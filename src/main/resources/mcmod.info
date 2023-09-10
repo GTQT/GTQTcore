@@ -1,14 +1,14 @@
 [
 {
-  "modid": "examplemod",
-  "name": "Example Mod",
-  "description": "Example placeholder mod.",
+  "modid": "gtqtcore",
+  "name": "GTQT Core",
+  "description": "1145141919810",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",
   "updateUrl": "",
-  "authorList": ["CleanroomMC"],
-  "credits": "Authors of this project",
+  "authorList": ["XB_Asuna"],
+  "credits": "A mod for mod packet GregTech:QuantumTransition",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []
