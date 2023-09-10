@@ -5,10 +5,14 @@ import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.common.metatileentities.MetaTileEntities;
 import keqing.gtqtcore.api.utils.GTQTLog;
 import keqing.gtqtcore.common.metatileentities.multi.generators.MetaTileEntityLightningRod;
-
+import keqing.gtqtcore.common.metatileentities.multi.multiblockpart.standard.MetaTileEntityOceanFish;
+import static gregtech.common.metatileentities.MetaTileEntities.registerMetaTileEntity;
 import static keqing.gtqtcore.api.GTQTValue.gtqtcoreId;
 
 public class GTQTMetaTileEntities {
+
+    public static MetaTileEntityOceanFish OCEAN_FISH;
+
     public static MetaTileEntityLightningRod[] LIGHTNING_ROD = new MetaTileEntityLightningRod[3];
 
     public static void initialization() {
@@ -18,6 +22,8 @@ public class GTQTMetaTileEntities {
         LIGHTNING_ROD[0] = registerSingleMetaTileEntity(0, new MetaTileEntityLightningRod(gtqtcoreId("lightning_rod.zpm"), GTValues.ZPM));
         LIGHTNING_ROD[1] = registerSingleMetaTileEntity(1, new MetaTileEntityLightningRod(gtqtcoreId("lightning_rod.luv"), GTValues.LuV));
         LIGHTNING_ROD[2] = registerSingleMetaTileEntity(2, new MetaTileEntityLightningRod(gtqtcoreId("lightning_rod.iv"), GTValues.IV));
+
+        OCEAN_FISH = registerMetaTileEntity(3000, new MetaTileEntityOceanFish(gtqtcoreId("ocean_fish")));
 
     }
 
