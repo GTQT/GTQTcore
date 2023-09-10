@@ -5,13 +5,17 @@ import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.common.metatileentities.MetaTileEntities;
 import keqing.gtqtcore.api.utils.GTQTLog;
 import keqing.gtqtcore.common.metatileentities.multi.generators.MetaTileEntityLightningRod;
-import keqing.gtqtcore.common.metatileentities.multi.multiblockpart.standard.MetaTileEntityOceanFish;
+import keqing.gtqtcore.common.metatileentities.multi.multiblockpart.standard.MetaTileEntityBlazingBlastFurnace;
+import keqing.gtqtcore.common.metatileentities.multi.multiblockpart.standard.MetaTileEntityHugeChemicalReactor;
+
 import static gregtech.common.metatileentities.MetaTileEntities.registerMetaTileEntity;
 import static keqing.gtqtcore.api.GTQTValue.gtqtcoreId;
 
 public class GTQTMetaTileEntities {
 
-    public static MetaTileEntityOceanFish OCEAN_FISH;
+
+    public static MetaTileEntityBlazingBlastFurnace BLAZING_BLAST_FURNACE ;
+    public static MetaTileEntityHugeChemicalReactor HUGE_CHEMICAL_REACTOR;
 
     public static MetaTileEntityLightningRod[] LIGHTNING_ROD = new MetaTileEntityLightningRod[3];
 
@@ -23,8 +27,8 @@ public class GTQTMetaTileEntities {
         LIGHTNING_ROD[1] = registerSingleMetaTileEntity(1, new MetaTileEntityLightningRod(gtqtcoreId("lightning_rod.luv"), GTValues.LuV));
         LIGHTNING_ROD[2] = registerSingleMetaTileEntity(2, new MetaTileEntityLightningRod(gtqtcoreId("lightning_rod.iv"), GTValues.IV));
 
-        OCEAN_FISH = registerMetaTileEntity(3000, new MetaTileEntityOceanFish(gtqtcoreId("ocean_fish")));
-
+        HUGE_CHEMICAL_REACTOR = registerMetaTileEntity(3000, new MetaTileEntityHugeChemicalReactor(gtqtcoreId("huge_chemical_reactor")));
+        BLAZING_BLAST_FURNACE = registerMetaTileEntity(3001, new MetaTileEntityBlazingBlastFurnace(gtqtcoreId("blazing_blast_furnace")));
     }
 
     private static <T extends MetaTileEntity> T registerSingleMetaTileEntity(int id, T mte) {

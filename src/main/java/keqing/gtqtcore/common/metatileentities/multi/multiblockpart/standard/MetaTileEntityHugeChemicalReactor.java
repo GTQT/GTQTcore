@@ -2,8 +2,6 @@ package keqing.gtqtcore.common.metatileentities.multi.multiblockpart.standard;
 
 import gregicality.multiblocks.api.metatileentity.GCYMMultiblockAbility;
 import gregicality.science.common.block.blocks.BlockTransparentCasing;
-import gregtech.api.GTValues;
-import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
@@ -12,7 +10,6 @@ import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
-import gregtech.api.util.GTUtility;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
@@ -24,32 +21,28 @@ import gregtech.common.blocks.BlockBoilerCasing.BoilerCasingType;
 import gregicality.multiblocks.api.metatileentity.GCYMRecipeMapMultiblockController;
 
 import gregicality.science.common.block.GCYSMetaBlocks;
-import gregicality.science.api.recipes.GCYSRecipeMaps;
 import gregicality.science.common.block.blocks.BlockGCYSMultiblockCasing;
 
-import gregtech.core.sound.GTSoundEvents;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class MetaTileEntityOceanFish extends GCYMRecipeMapMultiblockController {
-    public MetaTileEntityOceanFish(ResourceLocation metaTileEntityId) {
+public class MetaTileEntityHugeChemicalReactor extends GCYMRecipeMapMultiblockController {
+    public MetaTileEntityHugeChemicalReactor(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[] {
                 RecipeMaps.CHEMICAL_RECIPES,
-                RecipeMaps.LARGE_CHEMICAL_RECIPES,
-                GCYSRecipeMaps.CVD_RECIPES
+                RecipeMaps.LARGE_CHEMICAL_RECIPES
         });
-        this.recipeMapWorkable = new MultiblockRecipeLogic(this, true);
+
     }
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity metaTileEntityHolder) {
-        return new MetaTileEntityOceanFish(this.metaTileEntityId);
+        return new MetaTileEntityHugeChemicalReactor(this.metaTileEntityId);
     }
 
     @Nonnull
@@ -93,11 +86,9 @@ public class MetaTileEntityOceanFish extends GCYMRecipeMapMultiblockController {
     }
     public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
-        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("gregtech.machine.perfect_oc", new Object[0]));
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("gregtech.machine.huge_chemical_reactor", new Object[0]));
     }
-    public SoundEvent getBreakDownSound() {
-        return GTSoundEvents.BREAKDOWN_ELECTRICAL;
-    }
+
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
         return Textures.INERT_PTFE_CASING;
     }
