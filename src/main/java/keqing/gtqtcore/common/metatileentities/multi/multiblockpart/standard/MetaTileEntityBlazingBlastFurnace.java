@@ -21,6 +21,8 @@ import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.MultiblockShapeInfo;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
+import gregtech.api.recipes.RecipeMap;
+import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.recipes.recipeproperties.TemperatureProperty;
 import gregtech.api.util.GTUtility;
 import gregtech.client.renderer.ICubeRenderer;
@@ -49,9 +51,12 @@ import java.util.List;
 public class MetaTileEntityBlazingBlastFurnace extends GCYMRecipeMapMultiblockController implements IHeatingCoil {
 
     private int blastFurnaceTemperature;
+        public MetaTileEntityBlazingBlastFurnace(ResourceLocation metaTileEntityId) {
+            super(metaTileEntityId, new RecipeMap[] {
+                    GTQTcoreRecipeMaps.BLAZING_BLAST_FURNACE,
+                    RecipeMaps.BLAST_RECIPES
+            });
 
-    public MetaTileEntityBlazingBlastFurnace(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, GTQTcoreRecipeMaps.BLAZING_BLAST_FURNACE);
         this.recipeMapWorkable = new HeatingCoilRecipeLogic(this);
     }
 
@@ -97,11 +102,9 @@ public class MetaTileEntityBlazingBlastFurnace extends GCYMRecipeMapMultiblockCo
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
-                .aisle("#XXX#", "#CCC#", "#GGG#", "#CCC#", "#XXX#")
-                .aisle("XXXXX", "CAAAC", "GAAAG", "CAAAC", "XXXXX")
-                .aisle("XXXXX", "CAAAC", "GAAAG", "CAAAC", "XXMXX")
-                .aisle("XXXXX", "CAAAC", "GAAAG", "CAAAC", "XXXXX")
-                .aisle("#XSX#", "#CCC#", "#GGG#", "#CCC#", "#XXX#")
+                .aisle("XXX", "CCC", "CCC", "XXX")
+                .aisle("XXX", "C#C", "C#C", "XMX")
+                .aisle("XSX", "CCC", "CCC", "XXX")
                 .where('S', selfPredicate())
                 .where('X', states(getCasingState())
                         .or(abilities(MultiblockAbility.MAINTENANCE_HATCH).setExactLimit(1))
@@ -114,10 +117,8 @@ public class MetaTileEntityBlazingBlastFurnace extends GCYMRecipeMapMultiblockCo
                         .or(abilities(GCYMMultiblockAbility.PARALLEL_HATCH))
                 )
                 .where('C', heatingCoils())
-                .where('G', states(getCasingState2()))
                 .where('M', abilities(MultiblockAbility.MUFFLER_HATCH))
-                .where('A', air())
-                .where('#', any())
+                .where('#', air())
                 .build();
     }
 
@@ -127,14 +128,11 @@ public class MetaTileEntityBlazingBlastFurnace extends GCYMRecipeMapMultiblockCo
         MultiblockShapeInfo.Builder builder = null;
         if (Blocks.AIR != null) {
             builder = MultiblockShapeInfo.builder()
-                    .aisle("#XEX#", "#CCC#", "#GGG#", "#CCC#", "#XXX#")
-                    .aisle("XXXXX", "C###C", "G###G", "C###C", "XXXXX")
-                    .aisle("XXXXX", "C###C", "G###G", "C###C", "XXMXX")
-                    .aisle("FXXXH", "C###C", "G###G", "C###C", "XXXXX")
-                    .aisle("#ISO#", "#CCC#", "#GGG#", "#CCC#", "#XXX#")
+                    .aisle("MIF", "CCC", "CCC", "XXX")
+                    .aisle("OXX", "C#C", "C#C", "XMX")
+                    .aisle("ESH", "CCC", "CCC", "XXX")
                     .where('S', GCYMMetaTileEntities.ALLOY_BLAST_SMELTER, EnumFacing.SOUTH)
                     .where('X', getCasingState())
-                    .where('G', getCasingState2())
                     .where('M', MetaTileEntities.MUFFLER_HATCH[GTValues.HV], EnumFacing.UP)
                     .where('I', MetaTileEntities.ITEM_IMPORT_BUS[GTValues.HV], EnumFacing.SOUTH)
                     .where('F', MetaTileEntities.FLUID_IMPORT_HATCH[GTValues.HV], EnumFacing.SOUTH)
@@ -157,10 +155,6 @@ public class MetaTileEntityBlazingBlastFurnace extends GCYMRecipeMapMultiblockCo
 
     private static IBlockState getCasingState() {
         return GCYMMetaBlocks.LARGE_MULTIBLOCK_CASING.getState(BlockLargeMultiblockCasing.CasingType.HIGH_TEMPERATURE_CASING);
-    }
-
-    private static IBlockState getCasingState2() {
-        return GCYMMetaBlocks.UNIQUE_CASING.getState(BlockUniqueCasing.UniqueCasingType.HEAT_VENT);
     }
 
     @Override
