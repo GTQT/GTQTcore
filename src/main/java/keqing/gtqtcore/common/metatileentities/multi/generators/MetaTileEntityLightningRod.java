@@ -149,7 +149,7 @@ public class MetaTileEntityLightningRod extends TieredMetaTileEntity {
     }
 
     public long getEnergyCapacity() {
-        return 50000000;
+        return 500000000;
     }
 
     protected long getMaxInputOutputAmperage() {
