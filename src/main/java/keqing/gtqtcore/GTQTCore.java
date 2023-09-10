@@ -37,7 +37,7 @@ public class GTQTCore {
     {
         GTQTLog.init(event.getModLog());
         GTQTMetaItems.init();
-        GTQTMetaTileEntities.init();
+        GTQTMetaTileEntities.initialization();
         GTQTMetaBlocks.init();
         proxy.preLoad();
 

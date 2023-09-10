@@ -27,17 +27,4 @@ public class GTQTEventHandler {
         //在此处注册材料
     }
 
-    @SubscribeEvent
-    public static void onPlayerJoin(EntityJoinWorldEvent event)
-    {
-        Entity entity = event.getEntity();
-        if(entity instanceof EntityPlayer)
-        {
-            String message = "Welcome to GTQT world," + entity.getName() + "!";
-            TextComponentString text =new TextComponentString(message);
-            entity.sendMessage(text);
-        }
-    }
-
-
 }
