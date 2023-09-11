@@ -1,4 +1,4 @@
-package keqing.gtqtcore.common.metatileentities.multi.multiblockpart.standard;
+package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
 import gregicality.multiblocks.api.metatileentity.GCYMMultiblockAbility;
 import gregicality.science.common.block.blocks.BlockTransparentCasing;
@@ -63,9 +63,8 @@ public class MetaTileEntityHugeChemicalReactor extends GCYMRecipeMapMultiblockCo
                         .or(abilities(MultiblockAbility.EXPORT_ITEMS).setMaxGlobalLimited(4).setPreviewCount(1))
                         .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setMaxGlobalLimited(8).setPreviewCount(1))
                         .or(abilities(MultiblockAbility.EXPORT_FLUIDS).setMaxGlobalLimited(8).setPreviewCount(1))
-                        .or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(3)
-                        )
-                        .or(abilities(GCYMMultiblockAbility.PARALLEL_HATCH))
+                        .or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(3))
+                        .or(abilities(GCYMMultiblockAbility.PARALLEL_HATCH).setMinGlobalLimited(1).setMaxGlobalLimited(1))
                 )
                 .where('A', states(this.getSecondCasingState()))
                 .where('B', states(this.getPipeCasingState()))

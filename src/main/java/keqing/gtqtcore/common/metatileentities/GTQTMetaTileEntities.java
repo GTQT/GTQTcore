@@ -9,10 +9,9 @@ import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMulti
 import gregtech.common.metatileentities.storage.MetaTileEntityQuantumTank;
 import keqing.gtqtcore.api.utils.GTQTLog;
 import keqing.gtqtcore.common.metatileentities.multi.generators.MetaTileEntityLightningRod;
-import keqing.gtqtcore.common.metatileentities.multi.multiblockpart.standard.MetaTileEntityBlazingBlastFurnace;
-import keqing.gtqtcore.common.metatileentities.multi.multiblockpart.standard.MetaTileEntityHugeChemicalReactor;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.MetaTileEntityBlazingBlastFurnace;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.MetaTileEntityHugeChemicalReactor;
 
-import static gregtech.common.metatileentities.MetaTileEntities.QUANTUM_TANK;
 import static gregtech.common.metatileentities.MetaTileEntities.registerMetaTileEntity;
 import static keqing.gtqtcore.api.GTQTValue.gtqtcoreId;
 

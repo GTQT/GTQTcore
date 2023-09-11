@@ -1,4 +1,4 @@
-package keqing.gtqtcore.common.metatileentities.multi.multiblockpart.standard;
+package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
 import gregicality.multiblocks.api.metatileentity.GCYMMultiblockAbility;
 import gregicality.multiblocks.api.metatileentity.GCYMRecipeMapMultiblockController;
@@ -56,13 +56,11 @@ public class MetaTileEntityBlazingBlastFurnace extends GCYMRecipeMapMultiblockCo
                     GTQTcoreRecipeMaps.BLAZING_BLAST_FURNACE,
                     RecipeMaps.BLAST_RECIPES
             });
-
-        this.recipeMapWorkable = new HeatingCoilRecipeLogic(this);
     }
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity metaTileEntityHolder) {
-        return new gregicality.multiblocks.common.metatileentities.multiblock.standard.MetaTileEntityAlloyBlastSmelter(this.metaTileEntityId);
+        return new MetaTileEntityBlazingBlastFurnace(this.metaTileEntityId);
     }
 
     @Override
@@ -112,9 +110,8 @@ public class MetaTileEntityBlazingBlastFurnace extends GCYMRecipeMapMultiblockCo
                         .or(abilities(MultiblockAbility.EXPORT_ITEMS).setMaxGlobalLimited(4).setPreviewCount(1))
                         .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setMaxGlobalLimited(8).setPreviewCount(1))
                         .or(abilities(MultiblockAbility.EXPORT_FLUIDS).setMaxGlobalLimited(8).setPreviewCount(1))
-                        .or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(3)
-                        )
-                        .or(abilities(GCYMMultiblockAbility.PARALLEL_HATCH))
+                        .or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(3))
+                        .or(abilities(GCYMMultiblockAbility.PARALLEL_HATCH).setMinGlobalLimited(1).setMaxGlobalLimited(1))
                 )
                 .where('C', heatingCoils())
                 .where('M', abilities(MultiblockAbility.MUFFLER_HATCH))

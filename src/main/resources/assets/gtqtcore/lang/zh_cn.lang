@@ -6,3 +6,15 @@ gtqtcore.machine.lightning_rod.usage=§b用法§r:将§b原版的§r铁栏杆放
 
 
 gtqtcore.machine.huge_chemical_reactor.name=巨型化学反应釜
+gtqtcore.machine.blazing_blast_furnace.name=炙焰冶炼炉
+
+gtqtcore.machine.quantum_tank.uev.name=炙焰冶炼炉
+gtqtcore.machine.fluid_hatch.import.uev.name=输入仓（UEV）
+gtqtcore.machine.fluid_hatch.export.uev.name=输出仓（UEV）
+gtqtcore.machine.fluid_hatch.import_16x.name=16重输入仓
+gtqtcore.machine.fluid_hatch.export_16x.name=16重输出仓
+
+gtqtcore.machine.parallel_hatch.uhv.name=并行仓控制器（UHV）
+gtqtcore.machine.parallel_hatch.uev.name=并行仓控制器（UEV）
+gtqtcore.machine.parallel_hatch.uiv.name=并行仓控制器（UIV）
+gtqtcore.machine.parallel_hatch.uxv.name=并行仓控制器（UXV）
