@@ -1,14 +1,20 @@
 package keqing.gtqtcore.common;
 
+import keqing.gtqtcore.GTQTCore;
+import keqing.gtqtcore.api.utils.GTQTLangUtil;
 import keqing.gtqtcore.api.utils.GTQTLog;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
+import org.apache.logging.log4j.LogManager;
 
 import java.util.Objects;
 import java.util.function.Function;
@@ -17,6 +23,12 @@ import java.util.function.Function;
         modid = "gtqtcore"
 )
 public class CommonProxy {
+
+    public void preInit( FMLPreInitializationEvent event ) {
+
+
+    }
+
 
     public CommonProxy() {
     }

@@ -11,15 +11,38 @@ import keqing.gtqtcore.api.utils.GTQTLog;
 import keqing.gtqtcore.common.metatileentities.multi.generators.MetaTileEntityLightningRod;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.MetaTileEntityBlazingBlastFurnace;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.MetaTileEntityHugeChemicalReactor;
+import keqing.gtqtcore.common.metatileentities.multi.multiblockpart.MetaTileEntityCreativeEnergyHatch;
+import keqing.gtqtcore.common.metatileentities.multi.multiblockpart.MetaTileInfWaterHatch;
+
+import java.util.function.IntFunction;
+import java.util.function.IntPredicate;
+import java.util.function.IntSupplier;
 
 import static gregtech.common.metatileentities.MetaTileEntities.registerMetaTileEntity;
 import static keqing.gtqtcore.api.GTQTValue.gtqtcoreId;
 
 public class GTQTMetaTileEntities {
 
+    public static void simpleTiredInit(MetaTileEntity[] tileEntities, IntFunction<MetaTileEntity> function, IntSupplier idSupplier, IntPredicate canAdd){
+        for(int i = 0;i<GTValues.V.length;i++){
+            if(canAdd.test(i)){
+                tileEntities[i] = registerMetaTileEntity(
+                        idSupplier.getAsInt(),function.apply(i));
+            }
+        }
+    }
+    public static int currentMultiPartID = 11000;
+    private static int nextMultiPartID(){
+        currentMultiPartID++;
+        return currentMultiPartID;
+    }
+    public static void simpleTiredInit(MetaTileEntity[] tileEntities, IntFunction<MetaTileEntity> function, IntSupplier idSupplier){
+        simpleTiredInit(tileEntities,function,idSupplier,(i) -> true);
+    }
     public static MetaTileEntityBlazingBlastFurnace BLAZING_BLAST_FURNACE ;
     public static MetaTileEntityHugeChemicalReactor HUGE_CHEMICAL_REACTOR;
-
+    public static final MetaTileEntityCreativeEnergyHatch[] CREATIVE_ENERGY_HATCHES = new MetaTileEntityCreativeEnergyHatch[GTValues.V.length];
+    public static MetaTileInfWaterHatch INF_WATER_HATCH;
     public static MetaTileEntityLightningRod[] LIGHTNING_ROD = new MetaTileEntityLightningRod[3];
 
     public static void initialization() {
@@ -33,10 +56,17 @@ public class GTQTMetaTileEntities {
         HUGE_CHEMICAL_REACTOR = registerMetaTileEntity(3000, new MetaTileEntityHugeChemicalReactor(gtqtcoreId("huge_chemical_reactor")));
         BLAZING_BLAST_FURNACE = registerMetaTileEntity(3001, new MetaTileEntityBlazingBlastFurnace(gtqtcoreId("blazing_blast_furnace")));
 
+        INF_WATER_HATCH = registerMetaTileEntity(3002,new MetaTileInfWaterHatch(gtqtcoreId("infinite_water_hatch")));
+
+
+        simpleTiredInit(CREATIVE_ENERGY_HATCHES,
+                (i) -> new MetaTileEntityCreativeEnergyHatch(gtqtcoreId("creative_energy_hatch."+GTValues.VN[i].toLowerCase()),i),
+                GTQTMetaTileEntities::nextMultiPartID);
+
        registerMetaTileEntity(3100, new MetaTileEntityQuantumTank(gtqtcoreId("quantum_tank.uev"), 6,114514));
 
-        registerMetaTileEntity(3105, new MetaTileEntityFluidHatch(gtqtcoreId("fluid_hatch.import.uev"), 1, false));
-        registerMetaTileEntity(3120, new MetaTileEntityFluidHatch(gtqtcoreId("fluid_hatch.export.uev"), 1, true));
+        registerMetaTileEntity(3105, new MetaTileEntityFluidHatch(gtqtcoreId("fluid_hatch.import.uev"), 11, false));
+        registerMetaTileEntity(3120, new MetaTileEntityFluidHatch(gtqtcoreId("fluid_hatch.export.uev"), 11, true));
 
         registerMetaTileEntity(3122, new MetaTileEntityMultiFluidHatch(gtqtcoreId("fluid_hatch.import_16x"), 4, false));
         registerMetaTileEntity(3124, new MetaTileEntityMultiFluidHatch(gtqtcoreId("fluid_hatch.export_16x"), 4, true));
@@ -45,6 +75,14 @@ public class GTQTMetaTileEntities {
         registerMetaTileEntity(3130, new MetaTileEntityParallelHatch(gtqtcoreId(String.format("parallel_hatch.%s", GTValues.VN[10])), 10));
         registerMetaTileEntity(3131, new MetaTileEntityParallelHatch(gtqtcoreId(String.format("parallel_hatch.%s", GTValues.VN[11])), 11));
         registerMetaTileEntity(3132, new MetaTileEntityParallelHatch(gtqtcoreId(String.format("parallel_hatch.%s", GTValues.VN[12])), 12));
+
+
+
+
+
+
+
+
 
     }
 

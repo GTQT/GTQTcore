@@ -8,7 +8,7 @@ gtqtcore.machine.lightning_rod.usage=§b用法§r:将§b原版的§r铁栏杆放
 gtqtcore.machine.huge_chemical_reactor.name=巨型化学反应釜
 gtqtcore.machine.blazing_blast_furnace.name=炙焰冶炼炉
 
-gtqtcore.machine.quantum_tank.uev.name=炙焰冶炼炉
+gtqtcore.machine.quantum_tank.uev.name=量子缸（UEV）
 gtqtcore.machine.fluid_hatch.import.uev.name=输入仓（UEV）
 gtqtcore.machine.fluid_hatch.export.uev.name=输出仓（UEV）
 gtqtcore.machine.fluid_hatch.import_16x.name=16重输入仓
@@ -18,3 +18,25 @@ gtqtcore.machine.parallel_hatch.uhv.name=并行仓控制器（UHV）
 gtqtcore.machine.parallel_hatch.uev.name=并行仓控制器（UEV）
 gtqtcore.machine.parallel_hatch.uiv.name=并行仓控制器（UIV）
 gtqtcore.machine.parallel_hatch.uxv.name=并行仓控制器（UXV）
+
+gtqtcore.machine.infinite_water_hatch.name=无限水仓
+
+gtqtcore.tooltip.inf_water1=供水 2^31-1 mb/t
+gtqtcore.tooltip.inf_water2=§9百 度 贴 吧
+gtqtcore.tooltip.inf_water3=只能给多方块结构供水,你不能从中抽水.
+
+gtqtcore.machine.creative_energy_hatch.ulv.name=创造模式能源仓 ULV
+gtqtcore.machine.creative_energy_hatch.lv.name=创造模式能源仓 LV
+gtqtcore.machine.creative_energy_hatch.mv.name=创造模式能源仓 MV
+gtqtcore.machine.creative_energy_hatch.hv.name=创造模式能源仓 HV
+gtqtcore.machine.creative_energy_hatch.ev.name=创造模式能源仓 EV
+gtqtcore.machine.creative_energy_hatch.iv.name=创造模式能源仓 IV
+gtqtcore.machine.creative_energy_hatch.luv.name=创造模式能源仓 LUV
+gtqtcore.machine.creative_energy_hatch.zpm.name=创造模式能源仓 ZPM
+gtqtcore.machine.creative_energy_hatch.uv.name=创造模式能源仓 UV
+gtqtcore.machine.creative_energy_hatch.uhv.name=创造模式能源仓 UHV
+gtqtcore.machine.creative_energy_hatch.uev.name=创造模式能源仓 UEV
+gtqtcore.machine.creative_energy_hatch.uiv.name=创造模式能源仓 UIV
+gtqtcore.machine.creative_energy_hatch.uxv.name=创造模式能源仓 UXU
+gtqtcore.machine.creative_energy_hatch.opv.name=创造模式能源仓 OPV
+gtqtcore.machine.creative_energy_hatch.max.name=创造模式能源仓 MAX
