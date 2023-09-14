@@ -10,6 +10,7 @@ gtqtcore.machine.blazing_blast_furnace.name=炙焰冶炼炉
 gtqtcore.machine.huge_turbine.plasma.name=超临界等离子轮机
 gtqtcore.machine.huge_turbine.gas.name=超临界燃气轮机
 gtqtcore.machine.huge_turbine.steam.name=超临界蒸汽轮机
+gtqtcore.machine.turbine_combustion_chamber.name=爆燃发动机
 
 gtqtcore.machine.rotor_holder.uhv.name=极限转子固定（UHV）
 gtqtcore.machine.rotor_holder.uev.name=极限转子固定（UEV）

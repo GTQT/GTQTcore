@@ -20,7 +20,7 @@ public class GTQTRecipesManager {
     public static void load() {
         MachineRecipeLoader.init();
         CraftingRecipeLoader.init();
-        MetaTileEntityLoader.init();
+       // MetaTileEntityLoader.init();
         MetaTileEntityMachineRecipeLoader.init();
         RecipeHandlerList.register();
     }
