@@ -1,3 +1,7 @@
+gregtech.material.high_pressure_steam=蒸汽废气
+gregtech.material.high_pressure_steam=高压蒸汽
+
+
 gtqtcore.machine.lightning_rod.iv.name=避雷针 I
 gtqtcore.machine.lightning_rod.luv.name=避雷针 II
 gtqtcore.machine.lightning_rod.zpm.name=避雷针 III
@@ -124,3 +128,13 @@ gtqtcore.machine.creative_energy_hatch.uiv.name=创造模式能源仓 UIV
 gtqtcore.machine.creative_energy_hatch.uxv.name=创造模式能源仓 UXU
 gtqtcore.machine.creative_energy_hatch.opv.name=创造模式能源仓 OPV
 gtqtcore.machine.creative_energy_hatch.max.name=创造模式能源仓 MAX
+
+//爆燃
+gtqtcore.multiblock.large_combustion_engine.water_amount=润滑液储量：%sL
+gtqtcore.multiblock.large_combustion_engine.lubricant_amount=水储量：%sL
+gtqtcore.multiblock.large_combustion_engine.lubricant_boosted=润滑液持续润滑中
+gtqtcore.multiblock.large_combustion_engine.supply_lubricant_to_boost=提供润滑油提升效率
+gtqtcore.multiblock.large_combustion_engine.supply_liquid_lubricant_to_boost=需要水来启动发电机
+gtqtcore.multiblock.large_combustion_engine.boost_disallowed=§b使用更高电压等级的发电仓来启用氧促燃。
+gtqtcore.multiblock.large_combustion_engine.no_water=水储量不足
+gtqtcore.multiblock.large_combustion_engine.obstructed=进气口被阻挡

@@ -3,11 +3,12 @@ package keqing.gtqtcore.common;
 import keqing.gtqtcore.GTQTCore;
 import keqing.gtqtcore.api.utils.GTQTLangUtil;
 import keqing.gtqtcore.api.utils.GTQTLog;
+import mezz.jei.plugins.vanilla.furnace.FuelRecipe;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.crafting.IRecipe;
-import net.minecraftforge.common.MinecraftForge;
+import keqing.gtqtcore.loaders.recipes.FuelRecipes;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -28,7 +29,10 @@ public class CommonProxy {
 
 
     }
+    public void init( FMLInitializationEvent event ) {
+        FuelRecipes.init();
 
+    }
 
     public CommonProxy() {
     }
