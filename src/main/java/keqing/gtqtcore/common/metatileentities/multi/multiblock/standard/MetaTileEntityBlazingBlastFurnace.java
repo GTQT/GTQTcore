@@ -5,13 +5,10 @@ import gregicality.multiblocks.api.metatileentity.GCYMRecipeMapMultiblockControl
 import gregicality.multiblocks.api.render.GCYMTextures;
 import gregicality.multiblocks.common.block.GCYMMetaBlocks;
 import gregicality.multiblocks.common.block.blocks.BlockLargeMultiblockCasing;
-import gregicality.multiblocks.common.block.blocks.BlockUniqueCasing;
-import gregicality.multiblocks.common.metatileentities.GCYMMetaTileEntities;
 import gregtech.api.GTValues;
 import gregtech.api.GregTechAPI;
 import gregtech.api.block.IHeatingCoilBlockStats;
 import gregtech.api.capability.IHeatingCoil;
-import gregtech.api.capability.impl.HeatingCoilRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
@@ -31,6 +28,7 @@ import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.metatileentities.MetaTileEntities;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
+import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.init.Blocks;
@@ -51,12 +49,13 @@ import java.util.List;
 public class MetaTileEntityBlazingBlastFurnace extends GCYMRecipeMapMultiblockController implements IHeatingCoil {
 
     private int blastFurnaceTemperature;
-        public MetaTileEntityBlazingBlastFurnace(ResourceLocation metaTileEntityId) {
-            super(metaTileEntityId, new RecipeMap[] {
-                    GTQTcoreRecipeMaps.BLAZING_BLAST_FURNACE,
-                    RecipeMaps.BLAST_RECIPES
-            });
+    public MetaTileEntityBlazingBlastFurnace(ResourceLocation metaTileEntityId) {
+        super(metaTileEntityId, new RecipeMap[] {
+                GTQTcoreRecipeMaps.BLAZING_BLAST_FURNACE,
+                RecipeMaps.BLAST_RECIPES
+        });
     }
+
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity metaTileEntityHolder) {
@@ -128,7 +127,7 @@ public class MetaTileEntityBlazingBlastFurnace extends GCYMRecipeMapMultiblockCo
                     .aisle("MIF", "CCC", "CCC", "XXX")
                     .aisle("OXX", "C#C", "C#C", "XMX")
                     .aisle("ESH", "CCC", "CCC", "XXX")
-                    .where('S', GCYMMetaTileEntities.ALLOY_BLAST_SMELTER, EnumFacing.SOUTH)
+                    .where('S', GTQTMetaTileEntities.BLAZING_BLAST_FURNACE, EnumFacing.SOUTH)
                     .where('X', getCasingState())
                     .where('M', MetaTileEntities.MUFFLER_HATCH[GTValues.HV], EnumFacing.UP)
                     .where('I', MetaTileEntities.ITEM_IMPORT_BUS[GTValues.HV], EnumFacing.SOUTH)

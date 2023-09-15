@@ -8,11 +8,11 @@ import gregtech.api.recipes.builders.FuelRecipeBuilder;
 import gregtech.core.sound.GTSoundEvents;
 
 
-    //怎么写请看
-    //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/api/recipe/GSRecipeMaps.java
+//怎么写请看
+//https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/api/recipe/GSRecipeMaps.java
 public class GTQTcoreRecipeMaps {
 
-    public static final RecipeMap<FuelRecipeBuilder> TURBINE_COMBUSTION_CHAMBER;
+    public static final RecipeMap TURBINE_COMBUSTION_CHAMBER;
     public static final RecipeMap<BlastRecipeBuilder> BLAZING_BLAST_FURNACE = new RecipeMap<>("blazing_blast_furnace", 9, 0, 3, 1, new BlastRecipeBuilder(), false)
             .setSlotOverlay(false, false, false, GuiTextures.FURNACE_OVERLAY_1)
             .setSlotOverlay(false, false, true, GuiTextures.FURNACE_OVERLAY_1)
