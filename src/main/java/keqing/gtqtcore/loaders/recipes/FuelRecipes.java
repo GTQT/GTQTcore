@@ -10,7 +10,13 @@ import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 public class FuelRecipes {
 
         public static void init(){
-        //diesel generator fuels
+        GTQTcoreRecipeMaps.ROCKET.recipeBuilder()
+                .fluidInputs(Naphtha.getFluid(1))
+                .fluidOutputs(HighPressureSteam.getFluid(20))
+                .duration(10)
+                .EUt((int) V[LV])
+                .buildAndRegister();
+
         GTQTcoreRecipeMaps.TURBINE_COMBUSTION_CHAMBER.recipeBuilder()
                 .fluidInputs(Naphtha.getFluid(1))
                 .fluidOutputs(HighPressureSteam.getFluid(20))
@@ -115,6 +121,8 @@ public class FuelRecipes {
                 .duration(15)
                 .EUt((int) V[LV])
                 .buildAndRegister();
+
+
 
 
     }

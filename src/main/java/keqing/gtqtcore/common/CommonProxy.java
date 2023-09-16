@@ -1,9 +1,8 @@
 package keqing.gtqtcore.common;
 
-import keqing.gtqtcore.GTQTCore;
-import keqing.gtqtcore.api.utils.GTQTLangUtil;
+import gregtech.loaders.recipe.GTRecipeManager;
 import keqing.gtqtcore.api.utils.GTQTLog;
-import mezz.jei.plugins.vanilla.furnace.FuelRecipe;
+import keqing.gtqtcore.loaders.recipes.handlers.IntegratedMiningDivision;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -15,7 +14,6 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
-import org.apache.logging.log4j.LogManager;
 
 import java.util.Objects;
 import java.util.function.Function;
@@ -31,7 +29,7 @@ public class CommonProxy {
     }
     public void init( FMLInitializationEvent event ) {
         FuelRecipes.init();
-
+        IntegratedMiningDivision.init();
     }
 
     public CommonProxy() {
@@ -52,7 +50,6 @@ public class CommonProxy {
         registry.register(方块实例);
         在注册MetaBlock时用到
         */
-
     }
 
     @SubscribeEvent
@@ -78,7 +75,7 @@ public class CommonProxy {
     public static void registerRecipes(RegistryEvent.Register<IRecipe> event)
     {
         GTQTLog.logger.info("Registering recipes...");
-        //在此处注册配方
+
     }
 
 }

@@ -92,7 +92,8 @@ repositories {
             includeGroup 'curse.maven'
         }
     }
-    mavenLocal() // Must be last for caching to work
+    mavenLocal()
+    mavenCentral() // Must be last for caching to work
 }
 
 dependencies {
@@ -127,8 +128,10 @@ dependencies {
             transitive = false
         }
     }
-
+    annotationProcessor 'com.github.bsideup.jabel:jabel-javac-plugin:1.0.0'
+    compileOnly 'com.github.bsideup.jabel:jabel-javac-plugin:1.0.0'
 }
+
 
 // Adds Access Transformer files to tasks
 if (project.use_access_transformer.toBoolean()) {
@@ -209,7 +212,5 @@ idea {
         }
     }
 }
-
-tasks.named("processIdeaSettings").configure {
-    dependsOn("injectTags")
-}
+sourceCompatibility = JavaVersion.VERSION_16
+targetCompatibility = JavaVersion.VERSION_16

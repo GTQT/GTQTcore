@@ -13,9 +13,13 @@ import gregtech.common.metatileentities.multi.multiblockpart.*;
 import gregtech.common.metatileentities.storage.MetaTileEntityQuantumTank;
 import keqing.gtqtcore.api.utils.GTQTLog;
 import keqing.gtqtcore.common.metatileentities.multi.generators.MetaTileEntityLightningRod;
+import keqing.gtqtcore.common.metatileentities.multi.generators.MetaTileEntityRocket;
 import keqing.gtqtcore.common.metatileentities.multi.generators.MetaTileEntityTurbineCombustionChamber;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.MetaTileEntityBlazingBlastFurnace;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.MetaTileEntityChemicalPlant;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.MetaTileEntityHugeChemicalReactor;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.MetaTileEntityIntegratedMiningDivision;
+import keqing.gtqtcore.common.metatileentities.multi.multiblockpart.MetaTileEntityCatalystHatch;
 import keqing.gtqtcore.common.metatileentities.multi.multiblockpart.MetaTileEntityCreativeEnergyHatch;
 import keqing.gtqtcore.common.metatileentities.multi.multiblockpart.MetaTileEntityPlusEnergyHatch;
 import keqing.gtqtcore.common.metatileentities.multi.multiblockpart.MetaTileInfWaterHatch;
@@ -47,6 +51,8 @@ public class GTQTMetaTileEntities {
     }
     public static MetaTileEntityBlazingBlastFurnace BLAZING_BLAST_FURNACE ;
     public static MetaTileEntityHugeChemicalReactor HUGE_CHEMICAL_REACTOR;
+
+    public static MetaTileEntityIntegratedMiningDivision INTEGRATED_MINING_DIVISION;
     public static final MetaTileEntityCreativeEnergyHatch[] CREATIVE_ENERGY_HATCHES = new MetaTileEntityCreativeEnergyHatch[GTValues.V.length];
     public static MetaTileInfWaterHatch INF_WATER_HATCH;
     public static MetaTileEntityLightningRod[] LIGHTNING_ROD = new MetaTileEntityLightningRod[3];
@@ -56,6 +62,8 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityLargeTurbine HUGE_PLASMA_TURBINE;
 
     public static MetaTileEntityTurbineCombustionChamber HUGE_TURBINE_COMBUSTION_CHAMBER;
+
+    public static MetaTileEntityRocket ROCKET;
 
     public static final MetaTileEntityPlusEnergyHatch[] PLUS_ENERGY_INPUT_HATCH = new MetaTileEntityPlusEnergyHatch[10];
     public static final MetaTileEntityPlusEnergyHatch[] PLUS_ENERGY_INPUT_HATCH_4A = new MetaTileEntityPlusEnergyHatch[10];
@@ -71,6 +79,8 @@ public class GTQTMetaTileEntities {
     public static final MetaTileEntityPlusEnergyHatch[] PLUS_ENERGY_OUTPUT_HATCH_128A = new MetaTileEntityPlusEnergyHatch[10];
     public static final MetaTileEntityPlusEnergyHatch[] PLUS_ENERGY_OUTPUT_HATCH_512A = new MetaTileEntityPlusEnergyHatch[10];
 
+    public static MetaTileEntityCatalystHatch CATALYST_HATCH;
+    public static MetaTileEntityChemicalPlant CHEMICAL_PLANT;
     public static final MetaTileEntityRotorHolder[] ROTOR_HOLDER = new MetaTileEntityRotorHolder[12]; //HV, EV, IV, LuV, ZPM, UV
 
     public static void initialization() {
@@ -82,14 +92,15 @@ public class GTQTMetaTileEntities {
 
         HUGE_CHEMICAL_REACTOR = registerMetaTileEntity(3000, new MetaTileEntityHugeChemicalReactor(gtqtcoreId("huge_chemical_reactor")));
         BLAZING_BLAST_FURNACE = registerMetaTileEntity(3001, new MetaTileEntityBlazingBlastFurnace(gtqtcoreId("blazing_blast_furnace")));
-
-        INF_WATER_HATCH = registerMetaTileEntity(3002,new MetaTileInfWaterHatch(gtqtcoreId("infinite_water_hatch")));
-
+        CHEMICAL_PLANT = registerMetaTileEntity(3002,new MetaTileEntityChemicalPlant(gtqtcoreId("chemical_plant")));
+        INF_WATER_HATCH = registerMetaTileEntity(3003,new MetaTileInfWaterHatch(gtqtcoreId("infinite_water_hatch")));
+        CATALYST_HATCH = registerMetaTileEntity(3004,new MetaTileEntityCatalystHatch(gtqtcoreId("catalyst_hatch")));
         HUGE_STEAM_TURBINE = registerMetaTileEntity(3010, new MetaTileEntityLargeTurbine(gtqtcoreId("huge_turbine.steam"), RecipeMaps.STEAM_TURBINE_FUELS, 9, MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.STEEL_TURBINE_CASING), MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.STEEL_GEARBOX), Textures.SOLID_STEEL_CASING, false, Textures.LARGE_STEAM_TURBINE_OVERLAY));
         HUGE_GAS_TURBINE = registerMetaTileEntity(3011, new MetaTileEntityLargeTurbine(gtqtcoreId("huge_turbine.gas"), RecipeMaps.GAS_TURBINE_FUELS, 10, MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.STAINLESS_TURBINE_CASING), MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.STAINLESS_STEEL_GEARBOX), Textures.CLEAN_STAINLESS_STEEL_CASING, true, Textures.LARGE_GAS_TURBINE_OVERLAY));
         HUGE_PLASMA_TURBINE = registerMetaTileEntity(3012, new MetaTileEntityLargeTurbine(gtqtcoreId("huge_turbine.plasma"), RecipeMaps.PLASMA_GENERATOR_FUELS, 10, MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.TUNGSTENSTEEL_TURBINE_CASING), MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.TUNGSTENSTEEL_GEARBOX), Textures.ROBUST_TUNGSTENSTEEL_CASING, false, Textures.LARGE_PLASMA_TURBINE_OVERLAY));
-
-        HUGE_TURBINE_COMBUSTION_CHAMBER = registerMetaTileEntity(3013, new MetaTileEntityTurbineCombustionChamber(gtqtcoreId("turbine_combustion_chamber"),3));
+        INTEGRATED_MINING_DIVISION = registerMetaTileEntity(3013, new MetaTileEntityIntegratedMiningDivision(gtqtcoreId("integrated_mining_division")));
+        HUGE_TURBINE_COMBUSTION_CHAMBER = registerMetaTileEntity(3014, new MetaTileEntityTurbineCombustionChamber(gtqtcoreId("turbine_combustion_chamber"),4));
+        ROCKET = registerMetaTileEntity(3015, new MetaTileEntityRocket(gtqtcoreId("rocket"),5));
 
 
         registerMetaTileEntity(3100, new MetaTileEntityQuantumTank(gtqtcoreId("quantum_tank.uev"), 6,114514));

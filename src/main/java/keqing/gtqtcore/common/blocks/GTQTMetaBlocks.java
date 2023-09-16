@@ -1,7 +1,10 @@
 package keqing.gtqtcore.common.blocks;
-
 public class GTQTMetaBlocks {
 
-    public static void init() {}
 
-}
+
+    public static void init() {
+    }
+    }
+
+

@@ -15,6 +15,7 @@ gtqtcore.machine.huge_turbine.plasma.name=超临界等离子轮机
 gtqtcore.machine.huge_turbine.gas.name=超临界燃气轮机
 gtqtcore.machine.huge_turbine.steam.name=超临界蒸汽轮机
 gtqtcore.machine.turbine_combustion_chamber.name=爆燃发动机
+gtqtcore.machine.rocket.name=火箭发动机
 
 gtqtcore.machine.rotor_holder.uhv.name=极限转子固定（UHV）
 gtqtcore.machine.rotor_holder.uev.name=极限转子固定（UEV）
@@ -129,7 +130,6 @@ gtqtcore.machine.creative_energy_hatch.uxv.name=创造模式能源仓 UXU
 gtqtcore.machine.creative_energy_hatch.opv.name=创造模式能源仓 OPV
 gtqtcore.machine.creative_energy_hatch.max.name=创造模式能源仓 MAX
 
-//爆燃
 gtqtcore.multiblock.large_combustion_engine.water_amount=润滑液储量：%sL
 gtqtcore.multiblock.large_combustion_engine.lubricant_amount=水储量：%sL
 gtqtcore.multiblock.large_combustion_engine.lubricant_boosted=润滑液持续润滑中
