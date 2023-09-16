@@ -2,6 +2,7 @@ package keqing.gtqtcore.common.metatileentities.multi.generators;
 
 import java.util.List;
 
+import gregicality.multiblocks.api.render.GCYMTextures;
 import gregtech.api.capability.IEnergyContainer;
 import gregtech.api.capability.IMultipleTankHandler;
 import gregtech.api.capability.impl.MultiblockFuelRecipeLogic;
@@ -9,9 +10,12 @@ import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.util.TextFormattingUtil;
-import gregtech.client.renderer.texture.Textures;
+import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
 import gregtech.common.blocks.*;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
+import keqing.gtqtcore.client.textures.GTQTTextures;
+import keqing.gtqtcore.common.block.GTQTMetaBlocks;
+import keqing.gtqtcore.common.block.blocks.GTQTMultiblockCasing;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -148,7 +152,7 @@ public class MetaTileEntityRocket extends FuelMultiblockController {
     }
 
     private static IBlockState getCasingState() {
-        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.TUNGSTENSTEEL_ROBUST);
+        return GTQTMetaBlocks.MULTI_CASING.getState(GTQTMultiblockCasing.CasingType.NITINOL_MACHINE_CASING);
     }
 
     private static IBlockState getCasingState1() {
@@ -156,7 +160,7 @@ public class MetaTileEntityRocket extends FuelMultiblockController {
     }
 
     private static IBlockState getCasingState2() {
-        return MetaBlocks.MULTIBLOCK_CASING.getState(BlockMultiblockCasing.MultiblockCasingType.EXTREME_ENGINE_INTAKE_CASING);
+        return MetaBlocks.MULTIBLOCK_CASING.getState(BlockMultiblockCasing.MultiblockCasingType.ENGINE_INTAKE_CASING);
     }
 
     private static IBlockState getCasingState3() {
@@ -164,18 +168,16 @@ public class MetaTileEntityRocket extends FuelMultiblockController {
     }
 
 
-    @SideOnly(Side.CLIENT)
     @Override
-    public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
-        return   Textures.ROBUST_TUNGSTENSTEEL_CASING ;
+    public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
+        return GTQTTextures.NITINOL_CASING;
     }
 
-    @SideOnly(Side.CLIENT)
-    @Nonnull
     @Override
-    protected ICubeRenderer getFrontOverlay() {
-        return  Textures.EXTREME_COMBUSTION_ENGINE_OVERLAY ;
+    protected OrientedOverlayRenderer getFrontOverlay() {
+        return GCYMTextures.ALLOY_BLAST_SMELTER_OVERLAY;
     }
+
 
     @Override
     public boolean hasMufflerMechanics() {

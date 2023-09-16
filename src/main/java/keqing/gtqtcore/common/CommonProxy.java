@@ -1,7 +1,8 @@
 package keqing.gtqtcore.common;
 
-import gregtech.loaders.recipe.GTRecipeManager;
+import gregtech.api.block.VariantItemBlock;
 import keqing.gtqtcore.api.utils.GTQTLog;
+import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.loaders.recipes.handlers.IntegratedMiningDivision;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -50,6 +51,8 @@ public class CommonProxy {
         registry.register(方块实例);
         在注册MetaBlock时用到
         */
+        registry.register(GTQTMetaBlocks.MULTI_CASING);
+
     }
 
     @SubscribeEvent
@@ -63,6 +66,8 @@ public class CommonProxy {
         registry.register(createItemBlock(方块实例, VariantItemBlock::new));
         在注册MetaBlock时用到
         */
+        registry.register(createItemBlock(GTQTMetaBlocks.MULTI_CASING, VariantItemBlock::new));
+
     }
 
     private static <T extends Block> ItemBlock createItemBlock(T block, Function<T, ItemBlock> producer) {

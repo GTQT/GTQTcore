@@ -1,20 +1,20 @@
 package keqing.gtqtcore.loaders.recipes.handlers;
 
+import gregtech.api.recipes.builders.SimpleRecipeBuilder;
 import gregtech.api.recipes.ingredients.GTRecipeOreInput;
 import gregtech.api.unification.material.Material;
+import gregtech.api.unification.material.properties.PropertyKey;
 import gregtech.api.unification.ore.OrePrefix;
 import keqing.gtqtcore.api.event.SearchMaterialsClassEvent;
 
 
 import java.lang.reflect.Modifier;
-import gregtech.api.recipes.RecipeMaps;
 
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import net.minecraftforge.common.MinecraftForge;
 
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -64,6 +64,25 @@ public class IntegratedMiningDivision {
         }
     }
 
+    private static void addStaticRecipes() {
+        for(var field : allMaterials()){
+            if(Modifier.isStatic(field.getModifiers())){
+                try {
+                    var obj = field.get(null);
+                    if(obj instanceof Material material
+                    ){
+                        if (material.hasProperty(PropertyKey.ORE)) {
+                            addIntegratedMiningRecipe(material, 64)
+                                    .buildAndRegister();
+                        }
+                    }
+                }   catch (IllegalAccessException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+    }
+
     public static Collection<Field> allMaterials(){
         var classList = new ArrayList<Class<?>>();
         var event = new SearchMaterialsClassEvent(classList);
@@ -72,6 +91,12 @@ public class IntegratedMiningDivision {
                     (clazz) -> Arrays.stream(clazz.getFields())).collect(Collectors.toList());
         }
         return Collections.emptySet();
+    }
+
+    private static SimpleRecipeBuilder addIntegratedMiningRecipe(Material material, int output) {
+        return GTQTcoreRecipeMaps.INTEGRATED_MINING_DIVISION.recipeBuilder()
+                .input(OrePrefix.ore, material)
+                .output(OrePrefix.ingot, material, output);
     }
 
 }

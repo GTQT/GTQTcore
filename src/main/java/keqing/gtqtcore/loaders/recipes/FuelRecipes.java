@@ -11,8 +11,8 @@ public class FuelRecipes {
 
         public static void init(){
         GTQTcoreRecipeMaps.ROCKET.recipeBuilder()
-                .fluidInputs(Naphtha.getFluid(1))
-                .fluidOutputs(HighPressureSteam.getFluid(20))
+                .fluidInputs(Water.getFluid(1))
+                .fluidOutputs(Water.getFluid(1))
                 .duration(10)
                 .EUt((int) V[LV])
                 .buildAndRegister();

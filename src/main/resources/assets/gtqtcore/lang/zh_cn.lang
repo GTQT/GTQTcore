@@ -138,3 +138,5 @@ gtqtcore.multiblock.large_combustion_engine.supply_liquid_lubricant_to_boost=需
 gtqtcore.multiblock.large_combustion_engine.boost_disallowed=§b使用更高电压等级的发电仓来启用氧促燃。
 gtqtcore.multiblock.large_combustion_engine.no_water=水储量不足
 gtqtcore.multiblock.large_combustion_engine.obstructed=进气口被阻挡
+
+gregtech.material.nitinol=镍钛诺合金

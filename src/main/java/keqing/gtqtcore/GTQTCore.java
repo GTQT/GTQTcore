@@ -2,7 +2,7 @@ package keqing.gtqtcore;
 
 import keqing.gtqtcore.api.utils.GTQTLog;
 import keqing.gtqtcore.common.CommonProxy;
-import keqing.gtqtcore.common.blocks.GTQTMetaBlocks;
+import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.items.GTQTMetaItems;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 import net.minecraftforge.fml.common.Mod;

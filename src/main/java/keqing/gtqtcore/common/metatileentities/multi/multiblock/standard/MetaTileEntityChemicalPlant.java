@@ -104,11 +104,6 @@ public class MetaTileEntityChemicalPlant extends RecipeMapMultiblockController {
     }
 
     @Override
-    public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
-        return Textures.SOLID_STEEL_CASING;
-    }
-
-    @Override
     public void receiveCustomData(int dataId, PacketBuffer buf) {
         super.receiveCustomData(dataId, buf);
         if(dataId == GTQTValue.UPDATE_TIER){
@@ -139,7 +134,29 @@ public class MetaTileEntityChemicalPlant extends RecipeMapMultiblockController {
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {
         return new MetaTileEntityChemicalPlant(metaTileEntityId);
     }
-
+    @Override
+    public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
+        switch (this.casingTier) {
+            case (2) -> {
+                return Textures.SOLID_STEEL_CASING;
+            }
+            case (3) -> {
+                return Textures.FROST_PROOF_CASING;
+            }
+            case (4) -> {
+                return Textures.CLEAN_STAINLESS_STEEL_CASING;
+            }
+            case (5) -> {
+                return Textures.STABLE_TITANIUM_CASING;
+            }
+            case (6) -> {
+                return Textures.ROBUST_TUNGSTENSTEEL_CASING;
+            }
+            default -> {
+                return Textures.BRONZE_PLATED_BRICKS;
+            }
+        }
+    }
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
