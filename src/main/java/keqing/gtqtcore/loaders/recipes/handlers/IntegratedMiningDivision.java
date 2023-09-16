@@ -9,6 +9,7 @@ import keqing.gtqtcore.api.event.SearchMaterialsClassEvent;
 import java.lang.reflect.Modifier;
 import gregtech.api.recipes.RecipeMaps;
 
+import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import net.minecraftforge.common.MinecraftForge;
 
 
@@ -20,11 +21,21 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.stream.Collectors;
 
+import static gregtech.api.GTValues.LV;
+import static gregtech.api.GTValues.V;
+import static gregtech.api.unification.material.Materials.Naphtha;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.HighPressureSteam;
 
 
 public class IntegratedMiningDivision {
     public static void init() {
 
+        GTQTcoreRecipeMaps.INTEGRATED_MINING_DIVISION.recipeBuilder()
+                .fluidInputs(Naphtha.getFluid(1))
+                .fluidOutputs(HighPressureSteam.getFluid(20))
+                .duration(10)
+                .EUt((int) V[LV])
+                .buildAndRegister();
 
         for(var field : allMaterials()){
             if(Modifier.isStatic(field.getModifiers())){
@@ -38,12 +49,11 @@ public class IntegratedMiningDivision {
                         var foil = GTRecipeOreInput.getOrCreate(OrePrefix.foil,material).getInputStacks();
 
                         if(ingot.length>0 && plate.length>0 && foil.length>0){
-                            RecipeMaps.BENDER_RECIPES.recipeBuilder()
+                            GTQTcoreRecipeMaps.INTEGRATED_MINING_DIVISION.recipeBuilder()
                                     .EUt(24)
                                     .input(OrePrefix.ingot,material)
                                     .output(OrePrefix.foil,material,4)
                                     .duration(Math.max((int)(material.getMass()*2.1),1))
-                                    .circuitMeta(8)
                                     .buildAndRegister();
                         }
                     }
