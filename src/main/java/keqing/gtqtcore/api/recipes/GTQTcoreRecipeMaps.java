@@ -16,6 +16,8 @@ public class GTQTcoreRecipeMaps {
 
     public static final RecipeMap<FuelRecipeBuilder> ROCKET;
 
+    public static final RecipeMap<FuelRecipeBuilder> I_MODULAR_FISSION_REACTOR;
+
     public static final RecipeMap<ChemicalPlantBuilder> CHEMICAL_PLANT;
 
     public static final RecipeMap<SimpleRecipeBuilder> INTEGRATED_MINING_DIVISION;
@@ -34,6 +36,9 @@ public class GTQTcoreRecipeMaps {
 
         ROCKET = new RecipeMap<>("rocket",
                 0, 0, 1, 1, new FuelRecipeBuilder(), false);
+
+        I_MODULAR_FISSION_REACTOR = new RecipeMap<>("i_modular_fission_reactor",
+                1, 1, 1, 1, new FuelRecipeBuilder(), false);
 
         CHEMICAL_PLANT = new RecipeMap<>("chemical_plant",
                 6, 6, 6, 6, new ChemicalPlantBuilder(), false);

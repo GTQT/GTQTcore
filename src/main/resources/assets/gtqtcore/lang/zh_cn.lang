@@ -19,7 +19,7 @@ gtqtcore.machine.rocket.name=火箭发动机
 gtqtcore.machine.catalyst_hatch.name=催化剂仓
 gtqtcore.machine.chemical_plant.name=化工厂
 gtqtcore.machine.integrated_mining_division.name=集成矿石处理厂
-
+gtqtcore.machine.i_modular_fission_reactor.name=模块化裂变（燃料棒）
 gtqtcore.machine.rotor_holder.uhv.name=极限转子固定（UHV）
 gtqtcore.machine.rotor_holder.uev.name=极限转子固定（UEV）
 gtqtcore.machine.rotor_holder.uiv.name=极限转子固定（UIV）

@@ -12,6 +12,7 @@ import gregtech.common.metatileentities.multi.electric.generator.MetaTileEntityL
 import gregtech.common.metatileentities.multi.multiblockpart.*;
 import gregtech.common.metatileentities.storage.MetaTileEntityQuantumTank;
 import keqing.gtqtcore.api.utils.GTQTLog;
+import keqing.gtqtcore.common.metatileentities.multi.generators.MetaTileEntityIModularFissionReactor;
 import keqing.gtqtcore.common.metatileentities.multi.generators.MetaTileEntityLightningRod;
 import keqing.gtqtcore.common.metatileentities.multi.generators.MetaTileEntityRocket;
 import keqing.gtqtcore.common.metatileentities.multi.generators.MetaTileEntityTurbineCombustionChamber;
@@ -62,7 +63,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityLargeTurbine HUGE_PLASMA_TURBINE;
 
     public static MetaTileEntityTurbineCombustionChamber HUGE_TURBINE_COMBUSTION_CHAMBER;
-
+    public static MetaTileEntityIModularFissionReactor I_MODULAR_FISSION_REACTOR;
     public static MetaTileEntityRocket ROCKET;
 
     public static final MetaTileEntityPlusEnergyHatch[] PLUS_ENERGY_INPUT_HATCH = new MetaTileEntityPlusEnergyHatch[10];
@@ -101,7 +102,7 @@ public class GTQTMetaTileEntities {
         INTEGRATED_MINING_DIVISION = registerMetaTileEntity(3013, new MetaTileEntityIntegratedMiningDivision(gtqtcoreId("integrated_mining_division")));
         HUGE_TURBINE_COMBUSTION_CHAMBER = registerMetaTileEntity(3014, new MetaTileEntityTurbineCombustionChamber(gtqtcoreId("turbine_combustion_chamber"),4));
         ROCKET = registerMetaTileEntity(3015, new MetaTileEntityRocket(gtqtcoreId("rocket"),5));
-
+        I_MODULAR_FISSION_REACTOR = registerMetaTileEntity(3016, new MetaTileEntityIModularFissionReactor(gtqtcoreId("i_modular_fission_reactor"),5));
 
         registerMetaTileEntity(3100, new MetaTileEntityQuantumTank(gtqtcoreId("quantum_tank.uev"), 6,114514));
 
