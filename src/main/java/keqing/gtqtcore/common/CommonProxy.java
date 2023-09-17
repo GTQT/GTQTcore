@@ -1,12 +1,15 @@
 package keqing.gtqtcore.common;
 
 import gregtech.api.block.VariantItemBlock;
+import gregtech.common.items.MetaItems;
 import keqing.gtqtcore.api.utils.GTQTLog;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.loaders.recipes.handlers.IntegratedMiningDivision;
 import net.minecraft.block.Block;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import keqing.gtqtcore.loaders.recipes.FuelRecipes;
 import net.minecraftforge.event.RegistryEvent;
@@ -23,6 +26,13 @@ import java.util.function.Function;
         modid = "gtqtcore"
 )
 public class CommonProxy {
+
+    public static final CreativeTabs GREGICA_TAB = new CreativeTabs("GTQTCore") {
+        @Override
+        public ItemStack createIcon() {
+            return MetaItems.WETWARE_MAINFRAME_UHV.getStackForm();
+        }
+    };
 
     public void preInit( FMLPreInitializationEvent event ) {
 

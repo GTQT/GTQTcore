@@ -36,8 +36,6 @@ import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.client.renderer.ICubeRenderer;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 
@@ -134,11 +132,11 @@ public class MetaTileEntityRocket extends FuelMultiblockController {
                 .aisle("MMM", "MBM", "MIM")
                 .aisle("MMM", "MBM", "MIM")
                 .aisle("MMM", "MBM", "MIM")
-                .aisle("MMM", "MBM", "MIM")
+                .aisle("CMM", "MBM", "MIM")
                 .aisle("MMM", "MBM", "MIM")
                 .aisle("NNN", "NBN", "NNN")
                 .aisle("NNN", "NBN", "NNN")
-                .aisle("AAA", "ACA", "AAA")
+                .aisle("AAA", "AAA", "AAA")
                 .where('C', selfPredicate())
                 .where('M', states(getCasingState()).setMinGlobalLimited(35)
                         .or(autoAbilities(false, true, true, true, true, true, false)))
@@ -160,7 +158,7 @@ public class MetaTileEntityRocket extends FuelMultiblockController {
     }
 
     private static IBlockState getCasingState2() {
-        return MetaBlocks.MULTIBLOCK_CASING.getState(BlockMultiblockCasing.MultiblockCasingType.ENGINE_INTAKE_CASING);
+        return MetaBlocks.MULTIBLOCK_CASING.getState(BlockMultiblockCasing.MultiblockCasingType.EXTREME_ENGINE_INTAKE_CASING);
     }
 
     private static IBlockState getCasingState3() {

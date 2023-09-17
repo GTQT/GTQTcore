@@ -13,7 +13,7 @@ public class GTQTTextures {
     public static SimpleOverlayRenderer INF_WATER;
     public static SimpleOverlayRenderer NITINOL_CASING;
     public static void init() {
-        NITINOL_CASING = new SimpleOverlayRenderer("multiblock/nitinol_machine_casing");
+        NITINOL_CASING = new SimpleOverlayRenderer("multiblock/casings/nitinol_machine_casing");
         LIGHTNING_ROD_OVERLAY = new OrientedOverlayRenderer("generators/lightning_rod");
         INF_WATER = new SimpleOverlayRenderer("multipart/overlay_water");
         CATALYST_HATCH = new SimpleOverlayRenderer("multipart/overlay_catalysts");

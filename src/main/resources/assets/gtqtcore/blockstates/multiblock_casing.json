@@ -11,7 +11,7 @@
       "nitinol_machine_casing": {
         "model": "minecraft:cube_all",
         "textures": {
-          "all": "gtqtcore:blocks/casings/nitinol_machine_casing"
+          "all": "gregtech:blocks/multiblock/casings/nitinol_machine_casing"
         }
       }
     }
