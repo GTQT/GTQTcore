@@ -37,31 +37,7 @@ public class IntegratedMiningDivision {
                 .EUt((int) V[LV])
                 .buildAndRegister();
 
-        for(var field : allMaterials()){
-            if(Modifier.isStatic(field.getModifiers())){
-                try {
-                    var obj = field.get(null);
-                    if(obj instanceof Material material
-                    ){
 
-                        var ingot = GTRecipeOreInput.getOrCreate(OrePrefix.ingot,material).getInputStacks();
-                        var plate = GTRecipeOreInput.getOrCreate(OrePrefix.plate,material).getInputStacks();
-                        var foil = GTRecipeOreInput.getOrCreate(OrePrefix.foil,material).getInputStacks();
-
-                        if(ingot.length>0 && plate.length>0 && foil.length>0){
-                            GTQTcoreRecipeMaps.INTEGRATED_MINING_DIVISION.recipeBuilder()
-                                    .EUt(24)
-                                    .input(OrePrefix.ingot,material)
-                                    .output(OrePrefix.foil,material,4)
-                                    .duration(Math.max((int)(material.getMass()*2.1),1))
-                                    .buildAndRegister();
-                        }
-                    }
-                }   catch (IllegalAccessException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        }
     }
 
     private static void addStaticRecipes() {

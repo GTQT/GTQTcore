@@ -238,7 +238,7 @@ public class MetaTileEntityTurbineCombustionChamber extends FuelMultiblockContro
                 }
 
                 //这里是增产的润滑油
-                if (combustionEngine.isBoostAllowed() && (totalContinuousRunningTime == 1 || totalContinuousRunningTime % 16 == 0)) {
+                if (combustionEngine.isBoostAllowed() && (totalContinuousRunningTime == 1 || totalContinuousRunningTime % 20 == 0)) {
                     IMultipleTankHandler inputTank = combustionEngine.getInputFluidInventory();
                     FluidStack boosterStack = OXYGEN_STACK;
                     if (boosterStack.isFluidStackIdentical(inputTank.drain(boosterStack, false))) {

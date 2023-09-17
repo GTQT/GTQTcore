@@ -16,6 +16,9 @@ gtqtcore.machine.huge_turbine.gas.name=超临界燃气轮机
 gtqtcore.machine.huge_turbine.steam.name=超临界蒸汽轮机
 gtqtcore.machine.turbine_combustion_chamber.name=爆燃发动机
 gtqtcore.machine.rocket.name=火箭发动机
+gtqtcore.machine.catalyst_hatch.name=催化剂仓
+gtqtcore.machine.chemical_plant.name=化工厂
+gtqtcore.machine.integrated_mining_division.name=集成矿石处理厂
 
 gtqtcore.machine.rotor_holder.uhv.name=极限转子固定（UHV）
 gtqtcore.machine.rotor_holder.uev.name=极限转子固定（UEV）
@@ -140,3 +143,4 @@ gtqtcore.multiblock.large_combustion_engine.no_water=水储量不足
 gtqtcore.multiblock.large_combustion_engine.obstructed=进气口被阻挡
 
 gregtech.material.nitinol=镍钛诺合金
+tile.multiblock_casing.nitinol_machine_casing.name=镍钛诺机械外壳
