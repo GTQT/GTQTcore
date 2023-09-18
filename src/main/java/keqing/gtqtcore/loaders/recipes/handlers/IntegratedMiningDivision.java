@@ -65,22 +65,14 @@ public class IntegratedMiningDivision {
     }
 
     private static void addStaticRecipes() {
-        for(var field : allMaterials()){
-            if(Modifier.isStatic(field.getModifiers())){
-                try {
-                    var obj = field.get(null);
-                    if(obj instanceof Material material
-                    ){
+        for (MaterialRegistry materialRegistry : GregTechAPI.materialManager.getRegistries()){
+            for (Material material : materialRegistry) {
                         if (material.hasProperty(PropertyKey.ORE)) {
                             addIntegratedMiningRecipe(material, 64)
                                     .buildAndRegister();
                         }
-                    }
-                }   catch (IllegalAccessException e) {
-                    throw new RuntimeException(e);
                 }
-            }
-        }
+         }
     }
 
     public static Collection<Field> allMaterials(){
