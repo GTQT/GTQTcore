@@ -7,7 +7,7 @@ gtqtcore.machine.lightning_rod.luv.name=避雷针 II
 gtqtcore.machine.lightning_rod.zpm.name=避雷针 III
 gtqtcore.machine.lightning_rod.usage=§b用法§r:将§b原版的§r铁栏杆放置其上,每当雨天或雷雨天时它就会产生能量(由Gregicas提供)。
 
-
+recipemap.integrated_mining_division.name=集成矿石处理
 
 gtqtcore.machine.huge_chemical_reactor.name=巨型化学反应釜
 gtqtcore.machine.blazing_blast_furnace.name=炙焰冶炼炉

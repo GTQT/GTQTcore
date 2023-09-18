@@ -44,7 +44,7 @@ public class GTQTcoreRecipeMaps {
                 6, 6, 6, 6, new ChemicalPlantBuilder(), false);
 
         INTEGRATED_MINING_DIVISION = new RecipeMap<>("integrated_mining_division",
-                3, 10, 3, 3, new SimpleRecipeBuilder(), false);
+                3, 3, 3, 0, new SimpleRecipeBuilder(), false);
     }
 
 }

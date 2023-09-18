@@ -39,7 +39,11 @@ public class MetaTileEntityIntegratedMiningDivision extends GCYMRecipeMapMultibl
 
     public MetaTileEntityIntegratedMiningDivision(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[] {
-                GTQTcoreRecipeMaps.INTEGRATED_MINING_DIVISION
+                GTQTcoreRecipeMaps.INTEGRATED_MINING_DIVISION,
+                RecipeMaps.ORE_WASHER_RECIPES,
+                RecipeMaps.THERMAL_CENTRIFUGE_RECIPES,
+                RecipeMaps.SIFTER_RECIPES,
+                RecipeMaps.MACERATOR_RECIPES
         });
 
     }
@@ -87,7 +91,7 @@ public class MetaTileEntityIntegratedMiningDivision extends GCYMRecipeMapMultibl
     }
     public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
-        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("gregtech.machine.huge_chemical_reactor", new Object[0]));
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("矿石所需要的唯一", new Object[0]));
     }
 
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
