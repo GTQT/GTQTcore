@@ -10,7 +10,7 @@ gtqtcore.machine.lightning_rod.usage=§b用法§r:将§b原版的§r铁栏杆放
 recipemap.integrated_mining_division.name=集成矿石处理
 
 gtqtcore.machine.huge_chemical_reactor.name=巨型化学反应釜
-gtqtcore.machine.blazing_blast_furnace.name=炙焰冶炼炉
+gtqtcore.machine.blazing_blast_furnace.name=炽焱冶炼炉
 gtqtcore.machine.huge_turbine.plasma.name=超临界等离子轮机
 gtqtcore.machine.huge_turbine.gas.name=超临界燃气轮机
 gtqtcore.machine.huge_turbine.steam.name=超临界蒸汽轮机
@@ -133,6 +133,8 @@ gtqtcore.machine.creative_energy_hatch.uxv.name=创造模式能源仓 UXU
 gtqtcore.machine.creative_energy_hatch.opv.name=创造模式能源仓 OPV
 gtqtcore.machine.creative_energy_hatch.max.name=创造模式能源仓 MAX
 
+gtqtcore.multiblock.vc.amount=炽焱燃料储量：%sL
+gtqtcore.multiblock.vc.heat=炽焱燃料正在消耗转化为热量！
 gtqtcore.multiblock.large_combustion_engine.water_amount=润滑液储量：%sL
 gtqtcore.multiblock.large_combustion_engine.lubricant_amount=水储量：%sL
 gtqtcore.multiblock.large_combustion_engine.lubricant_boosted=润滑液持续润滑中

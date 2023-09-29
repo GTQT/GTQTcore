@@ -46,9 +46,7 @@ public class MetaTileEntityChemicalPlant extends RecipeMapMultiblockController {
     private int coilLevel;
     private int casingTier;
     private int tubeTier;
-
     private int voltageTier;
-
     private int tier;
 
 

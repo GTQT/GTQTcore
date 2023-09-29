@@ -210,7 +210,6 @@ public class MetaTileEntityTurbineCombustionChamber extends FuelMultiblockContro
 
         private final MetaTileEntityTurbineCombustionChamber combustionEngine;
         private final boolean isExtreme;
-        private final int tier;
         private static final FluidStack OXYGEN_STACK = Materials.Lubricant.getFluid(20);
         private static final FluidStack LUBRICANT_STACK = Materials.Water.getFluid(4000);
 
@@ -218,7 +217,6 @@ public class MetaTileEntityTurbineCombustionChamber extends FuelMultiblockContro
             super(tileEntity);
             this.combustionEngine = (MetaTileEntityTurbineCombustionChamber) tileEntity;
             this.isExtreme = isExtreme;
-            this.tier = isExtreme ? GTValues.IV : GTValues.EV;
         }
 
 
@@ -263,14 +261,6 @@ public class MetaTileEntityTurbineCombustionChamber extends FuelMultiblockContro
             return super.shouldSearchForRecipes() && LUBRICANT_STACK.isFluidStackIdentical(((RecipeMapMultiblockController) metaTileEntity).getInputFluidInventory().drain(LUBRICANT_STACK, false));
         }
 
-        @Override
-        protected long getMaxVoltage() {
-            //this multiplies consumption through parallel
-            if (isOxygenBoosted)
-                return GTValues.V[tier] * 2;
-            else
-                return GTValues.V[tier];
-        }
 
         @Override
         protected long boostProduction(long production) {

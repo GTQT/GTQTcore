@@ -16,14 +16,8 @@ import keqing.gtqtcore.common.metatileentities.multi.generators.MetaTileEntityIM
 import keqing.gtqtcore.common.metatileentities.multi.generators.MetaTileEntityLightningRod;
 import keqing.gtqtcore.common.metatileentities.multi.generators.MetaTileEntityRocket;
 import keqing.gtqtcore.common.metatileentities.multi.generators.MetaTileEntityTurbineCombustionChamber;
-import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.MetaTileEntityBlazingBlastFurnace;
-import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.MetaTileEntityChemicalPlant;
-import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.MetaTileEntityHugeChemicalReactor;
-import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.MetaTileEntityIntegratedMiningDivision;
-import keqing.gtqtcore.common.metatileentities.multi.multiblockpart.MetaTileEntityCatalystHatch;
-import keqing.gtqtcore.common.metatileentities.multi.multiblockpart.MetaTileEntityCreativeEnergyHatch;
-import keqing.gtqtcore.common.metatileentities.multi.multiblockpart.MetaTileEntityPlusEnergyHatch;
-import keqing.gtqtcore.common.metatileentities.multi.multiblockpart.MetaTileInfWaterHatch;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.*;
+import keqing.gtqtcore.common.metatileentities.multi.multiblockpart.*;
 
 import java.util.function.IntFunction;
 import java.util.function.IntPredicate;
@@ -52,7 +46,6 @@ public class GTQTMetaTileEntities {
     }
     public static MetaTileEntityBlazingBlastFurnace BLAZING_BLAST_FURNACE ;
     public static MetaTileEntityHugeChemicalReactor HUGE_CHEMICAL_REACTOR;
-
     public static MetaTileEntityIntegratedMiningDivision INTEGRATED_MINING_DIVISION;
     public static final MetaTileEntityCreativeEnergyHatch[] CREATIVE_ENERGY_HATCHES = new MetaTileEntityCreativeEnergyHatch[GTValues.V.length];
     public static MetaTileInfWaterHatch INF_WATER_HATCH;
@@ -179,7 +172,6 @@ public class GTQTMetaTileEntities {
         PLUS_ENERGY_INPUT_HATCH_512A[4] = registerMetaTileEntity(3221, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.input_512a.opv"), 13, 512, false));
         PLUS_ENERGY_OUTPUT_HATCH_128A[4] = registerMetaTileEntity(3222, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.output_128a.opv"), 13, 128, true));
         PLUS_ENERGY_OUTPUT_HATCH_512A[4] = registerMetaTileEntity(3223, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.output_512a.opv"), 13, 512, true));
-
 
         simpleTiredInit(CREATIVE_ENERGY_HATCHES,
                 (i) -> new MetaTileEntityCreativeEnergyHatch(gtqtcoreId("creative_energy_hatch."+GTValues.VN[i].toLowerCase()),i),

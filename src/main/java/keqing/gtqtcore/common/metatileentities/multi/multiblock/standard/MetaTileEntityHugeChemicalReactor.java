@@ -34,12 +34,14 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class MetaTileEntityHugeChemicalReactor extends GCYMRecipeMapMultiblockController {
+
+    private static final int PARALLEL_LIMIT =64;
     public MetaTileEntityHugeChemicalReactor(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[] {
                 RecipeMaps.CHEMICAL_RECIPES,
                 RecipeMaps.LARGE_CHEMICAL_RECIPES
         });
-
+        this.recipeMapWorkable.setParallelLimit(PARALLEL_LIMIT);
     }
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity metaTileEntityHolder) {
         return new MetaTileEntityHugeChemicalReactor(this.metaTileEntityId);
@@ -64,7 +66,6 @@ public class MetaTileEntityHugeChemicalReactor extends GCYMRecipeMapMultiblockCo
                         .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setMaxGlobalLimited(8).setPreviewCount(1))
                         .or(abilities(MultiblockAbility.EXPORT_FLUIDS).setMaxGlobalLimited(8).setPreviewCount(1))
                         .or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(3))
-                        .or(abilities(GCYMMultiblockAbility.PARALLEL_HATCH).setMinGlobalLimited(1).setMaxGlobalLimited(1))
                 )
                 .where('A', states(this.getSecondCasingState()))
                 .where('B', states(this.getPipeCasingState()))
@@ -85,6 +86,7 @@ public class MetaTileEntityHugeChemicalReactor extends GCYMRecipeMapMultiblockCo
     }
     public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
+        tooltip.add(I18n.format("gregtech.universal.tooltip.parallel", PARALLEL_LIMIT));
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("gregtech.machine.huge_chemical_reactor", new Object[0]));
     }
 

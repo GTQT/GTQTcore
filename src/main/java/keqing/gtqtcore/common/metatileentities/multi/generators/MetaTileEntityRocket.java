@@ -132,7 +132,7 @@ public class MetaTileEntityRocket extends FuelMultiblockController {
                 .aisle("MMM", "MBM", "MIM")
                 .aisle("MMM", "MBM", "MIM")
                 .aisle("MMM", "MBM", "MIM")
-                .aisle("CMM", "MBM", "MIM")
+                .aisle("MMM", "CBM", "MIM")
                 .aisle("MMM", "MBM", "MIM")
                 .aisle("NNN", "NBN", "NNN")
                 .aisle("NNN", "NBN", "NNN")
