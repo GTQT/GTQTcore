@@ -43,7 +43,7 @@ import java.util.List;
 
 public class MetaTileEntityHugeChemicalReactor extends RecipeMapMultiblockController {
 
-    private static final int PARALLEL_LIMIT =64;
+    private static final int PARALLEL_LIMIT =256;
     public MetaTileEntityHugeChemicalReactor(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId,RecipeMaps.CHEMICAL_RECIPES);
         this.recipeMapWorkable.setParallelLimit(PARALLEL_LIMIT);

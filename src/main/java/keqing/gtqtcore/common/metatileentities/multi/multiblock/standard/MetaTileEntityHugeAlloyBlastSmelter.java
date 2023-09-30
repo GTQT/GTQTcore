@@ -26,6 +26,7 @@ import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
 import gregtech.client.utils.TooltipHelper;
+import gregtech.common.blocks.BlockFusionCasing;
 import gregtech.common.blocks.BlockGlassCasing;
 import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.blocks.MetaBlocks;
@@ -98,23 +99,244 @@ public class MetaTileEntityHugeAlloyBlastSmelter extends GCYMRecipeMapMultiblock
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
-                .aisle("MMMMMMMSMMMMMMM","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","MMMMMMMMMMMMMMM")
-                .aisle("MMMMMMMMMMMMMMM","ABBBBBBBBBBBBBA","ABBBBBBBBBBBBBA","ABBBBBBBBBBBBBA","ABBBBBBBBBBBBBA","ABBBBBBBBBBBBBA","ABBBBBBBBBBBBBA","ABBBBBBBBBBBBBA","ABBBBBBBBBBBBBA","ABBBBBBBBBBBBBA","ABBBBBBBBBBBBBA","ABBBBBBBBBBBBBA","ABBBBBBBBBBBBBA","ABBBBBBBBBBBBBA","ABBBBBBBBBBBBBA","ABBBBBBBBBBBBBA","ABBBBBBBBBBBBBA","ABBBBBBBBBBBBBA","ABBBBBBBBBBBBBA","MMMMMMMMMMMMMMM")
-                .aisle("MMMMMMMMMMMMMMM","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","MMMMMMMMMMMMMMM")
-                .aisle("MMMMMMMMMMMMMMM","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","MMMMMMMMMMMMMMM")
-                .aisle("MMMMMMMMMMMMMMM","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","MMMMMMMMMMMMMMM")
-                .aisle("MMMMMMMMMMMMMMM","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","MMMMMMMMMMMMMMM")
-                .aisle("MMMMMMMMMMMMMMM","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","MMMMMMMMMMMMMMM")
-                .aisle("MMMMMMMMMMMMMMM","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","MMMMMMMMMMMMMMM")
-                .aisle("MMMMMMMMMMMMMMM","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","MMMMMMMMMMMMMMM")
-                .aisle("MMMMMMMMMMMMMMM","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","MMMMMMMMMMMMMMM")
-                .aisle("MMMMMMMMMMMMMMM","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","MMMMMMMMMMMMMMM")
-                .aisle("MMMMMMMMMMMMMMM","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","MMMMMMMMMMMMMMM")
-                .aisle("MMMMMMMMMMMMMMM","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","MMMMMMMMMMMMMMM")
-                .aisle("MMMMMMMMMMMMMMM","ABBBBBBBBBBBBBA","ABBBBBBBBBBBBBA","ABBBBBBBBBBBBBA","ABBBBBBBBBBBBBA","ABBBBBBBBBBBBBA","ABBBBBBBBBBBBBA","ABBBBBBBBBBBBBA","ABBBBBBBBBBBBBA","ABBBBBBBBBBBBBA","ABBBBBBBBBBBBBA","ABBBBBBBBBBBBBA","ABBBBBBBBBBBBBA","ABBBBBBBBBBBBBA","ABBBBBBBBBBBBBA","ABBBBBBBBBBBBBA","ABBBBBBBBBBBBBA","ABBBBBBBBBBBBBA","ABBBBBBBBBBBBBA","MMMMMMMMMMMMMMM")
-                .aisle("MMMMMMMXMMMMMMM","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","MMMMMMMMMMMMMMM")
-                .where('X', selfPredicate())
-                .where('M', states(getCasingState())
+                .aisle(
+                        "   BBBBB   ",
+                        "   CCCCC   ",
+                        "   CCCCC   ",
+                        "   CCCCC   ",
+                        "   BBBBB   ",
+                        "           ",
+                        "           ",
+                        "           ",
+                        "           ",
+                        "           ",
+                        "           ",
+                        "           ",
+                        "           ",
+                        "           ",
+                        "           ",
+                        "           ",
+                        "           ",
+                        "           ",
+                        "           ",
+                        "           ")
+                .aisle(
+                        "  BDDDDDB  ",
+                        "  G     G  ",
+                        "  G     G  ",
+                        "  G     G  ",
+                        "  BDDDDDB  ",
+                        "   DDDDD   ",
+                        "   GGGGG   ",
+                        "   GGGGG   ",
+                        "   GGGGG   ",
+                        "   GGGGG   ",
+                        "   GGGGG   ",
+                        "   GGGGG   ",
+                        "   GGGGG   ",
+                        "   GGGGG   ",
+                        "   GGGGG   ",
+                        "   GGGGG   ",
+                        "   GGGGG   ",
+                        "   DDDDD   ",
+                        "   DDDDD   ",
+                        "           ")
+                .aisle(
+                        " BDDSSSDDB ",
+                        " G       G ",
+                        " G       G ",
+                        " G       G ",
+                        " BDDSSSDDB ",
+                        "  DVVVVVD  ",
+                        "  GWWWWWG  ",
+                        "  GWWWWWG  ",
+                        "  GWWWWWG  ",
+                        "  GWWWWWG  ",
+                        "  GWWWWWG  ",
+                        "  GWWWWWG  ",
+                        "  GWWWWWG  ",
+                        "  GWWWWWG  ",
+                        "  GWWWWWG  ",
+                        "  GWWWWWG  ",
+                        "  GWWWWWG  ",
+                        "  DDDDDDD  ",
+                        "  DDDDDDD  ",
+                        "   DDDDD   ")
+                .aisle(
+                        "BDDDDDDDDDB",
+                        "C  AWWWA  C",
+                        "C  ABBBA  C",
+                        "C  ABBBA  C",
+                        "BDDDDDDDDDB",
+                        " DVVVVVVVD ",
+                        " GWW   WWG ",
+                        " GWW   WWG ",
+                        " GWW   WWG ",
+                        " GWW   WWG ",
+                        " GWW   WWG ",
+                        " GWW   WWG ",
+                        " GWW   WWG ",
+                        " GWW   WWG ",
+                        " GWW   WWG ",
+                        " GWW   WWG ",
+                        " GWW   WWG ",
+                        " DDDDDDDDD ",
+                        " DDDDDDDDD ",
+                        "  DDDDDDD  ")
+                .aisle(
+                        "BDSDDDDDSDB",
+                        "C  W   W  C",
+                        "C  B   B  C",
+                        "C  B   B  C",
+                        "BDSDDDDDSDB",
+                        " DVVVVVVVD ",
+                        " GW     WG ",
+                        " GW     WG ",
+                        " GW     WG ",
+                        " GW     WG ",
+                        " GW     WG ",
+                        " GW     WG ",
+                        " GW     WG ",
+                        " GW     WG ",
+                        " GW     WG ",
+                        " GW     WG ",
+                        " GW     WG ",
+                        " DDDDDDDDD ",
+                        " DDDDDDDDD ",
+                        "  DDDDDDD  ")
+                .aisle(
+                        "BDSDDDDDSDB",
+                        "C  W A W  C",
+                        "C  B A B  C",
+                        "C  B A B  C",
+                        "BDSDDADDSDB",
+                        " DVVVAVVVD ",
+                        " GW  A  WG ",
+                        " GW  A  WG ",
+                        " GW  A  WG ",
+                        " GW  A  WG ",
+                        " GW  A  WG ",
+                        " GW  A  WG ",
+                        " GW  A  WG ",
+                        " GW  A  WG ",
+                        " GW  A  WG ",
+                        " GW  A  WG ",
+                        " GW  A  WG ",
+                        " DDDDDDDDD ",
+                        " DDDDDDDDD ",
+                        "  DDDDDDD  ")
+                .aisle(
+                        "BDSDDDDDSDB",
+                        "C  W   W  C",
+                        "C  B   B  C",
+                        "C  B   B  C",
+                        "BDSDDDDDSDB",
+                        " DVVVVVVVD ",
+                        " GW     WG ",
+                        " GW     WG ",
+                        " GW     WG ",
+                        " GW     WG ",
+                        " GW     WG ",
+                        " GW     WG ",
+                        " GW     WG ",
+                        " GW     WG ",
+                        " GW     WG ",
+                        " GW     WG ",
+                        " GW     WG ",
+                        " DDDDDDDDD ",
+                        " DDDDDDDDD ",
+                        "  DDDDDDD  ")
+                .aisle(
+                        "BDDDDDDDDDB",
+                        "C  AWWWA  C",
+                        "C  ABBBA  C",
+                        "C  ABBBA  C",
+                        "BDDDDDDDDDB",
+                        " DVVVVVVVD ",
+                        " GWW   WWG ",
+                        " GWW   WWG ",
+                        " GWW   WWG ",
+                        " GWW   WWG ",
+                        " GWW   WWG ",
+                        " GWW   WWG ",
+                        " GWW   WWG ",
+                        " GWW   WWG ",
+                        " GWW   WWG ",
+                        " GWW   WWG ",
+                        " GWW   WWG ",
+                        " DDDDDDDDD ",
+                        " DDDDDDDDD ",
+                        "  DDDDDDD  ")
+                .aisle(
+                        " BDDSSSDDB ",
+                        " G       G ",
+                        " G       G ",
+                        " G       G ",
+                        " BDDSSSDDB ",
+                        "  DVVVVVD  ",
+                        "  GWWWWWG  ",
+                        "  GWWWWWG  ",
+                        "  GWWWWWG  ",
+                        "  GWWWWWG  ",
+                        "  GWWWWWG  ",
+                        "  GWWWWWG  ",
+                        "  GWWWWWG  ",
+                        "  GWWWWWG  ",
+                        "  GWWWWWG  ",
+                        "  GWWWWWG  ",
+                        "  GWWWWWG  ",
+                        "  DDDDDDD  ",
+                        "  DDDDDDD  ",
+                        "   DDDDD   ")
+                .aisle(
+                        "  BDDDDDB  ",
+                        "  G     G  ",
+                        "  G     G  ",
+                        "  G     G  ",
+                        "  BDDDDDB  ",
+                        "   DDDDD   ",
+                        "   GGGGG   ",
+                        "   GGGGG   ",
+                        "   GGGGG   ",
+                        "   GGGGG   ",
+                        "   GGGGG   ",
+                        "   GGGGG   ",
+                        "   GGGGG   ",
+                        "   GGGGG   ",
+                        "   GGGGG   ",
+                        "   GGGGG   ",
+                        "   GGGGG   ",
+                        "   DDDDD   ",
+                        "   DDDDD   ",
+                        "           ")
+                .aisle(
+                        "   BBPBB   ",
+                        "   CCCCC   ",
+                        "   CCOCC   ",
+                        "   CCCCC   ",
+                        "   BBBBB   ",
+                        "           ",
+                        "           ",
+                        "           ",
+                        "           ",
+                        "           ",
+                        "           ",
+                        "           ",
+                        "           ",
+                        "           ",
+                        "           ",
+                        "           ",
+                        "           ",
+                        "           ",
+                        "           ",
+                        "           ")
+                .where('O', selfPredicate())
+                .where('A', states(getCasingState1()))
+                .where('B', states(getCasingState2()))
+                .where('D', states(getCasingState3()))
+                .where('S', states(getCasingState4()))
+                .where('V', states(getCasingState5()))
+                .where('C', states(getCasingState())
                         .or(abilities(MultiblockAbility.MAINTENANCE_HATCH).setExactLimit(1))
                         .or(abilities(MultiblockAbility.IMPORT_ITEMS).setMaxGlobalLimited(4).setPreviewCount(1))
                         .or(abilities(MultiblockAbility.EXPORT_ITEMS).setMaxGlobalLimited(4).setPreviewCount(1))
@@ -122,9 +344,9 @@ public class MetaTileEntityHugeAlloyBlastSmelter extends GCYMRecipeMapMultiblock
                         .or(abilities(MultiblockAbility.EXPORT_FLUIDS).setMaxGlobalLimited(8).setPreviewCount(1))
                         .or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(3))
                 )
-                .where('B', heatingCoils())
-                .where('A', states(this.getGlassState()))
-                .where('S', abilities(MultiblockAbility.MUFFLER_HATCH))
+                .where('W', heatingCoils())
+                .where('G', states(this.getGlassState()))
+                .where('P', abilities(MultiblockAbility.MUFFLER_HATCH))
                 .where(' ', air())
                 .build();
     }
@@ -132,6 +354,21 @@ public class MetaTileEntityHugeAlloyBlastSmelter extends GCYMRecipeMapMultiblock
         return MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.FUSION_GLASS);
     }
     private static IBlockState getCasingState() {
+        return GCYMMetaBlocks.LARGE_MULTIBLOCK_CASING.getState(BlockLargeMultiblockCasing.CasingType.HIGH_TEMPERATURE_CASING);
+    }
+    private static IBlockState getCasingState1() {
+        return MetaBlocks.FUSION_CASING.getState(BlockFusionCasing.CasingType.FUSION_CASING);
+    }
+    private static IBlockState getCasingState2() {
+        return GCYMMetaBlocks.LARGE_MULTIBLOCK_CASING.getState(BlockLargeMultiblockCasing.CasingType.HIGH_TEMPERATURE_CASING);
+    }
+    private static IBlockState getCasingState3() {
+        return GCYMMetaBlocks.LARGE_MULTIBLOCK_CASING.getState(BlockLargeMultiblockCasing.CasingType.HIGH_TEMPERATURE_CASING);
+    }
+    private static IBlockState getCasingState4() {
+        return GCYMMetaBlocks.LARGE_MULTIBLOCK_CASING.getState(BlockLargeMultiblockCasing.CasingType.ATOMIC_CASING);
+    }
+    private static IBlockState getCasingState5() {
         return GCYMMetaBlocks.LARGE_MULTIBLOCK_CASING.getState(BlockLargeMultiblockCasing.CasingType.HIGH_TEMPERATURE_CASING);
     }
 
