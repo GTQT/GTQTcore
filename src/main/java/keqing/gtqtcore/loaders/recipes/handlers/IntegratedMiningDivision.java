@@ -59,6 +59,7 @@ public class IntegratedMiningDivision {
         return GTQTcoreRecipeMaps.INTEGRATED_MINING_DIVISION.recipeBuilder()
                 .input(OrePrefix.ore, material)
                 .fluidInputs(Water.getFluid(1000))
+                .fluidInputs(Lubricant.getFluid(500))
                 .circuitMeta(1)
                 .output(OrePrefix.dust, material, output);
     }
@@ -66,6 +67,7 @@ public class IntegratedMiningDivision {
         return GTQTcoreRecipeMaps.INTEGRATED_MINING_DIVISION.recipeBuilder()
                 .input(OrePrefix.oreNetherrack, material)
                 .fluidInputs(Water.getFluid(1000))
+                .fluidInputs(Lubricant.getFluid(500))
                 .circuitMeta(1)
                 .output(OrePrefix.dust, material, output);
     }
@@ -102,7 +104,8 @@ public class IntegratedMiningDivision {
         return GTQTcoreRecipeMaps.INTEGRATED_MINING_DIVISION.recipeBuilder()
                 .input(ore, material)
                 .fluidInputs(Water.getFluid(2000))
-                .circuitMeta(1)
+                .fluidInputs(Lubricant.getFluid(200))
+                .circuitMeta(2)
                 .output(OrePrefix.crushedPurified, material, output);
 
     }

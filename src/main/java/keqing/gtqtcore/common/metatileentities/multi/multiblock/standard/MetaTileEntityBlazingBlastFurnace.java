@@ -24,7 +24,6 @@ import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeBuilder;
 import gregtech.api.recipes.machines.RecipeMapFurnace;
 import gregtech.api.recipes.recipeproperties.TemperatureProperty;
-import gregtech.api.unification.material.Materials;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
@@ -33,7 +32,6 @@ import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.metatileentities.MetaTileEntities;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
-import keqing.gtqtcore.common.metatileentities.multi.generators.MetaTileEntityTurbineCombustionChamber;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.init.Blocks;
@@ -54,9 +52,10 @@ import java.util.Comparator;
 import java.util.List;
 
 import static gregtech.api.recipes.RecipeMaps.BLAST_RECIPES;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.Pyrotheum;
 public class MetaTileEntityBlazingBlastFurnace extends RecipeMapMultiblockController implements IHeatingCoil {
     private int blastFurnaceTemperature;
-    protected int heatingCoilLevel;
+    protected static int heatingCoilLevel;
     protected int heatingCoilDiscount;
 
     public MetaTileEntityBlazingBlastFurnace(ResourceLocation metaTileEntityId) {
@@ -99,9 +98,9 @@ public class MetaTileEntityBlazingBlastFurnace extends RecipeMapMultiblockContro
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
-                .aisle("XXX", "CCC", "CCC", "XXX")
-                .aisle("XXX", "C#C", "C#C", "XMX")
-                .aisle("XSX", "CCC", "CCC", "XXX")
+                .aisle("XXX", "CCC", "CCC", "CCC","XXX")
+                .aisle("XXX", "C#C", "C#C", "C#C","XMX")
+                .aisle("XSX", "CCC", "CCC", "CCC","XXX")
                 .where('S', selfPredicate())
                 .where('X', states(getCasingState())
                         .or(abilities(MultiblockAbility.MAINTENANCE_HATCH).setExactLimit(1))
@@ -123,9 +122,9 @@ public class MetaTileEntityBlazingBlastFurnace extends RecipeMapMultiblockContro
         MultiblockShapeInfo.Builder builder = null;
         if (Blocks.AIR != null) {
             builder = MultiblockShapeInfo.builder()
-                    .aisle("MIF", "CCC", "CCC", "XXX")
-                    .aisle("OXX", "C#C", "C#C", "XMX")
-                    .aisle("ESH", "CCC", "CCC", "XXX")
+                    .aisle("MIF", "CCC", "CCC", "CCC", "XXX")
+                    .aisle("OXX", "C#C", "C#C", "C#C", "XMX")
+                    .aisle("ESH", "CCC", "CCC", "CCC", "XXX")
                     .where('S', GTQTMetaTileEntities.BLAZING_BLAST_FURNACE, EnumFacing.SOUTH)
                     .where('X', getCasingState())
                     .where('M', MetaTileEntities.MUFFLER_HATCH[GTValues.HV], EnumFacing.UP)
@@ -158,20 +157,20 @@ public class MetaTileEntityBlazingBlastFurnace extends RecipeMapMultiblockContro
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.1"));
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.2"));
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.3"));
-
+        tooltip.add(I18n.format("gtqtcore.multiblock.vc.tooltip.1"));
+        tooltip.add(I18n.format("gtqtcore.multiblock.vc.tooltip.2"));
+        tooltip.add(I18n.format("gtqtcore.multiblock.vc.tooltip.3"));
     }
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         if (isStructureFormed()) {
 
             if (getInputFluidInventory() != null) {
-                FluidStack LubricantStack = getInputFluidInventory().drain(Materials.Water.getFluid(Integer.MAX_VALUE), false);
-                 int oxygenAmount = LubricantStack == null ? 0 : LubricantStack.amount;
-                 textList.add(new TextComponentTranslation("gtqtcore.multiblock.vc.amount", TextFormattingUtil.formatNumbers(oxygenAmount)));
+                FluidStack LubricantStack = getInputFluidInventory().drain(Pyrotheum.getFluid(Integer.MAX_VALUE), false);
+                 int liquidOxygenAmount = LubricantStack == null ? 0 : LubricantStack.amount;
+                 textList.add(new TextComponentTranslation("gtqtcore.multiblock.vc.amount", TextFormattingUtil.formatNumbers((liquidOxygenAmount))));
                  textList.add(new TextComponentTranslation("gtqtcore.multiblock.vc.heat"));
-            }
-
-
+                }
             textList.add(new TextComponentTranslation("gregtech.multiblock.blast_furnace.max_temperature", blastFurnaceTemperature)
             .setStyle(new Style().setColor(TextFormatting.RED)));
             textList.add(new TextComponentTranslation("gregtech.multiblock.multi_furnace.heating_coil_level", heatingCoilLevel));
@@ -180,6 +179,16 @@ public class MetaTileEntityBlazingBlastFurnace extends RecipeMapMultiblockContro
         super.addDisplayText(textList);
     }
 
+    @Override
+    protected void addWarningText(List<ITextComponent> textList) {
+        super.addWarningText(textList);
+        if (isStructureFormed()) {
+            FluidStack lubricantStack = getInputFluidInventory().drain(Pyrotheum.getFluid(Integer.MAX_VALUE), false);
+            if (lubricantStack == null || lubricantStack.amount == 0) {
+                textList.add(new TextComponentTranslation("gtqtcore.multiblock.vc.no"));
+            }
+        }
+    }
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
         return GCYMTextures.BLAST_CASING;
@@ -205,51 +214,32 @@ public class MetaTileEntityBlazingBlastFurnace extends RecipeMapMultiblockContro
     public int getCurrentTemperature() {
         return this.blastFurnaceTemperature;
     }
-    public static int getEUtForParallel(int parallel, int discount) {
-        return RecipeMapFurnace.RECIPE_EUT * Math.max(1, (parallel / 8) / discount);
-    }
 
     /**
      * @param heatingCoilLevel the level to get the parallel for
      * @return the max parallel for the heating coil level
      */
     public static int getMaxParallel(int heatingCoilLevel) {
-        return 2 * heatingCoilLevel;
+        return heatingCoilLevel;
     }
 
-    /**
-     * @param parallel the amount of parallel recipes
-     * @param parallelLimit the maximum limit on parallel recipes
-     * @return the un-overclocked duration for an amount of parallel recipes
-     */
-    public static int getDurationForParallel(int parallel, int parallelLimit) {
-        return (int) Math.max(1.0, RecipeMapFurnace.RECIPE_DURATION * parallel / Math.max(1, parallelLimit * 1.0));
-    }
+
+
+    private final FluidStack LUBRICANT_STACK = Pyrotheum.getFluid(2);
 
     @Override
     public void invalidateStructure() {
         super.invalidateStructure();
-        this.blastFurnaceTemperature = 0;
-        this.heatingCoilLevel = 0;
-        this.heatingCoilDiscount = 0;
+        blastFurnaceTemperature = 0;
+        heatingCoilLevel = 0;
+        heatingCoilDiscount = 0;
     }
     protected class BlazingBlastFurnaceWorkable extends MultiblockRecipeLogic {
-        private static final FluidStack LUBRICANT_STACK = Materials.Water.getFluid(1);
+
         private final MetaTileEntityBlazingBlastFurnace combustionEngine;
         public BlazingBlastFurnaceWorkable(RecipeMapMultiblockController tileEntity) {
             super(tileEntity);
             this.combustionEngine = (MetaTileEntityBlazingBlastFurnace) tileEntity;
-        }
-        @Nonnull
-        @Override
-        public ParallelLogicType getParallelLogicType() {
-            return ParallelLogicType.APPEND_ITEMS;
-        }
-
-        @Override
-        public void applyParallelBonus(@Nonnull RecipeBuilder<?> builder) {
-            builder.EUt(getEUtForParallel(builder.getParallel(), heatingCoilDiscount))
-                    .duration(getDurationForParallel(builder.getParallel(), getParallelLimit()));
         }
 
         @Override

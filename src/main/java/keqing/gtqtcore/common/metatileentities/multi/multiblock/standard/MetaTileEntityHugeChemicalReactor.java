@@ -1,46 +1,51 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
-import gregicality.multiblocks.api.metatileentity.GCYMMultiblockAbility;
+import gregicality.multiblocks.api.metatileentity.GCYMRecipeMapMultiblockController;
+import gregicality.science.common.block.GCYSMetaBlocks;
+import gregicality.science.common.block.blocks.BlockGCYSMultiblockCasing;
 import gregicality.science.common.block.blocks.BlockTransparentCasing;
+import gregtech.api.block.IHeatingCoilBlockStats;
+import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
+import gregtech.api.metatileentity.multiblock.ParallelLogicType;
+import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
+import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
 import gregtech.client.utils.TooltipHelper;
+import gregtech.common.blocks.BlockBoilerCasing;
 import gregtech.common.blocks.BlockMetalCasing;
+import gregtech.common.blocks.BlockWireCoil.CoilType;
 import gregtech.common.blocks.MetaBlocks;
-import gregtech.common.blocks.BlockBoilerCasing.BoilerCasingType;
-
-import gregicality.multiblocks.api.metatileentity.GCYMRecipeMapMultiblockController;
-
-import gregicality.science.common.block.GCYSMetaBlocks;
-import gregicality.science.common.block.blocks.BlockGCYSMultiblockCasing;
-
+import gregtech.core.sound.GTSoundEvents;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class MetaTileEntityHugeChemicalReactor extends GCYMRecipeMapMultiblockController {
+public class MetaTileEntityHugeChemicalReactor extends RecipeMapMultiblockController {
 
     private static final int PARALLEL_LIMIT =64;
     public MetaTileEntityHugeChemicalReactor(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, new RecipeMap[] {
-                RecipeMaps.CHEMICAL_RECIPES,
-                RecipeMaps.LARGE_CHEMICAL_RECIPES
-        });
+        super(metaTileEntityId,RecipeMaps.CHEMICAL_RECIPES);
         this.recipeMapWorkable.setParallelLimit(PARALLEL_LIMIT);
     }
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity metaTileEntityHolder) {
@@ -79,7 +84,7 @@ public class MetaTileEntityHugeChemicalReactor extends GCYMRecipeMapMultiblockCo
         return GCYSMetaBlocks.MULTIBLOCK_CASING.getState(BlockGCYSMultiblockCasing.CasingType.ADVANCED_SUBSTRATE);
     }
     private IBlockState getPipeCasingState() {
-        return MetaBlocks.BOILER_CASING.getState(BoilerCasingType.POLYTETRAFLUOROETHYLENE_PIPE);
+        return MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.POLYTETRAFLUOROETHYLENE_PIPE);
     }
     private IBlockState getGlassState() {
         return GCYSMetaBlocks.TRANSPARENT_CASING.getState(BlockTransparentCasing.CasingType.PMMA);
@@ -97,5 +102,9 @@ public class MetaTileEntityHugeChemicalReactor extends GCYMRecipeMapMultiblockCo
     protected OrientedOverlayRenderer getFrontOverlay() {
         return Textures.LARGE_CHEMICAL_REACTOR_OVERLAY;
     }
-}
 
+    @Override
+    public boolean canBeDistinct() {
+        return true;
+    }
+}

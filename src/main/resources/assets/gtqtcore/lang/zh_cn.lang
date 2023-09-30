@@ -1,14 +1,14 @@
 gregtech.material.high_pressure_steam=蒸汽废气
 gregtech.material.high_pressure_steam=高压蒸汽
-
+gregtech.material.pyrotheum=炽焱燃料
 
 gtqtcore.machine.lightning_rod.iv.name=避雷针 I
 gtqtcore.machine.lightning_rod.luv.name=避雷针 II
 gtqtcore.machine.lightning_rod.zpm.name=避雷针 III
 gtqtcore.machine.lightning_rod.usage=§b用法§r:将§b原版的§r铁栏杆放置其上,每当雨天或雷雨天时它就会产生能量(由Gregicas提供)。
-
 recipemap.integrated_mining_division.name=集成矿石处理
-
+gtqtcore.machine.huge_macerator.name=巨型粉碎工厂
+gtqtcore.machine.huge_alloy_blast_smelter.name=巨型合金炉
 gtqtcore.machine.huge_chemical_reactor.name=巨型化学反应釜
 gtqtcore.machine.blazing_blast_furnace.name=炽焱冶炼炉
 gtqtcore.machine.huge_turbine.plasma.name=超临界等离子轮机
@@ -132,7 +132,30 @@ gtqtcore.machine.creative_energy_hatch.uiv.name=创造模式能源仓 UIV
 gtqtcore.machine.creative_energy_hatch.uxv.name=创造模式能源仓 UXU
 gtqtcore.machine.creative_energy_hatch.opv.name=创造模式能源仓 OPV
 gtqtcore.machine.creative_energy_hatch.max.name=创造模式能源仓 MAX
+gregtech.machine.huge_chemical_reactor=万里挑一
 
+gtqtcore.multiblock.ma.tooltip.1=每提升一级线圈并行数量*2。
+gtqtcore.multiblock.ma.tooltip.2=一次至多可处理1024个配方。
+gtqtcore.multiblock.ma.amount=润滑油储量：%sL
+gtqtcore.multiblock.ma.heat=润滑油持续润滑中
+gtqtcore.multiblock.ma.no=需要提供润滑油！
+
+gtqtcore.multiblock.ab.tooltip.1=每提升一级线圈并行数量*2。
+gtqtcore.multiblock.ab.tooltip.2=一次至多可处理1024个配方。
+gtqtcore.multiblock.ab.amount=润滑油储量：%sL
+gtqtcore.multiblock.ab.heat=润滑油持续润滑中
+gtqtcore.multiblock.ab.no=需要提供润滑油！
+
+gtqtcore.multiblock.md.tooltip.1=集成矿石处理厂的控制器方块
+gtqtcore.multiblock.md.tooltip.2=它很强（OP），我是说它是矿石处理厂。
+gtqtcore.multiblock.md.tooltip.3=一步完成所有矿石处理。
+gtqtcore.multiblock.md.tooltip.4=每提升一级线圈并行数量*2。
+gtqtcore.multiblock.md.tooltip.5=一次至多可处理1024个矿石。
+gtqtcore.multiblock.md.level=线圈等级：%s
+gtqtcore.multiblock.vc.tooltip.1=需要提供炽焱燃料工作。
+gtqtcore.multiblock.vc.tooltip.2=每提升一级线圈并行数量*2，工作时间无视并行配方数量。
+gtqtcore.multiblock.vc.tooltip.3=如果你在烈焰之炽焱用完的情况下继续运行，炽焱高炉将停机。
+gtqtcore.multiblock.vc.no=需要提供炽焱燃料！
 gtqtcore.multiblock.vc.amount=炽焱燃料储量：%sL
 gtqtcore.multiblock.vc.heat=炽焱燃料正在消耗转化为热量！
 gtqtcore.multiblock.large_combustion_engine.water_amount=润滑液储量：%sL

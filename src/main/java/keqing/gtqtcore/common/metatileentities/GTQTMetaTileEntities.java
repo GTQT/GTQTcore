@@ -47,6 +47,9 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityBlazingBlastFurnace BLAZING_BLAST_FURNACE ;
     public static MetaTileEntityHugeChemicalReactor HUGE_CHEMICAL_REACTOR;
     public static MetaTileEntityIntegratedMiningDivision INTEGRATED_MINING_DIVISION;
+    public static MetaTileEntityHugeMacerator HUGE_MACERATOR;
+    public static MetaTileEntityHugeAlloyBlastSmelter HUGE_ALLOY_BLAST_FURANCE;
+
     public static final MetaTileEntityCreativeEnergyHatch[] CREATIVE_ENERGY_HATCHES = new MetaTileEntityCreativeEnergyHatch[GTValues.V.length];
     public static MetaTileInfWaterHatch INF_WATER_HATCH;
     public static MetaTileEntityLightningRod[] LIGHTNING_ROD = new MetaTileEntityLightningRod[3];
@@ -89,6 +92,8 @@ public class GTQTMetaTileEntities {
         CHEMICAL_PLANT = registerMetaTileEntity(3002,new MetaTileEntityChemicalPlant(gtqtcoreId("chemical_plant")));
         INF_WATER_HATCH = registerMetaTileEntity(3003,new MetaTileInfWaterHatch(gtqtcoreId("infinite_water_hatch")));
         CATALYST_HATCH = registerMetaTileEntity(3004,new MetaTileEntityCatalystHatch(gtqtcoreId("catalyst_hatch")));
+        HUGE_MACERATOR = registerMetaTileEntity(3005,new MetaTileEntityHugeMacerator(gtqtcoreId("huge_macerator")));
+        HUGE_ALLOY_BLAST_FURANCE = registerMetaTileEntity(3006,new MetaTileEntityHugeAlloyBlastSmelter(gtqtcoreId("huge_alloy_blast_smelter")));
         HUGE_STEAM_TURBINE = registerMetaTileEntity(3010, new MetaTileEntityLargeTurbine(gtqtcoreId("huge_turbine.steam"), RecipeMaps.STEAM_TURBINE_FUELS, 9, MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.STEEL_TURBINE_CASING), MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.STEEL_GEARBOX), Textures.SOLID_STEEL_CASING, false, Textures.LARGE_STEAM_TURBINE_OVERLAY));
         HUGE_GAS_TURBINE = registerMetaTileEntity(3011, new MetaTileEntityLargeTurbine(gtqtcoreId("huge_turbine.gas"), RecipeMaps.GAS_TURBINE_FUELS, 10, MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.STAINLESS_TURBINE_CASING), MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.STAINLESS_STEEL_GEARBOX), Textures.CLEAN_STAINLESS_STEEL_CASING, true, Textures.LARGE_GAS_TURBINE_OVERLAY));
         HUGE_PLASMA_TURBINE = registerMetaTileEntity(3012, new MetaTileEntityLargeTurbine(gtqtcoreId("huge_turbine.plasma"), RecipeMaps.PLASMA_GENERATOR_FUELS, 10, MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.TUNGSTENSTEEL_TURBINE_CASING), MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.TUNGSTENSTEEL_GEARBOX), Textures.ROBUST_TUNGSTENSTEEL_CASING, false, Textures.LARGE_PLASMA_TURBINE_OVERLAY));
