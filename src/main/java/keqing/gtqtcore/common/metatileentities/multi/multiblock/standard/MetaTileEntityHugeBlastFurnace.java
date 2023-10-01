@@ -55,7 +55,6 @@ public class MetaTileEntityHugeBlastFurnace extends RecipeMapMultiblockControlle
     public MetaTileEntityHugeBlastFurnace(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, RecipeMaps.BLAST_RECIPES);
         this.recipeMapWorkable = new MetaTileEntityHugeBlastFurnaceWorkable(this);
-        this.recipeMapWorkable = new HeatingCoilRecipeLogic(this);
     }
 
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity metaTileEntityHolder) {

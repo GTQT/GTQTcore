@@ -46,14 +46,12 @@ import java.util.List;
 
 import static gregtech.api.unification.material.Materials.Lubricant;
 
-public class MetaTileEntityHugeMacerator extends GCYMRecipeMapMultiblockController {
+public class MetaTileEntityHugeMacerator extends RecipeMapMultiblockController {
 
     protected int heatingCoilLevel;
     protected int heatingCoilDiscount;
     public MetaTileEntityHugeMacerator(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, new RecipeMap[] {
-                RecipeMaps.MACERATOR_RECIPES
-        });
+        super(metaTileEntityId,RecipeMaps.MACERATOR_RECIPES);
         this.recipeMapWorkable = new MetaTileEntityHugeMaceratorWorkable(this);
     }
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity metaTileEntityHolder) {

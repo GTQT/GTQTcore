@@ -31,6 +31,7 @@ import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.core.sound.GTSoundEvents;
+import keqing.gtqtcore.api.metaileentity.GTQTRecipeMapMultiblockController;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
@@ -50,7 +51,7 @@ import java.util.List;
 
 import static gregtech.api.unification.material.Materials.Lubricant;
 
-public class MetaTileEntityIntegratedMiningDivision extends GCYMRecipeMapMultiblockController {
+public class MetaTileEntityIntegratedMiningDivision extends GTQTRecipeMapMultiblockController {
     protected int heatingCoilLevel;
     protected int heatingCoilDiscount;
     public MetaTileEntityIntegratedMiningDivision(ResourceLocation metaTileEntityId) {
@@ -103,6 +104,7 @@ public class MetaTileEntityIntegratedMiningDivision extends GCYMRecipeMapMultibl
         tooltip.add(I18n.format("gtqtcore.multiblock.md.tooltip.2"));
         tooltip.add(I18n.format("gtqtcore.multiblock.md.tooltip.3"));
         tooltip.add(I18n.format("gtqtcore.multiblock.md.tooltip.4"));
+        tooltip.add(I18n.format("gtqtcore.multiblock.md.tooltip.5"));
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("矿石所需要的唯一", new Object[0]));
     }
 

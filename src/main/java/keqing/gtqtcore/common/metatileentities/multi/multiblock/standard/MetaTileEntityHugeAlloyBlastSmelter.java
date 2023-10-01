@@ -47,16 +47,12 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-import static gregtech.api.unification.material.Materials.Lubricant;
-
-public class MetaTileEntityHugeAlloyBlastSmelter extends GCYMRecipeMapMultiblockController {
+public class MetaTileEntityHugeAlloyBlastSmelter extends RecipeMapMultiblockController {
 
     protected int heatingCoilLevel;
     protected int heatingCoilDiscount;
     public MetaTileEntityHugeAlloyBlastSmelter(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, new RecipeMap[] {
-                GCYMRecipeMaps.ALLOY_BLAST_RECIPES
-        });
+        super(metaTileEntityId, GCYMRecipeMaps.ALLOY_BLAST_RECIPES);
         this.recipeMapWorkable = new MetaTileEntityHugeAlloyBlastSmelterWorkable(this);
     }
 
