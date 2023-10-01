@@ -13,6 +13,54 @@
         "textures": {
           "all": "gregtech:blocks/multiblock/casings/nitinol_machine_casing"
         }
+      },
+      "compressed_fusion_reactor_mki_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casings/compressed_fusion_reactor_mki_casing"
+        }
+      },
+      "compressed_fusion_reactor_mkii_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casings/compressed_fusion_reactor_mkii_casing"
+        }
+      },
+      "compressed_fusion_reactor_mkiii_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casings/compressed_fusion_reactor_mkiii_casing"
+        }
+      },
+      "beam_core_0": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casings/beam_core_0"
+        }
+      },
+      "beam_core_1": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casings/beam_core_1"
+        }
+      },
+      "beam_core_2": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casings/beam_core_2"
+        }
+      },
+      "beam_core_3": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casings/beam_core_3"
+        }
+      },
+      "beam_core_4": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casings/beam_core_4"
+        }
       }
     }
   }
