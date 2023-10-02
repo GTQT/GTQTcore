@@ -49,6 +49,7 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
@@ -118,13 +119,13 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
                         "                    FCIBICF                    ",
                         "                                               ")
                 .aisle(
-                        "                    FCIBICF                    ",
+                        "                    FCICICF                    ",
                         "                   CC     CC                   ",
                         "                CCCCC     CCCCC                ",
                         "                PPPHHHHHHHHHPPP                ",
                         "                CCCCC     CCCCC                ",
                         "                   CC     CC                   ",
-                        "                    FCIBICF                    ")
+                        "                    FCICICF                    ")
                 .aisle(
                         "                    FCIBICF                    ",
                         "                CCCCC     CCCCC                ",
@@ -134,13 +135,13 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
                         "                CCCCC     CCCCC                ",
                         "                    FCIBICF                    ")
                 .aisle(
-                        "                    FCIBICF                    ",
+                        "                    FCICICF                    ",
                         "              CCCCCCC     CCCCCCC              ",
                         "            CCCCHHHCC     CCHHHCCCC            ",
                         "            PCHHHHHHHHHHHHHHHHHHHCP            ",
                         "            CCCCHHHCC     CCHHHCCCC            ",
                         "              CCCCCCC     CCCCCCC              ",
-                        "                    FCIBICF                    ")
+                        "                    FCICICF                    ")
                 .aisle(
                         "                                               ",
                         "            CCCCCCC FCIBICF CCCCCCC            ",
@@ -265,7 +266,7 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
                         "  FFF                                     FFF  ",
                         " FCCCF                                   FCCCF ",
                         "FCCHCCF                                 FCCHCCF",
-                        "PCHHHCP                                 PCHHHCP",
+                        "FCHHHCF                                 FCHHHCF",
                         "FCCHCCF                                 FCCHCCF",
                         " FCCCF                                   FCCCF ",
                         "  FFF                                     FFF  ")
@@ -273,7 +274,7 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
                         "  CCC                                     CCC  ",
                         " C   C                                   C   C ",
                         "C  H  C                                 C  H  C",
-                        "P HHH P                                 P HHH P",
+                        "C HHH C                                 C HHH C",
                         "C  H  C                                 C  H  C",
                         " C   C                                   C   C ",
                         "  CCC                                     CCC  ")
@@ -289,7 +290,7 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
                         "  CBC                                     CBC  ",
                         " B   B                                   B   B ",
                         "C  H  C                                 C  H  C",
-                        "P HHH P                                 P HHH P",
+                        "B HHH B                                 B HHH B",
                         "C  H  C                                 C  H  C",
                         " B   B                                   B   B ",
                         "  CBC                                     CBC  ")
@@ -305,7 +306,7 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
                         "  CCC                                     CCC  ",
                         " C   C                                   C   C ",
                         "C  H  C                                 C  H  C",
-                        "P HHH P                                 P HHH P",
+                        "C HHH C                                 C HHH C",
                         "C  H  C                                 C  H  C",
                         " C   C                                   C   C ",
                         "  CCC                                     CCC  ")
@@ -313,7 +314,7 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
                         "  FFF                                     FFF  ",
                         " FCCCF                                   FCCCF ",
                         "FCCHCCF                                 FCCHCCF",
-                        "PCHHHCP                                 PCHHHCP",
+                        "FCHHHCF                                 FCHHHCF",
                         "FCCHCCF                                 FCCHCCF",
                         " FCCCF                                   FCCCF ",
                         "  FFF                                     FFF  ")
@@ -438,13 +439,13 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
                         "            CCCCCCC FCIBICF CCCCCCC            ",
                         "                                               ")
                 .aisle(
-                        "                    FCIBICF                    ",
+                        "                    FCICICF                    ",
                         "              CCCCCCC     CCCCCCC              ",
                         "            CCCCHHHCC     CCHHHCCCC            ",
                         "            PPHHHHHHHHHHHHHHHHHHHPP            ",
                         "            CCCCHHHCC     CCHHHCCCC            ",
                         "              CCCCCCC     CCCCCCC              ",
-                        "                    FCIBICF                    ")
+                        "                    FCICICF                    ")
                 .aisle(
                         "                    FCIBICF                    ",
                         "                CCCCC     CCCCC                ",
@@ -454,13 +455,13 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
                         "                CCCCC     CCCCC                ",
                         "                    FCIBICF                    ")
                 .aisle(
-                        "                    FCIBICF                    ",
+                        "                    FCICICF                    ",
                         "                   CC     CC                   ",
                         "                CCCCC     CCCCC                ",
                         "                PPPHHHHHHHHHPPP                ",
                         "                CCCCC     CCCCC                ",
                         "                   CC     CC                   ",
-                        "                    FCIBICF                    ")
+                        "                    FCICICF                    ")
                 .aisle(
                         "                                               ",
                         "                    FCIBICF                    ",
@@ -755,19 +756,19 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
                 if (entity != null) {
                     buffer.begin(GL11.GL_QUAD_STRIP, DefaultVertexFormats.POSITION_COLOR);
                     RenderBufferHelper.renderRing(buffer,
-                            x + getFrontFacing().getOpposite().getXOffset() * 7 +0.5,
+                            x + getFrontFacing().getOpposite().getXOffset() * 23 + 0.5,
                             y + 0.5,
-                            z + getFrontFacing().getOpposite().getZOffset() * 7 - 15.5,
+                            z + getFrontFacing().getOpposite().getZOffset() * 23 + 0.5,
                             6, 0.2, 10, 20,
-                            r, g, b, a, EnumFacing.Axis.X);
+                            r, g, b, a, EnumFacing.Axis.Y);
                     Tessellator.getInstance().draw();
                 }
                 if (entity != null) {
                     buffer.begin(GL11.GL_QUAD_STRIP, DefaultVertexFormats.POSITION_COLOR);
                     RenderBufferHelper.renderRing(buffer,
-                            x + getFrontFacing().getOpposite().getXOffset() * 7 +0.5,
+                            x + getFrontFacing().getOpposite().getXOffset() * 23 + 0.5,
                             y + 0.5,
-                            z + getFrontFacing().getOpposite().getZOffset() * 7 - 15.5,
+                            z + getFrontFacing().getOpposite().getZOffset() * 23 + 0.5,
                             12, 0.2, 10, 20,
                             r, g, b, a, EnumFacing.Axis.Y);
                     Tessellator.getInstance().draw();
@@ -775,19 +776,19 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
                 if (entity != null) {
                     buffer.begin(GL11.GL_QUAD_STRIP, DefaultVertexFormats.POSITION_COLOR);
                     RenderBufferHelper.renderRing(buffer,
-                            x + getFrontFacing().getOpposite().getXOffset() * 7 +0.5,
+                            x + getFrontFacing().getOpposite().getXOffset() * 23 + 0.5,
                             y + 0.5,
-                            z + getFrontFacing().getOpposite().getZOffset() * 7 - 15.5,
+                            z + getFrontFacing().getOpposite().getZOffset() * 23 + 0.5,
                             6, 0.2, 10, 20,
-                            r, g, b, a, EnumFacing.Axis.Y);
+                            r, g, b, a, EnumFacing.Axis.X);
                     Tessellator.getInstance().draw();
                 }
                 if (entity != null) {
                     buffer.begin(GL11.GL_QUAD_STRIP, DefaultVertexFormats.POSITION_COLOR);
                     RenderBufferHelper.renderRing(buffer,
-                            x + getFrontFacing().getOpposite().getXOffset() * 7 +0.5,
+                            x + getFrontFacing().getOpposite().getXOffset() * 23 + 0.5,
                             y + 0.5,
-                            z + getFrontFacing().getOpposite().getZOffset() * 7 - 15.5,
+                            z + getFrontFacing().getOpposite().getZOffset() * 23 + 0.5,
                             6, 0.2, 10, 20,
                             r, g, b, a, EnumFacing.Axis.Z);
                     Tessellator.getInstance().draw();
