@@ -73,10 +73,10 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
 
     public int getMaxParallel(int heatingCoilLevel) {
         if (tier == GTValues.UHV)
-            return  4* heatingCoilLevel;
+            return   heatingCoilLevel;
         if (tier == GTValues.UEV)
-            return  16* heatingCoilLevel;
-        return  64* heatingCoilLevel;
+            return  4 * heatingCoilLevel;
+        return  16 * heatingCoilLevel;
     }
     public MetaTileEntityCompressedFusionReactor(ResourceLocation metaTileEntityId, int tier) {
         super(metaTileEntityId, RecipeMaps.FUSION_RECIPES);
@@ -637,13 +637,13 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
         tooltip.add(I18n.format("gregtech.machine.fusion_reactor.overclocking"));
         tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.1"));
         if (tier == GTValues.UHV){
-            tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.2", 64));
+            tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.2", 16));
             tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("惊 鸿 万 物", new Object[0]));}
         if (tier == GTValues.UEV){
-            tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.2", 256));
+            tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.2", 64));
             tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("破 碎 亘 古", new Object[0]));}
         if (tier == GTValues.UIV){
-            tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.2", 1024));
+            tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.2", 256));
             tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("凌 驾 虚 无", new Object[0]));}
     }
 

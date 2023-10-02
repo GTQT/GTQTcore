@@ -88,7 +88,7 @@ public class MetaTileEntityHugeMacerator extends RecipeMapMultiblockController {
     @Override
     public void addInformation(ItemStack stack, @Nullable World player, @Nonnull List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
-        tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.2", 512));
+        tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.2", 256));
         tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.1"));
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("最强粉碎王", new Object[0]));
     }
@@ -171,7 +171,7 @@ public class MetaTileEntityHugeMacerator extends RecipeMapMultiblockController {
      * @return the max parallel for the heating coil level
      */
     public static int getMaxParallel(int heatingCoilLevel) {
-        return 32 * heatingCoilLevel;
+        return 16 * heatingCoilLevel;
     }
     private final FluidStack LUBRICANT_STACK = Lubricant.getFluid(1);
 

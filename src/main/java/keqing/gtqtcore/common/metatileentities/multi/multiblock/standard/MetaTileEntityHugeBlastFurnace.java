@@ -76,7 +76,7 @@ public class MetaTileEntityHugeBlastFurnace extends RecipeMapMultiblockControlle
     public void addInformation(ItemStack stack, @Nullable World player, @Nonnull List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.1"));
-        tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.2"));
+        tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.2", 256));
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.1"));
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.2"));
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.3"));
@@ -178,7 +178,7 @@ public class MetaTileEntityHugeBlastFurnace extends RecipeMapMultiblockControlle
      * @return the max parallel for the heating coil level
      */
     public static int getMaxParallel(int heatingCoilLevel) {
-        return 64 * heatingCoilLevel;
+        return 16 * heatingCoilLevel;
     }
 
     @Override
