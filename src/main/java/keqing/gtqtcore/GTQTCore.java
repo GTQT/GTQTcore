@@ -16,7 +16,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
         name="GTQTcore",
         acceptedMinecraftVersions = "[1.12.2,1.13)",
         version = "0.0.1-beta" ,
-        dependencies = "required-after:gregtech@[2.7.3-beta,) ;"
+        dependencies = "required-after:gregtech@[2.7.4-beta,) ;"
 )
 public class GTQTCore {
 

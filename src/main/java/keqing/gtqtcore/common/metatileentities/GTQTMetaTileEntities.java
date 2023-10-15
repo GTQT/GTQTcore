@@ -65,6 +65,13 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityIModularFissionReactor I_MODULAR_FISSION_REACTOR;
     public static MetaTileEntityRocket ROCKET;
 
+    public static final MetaTileEntityMultiFluidHatch[] QUADRUPLE_IMPORT_HATCH = new MetaTileEntityMultiFluidHatch[6]; // EV-UHV
+    public static final MetaTileEntityMultiFluidHatch[] NONUPLE_IMPORT_HATCH = new MetaTileEntityMultiFluidHatch[6]; // EV-UHV
+    public static final MetaTileEntityMultiFluidHatch[] QUADRUPLE_EXPORT_HATCH = new MetaTileEntityMultiFluidHatch[6]; // EV-UHV
+    public static final MetaTileEntityMultiFluidHatch[] NONUPLE_EXPORT_HATCH = new MetaTileEntityMultiFluidHatch[6]; // EV-UHV
+    public static final MetaTileEntityMultiFluidHatch[] BIG_IMPORT_HATCH = new MetaTileEntityMultiFluidHatch[6]; // EV-UHV
+    public static final MetaTileEntityMultiFluidHatch[] BIG_EXPORT_HATCH = new MetaTileEntityMultiFluidHatch[6]; // EV-UHV
+
     public static final MetaTileEntityPlusEnergyHatch[] PLUS_ENERGY_INPUT_HATCH = new MetaTileEntityPlusEnergyHatch[10];
     public static final MetaTileEntityPlusEnergyHatch[] PLUS_ENERGY_INPUT_HATCH_4A = new MetaTileEntityPlusEnergyHatch[10];
     public static final MetaTileEntityPlusEnergyHatch[] PLUS_ENERGY_INPUT_HATCH_16A = new MetaTileEntityPlusEnergyHatch[10];
@@ -113,13 +120,18 @@ public class GTQTMetaTileEntities {
         registerMetaTileEntity(3105, new MetaTileEntityFluidHatch(gtqtcoreId("fluid_hatch.import.uev"), 11, false));
         registerMetaTileEntity(3120, new MetaTileEntityFluidHatch(gtqtcoreId("fluid_hatch.export.uev"), 11, true));
 
-        registerMetaTileEntity(3122, new MetaTileEntityMultiFluidHatch(gtqtcoreId("fluid_hatch.import_16x"), 4, false));
-        registerMetaTileEntity(3124, new MetaTileEntityMultiFluidHatch(gtqtcoreId("fluid_hatch.export_16x"), 4, true));
+        registerMetaTileEntity(3023, new MetaTileEntityParallelHatch(gtqtcoreId(String.format("parallel_hatch.%s", GTValues.VN[9])), 9));
+        registerMetaTileEntity(3024, new MetaTileEntityParallelHatch(gtqtcoreId(String.format("parallel_hatch.%s", GTValues.VN[10])), 10));
+        registerMetaTileEntity(3025, new MetaTileEntityParallelHatch(gtqtcoreId(String.format("parallel_hatch.%s", GTValues.VN[11])), 11));
+        registerMetaTileEntity(3026, new MetaTileEntityParallelHatch(gtqtcoreId(String.format("parallel_hatch.%s", GTValues.VN[12])), 12));
 
-        registerMetaTileEntity(3129, new MetaTileEntityParallelHatch(gtqtcoreId(String.format("parallel_hatch.%s", GTValues.VN[9])), 9));
-        registerMetaTileEntity(3130, new MetaTileEntityParallelHatch(gtqtcoreId(String.format("parallel_hatch.%s", GTValues.VN[10])), 10));
-        registerMetaTileEntity(3131, new MetaTileEntityParallelHatch(gtqtcoreId(String.format("parallel_hatch.%s", GTValues.VN[11])), 11));
-        registerMetaTileEntity(3132, new MetaTileEntityParallelHatch(gtqtcoreId(String.format("parallel_hatch.%s", GTValues.VN[12])), 12));
+        for (int i = GTValues.IV; i <= GTValues.UHV; i++) {
+            int index = i - GTValues.IV;
+            String tierName = GTValues.VN[i].toLowerCase();
+            BIG_IMPORT_HATCH[index + 1] = registerMetaTileEntity(3030 + index, new MetaTileEntityMultiFluidHatch(gtqtcoreId("fluid_hatch.import_16x." + tierName), i, 16, false));
+            BIG_EXPORT_HATCH[index + 1] = registerMetaTileEntity(3050 + index, new MetaTileEntityMultiFluidHatch(gtqtcoreId("fluid_hatch.export_16x." + tierName), i, 16, true));
+        }
+
 
         ROTOR_HOLDER[6] = registerMetaTileEntity(3233, new MetaTileEntityRotorHolder(gtqtcoreId("rotor_holder.uhv"), GTValues.UHV));
         ROTOR_HOLDER[7] = registerMetaTileEntity(3134, new MetaTileEntityRotorHolder(gtqtcoreId("rotor_holder.uev"), GTValues.UEV));
