@@ -4,12 +4,22 @@ package keqing.gtqtcore.loaders.recipes;
 
 import static gregtech.api.GTValues.*;
 import static gregtech.api.unification.material.Materials.*;
+import static gregtech.api.unification.ore.OrePrefix.*;
+import static gregtech.loaders.OreDictionaryLoader.OREDICT_BLOCK_FUEL_COKE;
+import static gregtech.loaders.OreDictionaryLoader.OREDICT_FUEL_COKE;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 
 public class FuelRecipes {
 
         public static void init(){
+        GTQTcoreRecipeMaps.STEAM_BLAST_FURNACE_RECIPES.recipeBuilder()
+                .input(ingot, WroughtIron)
+                .output(ingot, Steel)
+                .duration(3600)
+                .EUt(24)
+                .buildAndRegister();
+
         GTQTcoreRecipeMaps.TURBINE_COMBUSTION_CHAMBER.recipeBuilder()
                 .fluidInputs(Naphtha.getFluid(1))
                 .fluidOutputs(HighPressureSteam.getFluid(200))

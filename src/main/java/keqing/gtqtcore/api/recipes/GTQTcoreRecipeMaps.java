@@ -21,14 +21,9 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<ChemicalPlantBuilder> CHEMICAL_PLANT;
 
     public static final RecipeMap<SimpleRecipeBuilder> INTEGRATED_MINING_DIVISION;
+    public static final RecipeMap<FuelRecipeBuilder> STEAM_BLAST_FURNACE_RECIPES;
+    public static final RecipeMap<FuelRecipeBuilder> STEAM_ORE_WASHER_RECIPES;
 
-    public static final RecipeMap<BlastRecipeBuilder> BLAZING_BLAST_FURNACE = new RecipeMap<>("blazing_blast_furnace", 9, 0, 3, 1, new BlastRecipeBuilder(), false)
-            .setSlotOverlay(false, false, false, GuiTextures.FURNACE_OVERLAY_1)
-            .setSlotOverlay(false, false, true, GuiTextures.FURNACE_OVERLAY_1)
-            .setSlotOverlay(false, true, false, GuiTextures.FURNACE_OVERLAY_2)
-            .setSlotOverlay(false, true, true, GuiTextures.FURNACE_OVERLAY_2)
-            .setSlotOverlay(true, true, false, GuiTextures.FURNACE_OVERLAY_2)
-            .setSlotOverlay(true, true, true, GuiTextures.FURNACE_OVERLAY_2);
     private GTQTcoreRecipeMaps() {}
     static {
         TURBINE_COMBUSTION_CHAMBER = new RecipeMap<>("turbine_combustion_chamber",
@@ -45,6 +40,12 @@ public class GTQTcoreRecipeMaps {
 
         INTEGRATED_MINING_DIVISION = new RecipeMap<>("integrated_mining_division",
                 3, 3, 3, 0, new SimpleRecipeBuilder(), false);
+
+        STEAM_BLAST_FURNACE_RECIPES = new RecipeMap<>("steam_blast_furance",
+                1, 1, 0, 0, new FuelRecipeBuilder(), false);
+
+        STEAM_ORE_WASHER_RECIPES = new RecipeMap<>("steam_ore_washer",
+                1, 1, 0, 0, new FuelRecipeBuilder(), false);
     }
 
 }

@@ -16,7 +16,10 @@ import keqing.gtqtcore.common.metatileentities.multi.generators.MetaTileEntityIM
 import keqing.gtqtcore.common.metatileentities.multi.generators.MetaTileEntityLightningRod;
 import keqing.gtqtcore.common.metatileentities.multi.generators.MetaTileEntityRocket;
 import keqing.gtqtcore.common.metatileentities.multi.generators.MetaTileEntityTurbineCombustionChamber;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.MetaTileEntityMultiblockTank;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.*;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.steam.MetaTileEntitySteamBlastFurnace;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.steam.MetaTileEntitySteamOreWasher;
 import keqing.gtqtcore.common.metatileentities.multi.multiblockpart.*;
 
 import java.util.function.IntFunction;
@@ -64,6 +67,10 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityTurbineCombustionChamber HUGE_TURBINE_COMBUSTION_CHAMBER;
     public static MetaTileEntityIModularFissionReactor I_MODULAR_FISSION_REACTOR;
     public static MetaTileEntityRocket ROCKET;
+    public static MetaTileEntitySteamOreWasher STEAM_ORE_WASHER;
+    public static MetaTileEntitySteamBlastFurnace STEAM_BLAST_FURANCE;
+
+    public static MetaTileEntityMultiblockTank STEEL_TANK;
 
     public static final MetaTileEntityMultiFluidHatch[] QUADRUPLE_IMPORT_HATCH = new MetaTileEntityMultiFluidHatch[6]; // EV-UHV
     public static final MetaTileEntityMultiFluidHatch[] NONUPLE_IMPORT_HATCH = new MetaTileEntityMultiFluidHatch[6]; // EV-UHV
@@ -113,9 +120,12 @@ public class GTQTMetaTileEntities {
         ROCKET = registerMetaTileEntity(3015, new MetaTileEntityRocket(gtqtcoreId("rocket"),5));
         I_MODULAR_FISSION_REACTOR = registerMetaTileEntity(3016, new MetaTileEntityIModularFissionReactor(gtqtcoreId("i_modular_fission_reactor"),5));
         SPACE_DRILLING = registerMetaTileEntity(3017, new MetaTileEntitySpaceDrilling(gtqtcoreId("space_drilling")));
+        STEAM_BLAST_FURANCE = registerMetaTileEntity(3018, new MetaTileEntitySteamBlastFurnace(gtqtcoreId("steam_blast_furance")));
+        STEAM_ORE_WASHER = registerMetaTileEntity(3019, new MetaTileEntitySteamOreWasher(gtqtcoreId("steam_ore_washer")));
         COMPRESSED_FUSION_REACTOR_MKI = registerMetaTileEntity(3020,new MetaTileEntityCompressedFusionReactor(gtqtcoreId("compressed_fusion_reactor_mki"),9));
         COMPRESSED_FUSION_REACTOR_MKII = registerMetaTileEntity(3021,new MetaTileEntityCompressedFusionReactor(gtqtcoreId("compressed_fusion_reactor_mkii"),10));
         COMPRESSED_FUSION_REACTOR_MKIII = registerMetaTileEntity(3022,new MetaTileEntityCompressedFusionReactor(gtqtcoreId("compressed_fusion_reactor_mkiii"),11));
+        STEEL_TANK = registerMetaTileEntity(3100, new MetaTileEntityMultiblockTank(gtqtcoreId("tank.steel"), true, 1000));
 
         registerMetaTileEntity(3105, new MetaTileEntityFluidHatch(gtqtcoreId("fluid_hatch.import.uev"), 11, false));
         registerMetaTileEntity(3120, new MetaTileEntityFluidHatch(gtqtcoreId("fluid_hatch.export.uev"), 11, true));
