@@ -69,8 +69,9 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityRocket ROCKET;
     public static MetaTileEntitySteamOreWasher STEAM_ORE_WASHER;
     public static MetaTileEntitySteamBlastFurnace STEAM_BLAST_FURANCE;
-
     public static MetaTileEntityMultiblockTank STEEL_TANK;
+    public static MetaTileEntityAssemblyLineTower ASSEMBLY_LINE_TOWER;
+    public static MetaTileEntityHugeDistillationTower HUGE_DISTILLATION_TOWER;
 
     public static final MetaTileEntityMultiFluidHatch[] QUADRUPLE_IMPORT_HATCH = new MetaTileEntityMultiFluidHatch[6]; // EV-UHV
     public static final MetaTileEntityMultiFluidHatch[] NONUPLE_IMPORT_HATCH = new MetaTileEntityMultiFluidHatch[6]; // EV-UHV
@@ -122,6 +123,8 @@ public class GTQTMetaTileEntities {
         SPACE_DRILLING = registerMetaTileEntity(3017, new MetaTileEntitySpaceDrilling(gtqtcoreId("space_drilling")));
         STEAM_BLAST_FURANCE = registerMetaTileEntity(3018, new MetaTileEntitySteamBlastFurnace(gtqtcoreId("steam_blast_furance")));
         STEAM_ORE_WASHER = registerMetaTileEntity(3019, new MetaTileEntitySteamOreWasher(gtqtcoreId("steam_ore_washer")));
+        ASSEMBLY_LINE_TOWER = registerMetaTileEntity(3099, new MetaTileEntityAssemblyLineTower(gtqtcoreId("assembly_line_tower")));
+        HUGE_DISTILLATION_TOWER = registerMetaTileEntity(3098, new MetaTileEntityHugeDistillationTower(gtqtcoreId("huge_distillation_tower")));
         COMPRESSED_FUSION_REACTOR_MKI = registerMetaTileEntity(3020,new MetaTileEntityCompressedFusionReactor(gtqtcoreId("compressed_fusion_reactor_mki"),9));
         COMPRESSED_FUSION_REACTOR_MKII = registerMetaTileEntity(3021,new MetaTileEntityCompressedFusionReactor(gtqtcoreId("compressed_fusion_reactor_mkii"),10));
         COMPRESSED_FUSION_REACTOR_MKIII = registerMetaTileEntity(3022,new MetaTileEntityCompressedFusionReactor(gtqtcoreId("compressed_fusion_reactor_mkiii"),11));

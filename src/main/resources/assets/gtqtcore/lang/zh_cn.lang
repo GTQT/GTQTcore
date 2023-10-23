@@ -1,7 +1,8 @@
 gregtech.material.high_pressure_steam=蒸汽废气
 gregtech.material.high_pressure_steam=高压蒸汽
 gregtech.material.pyrotheum=炽焱燃料
-
+gtqtcore.machine.steam_ore_washer.name=蒸汽洗矿厂
+gtqtcore.machine.steam_blast_furance.name=蒸汽高炉
 gtqtcore.machine.lightning_rod.iv.name=避雷针 I
 gtqtcore.machine.lightning_rod.luv.name=避雷针 II
 gtqtcore.machine.lightning_rod.zpm.name=避雷针 III

@@ -1,41 +1,37 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
-import gregicality.multiblocks.api.metatileentity.GCYMRecipeMapMultiblockController;
 import gregicality.science.common.block.GCYSMetaBlocks;
 import gregicality.science.common.block.blocks.BlockGCYSMultiblockCasing;
 import gregicality.science.common.block.blocks.BlockTransparentCasing;
 import gregtech.api.block.IHeatingCoilBlockStats;
-import gregtech.api.capability.IMultipleTankHandler;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
-import gregtech.api.metatileentity.multiblock.ParallelLogicType;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
-import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
 import gregtech.client.utils.TooltipHelper;
 import gregtech.common.blocks.BlockBoilerCasing;
 import gregtech.common.blocks.BlockMetalCasing;
+import gregtech.common.blocks.BlockMetalCasing.MetalCasingType;
 import gregtech.common.blocks.BlockWireCoil;
-import gregtech.common.blocks.BlockWireCoil.CoilType;
 import gregtech.common.blocks.MetaBlocks;
+import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiFluidHatch;
 import gregtech.core.sound.GTSoundEvents;
-import keqing.gtqtcore.api.metaileentity.GTQTRecipeMapMultiblockController;
-import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
@@ -46,21 +42,20 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.function.Function;
 
-import static gregtech.api.unification.material.Materials.Lubricant;
+import static gregtech.api.util.RelativeDirection.*;
 
-public class MetaTileEntityHugeChemicalReactor extends GTQTRecipeMapMultiblockController {
+public class MetaTileEntityHugeDistillationTower extends RecipeMapMultiblockController {
+
     protected int heatingCoilLevel;
     protected int heatingCoilDiscount;
-    public MetaTileEntityHugeChemicalReactor(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, new RecipeMap[] {
-                RecipeMaps.CHEMICAL_RECIPES,
-                RecipeMaps.LARGE_CHEMICAL_RECIPES
-        });
-        this.recipeMapWorkable = new MetaTileEntityHugeChemicalReactorWorkable(this);
+    public MetaTileEntityHugeDistillationTower(ResourceLocation metaTileEntityId) {
+        super(metaTileEntityId, RecipeMaps.DISTILLATION_RECIPES);
+        this.recipeMapWorkable = new MetaTileEntityHugeDistillationTower.MetaTileEntityHugeDistillationTowerWorkable(this);
     }
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity metaTileEntityHolder) {
-        return new MetaTileEntityHugeChemicalReactor(this.metaTileEntityId);
+        return new MetaTileEntityHugeDistillationTower(this.metaTileEntityId);
     }
 
 
@@ -102,47 +97,41 @@ public class MetaTileEntityHugeChemicalReactor extends GTQTRecipeMapMultiblockCo
     }
 
     @Nonnull
+    @Override
     protected BlockPattern createStructurePattern() {
-        return FactoryBlockPattern.start()
-                .aisle("CCMCC", "CGGGC", "CGCGC", "CGGGC", "CCCCC")
-                .aisle("CBCBC", "BGGGB", "CGAGC", "BGGGB", "CBCBC")
-                .aisle("CBCBC", "BXXXB", "CXAXC", "BXXXB", "CBCBC")
-                .aisle("CBCBC", "BGGGB", "CGAGC", "BGGGB", "CBCBC")
-                .aisle("CBCBC", "BGGGB", "CGAGC", "BGGGB", "CBCBC")
-                .aisle("CBCBC", "BXXXB", "CXAXC", "BXXXB", "CBCBC")
-                .aisle("CBCBC", "BGGGB", "CGAGC", "BGGGB", "CBCBC")
-                .aisle("CCCCC", "CGGGC", "CGOGC", "CGGGC", "CCCCC")
-                .where('O', this.selfPredicate())
-                .where('C', states(this.getCasingState())
-                        .or(abilities(MultiblockAbility.MAINTENANCE_HATCH).setExactLimit(1))
-                        .or(abilities(MultiblockAbility.IMPORT_ITEMS).setMaxGlobalLimited(4).setPreviewCount(1))
-                        .or(abilities(MultiblockAbility.EXPORT_ITEMS).setMaxGlobalLimited(4).setPreviewCount(1))
-                        .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setMaxGlobalLimited(8).setPreviewCount(1))
-                        .or(abilities(MultiblockAbility.EXPORT_FLUIDS).setMaxGlobalLimited(8).setPreviewCount(1))
+        return FactoryBlockPattern.start(RIGHT, FRONT, UP)
+                .aisle("YSY", "YYY", "YYY")
+                .aisle("XXX", "XCX", "XXX").setRepeatable(1, 11)
+                .aisle("XXX", "XXX", "XXX")
+                .where('S', selfPredicate())
+                .where('Y', states(getCasingState())
+                        .or(abilities(MultiblockAbility.EXPORT_ITEMS).setMaxGlobalLimited(1))
                         .or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(3))
-                )
-                .where('X', heatingCoils())
-                .where('M', abilities(MultiblockAbility.MUFFLER_HATCH))
-                .where('A', states(this.getSecondCasingState()))
-                .where('B', states(this.getPipeCasingState()))
-                .where('G', states(this.getGlassState()))
+                        .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setExactLimit(1)))
+                .where('X', states(getCasingState())
+                        .or(metaTileEntities(MultiblockAbility.REGISTRY.get(MultiblockAbility.EXPORT_FLUIDS).stream()
+                                .filter(mte->!(mte instanceof MetaTileEntityMultiFluidHatch))
+                                .toArray(MetaTileEntity[]::new))
+                                .setMinLayerLimited(1).setMaxLayerLimited(1))
+                        .or(autoAbilities(true, false)))
+                .where('#', air())
+                .where('C', heatingCoils())
                 .build();
     }
-    private IBlockState getCasingState() {
-        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.PTFE_INERT_CASING);
-    }
-    private IBlockState getSecondCasingState() {
-        return GCYSMetaBlocks.MULTIBLOCK_CASING.getState(BlockGCYSMultiblockCasing.CasingType.ADVANCED_SUBSTRATE);
-    }
-    private IBlockState getPipeCasingState() {
-        return MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.POLYTETRAFLUOROETHYLENE_PIPE);
-    }
-    private IBlockState getGlassState() {
-        return GCYSMetaBlocks.TRANSPARENT_CASING.getState(BlockTransparentCasing.CasingType.PMMA);
+
+    @Override
+    protected boolean allowSameFluidFillForOutputs() {
+        return false;
     }
 
-    public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
-        return Textures.INERT_PTFE_CASING;
+    @SideOnly(Side.CLIENT)
+    @Override
+    public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
+        return Textures.CLEAN_STAINLESS_STEEL_CASING;
+    }
+
+    protected IBlockState getCasingState() {
+        return MetaBlocks.METAL_CASING.getState(MetalCasingType.STAINLESS_CLEAN);
     }
 
     @Override
@@ -153,21 +142,21 @@ public class MetaTileEntityHugeChemicalReactor extends GTQTRecipeMapMultiblockCo
     @SideOnly(Side.CLIENT)
     @Nonnull
     @Override
-    protected OrientedOverlayRenderer getFrontOverlay() {
-        return Textures.LARGE_CHEMICAL_REACTOR_OVERLAY;
+    protected ICubeRenderer getFrontOverlay() {
+        return Textures.DISTILLATION_TOWER_OVERLAY;
     }
 
     @Override
-    public boolean hasMufflerMechanics() {
-        return true;
+    public int getFluidOutputLimit() {
+        return getOutputFluidInventory().getTanks();
     }
 
     public static int getMaxParallel(int heatingCoilLevel) {
         return  16 * heatingCoilLevel;
     }
-    protected class MetaTileEntityHugeChemicalReactorWorkable extends MultiblockRecipeLogic {
+    protected class MetaTileEntityHugeDistillationTowerWorkable extends MultiblockRecipeLogic {
 
-        public MetaTileEntityHugeChemicalReactorWorkable(RecipeMapMultiblockController tileEntity) {
+        public MetaTileEntityHugeDistillationTowerWorkable(RecipeMapMultiblockController tileEntity) {
             super(tileEntity);
 
         }
