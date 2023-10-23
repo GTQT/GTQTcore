@@ -10,7 +10,6 @@ import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.MetaTileEntities;
 import gregtech.common.metatileentities.multi.electric.generator.MetaTileEntityLargeTurbine;
 import gregtech.common.metatileentities.multi.multiblockpart.*;
-import gregtech.common.metatileentities.storage.MetaTileEntityQuantumTank;
 import keqing.gtqtcore.api.utils.GTQTLog;
 import keqing.gtqtcore.common.metatileentities.multi.generators.MetaTileEntityIModularFissionReactor;
 import keqing.gtqtcore.common.metatileentities.multi.generators.MetaTileEntityLightningRod;
@@ -72,7 +71,9 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityMultiblockTank STEEL_TANK;
     public static MetaTileEntityAssemblyLineTower ASSEMBLY_LINE_TOWER;
     public static MetaTileEntityHugeDistillationTower HUGE_DISTILLATION_TOWER;
-
+    public static MetaTileEntityHugeVacuum HUGE_VACUUM;
+    public static MetaTileEntityQuantumForceTransformer QUANTUM_FORCE_TRANSFORMER;
+    public static MetaTileEntityHugeElectricImplosionCompressor HUGE_ELECTRRIC_IMPLOSION_COMPRESSOR;
     public static final MetaTileEntityMultiFluidHatch[] QUADRUPLE_IMPORT_HATCH = new MetaTileEntityMultiFluidHatch[6]; // EV-UHV
     public static final MetaTileEntityMultiFluidHatch[] NONUPLE_IMPORT_HATCH = new MetaTileEntityMultiFluidHatch[6]; // EV-UHV
     public static final MetaTileEntityMultiFluidHatch[] QUADRUPLE_EXPORT_HATCH = new MetaTileEntityMultiFluidHatch[6]; // EV-UHV
@@ -125,6 +126,9 @@ public class GTQTMetaTileEntities {
         STEAM_ORE_WASHER = registerMetaTileEntity(3019, new MetaTileEntitySteamOreWasher(gtqtcoreId("steam_ore_washer")));
         ASSEMBLY_LINE_TOWER = registerMetaTileEntity(3099, new MetaTileEntityAssemblyLineTower(gtqtcoreId("assembly_line_tower")));
         HUGE_DISTILLATION_TOWER = registerMetaTileEntity(3098, new MetaTileEntityHugeDistillationTower(gtqtcoreId("huge_distillation_tower")));
+        HUGE_VACUUM = registerMetaTileEntity(3097, new MetaTileEntityHugeVacuum(gtqtcoreId("huge_vacuum")));
+        HUGE_ELECTRRIC_IMPLOSION_COMPRESSOR = registerMetaTileEntity(3096, new MetaTileEntityHugeElectricImplosionCompressor(gtqtcoreId("huge_electric_implosion_compressor")));
+        QUANTUM_FORCE_TRANSFORMER = registerMetaTileEntity(3095, new MetaTileEntityQuantumForceTransformer(gtqtcoreId("quantum_force_transform")));
         COMPRESSED_FUSION_REACTOR_MKI = registerMetaTileEntity(3020,new MetaTileEntityCompressedFusionReactor(gtqtcoreId("compressed_fusion_reactor_mki"),9));
         COMPRESSED_FUSION_REACTOR_MKII = registerMetaTileEntity(3021,new MetaTileEntityCompressedFusionReactor(gtqtcoreId("compressed_fusion_reactor_mkii"),10));
         COMPRESSED_FUSION_REACTOR_MKIII = registerMetaTileEntity(3022,new MetaTileEntityCompressedFusionReactor(gtqtcoreId("compressed_fusion_reactor_mkiii"),11));
