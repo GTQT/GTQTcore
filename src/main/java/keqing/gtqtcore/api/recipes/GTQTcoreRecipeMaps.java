@@ -16,6 +16,8 @@ public class GTQTcoreRecipeMaps {
 
     public static final RecipeMap<FuelRecipeBuilder> ROCKET;
 
+    public static final RecipeMap<FuelRecipeBuilder> NAQUADAH_REACTOR;
+
     public static final RecipeMap<FuelRecipeBuilder> I_MODULAR_FISSION_REACTOR;
 
     public static final RecipeMap<ChemicalPlantBuilder> CHEMICAL_PLANT;
@@ -30,6 +32,9 @@ public class GTQTcoreRecipeMaps {
                 0, 0, 1, 1, new FuelRecipeBuilder(), false);
 
         ROCKET = new RecipeMap<>("rocket",
+                0, 0, 1, 1, new FuelRecipeBuilder(), false);
+
+        NAQUADAH_REACTOR = new RecipeMap<>("naquadah_reactor",
                 0, 0, 1, 1, new FuelRecipeBuilder(), false);
 
         I_MODULAR_FISSION_REACTOR = new RecipeMap<>("i_modular_fission_reactor",
