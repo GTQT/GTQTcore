@@ -35,7 +35,7 @@ public class GTQTcoreRecipeMaps {
                 0, 0, 1, 1, new FuelRecipeBuilder(), false);
 
         NAQUADAH_REACTOR = new RecipeMap<>("naquadah_reactor",
-                0, 0, 1, 1, new FuelRecipeBuilder(), false);
+                1, 1, 1, 1, new FuelRecipeBuilder(), false);
 
         I_MODULAR_FISSION_REACTOR = new RecipeMap<>("i_modular_fission_reactor",
                 1, 1, 1, 1, new FuelRecipeBuilder(), false);

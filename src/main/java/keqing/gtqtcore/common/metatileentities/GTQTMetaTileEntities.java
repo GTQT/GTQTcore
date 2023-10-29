@@ -131,9 +131,9 @@ public class GTQTMetaTileEntities {
         HUGE_VACUUM = registerMetaTileEntity(3097, new MetaTileEntityHugeVacuum(gtqtcoreId("huge_vacuum")));
         HUGE_ELECTRRIC_IMPLOSION_COMPRESSOR = registerMetaTileEntity(3096, new MetaTileEntityHugeElectricImplosionCompressor(gtqtcoreId("huge_electric_implosion_compressor")));
         QUANTUM_FORCE_TRANSFORMER = registerMetaTileEntity(3095, new MetaTileEntityQuantumForceTransformer(gtqtcoreId("quantum_force_transform")));
-        NAQUADAH_REACTOR_MKI = registerMetaTileEntity(3094, new MetaTileEntityNaquadahReactorMki(gtqtcoreId("naquadah_reactor_mki"),8));
-        NAQUADAH_REACTOR_MKII = registerMetaTileEntity(3093, new MetaTileEntityNaquadahReactorMkii(gtqtcoreId("naquadah_reactor_mkii"),9));
-        NAQUADAH_REACTOR_MKIII = registerMetaTileEntity(3092, new MetaTileEntityNaquadahReactorMkiii(gtqtcoreId("naquadah_reactor_mkiii"),10));
+        NAQUADAH_REACTOR_MKI = registerMetaTileEntity(3094, new MetaTileEntityNaquadahReactorMki(gtqtcoreId("naquadah_reactor_mki")));
+        NAQUADAH_REACTOR_MKII = registerMetaTileEntity(3093, new MetaTileEntityNaquadahReactorMkii(gtqtcoreId("naquadah_reactor_mkii")));
+        NAQUADAH_REACTOR_MKIII = registerMetaTileEntity(3092, new MetaTileEntityNaquadahReactorMkiii(gtqtcoreId("naquadah_reactor_mkiii")));
         COMPRESSED_FUSION_REACTOR_MKI = registerMetaTileEntity(3020,new MetaTileEntityCompressedFusionReactor(gtqtcoreId("compressed_fusion_reactor_mki"),9));
         COMPRESSED_FUSION_REACTOR_MKII = registerMetaTileEntity(3021,new MetaTileEntityCompressedFusionReactor(gtqtcoreId("compressed_fusion_reactor_mkii"),10));
         COMPRESSED_FUSION_REACTOR_MKIII = registerMetaTileEntity(3022,new MetaTileEntityCompressedFusionReactor(gtqtcoreId("compressed_fusion_reactor_mkiii"),11));

@@ -164,7 +164,6 @@ public class MetaTileEntityBlazingBlastFurnace extends RecipeMapMultiblockContro
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         if (isStructureFormed()) {
-
             if (getInputFluidInventory() != null) {
                 FluidStack LubricantStack = getInputFluidInventory().drain(Pyrotheum.getFluid(Integer.MAX_VALUE), false);
                  int liquidOxygenAmount = LubricantStack == null ? 0 : LubricantStack.amount;
