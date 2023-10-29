@@ -19,6 +19,9 @@ import gregtech.common.blocks.BlockMetalCasing.MetalCasingType;
 import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.core.sound.GTSoundEvents;
+import keqing.gtqtcore.client.textures.GTQTTextures;
+import keqing.gtqtcore.common.block.GTQTMetaBlocks;
+import keqing.gtqtcore.common.block.blocks.GTQTADVBlock;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -112,34 +115,43 @@ public class MetaTileEntityQuantumForceTransformer extends RecipeMapMultiblockCo
                         .or(abilities(MultiblockAbility.IMPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1))
                         .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setMinGlobalLimited(1).setPreviewCount(1))
                         .or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(2).setPreviewCount(1)))
-                .where('A', states(getCasingState()).or(autoAbilities(true, false)))
-                .where('D', states(getCasingState()))
-                .where('T', states(getCasingState()))
-                .where('B', states(getCasingState()))
-                .where('H', states(getCasingState()))
+                .where('A', states(getCasingState1()).or(autoAbilities(true, false)))
+                .where('D', states(getCasingState2()))
+                .where('T', states(getCasingState3()))
+                .where('B', states(getCasingState4()))
+                .where('H', states(getCasingState5()))
                 .where(' ', any())
                 .where('C', heatingCoils())
                 .build();
     }
 
+    protected IBlockState getCasingState() {
+        return GTQTMetaBlocks.ADV_BLOCK.getState(GTQTADVBlock.CasingType.ADV_MACHINE_TECH);
+    }
+    protected IBlockState getCasingState1() {
+        return GTQTMetaBlocks.ADV_BLOCK.getState(GTQTADVBlock.CasingType.ADV_MACHINE_TECH);
+    }
+    protected IBlockState getCasingState2() {
+        return GTQTMetaBlocks.ADV_BLOCK.getState(GTQTADVBlock.CasingType.ADV_MACHINE_LESU);
+    }
+    protected IBlockState getCasingState3() {
+        return GTQTMetaBlocks.ADV_BLOCK.getState(GTQTADVBlock.CasingType.ADV_MACHINE_TECH);
+    }
+    protected IBlockState getCasingState4() {
+        return GTQTMetaBlocks.ADV_BLOCK.getState(GTQTADVBlock.CasingType.ADV_MACHINE_VENT_ROTARING);
+    }
+    protected IBlockState getCasingState5() {
+        return GTQTMetaBlocks.ADV_BLOCK.getState(GTQTADVBlock.CasingType.ADV_MACHINE_TECH);
+    }
     @Override
-    protected boolean allowSameFluidFillForOutputs() {
-        return false;
+    public SoundEvent getBreakdownSound() {
+        return GTSoundEvents.BREAKDOWN_ELECTRICAL;
     }
 
     @SideOnly(Side.CLIENT)
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
-        return Textures.FROST_PROOF_CASING;
-    }
-
-    protected IBlockState getCasingState() {
-        return MetaBlocks.METAL_CASING.getState(MetalCasingType.ALUMINIUM_FROSTPROOF);
-    }
-
-    @Override
-    public SoundEvent getBreakdownSound() {
-        return GTSoundEvents.BREAKDOWN_ELECTRICAL;
+        return GTQTTextures.ADV_MACHINE_TECH;
     }
 
     @SideOnly(Side.CLIENT)

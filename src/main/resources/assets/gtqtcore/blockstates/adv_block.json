@@ -1,0 +1,74 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "minecraft:cube_all",
+    "textures": {
+      "all": "gregtech:blocks/rendering_error"
+    }
+  },
+  "variants": {
+    "variant": {
+      "adv_machine_tech": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/advblock/adv_machine_tech"
+        }
+      },
+      "adv_machine_dimensional_cover_blue": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/advblock/adv_machine_dimensional_cover_blue"
+        }
+      },
+      "adv_machine_dimensional_cover_orange": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/advblock/adv_machine_dimensional_cover_orange"
+        }
+      },
+      "adv_machine_matterfab": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/advblock/adv_machine_matterfab"
+        }
+      },
+      "adv_machine_matterfab_active": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/advblock/adv_machine_matterfab_active"
+        }
+      },
+      "adv_machine_matterfab_active_animated": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/advblock/adv_machine_matterfab_active_animated"
+        }
+      },
+      "adv_machine_matterfab_animated": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/advblock/adv_machine_matterfab_animated"
+        }
+      },
+      "adv_machine_lesu": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/advblock/adv_machine_lesu"
+        }
+      },
+      "adv_machine_vent_rotating": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/advblock/adv_machine_vent_rotating"
+        }
+      },
+      "adv_machine_tubbine": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/advblock/adv_machine_tubbine"
+        }
+      }
+    }
+  }
+}
+

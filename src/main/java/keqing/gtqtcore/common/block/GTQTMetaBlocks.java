@@ -2,6 +2,7 @@ package keqing.gtqtcore.common.block;
 
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTMultiblockCasing;
+import keqing.gtqtcore.common.block.blocks.GTQTADVBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -12,18 +13,22 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class GTQTMetaBlocks {
     public static GTQTMultiblockCasing MULTI_CASING;
+    public static GTQTADVBlock ADV_BLOCK;
 
     private GTQTMetaBlocks() {}
 
     public static void init() {
         MULTI_CASING = new GTQTMultiblockCasing();
         MULTI_CASING.setRegistryName("multiblock_casing");
+        ADV_BLOCK = new GTQTADVBlock();
+        ADV_BLOCK.setRegistryName("adv_block");
 
     }
 
     @SideOnly(Side.CLIENT)
     public static void registerItemModels() {
         registerItemModel(MULTI_CASING);
+        registerItemModel(ADV_BLOCK);
 
     }
 

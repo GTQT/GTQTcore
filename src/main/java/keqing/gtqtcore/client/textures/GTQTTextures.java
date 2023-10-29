@@ -15,6 +15,16 @@ public class GTQTTextures {
     public static SimpleOverlayRenderer COMPRESSED_FUSION_REACTOR_MKI_CASING;
     public static SimpleOverlayRenderer COMPRESSED_FUSION_REACTOR_MKII_CASING;
     public static SimpleOverlayRenderer COMPRESSED_FUSION_REACTOR_MKIII_CASING;
+    public static SimpleOverlayRenderer ADV_DIMENSIONAL_CASING_B;
+    public static SimpleOverlayRenderer ADV_DIMENSIONAL_CASING_O;
+    public static SimpleOverlayRenderer ADV_MACHINE_LESU;
+    public static SimpleOverlayRenderer ADV_MACHINE_TECH;
+    public static SimpleOverlayRenderer ADV_MACHINE_MATTERFAB;
+    public static SimpleOverlayRenderer ADV_MACHINE_MATTERFAB_ACTIVE;
+    public static SimpleOverlayRenderer ADV_MACHINE_MATTERFAB_ACTIVE_ANIMATED;
+    public static SimpleOverlayRenderer ADV_MACHINE_MATTERFAB_ANIMATED;
+    public static SimpleOverlayRenderer ADV_MACHINE_VENT_ROTARING;
+    public static SimpleOverlayRenderer ADV_MACHINE_TUBBINE;
     public static void init() {
         NITINOL_CASING = new SimpleOverlayRenderer("multiblock/casings/nitinol_machine_casing");
         LIGHTNING_ROD_OVERLAY = new OrientedOverlayRenderer("generators/lightning_rod");
@@ -24,6 +34,16 @@ public class GTQTTextures {
         COMPRESSED_FUSION_REACTOR_MKI_CASING = new SimpleOverlayRenderer("multiblock/casings/compressed_fusion_reactor_mki_casing");
         COMPRESSED_FUSION_REACTOR_MKII_CASING = new SimpleOverlayRenderer("multiblock/casings/compressed_fusion_reactor_mkii_casing");
         COMPRESSED_FUSION_REACTOR_MKIII_CASING = new SimpleOverlayRenderer("multiblock/casings/compressed_fusion_reactor_mkiii_casing");
+        ADV_DIMENSIONAL_CASING_B = new SimpleOverlayRenderer("multiblock/advblock/adv_machine_dimensional_cover_blue");
+        ADV_DIMENSIONAL_CASING_O = new SimpleOverlayRenderer("multiblock/advblock/adv_machine_dimensional_cover_orange");
+        ADV_MACHINE_LESU = new SimpleOverlayRenderer("multiblock/advblock/adv_machine_lesu");
+        ADV_MACHINE_TECH = new SimpleOverlayRenderer("multiblock/advblock/adv_machine_tech");
+        ADV_MACHINE_MATTERFAB = new SimpleOverlayRenderer("multiblock/advblock/adv_machine_matterfab");
+        ADV_MACHINE_MATTERFAB_ACTIVE = new SimpleOverlayRenderer("multiblock/advblock/adv_machine_matterfab_active");
+        ADV_MACHINE_MATTERFAB_ACTIVE_ANIMATED = new SimpleOverlayRenderer("multiblock/advblock/adv_machine_matterfab_active_animated");
+        ADV_MACHINE_MATTERFAB_ANIMATED = new SimpleOverlayRenderer("multiblock/advblock/adv_machine_matterfab_animated");
+        ADV_MACHINE_VENT_ROTARING = new SimpleOverlayRenderer("multiblock/advblock/adv_machine_vent_rotating");
+        ADV_MACHINE_TUBBINE = new SimpleOverlayRenderer("multiblock/advblock/adv_machine_tubbine");
         }
 
 

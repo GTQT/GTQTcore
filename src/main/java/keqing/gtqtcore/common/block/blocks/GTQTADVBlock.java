@@ -1,5 +1,6 @@
 package keqing.gtqtcore.common.block.blocks;
 
+
 import gregtech.api.block.VariantBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -11,10 +12,10 @@ import net.minecraft.world.IBlockAccess;
 
 import javax.annotation.Nonnull;
 
-public class GTQTMultiblockCasing extends VariantBlock<GTQTMultiblockCasing.CasingType> {
+public class GTQTADVBlock extends VariantBlock<GTQTADVBlock.CasingType> {
 
 
-    public GTQTMultiblockCasing() {
+    public GTQTADVBlock() {
         super(Material.IRON);
         this.setTranslationKey("multiblock_casing");
         this.setHardness(5.0F);
@@ -29,16 +30,16 @@ public class GTQTMultiblockCasing extends VariantBlock<GTQTMultiblockCasing.Casi
 
     public static enum CasingType implements IStringSerializable {
 
-        NITINOL_MACHINE_CASING("nitinol_machine_casing"),
-        COMPRESSED_FUSION_REACTOR_MKI_CASING("compressed_fusion_reactor_mki_casing"),
-        COMPRESSED_FUSION_REACTOR_MKII_CASING("compressed_fusion_reactor_mkii_casing"),
-        COMPRESSED_FUSION_REACTOR_MKIII_CASING("compressed_fusion_reactor_mkiii_casing"),
-        BEAM_CORE_0("beam_core_0"),
-        BEAM_CORE_1("beam_core_1"),
-        BEAM_CORE_2("beam_core_2"),
-        BEAM_CORE_3("beam_core_3"),
-        BEAM_CORE_4("beam_core_4");
-
+        ADV_MACHINE_TECH("adv_machine_tech"),
+        ADV_DIMENSIONAL_CASING_B("adv_machine_dimensional_cover_blue"),
+        ADV_DIMENSIONAL_CASING_O("adv_machine_dimensional_cover_orange"),
+        ADV_MACHINE_LESU("adv_machine_lesu"),
+        ADV_MACHINE_MATTERFAB("adv_machine_matterfab"),
+        ADV_MACHINE_MATTERFAB_ACTIVE("adv_machine_matterfab_active"),
+        ADV_MACHINE_MATTERFAB_ACTIVE_ANIMATED("adv_machine_matterfab_active_animated"),
+        ADV_MACHINE_MATTERFAB_ANIMATED("adv_machine_matterfab_animated"),
+        ADV_MACHINE_VENT_ROTARING("adv_machine_vent_rotating"),
+        ADV_MACHINE_TUBBINE("adv_machine_tubbine");
         private final String name;
 
         CasingType(String name) {
