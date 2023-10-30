@@ -4,6 +4,7 @@ import gregtech.api.block.VariantItemBlock;
 import gregtech.common.items.MetaItems;
 import keqing.gtqtcore.api.utils.GTQTLog;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
+import keqing.gtqtcore.common.block.blocks.GTQTBlockWireCoil;
 import keqing.gtqtcore.loaders.recipes.handlers.IntegratedMiningDivision;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
@@ -22,6 +23,9 @@ import net.minecraftforge.registries.IForgeRegistry;
 import java.util.Objects;
 import java.util.function.Function;
 
+import static gregtech.api.GregTechAPI.HEATING_COILS;
+
+
 @Mod.EventBusSubscriber(
         modid = "gtqtcore"
 )
@@ -36,11 +40,15 @@ public class CommonProxy {
 
     public void preInit( FMLPreInitializationEvent event ) {
 
-
     }
     public void init( FMLInitializationEvent event ) {
         FuelRecipes.init();
         IntegratedMiningDivision.init();
+
+        for (GTQTBlockWireCoil.CoilType type : GTQTBlockWireCoil.CoilType.values()) {
+            HEATING_COILS.put(GTQTMetaBlocks.WIRE_COIL.getState(type), type);
+        }
+
     }
 
     public CommonProxy() {
@@ -64,6 +72,7 @@ public class CommonProxy {
         registry.register(GTQTMetaBlocks.MULTI_CASING);
         registry.register(GTQTMetaBlocks.ADV_BLOCK);
         registry.register(GTQTMetaBlocks.ADV_GLASS);
+        registry.register(GTQTMetaBlocks.WIRE_COIL);
 
     }
 
@@ -81,6 +90,7 @@ public class CommonProxy {
         registry.register(createItemBlock(GTQTMetaBlocks.MULTI_CASING, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.ADV_BLOCK, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.ADV_GLASS, VariantItemBlock::new));
+        registry.register(createItemBlock(GTQTMetaBlocks.WIRE_COIL, VariantItemBlock::new));
     }
 
     private static <T extends Block> ItemBlock createItemBlock(T block, Function<T, ItemBlock> producer) {

@@ -13,6 +13,14 @@ import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 public class FuelRecipes {
 
         public static void init(){
+
+        GTQTcoreRecipeMaps.QFT.recipeBuilder()
+                .input(ingot, WroughtIron)
+                .output(ingot, Steel)
+                .duration(3600)
+                .EUt(24)
+                .buildAndRegister();
+
         GTQTcoreRecipeMaps.STEAM_BLAST_FURNACE_RECIPES.recipeBuilder()
                 .input(ingot, WroughtIron)
                 .output(ingot, Steel)

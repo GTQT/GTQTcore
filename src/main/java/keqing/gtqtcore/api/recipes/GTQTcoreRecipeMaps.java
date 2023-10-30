@@ -25,6 +25,7 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<SimpleRecipeBuilder> INTEGRATED_MINING_DIVISION;
     public static final RecipeMap<FuelRecipeBuilder> STEAM_BLAST_FURNACE_RECIPES;
     public static final RecipeMap<FuelRecipeBuilder> STEAM_ORE_WASHER_RECIPES;
+    public static final RecipeMap<FuelRecipeBuilder> QFT;
 
     private GTQTcoreRecipeMaps() {}
     static {
@@ -51,6 +52,9 @@ public class GTQTcoreRecipeMaps {
 
         STEAM_ORE_WASHER_RECIPES = new RecipeMap<>("steam_ore_washer",
                 1, 1, 0, 0, new FuelRecipeBuilder(), false);
+
+        QFT = new RecipeMap<>("quantum_is_so_fast",
+                9, 9, 9, 9, new FuelRecipeBuilder(), false);
     }
 
 }

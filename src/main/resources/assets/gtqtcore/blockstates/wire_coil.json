@@ -1,0 +1,50 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "minecraft:cube_all",
+    "textures": {
+      "all": "gregtech:blocks/rendering_error"
+    }
+  },
+  "variants": {
+    "variant": {
+      "draconic": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/wire_coil/machine_coil_drac"
+        }
+      },
+      "wake_draconic": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/wire_coil/machine_coil_wdrac"
+        }
+      },
+      "unive": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/wire_coil/machine_coil_unive"
+        }
+      },
+      "end": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/wire_coil/machine_coil_end"
+        }
+      },
+      "superconducting_metallic_hydrogen_coil": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/wire_coil/superconducting_metallic_hydrogen_coil"
+        }
+      },
+      "cupar_proton_pair_coil": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/wire_coil/cupar_proton_pair_coil"
+        }
+      }
+    }
+  }
+}
+

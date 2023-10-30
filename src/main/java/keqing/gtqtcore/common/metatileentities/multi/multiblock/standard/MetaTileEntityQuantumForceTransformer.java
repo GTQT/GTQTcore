@@ -20,6 +20,7 @@ import gregtech.common.blocks.BlockMetalCasing.MetalCasingType;
 import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.core.sound.GTSoundEvents;
+import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTADVBlock;
@@ -47,7 +48,7 @@ public class MetaTileEntityQuantumForceTransformer extends RecipeMapMultiblockCo
     protected int heatingCoilDiscount;
 
     public MetaTileEntityQuantumForceTransformer(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, RecipeMaps.VACUUM_RECIPES);
+        super(metaTileEntityId, GTQTcoreRecipeMaps.QFT);
         this.recipeMapWorkable = new MetaTileEntityQuantumForceTransformer.MetaTileEntityQuantumForceTransformerWorkable(this);
     }
 
@@ -66,9 +67,9 @@ public class MetaTileEntityQuantumForceTransformer extends RecipeMapMultiblockCo
     @Override
     public void addInformation(ItemStack stack, @Nullable World player, @Nonnull List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
-        tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.2", 256));
+        tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.2", 576));
         tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.1"));
-        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("极度冰寒", new Object[0]));
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("我选择跳过", new Object[0]));
     }
 
     @Override
@@ -116,7 +117,7 @@ public class MetaTileEntityQuantumForceTransformer extends RecipeMapMultiblockCo
                 .where('D', states(getCasingState2()))
                 .where('T', states(getCasingState3()))
                 .where('B', states(getCasingState4()))
-                .where('H', states(getCasingState5())
+                .where('H', states(getCasingState5()).or(autoAbilities(true, false))
                         .or(abilities(MultiblockAbility.EXPORT_FLUIDS).setMinGlobalLimited(1).setPreviewCount(1))
                         .or(abilities(MultiblockAbility.EXPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1))
                         .or(abilities(MultiblockAbility.IMPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1))
@@ -172,7 +173,7 @@ public class MetaTileEntityQuantumForceTransformer extends RecipeMapMultiblockCo
     }
 
     public static int getMaxParallel(int heatingCoilLevel) {
-        return 16 * heatingCoilLevel;
+        return 24 * heatingCoilLevel;
     }
 
     protected class MetaTileEntityQuantumForceTransformerWorkable extends MultiblockRecipeLogic {

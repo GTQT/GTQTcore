@@ -2,6 +2,7 @@ package keqing.gtqtcore.common.block;
 
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTADVGlass;
+import keqing.gtqtcore.common.block.blocks.GTQTBlockWireCoil;
 import keqing.gtqtcore.common.block.blocks.GTQTMultiblockCasing;
 import keqing.gtqtcore.common.block.blocks.GTQTADVBlock;
 import net.minecraft.block.Block;
@@ -16,6 +17,7 @@ public class GTQTMetaBlocks {
     public static GTQTMultiblockCasing MULTI_CASING;
     public static GTQTADVBlock ADV_BLOCK;
     public static GTQTADVGlass ADV_GLASS;
+    public static GTQTBlockWireCoil WIRE_COIL;
 
     private GTQTMetaBlocks() {}
 
@@ -26,6 +28,8 @@ public class GTQTMetaBlocks {
         ADV_BLOCK.setRegistryName("adv_block");
         ADV_GLASS = new GTQTADVGlass();
         ADV_GLASS.setRegistryName("adv_glass");
+        WIRE_COIL = new GTQTBlockWireCoil();
+        WIRE_COIL.setRegistryName("wire_coil");
 
     }
 
@@ -34,6 +38,7 @@ public class GTQTMetaBlocks {
         registerItemModel(MULTI_CASING);
         registerItemModel(ADV_BLOCK);
         registerItemModel(ADV_GLASS);
+        registerItemModel(WIRE_COIL);
 
     }
 

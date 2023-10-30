@@ -81,7 +81,7 @@ public class MetaTileEntityChemicalPlant extends RecipeMapMultiblockController {
                 .where('M', TiredTraceabilityPredicate.MACHINE_CASINGS)
                 .where('T', TiredTraceabilityPredicate.CP_TUBE)
                 .where('#', any())
-                .where('A',air())
+                .where('A', air())
                 .build();
     }
 
