@@ -31,6 +31,7 @@ public class GTQTADVBlock extends VariantBlock<GTQTADVBlock.CasingType> {
     public static enum CasingType implements IStringSerializable {
 
         ADV_MACHINE_TECH("adv_machine_tech"),
+        ADV_MACHINE_BASIC("adv_machine_basic"),
         ADV_DIMENSIONAL_CASING_B("adv_machine_dimensional_cover_blue"),
         ADV_DIMENSIONAL_CASING_O("adv_machine_dimensional_cover_orange"),
         ADV_MACHINE_LESU("adv_machine_lesu"),

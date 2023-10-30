@@ -19,6 +19,7 @@ public class GTQTTextures {
     public static SimpleOverlayRenderer ADV_DIMENSIONAL_CASING_O;
     public static SimpleOverlayRenderer ADV_MACHINE_LESU;
     public static SimpleOverlayRenderer ADV_MACHINE_TECH;
+    public static SimpleOverlayRenderer ADV_MACHINE_BASIC;
     public static SimpleOverlayRenderer ADV_MACHINE_MATTERFAB;
     public static SimpleOverlayRenderer ADV_MACHINE_MATTERFAB_ACTIVE;
     public static SimpleOverlayRenderer ADV_MACHINE_MATTERFAB_ACTIVE_ANIMATED;
@@ -38,6 +39,7 @@ public class GTQTTextures {
         ADV_DIMENSIONAL_CASING_O = new SimpleOverlayRenderer("multiblock/advblock/adv_machine_dimensional_cover_orange");
         ADV_MACHINE_LESU = new SimpleOverlayRenderer("multiblock/advblock/adv_machine_lesu");
         ADV_MACHINE_TECH = new SimpleOverlayRenderer("multiblock/advblock/adv_machine_tech");
+        ADV_MACHINE_BASIC = new SimpleOverlayRenderer("multiblock/advblock/adv_machine_basic");
         ADV_MACHINE_MATTERFAB = new SimpleOverlayRenderer("multiblock/advblock/adv_machine_matterfab");
         ADV_MACHINE_MATTERFAB_ACTIVE = new SimpleOverlayRenderer("multiblock/advblock/adv_machine_matterfab_active");
         ADV_MACHINE_MATTERFAB_ACTIVE_ANIMATED = new SimpleOverlayRenderer("multiblock/advblock/adv_machine_matterfab_active_animated");

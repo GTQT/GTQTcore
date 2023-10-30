@@ -1,0 +1,56 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "minecraft:cube_all",
+    "textures": {
+      "all": "gregtech:blocks/rendering_error"
+    }
+  },
+  "variants": {
+    "variant": {
+      "adv_machine_glass": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/advglass/adv_machine_glass"
+        }
+      },
+      "adv_machine_glass_r": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/advglass/adv_machine_glass_r"
+        }
+      },
+      "adv_machine_glass_o": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/advglass/adv_machine_glass_o"
+        }
+      },
+      "adv_machine_glass_b": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/advglass/adv_machine_glass_b"
+        }
+      },
+      "adv_machine_glass_p": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/advglass/adv_machine_glass_p"
+        }
+      },
+      "adv_machine_glass_g": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/advglass/adv_machine_glass_g"
+        }
+      },
+      "adv_machine_glass_pr": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/advglass/adv_machine_glass_pr"
+        }
+      }
+    }
+  }
+}
+

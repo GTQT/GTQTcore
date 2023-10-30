@@ -1,6 +1,7 @@
 package keqing.gtqtcore.common.block;
 
 import gregtech.common.blocks.MetaBlocks;
+import keqing.gtqtcore.common.block.blocks.GTQTADVGlass;
 import keqing.gtqtcore.common.block.blocks.GTQTMultiblockCasing;
 import keqing.gtqtcore.common.block.blocks.GTQTADVBlock;
 import net.minecraft.block.Block;
@@ -14,6 +15,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class GTQTMetaBlocks {
     public static GTQTMultiblockCasing MULTI_CASING;
     public static GTQTADVBlock ADV_BLOCK;
+    public static GTQTADVGlass ADV_GLASS;
 
     private GTQTMetaBlocks() {}
 
@@ -22,6 +24,8 @@ public class GTQTMetaBlocks {
         MULTI_CASING.setRegistryName("multiblock_casing");
         ADV_BLOCK = new GTQTADVBlock();
         ADV_BLOCK.setRegistryName("adv_block");
+        ADV_GLASS = new GTQTADVGlass();
+        ADV_GLASS.setRegistryName("adv_glass");
 
     }
 
@@ -29,6 +33,7 @@ public class GTQTMetaBlocks {
     public static void registerItemModels() {
         registerItemModel(MULTI_CASING);
         registerItemModel(ADV_BLOCK);
+        registerItemModel(ADV_GLASS);
 
     }
 

@@ -49,5 +49,6 @@ public class GTQTMultiblockCasing extends VariantBlock<GTQTMultiblockCasing.Casi
         public String getName() {
             return name;
         }
+
     }
 }

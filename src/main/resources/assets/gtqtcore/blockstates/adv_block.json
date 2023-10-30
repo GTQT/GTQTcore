@@ -14,6 +14,12 @@
           "all": "gregtech:blocks/multiblock/advblock/adv_machine_tech"
         }
       },
+      "adv_machine_basic": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/advblock/adv_machine_basic"
+        }
+      },
       "adv_machine_dimensional_cover_blue": {
         "model": "minecraft:cube_all",
         "textures": {

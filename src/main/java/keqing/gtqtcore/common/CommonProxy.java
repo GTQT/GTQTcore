@@ -63,6 +63,7 @@ public class CommonProxy {
         */
         registry.register(GTQTMetaBlocks.MULTI_CASING);
         registry.register(GTQTMetaBlocks.ADV_BLOCK);
+        registry.register(GTQTMetaBlocks.ADV_GLASS);
 
     }
 
@@ -79,6 +80,7 @@ public class CommonProxy {
         */
         registry.register(createItemBlock(GTQTMetaBlocks.MULTI_CASING, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.ADV_BLOCK, VariantItemBlock::new));
+        registry.register(createItemBlock(GTQTMetaBlocks.ADV_GLASS, VariantItemBlock::new));
     }
 
     private static <T extends Block> ItemBlock createItemBlock(T block, Function<T, ItemBlock> producer) {
