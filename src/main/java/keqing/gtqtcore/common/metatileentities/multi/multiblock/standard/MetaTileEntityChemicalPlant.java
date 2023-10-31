@@ -32,11 +32,13 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.List;
 
 import static gregtech.api.GTValues.VA;
@@ -54,7 +56,6 @@ public class MetaTileEntityChemicalPlant extends RecipeMapMultiblockController {
         super(metaTileEntityId, GTQTcoreRecipeMaps.CHEMICAL_PLANT);
         this.recipeMapWorkable = new ChemicalPlantLogic(this);
     }
-
 
     @SuppressWarnings("SpellCheckingInspection")
     @Override
@@ -117,15 +118,18 @@ public class MetaTileEntityChemicalPlant extends RecipeMapMultiblockController {
     public void addInformation(ItemStack stack,  World world,  List<String> tooltip, boolean advanced) {
         super.addInformation(stack, world, tooltip, advanced);
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("gregtech.machine.perfect_oc"));
+        tooltip.add(I18n.format("gtqtcore.machine.chemical-plant.tooltip.1"));
     }
 
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
-        textList.add(new TextComponentString(String.format("coilTire: %d",coilLevel)));
-        textList.add(new TextComponentString(String.format("casingTire: %d",casingTier)));
-        textList.add(new TextComponentString(String.format("tubeTire: %d",tubeTier)));
-        textList.add(new TextComponentString(String.format("tire: %d",tier)));
+        textList.add(new TextComponentTranslation("gtqtcore.coilTire", coilLevel));
+        textList.add(new TextComponentTranslation("gtqtcore.casingTire", casingTier));
+        textList.add(new TextComponentTranslation("gtqtcore.tubeTire", tubeTier));
+        textList.add(new TextComponentTranslation("gtqtcore.tire", tier));
+        if(casingTier!=tubeTier)
+            textList.add(new TextComponentTranslation("gtqtcore.equal", casingTier,tier));
     }
 
     @Override

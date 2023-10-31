@@ -186,7 +186,12 @@ gtqtcore.multiblock.large_combustion_engine.supply_liquid_lubricant_to_boost=需
 gtqtcore.multiblock.large_combustion_engine.boost_disallowed=§b使用更高电压等级的发电仓来启用氧促燃。
 gtqtcore.multiblock.large_combustion_engine.no_water=水储量不足
 gtqtcore.multiblock.large_combustion_engine.obstructed=进气口被阻挡
-
+gtqtcore.equal=外壳等级：%s与管道等级：%s等级不一致！将默认使用最低等级！
+gtqtcore.tire=多方块等级：%s
+gtqtcore.tubeTire=管道等级：%s
+gtqtcore.casingTire=外壳等级：%s
+gtqtcore.coilTire=线圈等级：%s
+gtqtcore.machine.chemical-plant.tooltip.1=需要多方块等级大于配方电压等级才能工作！
 gregtech.material.nitinol=镍钛诺合金
 tile.multiblock_casing.nitinol_machine_casing.name=镍钛诺机械外壳
 tile.multiblock_casing.compressed_fusion_reactor_mki_casing.name=压缩聚变MKI外壳
