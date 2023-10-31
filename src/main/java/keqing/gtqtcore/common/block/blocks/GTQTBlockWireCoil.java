@@ -84,9 +84,9 @@ import java.util.List;
             DRACONIC("draconic", 12600, 18, 10, Materials.Neutronium),
             WAKE_DRACONIC("wake_draconic", 14400, 20, 12, Materials.Neutronium),
             UNIVE("unive", 16200, 22, 14, Materials.Neutronium),
-            END("end", 16200, 22, 16, Materials.Neutronium),
-            SUPERCONDUCTING_METALLIC_HYDROGEN_COIL("superconducting_metallic_hydrogen_coil", 18000, 22, 18, Materials.Neutronium),
-            CUPAR_PROTON_PAIR_COIL("cupar_proton_pair_coil", 19800, 24, 20, Materials.Neutronium);
+            END("end", 18000, 22, 16, Materials.Neutronium),
+            SUPERCONDUCTING_METALLIC_HYDROGEN_COIL("superconducting_metallic_hydrogen_coil", 19800, 22, 18, Materials.Neutronium),
+            CUPAR_PROTON_PAIR_COIL("cupar_proton_pair_coil", 21600, 24, 20, Materials.Neutronium);
 
             private final String name;
             //electric blast furnace properties

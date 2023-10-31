@@ -2,6 +2,7 @@ package keqing.gtqtcore.loaders.recipes;
 
 
 
+import static gregicality.science.api.unification.materials.GCYSMaterials.Kevlar;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
@@ -15,10 +16,17 @@ public class FuelRecipes {
         public static void init(){
 
         GTQTcoreRecipeMaps.QFT.recipeBuilder()
-                .input(ingot, WroughtIron)
-                .output(ingot, Steel)
-                .duration(3600)
-                .EUt(24)
+                .fluidInputs(Hydrogen.getFluid(26000))
+                .fluidInputs(Oxygen.getFluid(2000))
+                .fluidInputs(Fluorine.getFluid(4000))
+                .fluidInputs(Nitrogen.getFluid(6000))
+                .fluidInputs(Carbon.getFluid(38000))
+                .fluidOutputs(Polyethylene.getFluid(1000))
+                .fluidOutputs(Polytetrafluoroethylene.getFluid(1000))
+                .fluidOutputs(Polybenzimidazole.getFluid(1000))
+                .fluidOutputs(Kevlar.getFluid(1000))
+                .duration(360)
+                .EUt(122880)
                 .buildAndRegister();
 
         GTQTcoreRecipeMaps.STEAM_BLAST_FURNACE_RECIPES.recipeBuilder()
