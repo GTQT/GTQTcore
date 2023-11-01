@@ -1,3 +1,5 @@
+item.gt.tool.choocher.name=%s多功能扳手锤
+item.gt.tool.jinitaimei.name=%s多功能螺丝钳
 gregtech.material.high_pressure_steam=蒸汽废气
 gregtech.material.high_pressure_steam=高压蒸汽
 gregtech.material.pyrotheum=炽焱燃料
@@ -188,6 +190,7 @@ gtqtcore.multiblock.large_combustion_engine.no_water=水储量不足
 gtqtcore.multiblock.large_combustion_engine.obstructed=进气口被阻挡
 gtqtcore.equal=外壳等级：%s与管道等级：%s等级不一致！将默认使用最低等级！
 gtqtcore.tire=多方块等级：%s
+gtqtcore.vtire=支持的配方最高电压：%s V
 gtqtcore.tubeTire=管道等级：%s
 gtqtcore.casingTire=外壳等级：%s
 gtqtcore.coilTire=线圈等级：%s

@@ -41,6 +41,7 @@ public class GTQTCore {
         GTQTMetaTileEntities.initialization();
         GTQTMetaBlocks.init();
         proxy.preLoad();
+        proxy.preInit(event);
 
     }
 

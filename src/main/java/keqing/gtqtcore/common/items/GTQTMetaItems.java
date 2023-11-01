@@ -2,6 +2,7 @@ package keqing.gtqtcore.common.items;
 
 import gregtech.api.items.metaitem.MetaItem;
 import gregtech.api.items.metaitem.StandardMetaItem;
+import keqing.gtqtcore.common.block.blocks.GTQTADVGlass;
 
 public class GTQTMetaItems {
     /*
@@ -11,12 +12,14 @@ public class GTQTMetaItems {
      */
     public static StandardMetaItem metaItem1;
 
+
     public static MetaItem<?>.MetaValueItem TEST;
 
     public static void init()
     {
         metaItem1 = new StandardMetaItem();
         metaItem1.setRegistryName("gtqt_meta_item_1");
+
     }
 
     public static void initSubItems()

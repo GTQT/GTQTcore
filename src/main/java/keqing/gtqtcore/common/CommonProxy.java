@@ -5,6 +5,8 @@ import gregtech.common.items.MetaItems;
 import keqing.gtqtcore.api.utils.GTQTLog;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTBlockWireCoil;
+import keqing.gtqtcore.common.items.metaitems.GTQTMetaToolItems;
+import keqing.gtqtcore.loaders.recipes.GTQTRecipes;
 import keqing.gtqtcore.loaders.recipes.handlers.IntegratedMiningDivision;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
@@ -31,7 +33,7 @@ import static gregtech.api.GregTechAPI.HEATING_COILS;
 )
 public class CommonProxy {
 
-    public static final CreativeTabs GREGICA_TAB = new CreativeTabs("GTQTCore") {
+    public static final CreativeTabs GTQTCore_TAB = new CreativeTabs("GTQTCore") {
         @Override
         public ItemStack createIcon() {
             return MetaItems.WETWARE_MAINFRAME_UHV.getStackForm();
@@ -39,11 +41,13 @@ public class CommonProxy {
     };
 
     public void preInit( FMLPreInitializationEvent event ) {
-
+        GTQTMetaToolItems.init();
+        GTQTRecipes.registerTool();
     }
     public void init( FMLInitializationEvent event ) {
         FuelRecipes.init();
         IntegratedMiningDivision.init();
+
 
         for (GTQTBlockWireCoil.CoilType type : GTQTBlockWireCoil.CoilType.values()) {
             HEATING_COILS.put(GTQTMetaBlocks.WIRE_COIL.getState(type), type);
@@ -87,6 +91,7 @@ public class CommonProxy {
         registry.register(createItemBlock(方块实例, VariantItemBlock::new));
         在注册MetaBlock时用到
         */
+
         registry.register(createItemBlock(GTQTMetaBlocks.MULTI_CASING, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.ADV_BLOCK, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.ADV_GLASS, VariantItemBlock::new));

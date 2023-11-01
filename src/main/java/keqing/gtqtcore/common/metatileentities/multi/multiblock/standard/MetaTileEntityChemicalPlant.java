@@ -127,9 +127,10 @@ public class MetaTileEntityChemicalPlant extends RecipeMapMultiblockController {
         textList.add(new TextComponentTranslation("gtqtcore.coilTire", coilLevel));
         textList.add(new TextComponentTranslation("gtqtcore.casingTire", casingTier));
         textList.add(new TextComponentTranslation("gtqtcore.tubeTire", tubeTier));
-        textList.add(new TextComponentTranslation("gtqtcore.tire", tier));
         if(casingTier!=tubeTier)
-            textList.add(new TextComponentTranslation("gtqtcore.equal", casingTier,tier));
+            textList.add(new TextComponentTranslation("gtqtcore.equal", casingTier,tubeTier));
+        textList.add(new TextComponentTranslation("gtqtcore.tire", tier));
+        textList.add(new TextComponentTranslation("gtqtcore.vtire", tier*32));
     }
 
     @Override
