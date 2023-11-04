@@ -1,5 +1,7 @@
-item.gt.tool.choocher.name=%s多功能扳手锤
-item.gt.tool.jinitaimei.name=%s多功能螺丝钳
+item.gt.tool.choocher.name=%s多功能扳手锤（扳手&锤）
+item.gt.tool.jinitaimei.name=%s多功能螺丝钳（螺丝刀&剪线钳）
+item.gt.tool.choocher_hv.name=电动%s多功能扳手锤（扳手&锤）
+item.gt.tool.jinitaimei_hv.name=电动%s多功能螺丝钳（螺丝刀&剪线钳）
 gregtech.material.high_pressure_steam=蒸汽废气
 gregtech.material.high_pressure_steam=高压蒸汽
 gregtech.material.pyrotheum=炽焱燃料

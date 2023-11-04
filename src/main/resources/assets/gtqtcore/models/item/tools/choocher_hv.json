@@ -1,6 +1,7 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "gtqtcore:items/tools/choocher"
+    "layer0": "gtqtcore:items/tools/choocher_hv",
+    "layer1": "gtqtcore:items/tools/power_unit_hv"
   }
 }

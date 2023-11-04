@@ -134,7 +134,7 @@ public class GTQTMetaTileEntities {
         NAQUADAH_REACTOR_MKI = registerMetaTileEntity(3094, new MetaTileEntityNaquadahReactorMki(gtqtcoreId("naquadah_reactor_mki")));
         NAQUADAH_REACTOR_MKII = registerMetaTileEntity(3093, new MetaTileEntityNaquadahReactorMkii(gtqtcoreId("naquadah_reactor_mkii")));
         NAQUADAH_REACTOR_MKIII = registerMetaTileEntity(3092, new MetaTileEntityNaquadahReactorMkiii(gtqtcoreId("naquadah_reactor_mkiii")));
-        COMPRESSED_FUSION_REACTOR_MKI = registerMetaTileEntity(3020,new MetaTileEntityCompressedFusionReactor(gtqtcoreId("compressed_fusion_reactor_mki"),9));
+      COMPRESSED_FUSION_REACTOR_MKI = registerMetaTileEntity(3020,new MetaTileEntityCompressedFusionReactor(gtqtcoreId("compressed_fusion_reactor_mki"),9));
         COMPRESSED_FUSION_REACTOR_MKII = registerMetaTileEntity(3021,new MetaTileEntityCompressedFusionReactor(gtqtcoreId("compressed_fusion_reactor_mkii"),10));
         COMPRESSED_FUSION_REACTOR_MKIII = registerMetaTileEntity(3022,new MetaTileEntityCompressedFusionReactor(gtqtcoreId("compressed_fusion_reactor_mkiii"),11));
         STEEL_TANK = registerMetaTileEntity(3100, new MetaTileEntityMultiblockTank(gtqtcoreId("tank.steel"), true, 1000));

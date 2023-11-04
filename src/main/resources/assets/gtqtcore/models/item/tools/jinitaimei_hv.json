@@ -1,6 +1,7 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "gtqtcore:items/tools/jinitaimei"
+    "layer0": "gtqtcore:items/tools/jinitaimei_hv",
+    "layer1": "gtqtcore:items/tools/power_unit_hv"
   }
 }
