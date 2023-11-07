@@ -13,7 +13,6 @@ import gregtech.common.metatileentities.multi.electric.generator.MetaTileEntityL
 import gregtech.common.metatileentities.multi.multiblockpart.*;
 import keqing.gtqtcore.api.utils.GTQTLog;
 import keqing.gtqtcore.common.metatileentities.multi.generators.*;
-import keqing.gtqtcore.common.metatileentities.multi.multiblock.MetaTileEntityMultiblockTank;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.steam.MetaTileEntitySteamBlastFurnace;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.steam.MetaTileEntitySteamOreWasher;
@@ -66,7 +65,6 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityRocket ROCKET;
     public static MetaTileEntitySteamOreWasher STEAM_ORE_WASHER;
     public static MetaTileEntitySteamBlastFurnace STEAM_BLAST_FURANCE;
-    public static MetaTileEntityMultiblockTank STEEL_TANK;
     public static MetaTileEntityAssemblyLineTower ASSEMBLY_LINE_TOWER;
     public static MetaTileEntityHugeDistillationTower HUGE_DISTILLATION_TOWER;
     public static MetaTileEntityHugeVacuum HUGE_VACUUM;
@@ -75,6 +73,9 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityNaquadahReactorMki NAQUADAH_REACTOR_MKI;
     public static MetaTileEntityNaquadahReactorMkii NAQUADAH_REACTOR_MKII;
     public static MetaTileEntityNaquadahReactorMkiii NAQUADAH_REACTOR_MKIII;
+
+    public static final MetaTileEntityHugeFusionReactor[] HUGE_FUSION_REACTOR = new MetaTileEntityHugeFusionReactor[3];
+    public static  MetaTileEntityStarBiomimeticFactory STAR_BIOMIMETIC_FACTORY;
 
     public static MetaTileEntityHugeMiner BASIC_HUGE_MINER;
     public static MetaTileEntityHugeMiner HUGE_MINER;
@@ -134,14 +135,16 @@ public class GTQTMetaTileEntities {
         NAQUADAH_REACTOR_MKI = registerMetaTileEntity(3094, new MetaTileEntityNaquadahReactorMki(gtqtcoreId("naquadah_reactor_mki")));
         NAQUADAH_REACTOR_MKII = registerMetaTileEntity(3093, new MetaTileEntityNaquadahReactorMkii(gtqtcoreId("naquadah_reactor_mkii")));
         NAQUADAH_REACTOR_MKIII = registerMetaTileEntity(3092, new MetaTileEntityNaquadahReactorMkiii(gtqtcoreId("naquadah_reactor_mkiii")));
-      COMPRESSED_FUSION_REACTOR_MKI = registerMetaTileEntity(3020,new MetaTileEntityCompressedFusionReactor(gtqtcoreId("compressed_fusion_reactor_mki"),9));
+        COMPRESSED_FUSION_REACTOR_MKI = registerMetaTileEntity(3020,new MetaTileEntityCompressedFusionReactor(gtqtcoreId("compressed_fusion_reactor_mki"),9));
         COMPRESSED_FUSION_REACTOR_MKII = registerMetaTileEntity(3021,new MetaTileEntityCompressedFusionReactor(gtqtcoreId("compressed_fusion_reactor_mkii"),10));
         COMPRESSED_FUSION_REACTOR_MKIII = registerMetaTileEntity(3022,new MetaTileEntityCompressedFusionReactor(gtqtcoreId("compressed_fusion_reactor_mkiii"),11));
-        STEEL_TANK = registerMetaTileEntity(3100, new MetaTileEntityMultiblockTank(gtqtcoreId("tank.steel"), true, 1000));
-        BASIC_HUGE_MINER = registerMetaTileEntity(3101, new MetaTileEntityHugeMiner(gtqtcoreId("large_miner.ev"), GTValues.ZPM, 1, 9, 7, Materials.Steel, 64));
-        HUGE_MINER = registerMetaTileEntity(3102, new MetaTileEntityHugeMiner(gtqtcoreId("large_miner.iv"), GTValues.UV, 1, 11, 8, Materials.Titanium, 128));
-        ADVANCED_HUGE_MINER = registerMetaTileEntity(3103, new MetaTileEntityHugeMiner(gtqtcoreId("large_miner.luv"), GTValues.UHV, 1, 13, 9, Materials.TungstenSteel, 256));
-
+        BASIC_HUGE_MINER = registerMetaTileEntity(15000, new MetaTileEntityHugeMiner(gtqtcoreId("large_miner.ev"), GTValues.ZPM, 1, 9, 7, Materials.Steel, 64));
+        HUGE_MINER = registerMetaTileEntity(15001, new MetaTileEntityHugeMiner(gtqtcoreId("large_miner.iv"), GTValues.UV, 1, 11, 8, Materials.Titanium, 128));
+        ADVANCED_HUGE_MINER = registerMetaTileEntity(15002, new MetaTileEntityHugeMiner(gtqtcoreId("large_miner.luv"), GTValues.UHV, 1, 13, 9, Materials.TungstenSteel, 256));
+        HUGE_FUSION_REACTOR[0] = registerMetaTileEntity(15003, new MetaTileEntityHugeFusionReactor(gtqtcoreId("fusion_reactor.uhv"), GTValues.UHV));
+        HUGE_FUSION_REACTOR[1] = registerMetaTileEntity(15004, new MetaTileEntityHugeFusionReactor(gtqtcoreId("fusion_reactor.uev"), GTValues.UEV));
+        HUGE_FUSION_REACTOR[2] = registerMetaTileEntity(15005, new MetaTileEntityHugeFusionReactor(gtqtcoreId("fusion_reactor.uiv"), GTValues.UIV));
+        STAR_BIOMIMETIC_FACTORY= registerMetaTileEntity(15006, new MetaTileEntityStarBiomimeticFactory(gtqtcoreId("star_biomimetic_factory")));
         registerMetaTileEntity(3105, new MetaTileEntityFluidHatch(gtqtcoreId("fluid_hatch.import.uev"), 11, false));
         registerMetaTileEntity(3120, new MetaTileEntityFluidHatch(gtqtcoreId("fluid_hatch.export.uev"), 11, true));
 

@@ -61,6 +61,24 @@
         "textures": {
           "all": "gregtech:blocks/multiblock/casings/beam_core_4"
         }
+      },
+      "machine_casing_fusion_4": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casings/machine_casing_fusion_4"
+        }
+      },
+      "machine_casing_fusion_5": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casings/machine_casing_fusion_5"
+        }
+      },
+      "machine_casing_fusion_6": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casings/machine_casing_fusion_6"
+        }
       }
     }
   }

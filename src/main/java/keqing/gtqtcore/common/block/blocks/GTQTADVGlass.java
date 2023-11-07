@@ -70,7 +70,10 @@ public class GTQTADVGlass extends VariantBlock<GTQTADVGlass.CasingType> {
         ADV_MACHINE_GLASS_G("adv_machine_glass_g"),
         ADV_MACHINE_GLASS_P("adv_machine_glass_p"),
         ADV_MACHINE_GLASS_O("adv_machine_glass_o"),
-        DV_MACHINE_GLASS_PR("adv_machine_glass_pr");
+        DV_MACHINE_GLASS_PR("adv_machine_glass_pr"),
+        TECH_FUSION_GLASS_IV("tech_fusion_glass_4"),
+        TECH_FUSION_GLASS_V("tech_fusion_glass_5"),
+        TECH_FUSION_GLASS_VI("tech_fusion_glass_6");
         private final String name;
 
         CasingType(String name) {

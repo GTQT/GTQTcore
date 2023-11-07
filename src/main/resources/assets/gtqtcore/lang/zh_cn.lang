@@ -15,6 +15,10 @@ gtqtcore.machine.assembly_line_tower.name=装配线（竖着的）
 gtqtcore.machine.huge_distillation_tower.name=巨型蒸馏塔
 gtqtcore.machine.huge_vacuum.name=巨型真空冷冻机
 gtqtcore.machine.huge_electric_implosion_compressor.name=巨型聚爆压缩机
+gtqtcore.machine.star_biomimetic_factory.name=恒星拟生厂
+gtqtcore.machine.fusion_reactor.uhv.name=四型聚变反应堆控制电脑
+gtqtcore.machine.fusion_reactor.uev.name=五型聚变反应堆控制电脑
+gtqtcore.machine.fusion_reactor.uiv.name=六型聚变反应堆控制电脑
 gtqtcore.machine.lightning_rod.iv.name=避雷针 I
 gtqtcore.machine.lightning_rod.luv.name=避雷针 II
 gtqtcore.machine.lightning_rod.zpm.name=避雷针 III
@@ -207,6 +211,10 @@ tile.multiblock_casing.beam_core_1.name=内爆核心
 tile.multiblock_casing.beam_core_2.name=导压核心
 tile.multiblock_casing.beam_core_3.name=束流核心
 tile.multiblock_casing.beam_core_4.name=聚能核心
+tile.multiblock_casing.machine_casing_fusion_4.name=四型聚变机器外壳
+tile.multiblock_casing.machine_casing_fusion_5.name=五型聚变机器外壳
+tile.multiblock_casing.machine_casing_fusion_6.name=六型聚变机器外壳
+
 
 tile.multiblock_casing.adv_machine_tech.name=智能机器外壳
 tile.multiblock_casing.adv_machine_basic.name=智能基础外壳
@@ -227,6 +235,16 @@ tile.multiblock_casing.adv_machine_glass_b.name=智能玻璃（B型）
 tile.multiblock_casing.adv_machine_glass_p.name=智能玻璃（P型）
 tile.multiblock_casing.adv_machine_glass_g.name=智能玻璃（G型）
 tile.multiblock_casing.adv_machine_glass_pr.name=智能玻璃（PR型）
+tile.multiblock_casing.tech_fusion_glass_4.name=强化低阶聚变玻璃
+tile.multiblock_casing.tech_fusion_glass_5.name=强化中阶聚变玻璃
+tile.multiblock_casing.tech_fusion_glass_6.name=强化高阶聚变玻璃
+
+tile.quantum_casing.motorblock.name=量子动力模块
+tile.quantum_casing.quantumcasing.name=量子基材模块
+tile.quantum_casing.quantumcomputercasing.name=量子计算模块
+tile.quantum_casing.fieldgeneratorcasing.name=量子力场模块
+tile.quantum_casing.dimensionalcasing.name=量子维度模块
+tile.quantum_casing.annihilationcasing.name=量子堙灭模块
 
 tile.wire_coil.draconic.name=*-态素龙线圈-*
 tile.wire_coil.wake_draconic.name=*-态素觉醒龙线圈-*

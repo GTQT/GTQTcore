@@ -26,6 +26,7 @@ public class GTQTTextures {
     public static SimpleOverlayRenderer ADV_MACHINE_MATTERFAB_ANIMATED;
     public static SimpleOverlayRenderer ADV_MACHINE_VENT_ROTARING;
     public static SimpleOverlayRenderer ADV_MACHINE_TUBBINE;
+    public static SimpleOverlayRenderer QUANTUM_CASING;
     public static void init() {
         NITINOL_CASING = new SimpleOverlayRenderer("multiblock/casings/nitinol_machine_casing");
         LIGHTNING_ROD_OVERLAY = new OrientedOverlayRenderer("generators/lightning_rod");
@@ -46,6 +47,7 @@ public class GTQTTextures {
         ADV_MACHINE_MATTERFAB_ANIMATED = new SimpleOverlayRenderer("multiblock/advblock/adv_machine_matterfab_animated");
         ADV_MACHINE_VENT_ROTARING = new SimpleOverlayRenderer("multiblock/advblock/adv_machine_vent_rotating");
         ADV_MACHINE_TUBBINE = new SimpleOverlayRenderer("multiblock/advblock/adv_machine_tubbine");
+        QUANTUM_CASING = new SimpleOverlayRenderer("multiblock/quantumcasing/quantumcasing");
         }
 
 
