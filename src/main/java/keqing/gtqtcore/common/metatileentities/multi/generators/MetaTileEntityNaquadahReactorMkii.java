@@ -99,7 +99,7 @@ public class MetaTileEntityNaquadahReactorMkii extends FuelMultiblockController 
     private static class TurbineCombustionEngineWorkableHandler extends MultiblockFuelRecipeLogic {
 
 
-        public TurbineCombustionEngineWorkableHandler(RecipeMapMultiblockController tileEntity) {
+        public TurbineCombustionEngineWorkableHandler(FuelMultiblockController tileEntity) {
             super(tileEntity);
         }
 

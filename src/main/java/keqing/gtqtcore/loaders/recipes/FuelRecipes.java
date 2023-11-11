@@ -1,7 +1,5 @@
 package keqing.gtqtcore.loaders.recipes;
 
-
-
 import static gregicality.science.api.unification.materials.GCYSMaterials.Kevlar;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.unification.material.Materials.*;

@@ -16,6 +16,7 @@ gtqtcore.machine.huge_distillation_tower.name=巨型蒸馏塔
 gtqtcore.machine.huge_vacuum.name=巨型真空冷冻机
 gtqtcore.machine.huge_electric_implosion_compressor.name=巨型聚爆压缩机
 gtqtcore.machine.star_biomimetic_factory.name=恒星拟生厂
+gtqtcore.machine.plasma_forge.name=次元制造工厂
 gtqtcore.machine.fusion_reactor.uhv.name=四型聚变反应堆控制电脑
 gtqtcore.machine.fusion_reactor.uev.name=五型聚变反应堆控制电脑
 gtqtcore.machine.fusion_reactor.uiv.name=六型聚变反应堆控制电脑
