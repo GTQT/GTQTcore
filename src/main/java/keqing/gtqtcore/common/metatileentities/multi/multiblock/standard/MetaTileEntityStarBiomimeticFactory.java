@@ -22,6 +22,7 @@ import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.core.sound.GTSoundEvents;
+import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTMultiblockCasing;
@@ -50,7 +51,7 @@ public class MetaTileEntityStarBiomimeticFactory extends RecipeMapMultiblockCont
     private Integer color;
 
     public MetaTileEntityStarBiomimeticFactory(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, RecipeMaps.MACERATOR_RECIPES);
+        super(metaTileEntityId, GTQTcoreRecipeMaps.STAR_BIOMIMETIC_FACTORY);
     }
 
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity metaTileEntityHolder) {

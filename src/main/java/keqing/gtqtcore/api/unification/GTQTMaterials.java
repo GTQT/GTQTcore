@@ -9,6 +9,10 @@ public class GTQTMaterials {
     public static Material SteamExhaustGas;
     public static Material Nitinol;
     public static Material Pyrotheum;
+    public static Material StellarMaterialResidueA;
+    public static Material StellarMaterialResidueB;
+    public static Material StellarMaterialResidueC;
+    public static Material StellarMaterial;
 
     //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/api/unification/GSMaterials.java
 

@@ -30,6 +30,7 @@ import gregtech.client.utils.TooltipHelper;
 import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.BlockWireCoil;
 import gregtech.core.sound.GTSoundEvents;
+import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTMultiblockCasing;
@@ -73,7 +74,7 @@ public class MetaTileEntityPlasmaForge extends RecipeMapMultiblockController imp
     protected int heatingCoilDiscount;
 
     public MetaTileEntityPlasmaForge(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, RecipeMaps.MACERATOR_RECIPES);
+        super(metaTileEntityId, GTQTcoreRecipeMaps.PLASMA_FORGE);
         this.recipeMapWorkable = new MetaTileEntityPlasmaForgeWorkable(this);
     }
 
@@ -100,7 +101,7 @@ public class MetaTileEntityPlasmaForge extends RecipeMapMultiblockController imp
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.1"));
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.2"));
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.3"));
-        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("不再需要高炉", new Object[0]));
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("恒星级冶炼厂", new Object[0]));
     }
 
     @Override

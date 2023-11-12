@@ -27,6 +27,10 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<FuelRecipeBuilder> STEAM_ORE_WASHER_RECIPES;
     public static final RecipeMap<FuelRecipeBuilder> QFT;
 
+    public static final RecipeMap<FuelRecipeBuilder> STAR_MIXER;
+    public static final RecipeMap<FuelRecipeBuilder> PLASMA_FORGE;
+    public static final RecipeMap<FuelRecipeBuilder> STAR_BIOMIMETIC_FACTORY;
+
     private GTQTcoreRecipeMaps() {}
     static {
         TURBINE_COMBUSTION_CHAMBER = new RecipeMap<>("turbine_combustion_chamber",
@@ -47,13 +51,22 @@ public class GTQTcoreRecipeMaps {
         INTEGRATED_MINING_DIVISION = new RecipeMap<>("integrated_mining_division",
                 3, 3, 3, 0, new SimpleRecipeBuilder(), false);
 
-        STEAM_BLAST_FURNACE_RECIPES = new RecipeMap<>("steam_blast_furance",
+        STEAM_BLAST_FURNACE_RECIPES = new RecipeMap<>("steam_blast_furnace",
                 1, 1, 0, 0, new FuelRecipeBuilder(), false);
 
         STEAM_ORE_WASHER_RECIPES = new RecipeMap<>("steam_ore_washer",
                 1, 1, 0, 0, new FuelRecipeBuilder(), false);
 
         QFT = new RecipeMap<>("quantum_is_so_fast",
+                9, 9, 9, 9, new FuelRecipeBuilder(), false);
+
+        STAR_MIXER = new RecipeMap<>("star_mixer",
+                3, 3, 9, 3, new FuelRecipeBuilder(), false);
+
+        STAR_BIOMIMETIC_FACTORY = new RecipeMap<>("star_biomimetic_factory",
+                1, 32, 1, 16, new FuelRecipeBuilder(), false);
+
+        PLASMA_FORGE = new RecipeMap<>("plasma_forge",
                 9, 9, 9, 9, new FuelRecipeBuilder(), false);
     }
 

@@ -28,6 +28,7 @@ import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.core.sound.GTSoundEvents;
+import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTQuantumCasing;
@@ -54,7 +55,7 @@ public class MetaTileEntityStarMixer extends RecipeMapMultiblockController {
     protected int heatingCoilLevel;
     protected int heatingCoilDiscount;
     public MetaTileEntityStarMixer(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId,RecipeMaps.MACERATOR_RECIPES);
+        super(metaTileEntityId, GTQTcoreRecipeMaps.STAR_MIXER);
         this.recipeMapWorkable = new MetaTileEntityStarMixerWorkable(this);
     }
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity metaTileEntityHolder) {

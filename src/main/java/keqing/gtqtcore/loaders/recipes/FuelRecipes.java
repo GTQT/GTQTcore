@@ -1,6 +1,6 @@
 package keqing.gtqtcore.loaders.recipes;
 
-import static gregicality.science.api.unification.materials.GCYSMaterials.Kevlar;
+import static gregicality.science.api.unification.materials.GCYSMaterials.*;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
@@ -12,6 +12,45 @@ import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 public class FuelRecipes {
 
         public static void init(){
+
+                GTQTcoreRecipeMaps.STAR_MIXER.recipeBuilder()
+                        .fluidInputs(Oxygen.getPlasma(1000))
+                        .fluidInputs(Nitrogen.getPlasma(1000))
+                        .fluidInputs(Helium.getPlasma(1000))
+                        .fluidOutputs(StellarMaterialResidueA.getFluid(1000))
+                        .duration(18000)
+                        .EUt(7864320)
+                        .circuitMeta(1)
+                        .buildAndRegister();
+
+                GTQTcoreRecipeMaps.STAR_MIXER.recipeBuilder()
+                        .fluidInputs(Oxygen.getPlasma(1000))
+                        .fluidInputs(Nitrogen.getPlasma(1000))
+                        .fluidInputs(Helium.getPlasma(1000))
+                        .fluidInputs(Iron.getPlasma(1000))
+                        .fluidInputs(Nickel.getPlasma(1000))
+                        .fluidInputs(Argon.getPlasma(1000))
+                        .fluidOutputs(StellarMaterialResidueB.getFluid(1000))
+                        .duration(36000)
+                        .EUt(7864320)
+                        .circuitMeta(2)
+                        .buildAndRegister();
+
+                GTQTcoreRecipeMaps.STAR_MIXER.recipeBuilder()
+                        .fluidInputs(Oxygen.getPlasma(1000))
+                        .fluidInputs(Nitrogen.getPlasma(1000))
+                        .fluidInputs(Helium.getPlasma(1000))
+                        .fluidInputs(Iron.getPlasma(1000))
+                        .fluidInputs(Nickel.getPlasma(1000))
+                        .fluidInputs(Argon.getPlasma(1000))
+                        .fluidInputs(Adamantium.getPlasma(1000))
+                        .fluidInputs(Vibranium.getPlasma(1000))
+                        .fluidInputs(StellarMaterial.getPlasma(1000))
+                        .fluidOutputs(StellarMaterialResidueC.getFluid(1000))
+                        .duration(72000)
+                        .EUt(7864320)
+                        .circuitMeta(3)
+                        .buildAndRegister();
 
         GTQTcoreRecipeMaps.QFT.recipeBuilder()
                 .fluidInputs(Hydrogen.getFluid(26000))
