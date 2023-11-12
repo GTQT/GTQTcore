@@ -11,6 +11,7 @@ gtqtcore.machine.naquadah_reactor_mkiii.name=大型硅岩反应堆MKIII
 gtqtcore.machine.quantum_force_transform.name=量子操纵者
 gtqtcore.machine.steam_ore_washer.name=蒸汽洗矿厂
 gtqtcore.machine.steam_blast_furance.name=蒸汽高炉
+gtqtcore.machine.star_mixer.name=次元搅拌机
 gtqtcore.machine.assembly_line_tower.name=装配线（竖着的）
 gtqtcore.machine.huge_distillation_tower.name=巨型蒸馏塔
 gtqtcore.machine.huge_vacuum.name=巨型真空冷冻机

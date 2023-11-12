@@ -77,6 +77,7 @@ public class GTQTMetaTileEntities {
     public static final MetaTileEntityHugeFusionReactor[] HUGE_FUSION_REACTOR = new MetaTileEntityHugeFusionReactor[3];
     public static  MetaTileEntityStarBiomimeticFactory STAR_BIOMIMETIC_FACTORY;
     public static  MetaTileEntityPlasmaForge PLASMA_FORGE;
+    public static  MetaTileEntityStarMixer STAR_MIXER;
 
     public static MetaTileEntityHugeMiner BASIC_HUGE_MINER;
     public static MetaTileEntityHugeMiner HUGE_MINER;
@@ -147,6 +148,7 @@ public class GTQTMetaTileEntities {
         HUGE_FUSION_REACTOR[2] = registerMetaTileEntity(15005, new MetaTileEntityHugeFusionReactor(gtqtcoreId("fusion_reactor.uiv"), GTValues.UIV));
         STAR_BIOMIMETIC_FACTORY= registerMetaTileEntity(15006, new MetaTileEntityStarBiomimeticFactory(gtqtcoreId("star_biomimetic_factory")));
         PLASMA_FORGE= registerMetaTileEntity(15007, new MetaTileEntityPlasmaForge(gtqtcoreId("plasma_forge")));
+        STAR_MIXER= registerMetaTileEntity(15008, new MetaTileEntityStarMixer(gtqtcoreId("star_mixer")));
         registerMetaTileEntity(3105, new MetaTileEntityFluidHatch(gtqtcoreId("fluid_hatch.import.uev"), 11, false));
         registerMetaTileEntity(3120, new MetaTileEntityFluidHatch(gtqtcoreId("fluid_hatch.export.uev"), 11, true));
 
