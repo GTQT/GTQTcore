@@ -3,6 +3,7 @@ package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 import gregtech.api.GTValues;
 import gregtech.api.block.IHeatingCoilBlockStats;
 import gregtech.api.capability.GregtechDataCodes;
+import gregtech.api.capability.IHeatingCoil;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.IFastRenderMetaTileEntity;
 import gregtech.api.metatileentity.MetaTileEntity;
@@ -67,7 +68,7 @@ import java.util.Objects;
 
 import static gregtech.api.util.RelativeDirection.*;
 
-public class MetaTileEntityPlasmaForge extends RecipeMapMultiblockController implements IFastRenderMetaTileEntity {
+public class MetaTileEntityPlasmaForge extends RecipeMapMultiblockController implements IFastRenderMetaTileEntity, IHeatingCoil {
     private Integer color;
     private int blastFurnaceTemperature;
     protected int heatingCoilLevel;
@@ -91,7 +92,10 @@ public class MetaTileEntityPlasmaForge extends RecipeMapMultiblockController imp
         }
         super.addDisplayText(textList);
     }
-
+    @Override
+    public int getCurrentTemperature() {
+        return this.blastFurnaceTemperature;
+    }
 
     @Override
     public void addInformation(ItemStack stack, @Nullable World player, @Nonnull List<String> tooltip, boolean advanced) {

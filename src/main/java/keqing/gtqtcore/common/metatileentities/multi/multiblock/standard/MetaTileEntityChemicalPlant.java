@@ -3,6 +3,7 @@ package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
+import gregtech.api.GTValues;
 import gregtech.api.block.IHeatingCoilBlockStats;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
@@ -130,7 +131,7 @@ public class MetaTileEntityChemicalPlant extends RecipeMapMultiblockController {
         if(casingTier!=tubeTier)
             textList.add(new TextComponentTranslation("gtqtcore.equal", casingTier,tubeTier));
         textList.add(new TextComponentTranslation("gtqtcore.tire", tier));
-        textList.add(new TextComponentTranslation("gtqtcore.vtire", tier*32));
+        textList.add(new TextComponentTranslation("gtqtcore.vtire", GTValues.V[tier]));
     }
 
     @Override

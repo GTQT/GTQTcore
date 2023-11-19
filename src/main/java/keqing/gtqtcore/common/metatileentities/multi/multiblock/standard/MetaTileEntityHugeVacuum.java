@@ -58,7 +58,7 @@ public class MetaTileEntityHugeVacuum extends RecipeMapMultiblockController {
     @Override
     public void addInformation(ItemStack stack, @Nullable World player, @Nonnull List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
-        tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.2", 256));
+        tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.2", 384));
         tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.1"));
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("极度冰寒", new Object[0]));
     }

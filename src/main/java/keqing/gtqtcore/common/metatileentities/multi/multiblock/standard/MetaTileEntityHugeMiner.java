@@ -174,9 +174,13 @@ public class MetaTileEntityHugeMiner extends MultiblockWithDisplayBase implement
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
-                .aisle("XXX", "#F#", "#F#", "#F#", "###", "###", "###")
-                .aisle("XXX", "FCF", "FCF", "FCF", "#F#", "#F#", "#F#")
-                .aisle("XSX", "#F#", "#F#", "#F#", "###", "###", "###")
+                .aisle("#######", "###C###", "#######", "#######", "#######", "#######", "#######")
+                .aisle("#######", "##CCC##", "#######", "#######", "#######", "#######", "#######")
+                .aisle("#######", "#CCCCC#", "###X###", "###X###", "###C###", "###C###", "#######")
+                .aisle("###C###", "CCCFCCC", "##XFX##", "##XFX##", "##CFC##", "##CFC##", "###F###")
+                .aisle("#######", "#CCCCC#", "###S###", "###X###", "###C###", "###C###", "#######")
+                .aisle("#######", "##CCC##", "#######", "#######", "#######", "#######", "#######")
+                .aisle("#######", "###C###", "#######", "#######", "#######", "#######", "#######")
                 .where('S', selfPredicate())
                 .where('X', states(getCasingState())
                         .or(abilities(MultiblockAbility.EXPORT_ITEMS).setMaxGlobalLimited(1).setPreviewCount(1))

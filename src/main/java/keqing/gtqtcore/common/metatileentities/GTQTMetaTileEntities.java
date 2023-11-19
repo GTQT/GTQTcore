@@ -49,7 +49,6 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityHugeMacerator HUGE_MACERATOR;
     public static MetaTileEntityHugeAlloyBlastSmelter HUGE_ALLOY_BLAST_FURANCE;
     public static MetaTileEntityHugeBlastFurnace HUGE_BLAST_FURANCE;
-    public static MetaTileEntitySpaceDrilling SPACE_DRILLING;
     public static MetaTileEntityCompressedFusionReactor COMPRESSED_FUSION_REACTOR_MKI;
     public static MetaTileEntityCompressedFusionReactor COMPRESSED_FUSION_REACTOR_MKII;
     public static MetaTileEntityCompressedFusionReactor COMPRESSED_FUSION_REACTOR_MKIII;
@@ -78,7 +77,7 @@ public class GTQTMetaTileEntities {
     public static  MetaTileEntityStarBiomimeticFactory STAR_BIOMIMETIC_FACTORY;
     public static  MetaTileEntityPlasmaForge PLASMA_FORGE;
     public static  MetaTileEntityStarMixer STAR_MIXER;
-
+    public static MetaTileEntityHugeCrackingUnit HUGE_CRACKING_UNIT;
     public static MetaTileEntityHugeMiner BASIC_HUGE_MINER;
     public static MetaTileEntityHugeMiner HUGE_MINER;
     public static MetaTileEntityHugeMiner ADVANCED_HUGE_MINER;
@@ -126,7 +125,7 @@ public class GTQTMetaTileEntities {
         HUGE_TURBINE_COMBUSTION_CHAMBER = registerMetaTileEntity(3014, new MetaTileEntityTurbineCombustionChamber(gtqtcoreId("turbine_combustion_chamber"),4));
         ROCKET = registerMetaTileEntity(3015, new MetaTileEntityRocket(gtqtcoreId("rocket"),5));
         I_MODULAR_FISSION_REACTOR = registerMetaTileEntity(3016, new MetaTileEntityIModularFissionReactor(gtqtcoreId("i_modular_fission_reactor"),5));
-        SPACE_DRILLING = registerMetaTileEntity(3017, new MetaTileEntitySpaceDrilling(gtqtcoreId("space_drilling")));
+        HUGE_CRACKING_UNIT = registerMetaTileEntity(3017, new MetaTileEntityHugeCrackingUnit(gtqtcoreId("huge_cracking_unit")));
         STEAM_BLAST_FURANCE = registerMetaTileEntity(3018, new MetaTileEntitySteamBlastFurnace(gtqtcoreId("steam_blast_furance")));
         STEAM_ORE_WASHER = registerMetaTileEntity(3019, new MetaTileEntitySteamOreWasher(gtqtcoreId("steam_ore_washer")));
         ASSEMBLY_LINE_TOWER = registerMetaTileEntity(3099, new MetaTileEntityAssemblyLineTower(gtqtcoreId("assembly_line_tower")));
@@ -140,9 +139,9 @@ public class GTQTMetaTileEntities {
         COMPRESSED_FUSION_REACTOR_MKI = registerMetaTileEntity(3020,new MetaTileEntityCompressedFusionReactor(gtqtcoreId("compressed_fusion_reactor_mki"),9));
         COMPRESSED_FUSION_REACTOR_MKII = registerMetaTileEntity(3021,new MetaTileEntityCompressedFusionReactor(gtqtcoreId("compressed_fusion_reactor_mkii"),10));
         COMPRESSED_FUSION_REACTOR_MKIII = registerMetaTileEntity(3022,new MetaTileEntityCompressedFusionReactor(gtqtcoreId("compressed_fusion_reactor_mkiii"),11));
-        BASIC_HUGE_MINER = registerMetaTileEntity(15000, new MetaTileEntityHugeMiner(gtqtcoreId("large_miner.ev"), GTValues.ZPM, 1, 9, 7, Materials.Steel, 64));
-        HUGE_MINER = registerMetaTileEntity(15001, new MetaTileEntityHugeMiner(gtqtcoreId("large_miner.iv"), GTValues.UV, 1, 11, 8, Materials.Titanium, 128));
-        ADVANCED_HUGE_MINER = registerMetaTileEntity(15002, new MetaTileEntityHugeMiner(gtqtcoreId("large_miner.luv"), GTValues.UHV, 1, 13, 9, Materials.TungstenSteel, 256));
+        BASIC_HUGE_MINER = registerMetaTileEntity(15000, new MetaTileEntityHugeMiner(gtqtcoreId("large_miner.zpm"), GTValues.ZPM, 1, 9, 7, Materials.Steel, 64));
+        HUGE_MINER = registerMetaTileEntity(15001, new MetaTileEntityHugeMiner(gtqtcoreId("large_miner.uv"), GTValues.UV, 1, 11, 8, Materials.Titanium, 128));
+        ADVANCED_HUGE_MINER = registerMetaTileEntity(15002, new MetaTileEntityHugeMiner(gtqtcoreId("large_miner.uhv"), GTValues.UHV, 1, 13, 9, Materials.TungstenSteel, 256));
         HUGE_FUSION_REACTOR[0] = registerMetaTileEntity(15003, new MetaTileEntityHugeFusionReactor(gtqtcoreId("fusion_reactor.uhv"), GTValues.UHV));
         HUGE_FUSION_REACTOR[1] = registerMetaTileEntity(15004, new MetaTileEntityHugeFusionReactor(gtqtcoreId("fusion_reactor.uev"), GTValues.UEV));
         HUGE_FUSION_REACTOR[2] = registerMetaTileEntity(15005, new MetaTileEntityHugeFusionReactor(gtqtcoreId("fusion_reactor.uiv"), GTValues.UIV));

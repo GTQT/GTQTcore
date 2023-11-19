@@ -1,6 +1,7 @@
 package keqing.gtqtcore.common;
 
 import gregtech.api.block.VariantItemBlock;
+import gregtech.api.recipes.recipeproperties.FusionEUToStartProperty;
 import gregtech.common.items.MetaItems;
 import keqing.gtqtcore.api.utils.GTQTLog;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
@@ -110,7 +111,9 @@ public class CommonProxy {
     public static void registerRecipes(RegistryEvent.Register<IRecipe> event)
     {
         GTQTLog.logger.info("Registering recipes...");
-
+        FusionEUToStartProperty.registerFusionTier(9, "(MK4)");
+        FusionEUToStartProperty.registerFusionTier(10, "(MK5)");
+        FusionEUToStartProperty.registerFusionTier(11, "(MK6)");
     }
 
 }

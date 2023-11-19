@@ -7,11 +7,15 @@ import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.loaders.OreDictionaryLoader.OREDICT_BLOCK_FUEL_COKE;
 import static gregtech.loaders.OreDictionaryLoader.OREDICT_FUEL_COKE;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
+
+import gregtech.api.recipes.RecipeMaps;
+import gregtech.api.unification.material.Materials;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 
 public class FuelRecipes {
 
         public static void init(){
+
 
                 GTQTcoreRecipeMaps.STAR_MIXER.recipeBuilder()
                         .fluidInputs(Oxygen.getPlasma(1000))
