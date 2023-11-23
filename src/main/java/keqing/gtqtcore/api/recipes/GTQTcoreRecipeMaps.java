@@ -1,11 +1,16 @@
 package keqing.gtqtcore.api.recipes;
 
+import gregicality.science.api.recipes.builders.NoCoilTemperatureRecipeBuilder;
 import gregtech.api.gui.GuiTextures;
+import gregtech.api.gui.widgets.ProgressWidget;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.builders.BlastRecipeBuilder;
 import gregtech.api.recipes.builders.FuelRecipeBuilder;
 import gregtech.api.recipes.builders.SimpleRecipeBuilder;
+import gregtech.core.sound.GTSoundEvents;
 import keqing.gtqtcore.api.capability.chemical_plant.ChemicalPlantBuilder;
+import keqing.gtqtcore.api.recipes.builder.FlowRateRecipeBuilder;
+import keqing.gtqtcore.api.recipes.machine.RecipeMapDangoteDistillery;
 
 
 //怎么写请看
@@ -26,13 +31,25 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<FuelRecipeBuilder> STEAM_BLAST_FURNACE_RECIPES;
     public static final RecipeMap<FuelRecipeBuilder> STEAM_ORE_WASHER_RECIPES;
     public static final RecipeMap<FuelRecipeBuilder> QFT;
-
+    public static final RecipeMap<FlowRateRecipeBuilder> HEAT_EXCHANGE_RECIPES;
     public static final RecipeMap<FuelRecipeBuilder> STAR_MIXER;
     public static final RecipeMap<FuelRecipeBuilder> PLASMA_FORGE;
     public static final RecipeMap<FuelRecipeBuilder> STAR_BIOMIMETIC_FACTORY;
+    public static final RecipeMap<NoCoilTemperatureRecipeBuilder> MOLECULAR_DISTILLATION_RECIPES;
 
+    public static final RecipeMap<FuelRecipeBuilder> HIGH_PRESSURE_STEAM_TURBINE_FUELS;
+
+    public static final RecipeMap<FuelRecipeBuilder> SUPERCRITICAL_STEAM_TURBINE_FUELS;
     private GTQTcoreRecipeMaps() {}
     static {
+        //  Dangote Distillery RecipeMap
+        MOLECULAR_DISTILLATION_RECIPES = new RecipeMapDangoteDistillery<>("molecular_distillation_recipes", 0, true, 1, true, 1, true, 12, false, new NoCoilTemperatureRecipeBuilder(), false)
+                .setSound(GTSoundEvents.CHEMICAL_REACTOR);
+
+        //  Large Heat Exchanger Recipemap
+        HEAT_EXCHANGE_RECIPES = new RecipeMap<>("heat_exchanger_recipes", 0, 0, 2, 3, new FlowRateRecipeBuilder(), false)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_ARC_FURNACE, ProgressWidget.MoveType.HORIZONTAL);
+
         TURBINE_COMBUSTION_CHAMBER = new RecipeMap<>("turbine_combustion_chamber",
                 0, 0, 1, 1, new FuelRecipeBuilder(), false);
 
@@ -68,6 +85,13 @@ public class GTQTcoreRecipeMaps {
 
         PLASMA_FORGE = new RecipeMap<>("plasma_forge",
                 9, 9, 9, 9, new FuelRecipeBuilder(), false);
+
+        //  High Pressure Steam Turbine Recipemap
+        HIGH_PRESSURE_STEAM_TURBINE_FUELS = new RecipeMap<>("high_pressure_steam_turbine_fuels", 0, 0, 1, 1, new FuelRecipeBuilder(), false);
+
+        //  Supercritical Steam Turbine Recipemap
+        SUPERCRITICAL_STEAM_TURBINE_FUELS = new RecipeMap<>("supercritical_steam_turbine_fuels",  0, 0, 1, 1, new FuelRecipeBuilder(), false);
+
     }
 
 }

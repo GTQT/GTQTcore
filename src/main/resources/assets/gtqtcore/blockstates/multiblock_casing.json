@@ -14,6 +14,24 @@
           "all": "gregtech:blocks/multiblock/casings/nitinol_machine_casing"
         }
       },
+      "hc_alloy_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casings/hc_alloy_casing"
+        }
+      },
+      "supercritical_fluid_turbine_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casings/supercritical_fluid_turbine_casing"
+        }
+      },
+      "supercritical_fluid_turbine_shaft_block": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casings/supercritical_fluid_turbine_shaft_block"
+        }
+      },
       "compressed_fusion_reactor_mki_casing": {
         "model": "minecraft:cube_all",
         "textures": {

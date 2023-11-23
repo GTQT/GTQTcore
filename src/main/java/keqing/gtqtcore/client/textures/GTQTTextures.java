@@ -27,8 +27,14 @@ public class GTQTTextures {
     public static SimpleOverlayRenderer ADV_MACHINE_VENT_ROTARING;
     public static SimpleOverlayRenderer ADV_MACHINE_TUBBINE;
     public static SimpleOverlayRenderer QUANTUM_CASING;
+    public static SimpleOverlayRenderer HC_ALLOY_CASING;
+    public static SimpleOverlayRenderer SFTC;
+    public static SimpleOverlayRenderer SFTS;
     public static void init() {
         NITINOL_CASING = new SimpleOverlayRenderer("multiblock/casings/nitinol_machine_casing");
+        HC_ALLOY_CASING = new SimpleOverlayRenderer("multiblock/casings/hc_alloy_casing");
+        SFTC = new SimpleOverlayRenderer("multiblock/casings/supercritical_fluid_turbine_casing");
+        SFTS = new SimpleOverlayRenderer("multiblock/casings/supercritical_fluid_turbine_shaft");
         LIGHTNING_ROD_OVERLAY = new OrientedOverlayRenderer("generators/lightning_rod");
         INF_WATER = new SimpleOverlayRenderer("multipart/overlay_water");
         CATALYST_HATCH = new SimpleOverlayRenderer("multipart/overlay_catalysts");

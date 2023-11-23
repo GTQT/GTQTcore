@@ -8,6 +8,7 @@ import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTBlockWireCoil;
 import keqing.gtqtcore.common.items.metaitems.GTQTMetaToolItems;
 import keqing.gtqtcore.loaders.recipes.GTQTRecipes;
+import keqing.gtqtcore.loaders.recipes.handlers.HeatExchangeRecipes;
 import keqing.gtqtcore.loaders.recipes.handlers.IntegratedMiningDivision;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
@@ -48,6 +49,7 @@ public class CommonProxy {
     public void init( FMLInitializationEvent event ) {
         FuelRecipes.init();
         IntegratedMiningDivision.init();
+        HeatExchangeRecipes.init();
 
 
         for (GTQTBlockWireCoil.CoilType type : GTQTBlockWireCoil.CoilType.values()) {

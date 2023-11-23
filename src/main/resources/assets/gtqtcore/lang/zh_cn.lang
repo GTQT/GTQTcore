@@ -271,3 +271,26 @@ tile.wire_coil.unive.name=*-宇宙态素中子线圈-*
 tile.wire_coil.end.name=*-寰宇支配之无尽线圈-*
 tile.wire_coil.superconducting_metallic_hydrogen_coil.name=*-超导金属氢线圈-*
 tile.wire_coil.cupar_proton_pair_coil.name=*-库珀对线圈-*
+
+gtqtcore.machine.lager_heat_exchanger.name=大型热交换机
+recipemap.heat_exchanger_recipes.name=热力交换
+gtqtcore.multiblock.large_heat_exchanger.threshold=流量阈值：%s
+gtqtcore.multiblock.large_heat_exchanger.threshold.tooltip=热交换器能以降低基础热流体输入流量为代价，降低生产过热蒸汽的流量阈值。
+gtqtcore.multiblock.large_heat_exchanger.threshold_decrement=§c降低5%%流量阈值 /n§7效率降低3%%
+gtqtcore.multiblock.large_heat_exchanger.threshold_increment=§a增加5%%流量阈值 /n§7效率增加3%%
+gtqtcore.multiblock.large_heat_exchanger.description=大型热交换器是你第一台能生产高压蒸汽的多方块。
+gtqtcore.multiblock.large_heat_exchanger.heat_time_tooltip=升温耗时：§f%ss
+gtqtcore.multiblock.large_heat_exchanger.explosion_tooltip=蒸馏水供应不足会导致爆炸！
+gtqtcore.multiblock.mega_heat_exchanger.tooltip.parallel=相当于§e%s§7台大型热交换机。
+gtqtcore.recipe.max_rate=最大流量： %s L/s
+gtqtcore.recipe.flow_rate=流量阈值： %s L/s
+
+recipemap.molecular_distillation_recipes.name=高真空分子蒸馏
+gtqtcore.machine.dangote_distillery.name=丹格特蒸馏厂
+gtqtcore.machine.dangote_distillery.tooltip.1=现代化工业蒸馏，从现在开始
+gtqtcore.machine.dangote_distillery.tooltip.2=可运行一般的§r蒸馏塔§7配方，亦可用于进行分子蒸馏
+gtqtcore.machine.dangote_distillery.tooltip.3=运行§r蒸馏室§7配方时，运行耗时为§r(配方时间/4)§7。
+gtqtcore.machine.dangote_distillery.tooltip.4=运行§r蒸馏塔§7配方时，运行耗时为§r(配方时间/2)§7。
+gtqtcore.machine.dangote_distillery.tooltip.5=最大并行数：
+gtqtcore.machine.dangote_distillery.tooltip.6=§3UV§7级以下 -> §r4 * (电压等级 * 4)§7
+gtqtcore.machine.dangote_distillery.tooltip.7=§3UV§7级以上 -> §r12 * (电压等级 * 4)§7

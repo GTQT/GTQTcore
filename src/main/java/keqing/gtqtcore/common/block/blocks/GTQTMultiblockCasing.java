@@ -30,6 +30,9 @@ public class GTQTMultiblockCasing extends VariantBlock<GTQTMultiblockCasing.Casi
     public static enum CasingType implements IStringSerializable {
 
         NITINOL_MACHINE_CASING("nitinol_machine_casing"),
+        HC_ALLOY_CASING("hc_alloy_casing"),
+        SFTC("supercritical_fluid_turbine_casing"),
+        SFTS("supercritical_fluid_turbine_shaft_block"),
         COMPRESSED_FUSION_REACTOR_MKI_CASING("compressed_fusion_reactor_mki_casing"),
         COMPRESSED_FUSION_REACTOR_MKII_CASING("compressed_fusion_reactor_mkii_casing"),
         COMPRESSED_FUSION_REACTOR_MKIII_CASING("compressed_fusion_reactor_mkiii_casing"),

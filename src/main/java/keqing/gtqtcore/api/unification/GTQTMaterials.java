@@ -7,6 +7,7 @@ import keqing.gtqtcore.api.unification.matreials.HigherDegreeMaterials;
 public class GTQTMaterials {
     public static Material HighPressureSteam;
     public static Material SteamExhaustGas;
+    public static Material SuperheatedSteam;
     public static Material Nitinol;
     public static Material Pyrotheum;
     public static Material StellarMaterialResidueA;
