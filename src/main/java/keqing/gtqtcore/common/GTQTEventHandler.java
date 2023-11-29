@@ -2,6 +2,7 @@ package keqing.gtqtcore.common;
 
 import gregtech.api.unification.material.event.MaterialEvent;
 import keqing.gtqtcore.api.unification.GTQTMaterials;
+import keqing.gtqtcore.api.unification.TJMaterials;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentString;
@@ -24,6 +25,7 @@ public class GTQTEventHandler {
     public static void registerMaterials(MaterialEvent event)
     {
         GTQTMaterials.register();
+        TJMaterials.register();
         //在此处注册材料
     }
 

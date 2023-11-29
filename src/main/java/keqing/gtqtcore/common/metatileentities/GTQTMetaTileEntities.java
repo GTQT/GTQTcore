@@ -62,6 +62,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileInfWaterHatch INF_WATER_HATCH;
     public static MetaTileEntityLightningRod[] LIGHTNING_ROD = new MetaTileEntityLightningRod[3];
     public static MetaTileEntityDangoteDistillery DANGOTE_DISTILLERY;
+    public static MetaTileEntitykeQingNet KeQing_NET;
     public static MetaTileEntityLargeTurbine HUGE_STEAM_TURBINE;
     public static MetaTileEntityLargeTurbine HUGE_GAS_TURBINE;
     public static MetaTileEntityLargeTurbine HUGE_PLASMA_TURBINE;
@@ -152,6 +153,7 @@ public class GTQTMetaTileEntities {
         STAR_BIOMIMETIC_FACTORY= registerMetaTileEntity(15006, new MetaTileEntityStarBiomimeticFactory(gtqtcoreId("star_biomimetic_factory")));
         PLASMA_FORGE= registerMetaTileEntity(15007, new MetaTileEntityPlasmaForge(gtqtcoreId("plasma_forge")));
         STAR_MIXER= registerMetaTileEntity(15008, new MetaTileEntityStarMixer(gtqtcoreId("star_mixer")));
+        KeQing_NET= registerMetaTileEntity(15009, new MetaTileEntitykeQingNet(gtqtcoreId("keqing_net")));
 
         registerMetaTileEntity(3105, new MetaTileEntityFluidHatch(gtqtcoreId("fluid_hatch.import.uev"), 11, false));
         registerMetaTileEntity(3120, new MetaTileEntityFluidHatch(gtqtcoreId("fluid_hatch.export.uev"), 11, true));

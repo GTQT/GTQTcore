@@ -8,8 +8,10 @@ import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTBlockWireCoil;
 import keqing.gtqtcore.common.items.metaitems.GTQTMetaToolItems;
 import keqing.gtqtcore.loaders.recipes.GTQTRecipes;
+import keqing.gtqtcore.loaders.recipes.GTQTRecipesManager;
 import keqing.gtqtcore.loaders.recipes.handlers.HeatExchangeRecipes;
 import keqing.gtqtcore.loaders.recipes.handlers.IntegratedMiningDivision;
+import keqing.gtqtcore.loaders.recipes.handlers.KeQingNET;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -50,6 +52,8 @@ public class CommonProxy {
         FuelRecipes.init();
         IntegratedMiningDivision.init();
         HeatExchangeRecipes.init();
+        KeQingNET.init();
+        GTQTRecipesManager.init();
 
 
         for (GTQTBlockWireCoil.CoilType type : GTQTBlockWireCoil.CoilType.values()) {
@@ -81,6 +85,7 @@ public class CommonProxy {
         registry.register(GTQTMetaBlocks.ADV_GLASS);
         registry.register(GTQTMetaBlocks.WIRE_COIL);
         registry.register(GTQTMetaBlocks.QUANTUM_CASING);
+        registry.register(GTQTMetaBlocks.TURBINE_CASING);
 
     }
 
@@ -101,6 +106,7 @@ public class CommonProxy {
         registry.register(createItemBlock(GTQTMetaBlocks.ADV_GLASS, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.WIRE_COIL, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.QUANTUM_CASING, VariantItemBlock::new));
+        registry.register(createItemBlock(GTQTMetaBlocks.TURBINE_CASING, VariantItemBlock::new));
     }
 
     private static <T extends Block> ItemBlock createItemBlock(T block, Function<T, ItemBlock> producer) {

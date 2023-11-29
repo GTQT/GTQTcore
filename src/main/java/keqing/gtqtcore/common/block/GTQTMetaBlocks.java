@@ -16,6 +16,7 @@ public class GTQTMetaBlocks {
     public static GTQTADVGlass ADV_GLASS;
     public static GTQTBlockWireCoil WIRE_COIL;
     public static GTQTQuantumCasing QUANTUM_CASING;
+    public static GTQTTurbineCasing TURBINE_CASING;
 
     private GTQTMetaBlocks() {}
 
@@ -30,6 +31,8 @@ public class GTQTMetaBlocks {
         WIRE_COIL.setRegistryName("wire_coil");
         QUANTUM_CASING = new GTQTQuantumCasing();
         QUANTUM_CASING.setRegistryName("quantum_casing");
+        TURBINE_CASING = new GTQTTurbineCasing();
+        TURBINE_CASING.setRegistryName("turbine_casing");
 
     }
 
@@ -40,6 +43,7 @@ public class GTQTMetaBlocks {
         registerItemModel(ADV_GLASS);
         registerItemModel(WIRE_COIL);
         registerItemModel(QUANTUM_CASING);
+        registerItemModel(TURBINE_CASING);
 
     }
 

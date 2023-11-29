@@ -1,0 +1,25 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "minecraft:cube_all",
+    "textures": {
+      "all": "gregtech:blocks/rendering_error"
+    }
+  },
+  "variants": {
+    "variant": {
+      "pd_machine_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casing/pd_machine_casing"
+        }
+      },
+      "pd_turbine_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casing/pd_turbine_casing"
+        }
+      }
+    }
+  }
+}

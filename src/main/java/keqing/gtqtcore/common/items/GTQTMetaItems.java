@@ -10,6 +10,7 @@ public class GTQTMetaItems {
     例如：
     public static MetaItem<?>.MetaValueItem 你物品的名字，记得全大写;
      */
+    public static MetaItem<?>.MetaValueItem ABCABC;
     public static StandardMetaItem metaItem1;
 
 

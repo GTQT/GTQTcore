@@ -105,15 +105,13 @@ dependencies {
 
     // Example of deobfuscating a dependency
     // implementation rfg.deobf('curse.maven:had-enough-items-557549:4543375')
-    implementation rfg.deobf("curse.maven:gregicality-multiblocks-564858:4701685")
     implementation rfg.deobf("curse.maven:code-chicken-lib-1-8-242818:2779848")
+    implementation rfg.deobf(files("libs/GregicalityMultiblocks-1.2.4.jar"))
     implementation rfg.deobf(files("libs/gregtech-1.12.2-2.7.4-beta.jar"))
-    implementation rfg.deobf(files("libs/GregicalityScience-1.12.2-0.0.4-fix.jar"))
-    implementation rfg.deobf(files("libs/gregtechfoodoption-1.9.3.1.jar"))
     implementation rfg.deobf(files("libs/jei_1.12.2-4.16.1.1003.jar"))
-    implementation rfg.deobf(files("libs/mechtech-1.2.1.jar"))
     implementation rfg.deobf(files("libs/theoneprobe-1.12-1.4.28.jar"))
     implementation rfg.deobf(files("libs/CTM-MC1.12.2-1.0.2.31.jar"))
+    implementation rfg.deobf(files("libs/modid-1.0.jar"))
     implementation rfg.deobf(files("libs/appliedenergistics2-rv6-stable-7-extended_life-v0.55.22.jar"))
     if (project.use_mixins.toBoolean()) {
         // Change your mixin refmap name here:

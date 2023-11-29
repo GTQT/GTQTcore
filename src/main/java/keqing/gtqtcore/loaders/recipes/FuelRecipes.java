@@ -4,6 +4,9 @@ import static gregicality.science.api.unification.materials.GCYSMaterials.*;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
+import static gregtech.common.blocks.BlockFusionCasing.CasingType.FUSION_COIL;
+import static gregtech.common.blocks.MetaBlocks.FUSION_CASING;
+import static gregtech.common.metatileentities.MetaTileEntities.FUSION_REACTOR;
 import static gregtech.loaders.OreDictionaryLoader.OREDICT_BLOCK_FUEL_COKE;
 import static gregtech.loaders.OreDictionaryLoader.OREDICT_FUEL_COKE;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
@@ -15,8 +18,6 @@ import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 public class FuelRecipes {
 
         public static void init(){
-
-
                 GTQTcoreRecipeMaps.STAR_MIXER.recipeBuilder()
                         .fluidInputs(Oxygen.getPlasma(1000))
                         .fluidInputs(Nitrogen.getPlasma(1000))

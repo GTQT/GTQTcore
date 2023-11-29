@@ -1,16 +1,20 @@
 package keqing.gtqtcore.api.recipes;
 
 import gregicality.science.api.recipes.builders.NoCoilTemperatureRecipeBuilder;
+import gregtech.api.GTValues;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.widgets.ProgressWidget;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.builders.BlastRecipeBuilder;
+import gregtech.api.recipes.builders.ComputationRecipeBuilder;
 import gregtech.api.recipes.builders.FuelRecipeBuilder;
 import gregtech.api.recipes.builders.SimpleRecipeBuilder;
+import gregtech.api.recipes.machines.RecipeMapResearchStation;
 import gregtech.core.sound.GTSoundEvents;
 import keqing.gtqtcore.api.capability.chemical_plant.ChemicalPlantBuilder;
 import keqing.gtqtcore.api.recipes.builder.FlowRateRecipeBuilder;
 import keqing.gtqtcore.api.recipes.machine.RecipeMapDangoteDistillery;
+import keqing.gtqtcore.api.recipes.machine.RecipeMapKeQingNet;
 
 
 //怎么写请看
@@ -38,7 +42,7 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<NoCoilTemperatureRecipeBuilder> MOLECULAR_DISTILLATION_RECIPES;
 
     public static final RecipeMap<FuelRecipeBuilder> HIGH_PRESSURE_STEAM_TURBINE_FUELS;
-
+    public static final RecipeMap<ComputationRecipeBuilder> KEQING_NET_RECIES;
     public static final RecipeMap<FuelRecipeBuilder> SUPERCRITICAL_STEAM_TURBINE_FUELS;
     private GTQTcoreRecipeMaps() {}
     static {
@@ -92,6 +96,11 @@ public class GTQTcoreRecipeMaps {
         //  Supercritical Steam Turbine Recipemap
         SUPERCRITICAL_STEAM_TURBINE_FUELS = new RecipeMap<>("supercritical_steam_turbine_fuels",  0, 0, 1, 1, new FuelRecipeBuilder(), false);
 
+        KEQING_NET_RECIES = new RecipeMap<>("keqing_net_recipes", 2, 1, 0, 0, new ComputationRecipeBuilder(), false)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, ProgressWidget.MoveType.HORIZONTAL)
+                .setSlotOverlay(false, false, GuiTextures.SCANNER_OVERLAY)
+                .setSlotOverlay(true, false, GuiTextures.RESEARCH_STATION_OVERLAY)
+                .setSound(GTValues.FOOLS.get() ? GTSoundEvents.SCIENCE : GTSoundEvents.COMPUTATION);
     }
 
 }
