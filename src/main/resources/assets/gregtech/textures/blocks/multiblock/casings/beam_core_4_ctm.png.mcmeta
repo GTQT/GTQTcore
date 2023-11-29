@@ -1,0 +1,18 @@
+{
+  "animation": {
+    "interpolate": true,
+    "frametime": 2
+  },
+  "ctm": {
+    "ctm_version": 1,
+    "type": "sctm",
+    "layer": "BLOOM",
+	"gregtech": true,
+    "extra": {
+      "light": 15,
+      "connect_to": [
+        { "block": "gtqtcore:multiblock_casing:8" },
+      ]
+    }
+  }
+}

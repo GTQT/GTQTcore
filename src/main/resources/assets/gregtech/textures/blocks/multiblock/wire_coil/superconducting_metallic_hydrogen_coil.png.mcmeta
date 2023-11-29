@@ -1,0 +1,9 @@
+{
+    "ctm": {
+        "ctm_version": 1,
+        "type": "ctm",
+        "textures": [
+            "gregtech:blocks/multiblock/wire_coil/superconducting_metallic_hydrogen_coil-ctm"
+        ]
+    }
+}
