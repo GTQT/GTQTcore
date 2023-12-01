@@ -188,41 +188,6 @@ public class MetaTileEntityDangoteDistillery extends MultiMapMultiblockControlle
 
         @Override
         public int getParallelLimit() {
-//            if (this.getMaxVoltage() == V[ULV]) {
-//                return ParallelTier(ULV);
-//            } else if (this.getMaxVoltage() == V[LV]) {
-//                return ParallelTier(LV);
-//            } else if (this.getMaxVoltage() == V[MV]) {
-//                return ParallelTier(MV);
-//            } else if (this.getMaxVoltage() == V[HV]) {
-//                return ParallelTier(HV);
-//            } else if (this.getMaxVoltage() == V[EV]) {
-//                return ParallelTier(EV);
-//            } else if (this.getMaxVoltage() == V[IV]) {
-//                return ParallelTier(IV);
-//            } else if (this.getMaxVoltage() == V[LuV]) {
-//                return ParallelTier(LuV);
-//            } else if (this.getMaxVoltage() == V[ZPM]) {
-//                return ParallelTier(ZPM);
-//            } else if (this.getMaxVoltage() == V[UV]) {
-//                return ParallelTier(UV);
-//            } else if (this.getMaxVoltage() == V[UHV]) {
-//                return HigherParallelTier(UHV);
-//            } else if (this.getMaxVoltage() == V[UEV]) {
-//                return HigherParallelTier(UEV);
-//            } else if (this.getMaxVoltage() == V[UIV]) {
-//                return HigherParallelTier(UIV);
-//            } else if (this.getMaxVoltage() == V[UXV]) {
-//                return HigherParallelTier(UXV);
-//            } else if (this.getMaxVoltage() == V[OpV]) {
-//                return HigherParallelTier(OpV);
-//            } else if (this.getMaxVoltage() == V[MAX]) {
-//                return HigherParallelTier(MAX);
-//            } else if (this.getMaxVoltage() > V[MAX]){    //  For MAX+, get 4 * 15 * 4
-//                return HigherParallelTier(15);
-//            } else {
-//                return 1;
-//            }
             if (this.getMaxVoltage() > V[MAX]) {    //  For MAX+, get 4 * 15 * 4
                 return HigherParallelTier(15);
             }

@@ -10,6 +10,10 @@ public class GTQTTextures {
     public static OrientedOverlayRenderer LIGHTNING_ROD_OVERLAY;
     public static OrientedOverlayRenderer CHEMICAL_PLANT;
     public static SimpleOverlayRenderer CATALYST_HATCH;
+    public static SimpleOverlayRenderer PD_CASING;
+    public static SimpleOverlayRenderer ADVANCED_INVAR_CASING;
+    public static SimpleOverlayRenderer MACERATOR_CASING;
+    public static SimpleOverlayRenderer NQ_CASING;
     public static SimpleOverlayRenderer INF_WATER;
     public static SimpleOverlayRenderer NITINOL_CASING;
     public static SimpleOverlayRenderer COMPRESSED_FUSION_REACTOR_MKI_CASING;
@@ -32,6 +36,10 @@ public class GTQTTextures {
     public static SimpleOverlayRenderer SFTS;
     public static void init() {
         NITINOL_CASING = new SimpleOverlayRenderer("multiblock/casings/nitinol_machine_casing");
+        MACERATOR_CASING = new SimpleOverlayRenderer("multiblock/casing/macerator_casing");
+        PD_CASING = new SimpleOverlayRenderer("multiblock/casing/pd_turbine_casing");
+        ADVANCED_INVAR_CASING = new SimpleOverlayRenderer("multiblock/casing/advanced_invar_casing");
+        NQ_CASING = new SimpleOverlayRenderer("multiblock/casing/nq_turbine_casing");
         HC_ALLOY_CASING = new SimpleOverlayRenderer("multiblock/casings/hc_alloy_casing");
         SFTC = new SimpleOverlayRenderer("multiblock/casings/supercritical_fluid_turbine_casing");
         SFTS = new SimpleOverlayRenderer("multiblock/casings/supercritical_fluid_turbine_shaft");

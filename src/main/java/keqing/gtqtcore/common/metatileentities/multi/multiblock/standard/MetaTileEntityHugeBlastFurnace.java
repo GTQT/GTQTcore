@@ -1,11 +1,9 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
-import gregicality.multiblocks.api.metatileentity.GCYMRecipeMapMultiblockController;
 import gregicality.multiblocks.api.render.GCYMTextures;
 import gregtech.api.GTValues;
 import gregtech.api.block.IHeatingCoilBlockStats;
 import gregtech.api.capability.IHeatingCoil;
-import gregtech.api.capability.impl.HeatingCoilRecipeLogic;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
@@ -16,8 +14,8 @@ import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
-import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
+import gregtech.api.recipes.recipeproperties.IRecipePropertyStorage;
 import gregtech.api.recipes.recipeproperties.TemperatureProperty;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.TextFormattingUtil;
@@ -30,6 +28,9 @@ import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.core.sound.GTSoundEvents;
+import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
+import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
+import keqing.gtqtcore.api.utils.GTQTUtil;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -52,6 +53,8 @@ public class MetaTileEntityHugeBlastFurnace extends RecipeMapMultiblockControlle
     private int blastFurnaceTemperature;
     protected int heatingCoilLevel;
     protected int heatingCoilDiscount;
+    private int glassTire;
+
     public MetaTileEntityHugeBlastFurnace(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, RecipeMaps.BLAST_RECIPES);
         this.recipeMapWorkable = new MetaTileEntityHugeBlastFurnaceWorkable(this);
@@ -67,6 +70,8 @@ public class MetaTileEntityHugeBlastFurnace extends RecipeMapMultiblockControlle
             textList.add(new TextComponentTranslation("gregtech.multiblock.blast_furnace.max_temperature",
                     new TextComponentTranslation(TextFormattingUtil.formatNumbers(blastFurnaceTemperature) + "K").setStyle(new Style().setColor(TextFormatting.RED))));
             textList.add(new TextComponentTranslation("gtqtcore.multiblock.md.level", heatingCoilLevel));
+            textList.add(new TextComponentTranslation("gtqtcore.multiblock.md.glass", glassTire));
+            textList.add(new TextComponentTranslation("gtqtcore.multiblock.fu.level", 100-10*glassTire));
         }
         super.addDisplayText(textList);
     }
@@ -75,8 +80,10 @@ public class MetaTileEntityHugeBlastFurnace extends RecipeMapMultiblockControlle
     @Override
     public void addInformation(ItemStack stack, @Nullable World player, @Nonnull List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
+        tooltip.add(I18n.format("gtqtcore.multiblock.hb.tooltip.2"));
+        tooltip.add(I18n.format("gtqtcore.multiblock.hb.tooltip.3"));
         tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.1"));
-        tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.2", 256));
+        tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.2", 576));
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.1"));
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.2"));
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.3"));
@@ -92,6 +99,10 @@ public class MetaTileEntityHugeBlastFurnace extends RecipeMapMultiblockControlle
         super.formStructure(context);
         Object coilType = context.get("CoilType");
         Object type = context.get("CoilType");
+        Object glassTire = context.get("GlassTiredStats");
+        this.glassTire = GTQTUtil.getOrDefault(() -> glassTire instanceof WrappedIntTired,
+                () -> ((WrappedIntTired)glassTire).getIntTier(),
+                0);
         if (coilType instanceof IHeatingCoilBlockStats) {
             this.heatingCoilLevel = ((IHeatingCoilBlockStats) coilType).getLevel();
             this.blastFurnaceTemperature = ((IHeatingCoilBlockStats) type).getCoilTemperature();
@@ -137,14 +148,12 @@ public class MetaTileEntityHugeBlastFurnace extends RecipeMapMultiblockControlle
                         .or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(3))
                 )
                 .where('B', heatingCoils())
-                .where('A', states(this.getGlassState()))
+                .where('A', TiredTraceabilityPredicate.CP_GLASS)
                 .where('S', abilities(MultiblockAbility.MUFFLER_HATCH))
                 .where(' ', air())
                 .build();
     }
-    private IBlockState getGlassState() {
-        return MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.FUSION_GLASS);
-    }
+
     private static IBlockState getCasingState() {
         return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.INVAR_HEATPROOF);
     }
@@ -178,7 +187,7 @@ public class MetaTileEntityHugeBlastFurnace extends RecipeMapMultiblockControlle
      * @return the max parallel for the heating coil level
      */
     public static int getMaxParallel(int heatingCoilLevel) {
-        return 16 * heatingCoilLevel;
+        return 16 * heatingCoilLevel ;
     }
 
     @Override
@@ -193,6 +202,11 @@ public class MetaTileEntityHugeBlastFurnace extends RecipeMapMultiblockControlle
 
         public MetaTileEntityHugeBlastFurnaceWorkable(RecipeMapMultiblockController tileEntity) {
             super(tileEntity);
+        }
+
+        public void setMaxProgress(int maxProgress) {
+            this.maxProgressTime = maxProgress*(100-glassTire*5)/100;
+
         }
 
         @Override

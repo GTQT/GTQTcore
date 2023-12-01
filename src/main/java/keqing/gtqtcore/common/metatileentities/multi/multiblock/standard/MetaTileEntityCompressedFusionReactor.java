@@ -17,6 +17,7 @@ import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.recipes.recipeproperties.FusionEUToStartProperty;
+import gregtech.api.recipes.recipeproperties.IRecipePropertyStorage;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.util.interpolate.Eases;
 import gregtech.client.renderer.ICubeRenderer;
@@ -31,6 +32,10 @@ import gregtech.common.blocks.BlockFusionCasing;
 import gregtech.common.blocks.BlockGlassCasing;
 import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.blocks.MetaBlocks;
+import keqing.gtqtcore.api.GTQTValue;
+import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
+import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
+import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTMultiblockCasing;
@@ -49,7 +54,6 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
@@ -66,11 +70,12 @@ import java.util.Objects;
 public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockController implements IFastRenderMetaTileEntity {
     protected int heatingCoilLevel;
     protected int heatingCoilDiscount;
-    
     protected int tier;
+    int beamTire;
     private EnergyContainerList inputEnergyContainers;
     private long heat = 0; // defined in TileEntityFusionReactor but serialized in FusionRecipeLogic
     private Integer color;
+    protected int glassTire;
 
     public int getMaxParallel(int heatingCoilLevel) {
         if (tier == GTValues.UHV)
@@ -490,9 +495,9 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
                 )
                 .where('F', states(MetaBlocks.FRAMES.get(Materials.NaquadahAlloy).getBlock(Materials.NaquadahAlloy)))
                 .where('H', states(getCasingState1()))
-                .where('P', states(getCasingState2()))
+                .where('P', TiredTraceabilityPredicate.CP_BEAM)
                 .where('I', heatingCoils())
-                .where('B', states(this.getGlassState()))
+                .where('B', TiredTraceabilityPredicate.CP_GLASS)
                 .where(' ', any())
                 .build();
     }
@@ -502,6 +507,7 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
     private static IBlockState getCasingState1() {
         return MetaBlocks.FUSION_CASING.getState(BlockFusionCasing.CasingType.FUSION_COIL);
     }
+
 
 
     @SideOnly(Side.CLIENT)
@@ -523,22 +529,21 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
         return  GTQTMetaBlocks.MULTI_CASING.getState(GTQTMultiblockCasing.CasingType.COMPRESSED_FUSION_REACTOR_MKIII_CASING);
     }
 
-    private IBlockState getCasingState2() {
-        if (tier == GTValues.UHV)
-            return  GTQTMetaBlocks.MULTI_CASING.getState(GTQTMultiblockCasing.CasingType.BEAM_CORE_2);
-        if (tier == GTValues.UEV)
-            return  GTQTMetaBlocks.MULTI_CASING.getState(GTQTMultiblockCasing.CasingType.BEAM_CORE_0);
-
-        return  GTQTMetaBlocks.MULTI_CASING.getState(GTQTMultiblockCasing.CasingType.BEAM_CORE_4);
-    }
 
     @Override
     protected void formStructure(PatternMatchContext context) {
         long energyStored = this.energyContainer.getEnergyStored();
         super.formStructure(context);
-        this.initializeAbilities();
         ((EnergyContainerHandler) this.energyContainer).setEnergyStored(energyStored);
         Object coilType = context.get("CoilType");
+        Object beamTire = context.get("BeamTiredStats");
+        Object glassTire = context.get("GlassTiredStats");
+        this.glassTire = GTQTUtil.getOrDefault(() -> glassTire instanceof WrappedIntTired,
+                () -> ((WrappedIntTired)glassTire).getIntTier(),
+                0);
+        this.beamTire = GTQTUtil.getOrDefault(() -> beamTire instanceof WrappedIntTired,
+                () -> ((WrappedIntTired)beamTire).getIntTier(),
+                0);
         if (coilType instanceof IHeatingCoilBlockStats) {
             this.heatingCoilLevel = ((IHeatingCoilBlockStats) coilType).getLevel();
             this.heatingCoilDiscount = ((IHeatingCoilBlockStats) coilType).getEnergyDiscount();
@@ -624,8 +629,11 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
+        textList.add(new TextComponentTranslation("gtqtcore.multiblock.md.level", heatingCoilLevel));
+        textList.add(new TextComponentTranslation("gtqtcore.multiblock.fu.level", 100-10*beamTire));
+        textList.add(new TextComponentTranslation("gtqtcore.multiblock.md.glass", glassTire));
+        textList.add(new TextComponentTranslation("gregtech.multiblock.cracking_unit.energy", 100 - 2.5 * this.glassTire));
         if (isStructureFormed()) {
-            textList.add(new TextComponentTranslation("gtqtcore.multiblock.md.level", heatingCoilLevel));
             textList.add(new TextComponentTranslation("gregtech.multiblock.fusion_reactor.energy", this.energyContainer.getEnergyStored(), this.energyContainer.getEnergyCapacity()));
             textList.add(new TextComponentTranslation("gregtech.multiblock.fusion_reactor.heat", heat));
         }
@@ -636,15 +644,18 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(I18n.format("gregtech.machine.fusion_reactor.capacity", calculateEnergyStorageFactor(16) / 1000000L));
         tooltip.add(I18n.format("gregtech.machine.fusion_reactor.overclocking"));
-        tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.1"));
+        tooltip.add(I18n.format("gtqtcore.multiblock.fu.tooltip.1"));
+        tooltip.add(I18n.format("gtqtcore.multiblock.hb.tooltip.4"));
+        tooltip.add(I18n.format("gtqtcore.multiblock.hb.tooltip.3"));
+
         if (tier == GTValues.UHV){
-            tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.2", 16));
+            tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.2", 24));
             tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("惊 鸿 万 物", new Object[0]));}
         if (tier == GTValues.UEV){
-            tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.2", 64));
+            tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.2", 96));
             tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("破 碎 亘 古", new Object[0]));}
         if (tier == GTValues.UIV){
-            tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.2", 256));
+            tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.2", 384));
             tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("凌 驾 虚 无", new Object[0]));}
     }
 
@@ -666,9 +677,6 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
         return false;
     }
 
-    public long getHeat() {
-        return heat;
-    }
 
     private class FusionRecipeLogic extends MultiblockRecipeLogic {
 
@@ -813,6 +821,10 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
         return true;
     }
 
+    protected int getGlassTireTier() {
+        return this.glassTire;
+    }
+
     static BloomEffectUtil.IBloomRenderFast RENDER_HANDLER = new BloomEffectUtil.IBloomRenderFast() {
         @Override
         public int customBloomStyle() {
@@ -848,6 +860,19 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
     protected class MetaTileEntityCompressedFusionReactorWorkable extends MultiblockRecipeLogic {
         public MetaTileEntityCompressedFusionReactorWorkable(RecipeMapMultiblockController tileEntity) {
             super(tileEntity);
+        }
+
+        protected void modifyOverclockPost(int[] resultOverclock, @Nonnull IRecipePropertyStorage storage) {
+            super.modifyOverclockPost(resultOverclock, storage);
+            int coilTier = ((MetaTileEntityCompressedFusionReactor)this.metaTileEntity).getGlassTireTier();
+            if (coilTier > 0) {
+                resultOverclock[0] = (int)((double)resultOverclock[0] * (1.0 - (double)glassTire * 0.025));
+                resultOverclock[0] = Math.max(1, resultOverclock[0]);
+            }
+        }
+        public void setMaxProgress(int maxProgress) {
+            this.maxProgressTime = maxProgress*(100-beamTire*10)/100;
+
         }
 
         @Override

@@ -5,13 +5,14 @@ import gregtech.api.pattern.BlockWorldState;
 import gregtech.api.pattern.PatternStringError;
 import gregtech.api.pattern.TraceabilityPredicate;
 import gregtech.api.util.BlockInfo;
-import gregtech.common.blocks.BlockBoilerCasing;
-import gregtech.common.blocks.BlockMachineCasing;
-import gregtech.common.blocks.BlockMetalCasing;
-import gregtech.common.blocks.MetaBlocks;
+import gregtech.common.blocks.*;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import keqing.gtqtcore.api.blocks.ITired;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
+import keqing.gtqtcore.common.block.GTQTMetaBlocks;
+import keqing.gtqtcore.common.block.blocks.GTQTADVGlass;
+import keqing.gtqtcore.common.block.blocks.GTQTMultiblockCasing;
+import keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing;
 import net.minecraft.block.state.IBlockState;
 
 import javax.annotation.Nullable;
@@ -24,12 +25,14 @@ import java.util.stream.Collectors;
 
 public class TiredTraceabilityPredicate extends TraceabilityPredicate {
 
+
     static {
         MAP_ESSENTIA_CELLS = new Object2ObjectOpenHashMap<>();
         MAP_MACHINE_CASING = new Object2ObjectOpenHashMap<>();
         MAP_GLASS = new Object2ObjectOpenHashMap<>();
         MAP_CP_CASING = new Object2ObjectOpenHashMap<>();
         MAP_CP_TUBE = new Object2ObjectOpenHashMap<>();
+        MAP_CP_BEAM = new Object2ObjectOpenHashMap<>();
 
         for (BlockMachineCasing.MachineCasingType type : Arrays.stream(BlockMachineCasing.MachineCasingType.values()).filter((c)-> c.ordinal()<10).collect(Collectors.toList())) {
             TiredTraceabilityPredicate.MAP_MACHINE_CASING.put(MetaBlocks.MACHINE_CASING.getState(type),new WrappedIntTired(type,type.ordinal()));
@@ -47,6 +50,10 @@ public class TiredTraceabilityPredicate extends TraceabilityPredicate {
                 new WrappedIntTired(BlockMetalCasing.MetalCasingType.TITANIUM_STABLE,5));
         TiredTraceabilityPredicate.MAP_CP_CASING.put(MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.TUNGSTENSTEEL_ROBUST),
                 new WrappedIntTired(BlockMetalCasing.MetalCasingType.TUNGSTENSTEEL_ROBUST,6));
+        TiredTraceabilityPredicate.MAP_CP_CASING.put(GTQTMetaBlocks.TURBINE_CASING.getState(GTQTTurbineCasing.TurbineCasingType.PD_TURBINE_CASING),
+                new WrappedIntTired(GTQTTurbineCasing.TurbineCasingType.PD_TURBINE_CASING,7));
+        TiredTraceabilityPredicate.MAP_CP_CASING.put(GTQTMetaBlocks.TURBINE_CASING.getState(GTQTTurbineCasing.TurbineCasingType.NQ_TURBINE_CASING),
+                new WrappedIntTired(GTQTTurbineCasing.TurbineCasingType.NQ_TURBINE_CASING,8));
 
         TiredTraceabilityPredicate.MAP_CP_TUBE.put(MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.BRONZE_PIPE),
                 new WrappedIntTired(BlockBoilerCasing.BoilerCasingType.BRONZE_PIPE,1));
@@ -56,6 +63,38 @@ public class TiredTraceabilityPredicate extends TraceabilityPredicate {
                 new WrappedIntTired(BlockBoilerCasing.BoilerCasingType.BRONZE_PIPE,5));
         TiredTraceabilityPredicate.MAP_CP_TUBE.put(MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.TUNGSTENSTEEL_PIPE),
                 new WrappedIntTired(BlockBoilerCasing.BoilerCasingType.TUNGSTENSTEEL_PIPE,6));
+        TiredTraceabilityPredicate.MAP_CP_TUBE.put(GTQTMetaBlocks.TURBINE_CASING.getState(GTQTTurbineCasing.TurbineCasingType.PD_MACHINE_CASING),
+                new WrappedIntTired(GTQTTurbineCasing.TurbineCasingType.PD_MACHINE_CASING,7));
+        TiredTraceabilityPredicate.MAP_CP_TUBE.put(GTQTMetaBlocks.TURBINE_CASING.getState(GTQTTurbineCasing.TurbineCasingType.NQ_MACHINE_CASING),
+                new WrappedIntTired(GTQTTurbineCasing.TurbineCasingType.NQ_MACHINE_CASING,8));
+
+
+        TiredTraceabilityPredicate.MAP_GLASS.put(MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.FUSION_GLASS),
+                new WrappedIntTired(BlockGlassCasing.CasingType.FUSION_GLASS,1));
+
+        TiredTraceabilityPredicate.MAP_GLASS.put(GTQTMetaBlocks.ADV_GLASS.getState(GTQTADVGlass.CasingType.TECH_FUSION_GLASS_IV),
+                new WrappedIntTired(GTQTADVGlass.CasingType.TECH_FUSION_GLASS_IV,2));
+
+        TiredTraceabilityPredicate.MAP_GLASS.put(GTQTMetaBlocks.ADV_GLASS.getState(GTQTADVGlass.CasingType.TECH_FUSION_GLASS_V),
+                new WrappedIntTired(GTQTADVGlass.CasingType.TECH_FUSION_GLASS_V,3));
+
+        TiredTraceabilityPredicate.MAP_GLASS.put(GTQTMetaBlocks.ADV_GLASS.getState(GTQTADVGlass.CasingType.TECH_FUSION_GLASS_VI),
+                new WrappedIntTired(GTQTADVGlass.CasingType.TECH_FUSION_GLASS_VI,4));
+
+        TiredTraceabilityPredicate.MAP_CP_BEAM.put(GTQTMetaBlocks.MULTI_CASING.getState(GTQTMultiblockCasing.CasingType.BEAM_CORE_0),
+                new WrappedIntTired(GTQTMultiblockCasing.CasingType.BEAM_CORE_0,1));
+
+        TiredTraceabilityPredicate.MAP_CP_BEAM.put(GTQTMetaBlocks.MULTI_CASING.getState(GTQTMultiblockCasing.CasingType.BEAM_CORE_1),
+                new WrappedIntTired(GTQTMultiblockCasing.CasingType.BEAM_CORE_1,2));
+
+        TiredTraceabilityPredicate.MAP_CP_BEAM.put(GTQTMetaBlocks.MULTI_CASING.getState(GTQTMultiblockCasing.CasingType.BEAM_CORE_2),
+                new WrappedIntTired(GTQTMultiblockCasing.CasingType.BEAM_CORE_2,3));
+
+        TiredTraceabilityPredicate.MAP_CP_BEAM.put(GTQTMetaBlocks.MULTI_CASING.getState(GTQTMultiblockCasing.CasingType.BEAM_CORE_3),
+                new WrappedIntTired(GTQTMultiblockCasing.CasingType.BEAM_CORE_3,4));
+
+        TiredTraceabilityPredicate.MAP_CP_BEAM.put(GTQTMetaBlocks.MULTI_CASING.getState(GTQTMultiblockCasing.CasingType.BEAM_CORE_4),
+                new WrappedIntTired(GTQTMultiblockCasing.CasingType.BEAM_CORE_4,5));
 
     }
 
@@ -64,6 +103,7 @@ public class TiredTraceabilityPredicate extends TraceabilityPredicate {
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_GLASS;
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_CP_CASING;
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_CP_TUBE;
+    public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_CP_BEAM;
 
 
     public static TraceabilityPredicate MACHINE_CASINGS = new TiredTraceabilityPredicate(MAP_MACHINE_CASING,"MachineCasingType",null);
@@ -76,7 +116,11 @@ public class TiredTraceabilityPredicate extends TraceabilityPredicate {
     public static TraceabilityPredicate CP_TUBE = new TiredTraceabilityPredicate(MAP_CP_TUBE,
             Comparator.comparing((s) -> ((WrappedIntTired)MAP_CP_TUBE.get(s)).getIntTier()),"ChemicalPlantTube",null);
 
+    public static TraceabilityPredicate CP_GLASS = new TiredTraceabilityPredicate(MAP_GLASS,
+            Comparator.comparing((s) -> ((WrappedIntTired)MAP_GLASS.get(s)).getIntTier()),"Glass",null);
 
+    public static TraceabilityPredicate CP_BEAM = new TiredTraceabilityPredicate(MAP_CP_BEAM,
+            Comparator.comparing((s) -> ((WrappedIntTired)MAP_CP_BEAM.get(s)).getIntTier()),"Beam",null);
     private final Object2ObjectOpenHashMap<IBlockState, ITired> map;
     private final String name;
 

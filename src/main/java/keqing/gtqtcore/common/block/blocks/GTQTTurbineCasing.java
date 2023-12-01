@@ -30,12 +30,12 @@ public class GTQTTurbineCasing extends VariantBlock<GTQTTurbineCasing.TurbineCas
     }
 
     public enum TurbineCasingType implements IStringSerializable, IStateHarvestLevel {
-
-
+        MACERATOR_CASING("macerator_casing", 4),
+        ADVANCED_INVAR_CASING("advanced_invar_casing", 4),
         PD_MACHINE_CASING("pd_machine_casing", 4),
-
-
-        PD_TURBINE_CASING("pd_turbine_casing", 4);
+        PD_TURBINE_CASING("pd_turbine_casing", 4),
+        NQ_MACHINE_CASING("nq_machine_casing", 4),
+        NQ_TURBINE_CASING("nq_turbine_casing", 4);
 
         private final String name;
         private final int harvestLevel;

@@ -19,6 +19,30 @@
         "textures": {
           "all": "gregtech:blocks/multiblock/casing/pd_turbine_casing"
         }
+      },
+      "nq_machine_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casing/nq_machine_casing"
+        }
+      },
+      "nq_turbine_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casing/nq_turbine_casing"
+        }
+      },
+      "macerator_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casing/macerator_casing"
+        }
+      },
+      "advanced_invar_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casing/advanced_invar_casing"
+        }
       }
     }
   }

@@ -21,6 +21,9 @@ import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.core.sound.GTSoundEvents;
+import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
+import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
+import keqing.gtqtcore.api.utils.GTQTUtil;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -40,6 +43,7 @@ public class MetaTileEntityHugeCrackingUnit extends RecipeMapMultiblockControlle
     private int coilTier;
     protected int heatingCoilLevel;
     protected int heatingCoilDiscount;
+    private int glassTire;
 
     public MetaTileEntityHugeCrackingUnit(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, RecipeMaps.CRACKING_RECIPES);
@@ -64,7 +68,7 @@ public class MetaTileEntityHugeCrackingUnit extends RecipeMapMultiblockControlle
                 .aisle("HHHHHHOHHHHHH"," H         H "," H         H "," H         H "," H         H "," H         H "," H         H ")
                 .where('O', this.selfPredicate())
                 .where('H', states(this.getCasingState()).setMinGlobalLimited(215).or(this.autoAbilities()))
-                .where('G', states(this.getGlassState()))
+                .where('G', TiredTraceabilityPredicate.CP_GLASS)
                 .where('#', air()).where('C', heatingCoils()).build();
     }
 
@@ -72,9 +76,7 @@ public class MetaTileEntityHugeCrackingUnit extends RecipeMapMultiblockControlle
     public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
         return Textures.CLEAN_STAINLESS_STEEL_CASING;
     }
-    private IBlockState getGlassState() {
-        return MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.FUSION_GLASS);
-    }
+
 
     protected IBlockState getCasingState() {
         return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STAINLESS_CLEAN);
@@ -89,6 +91,8 @@ public class MetaTileEntityHugeCrackingUnit extends RecipeMapMultiblockControlle
         if (this.isStructureFormed()) {
             textList.add(new TextComponentTranslation("gregtech.multiblock.cracking_unit.energy", 100 - 10 * this.coilTier));
             textList.add(new TextComponentTranslation("gtqtcore.multiblock.md.level", heatingCoilLevel));
+            textList.add(new TextComponentTranslation("gtqtcore.multiblock.md.glass", glassTire));
+            textList.add(new TextComponentTranslation("gtqtcore.multiblock.fu.level", 100-10*glassTire));
         }
 
     }
@@ -97,8 +101,11 @@ public class MetaTileEntityHugeCrackingUnit extends RecipeMapMultiblockControlle
     public void addInformation(ItemStack stack, @Nullable World player, @Nonnull List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(I18n.format("gregtech.machine.cracker.tooltip.1"));
-        tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.2", 384));
+        tooltip.add(I18n.format("gtqtcore.multiblock.hb.tooltip.1"));
+        tooltip.add(I18n.format("gtqtcore.multiblock.hb.tooltip.2"));
+        tooltip.add(I18n.format("gtqtcore.multiblock.hb.tooltip.3"));
         tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.1"));
+        tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.2", 768));
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("超级裂化王", new Object[0]));
     }
 
@@ -114,6 +121,10 @@ public class MetaTileEntityHugeCrackingUnit extends RecipeMapMultiblockControlle
         super.formStructure(context);
         Object type = context.get("CoilType");
         Object coilType = context.get("CoilType");
+        Object glassTire = context.get("GlassTiredStats");
+        this.glassTire = GTQTUtil.getOrDefault(() -> glassTire instanceof WrappedIntTired,
+                () -> ((WrappedIntTired)glassTire).getIntTier(),
+                0);
         if (type instanceof IHeatingCoilBlockStats) {
             this.coilTier = ((IHeatingCoilBlockStats)type).getTier();
             this.heatingCoilLevel = ((IHeatingCoilBlockStats) coilType).getLevel();
@@ -135,12 +146,17 @@ public class MetaTileEntityHugeCrackingUnit extends RecipeMapMultiblockControlle
         return this.coilTier;
     }
     public static int getMaxParallel(int heatingCoilLevel) {
-        return  16 * heatingCoilLevel;
+        return  8 * heatingCoilLevel;
     }
     private class CrackingUnitWorkableHandler extends MultiblockRecipeLogic {
 
         public CrackingUnitWorkableHandler(RecipeMapMultiblockController tileEntity) {
             super(tileEntity);
+        }
+
+        public void setMaxProgress(int maxProgress) {
+            this.maxProgressTime = maxProgress*(100-glassTire*5)/100;
+
         }
 
         @Override
@@ -152,7 +168,7 @@ public class MetaTileEntityHugeCrackingUnit extends RecipeMapMultiblockControlle
             super.modifyOverclockPost(resultOverclock, storage);
             int coilTier = ((MetaTileEntityHugeCrackingUnit)this.metaTileEntity).getCoilTier();
             if (coilTier > 0) {
-                resultOverclock[0] = (int)((double)resultOverclock[0] * (1.0 - (double)coilTier * 0.1));
+                resultOverclock[0] = (int)((double)resultOverclock[0] * (100 - (double)coilTier*3)/100);
                 resultOverclock[0] = Math.max(1, resultOverclock[0]);
             }
         }
