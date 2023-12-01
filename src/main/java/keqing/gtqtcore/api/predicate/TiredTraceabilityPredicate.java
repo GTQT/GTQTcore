@@ -12,6 +12,7 @@ import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTADVGlass;
 import keqing.gtqtcore.common.block.blocks.GTQTMultiblockCasing;
+import keqing.gtqtcore.common.block.blocks.GTQTQuantumForceTransformerCasing;
 import keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing;
 import net.minecraft.block.state.IBlockState;
 
@@ -33,6 +34,9 @@ public class TiredTraceabilityPredicate extends TraceabilityPredicate {
         MAP_CP_CASING = new Object2ObjectOpenHashMap<>();
         MAP_CP_TUBE = new Object2ObjectOpenHashMap<>();
         MAP_CP_BEAM = new Object2ObjectOpenHashMap<>();
+        MAP_QFT_MANIPULATOR = new Object2ObjectOpenHashMap<>();
+        MAP_QFT_SHIELDING_CORE = new Object2ObjectOpenHashMap<>();
+        MAP_QFT_GLASS = new Object2ObjectOpenHashMap<>();
 
         for (BlockMachineCasing.MachineCasingType type : Arrays.stream(BlockMachineCasing.MachineCasingType.values()).filter((c)-> c.ordinal()<10).collect(Collectors.toList())) {
             TiredTraceabilityPredicate.MAP_MACHINE_CASING.put(MetaBlocks.MACHINE_CASING.getState(type),new WrappedIntTired(type,type.ordinal()));
@@ -96,8 +100,47 @@ public class TiredTraceabilityPredicate extends TraceabilityPredicate {
         TiredTraceabilityPredicate.MAP_CP_BEAM.put(GTQTMetaBlocks.MULTI_CASING.getState(GTQTMultiblockCasing.CasingType.BEAM_CORE_4),
                 new WrappedIntTired(GTQTMultiblockCasing.CasingType.BEAM_CORE_4,5));
 
-    }
 
+
+        //  MAP_QFT_MANIPULATOR Init
+        TiredTraceabilityPredicate.MAP_QFT_MANIPULATOR.put(GTQTMetaBlocks.QUANTUM_CONSTRAINT_CASING.getState(GTQTQuantumForceTransformerCasing.CasingType.NEUTRON_PULSE_MANIPULATOR_CASING),
+                new WrappedIntTired(GTQTQuantumForceTransformerCasing.CasingType.NEUTRON_PULSE_MANIPULATOR_CASING, 1));
+        TiredTraceabilityPredicate.MAP_QFT_MANIPULATOR.put(GTQTMetaBlocks.QUANTUM_CONSTRAINT_CASING.getState(GTQTQuantumForceTransformerCasing.CasingType.COSMIC_FABRIC_MANIPULATOR_CASING),
+                new WrappedIntTired(GTQTQuantumForceTransformerCasing.CasingType.COSMIC_FABRIC_MANIPULATOR_CASING, 2));
+        TiredTraceabilityPredicate.MAP_QFT_MANIPULATOR.put(GTQTMetaBlocks.QUANTUM_CONSTRAINT_CASING.getState(GTQTQuantumForceTransformerCasing.CasingType.INFINITY_INFUSED_MANIPULATOR_CASING),
+                new WrappedIntTired(GTQTQuantumForceTransformerCasing.CasingType.INFINITY_INFUSED_MANIPULATOR_CASING, 3));
+        TiredTraceabilityPredicate.MAP_QFT_MANIPULATOR.put(GTQTMetaBlocks.QUANTUM_CONSTRAINT_CASING.getState(GTQTQuantumForceTransformerCasing.CasingType.SUPRACAUSAL_CONTINUUM_MANIPULATOR_CASING),
+                new WrappedIntTired(GTQTQuantumForceTransformerCasing.CasingType.SUPRACAUSAL_CONTINUUM_MANIPULATOR_CASING, 4));
+
+        //  MAP_QFT_SHIELDING_CORE Init
+        TiredTraceabilityPredicate.MAP_QFT_SHIELDING_CORE.put(GTQTMetaBlocks.QUANTUM_CONSTRAINT_CASING.getState(GTQTQuantumForceTransformerCasing.CasingType.NEUTRON_SHIELDING_CORE_CASING),
+                new WrappedIntTired(GTQTQuantumForceTransformerCasing.CasingType.NEUTRON_SHIELDING_CORE_CASING, 1));
+        TiredTraceabilityPredicate.MAP_QFT_SHIELDING_CORE.put(GTQTMetaBlocks.QUANTUM_CONSTRAINT_CASING.getState(GTQTQuantumForceTransformerCasing.CasingType.COSMIC_FABRIC_SHIELDING_CORE_CASING),
+                new WrappedIntTired(GTQTQuantumForceTransformerCasing.CasingType.COSMIC_FABRIC_SHIELDING_CORE_CASING, 2));
+        TiredTraceabilityPredicate.MAP_QFT_SHIELDING_CORE.put(GTQTMetaBlocks.QUANTUM_CONSTRAINT_CASING.getState(GTQTQuantumForceTransformerCasing.CasingType.INFINITY_INFUSED_SHIELDING_CORE_CASING),
+                new WrappedIntTired(GTQTQuantumForceTransformerCasing.CasingType.INFINITY_INFUSED_SHIELDING_CORE_CASING, 3));
+        TiredTraceabilityPredicate.MAP_QFT_SHIELDING_CORE.put(GTQTMetaBlocks.QUANTUM_CONSTRAINT_CASING.getState(GTQTQuantumForceTransformerCasing.CasingType.SUPRACAUSAL_CONTINUUM_SHIELDING_CORE_CASING),
+                new WrappedIntTired(GTQTQuantumForceTransformerCasing.CasingType.SUPRACAUSAL_CONTINUUM_SHIELDING_CORE_CASING, 4));
+
+        //  MAP_QFT_GLASS Init
+        TiredTraceabilityPredicate.MAP_QFT_GLASS.put(GTQTMetaBlocks.ADV_GLASS.getState(GTQTADVGlass.CasingType.ADV_MACHINE_GLASS),
+                new WrappedIntTired(GTQTADVGlass.CasingType.ADV_MACHINE_GLASS, 1));
+        TiredTraceabilityPredicate.MAP_QFT_GLASS.put(GTQTMetaBlocks.ADV_GLASS.getState(GTQTADVGlass.CasingType.ADV_MACHINE_GLASS_B),
+                new WrappedIntTired(GTQTADVGlass.CasingType.ADV_MACHINE_GLASS_B, 2));
+        TiredTraceabilityPredicate.MAP_QFT_GLASS.put(GTQTMetaBlocks.ADV_GLASS.getState(GTQTADVGlass.CasingType.ADV_MACHINE_GLASS_G),
+                new WrappedIntTired(GTQTADVGlass.CasingType.ADV_MACHINE_GLASS_G, 3));
+        TiredTraceabilityPredicate.MAP_QFT_GLASS.put(GTQTMetaBlocks.ADV_GLASS.getState(GTQTADVGlass.CasingType.ADV_MACHINE_GLASS_O),
+                new WrappedIntTired(GTQTADVGlass.CasingType.ADV_MACHINE_GLASS_O, 4));
+        TiredTraceabilityPredicate. MAP_QFT_GLASS.put(GTQTMetaBlocks.ADV_GLASS.getState(GTQTADVGlass.CasingType.ADV_MACHINE_GLASS_P),
+                new WrappedIntTired(GTQTADVGlass.CasingType.ADV_MACHINE_GLASS_P, 5));
+        TiredTraceabilityPredicate.MAP_QFT_GLASS.put(GTQTMetaBlocks.ADV_GLASS.getState(GTQTADVGlass.CasingType.ADV_MACHINE_GLASS_R),
+                new WrappedIntTired(GTQTADVGlass.CasingType.ADV_MACHINE_GLASS_R, 6));
+
+
+    }
+    public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_QFT_GLASS;
+    public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_QFT_SHIELDING_CORE;
+    public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_QFT_MANIPULATOR;
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_ESSENTIA_CELLS;
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_MACHINE_CASING;
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_GLASS;
@@ -121,6 +164,13 @@ public class TiredTraceabilityPredicate extends TraceabilityPredicate {
 
     public static TraceabilityPredicate CP_BEAM = new TiredTraceabilityPredicate(MAP_CP_BEAM,
             Comparator.comparing((s) -> ((WrappedIntTired)MAP_CP_BEAM.get(s)).getIntTier()),"Beam",null);
+
+    public static TraceabilityPredicate QFT_MANIPULATOR = new TiredTraceabilityPredicate(MAP_QFT_MANIPULATOR,
+            Comparator.comparing((s) -> ((WrappedIntTired)MAP_QFT_MANIPULATOR.get(s)).getIntTier()),"Manipulatpr",null);
+    public static TraceabilityPredicate QFT_SHIELDING_CORE = new TiredTraceabilityPredicate(MAP_QFT_SHIELDING_CORE,
+            Comparator.comparing((s) -> ((WrappedIntTired)MAP_QFT_SHIELDING_CORE.get(s)).getIntTier()),"Core",null);
+    public static TraceabilityPredicate QFT_GLASS = new TiredTraceabilityPredicate(MAP_QFT_GLASS,
+            Comparator.comparing((s) -> ((WrappedIntTired)MAP_QFT_GLASS.get(s)).getIntTier()),"QFTGlass",null);
     private final Object2ObjectOpenHashMap<IBlockState, ITired> map;
     private final String name;
 

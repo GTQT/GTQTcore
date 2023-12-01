@@ -11,6 +11,8 @@ public class GTQTDataCode {
     public static final int GTQT_CHANNEL_5 = 9988;
     public static final int GTQT_CHANNEL_6 = 9989;
     public static final int GTQT_CHANNEL_7 = 9990;
+    public static final int GTQT_CHANNEL_8 = 9991;
+    public static final int GTQT_CHANNEL_9 = 9992;
 
     private GTQTDataCode() {/**/}
 }

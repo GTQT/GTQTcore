@@ -18,6 +18,7 @@ public class ClientProxy extends CommonProxy {
     {
         super.preLoad();
         GTQTTextures.init();
+        GTQTTextures.preInit();
     }
 
     @SubscribeEvent

@@ -1,7 +1,12 @@
 package keqing.gtqtcore.client.textures;
 
+import codechicken.lib.texture.TextureUtils;
 import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
 import gregtech.client.renderer.texture.cube.SimpleOverlayRenderer;
+import keqing.gtqtcore.api.utils.GTQTUtil;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.client.renderer.texture.TextureMap;
+
 
 public class GTQTTextures {
     //怎么写？请看
@@ -10,6 +15,7 @@ public class GTQTTextures {
     public static OrientedOverlayRenderer LIGHTNING_ROD_OVERLAY;
     public static OrientedOverlayRenderer CHEMICAL_PLANT;
     public static SimpleOverlayRenderer CATALYST_HATCH;
+    public static SimpleOverlayRenderer QUANTUM_CONSTRAINT_CASING;
     public static SimpleOverlayRenderer PD_CASING;
     public static SimpleOverlayRenderer ADVANCED_INVAR_CASING;
     public static SimpleOverlayRenderer MACERATOR_CASING;
@@ -34,10 +40,12 @@ public class GTQTTextures {
     public static SimpleOverlayRenderer HC_ALLOY_CASING;
     public static SimpleOverlayRenderer SFTC;
     public static SimpleOverlayRenderer SFTS;
+    public static TextureAtlasSprite FORCE_FIELD;
     public static void init() {
         NITINOL_CASING = new SimpleOverlayRenderer("multiblock/casings/nitinol_machine_casing");
         MACERATOR_CASING = new SimpleOverlayRenderer("multiblock/casing/macerator_casing");
         PD_CASING = new SimpleOverlayRenderer("multiblock/casing/pd_turbine_casing");
+        QUANTUM_CONSTRAINT_CASING = new SimpleOverlayRenderer("multiblock/quantum_force_transformer_casing/quantum_constraint_casing");
         ADVANCED_INVAR_CASING = new SimpleOverlayRenderer("multiblock/casing/advanced_invar_casing");
         NQ_CASING = new SimpleOverlayRenderer("multiblock/casing/nq_turbine_casing");
         HC_ALLOY_CASING = new SimpleOverlayRenderer("multiblock/casings/hc_alloy_casing");
@@ -62,8 +70,14 @@ public class GTQTTextures {
         ADV_MACHINE_VENT_ROTARING = new SimpleOverlayRenderer("multiblock/advblock/adv_machine_vent_rotating");
         ADV_MACHINE_TUBBINE = new SimpleOverlayRenderer("multiblock/advblock/adv_machine_tubbine");
         QUANTUM_CASING = new SimpleOverlayRenderer("multiblock/quantumcasing/quantumcasing");
+
         }
 
-
+        public static void register(TextureMap textureMap) {
+            FORCE_FIELD = textureMap.registerSprite(GTQTUtil.gtqtId("blocks/force_field"));
+        }
+    public static void preInit() {
+        TextureUtils.addIconRegister(GTQTTextures::register);
+    }
 
 }
