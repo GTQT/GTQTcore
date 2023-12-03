@@ -1,0 +1,7 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "epimorphism:items/tools/soldering_iron",
+    "layer1": "epimorphism:items/tools/soldering_iron_overlay"
+  }
+}

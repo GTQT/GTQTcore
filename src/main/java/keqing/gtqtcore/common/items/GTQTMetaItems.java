@@ -4,34 +4,42 @@ import gregtech.api.items.metaitem.MetaItem;
 import gregtech.api.items.metaitem.StandardMetaItem;
 import keqing.gtqtcore.common.block.blocks.GTQTADVGlass;
 
+import java.util.List;
+
 public class GTQTMetaItems {
     /*
     在此处提供物品的实例
     例如：
     public static MetaItem<?>.MetaValueItem 你物品的名字，记得全大写;
      */
-    public static MetaItem<?>.MetaValueItem ABCABC;
-    public static StandardMetaItem metaItem1;
+    public static final List<MetaItem<?>> ITEMS = GTQTMetaItem1.getMetaItems();
+    public static MetaItem<?>.MetaValueItem WRAP_CIRCUIT_ULV;
+    public static MetaItem<?>.MetaValueItem WRAP_CIRCUIT_LV;
+    public static MetaItem<?>.MetaValueItem WRAP_CIRCUIT_MV;
+    public static MetaItem<?>.MetaValueItem WRAP_CIRCUIT_HV;
+    public static MetaItem<?>.MetaValueItem WRAP_CIRCUIT_EV;
+    public static MetaItem<?>.MetaValueItem WRAP_CIRCUIT_IV;
+    public static MetaItem<?>.MetaValueItem WRAP_CIRCUIT_LuV;
+    public static MetaItem<?>.MetaValueItem WRAP_CIRCUIT_ZPM;
+    public static MetaItem<?>.MetaValueItem WRAP_CIRCUIT_UV;
+    public static MetaItem<?>.MetaValueItem WRAP_CIRCUIT_UHV;
+    public static MetaItem<?>.MetaValueItem WRAP_CIRCUIT_UEV;
+    public static MetaItem<?>.MetaValueItem WRAP_CIRCUIT_UIV;
+    public static MetaItem<?>.MetaValueItem WRAP_CIRCUIT_UXV;
+    public static MetaItem<?>.MetaValueItem WRAP_CIRCUIT_OpV;
+    public static MetaItem<?>.MetaValueItem WRAP_CIRCUIT_MAX;
 
 
-    public static MetaItem<?>.MetaValueItem TEST;
 
-    public static void init()
+    public static void initialization()
     {
-        metaItem1 = new StandardMetaItem();
-        metaItem1.setRegistryName("gtqt_meta_item_1");
-
+        GTQTMetaItem1 item1 = new GTQTMetaItem1();
     }
-
     public static void initSubItems()
     {
-        StandardMetaItem.registerItems();
+        GTQTMetaItem1.registerItems();
     }
 
-    private static void registerSubItems() {
-        //下面是一个例子，第一个数据（0）是Meta Data，不能重复
-        //"test"是该物品的Meta ID，例如circuit.ulv之类的
-        //TEST = metaItem1.addItem(0, "test");
-    }
+
 
 }

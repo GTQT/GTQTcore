@@ -11,6 +11,8 @@ import static gregicality.multiblocks.api.unification.GCYMMaterials.TantalumCarb
 import static gregicality.science.api.unification.materials.GCYSMaterials.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.info.MaterialFlags.*;
+import static gregtech.api.unification.material.info.MaterialIconSet.DULL;
+import static gregtech.api.unification.material.info.MaterialIconSet.SHINY;
 import static gregtech.api.util.GTUtility.gregtechId;
 import static keqing.gtqtcore.api.unification.TJMaterials.*;
 
@@ -45,6 +47,14 @@ public class TJFirstDegreeMaterials {
                 .components(Phosphorus, 1, Carbon, 18, Hydrogen, 15)
                 .build()
                 .setFormula("P(C6H5)3", true);
+
+        Difluorobenzophenone = new Material.Builder(25003, gregtechId("difluorobenzophenone"))
+                .dust()
+                .color(0xC44DA5)
+                .iconSet(SHINY)
+                .components(Carbon, 13, Hydrogen, 8, Oxygen, 1, Fluorine, 2)
+                .build()
+                .setFormula("(FC6H4)2CO", true);
 
         MolybdenumSulfide = new Material.Builder(25004, gregtechId("molybdenumsulfide"))
                 .fluid()
@@ -120,6 +130,20 @@ public class TJFirstDegreeMaterials {
                 .color(0x472a1a)
                 .build();
 
+        //  25038 Hydroquinone
+        Hydroquinone = new Material.Builder(25017, gregtechId("hydroquinone"))
+                .fluid()
+                .color(0x83251A)
+                .components(Carbon, 6, Hydrogen, 6, Oxygen, 2)
+                .build()
+                .setFormula("C6H4(OH)2", true);
+
+        Fluorobenzene = new Material.Builder(25018, gregtechId("fluorobenzene"))
+                .fluid()
+                .color(0x7CCA88)
+                .components(Carbon, 6, Hydrogen, 5, Fluorine, 1)
+                .build();
+
         Starlight = new Material.Builder(25019, gregtechId("starlight"))
                 .fluid()
                 .color(0xebfafc)
@@ -187,8 +211,39 @@ public class TJFirstDegreeMaterials {
                 .build()
                 .setFormula("Co-60", false);
 
-        //25029 - 25044 RESERVED
+        Fluorotoluene = new Material.Builder(25029, gregtechId("fluorotoluene"))
+                .fluid()
+                .color(0x6EC5B8)
+                .components(Carbon, 7, Hydrogen, 7, Fluorine, 1)
+                .build();
 
+        Resorcinol = new Material.Builder(25030, gregtechId("resorcinol"))
+                .fluid()
+                .color(0x9DA38D)
+                .components(Carbon, 6, Hydrogen, 6, Oxygen, 2)
+                .build();
+
+        ZnFeAlClCatalyst = new Material.Builder(25031, gregtechId("zn_fe_al_cl_catalyst"))
+                .dust()
+                .color(0xC522A9)
+                .iconSet(DULL)
+                .components(Zinc, 1, Iron, 1, Aluminium, 1, Chlorine, 1)
+                .build();
+
+        NitrileButadieneRubber = new Material.Builder(25032, gregtechId("nitrile_butadiene_rubber"))
+                .polymer()
+                .color(0x211A18)
+                .flags(DISABLE_DECOMPOSITION, GENERATE_PLATE, GENERATE_RING)
+                .components(Carbon, 7, Hydrogen, 9, Nitrogen, 1)
+                .fluidTemp(433)
+                .build();
+
+        PolyPhosphonitrileFluoroRubber = new Material.Builder(25033, gregtechId("poly_phosphonitrile_fluoro_rubber"))
+                .polymer()
+                .color(0x372B28)
+                .flags(DISABLE_DECOMPOSITION, GENERATE_PLATE, GENERATE_RING)
+                .components(Carbon, 24, Hydrogen, 16, Oxygen, 8, Nitrogen, 4, Phosphorus, 4, Fluorine, 40)
+                .build();
 
         Silane = new Material.Builder(25045, gregtechId("silane"))
                 .fluid()

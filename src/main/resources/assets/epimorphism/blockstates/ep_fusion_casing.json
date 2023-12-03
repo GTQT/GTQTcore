@@ -1,0 +1,80 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "minecraft:cube_all",
+    "textures": {
+      "all": "gregtech:blocks/rendering_error"
+    }
+  },
+  "variants": {
+    "variant": {
+      "compressed_fusion_reactor_mki_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "epimorphism:blocks/casings/ep_fusion_casing/compressed_fusion_reactor_mki_casing"
+        }
+      },
+      "compressed_fusion_reactor_mkii_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "epimorphism:blocks/casings/ep_fusion_casing/compressed_fusion_reactor_mkii_casing"
+        }
+      },
+      "compressed_fusion_reactor_mkiii_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "epimorphism:blocks/casings/ep_fusion_casing/compressed_fusion_reactor_mkiii_casing"
+        }
+      },
+      "beam_core_0": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "epimorphism:blocks/casings/ep_fusion_casing/beam_core_0"
+        }
+      },
+      "beam_core_1": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "epimorphism:blocks/casings/ep_fusion_casing/beam_core_1"
+        }
+      },
+      "beam_core_2": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "epimorphism:blocks/casings/ep_fusion_casing/beam_core_2"
+        }
+      },
+      "beam_core_3": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "epimorphism:blocks/casings/ep_fusion_casing/beam_core_3"
+        }
+      },
+      "beam_core_4": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "epimorphism:blocks/casings/ep_fusion_casing/beam_core_4"
+        }
+      },
+      "machine_casing_fusion_4": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "epimorphism:blocks/casings/ep_fusion_casing/machine_casing_fusion_4"
+        }
+      },
+      "machine_casing_fusion_5": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "epimorphism:blocks/casings/ep_fusion_casing/machine_casing_fusion_5"
+        }
+      },
+      "machine_casing_fusion_6": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "epimorphism:blocks/casings/ep_fusion_casing/machine_casing_fusion_6"
+        }
+      }
+    }
+  }
+}
+

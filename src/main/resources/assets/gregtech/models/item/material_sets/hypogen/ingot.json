@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "epimorphism:items/material_sets/hypogen/ingot",
+    "layer1": "epimorphism:items/material_sets/hypogen/ingot_overlay"
+  }
+}

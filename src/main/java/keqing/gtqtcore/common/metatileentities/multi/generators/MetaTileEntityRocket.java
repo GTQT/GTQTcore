@@ -47,10 +47,10 @@ public class MetaTileEntityRocket extends FuelMultiblockController {
 
     public MetaTileEntityRocket(ResourceLocation metaTileEntityId, int tier) {
         super(metaTileEntityId,GTQTcoreRecipeMaps.ROCKET, tier);
-        this.recipeMapWorkable = new TurbineCombustionEngineWorkableHandler(this, tier > GTValues.EV);
+        this.recipeMapWorkable = new TurbineCombustionEngineWorkableHandler(this, tier > GTValues.UV);
         this.recipeMapWorkable.setMaximumOverclockVoltage(GTValues.V[tier]);
         this.tier = tier;
-        this.isExtreme = tier > GTValues.EV;
+        this.isExtreme = tier > GTValues.UV;
     }
 
 
@@ -154,7 +154,7 @@ public class MetaTileEntityRocket extends FuelMultiblockController {
     }
 
     private static IBlockState getCasingState1() {
-        return MetaBlocks.WIRE_COIL.getState(BlockWireCoil.CoilType.TUNGSTENSTEEL);
+        return MetaBlocks.WIRE_COIL.getState(BlockWireCoil.CoilType.TRITANIUM);
     }
 
     private static IBlockState getCasingState2() {
@@ -226,7 +226,7 @@ public class MetaTileEntityRocket extends FuelMultiblockController {
             super(tileEntity);
             this.combustionEngine = (MetaTileEntityRocket) tileEntity;
             this.isExtreme = isExtreme;
-            this.tier = isExtreme ? GTValues.IV : GTValues.EV;
+            this.tier = isExtreme ? GTValues.UV : GTValues.ZPM;
         }
 
 

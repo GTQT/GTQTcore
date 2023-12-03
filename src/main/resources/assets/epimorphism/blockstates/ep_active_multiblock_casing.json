@@ -1,0 +1,56 @@
+{
+  "forge_marker": 1,
+  "variants": {
+    "active=false,variant=flotation_intake_casing": {
+      "model": "minecraft:cube_all",
+      "textures": {
+        "all": "epimorphism:blocks/casings/ep_active_multiblock_casing/flotation_intake_casing"
+      }
+    },
+    "active=true,variant=flotation_intake_casing": {
+      "model": "minecraft:cube_all",
+      "textures": {
+        "all": "epimorphism:blocks/casings/ep_active_multiblock_casing/flotation_intake_casing_active"
+      }
+    },
+    "active=false,variant=hyper_core_mk1": {
+      "model": "minecraft:cube_all",
+      "textures": {
+        "all": "epimorphism:blocks/casings/ep_active_multiblock_casing/hyper_core_mk1"
+      }
+    },
+    "active=true,variant=hyper_core_mk1": {
+      "model": "gregtech:cube_2_layer_all",
+      "textures": {
+        "bot_all": "epimorphism:blocks/casings/ep_active_multiblock_casing/hyper_core_mk1",
+        "top_all": "epimorphism:blocks/casings/ep_active_multiblock_casing/hyper_core_bloom"
+      }
+    },
+    "active=false,variant=hyper_core_mk2": {
+      "model": "minecraft:cube_all",
+      "textures": {
+        "all": "epimorphism:blocks/casings/ep_active_multiblock_casing/hyper_core_mk2"
+      }
+    },
+    "active=true,variant=hyper_core_mk2": {
+      "model": "gregtech:cube_2_layer_all",
+      "textures": {
+        "bot_all": "epimorphism:blocks/casings/ep_active_multiblock_casing/hyper_core_mk2",
+        "top_all": "epimorphism:blocks/casings/ep_active_multiblock_casing/hyper_core_bloom"
+      }
+    },
+    "active=false,variant=hyper_core_mk3": {
+      "model": "minecraft:cube_all",
+      "textures": {
+        "all": "epimorphism:blocks/casings/ep_active_multiblock_casing/hyper_core_mk3"
+      }
+    },
+    "active=true,variant=hyper_core_mk3": {
+      "model": "gregtech:cube_2_layer_all",
+      "textures": {
+        "bot_all": "epimorphism:blocks/casings/ep_active_multiblock_casing/hyper_core_mk3",
+        "top_all": "epimorphism:blocks/casings/ep_active_multiblock_casing/hyper_core_bloom"
+      }
+    }
+  }
+}

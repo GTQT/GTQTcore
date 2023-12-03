@@ -3,16 +3,17 @@ package keqing.gtqtcore.common;
 import gregtech.api.block.VariantItemBlock;
 import gregtech.api.recipes.recipeproperties.FusionEUToStartProperty;
 import gregtech.common.items.MetaItems;
+import keqing.gtqtcore.api.recipes.properties.CACasingTierProperty;
+import keqing.gtqtcore.api.recipes.properties.QFTCasingTierProperty;
 import keqing.gtqtcore.api.utils.GTQTLog;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTBlockWireCoil;
 import keqing.gtqtcore.common.items.metaitems.GTQTMetaToolItems;
 import keqing.gtqtcore.loaders.recipes.GTQTRecipes;
 import keqing.gtqtcore.loaders.recipes.GTQTRecipesManager;
-import keqing.gtqtcore.loaders.recipes.handlers.HeatExchangeRecipes;
-import keqing.gtqtcore.loaders.recipes.handlers.IntegratedMiningDivision;
-import keqing.gtqtcore.loaders.recipes.handlers.KeQingNET;
+import keqing.gtqtcore.loaders.recipes.handlers.*;
 import net.minecraft.block.Block;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -53,7 +54,11 @@ public class CommonProxy {
         IntegratedMiningDivision.init();
         HeatExchangeRecipes.init();
         KeQingNET.init();
+        QTF.init();
+        ComponentAssemblyLineRecipes.init();
+        RocketEngineRecipes.init();
         GTQTRecipesManager.init();
+        WrapCircuits.init();
 
 
         for (GTQTBlockWireCoil.CoilType type : GTQTBlockWireCoil.CoilType.values()) {
@@ -87,6 +92,7 @@ public class CommonProxy {
         registry.register(GTQTMetaBlocks.QUANTUM_CASING);
         registry.register(GTQTMetaBlocks.TURBINE_CASING);
         registry.register(GTQTMetaBlocks.QUANTUM_CONSTRAINT_CASING);
+        registry.register(GTQTMetaBlocks.COMPONENT_ASSEMBLY_LINE);
 
     }
 
@@ -109,6 +115,7 @@ public class CommonProxy {
         registry.register(createItemBlock(GTQTMetaBlocks.QUANTUM_CASING, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.TURBINE_CASING, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.QUANTUM_CONSTRAINT_CASING, VariantItemBlock::new));
+        registry.register(createItemBlock(GTQTMetaBlocks.COMPONENT_ASSEMBLY_LINE, VariantItemBlock::new));
     }
 
     private static <T extends Block> ItemBlock createItemBlock(T block, Function<T, ItemBlock> producer) {
@@ -124,6 +131,25 @@ public class CommonProxy {
         FusionEUToStartProperty.registerFusionTier(9, "(MK4)");
         FusionEUToStartProperty.registerFusionTier(10, "(MK5)");
         FusionEUToStartProperty.registerFusionTier(11, "(MK6)");
+        QFTCasingTierProperty.registerQFTCasingTier(1, I18n.format("epimorphism.machine.quantum_force_transformer.tier.1"));
+        QFTCasingTierProperty.registerQFTCasingTier(2, I18n.format("epimorphism.machine.quantum_force_transformer.tier.2"));
+        QFTCasingTierProperty.registerQFTCasingTier(3, I18n.format("epimorphism.machine.quantum_force_transformer.tier.3"));
+        QFTCasingTierProperty.registerQFTCasingTier(4, I18n.format("epimorphism.machine.quantum_force_transformer.tier.4"));
+
+        CACasingTierProperty.registerCACasingTier(1, I18n.format("epimorphism.machine.component_assembly_line.tier.1"));
+        CACasingTierProperty.registerCACasingTier(2, I18n.format("epimorphism.machine.component_assembly_line.tier.2"));
+        CACasingTierProperty.registerCACasingTier(3, I18n.format("epimorphism.machine.component_assembly_line.tier.3"));
+        CACasingTierProperty.registerCACasingTier(4, I18n.format("epimorphism.machine.component_assembly_line.tier.4"));
+        CACasingTierProperty.registerCACasingTier(5, I18n.format("epimorphism.machine.component_assembly_line.tier.5"));
+        CACasingTierProperty.registerCACasingTier(6, I18n.format("epimorphism.machine.component_assembly_line.tier.6"));
+        CACasingTierProperty.registerCACasingTier(7, I18n.format("epimorphism.machine.component_assembly_line.tier.7"));
+        CACasingTierProperty.registerCACasingTier(8, I18n.format("epimorphism.machine.component_assembly_line.tier.8"));
+        CACasingTierProperty.registerCACasingTier(9, I18n.format("epimorphism.machine.component_assembly_line.tier.9"));
+        CACasingTierProperty.registerCACasingTier(10, I18n.format("epimorphism.machine.component_assembly_line.tier.10"));
+        CACasingTierProperty.registerCACasingTier(11, I18n.format("epimorphism.machine.component_assembly_line.tier.11"));
+        CACasingTierProperty.registerCACasingTier(12, I18n.format("epimorphism.machine.component_assembly_line.tier.12"));
+        CACasingTierProperty.registerCACasingTier(13, I18n.format("epimorphism.machine.component_assembly_line.tier.13"));
+        CACasingTierProperty.registerCACasingTier(14, I18n.format("epimorphism.machine.component_assembly_line.tier.14"));
     }
 
 }

@@ -1,0 +1,6 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "epimorphism:items/material_sets/infinity/stick_long"
+  }
+}

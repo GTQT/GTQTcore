@@ -43,6 +43,54 @@
         "textures": {
           "all": "gregtech:blocks/multiblock/casing/advanced_invar_casing"
         }
+      },
+      "hyper_core_mk1": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casing/hyper_core_mk1"
+        }
+      },
+      "hyper_core_mk2": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casing/hyper_core_mk2"
+        }
+      },
+      "hyper_core_mk3": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casing/hyper_core_mk3"
+        }
+      },
+      "hyper_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casing/hyper_casing"
+        }
+      },
+      "talonite_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casing/talonite_casing"
+        }
+      },
+      "polybenzimidazole_pipe": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casing/polybenzimidazole_pipe"
+        }
+      },
+      "iridium_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casing/iridium_casing"
+        }
+      },
+      "advanced_filter_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casing/advanced_filter_casing"
+        }
       }
     }
   }

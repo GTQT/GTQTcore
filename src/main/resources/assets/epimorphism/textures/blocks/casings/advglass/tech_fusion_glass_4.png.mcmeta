@@ -1,0 +1,15 @@
+{
+    "ctm": {
+        "ctm_version": 1,
+        "type": "CTM",
+        "layer": "BLOOM",
+        "gregtech": true,
+        "textures": [
+            "epimorphism:blocks/casings/advglass/tech_fusion_glass_4_ctm"
+        ],
+        "extra": {
+            "connect_inside": true,
+			"light": 15
+        }
+    }
+}

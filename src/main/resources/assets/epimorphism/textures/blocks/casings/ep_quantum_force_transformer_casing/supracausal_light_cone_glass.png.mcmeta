@@ -1,0 +1,13 @@
+{
+  "ctm": {
+    "ctm_version": 1,
+    "type": "CTM",
+    "layer": "CUTOUT",
+    "textures": [
+      "epimorphism:blocks/casing/ep_quantum_force_transformer_casing/supracausal_light_cone_glass_ctm"
+    ],
+    "extra": {
+      "connect_inside": true
+    }
+  }
+}

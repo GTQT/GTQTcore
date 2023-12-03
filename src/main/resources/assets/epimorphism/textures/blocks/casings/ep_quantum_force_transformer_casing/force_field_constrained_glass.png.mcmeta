@@ -1,0 +1,13 @@
+{
+  "ctm": {
+    "ctm_version": 1,
+    "type": "CTM",
+    "layer": "CUTOUT",
+    "textures": [
+      "epimorphism:blocks/casings/ep_quantum_force_transformer_casing/force_field_constrained_glass_ctm"
+    ],
+    "extra": {
+      "connect_inside": true
+    }
+  }
+}

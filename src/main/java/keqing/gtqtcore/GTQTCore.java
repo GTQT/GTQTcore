@@ -37,7 +37,7 @@ public class GTQTCore {
     public void preInit(FMLPreInitializationEvent event)
     {
         GTQTLog.init(event.getModLog());
-        GTQTMetaItems.init();
+        GTQTMetaItems.initialization();
         GTQTMetaTileEntities.initialization();
         GTQTMetaBlocks.init();
         proxy.preLoad();

@@ -252,7 +252,23 @@ gtqtcore.machine.quantum_force_transformer.tier.2=寰宇 (2级)
 gtqtcore.machine.quantum_force_transformer.tier.3=无尽时空 (3级)
 gtqtcore.machine.quantum_force_transformer.tier.4=超因果连续体 (4级)
 
+gtqtcore.machine.large_naquadah_reactor.name=大型硅岩反应堆
+gtqtcore.machine.large_naquadah_reactor.tooltip.1=取之有度，用之有节
+gtqtcore.machine.large_naquadah_reactor.tooltip.2=最高产生§3UV§7级的能量
 
+gtqtcore.machine.hyper_reactor_mk1.name=超能反应堆 Mk I
+gtqtcore.machine.hyper_reactor_mk1.tooltip.1=磁约束超能聚变
+gtqtcore.machine.hyper_reactor_mk1.tooltip.2=最高产生§4UHV§7级的能量
+gtqtcore.machine.hyper_reactor_mk2.name=超能反应堆 Mk II
+gtqtcore.machine.hyper_reactor_mk2.tooltip.1=力场约束超能聚变
+gtqtcore.machine.hyper_reactor_mk2.tooltip.2=最高产生§aUEV§7级的能量
+gtqtcore.machine.hyper_reactor_mk3.name=超能反应堆 Mk III
+gtqtcore.machine.hyper_reactor_mk3.tooltip.1=自控制超能聚变
+gtqtcore.machine.hyper_reactor_mk3.tooltip.2=最高产生§2UIV§7级的能量
+
+gtqtcore.machine.fuel_refine_factory.name=燃料精炼厂
+recipemap.fuel_refine_factory_recipes.name=燃料精炼
+recipemap.naquadah_reactor_recipes.name=硅岩反应堆
 tile.quantum_force_transformer_casing.quantum_constraint_casing.name=量子约束机器外壳
 tile.quantum_force_transformer_casing.neutron_pulse_manipulator_casing.name=中子脉冲控制器机械方块
 tile.quantum_force_transformer_casing.neutron_pulse_manipulator_casing.tooltip=§b量子操纵者§7-脉冲控制器等级：§cI§7
@@ -340,3 +356,9 @@ gtqtcore.machine.dangote_distillery.tooltip.7=§3UV§7级以上 -> §r12 * (电�
 gtqtcore.machine.hm.tooltip.1=最大并行数：
 gtqtcore.machine.hm.tooltip.2=§3UV§7级以下 -> §r线圈等级 * 电压等级§7
 gtqtcore.machine.hm.tooltip.3=§3UV§7级以上 -> §r线圈等级 * 电压等级 * 4§7
+epimorphism.machine.quantum_force_transformer.tier=偷鸡
+epimorphism.machine.quantum_force_transformer.tier.1=等级一
+epimorphism.machine.quantum_force_transformer.tier.2=等级二
+epimorphism.machine.quantum_force_transformer.tier.3=等级三
+epimorphism.machine.quantum_force_transformer.tier.4=等级四
+epimorphism.machine.quantum_force_transformer.tier.5=等级五

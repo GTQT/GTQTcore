@@ -1,0 +1,39 @@
+{
+  "forge_marker": 1,
+  "variants": {
+    "variant": {
+      "naquadria_charge": {
+        "model": "minecraft:cube_bottom_top",
+        "textures": {
+          "top": "epimorphism:blocks/explosives/naquadria_charge_top",
+          "side": "epimorphism:blocks/explosives/naquadria_charge_side",
+          "bottom": "#side"
+        }
+      },
+      "taranium_charge": {
+        "model": "minecraft:cube_bottom_top",
+        "textures": {
+          "top": "epimorphism:blocks/explosives/taranium_charge_top",
+          "side": "epimorphism:blocks/explosives/taranium_charge_side",
+          "bottom": "#side"
+        }
+      },
+      "leptonic_charge": {
+        "model": "minecraft:cube_bottom_top",
+        "textures": {
+          "top": "epimorphism:blocks/explosives/leptonic_charge_top",
+          "side": "epimorphism:blocks/explosives/leptonic_charge_side",
+          "bottom": "#side"
+        }
+      },
+      "quantum_chromodynamic_charge": {
+        "model": "minecraft:cube_bottom_top",
+        "textures": {
+          "top": "epimorphism:blocks/explosives/quantum_chromodynamic_charge_top",
+          "side": "epimorphism:blocks/explosives/quantum_chromodynamic_charge_side",
+          "bottom": "#side"
+        }
+      }
+    }
+  }
+}

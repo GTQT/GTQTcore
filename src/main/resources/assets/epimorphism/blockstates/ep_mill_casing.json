@@ -1,0 +1,43 @@
+{
+  "forge_marker": 1,
+  "variants": {
+    "variant": {
+      "isa_mill_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "epimorphism:blocks/casings/ep_mill_casing/isa_mill_casing"
+        }
+      },
+      "isa_mill_casing_gearbox": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "epimorphism:blocks/casings/ep_mill_casing/isa_mill_casing_gearbox"
+        }
+      },
+      "isa_mill_casing_pipe": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "epimorphism:blocks/casings/ep_mill_casing/isa_mill_casing_pipe"
+        }
+      },
+      "flotation_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "epimorphism:blocks/casings/ep_mill_casing/flotation_casing"
+        }
+      },
+      "flotation_casing_gearbox": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "epimorphism:blocks/casings/ep_mill_casing/flotation_casing_gearbox"
+        }
+      },
+      "flotation_casing_pipe": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "epimorphism:blocks/casings/ep_mill_casing/flotation_casing_pipe"
+        }
+      }
+    }
+  }
+}

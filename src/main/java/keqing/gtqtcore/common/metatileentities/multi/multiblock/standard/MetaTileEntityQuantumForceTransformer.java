@@ -13,6 +13,7 @@ import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.MultiblockShapeInfo;
 import gregtech.api.pattern.PatternMatchContext;
+import gregtech.api.recipes.recipeproperties.IRecipePropertyStorage;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.shader.postprocessing.BloomEffect;
@@ -82,7 +83,8 @@ public class MetaTileEntityQuantumForceTransformer extends RecipeMapMultiblockCo
     private static List<IBlockState> finalListGlass;
 
     public MetaTileEntityQuantumForceTransformer(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, GTQTcoreRecipeMaps.QFT);
+        super(metaTileEntityId, GTQTcoreRecipeMaps.QUANTUM_FORCE_TRANSFORMER_RECIPES);
+        this.recipeMapWorkable = new MetaTileEntityQuantumForceTransformerHandler(this);
     }
 
     @Override
@@ -161,6 +163,23 @@ public class MetaTileEntityQuantumForceTransformer extends RecipeMapMultiblockCo
         tooltip.add(I18n.format("gtqtcore.machine.quantum_force_transformer.tooltip.1"));
         tooltip.add(I18n.format("gtqtcore.machine.quantum_force_transformer.tooltip.2"));
         tooltip.add(I18n.format("gtqtcore.machine.quantum_force_transformer.tooltip.3"));
+        tooltip.add(I18n.format("结构内玻璃每升级一次，耗能减百分之五"));
+        tooltip.add(I18n.format("结构内核心每升级一次，耗时减百分之十"));
+        tooltip.add(I18n.format("结构内主体升级一次，并行翻倍"));
+    }
+
+    protected void addDisplayText(List<ITextComponent> textList) {
+        super.addDisplayText(textList);
+        if (this.isStructureFormed()) {
+
+            textList.add(new TextComponentTranslation("gtqtcore.multiblock.md.level", coreTier));
+            textList.add(new TextComponentTranslation("gtqtcore.multiblock.md.glass", glassTier));
+            textList.add(new TextComponentTranslation("gtqtcore.casingTire", manioulatorTier));
+            textList.add(new TextComponentTranslation("gtqtcore.tire", ManipulatorCasingTier));
+            textList.add(new TextComponentTranslation("gregtech.multiblock.cracking_unit.energy", 100 - 10 * this.glassTier));
+            textList.add(new TextComponentTranslation("gtqtcore.multiblock.fu.level", 10*coreTier));
+        }
+
     }
 
 
@@ -168,8 +187,8 @@ public class MetaTileEntityQuantumForceTransformer extends RecipeMapMultiblockCo
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
         Object manioulatorTier = context.get("ManipulatprTiredStats");
-        Object coreTier = context.get("CoreTubeTiredStats");
-        Object glassTier = context.get("QFTGlassTypeTiredStats");
+        Object coreTier = context.get("CoreTiredStats");
+        Object glassTier = context.get("QFTGlassTiredStats");
         this.manioulatorTier = GTQTUtil.getOrDefault(() -> manioulatorTier instanceof WrappedIntTired,
                 () -> ((WrappedIntTired)manioulatorTier).getIntTier(),
                 0);
@@ -355,4 +374,35 @@ public class MetaTileEntityQuantumForceTransformer extends RecipeMapMultiblockCo
             OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, lastBrightnessX, lastBrightnessY);
         }
     };
+    protected int getGlassTire() {
+        return this.glassTier;
+    }
+    public static int getMaxParallel(int manioulatorTier) {
+        return manioulatorTier;
+    }
+    private class MetaTileEntityQuantumForceTransformerHandler extends MultiblockRecipeLogic {
+
+        public MetaTileEntityQuantumForceTransformerHandler(RecipeMapMultiblockController tileEntity) {
+            super(tileEntity);
+        }
+
+        public void setMaxProgress(int maxProgress) {
+            this.maxProgressTime = maxProgress*(100-coreTier*5)/100;
+
+        }
+
+        @Override
+        public int getParallelLimit() {
+            return getMaxParallel(manioulatorTier);
+        }
+
+        protected void modifyOverclockPost(int[] resultOverclock, @Nonnull IRecipePropertyStorage storage) {
+            super.modifyOverclockPost(resultOverclock, storage);
+            int glassTier = ((MetaTileEntityQuantumForceTransformer)this.metaTileEntity).getGlassTire();
+            if (glassTier > 0) {
+                resultOverclock[0] = (int)((double)resultOverclock[0] * (100 - (double)glassTier*3)/100);
+                resultOverclock[0] = Math.max(1, resultOverclock[0]);
+            }
+        }
+    }
 }

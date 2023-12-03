@@ -1,0 +1,19 @@
+{
+    "animation": {
+    "interpolate": true,
+    "frametime": 2,
+    "frames": [0, 1, 2, 3, 4, 5, 6, 7]
+   },
+    "ctm": {
+        "ctm_version": 1,
+        "type": "CTM",
+        "layer": "BLOOM",
+        "gregtech": true,
+        "textures": [
+            "epimorphism:blocks/casings/ep_fusion_casing/beam_core_4_ctm"
+        ],
+        "extra": {
+            "connect_inside": true
+        }
+    }
+}

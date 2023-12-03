@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "gregtech:items/metaitems/circuit.nand_chip",
+    "layer1": "epimorphism:items/metaitems/wrap_overlay"
+  }
+}

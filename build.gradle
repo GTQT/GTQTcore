@@ -113,6 +113,7 @@ dependencies {
     implementation rfg.deobf(files("libs/CTM-MC1.12.2-1.0.2.31.jar"))
     implementation rfg.deobf(files("libs/gcys-1.0.jar"))
     implementation rfg.deobf(files("libs/appliedenergistics2-rv6-stable-7-extended_life-v0.55.22.jar"))
+
     if (project.use_mixins.toBoolean()) {
         // Change your mixin refmap name here:
         String mixin = modUtils.enableMixins('org.spongepowered:mixin:0.8.3', "mixins.${project.archives_base_name}.refmap.json")

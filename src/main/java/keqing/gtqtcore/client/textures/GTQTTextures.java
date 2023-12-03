@@ -1,25 +1,33 @@
 package keqing.gtqtcore.client.textures;
 
 import codechicken.lib.texture.TextureUtils;
+import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
 import gregtech.client.renderer.texture.cube.SimpleOverlayRenderer;
 import keqing.gtqtcore.api.utils.GTQTUtil;
+import keqing.gtqtcore.client.renderer.textures.OverlayRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
 
 
 public class GTQTTextures {
+    public static OverlayRenderer MULTIPART_BUFFER_HATCH = new OverlayRenderer("multipart/overlay_buffer_hatch");
+    public static OrientedOverlayRenderer ROCKET_ENGINE_OVERLAY = new OrientedOverlayRenderer("machines/rocket_engine");
+    public static OrientedOverlayRenderer NAQUADAH_REACTOR_OVERLAY = new OrientedOverlayRenderer("machines/naquadah_reactor");
     //怎么写？请看
     //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/client/textures/GSTextures.java
-
+    public static TextureAtlasSprite HALO;
     public static OrientedOverlayRenderer LIGHTNING_ROD_OVERLAY;
     public static OrientedOverlayRenderer CHEMICAL_PLANT;
     public static SimpleOverlayRenderer CATALYST_HATCH;
+    public static SimpleOverlayRenderer HYPER_CASING;
+    public static SimpleOverlayRenderer POLYBENZIMIDAZOLE_PIPE;
     public static SimpleOverlayRenderer QUANTUM_CONSTRAINT_CASING;
     public static SimpleOverlayRenderer PD_CASING;
     public static SimpleOverlayRenderer ADVANCED_INVAR_CASING;
     public static SimpleOverlayRenderer MACERATOR_CASING;
     public static SimpleOverlayRenderer NQ_CASING;
+    public static SimpleOverlayRenderer IRIDIUM_CASING;
     public static SimpleOverlayRenderer INF_WATER;
     public static SimpleOverlayRenderer NITINOL_CASING;
     public static SimpleOverlayRenderer COMPRESSED_FUSION_REACTOR_MKI_CASING;
@@ -45,9 +53,12 @@ public class GTQTTextures {
         NITINOL_CASING = new SimpleOverlayRenderer("multiblock/casings/nitinol_machine_casing");
         MACERATOR_CASING = new SimpleOverlayRenderer("multiblock/casing/macerator_casing");
         PD_CASING = new SimpleOverlayRenderer("multiblock/casing/pd_turbine_casing");
+        HYPER_CASING = new SimpleOverlayRenderer("multiblock/casing/hyper_casing");
+        POLYBENZIMIDAZOLE_PIPE = new SimpleOverlayRenderer("multiblock/casing/talonite_casing");
         QUANTUM_CONSTRAINT_CASING = new SimpleOverlayRenderer("multiblock/quantum_force_transformer_casing/quantum_constraint_casing");
         ADVANCED_INVAR_CASING = new SimpleOverlayRenderer("multiblock/casing/advanced_invar_casing");
         NQ_CASING = new SimpleOverlayRenderer("multiblock/casing/nq_turbine_casing");
+        IRIDIUM_CASING = new SimpleOverlayRenderer("multiblock/casing/iridium_casing");
         HC_ALLOY_CASING = new SimpleOverlayRenderer("multiblock/casings/hc_alloy_casing");
         SFTC = new SimpleOverlayRenderer("multiblock/casings/supercritical_fluid_turbine_casing");
         SFTS = new SimpleOverlayRenderer("multiblock/casings/supercritical_fluid_turbine_shaft");
@@ -75,6 +86,7 @@ public class GTQTTextures {
 
         public static void register(TextureMap textureMap) {
             FORCE_FIELD = textureMap.registerSprite(GTQTUtil.gtqtId("blocks/force_field"));
+            HALO = textureMap.registerSprite(GTQTUtil.gtqtId("items/halo"));
         }
     public static void preInit() {
         TextureUtils.addIconRegister(GTQTTextures::register);

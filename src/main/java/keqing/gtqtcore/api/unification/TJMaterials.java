@@ -80,6 +80,14 @@ public class TJMaterials {
     public static Material PalladiumChloride; // PdCl2
     public static Material AllylAcetate;
     public static Material SilverLeadOxide;
+    public static Material Difluorobenzophenone;
+    public static Material Fluorobenzene;
+    public static Material Hydroquinone;
+    public static Material ZnFeAlClCatalyst;
+    public static Material PolyPhosphonitrileFluoroRubber;
+    public static Material NitrileButadieneRubber;
+    public static Material Resorcinol;
+    public static Material Fluorotoluene;
     public static Material LuminescentSiliconNanocrystals;
     public static Material SeleniumMonobromide;
     public static Material HydraziniumChloride;

@@ -1,0 +1,14 @@
+{
+    "ctm": {
+        "ctm_version": 1,
+        "type": "CTM",
+        "layer": "BLOOM",
+        "gregtech": true,
+        "textures": [
+            "epimorphism:blocks/casings/ep_quantum_force_transformer_casing/spacetime_supercondenser_glass_ctm"
+        ],
+        "extra": {
+            "light": 2
+        }
+    }
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "epimorphism:items/metaitems/circuit.supracausal_assembly",
+    "layer1": "epimorphism:items/metaitems/wrap_overlay"
+  }
+}

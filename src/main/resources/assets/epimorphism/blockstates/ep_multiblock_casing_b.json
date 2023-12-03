@@ -1,0 +1,104 @@
+{
+  "forge_marker": 1,
+  "variants": {
+    "variant": {
+      "general_processing_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "epimorphism:blocks/casings/ep_multiblock_casing_b/general_processing_casing"
+        }
+      },
+      "maraging_steel_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "epimorphism:blocks/casings/ep_multiblock_casing_b/maraging_steel_250_casing"
+        }
+      },
+      "babbitt_alloy_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "epimorphism:blocks/casings/solid/babbitt_alloy_casing"
+        }
+      },
+      "zirconium_carbide_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "epimorphism:blocks/casings/solid/zirconium_carbide_casing"
+        }
+      },
+      "hastelloy_x78_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "epimorphism:blocks/casings/solid/hastelloy_x78_casing"
+        }
+      },
+      "stellar_containment_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "epimorphism:blocks/casings/solid/stellar_containment_casing"
+        }
+      },
+      "hastelloy_k243_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "epimorphism:blocks/casings/solid/hastelloy_k243_casing"
+        }
+      },
+      "supercritical_fluid_turbine_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "epimorphism:blocks/casings/ep_multiblock_casing_b/supercritical_fluid_turbine_casing"
+        }
+      },
+      "corrosion_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "epimorphism:blocks/casings/ep_multiblock_casing_b/corrosion_casing"
+        }
+      },
+      "precise_assembler_casing_mk1": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "epimorphism:blocks/casings/solid/precise_assembler_casing_mk1"
+        }
+      },
+      "precise_assembler_casing_mk2": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "epimorphism:blocks/casings/solid/precise_assembler_casing_mk2"
+        }
+      },
+      "precise_assembler_casing_mk3": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "epimorphism:blocks/casings/solid/precise_assembler_casing_mk3"
+        }
+      },
+      "cyclotron_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "epimorphism:blocks/casings/solid/cyclotron_casing"
+        }
+      },
+      "cyclotron_coil": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "epimorphism:blocks/casings/solid/cyclotron_coil"
+        }
+      },
+      "supercritical_fluid_turbine_shaft_block": {
+        "model": "epimorphism:shaft",
+        "textures": {
+          "side": "epimorphism:blocks/casings/ep_multiblock_casing_b/supercritical_fluid_turbine_shaft_block_side",
+          "end": "epimorphism:blocks/casings/ep_multiblock_casing_b/supercritical_fluid_turbine_shaft_block_end"
+        }
+      },
+      "alloy_smelting_pipe_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "epimorphism:blocks/casings/ep_multiblock_casing_b/alloy_smelting_pipe_casing"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+    "parent": "item/handheld",
+    "textures": {
+      "layer0": "epimorphism:items/void",
+      "layer1": "epimorphism:items/tools/small_bending_cylinder"
+    }
+  }

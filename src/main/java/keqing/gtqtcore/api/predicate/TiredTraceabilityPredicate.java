@@ -10,10 +10,7 @@ import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import keqing.gtqtcore.api.blocks.ITired;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.common.block.blocks.GTQTADVGlass;
-import keqing.gtqtcore.common.block.blocks.GTQTMultiblockCasing;
-import keqing.gtqtcore.common.block.blocks.GTQTQuantumForceTransformerCasing;
-import keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing;
+import keqing.gtqtcore.common.block.blocks.*;
 import net.minecraft.block.state.IBlockState;
 
 import javax.annotation.Nullable;
@@ -37,6 +34,7 @@ public class TiredTraceabilityPredicate extends TraceabilityPredicate {
         MAP_QFT_MANIPULATOR = new Object2ObjectOpenHashMap<>();
         MAP_QFT_SHIELDING_CORE = new Object2ObjectOpenHashMap<>();
         MAP_QFT_GLASS = new Object2ObjectOpenHashMap<>();
+        MAP_CAL_CASING = new Object2ObjectOpenHashMap<>();
 
         for (BlockMachineCasing.MachineCasingType type : Arrays.stream(BlockMachineCasing.MachineCasingType.values()).filter((c)-> c.ordinal()<10).collect(Collectors.toList())) {
             TiredTraceabilityPredicate.MAP_MACHINE_CASING.put(MetaBlocks.MACHINE_CASING.getState(type),new WrappedIntTired(type,type.ordinal()));
@@ -136,6 +134,34 @@ public class TiredTraceabilityPredicate extends TraceabilityPredicate {
         TiredTraceabilityPredicate.MAP_QFT_GLASS.put(GTQTMetaBlocks.ADV_GLASS.getState(GTQTADVGlass.CasingType.ADV_MACHINE_GLASS_R),
                 new WrappedIntTired(GTQTADVGlass.CasingType.ADV_MACHINE_GLASS_R, 6));
 
+        TiredTraceabilityPredicate.MAP_CAL_CASING.put(GTQTMetaBlocks.COMPONENT_ASSEMBLY_LINE.getState(GTQTBlockComponentAssemblyLineCasing.CasingTier.LV),
+                new WrappedIntTired(GTQTBlockComponentAssemblyLineCasing.CasingTier.LV, 1));
+        TiredTraceabilityPredicate.MAP_CAL_CASING.put(GTQTMetaBlocks.COMPONENT_ASSEMBLY_LINE.getState(GTQTBlockComponentAssemblyLineCasing.CasingTier.MV),
+                new WrappedIntTired(GTQTBlockComponentAssemblyLineCasing.CasingTier.MV, 2));
+        TiredTraceabilityPredicate.MAP_CAL_CASING.put(GTQTMetaBlocks.COMPONENT_ASSEMBLY_LINE.getState(GTQTBlockComponentAssemblyLineCasing.CasingTier.HV),
+                new WrappedIntTired(GTQTBlockComponentAssemblyLineCasing.CasingTier.HV, 3));
+        TiredTraceabilityPredicate.MAP_CAL_CASING.put(GTQTMetaBlocks.COMPONENT_ASSEMBLY_LINE.getState(GTQTBlockComponentAssemblyLineCasing.CasingTier.EV),
+                new WrappedIntTired(GTQTBlockComponentAssemblyLineCasing.CasingTier.EV, 4));
+        TiredTraceabilityPredicate.MAP_CAL_CASING.put(GTQTMetaBlocks.COMPONENT_ASSEMBLY_LINE.getState(GTQTBlockComponentAssemblyLineCasing.CasingTier.IV),
+                new WrappedIntTired(GTQTBlockComponentAssemblyLineCasing.CasingTier.IV, 5));
+        TiredTraceabilityPredicate.MAP_CAL_CASING.put(GTQTMetaBlocks.COMPONENT_ASSEMBLY_LINE.getState(GTQTBlockComponentAssemblyLineCasing.CasingTier.LuV),
+                new WrappedIntTired(GTQTBlockComponentAssemblyLineCasing.CasingTier.LuV, 6));
+        TiredTraceabilityPredicate.MAP_CAL_CASING.put(GTQTMetaBlocks.COMPONENT_ASSEMBLY_LINE.getState(GTQTBlockComponentAssemblyLineCasing.CasingTier.ZPM),
+                new WrappedIntTired(GTQTBlockComponentAssemblyLineCasing.CasingTier.ZPM, 7));
+        TiredTraceabilityPredicate.MAP_CAL_CASING.put(GTQTMetaBlocks.COMPONENT_ASSEMBLY_LINE.getState(GTQTBlockComponentAssemblyLineCasing.CasingTier.UV),
+                new WrappedIntTired(GTQTBlockComponentAssemblyLineCasing.CasingTier.UV, 8));
+        TiredTraceabilityPredicate.MAP_CAL_CASING.put(GTQTMetaBlocks.COMPONENT_ASSEMBLY_LINE.getState(GTQTBlockComponentAssemblyLineCasing.CasingTier.UHV),
+                new WrappedIntTired(GTQTBlockComponentAssemblyLineCasing.CasingTier.UHV, 9));
+        TiredTraceabilityPredicate.MAP_CAL_CASING.put(GTQTMetaBlocks.COMPONENT_ASSEMBLY_LINE.getState(GTQTBlockComponentAssemblyLineCasing.CasingTier.UEV),
+                new WrappedIntTired(GTQTBlockComponentAssemblyLineCasing.CasingTier.UEV, 10));
+        TiredTraceabilityPredicate.MAP_CAL_CASING.put(GTQTMetaBlocks.COMPONENT_ASSEMBLY_LINE.getState(GTQTBlockComponentAssemblyLineCasing.CasingTier.UIV),
+                new WrappedIntTired(GTQTBlockComponentAssemblyLineCasing.CasingTier.UIV, 11));
+        TiredTraceabilityPredicate.MAP_CAL_CASING.put(GTQTMetaBlocks.COMPONENT_ASSEMBLY_LINE.getState(GTQTBlockComponentAssemblyLineCasing.CasingTier.UXV),
+                new WrappedIntTired(GTQTBlockComponentAssemblyLineCasing.CasingTier.UXV, 12));
+        TiredTraceabilityPredicate.MAP_CAL_CASING.put(GTQTMetaBlocks.COMPONENT_ASSEMBLY_LINE.getState(GTQTBlockComponentAssemblyLineCasing.CasingTier.OpV),
+                new WrappedIntTired(GTQTBlockComponentAssemblyLineCasing.CasingTier.OpV, 13));
+        TiredTraceabilityPredicate.MAP_CAL_CASING.put(GTQTMetaBlocks.COMPONENT_ASSEMBLY_LINE.getState(GTQTBlockComponentAssemblyLineCasing.CasingTier.MAX),
+                new WrappedIntTired(GTQTBlockComponentAssemblyLineCasing.CasingTier.MAX, 14));
 
     }
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_QFT_GLASS;
@@ -147,6 +173,7 @@ public class TiredTraceabilityPredicate extends TraceabilityPredicate {
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_CP_CASING;
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_CP_TUBE;
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_CP_BEAM;
+    public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_CAL_CASING;
 
 
     public static TraceabilityPredicate MACHINE_CASINGS = new TiredTraceabilityPredicate(MAP_MACHINE_CASING,"MachineCasingType",null);
@@ -171,6 +198,9 @@ public class TiredTraceabilityPredicate extends TraceabilityPredicate {
             Comparator.comparing((s) -> ((WrappedIntTired)MAP_QFT_SHIELDING_CORE.get(s)).getIntTier()),"Core",null);
     public static TraceabilityPredicate QFT_GLASS = new TiredTraceabilityPredicate(MAP_QFT_GLASS,
             Comparator.comparing((s) -> ((WrappedIntTired)MAP_QFT_GLASS.get(s)).getIntTier()),"QFTGlass",null);
+
+    public static TraceabilityPredicate CAL_CASING = new TiredTraceabilityPredicate(MAP_CAL_CASING,
+            Comparator.comparing((s) -> ((WrappedIntTired)MAP_CAL_CASING.get(s)).getIntTier()),"CALCasing",null);
     private final Object2ObjectOpenHashMap<IBlockState, ITired> map;
     private final String name;
 

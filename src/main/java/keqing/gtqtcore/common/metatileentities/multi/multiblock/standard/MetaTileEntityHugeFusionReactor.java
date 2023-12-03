@@ -31,6 +31,7 @@ import gregtech.common.metatileentities.MetaTileEntities;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTADVGlass;
 import keqing.gtqtcore.common.block.blocks.GTQTMultiblockCasing;
+import keqing.gtqtcore.common.block.blocks.GTQTQuantumForceTransformerCasing;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -106,10 +107,8 @@ public class MetaTileEntityHugeFusionReactor extends RecipeMapMultiblockControll
                 .aisle("###############", "######OSO######", "###############")
                 .where('S', selfPredicate())
                 .where('G', states(getCasingState(), getGlassState()))
-                .where('E', states(getCasingState(), getGlassState()).or(metaTileEntities(Arrays.stream(MetaTileEntities.ENERGY_INPUT_HATCH)
-                        .filter(mte -> mte != null && tier <= mte.getTier() && mte.getTier() <= GTValues.UIV)
-                        .toArray(MetaTileEntity[]::new))
-                        .setMinGlobalLimited(1).setPreviewCount(16)))
+                .where('E', states(getCasingState(), getGlassState()).or(abilities(MultiblockAbility.INPUT_ENERGY)
+                        .setPreviewCount(16)))
                 .where('C', states(getCasingState()))
                 .where('K', states(getCoilState()))
                 .where('O', states(getCasingState(), getGlassState()).or(abilities(MultiblockAbility.EXPORT_FLUIDS)))
@@ -149,10 +148,7 @@ public class MetaTileEntityHugeFusionReactor extends RecipeMapMultiblockControll
     }
 
     private IBlockState getCoilState() {
-        if (tier == GTValues.UHV)
-            return MetaBlocks.FUSION_CASING.getState(BlockFusionCasing.CasingType.SUPERCONDUCTOR_COIL);
-
-        return MetaBlocks.FUSION_CASING.getState(BlockFusionCasing.CasingType.FUSION_COIL);
+        return GTQTMetaBlocks.QUANTUM_CONSTRAINT_CASING.getState(GTQTQuantumForceTransformerCasing.CasingType.QUANTUM_FORCE_TRANSFORMER_COIL);
     }
 
     @Override

@@ -14,6 +14,7 @@ public class GTQTRecipesManager {
         PetrochemRecipes.init();
         MaterialOreChains.init();
         LubricantChains.init();
+        PEEKChain.init();
         CircuitryMaterialChains.init();
     }
 }
