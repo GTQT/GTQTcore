@@ -1,5 +1,10 @@
 package keqing.gtqtcore.api.unification.matreials;
 
+import gregtech.api.unification.material.properties.BlastProperty;
+import gregtech.api.unification.material.properties.PropertyKey;
+
+import static gregtech.api.GTValues.EV;
+import static gregtech.api.GTValues.VA;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.info.MaterialFlags.CRYSTALLIZABLE;
 import static keqing.gtqtcore.api.unification.material.info.EPMaterialFlags.*;

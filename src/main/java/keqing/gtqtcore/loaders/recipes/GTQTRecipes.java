@@ -23,6 +23,7 @@ import static keqing.gtqtcore.common.items.metaitems.GTQTMetaToolItems.Choocher_
 import static keqing.gtqtcore.common.items.metaitems.GTQTMetaToolItems.Jinitaimei_HV;
 
 public class GTQTRecipes {
+
     public static void register(){
     }
 
@@ -74,5 +75,7 @@ public class GTQTRecipes {
             }
         }
     }
+
+
 
 }

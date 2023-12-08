@@ -77,8 +77,7 @@ public class MetaTileEntityDangoteDistillery extends MultiMapMultiblockControlle
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start(RelativeDirection.RIGHT, RelativeDirection.FRONT, RelativeDirection.UP)
                 .aisle("YSY", "YYY", "YYY")
-                .aisle("XXX", "XPX", "XXX")
-                .setRepeatable(1, 11)
+                .aisle("XXX", "XPX", "XXX").setRepeatable(1, 11)
                 .aisle("XXX", "XXX", "XXX")
                 .where('S', this.selfPredicate())
                 .where('Y', states(getCasingState())

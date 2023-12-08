@@ -60,7 +60,7 @@ public class OverlayRenderer implements ICubeRenderer {
         if (this.spriteEmissive != null) {
             if (ConfigHolder.client.machinesEmissiveTextures) {
                 IVertexOperation[] lightPipeline = (IVertexOperation[]) ArrayUtils.add(pipeline, new LightMapOperation(240, 240));
-                Textures.renderFace(renderState, translation, lightPipeline, frontFacing, bounds, this.spriteEmissive, BloomEffectUtil.getRealBloomLayer());
+                Textures.renderFace(renderState, translation, lightPipeline, frontFacing, bounds, this.spriteEmissive, BloomEffectUtil.getBloomLayer());
             } else {
                 Textures.renderFace(renderState, translation, pipeline, frontFacing, bounds, this.spriteEmissive, BlockRenderLayer.CUTOUT_MIPPED);
             }

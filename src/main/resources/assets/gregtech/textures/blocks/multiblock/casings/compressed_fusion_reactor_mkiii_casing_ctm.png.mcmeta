@@ -11,7 +11,7 @@
     "extra": {
       "light": 15,
       "connect_to": [
-        { "block": "gtqtcore:multiblock_casing:3" },
+        { "block": "gtqtcore:multiblock_casing:3" }
       ]
     }
   }

@@ -1,6 +1,7 @@
 package keqing.gtqtcore.api.unification.matreials;
 import gregtech.api.GTValues;
 import gregtech.api.unification.material.Material;
+import gregtech.api.unification.material.properties.BlastProperty;
 import gregtech.api.unification.material.properties.BlastProperty.GasTier;
 import gregtech.api.unification.material.properties.ToolProperty;
 
@@ -22,7 +23,7 @@ public class HigherDegreeMaterials {
                 .rotorStats(15.0f, 7.0f, 3000)
                 .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 2560, 3)
                         .attackSpeed(0.1F).enchantability(21).build())
-                .blastTemp(1300, GasTier.LOW, VA[HV], 1000)
+                .blast(1300, BlastProperty.GasTier.LOW)
                 .build();
 
 

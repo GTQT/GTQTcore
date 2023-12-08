@@ -17,12 +17,8 @@ import gregtech.api.recipes.recipeproperties.IRecipePropertyStorage;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.shader.postprocessing.BloomEffect;
-import gregtech.client.utils.BloomEffectUtil;
-import gregtech.client.utils.TooltipHelper;
-import gregtech.common.blocks.BlockWireCoil;
-import gregtech.common.metatileentities.MetaTileEntities;
-import gregtech.core.sound.GTSoundEvents;
-import keqing.gtqtcore.api.GTQTValue;
+
+
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.capability.GTQTDataCode;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
@@ -30,6 +26,7 @@ import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.utils.GTQTUniverUtil;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
+import keqing.gtqtcore.client.utils.BloomEffectUtil;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTADVBlock;
 import keqing.gtqtcore.common.block.blocks.GTQTADVGlass;

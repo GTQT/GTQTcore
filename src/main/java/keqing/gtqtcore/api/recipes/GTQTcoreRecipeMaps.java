@@ -60,13 +60,13 @@ public class GTQTcoreRecipeMaps {
         COMPONENT_ASSEMBLY_LINE_RECIPES = new RecipeMapComponentAssemblyLine<>("component_assembly_line_recipes", 12, 1,  12, 0, new CACasingTierRecipeBuilder(), false)
                 .setSound(GTSoundEvents.ASSEMBLER);
 
-        DIGESTER_RECIPES = new RecipeMap<>("digester_recipes", 4, 2, 4, 2, new SimpleRecipeBuilder(), false);
+        DIGESTER_RECIPES = new RecipeMap<>("digester_recipes", 4, 4, 4, 4, new SimpleRecipeBuilder(), false);
 
-        FERMENTATION_TANK_RECIPES = new RecipeMap<>("fermentation_tank_recipes", 0, 4, 0, 4, 4, 4, 1, 3, new PHRecipeBuilder(), false)
+        FERMENTATION_TANK_RECIPES = new RecipeMap<>("fermentation_tank_recipes",  4, 4, 4,  3, new PHRecipeBuilder(), false)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_EXTRACT, ProgressWidget.MoveType.HORIZONTAL)
                 .setSound(GTSoundEvents.CHEMICAL_REACTOR);
 
-        DISSOLUTION_TANK_RECIPES = new RecipeMap<>("dissolution_tank_recipes", 4, 2, 4, 4, new SimpleRecipeBuilder(), false);
+        DISSOLUTION_TANK_RECIPES = new RecipeMap<>("dissolution_tank_recipes", 4, 4, 4, 4, new SimpleRecipeBuilder(), false);
         //  Dangote Distillery RecipeMap
         MOLECULAR_DISTILLATION_RECIPES = new RecipeMapDangoteDistillery<>("molecular_distillation_recipes", 0, true, 1, true, 1, true, 12, false, new NoCoilTemperatureRecipeBuilder(), false)
                 .setSound(GTSoundEvents.CHEMICAL_REACTOR);
@@ -82,10 +82,10 @@ public class GTQTcoreRecipeMaps {
                 0, 0, 1, 1, new FuelRecipeBuilder(), false);
 
         NAQUADAH_REACTOR = new RecipeMap<>("naquadah_reactor",
-                1, 1, 1, 1, new FuelRecipeBuilder(), false);
+                3, 1, 1, 1, new FuelRecipeBuilder(), false);
 
         I_MODULAR_FISSION_REACTOR = new RecipeMap<>("i_modular_fission_reactor",
-                1, 1, 1, 1, new FuelRecipeBuilder(), false);
+                3, 1, 1, 1, new FuelRecipeBuilder(), false);
 
         CHEMICAL_PLANT = new RecipeMap<>("chemical_plant",
                 6, 6, 6, 6, new ChemicalPlantBuilder(), false);
@@ -94,12 +94,12 @@ public class GTQTcoreRecipeMaps {
                 3, 3, 3, 0, new SimpleRecipeBuilder(), false);
 
         STEAM_BLAST_FURNACE_RECIPES = new RecipeMap<>("steam_blast_furnace",
-                1, 1, 0, 0, new FuelRecipeBuilder(), false);
+                3, 1, 0, 0, new FuelRecipeBuilder(), false);
 
         STEAM_ORE_WASHER_RECIPES = new RecipeMap<>("steam_ore_washer",
-                1, 1, 0, 0, new FuelRecipeBuilder(), false);
+                3, 1, 0, 0, new FuelRecipeBuilder(), false);
 
-        QUANTUM_FORCE_TRANSFORMER_RECIPES = new RecipeMap<>("quantum_force_transformer_recipes", 0, 6, 0, 6, 0, 6, 0, 6, new QFTCasingTierRecipeBuilder(), false)
+        QUANTUM_FORCE_TRANSFORMER_RECIPES = new RecipeMap<>("quantum_force_transformer_recipes", 6,  6,  6,  6, new QFTCasingTierRecipeBuilder(), false)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL)
                 .setSound(GTSoundEvents.SCIENCE);
 
@@ -107,7 +107,7 @@ public class GTQTcoreRecipeMaps {
                 3, 3, 9, 3, new FuelRecipeBuilder(), false);
 
         STAR_BIOMIMETIC_FACTORY = new RecipeMap<>("star_biomimetic_factory",
-                1, 32, 1, 16, new FuelRecipeBuilder(), false);
+                3, 32, 1, 16, new FuelRecipeBuilder(), false);
 
         PLASMA_FORGE = new RecipeMap<>("plasma_forge",
                 9, 9, 9, 9, new FuelRecipeBuilder(), false);
@@ -124,26 +124,26 @@ public class GTQTcoreRecipeMaps {
                 .setSlotOverlay(true, false, GuiTextures.RESEARCH_STATION_OVERLAY)
                 .setSound(GTValues.FOOLS.get() ? GTSoundEvents.SCIENCE : GTSoundEvents.COMPUTATION);
 
-        NAQUADAH_REACTOR_RECIPES = new RecipeMap<>("naquadah_reactor_recipes", 0, 0, 0, 0, 0, 1, 0, 0, new FuelRecipeBuilder(), false)
+        NAQUADAH_REACTOR_RECIPES = new RecipeMap<>("naquadah_reactor_recipes", 0,  0,   1,  0, new FuelRecipeBuilder(), false)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, ProgressWidget.MoveType.HORIZONTAL)
                 .setSound(GTSoundEvents.COMBUSTION);
 
         //  Hyper Reactor Mk I Recipemap
-        HYPER_REACTOR_MK1_RECIPES = new RecipeMap<>("hyper_reactor_mk1_recipes", 0, 0, 0, 0, 0, 1, 0, 0, new FuelRecipeBuilder(), false)
+        HYPER_REACTOR_MK1_RECIPES = new RecipeMap<>("hyper_reactor_mk1_recipes", 0,  0,  1, 0, new FuelRecipeBuilder(), false)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL)
                 .setSound(GTSoundEvents.ARC);
 
         //  Hyper Reactor Mk II Recipemap
-        HYPER_REACTOR_MK2_RECIPES = new RecipeMap<>("hyper_reactor_mk2_recipes", 0, 0, 0, 0, 0, 1, 0, 0, new FuelRecipeBuilder(), false)
+        HYPER_REACTOR_MK2_RECIPES = new RecipeMap<>("hyper_reactor_mk2_recipes", 0,  0, 1,0, new FuelRecipeBuilder(), false)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL)
                 .setSound(GTSoundEvents.ARC);
 
         //  Hyper Reactor Mk III Recipemap
-        HYPER_REACTOR_MK3_RECIPES = new RecipeMap<>("hyper_reactor_mk3_recipes", 0, 0, 0, 0, 0, 1, 0, 0, new FuelRecipeBuilder(), false)
+        HYPER_REACTOR_MK3_RECIPES = new RecipeMap<>("hyper_reactor_mk3_recipes",  0, 0,  1,  0, new FuelRecipeBuilder(), false)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL)
                 .setSound(GTSoundEvents.ARC);
 
-        FUEL_REFINE_FACTORY_RECIPES = new RecipeMap<>("fuel_refine_factory_recipes", 0, 3, 0, 4, 0, 4, 0, 2, new SimpleRecipeBuilder(), false)
+        FUEL_REFINE_FACTORY_RECIPES = new RecipeMap<>("fuel_refine_factory_recipes", 3,  4,  4, 2, new SimpleRecipeBuilder(), false)
                 .setSlotOverlay(false, false, false, GuiTextures.MOLECULAR_OVERLAY_1)
                 .setSlotOverlay(false, false, true, GuiTextures.MOLECULAR_OVERLAY_2)
                 .setSlotOverlay(false, true, false, GuiTextures.MOLECULAR_OVERLAY_3)

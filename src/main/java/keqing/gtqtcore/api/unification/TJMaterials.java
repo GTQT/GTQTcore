@@ -27,10 +27,9 @@ public class TJMaterials {
     public static List<MaterialFlag> STANDARDGEAR = new ArrayList<>(Arrays.asList(GENERATE_GEAR, GENERATE_SMALL_GEAR));
     public static List<MaterialFlag> STANDARDSPRING = new ArrayList<>(Arrays.asList(GENERATE_SPRING, GENERATE_SPRING_SMALL));
     public static List<MaterialFlag> STANDARDROUND = new ArrayList<>(Collections.singletonList(GENERATE_ROUND));
-    public static List<MaterialFlag> STANDARDLENS = new ArrayList<>(Collections.singletonList(GENERATE_LENS));
 
     public static List<MaterialFlag> STANDARDCASING = new ArrayList<>(Collections.singletonList(GENERATE_FRAME));
-    public static List<MaterialFlag> STANDARDGEM = new ArrayList<>(Arrays.asList(GENERATE_LENS, HIGH_SIFTER_OUTPUT));
+
 
     public static Material Cobalt60;
     public static Material SuperfluidHelium3;

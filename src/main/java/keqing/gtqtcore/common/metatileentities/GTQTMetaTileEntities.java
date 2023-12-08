@@ -7,6 +7,7 @@ import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.SimpleGeneratorMetaTileEntity;
 import gregtech.api.unification.material.Materials;
 import gregtech.common.metatileentities.MetaTileEntities;
+import gregtech.common.metatileentities.multi.MetaTileEntityTankValve;
 import gregtech.common.metatileentities.multi.electric.generator.MetaTileEntityLargeTurbine;
 import gregtech.common.metatileentities.multi.multiblockpart.*;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
@@ -17,6 +18,7 @@ import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.steam.MetaTileEntitySteamBlastFurnace;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.steam.MetaTileEntitySteamOreWasher;
 import keqing.gtqtcore.common.metatileentities.multi.multiblockpart.*;
+import keqing.gtqtcore.common.metatileentities.storage.MetaTileEntityMultiblockTank;
 
 import java.util.function.IntFunction;
 import java.util.function.IntPredicate;
@@ -46,6 +48,7 @@ public class GTQTMetaTileEntities {
     public static void simpleTiredInit(MetaTileEntity[] tileEntities, IntFunction<MetaTileEntity> function, IntSupplier idSupplier){
         simpleTiredInit(tileEntities,function,idSupplier,(i) -> true);
     }
+    public static MetaTileEntityMultiblockTank HUGE_TANK;
     public static MetaTileEntityComponentAssemblyLine COMPONENT_ASSEMBLY_LINE;
     public static MetaTileEntityBufferHatch MULTIPART_BUFFER_HATCH;
     public static MetaTileEntityBlazingBlastFurnace BLAZING_BLAST_FURNACE ;
@@ -73,7 +76,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityRocket ROCKET;
     public static MetaTileEntitySteamOreWasher STEAM_ORE_WASHER;
     public static MetaTileEntitySteamBlastFurnace STEAM_BLAST_FURANCE;
-    public static MetaTileEntityAssemblyLineTower ASSEMBLY_LINE_TOWER;
+
     public static MetaTileEntityHugeDistillationTower HUGE_DISTILLATION_TOWER;
     public static MetaTileEntityHugeVacuum HUGE_VACUUM;
     public static MetaTileEntityQuantumForceTransformer QUANTUM_FORCE_TRANSFORMER;
@@ -140,7 +143,7 @@ public class GTQTMetaTileEntities {
         HUGE_CRACKING_UNIT = registerMetaTileEntity(3017, new MetaTileEntityHugeCrackingUnit(gtqtcoreId("huge_cracking_unit")));
         STEAM_BLAST_FURANCE = registerMetaTileEntity(3018, new MetaTileEntitySteamBlastFurnace(gtqtcoreId("steam_blast_furance")));
         STEAM_ORE_WASHER = registerMetaTileEntity(3019, new MetaTileEntitySteamOreWasher(gtqtcoreId("steam_ore_washer")));
-        ASSEMBLY_LINE_TOWER = registerMetaTileEntity(3099, new MetaTileEntityAssemblyLineTower(gtqtcoreId("assembly_line_tower")));
+
         HUGE_DISTILLATION_TOWER = registerMetaTileEntity(3098, new MetaTileEntityHugeDistillationTower(gtqtcoreId("huge_distillation_tower")));
         HUGE_VACUUM = registerMetaTileEntity(3097, new MetaTileEntityHugeVacuum(gtqtcoreId("huge_vacuum")));
         HUGE_ELECTRRIC_IMPLOSION_COMPRESSOR = registerMetaTileEntity(3096, new MetaTileEntityHugeElectricImplosionCompressor(gtqtcoreId("huge_electric_implosion_compressor")));
@@ -179,6 +182,10 @@ public class GTQTMetaTileEntities {
         MULTIPART_BUFFER_HATCH = registerMetaTileEntity(15023, new MetaTileEntityBufferHatch(gtqtcoreId("buffer_hatch")));
         DIGESTER = registerMetaTileEntity(15024, new MetaTileEntityDigester(gtqtcoreId("digester")));
         COMPONENT_ASSEMBLY_LINE = registerMetaTileEntity(15025, new MetaTileEntityComponentAssemblyLine(gtqtcoreId("component_assembly_line")));
+
+        HUGE_TANK = registerMetaTileEntity(15031,
+                new MetaTileEntityMultiblockTank(gtqtcoreId("tank.steel"), true, 1000 * 1000));
+
         registerMetaTileEntity(3105, new MetaTileEntityFluidHatch(gtqtcoreId("fluid_hatch.import.uev"), 11, false));
         registerMetaTileEntity(3120, new MetaTileEntityFluidHatch(gtqtcoreId("fluid_hatch.export.uev"), 11, true));
 

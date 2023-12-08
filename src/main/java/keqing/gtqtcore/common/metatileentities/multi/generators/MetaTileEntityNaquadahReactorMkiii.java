@@ -110,7 +110,7 @@ public class MetaTileEntityNaquadahReactorMkiii extends FuelMultiblockController
 
 
         @Override
-        protected long getMaxVoltage() {
+        public long getMaxVoltage() {
             return GTValues.V[UHV];
         }
     }

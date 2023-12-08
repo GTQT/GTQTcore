@@ -60,7 +60,7 @@ public class MetaTileEntityRocket extends FuelMultiblockController {
             if (getInputFluidInventory() != null) {
                 FluidStack lubricantStack = getInputFluidInventory().drain(Materials.Lubricant.getFluid(Integer.MAX_VALUE), false);
                 FluidStack oxygenStack = getInputFluidInventory().drain(Materials.Oxygen.getFluid(Integer.MAX_VALUE), false);
-                FluidStack liquidOxygenStack = getInputFluidInventory().drain(Materials.LiquidOxygen.getFluid(Integer.MAX_VALUE), false);
+                FluidStack liquidOxygenStack = getInputFluidInventory().drain(Materials.Oxygen.getFluid(Integer.MAX_VALUE), false);
                 int lubricantAmount = lubricantStack == null ? 0 : lubricantStack.amount;
                 textList.add(new TextComponentTranslation("gregtech.multiblock.large_combustion_engine.lubricant_amount", TextFormattingUtil.formatNumbers(lubricantAmount)));
                 if (boostAllowed) {
@@ -219,7 +219,7 @@ public class MetaTileEntityRocket extends FuelMultiblockController {
         private final boolean isExtreme;
         private final int tier;
         private static final FluidStack OXYGEN_STACK = Materials.Oxygen.getFluid(20);
-        private static final FluidStack LIQUID_OXYGEN_STACK = Materials.LiquidOxygen.getFluid(80);
+        private static final FluidStack LIQUID_OXYGEN_STACK = Materials.Oxygen.getFluid(80);
         private static final FluidStack LUBRICANT_STACK = Materials.Lubricant.getFluid(1);
 
         public TurbineCombustionEngineWorkableHandler(RecipeMapMultiblockController tileEntity, boolean isExtreme) {
@@ -272,7 +272,7 @@ public class MetaTileEntityRocket extends FuelMultiblockController {
         }
 
         @Override
-        protected long getMaxVoltage() {
+        public long getMaxVoltage() {
             //this multiplies consumption through parallel
             if (isOxygenBoosted)
                 return GTValues.V[tier] * 2;

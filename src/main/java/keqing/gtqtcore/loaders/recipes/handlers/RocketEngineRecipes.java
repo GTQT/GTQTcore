@@ -37,7 +37,7 @@ public class RocketEngineRecipes {
 
         MIXER_RECIPES.recipeBuilder()
                 .fluidInputs(HighlyPurifiedCoalTar.getFluid(1000))
-                .fluidInputs(LiquidOxygen.getFluid(1000))
+                .fluidInputs(Oxygen.getFluid(1000))
                 .fluidOutputs(RP1RocketFuel.getFluid(1000))
                 .EUt(VA[HV])
                 .duration(16)

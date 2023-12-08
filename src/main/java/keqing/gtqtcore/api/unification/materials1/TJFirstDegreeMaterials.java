@@ -26,7 +26,7 @@ public class TJFirstDegreeMaterials {
     public static void registerMaterials(){
         Birmabright = new Material.Builder(25000, gregtechId("birmabright"))
                 .ingot().fluid()
-                .blastTemp(1100)
+                .blast(1100)
                 .color(1755371).iconSet(MaterialIconSet.DULL)
                 .flags(setMaterialFlags(STANDARDPLATE, STANDARDROD, STANDARDROTOR, STANDARDGEAR, STANDARDSPRING, STANDARDCASING))
                 .components(Aluminium, 5, Magnesium, 1, Manganese, 1)
@@ -37,7 +37,7 @@ public class TJFirstDegreeMaterials {
                 .colorAverage().iconSet(MaterialIconSet.SHINY)
                 .flags(setMaterialFlags(STANDARDPLATE, STANDARDROD, STANDARDROTOR, STANDARDGEAR, STANDARDSPRING))
                 .components(Iron, 3, Carbon, 1, Vanadium, 5, Titanium, 40, Aluminium, 6)
-                .blastTemp(3400)
+                .blast(3400)
                 .build();
 
         TriphenylPhosphine  = new Material.Builder(25002, gregtechId("triphenylphosphine"))
@@ -85,7 +85,7 @@ public class TJFirstDegreeMaterials {
 
         SilicaCeramic = new Material.Builder(25008, gregtechId("silicaceramic"))
                 .ingot()
-                .blastTemp(1000)
+                .blast(1000)
                 .color(0x8c7a50).iconSet(MaterialIconSet.SHINY)
                 .flags(setMaterialFlags(STANDARDPLATE,STANDARDROD,STANDARDFOIL,STANDARDROUND))
                 .build();
@@ -231,15 +231,15 @@ public class TJFirstDegreeMaterials {
                 .build();
 
         NitrileButadieneRubber = new Material.Builder(25032, gregtechId("nitrile_butadiene_rubber"))
-                .polymer()
+                .fluid()
                 .color(0x211A18)
                 .flags(DISABLE_DECOMPOSITION, GENERATE_PLATE, GENERATE_RING)
                 .components(Carbon, 7, Hydrogen, 9, Nitrogen, 1)
-                .fluidTemp(433)
+                .fluidPipeProperties(433,1000,false)
                 .build();
 
         PolyPhosphonitrileFluoroRubber = new Material.Builder(25033, gregtechId("poly_phosphonitrile_fluoro_rubber"))
-                .polymer()
+                .fluid()
                 .color(0x372B28)
                 .flags(DISABLE_DECOMPOSITION, GENERATE_PLATE, GENERATE_RING)
                 .components(Carbon, 24, Hydrogen, 16, Oxygen, 8, Nitrogen, 4, Phosphorus, 4, Fluorine, 40)
@@ -268,14 +268,6 @@ public class TJFirstDegreeMaterials {
                 .iconSet(MaterialIconSet.SHINY)
                 .build();
 
-
-        DegenerateRhenium = new Material.Builder(25047, gregtechId("degenerate_rhenium"))
-                .dust()
-                .ingot()
-                .color(0xc9c9c9)
-                .iconSet(MaterialIconSet.METALLIC)
-                .components(Rhenium, 1)
-                .build();
 
         NihoniumTriiodide = new Material.Builder(25048, gregtechId("nihonium_triiodide"))
                 .dust()
@@ -346,7 +338,7 @@ public class TJFirstDegreeMaterials {
                 .fluid()
                 .colorAverage()
                 .components(NaquadahEnriched, 16, Einsteinium, 4, Rhodium, 4, Technetium, 4, Astatine, 2, Erbium, 2)
-                .blastTemp(9700)
+                .blast(9700)
                 .iconSet(MaterialIconSet.SHINY)
                 .build();
 
@@ -354,13 +346,13 @@ public class TJFirstDegreeMaterials {
                 .ingot()
                 .colorAverage()
                 .components(Sodium, 1, Potassium, 1, Niobium, 2, Oxygen, 6)
-                .blastTemp(3600)
+                .blast(3600)
                 .build();
 
         TriniumSteel = new Material.Builder(25062, gregtechId("trinium_steel"))
                 .ingot()
                 .iconSet(MaterialIconSet.SHINY)
-                .blastTemp(10200)
+                .blast(10200)
                 .colorAverage()
                 .components(Trinium, 18, Tungsten, 6, Vanadium, 4, Chrome, 2, Tantalum, 1, Cobalt, 1)
                 .build();
@@ -368,7 +360,7 @@ public class TJFirstDegreeMaterials {
         LeadZirconateTitanate = new Material.Builder(25063, gregtechId("lead_zirconate_titanate"))
                 .ingot()
                 .iconSet(MaterialIconSet.DULL)
-                .blastTemp(6100)
+                .blast(6100)
                 .color(0x355232)
                 .components(Lead, 12, Titanium, 1, Zirconium, 1, Oxygen, 16)
                 .build();
@@ -404,14 +396,14 @@ public class TJFirstDegreeMaterials {
 
         TerfenolD_H = new Material.Builder(25069, gregtechId("terfenol_d_heavy"))
                 .ingot()
-                .blastTemp(10200)
+                .blast(10200)
                 .components(Osmium, 12, Iron, 6, Dysprosium, 2, Terbium, 1)
                 .color(0x4d4d4d)
                 .build();
 
         TerfenolD_L = new Material.Builder(25070, gregtechId("terfenol_d_light"))
                 .ingot()
-                .blastTemp(10200)
+                .blast(10200)
                 .color(0x9c9c9c)
                 .build();
 

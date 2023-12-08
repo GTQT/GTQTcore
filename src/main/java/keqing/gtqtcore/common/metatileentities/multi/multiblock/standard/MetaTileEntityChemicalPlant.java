@@ -234,7 +234,7 @@ public class MetaTileEntityChemicalPlant extends RecipeMapMultiblockController {
             this.metaTileEntity.markDirty();
         }
 
-        protected long getMaxVoltage() {
+        public long getMaxVoltage() {
             return Math.min(super.getMaxVoltage(), VA[voltageTier]);
         }
 

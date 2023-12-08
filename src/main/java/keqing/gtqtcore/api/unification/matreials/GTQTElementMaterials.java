@@ -1,6 +1,5 @@
 package keqing.gtqtcore.api.unification.matreials;
 
-import gregtech.api.fluids.fluidType.FluidTypes;
 import gregtech.api.unification.Elements;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.properties.BlastProperty;
@@ -37,7 +36,7 @@ public class GTQTElementMaterials {
                         .enchantment(Enchantments.EFFICIENCY, 5)
                         .enchantment(Enchantments.FORTUNE, 5)
                         .build())
-                .blastTemp(10800, BlastProperty.GasTier.HIGHEST, VA[UHV])
+                .blast(10800, BlastProperty.GasTier.HIGHER)
                 .build();
         //  26002 Awakened Draconium
         AwakenedDraconium = new Material.Builder(getMaterialsId(), gregtechId("awakened_draconium"))
@@ -47,7 +46,7 @@ public class GTQTElementMaterials {
                 .iconSet(BRIGHT)
                 .flags(GENERATE_PLATE, GENERATE_FOIL, GENERATE_FINE_WIRE)
                 .element(GTQTElements.AwakenedDraconium)
-                .blastTemp(10800, BlastProperty.GasTier.HIGHEST, VA[UV])
+                .blast(10800, BlastProperty.GasTier.HIGHER)
                 .cableProperties(V[UHV], 16, 4)
                 .build();
         //  26003 Chaotic Draconium
@@ -72,12 +71,12 @@ public class GTQTElementMaterials {
         //  26009 Metastable Oganesson
         MetastableOganesson = new Material.Builder(getMaterialsId(), gregtechId("metastable_oganesson"))
                 .ingot()
-                .fluid(FluidTypes.GAS)
+                .gas()
                 .color(0xE61C24)
                 .iconSet(SHINY)
                 .element(Elements.Og)
                 .flags(GENERATE_PLATE)
-                .blastTemp(10380)
+                .blast(10300, BlastProperty.GasTier.LOW)
                 .build();
         //  TODO Radium-Radon Mixture + Scandium-Titanium-50 Mixture -> Metastable Hassium
         //  26010 Metastable Hassium
@@ -106,48 +105,46 @@ public class GTQTElementMaterials {
                 .color(0x323232)
                 .iconSet(BRIGHT)
                 .flags(NO_SMELTING, NO_SMASHING)
-                .fluidTemp(2000000000)
+                .fluidPipeProperties(2000000000,1000,false)
                 .element(GTQTElements.CosmicNeutronium)
                 .cableProperties(V[UIV], 256, 128, false)
                 .build();
         //  26013 Degenerate Rhenium
         DegenerateRhenium = new Material.Builder(getMaterialsId(), gregtechId("degenerate_rhenium"))
                 .dust()
-                .fluid(FluidTypes.PLASMA)
-                .fluidTemp((int) V[UV])
                 .color(0x6666FF)
                 .iconSet(CUSTOM_DEGENERATE_RHENIUM)
                 .element(Elements.Rh)
                 .flags(GENERATE_PLATE)
                 .build()
                 .setFormula("§cR§de", false);
+
         //  26014 Infinity
         Infinity = new Material.Builder(getMaterialsId(), gregtechId("infinity"))
                 .ingot()
                 .fluid()
                 .iconSet(CUSTOM_INFINITY)
-                .fluidTemp((int) V[UIV])
+                .fluidPipeProperties((int) V[UIV],1000,false)
                 .element(GTQTElements.Infinity)
-                .blastTemp(12600, BlastProperty.GasTier.HIGHEST, VA[UHV], 5901)
+                .blast(12600, BlastProperty.GasTier.HIGHER)
                 .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_RING, GENERATE_ROUND, GENERATE_BOLT_SCREW, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR,GENERATE_ROTOR)
                 .build();
         //  26015 Rhugnor
         Rhugnor = new Material.Builder(getMaterialsId(), gregtechId("rhugnor"))
                 .ingot()
                 .fluid()
-                .fluidTemp((int) (V[UIV] - V[UV]))
+                .fluidPipeProperties((int) (V[UIV] - V[UV]),1000,false )
                 .color(0xBE00FF)
                 .iconSet(BRIGHT)
                 .element(GTQTElements.Rhugnor)
-                .blastTemp(12000, BlastProperty.GasTier.HIGHEST, VA[UHV], 3340)
+                .blast(12800, BlastProperty.GasTier.HIGHER)
                 .flags(GENERATE_PLATE)
                 .build();
         //  26016 Hypogen
         Hypogen = new Material.Builder(getMaterialsId(), gregtechId("hypogen"))
                 .ingot()
                 .fluid()
-                .plasma()
-                .fluidTemp((int) (V[UXV] - V[LuV]))
+                .fluidPipeProperties((int) (V[UXV] - V[LuV]),1000,false )
                 .element(GTQTElements.Hypogen)
                 .color(0xDC784B)
                 .iconSet(CUSTOM_HYPOGEN)
@@ -172,11 +169,10 @@ public class GTQTElementMaterials {
         AstralTitanium = new Material.Builder(getMaterialsId(), gregtechId("astral_titanium"))
                 .ingot()
                 .fluid()
-                .plasma()
                 .color(0xDCA0F0)
                 .iconSet(BRIGHT)
                 //  TODO may be re-balance
-                .blastTemp(12000, BlastProperty.GasTier.HIGHEST, VA[UHV])
+                .blast(12800, BlastProperty.GasTier.HIGHER)
                 .element(GTQTElements.AstralTitanium)
                 .flags(GENERATE_PLATE, GENERATE_FOIL)
                 .build();
@@ -184,11 +180,10 @@ public class GTQTElementMaterials {
         CelestialTungsten = new Material.Builder(getMaterialsId(), gregtechId("celestial_tungsten"))
                 .ingot()
                 .fluid()
-                .plasma()
                 .color(0x323232)
                 .iconSet(BRIGHT)
                 //  TODO may be re-balance
-                .blastTemp(12000, BlastProperty.GasTier.HIGHEST, VA[UHV])
+                .blast(12800, BlastProperty.GasTier.HIGHER)
                 .element(GTQTElements.CelestialTungsten)
                 .flags(GENERATE_PLATE, GENERATE_FOIL, GENERATE_ROD, GENERATE_BOLT_SCREW)
                 .build();
@@ -206,14 +201,14 @@ public class GTQTElementMaterials {
                 .fluid()
                 .color(0xE5A559)
                 .iconSet(BRIGHT)
-                .blastTemp(10800, BlastProperty.GasTier.HIGHEST, VA[UV])
+                .blast(12800, BlastProperty.GasTier.HIGHER)
                 .element(GTQTElements.Ichorium)
                 .flags(GENERATE_PLATE)
                 .build();
         //  26022 Ichor Liquid
         IchorLiquid = new Material.Builder(getMaterialsId(), gregtechId("ichor_liquid"))
-                .fluid(FluidTypes.PLASMA)
-                .fluidTemp(214748)
+                .fluid()
+                .fluidPipeProperties(214748,1000,false)
                 .color(0xE5A559)
                 .element(GTQTElements.IchorLiquid)
                 .build();
@@ -221,7 +216,7 @@ public class GTQTElementMaterials {
         CrystalMatrix = new Material.Builder(getMaterialsId(), gregtechId("crystal_matrix"))
                 .ingot()
                 .fluid()
-                .fluidTemp(660450)
+                .fluidPipeProperties(660450,1000,false)
                 .color(0x70ecff)
                 .iconSet(BRIGHT)
                 .element(GTQTElements.CrystalMatrix)
@@ -230,7 +225,7 @@ public class GTQTElementMaterials {
         VoidMetal = new Material.Builder(getMaterialsId(), gregtechId("void_metal"))
                 .ingot()
                 .fluid()
-                .fluidTemp(0)
+                .fluidPipeProperties(0,1000,false)
                 .color(0x20142C)
                 .iconSet(DULL)
                 .element(GTQTElements.VoidMetal)
@@ -239,11 +234,10 @@ public class GTQTElementMaterials {
         Mithril = new Material.Builder(getMaterialsId(), gregtechId("mithril"))
                 .ingot()
                 .fluid()
-                .plasma()
-                .fluidTemp(4550)
+                .fluidPipeProperties(4450,1000,false)
                 .color(0x428fdb)
                 .iconSet(DULL)
-                .blastTemp(10900, BlastProperty.GasTier.HIGHEST, VA[UHV])
+                .blast(10800, BlastProperty.GasTier.HIGHER)
                 .element(GTQTElements.Mithril)
                 .flags(GENERATE_PLATE, GENERATE_FOIL, GENERATE_FINE_WIRE)
                 .build();

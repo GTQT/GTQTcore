@@ -57,7 +57,7 @@ public class NoEnergyMultiblockRecipeLogic extends AbstractRecipeLogic {
     }
 
     @Override
-    protected long getMaxVoltage() {
+    public long getMaxVoltage() {
         return GTValues.LV;
     }
 
@@ -291,15 +291,21 @@ public class NoEnergyMultiblockRecipeLogic extends AbstractRecipeLogic {
 
         recipe = Recipe.trimRecipeOutputs(recipe, getRecipeMap(), metaTileEntity.getItemOutputLimit(), metaTileEntity.getFluidOutputLimit());
 
-        recipe = findParallelRecipe(
-                this,
+        recipe = findParallelRecipe (
                 recipe,
                 currentDistinctInputBus,
                 getInputTank(),
                 getOutputInventory(),
                 getOutputTank(),
                 getMaxParallelVoltage(),
-                getParallelLimit());
+                getParallelLimit()
+
+        );
+
+
+
+
+
 
         if (recipe != null && setupAndConsumeRecipeInputs(recipe, currentDistinctInputBus)) {
             setupRecipe(recipe);

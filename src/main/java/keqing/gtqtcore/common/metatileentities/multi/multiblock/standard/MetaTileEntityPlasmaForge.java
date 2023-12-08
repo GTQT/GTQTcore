@@ -18,20 +18,20 @@ import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.recipeproperties.TemperatureProperty;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.TextFormattingUtil;
-import gregtech.api.util.interpolate.Eases;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
 import gregtech.client.shader.postprocessing.BloomEffect;
-import gregtech.client.utils.BloomEffectUtil;
 import gregtech.client.utils.RenderBufferHelper;
-import gregtech.client.utils.RenderUtil;
 import gregtech.client.utils.TooltipHelper;
 import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.BlockWireCoil;
 import gregtech.core.sound.GTSoundEvents;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
+import keqing.gtqtcore.api.utils.interpolate.Eases;
 import keqing.gtqtcore.client.textures.GTQTTextures;
+import keqing.gtqtcore.client.utils.BloomEffectUtil;
+import keqing.gtqtcore.client.utils.RenderUtil;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTMultiblockCasing;
 import keqing.gtqtcore.common.block.blocks.GTQTQuantumCasing;
@@ -67,7 +67,7 @@ import java.util.Objects;
 
 import static gregtech.api.util.RelativeDirection.*;
 
-public class MetaTileEntityPlasmaForge extends RecipeMapMultiblockController implements IFastRenderMetaTileEntity, IHeatingCoil {
+public class MetaTileEntityPlasmaForge extends RecipeMapMultiblockController implements  IHeatingCoil {
     private Integer color;
     private int blastFurnaceTemperature;
     protected int heatingCoilLevel;
@@ -226,141 +226,9 @@ public class MetaTileEntityPlasmaForge extends RecipeMapMultiblockController imp
         return false;
     }
 
-    @Override
-    protected void updateFormedValid() {
-        super.updateFormedValid();
-        int newColor = 0xFF000000;
-        if (!Objects.equals(color, newColor)) {
-            color = newColor;
-            writeCustomData(GregtechDataCodes.UPDATE_COLOR, this::writeColor);
-        }
 
-    }
 
-    @Override
-    public void writeInitialSyncData(PacketBuffer buf) {
-        super.writeInitialSyncData(buf);
-        writeColor(buf);
-    }
 
-    @Override
-    public void receiveInitialSyncData(PacketBuffer buf) {
-        super.receiveInitialSyncData(buf);
-        readColor(buf);
-    }
-
-    @Override
-    public void receiveCustomData(int dataId, PacketBuffer buf) {
-        super.receiveCustomData(dataId, buf);
-        if (dataId == GregtechDataCodes.UPDATE_COLOR) {
-            readColor(buf);
-        }
-    }
-
-    private void readColor(PacketBuffer buf) {
-        color = buf.readBoolean() ? buf.readVarInt() : null;
-    }
-
-    private void writeColor(PacketBuffer buf) {
-        buf.writeBoolean(color != null);
-        if (color != null) {
-            buf.writeVarInt(color);
-        }
-    }
-
-    @Override
-    public void renderMetaTileEntity(double x, double y, double z, float partialTicks) {
-        if (color != null && MinecraftForgeClient.getRenderPass() == 0) {
-            final int c = color;
-            BloomEffectUtil.requestCustomBloom(RENDER_HANDLER, (buffer) -> {
-                int color = RenderUtil.colorInterpolator(c, -1).apply(Eases.EaseQuadIn.getInterpolation(Math.abs((Math.abs(getOffsetTimer() % 50) + partialTicks) - 25) / 25));
-                float a = (float) (color >> 24 & 255) / 255.0F;
-                float r = (float) (color >> 16 & 255) / 255.0F;
-                float g = (float) (color >> 8 & 255) / 255.0F;
-                float b = (float) (color & 255) / 255.0F;
-                Entity entity = Minecraft.getMinecraft().getRenderViewEntity();
-                if (entity != null) {
-                    buffer.begin(GL11.GL_QUAD_STRIP, DefaultVertexFormats.POSITION_COLOR);
-                    RenderBufferHelper.renderRing(buffer,
-                            x+0.5,
-                            y +16,
-                            z +0.5,
-                            1, 3, 10, 20,
-                            r, g, b, a, EnumFacing.Axis.Y);
-                    Tessellator.getInstance().draw();
-                }
-                if (entity != null) {
-                    buffer.begin(GL11.GL_QUAD_STRIP, DefaultVertexFormats.POSITION_COLOR);
-                    RenderBufferHelper.renderRing(buffer,
-                            x+0.5,
-                            y +16,
-                            z +0.5,
-                            1, 3, 10, 20,
-                            r, g, b, a, EnumFacing.Axis.X);
-                    Tessellator.getInstance().draw();
-                }
-                if (entity != null) {
-                    buffer.begin(GL11.GL_QUAD_STRIP, DefaultVertexFormats.POSITION_COLOR);
-                    RenderBufferHelper.renderRing(buffer,
-                            x+0.5,
-                            y +16,
-                            z +0.5,
-                            1, 3, 10, 20,
-                            r, g, b, a, EnumFacing.Axis.Z);
-                    Tessellator.getInstance().draw();
-                }
-            });
-        }
-    }
-
-    @Override
-    public AxisAlignedBB getRenderBoundingBox() {
-        return new AxisAlignedBB(this.getPos().offset(getFrontFacing().getOpposite()).offset(getFrontFacing().rotateY(), 6),
-                this.getPos().offset(getFrontFacing().getOpposite(), 13).offset(getFrontFacing().rotateY().getOpposite(), 6));
-    }
-
-    @Override
-    public boolean shouldRenderInPass(int pass) {
-        return pass == 0;
-    }
-
-    @Override
-    public boolean isGlobalRenderer() {
-        return true;
-    }
-
-    static BloomEffectUtil.IBloomRenderFast RENDER_HANDLER = new BloomEffectUtil.IBloomRenderFast() {
-        @Override
-        public int customBloomStyle() {
-            return ConfigHolder.client.shader.fusionBloom.useShader ? ConfigHolder.client.shader.fusionBloom.bloomStyle : -1;
-        }
-
-        float lastBrightnessX;
-        float lastBrightnessY;
-
-        @Override
-        @SideOnly(Side.CLIENT)
-        public void preDraw(BufferBuilder buffer) {
-            BloomEffect.strength = (float) ConfigHolder.client.shader.fusionBloom.strength;
-            BloomEffect.baseBrightness = (float) ConfigHolder.client.shader.fusionBloom.baseBrightness;
-            BloomEffect.highBrightnessThreshold = (float) ConfigHolder.client.shader.fusionBloom.highBrightnessThreshold;
-            BloomEffect.lowBrightnessThreshold = (float) ConfigHolder.client.shader.fusionBloom.lowBrightnessThreshold;
-            BloomEffect.step = 1;
-
-            lastBrightnessX = OpenGlHelper.lastBrightnessX;
-            lastBrightnessY = OpenGlHelper.lastBrightnessY;
-            GlStateManager.color(1, 1, 1, 1);
-            OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240.0F, 240.0F);
-            GlStateManager.disableTexture2D();
-        }
-
-        @Override
-        @SideOnly(Side.CLIENT)
-        public void postDraw(BufferBuilder buffer) {
-            GlStateManager.enableTexture2D();
-            OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, lastBrightnessX, lastBrightnessY);
-        }
-    };
 
 
     public static int getMaxParallel(int heatingCoilLevel) {

@@ -133,7 +133,7 @@ public class MetaTileEntitySteamBlastFurnace extends RecipeMapSteamMultiblockCon
             Textures.RENDER_STATE.set(new CubeRendererState(op.layer, CubeRendererState.PASS_MASK, op.world));
             Textures.renderFace(renderState, offset,
                     ArrayUtils.addAll(pipeline, new LightMapOperation(240, 240), new ColourOperation(0xFFFFFFFF)),
-                    EnumFacing.UP, Cuboid6.full, TextureUtils.getBlockTexture("lava_still"), BloomEffectUtil.getRealBloomLayer());
+                    EnumFacing.UP, Cuboid6.full, TextureUtils.getBlockTexture("lava_still"), BloomEffectUtil.getBloomLayer());
             Textures.RENDER_STATE.set(op);
         }
     }
@@ -161,10 +161,6 @@ public class MetaTileEntitySteamBlastFurnace extends RecipeMapSteamMultiblockCon
         middlePos = middlePos.offset(getFrontFacing().getOpposite());
         this.getWorld().getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(middlePos)).forEach(entity -> entity.attackEntityFrom(DamageSource.LAVA, 3.0f));
 
-        if (getOffsetTimer() % 10 == 0) {
-            IBlockState state = getWorld().getBlockState(middlePos);
-            GTUtility.tryBreakSnowLayer(getWorld(), middlePos, state, true);
-        }
     }
 
     @Override

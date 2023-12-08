@@ -59,7 +59,7 @@ public class MetaTileEntityTurbineCombustionChamber extends FuelMultiblockContro
             if (getInputFluidInventory() != null) {
                 FluidStack WaterStack = getInputFluidInventory().drain(Materials.Lubricant.getFluid(Integer.MAX_VALUE), false);
                 FluidStack LubricantStack = getInputFluidInventory().drain(Materials.Water.getFluid(Integer.MAX_VALUE), false);
-                FluidStack liquidOxygenStack = getInputFluidInventory().drain(Materials.LiquidOxygen.getFluid(Integer.MAX_VALUE), false);
+                FluidStack liquidOxygenStack = getInputFluidInventory().drain(Materials.Oxygen.getFluid(Integer.MAX_VALUE), false);
                 int lubricantAmount = WaterStack == null ? 0 : WaterStack.amount;
                 textList.add(new TextComponentTranslation("gtqtcore.multiblock.large_combustion_engine.water_amount", TextFormattingUtil.formatNumbers(lubricantAmount)));
                 if (boostAllowed) {
@@ -146,7 +146,7 @@ public class MetaTileEntityTurbineCombustionChamber extends FuelMultiblockContro
     }
 
     private static IBlockState getCasingState1() {
-        return MetaBlocks.WIRE_COIL.getState(BlockWireCoil.CoilType.TUNGSTENSTEEL);
+        return MetaBlocks.WIRE_COIL.getState(BlockWireCoil.CoilType.HSS_G);
     }
 
     private static IBlockState getCasingState2() {
