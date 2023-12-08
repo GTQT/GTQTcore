@@ -4,3 +4,4 @@ public interface IHeatExchanger {
     int getThrottle();
     int getParallel();
 }
+

@@ -202,7 +202,6 @@ public class MetaTileEntityHugeMiner extends MultiblockWithDisplayBase implement
         int workingAreaChunks = this.minerLogic.getCurrentRadius() * 2 / CHUNK_LENGTH;
         tooltip.add(I18n.format("gregtech.machine.miner.multi.modes"));
         tooltip.add(I18n.format("gregtech.machine.miner.multi.production"));
-        tooltip.add(I18n.format("gregtech.machine.miner.fluid_usage", getDrillingFluidConsumePerTick(), DrillingFluid.getLocalizedName()));
         tooltip.add(I18n.format("gregtech.universal.tooltip.working_area_chunks_max", workingAreaChunks, workingAreaChunks));
         tooltip.add(I18n.format("gregtech.universal.tooltip.energy_tier_range", GTValues.VNF[this.tier], GTValues.VNF[this.tier + 1]));
     }

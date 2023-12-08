@@ -181,7 +181,11 @@ gtqtcore.machine.creative_energy_hatch.uxv.name=创造模式能源仓（§eUXV§
 gtqtcore.machine.creative_energy_hatch.opv.name=创造模式能源仓（§9OpV§r）
 gtqtcore.machine.creative_energy_hatch.max.name=创造模式能源仓（§c§lMAX§r）
 gregtech.machine.huge_chemical_reactor=万里挑一
-
+gtqtcore.multiblock.fr.threshold_decrement=§c降低一单位压裂压力 /n§7流体产出降低半单位，压裂液消耗减少一单位。
+gtqtcore.multiblock.fr.threshold_increment=§a增加一单位压裂压力 /n§7流体产出增加半单位，压裂液消耗增加一单位。
+gregtech.machine.fr.description=机器内可调节压裂压力，从而控制流体产出与压裂液消耗。
+gtqtcore.multiblock.fr1.amount=压裂液储量：%sL
+gtqtcore.multiblock.fr2.amount=压裂压力：%s
 gtqtcore.multiblock.ma.amount=润滑油储量：%sL
 gtqtcore.multiblock.ma.heat=润滑油持续润滑中
 gtqtcore.multiblock.ma.no=需要提供润滑油！

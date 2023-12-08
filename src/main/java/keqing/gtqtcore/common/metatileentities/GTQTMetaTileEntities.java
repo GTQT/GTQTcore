@@ -98,6 +98,10 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityHyperReactorMk1 HYPER_REACTOR_MK1;
     public static MetaTileEntityHyperReactorMk2 HYPER_REACTOR_MK2;
     public static MetaTileEntityHyperReactorMk3 HYPER_REACTOR_MK3;
+
+    public static MetaTileEntityFracturing BASIC_FLUID_DRILLING_RIG;
+    public static MetaTileEntityFracturing FLUID_DRILLING_RIG;
+    public static MetaTileEntityFracturing ADVANCED_FLUID_DRILLING_RIG;
     public static MetaTileEntityLargeNaquadahReactor LARGE_NAQUADAH_REACTOR;
     public static MetaTileEntityHugeElectricImplosionCompressor HUGE_ELECTRRIC_IMPLOSION_COMPRESSOR;
     public static final MetaTileEntityMultiFluidHatch[] BIG_IMPORT_HATCH = new MetaTileEntityMultiFluidHatch[6]; // EV-UHV
@@ -182,7 +186,9 @@ public class GTQTMetaTileEntities {
         MULTIPART_BUFFER_HATCH = registerMetaTileEntity(15023, new MetaTileEntityBufferHatch(gtqtcoreId("buffer_hatch")));
         DIGESTER = registerMetaTileEntity(15024, new MetaTileEntityDigester(gtqtcoreId("digester")));
         COMPONENT_ASSEMBLY_LINE = registerMetaTileEntity(15025, new MetaTileEntityComponentAssemblyLine(gtqtcoreId("component_assembly_line")));
-
+        BASIC_FLUID_DRILLING_RIG = registerMetaTileEntity(15026, new MetaTileEntityFracturing(gtqtcoreId("fracturing.mv"), 2));
+        FLUID_DRILLING_RIG = registerMetaTileEntity(15027, new MetaTileEntityFracturing(gtqtcoreId("fracturing.hv"), 3));
+        ADVANCED_FLUID_DRILLING_RIG = registerMetaTileEntity(15028, new MetaTileEntityFracturing(gtqtcoreId("fracturing.ev"), 4));
         HUGE_TANK = registerMetaTileEntity(15031,
                 new MetaTileEntityMultiblockTank(gtqtcoreId("tank.steel"), true, 1000 * 1000));
 
