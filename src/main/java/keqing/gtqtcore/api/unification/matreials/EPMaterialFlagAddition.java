@@ -7,6 +7,7 @@ import static gregtech.api.GTValues.EV;
 import static gregtech.api.GTValues.VA;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.info.MaterialFlags.CRYSTALLIZABLE;
+import static gregtech.api.unification.material.info.MaterialFlags.GENERATE_ROTOR;
 import static keqing.gtqtcore.api.unification.material.info.EPMaterialFlags.*;
 
 public class EPMaterialFlagAddition {
@@ -18,7 +19,7 @@ public class EPMaterialFlagAddition {
         //  Copper (LV), Cupronickel (MV), Electrum (HV), Kanthal (EV),
         //  Graphene (IV), Ruridit (LuV), Vanadium Gallium (ZPM), Americium (UV)
         //  Europium (UHV), Carbon Nanotube (UEV)
-
+        Aluminium.addFlags(GENERATE_ROTOR);
         Copper.addFlags(GENERATE_COIL);
         Cupronickel.addFlags(GENERATE_COIL);
         Electrum.addFlags(GENERATE_COIL);

@@ -16,5 +16,6 @@ public class GTQTRecipesManager {
         LubricantChains.init();
         PEEKChain.init();
         CircuitryMaterialChains.init();
+        MetaTileEntityLoader.init();
     }
 }

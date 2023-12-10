@@ -154,7 +154,7 @@ public class MetaTileEntityRocket extends FuelMultiblockController {
     }
 
     private static IBlockState getCasingState1() {
-        return MetaBlocks.WIRE_COIL.getState(BlockWireCoil.CoilType.TRITANIUM);
+        return MetaBlocks.WIRE_COIL.getState(BlockWireCoil.CoilType.NICHROME);
     }
 
     private static IBlockState getCasingState2() {

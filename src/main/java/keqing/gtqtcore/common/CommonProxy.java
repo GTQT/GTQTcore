@@ -11,6 +11,7 @@ import keqing.gtqtcore.common.block.blocks.GTQTBlockWireCoil;
 import keqing.gtqtcore.common.items.metaitems.GTQTMetaToolItems;
 import keqing.gtqtcore.loaders.recipes.GTQTRecipes;
 import keqing.gtqtcore.loaders.recipes.GTQTRecipesManager;
+import keqing.gtqtcore.loaders.recipes.MetaTileEntityLoader;
 import keqing.gtqtcore.loaders.recipes.handlers.*;
 import net.minecraft.block.Block;
 import net.minecraft.client.resources.I18n;
@@ -59,6 +60,7 @@ public class CommonProxy {
         RocketEngineRecipes.init();
         GTQTRecipesManager.init();
         WrapCircuits.init();
+        MetaTileEntityLoader.init();
 
 
         for (GTQTBlockWireCoil.CoilType type : GTQTBlockWireCoil.CoilType.values()) {
