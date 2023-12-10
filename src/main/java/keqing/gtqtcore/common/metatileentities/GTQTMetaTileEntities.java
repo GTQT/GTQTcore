@@ -1,13 +1,11 @@
 package keqing.gtqtcore.common.metatileentities;
 
-import gregicality.multiblocks.api.recipes.GCYMRecipeMaps;
 import gregicality.multiblocks.common.metatileentities.multiblockpart.MetaTileEntityParallelHatch;
 import gregtech.api.GTValues;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.SimpleGeneratorMetaTileEntity;
 import gregtech.api.unification.material.Materials;
 import gregtech.common.metatileentities.MetaTileEntities;
-import gregtech.common.metatileentities.multi.MetaTileEntityTankValve;
 import gregtech.common.metatileentities.multi.electric.generator.MetaTileEntityLargeTurbine;
 import gregtech.common.metatileentities.multi.multiblockpart.*;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
@@ -15,7 +13,9 @@ import keqing.gtqtcore.api.utils.GTQTLog;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.metatileentities.multi.generators.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.*;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.steam.MetaTileEntitySteamExtractor;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.steam.MetaTileEntitySteamBlastFurnace;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.steam.MetaTileEntitySteamCompressor;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.steam.MetaTileEntitySteamOreWasher;
 import keqing.gtqtcore.common.metatileentities.multi.multiblockpart.*;
 import keqing.gtqtcore.common.metatileentities.storage.MetaTileEntityMultiblockTank;
@@ -27,7 +27,6 @@ import java.util.function.IntSupplier;
 import static gregtech.api.util.GTUtility.genericGeneratorTankSizeFunction;
 import static gregtech.common.metatileentities.MetaTileEntities.*;
 import static keqing.gtqtcore.api.GTQTValue.gtqtcoreId;
-import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.NAQUADAH_REACTOR;
 
 public class GTQTMetaTileEntities {
 
@@ -90,6 +89,8 @@ public class GTQTMetaTileEntities {
     public static  MetaTileEntityStarBiomimeticFactory STAR_BIOMIMETIC_FACTORY;
     public static  MetaTileEntityPlasmaForge PLASMA_FORGE;
     public static MetaTileEntityStarMixer STAR_MIXER;
+    public static MetaTileEntitySteamCompressor STEAM_COMPRESSOR;
+    public static MetaTileEntitySteamExtractor STEAM_EXTRACTOR;
     public static MetaTileEntityHugeCrackingUnit HUGE_CRACKING_UNIT;
     public static MetaTileEntityHugeMiner BASIC_HUGE_MINER;
     public static MetaTileEntityHugeMiner HUGE_MINER;
@@ -189,6 +190,8 @@ public class GTQTMetaTileEntities {
         BASIC_FLUID_DRILLING_RIG = registerMetaTileEntity(15026, new MetaTileEntityFracturing(gtqtcoreId("fracturing.mv"), 2));
         FLUID_DRILLING_RIG = registerMetaTileEntity(15027, new MetaTileEntityFracturing(gtqtcoreId("fracturing.hv"), 3));
         ADVANCED_FLUID_DRILLING_RIG = registerMetaTileEntity(15028, new MetaTileEntityFracturing(gtqtcoreId("fracturing.ev"), 4));
+        STEAM_COMPRESSOR = registerMetaTileEntity(15029, new MetaTileEntitySteamCompressor(gtqtcoreId("steam_compressor")));
+        STEAM_EXTRACTOR = registerMetaTileEntity(15030, new MetaTileEntitySteamExtractor(gtqtcoreId("steam_extractor")));
         HUGE_TANK = registerMetaTileEntity(15031,
                 new MetaTileEntityMultiblockTank(gtqtcoreId("tank.steel"), true, 1000 * 1000));
 

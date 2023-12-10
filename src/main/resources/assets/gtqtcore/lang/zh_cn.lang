@@ -41,8 +41,8 @@ recipemap.i_modular_fission_reactor.name=模块化裂变
 recipemap.naquadah_reactor.name=硅岩反应
 recipemap.rocket.name=火箭燃烧
 recipemap.turbine_combustion_chamber.name=爆燃空气发电
-
-
+gtqtcore.machine.steam_extractor.name=大型蒸汽提取机
+gtqtcore.machine.steam_compressor.name=大型蒸汽压缩机
 gtqtcore.machine.huge_macerator.name=巨型粉碎工厂
 gtqtcore.machine.huge_alloy_blast_smelter.name=巨型合金炉
 gtqtcore.machine.huge_blast_furnace.name=巨型高炉
