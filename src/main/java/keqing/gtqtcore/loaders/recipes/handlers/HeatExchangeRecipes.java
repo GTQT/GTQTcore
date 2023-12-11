@@ -10,14 +10,14 @@ public class HeatExchangeRecipes {
 
         //  Exhaust gas heat exchange
         HEAT_EXCHANGE_RECIPES.recipeBuilder()
-                .fluidInputs(DistilledWater.getFluid(5))
-                .fluidInputs(HighPressureSteam.getFluid(1))
-                .fluidOutputs(Steam.getFluid(160 * 5))
-                .fluidOutputs(SuperheatedSteam.getFluid(80 * 5))
-                .fluidOutputs(SteamExhaustGas.getFluid(1))
-                .maxRate(1600)
-                .flowRate(500)
-                .duration(20)
+                .fluidInputs(DistilledWater.getFluid(10))
+                .fluidInputs(HighPressureSteam.getFluid(2))
+                .fluidOutputs(Steam.getFluid(160 * 10))
+                .fluidOutputs(SuperheatedSteam.getFluid(80 * 10))
+                .fluidOutputs(SteamExhaustGas.getFluid(2))
+                .maxRate(3200)
+                .flowRate(1000)
+                .duration(1)
                 .buildAndRegister();
     }
 }

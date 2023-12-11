@@ -420,105 +420,105 @@ public class FuelRecipes {
 
         GTQTcoreRecipeMaps.TURBINE_COMBUSTION_CHAMBER.recipeBuilder()
                 .fluidInputs(Naphtha.getFluid(1))
-                .fluidOutputs(HighPressureSteam.getFluid(200))
+                .fluidOutputs(HighPressureSteam.getFluid(20))
                 .duration(10)
                 .EUt((int) V[LV])
                 .buildAndRegister();
 
         GTQTcoreRecipeMaps.TURBINE_COMBUSTION_CHAMBER.recipeBuilder()
                 .fluidInputs(SulfuricLightFuel.getFluid(4))
-                .fluidOutputs(HighPressureSteam.getFluid(100))
+                .fluidOutputs(HighPressureSteam.getFluid(10))
                 .duration(5)
                 .EUt((int) V[LV])
                 .buildAndRegister();
 
         GTQTcoreRecipeMaps.TURBINE_COMBUSTION_CHAMBER.recipeBuilder()
                 .fluidInputs(Methanol.getFluid(4))
-                .fluidOutputs(HighPressureSteam.getFluid(160))
+                .fluidOutputs(HighPressureSteam.getFluid(16))
                 .duration(8)
                 .EUt((int) V[LV])
                 .buildAndRegister();
 
         GTQTcoreRecipeMaps.TURBINE_COMBUSTION_CHAMBER.recipeBuilder()
                 .fluidInputs(Ethanol.getFluid(1))
-                .fluidOutputs(HighPressureSteam.getFluid(120))
+                .fluidOutputs(HighPressureSteam.getFluid(12))
                 .duration(6)
                 .EUt((int) V[LV])
                 .buildAndRegister();
 
         GTQTcoreRecipeMaps.TURBINE_COMBUSTION_CHAMBER.recipeBuilder()
                 .fluidInputs(Octane.getFluid(2))
-                .fluidOutputs(HighPressureSteam.getFluid(100))
+                .fluidOutputs(HighPressureSteam.getFluid(10))
                 .duration(5)
                 .EUt((int) V[LV])
                 .buildAndRegister();
 
         GTQTcoreRecipeMaps.TURBINE_COMBUSTION_CHAMBER.recipeBuilder()
                 .fluidInputs(BioDiesel.getFluid(1))
-                .fluidOutputs(HighPressureSteam.getFluid(160))
+                .fluidOutputs(HighPressureSteam.getFluid(16))
                 .duration(8)
                 .EUt((int) V[LV])
                 .buildAndRegister();
 
         GTQTcoreRecipeMaps.TURBINE_COMBUSTION_CHAMBER.recipeBuilder()
                 .fluidInputs(LightFuel.getFluid(1))
-                .fluidOutputs(HighPressureSteam.getFluid(200))
+                .fluidOutputs(HighPressureSteam.getFluid(20))
                 .duration(10)
                 .EUt((int) V[LV])
                 .buildAndRegister();
 
         GTQTcoreRecipeMaps.TURBINE_COMBUSTION_CHAMBER.recipeBuilder()
                 .fluidInputs(Diesel.getFluid(1))
-                .fluidOutputs(HighPressureSteam.getFluid(300))
+                .fluidOutputs(HighPressureSteam.getFluid(30))
                 .duration(15)
                 .EUt((int) V[LV])
                 .buildAndRegister();
 
         GTQTcoreRecipeMaps.TURBINE_COMBUSTION_CHAMBER.recipeBuilder()
                 .fluidInputs(CetaneBoostedDiesel.getFluid(2))
-                .fluidOutputs(HighPressureSteam.getFluid(900))
+                .fluidOutputs(HighPressureSteam.getFluid(90))
                 .duration(45)
                 .EUt((int) V[LV])
                 .buildAndRegister();
 
         GTQTcoreRecipeMaps.TURBINE_COMBUSTION_CHAMBER.recipeBuilder()
                 .fluidInputs(RocketFuel.getFluid(16))
-                .fluidOutputs(HighPressureSteam.getFluid(2500))
+                .fluidOutputs(HighPressureSteam.getFluid(250))
                 .duration(125)
                 .EUt((int) V[LV])
                 .buildAndRegister();
 
         GTQTcoreRecipeMaps.TURBINE_COMBUSTION_CHAMBER.recipeBuilder()
                 .fluidInputs(Gasoline.getFluid(1))
-                .fluidOutputs(HighPressureSteam.getFluid(1000))
+                .fluidOutputs(HighPressureSteam.getFluid(100))
                 .duration(50)
                 .EUt((int) V[LV])
                 .buildAndRegister();
 
         GTQTcoreRecipeMaps.TURBINE_COMBUSTION_CHAMBER.recipeBuilder()
                 .fluidInputs(HighOctaneGasoline.getFluid(1))
-                .fluidOutputs(HighPressureSteam.getFluid(2000))
+                .fluidOutputs(HighPressureSteam.getFluid(200))
                 .duration(100)
                 .EUt((int) V[LV])
                 .buildAndRegister();
 
         GTQTcoreRecipeMaps.TURBINE_COMBUSTION_CHAMBER.recipeBuilder()
                 .fluidInputs(Toluene.getFluid(1))
-                .fluidOutputs(HighPressureSteam.getFluid(2000))
+                .fluidOutputs(HighPressureSteam.getFluid(200))
                 .duration(10)
                 .EUt((int) V[LV])
                 .buildAndRegister();
 
         GTQTcoreRecipeMaps.TURBINE_COMBUSTION_CHAMBER.recipeBuilder()
                 .fluidInputs(OilLight.getFluid(32))
-                .fluidOutputs(HighPressureSteam.getFluid(100))
+                .fluidOutputs(HighPressureSteam.getFluid(10))
                 .duration(5)
                 .EUt((int) V[LV])
                 .buildAndRegister();
 
         GTQTcoreRecipeMaps.TURBINE_COMBUSTION_CHAMBER.recipeBuilder()
                 .fluidInputs(RawOil.getFluid(64))
-                .fluidOutputs(HighPressureSteam.getFluid(300))
+                .fluidOutputs(HighPressureSteam.getFluid(30))
                 .duration(15)
                 .EUt((int) V[LV])
                 .buildAndRegister();

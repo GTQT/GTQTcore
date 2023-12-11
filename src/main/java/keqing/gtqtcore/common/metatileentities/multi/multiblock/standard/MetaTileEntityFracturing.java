@@ -58,7 +58,7 @@ import static gregtech.api.unification.material.Materials.Lubricant;
 
 public class MetaTileEntityFracturing extends MultiblockWithDisplayBase implements IMiner,ITieredMetaTileEntity, IWorkable {
 
-    int thresholdPercentage = 100;
+    int thresholdPercentage = 1;
     private final FracturingLogic minerLogic;
     private final int tier;
     private final int drillingFluidConsumePerTick;
@@ -170,9 +170,9 @@ public class MetaTileEntityFracturing extends MultiblockWithDisplayBase implemen
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
-                .aisle("FFFFFCC","FXXXXCC","FXXXXCC","FXXXXCC","  F    ","  F    ","       ","       ","       ")
+                .aisle("FFFFFCC","XXXXXCC","XXXXXCC","XXXXXCC","  F    ","  F    ","       ","       ","       ")
                 .aisle("F F  CC","CCCCCCC","CCCCCCC","CCCCCCC"," FFF   "," FFF   ","  F    ","  F    ","  F    ")
-                .aisle("FFFFFCC","FSXXXCC","FXXXXCC","FXXXXCC","  F    ","  F    ","       ","       ","       ")
+                .aisle("FFFFFCC","XSXXXCC","XXXXXCC","XXXXXCC","  F    ","  F    ","       ","       ","       ")
                 .where('S', selfPredicate())
                 .where('X', states(getCasingState()).setMinGlobalLimited(3)
                         .or(abilities(MultiblockAbility.INPUT_ENERGY).setMaxGlobalLimited(1))

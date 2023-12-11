@@ -186,6 +186,18 @@ gtqtcore.multiblock.fr.threshold_increment=§a增加一单位压裂压力 /n§7�
 gregtech.machine.fr.description=机器内可调节压裂压力，从而控制流体产出与压裂液消耗。
 gtqtcore.multiblock.fr1.amount=压裂液储量：%sL
 gtqtcore.multiblock.fr2.amount=压裂压力：%s
+
+gtqtcore.multiblock.ip1.amount=风量：%sL(风量上限 %s L)
+gtqtcore.multiblock.ip2.amount=温度：%sK(最高炉温 %s K)
+gtqtcore.multiblock.ip3.amount=耗时减免：每工作三秒总耗时减去 %s 秒。
+gtqtcore.multiblock.ip.threshold_decrement=§c降低一单位风量 /n§7升温速度降低一倍。
+gtqtcore.multiblock.ip.threshold_increment=§a增加一单位风量 /n§7升温速度增加一倍。
+
+gtqtcore.machine.industrial_primitive_blast_furnace.tooltip.1=可拓展两个附属高炉，附属高炉数量决定进风量上限。
+gtqtcore.machine.industrial_primitive_blast_furnace.tooltip.2=调节风量节流阀可以控制升温速率，当机器不工作时温度会缓缓降低。
+gtqtcore.machine.industrial_primitive_blast_furnace.tooltip.3=降温速度由当前温度决定（降温曲线）。
+gtqtcore.machine.industrial_primitive_blast_furnace.tooltip.4=温度区间决定定耗时减免，每三秒执行一次耗时减免（由减免等级决定）。
+gtqtcore.machine.industrial_primitive_blast_furnace.tooltip.5=全部升级完毕后最高十倍耗时减免。
 gtqtcore.multiblock.ma.amount=润滑油储量：%sL
 gtqtcore.multiblock.ma.heat=润滑油持续润滑中
 gtqtcore.multiblock.ma.no=需要提供润滑油！

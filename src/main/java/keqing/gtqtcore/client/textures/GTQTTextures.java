@@ -24,6 +24,7 @@ public class GTQTTextures {
     public static SimpleOverlayRenderer POLYBENZIMIDAZOLE_PIPE;
     public static SimpleOverlayRenderer QUANTUM_CONSTRAINT_CASING;
     public static SimpleOverlayRenderer PD_CASING;
+    public static SimpleOverlayRenderer BRICK;
     public static SimpleOverlayRenderer ADVANCED_INVAR_CASING;
     public static SimpleOverlayRenderer MACERATOR_CASING;
     public static SimpleOverlayRenderer NQ_CASING;
@@ -54,6 +55,7 @@ public class GTQTTextures {
         MACERATOR_CASING = new SimpleOverlayRenderer("multiblock/casing/macerator_casing");
         PD_CASING = new SimpleOverlayRenderer("multiblock/casing/pd_turbine_casing");
         HYPER_CASING = new SimpleOverlayRenderer("multiblock/casing/hyper_casing");
+        BRICK = new SimpleOverlayRenderer("multiblock/casing/brick");
         POLYBENZIMIDAZOLE_PIPE = new SimpleOverlayRenderer("multiblock/casing/talonite_casing");
         QUANTUM_CONSTRAINT_CASING = new SimpleOverlayRenderer("multiblock/quantum_force_transformer_casing/quantum_constraint_casing");
         ADVANCED_INVAR_CASING = new SimpleOverlayRenderer("multiblock/casing/advanced_invar_casing");

@@ -17,6 +17,7 @@ import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.utils.GTQTLog;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.metatileentities.multi.generators.*;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.MetaTileEntityIndustrialPrimitiveBlastFurnace;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.steam.MetaTileEntitySteamExtractor;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.steam.MetaTileEntitySteamBlastFurnace;
@@ -106,10 +107,14 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityHyperReactorMk3 HYPER_REACTOR_MK3;
 
     public static MetaTileEntityFracturing BASIC_FLUID_DRILLING_RIG;
+    public static MetaTileEntitySepticTank SEPTIC_TANK;
+    public static MetaTileEntityPCB PCB;
     public static MetaTileEntityFracturing FLUID_DRILLING_RIG;
     public static MetaTileEntityFracturing ADVANCED_FLUID_DRILLING_RIG;
     public static MetaTileEntityLargeNaquadahReactor LARGE_NAQUADAH_REACTOR;
     public static MetaTileEntityHugeElectricImplosionCompressor HUGE_ELECTRRIC_IMPLOSION_COMPRESSOR;
+
+    public static MetaTileEntityIndustrialPrimitiveBlastFurnace INDUSTRIAL_PRIMITIVE_BLAST_FURNACE;
 
     public static final SimpleGeneratorMetaTileEntity[] COMBUSTION_GENERATOR = new SimpleGeneratorMetaTileEntity[4];
     public static final SimpleGeneratorMetaTileEntity[] STEAM_TURBINE = new SimpleGeneratorMetaTileEntity[4];
@@ -219,6 +224,9 @@ public class GTQTMetaTileEntities {
         GAS_TURBINE[0] = registerMetaTileEntity(3072, new MetaTileEntitySingleTurbine(gtqtcoreId("gas_turbine.ev"), RecipeMaps.GAS_TURBINE_FUELS, Textures.GAS_TURBINE_OVERLAY, 4, GTUtility.genericGeneratorTankSizeFunction));
         GAS_TURBINE[1] = registerMetaTileEntity(3073, new MetaTileEntitySingleTurbine(gtqtcoreId("gas_turbine.iv"), RecipeMaps.GAS_TURBINE_FUELS, Textures.GAS_TURBINE_OVERLAY, 5, GTUtility.genericGeneratorTankSizeFunction));
 
+        INDUSTRIAL_PRIMITIVE_BLAST_FURNACE = registerMetaTileEntity(3074, new MetaTileEntityIndustrialPrimitiveBlastFurnace(gtqtcoreId("industrial_primitive_blast_furnace")));
+        SEPTIC_TANK = registerMetaTileEntity(3075, new MetaTileEntitySepticTank(gtqtcoreId("septic_tank")));
+        PCB = registerMetaTileEntity(3076, new MetaTileEntityPCB(gtqtcoreId("pcb")));
 
         ROTOR_HOLDER[6] = registerMetaTileEntity(3144, new MetaTileEntityRotorHolder(gtqtcoreId("rotor_holder.uhv"), GTValues.UHV));
         ROTOR_HOLDER[7] = registerMetaTileEntity(3145, new MetaTileEntityRotorHolder(gtqtcoreId("rotor_holder.uev"), GTValues.UEV));

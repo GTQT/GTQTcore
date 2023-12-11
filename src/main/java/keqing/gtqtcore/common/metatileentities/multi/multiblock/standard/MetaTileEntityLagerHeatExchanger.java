@@ -114,11 +114,11 @@ public class MetaTileEntityLagerHeatExchanger extends NoEnergyMultiblockControll
     }
 
     private void incrementThreshold(Widget.ClickData clickData) {
-        this.thresholdPercentage = MathHelper.clamp(thresholdPercentage + 5, 25, 100);
+        this.thresholdPercentage = MathHelper.clamp(thresholdPercentage + 5, 25, 200);
     }
 
     private void decrementThreshold(Widget.ClickData clickData) {
-        this.thresholdPercentage = MathHelper.clamp(thresholdPercentage - 5, 25, 100);
+        this.thresholdPercentage = MathHelper.clamp(thresholdPercentage - 5, 25, 200);
     }
 
     @Override

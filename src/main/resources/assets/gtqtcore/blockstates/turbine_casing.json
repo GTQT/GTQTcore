@@ -91,6 +91,12 @@
         "textures": {
           "all": "gregtech:blocks/multiblock/casing/advanced_filter_casing"
         }
+      },
+      "brick": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casing/brick"
+        }
       }
     }
   }

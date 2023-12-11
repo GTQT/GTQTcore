@@ -48,6 +48,7 @@ public abstract class NoEnergyMultiblockController extends MultiblockWithDisplay
 
     private ICleanroomProvider cleanroom;
 
+
     public NoEnergyMultiblockController(ResourceLocation metaTileEntityId, RecipeMap<?> recipeMap) {
         super(metaTileEntityId);
         this.recipeMap = recipeMap;
@@ -82,6 +83,8 @@ public abstract class NoEnergyMultiblockController extends MultiblockWithDisplay
     public boolean checkRecipe(@Nonnull Recipe recipe, boolean consumeIfSuccess) {
         return true;
     }
+
+
 
     @Override
     protected void formStructure(PatternMatchContext context) {
