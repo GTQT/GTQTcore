@@ -27,7 +27,7 @@ public class GTQTElementMaterials {
         //  26001 Draconium
         Draconium = new Material.Builder(getMaterialsId(), gregtechId("draconium"))
                 .ingot()
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0xbe49ed)
                 .iconSet(SHINY)
                 .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_ROTOR, GENERATE_ROD, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_FRAME, GENERATE_DENSE)
@@ -42,7 +42,7 @@ public class GTQTElementMaterials {
         //  26002 Awakened Draconium
         AwakenedDraconium = new Material.Builder(getMaterialsId(), gregtechId("awakened_draconium"))
                 .ingot()
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0xf58742)
                 .iconSet(BRIGHT)
                 .flags(GENERATE_PLATE, GENERATE_FOIL, GENERATE_FINE_WIRE)
@@ -53,7 +53,7 @@ public class GTQTElementMaterials {
         //  26003 Chaotic Draconium
         ChaoticDraconium = new Material.Builder(getMaterialsId(), gregtechId("chaotic_draconium"))
                 .ingot()
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0x2C195A)
                 .iconSet(SHINY)
                 .flags(NO_SMELTING, GENERATE_PLATE, GENERATE_DOUBLE_PLATE)
@@ -64,7 +64,7 @@ public class GTQTElementMaterials {
         //  26008 Plutonium-244
         Plutonium244 = new Material.Builder(getMaterialsId(), gregtechId("plutonium_244"))
                 .ingot()
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0xF03232)
                 .iconSet(SHINY)
                 .element(GTQTElements.Plutonium244)
@@ -83,7 +83,7 @@ public class GTQTElementMaterials {
         //  26010 Metastable Hassium
         MetastableHassium = new Material.Builder(getMaterialsId(), gregtechId("metastable_hassium"))
                 .ingot()
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0x2D3A9D)
                 .iconSet(BRIGHT)
                 .element(Elements.Hs)
@@ -93,7 +93,7 @@ public class GTQTElementMaterials {
         //  26011 Metastable Flerovium
         MetastableFlerovium = new Material.Builder(getMaterialsId(), gregtechId("metastable_flerovium"))
                 .ingot()
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0x521973)
                 .iconSet(SHINY)
                 .element(Elements.Fl)
@@ -157,7 +157,7 @@ public class GTQTElementMaterials {
         //  26017 Californium-252
         Californium252 = new Material.Builder(getMaterialsId(), gregtechId("californium_252"))
                 .ingot()
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .iconSet(SHINY)
                 .element(GTQTElements.Californium252)
                 .color(Californium.getMaterialRGB())
@@ -165,7 +165,7 @@ public class GTQTElementMaterials {
         //  26018 Astral Titanium
         AstralTitanium = new Material.Builder(getMaterialsId(), gregtechId("astral_titanium"))
                 .ingot()
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0xDCA0F0)
                 .iconSet(BRIGHT)
                 //  TODO may be re-balance
@@ -176,7 +176,7 @@ public class GTQTElementMaterials {
         //  26019 Celestial Tungsten
         CelestialTungsten = new Material.Builder(getMaterialsId(), gregtechId("celestial_tungsten"))
                 .ingot()
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0x323232)
                 .iconSet(BRIGHT)
                 //  TODO may be re-balance
@@ -187,7 +187,7 @@ public class GTQTElementMaterials {
         //  26020 Ytterbium-178
         Ytterbium178 = new Material.Builder(getMaterialsId(), gregtechId("ytterbium_178"))
                 .dust()
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(Ytterbium.getMaterialRGB())
                 .iconSet(SHINY)
                 .element(GTQTElements.Ytterbium178)
@@ -195,7 +195,7 @@ public class GTQTElementMaterials {
         //  26021 Ichorium
         Ichorium = new Material.Builder(getMaterialsId(), gregtechId("ichorium"))
                 .ingot()
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0xE5A559)
                 .iconSet(BRIGHT)
                 .blast(12800, BlastProperty.GasTier.HIGHER)
@@ -219,7 +219,7 @@ public class GTQTElementMaterials {
         //  26024 Void Metal
         VoidMetal = new Material.Builder(getMaterialsId(), gregtechId("void_metal"))
                 .ingot()
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0x20142C)
                 .iconSet(DULL)
                 .element(GTQTElements.VoidMetal)
@@ -236,13 +236,13 @@ public class GTQTElementMaterials {
                 .build();
         //  26026 Bismuth-209
         Bismuth209 = new Material.Builder(getMaterialsId(), gregtechId("bismuth_209"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(Bismuth.getMaterialRGB())
                 .element(GTQTElements.Bismuth209)
                 .build();
         //  26027 Lead-209
         Lead209 = new Material.Builder(getMaterialsId(), gregtechId("lead_209"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(Lead.getMaterialRGB())
                 .element(GTQTElements.Lead209)
                 .build();

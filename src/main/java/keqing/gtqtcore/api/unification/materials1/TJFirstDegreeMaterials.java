@@ -27,7 +27,7 @@ public class TJFirstDegreeMaterials {
     public static void registerMaterials(){
         Birmabright = new Material.Builder(25000, gregtechId("birmabright"))
                 .ingot()
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .blast(1100)
                 .color(1755371).iconSet(MaterialIconSet.DULL)
                 .flags(setMaterialFlags(STANDARDPLATE, STANDARDROD, STANDARDROTOR, STANDARDGEAR, STANDARDSPRING, STANDARDCASING))
@@ -36,7 +36,7 @@ public class TJFirstDegreeMaterials {
 
         BT6 = new Material.Builder(25001, gregtechId("bt_6"))
                 .ingot()
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .colorAverage().iconSet(MaterialIconSet.SHINY)
                 .flags(setMaterialFlags(STANDARDPLATE, STANDARDROD, STANDARDROTOR, STANDARDGEAR, STANDARDSPRING))
                 .components(Iron, 3, Carbon, 1, Vanadium, 5, Titanium, 40, Aluminium, 6)
@@ -45,7 +45,7 @@ public class TJFirstDegreeMaterials {
 
         TriphenylPhosphine  = new Material.Builder(25002, gregtechId("triphenylphosphine"))
                 .dust()
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .colorAverage()
                 .components(Phosphorus, 1, Carbon, 18, Hydrogen, 15)
                 .build()
@@ -60,28 +60,28 @@ public class TJFirstDegreeMaterials {
                 .setFormula("(FC6H4)2CO", true);
 
         MolybdenumSulfide = new Material.Builder(25004, gregtechId("molybdenumsulfide"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .colorAverage()
                 .components(Molybdenum, 1, Sulfur, 2)
                 .build()
                 .setFormula("MoS2", true);
 
         PhenylmagnesiumBromide = new Material.Builder(25005, gregtechId("phenylmagnesiumbromide"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .colorAverage()
                 .components(Carbon, 6, Hydrogen, 5, Magnesium, 1, Bromine, 1)
                 .build()
                 .setFormula("C6H5MgBr", true);
 
         Bromobenzene = new Material.Builder(25006, gregtechId("bromobenzene"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .colorAverage()
                 .components(Carbon, 6, Hydrogen, 4, Bromine, 1)
                 .build()
                 .setFormula("C6H5Br",true);
 
         Draconium = new Material.Builder(25007, gregtechId("draconium"))
-                .ingot().liquid(new FluidBuilder().customStill())
+                .ingot().fluid()
                 .color(0x573d85).iconSet(MaterialIconSet.DULL)
                 .flags(setMaterialFlags(STANDARDPLATE, STANDARDCASING))
                 .build();
@@ -100,21 +100,21 @@ public class TJFirstDegreeMaterials {
 
         //TODO: CARBON make the formula for ladder poly-p-phenylene
         Ladder_Poly_P_Phenylene = new Material.Builder(25011, gregtechId("polypphenylene"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .ingot()
                 .color(0xbfb393)
                 .flags(setMaterialFlags(STANDARDWIREFINE,STANDARDFOIL))
                 .build();
 
         HydrogenSilsesquioxane = new Material.Builder(25012, gregtechId("hydrogensilsesquioxane"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0x471525)
                 .build()
                 .setFormula("[HSiO3/2]", true);
 
         //TODO: CARBON make the formula for SU-8 Photoresist
         SU8_Photoresist = new Material.Builder(25013, gregtechId("su_photoresist"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0x0e242b)
                 .build();
         Fiberglass = new Material.Builder(25014, gregtechId("fiberglass"))
@@ -129,26 +129,26 @@ public class TJFirstDegreeMaterials {
                 .build();
 
         SeleniumMonobromide = new Material.Builder(25016, gregtechId("seleniummonobromide"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0x472a1a)
                 .build();
 
         //  25038 Hydroquinone
         Hydroquinone = new Material.Builder(25017, gregtechId("hydroquinone"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0x83251A)
                 .components(Carbon, 6, Hydrogen, 6, Oxygen, 2)
                 .build()
                 .setFormula("C6H4(OH)2", true);
 
         Fluorobenzene = new Material.Builder(25018, gregtechId("fluorobenzene"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0x7CCA88)
                 .components(Carbon, 6, Hydrogen, 5, Fluorine, 1)
                 .build();
 
         Starlight = new Material.Builder(25019, gregtechId("starlight"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0xebfafc)
                 .iconSet(MaterialIconSet.SHINY)
                 .build();
@@ -174,28 +174,28 @@ public class TJFirstDegreeMaterials {
                 .build();
 
         HydraziniumChloride = new Material.Builder(25023, gregtechId("hydraziniumchloride"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .colorAverage()
                 .components(Nitrogen, 2, Hydrogen, 5, Chlorine, 1)
                 .build()
                 .setFormula("N2H4HCl", true);
 
         DibromoisophthalicAcid = new Material.Builder(25024, gregtechId("dibromoisophthalicacid"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .colorAverage()
                 .components(Carbon, 8, Hydrogen, 5, Bromine, 1, Oxygen, 4)
                 .build()
                 .setFormula("C8H5BrO4",true);
 
         Dibromoterephthaloyldichloride = new Material.Builder(25025, gregtechId("dibromoterephthaloyldichloride"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .colorAverage()
                 .components(Carbon, 8, Hydrogen, 2, Bromine, 2, Chlorine, 2, Oxygen, 2)
                 .build()
                 .setFormula("C8H2Br2Cl2O2",true);
 
         P1Solution = new Material.Builder(25026, gregtechId("p_one_solution"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0x6b0c05)
                 .build();
 
@@ -215,13 +215,13 @@ public class TJFirstDegreeMaterials {
                 .setFormula("Co-60", false);
 
         Fluorotoluene = new Material.Builder(25029, gregtechId("fluorotoluene"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0x6EC5B8)
                 .components(Carbon, 7, Hydrogen, 7, Fluorine, 1)
                 .build();
 
         Resorcinol = new Material.Builder(25030, gregtechId("resorcinol"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0x9DA38D)
                 .components(Carbon, 6, Hydrogen, 6, Oxygen, 2)
                 .build();
@@ -234,21 +234,21 @@ public class TJFirstDegreeMaterials {
                 .build();
 
         NitrileButadieneRubber = new Material.Builder(25032, gregtechId("nitrile_butadiene_rubber"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0x211A18)
                 .flags(DISABLE_DECOMPOSITION, GENERATE_PLATE, GENERATE_RING)
                 .components(Carbon, 7, Hydrogen, 9, Nitrogen, 1)
                 .build();
 
         PolyPhosphonitrileFluoroRubber = new Material.Builder(25033, gregtechId("poly_phosphonitrile_fluoro_rubber"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0x372B28)
                 .flags(DISABLE_DECOMPOSITION, GENERATE_PLATE, GENERATE_RING)
                 .components(Carbon, 24, Hydrogen, 16, Oxygen, 8, Nitrogen, 4, Phosphorus, 4, Fluorine, 40)
                 .build();
 
         Silane = new Material.Builder(25045, gregtechId("silane"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .colorAverage()
                 .components(Silicon, 1, Hydrogen, 4)
                 .build()
@@ -279,17 +279,17 @@ public class TJFirstDegreeMaterials {
 
 
         Gluons = new Material.Builder(25051, gregtechId("gluons"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0xffffff)
                 .build();
 
         LightQuarks = new Material.Builder(25052, gregtechId("light_quarks"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0x59ff7d)
                 .build();
 
         HeavyQuarks = new Material.Builder(25053, gregtechId("heavy_quarks"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0x4a080b)
                 .build();
 
@@ -314,7 +314,7 @@ public class TJFirstDegreeMaterials {
                 .build();
 
         HeavyQuarkDegenerate = new Material.Builder(25057, gregtechId("heavy_quark_degenerate_matter"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .ingot()
                 .color(0x171717)
                 .components(Gluons, 1, HeavyQuarks, 4, LightQuarks, 1)
@@ -328,14 +328,14 @@ public class TJFirstDegreeMaterials {
                 .build();
 
         IndiumFluoride = new Material.Builder(25059, gregtechId("indium_fluoride"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0x2d5c53)
                 .components(Indium, 1, Fluorine, 3)
                 .build();
 
         EnrichedNaqAlloy = new Material.Builder(25060, gregtechId("enriched_naquadah_alloy"))
                 .ingot()
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .colorAverage()
                 .components(NaquadahEnriched, 16, Einsteinium, 4, Rhodium, 4, Technetium, 4, Astatine, 2, Erbium, 2)
                 .blast(9700)
@@ -366,30 +366,30 @@ public class TJFirstDegreeMaterials {
                 .build();
 
         XenonFluorideSupercondiveMix = new Material.Builder(25064, gregtechId("xenon_fluoride_mix"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0x251a33)
                 .build();
 
 
         XenonOxyTetraFluoride = new Material.Builder(25065, gregtechId("xenon_oxytetrafluoride"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .colorAverage()
                 .components(Xenon, 1, Oxygen, 1, Fluorine, 4)
                 .build();
 
         XenonDioxide = new Material.Builder(25066, gregtechId("xenon_dioxide"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .colorAverage()
                 .components(Xenon, 1, Oxygen, 2)
                 .build();
 
         XenonTetraFluoride = new Material.Builder(25067, gregtechId("xenon_tetrafluoride"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0x3d1e42)
                 .components(Xenon, 1, Fluorine, 4)
                 .build();
         XenonHexaFluoride = new Material.Builder(25068, gregtechId("xenon_hexafluoride"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0x8d5cff)
                 .components(Xenon, 1, Fluorine, 6)
                 .build();
@@ -408,31 +408,31 @@ public class TJFirstDegreeMaterials {
                 .build();
 
         SuspendedPGQD = new Material.Builder(25071, gregtechId("suspended_pgqd"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0x65ad95)
                 .components(Krypton, 1, GraphenePQD, 1)
                 .build();
 
         Leptons = new Material.Builder(25072, gregtechId("leptons"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0x5500ff)
                 .build();
 
         NeonFluoride = new Material.Builder(25073, gregtechId("neon_fluoride"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .colorAverage()
                 .components(Neon, 1, Fluorine, 1)
                 .build();
 
         ExcitedNeonFluoride = new Material.Builder(25074, gregtechId("excited_neon_fluoride"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .colorAverage()
                 .color(NeonFluoride.getMaterialRGB())
                 .components(NeonFluoride, 1)
                 .build();
 
         ArgonFluorine = new Material.Builder(25075, gregtechId("argon_fluorine"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0x00ff88)
                 .components(Argon, 1, Fluorine, 1)
                 .build();
@@ -450,7 +450,7 @@ public class TJFirstDegreeMaterials {
                 .build();
 
         Acrylonitrile = new Material.Builder(25078, gregtechId("acrylonitrile"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0x565734)
                 .components(Carbon, 3, Hydrogen, 3, Nitrogen, 1)
                 .build()
@@ -462,7 +462,7 @@ public class TJFirstDegreeMaterials {
                 .build();
 
         SodiumThiocyanatePolymerizationSolution = new Material.Builder(25080, gregtechId("sodiumthiocyanatepolymerizationsolution"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .colorAverage()
                 .components(Water, 1, SodiumThiocyanate, 1)
                 .build();
@@ -473,7 +473,7 @@ public class TJFirstDegreeMaterials {
                 .build();
 
         CFCoatingSolution = new Material.Builder(25082, gregtechId("cf_coating_solution"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .colorAverage()
                 .components(PolyvinylChloride, 1, Polyethylene, 1)
                 .build();
@@ -489,7 +489,7 @@ public class TJFirstDegreeMaterials {
 
         Polyetheretherketone = new Material.Builder(25086, gregtechId("peek"))
                 .ingot()
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .iconSet(MaterialIconSet.DULL)
                 .color(0x2b2b2b)
                 .build()
@@ -497,7 +497,7 @@ public class TJFirstDegreeMaterials {
 
         ProgrammableMatter = new Material.Builder(25087, gregtechId("programmable_matter"))
                 .ingot()
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0x8196a3)
                 .iconSet(MaterialIconSet.SHINY)
                 .build()
@@ -526,7 +526,7 @@ public class TJFirstDegreeMaterials {
 
         HEA_2 = new Material.Builder(25091, gregtechId("high_entropy_alloy_2"))
                 .ingot()
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .iconSet(MaterialIconSet.METALLIC)
                 .components(Zirconium, 6, Tungsten, 4, Vanadium, 5, Cobalt, 3, Manganese, 4)
                 .colorAverage()
@@ -534,7 +534,7 @@ public class TJFirstDegreeMaterials {
 
         HEA_3 = new Material.Builder(25092, gregtechId("high_entropy_alloy_3"))
                 .ingot()
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .iconSet(MaterialIconSet.SHINY)
                 .components(Aluminium, 5, Chrome, 5, Molybdenum, 7, Tantalum, 9, Titanium, 6, Zirconium, 4, Nitrogen, 21)
                 .colorAverage()
@@ -595,21 +595,21 @@ public class TJFirstDegreeMaterials {
 
 
         Methyltrichlorosilane = new Material.Builder(25103, gregtechId("methyltrichlorosilane"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .colorAverage()
                 .components(Carbon, 1, Hydrogen, 3, Chlorine, 3, Silicon, 1)
                 .build()
                 .setFormula("CH3Cl3Si", true);
 
         Methyltrimethoxysilane = new Material.Builder(25104, gregtechId("methyltrimethyoxysilane"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0x42163c)
                 .components(Silicon, 1, Oxygen, 3, Carbon, 4, Hydrogen, 12)
                 .build()
                 .setFormula("CH3Si(OCH3)3", true);
 
         Polymethylsilesquioxane = new Material.Builder(25105, gregtechId("polymethylsilesquioxane"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0xff7ab4)
                 .components(Silicon, 1, Oxygen, 3, Carbon, 4, Hydrogen, 12)
                 .build()
@@ -627,7 +627,7 @@ public class TJFirstDegreeMaterials {
                 .build();
 
         OnePropanol = new Material.Builder(25108, gregtechId("onepropanol"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0xbad17b)
                 .components(Carbon, 3, Hydrogen, 8, Oxygen, 1)
                 .build()
@@ -641,7 +641,7 @@ public class TJFirstDegreeMaterials {
                 .setFormula("(Na13Al13Si83O192)16H2O", true);
 
         SodiumHydroxideSilica = new Material.Builder(25110, gregtechId("sodiumhydroxidesilica"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0x213996)
                 .iconSet(MaterialIconSet.FLUID)
                 .components(SodiumHydroxide, 1, SiliconDioxide, 1, Water, 1)
@@ -654,7 +654,7 @@ public class TJFirstDegreeMaterials {
                 .build();
 
         SodiumAluminumSilicaSolution = new Material.Builder(25112, gregtechId("aluminumsilicasolution"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0xb0c1ff)
                 .components(Sodium, 1, Aluminium, 1, Silicon, 1, Oxygen, 2, Water, 1)
                 .build();
@@ -668,7 +668,7 @@ public class TJFirstDegreeMaterials {
                 .build();
 
         DimethylCarbonate = new Material.Builder(25115, gregtechId("dimethylcarbonate"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .colorAverage()
                 .components(Carbon, 3, Hydrogen, 6, Oxygen, 3)
                 .build()
@@ -682,28 +682,28 @@ public class TJFirstDegreeMaterials {
                 .setFormula("(CH3)4NBr",true);
 
         DiamondSonicationSolution = new Material.Builder(25117, gregtechId("diamondsonicationsolution"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .colorAverage()
                 .flags(DISABLE_DECOMPOSITION)
                 .components(Graphite, 1, Phenol, 1)
                 .build();
 
         SuperfluidHelium3 = new Material.Builder(25118, gregtechId("superfluidhelium"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .colorAverage()
                 .flags(DISABLE_DECOMPOSITION)
                 .components(Helium3, 1)
                 .build();
 
         CobaltChloride = new Material.Builder(25119, gregtechId("cobaltchloride"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0x48559F)
                 .flags(DISABLE_DECOMPOSITION)
                 .components(Cobalt, 1, Chlorine, 2)
                 .build();
 
         CobaltIodide = new Material.Builder(25120, gregtechId("cobaltiodide"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .colorAverage()
                 .flags(DISABLE_DECOMPOSITION)
                 .build();
@@ -715,22 +715,22 @@ public class TJFirstDegreeMaterials {
                 .setFormula("Co-59", false);
 
         Cobalt59Iodide = new Material.Builder(25122, gregtechId("cobalt_59_iodide"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0x0B0058)
                 .build();
 
         Cobalt60Iodide = new Material.Builder(25123, gregtechId("cobalt_60_iodide"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .colorAverage()
                 .build();
 
         HydroiodicAcid = new Material.Builder(25124, gregtechId("hydroiodicacid"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .colorAverage()
                 .build();
 
         ImpureHydroiodicAcid = new Material.Builder(25125, gregtechId("impurehydroiodicacid"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .colorAverage()
                 .flags(DISABLE_DECOMPOSITION)
                 .components(HydroiodicAcid, 1, Water, 1)
@@ -738,13 +738,13 @@ public class TJFirstDegreeMaterials {
                 .setFormula("N2(HI)2H2O",true);
 
         Butynediol = new Material.Builder(25126, gregtechId("butynediol"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .colorAverage()
                 .components(Carbon, 4, Hydrogen, 6, Oxygen, 2)
                 .build();
 
         KAOil = new Material.Builder(25127, gregtechId("ka_oil"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0xFA7B53)
                 .components(Carbon, 12, Hydrogen, 22, Oxygen, 2)
                 .build()
@@ -758,7 +758,7 @@ public class TJFirstDegreeMaterials {
                 .setFormula("C6H8O2(OH)2", true);
 
         NitrousAcid = new Material.Builder(25138, gregtechId("nitrous_acid"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .colorAverage()
                 .components(Hydrogen, 1, Nitrogen, 1, Oxygen, 2)
                 .build();
@@ -776,7 +776,7 @@ public class TJFirstDegreeMaterials {
                 .build();
 
         Cyclopentanone = new Material.Builder(25131, gregtechId("cyclopentanone"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .colorAverage()
                 .components(Carbon, 5, Hydrogen, 8, Oxygen, 1)
                 .build()
@@ -789,46 +789,46 @@ public class TJFirstDegreeMaterials {
                 .build();
 
         TriphenylsulfoniumHexafluoroantimonate = new Material.Builder(25133, gregtechId("triphenylsulfonium_hexafluoroantimonate"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0x8968FA)
                 .components(Carbon, 18, Hydrogen, 15, Sulfur, 1, Antimony, 1, Fluorine, 6)
                 .build();
 
         HypofluorousAcid = new Material.Builder(25134, gregtechId("hypofluorous_acid"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .colorAverage()
                 .components(Hydrogen, 1, Fluorine, 1, Oxygen, 1)
                 .build();
 
         HexafluoroantimonateSalt1 = new Material.Builder(25135, gregtechId("hexafluoroantimonate_salt_1"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0x26095F)
                 .components(Carbon, 36, Hydrogen, 28, Sulfur, 3, Antimony, 2, Fluorine, 12)
                 .build()
                 .setFormula("C36H28S3(SbF6)2", true);
 
         HexafluoroantimonateSalt2 = new Material.Builder(25136, gregtechId("hexafluoroantimonate_salt_2"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0x5A2F9F)
                 .components(Carbon, 24, Hydrogen, 19, Sulfur, 2, Antimony, 1, Fluorine, 6)
                 .build();
 
         MixedHexafluoroantimonateSalts = new Material.Builder(25137, gregtechId("mixed_hexafluoroantimonate_salts"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .flags(DECOMPOSITION_BY_CENTRIFUGING)
                 .colorAverage()
                 .components(HexafluoroantimonateSalt1, 1, HexafluoroantimonateSalt2, 1)
                 .build();
 
         DiluteFluoroantimonicAcid = new Material.Builder(25139, gregtechId("dilute_fluoroantimonic_acid"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .flags(DISABLE_DECOMPOSITION)
                 .colorAverage()
                 .components(Hydrogen, 1, Antimony, 1, Fluorine, 6)
                 .build();
 
         IndiumSolution = new Material.Builder(25140, gregtechId("indium_solution"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0x58474C)
                 .flags(DISABLE_DECOMPOSITION)
                 .build()
@@ -842,7 +842,7 @@ public class TJFirstDegreeMaterials {
                 .build();
 
         IndiumResidue = new Material.Builder(25142, gregtechId("indium_refining_residue"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .iconSet(MaterialIconSet.LIGNITE)
                 .color(0x060921)
                 .build();
@@ -878,29 +878,29 @@ public class TJFirstDegreeMaterials {
                 .build();
 
         BauxiteSlurry = new Material.Builder(25148, gregtechId("bauxite_slurry"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0x51040A)
                 .build();
 
         IlmeniteSlurry = new Material.Builder(25149, gregtechId("ilmenite_slurry"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0x0A0212)
                 .build();
 
         RedMud = new Material.Builder(25150, gregtechId("red_mud"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .colorAverage()
                 .flags(DISABLE_DECOMPOSITION)
                 .components(Rutile, 1, HydrochloricAcid, 2)
                 .build();
 
         HeavyRedMudResidue = new Material.Builder(25151, gregtechId("red_mud_residue"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0x091012)
                 .build();
 
         RefractoryMetalResidue = new Material.Builder(25152, gregtechId("refractory_metal_residue"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0x164347)
                 .build();
 
@@ -917,24 +917,24 @@ public class TJFirstDegreeMaterials {
                 .build();
 
         HafniumTetrachloride = new Material.Builder(25155, gregtechId("hafnium_tetrachloride"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .colorAverage()
                 .components(Hafnium, 1, Chlorine, 4)
                 .build();
 
         ZirconiumTetrachloride = new Material.Builder(25156, gregtechId("zirconium_tetrachloride"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .colorAverage()
                 .components(Zirconium, 1, Chlorine, 4)
                 .build();
 
         PotassiumFluorideRefractoryMixture = new Material.Builder(25157, gregtechId("potassium_fluoride_refractory_mixture"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0x667E71)
                 .build();
 
         Trichlorosilane = new Material.Builder(25158, gregtechId("trichlorosilane"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .colorAverage()
                 .components(Hydrogen, 1, Silicon, 1, Chlorine, 3)
                 .build();
@@ -946,19 +946,19 @@ public class TJFirstDegreeMaterials {
                 .build();
 
         Aminopropionitrile = new Material.Builder(25159, gregtechId("aminopropionitrile"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .components(Carbon, 3, Hydrogen, 6, Nitrogen, 2)
                 .colorAverage()
                 .build();
 
         Aminopropylamine = new Material.Builder(25160, gregtechId("aminopropylamine"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .components(Carbon, 3, Hydrogen, 10, Nitrogen, 2)
                 .colorAverage()
                 .build();
 
         KAPA = new Material.Builder(25161, gregtechId("kapa"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .components(Potassium, 2, Carbon, 3, Hydrogen, 10, Nitrogen, 2)
                 .colorAverage()
                 .build();
@@ -994,7 +994,7 @@ public class TJFirstDegreeMaterials {
                 .build();
 
         SodiumAcetate = new Material.Builder(25167, gregtechId("sodium_acetate"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .components(Carbon, 2, Hydrogen, 3, Sodium, 1, Oxygen, 2)
                 .colorAverage()
                 .build()
@@ -1014,19 +1014,19 @@ public class TJFirstDegreeMaterials {
                 .build();
 
         PerchloricAcid = new Material.Builder(25170, gregtechId("perchloric_acid"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .components(Hydrogen, 1, Chlorine, 1, Oxygen, 4)
                 .colorAverage()
                 .build();
 
         Phenylhydrazine = new Material.Builder(25171, gregtechId("phenylhydrazine"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .components(Carbon, 6, Hydrogen, 8, Nitrogen, 2)
                 .colorAverage()
                 .build();
 
         BenzoylChloride = new Material.Builder(25172, gregtechId("benzoyl_chloride"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .components(Carbon, 7, Hydrogen, 5, Chlorine, 1, Oxygen, 1)
                 .colorAverage()
                 .build();
@@ -1052,31 +1052,31 @@ public class TJFirstDegreeMaterials {
                 .build();
 
         Acetaldehyde = new Material.Builder(25176, gregtechId("acetaldehyde"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .components(Carbon, 2, Hydrogen, 4, Oxygen, 1)
                 .colorAverage()
                 .build();
 
         Acetoin  = new Material.Builder(25178, gregtechId("acetoin"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .components(Carbon, 4, Hydrogen, 8, Oxygen, 2)
                 .colorAverage()
                 .build();
 
         MetaNitrochlorobenzine = new Material.Builder(25179, gregtechId("meta_nitrochlorobenzine"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .components(Carbon, 6, Hydrogen, 4, Chlorine, 1, Nitrogen, 1, Oxygen, 2)
                 .colorAverage()
                 .build();
 
         Nitroanisole = new Material.Builder(25180, gregtechId("nitroanisole"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .components(Carbon, 7, Hydrogen, 7, Nitrogen, 1, Oxygen, 3)
                 .colorAverage()
                 .build();
 
         Anisidine = new Material.Builder(25182, gregtechId("anisidine"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .components(Carbon, 7, Hydrogen, 9, Nitrogen, 1, Oxygen, 1)
                 .colorAverage()
                 .build();
@@ -1094,13 +1094,13 @@ public class TJFirstDegreeMaterials {
                 .build();
 
         PropargylAlcohol = new Material.Builder(25185, gregtechId("propargyl_alcohol"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .colorAverage()
                 .components(Carbon, 3, Hydrogen, 4, Oxygen, 1)
                 .build();
 
         PropargylBromide = new Material.Builder(25186, gregtechId("propargyl_bromide"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .colorAverage()
                 .components(Carbon, 3, Hydrogen, 3, Bromine, 1)
                 .build();
@@ -1113,26 +1113,26 @@ public class TJFirstDegreeMaterials {
                 .setFormula("CH3COCl", true);
 
         AcetylChloride = new Material.Builder(25188, gregtechId("acetyl_chloride"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .colorAverage()
                 .components(Carbon, 2, Hydrogen, 3, Oxygen, 1, Chlorine, 1)
                 .build();
 
         Acetophenone = new Material.Builder(25189, gregtechId("acetophenone"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .colorAverage()
                 .components(Carbon, 8, Hydrogen, 8, Oxygen, 1)
                 .build()
                 .setFormula("C6H5COCH3", true);
 
         Phenylethylamine = new Material.Builder(25190, gregtechId("phenylethylamine"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .colorAverage()
                 .components(Carbon, 8, Hydrogen, 11, Nitrogen, 1)
                 .build();
 
         PhenylethylIsocyanate = new Material.Builder(25191, gregtechId("phenylethyl_isocyanate"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .colorAverage()
                 .components(Carbon, 9, Hydrogen, 9, Nitrogen, 1, Oxygen, 1)
                 .build();
@@ -1151,7 +1151,7 @@ public class TJFirstDegreeMaterials {
                 .build();
 
         SulfuricFlueGas = new Material.Builder(25194, gregtechId("sulfuric_flue_gas"))
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0x6B6623)
                 .build();
 

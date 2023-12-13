@@ -69,7 +69,7 @@ public class EPMachineCasingMaterials {
         //  24506 HDCS (High Durability Compound Steel)
         Hdcs = new Material.Builder(getMaterialsId(), gregtechId("hdcs"))
                 .ingot()
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0x334433)
                 .iconSet(SHINY)
                 .toolStats(new ToolProperty(20.0F, 10.0F, 18000, 18))
@@ -90,7 +90,7 @@ public class EPMachineCasingMaterials {
         //  24509 Black Titanium
         BlackTitanium = new Material.Builder(getMaterialsId(), gregtechId("black_titanium"))
                 .ingot()
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0x6C003B)
                 .iconSet(SHINY)
                 .blast(11500, GasTier.HIGHER)
@@ -101,7 +101,7 @@ public class EPMachineCasingMaterials {
         //  24510 Talonite
         Talonite = new Material.Builder(getMaterialsId(), gregtechId("talonite"))
                 .ingot()
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0x9991A5)
                 .iconSet(SHINY)
                 .blast(3545, GasTier.HIGHER)
@@ -111,7 +111,7 @@ public class EPMachineCasingMaterials {
         //  24511 Black Plutonium
         BlackPlutonium = new Material.Builder(getMaterialsId(), gregtechId("black_plutonium"))
                 .ingot()
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0x060606)
                 .iconSet(BRIGHT)
                 .blast(12960, GasTier.HIGHER)
@@ -121,7 +121,7 @@ public class EPMachineCasingMaterials {
         //  24512 Maraging Steel-250
         MaragingSteel250 = new Material.Builder(getMaterialsId(), gregtechId("maraging_steel_250"))
                 .ingot()
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0xA5ADB2)
                 .iconSet(SHINY)
                 .blast(2413, GasTier.HIGHER)
@@ -131,7 +131,7 @@ public class EPMachineCasingMaterials {
         //  24513 Staballoy
         Staballoy = new Material.Builder(getMaterialsId(), gregtechId("staballoy"))
                 .ingot()
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0x444B42)
                 .iconSet(SHINY)
                 .blast(3450, GasTier.HIGHER)
@@ -141,7 +141,7 @@ public class EPMachineCasingMaterials {
         //  24514 Babbitt Alloy
         BabbittAlloy = new Material.Builder(getMaterialsId(), gregtechId("babbitt_alloy"))
                 .ingot()
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0xA19CA4)
                 .iconSet(SHINY)
                 .components(Tin, 5, Lead, 36, Antimony, 8, Astatine, 1)
@@ -151,7 +151,7 @@ public class EPMachineCasingMaterials {
         //  24515 Zirconium Carbide
         ZirconiumCarbide = new Material.Builder(getMaterialsId(), gregtechId("zirconium_carbide"))
                 .ingot()
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0xFFDACD)
                 .iconSet(SHINY)
                 .components(Zirconium, 1, Carbon, 1)
@@ -171,7 +171,7 @@ public class EPMachineCasingMaterials {
         //  24517 Incoloy-MA813
         IncoloyMA813 = new Material.Builder(getMaterialsId(), gregtechId("incoloy_ma_813"))
                 .ingot()
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0x6CF076)
                 .iconSet(SHINY)
                 .components(VanadiumSteel, 4, Osmiridium, 2, HSSS, 3, Germanium, 4, Duranium, 5, Dubnium, 1)
@@ -181,7 +181,7 @@ public class EPMachineCasingMaterials {
         //  24518 Hastelloy-X78
         HastelloyX78 = new Material.Builder(getMaterialsId(), gregtechId("hastelloy_x_78"))
                 .ingot()
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0x6BA3E3)
                 .iconSet(SHINY)
                 .blast(12280, GasTier.HIGHER)
@@ -191,7 +191,7 @@ public class EPMachineCasingMaterials {
         //  24519 Hastelloy-K243
         HastelloyK243 = new Material.Builder(getMaterialsId(), gregtechId("hastelloy_k_243"))
                 .ingot()
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0xa4ff70)
                 .iconSet(BRIGHT)
                 .blast(12400, GasTier.HIGHER)
@@ -200,7 +200,7 @@ public class EPMachineCasingMaterials {
         //  24520 Mar-M200 Steel
         MARM200Steel = new Material.Builder(getMaterialsId(), gregtechId("mar_m_200_steel"))
                 .ingot()
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0x515151)
                 .iconSet(SHINY)
                 .blast(5000, GasTier.HIGHER)
@@ -210,7 +210,7 @@ public class EPMachineCasingMaterials {
         //  24521 Mar-M200-Ce Steel
         MARM200CeSteel = new Material.Builder(getMaterialsId(), gregtechId("mar_m_200_ce_steel"))
                 .ingot()
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0x383030)
                 .iconSet(BRIGHT)
                 .blast(7500, GasTier.HIGHER)
@@ -220,7 +220,7 @@ public class EPMachineCasingMaterials {
         //  24522 Tanmolyium Beta-C
         TanmolyiumBetaC = new Material.Builder(getMaterialsId(), gregtechId("tanmolyium_beta_c"))
                 .ingot()
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0xc72fcc)
                 .iconSet(METALLIC)
                 .blast(5300, GasTier.HIGHER)
@@ -230,7 +230,7 @@ public class EPMachineCasingMaterials {
         //  24523 Hastelloy-C59
         HastelloyC59 = new Material.Builder(getMaterialsId(), gregtechId("hastelloy_c_59"))
                 .ingot()
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0xD6D0F0)
                 .iconSet(DULL)
                 .blast(7600, GasTier.HIGHER)
@@ -240,7 +240,7 @@ public class EPMachineCasingMaterials {
         //  24524 HMS-1J79 Alloy
         HMS1J79Alloy = new Material.Builder(getMaterialsId(), gregtechId("hms_1_j_79_alloy"))
                 .ingot()
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0xD1CB0B)
                 .iconSet(SHINY)
                 .blast(8100, GasTier.HIGHER)
@@ -250,7 +250,7 @@ public class EPMachineCasingMaterials {
         //  24525 High Strength Structural Steel-HY130-1
         HY1301 = new Material.Builder(getMaterialsId(), gregtechId("hy_1301"))
                 .ingot()
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0x6F3E57)
                 .iconSet(SHINY)
                 .blast(7820, GasTier.HIGHER)
@@ -260,7 +260,7 @@ public class EPMachineCasingMaterials {
         //  24526 Super Austenitic Stainless Steel-904L
         AusteniticStainlessSteel904L = new Material.Builder(getMaterialsId(), gregtechId("super_austenitic_stainless_steel_904_l"))
                 .ingot()
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0x881357)
                 .iconSet(METALLIC)
                 .blast(4960, GasTier.HIGHER)
@@ -277,7 +277,7 @@ public class EPMachineCasingMaterials {
         //  24528 Eglin Steel
         EglinSteel = new Material.Builder(getMaterialsId(), gregtechId("eglin_steel"))
                 .ingot()
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0x8B4513)
                 .iconSet(METALLIC)
                 .components(EglinSteelBase, 10, Sulfur, 1, Silicon, 1, Carbon, 1)
@@ -287,7 +287,7 @@ public class EPMachineCasingMaterials {
         //  24529 Pikyonium-64B
         Pikyonium64B = new Material.Builder(getMaterialsId(), gregtechId("pikyonium_64_b"))
                 .ingot()
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0x3467BA)
                 .iconSet(SHINY)
                 .blast(10400, GasTier.HIGHER)
@@ -298,7 +298,7 @@ public class EPMachineCasingMaterials {
         //  24532 Incoloy-DS
         IncoloyDS = new Material.Builder(getMaterialsId(), gregtechId("incoloy_ds"))
                 .ingot()
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0x6746B7)
                 .iconSet(BRIGHT)
                 .blast(5680, GasTier.HIGHER)
@@ -308,7 +308,7 @@ public class EPMachineCasingMaterials {
         //  24533 Inconel-690
         Inconel690 = new Material.Builder(getMaterialsId(), gregtechId("inconel_690"))
                 .ingot()
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0x4FC050)
                 .iconSet(SHINY)
                 .components(Chrome, 1, Niobium, 2, Molybdenum, 2, Nichrome, 3)
@@ -318,7 +318,7 @@ public class EPMachineCasingMaterials {
         //  24534 Tantalloy61
         Tantalloy61 = new Material.Builder(getMaterialsId(), gregtechId("tantalloy_61"))
                 .ingot()
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0x717171)
                 .iconSet(METALLIC)
                 .components(Tantalum, 13, Tungsten, 12, Titanium, 6, Yttrium, 4)
@@ -328,7 +328,7 @@ public class EPMachineCasingMaterials {
         //  24535 Inconel-020
         Incoloy020 = new Material.Builder(getMaterialsId(), gregtechId("incoloy_020"))
                 .ingot()
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0xF8BFFC)
                 .iconSet(METALLIC)
                 .components(Iron, 10, Nickel, 9, Chrome, 5, Copper, 1)
@@ -338,7 +338,7 @@ public class EPMachineCasingMaterials {
         //  24536 HG-1223
         HG1223 = new Material.Builder(getMaterialsId(), gregtechId("hg_1223"))
                 .ingot()
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0x235497)
                 .iconSet(SHINY)
                 .components(Mercury, 1, Barium, 2, Calcium, 2, Copper, 3, Oxygen, 8)
@@ -348,7 +348,7 @@ public class EPMachineCasingMaterials {
         //  24537 HMS-1J22 Alloy
         HMS1J22Alloy = new Material.Builder(getMaterialsId(), gregtechId("hms_1_j_22_alloy"))
                 .ingot()
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0x9E927D)
                 .iconSet(DULL)
                 .components(Nickel, 12, TinAlloy, 8, Chrome, 4, Phosphorus, 2, Silicon, 2)
@@ -359,7 +359,7 @@ public class EPMachineCasingMaterials {
         //  24540 Superheavy-H Alloy
         SuperheavyHAlloy = new Material.Builder(getMaterialsId(), gregtechId("superheavy_h_alloy"))
                 .ingot()
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0xE84B36)
                 .iconSet(SHINY)
                 .components(Copernicium, 1, Nihonium, 1, MetastableFlerovium, 1, Moscovium, 1, Livermorium, 1, Tennessine, 1, MetastableOganesson, 1)
@@ -371,7 +371,7 @@ public class EPMachineCasingMaterials {
         //  24541 Superheavy-L Alloy
         SuperheavyLAlloy = new Material.Builder(getMaterialsId(), gregtechId("superheavy_l_alloy"))
                 .ingot()
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(0x4D8BE9)
                 .iconSet(SHINY)
                 .components(Rutherfordium, 1, Dubnium, 1, Seaborgium, 1, Bohrium, 1, MetastableHassium, 1, Meitnerium, 1, Darmstadtium, 1, Roentgenium, 1)
@@ -381,7 +381,7 @@ public class EPMachineCasingMaterials {
         //  24542 Platinum-group Alloy
         PlatinumGroupAlloy = new Material.Builder(getMaterialsId(), gregtechId("platinum_group_alloy"))
                 .ingot()
-                .liquid(new FluidBuilder().customStill())
+                .fluid()
                 .color(Gold.getMaterialRGB() + Silver.getMaterialRGB() + Platinum.getMaterialRGB() + Palladium.getMaterialRGB() + Ruthenium.getMaterialRGB() + Rhodium.getMaterialRGB() + Iridium.getMaterialRGB() + Osmium.getMaterialRGB())
                 .iconSet(BRIGHT)
                 .components(Gold, 1, Silver, 1, Platinum, 1, Palladium, 1, Ruthenium, 1, Rhodium, 1, Iridium, 1, Osmium, 1)
