@@ -1,10 +1,5 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock;
 
-import codechicken.lib.render.CCRenderState;
-import codechicken.lib.render.pipeline.IVertexOperation;
-import codechicken.lib.texture.TextureUtils;
-import codechicken.lib.vec.Cuboid6;
-import codechicken.lib.vec.Matrix4;
 import gregtech.api.GTValues;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.Widget;
@@ -18,13 +13,8 @@ import gregtech.api.pattern.*;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.util.GTUtility;
-import gregtech.client.renderer.CubeRendererState;
 import gregtech.client.renderer.ICubeRenderer;
-import gregtech.client.renderer.cclop.ColourOperation;
-import gregtech.client.renderer.cclop.LightMapOperation;
 import gregtech.client.renderer.texture.Textures;
-import gregtech.client.utils.BloomEffectUtil;
-import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.BlockBoilerCasing;
 import gregtech.common.blocks.BlockFireboxCasing;
 import gregtech.common.blocks.BlockMetalCasing;
@@ -37,9 +27,11 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.*;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -48,7 +40,6 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.apache.commons.lang3.ArrayUtils;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -191,10 +182,6 @@ public class MetaTileEntityIndustrialPrimitiveBlastFurnace extends NoEnergyMulti
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
         if (isStructureFormed()) {
-            if(Temp>3000&&Temp<12000)Temp--;
-            if(Temp>12000&&Temp<19000)Temp=Temp-2;
-            if(Temp>19000&&Temp<26000)Temp=Temp-3;
-            if(Temp>26000)Temp=Temp-4;
             textList.add(new TextComponentTranslation("gtqtcore.multiblock.ip1.amount",thresholdPercentage*10,40));
             textList.add(new TextComponentTranslation("gtqtcore.multiblock.ip2.amount",Temp/10,2800));
             textList.add(new TextComponentTranslation("gtqtcore.multiblock.ip3.amount",cost()));
@@ -259,6 +246,10 @@ public class MetaTileEntityIndustrialPrimitiveBlastFurnace extends NoEnergyMulti
 
 
         protected void updateRecipeProgress() {
+            if(Temp>3000&&Temp<=12000)Temp--;
+            if(Temp>12000&&Temp<=19000)Temp=Temp-2;
+            if(Temp>19000&&Temp<=26000)Temp=Temp-3;
+            if(Temp>26000)Temp=Temp-4;
             if (canRecipeProgress) {
                 if(Temp<28000) Temp=Temp+thresholdPercentage;
                 if(++progressTime%3==0) maxProgressTime=maxProgressTime-cost();
@@ -291,6 +282,7 @@ public class MetaTileEntityIndustrialPrimitiveBlastFurnace extends NoEnergyMulti
             }
         }
     }
+
     private void pollutionParticles() {
         BlockPos pos = this.getPos();
         EnumFacing facing = this.getFrontFacing().getOpposite();
@@ -299,12 +291,18 @@ public class MetaTileEntityIndustrialPrimitiveBlastFurnace extends NoEnergyMulti
         float zPos = facing.getZOffset() *2 + pos.getZ() + 0.5F;
 
         float ySpd = facing.getYOffset() * 0.7F + 0.7F + 0.8F * GTValues.RNG.nextFloat();
-        runMufflerEffect(xPos, yPos, zPos, 0, ySpd, 0);
-        runMufflerEffect(xPos, yPos, zPos, 0.1F, ySpd, 0.1F);
-        runMufflerEffect(xPos, yPos, zPos, -0.1F, ySpd, -0.1F);
-        runMufflerEffect(xPos, yPos, zPos, +0.1F, ySpd, -0.1F);
-        runMufflerEffect(xPos, yPos, zPos, +0.1F, ySpd, -0.1F);
+
+        arunMufflerEffect(xPos, yPos, zPos, 0, ySpd, 0);
+        arunMufflerEffect(xPos, yPos, zPos, 0.1F, ySpd, 0.1F);
+        arunMufflerEffect(xPos, yPos, zPos, -0.1F, ySpd, -0.1F);
+        arunMufflerEffect(xPos, yPos, zPos, +0.1F, ySpd, -0.1F);
+        arunMufflerEffect(xPos, yPos, zPos, -0.1F, ySpd, +0.1F);
     }
+
+    public void arunMufflerEffect(float xPos, float yPos, float zPos, float xSpd, float ySpd, float zSpd) {
+        this.getWorld().spawnParticle(EnumParticleTypes.SMOKE_LARGE, (double)xPos, (double)yPos, (double)zPos, (double)xSpd, (double)ySpd, (double)zSpd, new int[0]);
+    }
+
 
     private void damageEntitiesAndBreakSnow() {
         BlockPos middlePos = this.getPos();

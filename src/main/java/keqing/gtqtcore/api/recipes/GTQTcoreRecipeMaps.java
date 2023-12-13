@@ -10,10 +10,7 @@ import gregtech.api.recipes.builders.FuelRecipeBuilder;
 import gregtech.api.recipes.builders.SimpleRecipeBuilder;
 import gregtech.core.sound.GTSoundEvents;
 import keqing.gtqtcore.api.capability.chemical_plant.ChemicalPlantBuilder;
-import keqing.gtqtcore.api.recipes.builder.CACasingTierRecipeBuilder;
-import keqing.gtqtcore.api.recipes.builder.FlowRateRecipeBuilder;
-import keqing.gtqtcore.api.recipes.builder.PHRecipeBuilder;
-import keqing.gtqtcore.api.recipes.builder.QFTCasingTierRecipeBuilder;
+import keqing.gtqtcore.api.recipes.builder.*;
 import keqing.gtqtcore.api.recipes.machine.RecipeMapComponentAssemblyLine;
 import keqing.gtqtcore.api.recipes.machine.RecipeMapDangoteDistillery;
 
@@ -23,6 +20,8 @@ import keqing.gtqtcore.api.recipes.machine.RecipeMapDangoteDistillery;
 public class GTQTcoreRecipeMaps {
 
     public static final RecipeMap<CACasingTierRecipeBuilder> COMPONENT_ASSEMBLY_LINE_RECIPES;
+
+    public static final RecipeMap<PCBRecipeBuilder> PCB;
     public static final RecipeMap<SimpleRecipeBuilder> DIGESTER_RECIPES;
     public static final RecipeMap<PHRecipeBuilder> FERMENTATION_TANK_RECIPES;
     public static final RecipeMap<FuelRecipeBuilder> NAQUADAH_REACTOR_RECIPES;
@@ -57,6 +56,7 @@ public class GTQTcoreRecipeMaps {
 
     private GTQTcoreRecipeMaps() {}
     static {
+        PCB=new  RecipeMap<>("pcb", 6, 6, 6, 6, new PCBRecipeBuilder(), false);
         COMPONENT_ASSEMBLY_LINE_RECIPES = new RecipeMapComponentAssemblyLine<>("component_assembly_line_recipes", 12, 1,  12, 0, new CACasingTierRecipeBuilder(), false)
                 .setSound(GTSoundEvents.ASSEMBLER);
 

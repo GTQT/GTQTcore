@@ -4,6 +4,7 @@ import gregtech.api.block.VariantItemBlock;
 import gregtech.api.recipes.recipeproperties.FusionEUToStartProperty;
 import gregtech.common.items.MetaItems;
 import keqing.gtqtcore.api.recipes.properties.CACasingTierProperty;
+import keqing.gtqtcore.api.recipes.properties.PCBPartProperty;
 import keqing.gtqtcore.api.recipes.properties.QFTCasingTierProperty;
 import keqing.gtqtcore.api.utils.GTQTLog;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
@@ -130,6 +131,8 @@ public class CommonProxy {
     public static void registerRecipes(RegistryEvent.Register<IRecipe> event)
     {
         GTQTLog.logger.info("Registering recipes...");
+        PCBPartProperty.registeredPart(1,"微生物培养仓");
+        PCBPartProperty.registeredPart(2,"化学辅助计算机");
         FusionEUToStartProperty.registerFusionTier(9, "(MK4)");
         FusionEUToStartProperty.registerFusionTier(10, "(MK5)");
         FusionEUToStartProperty.registerFusionTier(11, "(MK6)");

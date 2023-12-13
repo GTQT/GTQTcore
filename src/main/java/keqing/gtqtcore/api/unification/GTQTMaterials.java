@@ -96,12 +96,14 @@ public class GTQTMaterials {
     public GTQTMaterials() {}
 
     public static void register() {
+
         GTQTElementMaterials.register();
         FirstDegreeMaterials.register();
         HigherDegreeMaterials.register();
         EPMachineCasingMaterials.register();
         EPMaterialPropertyAddition.init();
         EPMaterialFlagAddition.init();
+
     }
 
 

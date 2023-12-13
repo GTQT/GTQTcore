@@ -262,7 +262,9 @@ public class TJMaterials {
     }
 
     public static void register() {
+
         TJFirstDegreeMaterials.registerMaterials();
+
     }
 
 }

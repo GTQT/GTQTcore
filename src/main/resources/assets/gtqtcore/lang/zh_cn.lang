@@ -187,8 +187,20 @@ gregtech.machine.fr.description=机器内可调节压裂压力，从而控制流
 gtqtcore.multiblock.fr1.amount=压裂液储量：%sL
 gtqtcore.multiblock.fr2.amount=压裂压力：%s
 
+gtqtcore.multiblock.pcb.xy=拓展结构（1/0）:微生物培养仓 %s 化学辅助计算机 %s 高频散热模块 %s 超净循环过滤器 %s
+gtqtcore.multiblock.pcb.amount=冷却液储量：%s
+gtqtcore.multiblock.pcb.threshold_decrement=§c降低一单位冷却液消耗 /n§7升温速度增加一倍。
+gtqtcore.multiblock.pcb.threshold_increment=§a增加一单位冷却液消耗 /n§7升温速度降低一倍。
+
+gtqtcore.machine.pcb.tooltip.1=拥有四种模块化结构升级，部分配方需要对应的模块构建完毕后才能使用。
+gtqtcore.machine.pcb.tooltip.2=生物类基板配方需要结构 微生物培养仓；化学类基板配方需要结构 化学辅助计算机.
+gtqtcore.machine.pcb.tooltip.3=建造 超净循环过滤器 来提升机器工作效率，解锁并行机制，效率计算：每工作五秒减免耗时一秒。
+gtqtcore.machine.pcb.tooltip.4=建造 高频散热模块 来控制多方块温度，消耗冷却液来降低多方块温度。
+gtqtcore.machine.pcb.tooltip.5=多方块工作时会持续升温，当温度大于阈值时会停止工作。如果没有建造 高频散热模块 模块，那么多方块只会在待机时降温，多方块温度处于不同区间时拥有不同的并行数量。
+gtqtcore.multiblock.pcb1.amount=冷却效率：%s(上限 %s )温度：%sK(上限 %s K)
+
 gtqtcore.multiblock.ip1.amount=风量：%sL(风量上限 %s L)
-gtqtcore.multiblock.ip2.amount=温度：%sK(最高炉温 %s K)
+gtqtcore.multiblock.ip2.amount=温度：%sK(最高温度 %s K)
 gtqtcore.multiblock.ip3.amount=耗时减免：每工作三秒总耗时减去 %s 秒。
 gtqtcore.multiblock.ip.threshold_decrement=§c降低一单位风量 /n§7升温速度降低一倍。
 gtqtcore.multiblock.ip.threshold_increment=§a增加一单位风量 /n§7升温速度增加一倍。
