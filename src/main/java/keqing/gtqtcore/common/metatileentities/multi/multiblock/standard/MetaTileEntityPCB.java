@@ -578,19 +578,23 @@ public class MetaTileEntityPCB extends RecipeMapMultiblockController {
 
         FluidStack COLD_STACK = Water.getFluid(1);
 
+        @Override
+        public void update() {
+            super.update();
+            if (z == 1 && Temp > 3000) {
+                IMultipleTankHandler inputTank = getInputFluidInventory();
+                if (COLD_STACK.isFluidStackIdentical(inputTank.drain(COLD_STACK, false))) {
+                    for(int i=0;i<thresholdPercentage;i++) inputTank.drain(COLD_STACK, true);
+                    Temp = Temp - thresholdPercentage;
+                }
+            }
+        }
+
         protected void updateRecipeProgress() {
             if (Temp > 3000) Temp = Temp - 10;
             if (canRecipeProgress) {
                 if (Temp < 10000) Temp = Temp + 40;
-                if (z == 1 && Temp > 3000) {
-                    IMultipleTankHandler inputTank = getInputFluidInventory();
-                    if (COLD_STACK.isFluidStackIdentical(inputTank.drain(COLD_STACK, false))) {
-                        for(int i=0;i<thresholdPercentage;i++) inputTank.drain(COLD_STACK, true);
-                        Temp = Temp - thresholdPercentage;
-                    }
-                }
-
-                //if (z == 1) if (++progressTime % 3 == 0) maxProgressTime--;
+                if (z == 1) if (++progressTime % 3 == 0) maxProgressTime--;
                 if (Temp < 9000) {
                     if (++progressTime % 5 == 0 && w == 1)
                         maxProgressTime = maxProgressTime - 1;

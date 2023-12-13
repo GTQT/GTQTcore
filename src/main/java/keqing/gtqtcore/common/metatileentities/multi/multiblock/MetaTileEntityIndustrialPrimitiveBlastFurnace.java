@@ -192,6 +192,7 @@ public class MetaTileEntityIndustrialPrimitiveBlastFurnace extends NoEnergyMulti
     @Override
     public void addInformation(ItemStack stack,  World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
+
         tooltip.add(I18n.format("gtqtcore.machine.industrial_primitive_blast_furnace.tooltip.1"));
         tooltip.add(I18n.format("gtqtcore.machine.industrial_primitive_blast_furnace.tooltip.2"));
         tooltip.add(I18n.format("gtqtcore.machine.industrial_primitive_blast_furnace.tooltip.3"));
@@ -246,10 +247,6 @@ public class MetaTileEntityIndustrialPrimitiveBlastFurnace extends NoEnergyMulti
 
 
         protected void updateRecipeProgress() {
-            if(Temp>3000&&Temp<=12000)Temp--;
-            if(Temp>12000&&Temp<=19000)Temp=Temp-2;
-            if(Temp>19000&&Temp<=26000)Temp=Temp-3;
-            if(Temp>26000)Temp=Temp-4;
             if (canRecipeProgress) {
                 if(Temp<28000) Temp=Temp+thresholdPercentage;
                 if(++progressTime%3==0) maxProgressTime=maxProgressTime-cost();
@@ -272,7 +269,10 @@ public class MetaTileEntityIndustrialPrimitiveBlastFurnace extends NoEnergyMulti
     @Override
     public void update() {
         super.update();
-
+        if(Temp>3000&&Temp<=12000)Temp--;
+        if(Temp>12000&&Temp<=19000)Temp=Temp-2;
+        if(Temp>19000&&Temp<=26000)Temp=Temp-3;
+        if(Temp>26000)Temp=Temp-4;
         if (this.isActive()) {
             if (getWorld().isRemote) {
                 pollutionParticles();
