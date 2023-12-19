@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures" : {
-    "layer0": "epimorphism:items/metaitems/algae.chrysophyceae"
+    "layer0": "gtqtcore:items/metaitems/algae.chrysophyceae"
   }
 }

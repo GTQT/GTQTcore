@@ -58,6 +58,7 @@ public class GTQTMetaTileEntities {
         simpleTiredInit(tileEntities,function,idSupplier,(i) -> true);
     }
     public static MetaTileEntityMultiblockTank HUGE_TANK;
+    public static MetaTileEntityAlgaeFarm ALGAE_FARM;
     public static MetaTileEntityComponentAssemblyLine COMPONENT_ASSEMBLY_LINE;
     public static MetaTileEntityBufferHatch MULTIPART_BUFFER_HATCH;
     public static MetaTileEntityBlazingBlastFurnace BLAZING_BLAST_FURNACE ;
@@ -120,6 +121,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityLargeNaquadahReactor LARGE_NAQUADAH_REACTOR;
     public static MetaTileEntityHugeElectricImplosionCompressor HUGE_ELECTRRIC_IMPLOSION_COMPRESSOR;
     public static MetaTileEntityFlotationFactory FLOTATION_FACTORY;
+    public static MetaTileEntityLargeProcessingFactory LAGER_PROCESSING_FACTORY;
     public static MetaTileEntityVacuumDryingFurnace VACUUM_DRYING_FURNACE;
     public static MetaTileEntityIndustrialPrimitiveBlastFurnace INDUSTRIAL_PRIMITIVE_BLAST_FURNACE;
 
@@ -243,7 +245,8 @@ public class GTQTMetaTileEntities {
         MULTIPART_BALL_HATCH = registerMetaTileEntity(3079, new MetaTileEntityMillBallHatch(gtqtcoreId("mill_ball_hatch")));
         FLOTATION_FACTORY = registerMetaTileEntity(3080, new MetaTileEntityFlotationFactory(gtqtcoreId("flotation_factory")));
         VACUUM_DRYING_FURNACE = registerMetaTileEntity(3081, new MetaTileEntityVacuumDryingFurnace(gtqtcoreId("vacuum_drying_furnace")));
-
+        ALGAE_FARM = registerMetaTileEntity(3082, new MetaTileEntityAlgaeFarm(gtqtcoreId("algae_farm")));
+        LAGER_PROCESSING_FACTORY = registerMetaTileEntity(3083, new MetaTileEntityLargeProcessingFactory(gtqtcoreId("large_processing_factory")));
 
         registerSimpleMetaTileEntity(FLUID_EXTRACTOR, 3100, "fluid_extractor", GTQTcoreRecipeMaps.FLUID_EXTRACTOR_RECIPES, Textures.EXTRACTOR_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
         registerSimpleMetaTileEntity(FLUID_CANNER, 3115, "fluid_canner", GTQTcoreRecipeMaps.FLUID_CANNER_RECIPES, Textures.CANNER_OVERLAY, true,GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);

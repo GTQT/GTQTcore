@@ -13,6 +13,12 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem 你物品的名字，记得全大写;
      */
     public static final List<MetaItem<?>> ITEMS = GTQTMetaItem1.getMetaItems();
+    public static MetaItem<?>.MetaValueItem COMMON_ALGAE;
+    public static MetaItem<?>.MetaValueItem GREEN_ALGAE;
+    public static MetaItem<?>.MetaValueItem RED_ALGAE;
+    public static MetaItem<?>.MetaValueItem BROWN_ALGAE;
+    public static MetaItem<?>.MetaValueItem GOLD_ALGAE;
+    public static MetaItem<?>.MetaValueItem T_ALGAE;
     public static MetaItem<?>.MetaValueItem BIOLOGY_INTEGRATED_CIRCUIT;
     public static MetaItem<?>.MetaValueItem POTASSIUM_ETHYLATE;
     public static MetaItem<?>.MetaValueItem SODIUM_ETHYLATE;
@@ -37,6 +43,18 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem GRINDBALL_ALUMINIUM;
     public static MetaItem<?>.MetaValueItem SODIUM_ETHYLXANTHATE;
     public static MetaItem<?>.MetaValueItem POTASSIUM_ETHYLXANTHATE;
+
+    public static MetaItem<?>.MetaValueItem ROUGH_BIOLOGY_RESIN;
+    public static MetaItem<?>.MetaValueItem PURIFIED_ALUMINIUM_MIXTURE;
+    public static MetaItem<?>.MetaValueItem CELLULOSE_PULP;
+    public static MetaItem<?>.MetaValueItem CELLULOSE_FIBER;
+    public static MetaItem<?>.MetaValueItem CELLULOSE_FIBER_RED;
+    public static MetaItem<?>.MetaValueItem CELLULOSE_FIBER_YELLOW;
+    public static MetaItem<?>.MetaValueItem COMPOST;
+    public static MetaItem<?>.MetaValueItem ALGAE_ACID;
+    public static MetaItem<?>.MetaValueItem WOOD_PELLETS;
+    public static MetaItem<?>.MetaValueItem PELLETS_MOULD;
+    public static MetaItem<?>.MetaValueItem ALUMINIUM_PELLETS;
 
     public static void initialization()
     {

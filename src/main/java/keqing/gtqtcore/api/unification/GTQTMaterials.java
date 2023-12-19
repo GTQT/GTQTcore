@@ -109,8 +109,6 @@ public class GTQTMaterials {
     public static Material CalciumCarbonate;
     public static Material PropionicAcid;
     public static Material SodiumAluminate;
-    public static Material Butanol;
-    public static Material Formaldehyde;
     public static Material CarbenDisulfide;
     public static Material PineOil;
     public static Material Periodicium;

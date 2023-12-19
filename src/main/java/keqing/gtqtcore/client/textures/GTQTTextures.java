@@ -26,6 +26,7 @@ public class GTQTTextures {
     public static SimpleOverlayRenderer POLYBENZIMIDAZOLE_PIPE;
     public static SimpleOverlayRenderer QUANTUM_CONSTRAINT_CASING;
     public static SimpleOverlayRenderer PD_CASING;
+    public static SimpleOverlayRenderer ASEPTIC_FARM_CASING;
     public static SimpleOverlayRenderer FLOTATION_CASING;
     public static SimpleOverlayRenderer BRICK;
     public static SimpleOverlayRenderer ADVANCED_INVAR_CASING;
@@ -34,6 +35,7 @@ public class GTQTTextures {
     public static SimpleOverlayRenderer VACUUM_CASING;
     public static SimpleOverlayRenderer IRIDIUM_CASING;
     public static SimpleOverlayRenderer INF_WATER;
+    public static SimpleOverlayRenderer PROCESS;
     public static SimpleOverlayRenderer NITINOL_CASING;
     public static SimpleOverlayRenderer ISA_CASING;
     public static SimpleOverlayRenderer COMPRESSED_FUSION_REACTOR_MKI_CASING;
@@ -82,6 +84,8 @@ public class GTQTTextures {
     public static void init() {
         FLOTATION_CASING = new SimpleOverlayRenderer("multiblock/isa_casing/flotation_casing");
         ISA_CASING = new SimpleOverlayRenderer("multiblock/isa_casing/isa_mill_casing");
+        ASEPTIC_FARM_CASING = new SimpleOverlayRenderer("multiblock/isa_casing/aseptic_farm_machine_casing");
+        PROCESS = new SimpleOverlayRenderer("multiblock/isa_casing/process_casing");
         VACUUM_CASING = new SimpleOverlayRenderer("multiblock/isa_casing/vacuum_casing");
         NITINOL_CASING = new SimpleOverlayRenderer("multiblock/casings/nitinol_machine_casing");
         MACERATOR_CASING = new SimpleOverlayRenderer("multiblock/casing/macerator_casing");

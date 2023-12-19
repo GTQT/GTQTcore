@@ -35,6 +35,11 @@ public class FuelRecipes {
                         .duration(514)
                         .buildAndRegister();
 
+                NAQUADAH_REACTOR_RECIPES.recipeBuilder()
+                        .fluidInputs(Water.getFluid(1))
+                        .EUt((int) V[LV])
+                        .duration(180)
+                        .buildAndRegister();
 
                 //  Heavy Naquadah Fuel
                 NAQUADAH_REACTOR_RECIPES.recipeBuilder()

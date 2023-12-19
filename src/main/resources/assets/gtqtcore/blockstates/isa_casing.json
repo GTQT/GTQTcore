@@ -57,6 +57,24 @@
           "side": "gregtech:blocks/multiblock/isa_casing/vacuum_casing_side",
           "bottom": "gregtech:blocks/multiblock/isa_casing/vacuum_casing"
         }
+      },
+      "aseptic_farm_machine_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/isa_casing/aseptic_farm_machine_casing"
+        }
+      },
+      "process_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/isa_casing/process_casing"
+        }
+      },
+      "round": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/isa_casing/round"
+        }
       }
     }
   }

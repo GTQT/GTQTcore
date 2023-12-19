@@ -1,6 +1,7 @@
 package keqing.gtqtcore.api.unification.matreials;
 
 import gregtech.api.unification.material.Material;
+import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.material.info.MaterialIconSet;
 import keqing.gtqtcore.api.unification.GTQTElements;
 import keqing.gtqtcore.api.unification.GTQTMaterials;
@@ -108,6 +109,44 @@ public class SecondDegreeMaterials {
                 .color(0x483DB4)
                 .flags(DISABLE_DECOMPOSITION)
                 .components(Rutile, 1, HydrochloricAcid, 2)
+                .build();
+
+        GTQTMaterials.CarbenDisulfide  = new Material.Builder(getMaterialsId(), gregtechId("carbon_disulfide"))
+                .fluid()
+                .colorAverage()
+                .components(Carbon, 1, Sulfur, 2)
+                .build();
+
+        GTQTMaterials.UreaMix = new Material.Builder(getMaterialsId(), gregtechId("urea_mix"))
+                .fluid()
+                .color(0x443610)
+                .build();
+
+        GTQTMaterials.FermentationBase = new Material.Builder(getMaterialsId(), gregtechId( "fermentation_base"))
+                .fluid()
+                .color(0x5E5839)
+                .build();
+
+        GTQTMaterials.Resin = new Material.Builder(getMaterialsId(), gregtechId("resin"))
+                .fluid()
+                .color(0x353533)
+                .build();
+
+        GTQTMaterials.CalciumCarbonate = new Material.Builder(getMaterialsId(), gregtechId("calcium_carbonate"))
+                .dust()
+                .components(Materials.Calcium, 1, Materials.Carbon, 1, Materials.Oxygen, 3)
+                .color(0xE8E8CB)
+                .build();
+
+        GTQTMaterials.PropionicAcid = new Material.Builder(getMaterialsId(), gregtechId("propionic_acid"))
+                .fluid()
+                .color(0xB3BC88)
+                .build();
+
+        GTQTMaterials.SodiumAluminate = new Material.Builder(getMaterialsId(), gregtechId( "sodium_aluminate"))
+                .dust()
+                .colorAverage()
+                .components(Sodium, 1, Aluminium, 1, Oxygen, 2)
                 .build();
 
         GTQTMaterials.CarbenDisulfide  = new Material.Builder(getMaterialsId(), gregtechId("carbon_disulfide"))

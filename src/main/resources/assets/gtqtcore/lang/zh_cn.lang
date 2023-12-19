@@ -378,6 +378,26 @@ tile.pine_log.name=松木
 tile.pine_sapling.name=松树树苗
 tile.pine_leaves.name=松树树叶（不含松鼠）
 
+metaitem.algae.common.name=普通藻类
+metaitem.algae.red.name=红色藻类
+metaitem.algae.green.name=绿色藻类
+metaitem.algae.gold.name=金色藻类
+metaitem.algae.brown.name=棕色藻类
+metaitem.algae.t.name=T型藻类
+gregica.multipart.catalyst.only=仅能放入催化剂
+metaitem.item.biology_integrated_circuit.name=生物集成电路
+metaitem.item.biology_resin.name=生物树脂
+metaitem.item.cellulose_fiber_yellow.name=黄色纤维素纤维
+metaitem.item.cellulose_fiber_red.name=红色纤维素纤维
+metaitem.item.cellulose_fiber_green.name=绿色纤维素纤维
+metaitem.item.compost.name=堆肥
+metaitem.item.aluminium_mixture.name=铝混合物
+metaitem.item.cellulose_pulp.name=纤维素浆
+metaitem.item.algae_acid.name=藻酸
+metaitem.item.pellets_mould.name=模具(颗粒)
+metaitem.item.wood_pellets.name=木颗粒
+metaitem.item.aluminium_pellets.name=铝颗粒
+
 gtqtcore.machine.combustion_generator.ev.name=脉冲内燃发电机
 gtqtcore.machine.steam_turbine.ev.name=脉冲蒸气轮机
 gtqtcore.machine.gas_turbine.ev.name=脉冲燃气轮机
@@ -517,3 +537,18 @@ gtqtcore.multiblock.industrial_fisher.mode0=模式:捕鱼
 gtqtcore.multiblock.industrial_fisher.mode1=模式:捕垃圾
 gtqtcore.multiblock.industrial_fisher.mode2=模式: 捕宝藏
 gtqtcore.multiblock.industrial_fisher.inv_full=物品栏已满
+
+gtqtcore.machine.af.tooltip.1=加水即可工作（不耗电）
+
+gtqtcore.machine.large_processing_factory.name=大型加工厂
+gtqtcore.machine.large_processing_factory.tooltip.1=把你的小机器丢掉
+gtqtcore.machine.large_processing_factory.tooltip.2=比相同电压的单方块机器快2.5倍。
+gtqtcore.machine.large_processing_factory.tooltip.3=使用§6编程电路§7控制当前模式下的配方：
+gtqtcore.machine.large_processing_factory.tooltip.4=§c加工模式-A§7 -> 20-压缩机，21-车床，22-两极磁化机
+gtqtcore.machine.large_processing_factory.tooltip.5=§c加工模式-B§7 -> 20-发酵槽，21-提取机，22-装罐机
+gtqtcore.machine.large_processing_factory.tooltip.6=§c加工模式-C§7 -> 20-精密激光蚀刻机，21-高压釜，22-流体固化机
+gtqtcore.machine.large_processing_factory.tooltip.7=§e电压等级§7决定了最大并行数。
+gtqtcore.machine.large_processing_factory.tooltip.8=每提升1个电压等级，最大并行数加2。
+recipemap.processing_mode_a.name=钳工实习
+recipemap.processing_mode_b.name=化学实验
+recipemap.processing_mode_c.name=物理大王

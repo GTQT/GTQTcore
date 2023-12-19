@@ -36,8 +36,10 @@ public class GTQTIsaCasing extends VariantBlock<GTQTIsaCasing.CasingType> {
         FLOTATION_CASING_GEARBOX("flotation_casing_gearbox"),
         FLOTATION_CASING_PIPE("flotation_casing_pipe"),
         FLOTATION_INTAKE_CASING("flotation_intake_casing"),
-        VACUUM_CASING("vacuum_casing");
-
+        VACUUM_CASING("vacuum_casing"),
+        ASEPTIC_FARM_CASING("aseptic_farm_machine_casing"),
+        PROCESS("process_casing"),
+        ROUND("round");
 
         private final String name;
 

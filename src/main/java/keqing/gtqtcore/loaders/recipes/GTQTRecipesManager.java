@@ -11,6 +11,7 @@ public class GTQTRecipesManager {
     }
     public static void init() {
         BiochemChains.init();
+        BiologyRecipe.init();
         PhotoresistChains.init();
         PetrochemRecipes.init();
         MaterialOreChains.init();
