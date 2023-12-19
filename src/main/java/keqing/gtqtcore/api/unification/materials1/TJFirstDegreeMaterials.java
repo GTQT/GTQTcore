@@ -887,13 +887,6 @@ public class TJFirstDegreeMaterials {
                 .color(0x0A0212)
                 .build();
 
-        RedMud = new Material.Builder(25150, gregtechId("red_mud"))
-                .fluid()
-                .colorAverage()
-                .flags(DISABLE_DECOMPOSITION)
-                .components(Rutile, 1, HydrochloricAcid, 2)
-                .build();
-
         HeavyRedMudResidue = new Material.Builder(25151, gregtechId("red_mud_residue"))
                 .fluid()
                 .color(0x091012)

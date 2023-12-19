@@ -5,6 +5,7 @@ import gregtech.api.GTValues;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.widgets.ProgressWidget;
 import gregtech.api.recipes.RecipeMap;
+import gregtech.api.recipes.builders.BlastRecipeBuilder;
 import gregtech.api.recipes.builders.ComputationRecipeBuilder;
 import gregtech.api.recipes.builders.FuelRecipeBuilder;
 import gregtech.api.recipes.builders.SimpleRecipeBuilder;
@@ -53,9 +54,43 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<FuelRecipeBuilder> HYPER_REACTOR_MK2_RECIPES;
     public static final RecipeMap<FuelRecipeBuilder> HYPER_REACTOR_MK3_RECIPES;
     public static final RecipeMap<SimpleRecipeBuilder> DISSOLUTION_TANK_RECIPES;
+    public static final RecipeMap<SimpleRecipeBuilder> FLUID_EXTRACTOR_RECIPES;
+    public static final RecipeMap<SimpleRecipeBuilder> FLUID_CANNER_RECIPES;
+    public static final RecipeMap<SimpleRecipeBuilder> FLOTATION_FACTORY_RECIPES;
+    public static final RecipeMap<BlastRecipeBuilder> VACUUM_DRYING_FURNACE_RECIPES;
+    public static final RecipeMap<GrindBallTierRecipeBuilder> ISA_MILL_GRINDER;
 
     private GTQTcoreRecipeMaps() {}
     static {
+        VACUUM_DRYING_FURNACE_RECIPES = new RecipeMap<>("vacuum_drying_furnace_recipes", 1, 9, 2, 3, new BlastRecipeBuilder(), false)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_SIFT, ProgressWidget.MoveType.HORIZONTAL)
+                .setSlotOverlay(false, false, false, GuiTextures.FURNACE_OVERLAY_1)
+                .setSlotOverlay(false, false, true, GuiTextures.FURNACE_OVERLAY_1)
+                .setSlotOverlay(false, true, false, GuiTextures.FURNACE_OVERLAY_2)
+                .setSlotOverlay(false, true, true, GuiTextures.FURNACE_OVERLAY_2)
+                .setSlotOverlay(true, true, false, GuiTextures.FURNACE_OVERLAY_2)
+                .setSlotOverlay(true, true, true, GuiTextures.FURNACE_OVERLAY_2)
+                .setSound(GTSoundEvents.FURNACE);
+
+
+        FLOTATION_FACTORY_RECIPES = new RecipeMap<>("flotation_factory_recipes", 5, 3, 3, 3, new SimpleRecipeBuilder(), false)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_BATH, ProgressWidget.MoveType.CIRCULAR)
+                .setSound(GTSoundEvents.BATH);
+
+        ISA_MILL_GRINDER = new RecipeMap<>("isa_mill_recipes", 3, 3, 0, 0, new GrindBallTierRecipeBuilder(), false)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_MACERATE, ProgressWidget.MoveType.HORIZONTAL)
+                .setSound(GTSoundEvents.MACERATOR);
+
+        FLUID_EXTRACTOR_RECIPES = new RecipeMap<>("fluid_extractor_recipes", 2,2,2,2, new SimpleRecipeBuilder(), false)
+                .setSlotOverlay(false, false, GuiTextures.EXTRACTOR_OVERLAY)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_COMPRESS, ProgressWidget.MoveType.HORIZONTAL)
+                .setSound(GTSoundEvents.ASSEMBLER);
+
+        FLUID_CANNER_RECIPES = new RecipeMap<>("fluid_canner_recipes", 2,2,2,2, new SimpleRecipeBuilder(), false)
+                .setSlotOverlay(false, false, GuiTextures.CANNER_OVERLAY)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_COMPRESS, ProgressWidget.MoveType.HORIZONTAL)
+                .setSound(GTSoundEvents.ASSEMBLER);
+
         PCB=new  RecipeMap<>("pcb", 6, 6, 6, 6, new PCBRecipeBuilder(), false);
         COMPONENT_ASSEMBLY_LINE_RECIPES = new RecipeMapComponentAssemblyLine<>("component_assembly_line_recipes", 12, 1,  12, 0, new CACasingTierRecipeBuilder(), false)
                 .setSound(GTSoundEvents.ASSEMBLER);

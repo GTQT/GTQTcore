@@ -10,9 +10,7 @@ import keqing.gtqtcore.api.utils.GTQTLog;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTBlockWireCoil;
 import keqing.gtqtcore.common.items.metaitems.GTQTMetaToolItems;
-import keqing.gtqtcore.loaders.recipes.GTQTRecipes;
-import keqing.gtqtcore.loaders.recipes.GTQTRecipesManager;
-import keqing.gtqtcore.loaders.recipes.MetaTileEntityLoader;
+import keqing.gtqtcore.loaders.recipes.*;
 import keqing.gtqtcore.loaders.recipes.handlers.*;
 import net.minecraft.block.Block;
 import net.minecraft.client.resources.I18n;
@@ -21,7 +19,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
-import keqing.gtqtcore.loaders.recipes.FuelRecipes;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -33,6 +30,8 @@ import java.util.Objects;
 import java.util.function.Function;
 
 import static gregtech.api.GregTechAPI.HEATING_COILS;
+import static keqing.gtqtcore.api.capability.chemical_plant.ChemicalPlantProperties.registerCasingTier;
+import static keqing.gtqtcore.common.block.GTQTMetaBlocks.*;
 
 
 @Mod.EventBusSubscriber(
@@ -56,12 +55,15 @@ public class CommonProxy {
         IntegratedMiningDivision.init();
         HeatExchangeRecipes.init();
         KeQingNET.init();
+        ISA.init();
         QTF.init();
         ComponentAssemblyLineRecipes.init();
         RocketEngineRecipes.init();
         GTQTRecipesManager.init();
         WrapCircuits.init();
         MetaTileEntityLoader.init();
+        MetaTileEntityMachine.init();
+
 
 
         for (GTQTBlockWireCoil.CoilType type : GTQTBlockWireCoil.CoilType.values()) {
@@ -96,6 +98,14 @@ public class CommonProxy {
         registry.register(GTQTMetaBlocks.TURBINE_CASING);
         registry.register(GTQTMetaBlocks.QUANTUM_CONSTRAINT_CASING);
         registry.register(GTQTMetaBlocks.COMPONENT_ASSEMBLY_LINE);
+        registry.register(GTQTMetaBlocks.ISA_CASING);
+
+        PINE_LOG.setCreativeTab(GTQTCore_TAB);
+        PINE_SAPLING.setCreativeTab(GTQTCore_TAB);
+        PINE_LEAVES.setCreativeTab(GTQTCore_TAB);
+        registry.register(PINE_LOG);
+        registry.register(PINE_SAPLING);
+        registry.register(PINE_LEAVES);
 
     }
 
@@ -119,6 +129,12 @@ public class CommonProxy {
         registry.register(createItemBlock(GTQTMetaBlocks.TURBINE_CASING, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.QUANTUM_CONSTRAINT_CASING, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.COMPONENT_ASSEMBLY_LINE, VariantItemBlock::new));
+        registry.register(createItemBlock(GTQTMetaBlocks.ISA_CASING, VariantItemBlock::new));
+
+
+        registry.register(createItemBlock(PINE_LOG, ItemBlock::new));
+        registry.register(createItemBlock(PINE_SAPLING, ItemBlock::new));
+        registry.register(createItemBlock(PINE_LEAVES, ItemBlock::new));
     }
 
     private static <T extends Block> ItemBlock createItemBlock(T block, Function<T, ItemBlock> producer) {
@@ -131,6 +147,14 @@ public class CommonProxy {
     public static void registerRecipes(RegistryEvent.Register<IRecipe> event)
     {
         GTQTLog.logger.info("Registering recipes...");
+
+        registerCasingTier(0, "一级");
+        registerCasingTier(1, "二级");
+        registerCasingTier(2, "三级");
+        registerCasingTier(3, "四级");
+        registerCasingTier(4, "五级");
+        registerCasingTier(5, "六级");
+
         PCBPartProperty.registeredPart(1,"微生物培养仓");
         PCBPartProperty.registeredPart(2,"化学辅助计算机");
         FusionEUToStartProperty.registerFusionTier(9, "(MK4)");

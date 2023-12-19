@@ -20,6 +20,7 @@ import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
+import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.ResourceLocation;
 
@@ -84,10 +85,9 @@ public class MetaTileEntityNaquadahReactorMkiii extends FuelMultiblockController
 
     @Nonnull
     @Override
-    protected OrientedOverlayRenderer getFrontOverlay() {
-        return GCYMTextures.ELECTRIC_IMPLOSION_OVERLAY;
+    protected ICubeRenderer getFrontOverlay() {
+        return GTQTTextures.VACUUM_DRYING_FURNACE_OVERLAY;
     }
-
 
     @Override
     public boolean hasMufflerMechanics() {

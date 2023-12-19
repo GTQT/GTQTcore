@@ -76,5 +76,18 @@ public class FirstDegreeMaterials {
                 .components(Methylhydrazine, 1, Tetranitromethane, 1)
                 .flags(DISABLE_DECOMPOSITION)
                 .build();
+        GTQTMaterials.Alumite = new Material.Builder(20017, gregtechId("alumite"))
+                .fluid()
+                .ingot()
+                .color(0x607186)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+        GTQTMaterials.Alubrassa = new Material.Builder(20018, gregtechId("alubrassa"))
+                .fluid()
+                .ingot()
+                .color(0x321452)
+                .flags(DISABLE_DECOMPOSITION)
+                .components(Aluminium, 3, Copper, 1)
+                .build();
     }
 }

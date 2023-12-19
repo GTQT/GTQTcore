@@ -155,7 +155,6 @@ public class TJMaterials {
     //
     public static Material BauxiteSlurry;
     public static Material IlmeniteSlurry;
-    public static Material RedMud;
     public static Material HeavyRedMudResidue;
     public static Material RefractoryMetalResidue;
     public static Material PotassiumFluorideRefractoryMixture;

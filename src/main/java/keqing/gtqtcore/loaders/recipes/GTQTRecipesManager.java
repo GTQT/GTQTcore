@@ -1,6 +1,7 @@
 package keqing.gtqtcore.loaders.recipes;
 
 import keqing.gtqtcore.loaders.recipes.chain.*;
+import keqing.gtqtcore.loaders.recipes.handlers.ISA;
 
 public class GTQTRecipesManager {
     private GTQTRecipesManager() {
@@ -17,5 +18,6 @@ public class GTQTRecipesManager {
         PEEKChain.init();
         CircuitryMaterialChains.init();
         MetaTileEntityLoader.init();
+        MetaTileEntityMachine.init();
     }
 }

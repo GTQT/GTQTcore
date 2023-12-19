@@ -106,7 +106,7 @@ public class MetaTileEntityChemicalPlant extends RecipeMapMultiblockController {
     @Nonnull
     @Override
     protected ICubeRenderer getFrontOverlay() {
-        return GTQTTextures.CHEMICAL_PLANT;
+        return GTQTTextures.CHEMICAL_PLANT_OVERLAY;
     }
 
     public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {

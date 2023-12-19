@@ -44,7 +44,8 @@ public class GTQTTurbineCasing extends VariantBlock<GTQTTurbineCasing.TurbineCas
         PD_MACHINE_CASING("pd_machine_casing", 4),
         PD_TURBINE_CASING("pd_turbine_casing", 4),
         NQ_MACHINE_CASING("nq_machine_casing", 4),
-        NQ_TURBINE_CASING("nq_turbine_casing", 4);
+        NQ_TURBINE_CASING("nq_turbine_casing", 4),
+        FISHING_CASING("fishing_casing", 4);
 
         private final String name;
         private final int harvestLevel;

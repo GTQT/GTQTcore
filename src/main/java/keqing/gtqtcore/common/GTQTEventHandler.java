@@ -2,6 +2,7 @@ package keqing.gtqtcore.common;
 
 import gregtech.api.unification.material.event.MaterialEvent;
 import keqing.gtqtcore.api.unification.GTQTMaterials;
+import keqing.gtqtcore.api.unification.OrePrefixAdditions;
 import keqing.gtqtcore.api.unification.TJMaterials;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
@@ -22,6 +23,7 @@ public class GTQTEventHandler {
     {
         GTQTMaterials.register();
         TJMaterials.register();
+        OrePrefixAdditions.init();
         //在此处注册材料
     }
 

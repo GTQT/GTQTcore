@@ -1,24 +1,31 @@
 package keqing.gtqtcore.loaders.recipes;
 
+import gregtech.api.GTValues;
 import gregtech.api.capability.GregtechCapabilities;
 import gregtech.api.capability.IElectricItem;
 import gregtech.api.recipes.ModHandler;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.material.info.MaterialFlags;
+import gregtech.api.unification.material.properties.OreProperty;
 import gregtech.api.unification.material.properties.PropertyKey;
 import gregtech.api.unification.material.properties.ToolProperty;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.UnificationEntry;
 import gregtech.common.items.MetaItems;
+import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
+import keqing.gtqtcore.api.unification.ore.GTQTOrePrefix;
 import keqing.gtqtcore.common.items.metaitems.GTQTMetaToolItems;
+import keqing.gtqtcore.loaders.recipes.handlers.ISA;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 
+import static gregtech.api.GTValues.ZPM;
 import static gregtech.api.unification.ore.OrePrefix.plate;
 import static gregtech.api.unification.ore.OrePrefix.stickLong;
 import static gregtech.common.items.MetaItems.POWER_UNIT_HV;
 import static gregtech.loaders.recipe.handlers.ToolRecipeHandler.addToolRecipe;
+import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.milled;
 import static keqing.gtqtcore.common.items.metaitems.GTQTMetaToolItems.Choocher_HV;
 import static keqing.gtqtcore.common.items.metaitems.GTQTMetaToolItems.Jinitaimei_HV;
 
@@ -29,7 +36,29 @@ public class GTQTRecipes {
 
     public static void registerTool(){
         plate.addProcessingHandler(PropertyKey.TOOL, GTQTRecipes::gcmTool);
+        milled.addProcessingHandler(PropertyKey.ORE,GTQTRecipes::processMilled);
     }
+
+    public static void processMilled(OrePrefix milledPrefix, Material material, OreProperty property) {
+        GTQTcoreRecipeMaps.ISA_MILL_GRINDER.recipeBuilder()
+                .EUt(GTValues.VA[ZPM])
+                .duration(1500)
+                .input(OrePrefix.crushed, material, 16)
+                .output(milledPrefix, material, 16)
+                .circuitMeta(11)
+                .grindBallTier(1)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.ISA_MILL_GRINDER.recipeBuilder()
+                .EUt(GTValues.VA[ZPM])
+                .duration(1200)
+                .input(OrePrefix.crushed, material, 16)
+                .output(milledPrefix, material, 32)
+                .circuitMeta(10)
+                .grindBallTier(2)
+                .buildAndRegister();
+    }
+
     private static void gcmTool(OrePrefix prefix, Material material, ToolProperty property) {
         UnificationEntry plate = new UnificationEntry(OrePrefix.plate, material);
         UnificationEntry ingot = new UnificationEntry(material.hasProperty(PropertyKey.GEM) ? OrePrefix.gem : OrePrefix.ingot, material);

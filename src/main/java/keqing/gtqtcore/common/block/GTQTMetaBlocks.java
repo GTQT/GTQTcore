@@ -2,6 +2,9 @@ package keqing.gtqtcore.common.block;
 
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.common.block.blocks.*;
+import keqing.gtqtcore.common.block.wood.BlockPineLeaves;
+import keqing.gtqtcore.common.block.wood.BlockPineLog;
+import keqing.gtqtcore.common.block.wood.BlockPineSapling;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -19,7 +22,12 @@ public class GTQTMetaBlocks {
     public static GTQTTurbineCasing TURBINE_CASING;
     public static GTQTQuantumForceTransformerCasing QUANTUM_CONSTRAINT_CASING;
     public static GTQTBlockComponentAssemblyLineCasing COMPONENT_ASSEMBLY_LINE;
+    public static GTQTIsaCasing ISA_CASING;
 
+
+    public static final BlockPineLeaves PINE_LEAVES = new BlockPineLeaves();
+    public static final BlockPineLog PINE_LOG = new BlockPineLog();
+    public static final BlockPineSapling PINE_SAPLING = new BlockPineSapling();
     private GTQTMetaBlocks() {}
 
     public static void init() {
@@ -39,11 +47,17 @@ public class GTQTMetaBlocks {
         QUANTUM_CONSTRAINT_CASING.setRegistryName("quantum_force_transformer_casing");
         COMPONENT_ASSEMBLY_LINE = new GTQTBlockComponentAssemblyLineCasing();
         COMPONENT_ASSEMBLY_LINE.setRegistryName("component_assembly_line_casing");
+        ISA_CASING = new GTQTIsaCasing();
+        ISA_CASING.setRegistryName("isa_casing");
 
     }
 
     @SideOnly(Side.CLIENT)
     public static void registerItemModels() {
+        registerItemModel(PINE_LEAVES);
+        registerItemModel(PINE_LOG);
+        registerItemModel(PINE_SAPLING);
+
         registerItemModel(MULTI_CASING);
         registerItemModel(ADV_BLOCK);
         registerItemModel(ADV_GLASS);
@@ -52,7 +66,7 @@ public class GTQTMetaBlocks {
         registerItemModel(TURBINE_CASING);
         registerItemModel(QUANTUM_CONSTRAINT_CASING);
         registerItemModel(COMPONENT_ASSEMBLY_LINE);
-
+        registerItemModel(ISA_CASING);
     }
 
     @SideOnly(Side.CLIENT)

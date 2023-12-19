@@ -16,7 +16,7 @@ import keqing.gtqtcore.api.unification.GTQTMaterials;
 
 public class HigherDegreeMaterials {
     public static void register() {
-        GTQTMaterials.Nitinol = new Material.Builder(21000, gregtechId("nitinol"))
+        GTQTMaterials.Nitinol = new Material.Builder(20600, gregtechId("nitinol"))
                 .ingot(3)
                 .fluid()
                 .color(0x8C6464).iconSet(METALLIC)

@@ -705,8 +705,6 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(I18n.format("gregtech.machine.fusion_reactor.capacity", calculateEnergyStorageFactor(16) / 1000000L));
         tooltip.add(I18n.format("gregtech.machine.fusion_reactor.overclocking"));
-        tooltip.add(I18n.format("gregtech.machine.fusion_reactor.capacity", calculateEnergyStorageFactor(16) / 1000000L));
-        tooltip.add(I18n.format("gregtech.machine.fusion_reactor.overclocking"));
         tooltip.add(I18n.format("gtqtcore.multiblock.fu.tooltip.1"));
         tooltip.add(I18n.format("gtqtcore.multiblock.hb.tooltip.4"));
         tooltip.add(I18n.format("gtqtcore.multiblock.hb.tooltip.3"));

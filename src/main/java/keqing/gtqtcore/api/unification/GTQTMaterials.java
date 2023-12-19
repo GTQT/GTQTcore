@@ -90,6 +90,50 @@ public class GTQTMaterials {
     public static Material RP1RocketFuel;
     public static Material Methylhydrazine;
     public static Material MethylhydrazineNitrateRocketFuel;
+    public static Material Alumite;
+    public static Material Alubrassa;
+    public static Material Coolant;
+    public static Material SuperCoolant;
+    public static Material Cryotheum;
+    public static Material XPJuice;
+    public static Material Spirit;
+    public static Material Hollowtears;
+    public static Material AtomicSeparationCatalyst;
+    public static Material Tiberium;
+    public static Material NeutronsFlow;
+    public static Material ProtonFlow;
+    public static Material BismuthLeadAlloy;
+    public static Material UreaMix;
+    public static Material FermentationBase;
+    public static Material Resin;
+    public static Material CalciumCarbonate;
+    public static Material PropionicAcid;
+    public static Material SodiumAluminate;
+    public static Material Butanol;
+    public static Material Formaldehyde;
+    public static Material CarbenDisulfide;
+    public static Material PineOil;
+    public static Material Periodicium;
+
+    public static Material AlmandineFront;
+    public static Material PentlanditeFront;
+    public static Material ChalcopyriteFront;
+    public static Material GrossularFront;
+    public static Material MonaziteFront;
+    public static Material NickelFront;
+    public static Material PlatinumFront;
+    public static Material PyropeFront;
+    public static Material RedstoneFront;
+    public static Material SpessartineFront;
+    public static Material SphaleriteFront;
+
+
+
+    public static Material Thaumium;
+    public static Material MetallicHydrogen;
+    public static Material Ethylenimine;
+    public static Material Polyethyleneimine;
+    public static Material RedMud;
 
     //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/api/unification/GSMaterials.java
 
@@ -99,6 +143,7 @@ public class GTQTMaterials {
 
         GTQTElementMaterials.register();
         FirstDegreeMaterials.register();
+        SecondDegreeMaterials.register();
         HigherDegreeMaterials.register();
         EPMachineCasingMaterials.register();
         EPMaterialPropertyAddition.init();

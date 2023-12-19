@@ -189,8 +189,6 @@ public class MetaTileEntityHugeFusionReactor extends RecipeMapMultiblockControll
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(I18n.format("gregtech.machine.fusion_reactor.capacity", calculateEnergyStorageFactor(16) / 1000000L));
         tooltip.add(I18n.format("gregtech.machine.fusion_reactor.overclocking"));
-        tooltip.add(I18n.format("gregtech.machine.fusion_reactor.capacity", calculateEnergyStorageFactor(16) / 1000000L));
-        tooltip.add(I18n.format("gregtech.machine.fusion_reactor.overclocking"));
         if (tier == GTValues.UHV){
             tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("惊 鸿 万 物", new Object[0]));}
         if (tier == GTValues.UEV){

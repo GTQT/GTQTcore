@@ -1,7 +1,11 @@
 package keqing.gtqtcore.common.items;
 
 import gregtech.api.GregTechAPI;
+import gregtech.api.items.metaitem.MetaItem;
 import gregtech.api.items.metaitem.StandardMetaItem;
+import keqing.gtqtcore.common.CommonProxy;
+import keqing.gtqtcore.common.items.behaviors.IntBcircuitBehavior;
+import keqing.gtqtcore.common.items.behaviors.MillBallBehavior;
 
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 
@@ -15,6 +19,18 @@ public class GTQTMetaItem1 extends StandardMetaItem {
 
 
     public void registerSubItems() {
+        BIOLOGY_INTEGRATED_CIRCUIT = this.addItem(39, "item.biology_integrated_circuit").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB).addComponents(new IntBcircuitBehavior());
+        POTASSIUM_ETHYLATE=this.addItem(58, "item.potassium.ethylate").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        POTASSIUM_ETHYLXANTHATE=this.addItem(59, "item.potassium.ethylxanthate").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        SODIUM_ETHYLXANTHATE=this.addItem(57, "item.sodium.ethylxanthate").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        SODIUM_ETHYLATE=this.addItem(56, "item.sodium.ethylate").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        PINE_CONE=this.addItem(47, "item.pine_cone").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        PINE_FRAGMENT=this.addItem(48, "item.pine_fragment").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        GRINDBALL_SOAPSTONE = this.addItem(370, "mill.grindball_soapstone").setMaxStackSize(1).addComponents(new MillBallBehavior());
+        GRINDBALL_ALUMINIUM = this.addItem(371, "mill.grindball_aluminium").setMaxStackSize(1).addComponents(new MillBallBehavior());
+
+
+
         WRAP_CIRCUIT_ULV = this.addItem(400, "wrap.circuit.ulv");
         WRAP_CIRCUIT_LV = this.addItem(401, "wrap.circuit.lv");
         WRAP_CIRCUIT_MV = this.addItem(402, "wrap.circuit.mv");

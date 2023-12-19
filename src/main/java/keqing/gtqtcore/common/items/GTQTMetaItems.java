@@ -13,6 +13,11 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem 你物品的名字，记得全大写;
      */
     public static final List<MetaItem<?>> ITEMS = GTQTMetaItem1.getMetaItems();
+    public static MetaItem<?>.MetaValueItem BIOLOGY_INTEGRATED_CIRCUIT;
+    public static MetaItem<?>.MetaValueItem POTASSIUM_ETHYLATE;
+    public static MetaItem<?>.MetaValueItem SODIUM_ETHYLATE;
+    public static MetaItem<?>.MetaValueItem PINE_CONE;
+    public static MetaItem<?>.MetaValueItem PINE_FRAGMENT;
     public static MetaItem<?>.MetaValueItem WRAP_CIRCUIT_ULV;
     public static MetaItem<?>.MetaValueItem WRAP_CIRCUIT_LV;
     public static MetaItem<?>.MetaValueItem WRAP_CIRCUIT_MV;
@@ -28,8 +33,10 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem WRAP_CIRCUIT_UXV;
     public static MetaItem<?>.MetaValueItem WRAP_CIRCUIT_OpV;
     public static MetaItem<?>.MetaValueItem WRAP_CIRCUIT_MAX;
-
-
+    public static MetaItem<?>.MetaValueItem GRINDBALL_SOAPSTONE;
+    public static MetaItem<?>.MetaValueItem GRINDBALL_ALUMINIUM;
+    public static MetaItem<?>.MetaValueItem SODIUM_ETHYLXANTHATE;
+    public static MetaItem<?>.MetaValueItem POTASSIUM_ETHYLXANTHATE;
 
     public static void initialization()
     {

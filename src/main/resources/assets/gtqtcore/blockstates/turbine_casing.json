@@ -97,6 +97,12 @@
         "textures": {
           "all": "gregtech:blocks/multiblock/casing/brick"
         }
+      },
+      "fishing_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casing/fishing_casing"
+        }
       }
     }
   }

@@ -6,11 +6,13 @@ import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
 import gregtech.client.renderer.texture.cube.SimpleOverlayRenderer;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.renderer.textures.OverlayRenderer;
+import keqing.gtqtcore.client.textures.custom.IsaMillRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
 
 
 public class GTQTTextures {
+    public static SimpleOverlayRenderer FISHING_CASING;
     public static OverlayRenderer MULTIPART_BUFFER_HATCH = new OverlayRenderer("multipart/overlay_buffer_hatch");
     public static OrientedOverlayRenderer ROCKET_ENGINE_OVERLAY = new OrientedOverlayRenderer("machines/rocket_engine");
     public static OrientedOverlayRenderer NAQUADAH_REACTOR_OVERLAY = new OrientedOverlayRenderer("machines/naquadah_reactor");
@@ -24,13 +26,16 @@ public class GTQTTextures {
     public static SimpleOverlayRenderer POLYBENZIMIDAZOLE_PIPE;
     public static SimpleOverlayRenderer QUANTUM_CONSTRAINT_CASING;
     public static SimpleOverlayRenderer PD_CASING;
+    public static SimpleOverlayRenderer FLOTATION_CASING;
     public static SimpleOverlayRenderer BRICK;
     public static SimpleOverlayRenderer ADVANCED_INVAR_CASING;
     public static SimpleOverlayRenderer MACERATOR_CASING;
     public static SimpleOverlayRenderer NQ_CASING;
+    public static SimpleOverlayRenderer VACUUM_CASING;
     public static SimpleOverlayRenderer IRIDIUM_CASING;
     public static SimpleOverlayRenderer INF_WATER;
     public static SimpleOverlayRenderer NITINOL_CASING;
+    public static SimpleOverlayRenderer ISA_CASING;
     public static SimpleOverlayRenderer COMPRESSED_FUSION_REACTOR_MKI_CASING;
     public static SimpleOverlayRenderer COMPRESSED_FUSION_REACTOR_MKII_CASING;
     public static SimpleOverlayRenderer COMPRESSED_FUSION_REACTOR_MKIII_CASING;
@@ -50,12 +55,40 @@ public class GTQTTextures {
     public static SimpleOverlayRenderer SFTC;
     public static SimpleOverlayRenderer SFTS;
     public static TextureAtlasSprite FORCE_FIELD;
+
+    public static IsaMillRenderer ISA_MILL = new IsaMillRenderer();
+
+    public static OrientedOverlayRenderer CATALYTIC_REFORMER_OVERLAY = new OrientedOverlayRenderer("overlay/catalytic_reformer");
+    public static OrientedOverlayRenderer CRYSTALLIZATION_CRUCIBLE_OVERLAY = new OrientedOverlayRenderer("overlay/crystallization_crucible");
+    public static OrientedOverlayRenderer CVD_UNIT_OVERLAY = new OrientedOverlayRenderer("overlay/cvd_unit");
+    public static OrientedOverlayRenderer NANOSCALE_FABRICATOR_OVERLAY = new OrientedOverlayRenderer("overlay/nanoscale_fabricator");
+    public static OrientedOverlayRenderer SONICATOR_OVERLAY = new OrientedOverlayRenderer("overlay/sonicator");
+    public static OrientedOverlayRenderer ISA_MILL_OVERLAY = new OrientedOverlayRenderer("overlay/isa_mill");
+    public static OrientedOverlayRenderer BURNER_REACTOR_OVERLAY = new OrientedOverlayRenderer("overlay/burner_reactor");
+    public static OrientedOverlayRenderer CRYOGENIC_REACTOR_OVERLAY = new OrientedOverlayRenderer("overlay/cryogenic_reactor");
+    public static OrientedOverlayRenderer VACUUM_DRYING_FURNACE_OVERLAY = new OrientedOverlayRenderer("overlay/vacuum_drying_furnace");
+    public static OrientedOverlayRenderer CHEMICAL_PLANT_OVERLAY = new OrientedOverlayRenderer("overlay/ep_chemical_plant");
+    public static OrientedOverlayRenderer INDUSTRIAL_DRILL_OVERLAY = new OrientedOverlayRenderer("overlay/industrial_drill");
+    public static OrientedOverlayRenderer FRACKER_OVERLAY = new OrientedOverlayRenderer("overlay/fracker");
+    public static OrientedOverlayRenderer ROASTER_OVERLAY = new OrientedOverlayRenderer("overlay/roaster");
+    public static OrientedOverlayRenderer ALGAE_FARM_OVERLAY = new OrientedOverlayRenderer("overlay/algae_farm");
+    public static OrientedOverlayRenderer MEGA_TURBINE_OVERLAY = new OrientedOverlayRenderer("overlay/mega_turbine");
+    public static OrientedOverlayRenderer DRYER_OVERLAY = new OrientedOverlayRenderer("machines/dryer");
+    public static OrientedOverlayRenderer STELLAR_FURNACE_OVERLAY = new OrientedOverlayRenderer("overlay/stellar_furnace");
+    public static OrientedOverlayRenderer CYCLOTRON_OVERLAY = new OrientedOverlayRenderer("overlay/cyclotron");
+    public static OrientedOverlayRenderer DRAGON_FUSION_OVERLAY = new OrientedOverlayRenderer("overlay/dragon_fusion");
+    public static OrientedOverlayRenderer MULTIPART_BALL_HATCH = new OrientedOverlayRenderer("multiparts/overlay_ball_hatch");
+
     public static void init() {
+        FLOTATION_CASING = new SimpleOverlayRenderer("multiblock/isa_casing/flotation_casing");
+        ISA_CASING = new SimpleOverlayRenderer("multiblock/isa_casing/isa_mill_casing");
+        VACUUM_CASING = new SimpleOverlayRenderer("multiblock/isa_casing/vacuum_casing");
         NITINOL_CASING = new SimpleOverlayRenderer("multiblock/casings/nitinol_machine_casing");
         MACERATOR_CASING = new SimpleOverlayRenderer("multiblock/casing/macerator_casing");
         PD_CASING = new SimpleOverlayRenderer("multiblock/casing/pd_turbine_casing");
         HYPER_CASING = new SimpleOverlayRenderer("multiblock/casing/hyper_casing");
         BRICK = new SimpleOverlayRenderer("multiblock/casing/brick");
+        FISHING_CASING = new SimpleOverlayRenderer("multiblock/casing/fishing_casing");
         POLYBENZIMIDAZOLE_PIPE = new SimpleOverlayRenderer("multiblock/casing/talonite_casing");
         QUANTUM_CONSTRAINT_CASING = new SimpleOverlayRenderer("multiblock/quantum_force_transformer_casing/quantum_constraint_casing");
         ADVANCED_INVAR_CASING = new SimpleOverlayRenderer("multiblock/casing/advanced_invar_casing");

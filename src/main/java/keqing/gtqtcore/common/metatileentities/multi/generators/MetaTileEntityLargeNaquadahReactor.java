@@ -116,7 +116,4 @@ public class MetaTileEntityLargeNaquadahReactor extends FuelMultiblockController
         tooltip.add(I18n.format("gtqtcore.machine.large_naquadah_reactor.tooltip.2"));
     }
 
-    public void runMufflerEffect(float xPos, float yPos, float zPos, float xSpd, float ySpd, float zSpd) {
-        this.getWorld().spawnParticle(EnumParticleTypes.SPELL_WITCH, (double)xPos, (double)yPos, (double)zPos, (double)xSpd, (double)ySpd, (double)zSpd, new int[0]);
-    }
 }

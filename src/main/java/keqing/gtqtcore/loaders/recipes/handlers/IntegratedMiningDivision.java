@@ -1,15 +1,19 @@
 package keqing.gtqtcore.loaders.recipes.handlers;
 
+import gregtech.api.GTValues;
 import gregtech.api.GregTechAPI;
 import gregtech.api.recipes.builders.FuelRecipeBuilder;
 import gregtech.api.recipes.builders.SimpleRecipeBuilder;
 import gregtech.api.recipes.ingredients.GTRecipeOreInput;
 import gregtech.api.unification.material.Material;
+import gregtech.api.unification.material.properties.OreProperty;
 import gregtech.api.unification.material.properties.PropertyKey;
 import gregtech.api.unification.material.registry.MaterialRegistry;
 import gregtech.api.unification.ore.OrePrefix;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
+import keqing.gtqtcore.api.unification.ore.GTQTOrePrefix;
 
+import static gregtech.api.GTValues.ZPM;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.ore;
 
@@ -20,6 +24,7 @@ public class IntegratedMiningDivision {
     }
 
     private static void addStaticRecipes() {
+
         for (MaterialRegistry materialRegistry : GregTechAPI.materialManager.getRegistries())
         {
             for (Material material : materialRegistry) {
