@@ -66,6 +66,7 @@ public class CommonProxy {
         WrapCircuits.init();
         MetaTileEntityLoader.init();
         MetaTileEntityMachine.init();
+        OreRecipeHandler.register();
 
 
 

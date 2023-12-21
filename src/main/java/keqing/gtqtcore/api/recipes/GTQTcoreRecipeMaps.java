@@ -149,7 +149,7 @@ public class GTQTcoreRecipeMaps {
                 6, 6, 6, 6, new ChemicalPlantBuilder(), false);
 
         INTEGRATED_MINING_DIVISION = new RecipeMap<>("integrated_mining_division",
-                3, 3, 3, 0, new SimpleRecipeBuilder(), false);
+                6, 6, 6, 6, new SimpleRecipeBuilder(), false);
 
         STEAM_BLAST_FURNACE_RECIPES = new RecipeMap<>("steam_blast_furnace",
                 3, 1, 0, 0, new FuelRecipeBuilder(), false);
