@@ -1,15 +1,19 @@
 package keqing.gtqtcore.loaders.recipes.chain;
 
 
+import gregtech.api.GTValues;
 import gregtech.api.recipes.ModHandler;
 import gregtech.api.unification.material.MarkerMaterials;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.UnificationEntry;
 import gregtech.common.items.MetaItems;
+import gregtechfoodoption.recipe.GTFORecipeMaps;
 import keqing.gtqtcore.api.items.IntCircuitIngredientBiology;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.unification.GTQTMaterials;
+import keqing.gtqtcore.common.block.GTQTMetaBlocks;
+import keqing.gtqtcore.common.block.wood.BlockPineSapling;
 import keqing.gtqtcore.common.items.GTQTMetaItems;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -17,7 +21,10 @@ import net.minecraft.item.ItemStack;
 
 import static gregicality.science.api.unification.materials.GCYSMaterials.Butanol;
 import static gregicality.science.api.unification.materials.GCYSMaterials.Formaldehyde;
+import static gregtech.api.GTValues.ZPM;
 import static gregtech.api.recipes.RecipeMaps.*;
+import static gregtech.api.unification.material.Materials.RawGrowthMedium;
+import static gregtech.api.unification.material.Materials.Water;
 import static gregtech.api.unification.ore.OrePrefix.*;
 
 public class BiologyRecipe {
@@ -30,6 +37,51 @@ public class BiologyRecipe {
 
     public static void init() {
         ModHandler.addShapelessRecipe("integrated_circuit_biology", IntCircuitIngredientBiology.getIntegratedCircuit(0), new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.ULV));
+
+        GTFORecipeMaps.GREENHOUSE_RECIPES.recipeBuilder()
+                .EUt(GTValues.VA[ZPM])
+                .duration(2000)
+                .input(GTQTMetaBlocks.PINE_SAPLING,1)
+                .fluidInputs(Water.getFluid(10000))
+                .output(GTQTMetaBlocks.PINE_LOG,6)
+                .output(GTQTMetaBlocks.PINE_SAPLING)
+                .output(GTQTMetaItems.PINE_CONE)
+                .circuitMeta(1)
+                .buildAndRegister();
+
+        GTFORecipeMaps.GREENHOUSE_RECIPES.recipeBuilder()
+                .EUt(GTValues.VA[ZPM])
+                .duration(2000)
+                .input(GTQTMetaBlocks.PINE_SAPLING,1)
+                .fluidInputs(Water.getFluid(10000))
+                .output(GTQTMetaBlocks.PINE_SAPLING,1)
+                .output(GTQTMetaBlocks.PINE_LOG,5)
+                .output(GTQTMetaBlocks.PINE_LEAVES,20)
+                .circuitMeta(2)
+                .buildAndRegister();
+
+        GTFORecipeMaps.GREENHOUSE_RECIPES.recipeBuilder()
+                .EUt(GTValues.VA[ZPM])
+                .duration(2000)
+                .input(GTQTMetaBlocks.PINE_SAPLING,1)
+                .fluidInputs(Water.getFluid(15000))
+                .output(GTQTMetaBlocks.PINE_SAPLING,1)
+                .output(GTQTMetaBlocks.PINE_LOG,5)
+                .output(GTQTMetaItems.PINE_CONE,5)
+                .circuitMeta(3)
+                .buildAndRegister();
+
+        GTFORecipeMaps.GREENHOUSE_RECIPES.recipeBuilder()
+                .EUt(GTValues.VA[ZPM])
+                .duration(2000)
+                .input(MetaItems.FERTILIZER,2)
+                .input(GTQTMetaBlocks.PINE_SAPLING,1)
+                .fluidInputs(Water.getFluid(20000))
+                .output(GTQTMetaBlocks.PINE_LOG,10)
+                .output(GTQTMetaBlocks.PINE_SAPLING,2)
+                .output(GTQTMetaItems.PINE_CONE,4)
+                .circuitMeta(4)
+                .buildAndRegister();
 
 //Common Algae Usage
         GTQTcoreRecipeMaps.CHEMICAL_PLANT.recipeBuilder()

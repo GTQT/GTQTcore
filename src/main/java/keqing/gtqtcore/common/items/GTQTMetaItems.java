@@ -55,6 +55,11 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem WOOD_PELLETS;
     public static MetaItem<?>.MetaValueItem PELLETS_MOULD;
     public static MetaItem<?>.MetaValueItem ALUMINIUM_PELLETS;
+    public static MetaItem<?>.MetaValueItem IRON_CROP;
+    public static MetaItem<?>.MetaValueItem TIN_CROP;
+    public static MetaItem<?>.MetaValueItem COPPER_CROP;
+    public static MetaItem<?>.MetaValueItem BRONZE_CROP;
+    public static MetaItem<?>.MetaValueItem CARBON_CROP;
 
     public static void initialization()
     {

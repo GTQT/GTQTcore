@@ -115,7 +115,7 @@ dependencies {
     implementation rfg.deobf(files("libs/CTM-MC1.12.2-1.0.2.31.jar"))
     implementation rfg.deobf(files("libs/GregTechScienceGTQTport-1.0.jar"))
     implementation rfg.deobf(files("libs/groovyscript-0.7.0.jar"))
-
+    implementation rfg.deobf(files("libs/gregtechfoodoption-1.10.2.jar"))
 
     if (project.use_mixins.toBoolean()) {
         // Change your mixin refmap name here:

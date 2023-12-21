@@ -123,13 +123,19 @@ public class GTQTcoreRecipeMaps {
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARC_FURNACE, ProgressWidget.MoveType.HORIZONTAL);
 
         TURBINE_COMBUSTION_CHAMBER = new RecipeMap<>("turbine_combustion_chamber",
-                0, 0, 1, 1, new FuelRecipeBuilder(), false);
+                0, 0, 1, 1, new FuelRecipeBuilder(), false)
+                .allowEmptyOutput();
 
         ROCKET = new RecipeMap<>("rocket",
-                0, 0, 1, 1, new FuelRecipeBuilder(), false);
+                0, 0, 1, 0, new FuelRecipeBuilder(), false)
+                .setSlotOverlay(false, true, true, GuiTextures.CENTRIFUGE_OVERLAY)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_GAS_COLLECTOR, ProgressWidget.MoveType.HORIZONTAL)
+                .setSound(GTSoundEvents.TURBINE)
+                .allowEmptyOutput();
 
         NAQUADAH_REACTOR = new RecipeMap<>("naquadah_reactor",
-                3, 1, 1, 1, new FuelRecipeBuilder(), false);
+                3, 1, 1, 1, new FuelRecipeBuilder(), false)
+                .allowEmptyOutput();
 
         I_MODULAR_FISSION_REACTOR = new RecipeMap<>("i_modular_fission_reactor",
                 3, 1, 1, 1, new FuelRecipeBuilder(), false);
@@ -173,22 +179,26 @@ public class GTQTcoreRecipeMaps {
 
         NAQUADAH_REACTOR_RECIPES = new RecipeMap<>("naquadah_reactor_recipes", 0,  0,   1,  0, new FuelRecipeBuilder(), false)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, ProgressWidget.MoveType.HORIZONTAL)
-                .setSound(GTSoundEvents.COMBUSTION);
+                .setSound(GTSoundEvents.COMBUSTION)
+                .allowEmptyOutput();
 
         //  Hyper Reactor Mk I Recipemap
         HYPER_REACTOR_MK1_RECIPES = new RecipeMap<>("hyper_reactor_mk1_recipes", 0,  0,  1, 0, new FuelRecipeBuilder(), false)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL)
-                .setSound(GTSoundEvents.ARC);
+                .setSound(GTSoundEvents.ARC)
+                .allowEmptyOutput();
 
         //  Hyper Reactor Mk II Recipemap
         HYPER_REACTOR_MK2_RECIPES = new RecipeMap<>("hyper_reactor_mk2_recipes", 0,  0, 1,0, new FuelRecipeBuilder(), false)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL)
-                .setSound(GTSoundEvents.ARC);
+                .setSound(GTSoundEvents.ARC)
+                .allowEmptyOutput();
 
         //  Hyper Reactor Mk III Recipemap
         HYPER_REACTOR_MK3_RECIPES = new RecipeMap<>("hyper_reactor_mk3_recipes",  0, 0,  1,  0, new FuelRecipeBuilder(), false)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL)
-                .setSound(GTSoundEvents.ARC);
+                .setSound(GTSoundEvents.ARC)
+                .allowEmptyOutput();
 
         FUEL_REFINE_FACTORY_RECIPES = new RecipeMap<>("fuel_refine_factory_recipes", 3,  4,  4, 2, new SimpleRecipeBuilder(), false)
                 .setSlotOverlay(false, false, false, GuiTextures.MOLECULAR_OVERLAY_1)

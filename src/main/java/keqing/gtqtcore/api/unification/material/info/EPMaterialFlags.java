@@ -4,6 +4,8 @@ import gregtech.api.unification.material.info.MaterialFlag;
 import gregtech.api.unification.material.info.MaterialFlags;
 import gregtech.api.unification.material.properties.PropertyKey;
 
+import static gregtech.api.unification.material.info.MaterialFlags.GENERATE_ROD;
+
 public class EPMaterialFlags {
 
     public static final MaterialFlag GENERATE_COIL = new MaterialFlag.Builder("generate_coil")
@@ -19,4 +21,15 @@ public class EPMaterialFlags {
     public static final MaterialFlag GENERATE_BOULE = new MaterialFlag.Builder("generate_boule")
             .requireProps(PropertyKey.GEM)
             .build();
+
+    public static final MaterialFlag GENERATE_ELECTRODE = new MaterialFlag.Builder("electrode")
+            .requireFlags(GENERATE_ROD)
+            .requireProps(PropertyKey.INGOT)
+            .build();
+
+    public static final MaterialFlag GENERATE_NANOTUBE = new MaterialFlag.Builder("generate_nanotube")
+            .build();
+    public static final MaterialFlag GENERATE_NANOSENSOR = new MaterialFlag.Builder("generate_nanosensor")
+            .build();
+
 }

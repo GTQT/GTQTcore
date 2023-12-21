@@ -9,6 +9,7 @@ import keqing.gtqtcore.api.recipes.properties.QFTCasingTierProperty;
 import keqing.gtqtcore.api.utils.GTQTLog;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTBlockWireCoil;
+import keqing.gtqtcore.common.block.blocks.GTQTCrops;
 import keqing.gtqtcore.common.items.metaitems.GTQTMetaToolItems;
 import keqing.gtqtcore.loaders.recipes.*;
 import keqing.gtqtcore.loaders.recipes.handlers.*;
@@ -100,6 +101,12 @@ public class CommonProxy {
         registry.register(GTQTMetaBlocks.COMPONENT_ASSEMBLY_LINE);
         registry.register(GTQTMetaBlocks.ISA_CASING);
 
+        registry.register(GTQTCrops.COPPER_CROP);
+        registry.register(GTQTCrops.IRON_CROP);
+        registry.register(GTQTCrops.TIN_CROP);
+        registry.register(GTQTCrops.BRONZE_CROP);
+        registry.register(GTQTCrops.CARBON_CROP);
+
         PINE_LOG.setCreativeTab(GTQTCore_TAB);
         PINE_SAPLING.setCreativeTab(GTQTCore_TAB);
         PINE_LEAVES.setCreativeTab(GTQTCore_TAB);
@@ -160,25 +167,25 @@ public class CommonProxy {
         FusionEUToStartProperty.registerFusionTier(9, "(MK4)");
         FusionEUToStartProperty.registerFusionTier(10, "(MK5)");
         FusionEUToStartProperty.registerFusionTier(11, "(MK6)");
-        QFTCasingTierProperty.registerQFTCasingTier(1, I18n.format("epimorphism.machine.quantum_force_transformer.tier.1"));
-        QFTCasingTierProperty.registerQFTCasingTier(2, I18n.format("epimorphism.machine.quantum_force_transformer.tier.2"));
-        QFTCasingTierProperty.registerQFTCasingTier(3, I18n.format("epimorphism.machine.quantum_force_transformer.tier.3"));
-        QFTCasingTierProperty.registerQFTCasingTier(4, I18n.format("epimorphism.machine.quantum_force_transformer.tier.4"));
+        QFTCasingTierProperty.registerQFTCasingTier(1, I18n.format("gtqtcore.machine.quantum_force_transformer.tier.1"));
+        QFTCasingTierProperty.registerQFTCasingTier(2, I18n.format("gtqtcore.machine.quantum_force_transformer.tier.2"));
+        QFTCasingTierProperty.registerQFTCasingTier(3, I18n.format("gtqtcore.machine.quantum_force_transformer.tier.3"));
+        QFTCasingTierProperty.registerQFTCasingTier(4, I18n.format("gtqtcore.machine.quantum_force_transformer.tier.4"));
 
-        CACasingTierProperty.registerCACasingTier(1, I18n.format("epimorphism.machine.component_assembly_line.tier.1"));
-        CACasingTierProperty.registerCACasingTier(2, I18n.format("epimorphism.machine.component_assembly_line.tier.2"));
-        CACasingTierProperty.registerCACasingTier(3, I18n.format("epimorphism.machine.component_assembly_line.tier.3"));
-        CACasingTierProperty.registerCACasingTier(4, I18n.format("epimorphism.machine.component_assembly_line.tier.4"));
-        CACasingTierProperty.registerCACasingTier(5, I18n.format("epimorphism.machine.component_assembly_line.tier.5"));
-        CACasingTierProperty.registerCACasingTier(6, I18n.format("epimorphism.machine.component_assembly_line.tier.6"));
-        CACasingTierProperty.registerCACasingTier(7, I18n.format("epimorphism.machine.component_assembly_line.tier.7"));
-        CACasingTierProperty.registerCACasingTier(8, I18n.format("epimorphism.machine.component_assembly_line.tier.8"));
-        CACasingTierProperty.registerCACasingTier(9, I18n.format("epimorphism.machine.component_assembly_line.tier.9"));
-        CACasingTierProperty.registerCACasingTier(10, I18n.format("epimorphism.machine.component_assembly_line.tier.10"));
-        CACasingTierProperty.registerCACasingTier(11, I18n.format("epimorphism.machine.component_assembly_line.tier.11"));
-        CACasingTierProperty.registerCACasingTier(12, I18n.format("epimorphism.machine.component_assembly_line.tier.12"));
-        CACasingTierProperty.registerCACasingTier(13, I18n.format("epimorphism.machine.component_assembly_line.tier.13"));
-        CACasingTierProperty.registerCACasingTier(14, I18n.format("epimorphism.machine.component_assembly_line.tier.14"));
+        CACasingTierProperty.registerCACasingTier(1, I18n.format("gtqtcore.machine.component_assembly_line.tier.1"));
+        CACasingTierProperty.registerCACasingTier(2, I18n.format("gtqtcore.machine.component_assembly_line.tier.2"));
+        CACasingTierProperty.registerCACasingTier(3, I18n.format("gtqtcore.machine.component_assembly_line.tier.3"));
+        CACasingTierProperty.registerCACasingTier(4, I18n.format("gtqtcore.machine.component_assembly_line.tier.4"));
+        CACasingTierProperty.registerCACasingTier(5, I18n.format("gtqtcore.machine.component_assembly_line.tier.5"));
+        CACasingTierProperty.registerCACasingTier(6, I18n.format("gtqtcore.machine.component_assembly_line.tier.6"));
+        CACasingTierProperty.registerCACasingTier(7, I18n.format("gtqtcore.machine.component_assembly_line.tier.7"));
+        CACasingTierProperty.registerCACasingTier(8, I18n.format("gtqtcore.machine.component_assembly_line.tier.8"));
+        CACasingTierProperty.registerCACasingTier(9, I18n.format("gtqtcore.machine.component_assembly_line.tier.9"));
+        CACasingTierProperty.registerCACasingTier(10, I18n.format("gtqtcore.machine.component_assembly_line.tier.10"));
+        CACasingTierProperty.registerCACasingTier(11, I18n.format("gtqtcore.machine.component_assembly_line.tier.11"));
+        CACasingTierProperty.registerCACasingTier(12, I18n.format("gtqtcore.machine.component_assembly_line.tier.12"));
+        CACasingTierProperty.registerCACasingTier(13, I18n.format("gtqtcore.machine.component_assembly_line.tier.13"));
+        CACasingTierProperty.registerCACasingTier(14, I18n.format("gtqtcore.machine.component_assembly_line.tier.14"));
     }
 
 }

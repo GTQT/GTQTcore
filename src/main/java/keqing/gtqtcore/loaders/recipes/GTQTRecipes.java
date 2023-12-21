@@ -4,15 +4,18 @@ import gregtech.api.GTValues;
 import gregtech.api.capability.GregtechCapabilities;
 import gregtech.api.capability.IElectricItem;
 import gregtech.api.recipes.ModHandler;
+import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.material.info.MaterialFlags;
+import gregtech.api.unification.material.properties.IngotProperty;
 import gregtech.api.unification.material.properties.OreProperty;
 import gregtech.api.unification.material.properties.PropertyKey;
 import gregtech.api.unification.material.properties.ToolProperty;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.UnificationEntry;
 import gregtech.common.items.MetaItems;
+import gregtechfoodoption.recipe.GTFORecipeMaps;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.unification.ore.GTQTOrePrefix;
 import keqing.gtqtcore.common.items.metaitems.GTQTMetaToolItems;
@@ -21,11 +24,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 
 import static gregtech.api.GTValues.ZPM;
+import static gregtech.api.unification.material.Materials.RawGrowthMedium;
 import static gregtech.api.unification.ore.OrePrefix.plate;
 import static gregtech.api.unification.ore.OrePrefix.stickLong;
 import static gregtech.common.items.MetaItems.POWER_UNIT_HV;
 import static gregtech.loaders.recipe.handlers.ToolRecipeHandler.addToolRecipe;
-import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.milled;
+import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.*;
 import static keqing.gtqtcore.common.items.metaitems.GTQTMetaToolItems.Choocher_HV;
 import static keqing.gtqtcore.common.items.metaitems.GTQTMetaToolItems.Jinitaimei_HV;
 
@@ -37,8 +41,48 @@ public class GTQTRecipes {
     public static void registerTool(){
         plate.addProcessingHandler(PropertyKey.TOOL, GTQTRecipes::gcmTool);
         milled.addProcessingHandler(PropertyKey.ORE,GTQTRecipes::processMilled);
+        fcrop.addProcessingHandler(PropertyKey.INGOT,GTQTRecipes::processCrops);
+        leaf.addProcessingHandler(PropertyKey.INGOT,GTQTRecipes::processLeaf);
     }
 
+    public static void processCrops(OrePrefix fcropPrefix, Material material, IngotProperty property)
+    {
+        GTFORecipeMaps.GREENHOUSE_RECIPES.recipeBuilder()
+                .EUt(GTValues.VA[ZPM])
+                .duration(4500)
+                .input(MetaItems.FERTILIZER,12)
+                .fluidInputs(RawGrowthMedium.getFluid(12000))
+                .notConsumable(fcropPrefix, material, 1)
+                .chancedOutput(fcropPrefix, material, 100,100)
+                .circuitMeta(1)
+                .buildAndRegister();
+
+        GTFORecipeMaps.GREENHOUSE_RECIPES.recipeBuilder()
+                .EUt(GTValues.VA[ZPM])
+                .duration(1500)
+                .fluidInputs(RawGrowthMedium.getFluid(4000))
+                .input(MetaItems.FERTILIZER,4)
+                .notConsumable(fcropPrefix, material, 1)
+                .chancedOutput(GTQTOrePrefix.leaf, material, 2000,1000)
+                .chancedOutput(GTQTOrePrefix.leaf, material, 2000,1000)
+                .chancedOutput(GTQTOrePrefix.leaf, material, 2000,1000)
+                .chancedOutput(GTQTOrePrefix.leaf, material, 2000,1000)
+                .circuitMeta(2)
+                .buildAndRegister();
+
+    }
+    public static void processLeaf(OrePrefix leafPrefix, Material material, IngotProperty property)
+    {
+        RecipeMaps.MACERATOR_RECIPES.recipeBuilder()
+                .EUt(GTValues.VA[ZPM])
+                .duration(1500)
+                .input(leafPrefix, material, 1)
+                .chancedOutput(OrePrefix.dust, material, 500,125)
+                .chancedOutput(OrePrefix.dust, material, 500,125)
+                .chancedOutput(OrePrefix.dust, material, 500,125)
+                .chancedOutput(OrePrefix.dust, material, 500,125)
+                .buildAndRegister();
+    }
     public static void processMilled(OrePrefix milledPrefix, Material material, OreProperty property) {
         GTQTcoreRecipeMaps.ISA_MILL_GRINDER.recipeBuilder()
                 .EUt(GTValues.VA[ZPM])

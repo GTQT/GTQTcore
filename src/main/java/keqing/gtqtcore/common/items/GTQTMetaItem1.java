@@ -3,11 +3,19 @@ package keqing.gtqtcore.common.items;
 import gregtech.api.GregTechAPI;
 import gregtech.api.items.metaitem.MetaItem;
 import gregtech.api.items.metaitem.StandardMetaItem;
+import gregtech.api.unification.material.Material;
+import gregtech.api.unification.material.Materials;
+import gregtechfoodoption.block.GTFOCrops;
+import gregtechfoodoption.item.GTFOCropSeedBehaviour;
 import keqing.gtqtcore.common.CommonProxy;
+import keqing.gtqtcore.common.block.blocks.GTQTCrops;
+import keqing.gtqtcore.common.block.blocks.GTQTcrop;
 import keqing.gtqtcore.common.items.behaviors.IntBcircuitBehavior;
 import keqing.gtqtcore.common.items.behaviors.MillBallBehavior;
+import org.objectweb.asm.commons.GeneratorAdapter;
 
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
+
 
 public class GTQTMetaItem1 extends StandardMetaItem {
 
@@ -19,6 +27,21 @@ public class GTQTMetaItem1 extends StandardMetaItem {
 
 
     public void registerSubItems() {
+
+        COPPER_CROP = addItem(200, "copper_crop");
+        COPPER_CROP.addComponents(new GTQTCropSeedBehaviour(GTQTCrops.COPPER_CROP, COPPER_CROP.getStackForm(), COPPER_CROP.getStackForm()));
+
+        IRON_CROP = addItem(201, "iron_crop");
+        IRON_CROP.addComponents(new GTQTCropSeedBehaviour(GTQTCrops.IRON_CROP, IRON_CROP.getStackForm(), IRON_CROP.getStackForm()));
+
+        TIN_CROP = addItem(202, "tin_crop");
+        TIN_CROP.addComponents(new GTQTCropSeedBehaviour(GTQTCrops.TIN_CROP, TIN_CROP.getStackForm(), TIN_CROP.getStackForm()));
+
+        BRONZE_CROP = addItem(203, "bronze_crop");
+        BRONZE_CROP.addComponents(new GTQTCropSeedBehaviour(GTQTCrops.BRONZE_CROP, BRONZE_CROP.getStackForm(), BRONZE_CROP.getStackForm()));
+
+        CARBON_CROP = addItem(204, "carbon_crop");
+        CARBON_CROP.addComponents(new GTQTCropSeedBehaviour(GTQTCrops.CARBON_CROP, CARBON_CROP.getStackForm(), CARBON_CROP.getStackForm()));
 
         COMMON_ALGAE = this.addItem(10,"algae.common").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         GREEN_ALGAE = this.addItem(11,"algae.green").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);

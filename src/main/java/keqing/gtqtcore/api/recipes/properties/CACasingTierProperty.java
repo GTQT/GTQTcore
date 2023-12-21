@@ -27,7 +27,7 @@ public class CACasingTierProperty extends RecipeProperty<Integer> {
 
     @Override
     public void drawInfo(Minecraft minecraft, int x, int y, int color, Object value) {
-        minecraft.fontRenderer.drawString(I18n.format("epimorphism.machine.component_assembly_line.tier",
+        minecraft.fontRenderer.drawString(I18n.format("gtqtcore.machine.component_assembly_line.tier",
                 castValue(value).toString()) + getCACasingTier(castValue(value)), x, y, color);
     }
 

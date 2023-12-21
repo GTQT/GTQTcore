@@ -27,7 +27,7 @@ public class QFTCasingTierProperty extends RecipeProperty<Integer> {
 
     @Override
     public void drawInfo(Minecraft minecraft, int x, int y, int color, Object value) {
-        minecraft.fontRenderer.drawString(I18n.format("epimorphism.machine.quantum_force_transformer.tier",
+        minecraft.fontRenderer.drawString(I18n.format("gtqtcore.machine.quantum_force_transformer.tier",
                 castValue(value).toString()) + getQFTCasingTier(castValue(value)), x, y, color);
     }
 

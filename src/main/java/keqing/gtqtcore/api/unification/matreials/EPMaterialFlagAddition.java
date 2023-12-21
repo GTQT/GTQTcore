@@ -1,13 +1,15 @@
 package keqing.gtqtcore.api.unification.matreials;
 
 import gregtech.api.unification.material.properties.BlastProperty;
+import gregtech.api.unification.material.properties.IMaterialProperty;
+import gregtech.api.unification.material.properties.IngotProperty;
 import gregtech.api.unification.material.properties.PropertyKey;
 
+import static gregicality.science.api.unification.materials.GCYSMaterials.*;
 import static gregtech.api.GTValues.EV;
 import static gregtech.api.GTValues.VA;
 import static gregtech.api.unification.material.Materials.*;
-import static gregtech.api.unification.material.info.MaterialFlags.CRYSTALLIZABLE;
-import static gregtech.api.unification.material.info.MaterialFlags.GENERATE_ROTOR;
+import static gregtech.api.unification.material.info.MaterialFlags.*;
 import static keqing.gtqtcore.api.unification.material.info.EPMaterialFlags.*;
 
 public class EPMaterialFlagAddition {
@@ -161,5 +163,32 @@ public class EPMaterialFlagAddition {
         Olivine.addFlags(CRYSTALLIZABLE);
         Amethyst.addFlags(CRYSTALLIZABLE);
         Opal.addFlags(CRYSTALLIZABLE);
+        Platinum.addFlags(GENERATE_ELECTRODE);
+        Graphite.addFlags(GENERATE_ELECTRODE);
+        Palladium.addFlags(GENERATE_ELECTRODE);
+        Silver.addFlags(GENERATE_ELECTRODE);
+        Copper.addFlags(GENERATE_ELECTRODE);
+        Aluminium.addFlags(GENERATE_ELECTRODE);
+        Zinc.addFlags(GENERATE_ELECTRODE);
+        Steel.addFlags(GENERATE_ELECTRODE);
+        Brass.addFlags(GENERATE_ELECTRODE);
+
+        Carbon.addFlags(GENERATE_NANOTUBE, GENERATE_NANOSENSOR); // W.I.P
+        Graphene.addFlags(GENERATE_NANOTUBE, GENERATE_NANOSENSOR); // W.I.P
+
+        Iron.addFlags(GENERATE_NANOTUBE, GENERATE_NANOSENSOR); // W.I.P
+        IronMagnetic.addFlags(GENERATE_NANOTUBE, GENERATE_NANOSENSOR); // W.I.P
+        Copper.addFlags(GENERATE_NANOTUBE, GENERATE_NANOSENSOR); // W.I.P
+        Tin.addFlags(GENERATE_NANOTUBE, GENERATE_NANOSENSOR); // W.I.P
+        Nickel.addFlags(GENERATE_NANOTUBE, GENERATE_NANOSENSOR); // W.I.P
+        Cobalt.addFlags(GENERATE_NANOTUBE, GENERATE_NANOSENSOR); // W.I.P
+        Lead.addFlags(GENERATE_NANOTUBE, GENERATE_NANOSENSOR); // W.I.P
+        Redstone.addFlags(GENERATE_NANOTUBE, GENERATE_NANOSENSOR); // W.I.P
+
+        RedAlloy.addFlags(GENERATE_NANOTUBE, GENERATE_NANOSENSOR); // W.I.P
+
+        Silver.addFlags(GENERATE_NANOTUBE, GENERATE_NANOSENSOR); // For PCB factory Etching
+        Gold.addFlags(GENERATE_NANOTUBE, GENERATE_NANOSENSOR); // For PCB factory Etching
+
     }
 }

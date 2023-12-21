@@ -35,72 +35,67 @@ public class FuelRecipes {
                         .duration(514)
                         .buildAndRegister();
 
-                NAQUADAH_REACTOR_RECIPES.recipeBuilder()
-                        .fluidInputs(Water.getFluid(1))
-                        .EUt((int) V[LV])
-                        .duration(180)
-                        .buildAndRegister();
 
                 //  Heavy Naquadah Fuel
                 NAQUADAH_REACTOR_RECIPES.recipeBuilder()
                         .fluidInputs(HeavyNaquadahFuel.getFluid(1))
-                        .EUt(-2048)
+                        .EUt(2048)
                         .duration(180)
                         .buildAndRegister();
 
                 //  Medium Naquadah Fuel
                 NAQUADAH_REACTOR_RECIPES.recipeBuilder()
                         .fluidInputs(MediumNaquadahFuel.getFluid(1))
-                        .EUt(-2048)
+                        .EUt(2048)
                         .duration(120)
                         .buildAndRegister();
 
                 //  Light Naquadah Fuel
                 NAQUADAH_REACTOR_RECIPES.recipeBuilder()
                         .fluidInputs(LightNaquadahFuel.getFluid(1))
-                        .EUt(-2048)
+                        .EUt(2048)
                         .duration(60)
                         .buildAndRegister();
 
                 //  Heavy Taranium Fuel
                 NAQUADAH_REACTOR_RECIPES.recipeBuilder()
                         .fluidInputs(HeavyTaraniumFuel.getFluid(1))
-                        .EUt(-4096)
+                        .EUt(4096)
                         .duration(360)
                         .buildAndRegister();
 
                 //  Medium Taranium Fuel
                 NAQUADAH_REACTOR_RECIPES.recipeBuilder()
                         .fluidInputs(MediumTaraniumFuel.getFluid(1))
-                        .EUt(-4096)
+                        .EUt(4096)
                         .duration(240)
                         .buildAndRegister();
 
                 //  Light Taranium Fuel
                 NAQUADAH_REACTOR_RECIPES.recipeBuilder()
                         .fluidInputs(LightTaraniumFuel.getFluid(1))
-                        .EUt(-4096)
+                        .EUt(4096)
                         .duration(120)
                         .buildAndRegister();
 
                 //  Heavy Enriched Taranium Fuel
                 NAQUADAH_REACTOR_RECIPES.recipeBuilder()
                         .fluidInputs(HeavyEnrichedTaraniumFuel.getFluid(1))
-                        .EUt(-8192)
+                        .EUt(8192)
                         .duration(720)
                         .buildAndRegister();
 
                 //  Medium Enriched Taranium Fuel
                 NAQUADAH_REACTOR_RECIPES.recipeBuilder()
                         .fluidInputs(MediumEnrichedTaraniumFuel.getFluid(1))
-                        .EUt(-8192)
+                        .EUt(8192)
                         .duration(480)
                         .buildAndRegister();
 
                 //  Light Enriched Taranium Fuel
                 NAQUADAH_REACTOR_RECIPES.recipeBuilder()
                         .fluidInputs(LightEnrichedTaraniumFuel.getFluid(1))
-                        .EUt(-8192)
+                        .EUt(8192)
                         .duration(240)
                         .buildAndRegister();
 
@@ -339,57 +334,57 @@ public class FuelRecipes {
                 HYPER_REACTOR_MK1_RECIPES.recipeBuilder()
                         .fluidInputs(LightHyperFuel.getFluid(1))
                         .duration(200)
-                        .EUt(- (int) V[LuV])
+                        .EUt((int) V[LuV])
                         .buildAndRegister();
 
                 HYPER_REACTOR_MK1_RECIPES.recipeBuilder()
                         .fluidInputs(MediumHyperFuel.getFluid(1))
                         .duration(400)
-                        .EUt(- (int) V[LuV])
+                        .EUt((int) V[LuV])
                         .buildAndRegister();
 
                 HYPER_REACTOR_MK1_RECIPES.recipeBuilder()
                         .fluidInputs(HeavyHyperFuel.getFluid(1))
                         .duration(600)
-                        .EUt(- (int) V[LuV])
+                        .EUt((int) V[LuV])
                         .buildAndRegister();
 
                 //  Hyper Reactor Mk II
                 HYPER_REACTOR_MK2_RECIPES.recipeBuilder()
                         .fluidInputs(LightHyperFuel.getFluid(1))
                         .duration(200)
-                        .EUt(- (int) V[ZPM])
+                        .EUt((int) V[ZPM])
                         .buildAndRegister();
 
                 HYPER_REACTOR_MK2_RECIPES.recipeBuilder()
                         .fluidInputs(MediumHyperFuel.getFluid(1))
                         .duration(400)
-                        .EUt(- (int) V[ZPM])
+                        .EUt((int) V[ZPM])
                         .buildAndRegister();
 
                 HYPER_REACTOR_MK2_RECIPES.recipeBuilder()
                         .fluidInputs(HeavyHyperFuel.getFluid(1))
                         .duration(600)
-                        .EUt(- (int) V[ZPM])
+                        .EUt((int) V[ZPM])
                         .buildAndRegister();
 
                 //  Hyper Reactor Mk III
                 HYPER_REACTOR_MK3_RECIPES.recipeBuilder()
                         .fluidInputs(LightHyperFuel.getFluid(1))
                         .duration(200)
-                        .EUt(- (int) V[UV])
+                        .EUt((int) V[UV])
                         .buildAndRegister();
 
                 HYPER_REACTOR_MK3_RECIPES.recipeBuilder()
                         .fluidInputs(MediumHyperFuel.getFluid(1))
                         .duration(400)
-                        .EUt(- (int) V[UV])
+                        .EUt((int) V[UV])
                         .buildAndRegister();
 
                 HYPER_REACTOR_MK3_RECIPES.recipeBuilder()
                         .fluidInputs(HeavyHyperFuel.getFluid(1))
                         .duration(600)
-                        .EUt(- (int) V[UV])
+                        .EUt((int) V[UV])
                         .buildAndRegister();
 
                 GTQTcoreRecipeMaps.STAR_MIXER.recipeBuilder()
