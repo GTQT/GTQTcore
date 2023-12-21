@@ -27,7 +27,7 @@ public class GTQTOrePrefix {
     public static final OrePrefix leaf = new OrePrefix("leaf", M, null, GTQTMaterialIconType.leaf, ENABLE_UNIFICATION,
             OrePrefix.Conditions.hasIngotProperty, mat -> Collections.singletonList(I18n.format("metaitem.leaf.tooltip")));
 
-    public static final OrePrefix fcrop = new OrePrefix("crops", M, null, GTQTMaterialIconType.fcrop, ENABLE_UNIFICATION,
+    public static final OrePrefix fcrop = new OrePrefix("fcrop", M, null, GTQTMaterialIconType.fcrop, ENABLE_UNIFICATION,
             OrePrefix.Conditions.hasIngotProperty, mat -> Collections.singletonList(I18n.format("metaitem.fcrop.tooltip")));
     public static final OrePrefix nanotube = new OrePrefix("nanotube", M, null, GTQTMaterialIconType.nanotube, ENABLE_UNIFICATION,
             mat -> mat.hasFlag(GENERATE_NANOTUBE));

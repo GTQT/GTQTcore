@@ -4,6 +4,7 @@ import gregtech.api.block.VariantItemBlock;
 import gregtech.api.recipes.recipeproperties.FusionEUToStartProperty;
 import gregtech.common.items.MetaItems;
 import keqing.gtqtcore.api.recipes.properties.CACasingTierProperty;
+import keqing.gtqtcore.api.recipes.properties.ELEProperties;
 import keqing.gtqtcore.api.recipes.properties.PCBPartProperty;
 import keqing.gtqtcore.api.recipes.properties.QFTCasingTierProperty;
 import keqing.gtqtcore.api.utils.GTQTLog;
@@ -55,6 +56,7 @@ public class CommonProxy {
         FuelRecipes.init();
         IntegratedMiningDivision.init();
         HeatExchangeRecipes.init();
+        ELE.init();
         KeQingNET.init();
         ISA.init();
         QTF.init();
@@ -100,6 +102,7 @@ public class CommonProxy {
         registry.register(GTQTMetaBlocks.QUANTUM_CONSTRAINT_CASING);
         registry.register(GTQTMetaBlocks.COMPONENT_ASSEMBLY_LINE);
         registry.register(GTQTMetaBlocks.ISA_CASING);
+        registry.register(GTQTMetaBlocks.ELECTROBATH);
 
         registry.register(GTQTCrops.COPPER_CROP);
         registry.register(GTQTCrops.IRON_CROP);
@@ -137,7 +140,7 @@ public class CommonProxy {
         registry.register(createItemBlock(GTQTMetaBlocks.QUANTUM_CONSTRAINT_CASING, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.COMPONENT_ASSEMBLY_LINE, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.ISA_CASING, VariantItemBlock::new));
-
+        registry.register(createItemBlock(GTQTMetaBlocks.ELECTROBATH, VariantItemBlock::new));
 
         registry.register(createItemBlock(PINE_LOG, ItemBlock::new));
         registry.register(createItemBlock(PINE_SAPLING, ItemBlock::new));
@@ -161,6 +164,12 @@ public class CommonProxy {
         registerCasingTier(3, "四级");
         registerCasingTier(4, "五级");
         registerCasingTier(5, "六级");
+
+        ELEProperties.registeredTier(1,"一级");
+        ELEProperties.registeredTier(2,"二级");
+        ELEProperties.registeredTier(3,"三级");
+        ELEProperties.registeredTier(4,"四级");
+        ELEProperties.registeredTier(5,"五级");
 
         PCBPartProperty.registeredPart(1,"微生物培养仓");
         PCBPartProperty.registeredPart(2,"化学辅助计算机");

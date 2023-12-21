@@ -264,6 +264,9 @@ gtqtcore.multiblock.ip3.amount=耗时减免：每工作三秒总耗时减去 %s 
 gtqtcore.multiblock.ip.threshold_decrement=§c降低一单位风量 /n§7升温速度降低一倍。
 gtqtcore.multiblock.ip.threshold_increment=§a增加一单位风量 /n§7升温速度增加一倍。
 
+gtqtcore.multiblock.ele.threshold_decrement=§c降低一单位电流效率
+gtqtcore.multiblock.ele.threshold_increment=§a增加一单位电流效率
+
 gtqtcore.machine.industrial_primitive_blast_furnace.tooltip.1=可拓展两个附属高炉，附属高炉数量决定进风量上限。
 gtqtcore.machine.industrial_primitive_blast_furnace.tooltip.2=调节风量节流阀可以控制升温速率，当机器不工作时温度会缓缓降低。
 gtqtcore.machine.industrial_primitive_blast_furnace.tooltip.3=降温速度由当前温度决定（降温曲线）。
@@ -313,6 +316,8 @@ gtqtcore.vtire=支持的配方最高电压：%s V
 gtqtcore.tubeTire=管道等级：%s
 gtqtcore.casingTire=外壳等级：%s
 gtqtcore.coilTire=线圈等级：%s
+gtqtcore.eleTire=外壳等级：%s 电解器等级：%s 配方最大电压：%s
+gregtech.multiblock.ele.1=耗能减免：%s 电流效率：%s 电极洁净度：%s
 gtqtcore.machine.chemical-plant.tooltip.1=需要多方块等级大于配方电压等级才能工作！
 gregtech.material.pine_oil=松油
 gregtech.material.nitinol=镍钛诺合金
@@ -334,6 +339,12 @@ metaitem.item.sodium.ethylxanthate.name=乙基黄原酸钠
 metaitem.item.sodium.ethylate.name=乙醇钠
 metaitem.item.pine_cone.name=松果
 metaitem.item.pine_fragment.name=粉碎的松树组织
+
+gtqtcore.machine.ele.tooltip.1=工业化的多方块电解机，拥有独立模块电解单元。
+gtqtcore.machine.ele.tooltip.2=升级电解单元解锁高阶配方，并且进行耗电减免，升级多方块机器解锁高电压配方。
+gtqtcore.machine.ele.tooltip.3=可调节电流效率控制电解速度，并且会消耗电极洁净度，洁净度过低机器会强制停机。
+gtqtcore.machine.ele.tooltip.4=多方块并行数量取决于电极洁净度，洁净度越高并行数量越高。
+gtqtcore.machine.ele.tooltip.5=消耗洁净剂(是盐酸啦)修复电极，提升其洁净度。
 
 
 tile.multiblock_casing.nitinol_machine_casing.name=镍钛诺机械外壳
@@ -363,7 +374,7 @@ gtqtcore.machine.quantum_force_transformer.tier.4=超因果连续体 (4级)
 gtqtcore.machine.large_naquadah_reactor.name=大型硅岩反应堆
 gtqtcore.machine.large_naquadah_reactor.tooltip.1=取之不尽，用之不竭
 gtqtcore.machine.large_naquadah_reactor.tooltip.2=最高产生§3UV§7级的能量
-
+gtqtcore.machine.electrobath.name=工业电解槽
 gtqtcore.machine.hyper_reactor_mk1.name=超能反应堆 Mk I
 gtqtcore.machine.hyper_reactor_mk1.tooltip.1=磁约束超能聚变
 gtqtcore.machine.hyper_reactor_mk1.tooltip.2=最高产生§4UHV§7级的能量
@@ -374,6 +385,8 @@ gtqtcore.machine.hyper_reactor_mk3.name=超能反应堆 Mk III
 gtqtcore.machine.hyper_reactor_mk3.tooltip.1=自控制超能聚变
 gtqtcore.machine.hyper_reactor_mk3.tooltip.2=最高产生§2UIV§7级的能量
 
+gtqtcore.multiblock.ele.no_water=电极洁净度过低！
+gtqtcore.multiblock.ele.amount=洁净剂储量：%s
 tile.pine_log.name=松木
 tile.pine_sapling.name=松树树苗
 tile.pine_leaves.name=松树树叶（不含松鼠）
@@ -413,6 +426,7 @@ gtqtcore.tooltip.warning=§c警告§r：§b能源仓§r不能与水接触而§b�
 gtqtcore.machine.fuel_refine_factory.name=燃料精炼厂
 recipemap.fuel_refine_factory_recipes.name=燃料精炼
 recipemap.naquadah_reactor_recipes.name=硅岩反应堆
+recipemap.electrobath.name=工业电解
 tile.quantum_force_transformer_casing.quantum_constraint_casing.name=量子约束机器外壳
 tile.quantum_force_transformer_casing.neutron_pulse_manipulator_casing.name=中子脉冲控制器机械方块
 tile.quantum_force_transformer_casing.neutron_pulse_manipulator_casing.tooltip=§b量子操纵者§7-脉冲控制器等级：§cI§7
@@ -479,6 +493,15 @@ tile.multiblock_casing.adv_machine_glass_pr.name=智能玻璃（PR型）
 tile.multiblock_casing.tech_fusion_glass_4.name=强化低阶聚变玻璃
 tile.multiblock_casing.tech_fusion_glass_5.name=强化中阶聚变玻璃
 tile.multiblock_casing.tech_fusion_glass_6.name=强化高阶聚变玻璃
+
+tile.electrobath.i_electrobath.name=一级电解核心
+tile.electrobath.ii_electrobath.name=二级电解核心
+tile.electrobath.iii_electrobath.name=三级电解核心
+tile.electrobath.iv_electrobath.name=四级电解核心
+tile.electrobath.v_electrobath.name=五级电解核心
+
+
+
 
 tile.turbine_casing.nq_machine_casing.name=硅岩合金管道外壳
 tile.turbine_casing.nq_turbine_casing.name=硅岩合金机械方块

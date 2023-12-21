@@ -1,13 +1,15 @@
 package keqing.gtqtcore.loaders.recipes.handlers;
 
-import static gregtech.api.unification.material.Materials.DistilledWater;
-import static gregtech.api.unification.material.Materials.Steam;
+import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
+
+import static gregtech.api.unification.material.Materials.*;
+import static gregtech.api.unification.material.Materials.Oxygen;
+import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.ELECTROBATH;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.HEAT_EXCHANGE_RECIPES;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 
 public class HeatExchangeRecipes {
     public static void init() {
-
         //  Exhaust gas heat exchange
         HEAT_EXCHANGE_RECIPES.recipeBuilder()
                 .fluidInputs(DistilledWater.getFluid(10))

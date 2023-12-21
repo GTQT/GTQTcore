@@ -1,0 +1,43 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "minecraft:cube_all",
+    "textures": {
+      "all": "gregtech:blocks/rendering_error"
+    }
+  },
+  "variants": {
+    "variant": {
+      "i_electrobath": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/electrobath/i_electrobath"
+        }
+      },
+      "ii_electrobath": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/electrobath/ii_electrobath"
+        }
+      },
+      "iii_electrobath": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/electrobath/iii_electrobath"
+        }
+      },
+      "iv_electrobath": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/electrobath/iv_electrobath"
+        }
+      },
+      "v_electrobath": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/electrobath/v_electrobath"
+        }
+      }
+    }
+  }
+}

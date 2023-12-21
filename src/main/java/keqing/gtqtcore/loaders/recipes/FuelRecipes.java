@@ -19,6 +19,7 @@ import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 public class FuelRecipes {
 
         public static void init(){
+
                 PCB.recipeBuilder()
                 .fluidInputs(HeavyNaquadahFuel.getFluid(1))
                 .fluidOutputs(LightNaquadahFuel.getFluid(1))

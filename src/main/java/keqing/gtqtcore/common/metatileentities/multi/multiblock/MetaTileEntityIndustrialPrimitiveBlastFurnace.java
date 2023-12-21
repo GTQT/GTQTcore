@@ -15,6 +15,7 @@ import gregtech.api.unification.material.Materials;
 import gregtech.api.util.GTUtility;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
+import gregtech.client.utils.TooltipHelper;
 import gregtech.common.blocks.BlockBoilerCasing;
 import gregtech.common.blocks.BlockFireboxCasing;
 import gregtech.common.blocks.BlockMetalCasing;
@@ -192,7 +193,7 @@ public class MetaTileEntityIndustrialPrimitiveBlastFurnace extends NoEnergyMulti
     @Override
     public void addInformation(ItemStack stack,  World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
-
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("跨纬度等泥土子锻炉", new Object[0]));
         tooltip.add(I18n.format("gtqtcore.machine.industrial_primitive_blast_furnace.tooltip.1"));
         tooltip.add(I18n.format("gtqtcore.machine.industrial_primitive_blast_furnace.tooltip.2"));
         tooltip.add(I18n.format("gtqtcore.machine.industrial_primitive_blast_furnace.tooltip.3"));

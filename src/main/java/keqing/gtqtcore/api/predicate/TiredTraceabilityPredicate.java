@@ -35,6 +35,7 @@ public class TiredTraceabilityPredicate extends TraceabilityPredicate {
         MAP_QFT_SHIELDING_CORE = new Object2ObjectOpenHashMap<>();
         MAP_QFT_GLASS = new Object2ObjectOpenHashMap<>();
         MAP_CAL_CASING = new Object2ObjectOpenHashMap<>();
+        MAP_ELE_CASING = new Object2ObjectOpenHashMap<>();
 
         for (BlockMachineCasing.MachineCasingType type : Arrays.stream(BlockMachineCasing.MachineCasingType.values()).filter((c)-> c.ordinal()<10).collect(Collectors.toList())) {
             TiredTraceabilityPredicate.MAP_MACHINE_CASING.put(MetaBlocks.MACHINE_CASING.getState(type),new WrappedIntTired(type,type.ordinal()));
@@ -163,6 +164,18 @@ public class TiredTraceabilityPredicate extends TraceabilityPredicate {
         TiredTraceabilityPredicate.MAP_CAL_CASING.put(GTQTMetaBlocks.COMPONENT_ASSEMBLY_LINE.getState(GTQTBlockComponentAssemblyLineCasing.CasingTier.MAX),
                 new WrappedIntTired(GTQTBlockComponentAssemblyLineCasing.CasingTier.MAX, 14));
 
+
+        TiredTraceabilityPredicate.MAP_ELE_CASING.put(GTQTMetaBlocks.ELECTROBATH.getState(GTQTElectrobath.CasingType.I_ELECTROBATH),
+                new WrappedIntTired(GTQTElectrobath.CasingType.I_ELECTROBATH, 1));
+        TiredTraceabilityPredicate.MAP_ELE_CASING.put(GTQTMetaBlocks.ELECTROBATH.getState(GTQTElectrobath.CasingType.II_ELECTROBATH),
+                new WrappedIntTired(GTQTElectrobath.CasingType.II_ELECTROBATH, 2));
+        TiredTraceabilityPredicate.MAP_ELE_CASING.put(GTQTMetaBlocks.ELECTROBATH.getState(GTQTElectrobath.CasingType.III_ELECTROBATH),
+                new WrappedIntTired(GTQTElectrobath.CasingType.III_ELECTROBATH, 3));
+        TiredTraceabilityPredicate.MAP_ELE_CASING.put(GTQTMetaBlocks.ELECTROBATH.getState(GTQTElectrobath.CasingType.IV_ELECTROBATH),
+                new WrappedIntTired(GTQTElectrobath.CasingType.IV_ELECTROBATH, 4));
+        TiredTraceabilityPredicate.MAP_ELE_CASING.put(GTQTMetaBlocks.ELECTROBATH.getState(GTQTElectrobath.CasingType.V_ELECTROBATH),
+                new WrappedIntTired(GTQTElectrobath.CasingType.V_ELECTROBATH, 5));
+
     }
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_QFT_GLASS;
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_QFT_SHIELDING_CORE;
@@ -174,7 +187,10 @@ public class TiredTraceabilityPredicate extends TraceabilityPredicate {
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_CP_TUBE;
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_CP_BEAM;
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_CAL_CASING;
+    public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_ELE_CASING;
 
+    public static TraceabilityPredicate CP_ELE_CASING = new TiredTraceabilityPredicate(MAP_ELE_CASING,
+            Comparator.comparing((s) -> ((WrappedIntTired)MAP_ELE_CASING.get(s)).getIntTier()),"Ele",null);
 
     public static TraceabilityPredicate MACHINE_CASINGS = new TiredTraceabilityPredicate(MAP_MACHINE_CASING,"MachineCasingType",null);
 

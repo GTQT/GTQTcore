@@ -115,6 +115,8 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntitySepticTank SEPTIC_TANK;
     public static MetaTileEntityIsaMill ISA_MILL;
     public static MetaTileEntityPCB PCB;
+
+    public static MetaTileEntityElectrobath ELECTROBATH;
     public static MetaTileEntityIndustrialFishingPond INDUSTRIAL_FISHING_POND;
     public static MetaTileEntityFracturing FLUID_DRILLING_RIG;
     public static MetaTileEntityFracturing ADVANCED_FLUID_DRILLING_RIG;
@@ -247,6 +249,8 @@ public class GTQTMetaTileEntities {
         VACUUM_DRYING_FURNACE = registerMetaTileEntity(3081, new MetaTileEntityVacuumDryingFurnace(gtqtcoreId("vacuum_drying_furnace")));
         ALGAE_FARM = registerMetaTileEntity(3082, new MetaTileEntityAlgaeFarm(gtqtcoreId("algae_farm")));
         LAGER_PROCESSING_FACTORY = registerMetaTileEntity(3083, new MetaTileEntityLargeProcessingFactory(gtqtcoreId("large_processing_factory")));
+        ELECTROBATH = registerMetaTileEntity(3084, new MetaTileEntityElectrobath(gtqtcoreId("electrobath")));
+
 
         registerSimpleMetaTileEntity(FLUID_EXTRACTOR, 3100, "fluid_extractor", GTQTcoreRecipeMaps.FLUID_EXTRACTOR_RECIPES, Textures.EXTRACTOR_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
         registerSimpleMetaTileEntity(FLUID_CANNER, 3115, "fluid_canner", GTQTcoreRecipeMaps.FLUID_CANNER_RECIPES, Textures.CANNER_OVERLAY, true,GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);

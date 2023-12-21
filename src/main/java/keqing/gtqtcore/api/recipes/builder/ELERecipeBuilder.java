@@ -1,46 +1,47 @@
 package keqing.gtqtcore.api.recipes.builder;
 
+
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeBuilder;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.util.EnumValidationResult;
 import keqing.gtqtcore.api.recipes.properties.CACasingTierProperty;
-import keqing.gtqtcore.api.recipes.properties.PACasingTierProperty;
-import keqing.gtqtcore.api.recipes.properties.PCBPartProperty;
+import keqing.gtqtcore.api.recipes.properties.ELEProperties;
+
 import keqing.gtqtcore.api.utils.GTQTLog;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.annotation.Nonnull;
 
-public class PCBRecipeBuilder  extends RecipeBuilder<PCBRecipeBuilder> {
+public class ELERecipeBuilder  extends RecipeBuilder<ELERecipeBuilder> {
 
-    public PCBRecipeBuilder() {}
+    public ELERecipeBuilder() {}
 
-    public PCBRecipeBuilder(Recipe recipe, RecipeMap<PCBRecipeBuilder> recipeMap) {
+    public ELERecipeBuilder(Recipe recipe, RecipeMap<ELERecipeBuilder> recipeMap) {
         super(recipe, recipeMap);
     }
 
-    public PCBRecipeBuilder(RecipeBuilder<PCBRecipeBuilder> recipeBuilder) {
+    public ELERecipeBuilder(RecipeBuilder<ELERecipeBuilder> recipeBuilder) {
         super(recipeBuilder);
     }
 
     @Override
-    public PCBRecipeBuilder copy() {
-        return new PCBRecipeBuilder(this);
+    public ELERecipeBuilder copy() {
+        return new ELERecipeBuilder(this);
     }
 
-    public int getPart() {
+    public int getTire() {
         return this.recipePropertyStorage == null ? 0 :
-                this.recipePropertyStorage.getRecipePropertyValue(PCBPartProperty.getInstance(), 0);
+                this.recipePropertyStorage.getRecipePropertyValue(ELEProperties.getInstance(), 0);
     }
 
-    public PCBRecipeBuilder part(int Tier) {
-        if (Tier <= 0) {
+    public ELERecipeBuilder tier(int Tire) {
+        if (Tire <= 0) {
             GTQTLog.logger.error("Casing Tier cannot be less than or equal to 0", new IllegalArgumentException());
             recipeStatus = EnumValidationResult.INVALID;
         }
 
-        this.applyProperty(PCBPartProperty.getInstance(), Tier);
+        this.applyProperty(ELEProperties.getInstance(), Tire);
         return this;
     }
 
@@ -49,7 +50,7 @@ public class PCBRecipeBuilder  extends RecipeBuilder<PCBRecipeBuilder> {
     public String toString() {
         return new ToStringBuilder(this)
                 .appendSuper(super.toString())
-                .append(PCBPartProperty.getInstance().getKey(), getPart())
+                .append(ELEProperties.getInstance().getKey(), getTire())
                 .toString();
     }
 }

@@ -16,6 +16,7 @@ import keqing.gtqtcore.api.recipes.builder.*;
 import keqing.gtqtcore.api.recipes.machine.RecipeMapComponentAssemblyLine;
 import keqing.gtqtcore.api.recipes.machine.RecipeMapDangoteDistillery;
 import keqing.gtqtcore.api.recipes.machine.RecipeMapPseudoGroup;
+import keqing.gtqtcore.loaders.recipes.handlers.ELE;
 
 
 //怎么写请看
@@ -23,7 +24,7 @@ import keqing.gtqtcore.api.recipes.machine.RecipeMapPseudoGroup;
 public class GTQTcoreRecipeMaps {
 
     public static final RecipeMap<CACasingTierRecipeBuilder> COMPONENT_ASSEMBLY_LINE_RECIPES;
-
+    public static final RecipeMap<ELERecipeBuilder> ELECTROBATH;
     public static final RecipeMap<PCBRecipeBuilder> PCB;
     public static final RecipeMap<SimpleRecipeBuilder> DIGESTER_RECIPES;
     public static final RecipeMap<PHRecipeBuilder> FERMENTATION_TANK_RECIPES;
@@ -67,6 +68,7 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMapPseudoGroup<SimpleRecipeBuilder> PROCESSING_MODE_C;
 
 
+
     private GTQTcoreRecipeMaps() {}
     static {
         PROCESSING_MODE_A = new RecipeMapPseudoGroup<>("processing_mode_a", 1, 2, 1, 1, new SimpleRecipeBuilder(), RecipeMaps.COMPRESSOR_RECIPES, RecipeMaps.LATHE_RECIPES, RecipeMaps.POLARIZER_RECIPES, true);
@@ -84,6 +86,9 @@ public class GTQTcoreRecipeMaps {
                 .setSlotOverlay(true, true, true, GuiTextures.FURNACE_OVERLAY_2)
                 .setSound(GTSoundEvents.FURNACE);
 
+        ELECTROBATH = new RecipeMap<>("electrobath", 6, 6, 6, 6, new ELERecipeBuilder(), false)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_BATH, ProgressWidget.MoveType.CIRCULAR)
+                .setSound(GTSoundEvents.ELECTROLYZER);
 
         FLOTATION_FACTORY_RECIPES = new RecipeMap<>("flotation_factory_recipes", 5, 3, 3, 3, new SimpleRecipeBuilder(), false)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_BATH, ProgressWidget.MoveType.CIRCULAR)

@@ -31,6 +31,7 @@ import gregtech.api.util.TextComponentUtil;
 import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
+import gregtech.client.utils.TooltipHelper;
 import gregtech.common.blocks.BlockWireCoil;
 import gregtech.core.sound.GTSoundEvents;
 import keqing.gtqtcore.api.capability.impl.NoEnergyMultiblockRecipeLogic;
@@ -327,6 +328,7 @@ public class MetaTileEntityPCB extends RecipeMapMultiblockController {
     @Override
     public void addInformation(ItemStack stack,  World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("家门口的电路板工厂", new Object[0]));
         tooltip.add(I18n.format("gtqtcore.machine.pcb.tooltip.1"));
         tooltip.add(I18n.format("gtqtcore.machine.pcb.tooltip.2"));
         tooltip.add(I18n.format("gtqtcore.machine.pcb.tooltip.3"));

@@ -116,6 +116,7 @@ public class MetaTileEntityAlgaeFarm  extends MultiblockWithDisplayBase implemen
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack,  World world,  List<String> tooltip, boolean advanced) {
         super.addInformation(stack, world, tooltip, advanced);
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("快乐海藻", new Object[0]));
         tooltip.add(I18n.format("gtqtcore.machine.af.tooltip.1"));
     }
 

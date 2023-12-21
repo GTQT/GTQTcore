@@ -16,6 +16,7 @@ import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.recipes.Recipe;
 import gregtech.client.renderer.ICubeRenderer;
+import gregtech.client.utils.TooltipHelper;
 import gregtech.core.advancement.AdvancementTriggers;
 import keqing.gtqtcore.api.capability.IBall;
 import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
@@ -25,12 +26,15 @@ import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTIsaCasing;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -44,6 +48,12 @@ public class MetaTileEntityIsaMill extends RecipeMapMultiblockController {
         this.recipeMapWorkable = new MetaTileEntityIsaMill.IsaMillLogic(this);
     }
 
+    @Override
+    public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
+        super.addInformation(stack, player, tooltip, advanced);
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("粉碎！粉碎！", new Object[0]));
+
+    }
     protected IBlockState getCasingState() {
         return GTQTMetaBlocks.ISA_CASING.getState(GTQTIsaCasing.CasingType.ISA_MILL_CASING);
     }
