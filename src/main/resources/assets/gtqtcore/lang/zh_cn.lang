@@ -339,14 +339,25 @@ metaitem.item.sodium.ethylxanthate.name=乙基黄原酸钠
 metaitem.item.sodium.ethylate.name=乙醇钠
 metaitem.item.pine_cone.name=松果
 metaitem.item.pine_fragment.name=粉碎的松树组织
-
+gtqtcore.machine.ak.tooltip.1=消耗岩浆提升热量，温度达到一定范围开始工作。
+gtqtcore.machine.ak.tooltip.2=温度越高，机器效率越高。
+gtqtcore.machine.ak.tooltip.3=不工作时温度会降低至室温.
 gtqtcore.machine.ele.tooltip.1=工业化的多方块电解机，拥有独立模块电解单元。
 gtqtcore.machine.ele.tooltip.2=升级电解单元解锁高阶配方，并且进行耗电减免，升级多方块机器解锁高电压配方。
 gtqtcore.machine.ele.tooltip.3=可调节电流效率控制电解速度，并且会消耗电极洁净度，洁净度过低机器会强制停机。
 gtqtcore.machine.ele.tooltip.4=多方块并行数量取决于电极洁净度，洁净度越高并行数量越高。
 gtqtcore.machine.ele.tooltip.5=消耗洁净剂(是盐酸啦)修复电极，提升其洁净度。
-
-
+gtqtcore.machine.alloy_klin.name=合金窑
+gtqtcore.machine.vacuum_freezer.name=真空冷冻机
+gtqtcore.machine.pyrolyse_oven.name=热解炉
+gtqtcore.machine.cracker.name=石油裂化机
+gtqtcore.machine.distillation_tower.name=蒸馏塔
+gtqtcore.machine.salt_flied.name=晒盐场
+tile.isa_casing.process_casing.name=加工厂外壳
+gtqtcore.multiblock.ak.amount=岩浆储量：%s
+gtqtcore.multiblock.sf.amount=淡水储量：%s
+gtqtcore.multiblock.ak.temp=温度过低，请加岩浆
+recipemap.alloy_klin.name=合金窑
 tile.multiblock_casing.nitinol_machine_casing.name=镍钛诺机械外壳
 tile.multiblock_casing.compressed_fusion_reactor_mki_casing.name=压缩聚变机器外壳 Mk I
 tile.multiblock_casing.compressed_fusion_reactor_mkii_casing.name=压缩聚变机器外壳 Mk II
@@ -384,7 +395,7 @@ gtqtcore.machine.hyper_reactor_mk2.tooltip.2=最高产生§aUEV§7级的能量
 gtqtcore.machine.hyper_reactor_mk3.name=超能反应堆 Mk III
 gtqtcore.machine.hyper_reactor_mk3.tooltip.1=自控制超能聚变
 gtqtcore.machine.hyper_reactor_mk3.tooltip.2=最高产生§2UIV§7级的能量
-
+gtqtcore.multiblock.sf.1=你需要每TICK提供40L水才能工作！
 gtqtcore.multiblock.ele.no_water=电极洁净度过低！
 gtqtcore.multiblock.ele.amount=洁净剂储量：%s
 tile.pine_log.name=松木

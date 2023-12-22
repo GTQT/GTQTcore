@@ -120,6 +120,7 @@ public class MetaTileEntityAlgaeFarm  extends MultiblockWithDisplayBase implemen
         tooltip.add(I18n.format("gtqtcore.machine.af.tooltip.1"));
     }
 
+
     @Nonnull
     @Override
     protected BlockPattern createStructurePattern() {

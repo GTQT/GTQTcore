@@ -20,6 +20,7 @@ import keqing.gtqtcore.api.utils.GTQTLog;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.metatileentities.multi.generators.*;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.MetaTileEntityAlloykiln;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.MetaTileEntityIndustrialPrimitiveBlastFurnace;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.steam.MetaTileEntitySteamExtractor;
@@ -76,6 +77,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityLightningRod[] LIGHTNING_ROD = new MetaTileEntityLightningRod[3];
     public static MetaTileEntityDangoteDistillery DANGOTE_DISTILLERY;
     public static MetaTileEntitykeQingNet KeQing_NET;
+    public static MetaTileEntityDistillationTower DISTILLATION_TOWER;
     public static MetaTileEntityLargeTurbine HUGE_STEAM_TURBINE;
     public static MetaTileEntityLargeTurbine HUGE_GAS_TURBINE;
     public static MetaTileEntityLargeTurbine HUGE_PLASMA_TURBINE;
@@ -89,6 +91,7 @@ public class GTQTMetaTileEntities {
 
     public static MetaTileEntityHugeDistillationTower HUGE_DISTILLATION_TOWER;
     public static MetaTileEntityHugeVacuum HUGE_VACUUM;
+    public static MetaTileEntityVacuumFreezer VACUUM_FREEZER;
     public static MetaTileEntityQuantumForceTransformer QUANTUM_FORCE_TRANSFORMER;
     public static MetaTileEntityFuelRefineFactory FUEL_REFINE_FACTORY;
     public static MetaTileEntityFermentationTank FERMENTATION_TANK;
@@ -115,12 +118,15 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntitySepticTank SEPTIC_TANK;
     public static MetaTileEntityIsaMill ISA_MILL;
     public static MetaTileEntityPCB PCB;
-
+    public static MetaTileEntityAlloykiln ALLOY_KILN;
+    public static MetaTileEntitySaltField SALT_FLIED;;
     public static MetaTileEntityElectrobath ELECTROBATH;
     public static MetaTileEntityIndustrialFishingPond INDUSTRIAL_FISHING_POND;
     public static MetaTileEntityFracturing FLUID_DRILLING_RIG;
     public static MetaTileEntityFracturing ADVANCED_FLUID_DRILLING_RIG;
     public static MetaTileEntityLargeNaquadahReactor LARGE_NAQUADAH_REACTOR;
+    public static MetaTileEntityCrackingUnit CRACKER;
+    public static MetaTileEntityPyrolyseOven PYROLYSE_OVEN;
     public static MetaTileEntityHugeElectricImplosionCompressor HUGE_ELECTRRIC_IMPLOSION_COMPRESSOR;
     public static MetaTileEntityFlotationFactory FLOTATION_FACTORY;
     public static MetaTileEntityLargeProcessingFactory LAGER_PROCESSING_FACTORY;
@@ -250,6 +256,13 @@ public class GTQTMetaTileEntities {
         ALGAE_FARM = registerMetaTileEntity(3082, new MetaTileEntityAlgaeFarm(gtqtcoreId("algae_farm")));
         LAGER_PROCESSING_FACTORY = registerMetaTileEntity(3083, new MetaTileEntityLargeProcessingFactory(gtqtcoreId("large_processing_factory")));
         ELECTROBATH = registerMetaTileEntity(3084, new MetaTileEntityElectrobath(gtqtcoreId("electrobath")));
+        ALLOY_KILN = registerMetaTileEntity(3085, new MetaTileEntityAlloykiln(gtqtcoreId("alloy_klin")));
+        SALT_FLIED = registerMetaTileEntity(3086, new MetaTileEntitySaltField(gtqtcoreId("salt_flied")));
+        DISTILLATION_TOWER = registerMetaTileEntity(3087, new MetaTileEntityDistillationTower(gtqtcoreId("distillation_tower")));
+        CRACKER = registerMetaTileEntity(3088, new MetaTileEntityCrackingUnit(gtqtcoreId("cracker")));
+        PYROLYSE_OVEN = registerMetaTileEntity(3089, new MetaTileEntityPyrolyseOven(gtqtcoreId("pyrolyse_oven")));
+        VACUUM_FREEZER = registerMetaTileEntity(3090, new MetaTileEntityVacuumFreezer(gtqtcoreId("vacuum_freezer")));
+
 
 
         registerSimpleMetaTileEntity(FLUID_EXTRACTOR, 3100, "fluid_extractor", GTQTcoreRecipeMaps.FLUID_EXTRACTOR_RECIPES, Textures.EXTRACTOR_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);

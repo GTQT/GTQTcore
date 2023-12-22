@@ -5,15 +5,14 @@ import gregtech.api.capability.GregtechCapabilities;
 import gregtech.api.capability.IElectricItem;
 import gregtech.api.recipes.ModHandler;
 import gregtech.api.recipes.RecipeMaps;
+import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.material.info.MaterialFlags;
-import gregtech.api.unification.material.properties.IngotProperty;
-import gregtech.api.unification.material.properties.OreProperty;
-import gregtech.api.unification.material.properties.PropertyKey;
-import gregtech.api.unification.material.properties.ToolProperty;
+import gregtech.api.unification.material.properties.*;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.UnificationEntry;
+import gregtech.api.util.GTUtility;
 import gregtech.common.items.MetaItems;
 import gregtechfoodoption.recipe.GTFORecipeMaps;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
@@ -23,7 +22,7 @@ import keqing.gtqtcore.loaders.recipes.handlers.ISA;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 
-import static gregtech.api.GTValues.ZPM;
+import static gregtech.api.GTValues.*;
 import static gregtech.api.unification.material.Materials.RawGrowthMedium;
 import static gregtech.api.unification.ore.OrePrefix.plate;
 import static gregtech.api.unification.ore.OrePrefix.stickLong;
@@ -43,8 +42,90 @@ public class GTQTRecipes {
         milled.addProcessingHandler(PropertyKey.ORE,GTQTRecipes::processMilled);
         fcrop.addProcessingHandler(PropertyKey.INGOT,GTQTRecipes::processCrops);
         leaf.addProcessingHandler(PropertyKey.INGOT,GTQTRecipes::processLeaf);
+
+        OrePrefix.gear.addProcessingHandler(PropertyKey.DUST, GTQTRecipes::processGear);
+        OrePrefix.gearSmall.addProcessingHandler(PropertyKey.DUST, GTQTRecipes::processGear);
+        OrePrefix.plate.addProcessingHandler(PropertyKey.DUST, GTQTRecipes::processPlate);
+        OrePrefix.rotor.addProcessingHandler(PropertyKey.INGOT, GTQTRecipes::processRotor);
+
+        OrePrefix.block.addProcessingHandler(PropertyKey.DUST, GTQTRecipes::processBlock);
+        OrePrefix.ingot.addProcessingHandler(PropertyKey.INGOT, GTQTRecipes::processIngot);
+        OrePrefix.nugget.addProcessingHandler(PropertyKey.DUST, GTQTRecipes::processNugget);
     }
 
+    public static void processIngot(OrePrefix ingotPrefix, Material material, IngotProperty property) {
+        if (material.hasFluid()) {
+            RecipeMaps.VACUUM_RECIPES.recipeBuilder()
+                    .notConsumable(MetaItems.SHAPE_MOLD_INGOT)
+                    .fluidInputs(material.getFluid(L))
+                    .outputs(OreDictUnifier.get(ingotPrefix, material))
+                    .duration(20).EUt(VA[MV]*4)
+                    .buildAndRegister();
+        }
+    }
+    public static void processNugget(OrePrefix orePrefix, Material material, DustProperty property) {
+        if (material.hasFluid()) {
+            RecipeMaps.VACUUM_RECIPES.recipeBuilder()
+                    .notConsumable(MetaItems.SHAPE_MOLD_NUGGET)
+                    .fluidInputs(material.getFluid(L))
+                    .outputs(OreDictUnifier.get(orePrefix, material, 9))
+                    .duration((int) material.getMass()*4)
+                    .EUt(VA[MV])
+                    .buildAndRegister();
+        }
+
+    }
+    public static void processBlock(OrePrefix blockPrefix, Material material, DustProperty property) {
+        ItemStack blockStack = OreDictUnifier.get(blockPrefix, material);
+        long materialAmount = blockPrefix.getMaterialAmount(material);
+        if (material.hasFluid()) {
+            RecipeMaps.VACUUM_RECIPES.recipeBuilder()
+                    .notConsumable(MetaItems.SHAPE_MOLD_BLOCK)
+                    .fluidInputs(material.getFluid((int) (materialAmount * L / M)))
+                    .outputs(blockStack)
+                    .duration((int) material.getMass()*4).EUt(VA[MV])
+                    .buildAndRegister();
+        }
+
+    }
+        public static void processGear(OrePrefix gearPrefix, Material material, DustProperty property) {
+        ItemStack stack = OreDictUnifier.get(gearPrefix, material);
+        if (material.hasFluid()) {
+            boolean isSmall = gearPrefix == OrePrefix.gearSmall;
+            RecipeMaps.VACUUM_RECIPES.recipeBuilder()
+                    .notConsumable(isSmall ? MetaItems.SHAPE_MOLD_GEAR_SMALL : MetaItems.SHAPE_MOLD_GEAR)
+                    .fluidInputs(material.getFluid(L * (isSmall ? 1 : 4)))
+                    .outputs(stack)
+                    .duration(isSmall ? 80 : 400)
+                    .EUt(GTValues.VA[HV])
+                    .buildAndRegister();
+        }
+
+    }
+    public static void processPlate(OrePrefix platePrefix, Material material, DustProperty property) {
+        if (material.hasFluid()) {
+            RecipeMaps.VACUUM_RECIPES.recipeBuilder()
+                    .notConsumable(MetaItems.SHAPE_MOLD_PLATE)
+                    .fluidInputs(material.getFluid(L))
+                    .outputs(OreDictUnifier.get(platePrefix, material))
+                    .duration(160)
+                    .EUt(GTValues.VA[HV])
+                    .buildAndRegister();
+        }
+    }
+    public static void processRotor(OrePrefix rotorPrefix, Material material, IngotProperty property) {
+        ItemStack stack = OreDictUnifier.get(rotorPrefix, material);
+        if (material.hasFluid()) {
+            RecipeMaps.VACUUM_RECIPES.recipeBuilder()
+                    .notConsumable(MetaItems.SHAPE_MOLD_ROTOR)
+                    .fluidInputs(material.getFluid(L * 4))
+                    .outputs(GTUtility.copy(stack))
+                    .duration(480)
+                    .EUt(GTValues.VA[HV])
+                    .buildAndRegister();
+        }
+
+    }
     public static void processCrops(OrePrefix fcropPrefix, Material material, IngotProperty property)
     {
         GTFORecipeMaps.GREENHOUSE_RECIPES.recipeBuilder()

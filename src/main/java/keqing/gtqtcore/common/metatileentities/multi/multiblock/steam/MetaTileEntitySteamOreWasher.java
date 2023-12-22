@@ -159,7 +159,10 @@ public class MetaTileEntitySteamOreWasher extends RecipeMapSteamMultiblockContro
         float zPos = facing.getZOffset() * 0.76F + pos.getZ() + 0.5F;
 
         float ySpd = facing.getYOffset() * 0.1F + 0.2F + 0.1F * GTValues.RNG.nextFloat();
-        runMufflerEffect(xPos, yPos, zPos, 0, ySpd, 0);
+        runMufflerEffeca(xPos, yPos, zPos, 0, ySpd, 0);
+    }
+    public void runMufflerEffeca(float xPos, float yPos, float zPos, float xSpd, float ySpd, float zSpd) {
+        this.getWorld().spawnParticle(EnumParticleTypes.SMOKE_LARGE, (double)xPos, (double)yPos, (double)zPos, (double)xSpd, (double)ySpd, (double)zSpd, new int[0]);
     }
 
     private void damageEntitiesAndBreakSnow() {

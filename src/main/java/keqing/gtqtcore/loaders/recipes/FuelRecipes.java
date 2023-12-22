@@ -4,21 +4,37 @@ import static gregicality.science.api.unification.materials.GCYSMaterials.*;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
-import static gregtech.common.blocks.BlockFusionCasing.CasingType.FUSION_COIL;
-import static gregtech.common.blocks.MetaBlocks.FUSION_CASING;
-import static gregtech.common.metatileentities.MetaTileEntities.FUSION_REACTOR;
-import static gregtech.loaders.OreDictionaryLoader.OREDICT_BLOCK_FUEL_COKE;
-import static gregtech.loaders.OreDictionaryLoader.OREDICT_FUEL_COKE;
+
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 
 import gregtech.api.recipes.RecipeMaps;
+import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Materials;
+import gregtech.api.unification.material.properties.PropertyKey;
+import gregtech.api.unification.ore.OrePrefix;
+import gregtech.api.unification.stack.MaterialStack;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 
 public class FuelRecipes {
 
-        public static void init(){
+
+                public static void init(){
+
+
+                    SALT_FLIED.recipeBuilder()
+                            .fluidInputs(Water.getFluid(16000))
+                            .fluidOutputs(SaltWater.getFluid(16000))
+                            .duration(2000)
+                            .circuitMeta(1)
+                            .buildAndRegister();
+
+                    SALT_FLIED.recipeBuilder()
+                            .fluidInputs(Water.getFluid(16000))
+                            .output(dust, Salt, 512)
+                            .duration(2000)
+                            .circuitMeta(2)
+                            .buildAndRegister();
 
                 PCB.recipeBuilder()
                 .fluidInputs(HeavyNaquadahFuel.getFluid(1))

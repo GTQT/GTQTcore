@@ -1,6 +1,7 @@
 package keqing.gtqtcore.loaders.recipes;
 
 import keqing.gtqtcore.loaders.recipes.chain.*;
+import keqing.gtqtcore.loaders.recipes.handlers.AllouKlin;
 import keqing.gtqtcore.loaders.recipes.handlers.DecompositionRecipeHandler;
 import keqing.gtqtcore.loaders.recipes.handlers.ELE;
 
@@ -19,7 +20,7 @@ public class GTQTRecipesManager {
         LubricantChains.init();
         PEEKChain.init();
         ELE.init();
-        OreRecipeHandler.register();
+        AllouKlin.init();
         DecompositionRecipeHandler.runRecipeGeneration();
         CircuitryMaterialChains.init();
         MetaTileEntityLoader.init();
