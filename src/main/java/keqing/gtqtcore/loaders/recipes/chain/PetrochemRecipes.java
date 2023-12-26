@@ -35,7 +35,6 @@ public class PetrochemRecipes {
     }
 
     public static void removeOvercostRecipes() {
-        GTRecipeHandler.removeAllRecipes(COKE_OVEN_RECIPES);
         //TODO cannot remove this GCYS recipe
 //        GTRecipeHandler.removeRecipesByInputs(DISTILLATION_RECIPES, RareEarthChloridesSolution.getFluid(1000));
         GTRecipeHandler.removeRecipesByInputs(DISTILLATION_RECIPES, CharcoalByproducts.getFluid(1000));
@@ -118,19 +117,6 @@ public class PetrochemRecipes {
                 .output(FERTILIZER)
                 .buildAndRegister();
 
-        COKE_OVEN_RECIPES.recipeBuilder()
-                .duration(300)
-                .input(gem, Charcoal)
-                .fluidOutputs(Creosote.getFluid(500))
-                .output(gem, Coke)
-                .buildAndRegister();
-
-        COKE_OVEN_RECIPES.recipeBuilder()
-                .duration(150)
-                .input(log, Wood)
-                .fluidOutputs(Creosote.getFluid(500))
-                .output(gem, Charcoal)
-                .buildAndRegister();
     }
 
     public static void catalysts() {

@@ -1,9 +1,6 @@
 package keqing.gtqtcore.api.unification.matreials;
 
-import gregtech.api.unification.material.properties.BlastProperty;
-import gregtech.api.unification.material.properties.IMaterialProperty;
-import gregtech.api.unification.material.properties.IngotProperty;
-import gregtech.api.unification.material.properties.PropertyKey;
+import gregtech.api.unification.material.properties.*;
 
 import static gregicality.science.api.unification.materials.GCYSMaterials.*;
 import static gregtech.api.GTValues.EV;
@@ -189,6 +186,8 @@ public class EPMaterialFlagAddition {
 
         Silver.addFlags(GENERATE_NANOTUBE, GENERATE_NANOSENSOR); // For PCB factory Etching
         Gold.addFlags(GENERATE_NANOTUBE, GENERATE_NANOSENSOR); // For PCB factory Etching
+
+        Graphite.setProperty(PropertyKey.FLUID, new FluidProperty());
 
     }
 }

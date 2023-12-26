@@ -132,6 +132,20 @@ public class GTQTMaterials {
     public static Material Ethylenimine;
     public static Material Polyethyleneimine;
     public static Material RedMud;
+    public static Material LeanGoldSulphide;
+    public static Material RichGoldSulphide;
+    public static Material Pyrargyrite;
+    public static Material Zincantimonygalvanite;
+    public static Material Crocoite;
+    public static Material Cryolite;
+    public static Material Lignite;
+    public static Material infused_air;
+    public static Material infused_fire;
+    public static Material infused_water;
+    public static Material infused_earth;
+    public static Material infused_entropy;
+    public static Material infused_order;
+    public static Material Amblygonite;
 
     //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/api/unification/GSMaterials.java
 

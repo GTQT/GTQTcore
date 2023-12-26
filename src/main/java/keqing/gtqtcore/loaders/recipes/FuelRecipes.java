@@ -2,12 +2,14 @@ package keqing.gtqtcore.loaders.recipes;
 
 import static gregicality.science.api.unification.materials.GCYSMaterials.*;
 import static gregtech.api.GTValues.*;
+import static gregtech.api.recipes.RecipeMaps.COKE_OVEN_RECIPES;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 
+import gregtech.api.metatileentity.multiblock.CleanroomType;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Materials;
@@ -21,6 +23,62 @@ public class FuelRecipes {
 
                 public static void init(){
 
+                    CW_PRECISE_ASSEMBLER_RECIPES.recipeBuilder()
+                            .input(screw, Hdcs, 4)
+                            .fluidInputs(SolderingAlloy.getFluid(L * 8))
+                            .fluidInputs(Kevlar.getFluid(L * 4))
+                            .output(ingot,Iron)
+                            .EUt(VA[UHV])
+                            .duration(120)
+                            .CWUt(3)
+                            .buildAndRegister();
+
+                    PRECISE_ASSEMBLER_RECIPES.recipeBuilder()
+                            .input(screw, Hdcs, 4)
+                            .fluidInputs(SolderingAlloy.getFluid(L * 8))
+                            .fluidInputs(Kevlar.getFluid(L * 4))
+                            .output(ingot,Iron)
+                            .EUt(VA[UHV])
+                            .duration(120)
+                            .CasingTier(3)
+                            .buildAndRegister();
+
+
+                    FLUID_EXTRACTOR_RECIPES.recipeBuilder().EUt(VA[IV]).duration(100)
+                            .fluidInputs(EnrichedBacterialSludge.getFluid(1000))
+                            .circuitMeta(1)
+                            .fluidOutputs(Mutagen.getFluid(100))
+                            .cleanroom(CleanroomType.STERILE_CLEANROOM)
+                            .buildAndRegister();
+
+                    FLUID_EXTRACTOR_RECIPES.recipeBuilder()
+                            .circuitMeta(1)
+                            .fluidInputs(Toluene.getFluid(30))
+                            .fluidOutputs(LightFuel.getFluid(30))
+                            .duration(160).EUt(24).buildAndRegister();
+
+                    FLUID_EXTRACTOR_RECIPES.recipeBuilder()
+                            .circuitMeta(1)
+                            .fluidInputs(HeavyFuel.getFluid(10))
+                            .fluidOutputs(Toluene.getFluid(4))
+                            .duration(16).EUt(24).buildAndRegister();
+
+                    FLUID_EXTRACTOR_RECIPES.recipeBuilder()
+                            .circuitMeta(2)
+                            .fluidInputs(HeavyFuel.getFluid(10))
+                            .fluidOutputs(Benzene.getFluid(4))
+                            .duration(16).EUt(24).buildAndRegister();
+
+                    FLUID_EXTRACTOR_RECIPES.recipeBuilder()
+                            .circuitMeta(3)
+                            .fluidInputs(HeavyFuel.getFluid(20))
+                            .fluidOutputs(Phenol.getFluid(5))
+                            .duration(32).EUt(24).buildAndRegister();
+
+                    FLUID_EXTRACTOR_RECIPES.recipeBuilder()
+                            .fluidInputs(Water.getFluid(576))
+                            .fluidOutputs(DistilledWater.getFluid(520))
+                            .duration(160).EUt(VA[MV]).buildAndRegister();
 
                     SALT_FLIED.recipeBuilder()
                             .fluidInputs(Water.getFluid(16000))

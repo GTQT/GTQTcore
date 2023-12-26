@@ -13,6 +13,7 @@ import keqing.gtqtcore.api.capability.impl.NoEnergyMultiblockRecipeLogic;
 import keqing.gtqtcore.api.recipes.builder.*;
 import keqing.gtqtcore.api.recipes.machine.RecipeMapComponentAssemblyLine;
 import keqing.gtqtcore.api.recipes.machine.RecipeMapDangoteDistillery;
+import keqing.gtqtcore.api.recipes.machine.RecipeMapPreciseAssembler;
 import keqing.gtqtcore.api.recipes.machine.RecipeMapPseudoGroup;
 import keqing.gtqtcore.loaders.recipes.handlers.ELE;
 
@@ -20,7 +21,10 @@ import keqing.gtqtcore.loaders.recipes.handlers.ELE;
 //怎么写请看
 //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/api/recipe/GSRecipeMaps.java
 public class GTQTcoreRecipeMaps {
-
+    public static final RecipeMap<SimpleRecipeBuilder> COMPONENT_ASSEMBLER_RECIPES;
+    public static final RecipeMap<SimpleRecipeBuilder> ULTRAVIOLET_LAMP_CHAMBER_RECIPES;
+    public static final RecipeMap<SimpleRecipeBuilder> VACUUM_CHAMBER_RECIPES;
+    public static final RecipeMap<SimpleRecipeBuilder> DECAY_CHAMBER_RECIPES;
     public static final RecipeMap<CACasingTierRecipeBuilder> COMPONENT_ASSEMBLY_LINE_RECIPES;
     public static final RecipeMap<ELERecipeBuilder> ELECTROBATH;
     public static final RecipeMap<PCBRecipeBuilder> PCB;
@@ -66,7 +70,9 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMapPseudoGroup<SimpleRecipeBuilder> PROCESSING_MODE_A;
     public static final RecipeMapPseudoGroup<SimpleRecipeBuilder> PROCESSING_MODE_B;
     public static final RecipeMapPseudoGroup<SimpleRecipeBuilder> PROCESSING_MODE_C;
+    public static final RecipeMap<PACasingTierRecipeBuilder> PRECISE_ASSEMBLER_RECIPES;
 
+    public static final RecipeMap<ComputationRecipeBuilder> CW_PRECISE_ASSEMBLER_RECIPES;
 
 
     private GTQTcoreRecipeMaps() {}
@@ -75,6 +81,40 @@ public class GTQTcoreRecipeMaps {
         PROCESSING_MODE_B = new RecipeMapPseudoGroup<>("processing_mode_b", 2, 2, 1, 1, new SimpleRecipeBuilder(), RecipeMaps.FERMENTING_RECIPES, RecipeMaps.EXTRACTOR_RECIPES, RecipeMaps.CANNER_RECIPES, true);
         PROCESSING_MODE_C = new RecipeMapPseudoGroup<>("processing_mode_c", 2, 2, 1, 1, new SimpleRecipeBuilder(), RecipeMaps.LASER_ENGRAVER_RECIPES, RecipeMaps.AUTOCLAVE_RECIPES, RecipeMaps.FLUID_SOLIDFICATION_RECIPES, true);
 
+        VACUUM_CHAMBER_RECIPES = new RecipeMap<>("vacuum_chamber_recipes", 1, 4,  2,  1, new SimpleRecipeBuilder(), false)
+                .setSlotOverlay(false, false, GuiTextures.CIRCUIT_OVERLAY)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_COMPRESS, ProgressWidget.MoveType.HORIZONTAL)
+                .setSound(GTSoundEvents.ASSEMBLER);
+
+        ULTRAVIOLET_LAMP_CHAMBER_RECIPES = new RecipeMap<>("ultraviolet_lamp_chamber_recipes",  2,  2,  3, 2, new SimpleRecipeBuilder(), false)
+                .setSlotOverlay(false, false, false, GuiTextures.LENS_OVERLAY)
+                .setSlotOverlay(false, false, true, GuiTextures.LENS_OVERLAY)
+                .setSlotOverlay(false, true, false, GuiTextures.MOLECULAR_OVERLAY_3)
+                .setSlotOverlay(false, true, true, GuiTextures.MOLECULAR_OVERLAY_4)
+                .setSlotOverlay(true, false, GuiTextures.VIAL_OVERLAY_1)
+                .setSlotOverlay(true, true, GuiTextures.VIAL_OVERLAY_2)
+                .setSound(GTSoundEvents.CHEMICAL_REACTOR);
+
+        DECAY_CHAMBER_RECIPES = new RecipeMap<>("decay_chamber_recipes",  1,  1,  1,  1, new SimpleRecipeBuilder(), false)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_HAMMER, ProgressWidget.MoveType.VERTICAL_DOWNWARDS)
+                .setSound(GTSoundEvents.SCIENCE);
+
+        COMPONENT_ASSEMBLER_RECIPES = new RecipeMap<>("component_assembler_recipes", 6,  1,  1,  0, new SimpleRecipeBuilder(), false)
+                .setSlotOverlay(false, false, false, GuiTextures.CIRCUIT_OVERLAY)
+                .setSlotOverlay(false, false, true, GuiTextures.CIRCUIT_OVERLAY)
+                .setSound(GTSoundEvents.ASSEMBLER);
+
+        PRECISE_ASSEMBLER_RECIPES = new RecipeMapPreciseAssembler<>("precise_assembler_recipes", 4, 1, 4, 0, new PACasingTierRecipeBuilder(), false)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL)
+                .setSlotOverlay(false, false, false, GuiTextures.CIRCUIT_OVERLAY)
+                .setSlotOverlay(false, false, true, GuiTextures.CIRCUIT_OVERLAY)
+                .setSound(GTSoundEvents.ASSEMBLER);
+
+        CW_PRECISE_ASSEMBLER_RECIPES = new RecipeMapPreciseAssembler<>("cwt_precise_assembler_recipes", 4, 1, 4, 0, new ComputationRecipeBuilder(), false)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL)
+                .setSlotOverlay(false, false, false, GuiTextures.CIRCUIT_OVERLAY)
+                .setSlotOverlay(false, false, true, GuiTextures.CIRCUIT_OVERLAY)
+                .setSound(GTSoundEvents.ASSEMBLER);
 
         VACUUM_DRYING_FURNACE_RECIPES = new RecipeMap<>("vacuum_drying_furnace_recipes", 1, 9, 2, 3, new BlastRecipeBuilder(), false)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_SIFT, ProgressWidget.MoveType.HORIZONTAL)

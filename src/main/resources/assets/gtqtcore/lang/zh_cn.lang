@@ -320,6 +320,22 @@ gtqtcore.eleTire=外壳等级：%s 电解器等级：%s 配方最大电压：%s
 gregtech.multiblock.ele.1=耗能减免：%s 电流效率：%s 电极洁净度：%s
 gtqtcore.machine.chemical-plant.tooltip.1=需要多方块等级大于配方电压等级才能工作！
 gregtech.material.pine_oil=松油
+
+gregtech.material.amblygonite=磷铝锂石
+gregtech.material.infused_order=序
+gregtech.material.infused_entropy=熵
+gregtech.material.infused_earth=土
+gregtech.material.infused_water=流
+gregtech.material.infused_fire=焱
+gregtech.material.infused_air=气
+gregtech.material.cryolite=冰晶石
+gregtech.material.crocoite=铬铅矿
+gregtech.material.zincantimonygalvanite=锌锑方辉银矿
+gregtech.material.pyrargyrite=深红银矿
+gregtech.material.lignite=褐煤
+gregtech.material.rich_gold_sulphide=含金多金属矿石
+gregtech.material.lean_gold_sulphide=贫硫化金矿石
+
 gregtech.material.nitinol=镍钛诺合金
 gregtech.material.almandine_front=铁铝榴石泡沫
 gregtech.material.pentlandite_front=镍黄铁矿泡沫
@@ -370,6 +386,11 @@ tile.multiblock_casing.beam_core_4.name=聚能核心
 tile.multiblock_casing.machine_casing_fusion_4.name=聚变机器外壳 Mk IV
 tile.multiblock_casing.machine_casing_fusion_5.name=聚变机器外壳 Mk V
 tile.multiblock_casing.machine_casing_fusion_6.name=聚变机器外壳 Mk VI
+
+tile.turbine_casing1.st_machine_casing.name=山铜合金管道外壳
+tile.turbine_casing1.st_turbine_casing.name=山铜合金机械方块
+tile.turbine_casing1.ad_machine_casing.name=精金合金管道外壳
+tile.turbine_casing1.ad_turbine_casing.name=精金合金机械方块
 
 recipemap.quantum_force_transformer_recipes.name=量子操纵者
 gtqtcore.machine.quantum_force_transformer.name=量子操纵者
@@ -586,7 +607,8 @@ gtqtcore.machine.large_processing_factory.tooltip.8=每提升1个电压等级，
 recipemap.processing_mode_a.name=钳工实习
 recipemap.processing_mode_b.name=化学实验
 recipemap.processing_mode_c.name=物理大王
-
+recipemap.cwt_precise_assembler_recipes.name=超精度算子组装
+gtgtcore.machine.pyrolysis_tower.name=热解塔
 item.material.oreprefix.leaf=%s富集叶子
 item.material.oreprefix.fcrop=%s改良杂交种子
 metaitem.leaf.tooltip=魔法作物启动！

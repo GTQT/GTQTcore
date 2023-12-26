@@ -11,15 +11,49 @@ import gregtech.api.unification.stack.UnificationEntry;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.items.MetaItems;
 import gregtech.common.metatileentities.MetaTileEntities;
+import gregtech.loaders.recipe.CraftingComponent;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 
 import static gregtech.common.metatileentities.MetaTileEntities.HULL;
-
+import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.*;
 
 
 public class MetaTileEntityLoader {
     public static void init() {
+        gregtech.loaders.recipe.MetaTileEntityLoader.registerMachineRecipe(true, ULTRAVIOLET_LAMP_CHAMBER,
+                "GEG", "PHP", "WXW",
+                'E', CraftingComponent.EMITTER,
+                'H', CraftingComponent.HULL,
+                'P', CraftingComponent.PLATE,
+                'G', CraftingComponent.GLASS,
+                'W', CraftingComponent.CABLE,
+                'X', CraftingComponent.CIRCUIT);
 
+        gregtech.loaders.recipe.MetaTileEntityLoader.registerMachineRecipe(true, VACUUM_CHAMBER,
+                "GCG", "PHP", "GWG",
+                'W', CraftingComponent.CABLE,
+                'C', CraftingComponent.CIRCUIT,
+                'P', CraftingComponent.PUMP,
+                'G', CraftingComponent.GLASS,
+                'H', CraftingComponent.HULL);
+
+        gregtech.loaders.recipe.MetaTileEntityLoader.registerMachineRecipe(true, DECAY_CHAMBER,
+                "CFC", "RHR", "WFW",
+                'H', CraftingComponent.HULL,
+                'R', CraftingComponent.DOUBLE_PLATE,
+                'F', CraftingComponent.FIELD_GENERATOR,
+                'C', CraftingComponent.CIRCUIT,
+                'W', CraftingComponent.CABLE);
+
+
+        gregtech.loaders.recipe.MetaTileEntityLoader.registerMachineRecipe(true, COMPONENT_ASSEMBLER,
+                "PPP", "CHR", "WXW",
+                'P', CraftingComponent.PLATE,
+                'H', CraftingComponent.HULL,
+                'C', CraftingComponent.CONVEYOR,
+                'R', CraftingComponent.ROBOT_ARM,
+                'W', CraftingComponent.CABLE,
+                'X', CraftingComponent.CIRCUIT);
 
         ModHandler.addShapedRecipe(true, "diesel_generator_ev", GTQTMetaTileEntities.COMBUSTION_GENERATOR[0].getStackForm(),
                 "PCP", "EME", "GWG", 'M', HULL[GTValues.EV].getStackForm(), 'P',

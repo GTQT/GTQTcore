@@ -3,10 +3,7 @@ package keqing.gtqtcore.common;
 import gregtech.api.block.VariantItemBlock;
 import gregtech.api.recipes.recipeproperties.FusionEUToStartProperty;
 import gregtech.common.items.MetaItems;
-import keqing.gtqtcore.api.recipes.properties.CACasingTierProperty;
-import keqing.gtqtcore.api.recipes.properties.ELEProperties;
-import keqing.gtqtcore.api.recipes.properties.PCBPartProperty;
-import keqing.gtqtcore.api.recipes.properties.QFTCasingTierProperty;
+import keqing.gtqtcore.api.recipes.properties.*;
 import keqing.gtqtcore.api.utils.GTQTLog;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTBlockWireCoil;
@@ -61,6 +58,7 @@ public class CommonProxy {
         ISA.init();
         QTF.init();
         ComponentAssemblyLineRecipes.init();
+        ComponentAssemblerRecipes.init();
         RocketEngineRecipes.init();
         GTQTRecipesManager.init();
         WrapCircuits.init();
@@ -99,6 +97,7 @@ public class CommonProxy {
         registry.register(GTQTMetaBlocks.WIRE_COIL);
         registry.register(GTQTMetaBlocks.QUANTUM_CASING);
         registry.register(GTQTMetaBlocks.TURBINE_CASING);
+        registry.register(GTQTMetaBlocks.TURBINE_CASING1);
         registry.register(GTQTMetaBlocks.QUANTUM_CONSTRAINT_CASING);
         registry.register(GTQTMetaBlocks.COMPONENT_ASSEMBLY_LINE);
         registry.register(GTQTMetaBlocks.ISA_CASING);
@@ -137,6 +136,7 @@ public class CommonProxy {
         registry.register(createItemBlock(GTQTMetaBlocks.WIRE_COIL, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.QUANTUM_CASING, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.TURBINE_CASING, VariantItemBlock::new));
+        registry.register(createItemBlock(GTQTMetaBlocks.TURBINE_CASING1, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.QUANTUM_CONSTRAINT_CASING, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.COMPONENT_ASSEMBLY_LINE, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.ISA_CASING, VariantItemBlock::new));
@@ -170,6 +170,10 @@ public class CommonProxy {
         ELEProperties.registeredTier(3,"三级");
         ELEProperties.registeredTier(4,"四级");
         ELEProperties.registeredTier(5,"五级");
+
+        PACasingTierProperty.registerPACasingTier(1, I18n.format("gtqtcore.machine.precise_assembler.tier.1"));
+        PACasingTierProperty.registerPACasingTier(2, I18n.format("gtqtcore.machine.precise_assembler.tier.2"));
+        PACasingTierProperty.registerPACasingTier(3, I18n.format("gtqtcore.machine.precise_assembler.tier.3"));
 
         PCBPartProperty.registeredPart(1,"微生物培养仓");
         PCBPartProperty.registeredPart(2,"化学辅助计算机");

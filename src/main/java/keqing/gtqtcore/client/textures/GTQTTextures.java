@@ -26,6 +26,11 @@ public class GTQTTextures {
     public static SimpleOverlayRenderer POLYBENZIMIDAZOLE_PIPE;
     public static SimpleOverlayRenderer QUANTUM_CONSTRAINT_CASING;
     public static SimpleOverlayRenderer PD_CASING;
+    public static SimpleOverlayRenderer PRECISE_ASSEMBLER_CASING_MK1;
+    public static SimpleOverlayRenderer PRECISE_ASSEMBLER_CASING_MK2;
+    public static SimpleOverlayRenderer PRECISE_ASSEMBLER_CASING_MK3;
+    public static SimpleOverlayRenderer AD_CASING;
+    public static SimpleOverlayRenderer ST_CASING;
     public static SimpleOverlayRenderer ASEPTIC_FARM_CASING;
     public static SimpleOverlayRenderer FLOTATION_CASING;
     public static SimpleOverlayRenderer BRICK;
@@ -89,7 +94,14 @@ public class GTQTTextures {
         VACUUM_CASING = new SimpleOverlayRenderer("multiblock/isa_casing/vacuum_casing");
         NITINOL_CASING = new SimpleOverlayRenderer("multiblock/casings/nitinol_machine_casing");
         MACERATOR_CASING = new SimpleOverlayRenderer("multiblock/casing/macerator_casing");
+
+        PRECISE_ASSEMBLER_CASING_MK1 = new SimpleOverlayRenderer("multiblock/casing/precise_assembler_casing_mk1");
+        PRECISE_ASSEMBLER_CASING_MK2= new SimpleOverlayRenderer("multiblock/casing/precise_assembler_casing_mk2");
+        PRECISE_ASSEMBLER_CASING_MK3 = new SimpleOverlayRenderer("multiblock/casing/precise_assembler_casing_mk3");
+
         PD_CASING = new SimpleOverlayRenderer("multiblock/casing/pd_turbine_casing");
+        ST_CASING = new SimpleOverlayRenderer("multiblock/casing/st_turbine_casing");
+        AD_CASING = new SimpleOverlayRenderer("multiblock/casing/ad_turbine_casing");
         HYPER_CASING = new SimpleOverlayRenderer("multiblock/casing/hyper_casing");
         BRICK = new SimpleOverlayRenderer("multiblock/casing/brick");
         FISHING_CASING = new SimpleOverlayRenderer("multiblock/casing/fishing_casing");

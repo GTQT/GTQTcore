@@ -16,9 +16,7 @@ public class RocketEngineRecipes {
     public static void init() {
 
         //  Remove rocket fuel Combustion generator recipe
-        GTRecipeHandler.removeRecipesByInputs(COMBUSTION_GENERATOR_FUELS,
-                new FluidStack[]{RocketFuel.getFluid(16)});
-
+        GTRecipeHandler.removeRecipesByInputs(COMBUSTION_GENERATOR_FUELS, RocketFuel.getFluid(16));
         //  Rocket Fuel
         ROCKET.recipeBuilder()
                 .fluidInputs(RocketFuel.getFluid(16))

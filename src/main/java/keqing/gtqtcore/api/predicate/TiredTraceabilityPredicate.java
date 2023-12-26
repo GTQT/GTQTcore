@@ -36,10 +36,53 @@ public class TiredTraceabilityPredicate extends TraceabilityPredicate {
         MAP_QFT_GLASS = new Object2ObjectOpenHashMap<>();
         MAP_CAL_CASING = new Object2ObjectOpenHashMap<>();
         MAP_ELE_CASING = new Object2ObjectOpenHashMap<>();
+        MAP_PA_CASING = new Object2ObjectOpenHashMap<>();
+        MAP_PA_INTERNAL_CASING = new Object2ObjectOpenHashMap<>();
 
-        for (BlockMachineCasing.MachineCasingType type : Arrays.stream(BlockMachineCasing.MachineCasingType.values()).filter((c)-> c.ordinal()<10).collect(Collectors.toList())) {
-            TiredTraceabilityPredicate.MAP_MACHINE_CASING.put(MetaBlocks.MACHINE_CASING.getState(type),new WrappedIntTired(type,type.ordinal()));
-        }
+        TiredTraceabilityPredicate.MAP_PA_CASING.put(GTQTMetaBlocks.TURBINE_CASING1.getState(GTQTTurbineCasing1.TurbineCasingType.PRECISE_ASSEMBLER_CASING_MK1),
+                new WrappedIntTired(GTQTTurbineCasing1.TurbineCasingType.PRECISE_ASSEMBLER_CASING_MK1, 1));
+        TiredTraceabilityPredicate.MAP_PA_CASING.put(GTQTMetaBlocks.TURBINE_CASING1.getState(GTQTTurbineCasing1.TurbineCasingType.PRECISE_ASSEMBLER_CASING_MK1),
+                new WrappedIntTired(GTQTTurbineCasing1.TurbineCasingType.PRECISE_ASSEMBLER_CASING_MK1, 2));
+        TiredTraceabilityPredicate.MAP_PA_CASING.put(GTQTMetaBlocks.TURBINE_CASING1.getState(GTQTTurbineCasing1.TurbineCasingType.PRECISE_ASSEMBLER_CASING_MK1),
+                new WrappedIntTired(GTQTTurbineCasing1.TurbineCasingType.PRECISE_ASSEMBLER_CASING_MK1, 3));
+
+        TiredTraceabilityPredicate.MAP_PA_INTERNAL_CASING.put(MetaBlocks.MACHINE_CASING.getState(BlockMachineCasing.MachineCasingType.LuV),
+                new WrappedIntTired(BlockMachineCasing.MachineCasingType.LuV, 1));
+        TiredTraceabilityPredicate.MAP_PA_INTERNAL_CASING.put(MetaBlocks.MACHINE_CASING.getState(BlockMachineCasing.MachineCasingType.ZPM),
+                new WrappedIntTired(BlockMachineCasing.MachineCasingType.ZPM, 2));
+        TiredTraceabilityPredicate.MAP_PA_INTERNAL_CASING.put(MetaBlocks.MACHINE_CASING.getState(BlockMachineCasing.MachineCasingType.UV),
+                new WrappedIntTired(BlockMachineCasing.MachineCasingType.UV, 3));
+
+
+        TiredTraceabilityPredicate.MAP_MACHINE_CASING.put(MetaBlocks.MACHINE_CASING.getState(BlockMachineCasing.MachineCasingType.LV),
+                new WrappedIntTired(BlockMachineCasing.MachineCasingType.LV,1));
+        TiredTraceabilityPredicate.MAP_MACHINE_CASING.put(MetaBlocks.MACHINE_CASING.getState(BlockMachineCasing.MachineCasingType.MV),
+                new WrappedIntTired(BlockMachineCasing.MachineCasingType.MV,2));
+        TiredTraceabilityPredicate.MAP_MACHINE_CASING.put(MetaBlocks.MACHINE_CASING.getState(BlockMachineCasing.MachineCasingType.HV),
+                new WrappedIntTired(BlockMachineCasing.MachineCasingType.HV,3));
+        TiredTraceabilityPredicate.MAP_MACHINE_CASING.put(MetaBlocks.MACHINE_CASING.getState(BlockMachineCasing.MachineCasingType.EV),
+                new WrappedIntTired(BlockMachineCasing.MachineCasingType.EV,4));
+        TiredTraceabilityPredicate.MAP_MACHINE_CASING.put(MetaBlocks.MACHINE_CASING.getState(BlockMachineCasing.MachineCasingType.IV),
+                new WrappedIntTired(BlockMachineCasing.MachineCasingType.IV,5));
+        TiredTraceabilityPredicate.MAP_MACHINE_CASING.put(MetaBlocks.MACHINE_CASING.getState(BlockMachineCasing.MachineCasingType.LuV),
+                new WrappedIntTired(BlockMachineCasing.MachineCasingType.LuV,6));
+        TiredTraceabilityPredicate.MAP_MACHINE_CASING.put(MetaBlocks.MACHINE_CASING.getState(BlockMachineCasing.MachineCasingType.ZPM),
+                new WrappedIntTired(BlockMachineCasing.MachineCasingType.ZPM,7));
+        TiredTraceabilityPredicate.MAP_MACHINE_CASING.put(MetaBlocks.MACHINE_CASING.getState(BlockMachineCasing.MachineCasingType.UV),
+                new WrappedIntTired(BlockMachineCasing.MachineCasingType.UV,8));
+        TiredTraceabilityPredicate.MAP_MACHINE_CASING.put(MetaBlocks.MACHINE_CASING.getState(BlockMachineCasing.MachineCasingType.UHV),
+                new WrappedIntTired(BlockMachineCasing.MachineCasingType.UHV,9));
+        TiredTraceabilityPredicate.MAP_MACHINE_CASING.put(MetaBlocks.MACHINE_CASING.getState(BlockMachineCasing.MachineCasingType.UEV),
+                new WrappedIntTired(BlockMachineCasing.MachineCasingType.UEV,10));
+        TiredTraceabilityPredicate.MAP_MACHINE_CASING.put(MetaBlocks.MACHINE_CASING.getState(BlockMachineCasing.MachineCasingType.UIV),
+                new WrappedIntTired(BlockMachineCasing.MachineCasingType.UIV,11));
+        TiredTraceabilityPredicate.MAP_MACHINE_CASING.put(MetaBlocks.MACHINE_CASING.getState(BlockMachineCasing.MachineCasingType.UXV),
+                new WrappedIntTired(BlockMachineCasing.MachineCasingType.UXV,12));
+        TiredTraceabilityPredicate.MAP_MACHINE_CASING.put(MetaBlocks.MACHINE_CASING.getState(BlockMachineCasing.MachineCasingType.OpV),
+                new WrappedIntTired(BlockMachineCasing.MachineCasingType.OpV,13));
+        TiredTraceabilityPredicate.MAP_MACHINE_CASING.put(MetaBlocks.MACHINE_CASING.getState(BlockMachineCasing.MachineCasingType.MAX),
+                new WrappedIntTired(BlockMachineCasing.MachineCasingType.MAX,14));
+
 
         TiredTraceabilityPredicate.MAP_CP_CASING.put(MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.BRONZE_BRICKS),
                 new WrappedIntTired(BlockMetalCasing.MetalCasingType.BRONZE_BRICKS,1));
@@ -57,6 +100,10 @@ public class TiredTraceabilityPredicate extends TraceabilityPredicate {
                 new WrappedIntTired(GTQTTurbineCasing.TurbineCasingType.PD_TURBINE_CASING,7));
         TiredTraceabilityPredicate.MAP_CP_CASING.put(GTQTMetaBlocks.TURBINE_CASING.getState(GTQTTurbineCasing.TurbineCasingType.NQ_TURBINE_CASING),
                 new WrappedIntTired(GTQTTurbineCasing.TurbineCasingType.NQ_TURBINE_CASING,8));
+        TiredTraceabilityPredicate.MAP_CP_CASING.put(GTQTMetaBlocks.TURBINE_CASING1.getState(GTQTTurbineCasing1.TurbineCasingType.ST_TURBINE_CASING),
+                new WrappedIntTired(GTQTTurbineCasing1.TurbineCasingType.ST_TURBINE_CASING,9));
+        TiredTraceabilityPredicate.MAP_CP_CASING.put(GTQTMetaBlocks.TURBINE_CASING1.getState(GTQTTurbineCasing1.TurbineCasingType.AD_TURBINE_CASING),
+                new WrappedIntTired(GTQTTurbineCasing1.TurbineCasingType.AD_TURBINE_CASING,10));
 
         TiredTraceabilityPredicate.MAP_CP_TUBE.put(MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.BRONZE_PIPE),
                 new WrappedIntTired(BlockBoilerCasing.BoilerCasingType.BRONZE_PIPE,1));
@@ -70,6 +117,10 @@ public class TiredTraceabilityPredicate extends TraceabilityPredicate {
                 new WrappedIntTired(GTQTTurbineCasing.TurbineCasingType.PD_MACHINE_CASING,7));
         TiredTraceabilityPredicate.MAP_CP_TUBE.put(GTQTMetaBlocks.TURBINE_CASING.getState(GTQTTurbineCasing.TurbineCasingType.NQ_MACHINE_CASING),
                 new WrappedIntTired(GTQTTurbineCasing.TurbineCasingType.NQ_MACHINE_CASING,8));
+        TiredTraceabilityPredicate.MAP_CP_TUBE.put(GTQTMetaBlocks.TURBINE_CASING1.getState(GTQTTurbineCasing1.TurbineCasingType.ST_MACHINE_CASING),
+                new WrappedIntTired(GTQTTurbineCasing1.TurbineCasingType.ST_MACHINE_CASING,9));
+        TiredTraceabilityPredicate.MAP_CP_TUBE.put(GTQTMetaBlocks.TURBINE_CASING1.getState(GTQTTurbineCasing1.TurbineCasingType.AD_MACHINE_CASING),
+                new WrappedIntTired(GTQTTurbineCasing1.TurbineCasingType.AD_MACHINE_CASING,10));
 
 
         TiredTraceabilityPredicate.MAP_GLASS.put(MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.FUSION_GLASS),
@@ -188,7 +239,14 @@ public class TiredTraceabilityPredicate extends TraceabilityPredicate {
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_CP_BEAM;
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_CAL_CASING;
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_ELE_CASING;
+    public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_PA_CASING;
+    public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_PA_INTERNAL_CASING;
 
+    public static TraceabilityPredicate CP_PA_CASING = new TiredTraceabilityPredicate(MAP_PA_CASING,
+            Comparator.comparing((s) -> ((WrappedIntTired)MAP_PA_CASING.get(s)).getIntTier()),"PAC",null);
+
+    public static TraceabilityPredicate CP_PA_INTERNAL_CASING =new TiredTraceabilityPredicate(MAP_PA_INTERNAL_CASING,
+            Comparator.comparing((s) -> ((WrappedIntTired)MAP_PA_INTERNAL_CASING.get(s)).getIntTier()), "PAI", null);
     public static TraceabilityPredicate CP_ELE_CASING = new TiredTraceabilityPredicate(MAP_ELE_CASING,
             Comparator.comparing((s) -> ((WrappedIntTired)MAP_ELE_CASING.get(s)).getIntTier()),"Ele",null);
 

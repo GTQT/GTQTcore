@@ -55,7 +55,6 @@ public class MetaTileEntityDistillationTower extends RecipeMapMultiblockControll
 
     private int tier;
     private int casingTier;
-
     private int tubeTier;
     public MetaTileEntityDistillationTower(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, RecipeMaps.DISTILLATION_RECIPES);
@@ -151,6 +150,7 @@ public class MetaTileEntityDistillationTower extends RecipeMapMultiblockControll
         return false;
     }
 
+    @SideOnly(Side.CLIENT)
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
         switch (this.casingTier) {
             case (2) -> {
@@ -173,6 +173,12 @@ public class MetaTileEntityDistillationTower extends RecipeMapMultiblockControll
             }
             case (8) -> {
                 return GTQTTextures.NQ_CASING;
+            }
+            case (9) -> {
+                return GTQTTextures.ST_CASING;
+            }
+            case (10) -> {
+                return GTQTTextures.AD_CASING;
             }
             default -> {
                 return Textures.BRONZE_PLATED_BRICKS;

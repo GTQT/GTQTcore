@@ -80,7 +80,6 @@ public class MetaTileEntityPyrolyseOven extends RecipeMapMultiblockController {
                 .where('#', air())
                 .build();
     }
-
     @SideOnly(Side.CLIENT)
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
         switch (this.tier) {
@@ -104,6 +103,12 @@ public class MetaTileEntityPyrolyseOven extends RecipeMapMultiblockController {
             }
             case (8) -> {
                 return GTQTTextures.NQ_CASING;
+            }
+            case (9) -> {
+                return GTQTTextures.ST_CASING;
+            }
+            case (10) -> {
+                return GTQTTextures.AD_CASING;
             }
             default -> {
                 return Textures.BRONZE_PLATED_BRICKS;

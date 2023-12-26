@@ -1,5 +1,6 @@
 package keqing.gtqtcore.api.recipes.properties;
 
+import gregtech.api.recipes.recipeproperties.ComputationProperty;
 import gregtech.api.recipes.recipeproperties.RecipeProperty;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
@@ -27,7 +28,7 @@ public class PACasingTierProperty extends RecipeProperty<Integer> {
 
     @Override
     public void drawInfo(Minecraft minecraft, int x, int y, int color, Object value) {
-        minecraft.fontRenderer.drawString(I18n.format("epimorphism.machine.precise_assembler.tier",
+        minecraft.fontRenderer.drawString(I18n.format("gtqtcore.machine.precise_assembler.tier",
                 castValue(value).toString()) + getPACasingTier(castValue(value)), x, y, color);
     }
 
@@ -45,4 +46,5 @@ public class PACasingTierProperty extends RecipeProperty<Integer> {
         Validate.notNull(shortName);
         registeredPACasingTiers.put(tier, shortName);
     }
+
 }

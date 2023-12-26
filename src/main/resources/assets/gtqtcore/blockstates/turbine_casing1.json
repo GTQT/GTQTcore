@@ -1,0 +1,55 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "minecraft:cube_all",
+    "textures": {
+      "all": "gregtech:blocks/rendering_error"
+    }
+  },
+  "variants": {
+    "variant": {
+      "st_machine_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casing/st_machine_casing"
+        }
+      },
+      "st_turbine_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casing/st_turbine_casing"
+        }
+      },
+      "ad_machine_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casing/ad_machine_casing"
+        }
+      },
+      "ad_turbine_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casing/ad_turbine_casing"
+        }
+      },
+      "precise_assembler_casing_mk1": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casing/precise_assembler_casing_mk1"
+        }
+      },
+      "precise_assembler_casing_mk2": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casing/precise_assembler_casing_mk2"
+        }
+      },
+      "precise_assembler_casing_mk3": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casing/precise_assembler_casing_mk3"
+        }
+      }
+    }
+  }
+}

@@ -30,6 +30,10 @@ import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.MetaTileEntities;
 import gregtech.core.sound.GTSoundEvents;
 
+import keqing.gtqtcore.api.GTQTValue;
+import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
+import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
+import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing;
@@ -37,6 +41,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
@@ -50,20 +55,34 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-public class MetaTileEntitySepticTank extends RecipeMapMultiblockController implements IHeatingCoil {
+import static gregtech.api.GTValues.VA;
 
+public class MetaTileEntitySepticTank extends RecipeMapMultiblockController implements IHeatingCoil {
+    private int tier;
     private int blastFurnaceTemperature;
 
     public MetaTileEntitySepticTank(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, RecipeMaps.BLAST_RECIPES);
+        super(metaTileEntityId, RecipeMaps.FERMENTING_RECIPES);
         this.recipeMapWorkable = new HeatingCoilRecipeLogic(this);
     }
 
     @Override
+    public void receiveCustomData(int dataId, PacketBuffer buf) {
+        super.receiveCustomData(dataId, buf);
+        if(dataId == GTQTValue.UPDATE_TIER){
+            this.tier = buf.readInt();
+        }
+        if(dataId == GTQTValue.REQUIRE_DATA_UPDATE){
+            this.writeCustomData(GTQTValue.UPDATE_TIER,buf1 -> buf1.writeInt(this.tier));
+        }
+    }
+    @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntitySepticTank(metaTileEntityId);
     }
-
+    public int getParallelLimit() {
+        return (int) Math.pow(2, tier);
+    }
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         MultiblockDisplayText.builder(textList, isStructureFormed())
@@ -81,6 +100,7 @@ public class MetaTileEntitySepticTank extends RecipeMapMultiblockController impl
                                 TextFormatting.GRAY,
                                 "gregtech.multiblock.blast_furnace.max_temperature",
                                 heatString));
+                        textList.add(new TextComponentTranslation("gtqtcore.tire", tier));
                     }
                 })
                 .addParallelsLine(recipeMapWorkable.getParallelLimit())
@@ -91,6 +111,10 @@ public class MetaTileEntitySepticTank extends RecipeMapMultiblockController impl
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
+        Object tier = context.get("ChemicalPlantCasingTiredStats");
+        this.tier = GTQTUtil.getOrDefault(() -> tier instanceof WrappedIntTired,
+                () -> ((WrappedIntTired)tier).getIntTier(),
+                0);
         Object type = context.get("CoilType");
         if (type instanceof IHeatingCoilBlockStats) {
             this.blastFurnaceTemperature = ((IHeatingCoilBlockStats) type).getCoilTemperature();
@@ -117,7 +141,7 @@ public class MetaTileEntitySepticTank extends RecipeMapMultiblockController impl
                 .aisle("XXXXX", "C###C", "C###C", "XXXXX")
                 .aisle("XXSXX", "XCCCX","XCCCX",  "XXXXX")
                 .where('S', selfPredicate())
-                .where('X', states(getCasingState()).setMinGlobalLimited(50)
+                .where('X', TiredTraceabilityPredicate.CP_CASING.setMinGlobalLimited(50)
                         .or(autoAbilities(true, true, true, true, true, true, false)))
                 .where('M', abilities(MultiblockAbility.MUFFLER_HATCH))
                 .where('C', heatingCoils())
@@ -130,9 +154,33 @@ public class MetaTileEntitySepticTank extends RecipeMapMultiblockController impl
     }
 
     @SideOnly(Side.CLIENT)
-    @Override
-    public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
-        return GTQTTextures.BRICK;
+    public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
+        switch (this.tier) {
+            case (2) -> {
+                return Textures.SOLID_STEEL_CASING;
+            }
+            case (3) -> {
+                return Textures.FROST_PROOF_CASING;
+            }
+            case (4) -> {
+                return Textures.CLEAN_STAINLESS_STEEL_CASING;
+            }
+            case (5) -> {
+                return Textures.STABLE_TITANIUM_CASING;
+            }
+            case (6) -> {
+                return Textures.ROBUST_TUNGSTENSTEEL_CASING;
+            }
+            case (7) -> {
+                return GTQTTextures.PD_CASING;
+            }
+            case (8) -> {
+                return GTQTTextures.NQ_CASING;
+            }
+            default -> {
+                return Textures.BRONZE_PLATED_BRICKS;
+            }
+        }
     }
 
     @Override

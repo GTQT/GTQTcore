@@ -89,5 +89,13 @@ public class FirstDegreeMaterials {
                 .flags(DISABLE_DECOMPOSITION)
                 .components(Aluminium, 3, Copper, 1)
                 .build();
+        //含杂预处理原油
+        //预处理原油
+        //沥青
+        //蜡油
+        //水煤气
+        //常压渣油
+        //减压渣油
+        //粗柴油
     }
 }

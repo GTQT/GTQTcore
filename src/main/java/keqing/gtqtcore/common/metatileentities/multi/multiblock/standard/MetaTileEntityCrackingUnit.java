@@ -77,7 +77,7 @@ public class MetaTileEntityCrackingUnit extends RecipeMapMultiblockController {
                 .where('C', heatingCoils())
                 .build();
     }
-
+    @SideOnly(Side.CLIENT)
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
         switch (this.casingTier) {
             case (2) -> {
@@ -100,6 +100,12 @@ public class MetaTileEntityCrackingUnit extends RecipeMapMultiblockController {
             }
             case (8) -> {
                 return GTQTTextures.NQ_CASING;
+            }
+            case (9) -> {
+                return GTQTTextures.ST_CASING;
+            }
+            case (10) -> {
+                return GTQTTextures.AD_CASING;
             }
             default -> {
                 return Textures.BRONZE_PLATED_BRICKS;

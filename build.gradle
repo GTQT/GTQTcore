@@ -70,6 +70,7 @@ minecraft {
     // injectedTags.put('MOD_ID', project.archives_base_name)
 }
 
+
 // Generate a group.archives_base_name.Tags class
 tasks.injectTags.configure {
     // Change Tags class' name here:

@@ -92,6 +92,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityHugeDistillationTower HUGE_DISTILLATION_TOWER;
     public static MetaTileEntityHugeVacuum HUGE_VACUUM;
     public static MetaTileEntityVacuumFreezer VACUUM_FREEZER;
+    public static MetaTileEntityPyrolysisTower PYROLYSIS_TOWER;
     public static MetaTileEntityQuantumForceTransformer QUANTUM_FORCE_TRANSFORMER;
     public static MetaTileEntityFuelRefineFactory FUEL_REFINE_FACTORY;
     public static MetaTileEntityFermentationTank FERMENTATION_TANK;
@@ -119,7 +120,9 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityIsaMill ISA_MILL;
     public static MetaTileEntityPCB PCB;
     public static MetaTileEntityAlloykiln ALLOY_KILN;
-    public static MetaTileEntitySaltField SALT_FLIED;;
+    public static MetaTileEntitySaltField SALT_FLIED;
+    public static SimpleMachineMetaTileEntity[] COMPONENT_ASSEMBLER = new SimpleMachineMetaTileEntity[GTValues.IV + 1];
+    public static SimpleMachineMetaTileEntity[] DECAY_CHAMBER = new SimpleMachineMetaTileEntity[GTValues.V.length - 1];
     public static MetaTileEntityElectrobath ELECTROBATH;
     public static MetaTileEntityIndustrialFishingPond INDUSTRIAL_FISHING_POND;
     public static MetaTileEntityFracturing FLUID_DRILLING_RIG;
@@ -127,6 +130,8 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityLargeNaquadahReactor LARGE_NAQUADAH_REACTOR;
     public static MetaTileEntityCrackingUnit CRACKER;
     public static MetaTileEntityPyrolyseOven PYROLYSE_OVEN;
+
+    public static MetaTileEntityPreciseAssembler PRECISE_ASSEMBLER;
     public static MetaTileEntityHugeElectricImplosionCompressor HUGE_ELECTRRIC_IMPLOSION_COMPRESSOR;
     public static MetaTileEntityFlotationFactory FLOTATION_FACTORY;
     public static MetaTileEntityLargeProcessingFactory LAGER_PROCESSING_FACTORY;
@@ -153,6 +158,8 @@ public class GTQTMetaTileEntities {
     public static final MetaTileEntityPlusEnergyHatch[] PLUS_ENERGY_OUTPUT_HATCH_64A = new MetaTileEntityPlusEnergyHatch[10];
     public static final MetaTileEntityPlusEnergyHatch[] PLUS_ENERGY_OUTPUT_HATCH_128A = new MetaTileEntityPlusEnergyHatch[10];
     public static final MetaTileEntityPlusEnergyHatch[] PLUS_ENERGY_OUTPUT_HATCH_512A = new MetaTileEntityPlusEnergyHatch[10];
+    public static SimpleMachineMetaTileEntity[] ULTRAVIOLET_LAMP_CHAMBER = new SimpleMachineMetaTileEntity[GTValues.V.length - 1];
+    public static SimpleMachineMetaTileEntity[] VACUUM_CHAMBER = new SimpleMachineMetaTileEntity[GTValues.V.length - 1];
     public static MetaTileEntityMillBallHatch MULTIPART_BALL_HATCH;
     public static MetaTileEntityCatalystHatch CATALYST_HATCH;
     public static MetaTileEntityChemicalPlant CHEMICAL_PLANT;
@@ -262,11 +269,16 @@ public class GTQTMetaTileEntities {
         CRACKER = registerMetaTileEntity(3088, new MetaTileEntityCrackingUnit(gtqtcoreId("cracker")));
         PYROLYSE_OVEN = registerMetaTileEntity(3089, new MetaTileEntityPyrolyseOven(gtqtcoreId("pyrolyse_oven")));
         VACUUM_FREEZER = registerMetaTileEntity(3090, new MetaTileEntityVacuumFreezer(gtqtcoreId("vacuum_freezer")));
+        PYROLYSIS_TOWER = registerMetaTileEntity(3091, new MetaTileEntityPyrolysisTower(gtqtcoreId("pyrolysis_tower")));
+        PRECISE_ASSEMBLER = registerMetaTileEntity(3092, new MetaTileEntityPreciseAssembler(gtqtcoreId("precise_assembler")));
 
+        registerSimpleMetaTileEntity(FLUID_EXTRACTOR, 15000, "fluid_extractor", GTQTcoreRecipeMaps.FLUID_EXTRACTOR_RECIPES, Textures.EXTRACTOR_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
+        registerSimpleMetaTileEntity(FLUID_CANNER, 15015, "fluid_canner", GTQTcoreRecipeMaps.FLUID_CANNER_RECIPES, Textures.CANNER_OVERLAY, true,GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
 
-
-        registerSimpleMetaTileEntity(FLUID_EXTRACTOR, 3100, "fluid_extractor", GTQTcoreRecipeMaps.FLUID_EXTRACTOR_RECIPES, Textures.EXTRACTOR_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
-        registerSimpleMetaTileEntity(FLUID_CANNER, 3115, "fluid_canner", GTQTcoreRecipeMaps.FLUID_CANNER_RECIPES, Textures.CANNER_OVERLAY, true,GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
+        registerSimpleMetaTileEntity(COMPONENT_ASSEMBLER, 15030, "component_assembler", GTQTcoreRecipeMaps.COMPONENT_ASSEMBLER_RECIPES, Textures.ASSEMBLER_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
+        registerSimpleMetaTileEntity(DECAY_CHAMBER, 15045, "decay_chamber", GTQTcoreRecipeMaps.DECAY_CHAMBER_RECIPES, Textures.CHEMICAL_BATH_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
+        registerSimpleMetaTileEntity(VACUUM_CHAMBER, 15060, "vacuum_chamber", GTQTcoreRecipeMaps.VACUUM_CHAMBER_RECIPES, Textures.GAS_COLLECTOR_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
+        registerSimpleMetaTileEntity(ULTRAVIOLET_LAMP_CHAMBER, 15075, "ultraviolet_lamp_chamber", GTQTcoreRecipeMaps.ULTRAVIOLET_LAMP_CHAMBER_RECIPES, Textures.LASER_ENGRAVER_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
 
         ROTOR_HOLDER[6] = registerMetaTileEntity(3144, new MetaTileEntityRotorHolder(gtqtcoreId("rotor_holder.uhv"), GTValues.UHV));
         ROTOR_HOLDER[7] = registerMetaTileEntity(3145, new MetaTileEntityRotorHolder(gtqtcoreId("rotor_holder.uev"), GTValues.UEV));
