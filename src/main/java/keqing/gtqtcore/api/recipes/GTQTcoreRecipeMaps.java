@@ -28,6 +28,8 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<CACasingTierRecipeBuilder> COMPONENT_ASSEMBLY_LINE_RECIPES;
     public static final RecipeMap<ELERecipeBuilder> ELECTROBATH;
     public static final RecipeMap<PCBRecipeBuilder> PCB;
+
+    public static final RecipeMap<PARecipeBuilder> PARTICLE_ACCELERATOR_RECIPES;
     public static final RecipeMap<SimpleRecipeBuilder> DIGESTER_RECIPES;
     public static final RecipeMap<PHRecipeBuilder> FERMENTATION_TANK_RECIPES;
     public static final RecipeMap<FuelRecipeBuilder> NAQUADAH_REACTOR_RECIPES;
@@ -80,6 +82,9 @@ public class GTQTcoreRecipeMaps {
         PROCESSING_MODE_A = new RecipeMapPseudoGroup<>("processing_mode_a", 1, 2, 1, 1, new SimpleRecipeBuilder(), RecipeMaps.COMPRESSOR_RECIPES, RecipeMaps.LATHE_RECIPES, RecipeMaps.POLARIZER_RECIPES, true);
         PROCESSING_MODE_B = new RecipeMapPseudoGroup<>("processing_mode_b", 2, 2, 1, 1, new SimpleRecipeBuilder(), RecipeMaps.FERMENTING_RECIPES, RecipeMaps.EXTRACTOR_RECIPES, RecipeMaps.CANNER_RECIPES, true);
         PROCESSING_MODE_C = new RecipeMapPseudoGroup<>("processing_mode_c", 2, 2, 1, 1, new SimpleRecipeBuilder(), RecipeMaps.LASER_ENGRAVER_RECIPES, RecipeMaps.AUTOCLAVE_RECIPES, RecipeMaps.FLUID_SOLIDFICATION_RECIPES, true);
+
+        PARTICLE_ACCELERATOR_RECIPES=new  RecipeMap<>("pa", 6, 6, 6, 6, new PARecipeBuilder(), false);
+
 
         VACUUM_CHAMBER_RECIPES = new RecipeMap<>("vacuum_chamber_recipes", 1, 4,  2,  1, new SimpleRecipeBuilder(), false)
                 .setSlotOverlay(false, false, GuiTextures.CIRCUIT_OVERLAY)

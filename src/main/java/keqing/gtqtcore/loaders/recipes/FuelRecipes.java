@@ -23,6 +23,14 @@ public class FuelRecipes {
 
                 public static void init(){
 
+                    PARTICLE_ACCELERATOR_RECIPES.recipeBuilder()
+                            .input(screw, Hdcs, 1)
+                            .output(ingot,Iron)
+                            .EUt(VA[MV])
+                            .duration(120)
+                            .part(11234)
+                            .buildAndRegister();
+
                     CW_PRECISE_ASSEMBLER_RECIPES.recipeBuilder()
                             .input(screw, Hdcs, 4)
                             .fluidInputs(SolderingAlloy.getFluid(L * 8))

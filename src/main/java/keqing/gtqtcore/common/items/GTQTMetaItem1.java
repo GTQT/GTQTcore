@@ -12,6 +12,7 @@ import keqing.gtqtcore.common.block.blocks.GTQTCrops;
 import keqing.gtqtcore.common.block.blocks.GTQTcrop;
 import keqing.gtqtcore.common.items.behaviors.IntBcircuitBehavior;
 import keqing.gtqtcore.common.items.behaviors.MillBallBehavior;
+import keqing.gtqtcore.common.items.behaviors.StructureWriteBehavior;
 import org.objectweb.asm.commons.GeneratorAdapter;
 
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
@@ -89,5 +90,8 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         WRAP_CIRCUIT_UXV = this.addItem(412, "wrap.circuit.uxv");
         WRAP_CIRCUIT_OpV = this.addItem(413, "wrap.circuit.opv");
         WRAP_CIRCUIT_MAX = this.addItem(414, "wrap.circuit.max");
+
+        DEBUG_STRUCTURE_WRITER = this.addItem(9999, "debug.structure_writer").addComponents(StructureWriteBehavior.INSTANCE);
+        DEBUG_STRUCTURE_BUILDER = this.addItem(10000, "debug.structure_builder");
     }
 }

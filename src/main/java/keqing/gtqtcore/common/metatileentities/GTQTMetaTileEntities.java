@@ -130,6 +130,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityLargeNaquadahReactor LARGE_NAQUADAH_REACTOR;
     public static MetaTileEntityCrackingUnit CRACKER;
     public static MetaTileEntityPyrolyseOven PYROLYSE_OVEN;
+    public static MetaTileEntityParticleAccelerator PARTICLE_ACCELERATOR;
 
     public static MetaTileEntityPreciseAssembler PRECISE_ASSEMBLER;
     public static MetaTileEntityHugeElectricImplosionCompressor HUGE_ELECTRRIC_IMPLOSION_COMPRESSOR;
@@ -271,6 +272,8 @@ public class GTQTMetaTileEntities {
         VACUUM_FREEZER = registerMetaTileEntity(3090, new MetaTileEntityVacuumFreezer(gtqtcoreId("vacuum_freezer")));
         PYROLYSIS_TOWER = registerMetaTileEntity(3091, new MetaTileEntityPyrolysisTower(gtqtcoreId("pyrolysis_tower")));
         PRECISE_ASSEMBLER = registerMetaTileEntity(3092, new MetaTileEntityPreciseAssembler(gtqtcoreId("precise_assembler")));
+        PARTICLE_ACCELERATOR = registerMetaTileEntity(3093, new MetaTileEntityParticleAccelerator(gtqtcoreId("particle_accelerator")));
+
 
         registerSimpleMetaTileEntity(FLUID_EXTRACTOR, 15000, "fluid_extractor", GTQTcoreRecipeMaps.FLUID_EXTRACTOR_RECIPES, Textures.EXTRACTOR_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
         registerSimpleMetaTileEntity(FLUID_CANNER, 15015, "fluid_canner", GTQTcoreRecipeMaps.FLUID_CANNER_RECIPES, Textures.CANNER_OVERLAY, true,GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);

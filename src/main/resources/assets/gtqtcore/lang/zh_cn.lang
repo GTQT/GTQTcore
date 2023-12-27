@@ -372,6 +372,35 @@ gtqtcore.machine.salt_flied.name=晒盐场
 tile.isa_casing.process_casing.name=加工厂外壳
 gtqtcore.multiblock.ak.amount=岩浆储量：%s
 gtqtcore.multiblock.sf.amount=淡水储量：%s
+gtqtcore.pa.mode1=加速模式：加速 偏转相位：%s 速度：%s C
+gtqtcore.pa.mode2=加速模式：稳定 偏转相位：%s 速度：%s C
+gtqtcore.pa.mode3=加速模式：减速 偏转相位：%s 速度：%s C
+gtqtcore.pa.mode=加速模式：%s
+gtqtcore.pa.angle=粒子偏转角：%s
+gtqtcore.multiblock.pa.amount=液氮储量：%s
+gtqtcore.pa.level=加速线圈等级：%s 加速器等级：%s 探针等级：%s
+gtqtcore.pa.agp1=|---------|
+gtqtcore.pa.agp2=|    +    |
+gtqtcore.pa.agp3=|----+----|
+gtqtcore.pa.agp4=|    +    |
+
+gtqtcore.pa.ag0=|----*----|
+
+gtqtcore.pa.ag1=|    *    |
+gtqtcore.pa.ag2=|    + *  |
+gtqtcore.pa.ag3=|----+--*-|
+gtqtcore.pa.ag4=|    + *  |
+gtqtcore.pa.ag5=|    *    |
+
+gtqtcore.pa.ag6=|  * +    |
+gtqtcore.pa.ag7=|-*--+----|
+gtqtcore.pa.ag8=|  * +    |
+
+gtqtcore.multiblock.pam.threshold_decrement=调整加速模式
+gtqtcore.multiblock.pam.threshold_increment=调整加速模式
+gtqtcore.multiblock.paa.threshold_decrement=调整偏转角
+gtqtcore.multiblock.paa.threshold_increment=调整偏转角
+
 gtqtcore.multiblock.ak.temp=温度过低，请加岩浆
 recipemap.alloy_klin.name=合金窑
 tile.multiblock_casing.nitinol_machine_casing.name=镍钛诺机械外壳
@@ -594,6 +623,16 @@ gtqtcore.multiblock.industrial_fisher.mode2=模式: 捕宝藏
 gtqtcore.multiblock.industrial_fisher.inv_full=物品栏已满
 
 gtqtcore.machine.af.tooltip.1=加水即可工作（不耗电）
+
+metaitem.debug.structure_writer.name=多方块导出工具
+metaitem.debug.structure_writer.tooltip=因为我需要一个...
+metaitem.debug.structure_writer.export_to_log=导出为日志
+metaitem.debug.structure_writer.export_to_json=导出为Json
+metaitem.debug.structure_writer.rotate_along_y_axis=沿Y轴旋转
+metaitem.debug.structure_writer.ex=无
+metaitem.debug.structure_writer.structural_scale=结构规模： X:%s  Y:%s  Z:%s
+metaitem.debug.structure_builder.name=多方块构建工具
+
 
 gtqtcore.machine.large_processing_factory.name=大型加工厂
 gtqtcore.machine.large_processing_factory.tooltip.1=把你的小机器丢掉

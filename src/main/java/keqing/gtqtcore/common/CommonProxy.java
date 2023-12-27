@@ -171,6 +171,8 @@ public class CommonProxy {
         ELEProperties.registeredTier(4,"四级");
         ELEProperties.registeredTier(5,"五级");
 
+        PAPartProperty.registeredPart(11234,"一级 + 1234");
+
         PACasingTierProperty.registerPACasingTier(1, I18n.format("gtqtcore.machine.precise_assembler.tier.1"));
         PACasingTierProperty.registerPACasingTier(2, I18n.format("gtqtcore.machine.precise_assembler.tier.2"));
         PACasingTierProperty.registerPACasingTier(3, I18n.format("gtqtcore.machine.precise_assembler.tier.3"));

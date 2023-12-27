@@ -61,6 +61,9 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem BRONZE_CROP;
     public static MetaItem<?>.MetaValueItem CARBON_CROP;
 
+    public static MetaItem<?>.MetaValueItem DEBUG_STRUCTURE_WRITER;
+    public static MetaItem<?>.MetaValueItem DEBUG_STRUCTURE_BUILDER;
+
     public static void initialization()
     {
         GTQTMetaItem1 item1 = new GTQTMetaItem1();
