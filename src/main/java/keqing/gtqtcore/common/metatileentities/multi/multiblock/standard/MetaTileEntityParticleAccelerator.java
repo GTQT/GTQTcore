@@ -307,7 +307,7 @@ public class MetaTileEntityParticleAccelerator extends RecipeMapMultiblockContro
         int unit = number % 10; // 个位  角度匹配
         int ten = (number / 10) % 10; // 十位
         int hundred = (number / 100) % 10; // 百位   速度匹配
-        int thousand = (number / 1000) % 10; // 千位     混沌匹配
+        int thousand = (number / 1000) % 10; // 千位
         int tenth = (number / 10000) % 10; // 万位     外壳匹配
         //匹配
         if(tenth<=casingTier) {

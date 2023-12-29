@@ -2,6 +2,7 @@ package keqing.gtqtcore.common.metatileentities.multi.generators;
 
 import java.util.List;
 
+import gregtech.api.block.IHeatingCoilBlockStats;
 import gregtech.api.capability.IEnergyContainer;
 import gregtech.api.capability.IMultipleTankHandler;
 import gregtech.api.capability.impl.MultiblockFuelRecipeLogic;
@@ -38,7 +39,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 
 public class MetaTileEntityTurbineCombustionChamber extends FuelMultiblockController {
-
+    protected static int heatingCoilLevel;
     private final int tier;
     private final boolean isExtreme;
     private boolean boostAllowed;
@@ -132,7 +133,7 @@ public class MetaTileEntityTurbineCombustionChamber extends FuelMultiblockContro
                 .where('C', selfPredicate())
                 .where('M', states(getCasingState()).setMinGlobalLimited(15)
                         .or(autoAbilities(false, true, true, true, true, true, false)))
-                .where('N', states(getCasingState1()))
+                .where('N',  heatingCoils())
                 .where('A', states(getCasingState2()))
                 .where('B', states(getCasingState3()))
                 .where('E', abilities(MultiblockAbility.OUTPUT_ENERGY))
@@ -145,9 +146,6 @@ public class MetaTileEntityTurbineCombustionChamber extends FuelMultiblockContro
         return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.TUNGSTENSTEEL_ROBUST);
     }
 
-    private static IBlockState getCasingState1() {
-        return MetaBlocks.WIRE_COIL.getState(BlockWireCoil.CoilType.HSS_G);
-    }
 
     private static IBlockState getCasingState2() {
         return MetaBlocks.MULTIBLOCK_CASING.getState(BlockMultiblockCasing.MultiblockCasingType.EXTREME_ENGINE_INTAKE_CASING);
@@ -203,6 +201,13 @@ public class MetaTileEntityTurbineCombustionChamber extends FuelMultiblockContro
         super.formStructure(context);
         IEnergyContainer energyContainer = getEnergyContainer();
         this.boostAllowed = energyContainer != null && energyContainer.getOutputVoltage() >= GTValues.V[this.tier + 1];
+
+        Object coilType = context.get("CoilType");
+        if (coilType instanceof IHeatingCoilBlockStats) {
+            heatingCoilLevel = ((IHeatingCoilBlockStats) coilType).getLevel();
+        } else {
+            heatingCoilLevel = BlockWireCoil.CoilType.CUPRONICKEL.getLevel();
+        }
     }
     private static class TurbineCombustionEngineWorkableHandler extends MultiblockFuelRecipeLogic {
 
@@ -219,7 +224,14 @@ public class MetaTileEntityTurbineCombustionChamber extends FuelMultiblockContro
             this.isExtreme = isExtreme;
         }
 
-
+        @Override
+        public long getMaxVoltage() {
+            //this multiplies consumption through parallel
+            if (isOxygenBoosted)
+                return GTValues.V[heatingCoilLevel] * 2;
+            else
+                return GTValues.V[heatingCoilLevel];
+        }
         @Override
         protected void updateRecipeProgress() {
             if (canRecipeProgress && drawEnergy(recipeEUt, true)) {

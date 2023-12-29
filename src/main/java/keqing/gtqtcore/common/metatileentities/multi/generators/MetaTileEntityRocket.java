@@ -3,16 +3,21 @@ package keqing.gtqtcore.common.metatileentities.multi.generators;
 import java.util.List;
 
 import gregicality.multiblocks.api.render.GCYMTextures;
+import gregtech.api.block.IHeatingCoilBlockStats;
 import gregtech.api.capability.IEnergyContainer;
+import gregtech.api.capability.IHeatingCoil;
 import gregtech.api.capability.IMultipleTankHandler;
 import gregtech.api.capability.impl.MultiblockFuelRecipeLogic;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.unification.material.Materials;
+import gregtech.api.util.GTUtility;
 import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
 import gregtech.common.blocks.*;
+import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
+import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTMultiblockCasing;
@@ -39,7 +44,9 @@ import net.minecraftforge.fluids.FluidStack;
 
 import javax.annotation.Nonnull;
 
-public class MetaTileEntityRocket extends FuelMultiblockController {
+public class MetaTileEntityRocket extends FuelMultiblockController  {
+
+    protected static int heatingCoilLevel;
 
     private final int tier;
     private final boolean isExtreme;
@@ -59,32 +66,9 @@ public class MetaTileEntityRocket extends FuelMultiblockController {
         if (isStructureFormed()) {
             if (getInputFluidInventory() != null) {
                 FluidStack lubricantStack = getInputFluidInventory().drain(Materials.Lubricant.getFluid(Integer.MAX_VALUE), false);
-                FluidStack oxygenStack = getInputFluidInventory().drain(Materials.Oxygen.getFluid(Integer.MAX_VALUE), false);
-                FluidStack liquidOxygenStack = getInputFluidInventory().drain(Materials.Oxygen.getFluid(Integer.MAX_VALUE), false);
                 int lubricantAmount = lubricantStack == null ? 0 : lubricantStack.amount;
                 textList.add(new TextComponentTranslation("gregtech.multiblock.large_combustion_engine.lubricant_amount", TextFormattingUtil.formatNumbers(lubricantAmount)));
-                if (boostAllowed) {
-                    if (!isExtreme) {
-                        if (((TurbineCombustionEngineWorkableHandler) recipeMapWorkable).isOxygenBoosted) {
-                            int oxygenAmount = oxygenStack == null ? 0 : oxygenStack.amount;
-                            textList.add(new TextComponentTranslation("gregtech.multiblock.large_combustion_engine.oxygen_amount", TextFormattingUtil.formatNumbers(oxygenAmount)));
-                            textList.add(new TextComponentTranslation("gregtech.multiblock.large_combustion_engine.oxygen_boosted"));
-                        } else {
-                            textList.add(new TextComponentTranslation("gregtech.multiblock.large_combustion_engine.supply_oxygen_to_boost"));
-                        }
-                    }
-                    else {
-                        if (((TurbineCombustionEngineWorkableHandler) recipeMapWorkable).isOxygenBoosted) {
-                            int liquidOxygenAmount = liquidOxygenStack == null ? 0 : liquidOxygenStack.amount;
-                            textList.add(new TextComponentTranslation("gregtech.multiblock.large_combustion_engine.liquid_oxygen_amount", TextFormattingUtil.formatNumbers((liquidOxygenAmount))));
-                            textList.add(new TextComponentTranslation("gregtech.multiblock.large_combustion_engine.liquid_oxygen_boosted"));
-                        } else {
-                            textList.add(new TextComponentTranslation("gregtech.multiblock.large_combustion_engine.supply_liquid_oxygen_to_boost"));
-                        }
-                    }
-                } else {
-                    textList.add(new TextComponentTranslation("gregtech.multiblock.large_combustion_engine.boost_disallowed"));
-                }
+
             }
         }
     }
@@ -124,6 +108,19 @@ public class MetaTileEntityRocket extends FuelMultiblockController {
         }
     }
 
+    @Override
+    protected void formStructure(PatternMatchContext context) {
+        super.formStructure(context);
+        this.boostAllowed = energyContainer != null && energyContainer.getOutputVoltage() >= GTValues.V[this.tier + 1];
+        Object coilType = context.get("CoilType");
+        if (coilType instanceof IHeatingCoilBlockStats) {
+            heatingCoilLevel = ((IHeatingCoilBlockStats) coilType).getLevel();
+        } else {
+            heatingCoilLevel = BlockWireCoil.CoilType.CUPRONICKEL.getLevel();
+        }
+    }
+
+
     @Nonnull
     @Override
     protected  BlockPattern createStructurePattern() {
@@ -132,15 +129,15 @@ public class MetaTileEntityRocket extends FuelMultiblockController {
                 .aisle("MMM", "MBM", "MIM")
                 .aisle("MMM", "MBM", "MIM")
                 .aisle("MMM", "MBM", "MIM")
-                .aisle("MMM", "CBM", "MIM")
+                .aisle("MMM", "MBM", "MIM")
                 .aisle("MMM", "MBM", "MIM")
                 .aisle("NNN", "NBN", "NNN")
                 .aisle("NNN", "NBN", "NNN")
-                .aisle("AAA", "AAA", "AAA")
+                .aisle("AAA", "ACA", "AAA")
                 .where('C', selfPredicate())
                 .where('M', states(getCasingState()).setMinGlobalLimited(35)
                         .or(autoAbilities(false, true, true, true, true, true, false)))
-                .where('N', states(getCasingState1()))
+                .where('N',  heatingCoils())
                 .where('A', states(getCasingState2()))
                 .where('B', states(getCasingState3()))
                 .where('E', abilities(MultiblockAbility.OUTPUT_ENERGY))
@@ -151,10 +148,6 @@ public class MetaTileEntityRocket extends FuelMultiblockController {
 
     private static IBlockState getCasingState() {
         return GTQTMetaBlocks.MULTI_CASING.getState(GTQTMultiblockCasing.CasingType.NITINOL_MACHINE_CASING);
-    }
-
-    private static IBlockState getCasingState1() {
-        return MetaBlocks.WIRE_COIL.getState(BlockWireCoil.CoilType.NICHROME);
     }
 
     private static IBlockState getCasingState2() {
@@ -206,11 +199,6 @@ public class MetaTileEntityRocket extends FuelMultiblockController {
         return false;
     }
 
-    protected void formStructure(PatternMatchContext context) {
-        super.formStructure(context);
-        IEnergyContainer energyContainer = getEnergyContainer();
-        this.boostAllowed = energyContainer != null && energyContainer.getOutputVoltage() >= GTValues.V[this.tier + 1];
-    }
     private static class TurbineCombustionEngineWorkableHandler extends MultiblockFuelRecipeLogic {
 
         private boolean isOxygenBoosted = false;
@@ -275,9 +263,9 @@ public class MetaTileEntityRocket extends FuelMultiblockController {
         public long getMaxVoltage() {
             //this multiplies consumption through parallel
             if (isOxygenBoosted)
-                return GTValues.V[tier] * 2;
+                return GTValues.V[6] * 2;
             else
-                return GTValues.V[tier];
+                return GTValues.V[6];
         }
 
         @Override

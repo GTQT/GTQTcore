@@ -365,6 +365,7 @@ gtqtcore.machine.ele.tooltip.4=多方块并行数量取决于电极洁净度，�
 gtqtcore.machine.ele.tooltip.5=消耗洁净剂(是盐酸啦)修复电极，提升其洁净度。
 gtqtcore.machine.alloy_klin.name=合金窑
 gtqtcore.machine.vacuum_freezer.name=真空冷冻机
+gtqtcore.machine.large_chemical_reactor.name=工业化学反应釜
 gtqtcore.machine.pyrolyse_oven.name=热解炉
 gtqtcore.machine.cracker.name=石油裂化机
 gtqtcore.machine.distillation_tower.name=蒸馏塔

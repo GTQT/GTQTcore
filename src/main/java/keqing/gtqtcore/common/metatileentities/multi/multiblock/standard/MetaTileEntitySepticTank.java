@@ -136,10 +136,10 @@ public class MetaTileEntitySepticTank extends RecipeMapMultiblockController impl
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
                 .aisle("XXMXX", "XCCCX", "XCCCX", "XXXXX")
-                .aisle("XXXXX", "C###C", "C###C","XXXXX")
                 .aisle("XXXXX", "C###C", "C###C", "XXXXX")
                 .aisle("XXXXX", "C###C", "C###C", "XXXXX")
-                .aisle("XXSXX", "XCCCX","XCCCX",  "XXXXX")
+                .aisle("XXXXX", "C###C", "C###C", "XXXXX")
+                .aisle("XXSXX", "XCCCX", "XCCCX", "XXXXX")
                 .where('S', selfPredicate())
                 .where('X', TiredTraceabilityPredicate.CP_CASING.setMinGlobalLimited(50)
                         .or(autoAbilities(true, true, true, true, true, true, false)))

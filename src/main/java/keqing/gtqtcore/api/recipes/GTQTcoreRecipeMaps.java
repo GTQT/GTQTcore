@@ -11,10 +11,7 @@ import gregtech.core.sound.GTSoundEvents;
 import keqing.gtqtcore.api.capability.chemical_plant.ChemicalPlantBuilder;
 import keqing.gtqtcore.api.capability.impl.NoEnergyMultiblockRecipeLogic;
 import keqing.gtqtcore.api.recipes.builder.*;
-import keqing.gtqtcore.api.recipes.machine.RecipeMapComponentAssemblyLine;
-import keqing.gtqtcore.api.recipes.machine.RecipeMapDangoteDistillery;
-import keqing.gtqtcore.api.recipes.machine.RecipeMapPreciseAssembler;
-import keqing.gtqtcore.api.recipes.machine.RecipeMapPseudoGroup;
+import keqing.gtqtcore.api.recipes.machine.*;
 import keqing.gtqtcore.loaders.recipes.handlers.ELE;
 
 
@@ -31,6 +28,7 @@ public class GTQTcoreRecipeMaps {
 
     public static final RecipeMap<PARecipeBuilder> PARTICLE_ACCELERATOR_RECIPES;
     public static final RecipeMap<SimpleRecipeBuilder> DIGESTER_RECIPES;
+    public static final RecipeMap<SimpleRecipeBuilder> BIOLOGICAL_REACTION_RECIPES;
     public static final RecipeMap<PHRecipeBuilder> FERMENTATION_TANK_RECIPES;
     public static final RecipeMap<FuelRecipeBuilder> NAQUADAH_REACTOR_RECIPES;
     public static final RecipeMap<FuelRecipeBuilder> TURBINE_COMBUSTION_CHAMBER;
@@ -83,8 +81,8 @@ public class GTQTcoreRecipeMaps {
         PROCESSING_MODE_B = new RecipeMapPseudoGroup<>("processing_mode_b", 2, 2, 1, 1, new SimpleRecipeBuilder(), RecipeMaps.FERMENTING_RECIPES, RecipeMaps.EXTRACTOR_RECIPES, RecipeMaps.CANNER_RECIPES, true);
         PROCESSING_MODE_C = new RecipeMapPseudoGroup<>("processing_mode_c", 2, 2, 1, 1, new SimpleRecipeBuilder(), RecipeMaps.LASER_ENGRAVER_RECIPES, RecipeMaps.AUTOCLAVE_RECIPES, RecipeMaps.FLUID_SOLIDFICATION_RECIPES, true);
 
-        PARTICLE_ACCELERATOR_RECIPES=new  RecipeMap<>("pa", 6, 6, 6, 6, new PARecipeBuilder(), false);
-
+        PARTICLE_ACCELERATOR_RECIPES=new RecipeMapParticleAccelerator<>("pa", 2, 1, 2, 1, new PARecipeBuilder(), false)
+                .setSound(GTSoundEvents.CHEMICAL_REACTOR);
 
         VACUUM_CHAMBER_RECIPES = new RecipeMap<>("vacuum_chamber_recipes", 1, 4,  2,  1, new SimpleRecipeBuilder(), false)
                 .setSlotOverlay(false, false, GuiTextures.CIRCUIT_OVERLAY)
@@ -170,6 +168,7 @@ public class GTQTcoreRecipeMaps {
         FERMENTATION_TANK_RECIPES = new RecipeMap<>("fermentation_tank_recipes",  4, 4, 4,  3, new PHRecipeBuilder(), false)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_EXTRACT, ProgressWidget.MoveType.HORIZONTAL)
                 .setSound(GTSoundEvents.CHEMICAL_REACTOR);
+        BIOLOGICAL_REACTION_RECIPES = new RecipeMap<>("biological_reaction_recipes", 4, 4, 4, 4, new SimpleRecipeBuilder(), false);
 
         DISSOLUTION_TANK_RECIPES = new RecipeMap<>("dissolution_tank_recipes", 4, 4, 4, 4, new SimpleRecipeBuilder(), false);
         //  Dangote Distillery RecipeMap

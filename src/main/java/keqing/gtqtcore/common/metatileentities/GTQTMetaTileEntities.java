@@ -36,7 +36,6 @@ import java.util.function.IntSupplier;
 
 import static gregtech.api.util.GTUtility.genericGeneratorTankSizeFunction;
 import static gregtech.common.metatileentities.MetaTileEntities.*;
-import static gregtech.common.metatileentities.MetaTileEntities.registerSimpleMetaTileEntity;
 import static keqing.gtqtcore.api.GTQTValue.gtqtcoreId;
 
 public class GTQTMetaTileEntities {
@@ -124,6 +123,7 @@ public class GTQTMetaTileEntities {
     public static SimpleMachineMetaTileEntity[] COMPONENT_ASSEMBLER = new SimpleMachineMetaTileEntity[GTValues.IV + 1];
     public static SimpleMachineMetaTileEntity[] DECAY_CHAMBER = new SimpleMachineMetaTileEntity[GTValues.V.length - 1];
     public static MetaTileEntityElectrobath ELECTROBATH;
+    public static MetaTileEntityBiologicalReaction BIOLOGICAL_REACTION;
     public static MetaTileEntityIndustrialFishingPond INDUSTRIAL_FISHING_POND;
     public static MetaTileEntityFracturing FLUID_DRILLING_RIG;
     public static MetaTileEntityFracturing ADVANCED_FLUID_DRILLING_RIG;
@@ -131,7 +131,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityCrackingUnit CRACKER;
     public static MetaTileEntityPyrolyseOven PYROLYSE_OVEN;
     public static MetaTileEntityParticleAccelerator PARTICLE_ACCELERATOR;
-
+    public static MetaTileEntityLargeChemicalReactor LARGE_CHEMICAL_REACTOR;
     public static MetaTileEntityPreciseAssembler PRECISE_ASSEMBLER;
     public static MetaTileEntityHugeElectricImplosionCompressor HUGE_ELECTRRIC_IMPLOSION_COMPRESSOR;
     public static MetaTileEntityFlotationFactory FLOTATION_FACTORY;
@@ -273,7 +273,8 @@ public class GTQTMetaTileEntities {
         PYROLYSIS_TOWER = registerMetaTileEntity(3091, new MetaTileEntityPyrolysisTower(gtqtcoreId("pyrolysis_tower")));
         PRECISE_ASSEMBLER = registerMetaTileEntity(3092, new MetaTileEntityPreciseAssembler(gtqtcoreId("precise_assembler")));
         PARTICLE_ACCELERATOR = registerMetaTileEntity(3093, new MetaTileEntityParticleAccelerator(gtqtcoreId("particle_accelerator")));
-
+        LARGE_CHEMICAL_REACTOR = registerMetaTileEntity(3094, new MetaTileEntityLargeChemicalReactor(gtqtcoreId("large_chemical_reactor")));
+        BIOLOGICAL_REACTION=registerMetaTileEntity(3095,new MetaTileEntityBiologicalReaction(gtqtcoreId(("biological_reaction"))));
 
         registerSimpleMetaTileEntity(FLUID_EXTRACTOR, 15000, "fluid_extractor", GTQTcoreRecipeMaps.FLUID_EXTRACTOR_RECIPES, Textures.EXTRACTOR_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
         registerSimpleMetaTileEntity(FLUID_CANNER, 15015, "fluid_canner", GTQTcoreRecipeMaps.FLUID_CANNER_RECIPES, Textures.CANNER_OVERLAY, true,GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
