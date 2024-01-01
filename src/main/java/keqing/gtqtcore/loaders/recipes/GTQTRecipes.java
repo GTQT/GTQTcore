@@ -3,6 +3,7 @@ package keqing.gtqtcore.loaders.recipes;
 import gregtech.api.GTValues;
 import gregtech.api.capability.GregtechCapabilities;
 import gregtech.api.capability.IElectricItem;
+import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.recipes.ModHandler;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.OreDictUnifier;
@@ -14,6 +15,7 @@ import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.UnificationEntry;
 import gregtech.api.util.GTUtility;
 import gregtech.common.items.MetaItems;
+import gregtech.common.metatileentities.MetaTileEntities;
 import gregtechfoodoption.recipe.GTFORecipeMaps;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.unification.ore.GTQTOrePrefix;
@@ -26,11 +28,10 @@ import static gregtech.api.GTValues.*;
 import static gregtech.api.unification.material.Materials.RawGrowthMedium;
 import static gregtech.api.unification.ore.OrePrefix.plate;
 import static gregtech.api.unification.ore.OrePrefix.stickLong;
-import static gregtech.common.items.MetaItems.POWER_UNIT_HV;
+import static gregtech.common.items.MetaItems.*;
 import static gregtech.loaders.recipe.handlers.ToolRecipeHandler.addToolRecipe;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.*;
-import static keqing.gtqtcore.common.items.metaitems.GTQTMetaToolItems.Choocher_HV;
-import static keqing.gtqtcore.common.items.metaitems.GTQTMetaToolItems.Jinitaimei_HV;
+import static keqing.gtqtcore.common.items.metaitems.GTQTMetaToolItems.*;
 
 public class GTQTRecipes {
 
@@ -186,6 +187,7 @@ public class GTQTRecipes {
 
     private static void gcmTool(OrePrefix prefix, Material material, ToolProperty property) {
         UnificationEntry plate = new UnificationEntry(OrePrefix.plate, material);
+        UnificationEntry stick = new UnificationEntry(OrePrefix.stick, material);
         UnificationEntry ingot = new UnificationEntry(material.hasProperty(PropertyKey.GEM) ? OrePrefix.gem : OrePrefix.ingot, material);
         //tools
         if (material.hasFlag(MaterialFlags.GENERATE_LONG_ROD)) {
@@ -198,6 +200,24 @@ public class GTQTRecipes {
                 }
             }
         }
+        if (property.getToolDurability() > 0) {
+            ItemStack[] powerUnits = {POWER_UNIT_IV.getMaxChargeOverrideStack(40960000L), POWER_UNIT_IV.getMaxChargeOverrideStack(250000000L)};
+            for (int i = 0; i < powerUnits.length; i++) {
+                IElectricItem powerUnit = powerUnits[i].getCapability(GregtechCapabilities.CAPABILITY_ELECTRIC_ITEM, null);
+                ItemStack toolItem = VAJRA.get(material, 0, powerUnit.getMaxCharge());
+                ModHandler.addShapedEnergyTransferRecipe(String.format("%s_%s_%s", "vajra", material, i),
+                        toolItem,
+                        Ingredient.fromStacks(powerUnits[i]), true, true,
+                        "KIK", "POP", "TST",
+                        'O', MetaItems.EMITTER_UV,
+                        'K', stick,
+                        'I', MetaItems.FIELD_GENERATOR_UV,
+                        'P', plate,
+                        'T', MetaItems.ELECTRIC_MOTOR_IV,
+                        'S', powerUnits[i]);
+            }
+        }
+
         if (property.getToolDurability() > 0) {
             ItemStack[] powerUnits = {POWER_UNIT_HV.getMaxChargeOverrideStack(1800000L), POWER_UNIT_HV.getMaxChargeOverrideStack(1600000L), POWER_UNIT_HV.getMaxChargeOverrideStack(1200000L), POWER_UNIT_HV.getMaxChargeOverrideStack(6400000L)};
             for (int i = 0; i < powerUnits.length; i++) {
@@ -228,6 +248,86 @@ public class GTQTRecipes {
                         'S', powerUnits[i]);
             }
         }
+
+        if (property.getToolDurability() > 0) {
+            ItemStack[] powerUnits = {POWER_UNIT_LV.getMaxChargeOverrideStack(80000L), POWER_UNIT_LV.getMaxChargeOverrideStack(100000L), POWER_UNIT_LV.getMaxChargeOverrideStack(120000L)};
+            for (int i = 0; i < powerUnits.length; i++) {
+                IElectricItem powerUnit = powerUnits[i].getCapability(GregtechCapabilities.CAPABILITY_ELECTRIC_ITEM, null);
+                ItemStack toolItem = HARD_HAMMER_LV.get(material, 0, powerUnit.getMaxCharge());
+                ModHandler.addShapedEnergyTransferRecipe(String.format("%s_%s_%s", "hammer_lv", material, i),
+                        toolItem,
+                        Ingredient.fromStacks(powerUnits[i]), true, true,
+                        "PIP", "PTP", "dSd",
+                        'I', ingot,
+                        'P', plate,
+                        'T', MetaItems.ELECTRIC_MOTOR_LV,
+                        'S', powerUnits[i]);
+            }
+        }
+        if (property.getToolDurability() > 0) {
+            ItemStack[] powerUnits = {POWER_UNIT_MV.getMaxChargeOverrideStack(360000L), POWER_UNIT_MV.getMaxChargeOverrideStack(400000L), POWER_UNIT_MV.getMaxChargeOverrideStack(420000L)};
+            for (int i = 0; i < powerUnits.length; i++) {
+                IElectricItem powerUnit = powerUnits[i].getCapability(GregtechCapabilities.CAPABILITY_ELECTRIC_ITEM, null);
+                ItemStack toolItem = HARD_HAMMER_MV.get(material, 0, powerUnit.getMaxCharge());
+                ModHandler.addShapedEnergyTransferRecipe(String.format("%s_%s_%s", "hammer_mv", material, i),
+                        toolItem,
+                        Ingredient.fromStacks(powerUnits[i]), true, true,
+                        "PIP", "PTP", "dSd",
+                        'I', ingot,
+                        'P', plate,
+                        'T', MetaItems.ELECTRIC_MOTOR_MV,
+                        'S', powerUnits[i]);
+            }
+        }
+
+        if (property.getToolDurability() > 0) {
+            ItemStack[] powerUnits = {POWER_UNIT_HV.getMaxChargeOverrideStack(1800000L), POWER_UNIT_HV.getMaxChargeOverrideStack(1600000L), POWER_UNIT_HV.getMaxChargeOverrideStack(1200000L), POWER_UNIT_HV.getMaxChargeOverrideStack(6400000L)};
+            for (int i = 0; i < powerUnits.length; i++) {
+                IElectricItem powerUnit = powerUnits[i].getCapability(GregtechCapabilities.CAPABILITY_ELECTRIC_ITEM, null);
+                ItemStack toolItem = HARD_HAMMER_HV.get(material, 0, powerUnit.getMaxCharge());
+                ModHandler.addShapedEnergyTransferRecipe(String.format("%s_%s_%s", "hammer_hv", material, i),
+                        toolItem,
+                        Ingredient.fromStacks(powerUnits[i]), true, true,
+                        "PIP", "PTP", "dSd",
+                        'I', ingot,
+                        'P', plate,
+                        'T', MetaItems.ELECTRIC_MOTOR_HV,
+                        'S', powerUnits[i]);
+            }
+        }
+
+        if (property.getToolDurability() > 0) {
+            ItemStack[] powerUnits = {POWER_UNIT_EV.getMaxChargeOverrideStack(10240000L), POWER_UNIT_EV.getMaxChargeOverrideStack(25000000L)};
+            for (int i = 0; i < powerUnits.length; i++) {
+                IElectricItem powerUnit = powerUnits[i].getCapability(GregtechCapabilities.CAPABILITY_ELECTRIC_ITEM, null);
+                ItemStack toolItem = HARD_HAMMER_EV.get(material, 0, powerUnit.getMaxCharge());
+                ModHandler.addShapedEnergyTransferRecipe(String.format("%s_%s_%s", "hammer_ev", material, i),
+                        toolItem,
+                        Ingredient.fromStacks(powerUnits[i]), true, true,
+                        "PIP", "PTP", "dSd",
+                        'I', ingot,
+                        'P', plate,
+                        'T', MetaItems.ELECTRIC_MOTOR_EV,
+                        'S', powerUnits[i]);
+            }
+        }
+
+        if (property.getToolDurability() > 0) {
+            ItemStack[] powerUnits = {POWER_UNIT_IV.getMaxChargeOverrideStack(40960000L), POWER_UNIT_IV.getMaxChargeOverrideStack(250000000L)};
+            for (int i = 0; i < powerUnits.length; i++) {
+                IElectricItem powerUnit = powerUnits[i].getCapability(GregtechCapabilities.CAPABILITY_ELECTRIC_ITEM, null);
+                ItemStack toolItem = HARD_HAMMER_IV.get(material, 0, powerUnit.getMaxCharge());
+                ModHandler.addShapedEnergyTransferRecipe(String.format("%s_%s_%s", "hammer_iv", material, i),
+                        toolItem,
+                        Ingredient.fromStacks(powerUnits[i]), true, true,
+                        "PIP", "PTP", "dSd",
+                        'I', ingot,
+                        'P', plate,
+                        'T', MetaItems.ELECTRIC_MOTOR_IV,
+                        'S', powerUnits[i]);
+            }
+        }
+
     }
 
 

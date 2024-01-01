@@ -111,7 +111,6 @@ public class EPMaterialFlagAddition {
         TungstenCarbide.addFlags(GENERATE_CURVED_PLATE);
         TungstenSteel.addFlags(GENERATE_CURVED_PLATE);
         VanadiumSteel.addFlags(GENERATE_CURVED_PLATE);
-
         /*
          *  CEu Vanilla Item Pipes
          *  Americium

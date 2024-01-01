@@ -1,10 +1,14 @@
 package keqing.gtqtcore.common.items;
 
+import gregtech.api.GTValues;
 import gregtech.api.GregTechAPI;
+import gregtech.api.items.metaitem.ElectricStats;
 import gregtech.api.items.metaitem.MetaItem;
 import gregtech.api.items.metaitem.StandardMetaItem;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.Materials;
+import gregtech.common.items.behaviors.MultiblockBuilderBehavior;
+import gregtech.common.items.behaviors.ProspectorScannerBehavior;
 import gregtechfoodoption.block.GTFOCrops;
 import gregtechfoodoption.item.GTFOCropSeedBehaviour;
 import keqing.gtqtcore.common.CommonProxy;
@@ -91,7 +95,19 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         WRAP_CIRCUIT_OpV = this.addItem(413, "wrap.circuit.opv");
         WRAP_CIRCUIT_MAX = this.addItem(414, "wrap.circuit.max");
 
+        PROSPECTOR_UV = addItem(415, "prospector.uv")
+                .addComponents(ElectricStats.createElectricItem(16_000_000_000L, GTValues.UV),
+                        new ProspectorScannerBehavior(7, GTValues.UV))
+                .setMaxStackSize(1)
+                .setCreativeTabs(GregTechAPI.TAB_GREGTECH_TOOLS);
+
+        PROSPECTOR_UV = addItem(416, "prospector.uiv")
+                .addComponents(ElectricStats.createElectricItem(256_000_000_000L, GTValues.UIV),
+                        new ProspectorScannerBehavior(9, GTValues.UIV))
+                .setMaxStackSize(1)
+                .setCreativeTabs(GregTechAPI.TAB_GREGTECH_TOOLS);
+
         DEBUG_STRUCTURE_WRITER = this.addItem(9999, "debug.structure_writer").addComponents(StructureWriteBehavior.INSTANCE);
-        DEBUG_STRUCTURE_BUILDER = this.addItem(10000, "debug.structure_builder");
+        DEBUG_STRUCTURE_BUILDER = this.addItem(10000, "debug.structure_builder").addComponents(new MultiblockBuilderBehavior());
     }
 }

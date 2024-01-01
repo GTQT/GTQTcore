@@ -208,9 +208,9 @@ public class GTQTMetaTileEntities {
         NAQUADAH_REACTOR_MKIII = registerMetaTileEntity(3033, new MetaTileEntityNaquadahReactorMkiii(gtqtcoreId("naquadah_reactor_mkiii")));
         LAGER_HEAT_EXCHANGER = registerMetaTileEntity(3034, new MetaTileEntityLagerHeatExchanger(gtqtcoreId("lager_heat_exchanger")));
         DANGOTE_DISTILLERY = registerMetaTileEntity(3035, new MetaTileEntityDangoteDistillery(gtqtcoreId("dangote_distillery")));
-        BASIC_HUGE_MINER = registerMetaTileEntity(3036, new MetaTileEntityHugeMiner(gtqtcoreId("large_miner.zpm"), GTValues.ZPM, 1, 9, 7, Materials.Steel, 64));
-        HUGE_MINER = registerMetaTileEntity(3037, new MetaTileEntityHugeMiner(gtqtcoreId("large_miner.uv"), GTValues.UV, 1, 11, 8, Materials.Titanium, 128));
-        ADVANCED_HUGE_MINER = registerMetaTileEntity(3038, new MetaTileEntityHugeMiner(gtqtcoreId("large_miner.uhv"), GTValues.UHV, 1, 13, 9, Materials.TungstenSteel, 256));
+        BASIC_HUGE_MINER = registerMetaTileEntity(3036, new MetaTileEntityHugeMiner(gtqtcoreId("large_miner.zpm"), GTValues.ZPM, 1, 9, 7,  64));
+        HUGE_MINER = registerMetaTileEntity(3037, new MetaTileEntityHugeMiner(gtqtcoreId("large_miner.uv"), GTValues.UV, 1, 11, 8,  128));
+        ADVANCED_HUGE_MINER = registerMetaTileEntity(3038, new MetaTileEntityHugeMiner(gtqtcoreId("large_miner.uhv"), GTValues.UHV, 1, 13, 9 , 256));
         HUGE_FUSION_REACTOR[0] = registerMetaTileEntity(3039, new MetaTileEntityHugeFusionReactor(gtqtcoreId("fusion_reactor.uhv"), GTValues.UHV));
         HUGE_FUSION_REACTOR[1] = registerMetaTileEntity(3040, new MetaTileEntityHugeFusionReactor(gtqtcoreId("fusion_reactor.uev"), GTValues.UEV));
         HUGE_FUSION_REACTOR[2] = registerMetaTileEntity(3041, new MetaTileEntityHugeFusionReactor(gtqtcoreId("fusion_reactor.uiv"), GTValues.UIV));

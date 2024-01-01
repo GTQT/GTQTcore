@@ -5,6 +5,7 @@ import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
 import com.google.common.collect.Lists;
+import gregicality.science.api.unification.materials.GCYSMaterials;
 import gregtech.api.GTValues;
 import gregtech.api.capability.*;
 import gregtech.api.capability.impl.EnergyContainerList;
@@ -17,6 +18,7 @@ import gregtech.api.gui.Widget;
 import gregtech.api.gui.widgets.AdvancedTextWidget;
 import gregtech.api.gui.widgets.ImageCycleButtonWidget;
 import gregtech.api.metatileentity.IDataInfoProvider;
+import gregtech.api.metatileentity.IFastRenderMetaTileEntity;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
@@ -30,12 +32,28 @@ import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.util.GTUtility;
+import gregtech.api.util.RelativeDirection;
+import gregtech.api.util.interpolate.Eases;
 import gregtech.client.renderer.ICubeRenderer;
+import gregtech.client.renderer.IRenderSetup;
 import gregtech.client.renderer.texture.Textures;
+import gregtech.client.shader.postprocessing.BloomEffect;
+import gregtech.client.shader.postprocessing.BloomType;
+import gregtech.client.utils.*;
+import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.core.sound.GTSoundEvents;
+import keqing.gtqtcore.client.textures.GTQTTextures;
+import keqing.gtqtcore.common.block.GTQTMetaBlocks;
+import keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing;
+import keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing1;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.BufferBuilder;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.OpenGlHelper;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -46,6 +64,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.*;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
@@ -54,6 +73,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
+import org.lwjgl.opengl.GL11;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -62,12 +82,12 @@ import java.util.List;
 
 import static gregtech.api.unification.material.Materials.DrillingFluid;
 
-public class MetaTileEntityHugeMiner extends MultiblockWithDisplayBase implements IMiner, IControllable, IDataInfoProvider {
+public class MetaTileEntityHugeMiner extends MultiblockWithDisplayBase implements IMiner, IControllable, IDataInfoProvider, IFastRenderMetaTileEntity, IBloomEffect {
 
     private static final int CHUNK_LENGTH = 16;
 
-    private final Material material;
     private final int tier;
+
 
     private IEnergyContainer energyContainer;
     protected IMultipleTankHandler inputFluidInventory;
@@ -82,9 +102,8 @@ public class MetaTileEntityHugeMiner extends MultiblockWithDisplayBase implement
 
     private final MultiblockMinerLogic minerLogic;
 
-    public MetaTileEntityHugeMiner(ResourceLocation metaTileEntityId, int tier, int speed, int maximumChunkDiameter, int fortune, Material material, int drillingFluidConsumePerTick) {
+    public MetaTileEntityHugeMiner(ResourceLocation metaTileEntityId, int tier, int speed, int maximumChunkDiameter, int fortune, int drillingFluidConsumePerTick) {
         super(metaTileEntityId);
-        this.material = material;
         this.tier = tier;
         this.drillingFluidConsumePerTick = drillingFluidConsumePerTick;
         this.minerLogic = new MultiblockMinerLogic(this, fortune, speed, maximumChunkDiameter * CHUNK_LENGTH / 2, RecipeMaps.MACERATOR_RECIPES);
@@ -92,12 +111,13 @@ public class MetaTileEntityHugeMiner extends MultiblockWithDisplayBase implement
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
-        return new MetaTileEntityHugeMiner(metaTileEntityId, this.tier, this.minerLogic.getSpeed(), this.minerLogic.getMaximumRadius() * 2 / CHUNK_LENGTH, this.minerLogic.getFortune(), getMaterial(), getDrillingFluidConsumePerTick());
+        return new MetaTileEntityHugeMiner(metaTileEntityId, this.tier, this.minerLogic.getSpeed(), this.minerLogic.getMaximumRadius() * 2 / CHUNK_LENGTH, this.minerLogic.getFortune(),  getDrillingFluidConsumePerTick());
     }
 
     @Override
     public void invalidateStructure() {
         super.invalidateStructure();
+        this.setFusionRingColor(NO_COLOR);
         resetTileAbilities();
         if (this.minerLogic.isActive())
             this.minerLogic.setActive(false);
@@ -107,6 +127,7 @@ public class MetaTileEntityHugeMiner extends MultiblockWithDisplayBase implement
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
         initializeAbilities();
+
     }
 
     private void initializeAbilities() {
@@ -163,11 +184,14 @@ public class MetaTileEntityHugeMiner extends MultiblockWithDisplayBase implement
 
     @Override
     protected void updateFormedValid() {
+
         this.minerLogic.performMining();
         if (!getWorld().isRemote && this.minerLogic.wasActiveAndNeedsUpdate()) {
             this.minerLogic.setWasActiveAndNeedsUpdate(false);
             this.minerLogic.setActive(false);
         }
+            setFusionRingColor(NO_COLOR);
+
     }
 
     @Nonnull
@@ -176,9 +200,9 @@ public class MetaTileEntityHugeMiner extends MultiblockWithDisplayBase implement
         return FactoryBlockPattern.start()
                 .aisle("#######", "###C###", "#######", "#######", "#######", "#######", "#######")
                 .aisle("#######", "##CCC##", "#######", "#######", "#######", "#######", "#######")
-                .aisle("#######", "#CCCCC#", "###X###", "###X###", "###C###", "###C###", "#######")
-                .aisle("###C###", "CCCFCCC", "##XFX##", "##XFX##", "##CFC##", "##CFC##", "###F###")
-                .aisle("#######", "#CCCCC#", "###S###", "###X###", "###C###", "###C###", "#######")
+                .aisle("###C###", "#CCCCC#", "###X###", "###X###", "###C###", "###C###", "#######")
+                .aisle("##C#C##", "CCC#CCC", "##X#X##", "##X#X##", "##C#C##", "##C#C##", "###S###")
+                .aisle("###C###", "#CCCCC#", "###X###", "###X###", "###C###", "###C###", "#######")
                 .aisle("#######", "##CCC##", "#######", "#######", "#######", "#######", "#######")
                 .aisle("#######", "###C###", "#######", "#######", "#######", "#######", "#######")
                 .where('S', selfPredicate())
@@ -276,30 +300,30 @@ public class MetaTileEntityHugeMiner extends MultiblockWithDisplayBase implement
     }
 
     public IBlockState getCasingState() {
-        if (this.material.equals(Materials.Titanium))
-            return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.TITANIUM_STABLE);
-        if (this.material.equals(Materials.TungstenSteel))
-            return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.TUNGSTENSTEEL_ROBUST);
-        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STEEL_SOLID);
+        if (this.tier==7)
+            return GTQTMetaBlocks.TURBINE_CASING.getState(GTQTTurbineCasing.TurbineCasingType.PD_TURBINE_CASING);
+        if (this.tier==8)
+            return GTQTMetaBlocks.TURBINE_CASING.getState(GTQTTurbineCasing.TurbineCasingType.NQ_TURBINE_CASING);
+        return GTQTMetaBlocks.TURBINE_CASING1.getState(GTQTTurbineCasing1.TurbineCasingType.ST_TURBINE_CASING);
     }
 
     @Nonnull
     private TraceabilityPredicate getFramePredicate() {
-        if (this.material.equals(Materials.Titanium))
-            return frames(Materials.Titanium);
-        if (this.material.equals(Materials.TungstenSteel))
-            return frames(Materials.TungstenSteel);
-        return frames(Materials.Steel);
+        if (this.tier==7)
+            return frames(Materials.RhodiumPlatedPalladium);
+        if (this.tier==8)
+            return frames(Materials.NaquadahAlloy);
+        return frames(GCYSMaterials.Orichalcum);
     }
 
     @SideOnly(Side.CLIENT)
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
-        if (this.material.equals(Materials.Titanium))
-            return Textures.STABLE_TITANIUM_CASING;
-        if (this.material.equals(Materials.TungstenSteel))
-            return Textures.ROBUST_TUNGSTENSTEEL_CASING;
-        return Textures.SOLID_STEEL_CASING;
+        if (this.tier==7)
+            return GTQTTextures.PD_CASING;
+        if (this.tier==8)
+            return GTQTTextures.NQ_CASING;
+        return GTQTTextures.ST_CASING;
     }
 
     @Override
@@ -323,6 +347,7 @@ public class MetaTileEntityHugeMiner extends MultiblockWithDisplayBase implement
     public void writeInitialSyncData(PacketBuffer buf) {
         super.writeInitialSyncData(buf);
         this.minerLogic.writeInitialSyncData(buf);
+        buf.writeVarInt(this.fusionRingColor);
     }
 
     @Override
@@ -458,10 +483,6 @@ public class MetaTileEntityHugeMiner extends MultiblockWithDisplayBase implement
         this.isInventoryFull = isFull;
     }
 
-    public Material getMaterial() {
-        return material;
-    }
-
     public int getTier() {
         return this.tier;
     }
@@ -514,8 +535,146 @@ public class MetaTileEntityHugeMiner extends MultiblockWithDisplayBase implement
         return Collections.singletonList(new TextComponentTranslation("gregtech.machine.miner.working_area", workingArea, workingArea));
     }
 
+
+
+
+    protected static final int NO_COLOR = 0;
+    private int fusionRingColor = NO_COLOR;
+    private boolean registeredBloomRenderTicket;
     @Override
     protected boolean shouldShowVoidingModeButton() {
         return false;
+    }
+    protected int getFusionRingColor() {
+        return this.fusionRingColor;
+    }
+    protected boolean hasFusionRingColor() {
+        return true;
+    }
+    protected void setFusionRingColor(int fusionRingColor) {
+        if (this.fusionRingColor != fusionRingColor) {
+            this.fusionRingColor = fusionRingColor;
+            writeCustomData(GregtechDataCodes.UPDATE_COLOR, buf -> buf.writeVarInt(fusionRingColor));
+        }
+    }
+
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void renderMetaTileEntity(double x, double y, double z, float partialTicks) {
+        if (this.hasFusionRingColor() && !this.registeredBloomRenderTicket) {
+            this.registeredBloomRenderTicket = true;
+            BloomEffectUtil.registerBloomRender(FusionBloomSetup.INSTANCE, getBloomType(), this, this);
+        }
+    }
+    private static BloomType getBloomType() {
+        ConfigHolder.FusionBloom fusionBloom = ConfigHolder.client.shader.fusionBloom;
+        return BloomType.fromValue(fusionBloom.useShader ? fusionBloom.bloomStyle : -1);
+    }
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void renderBloomEffect(BufferBuilder buffer, EffectRenderContext context) {
+        int color = RenderUtil.interpolateColor(this.getFusionRingColor(), -1, Eases.QUAD_IN.getInterpolation(
+                Math.abs((Math.abs(getOffsetTimer() % 50) + context.partialTicks()) - 25) / 25));
+        float a = (float) (color >> 24 & 255) / 255.0F;
+        float r = (float) (color >> 16 & 255) / 255.0F;
+        float g = (float) (color >> 8 & 255) / 255.0F;
+        float b = (float) (color & 255) / 255.0F;
+        EnumFacing relativeBack = RelativeDirection.BACK.getRelativeFacing(getFrontFacing(), getUpwardsFacing(),
+                isFlipped());
+        EnumFacing.Axis axis = RelativeDirection.UP.getRelativeFacing(getFrontFacing(), getUpwardsFacing(), isFlipped())
+                .getAxis();
+
+        RenderBufferHelper.renderRing(buffer,
+                getPos().getX() - context.cameraX() + relativeBack.getXOffset()+0.75,
+                getPos().getY() - context.cameraY() + relativeBack.getYOffset() ,
+                getPos().getZ() - context.cameraZ() + relativeBack.getZOffset()+0.75,
+                10, 0.2, 10, 20,
+                r, g, b, a, EnumFacing.Axis.Y);
+
+        RenderBufferHelper.renderRing(buffer,
+                getPos().getX() - context.cameraX() + relativeBack.getXOffset()+0.75,
+                getPos().getY() - context.cameraY() + relativeBack.getYOffset()-5 ,
+                getPos().getZ() - context.cameraZ() + relativeBack.getZOffset()+0.75,
+                8, 0.2, 10, 20,
+                r, g, b, a, EnumFacing.Axis.Y);
+
+        RenderBufferHelper.renderRing(buffer,
+                getPos().getX() - context.cameraX() + relativeBack.getXOffset()+0.75,
+                getPos().getY() - context.cameraY() + relativeBack.getYOffset()-10 ,
+                getPos().getZ() - context.cameraZ() + relativeBack.getZOffset()+0.75,
+                4, 0.2, 10, 20,
+                r, g, b, a, EnumFacing.Axis.Y);
+
+        for(int i=0;i<40;i++) {
+            RenderBufferHelper.renderRing(buffer,
+                    getPos().getX() - context.cameraX() + relativeBack.getXOffset()+0.75,
+                    getPos().getY() - context.cameraY() + relativeBack.getYOffset() - 20-i*5,
+                    getPos().getZ() - context.cameraZ() + relativeBack.getZOffset()+0.75,
+                    2, 0.2, 10, 20,
+                    r, g, b, a, EnumFacing.Axis.Y);
+
+        }
+
+
+    }
+    @Override
+    @SideOnly(Side.CLIENT)
+    public boolean shouldRenderBloomEffect( EffectRenderContext context) {
+        return this.hasFusionRingColor();
+    }
+    @Override
+    public AxisAlignedBB getRenderBoundingBox() {
+        EnumFacing relativeRight = RelativeDirection.RIGHT.getRelativeFacing(getFrontFacing(), getUpwardsFacing(),
+                isFlipped());
+        EnumFacing relativeBack = RelativeDirection.BACK.getRelativeFacing(getFrontFacing(), getUpwardsFacing(),
+                isFlipped());
+
+        return new AxisAlignedBB(
+                this.getPos().offset(relativeBack).offset(relativeRight, 6),
+                this.getPos().offset(relativeBack, 13).offset(relativeRight.getOpposite(), 6));
+    }
+
+    @Override
+    public boolean shouldRenderInPass(int pass) {
+        return pass == 0;
+    }
+
+    @Override
+    public boolean isGlobalRenderer() {
+        return true;
+    }
+    @SideOnly(Side.CLIENT)
+    private static final class FusionBloomSetup implements IRenderSetup {
+
+        private static final FusionBloomSetup INSTANCE = new FusionBloomSetup();
+
+        float lastBrightnessX;
+        float lastBrightnessY;
+
+        @Override
+        public void preDraw( BufferBuilder buffer) {
+            BloomEffect.strength = (float) ConfigHolder.client.shader.fusionBloom.strength;
+            BloomEffect.baseBrightness = (float) ConfigHolder.client.shader.fusionBloom.baseBrightness;
+            BloomEffect.highBrightnessThreshold = (float) ConfigHolder.client.shader.fusionBloom.highBrightnessThreshold;
+            BloomEffect.lowBrightnessThreshold = (float) ConfigHolder.client.shader.fusionBloom.lowBrightnessThreshold;
+            BloomEffect.step = 1;
+
+            lastBrightnessX = OpenGlHelper.lastBrightnessX;
+            lastBrightnessY = OpenGlHelper.lastBrightnessY;
+            GlStateManager.color(1, 1, 1, 1);
+            OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240.0F, 240.0F);
+            GlStateManager.disableTexture2D();
+
+            buffer.begin(GL11.GL_QUAD_STRIP, DefaultVertexFormats.POSITION_COLOR);
+        }
+
+        @Override
+        public void postDraw( BufferBuilder buffer) {
+            Tessellator.getInstance().draw();
+
+            GlStateManager.enableTexture2D();
+            OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, lastBrightnessX, lastBrightnessY);
+        }
     }
 }

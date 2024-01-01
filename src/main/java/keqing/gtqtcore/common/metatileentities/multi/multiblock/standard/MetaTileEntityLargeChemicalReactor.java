@@ -53,6 +53,7 @@ public class MetaTileEntityLargeChemicalReactor extends RecipeMapMultiblockContr
     private int casingTier;
     private int tubeTier;
     private int tier;
+
     public MetaTileEntityLargeChemicalReactor(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, RecipeMaps.CHEMICAL_RECIPES);
         this.recipeMapWorkable = new LargeChemicalReactorLogic(this);

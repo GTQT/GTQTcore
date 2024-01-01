@@ -22,6 +22,13 @@ public class FuelRecipes {
 
 
                 public static void init(){
+                    BIOLOGICAL_REACTION_RECIPES.recipeBuilder()
+                            .input(screw, Hdcs, 1)
+                            .output(ingot,Iron)
+                            .EUt(VA[MV])
+                            .duration(120)
+                            .rate(60)
+                            .buildAndRegister();
 
                     PARTICLE_ACCELERATOR_RECIPES.recipeBuilder()
                             .input(screw, Hdcs, 1)
