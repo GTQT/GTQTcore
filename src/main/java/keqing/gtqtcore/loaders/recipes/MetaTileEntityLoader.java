@@ -1,6 +1,7 @@
 package keqing.gtqtcore.loaders.recipes;
 
 import gregtech.api.GTValues;
+import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.recipes.ModHandler;
 import gregtech.api.unification.material.MarkerMaterials;
 import gregtech.api.unification.material.Materials;
@@ -12,14 +13,22 @@ import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.items.MetaItems;
 import gregtech.common.metatileentities.MetaTileEntities;
 import gregtech.loaders.recipe.CraftingComponent;
+import gregtech.loaders.recipe.MachineRecipeLoader;
+import keqing.gtqtcore.api.unification.ore.GTQTOrePrefix;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 
+import static gregtech.common.metatileentities.MetaTileEntities.*;
 import static gregtech.common.metatileentities.MetaTileEntities.HULL;
+import static gregtech.loaders.recipe.CraftingComponent.*;
+import static gregtech.loaders.recipe.CraftingComponent.CABLE_QUAD;
+import static gregtech.loaders.recipe.MetaTileEntityLoader.registerMachineRecipe;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.*;
 
 
 public class MetaTileEntityLoader {
+
     public static void init() {
+
         gregtech.loaders.recipe.MetaTileEntityLoader.registerMachineRecipe(true, ULTRAVIOLET_LAMP_CHAMBER,
                 "GEG", "PHP", "WXW",
                 'E', CraftingComponent.EMITTER,

@@ -121,7 +121,7 @@ public class GTQTMetaToolItems {
                         .behaviors(TorchPlaceBehavior.INSTANCE))
                 .sound(SoundEvents.BLOCK_ANVIL_LAND)
                 .electric(GTValues.IV)
-                .toolClasses(ToolClasses.PICKAXE, ToolClasses.HARD_HAMMER));
+                .toolClasses(ToolClasses.PICKAXE, ToolClasses.HARD_HAMMER, ToolClasses.SHOVEL));
 
         VAJRA = register(ItemGTTool.Builder.of(GTQTCore.MODID, "vajra")
                 .toolStats(b -> b.blockBreaking().crafting().damagePerCraftingAction(2)
@@ -131,7 +131,7 @@ public class GTQTMetaToolItems {
                         .behaviors(TorchPlaceBehavior.INSTANCE))
                 .sound(SoundEvents.BLOCK_ANVIL_LAND)
                 .electric(GTValues.IV)
-                .toolClasses(ToolClasses.PICKAXE, ToolClasses.AXE,ToolClasses.SWORD,ToolClasses.SHOVEL,ToolClasses.HOE));
+                .toolClasses(ToolClasses.WRENCH,ToolClasses.WIRE_CUTTER,ToolClasses.PICKAXE, ToolClasses.AXE,ToolClasses.SWORD,ToolClasses.SHOVEL,ToolClasses.HOE));
     }
 
 }

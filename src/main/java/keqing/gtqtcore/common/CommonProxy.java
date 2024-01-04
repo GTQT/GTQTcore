@@ -106,6 +106,7 @@ public class CommonProxy {
         registry.register(GTQTCrops.COPPER_CROP);
         registry.register(GTQTCrops.IRON_CROP);
         registry.register(GTQTCrops.TIN_CROP);
+        registry.register(GTQTCrops.GOLD_CROP);
         registry.register(GTQTCrops.BRONZE_CROP);
         registry.register(GTQTCrops.CARBON_CROP);
 
@@ -158,6 +159,7 @@ public class CommonProxy {
     {
         GTQTLog.logger.info("Registering recipes...");
 
+
         registerCasingTier(0, "一级");
         registerCasingTier(1, "二级");
         registerCasingTier(2, "三级");
@@ -165,6 +167,10 @@ public class CommonProxy {
         registerCasingTier(4, "五级");
         registerCasingTier(5, "六级");
 
+        MDProperties.registeredTier(1,"一级");
+        MDProperties.registeredTier(2,"二级");
+        MDProperties.registeredTier(3,"三级");
+        MDProperties.registeredTier(4,"四级");
         ELEProperties.registeredTier(1,"一级");
         ELEProperties.registeredTier(2,"二级");
         ELEProperties.registeredTier(3,"三级");

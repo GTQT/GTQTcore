@@ -478,15 +478,6 @@ public class TJFirstDegreeMaterials {
                 .components(PolyvinylChloride, 1, Polyethylene, 1)
                 .build();
 
-        GalvanizedSteel = new Material.Builder(25083, gregtechId("galvanized_steel"))
-                .ingot()
-                .color(0xb5b5b5)
-                .components(Iron, 9, Zinc, 1)
-                .iconSet(MaterialIconSet.SHINY)
-                .arcSmeltInto(Steel)
-                .flags(DISABLE_DECOMPOSITION, NO_WORKING, NO_SMASHING, NO_SMELTING)
-                .build();
-
         Polyetheretherketone = new Material.Builder(25086, gregtechId("peek"))
                 .ingot()
                 .fluid()

@@ -66,7 +66,7 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<SimpleRecipeBuilder> FLOTATION_FACTORY_RECIPES;
     public static final RecipeMap<BlastRecipeBuilder> VACUUM_DRYING_FURNACE_RECIPES;
     public static final RecipeMap<GrindBallTierRecipeBuilder> ISA_MILL_GRINDER;
-
+    public static final RecipeMap<PrimitiveRecipeBuilder> OIL_POOL;
     public static final RecipeMapPseudoGroup<SimpleRecipeBuilder> PROCESSING_MODE_A;
     public static final RecipeMapPseudoGroup<SimpleRecipeBuilder> PROCESSING_MODE_B;
     public static final RecipeMapPseudoGroup<SimpleRecipeBuilder> PROCESSING_MODE_C;
@@ -74,12 +74,21 @@ public class GTQTcoreRecipeMaps {
 
     public static final RecipeMap<ComputationRecipeBuilder> CW_PRECISE_ASSEMBLER_RECIPES;
 
+    public static final RecipeMap<MDRecipeBuilder> MINING_DRILL_RECIPES;
+
+
 
     private GTQTcoreRecipeMaps() {}
     static {
         PROCESSING_MODE_A = new RecipeMapPseudoGroup<>("processing_mode_a", 1, 2, 1, 1, new SimpleRecipeBuilder(), RecipeMaps.COMPRESSOR_RECIPES, RecipeMaps.LATHE_RECIPES, RecipeMaps.POLARIZER_RECIPES, true);
         PROCESSING_MODE_B = new RecipeMapPseudoGroup<>("processing_mode_b", 2, 2, 1, 1, new SimpleRecipeBuilder(), RecipeMaps.FERMENTING_RECIPES, RecipeMaps.EXTRACTOR_RECIPES, RecipeMaps.CANNER_RECIPES, true);
         PROCESSING_MODE_C = new RecipeMapPseudoGroup<>("processing_mode_c", 2, 2, 1, 1, new SimpleRecipeBuilder(), RecipeMaps.LASER_ENGRAVER_RECIPES, RecipeMaps.AUTOCLAVE_RECIPES, RecipeMaps.FLUID_SOLIDFICATION_RECIPES, true);
+
+
+        MINING_DRILL_RECIPES= new RecipeMap<>("mining_drill", 2, 16, 1, 0, new MDRecipeBuilder(), false)
+                .setSlotOverlay(false, false, true, GuiTextures.CRUSHED_ORE_OVERLAY)
+                .setSlotOverlay(true, false, true, GuiTextures.DUST_OVERLAY)
+                .setSound(GTSoundEvents.MACERATOR);
 
         PARTICLE_ACCELERATOR_RECIPES=new RecipeMapParticleAccelerator<>("pa", 2, 1, 2, 1, new PARecipeBuilder(), false)
                 .setSound(GTSoundEvents.CHEMICAL_REACTOR);
@@ -138,6 +147,10 @@ public class GTQTcoreRecipeMaps {
                 .setSound(GTSoundEvents.BATH);
 
         ALLOY_kILN = new RecipeMap<>("alloy_klin", 2, 2, 0, 0, new PrimitiveRecipeBuilder(), false)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_MACERATE, ProgressWidget.MoveType.HORIZONTAL)
+                .setSound(GTSoundEvents.MACERATOR);
+
+        OIL_POOL = new RecipeMap<>("oil_pool", 0, 0, 1, 2, new PrimitiveRecipeBuilder(), false)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_MACERATE, ProgressWidget.MoveType.HORIZONTAL)
                 .setSound(GTSoundEvents.MACERATOR);
 

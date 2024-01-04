@@ -21,7 +21,7 @@ public class GTQTCrops extends BlockCrops {
     public static GTQTcrop COPPER_CROP = GTQTcrop.create("copper");
     public static GTQTcrop IRON_CROP = GTQTcrop.create("iron");
     public static GTQTcrop TIN_CROP = GTQTcrop.create("tin");
-
+    public static GTQTcrop GOLD_CROP = GTQTcrop.create("gold");
     public static GTQTcrop BRONZE_CROP = GTQTcrop.create("bronze");
 
     public static GTQTcrop CARBON_CROP = GTQTcrop.create("carbon");

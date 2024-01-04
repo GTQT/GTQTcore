@@ -32,7 +32,7 @@ public class GTQTElementMaterials {
                 .iconSet(SHINY)
                 .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_ROTOR, GENERATE_ROD, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_FRAME, GENERATE_DENSE)
                 .element(GTQTElements.Draconium)
-                .toolStats(ToolProperty.Builder.of(7.0F, 25.0F, 17000, 22)
+                .toolStats(ToolProperty.Builder.of(7.0F, 25.0F, 17000, 8)
                         .magnetic()
                         .enchantment(Enchantments.EFFICIENCY, 5)
                         .enchantment(Enchantments.FORTUNE, 5)
@@ -45,7 +45,19 @@ public class GTQTElementMaterials {
                 .fluid()
                 .color(0xf58742)
                 .iconSet(BRIGHT)
-                .flags(GENERATE_PLATE, GENERATE_FOIL, GENERATE_FINE_WIRE)
+                .flags(GENERATE_PLATE, GENERATE_ROD, GENERATE_RING, GENERATE_BOLT_SCREW, GENERATE_GEAR, GENERATE_ROTOR,
+                        GENERATE_FRAME,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROUND,GENERATE_SMALL_GEAR
+                        ,GENERATE_SPRING,GENERATE_SPRING_SMALL)
+                .rotorStats(18.0f, 10.0f, 20000)
+                .toolStats(ToolProperty.Builder.of(10.0F, 30.0F, 28000, 9)
+                        .attackSpeed(0.1F).enchantability(21)
+                        .unbreakable()
+                        .enchantability(33)
+                        .magnetic()
+                        .enchantment(Enchantments.EFFICIENCY, 5)
+                        .enchantment(Enchantments.FORTUNE, 5)
+                        .build())
+
                 .element(GTQTElements.AwakenedDraconium)
                 .blast(10800, BlastProperty.GasTier.HIGHER)
                 .cableProperties(V[UHV], 16, 4)
@@ -106,6 +118,15 @@ public class GTQTElementMaterials {
                 .color(0x323232)
                 .iconSet(BRIGHT)
                 .flags(NO_SMELTING, NO_SMASHING)
+                .toolStats(ToolProperty.Builder.of(40.0F, 20.0F, 25600, 7)
+                        .attackSpeed(0.1F).enchantability(21)
+                        .unbreakable()
+                        .enchantability(33)
+                        .magnetic()
+                        .enchantment(Enchantments.EFFICIENCY, 3)
+                        .enchantment(Enchantments.FORTUNE, 2)
+                        .enchantment(Enchantments.SHARPNESS, 2).build())
+
                 .element(GTQTElements.CosmicNeutronium)
                 .cableProperties(V[UIV], 256, 128, false)
                 .build();
@@ -126,6 +147,16 @@ public class GTQTElementMaterials {
                 .iconSet(CUSTOM_INFINITY)
                 .element(GTQTElements.Infinity)
                 .blast(12600, BlastProperty.GasTier.HIGHER)
+                .rotorStats(18.0f, 10.0f, 128000)
+                .toolStats(ToolProperty.Builder.of(40.0F, 20.0F, 512000, 8)
+                        .attackSpeed(0.1F).enchantability(21)
+                        .unbreakable()
+                        .enchantability(33)
+                        .magnetic()
+                        .enchantment(Enchantments.EFFICIENCY, 5)
+                        .enchantment(Enchantments.FORTUNE, 4)
+                        .enchantment(Enchantments.SHARPNESS, 3).build())
+
                 .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_RING, GENERATE_ROUND, GENERATE_BOLT_SCREW, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR,GENERATE_ROTOR)
                 .build();
         //  26015 Rhugnor
@@ -137,6 +168,10 @@ public class GTQTElementMaterials {
                 .element(GTQTElements.Rhugnor)
                 .blast(12800, BlastProperty.GasTier.HIGHER)
                 .flags(GENERATE_PLATE)
+                .rotorStats(18.0f, 10.0f, 64000)
+                .toolStats(ToolProperty.Builder.of(40.0F, 20.0F, 25600, 8)
+                        .attackSpeed(0.1F).enchantability(21).build())
+                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_RING, GENERATE_ROUND, GENERATE_BOLT_SCREW, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR,GENERATE_ROTOR)
                 .build();
         //  26016 Hypogen
         Hypogen = new Material.Builder(getMaterialsId(), gregtechId("hypogen"))
@@ -149,6 +184,8 @@ public class GTQTElementMaterials {
                         .unbreakable()
                         .enchantability(33)
                         .magnetic()
+                        .enchantment(Enchantments.EFFICIENCY, 8)
+                        .enchantment(Enchantments.FORTUNE, 5)
                         .enchantment(Enchantments.SHARPNESS, 10)
                         .enchantment(Enchantments.LOOTING, 5)
                         .enchantment(Enchantments.SWEEPING, 3).build())
@@ -182,7 +219,11 @@ public class GTQTElementMaterials {
                 //  TODO may be re-balance
                 .blast(12800, BlastProperty.GasTier.HIGHER)
                 .element(GTQTElements.CelestialTungsten)
-                .flags(GENERATE_PLATE, GENERATE_FOIL, GENERATE_ROD, GENERATE_BOLT_SCREW)
+                .rotorStats(18.0f, 10.0f, 64000)
+                .toolStats(ToolProperty.Builder.of(40.0F, 20.0F, 12800, 8)
+                        .attackSpeed(0.1F).enchantability(21).build())
+                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_RING, GENERATE_ROUND, GENERATE_BOLT_SCREW, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR,GENERATE_ROTOR)
+
                 .build();
         //  26020 Ytterbium-178
         Ytterbium178 = new Material.Builder(getMaterialsId(), gregtechId("ytterbium_178"))
@@ -191,6 +232,11 @@ public class GTQTElementMaterials {
                 .color(Ytterbium.getMaterialRGB())
                 .iconSet(SHINY)
                 .element(GTQTElements.Ytterbium178)
+                .rotorStats(18.0f, 10.0f, 64000)
+                .toolStats(ToolProperty.Builder.of(40.0F, 20.0F, 12800, 8)
+                        .attackSpeed(0.1F).enchantability(21).build())
+                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_RING, GENERATE_ROUND, GENERATE_BOLT_SCREW, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR,GENERATE_ROTOR)
+
                 .build();
         //  26021 Ichorium
         Ichorium = new Material.Builder(getMaterialsId(), gregtechId("ichorium"))
@@ -200,7 +246,11 @@ public class GTQTElementMaterials {
                 .iconSet(BRIGHT)
                 .blast(12800, BlastProperty.GasTier.HIGHER)
                 .element(GTQTElements.Ichorium)
-                .flags(GENERATE_PLATE)
+                .rotorStats(18.0f, 10.0f, 64000)
+                .toolStats(ToolProperty.Builder.of(40.0F, 20.0F, 12800, 8)
+                        .attackSpeed(0.1F).enchantability(21).build())
+                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_RING, GENERATE_ROUND, GENERATE_BOLT_SCREW, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR,GENERATE_ROTOR)
+
                 .build();
         //  26022 Ichor Liquid
         IchorLiquid = new Material.Builder(getMaterialsId(), gregtechId("ichor_liquid"))

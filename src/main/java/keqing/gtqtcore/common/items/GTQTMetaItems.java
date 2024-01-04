@@ -60,7 +60,7 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem COPPER_CROP;
     public static MetaItem<?>.MetaValueItem BRONZE_CROP;
     public static MetaItem<?>.MetaValueItem CARBON_CROP;
-
+    public static MetaItem<?>.MetaValueItem GOLD_CROP;
     public static MetaItem<?>.MetaValueItem PROSPECTOR_UV;
     public static MetaItem<?>.MetaValueItem PROSPECTOR_UIV;
     public static MetaItem<?>.MetaValueItem DEBUG_STRUCTURE_WRITER;

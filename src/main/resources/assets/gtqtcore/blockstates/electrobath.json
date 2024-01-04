@@ -37,6 +37,29 @@
         "textures": {
           "all": "gregtech:blocks/multiblock/electrobath/v_electrobath"
         }
+      },
+      "drill_head_lv": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/electrobath/drill_head_lv"
+        }
+      },
+      "drill_head_mv": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/electrobath/drill_head_mv"
+        }
+      },
+      "drill_head_hv": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/electrobath/drill_head_hv"
+        }
+      },"drill_head_ev": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/electrobath/drill_head_ev"
+        }
       }
     }
   }

@@ -46,7 +46,6 @@ public class TJMaterials {
     public static Material TriniumSteel;
     public static Material TerfenolD_H;
     public static Material TerfenolD_L;
-    public static Material GalvanizedSteel;
     public static Material LutetiumTantalate;
     public static Material Iridrhodruthenium;
     public static Material HEA_1;

@@ -1,0 +1,50 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cross"
+  },
+  "variants": {
+    "age": {
+      "0": {
+        "textures": {
+          "cross": "gtqtcore:crop/crop_gold/0"
+        }
+      },
+      "1": {
+        "textures": {
+          "cross": "gtqtcore:crop/crop_gold/1"
+        }
+      },
+      "2": {
+        "textures": {
+          "cross": "gtqtcore:crop/crop_gold/2"
+        }
+      },
+      "3": {
+        "textures": {
+          "cross": "gtqtcore:crop/crop_gold/3"
+        }
+      },
+      "4": {
+        "textures": {
+          "cross": "gtqtcore:crop/crop_gold/4"
+        }
+      },
+      "5": {
+        "textures": {
+          "cross": "gtqtcore:crop/crop_gold/5"
+        }
+      },
+      "6": {
+        "textures": {
+        "cross": "gtqtcore:crop/crop_gold/6"
+      }
+      },
+      "7": {
+        "textures": {
+        "cross": "gtqtcore:crop/crop_gold/7"
+      }
+      }
+    }
+  }
+}

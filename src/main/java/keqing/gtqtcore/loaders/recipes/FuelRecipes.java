@@ -22,6 +22,17 @@ public class FuelRecipes {
 
 
                 public static void init(){
+                    MINING_DRILL_RECIPES.recipeBuilder()
+                            .chancedOutput(ore,Copper,5000,500)
+                            .chancedOutput(ore,Iron,5000,500)
+                            .chancedOutput(ore,Tin,5000,500)
+                            .chancedOutput(ore,Coal,5000,500)
+                            .tier(1)
+                            .EUt(30)
+                            .duration(20)
+                            .circuitMeta(1)
+                            .buildAndRegister();
+
                     BIOLOGICAL_REACTION_RECIPES.recipeBuilder()
                             .input(screw, Hdcs, 1)
                             .output(ingot,Iron)

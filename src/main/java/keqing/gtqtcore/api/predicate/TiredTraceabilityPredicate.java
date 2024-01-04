@@ -36,6 +36,7 @@ public class TiredTraceabilityPredicate extends TraceabilityPredicate {
         MAP_QFT_GLASS = new Object2ObjectOpenHashMap<>();
         MAP_CAL_CASING = new Object2ObjectOpenHashMap<>();
         MAP_ELE_CASING = new Object2ObjectOpenHashMap<>();
+        MAP_DRI_CASING = new Object2ObjectOpenHashMap<>();
         MAP_PA_CASING = new Object2ObjectOpenHashMap<>();
         MAP_PA_INTERNAL_CASING = new Object2ObjectOpenHashMap<>();
 
@@ -227,8 +228,18 @@ public class TiredTraceabilityPredicate extends TraceabilityPredicate {
         TiredTraceabilityPredicate.MAP_ELE_CASING.put(GTQTMetaBlocks.ELECTROBATH.getState(GTQTElectrobath.CasingType.V_ELECTROBATH),
                 new WrappedIntTired(GTQTElectrobath.CasingType.V_ELECTROBATH, 5));
 
+        TiredTraceabilityPredicate.MAP_DRI_CASING.put(GTQTMetaBlocks.ELECTROBATH.getState(GTQTElectrobath.CasingType.DRILL_HEAD_LV),
+                new WrappedIntTired(GTQTElectrobath.CasingType.DRILL_HEAD_LV, 1));
+        TiredTraceabilityPredicate.MAP_DRI_CASING.put(GTQTMetaBlocks.ELECTROBATH.getState(GTQTElectrobath.CasingType.DRILL_HEAD_MV),
+                new WrappedIntTired(GTQTElectrobath.CasingType.DRILL_HEAD_MV, 2));
+        TiredTraceabilityPredicate.MAP_DRI_CASING.put(GTQTMetaBlocks.ELECTROBATH.getState(GTQTElectrobath.CasingType.DRILL_HEAD_HV),
+                new WrappedIntTired(GTQTElectrobath.CasingType.DRILL_HEAD_HV, 3));
+        TiredTraceabilityPredicate.MAP_DRI_CASING.put(GTQTMetaBlocks.ELECTROBATH.getState(GTQTElectrobath.CasingType.DRILL_HEAD_EV),
+                new WrappedIntTired(GTQTElectrobath.CasingType.DRILL_HEAD_EV, 4));
+
     }
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_QFT_GLASS;
+    public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_DRI_CASING;
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_QFT_SHIELDING_CORE;
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_QFT_MANIPULATOR;
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_ESSENTIA_CELLS;
@@ -249,7 +260,8 @@ public class TiredTraceabilityPredicate extends TraceabilityPredicate {
             Comparator.comparing((s) -> ((WrappedIntTired)MAP_PA_INTERNAL_CASING.get(s)).getIntTier()), "PAI", null);
     public static TraceabilityPredicate CP_ELE_CASING = new TiredTraceabilityPredicate(MAP_ELE_CASING,
             Comparator.comparing((s) -> ((WrappedIntTired)MAP_ELE_CASING.get(s)).getIntTier()),"Ele",null);
-
+    public static TraceabilityPredicate CP_DRI_CASING = new TiredTraceabilityPredicate(MAP_DRI_CASING,
+            Comparator.comparing((s) -> ((WrappedIntTired)MAP_DRI_CASING.get(s)).getIntTier()),"Dri",null);
     public static TraceabilityPredicate MACHINE_CASINGS = new TiredTraceabilityPredicate(MAP_MACHINE_CASING,"MachineCasingType",null);
 
     public static TraceabilityPredicate ESSENTIA_CELLS = new TiredTraceabilityPredicate(MAP_ESSENTIA_CELLS,"ESS_CELL","gc.multiblock.pattern.error.essentia")

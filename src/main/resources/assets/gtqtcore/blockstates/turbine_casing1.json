@@ -49,6 +49,18 @@
         "textures": {
           "all": "gregtech:blocks/multiblock/casing/precise_assembler_casing_mk3"
         }
+      },
+      "galvanize_steel_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casing/galvanize_steel_casing"
+        }
+      },
+      "zhu": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casing/zhu"
+        }
       }
     }
   }

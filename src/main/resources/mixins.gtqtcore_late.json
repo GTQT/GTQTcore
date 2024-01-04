@@ -1,0 +1,14 @@
+{
+  "package": "keqing.gtqtcore.mixin",
+  "required": true,
+  "refmap": "${mixin_refmap}",
+  "target": "@env(DEFAULT)",
+  "minVersion": "0.8.3",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "gregtech.MixinMetaTileEntityFluidHatch",
+    "gregtech.MixinMetaTileEntityItemBus"
+  ],
+  "server": [],
+  "client": []
+}

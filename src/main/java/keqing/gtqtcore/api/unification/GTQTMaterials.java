@@ -4,6 +4,7 @@ import gregtech.api.unification.material.Material;
 import keqing.gtqtcore.api.unification.matreials.*;
 
 public class GTQTMaterials {
+    public static Material GalvanizedSteel;
     public static Material Inconel625;
     public static Material HastelloyN;
     public static Material Stellite;
@@ -146,6 +147,18 @@ public class GTQTMaterials {
     public static Material infused_entropy;
     public static Material infused_order;
     public static Material Amblygonite;
+    public static Material PreTreatedCrudeOilContainingImpurities;
+    public static Material Demulsifier;
+    public static Material EthyleneOxide;
+    public static Material PropyleneOxide;
+    public static Material PreTreatedCrudeOil;
+    public static Material Asphalt;
+    public static Material WaxOil;
+    public static Material WaterGas;
+    public static Material VacuumResidue;
+    public static Material AtmosphericResidue;
+    public static Material GasOil;
+    public static Material OilSlurry;
 
     //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/api/unification/GSMaterials.java
 

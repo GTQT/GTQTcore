@@ -22,6 +22,7 @@ import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.metatileentities.multi.generators.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.MetaTileEntityAlloykiln;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.MetaTileEntityIndustrialPrimitiveBlastFurnace;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.MetaTileEntityOilPool;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.steam.MetaTileEntitySteamExtractor;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.steam.MetaTileEntitySteamBlastFurnace;
@@ -57,6 +58,7 @@ public class GTQTMetaTileEntities {
     public static void simpleTiredInit(MetaTileEntity[] tileEntities, IntFunction<MetaTileEntity> function, IntSupplier idSupplier){
         simpleTiredInit(tileEntities,function,idSupplier,(i) -> true);
     }
+    public static MetaTileEntityOilPool OIL_POOL;
     public static MetaTileEntityMultiblockTank HUGE_TANK;
     public static MetaTileEntityAlgaeFarm ALGAE_FARM;
     public static MetaTileEntityComponentAssemblyLine COMPONENT_ASSEMBLY_LINE;
@@ -77,9 +79,6 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityDangoteDistillery DANGOTE_DISTILLERY;
     public static MetaTileEntitykeQingNet KeQing_NET;
     public static MetaTileEntityDistillationTower DISTILLATION_TOWER;
-    public static MetaTileEntityLargeTurbine HUGE_STEAM_TURBINE;
-    public static MetaTileEntityLargeTurbine HUGE_GAS_TURBINE;
-    public static MetaTileEntityLargeTurbine HUGE_PLASMA_TURBINE;
     public static final SimpleGeneratorMetaTileEntity[] NAQUADAH_REACTOR = new SimpleGeneratorMetaTileEntity[3];
     public static final SimpleGeneratorMetaTileEntity[] ROCKET_ENGINE = new SimpleGeneratorMetaTileEntity[3];
     public static MetaTileEntityTurbineCombustionChamber HUGE_TURBINE_COMBUSTION_CHAMBER;
@@ -137,14 +136,20 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityFlotationFactory FLOTATION_FACTORY;
     public static MetaTileEntityLargeProcessingFactory LAGER_PROCESSING_FACTORY;
     public static MetaTileEntityVacuumDryingFurnace VACUUM_DRYING_FURNACE;
+    public static MetaTileEntityMiningDrill MINING_DRILL;
     public static MetaTileEntityIndustrialPrimitiveBlastFurnace INDUSTRIAL_PRIMITIVE_BLAST_FURNACE;
 
     public static final SimpleGeneratorMetaTileEntity[] COMBUSTION_GENERATOR = new SimpleGeneratorMetaTileEntity[4];
     public static final SimpleGeneratorMetaTileEntity[] STEAM_TURBINE = new SimpleGeneratorMetaTileEntity[4];
     public static final SimpleGeneratorMetaTileEntity[] GAS_TURBINE = new SimpleGeneratorMetaTileEntity[4];
 
-    public static final MetaTileEntityMultiFluidHatch[] BIG_IMPORT_HATCH = new MetaTileEntityMultiFluidHatch[6]; // EV-UHV
-    public static final MetaTileEntityMultiFluidHatch[] BIG_EXPORT_HATCH = new MetaTileEntityMultiFluidHatch[6]; // EV-UHV
+    public static final MetaTileEntityPlusMultiFluidHatch[] BIG_IMPORT_HATCH = new MetaTileEntityPlusMultiFluidHatch[11]; // EV-UHV
+    public static final MetaTileEntityPlusMultiFluidHatch[] BIG_EXPORT_HATCH = new MetaTileEntityPlusMultiFluidHatch[11]; // EV-UHV
+
+    public static MetaTileEntityFluidHatch[] IMPORT_FLUID_HATCH = new MetaTileEntityFluidHatch[4];
+    public static MetaTileEntityFluidHatch[] EXPORT_FLUID_HATCH = new MetaTileEntityFluidHatch[4];
+    public static MetaTileEntityItemBus[] IMPORT_ITEM_HATCH = new MetaTileEntityItemBus[4];
+    public static MetaTileEntityItemBus[] EXPORT_ITEM_HATCH = new MetaTileEntityItemBus[4];
 
     public static final MetaTileEntityPlusEnergyHatch[] PLUS_ENERGY_INPUT_HATCH = new MetaTileEntityPlusEnergyHatch[10];
     public static final MetaTileEntityPlusEnergyHatch[] PLUS_ENERGY_INPUT_HATCH_4A = new MetaTileEntityPlusEnergyHatch[10];
@@ -208,9 +213,9 @@ public class GTQTMetaTileEntities {
         NAQUADAH_REACTOR_MKIII = registerMetaTileEntity(3033, new MetaTileEntityNaquadahReactorMkiii(gtqtcoreId("naquadah_reactor_mkiii")));
         LAGER_HEAT_EXCHANGER = registerMetaTileEntity(3034, new MetaTileEntityLagerHeatExchanger(gtqtcoreId("lager_heat_exchanger")));
         DANGOTE_DISTILLERY = registerMetaTileEntity(3035, new MetaTileEntityDangoteDistillery(gtqtcoreId("dangote_distillery")));
-        BASIC_HUGE_MINER = registerMetaTileEntity(3036, new MetaTileEntityHugeMiner(gtqtcoreId("large_miner.zpm"), GTValues.ZPM, 1, 9, 7,  64));
-        HUGE_MINER = registerMetaTileEntity(3037, new MetaTileEntityHugeMiner(gtqtcoreId("large_miner.uv"), GTValues.UV, 1, 11, 8,  128));
-        ADVANCED_HUGE_MINER = registerMetaTileEntity(3038, new MetaTileEntityHugeMiner(gtqtcoreId("large_miner.uhv"), GTValues.UHV, 1, 13, 9 , 256));
+        BASIC_HUGE_MINER = registerMetaTileEntity(3036, new MetaTileEntityHugeMiner(gtqtcoreId("large_miner.zpm"), GTValues.ZPM, 1, 8, 7,  64));
+        HUGE_MINER = registerMetaTileEntity(3037, new MetaTileEntityHugeMiner(gtqtcoreId("large_miner.uv"), GTValues.UV, 2, 10, 8,  128));
+        ADVANCED_HUGE_MINER = registerMetaTileEntity(3038, new MetaTileEntityHugeMiner(gtqtcoreId("large_miner.uhv"), GTValues.UHV, 3, 12, 9 , 256));
         HUGE_FUSION_REACTOR[0] = registerMetaTileEntity(3039, new MetaTileEntityHugeFusionReactor(gtqtcoreId("fusion_reactor.uhv"), GTValues.UHV));
         HUGE_FUSION_REACTOR[1] = registerMetaTileEntity(3040, new MetaTileEntityHugeFusionReactor(gtqtcoreId("fusion_reactor.uev"), GTValues.UEV));
         HUGE_FUSION_REACTOR[2] = registerMetaTileEntity(3041, new MetaTileEntityHugeFusionReactor(gtqtcoreId("fusion_reactor.uiv"), GTValues.UIV));
@@ -275,6 +280,8 @@ public class GTQTMetaTileEntities {
         PARTICLE_ACCELERATOR = registerMetaTileEntity(3093, new MetaTileEntityParticleAccelerator(gtqtcoreId("particle_accelerator")));
         LARGE_CHEMICAL_REACTOR = registerMetaTileEntity(3094, new MetaTileEntityLargeChemicalReactor(gtqtcoreId("large_chemical_reactor")));
         BIOLOGICAL_REACTION=registerMetaTileEntity(3095,new MetaTileEntityBiologicalReaction(gtqtcoreId(("biological_reaction"))));
+        OIL_POOL=registerMetaTileEntity(3096,new MetaTileEntityOilPool(gtqtcoreId(("oil_pool"))));
+        MINING_DRILL=registerMetaTileEntity(3097,new MetaTileEntityMiningDrill(gtqtcoreId(("mining_drill"))));
 
         registerSimpleMetaTileEntity(FLUID_EXTRACTOR, 15000, "fluid_extractor", GTQTcoreRecipeMaps.FLUID_EXTRACTOR_RECIPES, Textures.EXTRACTOR_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
         registerSimpleMetaTileEntity(FLUID_CANNER, 15015, "fluid_canner", GTQTcoreRecipeMaps.FLUID_CANNER_RECIPES, Textures.CANNER_OVERLAY, true,GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
@@ -284,74 +291,91 @@ public class GTQTMetaTileEntities {
         registerSimpleMetaTileEntity(VACUUM_CHAMBER, 15060, "vacuum_chamber", GTQTcoreRecipeMaps.VACUUM_CHAMBER_RECIPES, Textures.GAS_COLLECTOR_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
         registerSimpleMetaTileEntity(ULTRAVIOLET_LAMP_CHAMBER, 15075, "ultraviolet_lamp_chamber", GTQTcoreRecipeMaps.ULTRAVIOLET_LAMP_CHAMBER_RECIPES, Textures.LASER_ENGRAVER_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
 
-        ROTOR_HOLDER[6] = registerMetaTileEntity(3144, new MetaTileEntityRotorHolder(gtqtcoreId("rotor_holder.uhv"), GTValues.UHV));
-        ROTOR_HOLDER[7] = registerMetaTileEntity(3145, new MetaTileEntityRotorHolder(gtqtcoreId("rotor_holder.uev"), GTValues.UEV));
-        ROTOR_HOLDER[8] = registerMetaTileEntity(3146, new MetaTileEntityRotorHolder(gtqtcoreId("rotor_holder.uiv"), GTValues.UIV));
-        ROTOR_HOLDER[9] = registerMetaTileEntity(3147, new MetaTileEntityRotorHolder(gtqtcoreId("rotor_holder.uxv"), GTValues.UXV));
-        ROTOR_HOLDER[10] = registerMetaTileEntity(3148, new MetaTileEntityRotorHolder(gtqtcoreId("rotor_holder.opv"), GTValues.OpV));
-        ROTOR_HOLDER[11] = registerMetaTileEntity(3149, new MetaTileEntityRotorHolder(gtqtcoreId("rotor_holder.max"), GTValues.MAX));
+        ROTOR_HOLDER[6] = registerMetaTileEntity(16000, new MetaTileEntityRotorHolder(gtqtcoreId("rotor_holder.uhv"), GTValues.UHV));
+        ROTOR_HOLDER[7] = registerMetaTileEntity(16001, new MetaTileEntityRotorHolder(gtqtcoreId("rotor_holder.uev"), GTValues.UEV));
+        ROTOR_HOLDER[8] = registerMetaTileEntity(16002, new MetaTileEntityRotorHolder(gtqtcoreId("rotor_holder.uiv"), GTValues.UIV));
+        ROTOR_HOLDER[9] = registerMetaTileEntity(16003, new MetaTileEntityRotorHolder(gtqtcoreId("rotor_holder.uxv"), GTValues.UXV));
+        ROTOR_HOLDER[10] = registerMetaTileEntity(16004, new MetaTileEntityRotorHolder(gtqtcoreId("rotor_holder.opv"), GTValues.OpV));
+        ROTOR_HOLDER[11] = registerMetaTileEntity(16005, new MetaTileEntityRotorHolder(gtqtcoreId("rotor_holder.max"), GTValues.MAX));
 
-        PLUS_ENERGY_INPUT_HATCH[1] = registerMetaTileEntity(3150, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.input.uev"), 10, 2, false));
-        PLUS_ENERGY_OUTPUT_HATCH[1] = registerMetaTileEntity(3151, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.output.uev"), 10, 2, true));
-        PLUS_ENERGY_INPUT_HATCH_4A[1] = registerMetaTileEntity(3152, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.input_4a.uev"), 10,4, false));
-        PLUS_ENERGY_INPUT_HATCH_16A[1] = registerMetaTileEntity(3153, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.input_16a.uev"), 10, 16, false));
-        PLUS_ENERGY_OUTPUT_HATCH_4A[1] = registerMetaTileEntity(3154, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.output_4a.uev"), 10, 4, true));
-        PLUS_ENERGY_OUTPUT_HATCH_16A[1] = registerMetaTileEntity(3155, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.output_16a.uev"), 10, 16, true));
+        PLUS_ENERGY_INPUT_HATCH[1] = registerMetaTileEntity(16006, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.input.uev"), 10, 2, false));
+        PLUS_ENERGY_OUTPUT_HATCH[1] = registerMetaTileEntity(16007, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.output.uev"), 10, 2, true));
+        PLUS_ENERGY_INPUT_HATCH_4A[1] = registerMetaTileEntity(16008, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.input_4a.uev"), 10,4, false));
+        PLUS_ENERGY_INPUT_HATCH_16A[1] = registerMetaTileEntity(16009, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.input_16a.uev"), 10, 16, false));
+        PLUS_ENERGY_OUTPUT_HATCH_4A[1] = registerMetaTileEntity(16010, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.output_4a.uev"), 10, 4, true));
+        PLUS_ENERGY_OUTPUT_HATCH_16A[1] = registerMetaTileEntity(16011, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.output_16a.uev"), 10, 16, true));
 
-        PLUS_ENERGY_INPUT_HATCH[2] = registerMetaTileEntity(3156, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.input.uiv"), 11, 2, false));
-        PLUS_ENERGY_OUTPUT_HATCH[2] = registerMetaTileEntity(3157, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.output.uiv"), 11, 2, true));
-        PLUS_ENERGY_INPUT_HATCH_4A[2] = registerMetaTileEntity(3158, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.input_4a.uiv"), 11,4, false));
-        PLUS_ENERGY_INPUT_HATCH_16A[2] = registerMetaTileEntity(3159, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.input_16a.uiv"), 11, 16, false));
-        PLUS_ENERGY_OUTPUT_HATCH_4A[2] = registerMetaTileEntity(3160, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.output_4a.uiv"), 11, 4, true));
-        PLUS_ENERGY_OUTPUT_HATCH_16A[2] = registerMetaTileEntity(3161, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.output_16a.uiv"), 11, 16, true));
+        PLUS_ENERGY_INPUT_HATCH[2] = registerMetaTileEntity(16012, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.input.uiv"), 11, 2, false));
+        PLUS_ENERGY_OUTPUT_HATCH[2] = registerMetaTileEntity(16013, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.output.uiv"), 11, 2, true));
+        PLUS_ENERGY_INPUT_HATCH_4A[2] = registerMetaTileEntity(16014, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.input_4a.uiv"), 11,4, false));
+        PLUS_ENERGY_INPUT_HATCH_16A[2] = registerMetaTileEntity(16015, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.input_16a.uiv"), 11, 16, false));
+        PLUS_ENERGY_OUTPUT_HATCH_4A[2] = registerMetaTileEntity(16016, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.output_4a.uiv"), 11, 4, true));
+        PLUS_ENERGY_OUTPUT_HATCH_16A[2] = registerMetaTileEntity(16017, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.output_16a.uiv"), 11, 16, true));
 
-        PLUS_ENERGY_INPUT_HATCH[3] = registerMetaTileEntity(3162, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.input.uxv"), 12, 2, false));
-        PLUS_ENERGY_OUTPUT_HATCH[3] = registerMetaTileEntity(3163, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.output.uxv"), 12, 2, true));
-        PLUS_ENERGY_INPUT_HATCH_4A[3] = registerMetaTileEntity(3164, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.input_4a.uxv"), 12,4, false));
-        PLUS_ENERGY_INPUT_HATCH_16A[3] = registerMetaTileEntity(3165, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.input_16a.uxv"), 12, 16, false));
-        PLUS_ENERGY_OUTPUT_HATCH_4A[3] = registerMetaTileEntity(3166, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.output_4a.uxv"), 12, 4, true));
-        PLUS_ENERGY_OUTPUT_HATCH_16A[3] = registerMetaTileEntity(3167, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.output_16a.uxv"), 12, 16, true));
+        PLUS_ENERGY_INPUT_HATCH[3] = registerMetaTileEntity(16018, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.input.uxv"), 12, 2, false));
+        PLUS_ENERGY_OUTPUT_HATCH[3] = registerMetaTileEntity(16019, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.output.uxv"), 12, 2, true));
+        PLUS_ENERGY_INPUT_HATCH_4A[3] = registerMetaTileEntity(16020, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.input_4a.uxv"), 12,4, false));
+        PLUS_ENERGY_INPUT_HATCH_16A[3] = registerMetaTileEntity(16021, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.input_16a.uxv"), 12, 16, false));
+        PLUS_ENERGY_OUTPUT_HATCH_4A[3] = registerMetaTileEntity(16022, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.output_4a.uxv"), 12, 4, true));
+        PLUS_ENERGY_OUTPUT_HATCH_16A[3] = registerMetaTileEntity(16023, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.output_16a.uxv"), 12, 16, true));
 
-        PLUS_ENERGY_INPUT_HATCH[4] = registerMetaTileEntity(3168, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.input.opv"), 13, 2, false));
-        PLUS_ENERGY_OUTPUT_HATCH[4] = registerMetaTileEntity(3169, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.output.opv"), 13, 2, true));
-        PLUS_ENERGY_INPUT_HATCH_4A[4] = registerMetaTileEntity(3170, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.input_4a.opv"), 13,4, false));
-        PLUS_ENERGY_INPUT_HATCH_16A[4] = registerMetaTileEntity(3171, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.input_16a.opv"), 13, 16, false));
-        PLUS_ENERGY_OUTPUT_HATCH_4A[4] = registerMetaTileEntity(3172, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.output_4a.opv"), 13, 4, true));
-        PLUS_ENERGY_OUTPUT_HATCH_16A[4] = registerMetaTileEntity(3173, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.output_16a.opv"), 13, 16, true));
+        PLUS_ENERGY_INPUT_HATCH[4] = registerMetaTileEntity(16024, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.input.opv"), 13, 2, false));
+        PLUS_ENERGY_OUTPUT_HATCH[4] = registerMetaTileEntity(16025, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.output.opv"), 13, 2, true));
+        PLUS_ENERGY_INPUT_HATCH_4A[4] = registerMetaTileEntity(16026, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.input_4a.opv"), 13,4, false));
+        PLUS_ENERGY_INPUT_HATCH_16A[4] = registerMetaTileEntity(16027, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.input_16a.opv"), 13, 16, false));
+        PLUS_ENERGY_OUTPUT_HATCH_4A[4] = registerMetaTileEntity(16028, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.output_4a.opv"), 13, 4, true));
+        PLUS_ENERGY_OUTPUT_HATCH_16A[4] = registerMetaTileEntity(16029, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.output_16a.opv"), 13, 16, true));
 
-        PLUS_ENERGY_INPUT_HATCH_64A[1] = registerMetaTileEntity(3200, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.input_64a.uev"), 10, 64, false));
-        PLUS_ENERGY_OUTPUT_HATCH_64A[1] = registerMetaTileEntity(3201, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.output_64a.uev"), 10, 64, true));
-        PLUS_ENERGY_INPUT_HATCH_128A[1] = registerMetaTileEntity(3202, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.input_128a.uev"), 10,128, false));
-        PLUS_ENERGY_INPUT_HATCH_512A[1] = registerMetaTileEntity(3203, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.input_512a.uev"), 10, 512, false));
-        PLUS_ENERGY_OUTPUT_HATCH_128A[1] = registerMetaTileEntity(3204, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.output_128a.uev"), 10, 128, true));
-        PLUS_ENERGY_OUTPUT_HATCH_512A[1] = registerMetaTileEntity(3205, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.output_512a.uev"), 10, 512, true));
+        PLUS_ENERGY_INPUT_HATCH_64A[1] = registerMetaTileEntity(16030, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.input_64a.uev"), 10, 64, false));
+        PLUS_ENERGY_OUTPUT_HATCH_64A[1] = registerMetaTileEntity(16031, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.output_64a.uev"), 10, 64, true));
+        PLUS_ENERGY_INPUT_HATCH_128A[1] = registerMetaTileEntity(16032, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.input_128a.uev"), 10,128, false));
+        PLUS_ENERGY_INPUT_HATCH_512A[1] = registerMetaTileEntity(16033, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.input_512a.uev"), 10, 512, false));
+        PLUS_ENERGY_OUTPUT_HATCH_128A[1] = registerMetaTileEntity(16034, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.output_128a.uev"), 10, 128, true));
+        PLUS_ENERGY_OUTPUT_HATCH_512A[1] = registerMetaTileEntity(16035, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.output_512a.uev"), 10, 512, true));
 
-        PLUS_ENERGY_INPUT_HATCH_64A[2] = registerMetaTileEntity(3206, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.input_64a.uiv"), 11, 64, false));
-        PLUS_ENERGY_OUTPUT_HATCH_64A[2] = registerMetaTileEntity(3207, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.output_64a.uiv"), 11, 64, true));
-        PLUS_ENERGY_INPUT_HATCH_128A[2] = registerMetaTileEntity(3208, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.input_128a.uiv"), 11,128, false));
-        PLUS_ENERGY_INPUT_HATCH_512A[2] = registerMetaTileEntity(3209, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.input_512a.uiv"), 11, 512, false));
-        PLUS_ENERGY_OUTPUT_HATCH_128A[2] = registerMetaTileEntity(3210, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.output_128a.uiv"), 11, 128, true));
-        PLUS_ENERGY_OUTPUT_HATCH_512A[2] = registerMetaTileEntity(3211, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.output_512a.uiv"), 11, 512, true));
+        PLUS_ENERGY_INPUT_HATCH_64A[2] = registerMetaTileEntity(16036, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.input_64a.uiv"), 11, 64, false));
+        PLUS_ENERGY_OUTPUT_HATCH_64A[2] = registerMetaTileEntity(16037, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.output_64a.uiv"), 11, 64, true));
+        PLUS_ENERGY_INPUT_HATCH_128A[2] = registerMetaTileEntity(16038, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.input_128a.uiv"), 11,128, false));
+        PLUS_ENERGY_INPUT_HATCH_512A[2] = registerMetaTileEntity(16039, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.input_512a.uiv"), 11, 512, false));
+        PLUS_ENERGY_OUTPUT_HATCH_128A[2] = registerMetaTileEntity(16040, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.output_128a.uiv"), 11, 128, true));
+        PLUS_ENERGY_OUTPUT_HATCH_512A[2] = registerMetaTileEntity(16041, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.output_512a.uiv"), 11, 512, true));
 
-        PLUS_ENERGY_INPUT_HATCH_64A[3] = registerMetaTileEntity(3212, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.input_64a.uxv"), 12, 64, false));
-        PLUS_ENERGY_OUTPUT_HATCH_64A[3] = registerMetaTileEntity(3213, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.output_64a.uxv"), 12, 64, true));
-        PLUS_ENERGY_INPUT_HATCH_128A[3] = registerMetaTileEntity(3214, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.input_128a.uxv"), 12,128, false));
-        PLUS_ENERGY_INPUT_HATCH_512A[3] = registerMetaTileEntity(3215, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.input_512a.uxv"), 12, 512, false));
-        PLUS_ENERGY_OUTPUT_HATCH_128A[3] = registerMetaTileEntity(3216, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.output_128a.uxv"), 12, 128, true));
-        PLUS_ENERGY_OUTPUT_HATCH_512A[3] = registerMetaTileEntity(3217, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.output_512a.uxv"), 12, 512, true));
+        PLUS_ENERGY_INPUT_HATCH_64A[3] = registerMetaTileEntity(16042, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.input_64a.uxv"), 12, 64, false));
+        PLUS_ENERGY_OUTPUT_HATCH_64A[3] = registerMetaTileEntity(16043, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.output_64a.uxv"), 12, 64, true));
+        PLUS_ENERGY_INPUT_HATCH_128A[3] = registerMetaTileEntity(16044, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.input_128a.uxv"), 12,128, false));
+        PLUS_ENERGY_INPUT_HATCH_512A[3] = registerMetaTileEntity(16045, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.input_512a.uxv"), 12, 512, false));
+        PLUS_ENERGY_OUTPUT_HATCH_128A[3] = registerMetaTileEntity(16046, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.output_128a.uxv"), 12, 128, true));
+        PLUS_ENERGY_OUTPUT_HATCH_512A[3] = registerMetaTileEntity(16047, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.output_512a.uxv"), 12, 512, true));
 
-        PLUS_ENERGY_INPUT_HATCH_64A[4] = registerMetaTileEntity(3218, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.input_64a.opv"), 13, 64, false));
-        PLUS_ENERGY_OUTPUT_HATCH_64A[4] = registerMetaTileEntity(3219, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.output_64a.opv"), 13, 64, true));
-        PLUS_ENERGY_INPUT_HATCH_128A[4] = registerMetaTileEntity(3220, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.input_128a.opv"), 13,128, false));
-        PLUS_ENERGY_INPUT_HATCH_512A[4] = registerMetaTileEntity(3221, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.input_512a.opv"), 13, 512, false));
-        PLUS_ENERGY_OUTPUT_HATCH_128A[4] = registerMetaTileEntity(3222, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.output_128a.opv"), 13, 128, true));
-        PLUS_ENERGY_OUTPUT_HATCH_512A[4] = registerMetaTileEntity(3223, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.output_512a.opv"), 13, 512, true));
+        PLUS_ENERGY_INPUT_HATCH_64A[4] = registerMetaTileEntity(16048, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.input_64a.opv"), 13, 64, false));
+        PLUS_ENERGY_OUTPUT_HATCH_64A[4] = registerMetaTileEntity(16049, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.output_64a.opv"), 13, 64, true));
+        PLUS_ENERGY_INPUT_HATCH_128A[4] = registerMetaTileEntity(16070, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.input_128a.opv"), 13,128, false));
+        PLUS_ENERGY_INPUT_HATCH_512A[4] = registerMetaTileEntity(16071, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.input_512a.opv"), 13, 512, false));
+        PLUS_ENERGY_OUTPUT_HATCH_128A[4] = registerMetaTileEntity(16072, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.output_128a.opv"), 13, 128, true));
+        PLUS_ENERGY_OUTPUT_HATCH_512A[4] = registerMetaTileEntity(16073, new MetaTileEntityPlusEnergyHatch(gtqtcoreId("energy_hatch.output_512a.opv"), 13, 512, true));
 
-        for (int i = GTValues.IV; i <= GTValues.UHV; i++) {
+        IMPORT_FLUID_HATCH[0] = registerMetaTileEntity(16074, new MetaTileEntityFluidHatch(gtqtcoreId("fluid_hatch.import.uev"), 10, false));
+        IMPORT_FLUID_HATCH[1] = registerMetaTileEntity(16075, new MetaTileEntityFluidHatch(gtqtcoreId("fluid_hatch.import.uiv"), 11, false));
+        IMPORT_FLUID_HATCH[2] = registerMetaTileEntity(16076, new MetaTileEntityFluidHatch(gtqtcoreId("fluid_hatch.import.uxv"), 12, false));
+        IMPORT_FLUID_HATCH[3] = registerMetaTileEntity(16077, new MetaTileEntityFluidHatch(gtqtcoreId("fluid_hatch.import.opv"), 13, false));
+        EXPORT_FLUID_HATCH[0] = registerMetaTileEntity(16078, new MetaTileEntityFluidHatch(gtqtcoreId("fluid_hatch.export.uev"), 10, true));
+        EXPORT_FLUID_HATCH[1] = registerMetaTileEntity(16079, new MetaTileEntityFluidHatch(gtqtcoreId("fluid_hatch.export.uiv"), 11, true));
+        EXPORT_FLUID_HATCH[2] = registerMetaTileEntity(16080, new MetaTileEntityFluidHatch(gtqtcoreId("fluid_hatch.export.uxv"), 12, true));
+        EXPORT_FLUID_HATCH[3] = registerMetaTileEntity(16081, new MetaTileEntityFluidHatch(gtqtcoreId("fluid_hatch.export.opv"), 13, true));
+        IMPORT_ITEM_HATCH[0] = registerMetaTileEntity(16082, new MetaTileEntityItemBus(gtqtcoreId("item_hatch.import.uev"), 10, false));
+        IMPORT_ITEM_HATCH[1] = registerMetaTileEntity(16083, new MetaTileEntityItemBus(gtqtcoreId("item_hatch.import.uiv"), 11, false));
+        IMPORT_ITEM_HATCH[2] = registerMetaTileEntity(16084, new MetaTileEntityItemBus(gtqtcoreId("item_hatch.import.uxv"), 12, false));
+        IMPORT_ITEM_HATCH[3] = registerMetaTileEntity(16085, new MetaTileEntityItemBus(gtqtcoreId("item_hatch.import.opv"), 13, false));
+        EXPORT_ITEM_HATCH[0] = registerMetaTileEntity(16086, new MetaTileEntityItemBus(gtqtcoreId("item_hatch.export.uev"), 10, false));
+        EXPORT_ITEM_HATCH[1] = registerMetaTileEntity(16087, new MetaTileEntityItemBus(gtqtcoreId("item_hatch.export.uiv"), 11, false));
+        EXPORT_ITEM_HATCH[2] = registerMetaTileEntity(16088, new MetaTileEntityItemBus(gtqtcoreId("item_hatch.export.uxv"), 12, false));
+        EXPORT_ITEM_HATCH[3] = registerMetaTileEntity(16089, new MetaTileEntityItemBus(gtqtcoreId("item_hatch.export.opv"), 13, false));
+
+        for (int i = GTValues.IV; i <= GTValues.MAX; i++) {
             int index = i - GTValues.IV;
             String tierName = GTValues.VN[i].toLowerCase();
-            BIG_IMPORT_HATCH[index + 1] = registerMetaTileEntity(3230 + index, new MetaTileEntityMultiFluidHatch(gtqtcoreId("fluid_hatch.import_16x." + tierName), i, 16, false));
-            BIG_EXPORT_HATCH[index + 1] = registerMetaTileEntity(3250 + index, new MetaTileEntityMultiFluidHatch(gtqtcoreId("fluid_hatch.export_16x." + tierName), i, 16, true));
+            BIG_IMPORT_HATCH[index + 1] = registerMetaTileEntity(16090 + index, new MetaTileEntityPlusMultiFluidHatch(gtqtcoreId("fluid_hatch.import_16x." + tierName), i, 16, false));
+            BIG_EXPORT_HATCH[index + 1] = registerMetaTileEntity(16100 + index, new MetaTileEntityPlusMultiFluidHatch(gtqtcoreId("fluid_hatch.export_16x." + tierName), i, 16, true));
         }
 
         simpleTiredInit(CREATIVE_ENERGY_HATCHES,
