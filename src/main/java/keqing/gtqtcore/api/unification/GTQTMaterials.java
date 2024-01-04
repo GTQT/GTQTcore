@@ -149,7 +149,6 @@ public class GTQTMaterials {
     public static Material Amblygonite;
     public static Material PreTreatedCrudeOilContainingImpurities;
     public static Material Demulsifier;
-    public static Material EthyleneOxide;
     public static Material PropyleneOxide;
     public static Material PreTreatedCrudeOil;
     public static Material Asphalt;

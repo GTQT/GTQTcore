@@ -117,12 +117,6 @@ public class FirstDegreeMaterials {
                 .color(0xC6E2FF)
                 .flags(DISABLE_DECOMPOSITION)
                 .build();
-        //环氧乙烷
-        GTQTMaterials.EthyleneOxide = new Material.Builder(getMaterialsId(), gregtechId("ethylene_oxide"))
-                .fluid()
-                .color(0xB8860B)
-                .flags(DISABLE_DECOMPOSITION)
-                .build();
         //环氧丙烷
         GTQTMaterials.PropyleneOxide = new Material.Builder(getMaterialsId(), gregtechId("propylene_oxide"))
                 .fluid()
