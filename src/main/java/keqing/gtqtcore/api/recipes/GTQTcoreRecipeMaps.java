@@ -19,6 +19,7 @@ import keqing.gtqtcore.loaders.recipes.handlers.ELE;
 //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/api/recipe/GSRecipeMaps.java
 public class GTQTcoreRecipeMaps {
     public static final RecipeMap<SimpleRecipeBuilder> COMPONENT_ASSEMBLER_RECIPES;
+    public static final RecipeMap<SimpleRecipeBuilder> SEPTIC_TANK;
     public static final RecipeMap<SimpleRecipeBuilder> ULTRAVIOLET_LAMP_CHAMBER_RECIPES;
     public static final RecipeMap<SimpleRecipeBuilder> VACUUM_CHAMBER_RECIPES;
     public static final RecipeMap<SimpleRecipeBuilder> DECAY_CHAMBER_RECIPES;
@@ -75,7 +76,9 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<ComputationRecipeBuilder> CW_PRECISE_ASSEMBLER_RECIPES;
 
     public static final RecipeMap<MDRecipeBuilder> MINING_DRILL_RECIPES;
-
+    public static final RecipeMap<FuelRecipeBuilder> SOLAR_PLATE;
+    public static final RecipeMap<SimpleRecipeBuilder> DISTILLATION_KETTLE;
+    public static final RecipeMap<SimpleRecipeBuilder> PYROLYSIS_TOWER;
 
 
     private GTQTcoreRecipeMaps() {}
@@ -203,6 +206,13 @@ public class GTQTcoreRecipeMaps {
                 .setSound(GTSoundEvents.TURBINE)
                 .allowEmptyOutput();
 
+        SOLAR_PLATE = new RecipeMap<>("soalr_plate",
+                0, 0, 1, 0, new FuelRecipeBuilder(), false)
+                .setSlotOverlay(false, true, true, GuiTextures.CENTRIFUGE_OVERLAY)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_GAS_COLLECTOR, ProgressWidget.MoveType.HORIZONTAL)
+                .setSound(GTSoundEvents.TURBINE)
+                .allowEmptyOutput();
+
         NAQUADAH_REACTOR = new RecipeMap<>("naquadah_reactor",
                 3, 1, 1, 1, new FuelRecipeBuilder(), false)
                 .allowEmptyOutput();
@@ -215,6 +225,15 @@ public class GTQTcoreRecipeMaps {
 
         INTEGRATED_MINING_DIVISION = new RecipeMap<>("integrated_mining_division",
                 6, 6, 6, 6, new SimpleRecipeBuilder(), false);
+
+        SEPTIC_TANK = new RecipeMap<>("septic_tank",
+                2, 2, 2, 2, new SimpleRecipeBuilder(), false);
+
+        DISTILLATION_KETTLE = new RecipeMap<>("distillation_kettle",
+                1, 1, 1, 6, new SimpleRecipeBuilder(), false);
+
+        PYROLYSIS_TOWER = new RecipeMap<>("pyrolysis_tower",
+                1, 1, 1, 8, new SimpleRecipeBuilder(), false);
 
         STEAM_BLAST_FURNACE_RECIPES = new RecipeMap<>("steam_blast_furnace",
                 3, 1, 0, 0, new FuelRecipeBuilder(), false);

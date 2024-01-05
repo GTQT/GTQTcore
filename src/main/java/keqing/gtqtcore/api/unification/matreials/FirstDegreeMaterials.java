@@ -98,6 +98,19 @@ public class FirstDegreeMaterials {
                 .flags(DISABLE_DECOMPOSITION)
                 .components(Aluminium, 3, Copper, 1)
                 .build();
+        //破乳剂
+        GTQTMaterials.Demulsifier = new Material.Builder(getMaterialsId(), gregtechId("demulsifier"))
+                .fluid()
+                .color(0xC6E2FF)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+        //盐水
+        GTQTMaterials.SeaWater = new Material.Builder(getMaterialsId(), gregtechId("sea_water"))
+                .fluid()
+                .color(0xB2DFEE)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
         //含杂预处理原油
         GTQTMaterials.PreTreatedCrudeOilContainingImpurities = new Material.Builder(getMaterialsId(), gregtechId("pre_treated_crude_oil_containing_impurities"))
                 .fluid()
@@ -111,12 +124,6 @@ public class FirstDegreeMaterials {
                 .flags(DISABLE_DECOMPOSITION)
                 .build();
 
-        //破乳剂
-        GTQTMaterials.Demulsifier = new Material.Builder(getMaterialsId(), gregtechId("demulsifier"))
-                .fluid()
-                .color(0xC6E2FF)
-                .flags(DISABLE_DECOMPOSITION)
-                .build();
         //环氧丙烷
         GTQTMaterials.PropyleneOxide = new Material.Builder(getMaterialsId(), gregtechId("propylene_oxide"))
                 .fluid()
@@ -153,14 +160,132 @@ public class FirstDegreeMaterials {
                 .color(0x8B2323)
                 .flags(DISABLE_DECOMPOSITION)
                 .build();
+        //防爆剂
+        GTQTMaterials.MTBE = new Material.Builder(getMaterialsId(), gregtechId("mtbe"))
+                .fluid()
+                .color(0x8B2323)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //轻柴油
+        GTQTMaterials.DieselLight = new Material.Builder(getMaterialsId(), gregtechId("diesel_light"))
+                .fluid()
+                .color(0x8B1A1A)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+        //重柴油
+        GTQTMaterials.DieselHeavy = new Material.Builder(getMaterialsId(), gregtechId("diesel_heavy"))
+                .fluid()
+                .color(0x8B2323)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+        //含硫轻柴油
+        GTQTMaterials.SDieselLight = new Material.Builder(getMaterialsId(), gregtechId("sdiesel_light"))
+                .fluid()
+                .color(0x8B1A1A)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+        //含硫重柴油
+        GTQTMaterials.SDieselHeavy = new Material.Builder(getMaterialsId(), gregtechId("sdiesel_heavy"))
+                .fluid()
+                .color(0x8B2323)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
         //粗柴油
         GTQTMaterials.GasOil = new Material.Builder(getMaterialsId(), gregtechId("gas_oil"))
                 .fluid()
                 .color(0x8B7355)
                 .flags(DISABLE_DECOMPOSITION)
                 .build();
+        //直馏汽油
+        GTQTMaterials.Distilledgasoline = new Material.Builder(getMaterialsId(), gregtechId("distilledgasoline"))
+                .fluid()
+                .color(0x8B7355)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
         //油浆
         GTQTMaterials.OilSlurry = new Material.Builder(getMaterialsId(), gregtechId("oil_slurry"))
+                .fluid()
+                .color(0x8B7355)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+        //油气
+        GTQTMaterials.OilGas = new Material.Builder(getMaterialsId(), gregtechId("oil_gas"))
+                .fluid()
+                .color(0x8B7355)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //氯化锌
+        GTQTMaterials.ZincCl = new Material.Builder(getMaterialsId(), gregtechId("zinc_cl"))
+                .dust()
+                .color(0xB2DFEE)
+                .components(Zinc, 1, Chlorine, 1)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //氯乙醇
+        GTQTMaterials.EthyleneChlorohydrin = new Material.Builder(getMaterialsId(), gregtechId("ethylene_chlorohydrin"))
+                .dust().fluid()
+                .color(0xB2DFEE)
+                .components(Carbon, 2, Hydrogen, 6, Oxygen, 1,Chlorine,1)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //硫酸铵
+        GTQTMaterials.AmmoniumSulfate = new Material.Builder(getMaterialsId(), gregtechId("ammonium_sulfate"))
+                .dust().fluid()
+                .color(0xB2DFEE)
+                .components(Nitrogen, 2, Hydrogen, 8, Sulfur, 1,Oxygen,4)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //轻度加氢裂解轻柴油
+        GTQTMaterials.LightlyHydroCrackedDieselLight = new Material.Builder(getMaterialsId(), gregtechId("LightlyHydroCrackedDieselLight"))
+                .fluid()
+                .color(0x8B7355)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+        //轻度蒸汽裂解轻柴油
+        GTQTMaterials.LightlySteamCrackedDieselLight = new Material.Builder(getMaterialsId(), gregtechId("LightlySteamCrackedDieselLight"))
+                .fluid()
+                .color(0x8B7355)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+        //中度加氢裂解轻柴油
+        GTQTMaterials.SeverelyHydroCrackedDieselLight = new Material.Builder(getMaterialsId(), gregtechId("SeverelyHydroCrackedDieselLight"))
+                .fluid()
+                .color(0x8B7355)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+        //中度蒸汽裂解轻柴油
+        GTQTMaterials.SeverelySteamCrackedDieselLight = new Material.Builder(getMaterialsId(), gregtechId("SeverelySteamCrackedDieselLight"))
+                .fluid()
+                .color(0x8B7355)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //轻度加氢裂解重柴油
+        GTQTMaterials.LightlyHydroCrackedDieselHeavy = new Material.Builder(getMaterialsId(), gregtechId("LightlyHydroCrackedDieselHeavy"))
+                .fluid()
+                .color(0x8B7355)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+        //轻度蒸汽裂解重柴油
+        GTQTMaterials.LightlySteamCrackedDieselHeavy = new Material.Builder(getMaterialsId(), gregtechId("LightlySteamCrackedDieselHeavy"))
+                .fluid()
+                .color(0x8B7355)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+        //中度加氢裂解重柴油
+        GTQTMaterials.SeverelyHydroCrackedDieselHeavy = new Material.Builder(getMaterialsId(), gregtechId("SeverelyHydroCrackedDieselHeavy"))
+                .fluid()
+                .color(0x8B7355)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+        //中度蒸汽裂解重柴油
+        GTQTMaterials.SeverelySteamCrackedDieselHeavy = new Material.Builder(getMaterialsId(), gregtechId("SeverelySteamCrackedDieselHeavy"))
                 .fluid()
                 .color(0x8B7355)
                 .flags(DISABLE_DECOMPOSITION)

@@ -8,8 +8,7 @@ import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.dust;
-import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.DISSOLUTION_TANK_RECIPES;
-import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.ROCKET;
+import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 
 public class RocketEngineRecipes {
@@ -60,6 +59,12 @@ public class RocketEngineRecipes {
                 .fluidInputs(DenseHydrazineMixtureFuel.getFluid(9))
                 .EUt(2048)
                 .duration(80)
+                .buildAndRegister();
+
+        SOLAR_PLATE.recipeBuilder()
+                .fluidInputs(Water.getFluid(1))
+                .EUt(32)
+                .duration(200)
                 .buildAndRegister();
 
         //  Methylhydrazine Nitrate Rocket Fuel

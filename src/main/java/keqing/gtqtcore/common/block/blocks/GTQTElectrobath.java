@@ -39,7 +39,11 @@ public class GTQTElectrobath extends VariantBlock<GTQTElectrobath.CasingType> {
         DRILL_HEAD_LV("drill_head_lv"),
         DRILL_HEAD_MV("drill_head_mv"),
         DRILL_HEAD_HV("drill_head_hv"),
-        DRILL_HEAD_EV("drill_head_ev");
+        DRILL_HEAD_EV("drill_head_ev"),
+        SOLAR_PLATE_LV("solar_plate_lv"),
+        SOLAR_PLATE_MV("solar_plate_mv"),
+        SOLAR_PLATE_HV("solar_plate_hv"),
+        SOLAR_PLATE_CASING("solar_plate_casing"),;
 
         private final String name;
 

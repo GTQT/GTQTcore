@@ -107,15 +107,30 @@ public class FuelRecipes {
                             .duration(160).EUt(VA[MV]).buildAndRegister();
 
                     SALT_FLIED.recipeBuilder()
+                            .fluidInputs(SeaWater.getFluid(16000))
+                            .fluidOutputs(SaltWater.getFluid(800))
+                            .duration(200)
+                            .circuitMeta(1)
+                            .buildAndRegister();
+
+
+                    SALT_FLIED.recipeBuilder()
                             .fluidInputs(Water.getFluid(16000))
-                            .fluidOutputs(SaltWater.getFluid(16000))
+                            .fluidOutputs(SaltWater.getFluid(1600))
                             .duration(2000)
                             .circuitMeta(1)
                             .buildAndRegister();
 
                     SALT_FLIED.recipeBuilder()
+                            .fluidInputs(SaltWater.getFluid(1600))
+                            .output(dust, Salt, 1200)
+                            .duration(500)
+                            .circuitMeta(1)
+                            .buildAndRegister();
+
+                    SALT_FLIED.recipeBuilder()
                             .fluidInputs(Water.getFluid(16000))
-                            .output(dust, Salt, 512)
+                            .output(dust, Salt, 800)
                             .duration(2000)
                             .circuitMeta(2)
                             .buildAndRegister();

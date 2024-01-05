@@ -36,6 +36,7 @@ public class TiredTraceabilityPredicate extends TraceabilityPredicate {
         MAP_QFT_GLASS = new Object2ObjectOpenHashMap<>();
         MAP_CAL_CASING = new Object2ObjectOpenHashMap<>();
         MAP_ELE_CASING = new Object2ObjectOpenHashMap<>();
+        MAP_SP_CASING = new Object2ObjectOpenHashMap<>();
         MAP_DRI_CASING = new Object2ObjectOpenHashMap<>();
         MAP_PA_CASING = new Object2ObjectOpenHashMap<>();
         MAP_PA_INTERNAL_CASING = new Object2ObjectOpenHashMap<>();
@@ -237,6 +238,13 @@ public class TiredTraceabilityPredicate extends TraceabilityPredicate {
         TiredTraceabilityPredicate.MAP_DRI_CASING.put(GTQTMetaBlocks.ELECTROBATH.getState(GTQTElectrobath.CasingType.DRILL_HEAD_EV),
                 new WrappedIntTired(GTQTElectrobath.CasingType.DRILL_HEAD_EV, 4));
 
+
+        TiredTraceabilityPredicate.MAP_SP_CASING.put(GTQTMetaBlocks.ELECTROBATH.getState(GTQTElectrobath.CasingType.SOLAR_PLATE_LV),
+                new WrappedIntTired(GTQTElectrobath.CasingType.SOLAR_PLATE_LV, 1));
+        TiredTraceabilityPredicate.MAP_SP_CASING.put(GTQTMetaBlocks.ELECTROBATH.getState(GTQTElectrobath.CasingType.SOLAR_PLATE_MV),
+                new WrappedIntTired(GTQTElectrobath.CasingType.SOLAR_PLATE_MV, 2));
+        TiredTraceabilityPredicate.MAP_SP_CASING.put(GTQTMetaBlocks.ELECTROBATH.getState(GTQTElectrobath.CasingType.SOLAR_PLATE_HV),
+                new WrappedIntTired(GTQTElectrobath.CasingType.SOLAR_PLATE_MV, 3));
     }
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_QFT_GLASS;
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_DRI_CASING;
@@ -251,6 +259,7 @@ public class TiredTraceabilityPredicate extends TraceabilityPredicate {
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_CAL_CASING;
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_ELE_CASING;
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_PA_CASING;
+    public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_SP_CASING;
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_PA_INTERNAL_CASING;
 
     public static TraceabilityPredicate CP_PA_CASING = new TiredTraceabilityPredicate(MAP_PA_CASING,
@@ -258,6 +267,9 @@ public class TiredTraceabilityPredicate extends TraceabilityPredicate {
 
     public static TraceabilityPredicate CP_PA_INTERNAL_CASING =new TiredTraceabilityPredicate(MAP_PA_INTERNAL_CASING,
             Comparator.comparing((s) -> ((WrappedIntTired)MAP_PA_INTERNAL_CASING.get(s)).getIntTier()), "PAI", null);
+
+    public static TraceabilityPredicate CP_SP_CASING =new TiredTraceabilityPredicate(MAP_SP_CASING,
+            Comparator.comparing((s) -> ((WrappedIntTired)MAP_SP_CASING.get(s)).getIntTier()), "SP", null);
     public static TraceabilityPredicate CP_ELE_CASING = new TiredTraceabilityPredicate(MAP_ELE_CASING,
             Comparator.comparing((s) -> ((WrappedIntTired)MAP_ELE_CASING.get(s)).getIntTier()),"Ele",null);
     public static TraceabilityPredicate CP_DRI_CASING = new TiredTraceabilityPredicate(MAP_DRI_CASING,

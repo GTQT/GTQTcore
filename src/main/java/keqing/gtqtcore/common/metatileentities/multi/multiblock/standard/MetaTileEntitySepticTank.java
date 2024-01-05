@@ -16,6 +16,7 @@ import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.MultiblockShapeInfo;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
+import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.recipes.recipeproperties.TemperatureProperty;
 import gregtech.api.util.GTUtility;
@@ -32,7 +33,9 @@ import gregtech.core.sound.GTSoundEvents;
 
 import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
+import keqing.gtqtcore.api.metaileentity.GTQTRecipeMapMultiblockController;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
+import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
@@ -57,12 +60,15 @@ import java.util.List;
 
 import static gregtech.api.GTValues.VA;
 
-public class MetaTileEntitySepticTank extends RecipeMapMultiblockController implements IHeatingCoil {
+public class MetaTileEntitySepticTank extends GTQTRecipeMapMultiblockController implements IHeatingCoil {
     private int tier;
     private int blastFurnaceTemperature;
 
     public MetaTileEntitySepticTank(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, RecipeMaps.FERMENTING_RECIPES);
+        super(metaTileEntityId, new RecipeMap[] {
+                RecipeMaps.FERMENTING_RECIPES,
+                RecipeMaps.BREWING_RECIPES
+        });
         this.recipeMapWorkable = new HeatingCoilRecipeLogic(this);
     }
 

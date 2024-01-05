@@ -35,6 +35,7 @@ public class GTQTTextures {
     public static SimpleOverlayRenderer ASEPTIC_FARM_CASING;
     public static SimpleOverlayRenderer FLOTATION_CASING;
     public static SimpleOverlayRenderer BRICK;
+    public static SimpleOverlayRenderer SOLAR_PLATE_CASING;
     public static SimpleOverlayRenderer ADVANCED_INVAR_CASING;
     public static SimpleOverlayRenderer MACERATOR_CASING;
     public static SimpleOverlayRenderer NQ_CASING;
@@ -112,6 +113,8 @@ public class GTQTTextures {
         NQ_CASING = new SimpleOverlayRenderer("multiblock/casing/nq_turbine_casing");
         IRIDIUM_CASING = new SimpleOverlayRenderer("multiblock/casing/iridium_casing");
         HC_ALLOY_CASING = new SimpleOverlayRenderer("multiblock/casings/hc_alloy_casing");
+        SOLAR_PLATE_CASING = new SimpleOverlayRenderer("multiblock/electrobath/solar_generator_bottom");
+
         SFTC = new SimpleOverlayRenderer("multiblock/casings/supercritical_fluid_turbine_casing");
         SFTS = new SimpleOverlayRenderer("multiblock/casings/supercritical_fluid_turbine_shaft");
         LIGHTNING_ROD_OVERLAY = new OrientedOverlayRenderer("generators/lightning_rod");

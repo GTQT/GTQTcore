@@ -6,6 +6,7 @@ import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.material.properties.PropertyKey;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.MaterialStack;
+import keqing.gtqtcore.api.unification.ore.GTQTOrePrefix;
 
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.ALLOY_kILN;
 
@@ -77,5 +78,24 @@ public class AllouKlin {
                     .outputs(OreDictUnifier.get(OrePrefix.ingot, stack[2].material, (int) stack[2].amount))
                     .buildAndRegister();
         }
+        /*
+        for (MaterialStack[] stack : alloySmelterList) {
+            ALLOY_kILN.recipeBuilder()
+                    .duration((int) stack[2].amount * 50)
+                    .input(GTQTOrePrefix.swarm, stack[0].material, (int) stack[0].amount)
+                    .input(GTQTOrePrefix.swarm, stack[1].material, (int) stack[1].amount)
+                    .outputs(OreDictUnifier.get(GTQTOrePrefix.swarm, stack[2].material, (int) stack[2].amount))
+                    .buildAndRegister();
+
+            ALLOY_kILN.recipeBuilder()
+                    .duration((int) stack[2].amount * 50)
+                    .input(GTQTOrePrefix.fcrop, stack[0].material, (int) stack[0].amount)
+                    .input(GTQTOrePrefix.fcrop, stack[1].material, (int) stack[1].amount)
+                    .outputs(OreDictUnifier.get(GTQTOrePrefix.fcrop, stack[2].material, (int) stack[2].amount))
+                    .buildAndRegister();
+        }
+
+         */
     }
+
 }

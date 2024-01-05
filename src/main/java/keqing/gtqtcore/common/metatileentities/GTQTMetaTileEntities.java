@@ -129,6 +129,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityLargeNaquadahReactor LARGE_NAQUADAH_REACTOR;
     public static MetaTileEntityCrackingUnit CRACKER;
     public static MetaTileEntityPyrolyseOven PYROLYSE_OVEN;
+    public static MetaTileEntityDistillationKettle DISTILLATION_KETTLE;
     public static MetaTileEntityParticleAccelerator PARTICLE_ACCELERATOR;
     public static MetaTileEntityLargeChemicalReactor LARGE_CHEMICAL_REACTOR;
     public static MetaTileEntityPreciseAssembler PRECISE_ASSEMBLER;
@@ -150,7 +151,8 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityFluidHatch[] EXPORT_FLUID_HATCH = new MetaTileEntityFluidHatch[4];
     public static MetaTileEntityItemBus[] IMPORT_ITEM_HATCH = new MetaTileEntityItemBus[4];
     public static MetaTileEntityItemBus[] EXPORT_ITEM_HATCH = new MetaTileEntityItemBus[4];
-
+    public static MetaTileEntityOceanPumper OCEAN_PUMPER;
+    public static MetaTileEntitySolarPlate SOLAR_PLATE;
     public static final MetaTileEntityPlusEnergyHatch[] PLUS_ENERGY_INPUT_HATCH = new MetaTileEntityPlusEnergyHatch[10];
     public static final MetaTileEntityPlusEnergyHatch[] PLUS_ENERGY_INPUT_HATCH_4A = new MetaTileEntityPlusEnergyHatch[10];
     public static final MetaTileEntityPlusEnergyHatch[] PLUS_ENERGY_INPUT_HATCH_16A = new MetaTileEntityPlusEnergyHatch[10];
@@ -282,6 +284,10 @@ public class GTQTMetaTileEntities {
         BIOLOGICAL_REACTION=registerMetaTileEntity(3095,new MetaTileEntityBiologicalReaction(gtqtcoreId(("biological_reaction"))));
         OIL_POOL=registerMetaTileEntity(3096,new MetaTileEntityOilPool(gtqtcoreId(("oil_pool"))));
         MINING_DRILL=registerMetaTileEntity(3097,new MetaTileEntityMiningDrill(gtqtcoreId(("mining_drill"))));
+        DISTILLATION_KETTLE=registerMetaTileEntity(3098,new MetaTileEntityDistillationKettle(gtqtcoreId(("distillation_kettle"))));
+        OCEAN_PUMPER = registerMetaTileEntity(3099, new MetaTileEntityOceanPumper(gtqtcoreId("ocean_pumper")));
+        SOLAR_PLATE = registerMetaTileEntity(3100, new MetaTileEntitySolarPlate(gtqtcoreId("solar_plate")));
+
 
         registerSimpleMetaTileEntity(FLUID_EXTRACTOR, 15000, "fluid_extractor", GTQTcoreRecipeMaps.FLUID_EXTRACTOR_RECIPES, Textures.EXTRACTOR_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
         registerSimpleMetaTileEntity(FLUID_CANNER, 15015, "fluid_canner", GTQTcoreRecipeMaps.FLUID_CANNER_RECIPES, Textures.CANNER_OVERLAY, true,GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);

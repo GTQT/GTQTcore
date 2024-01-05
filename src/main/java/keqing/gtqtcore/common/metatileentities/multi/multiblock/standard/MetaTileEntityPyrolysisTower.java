@@ -25,6 +25,7 @@ import gregtech.core.sound.GTSoundEvents;
 import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
+import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
@@ -48,7 +49,7 @@ import java.util.List;
 public class MetaTileEntityPyrolysisTower extends RecipeMapMultiblockController {
 
     public MetaTileEntityPyrolysisTower(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, RecipeMaps.FERMENTING_RECIPES);
+        super(metaTileEntityId, GTQTcoreRecipeMaps.PYROLYSIS_TOWER);
     }
 
 
@@ -61,7 +62,7 @@ public class MetaTileEntityPyrolysisTower extends RecipeMapMultiblockController 
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
-                .aisle("FCMCF", "FCCCF", "FCCCF", "FCCCF", "FCCCF", "FXXXF", "FXXXF", "FXXXF", "FXXXF", "FXXXF", "FFFFF", "#####", "#####", "#####", "#####", "#####", "#####", "#####", "#####")
+                .aisle("FCMCF", "FCCCF", "FCOCF", "FCOCF", "FCOCF", "FXOXF", "FXOXF", "FXOXF", "FXOXF", "FXOXF", "FFFFF", "#####", "#####", "#####", "#####", "#####", "#####", "#####", "#####")
                 .aisle("CCCCC", "C###C", "CT#TC", "C###C", "C###C", "C###C", "CCCCC", "X###X", "X#T#X", "XXXXX", "F###F", "#####", "#####", "#####", "#####", "#####", "#####", "#####", "#####")
                 .aisle("CCCCC", "C#T#C", "CTTTC", "C#T#C", "C#T#C", "C#T#C", "CCTCC", "XTTTX", "X#T#X", "XXXXX", "F###F", "#####", "#####", "#####", "#####", "#####", "#####", "#####", "#####")
                 .aisle("CCCCC", "C###C", "CT#TC", "C###C", "C###C", "C###C", "CCCCC", "X###X", "X#T#X", "XXXXX", "FFFFF", "F#F#F", "F#F#F", "F#F#F", "FFFFF", "F#F#F", "F#F#F", "F#F#F", "FFFFF")
@@ -71,11 +72,12 @@ public class MetaTileEntityPyrolysisTower extends RecipeMapMultiblockController 
                 .aisle("FXXXF", "F###F", "F###F", "F###F", "FFFFF", "F#F#F", "F#F#F", "F#F#F", "F#F#F", "F#F#F", "FFFFF", "F#F#F", "F#F#F", "F#F#F", "FFFFF", "F#F#F", "F#F#F", "F#F#F", "FFFFF")
                 .where('S', selfPredicate())
                 .where('X', states(getCasingState()).setMinGlobalLimited(50)
-                        .or(autoAbilities(true, true, true, true, true, true, false)))
+                        .or(autoAbilities(true, true, true, true, true, false, false)))
                 .where('M', abilities(MultiblockAbility.MUFFLER_HATCH))
                 .where('C', states(getCasingState1()))
                 .where('T', states(getCasingState2()))
                 .where('F', states(getFrameState()))
+                .where('O', states(getCasingState()).or(abilities(MultiblockAbility.EXPORT_FLUIDS).setMinGlobalLimited(1).setPreviewCount(8)))
                 .where('#', air())
                 .build();
     }

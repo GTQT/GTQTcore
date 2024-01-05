@@ -4,6 +4,7 @@ import gregtech.api.unification.material.Material;
 import keqing.gtqtcore.api.unification.matreials.*;
 
 public class GTQTMaterials {
+    public static  Material MTBE;
     public static Material GalvanizedSteel;
     public static Material Inconel625;
     public static Material HastelloyN;
@@ -158,6 +159,24 @@ public class GTQTMaterials {
     public static Material AtmosphericResidue;
     public static Material GasOil;
     public static Material OilSlurry;
+    public static Material SeaWater;
+    public static Material Distilledgasoline;
+    public static Material ZincCl;
+    public static Material AmmoniumSulfate;
+    public static Material EthyleneChlorohydrin;
+    public static Material OilGas;
+    public static Material DieselLight;
+    public static Material DieselHeavy;
+    public static Material SDieselLight;
+    public static Material SDieselHeavy;
+    public static Material LightlyHydroCrackedDieselLight;
+    public static Material LightlySteamCrackedDieselLight;
+    public static Material SeverelyHydroCrackedDieselLight;
+    public static Material SeverelySteamCrackedDieselLight;
+    public static Material LightlyHydroCrackedDieselHeavy;
+    public static Material LightlySteamCrackedDieselHeavy;
+    public static Material SeverelyHydroCrackedDieselHeavy;
+    public static Material SeverelySteamCrackedDieselHeavy;
 
     //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/api/unification/GSMaterials.java
 
