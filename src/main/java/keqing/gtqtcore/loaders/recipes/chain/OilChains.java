@@ -1,6 +1,8 @@
 package keqing.gtqtcore.loaders.recipes.chain;
 
 import gregtech.api.unification.material.Material;
+import gregtech.common.blocks.BlockAsphalt;
+import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.items.MetaItems;
 
 import static gregicality.science.api.unification.materials.GCYSMaterials.*;
@@ -367,8 +369,8 @@ public class OilChains {
         CHEMICAL_RECIPES.recipeBuilder()
                 .fluidInputs(SDieselLight.getFluid(8000))
                 .fluidInputs(Hydrogen.getFluid(2000))
-                .fluidOutputs(DieselLight.getFluid(1000))
-                .fluidOutputs(HeavyFuel.getFluid(8000))
+                .fluidOutputs(HydrogenSulfide.getFluid(1000))
+                .fluidOutputs(DieselLight.getFluid(8000))
                 .duration(160).EUt(30).buildAndRegister();
 
         CHEMICAL_RECIPES.recipeBuilder()
@@ -410,6 +412,16 @@ public class OilChains {
                 .duration(9)
                 .EUt(30)
                 .buildAndRegister();
+
+        //沥青
+        CHEMICAL_RECIPES.recipeBuilder()
+                .input(dust,Coal)
+                .fluidInputs(Concrete.getFluid(144))
+                .fluidInputs(Asphalt.getFluid(144))
+                .outputs(MetaBlocks.ASPHALT.getItemVariant(BlockAsphalt.BlockType.ASPHALT))
+                .EUt(30)
+                .duration(200)
+                .buildAndRegister();
     }
     private static void cuihualiehua()
     {
@@ -439,7 +451,7 @@ public class OilChains {
 
         //蒸汽
         DISTILLATION_RECIPES.recipeBuilder()
-                .fluidInputs(LightlyHydroCrackedDieselLight.getFluid(800))
+                .fluidInputs(LightlySteamCrackedDieselLight.getFluid(800))
                 .chancedOutput(dust, Carbon, 1111, 0)
                 .fluidOutputs(DieselLight.getFluid(240))
                 .fluidOutputs(Naphtha.getFluid(50))
@@ -456,7 +468,7 @@ public class OilChains {
                 .duration(120).EUt(VA[MV]).buildAndRegister();
 
         DISTILLATION_RECIPES.recipeBuilder()
-                .fluidInputs(SeverelyHydroCrackedDieselLight.getFluid(800))
+                .fluidInputs(SeverelySteamCrackedDieselLight.getFluid(800))
                 .chancedOutput(dust, Carbon, 3333, 0)
                 .fluidOutputs(DieselLight.getFluid(80))
                 .fluidOutputs(Naphtha.getFluid(125))
@@ -473,7 +485,7 @@ public class OilChains {
                 .duration(120).EUt(VA[MV]).buildAndRegister();
 
         DISTILLATION_RECIPES.recipeBuilder()
-                .fluidInputs(LightlyHydroCrackedDieselHeavy.getFluid(800))
+                .fluidInputs(LightlySteamCrackedDieselHeavy.getFluid(800))
                 .chancedOutput(dust, Carbon, 1111, 0)
                 .fluidOutputs(DieselHeavy.getFluid(240))
                 .fluidOutputs(Naphtha.getFluid(50))
@@ -490,7 +502,7 @@ public class OilChains {
                 .duration(120).EUt(VA[MV]).buildAndRegister();
 
         DISTILLATION_RECIPES.recipeBuilder()
-                .fluidInputs(SeverelyHydroCrackedDieselHeavy.getFluid(800))
+                .fluidInputs(SeverelySteamCrackedDieselHeavy.getFluid(800))
                 .chancedOutput(dust, Carbon, 3333, 0)
                 .fluidOutputs(DieselHeavy.getFluid(80))
                 .fluidOutputs(Naphtha.getFluid(125))

@@ -177,6 +177,7 @@ public class GTQTMaterials {
     public static Material LightlySteamCrackedDieselHeavy;
     public static Material SeverelyHydroCrackedDieselHeavy;
     public static Material SeverelySteamCrackedDieselHeavy;
+    public static Material Phenolic;
 
     //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/api/unification/GSMaterials.java
 

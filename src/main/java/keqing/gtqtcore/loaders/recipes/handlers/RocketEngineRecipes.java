@@ -63,7 +63,7 @@ public class RocketEngineRecipes {
 
         SOLAR_PLATE.recipeBuilder()
                 .fluidInputs(Water.getFluid(1))
-                .EUt(32)
+                .EUt(30)
                 .duration(200)
                 .buildAndRegister();
 

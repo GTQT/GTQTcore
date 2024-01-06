@@ -1,6 +1,9 @@
 package keqing.gtqtcore.api.unification.ore;
 
+import gregtech.api.unification.material.info.MaterialFlag;
+import gregtech.api.unification.material.info.MaterialFlags;
 import gregtech.api.unification.ore.OrePrefix;
+import keqing.gtqtcore.api.unification.material.info.EPMaterialFlags;
 import keqing.gtqtcore.api.unification.material.info.GTQTMaterialIconType;
 import net.minecraft.client.resources.I18n;
 
@@ -18,11 +21,12 @@ public class GTQTOrePrefix {
             mat -> mat.hasFlag(GENERATE_ELECTRODE));
 
     public static final OrePrefix swarm = new OrePrefix("swarm", M, null, GTQTMaterialIconType.swarm, ENABLE_UNIFICATION,
-            OrePrefix.Conditions.hasIngotProperty, mat -> Collections.singletonList(I18n.format("metaitem.swarm.tooltip")));
+            OrePrefix.Conditions.hasIngotProperty,  mat ->Collections.singletonList(I18n.format("metaitem.swarm.tooltip")));
+
+
 
     public static final OrePrefix singularity = new OrePrefix("singularity", M, null, GTQTMaterialIconType.singularity, ENABLE_UNIFICATION,
             OrePrefix.Conditions.hasIngotProperty, mat -> Collections.singletonList(I18n.format("metaitem.singularity.tooltip")));
-
     public static final OrePrefix leaf = new OrePrefix("leaf", M, null, GTQTMaterialIconType.leaf, ENABLE_UNIFICATION,
             OrePrefix.Conditions.hasIngotProperty, mat -> Collections.singletonList(I18n.format("metaitem.leaf.tooltip")));
 

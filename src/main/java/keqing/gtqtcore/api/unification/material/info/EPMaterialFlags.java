@@ -18,6 +18,7 @@ public class EPMaterialFlags {
             .requireFlags(MaterialFlags.CRYSTALLIZABLE)
             .requireProps(PropertyKey.GEM)
             .build();
+
     public static final MaterialFlag GENERATE_BOULE = new MaterialFlag.Builder("generate_boule")
             .requireProps(PropertyKey.GEM)
             .build();
@@ -30,6 +31,9 @@ public class EPMaterialFlags {
     public static final MaterialFlag GENERATE_NANOTUBE = new MaterialFlag.Builder("generate_nanotube")
             .build();
     public static final MaterialFlag GENERATE_NANOSENSOR = new MaterialFlag.Builder("generate_nanosensor")
+            .build();
+
+    public static final MaterialFlag GENERATE_SWARM = new MaterialFlag.Builder("generate_swarm")
             .build();
 
 }

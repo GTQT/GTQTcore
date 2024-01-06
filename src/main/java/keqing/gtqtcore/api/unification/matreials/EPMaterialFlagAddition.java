@@ -1,5 +1,6 @@
 package keqing.gtqtcore.api.unification.matreials;
 
+import com.mojang.realmsclient.util.RealmsTasks;
 import gregtech.api.unification.material.properties.*;
 
 import static gregicality.science.api.unification.materials.GCYSMaterials.*;
@@ -187,6 +188,9 @@ public class EPMaterialFlagAddition {
         Gold.addFlags(GENERATE_NANOTUBE, GENERATE_NANOSENSOR); // For PCB factory Etching
 
         Graphite.setProperty(PropertyKey.FLUID, new FluidProperty());
-
+        Oxygen.setProperty(PropertyKey.INGOT, new IngotProperty());
+        Hydrogen.setProperty(PropertyKey.INGOT, new IngotProperty());
+        Nitrogen.setProperty(PropertyKey.INGOT, new IngotProperty());
+        Helium.setProperty(PropertyKey.INGOT, new IngotProperty());
     }
 }

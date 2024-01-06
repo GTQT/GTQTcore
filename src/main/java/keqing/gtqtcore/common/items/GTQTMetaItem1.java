@@ -51,6 +51,10 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         GOLD_CROP = addItem(205, "gold_crop");
         GOLD_CROP.addComponents(new GTQTCropSeedBehaviour(GTQTCrops.GOLD_CROP, GOLD_CROP.getStackForm(), GOLD_CROP.getStackForm()));
 
+
+        IMPREGNATED_GRAPHITE_RODSA = this.addItem(7,"item.impregnated_graphite_rodsa").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        IMPREGNATED_SUBSTRATE = this.addItem(8,"item.impregnated_substrate").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        IMPREGNATED_GRAPHITE_RODS = this.addItem(9,"item.impregnated_graphite_rods").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         COMMON_ALGAE = this.addItem(10,"algae.common").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         GREEN_ALGAE = this.addItem(11,"algae.green").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         RED_ALGAE = this.addItem(12,"algae.red").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);

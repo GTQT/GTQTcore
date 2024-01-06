@@ -360,6 +360,7 @@ gregtech.material.ethylene_oxide=环氧乙烷
 gregtech.material.propylene_oxide=环氧丙烷
 gregtech.material.ammonium_sulfate=硫酸铵
 gregtech.material.asphalt=沥青
+gregtech.material.phenolic=酚醛
 gregtech.material.wax_oil=蜡油
 gregtech.material.lightlyhydrocrackeddiesellight=轻度加氢裂解轻柴油
 gregtech.material.lightlysteamcrackeddiesellight=轻度蒸汽裂解轻柴油
@@ -590,6 +591,11 @@ metaitem.item.algae_acid.name=藻酸
 metaitem.item.pellets_mould.name=模具(颗粒)
 metaitem.item.wood_pellets.name=木颗粒
 metaitem.item.aluminium_pellets.name=铝颗粒
+
+metaitem.item.impregnated_graphite_rods.name=浸渍石墨棒组
+metaitem.item.impregnated_substrate.name=浸渍基板
+metaitem.item.impregnated_graphite_rodsa.name=预处理石墨电极
+
 
 gtqtcore.machine.combustion_generator.ev.name=脉冲内燃发电机
 gtqtcore.machine.steam_turbine.ev.name=脉冲蒸气轮机

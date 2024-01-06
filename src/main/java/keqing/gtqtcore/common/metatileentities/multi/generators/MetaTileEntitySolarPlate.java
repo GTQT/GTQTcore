@@ -14,8 +14,10 @@ import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
+import gregtech.api.unification.material.Materials;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.TextComponentUtil;
+import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
@@ -62,6 +64,9 @@ public class MetaTileEntitySolarPlate extends FuelMultiblockController {
         return new MetaTileEntitySolarPlate(metaTileEntityId);
     }
     int tier;
+
+
+
     @Nonnull
     @Override
     protected BlockPattern createStructurePattern() {
@@ -79,8 +84,7 @@ public class MetaTileEntitySolarPlate extends FuelMultiblockController {
                         .or(metaTileEntities(MultiblockAbility.REGISTRY.get(MultiblockAbility.OUTPUT_ENERGY).stream()
                                 .filter(mte -> {
                                     IEnergyContainer container = mte.getCapability(GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER, null);
-                                    return  container.getOutputAmperage() == 2
-                                            || container.getOutputVoltage() == GTValues.V[LV]
+                                    return     container.getOutputVoltage() == GTValues.V[LV]
                                             || container.getOutputVoltage() == GTValues.V[MV]
                                             || container.getOutputVoltage() == GTValues.V[HV];
 
@@ -112,7 +116,10 @@ public class MetaTileEntitySolarPlate extends FuelMultiblockController {
         tooltip.add(I18n.format("gtqtcore.machine.spa.tooltip.1"));
         tooltip.add(I18n.format("gtqtcore.machine.spa.tooltip.2"));
     }
-
+    protected void addDisplayText(List<ITextComponent> textList) {
+        super.addDisplayText(textList);
+        textList.add(new TextComponentTranslation("gtqtcore.tire", tier));
+    }
     @Override
     public boolean hasMufflerMechanics() {
         return false;
@@ -126,13 +133,15 @@ public class MetaTileEntitySolarPlate extends FuelMultiblockController {
                 0);
         this.writeCustomData(GTQTValue.UPDATE_TIER, buf -> buf.writeInt(this.tier));
     }
-
+/*
     public static int getMaxParallel(int tier) {
         if(tier==1) return 1;
         if(tier==2) return 4;
         if(tier==3) return 16;
         return 1;
     }
+
+ */
     public long getMaxVoltage() {
         return  VA[tier];
     }

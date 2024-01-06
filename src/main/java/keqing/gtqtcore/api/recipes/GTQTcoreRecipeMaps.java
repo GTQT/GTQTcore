@@ -78,6 +78,7 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<MDRecipeBuilder> MINING_DRILL_RECIPES;
     public static final RecipeMap<FuelRecipeBuilder> SOLAR_PLATE;
     public static final RecipeMap<SimpleRecipeBuilder> DISTILLATION_KETTLE;
+    public static final RecipeMap<SimpleRecipeBuilder> NANOHYBRID;
     public static final RecipeMap<SimpleRecipeBuilder> PYROLYSIS_TOWER;
 
 
@@ -253,6 +254,9 @@ public class GTQTcoreRecipeMaps {
 
         PLASMA_FORGE = new RecipeMap<>("plasma_forge",
                 9, 9, 9, 9, new FuelRecipeBuilder(), false);
+
+        NANOHYBRID = new RecipeMap<>("nanohybrid",
+                9, 1, 3, 0, new SimpleRecipeBuilder(), false);
 
         //  High Pressure Steam Turbine Recipemap
         HIGH_PRESSURE_STEAM_TURBINE_FUELS = new RecipeMap<>("high_pressure_steam_turbine_fuels", 0, 0, 1, 1, new FuelRecipeBuilder(), false);
