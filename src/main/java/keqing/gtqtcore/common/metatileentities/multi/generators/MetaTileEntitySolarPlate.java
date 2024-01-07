@@ -133,15 +133,6 @@ public class MetaTileEntitySolarPlate extends FuelMultiblockController {
                 0);
         this.writeCustomData(GTQTValue.UPDATE_TIER, buf -> buf.writeInt(this.tier));
     }
-/*
-    public static int getMaxParallel(int tier) {
-        if(tier==1) return 1;
-        if(tier==2) return 4;
-        if(tier==3) return 16;
-        return 1;
-    }
-
- */
     public long getMaxVoltage() {
         return  VA[tier];
     }

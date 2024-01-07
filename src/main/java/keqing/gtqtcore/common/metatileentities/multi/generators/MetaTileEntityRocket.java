@@ -15,6 +15,7 @@ import gregtech.api.unification.material.Materials;
 import gregtech.api.util.GTTransferUtils;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.TextFormattingUtil;
+import gregtech.client.renderer.texture.Textures;
 import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
 import gregtech.common.blocks.*;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
@@ -58,21 +59,45 @@ public class MetaTileEntityRocket extends FuelMultiblockController  {
 
     public MetaTileEntityRocket(ResourceLocation metaTileEntityId, int tier) {
         super(metaTileEntityId,GTQTcoreRecipeMaps.ROCKET, tier);
-        this.recipeMapWorkable = new TurbineCombustionEngineWorkableHandler(this, tier > GTValues.UV);
+        this.recipeMapWorkable = new TurbineCombustionEngineWorkableHandler(this, false);
         this.recipeMapWorkable.setMaximumOverclockVoltage(GTValues.V[tier]);
         this.tier = tier;
-        this.isExtreme = tier > GTValues.UV;
+        this.isExtreme = false;
     }
 
 
+    @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
         if (isStructureFormed()) {
             if (getInputFluidInventory() != null) {
-                FluidStack lubricantStack = getInputFluidInventory().drain(Materials.Lubricant.getFluid(Integer.MAX_VALUE), false);
-                int lubricantAmount = lubricantStack == null ? 0 : lubricantStack.amount;
-                textList.add(new TextComponentTranslation("gregtech.multiblock.large_combustion_engine.lubricant_amount", TextFormattingUtil.formatNumbers(lubricantAmount)));
-
+                FluidStack WaterStack = getInputFluidInventory().drain(Materials.Lubricant.getFluid(Integer.MAX_VALUE), false);
+                FluidStack LubricantStack = getInputFluidInventory().drain(Materials.Water.getFluid(Integer.MAX_VALUE), false);
+                FluidStack liquidOxygenStack = getInputFluidInventory().drain(Materials.Oxygen.getFluid(Integer.MAX_VALUE), false);
+                int lubricantAmount = WaterStack == null ? 0 : WaterStack.amount;
+                textList.add(new TextComponentTranslation("gtqtcore.multiblock.large_combustion_engine.water_amount", TextFormattingUtil.formatNumbers(lubricantAmount)));
+                if (boostAllowed) {
+                    if (!isExtreme) {
+                        if (((TurbineCombustionEngineWorkableHandler) recipeMapWorkable).isOxygenBoosted) {
+                            int oxygenAmount = LubricantStack == null ? 0 : LubricantStack.amount;
+                            textList.add(new TextComponentTranslation("gtqtcore.multiblock.large_combustion_engine.lubricant_amount", TextFormattingUtil.formatNumbers(oxygenAmount)));
+                            textList.add(new TextComponentTranslation("gtqtcore.multiblock.large_combustion_engine.lubricant_boosted"));
+                        } else {
+                            textList.add(new TextComponentTranslation("gtqtcore.multiblock.large_combustion_engine.supply_lubricant_to_boost"));
+                        }
+                    }
+                    else {
+                        if (((TurbineCombustionEngineWorkableHandler) recipeMapWorkable).isOxygenBoosted) {
+                            int liquidOxygenAmount = liquidOxygenStack == null ? 0 : liquidOxygenStack.amount;
+                            textList.add(new TextComponentTranslation("gtqtcore.multiblock.large_combustion_engine.liquid_lubricant_amount", TextFormattingUtil.formatNumbers((liquidOxygenAmount))));
+                            textList.add(new TextComponentTranslation("gtqtcore.multiblock.large_combustion_engine.liquid_lubricant_boosted"));
+                        } else {
+                            textList.add(new TextComponentTranslation("gtqtcore.multiblock.large_combustion_engine.supply_liquid_lubricant_to_boost"));
+                        }
+                    }
+                } else {
+                    textList.add(new TextComponentTranslation("gtqtcore.multiblock.large_combustion_engine.boost_disallowed"));
+                }
             }
         }
     }
@@ -171,7 +196,7 @@ public class MetaTileEntityRocket extends FuelMultiblockController  {
 
     @Override
     protected OrientedOverlayRenderer getFrontOverlay() {
-        return GCYMTextures.ALLOY_BLAST_SMELTER_OVERLAY;
+        return Textures.POWER_SUBSTATION_OVERLAY;
     }
 
 
@@ -218,8 +243,8 @@ public class MetaTileEntityRocket extends FuelMultiblockController  {
         }
         private final FluidStack WATER_STACK = Materials.Water.getFluid(1000*getmax(heatingCoilLevel));
         private final FluidStack HOT_STACK = GTQTMaterials.HighPressureSteam.getFluid(60*getmax(heatingCoilLevel));
-        private final FluidStack LUBRICANT_STACK = Materials.Lubricant.getFluid(50*getmax(heatingCoilLevel));
-        private final FluidStack OXYGEN_STACK = Materials.Oxygen.getFluid(200*getmax(heatingCoilLevel));
+        private final FluidStack LUBRICANT_STACK = Materials.Lubricant.getFluid(100*getmax(heatingCoilLevel));
+        private final FluidStack OXYGEN_STACK = Materials.Oxygen.getFluid(400*getmax(heatingCoilLevel));
         public int getmax(int heatingCoilLevel)
         {
             if(heatingCoilLevel <= 5)return heatingCoilLevel;

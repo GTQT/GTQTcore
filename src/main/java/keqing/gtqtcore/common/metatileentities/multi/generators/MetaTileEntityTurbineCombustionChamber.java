@@ -48,10 +48,10 @@ public class MetaTileEntityTurbineCombustionChamber extends FuelMultiblockContro
 
     public MetaTileEntityTurbineCombustionChamber(ResourceLocation metaTileEntityId, int tier) {
         super(metaTileEntityId,GTQTcoreRecipeMaps.TURBINE_COMBUSTION_CHAMBER, tier);
-        this.recipeMapWorkable = new TurbineCombustionEngineWorkableHandler(this, tier > GTValues.EV);
+        this.recipeMapWorkable = new TurbineCombustionEngineWorkableHandler(this, false);
         this.recipeMapWorkable.setMaximumOverclockVoltage(GTValues.V[tier]);
         this.tier = tier;
-        this.isExtreme = tier > GTValues.EV;
+        this.isExtreme = false;
     }
 
 
@@ -168,7 +168,7 @@ public class MetaTileEntityTurbineCombustionChamber extends FuelMultiblockContro
     @Nonnull
     @Override
     protected ICubeRenderer getFrontOverlay() {
-        return  Textures.EXTREME_COMBUSTION_ENGINE_OVERLAY ;
+        return  Textures.POWER_SUBSTATION_OVERLAY ;
     }
 
     @Override

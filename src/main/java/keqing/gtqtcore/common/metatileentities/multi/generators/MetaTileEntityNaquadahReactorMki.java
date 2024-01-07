@@ -106,7 +106,6 @@ public class MetaTileEntityNaquadahReactorMki extends FuelMultiblockController {
             super(tileEntity);
         }
 
-
         @Override
         public long getMaxVoltage() {
                 return GTValues.V[ZPM];
