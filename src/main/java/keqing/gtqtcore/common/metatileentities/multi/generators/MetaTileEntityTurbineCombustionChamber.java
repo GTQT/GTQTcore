@@ -32,6 +32,7 @@ import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.client.renderer.ICubeRenderer;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -39,6 +40,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 
 public class MetaTileEntityTurbineCombustionChamber extends FuelMultiblockController {
+
     protected static int heatingCoilLevel;
     private final int tier;
     private final boolean isExtreme;
@@ -209,81 +211,74 @@ public class MetaTileEntityTurbineCombustionChamber extends FuelMultiblockContro
             heatingCoilLevel = BlockWireCoil.CoilType.CUPRONICKEL.getLevel();
         }
     }
-    private static class TurbineCombustionEngineWorkableHandler extends MultiblockFuelRecipeLogic {
+    private class TurbineCombustionEngineWorkableHandler extends MultiblockFuelRecipeLogic {
 
         private boolean isOxygenBoosted = false;
 
         private final MetaTileEntityTurbineCombustionChamber combustionEngine;
-        private final boolean isExtreme;
-        private static final FluidStack OXYGEN_STACK = Materials.Lubricant.getFluid(20);
-        private static final FluidStack LUBRICANT_STACK = Materials.Water.getFluid(4000);
+        private boolean isExtreme;
+
+        int add;
 
         public TurbineCombustionEngineWorkableHandler(RecipeMapMultiblockController tileEntity, boolean isExtreme) {
             super(tileEntity);
             this.combustionEngine = (MetaTileEntityTurbineCombustionChamber) tileEntity;
             this.isExtreme = isExtreme;
         }
-
+        private final FluidStack WATER_STACK = Materials.Water.getFluid(1000*getmax(heatingCoilLevel));
+        private final FluidStack LUBRICANT_STACK = Materials.Lubricant.getFluid(50*getmax(heatingCoilLevel));
+        private final FluidStack OXYGEN_STACK = Materials.Oxygen.getFluid(200*getmax(heatingCoilLevel));
+        public int getmax(int heatingCoilLevel)
+        {
+            if(heatingCoilLevel <= 4)return heatingCoilLevel+add;
+            if(heatingCoilLevel<10)return 5+add;
+            if(heatingCoilLevel<16)return 6+add;
+            if(heatingCoilLevel<25)return 7+add;
+            return 1;
+        }
         @Override
         public long getMaxVoltage() {
             //this multiplies consumption through parallel
             if (isOxygenBoosted)
-                return GTValues.V[heatingCoilLevel] * 2;
+                return GTValues.V[getmax(heatingCoilLevel)+1] ;
             else
-                return GTValues.V[heatingCoilLevel];
+                return GTValues.V[getmax(heatingCoilLevel)];
         }
         @Override
         protected void updateRecipeProgress() {
             if (canRecipeProgress && drawEnergy(recipeEUt, true)) {
 
                 //这里是蒸燃联合需要的水
-                if (totalContinuousRunningTime == 1 || totalContinuousRunningTime % 72 == 0) {
                     IMultipleTankHandler inputTank = combustionEngine.getInputFluidInventory();
-                    if (LUBRICANT_STACK.isFluidStackIdentical(inputTank.drain(LUBRICANT_STACK, false))) {
-                        inputTank.drain(LUBRICANT_STACK, true);
+                    if (WATER_STACK.isFluidStackIdentical(inputTank.drain(WATER_STACK, false))) {
+                        inputTank.drain(WATER_STACK, true);
                     } else {
-                        invalidate();
                         return;
                     }
-                }
 
                 //这里是增产的润滑油
-                if (combustionEngine.isBoostAllowed() && (totalContinuousRunningTime == 1 || totalContinuousRunningTime % 20 == 0)) {
-                    IMultipleTankHandler inputTank = combustionEngine.getInputFluidInventory();
-                    FluidStack boosterStack = OXYGEN_STACK;
-                    if (boosterStack.isFluidStackIdentical(inputTank.drain(boosterStack, false))) {
+                    if (LUBRICANT_STACK.isFluidStackIdentical(inputTank.drain(LUBRICANT_STACK, false))) {
                         isOxygenBoosted = true;
-                        inputTank.drain(boosterStack, true);
+                        inputTank.drain(LUBRICANT_STACK, true);
                     } else {
                         isOxygenBoosted = false;
                     }
-                }
 
-                drawEnergy(recipeEUt, false);
+                //这里是增产的氧气
+                    if (OXYGEN_STACK.isFluidStackIdentical(inputTank.drain(OXYGEN_STACK, false))) {
+                        inputTank.drain(OXYGEN_STACK, true);
+                    }
 
-                //as recipe starts with progress on 1 this has to be > only not => to compensate for it
+                    drawEnergy(recipeEUt, false);
                 if (++progressTime > maxProgressTime) {
                     completeRecipe();
                 }
             }
         }
-
-        @Override
-        protected boolean shouldSearchForRecipes() {
-            return super.shouldSearchForRecipes() && LUBRICANT_STACK.isFluidStackIdentical(((RecipeMapMultiblockController) metaTileEntity).getInputFluidInventory().drain(LUBRICANT_STACK, false));
-        }
-
-
         @Override
         protected long boostProduction(long production) {
-            //this multiplies production without increasing consumption
             if (isOxygenBoosted)
-                if (!isExtreme)
-                    //recipe gives 2A EV and we want 3A EV, for 150% efficiency
-                    return production * 3 / 2;
-                else
-                    //recipe gives 2A IV and we want 4A IV, for 200% efficiency
-                    return production * 2;
+                    return production * 3/2;
             return production;
         }
 
@@ -294,7 +289,4 @@ public class MetaTileEntityTurbineCombustionChamber extends FuelMultiblockContro
         }
     }
 
-    boolean isBoostAllowed() {
-        return boostAllowed;
-    }
 }
