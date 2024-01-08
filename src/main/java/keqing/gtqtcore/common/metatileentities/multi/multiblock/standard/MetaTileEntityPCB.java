@@ -296,6 +296,7 @@ public class MetaTileEntityPCB extends RecipeMapMultiblockController {
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
+
         initializeAbilities();
         if (context.get("AuxiliaryBlastFurnace1") != null) {
             x += 1;
