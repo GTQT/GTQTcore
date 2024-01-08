@@ -326,10 +326,15 @@ public class MetaTileEntityTurbineCombustionChamber extends FuelMultiblockContro
     }
     public int getmax(int heatingCoilLevel)
     {
-        if(heatingCoilLevel <= 5)return heatingCoilLevel+add;
-        if(heatingCoilLevel<10)return 6+add;
-        if(heatingCoilLevel<16)return 7+add;
-        if(heatingCoilLevel<25)return 8+add;
+        if(heatingCoilLevel == 1)return 2+add;
+        if(heatingCoilLevel == 2)return 3+add;
+        if(heatingCoilLevel == 4)return 4+add;
+        if(heatingCoilLevel == 8)return 5+add;
+        if(heatingCoilLevel<=16)return 6+add;
+        if(heatingCoilLevel<=24)return 7+add;
+        if(heatingCoilLevel<=28)return 8+add;
+        if(heatingCoilLevel<=32)return 9+add;
+        if(heatingCoilLevel<=36)return 10+add;
         return 1;
     }
     int getRotorSpeed()

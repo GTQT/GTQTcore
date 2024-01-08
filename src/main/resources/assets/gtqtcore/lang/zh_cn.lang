@@ -708,6 +708,8 @@ tile.wire_coil.unive.name=*-宇宙态素中子线圈-*
 tile.wire_coil.end.name=*-寰宇支配之无尽线圈-*
 tile.wire_coil.superconducting_metallic_hydrogen_coil.name=*-超导金属氢线圈-*
 tile.wire_coil.cupar_proton_pair_coil.name=*-库珀对线圈-*
+tile.wire_coil.cupara_proton_pair_coil.name=*-海珀珍线圈-*
+tile.wire_coil.cuparb_proton_pair_coil.name=*-热动力学恒星压缩物质奇点线圈-*
 
 gtqtcore.machine.lager_heat_exchanger.name=大型热交换机
 recipemap.heat_exchanger_recipes.name=热力交换

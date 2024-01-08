@@ -43,6 +43,18 @@
         "textures": {
           "all": "gregtech:blocks/multiblock/wire_coil/cupar_proton_pair_coil"
         }
+      },
+      "cupara_proton_pair_coil": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/wire_coil/cupara_proton_pair_coil"
+        }
+      },
+      "cuparb_proton_pair_coil": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/wire_coil/cuparb_proton_pair_coil"
+        }
       }
     }
   }

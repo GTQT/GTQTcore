@@ -10,6 +10,7 @@ import gregtech.api.unification.material.Materials;
 import gregtech.client.utils.TooltipHelper;
 import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.metatileentities.multi.electric.MetaTileEntityMultiSmelter;
+import keqing.gtqtcore.api.unification.GTQTMaterials;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
@@ -81,13 +82,16 @@ import java.util.List;
 
         public enum CoilType implements IStringSerializable, IHeatingCoilBlockStats {
 
+
+
             DRACONIC("draconic", 12600, 18, 10, Materials.Neutronium),
             WAKE_DRACONIC("wake_draconic", 14400, 20, 12, Materials.Neutronium),
-            UNIVE("unive", 16200, 22, 14, Materials.Neutronium),
-            END("end", 18000, 22, 16, Materials.Neutronium),
-            SUPERCONDUCTING_METALLIC_HYDROGEN_COIL("superconducting_metallic_hydrogen_coil", 19800, 22, 18, Materials.Neutronium),
-            CUPAR_PROTON_PAIR_COIL("cupar_proton_pair_coil", 21600, 24, 20, Materials.Neutronium);
-
+            UNIVE("unive", 16200, 24, 18, GTQTMaterials.Draconium),
+            END("end", 18000, 26, 20,  GTQTMaterials.AwakenedDraconium),
+            SUPERCONDUCTING_METALLIC_HYDROGEN_COIL("superconducting_metallic_hydrogen_coil", 19800, 28, 18, Materials.Neutronium),
+            CUPAR_PROTON_PAIR_COIL("cupar_proton_pair_coil", 21600, 30, 20, Materials.Neutronium),
+            CUPARA_PROTON_PAIR_COIL("cupara_proton_pair_coil", 23400, 30, 20, Materials.Neutronium),
+            CUPARB_PROTON_PAIR_COIL("cuparb_proton_pair_coil", 25200, 32, 10, Materials.Neutronium);
             private final String name;
             //electric blast furnace properties
             private final int coilTemperature;
