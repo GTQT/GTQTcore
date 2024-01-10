@@ -6,15 +6,12 @@ import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.SimpleGeneratorMetaTileEntity;
 import gregtech.api.metatileentity.SimpleMachineMetaTileEntity;
 import gregtech.api.recipes.RecipeMaps;
-import gregtech.api.unification.material.Materials;
 import gregtech.api.util.GTUtility;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.common.metatileentities.MetaTileEntities;
 import gregtech.common.metatileentities.electric.MetaTileEntitySingleCombustion;
 import gregtech.common.metatileentities.electric.MetaTileEntitySingleTurbine;
-import gregtech.common.metatileentities.multi.electric.generator.MetaTileEntityLargeTurbine;
 import gregtech.common.metatileentities.multi.multiblockpart.*;
-import keqing.gtqtcore.GTQTCore;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.utils.GTQTLog;
 import keqing.gtqtcore.api.utils.GTQTUtil;
@@ -23,6 +20,7 @@ import keqing.gtqtcore.common.metatileentities.multi.generators.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.MetaTileEntityAlloykiln;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.MetaTileEntityIndustrialPrimitiveBlastFurnace;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.MetaTileEntityOilPool;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.MetaTileEntityPReactor;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.steam.MetaTileEntitySteamExtractor;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.steam.MetaTileEntitySteamBlastFurnace;
@@ -86,9 +84,10 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityRocket ROCKET;
     public static MetaTileEntitySteamOreWasher STEAM_ORE_WASHER;
     public static MetaTileEntitySteamBlastFurnace STEAM_BLAST_FURANCE;
-
+    public static MetaTileEntityPReactor P_REACTOR;
     public static MetaTileEntityHugeDistillationTower HUGE_DISTILLATION_TOWER;
     public static MetaTileEntityHugeVacuum HUGE_VACUUM;
+    public static final MetaTileEntityEFusionReactor[] EFUSION_REACTOR = new MetaTileEntityEFusionReactor[3];
     public static MetaTileEntityVacuumFreezer VACUUM_FREEZER;
     public static MetaTileEntityPyrolysisTower PYROLYSIS_TOWER;
     public static MetaTileEntityQuantumForceTransformer QUANTUM_FORCE_TRANSFORMER;
@@ -287,6 +286,10 @@ public class GTQTMetaTileEntities {
         DISTILLATION_KETTLE=registerMetaTileEntity(3098,new MetaTileEntityDistillationKettle(gtqtcoreId(("distillation_kettle"))));
         OCEAN_PUMPER = registerMetaTileEntity(3099, new MetaTileEntityOceanPumper(gtqtcoreId("ocean_pumper")));
         SOLAR_PLATE = registerMetaTileEntity(3100, new MetaTileEntitySolarPlate(gtqtcoreId("solar_plate")));
+        P_REACTOR= registerMetaTileEntity(3101, new MetaTileEntityPReactor(gtqtcoreId("p_reactor")));
+        EFUSION_REACTOR[0] = registerMetaTileEntity(3102, new MetaTileEntityEFusionReactor(gtqtcoreId("fusion_reactor.luv"), GTValues.LuV));
+        EFUSION_REACTOR[1] = registerMetaTileEntity(3103, new MetaTileEntityEFusionReactor(gtqtcoreId("fusion_reactor.zpm"), GTValues.ZPM));
+        EFUSION_REACTOR[2] = registerMetaTileEntity(3104, new MetaTileEntityEFusionReactor(gtqtcoreId("fusion_reactor.uv"), GTValues.UV));
 
 
         registerSimpleMetaTileEntity(FLUID_EXTRACTOR, 15000, "fluid_extractor", GTQTcoreRecipeMaps.FLUID_EXTRACTOR_RECIPES, Textures.EXTRACTOR_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
@@ -296,6 +299,8 @@ public class GTQTMetaTileEntities {
         registerSimpleMetaTileEntity(DECAY_CHAMBER, 15045, "decay_chamber", GTQTcoreRecipeMaps.DECAY_CHAMBER_RECIPES, Textures.CHEMICAL_BATH_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
         registerSimpleMetaTileEntity(VACUUM_CHAMBER, 15060, "vacuum_chamber", GTQTcoreRecipeMaps.VACUUM_CHAMBER_RECIPES, Textures.GAS_COLLECTOR_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
         registerSimpleMetaTileEntity(ULTRAVIOLET_LAMP_CHAMBER, 15075, "ultraviolet_lamp_chamber", GTQTcoreRecipeMaps.ULTRAVIOLET_LAMP_CHAMBER_RECIPES, Textures.LASER_ENGRAVER_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
+
+
 
         ROTOR_HOLDER[6] = registerMetaTileEntity(16000, new MetaTileEntityRotorHolder(gtqtcoreId("rotor_holder.uhv"), GTValues.UHV));
         ROTOR_HOLDER[7] = registerMetaTileEntity(16001, new MetaTileEntityRotorHolder(gtqtcoreId("rotor_holder.uev"), GTValues.UEV));

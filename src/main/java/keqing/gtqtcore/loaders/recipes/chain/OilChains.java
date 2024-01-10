@@ -4,6 +4,8 @@ import gregtech.api.unification.material.Material;
 import gregtech.common.blocks.BlockAsphalt;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.items.MetaItems;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 
 import static gregicality.science.api.unification.materials.GCYSMaterials.*;
 import static gregtech.api.GTValues.*;
@@ -124,6 +126,30 @@ public class OilChains {
     private static void Kettle()
     {
 
+        //煤焦线
+        DISTILLATION_KETTLE.recipeBuilder()
+                .input(log, Wood, 64)
+                .outputs(new ItemStack(Items.COAL, 48, 1))
+                .fluidOutputs(WoodTar.getFluid(1000))
+                .fluidOutputs(WoodGas.getFluid(1000))
+                .fluidOutputs(WoodVinegar.getFluid(2000))
+                .fluidOutputs(Creosote.getFluid(3000))
+                .duration(2000).EUt(120)
+                .buildAndRegister();
+
+        DISTILLATION_KETTLE.recipeBuilder()
+                .input(log, Wood, 80)
+                .fluidInputs(Nitrogen.getFluid(6000))
+                .output(gem, Coke, 48)
+                .fluidOutputs(CharcoalByproducts.getFluid(3000))
+                .fluidOutputs(WoodTar.getFluid(1000))
+                .fluidOutputs(WoodGas.getFluid(1000))
+                .fluidOutputs(WoodVinegar.getFluid(2000))
+                .fluidOutputs(Creosote.getFluid(3000))
+                .duration(2000).EUt(120)
+                .buildAndRegister();
+
+
         DISTILLATION_KETTLE.recipeBuilder()
                 .fluidInputs(Steam.getFluid(10000))
                 .input(gem, Coal,10)
@@ -232,6 +258,29 @@ public class OilChains {
                 .fluidOutputs(Creosote.getFluid(300))
                 .fluidOutputs(Phenol.getFluid(200))
                 .duration(80).EUt(VA[MV])
+                .buildAndRegister();
+
+        PYROLYSIS_TOWER.recipeBuilder()
+                .input(log, Wood, 64)
+                .fluidInputs(Steam.getFluid(6000))
+                .outputs(new ItemStack(Items.COAL, 64, 1))
+                .fluidOutputs(WoodTar.getFluid(1500))
+                .fluidOutputs(WoodGas.getFluid(1500))
+                .fluidOutputs(WoodVinegar.getFluid(3000))
+                .fluidOutputs(Creosote.getFluid(4000))
+                .duration(2400).EUt(120)
+                .buildAndRegister();
+
+        PYROLYSIS_TOWER.recipeBuilder()
+                .input(log, Wood, 80)
+                .fluidInputs(Nitrogen.getFluid(6000))
+                .output(gem, Coke, 80)
+                .fluidOutputs(CharcoalByproducts.getFluid(4000))
+                .fluidOutputs(WoodTar.getFluid(1500))
+                .fluidOutputs(WoodGas.getFluid(1500))
+                .fluidOutputs(WoodVinegar.getFluid(3000))
+                .fluidOutputs(Creosote.getFluid(4000))
+                .duration(2400).EUt(120)
                 .buildAndRegister();
     }
     private static void changjianya()

@@ -687,9 +687,13 @@ tile.electrobath.iii_electrobath.name=三级电解核心
 tile.electrobath.iv_electrobath.name=四级电解核心
 tile.electrobath.v_electrobath.name=五级电解核心
 
-
-
-
+gtqtcore.machine.p_reactor.name=原始化学反应缸
+gtqtcore.machine.fusion_reactor.luv.name=核聚变环流器 MKI
+gtqtcore.machine.fusion_reactor.zpm.name=核聚变环流器 MKII
+gtqtcore.machine.fusion_reactor.uv.name=核聚变环流器 MKIII
+recipemap.pr_mix.name=原始化学反应
+recipemap.efusion_reactor.name=核聚变环流器
+recipemap.solar_plate.name=太阳能
 tile.turbine_casing.nq_machine_casing.name=硅岩合金管道外壳
 tile.turbine_casing.nq_turbine_casing.name=硅岩合金机械方块
 tile.turbine_casing.pd_machine_casing.name=镀铑钯管道外壳

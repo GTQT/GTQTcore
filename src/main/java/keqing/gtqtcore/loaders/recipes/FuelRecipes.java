@@ -135,23 +135,6 @@ public class FuelRecipes {
                             .circuitMeta(2)
                             .buildAndRegister();
 
-                PCB.recipeBuilder()
-                .fluidInputs(HeavyNaquadahFuel.getFluid(1))
-                .fluidOutputs(LightNaquadahFuel.getFluid(1))
-                .EUt(114)
-                .part(1)
-                .duration(514)
-                .buildAndRegister();
-
-                PCB.recipeBuilder()
-                        .fluidInputs(LightNaquadahFuel.getFluid(1))
-                        .fluidOutputs(HeavyNaquadahFuel.getFluid(1))
-                        .EUt(114)
-                        .part(2)
-                        .duration(514)
-                        .buildAndRegister();
-
-
                 //  Heavy Naquadah Fuel
                 NAQUADAH_REACTOR_RECIPES.recipeBuilder()
                         .fluidInputs(HeavyNaquadahFuel.getFluid(1))

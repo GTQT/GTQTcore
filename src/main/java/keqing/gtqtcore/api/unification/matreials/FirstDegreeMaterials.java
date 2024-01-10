@@ -298,5 +298,10 @@ public class FirstDegreeMaterials {
                 .flags(DISABLE_DECOMPOSITION)
                 .build();
 
+        GTQTMaterials.Latex = new Material.Builder(getMaterialsId(), gregtechId("latex"))
+                .dust().fluid()
+                .color(0xFFFADA)
+                .build();
+
     }
 }

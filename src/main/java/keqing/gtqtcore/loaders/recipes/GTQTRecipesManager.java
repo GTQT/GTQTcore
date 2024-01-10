@@ -1,10 +1,7 @@
 package keqing.gtqtcore.loaders.recipes;
 
 import keqing.gtqtcore.loaders.recipes.chain.*;
-import keqing.gtqtcore.loaders.recipes.handlers.AllouKlin;
-import keqing.gtqtcore.loaders.recipes.handlers.DecompositionRecipeHandler;
-import keqing.gtqtcore.loaders.recipes.handlers.ELE;
-import keqing.gtqtcore.loaders.recipes.handlers.TESEDecompositionRecipeHandler;
+import keqing.gtqtcore.loaders.recipes.handlers.*;
 
 public class GTQTRecipesManager {
     private GTQTRecipesManager() {
@@ -29,5 +26,7 @@ public class GTQTRecipesManager {
         MetaTileEntityLoader.init();
         MetaTileEntityMachine.init();
         OilChains.init();
+        EFusionLoader.init();
+        PCBline.init();
     }
 }
