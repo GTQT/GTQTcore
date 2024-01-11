@@ -1,5 +1,8 @@
 package keqing.gtqtcore.loaders.recipes.chain;
 
+import gregicality.science.api.recipes.GCYSRecipeMaps;
+import gregtech.api.recipes.RecipeMap;
+import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.items.MetaItems;
@@ -8,16 +11,142 @@ import static gregicality.science.api.unification.materials.GCYSMaterials.*;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
+import static gregtech.common.items.MetaItems.*;
 import static gregtechfoodoption.GTFOMaterialHandler.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
+import static keqing.gtqtcore.api.unification.TJMaterials.*;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.electrode;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 
 public class CPULine {
     public static void init() {
         Pre();          //基板
+        Silicon();      //晶圆
     }
+    private static void Silicon()
+    {
+        CHEMICAL_RECIPES.recipeBuilder()
+                .input(dust,Copper)
+                .fluidInputs(Chlorine.getFluid(2000))
+                .output(dust,CopperCl)
+                .duration(200)
+                .EUt(30)
+                .buildAndRegister();
 
+        CHEMICAL_RECIPES.recipeBuilder()
+                .input(dust,CopperCl)
+                .fluidInputs(Trichlorosilane.getFluid(4000))
+                .fluidOutputs(Silane.getFluid(1000))
+                .fluidOutputs(SiliconTetrachloride.getFluid(3000))
+                .duration(200)
+                .EUt(30)
+                .buildAndRegister();
+
+        CHEMICAL_RECIPES.recipeBuilder()
+                .fluidInputs(SiliconTetrachloride.getFluid(1000))
+                .input(dust,Sodium,4)
+                .fluidOutputs(CSilicon.getFluid(1000))
+                .output(dust,Salt,4)
+                .duration(200)
+                .EUt(30)
+                .buildAndRegister();
+
+        ELECTROLYZER_RECIPES.recipeBuilder()
+                .fluidInputs(SiliconTetrachloride.getFluid(1000))
+                .fluidOutputs(Chlorine.getFluid(4000))
+                .fluidOutputs(CSilicon.getFluid(1000))
+                .duration(200)
+                .EUt(30)
+                .buildAndRegister();
+
+        ELECTROLYZER_RECIPES.recipeBuilder()
+                .fluidInputs(Silane.getFluid(1000))
+                .fluidOutputs(Hydrogen.getFluid(4000))
+                .fluidOutputs(CSilicon.getFluid(1000))
+                .duration(200)
+                .EUt(30)
+                .buildAndRegister();
+
+        GCYSRecipeMaps.CZPULLER_RECIPES.recipeBuilder()
+                .duration(5000)
+                .EUt(480)
+                .fluidInputs(Nitrogen.getFluid(16000))
+                .input(block,CSilicon,32)
+                .input(dust,GalliumArsenide,1)
+                .input(dust,Boron,1)
+                .output(SILICON_BOULE)
+                .buildAndRegister();
+
+        GCYSRecipeMaps.CZPULLER_RECIPES.recipeBuilder()
+                .duration(5000)
+                .EUt(1960)
+                .fluidInputs(Nitrogen.getFluid(16000))
+                .input(block,CSilicon,32)
+                .input(dust,GalliumArsenide,2)
+                .input(dust,Phosphorus,1)
+                .output(PHOSPHORUS_BOULE)
+                .buildAndRegister();
+
+        GCYSRecipeMaps.CZPULLER_RECIPES.recipeBuilder()
+                .duration(5000)
+                .EUt(7960)
+                .fluidInputs(Nitrogen.getFluid(16000))
+                .input(block,CSilicon,32)
+                .input(dust,GalliumArsenide,4)
+                .input(dust,Naquadah,1)
+                .output(NAQUADAH_BOULE)
+                .buildAndRegister();
+
+        GCYSRecipeMaps.CZPULLER_RECIPES.recipeBuilder()
+                .duration(5000)
+                .EUt(30720)
+                .fluidInputs(Nitrogen.getFluid(16000))
+                .input(block,CSilicon,32)
+                .input(dust,GalliumArsenide,8)
+                .input(dust,Neutronium,1)
+                .output(NEUTRONIUM_BOULE)
+                .buildAndRegister();
+
+        GCYSRecipeMaps.CZPULLER_RECIPES.recipeBuilder()
+                .duration(2500)
+                .EUt(480)
+                .fluidInputs(Helium.getFluid(4000))
+                .input(block,CSilicon,32)
+                .input(dust,IndiumGalliumPhosphide,1)
+                .input(dust,Boron,1)
+                .output(SILICON_BOULE,2)
+                .buildAndRegister();
+
+        GCYSRecipeMaps.CZPULLER_RECIPES.recipeBuilder()
+                .duration(2500)
+                .EUt(1960)
+                .fluidInputs(Helium.getFluid(4000))
+                .input(block,CSilicon,32)
+                .input(dust,IndiumGalliumPhosphide,2)
+                .input(dust,Phosphorus,1)
+                .output(PHOSPHORUS_BOULE,2)
+                .buildAndRegister();
+
+        GCYSRecipeMaps.CZPULLER_RECIPES.recipeBuilder()
+                .duration(2500)
+                .EUt(7680)
+                .fluidInputs(Helium.getFluid(4000))
+                .input(block,CSilicon,32)
+                .input(dust,IndiumGalliumPhosphide,4)
+                .input(dust,Naquadah,1)
+                .output(NAQUADAH_BOULE,2)
+                .buildAndRegister();
+
+        GCYSRecipeMaps.CZPULLER_RECIPES.recipeBuilder()
+                .duration(2500)
+                .EUt(30720)
+                .fluidInputs(Helium.getFluid(4000))
+                .input(block,CSilicon,32)
+                .input(dust,IndiumGalliumPhosphide,8)
+                .input(dust,Neutronium,1)
+                .output(NEUTRONIUM_BOULE,2)
+                .buildAndRegister();
+    }
     private static void Pre()
     {
         //酚醛基板

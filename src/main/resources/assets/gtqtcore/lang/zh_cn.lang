@@ -680,7 +680,8 @@ tile.multiblock_casing.adv_machine_glass_pr.name=智能玻璃（PR型）
 tile.multiblock_casing.tech_fusion_glass_4.name=强化低阶聚变玻璃
 tile.multiblock_casing.tech_fusion_glass_5.name=强化中阶聚变玻璃
 tile.multiblock_casing.tech_fusion_glass_6.name=强化高阶聚变玻璃
-
+gregtech.material.csilicon=太阳能级多晶硅
+gregtech.material.copper_cl=氯化铜
 tile.electrobath.i_electrobath.name=一级电解核心
 tile.electrobath.ii_electrobath.name=二级电解核心
 tile.electrobath.iii_electrobath.name=三级电解核心

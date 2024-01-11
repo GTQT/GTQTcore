@@ -13,6 +13,7 @@ import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.Materials.Tetranitromethane;
 import static gregtech.api.unification.material.info.MaterialFlags.*;
 import static gregtech.api.unification.material.info.MaterialFlags.GENERATE_SMALL_GEAR;
+import static gregtech.api.unification.material.info.MaterialIconSet.METALLIC;
 import static gregtech.api.util.GTUtility.gregtechId;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.HighlyPurifiedCoalTar;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.Methylhydrazine;
@@ -301,6 +302,22 @@ public class FirstDegreeMaterials {
         GTQTMaterials.Latex = new Material.Builder(getMaterialsId(), gregtechId("latex"))
                 .dust().fluid()
                 .color(0xFFFADA)
+                .build();
+
+        GTQTMaterials.CSilicon = new Material.Builder(getMaterialsId(), gregtechId("csilicon"))
+                .ingot().fluid()
+                .color(0x3C3C50).iconSet(METALLIC)
+                .flags(GENERATE_FOIL)
+                .element(Elements.Si)
+                .blast(2273) // no gas tier for silicon
+                .build();
+
+        GTQTMaterials.CopperCl = new Material.Builder(getMaterialsId(), gregtechId("copper_cl"))
+                .ingot()
+                .color(0x8B4C39).iconSet(METALLIC)
+                .flags(GENERATE_FOIL)
+                .components(Copper,1,Chlorine,2)
+                .blast(2273) // no gas tier for silicon
                 .build();
 
     }
