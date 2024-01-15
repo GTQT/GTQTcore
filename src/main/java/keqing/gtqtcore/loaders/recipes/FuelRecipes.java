@@ -11,6 +11,8 @@ import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 
 import gregtech.api.metatileentity.multiblock.CleanroomType;
 import gregtech.api.recipes.RecipeMaps;
+import gregtech.api.recipes.ingredients.nbtmatch.NBTCondition;
+import gregtech.api.recipes.ingredients.nbtmatch.NBTMatcher;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.material.properties.PropertyKey;

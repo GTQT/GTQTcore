@@ -521,6 +521,28 @@ gtqtcore.multiblock.pam.threshold_increment=调整加速模式
 gtqtcore.multiblock.paa.threshold_decrement=调整偏转角
 gtqtcore.multiblock.paa.threshold_increment=调整偏转角
 
+gtqtcore.multiblock.kqn.threshold_decrement=§c选取向前
+gtqtcore.multiblock.kqn.threshold_increment=§a选取向后
+
+gtqtcore.multiblock.kqn.thresholdPercentage=研究序号：%s
+gtqtcore.machine.keqing_net.name=科研计算机
+gtqtcore.multiblock.kqn.nb1=项目：可控核聚变 可控核聚变是可控的，能够持续进行的核聚变反应，其潜在优势使其成为最理想的终极能源形式之一。与核裂变相比，核聚变释放能量大，原料来源丰富，产生的放射性废物少。
+gtqtcore.multiblock.kqn.nb2=项目：涡轮效率升级I 通过对小型内燃发电机的涡轮外形继续重新设计以及机器外壳的材料设计，采用新结构的内燃机工作效率大大提升，并且可以适应更加恶劣的工作条件。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 gtqtcore.multiblock.ak.temp=温度过低，请加岩浆
 recipemap.alloy_klin.name=合金窑
 tile.multiblock_casing.nitinol_machine_casing.name=镍钛诺机械外壳

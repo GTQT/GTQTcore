@@ -55,7 +55,7 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<PrimitiveRecipeBuilder> PR_MIX;
     public static final RecipeMap<PrimitiveRecipeBuilder> SALT_FLIED;
     public static final RecipeMap<FuelRecipeBuilder> HIGH_PRESSURE_STEAM_TURBINE_FUELS;
-    public static final RecipeMap<ComputationRecipeBuilder> KEQING_NET_RECIES;
+    public static final RecipeMap<KQComputationRecipeBuilder> KEQING_NET_RECIES;
     public static final RecipeMap<FuelRecipeBuilder> SUPERCRITICAL_STEAM_TURBINE_FUELS;
 
     public static final RecipeMap<FuelRecipeBuilder> HYPER_REACTOR_MK1_RECIPES;
@@ -274,7 +274,7 @@ public class GTQTcoreRecipeMaps {
         //  Supercritical Steam Turbine Recipemap
         SUPERCRITICAL_STEAM_TURBINE_FUELS = new RecipeMap<>("supercritical_steam_turbine_fuels",  0, 0, 1, 1, new FuelRecipeBuilder(), false);
 
-        KEQING_NET_RECIES = new RecipeMap<>("keqing_net_recipes", 2, 1, 0, 0, new ComputationRecipeBuilder(), false)
+        KEQING_NET_RECIES = new RecipeMap<>("keqing_net_recipes", 2, 1, 0, 0, new KQComputationRecipeBuilder(), false)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, ProgressWidget.MoveType.HORIZONTAL)
                 .setSlotOverlay(false, false, GuiTextures.SCANNER_OVERLAY)
                 .setSlotOverlay(true, false, GuiTextures.RESEARCH_STATION_OVERLAY)

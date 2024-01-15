@@ -178,7 +178,7 @@ public class CommonProxy {
         ELEProperties.registeredTier(3,"三级");
         ELEProperties.registeredTier(4,"四级");
         ELEProperties.registeredTier(5,"五级");
-
+        for(int i=1;i<=100;i++) KQNetProperty.registeredNB(i, String.valueOf(i));
         for(int i=1;i<=100;i++) BRProperty.registeredRate(i, String.valueOf(i));
         PAPartProperty.registeredPart(11234,"一级 + 1234");
 

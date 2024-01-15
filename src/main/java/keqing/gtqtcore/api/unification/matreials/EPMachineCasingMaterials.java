@@ -46,7 +46,7 @@ public class EPMachineCasingMaterials {
                         GENERATE_FRAME,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROUND,GENERATE_SMALL_GEAR
                 ,GENERATE_SPRING,GENERATE_SPRING_SMALL)
                 .rotorStats(15.0f, 7.0f, 6000)
-                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 3600, 5)
+                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 36000, 5)
                         .attackSpeed(0.1F).enchantability(21).build())
                 .components(Nickel, 8, Chrome, 6, Molybdenum, 4, Niobium, 4, Titanium, 3, Iron, 2, Aluminium, 2)
                 .build();
@@ -60,7 +60,7 @@ public class EPMachineCasingMaterials {
                         GENERATE_FRAME,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROUND,GENERATE_SMALL_GEAR
                         ,GENERATE_SPRING,GENERATE_SPRING_SMALL)
                 .rotorStats(15.0f, 7.0f, 8000)
-                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 4800, 5)
+                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 48000, 5)
                         .attackSpeed(0.1F).enchantability(21).build())
                 .blast(4550, GasTier.HIGHER)
                 .components(Nickel, 15, Molybdenum, 4, Chrome, 2, Titanium, 2, Yttrium, 2)
@@ -77,7 +77,7 @@ public class EPMachineCasingMaterials {
                         GENERATE_FRAME,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROUND,GENERATE_SMALL_GEAR
                         ,GENERATE_SPRING,GENERATE_SPRING_SMALL)
                 .rotorStats(15.0f, 7.0f, 8000)
-                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 6000, 5)
+                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 60000, 5)
                         .attackSpeed(0.1F).enchantability(21).build())
                 .build();
 
@@ -87,7 +87,7 @@ public class EPMachineCasingMaterials {
                 .fluid()
                 .color(0x334433)
                 .iconSet(SHINY)
-                .toolStats(new ToolProperty(20.0F, 10.0F, 18000, 4))
+                .toolStats(new ToolProperty(20.0F, 10.0F, 180000, 4))
                 .blast(11900, GasTier.HIGHER)
                 .components(TungstenSteel, 12, HSSS, 9, HSSG, 6, Ruridit, 3, Naphtha, 2, Plutonium241, 1)
                 .flags(GENERATE_PLATE, GENERATE_ROD, GENERATE_RING, GENERATE_BOLT_SCREW, GENERATE_GEAR, GENERATE_ROTOR,
@@ -107,7 +107,7 @@ public class EPMachineCasingMaterials {
                         GENERATE_FRAME,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROUND,GENERATE_SMALL_GEAR
                         ,GENERATE_SPRING,GENERATE_SPRING_SMALL)
                 .rotorStats(18.0f, 7.0f, 8000)
-                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 6000, 5)
+                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 60000, 5)
                         .attackSpeed(0.1F).enchantability(21).build())
                 .components(HastelloyN, 8, Naquadria, 4, Samarium, 2, Tungsten, 4, Aluminium, 6, Nickel, 8, Titanium, 4, Carbon, 2, Argon, 2)
                 .build();
@@ -122,7 +122,7 @@ public class EPMachineCasingMaterials {
                         GENERATE_FRAME,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROUND,GENERATE_SMALL_GEAR
                         ,GENERATE_SPRING,GENERATE_SPRING_SMALL)
                 .rotorStats(18.0f, 7.0f, 10000)
-                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 8000, 6)
+                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 80000, 6)
                         .attackSpeed(0.1F).enchantability(21).build())
                 .components(Titanium, 26, Lanthanum, 6, TungstenSteel, 4, Cobalt, 3, Manganese, 2, Phosphorus, 2, Palladium, 2, Niobium, 1, Argon, 5)
                 .build();
@@ -147,7 +147,7 @@ public class EPMachineCasingMaterials {
                         GENERATE_FRAME,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROUND,GENERATE_SMALL_GEAR
                         ,GENERATE_SPRING,GENERATE_SPRING_SMALL)
                 .rotorStats(18.0f, 7.0f, 8000)
-                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 6000, 6)
+                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 60000, 6)
                         .attackSpeed(0.1F).enchantability(21).build())
                 .components(Plutonium244, 18, Cerium, 9, Gadolinium, 3, Dysprosium, 3, Thulium, 2, TungstenCarbide, 6, RedSteel, 6, Duranium, 2, Radon, 2)
                 .build();
@@ -162,7 +162,7 @@ public class EPMachineCasingMaterials {
                         GENERATE_FRAME,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROUND,GENERATE_SMALL_GEAR
                         ,GENERATE_SPRING,GENERATE_SPRING_SMALL)
                 .rotorStats(14.0f, 10.0f, 8000)
-                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 6000, 5)
+                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 60000, 5)
                         .attackSpeed(0.1F).enchantability(21).build())
                 .components(Steel, 16, Molybdenum, 1, Titanium, 1, Nickel, 4, Cobalt, 2)
                 .build();
@@ -177,7 +177,7 @@ public class EPMachineCasingMaterials {
                         GENERATE_FRAME,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROUND,GENERATE_SMALL_GEAR
                         ,GENERATE_SPRING,GENERATE_SPRING_SMALL)
                 .rotorStats(18.0f, 7.0f, 6000)
-                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 4000, 5)
+                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 40000, 5)
                         .attackSpeed(0.1F).enchantability(21).build())
                 .components(Uranium238, 9, Titanium, 1)
                 .build();
@@ -193,7 +193,7 @@ public class EPMachineCasingMaterials {
                         GENERATE_FRAME,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROUND,GENERATE_SMALL_GEAR
                         ,GENERATE_SPRING,GENERATE_SPRING_SMALL)
                 .rotorStats(18.0f, 7.0f, 8000)
-                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 4000, 7)
+                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 40000, 7)
                         .attackSpeed(0.1F).enchantability(21).build())
                 .build();
         //  24515 Zirconium Carbide
@@ -208,7 +208,7 @@ public class EPMachineCasingMaterials {
                         GENERATE_FRAME,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROUND,GENERATE_SMALL_GEAR
                         ,GENERATE_SPRING,GENERATE_SPRING_SMALL)
                 .rotorStats(18.0f, 7.0f, 6000)
-                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 4500, 6)
+                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 45000, 6)
                         .attackSpeed(0.1F).enchantability(21).build())
                 .build();
         //  24516 Inconel-792
@@ -223,7 +223,7 @@ public class EPMachineCasingMaterials {
                         GENERATE_FRAME,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROUND,GENERATE_SMALL_GEAR
                         ,GENERATE_SPRING,GENERATE_SPRING_SMALL)
                 .rotorStats(18.0f, 7.0f, 8000)
-                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 6000, 6)
+                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 60000, 6)
                         .attackSpeed(0.1F).enchantability(21).build())
                 .build();
         //  24517 Incoloy-MA813
@@ -238,7 +238,7 @@ public class EPMachineCasingMaterials {
                         GENERATE_FRAME,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROUND,GENERATE_SMALL_GEAR
                         ,GENERATE_SPRING,GENERATE_SPRING_SMALL)
                 .rotorStats(15.0f, 7.0f, 8000)
-                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 7500, 4)
+                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 75000, 4)
                         .attackSpeed(0.1F).enchantability(21).build())
                 .build();
         //  24518 Hastelloy-X78
@@ -253,7 +253,7 @@ public class EPMachineCasingMaterials {
                         GENERATE_FRAME,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROUND,GENERATE_SMALL_GEAR
                         ,GENERATE_SPRING,GENERATE_SPRING_SMALL)
                 .rotorStats(18.0f, 7.0f, 8000)
-                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 6000, 6)
+                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 60000, 6)
                         .attackSpeed(0.1F).enchantability(21).build())
                 .build();
         //  24519 Hastelloy-K243
@@ -268,7 +268,7 @@ public class EPMachineCasingMaterials {
                         GENERATE_FRAME,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROUND,GENERATE_SMALL_GEAR
                         ,GENERATE_SPRING,GENERATE_SPRING_SMALL)
                 .rotorStats(18.0f, 7.0f, 8000)
-                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 6000, 6)
+                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 60000, 6)
                         .attackSpeed(0.1F).enchantability(21).build())
                 .build();
         //  24520 Mar-M200 Steel
@@ -283,7 +283,7 @@ public class EPMachineCasingMaterials {
                         GENERATE_FRAME,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROUND,GENERATE_SMALL_GEAR
                         ,GENERATE_SPRING,GENERATE_SPRING_SMALL)
                 .rotorStats(18.0f, 7.0f, 8000)
-                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 6000, 6)
+                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 60000, 6)
                         .attackSpeed(0.1F).enchantability(21).build())
                 .build();
         //  24521 Mar-M200-Ce Steel
@@ -298,7 +298,7 @@ public class EPMachineCasingMaterials {
                         GENERATE_FRAME,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROUND,GENERATE_SMALL_GEAR
                         ,GENERATE_SPRING,GENERATE_SPRING_SMALL)
                 .rotorStats(18.0f, 7.0f, 8000)
-                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 6000, 7)
+                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 60000, 7)
                         .attackSpeed(0.1F).enchantability(21).build())
                 .build();
         //  24522 Tanmolyium Beta-C
@@ -313,7 +313,7 @@ public class EPMachineCasingMaterials {
                         GENERATE_FRAME,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROUND,GENERATE_SMALL_GEAR
                         ,GENERATE_SPRING,GENERATE_SPRING_SMALL)
                 .rotorStats(18.0f, 7.0f, 8000)
-                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 6000, 7)
+                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 60000, 7)
                         .attackSpeed(0.1F).enchantability(21).build())
                 .build();
         //  24523 Hastelloy-C59
@@ -328,7 +328,7 @@ public class EPMachineCasingMaterials {
                         GENERATE_FRAME,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROUND,GENERATE_SMALL_GEAR
                         ,GENERATE_SPRING,GENERATE_SPRING_SMALL)
                 .rotorStats(18.0f, 7.0f, 8000)
-                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 6000, 7)
+                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 60000, 7)
                         .attackSpeed(0.1F).enchantability(21).build())
                 .build();
         //  24524 HMS-1J79 Alloy
@@ -343,7 +343,7 @@ public class EPMachineCasingMaterials {
                         GENERATE_FRAME,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROUND,GENERATE_SMALL_GEAR
                         ,GENERATE_SPRING,GENERATE_SPRING_SMALL)
                 .rotorStats(18.0f, 7.0f, 8000)
-                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 6000, 6)
+                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 60000, 6)
                         .attackSpeed(0.1F).enchantability(21).build())
                 .build();
         //  24525 High Strength Structural Steel-HY130-1
@@ -358,7 +358,7 @@ public class EPMachineCasingMaterials {
                         GENERATE_FRAME,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROUND,GENERATE_SMALL_GEAR
                         ,GENERATE_SPRING,GENERATE_SPRING_SMALL)
                 .rotorStats(18.0f, 7.0f, 8000)
-                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 6000, 6)
+                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 60000, 6)
                         .attackSpeed(0.1F).enchantability(21).build())
                 .build();
         //  24526 Super Austenitic Stainless Steel-904L
@@ -373,7 +373,7 @@ public class EPMachineCasingMaterials {
                         GENERATE_FRAME,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROUND,GENERATE_SMALL_GEAR
                         ,GENERATE_SPRING,GENERATE_SPRING_SMALL)
                 .rotorStats(18.0f, 7.0f, 8000)
-                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 6000, 7)
+                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 60000, 7)
                         .attackSpeed(0.1F).enchantability(21).build())
                 .build();
         //  24527 Eglin Steel Base
@@ -395,7 +395,7 @@ public class EPMachineCasingMaterials {
                         GENERATE_FRAME,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROUND,GENERATE_SMALL_GEAR
                         ,GENERATE_SPRING,GENERATE_SPRING_SMALL)
                 .rotorStats(18.0f, 7.0f, 8000)
-                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 6000, 7)
+                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 60000, 7)
                         .attackSpeed(0.1F).enchantability(21).build())
                 .build();
         //  24529 Pikyonium-64B
@@ -410,7 +410,7 @@ public class EPMachineCasingMaterials {
                         GENERATE_FRAME,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROUND,GENERATE_SMALL_GEAR
                         ,GENERATE_SPRING,GENERATE_SPRING_SMALL)
                 .rotorStats(18.0f, 7.0f, 8000)
-                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 6000, 6)
+                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 60000, 6)
                         .attackSpeed(0.1F).enchantability(21).build())
                 .build();
 
@@ -426,7 +426,7 @@ public class EPMachineCasingMaterials {
                         GENERATE_FRAME,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROUND,GENERATE_SMALL_GEAR
                         ,GENERATE_SPRING,GENERATE_SPRING_SMALL)
                 .rotorStats(18.0f, 7.0f, 8000)
-                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 6000, 6)
+                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 60000, 6)
                         .attackSpeed(0.1F).enchantability(21).build())
                 .build();
         //  24533 Inconel-690
@@ -440,7 +440,7 @@ public class EPMachineCasingMaterials {
                         GENERATE_FRAME,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROUND,GENERATE_SMALL_GEAR
                         ,GENERATE_SPRING,GENERATE_SPRING_SMALL)
                 .rotorStats(18.0f, 7.0f, 8000)
-                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 6000, 6)
+                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 60000, 6)
                         .attackSpeed(0.1F).enchantability(21).build())
                 .blast(6200, GasTier.HIGHER)
                 .build();
@@ -456,7 +456,7 @@ public class EPMachineCasingMaterials {
                         GENERATE_FRAME,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROUND,GENERATE_SMALL_GEAR
                         ,GENERATE_SPRING,GENERATE_SPRING_SMALL)
                 .rotorStats(18.0f, 7.0f, 8000)
-                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 6000, 7)
+                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 60000, 7)
                         .attackSpeed(0.1F).enchantability(21).build())
                 .build();
         //  24535 Inconel-020
@@ -471,7 +471,7 @@ public class EPMachineCasingMaterials {
                         GENERATE_FRAME,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROUND,GENERATE_SMALL_GEAR
                         ,GENERATE_SPRING,GENERATE_SPRING_SMALL)
                 .rotorStats(18.0f, 7.0f, 8000)
-                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 6000, 6)
+                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 60000, 6)
                         .attackSpeed(0.1F).enchantability(21).build())
                 .build();
         //  24536 HG-1223
@@ -486,7 +486,7 @@ public class EPMachineCasingMaterials {
                         GENERATE_FRAME,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROUND,GENERATE_SMALL_GEAR
                         ,GENERATE_SPRING,GENERATE_SPRING_SMALL)
                 .rotorStats(18.0f, 7.0f, 8000)
-                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 6000, 5)
+                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 60000, 5)
                         .attackSpeed(0.1F).enchantability(21).build())
                 .build();
         //  24537 HMS-1J22 Alloy
@@ -501,7 +501,7 @@ public class EPMachineCasingMaterials {
                         GENERATE_FRAME,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROUND,GENERATE_SMALL_GEAR
                         ,GENERATE_SPRING,GENERATE_SPRING_SMALL)
                 .rotorStats(18.0f, 7.0f, 8000)
-                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 6000, 5)
+                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 60000, 5)
                         .attackSpeed(0.1F).enchantability(21).build())
                 .build();
 
@@ -518,7 +518,7 @@ public class EPMachineCasingMaterials {
                         GENERATE_FRAME,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROUND,GENERATE_SMALL_GEAR
                         ,GENERATE_SPRING,GENERATE_SPRING_SMALL)
                 .rotorStats(18.0f, 10.0f, 16000)
-                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 10000, 6)
+                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 100000, 6)
                         .attackSpeed(0.1F).enchantability(21).build())
                 .cableProperties(V[UIV], 256, 64, false)
                 .build();
@@ -534,7 +534,7 @@ public class EPMachineCasingMaterials {
                         GENERATE_FRAME,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROUND,GENERATE_SMALL_GEAR
                         ,GENERATE_SPRING,GENERATE_SPRING_SMALL)
                 .rotorStats(18.0f, 7.0f, 18000)
-                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 16000, 6)
+                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 160000, 6)
                         .attackSpeed(0.1F).enchantability(21).build())
                 .flags(GENERATE_ROD, GENERATE_BOLT_SCREW)
                 .build();

@@ -6,6 +6,10 @@ import gregtech.api.capability.IOpticalComputationProvider;
 import gregtech.api.capability.IOpticalComputationReceiver;
 import gregtech.api.capability.impl.ComputationRecipeLogic;
 import gregtech.api.capability.impl.ItemHandlerList;
+import gregtech.api.gui.GuiTextures;
+import gregtech.api.gui.Widget;
+import gregtech.api.gui.widgets.ClickButtonWidget;
+import gregtech.api.gui.widgets.WidgetGroup;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
@@ -15,20 +19,25 @@ import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
+import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.common.blocks.BlockComputerCasing;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
+import keqing.gtqtcore.api.recipes.properties.KQNetProperty;
+import keqing.gtqtcore.api.recipes.properties.PCBPartProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.IItemHandlerModifiable;
@@ -36,6 +45,8 @@ import net.minecraftforge.items.IItemHandlerModifiable;
 import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.Collections;
+
+import static gregtech.api.unification.material.Materials.Water;
 
 
 public class MetaTileEntitykeQingNet extends RecipeMapMultiblockController implements IOpticalComputationReceiver {
@@ -50,7 +61,45 @@ public class MetaTileEntitykeQingNet extends RecipeMapMultiblockController imple
         public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
             return new MetaTileEntitykeQingNet(this.metaTileEntityId);
         }
+    int thresholdPercentage=0;
+    @Override
+    @Nonnull
+    protected Widget getFlexButton(int x, int y, int width, int height) {
+        WidgetGroup group = new WidgetGroup(x, y, width, height);
+        group.addWidget(new ClickButtonWidget(0, 0, 9, 18, "", this::decrementThreshold)
+                .setButtonTexture(GuiTextures.BUTTON_THROTTLE_MINUS)
+                .setTooltipText("gtqtcore.multiblock.kqn.threshold_decrement"));
+        group.addWidget(new ClickButtonWidget(9, 0, 9, 18, "", this::incrementThreshold)
+                .setButtonTexture(GuiTextures.BUTTON_THROTTLE_PLUS)
+                .setTooltipText("gtqtcore.multiblock.kqn.threshold_increment"));
+        return group;
+    }
+    private void incrementThreshold(Widget.ClickData clickData) {
+            this.thresholdPercentage = MathHelper.clamp(thresholdPercentage + 1, 0, 100);
+    }
 
+    private void decrementThreshold(Widget.ClickData clickData) {
+            this.thresholdPercentage = MathHelper.clamp(thresholdPercentage - 1, 0, 100);
+    }
+    @Override
+    public boolean checkRecipe(@Nonnull Recipe recipe, boolean consumeIfSuccess) {
+        if(recipe.getProperty(KQNetProperty.getInstance(), 0)==thresholdPercentage)
+        {
+            return super.checkRecipe(recipe, consumeIfSuccess);
+        }
+        return false;
+    }
+    @Override
+    protected void addDisplayText(List<ITextComponent> textList) {
+        textList.add(new TextComponentTranslation("gtqtcore.multiblock.kqn.thresholdPercentage",thresholdPercentage));
+        switch (thresholdPercentage) {
+            case 1 -> textList.add(new TextComponentTranslation("gtqtcore.multiblock.kqn.nb1"));
+            case 2 -> textList.add(new TextComponentTranslation("gtqtcore.multiblock.kqn.nb2"));
+            case 3 -> textList.add(new TextComponentTranslation("gtqtcore.multiblock.kqn.nb3"));
+            case 4 -> textList.add(new TextComponentTranslation("gtqtcore.multiblock.kqn.nb4"));
+        }
+
+    }
         protected void formStructure(PatternMatchContext context) {
             super.formStructure(context);
             List<IOpticalComputationHatch> providers = this.getAbilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION);
@@ -69,8 +118,6 @@ public class MetaTileEntitykeQingNet extends RecipeMapMultiblockController imple
             }
 
         }
-
-
         public ComputationRecipeLogic getRecipeMapWorkable() {
             return (ComputationRecipeLogic)this.recipeMapWorkable;
         }
@@ -97,17 +144,13 @@ public class MetaTileEntitykeQingNet extends RecipeMapMultiblockController imple
         @Nonnull
         protected  BlockPattern createStructurePattern() {
             return FactoryBlockPattern.start()
-                    .aisle("XXX", "VVV", "PPP", "PSP", "PPP", "VVV", "XXX")
-                    .aisle("XXX", "VAV", "XAX", "XAX", "XAX", "VAV", "XXX")
-                    .aisle("XXX", "VAV", "XAX", "XAX", "XAX", "VAV", "XXX")
-                    .aisle("XXX", "VAV", "XAX", "XAX", "XAX", "VAV", "XXX")
-                    .aisle("XXX", "VAV", "XAX", "XAX", "XAX", "VAV", "XXX")
-                    .aisle("XXX", "VAV", "XAX", "XAX", "XAX", "VAV", "XXX")
-                    .aisle("XXX", "VVV", "PPP", "PHP", "PPP", "VVV", "XXX")
-                    .where('S', this.selfPredicate()).where('X', states(getCasingState()))
-                    .where(' ', any()).where('-', air())
-                    .where('V', states(getVentState()))
-                    .where('A', states(getAdvancedState())).where('P', states(new IBlockState[]{getCasingState()}).or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(1)).or(abilities(MultiblockAbility.MAINTENANCE_HATCH).setExactLimit(1)).or(abilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION).setExactLimit(1))).where('H', abilities(MultiblockAbility.OBJECT_HOLDER)).build();
+                    .aisle("PPP", "HSP", "PPP")
+                    .where('S', this.selfPredicate())
+                    .where('P', states(new IBlockState[]{getCasingState()})
+                            .or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(1))
+                            .or(abilities(MultiblockAbility.MAINTENANCE_HATCH).setExactLimit(1))
+                            .or(abilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION).setExactLimit(1)))
+                    .where('H', abilities(MultiblockAbility.OBJECT_HOLDER)).build();
         }
 
 
@@ -141,35 +184,14 @@ public class MetaTileEntitykeQingNet extends RecipeMapMultiblockController imple
         public boolean canVoidRecipeItemOutputs() {
             return true;
         }
-
-        public void addInformation(ItemStack stack, World world, List<String> tooltip, boolean advanced) {
-            super.addInformation(stack, world, tooltip, advanced);
-            tooltip.add(I18n.format("gregtech.machine.research_station.tooltip.1"));
-            tooltip.add(I18n.format("gregtech.machine.research_station.tooltip.2"));
-            tooltip.add(I18n.format("gregtech.machine.research_station.tooltip.3"));
-            tooltip.add(I18n.format("gregtech.machine.research_station.tooltip.4"));
-        }
-
-        protected void addDisplayText(List<ITextComponent> textList) {
-            super.addDisplayText(textList);
-            if (this.isStructureFormed() && this.isActive()) {
-                ComputationRecipeLogic recipeLogic = this.getRecipeMapWorkable();
-                textList.add(new TextComponentTranslation("gregtech.multiblock.computation.usage", recipeLogic.getCurrentDrawnCWUt()));
-                if (recipeLogic.isHasNotEnoughComputation()) {
-                    textList.add((new TextComponentTranslation("gregtech.multiblock.computation.not_enough_computation")).setStyle((new Style()).setColor(TextFormatting.RED)));
-                }
-            }
-
-        }
-
+        /*
         protected void addWarningText(List<ITextComponent> textList) {
             super.addWarningText(textList);
             if (this.isStructureFormed() && this.isActive() && this.getRecipeMapWorkable().isHasNotEnoughComputation()) {
                 textList.add((new TextComponentTranslation("gregtech.multiblock.computation.not_enough_computation")).setStyle((new Style()).setColor(TextFormatting.RED)));
             }
-
         }
-
+        */
         private static class ResearchStationRecipeLogic extends ComputationRecipeLogic {
             public ResearchStationRecipeLogic(MetaTileEntitykeQingNet metaTileEntity) {
                 super(metaTileEntity, ComputationType.SPORADIC);

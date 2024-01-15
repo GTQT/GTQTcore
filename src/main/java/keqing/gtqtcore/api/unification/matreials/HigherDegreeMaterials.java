@@ -23,7 +23,7 @@ public class HigherDegreeMaterials {
                 .flags(EXT2_METAL, GENERATE_SMALL_GEAR, GENERATE_RING, GENERATE_FRAME, GENERATE_ROTOR, GENERATE_ROUND, GENERATE_FOIL, GENERATE_GEAR)
                 .components(Nickel, 2, Titanium, 3)
                 .rotorStats(15.0f, 7.0f, 3000)
-                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 2560, 3)
+                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 5120, 3)
                         .attackSpeed(0.1F).enchantability(21).build())
                 .blast(1300, BlastProperty.GasTier.LOW)
                 .build();

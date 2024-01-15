@@ -18,7 +18,8 @@ public class KeQingNET {
                 .outputs(FUSION_REACTOR[0].getStackForm())
                 .EUt(7680)
                 .CWUt(2)
-                .totalCWU(1000)
+                .NB(1)
+                .totalCWU(100000)
                 .buildAndRegister();
     }
 }
