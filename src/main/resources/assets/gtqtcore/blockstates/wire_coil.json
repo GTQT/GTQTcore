@@ -33,9 +33,10 @@
         }
       },
       "superconducting_metallic_hydrogen_coil": {
-        "model": "minecraft:cube_all",
+        "model": "gregtech:cube_2_layer_all",
         "textures": {
-          "all": "gregtech:blocks/multiblock/wire_coil/superconducting_metallic_hydrogen_coil"
+          "bot_all": "gregtech:blocks/multiblock/wire_coil/superconducting_metallic_hydrogen_coil",
+          "top_all":"gregtech:blocks/multiblock/wire_coil/superconducting_metallic_hydrogen_coil_bloom"
         }
       },
       "cupar_proton_pair_coil": {

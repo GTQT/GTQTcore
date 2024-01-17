@@ -103,6 +103,7 @@ public class CommonProxy {
         registry.register(GTQTMetaBlocks.ISA_CASING);
         registry.register(GTQTMetaBlocks.ROAD);
         registry.register(GTQTMetaBlocks.ELECTROBATH);
+        registry.register(GTQTMetaBlocks.KQCC);
 
         registry.register(GTQTCrops.COPPER_CROP);
         registry.register(GTQTCrops.IRON_CROP);
@@ -144,6 +145,7 @@ public class CommonProxy {
         registry.register(createItemBlock(GTQTMetaBlocks.ISA_CASING, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.ELECTROBATH, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.ROAD, VariantItemBlock::new));
+        registry.register(createItemBlock(GTQTMetaBlocks.KQCC, VariantItemBlock::new));
 
         registry.register(createItemBlock(PINE_LOG, ItemBlock::new));
         registry.register(createItemBlock(PINE_SAPLING, ItemBlock::new));

@@ -27,6 +27,7 @@ public class GTQTMetaBlocks {
 
     public static GTQTElectrobath ELECTROBATH;
     public static GTQTRoad ROAD;
+    public static GTQTKQCC KQCC;
     public static final BlockPineLeaves PINE_LEAVES = new BlockPineLeaves();
     public static final BlockPineLog PINE_LOG = new BlockPineLog();
     public static final BlockPineSapling PINE_SAPLING = new BlockPineSapling();
@@ -55,6 +56,8 @@ public class GTQTMetaBlocks {
         ISA_CASING.setRegistryName("isa_casing");
         ELECTROBATH = new GTQTElectrobath();
         ELECTROBATH.setRegistryName("electrobath");
+        KQCC = new GTQTKQCC();
+        KQCC.setRegistryName("computer_competent");
 
         ROAD = new GTQTRoad();
         ROAD.setRegistryName("road");
@@ -77,6 +80,7 @@ public class GTQTMetaBlocks {
         registerItemModel(QUANTUM_CONSTRAINT_CASING);
         registerItemModel(COMPONENT_ASSEMBLY_LINE);
         registerItemModel(ISA_CASING);
+        registerItemModel(KQCC);
     }
 
     @SideOnly(Side.CLIENT)

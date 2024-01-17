@@ -3,6 +3,7 @@ package keqing.gtqtcore.common.items;
 import gregtech.api.items.metaitem.MetaItem;
 import gregtech.api.items.metaitem.StandardMetaItem;
 import keqing.gtqtcore.common.block.blocks.GTQTADVGlass;
+import net.minecraft.item.ItemStack;
 
 import java.util.List;
 

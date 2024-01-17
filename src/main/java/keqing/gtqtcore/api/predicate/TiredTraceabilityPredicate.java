@@ -41,6 +41,11 @@ public class TiredTraceabilityPredicate extends TraceabilityPredicate {
         MAP_PA_CASING = new Object2ObjectOpenHashMap<>();
         MAP_PA_INTERNAL_CASING = new Object2ObjectOpenHashMap<>();
 
+        //计算机
+        MAP_CPU_CASING = new Object2ObjectOpenHashMap<>();
+        MAP_GPU_CASING = new Object2ObjectOpenHashMap<>();
+        MAP_RAM_CASING = new Object2ObjectOpenHashMap<>();
+
         TiredTraceabilityPredicate.MAP_PA_CASING.put(GTQTMetaBlocks.TURBINE_CASING1.getState(GTQTTurbineCasing1.TurbineCasingType.PRECISE_ASSEMBLER_CASING_MK1),
                 new WrappedIntTired(GTQTTurbineCasing1.TurbineCasingType.PRECISE_ASSEMBLER_CASING_MK1, 1));
         TiredTraceabilityPredicate.MAP_PA_CASING.put(GTQTMetaBlocks.TURBINE_CASING1.getState(GTQTTurbineCasing1.TurbineCasingType.PRECISE_ASSEMBLER_CASING_MK1),
@@ -245,6 +250,21 @@ public class TiredTraceabilityPredicate extends TraceabilityPredicate {
                 new WrappedIntTired(GTQTElectrobath.CasingType.SOLAR_PLATE_MV, 2));
         TiredTraceabilityPredicate.MAP_SP_CASING.put(GTQTMetaBlocks.ELECTROBATH.getState(GTQTElectrobath.CasingType.SOLAR_PLATE_HV),
                 new WrappedIntTired(GTQTElectrobath.CasingType.SOLAR_PLATE_MV, 3));
+
+        TiredTraceabilityPredicate.MAP_CPU_CASING.put(GTQTMetaBlocks.KQCC.getState(GTQTKQCC.CasingType.COMPUTER_VENT),
+                new WrappedIntTired(GTQTKQCC.CasingType.COMPUTER_VENT, 0));
+        TiredTraceabilityPredicate.MAP_CPU_CASING.put(GTQTMetaBlocks.KQCC.getState(GTQTKQCC.CasingType.COMPUTER_CPUI),
+                new WrappedIntTired(GTQTKQCC.CasingType.COMPUTER_CPUI, 1));
+
+        TiredTraceabilityPredicate.MAP_GPU_CASING.put(GTQTMetaBlocks.KQCC.getState(GTQTKQCC.CasingType.COMPUTER_VENT),
+                new WrappedIntTired(GTQTKQCC.CasingType.COMPUTER_VENT, 0));
+        TiredTraceabilityPredicate.MAP_GPU_CASING.put(GTQTMetaBlocks.KQCC.getState(GTQTKQCC.CasingType.COMPUTER_GPUI),
+                new WrappedIntTired(GTQTKQCC.CasingType.COMPUTER_CPUI, 1));
+
+        TiredTraceabilityPredicate.MAP_RAM_CASING.put(GTQTMetaBlocks.KQCC.getState(GTQTKQCC.CasingType.COMPUTER_VENT),
+                new WrappedIntTired(GTQTKQCC.CasingType.COMPUTER_VENT, 0));
+        TiredTraceabilityPredicate.MAP_RAM_CASING.put(GTQTMetaBlocks.KQCC.getState(GTQTKQCC.CasingType.COMPUTER_RAMI),
+                new WrappedIntTired(GTQTKQCC.CasingType.COMPUTER_CPUI, 1));
     }
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_QFT_GLASS;
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_DRI_CASING;
@@ -261,6 +281,47 @@ public class TiredTraceabilityPredicate extends TraceabilityPredicate {
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_PA_CASING;
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_SP_CASING;
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_PA_INTERNAL_CASING;
+    //计算机
+    public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_CPU_CASING;
+    public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_GPU_CASING;
+    public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_RAM_CASING;
+
+    public static TraceabilityPredicate CP_CPU_CASING1 = new TiredTraceabilityPredicate(MAP_CPU_CASING,
+            Comparator.comparing((s) -> ((WrappedIntTired)MAP_CPU_CASING.get(s)).getIntTier()),"CPU1",null);
+    public static TraceabilityPredicate CP_GPU_CASING1 = new TiredTraceabilityPredicate(MAP_GPU_CASING,
+            Comparator.comparing((s) -> ((WrappedIntTired)MAP_GPU_CASING.get(s)).getIntTier()),"GPU1",null);
+    public static TraceabilityPredicate CP_RAM_CASING1 = new TiredTraceabilityPredicate(MAP_RAM_CASING,
+            Comparator.comparing((s) -> ((WrappedIntTired)MAP_RAM_CASING.get(s)).getIntTier()),"RAM1",null);
+
+
+    public static TraceabilityPredicate CP_CPU_CASING2 = new TiredTraceabilityPredicate(MAP_CPU_CASING,
+            Comparator.comparing((s) -> ((WrappedIntTired)MAP_CPU_CASING.get(s)).getIntTier()),"CPU2",null);
+    public static TraceabilityPredicate CP_GPU_CASING2 = new TiredTraceabilityPredicate(MAP_GPU_CASING,
+            Comparator.comparing((s) -> ((WrappedIntTired)MAP_GPU_CASING.get(s)).getIntTier()),"GPU2",null);
+    public static TraceabilityPredicate CP_RAM_CASING2 = new TiredTraceabilityPredicate(MAP_RAM_CASING,
+            Comparator.comparing((s) -> ((WrappedIntTired)MAP_RAM_CASING.get(s)).getIntTier()),"RAM2",null);
+
+
+    public static TraceabilityPredicate CP_CPU_CASING3 = new TiredTraceabilityPredicate(MAP_CPU_CASING,
+            Comparator.comparing((s) -> ((WrappedIntTired)MAP_CPU_CASING.get(s)).getIntTier()),"CPU3",null);
+    public static TraceabilityPredicate CP_GPU_CASING3 = new TiredTraceabilityPredicate(MAP_GPU_CASING,
+            Comparator.comparing((s) -> ((WrappedIntTired)MAP_GPU_CASING.get(s)).getIntTier()),"GPU3",null);
+    public static TraceabilityPredicate CP_RAM_CASING3 = new TiredTraceabilityPredicate(MAP_RAM_CASING,
+            Comparator.comparing((s) -> ((WrappedIntTired)MAP_RAM_CASING.get(s)).getIntTier()),"RAM3",null);
+
+
+    public static TraceabilityPredicate CP_CPU_CASING4 = new TiredTraceabilityPredicate(MAP_CPU_CASING,
+            Comparator.comparing((s) -> ((WrappedIntTired)MAP_CPU_CASING.get(s)).getIntTier()),"CPU4",null);
+    public static TraceabilityPredicate CP_GPU_CASING4 = new TiredTraceabilityPredicate(MAP_GPU_CASING,
+            Comparator.comparing((s) -> ((WrappedIntTired)MAP_GPU_CASING.get(s)).getIntTier()),"GPU4",null);
+    public static TraceabilityPredicate CP_RAM_CASING4 = new TiredTraceabilityPredicate(MAP_RAM_CASING,
+            Comparator.comparing((s) -> ((WrappedIntTired)MAP_RAM_CASING.get(s)).getIntTier()),"RAM4",null);
+
+
+
+
+
+
 
     public static TraceabilityPredicate CP_PA_CASING = new TiredTraceabilityPredicate(MAP_PA_CASING,
             Comparator.comparing((s) -> ((WrappedIntTired)MAP_PA_CASING.get(s)).getIntTier()),"PAC",null);

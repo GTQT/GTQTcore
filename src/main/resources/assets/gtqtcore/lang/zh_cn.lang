@@ -492,6 +492,16 @@ gtqtcore.multiblock.op.amount=沉淀池注水量 %s
 gtqtcore.multiblock.op.poruji=破乳剂缓存 %s
 gtqtcore.multiblock.op.amount1=水仓水量：%s
 gtqtcore.multiblock.op.amount2=水仓破乳剂量： %s
+gregtech.multiblock.kqcc.eu=耗电: %s EUt 基础产热: %s
+gregtech.multiblock.kqcc.start=工作状态: %s(关机=0 开机=1 超频=2)
+gregtech.multiblock.kqcc.gpu=GPU: %s %s %s %s
+gregtech.multiblock.kqcc.cpu=CPU: %s %s %s %s
+gregtech.multiblock.kqcc.ram=RAM: %s %s %s %s
+gtqtcore.multiblock.kqcc.hot=高温，计算算力性能下降！
+gtqtcore.multiblock.kqcc.water.amount=水储量: %s 冷却液储量: %s
+gtqtcore.multiblock.kqcc.threshold_decrement=§a此处(关机 开机)
+gtqtcore.multiblock.kqcc.threshold_increment=§c此处(开机 超频)
+gregtech.multiblock.kqcc.cwtt=算力: %s CWT 热量: %s
 gtqtcore.pa.mode1=加速模式：加速 偏转相位：%s 速度：%s C
 gtqtcore.pa.mode2=加速模式：稳定 偏转相位：%s 速度：%s C
 gtqtcore.pa.mode3=加速模式：减速 偏转相位：%s 速度：%s C

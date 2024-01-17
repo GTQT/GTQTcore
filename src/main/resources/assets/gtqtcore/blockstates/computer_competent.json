@@ -1,0 +1,41 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "minecraft:cube_all",
+    "textures": {
+      "all": "gregtech:blocks/rendering_error"
+    }
+  },
+  "variants": {
+    "variant": {
+      "computer_vent": {
+        "model": "minecraft:cube_bottom_top",
+        "textures": {
+          "side": "gregtech:blocks/multiblock/computer/computer_vent",
+          "bottom": "gregtech:blocks/multiblock/computer/computer_top",
+          "top": "gregtech:blocks/multiblock/computer/computer_top"
+        }
+      },
+      "computer_rami": {
+        "model": "gregtech:cube_2_layer_all",
+        "textures": {
+          "bot_all": "gregtech:blocks/multiblock/computer/computer_vent",
+          "top_all":"gregtech:blocks/multiblock/computer/rami"
+        }
+      },
+      "computer_cpui": {
+        "model": "gregtech:cube_2_layer_all",
+        "textures": {
+          "bot_all": "gregtech:blocks/multiblock/computer/computer_vent",
+          "top_all":"gregtech:blocks/multiblock/computer/cpui"
+        }
+      },"computer_gpui": {
+        "model": "gregtech:cube_2_layer_all",
+        "textures": {
+          "bot_all": "gregtech:blocks/multiblock/computer/computer_venti",
+          "top_all":"gregtech:blocks/multiblock/computer/gpui"
+        }
+      }
+    }
+  }
+}

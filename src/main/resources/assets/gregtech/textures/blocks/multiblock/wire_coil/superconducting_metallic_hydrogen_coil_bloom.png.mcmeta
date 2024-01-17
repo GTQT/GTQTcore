@@ -5,7 +5,7 @@
         "layer": "BLOOM",
         "gregtech": true,
         "textures": [
-            "gregtech:blocks/multiblock/wire_coil/superconducting_metallic_hydrogen_coil_bloom-ctm"
+            "gregtech:blocks/multiblock/wire_coil/superconducting_metallic_hydrogen_coil_bloom_ctm"
         ],
         "extra": {
             "connect_inside": true,
