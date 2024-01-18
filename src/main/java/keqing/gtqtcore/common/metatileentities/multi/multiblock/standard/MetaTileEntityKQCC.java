@@ -32,6 +32,7 @@ import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
@@ -49,8 +50,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import static gregtech.api.unification.material.Materials.PCBCoolant;
-import static gregtech.api.unification.material.Materials.Water;
+import static gregtech.api.unification.material.Materials.*;
 
 public class MetaTileEntityKQCC extends MultiblockWithDisplayBase implements IOpticalComputationProvider, IProgressBarMultiblock {
     private boolean isActive;
@@ -104,21 +104,47 @@ public class MetaTileEntityKQCC extends MultiblockWithDisplayBase implements IOp
         this.energyContainer = new EnergyContainerList(new ArrayList<>());
     }
     FluidStack COLD_STACK = Water.getFluid(10);
-    FluidStack COLD_STACKA = PCBCoolant.getFluid(1);
+    FluidStack COLD_STACKA = PCBCoolant.getFluid(5);
+    FluidStack COLD_STACKB = Nitrogen.getFluid(1);
+
+    FluidStack COLD_STACK1 = Water.getFluid(40);
+    FluidStack COLD_STACKA1 = PCBCoolant.getFluid(20);
+    FluidStack COLD_STACKB1 = Nitrogen.getFluid(4);
     @Override
     protected void updateFormedValid() {
         consumeEnergy();
-        if(HOT>0) HOT=HOT-1;
+        if(HOT>0) HOT=HOT-10;
 
         if(HOT>5000) {
 
-            if (COLD_STACK.isFluidStackIdentical(coolantHandler.drain(COLD_STACK, false))) {
-                coolantHandler.drain(COLD_STACK, true);
-                HOT = HOT - 250;
+            if(thresholdPercentage==1) {
+                if (COLD_STACK.isFluidStackIdentical(coolantHandler.drain(COLD_STACK, false))) {
+                    coolantHandler.drain(COLD_STACK, true);
+                    HOT = HOT - 770;
+                }
+                if (COLD_STACKA.isFluidStackIdentical(coolantHandler.drain(COLD_STACKA, false))) {
+                    coolantHandler.drain(COLD_STACKA, true);
+                    HOT = HOT - 1440;
+                }
+                if (COLD_STACKB.isFluidStackIdentical(coolantHandler.drain(COLD_STACKB, false))) {
+                    coolantHandler.drain(COLD_STACKB, true);
+                    HOT = HOT - 2880;
+                }
             }
-            if (COLD_STACKA.isFluidStackIdentical(coolantHandler.drain(COLD_STACKA, false))) {
-                coolantHandler.drain(COLD_STACKA, true);
-                HOT = HOT - 1000;
+
+            if(thresholdPercentage==2) {
+                if (COLD_STACK1.isFluidStackIdentical(coolantHandler.drain(COLD_STACK1, false))){
+                    coolantHandler.drain(COLD_STACK1, true);
+                    HOT = HOT - 1440;
+                }
+                if (COLD_STACKA1.isFluidStackIdentical(coolantHandler.drain(COLD_STACKA1, false))) {
+                    coolantHandler.drain(COLD_STACKA1, true);
+                    HOT = HOT - 2880;
+                }
+                if (COLD_STACKB1.isFluidStackIdentical(coolantHandler.drain(COLD_STACKB1, false))) {
+                    coolantHandler.drain(COLD_STACKB1, true);
+                    HOT = HOT - 5760;
+                }
             }
         }
     }
@@ -229,17 +255,30 @@ public class MetaTileEntityKQCC extends MultiblockWithDisplayBase implements IOp
         return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.PTFE_INERT_CASING);
     }
     @Override
+    public String[] getDescription() {
+        return new String[]{I18n.format("gtqtcore.multiblock.kqcc.description")};
+    }
+    @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
         textList.add(new TextComponentTranslation("gregtech.multiblock.kqcc.eu", CWTT()*32,HOT));
         textList.add(new TextComponentTranslation("gregtech.multiblock.kqcc.start", thresholdPercentage));
+
+        if((RAM1+RAM2+RAM3+RAM4)>=(GPU1+GPU2+GPU3+GPU4)&&(RAM1+RAM2+RAM3+RAM4)>=(CPU1+CPU2+CPU3+CPU4))
+            textList.add(new TextComponentTranslation("gregtech.multiblock.kqcc.normal"));
+        else
+            textList.add(new TextComponentTranslation("gregtech.multiblock.kqcc.lack"));
+
         if (coolantHandler != null) {
             FluidStack STACKA = coolantHandler.drain(Water.getFluid(Integer.MAX_VALUE), false);
             int liquidWaterAmount = STACKA == null ? 0 : STACKA.amount;
 
             FluidStack STACKB = coolantHandler.drain(PCBCoolant.getFluid(Integer.MAX_VALUE), false);
             int liquidPCBAmount = STACKB == null ? 0 : STACKB.amount;
-            textList.add(new TextComponentTranslation("gtqtcore.multiblock.kqcc.water.amount", TextFormattingUtil.formatNumbers((liquidWaterAmount)),TextFormattingUtil.formatNumbers((liquidPCBAmount))));
+
+            FluidStack STACKC = coolantHandler.drain(Nitrogen.getFluid(Integer.MAX_VALUE), false);
+            int liquidNITAmount = STACKC == null ? 0 : STACKC.amount;
+            textList.add(new TextComponentTranslation("gtqtcore.multiblock.kqcc.water.amount", TextFormattingUtil.formatNumbers((liquidWaterAmount)),TextFormattingUtil.formatNumbers((liquidPCBAmount)),TextFormattingUtil.formatNumbers((liquidNITAmount))));
         }
         textList.add(new TextComponentTranslation("gregtech.multiblock.kqcc.gpu", GPU1,GPU2,GPU3,GPU4));
         textList.add(new TextComponentTranslation("gregtech.multiblock.kqcc.cpu", CPU1,CPU2,CPU3,CPU4));

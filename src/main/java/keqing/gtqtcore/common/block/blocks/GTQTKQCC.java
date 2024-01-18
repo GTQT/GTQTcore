@@ -32,8 +32,14 @@ public class GTQTKQCC extends VariantBlock<GTQTKQCC.CasingType> {
 
         COMPUTER_VENT("computer_vent"),
         COMPUTER_RAMI("computer_rami"),
+        COMPUTER_RAMII("computer_ramii"),
+        COMPUTER_RAMIII("computer_ramiii"),
         COMPUTER_CPUI("computer_cpui"),
-        COMPUTER_GPUI("computer_gpui");
+        COMPUTER_CPUII("computer_cpuii"),
+        COMPUTER_CPUIII("computer_cpuiii"),
+        COMPUTER_GPUI("computer_gpui"),
+        COMPUTER_GPUII("computer_gpuii"),
+        COMPUTER_GPUIII("computer_gpuiii");
 
         private final String name;
 

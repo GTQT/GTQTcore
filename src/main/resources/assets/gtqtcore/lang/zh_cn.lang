@@ -498,10 +498,13 @@ gregtech.multiblock.kqcc.gpu=GPU: %s %s %s %s
 gregtech.multiblock.kqcc.cpu=CPU: %s %s %s %s
 gregtech.multiblock.kqcc.ram=RAM: %s %s %s %s
 gtqtcore.multiblock.kqcc.hot=高温，计算算力性能下降！
-gtqtcore.multiblock.kqcc.water.amount=水储量: %s 冷却液储量: %s
+gtqtcore.multiblock.kqcc.water.amount=水: %s 冷却液: %s 液氮: %s
 gtqtcore.multiblock.kqcc.threshold_decrement=§a此处(关机 开机)
 gtqtcore.multiblock.kqcc.threshold_increment=§c此处(开机 超频)
+gregtech.multiblock.kqcc.normal=§a正常效率计算。
+gregtech.multiblock.kqcc.lack=§c缺少足够内存！
 gregtech.multiblock.kqcc.cwtt=算力: %s CWT 热量: %s
+gtqtcore.machine.kqcc.name=计算服务器
 gtqtcore.pa.mode1=加速模式：加速 偏转相位：%s 速度：%s C
 gtqtcore.pa.mode2=加速模式：稳定 偏转相位：%s 速度：%s C
 gtqtcore.pa.mode3=加速模式：减速 偏转相位：%s 速度：%s C
@@ -747,6 +750,22 @@ tile.wire_coil.superconducting_metallic_hydrogen_coil.name=*-超导金属氢线�
 tile.wire_coil.cupar_proton_pair_coil.name=*-库珀对线圈-*
 tile.wire_coil.cupara_proton_pair_coil.name=*-海珀珍线圈-*
 tile.wire_coil.cuparb_proton_pair_coil.name=*-热动力学恒星压缩物质奇点线圈-*
+
+tile.computer_competent.computer_vent.name=空计算框架
+tile.computer_competent.computer_rami.name=数据缓存模块I
+tile.computer_competent.computer_ramii.name=数据缓存模块II
+tile.computer_competent.computer_ramiii.name=数据缓存模块III
+tile.computer_competent.computer_cpui.name=高性能计算模块I
+tile.computer_competent.computer_cpuii.name=高性能计算模块II
+tile.computer_competent.computer_cpuiii.name=高性能计算模块III
+tile.computer_competent.computer_gpui.name=辅助运算模块I
+tile.computer_competent.computer_gpuii.name=辅助运算模块II
+tile.computer_competent.computer_gpuiii.name=辅助运算模块III
+gtqtcore.multiblock.kqcc.description=计算中心服务器是你在早期获得算力的唯一方法，每一台服务器拥有三排四列共计12模块的计算组件，由上至下分别为【高性能计算模块/辅助运算模块/数据缓存模块】，每一排只能插放对应的组件，但是其等级可以不一样，也可以使用空框架填充。当RAM总和均大于CPU,GPU总和时，总算力为CPU,GPU的总和；否则为RAM的总和。单位热量由CPU总和*GPU总和决定。当温度小于三百度时正常性能计算，大于三百度时性能减半，大于四百五十度强制停机。处于超频模式时，计算性能翻倍，热量四倍，冷却液消耗四倍，综合散热性能翻倍。 冷却液种类/散热性能（水-7.7/10mb 冷却液-14.4/5mb 液氮-28.8/1mb）机器在关机状态无法通过冷却液降温！
+
+
+
+
 
 gtqtcore.machine.lager_heat_exchanger.name=大型热交换机
 recipemap.heat_exchanger_recipes.name=热力交换

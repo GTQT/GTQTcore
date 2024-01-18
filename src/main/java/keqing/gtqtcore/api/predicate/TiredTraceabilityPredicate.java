@@ -255,16 +255,28 @@ public class TiredTraceabilityPredicate extends TraceabilityPredicate {
                 new WrappedIntTired(GTQTKQCC.CasingType.COMPUTER_VENT, 0));
         TiredTraceabilityPredicate.MAP_CPU_CASING.put(GTQTMetaBlocks.KQCC.getState(GTQTKQCC.CasingType.COMPUTER_CPUI),
                 new WrappedIntTired(GTQTKQCC.CasingType.COMPUTER_CPUI, 1));
+        TiredTraceabilityPredicate.MAP_CPU_CASING.put(GTQTMetaBlocks.KQCC.getState(GTQTKQCC.CasingType.COMPUTER_CPUII),
+                new WrappedIntTired(GTQTKQCC.CasingType.COMPUTER_CPUII, 2));
+        TiredTraceabilityPredicate.MAP_CPU_CASING.put(GTQTMetaBlocks.KQCC.getState(GTQTKQCC.CasingType.COMPUTER_CPUIII),
+                new WrappedIntTired(GTQTKQCC.CasingType.COMPUTER_CPUIII, 3));
 
         TiredTraceabilityPredicate.MAP_GPU_CASING.put(GTQTMetaBlocks.KQCC.getState(GTQTKQCC.CasingType.COMPUTER_VENT),
                 new WrappedIntTired(GTQTKQCC.CasingType.COMPUTER_VENT, 0));
         TiredTraceabilityPredicate.MAP_GPU_CASING.put(GTQTMetaBlocks.KQCC.getState(GTQTKQCC.CasingType.COMPUTER_GPUI),
                 new WrappedIntTired(GTQTKQCC.CasingType.COMPUTER_CPUI, 1));
+        TiredTraceabilityPredicate.MAP_GPU_CASING.put(GTQTMetaBlocks.KQCC.getState(GTQTKQCC.CasingType.COMPUTER_GPUII),
+                new WrappedIntTired(GTQTKQCC.CasingType.COMPUTER_CPUII, 2));
+        TiredTraceabilityPredicate.MAP_GPU_CASING.put(GTQTMetaBlocks.KQCC.getState(GTQTKQCC.CasingType.COMPUTER_GPUIII),
+                new WrappedIntTired(GTQTKQCC.CasingType.COMPUTER_CPUIII, 3));
 
         TiredTraceabilityPredicate.MAP_RAM_CASING.put(GTQTMetaBlocks.KQCC.getState(GTQTKQCC.CasingType.COMPUTER_VENT),
                 new WrappedIntTired(GTQTKQCC.CasingType.COMPUTER_VENT, 0));
         TiredTraceabilityPredicate.MAP_RAM_CASING.put(GTQTMetaBlocks.KQCC.getState(GTQTKQCC.CasingType.COMPUTER_RAMI),
                 new WrappedIntTired(GTQTKQCC.CasingType.COMPUTER_CPUI, 1));
+        TiredTraceabilityPredicate.MAP_RAM_CASING.put(GTQTMetaBlocks.KQCC.getState(GTQTKQCC.CasingType.COMPUTER_RAMII),
+                new WrappedIntTired(GTQTKQCC.CasingType.COMPUTER_CPUII, 2));
+        TiredTraceabilityPredicate.MAP_RAM_CASING.put(GTQTMetaBlocks.KQCC.getState(GTQTKQCC.CasingType.COMPUTER_RAMIII),
+                new WrappedIntTired(GTQTKQCC.CasingType.COMPUTER_CPUIII, 3));
     }
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_QFT_GLASS;
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_DRI_CASING;
