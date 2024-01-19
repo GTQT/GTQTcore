@@ -13,11 +13,11 @@ import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.common.items.MetaItems.*;
 import static gregtechfoodoption.GTFOMaterialHandler.*;
+import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.TJMaterials.*;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.electrode;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
-
 public class CPULine {
     public static void init() {
         Pre();          //基板
@@ -34,7 +34,7 @@ public class CPULine {
                 .buildAndRegister();
 
         CHEMICAL_RECIPES.recipeBuilder()
-                .input(dust,CopperCl)
+                .notConsumable(dust,CopperCl)
                 .fluidInputs(Trichlorosilane.getFluid(4000))
                 .fluidOutputs(Silane.getFluid(1000))
                 .fluidOutputs(SiliconTetrachloride.getFluid(3000))
@@ -149,6 +149,35 @@ public class CPULine {
     }
     private static void Pre()
     {
+        //石墨电极线
+        //石墨+沥青=浸渍石墨
+        FLUID_SOLIDFICATION_RECIPES.recipeBuilder()
+                .duration(2000)
+                .EUt(8)
+                .input(stick,Graphite,16)
+                .fluidInputs(HighlyPurifiedCoalTar.getFluid(100))
+                .output(IMPREGNATED_GRAPHITE_RODS)
+                .buildAndRegister();
+
+        CHEMICAL_RECIPES.recipeBuilder()
+                .duration(100)
+                .EUt(30)
+                .input(IMPREGNATED_GRAPHITE_RODS)
+                .input(dust,Graphite,16)
+                .fluidInputs(Asphalt.getFluid(2000))
+                .output(IMPREGNATED_GRAPHITE_RODSA)
+                .buildAndRegister();
+
+        BLAST_RECIPES.recipeBuilder()
+                .duration(2000)
+                .EUt(120)
+                .blastFurnaceTemp(1800)
+                .input(IMPREGNATED_GRAPHITE_RODSA)
+                .input(dust,Diamond)
+                .fluidInputs(Nitrogen.getFluid(1000))
+                .output(electrode,Graphite)
+                .buildAndRegister();
+
         //酚醛基板
         CHEMICAL_RECIPES.recipeBuilder()
                 .duration(100)
@@ -192,37 +221,47 @@ public class CPULine {
                 .duration(100)
                 .EUt(30)
                 .input(IMPREGNATED_SUBSTRATE)
-                .fluidInputs(Phenolic.getFluid(100))
+                .fluidInputs(Phenolic.getFluid(250))
                 .output(MetaItems.PHENOLIC_BOARD)
                 .buildAndRegister();
 
-        //石墨电极线
-        //石墨+沥青=浸渍石墨
-        FLUID_SOLIDFICATION_RECIPES.recipeBuilder()
+
+
+        //这里是MV阶段的热固化树脂+玻璃纤维=塑料基板的产线
+        //这里是玻璃纤维
+        MIXER_RECIPES.recipeBuilder()
                 .duration(2000)
-                .EUt(8)
-                .input(stick,Graphite,16)
-                .fluidInputs(HighlyPurifiedCoalTar.getFluid(100))
-                .output(IMPREGNATED_GRAPHITE_RODS)
+                .EUt(120)
+                .input(dust,QuartzSand)
+                .input(dust,Quicklime)
+                .input(dust,Uvarovite)
+                .input(dust,Pyrope)
+                .output(dust,Fiberglass,4)
+                .buildAndRegister();
+
+        FLUID_EXTRACTOR_RECIPES.recipeBuilder()
+                .duration(20)
+                .EUt(120)
+                .fluidInputs(Fiberglass.getFluid(288))
+                .output(wireFine,Fiberglass,16)
                 .buildAndRegister();
 
         CHEMICAL_RECIPES.recipeBuilder()
                 .duration(100)
-                .EUt(30)
-                .input(IMPREGNATED_GRAPHITE_RODS)
-                .input(dust,Graphite,16)
-                .fluidInputs(Asphalt.getFluid(2000))
-                .output(IMPREGNATED_GRAPHITE_RODSA)
+                .EUt(120)
+                .input(wireFine,Fiberglass,4)
+                .input(foil,Copper,2)
+                .fluidInputs(Epoxy.getFluid(576))
+                .fluidInputs(Polyethylene.getFluid(400))
+                .output(IMPREGNATED_PLASTIC_SUBSTRATE,4)
                 .buildAndRegister();
 
-        BLAST_RECIPES.recipeBuilder()
-                .duration(2000)
+        FLUID_SOLIDFICATION_RECIPES.recipeBuilder()
+                .duration(100)
                 .EUt(120)
-                .blastFurnaceTemp(1800)
-                .input(IMPREGNATED_GRAPHITE_RODSA)
-                .input(dust,Diamond)
-                .fluidInputs(Nitrogen.getFluid(1000))
-                .output(electrode,Graphite)
+                .input(IMPREGNATED_PLASTIC_SUBSTRATE)
+                .fluidInputs(SulfuricAcid.getFluid(250))
+                .output(PLASTIC_BOARD)
                 .buildAndRegister();
     }
 }

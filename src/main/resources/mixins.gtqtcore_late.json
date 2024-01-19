@@ -6,9 +6,11 @@
   "minVersion": "0.8.3",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "gregtech.MixinGlassCasingType",
     "gregtech.MixinMetaTileEntityFluidHatch",
-    "gregtech.MixinMetaTileEntityItemBus"
+    "gregtech.MixinMetaTileEntityItemBus",
+    "gregtech.MixinMetaItemClient"
   ],
   "server": [],
-  "client": []
+  "client": ["gregtech.MixinBlockGlassCasing"]
 }

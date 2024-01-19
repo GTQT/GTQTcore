@@ -15,6 +15,7 @@ public class GTQTMetaItems {
      */
     public static final List<MetaItem<?>> ITEMS = GTQTMetaItem1.getMetaItems();
     public static MetaItem<?>.MetaValueItem IMPREGNATED_SUBSTRATE;
+    public static MetaItem<?>.MetaValueItem IMPREGNATED_PLASTIC_SUBSTRATE;
     public static MetaItem<?>.MetaValueItem IMPREGNATED_GRAPHITE_RODS;
     public static MetaItem<?>.MetaValueItem IMPREGNATED_GRAPHITE_RODSA;
     public static MetaItem<?>.MetaValueItem COMMON_ALGAE;

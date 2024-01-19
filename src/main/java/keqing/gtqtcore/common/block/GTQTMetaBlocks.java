@@ -1,5 +1,7 @@
 package keqing.gtqtcore.common.block;
 
+import gregtech.api.block.VariantBlock;
+import gregtech.common.blocks.BlockGlassCasing;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.common.block.blocks.*;
 import keqing.gtqtcore.common.block.wood.BlockPineLeaves;
@@ -28,9 +30,12 @@ public class GTQTMetaBlocks {
     public static GTQTElectrobath ELECTROBATH;
     public static GTQTRoad ROAD;
     public static GTQTKQCC KQCC;
+    public static GTQTBlockGlassCasing GLASS_CASING;
     public static final BlockPineLeaves PINE_LEAVES = new BlockPineLeaves();
     public static final BlockPineLog PINE_LOG = new BlockPineLog();
     public static final BlockPineSapling PINE_SAPLING = new BlockPineSapling();
+
+
     private GTQTMetaBlocks() {}
 
     public static void init() {
@@ -58,6 +63,8 @@ public class GTQTMetaBlocks {
         ELECTROBATH.setRegistryName("electrobath");
         KQCC = new GTQTKQCC();
         KQCC.setRegistryName("computer_competent");
+        GLASS_CASING = new GTQTBlockGlassCasing();
+        GLASS_CASING.setRegistryName("glass_casing");
 
         ROAD = new GTQTRoad();
         ROAD.setRegistryName("road");
@@ -81,6 +88,7 @@ public class GTQTMetaBlocks {
         registerItemModel(COMPONENT_ASSEMBLY_LINE);
         registerItemModel(ISA_CASING);
         registerItemModel(KQCC);
+        registerItemModel(GLASS_CASING);
     }
 
     @SideOnly(Side.CLIENT)

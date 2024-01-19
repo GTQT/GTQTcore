@@ -104,6 +104,7 @@ public class TJFirstDegreeMaterials {
                 .ingot()
                 .color(0xbfb393)
                 .flags(setMaterialFlags(STANDARDWIREFINE,STANDARDFOIL))
+                .flags(GENERATE_FINE_WIRE)
                 .build();
 
         HydrogenSilsesquioxane = new Material.Builder(25012, gregtechId("hydrogensilsesquioxane"))
@@ -118,7 +119,8 @@ public class TJFirstDegreeMaterials {
                 .color(0x0e242b)
                 .build();
         Fiberglass = new Material.Builder(25014, gregtechId("fiberglass"))
-                .ingot()
+                .ingot().fluid()
+                .flags(GENERATE_FINE_WIRE,GENERATE_PLATE)
                 .color(0x99c0cf)
                 .build();
 

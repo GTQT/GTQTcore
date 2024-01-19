@@ -20,7 +20,7 @@ import static gregtech.api.unification.ore.OrePrefix.ore;
 
 public class IntegratedMiningDivision {
     public static void init() {
-        addStaticRecipes();
+       addStaticRecipes();
     }
 
     private static void addStaticRecipes() {

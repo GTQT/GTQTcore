@@ -131,8 +131,8 @@ public class MetaTileEntityPlusMultiFluidHatch extends MetaTileEntityMultiblockN
 
     public void addInformation(ItemStack stack,  World player, List<String> tooltip, boolean advanced) {
         tooltip.add(I18n.format(this.isExportHatch ? "gregtech.machine.fluid_hatch.export.tooltip" : "gregtech.machine.fluid_hatch.import.tooltip", new Object[0]));
-        tooltip.add(I18n.format("gregtech.universal.tooltip.fluid_storage_capacity_mult", new Object[]{this.numSlots, this.tankSize}));
-        tooltip.add(I18n.format("gregtech.universal.enabled", new Object[0]));
+        tooltip.add(I18n.format("gregtech.universal.tooltip.fluid_storage_capacity_mult", this.numSlots, this.tankSize));
+        tooltip.add(I18n.format("gregtech.universal.enabled"));
     }
 
     public void addToolUsages(ItemStack stack,  World world, List<String> tooltip, boolean advanced) {

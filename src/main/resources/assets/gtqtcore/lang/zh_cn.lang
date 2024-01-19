@@ -243,6 +243,21 @@ gtqtcore.machine.fluid_hatch.export_16x.opv.name=16重输出仓（§4OPV§r）
 gtqtcore.machine.fluid_hatch.import_16x.max.name=16重输入仓（§4MAX§r）
 gtqtcore.machine.fluid_hatch.export_16x.max.name=16重输出仓（§4MAX§r）
 
+# 算力端口
+gtqtcore.machine.kqcccomputation_hatch.receiver.lv.name=算力输入端口（§7LV§r）
+gtqtcore.machine.kqcccomputation_hatch.receiver.mv.name=算力输入端口（§bMV§r）
+gtqtcore.machine.kqcccomputation_hatch.receiver.hv.name=算力输入端口（§6HV§r）
+gtqtcore.machine.kqcccomputation_hatch.receiver.ev.name=算力输入端口（§5EV§r）
+gtqtcore.machine.kqcccomputation_hatch.receiver.iv.name=算力输入端口（§1IV§r）
+gtqtcore.machine.kqcccomputation_hatch.receiver.luv.name=算力输入端口（§dLuV§r）
+
+gtqtcore.machine.kqcccomputation_hatch.transmitter.lv.name=算力输出端口（§7LV§r）
+gtqtcore.machine.kqcccomputation_hatch.transmitter.mv.name=算力输出端口（§bMV§r）
+gtqtcore.machine.kqcccomputation_hatch.transmitter.hv.name=算力输出端口（§6HV§r）
+gtqtcore.machine.kqcccomputation_hatch.transmitter.ev.name=算力输出端口（§5EV§r）
+gtqtcore.machine.kqcccomputation_hatch.transmitter.iv.name=算力输出端口（§1IV§r）
+gtqtcore.machine.kqcccomputation_hatch.transmitter.luv.name=算力输出端口（§dLuV§r）
+
 gtqtcore.machine.parallel_hatch.uhv.name=并行控制仓（§4UHV§r）
 gtqtcore.machine.parallel_hatch.uev.name=并行控制仓（§aUEV§r）
 gtqtcore.machine.parallel_hatch.uiv.name=并行控制仓（§2UIV§r）
@@ -348,6 +363,9 @@ gtqtcore.casingTire=外壳等级：%s
 gtqtcore.coilTire=线圈等级：%s
 gtqtcore.eleTire=外壳等级：%s 电解器等级：%s 配方最大电压：%s
 gregtech.multiblock.ele.1=耗能减免：%s 电流效率：%s 电极洁净度：%s
+gregtech.machine.kqcc.export.tooltip=§c算力的输出端,向光缆发送算力
+gregtech.machine.kqcc.import.tooltip=§a算力的输入端,从光缆请求算力
+gregtech.universal.tooltip.kqcc=端口等级：%s 算力最大流量：%s CWU
 gtqtcore.machine.chemical-plant.tooltip.1=需要多方块等级大于配方电压等级才能工作！
 recipemap.pyrolysis_tower.name=分馏塔
 gregtech.material.pine_oil=松油
@@ -503,7 +521,7 @@ gtqtcore.multiblock.kqcc.threshold_decrement=§a此处(关机 开机)
 gtqtcore.multiblock.kqcc.threshold_increment=§c此处(开机 超频)
 gregtech.multiblock.kqcc.normal=§a正常效率计算。
 gregtech.multiblock.kqcc.lack=§c缺少足够内存！
-gregtech.multiblock.kqcc.cwtt=算力: %s CWT 热量: %s
+gregtech.multiblock.kqcc.cwtt=算力: %s CWU 热量: %s
 gtqtcore.machine.kqcc.name=计算服务器
 gtqtcore.pa.mode1=加速模式：加速 偏转相位：%s 速度：%s C
 gtqtcore.pa.mode2=加速模式：稳定 偏转相位：%s 速度：%s C
@@ -629,6 +647,7 @@ metaitem.item.aluminium_pellets.name=铝颗粒
 
 metaitem.item.impregnated_graphite_rods.name=浸渍石墨棒组
 metaitem.item.impregnated_substrate.name=浸渍基板
+metaitem.item.impregnated_plastic_substrate.name=固化树脂-玻璃纤维复合基板
 metaitem.item.impregnated_graphite_rodsa.name=预处理石墨电极
 
 
@@ -679,6 +698,19 @@ tile.multiblock_casing.adv_machine_matterfab_animated.name=智能有机物质生
 tile.multiblock_casing.adv_machine_lesu.name=智能储能单元
 tile.multiblock_casing.adv_machine_vent_rotating.name=智能散热器
 tile.multiblock_casing.adv_machine_tubbine.name=智能涡轮
+
+tile.glass_casing.boron_silicate_glass.name=硼硅酸盐玻璃
+tile.glass_casing.boron_silicate_glass.tooltip=比钢化玻璃更好
+tile.glass_casing.ti_boron_silicate_glass.name=钛强化硼硅酸盐玻璃
+tile.glass_casing.ti_boron_silicate_glass.tooltip=粉红水晶
+tile.glass_casing.thy_boron_silicate_glass.name=钍强化的硼硅酸盐玻璃
+tile.glass_casing.thy_boron_silicate_glass.tooltip=绿油油
+tile.glass_casing.w_boron_silicate_glass.name=钨强化硼硅酸盐玻璃
+tile.glass_casing.w_boron_silicate_glass.tooltip=高强玻璃
+tile.glass_casing.osmir_boron_silicate_glass.name=铱锇合金强化硼硅酸盐玻璃
+tile.glass_casing.osmir_boron_silicate_glass.tooltip=工业之星
+tile.glass_casing.naq_boron_silicate_glass.name=硅岩强化硼硅酸盐玻璃
+tile.glass_casing.naq_boron_silicate_glass.tooltip=无惧冲击
 
 tile.turbine_casing.brick.name=隔热砖
 tile.turbine_casing.advanced_invar_casing.name=高级殷钢外壳
