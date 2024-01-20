@@ -68,6 +68,24 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem GOLD_CROP;
     public static MetaItem<?>.MetaValueItem PROSPECTOR_UV;
     public static MetaItem<?>.MetaValueItem PROSPECTOR_UIV;
+
+    public static MetaItem<?>.MetaValueItem RETICLE_ADVANCED_SYSTEM_ON_CHIP;
+    public static MetaItem<?>.MetaValueItem RETICLE_CENTRAL_PROCESSING_UNIT;
+    public static MetaItem<?>.MetaValueItem RETICLE_INTEGRATED_LOGIC_CIRCUIT;
+    public static MetaItem<?>.MetaValueItem RETICLE_LOW_POWER_INTEGRATED_CIRCUIT;
+    public static MetaItem<?>.MetaValueItem RETICLE_NAND_MEMORY_CHIP;
+    public static MetaItem<?>.MetaValueItem RETICLE_NANO_CENTRAL_PROCESSING_UNIT;
+    public static MetaItem<?>.MetaValueItem RETICLE_NOR_MEMORY_CHIP;
+    public static MetaItem<?>.MetaValueItem RETICLE_POWER_INTEGRATED_CIRCUIT;
+    public static MetaItem<?>.MetaValueItem RETICLE_QBIT_CENTRAL_PROCESSING_UNIT;
+    public static MetaItem<?>.MetaValueItem RETICLE_RANDOM_ACCESS_MEMORY;
+    public static MetaItem<?>.MetaValueItem RETICLE_SIMPLE_SYSTEM_ON_CHIP;
+    public static MetaItem<?>.MetaValueItem RETICLE_SYSTEM_ON_CHIP;
+    public static MetaItem<?>.MetaValueItem RETICLE_ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT;
+    public static MetaItem<?>.MetaValueItem RETICLE_ULTRA_LOW_POWER_INTEGRATED_CIRCUIT;
+    public static MetaItem<?>.MetaValueItem RETICLE_HIGH_POWER_INTEGRATED_CIRCUIT;
+    public static MetaItem<?>.MetaValueItem RETICLE_HIGHLY_ADVANCED_SYSTEM_ON_CHIP;
+    public static MetaItem<?>.MetaValueItem RETICLE_SILICON;
     public static MetaItem<?>.MetaValueItem DEBUG_STRUCTURE_WRITER;
     public static MetaItem<?>.MetaValueItem DEBUG_STRUCTURE_BUILDER;
 

@@ -81,6 +81,8 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<SimpleRecipeBuilder> NANOHYBRID;
     public static final RecipeMap<SimpleRecipeBuilder> PYROLYSIS_TOWER;
     public static final RecipeMap<FusionRecipeBuilder> EFUSION_RECIPES;
+    public static final RecipeMap<ComputationRecipeBuilder> LASER_ENGRAVING;
+    public static final RecipeMap<SimpleRecipeBuilder> CW_LASER_ENGRAVER_RECIPES;
 
     private GTQTcoreRecipeMaps() {}
     static {
@@ -133,6 +135,12 @@ public class GTQTcoreRecipeMaps {
                 .setSound(GTSoundEvents.ASSEMBLER);
 
         CW_PRECISE_ASSEMBLER_RECIPES = new RecipeMapPreciseAssembler<>("cwt_precise_assembler_recipes", 4, 1, 4, 0, new ComputationRecipeBuilder(), false)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL)
+                .setSlotOverlay(false, false, false, GuiTextures.CIRCUIT_OVERLAY)
+                .setSlotOverlay(false, false, true, GuiTextures.CIRCUIT_OVERLAY)
+                .setSound(GTSoundEvents.ASSEMBLER);
+
+        LASER_ENGRAVING = new RecipeMap<>("laser_engraving", 2, 1, 1, 0, new ComputationRecipeBuilder(), false)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL)
                 .setSlotOverlay(false, false, false, GuiTextures.CIRCUIT_OVERLAY)
                 .setSlotOverlay(false, false, true, GuiTextures.CIRCUIT_OVERLAY)
@@ -223,6 +231,12 @@ public class GTQTcoreRecipeMaps {
                 .setProgressBar(GuiTextures.PROGRESS_BAR_GAS_COLLECTOR, ProgressWidget.MoveType.HORIZONTAL)
                 .setSound(GTSoundEvents.TURBINE)
                 .allowEmptyOutput();
+
+        CW_LASER_ENGRAVER_RECIPES = new RecipeMap<>("cw_laser_engraver", 2, 1, 1, 0, new SimpleRecipeBuilder(), false)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL)
+                .setSlotOverlay(false, false, false, GuiTextures.CIRCUIT_OVERLAY)
+                .setSlotOverlay(false, false, true, GuiTextures.CIRCUIT_OVERLAY)
+                .setSound(GTSoundEvents.ASSEMBLER);
 
         NAQUADAH_REACTOR = new RecipeMap<>("naquadah_reactor",
                 3, 1, 1, 1, new FuelRecipeBuilder(), false)

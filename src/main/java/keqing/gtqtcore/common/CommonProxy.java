@@ -93,6 +93,7 @@ public class CommonProxy {
         */
         registry.register(GTQTMetaBlocks.MULTI_CASING);
         registry.register(GTQTMetaBlocks.ADV_BLOCK);
+        registry.register(GTQTMetaBlocks.GLASS_CASING);
         registry.register(GTQTMetaBlocks.ADV_GLASS);
         registry.register(GTQTMetaBlocks.WIRE_COIL);
         registry.register(GTQTMetaBlocks.QUANTUM_CASING);
@@ -104,7 +105,8 @@ public class CommonProxy {
         registry.register(GTQTMetaBlocks.ROAD);
         registry.register(GTQTMetaBlocks.ELECTROBATH);
         registry.register(GTQTMetaBlocks.KQCC);
-        registry.register(GTQTMetaBlocks.GLASS_CASING);
+        registry.register(GTQTMetaBlocks.STEPPER);
+
 
         registry.register(GTQTCrops.COPPER_CROP);
         registry.register(GTQTCrops.IRON_CROP);
@@ -136,6 +138,7 @@ public class CommonProxy {
 
         registry.register(createItemBlock(GTQTMetaBlocks.MULTI_CASING, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.ADV_BLOCK, VariantItemBlock::new));
+        registry.register(createItemBlock(GTQTMetaBlocks.GLASS_CASING, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.ADV_GLASS, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.WIRE_COIL, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.QUANTUM_CASING, VariantItemBlock::new));
@@ -146,8 +149,9 @@ public class CommonProxy {
         registry.register(createItemBlock(GTQTMetaBlocks.ISA_CASING, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.ELECTROBATH, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.ROAD, VariantItemBlock::new));
+        registry.register(createItemBlock(GTQTMetaBlocks.STEPPER, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.KQCC, VariantItemBlock::new));
-        registry.register(createItemBlock(GTQTMetaBlocks.GLASS_CASING, VariantItemBlock::new));
+
 
         registry.register(createItemBlock(PINE_LOG, ItemBlock::new));
         registry.register(createItemBlock(PINE_SAPLING, ItemBlock::new));

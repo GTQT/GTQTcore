@@ -35,7 +35,7 @@ public class GTQTBlockGlassCasing extends VariantActiveBlock<GTQTBlockGlassCasin
         setResistance(5.0F);
         setSoundType(SoundType.GLASS);
         setHarvestLevel(ToolClasses.PICKAXE, 1);
-        setDefaultState(this.getState(CasingType.SILICATE_GLASS));
+        setDefaultState(this.getState(CasingType.TI_BORON_SILICATE_GLASS));
         this.useNeighborBrightness = true;
     }
 
@@ -91,12 +91,15 @@ public class GTQTBlockGlassCasing extends VariantActiveBlock<GTQTBlockGlassCasin
 
     public enum CasingType implements IStringSerializable, ITierGlassBlockState {
 
-        SILICATE_GLASS("boron_silicate_glass", GTValues.HV, true),
+
         TI_BORON_SILICATE_GLASS("ti_boron_silicate_glass", GTValues.EV, true),
         W_BORON_SILICATE_GLASS("w_boron_silicate_glass", GTValues.IV, true),
         OSMIR_BORON_SILICATE_GLASS("osmir_boron_silicate_glass",GTValues.LuV, true),
         NAQ_BORON_SILICATE_GLASS("naq_boron_silicate_glass", GTValues.ZPM, true),
-        THY_BORON_SILICATE_GLASS("thy_boron_silicate_glass", GTValues.EV, true);
+        FORCE_FIELD_CONSTRAINED_GLASS("force_field_constrained_glass", GTValues.UV, true),
+        COSMIC_MICROWAVE_BACKGROUND_RADIATION_ABSORPTION_GLASS("cosmic_microwave_background_radiation_absorption_glass", GTValues.UHV, true),
+        SPACETIME_SUPERCONDENSER_GLASS("spacetime_supercondenser_glass", GTValues.UEV, true),
+        SUPRACAUSAL_LIGHT_CONE_GLASS("supracausal_light_cone_glass", GTValues.UIV, true);
 
         private final String name;
         private final int tier;

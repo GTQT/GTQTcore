@@ -52,12 +52,12 @@ public class FuelRecipes {
                             .buildAndRegister();
 
                     CW_PRECISE_ASSEMBLER_RECIPES.recipeBuilder()
-                            .input(screw, Hdcs, 4)
-                            .fluidInputs(SolderingAlloy.getFluid(L * 8))
-                            .fluidInputs(Kevlar.getFluid(L * 4))
+                            .input(screw, Hdcs, 1)
+                            .fluidInputs(SolderingAlloy.getFluid(L * 1))
                             .output(ingot,Iron)
                             .EUt(VA[UHV])
                             .duration(120)
+                            .totalCWU(600)
                             .CWUt(3)
                             .buildAndRegister();
 

@@ -168,6 +168,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityMillBallHatch MULTIPART_BALL_HATCH;
     public static MetaTileEntityCatalystHatch CATALYST_HATCH;
     public static MetaTileEntityChemicalPlant CHEMICAL_PLANT;
+    public static MetaTileEntityLaserEngraving LASER_ENGRAVING;
     public static final MetaTileEntityRotorHolder[] ROTOR_HOLDER = new MetaTileEntityRotorHolder[12]; //HV, EV, IV, LuV, ZPM, UV
 
     public static final SimpleMachineMetaTileEntity[] FLUID_CANNER = new SimpleMachineMetaTileEntity[GTValues.V.length - 1];
@@ -245,8 +246,7 @@ public class GTQTMetaTileEntities {
         ADVANCED_FLUID_DRILLING_RIG = registerMetaTileEntity(3064, new MetaTileEntityFracturing(gtqtcoreId("fracturing.ev"), 4));
         STEAM_COMPRESSOR = registerMetaTileEntity(3065, new MetaTileEntitySteamCompressor(gtqtcoreId("steam_compressor")));
         STEAM_EXTRACTOR = registerMetaTileEntity(3066, new MetaTileEntitySteamExtractor(gtqtcoreId("steam_extractor")));
-        HUGE_TANK = registerMetaTileEntity(3067,
-                new MetaTileEntityMultiblockTank(gtqtcoreId("tank.steel"), true, 1000 * 1000));
+        HUGE_TANK = registerMetaTileEntity(3067,new MetaTileEntityMultiblockTank(gtqtcoreId("tank.steel"), true, 1000 * 1000));
 
         // Diesel Generator, IDs 935-949
         COMBUSTION_GENERATOR[0] = registerMetaTileEntity(3068, new MetaTileEntitySingleCombustion(gtqtcoreId("combustion_generator.ev"), RecipeMaps.COMBUSTION_GENERATOR_FUELS, Textures.COMBUSTION_GENERATOR_OVERLAY, 4, genericGeneratorTankSizeFunction));
@@ -291,6 +291,7 @@ public class GTQTMetaTileEntities {
         EFUSION_REACTOR[1] = registerMetaTileEntity(3103, new MetaTileEntityEFusionReactor(gtqtcoreId("fusion_reactor.zpm"), GTValues.ZPM));
         EFUSION_REACTOR[2] = registerMetaTileEntity(3104, new MetaTileEntityEFusionReactor(gtqtcoreId("fusion_reactor.uv"), GTValues.UV));
         KQCC= registerMetaTileEntity(3105, new MetaTileEntityKQCC(gtqtcoreId("kqcc")));
+        LASER_ENGRAVING= registerMetaTileEntity(3106, new MetaTileEntityLaserEngraving(gtqtcoreId("laser_engraving")));
 
         registerSimpleMetaTileEntity(FLUID_EXTRACTOR, 15000, "fluid_extractor", GTQTcoreRecipeMaps.FLUID_EXTRACTOR_RECIPES, Textures.EXTRACTOR_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
         registerSimpleMetaTileEntity(FLUID_CANNER, 15015, "fluid_canner", GTQTcoreRecipeMaps.FLUID_CANNER_RECIPES, Textures.CANNER_OVERLAY, true,GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);

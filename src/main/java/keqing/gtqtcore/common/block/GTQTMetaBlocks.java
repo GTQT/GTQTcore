@@ -31,6 +31,7 @@ public class GTQTMetaBlocks {
     public static GTQTRoad ROAD;
     public static GTQTKQCC KQCC;
     public static GTQTBlockGlassCasing GLASS_CASING;
+    public static GTQTStepper STEPPER;
     public static final BlockPineLeaves PINE_LEAVES = new BlockPineLeaves();
     public static final BlockPineLog PINE_LOG = new BlockPineLog();
     public static final BlockPineSapling PINE_SAPLING = new BlockPineSapling();
@@ -65,6 +66,8 @@ public class GTQTMetaBlocks {
         KQCC.setRegistryName("computer_competent");
         GLASS_CASING = new GTQTBlockGlassCasing();
         GLASS_CASING.setRegistryName("glass_casing");
+        STEPPER = new GTQTStepper();
+        STEPPER.setRegistryName("stepper");
 
         ROAD = new GTQTRoad();
         ROAD.setRegistryName("road");
@@ -89,6 +92,7 @@ public class GTQTMetaBlocks {
         registerItemModel(ISA_CASING);
         registerItemModel(KQCC);
         registerItemModel(GLASS_CASING);
+        registerItemModel(STEPPER);
     }
 
     @SideOnly(Side.CLIENT)

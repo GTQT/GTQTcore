@@ -30,17 +30,22 @@ public class GTQTADVBlock extends VariantBlock<GTQTADVBlock.CasingType> {
 
     public static enum CasingType implements IStringSerializable {
 
-        ADV_MACHINE_TECH("adv_machine_tech"),
-        ADV_MACHINE_BASIC("adv_machine_basic"),
-        ADV_DIMENSIONAL_CASING_B("adv_machine_dimensional_cover_blue"),
-        ADV_DIMENSIONAL_CASING_O("adv_machine_dimensional_cover_orange"),
-        ADV_MACHINE_LESU("adv_machine_lesu"),
-        ADV_MACHINE_MATTERFAB("adv_machine_matterfab"),
-        ADV_MACHINE_MATTERFAB_ACTIVE("adv_machine_matterfab_active"),
-        ADV_MACHINE_MATTERFAB_ACTIVE_ANIMATED("adv_machine_matterfab_active_animated"),
-        ADV_MACHINE_MATTERFAB_ANIMATED("adv_machine_matterfab_animated"),
-        ADV_MACHINE_VENT_ROTARING("adv_machine_vent_rotating"),
-        ADV_MACHINE_TUBBINE("adv_machine_tubbine");
+        Inconel625("inconel_625"),
+        HastelloyN("hastelloy_n"),
+        Stellite("stellite"),
+        Hdcs("hdcs"),
+        Lafium("lafium"),
+        BlackTitanium("black_titanium"),
+        Talonite("talonite"),
+        BlackPlutonium("black_plutonium"),
+        MaragingSteel250("maraging_steel_250"),
+        Staballoy("staballoy"),
+        BabbittAlloy("babbitt_alloy"),
+        ZirconiumCarbide("zirconium_carbide"),
+        Inconel792("inconel_792"),
+        IncoloyMA813("incoloy_ma_813"),
+        HastelloyX78("hastelloy_x_78"),
+        HastelloyK243("hastelloy_k_243");
         private final String name;
 
         CasingType(String name) {

@@ -1,19 +1,29 @@
 package keqing.gtqtcore.common.block.blocks;
 
+import gregtech.api.GTValues;
 import gregtech.api.block.VariantBlock;
+import gregtech.api.block.VariantItemBlock;
+import gregtech.api.items.toolitem.ToolClasses;
+import keqing.gtqtcore.api.blocks.ITierGlassBlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class GTQTADVGlass extends VariantBlock<GTQTADVGlass.CasingType> {
 
@@ -23,8 +33,8 @@ public class GTQTADVGlass extends VariantBlock<GTQTADVGlass.CasingType> {
         this.setTranslationKey("multiblock_casing");
         this.setHardness(5.0F);
         this.setResistance(10.0F);
-        this.setSoundType(SoundType.METAL);
-        this.setHarvestLevel("wrench", 2);
+        this.setSoundType(SoundType.GLASS);
+        this.setHarvestLevel(ToolClasses.PICKAXE, 1);
     }
 
     public boolean canCreatureSpawn(@Nonnull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull EntityLiving.SpawnPlacementType type) {
@@ -51,7 +61,17 @@ public class GTQTADVGlass extends VariantBlock<GTQTADVGlass.CasingType> {
     public boolean isFullCube(@Nonnull IBlockState state) {
         return false;
     }
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void addInformation(@Nonnull ItemStack stack, @Nullable World player, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag advanced) {
+        super.addInformation(stack, player, tooltip, advanced);
+        VariantItemBlock itemBlock = (VariantItemBlock<GTQTBlockGlassCasing.CasingType, GTQTBlockGlassCasing>) stack.getItem();
+        IBlockState stackState = itemBlock.getBlockState(stack);
+        GTQTADVGlass.CasingType casingType =  this.getState(stackState);
+        tooltip.add(I18n.format("epimorphism.glass_tier.tooltip", casingType.getTireNameColored()));
+        tooltip.add(casingType.getOpticalTierName());
 
+    }
     @Override
     @SideOnly(Side.CLIENT)
     @SuppressWarnings("deprecation")
@@ -62,8 +82,10 @@ public class GTQTADVGlass extends VariantBlock<GTQTADVGlass.CasingType> {
                 getState(sideState) != getState(state) :
                 super.shouldSideBeRendered(state, world, pos, side);
     }
-    public static enum CasingType implements IStringSerializable {
+    public static enum CasingType  implements IStringSerializable, ITierGlassBlockState {
 
+        SILICATE_GLASS("boron_silicate_glass"),
+        THY_SILICATE_GLASS("thy_boron_silicate_glass"),
         ADV_MACHINE_GLASS("adv_machine_glass"),
         ADV_MACHINE_GLASS_R("adv_machine_glass_r"),
         ADV_MACHINE_GLASS_B("adv_machine_glass_b"),
@@ -84,6 +106,20 @@ public class GTQTADVGlass extends VariantBlock<GTQTADVGlass.CasingType> {
         @Override
         public String getName() {
             return name;
+        }
+        @Override
+        public boolean isOpticalGlass() {
+            return false;
+        }
+        public int getGlassTier() {
+            return switch (getName()) {
+                case ("boron_silicate_glass") -> GTValues.MV;
+                case ("adv_machine_glass"), ("adv_machine_glass_r"), ("adv_machine_glass_b"), ("adv_machine_glass_g"), ("adv_machine_glass_p") , ("adv_machine_glass_o"), ("adv_machine_glass_pr")-> GTValues.UV;
+                case ("tech_fusion_glass_4") -> GTValues.UHV;
+                case ("tech_fusion_glass_5") -> GTValues.UEV;
+                case ("tech_fusion_glass_6") -> GTValues.UIV;
+                default -> GTValues.HV;
+            };
         }
     }
 }

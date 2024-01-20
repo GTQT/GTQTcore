@@ -1,28 +1,116 @@
 package keqing.gtqtcore.loaders.recipes.chain;
-
+import gregtech.api.GTValues;
 import gregicality.science.api.recipes.GCYSRecipeMaps;
+import gregtech.api.metatileentity.multiblock.CleanroomType;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
+import gregtech.api.unification.material.MarkerMaterials;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.items.MetaItems;
-
+import gregtech.api.unification.material.MarkerMaterials.Color;
 import static gregicality.science.api.unification.materials.GCYSMaterials.*;
+import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.common.items.MetaItems.*;
+
 import static gregtechfoodoption.GTFOMaterialHandler.*;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.TJMaterials.*;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.electrode;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
+import static keqing.gtqtcore.common.items.GTQTMetaItems.RETICLE_POWER_INTEGRATED_CIRCUIT;
+
 public class CPULine {
     public static void init() {
+        LaserEngraving(); //光掩模
         Pre();          //基板
         Silicon();      //晶圆
     }
+
+    private static void LaserEngraving() {
+        // Wafer engraving
+        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8).fluidInputs(Water.getFluid(10000))
+                .notConsumable(craftingLens, Color.Purple).output(RETICLE_ADVANCED_SYSTEM_ON_CHIP)
+                .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
+
+
+        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8).fluidInputs(Water.getFluid(10000))
+                .notConsumable(craftingLens, Color.Red).output(RETICLE_CENTRAL_PROCESSING_UNIT)
+                .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
+
+
+        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8).fluidInputs(Water.getFluid(10000))
+                .notConsumable(craftingLens, Color.Blue).output(RETICLE_INTEGRATED_LOGIC_CIRCUIT)
+                .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
+
+
+        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8).fluidInputs(Water.getFluid(10000))
+                .notConsumable(craftingLens, Color.Brown).output(RETICLE_LOW_POWER_INTEGRATED_CIRCUIT)
+                .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
+
+
+        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8).fluidInputs(Water.getFluid(10000))
+                .notConsumable(craftingLens, Color.Cyan).output(RETICLE_NAND_MEMORY_CHIP)
+                .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
+
+
+        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8).fluidInputs(Water.getFluid(10000))
+                .notConsumable(craftingLens, Color.Black).output(RETICLE_NANO_CENTRAL_PROCESSING_UNIT)
+                .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
+
+
+        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[HV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8).fluidInputs(Water.getFluid(10000))
+                .notConsumable(craftingLens, Color.Gray).output(RETICLE_NOR_MEMORY_CHIP)
+                .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
+
+
+        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[HV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8).fluidInputs(Water.getFluid(10000))
+                .notConsumable(craftingLens, Color.Green).output(RETICLE_POWER_INTEGRATED_CIRCUIT)
+                .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
+
+
+        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[HV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8).fluidInputs(Water.getFluid(10000))
+                .notConsumable(craftingLens, Color.LightBlue).output(RETICLE_QBIT_CENTRAL_PROCESSING_UNIT)
+                .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
+
+
+        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[HV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8).fluidInputs(Water.getFluid(10000))
+                .notConsumable(craftingLens, Color.LightGray).output(RETICLE_RANDOM_ACCESS_MEMORY)
+                .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
+
+
+        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[EV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8).fluidInputs(Water.getFluid(10000))
+                .notConsumable(craftingLens, Color.Lime).output(RETICLE_SIMPLE_SYSTEM_ON_CHIP)
+                .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
+
+        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[EV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8).fluidInputs(Water.getFluid(10000))
+                .notConsumable(craftingLens, Color.Magenta).output(RETICLE_SYSTEM_ON_CHIP)
+                .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
+
+        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[EV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8).fluidInputs(Water.getFluid(10000))
+                .notConsumable(craftingLens, Color.White).output(RETICLE_ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT)
+                .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
+
+        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[EV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8).fluidInputs(Water.getFluid(10000))
+                .notConsumable(craftingLens, Color.Yellow).output(RETICLE_ULTRA_LOW_POWER_INTEGRATED_CIRCUIT)
+                .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
+
+        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[EV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8).fluidInputs(Water.getFluid(10000))
+                .notConsumable(craftingLens, Color.Pink).output(RETICLE_HIGH_POWER_INTEGRATED_CIRCUIT)
+                .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
+
+        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[EV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8).fluidInputs(Water.getFluid(10000))
+                .notConsumable(craftingLens, Color.Orange).output(RETICLE_HIGHLY_ADVANCED_SYSTEM_ON_CHIP)
+                .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
+
+
+
+    }
+
     private static void Silicon()
     {
         CHEMICAL_RECIPES.recipeBuilder()

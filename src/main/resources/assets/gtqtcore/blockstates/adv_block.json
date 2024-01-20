@@ -8,70 +8,100 @@
   },
   "variants": {
     "variant": {
-      "adv_machine_tech": {
+      "inconel_625": {
         "model": "minecraft:cube_all",
         "textures": {
-          "all": "gregtech:blocks/multiblock/advblock/adv_machine_tech"
+          "all": "gregtech:blocks/multiblock/advblock/inconel_625"
         }
       },
-      "adv_machine_basic": {
+      "hastelloy_n": {
         "model": "minecraft:cube_all",
         "textures": {
-          "all": "gregtech:blocks/multiblock/advblock/adv_machine_basic"
+          "all": "gregtech:blocks/multiblock/advblock/hastelloy_n"
         }
       },
-      "adv_machine_dimensional_cover_blue": {
+      "stellite": {
         "model": "minecraft:cube_all",
         "textures": {
-          "all": "gregtech:blocks/multiblock/advblock/adv_machine_dimensional_cover_blue"
+          "all": "gregtech:blocks/multiblock/advblock/stellite"
         }
       },
-      "adv_machine_dimensional_cover_orange": {
+      "hdcs": {
         "model": "minecraft:cube_all",
         "textures": {
-          "all": "gregtech:blocks/multiblock/advblock/adv_machine_dimensional_cover_orange"
+          "all": "gregtech:blocks/multiblock/advblock/hdcs"
         }
       },
-      "adv_machine_matterfab": {
+      "lafium": {
         "model": "minecraft:cube_all",
         "textures": {
-          "all": "gregtech:blocks/multiblock/advblock/adv_machine_matterfab"
+          "all": "gregtech:blocks/multiblock/advblock/lafium"
         }
       },
-      "adv_machine_matterfab_active": {
+      "black_titanium": {
         "model": "minecraft:cube_all",
         "textures": {
-          "all": "gregtech:blocks/multiblock/advblock/adv_machine_matterfab_active"
+          "all": "gregtech:blocks/multiblock/advblock/black_titanium"
         }
       },
-      "adv_machine_matterfab_active_animated": {
+      "talonite": {
         "model": "minecraft:cube_all",
         "textures": {
-          "all": "gregtech:blocks/multiblock/advblock/adv_machine_matterfab_active_animated"
+          "all": "gregtech:blocks/multiblock/advblock/talonite"
         }
       },
-      "adv_machine_matterfab_animated": {
+      "black_plutonium": {
         "model": "minecraft:cube_all",
         "textures": {
-          "all": "gregtech:blocks/multiblock/advblock/adv_machine_matterfab_animated"
+          "all": "gregtech:blocks/multiblock/advblock/black_plutonium"
         }
       },
-      "adv_machine_lesu": {
+      "maraging_steel_250": {
         "model": "minecraft:cube_all",
         "textures": {
-          "all": "gregtech:blocks/multiblock/advblock/adv_machine_lesu"
+          "all": "gregtech:blocks/multiblock/advblock/maraging_steel_250"
         }
       },
-      "adv_machine_vent_rotating": {
+      "staballoy": {
         "model": "minecraft:cube_all",
         "textures": {
-          "all": "gregtech:blocks/multiblock/advblock/adv_machine_vent_rotating"
+          "all": "gregtech:blocks/multiblock/advblock/staballoy"
         }
       },
-      "adv_machine_tubbine": {
+      "babbitt_alloy": {
         "model": "minecraft:cube_all",
         "textures": {
-          "all": "gregtech:blocks/multiblock/advblock/adv_machine_tubbine"
+          "all": "gregtech:blocks/multiblock/advblock/babbitt_alloy"
+        }
+      },
+      "zirconium_carbide": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/advblock/zirconium_carbide"
+        }
+      },
+      "inconel_792": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/advblock/inconel_792"
+        }
+      },
+      "incoloy_ma_813": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/advblock/incoloy_ma_813"
+        }
+      },
+      "hastelloy_x_78": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/advblock/hastelloy_x_78"
+        }
+      },
+      "hastelloy_k_243": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/advblock/hastelloy_k_243"
         }
       }
     }

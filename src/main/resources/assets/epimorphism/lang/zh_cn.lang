@@ -452,6 +452,7 @@ tile.ep_glass_casing_b.supracausal_light_cone_glass.name=超因果光锥具现�
 tile.ep_glass_casing_b.supracausal_light_cone_glass.tooltip=§b量子操纵者§7-力场玻璃等级：§cIV§7
 
 epimorphism.glass_tier.tooltip=玻璃等级：%s
+epimorphism.optical_glass_tier.tooltip.-1=非常原始的玻璃
 epimorphism.optical_glass_tier.tooltip.0=粗制光学玻璃
 epimorphism.optical_glass_tier.tooltip.1=普通光学玻璃
 epimorphism.optical_glass_tier.tooltip.2=改良光学玻璃

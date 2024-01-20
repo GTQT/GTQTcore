@@ -8,6 +8,18 @@
   },
   "variants": {
     "variant": {
+      "boron_silicate_glass": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/advglass/boron_silicate_glass"
+        }
+      },
+      "thy_boron_silicate_glass": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/advglass/thy_boron_silicate_glass"
+        }
+      },
       "adv_machine_glass": {
         "model": "minecraft:cube_all",
         "textures": {

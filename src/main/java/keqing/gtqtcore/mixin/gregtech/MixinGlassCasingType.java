@@ -14,11 +14,11 @@ public abstract class MixinGlassCasingType implements IStringSerializable, ITier
         return false;
     }
 
-    @Override
     public int getGlassTier() {
         return switch (getName()) {
             case ("fusion_glass") -> GTValues.UV;
             case ("laminated_glass") -> GTValues.IV;
+            case ("tempered_glass") -> GTValues.MV;
             default -> GTValues.HV;
         };
     }

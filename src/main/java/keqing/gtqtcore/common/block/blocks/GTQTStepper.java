@@ -33,7 +33,21 @@ public class GTQTStepper extends VariantBlock<GTQTStepper.CasingType> {
     public static enum CasingType implements IStringSerializable {
 
 
-        COMPUTER_GPUIII("computer_gpuiii");
+        LASER_MKI("laser_mki"),
+        LASER_MKII("laser_mkii"),
+        LASER_MKIII("laser_mkiii"),
+        LASER_MKIV("laser_mkiv"),
+        LASER_MKV("laser_mkv"),
+        F_LASER_MKI("f_laser_mki"),
+        F_LASER_MKII("f_laser_mkii"),
+        F_LASER_MKIII("f_laser_mkiii"),
+        F_LASER_MKIV("f_laser_mkiv"),
+        F_LASER_MKV("f_laser_mkv"),
+        CLEAN_MKI("clean_mki"),
+        CLEAN_MKII("clean_mkii"),
+        CLEAN_MKIII("clean_mkiii"),
+        CLEAN_MKIV("clean_mkiv"),
+        CLEAN_MKV("clean_mkv");
 
         private final String name;
 

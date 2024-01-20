@@ -1,0 +1,107 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "minecraft:cube_all",
+    "textures": {
+      "all": "gregtech:blocks/rendering_error"
+    }
+  },
+  "variants": {
+    "variant": {
+      "laser_mki": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/stepper/laser_mki"
+        }
+      },
+      "f_laser_mki": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/stepper/f_laser_mki"
+        }
+      },
+      "clean_mki": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/stepper/clean_mki"
+        }
+      },
+
+      "laser_mkii": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/stepper/laser_mkii"
+        }
+      },
+      "f_laser_mkii": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/stepper/f_laser_mkii"
+        }
+      },
+      "clean_mkii": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/stepper/clean_mkii"
+        }
+      },
+
+      "laser_mkiii": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/stepper/laser_mkiii"
+        }
+      },
+      "f_laser_mkiii": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/stepper/f_laser_mkiii"
+        }
+      },
+      "clean_mkiii": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/stepper/clean_mkiii"
+        }
+      },
+
+      "laser_mkiv": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/stepper/laser_mkiv"
+        }
+      },
+      "f_laser_mkiv": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/stepper/f_laser_mkiv"
+        }
+      },
+      "clean_mkiv": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/stepper/clean_mkiv"
+        }
+      },
+
+      "laser_mkv": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/stepper/laser_mkv"
+        }
+      },
+      "f_laser_mkv": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/stepper/f_laser_mkv"
+        }
+      },
+      "clean_mkv": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/stepper/clean_mkv"
+        }
+      }
+    }
+  }
+}

@@ -26,10 +26,12 @@ import net.minecraft.item.crafting.Ingredient;
 
 import static gregtech.api.GTValues.*;
 import static gregtech.api.unification.material.Materials.RawGrowthMedium;
+import static gregtech.api.unification.material.Materials.Water;
 import static gregtech.api.unification.ore.OrePrefix.plate;
 import static gregtech.api.unification.ore.OrePrefix.stickLong;
 import static gregtech.common.items.MetaItems.*;
 import static gregtech.loaders.recipe.handlers.ToolRecipeHandler.addToolRecipe;
+import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.CW_LASER_ENGRAVER_RECIPES;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.*;
 import static keqing.gtqtcore.common.items.metaitems.GTQTMetaToolItems.*;
 
@@ -44,6 +46,10 @@ public class GTQTRecipes {
         fcrop.addProcessingHandler(PropertyKey.INGOT,GTQTRecipes::processCrops);
         leaf.addProcessingHandler(PropertyKey.INGOT,GTQTRecipes::processLeaf);
 
+        OrePrefix.screw.addProcessingHandler(PropertyKey.DUST, GTQTRecipes::processScrew);
+        OrePrefix.bolt.addProcessingHandler(PropertyKey.DUST, GTQTRecipes::processBolt);
+        OrePrefix.ring.addProcessingHandler(PropertyKey.DUST, GTQTRecipes::processRing);
+        OrePrefix.stick.addProcessingHandler(PropertyKey.DUST, GTQTRecipes::processStick);
         OrePrefix.gear.addProcessingHandler(PropertyKey.DUST, GTQTRecipes::processGear);
         OrePrefix.gearSmall.addProcessingHandler(PropertyKey.DUST, GTQTRecipes::processGear);
         OrePrefix.plate.addProcessingHandler(PropertyKey.DUST, GTQTRecipes::processPlate);
@@ -52,6 +58,50 @@ public class GTQTRecipes {
         OrePrefix.block.addProcessingHandler(PropertyKey.DUST, GTQTRecipes::processBlock);
         OrePrefix.ingot.addProcessingHandler(PropertyKey.INGOT, GTQTRecipes::processIngot);
         OrePrefix.nugget.addProcessingHandler(PropertyKey.DUST, GTQTRecipes::processNugget);
+    }
+
+    private static void processScrew(OrePrefix orePrefix, Material material, DustProperty dustProperty) {
+        CW_LASER_ENGRAVER_RECIPES.recipeBuilder()
+                .input(plate, material, 1)
+                .fluidInputs(Water.getFluid(1000))
+                .outputs(OreDictUnifier.get(orePrefix, material, 8))
+                .duration(100)
+                .circuitMeta(6)
+                .EUt(GTValues.VA[HV])
+                .buildAndRegister();
+    }
+
+    private static void processBolt(OrePrefix orePrefix, Material material, DustProperty dustProperty) {
+        CW_LASER_ENGRAVER_RECIPES.recipeBuilder()
+                .input(plate, material, 1)
+                .fluidInputs(Water.getFluid(1000))
+                .outputs(OreDictUnifier.get(orePrefix, material, 8))
+                .duration(100)
+                .circuitMeta(6)
+                .EUt(GTValues.VA[HV])
+                .buildAndRegister();
+    }
+
+    private static void processRing(OrePrefix orePrefix, Material material, DustProperty dustProperty) {
+        CW_LASER_ENGRAVER_RECIPES.recipeBuilder()
+                .input(plate, material, 1)
+                .fluidInputs(Water.getFluid(1000))
+                .outputs(OreDictUnifier.get(orePrefix, material, 4))
+                .duration(100)
+                .circuitMeta(6)
+                .EUt(GTValues.VA[HV])
+                .buildAndRegister();
+    }
+
+    private static void processStick(OrePrefix orePrefix, Material material, DustProperty dustProperty) {
+        CW_LASER_ENGRAVER_RECIPES.recipeBuilder()
+                .input(plate, material, 1)
+                .fluidInputs(Water.getFluid(1000))
+                .outputs(OreDictUnifier.get(orePrefix, material, 2))
+                .duration(100)
+                .circuitMeta(5)
+                .EUt(GTValues.VA[HV])
+                .buildAndRegister();
     }
 
     public static void processIngot(OrePrefix ingotPrefix, Material material, IngotProperty property) {
@@ -65,6 +115,15 @@ public class GTQTRecipes {
         }
     }
     public static void processNugget(OrePrefix orePrefix, Material material, DustProperty property) {
+        CW_LASER_ENGRAVER_RECIPES.recipeBuilder()
+                .input(plate, material, 1)
+                .fluidInputs(Water.getFluid(1000))
+                .outputs(OreDictUnifier.get(orePrefix, material, 9))
+                .duration(100)
+                .circuitMeta(1)
+                .EUt(GTValues.VA[HV])
+                .buildAndRegister();
+
         if (material.hasFluid()) {
             RecipeMaps.VACUUM_RECIPES.recipeBuilder()
                     .notConsumable(MetaItems.SHAPE_MOLD_NUGGET)
@@ -91,8 +150,18 @@ public class GTQTRecipes {
     }
         public static void processGear(OrePrefix gearPrefix, Material material, DustProperty property) {
         ItemStack stack = OreDictUnifier.get(gearPrefix, material);
-        if (material.hasFluid()) {
             boolean isSmall = gearPrefix == OrePrefix.gearSmall;
+            CW_LASER_ENGRAVER_RECIPES.recipeBuilder()
+                    .fluidInputs(Water.getFluid(isSmall ? 1000 : 4000))
+                    .input(plate, material, isSmall ? 1 : 4)
+                    .outputs(GTUtility.copy(stack))
+                    .duration(100)
+                    .circuitMeta(isSmall ? 2 : 3)
+                    .EUt(GTValues.VA[HV])
+                    .buildAndRegister();
+
+        if (material.hasFluid()) {
+
             RecipeMaps.VACUUM_RECIPES.recipeBuilder()
                     .notConsumable(isSmall ? MetaItems.SHAPE_MOLD_GEAR_SMALL : MetaItems.SHAPE_MOLD_GEAR)
                     .fluidInputs(material.getFluid(L * (isSmall ? 1 : 4)))
@@ -116,6 +185,15 @@ public class GTQTRecipes {
     }
     public static void processRotor(OrePrefix rotorPrefix, Material material, IngotProperty property) {
         ItemStack stack = OreDictUnifier.get(rotorPrefix, material);
+        CW_LASER_ENGRAVER_RECIPES.recipeBuilder()
+                .input(plate, material, 4)
+                .outputs(GTUtility.copy(stack))
+                .fluidInputs(Water.getFluid(4000))
+                .duration(100)
+                .circuitMeta(4)
+                .EUt(GTValues.VA[HV])
+                .buildAndRegister();
+
         if (material.hasFluid()) {
             RecipeMaps.VACUUM_RECIPES.recipeBuilder()
                     .notConsumable(MetaItems.SHAPE_MOLD_ROTOR)

@@ -4,6 +4,12 @@ import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
 import gregtech.api.block.IHeatingCoilBlockStats;
+import gregtech.api.capability.IObjectHolder;
+import gregtech.api.capability.IOpticalComputationHatch;
+import gregtech.api.capability.IOpticalComputationProvider;
+import gregtech.api.capability.IOpticalComputationReceiver;
+import gregtech.api.capability.impl.ComputationRecipeLogic;
+import gregtech.api.capability.impl.ItemHandlerList;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
@@ -15,6 +21,7 @@ import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.MultiblockShapeInfo;
 import gregtech.api.pattern.PatternMatchContext;
+import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.client.renderer.ICubeRenderer;
@@ -42,6 +49,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.IItemHandlerModifiable;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -51,8 +60,8 @@ import java.util.stream.Collectors;
 
 import static gregtech.api.GTValues.*;
 
-public class MetaTileEntityPreciseAssembler extends MultiMapMultiblockController {
-
+public class MetaTileEntityPreciseAssembler extends MultiMapMultiblockController implements IOpticalComputationReceiver {
+    private IOpticalComputationProvider computationProvider;
     private int CasingTier;
     private int InternalCasingTier;
     private int tier;
@@ -68,7 +77,9 @@ public class MetaTileEntityPreciseAssembler extends MultiMapMultiblockController
         });
         this.recipeMapWorkable = new PreciseAssemblerRecipeLogic(this);
     }
-
+    public IOpticalComputationProvider getComputationProvider() {
+        return this.computationProvider;
+    }
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {
         return new MetaTileEntityPreciseAssembler(metaTileEntityId);
@@ -78,6 +89,10 @@ public class MetaTileEntityPreciseAssembler extends MultiMapMultiblockController
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
+        List<IOpticalComputationHatch> providers = this.getAbilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION);
+        if (providers != null && providers.size() >= 1) {
+            this.computationProvider = (IOpticalComputationProvider)providers.get(0);
+        }
         Object CasingTier = context.get("PAC");
         Object InternalCasingTier = context.get("PAI");
 
@@ -111,12 +126,13 @@ public class MetaTileEntityPreciseAssembler extends MultiMapMultiblockController
                 .aisle("CMMMMMMMC", "CGGGGGGGC", "CGGGGGGGC", "CGGGGGGGC", "DDDDDDDDD")
                 .aisle("CMMMMMMMC", "C       C", "C       C", "C       C", "DDDDDDDDD")
                 .aisle("CMMMMMMMC", "CGGGGGGGC", "CGGGGGGGC", "CGGGGGGGC", "DDDDDDDDD")
-                .aisle("DDDDSDDDD", "F       F", "F       F", "F       F", "DDDDDDDDD")
+                .aisle("DDDXSDDDD", "F       F", "F       F", "F       F", "DDDDDDDDD")
                 .where('S', selfPredicate())
                 .where('C', TiredTraceabilityPredicate.CP_PA_CASING)
                 .where('D', TiredTraceabilityPredicate.CP_PA_CASING
                         .setMinGlobalLimited(42)
                         .or(autoAbilities()))
+                .where('X', abilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION))
                 .where('F', states(getFrameState()))
                 .where('G', states(getGlassState()))
                 .where('M', TiredTraceabilityPredicate.CP_PA_INTERNAL_CASING)
@@ -193,10 +209,11 @@ public class MetaTileEntityPreciseAssembler extends MultiMapMultiblockController
         tooltip.add(I18n.format("gtqtcore.machine.precise_assembler.tooltip.5"));
     }
 
-    protected class PreciseAssemblerRecipeLogic extends MultiblockRecipeLogic {
+    protected class PreciseAssemblerRecipeLogic extends  ComputationRecipeLogic {
         public PreciseAssemblerRecipeLogic(RecipeMapMultiblockController tileEntity) {
-            super(tileEntity);
+            super(tileEntity,ComputationType.SPORADIC);
         }
+
 
         /**
          * @return Check if machine in PA

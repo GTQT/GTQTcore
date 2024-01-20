@@ -28,6 +28,7 @@ public class TiredTraceabilityPredicate extends TraceabilityPredicate {
         MAP_ESSENTIA_CELLS = new Object2ObjectOpenHashMap<>();
         MAP_MACHINE_CASING = new Object2ObjectOpenHashMap<>();
         MAP_GLASS = new Object2ObjectOpenHashMap<>();
+        MAP_LGLASS = new Object2ObjectOpenHashMap<>();
         MAP_CP_CASING = new Object2ObjectOpenHashMap<>();
         MAP_CP_TUBE = new Object2ObjectOpenHashMap<>();
         MAP_CP_BEAM = new Object2ObjectOpenHashMap<>();
@@ -39,6 +40,11 @@ public class TiredTraceabilityPredicate extends TraceabilityPredicate {
         MAP_SP_CASING = new Object2ObjectOpenHashMap<>();
         MAP_DRI_CASING = new Object2ObjectOpenHashMap<>();
         MAP_PA_CASING = new Object2ObjectOpenHashMap<>();
+
+        MAP_ZW_CASING = new Object2ObjectOpenHashMap<>();
+        MAP_TJ_CASING = new Object2ObjectOpenHashMap<>();
+        MAP_ZJ_CASING = new Object2ObjectOpenHashMap<>();
+
         MAP_PA_INTERNAL_CASING = new Object2ObjectOpenHashMap<>();
 
         //计算机
@@ -192,6 +198,29 @@ public class TiredTraceabilityPredicate extends TraceabilityPredicate {
                 new WrappedIntTired(GTQTADVGlass.CasingType.ADV_MACHINE_GLASS_P, 5));
         TiredTraceabilityPredicate.MAP_QFT_GLASS.put(GTQTMetaBlocks.ADV_GLASS.getState(GTQTADVGlass.CasingType.ADV_MACHINE_GLASS_R),
                 new WrappedIntTired(GTQTADVGlass.CasingType.ADV_MACHINE_GLASS_R, 6));
+        //lglass
+        TiredTraceabilityPredicate.MAP_LGLASS.put(GTQTMetaBlocks.ADV_GLASS.getState(GTQTADVGlass.CasingType.SILICATE_GLASS),
+                new WrappedIntTired(GTQTADVGlass.CasingType.SILICATE_GLASS, 1));
+        TiredTraceabilityPredicate.MAP_LGLASS.put(GTQTMetaBlocks.ADV_GLASS.getState(GTQTADVGlass.CasingType.THY_SILICATE_GLASS),
+                new WrappedIntTired(GTQTADVGlass.CasingType.THY_SILICATE_GLASS, 2));
+        TiredTraceabilityPredicate.MAP_LGLASS.put(GTQTMetaBlocks.GLASS_CASING.getState(GTQTBlockGlassCasing.CasingType.TI_BORON_SILICATE_GLASS),
+                new WrappedIntTired(GTQTBlockGlassCasing.CasingType.TI_BORON_SILICATE_GLASS, 3));
+        TiredTraceabilityPredicate.MAP_LGLASS.put(GTQTMetaBlocks.GLASS_CASING.getState(GTQTBlockGlassCasing.CasingType.W_BORON_SILICATE_GLASS),
+                new WrappedIntTired(GTQTBlockGlassCasing.CasingType.W_BORON_SILICATE_GLASS, 4));
+        TiredTraceabilityPredicate.MAP_LGLASS.put(GTQTMetaBlocks.GLASS_CASING.getState(GTQTBlockGlassCasing.CasingType.OSMIR_BORON_SILICATE_GLASS),
+                new WrappedIntTired(GTQTBlockGlassCasing.CasingType.OSMIR_BORON_SILICATE_GLASS, 5));
+        TiredTraceabilityPredicate.MAP_LGLASS.put(GTQTMetaBlocks.GLASS_CASING.getState(GTQTBlockGlassCasing.CasingType.NAQ_BORON_SILICATE_GLASS),
+                new WrappedIntTired(GTQTBlockGlassCasing.CasingType.NAQ_BORON_SILICATE_GLASS, 6));
+        TiredTraceabilityPredicate.MAP_LGLASS.put(GTQTMetaBlocks.GLASS_CASING.getState(GTQTBlockGlassCasing.CasingType.FORCE_FIELD_CONSTRAINED_GLASS),
+                new WrappedIntTired(GTQTBlockGlassCasing.CasingType.FORCE_FIELD_CONSTRAINED_GLASS, 7));
+        TiredTraceabilityPredicate.MAP_LGLASS.put(GTQTMetaBlocks.GLASS_CASING.getState(GTQTBlockGlassCasing.CasingType.COSMIC_MICROWAVE_BACKGROUND_RADIATION_ABSORPTION_GLASS),
+                new WrappedIntTired(GTQTBlockGlassCasing.CasingType.COSMIC_MICROWAVE_BACKGROUND_RADIATION_ABSORPTION_GLASS, 8));
+        TiredTraceabilityPredicate.MAP_LGLASS.put(GTQTMetaBlocks.GLASS_CASING.getState(GTQTBlockGlassCasing.CasingType.SPACETIME_SUPERCONDENSER_GLASS),
+                new WrappedIntTired(GTQTBlockGlassCasing.CasingType.SPACETIME_SUPERCONDENSER_GLASS, 9));
+        TiredTraceabilityPredicate.MAP_LGLASS.put(GTQTMetaBlocks.GLASS_CASING.getState(GTQTBlockGlassCasing.CasingType.SUPRACAUSAL_LIGHT_CONE_GLASS),
+                new WrappedIntTired(GTQTBlockGlassCasing.CasingType.SUPRACAUSAL_LIGHT_CONE_GLASS, 10));
+
+
 
         TiredTraceabilityPredicate.MAP_CAL_CASING.put(GTQTMetaBlocks.COMPONENT_ASSEMBLY_LINE.getState(GTQTBlockComponentAssemblyLineCasing.CasingTier.LV),
                 new WrappedIntTired(GTQTBlockComponentAssemblyLineCasing.CasingTier.LV, 1));
@@ -277,6 +306,41 @@ public class TiredTraceabilityPredicate extends TraceabilityPredicate {
                 new WrappedIntTired(GTQTKQCC.CasingType.COMPUTER_CPUII, 2));
         TiredTraceabilityPredicate.MAP_RAM_CASING.put(GTQTMetaBlocks.KQCC.getState(GTQTKQCC.CasingType.COMPUTER_RAMIII),
                 new WrappedIntTired(GTQTKQCC.CasingType.COMPUTER_CPUIII, 3));
+
+        TiredTraceabilityPredicate.MAP_ZW_CASING.put(GTQTMetaBlocks.STEPPER.getState(GTQTStepper.CasingType.LASER_MKI),
+                new WrappedIntTired(GTQTStepper.CasingType.LASER_MKI, 1));
+        TiredTraceabilityPredicate.MAP_TJ_CASING.put(GTQTMetaBlocks.STEPPER.getState(GTQTStepper.CasingType.F_LASER_MKI),
+                new WrappedIntTired(GTQTStepper.CasingType.F_LASER_MKI, 1));
+        TiredTraceabilityPredicate.MAP_ZJ_CASING.put(GTQTMetaBlocks.STEPPER.getState(GTQTStepper.CasingType.CLEAN_MKI),
+                new WrappedIntTired(GTQTStepper.CasingType.CLEAN_MKI, 1));
+
+        TiredTraceabilityPredicate.MAP_ZW_CASING.put(GTQTMetaBlocks.STEPPER.getState(GTQTStepper.CasingType.LASER_MKII),
+                new WrappedIntTired(GTQTStepper.CasingType.LASER_MKII, 2));
+        TiredTraceabilityPredicate.MAP_TJ_CASING.put(GTQTMetaBlocks.STEPPER.getState(GTQTStepper.CasingType.F_LASER_MKII),
+                new WrappedIntTired(GTQTStepper.CasingType.F_LASER_MKII, 2));
+        TiredTraceabilityPredicate.MAP_ZJ_CASING.put(GTQTMetaBlocks.STEPPER.getState(GTQTStepper.CasingType.CLEAN_MKII),
+                new WrappedIntTired(GTQTStepper.CasingType.CLEAN_MKII, 2));
+
+        TiredTraceabilityPredicate.MAP_ZW_CASING.put(GTQTMetaBlocks.STEPPER.getState(GTQTStepper.CasingType.LASER_MKIII),
+                new WrappedIntTired(GTQTStepper.CasingType.LASER_MKIII, 3));
+        TiredTraceabilityPredicate.MAP_TJ_CASING.put(GTQTMetaBlocks.STEPPER.getState(GTQTStepper.CasingType.F_LASER_MKIII),
+                new WrappedIntTired(GTQTStepper.CasingType.F_LASER_MKIII, 3));
+        TiredTraceabilityPredicate.MAP_ZJ_CASING.put(GTQTMetaBlocks.STEPPER.getState(GTQTStepper.CasingType.CLEAN_MKIII),
+                new WrappedIntTired(GTQTStepper.CasingType.CLEAN_MKIII, 3));
+
+        TiredTraceabilityPredicate.MAP_ZW_CASING.put(GTQTMetaBlocks.STEPPER.getState(GTQTStepper.CasingType.LASER_MKIV),
+                new WrappedIntTired(GTQTStepper.CasingType.LASER_MKIV, 4));
+        TiredTraceabilityPredicate.MAP_TJ_CASING.put(GTQTMetaBlocks.STEPPER.getState(GTQTStepper.CasingType.F_LASER_MKIV),
+                new WrappedIntTired(GTQTStepper.CasingType.F_LASER_MKIV, 4));
+        TiredTraceabilityPredicate.MAP_ZJ_CASING.put(GTQTMetaBlocks.STEPPER.getState(GTQTStepper.CasingType.CLEAN_MKIV),
+                new WrappedIntTired(GTQTStepper.CasingType.CLEAN_MKIV, 4));
+
+        TiredTraceabilityPredicate.MAP_ZW_CASING.put(GTQTMetaBlocks.STEPPER.getState(GTQTStepper.CasingType.LASER_MKV),
+                new WrappedIntTired(GTQTStepper.CasingType.LASER_MKV, 5));
+        TiredTraceabilityPredicate.MAP_TJ_CASING.put(GTQTMetaBlocks.STEPPER.getState(GTQTStepper.CasingType.F_LASER_MKV),
+                new WrappedIntTired(GTQTStepper.CasingType.F_LASER_MKV, 5));
+        TiredTraceabilityPredicate.MAP_ZJ_CASING.put(GTQTMetaBlocks.STEPPER.getState(GTQTStepper.CasingType.CLEAN_MKV),
+                new WrappedIntTired(GTQTStepper.CasingType.CLEAN_MKV, 5));
     }
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_QFT_GLASS;
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_DRI_CASING;
@@ -285,6 +349,7 @@ public class TiredTraceabilityPredicate extends TraceabilityPredicate {
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_ESSENTIA_CELLS;
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_MACHINE_CASING;
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_GLASS;
+    public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_LGLASS;
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_CP_CASING;
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_CP_TUBE;
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_CP_BEAM;
@@ -293,6 +358,10 @@ public class TiredTraceabilityPredicate extends TraceabilityPredicate {
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_PA_CASING;
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_SP_CASING;
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_PA_INTERNAL_CASING;
+    //光刻系统
+    public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_ZW_CASING;
+    public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_TJ_CASING;
+    public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_ZJ_CASING;
     //计算机
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_CPU_CASING;
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_GPU_CASING;
@@ -331,10 +400,16 @@ public class TiredTraceabilityPredicate extends TraceabilityPredicate {
 
 
 
+    public static TraceabilityPredicate CP_ZW_CASING = new TiredTraceabilityPredicate(MAP_ZW_CASING,
+            Comparator.comparing((s) -> ((WrappedIntTired)MAP_ZW_CASING.get(s)).getIntTier()),"ZW",null);
+    public static TraceabilityPredicate CP_TJ_CASING = new TiredTraceabilityPredicate(MAP_TJ_CASING,
+            Comparator.comparing((s) -> ((WrappedIntTired)MAP_TJ_CASING.get(s)).getIntTier()),"TJ",null);
+    public static TraceabilityPredicate CP_ZJ_CASING = new TiredTraceabilityPredicate(MAP_ZJ_CASING,
+            Comparator.comparing((s) -> ((WrappedIntTired)MAP_ZJ_CASING.get(s)).getIntTier()),"ZJ",null);
 
 
-
-
+    public static TraceabilityPredicate CP_LGLASS = new TiredTraceabilityPredicate(MAP_LGLASS,
+            Comparator.comparing((s) -> ((WrappedIntTired)MAP_LGLASS.get(s)).getIntTier()),"LGL",null);
     public static TraceabilityPredicate CP_PA_CASING = new TiredTraceabilityPredicate(MAP_PA_CASING,
             Comparator.comparing((s) -> ((WrappedIntTired)MAP_PA_CASING.get(s)).getIntTier()),"PAC",null);
 
