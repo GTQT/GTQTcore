@@ -263,8 +263,7 @@ public class FirstDegreeMaterials {
         //中度蒸汽裂解轻柴油
         GTQTMaterials.SeverelySteamCrackedDieselLight = new Material.Builder(getMaterialsId(), gregtechId("SeverelySteamCrackedDieselLight"))
                 .fluid()
-                .color(
-                        0xFF8C00)
+                .color(0xFF8C00)
                 .flags(DISABLE_DECOMPOSITION)
                 .build();
 
@@ -320,5 +319,39 @@ public class FirstDegreeMaterials {
                 .blast(2273) // no gas tier for silicon
                 .build();
 
+        //聚乙烯醇肉桂酸酯
+        GTQTMaterials.Vinylcinnamate = new Material.Builder(getMaterialsId(), gregtechId("vinylcinnamate"))
+                .fluid().dust()
+                .color(0xFF8C00).iconSet(METALLIC)
+                .flags(GENERATE_FOIL)
+                .build();
+        //感光树脂-聚乙烯醇肉桂酸酯
+
+        //增感剂
+        //光刻胶溶剂
+
+        //xMT分子光刻
+        GTQTMaterials.Xmt = new Material.Builder(getMaterialsId(), gregtechId("xmt"))
+                .fluid().dust()
+                .color(0x3C3C50).iconSet(METALLIC)
+                .flags(GENERATE_FOIL)
+                .build();
+
+        //xMT
+        //环氧交联剂
+        //光致酸产生剂(PAG)
+        //亲核猝灭剂
+        //碱猝灭剂
+
+
+        //氧化锆杂化物-（2,4-双（三氯甲基）-6-（4-甲氧基苯乙烯基）-1,3,5-三嗪）（ZrO2-BTMST）
+        GTQTMaterials.Zrbtmst = new Material.Builder(getMaterialsId(), gregtechId("zrbtmst"))
+                .fluid().dust()
+                .color(0xB2DFEE).iconSet(METALLIC)
+                .flags(GENERATE_FOIL)
+                .build();
+        //氧化锆杂化物
+        //（2,4-双（三氯甲基）-6-（4-甲氧基苯乙烯基）-1,3,5-三嗪）
+        //（ZrO2-BTMST）
     }
 }

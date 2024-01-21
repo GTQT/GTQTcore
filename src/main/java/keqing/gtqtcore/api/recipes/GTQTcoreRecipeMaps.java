@@ -57,7 +57,6 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<FuelRecipeBuilder> HIGH_PRESSURE_STEAM_TURBINE_FUELS;
     public static final RecipeMap<KQComputationRecipeBuilder> KEQING_NET_RECIES;
     public static final RecipeMap<FuelRecipeBuilder> SUPERCRITICAL_STEAM_TURBINE_FUELS;
-
     public static final RecipeMap<FuelRecipeBuilder> HYPER_REACTOR_MK1_RECIPES;
     public static final RecipeMap<FuelRecipeBuilder> HYPER_REACTOR_MK2_RECIPES;
     public static final RecipeMap<FuelRecipeBuilder> HYPER_REACTOR_MK3_RECIPES;
@@ -72,9 +71,7 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMapPseudoGroup<SimpleRecipeBuilder> PROCESSING_MODE_B;
     public static final RecipeMapPseudoGroup<SimpleRecipeBuilder> PROCESSING_MODE_C;
     public static final RecipeMap<PACasingTierRecipeBuilder> PRECISE_ASSEMBLER_RECIPES;
-
     public static final RecipeMap<ComputationRecipeBuilder> CW_PRECISE_ASSEMBLER_RECIPES;
-
     public static final RecipeMap<MDRecipeBuilder> MINING_DRILL_RECIPES;
     public static final RecipeMap<FuelRecipeBuilder> SOLAR_PLATE;
     public static final RecipeMap<SimpleRecipeBuilder> DISTILLATION_KETTLE;
@@ -82,7 +79,9 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<SimpleRecipeBuilder> PYROLYSIS_TOWER;
     public static final RecipeMap<FusionRecipeBuilder> EFUSION_RECIPES;
     public static final RecipeMap<ComputationRecipeBuilder> LASER_ENGRAVING;
+    public static final RecipeMap<ComputationRecipeBuilder> TD_PRINT_RECIPES;
     public static final RecipeMap<SimpleRecipeBuilder> CW_LASER_ENGRAVER_RECIPES;
+    public static final RecipeMap<LASERComputationRecipeBuilder> STEPPER_RECIPES;
 
     private GTQTcoreRecipeMaps() {}
     static {
@@ -141,6 +140,19 @@ public class GTQTcoreRecipeMaps {
                 .setSound(GTSoundEvents.ASSEMBLER);
 
         LASER_ENGRAVING = new RecipeMap<>("laser_engraving", 2, 1, 1, 0, new ComputationRecipeBuilder(), false)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL)
+                .setSlotOverlay(false, false, false, GuiTextures.CIRCUIT_OVERLAY)
+                .setSlotOverlay(false, false, true, GuiTextures.CIRCUIT_OVERLAY)
+                .setSound(GTSoundEvents.ASSEMBLER);
+
+        STEPPER_RECIPES = new RecipeMap<>("stepper_recipes", 2, 1, 1, 0, new LASERComputationRecipeBuilder(), false)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL)
+                .setSlotOverlay(false, false, false, GuiTextures.CIRCUIT_OVERLAY)
+                .setSlotOverlay(false, false, true, GuiTextures.CIRCUIT_OVERLAY)
+                .setSound(GTSoundEvents.ASSEMBLER);
+
+
+        TD_PRINT_RECIPES = new RecipeMap<>("threed_print", 2, 1, 1, 0, new ComputationRecipeBuilder(), false)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL)
                 .setSlotOverlay(false, false, false, GuiTextures.CIRCUIT_OVERLAY)
                 .setSlotOverlay(false, false, true, GuiTextures.CIRCUIT_OVERLAY)
@@ -232,7 +244,7 @@ public class GTQTcoreRecipeMaps {
                 .setSound(GTSoundEvents.TURBINE)
                 .allowEmptyOutput();
 
-        CW_LASER_ENGRAVER_RECIPES = new RecipeMap<>("cw_laser_engraver", 2, 1, 1, 0, new SimpleRecipeBuilder(), false)
+        CW_LASER_ENGRAVER_RECIPES = new RecipeMap<>("cw_laser_engraver", 2, 2, 1, 0, new SimpleRecipeBuilder(), false)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL)
                 .setSlotOverlay(false, false, false, GuiTextures.CIRCUIT_OVERLAY)
                 .setSlotOverlay(false, false, true, GuiTextures.CIRCUIT_OVERLAY)

@@ -10,8 +10,8 @@ import static keqing.gtqtcore.api.unification.TJMaterials.*;
 public class PhotoresistChains {
 
     public static void init() {
-        SU8();
-        HSQ();
+        SU8();//3
+        HSQ();//1
     }
 
     private static void SU8() {

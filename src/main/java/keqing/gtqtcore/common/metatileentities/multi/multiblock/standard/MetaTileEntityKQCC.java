@@ -111,9 +111,15 @@ public class MetaTileEntityKQCC extends MultiblockWithDisplayBase implements IOp
     FluidStack COLD_STACK1 = Water.getFluid(40);
     FluidStack COLD_STACKA1 = PCBCoolant.getFluid(20);
     FluidStack COLD_STACKB1 = Nitrogen.getFluid(4);
+
+    FluidStack KEEP_OPEN = Lubricant.getFluid(4);
     @Override
     protected void updateFormedValid() {
         consumeEnergy();
+        if (KEEP_OPEN.isFluidStackIdentical(coolantHandler.drain(KEEP_OPEN, false))) {
+            if(thresholdPercentage==0) thresholdPercentage=thresholdPercentage+1;
+        }
+
         if(HOT>0) HOT=HOT-10;
 
         if(HOT>5000) {

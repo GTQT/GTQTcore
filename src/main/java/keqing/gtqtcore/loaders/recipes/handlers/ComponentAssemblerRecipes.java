@@ -10,6 +10,7 @@ import static gregtech.common.items.MetaItems.*;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.COMPONENT_ASSEMBLER_RECIPES;
 import static keqing.gtqtcore.api.unification.TJMaterials.NitrileButadieneRubber;
 import static keqing.gtqtcore.api.unification.TJMaterials.PolyPhosphonitrileFluoroRubber;
+import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.*;
 import static net.minecraft.init.Items.*;
 
 public class ComponentAssemblerRecipes {
@@ -33,7 +34,7 @@ public class ComponentAssemblerRecipes {
         //  LV
         COMPONENT_ASSEMBLER_RECIPES.recipeBuilder()
                 .input(cableGtSingle, Tin, 2)
-                .input(stick, Iron, 2)
+                .input(plate_curved, Iron, 2)
                 .input(stick, IronMagnetic)
                 .input(wireGtSingle, Copper, 4)
                 .output(ELECTRIC_MOTOR_LV)
@@ -43,7 +44,7 @@ public class ComponentAssemblerRecipes {
 
         COMPONENT_ASSEMBLER_RECIPES.recipeBuilder()
                 .input(cableGtSingle, Tin, 2)
-                .input(stick, Steel, 2)
+                .input(plate_curved, Steel, 2)
                 .input(stick, SteelMagnetic)
                 .input(wireGtSingle, Copper, 4)
                 .output(ELECTRIC_MOTOR_LV)
@@ -54,7 +55,7 @@ public class ComponentAssemblerRecipes {
         //  MV
         COMPONENT_ASSEMBLER_RECIPES.recipeBuilder()
                 .input(cableGtSingle, Copper, 2)
-                .input(stick, Aluminium, 2)
+                .input(plate_curved, Aluminium, 2)
                 .input(stick, SteelMagnetic)
                 .input(wireGtDouble, Cupronickel, 4)
                 .output(ELECTRIC_MOTOR_MV)
@@ -65,7 +66,7 @@ public class ComponentAssemblerRecipes {
         //  HV
         COMPONENT_ASSEMBLER_RECIPES.recipeBuilder()
                 .input(cableGtDouble, Silver, 2)
-                .input(stick, StainlessSteel, 2)
+                .input(plate_curved, StainlessSteel, 2)
                 .input(stick, SteelMagnetic)
                 .input(wireGtDouble, Electrum, 4)
                 .output(ELECTRIC_MOTOR_HV)
@@ -76,7 +77,7 @@ public class ComponentAssemblerRecipes {
         //  EV
         COMPONENT_ASSEMBLER_RECIPES.recipeBuilder()
                 .input(cableGtDouble, Aluminium, 2)
-                .input(stick, Titanium, 2)
+                .input(plate_curved, Titanium, 2)
                 .input(stick, NeodymiumMagnetic)
                 .input(wireGtDouble, Kanthal, 4)
                 .output(ELECTRIC_MOTOR_EV)
@@ -87,7 +88,7 @@ public class ComponentAssemblerRecipes {
         //  IV
         COMPONENT_ASSEMBLER_RECIPES.recipeBuilder()
                 .input(cableGtDouble, Tungsten, 2)
-                .input(stick, TungstenSteel, 2)
+                .input(plate_curved, TungstenSteel, 2)
                 .input(stick, NeodymiumMagnetic)
                 .input(wireGtDouble, Graphene, 4)
                 .output(ELECTRIC_MOTOR_IV)
@@ -104,7 +105,7 @@ public class ComponentAssemblerRecipes {
                 .input(stick, Steel, 2)
                 .input(cableGtSingle, Tin, 2)
                 .input(plate, Steel, 3)
-                .input(gearSmall, Steel)
+                .input(cylinder, Steel)
                 .input(ELECTRIC_MOTOR_LV)
                 .output(ELECTRIC_PISTON_LV)
                 .EUt(VA[LV])
@@ -116,7 +117,7 @@ public class ComponentAssemblerRecipes {
                 .input(stick, Aluminium, 2)
                 .input(cableGtSingle, Copper, 2)
                 .input(plate, Aluminium, 3)
-                .input(gearSmall, Aluminium)
+                .input(cylinder, Aluminium)
                 .input(ELECTRIC_MOTOR_MV)
                 .output(ELECTRIC_PISTON_MV)
                 .EUt(VA[LV])
@@ -128,7 +129,7 @@ public class ComponentAssemblerRecipes {
                 .input(stick, StainlessSteel, 2)
                 .input(cableGtSingle, Gold, 2)
                 .input(plate, StainlessSteel, 3)
-                .input(gearSmall, StainlessSteel)
+                .input(cylinder, StainlessSteel)
                 .input(ELECTRIC_MOTOR_HV)
                 .output(ELECTRIC_PISTON_HV)
                 .EUt(VA[LV])
@@ -140,7 +141,7 @@ public class ComponentAssemblerRecipes {
                 .input(stick, Titanium, 2)
                 .input(cableGtSingle, Aluminium, 2)
                 .input(plate, Titanium, 3)
-                .input(gearSmall, Titanium)
+                .input(cylinder, Titanium)
                 .input(ELECTRIC_MOTOR_EV)
                 .output(ELECTRIC_PISTON_EV)
                 .EUt(VA[LV])
@@ -152,7 +153,7 @@ public class ComponentAssemblerRecipes {
                 .input(stick, TungstenSteel, 2)
                 .input(cableGtSingle, Tungsten, 2)
                 .input(plate, TungstenSteel, 3)
-                .input(gearSmall, TungstenSteel)
+                .input(cylinder, TungstenSteel)
                 .input(ELECTRIC_MOTOR_IV)
                 .output(ELECTRIC_PISTON_IV)
                 .EUt(VA[LV])
@@ -269,7 +270,7 @@ public class ComponentAssemblerRecipes {
         //  LV
         COMPONENT_ASSEMBLER_RECIPES.recipeBuilder()
                 .input(cableGtSingle, Tin)
-                .input(pipeNormalFluid, Bronze)
+                .input(valve, Bronze)
                 .input(screw, Tin)
                 .input(rotor, Tin)
                 .input(ring, Rubber, 2)
@@ -281,7 +282,7 @@ public class ComponentAssemblerRecipes {
 
         COMPONENT_ASSEMBLER_RECIPES.recipeBuilder()
                 .input(cableGtSingle, Tin)
-                .input(pipeNormalFluid, Bronze)
+                .input(valve, Bronze)
                 .input(screw, Tin)
                 .input(rotor, Tin)
                 .input(ring, SiliconeRubber, 2)
@@ -293,7 +294,7 @@ public class ComponentAssemblerRecipes {
 
         COMPONENT_ASSEMBLER_RECIPES.recipeBuilder()
                 .input(cableGtSingle, Tin)
-                .input(pipeNormalFluid, Bronze)
+                .input(valve, Bronze)
                 .input(screw, Tin)
                 .input(rotor, Tin)
                 .input(ring, StyreneButadieneRubber, 2)
@@ -305,7 +306,7 @@ public class ComponentAssemblerRecipes {
 
         COMPONENT_ASSEMBLER_RECIPES.recipeBuilder()
                 .input(cableGtSingle, Tin)
-                .input(pipeNormalFluid, Bronze)
+                .input(valve, Bronze)
                 .input(screw, Tin)
                 .input(rotor, Tin)
                 .input(ring, NitrileButadieneRubber, 2)
@@ -317,7 +318,7 @@ public class ComponentAssemblerRecipes {
 
         COMPONENT_ASSEMBLER_RECIPES.recipeBuilder()
                 .input(cableGtSingle, Tin)
-                .input(pipeNormalFluid, Bronze)
+                .input(valve, Bronze)
                 .input(screw, Tin)
                 .input(rotor, Tin)
                 .input(ring, PolyPhosphonitrileFluoroRubber, 2)
@@ -330,7 +331,7 @@ public class ComponentAssemblerRecipes {
         //  MV
         COMPONENT_ASSEMBLER_RECIPES.recipeBuilder()
                 .input(cableGtSingle, Copper)
-                .input(pipeNormalFluid, Steel)
+                .input(valve, Steel)
                 .input(screw, Bronze)
                 .input(rotor, Bronze)
                 .input(ring, Rubber, 2)
@@ -342,7 +343,7 @@ public class ComponentAssemblerRecipes {
 
         COMPONENT_ASSEMBLER_RECIPES.recipeBuilder()
                 .input(cableGtSingle, Copper)
-                .input(pipeNormalFluid, Steel)
+                .input(valve, Steel)
                 .input(screw, Bronze)
                 .input(rotor, Bronze)
                 .input(ring, SiliconeRubber, 2)
@@ -354,7 +355,7 @@ public class ComponentAssemblerRecipes {
 
         COMPONENT_ASSEMBLER_RECIPES.recipeBuilder()
                 .input(cableGtSingle, Copper)
-                .input(pipeNormalFluid, Steel)
+                .input(valve, Steel)
                 .input(screw, Bronze)
                 .input(rotor, Bronze)
                 .input(ring, StyreneButadieneRubber, 2)
@@ -366,7 +367,7 @@ public class ComponentAssemblerRecipes {
 
         COMPONENT_ASSEMBLER_RECIPES.recipeBuilder()
                 .input(cableGtSingle, Copper)
-                .input(pipeNormalFluid, Steel)
+                .input(valve, Steel)
                 .input(screw, Bronze)
                 .input(rotor, Bronze)
                 .input(ring, NitrileButadieneRubber, 2)
@@ -378,7 +379,7 @@ public class ComponentAssemblerRecipes {
 
         COMPONENT_ASSEMBLER_RECIPES.recipeBuilder()
                 .input(cableGtSingle, Copper)
-                .input(pipeNormalFluid, Steel)
+                .input(valve, Steel)
                 .input(screw, Bronze)
                 .input(rotor, Bronze)
                 .input(ring, PolyPhosphonitrileFluoroRubber, 2)
@@ -391,7 +392,7 @@ public class ComponentAssemblerRecipes {
         //  HV
         COMPONENT_ASSEMBLER_RECIPES.recipeBuilder()
                 .input(cableGtSingle, Gold)
-                .input(pipeNormalFluid, StainlessSteel)
+                .input(valve, StainlessSteel)
                 .input(screw, Steel)
                 .input(rotor, Steel)
                 .input(ring, Rubber, 2)
@@ -403,7 +404,7 @@ public class ComponentAssemblerRecipes {
 
         COMPONENT_ASSEMBLER_RECIPES.recipeBuilder()
                 .input(cableGtSingle, Gold)
-                .input(pipeNormalFluid, StainlessSteel)
+                .input(valve, StainlessSteel)
                 .input(screw, Steel)
                 .input(rotor, Steel)
                 .input(ring, SiliconeRubber, 2)
@@ -415,7 +416,7 @@ public class ComponentAssemblerRecipes {
 
         COMPONENT_ASSEMBLER_RECIPES.recipeBuilder()
                 .input(cableGtSingle, Gold)
-                .input(pipeNormalFluid, StainlessSteel)
+                .input(valve, StainlessSteel)
                 .input(screw, Steel)
                 .input(rotor, Steel)
                 .input(ring, StyreneButadieneRubber, 2)
@@ -427,7 +428,7 @@ public class ComponentAssemblerRecipes {
 
         COMPONENT_ASSEMBLER_RECIPES.recipeBuilder()
                 .input(cableGtSingle, Gold)
-                .input(pipeNormalFluid, StainlessSteel)
+                .input(valve, StainlessSteel)
                 .input(screw, Steel)
                 .input(rotor, Steel)
                 .input(ring, NitrileButadieneRubber, 2)
@@ -439,7 +440,7 @@ public class ComponentAssemblerRecipes {
 
         COMPONENT_ASSEMBLER_RECIPES.recipeBuilder()
                 .input(cableGtSingle, Gold)
-                .input(pipeNormalFluid, StainlessSteel)
+                .input(valve, StainlessSteel)
                 .input(screw, Steel)
                 .input(rotor, Steel)
                 .input(ring, PolyPhosphonitrileFluoroRubber, 2)
@@ -452,7 +453,7 @@ public class ComponentAssemblerRecipes {
         //  EV
         COMPONENT_ASSEMBLER_RECIPES.recipeBuilder()
                 .input(cableGtSingle, Aluminium)
-                .input(pipeNormalFluid, Titanium)
+                .input(valve, Titanium)
                 .input(screw, StainlessSteel)
                 .input(rotor, StainlessSteel)
                 .input(ring, Rubber, 2)
@@ -464,7 +465,7 @@ public class ComponentAssemblerRecipes {
 
         COMPONENT_ASSEMBLER_RECIPES.recipeBuilder()
                 .input(cableGtSingle, Aluminium)
-                .input(pipeNormalFluid, Titanium)
+                .input(valve, Titanium)
                 .input(screw, StainlessSteel)
                 .input(rotor, StainlessSteel)
                 .input(ring, SiliconeRubber, 2)
@@ -476,7 +477,7 @@ public class ComponentAssemblerRecipes {
 
         COMPONENT_ASSEMBLER_RECIPES.recipeBuilder()
                 .input(cableGtSingle, Aluminium)
-                .input(pipeNormalFluid, Titanium)
+                .input(valve, Titanium)
                 .input(screw, StainlessSteel)
                 .input(rotor, StainlessSteel)
                 .input(ring, StyreneButadieneRubber, 2)
@@ -488,7 +489,7 @@ public class ComponentAssemblerRecipes {
 
         COMPONENT_ASSEMBLER_RECIPES.recipeBuilder()
                 .input(cableGtSingle, Aluminium)
-                .input(pipeNormalFluid, Titanium)
+                .input(valve, Titanium)
                 .input(screw, StainlessSteel)
                 .input(rotor, StainlessSteel)
                 .input(ring, NitrileButadieneRubber, 2)
@@ -500,7 +501,7 @@ public class ComponentAssemblerRecipes {
 
         COMPONENT_ASSEMBLER_RECIPES.recipeBuilder()
                 .input(cableGtSingle, Aluminium)
-                .input(pipeNormalFluid, Titanium)
+                .input(valve, Titanium)
                 .input(screw, StainlessSteel)
                 .input(rotor, StainlessSteel)
                 .input(ring, PolyPhosphonitrileFluoroRubber, 2)
@@ -513,7 +514,7 @@ public class ComponentAssemblerRecipes {
         //  IV
         COMPONENT_ASSEMBLER_RECIPES.recipeBuilder()
                 .input(cableGtSingle, Tungsten)
-                .input(pipeNormalFluid, TungstenSteel)
+                .input(valve, TungstenSteel)
                 .input(screw, TungstenSteel)
                 .input(rotor, TungstenSteel)
                 .input(ring, SiliconeRubber, 2)
@@ -525,7 +526,7 @@ public class ComponentAssemblerRecipes {
 
         COMPONENT_ASSEMBLER_RECIPES.recipeBuilder()
                 .input(cableGtSingle, Tungsten)
-                .input(pipeNormalFluid, TungstenSteel)
+                .input(valve, TungstenSteel)
                 .input(screw, TungstenSteel)
                 .input(rotor, TungstenSteel)
                 .input(ring, StyreneButadieneRubber, 2)
@@ -537,7 +538,7 @@ public class ComponentAssemblerRecipes {
 
         COMPONENT_ASSEMBLER_RECIPES.recipeBuilder()
                 .input(cableGtSingle, Tungsten)
-                .input(pipeNormalFluid, TungstenSteel)
+                .input(valve, TungstenSteel)
                 .input(screw, TungstenSteel)
                 .input(rotor, TungstenSteel)
                 .input(ring, NitrileButadieneRubber, 2)
@@ -549,7 +550,7 @@ public class ComponentAssemblerRecipes {
 
         COMPONENT_ASSEMBLER_RECIPES.recipeBuilder()
                 .input(cableGtSingle, Tungsten)
-                .input(pipeNormalFluid, TungstenSteel)
+                .input(valve, TungstenSteel)
                 .input(screw, TungstenSteel)
                 .input(rotor, TungstenSteel)
                 .input(ring, PolyPhosphonitrileFluoroRubber, 2)
@@ -567,7 +568,7 @@ public class ComponentAssemblerRecipes {
         //  LV
         COMPONENT_ASSEMBLER_RECIPES.recipeBuilder()
                 .input(cableGtSingle, Tin, 3)
-                .input(stick, Steel, 2)
+                .input(motor_stick, Steel, 1)
                 .input(ELECTRIC_MOTOR_LV, 2)
                 .input(ELECTRIC_PISTON_LV)
                 .input(circuit, MarkerMaterials.Tier.LV)
@@ -579,7 +580,7 @@ public class ComponentAssemblerRecipes {
         //  MV
         COMPONENT_ASSEMBLER_RECIPES.recipeBuilder()
                 .input(cableGtSingle, Copper, 3)
-                .input(stick, Aluminium, 2)
+                .input(motor_stick, Aluminium, 1)
                 .input(ELECTRIC_MOTOR_MV, 2)
                 .input(ELECTRIC_PISTON_MV)
                 .input(circuit, MarkerMaterials.Tier.MV)
@@ -591,7 +592,7 @@ public class ComponentAssemblerRecipes {
         //  HV
         COMPONENT_ASSEMBLER_RECIPES.recipeBuilder()
                 .input(cableGtSingle, Gold, 3)
-                .input(stick, StainlessSteel, 2)
+                .input(motor_stick, StainlessSteel, 1)
                 .input(ELECTRIC_MOTOR_HV, 2)
                 .input(ELECTRIC_PISTON_HV)
                 .input(circuit, MarkerMaterials.Tier.HV)
@@ -603,7 +604,7 @@ public class ComponentAssemblerRecipes {
         //  EV
         COMPONENT_ASSEMBLER_RECIPES.recipeBuilder()
                 .input(cableGtSingle, Aluminium, 3)
-                .input(stick, Titanium, 2)
+                .input(motor_stick, Titanium, 1)
                 .input(ELECTRIC_MOTOR_EV, 2)
                 .input(ELECTRIC_PISTON_EV)
                 .input(circuit, MarkerMaterials.Tier.EV)
@@ -615,7 +616,7 @@ public class ComponentAssemblerRecipes {
         //  IV
         COMPONENT_ASSEMBLER_RECIPES.recipeBuilder()
                 .input(cableGtSingle, Tungsten, 3)
-                .input(stick, TungstenSteel, 2)
+                .input(motor_stick, TungstenSteel, 1)
                 .input(ELECTRIC_MOTOR_IV, 2)
                 .input(ELECTRIC_PISTON_IV)
                 .input(circuit, MarkerMaterials.Tier.IV)

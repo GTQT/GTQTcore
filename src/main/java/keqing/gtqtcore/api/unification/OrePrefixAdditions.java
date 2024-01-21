@@ -10,9 +10,19 @@ public class OrePrefixAdditions {
         MetaItems.addOrePrefix(GTQTOrePrefix.electrode);
         MetaItems.addOrePrefix(GTQTOrePrefix.nanotube);
         MetaItems.addOrePrefix(GTQTOrePrefix.nanosensor);
+        MetaItems.addOrePrefix(GTQTOrePrefix.soldering_iron_head);
+        MetaItems.addOrePrefix(GTQTOrePrefix.plate_curved);
         MetaItems.addOrePrefix(GTQTOrePrefix.swarm);
         MetaItems.addOrePrefix(GTQTOrePrefix.singularity);
         MetaItems.addOrePrefix(GTQTOrePrefix.leaf);
         MetaItems.addOrePrefix(GTQTOrePrefix.fcrop);
+
+        MetaItems.addOrePrefix(GTQTOrePrefix.plate_big);
+        MetaItems.addOrePrefix(GTQTOrePrefix.round_cover);
+        MetaItems.addOrePrefix(GTQTOrePrefix.motor_stick);
+        MetaItems.addOrePrefix(GTQTOrePrefix.cylinder);
+        MetaItems.addOrePrefix(GTQTOrePrefix.valve);
+        MetaItems.addOrePrefix(GTQTOrePrefix.shell);
+
     }
 }

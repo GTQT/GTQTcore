@@ -404,6 +404,13 @@ gregtech.material.distilledgasoline=直馏汽油
 gregtech.material.sea_water=海水
 gregtech.material.zinc_cl=氯化锌
 
+
+gregtech.material.vinylcinnamate=聚乙烯醇肉桂酸酯
+gregtech.material.xmt=xMT分子光刻胶
+gregtech.material.zrbtmst=氧化锆杂化物-（2,4-双（三氯甲基）-6-（4-甲氧基苯乙烯基）-1,3,5-三嗪）（ZrO2-BTMST）
+
+
+
 gregtech.material.amblygonite=磷铝锂石
 gregtech.material.infused_order=序
 gregtech.material.infused_entropy=熵
@@ -894,6 +901,21 @@ metaitem.debug.structure_writer.ex=无
 metaitem.debug.structure_writer.structural_scale=结构规模： X:%s  Y:%s  Z:%s
 metaitem.debug.structure_builder.name=多方块构建工具
 
+#  Tools
+gt.tool.class.bending_cylinder=弯曲绕筒
+gt.tool.class.small_bending_cylinder=小型弯曲绕筒
+gt.tool.class.soldering_iron=电烙铁
+
+item.gt.tool.universal_spade.name=%s万用铲
+item.gt.tool.combination_wrench.name=%s两用扳手
+item.gt.tool.bending_cylinder.name=%s弯曲绕筒
+item.gt.tool.small_bending_cylinder.name=%s小型弯曲绕筒
+item.gt.tool.soldering_iron_lv.name=%s电烙铁
+item.gt.tool.soldering_iron_lv.tooltip=比燧石刀好用
+item.gt.tool.soldering_iron_hv.name=%s电烙铁
+item.gt.tool.soldering_iron_hv.tooltip=小心烫手！
+item.gt.tool.soldering_iron_iv.name=%s电烙铁
+item.gt.tool.soldering_iron_iv.tooltip=电路板修理者 MK523
 
 gtqtcore.machine.large_processing_factory.name=大型加工厂
 gtqtcore.machine.large_processing_factory.tooltip.1=把你的小机器丢掉
@@ -912,10 +934,13 @@ gtqtcore.machine.pyrolysis_tower.name=热解塔
 item.material.oreprefix.leaf=%s富集叶子
 item.material.oreprefix.fcrop=%s改良杂交种子
 metaitem.leaf.tooltip=魔法作物启动！
+metaitem.soldering_iron_head.tooltip=焊接大王
+item.material.oreprefix.soldering_iron_head=%s电烙铁头
 metaitem.fcrop.tooltip=不要把我种在土里
 item.material.oreprefix.electrode=%s电极
 item.material.oreprefix.swarm=%s纳米蜂群
 item.material.oreprefix.nanotube=%s纳米管
+item.material.oreprefix.plate_curved=%s弯曲板
 item.material.oreprefix.nanosensor=%s纳米传感器
 item.material.oreprefix.singularity=%s奇点
 metaitem.singularity.tooltip=凝聚万物
@@ -927,3 +952,16 @@ metaitem.tin_crop.name=锡杂交稻
 metaitem.gold_crop.name=金杂交稻
 metaitem.bronze_crop.name=青铜杂交稻
 metaitem.carbon_crop.name=碳杂交稻
+
+metaitem.valve.tooltip=我不让你走你就走不了
+item.material.oreprefix.valve=%s阀门
+metaitem.cylinder.tooltip=塞进发动机
+item.material.oreprefix.cylinder=%s气缸
+metaitem.motor_stick.tooltip=玩机械动力玩的
+item.material.oreprefix.motor_stick=%s传动轴
+metaitem.shell.tooltip=塑料玩具
+item.material.oreprefix.shell=%s质外壳
+metaitem.round_cover.tooltip=我超，圆
+item.material.oreprefix.round_cover=%s圆板
+metaitem.plate_big.tooltip=钳工实习
+item.material.oreprefix.plate_big=%s焊接板

@@ -37,6 +37,7 @@ import static keqing.gtqtcore.api.GTQTValue.gtqtcoreId;
 public class GTQTMetaTileEntities {
 
 
+
     public static void simpleTiredInit(MetaTileEntity[] tileEntities, IntFunction<MetaTileEntity> function, IntSupplier idSupplier, IntPredicate canAdd){
         for(int i = 0;i<GTValues.V.length;i++){
             if(canAdd.test(i)){
@@ -100,6 +101,7 @@ public class GTQTMetaTileEntities {
     public static  MetaTileEntityPlasmaForge PLASMA_FORGE;
     public static MetaTileEntityStarMixer STAR_MIXER;
     public static MetaTileEntitySteamCompressor STEAM_COMPRESSOR;
+    public static  MetaTileEntityStepper STEPPER;
     public static MetaTileEntitySteamExtractor STEAM_EXTRACTOR;
     public static MetaTileEntityHugeCrackingUnit HUGE_CRACKING_UNIT;
     public static MetaTileEntityHugeMiner BASIC_HUGE_MINER;
@@ -292,6 +294,7 @@ public class GTQTMetaTileEntities {
         EFUSION_REACTOR[2] = registerMetaTileEntity(3104, new MetaTileEntityEFusionReactor(gtqtcoreId("fusion_reactor.uv"), GTValues.UV));
         KQCC= registerMetaTileEntity(3105, new MetaTileEntityKQCC(gtqtcoreId("kqcc")));
         LASER_ENGRAVING= registerMetaTileEntity(3106, new MetaTileEntityLaserEngraving(gtqtcoreId("laser_engraving")));
+        STEPPER= registerMetaTileEntity(3107, new MetaTileEntityStepper(gtqtcoreId("stepper")));
 
         registerSimpleMetaTileEntity(FLUID_EXTRACTOR, 15000, "fluid_extractor", GTQTcoreRecipeMaps.FLUID_EXTRACTOR_RECIPES, Textures.EXTRACTOR_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
         registerSimpleMetaTileEntity(FLUID_CANNER, 15015, "fluid_canner", GTQTcoreRecipeMaps.FLUID_CANNER_RECIPES, Textures.CANNER_OVERLAY, true,GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);

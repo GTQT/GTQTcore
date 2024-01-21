@@ -4,7 +4,9 @@ import gregtech.api.recipes.GTRecipeHandler;
 import gregtech.api.recipes.ModHandler;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.OreDictUnifier;
+import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.Materials;
+import gregtech.api.unification.material.info.MaterialFlags;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.ItemMaterialInfo;
 import gregtech.api.unification.stack.MaterialStack;
@@ -13,12 +15,18 @@ import gregtech.common.blocks.BlockMachineCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.items.MetaItems;
 import gregtech.common.metatileentities.MetaTileEntities;
+import gregtech.core.unification.material.internal.MaterialRegistryManager;
 import gregtech.loaders.recipe.CraftingComponent;
 import keqing.gtqtcore.api.unification.ore.GTQTOrePrefix;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTADVGlass;
 import keqing.gtqtcore.common.block.blocks.GTQTBlockGlassCasing;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
+
+import java.util.Collection;
 
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
@@ -31,15 +39,92 @@ import static gregtech.loaders.recipe.MetaTileEntityLoader.registerMachineRecipe
 import static keqing.gtqtcore.api.unification.GTQTMaterials.Infinity;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.GalvanizedSteel;
 import static keqing.gtqtcore.api.unification.TJMaterials.HDCS_1;
+import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.plate_curved;
 
 public class MetaTileEntityMachine {
     static int L=144;
 
    public static void init() {
+       VanillaOverrideRecipes();
         Hull();
         removeOldMachines();
         registerElectric();
        registerGalvanizedSteel();
+    }
+    private static void VanillaOverrideRecipes() {
+        //  Iron bucket
+        ModHandler.removeRecipeByName("gregtech:iron_bucket");
+        ModHandler.addShapedRecipe("iron_bucket", new ItemStack(Items.BUCKET),
+                "ChC", " P ",
+                'C', new UnificationEntry(plate_curved, Iron),
+                'P', new UnificationEntry(plate, Iron));
+
+        //  Hopper
+        ModHandler.removeRecipeByName("gregtech:hopper");
+        ModHandler.addShapedRecipe("hopper", new ItemStack(Blocks.HOPPER),
+                "UCU", "UGU", "wPh",
+                'U', new UnificationEntry(plate_curved, Iron),
+                'C', "chestWood",
+                'G', new UnificationEntry(gearSmall, Iron),
+                'P', new UnificationEntry(plate, Iron));
+
+        //  Cauldron
+        ModHandler.removeRecipeByName("gregtech:cauldron");
+        ModHandler.addShapedRecipe("cauldron", new ItemStack(Items.CAULDRON),
+                "C C", "ChC", "CPC",
+                'C', new UnificationEntry(plate_curved, Iron),
+                'P', new UnificationEntry(plate, Iron));
+
+        //  Compass
+        ModHandler.removeRecipeByName("minecraft:compass");
+        ModHandler.addShapedRecipe("compass", new ItemStack(Items.COMPASS),
+                " C ", "CRC", " C ",
+                'C', new UnificationEntry(plate_curved, Iron),
+                'R', new UnificationEntry(bolt, RedAlloy));
+
+        //  Clock
+        ModHandler.removeRecipeByName("minecraft:clock");
+        ModHandler.addShapedRecipe("clock", new ItemStack(Items.CLOCK),
+                " C ", "CRC", " C ",
+                'C', new UnificationEntry(plate_curved, Gold),
+                'R', new UnificationEntry(bolt, RedAlloy));
+
+        //  Fishing Rod
+        ModHandler.removeRecipeByName("minecraft:fishing_rod");
+        ModHandler.addShapedRecipe("fishing_rod", new ItemStack(Items.FISHING_ROD),
+                "  R", " RS", "R I",
+                'R', new UnificationEntry(stickLong, Wood),
+                'S', "string",
+                'I', new UnificationEntry(ring, Iron));
+
+        //  Shears
+        ModHandler.removeRecipeByName("minecraft:shears");
+        ModHandler.addShapedRecipe("shears", new ItemStack(Items.SHEARS),
+                "PSP", "hRf", "XsX",
+                'P', new UnificationEntry(plate, Iron),
+                'S', new UnificationEntry(screw, Iron),
+                'R', new UnificationEntry(ring, Iron),
+                'X', new UnificationEntry(stick, Wood));
+
+        //  Tool Override Recipe
+        Collection<Material> list = MaterialRegistryManager.getInstance().getRegisteredMaterials();
+        for (Material material : list) {
+            if (material.hasFlag(MaterialFlags.GENERATE_FOIL) && !material.hasFlag(MaterialFlags.NO_SMASHING)) {
+                ModHandler.removeRecipeByName(String.format("gregtech:foil_%s", material));
+            }
+            if (material.hasFlag(MaterialFlags.GENERATE_RING) && !material.hasFlag(MaterialFlags.NO_SMASHING)) {
+                ModHandler.removeRecipeByName(String.format("gregtech:ring_%s", material));
+            }
+            if (material.hasFlag(MaterialFlags.GENERATE_SPRING) && !material.hasFlag(MaterialFlags.NO_SMASHING)) {
+                ModHandler.removeRecipeByName(String.format("gregtech:spring_%s", material));
+            }
+            if (material.hasFlag(MaterialFlags.GENERATE_SPRING_SMALL) && !material.hasFlag(MaterialFlags.NO_SMASHING)) {
+                ModHandler.removeRecipeByName(String.format("gregtech:spring_small_%s", material));
+            }
+            if (material.hasFlag(MaterialFlags.GENERATE_ROTOR) && !material.hasFlag(MaterialFlags.NO_SMASHING))  {
+                ModHandler.removeRecipeByName(String.format("gregtech:rotor_%s", material));
+            }
+        }
     }
     private static void registerGalvanizedSteel() {
             OrePrefix[] galvanizedSteelPrefix = new OrePrefix[]{ingot, plate, stick, stickLong, bolt, screw, ring, gear, gearSmall, rotor, round};
@@ -229,8 +314,6 @@ public class MetaTileEntityMachine {
 
     }
     private static void registerElectric() {
-
-
 
         registerMachineRecipe(GTQTMetaTileEntities.FLUID_EXTRACTOR, "PGP", "EGE", "CMC", 'M', HULL, 'P',  PUMP, 'E', PISTON, 'C',
                 CIRCUIT,  'G', GLASS);
