@@ -79,7 +79,6 @@ public class MetaTileEntityHugeAlloyBlastSmelter extends RecipeMapMultiblockCont
         tooltip.add(I18n.format("gtqtcore.multiblock.hb.tooltip.2"));
         tooltip.add(I18n.format("gtqtcore.multiblock.hb.tooltip.3"));
         tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.1"));
-        tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.2",768));
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("最强合金王", new Object[0]));
     }
 

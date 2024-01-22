@@ -2,6 +2,10 @@ package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
 import gregicality.science.common.block.GCYSMetaBlocks;
 import gregicality.science.common.block.blocks.BlockTransparentCasing;
+import gregtech.api.capability.IOpticalComputationHatch;
+import gregtech.api.capability.IOpticalComputationProvider;
+import gregtech.api.capability.impl.ComputationRecipeLogic;
+import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
@@ -9,13 +13,18 @@ import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
+import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.ingredients.GTRecipeInput;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
+import keqing.gtqtcore.api.GTQTValue;
+import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
+import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
+import keqing.gtqtcore.api.utils.GTQTUtil;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -30,11 +39,14 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
+import static gregtech.api.GTValues.VA;
+
 public class MetaTileEntityDissolutionTank extends RecipeMapMultiblockController {
     public MetaTileEntityDissolutionTank(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.DISSOLUTION_TANK_RECIPES);
+        this.recipeMapWorkable = new DissolutionTankWorkableHandler(this);
     }
-
+    private int glass_tier;
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {
         return new MetaTileEntityDissolutionTank(metaTileEntityId);
@@ -100,23 +112,27 @@ public class MetaTileEntityDissolutionTank extends RecipeMapMultiblockController
                 .aisle("M   M", "MMSMM", "MGGGM", "MGGGM", " MMM ")
                 .where('S', selfPredicate())
                 .where('M', states(getCasingAState()).or(autoAbilities()))
-                .where('G', states(getGlassState()))
+                .where('G', TiredTraceabilityPredicate.CP_LGLASS)
                 .where('N', states(getCasingBState()))
                 .where('#', air())
                 .where(' ', any())
                 .build();
     }
+    @Override
+    protected void formStructure(PatternMatchContext context) {
+        super.formStructure(context);
+        Object glass_tier = context.get("LGLTiredStats");
 
+        this.glass_tier = GTQTUtil.getOrDefault(() -> glass_tier instanceof WrappedIntTired,
+                () -> ((WrappedIntTired)glass_tier).getIntTier(),
+                0);
+    }
     private static IBlockState getCasingAState() {
         return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STAINLESS_CLEAN);
     }
 
     private static IBlockState getCasingBState() {
         return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.INVAR_HEATPROOF);
-    }
-
-    private static IBlockState getGlassState() {
-        return GCYSMetaBlocks.TRANSPARENT_CASING.getState(BlockTransparentCasing.CasingType.PMMA);
     }
 
     @SideOnly(Side.CLIENT)
@@ -136,5 +152,25 @@ public class MetaTileEntityDissolutionTank extends RecipeMapMultiblockController
     public void addInformation(ItemStack stack, @Nullable World world, @Nonnull List<String> tooltip, boolean advanced) {
         super.addInformation(stack, world, tooltip, advanced);
         tooltip.add(I18n.format("epimorphism.machine.dissolution_tank.tooltip.1"));
+    }
+
+    protected class DissolutionTankWorkableHandler extends MultiblockRecipeLogic {
+        public DissolutionTankWorkableHandler(RecipeMapMultiblockController tileEntity) {
+            super(tileEntity);
+        }
+
+
+        public void setMaxProgress(int maxProgress) {
+                this.maxProgressTime = maxProgress*(100-glass_tier)/100;
+            }
+
+        public long getMaxVoltage() {
+            return VA[glass_tier];
+        }
+
+        @Override
+        public int getParallelLimit() {
+            return glass_tier;
+        }
     }
 }

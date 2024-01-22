@@ -54,9 +54,6 @@ public class MetaTileEntityHugeChemicalReactor extends GTQTRecipeMapMultiblockCo
         return new MetaTileEntityHugeChemicalReactor(this.metaTileEntityId);
     }
 
-
-
-
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         if (isStructureFormed()) {

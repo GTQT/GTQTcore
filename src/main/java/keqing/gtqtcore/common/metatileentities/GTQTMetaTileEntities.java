@@ -24,7 +24,6 @@ import keqing.gtqtcore.common.metatileentities.multi.multiblock.steam.MetaTileEn
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.steam.MetaTileEntitySteamCompressor;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.steam.MetaTileEntitySteamOreWasher;
 import keqing.gtqtcore.common.metatileentities.multi.multiblockpart.*;
-import keqing.gtqtcore.common.metatileentities.storage.MetaTileEntityMultiblockTank;
 
 import java.util.function.IntFunction;
 import java.util.function.IntPredicate;
@@ -56,7 +55,7 @@ public class GTQTMetaTileEntities {
         simpleTiredInit(tileEntities,function,idSupplier,(i) -> true);
     }
     public static MetaTileEntityOilPool OIL_POOL;
-    public static MetaTileEntityMultiblockTank HUGE_TANK;
+
     public static MetaTileEntityAlgaeFarm ALGAE_FARM;
     public static MetaTileEntityComponentAssemblyLine COMPONENT_ASSEMBLY_LINE;
     public static MetaTileEntityBufferHatch MULTIPART_BUFFER_HATCH;
@@ -253,7 +252,7 @@ public class GTQTMetaTileEntities {
         ADVANCED_FLUID_DRILLING_RIG = registerMetaTileEntity(3064, new MetaTileEntityFracturing(gtqtcoreId("fracturing.ev"), 4));
         STEAM_COMPRESSOR = registerMetaTileEntity(3065, new MetaTileEntitySteamCompressor(gtqtcoreId("steam_compressor")));
         STEAM_EXTRACTOR = registerMetaTileEntity(3066, new MetaTileEntitySteamExtractor(gtqtcoreId("steam_extractor")));
-        HUGE_TANK = registerMetaTileEntity(3067,new MetaTileEntityMultiblockTank(gtqtcoreId("tank.steel"), true, 1000 * 1000));
+        //HUGE_TANK = registerMetaTileEntity(3067,new MetaTileEntityMultiblockTank(gtqtcoreId("tank.steel")));
 
         // Diesel Generator, IDs 935-949
         COMBUSTION_GENERATOR[0] = registerMetaTileEntity(3068, new MetaTileEntitySingleCombustion(gtqtcoreId("combustion_generator.ev"), RecipeMaps.COMBUSTION_GENERATOR_FUELS, Textures.COMBUSTION_GENERATOR_OVERLAY, 4, genericGeneratorTankSizeFunction));

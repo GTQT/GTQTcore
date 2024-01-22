@@ -83,7 +83,6 @@ public class MetaTileEntityHugeBlastFurnace extends RecipeMapMultiblockControlle
         tooltip.add(I18n.format("gtqtcore.multiblock.hb.tooltip.2"));
         tooltip.add(I18n.format("gtqtcore.multiblock.hb.tooltip.3"));
         tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.1"));
-        tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.2", 576));
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.1"));
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.2"));
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.3"));

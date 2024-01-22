@@ -268,6 +268,30 @@ gtqtcore.machine.kqcccomputation_hatch.transmitter.uhv.name=算力输入端口�
 gtqtcore.machine.kqcccomputation_hatch.transmitter.uev.name=算力输入端口（§4UEV§r）
 gtqtcore.machine.kqcccomputation_hatch.transmitter.uiv.name=算力输入端口（§4UIV§r）
 
+gtqtcore.machine.wireless_energy_hatch.receiver.lv.name=无线能源输入端口（§7LV§r）
+gtqtcore.machine.wireless_energy_hatch.receiver.mv.name=无线能源输入端口（§bMV§r）
+gtqtcore.machine.wireless_energy_hatch.receiver.hv.name=无线能源输入端口（§6HV§r）
+gtqtcore.machine.wireless_energy_hatch.receiver.ev.name=无线能源输入端口（§5EV§r）
+gtqtcore.machine.wireless_energy_hatch.receiver.iv.name=无线能源输入端口（§1IV§r）
+gtqtcore.machine.wireless_energy_hatch.receiver.luv.name=无线能源输入端口（§dLuV§r）
+gtqtcore.machine.wireless_energy_hatch.receiver.zpm.name=无线能源输入端口（§cZPM§r）
+gtqtcore.machine.wireless_energy_hatch.receiver.uv.name=无线能源输入端口（§3UV§r）
+gtqtcore.machine.wireless_energy_hatch.receiver.uhv.name=无线能源输入端口（§4UHV§r）
+gtqtcore.machine.wireless_energy_hatch.receiver.uev.name=无线能源输入端口（§4UEV§r）
+gtqtcore.machine.wireless_energy_hatch.receiver.uiv.name=无线能源输入端口（§4UIV§r）
+
+gtqtcore.machine.wireless_energy_hatch.transmitter.lv.name=无线能源输出端口（§7LV§r）
+gtqtcore.machine.wireless_energy_hatch.transmitter.mv.name=无线能源输出端口（§bMV§r）
+gtqtcore.machine.wireless_energy_hatch.transmitter.hv.name=无线能源输出端口（§6HV§r）
+gtqtcore.machine.wireless_energy_hatch.transmitter.ev.name=无线能源输出端口（§5EV§r）
+gtqtcore.machine.wireless_energy_hatch.transmitter.iv.name=无线能源输出端口（§1IV§r）
+gtqtcore.machine.wireless_energy_hatch.transmitter.luv.name=无线能源输出端口（§dLuV§r）
+gtqtcore.machine.wireless_energy_hatch.transmitter.zpm.name=无线能源输入端口（§cZPM§r）
+gtqtcore.machine.wireless_energy_hatch.transmitter.uv.name=无线能源输入端口（§3UV§r）
+gtqtcore.machine.wireless_energy_hatch.transmitter.uhv.name=无线能源输入端口（§4UHV§r）
+gtqtcore.machine.wireless_energy_hatch.transmitter.uev.name=无线能源输入端口（§4UEV§r）
+gtqtcore.machine.wireless_energy_hatch.transmitter.uiv.name=无线能源输入端口（§4UIV§r）
+
 gtqtcore.machine.parallel_hatch.uhv.name=并行控制仓（§4UHV§r）
 gtqtcore.machine.parallel_hatch.uev.name=并行控制仓（§aUEV§r）
 gtqtcore.machine.parallel_hatch.uiv.name=并行控制仓（§2UIV§r）
@@ -549,6 +573,10 @@ gtqtcore.machine.kqhpca.name=高性能计算阵列（默认加强）
 gtqtcore.machine.kqns.name=网络交换机
 gregtech.multiblock.kqns.tier=交换机等级: %s
 gregtech.multiblock.kqns.max=算力负荷: %s / %s
+gregtech.universal.tooltip.kqcc=端口等级:%s
+gregtech.machine.wireless.export.tooltip=§c其实是动力仓(还没做完)
+gregtech.machine.wireless.import.tooltip=§a其实是能源仓(还没做完)
+gtqtcore.multiblock.tank.height=高度: %s
 gtqtcore.pa.mode1=加速模式：加速 偏转相位：%s 速度：%s C
 gtqtcore.pa.mode2=加速模式：稳定 偏转相位：%s 速度：%s C
 gtqtcore.pa.mode3=加速模式：减速 偏转相位：%s 速度：%s C
@@ -985,7 +1013,8 @@ item.material.oreprefix.round_cover=%s圆板
 metaitem.plate_big.tooltip=钳工实习
 item.material.oreprefix.plate_big=%s焊接板
 
-
+gtqt.tooltip.tiered_hatch_enabled=§2此机器配方逻辑已被修改，详情见描述。
+gtqtcore.gcymmultiblock.description=并行机制修改如下：在原有并行数量不变的基础上叠加一个等同于并行数量的耗时倍率减免，总产量不变。举例 有一个10秒出1个产物的配方，并行修改前：4并行 40秒出4个；并行修改后：4并行10秒出1个。
 gregica.gui.current_channel=§l当前绑定频道 : %s
 gregica.gui.mode.manual=手动设置频道
 gregica.gui.mode.available=可用频道
