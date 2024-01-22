@@ -9,6 +9,7 @@ import gregtech.common.items.behaviors.ProspectorScannerBehavior;
 import keqing.gtqtcore.common.CommonProxy;
 import keqing.gtqtcore.common.block.blocks.GTQTCrops;
 import keqing.gtqtcore.common.items.behaviors.IntBcircuitBehavior;
+import keqing.gtqtcore.common.items.behaviors.MemoryCardBehavior;
 import keqing.gtqtcore.common.items.behaviors.MillBallBehavior;
 import keqing.gtqtcore.common.items.behaviors.StructureWriteBehavior;
 
@@ -125,6 +126,8 @@ public class GTQTMetaItem1 extends StandardMetaItem {
                         new ProspectorScannerBehavior(9, GTValues.UIV))
                 .setMaxStackSize(1)
                 .setCreativeTabs(GregTechAPI.TAB_GREGTECH_TOOLS);
+
+        MEMORY_CARD = addItem(417,"item.memory_card").setMaxStackSize(1).setCreativeTabs(CommonProxy.GTQTCore_TAB).addComponents(new MemoryCardBehavior());
         DEBUG_STRUCTURE_WRITER = this.addItem(9999, "debug.structure_writer").addComponents(StructureWriteBehavior.INSTANCE);
         DEBUG_STRUCTURE_BUILDER = this.addItem(10000, "debug.structure_builder").addComponents(new MultiblockBuilderBehavior());
     }

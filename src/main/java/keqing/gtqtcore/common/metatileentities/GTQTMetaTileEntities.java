@@ -32,6 +32,7 @@ import java.util.function.IntSupplier;
 
 import static gregtech.api.util.GTUtility.genericGeneratorTankSizeFunction;
 import static gregtech.common.metatileentities.MetaTileEntities.*;
+import static gregtech.common.metatileentities.MetaTileEntities.registerMetaTileEntity;
 import static keqing.gtqtcore.api.GTQTValue.gtqtcoreId;
 
 public class GTQTMetaTileEntities {
@@ -172,6 +173,8 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityKQNetworkSwitch KQNS;
     public static MetaTileEntityChemicalPlant CHEMICAL_PLANT;
     public static MetaTileEntityLaserEngraving LASER_ENGRAVING;
+    public static MetaTileEntityWirelessEnergyHatch[] WIRELESS_EMERGY_HATCH_RECEIVER= new MetaTileEntityWirelessEnergyHatch[11];
+    public static MetaTileEntityWirelessEnergyHatch[] WIRELESS_EMERGY_HATCH_TRANSMITTER= new MetaTileEntityWirelessEnergyHatch[11];
     public static final MetaTileEntityRotorHolder[] ROTOR_HOLDER = new MetaTileEntityRotorHolder[12]; //HV, EV, IV, LuV, ZPM, UV
 
     public static final SimpleMachineMetaTileEntity[] FLUID_CANNER = new SimpleMachineMetaTileEntity[GTValues.V.length - 1];
@@ -307,12 +310,16 @@ public class GTQTMetaTileEntities {
         registerSimpleMetaTileEntity(VACUUM_CHAMBER, 15060, "vacuum_chamber", GTQTcoreRecipeMaps.VACUUM_CHAMBER_RECIPES, Textures.GAS_COLLECTOR_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
         registerSimpleMetaTileEntity(ULTRAVIOLET_LAMP_CHAMBER, 15075, "ultraviolet_lamp_chamber", GTQTcoreRecipeMaps.ULTRAVIOLET_LAMP_CHAMBER_RECIPES, Textures.LASER_ENGRAVER_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
 
-        for (int i = 1; i <= 11; i++) {
+        for (int i = 1; i <= 10; i++) {
             String tierName = GTValues.VN[i].toLowerCase();
             KQCC_COMPUTATION_HATCH_RECEIVER[i] = registerMetaTileEntity(15500 + i-1, new MetaTileEntityKQCCComputationHatch(gtqtcoreId("kqcccomputation_hatch.receiver." + tierName), i,  false));
-            KQCC_COMPUTATION_HATCH_TRANSMITTER[i] = registerMetaTileEntity(15511 + i-1, new MetaTileEntityKQCCComputationHatch(gtqtcoreId("kqcccomputation_hatch.transmitter." + tierName), i,  true));
+            KQCC_COMPUTATION_HATCH_TRANSMITTER[i] = registerMetaTileEntity(15510 + i-1, new MetaTileEntityKQCCComputationHatch(gtqtcoreId("kqcccomputation_hatch.transmitter." + tierName), i,  true));
         }
-
+        for (int i = 1; i <= 10; i++) {
+            String tierName = GTValues.VN[i].toLowerCase();
+            WIRELESS_EMERGY_HATCH_RECEIVER[i] = registerMetaTileEntity(15520 + i-1, new MetaTileEntityWirelessEnergyHatch(gtqtcoreId("wireless_energy_hatch.receiver." + tierName), i,  false));
+            WIRELESS_EMERGY_HATCH_TRANSMITTER[i] = registerMetaTileEntity(15530 + i-1, new MetaTileEntityWirelessEnergyHatch(gtqtcoreId("wireless_energy_hatch.transmitter." + tierName), i,  true));
+        }
         ROTOR_HOLDER[6] = registerMetaTileEntity(16000, new MetaTileEntityRotorHolder(gtqtcoreId("rotor_holder.uhv"), GTValues.UHV));
         ROTOR_HOLDER[7] = registerMetaTileEntity(16001, new MetaTileEntityRotorHolder(gtqtcoreId("rotor_holder.uev"), GTValues.UEV));
         ROTOR_HOLDER[8] = registerMetaTileEntity(16002, new MetaTileEntityRotorHolder(gtqtcoreId("rotor_holder.uiv"), GTValues.UIV));

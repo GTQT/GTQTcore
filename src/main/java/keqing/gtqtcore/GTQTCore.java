@@ -5,11 +5,13 @@ import keqing.gtqtcore.common.CommonProxy;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.items.GTQTMetaItems;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
+import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 
 @Mod(
         modid = "gtqtcore",
@@ -32,6 +34,7 @@ public class GTQTCore {
             serverSide = "keqing.gtqtcore.common.CommonProxy"
     )
     public static CommonProxy proxy;
+    public static long clientTimer;
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event)
@@ -45,6 +48,11 @@ public class GTQTCore {
 
     }
 
+    public static MinecraftServer currentServer;
+    @Mod.EventHandler
+    public void serverStart(FMLServerStartingEvent event) {
+        currentServer = event.getServer();
+    }
     @Mod.EventHandler
     public void init(FMLInitializationEvent event)
     {
