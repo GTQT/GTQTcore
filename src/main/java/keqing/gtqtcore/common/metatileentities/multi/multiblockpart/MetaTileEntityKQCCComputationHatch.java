@@ -33,6 +33,8 @@ import javax.annotation.Nullable;
 import java.util.Collection;
 import java.util.List;
 
+import static gregtech.api.GTValues.VA;
+
 public class MetaTileEntityKQCCComputationHatch extends MetaTileEntityMultiblockPart implements
         IMultiblockAbilityPart<IOpticalComputationHatch>, IOpticalComputationHatch {
     int tier;
@@ -55,8 +57,7 @@ public class MetaTileEntityKQCCComputationHatch extends MetaTileEntityMultiblock
     }
 
     public int tier() {
-        if(isTransmitter) return this.tier*8;
-        else return this.tier*32;
+        return VA[this.tier]/3;
     }
 
 

@@ -169,6 +169,7 @@ public class GTQTMetaTileEntities {
     public static SimpleMachineMetaTileEntity[] VACUUM_CHAMBER = new SimpleMachineMetaTileEntity[GTValues.V.length - 1];
     public static MetaTileEntityMillBallHatch MULTIPART_BALL_HATCH;
     public static MetaTileEntityCatalystHatch CATALYST_HATCH;
+    public static MetaTileEntityKQNetworkSwitch KQNS;
     public static MetaTileEntityChemicalPlant CHEMICAL_PLANT;
     public static MetaTileEntityLaserEngraving LASER_ENGRAVING;
     public static final MetaTileEntityRotorHolder[] ROTOR_HOLDER = new MetaTileEntityRotorHolder[12]; //HV, EV, IV, LuV, ZPM, UV
@@ -176,8 +177,9 @@ public class GTQTMetaTileEntities {
     public static final SimpleMachineMetaTileEntity[] FLUID_CANNER = new SimpleMachineMetaTileEntity[GTValues.V.length - 1];
     public static final SimpleMachineMetaTileEntity[] FLUID_EXTRACTOR = new SimpleMachineMetaTileEntity[GTValues.V.length - 1];
 
-    public static MetaTileEntityKQCCComputationHatch[] KQCC_COMPUTATION_HATCH_RECEIVER=new MetaTileEntityKQCCComputationHatch[7];
-    public static MetaTileEntityKQCCComputationHatch[] KQCC_COMPUTATION_HATCH_TRANSMITTER=new MetaTileEntityKQCCComputationHatch[7];
+    public static MetaTileEntityKQCCComputationHatch[] KQCC_COMPUTATION_HATCH_RECEIVER=new MetaTileEntityKQCCComputationHatch[12];
+    public static MetaTileEntityKQCCComputationHatch[] KQCC_COMPUTATION_HATCH_TRANSMITTER=new MetaTileEntityKQCCComputationHatch[12];
+    public static MetaTileEntityKQHPCA KQHPCA;
     //public static MetaTileEntityObjectHolder OBJECT_HOLDER;
     public static void initialization() {
         GTQTLog.logger.info("Registering MetaTileEntities");
@@ -295,7 +297,8 @@ public class GTQTMetaTileEntities {
         KQCC= registerMetaTileEntity(3105, new MetaTileEntityKQCC(gtqtcoreId("kqcc")));
         LASER_ENGRAVING= registerMetaTileEntity(3106, new MetaTileEntityLaserEngraving(gtqtcoreId("laser_engraving")));
         STEPPER= registerMetaTileEntity(3107, new MetaTileEntityStepper(gtqtcoreId("stepper")));
-
+        KQHPCA= registerMetaTileEntity(3108, new MetaTileEntityKQHPCA(gtqtcoreId("kqhpca")));
+        KQNS=registerMetaTileEntity(3109,new MetaTileEntityKQNetworkSwitch(gtqtcoreId("kqns")));
         registerSimpleMetaTileEntity(FLUID_EXTRACTOR, 15000, "fluid_extractor", GTQTcoreRecipeMaps.FLUID_EXTRACTOR_RECIPES, Textures.EXTRACTOR_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
         registerSimpleMetaTileEntity(FLUID_CANNER, 15015, "fluid_canner", GTQTcoreRecipeMaps.FLUID_CANNER_RECIPES, Textures.CANNER_OVERLAY, true,GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
 
@@ -304,10 +307,10 @@ public class GTQTMetaTileEntities {
         registerSimpleMetaTileEntity(VACUUM_CHAMBER, 15060, "vacuum_chamber", GTQTcoreRecipeMaps.VACUUM_CHAMBER_RECIPES, Textures.GAS_COLLECTOR_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
         registerSimpleMetaTileEntity(ULTRAVIOLET_LAMP_CHAMBER, 15075, "ultraviolet_lamp_chamber", GTQTcoreRecipeMaps.ULTRAVIOLET_LAMP_CHAMBER_RECIPES, Textures.LASER_ENGRAVER_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
 
-        for (int i = 1; i <= 6; i++) {
+        for (int i = 1; i <= 11; i++) {
             String tierName = GTValues.VN[i].toLowerCase();
             KQCC_COMPUTATION_HATCH_RECEIVER[i] = registerMetaTileEntity(15500 + i-1, new MetaTileEntityKQCCComputationHatch(gtqtcoreId("kqcccomputation_hatch.receiver." + tierName), i,  false));
-            KQCC_COMPUTATION_HATCH_TRANSMITTER[i] = registerMetaTileEntity(15506 + i-1, new MetaTileEntityKQCCComputationHatch(gtqtcoreId("kqcccomputation_hatch.transmitter." + tierName), i,  true));
+            KQCC_COMPUTATION_HATCH_TRANSMITTER[i] = registerMetaTileEntity(15511 + i-1, new MetaTileEntityKQCCComputationHatch(gtqtcoreId("kqcccomputation_hatch.transmitter." + tierName), i,  true));
         }
 
         ROTOR_HOLDER[6] = registerMetaTileEntity(16000, new MetaTileEntityRotorHolder(gtqtcoreId("rotor_holder.uhv"), GTValues.UHV));

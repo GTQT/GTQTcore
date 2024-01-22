@@ -122,9 +122,9 @@ public class MetaTileEntityFermentationTank extends RecipeMapMultiblockControlle
     @Override
     public String[] getDescription() {
         List<String> list = new ArrayList<>();
-        list.add(I18n.format("epimorphism.machine.fermentation_tank.description"));
-        Collections.addAll(list, LocalizationUtils.formatLines("epimorphism.machine.fermentation_tank.extra1"));
-        Collections.addAll(list, LocalizationUtils.formatLines("epimorphism.machine.fermentation_tank.extra2"));
+        list.add(I18n.format("gtqtcore.machine.fermentation_tank.description"));
+        Collections.addAll(list, LocalizationUtils.formatLines("gtqtcore.machine.fermentation_tank.extra1"));
+        Collections.addAll(list, LocalizationUtils.formatLines("gtqtcore.machine.fermentation_tank.extra2"));
         return list.toArray(new String[0]);
     }
 

@@ -252,12 +252,6 @@ public class MetaTileEntityKQCC extends MultiblockWithDisplayBase implements IOp
         return GTSoundEvents.BREAKDOWN_ELECTRICAL;
     }
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    protected  ICubeRenderer getFrontOverlay() {
-        return Textures.HPCA_OVERLAY;
-    }
-
     protected IBlockState getCasingState() {
         return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.PTFE_INERT_CASING);
     }
@@ -333,7 +327,7 @@ public class MetaTileEntityKQCC extends MultiblockWithDisplayBase implements IOp
     @Override
     public int getMaxCWUt(Collection<IOpticalComputationProvider> seen) {
         seen.add(this);
-        return (GPU1+GPU2+GPU3+GPU4)+(CPU1+CPU2+CPU3+CPU4);
+        return (GPU1+GPU2+GPU3+GPU4+CPU1+CPU2+CPU3+CPU4)*thresholdPercentage;
     }
 
     @Override

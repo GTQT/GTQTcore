@@ -259,5 +259,10 @@ public class MetaTileEntityBlazingBlastFurnace extends RecipeMapMultiblockContro
 
             }
         }
+
+        public void setMaxProgress(int maxProgress)
+        {
+            this.maxProgressTime = maxProgress/heatingCoilLevel;
+        }
     }
 }
