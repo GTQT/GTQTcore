@@ -14,6 +14,7 @@ import gregtech.client.renderer.texture.Textures;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockPart;
 import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.api.capability.impl.EnergyContainerWireless;
+import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -55,7 +56,7 @@ public class MetaTileEntityWirelessEnergyHatch extends MetaTileEntityMultiblockP
         super.renderMetaTileEntity(renderState, translation, pipeline);
         if (shouldRenderOverlay()) {
             // todo make its own texture
-            Textures.OPTICAL_DATA_ACCESS_HATCH.renderSided(getFrontFacing(), renderState, translation, pipeline);
+            GTQTTextures.WIRELESS_HATCH_HATCH.renderSided(getFrontFacing(), renderState, translation, pipeline);
         }
     }
     @Override

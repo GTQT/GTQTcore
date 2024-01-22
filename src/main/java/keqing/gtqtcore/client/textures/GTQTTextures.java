@@ -12,6 +12,7 @@ import net.minecraft.client.renderer.texture.TextureMap;
 
 
 public class GTQTTextures {
+    public static SimpleOverlayRenderer WIRELESS_HATCH_HATCH;
     public static SimpleOverlayRenderer FISHING_CASING;
     public static OverlayRenderer MULTIPART_BUFFER_HATCH = new OverlayRenderer("multipart/overlay_buffer_hatch");
     public static OrientedOverlayRenderer ROCKET_ENGINE_OVERLAY = new OrientedOverlayRenderer("machines/rocket_engine");
@@ -89,6 +90,7 @@ public class GTQTTextures {
     public static OrientedOverlayRenderer MULTIPART_BALL_HATCH = new OrientedOverlayRenderer("multiparts/overlay_ball_hatch");
 
     public static void init() {
+        WIRELESS_HATCH_HATCH = new SimpleOverlayRenderer("overlay/wireless_hatch/overlay_front");
         FLOTATION_CASING = new SimpleOverlayRenderer("multiblock/isa_casing/flotation_casing");
         ISA_CASING = new SimpleOverlayRenderer("multiblock/isa_casing/isa_mill_casing");
         ASEPTIC_FARM_CASING = new SimpleOverlayRenderer("multiblock/isa_casing/aseptic_farm_machine_casing");
