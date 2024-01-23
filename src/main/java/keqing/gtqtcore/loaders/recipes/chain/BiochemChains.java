@@ -7,7 +7,6 @@ import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.common.items.MetaItems.PLANT_BALL;
 import static gregtech.common.items.MetaItems.STICKY_RESIN;
-import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.CHEMICAL_PLANT;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.PR_MIX;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.Latex;
 import static keqing.gtqtcore.api.unification.TJMaterials.*;

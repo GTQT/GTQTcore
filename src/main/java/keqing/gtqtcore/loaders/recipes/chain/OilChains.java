@@ -15,7 +15,6 @@ import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtechfoodoption.GTFOMaterialHandler.*;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
-import static keqing.gtqtcore.api.unification.TJMaterials.Trichlorosilane;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.electrode;
 
 public class OilChains {

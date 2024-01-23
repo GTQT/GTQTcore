@@ -1,16 +1,11 @@
 package keqing.gtqtcore.loaders.recipes.handlers;
 
-import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
-
 import static gregicality.multiblocks.api.unification.GCYMMaterials.*;
 import static gregicality.science.api.unification.materials.GCYSMaterials.*;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
-import static gregtech.common.blocks.BlockFusionCasing.CasingType.SUPERCONDUCTOR_COIL;
-import static gregtech.common.blocks.MetaBlocks.FUSION_CASING;
 import static gregtech.common.items.MetaItems.*;
-import static gregtech.common.metatileentities.MetaTileEntities.FUSION_REACTOR;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.QUANTUM_FORCE_TRANSFORMER_RECIPES;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.TJMaterials.*;

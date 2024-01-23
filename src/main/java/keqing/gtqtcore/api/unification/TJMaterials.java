@@ -4,7 +4,7 @@ import gregtech.api.unification.Element;
 import gregtech.api.unification.Elements;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.info.MaterialFlag;
-import keqing.gtqtcore.api.unification.materials1.TJFirstDegreeMaterials;
+import keqing.gtqtcore.api.unification.matreials.TJFirstDegreeMaterials;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -1,15 +1,9 @@
-package keqing.gtqtcore.api.unification.materials1;
+package keqing.gtqtcore.api.unification.matreials;
 
-import gregtech.api.fluids.FluidBuilder;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.info.MaterialIconSet;
-import gregtech.api.unification.material.properties.*;
-import keqing.gtqtcore.api.unification.GTQTMaterials;
-import keqing.gtqtcore.api.unification.TJMaterials;
 
 
-import static gregicality.multiblocks.api.unification.GCYMMaterials.TantalumCarbide;
-import static gregicality.science.api.unification.materials.GCYSMaterials.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.info.MaterialFlags.*;
 import static gregtech.api.unification.material.info.MaterialIconSet.DULL;

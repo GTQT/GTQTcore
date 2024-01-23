@@ -38,7 +38,7 @@ public class ComponentAssemblerRecipes {
                 .input(stick, IronMagnetic)
                 .input(wireGtSingle, Copper, 4)
                 .output(ELECTRIC_MOTOR_LV)
-                .EUt(VA[LV])
+                .EUt(VA[ULV])
                 .duration(20)
                 .buildAndRegister();
 
@@ -48,7 +48,7 @@ public class ComponentAssemblerRecipes {
                 .input(stick, SteelMagnetic)
                 .input(wireGtSingle, Copper, 4)
                 .output(ELECTRIC_MOTOR_LV)
-                .EUt(VA[LV])
+                .EUt(VA[ULV])
                 .duration(20)
                 .buildAndRegister();
 
@@ -70,7 +70,7 @@ public class ComponentAssemblerRecipes {
                 .input(stick, SteelMagnetic)
                 .input(wireGtDouble, Electrum, 4)
                 .output(ELECTRIC_MOTOR_HV)
-                .EUt(VA[LV])
+                .EUt(VA[HV])
                 .duration(20)
                 .buildAndRegister();
 
@@ -81,7 +81,7 @@ public class ComponentAssemblerRecipes {
                 .input(stick, NeodymiumMagnetic)
                 .input(wireGtDouble, Kanthal, 4)
                 .output(ELECTRIC_MOTOR_EV)
-                .EUt(VA[LV])
+                .EUt(VA[HV])
                 .duration(20)
                 .buildAndRegister();
 
@@ -92,7 +92,7 @@ public class ComponentAssemblerRecipes {
                 .input(stick, NeodymiumMagnetic)
                 .input(wireGtDouble, Graphene, 4)
                 .output(ELECTRIC_MOTOR_IV)
-                .EUt(VA[LV])
+                .EUt(VA[EV])
                 .duration(20)
                 .buildAndRegister();
     }
@@ -108,7 +108,7 @@ public class ComponentAssemblerRecipes {
                 .input(cylinder, Steel)
                 .input(ELECTRIC_MOTOR_LV)
                 .output(ELECTRIC_PISTON_LV)
-                .EUt(VA[LV])
+                .EUt(VA[ULV])
                 .duration(20)
                 .buildAndRegister();
 
@@ -132,7 +132,7 @@ public class ComponentAssemblerRecipes {
                 .input(cylinder, StainlessSteel)
                 .input(ELECTRIC_MOTOR_HV)
                 .output(ELECTRIC_PISTON_HV)
-                .EUt(VA[LV])
+                .EUt(VA[MV])
                 .duration(20)
                 .buildAndRegister();
 
@@ -144,7 +144,7 @@ public class ComponentAssemblerRecipes {
                 .input(cylinder, Titanium)
                 .input(ELECTRIC_MOTOR_EV)
                 .output(ELECTRIC_PISTON_EV)
-                .EUt(VA[LV])
+                .EUt(VA[HV])
                 .duration(20)
                 .buildAndRegister();
 
@@ -156,21 +156,12 @@ public class ComponentAssemblerRecipes {
                 .input(cylinder, TungstenSteel)
                 .input(ELECTRIC_MOTOR_IV)
                 .output(ELECTRIC_PISTON_IV)
-                .EUt(VA[LV])
+                .EUt(VA[EV])
                 .duration(20)
                 .buildAndRegister();
     }
 
     private static void Conveyor() {
-        //  ULV
-
-
-        for (FluidStack stack : new FluidStack[]{
-                Rubber.getFluid(L * 6),
-                SiliconeRubber.getFluid(L * 6),
-                StyreneButadieneRubber.getFluid(L * 6)}) {
-
-        }
 
         //  LV
         for (FluidStack stack : new FluidStack[]{
@@ -185,7 +176,7 @@ public class ComponentAssemblerRecipes {
                     .circuitMeta(1)
                     .fluidInputs(new FluidStack[]{stack})
                     .output(CONVEYOR_MODULE_LV)
-                    .EUt(VA[LV])
+                    .EUt(VA[ULV])
                     .duration(20)
                     .buildAndRegister();
         }
@@ -221,7 +212,7 @@ public class ComponentAssemblerRecipes {
                     .circuitMeta(1)
                     .fluidInputs(new FluidStack[]{stack})
                     .output(CONVEYOR_MODULE_HV)
-                    .EUt(VA[LV])
+                    .EUt(VA[MV])
                     .duration(20)
                     .buildAndRegister();
         }
@@ -239,7 +230,7 @@ public class ComponentAssemblerRecipes {
                     .circuitMeta(1)
                     .fluidInputs(new FluidStack[]{stack})
                     .output(CONVEYOR_MODULE_EV)
-                    .EUt(VA[LV])
+                    .EUt(VA[HV])
                     .duration(20)
                     .buildAndRegister();
         }
@@ -256,7 +247,7 @@ public class ComponentAssemblerRecipes {
                     .circuitMeta(1)
                     .fluidInputs(new FluidStack[]{stack})
                     .output(CONVEYOR_MODULE_IV)
-                    .EUt(VA[LV])
+                    .EUt(VA[EV])
                     .duration(20)
                     .buildAndRegister();
         }
@@ -276,7 +267,7 @@ public class ComponentAssemblerRecipes {
                 .input(ring, Rubber, 2)
                 .input(ELECTRIC_MOTOR_LV)
                 .output(ELECTRIC_PUMP_LV)
-                .EUt(VA[LV])
+                .EUt(VA[ULV])
                 .duration(20)
                 .buildAndRegister();
 
@@ -288,7 +279,7 @@ public class ComponentAssemblerRecipes {
                 .input(ring, SiliconeRubber, 2)
                 .input(ELECTRIC_MOTOR_LV)
                 .output(ELECTRIC_PUMP_LV)
-                .EUt(VA[LV])
+                .EUt(VA[ULV])
                 .duration(20)
                 .buildAndRegister();
 
@@ -300,7 +291,7 @@ public class ComponentAssemblerRecipes {
                 .input(ring, StyreneButadieneRubber, 2)
                 .input(ELECTRIC_MOTOR_LV)
                 .output(ELECTRIC_PUMP_LV)
-                .EUt(VA[LV])
+                .EUt(VA[ULV])
                 .duration(20)
                 .buildAndRegister();
 
@@ -312,7 +303,7 @@ public class ComponentAssemblerRecipes {
                 .input(ring, NitrileButadieneRubber, 2)
                 .input(ELECTRIC_MOTOR_LV)
                 .output(ELECTRIC_PUMP_LV)
-                .EUt(VA[LV])
+                .EUt(VA[ULV])
                 .duration(20)
                 .buildAndRegister();
 
@@ -324,7 +315,7 @@ public class ComponentAssemblerRecipes {
                 .input(ring, PolyPhosphonitrileFluoroRubber, 2)
                 .input(ELECTRIC_MOTOR_LV)
                 .output(ELECTRIC_PUMP_LV)
-                .EUt(VA[LV])
+                .EUt(VA[ULV])
                 .duration(20)
                 .buildAndRegister();
 
@@ -398,7 +389,7 @@ public class ComponentAssemblerRecipes {
                 .input(ring, Rubber, 2)
                 .input(ELECTRIC_MOTOR_HV)
                 .output(ELECTRIC_PUMP_HV)
-                .EUt(VA[LV])
+                .EUt(VA[MV])
                 .duration(20)
                 .buildAndRegister();
 
@@ -410,7 +401,7 @@ public class ComponentAssemblerRecipes {
                 .input(ring, SiliconeRubber, 2)
                 .input(ELECTRIC_MOTOR_HV)
                 .output(ELECTRIC_PUMP_HV)
-                .EUt(VA[LV])
+                .EUt(VA[MV])
                 .duration(20)
                 .buildAndRegister();
 
@@ -422,7 +413,7 @@ public class ComponentAssemblerRecipes {
                 .input(ring, StyreneButadieneRubber, 2)
                 .input(ELECTRIC_MOTOR_HV)
                 .output(ELECTRIC_PUMP_HV)
-                .EUt(VA[LV])
+                .EUt(VA[MV])
                 .duration(20)
                 .buildAndRegister();
 
@@ -434,7 +425,7 @@ public class ComponentAssemblerRecipes {
                 .input(ring, NitrileButadieneRubber, 2)
                 .input(ELECTRIC_MOTOR_HV)
                 .output(ELECTRIC_PUMP_HV)
-                .EUt(VA[LV])
+                .EUt(VA[MV])
                 .duration(20)
                 .buildAndRegister();
 
@@ -446,7 +437,7 @@ public class ComponentAssemblerRecipes {
                 .input(ring, PolyPhosphonitrileFluoroRubber, 2)
                 .input(ELECTRIC_MOTOR_HV)
                 .output(ELECTRIC_PUMP_HV)
-                .EUt(VA[LV])
+                .EUt(VA[MV])
                 .duration(20)
                 .buildAndRegister();
 
@@ -459,7 +450,7 @@ public class ComponentAssemblerRecipes {
                 .input(ring, Rubber, 2)
                 .input(ELECTRIC_MOTOR_EV)
                 .output(ELECTRIC_PUMP_EV)
-                .EUt(VA[LV])
+                .EUt(VA[HV])
                 .duration(20)
                 .buildAndRegister();
 
@@ -471,7 +462,7 @@ public class ComponentAssemblerRecipes {
                 .input(ring, SiliconeRubber, 2)
                 .input(ELECTRIC_MOTOR_EV)
                 .output(ELECTRIC_PUMP_EV)
-                .EUt(VA[LV])
+                .EUt(VA[HV])
                 .duration(20)
                 .buildAndRegister();
 
@@ -483,7 +474,7 @@ public class ComponentAssemblerRecipes {
                 .input(ring, StyreneButadieneRubber, 2)
                 .input(ELECTRIC_MOTOR_EV)
                 .output(ELECTRIC_PUMP_EV)
-                .EUt(VA[LV])
+                .EUt(VA[HV])
                 .duration(20)
                 .buildAndRegister();
 
@@ -495,7 +486,7 @@ public class ComponentAssemblerRecipes {
                 .input(ring, NitrileButadieneRubber, 2)
                 .input(ELECTRIC_MOTOR_EV)
                 .output(ELECTRIC_PUMP_EV)
-                .EUt(VA[LV])
+                .EUt(VA[HV])
                 .duration(20)
                 .buildAndRegister();
 
@@ -507,7 +498,7 @@ public class ComponentAssemblerRecipes {
                 .input(ring, PolyPhosphonitrileFluoroRubber, 2)
                 .input(ELECTRIC_MOTOR_EV)
                 .output(ELECTRIC_PUMP_EV)
-                .EUt(VA[LV])
+                .EUt(VA[HV])
                 .duration(20)
                 .buildAndRegister();
 
@@ -520,7 +511,7 @@ public class ComponentAssemblerRecipes {
                 .input(ring, SiliconeRubber, 2)
                 .input(ELECTRIC_MOTOR_IV)
                 .output(ELECTRIC_PUMP_IV)
-                .EUt(VA[LV])
+                .EUt(VA[EV])
                 .duration(20)
                 .buildAndRegister();
 
@@ -532,7 +523,7 @@ public class ComponentAssemblerRecipes {
                 .input(ring, StyreneButadieneRubber, 2)
                 .input(ELECTRIC_MOTOR_IV)
                 .output(ELECTRIC_PUMP_IV)
-                .EUt(VA[LV])
+                .EUt(VA[EV])
                 .duration(20)
                 .buildAndRegister();
 
@@ -544,7 +535,7 @@ public class ComponentAssemblerRecipes {
                 .input(ring, NitrileButadieneRubber, 2)
                 .input(ELECTRIC_MOTOR_IV)
                 .output(ELECTRIC_PUMP_IV)
-                .EUt(VA[LV])
+                .EUt(VA[EV])
                 .duration(20)
                 .buildAndRegister();
 
@@ -556,7 +547,7 @@ public class ComponentAssemblerRecipes {
                 .input(ring, PolyPhosphonitrileFluoroRubber, 2)
                 .input(ELECTRIC_MOTOR_IV)
                 .output(ELECTRIC_PUMP_IV)
-                .EUt(VA[LV])
+                .EUt(VA[EV])
                 .duration(20)
                 .buildAndRegister();
     }
@@ -573,7 +564,7 @@ public class ComponentAssemblerRecipes {
                 .input(ELECTRIC_PISTON_LV)
                 .input(circuit, MarkerMaterials.Tier.LV)
                 .output(ROBOT_ARM_LV)
-                .EUt(VA[LV])
+                .EUt(VA[ULV])
                 .duration(20)
                 .buildAndRegister();
 
@@ -597,7 +588,7 @@ public class ComponentAssemblerRecipes {
                 .input(ELECTRIC_PISTON_HV)
                 .input(circuit, MarkerMaterials.Tier.HV)
                 .output(ROBOT_ARM_HV)
-                .EUt(VA[LV])
+                .EUt(VA[MV])
                 .duration(20)
                 .buildAndRegister();
 
@@ -609,7 +600,7 @@ public class ComponentAssemblerRecipes {
                 .input(ELECTRIC_PISTON_EV)
                 .input(circuit, MarkerMaterials.Tier.EV)
                 .output(ROBOT_ARM_EV)
-                .EUt(VA[LV])
+                .EUt(VA[HV])
                 .duration(20)
                 .buildAndRegister();
 
@@ -621,7 +612,7 @@ public class ComponentAssemblerRecipes {
                 .input(ELECTRIC_PISTON_IV)
                 .input(circuit, MarkerMaterials.Tier.IV)
                 .output(ROBOT_ARM_IV)
-                .EUt(VA[LV])
+                .EUt(VA[EV])
                 .duration(20)
                 .buildAndRegister();
     }
@@ -638,7 +629,7 @@ public class ComponentAssemblerRecipes {
                 .input(gem, Quartzite)
                 .circuitMeta(1)
                 .output(EMITTER_LV)
-                .EUt(VA[LV])
+                .EUt(VA[ULV])
                 .duration(20)
                 .buildAndRegister();
 
@@ -662,7 +653,7 @@ public class ComponentAssemblerRecipes {
                 .input(ENDER_EYE)
                 .circuitMeta(1)
                 .output(EMITTER_HV)
-                .EUt(VA[LV])
+                .EUt(VA[MV])
                 .duration(20)
                 .buildAndRegister();
 
@@ -674,7 +665,7 @@ public class ComponentAssemblerRecipes {
                 .input(QUANTUM_EYE)
                 .circuitMeta(1)
                 .output(EMITTER_EV)
-                .EUt(VA[LV])
+                .EUt(VA[HV])
                 .duration(20)
                 .buildAndRegister();
 
@@ -686,7 +677,7 @@ public class ComponentAssemblerRecipes {
                 .input(QUANTUM_STAR)
                 .circuitMeta(1)
                 .output(EMITTER_IV)
-                .EUt(VA[LV])
+                .EUt(VA[EV])
                 .duration(20)
                 .buildAndRegister();
     }
@@ -702,7 +693,7 @@ public class ComponentAssemblerRecipes {
                 .input(circuit, MarkerMaterials.Tier.LV)
                 .input(gem, Quartzite)
                 .output(SENSOR_LV)
-                .EUt(VA[LV])
+                .EUt(VA[ULV])
                 .duration(20)
                 .buildAndRegister();
 
@@ -724,7 +715,7 @@ public class ComponentAssemblerRecipes {
                 .input(circuit, MarkerMaterials.Tier.HV)
                 .input(ENDER_EYE)
                 .output(SENSOR_HV)
-                .EUt(VA[LV])
+                .EUt(VA[MV])
                 .duration(20)
                 .buildAndRegister();
 
@@ -735,7 +726,7 @@ public class ComponentAssemblerRecipes {
                 .input(circuit, MarkerMaterials.Tier.EV)
                 .input(QUANTUM_EYE)
                 .output(SENSOR_EV)
-                .EUt(VA[LV])
+                .EUt(VA[HV])
                 .duration(20)
                 .buildAndRegister();
 
@@ -746,7 +737,7 @@ public class ComponentAssemblerRecipes {
                 .input(circuit, MarkerMaterials.Tier.IV)
                 .input(QUANTUM_STAR)
                 .output(SENSOR_IV)
-                .EUt(VA[LV])
+                .EUt(VA[EV])
                 .duration(20)
                 .buildAndRegister();
     }
@@ -762,7 +753,7 @@ public class ComponentAssemblerRecipes {
                 .input(circuit, MarkerMaterials.Tier.LV, 2)
                 .input(wireGtQuadruple, ManganesePhosphide, 4)
                 .output(FIELD_GENERATOR_LV)
-                .EUt(VA[LV])
+                .EUt(VA[ULV])
                 .duration(20)
                 .buildAndRegister();
 
@@ -784,7 +775,7 @@ public class ComponentAssemblerRecipes {
                 .input(circuit, MarkerMaterials.Tier.HV, 2)
                 .input(wireGtQuadruple, MercuryBariumCalciumCuprate, 4)
                 .output(FIELD_GENERATOR_HV)
-                .EUt(VA[LV])
+                .EUt(VA[MV])
                 .duration(20)
                 .buildAndRegister();
 
@@ -795,7 +786,7 @@ public class ComponentAssemblerRecipes {
                 .input(circuit, MarkerMaterials.Tier.EV, 2)
                 .input(wireGtQuadruple, UraniumTriplatinum, 4)
                 .output(FIELD_GENERATOR_EV)
-                .EUt(VA[LV])
+                .EUt(VA[HV])
                 .duration(20)
                 .buildAndRegister();
 
@@ -806,7 +797,7 @@ public class ComponentAssemblerRecipes {
                 .input(circuit, MarkerMaterials.Tier.IV, 2)
                 .input(wireGtQuadruple, SamariumIronArsenicOxide, 4)
                 .output(FIELD_GENERATOR_IV)
-                .EUt(VA[LV])
+                .EUt(VA[EV])
                 .duration(20)
                 .buildAndRegister();
     }

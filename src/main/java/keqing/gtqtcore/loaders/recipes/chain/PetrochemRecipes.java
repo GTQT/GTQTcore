@@ -8,21 +8,9 @@ import static gregtech.api.unification.ore.OrePrefix.*;
 import static keqing.gtqtcore.api.unification.TJMaterials.*;
 
 import gregtech.api.recipes.GTRecipeHandler;
-import gregtech.api.recipes.ModHandler;
-import gregtech.api.unification.stack.UnificationEntry;
-import gregtech.common.blocks.MetaBlocks;
-import gregtech.common.metatileentities.MetaTileEntities;
 
 import static gregicality.science.api.recipes.GCYSRecipeMaps.*;
-import static gregicality.science.api.unification.materials.GCYSMaterials.*;
-import static gregtech.api.GTValues.*;
-import static gregtech.api.recipes.RecipeMaps.*;
-import static gregtech.api.unification.material.Materials.*;
-import static gregtech.api.unification.ore.OrePrefix.*;
-import static gregtech.common.blocks.BlockWireCoil.CoilType.CUPRONICKEL;
 import static gregtech.common.items.MetaItems.*;
-import static gregtech.common.metatileentities.MetaTileEntities.CRACKER;
-import static gregtech.common.metatileentities.MetaTileEntities.DISTILLATION_TOWER;
 
 
 public class PetrochemRecipes {

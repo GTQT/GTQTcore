@@ -6,13 +6,20 @@
   "minVersion": "0.8.3",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "gregtech.MixinSolarBoilerServer",
+    "gregtech.MixinSteamBoilerAccess",
     "multiblocks.mixinGCYMRecipeMapMultiblockController",
     "multiblocks.mixinGCYMMultiblockRecipeLogic",
+    "gregtech.MixinSimpleGeneratorMetaTileEntity",
+    "gregtech.MixinWorkableTieredMetaTileEntity",
     "gregtech.MixinGlassCasingType",
     "gregtech.MixinMetaTileEntityFluidHatch",
     "gregtech.MixinMetaTileEntityItemBus",
     "gregtech.MixinMetaItemClient"
   ],
   "server": [],
-  "client": ["gregtech.MixinBlockGlassCasing"]
+  "client": [
+    "gregtech.MixinSolarBoilerClient",
+    "gregtech.MixinBlockGlassCasing"
+  ]
 }

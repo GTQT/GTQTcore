@@ -19,8 +19,8 @@ public class RocketEngineRecipes {
         //  Rocket Fuel
         ROCKET.recipeBuilder()
                 .fluidInputs(RocketFuel.getFluid(16))
-                .EUt(2048)
-                .duration(20)
+                .EUt(32)
+                .duration(20*64)
                 .buildAndRegister();
 
         //  RP-1 Rocket Fuel
@@ -28,7 +28,7 @@ public class RocketEngineRecipes {
                 .fluidInputs(CoalTar.getFluid(50))
                 .circuitMeta(0)
                 .fluidOutputs(HighlyPurifiedCoalTar.getFluid(25))
-                .EUt(VA[MV])
+                .EUt(128)
                 .duration(16)
                 .buildAndRegister();
 
@@ -42,8 +42,8 @@ public class RocketEngineRecipes {
 
         ROCKET.recipeBuilder()
                 .fluidInputs(RP1RocketFuel.getFluid(12))
-                .EUt(2048)
-                .duration(60)
+                .EUt(32)
+                .duration(60*64)
                 .buildAndRegister();
 
         //  Dense Hydrazine Mixture Fuel
@@ -57,8 +57,8 @@ public class RocketEngineRecipes {
 
         ROCKET.recipeBuilder()
                 .fluidInputs(DenseHydrazineMixtureFuel.getFluid(9))
-                .EUt(2048)
-                .duration(80)
+                .EUt(32)
+                .duration(80*64)
                 .buildAndRegister();
 
         SOLAR_PLATE.recipeBuilder()
@@ -87,8 +87,8 @@ public class RocketEngineRecipes {
 
         ROCKET.recipeBuilder()
                 .fluidInputs(MethylhydrazineNitrateRocketFuel.getFluid(6))
-                .EUt(2048)
-                .duration(120)
+                .EUt(32)
+                .duration(120*64)
                 .buildAndRegister();
 
     }

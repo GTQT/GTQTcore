@@ -1,12 +1,6 @@
 package keqing.gtqtcore.loaders.recipes.chain;
-import gregtech.api.GTValues;
 import gregicality.science.api.recipes.GCYSRecipeMaps;
 import gregtech.api.metatileentity.multiblock.CleanroomType;
-import gregtech.api.recipes.RecipeMap;
-import gregtech.api.recipes.RecipeMaps;
-import gregtech.api.unification.material.MarkerMaterials;
-import gregtech.api.unification.ore.OrePrefix;
-import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.items.MetaItems;
 import gregtech.api.unification.material.MarkerMaterials.Color;
 import static gregicality.science.api.unification.materials.GCYSMaterials.*;
@@ -16,7 +10,6 @@ import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.common.items.MetaItems.*;
 
-import static gregtechfoodoption.GTFOMaterialHandler.*;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.TJMaterials.*;
@@ -179,34 +172,26 @@ public class CPULine {
                 .input(NEUTRONIUM_WAFER).output(HIGHLY_ADVANCED_SOC_WAFER,1)
                 .totalCWU(614400).CWUt(512).fluidInputs(Zrbtmst.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
 
-        //test
-        STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[IV])
-                .Laser(500)
-                .input(dust,Iron)
-                .output(HIGHLY_ADVANCED_SOC_WAFER,1)
-                .totalCWU(614400).CWUt(20)
-                .fluidInputs(Zrbtmst.getFluid(1000))
-                .cleanroom(CleanroomType.CLEANROOM)
-                .buildAndRegister();
 
-        //???
-        STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[MV])
+        //cpu
+        STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[EV])
                 .notConsumable(RETICLE_NANO_CENTRAL_PROCESSING_UNIT)
                 .input(SILICON_WAFER)
                 .output(NANO_CENTRAL_PROCESSING_UNIT_WAFER)
-                .totalCWU(9600).CWUt(8)
+                .totalCWU(153600).CWUt(128)
                 .fluidInputs(Water.getFluid(10000))
                 .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
 
-        STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[MV])
+        STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[EV])
                 .notConsumable(RETICLE_QBIT_CENTRAL_PROCESSING_UNIT)
                 .input(SILICON_WAFER)
                 .output(QUBIT_CENTRAL_PROCESSING_UNIT_WAFER)
-                .totalCWU(9600).CWUt(8)
+                .totalCWU(153600).CWUt(128)
                 .fluidInputs(Water.getFluid(10000))
                 .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
 
-        STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[MV])
+        //pic
+        STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[IV])
                 .notConsumable(RETICLE_ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT)
                 .input(SILICON_WAFER)
                 .output(ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT_WAFER)
@@ -214,7 +199,7 @@ public class CPULine {
                 .fluidInputs(Water.getFluid(10000))
                 .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
 
-        STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[MV])
+        STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[LuV])
                 .notConsumable(RETICLE_HIGH_POWER_INTEGRATED_CIRCUIT)
                 .input(SILICON_WAFER)
                 .output(HIGH_POWER_INTEGRATED_CIRCUIT_WAFER)
@@ -222,6 +207,7 @@ public class CPULine {
                 .fluidInputs(Water.getFluid(10000))
                 .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
 
+        //gcys pic
 
     }
 

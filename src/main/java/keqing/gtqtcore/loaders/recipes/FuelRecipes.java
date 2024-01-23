@@ -140,64 +140,64 @@ public class FuelRecipes {
                 //  Heavy Naquadah Fuel
                 NAQUADAH_REACTOR_RECIPES.recipeBuilder()
                         .fluidInputs(HeavyNaquadahFuel.getFluid(1))
-                        .EUt(2048)
-                        .duration(180)
+                        .EUt(32)
+                        .duration(180*65)
                         .buildAndRegister();
 
                 //  Medium Naquadah Fuel
                 NAQUADAH_REACTOR_RECIPES.recipeBuilder()
                         .fluidInputs(MediumNaquadahFuel.getFluid(1))
-                        .EUt(2048)
-                        .duration(120)
+                        .EUt(32)
+                        .duration(120*64)
                         .buildAndRegister();
 
                 //  Light Naquadah Fuel
                 NAQUADAH_REACTOR_RECIPES.recipeBuilder()
                         .fluidInputs(LightNaquadahFuel.getFluid(1))
-                        .EUt(2048)
-                        .duration(60)
+                        .EUt(32)
+                        .duration(60*64)
                         .buildAndRegister();
 
                 //  Heavy Taranium Fuel
                 NAQUADAH_REACTOR_RECIPES.recipeBuilder()
                         .fluidInputs(HeavyTaraniumFuel.getFluid(1))
-                        .EUt(4096)
-                        .duration(360)
+                        .EUt(32)
+                        .duration(360*128)
                         .buildAndRegister();
 
                 //  Medium Taranium Fuel
                 NAQUADAH_REACTOR_RECIPES.recipeBuilder()
                         .fluidInputs(MediumTaraniumFuel.getFluid(1))
-                        .EUt(4096)
-                        .duration(240)
+                        .EUt(32)
+                        .duration(240*128)
                         .buildAndRegister();
 
                 //  Light Taranium Fuel
                 NAQUADAH_REACTOR_RECIPES.recipeBuilder()
                         .fluidInputs(LightTaraniumFuel.getFluid(1))
-                        .EUt(4096)
-                        .duration(120)
+                        .EUt(32)
+                        .duration(120*128)
                         .buildAndRegister();
 
                 //  Heavy Enriched Taranium Fuel
                 NAQUADAH_REACTOR_RECIPES.recipeBuilder()
                         .fluidInputs(HeavyEnrichedTaraniumFuel.getFluid(1))
-                        .EUt(8192)
-                        .duration(720)
+                        .EUt(32)
+                        .duration(720*256)
                         .buildAndRegister();
 
                 //  Medium Enriched Taranium Fuel
                 NAQUADAH_REACTOR_RECIPES.recipeBuilder()
                         .fluidInputs(MediumEnrichedTaraniumFuel.getFluid(1))
-                        .EUt(8192)
-                        .duration(480)
+                        .EUt(32)
+                        .duration(480*256)
                         .buildAndRegister();
 
                 //  Light Enriched Taranium Fuel
                 NAQUADAH_REACTOR_RECIPES.recipeBuilder()
                         .fluidInputs(LightEnrichedTaraniumFuel.getFluid(1))
-                        .EUt(8192)
-                        .duration(240)
+                        .EUt(32)
+                        .duration(240*256)
                         .buildAndRegister();
 
                 FUEL_REFINE_FACTORY_RECIPES.recipeBuilder()

@@ -1039,3 +1039,6 @@ gregica.gui.channel_join=加入
 gregica.gui.channel_delete=删除
 gregica.gui.cancel=取消
 gregica.gui.confirm=确认
+gregica.mixin.nerf.steam.solar.detail=§c工作超过1天后,输出将会在10天内线性减小到1/3
+gregtech.generator.1=§b发电效率：%d
+gregica.mixin.info.steam=当前蒸汽输出: %d l/s

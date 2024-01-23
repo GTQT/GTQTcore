@@ -1,6 +1,5 @@
 package keqing.gtqtcore.loaders.recipes;
 
-import gregtech.api.recipes.GTRecipeHandler;
 import gregtech.api.recipes.ModHandler;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.OreDictUnifier;
@@ -12,7 +11,6 @@ import gregtech.api.unification.stack.ItemMaterialInfo;
 import gregtech.api.unification.stack.MaterialStack;
 import gregtech.api.unification.stack.UnificationEntry;
 import gregtech.common.blocks.BlockMachineCasing;
-import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.items.MetaItems;
 import gregtech.common.metatileentities.MetaTileEntities;
 import gregtech.core.unification.material.internal.MaterialRegistryManager;
@@ -38,7 +36,6 @@ import static gregtech.loaders.recipe.CraftingComponent.*;
 import static gregtech.loaders.recipe.MetaTileEntityLoader.registerMachineRecipe;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.Infinity;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.GalvanizedSteel;
-import static keqing.gtqtcore.api.unification.TJMaterials.HDCS_1;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.plate_curved;
 
 public class MetaTileEntityMachine {
@@ -159,39 +156,56 @@ public class MetaTileEntityMachine {
         ModHandler.removeRecipeByName("gregtech:gregtech.machine.hull.zpm");
         ModHandler.removeRecipeByName("gregtech:gregtech.machine.hull.uv");
         ModHandler.removeRecipeByName("gregtech:gregtech.machine.hull.uhv");
-        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(25).EUt(16)
+
+        //ulv
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(25).EUt(15)
                 .inputs(MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.ULV))
                 .input(plate, Materials.RedAlloy, 2)
                 .input(OrePrefix.cableGtSingle, Materials.Lead, 2)
-                .fluidInputs(Materials.Polyethylene.getFluid(L * 2)).outputs(MetaTileEntities.HULL[0].getStackForm())
+                .fluidInputs(Glue.getFluid(L * 2)).outputs(MetaTileEntities.HULL[0].getStackForm())
                 .buildAndRegister();
-        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(50).EUt(16)
+
+        //lv
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(50).EUt(60)
                 .inputs(MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.LV))
                 .input(plate, GalvanizedSteel, 2)
-                .input(OrePrefix.cableGtSingle, Materials.Tin, 2).fluidInputs(Materials.Polyethylene.getFluid(L * 2))
+                .input(OrePrefix.cableGtSingle, Materials.Tin, 2)
+                .fluidInputs(Rubber.getFluid(L * 2))
                 .outputs(MetaTileEntities.HULL[1].getStackForm()).buildAndRegister();
-        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(50).EUt(16)
+
+        //mv
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(50).EUt(240)
                 .inputs(MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.MV))
-                .input(MetaItems.CARBON_FIBER_PLATE, 2)
-                .input(OrePrefix.cableGtSingle, Materials.Copper, 2).fluidInputs(Materials.Polyethylene.getFluid(L * 2))
+                .input(plate,Invar, 2)
+                .input(OrePrefix.cableGtSingle, Materials.Copper, 2)
+                .fluidInputs(Materials.Polyethylene.getFluid(L * 2))
                 .outputs(MetaTileEntities.HULL[2].getStackForm()).buildAndRegister();
-        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(50).EUt(16)
+
+        //hv
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(50).EUt(960)
                 .inputs(MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.HV))
                 .input(plate, Ultimet, 2)
-                .input(OrePrefix.cableGtSingle, Materials.Aluminium, 2).fluidInputs(Materials.Polyethylene.getFluid(L * 2))
+                .input(OrePrefix.cableGtSingle, Materials.Aluminium, 2)
+                .fluidInputs(Materials.Epoxy.getFluid(L * 2))
                 .outputs(MetaTileEntities.HULL[3].getStackForm()).buildAndRegister();
-        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(50).EUt(16)
+
+        //ev
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(50).EUt(3860)
                 .inputs(MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.EV))
                 .input(plate, Palladium, 2)
                 .input(OrePrefix.cableGtSingle, Materials.Aluminium, 2)
-                .fluidInputs(Materials.Polyethylene.getFluid(L * 2)).outputs(MetaTileEntities.HULL[4].getStackForm())
+                .fluidInputs(Materials.Polytetrafluoroethylene.getFluid(L * 2)).outputs(MetaTileEntities.HULL[4].getStackForm())
                 .buildAndRegister();
-        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(50).EUt(16)
+
+        //iv
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(50).EUt(15440)
                 .inputs(MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.IV))
                 .input(plate, Iridium, 2)
                 .input(OrePrefix.cableGtSingle, Materials.Platinum, 2)
-                .fluidInputs(Polytetrafluoroethylene.getFluid(L * 2)).outputs(MetaTileEntities.HULL[5].getStackForm())
+                .fluidInputs(Polybenzimidazole.getFluid(L * 2)).outputs(MetaTileEntities.HULL[5].getStackForm())
                 .buildAndRegister();
+
+        //待定
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(50).EUt(16)
                 .inputs(MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.LuV))
                 .input(plate, HSSS, 2)

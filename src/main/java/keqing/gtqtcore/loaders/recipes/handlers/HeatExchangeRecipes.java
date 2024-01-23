@@ -21,5 +21,28 @@ public class HeatExchangeRecipes {
                 .flowRate(1000)
                 .duration(1)
                 .buildAndRegister();
+
+        HEAT_EXCHANGE_RECIPES.recipeBuilder()
+                .fluidInputs(DistilledWater.getFluid(10))
+                .fluidInputs(SuperheatedSteam.getFluid(20))
+                .fluidOutputs(Steam.getFluid(160 * 10))
+                .fluidOutputs(Steam.getFluid(80 * 10))
+                .fluidOutputs(SteamExhaustGas.getFluid(20))
+                .maxRate(3200)
+                .flowRate(1000)
+                .duration(1)
+                .buildAndRegister();
+
+        HEAT_EXCHANGE_RECIPES.recipeBuilder()
+                .fluidInputs(DistilledWater.getFluid(10))
+                .fluidInputs(SteamExhaustGas.getFluid(200))
+                .fluidOutputs(Steam.getFluid(160 * 10))
+                .fluidOutputs(Steam.getFluid(80 * 10))
+                .fluidOutputs(Steam.getFluid(20))
+                .maxRate(3200)
+                .flowRate(1000)
+                .duration(1)
+                .buildAndRegister();
+
     }
 }
