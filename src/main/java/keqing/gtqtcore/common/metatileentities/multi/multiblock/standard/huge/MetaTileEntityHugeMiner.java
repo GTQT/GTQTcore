@@ -1,4 +1,4 @@
-package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
+package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.huge;
 
 import codechicken.lib.raytracer.CuboidRayTraceResult;
 import codechicken.lib.render.CCRenderState;
@@ -29,7 +29,6 @@ import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.pattern.TraceabilityPredicate;
 import gregtech.api.recipes.RecipeMaps;
-import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.RelativeDirection;
@@ -41,8 +40,6 @@ import gregtech.client.shader.postprocessing.BloomEffect;
 import gregtech.client.shader.postprocessing.BloomType;
 import gregtech.client.utils.*;
 import gregtech.common.ConfigHolder;
-import gregtech.common.blocks.BlockMetalCasing;
-import gregtech.common.blocks.MetaBlocks;
 import gregtech.core.sound.GTSoundEvents;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;

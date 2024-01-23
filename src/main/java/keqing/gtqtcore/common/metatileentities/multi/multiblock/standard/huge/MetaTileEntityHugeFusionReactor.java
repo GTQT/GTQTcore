@@ -1,4 +1,4 @@
-package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
+package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.huge;
 
 import com.google.common.collect.Lists;
 import com.google.common.util.concurrent.AtomicDouble;

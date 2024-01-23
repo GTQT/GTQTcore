@@ -741,6 +741,7 @@ tile.quantum_force_transformer_casing.supracausal_continuum_shielding_core_casin
 tile.quantum_force_transformer_casing.supracausal_continuum_shielding_core_casing.tooltip=§b量子操纵者§7-屏蔽核心等级：§cIV§7
 tile.quantum_force_transformer_casing.quantum_force_transformer_coil.name=超维度转换线圈方块
 
+gtqt.tooltip.update=本多方块支持机械外壳升级，外壳等级如下（青铜机械方块，脱氧钢机械方块，铝制防冻机械方块，洁净不锈钢机械方块，加强钛机械方块，加强钨钢机械方块，镀铑钯机械方块，硅岩合金机械方块，山铜机械方块，精金机械方块），外壳每升级一次，均拥有不同的增益效果，详情查询多方块自己的介绍。
 tile.multiblock_casing.adv_machine_tech.name=智能机器外壳
 tile.multiblock_casing.adv_machine_basic.name=智能基础外壳
 tile.multiblock_casing.adv_machine_dimensional_cover_blue.name=先进维度覆盖器（B型）

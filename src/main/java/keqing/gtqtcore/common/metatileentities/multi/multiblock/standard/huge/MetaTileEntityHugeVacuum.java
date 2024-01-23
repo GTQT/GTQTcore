@@ -1,4 +1,4 @@
-package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
+package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.huge;
 
 import gregtech.api.block.IHeatingCoilBlockStats;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
@@ -17,7 +17,6 @@ import gregtech.client.utils.TooltipHelper;
 import gregtech.common.blocks.BlockMetalCasing.MetalCasingType;
 import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.blocks.MetaBlocks;
-import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiFluidHatch;
 import gregtech.core.sound.GTSoundEvents;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
@@ -36,16 +35,16 @@ import java.util.List;
 
 import static gregtech.api.util.RelativeDirection.*;
 
-public class MetaTileEntityHugeDistillationTower extends RecipeMapMultiblockController {
+public class MetaTileEntityHugeVacuum extends RecipeMapMultiblockController {
 
     protected int heatingCoilLevel;
     protected int heatingCoilDiscount;
-    public MetaTileEntityHugeDistillationTower(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, RecipeMaps.DISTILLATION_RECIPES);
-        this.recipeMapWorkable = new MetaTileEntityHugeDistillationTower.MetaTileEntityHugeDistillationTowerWorkable(this);
+    public MetaTileEntityHugeVacuum(ResourceLocation metaTileEntityId) {
+        super(metaTileEntityId, RecipeMaps.VACUUM_RECIPES);
+        this.recipeMapWorkable = new MetaTileEntityHugeVacuum.MetaTileEntityHugeVaccumWorkable(this);
     }
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity metaTileEntityHolder) {
-        return new MetaTileEntityHugeDistillationTower(this.metaTileEntityId);
+        return new MetaTileEntityHugeVacuum(this.metaTileEntityId);
     }
 
     @Override
@@ -58,9 +57,9 @@ public class MetaTileEntityHugeDistillationTower extends RecipeMapMultiblockCont
     @Override
     public void addInformation(ItemStack stack, @Nullable World player, @Nonnull List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
-        tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.2", 256));
+        tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.2", 384));
         tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.1"));
-        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("你们不能在一起", new Object[0]));
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("极度冰寒", new Object[0]));
     }
 
     @Override
@@ -104,15 +103,12 @@ public class MetaTileEntityHugeDistillationTower extends RecipeMapMultiblockCont
                 .aisle("MMMMMMMMMMMMMMM","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","MMMMMMMMMMMMMMM")
                 .where('S', selfPredicate())
                 .where('M', states(getCasingState())
-                        .or(abilities(MultiblockAbility.EXPORT_ITEMS).setMaxGlobalLimited(4).setPreviewCount(1))
-                        .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setMaxGlobalLimited(8).setPreviewCount(1))
-                        .or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(3))
-                )
+                        .or(abilities(MultiblockAbility.EXPORT_FLUIDS).setMinGlobalLimited(1).setPreviewCount(1))
+                        .or(abilities(MultiblockAbility.EXPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1))
+                        .or(abilities(MultiblockAbility.IMPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1))
+                        .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setMinGlobalLimited(1).setPreviewCount(1))
+                        .or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(2).setPreviewCount(1)))
                 .where('A', states(getCasingState())
-                        .or(metaTileEntities(MultiblockAbility.REGISTRY.get(MultiblockAbility.EXPORT_FLUIDS).stream()
-                                .filter(mte->!(mte instanceof MetaTileEntityMultiFluidHatch))
-                                .toArray(MetaTileEntity[]::new))
-                                .setMinLayerLimited(1).setMaxLayerLimited(1))
                         .or(autoAbilities(true, false)))
                 .where(' ', air())
                 .where('B', heatingCoils())
@@ -127,11 +123,11 @@ public class MetaTileEntityHugeDistillationTower extends RecipeMapMultiblockCont
     @SideOnly(Side.CLIENT)
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
-        return Textures.CLEAN_STAINLESS_STEEL_CASING;
+        return Textures.FROST_PROOF_CASING;
     }
 
     protected IBlockState getCasingState() {
-        return MetaBlocks.METAL_CASING.getState(MetalCasingType.STAINLESS_CLEAN);
+        return MetaBlocks.METAL_CASING.getState(MetalCasingType.ALUMINIUM_FROSTPROOF);
     }
 
     @Override
@@ -143,7 +139,7 @@ public class MetaTileEntityHugeDistillationTower extends RecipeMapMultiblockCont
     @Nonnull
     @Override
     protected ICubeRenderer getFrontOverlay() {
-        return Textures.DISTILLATION_TOWER_OVERLAY;
+        return Textures.VACUUM_FREEZER_OVERLAY;
     }
 
     @Override
@@ -154,11 +150,10 @@ public class MetaTileEntityHugeDistillationTower extends RecipeMapMultiblockCont
     public static int getMaxParallel(int heatingCoilLevel) {
         return  16 * heatingCoilLevel;
     }
-    protected class MetaTileEntityHugeDistillationTowerWorkable extends MultiblockRecipeLogic {
+    protected class MetaTileEntityHugeVaccumWorkable extends MultiblockRecipeLogic {
 
-        public MetaTileEntityHugeDistillationTowerWorkable(RecipeMapMultiblockController tileEntity) {
+        public MetaTileEntityHugeVaccumWorkable(RecipeMapMultiblockController tileEntity) {
             super(tileEntity);
-
         }
         @Override
         public int getParallelLimit() {

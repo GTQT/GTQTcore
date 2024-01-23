@@ -1,10 +1,9 @@
-package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
+package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.huge;
 
 import gregicality.multiblocks.api.recipes.GCYMRecipeMaps;
 import gregicality.multiblocks.api.render.GCYMTextures;
 import gregicality.multiblocks.common.block.GCYMMetaBlocks;
 import gregicality.multiblocks.common.block.blocks.BlockLargeMultiblockCasing;
-import gregtech.api.GTValues;
 import gregtech.api.block.IHeatingCoilBlockStats;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
@@ -16,12 +15,10 @@ import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.recipeproperties.IRecipePropertyStorage;
-import gregtech.api.util.GTUtility;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
 import gregtech.client.utils.TooltipHelper;
 import gregtech.common.blocks.BlockFusionCasing;
-import gregtech.common.blocks.BlockGlassCasing;
 import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.core.sound.GTSoundEvents;
@@ -42,6 +39,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
+
+import static gregtech.api.GTValues.VA;
 
 public class MetaTileEntityHugeAlloyBlastSmelter extends RecipeMapMultiblockController {
 
@@ -406,7 +405,7 @@ public class MetaTileEntityHugeAlloyBlastSmelter extends RecipeMapMultiblockCont
      * @return the max parallel for the heating coil level
      */
     public static int getMaxParallel(int heatingCoilLevel) {
-        return 16 * heatingCoilLevel;
+        return VA[heatingCoilLevel];
     }
 
     @Override

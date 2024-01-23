@@ -1,4 +1,4 @@
-package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
+package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.kqcc;
 
 import gregtech.api.GTValues;
 import gregtech.api.capability.IOpticalComputationHatch;
@@ -188,7 +188,10 @@ public class MetaTileEntityKQNetworkSwitch extends MetaTileEntityDataBank implem
             }
         }
     }
-
+    @Override
+    public String[] getDescription() {
+        return new String[]{I18n.format("gtqt.tooltip.update")};
+    }
     @SideOnly(Side.CLIENT)
     @Override
     protected  ICubeRenderer getFrontOverlay() {

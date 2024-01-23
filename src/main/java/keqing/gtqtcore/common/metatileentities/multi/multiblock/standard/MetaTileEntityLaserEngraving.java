@@ -28,6 +28,7 @@ import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
@@ -126,6 +127,10 @@ public class MetaTileEntityLaserEngraving extends MultiMapMultiblockController i
                 return Textures.BRONZE_PLATED_BRICKS;
             }
         }
+    }
+    @Override
+    public String[] getDescription() {
+        return new String[]{I18n.format("gtqt.tooltip.update")};
     }
     public IOpticalComputationProvider getComputationProvider() {
         return this.computationProvider;

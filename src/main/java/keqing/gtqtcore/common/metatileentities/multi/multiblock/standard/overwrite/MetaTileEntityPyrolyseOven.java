@@ -1,4 +1,4 @@
-package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
+package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.overwrite;
 
 import gregtech.api.block.IHeatingCoilBlockStats;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
@@ -116,7 +116,10 @@ public class MetaTileEntityPyrolyseOven extends RecipeMapMultiblockController {
             }
         }
     }
-
+    @Override
+    public String[] getDescription() {
+        return new String[]{I18n.format("gtqt.tooltip.update")};
+    }
     protected IBlockState getCasingState() {
         return MetaBlocks.MACHINE_CASING.getState(MachineCasingType.ULV);
     }

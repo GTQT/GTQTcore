@@ -1,4 +1,4 @@
-package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
+package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.huge;
 
 import gregicality.multiblocks.api.render.GCYMTextures;
 import gregtech.api.block.IHeatingCoilBlockStats;

@@ -1,4 +1,4 @@
-package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
+package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.huge;
 
 import gregicality.science.common.block.GCYSMetaBlocks;
 import gregicality.science.common.block.blocks.BlockGCYSMultiblockCasing;
@@ -24,7 +24,10 @@ import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.core.sound.GTSoundEvents;
+import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.metaileentity.GTQTRecipeMapMultiblockController;
+import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
+import keqing.gtqtcore.api.utils.GTQTUtil;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -40,9 +43,12 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
+import static gregtech.api.GTValues.VA;
+
 public class MetaTileEntityHugeChemicalReactor extends GTQTRecipeMapMultiblockController {
     protected int heatingCoilLevel;
     protected int heatingCoilDiscount;
+    private int glass_tier;
     public MetaTileEntityHugeChemicalReactor(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[] {
                 RecipeMaps.CHEMICAL_RECIPES,
@@ -73,6 +79,7 @@ public class MetaTileEntityHugeChemicalReactor extends GTQTRecipeMapMultiblockCo
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
         Object coilType = context.get("CoilType");
+        Object glass_tier = context.get("LGLTiredStats");
         if (coilType instanceof IHeatingCoilBlockStats) {
             this.heatingCoilLevel = ((IHeatingCoilBlockStats) coilType).getLevel();
             this.heatingCoilDiscount = ((IHeatingCoilBlockStats) coilType).getEnergyDiscount();
@@ -80,6 +87,9 @@ public class MetaTileEntityHugeChemicalReactor extends GTQTRecipeMapMultiblockCo
             this.heatingCoilLevel = BlockWireCoil.CoilType.CUPRONICKEL.getLevel();
             this.heatingCoilDiscount = BlockWireCoil.CoilType.CUPRONICKEL.getEnergyDiscount();
         }
+        this.glass_tier = GTQTUtil.getOrDefault(() -> glass_tier instanceof WrappedIntTired,
+                () -> ((WrappedIntTired)glass_tier).getIntTier(),
+                0);
     }
 
     @Override
@@ -113,7 +123,7 @@ public class MetaTileEntityHugeChemicalReactor extends GTQTRecipeMapMultiblockCo
                 .where('M', abilities(MultiblockAbility.MUFFLER_HATCH))
                 .where('A', states(this.getSecondCasingState()))
                 .where('B', states(this.getPipeCasingState()))
-                .where('G', states(this.getGlassState()))
+                .where('G', TiredTraceabilityPredicate.CP_LGLASS)
                 .build();
     }
     private IBlockState getCasingState() {
@@ -151,13 +161,15 @@ public class MetaTileEntityHugeChemicalReactor extends GTQTRecipeMapMultiblockCo
     }
 
     public static int getMaxParallel(int heatingCoilLevel) {
-        return  16 * heatingCoilLevel;
+        return  VA[heatingCoilLevel];
     }
     protected class MetaTileEntityHugeChemicalReactorWorkable extends MultiblockRecipeLogic {
+        public void setMaxProgress(int maxProgress) {
+            this.maxProgressTime = maxProgress*(100-glass_tier*5)/100;
 
+        }
         public MetaTileEntityHugeChemicalReactorWorkable(RecipeMapMultiblockController tileEntity) {
             super(tileEntity);
-
         }
         @Override
         public int getParallelLimit() {

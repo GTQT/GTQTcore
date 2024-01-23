@@ -1,4 +1,4 @@
-package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
+package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.star;
 
 import gregtech.api.block.IHeatingCoilBlockStats;
 import gregtech.api.capability.IMultipleTankHandler;

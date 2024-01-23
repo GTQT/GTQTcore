@@ -184,6 +184,10 @@ public class MetaTileEntityChemicalPlant extends RecipeMapMultiblockController {
         }
     }
     @Override
+    public String[] getDescription() {
+        return new String[]{I18n.format("gtqt.tooltip.update")};
+    }
+    @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
         Object coilType = context.get("CoilType");

@@ -1,4 +1,4 @@
-package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
+package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.kqcc;
 
 import gregtech.api.GTValues;
 import gregtech.api.capability.*;

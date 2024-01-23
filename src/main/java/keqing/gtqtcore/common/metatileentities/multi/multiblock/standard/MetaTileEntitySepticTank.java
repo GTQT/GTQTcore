@@ -188,7 +188,10 @@ public class MetaTileEntitySepticTank extends GTQTRecipeMapMultiblockController 
             }
         }
     }
-
+    @Override
+    public String[] getDescription() {
+        return new String[]{I18n.format("gtqt.tooltip.update")};
+    }
     @Override
     public void addInformation(ItemStack stack,  World world,  List<String> tooltip,
                                boolean advanced) {

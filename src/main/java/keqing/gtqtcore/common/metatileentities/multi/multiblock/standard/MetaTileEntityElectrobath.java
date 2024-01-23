@@ -215,6 +215,10 @@ public class MetaTileEntityElectrobath extends RecipeMapMultiblockController {
         }
     }
     @Override
+    public String[] getDescription() {
+        return new String[]{I18n.format("gtqt.tooltip.update")};
+    }
+    @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
         Object eleTier = context.get("EleTiredStats");
