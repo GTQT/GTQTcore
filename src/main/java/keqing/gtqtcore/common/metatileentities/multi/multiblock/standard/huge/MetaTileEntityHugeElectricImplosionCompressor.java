@@ -12,13 +12,19 @@ import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
+import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMaps;
+import gregtech.api.recipes.ingredients.GTRecipeItemInput;
+import gregtech.api.recipes.recipeproperties.ImplosionExplosiveProperty;
 import gregtech.api.unification.material.Materials;
+import gregtech.api.util.ValidationResult;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
 import gregtech.client.utils.TooltipHelper;
 import gregtech.common.blocks.*;
+import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
+import keqing.gtqtcore.api.recipes.properties.PCBPartProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -37,7 +43,7 @@ public class MetaTileEntityHugeElectricImplosionCompressor extends RecipeMapMult
     protected int heatingCoilDiscount;
     protected int number;
     public MetaTileEntityHugeElectricImplosionCompressor(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId,RecipeMaps.IMPLOSION_RECIPES);
+        super(metaTileEntityId, GTQTcoreRecipeMaps.HUGE_IMPLOSION_RECIPES);
         this.recipeMapWorkable = new MetaTileEntityHugeElectricImplosionCompressorWorkable(this);
     }
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity metaTileEntityHolder) {
@@ -98,6 +104,8 @@ public class MetaTileEntityHugeElectricImplosionCompressor extends RecipeMapMult
                 .where('M', abilities(MultiblockAbility.MUFFLER_HATCH))
                 .build();
     }
+
+
 
     private static IBlockState getCasingState() {
         return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.TUNGSTENSTEEL_ROBUST);

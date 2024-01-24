@@ -13,6 +13,7 @@ import keqing.gtqtcore.api.capability.impl.NoEnergyMultiblockRecipeLogic;
 import keqing.gtqtcore.api.recipes.builder.*;
 import keqing.gtqtcore.api.recipes.machine.*;
 import keqing.gtqtcore.loaders.recipes.handlers.ELE;
+import net.minecraft.init.SoundEvents;
 
 
 //怎么写请看
@@ -82,6 +83,7 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<ComputationRecipeBuilder> TD_PRINT_RECIPES;
     public static final RecipeMap<SimpleRecipeBuilder> CW_LASER_ENGRAVER_RECIPES;
     public static final RecipeMap<LASERComputationRecipeBuilder> STEPPER_RECIPES;
+    public static final RecipeMap<SimpleRecipeBuilder> HUGE_IMPLOSION_RECIPES;
 
     private GTQTcoreRecipeMaps() {}
     static {
@@ -175,6 +177,10 @@ public class GTQTcoreRecipeMaps {
         FLOTATION_FACTORY_RECIPES = new RecipeMap<>("flotation_factory_recipes", 5, 3, 3, 3, new SimpleRecipeBuilder(), false)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_BATH, ProgressWidget.MoveType.CIRCULAR)
                 .setSound(GTSoundEvents.BATH);
+
+        HUGE_IMPLOSION_RECIPES = new RecipeMap<>("huge_implosion_recipes", 2, 2, 0, 0, new SimpleRecipeBuilder(), false)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.CIRCULAR)
+                .setSound(SoundEvents.ENTITY_GENERIC_EXPLODE);
 
         ALLOY_kILN = new RecipeMap<>("alloy_klin", 2, 2, 0, 0, new PrimitiveRecipeBuilder(), false)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_MACERATE, ProgressWidget.MoveType.HORIZONTAL)

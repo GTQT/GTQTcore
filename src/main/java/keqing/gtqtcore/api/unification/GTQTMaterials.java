@@ -184,6 +184,7 @@ public class GTQTMaterials {
     public static Material Vinylcinnamate;
     public static Material Xmt;
     public static Material Zrbtmst;
+    public static Material Amber;
 
     //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/api/unification/GSMaterials.java
 

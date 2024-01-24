@@ -3,11 +3,14 @@ package keqing.gtqtcore.api.recipes.builder;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeBuilder;
 import gregtech.api.recipes.RecipeMap;
+import gregtech.api.recipes.ingredients.GTRecipeItemInput;
 import gregtech.api.util.EnumValidationResult;
+import gregtech.api.util.ValidationResult;
 import keqing.gtqtcore.api.recipes.properties.CACasingTierProperty;
 import keqing.gtqtcore.api.recipes.properties.PACasingTierProperty;
 import keqing.gtqtcore.api.recipes.properties.PCBPartProperty;
 import keqing.gtqtcore.api.utils.GTQTLog;
+import net.minecraft.item.ItemStack;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.annotation.Nonnull;
@@ -52,4 +55,5 @@ public class PCBRecipeBuilder  extends RecipeBuilder<PCBRecipeBuilder> {
                 .append(PCBPartProperty.getInstance().getKey(), getPart())
                 .toString();
     }
+
 }

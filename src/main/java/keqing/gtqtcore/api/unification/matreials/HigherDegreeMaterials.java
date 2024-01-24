@@ -116,7 +116,13 @@ public class HigherDegreeMaterials {
                 .components(Lithium,1,Sodium,1,Aluminium,1,Phosphate,1,Oxygen,4,Fluorine,1,Hydrogen,1)
                 .build();
 
-
+        // 琥珀
+        GTQTMaterials.Amber= new Material.Builder(20615, gregtechId("amber"))
+                .ore()
+                .dust().fluid()
+                .color(0x8B4C39)
+                .components(Carbon,10,Hydrogen,16,Oxygen,1)
+                .build();
 
     }
 }
