@@ -287,16 +287,28 @@ gtqtcore.machine.wireless_energy_hatch.transmitter.hv.name=无线能源输出端
 gtqtcore.machine.wireless_energy_hatch.transmitter.ev.name=无线能源输出端口（§5EV§r）
 gtqtcore.machine.wireless_energy_hatch.transmitter.iv.name=无线能源输出端口（§1IV§r）
 gtqtcore.machine.wireless_energy_hatch.transmitter.luv.name=无线能源输出端口（§dLuV§r）
-gtqtcore.machine.wireless_energy_hatch.transmitter.zpm.name=无线能源输入端口（§cZPM§r）
-gtqtcore.machine.wireless_energy_hatch.transmitter.uv.name=无线能源输入端口（§3UV§r）
-gtqtcore.machine.wireless_energy_hatch.transmitter.uhv.name=无线能源输入端口（§4UHV§r）
-gtqtcore.machine.wireless_energy_hatch.transmitter.uev.name=无线能源输入端口（§4UEV§r）
-gtqtcore.machine.wireless_energy_hatch.transmitter.uiv.name=无线能源输入端口（§4UIV§r）
+gtqtcore.machine.wireless_energy_hatch.transmitter.zpm.name=无线能源输出端口（§cZPM§r）
+gtqtcore.machine.wireless_energy_hatch.transmitter.uv.name=无线能源输出端口（§3UV§r）
+gtqtcore.machine.wireless_energy_hatch.transmitter.uhv.name=无线能源输出端口（§4UHV§r）
+gtqtcore.machine.wireless_energy_hatch.transmitter.uev.name=无线能源输出端口（§4UEV§r）
+gtqtcore.machine.wireless_energy_hatch.transmitter.uiv.name=无线能源输出端口（§4UIV§r）
 
 gtqtcore.machine.parallel_hatch.uhv.name=并行控制仓（§4UHV§r）
 gtqtcore.machine.parallel_hatch.uev.name=并行控制仓（§aUEV§r）
 gtqtcore.machine.parallel_hatch.uiv.name=并行控制仓（§2UIV§r）
 gtqtcore.machine.parallel_hatch.uxv.name=并行控制仓（§eUXV§r）
+
+#HPCA
+gtqtcore.machine.hpca.super_computation_component.name=HPCA超级计算组件
+gtqtcore.machine.hpca.super_computation_component.tooltip=严辉村奇迹
+gtqtcore.machine.hpca.ultimate_computation_component.name=HPCA终级计算组件
+gtqtcore.machine.hpca.ultimate_computation_component.tooltip=开挖掘机
+gtqtcore.machine.hpca.advanced_cooler_component.name=HPCA高级主动冷却组件
+gtqtcore.machine.hpca.advanced_cooler_component.tooltip=阿里
+gtqtcore.machine.hpca.super_cooler_component.name=HPCA超级主动冷却组件
+gtqtcore.machine.hpca.super_cooler_component.tooltip=阿里巴巴
+gtqtcore.machine.hpca.ultimate_cooler_component.name=HPCA终级主动冷却组件
+gtqtcore.machine.hpca.ultimate_cooler_component.tooltip=阿里巴巴是个快乐的青年
 
 gtqtcore.machine.infinite_water_hatch.name=无限水仓
 

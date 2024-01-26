@@ -1,6 +1,9 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.kqcc;
 
 
+import codechicken.lib.render.CCRenderState;
+import codechicken.lib.render.pipeline.IVertexOperation;
+import codechicken.lib.vec.Matrix4;
 import gregtech.api.capability.IEnergyContainer;
 import gregtech.api.capability.IOpticalComputationProvider;
 import gregtech.api.capability.impl.EnergyContainerList;
@@ -195,6 +198,17 @@ public class MetaTileEntityKQCC extends MultiblockWithDisplayBase implements IOp
             this.writeCustomData(GTQTValue.UPDATE_TIER,buf1 -> buf1.writeInt(this.RAM1));
         }
     }
+    @Override
+    public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
+        super.renderMetaTileEntity(renderState, translation, pipeline);
+        getFrontOverlay().renderOrientedState(renderState, translation, pipeline, getFrontFacing(), this.isActive(),
+                this.isWorkingEnabled());
+    }
+
+    private boolean isWorkingEnabled() {
+        return isWorkingEnabled;
+    }
+
     @SuppressWarnings("SpellCheckingInspection")
     @Override
     protected BlockPattern createStructurePattern() {

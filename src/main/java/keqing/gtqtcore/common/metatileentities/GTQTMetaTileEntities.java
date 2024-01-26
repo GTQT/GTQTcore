@@ -22,10 +22,7 @@ import keqing.gtqtcore.common.metatileentities.multi.generators.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.huge.*;
-import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.kqcc.MetaTileEntityKQCC;
-import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.kqcc.MetaTileEntityKQHPCA;
-import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.kqcc.MetaTileEntityKQNetworkSwitch;
-import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.kqcc.MetaTileEntitykeQingNet;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.kqcc.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.overwrite.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.star.MetaTileEntityPlasmaForge;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.star.MetaTileEntityStarBiomimeticFactory;
@@ -191,6 +188,11 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityKQCCComputationHatch[] KQCC_COMPUTATION_HATCH_RECEIVER=new MetaTileEntityKQCCComputationHatch[12];
     public static MetaTileEntityKQCCComputationHatch[] KQCC_COMPUTATION_HATCH_TRANSMITTER=new MetaTileEntityKQCCComputationHatch[12];
     public static MetaTileEntityKQHPCA KQHPCA;
+    public static MetaTileEntityHPCAAdvancedComputation HPCA_SUPER_COMPUTATION_COMPONENT;
+    public static MetaTileEntityHPCAAdvancedComputation HPCA_ULTIMATE_COMPUTATION_COMPONENT;
+    public static MetaTileEntityHPCAAdvancedCooler HPCA_ADVANCED_COOLER_COMPONENT;
+    public static MetaTileEntityHPCAAdvancedCooler HPCA_SUPER_COOLER_COMPONENT;
+    public static MetaTileEntityHPCAAdvancedCooler HPCA_ULTIMATE_COOLER_COMPONENT;
 
     //public static MetaTileEntityObjectHolder OBJECT_HOLDER;
     public static void initialization() {
@@ -313,9 +315,13 @@ public class GTQTMetaTileEntities {
 
         //KQCC
         KQCC= registerMetaTileEntity(3450, new MetaTileEntityKQCC(gtqtcoreId("kqcc")));
-        KQHPCA= registerMetaTileEntity(3451, new MetaTileEntityKQHPCA(gtqtcoreId("kqhpca")));
-        KQNS=registerMetaTileEntity(3452,new MetaTileEntityKQNetworkSwitch(gtqtcoreId("kqns")));
-        KeQing_NET= registerMetaTileEntity(3453, new MetaTileEntitykeQingNet(gtqtcoreId("keqing_net")));
+        KQNS=registerMetaTileEntity(3451,new MetaTileEntityKQNetworkSwitch(gtqtcoreId("kqns")));
+        KeQing_NET= registerMetaTileEntity(3452, new MetaTileEntitykeQingNet(gtqtcoreId("keqing_net")));
+        HPCA_SUPER_COMPUTATION_COMPONENT = registerMetaTileEntity(3453, new MetaTileEntityHPCAAdvancedComputation(gtqtcoreId("hpca.super_computation_component"),false));
+        HPCA_ULTIMATE_COMPUTATION_COMPONENT = registerMetaTileEntity(3454, new MetaTileEntityHPCAAdvancedComputation(gtqtcoreId("hpca.ultimate_computation_component"),  true));
+        HPCA_ADVANCED_COOLER_COMPONENT = registerMetaTileEntity(3455, new MetaTileEntityHPCAAdvancedCooler(gtqtcoreId("hpca.advanced_cooler_component"),  false, false));
+        HPCA_SUPER_COOLER_COMPONENT = registerMetaTileEntity(3456, new MetaTileEntityHPCAAdvancedCooler(gtqtcoreId("hpca.super_cooler_component"), true, false));
+        HPCA_ULTIMATE_COOLER_COMPONENT = registerMetaTileEntity(3457, new MetaTileEntityHPCAAdvancedCooler(gtqtcoreId("hpca.ultimate_cooler_component"),  false, true));
 
         //小机器
         registerSimpleMetaTileEntity(FLUID_EXTRACTOR, 15000, "fluid_extractor", GTQTcoreRecipeMaps.FLUID_EXTRACTOR_RECIPES, Textures.EXTRACTOR_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
