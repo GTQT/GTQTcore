@@ -483,7 +483,7 @@ public class CPULine {
                 .duration(100)
                 .EUt(30)
                 .input(plate,TreatedWood,4)
-                .input(plate,Copper,2)
+                .input(foil,Copper,2)
                 .fluidInputs(RedAlloy.getFluid(576))
                 .fluidInputs(Glue.getFluid(400))
                 .output(IMPREGNATED_SUBSTRATE,4)
@@ -522,7 +522,7 @@ public class CPULine {
                 .duration(100)
                 .EUt(120)
                 .input(wireFine,Fiberglass,4)
-                .input(foil,Copper,2)
+                .input(foil,Gold,2)
                 .fluidInputs(Epoxy.getFluid(576))
                 .fluidInputs(Polyethylene.getFluid(400))
                 .output(IMPREGNATED_PLASTIC_SUBSTRATE,4)
@@ -534,6 +534,25 @@ public class CPULine {
                 .input(IMPREGNATED_PLASTIC_SUBSTRATE)
                 .fluidInputs(SulfuricAcid.getFluid(250))
                 .output(PLASTIC_BOARD)
+                .buildAndRegister();
+
+        //这里是HV阶段的环氧树脂基板
+        FLUID_SOLIDFICATION_RECIPES.recipeBuilder()
+                .duration(100)
+                .EUt(480)
+                .input(IMPREGNATED_EPOXY)
+                .fluidInputs(PhosphoricAcid.getFluid(250))
+                .output(EPOXY_BOARD)
+                .buildAndRegister();
+
+        CHEMICAL_RECIPES.recipeBuilder()
+                .duration(100)
+                .EUt(480)
+                .input(plate,ReinforcedEpoxyResin)
+                .input(foil,Platinum,2)
+                .fluidInputs(StyreneButadieneRubber.getFluid(400))
+                .fluidInputs(Polytetrafluoroethylene.getFluid(576))
+                .output(IMPREGNATED_EPOXY,4)
                 .buildAndRegister();
     }
 }

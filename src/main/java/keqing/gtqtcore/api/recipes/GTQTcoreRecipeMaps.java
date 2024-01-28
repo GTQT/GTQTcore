@@ -9,11 +9,8 @@ import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.recipes.builders.*;
 import gregtech.core.sound.GTSoundEvents;
 import keqing.gtqtcore.api.capability.chemical_plant.ChemicalPlantBuilder;
-import keqing.gtqtcore.api.capability.impl.NoEnergyMultiblockRecipeLogic;
 import keqing.gtqtcore.api.recipes.builder.*;
 import keqing.gtqtcore.api.recipes.machine.*;
-import keqing.gtqtcore.loaders.recipes.handlers.ELE;
-import net.minecraft.init.SoundEvents;
 
 
 //怎么写请看
@@ -83,7 +80,10 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<ComputationRecipeBuilder> TD_PRINT_RECIPES;
     public static final RecipeMap<SimpleRecipeBuilder> CW_LASER_ENGRAVER_RECIPES;
     public static final RecipeMap<LASERComputationRecipeBuilder> STEPPER_RECIPES;
-    public static final RecipeMap<SimpleRecipeBuilder> HUGE_IMPLOSION_RECIPES;
+
+    public static final RecipeMap<StarComputationRecipeBuilder> STAR_SURVEY;
+    public static final RecipeMap<SimpleRecipeBuilder> GANTRY_CRANE;
+
 
     private GTQTcoreRecipeMaps() {}
     static {
@@ -178,10 +178,6 @@ public class GTQTcoreRecipeMaps {
                 .setProgressBar(GuiTextures.PROGRESS_BAR_BATH, ProgressWidget.MoveType.CIRCULAR)
                 .setSound(GTSoundEvents.BATH);
 
-        HUGE_IMPLOSION_RECIPES = new RecipeMap<>("huge_implosion_recipes", 2, 2, 0, 0, new SimpleRecipeBuilder(), false)
-                .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.CIRCULAR)
-                .setSound(SoundEvents.ENTITY_GENERIC_EXPLODE);
-
         ALLOY_kILN = new RecipeMap<>("alloy_klin", 2, 2, 0, 0, new PrimitiveRecipeBuilder(), false)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_MACERATE, ProgressWidget.MoveType.HORIZONTAL)
                 .setSound(GTSoundEvents.MACERATOR);
@@ -269,6 +265,9 @@ public class GTQTcoreRecipeMaps {
         INTEGRATED_MINING_DIVISION = new RecipeMap<>("integrated_mining_division",
                 6, 6, 6, 6, new SimpleRecipeBuilder(), false);
 
+        GANTRY_CRANE = new RecipeMap<>("gantry_crane",
+                9, 1, 0, 0, new SimpleRecipeBuilder(), false);
+
         SEPTIC_TANK = new RecipeMap<>("septic_tank",
                 2, 2, 2, 2, new SimpleRecipeBuilder(), false);
 
@@ -310,6 +309,9 @@ public class GTQTcoreRecipeMaps {
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, ProgressWidget.MoveType.HORIZONTAL)
                 .setSlotOverlay(false, false, GuiTextures.SCANNER_OVERLAY)
                 .setSlotOverlay(true, false, GuiTextures.RESEARCH_STATION_OVERLAY)
+                .setSound(GTValues.FOOLS.get() ? GTSoundEvents.SCIENCE : GTSoundEvents.COMPUTATION);
+
+        STAR_SURVEY = new RecipeMap<>("star_suvery", 9, 1, 0, 0, new StarComputationRecipeBuilder(), false)
                 .setSound(GTValues.FOOLS.get() ? GTSoundEvents.SCIENCE : GTSoundEvents.COMPUTATION);
 
         NAQUADAH_REACTOR_RECIPES = new RecipeMap<>("naquadah_reactor_recipes", 0,  0,   1,  0, new FuelRecipeBuilder(), false)

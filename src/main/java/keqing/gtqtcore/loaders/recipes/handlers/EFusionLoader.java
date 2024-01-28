@@ -9,7 +9,7 @@ import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.EFUSION_RECIPES;
 public class EFusionLoader {
 
     public static void init() {
-        EFUSION_RECIPES.recipeBuilder()
+        /*EFUSION_RECIPES.recipeBuilder()
                 .fluidInputs(Materials.Deuterium.getFluid(125))
                 .fluidInputs(Materials.Tritium.getFluid(125))
                 .fluidOutputs(Materials.Helium.getPlasma(125))
@@ -80,6 +80,8 @@ public class EFusionLoader {
                 .EUt(49152)
                 .EUToStart(280_000_000)
                 .buildAndRegister();
+
+         */
 
     }
 }

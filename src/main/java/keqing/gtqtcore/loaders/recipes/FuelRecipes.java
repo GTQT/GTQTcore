@@ -6,24 +6,109 @@ import static gregtech.api.recipes.RecipeMaps.COKE_OVEN_RECIPES;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 
+import static gregtech.common.items.MetaItems.*;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
+import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 
 import gregtech.api.metatileentity.multiblock.CleanroomType;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.recipes.ingredients.nbtmatch.NBTCondition;
 import gregtech.api.recipes.ingredients.nbtmatch.NBTMatcher;
 import gregtech.api.unification.OreDictUnifier;
+import gregtech.api.unification.material.MarkerMaterials;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.material.properties.PropertyKey;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.MaterialStack;
+import ibxm.Player;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
+import keqing.gtqtcore.api.recipes.properties.StarProperty;
 
 public class FuelRecipes {
 
 
-                public static void init(){
+    public static void init(){
+
+        //test
+        STAR_SURVEY.recipeBuilder()
+                .input(circuit, MarkerMaterials.Tier.HV, 1)
+                .input(FIELD_GENERATOR_HV, 1)
+                .input(EMITTER_HV, 1)
+                .input(plateDouble, Platinum,16)
+                .output(COMPUTERTIER1)
+                .NB(1)
+                .CWUt(24)
+                .totalCWU(240000)
+                .EUt(30)
+                .duration(20)
+                .buildAndRegister();
+
+        STAR_SURVEY.recipeBuilder()
+                .input(circuit, MarkerMaterials.Tier.EV, 2)
+                .input(FIELD_GENERATOR_EV, 2)
+                .input(EMITTER_EV, 2)
+                .input(plateDouble, Platinum,16)
+                .output(COMPUTERTIER2)
+                .NB(2)
+                .CWUt(96)
+                .totalCWU(960000)
+                .EUt(30)
+                .duration(20)
+                .buildAndRegister();
+
+        STAR_SURVEY.recipeBuilder()
+                .input(circuit, MarkerMaterials.Tier.IV, 4)
+                .input(FIELD_GENERATOR_IV, 4)
+                .input(EMITTER_IV, 4)
+                .input(plateDouble, Platinum,16)
+                .output(COMPUTERTIER3)
+                .NB(3)
+                .CWUt(384)
+                .totalCWU(3840000)
+                .EUt(30)
+                .duration(20)
+                .buildAndRegister();
+
+        STAR_SURVEY.recipeBuilder()
+                .input(circuit, MarkerMaterials.Tier.LuV, 8)
+                .input(FIELD_GENERATOR_LuV, 8)
+                .input(EMITTER_LuV, 8)
+                .input(plateDouble, Platinum,16)
+                .output(COMPUTERTIER4)
+                .NB(4)
+                .CWUt(1536)
+                .totalCWU(15360000)
+                .EUt(30)
+                .duration(20)
+                .buildAndRegister();
+
+        STAR_SURVEY.recipeBuilder()
+                .input(circuit, MarkerMaterials.Tier.ZPM, 16)
+                .input(FIELD_GENERATOR_ZPM, 16)
+                .input(EMITTER_ZPM, 16)
+                .input(plateDouble, Platinum,16)
+                .output(COMPUTERTIER5)
+                .NB(5)
+                .CWUt(6144)
+                .totalCWU(514)
+                .EUt(30)
+                .duration(61440000)
+                .buildAndRegister();
+
+        STAR_SURVEY.recipeBuilder()
+                .input(circuit, MarkerMaterials.Tier.UHV, 32)
+                .input(FIELD_GENERATOR_UHV, 32)
+                .input(EMITTER_UHV, 32)
+                .input(plateDouble, Platinum,16)
+                .output(COMPUTERTIER6)
+                .NB(6)
+                .CWUt(24576)
+                .totalCWU(514)
+                .EUt(30)
+                .duration(245760000)
+                .buildAndRegister();
+
                     MINING_DRILL_RECIPES.recipeBuilder()
                             .chancedOutput(ore,Copper,5000,500)
                             .chancedOutput(ore,Iron,5000,500)

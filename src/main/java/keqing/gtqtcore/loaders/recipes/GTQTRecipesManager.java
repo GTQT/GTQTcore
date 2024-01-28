@@ -21,6 +21,7 @@ public class GTQTRecipesManager {
         CPULine.init();
         AllouKlin.init();
         GTComponents.init();
+        PlatinumDeal.init();
         DecompositionRecipeHandler.runRecipeGeneration();
         TESEDecompositionRecipeHandler.runRecipeGeneration();
         CircuitryMaterialChains.init();

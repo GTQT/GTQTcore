@@ -1,5 +1,6 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.huge;
 
+import gregicality.multiblocks.api.capability.IParallelMultiblock;
 import gregtech.api.block.IHeatingCoilBlockStats;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
@@ -58,7 +59,6 @@ public class MetaTileEntityHugeDistillationTower extends RecipeMapMultiblockCont
     @Override
     public void addInformation(ItemStack stack, @Nullable World player, @Nonnull List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
-        tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.2", 256));
         tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.1"));
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("你们不能在一起", new Object[0]));
     }
@@ -162,6 +162,11 @@ public class MetaTileEntityHugeDistillationTower extends RecipeMapMultiblockCont
         @Override
         public int getParallelLimit() {
             return getMaxParallel(heatingCoilLevel);
+        }
+        @Override
+        public void setMaxProgress(int maxProgress)
+        {
+            this.maxProgressTime = maxProgress/getParallelLimit();
         }
     }
 }

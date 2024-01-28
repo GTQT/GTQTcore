@@ -15,6 +15,7 @@ public class GTQTMetaItems {
      */
     public static final List<MetaItem<?>> ITEMS = GTQTMetaItem1.getMetaItems();
     public static MetaItem<?>.MetaValueItem IMPREGNATED_SUBSTRATE;
+    public static MetaItem<?>.MetaValueItem IMPREGNATED_EPOXY;
     public static MetaItem<?>.MetaValueItem MEMORY_CARD;
     public static MetaItem<?>.MetaValueItem IMPREGNATED_PLASTIC_SUBSTRATE;
     public static MetaItem<?>.MetaValueItem IMPREGNATED_GRAPHITE_RODS;
@@ -89,6 +90,25 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem RETICLE_SILICON;
     public static MetaItem<?>.MetaValueItem DEBUG_STRUCTURE_WRITER;
     public static MetaItem<?>.MetaValueItem DEBUG_STRUCTURE_BUILDER;
+    public static MetaItem<?>.MetaValueItem COMPUTERMINER;
+    public static MetaItem<?>.MetaValueItem COMPUTERCARGO;
+    public static MetaItem<?>.MetaValueItem COMPUTERBUGGY;
+    public static MetaItem<?>.MetaValueItem COMPUTERTIER6;
+    public static MetaItem<?>.MetaValueItem COMPUTERTIER5;
+    public static MetaItem<?>.MetaValueItem COMPUTERTIER4;
+    public static MetaItem<?>.MetaValueItem COMPUTERTIER3;
+    public static MetaItem<?>.MetaValueItem COMPUTERTIER2;
+    public static MetaItem<?>.MetaValueItem COMPUTERTIER1;
+    public static MetaItem<?>.MetaValueItem LANDER_MODULE3;
+    public static MetaItem<?>.MetaValueItem LANDER_MODULE2;
+    public static MetaItem<?>.MetaValueItem LANDER_MODULE1;
+    public static MetaItem<?>.MetaValueItem HEAVY_ALLOY_PLATE;
+    public static MetaItem<?>.MetaValueItem HEAVY_ALLOY_PLATEA;
+    public static MetaItem<?>.MetaValueItem HEAVY_ALLOY_PLATEB;
+    public static MetaItem<?>.MetaValueItem HEAVY_ALLOY_PLATEC;
+    public static MetaItem<?>.MetaValueItem HEAVY_ALLOY_PLATED;
+    public static MetaItem<?>.MetaValueItem HEAVY_ALLOY_PLATEE;
+
 
     public static void initialization()
     {

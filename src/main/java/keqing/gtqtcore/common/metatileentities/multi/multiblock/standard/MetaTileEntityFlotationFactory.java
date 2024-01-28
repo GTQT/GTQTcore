@@ -29,6 +29,7 @@ import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTIsaCasing;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.huge.MetaTileEntityHugeDistillationTower;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
@@ -47,8 +48,24 @@ public class MetaTileEntityFlotationFactory extends RecipeMapMultiblockControlle
 
     public MetaTileEntityFlotationFactory(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.FLOTATION_FACTORY_RECIPES);
+        this.recipeMapWorkable = new MetaTileEntityFlotationFactoryrWorkable(this);
     }
 
+    protected static class MetaTileEntityFlotationFactoryrWorkable extends MultiblockRecipeLogic {
+
+        public MetaTileEntityFlotationFactoryrWorkable(RecipeMapMultiblockController tileEntity) {
+            super(tileEntity);
+        }
+        @Override
+        public int getParallelLimit() {
+            return 32;
+        }
+        @Override
+        public void setMaxProgress(int maxProgress)
+        {
+            this.maxProgressTime = maxProgress/32;
+        }
+    }
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {
         return new MetaTileEntityFlotationFactory(metaTileEntityId);

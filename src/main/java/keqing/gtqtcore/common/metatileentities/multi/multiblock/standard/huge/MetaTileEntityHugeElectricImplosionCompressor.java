@@ -43,7 +43,7 @@ public class MetaTileEntityHugeElectricImplosionCompressor extends RecipeMapMult
     protected int heatingCoilDiscount;
     protected int number;
     public MetaTileEntityHugeElectricImplosionCompressor(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, GTQTcoreRecipeMaps.HUGE_IMPLOSION_RECIPES);
+        super(metaTileEntityId, RecipeMaps.IMPLOSION_RECIPES);
         this.recipeMapWorkable = new MetaTileEntityHugeElectricImplosionCompressorWorkable(this);
     }
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity metaTileEntityHolder) {

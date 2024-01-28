@@ -27,30 +27,15 @@ public class GTQTMetaItem1 extends StandardMetaItem {
 
     public void registerSubItems() {
 
-        COPPER_CROP = addItem(200, "copper_crop");
-        COPPER_CROP.addComponents(new GTQTCropSeedBehaviour(GTQTCrops.COPPER_CROP, COPPER_CROP.getStackForm(), COPPER_CROP.getStackForm()));
-
-        IRON_CROP = addItem(201, "iron_crop");
-        IRON_CROP.addComponents(new GTQTCropSeedBehaviour(GTQTCrops.IRON_CROP, IRON_CROP.getStackForm(), IRON_CROP.getStackForm()));
-
-        TIN_CROP = addItem(202, "tin_crop");
-        TIN_CROP.addComponents(new GTQTCropSeedBehaviour(GTQTCrops.TIN_CROP, TIN_CROP.getStackForm(), TIN_CROP.getStackForm()));
-
-        BRONZE_CROP = addItem(203, "bronze_crop");
-        BRONZE_CROP.addComponents(new GTQTCropSeedBehaviour(GTQTCrops.BRONZE_CROP, BRONZE_CROP.getStackForm(), BRONZE_CROP.getStackForm()));
-
-        CARBON_CROP = addItem(204, "carbon_crop");
-        CARBON_CROP.addComponents(new GTQTCropSeedBehaviour(GTQTCrops.CARBON_CROP, CARBON_CROP.getStackForm(), CARBON_CROP.getStackForm()));
-
-        GOLD_CROP = addItem(205, "gold_crop");
-        GOLD_CROP.addComponents(new GTQTCropSeedBehaviour(GTQTCrops.GOLD_CROP, GOLD_CROP.getStackForm(), GOLD_CROP.getStackForm()));
 
 
+        //基础材料
         IMPREGNATED_GRAPHITE_RODSA = this.addItem(1,"item.impregnated_graphite_rodsa").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         IMPREGNATED_GRAPHITE_RODS = this.addItem(2,"item.impregnated_graphite_rods").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         IMPREGNATED_SUBSTRATE = this.addItem(3,"item.impregnated_substrate").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         IMPREGNATED_PLASTIC_SUBSTRATE = this.addItem(4,"item.impregnated_plastic_substrate").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
-
+        IMPREGNATED_EPOXY = this.addItem(5,"item.impregnated_epoxy").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        //快乐海藻
         COMMON_ALGAE = this.addItem(10,"algae.common").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         GREEN_ALGAE = this.addItem(11,"algae.green").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         RED_ALGAE = this.addItem(12,"algae.red").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
@@ -71,13 +56,10 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         WOOD_PELLETS=this.addItem(51, "item.wood_pellets").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         PELLETS_MOULD=this.addItem(52, "item.pellets_mould").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         ALUMINIUM_PELLETS=this.addItem(53, "item.aluminium_pellets").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
-
         POTASSIUM_ETHYLATE=this.addItem(54, "item.potassium.ethylate").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         POTASSIUM_ETHYLXANTHATE=this.addItem(55, "item.potassium.ethylxanthate").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         SODIUM_ETHYLXANTHATE=this.addItem(56, "item.sodium.ethylxanthate").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         SODIUM_ETHYLATE=this.addItem(57, "item.sodium.ethylate").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
-
-
         RETICLE_ADVANCED_SYSTEM_ON_CHIP=this.addItem(58, "reticle.advanced_system_on_chip").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         RETICLE_CENTRAL_PROCESSING_UNIT=this.addItem(59, "reticle.central_processing_unit").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         RETICLE_HIGH_POWER_INTEGRATED_CIRCUIT=this.addItem(60, "reticle.high_power_integrated_circuit").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
@@ -96,9 +78,53 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         RETICLE_ULTRA_LOW_POWER_INTEGRATED_CIRCUIT=this.addItem(73, "reticle.ultra_low_power_integrated_circuit").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         RETICLE_SILICON=this.addItem(74, "reticle.silicon").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
 
+        //神秘农业
+        COPPER_CROP = addItem(200, "copper_crop");
+        COPPER_CROP.addComponents(new GTQTCropSeedBehaviour(GTQTCrops.COPPER_CROP, COPPER_CROP.getStackForm(), COPPER_CROP.getStackForm()));
+
+        IRON_CROP = addItem(201, "iron_crop");
+        IRON_CROP.addComponents(new GTQTCropSeedBehaviour(GTQTCrops.IRON_CROP, IRON_CROP.getStackForm(), IRON_CROP.getStackForm()));
+
+        TIN_CROP = addItem(202, "tin_crop");
+        TIN_CROP.addComponents(new GTQTCropSeedBehaviour(GTQTCrops.TIN_CROP, TIN_CROP.getStackForm(), TIN_CROP.getStackForm()));
+
+        BRONZE_CROP = addItem(203, "bronze_crop");
+        BRONZE_CROP.addComponents(new GTQTCropSeedBehaviour(GTQTCrops.BRONZE_CROP, BRONZE_CROP.getStackForm(), BRONZE_CROP.getStackForm()));
+
+        CARBON_CROP = addItem(204, "carbon_crop");
+        CARBON_CROP.addComponents(new GTQTCropSeedBehaviour(GTQTCrops.CARBON_CROP, CARBON_CROP.getStackForm(), CARBON_CROP.getStackForm()));
+
+        GOLD_CROP = addItem(205, "gold_crop");
+        GOLD_CROP.addComponents(new GTQTCropSeedBehaviour(GTQTCrops.GOLD_CROP, GOLD_CROP.getStackForm(), GOLD_CROP.getStackForm()));
+
+        //火箭大军集结完毕
+        //登陆器三个
+        LANDER_MODULE1=this.addItem(350, "lander_module_t1").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        LANDER_MODULE2=this.addItem(351, "lander_module_t2").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        LANDER_MODULE3=this.addItem(352, "lander_module_t3").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        //导航电脑6个
+        COMPUTERTIER1=this.addItem(353, "computerTier1").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        COMPUTERTIER2=this.addItem(354, "computerTier2").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        COMPUTERTIER3=this.addItem(355, "computerTier3").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        COMPUTERTIER4=this.addItem(356, "computerTier4").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        COMPUTERTIER5=this.addItem(357, "computerTier5").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        COMPUTERTIER6=this.addItem(358, "computerTier6").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        //备用
+        COMPUTERMINER=this.addItem(359, "computerMiner").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        COMPUTERCARGO=this.addItem(340, "computerCargo").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        COMPUTERBUGGY=this.addItem(341, "computerBuggy").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        //材料
+        HEAVY_ALLOY_PLATE=this.addItem(342, "heavy_alloy_plate").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        HEAVY_ALLOY_PLATEA=this.addItem(343, "heavy_alloy_platea").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        HEAVY_ALLOY_PLATEB=this.addItem(344, "heavy_alloy_plateb").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        HEAVY_ALLOY_PLATEC=this.addItem(345, "heavy_alloy_platec").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        HEAVY_ALLOY_PLATED=this.addItem(346, "heavy_alloy_plated").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        HEAVY_ALLOY_PLATEE=this.addItem(347, "heavy_alloy_platee").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        //磨球
         GRINDBALL_SOAPSTONE = this.addItem(370, "mill.grindball_soapstone").setMaxStackSize(1).addComponents(new MillBallBehavior());
         GRINDBALL_ALUMINIUM = this.addItem(371, "mill.grindball_aluminium").setMaxStackSize(1).addComponents(new MillBallBehavior());
 
+        //封装电路板
         WRAP_CIRCUIT_ULV = this.addItem(400, "wrap.circuit.ulv");
         WRAP_CIRCUIT_LV = this.addItem(401, "wrap.circuit.lv");
         WRAP_CIRCUIT_MV = this.addItem(402, "wrap.circuit.mv");

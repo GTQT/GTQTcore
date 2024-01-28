@@ -14,7 +14,6 @@ public class EPMaterialFlagAddition {
 
     public static void init() {
         //  Coils
-
         //  Motor coils
         //  Copper (LV), Cupronickel (MV), Electrum (HV), Kanthal (EV),
         //  Graphene (IV), Ruridit (LuV), Vanadium Gallium (ZPM), Americium (UV)
@@ -29,6 +28,7 @@ public class EPMaterialFlagAddition {
         VanadiumGallium.addFlags(GENERATE_COIL);
         Americium.addFlags(GENERATE_COIL);
         Europium.addFlags(GENERATE_COIL);
+        Coal.addFlags(GENERATE_DENSE,GENERATE_PLATE,GENERATE_DOUBLE_PLATE);
         // CarbonNanotube.addFlags(GENERATE_COIL);
 
         //  Voltage coils
@@ -36,7 +36,7 @@ public class EPMaterialFlagAddition {
         //  Tungsten Steel (EV), Iridium (IV), Osmiridium (LuV), Europium (ZPM),
         //  Tritanium (UV), Vibranium (UHV), Seaborgium (UEV)
         Lead.addFlags(GENERATE_COIL);
-        Steel.addFlags(GENERATE_COIL);
+        Steel.addFlags(GENERATE_COIL,GENERATE_DENSE);
         Aluminium.addFlags(GENERATE_COIL);
         BlackSteel.addFlags(GENERATE_COIL);
         TungstenSteel.addFlags(GENERATE_COIL);
@@ -50,7 +50,7 @@ public class EPMaterialFlagAddition {
         //  Curved plates
 
         //  Rotors
-        Iron.addFlags(GENERATE_CURVED_PLATE);
+        Iron.addFlags(GENERATE_CURVED_PLATE,GENERATE_DENSE);
         WroughtIron.addFlags(GENERATE_CURVED_PLATE);
         Darmstadtium.addFlags(GENERATE_CURVED_PLATE);
         RhodiumPlatedPalladium.addFlags(GENERATE_CURVED_PLATE);
@@ -89,14 +89,14 @@ public class EPMaterialFlagAddition {
         *  VanadiumSteel
          */
         Aluminium.addFlags(GENERATE_CURVED_PLATE);
-        Bronze.addFlags(GENERATE_CURVED_PLATE,GENERATE_SPRING,GENERATE_SPRING_SMALL);
+        Bronze.addFlags(GENERATE_CURVED_PLATE,GENERATE_SPRING,GENERATE_SPRING_SMALL,GENERATE_DENSE);
         Chrome.addFlags(GENERATE_CURVED_PLATE,GENERATE_SPRING,GENERATE_SPRING_SMALL);
-        Copper.addFlags(GENERATE_CURVED_PLATE,GENERATE_SPRING,GENERATE_SPRING_SMALL);
+        Copper.addFlags(GENERATE_CURVED_PLATE,GENERATE_SPRING,GENERATE_SPRING_SMALL,GENERATE_DENSE);
         Duranium.addFlags(GENERATE_CURVED_PLATE,GENERATE_SPRING,GENERATE_SPRING_SMALL);
         Europium.addFlags(GENERATE_CURVED_PLATE,GENERATE_SPRING,GENERATE_SPRING_SMALL);
         Gold.addFlags(GENERATE_CURVED_PLATE,GENERATE_SPRING,GENERATE_SPRING_SMALL);
         Iridium.addFlags(GENERATE_CURVED_PLATE,GENERATE_SPRING,GENERATE_SPRING_SMALL);
-        Lead.addFlags(GENERATE_CURVED_PLATE,GENERATE_SPRING,GENERATE_SPRING_SMALL);
+        Lead.addFlags(GENERATE_CURVED_PLATE,GENERATE_SPRING,GENERATE_SPRING_SMALL,GENERATE_DENSE);
         Naquadah.addFlags(GENERATE_CURVED_PLATE,GENERATE_SPRING,GENERATE_SPRING_SMALL);
         Neutronium.addFlags(GENERATE_CURVED_PLATE,GENERATE_SPRING,GENERATE_SPRING_SMALL);
         NiobiumTitanium.addFlags(GENERATE_CURVED_PLATE,GENERATE_SPRING,GENERATE_SPRING_SMALL);
@@ -135,18 +135,18 @@ public class EPMaterialFlagAddition {
         Americium.addFlags(GENERATE_CURVED_PLATE,GENERATE_SPRING,GENERATE_SPRING_SMALL);
         Magnalium.addFlags(GENERATE_CURVED_PLATE,GENERATE_SPRING,GENERATE_SPRING_SMALL);
         SterlingSilver.addFlags(GENERATE_CURVED_PLATE,GENERATE_SPRING,GENERATE_SPRING_SMALL);
-        Tin.addFlags(GENERATE_CURVED_PLATE);
+        Tin.addFlags(GENERATE_CURVED_PLATE,GENERATE_DENSE);
         Cupronickel.addFlags(GENERATE_CURVED_PLATE,GENERATE_SPRING,GENERATE_SPRING_SMALL);
         BlackBronze.addFlags(GENERATE_CURVED_PLATE,GENERATE_SPRING,GENERATE_SPRING_SMALL);
         CobaltBrass.addFlags(GENERATE_CURVED_PLATE,GENERATE_SPRING,GENERATE_SPRING_SMALL);
         Electrum.addFlags(GENERATE_CURVED_PLATE,GENERATE_SPRING,GENERATE_SPRING_SMALL);
-        Cobalt.addFlags(GENERATE_CURVED_PLATE,GENERATE_SPRING,GENERATE_SPRING_SMALL);
         Platinum.addFlags(GENERATE_CURVED_PLATE,GENERATE_SPRING,GENERATE_SPRING_SMALL);
         Brass.addFlags(GENERATE_CURVED_PLATE,GENERATE_SPRING,GENERATE_SPRING_SMALL);
         Osmium.addFlags(GENERATE_CURVED_PLATE,GENERATE_SPRING,GENERATE_SPRING_SMALL);
         Ultimet.addFlags(GENERATE_CURVED_PLATE,GENERATE_SPRING,GENERATE_SPRING_SMALL);
         Osmiridium.addFlags(GENERATE_CURVED_PLATE,GENERATE_SPRING,GENERATE_SPRING_SMALL);
-        Nickel.addFlags(GENERATE_CURVED_PLATE,GENERATE_SPRING,GENERATE_SPRING_SMALL);
+        Nickel.addFlags(GENERATE_CURVED_PLATE,GENERATE_SPRING,GENERATE_SPRING_SMALL,GENERATE_DENSE);
+        Cobalt.addFlags(GENERATE_CURVED_PLATE,GENERATE_SPRING,GENERATE_SPRING_SMALL,GENERATE_DENSE);
         // PolyvinylChloride.addFlags(GENERATE_CURVED_PLATE);
         RoseGold.addFlags(GENERATE_CURVED_PLATE,GENERATE_SPRING,GENERATE_SPRING_SMALL);
 
@@ -186,11 +186,10 @@ public class EPMaterialFlagAddition {
 
         Silver.addFlags(GENERATE_NANOTUBE, GENERATE_NANOSENSOR); // For PCB factory Etching
         Gold.addFlags(GENERATE_NANOTUBE, GENERATE_NANOSENSOR); // For PCB factory Etching
-
+        Silicon.addFlags(GENERATE_DENSE);
+        RedAlloy.addFlags(GENERATE_RING);
+        Carbon.addFlags(GENERATE_ROD);
         Graphite.setProperty(PropertyKey.FLUID, new FluidProperty());
-        Oxygen.setProperty(PropertyKey.INGOT, new IngotProperty());
-        Hydrogen.setProperty(PropertyKey.INGOT, new IngotProperty());
-        Nitrogen.setProperty(PropertyKey.INGOT, new IngotProperty());
-        Helium.setProperty(PropertyKey.INGOT, new IngotProperty());
+        Magnesium.addFlags(GENERATE_PLATE,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_ROTOR,GENERATE_ROD,GENERATE_SPRING,GENERATE_GEAR,GENERATE_FRAME);
     }
 }

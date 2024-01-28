@@ -54,6 +54,7 @@ public class CommonProxy {
         IntegratedMiningDivision.init();
         HeatExchangeRecipes.init();
         ELE.init();
+        OreDeal.init();
         KeQingNET.init();
         ISA.init();
         QTF.init();
@@ -186,6 +187,15 @@ public class CommonProxy {
         ELEProperties.registeredTier(3,"三级");
         ELEProperties.registeredTier(4,"四级");
         ELEProperties.registeredTier(5,"五级");
+
+        StarProperty.registeredNB(1,"射电望远镜-1级");
+        StarProperty.registeredNB(2,"远轨道卫星探测-2级");
+        StarProperty.registeredNB(3,"大型轨道望远镜-3级");
+        StarProperty.registeredNB(4,"太空探测阵列-4级");
+        StarProperty.registeredNB(5,"引力波探测-5级");
+        StarProperty.registeredNB(6,"不知道-6级");
+
+
         for(int i=10;i<=800;i=i+10) LASERNetProperty.registeredLaser(i, String.valueOf(i));
         for(int i=1;i<=100;i++) KQNetProperty.registeredNB(i, String.valueOf(i));
         for(int i=1;i<=100;i++) BRProperty.registeredRate(i, String.valueOf(i));

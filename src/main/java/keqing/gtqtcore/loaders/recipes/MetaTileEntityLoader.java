@@ -29,6 +29,24 @@ public class MetaTileEntityLoader {
 
     public static void init() {
 
+        gregtech.loaders.recipe.MetaTileEntityLoader.registerMachineRecipe(true, KQCC_COMPUTATION_HATCH_RECEIVER,
+                "GEG", "PHP", "WXW",
+                'E', CraftingComponent.EMITTER,
+                'H', CraftingComponent.HULL,
+                'P', CraftingComponent.PLATE,
+                'G', CraftingComponent.SENSOR,
+                'W', CraftingComponent.CABLE,
+                'X', CraftingComponent.CIRCUIT);
+
+        gregtech.loaders.recipe.MetaTileEntityLoader.registerMachineRecipe(true, KQCC_COMPUTATION_HATCH_TRANSMITTER,
+                "EGE", "PHP", "WXW",
+                'E', CraftingComponent.EMITTER,
+                'H', CraftingComponent.HULL,
+                'P', CraftingComponent.PLATE,
+                'G', CraftingComponent.SENSOR,
+                'W', CraftingComponent.CABLE,
+                'X', CraftingComponent.CIRCUIT);
+
         gregtech.loaders.recipe.MetaTileEntityLoader.registerMachineRecipe(true, ULTRAVIOLET_LAMP_CHAMBER,
                 "GEG", "PHP", "WXW",
                 'E', CraftingComponent.EMITTER,

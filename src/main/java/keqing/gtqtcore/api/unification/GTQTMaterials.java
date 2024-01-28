@@ -185,6 +185,17 @@ public class GTQTMaterials {
     public static Material Xmt;
     public static Material Zrbtmst;
     public static Material Amber;
+    public static Material MeteoricIron;
+    public static Material Desh;
+    public static Material ZincSulfate;
+    public static Material RhodiumRaw;
+    public static Material RhodiumSalt;
+    public static Material RhodiumNitrateSolution;
+    public static Material RhodiumDo;
+    public static Material RutheniumOxide;
+    public static Material RutheniumfOxide;
+    public static Material RutheniumgOxide;
+    public static Material IridiumFluid;
 
     //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/api/unification/GSMaterials.java
 

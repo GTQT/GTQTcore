@@ -450,7 +450,8 @@ gregtech.material.oil_slurry=油浆
 gregtech.material.distilledgasoline=直馏汽油
 gregtech.material.sea_water=海水
 gregtech.material.zinc_cl=氯化锌
-
+gregtech.material.meteoric_iron=陨铁
+gregtech.material.desh=戴斯
 
 gregtech.material.vinylcinnamate=聚乙烯醇肉桂酸酯
 gregtech.material.xmt=xMT分子光刻胶
@@ -715,7 +716,44 @@ metaitem.item.aluminium_pellets.name=铝颗粒
 metaitem.item.impregnated_graphite_rods.name=浸渍石墨棒组
 metaitem.item.impregnated_substrate.name=浸渍基板
 metaitem.item.impregnated_plastic_substrate.name=固化树脂-玻璃纤维复合基板
+metaitem.item.impregnated_epoxy.name=高分子纤维强化-铂基板
 metaitem.item.impregnated_graphite_rodsa.name=预处理石墨电极
+
+metaitem.reticle.advanced_system_on_chip.name=？光掩模
+metaitem.reticle.central_processing_unit.name=？光掩模
+metaitem.reticle.high_power_integrated_circuit.name=？光掩模
+metaitem.reticle.highly_advanced_system_on_chip.name=？光掩模
+metaitem.reticle.integrated_logic_circuit.name=？光掩模
+metaitem.reticle.low_power_integrated_circuit.name=？光掩模
+metaitem.reticle.nand_memory_chip.name=？光掩模
+metaitem.reticle.nano_central_processing_unit.name=？光掩模
+metaitem.reticle.nor_memory_chip.name=？光掩模
+metaitem.reticle.power_integrated_circuit.name=？光掩模
+metaitem.reticle.qbit_central_processing_unit.name=？光掩模
+metaitem.reticle.random_access_memory.name=？光掩模
+metaitem.reticle.simple_system_on_chip.name=？光掩模
+metaitem.reticle.system_on_chip.name=？光掩模
+metaitem.reticle.ultra_high_power_integrated_circuit.name=？光掩模
+metaitem.reticle.ultra_low_power_integrated_circuit.name=？光掩模
+metaitem.reticle.silicon.name=光掩模基板（待雕刻）
+
+metaitem.computerTier1.name=导航电脑（T1）
+metaitem.computerTier2.name=导航电脑（T2）
+metaitem.computerTier3.name=导航电脑（T3）
+metaitem.computerTier4.name=导航电脑（T4）
+metaitem.computerTier5.name=导航电脑（T5）
+metaitem.computerTier6.name=导航电脑（T6）
+metaitem.computerMiner.name=飞行控制电脑（采矿）
+metaitem.computerCargo.name=飞行控制电脑（不知道）
+metaitem.computerBuggy.name=飞行控制电脑（不知道）
+
+metaitem.heavy_alloy_plate.name=合金复合板
+metaitem.heavy_alloy_platea.name=合金复合板A
+metaitem.heavy_alloy_plateb.name=合金复合板B
+metaitem.heavy_alloy_platec.name=合金复合板C
+metaitem.heavy_alloy_plated.name=合金复合板D
+metaitem.heavy_alloy_platee.name=合金复合板E
+
 
 
 gtqtcore.machine.combustion_generator.ev.name=脉冲内燃发电机

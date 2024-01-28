@@ -63,7 +63,6 @@ public class GTQTRecipes {
         round_cover.addProcessingHandler(PropertyKey.INGOT, GTQTRecipes::processRoundCover);
         shell.addProcessingHandler(PropertyKey.INGOT, GTQTRecipes::processShell);
         soldering_iron_head.addProcessingHandler(PropertyKey.INGOT, GTQTRecipes::processSolderingIron);
-        OrePrefix.dust.addProcessingHandler(PropertyKey.DUST, GTQTRecipes::processDust);
         OrePrefix.ring.addProcessingHandler(PropertyKey.DUST, GTQTRecipes::processRing);
         OrePrefix.stick.addProcessingHandler(PropertyKey.DUST, GTQTRecipes::processStick);
         OrePrefix.gear.addProcessingHandler(PropertyKey.DUST, GTQTRecipes::processGear);
@@ -82,22 +81,7 @@ public class GTQTRecipes {
         OrePrefix.foil.addProcessingHandler(PropertyKey.INGOT, GTQTRecipes::processFoil);
         OrePrefix.rotor.addProcessingHandler(PropertyKey.INGOT, GTQTRecipes::processRotorA);
     }
-    public static void processDust(OrePrefix dustPrefix, Material mat, DustProperty property) {
-        ItemStack dustStack = OreDictUnifier.get(dustPrefix, mat);
-        if (mat.hasProperty(PropertyKey.GEM)) {
-            ItemStack gemStack = OreDictUnifier.get(OrePrefix.gem, mat);
 
-            if (!mat.hasFlag(EXPLOSIVE) && !mat.hasFlag(FLAMMABLE)) {
-                GTQTcoreRecipeMaps.HUGE_IMPLOSION_RECIPES.recipeBuilder()
-                        .inputs(GTUtility.copy(4, dustStack))
-                        .outputs(GTUtility.copy(3, gemStack))
-                        .chancedOutput(dust, Materials.DarkAsh, 2500, 0)
-                        .EUt(GTValues.VA[HV])
-                        .duration(5)
-                        .buildAndRegister();
-            }
-        }
-    }
 
     private static void processShell(OrePrefix orePrefix, Material material, IngotProperty ingotProperty) {
         CW_LASER_ENGRAVER_RECIPES.recipeBuilder()
