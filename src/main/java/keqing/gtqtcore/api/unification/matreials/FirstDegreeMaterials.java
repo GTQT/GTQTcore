@@ -4,6 +4,7 @@ import gregtech.api.fluids.FluidBuilder;
 import gregtech.api.unification.Elements;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.properties.BlastProperty;
+import gregtech.api.unification.material.properties.ToolProperty;
 import gregtech.api.util.GTUtility;
 import keqing.gtqtcore.api.unification.GTQTMaterials;
 
@@ -13,10 +14,11 @@ import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.Materials.Tetranitromethane;
 import static gregtech.api.unification.material.info.MaterialFlags.*;
 import static gregtech.api.unification.material.info.MaterialFlags.GENERATE_SMALL_GEAR;
-import static gregtech.api.unification.material.info.MaterialIconSet.METALLIC;
+import static gregtech.api.unification.material.info.MaterialIconSet.*;
+import static gregtech.api.unification.material.properties.BlastProperty.GasTier.LOW;
+import static gregtech.api.unification.material.properties.BlastProperty.GasTier.MID;
 import static gregtech.api.util.GTUtility.gregtechId;
-import static keqing.gtqtcore.api.unification.GTQTMaterials.HighlyPurifiedCoalTar;
-import static keqing.gtqtcore.api.unification.GTQTMaterials.Methylhydrazine;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.material.info.GTQTMaterialIconSet.CUSTOM_MHCSM;
 
 public class FirstDegreeMaterials {
@@ -366,5 +368,168 @@ public class FirstDegreeMaterials {
                 .color(0xFF7256).iconSet(METALLIC)
                 .flags(GENERATE_PLATE,GENERATE_DENSE, GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_RING, GENERATE_ROUND, GENERATE_BOLT_SCREW, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR)
                 .build();
+
+        GTQTMaterials.Fluix = new Material.Builder(getMaterialsId(), gregtechId("fluix"))
+                .gem(1).dust()
+                .color(0x7D26CD).iconSet(CERTUS)
+                .flags(GENERATE_PLATE, CRYSTALLIZABLE)
+                .components(Silicon, 1, Oxygen, 2)
+                .build();
+
+        //eio
+        GTQTMaterials.RedstoneAlloy = new Material.Builder(getMaterialsId(), gregtechId("redstone_alloy"))
+                .ingot().fluid()
+                .color(0x943423).iconSet(SHINY)
+                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROD,GENERATE_FRAME,GENERATE_BOLT_SCREW,GENERATE_FOIL,GENERATE_GEAR,GENERATE_SMALL_GEAR,GENERATE_ROUND,GENERATE_SPRING)
+                .components(Redstone ,1,Hydrogen, 1,Oxygen ,1)
+                .blast(2700,LOW)
+                .cableProperties(32,1,2)
+                .build();
+
+        GTQTMaterials.PulsatingIron = new Material.Builder(getMaterialsId(), gregtechId("pulsating_iron"))
+                .ingot().fluid()
+                .color(0x4b915b).iconSet(SHINY)
+                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROD,GENERATE_FRAME,GENERATE_BOLT_SCREW,GENERATE_FOIL,GENERATE_GEAR,GENERATE_SMALL_GEAR,GENERATE_ROUND,GENERATE_SPRING)
+                .components(EnderPearl ,1,Iron, 1,RedstoneAlloy ,1)
+                .build();
+
+        GTQTMaterials.ConductiveIron = new Material.Builder(getMaterialsId(), gregtechId("conductive_iron"))
+                .ingot().fluid()
+                .color(0xb89791).iconSet(SHINY)
+                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROD,GENERATE_FRAME,GENERATE_BOLT_SCREW,GENERATE_FOIL,GENERATE_GEAR,GENERATE_SMALL_GEAR,GENERATE_ROUND,GENERATE_SPRING)
+                .components(Silver ,1,Iron, 1,RedstoneAlloy ,1)
+                .build();
+
+        GTQTMaterials.EnergeticAlloy = new Material.Builder(getMaterialsId(), gregtechId("energetic_alloy"))
+                .ingot().fluid()
+                .color(0xd89045).iconSet(SHINY)
+                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROD,GENERATE_FRAME,GENERATE_BOLT_SCREW,GENERATE_FOIL,GENERATE_GEAR,GENERATE_SMALL_GEAR,GENERATE_ROUND,GENERATE_SPRING)
+                .components(BlackSteel ,1,Gold, 1,ConductiveIron ,1)
+                .blast(2700,LOW)
+                .cableProperties(512,2,4)
+                .build();
+
+        GTQTMaterials.VibrantAlloy = new Material.Builder(getMaterialsId(), gregtechId("vibrant_alloy"))
+                .ingot().fluid()
+                .color(0x859f2d).iconSet(SHINY)
+                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROD,GENERATE_FRAME,GENERATE_BOLT_SCREW,GENERATE_FOIL,GENERATE_GEAR,GENERATE_SMALL_GEAR,GENERATE_ROUND,GENERATE_SPRING)
+                .components(EnderEye ,1,EnergeticAlloy, 1,Chromite ,1)
+                .blast(2700,LOW)
+                .cableProperties(2048,4,4)
+                .build();
+
+        GTQTMaterials.Soularium = new Material.Builder(getMaterialsId(), gregtechId("soularium"))
+                .ingot().fluid()
+                .color(0x372719).iconSet(SHINY)
+                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROD,GENERATE_FRAME,GENERATE_BOLT_SCREW,GENERATE_FOIL,GENERATE_GEAR,GENERATE_SMALL_GEAR,GENERATE_ROUND,GENERATE_SPRING)
+                .components(Gold ,1,Ash,1)
+                .build();
+
+        GTQTMaterials.ElectricalSteel = new Material.Builder(getMaterialsId(), gregtechId("electrical_steel"))
+                .ingot().fluid()
+                .color(0x9d9d9d).iconSet(SHINY)
+                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROD,GENERATE_FRAME,GENERATE_BOLT_SCREW,GENERATE_FOIL,GENERATE_GEAR,GENERATE_SMALL_GEAR,GENERATE_ROUND,GENERATE_SPRING)
+                .components(Steel ,1,Coal, 1,Silicon ,1)
+                .blast(2700,LOW)
+                .rotorStats(9.0f, 5.0f, 3000)
+                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 28000, 5)
+                        .attackSpeed(0.1F).enchantability(21).build())
+                .cableProperties(128,2,2)
+                .build();
+
+        GTQTMaterials.DarkSteel = new Material.Builder(getMaterialsId(), gregtechId("dark_steel"))
+                .ingot().fluid()
+                .color(0x2f292f).iconSet(SHINY)
+                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROD,GENERATE_FRAME,GENERATE_BOLT_SCREW,GENERATE_FOIL,GENERATE_GEAR,GENERATE_SMALL_GEAR,GENERATE_ROUND,GENERATE_SPRING)
+                .components(ElectricalSteel ,1,Coal, 1,Obsidian ,1)
+                .rotorStats(12.0f, 6.0f, 4500)
+                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 32000, 5)
+                        .attackSpeed(0.1F).enchantability(21).build())
+                .blast(3600,MID)
+                .build();
+
+        GTQTMaterials.EndSteel = new Material.Builder(getMaterialsId(), gregtechId("end_steel"))
+                .ingot().fluid()
+                .color(0xbdb88c).iconSet(SHINY)
+                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROD,GENERATE_FRAME,GENERATE_BOLT_SCREW,GENERATE_FOIL,GENERATE_GEAR,GENERATE_SMALL_GEAR,GENERATE_ROUND,GENERATE_SPRING)
+                .components(DarkSteel ,1,Endstone, 1,TungstenSteel ,1)
+                .rotorStats(15.0f, 7.0f, 6000)
+                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 36000, 5)
+                        .attackSpeed(0.1F).enchantability(21).build())
+                .blast(4500,MID)
+                .build();
+
+        GTQTMaterials.CrystallineAlloy = new Material.Builder(getMaterialsId(), gregtechId("crystalline_alloy"))
+                .ingot().fluid()
+                .color(0x8FE3F7).iconSet(SHINY)
+                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROD,GENERATE_FRAME,GENERATE_BOLT_SCREW,GENERATE_FOIL,GENERATE_GEAR,GENERATE_SMALL_GEAR,GENERATE_ROUND,GENERATE_SPRING)
+                .components(PulsatingIron ,1,Diamond,1,Emerald,1,Gold,1)
+                .blast(4500,MID)
+                .build();
+
+        GTQTMaterials.MelodicAlloy = new Material.Builder(getMaterialsId(), gregtechId("melodic_alloy"))
+                .ingot().fluid()
+                .color(0xA877A8).iconSet(SHINY)
+                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROD,GENERATE_FRAME,GENERATE_BOLT_SCREW,GENERATE_FOIL,GENERATE_GEAR,GENERATE_SMALL_GEAR,GENERATE_ROUND,GENERATE_SPRING)
+                .components(EndSteel ,1,EnderEye,1,Bismuth,1)
+                .blast(5400,MID)
+                .build();
+
+        GTQTMaterials.StellarAlloy = new Material.Builder(getMaterialsId(), gregtechId("stellar_alloy"))
+                .ingot().fluid()
+                .color(0xCCCCCC).iconSet(SHINY)
+                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROD,GENERATE_FRAME,GENERATE_BOLT_SCREW,GENERATE_FOIL,GENERATE_GEAR,GENERATE_SMALL_GEAR,GENERATE_ROUND,GENERATE_SPRING)
+                .components(MelodicAlloy ,1,NetherStar,1,Naquadah,1)
+                .blast(7200,MID)
+                .rotorStats(15.0f, 7.0f, 6000)
+                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 32000, 5)
+                        .attackSpeed(0.1F).enchantability(21).build())
+                .cableProperties(32768,6,8)
+                .build();
+
+        GTQTMaterials.CrystallinePinkSlime = new Material.Builder(getMaterialsId(), gregtechId("crystalline_pink_slime"))
+                .ingot().fluid()
+                .color(0xE79EDB).iconSet(SHINY)
+                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROD,GENERATE_FRAME,GENERATE_BOLT_SCREW,GENERATE_FOIL,GENERATE_GEAR,GENERATE_SMALL_GEAR,GENERATE_ROUND,GENERATE_SPRING)
+                .components(CrystallineAlloy ,1,Diamond,1,RawRubber,1)
+                .blast(5000,MID)
+                .rotorStats(15.0f, 7.0f, 4000)
+                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 6000, 5)
+                        .attackSpeed(0.1F).enchantability(21).build())
+                .cableProperties(2048,6,2)
+                .build();
+
+        GTQTMaterials.EnergeticSilver = new Material.Builder(getMaterialsId(), gregtechId("energetic_silver"))
+                .ingot().fluid()
+                .color(0x598DB3).iconSet(SHINY)
+                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROD,GENERATE_FRAME,GENERATE_BOLT_SCREW,GENERATE_FOIL,GENERATE_GEAR,GENERATE_SMALL_GEAR,GENERATE_ROUND,GENERATE_SPRING)
+                .components(Silver ,1,ConductiveIron,1,BlackSteel,1)
+                .blast(2700,MID)
+                .rotorStats(15.0f, 7.0f, 2000)
+                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 8000, 5)
+                        .attackSpeed(0.1F).enchantability(21).build())
+                .cableProperties(512,4,2)
+                .build();
+
+        GTQTMaterials.VividAlloy = new Material.Builder(getMaterialsId(), gregtechId("vivid_alloy"))
+                .ingot().fluid()
+                .color(0x469BB1).iconSet(SHINY)
+                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROD,GENERATE_FRAME,GENERATE_BOLT_SCREW,GENERATE_FOIL,GENERATE_GEAR,GENERATE_SMALL_GEAR,GENERATE_ROUND,GENERATE_SPRING)
+                .components(Chromite ,1,EnergeticSilver,1,EnderEye,1)
+                .blast(3000,MID)
+                .rotorStats(15.0f, 7.0f, 4000)
+                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 12000, 5)
+                        .attackSpeed(0.1F).enchantability(21).build())
+                .cableProperties(2048,4,2)
+                .build();
+
+        GTQTMaterials.CrudeSteel = new Material.Builder(getMaterialsId(), gregtechId("crude_steel"))
+                .ingot().fluid()
+                .color(0x807C74).iconSet(ROUGH)
+                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROD,GENERATE_FRAME,GENERATE_BOLT_SCREW,GENERATE_FOIL,GENERATE_GEAR,GENERATE_SMALL_GEAR,GENERATE_ROUND,GENERATE_SPRING)
+                .components(MelodicAlloy ,1,NetherStar,1,Naquadah,1)
+                .cableProperties(32768,6,8)
+                .build();
+
     }
 }

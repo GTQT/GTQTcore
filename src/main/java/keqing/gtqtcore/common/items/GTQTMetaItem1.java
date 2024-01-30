@@ -3,6 +3,7 @@ package keqing.gtqtcore.common.items;
 import gregtech.api.GTValues;
 import gregtech.api.GregTechAPI;
 import gregtech.api.items.metaitem.ElectricStats;
+import gregtech.api.items.metaitem.MetaItem;
 import gregtech.api.items.metaitem.StandardMetaItem;
 import gregtech.common.items.behaviors.MultiblockBuilderBehavior;
 import gregtech.common.items.behaviors.ProspectorScannerBehavior;
@@ -77,6 +78,25 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         RETICLE_ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT=this.addItem(72, "reticle.ultra_high_power_integrated_circuit").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         RETICLE_ULTRA_LOW_POWER_INTEGRATED_CIRCUIT=this.addItem(73, "reticle.ultra_low_power_integrated_circuit").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         RETICLE_SILICON=this.addItem(74, "reticle.silicon").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+
+        //AE
+        //神秘硅束
+        AE_SILICON = this.addItem(75, "ae.silicon").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        //神秘硅晶
+        AE_WAFER=this.addItem(76, "ae.wafer").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        //光掩模*3
+        AE_RETICLEA=this.addItem(77, "ae.reticlea").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        AE_RETICLEB=this.addItem(78, "ae.reticleb").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        AE_RETICLEC=this.addItem(79, "ae.reticlec").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        //掺杂晶圆*3
+        AE_WAFERA=this.addItem(80, "ae.wafera").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        AE_WAFERB=this.addItem(81, "ae.waferb").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        AE_WAFERC=this.addItem(82, "ae.waferc").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        //蚀刻后*3
+        AE_A=this.addItem(83, "ae.a").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        AE_B=this.addItem(84, "ae.b").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        AE_C=this.addItem(85, "ae.c").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+
 
         //神秘农业
         COPPER_CROP = addItem(200, "copper_crop");

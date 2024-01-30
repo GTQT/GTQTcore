@@ -187,7 +187,7 @@ public class EPMaterialFlagAddition {
         Silver.addFlags(GENERATE_NANOTUBE, GENERATE_NANOSENSOR); // For PCB factory Etching
         Gold.addFlags(GENERATE_NANOTUBE, GENERATE_NANOSENSOR); // For PCB factory Etching
         Silicon.addFlags(GENERATE_DENSE);
-        RedAlloy.addFlags(GENERATE_RING);
+        RedAlloy.addFlags(GENERATE_RING,GENERATE_GEAR);
         Carbon.addFlags(GENERATE_ROD);
         Graphite.setProperty(PropertyKey.FLUID, new FluidProperty());
         Magnesium.addFlags(GENERATE_PLATE,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_ROTOR,GENERATE_ROD,GENERATE_SPRING,GENERATE_GEAR,GENERATE_FRAME);

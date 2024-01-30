@@ -108,6 +108,18 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem HEAVY_ALLOY_PLATEC;
     public static MetaItem<?>.MetaValueItem HEAVY_ALLOY_PLATED;
     public static MetaItem<?>.MetaValueItem HEAVY_ALLOY_PLATEE;
+    public static MetaItem<?>.MetaValueItem AE_SILICON;
+    public static MetaItem<?>.MetaValueItem AE_WAFER;
+    public static MetaItem<?>.MetaValueItem AE_RETICLEA;
+    public static MetaItem<?>.MetaValueItem AE_RETICLEB;
+    public static MetaItem<?>.MetaValueItem AE_RETICLEC;
+    public static MetaItem<?>.MetaValueItem AE_WAFERA;
+    public static MetaItem<?>.MetaValueItem AE_WAFERB;
+    public static MetaItem<?>.MetaValueItem AE_WAFERC;
+    public static MetaItem<?>.MetaValueItem AE_A;
+    public static MetaItem<?>.MetaValueItem AE_B;
+    public static MetaItem<?>.MetaValueItem AE_C;
+
 
 
     public static void initialization()

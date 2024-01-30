@@ -196,6 +196,23 @@ public class GTQTMaterials {
     public static Material RutheniumfOxide;
     public static Material RutheniumgOxide;
     public static Material IridiumFluid;
+    public static Material Fluix;
+    public static Material RedstoneAlloy;
+    public static Material PulsatingIron;
+    public static Material ConductiveIron;
+    public static Material EnergeticAlloy;
+    public static Material VibrantAlloy;
+    public static Material Soularium;
+    public static Material ElectricalSteel;
+    public static Material DarkSteel;
+    public static Material EndSteel;
+    public static Material CrystallineAlloy;
+    public static Material MelodicAlloy;
+    public static Material StellarAlloy;
+    public static Material CrudeSteel;
+    public static Material CrystallinePinkSlime;
+    public static Material EnergeticSilver;
+    public static Material VividAlloy;
 
     //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/api/unification/GSMaterials.java
 

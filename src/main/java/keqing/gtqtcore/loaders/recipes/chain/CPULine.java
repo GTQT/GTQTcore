@@ -23,6 +23,97 @@ public class CPULine {
         LaserStepper();  //光刻
         Pre();          //基板
         Silicon();      //晶圆
+        AE();
+    }
+
+    private static void AE() {
+        BLAST_RECIPES.recipeBuilder()
+                .input(AE_WAFER)
+                .input(dust,Gold,16)
+                .output(AE_WAFERA)
+                .blastFurnaceTemp(3600)
+                .fluidInputs()
+                .duration(9000)
+                .EUt(VA[MV])
+                .buildAndRegister();
+
+        BLAST_RECIPES.recipeBuilder()
+                .input(AE_WAFER)
+                .input(dust,Fluix,16)
+                .output(AE_WAFERB)
+                .blastFurnaceTemp(3600)
+                .fluidInputs()
+                .duration(9000)
+                .EUt(VA[MV])
+                .buildAndRegister();
+
+        BLAST_RECIPES.recipeBuilder()
+                .input(AE_WAFER)
+                .input(dust,Diamond,16)
+                .output(AE_WAFERC)
+                .blastFurnaceTemp(3600)
+                .fluidInputs()
+                .duration(9000)
+                .EUt(VA[MV])
+                .buildAndRegister();
+
+        CUTTER_RECIPES.recipeBuilder()
+                .input(AE_SILICON)
+                .output(AE_WAFER,16)
+                .fluidInputs(Lubricant.getFluid(4000))
+                .duration(9000)
+                .EUt(VA[MV])
+                .buildAndRegister();
+
+        STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[HV]).notConsumable(AE_RETICLEA)
+                .Laser(600)
+                .input(AE_WAFERA).output(AE_A,1)
+                .totalCWU(9600).CWUt(16).fluidInputs(HydrogenSilsesquioxane.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
+
+        STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[HV]).notConsumable(AE_RETICLEB)
+                .Laser(600)
+                .input(AE_WAFERB).output(AE_B,1)
+                .totalCWU(9600).CWUt(16).fluidInputs(HydrogenSilsesquioxane.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
+
+        STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[HV]).notConsumable(AE_RETICLEC)
+                .Laser(600)
+                .input(AE_WAFERC).output(AE_C,1)
+                .totalCWU(9600).CWUt(16).fluidInputs(HydrogenSilsesquioxane.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
+
+
+
+        STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[HV]).notConsumable(AE_RETICLEA)
+                .Laser(200)
+                .input(AE_WAFERA).output(AE_A,4)
+                .totalCWU(32000).CWUt(32).fluidInputs(SU8_Photoresist.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
+
+        STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[HV]).notConsumable(AE_RETICLEB)
+                .Laser(200)
+                .input(AE_WAFERB).output(AE_B,4)
+                .totalCWU(32000).CWUt(32).fluidInputs(SU8_Photoresist.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
+
+        STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[HV]).notConsumable(AE_RETICLEC)
+                .Laser(200)
+                .input(AE_WAFERC).output(AE_C,4)
+                .totalCWU(32000).CWUt(32).fluidInputs(SU8_Photoresist.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
+
+
+
+        STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[HV]).notConsumable(AE_RETICLEA)
+                .Laser(60)
+                .input(AE_WAFERA).output(AE_A,16)
+                .totalCWU(64000).CWUt(64).fluidInputs(Vinylcinnamate.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
+
+        STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[HV]).notConsumable(AE_RETICLEB)
+                .Laser(60)
+                .input(AE_WAFERB).output(AE_B,16)
+                .totalCWU(64000).CWUt(64).fluidInputs(Vinylcinnamate.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
+
+        STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[HV]).notConsumable(AE_RETICLEC)
+                .Laser(60)
+                .input(AE_WAFERC).output(AE_C,16)
+                .totalCWU(64000).CWUt(64).fluidInputs(Vinylcinnamate.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
+
     }
 
     private static void LaserStepper() {
@@ -207,11 +298,30 @@ public class CPULine {
                 .fluidInputs(Water.getFluid(10000))
                 .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
 
-        //gcys pic
+        //TODO gcys pic
 
     }
 
     private static void LaserEngraving() {
+        //TODO
+        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8)
+            .fluidInputs(Water.getFluid(10000))
+            .notConsumable(ingot, Iron).output(AE_RETICLEA)
+            .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
+
+        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8)
+                .fluidInputs(Water.getFluid(10000))
+                .notConsumable(ingot, Boron).output(AE_RETICLEB)
+                .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
+
+        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8)
+                .fluidInputs(Water.getFluid(10000))
+                .notConsumable(ingot, Steel).output(AE_RETICLEC)
+                .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
+
+
+
+
         LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8)
                 .fluidInputs(Water.getFluid(10000))
                 .notConsumable(craftingLens, Color.Blue).output(RETICLE_INTEGRATED_LOGIC_CIRCUIT)
