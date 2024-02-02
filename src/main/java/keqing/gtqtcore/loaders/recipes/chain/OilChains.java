@@ -120,7 +120,44 @@ public class OilChains {
                 .duration(1000)
                 .buildAndRegister();
 
+
         //预处理
+        ELEOIL.recipeBuilder()
+                .fluidInputs(RawOil.getFluid(1000))
+                .fluidInputs(Demulsifier.getFluid(100))
+                .fluidOutputs(PreTreatedCrudeOil.getFluid(1500))
+                .fluidOutputs(SaltWater.getFluid(2000))
+                .duration(200)
+                .EUt(120)
+                .buildAndRegister();
+
+        ELEOIL.recipeBuilder()
+                .fluidInputs(OilHeavy.getFluid(1000))
+                .fluidInputs(Demulsifier.getFluid(100))
+                .fluidOutputs(PreTreatedCrudeOil.getFluid(1500))
+                .fluidOutputs(SaltWater.getFluid(2000))
+                .duration(200)
+                .EUt(120)
+                .buildAndRegister();
+
+        ELEOIL.recipeBuilder()
+                .fluidInputs(OilLight.getFluid(1000))
+                .fluidInputs(Demulsifier.getFluid(100))
+                .fluidOutputs(PreTreatedCrudeOil.getFluid(1500))
+                .fluidOutputs(SaltWater.getFluid(2000))
+                .duration(200)
+                .EUt(120)
+                .buildAndRegister();
+
+        ELEOIL.recipeBuilder()
+                .fluidInputs(Oil.getFluid(1000))
+                .fluidInputs(Demulsifier.getFluid(100))
+                .fluidOutputs(PreTreatedCrudeOil.getFluid(1500))
+                .fluidOutputs(SaltWater.getFluid(2000))
+                .duration(200)
+                .EUt(120)
+                .buildAndRegister();
+
     }
     private static void Kettle()
     {
@@ -467,6 +504,14 @@ public class OilChains {
                 .fluidInputs(Concrete.getFluid(144))
                 .fluidInputs(Asphalt.getFluid(144))
                 .outputs(MetaBlocks.ASPHALT.getItemVariant(BlockAsphalt.BlockType.ASPHALT))
+                .EUt(30)
+                .duration(200)
+                .buildAndRegister();
+
+        //油气处理
+        CHEMICAL_RECIPES.recipeBuilder()
+                .fluidInputs(OilGas.getFluid(1000))
+                .fluidOutputs(RefineryGas.getFluid(4000))
                 .EUt(30)
                 .duration(200)
                 .buildAndRegister();

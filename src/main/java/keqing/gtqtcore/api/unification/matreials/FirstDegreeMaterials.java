@@ -531,5 +531,7 @@ public class FirstDegreeMaterials {
                 .cableProperties(32768,6,8)
                 .build();
 
+
+
     }
 }

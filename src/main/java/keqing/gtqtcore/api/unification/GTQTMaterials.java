@@ -213,6 +213,13 @@ public class GTQTMaterials {
     public static Material CrystallinePinkSlime;
     public static Material EnergeticSilver;
     public static Material VividAlloy;
+    public static Material LeanGoldBs;
+    public static Material LeanGoldJc;
+    public static Material LeanCopperJc;
+    public static Material LeanGoldCl;
+    public static Material LeanGoldDr;
+    public static Material RichGoldBs;
+    public static Material RichCopperJc;
 
     //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/api/unification/GSMaterials.java
 

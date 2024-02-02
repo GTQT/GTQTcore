@@ -83,6 +83,9 @@ public class GTQTcoreRecipeMaps {
 
     public static final RecipeMap<StarComputationRecipeBuilder> STAR_SURVEY;
     public static final RecipeMap<SimpleRecipeBuilder> GANTRY_CRANE;
+    public static final RecipeMap<SimpleRecipeBuilder> CLARIFIER;
+    public static final RecipeMap<SimpleRecipeBuilder>  ELEOIL;
+    public static final RecipeMap<SimpleRecipeBuilder>  REACTION_FURNACE_RECIPES;
 
 
     private GTQTcoreRecipeMaps() {}
@@ -267,6 +270,15 @@ public class GTQTcoreRecipeMaps {
 
         GANTRY_CRANE = new RecipeMap<>("gantry_crane",
                 9, 1, 0, 0, new SimpleRecipeBuilder(), false);
+
+        CLARIFIER = new RecipeMap<>("clarifire",
+                1, 1, 1, 1, new SimpleRecipeBuilder(), false);
+
+        ELEOIL = new RecipeMap<>("ele_oil",
+                0, 0, 2, 2, new SimpleRecipeBuilder(), false);
+
+        REACTION_FURNACE_RECIPES = new RecipeMap<>("reaction_furnace",
+                3, 3, 3, 3, new SimpleRecipeBuilder(), false);
 
         SEPTIC_TANK = new RecipeMap<>("septic_tank",
                 2, 2, 2, 2, new SimpleRecipeBuilder(), false);

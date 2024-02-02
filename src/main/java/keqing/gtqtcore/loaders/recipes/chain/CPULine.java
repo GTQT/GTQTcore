@@ -3,6 +3,9 @@ import gregicality.science.api.recipes.GCYSRecipeMaps;
 import gregtech.api.metatileentity.multiblock.CleanroomType;
 import gregtech.common.items.MetaItems;
 import gregtech.api.unification.material.MarkerMaterials.Color;
+import keqing.gtqtcore.common.block.GTQTMetaBlocks;
+import keqing.gtqtcore.common.block.blocks.GTQTADVGlass;
+
 import static gregicality.science.api.unification.materials.GCYSMaterials.*;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
@@ -14,6 +17,7 @@ import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.TJMaterials.*;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.electrode;
+import static keqing.gtqtcore.common.block.blocks.GTQTADVGlass.CasingType.SILICATE_GLASS;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.RETICLE_POWER_INTEGRATED_CIRCUIT;
 
@@ -303,6 +307,17 @@ public class CPULine {
     }
 
     private static void LaserEngraving() {
+        //初加工 CVD法
+        REACTION_FURNACE_RECIPES.recipeBuilder()
+                .inputs(GTQTMetaBlocks.ADV_GLASS.getItemVariant(SILICATE_GLASS))
+                .output(RETICLE_SILICON)
+                .fluidInputs(SiliconTetrachloride.getFluid(16000))
+                .duration(1000)
+                .EUt(120)
+                .buildAndRegister();
+
+
+
         //TODO
         LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8)
             .fluidInputs(Water.getFluid(10000))

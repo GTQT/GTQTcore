@@ -213,5 +213,43 @@ public class SecondDegreeMaterials {
                 .dust()
                 .color(0xFFFF00)
                 .build();
+
+        //硫化金处理
+        //焙烧
+        GTQTMaterials.LeanGoldBs  = new Material.Builder(getMaterialsId(), gregtechId("len_gold_bs"))
+                .dust()
+                .color(0xFFFF00)
+                .build();
+
+        //氰化钠浸出
+        GTQTMaterials.LeanGoldJc  = new Material.Builder(getMaterialsId(), gregtechId("len_gold_js"))
+                .fluid()
+                .color(0xFFFF00)
+                .build();
+
+        GTQTMaterials.LeanCopperJc  = new Material.Builder(getMaterialsId(), gregtechId("len_copper_js"))
+                .dust()
+                .color(0xFFFF00)
+                .build();
+
+        GTQTMaterials.LeanGoldCl  = new Material.Builder(getMaterialsId(), gregtechId("len_gold_Cl"))
+                .fluid()
+                .color(0xFFFF00)
+                .build();
+
+        GTQTMaterials.LeanGoldDr  = new Material.Builder(getMaterialsId(), gregtechId("len_gold_dr"))
+                .dust()
+                .color(0xFFFF00)
+                .build();
+
+        GTQTMaterials.RichGoldBs  = new Material.Builder(getMaterialsId(), gregtechId("rich_gold_bs"))
+                .dust()
+                .color(0xFFFF00)
+                .build();
+
+        GTQTMaterials.RichCopperJc  = new Material.Builder(getMaterialsId(), gregtechId("rich_copper_js"))
+                .dust()
+                .color(0xFFFF00)
+                .build();
     }
 }
