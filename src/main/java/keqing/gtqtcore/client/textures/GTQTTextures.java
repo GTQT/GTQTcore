@@ -31,6 +31,7 @@ public class GTQTTextures {
     public static SimpleOverlayRenderer PRECISE_ASSEMBLER_CASING_MK2;
     public static SimpleOverlayRenderer PRECISE_ASSEMBLER_CASING_MK3;
     public static SimpleOverlayRenderer AD_CASING;
+    public static SimpleOverlayRenderer SPACE_ELEVATOR_CASING;
     public static SimpleOverlayRenderer GALVANIZE_STEEL_CASING;
     public static SimpleOverlayRenderer ST_CASING;
     public static SimpleOverlayRenderer ASEPTIC_FARM_CASING;
@@ -93,6 +94,7 @@ public class GTQTTextures {
         WIRELESS_HATCH_HATCH = new SimpleOverlayRenderer("overlay/wireless_hatch/overlay_front");
         FLOTATION_CASING = new SimpleOverlayRenderer("multiblock/isa_casing/flotation_casing");
         ISA_CASING = new SimpleOverlayRenderer("multiblock/isa_casing/isa_mill_casing");
+        SPACE_ELEVATOR_CASING = new SimpleOverlayRenderer("multiblock/casings/support_structure_side");
         ASEPTIC_FARM_CASING = new SimpleOverlayRenderer("multiblock/isa_casing/aseptic_farm_machine_casing");
         PROCESS = new SimpleOverlayRenderer("multiblock/isa_casing/process_casing");
         VACUUM_CASING = new SimpleOverlayRenderer("multiblock/isa_casing/vacuum_casing");

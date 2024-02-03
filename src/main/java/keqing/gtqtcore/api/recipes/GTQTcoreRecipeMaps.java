@@ -87,6 +87,8 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<SimpleRecipeBuilder>  ELEOIL;
     public static final RecipeMap<SimpleRecipeBuilder>  REACTION_FURNACE_RECIPES;
 
+    public static final RecipeMap<SEComputationRecipeBuilder> SPACE_ELEVATOR_DRILLING_MODULE;
+    public static final RecipeMap<SEComputationRecipeBuilder> SPACE_ELEVATOR_MINING_MODULE;
 
     private GTQTcoreRecipeMaps() {}
     static {
@@ -214,6 +216,14 @@ public class GTQTcoreRecipeMaps {
         PCB=new  RecipeMap<>("pcb", 6, 6, 6, 6, new PCBRecipeBuilder(), false);
         COMPONENT_ASSEMBLY_LINE_RECIPES = new RecipeMapComponentAssemblyLine<>("component_assembly_line_recipes", 12, 1,  12, 0, new CACasingTierRecipeBuilder(), false)
                 .setSound(GTSoundEvents.ASSEMBLER);
+
+        SPACE_ELEVATOR_MINING_MODULE = new RecipeMapSE<>("space_elevator_mining_module", 4, 16,  2, 0, new SEComputationRecipeBuilder(), false)
+                .setSound(GTSoundEvents.ASSEMBLER);
+
+        SPACE_ELEVATOR_DRILLING_MODULE = new RecipeMapSF<>("space_elevator_drilling_module", 4, 0,  2, 16, new SEComputationRecipeBuilder(), false)
+                .setSound(GTSoundEvents.ASSEMBLER);
+
+
 
         DIGESTER_RECIPES = new RecipeMap<>("digester_recipes", 4, 4, 4, 4, new SimpleRecipeBuilder(), false);
 

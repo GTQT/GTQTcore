@@ -18,6 +18,7 @@ public class GTQTRecipesManager {
         LubricantChains.init();
         PEEKChain.init();
         ELE.init();
+        SEloader.init();
         CPULine.init();
         AllouKlin.init();
         GTComponents.init();

@@ -623,6 +623,12 @@ gregtech.universal.tooltip.kqcc=端口等级:%s
 gregtech.machine.wireless.export.tooltip=§c其实是动力仓(还没做完)
 gregtech.machine.wireless.import.tooltip=§a其实是能源仓(还没做完)
 gtqtcore.multiblock.tank.height=高度: %s
+
+gtqtcore.multiblock.se.motor=轨道加速器: %s 目标星域: %s
+gtqtcore.multiblock.se.abcdn=模块项目: 矿机 超频 耗能 并行
+gtqtcore.multiblock.se.abcd=模块等级: %s  %s  %s  %s
+gtqtcore.multiblock.se.threshold_decrement=星域缩小
+gtqtcore.multiblock.se.threshold_increment=星域扩大
 gtqtcore.pa.mode1=加速模式：加速 偏转相位：%s 速度：%s C
 gtqtcore.pa.mode2=加速模式：稳定 偏转相位：%s 速度：%s C
 gtqtcore.pa.mode3=加速模式：减速 偏转相位：%s 速度：%s C

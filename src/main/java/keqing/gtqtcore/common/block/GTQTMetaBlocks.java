@@ -32,6 +32,7 @@ public class GTQTMetaBlocks {
     public static GTQTKQCC KQCC;
     public static GTQTBlockGlassCasing GLASS_CASING;
     public static GTQTStepper STEPPER;
+    public static GTQTSpaceElevator SPACE_ELEVATOR;
     public static final BlockPineLeaves PINE_LEAVES = new BlockPineLeaves();
     public static final BlockPineLog PINE_LOG = new BlockPineLog();
     public static final BlockPineSapling PINE_SAPLING = new BlockPineSapling();
@@ -50,6 +51,8 @@ public class GTQTMetaBlocks {
         WIRE_COIL.setRegistryName("wire_coil");
         QUANTUM_CASING = new GTQTQuantumCasing();
         QUANTUM_CASING.setRegistryName("quantum_casing");
+        SPACE_ELEVATOR = new GTQTSpaceElevator();
+        SPACE_ELEVATOR.setRegistryName("space_elevator");
         TURBINE_CASING = new GTQTTurbineCasing();
         TURBINE_CASING.setRegistryName("turbine_casing");
         TURBINE_CASING1 = new GTQTTurbineCasing1();
@@ -84,6 +87,7 @@ public class GTQTMetaBlocks {
         registerItemModel(ADV_GLASS);
         registerItemModel(WIRE_COIL);
         registerItemModel(QUANTUM_CASING);
+        registerItemModel(SPACE_ELEVATOR);
         registerItemModel(TURBINE_CASING);
         registerItemModel(ROAD);
         registerItemModel(TURBINE_CASING1);
