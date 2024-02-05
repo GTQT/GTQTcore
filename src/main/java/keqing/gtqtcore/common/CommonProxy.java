@@ -10,6 +10,7 @@ import keqing.gtqtcore.api.utils.GTQTLog;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTBlockWireCoil;
 import keqing.gtqtcore.common.block.blocks.GTQTCrops;
+import keqing.gtqtcore.common.items.GTQTMetaItems;
 import keqing.gtqtcore.common.items.metaitems.GTQTMetaToolItems;
 import keqing.gtqtcore.loaders.recipes.*;
 import keqing.gtqtcore.loaders.recipes.gcys.GCYSMaterialInfoLoader;
@@ -41,10 +42,29 @@ import static keqing.gtqtcore.common.block.GTQTMetaBlocks.*;
 )
 public class CommonProxy {
 
-    public static final CreativeTabs GTQTCore_TAB = new CreativeTabs("GTQTCore") {
+    public static final CreativeTabs GTQTCore_TAB = new CreativeTabs("gtqtcore") {
         @Override
         public ItemStack createIcon() {
-            return MetaItems.WETWARE_MAINFRAME_UHV.getStackForm();
+            return GTQTMetaItems.SUPRACAUSAL_MAINFRAME.getStackForm();
+        }
+    };
+
+    public static final CreativeTabs GTQTCore_BIO = new CreativeTabs("gtqtbio") {
+        @Override
+        public ItemStack createIcon() {
+            return GTQTMetaItems.COMMON_ALGAE.getStackForm();
+        }
+    };
+    public static final CreativeTabs GTQTCore_SP = new CreativeTabs("gtqtsp") {
+        @Override
+        public ItemStack createIcon() {
+            return GTQTMetaItems.COMPUTERTIER6.getStackForm();
+        }
+    };
+    public static final CreativeTabs GTQTCore_NE = new CreativeTabs("gtqtae") {
+        @Override
+        public ItemStack createIcon() {
+            return GTQTMetaItems.AE_C.getStackForm();
         }
     };
 

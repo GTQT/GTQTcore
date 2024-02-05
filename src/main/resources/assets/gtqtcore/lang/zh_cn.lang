@@ -1143,3 +1143,8 @@ gregica.gui.confirm=确认
 gregica.mixin.nerf.steam.solar.detail=§c工作超过1天后,输出将会在10天内线性减小到1/3
 gregtech.generator.1=§b发电效率：%d
 gregica.mixin.info.steam=当前蒸汽输出: %d l/s
+
+itemGroup.gtqtcore=量子跃迁-核心
+itemGroup.gtqtbio=量子跃迁-生物工程
+itemGroup.gtqtsp=量子跃迁-星辰大海
+itemGroup.gtqtae=量子跃迁-网道行者

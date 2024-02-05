@@ -79,7 +79,7 @@ public class GrapheneChain {
                 .input(plate, HSLASteel, 6)
                 .inputs(MetaItems.VACUUM_TUBE.getStackForm())
                 .outputs(GTQTMetaItems.MAGNETRON.getStackForm())
-                .duration(600).EUt(VA[IV]).buildAndRegister();
+                .duration(600).EUt(VA[ZPM]).buildAndRegister();
 
         // TODO LIG Graphene
     }

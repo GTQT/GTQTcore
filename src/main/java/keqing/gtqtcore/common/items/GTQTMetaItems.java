@@ -69,8 +69,49 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem CARBON_CROP;
     public static MetaItem<?>.MetaValueItem GOLD_CROP;
     public static MetaItem<?>.MetaValueItem PROSPECTOR_UV;
-    public static MetaItem<?>.MetaValueItem PROSPECTOR_UIV;
+    public static MetaItem<?>.MetaValueItem COSMIC_CAPACITOR;
 
+    public static MetaItem<?>.MetaValueItem COSMIC_DIODE;
+    public static MetaItem<?>.MetaValueItem COSMIC_RESISTOR;
+    public static MetaItem<?>.MetaValueItem COSMIC_TRANSISTOR;
+    public static MetaItem<?>.MetaValueItem COSMIC_INDUCTOR;
+
+    public static MetaItem<?>.MetaValueItem SUPRACAUSAL_CAPACITOR;
+    public static MetaItem<?>.MetaValueItem SUPRACAUSAL_DIODE;
+    public static MetaItem<?>.MetaValueItem SUPRACAUSAL_RESISTOR;
+    public static MetaItem<?>.MetaValueItem SUPRACAUSAL_TRANSISTOR;
+    public static MetaItem<?>.MetaValueItem SUPRACAUSAL_INDUCTOR;
+    public static MetaItem<?>.MetaValueItem COSMIC_INFORMATION_MODULE;
+    public static MetaItem<?>.MetaValueItem HOLOGRAPHIC_INFORMATION_IMC;
+    public static MetaItem<?>.MetaValueItem SPACETIME_CONDENSER;
+    public static MetaItem<?>.MetaValueItem LIGHT_CONE_MODULE;
+    public static MetaItem<?>.MetaValueItem PHASE_CHANGE_MEMORY;
+    public static MetaItem<?>.MetaValueItem OPTICAL_NOR_MEMORY_CHIP;
+    public static MetaItem<?>.MetaValueItem SPIN_TRANSFER_TORQUE_MEMORY;
+    public static MetaItem<?>.MetaValueItem SPINTRONIC_NAND_MEMORY_CHIP;
+    public static MetaItem<?>.MetaValueItem ATTO_PIC_WAFER;
+    public static MetaItem<?>.MetaValueItem ATTO_PIC_CHIP;
+    public static MetaItem<?>.MetaValueItem ZEPTO_PIC_WAFER;
+    public static MetaItem<?>.MetaValueItem ZEPTO_PIC_CHIP;
+    public static MetaItem<?>.MetaValueItem DUBNIUM_BOULE;
+    public static MetaItem<?>.MetaValueItem DUBNIUM_WAFER;
+    public static MetaItem<?>.MetaValueItem CUBIC_ZIRCONIA_EUROPIUM_BOULE;
+    public static MetaItem<?>.MetaValueItem CUBIC_ZIRCONIA_EUROPIUM_WAFER;
+    public static MetaItem<?>.MetaValueItem CRYSTAL_INTERFACE_WAFER;
+    public static MetaItem<?>.MetaValueItem CRYSTAL_INTERFACE_CHIP;
+    public static MetaItem<?>.MetaValueItem UHASOC_WAFER;
+    public static MetaItem<?>.MetaValueItem UHASOC_CHIP;
+    public static MetaItem<?>.MetaValueItem INTRAVITAL_SOC;
+    public static MetaItem<?>.MetaValueItem STRONTIUM_CARBONATE_BOHRIUM_BOULE;
+    public static MetaItem<?>.MetaValueItem STRONTIUM_CARBONATE_BOHRIUM_WAFER;
+    public static MetaItem<?>.MetaValueItem STRONTIUM_CARBONATE_OPTICAL_WAFER;
+    public static MetaItem<?>.MetaValueItem OPTICAL_IMC_BOARD;
+    public static MetaItem<?>.MetaValueItem PHOTOELECTRON_SOC;
+    public static MetaItem<?>.MetaValueItem HELIUM_LASER;
+    public static MetaItem<?>.MetaValueItem NEON_LASER;
+    public static MetaItem<?>.MetaValueItem ARGON_LASER;
+    public static MetaItem<?>.MetaValueItem KRYPTON_LASER;
+    public static MetaItem<?>.MetaValueItem XENON_LASER;
     public static MetaItem<?>.MetaValueItem RETICLE_ADVANCED_SYSTEM_ON_CHIP;
     public static MetaItem<?>.MetaValueItem RETICLE_CENTRAL_PROCESSING_UNIT;
     public static MetaItem<?>.MetaValueItem RETICLE_INTEGRATED_LOGIC_CIRCUIT;
@@ -183,8 +224,6 @@ public class GTQTMetaItems {
     // Crystal Circuit Components
     public static MetaItem<?>.MetaValueItem EU_DOPED_CUBIC_ZIRCONIA_BOULE;
     public static MetaItem<?>.MetaValueItem EU_DOPED_CUBIC_ZIRCONIA_WAFER;
-    public static MetaItem<?>.MetaValueItem CRYSTAL_INTERFACE_WAFER;
-    public static MetaItem<?>.MetaValueItem CRYSTAL_INTERFACE_CHIP;
     public static MetaItem<?>.MetaValueItem ENGRAVED_RUBY_CRYSTAL_CHIP;
     public static MetaItem<?>.MetaValueItem ENGRAVED_SAPPHIRE_CRYSTAL_CHIP;
     public static MetaItem<?>.MetaValueItem ENGRAVED_DIAMOND_CRYSTAL_CHIP;
@@ -198,7 +237,7 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem NONLINEAR_CHEMICAL_OSCILLATOR;
 
     // Optical Circuit Components
-    public static MetaItem<?>.MetaValueItem PHASE_CHANGE_MEMORY;
+
     public static MetaItem<?>.MetaValueItem OPTICAL_FIBER;
     public static MetaItem<?>.MetaValueItem DIELECTRIC_MIRROR;
     public static MetaItem<?>.MetaValueItem EMPTY_LASER_ASSEMBLY;
@@ -207,11 +246,27 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem OPTICAL_LASER_CONTROL_UNIT;
 
     // Spintronic Circuit Components
-    public static MetaItem<?>.MetaValueItem SPIN_TRANSFER_TORQUE_MEMORY;
     public static MetaItem<?>.MetaValueItem TOPOLOGICAL_INSULATOR_TUBE;
     public static MetaItem<?>.MetaValueItem BOSE_EINSTEIN_CONDENSATE_CONTAINMENT_UNIT;
     public static MetaItem<?>.MetaValueItem BOSE_EINSTEIN_CONDENSATE;
     public static MetaItem<?>.MetaValueItem ESR_COMPUTATION_UNIT;
+    //  Covers
+    public static MetaItem<?>.MetaValueItem ELECTRIC_MOTOR_ULV;
+    public static MetaItem<?>.MetaValueItem ELECTRIC_PISTON_ULV;
+    public static MetaItem<?>.MetaValueItem ELECTRIC_PUMP_ULV;
+    public static MetaItem<?>.MetaValueItem CONVEYOR_MODULE_ULV;
+    public static MetaItem<?>.MetaValueItem ROBOT_ARM_ULV;
+    public static MetaItem<?>.MetaValueItem EMITTER_ULV;
+    public static MetaItem<?>.MetaValueItem SENSOR_ULV;
+    public static MetaItem<?>.MetaValueItem FIELD_GENERATOR_ULV;
+    public static MetaItem<?>.MetaValueItem ELECTRIC_MOTOR_MAX;
+    public static MetaItem<?>.MetaValueItem ELECTRIC_PISTON_MAX;
+    public static MetaItem<?>.MetaValueItem ELECTRIC_PUMP_MAX;
+    public static MetaItem<?>.MetaValueItem CONVEYOR_MODULE_MAX;
+    public static MetaItem<?>.MetaValueItem ROBOT_ARM_MAX;
+    public static MetaItem<?>.MetaValueItem EMITTER_MAX;
+    public static MetaItem<?>.MetaValueItem SENSOR_MAX;
+    public static MetaItem<?>.MetaValueItem FIELD_GENERATOR_MAX;
 
 
 
@@ -222,6 +277,24 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem NANO_POWER_IC;
     public static MetaItem<?>.MetaValueItem PICO_POWER_IC;
     public static MetaItem<?>.MetaValueItem FEMTO_POWER_IC;
+    //  High Energy Physics items
+    public static MetaItem<?>.MetaValueItem PLASMA_CONTAINMENT_CELL;
+    public static MetaItem<?>.MetaValueItem RHENIUM_PLASMA_CONTAINMENT_CELL;
+    public static MetaItem<?>.MetaValueItem NEUTRON_PLASMA_CONTAINMENT_CELL;
+    public static MetaItem<?>.MetaValueItem HYPOGEN_PLASMA_CONTAINMENT_CELL;
+    public static MetaItem<?>.MetaValueItem ACTINIUM_SUPERHYDRIDE_PLASMA_CONTAINMENT_CELL;
+    public static MetaItem<?>.MetaValueItem QUANTUM_ANOMALY;
+
+    //  Biological
+    public static MetaItem<?>.MetaValueItem ELECTROCHEMICAL_GRADIENT_RECORDER;
+    public static MetaItem<?>.MetaValueItem ULTRA_MICRO_PHASE_SEPARATOR;
+    public static MetaItem<?>.MetaValueItem QUANTUM_TUNNELING_MICROTUBULE;
+    public static MetaItem<?>.MetaValueItem HYPERRIBOSOME;
+    public static MetaItem<?>.MetaValueItem NEUTRON_ABSORBING_PROTEIN;
+    public static MetaItem<?>.MetaValueItem SUPEREXCITED_CONDUCTIVE_POLYMER;
+    public static MetaItem<?>.MetaValueItem DNA_ENCODER;
+    public static MetaItem<?>.MetaValueItem DNA_DECODER;
+    public static MetaItem<?>.MetaValueItem DNA_DECODE_ENCODER;
 
     // Circuit Boards
     public static MetaItem<?>.MetaValueItem GOOWARE_BOARD;

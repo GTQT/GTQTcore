@@ -2,8 +2,7 @@ package keqing.gtqtcore.loaders.recipes.chain;
 
 import gregtech.api.metatileentity.multiblock.CleanroomType;
 
-import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.CVD_RECIPES;
-import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.PLASMA_CVD_RECIPES;
+import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static gregicality.science.api.unification.ore.GCYSOrePrefix.*;
 import static gregtech.api.GTValues.*;
@@ -148,7 +147,7 @@ public class NanotubesChain {
                 .fluidOutputs(BoronTrifluoride.getFluid(4000))
                 .fluidOutputs(Octene.getFluid(3000))
                 .fluidOutputs(HydrofluoricAcid.getFluid(4000))
-                .EUt(VA[UV])
+                .EUt(VA[IV])
                 .duration(200)
                 .buildAndRegister();
 
