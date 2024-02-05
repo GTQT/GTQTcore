@@ -1,15 +1,10 @@
 package keqing.gtqtcore.loaders.recipes.chain;
 
-import net.minecraftforge.fluids.FluidStack;
-
-import static gregicality.science.api.unification.materials.GCYSMaterials.KaptonE;
-import static gregicality.science.api.unification.materials.GCYSMaterials.KaptonK;
-import static gregtech.api.GTValues.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.common.items.MetaItems.*;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.PCB;
-import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.swarm;
+import static keqing.gtqtcore.api.unification.GCYSMaterials.KaptonE;
 
 public class PCBline {
 

@@ -1,6 +1,6 @@
 package keqing.gtqtcore.loaders.recipes.chain;
 
-import static gregicality.science.api.unification.materials.GCYSMaterials.*;
+import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;

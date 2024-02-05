@@ -5,7 +5,7 @@ import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
 import com.google.common.collect.Lists;
-import gregicality.science.api.unification.materials.GCYSMaterials;
+
 import gregtech.api.GTValues;
 import gregtech.api.capability.*;
 import gregtech.api.capability.impl.EnergyContainerList;
@@ -41,6 +41,7 @@ import gregtech.client.shader.postprocessing.BloomType;
 import gregtech.client.utils.*;
 import gregtech.common.ConfigHolder;
 import gregtech.core.sound.GTSoundEvents;
+import keqing.gtqtcore.api.unification.GCYSMaterials;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing;

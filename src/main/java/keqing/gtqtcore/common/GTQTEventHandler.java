@@ -4,6 +4,7 @@ import gregtech.api.items.metaitem.StandardMetaItem;
 import gregtech.api.items.metaitem.stats.IItemBehaviour;
 import gregtech.api.unification.material.event.MaterialEvent;
 import keqing.gtqtcore.api.items.IExtendedItemBehavior;
+import keqing.gtqtcore.api.unification.GCYSMaterials;
 import keqing.gtqtcore.api.unification.GTQTMaterials;
 import keqing.gtqtcore.api.unification.OrePrefixAdditions;
 import keqing.gtqtcore.api.unification.TJMaterials;
@@ -64,6 +65,7 @@ public class GTQTEventHandler {
     {
         GTQTMaterials.register();
         TJMaterials.register();
+        GCYSMaterials.init();
         OrePrefixAdditions.init();
         //在此处注册材料
     }

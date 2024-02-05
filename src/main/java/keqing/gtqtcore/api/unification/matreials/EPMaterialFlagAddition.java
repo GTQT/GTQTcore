@@ -1,11 +1,7 @@
 package keqing.gtqtcore.api.unification.matreials;
 
-import com.mojang.realmsclient.util.RealmsTasks;
 import gregtech.api.unification.material.properties.*;
 
-import static gregicality.science.api.unification.materials.GCYSMaterials.*;
-import static gregtech.api.GTValues.EV;
-import static gregtech.api.GTValues.VA;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.info.MaterialFlags.*;
 import static keqing.gtqtcore.api.unification.material.info.EPMaterialFlags.*;

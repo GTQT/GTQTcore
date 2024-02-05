@@ -1,7 +1,9 @@
 package keqing.gtqtcore.common;
 
+import gregtech.api.GregTechAPI;
 import gregtech.api.block.VariantItemBlock;
 import gregtech.api.recipes.recipeproperties.FusionEUToStartProperty;
+import gregtech.api.unification.stack.ItemMaterialInfo;
 import gregtech.common.items.MetaItems;
 import keqing.gtqtcore.api.recipes.properties.*;
 import keqing.gtqtcore.api.utils.GTQTLog;
@@ -10,6 +12,7 @@ import keqing.gtqtcore.common.block.blocks.GTQTBlockWireCoil;
 import keqing.gtqtcore.common.block.blocks.GTQTCrops;
 import keqing.gtqtcore.common.items.metaitems.GTQTMetaToolItems;
 import keqing.gtqtcore.loaders.recipes.*;
+import keqing.gtqtcore.loaders.recipes.gcys.GCYSMaterialInfoLoader;
 import keqing.gtqtcore.loaders.recipes.handlers.*;
 import net.minecraft.block.Block;
 import net.minecraft.client.resources.I18n;
@@ -80,7 +83,10 @@ public class CommonProxy {
     public void preLoad() {
 
     }
-
+    @SubscribeEvent
+    public static void initMaterialInfo(GregTechAPI.RegisterEvent<ItemMaterialInfo> event) {
+        GCYSMaterialInfoLoader.init();
+    }
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event)
     {

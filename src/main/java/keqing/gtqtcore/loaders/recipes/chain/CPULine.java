@@ -1,12 +1,10 @@
 package keqing.gtqtcore.loaders.recipes.chain;
-import gregicality.science.api.recipes.GCYSRecipeMaps;
 import gregtech.api.metatileentity.multiblock.CleanroomType;
 import gregtech.common.items.MetaItems;
 import gregtech.api.unification.material.MarkerMaterials.Color;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.common.block.blocks.GTQTADVGlass;
 
-import static gregicality.science.api.unification.materials.GCYSMaterials.*;
+import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
@@ -464,7 +462,7 @@ public class CPULine {
                 .EUt(30)
                 .buildAndRegister();
 
-        GCYSRecipeMaps.CZPULLER_RECIPES.recipeBuilder()
+        CZPULLER_RECIPES.recipeBuilder()
                 .duration(5000)
                 .EUt(480)
                 .fluidInputs(Nitrogen.getFluid(16000))
@@ -474,7 +472,7 @@ public class CPULine {
                 .output(SILICON_BOULE)
                 .buildAndRegister();
 
-        GCYSRecipeMaps.CZPULLER_RECIPES.recipeBuilder()
+        CZPULLER_RECIPES.recipeBuilder()
                 .duration(5000)
                 .EUt(1960)
                 .fluidInputs(Nitrogen.getFluid(16000))
@@ -484,7 +482,7 @@ public class CPULine {
                 .output(PHOSPHORUS_BOULE)
                 .buildAndRegister();
 
-        GCYSRecipeMaps.CZPULLER_RECIPES.recipeBuilder()
+        CZPULLER_RECIPES.recipeBuilder()
                 .duration(5000)
                 .EUt(7960)
                 .fluidInputs(Nitrogen.getFluid(16000))
@@ -494,7 +492,7 @@ public class CPULine {
                 .output(NAQUADAH_BOULE)
                 .buildAndRegister();
 
-        GCYSRecipeMaps.CZPULLER_RECIPES.recipeBuilder()
+        CZPULLER_RECIPES.recipeBuilder()
                 .duration(5000)
                 .EUt(30720)
                 .fluidInputs(Nitrogen.getFluid(16000))
@@ -504,7 +502,7 @@ public class CPULine {
                 .output(NEUTRONIUM_BOULE)
                 .buildAndRegister();
 
-        GCYSRecipeMaps.CZPULLER_RECIPES.recipeBuilder()
+        CZPULLER_RECIPES.recipeBuilder()
                 .duration(2500)
                 .EUt(480)
                 .fluidInputs(Helium.getFluid(4000))
@@ -514,7 +512,7 @@ public class CPULine {
                 .output(SILICON_BOULE,2)
                 .buildAndRegister();
 
-        GCYSRecipeMaps.CZPULLER_RECIPES.recipeBuilder()
+        CZPULLER_RECIPES.recipeBuilder()
                 .duration(2500)
                 .EUt(1960)
                 .fluidInputs(Helium.getFluid(4000))
@@ -524,7 +522,7 @@ public class CPULine {
                 .output(PHOSPHORUS_BOULE,2)
                 .buildAndRegister();
 
-        GCYSRecipeMaps.CZPULLER_RECIPES.recipeBuilder()
+        CZPULLER_RECIPES.recipeBuilder()
                 .duration(2500)
                 .EUt(7680)
                 .fluidInputs(Helium.getFluid(4000))
@@ -534,7 +532,7 @@ public class CPULine {
                 .output(NAQUADAH_BOULE,2)
                 .buildAndRegister();
 
-        GCYSRecipeMaps.CZPULLER_RECIPES.recipeBuilder()
+        CZPULLER_RECIPES.recipeBuilder()
                 .duration(2500)
                 .EUt(30720)
                 .fluidInputs(Helium.getFluid(4000))

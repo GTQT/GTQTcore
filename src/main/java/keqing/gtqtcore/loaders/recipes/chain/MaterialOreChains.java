@@ -1,6 +1,7 @@
 package keqing.gtqtcore.loaders.recipes.chain;
 
-import static gregicality.science.api.unification.materials.GCYSMaterials.*;
+import static gregicality.science.api.recipes.GCYSRecipeMaps.DRYER_RECIPES;
+import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
@@ -12,8 +13,6 @@ import gregtech.api.recipes.GTRecipeHandler;
 import gregtech.api.unification.OreDictUnifier;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
-
-import static gregicality.science.api.recipes.GCYSRecipeMaps.*;
 
 
 public class MaterialOreChains {

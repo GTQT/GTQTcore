@@ -21,8 +21,10 @@ import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.metatileentities.multi.generators.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.*;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.gcys.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.huge.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.kqcc.*;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.kqcc.MetaTileEntityCosmicRayDetector;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.overwrite.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.star.MetaTileEntityPlasmaForge;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.star.MetaTileEntityStarBiomimeticFactory;
@@ -199,6 +201,20 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityHPCAAdvancedCooler HPCA_SUPER_COOLER_COMPONENT;
     public static MetaTileEntityHPCAAdvancedCooler HPCA_ULTIMATE_COOLER_COMPONENT;
 
+    public static MetaTileEntityCrystallizationCrucible CRYSTALLIZATION_CRUCIBLE;
+    public static MetaTileEntityRoaster ROASTER;
+    public static MetaTileEntityNanoscaleFabricator NANOSCALE_FABRICATOR;
+    public static MetaTileEntityCVDUnit CVD_UNIT;
+    public static MetaTileEntityEXCVD EX_CVD;
+    public static MetaTileEntityBurnerReactor BURNER_REACTOR;
+    public static MetaTileEntityCryoReactor CRYOGENIC_REACTOR;
+    public static MetaTileEntityFracker HYDRAULIC_FRACKER;
+    public static MetaTileEntitySonicator SONICATOR;
+    public static MetaTileEntityCatalyticReformer CATALYTIC_REFORMER;
+    public static MetaTileEntityIndustrialDrill INDUSTRIAL_DRILL;
+    public static MetaTileEntityIonImplanter ION_IMPLANTATOR;
+    public static MetaTileEntityCZPuller CZ_PULLER;
+
     //public static MetaTileEntityObjectHolder OBJECT_HOLDER;
     public static void initialization() {
         GTQTLog.logger.info("Registering MetaTileEntities");
@@ -334,6 +350,21 @@ public class GTQTMetaTileEntities {
         HPCA_SUPER_COOLER_COMPONENT = registerMetaTileEntity(3464, new MetaTileEntityHPCAAdvancedCooler(gtqtcoreId("hpca.super_cooler_component"), true, false));
         HPCA_ULTIMATE_COOLER_COMPONENT = registerMetaTileEntity(3465, new MetaTileEntityHPCAAdvancedCooler(gtqtcoreId("hpca.ultimate_cooler_component"),  false, true));
 
+
+        //GCYS
+        INDUSTRIAL_DRILL = registerMetaTileEntity(3500, new MetaTileEntityIndustrialDrill(gtqtcoreId("industrial_drill")));
+        CATALYTIC_REFORMER = registerMetaTileEntity(3501, new MetaTileEntityCatalyticReformer(gtqtcoreId("catalytic_reformer")));
+        SONICATOR = registerMetaTileEntity(3502, new MetaTileEntitySonicator(gtqtcoreId("sonicator")));
+        HYDRAULIC_FRACKER = registerMetaTileEntity(3503, new MetaTileEntityFracker(gtqtcoreId("fracker"), GTValues.ZPM));
+        NANOSCALE_FABRICATOR = registerMetaTileEntity(3504, new MetaTileEntityNanoscaleFabricator(gtqtcoreId("nanoscale_fabricator")));
+        ROASTER = registerMetaTileEntity(3505, new MetaTileEntityRoaster(gtqtcoreId("roaster")));
+        CRYSTALLIZATION_CRUCIBLE = registerMetaTileEntity(3506, new MetaTileEntityCrystallizationCrucible(gtqtcoreId("crystallization_crucible")));
+        CVD_UNIT = registerMetaTileEntity(3507, new MetaTileEntityCVDUnit(gtqtcoreId("cvd_unit")));
+        BURNER_REACTOR = registerMetaTileEntity(3508, new MetaTileEntityBurnerReactor(gtqtcoreId("burner_reactor")));
+        CRYOGENIC_REACTOR = registerMetaTileEntity(3509, new MetaTileEntityCryoReactor(gtqtcoreId("cryogenic_reactor")));
+        ION_IMPLANTATOR = registerMetaTileEntity(3510, new MetaTileEntityIonImplanter(gtqtcoreId("ion_implantator")));
+        CZ_PULLER = registerMetaTileEntity(3511, new MetaTileEntityCZPuller(gtqtcoreId("cz_puller")));
+        EX_CVD = registerMetaTileEntity(3512, new MetaTileEntityEXCVD(gtqtcoreId("ex_cvd")));
         //小机器
         registerSimpleMetaTileEntity(FLUID_EXTRACTOR, 15000, "fluid_extractor", GTQTcoreRecipeMaps.FLUID_EXTRACTOR_RECIPES, Textures.EXTRACTOR_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
         registerSimpleMetaTileEntity(FLUID_CANNER, 15015, "fluid_canner", GTQTcoreRecipeMaps.FLUID_CANNER_RECIPES, Textures.CANNER_OVERLAY, true,GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);

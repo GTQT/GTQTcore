@@ -1,8 +1,7 @@
 package keqing.gtqtcore.loaders.recipes;
 
-import static gregicality.science.api.unification.materials.GCYSMaterials.*;
+import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static gregtech.api.GTValues.*;
-import static gregtech.api.recipes.RecipeMaps.COKE_OVEN_RECIPES;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 
@@ -12,18 +11,8 @@ import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 
 import gregtech.api.metatileentity.multiblock.CleanroomType;
-import gregtech.api.recipes.RecipeMaps;
-import gregtech.api.recipes.ingredients.nbtmatch.NBTCondition;
-import gregtech.api.recipes.ingredients.nbtmatch.NBTMatcher;
-import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.MarkerMaterials;
-import gregtech.api.unification.material.Materials;
-import gregtech.api.unification.material.properties.PropertyKey;
-import gregtech.api.unification.ore.OrePrefix;
-import gregtech.api.unification.stack.MaterialStack;
-import ibxm.Player;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
-import keqing.gtqtcore.api.recipes.properties.StarProperty;
 
 public class FuelRecipes {
 

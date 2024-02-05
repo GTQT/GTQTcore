@@ -7,7 +7,6 @@ import gregtech.common.items.MetaItems;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
-import static gregicality.science.api.unification.materials.GCYSMaterials.*;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
@@ -15,6 +14,7 @@ import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtechfoodoption.GTFOMaterialHandler.*;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
+import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.electrode;
 
 public class OilChains {

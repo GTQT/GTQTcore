@@ -45,6 +45,7 @@ import static gregtech.loaders.recipe.handlers.ToolRecipeHandler.addElectricTool
 import static gregtech.loaders.recipe.handlers.ToolRecipeHandler.powerUnitItems;
 import static keqing.gtqtcore.api.items.toolitem.GTQTToolClasses.SOLDERING_IRON;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
+import static keqing.gtqtcore.api.unification.material.info.EPMaterialFlags.GENERATE_CURVED_PLATE;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.*;
 import static keqing.gtqtcore.common.items.metaitems.GTQTMetaToolItems.*;
 
@@ -447,25 +448,29 @@ public class GTQTRecipes {
     }
 
     private static void processRing(OrePrefix orePrefix, Material material, DustProperty dustProperty) {
-        CW_LASER_ENGRAVER_RECIPES.recipeBuilder()
-                .input(plate_big, material, 1)
-                .fluidInputs(Water.getFluid(1000))
-                .outputs(OreDictUnifier.get(orePrefix, material, 16))
-                .duration(100)
-                .circuitMeta(3)
-                .EUt(GTValues.VA[HV])
-                .buildAndRegister();
+        if (material.hasFlag(GENERATE_CURVED_PLATE)) {
+            CW_LASER_ENGRAVER_RECIPES.recipeBuilder()
+                    .input(plate_big, material, 1)
+                    .fluidInputs(Water.getFluid(1000))
+                    .outputs(OreDictUnifier.get(orePrefix, material, 16))
+                    .duration(100)
+                    .circuitMeta(3)
+                    .EUt(GTValues.VA[HV])
+                    .buildAndRegister();
+        }
     }
 
     private static void processStick(OrePrefix orePrefix, Material material, DustProperty dustProperty) {
-        CW_LASER_ENGRAVER_RECIPES.recipeBuilder()
-                .input(plate_big, material, 1)
-                .fluidInputs(Water.getFluid(1000))
-                .outputs(OreDictUnifier.get(orePrefix, material, 8))
-                .duration(100)
-                .circuitMeta(4)
-                .EUt(GTValues.VA[HV])
-                .buildAndRegister();
+        if (material.hasFlag(GENERATE_CURVED_PLATE)) {
+            CW_LASER_ENGRAVER_RECIPES.recipeBuilder()
+                    .input(plate_big, material, 1)
+                    .fluidInputs(Water.getFluid(1000))
+                    .outputs(OreDictUnifier.get(orePrefix, material, 8))
+                    .duration(100)
+                    .circuitMeta(4)
+                    .EUt(GTValues.VA[HV])
+                    .buildAndRegister();
+        }
     }
 
     public static void processIngot(OrePrefix ingotPrefix, Material material, IngotProperty property) {
@@ -519,15 +524,16 @@ public class GTQTRecipes {
 
     }
     public static void processPlate(OrePrefix platePrefix, Material material, DustProperty property) {
-        CW_LASER_ENGRAVER_RECIPES.recipeBuilder()
-                .input(plate_big, material, 1)
-                .fluidInputs(Water.getFluid(1000))
-                .outputs(OreDictUnifier.get(platePrefix, material,4))
-                .duration(100)
-                .circuitMeta(5)
-                .EUt(GTValues.VA[HV])
-                .buildAndRegister();
-
+        if (material.hasFlag(GENERATE_CURVED_PLATE)) {
+            CW_LASER_ENGRAVER_RECIPES.recipeBuilder()
+                    .input(plate_big, material, 1)
+                    .fluidInputs(Water.getFluid(1000))
+                    .outputs(OreDictUnifier.get(platePrefix, material, 4))
+                    .duration(100)
+                    .circuitMeta(5)
+                    .EUt(GTValues.VA[HV])
+                    .buildAndRegister();
+        }
         if (material.hasFluid()) {
             RecipeMaps.VACUUM_RECIPES.recipeBuilder()
                     .notConsumable(MetaItems.SHAPE_MOLD_PLATE)

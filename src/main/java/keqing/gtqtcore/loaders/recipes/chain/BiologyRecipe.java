@@ -13,19 +13,16 @@ import keqing.gtqtcore.api.items.IntCircuitIngredientBiology;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.unification.GTQTMaterials;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.common.block.wood.BlockPineSapling;
 import keqing.gtqtcore.common.items.GTQTMetaItems;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
-import static gregicality.science.api.unification.materials.GCYSMaterials.Butanol;
-import static gregicality.science.api.unification.materials.GCYSMaterials.Formaldehyde;
 import static gregtech.api.GTValues.ZPM;
 import static gregtech.api.recipes.RecipeMaps.*;
-import static gregtech.api.unification.material.Materials.RawGrowthMedium;
 import static gregtech.api.unification.material.Materials.Water;
 import static gregtech.api.unification.ore.OrePrefix.*;
+import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 
 public class BiologyRecipe {
 

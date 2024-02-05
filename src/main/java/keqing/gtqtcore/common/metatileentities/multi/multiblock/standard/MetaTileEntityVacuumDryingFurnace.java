@@ -1,6 +1,5 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
-import gregicality.science.api.recipes.GCYSRecipeMaps;
 import gregtech.api.GTValues;
 import gregtech.api.GregTechAPI;
 import gregtech.api.capability.IHeatingCoil;
@@ -49,13 +48,15 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+import static gregicality.science.api.recipes.GCYSRecipeMaps.DRYER_RECIPES;
+
 public class MetaTileEntityVacuumDryingFurnace extends MultiMapMultiblockController implements IHeatingCoil {
 
     private int temperature;
 
     public MetaTileEntityVacuumDryingFurnace(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{
-                GCYSRecipeMaps.DRYER_RECIPES,
+                DRYER_RECIPES,
                 GTQTcoreRecipeMaps.VACUUM_DRYING_FURNACE_RECIPES});
         this.recipeMapWorkable = new HeatingCoilRecipeLogic(this);
     }

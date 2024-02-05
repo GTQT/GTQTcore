@@ -1,7 +1,7 @@
 package keqing.gtqtcore.loaders.recipes.handlers;
 
 import static gregicality.multiblocks.api.unification.GCYMMaterials.*;
-import static gregicality.science.api.unification.materials.GCYSMaterials.*;
+import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;

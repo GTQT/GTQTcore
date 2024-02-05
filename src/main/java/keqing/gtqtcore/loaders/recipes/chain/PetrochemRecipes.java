@@ -1,6 +1,9 @@
 package keqing.gtqtcore.loaders.recipes.chain;
 
-import static gregicality.science.api.unification.materials.GCYSMaterials.*;
+import static gregicality.science.api.recipes.GCYSRecipeMaps.DRYER_RECIPES;
+import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.CRYSTALLIZER_RECIPES;
+import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.CVD_RECIPES;
+import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
@@ -9,7 +12,6 @@ import static keqing.gtqtcore.api.unification.TJMaterials.*;
 
 import gregtech.api.recipes.GTRecipeHandler;
 
-import static gregicality.science.api.recipes.GCYSRecipeMaps.*;
 import static gregtech.common.items.MetaItems.*;
 
 

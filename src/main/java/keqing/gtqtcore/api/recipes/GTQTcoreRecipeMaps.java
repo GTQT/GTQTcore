@@ -1,6 +1,8 @@
 package keqing.gtqtcore.api.recipes;
 
 import gregicality.science.api.recipes.builders.NoCoilTemperatureRecipeBuilder;
+import gregicality.science.api.recipes.builders.TemperaturePressureRecipeBuilder;
+import gregicality.science.client.render.GCYSGuiTextures;
 import gregtech.api.GTValues;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.widgets.ProgressWidget;
@@ -16,6 +18,65 @@ import keqing.gtqtcore.api.recipes.machine.*;
 //怎么写请看
 //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/api/recipe/GSRecipeMaps.java
 public class GTQTcoreRecipeMaps {
+    public static final RecipeMap<SimpleRecipeBuilder> CATALYTIC_REFORMER_RECIPES = new RecipeMap<>("catalytic_reformer_recipes", 3,1, 1, 4, new SimpleRecipeBuilder(), false)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_CRACKING, ProgressWidget.MoveType.HORIZONTAL)
+            .setSound(GTSoundEvents.FURNACE);
+
+    public static final RecipeMap<TemperaturePressureRecipeBuilder> BURNER_REACTOR_RECIPES = new RecipeMap<>("burner_reactor_recipes",  3,  2,  3,  3, new TemperaturePressureRecipeBuilder(), false)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_ARC_FURNACE, ProgressWidget.MoveType.HORIZONTAL)
+            .setSound(GTSoundEvents.ARC);
+
+    public static final RecipeMap<NoCoilTemperatureRecipeBuilder> CRYOGENIC_REACTOR_RECIPES = new RecipeMap<>("cryogenic_reactor_recipes",  3,  2,  2,  2, new NoCoilTemperatureRecipeBuilder(), false)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, ProgressWidget.MoveType.HORIZONTAL)
+            .setSound(GTSoundEvents.COOLING);
+
+    public static final RecipeMap<TemperaturePressureRecipeBuilder> CVD_RECIPES = new RecipeMap<>("cvd_recipes",  2,  2,  3,  3, new TemperaturePressureRecipeBuilder(), false)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL)
+            .setSound(GTSoundEvents.COOLING);
+
+    public static final RecipeMap<TemperaturePressureRecipeBuilder> PLASMA_CVD_RECIPES = new RecipeMap<>("plasma_cvd_recipes",  4,  4,  4,  4, new TemperaturePressureRecipeBuilder(), false)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL)
+            .setSound(GTSoundEvents.COOLING);
+
+    public static final RecipeMap<NoCoilTemperatureRecipeBuilder> MOLECULAR_BEAM_RECIPES = new RecipeMap<>("molecular_beam_recipes", 5, 5,  2,  1, new NoCoilTemperatureRecipeBuilder(), false)
+            .setSlotOverlay(false, false, false, GCYSGuiTextures.NANOSCALE_OVERLAY_1)
+            .setSlotOverlay(false, false, true, GCYSGuiTextures.NANOSCALE_OVERLAY_1)
+            .setSlotOverlay(false, true, false, GCYSGuiTextures.NANOSCALE_OVERLAY_2)
+            .setSlotOverlay(false, true, true, GCYSGuiTextures.NANOSCALE_OVERLAY_2)
+            .setSlotOverlay(true, false, true, GCYSGuiTextures.NANOSCALE_OVERLAY_1)
+            .setSlotOverlay(true, true, true, GCYSGuiTextures.NANOSCALE_OVERLAY_2)
+            .setProgressBar(GCYSGuiTextures.PROGRESS_BAR_NANOSCALE, ProgressWidget.MoveType.HORIZONTAL)
+            .setSound(GTSoundEvents.ELECTROLYZER);
+
+    public static final RecipeMap<SimpleRecipeBuilder> SONICATION_RECIPES = new RecipeMap<>("sonication_recipes",    3, 2, 2, 1, new SimpleRecipeBuilder(), false)
+            .setSlotOverlay(false, true, false, GuiTextures.BREWER_OVERLAY)
+            .setSlotOverlay(false, true, true, GuiTextures.MOLECULAR_OVERLAY_3)
+            .setSlotOverlay(true, true, true, GuiTextures.MOLECULAR_OVERLAY_4)
+            .setSlotOverlay(true, false, true, GCYSGuiTextures.FOIL_OVERLAY)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_EXTRACT, ProgressWidget.MoveType.HORIZONTAL)
+            .setSound(GTSoundEvents.CENTRIFUGE);
+
+    public static final RecipeMap<SimpleRecipeBuilder> ION_IMPLANTATOR_RECIPES = new RecipeMap<>("ion_implanter_recipes", 3, 3, 1,  1,   new SimpleRecipeBuilder(), false)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL)
+            .setSound(GTSoundEvents.ELECTROLYZER);
+
+    public static final RecipeMap<SimpleRecipeBuilder> DRILLING_RECIPES = new RecipeMap<>("drill_recipes", 3, 1,  1,    1, new SimpleRecipeBuilder(), false)
+            .setSlotOverlay(false, false, true, GuiTextures.CRUSHED_ORE_OVERLAY)
+            .setSlotOverlay(true, false, true, GuiTextures.DUST_OVERLAY)
+            .setSound(GTSoundEvents.MACERATOR);
+
+    public static final RecipeMap<BlastRecipeBuilder> CRYSTALLIZER_RECIPES = new RecipeMap<>("crystallization_recipes",  6, 1, 1,  3,   new BlastRecipeBuilder(), false)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_CRYSTALLIZATION, ProgressWidget.MoveType.HORIZONTAL)
+            .setSound(GTSoundEvents.FURNACE);
+
+    public static final RecipeMap<BlastRecipeBuilder> CZPULLER_RECIPES = new RecipeMap<>("czpuller_recipes", 3, 12, 1,3,   new BlastRecipeBuilder(), false)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_CRYSTALLIZATION, ProgressWidget.MoveType.HORIZONTAL)
+            .setSound(GTSoundEvents.FURNACE);
+
+    public static final RecipeMap<NoCoilTemperatureRecipeBuilder> ROASTER_RECIPES = new RecipeMap<>("roaster_recipes",  3,  3,  3,  3, new NoCoilTemperatureRecipeBuilder(), false)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, ProgressWidget.MoveType.HORIZONTAL)
+            .setSound(GTSoundEvents.FURNACE);
+
     public static final RecipeMap<SimpleRecipeBuilder> COMPONENT_ASSEMBLER_RECIPES;
     public static final RecipeMap<SimpleRecipeBuilder> SEPTIC_TANK;
     public static final RecipeMap<SimpleRecipeBuilder> ULTRAVIOLET_LAMP_CHAMBER_RECIPES;

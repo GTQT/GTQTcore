@@ -1,9 +1,8 @@
 package keqing.gtqtcore.loaders.recipes.handlers;
 
 import gregtech.api.recipes.GTRecipeHandler;
-import net.minecraftforge.fluids.FluidStack;
 
-import static gregicality.science.api.unification.materials.GCYSMaterials.*;
+import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;

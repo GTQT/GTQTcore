@@ -220,6 +220,29 @@ public class GTQTMaterials {
     public static Material LeanGoldDr;
     public static Material RichGoldBs;
     public static Material RichCopperJc;
+    public static Material Dichlorocyclooctadieneplatinium;
+    public static Material Diiodobiphenyl;
+    public static Material SilverTetrafluoroborate;
+    public static Material TrimethyltinChloride;
+    public static Material SilverChloride;
+    public static Material Octene;
+    public static Material Cyclooctadiene;
+    public static Material Hexafluoropropylene;
+    public static Material HexachloroplatinicAcid;
+    public static Material PotassiumTetrachloroplatinate;
+    public static Material HydroxylamineDisulfate;
+    public static Material HydroxylamineHydrochloride;
+    public static Material Hydroxylamine;
+    public static Material AmmoniumPersulfate;
+    public static Material LanthanumFullereneMixture;
+    public static Material SilverOxide;
+    public static Material TinChloride;
+    public static Material MagnetoResonatic;
+    public static Material Prasiolite;
+    public static Material BismuthTellurite;
+    public static Material LanthanumEmbeddedFullerene;
+    public static Material LanthanumFullereneNanotube;
+    public static Material NeutroniumNanotube;
 
     //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/api/unification/GSMaterials.java
 

@@ -68,7 +68,7 @@ public class HeatExchangerLogic  extends NoEnergyMultiblockRecipeLogic {
     }
 
     @Override
-    protected boolean prepareRecipe(Recipe recipe) {
+    public boolean prepareRecipe(Recipe recipe) {
         FluidStack recipeFluidStack = recipe.getFluidInputs().get(1).getInputFluidStack();
         FluidStack inputFluidStack = getInputFluidStack(recipeFluidStack);
         int maxInletFlow = (int) (Math.ceil(0.4 + 0.006 * ((IHeatExchanger)metaTileEntity).getThrottle() * ((IHeatExchanger)metaTileEntity).getParallel()));
