@@ -67,7 +67,12 @@ public class CommonProxy {
             return GTQTMetaItems.AE_C.getStackForm();
         }
     };
-
+    public static final CreativeTabs GTQTCore_NC = new CreativeTabs("gtqtnc") {
+        @Override
+        public ItemStack createIcon() {
+            return GTQTMetaItems.NAQUADAH_ROD_QUAD.getStackForm();
+        }
+    };
     public void preInit( FMLPreInitializationEvent event ) {
         GTQTMetaToolItems.init();
         GTQTRecipes.registerTool();

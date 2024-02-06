@@ -757,6 +757,49 @@ metaitem.item.impregnated_plastic_substrate.name=固化树脂-玻璃纤维复合
 metaitem.item.impregnated_epoxy.name=高分子纤维强化-铂基板
 metaitem.item.impregnated_graphite_rodsa.name=预处理石墨电极
 
+metaitem.naquadah_rod.name=硅岩燃料棒
+metaitem.naquadah_rod_dual.name=双联硅岩燃料棒
+metaitem.naquadah_rod_quad.name=四联硅岩燃料棒
+metaitem.poor_naquadah_rod.name=贫瘠硅岩燃料棒
+metaitem.poor_naquadah_rod_dual.name=贫瘠双联硅岩燃料棒
+metaitem.poor_naquadah_rod_quad.name=贫瘠四联硅岩燃料棒
+metaitem.thorium_rod.name=钍燃料棒
+metaitem.thorium_rod_dual.name=双联钍燃料棒
+metaitem.thorium_rod_quad.name=四联钍燃料棒
+metaitem.poor_thorium_rod.name=枯竭钍燃料棒
+metaitem.poor_thorium_rod_dual.name=枯竭双联钍燃料棒
+metaitem.poor_thorium_rod_quad.name=枯竭四联钍燃料棒
+
+metaitem.mining_drone.lv.name=轨道采集器（§7LV§r）
+metaitem.mining_drone.mv.name=轨道采集器（§bMV§r）
+metaitem.mining_drone.hv.name=轨道采集器（§6HV§r）
+metaitem.mining_drone.ev.name=轨道采集器（§5EV§r）
+metaitem.mining_drone.iv.name=轨道采集器（§1IV§r）
+metaitem.mining_drone.luv.name=轨道采集器（§dLuV§r）
+metaitem.mining_drone.zpm.name=轨道采集器（§cZPM§r）
+metaitem.mining_drone.uv.name=轨道采集器（§3UV§r）
+metaitem.mining_drone.uhv.name=轨道采集器（§4UHV§r）
+metaitem.mining_drone.uev.name=轨道采集器（§aUEV§r）
+metaitem.mining_drone.uiv.name=轨道采集器（§2UIV§r）
+metaitem.mining_drone.uxv.name=轨道采集器（§eUXV§r）
+metaitem.mining_drone.opv.name=轨道采集器（§9OpV§r）
+metaitem.mining_drone.max.name=轨道采集器（§c§lMAX§r）
+
+metaitem.mining_drone.lv.tooltip=§7星际拾荒者I
+metaitem.mining_drone.mv.tooltip=§b星际拾荒者II
+metaitem.mining_drone.hv.tooltip=§6星际拾荒者III
+metaitem.mining_drone.ev.tooltip=§5小行星杀手I
+metaitem.mining_drone.iv.tooltip=§1小行星杀手II
+metaitem.mining_drone.luv.tooltip=§d小行星杀手III
+metaitem.mining_drone.zpm.tooltip=§c星球粉碎机I
+metaitem.mining_drone.uv.tooltip=§3星球粉碎机II
+metaitem.mining_drone.uhv.tooltip=§4星球粉碎机III
+metaitem.mining_drone.uev.tooltip=§a便携苍穹共振仪I
+metaitem.mining_drone.uiv.tooltip=§2便携苍穹共振仪II
+metaitem.mining_drone.uxv.tooltip=§e便携苍穹共振仪III
+metaitem.mining_drone.opv.tooltip=§9-*创造一个宇宙，然后摧毁它*-
+metaitem.mining_drone.max.tooltip=§c=《༺=☆你的就是我的，我的还是我的☆=༻》=
+
 metaitem.reticle.advanced_system_on_chip.name=？光掩模
 metaitem.reticle.central_processing_unit.name=？光掩模
 metaitem.reticle.high_power_integrated_circuit.name=？光掩模
@@ -1144,7 +1187,8 @@ gregica.mixin.nerf.steam.solar.detail=§c工作超过1天后,输出将会在10�
 gregtech.generator.1=§b发电效率：%d
 gregica.mixin.info.steam=当前蒸汽输出: %d l/s
 
-itemGroup.gtqtcore=量子跃迁-核心
-itemGroup.gtqtbio=量子跃迁-生物工程
-itemGroup.gtqtsp=量子跃迁-星辰大海
-itemGroup.gtqtae=量子跃迁-网道行者
+itemGroup.gtqtcore=量子跃迁|纠缠之源
+itemGroup.gtqtbio=量子跃迁|生物工程
+itemGroup.gtqtsp=量子跃迁|星辰大海
+itemGroup.gtqtae=量子跃迁|网道行者
+itemGroup.gtqtnc=量子跃迁|原子之心

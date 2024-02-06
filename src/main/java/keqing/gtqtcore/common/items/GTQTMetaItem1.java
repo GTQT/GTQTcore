@@ -138,27 +138,43 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         COMPUTERTIER6=this.addItem(358, "computerTier6").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_SP);
         //备用
         COMPUTERMINER=this.addItem(359, "computerMiner").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_SP);
-        COMPUTERCARGO=this.addItem(340, "computerCargo").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_SP);
-        COMPUTERBUGGY=this.addItem(341, "computerBuggy").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_SP);
+        COMPUTERCARGO=this.addItem(360, "computerCargo").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_SP);
+        COMPUTERBUGGY=this.addItem(361, "computerBuggy").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_SP);
         //材料
-        HEAVY_ALLOY_PLATE=this.addItem(342, "heavy_alloy_plate").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_SP);
-        HEAVY_ALLOY_PLATEA=this.addItem(343, "heavy_alloy_platea").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_SP);
-        HEAVY_ALLOY_PLATEB=this.addItem(344, "heavy_alloy_plateb").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_SP);
-        HEAVY_ALLOY_PLATEC=this.addItem(345, "heavy_alloy_platec").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_SP);
-        HEAVY_ALLOY_PLATED=this.addItem(346, "heavy_alloy_plated").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_SP);
-        HEAVY_ALLOY_PLATEE=this.addItem(347, "heavy_alloy_platee").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_SP);
+        HEAVY_ALLOY_PLATE=this.addItem(362, "heavy_alloy_plate").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_SP);
+        HEAVY_ALLOY_PLATEA=this.addItem(363, "heavy_alloy_platea").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_SP);
+        HEAVY_ALLOY_PLATEB=this.addItem(364, "heavy_alloy_plateb").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_SP);
+        HEAVY_ALLOY_PLATEC=this.addItem(365, "heavy_alloy_platec").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_SP);
+        HEAVY_ALLOY_PLATED=this.addItem(366, "heavy_alloy_plated").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_SP);
+        HEAVY_ALLOY_PLATEE=this.addItem(367, "heavy_alloy_platee").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_SP);
+        //炸弹小飞机
+        MINING_DRONE_LV = this.addItem(368, "mining_drone.lv").setMaxStackSize(1).setCreativeTabs(CommonProxy.GTQTCore_SP);
+        MINING_DRONE_MV = this.addItem(369, "mining_drone.mv").setMaxStackSize(1).setCreativeTabs(CommonProxy.GTQTCore_SP);
+        MINING_DRONE_HV = this.addItem(370, "mining_drone.hv").setMaxStackSize(1).setCreativeTabs(CommonProxy.GTQTCore_SP);
+        MINING_DRONE_EV = this.addItem(371, "mining_drone.ev").setMaxStackSize(1).setCreativeTabs(CommonProxy.GTQTCore_SP);
+        MINING_DRONE_IV = this.addItem(372, "mining_drone.iv").setMaxStackSize(1).setCreativeTabs(CommonProxy.GTQTCore_SP);
+        MINING_DRONE_LuV = this.addItem(373, "mining_drone.luv").setMaxStackSize(1).setCreativeTabs(CommonProxy.GTQTCore_SP);
+        MINING_DRONE_ZPM = this.addItem(374, "mining_drone.zpm").setMaxStackSize(1).setCreativeTabs(CommonProxy.GTQTCore_SP);
+        MINING_DRONE_UV = this.addItem(375, "mining_drone.uv").setMaxStackSize(1).setCreativeTabs(CommonProxy.GTQTCore_SP);
+        MINING_DRONE_UHV = this.addItem(376, "mining_drone.uhv").setMaxStackSize(1).setCreativeTabs(CommonProxy.GTQTCore_SP);
+        MINING_DRONE_UEV = this.addItem(377, "mining_drone.uev").setMaxStackSize(1).setCreativeTabs(CommonProxy.GTQTCore_SP);
+        MINING_DRONE_UIV = this.addItem(378, "mining_drone.uiv").setMaxStackSize(1).setCreativeTabs(CommonProxy.GTQTCore_SP);
+        MINING_DRONE_UXV = this.addItem(379, "mining_drone.uxv").setMaxStackSize(1).setCreativeTabs(CommonProxy.GTQTCore_SP);
+        MINING_DRONE_OpV = this.addItem(380, "mining_drone.opv").setMaxStackSize(1).setCreativeTabs(CommonProxy.GTQTCore_SP);
+        MINING_DRONE_MAX = this.addItem(381, "mining_drone.max").setMaxStackSize(1).setCreativeTabs(CommonProxy.GTQTCore_SP);
+
         //磨球
-        GRINDBALL_SOAPSTONE = this.addItem(370, "mill.grindball_soapstone").setMaxStackSize(1).addComponents(new MillBallBehavior()).setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        GRINDBALL_ALUMINIUM = this.addItem(371, "mill.grindball_aluminium").setMaxStackSize(1).addComponents(new MillBallBehavior()).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        GRINDBALL_SOAPSTONE = this.addItem(391, "mill.grindball_soapstone").setMaxStackSize(1).addComponents(new MillBallBehavior()).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        GRINDBALL_ALUMINIUM = this.addItem(392, "mill.grindball_aluminium").setMaxStackSize(1).addComponents(new MillBallBehavior()).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         // Simple Machine Crafting Components: ID 480-499
-        COMPONENT_GRINDER_BORON_NITRIDE = this.addItem(374, "component.grinder.boron_nitride").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GCYSMaterials.CubicBoronNitride, M * 4), new MaterialStack(GCYSMaterials.Vibranium, M * 8), new MaterialStack(GCYSMaterials.CubicHeterodiamond, M))).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        COMPONENT_GRINDER_BORON_NITRIDE = this.addItem(393, "component.grinder.boron_nitride").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GCYSMaterials.CubicBoronNitride, M * 4), new MaterialStack(GCYSMaterials.Vibranium, M * 8), new MaterialStack(GCYSMaterials.CubicHeterodiamond, M))).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         // Voltage Coils: ID 350-355
-        VOLTAGE_COIL_UHV = this.addItem(375, "voltage_coil.uhv").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GCYSMaterials.MercuryCadmiumTelluride, M * 2), new MaterialStack(GCYSMaterials.ChromiumGermaniumTellurideMagnetic, M / 2))).setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        VOLTAGE_COIL_UEV = this.addItem(376, "voltage_coil.uev").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GCYSMaterials.MercuryCadmiumTelluride, M * 2), new MaterialStack(GCYSMaterials.ChromiumGermaniumTellurideMagnetic, M / 2))).setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        VOLTAGE_COIL_UIV = this.addItem(377, "voltage_coil.uiv").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GCYSMaterials.MercuryCadmiumTelluride, M * 2), new MaterialStack(GCYSMaterials.ChromiumGermaniumTellurideMagnetic, M / 2))).setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        VOLTAGE_COIL_UXV = this.addItem(378, "voltage_coil.uxv").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GCYSMaterials.MercuryCadmiumTelluride, M * 2), new MaterialStack(GCYSMaterials.ChromiumGermaniumTellurideMagnetic, M / 2))).setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        VOLTAGE_COIL_OpV = this.addItem(379, "voltage_coil.opv").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GCYSMaterials.MercuryCadmiumTelluride, M * 2), new MaterialStack(GCYSMaterials.ChromiumGermaniumTellurideMagnetic, M / 2))).setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        VOLTAGE_COIL_MAX = this.addItem(380, "voltage_coil.max").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GCYSMaterials.MercuryCadmiumTelluride, M * 2), new MaterialStack(GCYSMaterials.ChromiumGermaniumTellurideMagnetic, M / 2))).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        VOLTAGE_COIL_UHV = this.addItem(394, "voltage_coil.uhv").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GCYSMaterials.MercuryCadmiumTelluride, M * 2), new MaterialStack(GCYSMaterials.ChromiumGermaniumTellurideMagnetic, M / 2))).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        VOLTAGE_COIL_UEV = this.addItem(395, "voltage_coil.uev").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GCYSMaterials.MercuryCadmiumTelluride, M * 2), new MaterialStack(GCYSMaterials.ChromiumGermaniumTellurideMagnetic, M / 2))).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        VOLTAGE_COIL_UIV = this.addItem(396, "voltage_coil.uiv").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GCYSMaterials.MercuryCadmiumTelluride, M * 2), new MaterialStack(GCYSMaterials.ChromiumGermaniumTellurideMagnetic, M / 2))).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        VOLTAGE_COIL_UXV = this.addItem(397, "voltage_coil.uxv").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GCYSMaterials.MercuryCadmiumTelluride, M * 2), new MaterialStack(GCYSMaterials.ChromiumGermaniumTellurideMagnetic, M / 2))).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        VOLTAGE_COIL_OpV = this.addItem(398, "voltage_coil.opv").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GCYSMaterials.MercuryCadmiumTelluride, M * 2), new MaterialStack(GCYSMaterials.ChromiumGermaniumTellurideMagnetic, M / 2))).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        VOLTAGE_COIL_MAX = this.addItem(399, "voltage_coil.max").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GCYSMaterials.MercuryCadmiumTelluride, M * 2), new MaterialStack(GCYSMaterials.ChromiumGermaniumTellurideMagnetic, M / 2))).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         //封装电路板
         WRAP_CIRCUIT_ULV = this.addItem(400, "wrap.circuit.ulv").setCreativeTabs(CommonProxy.GTQTCore_TAB);
         WRAP_CIRCUIT_LV = this.addItem(401, "wrap.circuit.lv").setCreativeTabs(CommonProxy.GTQTCore_TAB);
@@ -316,6 +332,23 @@ public class GTQTMetaItem1 extends StandardMetaItem {
 
 
         // Supra-Chronal Circuit Components: ID 300-349
+
+        //核物理 800
+        NAQUADAH_ROD = this.addItem(800, "naquadah_rod").setCreativeTabs(CommonProxy.GTQTCore_NC);
+        NAQUADAH_ROD_DUAL = this.addItem(801, "naquadah_rod_dual").setCreativeTabs(CommonProxy.GTQTCore_NC);
+        NAQUADAH_ROD_QUAD = this.addItem(802, "naquadah_rod_quad").setCreativeTabs(CommonProxy.GTQTCore_NC);
+
+        POOR_NAQUADAH_ROD = this.addItem(803, "poor_naquadah_rod").setCreativeTabs(CommonProxy.GTQTCore_NC);
+        POOR_NAQUADAH_ROD_DUAL = this.addItem(804, "poor_naquadah_rod_dual").setCreativeTabs(CommonProxy.GTQTCore_NC);
+        POOR_NAQUADAH_ROD_QUAD = this.addItem(805, "poor_naquadah_rod_quad").setCreativeTabs(CommonProxy.GTQTCore_NC);
+
+        THORIUM_ROD = this.addItem(806, "thorium_rod").setCreativeTabs(CommonProxy.GTQTCore_NC);
+        THORIUM_ROD_DUAL = this.addItem(807, "thorium_rod_dual").setCreativeTabs(CommonProxy.GTQTCore_NC);
+        THORIUM_ROD_QUAD = this.addItem(808, "thorium_rod_quad").setCreativeTabs(CommonProxy.GTQTCore_NC);
+
+        POOR_THORIUM_ROD = this.addItem(809, "poor_thorium_rod").setCreativeTabs(CommonProxy.GTQTCore_NC);
+        POOR_THORIUM_ROD_DUAL = this.addItem(810, "poor_thorium_rod_dual").setCreativeTabs(CommonProxy.GTQTCore_NC);
+        POOR_THORIUM_ROD_QUAD = this.addItem(811, "poor_thorium_rod_quad").setCreativeTabs(CommonProxy.GTQTCore_NC);
 
         // Power Components: ID 356-379
         NANO_POWER_IC_WAFER = this.addItem(856, "wafer.nano_power_integrated_circuit").setCreativeTabs(CommonProxy.GTQTCore_TAB);
