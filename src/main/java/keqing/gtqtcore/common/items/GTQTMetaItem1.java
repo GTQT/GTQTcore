@@ -37,11 +37,11 @@ public class GTQTMetaItem1 extends StandardMetaItem {
 
 
         //基础材料
-        IMPREGNATED_GRAPHITE_RODSA = this.addItem(1,"item.impregnated_graphite_rodsa").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        IMPREGNATED_GRAPHITE_RODS = this.addItem(2,"item.impregnated_graphite_rods").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        IMPREGNATED_SUBSTRATE = this.addItem(3,"item.impregnated_substrate").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        IMPREGNATED_PLASTIC_SUBSTRATE = this.addItem(4,"item.impregnated_plastic_substrate").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        IMPREGNATED_EPOXY = this.addItem(5,"item.impregnated_epoxy").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        IMPREGNATED_GRAPHITE_RODSA = this.addItem(1,"item.impregnated_graphite_rodsa").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
+        IMPREGNATED_GRAPHITE_RODS = this.addItem(2,"item.impregnated_graphite_rods").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
+        IMPREGNATED_SUBSTRATE = this.addItem(3,"item.impregnated_substrate").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
+        IMPREGNATED_PLASTIC_SUBSTRATE = this.addItem(4,"item.impregnated_plastic_substrate").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
+        IMPREGNATED_EPOXY = this.addItem(5,"item.impregnated_epoxy").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
         //快乐海藻
         COMMON_ALGAE = this.addItem(10,"algae.common").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO);
         GREEN_ALGAE = this.addItem(11,"algae.green").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO);
@@ -68,23 +68,23 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         SODIUM_ETHYLXANTHATE=this.addItem(56, "item.sodium.ethylxanthate").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO);
         SODIUM_ETHYLATE=this.addItem(57, "item.sodium.ethylate").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO);
 
-        RETICLE_ADVANCED_SYSTEM_ON_CHIP=this.addItem(58, "reticle.advanced_system_on_chip").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        RETICLE_CENTRAL_PROCESSING_UNIT=this.addItem(59, "reticle.central_processing_unit").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        RETICLE_HIGH_POWER_INTEGRATED_CIRCUIT=this.addItem(60, "reticle.high_power_integrated_circuit").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        RETICLE_HIGHLY_ADVANCED_SYSTEM_ON_CHIP=this.addItem(61, "reticle.highly_advanced_system_on_chip").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        RETICLE_INTEGRATED_LOGIC_CIRCUIT=this.addItem(62, "reticle.integrated_logic_circuit").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        RETICLE_LOW_POWER_INTEGRATED_CIRCUIT=this.addItem(63, "reticle.low_power_integrated_circuit").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        RETICLE_NAND_MEMORY_CHIP=this.addItem(64, "reticle.nand_memory_chip").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        RETICLE_NANO_CENTRAL_PROCESSING_UNIT=this.addItem(65, "reticle.nano_central_processing_unit").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        RETICLE_NOR_MEMORY_CHIP=this.addItem(66, "reticle.nor_memory_chip").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        RETICLE_POWER_INTEGRATED_CIRCUIT=this.addItem(67, "reticle.power_integrated_circuit").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        RETICLE_QBIT_CENTRAL_PROCESSING_UNIT=this.addItem(68, "reticle.qbit_central_processing_unit").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        RETICLE_RANDOM_ACCESS_MEMORY=this.addItem(69, "reticle.random_access_memory").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        RETICLE_SIMPLE_SYSTEM_ON_CHIP=this.addItem(70, "reticle.simple_system_on_chip").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        RETICLE_SYSTEM_ON_CHIP=this.addItem(71, "reticle.system_on_chip").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        RETICLE_ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT=this.addItem(72, "reticle.ultra_high_power_integrated_circuit").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        RETICLE_ULTRA_LOW_POWER_INTEGRATED_CIRCUIT=this.addItem(73, "reticle.ultra_low_power_integrated_circuit").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        RETICLE_SILICON=this.addItem(74, "reticle.silicon").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        RETICLE_ADVANCED_SYSTEM_ON_CHIP=this.addItem(58, "reticle.advanced_system_on_chip").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_GD);
+        RETICLE_CENTRAL_PROCESSING_UNIT=this.addItem(59, "reticle.central_processing_unit").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_GD);
+        RETICLE_HIGH_POWER_INTEGRATED_CIRCUIT=this.addItem(60, "reticle.high_power_integrated_circuit").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_GD);
+        RETICLE_HIGHLY_ADVANCED_SYSTEM_ON_CHIP=this.addItem(61, "reticle.highly_advanced_system_on_chip").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_GD);
+        RETICLE_INTEGRATED_LOGIC_CIRCUIT=this.addItem(62, "reticle.integrated_logic_circuit").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_GD);
+        RETICLE_LOW_POWER_INTEGRATED_CIRCUIT=this.addItem(63, "reticle.low_power_integrated_circuit").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_GD);
+        RETICLE_NAND_MEMORY_CHIP=this.addItem(64, "reticle.nand_memory_chip").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_GD);
+        RETICLE_NANO_CENTRAL_PROCESSING_UNIT=this.addItem(65, "reticle.nano_central_processing_unit").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_GD);
+        RETICLE_NOR_MEMORY_CHIP=this.addItem(66, "reticle.nor_memory_chip").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_GD);
+        RETICLE_POWER_INTEGRATED_CIRCUIT=this.addItem(67, "reticle.power_integrated_circuit").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_GD);
+        RETICLE_QBIT_CENTRAL_PROCESSING_UNIT=this.addItem(68, "reticle.qbit_central_processing_unit").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_GD);
+        RETICLE_RANDOM_ACCESS_MEMORY=this.addItem(69, "reticle.random_access_memory").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_GD);
+        RETICLE_SIMPLE_SYSTEM_ON_CHIP=this.addItem(70, "reticle.simple_system_on_chip").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_GD);
+        RETICLE_SYSTEM_ON_CHIP=this.addItem(71, "reticle.system_on_chip").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_GD);
+        RETICLE_ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT=this.addItem(72, "reticle.ultra_high_power_integrated_circuit").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_GD);
+        RETICLE_ULTRA_LOW_POWER_INTEGRATED_CIRCUIT=this.addItem(73, "reticle.ultra_low_power_integrated_circuit").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_GD);
+        RETICLE_SILICON=this.addItem(74, "reticle.silicon").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_GD);
 
         //AE
         //神秘硅束
@@ -196,19 +196,36 @@ public class GTQTMetaItem1 extends StandardMetaItem {
                 .addComponents(ElectricStats.createElectricItem(16_000_000_000L, GTValues.UV),
                         new ProspectorScannerBehavior(7, GTValues.UV))
                 .setMaxStackSize(1)
-                .setCreativeTabs(CommonProxy.GTQTCore_TAB);
+                .setCreativeTabs(CommonProxy.GTQTCore_TO);
 
         PROSPECTOR_UV = addItem(416, "prospector.uiv")
                 .addComponents(ElectricStats.createElectricItem(256_000_000_000L, GTValues.UIV),
                         new ProspectorScannerBehavior(9, GTValues.UIV))
                 .setMaxStackSize(1)
-                .setCreativeTabs(CommonProxy.GTQTCore_TAB);
+                .setCreativeTabs(CommonProxy.GTQTCore_TO);
 
-        MEMORY_CARD = addItem(417,"item.memory_card").setMaxStackSize(1).setCreativeTabs(CommonProxy.GTQTCore_TAB).addComponents(new MemoryCardBehavior()).setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        DEBUG_STRUCTURE_WRITER = this.addItem(418, "debug.structure_writer").addComponents(StructureWriteBehavior.INSTANCE).setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        DEBUG_STRUCTURE_BUILDER = this.addItem(419, "debug.structure_builder").addComponents(new MultiblockBuilderBehavior()).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        MEMORY_CARD = addItem(417,"item.memory_card").setMaxStackSize(1).setCreativeTabs(CommonProxy.GTQTCore_TAB).addComponents(new MemoryCardBehavior()).setCreativeTabs(CommonProxy.GTQTCore_TO);
+        DEBUG_STRUCTURE_WRITER = this.addItem(418, "debug.structure_writer").addComponents(StructureWriteBehavior.INSTANCE).setCreativeTabs(CommonProxy.GTQTCore_TO);
+        DEBUG_STRUCTURE_BUILDER = this.addItem(419, "debug.structure_builder").addComponents(new MultiblockBuilderBehavior()).setCreativeTabs(CommonProxy.GTQTCore_TO);
 
+        CARBON_ALLOTROPE_MIXTURE = this.addItem(420, "mixture.carbon_allotrope").setCreativeTabs(CommonProxy.GTQTCore_CH);
+        GRAPHENE_ALIGNED_CNT = this.addItem(421, "cnt.graphene_aligned").setCreativeTabs(CommonProxy.GTQTCore_CH);
 
+        BORON_NITRIDE_GRINDER = this.addItem(422, "grinder.boron_nitride").setCreativeTabs(CommonProxy.GTQTCore_HP);
+        VACUUM_TUBE_COMPONENT = this.addItem(423, "component.vacuum_tube").setCreativeTabs(CommonProxy.GTQTCore_HP);
+        SEPARATION_ELECTROMAGNET = this.addItem(424, "separation_electromagnet").setCreativeTabs(CommonProxy.GTQTCore_HP);
+        PROTONATED_FULLERENE_SIEVING_MATRIX = this.addItem(425, "protonated_fullerene_sieving_matrix").setCreativeTabs(CommonProxy.GTQTCore_CH);
+        SATURATED_FULLERENE_SIEVING_MATRIX = this.addItem( 426, "saturated_fullerene_sieving_matrix").setCreativeTabs(CommonProxy.GTQTCore_CH);
+        METASTABLE_SELF_HEALING_ADHESIVE = this.addItem(427, "metastable_self_healing_adhesive").setCreativeTabs(CommonProxy.GTQTCore_HP);
+        HYPERDIMENSIONAL_TACHYON_CONDENSED_MATTER = this.addItem(428, "hyperdimensional_tachyon_condensed_matter").setCreativeTabs(CommonProxy.GTQTCore_HP);
+        UNSTABLE_STAR = this.addItem(429, "unstable_star").setCreativeTabs(CommonProxy.GTQTCore_HP);
+        CLADDED_OPTICAL_FIBER_CORE = this.addItem(430, "component.cosmic.cladded_optical_fiber_core").setCreativeTabs(CommonProxy.GTQTCore_HP);
+        CLOSED_TIMELIKE_CURVE_COMPUTATIONAL_UNIT = addItem(431, "component.cosmic.closed_timelike_curve_computational_unit").setCreativeTabs(CommonProxy.GTQTCore_HP);
+        CLOSED_TIMELIKE_CURVE_GUIDANCE_UNIT = addItem(432, "component.cosmic.closed_timelike_curve_guidance_unit").setCreativeTabs(CommonProxy.GTQTCore_HP);
+        NUCLEAR_CLOCK = addItem(433, "component.cosmic.nuclear_clock").setCreativeTabs(CommonProxy.GTQTCore_HP);
+        MANIFOLD_OSCILLATORY_POWER_CELL = addItem(434, "component.cosmic.manifold_oscillatory_power_cell").setCreativeTabs(CommonProxy.GTQTCore_HP);
+        SCINTILLATOR = addItem(435, "scintillator").setCreativeTabs(CommonProxy.GTQTCore_GD);
+        SCINTILLATOR_CRYSTAL = addItem(436, "scintillator_crystal").setCreativeTabs(CommonProxy.GTQTCore_GD);
         
         // Circuits: ID 0-49
         GOOWARE_PROCESSOR = this.addItem(500, "circuit.gooware_processor").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.ZPM).setCreativeTabs(CommonProxy.GTQTCore_TAB);
@@ -236,24 +253,56 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         SUPRACAUSAL_COMPUTER = this.addItem(518, "circuit.supracausal_computer").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.OpV).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         SUPRACAUSAL_MAINFRAME = this.addItem(519, "circuit.supracausal_mainframe").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.MAX).setCreativeTabs(CommonProxy.GTQTCore_TAB);
 
-        SUPRACHRONAL_ULV = this.addItem(520, "circuit.suprachronal.ulv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.ULV).setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        SUPRACHRONAL_LV = this.addItem(521, "circuit.suprachronal.lv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.LV).setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        SUPRACHRONAL_MV = this.addItem(522, "circuit.suprachronal.mv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.MV).setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        SUPRACHRONAL_HV = this.addItem(523, "circuit.suprachronal.hv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.HV).setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        SUPRACHRONAL_EV = this.addItem(524, "circuit.suprachronal.ev").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.EV).setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        SUPRACHRONAL_IV = this.addItem(525, "circuit.suprachronal.iv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.IV).setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        SUPRACHRONAL_LuV = this.addItem(526, "circuit.suprachronal.luv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.LuV).setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        SUPRACHRONAL_ZPM = this.addItem(527, "circuit.suprachronal.zpm").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.ZPM).setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        SUPRACHRONAL_UV = this.addItem(528, "circuit.suprachronal.uv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.UV).setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        SUPRACHRONAL_UHV = this.addItem(529, "circuit.suprachronal.uhv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.UHV).setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        SUPRACHRONAL_UEV = this.addItem(530, "circuit.suprachronal.uev").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.UEV).setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        SUPRACHRONAL_UIV = this.addItem(531, "circuit.suprachronal.uiv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.UIV).setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        SUPRACHRONAL_UXV = this.addItem(532, "circuit.suprachronal.uxv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.UXV).setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        SUPRACHRONAL_OpV = this.addItem(533, "circuit.suprachronal.opv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.OpV).setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        SUPRACHRONAL_MAX = this.addItem(534, "circuit.suprachronal.max").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.MAX).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        SUPRACHRONAL_ULV = this.addItem(520, "circuit.suprachronal.ulv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.ULV).setCreativeTabs(CommonProxy.GTQTCore_HP);
+        SUPRACHRONAL_LV = this.addItem(521, "circuit.suprachronal.lv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.LV).setCreativeTabs(CommonProxy.GTQTCore_HP);
+        SUPRACHRONAL_MV = this.addItem(522, "circuit.suprachronal.mv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.MV).setCreativeTabs(CommonProxy.GTQTCore_HP);
+        SUPRACHRONAL_HV = this.addItem(523, "circuit.suprachronal.hv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.HV).setCreativeTabs(CommonProxy.GTQTCore_HP);
+        SUPRACHRONAL_EV = this.addItem(524, "circuit.suprachronal.ev").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.EV).setCreativeTabs(CommonProxy.GTQTCore_HP);
+        SUPRACHRONAL_IV = this.addItem(525, "circuit.suprachronal.iv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.IV).setCreativeTabs(CommonProxy.GTQTCore_HP);
+        SUPRACHRONAL_LuV = this.addItem(526, "circuit.suprachronal.luv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.LuV).setCreativeTabs(CommonProxy.GTQTCore_HP);
+        SUPRACHRONAL_ZPM = this.addItem(527, "circuit.suprachronal.zpm").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.ZPM).setCreativeTabs(CommonProxy.GTQTCore_HP);
+        SUPRACHRONAL_UV = this.addItem(528, "circuit.suprachronal.uv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.UV).setCreativeTabs(CommonProxy.GTQTCore_HP);
+        SUPRACHRONAL_UHV = this.addItem(529, "circuit.suprachronal.uhv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.UHV).setCreativeTabs(CommonProxy.GTQTCore_HP);
+        SUPRACHRONAL_UEV = this.addItem(530, "circuit.suprachronal.uev").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.UEV).setCreativeTabs(CommonProxy.GTQTCore_HP);
+        SUPRACHRONAL_UIV = this.addItem(531, "circuit.suprachronal.uiv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.UIV).setCreativeTabs(CommonProxy.GTQTCore_HP);
+        SUPRACHRONAL_UXV = this.addItem(532, "circuit.suprachronal.uxv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.UXV).setCreativeTabs(CommonProxy.GTQTCore_HP);
+        SUPRACHRONAL_OpV = this.addItem(533, "circuit.suprachronal.opv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.OpV).setCreativeTabs(CommonProxy.GTQTCore_HP);
+        SUPRACHRONAL_MAX = this.addItem(534, "circuit.suprachronal.max").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.MAX).setCreativeTabs(CommonProxy.GTQTCore_HP);
+
+        MAGNETO_RESONATIC_CIRCUIT_ULV = this.addItem(535, "circuit.magneto_resonatic.ulv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.ULV).setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        MAGNETO_RESONATIC_CIRCUIT_LV = this.addItem(536, "circuit.magneto_resonatic.lv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.LV).setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        MAGNETO_RESONATIC_CIRCUIT_MV = this.addItem(537, "circuit.magneto_resonatic.mv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.MV).setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        MAGNETO_RESONATIC_CIRCUIT_HV = this.addItem(538, "circuit.magneto_resonatic.hv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.HV).setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        MAGNETO_RESONATIC_CIRCUIT_EV = this.addItem(539, "circuit.magneto_resonatic.ev").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.EV).setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        MAGNETO_RESONATIC_CIRCUIT_IV = this.addItem(540, "circuit.magneto_resonatic.iv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.IV).setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        MAGNETO_RESONATIC_CIRCUIT_LuV = this.addItem(541, "circuit.magneto_resonatic.luv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.LuV).setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        MAGNETO_RESONATIC_CIRCUIT_ZPM = this.addItem(542, "circuit.magneto_resonatic.zpm").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.ZPM).setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        MAGNETO_RESONATIC_CIRCUIT_UV = this.addItem(543, "circuit.magneto_resonatic.uv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.UV).setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        MAGNETO_RESONATIC_CIRCUIT_UHV = this.addItem(544, "circuit.magneto_resonatic.uhv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.UHV).setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        MAGNETO_RESONATIC_CIRCUIT_UEV = this.addItem(545, "circuit.magneto_resonatic.uev").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.UEV).setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        MAGNETO_RESONATIC_CIRCUIT_UIV = this.addItem(546, "circuit.magneto_resonatic.uiv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.UIV).setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        MAGNETO_RESONATIC_CIRCUIT_UXV = this.addItem(547, "circuit.magneto_resonatic.uxv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.UXV).setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        MAGNETO_RESONATIC_CIRCUIT_OpV = this.addItem(548, "circuit.magneto_resonatic.opv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.OpV).setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        MAGNETO_RESONATIC_CIRCUIT_MAX = this.addItem(549, "circuit.magneto_resonatic.max").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.MAX).setCreativeTabs(CommonProxy.GTQTCore_BIO);
+
+        ASUPRACHRONAL_ULV = this.addItem(550, "circuit_suprachronal_ulv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.ULV).setCreativeTabs(CommonProxy.GTQTCore_GD);
+        ASUPRACHRONAL_LV = this.addItem(551, "circuit_suprachronal_lv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.LV).setCreativeTabs(CommonProxy.GTQTCore_GD);
+        ASUPRACHRONAL_MV = this.addItem(552, "circuit_suprachronal_mv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.MV).setCreativeTabs(CommonProxy.GTQTCore_GD);
+        ASUPRACHRONAL_HV = this.addItem(553, "circuit_suprachronal_hv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.HV).setCreativeTabs(CommonProxy.GTQTCore_GD);
+        ASUPRACHRONAL_EV = this.addItem(554, "circuit_suprachronal_ev").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.EV).setCreativeTabs(CommonProxy.GTQTCore_GD);
+        ASUPRACHRONAL_IV = this.addItem(555, "circuit_suprachronal_iv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.IV).setCreativeTabs(CommonProxy.GTQTCore_GD);
+        ASUPRACHRONAL_LuV = this.addItem(556, "circuit_suprachronal_luv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.LuV).setCreativeTabs(CommonProxy.GTQTCore_GD);
+        ASUPRACHRONAL_ZPM = this.addItem(557, "circuit_suprachronal_zpm").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.ZPM).setCreativeTabs(CommonProxy.GTQTCore_GD);
+        ASUPRACHRONAL_UV = this.addItem(558, "circuit_suprachronal_uv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.UV).setCreativeTabs(CommonProxy.GTQTCore_GD);
+        ASUPRACHRONAL_UHV = this.addItem(559, "circuit_suprachronal_uhv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.UHV).setCreativeTabs(CommonProxy.GTQTCore_GD);
+        ASUPRACHRONAL_UEV = this.addItem(560, "circuit_suprachronal_uev").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.UEV).setCreativeTabs(CommonProxy.GTQTCore_GD);
+        ASUPRACHRONAL_UIV = this.addItem(561, "circuit_suprachronal_uiv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.UIV).setCreativeTabs(CommonProxy.GTQTCore_GD);
+        ASUPRACHRONAL_UXV = this.addItem(562, "circuit_suprachronal_uxv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.UXV).setCreativeTabs(CommonProxy.GTQTCore_GD);
+        ASUPRACHRONAL_OpV = this.addItem(563, "circuit_suprachronal_opv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.OpV).setCreativeTabs(CommonProxy.GTQTCore_GD);
+        ASUPRACHRONAL_MAX = this.addItem(564, "circuit_suprachronal_max").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.MAX).setCreativeTabs(CommonProxy.GTQTCore_GD);
 
         // Primitive Circuit Components: ID 50-59
-        VACUUM_TUBE_COMPONENTS = this.addItem(551, "vacuum_tube.components").setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        VACUUM_TUBE_COMPONENTS = this.addItem(565, "vacuum_tube.components").setCreativeTabs(CommonProxy.GTQTCore_TAB);
 
         // Electronic Circuit Components: ID 60-69
 
@@ -268,62 +317,62 @@ public class GTQTMetaItem1 extends StandardMetaItem {
 
 
         // Crystal Circuit Components: ID 130-159
-        STRONTIUM_CARBONATE_OPTICAL_WAFER = this.addItem(625, "component.optical.strontium_carbonate_wafer").setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        STRONTIUM_CARBONATE_BOHRIUM_BOULE = this.addItem(626, "boule.strontium_carbonate.bohrium").setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        STRONTIUM_CARBONATE_BOHRIUM_WAFER = this.addItem(627, "wafer.strontium_carbonate.bohrium").setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        DUBNIUM_BOULE = this.addItem(628, "boule.dubnium").setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        EU_DOPED_CUBIC_ZIRCONIA_BOULE = this.addItem(630, "boule.cubic_zirconia.europium").setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        EU_DOPED_CUBIC_ZIRCONIA_WAFER = this.addItem(631, "wafer.cubic_zirconia.europium").setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        CRYSTAL_INTERFACE_WAFER = this.addItem(632, "wafer.crystal.interface").setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        CRYSTAL_INTERFACE_CHIP = this.addItem(633, "plate.crystal.interface").setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        ENGRAVED_RUBY_CRYSTAL_CHIP = this.addItem(634, "engraved.crystal_chip.ruby").setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        ENGRAVED_SAPPHIRE_CRYSTAL_CHIP = this.addItem(635, "engraved.crystal_chip.sapphire").setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        ENGRAVED_DIAMOND_CRYSTAL_CHIP = this.addItem(636, "engraved.crystal_chip.diamond").setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        CRYSTAL_MODULATOR_RUBY = this.addItem(637, "crystal.modulator.ruby").setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        CRYSTAL_MODULATOR_SAPPHIRE = this.addItem(638, "crystal.modulator.sapphire").setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        CRYSTAL_MODULATOR_DIAMOND = this.addItem(639, "crystal.modulator.diamond").setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        CRYSTAL_SYSTEM_ON_CHIP_SOCKET = this.addItem(640, "crystal.system_on_chip.socket").setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        INTRAVITAL_SOC = this.addItem(641, "component.gooware.intravital_soc").setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        OPTICAL_IMC_BOARD = this.addItem(642, "component.optical.optical_imc_board").setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        PHOTOELECTRON_SOC = this.addItem(643, "component.optical.photoelectron_soc").setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        STRONTIUM_CARBONATE_OPTICAL_WAFER = this.addItem(625, "component.optical.strontium_carbonate_wafer").setCreativeTabs(CommonProxy.GTQTCore_GD);
+        STRONTIUM_CARBONATE_BOHRIUM_BOULE = this.addItem(626, "boule.strontium_carbonate.bohrium").setCreativeTabs(CommonProxy.GTQTCore_GD);
+        STRONTIUM_CARBONATE_BOHRIUM_WAFER = this.addItem(627, "wafer.strontium_carbonate.bohrium").setCreativeTabs(CommonProxy.GTQTCore_GD);
+        DUBNIUM_BOULE = this.addItem(628, "boule.dubnium").setCreativeTabs(CommonProxy.GTQTCore_GD);
+        EU_DOPED_CUBIC_ZIRCONIA_BOULE = this.addItem(630, "boule.cubic_zirconia.europium").setCreativeTabs(CommonProxy.GTQTCore_GD);
+        EU_DOPED_CUBIC_ZIRCONIA_WAFER = this.addItem(631, "wafer.cubic_zirconia.europium").setCreativeTabs(CommonProxy.GTQTCore_GD);
+        CRYSTAL_INTERFACE_WAFER = this.addItem(632, "wafer.crystal.interface").setCreativeTabs(CommonProxy.GTQTCore_GD);
+        CRYSTAL_INTERFACE_CHIP = this.addItem(633, "plate.crystal.interface").setCreativeTabs(CommonProxy.GTQTCore_GD);
+        ENGRAVED_RUBY_CRYSTAL_CHIP = this.addItem(634, "engraved.crystal_chip.ruby").setCreativeTabs(CommonProxy.GTQTCore_GD);
+        ENGRAVED_SAPPHIRE_CRYSTAL_CHIP = this.addItem(635, "engraved.crystal_chip.sapphire").setCreativeTabs(CommonProxy.GTQTCore_GD);
+        ENGRAVED_DIAMOND_CRYSTAL_CHIP = this.addItem(636, "engraved.crystal_chip.diamond").setCreativeTabs(CommonProxy.GTQTCore_GD);
+        CRYSTAL_MODULATOR_RUBY = this.addItem(637, "crystal.modulator.ruby").setCreativeTabs(CommonProxy.GTQTCore_GD);
+        CRYSTAL_MODULATOR_SAPPHIRE = this.addItem(638, "crystal.modulator.sapphire").setCreativeTabs(CommonProxy.GTQTCore_GD);
+        CRYSTAL_MODULATOR_DIAMOND = this.addItem(639, "crystal.modulator.diamond").setCreativeTabs(CommonProxy.GTQTCore_GD);
+        CRYSTAL_SYSTEM_ON_CHIP_SOCKET = this.addItem(640, "crystal.system_on_chip.socket").setCreativeTabs(CommonProxy.GTQTCore_GD);
+        INTRAVITAL_SOC = this.addItem(641, "component.gooware.intravital_soc").setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        OPTICAL_IMC_BOARD = this.addItem(642, "component.optical.optical_imc_board").setCreativeTabs(CommonProxy.GTQTCore_GD);
+        PHOTOELECTRON_SOC = this.addItem(643, "component.optical.photoelectron_soc").setCreativeTabs(CommonProxy.GTQTCore_GD);
 
         // Wetware Circuit Components: ID 160-179
 
 
         // Gooware Circuit Components: ID 180-199
-        BZ_REACTION_CHAMBER = this.addItem(680, "reaction_chamber.bz").setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        NONLINEAR_CHEMICAL_OSCILLATOR = this.addItem(681, "nonlinear_chemical_oscillator").setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        BZ_REACTION_CHAMBER = this.addItem(680, "reaction_chamber.bz").setCreativeTabs(CommonProxy.GTQTCore_CH);
+        NONLINEAR_CHEMICAL_OSCILLATOR = this.addItem(681, "nonlinear_chemical_oscillator").setCreativeTabs(CommonProxy.GTQTCore_CH);
 
         //  Cosmic Components
-        COSMIC_INFORMATION_MODULE = this.addItem(682, "component.cosmic.information_module").setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        HOLOGRAPHIC_INFORMATION_IMC = this.addItem(683, "component.cosmic.holographic_imc").setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        COSMIC_INFORMATION_MODULE = this.addItem(682, "component.cosmic.information_module").setCreativeTabs(CommonProxy.GTQTCore_HP);
+        HOLOGRAPHIC_INFORMATION_IMC = this.addItem(683, "component.cosmic.holographic_imc").setCreativeTabs(CommonProxy.GTQTCore_HP);
 
         //  Supracausal Components
-        SPACETIME_CONDENSER = this.addItem(684, "component.supracausal.spacetime_condenser").setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        LIGHT_CONE_MODULE = this.addItem(685, "component.supracausal.light_cone_module").setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        SPACETIME_CONDENSER = this.addItem(684, "component.supracausal.spacetime_condenser").setCreativeTabs(CommonProxy.GTQTCore_HP);
+        LIGHT_CONE_MODULE = this.addItem(685, "component.supracausal.light_cone_module").setCreativeTabs(CommonProxy.GTQTCore_HP);
 
         // Optical Circuit Components: ID 200-219
-        PHASE_CHANGE_MEMORY = this.addItem(700, "plate.phase_change_memory").setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        OPTICAL_FIBER = this.addItem(701, "optical_fiber").setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        DIELECTRIC_MIRROR = this.addItem(702, "dielectric_mirror").setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        EMPTY_LASER_ASSEMBLY = this.addItem(703, "laser.assembly.empty").setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        HELIUM_LASER = this.addItem(704, "laser.emitter.helium").setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        NEON_LASER = this.addItem(705, "laser.emitter.neon").setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        ARGON_LASER = this.addItem(706, "laser.emitter.argon").setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        KRYPTON_LASER = this.addItem(707, "laser.emitter.krypton").setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        XENON_LASER = this.addItem(708, "laser.emitter.xenon").setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        HELIUM_NEON_LASER = this.addItem(709, "laser.helium_neon").setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        ND_YAG_LASER = this.addItem(710, "laser.nd_yag").setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        OPTICAL_LASER_CONTROL_UNIT = this.addItem(711, "optical_laser_control_unit").setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        PHASE_CHANGE_MEMORY = this.addItem(700, "plate.phase_change_memory").setCreativeTabs(CommonProxy.GTQTCore_GD);
+        OPTICAL_FIBER = this.addItem(701, "optical_fiber").setCreativeTabs(CommonProxy.GTQTCore_GD);
+        DIELECTRIC_MIRROR = this.addItem(702, "dielectric_mirror").setCreativeTabs(CommonProxy.GTQTCore_GD);
+        EMPTY_LASER_ASSEMBLY = this.addItem(703, "laser.assembly.empty").setCreativeTabs(CommonProxy.GTQTCore_GD);
+        HELIUM_LASER = this.addItem(704, "laser.emitter.helium").setCreativeTabs(CommonProxy.GTQTCore_GD);
+        NEON_LASER = this.addItem(705, "laser.emitter.neon").setCreativeTabs(CommonProxy.GTQTCore_GD);
+        ARGON_LASER = this.addItem(706, "laser.emitter.argon").setCreativeTabs(CommonProxy.GTQTCore_GD);
+        KRYPTON_LASER = this.addItem(707, "laser.emitter.krypton").setCreativeTabs(CommonProxy.GTQTCore_GD);
+        XENON_LASER = this.addItem(708, "laser.emitter.xenon").setCreativeTabs(CommonProxy.GTQTCore_GD);
+        HELIUM_NEON_LASER = this.addItem(709, "laser.helium_neon").setCreativeTabs(CommonProxy.GTQTCore_GD);
+        ND_YAG_LASER = this.addItem(710, "laser.nd_yag").setCreativeTabs(CommonProxy.GTQTCore_GD);
+        OPTICAL_LASER_CONTROL_UNIT = this.addItem(711, "optical_laser_control_unit").setCreativeTabs(CommonProxy.GTQTCore_GD);
 
 
 
         // Spintronic Circuit Components: ID 220-239
-        SPIN_TRANSFER_TORQUE_MEMORY = this.addItem(720, "plate.spin_transfer_torque_memory").setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        TOPOLOGICAL_INSULATOR_TUBE = this.addItem(721, "tube.topological_insulator").setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        BOSE_EINSTEIN_CONDENSATE_CONTAINMENT_UNIT = this.addItem(722, "containment_unit.bose_einstein_condensate").setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        BOSE_EINSTEIN_CONDENSATE = this.addItem(723, "bose_einstein_condensate").setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        ESR_COMPUTATION_UNIT = this.addItem(724, "esr_computation_unit").setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        SPIN_TRANSFER_TORQUE_MEMORY = this.addItem(720, "plate.spin_transfer_torque_memory").setCreativeTabs(CommonProxy.GTQTCore_HP);
+        TOPOLOGICAL_INSULATOR_TUBE = this.addItem(721, "tube.topological_insulator").setCreativeTabs(CommonProxy.GTQTCore_HP);
+        BOSE_EINSTEIN_CONDENSATE_CONTAINMENT_UNIT = this.addItem(722, "containment_unit.bose_einstein_condensate").setCreativeTabs(CommonProxy.GTQTCore_HP);
+        BOSE_EINSTEIN_CONDENSATE = this.addItem(723, "bose_einstein_condensate").setCreativeTabs(CommonProxy.GTQTCore_HP);
+        ESR_COMPUTATION_UNIT = this.addItem(724, "esr_computation_unit").setCreativeTabs(CommonProxy.GTQTCore_HP);
 
         // Cosmic Circuit Components: ID 240-259
 
@@ -420,17 +469,13 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         // Process-Specific Components: ID 500-999
         MAGNETRON = this.addItem(950, "magnetron").setCreativeTabs(CommonProxy.GTQTCore_TAB);
 
-        // Process Intermediary Items: ID 1000-1999
-        CARBON_ALLOTROPE_MIXTURE = this.addItem(951, "mixture.carbon_allotrope").setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        GRAPHENE_ALIGNED_CNT = this.addItem(952, "cnt.graphene_aligned").setCreativeTabs(CommonProxy.GTQTCore_TAB);
-
         //  High Energy Physics items
-        PLASMA_CONTAINMENT_CELL = this.addItem(1000, "plasma_containment_cell").setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        RHENIUM_PLASMA_CONTAINMENT_CELL = this.addItem(1001, "rhenium_plasma_containment_cell").setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        NEUTRON_PLASMA_CONTAINMENT_CELL = this.addItem(1002, "neutron_plasma_containment_cell").setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        HYPOGEN_PLASMA_CONTAINMENT_CELL = this.addItem(1003, "hypogen_plasma_containment_cell").setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        ACTINIUM_SUPERHYDRIDE_PLASMA_CONTAINMENT_CELL = this.addItem(1004, "actinium_superhydride_plasma_containment_cell").setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        QUANTUM_ANOMALY = this.addItem(1005, "quantum_anomaly").setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        PLASMA_CONTAINMENT_CELL = this.addItem(1000, "plasma_containment_cell").setCreativeTabs(CommonProxy.GTQTCore_HP);
+        RHENIUM_PLASMA_CONTAINMENT_CELL = this.addItem(1001, "rhenium_plasma_containment_cell").setCreativeTabs(CommonProxy.GTQTCore_HP);
+        NEUTRON_PLASMA_CONTAINMENT_CELL = this.addItem(1002, "neutron_plasma_containment_cell").setCreativeTabs(CommonProxy.GTQTCore_HP);
+        HYPOGEN_PLASMA_CONTAINMENT_CELL = this.addItem(1003, "hypogen_plasma_containment_cell").setCreativeTabs(CommonProxy.GTQTCore_HP);
+        ACTINIUM_SUPERHYDRIDE_PLASMA_CONTAINMENT_CELL = this.addItem(1004, "actinium_superhydride_plasma_containment_cell").setCreativeTabs(CommonProxy.GTQTCore_HP);
+        QUANTUM_ANOMALY = this.addItem(1005, "quantum_anomaly").setCreativeTabs(CommonProxy.GTQTCore_HP);
 
         //  Biological Components
         ELECTROCHEMICAL_GRADIENT_RECORDER = this.addItem(1006, "biological.components.electrochemical_gradient_recorder").setCreativeTabs(CommonProxy.GTQTCore_BIO);

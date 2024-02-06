@@ -218,6 +218,22 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem SUPRACHRONAL_OpV;
     public static MetaItem<?>.MetaValueItem SUPRACHRONAL_MAX;
 
+
+    public static MetaItem<?>.MetaValueItem ASUPRACHRONAL_ULV;
+    public static MetaItem<?>.MetaValueItem ASUPRACHRONAL_LV;
+    public static MetaItem<?>.MetaValueItem ASUPRACHRONAL_MV;
+    public static MetaItem<?>.MetaValueItem ASUPRACHRONAL_HV;
+    public static MetaItem<?>.MetaValueItem ASUPRACHRONAL_EV;
+    public static MetaItem<?>.MetaValueItem ASUPRACHRONAL_IV;
+    public static MetaItem<?>.MetaValueItem ASUPRACHRONAL_LuV;
+    public static MetaItem<?>.MetaValueItem ASUPRACHRONAL_ZPM;
+    public static MetaItem<?>.MetaValueItem ASUPRACHRONAL_UV;
+    public static MetaItem<?>.MetaValueItem ASUPRACHRONAL_UHV;
+    public static MetaItem<?>.MetaValueItem ASUPRACHRONAL_UEV;
+    public static MetaItem<?>.MetaValueItem ASUPRACHRONAL_UIV;
+    public static MetaItem<?>.MetaValueItem ASUPRACHRONAL_UXV;
+    public static MetaItem<?>.MetaValueItem ASUPRACHRONAL_OpV;
+    public static MetaItem<?>.MetaValueItem ASUPRACHRONAL_MAX;
     // Primitive Circuit Components
     public static MetaItem<?>.MetaValueItem VACUUM_TUBE_COMPONENTS;
 
@@ -323,7 +339,40 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem MINING_DRONE_UXV;
     public static MetaItem<?>.MetaValueItem MINING_DRONE_OpV;
     public static MetaItem<?>.MetaValueItem MINING_DRONE_MAX;
+    public static MetaItem<?>.MetaValueItem MAGNETO_RESONATIC_CIRCUIT_ULV;
+    public static MetaItem<?>.MetaValueItem MAGNETO_RESONATIC_CIRCUIT_LV;
+    public static MetaItem<?>.MetaValueItem MAGNETO_RESONATIC_CIRCUIT_MV;
+    public static MetaItem<?>.MetaValueItem MAGNETO_RESONATIC_CIRCUIT_HV;
+    public static MetaItem<?>.MetaValueItem MAGNETO_RESONATIC_CIRCUIT_EV;
+    public static MetaItem<?>.MetaValueItem MAGNETO_RESONATIC_CIRCUIT_IV;
+    public static MetaItem<?>.MetaValueItem MAGNETO_RESONATIC_CIRCUIT_LuV;
+    public static MetaItem<?>.MetaValueItem MAGNETO_RESONATIC_CIRCUIT_ZPM;
+    public static MetaItem<?>.MetaValueItem MAGNETO_RESONATIC_CIRCUIT_UV;
+    public static MetaItem<?>.MetaValueItem MAGNETO_RESONATIC_CIRCUIT_UHV;
+    public static MetaItem<?>.MetaValueItem MAGNETO_RESONATIC_CIRCUIT_UEV;
+    public static MetaItem<?>.MetaValueItem MAGNETO_RESONATIC_CIRCUIT_UIV;
+    public static MetaItem<?>.MetaValueItem MAGNETO_RESONATIC_CIRCUIT_UXV;
+    public static MetaItem<?>.MetaValueItem MAGNETO_RESONATIC_CIRCUIT_OpV;
+    public static MetaItem<?>.MetaValueItem MAGNETO_RESONATIC_CIRCUIT_MAX;
+    public static MetaItem<?>.MetaValueItem CARBON_ALLOTROPE;
+    public static MetaItem<?>.MetaValueItem GRAPHENE_ALIGNED;
+    public static MetaItem<?>.MetaValueItem BORON_NITRIDE_GRINDER;
+    public static MetaItem<?>.MetaValueItem VACUUM_TUBE_COMPONENT;
+    public static MetaItem<?>.MetaValueItem SEPARATION_ELECTROMAGNET;
+    public static MetaItem<?>.MetaValueItem PROTONATED_FULLERENE_SIEVING_MATRIX;
+    public static MetaItem<?>.MetaValueItem SATURATED_FULLERENE_SIEVING_MATRIX;
 
+    public static MetaItem<?>.MetaValueItem METASTABLE_SELF_HEALING_ADHESIVE;
+    public static MetaItem<?>.MetaValueItem HYPERDIMENSIONAL_TACHYON_CONDENSED_MATTER;
+    public static MetaItem<?>.MetaValueItem UNSTABLE_STAR;
+    public static MetaItem<?>.MetaValueItem CLADDED_OPTICAL_FIBER_CORE;
+    public static MetaItem<?>.MetaValueItem CLOSED_TIMELIKE_CURVE_COMPUTATIONAL_UNIT;
+    public static MetaItem<?>.MetaValueItem CLOSED_TIMELIKE_CURVE_GUIDANCE_UNIT;
+    public static MetaItem<?>.MetaValueItem NUCLEAR_CLOCK;
+    public static MetaItem<?>.MetaValueItem MANIFOLD_OSCILLATORY_POWER_CELL;
+
+    public static MetaItem<?>.MetaValueItem SCINTILLATOR;
+    public static MetaItem<?>.MetaValueItem SCINTILLATOR_CRYSTAL;
     // Circuit Boards
     public static MetaItem<?>.MetaValueItem GOOWARE_BOARD;
     public static MetaItem<?>.MetaValueItem OPTICAL_BOARD;

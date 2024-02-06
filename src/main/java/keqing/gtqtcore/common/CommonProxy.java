@@ -52,7 +52,7 @@ public class CommonProxy {
     public static final CreativeTabs GTQTCore_BIO = new CreativeTabs("gtqtbio") {
         @Override
         public ItemStack createIcon() {
-            return GTQTMetaItems.COMMON_ALGAE.getStackForm();
+            return GTQTMetaItems.DNA_ENCODER.getStackForm();
         }
     };
     public static final CreativeTabs GTQTCore_SP = new CreativeTabs("gtqtsp") {
@@ -67,10 +67,38 @@ public class CommonProxy {
             return GTQTMetaItems.AE_C.getStackForm();
         }
     };
+    public static final CreativeTabs GTQTCore_CH = new CreativeTabs("gtqtch") {
+        @Override
+        public ItemStack createIcon() {
+            return GTQTMetaItems.BZ_REACTION_CHAMBER.getStackForm();
+        }
+    };
     public static final CreativeTabs GTQTCore_NC = new CreativeTabs("gtqtnc") {
         @Override
         public ItemStack createIcon() {
             return GTQTMetaItems.NAQUADAH_ROD_QUAD.getStackForm();
+        }
+    };
+
+    public static final CreativeTabs GTQTCore_HP = new CreativeTabs("gtqthp") {
+        @Override
+        public ItemStack createIcon() {
+            return GTQTMetaItems.QUANTUM_ANOMALY.getStackForm();
+        }
+    };
+
+    public static final CreativeTabs GTQTCore_GD = new CreativeTabs("gtqtgd") {
+        @Override
+        public ItemStack createIcon() {
+            return GTQTMetaItems.ND_YAG_LASER.getStackForm();
+        }
+    };
+
+
+    public static final CreativeTabs GTQTCore_TO = new CreativeTabs("gtqtto") {
+        @Override
+        public ItemStack createIcon() {
+            return GTQTMetaItems.DEBUG_STRUCTURE_WRITER.getStackForm();
         }
     };
     public void preInit( FMLPreInitializationEvent event ) {
