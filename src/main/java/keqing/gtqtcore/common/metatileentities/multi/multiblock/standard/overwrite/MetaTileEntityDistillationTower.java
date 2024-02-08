@@ -55,7 +55,17 @@ public class MetaTileEntityDistillationTower extends RecipeMapMultiblockControll
         super(metaTileEntityId, RecipeMaps.DISTILLATION_RECIPES);
         this.recipeMapWorkable = new DistillationTowerLogic(this);
     }
+    @Override
+    public void writeInitialSyncData(PacketBuffer buf) {
+        super.writeInitialSyncData(buf);
+        buf.writeInt(this.casingTier);
+    }
 
+    @Override
+    public void receiveInitialSyncData(PacketBuffer buf) {
+        super.receiveInitialSyncData(buf);
+        this.casingTier = buf.readInt();
+    }
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityDistillationTower(metaTileEntityId);

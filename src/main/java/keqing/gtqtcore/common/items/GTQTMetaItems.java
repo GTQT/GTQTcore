@@ -393,6 +393,23 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem SPINTRONIC_TRANSISTOR;
     public static MetaItem<?>.MetaValueItem SPINTRONIC_INDUCTOR;
 
+    public static MetaItem<?>.MetaValueItem DISK_0;
+    public static MetaItem<?>.MetaValueItem DISK_1;
+    public static MetaItem<?>.MetaValueItem DISK_2;
+    public static MetaItem<?>.MetaValueItem DISK_3;
+    public static MetaItem<?>.MetaValueItem DISK_4;
+    public static MetaItem<?>.MetaValueItem DISK_5;
+    public static MetaItem<?>.MetaValueItem DISK_6;
+    public static MetaItem<?>.MetaValueItem DISK_7;
+    public static MetaItem<?>.MetaValueItem DISK_8;
+    public static MetaItem<?>.MetaValueItem DISK_9;
+    public static MetaItem<?>.MetaValueItem DISK_10;
+    public static MetaItem<?>.MetaValueItem DISK_11;
+    public static MetaItem<?>.MetaValueItem DISK_12;
+    public static MetaItem<?>.MetaValueItem DISK_13;
+    public static MetaItem<?>.MetaValueItem DISK_14;
+    public static MetaItem<?>.MetaValueItem DISK_15;
+
     // Process-Specific Components
     public static MetaItem<?>.MetaValueItem MAGNETRON;
 

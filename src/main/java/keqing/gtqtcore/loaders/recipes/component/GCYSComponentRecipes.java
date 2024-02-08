@@ -5,12 +5,13 @@ import gregtech.api.unification.material.MarkerMaterials;
 import gregtech.api.unification.stack.UnificationEntry;
 import keqing.gtqtcore.common.items.GTQTMetaItems;
 
+import static gregtech.api.GTValues.*;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
-import static gregtech.api.GTValues.L;
 import static gregtech.api.recipes.RecipeMaps.ASSEMBLY_LINE_RECIPES;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.common.items.MetaItems.*;
+import static keqing.gtqtcore.common.items.GTQTMetaItems.GOOWARE_ASSEMBLY;
 
 public class GCYSComponentRecipes {
 
@@ -39,6 +40,10 @@ public class GCYSComponentRecipes {
                 .fluidInputs(Lubricant.getFluid(1000))
                 .fluidInputs(Vibranium.getFluid(L))
                 .output(ELECTRIC_MOTOR_UHV)
+                .stationResearch(b -> b
+                        .researchStack(ELECTRIC_MOTOR_UV.getStackForm())
+                        .CWUt(64)
+                        .EUt(VA[UV]))
                 .duration(600).EUt(400000).buildAndRegister();
     }
 
@@ -55,6 +60,10 @@ public class GCYSComponentRecipes {
                 .fluidInputs(StyreneButadieneRubber.getFluid(L * 24))
                 .fluidInputs(Vibranium.getFluid(L))
                 .output(CONVEYOR_MODULE_UHV)
+                .stationResearch(b -> b
+                        .researchStack(CONVEYOR_MODULE_UV.getStackForm())
+                        .CWUt(64)
+                        .EUt(VA[UV]))
                 .duration(600).EUt(400000).buildAndRegister();
     }
 
@@ -72,6 +81,10 @@ public class GCYSComponentRecipes {
                 .fluidInputs(Lubricant.getFluid(1000))
                 .fluidInputs(Vibranium.getFluid(L))
                 .output(ELECTRIC_PISTON_UHV)
+                .stationResearch(b -> b
+                        .researchStack(ELECTRIC_PISTON_UV.getStackForm())
+                        .CWUt(64)
+                        .EUt(VA[UV]))
                 .duration(600).EUt(400000).buildAndRegister();
     }
 
@@ -90,6 +103,10 @@ public class GCYSComponentRecipes {
                 .fluidInputs(Lubricant.getFluid(1000))
                 .fluidInputs(Vibranium.getFluid(L))
                 .output(ROBOT_ARM_UHV)
+                .stationResearch(b -> b
+                        .researchStack(ROBOT_ARM_UV.getStackForm())
+                        .CWUt(64)
+                        .EUt(VA[UV]))
                 .duration(600).EUt(400000).buildAndRegister();
     }
 
@@ -106,6 +123,10 @@ public class GCYSComponentRecipes {
                 .fluidInputs(Lubricant.getFluid(1000))
                 .fluidInputs(Vibranium.getFluid(L))
                 .output(ELECTRIC_PUMP_UHV)
+                .stationResearch(b -> b
+                        .researchStack(ELECTRIC_PUMP_UV.getStackForm())
+                        .CWUt(64)
+                        .EUt(VA[UV]))
                 .duration(600).EUt(400000).buildAndRegister();
     }
 
@@ -122,6 +143,10 @@ public class GCYSComponentRecipes {
                 .fluidInputs(SolderingAlloy.getFluid(L * 8))
                 .fluidInputs(Vibranium.getFluid(L))
                 .output(EMITTER_UHV)
+                .stationResearch(b -> b
+                        .researchStack(EMITTER_UV.getStackForm())
+                        .CWUt(64)
+                        .EUt(VA[UV]))
                 .duration(600).EUt(400000).buildAndRegister();
     }
 
@@ -138,6 +163,10 @@ public class GCYSComponentRecipes {
                 .fluidInputs(SolderingAlloy.getFluid(L * 8))
                 .fluidInputs(Vibranium.getFluid(L))
                 .output(SENSOR_UHV)
+                .stationResearch(b -> b
+                        .researchStack(SENSOR_UV.getStackForm())
+                        .CWUt(64)
+                        .EUt(VA[UV]))
                 .duration(600).EUt(400000).buildAndRegister();
     }
 
@@ -154,6 +183,10 @@ public class GCYSComponentRecipes {
                 .fluidInputs(SolderingAlloy.getFluid(L * 12))
                 .fluidInputs(Vibranium.getFluid(L))
                 .output(FIELD_GENERATOR_UHV)
+                .stationResearch(b -> b
+                        .researchStack(FIELD_GENERATOR_UV.getStackForm())
+                        .CWUt(64)
+                        .EUt(VA[UV]))
                 .duration(600).EUt(400000).buildAndRegister();
     }
 

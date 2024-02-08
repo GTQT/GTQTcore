@@ -223,7 +223,6 @@ public class MetaTileEntityKQCC extends MultiblockWithDisplayBase implements IOp
                 .where('X', abilities(MultiblockAbility.COMPUTATION_DATA_TRANSMISSION))
                 .where('N', states(getCasingState())
                         .or(abilities(MultiblockAbility.MAINTENANCE_HATCH).setExactLimit(1))
-                        .or(abilities(MultiblockAbility.EXPORT_FLUIDS).setMinGlobalLimited(1).setPreviewCount(1))
                         .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setMinGlobalLimited(1).setPreviewCount(1))
                         .or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(2).setPreviewCount(1)))
                 .where('A', TiredTraceabilityPredicate.CP_GPU_CASING1)

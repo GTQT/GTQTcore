@@ -9,6 +9,15 @@ import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.SPACE_ELEVATOR_MINI
 
 public class SEloader {
     public static void init() {
+        casing();
+        mining();
+        drilling();
+    }
+
+    private static void casing() {
+    }
+
+    private static void mining() {
         SPACE_ELEVATOR_MINING_MODULE.recipeBuilder()
                 .input(dust,Iron)
                 .fluidInputs(Water.getFluid(14))
@@ -19,7 +28,9 @@ public class SEloader {
                 .EUt(32)
                 .duration(20*64)
                 .buildAndRegister();
+    }
 
+    private static void drilling() {
         SPACE_ELEVATOR_DRILLING_MODULE.recipeBuilder()
                 .input(dust,Iron)
                 .fluidInputs(Water.getFluid(14))

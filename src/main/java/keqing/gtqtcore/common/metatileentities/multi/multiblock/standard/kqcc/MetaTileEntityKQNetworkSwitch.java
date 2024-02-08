@@ -47,7 +47,8 @@ import java.util.Set;
 import static gregtech.api.GTValues.VA;
 
 public class MetaTileEntityKQNetworkSwitch extends MetaTileEntityDataBank implements IOpticalComputationProvider {
-
+    private int laser_tier;
+    private int casing_tier;
     int tire;
     private static final int EUT_PER_HATCH = VA[GTValues.IV];
 
@@ -72,10 +73,10 @@ public class MetaTileEntityKQNetworkSwitch extends MetaTileEntityDataBank implem
     public void receiveCustomData(int dataId, PacketBuffer buf) {
         super.receiveCustomData(dataId, buf);
         if(dataId == GTQTValue.UPDATE_TIER){
-            this.tire = buf.readInt();
+            this.casing_tier = buf.readInt();
         }
         if(dataId == GTQTValue.REQUIRE_DATA_UPDATE){
-            this.writeCustomData(GTQTValue.UPDATE_TIER,buf1 -> buf1.writeInt(this.tire));
+            this.writeCustomData(GTQTValue.UPDATE_TIER,buf1 -> buf1.writeInt(this.casing_tier));
         }
     }
     @Override
@@ -84,11 +85,17 @@ public class MetaTileEntityKQNetworkSwitch extends MetaTileEntityDataBank implem
         computationHandler.onStructureForm(
                 getAbilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION),
                 getAbilities(MultiblockAbility.COMPUTATION_DATA_TRANSMISSION));
-        Object tire = context.get("ChemicalPlantCasingTiredStats");
-        this.tire = GTQTUtil.getOrDefault(() -> tire instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)tire).getIntTier(),
+        Object casing_tier = context.get("ChemicalPlantCasingTiredStats");
+        Object laser_tier = context.get("ZWTiredStats");
+        this.casing_tier = GTQTUtil.getOrDefault(() -> casing_tier instanceof WrappedIntTired,
+                () -> ((WrappedIntTired)casing_tier).getIntTier(),
                 0);
-        this.writeCustomData(GTQTValue.UPDATE_TIER,buf -> buf.writeInt(this.tire));
+        this.laser_tier = GTQTUtil.getOrDefault(() -> laser_tier instanceof WrappedIntTired,
+                () -> ((WrappedIntTired)laser_tier).getIntTier(),
+                0);
+
+        this.writeCustomData(GTQTValue.UPDATE_TIER,buf -> buf.writeInt(this.casing_tier));
+        this.tire=Math.min(this.casing_tier,this.laser_tier);
     }
 
     @Override
@@ -136,7 +143,7 @@ public class MetaTileEntityKQNetworkSwitch extends MetaTileEntityDataBank implem
                 .aisle("XXX", "XAX", "XXX")
                 .aisle("XXX", "XSX", "XXX")
                 .where('S', selfPredicate())
-                .where('A', states(getAdvancedState()))
+                .where('A', TiredTraceabilityPredicate.CP_ZW_CASING)
                 .where('X', TiredTraceabilityPredicate.CP_CASING.setMinGlobalLimited(7)
                         .or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(1, 1))
                         .or(maintenancePredicate())
@@ -145,17 +152,9 @@ public class MetaTileEntityKQNetworkSwitch extends MetaTileEntityDataBank implem
                 .build();
     }
 
-    private static  IBlockState getCasingState() {
-        return MetaBlocks.COMPUTER_CASING.getState(BlockComputerCasing.CasingType.COMPUTER_CASING);
-    }
-
-    private static  IBlockState getAdvancedState() {
-        return MetaBlocks.COMPUTER_CASING.getState(BlockComputerCasing.CasingType.ADVANCED_COMPUTER_CASING);
-    }
-
     @SideOnly(Side.CLIENT)
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
-        switch (this.tire) {
+        switch (this.casing_tier) {
             case (2) -> {
                 return Textures.SOLID_STEEL_CASING;
             }

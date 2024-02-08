@@ -488,5 +488,24 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         DNA_DECODER = this.addItem(1013, "biological.components.dna_decoder").setCreativeTabs(CommonProxy.GTQTCore_BIO);
         DNA_DECODE_ENCODER = this.addItem(1014, "biological.components.dna_decode_encoder").setCreativeTabs(CommonProxy.GTQTCore_BIO);
 
+
+
+        //蓝图
+        DISK_0 = this.addItem(2000, "disk.0").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        DISK_1 = this.addItem(2001, "disk.1").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        DISK_2 = this.addItem(2002, "disk.2").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        DISK_3 = this.addItem(2003, "disk.3").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        DISK_4 = this.addItem(2004, "disk.4").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        DISK_5 = this.addItem(2005, "disk.5").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        DISK_6 = this.addItem(2006, "disk.6").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        DISK_7 = this.addItem(2007, "disk.7").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        DISK_8 = this.addItem(2008, "disk.8").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        DISK_9 = this.addItem(2009, "disk.9").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        DISK_10 = this.addItem(2010, "disk.10").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        DISK_11 = this.addItem(2011, "disk.11").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        DISK_12 = this.addItem(2012, "disk.12").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        DISK_13 = this.addItem(2013, "disk.13").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        DISK_14 = this.addItem(2014, "disk.14").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        DISK_15 = this.addItem(2015, "disk.15").setCreativeTabs(CommonProxy.GTQTCore_DISK);
     }
 }

@@ -23,8 +23,7 @@ import net.minecraftforge.fluids.FluidStack;
 import org.apache.commons.lang3.ArrayUtils;
 
 import static gregicality.science.common.metatileentities.GCYSMetaTileEntities.*;
-import static gregtech.api.GTValues.UHV;
-import static gregtech.api.GTValues.VA;
+import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.ASSEMBLER_RECIPES;
 import static gregtech.api.recipes.RecipeMaps.ASSEMBLY_LINE_RECIPES;
 import static gregtech.api.unification.material.Materials.*;
@@ -132,6 +131,10 @@ public class GCYSMetaTileEntityLoader {
                 .fluidInputs(SodiumPotassium.getFluid(12000))
                 .fluidInputs(SolderingAlloy.getFluid(5760))
                 .output(ENERGY_INPUT_HATCH[8])
+                .stationResearch(b -> b
+                        .researchStack(ENERGY_INPUT_HATCH[7].getStackForm())
+                        .CWUt(64)
+                        .EUt(VA[UV]))
                 .duration(1000).EUt(VA[UHV]).buildAndRegister();
 
         GTRecipeHandler.removeRecipesByInputs(ASSEMBLER_RECIPES,
@@ -176,6 +179,10 @@ public class GCYSMetaTileEntityLoader {
                 .fluidInputs(SodiumPotassium.getFluid(12000))
                 .fluidInputs(SolderingAlloy.getFluid(5760))
                 .output(ENERGY_OUTPUT_HATCH[8])
+                .stationResearch(b -> b
+                        .researchStack(ENERGY_OUTPUT_HATCH[7].getStackForm())
+                        .CWUt(64)
+                        .EUt(VA[UV]))
                 .duration(1000).EUt(VA[UHV]).buildAndRegister();
 
         GTRecipeHandler.removeRecipesByInputs(ASSEMBLER_RECIPES,

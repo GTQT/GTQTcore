@@ -12,6 +12,7 @@ import keqing.gtqtcore.common.block.blocks.GTQTBlockWireCoil;
 import keqing.gtqtcore.common.block.blocks.GTQTCrops;
 import keqing.gtqtcore.common.items.GTQTMetaItems;
 import keqing.gtqtcore.common.items.metaitems.GTQTMetaToolItems;
+import keqing.gtqtcore.loaders.WorldLoader;
 import keqing.gtqtcore.loaders.recipes.*;
 import keqing.gtqtcore.loaders.recipes.gcys.GCYSMaterialInfoLoader;
 import keqing.gtqtcore.loaders.recipes.handlers.*;
@@ -93,8 +94,12 @@ public class CommonProxy {
             return GTQTMetaItems.ND_YAG_LASER.getStackForm();
         }
     };
-
-
+    public static final CreativeTabs GTQTCore_DISK = new CreativeTabs("gtqtds") {
+        @Override
+        public ItemStack createIcon() {
+            return GTQTMetaItems.DISK_0.getStackForm();
+        }
+    };
     public static final CreativeTabs GTQTCore_TO = new CreativeTabs("gtqtto") {
         @Override
         public ItemStack createIcon() {
@@ -106,6 +111,7 @@ public class CommonProxy {
         GTQTRecipes.registerTool();
     }
     public void init( FMLInitializationEvent event ) {
+        WorldLoader.init();
         FuelRecipes.init();
         IntegratedMiningDivision.init();
         HeatExchangeRecipes.init();

@@ -8,11 +8,22 @@ import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.widgets.ProgressWidget;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
+import gregtech.api.recipes.RecyclingHandler;
 import gregtech.api.recipes.builders.*;
+import gregtech.api.recipes.ingredients.GTRecipeInput;
+import gregtech.api.recipes.machines.RecipeMapAssemblyLine;
+import gregtech.api.unification.OreDictUnifier;
+import gregtech.api.unification.material.Materials;
+import gregtech.api.unification.stack.ItemMaterialInfo;
+import gregtech.api.util.AssemblyLineManager;
 import gregtech.core.sound.GTSoundEvents;
 import keqing.gtqtcore.api.capability.chemical_plant.ChemicalPlantBuilder;
 import keqing.gtqtcore.api.recipes.builder.*;
 import keqing.gtqtcore.api.recipes.machine.*;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidStack;
+
+import java.util.function.Consumer;
 
 
 //怎么写请看
@@ -85,7 +96,6 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<CACasingTierRecipeBuilder> COMPONENT_ASSEMBLY_LINE_RECIPES;
     public static final RecipeMap<ELERecipeBuilder> ELECTROBATH;
     public static final RecipeMap<PCBRecipeBuilder> PCB;
-
     public static final RecipeMap<PARecipeBuilder> PARTICLE_ACCELERATOR_RECIPES;
     public static final RecipeMap<SimpleRecipeBuilder> DIGESTER_RECIPES;
     public static final RecipeMap<BRRecioeBuilder> BIOLOGICAL_REACTION_RECIPES;
@@ -94,13 +104,9 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<FuelRecipeBuilder> TURBINE_COMBUSTION_CHAMBER;
     public static final RecipeMap<SimpleRecipeBuilder> FUEL_REFINE_FACTORY_RECIPES;
     public static final RecipeMap<FuelRecipeBuilder> ROCKET;
-
     public static final RecipeMap<FuelRecipeBuilder> NAQUADAH_REACTOR;
-
     public static final RecipeMap<FuelRecipeBuilder> I_MODULAR_FISSION_REACTOR;
-
     public static final RecipeMap<ChemicalPlantBuilder> CHEMICAL_PLANT;
-
     public static final RecipeMap<SimpleRecipeBuilder> INTEGRATED_MINING_DIVISION;
     public static final RecipeMap<FuelRecipeBuilder> STEAM_BLAST_FURNACE_RECIPES;
     public static final RecipeMap<FuelRecipeBuilder> STEAM_ORE_WASHER_RECIPES;
@@ -162,7 +168,6 @@ public class GTQTcoreRecipeMaps {
         EFUSION_RECIPES = new RecipeMap<>("efusion_reactor",0,0,2,1,new FusionRecipeBuilder(),false)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_COMPRESS, ProgressWidget.MoveType.HORIZONTAL)
                 .setSound(GTSoundEvents.ARC);
-
 
         MINING_DRILL_RECIPES= new RecipeMap<>("mining_drill", 2, 16, 1, 0, new MDRecipeBuilder(), false)
                 .setSlotOverlay(false, false, true, GuiTextures.CRUSHED_ORE_OVERLAY)

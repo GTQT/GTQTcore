@@ -570,8 +570,22 @@ gtqtcore.machine.large_chemical_reactor.name=工业化学反应釜
 gtqtcore.machine.pyrolyse_oven.name=热解炉
 gtqtcore.machine.cracker.name=石油裂化机
 gtqtcore.machine.distillation_tower.name=蒸馏塔
+gtqtcore.machine.assembly_line.name=装配线
+gtqtcore.machine.reactor_furnace.name=反射炉
+recipemap.reaction_furnace.name=反射煅烧
+gtqtcore.machine.space_elevator.name=太空电梯
+recipemap.space_elevator_mining_module.name=太空矿床采集
+recipemap.space_elevator_drilling_module.name=太空气泉采集
+gtqtcore.machine.gantry_crane.name=大型龙门吊
+recipemap.gantry_crane.name=大型组装
+gtqtcore.machine.clarifier.name=澄清池
+recipemap.clarifitre.name=澄清
+gtqtcore.machine.ele_oil.name=电催破乳反应罐
+recipemap.ele_oil.name=电催破乳反应
 gtqtcore.machine.salt_flied.name=晒盐场
 tile.isa_casing.process_casing.name=加工厂外壳
+recipemap.keqing_net_recipes.name=序列研究
+recipemap.star_suvery.name=星球研究
 item.gt.tool.hammer_lv.name=风钻（LV）
 item.gt.tool.hammer_mv.name=风钻（MV）
 item.gt.tool.hammer_hv.name=风钻（HV）
@@ -654,7 +668,7 @@ gregtech.universal.tooltip.kqcc=端口等级:%s
 gregtech.machine.wireless.export.tooltip=§c其实是动力仓(还没做完)
 gregtech.machine.wireless.import.tooltip=§a其实是能源仓(还没做完)
 gtqtcore.multiblock.tank.height=高度: %s
-
+gtqtcore.atier=: %s %s %s %s
 gtqtcore.multiblock.se.motor=轨道加速器: %s 目标星域: %s
 gtqtcore.multiblock.se.abcdn=模块项目: 矿机 超频 耗能 并行
 gtqtcore.multiblock.se.abcd=模块等级: %s  %s  %s  %s
@@ -689,22 +703,82 @@ gtqtcore.multiblock.pam.threshold_increment=调整加速模式
 gtqtcore.multiblock.paa.threshold_decrement=调整偏转角
 gtqtcore.multiblock.paa.threshold_increment=调整偏转角
 
-gtqtcore.multiblock.kqn.threshold_decrement=§c选取向前
-gtqtcore.multiblock.kqn.threshold_increment=§a选取向后
+gtqtcore.multiblock.kqn.threshold_decrement=§c选取向前 1
+gtqtcore.multiblock.kqn.threshold_increment=§a选取向后 1
+
+gtqtcore.multiblock.kqn.threshold_decrement1=§c选取向前 10
+gtqtcore.multiblock.kqn.threshold_increment1=§a选取向后 10
 
 gtqtcore.multiblock.kqn.thresholdPercentage=研究序号：%s
 gtqtcore.machine.keqing_net.name=科研计算机
-gtqtcore.multiblock.kqn.nb1=项目：可控核聚变 可控核聚变是可控的，能够持续进行的核聚变反应，其潜在优势使其成为最理想的终极能源形式之一。与核裂变相比，核聚变释放能量大，原料来源丰富，产生的放射性废物少。
-gtqtcore.multiblock.kqn.nb2=项目：涡轮效率升级I 通过对小型内燃发电机的涡轮外形继续重新设计以及机器外壳的材料设计，采用新结构的内燃机工作效率大大提升，并且可以适应更加恶劣的工作条件。
 
+gtqtcore.multiblock.kqn.nb0=欢迎使用KQCC科研计算机集成系统！
+metaitem.disk.0.name=数据存储器
+metaitem.disk.0.tooltip=§aNULL
 
+gtqtcore.multiblock.kqn.nb1=项目：涡轮效率升级I 通过对小型内燃发电机的涡轮外形继续重新设计以及机器外壳的材料设计，采用新结构的内燃机工作效率大大提升，并且可以适应更加恶劣的工作条件。
+metaitem.disk.1.name=数据存储器
+metaitem.disk.1.tooltip=§a涡轮效率升级I
 
+gtqtcore.multiblock.kqn.nb2=项目：涡轮效率升级II 继续对涡轮叶片外形结构进行重新设计优化，使得涡轮叶片尖端的最高速度能够突破声速，并且最大化降低，损耗涡轮热机再起效率大大提升。
+metaitem.disk.2.name=数据存储器
+metaitem.disk.2.tooltip=§a涡轮效率升级II
 
+gtqtcore.multiblock.kqn.nb3=项目：涡轮效率升级III 传统的涡轮结以及无法满足日益增长的产能需求，采用KQCC-泵推轮机一体化设计，在叶片材料外形不变的情况下，将总体效率推到新高度。
+metaitem.disk.3.name=数据存储器
+metaitem.disk.3.tooltip=§a涡轮效率升级III
 
+gtqtcore.multiblock.kqn.nb4=项目：蒸燃联合体系 燃气蒸汽联合循环是以燃气为高温工质,蒸汽为低温工质.由燃气轮机的排气作为蒸汽轮机装置循环的加热源的联合循环。相较于同等级柴油机，总发电效率提高几乎一倍！
+metaitem.disk.4.name=数据存储器
+metaitem.disk.4.tooltip=§a蒸燃联合体系
 
+gtqtcore.multiblock.kqn.nb5=项目：室温超导设计 通过对加工手段的精进，材料学的认知进步,有望在所有电和磁的领域让室温超导材料得到大规模应用，极大提高装置的性能和效率，得以支持更加极端的工作环境。
+metaitem.disk.5.name=数据存储器
+metaitem.disk.5.tooltip=§a室温超导设计
 
+gtqtcore.multiblock.kqn.nb6=项目：可控核聚变-环流器设计 相较于传统结构的核聚变装置，使用新结构的聚变（环流器）在特定工作条件下的运行表现更加优异，无论是耗电还是产率都具有极其可观的加成。
+metaitem.disk.6.name=数据存储器
+metaitem.disk.6.tooltip=§a可控核聚变-环流器设计
 
+gtqtcore.multiblock.kqn.nb7=项目：可控核聚变-聚变超导线圈 使用先进材料复合的超导线圈能够适应更加极端的工作条件，通过应用在在核聚变领域，能够使机器将粒子加速到更加极端的程度。
+metaitem.disk.7.name=数据存储器
+metaitem.disk.7.tooltip=§a可控核聚变-聚变超导线圈
 
+gtqtcore.multiblock.kqn.nb8=项目：资源勘探I 借助基础的物理地理手段，通过地震波探测地表下的矿脉，流体含量，种类，并且引导设备进行开采，采用此技术的设备将大幅度避开现实的资源枯竭（即虚空矿机）。
+metaitem.disk.8.name=数据存储器
+metaitem.disk.8.tooltip=§a资源勘探I
+
+gtqtcore.multiblock.kqn.nb9=项目：资源勘探II 基于光电工程的飞速进步，以及卫星探测设备的大力支持，我们得以通过光谱分析直接获取各类天体的各种矿藏种类，含量。此技术因与自动导航技术相结合来作为采矿无人机的核心。
+metaitem.disk.9.name=数据存储器
+metaitem.disk.9.tooltip=§a资源勘探II
+
+gtqtcore.multiblock.kqn.nb10=项目：资源勘探III 受限于传统资源开采探测的不确定性，得益于高能物理的飞速发展，采用最前沿科技的暗物质-引力波探测技术将完美避开所有风险，整个星系的资源将一览无余！
+metaitem.disk.10.name=数据存储器
+metaitem.disk.10.tooltip=§a资源勘探III
+
+gtqtcore.multiblock.kqn.nb11=项目：网道行者-元素存储 通过对Fluix水晶体的基本分析，借助基本的数电系统，能够基本实现物质<->元素组分的转换，当然，这种转换受限于一种极其独特的设备结构，并且无法脱离此结构存在。
+metaitem.disk.11.name=数据存储器
+metaitem.disk.11.tooltip=§e网道行者-元素存储
+
+gtqtcore.multiblock.kqn.nb12=项目：网道行者-管网系统 结合当前光电技术分析元素组分流动特性，在特定的条件下元素组分居然能够以极快的速度在Fluix管道内传输，如果我们在Fluxi管网分别进行物质<->元素组分转换，将使我们的物流自动化达到前所未有的高度。
+metaitem.disk.12.name=数据存储器
+metaitem.disk.12.tooltip=§e网道行者-管网系统
+
+gtqtcore.multiblock.kqn.nb13=项目：网道行者-无线传输 借助高能物理，我们能轻松的观察物质<->元素组分转换时的原子运动情况，Fluix的运行原理，我们是能够脱离管网限制直接实现无线传输元素组分，当然，这需要消耗大量的电力来催使Fluix对物质转换。
+metaitem.disk.13.name=数据存储器
+metaitem.disk.13.tooltip=§e网道行者-无线传输
+
+gtqtcore.multiblock.kqn.nb14=项目：人工智能I 基于简单的逻辑电路网络，我们可以让设备实现极其原始的自动化交互模式，当然，这种逻辑复杂度甚至远远不及一只单细胞，但是至少能够满足大部分机械化人工操作，机器辅助人工的时代即将到来
+metaitem.disk.14.name=数据存储器
+metaitem.disk.14.tooltip=§a人工智能I
+
+gtqtcore.multiblock.kqn.nb15=项目：人工智能II 随着光刻技术的提高，中央处理器的体积越来越小，在单位体积内排列更多的电子原件，设备能够操作的复杂度显著提高，这项技术已经完全能够应用到各行各业的基础领域，无人化操作不再是梦想。
+metaitem.disk.15.name=数据存储器
+metaitem.disk.15.tooltip=§a人工智能II
+
+gtqtcore.multiblock.kqn.nb16=项目：人工智能III 电子元件的尺寸已经到达极限，但是其运算复杂度依旧无法匹敌动物，基于生物工程技术，通过对细胞的诱导生长结合简单的控制电路的运作原理分析，脑机接口又或是湿件电路或将实现。
+metaitem.disk.16.name=数据存储器
+metaitem.disk.16.tooltip=§a人工智能III
 
 
 
@@ -1302,4 +1376,5 @@ itemGroup.gtqtnc=量子跃迁 | 原子之心
 itemGroup.gtqthp=量子跃迁 | 高能物理
 itemGroup.gtqtch=量子跃迁 | 化学工程
 itemGroup.gtqtgd=量子跃迁 | 光电工程
+itemGroup.gtqtds=量子跃迁 | 科研系统
 itemGroup.gtqtto=量子跃迁 | 实用工具

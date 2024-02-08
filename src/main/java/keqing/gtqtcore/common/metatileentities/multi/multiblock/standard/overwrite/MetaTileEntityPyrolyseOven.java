@@ -199,7 +199,17 @@ public class MetaTileEntityPyrolyseOven extends RecipeMapMultiblockController {
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(I18n.format("gregtech.machine.pyrolyse_oven.tooltip.1"));
     }
+    @Override
+    public void writeInitialSyncData(PacketBuffer buf) {
+        super.writeInitialSyncData(buf);
+        buf.writeInt(this.tier);
+    }
 
+    @Override
+    public void receiveInitialSyncData(PacketBuffer buf) {
+        super.receiveInitialSyncData(buf);
+        this.tier = buf.readInt();
+    }
     @Override
     public void invalidateStructure() {
         super.invalidateStructure();

@@ -34,7 +34,7 @@ configurations {
     embed
     implementation.extendsFrom(embed)
 }
-
+/*
 minecraft {
     mcVersion = '1.12.2'
 
@@ -66,11 +66,47 @@ minecraft {
     // Add any properties you want to swap out for a dynamic value at build time here
     // Any properties here will be added to a class at build time, the name can be configured below
     // Example:
+    injectedTags.put("VERSION", project.version)
     // injectedTags.put('VERSION', project.version)
     // injectedTags.put('MOD_ID', project.archives_base_name)
 }
+*/
 
+minecraft {
+    mcVersion.set("1.12.2")
 
+    // Username for client run configurations
+    username.set("XB_Asuna")
+
+    // Generate a field named VERSION with the mod version in the injected Tags class
+    injectedTags.put("VERSION", project.version)
+
+    // If you need the old replaceIn mechanism, prefer the injectTags task because it doesn't inject a javac plugin.
+    // tagReplacementFiles.add("RfgExampleMod.java")
+
+    // Enable assertions in the mod's package when running the client or server
+    def args = ["-ea:${project.group}"]
+    if (project.use_coremod.toBoolean()) {
+        args << '-Dfml.coreMods.load=' + coremod_plugin_class_name
+    }
+    if (project.use_mixins.toBoolean()) {
+        args << '-Dmixin.hotSwap=true'
+        args << '-Dmixin.checks.interfaces=true'
+        args << '-Dmixin.debug.export=true'
+    }
+
+    // Mixin args
+    args.add("-Dmixin.hotSwap=true")
+    args.add("-Dmixin.checks.interfaces=true")
+    args.add("-Dmixin.debug.export=true")
+    extraRunJvmArguments.addAll(args)
+
+    // If needed, add extra tweaker classes like for mixins.
+    // extraTweakClasses.add("org.spongepowered.asm.launch.MixinTweaker")
+
+    // Exclude some Maven dependency groups from being automatically included in the reobfuscated runs
+    groupsToExcludeFromAutoReobfMapping.addAll("com.diffplug", "com.diffplug.durian", "net.industrial-craft")
+}
 // Generate a group.archives_base_name.Tags class
 tasks.injectTags.configure {
     // Change Tags class' name here:
@@ -116,6 +152,7 @@ dependencies {
     implementation rfg.deobf(files("libs/theoneprobe-1.12-1.4.28.jar"))
     implementation rfg.deobf(files("libs/groovyscript-0.7.0.jar"))
     implementation rfg.deobf(files("libs/GregTechScienceGTQTport-1.0.jar"))
+    implementation rfg.deobf(files("libs/BiomesOPlenty-1.12.2-7.0.1.2444-universal.jar"))
     implementation rfg.deobf(files("libs/CTM-MC1.12.2-1.0.2.31.jar"))
 
     if (project.use_mixins.toBoolean()) {

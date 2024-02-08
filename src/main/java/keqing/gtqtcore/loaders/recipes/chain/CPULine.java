@@ -474,6 +474,16 @@ public class CPULine {
 
         CZPULLER_RECIPES.recipeBuilder()
                 .duration(5000)
+                .EUt(480)
+                .fluidInputs(Nitrogen.getFluid(16000))
+                .input(block,CSilicon,32)
+                .input(dust,GalliumArsenide,1)
+                .input(dust,Fluix,1)
+                .output(AE_SILICON)
+                .buildAndRegister();
+
+        CZPULLER_RECIPES.recipeBuilder()
+                .duration(5000)
                 .EUt(1960)
                 .fluidInputs(Nitrogen.getFluid(16000))
                 .input(block,CSilicon,32)
@@ -510,6 +520,16 @@ public class CPULine {
                 .input(dust,IndiumGalliumPhosphide,1)
                 .input(dust,Boron,1)
                 .output(SILICON_BOULE,2)
+                .buildAndRegister();
+
+        CZPULLER_RECIPES.recipeBuilder()
+                .duration(5000)
+                .EUt(480)
+                .fluidInputs(Nitrogen.getFluid(16000))
+                .input(block,CSilicon,32)
+                .input(dust,IndiumGalliumPhosphide,1)
+                .input(dust,Fluix,1)
+                .output(AE_SILICON,2)
                 .buildAndRegister();
 
         CZPULLER_RECIPES.recipeBuilder()

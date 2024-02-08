@@ -1,5 +1,6 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.kqcc;
 
+import gregtech.api.GTValues;
 import gregtech.api.capability.IObjectHolder;
 import gregtech.api.capability.IOpticalComputationHatch;
 import gregtech.api.capability.IOpticalComputationProvider;
@@ -57,12 +58,19 @@ public class MetaTileEntitykeQingNet extends RecipeMapMultiblockController imple
     @Nonnull
     protected Widget getFlexButton(int x, int y, int width, int height) {
         WidgetGroup group = new WidgetGroup(x, y, width, height);
-        group.addWidget(new ClickButtonWidget(0, 0, 9, 18, "", this::decrementThreshold)
+        group.addWidget(new ClickButtonWidget(0, 0, 9, 9, "", this::decrementThreshold)
                 .setButtonTexture(GuiTextures.BUTTON_THROTTLE_MINUS)
                 .setTooltipText("gtqtcore.multiblock.kqn.threshold_decrement"));
-        group.addWidget(new ClickButtonWidget(9, 0, 9, 18, "", this::incrementThreshold)
+        group.addWidget(new ClickButtonWidget(9, 0, 9, 9, "", this::incrementThreshold)
                 .setButtonTexture(GuiTextures.BUTTON_THROTTLE_PLUS)
                 .setTooltipText("gtqtcore.multiblock.kqn.threshold_increment"));
+
+        group.addWidget(new ClickButtonWidget(0, 9, 9, 9, "", this::decrementThreshold1)
+                .setButtonTexture(GuiTextures.BUTTON_THROTTLE_MINUS)
+                .setTooltipText("gtqtcore.multiblock.kqn.threshold_decrement1"));
+        group.addWidget(new ClickButtonWidget(9, 9, 9, 9, "", this::incrementThreshold1)
+                .setButtonTexture(GuiTextures.BUTTON_THROTTLE_PLUS)
+                .setTooltipText("gtqtcore.multiblock.kqn.threshold_increment1"));
         return group;
     }
     private void incrementThreshold(Widget.ClickData clickData) {
@@ -71,6 +79,14 @@ public class MetaTileEntitykeQingNet extends RecipeMapMultiblockController imple
 
     private void decrementThreshold(Widget.ClickData clickData) {
             this.thresholdPercentage = MathHelper.clamp(thresholdPercentage - 1, 0, 100);
+    }
+
+    private void incrementThreshold1(Widget.ClickData clickData) {
+        this.thresholdPercentage = MathHelper.clamp(thresholdPercentage + 10, 0, 100);
+    }
+
+    private void decrementThreshold1(Widget.ClickData clickData) {
+        this.thresholdPercentage = MathHelper.clamp(thresholdPercentage - 10, 0, 100);
     }
     @Override
     public boolean checkRecipe(@Nonnull Recipe recipe, boolean consumeIfSuccess) {
@@ -83,13 +99,7 @@ public class MetaTileEntitykeQingNet extends RecipeMapMultiblockController imple
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         textList.add(new TextComponentTranslation("gtqtcore.multiblock.kqn.thresholdPercentage",thresholdPercentage));
-        switch (thresholdPercentage) {
-            case 1 -> textList.add(new TextComponentTranslation("gtqtcore.multiblock.kqn.nb1"));
-            case 2 -> textList.add(new TextComponentTranslation("gtqtcore.multiblock.kqn.nb2"));
-            case 3 -> textList.add(new TextComponentTranslation("gtqtcore.multiblock.kqn.nb3"));
-            case 4 -> textList.add(new TextComponentTranslation("gtqtcore.multiblock.kqn.nb4"));
-        }
-
+        textList.add(new TextComponentTranslation( String.format("gtqtcore.multiblock.kqn.nb%s",thresholdPercentage)));
     }
         protected void formStructure(PatternMatchContext context) {
             super.formStructure(context);

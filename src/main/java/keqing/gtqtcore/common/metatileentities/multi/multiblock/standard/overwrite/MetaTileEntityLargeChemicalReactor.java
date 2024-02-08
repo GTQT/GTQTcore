@@ -162,7 +162,6 @@ public class MetaTileEntityLargeChemicalReactor extends RecipeMapMultiblockContr
         }
     }
 
-
     @Override
     public SoundEvent getBreakdownSound() {
         return GTSoundEvents.BREAKDOWN_ELECTRICAL;

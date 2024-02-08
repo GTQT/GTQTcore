@@ -124,7 +124,7 @@ public class OilChains {
         //预处理
         ELEOIL.recipeBuilder()
                 .fluidInputs(RawOil.getFluid(1000))
-                .fluidInputs(Demulsifier.getFluid(100))
+                .fluidInputs(Demulsifier.getFluid(20))
                 .fluidOutputs(PreTreatedCrudeOil.getFluid(1500))
                 .fluidOutputs(SaltWater.getFluid(2000))
                 .duration(200)
@@ -133,7 +133,7 @@ public class OilChains {
 
         ELEOIL.recipeBuilder()
                 .fluidInputs(OilHeavy.getFluid(1000))
-                .fluidInputs(Demulsifier.getFluid(100))
+                .fluidInputs(Demulsifier.getFluid(20))
                 .fluidOutputs(PreTreatedCrudeOil.getFluid(1500))
                 .fluidOutputs(SaltWater.getFluid(2000))
                 .duration(200)
@@ -142,7 +142,7 @@ public class OilChains {
 
         ELEOIL.recipeBuilder()
                 .fluidInputs(OilLight.getFluid(1000))
-                .fluidInputs(Demulsifier.getFluid(100))
+                .fluidInputs(Demulsifier.getFluid(20))
                 .fluidOutputs(PreTreatedCrudeOil.getFluid(1500))
                 .fluidOutputs(SaltWater.getFluid(2000))
                 .duration(200)
@@ -151,7 +151,7 @@ public class OilChains {
 
         ELEOIL.recipeBuilder()
                 .fluidInputs(Oil.getFluid(1000))
-                .fluidInputs(Demulsifier.getFluid(100))
+                .fluidInputs(Demulsifier.getFluid(20))
                 .fluidOutputs(PreTreatedCrudeOil.getFluid(1500))
                 .fluidOutputs(SaltWater.getFluid(2000))
                 .duration(200)

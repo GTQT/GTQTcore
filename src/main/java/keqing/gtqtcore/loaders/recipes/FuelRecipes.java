@@ -1,5 +1,6 @@
 package keqing.gtqtcore.loaders.recipes;
 
+import static gregtech.api.recipes.RecipeMaps.ASSEMBLY_LINE_RECIPES;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.unification.material.Materials.*;
@@ -18,7 +19,6 @@ public class FuelRecipes {
 
 
     public static void init(){
-
         //test
         STAR_SURVEY.recipeBuilder()
                 .input(circuit, MarkerMaterials.Tier.HV, 1)

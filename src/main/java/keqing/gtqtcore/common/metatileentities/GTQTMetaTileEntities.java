@@ -191,7 +191,7 @@ public class GTQTMetaTileEntities {
 
     public static final SimpleMachineMetaTileEntity[] FLUID_CANNER = new SimpleMachineMetaTileEntity[GTValues.V.length - 1];
     public static final SimpleMachineMetaTileEntity[] FLUID_EXTRACTOR = new SimpleMachineMetaTileEntity[GTValues.V.length - 1];
-
+    public static MetaTileEntityAssemblyLine ASSEMBLY_LINE;
     public static MetaTileEntityKQCCComputationHatch[] KQCC_COMPUTATION_HATCH_RECEIVER=new MetaTileEntityKQCCComputationHatch[12];
     public static MetaTileEntityKQCCComputationHatch[] KQCC_COMPUTATION_HATCH_TRANSMITTER=new MetaTileEntityKQCCComputationHatch[12];
     public static MetaTileEntityKQHPCA KQHPCA;
@@ -307,6 +307,7 @@ public class GTQTMetaTileEntities {
         CRACKER = registerMetaTileEntity(3251, new MetaTileEntityCrackingUnit(gtqtcoreId("cracker")));
         PYROLYSE_OVEN = registerMetaTileEntity(3252, new MetaTileEntityPyrolyseOven(gtqtcoreId("pyrolyse_oven")));
         VACUUM_FREEZER = registerMetaTileEntity(3253, new MetaTileEntityVacuumFreezer(gtqtcoreId("vacuum_freezer")));
+        ASSEMBLY_LINE = registerMetaTileEntity(3254, new MetaTileEntityAssemblyLine(gtqtcoreId("assembly_line")));
         //巨型设备
         HUGE_FUSION_REACTOR[0] = registerMetaTileEntity(3300, new MetaTileEntityHugeFusionReactor(gtqtcoreId("fusion_reactor.uhv"), GTValues.UHV));
         HUGE_FUSION_REACTOR[1] = registerMetaTileEntity(3301, new MetaTileEntityHugeFusionReactor(gtqtcoreId("fusion_reactor.uev"), GTValues.UEV));

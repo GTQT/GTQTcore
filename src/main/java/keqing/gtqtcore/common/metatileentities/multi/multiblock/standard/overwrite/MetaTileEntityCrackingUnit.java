@@ -204,7 +204,17 @@ public class MetaTileEntityCrackingUnit extends RecipeMapMultiblockController {
         super.invalidateStructure();
         this.coilTier = -1;
     }
+    @Override
+    public void writeInitialSyncData(PacketBuffer buf) {
+        super.writeInitialSyncData(buf);
+        buf.writeInt(this.casingTier);
+    }
 
+    @Override
+    public void receiveInitialSyncData(PacketBuffer buf) {
+        super.receiveInitialSyncData(buf);
+        this.casingTier = buf.readInt();
+    }
     protected int getCoilTier() {
         return this.coilTier;
     }
