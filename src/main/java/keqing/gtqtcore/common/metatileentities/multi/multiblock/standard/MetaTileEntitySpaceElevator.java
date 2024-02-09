@@ -1,6 +1,5 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
-
 import gregtech.api.capability.IOpticalComputationProvider;
 import gregtech.api.capability.IOpticalComputationReceiver;
 import gregtech.api.capability.impl.ComputationRecipeLogic;
@@ -170,16 +169,16 @@ public class MetaTileEntitySpaceElevator extends MultiMapMultiblockController im
         super.invalidateStructure();
     }
 
-/*
-    @Override
-    public boolean checkRecipe(@Nonnull Recipe recipe,
-                               boolean consumeIfSuccess) {
-        if (super.checkRecipe(recipe, consumeIfSuccess)) {
-            recipe.getProperty(SpaceElevatorCasingTierProperty.getInstance(), 0);
+    /*
+        @Override
+        public boolean checkRecipe(@Nonnull Recipe recipe,
+                                   boolean consumeIfSuccess) {
+            if (super.checkRecipe(recipe, consumeIfSuccess)) {
+                recipe.getProperty(SpaceElevatorCasingTierProperty.getInstance(), 0);
+            }
+            return false;
         }
-        return false;
-    }
-*/
+    */
     @Nonnull
     @Override
     protected BlockPattern createStructurePattern() {

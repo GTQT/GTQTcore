@@ -181,7 +181,8 @@ public class MetaTileEntityKQCCComputationHatch extends MetaTileEntityMultiblock
     }
     public void addInformation(ItemStack stack,  World player, List<String> tooltip, boolean advanced) {
         tooltip.add(I18n.format(this.isTransmitter ? "gregtech.machine.kqcc.export.tooltip" : "gregtech.machine.kqcc.import.tooltip"));
-        tooltip.add(I18n.format("gregtech.universal.tooltip.kqcc", this.tier, this.tier()));
+        tooltip.add(I18n.format("gregtech.universal.tooltip.kqcc1", this.tier));
+        tooltip.add(I18n.format("gregtech.universal.tooltip.kqcc2", this.tier()));
     }
 
 }

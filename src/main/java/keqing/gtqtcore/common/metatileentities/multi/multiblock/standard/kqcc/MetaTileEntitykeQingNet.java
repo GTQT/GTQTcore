@@ -23,6 +23,7 @@ import gregtech.api.recipes.Recipe;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.common.blocks.BlockComputerCasing;
+import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.recipes.properties.KQNetProperty;
@@ -145,6 +146,7 @@ public class MetaTileEntitykeQingNet extends RecipeMapMultiblockController imple
         @Nonnull
         protected  BlockPattern createStructurePattern() {
             return FactoryBlockPattern.start()
+                    .aisle("PPP", "PPP", "PPP")
                     .aisle("PPP", "HSP", "PPP")
                     .where('S', this.selfPredicate())
                     .where('P', states(new IBlockState[]{getCasingState()})
@@ -155,21 +157,13 @@ public class MetaTileEntitykeQingNet extends RecipeMapMultiblockController imple
         }
 
 
-        private static  IBlockState getVentState() {
-            return MetaBlocks.COMPUTER_CASING.getState(BlockComputerCasing.CasingType.COMPUTER_HEAT_VENT);
-        }
-
-        private static  IBlockState getAdvancedState() {
-            return MetaBlocks.COMPUTER_CASING.getState(BlockComputerCasing.CasingType.ADVANCED_COMPUTER_CASING);
-        }
-
-        private static  IBlockState getCasingState() {
-            return MetaBlocks.COMPUTER_CASING.getState(BlockComputerCasing.CasingType.COMPUTER_CASING);
+        protected IBlockState getCasingState() {
+             return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.PTFE_INERT_CASING);
         }
 
         @SideOnly(Side.CLIENT)
         public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
-            return sourcePart != null && !(sourcePart instanceof IObjectHolder) ? Textures.COMPUTER_CASING : Textures.ADVANCED_COMPUTER_CASING;
+            return Textures.INERT_PTFE_CASING;
         }
 
         @Nonnull
