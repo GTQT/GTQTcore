@@ -87,8 +87,7 @@ public class HigherDegreeMaterials {
                 .build();
         // 冰晶石
         GTQTMaterials.Cryolite= new Material.Builder(getMaterialsId(), gregtechId("cryolite"))
-                .ore()
-                .dust().fluid()
+                .ore().dust().fluid()
                 .color(0x98F5FF)
                 .components(Sodium,3,Aluminium,1,Fluorine,6)
                 .build();

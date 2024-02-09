@@ -579,7 +579,7 @@ recipemap.space_elevator_drilling_module.name=太空气泉采集
 gtqtcore.machine.gantry_crane.name=大型龙门吊
 recipemap.gantry_crane.name=大型组装
 gtqtcore.machine.clarifier.name=澄清池
-recipemap.clarifitre.name=澄清
+recipemap.clarifire.name=澄清
 gtqtcore.machine.ele_oil.name=电催破乳反应罐
 recipemap.ele_oil.name=电催破乳反应
 gtqtcore.machine.salt_flied.name=晒盐场
@@ -1015,7 +1015,7 @@ metaitem.heavy_alloy_plateb.name=合金复合板B
 metaitem.heavy_alloy_platec.name=合金复合板C
 metaitem.heavy_alloy_plated.name=合金复合板D
 metaitem.heavy_alloy_platee.name=合金复合板E
-
+metaitem.item.insulatingmica.name=绝缘云母复合片
 
 
 gtqtcore.machine.combustion_generator.ev.name=脉冲内燃发电机
@@ -1162,12 +1162,24 @@ tile.multiblock_casing.tech_fusion_glass_5.name=强化中阶聚变玻璃
 tile.multiblock_casing.tech_fusion_glass_6.name=强化高阶聚变玻璃
 gregtech.material.csilicon=太阳能级多晶硅
 gregtech.material.copper_cl=氯化铜
+gregtech.material.fluix=FLUIX
+gregtech.material.ealuminium=不知道什么铝
+
+gregtech.material.len_gold_bs=焙烧贫瘠金含杂
+gregtech.material.len_gold_js=沉浸含硫金溶液
+gregtech.material.len_copper_js=沉浸贫瘠铜混合
+gregtech.material.len_gold_cl=含杂金溶液
+gregtech.material.len_gold_dr=高纯金
+gregtech.material.rich_gold_bs=焙烧富集金含杂
+gregtech.material.rich_copper_js=沉浸富集铜混合
+
 tile.electrobath.i_electrobath.name=一级电解核心
 tile.electrobath.ii_electrobath.name=二级电解核心
 tile.electrobath.iii_electrobath.name=三级电解核心
 tile.electrobath.iv_electrobath.name=四级电解核心
 tile.electrobath.v_electrobath.name=五级电解核心
-
+gtqtcore.machine.edata_access_hatch.name=简易数据访问仓
+gtqtcore.machine.fdata_access_hatch.name=增强数据访问仓
 gtqtcore.machine.p_reactor.name=原始化学反应缸
 gtqtcore.machine.fusion_reactor.luv.name=核聚变环流器 MKI
 gtqtcore.machine.fusion_reactor.zpm.name=核聚变环流器 MKII
@@ -1175,6 +1187,7 @@ gtqtcore.machine.fusion_reactor.uv.name=核聚变环流器 MKIII
 recipemap.pr_mix.name=原始化学反应
 recipemap.efusion_reactor.name=核聚变环流器
 recipemap.solar_plate.name=太阳能
+recipemap.stepper_recipes.name=光刻
 tile.turbine_casing.nq_machine_casing.name=硅岩合金管道外壳
 tile.turbine_casing.nq_turbine_casing.name=硅岩合金机械方块
 tile.turbine_casing.pd_machine_casing.name=镀铑钯管道外壳
@@ -1325,7 +1338,8 @@ metaitem.ae.waferc.name=待蚀刻工程芯片晶圆
 metaitem.ae.a.name=逻辑芯片晶圆
 metaitem.ae.b.name=运算芯片晶圆
 metaitem.ae.c.name=工程芯片晶圆
-
+metaitem.ae.fluix_firm.name=FLUIX水晶束能器
+metaitem.ae.fluix_firm.tooltip=特殊框架加工而成的水晶束能器，可以实现物质<->元素转换。
 metaitem.valve.tooltip=我不让你走你就走不了
 item.material.oreprefix.valve=%s阀门
 metaitem.cylinder.tooltip=塞进发动机

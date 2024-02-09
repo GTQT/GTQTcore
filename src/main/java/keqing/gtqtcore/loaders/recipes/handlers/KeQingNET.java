@@ -2,6 +2,8 @@ package keqing.gtqtcore.loaders.recipes.handlers;
 
 import gregtech.api.GTValues;
 import gregtech.api.recipes.ModHandler;
+import gregtech.api.recipes.ingredients.nbtmatch.NBTCondition;
+import gregtech.api.recipes.ingredients.nbtmatch.NBTMatcher;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.MarkerMaterials;
 import gregtech.api.unification.material.Materials;
@@ -12,14 +14,14 @@ import gregtech.common.items.MetaItems;
 import gregtech.common.metatileentities.MetaTileEntities;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
+import net.minecraftforge.oredict.OreDictionary;
 
 import static gregtech.api.GTValues.*;
-import static gregtech.api.recipes.RecipeMaps.ASSEMBLER_RECIPES;
+import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.MarkerMaterials.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.api.GTValues.*;
-import static gregtech.api.recipes.RecipeMaps.ASSEMBLY_LINE_RECIPES;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.common.blocks.BlockFusionCasing.CasingType.FUSION_COIL;
@@ -33,6 +35,7 @@ import static gregtech.common.blocks.BlockFusionCasing.CasingType.SUPERCONDUCTOR
 import static gregtech.common.items.MetaItems.*;
 import static gregtech.common.metatileentities.MetaTileEntities.*;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.KaptonK;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.Fluix;
 import static keqing.gtqtcore.common.block.blocks.GTQTKQCC.CasingType.COMPUTER_VENT;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.*;
@@ -45,9 +48,41 @@ public class KeQingNET {
     public static void init() {
         Pre();
         I_VV();
-        Assembler();
+        VVI_VVVV();
 
     }
+
+    private static void VVI_VVVV() {
+        //11 网道行者-元素存储
+        GTQTcoreRecipeMaps.KEQING_NET_RECIES.recipeBuilder()
+                .input(DISK_0)
+                .notConsumable(gem,Fluix)
+                .output(DISK_11)
+                .EUt(7680)
+                .CWUt(128)
+                .NB(11)
+                .totalCWU(100000)
+                .buildAndRegister();
+
+        OreDictionary.registerOre("crystalFluix", OreDictUnifier.get(OrePrefix.gem, Fluix));
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .EUt(VA[HV])
+                .input(gem,Fluix)
+                .input(EMITTER_HV)
+                .input(plate,StainlessSteel,4)
+                .fluidInputs(Polybenzimidazole.getFluid(GTValues.L * 4))
+                .output(AE_FLUIX_FIRM)
+                .scannerResearch(b -> b
+                        .researchStack(DISK_11.getStackForm())
+                        .duration(1200)
+                        .EUt(VA[HV]))
+                .duration(100).buildAndRegister();
+        //12 网道行者-管网系统
+
+        //13 网道行者-无线传输
+    }
+
     private static void Pre() {
         ASSEMBLER_RECIPES.recipeBuilder()
                 .input(wireFine, BorosilicateGlass, 8)
@@ -84,7 +119,7 @@ public class KeQingNET {
                 .input(CENTRAL_PROCESSING_UNIT, 4)
                 .input(RANDOM_ACCESS_MEMORY, 4)
                 .input(wireFine, Aluminium, 2)
-                .input(gear, Copper, 1)
+                .input(gearSmall, Copper, 4)
                 .input(OPTICAL_PIPES[0], 2)
                 .fluidInputs(Polyethylene.getFluid(L))
                 .output(DISK_0)
@@ -111,6 +146,73 @@ public class KeQingNET {
                 .fluidInputs(Polytetrafluoroethylene.getFluid(L*8))
                 .outputs( GTQTMetaBlocks.KQCC.getItemVariant(COMPUTER_VENT))
                 .duration(1000).EUt(120).buildAndRegister();
+        //数据仓
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(ITEM_IMPORT_BUS[MV])
+                .input(DISK_0)
+                .input(circuit, Tier.MV, 4)
+                .output(EDATA_ACCESS_HATCH)
+                .fluidInputs(Polytetrafluoroethylene.getFluid(L * 2))
+                .duration(200).EUt(VA[EV]).buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(ITEM_IMPORT_BUS[UV])
+                .inputNBT(TOOL_DATA_ORB, 4, NBTMatcher.ANY, NBTCondition.ANY)
+                .input(circuit, Tier.UHV, 4)
+                .output(FDATA_ACCESS_HATCH)
+                .fluidInputs(SolderingAlloy.getFluid(L * 8))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 8))
+                .stationResearch(b -> b.researchStack(ADVANCED_DATA_ACCESS_HATCH.getStackForm()).CWUt(2048))
+                .duration(4000000).EUt(6000).buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .inputs(HULL[2].getStackForm())
+                .input(EMITTER_MV, 4)
+                .input(SENSOR_MV, 4)
+                .input(circuit, Tier.MV, 4)
+                .input(wireFine, Copper, 32)
+                .input(foil, Aluminium, 64)
+                .input(OPTICAL_PIPES[0], 8)
+                .fluidInputs(SolderingAlloy.getFluid(L * 4))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 4))
+                .output(KQNS)
+                .scannerResearch(b -> b
+                        .researchStack(DISK_0.getStackForm())
+                        .EUt(VA[MV]))
+                .duration(200).EUt(120).buildAndRegister();
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .inputs(HULL[2].getStackForm())
+                .input(FIELD_GENERATOR_MV, 8)
+                .input(DISK_0,4)
+                .input(COVER_SCREEN)
+                .input(wireFine, Aluminium, 16)
+                .input(OPTICAL_PIPES[0], 8)
+                .fluidInputs(SolderingAlloy.getFluid(L * 4))
+                .output(KeQing_NET)
+                .duration(200).EUt(120).buildAndRegister();
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .inputs(HULL[2].getStackForm())
+                .input(EMITTER_MV, 8)
+                .input(DISK_0,4)
+                .input(COVER_SCREEN)
+                .input(wireFine, Aluminium, 16)
+                .input(OPTICAL_PIPES[0], 8)
+                .fluidInputs(SolderingAlloy.getFluid(L * 4))
+                .output(KQCC)
+                .duration(200).EUt(120).buildAndRegister();
+
+        CIRCUIT_ASSEMBLER_RECIPES.recipeBuilder()
+                .input(PLASTIC_CIRCUIT_BOARD)
+                .input(circuit, Tier.MV, 2)
+                .input(CENTRAL_PROCESSING_UNIT, 4)
+                .input(RANDOM_ACCESS_MEMORY, 4)
+                .input(wireFine, Aluminium, 32)
+                .output(TOOL_DATA_STICK)
+                .solderMultiplier(2)
+                .duration(1000).EUt(120).buildAndRegister();
+
     }
     private static void I_VV() {
 
@@ -488,12 +590,53 @@ public class KeQingNET {
                         .duration(1200)
                         .EUt(VA[IV]))
                 .duration(800).EUt(VA[ZPM]).buildAndRegister();
+        //8 资源勘探I
+        GTQTcoreRecipeMaps.KEQING_NET_RECIES.recipeBuilder()
+                .input(DISK_0)
+                .notConsumable(SENSOR_HV)
+                .output(DISK_8)
+                .EUt(7680)
+                .CWUt(256)
+                .NB(8)
+                .totalCWU(100000)
+                .buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(HULL[3],16)
+                .inputs(MetaItems.FIELD_GENERATOR_HV.getStackForm(16))
+                .inputs(MetaItems.SENSOR_HV.getStackForm(16))
+                .input(OrePrefix.circuit, MarkerMaterials.Tier.HV, 4)
+                .input(OrePrefix.pipeSmallFluid, Aluminium, 4)
+                .input(OrePrefix.plate, StainlessSteel, 4)
+                .fluidInputs(Polyethylene.getFluid(GTValues.L * 4))
+                .output(COSMIC_RAY_DETECTOR)
+                .scannerResearch(b -> b
+                        .researchStack(DISK_8.getStackForm())
+                        .duration(1200)
+                        .EUt(VA[HV]))
+                .duration(800).EUt(VA[HV]).buildAndRegister();
+
+        //9 资源勘探II
+        GTQTcoreRecipeMaps.KEQING_NET_RECIES.recipeBuilder()
+                .input(DISK_0)
+                .notConsumable(SENSOR_IV)
+                .output(DISK_9)
+                .EUt(7680)
+                .CWUt(256)
+                .NB(8)
+                .totalCWU(100000)
+                .buildAndRegister();
+        //10 资源勘探III
+        GTQTcoreRecipeMaps.KEQING_NET_RECIES.recipeBuilder()
+                .input(DISK_0)
+                .notConsumable(SENSOR_ZPM)
+                .output(DISK_10)
+                .EUt(7680)
+                .CWUt(256)
+                .NB(8)
+                .totalCWU(100000)
+                .buildAndRegister();
     }
-    private static void Assembler() {
 
-
-
-
-    }
 
 }

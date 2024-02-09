@@ -266,7 +266,6 @@ public class OilChains {
 
         DISTILLATION_RECIPES.recipeBuilder()
                 .fluidInputs(Distilledgasoline.getFluid(3000))
-                .notConsumable(dust,ZincCl)
                 .fluidOutputs(Methane.getFluid(500))
                 .fluidOutputs(Ethanol.getFluid(500))
                 .fluidOutputs(Propane.getFluid(500))

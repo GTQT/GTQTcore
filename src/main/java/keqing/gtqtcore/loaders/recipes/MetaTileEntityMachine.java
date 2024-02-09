@@ -162,7 +162,7 @@ public class MetaTileEntityMachine {
                 .inputs(MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.ULV))
                 .input(plate, Materials.RedAlloy, 2)
                 .input(OrePrefix.cableGtSingle, Materials.Lead, 2)
-                .fluidInputs(Glue.getFluid(L * 2)).outputs(MetaTileEntities.HULL[0].getStackForm())
+                .outputs(MetaTileEntities.HULL[0].getStackForm())
                 .buildAndRegister();
 
         //lv
@@ -170,7 +170,7 @@ public class MetaTileEntityMachine {
                 .inputs(MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.LV))
                 .input(plate, GalvanizedSteel, 2)
                 .input(OrePrefix.cableGtSingle, Materials.Tin, 2)
-                .fluidInputs(Rubber.getFluid(L * 2))
+                .fluidInputs(Glue.getFluid(L * 2))
                 .outputs(MetaTileEntities.HULL[1].getStackForm()).buildAndRegister();
 
         //mv

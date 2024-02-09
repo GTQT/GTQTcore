@@ -12,6 +12,7 @@ import keqing.gtqtcore.common.block.blocks.GTQTBlockWireCoil;
 import keqing.gtqtcore.common.block.blocks.GTQTCrops;
 import keqing.gtqtcore.common.items.GTQTMetaItems;
 import keqing.gtqtcore.common.items.metaitems.GTQTMetaToolItems;
+import keqing.gtqtcore.loaders.OreDictionaryLoader;
 import keqing.gtqtcore.loaders.WorldLoader;
 import keqing.gtqtcore.loaders.recipes.*;
 import keqing.gtqtcore.loaders.recipes.gcys.GCYSMaterialInfoLoader;
@@ -112,6 +113,7 @@ public class CommonProxy {
     }
     public void init( FMLInitializationEvent event ) {
         WorldLoader.init();
+        OreDictionaryLoader.init();
         FuelRecipes.init();
         IntegratedMiningDivision.init();
         HeatExchangeRecipes.init();

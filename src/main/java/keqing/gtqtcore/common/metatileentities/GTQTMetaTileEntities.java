@@ -115,6 +115,8 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityHugeCrackingUnit HUGE_CRACKING_UNIT;
     public static MetaTileEntityHugeMiner BASIC_HUGE_MINER;
     public static MetaTileEntityHugeMiner HUGE_MINER;
+    public static MetaTileEntityDataAccessHatch EDATA_ACCESS_HATCH;
+    public static MetaTileEntityDataAccessHatch FDATA_ACCESS_HATCH;
     public static MetaTileEntityDissolutionTank DISSOLUTION_TANK;
     public static MetaTileEntityHugeMiner ADVANCED_HUGE_MINER;
     public static MetaTileEntityHyperReactorMk1 HYPER_REACTOR_MK1;
@@ -394,6 +396,8 @@ public class GTQTMetaTileEntities {
         CATALYST_HATCH = registerMetaTileEntity(15546,new MetaTileEntityCatalystHatch(gtqtcoreId("catalyst_hatch")));
         MULTIPART_BUFFER_HATCH = registerMetaTileEntity(15547, new MetaTileEntityBufferHatch(gtqtcoreId("buffer_hatch")));
         MULTIPART_BALL_HATCH = registerMetaTileEntity(15548, new MetaTileEntityMillBallHatch(gtqtcoreId("mill_ball_hatch")));
+        EDATA_ACCESS_HATCH = registerMetaTileEntity(15549, new MetaTileEntityDataAccessHatch(gtqtcoreId("edata_access_hatch"), GTValues.MV, false));
+        FDATA_ACCESS_HATCH = registerMetaTileEntity(15550, new MetaTileEntityDataAccessHatch(gtqtcoreId("fdata_access_hatch"), GTValues.UV, false));
 
         ROTOR_HOLDER[6] = registerMetaTileEntity(16000, new MetaTileEntityRotorHolder(gtqtcoreId("rotor_holder.uhv"), GTValues.UHV));
         ROTOR_HOLDER[7] = registerMetaTileEntity(16001, new MetaTileEntityRotorHolder(gtqtcoreId("rotor_holder.uev"), GTValues.UEV));

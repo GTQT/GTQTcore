@@ -2,6 +2,7 @@ package keqing.gtqtcore.mixin.gregtech;
 
 import gregtech.api.GTValues;
 import gregtech.api.capability.IEnergyContainer;
+import gregtech.api.capability.impl.AbstractRecipeLogic;
 import gregtech.api.capability.impl.EnergyContainerHandler;
 import gregtech.api.capability.impl.RecipeLogicEnergy;
 import gregtech.api.metatileentity.*;
@@ -18,17 +19,15 @@ import static gregtech.api.GTValues.VA;
 
 @Mixin(WorkableTieredMetaTileEntity.class)
 public abstract class MixinWorkableTieredMetaTileEntity extends TieredMetaTileEntity implements IDataInfoProvider, ICleanroomReceiver {
-
-    protected final long tier;
-    protected final RecipeLogicEnergy workable;
+    protected final AbstractRecipeLogic workable;
     protected final RecipeMap<?> recipeMap;
     protected final ICubeRenderer renderer;
     private final Function<Integer, Integer> tankScalingFunction;
     public final boolean handlesRecipeOutputs;
+    private ICleanroomProvider cleanroom;
 
     public MixinWorkableTieredMetaTileEntity(ResourceLocation metaTileEntityId, RecipeMap<?> recipeMap, ICubeRenderer renderer, int tier, Function<Integer, Integer> tankScalingFunction, boolean handlesRecipeOutputs) {
         super(metaTileEntityId, tier);
-        this.tier=tier;
         this.renderer = renderer;
         this.handlesRecipeOutputs = handlesRecipeOutputs;
         this.workable = this.createWorkable(recipeMap);
@@ -55,18 +54,21 @@ public abstract class MixinWorkableTieredMetaTileEntity extends TieredMetaTileEn
         if(tierVoltage==2097152)return 1572864;
         return tierVoltage;
     }
+
     protected void reinitializeEnergyContainer() {
         long tierVoltage = GTValues.V[this.getTier()];
         if (this.isEnergyEmitter()) {
-            this.energyContainer = EnergyContainerHandler.emitterContainer(this, tierVoltage * 60L, gettierVoltage(tierVoltage), this.getMaxInputOutputAmperage());
+            this.energyContainer = EnergyContainerHandler.emitterContainer(this, tierVoltage * 64L, gettierVoltage(tierVoltage), this.getMaxInputOutputAmperage());
         } else {
-            this.energyContainer = new EnergyContainerHandler(this, tierVoltage * 60L, tierVoltage, 2L, 0L, 0L) {
+            this.energyContainer = new EnergyContainerHandler(this, tierVoltage * 64L, tierVoltage, 2L, 0L, 0L) {
                 public long getInputAmperage() {
                     return this.getEnergyCapacity() / 2L > this.getEnergyStored() && isActive() ? 2L : 1L;
                 }
             };
         }
+
     }
+
     public boolean isActive()
     {
         return this.workable.isActive() && this.workable.isWorkingEnabled();

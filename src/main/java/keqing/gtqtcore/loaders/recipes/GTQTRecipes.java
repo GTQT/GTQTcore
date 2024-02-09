@@ -45,7 +45,9 @@ import static gregtech.loaders.recipe.handlers.ToolRecipeHandler.addElectricTool
 import static gregtech.loaders.recipe.handlers.ToolRecipeHandler.powerUnitItems;
 import static keqing.gtqtcore.api.items.toolitem.GTQTToolClasses.SOLDERING_IRON;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.Asphalt;
 import static keqing.gtqtcore.api.unification.material.info.EPMaterialFlags.GENERATE_CURVED_PLATE;
+import static keqing.gtqtcore.api.unification.material.info.EPMaterialFlags.GENERATE_ELECTRODE;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.*;
 import static keqing.gtqtcore.common.items.metaitems.GTQTMetaToolItems.*;
 
@@ -82,7 +84,6 @@ public class GTQTRecipes {
         OrePrefix.foil.addProcessingHandler(PropertyKey.INGOT, GTQTRecipes::processFoil);
         OrePrefix.rotor.addProcessingHandler(PropertyKey.INGOT, GTQTRecipes::processRotorA);
     }
-
 
     private static void processShell(OrePrefix orePrefix, Material material, IngotProperty ingotProperty) {
         CW_LASER_ENGRAVER_RECIPES.recipeBuilder()

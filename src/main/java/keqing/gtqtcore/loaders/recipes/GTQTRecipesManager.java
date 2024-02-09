@@ -36,6 +36,8 @@ public class GTQTRecipesManager {
     public static void init() {
         MiscRecipes.init();
         RecipeConflicts.init();
+        AluminiumLine.init();
+        CoilWire.init();
         GCYSMetaTileEntityLoader.init();
         GCYSBlockRecipeLoader.init();
         BoulesRecipes.init();

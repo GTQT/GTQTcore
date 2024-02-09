@@ -243,6 +243,7 @@ public class GTQTMaterials {
     public static Material LanthanumEmbeddedFullerene;
     public static Material LanthanumFullereneNanotube;
     public static Material NeutroniumNanotube;
+    public static Material Ealuminium;
 
     //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/api/unification/GSMaterials.java
 

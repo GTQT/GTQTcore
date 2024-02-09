@@ -17,6 +17,7 @@ public class EPMaterialPropertyAddition {
         PalladiumRaw.setFormula("PdCl2?");
 
         // Dusts
+        Neptunium.setProperty(PropertyKey.DUST, new DustProperty());
         Iodine.setProperty(PropertyKey.DUST, new DustProperty());
         Praseodymium.setProperty(PropertyKey.DUST, new DustProperty());
         Scandium.setProperty(PropertyKey.DUST, new DustProperty());

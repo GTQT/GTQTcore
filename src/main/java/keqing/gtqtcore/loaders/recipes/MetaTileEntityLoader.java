@@ -1,8 +1,10 @@
 package keqing.gtqtcore.loaders.recipes;
 
+import gregicality.science.common.block.GCYSMetaBlocks;
 import gregtech.api.GTValues;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.recipes.ModHandler;
+import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.MarkerMaterials;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.material.properties.IngotProperty;
@@ -17,28 +19,106 @@ import gregtech.common.metatileentities.MetaTileEntities;
 import gregtech.loaders.recipe.CraftingComponent;
 import gregtech.loaders.recipe.MachineRecipeLoader;
 import keqing.gtqtcore.api.unification.ore.GTQTOrePrefix;
+import keqing.gtqtcore.common.block.GTQTMetaBlocks;
+import keqing.gtqtcore.common.block.blocks.GTQTElectrobath;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 
 import static gregicality.multiblocks.api.unification.GCYMMaterials.MolybdenumDisilicide;
 import static gregicality.multiblocks.api.unification.GCYMMaterials.TitaniumCarbide;
+import static gregicality.science.common.block.blocks.BlockCrucible.CrucibleType.QUARTZ_CRUCIBLE;
+import static gregtech.api.GTValues.L;
+import static gregtech.api.recipes.RecipeMaps.ASSEMBLER_RECIPES;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.Materials.YttriumBariumCuprate;
 import static gregtech.api.unification.ore.OrePrefix.*;
-import static gregtech.common.blocks.BlockMetalCasing.MetalCasingType.BRONZE_BRICKS;
-import static gregtech.common.blocks.BlockMetalCasing.MetalCasingType.PRIMITIVE_BRICKS;
+import static gregtech.common.blocks.BlockMetalCasing.MetalCasingType.*;
 import static gregtech.common.blocks.BlockWireCoil.CoilType.CUPRONICKEL;
+import static gregtech.common.blocks.MetaBlocks.OPTICAL_PIPES;
 import static gregtech.common.items.MetaItems.*;
 import static gregtech.common.metatileentities.MetaTileEntities.*;
 import static gregtech.common.metatileentities.MetaTileEntities.HULL;
 import static gregtech.loaders.recipe.CraftingComponent.*;
 import static gregtech.loaders.recipe.CraftingComponent.CABLE_QUAD;
 import static gregtech.loaders.recipe.MetaTileEntityLoader.registerMachineRecipe;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.CSilicon;
+import static keqing.gtqtcore.common.items.GTQTMetaItems.DISK_0;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.*;
 
 
 public class MetaTileEntityLoader {
 
     public static void init() {
+        //太阳能
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .inputs(HULL[4].getStackForm())
+                .input(EMITTER_MV, 8)
+                .input(plate, StainlessSteel, 16)
+                .fluidInputs(Polybenzimidazole.getFluid(L * 4))
+                .outputs(GTQTMetaBlocks.ELECTROBATH.getItemVariant(GTQTElectrobath.CasingType.SOLAR_PLATE_CASING))
+                .duration(2000).EUt(1960).buildAndRegister();
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .inputs(HULL[4].getStackForm())
+                .input(circuit, MarkerMaterials.Tier.HV,8)
+                .input(COVER_SCREEN)
+                .input(wireFine, Platinum, 16)
+                .fluidInputs(SolderingAlloy.getFluid(L * 4))
+                .output(SOLAR_PLATE)
+                .duration(2000).EUt(1960).buildAndRegister();
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .inputs(GTQTMetaBlocks.ELECTROBATH.getItemVariant(GTQTElectrobath.CasingType.SOLAR_PLATE_CASING))
+                .input(EMITTER_HV, 1)
+                .input(circuit, MarkerMaterials.Tier.HV,8)
+                .input(plate, CSilicon, 16)
+                .fluidInputs(Polybenzimidazole.getFluid(L * 4))
+                .outputs(GTQTMetaBlocks.ELECTROBATH.getItemVariant(GTQTElectrobath.CasingType.SOLAR_PLATE_LV))
+                .duration(2000).EUt(1960).buildAndRegister();
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .inputs(GTQTMetaBlocks.ELECTROBATH.getItemVariant(GTQTElectrobath.CasingType.SOLAR_PLATE_CASING))
+                .input(EMITTER_EV, 1)
+                .input(circuit, MarkerMaterials.Tier.EV,8)
+                .input(plate, CSilicon, 16)
+                .fluidInputs(Polybenzimidazole.getFluid(L * 4))
+                .outputs(GTQTMetaBlocks.ELECTROBATH.getItemVariant(GTQTElectrobath.CasingType.SOLAR_PLATE_MV))
+                .duration(2000).EUt(1960).buildAndRegister();
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .inputs(GTQTMetaBlocks.ELECTROBATH.getItemVariant(GTQTElectrobath.CasingType.SOLAR_PLATE_CASING))
+                .input(EMITTER_IV, 1)
+                .input(circuit, MarkerMaterials.Tier.IV,8)
+                .input(plate, CSilicon, 16)
+                .fluidInputs(Polybenzimidazole.getFluid(L * 4))
+                .outputs(GTQTMetaBlocks.ELECTROBATH.getItemVariant(GTQTElectrobath.CasingType.SOLAR_PLATE_HV))
+                .duration(2000).EUt(1960).buildAndRegister();
+
+        //化工厂
+        ModHandler.addShapedRecipe(true, "chemical_plant", CHEMICAL_PLANT.getStackForm(),
+                "MCM", "PHP", "MKM",
+                'M', new UnificationEntry(pipeNormalFluid, StainlessSteel),
+                'C', new UnificationEntry(circuit, MarkerMaterials.Tier.HV),
+                'P', ELECTRIC_PUMP_HV.getStackForm(),
+                'H', CHEMICAL_REACTOR[3].getStackForm(),
+                'K', new UnificationEntry(cableGtDouble, Aluminium)
+        );
+
+        ModHandler.addShapedRecipe(true, "catalyst_hatch", CATALYST_HATCH.getStackForm(),
+                "MhM", "PHP", "McM",
+                'M', new UnificationEntry(pipeNormalFluid, Aluminium),
+                'P', ROBOT_ARM_HV.getStackForm(),
+                'H', MetaTileEntities.HULL[3].getStackForm()
+        );
+        //溶解罐
+        ModHandler.addShapedRecipe(true, "dissolution_tank", DISSOLUTION_TANK.getStackForm(),
+                "MCM", "PHP", "MKM",
+                'M', new UnificationEntry(pipeNormalFluid, Polybenzimidazole),
+                'C', new UnificationEntry(circuit, MarkerMaterials.Tier.HV),
+                'P', ELECTRIC_PUMP_HV.getStackForm(),
+                'H', QUANTUM_TANK[1].getStackForm(),
+                'K', new UnificationEntry(cableGtDouble, Aluminium)
+        );
+
         ModHandler.addShapedRecipe(true, "p_reactor", P_REACTOR.getStackForm(),
                 "CGC", "ChC", "CGC",
                 'G', new UnificationEntry(OrePrefix.gear, Wood),
@@ -91,11 +171,62 @@ public class MetaTileEntityLoader {
                 'P', new UnificationEntry(plate, Titanium)
         );
 
+        ModHandler.addShapedRecipe(true, "cz_puller",
+                GTQTMetaTileEntities.CZ_PULLER.getStackForm(),
+                "FFF", "CHC", "WCW",
+                'F', MetaTileEntities.ELECTRIC_FURNACE[2].getStackForm(),
+                'C', new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.MV),
+                'H', GCYSMetaBlocks.CRUCIBLE.getItemVariant(QUARTZ_CRUCIBLE),
+                'W', new UnificationEntry(OrePrefix.cableGtSingle, Aluminium));
+
         ModHandler.addShapedRecipe(true, "distillation_tower", GTQTMetaTileEntities.DISTILLATION_TOWER.getStackForm(),
                 "CBC", "FMF", "CBC", 'M', MetaTileEntities.HULL[GTValues.LV].getStackForm(), 'B',
                 new UnificationEntry(OrePrefix.pipeLargeFluid, Steel), 'C',
                 new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.LV), 'F', MetaItems.ELECTRIC_PUMP_LV);
 
+        ModHandler.addShapedRecipe(true, "salt_flied", GTQTMetaTileEntities.SALT_FLIED.getStackForm(),
+                "FFF", "CMC", "BBB", 'M', MetaTileEntities.HULL[GTValues.LV].getStackForm(), 'B',
+                new UnificationEntry(OrePrefix.pipeLargeFluid, Steel), 'C',
+                new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.LV), 'F', MetaItems.ELECTRIC_PUMP_LV);
+
+        ModHandler.addShapedRecipe(true, "pyrolysis_tower", GTQTMetaTileEntities.PYROLYSIS_TOWER.getStackForm(),
+                "FFF", "CMC", "BBB", 'M', MetaTileEntities.HULL[GTValues.LV].getStackForm(), 'B',
+                new UnificationEntry(OrePrefix.pipeLargeFluid, Steel), 'C',
+                new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.LV), 'F', PRIMITIVE_BLAST_FURNACE.getStackForm());
+
+        ModHandler.addShapedRecipe(true, "distillation_kettle", GTQTMetaTileEntities.DISTILLATION_KETTLE.getStackForm(),
+                "BCB", "FMF", "BCB", 'M', MetaTileEntities.HULL[GTValues.LV].getStackForm(), 'B',
+                new UnificationEntry(OrePrefix.pipeLargeFluid, Steel), 'C',
+                new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.LV), 'F', MetaItems.ELECTRIC_PUMP_LV);
+
+        ModHandler.addShapedRecipe(true, "oil_poll", GTQTMetaTileEntities.OIL_POOL.getStackForm(),
+                "FFF", "BMB", "CCC", 'M', MetaTileEntities.HULL[GTValues.LV].getStackForm(), 'B',
+                new UnificationEntry(OrePrefix.pipeLargeFluid, Steel), 'C',
+                new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.LV), 'F', MetaItems.ELECTRIC_PUMP_LV);
+
+        ModHandler.addShapedRecipe(true, "mining_drill", GTQTMetaTileEntities.MINING_DRILL.getStackForm(),
+                "FFF", "BMB", "CCC", 'M', MetaTileEntities.HULL[GTValues.LV].getStackForm(), 'B',
+                new UnificationEntry(gear, Steel), 'C',
+                new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.LV), 'F', ELECTRIC_MOTOR_LV);
+
+        ModHandler.addShapedRecipe(true, "ele_oil", GTQTMetaTileEntities.ELE_OIL.getStackForm(),
+                "FFF", "BMB", "CCC", 'M', MetaTileEntities.HULL[GTValues.MV].getStackForm(), 'B',
+                new UnificationEntry(gear, StainlessSteel), 'C',
+                new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.LV), 'F', EMITTER_MV);
+
+        ModHandler.addShapedRecipe(true, "clarifier", GTQTMetaTileEntities.CLARIFIER.getStackForm(),
+                "FFF", "BMB", "CCC", 'M', MetaTileEntities.HULL[GTValues.LV].getStackForm(), 'B',
+                new UnificationEntry(plateDouble, Steel), 'C',
+                new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.LV), 'F', ELECTRIC_PUMP_LV);
+
+        ModHandler.addShapedRecipe(true, "ocean_pumper", GTQTMetaTileEntities.OCEAN_PUMPER.getStackForm(),
+                "FFF", "CMC", "FFF", 'M', MetaTileEntities.HULL[GTValues.HV].getStackForm(), 'C',
+                new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.LV), 'F', ELECTRIC_PUMP_LV);
+
+        ModHandler.addShapedRecipe(true, "gantry_crane", GTQTMetaTileEntities.GANTRY_CRANE.getStackForm(),
+                "FFF", "BMB", "CCC", 'M', MetaTileEntities.HULL[GTValues.HV].getStackForm(), 'B',
+                new UnificationEntry(plateDouble, StainlessSteel), 'C',
+                new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.HV), 'F', ELECTRIC_MOTOR_HV);
 
         ModHandler.addShapedRecipe(true, "cracking_unit", GTQTMetaTileEntities.CRACKER.getStackForm(), "CEC", "PHP", "CEC",
                 'C', MetaBlocks.WIRE_COIL.getItemVariant(CUPRONICKEL), 'E', MetaItems.ELECTRIC_PUMP_LV, 'P',
@@ -116,6 +247,13 @@ public class MetaTileEntityLoader {
                 "WCW", 'M', MetaTileEntities.HULL[GTValues.HV].getStackForm(), 'P',
                 EMITTER_HV, 'C', new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.HV), 'W',
                 new UnificationEntry(OrePrefix.cableGtSingle, Gold));
+
+        ModHandler.addShapedRecipe(true, "large_chemical_reactor",
+                GTQTMetaTileEntities.LARGE_CHEMICAL_REACTOR.getStackForm(), "CRC", "PMP", "CHC", 'C',
+                new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.LV), 'R',
+                OreDictUnifier.get(OrePrefix.rotor, Steel), 'P',
+                OreDictUnifier.get(OrePrefix.pipeLargeFluid, Materials.Polyethylene), 'M',
+                MetaItems.ELECTRIC_MOTOR_LV.getStackForm(), 'H', MetaTileEntities.HULL[GTValues.LV].getStackForm());
 
         ModHandler.addShapedRecipe(true, "reaction_furnace", REACTION_FURNACE.getStackForm(),
                 "KSK", "CHC", "PPP",

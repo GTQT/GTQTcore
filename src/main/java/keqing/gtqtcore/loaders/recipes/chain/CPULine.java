@@ -1,31 +1,243 @@
 package keqing.gtqtcore.loaders.recipes.chain;
+import appeng.client.render.effects.AssemblerFX;
 import gregtech.api.metatileentity.multiblock.CleanroomType;
+import gregtech.api.unification.material.MarkerMaterials;
 import gregtech.common.items.MetaItems;
 import gregtech.api.unification.material.MarkerMaterials.Color;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
+import keqing.gtqtcore.common.block.blocks.GTQTElectrobath;
+import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 
+import static gregtech.common.blocks.MetaBlocks.OPTICAL_PIPES;
+import static gregtech.common.items.MetaItems.*;
+import static gregtech.common.items.MetaItems.ELECTRIC_MOTOR_IV;
+import static gregtech.common.metatileentities.MetaTileEntities.HULL;
+import static gregtech.common.metatileentities.MetaTileEntities.ITEM_IMPORT_BUS;
+import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.LASER_ENGRAVING;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
-import static gregtech.common.items.MetaItems.*;
 
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.TJMaterials.*;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.electrode;
 import static keqing.gtqtcore.common.block.blocks.GTQTADVGlass.CasingType.SILICATE_GLASS;
+import static keqing.gtqtcore.common.block.blocks.GTQTStepper.CasingType.*;
+import static keqing.gtqtcore.common.block.blocks.GTQTStepper.CasingType.F_LASER_MKV;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.RETICLE_POWER_INTEGRATED_CIRCUIT;
+import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.*;
 
 public class CPULine {
     public static void init() {
+        Assembler();    //机器加工
         LaserEngraving(); //光掩模
         LaserStepper();  //光刻
         Pre();          //基板
         Silicon();      //晶圆
         AE();
+    }
+
+    private static void Assembler() {
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .inputs(HULL[2].getStackForm(4))
+                .input(EMITTER_MV, 4)
+                .input(SENSOR_MV, 4)
+                .input(circuit, MarkerMaterials.Tier.MV, 4)
+                .input(plate, Invar, 32)
+                .input(gear, Aluminium, 8)
+                .input(OPTICAL_PIPES[0], 8)
+                .fluidInputs(SolderingAlloy.getFluid(L * 4))
+                .fluidInputs(PolyvinylChloride.getFluid(L * 4))
+                .output(GTQTMetaTileEntities.STEPPER)
+                .scannerResearch(b -> b
+                        .researchStack(GTQTMetaBlocks.STEPPER.getItemVariant(LASER_MKI))
+                        .EUt(VA[MV]))
+                .duration(200).EUt(120).buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .inputs(HULL[2].getStackForm(4))
+                .input(EMITTER_MV, 4)
+                .input(FIELD_GENERATOR_MV, 4)
+                .input(circuit, MarkerMaterials.Tier.MV, 4)
+                .input(plate, Invar, 32)
+                .input(gear, Aluminium, 8)
+                .input(OPTICAL_PIPES[0], 8)
+                .fluidInputs(SolderingAlloy.getFluid(L * 4))
+                .fluidInputs(PolyvinylChloride.getFluid(L * 4))
+                .output(GTQTMetaTileEntities.LASER_ENGRAVING)
+                .scannerResearch(b -> b
+                        .researchStack(GTQTMetaBlocks.STEPPER.getItemVariant(F_LASER_MKI))
+                        .EUt(VA[MV]))
+                .duration(200).EUt(120).buildAndRegister();
+
+
+        //紫外
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .inputs(HULL[1].getStackForm())
+                .input(EMITTER_LV, 8)
+                .input(circuit, MarkerMaterials.Tier.LV,8)
+                .input(plate, Steel, 16)
+                .fluidInputs(Polyethylene.getFluid(L * 4))
+                .outputs(GTQTMetaBlocks.STEPPER.getItemVariant(LASER_MKI))
+                .duration(2000).EUt(30).buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .inputs(HULL[2].getStackForm())
+                .input(EMITTER_MV, 8)
+                .input(circuit, MarkerMaterials.Tier.MV,8)
+                .input(plate, Aluminium, 16)
+                .fluidInputs(PolyvinylChloride.getFluid(L * 4))
+                .outputs(GTQTMetaBlocks.STEPPER.getItemVariant(LASER_MKII))
+                .scannerResearch(b -> b
+                        .researchStack(EMITTER_MV.getStackForm())
+                        .EUt(VA[MV]))
+                .duration(200).EUt(120).buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .inputs(HULL[3].getStackForm())
+                .input(EMITTER_HV, 8)
+                .input(circuit, MarkerMaterials.Tier.HV,8)
+                .input(plate, StainlessSteel, 16)
+                .fluidInputs(Epoxy.getFluid(L * 4))
+                .outputs(GTQTMetaBlocks.STEPPER.getItemVariant(LASER_MKIII))
+                .scannerResearch(b -> b
+                        .researchStack(EMITTER_HV.getStackForm())
+                        .EUt(VA[HV]))
+                .duration(200).EUt(480).buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .inputs(HULL[4].getStackForm())
+                .input(EMITTER_EV, 8)
+                .input(circuit, MarkerMaterials.Tier.EV,8)
+                .input(plate, Titanium, 16)
+                .fluidInputs(ReinforcedEpoxyResin.getFluid(L * 4))
+                .outputs(GTQTMetaBlocks.STEPPER.getItemVariant(LASER_MKIV))
+                .scannerResearch(b -> b
+                        .researchStack(EMITTER_EV.getStackForm())
+                        .EUt(VA[EV]))
+                .duration(200).EUt(1960).buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .inputs(HULL[5].getStackForm())
+                .input(EMITTER_IV, 8)
+                .input(circuit, MarkerMaterials.Tier.IV,8)
+                .input(plate, TungstenSteel, 16)
+                .fluidInputs(Polytetrafluoroethylene.getFluid(L * 4))
+                .outputs(GTQTMetaBlocks.STEPPER.getItemVariant(LASER_MKV))
+                .scannerResearch(b -> b
+                        .researchStack(EMITTER_IV.getStackForm())
+                        .EUt(VA[IV]))
+                .duration(200).EUt(7680).buildAndRegister();
+
+
+        //射频
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .inputs(HULL[1].getStackForm())
+                .input(FIELD_GENERATOR_LV, 8)
+                .input(circuit, MarkerMaterials.Tier.LV,8)
+                .input(plate, Steel, 16)
+                .fluidInputs(Polyethylene.getFluid(L * 4))
+                .outputs(GTQTMetaBlocks.STEPPER.getItemVariant(F_LASER_MKI))
+                .duration(2000).EUt(30).buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .inputs(HULL[2].getStackForm())
+                .input(FIELD_GENERATOR_MV, 8)
+                .input(circuit, MarkerMaterials.Tier.MV,8)
+                .input(plate, Aluminium, 16)
+                .fluidInputs(PolyvinylChloride.getFluid(L * 4))
+                .outputs(GTQTMetaBlocks.STEPPER.getItemVariant(F_LASER_MKII))
+                .scannerResearch(b -> b
+                        .researchStack(FIELD_GENERATOR_MV.getStackForm())
+                        .EUt(VA[MV]))
+                .duration(200).EUt(120).buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .inputs(HULL[3].getStackForm())
+                .input(FIELD_GENERATOR_HV, 8)
+                .input(circuit, MarkerMaterials.Tier.HV,8)
+                .input(plate, StainlessSteel, 16)
+                .fluidInputs(Epoxy.getFluid(L * 4))
+                .outputs(GTQTMetaBlocks.STEPPER.getItemVariant(F_LASER_MKIII))
+                .scannerResearch(b -> b
+                        .researchStack(FIELD_GENERATOR_HV.getStackForm())
+                        .EUt(VA[HV]))
+                .duration(200).EUt(480).buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .inputs(HULL[4].getStackForm())
+                .input(FIELD_GENERATOR_EV, 8)
+                .input(circuit, MarkerMaterials.Tier.EV,8)
+                .input(plate, Titanium, 16)
+                .fluidInputs(ReinforcedEpoxyResin.getFluid(L * 4))
+                .outputs(GTQTMetaBlocks.STEPPER.getItemVariant(F_LASER_MKIV))
+                .scannerResearch(b -> b
+                        .researchStack(FIELD_GENERATOR_EV.getStackForm())
+                        .EUt(VA[EV]))
+                .duration(200).EUt(1960).buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .inputs(HULL[5].getStackForm())
+                .input(FIELD_GENERATOR_IV, 8)
+                .input(circuit, MarkerMaterials.Tier.IV,8)
+                .input(plate, TungstenSteel, 16)
+                .fluidInputs(Polytetrafluoroethylene.getFluid(L * 4))
+                .outputs(GTQTMetaBlocks.STEPPER.getItemVariant(F_LASER_MKV))
+                .scannerResearch(b -> b
+                        .researchStack(FIELD_GENERATOR_IV.getStackForm())
+                        .EUt(VA[IV]))
+                .duration(200).EUt(7680).buildAndRegister();
+
+
+        //自净
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .inputs(HULL[1].getStackForm())
+                .input(ELECTRIC_MOTOR_LV, 8)
+                .input(circuit, MarkerMaterials.Tier.LV,1)
+                .input(rotor, Steel, 16)
+                .fluidInputs(Polyethylene.getFluid(L * 4))
+                .outputs(GTQTMetaBlocks.STEPPER.getItemVariant(CLEAN_MKI))
+                .duration(2000).EUt(30).buildAndRegister();
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .inputs(HULL[2].getStackForm())
+                .input(ELECTRIC_MOTOR_MV, 8)
+                .input(circuit, MarkerMaterials.Tier.MV,1)
+                .input(rotor, Aluminium, 16)
+                .fluidInputs(PolyvinylChloride.getFluid(L * 4))
+                .outputs(GTQTMetaBlocks.STEPPER.getItemVariant(CLEAN_MKII))
+                .duration(200).EUt(120).buildAndRegister();
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .inputs(HULL[3].getStackForm())
+                .input(ELECTRIC_MOTOR_HV, 8)
+                .input(circuit, MarkerMaterials.Tier.HV,1)
+                .input(rotor, StainlessSteel, 16)
+                .fluidInputs(Epoxy.getFluid(L * 4))
+                .outputs(GTQTMetaBlocks.STEPPER.getItemVariant(CLEAN_MKIII))
+                .duration(200).EUt(480).buildAndRegister();
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .inputs(HULL[4].getStackForm())
+                .input(ELECTRIC_MOTOR_EV, 8)
+                .input(circuit, MarkerMaterials.Tier.EV,1)
+                .input(rotor, Titanium, 16)
+                .fluidInputs(ReinforcedEpoxyResin.getFluid(L * 4))
+                .outputs(GTQTMetaBlocks.STEPPER.getItemVariant(CLEAN_MKIV))
+                .duration(200).EUt(1960).buildAndRegister();
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .inputs(HULL[5].getStackForm())
+                .input(ELECTRIC_MOTOR_IV, 8)
+                .input(circuit, MarkerMaterials.Tier.IV,1)
+                .input(rotor, TungstenSteel, 16)
+                .fluidInputs(Polytetrafluoroethylene.getFluid(L * 4))
+                .outputs(GTQTMetaBlocks.STEPPER.getItemVariant(CLEAN_MKV))
+                .duration(200).EUt(7680).buildAndRegister();
     }
 
     private static void AE() {

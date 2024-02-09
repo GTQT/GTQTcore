@@ -260,7 +260,8 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem HELIUM_NEON_LASER;
     public static MetaItem<?>.MetaValueItem ND_YAG_LASER;
     public static MetaItem<?>.MetaValueItem OPTICAL_LASER_CONTROL_UNIT;
-
+    public static MetaItem<?>.MetaValueItem AE_FLUIX_FIRM;
+    public static MetaItem<?>.MetaValueItem INSULATINGMICA;
     // Spintronic Circuit Components
     public static MetaItem<?>.MetaValueItem TOPOLOGICAL_INSULATOR_TUBE;
     public static MetaItem<?>.MetaValueItem BOSE_EINSTEIN_CONDENSATE_CONTAINMENT_UNIT;
