@@ -298,6 +298,9 @@ gtqtcore.machine.parallel_hatch.uev.name=并行控制仓（§aUEV§r）
 gtqtcore.machine.parallel_hatch.uiv.name=并行控制仓（§2UIV§r）
 gtqtcore.machine.parallel_hatch.uxv.name=并行控制仓（§eUXV§r）
 
+metaitem.mold.gas.name=气缸铸模
+metaitem.mold.motor.name=传动轴铸模
+
 tile.space_elevator_casing.basic_casing.name=线缆锚定基材
 tile.space_elevator_casing.internal_structure.name=主结构支撑器
 tile.space_elevator_casing.support_structure.name=约束支撑器
@@ -382,9 +385,9 @@ gtqtcore.multiblock.ip.threshold_increment=§a增加一单位风量 /n§7升温�
 gtqtcore.multiblock.ele.threshold_decrement=§c降低一单位电流效率
 gtqtcore.multiblock.ele.threshold_increment=§a增加一单位电流效率
 
-gtqtcore.machine.fracturing.mv.name=压裂机I
-gtqtcore.machine.fracturing.hv.name=压裂机II
-gtqtcore.machine.fracturing.ev.name=压裂机III
+gtqtcore.machine.fracturing.iv.name=压裂机I
+gtqtcore.machine.fracturing.luv.name=压裂机II
+gtqtcore.machine.fracturing.zpm.name=压裂机III
 
 gtqtcore.machine.ion_implantator.name=等离子体源离子注入器
 gtqtcore.machine.cz_puller.name=柴可斯基外延单晶硅生长炉
@@ -447,6 +450,7 @@ gregtech.universal.tooltip.kqcc1=§1端口等级：%s
 gregtech.universal.tooltip.kqcc2=§1最大算力流量：%s
 gtqtcore.machine.chemical-plant.tooltip.1=需要多方块等级大于配方电压等级才能工作！
 recipemap.pyrolysis_tower.name=分馏塔
+recipemap.threed_print.name=3D打印
 gregtech.material.pine_oil=松油
 gregtech.material.ethylene_chlorohydrin=氯乙醇
 recipemap.distillation_kettle.name=粗蒸馏

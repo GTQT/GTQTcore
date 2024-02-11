@@ -458,10 +458,10 @@ public class OilChains {
                 .duration(160).EUt(30).buildAndRegister();
 
         CHEMICAL_RECIPES.recipeBuilder()
-                .fluidInputs(DieselLight.getFluid(8000))
-                .fluidInputs(DieselHeavy.getFluid(8000))
-                .fluidInputs(MTBE.getFluid(1000))
-                .fluidOutputs(Diesel.getFluid(160000))
+                .fluidInputs(DieselLight.getFluid(4000))
+                .fluidInputs(DieselHeavy.getFluid(4000))
+                .fluidInputs(MTBE.getFluid(500))
+                .fluidOutputs(Diesel.getFluid(8000))
                 .duration(160).EUt(30).buildAndRegister();
 
         CHEMICAL_RECIPES.recipeBuilder()

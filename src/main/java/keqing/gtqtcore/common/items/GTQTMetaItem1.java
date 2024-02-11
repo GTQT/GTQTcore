@@ -125,6 +125,10 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         GOLD_CROP = addItem(205, "gold_crop");
         GOLD_CROP.addComponents(new GTQTCropSeedBehaviour(GTQTCrops.GOLD_CROP, GOLD_CROP.getStackForm(), GOLD_CROP.getStackForm())).setCreativeTabs(CommonProxy.GTQTCore_BIO);
 
+
+        //快乐模具
+        MOLD_GAS=this.addItem(300, "mold.gas").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        MOLD_MOTOR=this.addItem(301, "mold.motor").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         //火箭大军集结完毕
         //登陆器三个
         LANDER_MODULE1=this.addItem(350, "lander_module_t1").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_SP);

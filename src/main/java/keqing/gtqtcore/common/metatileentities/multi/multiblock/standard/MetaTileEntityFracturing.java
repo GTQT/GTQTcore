@@ -32,6 +32,11 @@ import gregtech.client.renderer.texture.Textures;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.capability.impl.FracturingLogic;
+import keqing.gtqtcore.api.unification.GCYSMaterials;
+import keqing.gtqtcore.client.textures.GTQTTextures;
+import keqing.gtqtcore.common.block.GTQTMetaBlocks;
+import keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing;
+import keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing1;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -135,13 +140,16 @@ public class MetaTileEntityFracturing extends MultiblockWithDisplayBase implemen
         return this.inputFluidInventory;
     }
     public boolean drainFluid(boolean simulate) {
-        FluidStack drillingFluid = DrillingFluid.getFluid(10);
+        FluidStack drillingFluid = DrillingFluid.getFluid(10*thresholdPercentage);
         FluidStack fluidStack = inputFluidInventory.getTankAt(0).getFluid();
         if (fluidStack != null && fluidStack.isFluidEqual(DrillingFluid.getFluid(1)) && fluidStack.amount >= drillingFluid.amount) {
-            if (!simulate)
-                inputFluidInventory.drain(drillingFluid, true);
-            return true;
+            if (isWorkingEnabled()) {
+                if (!simulate)
+                    inputFluidInventory.drain(drillingFluid, true);
+                return true;
+            }
         }
+
         return false;
     }
 
@@ -175,9 +183,9 @@ public class MetaTileEntityFracturing extends MultiblockWithDisplayBase implemen
                 .aisle("FFFFFCC","XSXXXCC","XXXXXCC","XXXXXCC","  F    ","  F    ","       ","       ","       ")
                 .where('S', selfPredicate())
                 .where('X', states(getCasingState()).setMinGlobalLimited(3)
-                        .or(abilities(MultiblockAbility.INPUT_ENERGY).setMaxGlobalLimited(1))
-                        .or(abilities(MultiblockAbility.EXPORT_FLUIDS).setMaxGlobalLimited(1))
-                        .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setMaxGlobalLimited(1)))
+                        .or(abilities(MultiblockAbility.INPUT_ENERGY).setExactLimit(1))
+                        .or(abilities(MultiblockAbility.EXPORT_FLUIDS).setExactLimit(1))
+                        .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setExactLimit(1)))
                 .where('C', states(getCasingState()))
                 .where('F', getFramePredicate())
                 .where(' ', any())
@@ -185,35 +193,35 @@ public class MetaTileEntityFracturing extends MultiblockWithDisplayBase implemen
     }
 
     private IBlockState getCasingState() {
-        if (tier == GTValues.MV)
-            return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STEEL_SOLID);
-        if (tier == GTValues.HV)
-            return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.TITANIUM_STABLE);
-        if (tier == GTValues.EV)
-            return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.TUNGSTENSTEEL_ROBUST);
-        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STEEL_SOLID);
+        if (tier == GTValues.IV)
+            return GTQTMetaBlocks.TURBINE_CASING.getState(GTQTTurbineCasing.TurbineCasingType.PD_TURBINE_CASING);
+        if (tier == GTValues.LuV)
+            return GTQTMetaBlocks.TURBINE_CASING.getState(GTQTTurbineCasing.TurbineCasingType.NQ_TURBINE_CASING);
+        if (tier == GTValues.ZPM)
+            return GTQTMetaBlocks.TURBINE_CASING1.getState(GTQTTurbineCasing1.TurbineCasingType.ST_TURBINE_CASING);
+        return GTQTMetaBlocks.TURBINE_CASING.getState(GTQTTurbineCasing.TurbineCasingType.PD_TURBINE_CASING);
     }
 
     @Nonnull
     private TraceabilityPredicate getFramePredicate() {
-        if (tier == GTValues.MV)
-            return frames(Materials.Steel);
-        if (tier == GTValues.HV)
-            return frames(Materials.Titanium);
-        if (tier == GTValues.EV)
-            return frames(Materials.TungstenSteel);
-        return frames(Materials.Steel);
+        if (tier == GTValues.IV)
+            return frames(Materials.RhodiumPlatedPalladium);
+        if (tier == GTValues.LuV)
+            return frames(Materials.NaquadahAlloy);
+        if (tier == GTValues.ZPM)
+            return frames(GCYSMaterials.Orichalcum);
+        return frames(Materials.RhodiumPlatedPalladium);
     }
 
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
-        if (tier == GTValues.MV)
-            return Textures.SOLID_STEEL_CASING;
-        if (tier == GTValues.HV)
-            return Textures.STABLE_TITANIUM_CASING;
-        if (tier == GTValues.EV)
-            return Textures.ROBUST_TUNGSTENSTEEL_CASING;
-        return Textures.SOLID_STEEL_CASING;
+        if (tier == GTValues.IV)
+            return GTQTTextures.PD_CASING;
+        if (tier == GTValues.LuV)
+            return GTQTTextures.NQ_CASING;
+        if (tier == GTValues.ZPM)
+            return GTQTTextures.ST_CASING;
+        return GTQTTextures.PD_CASING;
     }
 
     @Override
@@ -296,29 +304,29 @@ public class MetaTileEntityFracturing extends MultiblockWithDisplayBase implemen
     }
 
     public int getRigMultiplier() {
-        if (this.tier == GTValues.MV)
-            return 1;
-        if (this.tier == GTValues.HV)
-            return 16;
-        if (this.tier == GTValues.EV)
-            return 64;
-        return 1;
+        if (this.tier == GTValues.IV)
+            return 128;
+        if (this.tier == GTValues.LuV)
+            return 256;
+        if (this.tier == GTValues.ZPM)
+            return 512;
+        return 128;
     }
 
     public int getDepletionChance() {
-        if (this.tier == GTValues.MV)
-            return 1;
-        if (this.tier == GTValues.HV)
-            return 2;
-        if (this.tier == GTValues.EV)
-            return 8;
-        return 1;
+        if (this.tier == GTValues.IV)
+            return 16;
+        if (this.tier == GTValues.LuV)
+            return 32;
+        if (this.tier == GTValues.ZPM)
+            return 64;
+        return 16;
     }
 
     @Nonnull
     @Override
     protected ICubeRenderer getFrontOverlay() {
-        return Textures.FLUID_RIG_OVERLAY;
+        return Textures.FUSION_REACTOR_OVERLAY;
     }
 
     @Override

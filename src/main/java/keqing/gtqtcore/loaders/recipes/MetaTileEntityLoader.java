@@ -22,6 +22,8 @@ import keqing.gtqtcore.api.unification.ore.GTQTOrePrefix;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTElectrobath;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 
 import static gregicality.multiblocks.api.unification.GCYMMaterials.MolybdenumDisilicide;
 import static gregicality.multiblocks.api.unification.GCYMMaterials.TitaniumCarbide;
@@ -41,13 +43,52 @@ import static gregtech.loaders.recipe.CraftingComponent.*;
 import static gregtech.loaders.recipe.CraftingComponent.CABLE_QUAD;
 import static gregtech.loaders.recipe.MetaTileEntityLoader.registerMachineRecipe;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.CSilicon;
-import static keqing.gtqtcore.common.items.GTQTMetaItems.DISK_0;
+import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.*;
+import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.*;
 
 
 public class MetaTileEntityLoader {
 
     public static void init() {
+        ModHandler.addShapedRecipe(true, "item_input_hatch", ITEM_IMPORT_BUS[0].getStackForm(),
+                "MC", "hc",
+                'M', MetaTileEntities.HULL[GTValues.ULV].getStackForm(),
+                'C', new ItemStack(Blocks.CHEST));
+
+        ModHandler.addShapedRecipe(true, "item_output_hatch", ITEM_EXPORT_BUS[0].getStackForm(),
+                "MC", "ch",
+                'M', MetaTileEntities.HULL[GTValues.ULV].getStackForm(),
+                'C', new ItemStack(Blocks.CHEST));
+
+        ModHandler.addShapedRecipe(true, "fluid_input_hatch", FLUID_IMPORT_HATCH[0].getStackForm(),
+                "MC", "hc",
+                'M', MetaTileEntities.HULL[GTValues.ULV].getStackForm(),
+                'C', new ItemStack(Blocks.GLASS));
+
+        ModHandler.addShapedRecipe(true, "fluid_output_hatch", FLUID_EXPORT_HATCH[0].getStackForm(),
+                "MC", "ch",
+                'M', MetaTileEntities.HULL[GTValues.ULV].getStackForm(),
+                'C', new ItemStack(Blocks.GLASS));
+
+        ModHandler.addShapedRecipe(true, "mold_gas", MOLD_GAS.getStackForm(),
+                "MC", "ch",
+                'M', new UnificationEntry(block, Steel),
+                'C', new UnificationEntry(cylinder, Steel));
+
+        ModHandler.addShapedRecipe(true, "mold_motor", MOLD_MOTOR.getStackForm(),
+                "MC", "ch",
+                'M', new UnificationEntry(block, Steel),
+                'C', new UnificationEntry(motor_stick, Steel));
+
+        //3d
+        ModHandler.addShapedRecipe(true, "three_d", THREE_DIM_PRINT.getStackForm(),
+                "MCM", "HHH", "PPP",
+                'M', new UnificationEntry(pipeNormalFluid, Polytetrafluoroethylene),
+                'C', new UnificationEntry(circuit, MarkerMaterials.Tier.MV),
+                'P', ELECTRIC_PUMP_MV.getStackForm(),
+                'H', FLUID_SOLIDIFIER[2].getStackForm()
+        );
         //太阳能
         ASSEMBLER_RECIPES.recipeBuilder()
                 .inputs(HULL[4].getStackForm())

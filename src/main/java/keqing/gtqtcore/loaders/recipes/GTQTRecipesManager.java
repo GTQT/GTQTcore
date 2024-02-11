@@ -42,6 +42,7 @@ public class GTQTRecipesManager {
         GCYSBlockRecipeLoader.init();
         BoulesRecipes.init();
         GrapheneChain.init();
+        MiningDrill.init();
         HydrogenPeroxideChain.init();
         AcetyleneChain.init();
         TurpentineChain.init();

@@ -182,6 +182,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityMillBallHatch MULTIPART_BALL_HATCH;
     public static MetaTileEntityCatalystHatch CATALYST_HATCH;
     public static MetaTileEntityKQNetworkSwitch KQNS;
+    public static MetaTileEntityThreeDim THREE_DIM_PRINT;
     public static MetaTileEntityELEOil ELE_OIL;
     public static MetaTileEntitySpaceElevator SPACE_ELEVATOR;
     public static MetaTileEntityReactionFurnace REACTION_FURNACE;
@@ -304,6 +305,7 @@ public class GTQTMetaTileEntities {
         ELE_OIL= registerMetaTileEntity(3183, new MetaTileEntityELEOil(gtqtcoreId("ele_oil")));
         REACTION_FURNACE= registerMetaTileEntity(3184, new MetaTileEntityReactionFurnace(gtqtcoreId("reactor_furnace")));
         SPACE_ELEVATOR= registerMetaTileEntity(3185, new MetaTileEntitySpaceElevator(gtqtcoreId("space_elevator")));
+        THREE_DIM_PRINT= registerMetaTileEntity(3186, new MetaTileEntityThreeDim(gtqtcoreId("three_dim_print")));
         //重写设备
         DISTILLATION_TOWER = registerMetaTileEntity(3250, new MetaTileEntityDistillationTower(gtqtcoreId("distillation_tower")));
         CRACKER = registerMetaTileEntity(3251, new MetaTileEntityCrackingUnit(gtqtcoreId("cracker")));
@@ -335,9 +337,9 @@ public class GTQTMetaTileEntities {
         STAR_MIXER= registerMetaTileEntity(3352, new MetaTileEntityStarMixer(gtqtcoreId("star_mixer")));
 
         //资源产出
-        BASIC_FLUID_DRILLING_RIG = registerMetaTileEntity(3400, new MetaTileEntityFracturing(gtqtcoreId("fracturing.mv"), 2));
-        FLUID_DRILLING_RIG = registerMetaTileEntity(3401, new MetaTileEntityFracturing(gtqtcoreId("fracturing.hv"), 3));
-        ADVANCED_FLUID_DRILLING_RIG = registerMetaTileEntity(3402, new MetaTileEntityFracturing(gtqtcoreId("fracturing.ev"), 4));
+        BASIC_FLUID_DRILLING_RIG = registerMetaTileEntity(3400, new MetaTileEntityFracturing(gtqtcoreId("fracturing.iv"), 5));
+        FLUID_DRILLING_RIG = registerMetaTileEntity(3401, new MetaTileEntityFracturing(gtqtcoreId("fracturing.luv"), 6));
+        ADVANCED_FLUID_DRILLING_RIG = registerMetaTileEntity(3402, new MetaTileEntityFracturing(gtqtcoreId("fracturing.zpm"), 7));
         BASIC_HUGE_MINER = registerMetaTileEntity(3403, new MetaTileEntityHugeMiner(gtqtcoreId("large_miner.zpm"), GTValues.ZPM, 1, 8, 7,  64));
         HUGE_MINER = registerMetaTileEntity(3404, new MetaTileEntityHugeMiner(gtqtcoreId("large_miner.uv"), GTValues.UV, 2, 10, 8,  128));
         ADVANCED_HUGE_MINER = registerMetaTileEntity(3405, new MetaTileEntityHugeMiner(gtqtcoreId("large_miner.uhv"), GTValues.UHV, 3, 12, 9 , 256));

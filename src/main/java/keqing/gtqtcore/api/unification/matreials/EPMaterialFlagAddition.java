@@ -24,6 +24,7 @@ public class EPMaterialFlagAddition {
         VanadiumGallium.addFlags(GENERATE_COIL);
         Americium.addFlags(GENERATE_COIL);
         Europium.addFlags(GENERATE_COIL);
+        Naquadah.addFlags(GENERATE_FRAME);
         Coal.addFlags(GENERATE_DENSE,GENERATE_PLATE,GENERATE_DOUBLE_PLATE);
         // CarbonNanotube.addFlags(GENERATE_COIL);
 

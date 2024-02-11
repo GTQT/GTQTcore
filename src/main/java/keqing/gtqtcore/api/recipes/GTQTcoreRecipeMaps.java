@@ -169,7 +169,7 @@ public class GTQTcoreRecipeMaps {
                 .setProgressBar(GuiTextures.PROGRESS_BAR_COMPRESS, ProgressWidget.MoveType.HORIZONTAL)
                 .setSound(GTSoundEvents.ARC);
 
-        MINING_DRILL_RECIPES= new RecipeMap<>("mining_drill", 2, 16, 1, 0, new MDRecipeBuilder(), false)
+        MINING_DRILL_RECIPES= new RecipeMap<>("mining_drill", 2, 9, 0, 0, new MDRecipeBuilder(), false)
                 .setSlotOverlay(false, false, true, GuiTextures.CRUSHED_ORE_OVERLAY)
                 .setSlotOverlay(true, false, true, GuiTextures.DUST_OVERLAY)
                 .setSound(GTSoundEvents.MACERATOR);
@@ -225,7 +225,7 @@ public class GTQTcoreRecipeMaps {
                 .setSound(GTSoundEvents.ASSEMBLER);
 
 
-        TD_PRINT_RECIPES = new RecipeMap<>("threed_print", 2, 1, 1, 0, new ComputationRecipeBuilder(), false)
+        TD_PRINT_RECIPES = new RecipeMap<>("threed_print", 2, 1, 2, 0, new ComputationRecipeBuilder(), false)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL)
                 .setSlotOverlay(false, false, false, GuiTextures.CIRCUIT_OVERLAY)
                 .setSlotOverlay(false, false, true, GuiTextures.CIRCUIT_OVERLAY)

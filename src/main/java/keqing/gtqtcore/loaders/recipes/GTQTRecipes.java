@@ -23,6 +23,7 @@ import gregtech.common.items.ToolItems;
 import gregtechfoodoption.recipe.GTFORecipeMaps;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.unification.ore.GTQTOrePrefix;
+import keqing.gtqtcore.common.items.GTQTMetaItems;
 import keqing.gtqtcore.common.items.metaitems.GTQTMetaToolItems;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
@@ -111,6 +112,24 @@ public class GTQTRecipes {
 
     private static void processPlateBig(OrePrefix orePrefix, Material material, IngotProperty ingotProperty) {
         if (material.hasFlag(GENERATE_PLATE)) {
+            if (material.hasFluid()) {
+                RecipeMaps.VACUUM_RECIPES.recipeBuilder()
+                        .notConsumable(GTQTMetaItems.MOLD_GAS)
+                        .fluidInputs(material.getFluid(L * 16))
+                        .output(cylinder,material)
+                        .duration(400)
+                        .EUt(GTValues.VA[MV])
+                        .buildAndRegister();
+
+                RecipeMaps.VACUUM_RECIPES.recipeBuilder()
+                        .notConsumable(GTQTMetaItems.MOLD_MOTOR)
+                        .fluidInputs(material.getFluid(L * 16))
+                        .output(motor_stick,material)
+                        .duration(400)
+                        .EUt(GTValues.VA[MV])
+                        .buildAndRegister();
+            }
+
             if (!material.hasFlag(MaterialFlags.NO_SMASHING)) {
                 ModHandler.addShapedRecipe(String.format("aplate_big_%s", material),
                         OreDictUnifier.get(plate_big, material),
@@ -211,6 +230,17 @@ public class GTQTRecipes {
                         .EUt(32).duration(40)
                         .circuitMeta(1)
                         .fluidInputs(material.getFluid(2000))
+                        .fluidInputs(Polytetrafluoroethylene.getFluid(144))
+                        .output(cylinder, material)
+                        .CWUt(24)
+                        .totalCWU(960000)
+                        .buildAndRegister();
+
+                TD_PRINT_RECIPES.recipeBuilder()
+                        .EUt(32).duration(40)
+                        .circuitMeta(1)
+                        .fluidInputs(material.getFluid(2000))
+                        .fluidInputs(Polybenzimidazole.getFluid(36))
                         .output(cylinder, material)
                         .CWUt(24)
                         .totalCWU(960000)
@@ -257,6 +287,17 @@ public class GTQTRecipes {
                         .circuitMeta(2)
                         .fluidInputs(material.getFluid(2000))
                         .output(motor_stick, material)
+                        .fluidInputs(Polytetrafluoroethylene.getFluid(144))
+                        .CWUt(24)
+                        .totalCWU(960000)
+                        .buildAndRegister();
+
+                TD_PRINT_RECIPES.recipeBuilder()
+                        .EUt(32).duration(40)
+                        .circuitMeta(2)
+                        .fluidInputs(material.getFluid(2000))
+                        .output(motor_stick, material)
+                        .fluidInputs(Polybenzimidazole.getFluid(36))
                         .CWUt(24)
                         .totalCWU(960000)
                         .buildAndRegister();
@@ -310,6 +351,17 @@ public class GTQTRecipes {
                         .circuitMeta(3)
                         .fluidInputs(material.getFluid(4000))
                         .output(valve, material)
+                        .fluidInputs(Polytetrafluoroethylene.getFluid(144))
+                        .CWUt(24)
+                        .totalCWU(960000)
+                        .buildAndRegister();
+
+                TD_PRINT_RECIPES.recipeBuilder()
+                        .EUt(32).duration(40)
+                        .circuitMeta(3)
+                        .fluidInputs(material.getFluid(4000))
+                        .output(valve, material)
+                        .fluidInputs(Polybenzimidazole.getFluid(36))
                         .CWUt(24)
                         .totalCWU(960000)
                         .buildAndRegister();
@@ -458,6 +510,15 @@ public class GTQTRecipes {
                     .circuitMeta(3)
                     .EUt(GTValues.VA[HV])
                     .buildAndRegister();
+        }
+        if (material.hasFlag(MaterialFlags.GENERATE_ROD)) {
+            if (!material.hasFlag(MaterialFlags.NO_SMASHING)) {
+                ModHandler.addShapedRecipe(String.format("bending_ring_%s", material),
+                        OreDictUnifier.get(OrePrefix.ring, material),
+                        "h", "S", "B",
+                        'S', new UnificationEntry(OrePrefix.stick, material),
+                        'B', GTQTMetaToolItems.SMALL_BENDING_CYLINDER);
+            }
         }
     }
 

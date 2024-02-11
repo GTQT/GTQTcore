@@ -38,6 +38,16 @@ public class BiochemChains {
 
     private static void latex()
     {
+        CHEMICAL_RECIPES.recipeBuilder()
+                .duration(20)
+                .EUt(30)
+                .input(STICKY_RESIN,2)
+                .input(dust,Salt,1)
+                .fluidInputs(Water.getFluid(800))
+                .fluidOutputs(Latex.getFluid(400))
+                .buildAndRegister();
+
+
         PR_MIX.recipeBuilder()
                 .duration(1200)
                 .input(STICKY_RESIN,20)
@@ -141,7 +151,7 @@ public class BiochemChains {
                 .fluidOutputs(Glue.getFluid(100))
                 .buildAndRegister();
 
-        CENTRIFUGE_RECIPES.recipeBuilder().duration(400).EUt(5)
+        CENTRIFUGE_RECIPES.recipeBuilder().duration(200).EUt(5)
                 .fluidInputs(Latex.getFluid(200))
                 .input(dust,SodaAsh)
                 .output(dust, RawRubber, 3)
@@ -150,14 +160,34 @@ public class BiochemChains {
                 .fluidOutputs(Glue.getFluid(200))
                 .buildAndRegister();
 
-        CENTRIFUGE_RECIPES.recipeBuilder().duration(400).EUt(120)
+        CENTRIFUGE_RECIPES.recipeBuilder().duration(200).EUt(120)
                 .input(STICKY_RESIN)
                 .output(dust, RawRubber, 3)
                 .chancedOutput(PLANT_BALL, 1000, 850)
                 .fluidOutputs(Glue.getFluid(100))
                 .buildAndRegister();
 
+        CENTRIFUGE_RECIPES.recipeBuilder().duration(400).EUt(5)
+                .fluidInputs(Latex.getFluid(200))
+                .input(dust,Trona)
+                .output(dust, RawRubber, 2)
+                .fluidOutputs(Glue.getFluid(100))
+                .buildAndRegister();
 
+
+        PR_MIX.recipeBuilder().duration(200)
+                .fluidInputs(Latex.getFluid(200))
+                .input(dust,SodaAsh)
+                .output(dust, RawRubber, 1)
+                .fluidOutputs(Glue.getFluid(200))
+                .buildAndRegister();
+
+        PR_MIX.recipeBuilder().duration(200)
+                .fluidInputs(Latex.getFluid(200))
+                .input(dust,Trona)
+                .output(dust, RawRubber, 1)
+                .fluidOutputs(Glue.getFluid(200))
+                .buildAndRegister();
     }
     private static void H_E_ringPrecursors() {
 

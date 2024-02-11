@@ -301,7 +301,7 @@ public class FirstDegreeMaterials {
                 .build();
 
         GTQTMaterials.Latex = new Material.Builder(getMaterialsId(), gregtechId("latex"))
-                .dust().fluid()
+                .fluid()
                 .color(0xFFFADA)
                 .build();
 

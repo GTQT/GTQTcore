@@ -14,6 +14,7 @@ import gregtech.common.items.MetaItems;
 import gregtech.common.metatileentities.MetaTileEntities;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
+import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 import net.minecraftforge.oredict.OreDictionary;
 
 import static gregtech.api.GTValues.*;
@@ -29,12 +30,15 @@ import static gregtech.common.blocks.BlockFusionCasing.CasingType.SUPERCONDUCTOR
 import static gregtech.common.blocks.BlockMetalCasing.MetalCasingType.BRONZE_BRICKS;
 import static gregtech.common.blocks.MetaBlocks.*;
 import static gregtech.common.items.MetaItems.*;
+import static gregtech.common.metatileentities.MetaTileEntities.ADVANCED_FLUID_DRILLING_RIG;
+import static gregtech.common.metatileentities.MetaTileEntities.FLUID_DRILLING_RIG;
 import static gregtech.common.metatileentities.MetaTileEntities.FUSION_REACTOR;
 
 import static gregtech.common.blocks.BlockFusionCasing.CasingType.SUPERCONDUCTOR_COIL;
 import static gregtech.common.items.MetaItems.*;
 import static gregtech.common.metatileentities.MetaTileEntities.*;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.KaptonK;
+import static keqing.gtqtcore.api.unification.GCYSMaterials.Orichalcum;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.Fluix;
 import static keqing.gtqtcore.common.block.blocks.GTQTKQCC.CasingType.COMPUTER_VENT;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
@@ -595,8 +599,8 @@ public class KeQingNET {
                 .input(DISK_0)
                 .notConsumable(SENSOR_HV)
                 .output(DISK_8)
-                .EUt(7680)
-                .CWUt(256)
+                .EUt(480)
+                .CWUt(120)
                 .NB(8)
                 .totalCWU(100000)
                 .buildAndRegister();
@@ -616,6 +620,40 @@ public class KeQingNET {
                         .EUt(VA[HV]))
                 .duration(800).EUt(VA[HV]).buildAndRegister();
 
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(HULL[EV])
+                .input(frameGt, Titanium, 4)
+                .input(circuit, Tier.EV, 4)
+                .input(ELECTRIC_MOTOR_EV, 4)
+                .input(ELECTRIC_PUMP_EV, 4)
+                .input(CONVEYOR_MODULE_EV, 4)
+                .input(gear, Tungsten, 4)
+                .circuitMeta(2)
+                .fluidInputs(Polyethylene.getFluid(GTValues.L * 4))
+                .output(BASIC_LARGE_MINER)
+                .scannerResearch(b -> b
+                        .researchStack(DISK_8.getStackForm())
+                        .duration(1200)
+                        .EUt(VA[EV]))
+                .duration(400).EUt(VA[EV]).buildAndRegister();
+
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(HULL[EV])
+                .input(frameGt, Titanium, 4)
+                .input(circuit, Tier.EV, 4)
+                .input(ELECTRIC_MOTOR_EV, 4)
+                .input(ELECTRIC_PUMP_EV, 4)
+                .input(gear, TungstenCarbide, 4)
+                .circuitMeta(2)
+                .fluidInputs(Polyethylene.getFluid(GTValues.L * 4))
+                .output(FLUID_DRILLING_RIG)
+                .scannerResearch(b -> b
+                        .researchStack(DISK_8.getStackForm())
+                        .duration(1200)
+                        .EUt(VA[EV]))
+                .duration(400).EUt(VA[EV]).buildAndRegister();
+
         //9 资源勘探II
         GTQTcoreRecipeMaps.KEQING_NET_RECIES.recipeBuilder()
                 .input(DISK_0)
@@ -626,6 +664,135 @@ public class KeQingNET {
                 .NB(8)
                 .totalCWU(100000)
                 .buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(HULL[IV])
+                .input(frameGt, TungstenSteel, 4)
+                .input(circuit, Tier.IV, 4)
+                .input(ELECTRIC_MOTOR_IV, 4)
+                .input(ELECTRIC_PUMP_IV, 4)
+                .input(CONVEYOR_MODULE_IV, 4)
+                .input(gear, Iridium, 4)
+                .circuitMeta(2)
+                .fluidInputs(ReinforcedEpoxyResin.getFluid(GTValues.L * 4))
+                .fluidInputs(Polytetrafluoroethylene.getFluid(GTValues.L * 4))
+                .fluidInputs(Polybenzimidazole.getFluid(GTValues.L * 4))
+                .output(LARGE_MINER)
+                .stationResearch(b -> b
+                        .researchStack(DISK_9.getStackForm())
+                        .CWUt(1000,1000000)
+                        .EUt(VA[IV]))
+                .duration(400).EUt(VA[IV]).buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(HULL[LuV])
+                .input(frameGt, TungstenSteel, 4)
+                .input(circuit, Tier.LuV, 4)
+                .input(ELECTRIC_MOTOR_LuV, 4)
+                .input(ELECTRIC_PUMP_LuV, 4)
+                .input(gear, Osmiridium, 4)
+                .fluidInputs(ReinforcedEpoxyResin.getFluid(GTValues.L * 4))
+                .fluidInputs(Polytetrafluoroethylene.getFluid(GTValues.L * 4))
+                .fluidInputs(Polybenzimidazole.getFluid(GTValues.L * 4))
+                .circuitMeta(2)
+                .output(ADVANCED_FLUID_DRILLING_RIG)
+                .stationResearch(b -> b
+                        .researchStack(DISK_9.getStackForm())
+                        .CWUt(1000,1000000)
+                        .EUt(VA[LuV]))
+                .duration(400).EUt(VA[LuV]).buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(HULL[LuV])
+                .input(frameGt, HSSS, 4)
+                .input(circuit, Tier.LuV, 4)
+                .input(ELECTRIC_MOTOR_LuV, 4)
+                .input(ELECTRIC_PUMP_LuV, 4)
+                .input(CONVEYOR_MODULE_LuV, 4)
+                .input(gear, Ruridit, 4)
+                .fluidInputs(ReinforcedEpoxyResin.getFluid(GTValues.L * 4))
+                .fluidInputs(Polytetrafluoroethylene.getFluid(GTValues.L * 4))
+                .fluidInputs(Polybenzimidazole.getFluid(GTValues.L * 4))
+                .circuitMeta(2)
+                .output(ADVANCED_LARGE_MINER)
+                .stationResearch(b -> b
+                        .researchStack(DISK_9.getStackForm())
+                        .CWUt(1000,4000000)
+                        .EUt(VA[LuV]))
+                .duration(400).EUt(VA[LuV]).buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(HULL[LuV])
+                .input(frameGt, TungstenSteel, 4)
+                .input(circuit, Tier.LuV, 4)
+                .input(ELECTRIC_MOTOR_LuV, 4)
+                .input(ELECTRIC_PUMP_LuV, 4)
+                .input(gear, Osmiridium, 4)
+                .fluidInputs(ReinforcedEpoxyResin.getFluid(GTValues.L * 4))
+                .fluidInputs(Polytetrafluoroethylene.getFluid(GTValues.L * 4))
+                .fluidInputs(Polybenzimidazole.getFluid(GTValues.L * 4))
+                .circuitMeta(2)
+                .output(ADVANCED_FLUID_DRILLING_RIG)
+                .stationResearch(b -> b
+                        .researchStack(DISK_9.getStackForm())
+                        .CWUt(1000,4000000)
+                        .EUt(VA[LuV]))
+                .duration(400).EUt(VA[LuV]).buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(HULL[ZPM])
+                .input(frameGt, RhodiumPlatedPalladium, 4)
+                .input(circuit, Tier.ZPM, 4)
+                .input(ELECTRIC_MOTOR_ZPM, 4)
+                .input(ELECTRIC_PUMP_ZPM, 4)
+                .input(gear, RhodiumPlatedPalladium, 4)
+                .fluidInputs(ReinforcedEpoxyResin.getFluid(GTValues.L * 4))
+                .fluidInputs(Polytetrafluoroethylene.getFluid(GTValues.L * 4))
+                .fluidInputs(Polybenzimidazole.getFluid(GTValues.L * 4))
+                .circuitMeta(2)
+                .output(GTQTMetaTileEntities.BASIC_FLUID_DRILLING_RIG)
+                .stationResearch(b -> b
+                        .researchStack(DISK_9.getStackForm())
+                        .CWUt(1000,4000000)
+                        .EUt(VA[LuV]))
+                .duration(400).EUt(VA[LuV]).buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(HULL[UV])
+                .input(frameGt, NaquadahAlloy, 4)
+                .input(circuit, Tier.UV, 4)
+                .input(ELECTRIC_MOTOR_UV, 4)
+                .input(ELECTRIC_PUMP_UV, 4)
+                .input(gear, NaquadahAlloy, 4)
+                .circuitMeta(2)
+                .fluidInputs(ReinforcedEpoxyResin.getFluid(GTValues.L * 4))
+                .fluidInputs(Polytetrafluoroethylene.getFluid(GTValues.L * 4))
+                .fluidInputs(Polybenzimidazole.getFluid(GTValues.L * 4))
+                .output(GTQTMetaTileEntities.FLUID_DRILLING_RIG)
+                .stationResearch(b -> b
+                        .researchStack(DISK_9.getStackForm())
+                        .CWUt(1000,4000000)
+                        .EUt(VA[LuV]))
+                .duration(400).EUt(VA[LuV]).buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(HULL[UHV])
+                .input(frameGt, Orichalcum, 4)
+                .input(circuit, Tier.UHV, 4)
+                .input(ELECTRIC_MOTOR_UHV, 4)
+                .input(ELECTRIC_PUMP_UHV, 4)
+                .input(gear, Orichalcum, 4)
+                .circuitMeta(2)
+                .fluidInputs(ReinforcedEpoxyResin.getFluid(GTValues.L * 4))
+                .fluidInputs(Polytetrafluoroethylene.getFluid(GTValues.L * 4))
+                .fluidInputs(Polybenzimidazole.getFluid(GTValues.L * 4))
+                .output(GTQTMetaTileEntities.ADVANCED_FLUID_DRILLING_RIG)
+                .stationResearch(b -> b
+                        .researchStack(DISK_9.getStackForm())
+                        .CWUt(1000,4000000)
+                        .EUt(VA[LuV]))
+                .duration(400).EUt(VA[LuV]).buildAndRegister();
+
         //10 资源勘探III
         GTQTcoreRecipeMaps.KEQING_NET_RECIES.recipeBuilder()
                 .input(DISK_0)

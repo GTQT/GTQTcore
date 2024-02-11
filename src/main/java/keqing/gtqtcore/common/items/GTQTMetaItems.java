@@ -17,6 +17,9 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem IMPREGNATED_SUBSTRATE;
     public static MetaItem<?>.MetaValueItem IMPREGNATED_EPOXY;
     public static MetaItem<?>.MetaValueItem MEMORY_CARD;
+
+    public static MetaItem<?>.MetaValueItem MOLD_GAS;
+    public static MetaItem<?>.MetaValueItem MOLD_MOTOR;
     public static MetaItem<?>.MetaValueItem IMPREGNATED_PLASTIC_SUBSTRATE;
     public static MetaItem<?>.MetaValueItem IMPREGNATED_GRAPHITE_RODS;
     public static MetaItem<?>.MetaValueItem IMPREGNATED_GRAPHITE_RODSA;
