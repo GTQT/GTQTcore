@@ -186,7 +186,7 @@ public class ELE {
                 .input(ELECTROLYZER[1],3)
                 .fluidInputs(Tin.getFluid(L * 4))
                 .outputs(GTQTMetaTileEntities.ELECTROBATH.getStackForm())
-                .duration(200).EUt(1960).buildAndRegister();
+                .duration(200).EUt(30).buildAndRegister();
 
         ELECTROBATH.recipeBuilder()
                 .notConsumable(electrode,Steel,1)

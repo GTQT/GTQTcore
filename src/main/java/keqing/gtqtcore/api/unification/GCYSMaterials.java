@@ -14,7 +14,6 @@ public class GCYSMaterials {
     public static Material Adamantium;
     public static Material Taranium;
 
-
     // First Degree Materials
     public static Material LanthanumOxide;
     public static Material PraseodymiumOxide;
@@ -243,7 +242,6 @@ public class GCYSMaterials {
 
 
     // Unknown Composition Materials
-    public static Material RareEarthHydroxidesSolution;
     public static Material RareEarthChloridesSolution;
     public static Material LeachedTurpentine;
     public static Material SteamCrackedTurpentine;

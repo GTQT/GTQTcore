@@ -5,6 +5,7 @@ import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.properties.BlastProperty;
 import gregtech.api.unification.material.properties.ToolProperty;
 
+import static gregtech.api.unification.Elements.Hf;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static gregtech.api.unification.material.info.MaterialFlags.*;
 import static gregtech.api.unification.material.info.MaterialIconSet.METALLIC;
@@ -66,5 +67,6 @@ public class GCYSElementMaterials {
                 .color(0x4F404F).iconSet(METALLIC)
                 .element(GCYSElements.Tn)
                 .build();
+
     }
 }

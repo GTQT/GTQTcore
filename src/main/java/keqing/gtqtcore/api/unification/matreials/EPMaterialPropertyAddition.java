@@ -46,8 +46,9 @@ public class EPMaterialPropertyAddition {
         Bromine.setProperty(PropertyKey.FLUID, new FluidProperty());
         Bromine.setMaterialIconSet(MaterialIconSet.FLUID);
         Germanium.setProperty(PropertyKey.FLUID, new FluidProperty());
-
-
+        Iodine.setProperty(PropertyKey.FLUID, new FluidProperty());
+        AmmoniumChloride.setProperty(PropertyKey.FLUID, new FluidProperty());
+        Hafnium.setProperty(PropertyKey.DUST, new DustProperty());
         // Ore Byproducts
         //TODO Fix ore byproduct changes
         Pollucite.getProperty(PropertyKey.ORE).setOreByProducts(Aluminium, Potassium, Caesium, Pollucite);

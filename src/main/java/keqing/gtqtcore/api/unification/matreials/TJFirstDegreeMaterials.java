@@ -1037,12 +1037,6 @@ public class TJFirstDegreeMaterials {
                 .colorAverage()
                 .build();
 
-        Acetoin  = new Material.Builder(25178, gregtechId("acetoin"))
-                .fluid()
-                .components(Carbon, 4, Hydrogen, 8, Oxygen, 2)
-                .colorAverage()
-                .build();
-
         MetaNitrochlorobenzine = new Material.Builder(25179, gregtechId("meta_nitrochlorobenzine"))
                 .fluid()
                 .components(Carbon, 6, Hydrogen, 4, Chlorine, 1, Nitrogen, 1, Oxygen, 2)

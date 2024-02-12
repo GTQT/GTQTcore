@@ -266,7 +266,7 @@ public class MaterialOreChains {
                 .blastFurnaceTemp(3200)
                 .input(dust, Magnesium, 2)
                 .fluidInputs(HafniumTetrachloride.getFluid(1000))
-                .output(ingotHot, Hafnium)
+                .output(dust, Hafnium)
                 .output(dust, MagnesiumChloride, 6)
                 .buildAndRegister();
 

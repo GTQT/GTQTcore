@@ -45,7 +45,6 @@ public class MetaTileEntityDangoteDistillery extends MultiMapMultiblockControlle
 
     public MetaTileEntityDangoteDistillery(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{
-                RecipeMaps.DISTILLERY_RECIPES,
                 RecipeMaps.DISTILLATION_RECIPES,
                 GTQTcoreRecipeMaps.MOLECULAR_DISTILLATION_RECIPES
         });

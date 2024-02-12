@@ -180,7 +180,7 @@ public class MetaTileEntityFracturing extends MultiblockWithDisplayBase implemen
         return FactoryBlockPattern.start()
                 .aisle("FFFFFCC","XXXXXCC","XXXXXCC","XXXXXCC","  F    ","  F    ","       ","       ","       ")
                 .aisle("F F  CC","CCCCCCC","CCCCCCC","CCCCCCC"," FFF   "," FFF   ","  F    ","  F    ","  F    ")
-                .aisle("FFFFFCC","XSXXXCC","XXXXXCC","XXXXXCC","  F    ","  F    ","       ","       ","       ")
+                .aisle("FFFFFCC","XXXXXCC","XXSXXCC","XXXXXCC","  F    ","  F    ","       ","       ","       ")
                 .where('S', selfPredicate())
                 .where('X', states(getCasingState()).setMinGlobalLimited(3)
                         .or(abilities(MultiblockAbility.INPUT_ENERGY).setExactLimit(1))

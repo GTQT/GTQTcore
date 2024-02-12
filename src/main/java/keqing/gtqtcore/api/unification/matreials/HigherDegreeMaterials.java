@@ -17,7 +17,7 @@ import keqing.gtqtcore.api.unification.GTQTMaterials;
 public class HigherDegreeMaterials {
 
     private static int startId = 20600;
-    private static final int END_ID = startId + 100;
+    private static final int END_ID = startId + 300;
 
     private static int getMaterialsId() {
         if (startId < END_ID) {
@@ -131,6 +131,13 @@ public class HigherDegreeMaterials {
                 .dust().fluid()
                 .color(0x8B4C39)
                 .components(Carbon,10,Hydrogen,16,Oxygen,1)
+                .build();
+
+        //方钍石
+        GTQTMaterials.Thorianite= new Material.Builder(getMaterialsId(), gregtechId("thorianite"))
+                .ore().dust()
+                .color(0x8B4C39)
+                .components(Thorium,1,Oxygen,2)
                 .build();
 
     }

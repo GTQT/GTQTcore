@@ -518,12 +518,70 @@ gregtech.material.rhodium_salt=铑盐
 gregtech.material.rhodium_raw=粗制铑金属
 gregtech.material.zinc_sulfate=硫酸锌
 
-
-
+gregtech.material.haidaihui=海带灰溶液
+gregtech.material.cuiquhaidaihui=萃取海带灰
+gregtech.material.potassium_iodide=碘化钾
+gregtech.material.potassium_bromide=溴化钾
+gregtech.material.crotonaldehyde=2-丁烯醛
+gregtech.material.ethylhexenal=2-乙基（-2-）己烯醛
+gregtech.material.vanadium_oxide=五氧化二钒
+gregtech.material.ethanedioic_acid=草酸
+gregtech.material.hexafluorosilicic_acid=氟硅酸
+gregtech.material.sodium_silicofluoride=氟硅酸钠
 
 gregtech.material.vinylcinnamate=聚乙烯醇肉桂酸酯
 gregtech.material.xmt=xMT分子光刻胶
 gregtech.material.zrbtmst=氧化锆杂化物-（2,4-双（三氯甲基）-6-（4-甲氧基苯乙烯基）-1,3,5-三嗪）（ZrO2-BTMST）
+
+
+gregtech.material.dujushixitu=独居石稀土浊溶液
+gregtech.material.yanghuahayanghuagao=氧化铪-氧化锆混合物
+gregtech.material.xishidujushixitu=稀释独居石稀土泥浆
+gregtech.material.yanghuaha=氧化铪
+gregtech.material.silvhuaha=四氯化铪锆混合
+gregtech.material.dilvhuaha=低纯锆铪混合
+gregtech.material.iilvhuaha=低纯碘化锆铪混合
+gregtech.material.liusuandujushi=硫酸独居石
+gregtech.material.dujushixitulvzha=独居石稀土滤渣粉
+gregtech.material.dujushixitulvb=磷酸钍滤饼
+gregtech.material.dujushixitulvbf=磷酸钍精粉
+gregtech.material.zhonghedujushixitulvzha=中和独居石稀土滤渣粉
+gregtech.material.nongsuodujushiqingyanghuawu=浓缩独居石稀土氢氧化物粉
+gregtech.material.youlvzhafen=铀滤渣粉
+gregtech.material.ganzaonongsuoxiaosuandujushixitu=干燥浓缩硝酸独居石稀土
+gregtech.material.dujushihantuchendian=独居石罕土沉淀粉
+gregtech.material.yizhiluhuadujushi=异质卤化独居石稀土混合物
+gregtech.material.baohedujushixituhunhe=饱和独居石稀土
+gregtech.material.shanjing=钐精
+gregtech.material.lvhuashi=氯化铈
+gregtech.material.cvhuashi=草酸铈
+gregtech.material.tvhuashi=氧化铈(III)
+gregtech.material.thorianite=方钍石
+gregtech.material.futanlanshixituzhuo=氟碳镧铈稀土浊溶液
+gregtech.material.zhengqiliehuafutanlanshinijiang=蒸汽裂化氟碳镧铈泥浆
+gregtech.material.tiaozhifutanlanshinijiang=调制氟碳镧铈泥浆
+gregtech.material.guolvfutanlanshinijiang=过滤氟碳镧铈泥浆
+gregtech.material.futanlanshixituyanghuawu=氟碳镧铈稀土氧化物
+gregtech.material.suanjinfutanlanshixituyanghuawu=酸浸氟碳镧铈稀土氧化物粉
+gregtech.material.bsxituyanghuawu=焙烧稀土氧化物粉
+gregtech.material.yanghuaxituyanghauwu=氧化铈稀土氧化物粉
+gregtech.material.futanlanshihantuyanghuawu=氟碳镧铈罕土氧化物粉
+gregtech.material.futanlanshihantuyanghuawuxuanzhuo=氟碳镧铈罕土氧化物悬浊液
+gregtech.material.shanxitujingfen=钐稀土精粉
+gregtech.material.fhanxitujingfen=氟化钐稀土精粉
+gregtech.material.shantui=钐-铽混合物粉
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -572,6 +630,7 @@ gtqtcore.machine.ele.tooltip.5=消耗洁净剂(是盐酸啦)修复电极，提�
 gtqtcore.machine.alloy_klin.name=合金窑
 gtqtcore.machine.vacuum_freezer.name=真空冷冻机
 gtqtcore.machine.large_chemical_reactor.name=工业化学反应釜
+gtqtcore.machine.three_dim_print.name=3D部件`打印机
 gtqtcore.machine.pyrolyse_oven.name=热解炉
 gtqtcore.machine.cracker.name=石油裂化机
 gtqtcore.machine.distillation_tower.name=蒸馏塔
@@ -609,7 +668,7 @@ gtqtcore.machine.ocean_pumper.name=海水泵机
 gtqtcore.machine.solar_plate.name=太阳能板
 gtqtcore.machine.spa.tooltip.1=只能白天工作，需要提供水洁净太阳能吸收面,需要保证上方10*10（控制器为中心）范围内均为空气。
 gtqtcore.machine.spa.tooltip.2=内置三级太阳能升级，每次升级发电提升一个阶段。
-recipemap.solar_plate.name=太阳神的力量
+recipemap.soalr_plate.name=太阳神的力量
 
 tile.electrobath.solar_plate_casing.name=阵列太阳能框架
 tile.electrobath.solar_plate_lv.name=基础太阳能集成板

@@ -35,7 +35,7 @@ public class PetrochemRecipes {
     }
 
     public static void addLowCostRecipes() {
-        DISTILLATION_RECIPES.recipeBuilder()
+       /* DISTILLATION_RECIPES.recipeBuilder()
                 .duration(150)
                 .EUt(VA[EV])
                 .fluidInputs(RareEarthChloridesSolution.getFluid(1000))
@@ -46,6 +46,8 @@ public class PetrochemRecipes {
                 .fluidOutputs(HydrochloricAcid.getFluid(1000))
                 .chancedOutput(dust, Thorium, 2500, 1000)
                 .buildAndRegister();
+
+        */
 
         DISTILLATION_RECIPES.recipeBuilder()
                 .duration(175)

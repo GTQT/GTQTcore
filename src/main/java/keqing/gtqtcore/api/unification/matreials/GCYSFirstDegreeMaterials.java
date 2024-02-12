@@ -372,7 +372,7 @@ public class GCYSFirstDegreeMaterials {
                 .build();
 
         BoricAcid = new Material.Builder(3549, gregtechId("boric_acid"))
-                .dust()
+                .dust().fluid()
                 .color(0xFAFAFA)
                 .iconSet(MaterialIconSet.SHINY)
                 .flags(DISABLE_DECOMPOSITION)

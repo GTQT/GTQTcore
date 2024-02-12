@@ -16,12 +16,7 @@ public class GCYSUnknownCompositionMaterials {
      */
     public static void init() {
 
-        RareEarthHydroxidesSolution = new Material.Builder(18000, gregtechId("rare_earth_hydroxides_solution"))
-                .fluid()
-                .color(0x434327)
-                .flags(DISABLE_DECOMPOSITION)
-                .components(RareEarth, 1, Oxygen, 1, Hydrogen, 1, Water, 1)
-                .build();
+
 
         RareEarthChloridesSolution = new Material.Builder(18001, gregtechId("rare_earth_chlorides_solution"))
                 .fluid()

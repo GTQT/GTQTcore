@@ -333,14 +333,6 @@ public class BiochemChains {
         CHEMICAL_RECIPES.recipeBuilder()
                 .duration(145)
                 .EUt(VA[EV])
-                .fluidInputs(Acetaldehyde.getFluid(1000)) //TODO: RECIPE
-                .notConsumable(dust, TriphenylMethoxytriazole)
-                .fluidOutputs(Acetoin.getFluid(1000))
-                .buildAndRegister();
-
-        CHEMICAL_RECIPES.recipeBuilder()
-                .duration(145)
-                .EUt(VA[EV])
                 .input(dust, Sodium)
                 .fluidInputs(Methanol.getFluid(1000))
                 .output(dust, SodiumMethoxide, 6)

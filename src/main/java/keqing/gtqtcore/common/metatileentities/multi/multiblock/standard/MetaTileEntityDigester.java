@@ -142,6 +142,9 @@ public class MetaTileEntityDigester extends RecipeMapMultiblockController {
         public int getParallelLimit() {
             return getMaxParallel(heatingCoilLevel);
         }
+        public void setMaxProgress(int maxProgress) {
+            this.maxProgressTime = maxProgress*(100-heatingCoilLevel)/100;
+        }
 
         protected void modifyOverclockPost(int[] resultOverclock, @Nonnull IRecipePropertyStorage storage) {
             super.modifyOverclockPost(resultOverclock, storage);

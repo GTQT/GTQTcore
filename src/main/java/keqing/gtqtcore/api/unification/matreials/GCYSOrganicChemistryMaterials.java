@@ -134,7 +134,7 @@ public class GCYSOrganicChemistryMaterials {
                 .build();
 
         TetramethylammoniumChloride = new Material.Builder(15018, gregtechId("tetramethylammonium_chloride"))
-                .dust()
+                .dust().fluid()
                 .color(0x27FF81)
                 .flags(DISABLE_DECOMPOSITION)
                 .iconSet(MaterialIconSet.METALLIC)
