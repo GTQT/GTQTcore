@@ -252,10 +252,19 @@ public class OilChains {
                 .fluidOutputs(SulfuricGas.getFluid(200))
                 .duration(200).EUt(60).buildAndRegister();
 
+        DISTILLATION_RECIPES.recipeBuilder()
+                .fluidInputs(GasOil.getFluid(2000))
+                .fluidOutputs(SDieselLight.getFluid(800))
+                .fluidOutputs(SDieselHeavy.getFluid(800))
+                .fluidOutputs(SulfuricGas.getFluid(400))
+                .fluidOutputs(Butane.getFluid(200))
+                .fluidOutputs(Propene.getFluid(200))
+                .fluidOutputs(Butene.getFluid(200))
+                .duration(400).EUt(60).buildAndRegister();
+
 
         DISTILLATION_KETTLE.recipeBuilder()
                 .fluidInputs(Distilledgasoline.getFluid(2000))
-                .notConsumable(dust,ZincCl)
                 .fluidOutputs(Methane.getFluid(200))
                 .fluidOutputs(Ethanol.getFluid(200))
                 .fluidOutputs(Propane.getFluid(200))

@@ -270,34 +270,34 @@ public class CommonProxy {
         for(int i=1;i<=100;i++) BRProperty.registeredRate(i, String.valueOf(i));
         PAPartProperty.registeredPart(11234,"一级 + 1234");
 
-        PACasingTierProperty.registerPACasingTier(1, I18n.format("gtqtcore.machine.precise_assembler.tier.1"));
-        PACasingTierProperty.registerPACasingTier(2, I18n.format("gtqtcore.machine.precise_assembler.tier.2"));
-        PACasingTierProperty.registerPACasingTier(3, I18n.format("gtqtcore.machine.precise_assembler.tier.3"));
+        PACasingTierProperty.registerPACasingTier(1, "1");
+        PACasingTierProperty.registerPACasingTier(2, "2");
+        PACasingTierProperty.registerPACasingTier(3,"3");
 
         PCBPartProperty.registeredPart(1,"微生物培养仓");
         PCBPartProperty.registeredPart(2,"化学辅助计算机");
         FusionEUToStartProperty.registerFusionTier(9, "(MK4)");
         FusionEUToStartProperty.registerFusionTier(10, "(MK5)");
         FusionEUToStartProperty.registerFusionTier(11, "(MK6)");
-        QFTCasingTierProperty.registerQFTCasingTier(1, I18n.format("gtqtcore.machine.quantum_force_transformer.tier.1"));
-        QFTCasingTierProperty.registerQFTCasingTier(2, I18n.format("gtqtcore.machine.quantum_force_transformer.tier.2"));
-        QFTCasingTierProperty.registerQFTCasingTier(3, I18n.format("gtqtcore.machine.quantum_force_transformer.tier.3"));
-        QFTCasingTierProperty.registerQFTCasingTier(4, I18n.format("gtqtcore.machine.quantum_force_transformer.tier.4"));
+        QFTCasingTierProperty.registerQFTCasingTier(1, "1");
+        QFTCasingTierProperty.registerQFTCasingTier(2, "2");
+        QFTCasingTierProperty.registerQFTCasingTier(3, "3");
+        QFTCasingTierProperty.registerQFTCasingTier(4, "4");
 
-        CACasingTierProperty.registerCACasingTier(1, I18n.format("gtqtcore.machine.component_assembly_line.tier.1"));
-        CACasingTierProperty.registerCACasingTier(2, I18n.format("gtqtcore.machine.component_assembly_line.tier.2"));
-        CACasingTierProperty.registerCACasingTier(3, I18n.format("gtqtcore.machine.component_assembly_line.tier.3"));
-        CACasingTierProperty.registerCACasingTier(4, I18n.format("gtqtcore.machine.component_assembly_line.tier.4"));
-        CACasingTierProperty.registerCACasingTier(5, I18n.format("gtqtcore.machine.component_assembly_line.tier.5"));
-        CACasingTierProperty.registerCACasingTier(6, I18n.format("gtqtcore.machine.component_assembly_line.tier.6"));
-        CACasingTierProperty.registerCACasingTier(7, I18n.format("gtqtcore.machine.component_assembly_line.tier.7"));
-        CACasingTierProperty.registerCACasingTier(8, I18n.format("gtqtcore.machine.component_assembly_line.tier.8"));
-        CACasingTierProperty.registerCACasingTier(9, I18n.format("gtqtcore.machine.component_assembly_line.tier.9"));
-        CACasingTierProperty.registerCACasingTier(10, I18n.format("gtqtcore.machine.component_assembly_line.tier.10"));
-        CACasingTierProperty.registerCACasingTier(11, I18n.format("gtqtcore.machine.component_assembly_line.tier.11"));
-        CACasingTierProperty.registerCACasingTier(12, I18n.format("gtqtcore.machine.component_assembly_line.tier.12"));
-        CACasingTierProperty.registerCACasingTier(13, I18n.format("gtqtcore.machine.component_assembly_line.tier.13"));
-        CACasingTierProperty.registerCACasingTier(14, I18n.format("gtqtcore.machine.component_assembly_line.tier.14"));
+        CACasingTierProperty.registerCACasingTier(1, "1");
+        CACasingTierProperty.registerCACasingTier(2, "2");
+        CACasingTierProperty.registerCACasingTier(3, "3");
+        CACasingTierProperty.registerCACasingTier(4, "4");
+        CACasingTierProperty.registerCACasingTier(5, "5");
+        CACasingTierProperty.registerCACasingTier(6, "6");
+        CACasingTierProperty.registerCACasingTier(7, "7");
+        CACasingTierProperty.registerCACasingTier(8, "8");
+        CACasingTierProperty.registerCACasingTier(9, "9");
+        CACasingTierProperty.registerCACasingTier(10, "10");
+        CACasingTierProperty.registerCACasingTier(11, "11");
+        CACasingTierProperty.registerCACasingTier(12, "12");
+        CACasingTierProperty.registerCACasingTier(13, "13");
+        CACasingTierProperty.registerCACasingTier(14, "14");
     }
 
 }

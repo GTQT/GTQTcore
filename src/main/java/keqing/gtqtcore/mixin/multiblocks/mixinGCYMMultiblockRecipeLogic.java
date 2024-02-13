@@ -16,8 +16,9 @@ public abstract class mixinGCYMMultiblockRecipeLogic  extends MultiblockRecipeLo
     }
 
     public int getParallelLimit() {
-        return this.metaTileEntity instanceof IParallelMultiblock && ((IParallelMultiblock)this.metaTileEntity).isParallel() ? ((IParallelMultiblock)this.metaTileEntity).getMaxParallel() : 1;
+        return ((IParallelMultiblock)this.metaTileEntity).isParallel() ? ((IParallelMultiblock)this.metaTileEntity).getMaxParallel() : 1;
     }
+
 
     @Override
    public void setMaxProgress(int maxProgress)

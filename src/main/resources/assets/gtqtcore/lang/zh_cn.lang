@@ -297,6 +297,8 @@ gtqtcore.machine.parallel_hatch.uhv.name=并行控制仓（§4UHV§r）
 gtqtcore.machine.parallel_hatch.uev.name=并行控制仓（§aUEV§r）
 gtqtcore.machine.parallel_hatch.uiv.name=并行控制仓（§2UIV§r）
 gtqtcore.machine.parallel_hatch.uxv.name=并行控制仓（§eUXV§r）
+gtqtcore.machine.parallel_hatch.opv.name=并行控制仓（§eOPV§r）
+gtqtcore.machine.parallel_hatch.max.name=并行控制仓（§eMAX§r）
 
 metaitem.mold.gas.name=气缸铸模
 metaitem.mold.motor.name=传动轴铸模

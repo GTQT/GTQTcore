@@ -390,16 +390,18 @@ public class GTQTMetaTileEntities {
             WIRELESS_EMERGY_HATCH_TRANSMITTER[i] = registerMetaTileEntity(15530 + i-1, new MetaTileEntityWirelessEnergyHatch(gtqtcoreId("wireless_energy_hatch.transmitter." + tierName), i,  true));
         }
 
-        registerMetaTileEntity(15541, new MetaTileEntityParallelHatch(gtqtcoreId(String.format("parallel_hatch.%s", GTValues.VN[9])), 9));
-        registerMetaTileEntity(15542, new MetaTileEntityParallelHatch(gtqtcoreId(String.format("parallel_hatch.%s", GTValues.VN[10])), 10));
-        registerMetaTileEntity(15543, new MetaTileEntityParallelHatch(gtqtcoreId(String.format("parallel_hatch.%s", GTValues.VN[11])), 11));
-        registerMetaTileEntity(15544, new MetaTileEntityParallelHatch(gtqtcoreId(String.format("parallel_hatch.%s", GTValues.VN[12])), 12));
-        INF_WATER_HATCH = registerMetaTileEntity(15545,new MetaTileInfWaterHatch(gtqtcoreId("infinite_water_hatch")));
-        CATALYST_HATCH = registerMetaTileEntity(15546,new MetaTileEntityCatalystHatch(gtqtcoreId("catalyst_hatch")));
-        MULTIPART_BUFFER_HATCH = registerMetaTileEntity(15547, new MetaTileEntityBufferHatch(gtqtcoreId("buffer_hatch")));
-        MULTIPART_BALL_HATCH = registerMetaTileEntity(15548, new MetaTileEntityMillBallHatch(gtqtcoreId("mill_ball_hatch")));
-        EDATA_ACCESS_HATCH = registerMetaTileEntity(15549, new MetaTileEntityDataAccessHatch(gtqtcoreId("edata_access_hatch"), GTValues.MV, false));
-        FDATA_ACCESS_HATCH = registerMetaTileEntity(15550, new MetaTileEntityDataAccessHatch(gtqtcoreId("fdata_access_hatch"), GTValues.UV, false));
+        registerMetaTileEntity(15541, new keqing.gtqtcore.common.metatileentities.multi.multiblockpart.MetaTileEntityParallelHatch(gtqtcoreId(String.format("parallel_hatch.%s", GTValues.VN[9])), 9));
+        registerMetaTileEntity(15542, new keqing.gtqtcore.common.metatileentities.multi.multiblockpart.MetaTileEntityParallelHatch(gtqtcoreId(String.format("parallel_hatch.%s", GTValues.VN[10])), 10));
+        registerMetaTileEntity(15543, new keqing.gtqtcore.common.metatileentities.multi.multiblockpart.MetaTileEntityParallelHatch(gtqtcoreId(String.format("parallel_hatch.%s", GTValues.VN[11])), 11));
+        registerMetaTileEntity(15544, new keqing.gtqtcore.common.metatileentities.multi.multiblockpart.MetaTileEntityParallelHatch(gtqtcoreId(String.format("parallel_hatch.%s", GTValues.VN[12])), 12));
+        registerMetaTileEntity(15545, new keqing.gtqtcore.common.metatileentities.multi.multiblockpart.MetaTileEntityParallelHatch(gtqtcoreId(String.format("parallel_hatch.%s", GTValues.VN[13])), 13));
+        registerMetaTileEntity(15546, new keqing.gtqtcore.common.metatileentities.multi.multiblockpart.MetaTileEntityParallelHatch(gtqtcoreId(String.format("parallel_hatch.%s", GTValues.VN[14])), 14));
+        INF_WATER_HATCH = registerMetaTileEntity(15547,new MetaTileInfWaterHatch(gtqtcoreId("infinite_water_hatch")));
+        CATALYST_HATCH = registerMetaTileEntity(15548,new MetaTileEntityCatalystHatch(gtqtcoreId("catalyst_hatch")));
+        MULTIPART_BUFFER_HATCH = registerMetaTileEntity(15549, new MetaTileEntityBufferHatch(gtqtcoreId("buffer_hatch")));
+        MULTIPART_BALL_HATCH = registerMetaTileEntity(15550, new MetaTileEntityMillBallHatch(gtqtcoreId("mill_ball_hatch")));
+        EDATA_ACCESS_HATCH = registerMetaTileEntity(15551, new MetaTileEntityDataAccessHatch(gtqtcoreId("edata_access_hatch"), GTValues.MV, false));
+        FDATA_ACCESS_HATCH = registerMetaTileEntity(15552, new MetaTileEntityDataAccessHatch(gtqtcoreId("fdata_access_hatch"), GTValues.UV, false));
 
         ROTOR_HOLDER[6] = registerMetaTileEntity(16000, new MetaTileEntityRotorHolder(gtqtcoreId("rotor_holder.uhv"), GTValues.UHV));
         ROTOR_HOLDER[7] = registerMetaTileEntity(16001, new MetaTileEntityRotorHolder(gtqtcoreId("rotor_holder.uev"), GTValues.UEV));
