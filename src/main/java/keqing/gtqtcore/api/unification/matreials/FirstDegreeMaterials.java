@@ -539,6 +539,7 @@ public class FirstDegreeMaterials {
         GTQTMaterials.Ealuminium = new Material.Builder(getMaterialsId(), gregtechId("ealuminium"))
                 .fluid().dust()
                 .color(0xd89045).iconSet(SHINY)
+                .flags(DISABLE_DECOMPOSITION)
                 .components(Aluminium ,1)
                 .build();
 

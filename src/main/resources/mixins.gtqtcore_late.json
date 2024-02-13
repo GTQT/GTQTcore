@@ -9,15 +9,12 @@
     "biomesoplenty.MixinBiomesOPlenty",
     "gregtech.MixinSolarBoilerServer",
     "gregtech.MixinSteamBoilerAccess",
-    "gregtech.MixinMetaTileEntityDataAccessHatch",
     "gregtech.MixinWorkableTieredMetaTileEntity",
     "multiblocks.mixinGCYMRecipeMapMultiblockController",
     "multiblocks.mixinGCYMMultiblockRecipeLogic",
-    "gregtech.MixinSimpleGeneratorMetaTileEntity",
     "gregtech.MixinGlassCasingType",
     "gregtech.MixinMetaTileEntityFluidHatch",
-    "gregtech.MixinMetaTileEntityItemBus",
-    "gregtech.MixinMetaItemClient"
+    "gregtech.MixinMetaTileEntityItemBus"
   ],
   "server": [],
   "client": [

@@ -187,6 +187,7 @@ public class EPMaterialFlagAddition {
         RedAlloy.addFlags(GENERATE_RING,GENERATE_GEAR);
         Carbon.addFlags(GENERATE_ROD);
         Graphite.setProperty(PropertyKey.FLUID, new FluidProperty());
+        Graphite.setProperty(PropertyKey.INGOT, new IngotProperty());
         Magnesium.addFlags(GENERATE_PLATE,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_ROTOR,GENERATE_ROD,GENERATE_SPRING,GENERATE_GEAR,GENERATE_FRAME);
     }
 }

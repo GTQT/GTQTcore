@@ -170,7 +170,7 @@ public class OilChains {
                 .fluidOutputs(WoodGas.getFluid(1000))
                 .fluidOutputs(WoodVinegar.getFluid(2000))
                 .fluidOutputs(Creosote.getFluid(3000))
-                .duration(2000).EUt(120)
+                .duration(2000).EUt(60)
                 .buildAndRegister();
 
         DISTILLATION_KETTLE.recipeBuilder()
@@ -182,7 +182,7 @@ public class OilChains {
                 .fluidOutputs(WoodGas.getFluid(1000))
                 .fluidOutputs(WoodVinegar.getFluid(2000))
                 .fluidOutputs(Creosote.getFluid(3000))
-                .duration(2000).EUt(120)
+                .duration(2000).EUt(60)
                 .buildAndRegister();
 
 

@@ -34,6 +34,7 @@ import keqing.gtqtcore.common.metatileentities.multi.multiblock.steam.MetaTileEn
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.steam.MetaTileEntitySteamCompressor;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.steam.MetaTileEntitySteamOreWasher;
 import keqing.gtqtcore.common.metatileentities.multi.multiblockpart.*;
+import keqing.gtqtcore.common.metatileentities.multi.multiblockpart.MetaTileEntityDataAccessHatch;
 
 import java.util.function.IntFunction;
 import java.util.function.IntPredicate;
@@ -232,12 +233,12 @@ public class GTQTMetaTileEntities {
         ROCKET_ENGINE[1] = registerMetaTileEntity(3007, new SimpleGeneratorMetaTileEntity(gtqtcoreId("rocket_engine.iv"), GTQTcoreRecipeMaps.ROCKET, GTQTTextures.ROCKET_ENGINE_OVERLAY, 5, genericGeneratorTankSizeFunction));
         ROCKET_ENGINE[2] = registerMetaTileEntity(3008, new SimpleGeneratorMetaTileEntity(gtqtcoreId("rocket_engine.luv"), GTQTcoreRecipeMaps.ROCKET, GTQTTextures.ROCKET_ENGINE_OVERLAY, 6, genericGeneratorTankSizeFunction));
 
-        COMBUSTION_GENERATOR[0] = registerMetaTileEntity(3009, new MetaTileEntitySingleCombustion(gtqtcoreId("combustion_generator.ev"), RecipeMaps.COMBUSTION_GENERATOR_FUELS, Textures.COMBUSTION_GENERATOR_OVERLAY, 4, genericGeneratorTankSizeFunction));
-        COMBUSTION_GENERATOR[1] = registerMetaTileEntity(3010, new MetaTileEntitySingleCombustion(gtqtcoreId("combustion_generator.iv"), RecipeMaps.COMBUSTION_GENERATOR_FUELS, Textures.COMBUSTION_GENERATOR_OVERLAY, 5, genericGeneratorTankSizeFunction));
-        STEAM_TURBINE[0] = registerMetaTileEntity(3011, new MetaTileEntitySingleTurbine(gtqtcoreId("steam_turbine.ev"), RecipeMaps.STEAM_TURBINE_FUELS, Textures.STEAM_TURBINE_OVERLAY, 4, GTUtility.steamGeneratorTankSizeFunction));
-        STEAM_TURBINE[1] = registerMetaTileEntity(3012, new MetaTileEntitySingleTurbine(gtqtcoreId("steam_turbine.iv"), RecipeMaps.STEAM_TURBINE_FUELS, Textures.STEAM_TURBINE_OVERLAY, 5, GTUtility.steamGeneratorTankSizeFunction));
-        GAS_TURBINE[0] = registerMetaTileEntity(3013, new MetaTileEntitySingleTurbine(gtqtcoreId("gas_turbine.ev"), RecipeMaps.GAS_TURBINE_FUELS, Textures.GAS_TURBINE_OVERLAY, 4, genericGeneratorTankSizeFunction));
-        GAS_TURBINE[1] = registerMetaTileEntity(3014, new MetaTileEntitySingleTurbine(gtqtcoreId("gas_turbine.iv"), RecipeMaps.GAS_TURBINE_FUELS, Textures.GAS_TURBINE_OVERLAY, 5, genericGeneratorTankSizeFunction));
+        COMBUSTION_GENERATOR[0] = registerMetaTileEntity(3009, new SimpleGeneratorMetaTileEntity(gtqtcoreId("combustion_generator.ev"), RecipeMaps.COMBUSTION_GENERATOR_FUELS, Textures.COMBUSTION_GENERATOR_OVERLAY, 4, genericGeneratorTankSizeFunction));
+        COMBUSTION_GENERATOR[1] = registerMetaTileEntity(3010, new SimpleGeneratorMetaTileEntity(gtqtcoreId("combustion_generator.iv"), RecipeMaps.COMBUSTION_GENERATOR_FUELS, Textures.COMBUSTION_GENERATOR_OVERLAY, 5, genericGeneratorTankSizeFunction));
+        STEAM_TURBINE[0] = registerMetaTileEntity(3011, new SimpleGeneratorMetaTileEntity(gtqtcoreId("steam_turbine.ev"), RecipeMaps.STEAM_TURBINE_FUELS, Textures.STEAM_TURBINE_OVERLAY, 4, GTUtility.steamGeneratorTankSizeFunction));
+        STEAM_TURBINE[1] = registerMetaTileEntity(3012, new SimpleGeneratorMetaTileEntity(gtqtcoreId("steam_turbine.iv"), RecipeMaps.STEAM_TURBINE_FUELS, Textures.STEAM_TURBINE_OVERLAY, 5, GTUtility.steamGeneratorTankSizeFunction));
+        GAS_TURBINE[0] = registerMetaTileEntity(3013, new SimpleGeneratorMetaTileEntity(gtqtcoreId("gas_turbine.ev"), RecipeMaps.GAS_TURBINE_FUELS, Textures.GAS_TURBINE_OVERLAY, 4, genericGeneratorTankSizeFunction));
+        GAS_TURBINE[1] = registerMetaTileEntity(3014, new SimpleGeneratorMetaTileEntity(gtqtcoreId("gas_turbine.iv"), RecipeMaps.GAS_TURBINE_FUELS, Textures.GAS_TURBINE_OVERLAY, 5, genericGeneratorTankSizeFunction));
 
         //发电设备 多方块
         EFUSION_REACTOR[0] = registerMetaTileEntity(3050, new MetaTileEntityEFusionReactor(gtqtcoreId("fusion_reactor.luv"), GTValues.LuV));

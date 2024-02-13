@@ -179,13 +179,6 @@ public class RareEarthProcessing {
     }
 
     private static void lite() {
-        DIGESTER_RECIPES.recipeBuilder()
-                .input(dust, RareEarth)
-                .fluidInputs(DiethylhexylPhosphoricAcid.getFluid(100))
-                .fluidInputs(Water.getFluid(900))
-                .fluidOutputs(RareEarthHydroxidesSolution.getFluid(1000))
-                .duration(120).EUt(VA[IV]).buildAndRegister();
-
         CHEMICAL_RECIPES.recipeBuilder()
                 .fluidInputs(RareEarthHydroxidesSolution.getFluid(1000))
                 .notConsumable(PROTONATED_FULLERENE_SIEVING_MATRIX)

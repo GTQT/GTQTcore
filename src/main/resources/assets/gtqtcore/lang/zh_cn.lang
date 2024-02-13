@@ -1227,7 +1227,7 @@ tile.multiblock_casing.tech_fusion_glass_6.name=强化高阶聚变玻璃
 gregtech.material.csilicon=太阳能级多晶硅
 gregtech.material.copper_cl=氯化铜
 gregtech.material.fluix=FLUIX
-gregtech.material.ealuminium=不知道什么铝
+gregtech.material.ealuminium=软铝
 
 gregtech.material.len_gold_bs=焙烧贫瘠金含杂
 gregtech.material.len_gold_js=沉浸含硫金溶液

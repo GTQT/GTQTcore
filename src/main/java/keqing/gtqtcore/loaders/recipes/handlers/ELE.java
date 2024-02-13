@@ -146,7 +146,7 @@ public class ELE {
                 .inputs(HULL[1].getStackForm())
                 .input(ELECTRIC_MOTOR_LV, 8)
                 .input(circuit, MarkerMaterials.Tier.LV,1)
-                .input(electrode,Steel, 8)
+                .input(electrode,Graphite, 8)
                 .fluidInputs(Polyethylene.getFluid(L * 4))
                 .outputs(GTQTMetaBlocks.ELECTROBATH.getItemVariant(GTQTElectrobath.CasingType.I_ELECTROBATH))
                 .duration(2000).EUt(30).buildAndRegister();

@@ -10,9 +10,15 @@ import gregtech.api.metatileentity.multiblock.ICleanroomProvider;
 import gregtech.api.metatileentity.multiblock.ICleanroomReceiver;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.client.renderer.ICubeRenderer;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.List;
 import java.util.function.Function;
 
 import static gregtech.api.GTValues.VA;

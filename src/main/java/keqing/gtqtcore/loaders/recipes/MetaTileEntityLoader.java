@@ -11,6 +11,7 @@ import gregtech.api.unification.material.properties.IngotProperty;
 import gregtech.api.unification.material.properties.PropertyKey;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.UnificationEntry;
+import gregtech.common.blocks.BlockMachineCasing;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.BlockSteamCasing;
 import gregtech.common.blocks.MetaBlocks;
@@ -35,6 +36,7 @@ import static gregtech.api.unification.material.Materials.YttriumBariumCuprate;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.common.blocks.BlockMetalCasing.MetalCasingType.*;
 import static gregtech.common.blocks.BlockWireCoil.CoilType.CUPRONICKEL;
+import static gregtech.common.blocks.MetaBlocks.MACHINE_CASING;
 import static gregtech.common.blocks.MetaBlocks.OPTICAL_PIPES;
 import static gregtech.common.items.MetaItems.*;
 import static gregtech.common.metatileentities.MetaTileEntities.*;
@@ -43,6 +45,7 @@ import static gregtech.loaders.recipe.CraftingComponent.*;
 import static gregtech.loaders.recipe.CraftingComponent.CABLE_QUAD;
 import static gregtech.loaders.recipe.MetaTileEntityLoader.registerMachineRecipe;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.CSilicon;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.RedstoneAlloy;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.*;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.*;
@@ -51,6 +54,13 @@ import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.*;
 public class MetaTileEntityLoader {
 
     public static void init() {
+        ModHandler.addShapedRecipe(true, "ulv_casing", HULL[0].getStackForm(),
+                "ABA", "CHC","ABA",
+                'H', MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.ULV),
+                'C', new UnificationEntry(wireGtSingle, Lead),
+                'B', new UnificationEntry(plate, Iron),
+                'A', new UnificationEntry(plate, RedAlloy));
+
         ModHandler.addShapedRecipe(true, "item_input_hatch", ITEM_IMPORT_BUS[0].getStackForm(),
                 "MC", "hc",
                 'M', MetaTileEntities.HULL[GTValues.ULV].getStackForm(),
@@ -239,6 +249,14 @@ public class MetaTileEntityLoader {
                 "BCB", "FMF", "BCB", 'M', MetaTileEntities.HULL[GTValues.LV].getStackForm(), 'B',
                 new UnificationEntry(OrePrefix.pipeLargeFluid, Steel), 'C',
                 new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.LV), 'F', MetaItems.ELECTRIC_PUMP_LV);
+
+
+        ModHandler.addShapedRecipe(true, "septic_tank", GTQTMetaTileEntities.SEPTIC_TANK.getStackForm(),
+                "BFB", "CMC", "BFB", 'M', MetaTileEntities.HULL[GTValues.LV].getStackForm(), 'B',
+                new UnificationEntry(OrePrefix.pipeLargeFluid, Steel), 'C',
+                new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.LV), 'F', MetaItems.ELECTRIC_PUMP_LV);
+
+
 
         ModHandler.addShapedRecipe(true, "oil_poll", GTQTMetaTileEntities.OIL_POOL.getStackForm(),
                 "FFF", "BMB", "CCC", 'M', MetaTileEntities.HULL[GTValues.LV].getStackForm(), 'B',
