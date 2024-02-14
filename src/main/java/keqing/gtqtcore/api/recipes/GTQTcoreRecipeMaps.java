@@ -101,7 +101,6 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<BRRecioeBuilder> BIOLOGICAL_REACTION_RECIPES;
     public static final RecipeMap<PHRecipeBuilder> FERMENTATION_TANK_RECIPES;
     public static final RecipeMap<FuelRecipeBuilder> NAQUADAH_REACTOR_RECIPES;
-    public static final RecipeMap<FuelRecipeBuilder> TURBINE_COMBUSTION_CHAMBER;
     public static final RecipeMap<SimpleRecipeBuilder> FUEL_REFINE_FACTORY_RECIPES;
     public static final RecipeMap<FuelRecipeBuilder> ROCKET;
     public static final RecipeMap<FuelRecipeBuilder> NAQUADAH_REACTOR;
@@ -306,10 +305,6 @@ public class GTQTcoreRecipeMaps {
         //  Large Heat Exchanger Recipemap
         HEAT_EXCHANGE_RECIPES = new RecipeMap<>("heat_exchanger_recipes", 0, 0, 2, 3, new FlowRateRecipeBuilder(), false)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARC_FURNACE, ProgressWidget.MoveType.HORIZONTAL);
-
-        TURBINE_COMBUSTION_CHAMBER = new RecipeMap<>("turbine_combustion_chamber",
-                0, 0, 1, 1, new FuelRecipeBuilder(), false)
-                .allowEmptyOutput();
 
         ROCKET = new RecipeMap<>("rocket",
                 0, 0, 1, 0, new FuelRecipeBuilder(), false)

@@ -23,6 +23,7 @@ import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.TooltipHelper;
 import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
+import keqing.gtqtcore.api.metaileentity.multiblock.GTQTRecipeMapMultiblockOverwrite;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.recipes.properties.ELEProperties;
@@ -43,8 +44,9 @@ import java.util.List;
 
 import static gregtech.api.GTValues.VA;
 import static gregtech.api.unification.material.Materials.HydrochloricAcid;
+import static gregtech.api.unification.material.Materials.Lubricant;
 
-public class MetaTileEntityElectrobath extends RecipeMapMultiblockController {
+public class MetaTileEntityElectrobath extends GTQTRecipeMapMultiblockOverwrite {
 
     private int eleTier;
     private int casingTier;
@@ -63,7 +65,26 @@ public class MetaTileEntityElectrobath extends RecipeMapMultiblockController {
             }
         }
     }
+    FluidStack KEEP_OPEN = Lubricant.getFluid(1);
+    @Override
+    public void update() {
+        super.update();
+        IMultipleTankHandler inputTank = getInputFluidInventory();
+        if (KEEP_OPEN.isFluidStackIdentical(inputTank.drain(KEEP_OPEN, false))) {
+            if(modern==0)modern=1;
+        }
+        if (modern == 1)
+        {
+            P = (int) ((this.energyContainer.getEnergyStored() + energyContainer.getInputPerSec()) / getMinVa());
+            ParallelNum = Math.min(P, ParallelLim);
+        }
+    }
+    public int getMinVa()
+    {
+        if((Math.min(this.energyContainer.getEnergyCapacity()/32,VA[tier])*20)==0)return 1;
+        return (int)(Math.min(this.energyContainer.getEnergyCapacity()/32,VA[tier]));
 
+    }
     @Override
     @Nonnull
     protected Widget getFlexButton(int x, int y, int width, int height) {
@@ -157,6 +178,9 @@ public class MetaTileEntityElectrobath extends RecipeMapMultiblockController {
             textList.add(new TextComponentTranslation("gtqtcore.equal", casingTier,tubeTier));
         textList.add(new TextComponentTranslation("gtqtcore.eleTire",tier, eleTier,GTValues.V[tier]));
         textList.add(new TextComponentTranslation("gregtech.multiblock.ele.1", 5*eleTier,eu,clean));
+        if(modern==0) textList.add(new TextComponentTranslation("gtqtcore.tire1",clean));
+        if(modern==1) textList.add(new TextComponentTranslation("gtqtcore.tire2",clean));
+        textList.add(new TextComponentTranslation("gtqtcore.parr",ParallelNum,ParallelLim));
         if (getInputFluidInventory() != null) {
             FluidStack STACK = getInputFluidInventory().drain(HydrochloricAcid.getFluid(Integer.MAX_VALUE), false);
             int liquidOxygenAmount = STACK == null ? 0 : STACK.amount;
@@ -240,6 +264,8 @@ public class MetaTileEntityElectrobath extends RecipeMapMultiblockController {
         this.tier = Math.min(this.casingTier,this.tubeTier);
 
         this.writeCustomData(GTQTValue.UPDATE_TIER,buf -> buf.writeInt(this.tier));
+        ParallelLim=2*clean;
+        ParallelNum=ParallelLim;
     }
 
     public static int getMaxParallel(int clean) {
@@ -253,7 +279,7 @@ public class MetaTileEntityElectrobath extends RecipeMapMultiblockController {
 
         @Override
         public int getParallelLimit() {
-            return getMaxParallel(clean);
+            return clean;
         }
 
         FluidStack COLD_STACK = HydrochloricAcid.getFluid(1);

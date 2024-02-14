@@ -6,6 +6,7 @@ import codechicken.lib.vec.Matrix4;
 import gregtech.api.GTValues;
 import gregtech.api.GregTechAPI;
 import gregtech.api.block.IHeatingCoilBlockStats;
+import gregtech.api.capability.IMultipleTankHandler;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
@@ -29,6 +30,7 @@ import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.capability.GTQTCapabilities;
 import keqing.gtqtcore.api.capability.chemical_plant.ChemicalPlantProperties;
+import keqing.gtqtcore.api.metaileentity.multiblock.GTQTRecipeMapMultiblockOverwrite;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.utils.GTQTUniverUtil;
@@ -45,6 +47,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -54,8 +57,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 import static gregtech.api.GTValues.VA;
+import static gregtech.api.unification.material.Materials.Lubricant;
 
-public class MetaTileEntityChemicalPlant extends RecipeMapMultiblockController {
+public class MetaTileEntityChemicalPlant extends GTQTRecipeMapMultiblockOverwrite {
 
     private int coilLevel;
     private int casingTier;
@@ -68,7 +72,26 @@ public class MetaTileEntityChemicalPlant extends RecipeMapMultiblockController {
         super(metaTileEntityId, GTQTcoreRecipeMaps.CHEMICAL_PLANT);
         this.recipeMapWorkable = new ChemicalPlantLogic(this);
     }
+    FluidStack KEEP_OPEN = Lubricant.getFluid(1);
+    @Override
+    public void update() {
+        super.update();
+        IMultipleTankHandler inputTank = getInputFluidInventory();
+        if (KEEP_OPEN.isFluidStackIdentical(inputTank.drain(KEEP_OPEN, false))) {
+            if(modern==0)modern=1;
+        }
+        if (modern == 1)
+        {
+            P = (int) ((this.energyContainer.getEnergyStored() + energyContainer.getInputPerSec()) / getMinVa());
+            ParallelNum = Math.min(P, ParallelLim);
+        }
+    }
+    public int getMinVa()
+    {
+        if((Math.min(this.energyContainer.getEnergyCapacity()/32,VA[tier])*20)==0)return 1;
+        return (int)(Math.min(this.energyContainer.getEnergyCapacity()/32,VA[tier]));
 
+    }
     @SuppressWarnings("SpellCheckingInspection")
     @Override
     protected BlockPattern createStructurePattern() {
@@ -141,7 +164,9 @@ public class MetaTileEntityChemicalPlant extends RecipeMapMultiblockController {
         textList.add(new TextComponentTranslation("gtqtcore.tubeTire", tubeTier));
         if(casingTier!=tubeTier)
             textList.add(new TextComponentTranslation("gtqtcore.equal", casingTier,tubeTier));
-        textList.add(new TextComponentTranslation("gtqtcore.tire", tier));
+        if(modern==0) textList.add(new TextComponentTranslation("gtqtcore.tire1",tier));
+        if(modern==1) textList.add(new TextComponentTranslation("gtqtcore.tire2",tier));
+        textList.add(new TextComponentTranslation("gtqtcore.parr",ParallelNum,ParallelLim));
     }
 
     @Override
@@ -210,6 +235,8 @@ public class MetaTileEntityChemicalPlant extends RecipeMapMultiblockController {
         this.tier = Math.min(this.casingTier,this.tubeTier);
 
         this.writeCustomData(GTQTValue.UPDATE_TIER,buf -> buf.writeInt(this.casingTier));
+        ParallelLim=(int)Math.pow(2, tier);
+        ParallelNum=ParallelLim;
     }
 
     @Override
@@ -257,7 +284,7 @@ public class MetaTileEntityChemicalPlant extends RecipeMapMultiblockController {
 
         @Override
         public int getParallelLimit() {
-            return 2 * tubeTier;
+            return ParallelNum;
         }
 
 

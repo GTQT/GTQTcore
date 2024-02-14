@@ -1,5 +1,6 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.overwrite;
 
+import gregtech.api.capability.IMultipleTankHandler;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
@@ -20,9 +21,9 @@ import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiFluidHatch;
 import gregtech.common.metatileentities.multi.multiblockpart.appeng.MetaTileEntityMEOutputHatch;
 import gregtech.core.sound.GTSoundEvents;
-
 import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
+import keqing.gtqtcore.api.metaileentity.multiblock.GTQTRecipeMapMultiblockOverwrite;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
@@ -39,14 +40,14 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import java.util.List;
 import java.util.function.Function;
 
 import static gregtech.api.GTValues.VA;
+import static gregtech.api.unification.material.Materials.Lubricant;
 import static gregtech.api.util.RelativeDirection.*;
 
-public class MetaTileEntityDistillationTower extends RecipeMapMultiblockController {
+public class MetaTileEntityDistillationTower extends GTQTRecipeMapMultiblockOverwrite {
 
     private int tier;
     private int casingTier;
@@ -71,7 +72,26 @@ public class MetaTileEntityDistillationTower extends RecipeMapMultiblockControll
         return new MetaTileEntityDistillationTower(metaTileEntityId);
 
     }
+    FluidStack KEEP_OPEN = Lubricant.getFluid(1);
+    @Override
+    public void update() {
+        super.update();
+        IMultipleTankHandler inputTank = getInputFluidInventory();
+        if (KEEP_OPEN.isFluidStackIdentical(inputTank.drain(KEEP_OPEN, false))) {
+            if(modern==0)modern=1;
+        }
+        if (modern == 1)
+        {
+            P = (int) ((this.energyContainer.getEnergyStored() + energyContainer.getInputPerSec()) / getMinVa());
+            ParallelNum = Math.min(P, ParallelLim);
+        }
+    }
+    public int getMinVa()
+    {
+        if((Math.min(this.energyContainer.getEnergyCapacity()/32,VA[tier])*20)==0)return 1;
+        return (int)(Math.min(this.energyContainer.getEnergyCapacity()/32,VA[tier]));
 
+    }
     public class DistillationTowerLogic extends MultiblockRecipeLogic {
         public DistillationTowerLogic(RecipeMapMultiblockController tileEntity) {
             super(tileEntity,true);
@@ -85,7 +105,7 @@ public class MetaTileEntityDistillationTower extends RecipeMapMultiblockControll
         }
         @Override
         public int getParallelLimit() {
-            return (int) Math.pow(2, casingTier);
+            return ParallelNum;
         }
     }
     @Override
@@ -121,12 +141,16 @@ public class MetaTileEntityDistillationTower extends RecipeMapMultiblockControll
                         fluidName));
             }
         }
-        super.addDisplayText(textList);
+        if(modern==0) textList.add(new TextComponentTranslation("gtqtcore.tire1",tier));
+        if(modern==1) textList.add(new TextComponentTranslation("gtqtcore.tire2",tier));
+        textList.add(new TextComponentTranslation("gtqtcore.parr",ParallelNum,ParallelLim));
         if(casingTier!=tubeTier)
             textList.add(new TextComponentTranslation("gtqtcore.equal", casingTier,tubeTier));
-        textList.add(new TextComponentTranslation("gtqtcore.tire", tier));
         textList.add(new TextComponentTranslation("gtqtcore.multiblock.fu.level", 5 * tier));
+        super.addDisplayText(textList);
+
     }
+
 
     @Override
     protected BlockPattern createStructurePattern() {
@@ -212,6 +236,8 @@ public class MetaTileEntityDistillationTower extends RecipeMapMultiblockControll
         this.tier = Math.min(this.casingTier,this.tubeTier);
 
         this.writeCustomData(GTQTValue.UPDATE_TIER,buf -> buf.writeInt(this.tier));
+        ParallelLim=(int)Math.pow(2, tier);
+        ParallelNum=ParallelLim;
     }
 
     protected IBlockState getCasingState() {

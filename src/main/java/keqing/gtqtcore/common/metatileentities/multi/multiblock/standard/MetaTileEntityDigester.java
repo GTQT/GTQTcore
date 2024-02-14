@@ -1,6 +1,7 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
 import gregtech.api.block.IHeatingCoilBlockStats;
+import gregtech.api.capability.IMultipleTankHandler;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
@@ -17,6 +18,7 @@ import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
+import keqing.gtqtcore.api.metaileentity.multiblock.GTQTRecipeMapMultiblockOverwrite;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import net.minecraft.block.state.IBlockState;
@@ -26,6 +28,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -33,7 +36,10 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class MetaTileEntityDigester extends RecipeMapMultiblockController {
+import static gregtech.api.GTValues.VA;
+import static gregtech.api.unification.material.Materials.Lubricant;
+
+public class MetaTileEntityDigester extends GTQTRecipeMapMultiblockOverwrite {
     private int coilTier;
     protected int heatingCoilLevel;
     protected int heatingCoilDiscount;
@@ -41,7 +47,26 @@ public class MetaTileEntityDigester extends RecipeMapMultiblockController {
         super(metaTileEntityId, GTQTcoreRecipeMaps.DIGESTER_RECIPES);
         this.recipeMapWorkable = new MetaTileEntityDigesterWorkable(this);
     }
+    FluidStack KEEP_OPEN = Lubricant.getFluid(1);
+    @Override
+    public void update() {
+        super.update();
+        IMultipleTankHandler inputTank = getInputFluidInventory();
+        if (KEEP_OPEN.isFluidStackIdentical(inputTank.drain(KEEP_OPEN, false))) {
+            if(modern==0)modern=1;
+        }
+        if (modern == 1)
+        {
+            P = (int) ((this.energyContainer.getEnergyStored() + energyContainer.getInputPerSec()) / getMinVa());
+            ParallelNum = Math.min(P, ParallelLim);
+        }
+    }
+    public int getMinVa()
+    {
+        if((Math.min(this.energyContainer.getEnergyCapacity()/32,VA[coilTier])*20)==0)return 1;
+        return (int)(Math.min(this.energyContainer.getEnergyCapacity()/32,VA[coilTier]));
 
+    }
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {
         return new MetaTileEntityDigester(metaTileEntityId);
@@ -50,7 +75,9 @@ public class MetaTileEntityDigester extends RecipeMapMultiblockController {
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         if (isStructureFormed()) {
-            textList.add(new TextComponentTranslation("gtqtcore.multiblock.md.level", heatingCoilLevel));
+            if(modern==0) textList.add(new TextComponentTranslation("gtqtcore.tire1",heatingCoilLevel));
+            if(modern==1) textList.add(new TextComponentTranslation("gtqtcore.tire2",heatingCoilLevel));
+            textList.add(new TextComponentTranslation("gtqtcore.parr",ParallelNum,ParallelLim));
             textList.add(new TextComponentTranslation("gregtech.multiblock.cracking_unit.energy", 100 - this.coilTier));
         }
         super.addDisplayText(textList);
@@ -100,6 +127,9 @@ public class MetaTileEntityDigester extends RecipeMapMultiblockController {
             this.heatingCoilLevel = BlockWireCoil.CoilType.CUPRONICKEL.getLevel();
             this.heatingCoilDiscount = BlockWireCoil.CoilType.CUPRONICKEL.getEnergyDiscount();
         }
+
+        ParallelLim=(int)Math.pow(2, coilTier);
+        ParallelNum=ParallelLim;
     }
     private static IBlockState getCasingAState() {
         return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.TUNGSTENSTEEL_ROBUST);
@@ -140,7 +170,7 @@ public class MetaTileEntityDigester extends RecipeMapMultiblockController {
 
         @Override
         public int getParallelLimit() {
-            return getMaxParallel(heatingCoilLevel);
+            return ParallelNum;
         }
         public void setMaxProgress(int maxProgress) {
             this.maxProgressTime = maxProgress*(100-heatingCoilLevel)/100;

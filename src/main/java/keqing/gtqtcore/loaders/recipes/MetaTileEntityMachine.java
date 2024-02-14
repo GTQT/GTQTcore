@@ -11,6 +11,8 @@ import gregtech.api.unification.stack.ItemMaterialInfo;
 import gregtech.api.unification.stack.MaterialStack;
 import gregtech.api.unification.stack.UnificationEntry;
 import gregtech.common.blocks.BlockMachineCasing;
+import gregtech.common.blocks.BlockSteamCasing;
+import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.items.MetaItems;
 import gregtech.common.metatileentities.MetaTileEntities;
 import gregtech.core.unification.material.internal.MaterialRegistryManager;
@@ -37,6 +39,7 @@ import static gregtech.loaders.recipe.MetaTileEntityLoader.registerMachineRecipe
 import static keqing.gtqtcore.api.unification.GTQTMaterials.Infinity;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.GalvanizedSteel;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.plate_curved;
+import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing1.TurbineCasingType.GALVANIZE_STEEL_CASING;
 
 public class MetaTileEntityMachine {
     static int L=144;
@@ -47,7 +50,18 @@ public class MetaTileEntityMachine {
         removeOldMachines();
         registerElectric();
        registerGalvanizedSteel();
+       machinecasing();
     }
+
+    private static void machinecasing() {
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(50).EUt(30)
+                .input(plate,GalvanizedSteel, 6)
+                .input(frameGt,GalvanizedSteel, 1)
+                .circuitMeta(6)
+                .outputs(GTQTMetaBlocks.TURBINE_CASING1.getItemVariant(GALVANIZE_STEEL_CASING))
+                .buildAndRegister();
+    }
+
     private static void VanillaOverrideRecipes() {
         //  Iron bucket
         ModHandler.removeRecipeByName("gregtech:iron_bucket");

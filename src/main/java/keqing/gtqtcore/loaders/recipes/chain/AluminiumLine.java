@@ -55,9 +55,9 @@ public class AluminiumLine {
                 .fluidInputs(Cryolite.getFluid(1440))
                 .output(dust,Ealuminium,10)
                 .fluidOutputs(Cryolite.getFluid(288))
-                .EUt(180)
+                .EUt(120)
                 .tier(1)
-                .duration(800)
+                .duration(400)
                 .buildAndRegister();
 
 

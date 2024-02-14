@@ -28,6 +28,7 @@ import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
 import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.metatileentities.MetaTileEntities;
+import keqing.gtqtcore.api.metaileentity.multiblock.GTQTRecipeMapMultiblockOverwrite;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing;
@@ -51,9 +52,11 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+import static gregtech.api.GTValues.VA;
 import static gregtech.api.recipes.RecipeMaps.BLAST_RECIPES;
+import static gregtech.api.unification.material.Materials.Lubricant;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.Pyrotheum;
-public class MetaTileEntityBlazingBlastFurnace extends RecipeMapMultiblockController implements IHeatingCoil {
+public class MetaTileEntityBlazingBlastFurnace extends GTQTRecipeMapMultiblockOverwrite implements IHeatingCoil {
     private int blastFurnaceTemperature;
     protected static int heatingCoilLevel;
     protected int heatingCoilDiscount;
@@ -68,8 +71,26 @@ public class MetaTileEntityBlazingBlastFurnace extends RecipeMapMultiblockContro
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity metaTileEntityHolder) {
         return new MetaTileEntityBlazingBlastFurnace(this.metaTileEntityId);
     }
+    FluidStack KEEP_OPEN = Lubricant.getFluid(1);
+    @Override
+    public void update() {
+        super.update();
+        IMultipleTankHandler inputTank = getInputFluidInventory();
+        if (KEEP_OPEN.isFluidStackIdentical(inputTank.drain(KEEP_OPEN, false))) {
+            if(modern==0)modern=1;
+        }
+        if (modern == 1)
+        {
+            P = (int) ((this.energyContainer.getEnergyStored() + energyContainer.getInputPerSec()) / getMinVa());
+            ParallelNum = Math.min(P, ParallelLim);
+        }
+    }
+    public int getMinVa()
+    {
+        if((Math.min(this.energyContainer.getEnergyCapacity()/32,VA[3])*20)==0)return 1;
+        return (int)(Math.min(this.energyContainer.getEnergyCapacity()/32,VA[3]));
 
-
+    }
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
@@ -84,7 +105,8 @@ public class MetaTileEntityBlazingBlastFurnace extends RecipeMapMultiblockContro
             this.heatingCoilLevel = BlockWireCoil.CoilType.CUPRONICKEL.getLevel();
             this.heatingCoilDiscount = BlockWireCoil.CoilType.CUPRONICKEL.getEnergyDiscount();
         }
-
+        ParallelLim=(int)Math.pow(2, 3);
+        ParallelNum=ParallelLim;
         this.blastFurnaceTemperature += 100 * Math.max(0, GTUtility.getTierByVoltage(getEnergyContainer().getInputVoltage()) - GTValues.MV);
     }
 
@@ -172,8 +194,10 @@ public class MetaTileEntityBlazingBlastFurnace extends RecipeMapMultiblockContro
                 }
             textList.add(new TextComponentTranslation("gregtech.multiblock.blast_furnace.max_temperature", blastFurnaceTemperature)
             .setStyle(new Style().setColor(TextFormatting.RED)));
-            textList.add(new TextComponentTranslation("gregtech.multiblock.multi_furnace.heating_coil_level", heatingCoilLevel));
             textList.add(new TextComponentTranslation("gregtech.multiblock.multi_furnace.heating_coil_discount", heatingCoilDiscount));
+            if(modern==0) textList.add(new TextComponentTranslation("gtqtcore.tire1",heatingCoilLevel));
+            if(modern==1) textList.add(new TextComponentTranslation("gtqtcore.tire2",heatingCoilLevel));
+            textList.add(new TextComponentTranslation("gtqtcore.parr",ParallelNum,ParallelLim));
         }
         super.addDisplayText(textList);
     }
@@ -243,7 +267,7 @@ public class MetaTileEntityBlazingBlastFurnace extends RecipeMapMultiblockContro
 
         @Override
         public int getParallelLimit() {
-            return getMaxParallel(heatingCoilLevel);
+            return ParallelNum;
         }
         protected void updateRecipeProgress() {
             if (canRecipeProgress && drawEnergy(recipeEUt, true)) {

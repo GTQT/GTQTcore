@@ -2,6 +2,7 @@ package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
 import gregicality.science.common.block.GCYSMetaBlocks;
 import gregicality.science.common.block.blocks.BlockTransparentCasing;
+import gregtech.api.capability.IMultipleTankHandler;
 import gregtech.api.capability.IOpticalComputationHatch;
 import gregtech.api.capability.IOpticalComputationProvider;
 import gregtech.api.capability.impl.ComputationRecipeLogic;
@@ -22,6 +23,7 @@ import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
+import keqing.gtqtcore.api.metaileentity.multiblock.GTQTRecipeMapMultiblockOverwrite;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.utils.GTQTUtil;
@@ -29,7 +31,10 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidTank;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -40,8 +45,9 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 import static gregtech.api.GTValues.VA;
+import static gregtech.api.unification.material.Materials.Lubricant;
 
-public class MetaTileEntityDissolutionTank extends RecipeMapMultiblockController {
+public class MetaTileEntityDissolutionTank extends GTQTRecipeMapMultiblockOverwrite {
     public MetaTileEntityDissolutionTank(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.DISSOLUTION_TANK_RECIPES);
         this.recipeMapWorkable = new DissolutionTankWorkableHandler(this);
@@ -51,7 +57,26 @@ public class MetaTileEntityDissolutionTank extends RecipeMapMultiblockController
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {
         return new MetaTileEntityDissolutionTank(metaTileEntityId);
     }
+    FluidStack KEEP_OPEN = Lubricant.getFluid(1);
+    @Override
+    public void update() {
+        super.update();
+        IMultipleTankHandler inputTank = getInputFluidInventory();
+        if (KEEP_OPEN.isFluidStackIdentical(inputTank.drain(KEEP_OPEN, false))) {
+            if(modern==0)modern=1;
+        }
+        if (modern == 1)
+        {
+            P = (int) ((this.energyContainer.getEnergyStored() + energyContainer.getInputPerSec()) / getMinVa());
+            ParallelNum = Math.min(P, ParallelLim);
+        }
+    }
+    public int getMinVa()
+    {
+        if((Math.min(this.energyContainer.getEnergyCapacity()/32,VA[glass_tier])*20)==0)return 1;
+        return (int)(Math.min(this.energyContainer.getEnergyCapacity()/32,VA[glass_tier]));
 
+    }
     @Override
     public boolean checkRecipe(@Nonnull Recipe recipe, boolean consumeIfSuccess) {
         if (super.checkRecipe(recipe, consumeIfSuccess)) {
@@ -126,6 +151,8 @@ public class MetaTileEntityDissolutionTank extends RecipeMapMultiblockController
         this.glass_tier = GTQTUtil.getOrDefault(() -> glass_tier instanceof WrappedIntTired,
                 () -> ((WrappedIntTired)glass_tier).getIntTier(),
                 0);
+        ParallelLim=(int)Math.pow(2, this.glass_tier);
+        ParallelNum=ParallelLim;
     }
     private static IBlockState getCasingAState() {
         return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STAINLESS_CLEAN);
@@ -153,6 +180,15 @@ public class MetaTileEntityDissolutionTank extends RecipeMapMultiblockController
         super.addInformation(stack, world, tooltip, advanced);
         tooltip.add(I18n.format("epimorphism.machine.dissolution_tank.tooltip.1"));
     }
+    @Override
+    protected void addDisplayText(List<ITextComponent> textList) {
+        if (isStructureFormed()) {
+            if(modern==0) textList.add(new TextComponentTranslation("gtqtcore.tire1",glass_tier));
+            if(modern==1) textList.add(new TextComponentTranslation("gtqtcore.tire2",glass_tier));
+            textList.add(new TextComponentTranslation("gtqtcore.parr",ParallelNum,ParallelLim));
+        }
+        super.addDisplayText(textList);
+    }
 
     protected class DissolutionTankWorkableHandler extends MultiblockRecipeLogic {
         public DissolutionTankWorkableHandler(RecipeMapMultiblockController tileEntity) {
@@ -170,7 +206,7 @@ public class MetaTileEntityDissolutionTank extends RecipeMapMultiblockController
 
         @Override
         public int getParallelLimit() {
-            return glass_tier;
+            return ParallelNum;
         }
     }
 }

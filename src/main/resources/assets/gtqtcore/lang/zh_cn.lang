@@ -440,6 +440,11 @@ gtqtcore.multiblock.large_combustion_engine.no_water=水储量不足
 gtqtcore.multiblock.large_combustion_engine.obstructed=进气口被阻挡
 gtqtcore.equal=外壳等级：%s与管道等级：%s等级不一致！将默认使用最低等级！
 gtqtcore.tire=多方块等级：%s
+gtqtcore.tire1=多方块等级：%s 模式：§c 手动
+gtqtcore.tire2=多方块等级：%s 模式：§a 自动（提供润滑油保持）
+gregtech.multiblock.hand.throttle_decrement=§c切换到手动并行
+gregtech.multiblock.hand.throttle_increment=§a切换到自动并行
+gtqtcore.parr=实际并行：%s/%s
 gtqtcore.vtire=支持的配方最高电压：%s V
 gtqtcore.tubeTire=管道等级：%s
 gtqtcore.casingTire=外壳等级：%s
@@ -771,6 +776,9 @@ gtqtcore.multiblock.paa.threshold_increment=调整偏转角
 
 gtqtcore.multiblock.kqn.threshold_decrement=§c选取向前 1
 gtqtcore.multiblock.kqn.threshold_increment=§a选取向后 1
+
+gregtech.multiblock.parr.throttle_decrement=§c并行增加单位
+gregtech.multiblock.parr.throttle_increment=§a并行减少单位
 
 gtqtcore.multiblock.kqn.threshold_decrement1=§c选取向前 10
 gtqtcore.multiblock.kqn.threshold_increment1=§a选取向后 10
