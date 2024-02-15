@@ -29,13 +29,9 @@ import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.overwri
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.star.MetaTileEntityPlasmaForge;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.star.MetaTileEntityStarBiomimeticFactory;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.star.MetaTileEntityStarMixer;
-import keqing.gtqtcore.common.metatileentities.multi.multiblock.steam.MetaTileEntitySteamExtractor;
-import keqing.gtqtcore.common.metatileentities.multi.multiblock.steam.MetaTileEntitySteamBlastFurnace;
-import keqing.gtqtcore.common.metatileentities.multi.multiblock.steam.MetaTileEntitySteamCompressor;
-import keqing.gtqtcore.common.metatileentities.multi.multiblock.steam.MetaTileEntitySteamOreWasher;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.steam.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblockpart.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblockpart.MetaTileEntityDataAccessHatch;
-
 import java.util.function.IntFunction;
 import java.util.function.IntPredicate;
 import java.util.function.IntSupplier;
@@ -113,6 +109,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntitySteamCompressor STEAM_COMPRESSOR;
     public static  MetaTileEntityStepper STEPPER;
     public static MetaTileEntitySteamExtractor STEAM_EXTRACTOR;
+    public static MetaTileEntitySteamHammer STEAM_HAMMER;
     public static MetaTileEntityHugeCrackingUnit HUGE_CRACKING_UNIT;
     public static MetaTileEntityHugeMiner BASIC_HUGE_MINER;
     public static MetaTileEntityHugeMiner HUGE_MINER;
@@ -123,7 +120,6 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityHyperReactorMk1 HYPER_REACTOR_MK1;
     public static MetaTileEntityHyperReactorMk2 HYPER_REACTOR_MK2;
     public static MetaTileEntityHyperReactorMk3 HYPER_REACTOR_MK3;
-
     public static MetaTileEntityFracturing BASIC_FLUID_DRILLING_RIG;
     public static MetaTileEntitySepticTank SEPTIC_TANK;
     public static MetaTileEntityIsaMill ISA_MILL;
@@ -189,6 +185,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityReactionFurnace REACTION_FURNACE;
     public static MetaTileEntityChemicalPlant CHEMICAL_PLANT;
     public static MetaTileEntityLaserEngraving LASER_ENGRAVING;
+    public static MetaTileEntityWaterPowerStation WATER_POWER_STATION;
     public static MetaTileEntityWirelessEnergyHatch[] WIRELESS_EMERGY_HATCH_RECEIVER= new MetaTileEntityWirelessEnergyHatch[11];
     public static MetaTileEntityWirelessEnergyHatch[] WIRELESS_EMERGY_HATCH_TRANSMITTER= new MetaTileEntityWirelessEnergyHatch[11];
     public static final MetaTileEntityRotorHolder[] ROTOR_HOLDER = new MetaTileEntityRotorHolder[12]; //HV, EV, IV, LuV, ZPM, UV
@@ -261,13 +258,15 @@ public class GTQTMetaTileEntities {
         SOLAR_PLATE = registerMetaTileEntity(3062, new MetaTileEntitySolarPlate(gtqtcoreId("solar_plate")));
 
         I_MODULAR_FISSION_REACTOR = registerMetaTileEntity(3063, new MetaTileEntityIModularFissionReactor(gtqtcoreId("i_modular_fission_reactor"),5));
+        WATER_POWER_STATION = registerMetaTileEntity(3064, new MetaTileEntityWaterPowerStation(gtqtcoreId("water_power_station")));
         //早期设备
         ALLOY_KILN = registerMetaTileEntity(3100, new MetaTileEntityAlloykiln(gtqtcoreId("alloy_klin")));
         STEAM_COMPRESSOR = registerMetaTileEntity(3101, new MetaTileEntitySteamCompressor(gtqtcoreId("steam_compressor")));
         STEAM_EXTRACTOR = registerMetaTileEntity(3102, new MetaTileEntitySteamExtractor(gtqtcoreId("steam_extractor")));
         STEAM_BLAST_FURANCE = registerMetaTileEntity(3103, new MetaTileEntitySteamBlastFurnace(gtqtcoreId("steam_blast_furance")));
         STEAM_ORE_WASHER = registerMetaTileEntity(3104, new MetaTileEntitySteamOreWasher(gtqtcoreId("steam_ore_washer")));
-        INDUSTRIAL_PRIMITIVE_BLAST_FURNACE = registerMetaTileEntity(3105, new MetaTileEntityIndustrialPrimitiveBlastFurnace(gtqtcoreId("industrial_primitive_blast_furnace")));
+        STEAM_HAMMER = registerMetaTileEntity(3105, new MetaTileEntitySteamHammer(gtqtcoreId("steam_hammer")));
+        INDUSTRIAL_PRIMITIVE_BLAST_FURNACE = registerMetaTileEntity(3106, new MetaTileEntityIndustrialPrimitiveBlastFurnace(gtqtcoreId("industrial_primitive_blast_furnace")));
         //正常设备
         DISSOLUTION_TANK = registerMetaTileEntity(3150, new MetaTileEntityDissolutionTank(gtqtcoreId("dissolution_tank")));
         BLAZING_BLAST_FURNACE = registerMetaTileEntity(3151, new MetaTileEntityBlazingBlastFurnace(gtqtcoreId("blazing_blast_furnace")));
@@ -335,7 +334,6 @@ public class GTQTMetaTileEntities {
         STAR_BIOMIMETIC_FACTORY= registerMetaTileEntity(3350, new MetaTileEntityStarBiomimeticFactory(gtqtcoreId("star_biomimetic_factory")));
         PLASMA_FORGE= registerMetaTileEntity(3351, new MetaTileEntityPlasmaForge(gtqtcoreId("plasma_forge")));
         STAR_MIXER= registerMetaTileEntity(3352, new MetaTileEntityStarMixer(gtqtcoreId("star_mixer")));
-
         //资源产出
         BASIC_FLUID_DRILLING_RIG = registerMetaTileEntity(3400, new MetaTileEntityFracturing(gtqtcoreId("fracturing.iv"), 5));
         FLUID_DRILLING_RIG = registerMetaTileEntity(3401, new MetaTileEntityFracturing(gtqtcoreId("fracturing.luv"), 6));

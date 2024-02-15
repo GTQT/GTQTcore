@@ -131,9 +131,6 @@ public class MetaTileEntityPCB extends RecipeMapMultiblockController {
         return false;
     }
 
-
-
-
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()

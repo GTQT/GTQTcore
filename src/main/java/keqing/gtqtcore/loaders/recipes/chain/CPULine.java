@@ -51,7 +51,7 @@ public class CPULine {
                 .fluidOutputs(Tetrafluoroethylene.getFluid(1000))
                 .duration(120).EUt(240).buildAndRegister();
         //
-        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+        ASSEMBLER_RECIPES.recipeBuilder()
                 .inputs(HULL[2].getStackForm(4))
                 .input(EMITTER_MV, 4)
                 .input(SENSOR_MV, 4)
@@ -59,15 +59,11 @@ public class CPULine {
                 .input(plate, Invar, 32)
                 .input(gear, Aluminium, 8)
                 .input(OPTICAL_PIPES[0], 8)
-                .fluidInputs(SolderingAlloy.getFluid(L * 4))
                 .fluidInputs(PolyvinylChloride.getFluid(L * 4))
                 .output(GTQTMetaTileEntities.STEPPER)
-                .scannerResearch(b -> b
-                        .researchStack(GTQTMetaBlocks.STEPPER.getItemVariant(LASER_MKI))
-                        .EUt(VA[MV]))
                 .duration(200).EUt(120).buildAndRegister();
 
-        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+        ASSEMBLER_RECIPES.recipeBuilder()
                 .inputs(HULL[2].getStackForm(4))
                 .input(EMITTER_MV, 4)
                 .input(FIELD_GENERATOR_MV, 4)
@@ -75,12 +71,8 @@ public class CPULine {
                 .input(plate, Invar, 32)
                 .input(gear, Aluminium, 8)
                 .input(OPTICAL_PIPES[0], 8)
-                .fluidInputs(SolderingAlloy.getFluid(L * 4))
                 .fluidInputs(PolyvinylChloride.getFluid(L * 4))
                 .output(GTQTMetaTileEntities.LASER_ENGRAVING)
-                .scannerResearch(b -> b
-                        .researchStack(GTQTMetaBlocks.STEPPER.getItemVariant(F_LASER_MKI))
-                        .EUt(VA[MV]))
                 .duration(200).EUt(120).buildAndRegister();
 
 
@@ -563,7 +555,7 @@ public class CPULine {
 
         LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[EV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8)
                 .fluidInputs(Water.getFluid(10000))
-                .notConsumable(craftingLens, Color.LightGray).output(RETICLE_RANDOM_ACCESS_MEMORY)
+                .notConsumable(craftingLens, Color.Red).output(RETICLE_RANDOM_ACCESS_MEMORY)
                 .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
 
         LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8)
@@ -574,12 +566,12 @@ public class CPULine {
 
         LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8)
                 .fluidInputs(Water.getFluid(10000))
-                .notConsumable(craftingLens, Color.Red).output(RETICLE_CENTRAL_PROCESSING_UNIT)
+                .notConsumable(craftingLens, Color.LightGray).output(RETICLE_CENTRAL_PROCESSING_UNIT)
                 .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
 
         LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8)
                 .fluidInputs(Water.getFluid(10000))
-                .notConsumable(craftingLens, Color.Brown).output(RETICLE_LOW_POWER_INTEGRATED_CIRCUIT)
+                .notConsumable(craftingLens, Color.LightBlue).output(RETICLE_LOW_POWER_INTEGRATED_CIRCUIT)
                 .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
 
         LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[HV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8)
@@ -599,12 +591,12 @@ public class CPULine {
 
         LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[HV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8)
                 .fluidInputs(Water.getFluid(10000))
-                .notConsumable(craftingLens, Color.Green).output(RETICLE_POWER_INTEGRATED_CIRCUIT)
+                .notConsumable(craftingLens, Color.Brown).output(RETICLE_POWER_INTEGRATED_CIRCUIT)
                 .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
 
         LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[HV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8)
                 .fluidInputs(Water.getFluid(10000))
-                .notConsumable(craftingLens, Color.LightBlue).output(RETICLE_QBIT_CENTRAL_PROCESSING_UNIT)
+                .notConsumable(craftingLens, Color.Yellow).output(RETICLE_QBIT_CENTRAL_PROCESSING_UNIT)
                 .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
 
         LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[EV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8)
@@ -622,9 +614,9 @@ public class CPULine {
                 .notConsumable(craftingLens, Color.White).output(RETICLE_ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT)
                 .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
 
-        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[EV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8)
+        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8)
                 .fluidInputs(Water.getFluid(10000))
-                .notConsumable(craftingLens, Color.Yellow).output(RETICLE_ULTRA_LOW_POWER_INTEGRATED_CIRCUIT)
+                .notConsumable(craftingLens, Color.Green).output(RETICLE_ULTRA_LOW_POWER_INTEGRATED_CIRCUIT)
                 .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
 
         LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[EV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8)
@@ -800,7 +792,7 @@ public class CPULine {
                 .EUt(30)
                 .input(IMPREGNATED_GRAPHITE_RODS)
                 .input(dust,Graphite,16)
-                .fluidInputs(Asphalt.getFluid(2000))
+                .fluidInputs(Asphalt.getFluid(500))
                 .output(IMPREGNATED_GRAPHITE_RODSA)
                 .buildAndRegister();
 

@@ -43,6 +43,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -212,7 +213,17 @@ public class MetaTileEntityAlloykiln extends NoEnergyMultiblockController {
             }
         }
     }
+    @Override
+    public void writeInitialSyncData(PacketBuffer buf) {
+        super.writeInitialSyncData(buf);
+        buf.writeInt(this.temp);
+    }
 
+    @Override
+    public void receiveInitialSyncData(PacketBuffer buf) {
+        super.receiveInitialSyncData(buf);
+        this.temp = buf.readInt();
+    }
     protected class AKLogic extends NoEnergyMultiblockRecipeLogic {
 
         FluidStack HEAT_STACK = Lava.getFluid(1);
@@ -224,17 +235,17 @@ public class MetaTileEntityAlloykiln extends NoEnergyMultiblockController {
                 IMultipleTankHandler inputTank = getInputFluidInventory();
                 if (HEAT_STACK.isFluidStackIdentical(inputTank.drain(HEAT_STACK, false))) {
                     inputTank.drain(HEAT_STACK, true);
-                    temp = temp + 20;
+                    temp = temp + 400;
                 }
             }
             if(temp>80000){temp=temp-2;cost=4;}
-            if(temp>60000){temp=temp-2;cost=3;}
-            if(temp>40000){temp=temp-2;cost=2;}
-            if(temp>30000){temp=temp-2;cost=1;}
+            else if(temp>60000){temp=temp-2;cost=3;}
+            else if(temp>40000){temp=temp-2;cost=2;}
+            else if(temp>30000){temp=temp-2;cost=1;}
         }
 
         public void setMaxProgress(int maxProgress) {
-            this.maxProgressTime = maxProgress*(100-cost*10)/100;
+            this.maxProgressTime = maxProgress*(100-cost*20)/100;
 
         }
 

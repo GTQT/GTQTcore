@@ -20,6 +20,7 @@ import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.recipes.recipeproperties.IRecipePropertyStorage;
+import gregtech.api.util.GTTransferUtils;
 import gregtech.api.util.RelativeDirection;
 import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
@@ -32,6 +33,7 @@ import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.recipes.properties.LASERNetProperty;
 import keqing.gtqtcore.api.recipes.properties.SEProperty;
 import keqing.gtqtcore.api.unification.GTQTMaterials;
+import keqing.gtqtcore.api.utils.GTQTLog;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
@@ -53,7 +55,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.List;
+
+import static keqing.gtqtcore.common.items.GTQTMetaItems.MINING_DRONE_LV;
+import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 
 
 public class MetaTileEntitySpaceElevator extends MultiMapMultiblockController implements IOpticalComputationReceiver {
@@ -62,7 +68,7 @@ public class MetaTileEntitySpaceElevator extends MultiMapMultiblockController im
         return this.computationProvider;
     }
     private int motortier;
-
+    int coe = 0;
     private int Atier;// 矿机
     private int Btier;// 超频
     private int Ctier;// 耗能
@@ -89,6 +95,71 @@ public class MetaTileEntitySpaceElevator extends MultiMapMultiblockController im
         }
         return false;
     }
+    private int getCoe() {
+        var slots = this.getInputInventory().getSlots();
+        for (int i = 0; i < slots; i++) {
+            ItemStack item =  this.getInputInventory().getStackInSlot(i);
+            if(item.getDisplayName().equals("轨道采集器（§7LV§r）"))
+            {
+                GTQTLog.logger.info("into 1");
+                return 1;
+            }
+            if(item.getDisplayName().equals("轨道采集器（§bMV§r）"))
+            {
+                GTQTLog.logger.info("into 2");
+                return 2;
+            }
+            if(item.getDisplayName().equals("轨道采集器（§6HV§r）"))
+            {
+                return 3;
+            }
+            if(item.getDisplayName().equals("轨道采集器（§5EV§r）"))
+            {
+                return 4;
+            }
+            if(item.getDisplayName().equals("轨道采集器（§1IV§r）"))
+            {
+                return 5;
+            }
+            if(item.getDisplayName().equals("轨道采集器（§dLuV§r）"))
+            {
+                return 6;
+            }
+            if(item.getDisplayName().equals("轨道采集器（§cZPM§r）"))
+            {
+                return 7;
+            }
+            if(item.getDisplayName().equals("轨道采集器（§3UV§r）"))
+            {
+                return 8;
+            }
+            if(item.getDisplayName().equals("轨道采集器（§4UHV§r）"))
+            {
+                return 9;
+            }
+            if(item.getDisplayName().equals("轨道采集器（§aUEV§r）"))
+            {
+                return 10;
+            }
+            if(item.getDisplayName().equals("轨道采集器（§2UIV§r）"))
+            {
+                return 11;
+            }
+            if(item.getDisplayName().equals("轨道采集器（§eUXV§r）"))
+            {
+                return 12;
+            }
+            if(item.getDisplayName().equals("轨道采集器（§9OpV§r）"))
+            {
+                return 13;
+            }
+            if(item.getDisplayName().equals("轨道采集器（§c§lMAX§r）"))
+            {
+                return 14;
+            }
+        }
+        return 0;
+    }
 
     @Override
     @Nonnull
@@ -110,8 +181,6 @@ public class MetaTileEntitySpaceElevator extends MultiMapMultiblockController im
     private void decrementThreshold(Widget.ClickData clickData) {
         this.dim = MathHelper.clamp(dim - 1, 0, motortier*2);
     }
-
-
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntitySpaceElevator(metaTileEntityId);
@@ -157,7 +226,7 @@ public class MetaTileEntitySpaceElevator extends MultiMapMultiblockController im
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
-        textList.add(new TextComponentTranslation("gtqtcore.multiblock.se.motor",motortier,dim));
+        textList.add(new TextComponentTranslation("gtqtcore.multiblock.se.motor",motortier,dim,getCoe()));
         textList.add(new TextComponentTranslation("gtqtcore.multiblock.se.abcdn"));
         textList.add(new TextComponentTranslation("gtqtcore.multiblock.se.abcd",Atier,Btier,Ctier,Dtier));
 
@@ -332,6 +401,30 @@ public class MetaTileEntitySpaceElevator extends MultiMapMultiblockController im
 
         public void setMaxProgress(int maxProgress) {
             this.maxProgressTime = maxProgress*(100-Btier*10);
+        }
+
+        @Override
+        protected void outputRecipeOutputs() {
+            int outNum = getCoe();
+            setOutPutItem(outNum);
+            GTTransferUtils.addItemsToItemHandler(this.getOutputInventory(), false, this.itemOutputs);
+            GTTransferUtils.addFluidsToFluidHandler(this.getOutputTank(), false, this.fluidOutputs);
+        }
+        private void setOutPutItem(int num)
+        {
+            if(num !=0)
+            {
+                List<ItemStack> MyitemOutputs = new ArrayList<>();
+                for (ItemStack item: this.itemOutputs
+                ) {
+                    int group = num/64;
+                    for (int i = 0; i < group; i++) {
+                        MyitemOutputs.add(new ItemStack(item.getItem(),64));
+                    }
+                    MyitemOutputs.add(new ItemStack(item.getItem(),num%64));
+                }
+                GTTransferUtils.addItemsToItemHandler(this.getOutputInventory(), false, MyitemOutputs);
+            }
         }
 
         @Override

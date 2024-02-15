@@ -263,8 +263,8 @@ public class MetaTileEntityIndustrialPrimitiveBlastFurnace extends NoEnergyMulti
             if(Temp<10000) return 2;
             if(Temp<15000) return 4;
             if(Temp<20000) return 8;
-            if(Temp<25000) return 12;
-            else return 16;
+            if(Temp<25000) return 16;
+            else return 24;
         }
     }
     @Override

@@ -148,10 +148,11 @@ public class OilChains {
                 .duration(100)
                 .EUt(30)
                 .circuitMeta(1)
+                .input(dust,Sodium,10)
                 .fluidInputs(Stearin.getFluid(1000))
                 .fluidInputs(EthyleneOxide.getFluid(1000))
                 .fluidInputs(PropyleneOxide.getFluid(1000))
-                .fluidOutputs(Demulsifier.getFluid(3000))
+                .fluidOutputs(Demulsifier.getFluid(6000))
                 .buildAndRegister();
         //氯乙醇
         CHEMICAL_RECIPES.recipeBuilder()
@@ -205,6 +206,18 @@ public class OilChains {
                 .fluidOutputs(Hydrogen.getFluid(1000))
                 .fluidOutputs(HydrogenPeroxide.getFluid(1000))
                 .fluidOutputs(AmmoniumSulfate.getFluid(2000))
+                .buildAndRegister();
+
+        CHEMICAL_RECIPES.recipeBuilder()
+                .duration(100)
+                .EUt(30)
+                .notConsumable(plate,Steel,1)
+                .circuitMeta(1)
+                .fluidInputs(Ethanol.getFluid(1000))
+                .fluidInputs(Air.getFluid(1000))
+                .output(dust,Ash,2)
+                .fluidOutputs(Hydrogen.getFluid(4000))
+                .fluidOutputs(HydrogenPeroxide.getFluid(500))
                 .buildAndRegister();
 
         //含杂预处理
@@ -311,7 +324,7 @@ public class OilChains {
                 .fluidOutputs(Hydrogen.getFluid(1000))
                 .fluidOutputs(Nitrogen.getFluid(1000))
                 .fluidOutputs(CarbonDioxide.getFluid(2000))
-                .duration(4000).EUt(60).buildAndRegister();
+                .duration(400).EUt(30).buildAndRegister();
 
         DISTILLATION_KETTLE.recipeBuilder()
                 .fluidInputs(FermentedBiomass.getFluid(2000))
@@ -376,7 +389,7 @@ public class OilChains {
                 .fluidOutputs(Butane.getFluid(200))
                 .fluidOutputs(Propene.getFluid(200))
                 .fluidOutputs(Butene.getFluid(200))
-                .duration(400).EUt(60).buildAndRegister();
+                .duration(400).EUt(30).buildAndRegister();
 
 
         DISTILLATION_KETTLE.recipeBuilder()
@@ -397,7 +410,7 @@ public class OilChains {
                 .fluidOutputs(Butane.getFluid(500))
                 .fluidOutputs(Propene.getFluid(500))
                 .fluidOutputs(Butene.getFluid(500))
-                .duration(300).EUt(60).buildAndRegister();
+                .duration(300).EUt(30).buildAndRegister();
         //煤油
         DISTILLATION_KETTLE.recipeBuilder()
                 .fluidInputs(CoalTar.getFluid(2000))
@@ -411,13 +424,12 @@ public class OilChains {
         //煤油
         DISTILLATION_RECIPES.recipeBuilder()
                 .fluidInputs(CoalTar.getFluid(2000))
-                .chancedOutput(dust, Coke, 2500, 0)
                 .fluidOutputs(Naphthalene.getFluid(600))
                 .fluidOutputs(HydrogenSulfide.getFluid(500))
                 .fluidOutputs(HighlyPurifiedCoalTar.getFluid(400))
                 .fluidOutputs(Creosote.getFluid(300))
                 .fluidOutputs(Phenol.getFluid(200))
-                .duration(80).EUt(VA[MV])
+                .duration(80).EUt(120)
                 .buildAndRegister();
 
         PYROLYSIS_TOWER.recipeBuilder()
@@ -669,7 +681,7 @@ public class OilChains {
                 .fluidOutputs(Ethylene.getFluid(50))
                 .fluidOutputs(Acetylene.getFluid(50))
                 .fluidOutputs(Dimethylbenzene.getFluid(50))
-                .duration(120).EUt(VA[MV]).buildAndRegister();
+                .duration(120).EUt(120).buildAndRegister();
 
         DISTILLATION_RECIPES.recipeBuilder()
                 .fluidInputs(SeverelySteamCrackedDieselLight.getFluid(800))
@@ -686,7 +698,7 @@ public class OilChains {
                 .fluidOutputs(Ethylene.getFluid(150))
                 .fluidOutputs(Acetylene.getFluid(150))
                 .fluidOutputs(Dimethylbenzene.getFluid(150))
-                .duration(120).EUt(VA[MV]).buildAndRegister();
+                .duration(120).EUt(120).buildAndRegister();
 
         DISTILLATION_RECIPES.recipeBuilder()
                 .fluidInputs(LightlySteamCrackedDieselHeavy.getFluid(800))
@@ -703,7 +715,7 @@ public class OilChains {
                 .fluidOutputs(Ethylene.getFluid(50))
                 .fluidOutputs(Acetylene.getFluid(50))
                 .fluidOutputs(Dimethylbenzene.getFluid(50))
-                .duration(120).EUt(VA[MV]).buildAndRegister();
+                .duration(120).EUt(120).buildAndRegister();
 
         DISTILLATION_RECIPES.recipeBuilder()
                 .fluidInputs(SeverelySteamCrackedDieselHeavy.getFluid(800))
@@ -720,7 +732,7 @@ public class OilChains {
                 .fluidOutputs(Ethylene.getFluid(150))
                 .fluidOutputs(Acetylene.getFluid(150))
                 .fluidOutputs(Dimethylbenzene.getFluid(150))
-                .duration(120).EUt(VA[MV]).buildAndRegister();
+                .duration(120).EUt(120).buildAndRegister();
 
 
 
@@ -733,7 +745,7 @@ public class OilChains {
                 .fluidOutputs(Propane.getFluid(100))
                 .fluidOutputs(Ethane.getFluid(75))
                 .fluidOutputs(Methane.getFluid(75))
-                .duration(120).EUt(VA[MV]).buildAndRegister();
+                .duration(120).EUt(120).buildAndRegister();
 
         DISTILLATION_RECIPES.recipeBuilder()
                 .fluidInputs(SeverelyHydroCrackedDieselLight.getFluid(800))
@@ -743,7 +755,7 @@ public class OilChains {
                 .fluidOutputs(Propane.getFluid(300))
                 .fluidOutputs(Ethane.getFluid(175))
                 .fluidOutputs(Methane.getFluid(175))
-                .duration(120).EUt(VA[MV]).buildAndRegister();
+                .duration(120).EUt(120).buildAndRegister();
 
         DISTILLATION_RECIPES.recipeBuilder()
                 .fluidInputs(LightlyHydroCrackedDieselHeavy.getFluid(800))
@@ -753,7 +765,7 @@ public class OilChains {
                 .fluidOutputs(Propane.getFluid(100))
                 .fluidOutputs(Ethane.getFluid(75))
                 .fluidOutputs(Methane.getFluid(75))
-                .duration(120).EUt(VA[MV]).buildAndRegister();
+                .duration(120).EUt(120).buildAndRegister();
 
         DISTILLATION_RECIPES.recipeBuilder()
                 .fluidInputs(SeverelyHydroCrackedDieselHeavy.getFluid(800))
@@ -763,7 +775,22 @@ public class OilChains {
                 .fluidOutputs(Propane.getFluid(300))
                 .fluidOutputs(Ethane.getFluid(175))
                 .fluidOutputs(Methane.getFluid(175))
-                .duration(120).EUt(VA[MV]).buildAndRegister();
+                .duration(120).EUt(120).buildAndRegister();
+
+        //燃油裂化补充配方
+        CHEMICAL_RECIPES.recipeBuilder()
+                .fluidInputs(LightFuel.getFluid(1000))
+                .fluidInputs(Steam.getFluid(4000))
+                .fluidOutputs(LightlySteamCrackedLightFuel.getFluid(500))
+                .circuitMeta(1)
+                .duration(120).EUt(30).buildAndRegister();
+
+        CHEMICAL_RECIPES.recipeBuilder()
+                .fluidInputs(HeavyFuel.getFluid(1000))
+                .fluidInputs(Steam.getFluid(4000))
+                .fluidOutputs(LightlySteamCrackedHeavyFuel.getFluid(500))
+                .circuitMeta(1)
+                .duration(120).EUt(30).buildAndRegister();
     }
     private static void lightlyCrack(Material raw, Material hydroCracked, Material steamCracked) {
         CRACKING_RECIPES.recipeBuilder()
@@ -771,7 +798,7 @@ public class OilChains {
                 .fluidInputs(raw.getFluid(1000))
                 .fluidInputs(Hydrogen.getFluid(2000))
                 .fluidOutputs(hydroCracked.getFluid(1000))
-                .duration(80).EUt(VA[MV]).buildAndRegister();
+                .duration(80).EUt(120).buildAndRegister();
 
 
         CRACKING_RECIPES.recipeBuilder()
@@ -796,7 +823,7 @@ public class OilChains {
                 .fluidInputs(raw.getFluid(1000))
                 .fluidInputs(Steam.getFluid(1000))
                 .fluidOutputs(steamCracked.getFluid(1000))
-                .duration(160).EUt(VA[HV]).buildAndRegister();
+                .duration(160).EUt(480).buildAndRegister();
 
     }
 }

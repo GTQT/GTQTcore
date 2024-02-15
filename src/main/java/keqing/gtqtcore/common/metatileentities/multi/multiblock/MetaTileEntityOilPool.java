@@ -42,6 +42,8 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -67,6 +69,31 @@ public class MetaTileEntityOilPool extends NoEnergyMultiblockController {
     double sperate;//盐度
     //需要加水将盐度下降到10%，根据加水量添加破乳剂，反应片刻后破乳度达到80%排放
     @Override
+    public NBTTagCompound writeToNBT(NBTTagCompound data) {
+        data.setDouble("sperate", sperate);
+        return super.writeToNBT(data);
+    }
+
+    @Override
+    public void readFromNBT(NBTTagCompound data) {
+        sperate = data.getInteger("sperate");
+        super.readFromNBT(data);
+    }
+
+    @Override
+    public void writeInitialSyncData(PacketBuffer buf) {
+        super.writeInitialSyncData(buf);
+        buf.writeDouble(sperate);
+    }
+
+    @Override
+    public void receiveInitialSyncData(PacketBuffer buf) {
+        super.receiveInitialSyncData(buf);
+        sperate = buf.readDouble();
+    }
+
+
+    @Override
     @Nonnull
     protected Widget getFlexButton(int x, int y, int width, int height) {
         WidgetGroup group = new WidgetGroup(x, y, width, height);
@@ -91,8 +118,10 @@ public class MetaTileEntityOilPool extends NoEnergyMultiblockController {
             super.update();
             IMultipleTankHandler inputTank = getInputFluidInventory();
             if (WATER.isFluidStackIdentical(inputTank.drain(WATER, false))) {
-                inputTank.drain(WATER, true);
-                amount = amount + 20;
+                if(amount<10000) {
+                    inputTank.drain(WATER, true);
+                    amount = amount + 20;
+                }
             }
             if (PORUJI.isFluidStackIdentical(inputTank.drain(PORUJI, false))) {
                 inputTank.drain(PORUJI, true);
@@ -105,9 +134,9 @@ public class MetaTileEntityOilPool extends NoEnergyMultiblockController {
         protected void updateRecipeProgress() {
             sperate=80;
             if (canRecipeProgress) {
-                sperate=80-amount*0.01;
+                sperate=(1600/(2000+amount))*100;
                 if(sperate<=20&&poruji>1&&rate<1000) {
-                    rate=rate+1*(6000/amount);
+                    rate=rate+3*(6000/amount);
                     poruji=poruji-1;
                     if(rate>=800)
                     {
@@ -115,7 +144,8 @@ public class MetaTileEntityOilPool extends NoEnergyMultiblockController {
                         {
                             completeRecipe();
                             rate=0;
-                            amount=amount-2000;
+                            if(amount>2000) amount=amount-2000;
+                            else amount=0;
                         }
                     }
                 }

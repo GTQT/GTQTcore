@@ -51,7 +51,7 @@ import static gregtech.client.renderer.texture.Textures.SOLID_STEEL_CASING;
 
 public class MetaTileEntitySteamBlastFurnace extends RecipeMapSteamMultiblockController {
 
-    private static final int PARALLEL_LIMIT = 8;
+    private static final int PARALLEL_LIMIT = 4;
 
     public MetaTileEntitySteamBlastFurnace(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.STEAM_BLAST_FURNACE_RECIPES, CONVERSION_RATE);
