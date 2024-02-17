@@ -46,8 +46,14 @@ import static gregtech.common.metatileentities.MetaTileEntities.HULL;
 import static gregtech.loaders.recipe.CraftingComponent.*;
 import static gregtech.loaders.recipe.CraftingComponent.CABLE_QUAD;
 import static gregtech.loaders.recipe.MetaTileEntityLoader.registerMachineRecipe;
+import static keqing.gtqtcore.api.unification.GCYSMaterials.Adamantite;
+import static keqing.gtqtcore.api.unification.GCYSMaterials.Orichalcum;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.*;
+import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.NQ_TURBINE_CASING;
+import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.PD_TURBINE_CASING;
+import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing1.TurbineCasingType.AD_TURBINE_CASING;
+import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing1.TurbineCasingType.ST_TURBINE_CASING;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.*;
 
@@ -64,6 +70,48 @@ public class MetaTileEntityLoader {
                 .input(OrePrefix.cableGtSingle, Materials.Tin, 32)
                 .fluidInputs(Polyethylene.getFluid(L * 12))
                 .outputs(WATER_POWER_STATION.getStackForm()).buildAndRegister();
+
+        ModHandler.addShapedRecipe(true, "tank0",TANK[0].getStackForm(), " R ",
+                "hCw", " R ", 'R', new UnificationEntry(OrePrefix.ring, Bronze), 'C',
+                MetaBlocks.METAL_CASING.getItemVariant(BRONZE_BRICKS));
+
+        ModHandler.addShapedRecipe(true, "tank1",TANK[1].getStackForm(), " R ",
+                "hCw", " R ", 'R', new UnificationEntry(OrePrefix.ring, Materials.Steel), 'C',
+                MetaBlocks.METAL_CASING.getItemVariant(STEEL_SOLID));
+
+        ModHandler.addShapedRecipe(true, "tank2",TANK[2].getStackForm(), " R ",
+                "hCw", " R ", 'R', new UnificationEntry(OrePrefix.ring, Aluminium), 'C',
+                MetaBlocks.METAL_CASING.getItemVariant(ALUMINIUM_FROSTPROOF));
+
+        ModHandler.addShapedRecipe(true, "tank3",TANK[3].getStackForm(), " R ",
+                "hCw", " R ", 'R', new UnificationEntry(OrePrefix.ring, StainlessSteel), 'C',
+                MetaBlocks.METAL_CASING.getItemVariant(STAINLESS_CLEAN));
+
+        ModHandler.addShapedRecipe(true, "tank4",TANK[4].getStackForm(), " R ",
+                "hCw", " R ", 'R', new UnificationEntry(OrePrefix.ring, Titanium), 'C',
+                MetaBlocks.METAL_CASING.getItemVariant(TITANIUM_STABLE));
+
+        ModHandler.addShapedRecipe(true, "tank5",TANK[5].getStackForm(), " R ",
+                "hCw", " R ", 'R', new UnificationEntry(OrePrefix.ring, TungstenSteel), 'C',
+                MetaBlocks.METAL_CASING.getItemVariant(TUNGSTENSTEEL_ROBUST));
+
+        ModHandler.addShapedRecipe(true, "tank6",TANK[6].getStackForm(), " R ",
+                "hCw", " R ", 'R', new UnificationEntry(OrePrefix.ring, RhodiumPlatedPalladium), 'C',
+                GTQTMetaBlocks.TURBINE_CASING.getItemVariant(PD_TURBINE_CASING));
+
+        ModHandler.addShapedRecipe(true, "tank7",TANK[7].getStackForm(), " R ",
+                "hCw", " R ", 'R', new UnificationEntry(OrePrefix.ring, NaquadahAlloy), 'C',
+                GTQTMetaBlocks.TURBINE_CASING.getItemVariant(NQ_TURBINE_CASING));
+
+        ModHandler.addShapedRecipe(true, "tank8",TANK[8].getStackForm(), " R ",
+                "hCw", " R ", 'R', new UnificationEntry(OrePrefix.ring, Orichalcum), 'C',
+                GTQTMetaBlocks.TURBINE_CASING1.getItemVariant(ST_TURBINE_CASING));
+
+        ModHandler.addShapedRecipe(true, "tank9",TANK[9].getStackForm(), " R ",
+                "hCw", " R ", 'R', new UnificationEntry(OrePrefix.ring, Adamantite), 'C',
+                GTQTMetaBlocks.TURBINE_CASING1.getItemVariant(AD_TURBINE_CASING));
+
+
 
         ModHandler.addShapedRecipe(true, "ulv_casing", HULL[0].getStackForm(),
                 "ABA", "CHC","ABA",

@@ -7,6 +7,7 @@ import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.Materials.Coal;
 import static gregtech.api.unification.ore.OrePrefix.ore;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.MINING_DRILL_RECIPES;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.Cryolite;
 import static net.minecraft.init.Blocks.SAND;
 
 public class MiningDrill {
@@ -25,7 +26,7 @@ public class MiningDrill {
                 .chancedOutput(new ItemStack(Blocks.STONE),5000,500)
                 .tier(1)
                 .EUt(30)
-                .duration(20)
+                .duration(200)
                 .circuitMeta(1)
                 .buildAndRegister();
 
@@ -36,7 +37,7 @@ public class MiningDrill {
                 .chancedOutput(ore,Coal,5000,500)
                 .tier(1)
                 .EUt(120)
-                .duration(20)
+                .duration(200)
                 .circuitMeta(2)
                 .buildAndRegister();
 
@@ -48,9 +49,10 @@ public class MiningDrill {
                 .chancedOutput(ore,Salt,2000,200)
                 .chancedOutput(ore,Cassiterite,2000,200)
                 .chancedOutput(ore,Chalcocite,2000,200)
+                .chancedOutput(ore,Cryolite,2000,200)
                 .tier(1)
                 .EUt(120)
-                .duration(20)
+                .duration(200)
                 .circuitMeta(3)
                 .buildAndRegister();
 
@@ -64,7 +66,7 @@ public class MiningDrill {
                 .chancedOutput(ore,Stibnite,2000,200)
                 .tier(1)
                 .EUt(120)
-                .duration(20)
+                .duration(200)
                 .circuitMeta(4)
                 .buildAndRegister();
 
@@ -78,7 +80,7 @@ public class MiningDrill {
                 .chancedOutput(ore,Amethyst,2000,200)
                 .tier(2)
                 .EUt(480)
-                .duration(20)
+                .duration(200)
                 .circuitMeta(5)
                 .buildAndRegister();
 
@@ -92,7 +94,7 @@ public class MiningDrill {
                 .chancedOutput(ore,Zeolite,2000,200)
                 .tier(2)
                 .EUt(480)
-                .duration(20)
+                .duration(200)
                 .circuitMeta(6)
                 .buildAndRegister();
 

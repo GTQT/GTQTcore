@@ -1,5 +1,6 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
+import gregtech.api.capability.IOpticalComputationHatch;
 import gregtech.api.capability.IOpticalComputationProvider;
 import gregtech.api.capability.IOpticalComputationReceiver;
 import gregtech.api.capability.impl.ComputationRecipeLogic;
@@ -86,7 +87,6 @@ public class MetaTileEntitySpaceElevator extends MultiMapMultiblockController im
         });
         this.recipeMapWorkable = new SpaceElevatorRecipeLogic(this);
     }
-
     @Override
     public boolean checkRecipe(@Nonnull Recipe recipe, boolean consumeIfSuccess) {
         if(recipe.getProperty(SEProperty.getInstance(), 0)<=motortier)
@@ -101,12 +101,10 @@ public class MetaTileEntitySpaceElevator extends MultiMapMultiblockController im
             ItemStack item =  this.getInputInventory().getStackInSlot(i);
             if(item.getDisplayName().equals("轨道采集器（§7LV§r）"))
             {
-                GTQTLog.logger.info("into 1");
                 return 1;
             }
             if(item.getDisplayName().equals("轨道采集器（§bMV§r）"))
             {
-                GTQTLog.logger.info("into 2");
                 return 2;
             }
             if(item.getDisplayName().equals("轨道采集器（§6HV§r）"))
@@ -198,6 +196,10 @@ public class MetaTileEntitySpaceElevator extends MultiMapMultiblockController im
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
+        List<IOpticalComputationHatch> providers = this.getAbilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION);
+        if (providers != null && providers.size() >= 1) {
+            this.computationProvider = (IOpticalComputationProvider)providers.get(0);
+        }
         Object motortier = context.get("SETiredStats");
         Object Atier = context.get("SEATiredStats");
         Object Btier = context.get("SEBTiredStats");
@@ -238,16 +240,7 @@ public class MetaTileEntitySpaceElevator extends MultiMapMultiblockController im
         super.invalidateStructure();
     }
 
-    /*
-        @Override
-        public boolean checkRecipe(@Nonnull Recipe recipe,
-                                   boolean consumeIfSuccess) {
-            if (super.checkRecipe(recipe, consumeIfSuccess)) {
-                recipe.getProperty(SpaceElevatorCasingTierProperty.getInstance(), 0);
-            }
-            return false;
-        }
-    */
+
     @Nonnull
     @Override
     protected BlockPattern createStructurePattern() {
@@ -302,7 +295,12 @@ public class MetaTileEntitySpaceElevator extends MultiMapMultiblockController im
                 .where('A', states(getFifthCasingState()))
                 .where('D', states(getSixthCasingState()))
                 .where('I', states(getSixthCasingState())
-                        .or(autoAbilities()))
+                        .or(abilities(MultiblockAbility.MAINTENANCE_HATCH).setExactLimit(1))
+                        .or(abilities(MultiblockAbility.EXPORT_FLUIDS).setExactLimit(1))
+                        .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setMinGlobalLimited(1).setPreviewCount(2))
+                        .or(abilities(MultiblockAbility.IMPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(2))
+                        .or(abilities(MultiblockAbility.EXPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(2))
+                        .or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(2).setPreviewCount(2)))
                 .where('-', air())
                 .where(' ', any())
                 .build();
@@ -382,7 +380,9 @@ public class MetaTileEntitySpaceElevator extends MultiMapMultiblockController im
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(I18n.format("gtlitecore.machine.space_elevator.tooltip.13"));
     }
-
+    public boolean hasMufflerMechanics() {
+        return false;
+    }
     @Override
     public boolean canBeDistinct() {
         return true;
@@ -396,44 +396,9 @@ public class MetaTileEntitySpaceElevator extends MultiMapMultiblockController im
 
         @Override
         public int getParallelLimit() {
-            return Atier*Dtier;
+            return Atier*Dtier* getCoe()== Atier*Dtier?1:Atier*Dtier* (getCoe()+1);
         }
 
-        public void setMaxProgress(int maxProgress) {
-            this.maxProgressTime = maxProgress*(100-Btier*10);
-        }
-
-        @Override
-        protected void outputRecipeOutputs() {
-            int outNum = getCoe();
-            setOutPutItem(outNum);
-            GTTransferUtils.addItemsToItemHandler(this.getOutputInventory(), false, this.itemOutputs);
-            GTTransferUtils.addFluidsToFluidHandler(this.getOutputTank(), false, this.fluidOutputs);
-        }
-        private void setOutPutItem(int num)
-        {
-            if(num !=0)
-            {
-                List<ItemStack> MyitemOutputs = new ArrayList<>();
-                for (ItemStack item: this.itemOutputs
-                ) {
-                    int group = num/64;
-                    for (int i = 0; i < group; i++) {
-                        MyitemOutputs.add(new ItemStack(item.getItem(),64));
-                    }
-                    MyitemOutputs.add(new ItemStack(item.getItem(),num%64));
-                }
-                GTTransferUtils.addItemsToItemHandler(this.getOutputInventory(), false, MyitemOutputs);
-            }
-        }
-
-        @Override
-        protected void modifyOverclockPost(int[] resultOverclock,  IRecipePropertyStorage storage) {
-            super.modifyOverclockPost(resultOverclock, storage);
-            resultOverclock[0] *= 1.0f - Ctier * 0.1; // each coil above cupronickel (coilTier = 0) uses 10% less
-            resultOverclock[0] = Math.max(1, resultOverclock[0]);
-        }
     }
-
 
 }

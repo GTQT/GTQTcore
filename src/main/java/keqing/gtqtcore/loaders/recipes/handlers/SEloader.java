@@ -23,10 +23,9 @@ public class SEloader {
                 .fluidInputs(Water.getFluid(14))
                 .output(ore,Naquadah)
                 .Motor(3)
-                .CWUt(10)
-                .totalCWU(114514)
-                .EUt(32)
-                .duration(20*64)
+                .CWUt(1000)
+                .EUt(7680)
+                .duration(2000*64)
                 .buildAndRegister();
     }
 
@@ -36,10 +35,9 @@ public class SEloader {
                 .fluidInputs(Water.getFluid(14))
                 .fluidOutputs(OilHeavy.getFluid(114))
                 .Motor(3)
-                .CWUt(10)
-                .totalCWU(114514)
-                .EUt(32)
-                .duration(20*64)
+                .CWUt(1000)
+                .EUt(7680)
+                .duration(2000*64)
                 .buildAndRegister();
     }
 }

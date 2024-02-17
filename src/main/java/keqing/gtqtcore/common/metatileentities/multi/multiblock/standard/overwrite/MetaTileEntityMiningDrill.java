@@ -25,6 +25,7 @@ import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -49,6 +50,19 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
         super(metaTileEntityId, GTQTcoreRecipeMaps.MINING_DRILL_RECIPES );
         this.recipeMapWorkable = new IndustrialDrillWorkableHandler(this, true);
     }
+
+    @Override
+    public NBTTagCompound writeToNBT(NBTTagCompound data) {
+        data.setDouble("naijiu", naijiu);
+        return super.writeToNBT(data);
+    }
+
+    @Override
+    public void readFromNBT(NBTTagCompound data) {
+        naijiu = data.getInteger("naijiu");
+        super.readFromNBT(data);
+    }
+
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {
@@ -255,12 +269,12 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
         }
 
         protected void updateRecipeProgress() {
-            if (canRecipeProgress) {
-                    naijiu--;
-                    if (++progressTime > maxProgressTime) {
-                        completeRecipe();
-                    }
-
+            if (this.canRecipeProgress && this.drawEnergy(this.recipeEUt, true)) {
+                this.drawEnergy(this.recipeEUt, false);
+                naijiu--;
+                if (++this.progressTime > this.maxProgressTime) {
+                    this.completeRecipe();
+                }
             }
         }
     }

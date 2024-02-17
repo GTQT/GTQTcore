@@ -49,7 +49,7 @@ public class CPULine {
                 .fluidInputs(HydrofluoricAcid.getFluid(4000))
                 .fluidOutputs(HydrochloricAcid.getFluid(6000))
                 .fluidOutputs(Tetrafluoroethylene.getFluid(1000))
-                .duration(120).EUt(240).buildAndRegister();
+                .duration(120).EUt(120).buildAndRegister();
         //
         ASSEMBLER_RECIPES.recipeBuilder()
                 .inputs(HULL[2].getStackForm(4))

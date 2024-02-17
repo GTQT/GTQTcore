@@ -119,9 +119,7 @@ public class KeQingNET {
         //物品支架
         ASSEMBLER_RECIPES.recipeBuilder()
                 .input(PLASTIC_CIRCUIT_BOARD)
-                .input(circuit, Tier.MV)
-                .input(CENTRAL_PROCESSING_UNIT, 4)
-                .input(RANDOM_ACCESS_MEMORY, 4)
+                .input(circuit, Tier.MV,8)
                 .input(wireFine, Aluminium, 2)
                 .input(gearSmall, Copper, 4)
                 .input(OPTICAL_PIPES[0], 2)
@@ -187,7 +185,7 @@ public class KeQingNET {
 
         ASSEMBLER_RECIPES.recipeBuilder()
                 .inputs(HULL[2].getStackForm())
-                .input(FIELD_GENERATOR_MV, 8)
+                .input(FIELD_GENERATOR_LV, 8)
                 .input(DISK_0,4)
                 .input(COVER_SCREEN)
                 .input(wireFine, Aluminium, 16)
@@ -198,7 +196,7 @@ public class KeQingNET {
 
         ASSEMBLER_RECIPES.recipeBuilder()
                 .inputs(HULL[2].getStackForm())
-                .input(EMITTER_MV, 8)
+                .input(EMITTER_LV, 8)
                 .input(DISK_0,4)
                 .input(COVER_SCREEN)
                 .input(wireFine, Aluminium, 16)

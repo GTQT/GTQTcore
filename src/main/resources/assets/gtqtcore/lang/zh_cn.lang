@@ -294,6 +294,17 @@ gtqtcore.machine.wireless_energy_hatch.transmitter.uhv.name=无线能源输出�
 gtqtcore.machine.wireless_energy_hatch.transmitter.uev.name=无线能源输出端口（§4UEV§r）
 gtqtcore.machine.wireless_energy_hatch.transmitter.uiv.name=无线能源输出端口（§4UIV§r）
 
+gtqtcore.machine.tank.ulv.name=结构储罐（LV）
+gtqtcore.machine.tank.lv.name=结构储罐（§7LV§r）
+gtqtcore.machine.tank.mv.name=结构储罐（§bMV§r）
+gtqtcore.machine.tank.hv.name=结构储罐（§6HV§r）
+gtqtcore.machine.tank.ev.name=结构储罐（§5EV§r）
+gtqtcore.machine.tank.iv.name=结构储罐（§1IV§r）
+gtqtcore.machine.tank.luv.name=结构储罐（§dLuV§r）
+gtqtcore.machine.tank.zpm.name=结构储罐（§cZPM§r）
+gtqtcore.machine.tank.uv.name=结构储罐（§3UV§r）
+gtqtcore.machine.tank.uhv.name=结构储罐（§4UHV§r）
+
 gtqtcore.machine.parallel_hatch.uhv.name=并行控制仓（§4UHV§r）
 gtqtcore.machine.parallel_hatch.uev.name=并行控制仓（§aUEV§r）
 gtqtcore.machine.parallel_hatch.uiv.name=并行控制仓（§2UIV§r）
@@ -1305,6 +1316,17 @@ tile.computer_competent.computer_cpuiii.name=高性能计算模块III
 tile.computer_competent.computer_gpui.name=辅助运算模块I
 tile.computer_competent.computer_gpuii.name=辅助运算模块II
 tile.computer_competent.computer_gpuiii.name=辅助运算模块III
+
+tile.computer_competent.computer_rami.tooltip=八百加八百等于十六百
+tile.computer_competent.computer_ramii.tooltip=记住全部！
+tile.computer_competent.computer_ramiii.tooltip=DDR114514
+tile.computer_competent.computer_cpui.tooltip=厘米级工艺
+tile.computer_competent.computer_cpuii.tooltip=人列计算机
+tile.computer_competent.computer_cpuiii.tooltip=我超，原子
+tile.computer_competent.computer_gpui.tooltip=苏联军工
+tile.computer_competent.computer_gpuii.tooltip=哥布林代工
+tile.computer_competent.computer_gpuiii.tooltip=神威！太湖之光！
+
 gtqtcore.multiblock.kqcc.description=计算中心服务器是你在早期获得算力的唯一方法，每一台服务器拥有三排四列共计12模块的计算组件，由上至下分别为【高性能计算模块/辅助运算模块/数据缓存模块】，每一排只能插放对应的组件，但是其等级可以不一样，也可以使用空框架填充。当RAM总和均大于CPU,GPU总和时，总算力为CPU,GPU的总和；否则为RAM的总和。单位热量由CPU总和*GPU总和决定。当温度小于三百度时正常性能计算，大于三百度时性能减半，大于四百五十度强制停机。处于超频模式时，计算性能翻倍，热量四倍，冷却液消耗四倍，综合散热性能翻倍。 冷却液种类/散热性能（水-7.7/10mb 冷却液-14.4/5mb 液氮-28.8/1mb）机器在关机状态无法通过冷却液降温！如果需要保持持续开机状态，只需要添加润滑油即可。
 
 

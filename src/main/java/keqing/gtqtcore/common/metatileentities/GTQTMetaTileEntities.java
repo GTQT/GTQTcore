@@ -32,6 +32,8 @@ import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.star.Me
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.steam.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblockpart.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblockpart.MetaTileEntityDataAccessHatch;
+import keqing.gtqtcore.common.metatileentities.storage.MetaTileEntityMultiblockTank;
+
 import java.util.function.IntFunction;
 import java.util.function.IntPredicate;
 import java.util.function.IntSupplier;
@@ -124,6 +126,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntitySepticTank SEPTIC_TANK;
     public static MetaTileEntityIsaMill ISA_MILL;
     public static MetaTileEntityPCB PCB;
+    public static MetaTileEntityMultiblockTank[] TANK = new MetaTileEntityMultiblockTank[10];
     public static MetaTileEntityAlloykiln ALLOY_KILN;
     public static MetaTileEntitySaltField SALT_FLIED;
     public static SimpleMachineMetaTileEntity[] COMPONENT_ASSEMBLER = new SimpleMachineMetaTileEntity[GTValues.IV + 1];
@@ -352,8 +355,6 @@ public class GTQTMetaTileEntities {
         HPCA_ULTIMATE_COMPUTATION_COMPONENT = registerMetaTileEntity(3462, new MetaTileEntityHPCAAdvancedComputation(gtqtcoreId("hpca.ultimate_computation_component"),  true));
         HPCA_SUPER_COOLER_COMPONENT = registerMetaTileEntity(3464, new MetaTileEntityHPCAAdvancedCooler(gtqtcoreId("hpca.super_cooler_component"), true, false));
         HPCA_ULTIMATE_COOLER_COMPONENT = registerMetaTileEntity(3465, new MetaTileEntityHPCAAdvancedCooler(gtqtcoreId("hpca.ultimate_cooler_component"),  false, true));
-
-
         //GCYS
         INDUSTRIAL_DRILL = registerMetaTileEntity(3500, new MetaTileEntityIndustrialDrill(gtqtcoreId("industrial_drill")));
         CATALYTIC_REFORMER = registerMetaTileEntity(3501, new MetaTileEntityCatalyticReformer(gtqtcoreId("catalytic_reformer")));
@@ -368,6 +369,13 @@ public class GTQTMetaTileEntities {
         ION_IMPLANTATOR = registerMetaTileEntity(3510, new MetaTileEntityIonImplanter(gtqtcoreId("ion_implantator")));
         CZ_PULLER = registerMetaTileEntity(3511, new MetaTileEntityCZPuller(gtqtcoreId("cz_puller")));
         EX_CVD = registerMetaTileEntity(3512, new MetaTileEntityEXCVD(gtqtcoreId("ex_cvd")));
+
+        //存储
+        for(int i=0;i<10;i++)
+        {
+            String tierName = GTValues.VN[i].toLowerCase();
+            TANK[i] = registerMetaTileEntity(3520 + i, new MetaTileEntityMultiblockTank(gtqtcoreId("tank." + tierName), i + 1));
+        }
         //小机器
         registerSimpleMetaTileEntity(FLUID_EXTRACTOR, 15000, "fluid_extractor", GTQTcoreRecipeMaps.FLUID_EXTRACTOR_RECIPES, Textures.EXTRACTOR_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
         registerSimpleMetaTileEntity(FLUID_CANNER, 15015, "fluid_canner", GTQTcoreRecipeMaps.FLUID_CANNER_RECIPES, Textures.CANNER_OVERLAY, true,GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);

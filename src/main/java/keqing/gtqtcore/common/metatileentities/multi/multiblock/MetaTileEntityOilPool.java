@@ -71,12 +71,16 @@ public class MetaTileEntityOilPool extends NoEnergyMultiblockController {
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setDouble("sperate", sperate);
+        data.setDouble("poruji", poruji);
+        data.setDouble("amount", amount);
         return super.writeToNBT(data);
     }
 
     @Override
     public void readFromNBT(NBTTagCompound data) {
         sperate = data.getInteger("sperate");
+        poruji = data.getInteger("poruji");
+        amount = data.getInteger("amount");
         super.readFromNBT(data);
     }
 
