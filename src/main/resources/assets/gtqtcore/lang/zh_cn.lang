@@ -593,8 +593,19 @@ gregtech.material.futanlanshihantuyanghuawuxuanzhuo=氟碳镧铈罕土氧化物�
 gregtech.material.shanxitujingfen=钐稀土精粉
 gregtech.material.fhanxitujingfen=氟化钐稀土精粉
 gregtech.material.shantui=钐-铽混合物粉
-
-
+gregtech.material.yanghuaguiyan=氧化硅岩
+gregtech.material.dichunduguiyanruye=低纯度硅岩乳液
+gregtech.material.dichunduguiyanrongye=低纯度硅岩溶液
+gregtech.material.nqad=硅岩-精金混合
+gregtech.material.galliumoh=氢氧化镓
+gregtech.material.feifu=废氟
+gregtech.material.feiye=废液
+gregtech.material.nongsuofujiguiyankuangni=浓缩富集硅岩矿泥粉
+gregtech.material.yanghuaguiyanhunhe=氧化硅岩混合物粉
+gregtech.material.gaochunguiyanrongye=高纯硅岩溶液
+gregtech.material.dichunliusuanchaonengguiyan=低纯硫酸超能硅岩粉
+gregtech.material.dichunliusuanchaonengguiyanr=低纯硫酸超能硅岩溶液
+gregtech.material.gaochunchaonengguiyanrongye=高纯超能硅岩溶液
 
 
 
@@ -661,6 +672,8 @@ gtqtcore.machine.assembly_line.name=装配线
 gtqtcore.machine.water_power_station.name=水电站
 gtqtcore.machine.reactor_furnace.name=反射炉
 recipemap.reaction_furnace.name=反射煅烧
+gtqtcore.machine.neutron_activator.name=中子活化仪
+recipemap.neutron_activator.name=中子活化
 gtqtcore.machine.space_elevator.name=太空电梯
 recipemap.space_elevator_mining_module.name=太空矿床采集
 recipemap.space_elevator_drilling_module.name=太空气泉采集
@@ -719,6 +732,10 @@ gtqtcore.machine.mdi.tooltip.2=工作时消耗钻头耐久度，耐久度全部�
 gtqtcore.machine.mdi.tooltip.3=多方块结构每升级一次，并行数量翻倍，钻头等级决定支持的配方等级。
 gtqtcore.machine.mdi.tooltip.1=还在手动挖矿？你居然还在手动挖矿？
 gtqtcore.md=钻机等级：%s 钻头等级：%s 钻头耐久：%s
+
+gtqtcore.multiblock.na.tooltips1=结构高度：%s 加速线圈等级：%s
+gtqtcore.multiblock.na.tooltips2=动能区间：%s--%s--%s MeV
+
 gtqtcore.multiblock.br.amount=水箱储量：%s
 gtqtcore.multiblock.br.1=注水量：%s 培养液储量：%s 培养液浓度：%s
 gtqtcore.multiblock.br.2=浓度过高！！！

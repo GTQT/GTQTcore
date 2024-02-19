@@ -32,7 +32,7 @@ import static gregicality.multiblocks.api.unification.GCYMMaterials.TitaniumCarb
 import static gregicality.science.common.block.blocks.BlockCrucible.CrucibleType.QUARTZ_CRUCIBLE;
 import static gregtech.api.GTValues.L;
 import static gregtech.api.recipes.RecipeMaps.ASSEMBLER_RECIPES;
-import static gregtech.api.unification.material.MarkerMaterials.Tier.LV;
+import static gregtech.api.unification.material.MarkerMaterials.Tier.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.Materials.YttriumBariumCuprate;
 import static gregtech.api.unification.ore.OrePrefix.*;
@@ -331,9 +331,9 @@ public class MetaTileEntityLoader {
                 'W', new UnificationEntry(OrePrefix.cableGtSingle, Aluminium));
 
         ModHandler.addShapedRecipe(true, "distillation_tower", GTQTMetaTileEntities.DISTILLATION_TOWER.getStackForm(),
-                "CBC", "FMF", "CBC", 'M', MetaTileEntities.HULL[GTValues.LV].getStackForm(), 'B',
-                new UnificationEntry(OrePrefix.pipeLargeFluid, Steel), 'C',
-                new UnificationEntry(OrePrefix.circuit, LV), 'F', MetaItems.ELECTRIC_PUMP_LV);
+                "CBC", "FMF", "CBC", 'M', MetaTileEntities.HULL[GTValues.MV].getStackForm(), 'B',
+                new UnificationEntry(OrePrefix.pipeLargeFluid, Polyethylene), 'C',
+                new UnificationEntry(OrePrefix.circuit, MV), 'F', MetaItems.ELECTRIC_PUMP_MV);
 
         ModHandler.addShapedRecipe(true, "salt_flied", GTQTMetaTileEntities.SALT_FLIED.getStackForm(),
                 "FFF", "CMC", "BBB", 'M', MetaTileEntities.HULL[GTValues.LV].getStackForm(), 'B',

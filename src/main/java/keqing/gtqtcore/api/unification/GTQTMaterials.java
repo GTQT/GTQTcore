@@ -370,6 +370,19 @@ public class GTQTMaterials {
     public static Material GoldNickelMixture;
     public static Material LeachingNickel;
     public static Material PotassiumMetabisulfite;
+    public static Material Yanghuaguiyan;
+    public static Material Dichunduguiyanruye;
+    public static Material Dichunduguiyanrongye;
+    public static Material Nqad;
+    public static Material Galliumoh;
+    public static Material Feifu;
+    public static Material Feiye;
+    public static Material Gaochunguiyanrongye;
+    public static Material Yanghuaguiyanhunhe;
+    public static Material Nongsuofujiguiyankuangni;
+    public static Material Dichunliusuanchaonengguiyan;
+    public static Material Dichunliusuanchaonengguiyanr;
+    public static Material Gaochunchaonengguiyanrongye;
 
     //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/api/unification/GSMaterials.java
 

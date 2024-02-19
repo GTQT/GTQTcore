@@ -268,6 +268,7 @@ public class CommonProxy {
         for(int i=10;i<=800;i=i+10) LASERNetProperty.registeredLaser(i, String.valueOf(i));
         for(int i=1;i<=100;i++) KQNetProperty.registeredNB(i, String.valueOf(i));
         for(int i=1;i<=100;i++) BRProperty.registeredRate(i, String.valueOf(i));
+        for(int i=1;i<=100;i++) NeutronActivatorPartProperty.registeredPart(i*200, String.valueOf(i*200));
         PAPartProperty.registeredPart(11234,"一级 + 1234");
 
         PACasingTierProperty.registerPACasingTier(1, "1");

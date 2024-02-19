@@ -11,6 +11,8 @@ import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.info.MaterialFlags.*;
 import static gregtech.api.unification.material.info.MaterialIconSet.*;
 import static gregtech.api.util.GTUtility.gregtechId;
+import static keqing.gtqtcore.api.unification.GCYSMaterials.Adamantium;
+
 import gregtech.api.unification.material.Material;
 import keqing.gtqtcore.api.unification.GTQTMaterials;
 
@@ -139,6 +141,16 @@ public class HigherDegreeMaterials {
                 .color(0x8B4C39)
                 .components(Thorium,1,Oxygen,2)
                 .build();
+
+        //氧化硅岩
+        GTQTMaterials.Yanghuaguiyan= new Material.Builder(getMaterialsId(), gregtechId("yanghuaguiyan"))
+                .ore().dust()
+                .flags(DISABLE_DECOMPOSITION)
+                .color(0x8B4C39)
+                .components(Naquadah,1,Oxygen,2)
+                .build();
+
+
 
     }
 }

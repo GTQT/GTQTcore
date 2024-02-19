@@ -1435,5 +1435,82 @@ public class FirstDegreeMaterials {
                 .iconSet(SAND)
                 .components(Potassium, 2, Sulfur, 2, Oxygen, 5)
                 .build();
+
+        //低纯度硅岩乳液
+        GTQTMaterials.Dichunduguiyanruye= new Material.Builder(getMaterialsId(), gregtechId("dichunduguiyanruye"))
+                .fluid()
+                .flags(DISABLE_DECOMPOSITION)
+                .color(0x9AFF9A)
+                .components(Naquadah,1,Oxygen,2)
+                .build();
+
+        //低纯度硅岩溶液
+        GTQTMaterials.Dichunduguiyanrongye= new Material.Builder(getMaterialsId(), gregtechId("dichunduguiyanrongye"))
+                .fluid()
+                .flags(DISABLE_DECOMPOSITION)
+                .color(0xB4EEB4)
+                .components(Naquadah,1,Oxygen,2)
+                .build();
+
+        //硅岩-精金混合
+        GTQTMaterials.Nqad= new Material.Builder(getMaterialsId(), gregtechId("nqad"))
+                .fluid()
+                .color(0xE9967A)
+                .build();
+
+        //氢氧化镓 material('gallium')
+        GTQTMaterials.Galliumoh= new Material.Builder(getMaterialsId(), gregtechId("galliumoh"))
+                .dust()
+                .color(0xDBDBDB)
+                .components(Gallium,1,Oxygen,1,Hydrogen,1)
+                .build();
+
+        //废氟
+        GTQTMaterials.Feifu= new Material.Builder(getMaterialsId(), gregtechId("feifu"))
+                .fluid()
+                .color(0x556B2F)
+                .flags(DISABLE_DECOMPOSITION)
+                .components(Fluorine,1)
+                .build();
+
+        //废液
+        GTQTMaterials.Feiye= new Material.Builder(getMaterialsId(), gregtechId("feiye"))
+                .fluid()
+                .color(0x548B54)
+                .build();
+
+        //浓缩富集硅岩矿泥粉
+        GTQTMaterials.Nongsuofujiguiyankuangni= new Material.Builder(getMaterialsId(), gregtechId("nongsuofujiguiyankuangni"))
+                .dust()
+                .color(0x48D1CC)
+                .build();
+        //氧化硅岩混合物粉
+        GTQTMaterials.Yanghuaguiyanhunhe= new Material.Builder(getMaterialsId(), gregtechId("yanghuaguiyanhunhe"))
+                .dust()
+                .color(0x458B00)
+                .build();
+        //高纯硅岩溶液
+        GTQTMaterials.Gaochunguiyanrongye= new Material.Builder(getMaterialsId(), gregtechId("gaochunguiyanrongye"))
+                .fluid()
+                .color(0x3CB371)
+                .build();
+
+        //低纯硫酸超能硅岩粉
+        GTQTMaterials.Dichunliusuanchaonengguiyan= new Material.Builder(getMaterialsId(), gregtechId("dichunliusuanchaonengguiyan"))
+                .dust()
+                .color(0x32CD32)
+                .build();
+
+        //低纯硫酸超能硅岩溶液
+        GTQTMaterials.Dichunliusuanchaonengguiyanr= new Material.Builder(getMaterialsId(), gregtechId("dichunliusuanchaonengguiyanr"))
+                .fluid()
+                .color(0x2E8B57)
+                .build();
+
+        //高纯超能硅岩溶液
+        GTQTMaterials.Gaochunchaonengguiyanrongye= new Material.Builder(getMaterialsId(), gregtechId("gaochunchaonengguiyanrongye"))
+                .fluid()
+                .color(0x228B22)
+                .build();
     }
 }

@@ -677,7 +677,7 @@ public class CPULine {
 
         CZPULLER_RECIPES.recipeBuilder()
                 .duration(5000)
-                .EUt(480)
+                .EUt(120)
                 .fluidInputs(Nitrogen.getFluid(16000))
                 .input(block,CSilicon,32)
                 .input(dust,GalliumArsenide,1)
@@ -687,7 +687,7 @@ public class CPULine {
 
         CZPULLER_RECIPES.recipeBuilder()
                 .duration(5000)
-                .EUt(480)
+                .EUt(120)
                 .fluidInputs(Nitrogen.getFluid(16000))
                 .input(block,CSilicon,32)
                 .input(dust,GalliumArsenide,1)
@@ -697,7 +697,7 @@ public class CPULine {
 
         CZPULLER_RECIPES.recipeBuilder()
                 .duration(5000)
-                .EUt(1960)
+                .EUt(480)
                 .fluidInputs(Nitrogen.getFluid(16000))
                 .input(block,CSilicon,32)
                 .input(dust,GalliumArsenide,2)
@@ -707,7 +707,7 @@ public class CPULine {
 
         CZPULLER_RECIPES.recipeBuilder()
                 .duration(5000)
-                .EUt(7960)
+                .EUt(480)
                 .fluidInputs(Nitrogen.getFluid(16000))
                 .input(block,CSilicon,32)
                 .input(dust,GalliumArsenide,4)
@@ -717,7 +717,7 @@ public class CPULine {
 
         CZPULLER_RECIPES.recipeBuilder()
                 .duration(5000)
-                .EUt(30720)
+                .EUt(7680)
                 .fluidInputs(Nitrogen.getFluid(16000))
                 .input(block,CSilicon,32)
                 .input(dust,GalliumArsenide,8)
@@ -727,7 +727,7 @@ public class CPULine {
 
         CZPULLER_RECIPES.recipeBuilder()
                 .duration(2500)
-                .EUt(480)
+                .EUt(1960)
                 .fluidInputs(Helium.getFluid(4000))
                 .input(block,CSilicon,32)
                 .input(dust,IndiumGalliumPhosphide,1)
@@ -737,7 +737,7 @@ public class CPULine {
 
         CZPULLER_RECIPES.recipeBuilder()
                 .duration(5000)
-                .EUt(480)
+                .EUt(120)
                 .fluidInputs(Nitrogen.getFluid(16000))
                 .input(block,CSilicon,32)
                 .input(dust,IndiumGalliumPhosphide,1)
@@ -747,7 +747,7 @@ public class CPULine {
 
         CZPULLER_RECIPES.recipeBuilder()
                 .duration(2500)
-                .EUt(1960)
+                .EUt(480)
                 .fluidInputs(Helium.getFluid(4000))
                 .input(block,CSilicon,32)
                 .input(dust,IndiumGalliumPhosphide,2)
@@ -757,7 +757,7 @@ public class CPULine {
 
         CZPULLER_RECIPES.recipeBuilder()
                 .duration(2500)
-                .EUt(7680)
+                .EUt(1960)
                 .fluidInputs(Helium.getFluid(4000))
                 .input(block,CSilicon,32)
                 .input(dust,IndiumGalliumPhosphide,4)
@@ -767,7 +767,7 @@ public class CPULine {
 
         CZPULLER_RECIPES.recipeBuilder()
                 .duration(2500)
-                .EUt(30720)
+                .EUt(7680)
                 .fluidInputs(Helium.getFluid(4000))
                 .input(block,CSilicon,32)
                 .input(dust,IndiumGalliumPhosphide,8)

@@ -224,28 +224,28 @@ public class OilChains {
         OIL_POOL.recipeBuilder()
                 .fluidInputs(RawOil.getFluid(1000))
                 .fluidOutputs(PreTreatedCrudeOilContainingImpurities.getFluid(1000))
-                .fluidOutputs(SaltWater.getFluid(2000))
+                .fluidOutputs(SaltWater.getFluid(200))
                 .duration(20)
                 .buildAndRegister();
 
         OIL_POOL.recipeBuilder()
                 .fluidInputs(OilHeavy.getFluid(1000))
                 .fluidOutputs(PreTreatedCrudeOilContainingImpurities.getFluid(1000))
-                .fluidOutputs(SaltWater.getFluid(2000))
+                .fluidOutputs(SaltWater.getFluid(200))
                 .duration(20)
                 .buildAndRegister();
 
         OIL_POOL.recipeBuilder()
                 .fluidInputs(OilLight.getFluid(1000))
                 .fluidOutputs(PreTreatedCrudeOilContainingImpurities.getFluid(1000))
-                .fluidOutputs(SaltWater.getFluid(2000))
+                .fluidOutputs(SaltWater.getFluid(200))
                 .duration(20)
                 .buildAndRegister();
 
         OIL_POOL.recipeBuilder()
                 .fluidInputs(Oil.getFluid(1000))
                 .fluidOutputs(PreTreatedCrudeOilContainingImpurities.getFluid(1000))
-                .fluidOutputs(SaltWater.getFluid(2000))
+                .fluidOutputs(SaltWater.getFluid(200))
                 .duration(20)
                 .buildAndRegister();
 
@@ -254,36 +254,36 @@ public class OilChains {
         ELEOIL.recipeBuilder()
                 .fluidInputs(RawOil.getFluid(1000))
                 .fluidInputs(Demulsifier.getFluid(20))
-                .fluidOutputs(PreTreatedCrudeOil.getFluid(1500))
-                .fluidOutputs(SaltWater.getFluid(2000))
-                .duration(200)
+                .fluidOutputs(PreTreatedCrudeOil.getFluid(1000))
+                .fluidOutputs(SaltWater.getFluid(200))
+                .duration(20)
                 .EUt(120)
                 .buildAndRegister();
 
         ELEOIL.recipeBuilder()
                 .fluidInputs(OilHeavy.getFluid(1000))
                 .fluidInputs(Demulsifier.getFluid(20))
-                .fluidOutputs(PreTreatedCrudeOil.getFluid(1500))
-                .fluidOutputs(SaltWater.getFluid(2000))
-                .duration(200)
+                .fluidOutputs(PreTreatedCrudeOil.getFluid(1000))
+                .fluidOutputs(SaltWater.getFluid(200))
+                .duration(20)
                 .EUt(120)
                 .buildAndRegister();
 
         ELEOIL.recipeBuilder()
                 .fluidInputs(OilLight.getFluid(1000))
                 .fluidInputs(Demulsifier.getFluid(20))
-                .fluidOutputs(PreTreatedCrudeOil.getFluid(1500))
-                .fluidOutputs(SaltWater.getFluid(2000))
-                .duration(200)
+                .fluidOutputs(PreTreatedCrudeOil.getFluid(1000))
+                .fluidOutputs(SaltWater.getFluid(200))
+                .duration(20)
                 .EUt(120)
                 .buildAndRegister();
 
         ELEOIL.recipeBuilder()
                 .fluidInputs(Oil.getFluid(1000))
                 .fluidInputs(Demulsifier.getFluid(20))
-                .fluidOutputs(PreTreatedCrudeOil.getFluid(1500))
-                .fluidOutputs(SaltWater.getFluid(2000))
-                .duration(200)
+                .fluidOutputs(PreTreatedCrudeOil.getFluid(1000))
+                .fluidOutputs(SaltWater.getFluid(200))
+                .duration(20)
                 .EUt(120)
                 .buildAndRegister();
 

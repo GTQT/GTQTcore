@@ -155,6 +155,7 @@ public class GTQTcoreRecipeMaps {
 
     public static final RecipeMap<SEComputationRecipeBuilder> SPACE_ELEVATOR_DRILLING_MODULE;
     public static final RecipeMap<SEComputationRecipeBuilder> SPACE_ELEVATOR_MINING_MODULE;
+    public static final RecipeMap<NeutronActivatorRecipeBuilder> NEUTRON_ACTIVATOR ;
 
     private GTQTcoreRecipeMaps() {}
     static {
@@ -174,6 +175,9 @@ public class GTQTcoreRecipeMaps {
                 .setSound(GTSoundEvents.MACERATOR);
 
         PARTICLE_ACCELERATOR_RECIPES=new RecipeMapParticleAccelerator<>("pa", 2, 1, 2, 1, new PARecipeBuilder(), false)
+                .setSound(GTSoundEvents.CHEMICAL_REACTOR);
+
+        NEUTRON_ACTIVATOR=new RecipeMap<>("neutron_activator", 6, 6, 1, 1, new NeutronActivatorRecipeBuilder(), false)
                 .setSound(GTSoundEvents.CHEMICAL_REACTOR);
 
         VACUUM_CHAMBER_RECIPES = new RecipeMap<>("vacuum_chamber_recipes", 1, 4,  2,  1, new SimpleRecipeBuilder(), false)

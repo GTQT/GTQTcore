@@ -184,6 +184,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityKQNetworkSwitch KQNS;
     public static MetaTileEntityThreeDim THREE_DIM_PRINT;
     public static MetaTileEntityELEOil ELE_OIL;
+    public static MetaTileEntityNeutronActivator NEUTRON_ACTIVATOR;
     public static MetaTileEntitySpaceElevator SPACE_ELEVATOR;
     public static MetaTileEntityReactionFurnace REACTION_FURNACE;
     public static MetaTileEntityChemicalPlant CHEMICAL_PLANT;
@@ -308,6 +309,7 @@ public class GTQTMetaTileEntities {
         REACTION_FURNACE= registerMetaTileEntity(3184, new MetaTileEntityReactionFurnace(gtqtcoreId("reactor_furnace")));
         SPACE_ELEVATOR= registerMetaTileEntity(3185, new MetaTileEntitySpaceElevator(gtqtcoreId("space_elevator")));
         THREE_DIM_PRINT= registerMetaTileEntity(3186, new MetaTileEntityThreeDim(gtqtcoreId("three_dim_print")));
+        NEUTRON_ACTIVATOR= registerMetaTileEntity(3187, new MetaTileEntityNeutronActivator(gtqtcoreId("neutron_activator")));
         //重写设备
         DISTILLATION_TOWER = registerMetaTileEntity(3250, new MetaTileEntityDistillationTower(gtqtcoreId("distillation_tower")));
         CRACKER = registerMetaTileEntity(3251, new MetaTileEntityCrackingUnit(gtqtcoreId("cracker")));
