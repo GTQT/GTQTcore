@@ -4,10 +4,12 @@ import gregtech.api.unification.material.MarkerMaterials;
 import net.minecraftforge.fluids.FluidStack;
 
 import static gregtech.api.GTValues.*;
+import static gregtech.api.recipes.RecipeMaps.BLAST_RECIPES;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.common.items.MetaItems.*;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.COMPONENT_ASSEMBLER_RECIPES;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.Yanghuaguiyanhunhe;
 import static keqing.gtqtcore.api.unification.TJMaterials.NitrileButadieneRubber;
 import static keqing.gtqtcore.api.unification.TJMaterials.PolyPhosphonitrileFluoroRubber;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.*;
@@ -757,7 +759,16 @@ public class ComponentAssemblerRecipes {
                 .duration(20)
                 .buildAndRegister();
 
+
+
         //  MV
+        BLAST_RECIPES.recipeBuilder()
+                .input(ENDER_PEARL)
+                .fluidInputs(Blaze.getFluid(288))
+                .output(ENDER_EYE,1)
+                .blastFurnaceTemp(2500)
+                .duration(100).EUt(120).buildAndRegister();
+
         COMPONENT_ASSEMBLER_RECIPES.recipeBuilder()
                 .input(ENDER_EYE)
                 .input(plate, Aluminium, 2)

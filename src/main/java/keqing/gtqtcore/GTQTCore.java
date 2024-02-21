@@ -8,10 +8,7 @@ import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.common.event.*;
 
 @Mod(
         modid = "gtqtcore",
@@ -21,6 +18,7 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
         dependencies = "required-after:gregtech@[2.7.4-beta,) ;"
 )
 public class GTQTCore {
+    public static final String PACK = "1.4.0_preview_0.04";
 
     public static final String MODID = "gtqtcore";
     public static final String NAME = "GTQT Core";
@@ -58,11 +56,19 @@ public class GTQTCore {
     {
         proxy.init(event);
     }
-
+    @Mod.EventHandler
+    public void construction(FMLConstructionEvent event) {
+        proxy.construction();
+    }
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event)
     {
-        // TODO
+        proxy.postInit();
+    }
+
+    @Mod.EventHandler
+    public void loadComplete(FMLLoadCompleteEvent event) {
+        proxy.loadComplete();
     }
 }
 

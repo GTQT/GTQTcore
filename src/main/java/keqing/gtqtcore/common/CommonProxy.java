@@ -7,6 +7,7 @@ import gregtech.api.unification.stack.ItemMaterialInfo;
 import gregtech.common.items.MetaItems;
 import keqing.gtqtcore.api.recipes.properties.*;
 import keqing.gtqtcore.api.utils.GTQTLog;
+import keqing.gtqtcore.client.utils.TitleUtils;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTBlockWireCoil;
 import keqing.gtqtcore.common.block.blocks.GTQTCrops;
@@ -107,11 +108,25 @@ public class CommonProxy {
             return GTQTMetaItems.DEBUG_STRUCTURE_WRITER.getStackForm();
         }
     };
+
+    public void postInit() {
+        TitleUtils.setRandomTitle("*后初始化*");
+    }
+
+    public void construction() {
+        TitleUtils.setRandomTitle("*构建*");
+    }
+
+    public void loadComplete() {
+        TitleUtils.setRandomTitle(null);
+    }
     public void preInit( FMLPreInitializationEvent event ) {
         GTQTMetaToolItems.init();
         GTQTRecipes.registerTool();
+        TitleUtils.setRandomTitle("*前初始化*");
     }
     public void init( FMLInitializationEvent event ) {
+        TitleUtils.setRandomTitle("*初始化*");
         WorldLoader.init();
         OreDictionaryLoader.init();
         FuelRecipes.init();
@@ -142,7 +157,7 @@ public class CommonProxy {
     }
 
     public void preLoad() {
-
+        TitleUtils.setRandomTitle("*PreLoad*");
     }
     @SubscribeEvent
     public static void initMaterialInfo(GregTechAPI.RegisterEvent<ItemMaterialInfo> event) {
