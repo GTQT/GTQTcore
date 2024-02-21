@@ -120,6 +120,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityDissolutionTank DISSOLUTION_TANK;
     public static MetaTileEntityHugeMiner ADVANCED_HUGE_MINER;
     public static MetaTileEntityHyperReactorMk1 HYPER_REACTOR_MK1;
+    public static MetaTileEntityGasCollector GAS_COLLECTOR;
     public static MetaTileEntityHyperReactorMk2 HYPER_REACTOR_MK2;
     public static MetaTileEntityHyperReactorMk3 HYPER_REACTOR_MK3;
     public static MetaTileEntityFracturing BASIC_FLUID_DRILLING_RIG;
@@ -346,7 +347,7 @@ public class GTQTMetaTileEntities {
         BASIC_HUGE_MINER = registerMetaTileEntity(3403, new MetaTileEntityHugeMiner(gtqtcoreId("large_miner.zpm"), GTValues.ZPM, 1, 8, 7,  64));
         HUGE_MINER = registerMetaTileEntity(3404, new MetaTileEntityHugeMiner(gtqtcoreId("large_miner.uv"), GTValues.UV, 2, 10, 8,  128));
         ADVANCED_HUGE_MINER = registerMetaTileEntity(3405, new MetaTileEntityHugeMiner(gtqtcoreId("large_miner.uhv"), GTValues.UHV, 3, 12, 9 , 256));
-
+        GAS_COLLECTOR = registerMetaTileEntity(3406, new MetaTileEntityGasCollector(gtqtcoreId("gas_collector")));
         //KQCC
         KQCC= registerMetaTileEntity(3450, new MetaTileEntityKQCC(gtqtcoreId("kqcc")));
         KQNS=registerMetaTileEntity(3451,new MetaTileEntityKQNetworkSwitch(gtqtcoreId("kqns")));

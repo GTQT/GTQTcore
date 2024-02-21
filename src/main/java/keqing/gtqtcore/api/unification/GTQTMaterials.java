@@ -383,6 +383,11 @@ public class GTQTMaterials {
     public static Material Dichunliusuanchaonengguiyan;
     public static Material Dichunliusuanchaonengguiyanr;
     public static Material Gaochunchaonengguiyanrongye;
+    public static Material LiquidBetAir;
+    public static Material BetAir;
+    public static Material MarsAir;
+    public static Material LiquidMarsAir;
+    public static Material MagicGas;
 
     //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/api/unification/GSMaterials.java
 

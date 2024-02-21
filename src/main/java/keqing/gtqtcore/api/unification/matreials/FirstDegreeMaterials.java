@@ -531,8 +531,7 @@ public class FirstDegreeMaterials {
                 .ingot().fluid()
                 .color(0x807C74).iconSet(ROUGH)
                 .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROD,GENERATE_FRAME,GENERATE_BOLT_SCREW,GENERATE_FOIL,GENERATE_GEAR,GENERATE_SMALL_GEAR,GENERATE_ROUND,GENERATE_SPRING)
-                .components(MelodicAlloy ,1,NetherStar,1,Naquadah,1)
-                .cableProperties(32768,6,8)
+                .flags(DISABLE_DECOMPOSITION)
                 .build();
 
 
@@ -1512,5 +1511,45 @@ public class FirstDegreeMaterials {
                 .fluid()
                 .color(0x228B22)
                 .build();
+
+        //交错次元空气
+        GTQTMaterials.BetAir = new Material.Builder(getMaterialsId(), gregtechId("bet_air"))
+                .gas()
+                .color(0x2E8B57)
+                .flags(DISABLE_DECOMPOSITION)
+                .components(Methane, 78, HydrogenSulfide, 21, Neon, 7,Radon,2)
+                .build();
+
+        GTQTMaterials.LiquidBetAir = new Material.Builder(getMaterialsId(), gregtechId("liquid_bet_air"))
+                .liquid(new FluidBuilder().temperature(58))
+                .color(0x228B22)
+                .flags(DISABLE_DECOMPOSITION)
+                .components(Methane, 144, CoalGas, 20, HydrogenSulfide, 15, SulfurDioxide, 15, Helium3, 5, Neon,
+                        1, Radon, 1)
+                .build();
+
+        //离散态素魔力
+        GTQTMaterials.MagicGas = new Material.Builder(getMaterialsId(), gregtechId("magic_gas"))
+                .gas()
+                .color(0x00FFFF)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //交错次元空气
+        GTQTMaterials.MarsAir = new Material.Builder(getMaterialsId(), gregtechId("mars_air"))
+                .gas()
+                .color(0x8B3E2F)
+                .flags(DISABLE_DECOMPOSITION)
+                .components(CarbonDioxide, 80, Argon, 20, Oxygen, 10,Radon,10,Hydrogen,10,Nitrogen,10,MagicGas,10)
+                .build();
+
+        GTQTMaterials.LiquidMarsAir = new Material.Builder(getMaterialsId(), gregtechId("liquid_mars_air"))
+                .liquid(new FluidBuilder().temperature(58))
+                .color(0x8B4500)
+                .flags(DISABLE_DECOMPOSITION)
+                .components(CarbonDioxide, 160, Argon, 15, Oxygen, 15, Helium3, 10, Radon,
+                        10, Hydrogen, 10,Nitrogen,10,MagicGas,5)
+                .build();
+
     }
 }

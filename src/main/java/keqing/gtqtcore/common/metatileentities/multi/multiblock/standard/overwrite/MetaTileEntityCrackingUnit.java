@@ -94,7 +94,7 @@ public class MetaTileEntityCrackingUnit extends GTQTRecipeMapMultiblockOverwrite
                         .or(abilities(MultiblockAbility.EXPORT_FLUIDS).setMaxGlobalLimited(1))
                         .or(abilities(MultiblockAbility.MUFFLER_HATCH).setMaxGlobalLimited(1))
                         .or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(3))
-                        .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setExactLimit(1)))
+                        .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setExactLimit(2)))
                 .where('#', air())
                 .where('C', heatingCoils())
                 .build();

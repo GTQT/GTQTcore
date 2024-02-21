@@ -56,11 +56,21 @@ import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing1.TurbineCasi
 import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing1.TurbineCasingType.ST_TURBINE_CASING;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.*;
+import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.GAS_COLLECTOR;
 
 
 public class MetaTileEntityLoader {
 
     public static void init() {
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(50).EUt(30)
+                .inputs(HULL[1].getStackForm(4))
+                .input(ELECTRIC_PUMP_MV,8)
+                .input(circuit,LV,8)
+                .input(rotor,Aluminium,8)
+                .input(OrePrefix.cableGtSingle, Materials.Tin, 32)
+                .fluidInputs(Polyethylene.getFluid(L * 12))
+                .outputs(GAS_COLLECTOR.getStackForm()).buildAndRegister();
+
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(50).EUt(30)
                 .inputs(HULL[1].getStackForm(4))
                 .input(ELECTRIC_MOTOR_LV,8)
@@ -331,9 +341,9 @@ public class MetaTileEntityLoader {
                 'W', new UnificationEntry(OrePrefix.cableGtSingle, Aluminium));
 
         ModHandler.addShapedRecipe(true, "distillation_tower", GTQTMetaTileEntities.DISTILLATION_TOWER.getStackForm(),
-                "CBC", "FMF", "CBC", 'M', MetaTileEntities.HULL[GTValues.MV].getStackForm(), 'B',
+                "CBC", "FMF", "CBC", 'M', MetaTileEntities.HULL[GTValues.LV].getStackForm(), 'B',
                 new UnificationEntry(OrePrefix.pipeLargeFluid, Polyethylene), 'C',
-                new UnificationEntry(OrePrefix.circuit, MV), 'F', MetaItems.ELECTRIC_PUMP_MV);
+                new UnificationEntry(OrePrefix.circuit, MV), 'F', MetaItems.ELECTRIC_PUMP_LV);
 
         ModHandler.addShapedRecipe(true, "salt_flied", GTQTMetaTileEntities.SALT_FLIED.getStackForm(),
                 "FFF", "CMC", "BBB", 'M', MetaTileEntities.HULL[GTValues.LV].getStackForm(), 'B',

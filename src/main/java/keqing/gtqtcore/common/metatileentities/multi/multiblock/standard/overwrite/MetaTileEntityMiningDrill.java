@@ -200,7 +200,7 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
         this.tier = Math.min(this.casing,this.tube);
 
         this.writeCustomData(GTQTValue.UPDATE_TIER, buf -> buf.writeInt(this.tier));
-        naijiu=drilla*15*7500;
+        naijiu=drilla*15*15000;
     }
 
    @Override

@@ -115,7 +115,7 @@ public class GTQTRecipes {
             if (material.hasFluid()) {
                 RecipeMaps.VACUUM_RECIPES.recipeBuilder()
                         .notConsumable(GTQTMetaItems.MOLD_GAS)
-                        .fluidInputs(material.getFluid(L * 16))
+                        .fluidInputs(material.getFluid(L * 10))
                         .output(cylinder,material)
                         .duration(400)
                         .EUt(GTValues.VA[MV])
@@ -123,7 +123,7 @@ public class GTQTRecipes {
 
                 RecipeMaps.VACUUM_RECIPES.recipeBuilder()
                         .notConsumable(GTQTMetaItems.MOLD_MOTOR)
-                        .fluidInputs(material.getFluid(L * 16))
+                        .fluidInputs(material.getFluid(L * 10))
                         .output(motor_stick,material)
                         .duration(400)
                         .EUt(GTValues.VA[MV])
@@ -157,17 +157,31 @@ public class GTQTRecipes {
                         .buildAndRegister();
 
                 RecipeMaps.CUTTER_RECIPES.recipeBuilder()
-                        .EUt(30).duration(1200)
+                        .EUt(30).duration(400)
                         .input(plate, material)
                         .output(shell, material)
                         .fluidInputs(Water.getFluid(1000))
                         .buildAndRegister();
 
                 RecipeMaps.CUTTER_RECIPES.recipeBuilder()
-                        .EUt(32).duration(40)
+                        .EUt(32).duration(200)
                         .input(plate_big, material)
                         .output(round_cover, material)
                         .fluidInputs(Water.getFluid(1000))
+                        .buildAndRegister();
+
+                RecipeMaps.CUTTER_RECIPES.recipeBuilder()
+                        .EUt(30).duration(200)
+                        .input(plate, material)
+                        .output(shell, material)
+                        .fluidInputs(Lubricant.getFluid(200))
+                        .buildAndRegister();
+
+                RecipeMaps.CUTTER_RECIPES.recipeBuilder()
+                        .EUt(32).duration(100)
+                        .input(plate_big, material)
+                        .output(round_cover, material)
+                        .fluidInputs(Lubricant.getFluid(200))
                         .buildAndRegister();
 
                 FLUID_EXTRACTOR_RECIPES.recipeBuilder()
@@ -218,6 +232,7 @@ public class GTQTRecipes {
 
                 RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
                         .EUt(32).duration(40)
+                        .circuitMeta(20)
                         .input(gearSmall, material, 1)
                         .input(stick, material, 1)
                         .input(plate_curved, material, 2)
@@ -276,6 +291,7 @@ public class GTQTRecipes {
 
                 RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
                         .EUt(32).duration(40)
+                        .circuitMeta(20)
                         .input(stickLong, material, 3)
                         .input(gear, material, 2)
                         .input(springSmall, material, 1)
@@ -338,6 +354,7 @@ public class GTQTRecipes {
 
                 RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
                         .EUt(32).duration(40)
+                        .circuitMeta(20)
                         .input(shell, material, 2)
                         .input(cylinder, material, 1)
                         .input(gearSmall, material, 1)

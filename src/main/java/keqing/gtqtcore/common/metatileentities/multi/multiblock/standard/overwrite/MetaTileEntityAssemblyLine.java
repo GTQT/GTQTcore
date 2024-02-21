@@ -96,10 +96,6 @@ public class MetaTileEntityAssemblyLine extends RecipeMapMultiblockController {
 
         public long getMaxVoltage() {return Math.min(VA[tier],VA[IV]);}
 
-        @Override
-        public int getParallelLimit() {
-            return tier;
-        }
     }
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {

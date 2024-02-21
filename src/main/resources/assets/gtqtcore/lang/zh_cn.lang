@@ -609,11 +609,11 @@ gregtech.material.gaochunchaonengguiyanrongye=高纯超能硅岩溶液
 
 
 
-
-
-
-
-
+gregtech.material.bet_air=沼泽空气
+gregtech.material.liquid_bet_air=液态沼泽空气
+gregtech.material.magic_gas=离散态微薄魔力
+gregtech.material.mars_air=火星大气
+gregtech.material.liquid_mars_air=液态火星大气
 
 
 
@@ -1130,7 +1130,7 @@ metaitem.heavy_alloy_platec.name=合金复合板C
 metaitem.heavy_alloy_plated.name=合金复合板D
 metaitem.heavy_alloy_platee.name=合金复合板E
 metaitem.item.insulatingmica.name=绝缘云母复合片
-
+gtqtcore.machine.gas_collector.name=大型集气机
 
 gtqtcore.machine.combustion_generator.ev.name=脉冲内燃发电机
 gtqtcore.machine.steam_turbine.ev.name=脉冲蒸气轮机

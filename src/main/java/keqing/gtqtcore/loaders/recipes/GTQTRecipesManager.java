@@ -36,6 +36,7 @@ public class GTQTRecipesManager {
     public static void init() {
         OceanChain.init();
         NaquadahChain.init();
+        GasChain.init();
         HexanitrohexaaxaisowurtzitaneChain.init();
         ZylonChain.init();
         MiscRecipes.init();
