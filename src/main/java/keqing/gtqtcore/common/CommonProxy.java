@@ -110,23 +110,18 @@ public class CommonProxy {
     };
 
     public void postInit() {
-        TitleUtils.setRandomTitle("*后初始化*");
     }
-
     public void construction() {
-        TitleUtils.setRandomTitle("*构建*");
     }
-
     public void loadComplete() {
-        TitleUtils.setRandomTitle(null);
     }
-    public void preInit( FMLPreInitializationEvent event ) {
+    public void preInit() {
         GTQTMetaToolItems.init();
         GTQTRecipes.registerTool();
-        TitleUtils.setRandomTitle("*前初始化*");
     }
-    public void init( FMLInitializationEvent event ) {
-        TitleUtils.setRandomTitle("*初始化*");
+    public void preLoad() {
+    }
+    public void init() {
         WorldLoader.init();
         OreDictionaryLoader.init();
         FuelRecipes.init();
@@ -156,9 +151,6 @@ public class CommonProxy {
     public CommonProxy() {
     }
 
-    public void preLoad() {
-        TitleUtils.setRandomTitle("*PreLoad*");
-    }
     @SubscribeEvent
     public static void initMaterialInfo(GregTechAPI.RegisterEvent<ItemMaterialInfo> event) {
         GCYSMaterialInfoLoader.init();

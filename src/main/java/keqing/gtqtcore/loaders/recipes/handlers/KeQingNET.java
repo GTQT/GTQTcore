@@ -118,7 +118,7 @@ public class KeQingNET {
 
         //物品支架
         ASSEMBLER_RECIPES.recipeBuilder()
-                .input(PLASTIC_CIRCUIT_BOARD)
+                .input(GOOD_CIRCUIT_BOARD)
                 .input(circuit, Tier.MV,8)
                 .input(wireFine, Aluminium, 2)
                 .input(gearSmall, Copper, 4)

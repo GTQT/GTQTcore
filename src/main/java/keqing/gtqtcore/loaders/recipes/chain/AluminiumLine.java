@@ -17,7 +17,7 @@ public class AluminiumLine {
                 .input(dust, Ealuminium, 1)
                 .input(dust, Carbon, 2)
                 .output(ingot, Aluminium, 1)
-                .fluidOutputs(CarbonDioxide.getFluid(288))
+                .fluidOutputs(CarbonDioxide.getFluid(2000))
                 .circuitMeta(1)
                 .blastFurnaceTemp(1700)
                 .duration(1000).EUt(VA[MV]).buildAndRegister();
@@ -27,7 +27,7 @@ public class AluminiumLine {
                 .input(dust, Carbon, 2)
                 .fluidInputs(Nitrogen.getFluid(2000))
                 .output(ingot, Aluminium, 1)
-                .fluidOutputs(CarbonDioxide.getFluid(288))
+                .fluidOutputs(CarbonDioxide.getFluid(2000))
                 .circuitMeta(2)
                 .blastFurnaceTemp(1700)
                 .duration(800).EUt(VA[MV]).buildAndRegister();

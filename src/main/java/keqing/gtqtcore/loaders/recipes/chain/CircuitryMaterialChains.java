@@ -19,10 +19,10 @@ public class CircuitryMaterialChains {
                 .duration(110)
                 .EUt(VA[MV])
                 .input(dust, Silicon)
-                .circuitMeta(0)
+                .circuitMeta(1)
                 .fluidInputs(HydrochloricAcid.getFluid(3000))
                 .fluidOutputs(Trichlorosilane.getFluid(1000))
-                .fluidOutputs(Hydrogen.getFluid(1000))
+                .fluidOutputs(Hydrogen.getFluid(2000))
                 .buildAndRegister();
 
         CHEMICAL_RECIPES.recipeBuilder()

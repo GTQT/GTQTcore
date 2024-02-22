@@ -194,7 +194,6 @@ public class MetaTileEntityStarMixer extends RecipeMapMultiblockController {
                 }
                 else return;
                 drawEnergy(recipeEUt, false);
-
             }
         }
     }

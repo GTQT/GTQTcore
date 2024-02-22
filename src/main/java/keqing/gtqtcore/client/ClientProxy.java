@@ -2,18 +2,46 @@ package keqing.gtqtcore.client;
 
 import keqing.gtqtcore.client.renderer.handler.StructureSelectRenderer;
 import keqing.gtqtcore.client.textures.GTQTTextures;
+import keqing.gtqtcore.client.utils.TitleUtils;
 import keqing.gtqtcore.common.CommonProxy;
 
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 
 @Mod.EventBusSubscriber({Side.CLIENT})
 public class ClientProxy extends CommonProxy {
     public ClientProxy() {
+        MinecraftForge.EVENT_BUS.register(this);
+    }
+
+    @Override
+    public void construction() {
+        super.construction();
+        TitleUtils.setRandomTitle("*Construction*");
+    }
+    public void preInit() {
+        super.preInit();
+        TitleUtils.setRandomTitle("*PreInit*");
+    }
+    public void init() {
+        super.init();
+        TitleUtils.setRandomTitle("*PreInit*");
+    }
+    @Override
+    public void postInit() {
+        super.postInit();
+        TitleUtils.setRandomTitle("*PostInit*");
+    }
+    @Override
+    public void loadComplete() {
+        super.loadComplete();
+        TitleUtils.setRandomTitle(null);
     }
 
     public void preLoad()
@@ -22,7 +50,6 @@ public class ClientProxy extends CommonProxy {
         GTQTTextures.init();
         GTQTTextures.preInit();
     }
-
     @SubscribeEvent
     public static void onRenderWorldLast(RenderWorldLastEvent event) {
         StructureSelectRenderer.render(event);

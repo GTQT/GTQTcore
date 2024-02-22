@@ -62,6 +62,21 @@ import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.GAS_C
 public class MetaTileEntityLoader {
 
     public static void init() {
+        // Minecart wheels
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(stick, Iron)
+                .input(ring, Iron, 2)
+                .output(IRON_MINECART_WHEELS)
+                .circuitMeta(1)
+                .duration(100).EUt(20).buildAndRegister();
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(stick, Steel)
+                .input(ring, Steel, 2)
+                .output(STEEL_MINECART_WHEELS)
+                .circuitMeta(1)
+                .duration(60).EUt(20).buildAndRegister();
+
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(50).EUt(30)
                 .inputs(HULL[1].getStackForm(4))
                 .input(ELECTRIC_PUMP_MV,8)
@@ -342,7 +357,7 @@ public class MetaTileEntityLoader {
 
         ModHandler.addShapedRecipe(true, "distillation_tower", GTQTMetaTileEntities.DISTILLATION_TOWER.getStackForm(),
                 "CBC", "FMF", "CBC", 'M', MetaTileEntities.HULL[GTValues.LV].getStackForm(), 'B',
-                new UnificationEntry(OrePrefix.pipeLargeFluid, Polyethylene), 'C',
+                new UnificationEntry(OrePrefix.pipeLargeFluid, Steel), 'C',
                 new UnificationEntry(OrePrefix.circuit, MV), 'F', MetaItems.ELECTRIC_PUMP_LV);
 
         ModHandler.addShapedRecipe(true, "salt_flied", GTQTMetaTileEntities.SALT_FLIED.getStackForm(),

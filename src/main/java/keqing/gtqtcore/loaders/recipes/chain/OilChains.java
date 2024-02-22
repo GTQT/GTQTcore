@@ -25,7 +25,47 @@ public class OilChains {
         Pre();          //预处理
         Kettle();       //原始蒸馏
         changjianya();  //常减压
+        jingzhihuishou();  //精致回收
         cuihualiehua(); //催化裂化
+    }
+
+    private static void jingzhihuishou() {
+        //VacuumResidue 减压渣油
+        SFM.recipeBuilder()
+                .fluidInputs(VacuumResidue.getFluid(2000))
+                .circuitMeta(1)
+                .chancedOutput(dust, Carbon, 1111, 0)
+                .fluidOutputs(DieselLight.getFluid(240))
+                .fluidOutputs(Naphtha.getFluid(50))
+                .fluidOutputs(Toluene.getFluid(25))
+                .fluidOutputs(Benzene.getFluid(125))
+                .fluidOutputs(Butene.getFluid(25))
+                .fluidOutputs(Butadiene.getFluid(15))
+                .fluidOutputs(Propane.getFluid(3))
+                .fluidOutputs(Propene.getFluid(30))
+                .fluidOutputs(Ethane.getFluid(5))
+                .fluidOutputs(Ethylene.getFluid(50))
+                .fluidOutputs(Acetylene.getFluid(50))
+                .fluidOutputs(Dimethylbenzene.getFluid(50))
+                .duration(120).EUt(120).buildAndRegister();
+
+        SFM.recipeBuilder()
+                .fluidInputs(VacuumResidue.getFluid(2000))
+                .circuitMeta(2)
+                .chancedOutput(dust, Carbon, 1111, 0)
+                .fluidOutputs(DieselHeavy.getFluid(240))
+                .fluidOutputs(Naphtha.getFluid(50))
+                .fluidOutputs(Toluene.getFluid(25))
+                .fluidOutputs(Benzene.getFluid(125))
+                .fluidOutputs(Butene.getFluid(25))
+                .fluidOutputs(Butadiene.getFluid(15))
+                .fluidOutputs(Propane.getFluid(3))
+                .fluidOutputs(Propene.getFluid(30))
+                .fluidOutputs(Ethane.getFluid(5))
+                .fluidOutputs(Ethylene.getFluid(50))
+                .fluidOutputs(Acetylene.getFluid(50))
+                .fluidOutputs(Dimethylbenzene.getFluid(50))
+                .duration(120).EUt(120).buildAndRegister();
     }
 
     private static void NewOil() {

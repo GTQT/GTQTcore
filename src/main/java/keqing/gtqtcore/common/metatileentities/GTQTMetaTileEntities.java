@@ -199,7 +199,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityAssemblyLine ASSEMBLY_LINE;
     public static MetaTileEntityKQCCComputationHatch[] KQCC_COMPUTATION_HATCH_RECEIVER=new MetaTileEntityKQCCComputationHatch[12];
     public static MetaTileEntityKQCCComputationHatch[] KQCC_COMPUTATION_HATCH_TRANSMITTER=new MetaTileEntityKQCCComputationHatch[12];
-    public static MetaTileEntityKQHPCA KQHPCA;
+    public static MetaTileEntityMSF MSF;
     public static MetaTileEntityCosmicRayDetector COSMIC_RAY_DETECTOR;
     public static MetaTileEntityHPCAAdvancedComputation HPCA_SUPER_COMPUTATION_COMPONENT;
     public static MetaTileEntityHPCAAdvancedComputation HPCA_ULTIMATE_COMPUTATION_COMPONENT;
@@ -311,6 +311,7 @@ public class GTQTMetaTileEntities {
         SPACE_ELEVATOR= registerMetaTileEntity(3185, new MetaTileEntitySpaceElevator(gtqtcoreId("space_elevator")));
         THREE_DIM_PRINT= registerMetaTileEntity(3186, new MetaTileEntityThreeDim(gtqtcoreId("three_dim_print")));
         NEUTRON_ACTIVATOR= registerMetaTileEntity(3187, new MetaTileEntityNeutronActivator(gtqtcoreId("neutron_activator")));
+        MSF= registerMetaTileEntity(3188, new MetaTileEntityMSF(gtqtcoreId("msf")));
         //重写设备
         DISTILLATION_TOWER = registerMetaTileEntity(3250, new MetaTileEntityDistillationTower(gtqtcoreId("distillation_tower")));
         CRACKER = registerMetaTileEntity(3251, new MetaTileEntityCrackingUnit(gtqtcoreId("cracker")));

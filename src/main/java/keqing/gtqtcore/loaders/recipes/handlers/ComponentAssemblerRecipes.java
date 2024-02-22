@@ -759,14 +759,12 @@ public class ComponentAssemblerRecipes {
                 .duration(20)
                 .buildAndRegister();
 
-
-
         //  MV
         BLAST_RECIPES.recipeBuilder()
                 .input(ENDER_PEARL)
                 .fluidInputs(Blaze.getFluid(288))
                 .output(ENDER_EYE,1)
-                .blastFurnaceTemp(2500)
+                .blastFurnaceTemp(1800)
                 .duration(100).EUt(120).buildAndRegister();
 
         COMPONENT_ASSEMBLER_RECIPES.recipeBuilder()

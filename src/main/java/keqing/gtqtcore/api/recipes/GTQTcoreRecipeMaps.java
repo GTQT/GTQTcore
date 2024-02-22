@@ -156,6 +156,7 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<SEComputationRecipeBuilder> SPACE_ELEVATOR_DRILLING_MODULE;
     public static final RecipeMap<SEComputationRecipeBuilder> SPACE_ELEVATOR_MINING_MODULE;
     public static final RecipeMap<NeutronActivatorRecipeBuilder> NEUTRON_ACTIVATOR ;
+    public static final RecipeMap<SimpleRecipeBuilder> SFM;
 
     private GTQTcoreRecipeMaps() {}
     static {
@@ -358,8 +359,11 @@ public class GTQTcoreRecipeMaps {
         SEPTIC_TANK = new RecipeMap<>("septic_tank",
                 2, 2, 2, 2, new SimpleRecipeBuilder(), false);
 
-        DISTILLATION_KETTLE = new RecipeMap<>("distillation_kettle",
-                1, 1, 1, 6, new SimpleRecipeBuilder(), false);
+        DISTILLATION_KETTLE = new RecipeMapGTQTDistillationTower<>("distillation_kettle",
+                1,false, 1,false, 1,false, 12,false, new SimpleRecipeBuilder(), false).setSound(GTSoundEvents.CHEMICAL_REACTOR);
+
+        SFM = new RecipeMapGTQTDistillationTower<>("sfm",
+                1, false, 1,false,  1,false,  12,false,  new SimpleRecipeBuilder(), false).setSound(GTSoundEvents.CHEMICAL_REACTOR);
 
         PYROLYSIS_TOWER = new RecipeMap<>("pyrolysis_tower",
                 1, 1, 1, 8, new SimpleRecipeBuilder(), false);

@@ -111,12 +111,12 @@ public abstract class GTQTRecipeMapMultiblockOverwrite extends RecipeMapMultiblo
         return group;
     }
     private void incrementThrottle(Widget.ClickData clickData) {
-        if(ParallelLim<=4) this.ParallelNum = MathHelper.clamp(ParallelNum +1, 0, ParallelLim);
+        if(ParallelLim<16) this.ParallelNum = MathHelper.clamp(ParallelNum +1, 0, ParallelLim);
         this.ParallelNum = MathHelper.clamp(ParallelNum + ParallelLim/16, 0, ParallelLim);
     }
 
     private void decrementThrottle(Widget.ClickData clickData) {
-        if(ParallelLim<=4) this.ParallelNum = MathHelper.clamp(ParallelNum -1, 0, ParallelLim);
+        if(ParallelLim<16) this.ParallelNum = MathHelper.clamp(ParallelNum -1, 0, ParallelLim);
         this.ParallelNum = MathHelper.clamp(ParallelNum - ParallelLim/16, 0, ParallelLim);
     }
 

@@ -1,6 +1,7 @@
 package keqing.gtqtcore;
 
 import keqing.gtqtcore.api.utils.GTQTLog;
+import keqing.gtqtcore.client.ClientProxy;
 import keqing.gtqtcore.common.CommonProxy;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.items.GTQTMetaItems;
@@ -18,7 +19,7 @@ import net.minecraftforge.fml.common.event.*;
         dependencies = "required-after:gregtech@[2.7.4-beta,) ;"
 )
 public class GTQTCore {
-    public static final String PACK = "1.4.0_preview_0.04";
+    public static final String PACK = "1.4.0_preview_0.6";
 
     public static final String MODID = "gtqtcore";
     public static final String NAME = "GTQT Core";
@@ -32,6 +33,7 @@ public class GTQTCore {
             serverSide = "keqing.gtqtcore.common.CommonProxy"
     )
     public static CommonProxy proxy;
+    public static ClientProxy cproxy;
     public static long clientTimer;
 
     @Mod.EventHandler
@@ -42,7 +44,7 @@ public class GTQTCore {
         GTQTMetaTileEntities.initialization();
         GTQTMetaBlocks.init();
         proxy.preLoad();
-        proxy.preInit(event);
+        proxy.preInit();
 
     }
 
@@ -54,7 +56,7 @@ public class GTQTCore {
     @Mod.EventHandler
     public void init(FMLInitializationEvent event)
     {
-        proxy.init(event);
+        proxy.init();
     }
     @Mod.EventHandler
     public void construction(FMLConstructionEvent event) {

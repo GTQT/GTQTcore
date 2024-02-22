@@ -310,7 +310,7 @@ public class FirstDegreeMaterials {
                 .build();
 
         GTQTMaterials.CSilicon = new Material.Builder(getMaterialsId(), gregtechId("csilicon"))
-                .ingot().fluid()
+                .ingot()
                 .color(0x3C3C50).iconSet(METALLIC)
                 .flags(GENERATE_FOIL)
                 .element(Elements.Si)

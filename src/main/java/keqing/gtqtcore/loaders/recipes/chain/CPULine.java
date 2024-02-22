@@ -553,7 +553,7 @@ public class CPULine {
                 .notConsumable(craftingLens, Color.Blue).output(RETICLE_INTEGRATED_LOGIC_CIRCUIT)
                 .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
 
-        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[EV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8)
+        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8)
                 .fluidInputs(Water.getFluid(10000))
                 .notConsumable(craftingLens, Color.Red).output(RETICLE_RANDOM_ACCESS_MEMORY)
                 .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
@@ -574,7 +574,7 @@ public class CPULine {
                 .notConsumable(craftingLens, Color.LightBlue).output(RETICLE_LOW_POWER_INTEGRATED_CIRCUIT)
                 .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
 
-        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[HV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8)
+        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8)
                 .fluidInputs(Water.getFluid(10000))
                 .notConsumable(craftingLens, Color.Cyan).output(RETICLE_NAND_MEMORY_CHIP)
                 .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
@@ -584,32 +584,32 @@ public class CPULine {
                 .notConsumable(craftingLens, Color.Black).output(RETICLE_NANO_CENTRAL_PROCESSING_UNIT)
                 .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
 
-        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[HV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8)
+        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8)
                 .fluidInputs(Water.getFluid(10000))
                 .notConsumable(craftingLens, Color.Gray).output(RETICLE_NOR_MEMORY_CHIP)
                 .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
 
-        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[HV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8)
+        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8)
                 .fluidInputs(Water.getFluid(10000))
                 .notConsumable(craftingLens, Color.Brown).output(RETICLE_POWER_INTEGRATED_CIRCUIT)
                 .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
 
-        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[HV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8)
+        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8)
                 .fluidInputs(Water.getFluid(10000))
                 .notConsumable(craftingLens, Color.Yellow).output(RETICLE_QBIT_CENTRAL_PROCESSING_UNIT)
                 .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
 
-        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[EV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8)
+        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8)
                 .fluidInputs(Water.getFluid(10000))
                 .notConsumable(craftingLens, Color.Lime).output(RETICLE_SIMPLE_SYSTEM_ON_CHIP)
                 .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
 
-        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[HV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8)
+        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8)
                 .fluidInputs(Water.getFluid(10000))
                 .notConsumable(craftingLens, Color.Magenta).output(RETICLE_SYSTEM_ON_CHIP)
                 .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
 
-        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[EV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8)
+        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8)
                 .fluidInputs(Water.getFluid(10000))
                 .notConsumable(craftingLens, Color.White).output(RETICLE_ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT)
                 .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
@@ -619,12 +619,12 @@ public class CPULine {
                 .notConsumable(craftingLens, Color.Green).output(RETICLE_ULTRA_LOW_POWER_INTEGRATED_CIRCUIT)
                 .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
 
-        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[EV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8)
+        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8)
                 .fluidInputs(Water.getFluid(10000))
                 .notConsumable(craftingLens, Color.Pink).output(RETICLE_HIGH_POWER_INTEGRATED_CIRCUIT)
                 .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
 
-        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[EV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8)
+        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8)
                 .fluidInputs(Water.getFluid(10000))
                 .notConsumable(craftingLens, Color.Orange).output(RETICLE_HIGHLY_ADVANCED_SYSTEM_ON_CHIP)
                 .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
@@ -653,8 +653,8 @@ public class CPULine {
         CHEMICAL_RECIPES.recipeBuilder()
                 .fluidInputs(SiliconTetrachloride.getFluid(1000))
                 .input(dust,Sodium,4)
-                .fluidOutputs(CSilicon.getFluid(1000))
-                .output(dust,Salt,4)
+                .output(dust,CSilicon)
+                .output(dust,Salt,8)
                 .duration(200)
                 .EUt(30)
                 .buildAndRegister();
@@ -662,7 +662,7 @@ public class CPULine {
         ELECTROLYZER_RECIPES.recipeBuilder()
                 .fluidInputs(SiliconTetrachloride.getFluid(1000))
                 .fluidOutputs(Chlorine.getFluid(4000))
-                .fluidOutputs(CSilicon.getFluid(1000))
+                .output(dust, CSilicon, 1)
                 .duration(200)
                 .EUt(30)
                 .buildAndRegister();
@@ -670,7 +670,7 @@ public class CPULine {
         ELECTROLYZER_RECIPES.recipeBuilder()
                 .fluidInputs(Silane.getFluid(1000))
                 .fluidOutputs(Hydrogen.getFluid(4000))
-                .fluidOutputs(CSilicon.getFluid(1000))
+                .output(dust, CSilicon, 1)
                 .duration(200)
                 .EUt(30)
                 .buildAndRegister();
@@ -828,7 +828,7 @@ public class CPULine {
 
         //酚醛基板简化版
         //防腐木板+胶水（浸渍基板）+酚醛
-        CUTTER_RECIPES.recipeBuilder()
+        FORGE_HAMMER_RECIPES.recipeBuilder()
                 .duration(100)
                 .EUt(30)
                 .input(plank, TreatedWood)
