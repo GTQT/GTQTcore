@@ -440,11 +440,12 @@ gtqtcore.multiblock.ab.amount=润滑油储量：%sL
 gtqtcore.multiblock.ab.heat=润滑油持续润滑中
 gtqtcore.multiblock.ab.no=需要提供润滑油！
 gtqtcore.multiblock.md.number=结构等级:%s
-gtqtcore.multiblock.md.tooltip.1=集成矿石处理厂的控制器方块
-gtqtcore.multiblock.md.tooltip.2=它很强（OP），我是说它是矿石处理厂。
-gtqtcore.multiblock.md.tooltip.3=一步完成所有矿石处理。
-gtqtcore.multiblock.md.tooltip.4=每提升一级线圈并行数量*2。
-gtqtcore.multiblock.md.tooltip.5=一次至多可处理1024个矿石。
+gtqtcore.multiblock.md.tooltip.1=一次性处理完矿石！
+gtqtcore.multiblock.md.tooltip.2=对大量矿物进行粗制处理，包括粉碎，洗矿等等（没有副产）
+gtqtcore.multiblock.md.tooltip.3=玻璃等级决定能耗减免，线圈等级决定最大工作电压，外壳等级决定并行系数
+gtqtcore.multiblock.md.tooltip.4=本多方块拥有智能并行系统，并且耗时不额外增加，使用润滑油切换模式
+gtqtcore.multiblock.md.tooltip.5=多方块等级取外壳与管道等级最小值
+gtqtcore.multiblock.md.level1=线圈等级：%s 玻璃等级：%s
 gtqtcore.multiblock.md.level=线圈等级：%s
 gtqtcore.multiblock.md.glass=玻璃等级：%s
 gtqtcore.multiblock.vc.tooltip.1=需要提供炽焱燃料工作。
@@ -464,7 +465,7 @@ gtqtcore.multiblock.large_combustion_engine.obstructed=进气口被阻挡
 gtqtcore.equal=外壳等级：%s与管道等级：%s等级不一致！将默认使用最低等级！
 gtqtcore.tire=多方块等级：%s
 gtqtcore.tire1=多方块等级：%s 模式：§c 手动
-gtqtcore.tire2=多方块等级：%s 模式：§a 自动（提供润滑油保持）
+gtqtcore.tire2=多方块等级：%s 模式：§a 自动
 gregtech.multiblock.hand.throttle_decrement=§c切换到手动并行
 gregtech.multiblock.hand.throttle_increment=§a切换到自动并行
 gtqtcore.parr=实际并行：%s/%s
@@ -563,7 +564,7 @@ gregtech.material.vinylcinnamate=聚乙烯醇肉桂酸酯
 gregtech.material.xmt=xMT分子光刻胶
 gregtech.material.zrbtmst=氧化锆杂化物-（2,4-双（三氯甲基）-6-（4-甲氧基苯乙烯基）-1,3,5-三嗪）（ZrO2-BTMST）
 
-
+gregtech.material.ulexite=钠硼解石
 gregtech.material.dujushixitu=独居石稀土浊溶液
 gregtech.material.yanghuahayanghuagao=氧化铪-氧化锆混合物
 gregtech.material.xishidujushixitu=稀释独居石稀土泥浆
@@ -613,9 +614,11 @@ gregtech.material.gaochunguiyanrongye=高纯硅岩溶液
 gregtech.material.dichunliusuanchaonengguiyan=低纯硫酸超能硅岩粉
 gregtech.material.dichunliusuanchaonengguiyanr=低纯硫酸超能硅岩溶液
 gregtech.material.gaochunchaonengguiyanrongye=高纯超能硅岩溶液
-
-
-
+gregtech.material.bittern=盐卤
+gregtech.material.bitterncl=氯化物型卤水
+gregtech.material.bitternso=硫酸盐型卤水
+gregtech.material.bitternco=碳酸盐型卤水
+gregtech.material.gashydrate=可燃冰
 gregtech.material.bet_air=沼泽空气
 gregtech.material.liquid_bet_air=液态沼泽空气
 gregtech.material.magic_gas=离散态微薄魔力
@@ -713,7 +716,20 @@ gtqtcore.machine.solar_plate.name=太阳能板
 gtqtcore.machine.spa.tooltip.1=只能白天工作，需要提供水洁净太阳能吸收面,需要保证上方10*10（控制器为中心）范围内均为空气。
 gtqtcore.machine.spa.tooltip.2=内置三级太阳能升级，每次升级发电提升一个阶段。
 recipemap.soalr_plate.name=太阳神的力量
-
+gregtech.machine.cracker.gtqtupdate.1=本多方块内置智能并行系统，升级你的多方块以提供更多的并行数量
+gregtech.machine.cracker.gtqtupdate.2=升级结构获得耗时减免，提高最大配方工作电压
+gtqt.machine.stepper.1=本多方块拥有部件升级：紫外发射模块，自净过滤器模块，射频调节器模块。
+gtqt.machine.3d.1=本多方块拥有部件升级：自净过滤器模块，射频调节器模块。
+gtqt.machine.stepper.2=紫外发射器等级决定多方块的极限加工波长，当其与射频调节器等级相同时，多方块自动进入同频加工模式。
+gtqt.machine.3d.2=当玻璃等级与射频调节器等级相同时，多方块自动进入同频加工模式。
+gtqt.machine.stepper.3=同频加工模式中，多方块享受对于玻璃等级的耗时减免。
+gtqt.machine.stepper.4=多方块最大工作电压为外壳与二倍自净模块中的较小值
+gtqt.machine.stepper.5=并行数量与自净等级，射频调节器等级关联（正常模式加法，同频模式乘法）
+gtqt.machine.ls.1=多方块内置升级部件：激光发射器
+gtqt.machine.ls.2=多方块最大工作电压为外壳与二倍激光发射等级中的较小值
+gtqt.machine.ls.3=当运行激光切割配方时，自动拥有等同于玻璃等级数量的并行，享受一倍耗时减免
+gtqt.machine.assembly_line.1=升级结构提高配方运行最大电压，升级玻璃获得耗时减免。
+gtqt.machine.assembly_line.2=最高运行配方电压为IV，本多方块支持研究数据输入，
 tile.electrobath.solar_plate_casing.name=阵列太阳能框架
 tile.electrobath.solar_plate_lv.name=基础太阳能集成板
 tile.electrobath.solar_plate_mv.name=进阶太阳能集成板
@@ -820,8 +836,8 @@ gtqtcore.multiblock.paa.threshold_increment=调整偏转角
 gtqtcore.multiblock.kqn.threshold_decrement=§c选取向前 1
 gtqtcore.multiblock.kqn.threshold_increment=§a选取向后 1
 
-gregtech.multiblock.parr.throttle_decrement=§c并行增加单位
-gregtech.multiblock.parr.throttle_increment=§a并行减少单位
+gregtech.multiblock.parr.throttle_decrement=§c并行减少单位
+gregtech.multiblock.parr.throttle_increment=§a并行增加单位
 
 gtqtcore.multiblock.kqn.threshold_decrement1=§c选取向前 10
 gtqtcore.multiblock.kqn.threshold_increment1=§a选取向后 10

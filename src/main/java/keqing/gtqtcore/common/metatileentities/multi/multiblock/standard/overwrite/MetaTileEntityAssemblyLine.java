@@ -437,14 +437,12 @@ public class MetaTileEntityAssemblyLine extends RecipeMapMultiblockController {
     }
 
     @Override
-    public void addInformation(ItemStack stack, World world,  List<String> tooltip,
-                               boolean advanced) {
-        if (ConfigHolder.machines.orderedAssembly && ConfigHolder.machines.orderedFluidAssembly) {
+    public void addInformation(ItemStack stack, World world,  List<String> tooltip, boolean advanced) {
             tooltip.add(I18n.format("gregtech.machine.assembly_line.tooltip_ordered_both"));
-        } else if (ConfigHolder.machines.orderedAssembly) {
             tooltip.add(I18n.format("gregtech.machine.assembly_line.tooltip_ordered_items"));
-        } else if (ConfigHolder.machines.orderedFluidAssembly) {
             tooltip.add(I18n.format("gregtech.machine.assembly_line.tooltip_ordered_fluids"));
-        }
+        tooltip.add(I18n.format("gtqt.machine.assembly_line.1"));
+        tooltip.add(I18n.format("gtqt.machine.assembly_line.2"));
+
     }
 }

@@ -31,6 +31,7 @@ import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
@@ -65,13 +66,24 @@ public class MetaTileEntityElectrobath extends GTQTRecipeMapMultiblockOverwrite 
             }
         }
     }
-    FluidStack KEEP_OPEN = Lubricant.getFluid(1);
+     int ParallelNum;
+    @Override
+    public NBTTagCompound writeToNBT(NBTTagCompound data) {
+        data.setInteger("modern", modern);
+        return super.writeToNBT(data);
+    }
+    @Override
+    public void readFromNBT(NBTTagCompound data) {
+        super.readFromNBT(data);
+        modern = data.getInteger("modern");
+    }
+
     @Override
     public void update() {
         super.update();
-        IMultipleTankHandler inputTank = getInputFluidInventory();
-        if (KEEP_OPEN.isFluidStackIdentical(inputTank.drain(KEEP_OPEN, false))) {
-            if(modern==0)modern=1;
+        if (modern == 0)
+        {
+            ParallelNum=ParallelNumA;
         }
         if (modern == 1)
         {
@@ -206,6 +218,8 @@ public class MetaTileEntityElectrobath extends GTQTRecipeMapMultiblockOverwrite 
         tooltip.add(I18n.format("gtqtcore.machine.ele.tooltip.3"));
         tooltip.add(I18n.format("gtqtcore.machine.ele.tooltip.4"));
         tooltip.add(I18n.format("gtqtcore.machine.ele.tooltip.5"));
+        tooltip.add(I18n.format("gregtech.machine.cracker.gtqtupdate.1"));
+        tooltip.add(I18n.format("gregtech.machine.cracker.gtqtupdate.2"));
     }
 
 

@@ -54,6 +54,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
@@ -80,7 +81,6 @@ public class MetaTileEntitySepticTank extends GTQTRecipeMapMultiblockController 
     public int modern;
     public int P;
     private int blastFurnaceTemperature;
-    FluidStack KEEP_OPEN = Lubricant.getFluid(1);
     public int getParallelNum()
     {
         if(ParallelNum==0) return 1;
@@ -91,12 +91,24 @@ public class MetaTileEntitySepticTank extends GTQTRecipeMapMultiblockController 
     public String[] getDescription() {
         return new String[]{I18n.format("gtqt.tooltip.update")};
     }
+    int ParallelNumA;
+    @Override
+    public NBTTagCompound writeToNBT(NBTTagCompound data) {
+        data.setInteger("modern", modern);
+        return super.writeToNBT(data);
+    }
+    @Override
+    public void readFromNBT(NBTTagCompound data) {
+        super.readFromNBT(data);
+        modern = data.getInteger("modern");
+    }
+
     @Override
     public void update() {
         super.update();
-        IMultipleTankHandler inputTank = getInputFluidInventory();
-        if (KEEP_OPEN.isFluidStackIdentical(inputTank.drain(KEEP_OPEN, false))) {
-            if(modern==0)modern=1;
+        if (modern == 0)
+        {
+            ParallelNum=ParallelNumA;
         }
         if (modern == 1)
         {
@@ -128,13 +140,13 @@ public class MetaTileEntitySepticTank extends GTQTRecipeMapMultiblockController 
         return group;
     }
     private void incrementThrottle(Widget.ClickData clickData) {
-        if(ParallelLim<=4) this.ParallelNum = MathHelper.clamp(ParallelNum +1, 0, ParallelLim);
-        this.ParallelNum = MathHelper.clamp(ParallelNum + ParallelLim/16, 0, ParallelLim);
+        if(ParallelLim<=4) this.ParallelNumA = MathHelper.clamp(ParallelNumA +1, 0, ParallelLim);
+        this.ParallelNumA = MathHelper.clamp(ParallelNumA + ParallelLim/16, 0, ParallelLim);
     }
 
     private void decrementThrottle(Widget.ClickData clickData) {
-        if(ParallelLim<=4) this.ParallelNum = MathHelper.clamp(ParallelNum -1, 0, ParallelLim);
-        this.ParallelNum = MathHelper.clamp(ParallelNum - ParallelLim/16, 0, ParallelLim);
+        if(ParallelLim<=4) this.ParallelNumA = MathHelper.clamp(ParallelNumA -1, 0, ParallelLim);
+        this.ParallelNumA = MathHelper.clamp(ParallelNumA - ParallelLim/16, 0, ParallelLim);
     }
 
     private void incrementThrottle1(Widget.ClickData clickData) {
@@ -319,6 +331,8 @@ public class MetaTileEntitySepticTank extends GTQTRecipeMapMultiblockController 
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.1"));
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.2"));
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.3"));
+        tooltip.add(I18n.format("gregtech.machine.cracker.gtqtupdate.1"));
+        tooltip.add(I18n.format("gregtech.machine.cracker.gtqtupdate.2"));
     }
 
     @Override

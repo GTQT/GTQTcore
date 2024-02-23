@@ -119,8 +119,15 @@ public class MetaTileEntityMSF extends GTQTRecipeMapMultiblockController impleme
         }
         @Override
         public int getParallelLimit() {
-            if(getStatue()) return number*4;
-            else return number;
+            if(getStatue()) {
+                if (isDistilleryMode()) {
+                    return number;
+                } else if (isDistillationMode()) {
+                    return number*2;
+                }
+                else return number*4;
+            }
+            return number;
         }
         @Override
         public void setMaxProgress(int maxProgress)

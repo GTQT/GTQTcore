@@ -30,34 +30,34 @@ public class IntegratedMiningDivision {
             for (Material material : materialRegistry) {
                 if (material.hasProperty(PropertyKey.ORE)) {
                     addIntegratedMiningRecipe1(material, 3)
-                            .EUt(7680).duration(20)
+                            .EUt(480).duration(20)
                             .buildAndRegister();
                     addIntegratedMiningRecipe9(material, 3)
-                            .EUt(7680).duration(20)
+                            .EUt(480).duration(20)
                             .buildAndRegister();
                     addIntegratedMiningRecipe2(material, 3)
-                            .EUt(7680).duration(20)
+                            .EUt(480).duration(20)
                             .buildAndRegister();
                     addIntegratedMiningRecipe3(material, 1)
-                            .EUt(7680).duration(20)
+                            .EUt(480).duration(20)
                             .buildAndRegister();
                     addIntegratedMiningRecipe4(material, 1)
-                            .EUt(30720).duration(20)
+                            .EUt(1960).duration(20)
                             .buildAndRegister();
                     addIntegratedMiningRecipe5(material, 1)
-                            .EUt(30720).duration(20)
+                            .EUt(1960).duration(20)
                             .buildAndRegister();
                     addIntegratedMiningRecipe6(material, 1)
-                            .EUt(30720).duration(20)
+                            .EUt(1960).duration(20)
                             .buildAndRegister();
                     addIntegratedMiningRecipe7(material, 2)
-                            .EUt(30720).duration(20)
+                            .EUt(1960).duration(20)
                             .buildAndRegister();
                     addIntegratedMiningRecipe8(material, 2)
-                            .EUt(30720).duration(20)
+                            .EUt(1960).duration(20)
                             .buildAndRegister();
                     addIntegratedMiningRecipe9(material, 2)
-                            .EUt(30720).duration(20)
+                            .EUt(1960).duration(20)
                             .buildAndRegister();
                     addIntegratedMiningRecipe10(material, 1)
                             .EUt(16).duration(160)

@@ -29,11 +29,13 @@ import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -57,7 +59,12 @@ public class MetaTileEntityLaserEngraving extends MultiMapMultiblockController i
         });
         this.recipeMapWorkable = new LaserEngravingWorkableHandler(this);
     }
-
+    @Override
+    public void addInformation(ItemStack stack, World world, List<String> tooltip, boolean advanced) {
+        tooltip.add(I18n.format("gtqt.machine.ls.1"));
+        tooltip.add(I18n.format("gtqt.machine.ls.2"));
+        tooltip.add(I18n.format("gtqt.machine.ls.3"));
+    }
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityLaserEngraving(metaTileEntityId);

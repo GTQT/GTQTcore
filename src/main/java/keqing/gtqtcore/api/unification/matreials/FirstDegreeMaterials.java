@@ -245,7 +245,6 @@ public class FirstDegreeMaterials {
                 .dust().fluid()
                 .color(0xB2DFEE)
                 .components(Nitrogen, 2, Hydrogen, 8, Sulfur, 1,Oxygen,4)
-                .flags(DISABLE_DECOMPOSITION)
                 .build();
 
         //轻度加氢裂解轻柴油
@@ -314,7 +313,7 @@ public class FirstDegreeMaterials {
                 .color(0x3C3C50).iconSet(METALLIC)
                 .flags(GENERATE_FOIL)
                 .element(Elements.Si)
-                .blast(2273) // no gas tier for silicon
+                .blast(1800) // no gas tier for silicon
                 .build();
 
         GTQTMaterials.CopperCl = new Material.Builder(getMaterialsId(), gregtechId("copper_cl"))

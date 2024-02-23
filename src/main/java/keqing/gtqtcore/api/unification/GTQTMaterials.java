@@ -388,6 +388,12 @@ public class GTQTMaterials {
     public static Material MarsAir;
     public static Material LiquidMarsAir;
     public static Material MagicGas;
+    public static Material Ulexite;
+    public static Material Bittern;
+    public static Material Bitterncl;
+    public static Material Bitternso;
+    public static Material Bitternco;
+    public static Material Gashydrate;
 
     //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/api/unification/GSMaterials.java
 

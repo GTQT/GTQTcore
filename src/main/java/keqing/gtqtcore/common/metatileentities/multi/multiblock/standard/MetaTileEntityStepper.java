@@ -34,12 +34,14 @@ import keqing.gtqtcore.api.recipes.properties.LASERNetProperty;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -58,7 +60,14 @@ public class MetaTileEntityStepper extends MultiMapMultiblockController implemen
     private int minvisa;
     private int visa;
 
-
+    @Override
+    public void addInformation(ItemStack stack, World world, List<String> tooltip, boolean advanced) {
+        tooltip.add(I18n.format("gtqt.machine.stepper.1"));
+        tooltip.add(I18n.format("gtqt.machine.stepper.2"));
+        tooltip.add(I18n.format("gtqt.machine.stepper.3"));
+        tooltip.add(I18n.format("gtqt.machine.stepper.4"));
+        tooltip.add(I18n.format("gtqt.machine.stepper.5"));
+    }
     private IOpticalComputationProvider computationProvider;
     public MetaTileEntityStepper(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{

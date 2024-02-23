@@ -43,6 +43,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -74,7 +75,16 @@ import static gregtech.api.unification.material.Materials.Lava;
 public class MetaTileEntityAlloykiln extends NoEnergyMultiblockController {
 
     int temp=30000;
-
+    @Override
+    public NBTTagCompound writeToNBT(NBTTagCompound data) {
+        data.setInteger("temp", temp);
+        return super.writeToNBT(data);
+    }
+    @Override
+    public void readFromNBT(NBTTagCompound data) {
+        super.readFromNBT(data);
+        temp = data.getInteger("temp");
+    }
     int cost;
     private static final TraceabilityPredicate SNOW_PREDICATE = new TraceabilityPredicate(
             bws -> GTUtility.isBlockSnow(bws.getBlockState()));

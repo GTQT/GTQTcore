@@ -139,6 +139,7 @@ public class HigherDegreeMaterials {
         GTQTMaterials.Thorianite= new Material.Builder(getMaterialsId(), gregtechId("thorianite"))
                 .ore().dust()
                 .color(0x8B4C39)
+                .flags(DISABLE_DECOMPOSITION)
                 .components(Thorium,1,Oxygen,2)
                 .build();
 
@@ -150,7 +151,43 @@ public class HigherDegreeMaterials {
                 .components(Naquadah,1,Oxygen,2)
                 .build();
 
+        //钠硼解石
+        GTQTMaterials.Ulexite= new Material.Builder(getMaterialsId(), gregtechId("ulexite"))
+                .ore().dust().fluid()
+                .flags(DISABLE_DECOMPOSITION)
+                .color(0xFFFAFA)
+                .components(Sodium,1,Calcium,1,Boron,5, Oxygen, 7, Hydrogen, 7,Water,6)
+                .build();
 
+        //bittern 盐卤
+        GTQTMaterials.Bittern= new Material.Builder(getMaterialsId(), gregtechId("bittern"))
+                .fluid()
+                .color(0xFFFAFA)
+                .build();
 
+        //氯化物型卤水
+        GTQTMaterials.Bitterncl= new Material.Builder(getMaterialsId(), gregtechId("bitterncl"))
+                .fluid()
+                .color(0xEE5C42)
+                .build();
+        //硫酸盐型卤水
+        GTQTMaterials.Bitternso= new Material.Builder(getMaterialsId(), gregtechId("bitternso"))
+                .fluid()
+                .color(0xCD69C9)
+                .build();
+        //碳酸盐型卤水
+        GTQTMaterials.Bitternco= new Material.Builder(getMaterialsId(), gregtechId("bitternco"))
+                .fluid()
+                .color(0xB3EE3A)
+                .build();
+
+        // 可燃冰
+        GTQTMaterials.Gashydrate = new Material.Builder(getMaterialsId(), gregtechId("gashydrate"))
+                .gem(1, 96000).ore(2, 1) // default coal burn time in vanilla
+                .color(0xE0FFFF).iconSet(LIGNITE)
+                .flags(FLAMMABLE, NO_SMELTING, NO_SMASHING, MORTAR_GRINDABLE, EXCLUDE_BLOCK_CRAFTING_BY_HAND_RECIPES,
+                        DISABLE_DECOMPOSITION)
+                .components(Methane,576,Water,11520)
+                .build();
     }
 }

@@ -29,6 +29,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
@@ -52,7 +53,18 @@ public class MetaTileEntityIndustrialPrimitiveBlastFurnace extends NoEnergyMulti
     private byte auxiliaryBlastFurnaceNumber = 0;
     int Temp=3000;
     private static final TraceabilityPredicate IS_SNOW_LAYER = new TraceabilityPredicate(bws -> GTUtility.isBlockSnow(bws.getBlockState()));
-
+    @Override
+    public NBTTagCompound writeToNBT(NBTTagCompound data) {
+        data.setInteger("Temp", Temp);
+        data.setInteger("thresholdPercentage", thresholdPercentage);
+        return super.writeToNBT(data);
+    }
+    @Override
+    public void readFromNBT(NBTTagCompound data) {
+        super.readFromNBT(data);
+        Temp = data.getInteger("Temp");
+        thresholdPercentage = data.getInteger("thresholdPercentage");
+    }
 
     public MetaTileEntityIndustrialPrimitiveBlastFurnace(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, RecipeMaps.PRIMITIVE_BLAST_FURNACE_RECIPES);

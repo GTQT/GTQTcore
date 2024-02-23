@@ -53,8 +53,8 @@ public class CPULine {
         //
         ASSEMBLER_RECIPES.recipeBuilder()
                 .inputs(HULL[2].getStackForm(4))
-                .input(EMITTER_MV, 4)
-                .input(SENSOR_MV, 4)
+                .input(EMITTER_LV, 4)
+                .input(SENSOR_LV, 4)
                 .input(circuit, MarkerMaterials.Tier.MV, 4)
                 .input(plate, Invar, 32)
                 .input(gear, Aluminium, 8)
@@ -65,8 +65,8 @@ public class CPULine {
 
         ASSEMBLER_RECIPES.recipeBuilder()
                 .inputs(HULL[2].getStackForm(4))
-                .input(EMITTER_MV, 4)
-                .input(FIELD_GENERATOR_MV, 4)
+                .input(EMITTER_LV, 4)
+                .input(FIELD_GENERATOR_LV, 4)
                 .input(circuit, MarkerMaterials.Tier.MV, 4)
                 .input(plate, Invar, 32)
                 .input(gear, Aluminium, 8)

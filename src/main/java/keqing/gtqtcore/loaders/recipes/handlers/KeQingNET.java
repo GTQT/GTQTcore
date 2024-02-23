@@ -215,6 +215,24 @@ public class KeQingNET {
                 .solderMultiplier(2)
                 .duration(1000).EUt(120).buildAndRegister();
 
+        //op
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .inputs(HULL[3].getStackForm(16))
+                .input(circuit, Tier.HV, 8)
+                .input(ELECTRIC_MOTOR_HV,16)
+                .input(ELECTRIC_PUMP_HV,16)
+                .input(gear,StainlessSteel,8)
+                .input(RANDOM_ACCESS_MEMORY, 4)
+                .input(wireFine, Aluminium, 8)
+                .input(foil, Aluminium, 8)
+                .fluidInputs(Polybenzimidazole.getFluid(4000))
+                .scannerResearch(b -> b
+                        .researchStack(MACERATOR[3].getStackForm())
+                        .duration(1200)
+                        .EUt(VA[MV]))
+                .output(INTEGRATED_MINING_DIVISION)
+                .duration(2000).EUt(480).buildAndRegister();
+
     }
     private static void I_VV() {
 

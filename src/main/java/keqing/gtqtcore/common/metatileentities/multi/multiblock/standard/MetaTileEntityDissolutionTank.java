@@ -30,6 +30,7 @@ import keqing.gtqtcore.api.utils.GTQTUtil;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -57,13 +58,24 @@ public class MetaTileEntityDissolutionTank extends GTQTRecipeMapMultiblockOverwr
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {
         return new MetaTileEntityDissolutionTank(metaTileEntityId);
     }
-    FluidStack KEEP_OPEN = Lubricant.getFluid(1);
+     int ParallelNum;
+    @Override
+    public NBTTagCompound writeToNBT(NBTTagCompound data) {
+        data.setInteger("modern", modern);
+        return super.writeToNBT(data);
+    }
+    @Override
+    public void readFromNBT(NBTTagCompound data) {
+        super.readFromNBT(data);
+        modern = data.getInteger("modern");
+    }
+
     @Override
     public void update() {
         super.update();
-        IMultipleTankHandler inputTank = getInputFluidInventory();
-        if (KEEP_OPEN.isFluidStackIdentical(inputTank.drain(KEEP_OPEN, false))) {
-            if(modern==0)modern=1;
+        if (modern == 0)
+        {
+            ParallelNum=ParallelNumA;
         }
         if (modern == 1)
         {
@@ -179,6 +191,7 @@ public class MetaTileEntityDissolutionTank extends GTQTRecipeMapMultiblockOverwr
     public void addInformation(ItemStack stack, @Nullable World world, @Nonnull List<String> tooltip, boolean advanced) {
         super.addInformation(stack, world, tooltip, advanced);
         tooltip.add(I18n.format("epimorphism.machine.dissolution_tank.tooltip.1"));
+        tooltip.add(I18n.format("gregtech.machine.cracker.gtqtupdate.1"));
     }
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {

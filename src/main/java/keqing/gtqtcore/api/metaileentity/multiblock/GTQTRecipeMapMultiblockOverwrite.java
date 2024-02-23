@@ -39,7 +39,7 @@ import static gregtech.api.unification.material.Materials.Lubricant;
 
 public abstract class GTQTRecipeMapMultiblockOverwrite extends RecipeMapMultiblockController {
     public int ParallelLim;
-    public int ParallelNum;
+    public int ParallelNumA;
     public int modern;
     public int P;
     int tier;
@@ -49,13 +49,24 @@ public abstract class GTQTRecipeMapMultiblockOverwrite extends RecipeMapMultiblo
     }
 
     /*
-    FluidStack KEEP_OPEN = Lubricant.getFluid(1);
+    int ParallelNum;
+    @Override
+    public NBTTagCompound writeToNBT(NBTTagCompound data) {
+        data.setInteger("modern", modern);
+        return super.writeToNBT(data);
+    }
+    @Override
+    public void readFromNBT(NBTTagCompound data) {
+        super.readFromNBT(data);
+        modern = data.getInteger("modern");
+    }
+
     @Override
     public void update() {
         super.update();
-        IMultipleTankHandler inputTank = getInputFluidInventory();
-        if (KEEP_OPEN.isFluidStackIdentical(inputTank.drain(KEEP_OPEN, false))) {
-            if(modern==0)modern=1;
+        if (modern == 0)
+        {
+            ParallelNum=ParallelNumA;
         }
         if (modern == 1)
         {
@@ -111,15 +122,24 @@ public abstract class GTQTRecipeMapMultiblockOverwrite extends RecipeMapMultiblo
         return group;
     }
     private void incrementThrottle(Widget.ClickData clickData) {
-        if(ParallelLim<16) this.ParallelNum = MathHelper.clamp(ParallelNum +1, 0, ParallelLim);
-        this.ParallelNum = MathHelper.clamp(ParallelNum + ParallelLim/16, 0, ParallelLim);
+        if(ParallelLim<16) this.ParallelNumA = MathHelper.clamp(ParallelNumA +1, 1, ParallelLim);
+        this.ParallelNumA = MathHelper.clamp(ParallelNumA + ParallelLim/16, 1, ParallelLim);
     }
 
     private void decrementThrottle(Widget.ClickData clickData) {
-        if(ParallelLim<16) this.ParallelNum = MathHelper.clamp(ParallelNum -1, 0, ParallelLim);
-        this.ParallelNum = MathHelper.clamp(ParallelNum - ParallelLim/16, 0, ParallelLim);
+        if(ParallelLim<16) this.ParallelNumA = MathHelper.clamp(ParallelNumA -1, 1, ParallelLim);
+        this.ParallelNumA = MathHelper.clamp(ParallelNumA - ParallelLim/16, 1, ParallelLim);
     }
 
+    public NBTTagCompound writeToNBT(NBTTagCompound data) {
+        data.setInteger("ParallelNumA", ParallelNumA);
+        return super.writeToNBT(data);
+    }
+
+    public void readFromNBT(NBTTagCompound data) {
+        super.readFromNBT(data);
+        ParallelNumA = data.getInteger("ParallelNumA");
+    }
     private void incrementThrottle1(Widget.ClickData clickData) {
         this.modern = MathHelper.clamp(modern + 1, 0, 1);
     }
@@ -133,12 +153,6 @@ public abstract class GTQTRecipeMapMultiblockOverwrite extends RecipeMapMultiblo
         this.energyContainer = new EnergyContainerList(getAbilities(MultiblockAbility.INPUT_ENERGY));
 
     }
-    public int getParallelNum()
-    {
-        if(ParallelNum==0) return 1;
-        else return ParallelNum;
-    }
-
     @Override
     public String[] getDescription() {
         return new String[]{I18n.format("gtqt.tooltip.update")};

@@ -342,7 +342,9 @@ public class GTQTcoreRecipeMaps {
                 6, 6, 6, 6, new ChemicalPlantBuilder(), false);
 
         INTEGRATED_MINING_DIVISION = new RecipeMap<>("integrated_mining_division",
-                6, 6, 6, 6, new SimpleRecipeBuilder(), false);
+                3, 3, 3, 3, new SimpleRecipeBuilder(), false)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL)
+                .setSound(GTSoundEvents.CHEMICAL_REACTOR);
 
         GANTRY_CRANE = new RecipeMap<>("gantry_crane",
                 9, 1, 0, 0, new SimpleRecipeBuilder(), false);
