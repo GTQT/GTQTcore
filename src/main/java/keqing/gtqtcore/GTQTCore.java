@@ -67,7 +67,6 @@ public class GTQTCore {
     {
         proxy.postInit();
     }
-
     @Mod.EventHandler
     public void loadComplete(FMLLoadCompleteEvent event) {
         proxy.loadComplete();

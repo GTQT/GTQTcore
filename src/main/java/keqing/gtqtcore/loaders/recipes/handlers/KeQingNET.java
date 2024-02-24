@@ -17,6 +17,8 @@ import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 import net.minecraftforge.oredict.OreDictionary;
 
+import static gregicality.multiblocks.api.unification.GCYMMaterials.TantalumCarbide;
+import static gregicality.multiblocks.api.unification.GCYMMaterials.WatertightSteel;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.MarkerMaterials.*;
@@ -37,9 +39,9 @@ import static gregtech.common.metatileentities.MetaTileEntities.FUSION_REACTOR;
 import static gregtech.common.blocks.BlockFusionCasing.CasingType.SUPERCONDUCTOR_COIL;
 import static gregtech.common.items.MetaItems.*;
 import static gregtech.common.metatileentities.MetaTileEntities.*;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.KaptonK;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.Orichalcum;
-import static keqing.gtqtcore.api.unification.GTQTMaterials.Fluix;
+import static gregtech.common.metatileentities.MetaTileEntities.ROTOR_HOLDER;
+import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.common.block.blocks.GTQTKQCC.CasingType.COMPUTER_VENT;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.*;
@@ -493,6 +495,116 @@ public class KeQingNET {
                 .totalCWU(100000)
                 .buildAndRegister();
 
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(LARGE_STEAM_TURBINE,6)
+                .input(plate, WatertightSteel, 8)
+                .input(circuit, MarkerMaterials.Tier.LuV, 32)
+                .input(ELECTRIC_PUMP_IV, 4)
+                .input(FLUID_REGULATOR_IV, 4)
+                .input(gear, TanmolyiumBetaC, 8)
+                .input(screw, MARM200Steel, 16)
+                .fluidInputs(BlueSteel.getFluid(L * 16))
+                .stationResearch(b -> b
+                        .researchStack(DISK_3.getStackForm())
+                        .CWUt(1000,1000000)
+                        .EUt(VA[IV]))
+                .output(MEGA_STEAM_TURBINE)
+                .EUt(VA[IV])
+                .duration(1200)
+                .buildAndRegister();
+
+        //  Mega Gas Turbine
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(LARGE_GAS_TURBINE,6)
+                .input(plate, TantalumCarbide, 8)
+                .input(circuit, MarkerMaterials.Tier.ZPM, 32)
+                .input(ELECTRIC_PUMP_LuV, 4)
+                .input(FLUID_REGULATOR_LUV, 4)
+                .input(rotor, Staballoy, 8)
+                .input(screw, IncoloyMA813, 16)
+                .fluidInputs(Naquadah.getFluid(L * 16))
+                .stationResearch(b -> b
+                        .researchStack(DISK_3.getStackForm())
+                        .CWUt(4000,1000000)
+                        .EUt(VA[LuV]))
+                .output(MEGA_GAS_TURBINE)
+                .EUt(VA[LuV])
+                .duration(1200)
+                .buildAndRegister();
+
+        //  Mega Plasma Turbine
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(LARGE_PLASMA_TURBINE,6)
+                .input(plate, HMS1J79Alloy, 8)
+                .input(circuit, MarkerMaterials.Tier.UV, 32)
+                .input(ELECTRIC_PUMP_ZPM, 4)
+                .input(FLUID_REGULATOR_ZPM, 4)
+                .input(spring, Pikyonium64B, 8)
+                .input(screw, Trinium, 16)
+                .fluidInputs(NaquadahAlloy.getFluid(L * 16))
+                .stationResearch(b -> b
+                        .researchStack(DISK_3.getStackForm())
+                        .CWUt(16000,1000000)
+                        .EUt(VA[ZPM]))
+                .output(MEGA_PLASMA_TURBINE)
+                .EUt(VA[ZPM])
+                .duration(1200)
+                .buildAndRegister();
+
+        //  ZPM
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(frameGt, NaquadahAlloy)
+                .input(ROTOR_HOLDER[5])
+                .input(ELECTRIC_MOTOR_ZPM, 2)
+                .input(rotor, Inconel792, 4)
+                .input(stickLong, TungstenSteel, 2)
+                .input(wireFine, NiobiumTitanium, 16)
+                .fluidInputs(SolderingAlloy.getFluid(L * 2))
+                .output(MULTIPART_REINFORCED_ROTOR_HOLDER[1])
+                .stationResearch(b -> b
+                        .researchStack(DISK_3.getStackForm())
+                        .CWUt(1000,1000000)
+                        .EUt(VA[ZPM]))
+                .EUt(VA[ZPM])
+                .duration(1200)
+                .buildAndRegister();
+
+        //  UV
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(frameGt, Darmstadtium)
+                .input(MULTIPART_REINFORCED_ROTOR_HOLDER[1])
+                .input(ELECTRIC_MOTOR_UV, 2)
+                .input(rotor, Inconel625, 4)
+                .input(stickLong, RhodiumPlatedPalladium, 2)
+                .input(wireFine, VanadiumGallium, 16)
+                .fluidInputs(SolderingAlloy.getFluid(L * 2))
+                .output(MULTIPART_REINFORCED_ROTOR_HOLDER[2])
+                .stationResearch(b -> b
+                        .researchStack(DISK_3.getStackForm())
+                        .CWUt(1000,1000000)
+                        .EUt(VA[ZPM]))
+                .EUt(VA[UV])
+                .duration(1200)
+                .buildAndRegister();
+
+        //  UHV
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(frameGt, Orichalcum)
+                .input(MULTIPART_REINFORCED_ROTOR_HOLDER[2])
+                .input(ELECTRIC_MOTOR_UHV, 2)
+                .input(CONVEYOR_MODULE_UHV, 2)
+                .input(rotor, Adamantium, 4)
+                .input(stickLong, HSSS, 2)
+                .input(wireFine, YttriumBariumCuprate, 32)
+                .fluidInputs(SolderingAlloy.getFluid(L * 10))
+                .output(MULTIPART_REINFORCED_ROTOR_HOLDER[3])
+                .EUt(VA[UHV])
+                .duration(1200)
+                .stationResearch(b -> b
+                        .researchStack(DISK_3.getStackForm())
+                        .CWUt(1000,1000000)
+                        .EUt(VA[ZPM]))
+                .buildAndRegister();
         //4 蒸燃联合体系 爆燃 大火箭
         GTQTcoreRecipeMaps.KEQING_NET_RECIES.recipeBuilder()
                 .input(DISK_0)

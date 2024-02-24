@@ -13,7 +13,11 @@ public class TitleUtils {
     public static final String DEFAULT_TITLE = "GregTech : Quantum Transition 格雷：量子跃迁 | ModPack Ver:" +GTQTCore.PACK+ " - GTQTCore Ver:"+GTQTCore.VERSION;
     public static String currentTitle = null;
     public static String TEST = "本整合包当前处于 内测 状态，不保证游戏完整性，仅供体验！";
-
+    public static void checkTitleState() {
+        if (currentTitle == null) {
+            return;
+        }
+    }
     public static void setRandomTitle(String STATUE)
     {
         currentTitle = buildTitle(getrandom(),STATUE);

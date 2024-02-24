@@ -9,6 +9,8 @@ import gregtech.api.metatileentity.SimpleMachineMetaTileEntity;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.util.GTUtility;
 import gregtech.client.renderer.texture.Textures;
+import gregtech.common.blocks.BlockTurbineCasing;
+import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.MetaTileEntities;
 import gregtech.common.metatileentities.electric.MetaTileEntitySingleCombustion;
 import gregtech.common.metatileentities.electric.MetaTileEntitySingleTurbine;
@@ -38,6 +40,7 @@ import java.util.function.IntFunction;
 import java.util.function.IntPredicate;
 import java.util.function.IntSupplier;
 
+import static gregtech.api.GTValues.LuV;
 import static gregtech.api.util.GTUtility.genericGeneratorTankSizeFunction;
 import static gregtech.common.metatileentities.MetaTileEntities.*;
 import static gregtech.common.metatileentities.MetaTileEntities.registerMetaTileEntity;
@@ -205,9 +208,13 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityHPCAAdvancedComputation HPCA_ULTIMATE_COMPUTATION_COMPONENT;
     public static MetaTileEntityHPCAAdvancedCooler HPCA_SUPER_COOLER_COMPONENT;
     public static MetaTileEntityHPCAAdvancedCooler HPCA_ULTIMATE_COOLER_COMPONENT;
-
+    public static MetaTileEntityIntegratedOreProcessor INTEGRATED_ORE_PROCESSOR;
     public static MetaTileEntityCrystallizationCrucible CRYSTALLIZATION_CRUCIBLE;
     public static MetaTileEntityRoaster ROASTER;
+    public static MetaTileEntityMegaTurbine MEGA_STEAM_TURBINE;
+    public static MetaTileEntityMegaTurbine MEGA_GAS_TURBINE;
+    public static MetaTileEntityMegaTurbine MEGA_PLASMA_TURBINE;
+
     public static MetaTileEntityNanoscaleFabricator NANOSCALE_FABRICATOR;
     public static MetaTileEntityCVDUnit CVD_UNIT;
     public static MetaTileEntityEXCVD EX_CVD;
@@ -219,14 +226,14 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityIndustrialDrill INDUSTRIAL_DRILL;
     public static MetaTileEntityIonImplanter ION_IMPLANTATOR;
     public static MetaTileEntityCZPuller CZ_PULLER;
-
+    public static final MetaTileEntityReinforcedRotorHolder[] MULTIPART_REINFORCED_ROTOR_HOLDER = new MetaTileEntityReinforcedRotorHolder[8];
     //public static MetaTileEntityObjectHolder OBJECT_HOLDER;
     public static void initialization() {
         GTQTLog.logger.info("Registering MetaTileEntities");
 
         //发电设备 单方块
         LIGHTNING_ROD[0] = registerSingleMetaTileEntity(3000, new MetaTileEntityLightningRod(gtqtcoreId("lightning_rod.zpm"), GTValues.ZPM));
-        LIGHTNING_ROD[1] = registerSingleMetaTileEntity(3001, new MetaTileEntityLightningRod(gtqtcoreId("lightning_rod.luv"), GTValues.LuV));
+        LIGHTNING_ROD[1] = registerSingleMetaTileEntity(3001, new MetaTileEntityLightningRod(gtqtcoreId("lightning_rod.luv"), LuV));
         LIGHTNING_ROD[2] = registerSingleMetaTileEntity(3002, new MetaTileEntityLightningRod(gtqtcoreId("lightning_rod.iv"), GTValues.IV));
         NAQUADAH_REACTOR[0] = registerMetaTileEntity(3003, new SimpleGeneratorMetaTileEntity(gtqtcoreId("naquadah_reactor.iv"), GTQTcoreRecipeMaps.NAQUADAH_REACTOR_RECIPES, GTQTTextures.NAQUADAH_REACTOR_OVERLAY, 5, genericGeneratorTankSizeFunction));
         NAQUADAH_REACTOR[1] = registerMetaTileEntity(3004, new SimpleGeneratorMetaTileEntity(gtqtcoreId("naquadah_reactor.luv"), GTQTcoreRecipeMaps.NAQUADAH_REACTOR_RECIPES, GTQTTextures.NAQUADAH_REACTOR_OVERLAY, 6, genericGeneratorTankSizeFunction));
@@ -243,7 +250,7 @@ public class GTQTMetaTileEntities {
         GAS_TURBINE[1] = registerMetaTileEntity(3014, new SimpleGeneratorMetaTileEntity(gtqtcoreId("gas_turbine.iv"), RecipeMaps.GAS_TURBINE_FUELS, Textures.GAS_TURBINE_OVERLAY, 5, genericGeneratorTankSizeFunction));
 
         //发电设备 多方块
-        EFUSION_REACTOR[0] = registerMetaTileEntity(3050, new MetaTileEntityEFusionReactor(gtqtcoreId("fusion_reactor.luv"), GTValues.LuV));
+        EFUSION_REACTOR[0] = registerMetaTileEntity(3050, new MetaTileEntityEFusionReactor(gtqtcoreId("fusion_reactor.luv"), LuV));
         EFUSION_REACTOR[1] = registerMetaTileEntity(3051, new MetaTileEntityEFusionReactor(gtqtcoreId("fusion_reactor.zpm"), GTValues.ZPM));
         EFUSION_REACTOR[2] = registerMetaTileEntity(3052, new MetaTileEntityEFusionReactor(gtqtcoreId("fusion_reactor.uv"), GTValues.UV));
 
@@ -264,6 +271,11 @@ public class GTQTMetaTileEntities {
 
         I_MODULAR_FISSION_REACTOR = registerMetaTileEntity(3063, new MetaTileEntityIModularFissionReactor(gtqtcoreId("i_modular_fission_reactor"),5));
         WATER_POWER_STATION = registerMetaTileEntity(3064, new MetaTileEntityWaterPowerStation(gtqtcoreId("water_power_station")));
+
+        MEGA_STEAM_TURBINE = registerMetaTileEntity(3065, new MetaTileEntityMegaTurbine(gtqtcoreId("mega_turbine.steam"), RecipeMaps.STEAM_TURBINE_FUELS, 3, MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.STEEL_TURBINE_CASING), MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.STEEL_GEARBOX), Textures.SOLID_STEEL_CASING, false, GTQTTextures.MEGA_TURBINE_OVERLAY));
+        MEGA_GAS_TURBINE = registerMetaTileEntity(3066, new MetaTileEntityMegaTurbine(gtqtcoreId("mega_turbine.gas"), RecipeMaps.GAS_TURBINE_FUELS, 4, MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.STAINLESS_TURBINE_CASING), MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.STAINLESS_STEEL_GEARBOX), Textures.CLEAN_STAINLESS_STEEL_CASING, true, GTQTTextures.MEGA_TURBINE_OVERLAY));
+        MEGA_PLASMA_TURBINE = registerMetaTileEntity(3067, new MetaTileEntityMegaTurbine(gtqtcoreId("mega_turbine.plasma"), RecipeMaps.PLASMA_GENERATOR_FUELS, 5, MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.TUNGSTENSTEEL_TURBINE_CASING), MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.TUNGSTENSTEEL_GEARBOX), Textures.ROBUST_TUNGSTENSTEEL_CASING, false, GTQTTextures.MEGA_TURBINE_OVERLAY));
+
         //早期设备
         ALLOY_KILN = registerMetaTileEntity(3100, new MetaTileEntityAlloykiln(gtqtcoreId("alloy_klin")));
         STEAM_COMPRESSOR = registerMetaTileEntity(3101, new MetaTileEntitySteamCompressor(gtqtcoreId("steam_compressor")));
@@ -312,6 +324,7 @@ public class GTQTMetaTileEntities {
         THREE_DIM_PRINT= registerMetaTileEntity(3186, new MetaTileEntityThreeDim(gtqtcoreId("three_dim_print")));
         NEUTRON_ACTIVATOR= registerMetaTileEntity(3187, new MetaTileEntityNeutronActivator(gtqtcoreId("neutron_activator")));
         MSF= registerMetaTileEntity(3188, new MetaTileEntityMSF(gtqtcoreId("msf")));
+        INTEGRATED_ORE_PROCESSOR= registerMetaTileEntity(3189, new MetaTileEntityIntegratedOreProcessor(gtqtcoreId("integrated_ore_processor")));
         //重写设备
         DISTILLATION_TOWER = registerMetaTileEntity(3250, new MetaTileEntityDistillationTower(gtqtcoreId("distillation_tower")));
         CRACKER = registerMetaTileEntity(3251, new MetaTileEntityCrackingUnit(gtqtcoreId("cracker")));
@@ -412,6 +425,15 @@ public class GTQTMetaTileEntities {
         MULTIPART_BALL_HATCH = registerMetaTileEntity(15550, new MetaTileEntityMillBallHatch(gtqtcoreId("mill_ball_hatch")));
         EDATA_ACCESS_HATCH = registerMetaTileEntity(15551, new MetaTileEntityDataAccessHatch(gtqtcoreId("edata_access_hatch"), GTValues.MV, false));
         FDATA_ACCESS_HATCH = registerMetaTileEntity(15552, new MetaTileEntityDataAccessHatch(gtqtcoreId("fdata_access_hatch"), GTValues.UV, false));
+
+        MULTIPART_REINFORCED_ROTOR_HOLDER[0] = registerMetaTileEntity(15553, new MetaTileEntityReinforcedRotorHolder(gtqtcoreId("reinforced_rotor_holder.luv"), 6));
+        MULTIPART_REINFORCED_ROTOR_HOLDER[1] = registerMetaTileEntity(15554, new MetaTileEntityReinforcedRotorHolder(gtqtcoreId("reinforced_rotor_holder.zpm"), 7));
+        MULTIPART_REINFORCED_ROTOR_HOLDER[2] = registerMetaTileEntity(15555, new MetaTileEntityReinforcedRotorHolder(gtqtcoreId("reinforced_rotor_holder.uv"), 8));
+        MULTIPART_REINFORCED_ROTOR_HOLDER[3] = registerMetaTileEntity(15556, new MetaTileEntityReinforcedRotorHolder(gtqtcoreId("reinforced_rotor_holder.uhv"), 9));
+        MULTIPART_REINFORCED_ROTOR_HOLDER[4] = registerMetaTileEntity(15557, new MetaTileEntityReinforcedRotorHolder(gtqtcoreId("reinforced_rotor_holder.uev"), 10));
+        MULTIPART_REINFORCED_ROTOR_HOLDER[5] = registerMetaTileEntity(15558, new MetaTileEntityReinforcedRotorHolder(gtqtcoreId("reinforced_rotor_holder.uiv"), 11));
+        MULTIPART_REINFORCED_ROTOR_HOLDER[6] = registerMetaTileEntity(15559, new MetaTileEntityReinforcedRotorHolder(gtqtcoreId("reinforced_rotor_holder.uxv"), 12));
+        MULTIPART_REINFORCED_ROTOR_HOLDER[7] = registerMetaTileEntity(15560, new MetaTileEntityReinforcedRotorHolder(gtqtcoreId("reinforced_rotor_holder.opv"), 13));
 
         ROTOR_HOLDER[6] = registerMetaTileEntity(16000, new MetaTileEntityRotorHolder(gtqtcoreId("rotor_holder.uhv"), GTValues.UHV));
         ROTOR_HOLDER[7] = registerMetaTileEntity(16001, new MetaTileEntityRotorHolder(gtqtcoreId("rotor_holder.uev"), GTValues.UEV));

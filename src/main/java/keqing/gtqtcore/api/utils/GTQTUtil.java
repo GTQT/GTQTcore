@@ -2,6 +2,7 @@ package keqing.gtqtcore.api.utils;
 
 import keqing.gtqtcore.GTQTCore;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
@@ -13,6 +14,7 @@ import java.util.BitSet;
 import java.util.function.BooleanSupplier;
 import java.util.function.Supplier;
 
+import static keqing.gtqtcore.api.utils.GTQTUniverUtil.*;
 import static net.minecraft.util.EnumFacing.*;
 
 public class GTQTUtil {
@@ -56,6 +58,7 @@ public class GTQTUtil {
     public static <T> T getOrDefault(BooleanSupplier canGet, Supplier<T> getter, T defaultValue){
         return canGet.getAsBoolean() ? getter.get() : defaultValue;
     }
+
 
     public static EnumFacing getFacingFromNeighbor(BlockPos pos,BlockPos neighbor){
         BlockPos rel = neighbor.subtract(pos);

@@ -1,5 +1,6 @@
 package keqing.gtqtcore.client;
 
+import keqing.gtqtcore.api.utils.GTQTLog;
 import keqing.gtqtcore.client.renderer.handler.StructureSelectRenderer;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.client.utils.TitleUtils;
@@ -12,6 +13,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 
 @Mod.EventBusSubscriber({Side.CLIENT})
@@ -60,5 +62,17 @@ public class ClientProxy extends CommonProxy {
     {
         GTQTMetaBlocks.registerItemModels();
     }
+    private long clientTick = 0;
+    @SubscribeEvent
+    public void onClientTick(TickEvent.ClientTickEvent event) {
+        if (event.phase != TickEvent.Phase.START) {
+            return;
+        }
+        clientTick++;
 
+        if (clientTick % 200 == 0) {
+            TitleUtils.setRandomTitle(null);
+            clientTick=0;
+        }
+    }
 }

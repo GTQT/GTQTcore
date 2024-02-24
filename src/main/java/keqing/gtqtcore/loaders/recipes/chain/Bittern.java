@@ -94,7 +94,7 @@ public class Bittern {
                 .fluidInputs(Ulexite.getFluid(11000))
                 .output(dust, SodiumHydroxide, 1)
                 .output(dust, CalciumHydroxide, 1)
-                .output(dust, BariumHydroxide, 5)
+                .output(dust, Borax, 1)
                 .fluidOutputs(Water.getFluid(6000))
                 .duration(200).EUt(120).buildAndRegister();
 

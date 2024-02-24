@@ -31,7 +31,9 @@ import static gregicality.multiblocks.api.unification.GCYMMaterials.MolybdenumDi
 import static gregicality.multiblocks.api.unification.GCYMMaterials.TitaniumCarbide;
 import static gregicality.science.common.block.blocks.BlockCrucible.CrucibleType.QUARTZ_CRUCIBLE;
 import static gregtech.api.GTValues.L;
+import static gregtech.api.GTValues.VA;
 import static gregtech.api.recipes.RecipeMaps.ASSEMBLER_RECIPES;
+import static gregtech.api.recipes.RecipeMaps.ASSEMBLY_LINE_RECIPES;
 import static gregtech.api.unification.material.MarkerMaterials.Tier.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.Materials.YttriumBariumCuprate;
@@ -56,6 +58,7 @@ import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing1.TurbineCasi
 import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing1.TurbineCasingType.ST_TURBINE_CASING;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.*;
+import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.DISTILLATION_TOWER;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.GAS_COLLECTOR;
 
 
@@ -211,6 +214,30 @@ public class MetaTileEntityLoader {
                 'P', ELECTRIC_PUMP_MV.getStackForm(),
                 'H', FLUID_SOLIDIFIER[2].getStackForm()
         );
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(HULL[7])
+                .input(ELECTRIC_MOTOR_ZPM, 32)
+                .input(ELECTRIC_PISTON_ZPM, 8)
+                .input(ELECTRIC_PUMP_ZPM, 16)
+                .input(CONVEYOR_MODULE_ZPM, 8)
+                .input(ROBOT_ARM_ZPM, 8)
+                .input(plateDouble, StainlessSteel, 32)
+                .input(rotor, Chrome, 16)
+                .input(circuit, MarkerMaterials.Tier.UV, 4)
+                .input(pipeNormalFluid, Polybenzimidazole, 32)
+                .input(COMPONENT_GRINDER_TUNGSTEN, 64)
+                .input(wireGtDouble, UraniumRhodiumDinaquadide, 16)
+                .fluidInputs(SolderingAlloy.getFluid(2880))
+                .fluidInputs(Naquadria.getFluid(1440))
+                .output(INTEGRATED_ORE_PROCESSOR)
+                .EUt(VA[7])
+                .duration(1600)
+                .scannerResearch(b -> b
+                        .researchStack(COMPONENT_GRINDER_TUNGSTEN.getStackForm())
+                        .EUt(VA[7])
+                        .duration(800))
+                .buildAndRegister();
+
         //耐火砖快乐配方
         ASSEMBLER_RECIPES.recipeBuilder()
                 .inputs(MetaItems.FIRECLAY_BRICK.getStackForm(6))
@@ -355,10 +382,15 @@ public class MetaTileEntityLoader {
                 'H', GCYSMetaBlocks.CRUCIBLE.getItemVariant(QUARTZ_CRUCIBLE),
                 'W', new UnificationEntry(OrePrefix.cableGtSingle, Aluminium));
 
-        ModHandler.addShapedRecipe(true, "distillation_tower", GTQTMetaTileEntities.DISTILLATION_TOWER.getStackForm(),
+        ModHandler.addShapedRecipe(true, "distillation_tower", DISTILLATION_TOWER.getStackForm(),
                 "CBC", "FMF", "CBC", 'M', MetaTileEntities.HULL[GTValues.LV].getStackForm(), 'B',
                 new UnificationEntry(OrePrefix.pipeLargeFluid, Steel), 'C',
                 new UnificationEntry(OrePrefix.circuit, MV), 'F', MetaItems.ELECTRIC_PUMP_LV);
+
+        ModHandler.addShapedRecipe(true, "distillation_tower", GTQTMetaTileEntities.MSF.getStackForm(),
+                "CBC", "FMF", "CBC", 'M', MetaTileEntities.HULL[GTValues.MV].getStackForm(), 'B',
+                new UnificationEntry(OrePrefix.pipeLargeFluid, Aluminium), 'C',
+                new UnificationEntry(OrePrefix.circuit, MV), 'F', DISTILLATION_TOWER.getStackForm());
 
         ModHandler.addShapedRecipe(true, "salt_flied", GTQTMetaTileEntities.SALT_FLIED.getStackForm(),
                 "FFF", "CMC", "BBB", 'M', MetaTileEntities.HULL[GTValues.LV].getStackForm(), 'B',

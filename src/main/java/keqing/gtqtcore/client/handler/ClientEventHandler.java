@@ -2,6 +2,8 @@ package keqing.gtqtcore.client.handler;
 
 
 
+import keqing.gtqtcore.GTQTCore;
+import keqing.gtqtcore.api.utils.GTQTLog;
 import keqing.gtqtcore.client.utils.TitleUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.text.TextFormatting;
@@ -9,6 +11,7 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.network.FMLNetworkEvent;
+import org.lwjgl.opengl.Display;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +19,6 @@ import java.util.List;
 @SuppressWarnings("MethodMayBeStatic")
 public class ClientEventHandler {
     public static final ClientEventHandler INSTANCE = new ClientEventHandler();
-
     private ClientEventHandler() {
     }
 
@@ -29,4 +31,5 @@ public class ClientEventHandler {
     public void onServerDisconnected(FMLNetworkEvent.ClientDisconnectionFromServerEvent event) {
         TitleUtils.setRandomTitleSync();
     }
+
 }

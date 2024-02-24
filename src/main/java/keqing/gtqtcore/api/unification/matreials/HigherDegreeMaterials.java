@@ -156,7 +156,7 @@ public class HigherDegreeMaterials {
                 .ore().dust().fluid()
                 .flags(DISABLE_DECOMPOSITION)
                 .color(0xFFFAFA)
-                .components(Sodium,1,Calcium,1,Boron,5, Oxygen, 7, Hydrogen, 7,Water,6)
+                .components(Sodium,1,Calcium,1,Borax,1, Oxygen, 2, Hydrogen, 2,Water,6)
                 .build();
 
         //bittern 盐卤
