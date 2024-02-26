@@ -43,6 +43,7 @@ import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.MetaTil
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
@@ -101,6 +102,7 @@ public class MetaTileEntityAssemblyLine extends RecipeMapMultiblockController {
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityAssemblyLine(metaTileEntityId);
     }
+
     @Override
     public String[] getDescription() {
         return new String[]{I18n.format("gtqt.tooltip.update")};
@@ -187,7 +189,16 @@ public class MetaTileEntityAssemblyLine extends RecipeMapMultiblockController {
         // player's right when looking at the controller, but the controller's left
         return RelativeDirection.LEFT.getSorter(getFrontFacing(), getUpwardsFacing(), isFlipped());
     }
-
+    @Override
+    public NBTTagCompound writeToNBT(NBTTagCompound data) {
+        data.setInteger("casingTier", casing_tier);
+        return super.writeToNBT(data);
+    }
+    @Override
+    public void readFromNBT(NBTTagCompound data) {
+        super.readFromNBT(data);
+        casing_tier = data.getInteger("casingTier");
+    }
     @SideOnly(Side.CLIENT)
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {

@@ -297,12 +297,13 @@ public class OreProcessorRecipeLogic implements IWorkable {
         if (fluid == null)
             return 0;
         for (FluidStack t_fluid : GTUtility.fluidHandlerToList(getInputTank())) {
-            if (t_fluid.isFluidEqual(fluid)) {
+            if (t_fluid != null && t_fluid.isFluidEqual(fluid)) {
                 t_amount += fluid.amount;
             }
         }
         return t_amount;
     }
+
 
     private void recipeProcessing() {
         int tCharged = MAX_PARALLEL;

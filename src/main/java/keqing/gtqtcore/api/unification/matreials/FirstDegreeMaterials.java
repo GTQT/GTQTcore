@@ -6,6 +6,7 @@ import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.properties.BlastProperty;
 import gregtech.api.unification.material.properties.ToolProperty;
 import gregtech.api.util.GTUtility;
+import keqing.gtqtcore.api.unification.GTQTElements;
 import keqing.gtqtcore.api.unification.GTQTMaterials;
 
 import static gregtech.api.GTValues.*;
@@ -373,7 +374,7 @@ public class FirstDegreeMaterials {
                 .build();
 
         GTQTMaterials.Fluix = new Material.Builder(getMaterialsId(), gregtechId("fluix"))
-                .gem(1).dust()
+                .gem(1).ore()
                 .color(0x7D26CD).iconSet(CERTUS)
                 .flags(GENERATE_PLATE, CRYSTALLIZABLE)
                 .components(Silicon, 1, Oxygen, 2)
@@ -1549,6 +1550,58 @@ public class FirstDegreeMaterials {
                 .components(CarbonDioxide, 160, Argon, 15, Oxygen, 15, Helium3, 10, Radon,
                         10, Hydrogen, 10,Nitrogen,10,MagicGas,5)
                 .build();
+
+        //离散态微薄魔力
+        GTQTMaterials.MagicGas = new Material.Builder(getMaterialsId(), gregtechId("magic_gas"))
+                .gas()
+                .color(0x00FFFF)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //离散态素魔力
+        GTQTMaterials.MagicFas = new Material.Builder(getMaterialsId(), gregtechId("magic_fas"))
+                .gas()
+                .color(0x00FFFF)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //离散态纯净魔力
+        GTQTMaterials.MagicDas = new Material.Builder(getMaterialsId(), gregtechId("magic_das"))
+                .gas()
+                .color(0x00FFFF)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //凝聚态素魔力
+        GTQTMaterials.MagicAas = new Material.Builder(getMaterialsId(), gregtechId("magic_aas"))
+                .gas()
+                .color(0x00FFFF)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //魔力废液
+        GTQTMaterials.MagicRub = new Material.Builder(getMaterialsId(), gregtechId("magic_rub"))
+                .gas()
+                .color(0x00FFFF)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //魔力
+        GTQTMaterials.Magic = new Material.Builder(getMaterialsId(), gregtechId("magic"))
+                .fluid()
+                .color(0x428fdb)
+                .iconSet(DULL)
+                .element(GTQTElements.Magic)
+                .build();
+
+        //富集魔力
+        GTQTMaterials.Richmagic = new Material.Builder(getMaterialsId(), gregtechId("richmagic"))
+                .ingot()
+                .color(0x428fdb)
+                .iconSet(DULL)
+                .flags(GENERATE_PLATE,GENERATE_DOUBLE_PLATE,GENERATE_ROD,GENERATE_LONG_ROD)
+                .build();
+                Richmagic.setFormula("*KQ*");
 
     }
 }

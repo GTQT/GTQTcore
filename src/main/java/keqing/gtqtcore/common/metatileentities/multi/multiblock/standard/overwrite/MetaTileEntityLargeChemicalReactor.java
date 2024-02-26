@@ -61,12 +61,14 @@ public class MetaTileEntityLargeChemicalReactor extends GTQTRecipeMapMultiblockO
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("modern", modern);
+        data.setInteger("casingTier", casingTier);
         return super.writeToNBT(data);
     }
     @Override
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         modern = data.getInteger("modern");
+        casingTier = data.getInteger("casingTier");
     }
     @Override
     public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {

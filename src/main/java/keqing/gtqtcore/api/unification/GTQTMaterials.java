@@ -394,6 +394,12 @@ public class GTQTMaterials {
     public static Material Bitternso;
     public static Material Bitternco;
     public static Material Gashydrate;
+    public static Material Magic;
+    public static Material Richmagic;
+    public static Material MagicRub;
+    public static Material MagicFas;
+    public static Material MagicDas;
+    public static Material MagicAas;
 
     //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/api/unification/GSMaterials.java
 

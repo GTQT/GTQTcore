@@ -57,12 +57,14 @@ public class MetaTileEntityVacuumFreezer extends GTQTRecipeMapMultiblockOverwrit
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("modern", modern);
+        data.setInteger("tier", tier);
         return super.writeToNBT(data);
     }
     @Override
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         modern = data.getInteger("modern");
+        tier = data.getInteger("tier");
     }
 
     @Override

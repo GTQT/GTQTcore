@@ -30,6 +30,7 @@ import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
@@ -85,6 +86,27 @@ public class MetaTileEntityLaserEngraving extends MultiMapMultiblockController i
         super.addDisplayText(textList);
         textList.add(new TextComponentTranslation("gtqtcore.eleTire",tier, laser_tier, glass_tier));
 
+    }
+    @Override
+    public NBTTagCompound writeToNBT(NBTTagCompound data) {
+        data.setInteger("tier", tier);
+        return super.writeToNBT(data);
+    }
+    @Override
+    public void readFromNBT(NBTTagCompound data) {
+        super.readFromNBT(data);
+        tier = data.getInteger("tier");
+    }
+    @Override
+    public void writeInitialSyncData(PacketBuffer buf) {
+        super.writeInitialSyncData(buf);
+        buf.writeInt(this.tier);
+    }
+
+    @Override
+    public void receiveInitialSyncData(PacketBuffer buf) {
+        super.receiveInitialSyncData(buf);
+        this.tier = buf.readInt();
     }
     @Override
     protected BlockPattern createStructurePattern() {

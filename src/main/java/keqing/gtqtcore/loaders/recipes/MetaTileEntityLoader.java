@@ -387,7 +387,7 @@ public class MetaTileEntityLoader {
                 new UnificationEntry(OrePrefix.pipeLargeFluid, Steel), 'C',
                 new UnificationEntry(OrePrefix.circuit, MV), 'F', MetaItems.ELECTRIC_PUMP_LV);
 
-        ModHandler.addShapedRecipe(true, "distillation_tower", GTQTMetaTileEntities.MSF.getStackForm(),
+        ModHandler.addShapedRecipe(true, "msf", GTQTMetaTileEntities.MSF.getStackForm(),
                 "CBC", "FMF", "CBC", 'M', MetaTileEntities.HULL[GTValues.MV].getStackForm(), 'B',
                 new UnificationEntry(OrePrefix.pipeLargeFluid, Aluminium), 'C',
                 new UnificationEntry(OrePrefix.circuit, MV), 'F', DISTILLATION_TOWER.getStackForm());

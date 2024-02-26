@@ -70,12 +70,16 @@ public class MetaTileEntityElectrobath extends GTQTRecipeMapMultiblockOverwrite 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("modern", modern);
+        data.setInteger("casingTier", casingTier);
+        data.setInteger("clean", clean);
         return super.writeToNBT(data);
     }
     @Override
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         modern = data.getInteger("modern");
+        casingTier = data.getInteger("casingTier");
+        clean = data.getInteger("clean");
     }
 
     @Override

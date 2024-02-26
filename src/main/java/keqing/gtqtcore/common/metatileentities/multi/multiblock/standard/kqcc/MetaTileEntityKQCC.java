@@ -33,6 +33,7 @@ import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
@@ -70,7 +71,7 @@ public class MetaTileEntityKQCC extends MultiblockWithDisplayBase implements IOp
     private int CPU3;
     private int GPU3;
     private int RAM3;
-
+    int a;
     private int CPU4;
     private int GPU4;
     private int RAM4;
@@ -91,11 +92,11 @@ public class MetaTileEntityKQCC extends MultiblockWithDisplayBase implements IOp
         return group;
     }
     private void incrementThreshold(Widget.ClickData clickData) {
-        this.thresholdPercentage = MathHelper.clamp(thresholdPercentage + 1, 0, 2);
+        this.a = MathHelper.clamp(a + 1, 0, 2);
     }
 
     private void decrementThreshold(Widget.ClickData clickData) {
-        this.thresholdPercentage = MathHelper.clamp(thresholdPercentage - 1, 0, 2);
+        this.a = MathHelper.clamp(a - 1, 0, 2);
     }
 
 
@@ -110,53 +111,60 @@ public class MetaTileEntityKQCC extends MultiblockWithDisplayBase implements IOp
     FluidStack COLD_STACK1 = Water.getFluid(40);
     FluidStack COLD_STACKA1 = PCBCoolant.getFluid(20);
     FluidStack COLD_STACKB1 = Nitrogen.getFluid(4);
-
-    FluidStack KEEP_OPEN = Lubricant.getFluid(4);
+    @Override
+    public NBTTagCompound writeToNBT(NBTTagCompound data) {
+        data.setInteger("a", a);
+        data.setFloat("HOT", HOT);
+        return super.writeToNBT(data);
+    }
+    @Override
+    public void readFromNBT(NBTTagCompound data) {
+        super.readFromNBT(data);
+        a = data.getInteger("a");
+        HOT = data.getFloat("HOT");
+    }
     @Override
     protected void updateFormedValid() {
         consumeEnergy();
-        if (KEEP_OPEN.isFluidStackIdentical(coolantHandler.drain(KEEP_OPEN, false))) {
-            if(thresholdPercentage==0) thresholdPercentage=thresholdPercentage+1;
-        }
-
-        if(HOT>0) HOT=HOT-10;
+        thresholdPercentage=a;
+        if(HOT>10) HOT=HOT-10;
 
         if(HOT>5000) {
 
             if(thresholdPercentage==1) {
                 if (COLD_STACK.isFluidStackIdentical(coolantHandler.drain(COLD_STACK, false))) {
                     coolantHandler.drain(COLD_STACK, true);
-                    HOT = HOT - 770;
+                    if(HOT>770) HOT = HOT - 770;
                 }
                 if (COLD_STACKA.isFluidStackIdentical(coolantHandler.drain(COLD_STACKA, false))) {
                     coolantHandler.drain(COLD_STACKA, true);
-                    HOT = HOT - 1440;
+                    if(HOT>1440) HOT = HOT - 1440;
                 }
                 if (COLD_STACKB.isFluidStackIdentical(coolantHandler.drain(COLD_STACKB, false))) {
                     coolantHandler.drain(COLD_STACKB, true);
-                    HOT = HOT - 2880;
+                    if(HOT>2880) HOT = HOT - 2880;
                 }
             }
 
             if(thresholdPercentage==2) {
                 if (COLD_STACK1.isFluidStackIdentical(coolantHandler.drain(COLD_STACK1, false))){
                     coolantHandler.drain(COLD_STACK1, true);
-                    HOT = HOT - 1440;
+                    if(HOT>1440)HOT = HOT - 1440;
                 }
                 if (COLD_STACKA1.isFluidStackIdentical(coolantHandler.drain(COLD_STACKA1, false))) {
                     coolantHandler.drain(COLD_STACKA1, true);
-                    HOT = HOT - 2880;
+                    if(HOT>2880)HOT = HOT - 2880;
                 }
                 if (COLD_STACKB1.isFluidStackIdentical(coolantHandler.drain(COLD_STACKB1, false))) {
                     coolantHandler.drain(COLD_STACKB1, true);
-                    HOT = HOT - 5760;
+                    if(HOT>5760)HOT = HOT - 5760;
                 }
             }
         }
     }
     private boolean hasNotEnoughEnergy;
     private void consumeEnergy() {
-        int energyToConsume = CWTT()*32*thresholdPercentage;
+        int energyToConsume = CWTT()*30*thresholdPercentage;
         boolean hasMaintenance = ConfigHolder.machines.enableMaintenance && hasMaintenanceMechanics();
         if (hasMaintenance) {
             // 10% more energy per maintenance problem
@@ -271,7 +279,7 @@ public class MetaTileEntityKQCC extends MultiblockWithDisplayBase implements IOp
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
-        textList.add(new TextComponentTranslation("gregtech.multiblock.kqcc.eu", CWTT()*32,HOT));
+        textList.add(new TextComponentTranslation("gregtech.multiblock.kqcc.eu", CWTT()*30,HOT));
         textList.add(new TextComponentTranslation("gregtech.multiblock.kqcc.start", thresholdPercentage));
 
         if((RAM1+RAM2+RAM3+RAM4)>=(GPU1+GPU2+GPU3+GPU4)&&(RAM1+RAM2+RAM3+RAM4)>=(CPU1+CPU2+CPU3+CPU4))
