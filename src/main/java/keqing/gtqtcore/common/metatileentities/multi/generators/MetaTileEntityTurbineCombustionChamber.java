@@ -377,7 +377,7 @@ public class MetaTileEntityTurbineCombustionChamber extends FuelMultiblockContro
         public boolean fillTanks(FluidStack stack, boolean simulate) {
             return GTTransferUtils.addFluidsToFluidHandler(outputFluidInventory, simulate, Collections.singletonList(stack));
         }
-        private final FluidStack HOT_STACK = GTQTMaterials.HighPressureSteam.getFluid(60);
+        private final FluidStack HOT_STACK = GTQTMaterials.HighPressureSteam.getFluid(2);
         @Override
         public long getMaxVoltage() {
             if (isOxygenBoosted)
@@ -387,7 +387,7 @@ public class MetaTileEntityTurbineCombustionChamber extends FuelMultiblockContro
         }
         @Override
         protected void updateRecipeProgress() {
-            if (canRecipeProgress && drawEnergy(recipeEUt, true)) {
+            if (canRecipeProgress) {
 
                 //这里是蒸燃联合需要的水
                     IMultipleTankHandler inputTank = combustionEngine.getInputFluidInventory();
@@ -413,9 +413,9 @@ public class MetaTileEntityTurbineCombustionChamber extends FuelMultiblockContro
                     else add=0;
 
                     drawEnergy(recipeEUt, false);
+                for(int i=0;i<getmax(heatingCoilLevel);i++) fillTanks(HOT_STACK,false);
                 if(speed<getMaxRotorHolderSpeed())speed=speed+10;
                 if (++progressTime > maxProgressTime) {
-                    for(int i=0;i<getmax(heatingCoilLevel);i++) fillTanks(HOT_STACK,false);
                     completeRecipe();
                     //naijiu--;
                 }

@@ -111,6 +111,7 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<FuelRecipeBuilder> STEAM_ORE_WASHER_RECIPES;
     public static final RecipeMap<QFTCasingTierRecipeBuilder> QUANTUM_FORCE_TRANSFORMER_RECIPES;
     public static final RecipeMap<FlowRateRecipeBuilder> HEAT_EXCHANGE_RECIPES;
+    public static final RecipeMap<PrimitiveRecipeBuilder> HEAT_EXCHANGE;
     public static final RecipeMap<FuelRecipeBuilder> STAR_MIXER;
     public static final RecipeMap<FuelRecipeBuilder> PLASMA_FORGE;
     public static final RecipeMap<FuelRecipeBuilder> STAR_BIOMIMETIC_FACTORY;
@@ -309,6 +310,9 @@ public class GTQTcoreRecipeMaps {
 
         //  Large Heat Exchanger Recipemap
         HEAT_EXCHANGE_RECIPES = new RecipeMap<>("heat_exchanger_recipes", 0, 0, 2, 3, new FlowRateRecipeBuilder(), false)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_ARC_FURNACE, ProgressWidget.MoveType.HORIZONTAL);
+
+        HEAT_EXCHANGE = new RecipeMap<>("heat_exchanger", 0, 0, 1, 1, new PrimitiveRecipeBuilder(), false)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARC_FURNACE, ProgressWidget.MoveType.HORIZONTAL);
 
         ROCKET = new RecipeMap<>("rocket",

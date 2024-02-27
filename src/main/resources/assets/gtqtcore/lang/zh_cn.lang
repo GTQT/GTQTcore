@@ -384,7 +384,7 @@ gtqtcore.multiblock.pcb.xy=拓展结构（1/0）:微生物培养仓 %s 化学辅
 gtqtcore.multiblock.pcb.amount=冷却液储量：%s
 gtqtcore.multiblock.pcb.threshold_decrement=§c降低一单位冷却液消耗 /n§7升温速度增加一倍。
 gtqtcore.multiblock.pcb.threshold_increment=§a增加一单位冷却液消耗 /n§7升温速度降低一倍。
-
+gregtech.multiblock.hc.computation=阈值热量%s/%s
 gtqtcore.msf.count1=闪蒸结构：%s 加热器：%s 蒸汽缓存：%s
 gtqtcore.msf.count2=舱室压力：%s %s %s kPa/标压
 gregtech.multiblock.msf.computation=舱压力载荷：%s
@@ -399,6 +399,10 @@ gtqtcore.machine.pcb.tooltip.4=建造 高频散热模块 来控制多方块温�
 gtqtcore.machine.pcb.tooltip.5=多方块工作时会持续升温，当温度大于阈值时会停止工作。如果没有建造 高频散热模块 模块，那么多方块只会在待机时降温，多方块温度处于不同区间时拥有不同的并行数量。
 gtqtcore.multiblock.pcb1.amount=冷却效率：%s(上限 %s )温度：%sK(上限 %s K)
 
+gtqtcore.hc.count1=换热面积：%s 换热效率：%s
+gtqtcore.hc.count2=外壳等级：%s 玻璃等级：%s
+gtqtcore.hc.count3=高温热源缓存：%s 低温热量缓存：%s
+gtqtcore.hc.count4=换热比：%s 辐射比：%s
 gtqtcore.machine.reinforced_rotor_holder.luv.name=强化转子支架（§dLuV§r）
 gtqtcore.machine.reinforced_rotor_holder.zpm.name=强化转子支架（§cZPM§r）
 gtqtcore.machine.reinforced_rotor_holder.uv.name=强化转子支架（§3UV§r）

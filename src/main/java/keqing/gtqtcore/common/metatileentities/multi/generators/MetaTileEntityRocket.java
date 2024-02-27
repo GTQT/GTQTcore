@@ -387,7 +387,7 @@ public class MetaTileEntityRocket extends FuelMultiblockController implements IT
         }
         @Override
         protected void updateRecipeProgress() {
-            if (canRecipeProgress && drawEnergy(recipeEUt, true)) {
+            if (canRecipeProgress ) {
 
                 //这里是蒸燃联合需要的水
                 IMultipleTankHandler inputTank = combustionEngine.getInputFluidInventory();
@@ -413,9 +413,9 @@ public class MetaTileEntityRocket extends FuelMultiblockController implements IT
                 else add=0;
 
                 drawEnergy(recipeEUt, false);
+                for(int i=0;i<getmax(heatingCoilLevel);i++) fillTanks(HOT_STACK,false);
                 if(speed<getMaxRotorHolderSpeed())speed=speed+10;
                 if (++progressTime > maxProgressTime) {
-                    for(int i=0;i<getmax(heatingCoilLevel);i++) fillTanks(HOT_STACK,false);
                     completeRecipe();
                     //naijiu--;
                 }
