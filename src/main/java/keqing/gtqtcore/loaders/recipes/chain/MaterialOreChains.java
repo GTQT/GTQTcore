@@ -165,11 +165,11 @@ public class MaterialOreChains {
         GTRecipeHandler.removeRecipesByInputs(BLAST_RECIPES, OreDictUnifier.get(dust, Hafnium));
         GTRecipeHandler.removeRecipesByInputs(BLAST_RECIPES, OreDictUnifier.get(dust, Zirconium));
         MIXER_RECIPES.recipeBuilder()
-                .duration(120)
-                .EUt(VA[MV])
-                .input(dust, Bauxite, 15)
+                .duration(30)
+                .EUt(VA[LV])
+                .input(dust, Aluminium, 6)
                 .fluidInputs(HydrochloricAcid.getFluid(4500))
-                .fluidInputs(Water.getFluid(1000))
+                .fluidInputs(Water.getFluid(10000))
                 .fluidOutputs(BauxiteSlurry.getFluid(1000))
                 .buildAndRegister();
 
@@ -184,10 +184,10 @@ public class MaterialOreChains {
 
         CENTRIFUGE_RECIPES.recipeBuilder()
                 .duration(180)
-                .EUt(VA[MV])
+                .EUt(VA[LV])
                 .fluidInputs(BauxiteSlurry.getFluid(1000))
                 .fluidOutputs(RedMud.getFluid(1000))
-                .output(dust, Alumina, 3)
+                .output(dust, AluminiumHydroxide, 6)
                 .buildAndRegister();
 
         CENTRIFUGE_RECIPES.recipeBuilder()

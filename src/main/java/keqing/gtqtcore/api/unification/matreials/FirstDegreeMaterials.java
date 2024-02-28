@@ -539,7 +539,7 @@ public class FirstDegreeMaterials {
                 .fluid().dust()
                 .color(0xd89045).iconSet(SHINY)
                 .flags(DISABLE_DECOMPOSITION)
-                .components(Aluminium ,1)
+                .components(Aluminium ,1,Nitrogen,3,Oxygen,9)
                 .build();
 
         //海带灰溶液

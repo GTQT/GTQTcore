@@ -2,6 +2,7 @@ package keqing.gtqtcore.api.unification.matreials;
 
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.info.MaterialIconSet;
+import keqing.gtqtcore.loaders.recipes.chain.AluminiumLine;
 
 
 import static gregtech.api.unification.material.Materials.*;
@@ -866,6 +867,7 @@ public class TJFirstDegreeMaterials {
 
         BauxiteSlurry = new Material.Builder(25148, gregtechId("bauxite_slurry"))
                 .fluid()
+                .flags(DISABLE_DECOMPOSITION)
                 .color(0x51040A)
                 .build();
 

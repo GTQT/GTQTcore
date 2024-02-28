@@ -667,7 +667,10 @@ gregtech.material.magic_gas=离散态微薄魔力
 gregtech.material.mars_air=火星大气
 gregtech.material.liquid_mars_air=液态火星大气
 
-
+gregtech.material.bitterns=硫酸酸化卤水
+gregtech.material.bitterno=氧化卤水
+gregtech.material.bitternbr=离散态氧化溴
+gregtech.material.bitternobr=氧化富集溴
 
 
 
@@ -1344,7 +1347,7 @@ tile.multiblock_casing.tech_fusion_glass_6.name=强化高阶聚变玻璃
 gregtech.material.csilicon=太阳能级多晶硅
 gregtech.material.copper_cl=氯化铜
 gregtech.material.fluix=FLUIX
-gregtech.material.ealuminium=软铝
+gregtech.material.ealuminium=硝酸铝
 
 gregtech.material.len_gold_bs=焙烧贫瘠金含杂
 gregtech.material.len_gold_js=沉浸含硫金溶液

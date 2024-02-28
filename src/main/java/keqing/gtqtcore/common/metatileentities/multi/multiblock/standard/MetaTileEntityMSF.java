@@ -266,7 +266,7 @@ public class MetaTileEntityMSF extends GTQTRecipeMapMultiblockController impleme
     @SideOnly(Side.CLIENT)
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
-        return Textures.SOLID_STEEL_CASING;
+        return Textures.FROST_PROOF_CASING;
     }
     @SideOnly(Side.CLIENT)
     @Nonnull
@@ -301,12 +301,12 @@ public class MetaTileEntityMSF extends GTQTRecipeMapMultiblockController impleme
     }
 
     private static IBlockState getCasingAState() {
-        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STEEL_SOLID);
+        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.ALUMINIUM_FROSTPROOF);
     }
     private static IBlockState getCasingBState() {
         return MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.STEEL_PIPE);
     }
     private static IBlockState getFrameState() {
-        return MetaBlocks.FRAMES.get(Materials.Steel).getBlock(Materials.Steel);
+        return MetaBlocks.FRAMES.get(Materials.Aluminium).getBlock(Materials.Aluminium);
     }
 }

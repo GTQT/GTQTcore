@@ -181,6 +181,30 @@ public class HigherDegreeMaterials {
                 .color(0xB3EE3A)
                 .build();
 
+        //硫酸酸化卤水
+        GTQTMaterials.Bitterns= new Material.Builder(getMaterialsId(), gregtechId("bitterns"))
+                .fluid()
+                .color(0xEE3A8C)
+                .build();
+
+        //氧化卤水
+        GTQTMaterials.Bitterno= new Material.Builder(getMaterialsId(), gregtechId("bitterno"))
+                .fluid()
+                .color(0xDEB887)
+                .build();
+
+        //离散态氧化溴
+        GTQTMaterials.Bitternbr= new Material.Builder(getMaterialsId(), gregtechId("bitternbr"))
+                .fluid()
+                .color(0xD02090)
+                .build();
+
+        //氧化富集溴
+        GTQTMaterials.Bitternobr= new Material.Builder(getMaterialsId(), gregtechId("bitternobr"))
+                .fluid()
+                .color(0xCD1076)
+                .build();
+
         // 可燃冰
         GTQTMaterials.Gashydrate = new Material.Builder(getMaterialsId(), gregtechId("gashydrate"))
                 .gem(1, 96000).ore(2, 1) // default coal burn time in vanilla

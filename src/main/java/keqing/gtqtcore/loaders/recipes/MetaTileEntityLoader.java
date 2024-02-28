@@ -84,7 +84,7 @@ public class MetaTileEntityLoader {
                 .inputs(HULL[1].getStackForm(4))
                 .input(ELECTRIC_PUMP_MV,8)
                 .input(circuit,LV,8)
-                .input(rotor,Aluminium,8)
+                .input(rotor,Aluminium,32)
                 .input(OrePrefix.cableGtSingle, Materials.Tin, 32)
                 .fluidInputs(Polyethylene.getFluid(L * 12))
                 .outputs(GAS_COLLECTOR.getStackForm()).buildAndRegister();
