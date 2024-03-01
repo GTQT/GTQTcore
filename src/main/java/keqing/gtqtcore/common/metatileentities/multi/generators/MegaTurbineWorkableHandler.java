@@ -35,9 +35,9 @@ public class MegaTurbineWorkableHandler extends MultiblockFuelRecipeLogic {
 
     @Override
     protected void updateRecipeProgress() {
-        if (canRecipeProgress) {
+        if (this.canRecipeProgress && this.drawEnergy(this.recipeEUt, true)) {
+            this.drawEnergy(this.recipeEUt, false);
             // turbines can void energy
-            drawEnergy(recipeEUt, false);
             //as recipe starts with progress on 1 this has to be > only not => to compensate for it
             if (++progressTime > maxProgressTime) {
                 completeRecipe();

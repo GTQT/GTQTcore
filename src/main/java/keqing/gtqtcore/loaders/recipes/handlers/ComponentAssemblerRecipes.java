@@ -72,7 +72,7 @@ public class ComponentAssemblerRecipes {
                 .input(stick, SteelMagnetic)
                 .input(wireGtDouble, Electrum, 4)
                 .output(ELECTRIC_MOTOR_HV)
-                .EUt(VA[HV])
+                .EUt(VA[MV])
                 .duration(20)
                 .buildAndRegister();
 

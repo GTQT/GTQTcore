@@ -602,7 +602,8 @@ public class MetaTileEntityPCB extends RecipeMapMultiblockController {
 
         protected void updateRecipeProgress() {
             if (Temp > 3000) Temp = Temp - 10;
-            if (canRecipeProgress) {
+            if (this.canRecipeProgress && this.drawEnergy(this.recipeEUt, true)) {
+                this.drawEnergy(this.recipeEUt, false);
                 if (Temp < 10000) Temp = Temp + 40;
                 if (z == 1) if (++progressTime % 3 == 0) maxProgressTime--;
                 if (Temp < 9000) {

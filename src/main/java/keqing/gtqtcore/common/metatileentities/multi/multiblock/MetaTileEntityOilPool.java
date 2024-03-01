@@ -137,7 +137,8 @@ public class MetaTileEntityOilPool extends NoEnergyMultiblockController {
         }
         protected void updateRecipeProgress() {
             sperate=80;
-            if (canRecipeProgress) {
+            if (this.canRecipeProgress && this.drawEnergy(this.recipeEUt, true)) {
+                this.drawEnergy(this.recipeEUt, false);
                 sperate=(1600/(2000+amount))*100;
                 if(sperate<=20&&poruji>1&&rate<1000) {
                     rate=rate+3*(6000/amount);

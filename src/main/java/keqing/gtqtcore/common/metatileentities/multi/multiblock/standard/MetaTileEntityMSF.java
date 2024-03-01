@@ -148,7 +148,7 @@ public class MetaTileEntityMSF extends GTQTRecipeMapMultiblockController impleme
         }
         protected void updateRecipeProgress() {
             if (canRecipeProgress && drawEnergy(recipeEUt, true)&&SIZE()) {
-
+                this.drawEnergy(this.recipeEUt, false);
                 if (++progressTime > maxProgressTime)
                 {
                     steam[0]=(int) (steam[0]*0.24);

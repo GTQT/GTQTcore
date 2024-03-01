@@ -158,6 +158,8 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<SEComputationRecipeBuilder> SPACE_ELEVATOR_MINING_MODULE;
     public static final RecipeMap<NeutronActivatorRecipeBuilder> NEUTRON_ACTIVATOR ;
     public static final RecipeMap<SimpleRecipeBuilder> SFM;
+    public static final RecipeMap<PrimitiveRecipeBuilder>  COAGULATION_RECIPES ;
+    public static final RecipeMap<SimpleRecipeBuilder> FLUIDIZED_BED;
 
     private GTQTcoreRecipeMaps() {}
     static {
@@ -165,7 +167,7 @@ public class GTQTcoreRecipeMaps {
         PROCESSING_MODE_A = new RecipeMapPseudoGroup<>("processing_mode_a", 1, 2, 1, 1, new SimpleRecipeBuilder(), RecipeMaps.COMPRESSOR_RECIPES, RecipeMaps.LATHE_RECIPES, RecipeMaps.POLARIZER_RECIPES, true);
         PROCESSING_MODE_B = new RecipeMapPseudoGroup<>("processing_mode_b", 2, 2, 1, 1, new SimpleRecipeBuilder(), RecipeMaps.FERMENTING_RECIPES, RecipeMaps.EXTRACTOR_RECIPES, RecipeMaps.CANNER_RECIPES, true);
         PROCESSING_MODE_C = new RecipeMapPseudoGroup<>("processing_mode_c", 2, 2, 1, 1, new SimpleRecipeBuilder(), RecipeMaps.LASER_ENGRAVER_RECIPES, RecipeMaps.AUTOCLAVE_RECIPES, RecipeMaps.FLUID_SOLIDFICATION_RECIPES, true);
-
+        COAGULATION_RECIPES = new RecipeMap<>("coagulation_tank", 2, 1, 2, 0, new PrimitiveRecipeBuilder(), false);
 
         EFUSION_RECIPES = new RecipeMap<>("efusion_reactor",0,0,2,1,new FusionRecipeBuilder(),false)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_COMPRESS, ProgressWidget.MoveType.HORIZONTAL)
@@ -364,6 +366,11 @@ public class GTQTcoreRecipeMaps {
 
         SEPTIC_TANK = new RecipeMap<>("septic_tank",
                 2, 2, 2, 2, new SimpleRecipeBuilder(), false);
+
+        FLUIDIZED_BED = new RecipeMap<>("fluidized_bed",
+                3, 3, 3, 3, new SimpleRecipeBuilder(), false)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL)
+                .setSound(GTSoundEvents.SCIENCE);
 
         DISTILLATION_KETTLE = new RecipeMapGTQTDistillationTower<>("distillation_kettle",
                 1,false, 1,false, 1,false, 12,false, new SimpleRecipeBuilder(), false).setSound(GTSoundEvents.CHEMICAL_REACTOR);

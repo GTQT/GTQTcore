@@ -1603,5 +1603,36 @@ public class FirstDegreeMaterials {
                 .build();
                 Richmagic.setFormula("*KQ*");
 
+        //四溴对二甲苯
+        GTQTMaterials.Tetrabromo = new Material.Builder(getMaterialsId(), gregtechId("tetrabromo"))
+                .fluid()
+                .color(0x8B8B00)
+                .flags(DISABLE_DECOMPOSITION)
+                .components(Carbon, 8, Hydrogen, 6, Bromine,4)
+                .build();
+
+        //六溴对二甲苯
+        GTQTMaterials.Tetrabromobenzene = new Material.Builder(getMaterialsId(), gregtechId("tetrabromobenzene"))
+                .fluid()
+                .color(0x8E8E38)
+                .flags(DISABLE_DECOMPOSITION)
+                .components(Carbon, 8, Hydrogen, 4, Bromine,6)
+                .build();
+
+        //BPS
+        GTQTMaterials.Bps = new Material.Builder(getMaterialsId(), gregtechId("bps"))
+                .fluid()
+                .color(0xB452CD)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+        Bps.setFormula("(C8H8)n-C8H4Br6");
+
+        //溴化环氧树脂
+        GTQTMaterials.Brominatedepoxyresins = new Material.Builder(getMaterialsId(), gregtechId("brominatedepoxyresins"))
+                .fluid()
+                .color(0xCD3278)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+        Brominatedepoxyresins.setFormula("(C11H12O3)n-C8H4Br6");
     }
 }

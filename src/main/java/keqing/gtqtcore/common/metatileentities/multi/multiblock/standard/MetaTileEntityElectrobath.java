@@ -327,7 +327,8 @@ public class MetaTileEntityElectrobath extends GTQTRecipeMapMultiblockOverwrite 
 
 
         protected void updateRecipeProgress() {
-            if (canRecipeProgress) {
+            if (this.canRecipeProgress && this.drawEnergy(this.recipeEUt, true)) {
+                this.drawEnergy(this.recipeEUt, false);
                 if(clean>=0) clean=clean-eu;
                 if(clean>100000)
                 {

@@ -404,6 +404,10 @@ public class GTQTMaterials {
     public static Material Bitterno;
     public static Material Bitternbr;
     public static Material Bitternobr;
+    public static Material Tetrabromo;
+    public static Material Tetrabromobenzene;
+    public static Material Bps;
+    public static Material Brominatedepoxyresins;
 
     //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/api/unification/GSMaterials.java
 

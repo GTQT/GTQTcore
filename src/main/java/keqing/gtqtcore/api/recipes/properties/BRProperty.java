@@ -21,7 +21,7 @@ public class BRProperty extends RecipeProperty<Integer> {
 
     @Override
     public void drawInfo(Minecraft minecraft, int x, int y, int color, Object value) {
-        minecraft.fontRenderer.drawString(I18n.format("反应浓度：",
+        minecraft.fontRenderer.drawString(I18n.format("最小反应浓度：",
                 castValue(value).toString()) + getTire(castValue(value)), x, y, color);
     }
 

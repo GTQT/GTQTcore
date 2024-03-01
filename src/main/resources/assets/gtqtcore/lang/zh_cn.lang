@@ -590,6 +590,10 @@ gregtech.material.rhodium_nitrate_solution=硝酸铑
 gregtech.material.rhodium_salt=铑盐
 gregtech.material.rhodium_raw=粗制铑金属
 gregtech.material.zinc_sulfate=硫酸锌
+gregtech.material.tetrabromo=四溴对二甲苯
+gregtech.material.tetrabromobenzene=六溴对二甲苯
+gregtech.material.bps=溴化聚苯乙烯
+gregtech.material.brominatedepoxyresins=溴化环氧树脂
 
 gregtech.material.haidaihui=海带灰溶液
 gregtech.material.cuiquhaidaihui=萃取海带灰
@@ -802,10 +806,13 @@ gtqtcore.machine.mdi.tooltip.2=工作时消耗钻头耐久度，耐久度全部�
 gtqtcore.machine.mdi.tooltip.3=多方块结构每升级一次，并行数量翻倍，钻头等级决定支持的配方等级。
 gtqtcore.machine.mdi.tooltip.1=还在手动挖矿？你居然还在手动挖矿？
 gtqtcore.md=钻机等级：%s 钻头等级：%s 钻头耐久：%s
-
+gtqtcore.machine.fluidized=冷却塔结构：%s
+gtqtcore.machine.fluidized1=流床热量缓存：%s 散热功率：%s
+gtqtcore.multiblock.fb.threshold_decrement=降低散热功率
+gtqtcore.multiblock.fb.threshold_increment=提高散热功率
 gtqtcore.multiblock.na.tooltips1=结构高度：%s 加速线圈等级：%s
 gtqtcore.multiblock.na.tooltips2=动能区间：%s--%s--%s MeV
-
+gregtech.multiblock.pb.computation=占比：%s
 gtqtcore.multiblock.br.amount=水箱储量：%s
 gtqtcore.multiblock.br.1=注水量：%s 培养液储量：%s 培养液浓度：%s
 gtqtcore.multiblock.br.2=浓度过高！！！
@@ -832,6 +839,9 @@ gregtech.multiblock.kqcc.cwtt=算力: %s CWU 热量: %s
 gtqtcore.machine.kqcc.name=计算服务器
 gtqtcore.machine.laser_engraving.name=激光雕刻机
 recipemap.laser_engraving.name=光掩模雕刻
+recipemap.biological_reaction_recipes.name=生物反应
+gtqtcore.machine.fluidzed_bed.name=大型流化床
+recipemap.fluidized_bed.name=流化加工
 recipemap.solar_plate.name=太阳能
 recipemap.cw_laser_engraver.name=激光切割
 gtqtcore.machine.stepper.name=光刻机

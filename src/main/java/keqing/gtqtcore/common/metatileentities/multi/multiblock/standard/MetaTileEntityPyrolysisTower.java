@@ -78,7 +78,7 @@ public class MetaTileEntityPyrolysisTower extends RecipeMapMultiblockController 
                 .where('T', states(getCasingState2()))
                 .where('F', states(getFrameState()))
                 .where('O', states(getCasingState()).or(abilities(MultiblockAbility.EXPORT_FLUIDS).setMinGlobalLimited(1).setPreviewCount(8)))
-                .where('#', air())
+                .where('#', any())
                 .build();
     }
 

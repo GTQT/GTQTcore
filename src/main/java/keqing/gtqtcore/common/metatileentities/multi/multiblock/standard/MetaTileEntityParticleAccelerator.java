@@ -334,7 +334,8 @@ public class MetaTileEntityParticleAccelerator extends RecipeMapMultiblockContro
         int d;
 
         protected void updateRecipeProgress() {
-            if (canRecipeProgress) {
+            if (this.canRecipeProgress && this.drawEnergy(this.recipeEUt, true)) {
+                this.drawEnergy(this.recipeEUt, false);
 
                 if (++progressTime > maxProgressTime) {
                     completeRecipe();

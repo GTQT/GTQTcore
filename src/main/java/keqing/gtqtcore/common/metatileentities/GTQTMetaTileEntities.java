@@ -219,9 +219,11 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityNanoscaleFabricator NANOSCALE_FABRICATOR;
     public static MetaTileEntityCVDUnit CVD_UNIT;
     public static MetaTileEntityEXCVD EX_CVD;
+    public static MetaTileEntityCoagulationTank COAGULATION_TANK;
     public static MetaTileEntityBurnerReactor BURNER_REACTOR;
     public static MetaTileEntityCryoReactor CRYOGENIC_REACTOR;
     public static MetaTileEntityFracker HYDRAULIC_FRACKER;
+    public static MetaTileEntityFluidizedBed FLUIDIZED_BED;
     public static MetaTileEntitySonicator SONICATOR;
     public static MetaTileEntityCatalyticReformer CATALYTIC_REFORMER;
     public static MetaTileEntityIndustrialDrill INDUSTRIAL_DRILL;
@@ -285,6 +287,8 @@ public class GTQTMetaTileEntities {
         STEAM_ORE_WASHER = registerMetaTileEntity(3104, new MetaTileEntitySteamOreWasher(gtqtcoreId("steam_ore_washer")));
         STEAM_HAMMER = registerMetaTileEntity(3105, new MetaTileEntitySteamHammer(gtqtcoreId("steam_hammer")));
         INDUSTRIAL_PRIMITIVE_BLAST_FURNACE = registerMetaTileEntity(3106, new MetaTileEntityIndustrialPrimitiveBlastFurnace(gtqtcoreId("industrial_primitive_blast_furnace")));
+        COAGULATION_TANK = registerMetaTileEntity(3107, new MetaTileEntityCoagulationTank(gtqtcoreId("coagulation_tank")));
+        P_REACTOR= registerMetaTileEntity(3108, new MetaTileEntityPReactor(gtqtcoreId("p_reactor")));
         //正常设备
         DISSOLUTION_TANK = registerMetaTileEntity(3150, new MetaTileEntityDissolutionTank(gtqtcoreId("dissolution_tank")));
         BLAZING_BLAST_FURNACE = registerMetaTileEntity(3151, new MetaTileEntityBlazingBlastFurnace(gtqtcoreId("blazing_blast_furnace")));
@@ -314,7 +318,7 @@ public class GTQTMetaTileEntities {
         MINING_DRILL=registerMetaTileEntity(3175,new MetaTileEntityMiningDrill(gtqtcoreId(("mining_drill"))));
         DISTILLATION_KETTLE=registerMetaTileEntity(3176,new MetaTileEntityDistillationKettle(gtqtcoreId(("distillation_kettle"))));
         OCEAN_PUMPER = registerMetaTileEntity(3177, new MetaTileEntityOceanPumper(gtqtcoreId("ocean_pumper")));
-        P_REACTOR= registerMetaTileEntity(3178, new MetaTileEntityPReactor(gtqtcoreId("p_reactor")));
+        HEAT_CHANGER= registerMetaTileEntity(3178, new MetaTileEntityHeatExchanger(gtqtcoreId("heat_exchanger")));
         LASER_ENGRAVING= registerMetaTileEntity(3179, new MetaTileEntityLaserEngraving(gtqtcoreId("laser_engraving")));
         STEPPER= registerMetaTileEntity(3180, new MetaTileEntityStepper(gtqtcoreId("stepper")));
         GANTRY_CRANE= registerMetaTileEntity(3181, new MetaTileEntityGantryCrane(gtqtcoreId("gantry_crane")));
@@ -326,7 +330,7 @@ public class GTQTMetaTileEntities {
         NEUTRON_ACTIVATOR= registerMetaTileEntity(3187, new MetaTileEntityNeutronActivator(gtqtcoreId("neutron_activator")));
         MSF= registerMetaTileEntity(3188, new MetaTileEntityMSF(gtqtcoreId("msf")));
         INTEGRATED_ORE_PROCESSOR= registerMetaTileEntity(3189, new MetaTileEntityIntegratedOreProcessor(gtqtcoreId("integrated_ore_processor")));
-        HEAT_CHANGER= registerMetaTileEntity(3190, new MetaTileEntityHeatExchanger(gtqtcoreId("heat_exchanger")));
+        FLUIDIZED_BED= registerMetaTileEntity(3190, new MetaTileEntityFluidizedBed(gtqtcoreId("fluidzed_bed")));
         //重写设备
         DISTILLATION_TOWER = registerMetaTileEntity(3250, new MetaTileEntityDistillationTower(gtqtcoreId("distillation_tower")));
         CRACKER = registerMetaTileEntity(3251, new MetaTileEntityCrackingUnit(gtqtcoreId("cracker")));

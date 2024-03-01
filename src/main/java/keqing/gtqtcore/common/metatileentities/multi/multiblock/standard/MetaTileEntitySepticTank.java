@@ -76,86 +76,13 @@ import static gregtech.api.unification.material.Materials.Lubricant;
 
 public class MetaTileEntitySepticTank extends GTQTRecipeMapMultiblockController implements IHeatingCoil {
     private int tier;
-    public int ParallelLim;
-    public int ParallelNum;
-    public int modern;
-    public int P;
     private int blastFurnaceTemperature;
-    public int getParallelNum()
-    {
-        if(ParallelNum==0) return 1;
-        else return ParallelNum;
-    }
 
     @Override
     public String[] getDescription() {
         return new String[]{I18n.format("gtqt.tooltip.update")};
     }
-    int ParallelNumA;
-    @Override
-    public NBTTagCompound writeToNBT(NBTTagCompound data) {
-        data.setInteger("modern", modern);
-        return super.writeToNBT(data);
-    }
-    @Override
-    public void readFromNBT(NBTTagCompound data) {
-        super.readFromNBT(data);
-        modern = data.getInteger("modern");
-    }
 
-    @Override
-    public void update() {
-        super.update();
-        if (modern == 0)
-        {
-            ParallelNum=ParallelNumA;
-        }
-        if (modern == 1)
-        {
-            P = (int) ((this.energyContainer.getEnergyStored() + energyContainer.getInputPerSec()) / getMinVa());
-            ParallelNum = Math.min(P, ParallelLim);
-        }
-    }
-    public int getMinVa()
-    {
-        if((Math.min(this.energyContainer.getEnergyCapacity()/32,VA[tier])*20)==0)return 1;
-        return (int)(Math.min(this.energyContainer.getEnergyCapacity()/32,VA[tier]));
-
-    }
-    protected Widget getFlexButton(int x, int y, int width, int height) {
-        WidgetGroup group = new WidgetGroup(x, y, width, height);
-        group.addWidget(new ClickButtonWidget(0, 0, 9, 9, "", this::decrementThrottle)
-                .setButtonTexture(GuiTextures.BUTTON_THROTTLE_MINUS)
-                .setTooltipText("gregtech.multiblock.parr.throttle_decrement"));
-        group.addWidget(new ClickButtonWidget(9, 0, 9, 9, "", this::incrementThrottle)
-                .setButtonTexture(GuiTextures.BUTTON_THROTTLE_PLUS)
-                .setTooltipText("gregtech.multiblock.parr.throttle_increment"));
-
-        group.addWidget(new ClickButtonWidget(0, 9, 9, 9, "", this::decrementThrottle1)
-                .setButtonTexture(GuiTextures.BUTTON_THROTTLE_MINUS)
-                .setTooltipText("gregtech.multiblock.hand.throttle_decrement"));
-        group.addWidget(new ClickButtonWidget(9, 9, 9, 9, "", this::incrementThrottle1)
-                .setButtonTexture(GuiTextures.BUTTON_THROTTLE_PLUS)
-                .setTooltipText("gregtech.multiblock.hand.throttle_increment"));
-        return group;
-    }
-    private void incrementThrottle(Widget.ClickData clickData) {
-        if(ParallelLim<=4) this.ParallelNumA = MathHelper.clamp(ParallelNumA +1, 0, ParallelLim);
-        this.ParallelNumA = MathHelper.clamp(ParallelNumA + ParallelLim/16, 0, ParallelLim);
-    }
-
-    private void decrementThrottle(Widget.ClickData clickData) {
-        if(ParallelLim<=4) this.ParallelNumA = MathHelper.clamp(ParallelNumA -1, 0, ParallelLim);
-        this.ParallelNumA = MathHelper.clamp(ParallelNumA - ParallelLim/16, 0, ParallelLim);
-    }
-
-    private void incrementThrottle1(Widget.ClickData clickData) {
-        this.modern = MathHelper.clamp(modern + 1, 0, 1);
-    }
-
-    private void decrementThrottle1(Widget.ClickData clickData) {
-        this.modern = MathHelper.clamp(modern - 1, 0, 1);
-    }
     public MetaTileEntitySepticTank(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[] {
                 RecipeMaps.FERMENTING_RECIPES,
@@ -178,7 +105,7 @@ public class MetaTileEntitySepticTank extends GTQTRecipeMapMultiblockController 
         }
         @Override
         public int getParallelLimit() {
-            return ParallelNum;
+            return tier;
         }
         public long getMaxVoltage() {
             return Math.min(super.getMaxVoltage(), VA[tier]);
@@ -219,9 +146,6 @@ public class MetaTileEntitySepticTank extends GTQTRecipeMapMultiblockController 
                                 "gregtech.multiblock.blast_furnace.max_temperature",
                                 heatString));
                         textList.add(new TextComponentTranslation("gtqtcore.tire", tier));
-                        if(modern==0) textList.add(new TextComponentTranslation("gtqtcore.tire1",tier));
-                        if(modern==1) textList.add(new TextComponentTranslation("gtqtcore.tire2",tier));
-                        textList.add(new TextComponentTranslation("gtqtcore.parr",ParallelNum,ParallelLim));
                     }
                 })
                 .addParallelsLine(recipeMapWorkable.getParallelLimit())
@@ -248,8 +172,6 @@ public class MetaTileEntitySepticTank extends GTQTRecipeMapMultiblockController 
                 0);
 
         this.writeCustomData(GTQTValue.UPDATE_TIER,buf -> buf.writeInt(this.tier));
-        ParallelLim=(int)Math.pow(2, this.tier);
-        ParallelNum=ParallelLim;
     }
 
     @Override

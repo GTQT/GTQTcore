@@ -6,6 +6,7 @@ import static gregtech.api.recipes.RecipeMaps.CHEMICAL_RECIPES;
 import static gregtech.api.recipes.RecipeMaps.DISTILLATION_RECIPES;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtechfoodoption.GTFOMaterialHandler.Stearin;
+import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.FLUIDIZED_BED;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.SFM;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
@@ -13,6 +14,66 @@ import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 public class OceanChain {
     public static void init() {
         I();          //碘
+        plastic();    //阻燃剂
+    }
+
+    private static void plastic() {
+        CHEMICAL_RECIPES.recipeBuilder()
+                .duration(200)
+                .EUt(120)
+                .notConsumable(OrePrefix.dust,AluminiumTrichloride,16)
+                .fluidInputs(Naphtha.getFluid(4000))
+                .fluidOutputs(Toluene.getFluid(1000))
+                .buildAndRegister();
+
+        FLUIDIZED_BED.recipeBuilder()
+                .duration(200)
+                .EUt(120)
+                .notConsumable(OrePrefix.dust,Gold,16)
+                .fluidInputs(Toluene.getFluid(4000))
+                .fluidOutputs(ParaXylene.getFluid(1000))
+                .fluidOutputs(Dimethylbenzene.getFluid(1000))
+                .buildAndRegister();
+
+        //在AlCl3催化下，对二甲苯与Br2反应，得到2，3，5，6-四溴对二甲苯。
+        FLUIDIZED_BED.recipeBuilder()
+                .duration(200)
+                .EUt(120)
+                .notConsumable(OrePrefix.dust,AluminiumTrichloride,16)
+                .fluidInputs(ParaXylene.getFluid(1000))
+                .fluidInputs(Bromine.getFluid(4000))
+                .fluidOutputs(Tetrabromo.getFluid(1000))
+                .fluidOutputs(Hydrogen.getFluid(4000))
+                .buildAndRegister();
+
+        //将80kg四氯化碳加入反应釜中，在搅拌下加入上述制备的四溴对二甲苯42kg
+        FLUIDIZED_BED.recipeBuilder()
+                .duration(400)
+                .EUt(120)
+                .fluidInputs(Tetrabromo.getFluid(1000))
+                .fluidInputs(CarbonTetrachloride.getFluid(4000))
+                .fluidInputs(Bromine.getFluid(2000))
+                .fluidOutputs(Tetrabromobenzene.getFluid(1000))
+                .fluidOutputs(CarbonTetrachloride.getFluid(4000))
+                .fluidOutputs(Hydrogen.getFluid(2000))
+                .buildAndRegister();
+
+        //溴化聚苯乙烯
+        CHEMICAL_RECIPES.recipeBuilder()
+                .duration(400)
+                .EUt(120)
+                .fluidInputs(Tetrabromobenzene.getFluid(4000))
+                .fluidInputs(Polystyrene.getFluid(1000))
+                .fluidOutputs(Bps.getFluid(1000))
+                .buildAndRegister();
+
+        CHEMICAL_RECIPES.recipeBuilder()
+                .duration(400)
+                .EUt(120)
+                .fluidInputs(Tetrabromobenzene.getFluid(4000))
+                .fluidInputs(Epoxy.getFluid(1000))
+                .fluidOutputs(Brominatedepoxyresins.getFluid(1000))
+                .buildAndRegister();
     }
 
     private static void I()
