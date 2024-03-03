@@ -27,6 +27,7 @@ public class GTQTTextures {
     public static SimpleOverlayRenderer POLYBENZIMIDAZOLE_PIPE;
     public static SimpleOverlayRenderer QUANTUM_CONSTRAINT_CASING;
     public static SimpleOverlayRenderer PD_CASING;
+    public static SimpleOverlayRenderer TALONITE;
     public static SimpleOverlayRenderer PRECISE_ASSEMBLER_CASING_MK1;
     public static SimpleOverlayRenderer PRECISE_ASSEMBLER_CASING_MK2;
     public static SimpleOverlayRenderer PRECISE_ASSEMBLER_CASING_MK3;
@@ -109,6 +110,7 @@ public class GTQTTextures {
         PD_CASING = new SimpleOverlayRenderer("multiblock/casing/pd_turbine_casing");
         ST_CASING = new SimpleOverlayRenderer("multiblock/casing/st_turbine_casing");
         AD_CASING = new SimpleOverlayRenderer("multiblock/casing/ad_turbine_casing");
+        TALONITE = new SimpleOverlayRenderer("multiblock/advblock/talonite");
         HYPER_CASING = new SimpleOverlayRenderer("multiblock/casing/hyper_casing");
         BRICK = new SimpleOverlayRenderer("multiblock/casing/brick");
         FISHING_CASING = new SimpleOverlayRenderer("multiblock/casing/fishing_casing");

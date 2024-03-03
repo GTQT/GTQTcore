@@ -240,6 +240,31 @@ public class KeQingNET {
                 .output(INTEGRATED_MINING_DIVISION)
                 .duration(2000).EUt(480).buildAndRegister();
 
+        //Arc
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .inputs(HULL[2].getStackForm(16))
+                .input(circuit, Tier.HV, 8)
+                .input(ELECTRIC_MOTOR_MV,16)
+                .input(ELECTRIC_PUMP_MV,16)
+                .input(gear,Aluminium,8)
+                .input(wireFine, Aluminium, 8)
+                .input(foil, Aluminium, 8)
+                .fluidInputs(Bps.getFluid(4000))
+                .output(ELECTRIC_ARC_FURNACE)
+                .duration(400).EUt(120).buildAndRegister();
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .inputs(HULL[2].getStackForm(8))
+                .input(circuit, Tier.HV, 8)
+                .input(ELECTRIC_PISTON_MV,16)
+                .input(ELECTRIC_PUMP_MV,16)
+                .input(pipeHugeFluid,Steel,8)
+                .input(gear,Aluminium,8)
+                .input(rotor, Aluminium, 8)
+                .fluidInputs(Epoxy.getFluid(4000))
+                .output(FLUIDIZED_BED)
+                .duration(200).EUt(120).buildAndRegister();
+
     }
     private static void I_VV() {
 

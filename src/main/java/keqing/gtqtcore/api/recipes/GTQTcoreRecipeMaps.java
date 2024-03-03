@@ -153,7 +153,7 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<SimpleRecipeBuilder> CLARIFIER;
     public static final RecipeMap<SimpleRecipeBuilder>  ELEOIL;
     public static final RecipeMap<SimpleRecipeBuilder>  REACTION_FURNACE_RECIPES;
-
+    public static final RecipeMap<SimpleRecipeBuilder>  BLAST_ARC_RECIPES;
     public static final RecipeMap<SEComputationRecipeBuilder> SPACE_ELEVATOR_DRILLING_MODULE;
     public static final RecipeMap<SEComputationRecipeBuilder> SPACE_ELEVATOR_MINING_MODULE;
     public static final RecipeMap<NeutronActivatorRecipeBuilder> NEUTRON_ACTIVATOR ;
@@ -363,6 +363,9 @@ public class GTQTcoreRecipeMaps {
 
         REACTION_FURNACE_RECIPES = new RecipeMap<>("reaction_furnace",
                 3, 3, 3, 3, new SimpleRecipeBuilder(), false);
+
+        BLAST_ARC_RECIPES = new RecipeMap<>("blast_arc_furnace",
+                6, 3, 6, 3, new SimpleRecipeBuilder(), false);
 
         SEPTIC_TANK = new RecipeMap<>("septic_tank",
                 2, 2, 2, 2, new SimpleRecipeBuilder(), false);

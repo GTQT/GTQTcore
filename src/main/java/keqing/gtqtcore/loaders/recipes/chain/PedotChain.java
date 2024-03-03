@@ -54,7 +54,6 @@ public class PedotChain {
                 .notConsumable(new IntCircuitIngredient(2))
                 .fluidInputs(Styrene.getFluid(2160))
                 .fluidInputs(Air.getFluid(7500))
-                .fluidInputs(TitaniumTetrachloride.getFluid(100))
                 .fluidOutputs(Polystyrene.getFluid(3240))
                 .duration(800).EUt(VA[LV]).buildAndRegister();
 
@@ -62,7 +61,6 @@ public class PedotChain {
                 .notConsumable(new IntCircuitIngredient(2))
                 .fluidInputs(Styrene.getFluid(2160))
                 .fluidInputs(Oxygen.getFluid(7500))
-                .fluidInputs(TitaniumTetrachloride.getFluid(100))
                 .fluidOutputs(Polystyrene.getFluid(4320))
                 .duration(800).EUt(VA[LV]).buildAndRegister();
 

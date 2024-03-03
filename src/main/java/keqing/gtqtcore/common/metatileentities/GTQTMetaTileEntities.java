@@ -130,6 +130,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntitySepticTank SEPTIC_TANK;
     public static MetaTileEntityIsaMill ISA_MILL;
     public static MetaTileEntityPCB PCB;
+    public static MetaTileEntityElectricArcFurnace ELECTRIC_ARC_FURNACE;
     public static MetaTileEntityMultiblockTank[] TANK = new MetaTileEntityMultiblockTank[10];
     public static MetaTileEntityAlloykiln ALLOY_KILN;
     public static MetaTileEntitySaltField SALT_FLIED;
@@ -331,6 +332,7 @@ public class GTQTMetaTileEntities {
         MSF= registerMetaTileEntity(3188, new MetaTileEntityMSF(gtqtcoreId("msf")));
         INTEGRATED_ORE_PROCESSOR= registerMetaTileEntity(3189, new MetaTileEntityIntegratedOreProcessor(gtqtcoreId("integrated_ore_processor")));
         FLUIDIZED_BED= registerMetaTileEntity(3190, new MetaTileEntityFluidizedBed(gtqtcoreId("fluidzed_bed")));
+        ELECTRIC_ARC_FURNACE= registerMetaTileEntity(3191, new MetaTileEntityElectricArcFurnace(gtqtcoreId("electric_arc_furnace")));
         //重写设备
         DISTILLATION_TOWER = registerMetaTileEntity(3250, new MetaTileEntityDistillationTower(gtqtcoreId("distillation_tower")));
         CRACKER = registerMetaTileEntity(3251, new MetaTileEntityCrackingUnit(gtqtcoreId("cracker")));

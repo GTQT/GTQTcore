@@ -127,7 +127,7 @@ public class EPMachineCasingMaterials {
                 .color(0x9991A5)
                 .iconSet(SHINY)
                 .blast(3545, GasTier.HIGHER)
-                .flags(GENERATE_PLATE)
+                .flags(GENERATE_PLATE,GENERATE_ROD,GENERATE_GEAR,GENERATE_SMALL_GEAR,GENERATE_LONG_ROD,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_FRAME)
                 .components(Cobalt, 4, Chrome, 3, Phosphorus, 2, Molybdenum, 1)
                 .build();
         //  24511 Black Plutonium

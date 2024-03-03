@@ -8,11 +8,13 @@ import gregtech.api.capability.IOpticalComputationProvider;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.Widget;
+import gregtech.api.gui.resources.TextureArea;
 import gregtech.api.gui.widgets.ClickButtonWidget;
 import gregtech.api.gui.widgets.WidgetGroup;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
+import gregtech.api.metatileentity.multiblock.IProgressBarMultiblock;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
@@ -21,6 +23,7 @@ import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
+import gregtech.api.util.TextComponentUtil;
 import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
@@ -47,6 +50,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -58,7 +62,7 @@ import java.util.Random;
 
 import static gregtech.api.unification.material.Materials.*;
 
-public class MetaTileEntityBiologicalReaction extends GTQTRecipeMapMultiblockController {
+public class MetaTileEntityBiologicalReaction extends GTQTRecipeMapMultiblockController implements IProgressBarMultiblock {
     public MetaTileEntityBiologicalReaction(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[] {
                 GTQTcoreRecipeMaps.BIOLOGICAL_REACTION_RECIPES,
@@ -69,10 +73,45 @@ public class MetaTileEntityBiologicalReaction extends GTQTRecipeMapMultiblockCon
     }
     private int glass_tier;
     private int clean_tier;
+    private int tubeTier;
     int liquid=0;
     int bio=0;
     double rate=0;
-
+    int n;
+    @Override
+    public int getNumProgressBars() {
+        return 2;
+    }
+    @Override
+    public double getFillPercentage(int index) {
+        if(rate>2)
+        return index == 0 ?  2 :
+                bio / 3200.0;
+        else
+            return index == 0 ?  rate :
+                    bio / 3200.0;
+    }
+    @Override
+    public TextureArea getProgressBarTexture(int index) {
+        return GuiTextures.PROGRESS_BAR_LCE_FUEL;
+    }
+    @Override
+    public void addBarHoverText(List<ITextComponent> hoverList, int index) {
+        ITextComponent cwutInfo;
+        if (index == 0) {
+            cwutInfo = TextComponentUtil.stringWithColor(
+                    TextFormatting.AQUA,
+                    rate*100 + " / " + 100 + "R");
+        } else {
+            cwutInfo = TextComponentUtil.stringWithColor(
+                    TextFormatting.AQUA,
+                    bio + " / " + 3200 + " P");
+        }
+        hoverList.add(TextComponentUtil.translationWithColor(
+                TextFormatting.GRAY,
+                "gregtech.multiblock.pb.computation",
+                cwutInfo));
+    }
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("liquid", liquid);
@@ -114,6 +153,10 @@ public class MetaTileEntityBiologicalReaction extends GTQTRecipeMapMultiblockCon
         super.formStructure(context);
         Object glass_tier = context.get("LGLTiredStats");
         Object clean_tier = context.get("ZJTiredStats");
+        Object tubeTier = context.get("ChemicalPlantTubeTiredStats");
+        this.tubeTier = GTQTUtil.getOrDefault(() -> tubeTier instanceof WrappedIntTired,
+                () -> ((WrappedIntTired)tubeTier).getIntTier(),
+                0);
         this.glass_tier = GTQTUtil.getOrDefault(() -> glass_tier instanceof WrappedIntTired,
                 () -> ((WrappedIntTired)glass_tier).getIntTier(),
                 0);
@@ -134,17 +177,13 @@ public class MetaTileEntityBiologicalReaction extends GTQTRecipeMapMultiblockCon
                 .where('J', TiredTraceabilityPredicate.CP_ZJ_CASING)
                 .where('G', TiredTraceabilityPredicate.CP_LGLASS)
                 .where('C', states(getCasingState()).setMinGlobalLimited(38).or(autoAbilities()))
-                .where('P', states(getCasingState1()))
+                .where('P', TiredTraceabilityPredicate.CP_TUBE)
                 .where(' ', any())
                 .build();
     }
 
     private static IBlockState getCasingState() {
         return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STAINLESS_CLEAN);
-    }
-
-    private static IBlockState getCasingState1() {
-        return MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.STEEL_PIPE);
     }
 
     @SideOnly(Side.CLIENT)
@@ -167,6 +206,7 @@ public class MetaTileEntityBiologicalReaction extends GTQTRecipeMapMultiblockCon
             textList.add(new TextComponentTranslation("gtqtcore.multiblock.br.amount", TextFormattingUtil.formatNumbers((liquidOxygenAmount))));
         }
         textList.add(new TextComponentTranslation("gtqtcore.multiblock.br.1",liquid,bio,rate));
+        textList.add(new TextComponentTranslation("gtqtcore.multiblock.br.3",glass_tier,tubeTier));
         if(rate>100)
             textList.add(new TextComponentTranslation("gtqtcore.multiblock.br.2"));
     }
@@ -220,23 +260,24 @@ public class MetaTileEntityBiologicalReaction extends GTQTRecipeMapMultiblockCon
 
  */
 
-            if (BIO1.isFluidStackIdentical(inputTank.drain(BIO1, false))) {
-                inputTank.drain(BIO1, true);
-                bio = bio + 100;
+            if(bio<3200) {
+                if (BIO1.isFluidStackIdentical(inputTank.drain(BIO1, false))) {
+                    inputTank.drain(BIO1, true);
+                    bio = bio + 100;
+                }
+                if (BIO2.isFluidStackIdentical(inputTank.drain(BIO2, false))) {
+                    inputTank.drain(BIO2, true);
+                    bio = bio + 100;
+                }
+                if (BIO3.isFluidStackIdentical(inputTank.drain(BIO3, false))) {
+                    inputTank.drain(BIO3, true);
+                    bio = bio + 100;
+                }
+                if (BIO4.isFluidStackIdentical(inputTank.drain(BIO4, false))) {
+                    inputTank.drain(BIO4, true);
+                    bio = bio + 100;
+                }
             }
-            if (BIO2.isFluidStackIdentical(inputTank.drain(BIO2, false))) {
-                inputTank.drain(BIO2, true);
-                bio = bio + 100;
-            }
-            if (BIO3.isFluidStackIdentical(inputTank.drain(BIO3, false))) {
-                inputTank.drain(BIO3, true);
-                bio = bio + 100;
-            }
-            if (BIO4.isFluidStackIdentical(inputTank.drain(BIO4, false))) {
-                inputTank.drain(BIO4, true);
-                bio = bio + 100;
-            }
-
             if (WATER.isFluidStackIdentical(inputTank.drain(WATER, false))) {
                 if(liquid<32000) {
                     inputTank.drain(WATER, true);
@@ -275,14 +316,16 @@ public class MetaTileEntityBiologicalReaction extends GTQTRecipeMapMultiblockCon
 
  */
             if(liquid==0) rate=0;
-            else rate=bio*100.0/liquid;
+            else rate=(double) bio*10/liquid;
         }
         protected int getp()
         {
-            if(rate>90)return 8;
-            if(rate>80)return 4;
-            if(rate>60)return 2;
-            if(rate>40)return 1;
+            if(rate>1.2)return 2;
+            if(rate>1.1)return 4;
+            if(rate>0.9)return 8;
+            if(rate>0.8)return 4;
+            if(rate>0.6)return 2;
+            if(rate>0.4)return 1;
             return 1;
         }
         @Override
@@ -327,7 +370,7 @@ public class MetaTileEntityBiologicalReaction extends GTQTRecipeMapMultiblockCon
                         liquid = liquid - 100;
                         if (++progressTime > maxProgressTime) {
                             completeRecipe();
-                            liquid=liquid/2;bio=bio*2/7;
+                            liquid=liquid*tubeTier/16;bio=bio*tubeTier/12;
                             //checjwater();
                         }
                     }
