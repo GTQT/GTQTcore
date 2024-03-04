@@ -1,5 +1,6 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
+import gregtech.api.GTValues;
 import gregtech.api.capability.IMultipleTankHandler;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.gui.GuiTextures;
@@ -24,12 +25,15 @@ import gregtech.client.renderer.texture.Textures;
 import gregtech.common.blocks.BlockBoilerCasing;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
+import gregtech.common.metatileentities.MetaTileEntities;
 import gregtech.core.sound.GTSoundEvents;
 import keqing.gtqtcore.api.pattern.GTQTTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
@@ -38,6 +42,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -225,15 +230,24 @@ public class MetaTileEntityFluidizedBed extends RecipeMapMultiblockController im
         if (Blocks.AIR != null) {
             builder = MultiblockShapeInfo.builder()
                     .aisle("AAAPPPP", "BBBQQQQ", "BBBQQQQ", "BBBQQQQ", "ABARRRR", " B     ", " B     ", " B     ", " B     ", " B     ", " B     ", " B     ")
-                    .aisle("A A    ", "BBBQQQQ", "BCBQ  Q", "BCBQ  Q", "BCBRRRR", "BCB TT ", "BCB TT ", "BCB TT ", "BCB TT ", "BCBTTTT", "BCB    ", "BBB    ")
+                    .aisle("A A    ", "BBBQQQQ", "ICBQ  Q", "BCBQ  Q", "BCBRRRR", "BCB TT ", "BCB TT ", "BCB TT ", "BCB TT ", "BCBTTTT", "OCB    ", "BBB    ")
                     .aisle("AAAPPPP", "BBBQQQQ", "BCBQQQQ", "BBBQQQQ", "ABARRRR", " B     ", " B     ", " B     ", " B     ", " B   T ", " B     ", " B     ")
                     .aisle("       ", "BBB    ", "BCB    ", "BBB    ", "A A    ", "       ", "       ", "       ", "       ", "     T ", "       ", "       ")
                     .aisle("       ", "BBB    ", "BCB    ", "BBB    ", "A A    ", "       ", "       ", "       ", "       ", "     T ", "       ", "       ")
                     .aisle("       ", "BBB    ", "BCB    ", "BBB    ", "A A    ", "       ", "       ", "       ", "       ", "     T ", "       ", "       ")
-                    .aisle("AAAPPPP", "BBBQQQQ", "BCBQQQQ", "BBBQQQQ", "ABARRRR", " B     ", " B     ", " B     ", " B     ", " B   T ", " B     ", " B     ")
-                    .aisle("A A    ", "BBBQQQQ", "BCBQ  Q", "BCBQ  Q", "BCBRRRR", "BCB TT ", "BCB TT ", "BCB TT ", "BCB TT ", "BCBTTTT", "BCB    ", "BBB    ")
-                    .aisle("AAAPPPP", "BBBQQQQ", "BSBQQQQ", "BBBQQQQ", "ABARRRR", " B     ", " B     ", " B     ", " B     ", " B     ", " B     ", " B     ")
+                    .aisle("AAAPPPP", "YBBQQQQ", "BCBQQQQ", "BBBQQQQ", "ABARRRR", " B     ", " B     ", " B     ", " B     ", " B   T ", " B     ", " B     ")
+                    .aisle("A A    ", "XBBQQQQ", "ICBQ  Q", "BCBQ  Q", "BCBRRRR", "BCB TT ", "BCB TT ", "BCB TT ", "BCB TT ", "BCBTTTT", "OCB    ", "BBB    ")
+                    .aisle("AAAPPPP", "EMBQQQQ", "BSBQQQQ", "BBBQQQQ", "ABARRRR", " B     ", " B     ", " B     ", " B     ", " B     ", " B     ", " B     ")
                     .where('S', GTQTMetaTileEntities.FLUIDIZED_BED, EnumFacing.SOUTH)
+
+                    .where('E', MetaTileEntities.ENERGY_INPUT_HATCH[GTValues.LV], EnumFacing.WEST)
+                    .where('X', MetaTileEntities.ITEM_IMPORT_BUS[GTValues.LV], EnumFacing.WEST)
+                    .where('Y', MetaTileEntities.ITEM_EXPORT_BUS[GTValues.LV], EnumFacing.WEST)
+                    .where('I', MetaTileEntities.FLUID_IMPORT_HATCH[GTValues.LV], EnumFacing.WEST)
+                    .where('O', MetaTileEntities.FLUID_EXPORT_HATCH[GTValues.LV], EnumFacing.WEST)
+                    .where('M', MetaTileEntities.MUFFLER_HATCH[GTValues.LV], EnumFacing.SOUTH)
+
+
                     .where('C', getCasingState2())
                     .where('A', getFrameState())
                     .where('B', getCasingState())
@@ -284,6 +298,14 @@ public class MetaTileEntityFluidizedBed extends RecipeMapMultiblockController im
     @Override
     public SoundEvent getBreakdownSound() {
         return GTSoundEvents.BREAKDOWN_ELECTRICAL;
+    }
+
+    @Override
+    public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
+        super.addInformation(stack, player, tooltip, advanced);
+        tooltip.add(I18n.format("gregtech.machine.fb.tooltip.1"));
+        tooltip.add(I18n.format("gregtech.machine.fb.tooltip.2"));
+        tooltip.add(I18n.format("gregtech.machine.fb.tooltip.3"));
     }
 
 }

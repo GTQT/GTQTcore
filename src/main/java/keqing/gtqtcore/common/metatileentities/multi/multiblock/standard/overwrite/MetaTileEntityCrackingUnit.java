@@ -103,10 +103,10 @@ public class MetaTileEntityCrackingUnit extends GTQTRecipeMapMultiblockOverwrite
                 .aisle("HCHCH", "HCOCH", "HCHCH")
                 .where('O', selfPredicate())
                 .where('H', TiredTraceabilityPredicate.CP_CASING
-                        .or(abilities(MultiblockAbility.IMPORT_ITEMS).setMaxGlobalLimited(1))
-                        .or(abilities(MultiblockAbility.MAINTENANCE_HATCH).setMaxGlobalLimited(1))
-                        .or(abilities(MultiblockAbility.EXPORT_FLUIDS).setMaxGlobalLimited(1))
-                        .or(abilities(MultiblockAbility.MUFFLER_HATCH).setMaxGlobalLimited(1))
+                        .or(abilities(MultiblockAbility.IMPORT_ITEMS).setExactLimit(1))
+                        .or(abilities(MultiblockAbility.MAINTENANCE_HATCH).setExactLimit(1))
+                        .or(abilities(MultiblockAbility.EXPORT_FLUIDS).setExactLimit(1))
+                        .or(abilities(MultiblockAbility.MUFFLER_HATCH).setExactLimit(1))
                         .or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(3))
                         .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setExactLimit(2)))
                 .where('#', air())
@@ -162,7 +162,9 @@ public class MetaTileEntityCrackingUnit extends GTQTRecipeMapMultiblockOverwrite
             this.writeCustomData(GTQTValue.UPDATE_TIER,buf1 -> buf1.writeInt(this.casingTier));
         }
     }
-
+    public boolean hasMufflerMechanics() {
+        return false;
+    }
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);

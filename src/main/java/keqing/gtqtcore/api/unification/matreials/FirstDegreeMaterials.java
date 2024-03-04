@@ -1634,5 +1634,120 @@ public class FirstDegreeMaterials {
                 .flags(DISABLE_DECOMPOSITION)
                 .build();
         Brominatedepoxyresins.setFormula("(C11H12O3)n-C8H4Br6");
+
+        GTQTMaterials.Anorthite = new Material.Builder(getMaterialsId(), gregtechId("anorthite"))
+                .dust()
+                .gem()
+                .color(0x595853).iconSet(CERTUS)
+                .flags(NO_SMASHING, DECOMPOSITION_BY_ELECTROLYZING)
+                .components(Calcium, 1, Aluminium, 2, Silicon, 2, Oxygen, 8)
+                .build()
+                .setFormula("Ca(Al2Si2O8)", true);
+
+
+        GTQTMaterials.Albite = new Material.Builder(getMaterialsId(), gregtechId("albite"))
+                .dust()
+                .gem()
+                .color(0xc4a997).iconSet(CERTUS)
+                .flags(NO_SMASHING, DECOMPOSITION_BY_ELECTROLYZING)
+                .components(Sodium, 1, Aluminium, 1, Silicon, 3, Oxygen, 8)
+                .build()
+                .setFormula("Na(AlSi3O8)", true);
+
+        GTQTMaterials.Oligoclase = new Material.Builder(getMaterialsId(), gregtechId("oligoclase"))
+                .dust()
+                .gem()
+                .color(0xd5c4b8).iconSet(CERTUS)
+                .flags(NO_SMASHING, DECOMPOSITION_BY_ELECTROLYZING)
+                .components(Albite, 4, Anorthite, 1)
+                .build()
+                .setFormula("(Na,Ca)(Si,Al)4O8", true);
+
+        GTQTMaterials.Andesine = new Material.Builder(getMaterialsId(), gregtechId("andesine"))
+                .dust()
+                .gem()
+                .color(0xe18e6f).iconSet(EMERALD)
+                .flags(NO_SMASHING, DECOMPOSITION_BY_ELECTROLYZING)
+                .components(Albite, 3, Anorthite, 2)
+                .build()
+                .setFormula("(Na,Ca)(Si,Al)4O8", true);
+
+        GTQTMaterials.Labradorite = new Material.Builder(getMaterialsId(), gregtechId("labradorite"))
+                .dust()
+                .gem()
+                .color(0x5c7181).iconSet(RUBY)
+                .flags(NO_SMASHING, DECOMPOSITION_BY_ELECTROLYZING)
+                .components(Albite, 2, Anorthite, 3)
+                .build()
+                .setFormula("(Na,Ca)(Si,Al)4O8", true);
+
+        GTQTMaterials.Bytownite = new Material.Builder(getMaterialsId(), gregtechId("bytownite"))
+                .dust()
+                .gem()
+                .color(0xc99c67).iconSet(LAPIS)
+                .flags(NO_SMASHING, DECOMPOSITION_BY_ELECTROLYZING)
+                .components(Albite, 1, Anorthite, 4)
+                .build()
+                .setFormula("(Na,Ca)(Si,Al)4O8", true);
+
+        GTQTMaterials.Clinochlore = new Material.Builder(getMaterialsId(), gregtechId("chlinochlore"))
+                .dust()
+                .gem()
+                .color(0x303e38).iconSet(EMERALD)
+                .flags(NO_SMASHING, DECOMPOSITION_BY_ELECTROLYZING)
+                .components(Magnesium, 5, Aluminium, 2, Silicon, 3, Oxygen, 18, Hydrogen, 8)
+                .build()
+                .setFormula("(Mg5Al)(AlSi3)O10(OH)8", true);
+
+        GTQTMaterials.Augite = new Material.Builder(getMaterialsId(), gregtechId("augite"))
+                .dust()
+                .color(0x1b1717).iconSet(ROUGH)
+                .flags(NO_SMASHING, DECOMPOSITION_BY_ELECTROLYZING)
+                .components(Calcium, 2, Magnesium, 3, Iron, 3, Silicon, 8, Oxygen, 24)
+                .build()
+                .setFormula("(Ca2MgFe)(MgFe)2(Si2O6)4", true);
+
+
+        GTQTMaterials.Dolomite = new Material.Builder(getMaterialsId(), gregtechId("dolomite"))
+                .dust()
+                .color(0xbbb8b2)
+                .flags(NO_SMASHING, DECOMPOSITION_BY_ELECTROLYZING)
+                .components(Calcium, 1, Magnesium, 1, Carbon, 2, Oxygen, 6)
+                .build()
+                .setFormula("CaMg(CO3)2", true);
+
+        GTQTMaterials.Muscovite = new Material.Builder(getMaterialsId(), gregtechId("muscovite"))
+                .dust()
+                .color(0x8b876a)
+                .flags(NO_SMASHING, DECOMPOSITION_BY_ELECTROLYZING)
+                .components(Potassium, 1, Aluminium, 3, Silicon, 3, Oxygen, 12, Hydrogen, 10)
+                .build()
+                .setFormula("KAl2(AlSi3O10)(OH)2)", true);
+
+        GTQTMaterials.Fluorite = new Material.Builder(getMaterialsId(), gregtechId("fluorite"))
+                .dust()
+                .gem()
+                .ore()
+                .color(0x276a4c).iconSet(CERTUS)
+                .flags(NO_SMASHING, DECOMPOSITION_BY_ELECTROLYZING)
+                .components(Calcium, 1, Fluorine, 2)
+                .build();
+
+        GTQTMaterials.Forsterite = new Material.Builder(getMaterialsId(), gregtechId("forsterite"))
+                .dust()
+                .gem()
+                .color(0x1d640f).iconSet(LAPIS)
+                .flags(NO_SMASHING, DECOMPOSITION_BY_ELECTROLYZING)
+                .components(Magnesium, 2, Sulfur, 1, Oxygen, 4)
+                .build()
+                .setFormula("Mg2(SiO4)",true);
+
+        GTQTMaterials.Lizardite = new Material.Builder(getMaterialsId(), gregtechId("lizardite"))
+                .dust()
+                .color(0xa79e42)
+                .flags(NO_SMASHING, DECOMPOSITION_BY_ELECTROLYZING)
+                .components(Magnesium, 3, Silicon, 2, Oxygen, 9, Hydrogen, 4)
+                .build()
+                .setFormula("Mg3Si2O5(OH)4",true);
     }
 }

@@ -676,7 +676,75 @@ gregtech.material.bitterno=氧化卤水
 gregtech.material.bitternbr=离散态氧化溴
 gregtech.material.bitternobr=氧化富集溴
 
+# Rocks
+tile.susy_stone_smooth.gabbro.name=辉长岩
+tile.susy_stone_smooth.gneiss.name=片麻岩
+tile.susy_stone_smooth.graphite.name=石墨页岩
+tile.susy_stone_smooth.limestone.name=石灰岩
+tile.susy_stone_smooth.mica.name=云母
+tile.susy_stone_smooth.phyllite.name=千枚岩
+tile.susy_stone_smooth.quartzite.name=石英岩
+tile.susy_stone_smooth.shale.name=页岩
+tile.susy_stone_smooth.slate.name=板岩
+tile.susy_stone_smooth.soapstone.name=皂石
+tile.susy_stone_smooth.kimberlite.name=金伯利岩
+tile.susy_stone_cobble.gabbro.name=辉长岩圆石
+tile.susy_stone_cobble.gneiss.name=片麻岩圆石
+tile.susy_stone_cobble.graphite.name=石墨页岩圆石
+tile.susy_stone_cobble.limestone.name=石灰岩圆石
+tile.susy_stone_cobble.mica.name=云母圆石
+tile.susy_stone_cobble.phyllite.name=千枚岩圆石
+tile.susy_stone_cobble.quartzite.name=石英岩圆石
+tile.susy_stone_cobble.shale.name=页岩圆石
+tile.susy_stone_cobble.slate.name=板岩圆石
+tile.susy_stone_cobble.soapstone.name=皂石圆石
+tile.susy_stone_cobble.kimberlite.name=金伯利岩圆石
+tile.susy_stone_bricks.gabbro.name=辉长岩砖
+tile.susy_stone_bricks.gneiss.name=片麻岩砖
+tile.susy_stone_bricks.graphite.name=石墨页岩砖
+tile.susy_stone_bricks.limestone.name=石灰岩砖
+tile.susy_stone_bricks.mica.name=云母砖
+tile.susy_stone_bricks.phyllite.name=千枚岩砖
+tile.susy_stone_bricks.quartzite.name=石英岩砖
+tile.susy_stone_bricks.shale.name=页岩砖
+tile.susy_stone_bricks.slate.name=板岩砖
+tile.susy_stone_bricks.soapstone.name=皂石砖
+tile.susy_stone_bricks.kimberlite.name=金伯利岩砖
 
+# Rock/Mineral Materials
+gregtech.material.fluorite=氟石
+gregtech.material.gabbro=辉长岩
+gregtech.material.slate=板岩
+gregtech.material.shale=页岩
+gregtech.material.phyllite=千枚岩
+gregtech.material.limestone=石灰岩
+gregtech.material.gneiss=片麻岩
+gregtech.material.kimberlite=金伯利岩
+gregtech.material.muscovite=白云母
+gregtech.material.dolomite=白云石
+gregtech.material.augite=辉石
+gregtech.material.chlinochlore=斜绿泥石
+gregtech.material.bytownite=倍长石
+gregtech.material.labradorite=拉长石
+gregtech.material.andesine=中长石
+gregtech.material.oligoclase=中长石
+gregtech.material.albite=钠长石
+gregtech.material.anorthite=钙长石
+gregtech.material.forsterite=镁橄榄石
+gregtech.material.lizardite=利蛇纹石
+
+# Ore Prefixes (%s is the localised material name)
+item.material.oreprefix.oreGabbro=辉长岩%s矿石
+item.material.oreprefix.oreGneiss=片麻岩%s矿石
+item.material.oreprefix.oreGraphite=石墨页岩%s矿石
+item.material.oreprefix.oreLimestone=石灰岩%s矿石
+item.material.oreprefix.oreMica=云母%s矿石
+item.material.oreprefix.orePhyllite=千枚岩%s矿石
+item.material.oreprefix.oreQuartzite=石英岩%s矿石
+item.material.oreprefix.oreShale=页岩%s矿石
+item.material.oreprefix.oreSlate=板岩%s矿石
+item.material.oreprefix.oreSoapstone=皂石%s矿石
+item.material.oreprefix.oreKimberlite=金伯利岩%s矿石
 
 gregtech.material.amblygonite=磷铝锂石
 gregtech.material.infused_order=序
@@ -810,6 +878,16 @@ recipemap.blast_arc_furnace.name=冶金
 gtqtcore.machine.mdi.tooltip.2=工作时消耗钻头耐久度，耐久度全部消耗后结构将会删除钻头，需要手动安装。
 gtqtcore.machine.mdi.tooltip.3=多方块结构每升级一次，并行数量翻倍，钻头等级决定支持的配方等级。
 gtqtcore.machine.mdi.tooltip.1=还在手动挖矿？你居然还在手动挖矿？
+
+gregtech.machine.fb.tooltip.1=可拓展结构：散热模块,装配后可调节更大范围的冷却效率
+gregtech.machine.fb.tooltip.2=多方块在开机后持续升温，对应不同区间的温度有不同的并行加成,待机时温度会自然下降
+gregtech.machine.fb.tooltip.3=拓展结构升级后耗时缩短为原先的四分之一
+
+gregtech.machine.msf.tooltip.1=可拓展片结构：闪蒸室，可拓展十二次，每一片都需要安装一重的输出仓
+gregtech.machine.msf.tooltip.2=多方块默认输出十二格配方，若结构没有拓展完毕，则会只输出已经拓展的数量
+gregtech.machine.msf.tooltip.3=升级线圈，延长结构获得更多加成。运行不同配方拥有不同加成效果。
+gregtech.machine.msf.tooltip.4=往闪蒸室压入蒸汽开始早期加压，压力均大于六成是达到最佳饱和状态，拥有性能提升。每运行完成一轮后，蒸汽有一定比例损耗，注意及时补充。
+
 gtqtcore.md=钻机等级：%s 钻头等级：%s 钻头耐久：%s
 gtqtcore.machine.fluidized=冷却塔结构：%s
 gtqtcore.machine.fluidized1=流床热量缓存：%s 散热功率：%s

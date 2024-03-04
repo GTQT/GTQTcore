@@ -167,7 +167,7 @@ public class MetaTileEntityElectricArcFurnace extends GTQTRecipeMapMultiblockCon
                     if (FeF.isFluidStackIdentical(inputTank.drain(FeF, false))) {
                         inputTank.drain(FeF, true);
                         Fe = Fe + 1;
-                        simulateTemp-=10;
+                        if(simulateTemp>=110)simulateTemp-=10;
                     }
                 }
 
@@ -176,7 +176,7 @@ public class MetaTileEntityElectricArcFurnace extends GTQTRecipeMapMultiblockCon
                     if (NiF.isFluidStackIdentical(inputTank.drain(NiF, false))) {
                         inputTank.drain(NiF, true);
                         Ni = Ni + 1;
-                        simulateTemp-=10;
+                        if(simulateTemp>=110)simulateTemp-=10;
                     }
                 }
 
@@ -185,7 +185,7 @@ public class MetaTileEntityElectricArcFurnace extends GTQTRecipeMapMultiblockCon
                     if (MnF.isFluidStackIdentical(inputTank.drain(MnF, false))) {
                         inputTank.drain(MnF, true);
                         Mn = Mn + 1;
-                        simulateTemp-=10;
+                        if(simulateTemp>=110)simulateTemp-=10;
                     }
                 }
 
@@ -194,7 +194,7 @@ public class MetaTileEntityElectricArcFurnace extends GTQTRecipeMapMultiblockCon
                     if (CrF.isFluidStackIdentical(inputTank.drain(CrF, false))) {
                         inputTank.drain(CrF, true);
                         Cr = Cr + 1;
-                        simulateTemp-=10;
+                        if(simulateTemp>=110)simulateTemp-=10;
                     }
                 }
                 FluidStack VF = Vanadium.getFluid(144);//V
@@ -202,7 +202,7 @@ public class MetaTileEntityElectricArcFurnace extends GTQTRecipeMapMultiblockCon
                     if (VF.isFluidStackIdentical(inputTank.drain(VF, false))) {
                         inputTank.drain(VF, true);
                         V = V + 1;
-                        simulateTemp-=10;
+                        if(simulateTemp>=110)simulateTemp-=10;
                     }
                 }
                 FluidStack WF = Tungsten.getFluid(144);//W
@@ -210,7 +210,7 @@ public class MetaTileEntityElectricArcFurnace extends GTQTRecipeMapMultiblockCon
                     if (WF.isFluidStackIdentical(inputTank.drain(WF, false))) {
                         inputTank.drain(WF, true);
                         W = W + 1;
-                        simulateTemp-=10;
+                        if(simulateTemp>=110)simulateTemp-=10;
                     }
                 }
                 /*
@@ -301,9 +301,7 @@ public class MetaTileEntityElectricArcFurnace extends GTQTRecipeMapMultiblockCon
         {
             return isOutput;
         }
-        public long getMaxVoltage() {
-            return Math.min(super.getMaxVoltage(), VA[tubeTier]);
-        }
+
         protected void modifyOverclockPre( int[] values,  IRecipePropertyStorage storage) {
             super.modifyOverclockPre(values, storage);
             values[0] = OverclockingLogic.applyCoilEUtDiscount(values[0], ((IHeatingCoil)this.metaTileEntity).getCurrentTemperature(), (Integer)storage.getRecipePropertyValue(TemperatureProperty.getInstance(), 0));

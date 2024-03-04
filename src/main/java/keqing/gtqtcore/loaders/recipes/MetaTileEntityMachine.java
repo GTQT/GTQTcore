@@ -36,8 +36,7 @@ import static gregtech.common.blocks.MetaBlocks.MACHINE_CASING;
 import static gregtech.common.metatileentities.MetaTileEntities.ARC_FURNACE;
 import static gregtech.loaders.recipe.CraftingComponent.*;
 import static gregtech.loaders.recipe.MetaTileEntityLoader.registerMachineRecipe;
-import static keqing.gtqtcore.api.unification.GTQTMaterials.Infinity;
-import static keqing.gtqtcore.api.unification.GTQTMaterials.GalvanizedSteel;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.plate_curved;
 import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing1.TurbineCasingType.GALVANIZE_STEEL_CASING;
 
@@ -198,7 +197,7 @@ public class MetaTileEntityMachine {
         //hv
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(50).EUt(480)
                 .inputs(MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.HV))
-                .input(plate, Ultimet, 2)
+                .input(plate, Talonite, 2)
                 .input(OrePrefix.cableGtSingle, Materials.Aluminium, 2)
                 .fluidInputs(Materials.Epoxy.getFluid(L * 2))
                 .outputs(MetaTileEntities.HULL[3].getStackForm()).buildAndRegister();

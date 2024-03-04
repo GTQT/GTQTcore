@@ -15,6 +15,8 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.util.EnumMap;
+
 public class GTQTMetaBlocks {
     public static GTQTMultiblockCasing MULTI_CASING;
     public static GTQTADVBlock ADV_BLOCK;
@@ -37,7 +39,7 @@ public class GTQTMetaBlocks {
     public static final BlockPineLog PINE_LOG = new BlockPineLog();
     public static final BlockPineSapling PINE_SAPLING = new BlockPineSapling();
 
-
+    public static final EnumMap<GTQTStoneVariantBlock.StoneVariant, GTQTStoneVariantBlock> SUSY_STONE_BLOCKS = new EnumMap<>(GTQTStoneVariantBlock.StoneVariant.class);
     private GTQTMetaBlocks() {}
 
     public static void init() {
@@ -74,6 +76,10 @@ public class GTQTMetaBlocks {
 
         ROAD = new GTQTRoad();
         ROAD.setRegistryName("road");
+
+        for (GTQTStoneVariantBlock.StoneVariant shape : GTQTStoneVariantBlock.StoneVariant.values()) {
+            SUSY_STONE_BLOCKS.put(shape, new GTQTStoneVariantBlock(shape));
+        }
     }
 
     @SideOnly(Side.CLIENT)
@@ -97,6 +103,8 @@ public class GTQTMetaBlocks {
         registerItemModel(KQCC);
         registerItemModel(GLASS_CASING);
         registerItemModel(STEPPER);
+        for (GTQTStoneVariantBlock block : SUSY_STONE_BLOCKS.values())
+            registerItemModel(block);
     }
 
     @SideOnly(Side.CLIENT)

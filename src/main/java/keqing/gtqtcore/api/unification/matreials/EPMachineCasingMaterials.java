@@ -126,7 +126,7 @@ public class EPMachineCasingMaterials {
                 .fluid()
                 .color(0x9991A5)
                 .iconSet(SHINY)
-                .blast(3545, GasTier.HIGHER)
+                .blast(2700, GasTier.LOW)
                 .flags(GENERATE_PLATE,GENERATE_ROD,GENERATE_GEAR,GENERATE_SMALL_GEAR,GENERATE_LONG_ROD,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_FRAME)
                 .components(Cobalt, 4, Chrome, 3, Phosphorus, 2, Molybdenum, 1)
                 .build();

@@ -166,7 +166,7 @@ public class MetaTileEntityLoader {
                 "ABA", "CHC","ABA",
                 'H', MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.HV),
                 'C', new UnificationEntry(cableGtSingle, Aluminium),
-                'B', new UnificationEntry(plate, Ultimet),
+                'B', new UnificationEntry(plate, Talonite),
                 'A', new UnificationEntry(plate, Epoxy));
 
         ModHandler.addShapedRecipe(true, "ev_casing", HULL[4].getStackForm(),

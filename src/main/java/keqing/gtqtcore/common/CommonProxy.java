@@ -6,11 +6,13 @@ import gregtech.api.recipes.recipeproperties.FusionEUToStartProperty;
 import gregtech.api.unification.stack.ItemMaterialInfo;
 import gregtech.common.items.MetaItems;
 import keqing.gtqtcore.api.recipes.properties.*;
+import keqing.gtqtcore.api.unification.ore.GTQTStoneTypes;
 import keqing.gtqtcore.api.utils.GTQTLog;
 import keqing.gtqtcore.client.utils.TitleUtils;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTBlockWireCoil;
 import keqing.gtqtcore.common.block.blocks.GTQTCrops;
+import keqing.gtqtcore.common.block.blocks.GTQTStoneVariantBlock;
 import keqing.gtqtcore.common.items.GTQTMetaItems;
 import keqing.gtqtcore.common.items.metaitems.GTQTMetaToolItems;
 import keqing.gtqtcore.loaders.OreDictionaryLoader;
@@ -119,7 +121,8 @@ public class CommonProxy {
         GTQTMetaToolItems.init();
         GTQTRecipes.registerTool();
     }
-    public void preLoad() {
+    public void preLoad(){
+        GTQTStoneTypes.init();
     }
     public void init() {
         WorldLoader.init();
@@ -191,12 +194,15 @@ public class CommonProxy {
         registry.register(GTQTCrops.BRONZE_CROP);
         registry.register(GTQTCrops.CARBON_CROP);
 
+        for (GTQTStoneVariantBlock block : GTQTMetaBlocks.SUSY_STONE_BLOCKS.values()) registry.register(block);
+
         PINE_LOG.setCreativeTab(GTQTCore_TAB);
         PINE_SAPLING.setCreativeTab(GTQTCore_TAB);
         PINE_LEAVES.setCreativeTab(GTQTCore_TAB);
         registry.register(PINE_LOG);
         registry.register(PINE_SAPLING);
         registry.register(PINE_LEAVES);
+
 
     }
 
@@ -229,7 +235,7 @@ public class CommonProxy {
         registry.register(createItemBlock(GTQTMetaBlocks.STEPPER, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.KQCC, VariantItemBlock::new));
 
-
+        for (GTQTStoneVariantBlock block : GTQTMetaBlocks.SUSY_STONE_BLOCKS.values()) registry.register(createItemBlock(block, VariantItemBlock::new));
         registry.register(createItemBlock(PINE_LOG, ItemBlock::new));
         registry.register(createItemBlock(PINE_SAPLING, ItemBlock::new));
         registry.register(createItemBlock(PINE_LEAVES, ItemBlock::new));

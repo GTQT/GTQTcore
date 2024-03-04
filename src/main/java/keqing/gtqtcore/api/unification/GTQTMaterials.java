@@ -408,6 +408,26 @@ public class GTQTMaterials {
     public static Material Tetrabromobenzene;
     public static Material Bps;
     public static Material Brominatedepoxyresins;
+    public static Material Gabbro;
+    public static Material Gneiss;
+    public static Material Limestone;
+    public static Material Phyllite;
+    public static Material Shale;
+    public static Material Slate;
+    public static Material Kimberlite;
+    public static Material Lizardite;
+    public static Material Forsterite;
+    public static Material Fluorite;
+    public static Material Muscovite;
+    public static Material Dolomite;
+    public static Material Augite;
+    public static Material Clinochlore;
+    public static Material Bytownite;
+    public static Material Andesine;
+    public static Material Labradorite;
+    public static Material Oligoclase;
+    public static Material Albite;
+    public static Material Anorthite;
 
     //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/api/unification/GSMaterials.java
 
