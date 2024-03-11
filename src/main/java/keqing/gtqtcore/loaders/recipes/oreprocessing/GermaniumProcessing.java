@@ -10,12 +10,12 @@ import static gregtech.api.unification.ore.OrePrefix.dust;
 /**
  * The Waelz Process
  *
- * <p>Produces Germanium from Sphalerite</p>
+ * <p>Produces GermaniumChain from Sphalerite</p>
  *
- * <p>Main Products: Germanium</p>
+ * <p>Main Products: GermaniumChain</p>
  * <p>Side Products: Zinc, Gallium, Manganese</p>
  *
- * <p>2 Sphalerite -> 1 Germanium</p>
+ * <p>2 Sphalerite -> 1 GermaniumChain</p>
  *
  */
 public class GermaniumProcessing {

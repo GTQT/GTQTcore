@@ -124,6 +124,10 @@ public class TiredTraceabilityPredicate extends TraceabilityPredicate {
                 new WrappedIntTired(BlockBoilerCasing.BoilerCasingType.BRONZE_PIPE,1));
         TiredTraceabilityPredicate.MAP_CP_TUBE.put(MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.STEEL_PIPE),
                 new WrappedIntTired(BlockBoilerCasing.BoilerCasingType.STEEL_PIPE,2));
+        TiredTraceabilityPredicate.MAP_CP_TUBE.put(GTQTMetaBlocks.TURBINE_CASING1.getState(GTQTTurbineCasing1.TurbineCasingType.AL_TURBINE_CASING),
+                new WrappedIntTired(GTQTTurbineCasing1.TurbineCasingType.AL_TURBINE_CASING,3));
+        TiredTraceabilityPredicate.MAP_CP_TUBE.put(GTQTMetaBlocks.TURBINE_CASING1.getState(GTQTTurbineCasing1.TurbineCasingType.SA_TURBINE_CASING),
+                new WrappedIntTired(GTQTTurbineCasing1.TurbineCasingType.SA_TURBINE_CASING,4));
         TiredTraceabilityPredicate.MAP_CP_TUBE.put(MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.TITANIUM_PIPE),
                 new WrappedIntTired(BlockBoilerCasing.BoilerCasingType.BRONZE_PIPE,5));
         TiredTraceabilityPredicate.MAP_CP_TUBE.put(MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.TUNGSTENSTEEL_PIPE),

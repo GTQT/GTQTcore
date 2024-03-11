@@ -4,6 +4,7 @@ import gregicality.science.api.unification.GCYSElements;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.properties.BlastProperty;
 import gregtech.api.unification.material.properties.ToolProperty;
+import net.minecraftforge.fml.common.asm.transformers.deobf.FMLRemappingAdapter;
 
 import static gregtech.api.unification.Elements.Hf;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
@@ -39,8 +40,9 @@ public class GCYSElementMaterials {
 
         Orichalcum = new Material.Builder(3103, gregtechId("orichalcum"))
                 .ingot().fluid()
+                .fluidPipeProperties(16000,32000,true)
                 .color(0x72A0C1).iconSet(METALLIC)
-                .flags(GENERATE_PLATE, GENERATE_ROTOR, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_ROUND)
+                .flags(GENERATE_PLATE, GENERATE_ROTOR, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_ROUND, GENERATE_FRAME)
                 .element(GCYSElements.Or)
                 .toolStats(ToolProperty.Builder.of(7.0F, 25.0F, 17000, 22).build())
                 .blast(9000, BlastProperty.GasTier.HIGH)

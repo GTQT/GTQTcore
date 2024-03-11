@@ -6,6 +6,7 @@ import keqing.gtqtcore.common.CommonProxy;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.items.GTQTMetaItems;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
+import keqing.gtqtcore.integration.GTQTIntegration;
 import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -46,6 +47,10 @@ public class GTQTCore {
         proxy.preLoad();
         proxy.preInit();
 
+    }
+    @Mod.EventHandler
+    public void onInit(FMLInitializationEvent event) {
+        GTQTIntegration.init();
     }
 
     public static MinecraftServer currentServer;

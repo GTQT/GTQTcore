@@ -111,7 +111,7 @@ public class SecondDegreeMaterials {
                 .fluid()
                 .color(0x483DB4)
                 .flags(DISABLE_DECOMPOSITION)
-                .components(Rutile, 1, HydrochloricAcid, 2)
+                .components(Rutile, 1,Gallium,1, HydrochloricAcid, 2)
                 .build();
 
         GTQTMaterials.CarbenDisulfide  = new Material.Builder(getMaterialsId(), gregtechId("carbon_disulfide"))

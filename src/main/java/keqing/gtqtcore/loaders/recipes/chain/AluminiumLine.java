@@ -32,8 +32,8 @@ public class AluminiumLine {
                 .output(ingot, Aluminium, 1)
                 .fluidOutputs(CarbonDioxide.getFluid(2000))
                 .circuitMeta(2)
-                .blastFurnaceTemp(2600)
-                .duration(800).EUt(VA[HV]).buildAndRegister();
+                .blastFurnaceTemp(1700)
+                .duration(1600).EUt(VA[MV]).buildAndRegister();
 
         RecipeMaps.BLAST_RECIPES.recipeBuilder()
                 .input(dust, Aluminium, 1)

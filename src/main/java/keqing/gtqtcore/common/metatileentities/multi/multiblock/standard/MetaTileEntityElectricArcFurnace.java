@@ -319,7 +319,6 @@ public class MetaTileEntityElectricArcFurnace extends GTQTRecipeMapMultiblockCon
                     if (++this.progressTime > this.maxProgressTime) {
                         this.completeRecipe();
                         simulateTemp = simulateTemp * 11 / 12;
-                        Fe+=16;
                         isOutput=true;
                     }
                 }

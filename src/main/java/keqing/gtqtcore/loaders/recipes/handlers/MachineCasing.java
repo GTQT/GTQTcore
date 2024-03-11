@@ -11,10 +11,12 @@ import static gregtech.api.recipes.RecipeMaps.MIXER_RECIPES;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.BLAST_ARC_RECIPES;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.ChloroplatinicAcid;
+import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.GalvanizedSteel;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.Talonite;
+import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.*;
 import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing1.TurbineCasingType.GALVANIZE_STEEL_CASING;
+import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing1.TurbineCasingType.*;
 
 public class MachineCasing {
     public static void init() {
@@ -72,6 +74,34 @@ public class MachineCasing {
                 .input(frameGt,Talonite, 1)
                 .circuitMeta(6)
                 .outputs(GTQTMetaBlocks.ADV_BLOCK.getItemVariant(GTQTADVBlock.CasingType.Talonite))
+                .buildAndRegister();
+
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(200).EUt(120)
+                .input(plate,RhodiumPlatedPalladium, 6)
+                .input(frameGt,RhodiumPlatedPalladium, 1)
+                .circuitMeta(6)
+                .outputs(GTQTMetaBlocks.TURBINE_CASING.getItemVariant(PD_TURBINE_CASING))
+                .buildAndRegister();
+
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(200).EUt(120)
+                .input(plate,Naquadah, 6)
+                .input(frameGt,Naquadah, 1)
+                .circuitMeta(6)
+                .outputs(GTQTMetaBlocks.TURBINE_CASING.getItemVariant(NQ_TURBINE_CASING))
+                .buildAndRegister();
+
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(200).EUt(120)
+                .input(plate,Orichalcum, 6)
+                .input(frameGt,Orichalcum, 1)
+                .circuitMeta(6)
+                .outputs(GTQTMetaBlocks.TURBINE_CASING1.getItemVariant(ST_TURBINE_CASING))
+                .buildAndRegister();
+
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(200).EUt(120)
+                .input(plate,Adamantite, 6)
+                .input(frameGt,Adamantite, 1)
+                .circuitMeta(6)
+                .outputs(GTQTMetaBlocks.TURBINE_CASING1.getItemVariant(AD_TURBINE_CASING))
                 .buildAndRegister();
     }
 }

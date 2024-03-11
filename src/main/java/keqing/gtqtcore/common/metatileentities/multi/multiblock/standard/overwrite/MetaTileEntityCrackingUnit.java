@@ -57,7 +57,6 @@ public class MetaTileEntityCrackingUnit extends GTQTRecipeMapMultiblockOverwrite
         super(metaTileEntityId, RecipeMaps.CRACKING_RECIPES);
         this.recipeMapWorkable = new CrackingUnitWorkableHandler(this);
     }
-
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityCrackingUnit(metaTileEntityId);

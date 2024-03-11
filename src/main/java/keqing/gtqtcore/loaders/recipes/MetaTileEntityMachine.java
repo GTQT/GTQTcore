@@ -10,6 +10,7 @@ import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.ItemMaterialInfo;
 import gregtech.api.unification.stack.MaterialStack;
 import gregtech.api.unification.stack.UnificationEntry;
+import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.BlockMachineCasing;
 import gregtech.common.blocks.BlockSteamCasing;
 import gregtech.common.blocks.MetaBlocks;
@@ -21,6 +22,7 @@ import keqing.gtqtcore.api.unification.ore.GTQTOrePrefix;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTADVGlass;
 import keqing.gtqtcore.common.block.blocks.GTQTBlockGlassCasing;
+import keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -36,9 +38,11 @@ import static gregtech.common.blocks.MetaBlocks.MACHINE_CASING;
 import static gregtech.common.metatileentities.MetaTileEntities.ARC_FURNACE;
 import static gregtech.loaders.recipe.CraftingComponent.*;
 import static gregtech.loaders.recipe.MetaTileEntityLoader.registerMachineRecipe;
+import static keqing.gtqtcore.api.unification.GCYSMaterials.Adamantite;
+import static keqing.gtqtcore.api.unification.GCYSMaterials.Orichalcum;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.plate_curved;
-import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing1.TurbineCasingType.GALVANIZE_STEEL_CASING;
+import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing1.TurbineCasingType.*;
 
 public class MetaTileEntityMachine {
     static int L=144;
@@ -50,6 +54,45 @@ public class MetaTileEntityMachine {
         registerElectric();
        registerGalvanizedSteel();
        machinecasing();
+       turbine();
+    }
+
+    private static void turbine() {
+        ModHandler.addShapedRecipe(true, "casing_aluminium_pipe",
+                GTQTMetaBlocks.TURBINE_CASING1.getItemVariant(AL_TURBINE_CASING, ConfigHolder.recipes.casingsPerCraft), "PIP", "IFI",
+                "PIP", 'P', new UnificationEntry(OrePrefix.plate, Aluminium), 'F',
+                new UnificationEntry(OrePrefix.frameGt, Materials.Aluminium), 'I',
+                new UnificationEntry(OrePrefix.pipeNormalFluid, Materials.Aluminium));
+
+        ModHandler.addShapedRecipe(true, "casing_stainless_pipe",
+                GTQTMetaBlocks.TURBINE_CASING1.getItemVariant(SA_TURBINE_CASING, ConfigHolder.recipes.casingsPerCraft), "PIP", "IFI",
+                "PIP", 'P', new UnificationEntry(OrePrefix.plate, StainlessSteel), 'F',
+                new UnificationEntry(OrePrefix.frameGt, Materials.StainlessSteel), 'I',
+                new UnificationEntry(OrePrefix.pipeNormalFluid, Materials.StainlessSteel));
+
+        ModHandler.addShapedRecipe(true, "casing_pd_pipe",
+                GTQTMetaBlocks.TURBINE_CASING.getItemVariant(GTQTTurbineCasing.TurbineCasingType.PD_MACHINE_CASING, ConfigHolder.recipes.casingsPerCraft), "PIP", "IFI",
+                "PIP", 'P', new UnificationEntry(OrePrefix.plate, RhodiumPlatedPalladium), 'F',
+                new UnificationEntry(OrePrefix.frameGt, Materials.RhodiumPlatedPalladium), 'I',
+                new UnificationEntry(OrePrefix.pipeNormalFluid, NiobiumTitanium));
+
+        ModHandler.addShapedRecipe(true, "casing_nq_pipe",
+                GTQTMetaBlocks.TURBINE_CASING.getItemVariant(GTQTTurbineCasing.TurbineCasingType.NQ_MACHINE_CASING, ConfigHolder.recipes.casingsPerCraft), "PIP", "IFI",
+                "PIP", 'P', new UnificationEntry(OrePrefix.plate, Naquadah), 'F',
+                new UnificationEntry(OrePrefix.frameGt, Materials.Naquadah), 'I',
+                new UnificationEntry(OrePrefix.pipeNormalFluid, Materials.Naquadah));
+
+        ModHandler.addShapedRecipe(true, "casing_st_pipe",
+                GTQTMetaBlocks.TURBINE_CASING1.getItemVariant(ST_MACHINE_CASING, ConfigHolder.recipes.casingsPerCraft), "PIP", "IFI",
+                "PIP", 'P', new UnificationEntry(OrePrefix.plate, Orichalcum), 'F',
+                new UnificationEntry(OrePrefix.frameGt, Orichalcum), 'I',
+                new UnificationEntry(OrePrefix.pipeNormalFluid, Orichalcum));
+
+        ModHandler.addShapedRecipe(true, "casing_ad_pipe",
+                GTQTMetaBlocks.TURBINE_CASING1.getItemVariant(AD_MACHINE_CASING, ConfigHolder.recipes.casingsPerCraft), "PIP", "IFI",
+                "PIP", 'P', new UnificationEntry(OrePrefix.plate, Adamantite), 'F',
+                new UnificationEntry(OrePrefix.frameGt, Adamantite), 'I',
+                new UnificationEntry(OrePrefix.pipeNormalFluid, Adamantite));
     }
 
     private static void machinecasing() {

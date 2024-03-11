@@ -14,6 +14,18 @@
           "all": "gregtech:blocks/multiblock/casing/st_machine_casing"
         }
       },
+      "al_turbine_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casing/al_machine_casing"
+        }
+      },
+      "sa_turbine_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casing/sa_machine_casing"
+        }
+      },
       "st_turbine_casing": {
         "model": "minecraft:cube_all",
         "textures": {

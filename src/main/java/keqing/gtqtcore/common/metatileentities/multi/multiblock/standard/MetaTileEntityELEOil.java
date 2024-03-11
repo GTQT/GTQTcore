@@ -4,6 +4,7 @@ import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
+import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
@@ -35,7 +36,7 @@ public class MetaTileEntityELEOil extends RecipeMapMultiblockController {
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
-                .aisle("CCC", "BCB", "ACA")
+                .aisle("BBB", "BCB", "ACA")
                 .aisle("CCC", "CDC", "ACA")
                 .aisle("CCC", "CDC", "ACA")
                 .aisle("CCC", "CDC", "ACA")
@@ -43,14 +44,18 @@ public class MetaTileEntityELEOil extends RecipeMapMultiblockController {
                 .aisle("CCC", "CDC", "ACA")
                 .aisle("CCC", "CDC", "ACA")
                 .aisle("CCC", "CDC", "ACA")
-                .aisle("CCC", "BSB", "ACA")
+                .aisle("BBB", "BSB", "ACA")
                 .where('S', selfPredicate())
                 .where('A', states(MetaBlocks.FRAMES.get(Materials.Steel).getBlock(Materials.Steel)))
-                .where('B', autoAbilities(true, false, false, false, false, true, false).setMinGlobalLimited(2)
-                        .or(autoAbilities(true, false, false, false, true, false, false).setMinGlobalLimited(2)))
+                .where('B', states(MetaBlocks.METAL_CASING.getState(MetalCasingType.STEEL_SOLID))
+                        .or(abilities(MultiblockAbility.EXPORT_FLUIDS).setMinGlobalLimited(1))
+                        .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setMinGlobalLimited(1)))
                 .where('C', states(MetaBlocks.METAL_CASING.getState(MetalCasingType.STEEL_SOLID))
-                        .or(autoAbilities(true, true, false, false, false, false, false))
-                        .or(autoAbilities(true, false, true, false, false, false, false).setMaxGlobalLimited(1)))
+                        .or(abilities(MultiblockAbility.EXPORT_FLUIDS).setExactLimit(1))
+                        .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setExactLimit(1))
+                        .or(abilities(MultiblockAbility.INPUT_ENERGY).setMaxGlobalLimited(2))
+                        .or(abilities(MultiblockAbility.MAINTENANCE_HATCH).setExactLimit(1))
+                        .or(abilities(MultiblockAbility.MUFFLER_HATCH).setExactLimit(1)))
                 .where('D', states(MetaBlocks.BOILER_CASING.getState(BoilerCasingType.STEEL_PIPE)))
                 .build();
     }

@@ -164,7 +164,7 @@ public class MetaTileEntityKQCC extends MultiblockWithDisplayBase implements IOp
     }
     private boolean hasNotEnoughEnergy;
     private void consumeEnergy() {
-        int energyToConsume = CWTT()*30*thresholdPercentage;
+        int energyToConsume = CWTT()*15*thresholdPercentage;
         boolean hasMaintenance = ConfigHolder.machines.enableMaintenance && hasMaintenanceMechanics();
         if (hasMaintenance) {
             // 10% more energy per maintenance problem

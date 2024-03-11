@@ -630,7 +630,7 @@ public class CPULine {
         CHEMICAL_RECIPES.recipeBuilder()
                 .input(dust,Copper)
                 .fluidInputs(Chlorine.getFluid(2000))
-                .output(dust,CopperCl)
+                .output(dust,CopperCl,3)
                 .duration(200)
                 .EUt(30)
                 .buildAndRegister();

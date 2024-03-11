@@ -135,7 +135,7 @@ public class MetaTileEntityMSF extends GTQTRecipeMapMultiblockController impleme
                 } else if (isDistillationMode()) {
                     return number*2;
                 }
-                else return number*4;
+                else return number*3;
             }
             return number;
         }
@@ -225,7 +225,7 @@ public class MetaTileEntityMSF extends GTQTRecipeMapMultiblockController impleme
 
     @Override
     protected BlockPattern createStructurePattern() {
-        FactoryBlockPattern pattern = FactoryBlockPattern.start(FRONT, UP, RIGHT)
+        FactoryBlockPattern pattern = FactoryBlockPattern.start(RIGHT, BACK, UP)
                 .aisle("YYY","YYY", "YYY", "YYY", " Y ")
                 .aisle("YYY","YYI", "YYI", "TYT", " S ")
                 .aisle("YYY","YYY", "YYG", "YYH", "FYF")

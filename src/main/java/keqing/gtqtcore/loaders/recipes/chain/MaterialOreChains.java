@@ -198,11 +198,12 @@ public class MaterialOreChains {
                 .output(dust, Iron)
                 .buildAndRegister();
 
-        DISTILLATION_RECIPES.recipeBuilder()
-                .duration(105)
-                .EUt(VA[HV])
-                .fluidInputs(RedMud.getFluid(1000))
-                .fluidOutputs(TitaniumTetrachloride.getFluid(1000))
+        CENTRIFUGE_RECIPES.recipeBuilder()
+                .duration(100)
+                .EUt(VA[EV])
+                .fluidInputs(RedMud.getFluid(4000))
+                .output(dust,Rutile)
+                .output(dust,Gallium)
                 .fluidOutputs(Water.getFluid(1000))
                 .fluidOutputs(HeavyRedMudResidue.getFluid(250))
                 .buildAndRegister();
@@ -212,7 +213,7 @@ public class MaterialOreChains {
                 .EUt(VA[EV])
                 .fluidInputs(HeavyRedMudResidue.getFluid(1000))
                 .fluidOutputs(Iron3Chloride.getFluid(250))
-                .fluidOutputs(RareEarthChloridesSolution.getFluid(250))
+                .fluidOutputs(CrudeRareEarthTurbidSolution.getFluid(250))
                 .fluidOutputs(RefractoryMetalResidue.getFluid(500))
                 .buildAndRegister();
 

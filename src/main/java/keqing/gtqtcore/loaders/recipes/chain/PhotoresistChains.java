@@ -189,6 +189,7 @@ public class PhotoresistChains {
                 .EUt(VA[MV])
                 .fluidInputs(Polymethylsilesquioxane.getFluid(1000))
                 .fluidInputs(Hydrogen.getFluid(1000))
+                .circuitMeta(1)
                 .fluidOutputs(HydrogenSilsesquioxane.getFluid(1000))
                 .buildAndRegister();
 

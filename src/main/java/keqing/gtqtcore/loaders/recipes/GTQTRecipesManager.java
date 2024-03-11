@@ -35,6 +35,7 @@ public class GTQTRecipesManager {
     }
     public static void init() {
         OceanChain.init();
+        GermaniumChain.init();
         NaquadahChain.init();
         MachineCasing.init();
         Bittern.init();

@@ -428,6 +428,23 @@ public class GTQTMaterials {
     public static Material Oligoclase;
     public static Material Albite;
     public static Material Anorthite;
+    public static Material Yanghuashanxinhunhewu;
+    public static Material Fujishanxinhunhewu;
+    public static Material Fujishanxinbeishaocanliu;
+    public static Material Hanxinrongye;
+    public static Material Qingyanghuatie;
+    public static Material Huntiezhecanzha;
+    public static Material Hungezhecanzha;
+    public static Material Yiyanghauzhe;
+    public static Material Zhezha;
+    public static Material Silvhuazhe;
+    public static Material Sgilvhuazhe;
+    public static Material Egryanghuazhe;
+    public static Material Canzharongye;
+    public static Material Rousuan;
+    public static Material Fujizhechendian;
+    public static Material Ssilvhuazhe;
+    public static Material Rzousuan;
 
     //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/api/unification/GSMaterials.java
 

@@ -761,6 +761,30 @@ gregtech.material.lignite=褐煤
 gregtech.material.rich_gold_sulphide=含金多金属矿石
 gregtech.material.lean_gold_sulphide=贫硫化金矿石
 
+
+
+gregtech.material.yanghuashanxinhunhewu=氧化闪锌混合物
+gregtech.material.fujishanxinhunhewu=富集闪锌混合物
+gregtech.material.fujishanxinbeishaocanliu=富集闪锌焙烧残留
+gregtech.material.hanxinrongye=含闪锌溶液
+gregtech.material.qingyanghuatie=氢氧化铁
+gregtech.material.huntiezhecanzha=混锗铁残渣
+gregtech.material.hungezhecanzha=混锗镉残渣
+gregtech.material.canzharongye=残渣溶液
+gregtech.material.yiyanghauzhe=一氧化锗
+gregtech.material.zhezha=焙烧锗炉渣
+gregtech.material.rousuan=鞣酸
+gregtech.material.rzousuan=含杂鞣酸
+gregtech.material.fujizhechendian=富集锗沉淀
+gregtech.material.silvhuazhe=含杂四氯化锗
+gregtech.material.ssilvhuazhe=酸性四氯化锗
+gregtech.material.sgilvhuazhe=高淳四氯化锗
+gregtech.material.egryanghuazhe=高纯二氧化锗
+
+
+
+
+
 gregtech.material.nitinol=镍钛诺合金
 gregtech.material.almandine_front=铁铝榴石泡沫
 gregtech.material.pentlandite_front=镍黄铁矿泡沫
@@ -1077,6 +1101,8 @@ tile.multiblock_casing.machine_casing_fusion_4.name=聚变机器外壳 Mk IV
 tile.multiblock_casing.machine_casing_fusion_5.name=聚变机器外壳 Mk V
 tile.multiblock_casing.machine_casing_fusion_6.name=聚变机器外壳 Mk VI
 
+tile.turbine_casing1.al_turbine_casing.name=铝管道外壳
+tile.turbine_casing1.sa_turbine_casing.name=不锈钢管道外壳
 tile.turbine_casing1.st_machine_casing.name=山铜合金管道外壳
 tile.turbine_casing1.st_turbine_casing.name=山铜合金机械方块
 tile.turbine_casing1.ad_machine_casing.name=精金合金管道外壳
@@ -1686,3 +1712,14 @@ itemGroup.gtqtch=量子跃迁 | 化学工程
 itemGroup.gtqtgd=量子跃迁 | 光电工程
 itemGroup.gtqtds=量子跃迁 | 科研系统
 itemGroup.gtqtto=量子跃迁 | 实用工具
+
+##  The One Probe
+gtqt.top.item_outputs=正在生产物品：
+gtqt.top.fluid_outputs=正在生产流体：
+gtqt.top.getparallelLimit=并行：
+gtqt.top.temperature=温度：
+gtqt.top.face=面向：
+gtqt.top.in=最大输入//实际输入:
+gtqt.top.on=最大输出//实际输出:
+gtqt.top.v=电流:
+gtqt.top.i=电压:

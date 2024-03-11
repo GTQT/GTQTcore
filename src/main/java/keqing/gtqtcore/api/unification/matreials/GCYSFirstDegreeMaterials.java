@@ -868,9 +868,10 @@ public class GCYSFirstDegreeMaterials {
 
         Adamantite = new Material.Builder(3615, gregtechId("adamantite"))
                 .dust()
+                .fluidPipeProperties(18000,36000,true)
                 .color(0xC83C3C)
                 .iconSet(MaterialIconSet.ROUGH)
-                .flags(GENERATE_PLATE,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_FOIL,GENERATE_FRAME,GENERATE_GEAR,GENERATE_ROD,GENERATE_LONG_ROD,GENERATE_RING)
+                .flags(GENERATE_PLATE,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_FOIL,GENERATE_FRAME,GENERATE_GEAR,GENERATE_ROD,GENERATE_LONG_ROD,GENERATE_RING,GENERATE_FRAME)
                 .components(Adamantium, 3, Oxygen, 4)
                 .build();
 

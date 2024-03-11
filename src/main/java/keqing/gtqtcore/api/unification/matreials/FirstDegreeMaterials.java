@@ -1749,5 +1749,125 @@ public class FirstDegreeMaterials {
                 .components(Magnesium, 3, Silicon, 2, Oxygen, 9, Hydrogen, 4)
                 .build()
                 .setFormula("Mg3Si2O5(OH)4",true);
+
+        //锗线
+        //氧化闪锌混合物
+        GTQTMaterials.Yanghuashanxinhunhewu = new Material.Builder(getMaterialsId(), gregtechId("yanghuashanxinhunhewu"))
+                .dust()
+                .color(0xAEEEEE)
+                .build()
+                .setFormula("Ge?O?",true);
+
+        //富集闪锌混合物
+        GTQTMaterials.Fujishanxinhunhewu = new Material.Builder(getMaterialsId(), gregtechId("fujishanxinhunhewu"))
+                .dust()
+                .color(0xB0C4DE)
+                .build()
+                .setFormula("Ge?O?",true);
+        //富集闪锌焙烧残留
+        GTQTMaterials.Fujishanxinbeishaocanliu = new Material.Builder(getMaterialsId(), gregtechId("fujishanxinbeishaocanliu"))
+                .dust()
+                .color(0xB0E0E6)
+                .build()
+                .setFormula("Ge?O?",true);
+
+        //含闪锌溶液
+        GTQTMaterials.Hanxinrongye = new Material.Builder(getMaterialsId(), gregtechId("hanxinrongye"))
+                .fluid()
+                .color(0xa79e42)
+                .build()
+                .setFormula("Ge?SO4?",true);
+        //氢氧化铁
+        GTQTMaterials.Qingyanghuatie = new Material.Builder(getMaterialsId(), gregtechId("qingyanghuatie"))
+                .dust()
+                .color(0xCD3700)
+                .flags(DISABLE_DECOMPOSITION)
+                .components(Iron, 1,  Oxygen, 3, Hydrogen, 3)
+                .build();
+
+        //混锗铁残渣
+        GTQTMaterials.Huntiezhecanzha = new Material.Builder(getMaterialsId(), gregtechId("huntiezhecanzha"))
+                .dust()
+                .color(0xB3EE3A)
+                .build()
+                .setFormula("Ge?Fe?Zn?",true);
+
+        //混锗镉残渣
+        GTQTMaterials.Hungezhecanzha = new Material.Builder(getMaterialsId(), gregtechId("hungezhecanzha"))
+                .dust()
+                .color(0xC67171)
+                .build()
+                .setFormula("Ge?Cd?Zn?",true);
+
+        //残渣溶液
+        GTQTMaterials.Canzharongye = new Material.Builder(getMaterialsId(), gregtechId("canzharongye"))
+                .fluid()
+                .color(0xCD950C)
+                .build()
+                .setFormula("Ge?Cd?*",true);
+
+        //一氧化锗
+        GTQTMaterials.Yiyanghauzhe = new Material.Builder(getMaterialsId(), gregtechId("yiyanghauzhe"))
+                .fluid()
+                .color(0x97FFFF)
+                .build()
+                .setFormula("GeO",true);
+        //炉渣
+        GTQTMaterials.Zhezha = new Material.Builder(getMaterialsId(), gregtechId("zhezha"))
+                .dust()
+                .color(0xA0522D)
+                .build()
+                .setFormula("Fe?Zn?Pd?Cd?",true);
+
+        //鞣酸
+        GTQTMaterials.Rousuan = new Material.Builder(getMaterialsId(), gregtechId("rousuan"))
+                .fluid()
+                .color(0x8B6914)
+                .build()
+                .setFormula("C76H52O46",true);
+
+        GTQTMaterials.Rzousuan = new Material.Builder(getMaterialsId(), gregtechId("rzousuan"))
+                .fluid()
+                .color(0x8B7E66)
+                .build()
+                .setFormula("C76H52O46*",true);
+
+
+        //富集锗沉淀
+        GTQTMaterials.Fujizhechendian = new Material.Builder(getMaterialsId(), gregtechId("fujizhechendian"))
+                .dust()
+                .color(0x7EC0EE)
+                .build()
+                .setFormula("Ge?",true);
+
+
+        //四氯化锗
+        GTQTMaterials.Silvhuazhe = new Material.Builder(getMaterialsId(), gregtechId("silvhuazhe"))
+                .fluid()
+                .color(0x8A2BE2)
+                .build()
+                .setFormula("GeCl4*",true);
+
+        //四氯化锗
+        GTQTMaterials.Ssilvhuazhe = new Material.Builder(getMaterialsId(), gregtechId("ssilvhuazhe"))
+                .fluid()
+                .color(0xa79e42)
+                .build()
+                .setFormula("GeCl4*HCl",true);
+
+        //高淳四氯化锗
+        GTQTMaterials.Sgilvhuazhe = new Material.Builder(getMaterialsId(), gregtechId("sgilvhuazhe"))
+                .fluid()
+                .color(0x7171C6)
+                .build()
+                .setFormula("GeCl4",true);
+
+        //高纯二氧化锗
+        GTQTMaterials.Egryanghuazhe = new Material.Builder(getMaterialsId(), gregtechId("egryanghuazhe"))
+                .dust()
+                .color(0x68228B)
+                .build()
+                .setFormula("Ge02",true);
+
     }
 }
