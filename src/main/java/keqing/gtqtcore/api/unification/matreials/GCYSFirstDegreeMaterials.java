@@ -5,12 +5,12 @@ import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.info.MaterialIconSet;
 import gregtech.api.unification.material.properties.ToolProperty;
 
-import static gregicality.science.api.unification.material.info.GCYSMaterialFlags.DISABLE_CRYSTALLIZATION;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.info.MaterialFlags.*;
 import static gregtech.api.unification.material.properties.BlastProperty.GasTier.*;
 import static gregtech.api.util.GTUtility.gregtechId;
+import static keqing.gtqtcore.api.unification.material.info.EPMaterialFlags.DISABLE_CRYSTALLIZATION;
 
 public class GCYSFirstDegreeMaterials {
 

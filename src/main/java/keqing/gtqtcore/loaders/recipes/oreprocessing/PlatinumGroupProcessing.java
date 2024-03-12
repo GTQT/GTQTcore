@@ -1,12 +1,11 @@
 package keqing.gtqtcore.loaders.recipes.oreprocessing;
 
-import gregicality.science.common.GCYSConfigHolder;
 import gregtech.api.recipes.GTRecipeHandler;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.recipes.ingredients.IntCircuitIngredient;
 import gregtech.api.unification.OreDictUnifier;
 
-import static gregicality.science.api.recipes.GCYSRecipeMaps.DRYER_RECIPES;
+
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import net.minecraft.item.ItemStack;
@@ -45,9 +44,9 @@ public class PlatinumGroupProcessing {
         iridium();
         osmium();
 
-        if (GCYSConfigHolder.chainOverrides.disablePlatinumProcessing) {
-            removeGTCERecipes();
-        }
+
+        removeGTCERecipes();
+
     }
 
     private static void removeGTCERecipes() {

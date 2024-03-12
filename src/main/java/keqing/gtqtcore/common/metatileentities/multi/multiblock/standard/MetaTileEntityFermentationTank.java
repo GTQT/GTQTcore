@@ -1,7 +1,5 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
-import gregicality.science.common.block.GCYSMetaBlocks;
-import gregicality.science.common.block.blocks.BlockTransparentCasing;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
@@ -26,6 +24,7 @@ import keqing.gtqtcore.api.recipes.properties.PHChangeProperty;
 import keqing.gtqtcore.api.recipes.properties.PHErrorRangeProperty;
 import keqing.gtqtcore.api.recipes.properties.PHProperty;
 import keqing.gtqtcore.api.utils.GTQTMathUtil;
+import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.nbt.NBTTagCompound;
@@ -41,6 +40,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static gregicality.multiblocks.api.unification.GCYMMaterials.WatertightSteel;
+import static keqing.gtqtcore.common.block.blocks.BlockTransparentCasing.CasingType.PMMA;
 
 public class MetaTileEntityFermentationTank extends RecipeMapMultiblockController implements IPHValue {
     private double pH = 7;
@@ -109,7 +109,7 @@ public class MetaTileEntityFermentationTank extends RecipeMapMultiblockControlle
     }
 
     private static IBlockState getGlassState() {
-        return GCYSMetaBlocks.TRANSPARENT_CASING.getState(BlockTransparentCasing.CasingType.PMMA);
+        return GTQTMetaBlocks.TRANSPARENT_CASING.getState(PMMA);
     }
 
     @Override

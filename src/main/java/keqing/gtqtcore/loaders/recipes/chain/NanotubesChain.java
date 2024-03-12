@@ -4,13 +4,13 @@ import gregtech.api.metatileentity.multiblock.CleanroomType;
 
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
-import static gregicality.science.api.unification.ore.GCYSOrePrefix.*;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.common.items.MetaItems.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
+import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.seedCrystal;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.CARBON_ALLOTROPE_MIXTURE;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.GRAPHENE_ALIGNED_CNT;
 
@@ -69,7 +69,6 @@ public class NanotubesChain {
                 .fluidInputs(Nitrogen.getPlasma(10000))
                 .output(ingot, CarbonNanotube)
                 .fluidOutputs(Ammonia.getFluid(10000))
-                .temperature(993)
                 .duration(100)
                 .EUt(VA[UV])
                 .buildAndRegister();
@@ -81,7 +80,6 @@ public class NanotubesChain {
                 .fluidInputs(Nitrogen.getPlasma(16000))
                 .output(stickLong, CarbonNanotube)
                 .fluidOutputs(Ammonia.getFluid(16000))
-                .temperature(993)
                 .duration(1200)
                 .EUt(VA[UEV])
                 .buildAndRegister();
@@ -324,7 +322,6 @@ public class NanotubesChain {
                 .fluidOutputs(Ammonia.getFluid(20000))
                 .EUt(VA[UHV])
                 .duration(320)
-                .temperature(4982)
                 .cleanroom(CleanroomType.CLEANROOM)
                 .buildAndRegister();
 
@@ -337,7 +334,6 @@ public class NanotubesChain {
                 .fluidInputs(Nitrogen.getPlasma(10000))
                 .output(ingot, LanthanumFullereneNanotube)
                 .fluidOutputs(Ammonia.getFluid(10000))
-                .temperature(3496)
                 .duration(1200)
                 .EUt(VA[UEV])
                 .buildAndRegister();
@@ -354,7 +350,6 @@ public class NanotubesChain {
                 .fluidInputs(Nitrogen.getPlasma(10000))
                 .output(ingot, NeutroniumNanotube)
                 .fluidOutputs(Ammonia.getFluid(10000))
-                .temperature(8993)
                 .duration(100)
                 .EUt(VA[UIV])
                 .buildAndRegister();

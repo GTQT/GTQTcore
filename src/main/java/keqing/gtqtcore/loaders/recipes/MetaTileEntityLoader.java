@@ -1,6 +1,5 @@
 package keqing.gtqtcore.loaders.recipes;
 
-import gregicality.science.common.block.GCYSMetaBlocks;
 import gregtech.api.GTValues;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.recipes.ModHandler;
@@ -29,7 +28,6 @@ import net.minecraft.item.ItemStack;
 
 import static gregicality.multiblocks.api.unification.GCYMMaterials.MolybdenumDisilicide;
 import static gregicality.multiblocks.api.unification.GCYMMaterials.TitaniumCarbide;
-import static gregicality.science.common.block.blocks.BlockCrucible.CrucibleType.QUARTZ_CRUCIBLE;
 import static gregtech.api.GTValues.L;
 import static gregtech.api.GTValues.VA;
 import static gregtech.api.recipes.RecipeMaps.ASSEMBLER_RECIPES;
@@ -52,6 +50,7 @@ import static keqing.gtqtcore.api.unification.GCYSMaterials.Adamantite;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.Orichalcum;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.*;
+import static keqing.gtqtcore.common.block.blocks.BlockCrucible.CrucibleType.QUARTZ_CRUCIBLE;
 import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.NQ_TURBINE_CASING;
 import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.PD_TURBINE_CASING;
 import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing1.TurbineCasingType.AD_TURBINE_CASING;
@@ -379,7 +378,7 @@ public class MetaTileEntityLoader {
                 "FFF", "CHC", "WCW",
                 'F', MetaTileEntities.ELECTRIC_FURNACE[2].getStackForm(),
                 'C', new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.MV),
-                'H', GCYSMetaBlocks.CRUCIBLE.getItemVariant(QUARTZ_CRUCIBLE),
+                'H', GTQTMetaBlocks.CRUCIBLE.getItemVariant(QUARTZ_CRUCIBLE),
                 'W', new UnificationEntry(OrePrefix.cableGtSingle, Aluminium));
 
         ModHandler.addShapedRecipe(true, "distillation_tower", DISTILLATION_TOWER.getStackForm(),

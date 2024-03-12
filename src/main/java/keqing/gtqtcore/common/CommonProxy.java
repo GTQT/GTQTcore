@@ -194,6 +194,12 @@ public class CommonProxy {
         registry.register(GTQTCrops.BRONZE_CROP);
         registry.register(GTQTCrops.CARBON_CROP);
 
+        registry.register(GTQTMetaBlocks.CRUCIBLE);
+        registry.register(GTQTMetaBlocks.MULTIBLOCK_CASING);
+        registry.register(GTQTMetaBlocks.MULTIBLOCK_CASING_ACTIVE);
+        registry.register(GTQTMetaBlocks.TRANSPARENT_CASING);
+
+
         for (GTQTStoneVariantBlock block : GTQTMetaBlocks.SUSY_STONE_BLOCKS.values()) registry.register(block);
 
         PINE_LOG.setCreativeTab(GTQTCore_TAB);
@@ -234,6 +240,11 @@ public class CommonProxy {
         registry.register(createItemBlock(GTQTMetaBlocks.ROAD, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.STEPPER, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.KQCC, VariantItemBlock::new));
+
+        registry.register(createItemBlock(GTQTMetaBlocks.CRUCIBLE, VariantItemBlock::new));
+        registry.register(createItemBlock(GTQTMetaBlocks.MULTIBLOCK_CASING, VariantItemBlock::new));
+        registry.register(createItemBlock(GTQTMetaBlocks.MULTIBLOCK_CASING_ACTIVE, VariantItemBlock::new));
+        registry.register(createItemBlock(GTQTMetaBlocks.TRANSPARENT_CASING, VariantItemBlock::new));
 
         for (GTQTStoneVariantBlock block : GTQTMetaBlocks.SUSY_STONE_BLOCKS.values()) registry.register(createItemBlock(block, VariantItemBlock::new));
         registry.register(createItemBlock(PINE_LOG, ItemBlock::new));

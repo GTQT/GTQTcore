@@ -1,17 +1,23 @@
 package keqing.gtqtcore.client.textures;
 
 import codechicken.lib.texture.TextureUtils;
-import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
 import gregtech.client.renderer.texture.cube.SimpleOverlayRenderer;
+import keqing.gtqtcore.GTQTCore;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.renderer.textures.OverlayRenderer;
 import keqing.gtqtcore.client.textures.custom.IsaMillRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
+import net.minecraft.util.ResourceLocation;
 
 
 public class GTQTTextures {
+    public static OrientedOverlayRenderer SUBSONIC_AXIAL_COMPRESSOR_OVERLAY = new OrientedOverlayRenderer("multiblock/subsonic_axial_compressor");
+    public static OrientedOverlayRenderer SUPERSONIC_AXIAL_COMPRESSOR_OVERLAY = new OrientedOverlayRenderer("multiblock/supersonic_axial_compressor");
+
+    public static TextureAtlasSprite PRESSURE_PIPE_SIDE;
+    public static TextureAtlasSprite PRESSURE_PIPE_OPEN;
     public static SimpleOverlayRenderer WIRELESS_HATCH_HATCH;
     public static SimpleOverlayRenderer FISHING_CASING;
     public static OverlayRenderer MULTIPART_BUFFER_HATCH = new OverlayRenderer("multipart/overlay_buffer_hatch");
@@ -149,6 +155,9 @@ public class GTQTTextures {
         public static void register(TextureMap textureMap) {
             FORCE_FIELD = textureMap.registerSprite(GTQTUtil.gtqtId("blocks/force_field"));
             HALO = textureMap.registerSprite(GTQTUtil.gtqtId("items/halo"));
+            PRESSURE_PIPE_SIDE = textureMap.registerSprite(new ResourceLocation(GTQTCore.MODID, "blocks/pipe/pressure_pipe_side"));
+            PRESSURE_PIPE_OPEN = textureMap.registerSprite(new ResourceLocation(GTQTCore.MODID, "blocks/pipe/pressure_pipe_open"));
+
         }
     public static void preInit() {
         TextureUtils.addIconRegister(GTQTTextures::register);

@@ -1,6 +1,5 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.gcys;
 
-import gregicality.science.client.render.GCYSTextures;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
@@ -15,6 +14,8 @@ import gregtech.common.blocks.BlockBoilerCasing;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
+import keqing.gtqtcore.client.textures.GTQTTextures;
+import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;
@@ -56,7 +57,7 @@ public class MetaTileEntityCatalyticReformer extends RecipeMapMultiblockControll
     @Nonnull
     @Override
     protected ICubeRenderer getFrontOverlay() {
-        return GCYSTextures.CATALYTIC_REFORMER_OVERLAY;
+        return GTQTTextures.CATALYTIC_REFORMER_OVERLAY;
     }
 
     @Override

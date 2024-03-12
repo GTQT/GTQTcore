@@ -1,11 +1,11 @@
 package keqing.gtqtcore.loaders.recipes.gcys;
 
-import gregicality.science.common.block.GCYSMetaBlocks;
-import gregicality.science.common.block.blocks.BlockCrucible;
-import gregicality.science.common.block.blocks.BlockGCYSMultiblockCasing;
-import gregicality.science.common.block.blocks.BlockGCYSMultiblockCasingActive;
 import gregtech.api.recipes.ModHandler;
 import gregtech.api.unification.stack.UnificationEntry;
+import keqing.gtqtcore.common.block.GTQTMetaBlocks;
+import keqing.gtqtcore.common.block.blocks.BlockCrucible;
+import keqing.gtqtcore.common.block.blocks.BlockGCYSMultiblockCasing;
+import keqing.gtqtcore.common.block.blocks.BlockGCYSMultiblockCasingActive;
 
 import static gregicality.multiblocks.api.unification.GCYMMaterials.HSLASteel;
 import static gregtech.api.GTValues.UV;
@@ -20,35 +20,35 @@ public class GCYSBlockRecipeLoader {
     public static void init() {
         // Crucibles
         // TODO better recipes for crucibles
-        ModHandler.addShapedRecipe(true, "quartz_crucible", GCYSMetaBlocks.CRUCIBLE.getItemVariant(BlockCrucible.CrucibleType.QUARTZ_CRUCIBLE),
+        ModHandler.addShapedRecipe(true, "quartz_crucible", GTQTMetaBlocks.CRUCIBLE.getItemVariant(BlockCrucible.CrucibleType.QUARTZ_CRUCIBLE),
                 "P P", "PhP", "PPP",
                 'P', new UnificationEntry(plate, Quartzite)
         );
 
-        ModHandler.addShapedRecipe(true, "tungsten_crucible", GCYSMetaBlocks.CRUCIBLE.getItemVariant(BlockCrucible.CrucibleType.TUNGSTEN_CRUCIBLE),
+        ModHandler.addShapedRecipe(true, "tungsten_crucible", GTQTMetaBlocks.CRUCIBLE.getItemVariant(BlockCrucible.CrucibleType.TUNGSTEN_CRUCIBLE),
                 "P P", "PhP", "PPP",
                 'P', new UnificationEntry(plateDouble, Tungsten)
         );
 
-        ModHandler.addShapedRecipe(true, "graphite_crucible", GCYSMetaBlocks.CRUCIBLE.getItemVariant(BlockCrucible.CrucibleType.GRAPHITE_CRUCIBLE),
+        ModHandler.addShapedRecipe(true, "graphite_crucible", GTQTMetaBlocks.CRUCIBLE.getItemVariant(BlockCrucible.CrucibleType.GRAPHITE_CRUCIBLE),
                 "P P", "PhP", "PPP",
                 'P', new UnificationEntry(plate, Graphene)
         );
 
-        ModHandler.addShapedRecipe(true, "hexagonal_boron_nitride_crucible", GCYSMetaBlocks.CRUCIBLE.getItemVariant(BlockCrucible.CrucibleType.BORON_NITRIDE_CRUCIBLE),
+        ModHandler.addShapedRecipe(true, "hexagonal_boron_nitride_crucible", GTQTMetaBlocks.CRUCIBLE.getItemVariant(BlockCrucible.CrucibleType.BORON_NITRIDE_CRUCIBLE),
                 "P P", "PhP", "PPP",
                 'P', new UnificationEntry(plate, HexagonalBoronNitride)
         );
 
         // Substrates
-        ModHandler.addShapedRecipe(true, "substrate", GCYSMetaBlocks.MULTIBLOCK_CASING.getItemVariant(BlockGCYSMultiblockCasing.CasingType.SUBSTRATE),
+        ModHandler.addShapedRecipe(true, "substrate", GTQTMetaBlocks.MULTIBLOCK_CASING.getItemVariant(BlockGCYSMultiblockCasing.CasingType.SUBSTRATE),
                 "PPP", "RFR", "R R",
                 'P', new UnificationEntry(plate, Palladium),
                 'R', new UnificationEntry(stick, RedSteel),
                 'F', new UnificationEntry(frameGt, BlueSteel)
         );
 
-        ModHandler.addShapedRecipe(true, "advanced_substrate", GCYSMetaBlocks.MULTIBLOCK_CASING.getItemVariant(BlockGCYSMultiblockCasing.CasingType.ADVANCED_SUBSTRATE),
+        ModHandler.addShapedRecipe(true, "advanced_substrate", GTQTMetaBlocks.MULTIBLOCK_CASING.getItemVariant(BlockGCYSMultiblockCasing.CasingType.ADVANCED_SUBSTRATE),
                 "PPP", "RFR", "R R",
                 'P', new UnificationEntry(plate, Ruridit),
                 'R', new UnificationEntry(stick, Duranium),
@@ -56,7 +56,7 @@ public class GCYSBlockRecipeLoader {
         );
 
         // Drill Head
-        ModHandler.addShapedRecipe(true, "industrial_drill_head", GCYSMetaBlocks.MULTIBLOCK_CASING.getItemVariant(BlockGCYSMultiblockCasing.CasingType.DRILL_HEAD),
+        ModHandler.addShapedRecipe(true, "industrial_drill_head", GTQTMetaBlocks.MULTIBLOCK_CASING.getItemVariant(BlockGCYSMultiblockCasing.CasingType.DRILL_HEAD),
                 "PGP", "MHM", "SSS",
                 'P', ELECTRIC_PISTON_UV.getStackForm(),
                 'G', new UnificationEntry(gear, Orichalcum),
@@ -66,7 +66,7 @@ public class GCYSBlockRecipeLoader {
         );
 
         // Airfoil Chambers
-        ModHandler.addShapedRecipe(true, "airfoil_chamber", GCYSMetaBlocks.MULTIBLOCK_CASING_ACTIVE.getItemVariant(BlockGCYSMultiblockCasingActive.CasingType.AIRFOIL),
+        ModHandler.addShapedRecipe(true, "airfoil_chamber", GTQTMetaBlocks.MULTIBLOCK_CASING_ACTIVE.getItemVariant(BlockGCYSMultiblockCasingActive.CasingType.AIRFOIL),
                 " IR", "SOS", "RI ",
                 'I', new UnificationEntry(ring, StyreneButadieneRubber),
                 'R', new UnificationEntry(rotor, TungstenSteel),
@@ -74,7 +74,7 @@ public class GCYSBlockRecipeLoader {
                 'O', new UnificationEntry(stick, HSLASteel)
         );
 
-        ModHandler.addShapedRecipe(true, "advanced_airfoil_chamber", GCYSMetaBlocks.MULTIBLOCK_CASING_ACTIVE.getItemVariant(BlockGCYSMultiblockCasingActive.CasingType.ADVANCED_AIRFOIL),
+        ModHandler.addShapedRecipe(true, "advanced_airfoil_chamber", GTQTMetaBlocks.MULTIBLOCK_CASING_ACTIVE.getItemVariant(BlockGCYSMultiblockCasingActive.CasingType.ADVANCED_AIRFOIL),
                 " IR", "SOS", "RI ",
                 'I', new UnificationEntry(ring, SiliconeRubber),
                 'R', new UnificationEntry(rotor, RhodiumPlatedPalladium),

@@ -1,8 +1,9 @@
 package keqing.gtqtcore.loaders.recipes.gcys;
 
-import gregicality.science.common.block.GCYSMetaBlocks;
-import gregicality.science.common.block.blocks.BlockTransparentCasing;
 
+
+import keqing.gtqtcore.common.block.GTQTMetaBlocks;
+import keqing.gtqtcore.common.block.blocks.BlockTransparentCasing;
 
 import static gregtech.api.GTValues.IV;
 import static gregtech.api.GTValues.VA;
@@ -37,7 +38,7 @@ public class MiscRecipes {
     private static void metaBlockRecipes() {
         COMPRESSOR_RECIPES.recipeBuilder()
                 .input(plate, PMMA, 4)
-                .outputs(GCYSMetaBlocks.TRANSPARENT_CASING.getItemVariant(BlockTransparentCasing.CasingType.PMMA))
+                .outputs(GTQTMetaBlocks.TRANSPARENT_CASING.getItemVariant(BlockTransparentCasing.CasingType.PMMA))
                 .duration(400).EUt(2).buildAndRegister();
     }
 }

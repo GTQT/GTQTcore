@@ -1,11 +1,5 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
-import gregicality.science.common.block.GCYSMetaBlocks;
-import gregicality.science.common.block.blocks.BlockTransparentCasing;
-import gregtech.api.capability.IMultipleTankHandler;
-import gregtech.api.capability.IOpticalComputationHatch;
-import gregtech.api.capability.IOpticalComputationProvider;
-import gregtech.api.capability.impl.ComputationRecipeLogic;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;

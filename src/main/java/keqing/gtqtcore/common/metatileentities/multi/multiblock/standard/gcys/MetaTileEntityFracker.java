@@ -9,7 +9,6 @@ import gregicality.multiblocks.api.unification.GCYMMaterials;
 import gregicality.multiblocks.common.block.GCYMMetaBlocks;
 import gregicality.multiblocks.common.block.blocks.BlockLargeMultiblockCasing;
 
-import gregicality.science.client.render.GCYSTextures;
 import gregtech.api.GTValues;
 import gregtech.api.capability.*;
 import gregtech.api.capability.impl.EnergyContainerList;
@@ -32,6 +31,7 @@ import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.BlockBoilerCasing;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
+import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -242,7 +242,7 @@ public class MetaTileEntityFracker extends MultiblockWithDisplayBase implements 
     @Nonnull
     @Override
     protected ICubeRenderer getFrontOverlay() {
-        return GCYSTextures.FRACKER_OVERLAY;
+        return GTQTTextures.FRACKER_OVERLAY;
     }
 
     @Override

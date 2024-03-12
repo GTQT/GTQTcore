@@ -1,8 +1,5 @@
 package keqing.gtqtcore.loaders.recipes.gcys;
 
-
-import gregicality.science.api.unification.material.info.GCYSMaterialFlags;
-import gregicality.science.api.unification.ore.GCYSOrePrefix;
 import gregtech.api.GTValues;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.recipes.builders.BlastRecipeBuilder;
@@ -16,6 +13,8 @@ import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.MaterialStack;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
+import keqing.gtqtcore.api.unification.material.info.EPMaterialFlags;
+import keqing.gtqtcore.api.unification.ore.GTQTOrePrefix;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -33,7 +32,7 @@ public class BouleRecipeHandler {
 
     public static void processCrystallizer(OrePrefix gem, @Nonnull Material material, GemProperty property) {
         // Not crystallizable materials cannot be made into boules
-        if (!material.hasFlag(MaterialFlags.CRYSTALLIZABLE) || material.hasFlag(GCYSMaterialFlags.DISABLE_CRYSTALLIZATION))
+        if (!material.hasFlag(MaterialFlags.CRYSTALLIZABLE) || material.hasFlag(EPMaterialFlags.DISABLE_CRYSTALLIZATION))
             return;
 
         // if there are too many components to fit in the crystallizer, do not make a recipe
@@ -110,8 +109,8 @@ public class BouleRecipeHandler {
             builder.duration((int) (material.getMass() * 4));
         }
 
-        builder.input(GCYSOrePrefix.seedCrystal, material, componentAmount)
-                .output(GCYSOrePrefix.boule, material, componentAmount);
+        builder.input(GTQTOrePrefix.seedCrystal, material, componentAmount)
+                .output(GTQTOrePrefix.boule, material, componentAmount);
 
         // Add the fluid and item inputs, then build the recipe
         if (!inputs.isEmpty()) builder.inputStacks(inputs);
@@ -120,9 +119,9 @@ public class BouleRecipeHandler {
 
         // Cut boules into one exquisite gem
         RecipeMaps.CUTTER_RECIPES.recipeBuilder().
-                input(GCYSOrePrefix.boule, material)
+                input(GTQTOrePrefix.boule, material)
                 .output(OrePrefix.gemExquisite, material)
-                .output(GCYSOrePrefix.seedCrystal, material)
+                .output(GTQTOrePrefix.seedCrystal, material)
                 .duration((int) (material.getMass() * 4))
                 .EUt(16)
                 .buildAndRegister();
@@ -131,7 +130,7 @@ public class BouleRecipeHandler {
         RecipeMaps.AUTOCLAVE_RECIPES.recipeBuilder().
                 input(OrePrefix.gemExquisite, material)
                 .fluidInputs(Materials.DistilledWater.getFluid(8000))
-                .output(GCYSOrePrefix.seedCrystal, material)
+                .output(GTQTOrePrefix.seedCrystal, material)
                 .duration((int) (material.getMass() * 9))
                 .EUt(VA[HV])
                 .buildAndRegister();

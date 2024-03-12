@@ -1,0 +1,57 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "block/cube_all",
+    "textures": {
+      "all": "gregtech:blocks/rendering_error"
+    }
+  },
+  "variants": {
+    "variant": {
+      "substrate": {
+        "model": "minecraft:cube_bottom_top",
+        "textures": {
+          "top": "gregtech:blocks/casings/solid/substrate_top",
+          "side": "gregtech:blocks/casings/solid/substrate_side",
+          "bottom": "#side"
+        }
+      },
+      "advanced_substrate": {
+        "model": "minecraft:cube_bottom_top",
+        "textures": {
+          "top": "gregtech:blocks/casings/solid/advanced_substrate_top",
+          "side": "gregtech:blocks/casings/solid/substrate_side",
+          "bottom": "#side"
+        }
+      },
+      "drill_head": {
+        "model": "minecraft:cube_bottom_top",
+        "textures": {
+          "top": "gregtech:blocks/casings/gearbox/machine_casing_gearbox_steel",
+          "side": "gregtech:blocks/casings/solid/machine_casing_solid_steel",
+          "bottom": "gregtech:blocks/casings/solid/drill_head_bottom"
+        }
+      },
+      "mass_nullifier_platform": {
+        "model": "minecraft:cube_bottom_top",
+        "textures": {
+          "top": "gregtech:blocks/casings/mass_nullifier_platform/mass_nullifier_platform_top",
+          "side": "gregtech:blocks/casings/mass_nullifier_platform/mass_nullifier_platform_side",
+          "bottom": "gregtech:blocks/casings/mass_nullifier_platform/mass_nullifier_platform_top"
+        }
+      },
+      "superheavy_quantum_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/casings/solid/superheavy_quantum_casing"
+        }
+      },
+      "extreme_strength_tritanium_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/casings/solid/extreme_strength_tritanium_casing"
+        }
+      }
+    }
+  }
+}

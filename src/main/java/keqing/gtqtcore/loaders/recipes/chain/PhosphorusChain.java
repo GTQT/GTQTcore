@@ -25,7 +25,7 @@ public class PhosphorusChain {
                 .output(dust, Wollastonite, 30)
                 .output(gem, WhitePhosphorus)
                 .fluidOutputs(CarbonDioxide.getFluid(5000))
-                .temperature(1073)
+                .blastFurnaceTemp(1073)
                 .duration(200).EUt(VA[MV]).buildAndRegister();
 
         //TODO find better recipe

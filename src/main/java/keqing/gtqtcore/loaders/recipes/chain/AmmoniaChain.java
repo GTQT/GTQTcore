@@ -1,6 +1,5 @@
 package keqing.gtqtcore.loaders.recipes.chain;
 
-import gregicality.science.common.GCYSConfigHolder;
 import gregtech.api.recipes.GTRecipeHandler;
 import gregtech.api.recipes.ingredients.IntCircuitIngredient;
 import net.minecraft.item.ItemStack;
@@ -27,10 +26,10 @@ public class AmmoniaChain {
 
         // CH4N + 2H2O -> NH4 + CH4 + O2 (lossy)
         CHEMICAL_RECIPES.recipeBuilder()
-                .notConsumable(dust, GCYSConfigHolder.chainOverrides.disableAmmoniaProcessing ? Chrome : Ruthenium)
+                .notConsumable(dust, Ruthenium)
                 .fluidInputs(RichNitrogenMixture.getFluid(2500))
                 .fluidInputs(Water.getFluid(2000))
-                .fluidOutputs(RichAmmoniaMixture.getFluid(GCYSConfigHolder.chainOverrides.disableAmmoniaProcessing ? 1000 : 3000))
+                .fluidOutputs(RichAmmoniaMixture.getFluid(3000))
                 .fluidOutputs(Methane.getFluid(1000))
                 .duration(80).EUt(VA[MV]).buildAndRegister();
 
@@ -41,15 +40,5 @@ public class AmmoniaChain {
                 .fluidOutputs(Ammonia.getFluid(1000))
                 .duration(160).EUt(VA[LV]).buildAndRegister();
 
-        if (GCYSConfigHolder.chainOverrides.disableAmmoniaProcessing) {
-            GTRecipeHandler.removeRecipesByInputs(CHEMICAL_RECIPES,
-                    new ItemStack[]{IntCircuitIngredient.getIntegratedCircuit(1)},
-                    new FluidStack[]{Nitrogen.getFluid(1000), Hydrogen.getFluid(3000)}
-            );
-            GTRecipeHandler.removeRecipesByInputs(LARGE_CHEMICAL_RECIPES,
-                    new ItemStack[]{IntCircuitIngredient.getIntegratedCircuit(1)},
-                    new FluidStack[]{Nitrogen.getFluid(1000), Hydrogen.getFluid(3000)}
-            );
-        }
     }
 }

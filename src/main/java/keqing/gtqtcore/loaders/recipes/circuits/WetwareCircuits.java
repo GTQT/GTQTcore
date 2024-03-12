@@ -2,7 +2,6 @@ package keqing.gtqtcore.loaders.recipes.circuits;
 
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 
-import gregicality.science.common.GCYSConfigHolder;
 import gregtech.api.metatileentity.multiblock.CleanroomType;
 import gregtech.api.recipes.GTRecipeHandler;
 import gregtech.api.unification.OreDictUnifier;
@@ -21,7 +20,7 @@ public class WetwareCircuits {
 
     public static void init() {
         // Harder Wetware
-        if (GCYSConfigHolder.circuitOverrides.harderWetwareCircuits) {
+
             GTRecipeHandler.removeRecipesByInputs(CIRCUIT_ASSEMBLER_RECIPES, new ItemStack[]{
                             MULTILAYER_FIBER_BOARD.getStackForm(16),
                             PETRI_DISH.getStackForm(),
@@ -30,7 +29,7 @@ public class WetwareCircuits {
                             OreDictUnifier.get(circuit, MarkerMaterials.Tier.IV),
                             OreDictUnifier.get(foil, NiobiumTitanium, 16)},
                     new FluidStack[]{SterileGrowthMedium.getFluid(4000)});
-        }
+
 
         CIRCUIT_ASSEMBLER_RECIPES.recipeBuilder()
                 .input(plate, KaptonK, 16)

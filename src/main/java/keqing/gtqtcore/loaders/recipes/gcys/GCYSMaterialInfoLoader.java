@@ -1,11 +1,11 @@
 package keqing.gtqtcore.loaders.recipes.gcys;
 
-import gregicality.science.common.block.GCYSMetaBlocks;
-import gregicality.science.common.block.blocks.BlockTransparentCasing;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.stack.ItemMaterialInfo;
 import gregtech.api.unification.stack.MaterialStack;
 import gregtech.common.metatileentities.MetaTileEntities;
+import keqing.gtqtcore.common.block.GTQTMetaBlocks;
+import keqing.gtqtcore.common.block.blocks.BlockTransparentCasing;
 
 
 import static gregtech.api.GTValues.M;
@@ -17,7 +17,7 @@ import static keqing.gtqtcore.api.unification.GCYSMaterials.PMMA;
 public class GCYSMaterialInfoLoader {
 
     public static void init() {
-        OreDictUnifier.registerOre(GCYSMetaBlocks.TRANSPARENT_CASING.getItemVariant(BlockTransparentCasing.CasingType.PMMA), new ItemMaterialInfo(new MaterialStack(PMMA, M * 4))); // single plate
+        OreDictUnifier.registerOre(GTQTMetaBlocks.TRANSPARENT_CASING.getItemVariant(BlockTransparentCasing.CasingType.PMMA), new ItemMaterialInfo(new MaterialStack(PMMA, M * 4))); // single plate
 
         // fix UHV hull unification
         OreDictUnifier.registerOre(MetaTileEntities.HULL[9].getStackForm(), new ItemMaterialInfo(

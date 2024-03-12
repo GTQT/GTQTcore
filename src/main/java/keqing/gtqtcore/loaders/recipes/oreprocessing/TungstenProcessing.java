@@ -1,11 +1,10 @@
 package keqing.gtqtcore.loaders.recipes.oreprocessing;
 
-import gregicality.science.common.GCYSConfigHolder;
 import gregtech.api.recipes.GTRecipeHandler;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.OreDictUnifier;
 
-import static gregicality.science.api.recipes.GCYSRecipeMaps.DRYER_RECIPES;
+import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.DRYER_RECIPES;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static gregtech.api.GTValues.EV;
 import static gregtech.api.GTValues.VA;
@@ -29,8 +28,7 @@ public class TungstenProcessing {
 
     public static void init() {
         tungstenChain();
-        if (GCYSConfigHolder.chainOverrides.disableTungstenProcessing)
-            removeGTCERecipes();
+        removeGTCERecipes();
     }
 
     private static void removeGTCERecipes() {

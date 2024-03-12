@@ -2,8 +2,6 @@ package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.gcys;
 
 import gregicality.multiblocks.common.block.GCYMMetaBlocks;
 import gregicality.multiblocks.common.block.blocks.BlockUniqueCasing;
-import gregicality.science.client.render.GCYSTextures;
-import gregicality.science.common.metatileentities.GCYSMetaTileEntities;
 import gregtech.api.GTValues;
 import gregtech.api.capability.IHeatingCoil;
 import gregtech.api.capability.impl.HeatingCoilRecipeLogic;
@@ -29,6 +27,7 @@ import gregtech.common.blocks.BlockWireCoil.CoilType;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.MetaTileEntities;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
+import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
@@ -148,7 +147,7 @@ public class MetaTileEntityCrystallizationCrucible extends RecipeMapMultiblockCo
     @Nonnull
     @Override
     protected OrientedOverlayRenderer getFrontOverlay() {
-        return GCYSTextures.CRYSTALLIZATION_CRUCIBLE_OVERLAY;
+            return GTQTTextures.CRYSTALLIZATION_CRUCIBLE_OVERLAY;
     }
 
     @Override

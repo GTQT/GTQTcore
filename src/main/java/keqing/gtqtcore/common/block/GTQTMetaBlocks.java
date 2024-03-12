@@ -1,8 +1,10 @@
 package keqing.gtqtcore.common.block;
 
 import gregtech.api.block.VariantBlock;
+import gregtech.client.model.SimpleStateMapper;
 import gregtech.common.blocks.BlockGlassCasing;
 import gregtech.common.blocks.MetaBlocks;
+import keqing.gtqtcore.client.renderer.pipe.PressurePipeRenderer;
 import keqing.gtqtcore.common.block.blocks.*;
 import keqing.gtqtcore.common.block.wood.BlockPineLeaves;
 import keqing.gtqtcore.common.block.wood.BlockPineLog;
@@ -10,6 +12,7 @@ import keqing.gtqtcore.common.block.wood.BlockPineSapling;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.IStateMapper;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
@@ -38,7 +41,10 @@ public class GTQTMetaBlocks {
     public static final BlockPineLeaves PINE_LEAVES = new BlockPineLeaves();
     public static final BlockPineLog PINE_LOG = new BlockPineLog();
     public static final BlockPineSapling PINE_SAPLING = new BlockPineSapling();
-
+    public static BlockCrucible CRUCIBLE;
+    public static BlockGCYSMultiblockCasing MULTIBLOCK_CASING;
+    public static BlockGCYSMultiblockCasingActive MULTIBLOCK_CASING_ACTIVE;
+    public static BlockTransparentCasing TRANSPARENT_CASING;
     public static final EnumMap<GTQTStoneVariantBlock.StoneVariant, GTQTStoneVariantBlock> SUSY_STONE_BLOCKS = new EnumMap<>(GTQTStoneVariantBlock.StoneVariant.class);
     private GTQTMetaBlocks() {}
 
@@ -77,6 +83,16 @@ public class GTQTMetaBlocks {
         ROAD = new GTQTRoad();
         ROAD.setRegistryName("road");
 
+        CRUCIBLE = new BlockCrucible();
+        CRUCIBLE.setRegistryName("crucible");
+        MULTIBLOCK_CASING = new BlockGCYSMultiblockCasing();
+        MULTIBLOCK_CASING.setRegistryName("multiblock_casing1");
+        MULTIBLOCK_CASING_ACTIVE = new BlockGCYSMultiblockCasingActive();
+        MULTIBLOCK_CASING_ACTIVE.setRegistryName("multiblock_casing_active");
+        TRANSPARENT_CASING = new BlockTransparentCasing();
+        TRANSPARENT_CASING.setRegistryName("transparent_casing");
+
+
         for (GTQTStoneVariantBlock.StoneVariant shape : GTQTStoneVariantBlock.StoneVariant.values()) {
             SUSY_STONE_BLOCKS.put(shape, new GTQTStoneVariantBlock(shape));
         }
@@ -103,6 +119,13 @@ public class GTQTMetaBlocks {
         registerItemModel(KQCC);
         registerItemModel(GLASS_CASING);
         registerItemModel(STEPPER);
+
+        registerItemModel(CRUCIBLE);
+        registerItemModel(MULTIBLOCK_CASING);
+        registerItemModel(MULTIBLOCK_CASING_ACTIVE);
+        registerItemModel(TRANSPARENT_CASING);
+
+
         for (GTQTStoneVariantBlock block : SUSY_STONE_BLOCKS.values())
             registerItemModel(block);
     }

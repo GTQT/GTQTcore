@@ -179,7 +179,7 @@ material.nd_yag=掺钕钇铝石榴石（Nd:YAG）
 material.bismuth_ferrite=铁酸铋
 material.cgt_magnetic=磁化铬锗碲化物
 material.heavy_alkali_chloride_solution=重碱氯化物溶液
-tile.multiblock_casing.superheavy_quantum_casing.name=超重量子外壳
+tile.multiblock_casing1.superheavy_quantum_casing.name=超重量子外壳
 
 # Third Degree Materials
 material.zinc_rich_sphalerite=富锌闪锌矿
@@ -469,12 +469,12 @@ tile.crucible.tungsten.name=钨坩埚
 tile.crucible.graphite.name=石墨坩埚
 tile.crucible.boron_nitride.name=氮化硼坩埚
 
-tile.multiblock_casing.substrate.name=基材外壳
-tile.multiblock_casing.advanced_substrate.name=高级基材外壳
-tile.multiblock_casing.drill_head.name=钻取
+tile.multiblock_casing1.substrate.name=基材外壳
+tile.multiblock_casing1.advanced_substrate.name=高级基材外壳
+tile.multiblock_casing1.drill_head.name=钻取
 
-tile.multiblock_casing_active.airfoil.name=翼型室
-tile.multiblock_casing_active.advanced_airfoil.name=高级翼型室
+tile.multiblock_casing1_active.airfoil.name=翼型室
+tile.multiblock_casing1_active.advanced_airfoil.name=高级翼型室
 
 tile.transparent_casing.pmma.name=亚克力玻璃（PMMA）
 

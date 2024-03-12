@@ -48,7 +48,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-import static gregicality.science.api.recipes.GCYSRecipeMaps.DRYER_RECIPES;
+import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.DRYER_RECIPES;
 
 public class MetaTileEntityVacuumDryingFurnace extends MultiMapMultiblockController implements IHeatingCoil {
 

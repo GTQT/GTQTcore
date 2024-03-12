@@ -4,7 +4,7 @@ import gregtech.api.metatileentity.multiblock.CleanroomType;
 import gregtech.api.recipes.GTRecipeHandler;
 import net.minecraftforge.fluids.FluidStack;
 
-import static gregicality.science.api.recipes.GCYSRecipeMaps.DRYER_RECIPES;
+
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
@@ -274,7 +274,7 @@ public class NaquadahChain {
                 .fluidOutputs(NaquadriaSolution.getFluid(1000))
                 .EUt(VA[IV])
                 .duration(1200)
-                .temperature(880)
+                .blastFurnaceTemp(880)
                 .buildAndRegister();
 
         //  Naquadria Solution -> Sulfur + Naquadria Waste + Sulfur dust
@@ -372,7 +372,7 @@ public class NaquadahChain {
                 .fluidOutputs(ImpureEnrichedNaquadahSolution.getFluid(1000))
                 .EUt(VA[ZPM])
                 .duration(1000)
-                .temperature(1280)
+                .blastFurnaceTemp(1280)
                 .buildAndRegister();
     }
 }

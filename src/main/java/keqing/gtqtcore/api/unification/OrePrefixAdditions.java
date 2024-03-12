@@ -5,7 +5,8 @@ import keqing.gtqtcore.api.unification.ore.GTQTOrePrefix;
 
 public class OrePrefixAdditions {
     public static void init() {
-
+        MetaItems.addOrePrefix(GTQTOrePrefix.seedCrystal);
+        MetaItems.addOrePrefix(GTQTOrePrefix.boule);
         MetaItems.addOrePrefix(GTQTOrePrefix.milled);
         MetaItems.addOrePrefix(GTQTOrePrefix.electrode);
         MetaItems.addOrePrefix(GTQTOrePrefix.nanotube);

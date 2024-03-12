@@ -1,8 +1,4 @@
 package keqing.gtqtcore.loaders.recipes.oreprocessing;
-
-
-
-import static gregicality.science.api.recipes.GCYSRecipeMaps.DRYER_RECIPES;
 import static gregtech.api.unification.material.Materials.Hafnium;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
@@ -66,7 +62,7 @@ public class RareEarthProcessing {
                 .fluidInputs(HydrochloricAcid.getFluid(1000))
                 .output(dust, RareEarthChloridesSlurry, 4)
                 .fluidOutputs(Steam.getFluid(600))
-                .temperature(1125)
+                .blastFurnaceTemp(1125)
                 .duration(120)
                 .EUt(VA[MV])
                 .buildAndRegister();
@@ -163,7 +159,7 @@ public class RareEarthProcessing {
                 .output(dust, Sulfur, 2)
                 .EUt(3840)
                 .duration(300)
-                .temperature(450)
+                .blastFurnaceTemp(450)
                 .buildAndRegister();
 
         //  Low Purity Rare Earth Chlorides Slag + Ferric Oxide -> Lanthanum Oxide + Oxygen
@@ -174,7 +170,7 @@ public class RareEarthProcessing {
                 .fluidOutputs(Oxygen.getFluid(3000))
                 .duration(300)
                 .EUt(15360)
-                .temperature(860)
+                .blastFurnaceTemp(860)
                 .buildAndRegister();
     }
 

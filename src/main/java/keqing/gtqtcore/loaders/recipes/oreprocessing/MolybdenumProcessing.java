@@ -1,6 +1,5 @@
 package keqing.gtqtcore.loaders.recipes.oreprocessing;
 
-import gregicality.science.common.GCYSConfigHolder;
 import gregtech.api.recipes.GTRecipeHandler;
 import gregtech.api.unification.OreDictUnifier;
 import net.minecraft.item.ItemStack;
@@ -34,11 +33,11 @@ public class MolybdenumProcessing {
         molybdenum();
         rhenium();
 
-        if (GCYSConfigHolder.chainOverrides.disableMolybdenumProcessing) {
+
             GTRecipeHandler.removeRecipesByInputs(ARC_FURNACE_RECIPES,
                     new ItemStack[]{OreDictUnifier.get(dust, Molybdenite, 3)},
                     new FluidStack[]{Oxygen.getFluid(4000)});
-        }
+
     }
 
     private static void molybdenum() {

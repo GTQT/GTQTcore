@@ -1,9 +1,9 @@
 package keqing.gtqtcore.api.unification.matreials;
 
-import gregicality.science.api.unification.GCYSElements;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.properties.BlastProperty;
 import gregtech.api.unification.material.properties.ToolProperty;
+import keqing.gtqtcore.api.unification.GTQTElements;
 import net.minecraftforge.fml.common.asm.transformers.deobf.FMLRemappingAdapter;
 
 import static gregtech.api.unification.Elements.Hf;
@@ -23,19 +23,19 @@ public class GCYSElementMaterials {
                 .ingot()
                 .color(0xE6E1FF)
                 .flags(GENERATE_PLATE, GENERATE_FOIL)
-                .element(GCYSElements.Li6)
+                .element(GTQTElements.Li6)
                 .build();
 
         Lithium7 = new Material.Builder(3101, gregtechId("lithium_7"))
                 .ingot()
                 .color(0xE1DCFF).iconSet(METALLIC)
-                .element(GCYSElements.Li7)
+                .element(GTQTElements.Li7)
                 .build();
 
         Beryllium7 = new Material.Builder(3102, gregtechId("beryllium_7"))
                 .ingot().fluid()
                 .color(0x6EBE6E)
-                .element(GCYSElements.Be7)
+                .element(GTQTElements.Be7)
                 .build();
 
         Orichalcum = new Material.Builder(3103, gregtechId("orichalcum"))
@@ -43,7 +43,7 @@ public class GCYSElementMaterials {
                 .fluidPipeProperties(16000,32000,true)
                 .color(0x72A0C1).iconSet(METALLIC)
                 .flags(GENERATE_PLATE, GENERATE_ROTOR, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_ROUND, GENERATE_FRAME)
-                .element(GCYSElements.Or)
+                .element(GTQTElements.Or)
                 .toolStats(ToolProperty.Builder.of(7.0F, 25.0F, 17000, 22).build())
                 .blast(9000, BlastProperty.GasTier.HIGH)
                 .build();
@@ -52,7 +52,7 @@ public class GCYSElementMaterials {
                 .ingot().fluid().plasma()
                 .color(0xC880FF).iconSet(SHINY)
                 .flags(GENERATE_PLATE, GENERATE_FOIL)
-                .element(GCYSElements.Vb)
+                .element(GTQTElements.Vb)
                 .blast(4852, BlastProperty.GasTier.HIGH)
                 .build();
 
@@ -60,14 +60,14 @@ public class GCYSElementMaterials {
                 .ingot().fluid().plasma()
                 .color(0xFF0040).iconSet(METALLIC)
                 .flags(GENERATE_PLATE, GENERATE_ROTOR, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_ROUND)
-                .element(GCYSElements.Ad)
+                .element(GTQTElements.Ad)
                 .blast(5225, BlastProperty.GasTier.HIGH)
                 .build();
 
         Taranium = new Material.Builder(3106, gregtechId("taranium"))
                 .dust()
                 .color(0x4F404F).iconSet(METALLIC)
-                .element(GCYSElements.Tn)
+                .element(GTQTElements.Tn)
                 .build();
 
     }

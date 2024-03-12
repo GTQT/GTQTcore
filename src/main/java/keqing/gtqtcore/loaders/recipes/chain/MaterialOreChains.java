@@ -1,6 +1,6 @@
 package keqing.gtqtcore.loaders.recipes.chain;
 
-import static gregicality.science.api.recipes.GCYSRecipeMaps.DRYER_RECIPES;
+import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
@@ -22,9 +22,9 @@ public class MaterialOreChains {
         ZirconiumHafnium();
     }
 
-    /*
+
     private static void FixRoaster() {
-        ROASTING_RECIPES.recipeBuilder()
+        BLAST_RECIPES.recipeBuilder()
                 .duration(40)
                 .EUt(VA[LV])
                 .input(dust, Sodium)
@@ -33,7 +33,7 @@ public class MaterialOreChains {
                 .blastFurnaceTemp(2100)
                 .buildAndRegister();
 
-        ROASTING_RECIPES.recipeBuilder()
+        VACUUM_DRYING_FURNACE_RECIPES.recipeBuilder()
                 .duration(160)
                 .EUt(VA[HV])
                 .input(dust, Molybdenite,3)
@@ -44,7 +44,7 @@ public class MaterialOreChains {
                 .blastFurnaceTemp(3200)
                 .buildAndRegister();
 
-        ROASTING_RECIPES.recipeBuilder()
+        BLAST_RECIPES.recipeBuilder()
                 .duration(200)
                 .EUt(VA[HV])
                 .input(dust, Quicklime, 2)
@@ -54,7 +54,7 @@ public class MaterialOreChains {
                 .blastFurnaceTemp(1500)
                 .buildAndRegister();
 
-        ROASTING_RECIPES.recipeBuilder()
+        BLAST_RECIPES.recipeBuilder()
                 .duration(100)
                 .EUt(VA[MV])
                 .input(dust, WhitePhosphorus)
@@ -63,7 +63,7 @@ public class MaterialOreChains {
                 .blastFurnaceTemp(5600)
                 .buildAndRegister();
 
-        ROASTING_RECIPES.recipeBuilder()
+        BLAST_RECIPES.recipeBuilder()
                 .duration(140)
                 .EUt(VA[HV])
                 .input(dust, Sphalerite, 2)
@@ -74,7 +74,7 @@ public class MaterialOreChains {
                 .blastFurnaceTemp(3600)
                 .buildAndRegister();
 
-        ROASTING_RECIPES.recipeBuilder()
+        BLAST_RECIPES.recipeBuilder()
                 .duration(120)
                 .EUt(VA[IV])
                 .input(dust, RarestMetalMixture, 12)
@@ -86,7 +86,7 @@ public class MaterialOreChains {
                 .blastFurnaceTemp(5400)
                 .buildAndRegister();
 
-        ROASTING_RECIPES.recipeBuilder()
+        BLAST_RECIPES.recipeBuilder()
                 .duration(100)
                 .EUt(VA[HV])
                 .input(dust, Quicklime, 2)
@@ -96,7 +96,7 @@ public class MaterialOreChains {
                 .blastFurnaceTemp(1500)
                 .buildAndRegister();
 
-        ROASTING_RECIPES.recipeBuilder()
+        BLAST_RECIPES.recipeBuilder()
                 .duration(220)
                 .EUt(VA[HV])
                 .input(dust, ChalcogenAnodeMud)
@@ -110,7 +110,7 @@ public class MaterialOreChains {
                 .buildAndRegister();
     }
 
-     */
+
 
     private static void Indium() {
         GTRecipeHandler.removeRecipesByInputs(CHEMICAL_RECIPES,

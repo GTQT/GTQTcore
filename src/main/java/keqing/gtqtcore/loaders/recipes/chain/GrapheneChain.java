@@ -1,6 +1,5 @@
 package keqing.gtqtcore.loaders.recipes.chain;
 
-import gregicality.science.common.GCYSConfigHolder;
 import gregtech.api.recipes.GTRecipeHandler;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.recipes.ingredients.IntCircuitIngredient;
@@ -18,13 +17,12 @@ public class GrapheneChain {
 
     public static void init() {
         // Remove Graphene Mixing
-        if (GCYSConfigHolder.chainOverrides.disableGrapheneProcessing) {
             GTRecipeHandler.removeRecipesByInputs(RecipeMaps.MIXER_RECIPES,
                     OreDictUnifier.get(dust, Graphite),
                     OreDictUnifier.get(dust, Carbon, 4),
                     OreDictUnifier.get(dust, Silicon),
                     IntCircuitIngredient.getIntegratedCircuit(1));
-        }
+
 
         // G -> GO
         RecipeMaps.CHEMICAL_RECIPES.recipeBuilder()

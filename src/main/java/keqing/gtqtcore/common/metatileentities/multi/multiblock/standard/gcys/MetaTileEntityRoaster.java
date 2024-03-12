@@ -1,8 +1,5 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.gcys;
 
-
-import gregicality.science.api.recipes.recipeproperties.NoCoilTemperatureProperty;
-import gregicality.science.client.render.GCYSTextures;
 import gregtech.api.capability.IHeatingCoil;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
@@ -22,6 +19,8 @@ import gregtech.common.blocks.BlockFireboxCasing;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
+import keqing.gtqtcore.api.recipes.properties.NoCoilTemperatureProperty;
+import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -123,7 +122,7 @@ public class MetaTileEntityRoaster extends RecipeMapMultiblockController impleme
     @Nonnull
     @Override
     protected ICubeRenderer getFrontOverlay() {
-        return GCYSTextures.ROASTER_OVERLAY;
+        return GTQTTextures.ROASTER_OVERLAY;
     }
 
     @Override

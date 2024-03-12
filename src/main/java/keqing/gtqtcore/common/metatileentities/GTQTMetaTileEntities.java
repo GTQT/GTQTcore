@@ -1,7 +1,5 @@
 package keqing.gtqtcore.common.metatileentities;
 
-import com.sun.jna.platform.win32.WinDef;
-import gregicality.multiblocks.common.metatileentities.multiblockpart.MetaTileEntityParallelHatch;
 import gregtech.api.GTValues;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.SimpleGeneratorMetaTileEntity;
@@ -34,6 +32,7 @@ import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.star.Me
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.steam.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblockpart.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblockpart.MetaTileEntityDataAccessHatch;
+
 import keqing.gtqtcore.common.metatileentities.storage.MetaTileEntityMultiblockTank;
 
 import java.util.function.IntFunction;
@@ -65,7 +64,6 @@ public class GTQTMetaTileEntities {
         simpleTiredInit(tileEntities,function,idSupplier,(i) -> true);
     }
     public static MetaTileEntityOilPool OIL_POOL;
-
     public static MetaTileEntityAlgaeFarm ALGAE_FARM;
     public static MetaTileEntityComponentAssemblyLine COMPONENT_ASSEMBLY_LINE;
     public static MetaTileEntityBufferHatch MULTIPART_BUFFER_HATCH;
@@ -234,7 +232,6 @@ public class GTQTMetaTileEntities {
     //public static MetaTileEntityObjectHolder OBJECT_HOLDER;
     public static void initialization() {
         GTQTLog.logger.info("Registering MetaTileEntities");
-
         //发电设备 单方块
         LIGHTNING_ROD[0] = registerSingleMetaTileEntity(3000, new MetaTileEntityLightningRod(gtqtcoreId("lightning_rod.zpm"), GTValues.ZPM));
         LIGHTNING_ROD[1] = registerSingleMetaTileEntity(3001, new MetaTileEntityLightningRod(gtqtcoreId("lightning_rod.luv"), LuV));

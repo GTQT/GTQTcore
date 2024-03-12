@@ -1,12 +1,10 @@
 package keqing.gtqtcore.api.unification.matreials;
 
-import gregicality.science.common.GCYSConfigHolder;
 import gregtech.api.unification.material.properties.OreProperty;
 import gregtech.api.unification.material.properties.PropertyKey;
-
-import static gregicality.science.api.unification.material.info.GCYSMaterialFlags.DISABLE_CRYSTALLIZATION;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.info.MaterialFlags.*;
+import static keqing.gtqtcore.api.unification.material.info.EPMaterialFlags.DISABLE_CRYSTALLIZATION;
 
 public class GCYSMaterialFlagAddition {
 
@@ -18,17 +16,15 @@ public class GCYSMaterialFlagAddition {
         IridiumMetalResidue.setFormula("Ir2O3", true);
 
         // Disable Decomposition
-        if (GCYSConfigHolder.chainOverrides.disableNiobiumTantalumProcessing) {
-            Pyrochlore.addFlags(DISABLE_DECOMPOSITION);
-            Tantalite.addFlags(DISABLE_DECOMPOSITION);
-        }
-        if (GCYSConfigHolder.chainOverrides.disableMolybdenumProcessing) {
-            Molybdenite.addFlags(DISABLE_DECOMPOSITION);
-            OreProperty oreProp = Molybdenite.getProperty(PropertyKey.ORE);
-            oreProp.setDirectSmeltResult(null);
-            Powellite.addFlags(DISABLE_DECOMPOSITION);
-            Wulfenite.addFlags(DISABLE_DECOMPOSITION);
-        }
+                Pyrochlore.addFlags(DISABLE_DECOMPOSITION);
+                Tantalite.addFlags(DISABLE_DECOMPOSITION);
+
+                Molybdenite.addFlags(DISABLE_DECOMPOSITION);
+                OreProperty oreProp = Molybdenite.getProperty(PropertyKey.ORE);
+                oreProp.setDirectSmeltResult(null);
+                Powellite.addFlags(DISABLE_DECOMPOSITION);
+                Wulfenite.addFlags(DISABLE_DECOMPOSITION);
+
         RockSalt.addFlags(DISABLE_DECOMPOSITION); // Conflict between Potassium Hydroxide and Rock Salt Electrolysis
         Salt.addFlags(DISABLE_DECOMPOSITION); // Conflict between Sodium Chlorate and Salt Electrolysis
         Pollucite.addFlags(DISABLE_DECOMPOSITION); // for rubidium chain

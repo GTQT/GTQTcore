@@ -1,9 +1,9 @@
 package keqing.gtqtcore.loaders.recipes.circuits;
 
-import gregicality.science.api.unification.ore.GCYSOrePrefix;
 import gregtech.api.metatileentity.multiblock.CleanroomType;
 import gregtech.api.recipes.ingredients.IntCircuitIngredient;
 import gregtech.common.items.MetaItems;
+import keqing.gtqtcore.api.unification.ore.GTQTOrePrefix;
 import net.minecraftforge.fluids.FluidStack;
 
 import static gregicality.multiblocks.api.recipes.GCYMRecipeMaps.ALLOY_BLAST_RECIPES;
@@ -42,7 +42,6 @@ public class OpticalCircuits {
                 .input(dust, Silicon)
                 .fluidInputs(Chlorine.getFluid(4000))
                 .fluidOutputs(SiliconTetrachloride.getFluid(1000))
-                .temperature(873)
                 .duration(150).EUt(VA[HV]).buildAndRegister();
 
         // Ge + 2O -> GeO2
@@ -59,7 +58,6 @@ public class OpticalCircuits {
                 .fluidInputs(SiliconTetrachloride.getFluid(1000))
                 .notConsumable(MetaItems.SHAPE_EXTRUDER_WIRE)
                 .output(OPTICAL_FIBER, 8)
-                .temperature(1800)
                 .duration(400).EUt(VA[IV]).buildAndRegister();
 
         //TODO Low Gravity
@@ -144,7 +142,7 @@ public class OpticalCircuits {
                 .input(dust, YttriumOxide, 5)
                 .input(dust, Alumina, 5)
                 .fluidInputs(DistilledWater.getFluid(8000))
-                .output(GCYSOrePrefix.seedCrystal, NdYAG)
+                .output(GTQTOrePrefix.seedCrystal, NdYAG)
                 .duration(288).EUt(VA[IV]).buildAndRegister();
 
         ASSEMBLER_RECIPES.recipeBuilder()

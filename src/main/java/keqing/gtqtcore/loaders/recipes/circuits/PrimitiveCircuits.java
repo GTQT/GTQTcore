@@ -1,6 +1,5 @@
 package keqing.gtqtcore.loaders.recipes.circuits;
 
-import gregicality.science.common.GCYSConfigHolder;
 import gregtech.api.recipes.GTRecipeHandler;
 import gregtech.api.recipes.ModHandler;
 import gregtech.api.recipes.ingredients.IntCircuitIngredient;
@@ -12,7 +11,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
 
-import static gregicality.science.api.recipes.GCYSRecipeMaps.PRESSURE_CHAMBER_RECIPES;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 import static gregtech.api.GTValues.*;
@@ -43,7 +41,7 @@ public class PrimitiveCircuits {
                 .output(OrePrefix.dust, Kovar, 7)
                 .duration(160).EUt(VA[ULV]).buildAndRegister();
 
-        if (!GCYSConfigHolder.circuitOverrides.harderVacuumTubes) return;
+
 
         removeGTCERecipes();
 
@@ -77,13 +75,7 @@ public class PrimitiveCircuits {
                     .duration(120).EUt(VA[ULV]).buildAndRegister();
         }
 
-        PRESSURE_CHAMBER_RECIPES.recipeBuilder()
-                .input(GLASS_TUBE)
-                .input(VACUUM_TUBE_COMPONENTS)
-                .input(OrePrefix.ring, Kovar)
-                .output(VACUUM_TUBE)
-                .pressure(13E-5)
-                .duration(100).EUt(16).buildAndRegister();
+
     }
 
     private static void removeGTCERecipes() {

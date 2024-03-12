@@ -1,6 +1,5 @@
 package keqing.gtqtcore.loaders.recipes.circuits;
 
-import gregicality.science.common.GCYSConfigHolder;
 import gregtech.api.recipes.GTRecipeHandler;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.OreDictUnifier;
@@ -22,9 +21,9 @@ public class CrystalCircuits {
         crystalInterface();
         crystalModulators();
         crystalSOC();
-        if (GCYSConfigHolder.circuitOverrides.harderCrystalCircuits) {
-            removeGTCERecipes();
-        }
+
+        removeGTCERecipes();
+
     }
 
     private static void removeGTCERecipes() {

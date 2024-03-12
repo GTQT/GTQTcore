@@ -1,6 +1,6 @@
 package keqing.gtqtcore.loaders.recipes.chain;
 
-import static gregicality.science.api.recipes.GCYSRecipeMaps.DRYER_RECIPES;
+import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.DRYER_RECIPES;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static gregtech.api.GTValues.IV;
 import static gregtech.api.GTValues.VA;

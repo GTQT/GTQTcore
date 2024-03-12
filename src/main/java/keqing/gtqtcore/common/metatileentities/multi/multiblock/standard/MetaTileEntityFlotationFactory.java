@@ -5,8 +5,6 @@ import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.texture.TextureUtils;
 import codechicken.lib.vec.Cuboid6;
 import codechicken.lib.vec.Matrix4;
-import gregicality.science.common.block.GCYSMetaBlocks;
-import gregicality.science.common.block.blocks.BlockTransparentCasing;
 import gregtech.api.capability.IMultipleTankHandler;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
@@ -28,6 +26,7 @@ import keqing.gtqtcore.api.metaileentity.multiblock.NoEnergyMultiblockController
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
+import keqing.gtqtcore.common.block.blocks.BlockTransparentCasing;
 import keqing.gtqtcore.common.block.blocks.GTQTIsaCasing;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.huge.MetaTileEntityHugeDistillationTower;
 import net.minecraft.block.state.IBlockState;
@@ -97,7 +96,7 @@ public class MetaTileEntityFlotationFactory extends RecipeMapMultiblockControlle
         return GTQTMetaBlocks.ISA_CASING.getState(GTQTIsaCasing.CasingType.FLOTATION_CASING);
     }
     private static IBlockState getGlassState() {
-        return GCYSMetaBlocks.TRANSPARENT_CASING.getState(BlockTransparentCasing.CasingType.PMMA);
+        return GTQTMetaBlocks.TRANSPARENT_CASING.getState(BlockTransparentCasing.CasingType.PMMA);
     }
     private static IBlockState getPipeState() {
         return GTQTMetaBlocks.ISA_CASING.getState(GTQTIsaCasing.CasingType.FLOTATION_CASING_PIPE);

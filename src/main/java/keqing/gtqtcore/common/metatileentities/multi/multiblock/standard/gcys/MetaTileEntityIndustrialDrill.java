@@ -3,10 +3,6 @@ package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.gcys;
 import gregicality.multiblocks.api.unification.GCYMMaterials;
 import gregicality.multiblocks.common.block.GCYMMetaBlocks;
 import gregicality.multiblocks.common.block.blocks.BlockLargeMultiblockCasing;
-
-import gregicality.science.client.render.GCYSTextures;
-import gregicality.science.common.block.GCYSMetaBlocks;
-import gregicality.science.common.block.blocks.BlockGCYSMultiblockCasing;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.capability.impl.NotifiableItemStackHandler;
 import gregtech.api.metatileentity.MetaTileEntity;
@@ -26,6 +22,9 @@ import gregtech.common.blocks.BlockMultiblockCasing;
 import gregtech.common.blocks.BlockTurbineCasing;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
+import keqing.gtqtcore.client.textures.GTQTTextures;
+import keqing.gtqtcore.common.block.GTQTMetaBlocks;
+import keqing.gtqtcore.common.block.blocks.BlockGCYSMultiblockCasing;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -70,7 +69,7 @@ public class MetaTileEntityIndustrialDrill extends RecipeMapMultiblockController
                 .where('B', states(MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STEEL_SOLID))
                         .setMinGlobalLimited(4)
                         .or(autoAbilities(true, true, false, true, true, true, true)))
-                .where('D', states(GCYSMetaBlocks.MULTIBLOCK_CASING.getState(BlockGCYSMultiblockCasing.CasingType.DRILL_HEAD)))
+                .where('D', states(GTQTMetaBlocks.MULTIBLOCK_CASING.getState(BlockGCYSMultiblockCasing.CasingType.DRILL_HEAD)))
                 .where('R', bedrockPredicate())
                 .where(' ', any())
                 .build();
@@ -121,7 +120,7 @@ public class MetaTileEntityIndustrialDrill extends RecipeMapMultiblockController
     @Nonnull
     @Override
     protected ICubeRenderer getFrontOverlay() {
-        return GCYSTextures.INDUSTRIAL_DRILL_OVERLAY;
+        return GTQTTextures.INDUSTRIAL_DRILL_OVERLAY;
     }
 
     @Override

@@ -5,11 +5,11 @@ import gregtech.api.GTValues;
 import static gregicality.multiblocks.api.recipes.GCYMRecipeMaps.ALLOY_BLAST_RECIPES;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.BURNER_REACTOR_RECIPES;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
-import static gregicality.science.api.unification.ore.GCYSOrePrefix.seedCrystal;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
+import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.seedCrystal;
 
 public class MagneticsChain {
 
@@ -60,7 +60,7 @@ public class MagneticsChain {
                 .input(dust, Iron, 2)
                 .fluidInputs(Oxygen.getFluid(3000))
                 .output(dust, FerricOxide, 5)
-                .temperature(473)
+                .blastFurnaceTemp(473)
                 .duration(50).EUt(120).buildAndRegister();
 
         CENTRIFUGE_RECIPES.recipeBuilder()

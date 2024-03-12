@@ -2,7 +2,6 @@ package keqing.gtqtcore.loaders.recipes.chain;
 
 import gregtech.common.items.MetaItems;
 
-import static gregicality.science.api.recipes.GCYSRecipeMaps.DRYER_RECIPES;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static gregtech.api.GTValues.*;
@@ -56,7 +55,6 @@ public class BoronNitrideChain {
                 .input(dust, Lithium)
                 .fluidInputs(Hydrogen.getFluid(1000))
                 .output(ingot, LithiumHydride)
-                .temperature(873)
                 .duration(300)
                 .EUt(VA[HV])
                 .buildAndRegister();
@@ -97,7 +95,6 @@ public class BoronNitrideChain {
                 .fluidInputs(Chlorine.getFluid(6000))
                 .fluidOutputs(BoronTrichloride.getFluid(2000))
                 .fluidOutputs(CarbonMonoxide.getFluid(3000))
-                .temperature(774)
                 .duration(90)
                 .EUt(VA[HV])
                 .buildAndRegister();
@@ -122,8 +119,6 @@ public class BoronNitrideChain {
                 .fluidOutputs(Water.getFluid(3000))
                 .duration(400)
                 .EUt(VA[UV])
-                .pressure(0.0000125D)
-                .temperature(1300)
                 .buildAndRegister();
 
         // B + N -> BN
@@ -144,8 +139,6 @@ public class BoronNitrideChain {
                 .output(gem, CubicBoronNitride)
                 .duration(100)
                 .EUt(VA[UV])
-                .pressure(18_000_000_000D)
-                .temperature(3501)
                 .buildAndRegister();
 
         // B3Cl3H3N3 -> 3 a-BN + 3HCl
@@ -185,8 +178,6 @@ public class BoronNitrideChain {
                 .output(gem, CubicHeterodiamond)
                 .duration(400)
                 .EUt(VA[UHV])
-                .pressure(18_000_000_000D)
-                .temperature(2200)
                 .buildAndRegister();
     }
 }

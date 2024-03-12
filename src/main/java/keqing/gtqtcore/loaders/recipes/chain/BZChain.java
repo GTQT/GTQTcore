@@ -64,7 +64,7 @@ public class BZChain {
                 .fluidInputs(Chlorine.getFluid(1000))
                 .fluidOutputs(Trichloroethylene.getFluid(1000))
                 .fluidOutputs(Hydrogen.getFluid(3000))
-                .temperature(400)
+                .blastFurnaceTemp(400)
                 .duration(100).EUt(VA[EV]).buildAndRegister();
 
         // C2HCl3 + 2H2O -> C2H3ClO2 + 2HCl
