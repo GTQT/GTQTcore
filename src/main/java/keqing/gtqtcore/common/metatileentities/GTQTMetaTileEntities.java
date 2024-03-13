@@ -88,6 +88,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityTurbineCombustionChamber HUGE_TURBINE_COMBUSTION_CHAMBER;
     public static MetaTileEntityIModularFissionReactor I_MODULAR_FISSION_REACTOR;
     public static MetaTileEntityRocket ROCKET;
+    public static MetaTileEntityIndustryWaterPump INDUSTRY_WATER_PUMP;
     public static MetaTileEntityKQCC KQCC;
     public static MetaTileEntityGantryCrane GANTRY_CRANE;
     public static MetaTileEntitySteamOreWasher STEAM_ORE_WASHER;
@@ -115,6 +116,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntitySteamHammer STEAM_HAMMER;
     public static MetaTileEntityHugeCrackingUnit HUGE_CRACKING_UNIT;
     public static MetaTileEntityHugeMiner BASIC_HUGE_MINER;
+    public static MetaTileEntityGreenhousePlus GREEN_HOUSE_PLUS;
     public static MetaTileEntityHugeMiner HUGE_MINER;
     public static MetaTileEntityDataAccessHatch EDATA_ACCESS_HATCH;
     public static MetaTileEntityDataAccessHatch FDATA_ACCESS_HATCH;
@@ -330,6 +332,7 @@ public class GTQTMetaTileEntities {
         INTEGRATED_ORE_PROCESSOR= registerMetaTileEntity(3189, new MetaTileEntityIntegratedOreProcessor(gtqtcoreId("integrated_ore_processor")));
         FLUIDIZED_BED= registerMetaTileEntity(3190, new MetaTileEntityFluidizedBed(gtqtcoreId("fluidzed_bed")));
         ELECTRIC_ARC_FURNACE= registerMetaTileEntity(3191, new MetaTileEntityElectricArcFurnace(gtqtcoreId("electric_arc_furnace")));
+        GREEN_HOUSE_PLUS= registerMetaTileEntity(3192, new MetaTileEntityGreenhousePlus(gtqtcoreId("green_house_plus")));
         //重写设备
         DISTILLATION_TOWER = registerMetaTileEntity(3250, new MetaTileEntityDistillationTower(gtqtcoreId("distillation_tower")));
         CRACKER = registerMetaTileEntity(3251, new MetaTileEntityCrackingUnit(gtqtcoreId("cracker")));
@@ -367,6 +370,7 @@ public class GTQTMetaTileEntities {
         HUGE_MINER = registerMetaTileEntity(3404, new MetaTileEntityHugeMiner(gtqtcoreId("large_miner.uv"), GTValues.UV, 2, 10, 8,  128));
         ADVANCED_HUGE_MINER = registerMetaTileEntity(3405, new MetaTileEntityHugeMiner(gtqtcoreId("large_miner.uhv"), GTValues.UHV, 3, 12, 9 , 256));
         GAS_COLLECTOR = registerMetaTileEntity(3406, new MetaTileEntityGasCollector(gtqtcoreId("gas_collector")));
+        INDUSTRY_WATER_PUMP = registerMetaTileEntity(3407, new MetaTileEntityIndustryWaterPump(gtqtcoreId("industry_water_pump")));
         //KQCC
         KQCC= registerMetaTileEntity(3450, new MetaTileEntityKQCC(gtqtcoreId("kqcc")));
         KQNS=registerMetaTileEntity(3451,new MetaTileEntityKQNetworkSwitch(gtqtcoreId("kqns")));

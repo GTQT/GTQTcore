@@ -782,7 +782,16 @@ gregtech.material.sgilvhuazhe=高淳四氯化锗
 gregtech.material.egryanghuazhe=高纯二氧化锗
 
 
-
+gregtech.material.dfeltamethrin=杀虫剂-溴氰菊酯
+gregtech.material.deltamethrin=溴氰菊酯
+gregtech.material.dfeltamethrina=二溴水苯
+gregtech.material.dfeltamethrinb=二溴苯酚
+gregtech.material.dfeltamethrinc=二溴-2-丙酮酚
+gregtech.material.dfeltamethrind=二溴-2-丙酮酚盐酸盐
+gregtech.material.dfeltamethrine=二溴菊酸
+gregtech.material.dfeltamethrinf=二溴菊酰氯
+gregtech.material.dfeltamethring=间苯氧基苯甲醛
+gregtech.material.dfeltamethrinh=α-氰基间苯氧基苯甲醇
 
 
 gregtech.material.nitinol=镍钛诺合金
@@ -896,13 +905,14 @@ metaitem.prospector.uiv.name=电动勘探扫描仪（UIV）
 gtqtcore.machine.mining_drill.name=大型采矿钻机
 recipemap.mining_drill.name=矿机钻井
 gtqtcore.machine.msf.name=大型闪蒸器
+gtqtcore.machine.green_house_plus.name=大型温室
 recipemap.sfm.name=闪蒸
 gtqtcore.machine.electric_arc_furnace.name=大型电极电弧炉
 recipemap.blast_arc_furnace.name=冶金
 gtqtcore.machine.mdi.tooltip.2=工作时消耗钻头耐久度，耐久度全部消耗后结构将会删除钻头，需要手动安装。
 gtqtcore.machine.mdi.tooltip.3=多方块结构每升级一次，并行数量翻倍，钻头等级决定支持的配方等级。
 gtqtcore.machine.mdi.tooltip.1=还在手动挖矿？你居然还在手动挖矿？
-
+gtqtcore.machine.greenhouse.tooltip.4=升级结构，提供农药，生物质提升机器效率。
 gregtech.machine.fb.tooltip.1=可拓展结构：散热模块,装配后可调节更大范围的冷却效率
 gregtech.machine.fb.tooltip.2=多方块在开机后持续升温，对应不同区间的温度有不同的并行加成,待机时温度会自然下降
 gregtech.machine.fb.tooltip.3=拓展结构升级后耗时缩短为原先的四分之一
@@ -952,6 +962,7 @@ gtqtcore.machine.laser_engraving.name=激光雕刻机
 recipemap.laser_engraving.name=光掩模雕刻
 recipemap.biological_reaction_recipes.name=生物反应
 gtqtcore.machine.fluidzed_bed.name=大型流化床
+gtqtcore.machine.industry_water_pump.name=工业水泵
 recipemap.fluidized_bed.name=流化加工
 recipemap.solar_plate.name=太阳能
 recipemap.cw_laser_engraver.name=激光切割
@@ -963,6 +974,8 @@ gtqtcore.machine.kqns.name=网络交换机
 gregtech.multiblock.kqns.tier=交换机等级: %s
 gregtech.multiblock.kqns.max=算力负荷: %s / %s
 gregtech.universal.tooltip.kqcc=端口等级:%s
+gtqtcore.multiblock.gr.tooltips1=结构等级: %s 加热器等级；%s
+gtqtcore.multiblock.gr.tooltips2=杀虫剂余量: %s
 gregtech.machine.wireless.export.tooltip=§c其实是动力仓(还没做完)
 gregtech.machine.wireless.import.tooltip=§a其实是能源仓(还没做完)
 gtqtcore.multiblock.tank.height=高度: %s

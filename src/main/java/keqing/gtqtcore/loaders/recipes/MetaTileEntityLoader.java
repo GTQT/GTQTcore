@@ -15,6 +15,7 @@ import gregtech.common.blocks.BlockMachineCasing;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.BlockSteamCasing;
 import gregtech.common.blocks.MetaBlocks;
+import gregtech.common.blocks.wood.BlockGregPlanks;
 import gregtech.common.items.MetaItems;
 import gregtech.common.metatileentities.MetaTileEntities;
 import gregtech.loaders.recipe.CraftingComponent;
@@ -138,7 +139,12 @@ public class MetaTileEntityLoader {
                 "hCw", " R ", 'R', new UnificationEntry(OrePrefix.ring, Adamantite), 'C',
                 GTQTMetaBlocks.TURBINE_CASING1.getItemVariant(AD_TURBINE_CASING));
 
-
+        ModHandler.addShapedRecipe(true, "industry_pump",INDUSTRY_WATER_PUMP.getStackForm(),
+                "ABA", "CHC","ABA",
+                'H', MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.LV),
+                'C', new UnificationEntry(pipeLargeFluid, Steel),
+                'B', new UnificationEntry(plate, Iron),
+                'A', new UnificationEntry(plate, Invar));
 
         ModHandler.addShapedRecipe(true, "ulv_casing", HULL[0].getStackForm(),
                 "ABA", "CHC","ABA",

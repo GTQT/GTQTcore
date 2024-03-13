@@ -445,6 +445,16 @@ public class GTQTMaterials {
     public static Material Fujizhechendian;
     public static Material Ssilvhuazhe;
     public static Material Rzousuan;
+    public static Material Dfeltamethrin;
+    public static Material Deltamethrin;
+    public static Material Dfeltamethrina;
+    public static Material Dfeltamethrinb;
+    public static Material Dfeltamethrinc;
+    public static Material Dfeltamethrind;
+    public static Material Dfeltamethrine;
+    public static Material Dfeltamethrinf;
+    public static Material Dfeltamethring;
+    public static Material Dfeltamethrinh;
 
     //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/api/unification/GSMaterials.java
 

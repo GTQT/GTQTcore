@@ -40,6 +40,7 @@ import static gregtech.common.blocks.BlockFusionCasing.CasingType.SUPERCONDUCTOR
 import static gregtech.common.items.MetaItems.*;
 import static gregtech.common.metatileentities.MetaTileEntities.*;
 import static gregtech.common.metatileentities.MetaTileEntities.ROTOR_HOLDER;
+import static gregtechfoodoption.machines.GTFOTileEntities.GREENHOUSE;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.common.block.blocks.GTQTKQCC.CasingType.COMPUTER_VENT;
@@ -122,7 +123,7 @@ public class KeQingNET {
         //物品支架
         ASSEMBLER_RECIPES.recipeBuilder()
                 .input(GOOD_CIRCUIT_BOARD)
-                .input(circuit, Tier.MV,8)
+                .input(circuit, Tier.MV,2)
                 .input(wireFine, Aluminium, 2)
                 .input(gearSmall, Copper, 4)
                 .input(plateDense, Aluminium, 4)
@@ -173,6 +174,21 @@ public class KeQingNET {
                 .fluidInputs(Polybenzimidazole.getFluid(L * 8))
                 .stationResearch(b -> b.researchStack(ADVANCED_DATA_ACCESS_HATCH.getStackForm()).CWUt(2048))
                 .duration(4000000).EUt(6000).buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(GREENHOUSE,4)
+                .input(circuit, Tier.HV, 4)
+                .input(ELECTRIC_PUMP_HV, 4)
+                .input(ROBOT_ARM_HV, 4)
+                .input(plateDense, StainlessSteel, 4)
+                .input(foil, StainlessSteel, 64)
+                .output(GREEN_HOUSE_PLUS)
+                .fluidInputs(SolderingAlloy.getFluid(L * 8))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 8))
+                .scannerResearch(b -> b
+                        .researchStack(GREENHOUSE.getStackForm())
+                        .EUt(VA[HV]))
+                .duration(4000).EUt(1960).buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .inputs(HULL[2].getStackForm())

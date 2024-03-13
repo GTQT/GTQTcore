@@ -1869,5 +1869,79 @@ public class FirstDegreeMaterials {
                 .build()
                 .setFormula("Ge02",true);
 
+        //杀虫剂
+        GTQTMaterials.Dfeltamethrin = new Material.Builder(getMaterialsId(), gregtechId("dfeltamethrin"))
+                .fluid()
+                .color(0x0000EE)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("C22H19Br2NO3",true);
+
+        //溴氰菊酯
+        GTQTMaterials.Deltamethrin = new Material.Builder(getMaterialsId(), gregtechId("deltamethrin"))
+                .dust()
+                .components(Carbon, 22, Hydrogen, 19, Bromine, 2, Nitrogen, 1,Oxygen,3)
+                .color(0x0000FF)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("C22H19Br2NO3",true);
+
+        //二溴水苯
+        GTQTMaterials.Dfeltamethrina = new Material.Builder(getMaterialsId(), gregtechId("dfeltamethrina"))
+                .fluid()
+                .color(0x006400)
+                .flags(DISABLE_DECOMPOSITION)
+                .components(Carbon, 22, Hydrogen, 19, Bromine, 2, Nitrogen, 1,Oxygen,3)
+                .build();
+
+        //二溴苯酚
+        GTQTMaterials.Dfeltamethrinb = new Material.Builder(getMaterialsId(), gregtechId("dfeltamethrinb"))
+                .fluid()
+                .color(0x00688B)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("C6H4Br2O",true);
+        //二溴-2-丙酮酚
+        GTQTMaterials.Dfeltamethrinc = new Material.Builder(getMaterialsId(), gregtechId("dfeltamethrinc"))
+                .fluid()
+                .color(0x00868B)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("C6H4Br2O",true);
+        //二溴-2-丙酮酚盐酸盐
+        GTQTMaterials.Dfeltamethrind = new Material.Builder(getMaterialsId(), gregtechId("dfeltamethrind"))
+                .fluid()
+                .color(0x008B00)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("C6H4Br2O*HCl",true);
+        //二溴菊酸
+        GTQTMaterials.Dfeltamethrine = new Material.Builder(getMaterialsId(), gregtechId("dfeltamethrine"))
+                .fluid()
+                .color(0x008B45)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("C8H10Br2O2",true);
+        //二溴菊酰氯
+        GTQTMaterials.Dfeltamethrinf = new Material.Builder(getMaterialsId(), gregtechId("dfeltamethrinf"))
+                .fluid()
+                .color(0x008B8B)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("C8H10Br2O2*CN",true);
+        //间苯氧基苯甲醛
+        GTQTMaterials.Dfeltamethring = new Material.Builder(getMaterialsId(), gregtechId("dfeltamethring"))
+                .fluid()
+                .color(0x009ACD)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("C13H10O2",true);
+        //α-氰基间苯氧基苯甲醇
+        GTQTMaterials.Dfeltamethrinh = new Material.Builder(getMaterialsId(), gregtechId("dfeltamethrinh"))
+                .fluid()
+                .color(0x00B2EE)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("C22H19Br2NO3",true);
     }
 }
