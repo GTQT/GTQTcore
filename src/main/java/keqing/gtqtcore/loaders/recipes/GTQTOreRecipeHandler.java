@@ -9,7 +9,6 @@ import keqing.gtqtcore.api.unification.ore.GTQTOrePrefix;
 public class GTQTOreRecipeHandler {
 
     public static void init(){
-        if (ConfigHolder.worldgen.allUniqueStoneTypes) {
             GTQTOrePrefix.oreGabbro.addProcessingHandler(PropertyKey.ORE, OreRecipeHandler::processOre);
             GTQTOrePrefix.oreGneiss.addProcessingHandler(PropertyKey.ORE, OreRecipeHandler::processOre);
             GTQTOrePrefix.oreLimestone.addProcessingHandler(PropertyKey.ORE, OreRecipeHandler::processOre);
@@ -19,6 +18,6 @@ public class GTQTOreRecipeHandler {
             GTQTOrePrefix.oreSlate.addProcessingHandler(PropertyKey.ORE, OreRecipeHandler::processOre);
             GTQTOrePrefix.oreSoapstone.addProcessingHandler(PropertyKey.ORE, OreRecipeHandler::processOre);
             GTQTOrePrefix.oreKimberlite.addProcessingHandler(PropertyKey.ORE, OreRecipeHandler::processOre);
-        }
+
     }
 }

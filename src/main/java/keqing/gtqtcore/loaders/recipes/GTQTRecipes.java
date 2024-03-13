@@ -61,7 +61,6 @@ public class GTQTRecipes {
     }
 
     public static void registerTool(){
-        regstone();
         plate.addProcessingHandler(PropertyKey.TOOL, GTQTRecipes::gcmTool);
         milled.addProcessingHandler(PropertyKey.ORE,GTQTRecipes::processMilled);
         fcrop.addProcessingHandler(PropertyKey.INGOT,GTQTRecipes::processCrops);
@@ -88,19 +87,6 @@ public class GTQTRecipes {
         OrePrefix.springSmall.addProcessingHandler(PropertyKey.INGOT, GTQTRecipes::processSpringSmall);
         OrePrefix.foil.addProcessingHandler(PropertyKey.INGOT, GTQTRecipes::processFoil);
         OrePrefix.rotor.addProcessingHandler(PropertyKey.INGOT, GTQTRecipes::processRotorA);
-    }
-    public static void regstone(){
-        if (ConfigHolder.worldgen.allUniqueStoneTypes) {
-            GTQTOrePrefix.oreGabbro.addProcessingHandler(PropertyKey.ORE, OreRecipeHandler::processOre);
-            GTQTOrePrefix.oreGneiss.addProcessingHandler(PropertyKey.ORE, OreRecipeHandler::processOre);
-            GTQTOrePrefix.oreLimestone.addProcessingHandler(PropertyKey.ORE, OreRecipeHandler::processOre);
-            GTQTOrePrefix.orePhyllite.addProcessingHandler(PropertyKey.ORE, OreRecipeHandler::processOre);
-            GTQTOrePrefix.oreQuartzite.addProcessingHandler(PropertyKey.ORE, OreRecipeHandler::processOre);
-            GTQTOrePrefix.oreShale.addProcessingHandler(PropertyKey.ORE, OreRecipeHandler::processOre);
-            GTQTOrePrefix.oreSlate.addProcessingHandler(PropertyKey.ORE, OreRecipeHandler::processOre);
-            GTQTOrePrefix.oreSoapstone.addProcessingHandler(PropertyKey.ORE, OreRecipeHandler::processOre);
-            GTQTOrePrefix.oreKimberlite.addProcessingHandler(PropertyKey.ORE, OreRecipeHandler::processOre);
-        }
     }
 
     private static void processShell(OrePrefix orePrefix, Material material, IngotProperty ingotProperty) {
