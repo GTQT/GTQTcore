@@ -18,6 +18,9 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem IMPREGNATED_EPOXY;
     public static MetaItem<?>.MetaValueItem MEMORY_CARD;
 
+    public static MetaItem<?>.MetaValueItem SOLAR_PLATE_MKI;
+    public static MetaItem<?>.MetaValueItem SOLAR_PLATE_MKII;
+    public static MetaItem<?>.MetaValueItem SOLAR_PLATE_MKIII;
     public static MetaItem<?>.MetaValueItem MOLD_GAS;
     public static MetaItem<?>.MetaValueItem MOLD_MOTOR;
     public static MetaItem<?>.MetaValueItem IMPREGNATED_PLASTIC_SUBSTRATE;

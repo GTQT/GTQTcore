@@ -106,6 +106,10 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         AE_C=this.addItem(85, "ae.c").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_NE);
         //fluix束能器
         AE_FLUIX_FIRM=this.addItem(86, "ae.fluix_firm").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_NE);
+        //光伏板
+        SOLAR_PLATE_MKI=this.addItem(90, "solar_plate_mki").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        SOLAR_PLATE_MKII=this.addItem(91, "solar_plate_mkii").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        SOLAR_PLATE_MKIII=this.addItem(92, "solar_plate_mkiii").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         //神秘农业
         COPPER_CROP = addItem(200, "copper_crop");
         COPPER_CROP.addComponents(new GTQTCropSeedBehaviour(GTQTCrops.COPPER_CROP, COPPER_CROP.getStackForm(), COPPER_CROP.getStackForm())).setCreativeTabs(CommonProxy.GTQTCore_BIO);

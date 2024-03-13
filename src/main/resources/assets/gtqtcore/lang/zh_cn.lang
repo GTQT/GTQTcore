@@ -793,7 +793,9 @@ gregtech.material.dfeltamethrinf=二溴菊酰氯
 gregtech.material.dfeltamethring=间苯氧基苯甲醛
 gregtech.material.dfeltamethrinh=α-氰基间苯氧基苯甲醇
 
-
+metaitem.solar_plate_mki.name=粗制光伏板
+metaitem.solar_plate_mkii.name=标准光伏板
+metaitem.solar_plate_mkiii.name=精致光伏板
 gregtech.material.nitinol=镍钛诺合金
 gregtech.material.almandine_front=铁铝榴石泡沫
 gregtech.material.pentlandite_front=镍黄铁矿泡沫
