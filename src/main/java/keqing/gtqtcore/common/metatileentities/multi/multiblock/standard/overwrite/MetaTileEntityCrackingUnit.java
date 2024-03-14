@@ -94,6 +94,7 @@ public class MetaTileEntityCrackingUnit extends GTQTRecipeMapMultiblockOverwrite
         return (int)(Math.min(this.energyContainer.getEnergyCapacity()/32,VA[casingTier]));
 
     }
+
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
@@ -101,17 +102,12 @@ public class MetaTileEntityCrackingUnit extends GTQTRecipeMapMultiblockOverwrite
                 .aisle("HCHCH", "H###H", "HCHCH")
                 .aisle("HCHCH", "HCOCH", "HCHCH")
                 .where('O', selfPredicate())
-                .where('H', TiredTraceabilityPredicate.CP_CASING
-                        .or(abilities(MultiblockAbility.IMPORT_ITEMS).setExactLimit(1))
-                        .or(abilities(MultiblockAbility.MAINTENANCE_HATCH).setExactLimit(1))
-                        .or(abilities(MultiblockAbility.EXPORT_FLUIDS).setExactLimit(1))
-                        .or(abilities(MultiblockAbility.MUFFLER_HATCH).setExactLimit(1))
-                        .or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(3))
-                        .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setExactLimit(2)))
+                .where('H', TiredTraceabilityPredicate.CP_CASING.setMinGlobalLimited(12).or(autoAbilities()))
                 .where('#', air())
                 .where('C', heatingCoils())
                 .build();
     }
+
     @SideOnly(Side.CLIENT)
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
         switch (this.casingTier) {
