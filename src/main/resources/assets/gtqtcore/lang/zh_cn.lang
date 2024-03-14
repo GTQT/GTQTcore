@@ -747,12 +747,6 @@ item.material.oreprefix.oreSoapstone=皂石%s矿石
 item.material.oreprefix.oreKimberlite=金伯利岩%s矿石
 
 gregtech.material.amblygonite=磷铝锂石
-gregtech.material.infused_order=序
-gregtech.material.infused_entropy=熵
-gregtech.material.infused_earth=土
-gregtech.material.infused_water=流
-gregtech.material.infused_fire=焱
-gregtech.material.infused_air=气
 gregtech.material.cryolite=冰晶石
 gregtech.material.crocoite=铬铅矿
 gregtech.material.zincantimonygalvanite=锌锑方辉银矿
@@ -760,8 +754,6 @@ gregtech.material.pyrargyrite=深红银矿
 gregtech.material.lignite=褐煤
 gregtech.material.rich_gold_sulphide=含金多金属矿石
 gregtech.material.lean_gold_sulphide=贫硫化金矿石
-
-
 
 gregtech.material.yanghuashanxinhunhewu=氧化闪锌混合物
 gregtech.material.fujishanxinhunhewu=富集闪锌混合物

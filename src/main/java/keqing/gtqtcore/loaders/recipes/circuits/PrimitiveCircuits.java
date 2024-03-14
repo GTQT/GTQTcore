@@ -11,6 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
 
+import static gregtech.api.unification.ore.OrePrefix.wireGtSingle;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 import static gregtech.api.GTValues.*;
@@ -41,27 +42,23 @@ public class PrimitiveCircuits {
                 .output(OrePrefix.dust, Kovar, 7)
                 .duration(160).EUt(VA[ULV]).buildAndRegister();
 
-
-
-        removeGTCERecipes();
-
         ModHandler.addShapedRecipe("vacuum_tube_components", VACUUM_TUBE_COMPONENTS.getStackForm(),
                 "RGR", "WWW",
                 'R', new UnificationEntry(OrePrefix.stick, Steel),
                 'G', new UnificationEntry(OrePrefix.dust, Glowstone),
-                'W', new UnificationEntry(OrePrefix.wireGtSingle, Copper));
+                'W', new UnificationEntry(wireGtSingle, Copper));
 
         ModHandler.addShapedRecipe("vacuum_tube_components_foil", VACUUM_TUBE_COMPONENTS.getStackForm(),
                 "RGR", "WWW",
                 'R', new UnificationEntry(OrePrefix.stick, Steel),
                 'G', new UnificationEntry(OrePrefix.foil, Gold),
-                'W', new UnificationEntry(OrePrefix.wireGtSingle, Copper));
+                'W', new UnificationEntry(wireGtSingle, Copper));
 
         for (Material copper : new Material[]{Copper, AnnealedCopper}) {
             ASSEMBLER_RECIPES.recipeBuilder()
                     .input(OrePrefix.foil, Gold)
                     .input(OrePrefix.bolt, Steel, 2)
-                    .input(OrePrefix.wireGtSingle, copper, 2)
+                    .input(wireGtSingle, copper, 2)
                     .circuitMeta(1)
                     .output(VACUUM_TUBE_COMPONENTS, copper == Copper ? 2 : 4)
                     .duration(120).EUt(VA[ULV]).buildAndRegister();
@@ -69,32 +66,12 @@ public class PrimitiveCircuits {
             ASSEMBLER_RECIPES.recipeBuilder()
                     .input(OrePrefix.foil, Gold)
                     .input(OrePrefix.bolt, Steel)
-                    .input(OrePrefix.wireGtSingle, copper, 2)
+                    .input(wireGtSingle, copper, 2)
                     .fluidInputs(RedAlloy.getFluid(L / 8))
                     .output(VACUUM_TUBE_COMPONENTS, copper == Copper ? 4 : 6)
                     .duration(120).EUt(VA[ULV]).buildAndRegister();
         }
 
 
-    }
-
-    private static void removeGTCERecipes() {
-        ModHandler.removeRecipeByName(new ResourceLocation("gregtech:vacuum_tube"));
-
-        for (Material copper : new Material[]{Copper, AnnealedCopper}) {
-            GTRecipeHandler.removeRecipesByInputs(ASSEMBLER_RECIPES,
-                    GLASS_TUBE.getStackForm(),
-                    OreDictUnifier.get(OrePrefix.bolt, Steel, 2),
-                    OreDictUnifier.get(OrePrefix.wireGtSingle, copper, 2),
-                    IntCircuitIngredient.getIntegratedCircuit(1));
-
-            GTRecipeHandler.removeRecipesByInputs(ASSEMBLER_RECIPES,
-                    new ItemStack[]{
-                        GLASS_TUBE.getStackForm(),
-                        OreDictUnifier.get(OrePrefix.bolt, Steel, 2),
-                        OreDictUnifier.get(OrePrefix.wireGtSingle, copper, 2),
-                        IntCircuitIngredient.getIntegratedCircuit(1)
-                    }, new FluidStack[]{RedAlloy.getFluid(L / 8)});
-        }
     }
 }

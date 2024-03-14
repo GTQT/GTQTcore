@@ -95,30 +95,7 @@ public class HigherDegreeMaterials {
                 .build();
 
         // 神秘六要素
-        GTQTMaterials.infused_air= new Material.Builder(getMaterialsId(), gregtechId("infused_air"))
-                .color(0xFEFE7D)
-                .ore().gem().fluid()
-                .build();
-        GTQTMaterials.infused_fire= new Material.Builder(getMaterialsId(), gregtechId("infused_fire"))
-                .color(0xFE3C01)
-                .ore().gem().fluid()
-                .build();
-        GTQTMaterials.infused_water= new Material.Builder(getMaterialsId(), gregtechId("infused_water"))
-                .color(0x0090FF)
-                .ore().gem().fluid()
-                .build();
-        GTQTMaterials.infused_earth= new Material.Builder(getMaterialsId(), gregtechId("infused_earth"))
-                .color(0x00A000)
-                .ore().gem().fluid()
-                .build();
-        GTQTMaterials.infused_entropy= new Material.Builder(getMaterialsId(), gregtechId("infused_entropy"))
-                .color(0x43435E)
-                .ore().gem().fluid()
-                .build();
-        GTQTMaterials.infused_order= new Material.Builder(getMaterialsId(), gregtechId("infused_order"))
-                .color(0xEECCFF)
-                .ore().gem().fluid()
-                .build();
+
         // 磷铝锂石
         GTQTMaterials.Amblygonite= new Material.Builder(getMaterialsId(), gregtechId("amblygonite"))
                 .ore()
