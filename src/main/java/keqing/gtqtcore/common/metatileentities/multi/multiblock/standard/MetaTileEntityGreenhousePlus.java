@@ -118,7 +118,7 @@ public class MetaTileEntityGreenhousePlus extends RecipeMapMultiblockController 
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
-        coilHeight = context.getInt("Count")/7;
+        coilHeight = context.getInt("Count")/3;
 
         Object coilType = context.get("CoilType");
         if (coilType instanceof IHeatingCoilBlockStats) {
@@ -135,13 +135,13 @@ public class MetaTileEntityGreenhousePlus extends RecipeMapMultiblockController 
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
-                .aisle("CCCCCCC", "XXXFXXX", "XXXFXXX", "XXXFXXX", "XXXFXXX", "XXXFXXX", "XXXFXXX", "XXXFXXX", "   F   ")
-                .aisle("CDDDDDC", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", " XXFXX ")
-                .aisle("CDDDDDC", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", " XXFXX ")
-                .aisle("CDDDDDC", "F##H##F", "F##H##F", "F##H##F", "F##H##F", "F##H##F", "F##H##F", "F##H##F", "FFFFFFF").setRepeatable(1, 10)
-                .aisle("CDDDDDC", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", " XXFXX ")
-                .aisle("CDDDDDC", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", " XXFXX ")
-                .aisle("CCCYCCC", "XXXFXXX", "XXXFXXX", "XXXFXXX", "XXXFXXX", "XXXFXXX", "XXXFXXX", "XXXFXXX", "   F   ")
+                .aisle("CCCCCCC", "CCCCCCC", "CCCCCCC", "XXXFXXX", "XXXFXXX", "XXXFXXX", "XXXFXXX", "XXXFXXX", "   F   ")
+                .aisle("CCCCCCC", "CDDDDDC", "C#####C", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", " XXFXX ")
+                .aisle("CCCCCCC", "CDDDDDC", "C#####C", "F#####F", "F#####F", "F#####F", "F#####F", "F#####F", "FFFFFFF")
+                .aisle("CCCCCCC", "CHDDDHC", "CH###HC", "X#####X", "X#####X", "X#####X", "X#####X", "X##H##X", "FXXFXXF").setRepeatable(1, 10)
+                .aisle("CCCCCCC", "CDDDDDC", "C#####C", "F#####F", "F#####F", "F#####F", "F#####F", "F#####F", "FFFFFFF")
+                .aisle("CCCCCCC", "CDDDDDC", "C#####C", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", " XXFXX ")
+                .aisle("CCCYCCC", "CCCCCCC", "CCCCCCC", "XXXFXXX", "XXXFXXX", "XXXFXXX", "XXXFXXX", "XXXFXXX", "   F   ")
                 .where('X', states(getCasingState()))
                 .where('F', states(getFrameState()))
                 .where('D', states(Blocks.DIRT.getDefaultState(), Blocks.GRASS.getDefaultState()).or(states(GRASSES)))
