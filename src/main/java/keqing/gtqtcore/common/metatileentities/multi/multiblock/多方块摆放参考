@@ -1,0 +1,11 @@
+精确数值
+.setExactLimit(1)
+最大最小总数值
+.setMinGlobalLimited(1).setMaxGlobalLimited(1)
+预览显示数量
+.setPreviewCount(1)
+最大最小每层数值
+.setMinLayerLimited(1).setMaxLayerLimited(1)
+常用
+.setExactLimit(1).setPreviewCount(1)
+.setMinGlobalLimited(1).setMaxGlobalLimited(2).setPreviewCount(1)

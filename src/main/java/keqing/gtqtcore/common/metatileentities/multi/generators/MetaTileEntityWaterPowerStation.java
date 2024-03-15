@@ -54,7 +54,7 @@ import java.util.List;
 import java.util.Random;
 
 import static gregtech.api.util.RelativeDirection.*;
-
+//水电站
 public class MetaTileEntityWaterPowerStation extends MultiblockWithDisplayBase implements  IProgressBarMultiblock {
     private int tier;
     private int coilLevel;
@@ -110,22 +110,25 @@ public class MetaTileEntityWaterPowerStation extends MultiblockWithDisplayBase i
 
     @Override
     protected BlockPattern createStructurePattern() {
-        FactoryBlockPattern pattern = FactoryBlockPattern.start(FRONT, UP, RIGHT)
+        FactoryBlockPattern pattern = FactoryBlockPattern.start(RIGHT, UP, FRONT)
+                .aisle("YYY", "YYY", "YYY", " S ")
                 .aisle("YYY", "YYY", "YYY", " Y ")
-                .aisle("YYY", "YYY", "YYI", " S ")
-                .aisle("YYY", "YYY", "YYH", " Y ")
-                .aisle("FFF", "FCF", "YYE", " Y ").setRepeatable(1, 36)
+                .aisle("YYY", "YYY", "YYY", " Y ")
+                .aisle("FFF", "FCF", "EYE", " E ").setRepeatable(1, 36)
                 .aisle("YYY", "YYY", "YYY", " Y ")
                 .where('S', selfPredicate())
-                .where('Y',states(getCasingAState()))
-                .where('H',(abilities(MultiblockAbility.MAINTENANCE_HATCH)))
-                .where('E',(abilities(MultiblockAbility.OUTPUT_ENERGY)))
-                .where('I',(abilities(MultiblockAbility.IMPORT_FLUIDS)))
+                .where('Y',states(getCasingAState())
+                        .or(abilities(MultiblockAbility.MAINTENANCE_HATCH).setExactLimit(1).setPreviewCount(1))
+                )
+                .where('E',states(getCasingAState())
+                        .or(abilities(MultiblockAbility.OUTPUT_ENERGY).setMinLayerLimited(1).setMaxLayerLimited(1))
+                )
                 .where('C', heatingCoils())
                 .where('F', states(getFrameState()))
                 .where(' ', any());
         return pattern.build();
     }
+
     public boolean hasMufflerMechanics() {
         return false;
     }

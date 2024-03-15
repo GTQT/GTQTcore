@@ -54,7 +54,7 @@ import java.util.List;
 import static gregtech.api.GTValues.VA;
 import static gregtech.api.unification.material.Materials.Lava;
 import static gregtech.api.unification.material.Materials.Water;
-
+//大型流化床
 public class MetaTileEntityFluidizedBed extends RecipeMapMultiblockController implements IProgressBarMultiblock {
     boolean auxiliaryBlastFurnaceNumber;
     int temp;
