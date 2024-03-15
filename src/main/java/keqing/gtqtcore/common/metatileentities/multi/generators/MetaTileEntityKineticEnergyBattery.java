@@ -6,14 +6,21 @@ import codechicken.lib.vec.Matrix4;
 import gregtech.api.block.IHeatingCoilBlockStats;
 import gregtech.api.capability.*;
 import gregtech.api.capability.impl.EnergyContainerList;
+import gregtech.api.gui.GuiTextures;
+import gregtech.api.gui.Widget;
+import gregtech.api.gui.resources.TextureArea;
+import gregtech.api.gui.widgets.ClickButtonWidget;
+import gregtech.api.gui.widgets.WidgetGroup;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
+import gregtech.api.metatileentity.multiblock.IProgressBarMultiblock;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.MultiblockWithDisplayBase;
 import gregtech.api.pattern.*;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.util.BlockInfo;
+import gregtech.api.util.TextComponentUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.TooltipHelper;
@@ -31,20 +38,25 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nonnull;
 import java.util.*;
 import static gregtech.api.util.RelativeDirection.*;
 import static java.lang.Math.*;
 
 //动能电池2024.3.14v1.0
-public class MetaTileEntityKineticEnergyBattery extends MultiblockWithDisplayBase implements IWorkable, IControllable {
+public class MetaTileEntityKineticEnergyBattery extends MultiblockWithDisplayBase implements IWorkable, IControllable, IProgressBarMultiblock {
     //定义电压
     private int tier;
+    int mod;
     //定义外壳
     private int casing;
     //定义线圈
@@ -70,7 +82,6 @@ public class MetaTileEntityKineticEnergyBattery extends MultiblockWithDisplayBas
     private IEnergyContainer outenergyContainer;
 //    protected ItemHandlerList itemImportInventory;
 //    protected ItemHandlerList itemExportInventory;
-
 
     //主方块工具提示
     @Override
@@ -219,43 +230,106 @@ public class MetaTileEntityKineticEnergyBattery extends MultiblockWithDisplayBas
         this.length = coilCount/4;
 
         this.tier = this.casing;
-
-        this.writeCustomData(GTQTValue.UPDATE_TIER, buf -> buf.writeInt(this.tier));
+        this.writeCustomData(GTQTValue.UPDATE_TIER,buf -> buf.writeInt(this.casing));
     }
-
 
     //gui数据
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
+        textList.add(new TextComponentTranslation("====================================="));
         textList.add(new TextComponentTranslation("gtqtcore.eke.count",length,casing,coilLevel));
         textList.add(new TextComponentTranslation("gtqtcore.eke.euMax",logic.euMax(),logic.speedMax()));
-        textList.add(new TextComponentTranslation("gtqtcore.eke.eu",eu,(double)(round(speed*100))/100, inputEu, outputEu));
+        textList.add(new TextComponentTranslation("gtqtcore.eke.eu1",eu,(double)(round(speed*100))/100));
+        textList.add(new TextComponentTranslation("gtqtcore.eke.eu2", inputEu, outputEu));
         if (this.isWorkingEnabled){
             if (euDelta>0){
-                textList.add(new TextComponentTranslation("gtqtcore.eke.output1",logic.powerMax(),euDelta,runDay, runTime, runMin,runS));
+                textList.add(new TextComponentTranslation("gtqtcore.eke.output1",logic.powerMax(),euDelta,runDay));
+                textList.add(new TextComponentTranslation("gtqtcore.eke.outputA",runTime, runMin,runS));
             }
             if (euDelta<0){
-                textList.add(new TextComponentTranslation("gtqtcore.eke.output2",logic.powerMax(),-euDelta,runDay, runTime, runMin,runS));
+                textList.add(new TextComponentTranslation("gtqtcore.eke.output2",logic.powerMax(),euDelta,runDay));
+                textList.add(new TextComponentTranslation("gtqtcore.eke.outputB",runTime, runMin,runS));
             }
             if (euDelta==0){
-                textList.add(new TextComponentTranslation("gtqtcore.eke.output3",logic.powerMax(),runDay, runTime, runMin,runS));
+                textList.add(new TextComponentTranslation("gtqtcore.eke.output3",logic.powerMax(),euDelta,runDay));
+                textList.add(new TextComponentTranslation("gtqtcore.eke.outputC",runTime, runMin,runS));
             }
         }else {
             textList.add(new TextComponentTranslation("gtqtcore.eke.output4",logic.powerMax()));
         }
+        textList.add(new TextComponentTranslation("====================================="));
     }
 
+    //进度条
+    @Override
+    public int getNumProgressBars() {
+        return 2;
+    }
+
+    @Override
+    public double getFillPercentage(int index) {
+        return index == 0 ? (eu*1.0) / logic.euMax() :
+                (double)((round(speed*100))/100)/logic.speedMax();
+    }
+
+    @Override
+    public TextureArea getProgressBarTexture(int index) {
+        return index == 0 ? GuiTextures.PROGRESS_BAR_HPCA_COMPUTATION : GuiTextures.PROGRESS_BAR_FUSION_HEAT;
+    }
+
+    @Override
+    public void addBarHoverText(List<ITextComponent> hoverList, int index) {
+        if (index == 0) {
+            ITextComponent cwutInfo = TextComponentUtil.stringWithColor(
+                    TextFormatting.AQUA,
+                    (eu*1.0)+ " / " +  logic.euMax() + " EU");
+            hoverList.add(TextComponentUtil.translationWithColor(
+                    TextFormatting.GRAY,
+                    "gregtech.multiblock.battery.EU",
+                    cwutInfo));
+        } else {
+            ITextComponent tempInfo = TextComponentUtil.stringWithColor(
+                    TextFormatting.AQUA,
+                    (double)((round(speed*100))/100)+ " / " +  logic.speedMax() + " Rad/t");
+            hoverList.add(TextComponentUtil.translationWithColor(
+                    TextFormatting.GRAY,
+                    "gregtech.multiblock.battery.Rad",
+                    tempInfo));
+        }
+    }
+    //按钮
+    @Override
+    @Nonnull
+    protected Widget getFlexButton(int x, int y, int width, int height) {
+        WidgetGroup group = new WidgetGroup(x, y, width, height);
+        group.addWidget(new ClickButtonWidget(0, 0, 9, 18, "", this::decrementThreshold)
+                .setButtonTexture(GuiTextures.BUTTON_THROTTLE_MINUS)
+                .setTooltipText("gtqtcore.multiblock.battery.threshold_decrement"));
+        group.addWidget(new ClickButtonWidget(9, 0, 9, 18, "", this::incrementThreshold)
+                .setButtonTexture(GuiTextures.BUTTON_THROTTLE_PLUS)
+                .setTooltipText("gtqtcore.multiblock.battery.threshold_increment"));
+        return group;
+    }
+
+    private void incrementThreshold(Widget.ClickData clickData) {
+        this.mod = MathHelper.clamp(mod + 1, 0, 3);
+    }
+
+    private void decrementThreshold(Widget.ClickData clickData) {
+        this.mod = MathHelper.clamp(mod - 1, 0, 3);
+    }
 
     //主方块数据存储
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
-        super.writeToNBT(data);
         data.setBoolean("isActive", isActive);
         data.setBoolean("isWorkingEnabled", isWorkingEnabled);
         data.setInteger("Eu", eu);
+        data.setInteger("casing", casing);
+        data.setInteger("mod", mod);
         data.setInteger("Speed", (int) speed);
-        return data;
+        return  super.writeToNBT(data);
     }
 //NBT读写这块需要搬过来  还有
     @Override
@@ -264,6 +338,8 @@ public class MetaTileEntityKineticEnergyBattery extends MultiblockWithDisplayBas
         isActive = data.getBoolean("isActive");
         isWorkingEnabled = data.getBoolean("isWorkingEnabled");
         eu = data.getInteger("Eu");
+        casing = data.getInteger("casing");
+        mod = data.getInteger("mod");
         speed = data.getInteger("Speed");
 
     }
@@ -272,6 +348,7 @@ public class MetaTileEntityKineticEnergyBattery extends MultiblockWithDisplayBas
         super.writeInitialSyncData(buf);
         buf.writeBoolean(isActive);
         buf.writeBoolean(isWorkingEnabled);
+        buf.writeInt(this.casing);
     }
 
     @Override
@@ -279,6 +356,7 @@ public class MetaTileEntityKineticEnergyBattery extends MultiblockWithDisplayBas
         super.receiveInitialSyncData(buf);
         isActive = buf.readBoolean();
         isWorkingEnabled = buf.readBoolean();
+        this.casing = buf.readInt();
     }
 
 
@@ -436,13 +514,6 @@ public class MetaTileEntityKineticEnergyBattery extends MultiblockWithDisplayBas
     @Override
     public void receiveCustomData(int dataId, PacketBuffer buf) {
         super.receiveCustomData(dataId, buf);
-        if (dataId == GregtechDataCodes.WORKABLE_ACTIVE) {
-            isActive = buf.readBoolean();
-            scheduleRenderUpdate();
-        } else if (dataId == GregtechDataCodes.WORKING_ENABLED) {
-            isWorkingEnabled = buf.readBoolean();
-            scheduleRenderUpdate();
-        }
         if(dataId == GTQTValue.UPDATE_TIER){
             this.casing = buf.readInt();
         }

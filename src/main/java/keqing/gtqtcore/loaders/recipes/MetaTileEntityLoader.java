@@ -31,8 +31,7 @@ import static gregicality.multiblocks.api.unification.GCYMMaterials.MolybdenumDi
 import static gregicality.multiblocks.api.unification.GCYMMaterials.TitaniumCarbide;
 import static gregtech.api.GTValues.L;
 import static gregtech.api.GTValues.VA;
-import static gregtech.api.recipes.RecipeMaps.ASSEMBLER_RECIPES;
-import static gregtech.api.recipes.RecipeMaps.ASSEMBLY_LINE_RECIPES;
+import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.MarkerMaterials.Tier.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.Materials.YttriumBariumCuprate;
@@ -268,11 +267,35 @@ public class MetaTileEntityLoader {
                 .output(SOLAR_PLATE)
                 .duration(2000).EUt(1960).buildAndRegister();
 
+        BLAST_RECIPES.recipeBuilder()
+                .input(dust,GalliumArsenide,16)
+                .input(plate,CSilicon,16)
+                .fluidInputs(Nitrogen.getFluid(4000))
+                .output(SOLAR_PLATE_MKI,1)
+                .blastFurnaceTemp(2700)
+                .duration(2000).EUt(480).buildAndRegister();
+
+        BLAST_RECIPES.recipeBuilder()
+                .input(dust,Germanium,16)
+                .input(plate,CSilicon,16)
+                .fluidInputs(Nitrogen.getFluid(4000))
+                .output(SOLAR_PLATE_MKII,1)
+                .blastFurnaceTemp(3600)
+                .duration(2000).EUt(1960).buildAndRegister();
+
+        BLAST_RECIPES.recipeBuilder()
+                .input(dust,IndiumGalliumPhosphide,16)
+                .input(plate,CSilicon,16)
+                .fluidInputs(Nitrogen.getFluid(4000))
+                .output(SOLAR_PLATE_MKIII,1)
+                .blastFurnaceTemp(4500)
+                .duration(2000).EUt(7680).buildAndRegister();
+
         ASSEMBLER_RECIPES.recipeBuilder()
                 .inputs(GTQTMetaBlocks.ELECTROBATH.getItemVariant(GTQTElectrobath.CasingType.SOLAR_PLATE_CASING))
                 .input(EMITTER_HV, 1)
                 .input(circuit, MarkerMaterials.Tier.HV,8)
-                .input(plate, CSilicon, 16)
+                .input(SOLAR_PLATE_MKI,4)
                 .fluidInputs(Polybenzimidazole.getFluid(L * 4))
                 .outputs(GTQTMetaBlocks.ELECTROBATH.getItemVariant(GTQTElectrobath.CasingType.SOLAR_PLATE_LV))
                 .duration(2000).EUt(1960).buildAndRegister();
@@ -281,7 +304,7 @@ public class MetaTileEntityLoader {
                 .inputs(GTQTMetaBlocks.ELECTROBATH.getItemVariant(GTQTElectrobath.CasingType.SOLAR_PLATE_CASING))
                 .input(EMITTER_EV, 1)
                 .input(circuit, MarkerMaterials.Tier.EV,8)
-                .input(plate, CSilicon, 16)
+                .input(SOLAR_PLATE_MKII,4)
                 .fluidInputs(Polybenzimidazole.getFluid(L * 4))
                 .outputs(GTQTMetaBlocks.ELECTROBATH.getItemVariant(GTQTElectrobath.CasingType.SOLAR_PLATE_MV))
                 .duration(2000).EUt(1960).buildAndRegister();
@@ -290,7 +313,7 @@ public class MetaTileEntityLoader {
                 .inputs(GTQTMetaBlocks.ELECTROBATH.getItemVariant(GTQTElectrobath.CasingType.SOLAR_PLATE_CASING))
                 .input(EMITTER_IV, 1)
                 .input(circuit, MarkerMaterials.Tier.IV,8)
-                .input(plate, CSilicon, 16)
+                .input(SOLAR_PLATE_MKIII,4)
                 .fluidInputs(Polybenzimidazole.getFluid(L * 4))
                 .outputs(GTQTMetaBlocks.ELECTROBATH.getItemVariant(GTQTElectrobath.CasingType.SOLAR_PLATE_HV))
                 .duration(2000).EUt(1960).buildAndRegister();
