@@ -60,7 +60,7 @@ import java.util.List;
 
 import static gregtech.api.unification.material.Materials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.Demulsifier;
-
+//预沉降池
 public class MetaTileEntityOilPool extends NoEnergyMultiblockController {
 
     float poruji; //破乳剂

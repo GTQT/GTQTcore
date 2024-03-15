@@ -46,7 +46,7 @@ import java.util.List;
 import static gregtech.api.GTValues.VA;
 import static gregtech.api.unification.material.Materials.Lubricant;
 
-
+//冰箱
 public class MetaTileEntityVacuumFreezer extends GTQTRecipeMapMultiblockOverwrite {
     private int tier;
     public MetaTileEntityVacuumFreezer(ResourceLocation metaTileEntityId) {

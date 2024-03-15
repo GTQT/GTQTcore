@@ -42,7 +42,7 @@ import java.util.List;
 
 import static gregtech.api.unification.material.Materials.Steam;
 import static gregtech.api.util.RelativeDirection.*;
-
+//闪蒸
 public class MetaTileEntityMSF extends GTQTRecipeMapMultiblockController implements  IProgressBarMultiblock {
     private int coilLevel;
     private int number;
@@ -226,9 +226,9 @@ public class MetaTileEntityMSF extends GTQTRecipeMapMultiblockController impleme
     @Override
     protected BlockPattern createStructurePattern() {
         FactoryBlockPattern pattern = FactoryBlockPattern.start(RIGHT, BACK, UP)
-                .aisle("YYY","YYY", "YYY", "YYY", " Y ")
-                .aisle("YYY","YYI", "YYI", "TYT", " S ")
-                .aisle("YYY","YYY", "YYG", "YYH", "FYF")
+                .aisle("HHH","HHH", "HHH", "HHH", " H ")
+                .aisle("HHH","HHH", "HHH", "HHH", " S ")
+                .aisle("HHH","HHH", "HHH", "HHH", "FHF")
                 .aisle("F F","FUF", "FUF", "FUF", "F F")
                 .aisle("F F","FUF", "FUF", "FUF", "F F")
                 .aisle("F F","FUF", "FUF", "FUF", "F F")
@@ -238,12 +238,14 @@ public class MetaTileEntityMSF extends GTQTRecipeMapMultiblockController impleme
                 .where('S', selfPredicate())
                 .where('Y',states(getCasingAState()))
                 .where('U',states(getCasingBState()))
-                .where('H',(abilities(MultiblockAbility.MAINTENANCE_HATCH)))
-                .where('T',(abilities(MultiblockAbility.INPUT_ENERGY)))
-                .where('G',(abilities(MultiblockAbility.IMPORT_ITEMS)))
+                .where('H',states(getCasingAState())
+                        .or(abilities(MultiblockAbility.MAINTENANCE_HATCH).setExactLimit(1).setPreviewCount(1))
+                        .or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(2).setPreviewCount(2))
+                        .or(abilities(MultiblockAbility.IMPORT_ITEMS).setExactLimit(1).setPreviewCount(1))
+                        .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setMinGlobalLimited(1).setMaxGlobalLimited(4).setPreviewCount(2))
+                )
                 .where('B',(abilities(MultiblockAbility.EXPORT_ITEMS)))
                 .where('O',(abilities(MultiblockAbility.EXPORT_FLUIDS)))
-                .where('I',(abilities(MultiblockAbility.IMPORT_FLUIDS)))
                 .where('C', coilPredicate())
                 .where('F', states(getFrameState()))
                 .where(' ', any());
