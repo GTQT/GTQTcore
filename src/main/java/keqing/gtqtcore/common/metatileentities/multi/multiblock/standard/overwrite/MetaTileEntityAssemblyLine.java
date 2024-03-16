@@ -71,8 +71,8 @@ import static gregtech.api.util.RelativeDirection.*;
 
 public class MetaTileEntityAssemblyLine extends RecipeMapMultiblockController {
     private int glass_tier;
+    private int laser_tier;
     private int casing_tier;
-    private int turbine_tier;
     int tier;
     private static final ResourceLocation LASER_LOCATION = GTUtility.gregtechId("textures/fx/laser/laser.png");
     private static final ResourceLocation LASER_HEAD_LOCATION = GTUtility
@@ -110,22 +110,22 @@ public class MetaTileEntityAssemblyLine extends RecipeMapMultiblockController {
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
-
+        Object laser_tier = context.get("ZWTiredStats");
         Object casing_tier = context.get("ChemicalPlantCasingTiredStats");
         Object turbine_tier = context.get("ChemicalPlantTubeTiredStats");
         Object glass_tier = context.get("LGLTiredStats");
 
+        this.laser_tier = GTQTUtil.getOrDefault(() -> laser_tier instanceof WrappedIntTired,
+                () -> ((WrappedIntTired)laser_tier).getIntTier(),
+                0);
         this.casing_tier = GTQTUtil.getOrDefault(() -> casing_tier instanceof WrappedIntTired,
                 () -> ((WrappedIntTired)casing_tier).getIntTier(),
-                0);
-        this.turbine_tier = GTQTUtil.getOrDefault(() -> turbine_tier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)turbine_tier).getIntTier(),
                 0);
         this.glass_tier = GTQTUtil.getOrDefault(() -> glass_tier instanceof WrappedIntTired,
                 () -> ((WrappedIntTired)glass_tier).getIntTier(),
                 0);
 
-        this.tier = Math.min(this.casing_tier,this.turbine_tier);
+        this.tier = Math.min(this.casing_tier,this.laser_tier);
 
         this.writeCustomData(GTQTValue.UPDATE_TIER,buf -> buf.writeInt(this.tier));
     }
@@ -148,7 +148,7 @@ public class MetaTileEntityAssemblyLine extends RecipeMapMultiblockController {
                                 .setMaxGlobalLimited(3)))
                 .where('I', metaTileEntities(MetaTileEntities.ITEM_IMPORT_BUS[GTValues.ULV]))
                 .where('G', TiredTraceabilityPredicate.CP_CASING)
-                .where('A', TiredTraceabilityPredicate.CP_TUBE)
+                .where('A', TiredTraceabilityPredicate.CP_ZW_CASING)
                 .where('R', TiredTraceabilityPredicate.CP_LGLASS)
                 .where('T', TiredTraceabilityPredicate.CP_CASING)
                 .where('D', dataHatchPredicate())
@@ -159,7 +159,7 @@ public class MetaTileEntityAssemblyLine extends RecipeMapMultiblockController {
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
-        textList.add(new TextComponentTranslation("gtqtcore.atier",tier,glass_tier, turbine_tier, casing_tier));
+        textList.add(new TextComponentTranslation("gtqtcore.atier",tier,glass_tier, laser_tier, casing_tier));
 
     }
     protected static TraceabilityPredicate fluidInputPredicate() {
