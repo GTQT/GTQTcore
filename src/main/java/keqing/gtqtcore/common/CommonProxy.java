@@ -60,12 +60,6 @@ public class CommonProxy {
             return GTQTMetaItems.DNA_ENCODER.getStackForm();
         }
     };
-    public static final CreativeTabs GTQTCore_SP = new CreativeTabs("gtqtsp") {
-        @Override
-        public ItemStack createIcon() {
-            return GTQTMetaItems.COMPUTERTIER6.getStackForm();
-        }
-    };
     public static final CreativeTabs GTQTCore_NE = new CreativeTabs("gtqtae") {
         @Override
         public ItemStack createIcon() {
@@ -175,7 +169,6 @@ public class CommonProxy {
         registry.register(GTQTMetaBlocks.ADV_GLASS);
         registry.register(GTQTMetaBlocks.WIRE_COIL);
         registry.register(GTQTMetaBlocks.QUANTUM_CASING);
-        registry.register(GTQTMetaBlocks.SPACE_ELEVATOR);
         registry.register(GTQTMetaBlocks.TURBINE_CASING);
         registry.register(GTQTMetaBlocks.TURBINE_CASING1);
         registry.register(GTQTMetaBlocks.QUANTUM_CONSTRAINT_CASING);
@@ -230,7 +223,6 @@ public class CommonProxy {
         registry.register(createItemBlock(GTQTMetaBlocks.ADV_GLASS, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.WIRE_COIL, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.QUANTUM_CASING, VariantItemBlock::new));
-        registry.register(createItemBlock(GTQTMetaBlocks.SPACE_ELEVATOR, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.TURBINE_CASING, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.TURBINE_CASING1, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.QUANTUM_CONSTRAINT_CASING, VariantItemBlock::new));
@@ -281,14 +273,6 @@ public class CommonProxy {
         ELEProperties.registeredTier(4,"四级");
         ELEProperties.registeredTier(5,"五级");
 
-        StarProperty.registeredNB(1,"射电望远镜-1级");
-        StarProperty.registeredNB(2,"远轨道卫星探测-2级");
-        StarProperty.registeredNB(3,"大型轨道望远镜-3级");
-        StarProperty.registeredNB(4,"太空探测阵列-4级");
-        StarProperty.registeredNB(5,"引力波探测-5级");
-        StarProperty.registeredNB(6,"不知道-6级");
-
-        for(int i=1;i<=7;i++) SEProperty.registeredMotor(i, String.valueOf(i));
         for(int i=10;i<=800;i=i+10) LASERNetProperty.registeredLaser(i, String.valueOf(i));
         for(int i=1;i<=100;i++) KQNetProperty.registeredNB(i, String.valueOf(i));
         for(int i=1;i<=100;i++) BRProperty.registeredRate(i, String.valueOf(i));

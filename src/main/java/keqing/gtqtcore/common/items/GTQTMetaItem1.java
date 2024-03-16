@@ -133,44 +133,6 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         //快乐模具
         MOLD_GAS=this.addItem(300, "mold.gas").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         MOLD_MOTOR=this.addItem(301, "mold.motor").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        //火箭大军集结完毕
-        //登陆器三个
-        LANDER_MODULE1=this.addItem(350, "lander_module_t1").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_SP);
-        LANDER_MODULE2=this.addItem(351, "lander_module_t2").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_SP);
-        LANDER_MODULE3=this.addItem(352, "lander_module_t3").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_SP);
-        //导航电脑6个
-        COMPUTERTIER1=this.addItem(353, "computerTier1").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_SP);
-        COMPUTERTIER2=this.addItem(354, "computerTier2").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_SP);
-        COMPUTERTIER3=this.addItem(355, "computerTier3").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_SP);
-        COMPUTERTIER4=this.addItem(356, "computerTier4").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_SP);
-        COMPUTERTIER5=this.addItem(357, "computerTier5").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_SP);
-        COMPUTERTIER6=this.addItem(358, "computerTier6").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_SP);
-        //备用
-        COMPUTERMINER=this.addItem(359, "computerMiner").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_SP);
-        COMPUTERCARGO=this.addItem(360, "computerCargo").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_SP);
-        COMPUTERBUGGY=this.addItem(361, "computerBuggy").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_SP);
-        //材料
-        HEAVY_ALLOY_PLATE=this.addItem(362, "heavy_alloy_plate").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_SP);
-        HEAVY_ALLOY_PLATEA=this.addItem(363, "heavy_alloy_platea").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_SP);
-        HEAVY_ALLOY_PLATEB=this.addItem(364, "heavy_alloy_plateb").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_SP);
-        HEAVY_ALLOY_PLATEC=this.addItem(365, "heavy_alloy_platec").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_SP);
-        HEAVY_ALLOY_PLATED=this.addItem(366, "heavy_alloy_plated").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_SP);
-        HEAVY_ALLOY_PLATEE=this.addItem(367, "heavy_alloy_platee").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_SP);
-        //炸弹小飞机
-        MINING_DRONE_LV = this.addItem(368, "mining_drone.lv").setMaxStackSize(1).setCreativeTabs(CommonProxy.GTQTCore_SP);
-        MINING_DRONE_MV = this.addItem(369, "mining_drone.mv").setMaxStackSize(1).setCreativeTabs(CommonProxy.GTQTCore_SP);
-        MINING_DRONE_HV = this.addItem(370, "mining_drone.hv").setMaxStackSize(1).setCreativeTabs(CommonProxy.GTQTCore_SP);
-        MINING_DRONE_EV = this.addItem(371, "mining_drone.ev").setMaxStackSize(1).setCreativeTabs(CommonProxy.GTQTCore_SP);
-        MINING_DRONE_IV = this.addItem(372, "mining_drone.iv").setMaxStackSize(1).setCreativeTabs(CommonProxy.GTQTCore_SP);
-        MINING_DRONE_LuV = this.addItem(373, "mining_drone.luv").setMaxStackSize(1).setCreativeTabs(CommonProxy.GTQTCore_SP);
-        MINING_DRONE_ZPM = this.addItem(374, "mining_drone.zpm").setMaxStackSize(1).setCreativeTabs(CommonProxy.GTQTCore_SP);
-        MINING_DRONE_UV = this.addItem(375, "mining_drone.uv").setMaxStackSize(1).setCreativeTabs(CommonProxy.GTQTCore_SP);
-        MINING_DRONE_UHV = this.addItem(376, "mining_drone.uhv").setMaxStackSize(1).setCreativeTabs(CommonProxy.GTQTCore_SP);
-        MINING_DRONE_UEV = this.addItem(377, "mining_drone.uev").setMaxStackSize(1).setCreativeTabs(CommonProxy.GTQTCore_SP);
-        MINING_DRONE_UIV = this.addItem(378, "mining_drone.uiv").setMaxStackSize(1).setCreativeTabs(CommonProxy.GTQTCore_SP);
-        MINING_DRONE_UXV = this.addItem(379, "mining_drone.uxv").setMaxStackSize(1).setCreativeTabs(CommonProxy.GTQTCore_SP);
-        MINING_DRONE_OpV = this.addItem(380, "mining_drone.opv").setMaxStackSize(1).setCreativeTabs(CommonProxy.GTQTCore_SP);
-        MINING_DRONE_MAX = this.addItem(381, "mining_drone.max").setMaxStackSize(1).setCreativeTabs(CommonProxy.GTQTCore_SP);
 
         //磨球
         GRINDBALL_SOAPSTONE = this.addItem(391, "mill.grindball_soapstone").setMaxStackSize(1).addComponents(new MillBallBehavior()).setCreativeTabs(CommonProxy.GTQTCore_TAB);

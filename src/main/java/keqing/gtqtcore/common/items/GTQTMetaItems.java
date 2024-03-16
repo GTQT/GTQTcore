@@ -137,24 +137,7 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem RETICLE_SILICON;
     public static MetaItem<?>.MetaValueItem DEBUG_STRUCTURE_WRITER;
     public static MetaItem<?>.MetaValueItem DEBUG_STRUCTURE_BUILDER;
-    public static MetaItem<?>.MetaValueItem COMPUTERMINER;
-    public static MetaItem<?>.MetaValueItem COMPUTERCARGO;
-    public static MetaItem<?>.MetaValueItem COMPUTERBUGGY;
-    public static MetaItem<?>.MetaValueItem COMPUTERTIER6;
-    public static MetaItem<?>.MetaValueItem COMPUTERTIER5;
-    public static MetaItem<?>.MetaValueItem COMPUTERTIER4;
-    public static MetaItem<?>.MetaValueItem COMPUTERTIER3;
-    public static MetaItem<?>.MetaValueItem COMPUTERTIER2;
-    public static MetaItem<?>.MetaValueItem COMPUTERTIER1;
-    public static MetaItem<?>.MetaValueItem LANDER_MODULE3;
-    public static MetaItem<?>.MetaValueItem LANDER_MODULE2;
-    public static MetaItem<?>.MetaValueItem LANDER_MODULE1;
-    public static MetaItem<?>.MetaValueItem HEAVY_ALLOY_PLATE;
-    public static MetaItem<?>.MetaValueItem HEAVY_ALLOY_PLATEA;
-    public static MetaItem<?>.MetaValueItem HEAVY_ALLOY_PLATEB;
-    public static MetaItem<?>.MetaValueItem HEAVY_ALLOY_PLATEC;
-    public static MetaItem<?>.MetaValueItem HEAVY_ALLOY_PLATED;
-    public static MetaItem<?>.MetaValueItem HEAVY_ALLOY_PLATEE;
+
     public static MetaItem<?>.MetaValueItem AE_SILICON;
     public static MetaItem<?>.MetaValueItem AE_WAFER;
     public static MetaItem<?>.MetaValueItem AE_RETICLEA;
@@ -332,20 +315,7 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem POOR_THORIUM_ROD_DUAL;
     public static MetaItem<?>.MetaValueItem POOR_THORIUM_ROD_QUAD;
 
-    public static MetaItem<?>.MetaValueItem MINING_DRONE_LV;
-    public static MetaItem<?>.MetaValueItem MINING_DRONE_MV;
-    public static MetaItem<?>.MetaValueItem MINING_DRONE_HV;
-    public static MetaItem<?>.MetaValueItem MINING_DRONE_EV;
-    public static MetaItem<?>.MetaValueItem MINING_DRONE_IV;
-    public static MetaItem<?>.MetaValueItem MINING_DRONE_LuV;
-    public static MetaItem<?>.MetaValueItem MINING_DRONE_ZPM;
-    public static MetaItem<?>.MetaValueItem MINING_DRONE_UV;
-    public static MetaItem<?>.MetaValueItem MINING_DRONE_UHV;
-    public static MetaItem<?>.MetaValueItem MINING_DRONE_UEV;
-    public static MetaItem<?>.MetaValueItem MINING_DRONE_UIV;
-    public static MetaItem<?>.MetaValueItem MINING_DRONE_UXV;
-    public static MetaItem<?>.MetaValueItem MINING_DRONE_OpV;
-    public static MetaItem<?>.MetaValueItem MINING_DRONE_MAX;
+
     public static MetaItem<?>.MetaValueItem MAGNETO_RESONATIC_CIRCUIT_ULV;
     public static MetaItem<?>.MetaValueItem MAGNETO_RESONATIC_CIRCUIT_LV;
     public static MetaItem<?>.MetaValueItem MAGNETO_RESONATIC_CIRCUIT_MV;

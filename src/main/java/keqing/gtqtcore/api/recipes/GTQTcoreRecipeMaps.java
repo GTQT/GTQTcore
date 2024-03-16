@@ -152,15 +152,11 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<ComputationRecipeBuilder> TD_PRINT_RECIPES;
     public static final RecipeMap<SimpleRecipeBuilder> CW_LASER_ENGRAVER_RECIPES;
     public static final RecipeMap<LASERComputationRecipeBuilder> STEPPER_RECIPES;
-
-    public static final RecipeMap<StarComputationRecipeBuilder> STAR_SURVEY;
     public static final RecipeMap<SimpleRecipeBuilder> GANTRY_CRANE;
     public static final RecipeMap<SimpleRecipeBuilder> CLARIFIER;
     public static final RecipeMap<SimpleRecipeBuilder>  ELEOIL;
     public static final RecipeMap<SimpleRecipeBuilder>  REACTION_FURNACE_RECIPES;
     public static final RecipeMap<SimpleRecipeBuilder>  BLAST_ARC_RECIPES;
-    public static final RecipeMap<SEComputationRecipeBuilder> SPACE_ELEVATOR_DRILLING_MODULE;
-    public static final RecipeMap<SEComputationRecipeBuilder> SPACE_ELEVATOR_MINING_MODULE;
     public static final RecipeMap<NeutronActivatorRecipeBuilder> NEUTRON_ACTIVATOR ;
     public static final RecipeMap<SimpleRecipeBuilder> SFM;
     public static final RecipeMap<PrimitiveRecipeBuilder>  COAGULATION_RECIPES ;
@@ -295,14 +291,6 @@ public class GTQTcoreRecipeMaps {
         COMPONENT_ASSEMBLY_LINE_RECIPES = new RecipeMapComponentAssemblyLine<>("component_assembly_line_recipes", 12, 1,  12, 0, new CACasingTierRecipeBuilder(), false)
                 .setSound(GTSoundEvents.ASSEMBLER);
 
-        SPACE_ELEVATOR_MINING_MODULE = new RecipeMapSE<>("space_elevator_mining_module", 4, 16,  2, 0, new SEComputationRecipeBuilder(), false)
-                .setSound(GTSoundEvents.ASSEMBLER);
-
-        SPACE_ELEVATOR_DRILLING_MODULE = new RecipeMapSF<>("space_elevator_drilling_module", 4, 0,  2, 16, new SEComputationRecipeBuilder(), false)
-                .setSound(GTSoundEvents.ASSEMBLER);
-
-
-
         DIGESTER_RECIPES = new RecipeMap<>("digester_recipes", 4, 4, 4, 4, new SimpleRecipeBuilder(), false);
 
         FERMENTATION_TANK_RECIPES = new RecipeMap<>("fermentation_tank_recipes",  4, 4, 4,  3, new PHRecipeBuilder(), false)
@@ -423,8 +411,6 @@ public class GTQTcoreRecipeMaps {
                 .setSlotOverlay(true, false, GuiTextures.RESEARCH_STATION_OVERLAY)
                 .setSound(GTValues.FOOLS.get() ? GTSoundEvents.SCIENCE : GTSoundEvents.COMPUTATION);
 
-        STAR_SURVEY = new RecipeMap<>("star_suvery", 9, 1, 0, 0, new StarComputationRecipeBuilder(), false)
-                .setSound(GTValues.FOOLS.get() ? GTSoundEvents.SCIENCE : GTSoundEvents.COMPUTATION);
 
         NAQUADAH_REACTOR_RECIPES = new RecipeMap<>("naquadah_reactor_recipes", 0,  0,   1,  0, new FuelRecipeBuilder(), false)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, ProgressWidget.MoveType.HORIZONTAL)
