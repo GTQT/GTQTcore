@@ -780,21 +780,6 @@ public class KeQingNET {
                 .buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(HULL[3],16)
-                .inputs(MetaItems.FIELD_GENERATOR_HV.getStackForm(16))
-                .inputs(MetaItems.SENSOR_HV.getStackForm(16))
-                .input(OrePrefix.circuit, MarkerMaterials.Tier.HV, 4)
-                .input(OrePrefix.pipeSmallFluid, Aluminium, 4)
-                .input(OrePrefix.plate, StainlessSteel, 4)
-                .fluidInputs(Polyethylene.getFluid(GTValues.L * 4))
-                .output(COSMIC_RAY_DETECTOR)
-                .scannerResearch(b -> b
-                        .researchStack(DISK_8.getStackForm())
-                        .duration(1200)
-                        .EUt(VA[HV]))
-                .duration(800).EUt(VA[HV]).buildAndRegister();
-
-        ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(HULL[EV])
                 .input(frameGt, Titanium, 4)
                 .input(circuit, Tier.EV, 4)

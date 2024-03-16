@@ -41,8 +41,6 @@ public class TiredTraceabilityPredicate extends TraceabilityPredicate {
         MAP_SP_CASING = new Object2ObjectOpenHashMap<>();
         MAP_DRI_CASING = new Object2ObjectOpenHashMap<>();
         MAP_PA_CASING = new Object2ObjectOpenHashMap<>();
-        MAP_SE_CASING = new Object2ObjectOpenHashMap<>();
-        MAP_SEM_CASING = new Object2ObjectOpenHashMap<>();
         MAP_ZW_CASING = new Object2ObjectOpenHashMap<>();
         MAP_TJ_CASING = new Object2ObjectOpenHashMap<>();
         MAP_ZJ_CASING = new Object2ObjectOpenHashMap<>();
@@ -226,25 +224,6 @@ public class TiredTraceabilityPredicate extends TraceabilityPredicate {
         TiredTraceabilityPredicate.MAP_LGLASS.put(GTQTMetaBlocks.GLASS_CASING.getState(GTQTBlockGlassCasing.CasingType.SUPRACAUSAL_LIGHT_CONE_GLASS),
                 new WrappedIntTired(GTQTBlockGlassCasing.CasingType.SUPRACAUSAL_LIGHT_CONE_GLASS, 10));
 
-        TiredTraceabilityPredicate.MAP_SE_CASING.put(GTQTMetaBlocks.SPACE_ELEVATOR.getState(GTQTSpaceElevator.ElevatorCasingType.MOTOR_CASING_MK1),
-                new WrappedIntTired(GTQTSpaceElevator.ElevatorCasingType.MOTOR_CASING_MK1, 1));
-        TiredTraceabilityPredicate.MAP_SE_CASING.put(GTQTMetaBlocks.SPACE_ELEVATOR.getState(GTQTSpaceElevator.ElevatorCasingType.MOTOR_CASING_MK2),
-                new WrappedIntTired(GTQTSpaceElevator.ElevatorCasingType.MOTOR_CASING_MK2, 2));
-        TiredTraceabilityPredicate.MAP_SE_CASING.put(GTQTMetaBlocks.SPACE_ELEVATOR.getState(GTQTSpaceElevator.ElevatorCasingType.MOTOR_CASING_MK3),
-                new WrappedIntTired(GTQTSpaceElevator.ElevatorCasingType.MOTOR_CASING_MK3, 3));
-        TiredTraceabilityPredicate.MAP_SE_CASING.put(GTQTMetaBlocks.SPACE_ELEVATOR.getState(GTQTSpaceElevator.ElevatorCasingType.MOTOR_CASING_MK4),
-                new WrappedIntTired(GTQTSpaceElevator.ElevatorCasingType.MOTOR_CASING_MK4, 4));
-        TiredTraceabilityPredicate.MAP_SE_CASING.put(GTQTMetaBlocks.SPACE_ELEVATOR.getState(GTQTSpaceElevator.ElevatorCasingType.MOTOR_CASING_MK5),
-                new WrappedIntTired(GTQTSpaceElevator.ElevatorCasingType.MOTOR_CASING_MK5, 5));
-
-        TiredTraceabilityPredicate.MAP_SEM_CASING.put(GTQTMetaBlocks.SPACE_ELEVATOR.getState(GTQTSpaceElevator.ElevatorCasingType.UPDATE_CASING_MK1),
-                new WrappedIntTired(GTQTSpaceElevator.ElevatorCasingType.UPDATE_CASING_MK1, 1));
-        TiredTraceabilityPredicate.MAP_SEM_CASING.put(GTQTMetaBlocks.SPACE_ELEVATOR.getState(GTQTSpaceElevator.ElevatorCasingType.UPDATE_CASING_MK2),
-                new WrappedIntTired(GTQTSpaceElevator.ElevatorCasingType.UPDATE_CASING_MK2, 2));
-        TiredTraceabilityPredicate.MAP_SEM_CASING.put(GTQTMetaBlocks.SPACE_ELEVATOR.getState(GTQTSpaceElevator.ElevatorCasingType.UPDATE_CASING_MK3),
-                new WrappedIntTired(GTQTSpaceElevator.ElevatorCasingType.UPDATE_CASING_MK3, 3));
-
-
         TiredTraceabilityPredicate.MAP_CAL_CASING.put(GTQTMetaBlocks.COMPONENT_ASSEMBLY_LINE.getState(GTQTBlockComponentAssemblyLineCasing.CasingTier.LV),
                 new WrappedIntTired(GTQTBlockComponentAssemblyLineCasing.CasingTier.LV, 1));
         TiredTraceabilityPredicate.MAP_CAL_CASING.put(GTQTMetaBlocks.COMPONENT_ASSEMBLY_LINE.getState(GTQTBlockComponentAssemblyLineCasing.CasingTier.MV),
@@ -378,8 +357,6 @@ public class TiredTraceabilityPredicate extends TraceabilityPredicate {
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_CP_BEAM;
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_CAL_CASING;
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_ELE_CASING;
-    public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_SE_CASING;
-    public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_SEM_CASING;
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_PA_CASING;
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_SP_CASING;
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_PA_INTERNAL_CASING;
@@ -422,21 +399,6 @@ public class TiredTraceabilityPredicate extends TraceabilityPredicate {
             Comparator.comparing((s) -> ((WrappedIntTired)MAP_GPU_CASING.get(s)).getIntTier()),"GPU4",null);
     public static TraceabilityPredicate CP_RAM_CASING4 = new TiredTraceabilityPredicate(MAP_RAM_CASING,
             Comparator.comparing((s) -> ((WrappedIntTired)MAP_RAM_CASING.get(s)).getIntTier()),"RAM4",null);
-
-    public static TraceabilityPredicate CP_SE_CASING = new TiredTraceabilityPredicate(MAP_SE_CASING,
-            Comparator.comparing((s) -> ((WrappedIntTired)MAP_SE_CASING.get(s)).getIntTier()),"SE",null);
-
-
-    public static TraceabilityPredicate CP_SEA_CASING = new TiredTraceabilityPredicate(MAP_SEM_CASING,
-            Comparator.comparing((s) -> ((WrappedIntTired)MAP_SEM_CASING.get(s)).getIntTier()),"SEA",null);
-    public static TraceabilityPredicate CP_SEB_CASING = new TiredTraceabilityPredicate(MAP_SEM_CASING,
-            Comparator.comparing((s) -> ((WrappedIntTired)MAP_SEM_CASING.get(s)).getIntTier()),"SEB",null);
-    public static TraceabilityPredicate CP_SEC_CASING = new TiredTraceabilityPredicate(MAP_SEM_CASING,
-            Comparator.comparing((s) -> ((WrappedIntTired)MAP_SEM_CASING.get(s)).getIntTier()),"SEC",null);
-    public static TraceabilityPredicate CP_SED_CASING = new TiredTraceabilityPredicate(MAP_SEM_CASING,
-            Comparator.comparing((s) -> ((WrappedIntTired)MAP_SEM_CASING.get(s)).getIntTier()),"SED",null);
-
-
 
     public static TraceabilityPredicate CP_ZW_CASING = new TiredTraceabilityPredicate(MAP_ZW_CASING,
             Comparator.comparing((s) -> ((WrappedIntTired)MAP_ZW_CASING.get(s)).getIntTier()),"ZW",null);

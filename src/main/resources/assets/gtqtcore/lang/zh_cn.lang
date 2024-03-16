@@ -315,29 +315,6 @@ gtqtcore.machine.parallel_hatch.max.name=并行控制仓（§eMAX§r）
 metaitem.mold.gas.name=气缸铸模
 metaitem.mold.motor.name=传动轴铸模
 
-tile.space_elevator_casing.basic_casing.name=线缆锚定基材
-tile.space_elevator_casing.internal_structure.name=主结构支撑器
-tile.space_elevator_casing.support_structure.name=约束支撑器
-tile.space_elevator_casing.floor.name=加固底座
-tile.space_elevator_casing.cable_casing.name=线缆束锚定器
-
-tile.space_elevator_casing.motor_casing_mk1.name=磁轨加速器 Mk I
-tile.space_elevator_casing.motor_casing_mk1.tooltip=无边疆
-tile.space_elevator_casing.motor_casing_mk2.name=磁轨加速器 Mk II
-tile.space_elevator_casing.motor_casing_mk2.tooltip=星辉
-tile.space_elevator_casing.motor_casing_mk3.name=磁轨加速器 Mk III
-tile.space_elevator_casing.motor_casing_mk3.tooltip=无垠夜空
-tile.space_elevator_casing.motor_casing_mk4.name=磁轨加速器 Mk IV
-tile.space_elevator_casing.motor_casing_mk4.tooltip=群星共舞
-tile.space_elevator_casing.motor_casing_mk5.name=磁轨加速器 Mk V
-tile.space_elevator_casing.motor_casing_mk5.tooltip=星河投射
-
-tile.space_elevator_casing.update_casing_mk1.name=分型运算器 Mk I
-tile.space_elevator_casing.update_casing_mk1.tooltip=专业计算
-tile.space_elevator_casing.update_casing_mk2.name=分型运算器 Mk II
-tile.space_elevator_casing.update_casing_mk2.tooltip=高浮点压力
-tile.space_elevator_casing.update_casing_mk3.name=分型运算器 Mk III
-tile.space_elevator_casing.update_casing_mk3.tooltip=量子集群
 #HPCA
 gtqtcore.machine.hpca.super_computation_component.name=HPCA超级计算组件
 gtqtcore.machine.hpca.super_computation_component.tooltip=严辉村奇迹
@@ -848,9 +825,6 @@ gtqtcore.machine.reactor_furnace.name=反射炉
 recipemap.reaction_furnace.name=反射煅烧
 gtqtcore.machine.neutron_activator.name=中子活化仪
 recipemap.neutron_activator.name=中子活化
-gtqtcore.machine.space_elevator.name=太空电梯
-recipemap.space_elevator_mining_module.name=太空矿床采集
-recipemap.space_elevator_drilling_module.name=太空气泉采集
 gtqtcore.machine.gantry_crane.name=大型龙门吊
 recipemap.gantry_crane.name=大型组装
 gtqtcore.machine.clarifier.name=澄清池
@@ -860,7 +834,6 @@ recipemap.ele_oil.name=电催破乳反应
 gtqtcore.machine.salt_flied.name=晒盐场
 tile.isa_casing.process_casing.name=加工厂外壳
 recipemap.keqing_net_recipes.name=序列研究
-recipemap.star_suvery.name=星球研究
 item.gt.tool.hammer_lv.name=风钻（LV）
 item.gt.tool.hammer_mv.name=风钻（MV）
 item.gt.tool.hammer_hv.name=风钻（HV）
@@ -994,11 +967,7 @@ gregtech.machine.wireless.export.tooltip=§c其实是动力仓(还没做完)
 gregtech.machine.wireless.import.tooltip=§a其实是能源仓(还没做完)
 gtqtcore.multiblock.tank.height=高度: %s
 gtqtcore.atier=: %s %s %s %s
-gtqtcore.multiblock.se.motor=轨道加速器: %s 星域: %s 矿机: %s
-gtqtcore.multiblock.se.abcdn=模块项目: 矿机 超频 耗能 并行
-gtqtcore.multiblock.se.abcd=模块等级: %s  %s  %s  %s
-gtqtcore.multiblock.se.threshold_decrement=星域缩小
-gtqtcore.multiblock.se.threshold_increment=星域扩大
+
 gtqtcore.pa.mode1=加速模式：加速 偏转相位：%s 速度：%s C
 gtqtcore.pa.mode2=加速模式：稳定 偏转相位：%s 速度：%s C
 gtqtcore.pa.mode3=加速模式：减速 偏转相位：%s 速度：%s C
@@ -1211,35 +1180,6 @@ gtqtcore.multiblock.tfft.threshold_decrement=流体向后一
 gtqtcore.multiblock.tfft.threshold_increment=流体向前一
 gtqtcore.multiblock.tfft.threshold_decrement1=流体向后十
 gtqtcore.multiblock.tfft.threshold_increment1=流体向前十
-metaitem.mining_drone.lv.name=轨道采集器（§7LV§r）
-metaitem.mining_drone.mv.name=轨道采集器（§bMV§r）
-metaitem.mining_drone.hv.name=轨道采集器（§6HV§r）
-metaitem.mining_drone.ev.name=轨道采集器（§5EV§r）
-metaitem.mining_drone.iv.name=轨道采集器（§1IV§r）
-metaitem.mining_drone.luv.name=轨道采集器（§dLuV§r）
-metaitem.mining_drone.zpm.name=轨道采集器（§cZPM§r）
-metaitem.mining_drone.uv.name=轨道采集器（§3UV§r）
-metaitem.mining_drone.uhv.name=轨道采集器（§4UHV§r）
-metaitem.mining_drone.uev.name=轨道采集器（§aUEV§r）
-metaitem.mining_drone.uiv.name=轨道采集器（§2UIV§r）
-metaitem.mining_drone.uxv.name=轨道采集器（§eUXV§r）
-metaitem.mining_drone.opv.name=轨道采集器（§9OpV§r）
-metaitem.mining_drone.max.name=轨道采集器（§c§lMAX§r）
-
-metaitem.mining_drone.lv.tooltip=§7星际拾荒者I
-metaitem.mining_drone.mv.tooltip=§b星际拾荒者II
-metaitem.mining_drone.hv.tooltip=§6星际拾荒者III
-metaitem.mining_drone.ev.tooltip=§5小行星杀手I
-metaitem.mining_drone.iv.tooltip=§1小行星杀手II
-metaitem.mining_drone.luv.tooltip=§d小行星杀手III
-metaitem.mining_drone.zpm.tooltip=§c星球粉碎机I
-metaitem.mining_drone.uv.tooltip=§3星球粉碎机II
-metaitem.mining_drone.uhv.tooltip=§4星球粉碎机III
-metaitem.mining_drone.uev.tooltip=§a便携苍穹共振仪I
-metaitem.mining_drone.uiv.tooltip=§2便携苍穹共振仪II
-metaitem.mining_drone.uxv.tooltip=§e便携苍穹共振仪III
-metaitem.mining_drone.opv.tooltip=§9-*创造一个宇宙，然后摧毁它*-
-metaitem.mining_drone.max.tooltip=§c=《༺=☆你的就是我的，我的还是我的☆=༻》=
 
 metaitem.circuit.magneto_resonatic.ulv.name=生物计算单元电路（§8ULV§r）
 metaitem.circuit.magneto_resonatic.ulv.tooltip=§dULV-等级电路
@@ -1335,22 +1275,6 @@ metaitem.component.cosmic.manifold_oscillatory_power_cell.name=流形振荡能�
 
 metaitem.scintillator.name=闪烁体
 metaitem.scintillator_crystal.name=闪烁晶体
-metaitem.computerTier1.name=导航电脑（T1）
-metaitem.computerTier2.name=导航电脑（T2）
-metaitem.computerTier3.name=导航电脑（T3）
-metaitem.computerTier4.name=导航电脑（T4）
-metaitem.computerTier5.name=导航电脑（T5）
-metaitem.computerTier6.name=导航电脑（T6）
-metaitem.computerMiner.name=飞行控制电脑（采矿）
-metaitem.computerCargo.name=飞行控制电脑（不知道）
-metaitem.computerBuggy.name=飞行控制电脑（不知道）
-
-metaitem.heavy_alloy_plate.name=合金复合板
-metaitem.heavy_alloy_platea.name=合金复合板A
-metaitem.heavy_alloy_plateb.name=合金复合板B
-metaitem.heavy_alloy_platec.name=合金复合板C
-metaitem.heavy_alloy_plated.name=合金复合板D
-metaitem.heavy_alloy_platee.name=合金复合板E
 metaitem.item.insulatingmica.name=绝缘云母复合片
 gtqtcore.machine.gas_collector.name=大型集气机
 
@@ -1731,7 +1655,6 @@ gregica.mixin.info.steam=当前蒸汽输出: %d l/s
 
 itemGroup.gtqtcore=量子跃迁 | 纠缠之源
 itemGroup.gtqtbio=量子跃迁 | 生物工程
-itemGroup.gtqtsp=量子跃迁 | 航空航天
 itemGroup.gtqtae=量子跃迁 | 应用能源
 itemGroup.gtqtnc=量子跃迁 | 原子之心
 itemGroup.gtqthp=量子跃迁 | 高能物理

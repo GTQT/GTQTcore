@@ -957,15 +957,6 @@ recipemap.digester_recipes.name=高温煮解
 gtqtcore.machine.computing_terminal.name=计算终端
 recipemap.computing_terminal_recipes.name=数据计算
 
-gtqtcore.machine.cosmic_ray_detector.name=宇宙射线探测器
-gtqtcore.machine.cosmic_ray_detector.tooltip.1=收集来自宇宙的信息和粒子
-gtqtcore.machine.cosmic_ray_detector.tooltip_shift.1=高度由顶端的传感器方块决定
-gtqtcore.machine.cosmic_ray_detector.tooltip_shift.2=传感器上方不能有非透明方块
-gtqtcore.machine.cosmic_ray_detector.altitude=当前高度为：%s
-gtqtcore.machine.cosmic_ray_detector.can_see_sky.false=§c传感器看不到天空
-gtqtcore.machine.cosmic_ray_detector.can_see_sky.true=传感器工作正常
-recipemap.cosmic_ray_detector_recipes.name=射线探测
-
 gtqtcore.machine.ion_implantater.name=离子注入机
 recipemap.ion_implanter_recipes.name=真空离子注入
 
