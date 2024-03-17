@@ -35,7 +35,7 @@ public class GTQTRecipesManager {
     }
     public static void init() {
         DeltamethrinChain.init();
-        GTQTOreRecipeHandler.init();
+        //GTQTOreRecipeHandler.init();
         OceanChain.init();
         GermaniumChain.init();
         NaquadahChain.init();
@@ -89,7 +89,6 @@ public class GTQTRecipesManager {
         LubricantChains.init();
         PEEKChain.init();
         ELE.init();
-        SEloader.init();
         CPULine.init();
         AllouKlin.init();
         GTComponents.init();

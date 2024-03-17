@@ -21,7 +21,6 @@ import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.gcys.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.huge.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.kqcc.*;
-import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.kqcc.MetaTileEntityCosmicRayDetector;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.overwrite.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.star.MetaTileEntityPlasmaForge;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.star.MetaTileEntityStarBiomimeticFactory;
@@ -187,7 +186,6 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityThreeDim THREE_DIM_PRINT;
     public static MetaTileEntityELEOil ELE_OIL;
     public static MetaTileEntityNeutronActivator NEUTRON_ACTIVATOR;
-    public static MetaTileEntitySpaceElevator SPACE_ELEVATOR;
     public static MetaTileEntityReactionFurnace REACTION_FURNACE;
     public static MetaTileEntityChemicalPlant CHEMICAL_PLANT;
     public static MetaTileEntityLaserEngraving LASER_ENGRAVING;
@@ -203,7 +201,6 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityKQCCComputationHatch[] KQCC_COMPUTATION_HATCH_TRANSMITTER=new MetaTileEntityKQCCComputationHatch[12];
     public static MetaTileEntityMSF MSF;
     public static MetaTileEntityHeatExchanger HEAT_CHANGER;
-    public static MetaTileEntityCosmicRayDetector COSMIC_RAY_DETECTOR;
     public static MetaTileEntityHPCAAdvancedComputation HPCA_SUPER_COMPUTATION_COMPONENT;
     public static MetaTileEntityHPCAAdvancedComputation HPCA_ULTIMATE_COMPUTATION_COMPONENT;
     public static MetaTileEntityHPCAAdvancedCooler HPCA_SUPER_COOLER_COMPONENT;
@@ -324,7 +321,6 @@ public class GTQTMetaTileEntities {
         CLARIFIER= registerMetaTileEntity(3182, new MetaTileEntityClarifier(gtqtcoreId("clarifier")));
         ELE_OIL= registerMetaTileEntity(3183, new MetaTileEntityELEOil(gtqtcoreId("ele_oil")));
         REACTION_FURNACE= registerMetaTileEntity(3184, new MetaTileEntityReactionFurnace(gtqtcoreId("reactor_furnace")));
-        SPACE_ELEVATOR= registerMetaTileEntity(3185, new MetaTileEntitySpaceElevator(gtqtcoreId("space_elevator")));
         THREE_DIM_PRINT= registerMetaTileEntity(3186, new MetaTileEntityThreeDim(gtqtcoreId("three_dim_print")));
         NEUTRON_ACTIVATOR= registerMetaTileEntity(3187, new MetaTileEntityNeutronActivator(gtqtcoreId("neutron_activator")));
         MSF= registerMetaTileEntity(3188, new MetaTileEntityMSF(gtqtcoreId("msf")));
@@ -374,7 +370,6 @@ public class GTQTMetaTileEntities {
         KQCC= registerMetaTileEntity(3450, new MetaTileEntityKQCC(gtqtcoreId("kqcc")));
         KQNS=registerMetaTileEntity(3451,new MetaTileEntityKQNetworkSwitch(gtqtcoreId("kqns")));
         KeQing_NET= registerMetaTileEntity(3452, new MetaTileEntitykeQingNet(gtqtcoreId("keqing_net")));
-        COSMIC_RAY_DETECTOR= registerMetaTileEntity(3453, new MetaTileEntityCosmicRayDetector(gtqtcoreId("cosmic_ray_detector")));
 
         HPCA_SUPER_COMPUTATION_COMPONENT = registerMetaTileEntity(3461, new MetaTileEntityHPCAAdvancedComputation(gtqtcoreId("hpca.super_computation_component"),false));
         HPCA_ULTIMATE_COMPUTATION_COMPONENT = registerMetaTileEntity(3462, new MetaTileEntityHPCAAdvancedComputation(gtqtcoreId("hpca.ultimate_computation_component"),  true));

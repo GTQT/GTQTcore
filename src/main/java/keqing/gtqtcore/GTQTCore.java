@@ -20,7 +20,7 @@ import net.minecraftforge.fml.common.event.*;
         dependencies = "required-after:gregtech@[2.7.4-beta,) ;"
 )
 public class GTQTCore {
-    public static final String PACK = "1.4.0_preview_0.7";
+    public static final String PACK = "1.4.0_preview_0.8";
 
     public static final String MODID = "gtqtcore";
     public static final String NAME = "GTQT Core";

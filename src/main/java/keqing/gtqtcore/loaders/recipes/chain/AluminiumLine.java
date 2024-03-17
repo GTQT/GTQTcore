@@ -23,7 +23,7 @@ public class AluminiumLine {
                 .fluidOutputs(CarbonDioxide.getFluid(2000))
                 .circuitMeta(1)
                 .blastFurnaceTemp(1700)
-                .duration(1000).EUt(VA[MV]).buildAndRegister();
+                .duration(1600).EUt(VA[MV]).buildAndRegister();
 
         RecipeMaps.BLAST_RECIPES.recipeBuilder()
                 .input(dust, Alumina, 1)
@@ -33,7 +33,7 @@ public class AluminiumLine {
                 .fluidOutputs(CarbonDioxide.getFluid(2000))
                 .circuitMeta(2)
                 .blastFurnaceTemp(1700)
-                .duration(1600).EUt(VA[MV]).buildAndRegister();
+                .duration(1000).EUt(VA[MV]).buildAndRegister();
 
         RecipeMaps.BLAST_RECIPES.recipeBuilder()
                 .input(dust, Aluminium, 1)

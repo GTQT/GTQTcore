@@ -110,7 +110,7 @@ public class MetaTileEntityDistillationTower extends GTQTRecipeMapMultiblockOver
     }
     public class DistillationTowerLogic extends MultiblockRecipeLogic {
         public DistillationTowerLogic(RecipeMapMultiblockController tileEntity) {
-            super(tileEntity,true);
+            super(tileEntity);
         }
         public void setMaxProgress(int maxProgress) {
             this.maxProgressTime = maxProgress*(100-tier*5)/100;

@@ -441,7 +441,10 @@ public class MetaTileEntityLoader {
                 new UnificationEntry(OrePrefix.pipeLargeFluid, Steel), 'C',
                 new UnificationEntry(OrePrefix.circuit, LV), 'F', MetaItems.ELECTRIC_PUMP_LV);
 
-
+        ModHandler.addShapedRecipe(true, "kinetic_energy_battery", GTQTMetaTileEntities.KINETIC_ENERGY_BATTERY.getStackForm(),
+                "FFF", "BMB", "CCC", 'M', MetaTileEntities.HULL[GTValues.LV].getStackForm(), 'B',
+                new UnificationEntry(OrePrefix.pipeLargeFluid, Steel), 'C',
+                new UnificationEntry(OrePrefix.circuit, LV), 'F', ELECTRIC_MOTOR_LV);
 
         ModHandler.addShapedRecipe(true, "oil_poll", GTQTMetaTileEntities.OIL_POOL.getStackForm(),
                 "FFF", "BMB", "CCC", 'M', MetaTileEntities.HULL[GTValues.LV].getStackForm(), 'B',
@@ -464,7 +467,7 @@ public class MetaTileEntityLoader {
                 new UnificationEntry(OrePrefix.circuit, LV), 'F', ELECTRIC_PUMP_LV);
 
         ModHandler.addShapedRecipe(true, "ocean_pumper", GTQTMetaTileEntities.OCEAN_PUMPER.getStackForm(),
-                "FFF", "CMC", "FFF", 'M', MetaTileEntities.HULL[GTValues.HV].getStackForm(), 'C',
+                "FFF", "CMC", "FFF", 'M', MetaTileEntities.HULL[GTValues.LV].getStackForm(), 'C',
                 new UnificationEntry(OrePrefix.circuit, LV), 'F', ELECTRIC_PUMP_LV);
 
         ModHandler.addShapedRecipe(true, "gantry_crane", GTQTMetaTileEntities.GANTRY_CRANE.getStackForm(),

@@ -360,14 +360,15 @@ public class FirstDegreeMaterials {
         //（2,4-双（三氯甲基）-6-（4-甲氧基苯乙烯基）-1,3,5-三嗪）
         //（ZrO2-BTMST）
         //陨铁
-        GTQTMaterials.MeteoricIron = new Material.Builder(getMaterialsId(), gregtechId("meteoric_iron"))
+        // TODO 占位2个ID 有材料优先把我补了
+        GTQTMaterials.MxeteoricIron = new Material.Builder(getMaterialsId(), gregtechId("mxeteoric_iron"))
                 .ingot().dust().ore()
                 .color(0x8B6914).iconSet(METALLIC)
                 .flags(GENERATE_PLATE, GENERATE_DENSE,GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_RING, GENERATE_ROUND, GENERATE_BOLT_SCREW, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR)
                 .build();
 
         //陨铁
-        GTQTMaterials.Desh = new Material.Builder(getMaterialsId(), gregtechId("desh"))
+        GTQTMaterials.Dxesh = new Material.Builder(getMaterialsId(), gregtechId("dxesh"))
                 .ingot().dust().ore()
                 .color(0xFF7256).iconSet(METALLIC)
                 .flags(GENERATE_PLATE,GENERATE_DENSE, GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_RING, GENERATE_ROUND, GENERATE_BOLT_SCREW, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR)

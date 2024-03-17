@@ -298,7 +298,7 @@ public class OreProcessorRecipeLogic implements IWorkable {
             return 0;
         for (FluidStack t_fluid : GTUtility.fluidHandlerToList(getInputTank())) {
             if (t_fluid != null && t_fluid.isFluidEqual(fluid)) {
-                t_amount += fluid.amount;
+                t_amount += t_fluid.amount;
             }
         }
         return t_amount;
@@ -388,7 +388,7 @@ public class OreProcessorRecipeLogic implements IWorkable {
                 }
                 case 4 -> {
                     doMacerator(isOre);
-                    doChemicalBath(isCrushedOre, isCrushedPureOre);
+                    doChemicalBath(isCrushedOre);
                     doMacerator(isCrushedOre, isCrushedPureOre);
                     doCentrifuge(isImpureOre, isPureOre);
                 }
@@ -594,7 +594,11 @@ public class OreProcessorRecipeLogic implements IWorkable {
 
             //  if enable stone dust voiding mode, then void the stone dust.
             if (isVoidStone) {
-                if (stack.isItemEqual(OreDictUnifier.get(OrePrefix.dust, Materials.Stone,  1))) {
+                if (stack.isItemEqual(OreDictUnifier.get(OrePrefix.dust, Materials.Stone, 1)) ||
+                        stack.isItemEqual(OreDictUnifier.get(OrePrefix.dust, Materials.Endstone, 1)) ||
+                        stack.isItemEqual(OreDictUnifier.get(OrePrefix.dust, Materials.Netherrack, 1))
+                ) {
+
                     continue;
                 }
             }
