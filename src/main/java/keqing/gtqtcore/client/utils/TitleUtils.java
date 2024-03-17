@@ -61,7 +61,7 @@ public class TitleUtils {
         //return String.format("%s | GTQT官方交流QQ群：494136307 | %s",DEFAULT_TITLE,TEST);
 
         if(STATUE!=null)return String.format("%s | 随机废话：%s | 加载状态：%s | %s",DEFAULT_TITLE,RANDOM,STATUE,TEST);
-        return String.format("%s | GTQT官方交流QQ群：494136307 | 随机废话； %s | %s",DEFAULT_TITLE,RANDOM,TEST);
+        return String.format("%s | GTQT官方交流QQ群：1073091808 | 随机废话； %s | %s",DEFAULT_TITLE,RANDOM,TEST);
     }
 
 
