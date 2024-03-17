@@ -248,17 +248,6 @@ public class MetaTileEntityVacuumFreezer extends GTQTRecipeMapMultiblockOverwrit
     public SoundEvent getBreakdownSound() {
         return GTSoundEvents.BREAKDOWN_ELECTRICAL;
     }
-    @Override
-    public void writeInitialSyncData(PacketBuffer buf) {
-        super.writeInitialSyncData(buf);
-        buf.writeInt(this.tier);
-    }
-
-    @Override
-    public void receiveInitialSyncData(PacketBuffer buf) {
-        super.receiveInitialSyncData(buf);
-        this.tier = buf.readInt();
-    }
     @SideOnly(Side.CLIENT)
     @Override
     protected ICubeRenderer getFrontOverlay() {
