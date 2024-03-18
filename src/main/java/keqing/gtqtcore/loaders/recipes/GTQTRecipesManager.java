@@ -36,6 +36,7 @@ public class GTQTRecipesManager {
     public static void init() {
         DeltamethrinChain.init();
         //GTQTOreRecipeHandler.init();
+        TitanateChain.init();
         OceanChain.init();
         GermaniumChain.init();
         NaquadahChain.init();
