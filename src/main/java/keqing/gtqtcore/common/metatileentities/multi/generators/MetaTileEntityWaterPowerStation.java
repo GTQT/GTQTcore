@@ -78,12 +78,12 @@ public class MetaTileEntityWaterPowerStation extends MultiblockWithDisplayBase i
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
-        textList.add(new TextComponentTranslation("==================="));
+        textList.add(new TextComponentTranslation("======================="));
         textList.add(new TextComponentTranslation("gtqtcore.wps.count", number,coilLevel));
-        textList.add(new TextComponentTranslation("gtqtcore.wps.checkwater", logic.checkWater()));
+        textList.add(new TextComponentTranslation("gtqtcore.wps.checkwater", logic.checkWater(),(number*2+1)*(number*2+1)*4));
         textList.add(new TextComponentTranslation("gtqtcore.wps.output1", outputEu));
         textList.add(new TextComponentTranslation("gtqtcore.wps.output2", geteu()));
-        textList.add(new TextComponentTranslation("==================="));
+        textList.add(new TextComponentTranslation("======================="));
     }
     @Override
     protected void updateFormedValid() {
