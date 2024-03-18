@@ -11,12 +11,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
 
-import static gregtech.api.unification.ore.OrePrefix.wireGtSingle;
+import static gregtech.api.recipes.RecipeMaps.*;
+import static gregtech.api.unification.ore.OrePrefix.*;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.CSilicon;
+import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.electrode;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 import static gregtech.api.GTValues.*;
-import static gregtech.api.recipes.RecipeMaps.ASSEMBLER_RECIPES;
-import static gregtech.api.recipes.RecipeMaps.MIXER_RECIPES;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.common.items.MetaItems.GLASS_TUBE;
 import static gregtech.common.items.MetaItems.VACUUM_TUBE;
@@ -53,6 +54,27 @@ public class PrimitiveCircuits {
                 'R', new UnificationEntry(OrePrefix.stick, Steel),
                 'G', new UnificationEntry(OrePrefix.foil, Gold),
                 'W', new UnificationEntry(wireGtSingle, Copper));
+        //普通硅保护气配方
+        BLAST_RECIPES.recipeBuilder()
+                .duration(800)
+                .EUt(120)
+                .blastFurnaceTemp(1800)
+                .input(dust,Silicon)
+                .fluidInputs(Nitrogen.getFluid(1000))
+                .circuitMeta(2)
+                .output(ingotHot, Silicon, 1)
+                .buildAndRegister();
+        //太阳能硅保护气配方
+        BLAST_RECIPES.recipeBuilder()
+                .duration(800)
+                .EUt(120)
+                .blastFurnaceTemp(1800)
+                .input(dust,CSilicon)
+                .fluidInputs(Nitrogen.getFluid(1000))
+                .circuitMeta(2)
+                .output(ingotHot, CSilicon, 1)
+                .buildAndRegister();
+
 
         for (Material copper : new Material[]{Copper, AnnealedCopper}) {
             ASSEMBLER_RECIPES.recipeBuilder()

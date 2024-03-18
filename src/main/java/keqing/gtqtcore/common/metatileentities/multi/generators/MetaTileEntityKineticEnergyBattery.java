@@ -244,15 +244,15 @@ public class MetaTileEntityKineticEnergyBattery extends MultiblockWithDisplayBas
         textList.add(new TextComponentTranslation("gtqtcore.eke.eu2", inputEu, outputEu));
         if (this.isWorkingEnabled){
             if (euDelta>0){
-                textList.add(new TextComponentTranslation("gtqtcore.eke.output1",logic.powerMax(),euDelta));
+                textList.add(new TextComponentTranslation("gtqtcore.eke.output1",euDelta,logic.powerMax()));
                 textList.add(new TextComponentTranslation("gtqtcore.eke.outputA",runDay,runTime,runMin,runS));
             }
             if (euDelta<0){
-                textList.add(new TextComponentTranslation("gtqtcore.eke.output2",logic.powerMax(),euDelta));
+                textList.add(new TextComponentTranslation("gtqtcore.eke.output2",euDelta,logic.powerMax()));
                 textList.add(new TextComponentTranslation("gtqtcore.eke.outputB",runDay,runTime,runMin,runS));
             }
             if (euDelta==0){
-                textList.add(new TextComponentTranslation("gtqtcore.eke.output3",logic.powerMax(),euDelta));
+                textList.add(new TextComponentTranslation("gtqtcore.eke.output3",logic.powerMax()));
                 textList.add(new TextComponentTranslation("gtqtcore.eke.outputC",runDay,runTime,runMin,runS));
             }
         }else {
