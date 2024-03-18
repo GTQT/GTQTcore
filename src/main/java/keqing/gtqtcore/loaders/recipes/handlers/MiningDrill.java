@@ -23,7 +23,6 @@ public class MiningDrill {
                 .chancedOutput(new ItemStack(Blocks.GRAVEL),5000,500)
                 .chancedOutput(new ItemStack(Blocks.CLAY),5000,500)
                 .chancedOutput(new ItemStack(Blocks.DIRT),5000,500)
-                .chancedOutput(new ItemStack(Blocks.STONE),5000,500)
                 .tier(1)
                 .EUt(30)
                 .duration(40)

@@ -56,6 +56,7 @@ public class MetaTileEntityWaterPowerStation extends MultiblockWithDisplayBase i
     private int tier;
     private int coilLevel;
     private int number;
+    private int outputEu;
     private boolean isWorkingEnabled;
     private final MetaTileEntityWaterPowerStationLogic logic;
     private IEnergyContainer energyContainer;
@@ -77,13 +78,18 @@ public class MetaTileEntityWaterPowerStation extends MultiblockWithDisplayBase i
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
+        textList.add(new TextComponentTranslation("==================="));
         textList.add(new TextComponentTranslation("gtqtcore.wps.count", number,coilLevel));
-        textList.add(new TextComponentTranslation("gtqtcore.wps.checkwater", logic.checkWater(),geteu()));
+        textList.add(new TextComponentTranslation("gtqtcore.wps.checkwater", logic.checkWater()));
+        textList.add(new TextComponentTranslation("gtqtcore.wps.output1", outputEu));
+        textList.add(new TextComponentTranslation("gtqtcore.wps.output2", geteu()));
+        textList.add(new TextComponentTranslation("==================="));
     }
     @Override
     protected void updateFormedValid() {
         this.logic.update();
         generator();
+        this.outputEu = logic.checkWater() *coilLevel/8;
     }
 
     private long geteu()
