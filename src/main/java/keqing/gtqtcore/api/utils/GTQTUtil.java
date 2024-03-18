@@ -23,14 +23,7 @@ public class GTQTUtil {
     public static ResourceLocation gtqtId(@Nonnull String path) {
         return new ResourceLocation("gtqtcore", path);
     }
-    public static boolean isOP(EntityPlayer entityPlayer){
-        var name = entityPlayer.getName();
-        if (GTQTCore.currentServer != null) {
-            var list = GTQTCore.currentServer.getPlayerList().getOppedPlayerNames();
-            return Arrays.asList(list).contains(name);
-        }
-        return false;
-    }
+
     public static int intValueOfBitSet(BitSet set){
         int result = 0;
         for(int i = 0; i<set.length();i++){

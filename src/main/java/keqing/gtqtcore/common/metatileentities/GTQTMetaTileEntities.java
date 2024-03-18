@@ -191,8 +191,6 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityLaserEngraving LASER_ENGRAVING;
     public static MetaTileEntityWaterPowerStation WATER_POWER_STATION;
     public static MetaTileEntityKineticEnergyBattery KINETIC_ENERGY_BATTERY;
-    public static MetaTileEntityWirelessEnergyHatch[] WIRELESS_EMERGY_HATCH_RECEIVER= new MetaTileEntityWirelessEnergyHatch[11];
-    public static MetaTileEntityWirelessEnergyHatch[] WIRELESS_EMERGY_HATCH_TRANSMITTER= new MetaTileEntityWirelessEnergyHatch[11];
     public static final MetaTileEntityRotorHolder[] ROTOR_HOLDER = new MetaTileEntityRotorHolder[12]; //HV, EV, IV, LuV, ZPM, UV
     public static final SimpleMachineMetaTileEntity[] FLUID_CANNER = new SimpleMachineMetaTileEntity[GTValues.V.length - 1];
     public static final SimpleMachineMetaTileEntity[] FLUID_EXTRACTOR = new SimpleMachineMetaTileEntity[GTValues.V.length - 1];
@@ -409,11 +407,6 @@ public class GTQTMetaTileEntities {
             String tierName = GTValues.VN[i].toLowerCase();
             KQCC_COMPUTATION_HATCH_RECEIVER[i] = registerMetaTileEntity(15500 + i-1, new MetaTileEntityKQCCComputationHatch(gtqtcoreId("kqcccomputation_hatch.receiver." + tierName), i,  false));
             KQCC_COMPUTATION_HATCH_TRANSMITTER[i] = registerMetaTileEntity(15510 + i-1, new MetaTileEntityKQCCComputationHatch(gtqtcoreId("kqcccomputation_hatch.transmitter." + tierName), i,  true));
-        }
-        for (int i = 1; i <= 10; i++) {
-            String tierName = GTValues.VN[i].toLowerCase();
-            WIRELESS_EMERGY_HATCH_RECEIVER[i] = registerMetaTileEntity(15520 + i-1, new MetaTileEntityWirelessEnergyHatch(gtqtcoreId("wireless_energy_hatch.receiver." + tierName), i,  false));
-            WIRELESS_EMERGY_HATCH_TRANSMITTER[i] = registerMetaTileEntity(15530 + i-1, new MetaTileEntityWirelessEnergyHatch(gtqtcoreId("wireless_energy_hatch.transmitter." + tierName), i,  true));
         }
 
         registerMetaTileEntity(15541, new keqing.gtqtcore.common.metatileentities.multi.multiblockpart.MetaTileEntityParallelHatch(gtqtcoreId(String.format("parallel_hatch.%s", GTValues.VN[9])), 9));
