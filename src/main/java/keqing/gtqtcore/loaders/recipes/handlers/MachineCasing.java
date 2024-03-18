@@ -60,7 +60,7 @@ public class MachineCasing {
                 .input(dust,Chrome,3)
                 .input(dust,Phosphorus,2)
                 .input(dust,Molybdenum,1)
-                .output(dust, Talonite, 4)
+                .output(dust, Talonite, 10)
                 .duration(120)
                 .EUt(VA[MV])
                 .buildAndRegister();
