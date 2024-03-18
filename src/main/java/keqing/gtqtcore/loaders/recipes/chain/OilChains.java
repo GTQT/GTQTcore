@@ -2,12 +2,15 @@ package keqing.gtqtcore.loaders.recipes.chain;
 
 import gregtech.api.recipes.GTRecipeHandler;
 import gregtech.api.recipes.RecipeMaps;
+import gregtech.api.recipes.ingredients.IntCircuitIngredient;
+import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Material;
 import gregtech.common.blocks.BlockAsphalt;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.items.MetaItems;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidStack;
 
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
@@ -70,6 +73,33 @@ public class OilChains {
 
     private static void NewOil() {
 
+        GTRecipeHandler.removeRecipesByInputs(MIXER_RECIPES,  new FluidStack[]{Tetranitromethane.getFluid(20),Diesel.getFluid(1000)});
+        GTRecipeHandler.removeRecipesByInputs(MIXER_RECIPES,  new FluidStack[]{Tetranitromethane.getFluid(40),BioDiesel.getFluid(1000)});
+
+        GTRecipeHandler.removeRecipesByInputs(LARGE_CHEMICAL_RECIPES, new ItemStack[]{IntCircuitIngredient.getIntegratedCircuit(24)}, new FluidStack[]{Tetranitromethane.getFluid(200),Diesel.getFluid(10000)});
+        GTRecipeHandler.removeRecipesByInputs(LARGE_CHEMICAL_RECIPES, new ItemStack[]{IntCircuitIngredient.getIntegratedCircuit(24)},new FluidStack[]{Tetranitromethane.getFluid(400),BioDiesel.getFluid(10000)});
+
+        CHEMICAL_PLANT.recipeBuilder()
+                .fluidInputs(Tetranitromethane.getFluid(500))
+                .fluidInputs(Diesel.getFluid(3000))
+                .fluidInputs(Tetrabromobenzene.getFluid(300))
+                .fluidInputs(MTBE.getFluid(200))
+                .fluidOutputs(CetaneBoostedDiesel.getFluid(4000))
+                .recipeLevel(2)
+                .duration(200)
+                .EUt(480)
+                .buildAndRegister();
+
+        CHEMICAL_PLANT.recipeBuilder()
+                .fluidInputs(Tetranitromethane.getFluid(500))
+                .fluidInputs(BioDiesel.getFluid(6000))
+                .fluidInputs(Tetrabromobenzene.getFluid(300))
+                .fluidInputs(MTBE.getFluid(200))
+                .fluidOutputs(CetaneBoostedDiesel.getFluid(4000))
+                .recipeLevel(2)
+                .duration(200)
+                .EUt(480)
+                .buildAndRegister();
         //柴油燃烧
         COMBUSTION_GENERATOR_FUELS.recipeBuilder()
                 .fluidInputs(DieselLight.getFluid(1))
