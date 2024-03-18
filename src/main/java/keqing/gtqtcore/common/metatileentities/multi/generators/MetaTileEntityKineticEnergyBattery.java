@@ -237,9 +237,9 @@ public class MetaTileEntityKineticEnergyBattery extends MultiblockWithDisplayBas
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
-        textList.add(new TextComponentTranslation("====================================="));
+        textList.add(new TextComponentTranslation("==================="));
         textList.add(new TextComponentTranslation("gtqtcore.eke.count",length,casing,coilLevel));
-        textList.add(new TextComponentTranslation("gtqtcore.eke.euMax",logic.euMax(),logic.speedMax()));
+        textList.add(new TextComponentTranslation("gtqtcore.eke.euMax",logic.euMax()/10000,logic.speedMax()));
         textList.add(new TextComponentTranslation("gtqtcore.eke.eu1",eu,(double)(round(speed*100))/100));
         textList.add(new TextComponentTranslation("gtqtcore.eke.eu2", inputEu, outputEu));
         if (this.isWorkingEnabled){
@@ -258,7 +258,7 @@ public class MetaTileEntityKineticEnergyBattery extends MultiblockWithDisplayBas
         }else {
             textList.add(new TextComponentTranslation("gtqtcore.eke.output4",logic.powerMax()));
         }
-        textList.add(new TextComponentTranslation("====================================="));
+        textList.add(new TextComponentTranslation("==================="));
     }
 
     //进度条
