@@ -47,8 +47,8 @@ public class GalliumNitrideChain {
 
         // 2Al(OH)3 -> Al2O3 + 3H2O
         DRYER_RECIPES.recipeBuilder()
-                .input(dust, AluminiumHydroxide, 14)
-                .output(dust, Alumina, 5)
+                .input(dust, AluminiumHydroxide, 2)
+                .output(dust, Alumina, 1)
                 .fluidOutputs(Water.getFluid(3000))
                 .duration(60).EUt(16).buildAndRegister();
 

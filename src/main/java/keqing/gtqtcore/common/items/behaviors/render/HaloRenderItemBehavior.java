@@ -1,10 +1,9 @@
 package keqing.gtqtcore.common.items.behaviors.render;
 
-
 import codechicken.lib.model.ModelRegistryHelper;
 import codechicken.lib.util.TransformUtils;
-import keqing.gtqtcore.api.items.metaitem.stats.renderer.IHaloRenderBehavior;
-import keqing.gtqtcore.client.renderer.handler.HaloItemRenderer;
+import keqing.gtqtcore.api.items.IHaloRenderBehavior;
+import keqing.gtqtcore.client.renderer.HaloItemRenderer;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.ResourceLocation;
@@ -13,14 +12,19 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.function.Supplier;
 
+
+@SuppressWarnings("rawtypes")
 public class HaloRenderItemBehavior implements IHaloRenderBehavior {
 
     private final int haloSize;
     private final int haloColour;
-    private final Supplier<TextureAtlasSprite> supplier;
+    private final Supplier supplier;
     private final boolean drawPulse;
 
-    public HaloRenderItemBehavior(int haloSize, int haloColour, Supplier<TextureAtlasSprite> supplier, boolean drawPulse) {
+    public HaloRenderItemBehavior(int haloSize,
+                                  int haloColour,
+                                  Supplier supplier,
+                                  boolean drawPulse) {
         this.haloSize = haloSize;
         this.haloColour = haloColour;
         this.supplier = supplier;
@@ -32,9 +36,10 @@ public class HaloRenderItemBehavior implements IHaloRenderBehavior {
         return true;
     }
 
+    @SideOnly(Side.CLIENT)
     @Override
     public TextureAtlasSprite getHaloTexture() {
-        return supplier.get();
+        return (TextureAtlasSprite) supplier.get();
     }
 
     @Override

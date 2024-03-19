@@ -457,6 +457,8 @@ public class GTQTMaterials {
     public static Material Dfeltamethrinh;
     public static Material MxeteoricIron;
     public static Material Dxesh;
+    public static Material NanometerBariumTitanate;
+    public static Material Htitanate;
 
     //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/api/unification/GSMaterials.java
 
