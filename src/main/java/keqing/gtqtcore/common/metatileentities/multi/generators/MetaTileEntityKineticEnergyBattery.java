@@ -237,28 +237,28 @@ public class MetaTileEntityKineticEnergyBattery extends MultiblockWithDisplayBas
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
-        textList.add(new TextComponentTranslation("==================="));
+        textList.add(new TextComponentTranslation("======================="));
         textList.add(new TextComponentTranslation("gtqtcore.eke.count",length,casing,coilLevel));
-        textList.add(new TextComponentTranslation("gtqtcore.eke.euMax",logic.euMax()/10000,logic.speedMax()));
-        textList.add(new TextComponentTranslation("gtqtcore.eke.eu1",eu,(double)(round(speed*100))/100));
+        textList.add(new TextComponentTranslation("gtqtcore.eke.euMax",logic.euMax()/10000,eu));
+        textList.add(new TextComponentTranslation("gtqtcore.eke.eu1",logic.speedMax(),(double)(round(speed*100))/100));
         textList.add(new TextComponentTranslation("gtqtcore.eke.eu2", inputEu, outputEu));
         if (this.isWorkingEnabled){
             if (euDelta>0){
-                textList.add(new TextComponentTranslation("gtqtcore.eke.output1",logic.powerMax(),euDelta));
+                textList.add(new TextComponentTranslation("gtqtcore.eke.output1",euDelta,logic.powerMax()));
                 textList.add(new TextComponentTranslation("gtqtcore.eke.outputA",runDay,runTime,runMin,runS));
             }
             if (euDelta<0){
-                textList.add(new TextComponentTranslation("gtqtcore.eke.output2",logic.powerMax(),euDelta));
+                textList.add(new TextComponentTranslation("gtqtcore.eke.output2",euDelta,logic.powerMax()));
                 textList.add(new TextComponentTranslation("gtqtcore.eke.outputB",runDay,runTime,runMin,runS));
             }
             if (euDelta==0){
-                textList.add(new TextComponentTranslation("gtqtcore.eke.output3",logic.powerMax(),euDelta));
+                textList.add(new TextComponentTranslation("gtqtcore.eke.output3",logic.powerMax()));
                 textList.add(new TextComponentTranslation("gtqtcore.eke.outputC",runDay,runTime,runMin,runS));
             }
         }else {
             textList.add(new TextComponentTranslation("gtqtcore.eke.output4",logic.powerMax()));
         }
-        textList.add(new TextComponentTranslation("==================="));
+        textList.add(new TextComponentTranslation("======================="));
     }
 
     //进度条
