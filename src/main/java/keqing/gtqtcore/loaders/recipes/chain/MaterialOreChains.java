@@ -169,7 +169,7 @@ public class MaterialOreChains {
                 .EUt(VA[LV])
                 .input(dust, Aluminium, 6)
                 .fluidInputs(HydrochloricAcid.getFluid(4500))
-                .fluidInputs(Water.getFluid(10000))
+                .fluidInputs(Water.getFluid(5000))
                 .fluidOutputs(BauxiteSlurry.getFluid(1000))
                 .buildAndRegister();
 

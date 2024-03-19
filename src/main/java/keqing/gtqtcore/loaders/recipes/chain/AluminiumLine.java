@@ -17,20 +17,20 @@ import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.electrode;
 public class AluminiumLine {
     public static void init() {
         RecipeMaps.BLAST_RECIPES.recipeBuilder()
-                .input(dust, Alumina, 1)
-                .input(dust, Carbon, 2)
-                .output(ingot, Aluminium, 1)
-                .fluidOutputs(CarbonDioxide.getFluid(2000))
+                .input(dust, Alumina, 2)
+                .input(dust, Carbon, 3)
+                .output(ingot, Aluminium, 4)
+                .fluidOutputs(CarbonDioxide.getFluid(3000))
                 .circuitMeta(1)
                 .blastFurnaceTemp(1700)
                 .duration(1600).EUt(VA[MV]).buildAndRegister();
 
         RecipeMaps.BLAST_RECIPES.recipeBuilder()
-                .input(dust, Alumina, 1)
-                .input(dust, Carbon, 2)
+                .input(dust, Alumina, 2)
+                .input(dust, Carbon, 3)
                 .fluidInputs(Nitrogen.getFluid(2000))
-                .output(ingot, Aluminium, 1)
-                .fluidOutputs(CarbonDioxide.getFluid(2000))
+                .output(ingot, Aluminium, 4)
+                .fluidOutputs(CarbonDioxide.getFluid(3000))
                 .circuitMeta(2)
                 .blastFurnaceTemp(1700)
                 .duration(1000).EUt(VA[MV]).buildAndRegister();
