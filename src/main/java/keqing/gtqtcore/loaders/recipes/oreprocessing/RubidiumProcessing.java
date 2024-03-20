@@ -31,7 +31,7 @@ public class RubidiumProcessing {
                 .output(dust, Alumina)
                 .output(dust, SiliconDioxide, 4)
                 .fluidOutputs(HeavyAlkaliChlorideSolution.getFluid(1000))
-                .duration(400).EUt(VA[EV]).buildAndRegister();
+                .duration(400).EUt(VA[MV]).buildAndRegister();
 
         // Sn + 4Cl -> SnCl4
         BURNER_REACTOR_RECIPES.recipeBuilder()
