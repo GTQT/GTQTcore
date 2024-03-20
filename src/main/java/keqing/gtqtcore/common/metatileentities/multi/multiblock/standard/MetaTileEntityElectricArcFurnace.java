@@ -72,6 +72,7 @@ import static gregicality.multiblocks.api.unification.material.GCYMMaterialIconT
 import static gregtech.api.GTValues.HV;
 import static gregtech.api.GTValues.VA;
 import static gregtech.api.unification.material.Materials.*;
+import static java.lang.Math.max;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.Stellite;
 
 public class MetaTileEntityElectricArcFurnace extends GTQTRecipeMapMultiblockController implements IHeatingCoil {
@@ -153,7 +154,7 @@ public class MetaTileEntityElectricArcFurnace extends GTQTRecipeMapMultiblockCon
         {
                 if(isActive())
                 {
-                    if(simulateTemp>=0&&simulateTemp<blastFurnaceTemperature)simulateTemp+=(blastFurnaceTemperature-simulateTemp)*0.001*eleTier;
+                    if(simulateTemp>=0&&simulateTemp<blastFurnaceTemperature)simulateTemp+=max((blastFurnaceTemperature-simulateTemp)*0.001*eleTier,1);
                 }
                 if(simulateTemp>=100&&!isActive())//模拟降温
                 {
@@ -423,7 +424,7 @@ public class MetaTileEntityElectricArcFurnace extends GTQTRecipeMapMultiblockCon
         }
         // the subtracted tier gives the starting level (exclusive) of the +100K heat bonus
         this.blastFurnaceTemperature += 100 *
-                Math.max(0, GTUtility.getFloorTierByVoltage(getEnergyContainer().getInputVoltage()) - GTValues.MV);
+                max(0, GTUtility.getFloorTierByVoltage(getEnergyContainer().getInputVoltage()) - GTValues.MV);
 
         Object eleTier = context.get("EleTiredStats");
         Object tubeTier = context.get("ChemicalPlantTubeTiredStats");
