@@ -20,7 +20,7 @@ public class GalliumNitrideChain {
                 .fluidInputs(Chloromethane.getFluid(3000))
                 .fluidOutputs(Trimethylaluminium.getFluid(500))
                 .output(dust, Salt, 6)
-                .duration(150).EUt(VA[EV]).buildAndRegister();
+                .duration(150).EUt(VA[MV]).buildAndRegister();
 
         // Ga + 3Cl -> GaCl3
         CHEMICAL_RECIPES.recipeBuilder()
@@ -35,7 +35,7 @@ public class GalliumNitrideChain {
                 .fluidInputs(Trimethylaluminium.getFluid(500))
                 .output(dust, AluminiumTrichloride, 4)
                 .fluidOutputs(Trimethylgallium.getFluid(1000))
-                .duration(300).EUt(VA[HV]).buildAndRegister();
+                .duration(300).EUt(VA[MV]).buildAndRegister();
 
         // AlCl3 + 3H2O -> Al(OH)3 + 3HCl
         CHEMICAL_BATH_RECIPES.recipeBuilder()
