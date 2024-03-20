@@ -17,6 +17,21 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem IMPREGNATED_SUBSTRATE;
     public static MetaItem<?>.MetaValueItem IMPREGNATED_EPOXY;
     public static MetaItem<?>.MetaValueItem MEMORY_CARD;
+    public static MetaItem<?>.MetaValueItem GENERAL_CIRCUIT_ULV;
+    public static MetaItem<?>.MetaValueItem GENERAL_CIRCUIT_LV;
+    public static MetaItem<?>.MetaValueItem GENERAL_CIRCUIT_MV;
+    public static MetaItem<?>.MetaValueItem GENERAL_CIRCUIT_HV;
+    public static MetaItem<?>.MetaValueItem GENERAL_CIRCUIT_EV;
+    public static MetaItem<?>.MetaValueItem GENERAL_CIRCUIT_IV;
+    public static MetaItem<?>.MetaValueItem GENERAL_CIRCUIT_LuV;
+    public static MetaItem<?>.MetaValueItem GENERAL_CIRCUIT_ZPM;
+    public static MetaItem<?>.MetaValueItem GENERAL_CIRCUIT_UV;
+    public static MetaItem<?>.MetaValueItem GENERAL_CIRCUIT_UHV;
+    public static MetaItem<?>.MetaValueItem GENERAL_CIRCUIT_UEV;
+    public static MetaItem<?>.MetaValueItem GENERAL_CIRCUIT_UIV;
+    public static MetaItem<?>.MetaValueItem GENERAL_CIRCUIT_UXV;
+    public static MetaItem<?>.MetaValueItem GENERAL_CIRCUIT_OpV;
+    public static MetaItem<?>.MetaValueItem GENERAL_CIRCUIT_MAX;
 
     public static MetaItem<?>.MetaValueItem SOLAR_PLATE_MKI;
     public static MetaItem<?>.MetaValueItem SOLAR_PLATE_MKII;

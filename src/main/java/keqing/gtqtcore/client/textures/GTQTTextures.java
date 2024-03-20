@@ -11,6 +11,8 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.util.ResourceLocation;
 
+import static keqing.gtqtcore.api.utils.GTQTUtil.gtqtId;
+
 
 public class GTQTTextures {
     public static OrientedOverlayRenderer SUBSONIC_AXIAL_COMPRESSOR_OVERLAY = new OrientedOverlayRenderer("multiblock/subsonic_axial_compressor");
@@ -25,7 +27,6 @@ public class GTQTTextures {
     public static OrientedOverlayRenderer NAQUADAH_REACTOR_OVERLAY = new OrientedOverlayRenderer("machines/naquadah_reactor");
     //怎么写？请看
     //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/client/textures/GSTextures.java
-    public static TextureAtlasSprite HALO;
     public static OrientedOverlayRenderer LIGHTNING_ROD_OVERLAY;
     public static OrientedOverlayRenderer CHEMICAL_PLANT;
     public static SimpleOverlayRenderer CATALYST_HATCH;
@@ -150,13 +151,53 @@ public class GTQTTextures {
 
         }
 
-        public static void register(TextureMap textureMap) {
-            FORCE_FIELD = textureMap.registerSprite(GTQTUtil.gtqtId("blocks/force_field"));
-            HALO = textureMap.registerSprite(GTQTUtil.gtqtId("items/halo"));
-            PRESSURE_PIPE_SIDE = textureMap.registerSprite(new ResourceLocation(GTQTCore.MODID, "blocks/pipe/pressure_pipe_side"));
-            PRESSURE_PIPE_OPEN = textureMap.registerSprite(new ResourceLocation(GTQTCore.MODID, "blocks/pipe/pressure_pipe_open"));
+    //  Multi Renderer
+    public static TextureAtlasSprite HALO_NOISE;
+    public static TextureAtlasSprite HALO;
+    public static TextureAtlasSprite[] COSMIC;
+    public static TextureAtlasSprite COSMIC_0;
+    public static TextureAtlasSprite COSMIC_1;
+    public static TextureAtlasSprite COSMIC_2;
+    public static TextureAtlasSprite COSMIC_3;
+    public static TextureAtlasSprite COSMIC_4;
+    public static TextureAtlasSprite COSMIC_5;
+    public static TextureAtlasSprite COSMIC_6;
+    public static TextureAtlasSprite COSMIC_7;
+    public static TextureAtlasSprite COSMIC_8;
+    public static TextureAtlasSprite COSMIC_9;
 
-        }
+    public static void register(TextureMap textureMap) {
+        FORCE_FIELD = textureMap.registerSprite(gtqtId("blocks/force_field"));
+        HALO = textureMap.registerSprite(gtqtId("items/halo"));
+        PRESSURE_PIPE_SIDE = textureMap.registerSprite(new ResourceLocation(GTQTCore.MODID, "blocks/pipe/pressure_pipe_side"));
+        PRESSURE_PIPE_OPEN = textureMap.registerSprite(new ResourceLocation(GTQTCore.MODID, "blocks/pipe/pressure_pipe_open"));
+        HALO_NOISE = textureMap.registerSprite(gtqtId("items/halo_noise"));
+        COSMIC_0 = textureMap.registerSprite(gtqtId("shader/cosmic_0"));
+        COSMIC_1 = textureMap.registerSprite(gtqtId("shader/cosmic_1"));
+        COSMIC_2 = textureMap.registerSprite(gtqtId("shader/cosmic_2"));
+        COSMIC_3 = textureMap.registerSprite(gtqtId("shader/cosmic_3"));
+        COSMIC_4 = textureMap.registerSprite(gtqtId("shader/cosmic_4"));
+        COSMIC_5 = textureMap.registerSprite(gtqtId("shader/cosmic_5"));
+        COSMIC_6 = textureMap.registerSprite(gtqtId("shader/cosmic_6"));
+        COSMIC_7 = textureMap.registerSprite(gtqtId("shader/cosmic_7"));
+        COSMIC_8 = textureMap.registerSprite(gtqtId("shader/cosmic_8"));
+        COSMIC_9 = textureMap.registerSprite(gtqtId("shader/cosmic_9"));
+        COSMIC = new TextureAtlasSprite[] {
+                COSMIC_0,
+                COSMIC_1,
+                COSMIC_2,
+                COSMIC_3,
+                COSMIC_4,
+                COSMIC_5,
+                COSMIC_6,
+                COSMIC_7,
+                COSMIC_8,
+                COSMIC_9
+
+        };
+        FORCE_FIELD = textureMap.registerSprite(gtqtId("blocks/multiblocks/quantum_force_transformer/force_field"));
+    }
+
     public static void preInit() {
         TextureUtils.addIconRegister(GTQTTextures::register);
     }

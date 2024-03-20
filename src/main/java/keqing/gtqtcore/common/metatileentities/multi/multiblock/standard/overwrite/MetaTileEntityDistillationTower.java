@@ -60,6 +60,15 @@ public class MetaTileEntityDistillationTower extends GTQTRecipeMapMultiblockOver
         this.recipeMapWorkable = new DistillationTowerLogic(this);
     }
     @Override
+    protected Function<BlockPos, Integer> multiblockPartSorter() {
+        return RelativeDirection.UP.getSorter(getFrontFacing(), getUpwardsFacing(), isFlipped());
+    }
+
+    @Override
+    public boolean allowsExtendedFacing() {
+        return false;
+    }
+    @Override
     public void writeInitialSyncData(PacketBuffer buf) {
         super.writeInitialSyncData(buf);
         buf.writeInt(this.casingTier);
@@ -124,15 +133,7 @@ public class MetaTileEntityDistillationTower extends GTQTRecipeMapMultiblockOver
             return ParallelNum;
         }
     }
-    @Override
-    protected Function<BlockPos, Integer> multiblockPartSorter() {
-        return RelativeDirection.UP.getSorter(getFrontFacing(), getUpwardsFacing(), isFlipped());
-    }
 
-    @Override
-    public boolean allowsExtendedFacing() {
-        return false;
-    }
 
     @Override
     public void receiveCustomData(int dataId, PacketBuffer buf) {

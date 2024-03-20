@@ -146,7 +146,7 @@ public class GTQTElementMaterials {
         GTQTMaterials.Infinity = new Material.Builder(getMaterialsId(), gregtechId("infinity"))
                 .ingot()
                 .liquid(new FluidBuilder().temperature((int) V[UIV]))
-                .iconSet(SHINY)
+                .iconSet(CUSTOM_INFINITY)
                 .element(GTQTElements.Infinity)
                 .blast(12600, BlastProperty.GasTier.HIGHER)
                 .rotorStats(18.0f, 10.0f, 128000)

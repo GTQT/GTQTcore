@@ -3,6 +3,7 @@ package keqing.gtqtcore.client;
 import keqing.gtqtcore.api.utils.GTQTLog;
 import keqing.gtqtcore.client.renderer.handler.StructureSelectRenderer;
 import keqing.gtqtcore.client.textures.GTQTTextures;
+import keqing.gtqtcore.client.utils.ShaderUtils;
 import keqing.gtqtcore.client.utils.TitleUtils;
 import keqing.gtqtcore.common.CommonProxy;
 
@@ -49,6 +50,8 @@ public class ClientProxy extends CommonProxy {
     public void preLoad()
     {
         super.preLoad();
+        MinecraftForge.EVENT_BUS.register(new ClientEventHandler());
+        ShaderUtils.initShaders();
         GTQTTextures.init();
         GTQTTextures.preInit();
     }
