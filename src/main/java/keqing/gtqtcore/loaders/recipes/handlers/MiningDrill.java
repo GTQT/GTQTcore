@@ -141,7 +141,7 @@ public class MiningDrill {
                 .chancedOutput(ore,Bauxite,2000,200)
                 .chancedOutput(ore,Tantalite,2000,200)
                 .chancedOutput(ore,Gold,2000,200)
-                .tier(2)
+                .tier(3)
                 .EUt(480)
                 .duration(40)
                 .circuitMeta(10)
