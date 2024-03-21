@@ -57,6 +57,7 @@ public class MetaTileEntityWaterPowerStation extends MultiblockWithDisplayBase i
     private int coilLevel;
     private int number;
     private int outputEu;
+    private int water=0;
     private boolean isWorkingEnabled;
     private final MetaTileEntityWaterPowerStationLogic logic;
     private IEnergyContainer energyContainer;
@@ -74,13 +75,14 @@ public class MetaTileEntityWaterPowerStation extends MultiblockWithDisplayBase i
         this.coilLevel = GTQTUtil.getOrDefault(() -> coilLevel instanceof IHeatingCoilBlockStats,
                 () ->  ((IHeatingCoilBlockStats) coilLevel).getLevel(),
                 BlockWireCoil.CoilType.CUPRONICKEL.getLevel());
+        this.water = logic.checkWater();
     }
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
         textList.add(new TextComponentTranslation("======================="));
         textList.add(new TextComponentTranslation("gtqtcore.wps.count", number,coilLevel));
-        textList.add(new TextComponentTranslation("gtqtcore.wps.checkwater", logic.checkWater(),(number*2+1)*(number*2+1)*4));
+        textList.add(new TextComponentTranslation("gtqtcore.wps.checkwater", water,(number*2+1)*(number*2+1)*4));
         textList.add(new TextComponentTranslation("gtqtcore.wps.output1", outputEu));
         textList.add(new TextComponentTranslation("gtqtcore.wps.output2", geteu()));
         textList.add(new TextComponentTranslation("======================="));
@@ -89,17 +91,17 @@ public class MetaTileEntityWaterPowerStation extends MultiblockWithDisplayBase i
     protected void updateFormedValid() {
         this.logic.update();
         generator();
-        this.outputEu = logic.checkWater() *coilLevel/8;
+        this.outputEu = water *coilLevel/8;
     }
 
     private long geteu()
     {
         Random rand = new Random();
         int randomNum = rand.nextInt(40);
-        return (long) (logic.checkWater() *coilLevel*(randomNum+80)/800);
+        return (long) (water *coilLevel*(randomNum+80)/800);
     }
     private void generator() {
-        isWorkingEnabled=this.energyContainer.getEnergyStored()<this.energyContainer.getEnergyCapacity()&&logic.checkWater() > 0;
+        isWorkingEnabled=this.energyContainer.getEnergyStored()<this.energyContainer.getEnergyCapacity()&&water > 0;
         if(isWorkingEnabled)
         {
             this.energyContainer.addEnergy(geteu());
@@ -202,7 +204,6 @@ public class MetaTileEntityWaterPowerStation extends MultiblockWithDisplayBase i
             this.metaTileEntity = metaTileEntity;
             this.tier = tier;
         }
-
         public int checkWater()
         {
             int waterpos=0;

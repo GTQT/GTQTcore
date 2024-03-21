@@ -55,9 +55,9 @@ public class AluminiumLine {
         //铝土矿-》偏铝酸钠-》氢氧化铝-》氧化铝
         AUTOCLAVE_RECIPES.recipeBuilder()
                 .input(crushed,Bauxite,2)
-                .fluidInputs(Steam.getFluid(9600))
+                .fluidInputs(Steam.getFluid(8000))
                 .output(dust,SodiumAluminate,4)
-                .fluidOutputs(Water.getFluid(2100))
+                .fluidOutputs(Water.getFluid(2000))
                 .EUt(30)
                 .duration(400)
                 .buildAndRegister();
