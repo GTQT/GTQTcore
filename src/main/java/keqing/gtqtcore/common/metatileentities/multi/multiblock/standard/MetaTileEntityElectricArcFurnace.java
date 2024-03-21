@@ -1,11 +1,9 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
 import gregtech.api.GTValues;
-import gregtech.api.GregTechAPI;
 import gregtech.api.block.IHeatingCoilBlockStats;
 import gregtech.api.capability.IHeatingCoil;
 import gregtech.api.capability.IMultipleTankHandler;
-import gregtech.api.capability.impl.HeatingCoilRecipeLogic;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
@@ -15,7 +13,6 @@ import gregtech.api.metatileentity.multiblock.MultiblockDisplayText;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
-import gregtech.api.pattern.MultiblockShapeInfo;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
@@ -29,15 +26,9 @@ import gregtech.api.util.TextComponentUtil;
 import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
-import gregtech.common.ConfigHolder;
-import gregtech.common.blocks.BlockMetalCasing.MetalCasingType;
 import gregtech.common.blocks.BlockWireCoil.CoilType;
-import gregtech.common.blocks.MetaBlocks;
-import gregtech.common.metatileentities.MetaTileEntities;
 import gregtech.core.sound.GTSoundEvents;
 
-import groovyjarjarantlr4.v4.runtime.misc.NotNull;
-import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.metaileentity.GTQTRecipeMapMultiblockController;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
@@ -48,10 +39,8 @@ import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTADVBlock;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.text.ITextComponent;
@@ -63,17 +52,13 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
-import static gregicality.multiblocks.api.unification.material.GCYMMaterialIconTypes.molten;
 import static gregtech.api.GTValues.HV;
 import static gregtech.api.GTValues.VA;
 import static gregtech.api.unification.material.Materials.*;
 import static java.lang.Math.max;
-import static keqing.gtqtcore.api.unification.GTQTMaterials.Stellite;
 
 public class MetaTileEntityElectricArcFurnace extends GTQTRecipeMapMultiblockController implements IHeatingCoil {
     private int eleTier;
@@ -91,6 +76,9 @@ public class MetaTileEntityElectricArcFurnace extends GTQTRecipeMapMultiblockCon
     private int W;
     //private int Mo;
     private boolean isOutput=false;
+    private boolean isInput=false;
+    private int runTime = 0;
+    private int maxTime = 0;
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("simulateTemp", simulateTemp);
@@ -152,16 +140,9 @@ public class MetaTileEntityElectricArcFurnace extends GTQTRecipeMapMultiblockCon
 
         if(ArcBlast())
         {
-                if(isActive())
-                {
-                    if(simulateTemp>=0&&simulateTemp<blastFurnaceTemperature)simulateTemp+=max((blastFurnaceTemperature-simulateTemp)*0.001*eleTier,1);
-                }
-                if(simulateTemp>=100&&!isActive())//模拟降温
-                {
-                    simulateTemp-=(double)simulateTemp/4000.0*tubeTier;
-                }
-
-
+            if (isActive()&& maxTime ==2000)if(simulateTemp>=0&&simulateTemp<blastFurnaceTemperature)simulateTemp+=max((blastFurnaceTemperature-simulateTemp)*0.001*eleTier,1);
+            if(isActive()&&isInput)
+            {
                 //元素配比
                 FluidStack FeF = Iron.getFluid(144);//Fe
                 if(Fe<16*tubeTier) {
@@ -225,58 +206,70 @@ public class MetaTileEntityElectricArcFurnace extends GTQTRecipeMapMultiblockCon
                 }
 
                  */
+            }
+            if(simulateTemp>=100&&!isActive())//模拟降温
+            {
+                simulateTemp-=(double)simulateTemp/4000.0*tubeTier;
+            }
 
-                if(isOutput) {
-                    //模拟冶炼 这里按照优先度 从上往下写
-                    //钨钢
-                    FluidStack TUNGSTENSTEEL = TungstenSteel.getFluid(144 * 2 * simulateTemp / getCurrentTemperature());
-                    if (simulateTemp > 4500) {
-                        if (Fe >= 1 && W >= 1) {
-                            Fe -= 1;
-                            W -= 1;
-                            fillTanks(TUNGSTENSTEEL, false);
-                        }
+
+
+
+            if(isOutput) {
+                //模拟冶炼 这里按照优先度 从上往下写
+                //钨钢
+                FluidStack TUNGSTENSTEEL = TungstenSteel.getFluid(144 * 2 * simulateTemp / getCurrentTemperature());
+                if (simulateTemp > 4500) {
+                    if (Fe >= 1 && W >= 1) {
+                        Fe -= 1;
+                        W -= 1;
+                        fillTanks(TUNGSTENSTEEL, false);
                     }
-                    //不锈钢
-                    FluidStack STAINLESSSTEEL = StainlessSteel.getFluid(144 * 9 * simulateTemp / getCurrentTemperature());
-                    if (simulateTemp > 2000) {
-                        if (Fe >= 6 && Ni >= 1 && Mn >= 1 && Cr >= 1) {
-                            Fe -= 6;
-                            Ni -= 1;
-                            Mn -= 1;
-                            Cr -= 1;
-                            fillTanks(STAINLESSSTEEL, false);
-                        }
-                    }
-                    //殷钢
-                    FluidStack INVARSTEEL = Invar.getFluid(144 * 3 * simulateTemp / getCurrentTemperature());
-                    if (simulateTemp > 1600) {
-                        if (Fe >= 2 && Ni >= 1) {
-                            Fe -= 2;
-                            Ni -= 1;
-                            fillTanks(INVARSTEEL, false);
-                        }
-                    }
-                    //钒钢
-                    FluidStack VANADIUMSTEEL = VanadiumSteel.getFluid(144 * 9 * simulateTemp / getCurrentTemperature());
-                    if (simulateTemp > 1400) {
-                        if (Fe >= 7 && V >= 1 && Cr>=1) {
-                            Fe -= 7;
-                            V -= 1;
-                            Cr -= 1;
-                            fillTanks(VANADIUMSTEEL, false);
-                        }
-                    }
-                    //钢
-                    FluidStack STEEL = Steel.getFluid(144 * simulateTemp / getCurrentTemperature());
-                    if (simulateTemp > 1000) {
-                        if (Fe >= 1) {
-                            Fe -= 1;
-                            fillTanks(STEEL, false);
-                        }
-                    }
-                    if(Fe<=1)isOutput=false;
                 }
+                //不锈钢
+                FluidStack STAINLESSSTEEL = StainlessSteel.getFluid(144 * 9 * simulateTemp / getCurrentTemperature());
+                if (simulateTemp > 2000) {
+                    if (Fe >= 6 && Ni >= 1 && Mn >= 1 && Cr >= 1) {
+                        Fe -= 6;
+                        Ni -= 1;
+                        Mn -= 1;
+                        Cr -= 1;
+                        fillTanks(STAINLESSSTEEL, false);
+                    }
+                }
+                //殷钢
+                FluidStack INVARSTEEL = Invar.getFluid(144 * 3 * simulateTemp / getCurrentTemperature());
+                if (simulateTemp > 1600) {
+                    if (Fe >= 2 && Ni >= 1) {
+                        Fe -= 2;
+                        Ni -= 1;
+                        fillTanks(INVARSTEEL, false);
+                    }
+                }
+                //钒钢
+                FluidStack VANADIUMSTEEL = VanadiumSteel.getFluid(144 * 9 * simulateTemp / getCurrentTemperature());
+                if (simulateTemp > 1400) {
+                    if (Fe >= 7 && V >= 1 && Cr>=1) {
+                        Fe -= 7;
+                        V -= 1;
+                        Cr -= 1;
+                        fillTanks(VANADIUMSTEEL, false);
+                    }
+                }
+                //钢
+                FluidStack STEEL = Steel.getFluid(144 * simulateTemp / getCurrentTemperature());
+                if (simulateTemp > 1000) {
+                    if (Fe >= 1) {
+                        Fe -= 1;
+                        fillTanks(STEEL, false);
+                    }
+                }
+                if(Fe<=1&&ArcBlast()&& isOutput) {
+                    FluidStack STEEL16 = Steel.getFluid(144*16);
+                    fillTanks(STEEL16, false);
+                    isOutput = false;
+                }
+            }
 
 
 
@@ -320,7 +313,16 @@ public class MetaTileEntityElectricArcFurnace extends GTQTRecipeMapMultiblockCon
                     if (++this.progressTime > this.maxProgressTime) {
                         this.completeRecipe();
                         simulateTemp = simulateTemp * 11 / 12;
-                        isOutput=true;
+                        isOutput = false;
+                    }
+                    else{
+                        runTime =this.progressTime;
+                        maxTime =this.maxProgressTime;
+                        if (runTime <1800&& maxTime ==2000)isInput=true;
+                        if (runTime ==1800&& maxTime ==2000) {
+                            isInput = false;
+                            isOutput = true;
+                        }
                     }
                 }
                 else
