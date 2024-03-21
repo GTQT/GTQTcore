@@ -20,6 +20,7 @@ import gregtech.common.items.MetaItems;
 import gregtech.common.metatileentities.MetaTileEntities;
 import gregtech.loaders.recipe.CraftingComponent;
 import gregtech.loaders.recipe.MachineRecipeLoader;
+import keqing.gtqtcore.api.unification.GTQTMaterials;
 import keqing.gtqtcore.api.unification.ore.GTQTOrePrefix;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTElectrobath;
@@ -241,7 +242,28 @@ public class MetaTileEntityLoader {
                         .EUt(VA[7])
                         .duration(800))
                 .buildAndRegister();
+        //处理阵列
+        ModHandler.addShapedRecipe(true, "lv_processing_array", LV_PROCESSING_ARRAY.getStackForm(), "RCR", "SPE", "HNH", 'R',
+                MetaItems.ROBOT_ARM_MV, 'C', new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.MV), 'S',
+                MetaItems.SENSOR_MV, 'P', GTQTMetaTileEntities.ASSEMBLY_LINE.getStackForm(), 'E', MetaItems.EMITTER_MV,
+                'H', new UnificationEntry(OrePrefix.plate, Invar), 'N',
+                new UnificationEntry(OrePrefix.pipeLargeFluid, Aluminium));
 
+        ModHandler.addShapedRecipe(true, "mv_processing_array", MV_PROCESSING_ARRAY.getStackForm(),  "RCR", "SPE", "HNH", 'R',
+                MetaItems.ROBOT_ARM_HV, 'C', new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.HV), 'S',
+                MetaItems.SENSOR_HV, 'P', GTQTMetaTileEntities.LV_PROCESSING_ARRAY.getStackForm(), 'E', MetaItems.EMITTER_HV,
+                'H', new UnificationEntry(OrePrefix.plate, Talonite), 'N',
+                new UnificationEntry(OrePrefix.pipeLargeFluid, StainlessSteel));
+
+        ModHandler.addShapedRecipe(true, "hv_processing_array", HV_PROCESSING_ARRAY.getStackForm(), "RCR", "SPE", "HNH", 'R',
+                MetaItems.ROBOT_ARM_EV, 'C', new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.EV), 'S',
+                MetaItems.SENSOR_EV, 'P', GTQTMetaTileEntities.MV_PROCESSING_ARRAY.getStackForm(), 'E', MetaItems.EMITTER_EV,
+                'H', new UnificationEntry(OrePrefix.plate, Titanium), 'N',
+                new UnificationEntry(OrePrefix.pipeLargeFluid, Polyethylene));
+
+        ModHandler.addShapedRecipe(true, "hv_machine_access_interface", HV_MACHINE_HATCH.getStackForm(),
+                "CHS", 'C', new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.HV), 'H',
+                MetaTileEntities.HULL[GTValues.HV].getStackForm(), 'S', MetaItems.SENSOR_HV.getStackForm());
         //耐火砖快乐配方
         ASSEMBLER_RECIPES.recipeBuilder()
                 .inputs(MetaItems.FIRECLAY_BRICK.getStackForm(6))

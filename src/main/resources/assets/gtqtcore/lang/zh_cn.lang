@@ -450,6 +450,16 @@ gtqtcore.machine.fracturing.zpm.name=压裂机III
 
 gtqtcore.machine.ion_implantator.name=等离子体源离子注入器
 gtqtcore.machine.cz_puller.name=柴可斯基外延单晶硅生长炉
+
+gtqtcore.machine.lv_processing_array.name=小型处理阵列（§7LV§r）
+gtqtcore.machine.mv_processing_array.name=小型处理阵列（§bMV§r）
+gtqtcore.machine.hv_processing_array.name=小型处理阵列（§6HV§r）
+
+gregtech.multiblock.lv_processing_array.description=处理阵列可将最多2个单方块机器集成在一个多方块机器中，以实现更高效的自动化。
+gregtech.multiblock.mv_processing_array.description=处理阵列可将最多4个单方块机器集成在一个多方块机器中，以实现更高效的自动化。
+gregtech.multiblock.hv_processing_array.description=处理阵列可将最多8个单方块机器集成在一个多方块机器中，以实现更高效的自动化。
+gtqtcore.machine.hv_machine_hatch.name=机器访问接口
+
 gtqtcore.machine.ex_cvd.name=极限粒子CVD
 gtqtcore.multiblock.wps.tooltip.1=可拓展多方块结构长度，升级线圈等级，每片结构都需要安装能源仓
 gtqtcore.multiblock.wps.tooltip.2=基础电量基于多方块结构长度为半径，高度四格以主方块为中心范围内的水
