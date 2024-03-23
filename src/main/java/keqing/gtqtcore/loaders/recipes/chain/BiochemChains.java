@@ -47,6 +47,15 @@ public class BiochemChains {
                 .fluidOutputs(Latex.getFluid(400))
                 .buildAndRegister();
 
+        CHEMICAL_RECIPES.recipeBuilder()
+                .duration(20)
+                .EUt(30)
+                .input(STICKY_RESIN,2)
+                .input(dust,RockSalt,1)
+                .fluidInputs(Water.getFluid(800))
+                .fluidOutputs(Latex.getFluid(400))
+                .buildAndRegister();
+
 
         PR_MIX.recipeBuilder()
                 .duration(1200)
