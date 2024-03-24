@@ -127,9 +127,9 @@ public class MetaTileEntityOilPool extends NoEnergyMultiblockController {
                     amount = amount + 20;
                 }
             }
-            if (PORUJI.isFluidStackIdentical(inputTank.drain(PORUJI, false))) {
+            if (poruji<10000&&PORUJI.isFluidStackIdentical(inputTank.drain(PORUJI, false))) {
                 inputTank.drain(PORUJI, true);
-                if(poruji<114514) poruji = poruji + 20;
+                poruji = poruji + 20;
             }
 
         }

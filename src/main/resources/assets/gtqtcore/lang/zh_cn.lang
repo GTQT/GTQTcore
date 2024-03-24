@@ -415,7 +415,10 @@ gtqtcore.machine.pcb.tooltip.3=建造 超净循环过滤器 来提升机器工�
 gtqtcore.machine.pcb.tooltip.4=建造 高频散热模块 来控制多方块温度，消耗冷却液来降低多方块温度。
 gtqtcore.machine.pcb.tooltip.5=多方块工作时会持续升温，当温度大于阈值时会停止工作。如果没有建造 高频散热模块 模块，那么多方块只会在待机时降温，多方块温度处于不同区间时拥有不同的并行数量。
 gtqtcore.multiblock.pcb1.amount=冷却效率：%s(上限 %s )温度：%sK(上限 %s K)
-
+gregtech.machine.biorea.gtqtupdate.1=升级 过滤器 玻璃 管道等级获得性能提升
+gregtech.machine.biorea.gtqtupdate.2=试用多方块需要往其中注入（RawGrowthMedium EnrichedBacterialSludge  FermentedBiomass Biomass）以及水提供多方块基本水量以及反应底液浓度
+gregtech.machine.biorea.gtqtupdate.3=不同配方需求不同反应浓度（配方标注的为浓度下限），浓度越高多方块提升倍率越高
+gregtech.machine.biorea.gtqtupdate.4=可享受耗时减免 并行加成等提升，工作完毕后会消耗一部分反应底液，请注意补充
 gtqtcore.hc.count1=换热面积：%s 换热效率：%s
 gtqtcore.hc.count2=外壳等级：%s 玻璃等级：%s
 gtqtcore.hc.count3=高温热源缓存：%s 低温热量缓存：%s
