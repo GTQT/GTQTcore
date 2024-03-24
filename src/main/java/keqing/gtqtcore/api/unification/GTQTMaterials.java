@@ -480,6 +480,14 @@ public class GTQTMaterials {
     public static Material DNAw;
     public static Material Wool;
     public static Material DNAn;
+    public static Material Yanghuatai;
+    public static Material Suanxingtai;
+    public static Material Hanzaxianhuatai;
+    public static Material Xianhuaitaicd;
+    public static Material Cuzhixianhuatai;
+    public static Material Xianhuatai;
+    public static Material Yisuanbei;
+    public static Material Tcfour;
 
     //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/api/unification/GSMaterials.java
 
