@@ -4,6 +4,10 @@ import gregtech.api.unification.material.Material;
 import keqing.gtqtcore.api.unification.matreials.*;
 
 public class GTQTMaterials {
+    public static  Material TRISP;
+    public static Material TRISN;
+    public static  Material TRIS ;
+    public static  Material CTAB;
     public static  Material MTBE;
     public static Material GalvanizedSteel;
     public static Material Inconel625;
@@ -459,6 +463,23 @@ public class GTQTMaterials {
     public static Material Dxesh;
     public static Material NanometerBariumTitanate;
     public static Material Htitanate;
+    public static Material Xiudaishiliuwan;
+    public static Material Hexadecanol;
+    public static Material Hydroxyethanethiol;
+    public static Material Erliudaierganchun;
+    public static Material Isoamylalcohol;
+    public static Material Isoamylalcohola;
+    public static Material DNAa;
+    public static Material DNAb;
+    public static Material DNAc;
+    public static Material DNAd;
+    public static Material DNAe;
+    public static Material DNAh;
+    public static Material DNAl;
+    public static Material DNAp;
+    public static Material DNAw;
+    public static Material Wool;
+    public static Material DNAn;
 
     //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/api/unification/GSMaterials.java
 

@@ -62,6 +62,29 @@ item.gt.tool.jinitaimei_hv.name=电动%s螺丝钳
 gregtech.material.alumite=耐酸铝
 gregtech.material.amber=琥珀
 gregtech.material.alubrassa=铝黄铜
+
+gregtech.material.cbat=CTAB
+gregtech.material.xiudaishiliuwan=溴代十六烷
+gregtech.material.hexadecanol=十六醇
+gregtech.material.hydroxyethanethiol=β-巯基乙醇
+gregtech.material.erliudaierganchun=二硫代二甘醇
+gregtech.material.tris=三羟甲基氨基甲烷
+gregtech.material.trisp=三羟甲基氨基甲烷
+gregtech.material.trisn=三羟甲基硝基甲烷
+gregtech.material.isoamylalcohol=异戊醇
+gregtech.material.isoamylalcohola=异戊醛
+
+gregtech.material.dnaa=含细胞DNA提取物
+gregtech.material.dnab=纯净DNA提取物
+gregtech.material.dnac=浓缩DNA提取物
+gregtech.material.dnad=富集培养DNA提取物
+gregtech.material.dnae=普适DNA定向细胞
+gregtech.material.dnah=易爆DNA定向细胞
+gregtech.material.dnal=自热DNA定向细胞
+gregtech.material.dnap=扩散DNA定向细胞
+gregtech.material.dnaw=纤维DNA定向细胞
+gregtech.material.dnan=闪星DNA定向细胞
+gregtech.material.wool=动物纤维粉末
 gregtech.material.high_pressure_steam=蒸汽废气
 gregtech.material.high_pressure_steam=高压蒸汽
 gregtech.material.pyrotheum=炽焱燃料
@@ -392,7 +415,10 @@ gtqtcore.machine.pcb.tooltip.3=建造 超净循环过滤器 来提升机器工�
 gtqtcore.machine.pcb.tooltip.4=建造 高频散热模块 来控制多方块温度，消耗冷却液来降低多方块温度。
 gtqtcore.machine.pcb.tooltip.5=多方块工作时会持续升温，当温度大于阈值时会停止工作。如果没有建造 高频散热模块 模块，那么多方块只会在待机时降温，多方块温度处于不同区间时拥有不同的并行数量。
 gtqtcore.multiblock.pcb1.amount=冷却效率：%s(上限 %s )温度：%sK(上限 %s K)
-
+gregtech.machine.biorea.gtqtupdate.1=升级 过滤器 玻璃 管道等级获得性能提升
+gregtech.machine.biorea.gtqtupdate.2=试用多方块需要往其中注入（RawGrowthMedium EnrichedBacterialSludge  FermentedBiomass Biomass）以及水提供多方块基本水量以及反应底液浓度
+gregtech.machine.biorea.gtqtupdate.3=不同配方需求不同反应浓度（配方标注的为浓度下限），浓度越高多方块提升倍率越高
+gregtech.machine.biorea.gtqtupdate.4=可享受耗时减免 并行加成等提升，工作完毕后会消耗一部分反应底液，请注意补充
 gtqtcore.hc.count1=换热面积：%s 换热效率：%s
 gtqtcore.hc.count2=外壳等级：%s 玻璃等级：%s
 gtqtcore.hc.count3=高温热源缓存：%s 低温热量缓存：%s
@@ -450,6 +476,16 @@ gtqtcore.machine.fracturing.zpm.name=压裂机III
 
 gtqtcore.machine.ion_implantator.name=等离子体源离子注入器
 gtqtcore.machine.cz_puller.name=柴可斯基外延单晶硅生长炉
+
+gtqtcore.machine.lv_processing_array.name=小型处理阵列（§7LV§r）
+gtqtcore.machine.mv_processing_array.name=小型处理阵列（§bMV§r）
+gtqtcore.machine.hv_processing_array.name=小型处理阵列（§6HV§r）
+
+gregtech.multiblock.lv_processing_array.description=处理阵列可将最多2个单方块机器集成在一个多方块机器中，以实现更高效的自动化。
+gregtech.multiblock.mv_processing_array.description=处理阵列可将最多4个单方块机器集成在一个多方块机器中，以实现更高效的自动化。
+gregtech.multiblock.hv_processing_array.description=处理阵列可将最多8个单方块机器集成在一个多方块机器中，以实现更高效的自动化。
+gtqtcore.machine.hv_machine_hatch.name=机器访问接口
+
 gtqtcore.machine.ex_cvd.name=极限粒子CVD
 gtqtcore.multiblock.wps.tooltip.1=可拓展多方块结构长度，升级线圈等级，每片结构都需要安装能源仓
 gtqtcore.multiblock.wps.tooltip.2=基础电量基于多方块结构长度为半径，高度四格以主方块为中心范围内的水

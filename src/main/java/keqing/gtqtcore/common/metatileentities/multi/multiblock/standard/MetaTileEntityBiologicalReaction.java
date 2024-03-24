@@ -41,7 +41,9 @@ import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTIsaCasing;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -49,6 +51,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -217,7 +220,14 @@ public class MetaTileEntityBiologicalReaction extends GTQTRecipeMapMultiblockCon
             return super.checkRecipe(recipe, consumeIfSuccess);
         else return false;
     }
-
+    @Override
+    public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
+        super.addInformation(stack, player, tooltip, advanced);
+        tooltip.add(I18n.format("gregtech.machine.biorea.gtqtupdate.1"));
+        tooltip.add(I18n.format("gregtech.machine.biorea.gtqtupdate.2"));
+        tooltip.add(I18n.format("gregtech.machine.biorea.gtqtupdate.3"));
+        tooltip.add(I18n.format("gregtech.machine.biorea.gtqtupdate.4"));
+    }
     protected class BiologicalReactionLogic extends MultiblockRecipeLogic {
 
         public BiologicalReactionLogic(RecipeMapMultiblockController tileEntity) {

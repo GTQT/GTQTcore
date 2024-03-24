@@ -29,8 +29,10 @@ import static keqing.gtqtcore.api.unification.material.info.GTQTMaterialIconSet.
 public class FirstDegreeMaterials {
     public FirstDegreeMaterials() {
     }
+
     private static int startId = 20000;
     private static final int END_ID = startId + 300;
+
     private static int getMaterialsId() {
         if (startId < END_ID) {
             return startId++;
@@ -44,14 +46,14 @@ public class FirstDegreeMaterials {
         GTQTMaterials.SuperheatedSteam = (new Material.Builder(getMaterialsId(), GTUtility.gregtechId("super_heated_steam"))).fluid().color(14601607).build();
         GTQTMaterials.Pyrotheum = (new Material.Builder(getMaterialsId(), GTUtility.gregtechId("pyrotheum"))).fluid().color(14601000).build();
 
-        GTQTMaterials.StellarMaterialResidueA = (new Material.Builder(getMaterialsId(), GTUtility.gregtechId("stellar_material_residue_a")))  .fluid().plasma().color(14601000).build().setFormula("ST-α", true);
-        GTQTMaterials.StellarMaterialResidueB = (new Material.Builder(getMaterialsId(), GTUtility.gregtechId("stellar_material_residue_b")))  .fluid().plasma().color(14600000).build().setFormula("ST-β", true);
-        GTQTMaterials.StellarMaterialResidueC = (new Material.Builder(getMaterialsId(), GTUtility.gregtechId("stellar_material_residue_c")))  .fluid().plasma().color(14639000).build().setFormula("ST-γ", true);
-        GTQTMaterials.StellarMaterial = (new Material.Builder(getMaterialsId(), GTUtility.gregtechId("stellar_material")))  .fluid().plasma().color(14638000).build().setFormula("ST-ST", true);
+        GTQTMaterials.StellarMaterialResidueA = (new Material.Builder(getMaterialsId(), GTUtility.gregtechId("stellar_material_residue_a"))).fluid().plasma().color(14601000).build().setFormula("ST-α", true);
+        GTQTMaterials.StellarMaterialResidueB = (new Material.Builder(getMaterialsId(), GTUtility.gregtechId("stellar_material_residue_b"))).fluid().plasma().color(14600000).build().setFormula("ST-β", true);
+        GTQTMaterials.StellarMaterialResidueC = (new Material.Builder(getMaterialsId(), GTUtility.gregtechId("stellar_material_residue_c"))).fluid().plasma().color(14639000).build().setFormula("ST-γ", true);
+        GTQTMaterials.StellarMaterial = (new Material.Builder(getMaterialsId(), GTUtility.gregtechId("stellar_material"))).fluid().plasma().color(14638000).build().setFormula("ST-ST", true);
 
-        GTQTMaterials.LightNaquadahFuel = (new Material.Builder(getMaterialsId(), GTUtility.gregtechId("light_naquadah_fuel"))) .fluid().color(14638000).build().setFormula("NQ", true);
-        GTQTMaterials.MediumNaquadahFuel = (new Material.Builder(getMaterialsId(), GTUtility.gregtechId("medium_naquadah_fuel"))) .fluid().color(14638000).build().setFormula("-NQ-", true);
-        GTQTMaterials.HeavyNaquadahFuel = (new Material.Builder(getMaterialsId(), GTUtility.gregtechId("heavy_naquadah_fuel"))) .fluid().color(14638000).build().setFormula("+NQ+", true);
+        GTQTMaterials.LightNaquadahFuel = (new Material.Builder(getMaterialsId(), GTUtility.gregtechId("light_naquadah_fuel"))).fluid().color(14638000).build().setFormula("NQ", true);
+        GTQTMaterials.MediumNaquadahFuel = (new Material.Builder(getMaterialsId(), GTUtility.gregtechId("medium_naquadah_fuel"))).fluid().color(14638000).build().setFormula("-NQ-", true);
+        GTQTMaterials.HeavyNaquadahFuel = (new Material.Builder(getMaterialsId(), GTUtility.gregtechId("heavy_naquadah_fuel"))).fluid().color(14638000).build().setFormula("+NQ+", true);
 
         GTQTMaterials.MagnetoHydrodynamicallyConstrainedStarMatter = new Material.Builder(getMaterialsId(), gregtechId("magneto_hydrodynamically_constrained_star_matter"))
                 .ingot()
@@ -237,7 +239,7 @@ public class FirstDegreeMaterials {
         GTQTMaterials.EthyleneChlorohydrin = new Material.Builder(getMaterialsId(), gregtechId("ethylene_chlorohydrin"))
                 .dust().fluid()
                 .color(0xB2DFEE)
-                .components(Carbon, 2, Hydrogen, 6, Oxygen, 1,Chlorine,1)
+                .components(Carbon, 2, Hydrogen, 6, Oxygen, 1, Chlorine, 1)
                 .flags(DISABLE_DECOMPOSITION)
                 .build();
 
@@ -245,7 +247,7 @@ public class FirstDegreeMaterials {
         GTQTMaterials.AmmoniumSulfate = new Material.Builder(getMaterialsId(), gregtechId("ammonium_sulfate"))
                 .dust().fluid()
                 .color(0xB2DFEE)
-                .components(Nitrogen, 2, Hydrogen, 8, Sulfur, 1,Oxygen,4)
+                .components(Nitrogen, 2, Hydrogen, 8, Sulfur, 1, Oxygen, 4)
                 .build();
 
         //轻度加氢裂解轻柴油
@@ -321,7 +323,7 @@ public class FirstDegreeMaterials {
                 .ingot()
                 .color(0x8B4C39).iconSet(METALLIC)
                 .flags(GENERATE_FOIL)
-                .components(Copper,1,Chlorine,2)
+                .components(Copper, 1, Chlorine, 2)
                 .blast(2273) // no gas tier for silicon
                 .build();
 
@@ -364,9 +366,9 @@ public class FirstDegreeMaterials {
         GTQTMaterials.NanometerBariumTitanate = new Material.Builder(getMaterialsId(), gregtechId("nanometer_barium_titanate"))
                 .ingot().dust().ore()
                 .color(0x8B6914).iconSet(METALLIC)
-                .components(Barium,1,Titanium,1,Oxygen,3)
+                .components(Barium, 1, Titanium, 1, Oxygen, 3)
                 .flags(DISABLE_DECOMPOSITION)
-                .flags(GENERATE_PLATE, GENERATE_DENSE,GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_RING, GENERATE_ROUND, GENERATE_BOLT_SCREW, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR)
+                .flags(GENERATE_PLATE, GENERATE_DENSE, GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_RING, GENERATE_ROUND, GENERATE_BOLT_SCREW, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR)
                 .build();
 
         //海绵钛
@@ -374,7 +376,7 @@ public class FirstDegreeMaterials {
                 .ingot()
                 .color(0x8B6914).iconSet(METALLIC)
                 .flags(DISABLE_DECOMPOSITION)
-                .components(Titanium,1)
+                .components(Titanium, 1)
                 .build();
 
         GTQTMaterials.Fluix = new Material.Builder(getMaterialsId(), gregtechId("fluix"))
@@ -388,153 +390,153 @@ public class FirstDegreeMaterials {
         GTQTMaterials.RedstoneAlloy = new Material.Builder(getMaterialsId(), gregtechId("redstone_alloy"))
                 .ingot().fluid()
                 .color(0x943423).iconSet(SHINY)
-                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROD,GENERATE_FRAME,GENERATE_BOLT_SCREW,GENERATE_FOIL,GENERATE_GEAR,GENERATE_SMALL_GEAR,GENERATE_ROUND,GENERATE_SPRING)
-                .components(Redstone ,1,Hydrogen, 1,Oxygen ,1)
-                .blast(2700,LOW)
-                .cableProperties(32,1,2)
+                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_DENSE, GENERATE_LONG_ROD, GENERATE_ROD, GENERATE_FRAME, GENERATE_BOLT_SCREW, GENERATE_FOIL, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_ROUND, GENERATE_SPRING)
+                .components(Redstone, 1, Hydrogen, 1, Oxygen, 1)
+                .blast(2700, LOW)
+                .cableProperties(32, 1, 2)
                 .build();
 
         GTQTMaterials.PulsatingIron = new Material.Builder(getMaterialsId(), gregtechId("pulsating_iron"))
                 .ingot().fluid()
                 .color(0x4b915b).iconSet(SHINY)
-                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROD,GENERATE_FRAME,GENERATE_BOLT_SCREW,GENERATE_FOIL,GENERATE_GEAR,GENERATE_SMALL_GEAR,GENERATE_ROUND,GENERATE_SPRING)
-                .components(EnderPearl ,1,Iron, 1,RedstoneAlloy ,1)
+                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_DENSE, GENERATE_LONG_ROD, GENERATE_ROD, GENERATE_FRAME, GENERATE_BOLT_SCREW, GENERATE_FOIL, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_ROUND, GENERATE_SPRING)
+                .components(EnderPearl, 1, Iron, 1, RedstoneAlloy, 1)
                 .build();
 
         GTQTMaterials.ConductiveIron = new Material.Builder(getMaterialsId(), gregtechId("conductive_iron"))
                 .ingot().fluid()
                 .color(0xb89791).iconSet(SHINY)
-                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROD,GENERATE_FRAME,GENERATE_BOLT_SCREW,GENERATE_FOIL,GENERATE_GEAR,GENERATE_SMALL_GEAR,GENERATE_ROUND,GENERATE_SPRING)
-                .components(Silver ,1,Iron, 1,RedstoneAlloy ,1)
+                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_DENSE, GENERATE_LONG_ROD, GENERATE_ROD, GENERATE_FRAME, GENERATE_BOLT_SCREW, GENERATE_FOIL, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_ROUND, GENERATE_SPRING)
+                .components(Silver, 1, Iron, 1, RedstoneAlloy, 1)
                 .build();
 
         GTQTMaterials.EnergeticAlloy = new Material.Builder(getMaterialsId(), gregtechId("energetic_alloy"))
                 .ingot().fluid()
                 .color(0xd89045).iconSet(SHINY)
-                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROD,GENERATE_FRAME,GENERATE_BOLT_SCREW,GENERATE_FOIL,GENERATE_GEAR,GENERATE_SMALL_GEAR,GENERATE_ROUND,GENERATE_SPRING)
-                .components(BlackSteel ,1,Gold, 1,ConductiveIron ,1)
-                .blast(2700,LOW)
-                .cableProperties(512,2,4)
+                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_DENSE, GENERATE_LONG_ROD, GENERATE_ROD, GENERATE_FRAME, GENERATE_BOLT_SCREW, GENERATE_FOIL, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_ROUND, GENERATE_SPRING)
+                .components(BlackSteel, 1, Gold, 1, ConductiveIron, 1)
+                .blast(2700, LOW)
+                .cableProperties(512, 2, 4)
                 .build();
 
         GTQTMaterials.VibrantAlloy = new Material.Builder(getMaterialsId(), gregtechId("vibrant_alloy"))
                 .ingot().fluid()
                 .color(0x859f2d).iconSet(SHINY)
-                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROD,GENERATE_FRAME,GENERATE_BOLT_SCREW,GENERATE_FOIL,GENERATE_GEAR,GENERATE_SMALL_GEAR,GENERATE_ROUND,GENERATE_SPRING)
-                .components(EnderEye ,1,EnergeticAlloy, 1,Chromite ,1)
-                .blast(2700,LOW)
-                .cableProperties(2048,4,4)
+                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_DENSE, GENERATE_LONG_ROD, GENERATE_ROD, GENERATE_FRAME, GENERATE_BOLT_SCREW, GENERATE_FOIL, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_ROUND, GENERATE_SPRING)
+                .components(EnderEye, 1, EnergeticAlloy, 1, Chromite, 1)
+                .blast(2700, LOW)
+                .cableProperties(2048, 4, 4)
                 .build();
 
         GTQTMaterials.Soularium = new Material.Builder(getMaterialsId(), gregtechId("soularium"))
                 .ingot().fluid()
                 .color(0x372719).iconSet(SHINY)
-                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROD,GENERATE_FRAME,GENERATE_BOLT_SCREW,GENERATE_FOIL,GENERATE_GEAR,GENERATE_SMALL_GEAR,GENERATE_ROUND,GENERATE_SPRING)
-                .components(Gold ,1,Ash,1)
+                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_DENSE, GENERATE_LONG_ROD, GENERATE_ROD, GENERATE_FRAME, GENERATE_BOLT_SCREW, GENERATE_FOIL, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_ROUND, GENERATE_SPRING)
+                .components(Gold, 1, Ash, 1)
                 .build();
 
         GTQTMaterials.ElectricalSteel = new Material.Builder(getMaterialsId(), gregtechId("electrical_steel"))
                 .ingot().fluid()
                 .color(0x9d9d9d).iconSet(SHINY)
-                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROD,GENERATE_FRAME,GENERATE_BOLT_SCREW,GENERATE_FOIL,GENERATE_GEAR,GENERATE_SMALL_GEAR,GENERATE_ROUND,GENERATE_SPRING)
-                .components(Steel ,1,Coal, 1,Silicon ,1)
-                .blast(2700,LOW)
+                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_DENSE, GENERATE_LONG_ROD, GENERATE_ROD, GENERATE_FRAME, GENERATE_BOLT_SCREW, GENERATE_FOIL, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_ROUND, GENERATE_SPRING)
+                .components(Steel, 1, Coal, 1, Silicon, 1)
+                .blast(2700, LOW)
                 .rotorStats(9.0f, 5.0f, 3000)
                 .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 28000, 5)
                         .attackSpeed(0.1F).enchantability(21).build())
-                .cableProperties(128,2,2)
+                .cableProperties(128, 2, 2)
                 .build();
 
         GTQTMaterials.DarkSteel = new Material.Builder(getMaterialsId(), gregtechId("dark_steel"))
                 .ingot().fluid()
                 .color(0x2f292f).iconSet(SHINY)
-                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROD,GENERATE_FRAME,GENERATE_BOLT_SCREW,GENERATE_FOIL,GENERATE_GEAR,GENERATE_SMALL_GEAR,GENERATE_ROUND,GENERATE_SPRING)
-                .components(ElectricalSteel ,1,Coal, 1,Obsidian ,1)
+                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_DENSE, GENERATE_LONG_ROD, GENERATE_ROD, GENERATE_FRAME, GENERATE_BOLT_SCREW, GENERATE_FOIL, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_ROUND, GENERATE_SPRING)
+                .components(ElectricalSteel, 1, Coal, 1, Obsidian, 1)
                 .rotorStats(12.0f, 6.0f, 4500)
                 .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 32000, 5)
                         .attackSpeed(0.1F).enchantability(21).build())
-                .blast(3600,MID)
+                .blast(3600, MID)
                 .build();
 
         GTQTMaterials.EndSteel = new Material.Builder(getMaterialsId(), gregtechId("end_steel"))
                 .ingot().fluid()
                 .color(0xbdb88c).iconSet(SHINY)
-                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROD,GENERATE_FRAME,GENERATE_BOLT_SCREW,GENERATE_FOIL,GENERATE_GEAR,GENERATE_SMALL_GEAR,GENERATE_ROUND,GENERATE_SPRING)
-                .components(DarkSteel ,1,Endstone, 1,TungstenSteel ,1)
+                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_DENSE, GENERATE_LONG_ROD, GENERATE_ROD, GENERATE_FRAME, GENERATE_BOLT_SCREW, GENERATE_FOIL, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_ROUND, GENERATE_SPRING)
+                .components(DarkSteel, 1, Endstone, 1, TungstenSteel, 1)
                 .rotorStats(15.0f, 7.0f, 6000)
                 .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 36000, 5)
                         .attackSpeed(0.1F).enchantability(21).build())
-                .blast(4500,MID)
+                .blast(4500, MID)
                 .build();
 
         GTQTMaterials.CrystallineAlloy = new Material.Builder(getMaterialsId(), gregtechId("crystalline_alloy"))
                 .ingot().fluid()
                 .color(0x8FE3F7).iconSet(SHINY)
-                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROD,GENERATE_FRAME,GENERATE_BOLT_SCREW,GENERATE_FOIL,GENERATE_GEAR,GENERATE_SMALL_GEAR,GENERATE_ROUND,GENERATE_SPRING)
-                .components(PulsatingIron ,1,Diamond,1,Emerald,1,Gold,1)
-                .blast(4500,MID)
+                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_DENSE, GENERATE_LONG_ROD, GENERATE_ROD, GENERATE_FRAME, GENERATE_BOLT_SCREW, GENERATE_FOIL, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_ROUND, GENERATE_SPRING)
+                .components(PulsatingIron, 1, Diamond, 1, Emerald, 1, Gold, 1)
+                .blast(4500, MID)
                 .build();
 
         GTQTMaterials.MelodicAlloy = new Material.Builder(getMaterialsId(), gregtechId("melodic_alloy"))
                 .ingot().fluid()
                 .color(0xA877A8).iconSet(SHINY)
-                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROD,GENERATE_FRAME,GENERATE_BOLT_SCREW,GENERATE_FOIL,GENERATE_GEAR,GENERATE_SMALL_GEAR,GENERATE_ROUND,GENERATE_SPRING)
-                .components(EndSteel ,1,EnderEye,1,Bismuth,1)
-                .blast(5400,MID)
+                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_DENSE, GENERATE_LONG_ROD, GENERATE_ROD, GENERATE_FRAME, GENERATE_BOLT_SCREW, GENERATE_FOIL, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_ROUND, GENERATE_SPRING)
+                .components(EndSteel, 1, EnderEye, 1, Bismuth, 1)
+                .blast(5400, MID)
                 .build();
 
         GTQTMaterials.StellarAlloy = new Material.Builder(getMaterialsId(), gregtechId("stellar_alloy"))
                 .ingot().fluid()
                 .color(0xCCCCCC).iconSet(SHINY)
-                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROD,GENERATE_FRAME,GENERATE_BOLT_SCREW,GENERATE_FOIL,GENERATE_GEAR,GENERATE_SMALL_GEAR,GENERATE_ROUND,GENERATE_SPRING)
-                .components(MelodicAlloy ,1,NetherStar,1,Naquadah,1)
-                .blast(7200,MID)
+                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_DENSE, GENERATE_LONG_ROD, GENERATE_ROD, GENERATE_FRAME, GENERATE_BOLT_SCREW, GENERATE_FOIL, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_ROUND, GENERATE_SPRING)
+                .components(MelodicAlloy, 1, NetherStar, 1, Naquadah, 1)
+                .blast(7200, MID)
                 .rotorStats(15.0f, 7.0f, 6000)
                 .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 32000, 5)
                         .attackSpeed(0.1F).enchantability(21).build())
-                .cableProperties(32768,6,8)
+                .cableProperties(32768, 6, 8)
                 .build();
 
         GTQTMaterials.CrystallinePinkSlime = new Material.Builder(getMaterialsId(), gregtechId("crystalline_pink_slime"))
                 .ingot().fluid()
                 .color(0xE79EDB).iconSet(SHINY)
-                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROD,GENERATE_FRAME,GENERATE_BOLT_SCREW,GENERATE_FOIL,GENERATE_GEAR,GENERATE_SMALL_GEAR,GENERATE_ROUND,GENERATE_SPRING)
-                .components(CrystallineAlloy ,1,Diamond,1,RawRubber,1)
-                .blast(5000,MID)
+                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_DENSE, GENERATE_LONG_ROD, GENERATE_ROD, GENERATE_FRAME, GENERATE_BOLT_SCREW, GENERATE_FOIL, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_ROUND, GENERATE_SPRING)
+                .components(CrystallineAlloy, 1, Diamond, 1, RawRubber, 1)
+                .blast(5000, MID)
                 .rotorStats(15.0f, 7.0f, 4000)
                 .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 6000, 5)
                         .attackSpeed(0.1F).enchantability(21).build())
-                .cableProperties(2048,6,2)
+                .cableProperties(2048, 6, 2)
                 .build();
 
         GTQTMaterials.EnergeticSilver = new Material.Builder(getMaterialsId(), gregtechId("energetic_silver"))
                 .ingot().fluid()
                 .color(0x598DB3).iconSet(SHINY)
-                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROD,GENERATE_FRAME,GENERATE_BOLT_SCREW,GENERATE_FOIL,GENERATE_GEAR,GENERATE_SMALL_GEAR,GENERATE_ROUND,GENERATE_SPRING)
-                .components(Silver ,1,ConductiveIron,1,BlackSteel,1)
-                .blast(2700,MID)
+                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_DENSE, GENERATE_LONG_ROD, GENERATE_ROD, GENERATE_FRAME, GENERATE_BOLT_SCREW, GENERATE_FOIL, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_ROUND, GENERATE_SPRING)
+                .components(Silver, 1, ConductiveIron, 1, BlackSteel, 1)
+                .blast(2700, MID)
                 .rotorStats(15.0f, 7.0f, 2000)
                 .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 8000, 5)
                         .attackSpeed(0.1F).enchantability(21).build())
-                .cableProperties(512,4,2)
+                .cableProperties(512, 4, 2)
                 .build();
 
         GTQTMaterials.VividAlloy = new Material.Builder(getMaterialsId(), gregtechId("vivid_alloy"))
                 .ingot().fluid()
                 .color(0x469BB1).iconSet(SHINY)
-                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROD,GENERATE_FRAME,GENERATE_BOLT_SCREW,GENERATE_FOIL,GENERATE_GEAR,GENERATE_SMALL_GEAR,GENERATE_ROUND,GENERATE_SPRING)
-                .components(Chromite ,1,EnergeticSilver,1,EnderEye,1)
-                .blast(3000,MID)
+                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_DENSE, GENERATE_LONG_ROD, GENERATE_ROD, GENERATE_FRAME, GENERATE_BOLT_SCREW, GENERATE_FOIL, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_ROUND, GENERATE_SPRING)
+                .components(Chromite, 1, EnergeticSilver, 1, EnderEye, 1)
+                .blast(3000, MID)
                 .rotorStats(15.0f, 7.0f, 4000)
                 .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 12000, 5)
                         .attackSpeed(0.1F).enchantability(21).build())
-                .cableProperties(2048,4,2)
+                .cableProperties(2048, 4, 2)
                 .build();
 
         GTQTMaterials.CrudeSteel = new Material.Builder(getMaterialsId(), gregtechId("crude_steel"))
                 .ingot().fluid()
                 .color(0x807C74).iconSet(ROUGH)
-                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROD,GENERATE_FRAME,GENERATE_BOLT_SCREW,GENERATE_FOIL,GENERATE_GEAR,GENERATE_SMALL_GEAR,GENERATE_ROUND,GENERATE_SPRING)
+                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_DENSE, GENERATE_LONG_ROD, GENERATE_ROD, GENERATE_FRAME, GENERATE_BOLT_SCREW, GENERATE_FOIL, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_ROUND, GENERATE_SPRING)
                 .flags(DISABLE_DECOMPOSITION)
                 .build();
 
@@ -543,7 +545,7 @@ public class FirstDegreeMaterials {
                 .fluid().dust()
                 .color(0xd89045).iconSet(SHINY)
                 .flags(DISABLE_DECOMPOSITION)
-                .components(Aluminium ,1,Nitrogen,3,Oxygen,9)
+                .components(Aluminium, 1, Nitrogen, 3, Oxygen, 9)
                 .build();
 
         //海带灰溶液
@@ -560,52 +562,52 @@ public class FirstDegreeMaterials {
         GTQTMaterials.PotassiumIodide = new Material.Builder(getMaterialsId(), gregtechId("potassium_iodide"))
                 .fluid()
                 .color(0xd89045).iconSet(SHINY)
-                .components(Potassium ,1,Iodine,1)
+                .components(Potassium, 1, Iodine, 1)
                 .build();
         //溴化钾
         GTQTMaterials.PotassiumBromide = new Material.Builder(getMaterialsId(), gregtechId("potassium_bromide"))
                 .fluid()
                 .color(0xd89045).iconSet(SHINY)
-                .components(Potassium ,1,Bromine,1)
+                .components(Potassium, 1, Bromine, 1)
                 .build();
         //2-丁烯醛
         GTQTMaterials.Crotonaldehyde = new Material.Builder(getMaterialsId(), gregtechId("crotonaldehyde"))
                 .fluid()
                 .color(0xd89045).iconSet(SHINY)
-                .components(Carbon ,4,Hydrogen,8,Oxygen,1)
+                .components(Carbon, 4, Hydrogen, 8, Oxygen, 1)
                 .build();
 
         //2-乙基（-2-）己烯醛
         GTQTMaterials.Ethylhexenal = new Material.Builder(getMaterialsId(), gregtechId("ethylhexenal"))
                 .fluid()
                 .color(0xd89045).iconSet(SHINY)
-                .components(Carbon,8,Hydrogen,14,Oxygen,1)
+                .components(Carbon, 8, Hydrogen, 14, Oxygen, 1)
                 .build();
         //草酸
         GTQTMaterials.EthanedioicAcid = new Material.Builder(getMaterialsId(), gregtechId("ethanedioic_acid"))
                 .fluid()
                 .color(0xd89045).iconSet(SHINY)
-                .components(Hydrogen,2,Carbon,2,Oxygen,4)
+                .components(Hydrogen, 2, Carbon, 2, Oxygen, 4)
                 .build();
 
         //五氧化二钒
         GTQTMaterials.VanadiumOxide = new Material.Builder(getMaterialsId(), gregtechId("vanadium_oxide"))
                 .dust()
                 .color(0xd89045).iconSet(SHINY)
-                .components(Vanadium,2,Oxygen,5)
+                .components(Vanadium, 2, Oxygen, 5)
                 .build();
         //SodiumSilicofluoride 氟硅酸钠
         GTQTMaterials.SodiumSilicofluoride = new Material.Builder(getMaterialsId(), gregtechId("sodium_silicofluoride"))
                 .fluid()
                 .color(0xd89045).iconSet(SHINY)
-                .components(Sodium,2,Silicon,1,Fluorine,6)
+                .components(Sodium, 2, Silicon, 1, Fluorine, 6)
                 .build();
 
         //Hexafluorosilicic acid 氟硅酸
         GTQTMaterials.HexafluorosilicicAcid = new Material.Builder(getMaterialsId(), gregtechId("hexafluorosilicic_acid"))
                 .fluid()
                 .color(0xd89045).iconSet(SHINY)
-                .components(Hydrogen,2,Silicon,1,Fluorine,6)
+                .components(Hydrogen, 2, Silicon, 1, Fluorine, 6)
                 .build();
 
         //独居石稀土浊溶液
@@ -618,7 +620,7 @@ public class FirstDegreeMaterials {
         GTQTMaterials.Yanghuahayanghuagao = new Material.Builder(getMaterialsId(), gregtechId("yanghuahayanghuagao"))
                 .dust()
                 .color(0xFFB90F).iconSet(SHINY)
-                .components(Hafnium,1,Zirconium,1,Oxygen,4)
+                .components(Hafnium, 1, Zirconium, 1, Oxygen, 4)
                 .flags(DISABLE_DECOMPOSITION)
                 .build();
 
@@ -632,14 +634,14 @@ public class FirstDegreeMaterials {
         GTQTMaterials.Yanghuaha = new Material.Builder(getMaterialsId(), gregtechId("yanghuaha"))
                 .dust()
                 .color(0xd89045).iconSet(SHINY)
-                .components(Hafnium,1,Oxygen,2)
+                .components(Hafnium, 1, Oxygen, 2)
                 .build();
 
         //四氯化铪_锆
         GTQTMaterials.Silvhuaha = new Material.Builder(getMaterialsId(), gregtechId("silvhuaha"))
                 .fluid()
                 .color(0xFFAEB9).iconSet(SHINY)
-                .components(Hafnium,1,Zirconium,1,Chlorine,8)
+                .components(Hafnium, 1, Zirconium, 1, Chlorine, 8)
                 .flags(DISABLE_DECOMPOSITION)
                 .build();
 
@@ -647,7 +649,7 @@ public class FirstDegreeMaterials {
         GTQTMaterials.Dilvhuaha = new Material.Builder(getMaterialsId(), gregtechId("dilvhuaha"))
                 .dust()
                 .color(0xFF8C00).iconSet(SHINY)
-                .components(Hafnium,1,Zirconium,1)
+                .components(Hafnium, 1, Zirconium, 1)
                 .flags(DISABLE_DECOMPOSITION)
                 .build();
 
@@ -655,7 +657,7 @@ public class FirstDegreeMaterials {
         GTQTMaterials.Iilvhuaha = new Material.Builder(getMaterialsId(), gregtechId("iilvhuaha"))
                 .fluid()
                 .color(0xFF83FA).iconSet(SHINY)
-                .components(Hafnium,1,Zirconium,1,Iodine,8)
+                .components(Hafnium, 1, Zirconium, 1, Iodine, 8)
                 .flags(DISABLE_DECOMPOSITION)
                 .build();
 
@@ -735,7 +737,7 @@ public class FirstDegreeMaterials {
         GTQTMaterials.Lvhuashi = new Material.Builder(getMaterialsId(), gregtechId("lvhuashi"))
                 .dust()
                 .color(0xF4F4F4).iconSet(SHINY)
-                .components(Cerium,1,Chlorine,2)
+                .components(Cerium, 1, Chlorine, 2)
                 .flags(DISABLE_DECOMPOSITION)
                 .build();
 
@@ -743,7 +745,7 @@ public class FirstDegreeMaterials {
         GTQTMaterials.Cvhuashi = new Material.Builder(getMaterialsId(), gregtechId("cvhuashi"))
                 .dust()
                 .color(0xF4A460).iconSet(SHINY)
-                .components(Cerium,1,Hydrogen,2,Carbon,2,Oxygen,4)
+                .components(Cerium, 1, Hydrogen, 2, Carbon, 2, Oxygen, 4)
                 .flags(DISABLE_DECOMPOSITION)
                 .build();
 
@@ -751,7 +753,7 @@ public class FirstDegreeMaterials {
         GTQTMaterials.Tvhuashi = new Material.Builder(getMaterialsId(), gregtechId("tvhuashi"))
                 .dust()
                 .color(0xF2F2F2).iconSet(SHINY)
-                .components(Cerium,2,Oxygen,3)
+                .components(Cerium, 2, Oxygen, 3)
                 .flags(DISABLE_DECOMPOSITION)
                 .build();
 
@@ -1210,7 +1212,7 @@ public class FirstDegreeMaterials {
                 .dust()
                 .color(0x48561E)
                 .iconSet(DULL)
-                .components(Carbon, 48, Hydrogen, 48 ,Nitrogen, 6)
+                .components(Carbon, 48, Hydrogen, 48, Nitrogen, 6)
                 .build();
         //  25120 Benzylamine
         GTQTMaterials.Benzylamine = new Material.Builder(getMaterialsId(), gregtechId("benzylamine"))
@@ -1440,78 +1442,78 @@ public class FirstDegreeMaterials {
                 .build();
 
         //低纯度硅岩乳液
-        GTQTMaterials.Dichunduguiyanruye= new Material.Builder(getMaterialsId(), gregtechId("dichunduguiyanruye"))
+        GTQTMaterials.Dichunduguiyanruye = new Material.Builder(getMaterialsId(), gregtechId("dichunduguiyanruye"))
                 .fluid()
                 .flags(DISABLE_DECOMPOSITION)
                 .color(0x9AFF9A)
-                .components(Naquadah,1,Oxygen,2)
+                .components(Naquadah, 1, Oxygen, 2)
                 .build();
 
         //低纯度硅岩溶液
-        GTQTMaterials.Dichunduguiyanrongye= new Material.Builder(getMaterialsId(), gregtechId("dichunduguiyanrongye"))
+        GTQTMaterials.Dichunduguiyanrongye = new Material.Builder(getMaterialsId(), gregtechId("dichunduguiyanrongye"))
                 .fluid()
                 .flags(DISABLE_DECOMPOSITION)
                 .color(0xB4EEB4)
-                .components(Naquadah,1,Oxygen,2)
+                .components(Naquadah, 1, Oxygen, 2)
                 .build();
 
         //硅岩-精金混合
-        GTQTMaterials.Nqad= new Material.Builder(getMaterialsId(), gregtechId("nqad"))
+        GTQTMaterials.Nqad = new Material.Builder(getMaterialsId(), gregtechId("nqad"))
                 .fluid()
                 .color(0xE9967A)
                 .build();
 
         //氢氧化镓 material('gallium')
-        GTQTMaterials.Galliumoh= new Material.Builder(getMaterialsId(), gregtechId("galliumoh"))
+        GTQTMaterials.Galliumoh = new Material.Builder(getMaterialsId(), gregtechId("galliumoh"))
                 .dust()
                 .color(0xDBDBDB)
-                .components(Gallium,1,Oxygen,1,Hydrogen,1)
+                .components(Gallium, 1, Oxygen, 1, Hydrogen, 1)
                 .build();
 
         //废氟
-        GTQTMaterials.Feifu= new Material.Builder(getMaterialsId(), gregtechId("feifu"))
+        GTQTMaterials.Feifu = new Material.Builder(getMaterialsId(), gregtechId("feifu"))
                 .fluid()
                 .color(0x556B2F)
                 .flags(DISABLE_DECOMPOSITION)
-                .components(Fluorine,1)
+                .components(Fluorine, 1)
                 .build();
 
         //废液
-        GTQTMaterials.Feiye= new Material.Builder(getMaterialsId(), gregtechId("feiye"))
+        GTQTMaterials.Feiye = new Material.Builder(getMaterialsId(), gregtechId("feiye"))
                 .fluid()
                 .color(0x548B54)
                 .build();
 
         //浓缩富集硅岩矿泥粉
-        GTQTMaterials.Nongsuofujiguiyankuangni= new Material.Builder(getMaterialsId(), gregtechId("nongsuofujiguiyankuangni"))
+        GTQTMaterials.Nongsuofujiguiyankuangni = new Material.Builder(getMaterialsId(), gregtechId("nongsuofujiguiyankuangni"))
                 .dust()
                 .color(0x48D1CC)
                 .build();
         //氧化硅岩混合物粉
-        GTQTMaterials.Yanghuaguiyanhunhe= new Material.Builder(getMaterialsId(), gregtechId("yanghuaguiyanhunhe"))
+        GTQTMaterials.Yanghuaguiyanhunhe = new Material.Builder(getMaterialsId(), gregtechId("yanghuaguiyanhunhe"))
                 .dust()
                 .color(0x458B00)
                 .build();
         //高纯硅岩溶液
-        GTQTMaterials.Gaochunguiyanrongye= new Material.Builder(getMaterialsId(), gregtechId("gaochunguiyanrongye"))
+        GTQTMaterials.Gaochunguiyanrongye = new Material.Builder(getMaterialsId(), gregtechId("gaochunguiyanrongye"))
                 .fluid()
                 .color(0x3CB371)
                 .build();
 
         //低纯硫酸超能硅岩粉
-        GTQTMaterials.Dichunliusuanchaonengguiyan= new Material.Builder(getMaterialsId(), gregtechId("dichunliusuanchaonengguiyan"))
+        GTQTMaterials.Dichunliusuanchaonengguiyan = new Material.Builder(getMaterialsId(), gregtechId("dichunliusuanchaonengguiyan"))
                 .dust()
                 .color(0x32CD32)
                 .build();
 
         //低纯硫酸超能硅岩溶液
-        GTQTMaterials.Dichunliusuanchaonengguiyanr= new Material.Builder(getMaterialsId(), gregtechId("dichunliusuanchaonengguiyanr"))
+        GTQTMaterials.Dichunliusuanchaonengguiyanr = new Material.Builder(getMaterialsId(), gregtechId("dichunliusuanchaonengguiyanr"))
                 .fluid()
                 .color(0x2E8B57)
                 .build();
 
         //高纯超能硅岩溶液
-        GTQTMaterials.Gaochunchaonengguiyanrongye= new Material.Builder(getMaterialsId(), gregtechId("gaochunchaonengguiyanrongye"))
+        GTQTMaterials.Gaochunchaonengguiyanrongye = new Material.Builder(getMaterialsId(), gregtechId("gaochunchaonengguiyanrongye"))
                 .fluid()
                 .color(0x228B22)
                 .build();
@@ -1521,7 +1523,7 @@ public class FirstDegreeMaterials {
                 .gas()
                 .color(0x2E8B57)
                 .flags(DISABLE_DECOMPOSITION)
-                .components(Methane, 78, HydrogenSulfide, 21, Neon, 7,Radon,2)
+                .components(Methane, 78, HydrogenSulfide, 21, Neon, 7, Radon, 2)
                 .build();
 
         GTQTMaterials.LiquidBetAir = new Material.Builder(getMaterialsId(), gregtechId("liquid_bet_air"))
@@ -1544,7 +1546,7 @@ public class FirstDegreeMaterials {
                 .gas()
                 .color(0x8B3E2F)
                 .flags(DISABLE_DECOMPOSITION)
-                .components(CarbonDioxide, 80, Argon, 20, Oxygen, 10,Radon,10,Hydrogen,10,Nitrogen,10,MagicGas,10)
+                .components(CarbonDioxide, 80, Argon, 20, Oxygen, 10, Radon, 10, Hydrogen, 10, Nitrogen, 10, MagicGas, 10)
                 .build();
 
         GTQTMaterials.LiquidMarsAir = new Material.Builder(getMaterialsId(), gregtechId("liquid_mars_air"))
@@ -1552,7 +1554,7 @@ public class FirstDegreeMaterials {
                 .color(0x8B4500)
                 .flags(DISABLE_DECOMPOSITION)
                 .components(CarbonDioxide, 160, Argon, 15, Oxygen, 15, Helium3, 10, Radon,
-                        10, Hydrogen, 10,Nitrogen,10,MagicGas,5)
+                        10, Hydrogen, 10, Nitrogen, 10, MagicGas, 5)
                 .build();
 
         //离散态微薄魔力
@@ -1603,16 +1605,16 @@ public class FirstDegreeMaterials {
                 .ingot()
                 .color(0x428fdb)
                 .iconSet(DULL)
-                .flags(GENERATE_PLATE,GENERATE_DOUBLE_PLATE,GENERATE_ROD,GENERATE_LONG_ROD)
+                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD)
                 .build();
-                Richmagic.setFormula("*KQ*");
+        Richmagic.setFormula("*KQ*");
 
         //四溴对二甲苯
         GTQTMaterials.Tetrabromo = new Material.Builder(getMaterialsId(), gregtechId("tetrabromo"))
                 .fluid()
                 .color(0x8B8B00)
                 .flags(DISABLE_DECOMPOSITION)
-                .components(Carbon, 8, Hydrogen, 6, Bromine,4)
+                .components(Carbon, 8, Hydrogen, 6, Bromine, 4)
                 .build();
 
         //六溴对二甲苯
@@ -1620,7 +1622,7 @@ public class FirstDegreeMaterials {
                 .fluid()
                 .color(0x8E8E38)
                 .flags(DISABLE_DECOMPOSITION)
-                .components(Carbon, 8, Hydrogen, 4, Bromine,6)
+                .components(Carbon, 8, Hydrogen, 4, Bromine, 6)
                 .build();
 
         //BPS
@@ -1744,7 +1746,7 @@ public class FirstDegreeMaterials {
                 .flags(NO_SMASHING, DECOMPOSITION_BY_ELECTROLYZING)
                 .components(Magnesium, 2, Sulfur, 1, Oxygen, 4)
                 .build()
-                .setFormula("Mg2(SiO4)",true);
+                .setFormula("Mg2(SiO4)", true);
 
         GTQTMaterials.Lizardite = new Material.Builder(getMaterialsId(), gregtechId("lizardite"))
                 .dust()
@@ -1752,7 +1754,7 @@ public class FirstDegreeMaterials {
                 .flags(NO_SMASHING, DECOMPOSITION_BY_ELECTROLYZING)
                 .components(Magnesium, 3, Silicon, 2, Oxygen, 9, Hydrogen, 4)
                 .build()
-                .setFormula("Mg3Si2O5(OH)4",true);
+                .setFormula("Mg3Si2O5(OH)4", true);
 
         //锗线
         //氧化闪锌混合物
@@ -1760,33 +1762,33 @@ public class FirstDegreeMaterials {
                 .dust()
                 .color(0xAEEEEE)
                 .build()
-                .setFormula("Ge?O?",true);
+                .setFormula("Ge?O?", true);
 
         //富集闪锌混合物
         GTQTMaterials.Fujishanxinhunhewu = new Material.Builder(getMaterialsId(), gregtechId("fujishanxinhunhewu"))
                 .dust()
                 .color(0xB0C4DE)
                 .build()
-                .setFormula("Ge?O?",true);
+                .setFormula("Ge?O?", true);
         //富集闪锌焙烧残留
         GTQTMaterials.Fujishanxinbeishaocanliu = new Material.Builder(getMaterialsId(), gregtechId("fujishanxinbeishaocanliu"))
                 .dust()
                 .color(0xB0E0E6)
                 .build()
-                .setFormula("Ge?O?",true);
+                .setFormula("Ge?O?", true);
 
         //含闪锌溶液
         GTQTMaterials.Hanxinrongye = new Material.Builder(getMaterialsId(), gregtechId("hanxinrongye"))
                 .fluid()
                 .color(0xa79e42)
                 .build()
-                .setFormula("Ge?SO4?",true);
+                .setFormula("Ge?SO4?", true);
         //氢氧化铁
         GTQTMaterials.Qingyanghuatie = new Material.Builder(getMaterialsId(), gregtechId("qingyanghuatie"))
                 .dust()
                 .color(0xCD3700)
                 .flags(DISABLE_DECOMPOSITION)
-                .components(Iron, 1,  Oxygen, 3, Hydrogen, 3)
+                .components(Iron, 1, Oxygen, 3, Hydrogen, 3)
                 .build();
 
         //混锗铁残渣
@@ -1794,47 +1796,47 @@ public class FirstDegreeMaterials {
                 .dust()
                 .color(0xB3EE3A)
                 .build()
-                .setFormula("Ge?Fe?Zn?",true);
+                .setFormula("Ge?Fe?Zn?", true);
 
         //混锗镉残渣
         GTQTMaterials.Hungezhecanzha = new Material.Builder(getMaterialsId(), gregtechId("hungezhecanzha"))
                 .dust()
                 .color(0xC67171)
                 .build()
-                .setFormula("Ge?Cd?Zn?",true);
+                .setFormula("Ge?Cd?Zn?", true);
 
         //残渣溶液
         GTQTMaterials.Canzharongye = new Material.Builder(getMaterialsId(), gregtechId("canzharongye"))
                 .fluid()
                 .color(0xCD950C)
                 .build()
-                .setFormula("Ge?Cd?*",true);
+                .setFormula("Ge?Cd?*", true);
 
         //一氧化锗
         GTQTMaterials.Yiyanghauzhe = new Material.Builder(getMaterialsId(), gregtechId("yiyanghauzhe"))
                 .fluid()
                 .color(0x97FFFF)
                 .build()
-                .setFormula("GeO",true);
+                .setFormula("GeO", true);
         //炉渣
         GTQTMaterials.Zhezha = new Material.Builder(getMaterialsId(), gregtechId("zhezha"))
                 .dust()
                 .color(0xA0522D)
                 .build()
-                .setFormula("Fe?Zn?Pd?Cd?",true);
+                .setFormula("Fe?Zn?Pd?Cd?", true);
 
         //鞣酸
         GTQTMaterials.Rousuan = new Material.Builder(getMaterialsId(), gregtechId("rousuan"))
                 .fluid()
                 .color(0x8B6914)
                 .build()
-                .setFormula("C76H52O46",true);
+                .setFormula("C76H52O46", true);
 
         GTQTMaterials.Rzousuan = new Material.Builder(getMaterialsId(), gregtechId("rzousuan"))
                 .fluid()
                 .color(0x8B7E66)
                 .build()
-                .setFormula("C76H52O46*",true);
+                .setFormula("C76H52O46*", true);
 
 
         //富集锗沉淀
@@ -1842,7 +1844,7 @@ public class FirstDegreeMaterials {
                 .dust()
                 .color(0x7EC0EE)
                 .build()
-                .setFormula("Ge?",true);
+                .setFormula("Ge?", true);
 
 
         //四氯化锗
@@ -1850,28 +1852,28 @@ public class FirstDegreeMaterials {
                 .fluid()
                 .color(0x8A2BE2)
                 .build()
-                .setFormula("GeCl4*",true);
+                .setFormula("GeCl4*", true);
 
         //四氯化锗
         GTQTMaterials.Ssilvhuazhe = new Material.Builder(getMaterialsId(), gregtechId("ssilvhuazhe"))
                 .fluid()
                 .color(0xa79e42)
                 .build()
-                .setFormula("GeCl4*HCl",true);
+                .setFormula("GeCl4*HCl", true);
 
         //高淳四氯化锗
         GTQTMaterials.Sgilvhuazhe = new Material.Builder(getMaterialsId(), gregtechId("sgilvhuazhe"))
                 .fluid()
                 .color(0x7171C6)
                 .build()
-                .setFormula("GeCl4",true);
+                .setFormula("GeCl4", true);
 
         //高纯二氧化锗
         GTQTMaterials.Egryanghuazhe = new Material.Builder(getMaterialsId(), gregtechId("egryanghuazhe"))
                 .dust()
                 .color(0x68228B)
                 .build()
-                .setFormula("Ge02",true);
+                .setFormula("Ge02", true);
 
         //杀虫剂
         GTQTMaterials.Dfeltamethrin = new Material.Builder(getMaterialsId(), gregtechId("dfeltamethrin"))
@@ -1879,23 +1881,23 @@ public class FirstDegreeMaterials {
                 .color(0x0000EE)
                 .flags(DISABLE_DECOMPOSITION)
                 .build()
-                .setFormula("C22H19Br2NO3",true);
+                .setFormula("C22H19Br2NO3", true);
 
         //溴氰菊酯
         GTQTMaterials.Deltamethrin = new Material.Builder(getMaterialsId(), gregtechId("deltamethrin"))
                 .dust()
-                .components(Carbon, 22, Hydrogen, 19, Bromine, 2, Nitrogen, 1,Oxygen,3)
+                .components(Carbon, 22, Hydrogen, 19, Bromine, 2, Nitrogen, 1, Oxygen, 3)
                 .color(0x0000FF)
                 .flags(DISABLE_DECOMPOSITION)
                 .build()
-                .setFormula("C22H19Br2NO3",true);
+                .setFormula("C22H19Br2NO3", true);
 
         //二溴水苯
         GTQTMaterials.Dfeltamethrina = new Material.Builder(getMaterialsId(), gregtechId("dfeltamethrina"))
                 .fluid()
                 .color(0x006400)
                 .flags(DISABLE_DECOMPOSITION)
-                .components(Carbon, 22, Hydrogen, 19, Bromine, 2, Nitrogen, 1,Oxygen,3)
+                .components(Carbon, 22, Hydrogen, 19, Bromine, 2, Nitrogen, 1, Oxygen, 3)
                 .build();
 
         //二溴苯酚
@@ -1904,48 +1906,190 @@ public class FirstDegreeMaterials {
                 .color(0x00688B)
                 .flags(DISABLE_DECOMPOSITION)
                 .build()
-                .setFormula("C6H4Br2O",true);
+                .setFormula("C6H4Br2O", true);
         //二溴-2-丙酮酚
         GTQTMaterials.Dfeltamethrinc = new Material.Builder(getMaterialsId(), gregtechId("dfeltamethrinc"))
                 .fluid()
                 .color(0x00868B)
                 .flags(DISABLE_DECOMPOSITION)
                 .build()
-                .setFormula("C6H4Br2O",true);
+                .setFormula("C6H4Br2O", true);
         //二溴-2-丙酮酚盐酸盐
         GTQTMaterials.Dfeltamethrind = new Material.Builder(getMaterialsId(), gregtechId("dfeltamethrind"))
                 .fluid()
                 .color(0x008B00)
                 .flags(DISABLE_DECOMPOSITION)
                 .build()
-                .setFormula("C6H4Br2O*HCl",true);
+                .setFormula("C6H4Br2O*HCl", true);
         //二溴菊酸
         GTQTMaterials.Dfeltamethrine = new Material.Builder(getMaterialsId(), gregtechId("dfeltamethrine"))
                 .fluid()
                 .color(0x008B45)
                 .flags(DISABLE_DECOMPOSITION)
                 .build()
-                .setFormula("C8H10Br2O2",true);
+                .setFormula("C8H10Br2O2", true);
         //二溴菊酰氯
         GTQTMaterials.Dfeltamethrinf = new Material.Builder(getMaterialsId(), gregtechId("dfeltamethrinf"))
                 .fluid()
                 .color(0x008B8B)
                 .flags(DISABLE_DECOMPOSITION)
                 .build()
-                .setFormula("C8H10Br2O2*CN",true);
+                .setFormula("C8H10Br2O2*CN", true);
         //间苯氧基苯甲醛
         GTQTMaterials.Dfeltamethring = new Material.Builder(getMaterialsId(), gregtechId("dfeltamethring"))
                 .fluid()
                 .color(0x009ACD)
                 .flags(DISABLE_DECOMPOSITION)
                 .build()
-                .setFormula("C13H10O2",true);
+                .setFormula("C13H10O2", true);
         //α-氰基间苯氧基苯甲醇
         GTQTMaterials.Dfeltamethrinh = new Material.Builder(getMaterialsId(), gregtechId("dfeltamethrinh"))
                 .fluid()
                 .color(0x00B2EE)
                 .flags(DISABLE_DECOMPOSITION)
                 .build()
-                .setFormula("C22H19Br2NO3",true);
+                .setFormula("C22H19Br2NO3", true);
+
+        //风趣幽默的生物工程
+        //CTAB
+        GTQTMaterials.CTAB = new Material.Builder(getMaterialsId(), gregtechId("cbat"))
+                .fluid()
+                .color(0x9ACD32)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("C19H42BrN", true);
+        //溴代十六烷
+        GTQTMaterials.Xiudaishiliuwan = new Material.Builder(getMaterialsId(), gregtechId("xiudaishiliuwan"))
+                .fluid()
+                .color(0xAB82FF)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("C16H33Br", true);
+        //十六醇
+        GTQTMaterials.Hexadecanol = new Material.Builder(getMaterialsId(), gregtechId("hexadecanol"))
+                .fluid()
+                .color(0xBDB76B)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("C16H34O", true);
+
+        //β-巯基乙醇
+        GTQTMaterials.Hydroxyethanethiol = new Material.Builder(getMaterialsId(), gregtechId("hydroxyethanethiol"))
+                .fluid()
+                .color(0xCD3333)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("C2H6OS", true);
+        //二硫代二甘醇
+        GTQTMaterials.Erliudaierganchun = new Material.Builder(getMaterialsId(), gregtechId("erliudaierganchun"))
+                .fluid()
+                .color(0xCD8C95)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("C4H6O4S2", true);
+        //三羟甲基氨基甲烷
+        GTQTMaterials.TRIS = new Material.Builder(getMaterialsId(), gregtechId("tris"))
+                .fluid()
+                .color(0xCDB7B5)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("(HOCH2)3CNH2", true);
+
+        //三羟甲基氨基甲烷
+        GTQTMaterials.TRISP = new Material.Builder(getMaterialsId(), gregtechId("trisp"))
+                .fluid()
+                .color(0xDEB887)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("(HOCH2)3CNH2*", true);
+        //三羟甲基硝基甲烷
+        GTQTMaterials.TRISN = new Material.Builder(getMaterialsId(), gregtechId("trisn"))
+                .fluid()
+                .color(0xEEAEEE)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("CH2（NO3）3", true);
+        //异戊醇
+        GTQTMaterials.Isoamylalcohol = new Material.Builder(getMaterialsId(), gregtechId("isoamylalcohol"))
+                .fluid()
+                .color(0xEE00EE)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("C5H12O", true);
+
+        //异戊醛
+        GTQTMaterials.Isoamylalcohola = new Material.Builder(getMaterialsId(), gregtechId("isoamylalcohola"))
+                .fluid()
+                .color(0xEE8262)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("C5H10O", true);
+
+        //dna
+        GTQTMaterials.DNAa = new Material.Builder(getMaterialsId(), gregtechId("dnaa"))
+                .fluid()
+                .color(0xB3EE3A)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        GTQTMaterials.DNAb = new Material.Builder(getMaterialsId(), gregtechId("dnab"))
+                .fluid()
+                .color(0x00008B)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        GTQTMaterials.DNAc = new Material.Builder(getMaterialsId(), gregtechId("dnac"))
+                .fluid()
+                .color(0x4B0082)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        GTQTMaterials.DNAd = new Material.Builder(getMaterialsId(), gregtechId("dnad"))
+                .fluid()
+                .color(0x8B864E)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        GTQTMaterials.DNAe = new Material.Builder(getMaterialsId(), gregtechId("dnae"))
+                .fluid()
+                .color(0xEE8262)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        GTQTMaterials.DNAh = new Material.Builder(getMaterialsId(), gregtechId("dnah"))
+                .fluid()
+                .color(0x737373)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        GTQTMaterials.DNAl = new Material.Builder(getMaterialsId(), gregtechId("dnal"))
+                .fluid()
+                .color(0xCD9B1D)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        GTQTMaterials.DNAp = new Material.Builder(getMaterialsId(), gregtechId("dnap"))
+                .fluid()
+                .color(0x388E8E)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        GTQTMaterials.DNAw = new Material.Builder(getMaterialsId(), gregtechId("dnaw"))
+                .fluid()
+                .color(0xFFFAFA)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        GTQTMaterials.DNAn = new Material.Builder(getMaterialsId(), gregtechId("dnan"))
+                .fluid()
+                .color(0xFFFFFF)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        GTQTMaterials.Wool = new Material.Builder(getMaterialsId(), gregtechId("wool"))
+                .fluid().dust()
+                .color(0xFFFFFF)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
     }
 }
