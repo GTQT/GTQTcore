@@ -94,6 +94,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntitySteamOreWasher STEAM_ORE_WASHER;
     public static MetaTileEntitySteamBlastFurnace STEAM_BLAST_FURANCE;
     public static MetaTileEntityPReactor P_REACTOR;
+    public static MetaTileEntityBReactor B_REACTOR;
     public static MetaTileEntityHugeDistillationTower HUGE_DISTILLATION_TOWER;
     public static MetaTileEntityHugeVacuum HUGE_VACUUM;
     public static final MetaTileEntityEFusionReactor[] EFUSION_REACTOR = new MetaTileEntityEFusionReactor[3];
@@ -287,6 +288,7 @@ public class GTQTMetaTileEntities {
         INDUSTRIAL_PRIMITIVE_BLAST_FURNACE = registerMetaTileEntity(3106, new MetaTileEntityIndustrialPrimitiveBlastFurnace(gtqtcoreId("industrial_primitive_blast_furnace")));
         COAGULATION_TANK = registerMetaTileEntity(3107, new MetaTileEntityCoagulationTank(gtqtcoreId("coagulation_tank")));
         P_REACTOR= registerMetaTileEntity(3108, new MetaTileEntityPReactor(gtqtcoreId("p_reactor")));
+        B_REACTOR= registerMetaTileEntity(3109, new MetaTileEntityBReactor(gtqtcoreId("b_reactor")));
         //正常设备
         DISSOLUTION_TANK = registerMetaTileEntity(3150, new MetaTileEntityDissolutionTank(gtqtcoreId("dissolution_tank")));
         BLAZING_BLAST_FURNACE = registerMetaTileEntity(3151, new MetaTileEntityBlazingBlastFurnace(gtqtcoreId("blazing_blast_furnace")));

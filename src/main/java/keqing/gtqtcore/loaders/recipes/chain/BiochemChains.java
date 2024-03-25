@@ -57,6 +57,30 @@ public class BiochemChains {
                 .buildAndRegister();
 
 
+        //
+        //
+        CHEMICAL_RECIPES.recipeBuilder()
+                .duration(200)
+                .EUt(120)
+                .input(dust,Salt,1)
+                .fluidInputs(Ammonia.getFluid(1000))
+                .fluidInputs(CarbonDioxide.getFluid(1000))
+                .fluidInputs(Water.getFluid(1000))
+                .fluidOutputs(AmmoniumChloride.getFluid(1000))
+                .output(dust,SodiumBicarbonate,1)
+                .buildAndRegister();
+
+        PR_MIX.recipeBuilder()
+                .duration(4000)
+                .input(dust,Salt,40)
+                .fluidInputs(Ammonia.getFluid(40000))
+                .fluidInputs(CarbonDioxide.getFluid(40000))
+                .fluidInputs(Water.getFluid(40000))
+                .fluidOutputs(AmmoniumChloride.getFluid(40000))
+                .output(dust,SodiumBicarbonate,40)
+                .buildAndRegister();
+
+
         PR_MIX.recipeBuilder()
                 .duration(1200)
                 .input(STICKY_RESIN,20)

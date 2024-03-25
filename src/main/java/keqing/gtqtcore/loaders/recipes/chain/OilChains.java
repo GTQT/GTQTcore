@@ -80,22 +80,21 @@ public class OilChains {
         GTRecipeHandler.removeRecipesByInputs(LARGE_CHEMICAL_RECIPES, new ItemStack[]{IntCircuitIngredient.getIntegratedCircuit(24)},new FluidStack[]{Tetranitromethane.getFluid(400),BioDiesel.getFluid(10000)});
 
         CHEMICAL_PLANT.recipeBuilder()
-                .fluidInputs(Tetranitromethane.getFluid(500))
-                .fluidInputs(Diesel.getFluid(3000))
-                .fluidInputs(Tetrabromobenzene.getFluid(300))
-                .fluidInputs(MTBE.getFluid(200))
-                .fluidOutputs(CetaneBoostedDiesel.getFluid(4000))
+                .fluidInputs(Diesel.getFluid(7500))
+                .fluidInputs(Tetranitromethane.getFluid(300))
+                .fluidInputs(Tetrabromobenzene.getFluid(200))
+                .fluidOutputs(CetaneBoostedDiesel.getFluid(8000))
                 .recipeLevel(2)
                 .duration(200)
                 .EUt(480)
                 .buildAndRegister();
 
         CHEMICAL_PLANT.recipeBuilder()
+                .fluidInputs(BioDiesel.getFluid(15000))
                 .fluidInputs(Tetranitromethane.getFluid(500))
-                .fluidInputs(BioDiesel.getFluid(6000))
                 .fluidInputs(Tetrabromobenzene.getFluid(300))
                 .fluidInputs(MTBE.getFluid(200))
-                .fluidOutputs(CetaneBoostedDiesel.getFluid(4000))
+                .fluidOutputs(CetaneBoostedDiesel.getFluid(8000))
                 .recipeLevel(2)
                 .duration(200)
                 .EUt(480)

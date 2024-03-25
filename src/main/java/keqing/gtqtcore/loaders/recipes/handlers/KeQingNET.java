@@ -237,7 +237,59 @@ public class KeQingNET {
                 .output(TOOL_DATA_STICK)
                 .solderMultiplier(2)
                 .duration(1000).EUt(120).buildAndRegister();
-
+        //BIOLOGICAL_REACTION
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .inputs(HULL[3].getStackForm(16))
+                .input(circuit, Tier.MV, 8)
+                .input(ELECTRIC_MOTOR_MV,16)
+                .input(ELECTRIC_PUMP_MV,16)
+                .input(rotor,Steel,8)
+                .input(QUANTUM_TANK[1], 4)
+                .input(pipeHugeFluid, Steel, 4)
+                .input(plate, Aluminium, 8)
+                .fluidInputs(Polytetrafluoroethylene.getFluid(4000))
+                .fluidInputs(Aluminium.getFluid(4000))
+                .scannerResearch(b -> b
+                        .researchStack(SEPTIC_TANK.getStackForm())
+                        .duration(1200)
+                        .EUt(VA[MV]))
+                .output(BIOLOGICAL_REACTION)
+                .duration(200).EUt(120).buildAndRegister();
+        //DIGESTER
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .inputs(HULL[3].getStackForm(16))
+                .input(circuit, Tier.HV, 8)
+                .input(ELECTRIC_MOTOR_HV,16)
+                .input(VOLTAGE_COIL_HV,16)
+                .input(rotor,StainlessSteel,8)
+                .input(QUANTUM_TANK[2], 4)
+                .input(pipeHugeFluid, Polytetrafluoroethylene, 4)
+                .input(plate, NanometerBariumTitanate, 8)
+                .fluidInputs(Polytetrafluoroethylene.getFluid(4000))
+                .fluidInputs(TungstenSteel.getFluid(4000))
+                .scannerResearch(b -> b
+                        .researchStack(REACTION_FURNACE.getStackForm())
+                        .duration(1200)
+                        .EUt(VA[MV]))
+                .output(DIGESTER)
+                .duration(2000).EUt(480).buildAndRegister();
+        //ALGAE_FARM
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .inputs(HULL[3].getStackForm(16))
+                .input(circuit, Tier.HV, 8)
+                .input(ELECTRIC_PUMP_HV,16)
+                .input(VOLTAGE_COIL_MV,16)
+                .input(gear,StainlessSteel,8)
+                .input(RANDOM_ACCESS_MEMORY, 4)
+                .input(wireFine, Aluminium, 8)
+                .input(foil, Aluminium, 8)
+                .fluidInputs(Polytetrafluoroethylene.getFluid(4000))
+                .scannerResearch(b -> b
+                        .researchStack(BIOLOGICAL_REACTION.getStackForm())
+                        .duration(1200)
+                        .EUt(VA[HV]))
+                .output(ALGAE_FARM)
+                .duration(2000).EUt(480).buildAndRegister();
         //op
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .inputs(HULL[3].getStackForm(16))
@@ -248,7 +300,7 @@ public class KeQingNET {
                 .input(RANDOM_ACCESS_MEMORY, 4)
                 .input(wireFine, Aluminium, 8)
                 .input(foil, Aluminium, 8)
-                .fluidInputs(Polybenzimidazole.getFluid(4000))
+                .fluidInputs(Polytetrafluoroethylene.getFluid(4000))
                 .scannerResearch(b -> b
                         .researchStack(MACERATOR[3].getStackForm())
                         .duration(1200)

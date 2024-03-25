@@ -2153,5 +2153,12 @@ public class FirstDegreeMaterials {
                 .components(Titanium,6,Aluminium,4,Vanadium,1)
                 .flags(DISABLE_DECOMPOSITION)
                 .build();
+
+        //生物原油
+        GTQTMaterials.Biooil = new Material.Builder(getMaterialsId(), gregtechId("biooil"))
+                .fluid()
+                .color(0xFA8072)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
     }
 }

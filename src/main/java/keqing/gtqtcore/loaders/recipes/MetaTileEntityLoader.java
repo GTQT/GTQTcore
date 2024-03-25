@@ -359,7 +359,7 @@ public class MetaTileEntityLoader {
         //溶解罐
         ModHandler.addShapedRecipe(true, "dissolution_tank", DISSOLUTION_TANK.getStackForm(),
                 "MCM", "PHP", "MKM",
-                'M', new UnificationEntry(pipeNormalFluid, Polybenzimidazole),
+                'M', new UnificationEntry(pipeNormalFluid, Polytetrafluoroethylene),
                 'C', new UnificationEntry(circuit, MarkerMaterials.Tier.HV),
                 'P', ELECTRIC_PUMP_HV.getStackForm(),
                 'H', QUANTUM_TANK[1].getStackForm(),
@@ -371,6 +371,10 @@ public class MetaTileEntityLoader {
                 'G', new UnificationEntry(OrePrefix.gear, Wood),
                 'C', MetaBlocks.STEAM_CASING.getItemVariant(BlockSteamCasing.SteamCasingType.WOOD_WALL));
 
+        ModHandler.addShapedRecipe(true, "b_reactor", B_REACTOR.getStackForm(),
+                "CGC", "ChC", "CGC",
+                'G', new UnificationEntry(OrePrefix.gear, StainlessSteel),
+                'C', MetaBlocks.METAL_CASING.getItemVariant(STAINLESS_CLEAN));
 
         ModHandler.addShapedRecipe(true, "steam_compressor", GTQTMetaTileEntities.STEAM_COMPRESSOR.getStackForm(),
                 "CGC", "CFC", "CGC",

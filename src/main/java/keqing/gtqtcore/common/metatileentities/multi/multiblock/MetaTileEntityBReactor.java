@@ -7,10 +7,12 @@ import codechicken.lib.texture.TextureUtils;
 import codechicken.lib.vec.Cuboid6;
 import codechicken.lib.vec.Matrix4;
 import gregtech.api.GTValues;
+import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
+import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.TraceabilityPredicate;
@@ -24,10 +26,14 @@ import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.BloomEffectUtil;
 import gregtech.client.utils.TooltipHelper;
 import gregtech.common.ConfigHolder;
+import gregtech.common.blocks.BlockBoilerCasing;
+import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.BlockSteamCasing;
 import gregtech.common.blocks.MetaBlocks;
+import keqing.gtqtcore.api.capability.impl.NoEnergyMultiblockRecipeLogic;
 import keqing.gtqtcore.api.metaileentity.multiblock.NoEnergyMultiblockController;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.overwrite.MetaTileEntityCrackingUnit;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
@@ -43,49 +49,63 @@ import org.apache.commons.lang3.ArrayUtils;
 
 import java.util.List;
 
-public class MetaTileEntityPReactor extends NoEnergyMultiblockController {
+public class MetaTileEntityBReactor extends NoEnergyMultiblockController {
     private static final TraceabilityPredicate SNOW_PREDICATE = new TraceabilityPredicate(
             bws -> GTUtility.isBlockSnow(bws.getBlockState()));
 
-    public MetaTileEntityPReactor(ResourceLocation metaTileEntityId) {
+    public MetaTileEntityBReactor(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.PR_MIX);
+        this.recipeMapWorkable = new BRLoigc(this);
     }
 
+    private class BRLoigc extends NoEnergyMultiblockRecipeLogic {
+        public void setMaxProgress(int maxProgress) {
+            this.maxProgressTime = maxProgress/4;
+        }
+        public BRLoigc(NoEnergyMultiblockController tileEntity) {
+            super(tileEntity, tileEntity.recipeMap);
+        }
+    }
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
-        return new MetaTileEntityPReactor(metaTileEntityId);
+        return new MetaTileEntityBReactor(metaTileEntityId);
     }
 
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
-                .aisle("XXX", "XXX", "XXX")
-                .aisle("XXX", "X&X", "X#X")
-                .aisle("XXX", "XYX", "XXX")
-                .where('X', states(MetaBlocks.STEAM_CASING.getState(BlockSteamCasing.SteamCasingType.WOOD_WALL))
-                        .or(abilities(MultiblockAbility.IMPORT_ITEMS).setMaxGlobalLimited(2))
-                        .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setMaxGlobalLimited(2))
+                .aisle("XXXXXXX", "XXXXXXX", "XXXXXXX")
+                .aisle("XXXXXXX", "X&&&&&X", "X#####X")
+                .aisle("XXXXXXX", "X&&&&&X", "X#####X")
+                .aisle("XXXXXXX", "X&&&&&X", "X#####X")
+                .aisle("XXXXXXX", "X&&&&&X", "X#####X")
+                .aisle("XXXXXXX", "X&&&&&X", "X#####X")
+                .aisle("XXXXXXX", "XXXYXXX", "XXXXXXX")
+                .where('X', states(getCasingBState())
+                        .or(abilities(MultiblockAbility.IMPORT_ITEMS).setMaxGlobalLimited(3))
+                        .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setMaxGlobalLimited(3))
                         .or(abilities(MultiblockAbility.EXPORT_FLUIDS).setMaxGlobalLimited(2))
-                        .or(abilities(MultiblockAbility.EXPORT_ITEMS).setMaxGlobalLimited(2)))
+                        .or(abilities(MultiblockAbility.EXPORT_ITEMS).setMaxGlobalLimited(3)))
                 .where('#', air())
                 .where('&', air().or(SNOW_PREDICATE)) // this won't stay in the structure, and will be broken while
                 // running
                 .where('Y', selfPredicate())
                 .build();
     }
-
+    private static IBlockState getCasingBState() {
+        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STAINLESS_CLEAN);
+    }
     @SideOnly(Side.CLIENT)
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
-        return Textures.WOOD_WALL;
+        return Textures.CLEAN_STAINLESS_STEEL_CASING;
     }
 
     @Override
     public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
-        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("村里的大缸（远离司马光）", new Object[0]));
-}
-
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("司马光砸不动", new Object[0]));
+    }
 
 
     @Override
@@ -95,17 +115,20 @@ public class MetaTileEntityPReactor extends NoEnergyMultiblockController {
                 recipeMapWorkable.isActive(), recipeMapWorkable.isWorkingEnabled());
         if (recipeMapWorkable.isActive() && isStructureFormed()) {
             EnumFacing back = getFrontFacing().getOpposite();
-            Matrix4 offset = translation.copy().translate(back.getXOffset(), -0.3, back.getZOffset());
-            CubeRendererState op = Textures.RENDER_STATE.get();
-            Textures.RENDER_STATE.set(new CubeRendererState(op.layer, CubeRendererState.PASS_MASK, op.world));
-            Textures.renderFace(renderState, offset,
-                    ArrayUtils.addAll(pipeline, new LightMapOperation(240, 240), new ColourOperation(0xFFFFFFFF)),
-                    EnumFacing.UP, Cuboid6.full, TextureUtils.getBlockTexture("lava_still"),
-                    BloomEffectUtil.getEffectiveBloomLayer());
-            Textures.RENDER_STATE.set(op);
+            for(float i=-2;i<=2;i++) {
+                for (float j = -2; j <=2; j++) {
+                    Matrix4 offset = translation.copy().translate(back.getXOffset() * 3+i, 0.6, back.getZOffset() * 3+j);
+                    CubeRendererState op = Textures.RENDER_STATE.get();
+                    Textures.RENDER_STATE.set(new CubeRendererState(op.layer, CubeRendererState.PASS_MASK, op.world));
+                    Textures.renderFace(renderState, offset,
+                            ArrayUtils.addAll(pipeline, new LightMapOperation(240, 240), new ColourOperation(0xFF00FFFF)),
+                            EnumFacing.UP, Cuboid6.full, TextureUtils.getBlockTexture("water_still"),
+                            BloomEffectUtil.getEffectiveBloomLayer());
+                    Textures.RENDER_STATE.set(op);
+                }
+            }
         }
     }
-
     @SideOnly(Side.CLIENT)
     @Override
     protected ICubeRenderer getFrontOverlay() {
@@ -123,7 +146,7 @@ public class MetaTileEntityPReactor extends NoEnergyMultiblockController {
 
         if (this.isActive()) {
             if (getWorld().isRemote) {
-                VanillaParticleEffects.PBF_SMOKE.runEffect(this);
+                pollutionParticles();
             } else {
                 damageEntitiesAndBreakSnow();
             }
@@ -142,18 +165,23 @@ public class MetaTileEntityPReactor extends NoEnergyMultiblockController {
         }
     }
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    public void randomDisplayTick() {
-        if (this.isActive()) {
-            VanillaParticleEffects.defaultFrontEffect(this, 0.3F, EnumParticleTypes.SMOKE_LARGE,
-                    EnumParticleTypes.FLAME);
-            if (ConfigHolder.machines.machineSounds && GTValues.RNG.nextDouble() < 0.1) {
-                BlockPos pos = getPos();
-                getWorld().playSound(pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F,
-                        SoundEvents.BLOCK_FURNACE_FIRE_CRACKLE, SoundCategory.BLOCKS, 1.0F, 1.0F, false);
-            }
-        }
+    private void pollutionParticles() {
+        BlockPos pos = this.getPos();
+        EnumFacing facing = this.getFrontFacing().getOpposite();
+        float xPos = facing.getXOffset() *3 + pos.getX() + 0.5F;
+        float yPos = facing.getYOffset()  + pos.getY() + 0.25F;
+        float zPos = facing.getZOffset() *3 + pos.getZ() + 0.5F;
+
+        float ySpd = facing.getYOffset() * 0.7F + 0.7F + 0.8F * GTValues.RNG.nextFloat();
+
+        arunMufflerEffect(xPos, yPos, zPos, 0, ySpd, 0);
+        arunMufflerEffect(xPos, yPos, zPos, 1F, ySpd, 1F);
+        arunMufflerEffect(xPos, yPos, zPos, -1F, ySpd, -1F);
+        arunMufflerEffect(xPos, yPos, zPos, +1F, ySpd, -1F);
+        arunMufflerEffect(xPos, yPos, zPos, -1F, ySpd, +1F);
+    }
+    public void arunMufflerEffect(float xPos, float yPos, float zPos, float xSpd, float ySpd, float zSpd) {
+        this.getWorld().spawnParticle(EnumParticleTypes.SMOKE_LARGE, (double)xPos, (double)yPos, (double)zPos, (double)xSpd, (double)ySpd, (double)zSpd, new int[0]);
     }
 
 }

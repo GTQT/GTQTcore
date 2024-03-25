@@ -488,6 +488,7 @@ public class GTQTMaterials {
     public static Material Xianhuatai;
     public static Material Yisuanbei;
     public static Material Tcfour;
+    public static Material Biooil;
 
     //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/api/unification/GSMaterials.java
 

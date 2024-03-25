@@ -5,11 +5,15 @@ import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
 import gregtech.api.capability.IMultiblockController;
+import gregtech.api.capability.IMultipleTankHandler;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.damagesources.DamageSources;
+import gregtech.api.gui.GuiTextures;
+import gregtech.api.gui.resources.TextureArea;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
+import gregtech.api.metatileentity.multiblock.IProgressBarMultiblock;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
@@ -17,6 +21,8 @@ import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.material.Materials;
+import gregtech.api.util.TextComponentUtil;
+import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.TooltipHelper;
@@ -40,58 +46,187 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public class MetaTileEntityGantryCrane extends RecipeMapMultiblockController {
+import static gregtech.api.unification.material.Materials.Steam;
+
+public class MetaTileEntityGantryCrane extends RecipeMapMultiblockController implements IProgressBarMultiblock {
 
     public MetaTileEntityGantryCrane(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.GANTRY_CRANE);
+        this.recipeMapWorkable = new MFSWorkableHandler(this);
+    }
+    private class MFSWorkableHandler extends MultiblockRecipeLogic {
+
+        public MFSWorkableHandler(RecipeMapMultiblockController tileEntity) {
+            super(tileEntity);
+        }
+        @Override
+        public int getParallelLimit() {
+            if(getStatue()) {
+                return 4;
+            }
+            return 1;
+        }
+        @Override
+        public void setMaxProgress(int maxProgress)
+        {
+            if(getStatue()) {
+                maxProgressTime = maxProgress/4;
+            }
+            else this.maxProgressTime = maxProgress;
+        }
+        public  boolean getStatue()
+        {
+            return steam[0] > 6000 && steam[1] > 6000 && steam[2] > 6000;
+        }
+        protected void updateRecipeProgress() {
+            if (canRecipeProgress && drawEnergy(recipeEUt, true)) {
+                this.drawEnergy(this.recipeEUt, false);
+                if (++progressTime > maxProgressTime)
+                {
+                    steam[0]=(int) (steam[0]*0.48);
+                    steam[1]=(int) (steam[1]*0.64);
+                    steam[2]=(int) (steam[2]*0.72);
+                    completeRecipe();
+                }
+            }
+        }
+    }
+    @Override
+    protected void addDisplayText(List<ITextComponent> textList) {
+        super.addDisplayText(textList);
+        if (getInputFluidInventory() != null) {
+            FluidStack SteamStack = getInputFluidInventory().drain(Steam.getFluid(Integer.MAX_VALUE), false);
+            int SteamAmount = SteamStack == null ? 0 : SteamStack.amount;
+            textList.add(new TextComponentTranslation("gtqtcore.gc.count1",TextFormattingUtil.formatNumbers(SteamAmount)));
+        }
+        textList.add(new TextComponentTranslation("gtqtcore.msf.count2", (double)steam[0]/1000,(double)steam[1]/1000,(double)steam[2]/1000));
+        if(getStatue())  textList.add(new TextComponentTranslation("gtqtcore.msf.good"));
+        else textList.add(new TextComponentTranslation("gtqtcore.msf.no"));
+    }
+    private static IBlockState getCasingAState() {
+        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STAINLESS_CLEAN);
+    }
+    int[] steam=new int[3];
+    FluidStack STEAM = Steam.getFluid(1000);
+    @Override
+    public void update() {
+        super.update();
+        if (steam[0] <= 9000) {
+            IMultipleTankHandler inputTank = getInputFluidInventory();
+            if (STEAM.isFluidStackIdentical(inputTank.drain(STEAM, false))) {
+                inputTank.drain(STEAM, true);
+                steam[0] = steam[0] + 800;
+
+            }
+        }
+
+        for(int i=0;i<3;i++) {
+            if (steam[0] > steam[1]) {
+                steam[0] = steam[0] - 40;
+                steam[1] = steam[1] + 30;
+            }
+
+            if (steam[0] < steam[1]) {
+                steam[1] = steam[1] - 30;
+                steam[0] = steam[0] + 40;
+            }
+
+            if (steam[1] > steam[2]) {
+                steam[1] = steam[1] - 10;
+                steam[2] = steam[2] + 10;
+            }
+
+            if (steam[1] < steam[2]) {
+                steam[2] = steam[2] - 10;
+                steam[1] = steam[1] + 10;
+            }
+        }
+
+    }
+    @Override
+    public NBTTagCompound writeToNBT(NBTTagCompound data) {
+        data.setInteger("fluid1", steam[0]);
+        data.setInteger("fluid2", steam[1]);
+        data.setInteger("fluid3", steam[2]);
+        return super.writeToNBT(data);
     }
 
-    private static IBlockState getCasingAState() {
-        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STEEL_SOLID);
+    @Override
+    public void readFromNBT(NBTTagCompound data) {
+        super.readFromNBT(data);
+        steam[0] = data.getInteger("fluid1");
+        steam[1] = data.getInteger("fluid2");
+        steam[2] = data.getInteger("fluid3");
+    }
+    public  boolean getStatue()
+    {
+        return steam[0] > 6000 && steam[1] > 6000 && steam[2] > 6000;
+    }
+    @Override
+    public int getNumProgressBars() {
+        return 3;
+    }
+
+    @Override
+    public void addBarHoverText(List<ITextComponent> hoverList, int index) {
+        ITextComponent cwutInfo = TextComponentUtil.stringWithColor(
+                TextFormatting.AQUA,
+                (steam[index] + 1000)+ " / " + (10000) + " kPa");
+        hoverList.add(TextComponentUtil.translationWithColor(
+                TextFormatting.GRAY,
+                "gregtech.multiblock.msf.computation",
+                cwutInfo));
+    }
+    @Override
+    public double getFillPercentage(int index) {
+        return (double) (steam[index] + 1000) / (10000);
+    }
+
+    @Override
+    public TextureArea getProgressBarTexture(int index) {
+        return GuiTextures.PROGRESS_BAR_HPCA_COMPUTATION;
     }
     @Nonnull
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
-                .aisle("                        ", "                        ", "                        ", "                        ", "                        ", "                        ", "                        ", "                        ", "                        ", "                        ", "                        ", "        A   A   A       ", "                        ", "                        ")
-                .aisle("BBBBB               BBBB", "                        ", "                        ", "                        ", "                        ", "                        ", "                        ", "                        ", "                        ", "                        ", "                        ", "        A   A   A       ", "                        ", "                        ")
-                .aisle("BBBBB               BBBB", " A A                 A A", " A A                 A A", " A A                 A A", " A A                 A A", " A A                 A A", " A A                 A A", " A A                 A A", " A A                 A A", " A A                 A A", " ACA A A A A A A A A ACA", " A A    A   A   A    A A", " A A                 A A", "                        ")
-                .aisle("BBBBB               BBBB", "  C                   C ", "  C                   C ", "  C                   C ", "  C                   C ", "  C                   C ", "  C                   C ", "  C                   C ", "  C                   C ", "AACAAAAAAAAAAAAAAAAAAACA", "CCCCCCCCCCCCCCCCCCCCCCCC", "     A AAA AAA AAA A    ", "       A A A A A A      ", "                        ")
-                .aisle("BBBBB               BBBB", " A A                 A A", " A A                 A A", " A A                 A A", " A A                 A A", " A A                 A A", " A A                 A A", " A A                 A A", " A A                 A A", " AAA                 AAA", " ACA                 ACA", " A A    A   A   A    A A", " A A                 A A", "                        ")
-                .aisle("BBBBB               BBBB", "                        ", "                        ", "                        ", "                        ", "                        ", "                        ", "                        ", "                        ", "  A                   A ", "  C                   C ", "        A   A   A       ", "                        ", "                        ")
-                .aisle("BBBBB               BBBB", "                        ", "                        ", "                        ", "                        ", "                        ", "                        ", "                        ", "                        ", "  A                   A ", "  C                   C ", "        A   A   A       ", "                        ", "                        ")
-                .aisle("BBBBB               BBBB", "                        ", "                        ", "                        ", "                        ", "                        ", "                        ", "                        ", "                        ", "  A                   A ", "  C   AAAAAAAAAAAAA   C ", "        CCCCCCCCC       ", "                        ", "                        ")
-                .aisle("BBBBB               BBBB", "                        ", "                        ", "                        ", "                        ", "                        ", "                        ", "                        ", "                        ", "  A                   A ", "  C                   C ", "        A   A   A       ", "                        ", "                        ")
-                .aisle("BBBBB               BBBB", "                        ", "                        ", "                        ", "                        ", "                        ", "                        ", "                        ", "                        ", "  A                   A ", "  C                   C ", "        A   A   A       ", "                        ", "                        ")
-                .aisle("BBBBB               BBBB", " A A                 A A", " A A                 A A", " A A                 A A", " A A                 A A", " A A                 A A", " A A                 A A", " A A                 A A", " A A                 A A", " AAA                 AAA", " ACA                 ACA", " A A    A   A   A    A A", " A A                 A A", "                        ")
-                .aisle("BBBBB               BBBB", "  C                   C ", "  S                   C ", "  C                   C ", "  C                   C ", "  C                   C ", "  C                   C ", "  C                   C ", "  C                   C ", "AACAAAAAAAAAAAAAAAAAAACA", "CCCCCCCCCCCCCCCCCCCCCCCC", "     A AAA AAA AAA A    ", "       A A A A A A      ", "                        ")
-                .aisle("BBBBB               BBBB", " A A                 A A", " A A                 A A", " A A                 A A", " A A                 A A", " A A                 A A", " A A                 A A", " A A                 A A", " A A                 A A", " A A                 A A", " ACA A A A A A A A A ACA", " A A    A   A   A    A A", " A A                 A A", "                        ")
-                .aisle("BBBBB               BBBB", "                        ", "                        ", "                        ", "                        ", "                        ", "                        ", "                        ", "                        ", "                        ", "                        ", "        A   A   A       ", "                        ", "                        ")
-                .aisle("                        ", "                        ", "                        ", "                        ", "                        ", "                        ", "                        ", "                        ", "                        ", "                        ", "                        ", "        A   A   A       ", "                        ", "                        ")
-                .aisle("                        ", "                        ", "                        ", "                        ", "                        ", "                        ", "                        ", "                        ", "                        ", "                        ", "                        ", "                        ", "                        ", "                        ")
+                .aisle(" CCC ", " CCC ", " CCC ", " CCC ", " CCC ")
+                .aisle("CCCCC", "CAAAC", "CAAAC", "CAAAC", "CCCCC")
+                .aisle("CCCCC", "CAAAC", "CAAAC", "CAAAC", "CCCCC")
+                .aisle("CCCCC", "CAAAC", "CAAAC", "CAAAC", "CCCCC")
+                .aisle(" CCC ", " CSC ", " CCC ", " CCC ", " CCC ")
                 .where('S', selfPredicate())
-                .where('B', states(MetaBlocks.STONE_BLOCKS.get(StoneVariantBlock.StoneVariant.SMOOTH).getState(StoneVariantBlock.StoneType.CONCRETE_LIGHT)))
-                .where('C', states(getCasingAState()).setMinGlobalLimited(355)
+                .where('C', states(getCasingAState()).setMinGlobalLimited(50)
                         .or(abilities(MultiblockAbility.MUFFLER_HATCH).setExactLimit(1))
                         .or(abilities(MultiblockAbility.MAINTENANCE_HATCH).setExactLimit(1))
                         .or(abilities(MultiblockAbility.EXPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1))
                         .or(abilities(MultiblockAbility.IMPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1))
+                        .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setMinGlobalLimited(1).setPreviewCount(1))
+                        .or(abilities(MultiblockAbility.EXPORT_FLUIDS).setMinGlobalLimited(1).setPreviewCount(1))
                         .or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(2).setPreviewCount(1)))
-                .where('A',  states(MetaBlocks.FRAMES.get(Materials.Steel).getBlock(Materials.Steel)))
+                .where('A',  states(MetaBlocks.FRAMES.get(Materials.StainlessSteel).getBlock(Materials.StainlessSteel)))
                 .build();
     }
-
+    @Override
+    public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
+        super.addInformation(stack, player, tooltip, advanced);
+        tooltip.add(I18n.format("gregtech.machine.gc.tooltip.4"));
+    }
     @SideOnly(Side.CLIENT)
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
-        return Textures.SOLID_STEEL_CASING;
+        return Textures.CLEAN_STAINLESS_STEEL_CASING;
     }
 
     @Override

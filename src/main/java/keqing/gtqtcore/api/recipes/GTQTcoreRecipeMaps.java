@@ -261,7 +261,7 @@ public class GTQTcoreRecipeMaps {
                 .setProgressBar(GuiTextures.PROGRESS_BAR_MACERATE, ProgressWidget.MoveType.HORIZONTAL)
                 .setSound(GTSoundEvents.MACERATOR);
 
-        PR_MIX = new RecipeMap<>("pr_mix", 2, 2, 2, 2, new PrimitiveRecipeBuilder(), false)
+        PR_MIX = new RecipeMap<>("pr_mix", 3, 3, 3, 3, new PrimitiveRecipeBuilder(), false)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_MACERATE, ProgressWidget.MoveType.HORIZONTAL)
                 .setSound(GTSoundEvents.CHEMICAL_REACTOR);
 
@@ -346,7 +346,7 @@ public class GTQTcoreRecipeMaps {
                 .setSound(GTSoundEvents.CHEMICAL_REACTOR);
 
         GANTRY_CRANE = new RecipeMap<>("gantry_crane",
-                9, 1, 0, 0, new SimpleRecipeBuilder(), false);
+                3, 3, 3, 3, new SimpleRecipeBuilder(), false);
 
         CLARIFIER = new RecipeMap<>("clarifire",
                 1, 1, 1, 1, new SimpleRecipeBuilder(), false);
