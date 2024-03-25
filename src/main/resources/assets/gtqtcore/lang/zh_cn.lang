@@ -74,6 +74,14 @@ gregtech.material.trisn=三羟甲基硝基甲烷
 gregtech.material.isoamylalcohol=异戊醇
 gregtech.material.isoamylalcohola=异戊醛
 
+gregtech.material.yanghuatai=氧化钛
+gregtech.material.suanxingtai=酸性钛
+gregtech.material.hanzaxianhuatai=含杂酰化钛
+gregtech.material.xianhuaitaicd=酰化钛沉淀
+gregtech.material.cuzhixianhuatai=粗制酰化钛
+gregtech.material.xianhuatai=酰化钛
+gregtech.material.yisuanbei=乙酸钡
+gregtech.material.tcfour=钛合金TC4
 gregtech.material.dnaa=含细胞DNA提取物
 gregtech.material.dnab=纯净DNA提取物
 gregtech.material.dnac=浓缩DNA提取物

@@ -368,6 +368,7 @@ public class FirstDegreeMaterials {
                 .color(0x8B6914).iconSet(METALLIC)
                 .components(Barium, 1, Titanium, 1, Oxygen, 3)
                 .flags(DISABLE_DECOMPOSITION)
+                .blast(4500,MID)
                 .flags(GENERATE_PLATE, GENERATE_DENSE, GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_RING, GENERATE_ROUND, GENERATE_BOLT_SCREW, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR)
                 .build();
 
@@ -2089,6 +2090,67 @@ public class FirstDegreeMaterials {
         GTQTMaterials.Wool = new Material.Builder(getMaterialsId(), gregtechId("wool"))
                 .fluid().dust()
                 .color(0xFFFFFF)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //氧化钛
+        GTQTMaterials.Yanghuatai = new Material.Builder(getMaterialsId(), gregtechId("yanghuatai"))
+                .ingot().dust()
+                .color(0xFF6EB4)
+                .components(Titanium,1,Oxygen,2)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+        //酸性钛
+        GTQTMaterials.Suanxingtai = new Material.Builder(getMaterialsId(), gregtechId("suanxingtai"))
+                .fluid()
+                .color(0xFF6A6A)
+                .components(Titanium,1,Sulfur,1,Oxygen,4)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+        //含杂酰化钛
+        GTQTMaterials.Hanzaxianhuatai = new Material.Builder(getMaterialsId(), gregtechId("hanzaxianhuatai"))
+                .fluid()
+                .color(0xFF3E96)
+                .components(Titanium,1,Carbon,1,Oxygen,1)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("[Ti(O2)(OH)(H2O)4]*", true);
+        //酰化钛沉淀
+        GTQTMaterials.Xianhuaitaicd = new Material.Builder(getMaterialsId(), gregtechId("xianhuaitaicd"))
+                .dust()
+                .color(0xFF7F00)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("[Ti(O2)(OH)(H2O)4]*", true);
+        //粗制酰化钛
+        GTQTMaterials.Cuzhixianhuatai = new Material.Builder(getMaterialsId(), gregtechId("cuzhixianhuatai"))
+                .fluid()
+                .color(0xFF8C69)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("[Ti(O2)(OH)(H2O)4]*", true);
+
+        //酰化钛
+        GTQTMaterials.Xianhuatai = new Material.Builder(getMaterialsId(), gregtechId("xianhuatai"))
+                .fluid()
+                .color(0xFF00FF)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("[Ti(O2)(OH)(H2O)4]＋", true);
+        //乙酸钡
+        GTQTMaterials.Yisuanbei = new Material.Builder(getMaterialsId(), gregtechId("yisuanbei"))
+                .fluid()
+                .color(0xFA8072)
+                .components(Titanium,1,Carbon,1,Oxygen,1)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("(CH₃COO)₂Ba", true);
+
+        //钛合金TC4
+        GTQTMaterials.Tcfour = new Material.Builder(getMaterialsId(), gregtechId("tcfour"))
+                .fluid()
+                .color(0xFF7F00)
+                .components(Titanium,6,Aluminium,4,Vanadium,1)
                 .flags(DISABLE_DECOMPOSITION)
                 .build();
     }
