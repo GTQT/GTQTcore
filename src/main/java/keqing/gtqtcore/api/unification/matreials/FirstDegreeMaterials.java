@@ -316,7 +316,7 @@ public class FirstDegreeMaterials {
                 .color(0x3C3C50).iconSet(METALLIC)
                 .flags(GENERATE_FOIL)
                 .element(Elements.Si)
-                .blast(1800) // no gas tier for silicon
+                .blast(1800,LOW) // no gas tier for silicon
                 .build();
 
         GTQTMaterials.CopperCl = new Material.Builder(getMaterialsId(), gregtechId("copper_cl"))
