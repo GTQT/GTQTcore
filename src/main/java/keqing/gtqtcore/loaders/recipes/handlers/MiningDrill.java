@@ -28,13 +28,13 @@ public class MiningDrill {
                 .duration(40)
                 .circuitMeta(1)
                 .buildAndRegister();
-        //煤	50	铜	50	铁	50	锡	50	油砂	10
+        //煤	50	铜	50	铁	50	锡	50	油砂	50
         MINING_DRILL_RECIPES.recipeBuilder()
                 .chancedOutput(ore,Copper,5000,500)
                 .chancedOutput(ore,Iron,5000,500)
                 .chancedOutput(ore,Tin,5000,500)
                 .chancedOutput(ore,Coal,5000,500)
-                .chancedOutput(ore,Oilsands,1000,500)
+                .chancedOutput(ore,Oilsands,5000,500)
                 .tier(1)
                 .EUt(120)
                 .duration(40)
