@@ -64,17 +64,6 @@ public class PrimitiveCircuits {
                 .circuitMeta(2)
                 .output(ingotHot, Silicon, 1)
                 .buildAndRegister();
-        //太阳能硅保护气配方
-        BLAST_RECIPES.recipeBuilder()
-                .duration(800)
-                .EUt(120)
-                .blastFurnaceTemp(1800)
-                .input(dust,CSilicon)
-                .fluidInputs(Nitrogen.getFluid(1000))
-                .circuitMeta(2)
-                .output(ingotHot, CSilicon, 1)
-                .buildAndRegister();
-
 
         for (Material copper : new Material[]{Copper, AnnealedCopper}) {
             ASSEMBLER_RECIPES.recipeBuilder()
