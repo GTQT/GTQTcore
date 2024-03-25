@@ -66,6 +66,14 @@ public class BiochemChains {
                 .buildAndRegister();
 
         PR_MIX.recipeBuilder()
+                .duration(1200)
+                .input(STICKY_RESIN,20)
+                .input(dust,RockSalt,10)
+                .fluidInputs(Water.getFluid(4000))
+                .fluidOutputs(Latex.getFluid(2000))
+                .buildAndRegister();
+
+        PR_MIX.recipeBuilder()
                 .input(dust, Sulfur)
                 .fluidInputs(Hydrogen.getFluid(2000))
                 .fluidOutputs(HydrogenSulfide.getFluid(1000))
