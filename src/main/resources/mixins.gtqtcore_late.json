@@ -9,7 +9,6 @@
     "gregtech.MixinMetaItem",
     "gregtech.MixinMetaPrefixItem",
     "gregtech.MixinMetaValueItem",
-    "biomesoplenty.MixinBiomesOPlenty",
     "gregtech.MixinSolarBoilerServer",
     "gregtech.MixinSteamBoilerAccess",
     "gregtech.MixinWorkableTieredMetaTileEntity",

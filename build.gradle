@@ -151,7 +151,6 @@ dependencies {
     implementation rfg.deobf(files("libs/jei_1.12.2-4.16.1.1003.jar"))
     implementation rfg.deobf(files("libs/theoneprobe-1.12-1.4.28.jar"))
     implementation rfg.deobf(files("libs/groovyscript-0.7.0.jar"))
-    implementation rfg.deobf(files("libs/BiomesOPlenty-1.12.2-7.0.1.2444-universal.jar"))
     implementation rfg.deobf(files("libs/CTM-MC1.12.2-1.0.2.31.jar"))
     if (project.use_mixins.toBoolean()) {
         // Change your mixin refmap name here:

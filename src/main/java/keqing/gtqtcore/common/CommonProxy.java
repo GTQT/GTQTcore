@@ -16,7 +16,6 @@ import keqing.gtqtcore.common.block.blocks.GTQTStoneVariantBlock;
 import keqing.gtqtcore.common.items.GTQTMetaItems;
 import keqing.gtqtcore.common.items.metaitems.GTQTMetaToolItems;
 import keqing.gtqtcore.loaders.OreDictionaryLoader;
-import keqing.gtqtcore.loaders.WorldLoader;
 import keqing.gtqtcore.loaders.recipes.*;
 import keqing.gtqtcore.loaders.recipes.gcys.GCYSMaterialInfoLoader;
 import keqing.gtqtcore.loaders.recipes.handlers.*;
@@ -119,7 +118,6 @@ public class CommonProxy {
         //GTQTStoneTypes.init();
     }
     public void init() {
-        WorldLoader.init();
         OreDictionaryLoader.init();
         FuelRecipes.init();
         IntegratedMiningDivision.init();
