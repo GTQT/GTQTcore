@@ -292,7 +292,7 @@ public class MetaTileEntityElectrobath extends GTQTRecipeMapMultiblockOverwrite 
         this.tier = Math.min(this.casingTier,this.tubeTier);
 
         this.writeCustomData(GTQTValue.UPDATE_TIER,buf -> buf.writeInt(this.tier));
-        ParallelLim=2*clean;
+        ParallelLim=(int)Math.pow(2, this.casingTier);
         ParallelNum=ParallelLim;
     }
 
