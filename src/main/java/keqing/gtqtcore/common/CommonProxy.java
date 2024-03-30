@@ -115,7 +115,7 @@ public class CommonProxy {
         GTQTRecipes.registerTool();
     }
     public void preLoad(){
-        //GTQTStoneTypes.init();
+        GTQTStoneTypes.init();
     }
     public void init() {
         OreDictionaryLoader.init();
