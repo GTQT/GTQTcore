@@ -106,7 +106,7 @@ public class MetaTileEntityKQNetworkSwitch extends MetaTileEntityDataBank implem
 
     @Override
     protected int getEnergyUsage() {
-        return isStructureFormed() ? computationHandler.getEUt() : 0;
+        return isStructureFormed() ? computationHandler.getEUt()/32 : 0;
     }
     public int vacwu()
     {
@@ -248,7 +248,7 @@ public class MetaTileEntityKQNetworkSwitch extends MetaTileEntityDataBank implem
             reset();
             this.providers.addAll(providers);
             this.transmitters.addAll(transmitters);
-            this.EUt = (providers.size() + transmitters.size()) * EUT_PER_HATCH;
+            this.EUt = (providers.size() + transmitters.size()) * EUT_PER_HATCH/32;
         }
 
         private void reset() {

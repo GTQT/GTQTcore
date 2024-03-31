@@ -199,7 +199,7 @@ public class KeQingNET {
                 .input(foil, Aluminium, 64)
                 .input(OPTICAL_PIPES[0], 8)
                 .fluidInputs(SolderingAlloy.getFluid(L * 4))
-                .fluidInputs(Polybenzimidazole.getFluid(L * 4))
+                .fluidInputs(Polyethylene.getFluid(L * 4))
                 .output(KQNS)
                 .scannerResearch(b -> b
                         .researchStack(DISK_0.getStackForm())
@@ -826,7 +826,7 @@ public class KeQingNET {
                 .notConsumable(SENSOR_HV)
                 .output(DISK_8)
                 .EUt(480)
-                .CWUt(120)
+                .CWUt(30)
                 .NB(8)
                 .totalCWU(100000)
                 .buildAndRegister();
