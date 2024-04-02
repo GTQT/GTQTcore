@@ -18,6 +18,7 @@ import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
+import gregtech.api.unification.material.Material;
 import gregtech.api.util.TextComponentUtil;
 import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
@@ -29,6 +30,7 @@ import keqing.gtqtcore.api.metaileentity.GTQTRecipeMapMultiblockController;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.recipes.properties.BRProperty;
+import keqing.gtqtcore.api.unification.GTQTMaterials;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.block.state.IBlockState;
@@ -48,6 +50,8 @@ import javax.annotation.Nonnull;
 import java.util.List;
 
 import static gregtech.api.unification.material.Materials.*;
+import static gregtech.api.unification.material.info.MaterialFlags.DISABLE_DECOMPOSITION;
+import static gregtech.api.util.GTUtility.gregtechId;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 
 public class MetaTileEntityEnzymesReaction extends GTQTRecipeMapMultiblockController implements IProgressBarMultiblock {
@@ -233,56 +237,101 @@ public class MetaTileEntityEnzymesReaction extends GTQTRecipeMapMultiblockContro
         else textList.add(new TextComponentTranslation("组合因子：%s %s %s %s %s 找不到可行配方！",A,B,C,D,E));
     }
 
+    //这里注册菌种
     public int getEnzymes()
     {
-        if(cE(2,1,1,1,1))return 1;
-        if(cE(4,2,1,2,1))return 2;
-        if(cE(3,2,1,4,4))return 3;
-        if(cE(4,2,3,5,5))return 4;
-        if(cE(3,2,4,8,7))return 5;
+        //普适矿处菌种 101
+        if(cE(1,0,1,0,0))return 101;
+        //定向铂系菌种 102
+        if(cE(1,0,1,1,0))return 102;
+        //普适魔性菌种 103
+        if(cE(1,1,0,1,0))return 103;
+        //普适副产菌种 104
+        if(cE(1,1,0,1,1))return 104;
+        //
+        //工业合成菌种I 201
+        if(cE(2,1,1,3,1))return 201;
+        //工业还原菌种 202
+        if(cE(1,2,3,1,1))return 202;
+        //工业氧化菌种 203
+        if(cE(1,3,2,1,1))return 203;
+        //工业催化菌种 204
+        if(cE(2,1,1,3,1))return 204;
+        //
+        //定向脂肪酶 301
+        if(cE(4,1,1,3,2))return 301;
+        //普适发酵酶 302
+        if(cE(2,4,2,3,1))return 302;
+        //定向发酵酶 303
+        if(cE(2,3,2,4,1))return 303;
+        //
+        //活性诱变酶 401
+        if(cE(2,5,2,4,3))return 401;
+
         return 0;
     }
     public  boolean getRare(int n)
     {
-        switch (n) {
-            case 1 -> {
-                return rate<6;
-            }
-            case 2 -> {
-                return rate>8;
-            }
-            case 3 -> {
-                return rate<6;
-            }
-            case 4 -> {
-                return rate>8;
-            }
-            case 5 -> {
-                return rate<6;
-            }
-            default -> {
-                return false;
-            }
-        }
+        if(n<200)return rate<=6;
+        if(n<300)return rate>=8;
+        if(n<400)return rate<=6;
+        if(n<500)return rate>=8;
+        return false;
     }
 
     public String getName(int n)
     {
+        //普适矿处菌种 101
+        //定向铂系菌种 102
+        //普适魔性菌种 103
+        //普适副产菌种 104
+        //
+        //工业合成菌种I 201
+        //工业还原菌种 202
+        //工业氧化菌种 203
+        //工业催化菌种 204
+        //
+        //定向脂肪酶 301
+        //普适发酵酶 302
+        //定向发酵酶 303
+        //
+        //活性诱变酶 401
         switch (n) {
-            case 1 -> {
-                return "A";
+            case 101 -> {
+                return "普适矿处菌种";
             }
-            case 2 -> {
-                return "B";
+            case 102 -> {
+                return "定向铂系菌种";
             }
-            case 3 -> {
-                return "C";
+            case 103 -> {
+                return "普适魔性菌种";
             }
-            case 4 -> {
-                return "D";
+            case 104 -> {
+                return "普适副产菌种";
             }
-            case 5 -> {
-                return "E";
+            case 201 -> {
+                return "工业合成菌种I";
+            }
+            case 202 -> {
+                return "工业还原菌种";
+            }
+            case 203 -> {
+                return "工业氧化菌种";
+            }
+            case 204 -> {
+                return "工业催化菌种";
+            }
+            case 301 -> {
+                return "定向脂肪酶";
+            }
+            case 302 -> {
+                return "普适发酵酶";
+            }
+            case 303 -> {
+                return "定向发酵酶";
+            }
+            case 401 -> {
+                return "活性诱变酶";
             }
             default -> {
                 return null;
@@ -318,11 +367,11 @@ public class MetaTileEntityEnzymesReaction extends GTQTRecipeMapMultiblockContro
         FluidStack WATER = Water.getFluid(100);
         FluidStack S = HydrochloricAcid.getFluid(100);
         FluidStack J = SodiumHydroxide.getFluid(100);
-        FluidStack BIO1 = Enzymesa.getFluid(100);
-        FluidStack BIO2 = Enzymesb .getFluid(100);
-        FluidStack BIO3 = Enzymesc.getFluid(100);
-        FluidStack BIO4 = Enzymesd.getFluid(100);
-        FluidStack BIO5 = Enzymese.getFluid(100);
+        FluidStack BIO1 = Enzymesa.getFluid(1000);
+        FluidStack BIO2 = Enzymesb .getFluid(1000);
+        FluidStack BIO3 = Enzymesc.getFluid(1000);
+        FluidStack BIO4 = Enzymesd.getFluid(1000);
+        FluidStack BIO5 = Enzymese.getFluid(1000);
 
         FluidStack BIOE = Rnzymes.getFluid(10);
         @Override
@@ -354,41 +403,24 @@ public class MetaTileEntityEnzymesReaction extends GTQTRecipeMapMultiblockContro
             if (BIO1.isFluidStackIdentical(inputTank.drain(BIO1, false))) {
                 inputTank.drain(BIO1, true);
                 A = A + 1;
-                B = B + 0;
-                C = C + 1;
-                D = D - 1;
-                E = E + 0;
+
             }
             if (BIO2.isFluidStackIdentical(inputTank.drain(BIO2, false))) {
                 inputTank.drain(BIO2, true);
-                A = A + 0;
-                B = B - 1;
-                C = C + 1;
-                D = D + 0;
-                E = E + 1;
+                B = B + 1;
+
             }
             if (BIO3.isFluidStackIdentical(inputTank.drain(BIO3, false))) {
                 inputTank.drain(BIO3, true);
-                A = A + 1;
-                B = B + 1;
-                C = C - 1;
-                D = D + 0;
-                E = E + 0;
+                C = C + 1;
             }
             if (BIO4.isFluidStackIdentical(inputTank.drain(BIO4, false))) {
                 inputTank.drain(BIO4, true);
-                A = A + 0;
-                B = B + 0;
-                C = C + 1;
                 D = D + 1;
-                E = E - 1;
+
             }
             if (BIO5.isFluidStackIdentical(inputTank.drain(BIO5, false))) {
                 inputTank.drain(BIO5, true);
-                A = A - 1;
-                B = B + 0;
-                C = C + 0;
-                D = D + 1;
                 E = E + 1;
             }
 

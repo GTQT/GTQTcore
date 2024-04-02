@@ -162,7 +162,7 @@ public class KeQingNET {
                 .input(plateDense, Aluminium, 4)
                 .output(EDATA_ACCESS_HATCH)
                 .fluidInputs(Polytetrafluoroethylene.getFluid(L * 2))
-                .duration(200).EUt(VA[EV]).buildAndRegister();
+                .duration(200).EUt(VA[HV]).buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(ITEM_IMPORT_BUS[UV])

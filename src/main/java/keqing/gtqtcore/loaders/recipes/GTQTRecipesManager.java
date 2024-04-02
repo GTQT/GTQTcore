@@ -35,6 +35,7 @@ public class GTQTRecipesManager {
     }
     public static void init() {
         DeltamethrinChain.init();
+        EnzymesRecipes.init();
         GTQTOreRecipeHandler.init();
         AlgaeChain.init();
         CTABChain.init();

@@ -495,6 +495,18 @@ public class GTQTMaterials {
     public static Material Enzymesd;
     public static Material Enzymese;
     public static Material Rnzymes;
+    public static Material Enzymesaa;
+    public static Material Enzymesab;
+    public static Material Enzymesac;
+    public static Material Enzymesad;
+    public static Material Enzymesba;
+    public static Material Enzymesbb;
+    public static Material Enzymesbc;
+    public static Material Enzymesbd;
+    public static Material Enzymesca;
+    public static Material Enzymescb;
+    public static Material Enzymescc;
+    public static Material Enzymesda;
 
     //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/api/unification/GSMaterials.java
 

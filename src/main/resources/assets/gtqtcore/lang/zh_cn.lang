@@ -869,6 +869,19 @@ gregtech.material.dfeltamethrinf=二溴菊酰氯
 gregtech.material.dfeltamethring=间苯氧基苯甲醛
 gregtech.material.dfeltamethrinh=α-氰基间苯氧基苯甲醇
 
+gregtech.material.enzymese_101=α-普适矿处菌种
+gregtech.material.enzymese_102=α-定向铂系菌种
+gregtech.material.enzymese_103=α-普适魔性菌种
+gregtech.material.enzymese_104=α-普适副产菌种
+gregtech.material.enzymese_201=α-工业合成菌种I
+gregtech.material.enzymese_202=α-工业还原菌种
+gregtech.material.enzymese_203=α-工业氧化菌种
+gregtech.material.enzymese_204=α-工业催化菌种
+gregtech.material.enzymese_301=α-定向脂肪酶
+gregtech.material.enzymese_302=α-普适发酵酶
+gregtech.material.enzymese_303=α-定向发酵酶
+gregtech.material.enzymese_401=α-活性诱变酶
+
 metaitem.solar_plate_mki.name=粗制光伏板
 metaitem.solar_plate_mkii.name=标准光伏板
 metaitem.solar_plate_mkiii.name=精致光伏板

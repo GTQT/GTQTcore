@@ -2168,35 +2168,35 @@ public class FirstDegreeMaterials {
                 .color(0xEE00EE)
                 .flags(DISABLE_DECOMPOSITION)
                 .build()
-                .setFormula("性状：1 0 1 -1 0", true);
+                .setFormula("性状：1 0 0 0 0", true);
 
         GTQTMaterials.Enzymesb = new Material.Builder(getMaterialsId(), gregtechId("enzymesb"))
                 .fluid()
                 .color(0xCD3333)
                 .flags(DISABLE_DECOMPOSITION)
                 .build()
-                .setFormula("性状：0 -1 1 0 1", true);
+                .setFormula("性状：0 1 0 0 0", true);
 
         GTQTMaterials.Enzymesc = new Material.Builder(getMaterialsId(), gregtechId("enzymesc"))
                 .fluid()
                 .color(0xB03060)
                 .flags(DISABLE_DECOMPOSITION)
                 .build()
-                .setFormula("性状：1 1 -1 0 0", true);
+                .setFormula("性状：0 0 1 0 0", true);
 
         GTQTMaterials.Enzymesd = new Material.Builder(getMaterialsId(), gregtechId("enzymesd"))
                 .fluid()
                 .color(0xB4EEB4)
                 .flags(DISABLE_DECOMPOSITION)
                 .build()
-                .setFormula("性状：0 0 1 1 -1", true);
+                .setFormula("性状：0 0 0 1 0", true);
 
         GTQTMaterials.Enzymese = new Material.Builder(getMaterialsId(), gregtechId("enzymese"))
                 .fluid()
                 .color(0xBDB76B)
                 .flags(DISABLE_DECOMPOSITION)
                 .build()
-                .setFormula("性状：-1 0 0 1 1", true);
+                .setFormula("性状：0 0 0 0 1", true);
 
         //富集生物培养基
         GTQTMaterials.Rnzymes = new Material.Builder(getMaterialsId(), gregtechId("rnzymes"))
@@ -2204,5 +2204,93 @@ public class FirstDegreeMaterials {
                 .color(0xFA8072)
                 .flags(DISABLE_DECOMPOSITION)
                 .build();
+
+        //普适矿处菌种 101
+        GTQTMaterials.Enzymesaa = new Material.Builder(getMaterialsId(), gregtechId("enzymese_101"))
+                .fluid()
+                .color(0xBDB76B)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("性状：1 0 1 0 0", true);
+        //定向铂系菌种 102
+        GTQTMaterials.Enzymesab = new Material.Builder(getMaterialsId(), gregtechId("enzymese_102"))
+                .fluid()
+                .color(0xBDB76B)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("性状：1 0 1 1 0", true);
+        //普适魔性菌种 103
+        GTQTMaterials.Enzymesac = new Material.Builder(getMaterialsId(), gregtechId("enzymese_103"))
+                .fluid()
+                .color(0xBDB76B)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("性状：1 1 0 1 0", true);
+        //普适副产菌种 104
+        GTQTMaterials.Enzymesad = new Material.Builder(getMaterialsId(), gregtechId("enzymese_104"))
+                .fluid()
+                .color(0xBDB76B)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("性状：1 1 0 1 1", true);
+        //
+        //工业合成菌种I 201
+        GTQTMaterials.Enzymesba = new Material.Builder(getMaterialsId(), gregtechId("enzymese_201"))
+                .fluid()
+                .color(0xBDB76B)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("性状：2 1 1 3 1", true);
+        //工业还原菌种 202
+        GTQTMaterials.Enzymesbb = new Material.Builder(getMaterialsId(), gregtechId("enzymese_202"))
+                .fluid()
+                .color(0xBDB76B)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("性状：1 2 3 1 1", true);
+        //工业氧化菌种 203
+        GTQTMaterials.Enzymesbc = new Material.Builder(getMaterialsId(), gregtechId("enzymese_203"))
+                .fluid()
+                .color(0xBDB76B)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("性状：1 3 2 1 1", true);
+        //工业催化菌种 204
+        GTQTMaterials.Enzymesbd = new Material.Builder(getMaterialsId(), gregtechId("enzymese_204"))
+                .fluid()
+                .color(0xBDB76B)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("性状：2 1 1 3 1", true);
+        //
+        //定向脂肪酶 301
+        GTQTMaterials.Enzymesca = new Material.Builder(getMaterialsId(), gregtechId("enzymese_301"))
+                .fluid()
+                .color(0xBDB76B)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("性状：4 1 1 3 2", true);
+        //普适发酵酶 302
+        GTQTMaterials.Enzymescb = new Material.Builder(getMaterialsId(), gregtechId("enzymese_302"))
+                .fluid()
+                .color(0xBDB76B)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("性状：2 4 2 3 1", true);
+        //定向发酵酶 303
+        GTQTMaterials.Enzymescc = new Material.Builder(getMaterialsId(), gregtechId("enzymese_303"))
+                .fluid()
+                .color(0xBDB76B)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("性状：2 3 2 4 1", true);
+        //
+        //活性诱变酶 401
+        GTQTMaterials.Enzymesda = new Material.Builder(getMaterialsId(), gregtechId("enzymese_401"))
+                .fluid()
+                .color(0xBDB76B)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("性状：2 5 2 4 3", true);
     }
 }
