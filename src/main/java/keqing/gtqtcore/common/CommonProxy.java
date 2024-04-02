@@ -271,6 +271,12 @@ public class CommonProxy {
         ELEProperties.registeredTier(4,"四级");
         ELEProperties.registeredTier(5,"五级");
 
+        ERProperty.registeredRate(1,"2 1 1 1 1 酸性");
+        ERProperty.registeredRate(2,"4 2 1 2 1 碱性");
+        ERProperty.registeredRate(3,"3 2 1 4 4 酸性");
+        ERProperty.registeredRate(4,"4 2 3 5 5 碱性");
+        ERProperty.registeredRate(5,"3 2 4 8 7 酸性");
+
         for(int i=10;i<=800;i=i+10) LASERNetProperty.registeredLaser(i, String.valueOf(i));
         for(int i=1;i<=100;i++) KQNetProperty.registeredNB(i, String.valueOf(i));
         for(int i=1;i<=100;i++) BRProperty.registeredRate(i, String.valueOf(i));

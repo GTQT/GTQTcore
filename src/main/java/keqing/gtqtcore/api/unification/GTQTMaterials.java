@@ -489,6 +489,12 @@ public class GTQTMaterials {
     public static Material Yisuanbei;
     public static Material Tcfour;
     public static Material Biooil;
+    public static Material Enzymesa;
+    public static Material Enzymesb;
+    public static Material Enzymesc;
+    public static Material Enzymesd;
+    public static Material Enzymese;
+    public static Material Rnzymes;
 
     //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/api/unification/GSMaterials.java
 

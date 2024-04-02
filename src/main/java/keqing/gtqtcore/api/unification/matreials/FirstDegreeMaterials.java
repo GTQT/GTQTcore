@@ -31,7 +31,7 @@ public class FirstDegreeMaterials {
     }
 
     private static int startId = 20000;
-    private static final int END_ID = startId + 300;
+    private static final int END_ID = startId + 1000;
 
     private static int getMaterialsId() {
         if (startId < END_ID) {
@@ -2156,6 +2156,50 @@ public class FirstDegreeMaterials {
 
         //生物原油
         GTQTMaterials.Biooil = new Material.Builder(getMaterialsId(), gregtechId("biooil"))
+                .fluid()
+                .color(0xFA8072)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //快乐细菌
+        //这里注册线性方程组的几个基础解系
+        GTQTMaterials.Enzymesa = new Material.Builder(getMaterialsId(), gregtechId("enzymesa"))
+                .fluid()
+                .color(0xEE00EE)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("性状：1 0 1 -1 0", true);
+
+        GTQTMaterials.Enzymesb = new Material.Builder(getMaterialsId(), gregtechId("enzymesb"))
+                .fluid()
+                .color(0xCD3333)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("性状：0 -1 1 0 1", true);
+
+        GTQTMaterials.Enzymesc = new Material.Builder(getMaterialsId(), gregtechId("enzymesc"))
+                .fluid()
+                .color(0xB03060)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("性状：1 1 -1 0 0", true);
+
+        GTQTMaterials.Enzymesd = new Material.Builder(getMaterialsId(), gregtechId("enzymesd"))
+                .fluid()
+                .color(0xB4EEB4)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("性状：0 0 1 1 -1", true);
+
+        GTQTMaterials.Enzymese = new Material.Builder(getMaterialsId(), gregtechId("enzymese"))
+                .fluid()
+                .color(0xBDB76B)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("性状：-1 0 0 1 1", true);
+
+        //富集生物培养基
+        GTQTMaterials.Rnzymes = new Material.Builder(getMaterialsId(), gregtechId("rnzymes"))
                 .fluid()
                 .color(0xFA8072)
                 .flags(DISABLE_DECOMPOSITION)

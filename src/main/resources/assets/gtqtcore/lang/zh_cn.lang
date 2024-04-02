@@ -649,6 +649,13 @@ gregtech.material.ethanedioic_acid=草酸
 gregtech.material.hexafluorosilicic_acid=氟硅酸
 gregtech.material.sodium_silicofluoride=氟硅酸钠
 
+gregtech.material.enzymesa=A型原始菌种
+gregtech.material.enzymesb=B型原始菌种
+gregtech.material.enzymesc=C型原始菌种
+gregtech.material.enzymesd=D型原始菌种
+gregtech.material.enzymese=E型原始菌种
+gregtech.material.rnzymes=富集元素培养基
+
 gregtech.material.vinylcinnamate=聚乙烯醇肉桂酸酯
 gregtech.material.xmt=xMT分子光刻胶
 gregtech.material.zrbtmst=氧化锆杂化物-（2,4-双（三氯甲基）-6-（4-甲氧基苯乙烯基）-1,3,5-三嗪）（ZrO2-BTMST）
@@ -1034,6 +1041,10 @@ recipemap.biological_reaction_recipes.name=生物反应
 gtqtcore.machine.fluidzed_bed.name=大型流化床
 gtqtcore.machine.industry_water_pump.name=工业水泵
 recipemap.fluidized_bed.name=流化加工
+
+gtqtcore.machine.enzymes_reactor.name=细菌培养箱
+recipemap.enzymes_reaction_recipes.name=超净细菌培养
+
 recipemap.solar_plate.name=太阳能
 recipemap.cw_laser_engraver.name=激光切割
 gtqtcore.machine.stepper.name=光刻机

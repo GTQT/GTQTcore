@@ -19,6 +19,46 @@ public class FuelRecipes {
 
 
     public static void init(){
+        ENZYMES_REACTION_RECIPES.recipeBuilder()
+                .input(plate, Hdcs, 1)
+                .output(ingot,Iron)
+                .EUt(VA[MV])
+                .duration(120)
+                .rate(1)
+                .buildAndRegister();
+
+        ENZYMES_REACTION_RECIPES.recipeBuilder()
+                .input(plate, Iron, 1)
+                .output(ingot,Iron)
+                .EUt(VA[MV])
+                .duration(120)
+                .rate(2)
+                .buildAndRegister();
+
+        ENZYMES_REACTION_RECIPES.recipeBuilder()
+                .input(plate, Steel, 1)
+                .output(ingot,Iron)
+                .EUt(VA[MV])
+                .duration(120)
+                .rate(3)
+                .buildAndRegister();
+
+        ENZYMES_REACTION_RECIPES.recipeBuilder()
+                .input(plate, Aluminium, 1)
+                .output(ingot,Iron)
+                .EUt(VA[MV])
+                .duration(120)
+                .rate(4)
+                .buildAndRegister();
+
+        ENZYMES_REACTION_RECIPES.recipeBuilder()
+                .input(plate, Gold, 1)
+                .output(ingot,Iron)
+                .EUt(VA[MV])
+                .duration(120)
+                .rate(5)
+                .buildAndRegister();
+
                     PARTICLE_ACCELERATOR_RECIPES.recipeBuilder()
                             .input(screw, Hdcs, 1)
                             .output(ingot,Iron)

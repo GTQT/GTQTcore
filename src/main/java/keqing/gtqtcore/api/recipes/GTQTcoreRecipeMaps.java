@@ -104,6 +104,7 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<PARecipeBuilder> PARTICLE_ACCELERATOR_RECIPES;
     public static final RecipeMap<SimpleRecipeBuilder> DIGESTER_RECIPES;
     public static final RecipeMap<BRRecioeBuilder> BIOLOGICAL_REACTION_RECIPES;
+    public static final RecipeMap<ERRecioeBuilder> ENZYMES_REACTION_RECIPES;
     public static final RecipeMap<PHRecipeBuilder> FERMENTATION_TANK_RECIPES;
     public static final RecipeMap<FuelRecipeBuilder> NAQUADAH_REACTOR_RECIPES;
     public static final RecipeMap<SimpleRecipeBuilder> FUEL_REFINE_FACTORY_RECIPES;
@@ -297,6 +298,7 @@ public class GTQTcoreRecipeMaps {
                 .setProgressBar(GuiTextures.PROGRESS_BAR_EXTRACT, ProgressWidget.MoveType.HORIZONTAL)
                 .setSound(GTSoundEvents.CHEMICAL_REACTOR);
         BIOLOGICAL_REACTION_RECIPES = new RecipeMap<>("biological_reaction_recipes", 3, 3, 3, 3, new BRRecioeBuilder(), false);
+        ENZYMES_REACTION_RECIPES = new RecipeMap<>("enzymes_reaction_recipes", 3, 3, 3, 3, new ERRecioeBuilder(), false);
 
         DISSOLUTION_TANK_RECIPES = new RecipeMap<>("dissolution_tank_recipes", 4, 4, 4, 4, new SimpleRecipeBuilder(), false);
         //  Dangote Distillery RecipeMap

@@ -42,6 +42,7 @@ public class EPMaterialPropertyAddition {
         Germanium.setProperty(PropertyKey.BLAST, new BlastProperty(1211));
 
         // Fluids
+        SodiumHydroxide.setProperty(PropertyKey.FLUID, new FluidProperty());
         SodiumBisulfate.setProperty(PropertyKey.FLUID, new FluidProperty());
         Bromine.setProperty(PropertyKey.FLUID, new FluidProperty());
         Bromine.setMaterialIconSet(MaterialIconSet.FLUID);

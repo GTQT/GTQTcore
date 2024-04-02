@@ -28,8 +28,7 @@ import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 
-import static gregicality.multiblocks.api.unification.GCYMMaterials.MolybdenumDisilicide;
-import static gregicality.multiblocks.api.unification.GCYMMaterials.TitaniumCarbide;
+import static gregicality.multiblocks.api.unification.GCYMMaterials.*;
 import static gregtech.api.GTValues.L;
 import static gregtech.api.GTValues.VA;
 import static gregtech.api.recipes.RecipeMaps.*;
@@ -52,6 +51,7 @@ import static keqing.gtqtcore.api.unification.GCYSMaterials.Orichalcum;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.*;
 import static keqing.gtqtcore.common.block.blocks.BlockCrucible.CrucibleType.QUARTZ_CRUCIBLE;
+import static keqing.gtqtcore.common.block.blocks.GTQTIsaCasing.CasingType.ASEPTIC_FARM_CASING;
 import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.NQ_TURBINE_CASING;
 import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.PD_TURBINE_CASING;
 import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing1.TurbineCasingType.AD_TURBINE_CASING;
@@ -270,6 +270,16 @@ public class MetaTileEntityLoader {
                 .input(dust, Gypsum, 2)
                 .fluidInputs(Concrete.getFluid(1000))
                 .outputs(MetaBlocks.METAL_CASING.getItemVariant(BlockMetalCasing.MetalCasingType.PRIMITIVE_BRICKS))
+                .duration(20).EUt(30).buildAndRegister();
+
+        //海藻方块
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .inputs(MetaTileEntities.HULL[GTValues.HV].getStackForm())
+                .input(plate, NanometerBariumTitanate, 6)
+                .input(frameGt, StainlessSteel, 1)
+                .fluidInputs(Brominatedepoxyresins.getFluid(1440))
+                .circuitMeta(1)
+                .outputs(GTQTMetaBlocks.ISA_CASING.getItemVariant(ASEPTIC_FARM_CASING))
                 .duration(20).EUt(30).buildAndRegister();
         //太阳能
         ASSEMBLER_RECIPES.recipeBuilder()

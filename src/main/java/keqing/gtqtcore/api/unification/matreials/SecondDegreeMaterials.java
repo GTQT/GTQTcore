@@ -16,8 +16,8 @@ import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 
 
 public class SecondDegreeMaterials {
-    private static int startId = 20300;
-    private static final int END_ID = startId + 300;
+    private static int startId = 21000;
+    private static final int END_ID = startId + 1000;
 
     private static int getMaterialsId() {
         if (startId < END_ID) {

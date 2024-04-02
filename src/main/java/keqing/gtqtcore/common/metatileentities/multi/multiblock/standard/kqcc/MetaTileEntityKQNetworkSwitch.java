@@ -106,7 +106,7 @@ public class MetaTileEntityKQNetworkSwitch extends MetaTileEntityDataBank implem
 
     @Override
     protected int getEnergyUsage() {
-        return isStructureFormed() ? computationHandler.getEUt()/32 : 0;
+        return isStructureFormed() ? computationHandler.getEUt()/128 : 0;
     }
     public int vacwu()
     {
@@ -204,7 +204,7 @@ public class MetaTileEntityKQNetworkSwitch extends MetaTileEntityDataBank implem
         tooltip.add(I18n.format("gregtech.machine.network_switch.tooltip.2"));
         tooltip.add(I18n.format("gregtech.machine.network_switch.tooltip.3"));
         tooltip.add(I18n.format("gregtech.machine.network_switch.tooltip.4",
-                TextFormattingUtil.formatNumbers(EUT_PER_HATCH)));
+                TextFormattingUtil.formatNumbers(EUT_PER_HATCH/128)));
     }
 
     @Override
@@ -248,7 +248,7 @@ public class MetaTileEntityKQNetworkSwitch extends MetaTileEntityDataBank implem
             reset();
             this.providers.addAll(providers);
             this.transmitters.addAll(transmitters);
-            this.EUt = (providers.size() + transmitters.size()) * EUT_PER_HATCH/32;
+            this.EUt = (providers.size() + transmitters.size()) * EUT_PER_HATCH/128;
         }
 
         private void reset() {
