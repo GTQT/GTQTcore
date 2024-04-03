@@ -355,9 +355,9 @@ public class MetaTileEntityEnzymesReaction extends GTQTRecipeMapMultiblockContro
     public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(I18n.format("gregtech.machine.biorea.gtqtupdate.1"));
-        tooltip.add(I18n.format("gregtech.machine.biorea.gtqtupdate.2"));
-        tooltip.add(I18n.format("gregtech.machine.biorea.gtqtupdate.3"));
-        tooltip.add(I18n.format("gregtech.machine.biorea.gtqtupdate.4"));
+        tooltip.add(I18n.format("gregtech.machine.bioreb.gtqtupdate.2"));
+        tooltip.add(I18n.format("gregtech.machine.bioreb.gtqtupdate.3"));
+        tooltip.add(I18n.format("gregtech.machine.bioreb.gtqtupdate.4"));
     }
     protected class BiologicalReactionLogic extends MultiblockRecipeLogic {
 

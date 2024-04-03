@@ -190,6 +190,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityKQNetworkSwitch KQNS;
     public static MetaTileEntityThreeDim THREE_DIM_PRINT;
     public static MetaTileEntityELEOil ELE_OIL;
+    public static MetaTileEntityBioCentrifuge BIO_CENTRIFUGE;
     public static MetaTileEntityEnzymesReaction ENZYMES_REACTOR;
     public static MetaTileEntityNeutronActivator NEUTRON_ACTIVATOR;
     public static MetaTileEntityReactionFurnace REACTION_FURNACE;
@@ -334,6 +335,7 @@ public class GTQTMetaTileEntities {
         ELECTRIC_ARC_FURNACE= registerMetaTileEntity(3191, new MetaTileEntityElectricArcFurnace(gtqtcoreId("electric_arc_furnace")));
         GREEN_HOUSE_PLUS= registerMetaTileEntity(3192, new MetaTileEntityGreenhousePlus(gtqtcoreId("green_house_plus")));
         ENZYMES_REACTOR= registerMetaTileEntity(3193, new MetaTileEntityEnzymesReaction(gtqtcoreId("enzymes_reactor")));
+        BIO_CENTRIFUGE= registerMetaTileEntity(3194, new MetaTileEntityBioCentrifuge(gtqtcoreId("bio_centrifuge")));
         //重写设备
         DISTILLATION_TOWER = registerMetaTileEntity(3250, new MetaTileEntityDistillationTower(gtqtcoreId("distillation_tower")));
         CRACKER = registerMetaTileEntity(3251, new MetaTileEntityCrackingUnit(gtqtcoreId("cracker")));

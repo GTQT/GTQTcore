@@ -134,6 +134,7 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<SimpleRecipeBuilder> DISSOLUTION_TANK_RECIPES;
     public static final RecipeMap<SimpleRecipeBuilder> FLUID_EXTRACTOR_RECIPES;
     public static final RecipeMap<SimpleRecipeBuilder> FLUID_CANNER_RECIPES;
+    public static final RecipeMap<SimpleRecipeBuilder> BIO_CENTRIFUGE;
     public static final RecipeMap<SimpleRecipeBuilder> FLOTATION_FACTORY_RECIPES;
     public static final RecipeMap<BlastRecipeBuilder> VACUUM_DRYING_FURNACE_RECIPES;
     public static final RecipeMap<GrindBallTierRecipeBuilder> ISA_MILL_GRINDER;
@@ -275,6 +276,10 @@ public class GTQTcoreRecipeMaps {
                 .setSound(GTSoundEvents.MACERATOR);
 
         ISA_MILL_GRINDER = new RecipeMap<>("isa_mill_recipes", 3, 3, 0, 0, new GrindBallTierRecipeBuilder(), false)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_MACERATE, ProgressWidget.MoveType.HORIZONTAL)
+                .setSound(GTSoundEvents.MACERATOR);
+
+        BIO_CENTRIFUGE = new RecipeMap<>("bio_centrifuge", 3, 3, 0, 0, new SimpleRecipeBuilder(), false)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_MACERATE, ProgressWidget.MoveType.HORIZONTAL)
                 .setSound(GTSoundEvents.MACERATOR);
 
