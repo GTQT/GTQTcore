@@ -191,6 +191,38 @@ public class KeQingNET {
                 .duration(4000).EUt(1960).buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(CENTRIFUGE[3],4)
+                .input(circuit, Tier.HV, 4)
+                .input(ELECTRIC_MOTOR_HV, 4)
+                .input(ROBOT_ARM_HV, 4)
+                .input(plateDense, NanometerBariumTitanate, 4)
+                .input(foil, Tcfour, 64)
+                .output(BIO_CENTRIFUGE)
+                .fluidInputs(SolderingAlloy.getFluid(L * 8))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 8))
+                .fluidInputs(Platinum.getFluid(L * 8))
+                .scannerResearch(b -> b
+                        .researchStack(CENTRIFUGE[3].getStackForm())
+                        .EUt(VA[HV]))
+                .duration(4000).EUt(1960).buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(BIOLOGICAL_REACTION,4)
+                .input(circuit, Tier.HV, 4)
+                .input(ELECTRIC_PUMP_HV, 4)
+                .input(ROBOT_ARM_HV, 4)
+                .input(plateDense, NanometerBariumTitanate, 4)
+                .input(foil, Tcfour, 64)
+                .output(ENZYMES_REACTOR)
+                .fluidInputs(SolderingAlloy.getFluid(L * 8))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 8))
+                .fluidInputs(Palladium.getFluid(L * 8))
+                .scannerResearch(b -> b
+                        .researchStack(BIOLOGICAL_REACTION.getStackForm())
+                        .EUt(VA[HV]))
+                .duration(4000).EUt(1960).buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .inputs(HULL[2].getStackForm())
                 .input(EMITTER_MV, 4)
                 .input(SENSOR_MV, 4)

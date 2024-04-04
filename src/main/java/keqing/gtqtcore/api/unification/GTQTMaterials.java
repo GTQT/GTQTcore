@@ -4,6 +4,8 @@ import gregtech.api.unification.material.Material;
 import keqing.gtqtcore.api.unification.matreials.*;
 
 public class GTQTMaterials {
+    public static  Material CHES;
+    public static  Material THF ;
     public static  Material TRISP;
     public static Material TRISN;
     public static  Material TRIS ;
@@ -507,6 +509,14 @@ public class GTQTMaterials {
     public static Material Enzymescb;
     public static Material Enzymescc;
     public static Material Enzymesda;
+    public static Material Enzymesaz;
+    public static Material Enzymesbz;
+    public static Material Enzymescz;
+    public static Material Enzymesdz;
+    public static Material Enzymesez;
+    public static Material Hydroxymethylfurfural;
+    public static Material Methylfuran;
+    public static Material Ethanesulphonate;
 
     //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/api/unification/GSMaterials.java
 

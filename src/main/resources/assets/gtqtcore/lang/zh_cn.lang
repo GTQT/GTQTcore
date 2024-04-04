@@ -654,6 +654,19 @@ gregtech.material.ethanedioic_acid=草酸
 gregtech.material.hexafluorosilicic_acid=氟硅酸
 gregtech.material.sodium_silicofluoride=氟硅酸钠
 
+gregtech.material.thf=四氢呋喃
+gregtech.material.hydroxymethylfurfural=5-羟甲基糠醛
+gregtech.material.methylfuran=2,5-二甲基呋喃
+gregtech.material.ches=2-环己胺基乙磺酸
+gregtech.material.ethanesulphonate=环己胺基乙磺酸钠（生物缓冲剂）
+
+
+gregtech.material.enzymesaz=A型原始含菌杂质
+gregtech.material.enzymesbz=B型原始含菌杂质
+gregtech.material.enzymescz=C型原始含菌杂质
+gregtech.material.enzymesdz=D型原始含菌杂质
+gregtech.material.enzymesez=E型原始含菌杂质
+
 gregtech.material.enzymesa=A型原始菌种
 gregtech.material.enzymesb=B型原始菌种
 gregtech.material.enzymesc=C型原始菌种

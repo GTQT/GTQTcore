@@ -279,7 +279,7 @@ public class GTQTcoreRecipeMaps {
                 .setProgressBar(GuiTextures.PROGRESS_BAR_MACERATE, ProgressWidget.MoveType.HORIZONTAL)
                 .setSound(GTSoundEvents.MACERATOR);
 
-        BIO_CENTRIFUGE = new RecipeMap<>("bio_centrifuge", 3, 3, 0, 0, new SimpleRecipeBuilder(), false)
+        BIO_CENTRIFUGE = new RecipeMap<>("bio_centrifuge", 3, 3, 3, 3, new SimpleRecipeBuilder(), false)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_MACERATE, ProgressWidget.MoveType.HORIZONTAL)
                 .setSound(GTSoundEvents.MACERATOR);
 
