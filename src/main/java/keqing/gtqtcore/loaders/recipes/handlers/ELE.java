@@ -25,7 +25,7 @@ import static keqing.gtqtcore.common.block.blocks.GTQTStepper.CasingType.*;
 public class ELE {
     public static void init() {
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
-                .EUt(120).duration(2000)
+                .EUt(120).duration(800)
                 .input(plate, Platinum, 8)
                 .input(stick, Platinum, 4)
                 .input(dust,Graphite,16)
@@ -35,7 +35,7 @@ public class ELE {
                 .buildAndRegister();
 
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
-                .EUt(120).duration(2000)
+                .EUt(120).duration(800)
                 .input(plate, Palladium, 8)
                 .input(stick, Palladium, 4)
                 .input(dust,Graphite,16)
@@ -45,7 +45,7 @@ public class ELE {
                 .buildAndRegister();
 
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
-                .EUt(120).duration(2000)
+                .EUt(120).duration(800)
                 .input(plate, Silver, 8)
                 .input(stick, Silver, 4)
                 .input(dust,Graphite,16)
@@ -55,7 +55,7 @@ public class ELE {
                 .buildAndRegister();
 
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
-                .EUt(120).duration(2000)
+                .EUt(120).duration(800)
                 .input(plate, Copper, 8)
                 .input(stick, Copper, 4)
                 .input(dust,Graphite,16)
@@ -65,7 +65,7 @@ public class ELE {
                 .buildAndRegister();
 
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
-                .EUt(120).duration(2000)
+                .EUt(120).duration(800)
                 .input(plate, Aluminium, 8)
                 .input(stick, Aluminium, 4)
                 .input(dust,Graphite,16)
@@ -75,7 +75,7 @@ public class ELE {
                 .buildAndRegister();
 
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
-                .EUt(120).duration(2000)
+                .EUt(120).duration(800)
                 .input(plate, Zinc, 8)
                 .input(stick, Zinc, 4)
                 .input(dust,Graphite,16)
@@ -85,7 +85,7 @@ public class ELE {
                 .buildAndRegister();
 
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
-                .EUt(120).duration(2000)
+                .EUt(120).duration(800)
                 .input(plate, Steel, 8)
                 .input(stick, Steel, 4)
                 .input(dust,Graphite,16)
@@ -95,7 +95,7 @@ public class ELE {
                 .buildAndRegister();
 
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
-                .EUt(120).duration(2000)
+                .EUt(120).duration(800)
                 .input(plate, Brass, 8)
                 .input(stick, Brass, 4)
                 .input(dust,Graphite,16)
@@ -155,7 +155,7 @@ public class ELE {
                 .inputs(HULL[2].getStackForm())
                 .input(ELECTRIC_MOTOR_MV, 8)
                 .input(circuit, MarkerMaterials.Tier.MV,1)
-                .input(electrode, Silver, 16)
+                .input(electrode, Silver, 8)
                 .fluidInputs(PolyvinylChloride.getFluid(L * 4))
                 .outputs(GTQTMetaBlocks.ELECTROBATH.getItemVariant(GTQTElectrobath.CasingType.II_ELECTROBATH))
                 .duration(200).EUt(120).buildAndRegister();
@@ -164,7 +164,7 @@ public class ELE {
                 .inputs(HULL[3].getStackForm())
                 .input(ELECTRIC_MOTOR_HV, 8)
                 .input(circuit, MarkerMaterials.Tier.HV,1)
-                .input(electrode, Aluminium, 16)
+                .input(electrode, Aluminium, 8)
                 .fluidInputs(Epoxy.getFluid(L * 4))
                 .outputs(GTQTMetaBlocks.ELECTROBATH.getItemVariant(GTQTElectrobath.CasingType.III_ELECTROBATH))
                 .duration(200).EUt(480).buildAndRegister();
@@ -173,7 +173,7 @@ public class ELE {
                 .inputs(HULL[4].getStackForm())
                 .input(ELECTRIC_MOTOR_EV, 8)
                 .input(circuit, MarkerMaterials.Tier.EV,1)
-                .input(electrode, Platinum, 16)
+                .input(electrode, Platinum, 8)
                 .fluidInputs(ReinforcedEpoxyResin.getFluid(L * 4))
                 .outputs(GTQTMetaBlocks.ELECTROBATH.getItemVariant(GTQTElectrobath.CasingType.IV_ELECTROBATH))
                 .duration(200).EUt(1960).buildAndRegister();

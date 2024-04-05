@@ -62,70 +62,70 @@ public class EnzymesRecipes {
         */
         //格式 小消耗细菌 原材料 输出材料
         //普适矿处菌种	1	倍产铁 铜 锡	HV
-        SpecialOut(Enzymesaa,10,ore,Iron,1,dust,Iron,3,1,10);
-        SpecialOut(Enzymesaa,10,ore,BandedIron,1,dust,Iron,3,1,10);
-        SpecialOut(Enzymesaa,10,ore,BrownLimonite,1,dust,Iron,3,1,10);
-        SpecialOut(Enzymesaa,10,ore,Chromite,1,dust,Iron,3,1,10);
-        SpecialOut(Enzymesaa,10,ore,Magnetite,1,dust,Iron,3,1,10);
-        SpecialOut(Enzymesaa,10,ore,Pyrite,1,dust,Iron,3,1,10);
-        SpecialOut(Enzymesaa,10,ore,YellowLimonite,1,dust,Iron,3,1,10);
+        SpecialOut(Enzymesaa,10,ore,Iron,1,dust,Iron,4,1,10);
+        SpecialOut(Enzymesaa,10,ore,BandedIron,1,dust,Iron,4,1,10);
+        SpecialOut(Enzymesaa,10,ore,BrownLimonite,1,dust,Iron,4,1,10);
+        SpecialOut(Enzymesaa,10,ore,Chromite,1,dust,Iron,4,1,10);
+        SpecialOut(Enzymesaa,10,ore,Magnetite,1,dust,Iron,4,1,10);
+        SpecialOut(Enzymesaa,10,ore,Pyrite,1,dust,Iron,4,1,10);
+        SpecialOut(Enzymesaa,10,ore,YellowLimonite,1,dust,Iron,4,1,10);
 
-        SpecialOut(Enzymesaa,10,ore,Pentlandite,1,dust,Nickel,3,1,10);
+        SpecialOut(Enzymesaa,10,ore,Pentlandite,1,dust,Nickel,4,1,10);
 
-        SpecialOut(Enzymesaa,10,ore,Copper,1,dust,Copper,3,1,10);
-        SpecialOut(Enzymesaa,10,ore,Chalcopyrite,1,dust,Copper,3,1,10);
-        SpecialOut(Enzymesaa,10,ore,Bornite,1,dust,Copper,3,1,10);
-        SpecialOut(Enzymesaa,10,ore,Chalcocite,1,dust,Copper,3,1,10);
-        SpecialOut(Enzymesaa,10,ore,Tetrahedrite,1,dust,Copper,3,1,10);
+        SpecialOut(Enzymesaa,10,ore,Copper,1,dust,Copper,4,1,10);
+        SpecialOut(Enzymesaa,10,ore,Chalcopyrite,1,dust,Copper,4,1,10);
+        SpecialOut(Enzymesaa,10,ore,Bornite,1,dust,Copper,4,1,10);
+        SpecialOut(Enzymesaa,10,ore,Chalcocite,1,dust,Copper,4,1,10);
+        SpecialOut(Enzymesaa,10,ore,Tetrahedrite,1,dust,Copper,4,1,10);
 
-        SpecialOut(Enzymesaa,10,ore,Tin,1,dust,Tin,3,1,10);
-        SpecialOut(Enzymesaa,10,ore,Cassiterite,1,dust,Tin,3,1,10);
-        SpecialOut(Enzymesaa,10,ore,CassiteriteSand,1,dust,Tin,3,1,10);
+        SpecialOut(Enzymesaa,10,ore,Tin,1,dust,Tin,4,1,10);
+        SpecialOut(Enzymesaa,10,ore,Cassiterite,1,dust,Tin,4,1,10);
+        SpecialOut(Enzymesaa,10,ore,CassiteriteSand,1,dust,Tin,4,1,10);
 
-        SpecialOut(Enzymesaa,10,ore,Aluminium,1,dust,Aluminium,3,1,10);
-        SpecialOut(Enzymesaa,10,ore,Almandine,1,dust,Aluminium,3,1,10);
-        SpecialOut(Enzymesaa,10,ore,Grossular,1,dust,Aluminium,3,1,10);
-        SpecialOut(Enzymesaa,10,ore,Pyrope,1,dust,Aluminium,3,1,10);
-        SpecialOut(Enzymesaa,10,ore,Spessartine,1,dust,Aluminium,3,1,10);
-        SpecialOut(Enzymesaa,10,ore,Amblygonite,1,dust,Aluminium,3,1,10);
-        SpecialOut(Enzymesaa,10,ore,Bauxite,1,dust,Aluminium,3,1,10);
+        SpecialOut(Enzymesaa,10,ore,Aluminium,1,dust,Aluminium,4,1,10);
+        SpecialOut(Enzymesaa,10,ore,Almandine,1,dust,Aluminium,4,1,10);
+        SpecialOut(Enzymesaa,10,ore,Grossular,1,dust,Aluminium,4,1,10);
+        SpecialOut(Enzymesaa,10,ore,Pyrope,1,dust,Aluminium,4,1,10);
+        SpecialOut(Enzymesaa,10,ore,Spessartine,1,dust,Aluminium,4,1,10);
+        SpecialOut(Enzymesaa,10,ore,Amblygonite,1,dust,Aluminium,4,1,10);
+        SpecialOut(Enzymesaa,10,ore,Bauxite,1,dust,Aluminium,4,1,10);
 
         //定向铂系菌种	2	倍产金 银 铂系	EV
-        SpecialOut(Enzymesab,10,ore,Gold,1,dust,Gold,3,1,20);
-        SpecialOut(Enzymesab,10,ore,Silver,1,dust,Silver,3,1,20);
-        SpecialOutCircuit(Enzymesab,10,1,dust,PlatinumGroupSludge,1,dust, Platinum,1,3,40);
-        SpecialOutCircuit(Enzymesab,10,2,dust,PlatinumGroupSludge,1,dust, Palladium,1,3,40);
-        SpecialOutCircuit(Enzymesab,10,3,dust,PlatinumGroupSludge,1,dust, Iridium,1,3,40);
-        SpecialOutCircuit(Enzymesab,10,4,dust,PlatinumGroupSludge,1,dust, Osmium,1,3,40);
-        SpecialOutCircuit(Enzymesab,10,5,dust,PlatinumGroupSludge,1,dust, Rhodium,1,3,40);
-        SpecialOutCircuit(Enzymesab,10,6,dust,PlatinumGroupSludge,1,dust, Ruthenium,1,3,40);
+        SpecialOut(Enzymesab,10,ore,Gold,1,dust,Gold,4,1,20);
+        SpecialOut(Enzymesab,10,ore,Silver,1,dust,Silver,4,1,20);
+        SpecialOutCircuit(Enzymesab,10,1,dust,PlatinumGroupSludge,1,dust, Platinum,2,3,40);
+        SpecialOutCircuit(Enzymesab,10,2,dust,PlatinumGroupSludge,1,dust, Palladium,2,3,40);
+        SpecialOutCircuit(Enzymesab,10,3,dust,PlatinumGroupSludge,1,dust, Iridium,2,3,40);
+        SpecialOutCircuit(Enzymesab,10,4,dust,PlatinumGroupSludge,1,dust, Osmium,2,3,40);
+        SpecialOutCircuit(Enzymesab,10,5,dust,PlatinumGroupSludge,1,dust, Rhodium,2,3,40);
+        SpecialOutCircuit(Enzymesab,10,6,dust,PlatinumGroupSludge,1,dust, Ruthenium,2,3,40);
 
         // 普适副产菌种	2	倍产副产（暂定HV前的矿）	HV
-        SpecialOutCircuit(Enzymesad,10,1,ore,Aluminium,1,dust, Rutile,1,2,20);
+        SpecialOutCircuit(Enzymesad,10,1,ore,Aluminium,1,dust, Rutile,2,2,20);
 
-        SpecialOutCircuit(Enzymesad,10,1,ore,Copper,1,dust, Gold,1,1,20);
-        SpecialOutCircuit(Enzymesad,10,2,ore,Copper,1,dust, Cobalt,1,1,20);
+        SpecialOutCircuit(Enzymesad,10,1,ore,Copper,1,dust, Gold,2,1,20);
+        SpecialOutCircuit(Enzymesad,10,2,ore,Copper,1,dust, Cobalt,2,1,20);
 
-        SpecialOutCircuit(Enzymesad,10,1,ore,Magnetite,1,dust, Gold,1,1,20);
+        SpecialOutCircuit(Enzymesad,10,1,ore,Magnetite,1,dust, Gold,2,1,20);
 
-        SpecialOutCircuit(Enzymesad,10,1,ore,Pyrite,1,dust, Sulfur,1,1,20);
+        SpecialOutCircuit(Enzymesad,10,1,ore,Pyrite,1,dust, Sulfur,2,1,20);
 
-        SpecialOutCircuit(Enzymesad,10,1,ore,Gold,1,dust, Copper,1,1,20);
-        SpecialOutCircuit(Enzymesad,10,2,ore,Gold,1,dust, Silver,1,1,20);
+        SpecialOutCircuit(Enzymesad,10,1,ore,Gold,1,dust, Copper,2,1,20);
+        SpecialOutCircuit(Enzymesad,10,2,ore,Gold,1,dust, Silver,2,1,20);
 
-        SpecialOutCircuit(Enzymesad,10,1,ore,Silver,1,dust, Gold,1,1,20);
-        SpecialOutCircuit(Enzymesad,10,2,ore,Silver,1,dust, Lead,1,1,20);
+        SpecialOutCircuit(Enzymesad,10,1,ore,Silver,1,dust, Gold,2,1,20);
+        SpecialOutCircuit(Enzymesad,10,2,ore,Silver,1,dust, Lead,2,1,20);
 
-        SpecialOutCircuit(Enzymesad,10,1,ore,Galena,1,dust, Silver,1,1,20);
-        SpecialOutCircuit(Enzymesad,10,2,ore,Galena,1,dust, Sulfur,1,1,20);
+        SpecialOutCircuit(Enzymesad,10,1,ore,Galena,1,dust, Silver,2,1,20);
+        SpecialOutCircuit(Enzymesad,10,2,ore,Galena,1,dust, Sulfur,2,1,20);
 
-        SpecialOutCircuit(Enzymesad,10,1,ore,Iron,1,dust, Gold,1,1,20);
-        SpecialOutCircuit(Enzymesad,10,2,ore,Iron,1,dust, Nickel,1,1,20);
-        SpecialOutCircuit(Enzymesad,10,3,ore,Iron,1,dust, Zinc,1,1,20);
+        SpecialOutCircuit(Enzymesad,10,1,ore,Iron,1,dust, Gold,2,1,20);
+        SpecialOutCircuit(Enzymesad,10,2,ore,Iron,1,dust, Nickel,2,1,20);
+        SpecialOutCircuit(Enzymesad,10,3,ore,Iron,1,dust, Zinc,2,1,20);
 
-        SpecialOutCircuit(Enzymesad,10,1,ore,Lead,1,dust, Nickel,1,1,20);
+        SpecialOutCircuit(Enzymesad,10,1,ore,Lead,1,dust, Nickel,2,1,20);
 
-        SpecialOutCircuit(Enzymesad,20,1,ore,Nickel,1,dust, Platinum,1,2,40);
+        SpecialOutCircuit(Enzymesad,20,1,ore,Nickel,1,dust, Platinum,2,2,40);
 
         //  工业合成菌种I	1	催化塑料 四氟乙烯 环氧树脂	HV
         Enzymesba();

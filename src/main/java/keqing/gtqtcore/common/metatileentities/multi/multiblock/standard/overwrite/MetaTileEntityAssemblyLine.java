@@ -65,8 +65,7 @@ import codechicken.lib.vec.Vector3;
 import java.util.List;
 import java.util.function.Function;
 
-import static gregtech.api.GTValues.IV;
-import static gregtech.api.GTValues.VA;
+import static gregtech.api.GTValues.*;
 import static gregtech.api.util.RelativeDirection.*;
 
 public class MetaTileEntityAssemblyLine extends RecipeMapMultiblockController {
@@ -95,7 +94,7 @@ public class MetaTileEntityAssemblyLine extends RecipeMapMultiblockController {
                 this.maxProgressTime = maxProgress*(100-glass_tier)/100;
         }
 
-        public long getMaxVoltage() {return Math.min(VA[tier],VA[IV]);}
+        public long getMaxVoltage() {return Math.min(VA[tier+1],VA[LuV]);}
 
     }
     @Override
@@ -127,7 +126,7 @@ public class MetaTileEntityAssemblyLine extends RecipeMapMultiblockController {
 
         this.tier = Math.min(this.casing_tier,this.laser_tier);
 
-        this.writeCustomData(GTQTValue.UPDATE_TIER,buf -> buf.writeInt(this.tier));
+        this.writeCustomData(GTQTValue.UPDATE_TIER,buf -> buf.writeInt(this.casing_tier));
     }
 
     @Override
