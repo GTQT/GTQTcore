@@ -517,6 +517,7 @@ public class GTQTMaterials {
     public static Material Hydroxymethylfurfural;
     public static Material Methylfuran;
     public static Material Ethanesulphonate;
+    public static Material GelidCryotheum;
 
     //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/api/unification/GSMaterials.java
 

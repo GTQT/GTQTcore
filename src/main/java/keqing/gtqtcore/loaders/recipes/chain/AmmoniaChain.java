@@ -16,7 +16,12 @@ public class AmmoniaChain {
 
     public static void init() {
         // Minimized Haber-Bosch Process
-
+        BLAST_RECIPES.recipeBuilder()
+                .input(dust,SodiumBicarbonate,2)
+                .input(dust,SodaAsh)
+                .fluidOutputs(Water.getFluid(2000))
+                .blastFurnaceTemp(1000)
+                .duration(20).EUt(VA[LV]).buildAndRegister();
         // CH4 + N -> CH4N
         MIXER_RECIPES.recipeBuilder()
                 .fluidInputs(Methane.getFluid(1000))

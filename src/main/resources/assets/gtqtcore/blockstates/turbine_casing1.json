@@ -68,10 +68,10 @@
           "all": "gregtech:blocks/multiblock/casing/galvanize_steel_casing"
         }
       },
-      "zhu": {
+      "advanced_cold_casing": {
         "model": "minecraft:cube_all",
         "textures": {
-          "all": "gregtech:blocks/multiblock/casing/zhu"
+          "all": "gregtech:blocks/multiblock/casing/advanced_cold_casing"
         }
       }
     }

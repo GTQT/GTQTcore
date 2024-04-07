@@ -2359,5 +2359,12 @@ public class FirstDegreeMaterials {
                 .flags(DISABLE_DECOMPOSITION)
                 .build()
                 .setFormula("C8H16NNaO3S", true);
+        //冷却液
+        GTQTMaterials.GelidCryotheum = new Material.Builder(getMaterialsId(), gregtechId("gelid_cryotheum"))
+                .liquid(new FluidBuilder().temperature(8).customStill().customFlow())
+                .color(0x40B8FB)
+                .components(Ice, 2, Electrotine, 1, Water, 1)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
     }
 }

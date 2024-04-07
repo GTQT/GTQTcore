@@ -53,6 +53,7 @@ public class GTQTTextures {
     public static SimpleOverlayRenderer IRIDIUM_CASING;
     public static SimpleOverlayRenderer INF_WATER;
     public static SimpleOverlayRenderer PROCESS;
+    public static SimpleOverlayRenderer ADV_COLD_CASING;
     public static SimpleOverlayRenderer NITINOL_CASING;
     public static SimpleOverlayRenderer ISA_CASING;
     public static SimpleOverlayRenderer COMPRESSED_FUSION_REACTOR_MKI_CASING;
@@ -115,6 +116,7 @@ public class GTQTTextures {
         PD_CASING = new SimpleOverlayRenderer("multiblock/casing/pd_turbine_casing");
         ST_CASING = new SimpleOverlayRenderer("multiblock/casing/st_turbine_casing");
         AD_CASING = new SimpleOverlayRenderer("multiblock/casing/ad_turbine_casing");
+        ADV_COLD_CASING = new SimpleOverlayRenderer("multiblock/casing/advanced_cold_casing");
         TALONITE = new SimpleOverlayRenderer("multiblock/advblock/talonite");
         HYPER_CASING = new SimpleOverlayRenderer("multiblock/casing/hyper_casing");
         BRICK = new SimpleOverlayRenderer("multiblock/casing/brick");

@@ -22,6 +22,7 @@ import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.gcys.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.huge.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.kqcc.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.overwrite.*;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.star.MetaTileEntityCryogenicFreezer;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.star.MetaTileEntityPlasmaForge;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.star.MetaTileEntityStarBiomimeticFactory;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.star.MetaTileEntityStarMixer;
@@ -205,6 +206,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityKQCCComputationHatch[] KQCC_COMPUTATION_HATCH_RECEIVER=new MetaTileEntityKQCCComputationHatch[12];
     public static MetaTileEntityKQCCComputationHatch[] KQCC_COMPUTATION_HATCH_TRANSMITTER=new MetaTileEntityKQCCComputationHatch[12];
     public static MetaTileEntityMSF MSF;
+    public static MetaTileEntityCryogenicFreezer CRYOGENIC_FREEZER;
     public static MetaTileEntityHeatExchanger HEAT_CHANGER;
     public static MetaTileEntityHPCAAdvancedComputation HPCA_SUPER_COMPUTATION_COMPONENT;
     public static MetaTileEntityHPCAAdvancedComputation HPCA_ULTIMATE_COMPUTATION_COMPONENT;
@@ -336,6 +338,7 @@ public class GTQTMetaTileEntities {
         GREEN_HOUSE_PLUS= registerMetaTileEntity(3192, new MetaTileEntityGreenhousePlus(gtqtcoreId("green_house_plus")));
         ENZYMES_REACTOR= registerMetaTileEntity(3193, new MetaTileEntityEnzymesReaction(gtqtcoreId("enzymes_reactor")));
         BIO_CENTRIFUGE= registerMetaTileEntity(3194, new MetaTileEntityBioCentrifuge(gtqtcoreId("bio_centrifuge")));
+        CRYOGENIC_FREEZER= registerMetaTileEntity(3195, new MetaTileEntityCryogenicFreezer(gtqtcoreId("cryogenic_freezer")));
         //重写设备
         DISTILLATION_TOWER = registerMetaTileEntity(3250, new MetaTileEntityDistillationTower(gtqtcoreId("distillation_tower")));
         CRACKER = registerMetaTileEntity(3251, new MetaTileEntityCrackingUnit(gtqtcoreId("cracker")));

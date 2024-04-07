@@ -324,13 +324,6 @@ public class GTQTcoreRecipeMaps {
                 .setSound(GTSoundEvents.TURBINE)
                 .allowEmptyOutput();
 
-        SOLAR_PLATE = new RecipeMap<>("soalr_plate",
-                0, 0, 1, 0, new FuelRecipeBuilder(), false)
-                .setSlotOverlay(false, true, true, GuiTextures.CENTRIFUGE_OVERLAY)
-                .setProgressBar(GuiTextures.PROGRESS_BAR_GAS_COLLECTOR, ProgressWidget.MoveType.HORIZONTAL)
-                .setSound(GTSoundEvents.TURBINE)
-                .allowEmptyOutput();
-
         CW_LASER_ENGRAVER_RECIPES = new RecipeMap<>("cw_laser_engraver", 2, 2, 1, 0, new SimpleRecipeBuilder(), false)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL)
                 .setSlotOverlay(false, false, false, GuiTextures.CIRCUIT_OVERLAY)
