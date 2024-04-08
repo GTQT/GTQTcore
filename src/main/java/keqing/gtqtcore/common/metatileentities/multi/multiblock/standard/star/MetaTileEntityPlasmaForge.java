@@ -166,7 +166,7 @@ public class MetaTileEntityPlasmaForge extends RecipeMapMultiblockController imp
     }
 
     private IBlockState getCasingState1() {
-        return GTQTMetaBlocks.MULTI_CASING.getState(GTQTMultiblockCasing.CasingType.BEAM_CORE_2);
+        return GTQTMetaBlocks.QUANTUM_CASING.getState(GTQTQuantumCasing.CasingType.QUANTUM_CASING);
     }
 
     private IBlockState getCasingState2() {

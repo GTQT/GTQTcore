@@ -145,7 +145,6 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<PACasingTierRecipeBuilder> PRECISE_ASSEMBLER_RECIPES;
     public static final RecipeMap<ComputationRecipeBuilder> CW_PRECISE_ASSEMBLER_RECIPES;
     public static final RecipeMap<MDRecipeBuilder> MINING_DRILL_RECIPES;
-    public static final RecipeMap<FuelRecipeBuilder> SOLAR_PLATE;
     public static final RecipeMap<SimpleRecipeBuilder> DISTILLATION_KETTLE;
     public static final RecipeMap<SimpleRecipeBuilder> NANOHYBRID;
     public static final RecipeMap<SimpleRecipeBuilder> PYROLYSIS_TOWER;

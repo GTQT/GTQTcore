@@ -28,6 +28,7 @@ import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
@@ -151,7 +152,16 @@ public class MetaTileEntityKQNetworkSwitch extends MetaTileEntityDataBank implem
                         .or(abilities(MultiblockAbility.COMPUTATION_DATA_TRANSMISSION).setMinGlobalLimited(1, 1)))
                 .build();
     }
-
+    @Override
+    public NBTTagCompound writeToNBT(NBTTagCompound data) {
+        data.setInteger("casing_tier", casing_tier);
+        return super.writeToNBT(data);
+    }
+    @Override
+    public void readFromNBT(NBTTagCompound data) {
+        super.readFromNBT(data);
+        casing_tier = data.getInteger("casing_tier");
+    }
     @SideOnly(Side.CLIENT)
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
         switch (this.casing_tier) {
