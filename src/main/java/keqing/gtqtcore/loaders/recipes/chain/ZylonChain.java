@@ -14,12 +14,13 @@ import static keqing.gtqtcore.api.unification.TJMaterials.*;
 
 public class ZylonChain {
     public static void init() {
+        //控制EV能做 化工厂能换化反换化反
         //  Au-Pd-C Catalyst
         MIXER_RECIPES.recipeBuilder()
                 .input(dust, Gold)
                 .input(dust, PalladiumOnCarbon)
                 .output(dust, AuPdCCatalyst, 2)
-                .EUt(VA[EV])
+                .EUt(VA[HV])
                 .duration(850)
                 .buildAndRegister();
 
@@ -30,8 +31,8 @@ public class ZylonChain {
                 .fluidInputs(Oxygen.getFluid(2000))
                 .fluidOutputs(Dibromomethylbenzene.getFluid(1000))
                 .fluidOutputs(Water.getFluid(2000))
-                .EUt(VA[IV])
-                .duration(430)
+                .EUt(VA[HV])
+                .duration(400)
                 .buildAndRegister();
 
         //  Dibromomethylbenzene (ZPM): Toluene + Bromine -> Dibromomethylbenzene
@@ -39,8 +40,16 @@ public class ZylonChain {
                 .fluidInputs(Toluene.getFluid(1000))
                 .fluidInputs(Bromine.getFluid(2000))
                 .fluidOutputs(Dibromomethylbenzene.getFluid(1000))
-                .EUt(VA[ZPM])
-                .duration(215)
+                .EUt(VA[HV])
+                .duration(200)
+                .buildAndRegister();
+
+        CHEMICAL_RECIPES.recipeBuilder()
+                .fluidInputs(Toluene.getFluid(1000))
+                .fluidInputs(Bromine.getFluid(2000))
+                .fluidOutputs(Dibromomethylbenzene.getFluid(1000))
+                .EUt(VA[EV])
+                .duration(400)
                 .buildAndRegister();
 
         //  Dibromomethylbenzene + Sulfuric Acid -> Terephthalaldehyde + Bromine + Hydrogen Sulfide + Hydrogen Peroxide
@@ -51,8 +60,19 @@ public class ZylonChain {
                 .fluidOutputs(Bromine.getFluid(2000))
                 .fluidOutputs(HydrogenSulfide.getFluid(1000))
                 .fluidOutputs(HydrogenPeroxide.getFluid(1000))
-                .EUt(VA[LuV])
+                .EUt(VA[HV])
                 .duration(120)
+                .buildAndRegister();
+
+        LARGE_CHEMICAL_RECIPES.recipeBuilder()
+                .fluidInputs(Dibromomethylbenzene.getFluid(1000))
+                .fluidInputs(SulfuricAcid.getFluid(1000))
+                .output(dust, Terephthalaldehyde, 16)
+                .fluidOutputs(Bromine.getFluid(2000))
+                .fluidOutputs(HydrogenSulfide.getFluid(1000))
+                .fluidOutputs(HydrogenPeroxide.getFluid(1000))
+                .EUt(VA[EV])
+                .duration(200)
                 .buildAndRegister();
 
         //  Isochloropropane
@@ -77,8 +97,24 @@ public class ZylonChain {
                 .fluidOutputs(Water.getFluid(2000))
                 .fluidOutputs(AceticAcid.getFluid(1000))
                 .fluidOutputs(SodiumAcetate.getFluid(1000))
-                .EUt(VA[UV])
+                .EUt(VA[EV])
                 .duration(500)
+                .buildAndRegister();
+
+        CHEMICAL_PLANT.recipeBuilder()
+                .input(dust, SodiumOxide, 3)
+                .fluidInputs(Resorcinol.getFluid(1000))
+                .fluidInputs(Isochloropropane.getFluid(1000))
+                .fluidInputs(AceticAnhydride.getFluid(1000))
+                .fluidInputs(NitricAcid.getFluid(2000))
+                .fluidInputs(Propene.getFluid(1000))
+                .output(dust, Salt, 2)
+                .fluidOutputs(Dinitrodipropanyloxybenzene.getFluid(1000))
+                .fluidOutputs(Water.getFluid(2000))
+                .fluidOutputs(AceticAcid.getFluid(1000))
+                .fluidOutputs(SodiumAcetate.getFluid(1000))
+                .EUt(VA[HV])
+                .duration(200)
                 .buildAndRegister();
 
         //  Prezylon
@@ -88,19 +124,38 @@ public class ZylonChain {
                 .fluidInputs(Dinitrodipropanyloxybenzene.getFluid(1000))
                 .output(dust, PreZylon)
                 .fluidOutputs(Oxygen.getFluid(6000))
-                .EUt(VA[UHV])
+                .EUt(VA[HV])
                 .duration(50)
+                .buildAndRegister();
+
+        CHEMICAL_RECIPES.recipeBuilder()
+                .input(dust, Terephthalaldehyde, 16)
+                .notConsumable(dust, AuPdCCatalyst)
+                .fluidInputs(Dinitrodipropanyloxybenzene.getFluid(1000))
+                .output(dust, PreZylon,16)
+                .fluidOutputs(Oxygen.getFluid(6000))
+                .EUt(VA[EV])
+                .duration(200)
+                .cleanroom(CleanroomType.CLEANROOM)
+                .buildAndRegister();
+
+        CHEMICAL_RECIPES.recipeBuilder()
+                .input(dust, Palladium, 16)
+                .input(dust, Graphene, 16)
+                .output(dust, PalladiumOnCarbon)
+                .EUt(VA[EV])
+                .duration(200)
                 .cleanroom(CleanroomType.CLEANROOM)
                 .buildAndRegister();
 
         //  Prezylon -> Zylon + Propane
         BLAST_RECIPES.recipeBuilder()
-                .input(dust, PreZylon)
-                .output(dust, Zylon)
-                .fluidOutputs(Propane.getFluid(2000))
+                .input(dust, PreZylon,16)
+                .output(dust, Zylon,16)
+                .fluidOutputs(Propane.getFluid(32000))
                 .EUt(VA[HV])
-                .duration(16000)
-                .blastFurnaceTemp(10000)
+                .duration(1600)
+                .blastFurnaceTemp(3500)
                 .buildAndRegister();
     }
 }

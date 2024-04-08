@@ -11,6 +11,7 @@ import keqing.gtqtcore.api.unification.GTQTMaterials;
 
 import static gregtech.api.GTValues.*;
 import static gregtech.api.GTValues.UHV;
+import static gregtech.api.fluids.attribute.FluidAttributes.ACID;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.Materials.Tetranitromethane;
 import static gregtech.api.unification.material.info.MaterialFlags.*;
@@ -369,7 +370,7 @@ public class FirstDegreeMaterials {
                 .components(Barium, 1, Titanium, 1, Oxygen, 3)
                 .flags(DISABLE_DECOMPOSITION)
                 .blast(4500,MID)
-                .flags(GENERATE_PLATE, GENERATE_DENSE, GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_RING, GENERATE_ROUND, GENERATE_BOLT_SCREW, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR)
+                .flags(GENERATE_PLATE, GENERATE_DENSE, GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_RING, GENERATE_ROUND, GENERATE_BOLT_SCREW, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR,GENERATE_FOIL)
                 .build();
 
         //海绵钛
@@ -975,7 +976,7 @@ public class FirstDegreeMaterials {
 
         //  25103 Zylon
         GTQTMaterials.Zylon = new Material.Builder(getMaterialsId(), gregtechId("zylon"))
-                .polymer()
+                .polymer().fluid()
                 .color(0xFFE000)
                 .iconSet(SHINY)
                 .flags(DISABLE_DECOMPOSITION, NO_SMASHING, NO_SMELTING, GENERATE_PLATE, GENERATE_FOIL)
@@ -2365,6 +2366,67 @@ public class FirstDegreeMaterials {
                 .color(0x40B8FB)
                 .components(Ice, 2, Electrotine, 1, Water, 1)
                 .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        GTQTMaterials.SodiumPhosphomolybdate = new Material.Builder(getMaterialsId(), gregtechId("sodium_phosphomolybdate"))
+                .dust()
+                .color(0xF3E0A8)
+                .iconSet(BRIGHT)
+                .components(Oxygen, 40, Molybdenum, 12, Sodium, 3, Phosphorus, 1)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("(MoO3)12Na3PO4", true);
+
+        GTQTMaterials.FerricCatalyst = new Material.Builder(getMaterialsId(), gregtechId("ferric_catalyst"))
+                .dust()
+                .color(0xFFD700)
+                .build()
+                .setFormula("Fe2(C4H4O6)3", true);
+
+        GTQTMaterials.PhosphonitrilicChlorideTrimer = new Material.Builder(getMaterialsId(), gregtechId("phosphonitrilic_chloride_trimer"))
+                .fluid()
+                .color(0x082C38)
+                .components(Chlorine, 6, Nitrogen, 3, Phosphorus, 3)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        GTQTMaterials.SodiumTrifluoroethanolate = new Material.Builder(getMaterialsId(), gregtechId("sodium_trifluoroethanolate"))
+                .dust()
+                .color(0x50083E)
+                .iconSet(ROUGH)
+                .components(Carbon, 2, Hydrogen, 4, Fluorine, 3, Sodium, 1, Oxygen, 1)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        GTQTMaterials.OctafluoroPentanol = new Material.Builder(getMaterialsId(), gregtechId("octafluoro_pentanol"))
+                .fluid()
+                .color(0xE5EBDE)
+                .components(Carbon, 5, Hydrogen, 4, Fluorine, 8, Oxygen, 1)
+                .build();
+
+        GTQTMaterials.FluoroboricAcid = new Material.Builder(getMaterialsId(), gregtechId("fluoroboric_acid"))
+                .liquid(new FluidBuilder().attributes(ACID))
+                .color(0xD5811B)
+                .components(Hydrogen, 1, Boron, 1, Fluorine, 4)
+                .build();
+
+        GTQTMaterials.SodiumNitrite = new Material.Builder(getMaterialsId(), gregtechId("sodium_nitrite"))
+                .dust()
+                .color(0x205CA4)
+                .iconSet(DULL)
+                .components(Sodium, 1, Nitrogen, 1, Oxygen, 2)
+                .build();
+
+        GTQTMaterials. BenzenediazoniumTetrafluoroborate = new Material.Builder(getMaterialsId(), gregtechId("benzenediazonium_tetrafluoroborate"))
+                .fluid()
+                .color(0xD5C5B2)
+                .components(Carbon, 6, Hydrogen, 5, Boron, 1, Fluorine, 4, Nitrogen, 2)
+                .build();
+
+        GTQTMaterials.CoACABCatalyst = new Material.Builder(getMaterialsId(), gregtechId("co_ac_ab_catalyst"))
+                .dust()
+                .color(0x6B4312)
+                .iconSet(METALLIC)
                 .build();
     }
 }

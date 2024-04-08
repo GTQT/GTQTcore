@@ -96,7 +96,7 @@ public class MetaTileEntityKQNetworkSwitch extends MetaTileEntityDataBank implem
                 0);
 
         this.writeCustomData(GTQTValue.UPDATE_TIER,buf -> buf.writeInt(this.casing_tier));
-        this.tire=Math.min(this.casing_tier,this.laser_tier);
+        this.tire=Math.min(this.casing_tier,this.laser_tier*2);
     }
 
     @Override
@@ -213,6 +213,7 @@ public class MetaTileEntityKQNetworkSwitch extends MetaTileEntityDataBank implem
         tooltip.add(I18n.format("gregtech.machine.network_switch.tooltip.1"));
         tooltip.add(I18n.format("gregtech.machine.network_switch.tooltip.2"));
         tooltip.add(I18n.format("gregtech.machine.network_switch.tooltip.3"));
+        tooltip.add(I18n.format("gtqtcore.machine.network_switch.tooltip.1"));
         tooltip.add(I18n.format("gregtech.machine.network_switch.tooltip.4",
                 TextFormattingUtil.formatNumbers(EUT_PER_HATCH/128)));
     }

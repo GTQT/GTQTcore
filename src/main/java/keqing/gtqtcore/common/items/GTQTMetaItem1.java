@@ -41,15 +41,19 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         IMPREGNATED_SUBSTRATE = this.addItem(3,"item.impregnated_substrate").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
         IMPREGNATED_PLASTIC_SUBSTRATE = this.addItem(4,"item.impregnated_plastic_substrate").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
         IMPREGNATED_EPOXY = this.addItem(5,"item.impregnated_epoxy").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
-        INSULATINGMICA = this.addItem(6,"item.insulatingmica").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
+        IMPREGNATED_FIBER = this.addItem(6,"item.impregnated_fiber").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
+
+        INSULATINGMICA = this.addItem(20,"item.insulatingmica").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
+        LAMINATION_GE = this.addItem(21,"item.lamination_ge").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
+
         //快乐海藻
-        COMMON_ALGAE = this.addItem(10,"algae.common").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO);
-        GREEN_ALGAE = this.addItem(11,"algae.green").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO);
-        RED_ALGAE = this.addItem(12,"algae.red").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO);
-        BROWN_ALGAE = this.addItem(13,"algae.brown").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO);
-        GOLD_ALGAE = this.addItem(14,"algae.gold").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO);
-        T_ALGAE = this.addItem(15,"algae.t").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO);
-        BIOLOGY_INTEGRATED_CIRCUIT = this.addItem(39, "item.biology_integrated_circuit").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO).addComponents(new IntBcircuitBehavior());
+        COMMON_ALGAE = this.addItem(30,"algae.common").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        GREEN_ALGAE = this.addItem(31,"algae.green").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        RED_ALGAE = this.addItem(32,"algae.red").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        BROWN_ALGAE = this.addItem(33,"algae.brown").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        GOLD_ALGAE = this.addItem(34,"algae.gold").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        T_ALGAE = this.addItem(35,"algae.t").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        BIOLOGY_INTEGRATED_CIRCUIT = this.addItem(40, "item.biology_integrated_circuit").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO).addComponents(new IntBcircuitBehavior());
         ROUGH_BIOLOGY_RESIN=this.addItem(41, "item.biology_resin").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO);
         PURIFIED_ALUMINIUM_MIXTURE=this.addItem(42, "item.aluminium_mixture").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO);
         CELLULOSE_PULP=this.addItem(43, "item.cellulose_pulp").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO);

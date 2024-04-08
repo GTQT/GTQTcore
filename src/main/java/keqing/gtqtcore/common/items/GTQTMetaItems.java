@@ -16,6 +16,8 @@ public class GTQTMetaItems {
     public static final List<MetaItem<?>> ITEMS = GTQTMetaItem1.getMetaItems();
     public static MetaItem<?>.MetaValueItem IMPREGNATED_SUBSTRATE;
     public static MetaItem<?>.MetaValueItem IMPREGNATED_EPOXY;
+    public static MetaItem<?>.MetaValueItem IMPREGNATED_FIBER;
+    public static MetaItem<?>.MetaValueItem LAMINATION_GE;
     public static MetaItem<?>.MetaValueItem MEMORY_CARD;
     public static MetaItem<?>.MetaValueItem GENERAL_CIRCUIT_ULV;
     public static MetaItem<?>.MetaValueItem GENERAL_CIRCUIT_LV;

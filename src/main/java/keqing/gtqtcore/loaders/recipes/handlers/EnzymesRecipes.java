@@ -239,13 +239,41 @@ public class EnzymesRecipes {
                 .fluidOutputs(FermentedBiomass.getFluid(3000))
                 .rate(20)
                 .duration(200).EUt(VA[HV]).buildAndRegister();
+
+        BIOLOGICAL_REACTION_RECIPES.recipeBuilder()
+                .fluidInputs(Enzymescb.getFluid(5))
+                .fluidInputs(RawOil.getFluid(1000))
+                .fluidOutputs(PreTreatedCrudeOil.getFluid(2000))
+                .rate(5)
+                .duration(100).EUt(VA[HV]).buildAndRegister();
+
+        BIOLOGICAL_REACTION_RECIPES.recipeBuilder()
+                .fluidInputs(Enzymescb.getFluid(5))
+                .fluidInputs(OilHeavy.getFluid(1000))
+                .fluidOutputs(PreTreatedCrudeOil.getFluid(2000))
+                .rate(5)
+                .duration(100).EUt(VA[HV]).buildAndRegister();
+
+        BIOLOGICAL_REACTION_RECIPES.recipeBuilder()
+                .fluidInputs(Enzymescb.getFluid(5))
+                .fluidInputs(OilLight.getFluid(1000))
+                .fluidOutputs(PreTreatedCrudeOil.getFluid(2000))
+                .rate(5)
+                .duration(100).EUt(VA[HV]).buildAndRegister();
+
+        BIOLOGICAL_REACTION_RECIPES.recipeBuilder()
+                .fluidInputs(Enzymescb.getFluid(5))
+                .fluidInputs(Oil.getFluid(1000))
+                .fluidOutputs(PreTreatedCrudeOil.getFluid(2000))
+                .rate(5)
+                .duration(100).EUt(VA[HV]).buildAndRegister();
     }
 
     private static void Enzymescc() {
         BIOLOGICAL_REACTION_RECIPES.recipeBuilder()
                 .fluidInputs(Enzymescc.getFluid(10))
                 .fluidInputs(FermentedBiomass.getFluid(1000))
-                .fluidOutputs(Biooil.getFluid(1000))
+                .fluidOutputs(Biooil.getFluid(2000))
                 .rate(20)
                 .duration(200).EUt(VA[HV]).buildAndRegister();
 

@@ -49,9 +49,9 @@ public class AlgaeChain {
                 .duration(400).EUt(VA[HV]).buildAndRegister();
 
         GANTRY_CRANE.recipeBuilder()
-                .fluidInputs(Water.getFluid(4000))
-                .input(items,4)
-                .fluidOutputs(Biooil.getFluid(1000))
-                .duration(800).EUt(120).buildAndRegister();
+                .fluidInputs(Water.getFluid(1000))
+                .input(items,1)
+                .fluidOutputs(Biooil.getFluid(2000))
+                .duration(1600).EUt(480).buildAndRegister();
     }
 }

@@ -518,6 +518,15 @@ public class GTQTMaterials {
     public static Material Methylfuran;
     public static Material Ethanesulphonate;
     public static Material GelidCryotheum;
+    public static Material SodiumPhosphomolybdate;
+    public static Material FerricCatalyst;
+    public static Material PhosphonitrilicChlorideTrimer;
+    public static Material SodiumTrifluoroethanolate;
+    public static Material OctafluoroPentanol;
+    public static Material FluoroboricAcid;
+    public static Material SodiumNitrite;
+    public static Material BenzenediazoniumTetrafluoroborate;
+    public static Material CoACABCatalyst;
 
     //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/api/unification/GSMaterials.java
 

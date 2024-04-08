@@ -295,11 +295,11 @@ gtqtcore.machine.kqcccomputation_hatch.transmitter.hv.name=算力输出端口（
 gtqtcore.machine.kqcccomputation_hatch.transmitter.ev.name=算力输出端口（§5EV§r）
 gtqtcore.machine.kqcccomputation_hatch.transmitter.iv.name=算力输出端口（§1IV§r）
 gtqtcore.machine.kqcccomputation_hatch.transmitter.luv.name=算力输出端口（§dLuV§r）
-gtqtcore.machine.kqcccomputation_hatch.transmitter.zpm.name=算力输入端口（§cZPM§r）
-gtqtcore.machine.kqcccomputation_hatch.transmitter.uv.name=算力输入端口（§3UV§r）
-gtqtcore.machine.kqcccomputation_hatch.transmitter.uhv.name=算力输入端口（§4UHV§r）
-gtqtcore.machine.kqcccomputation_hatch.transmitter.uev.name=算力输入端口（§4UEV§r）
-gtqtcore.machine.kqcccomputation_hatch.transmitter.uiv.name=算力输入端口（§4UIV§r）
+gtqtcore.machine.kqcccomputation_hatch.transmitter.zpm.name=算力输出端口（§cZPM§r）
+gtqtcore.machine.kqcccomputation_hatch.transmitter.uv.name=算力输出端口（§3UV§r）
+gtqtcore.machine.kqcccomputation_hatch.transmitter.uhv.name=算力输出端口（§4UHV§r）
+gtqtcore.machine.kqcccomputation_hatch.transmitter.uev.name=算力输出端口（§4UEV§r）
+gtqtcore.machine.kqcccomputation_hatch.transmitter.uiv.name=算力输出端口（§4UIV§r）
 
 gtqtcore.machine.wireless_energy_hatch.receiver.lv.name=无线能源输入端口（§7LV§r）
 gtqtcore.machine.wireless_energy_hatch.receiver.mv.name=无线能源输入端口（§bMV§r）
@@ -563,7 +563,9 @@ gtqtcore.vtire=支持的配方最高电压：%s V
 gtqtcore.tubeTire=管道等级：%s
 gtqtcore.casingTire=外壳等级：%s
 gtqtcore.coilTire=线圈等级：%s
+gtqtcore.machine.network_switch.tooltip.1=算力负荷上限取决于多方块等级（如果用不了升级就对了）
 gtqtcore.eleTire=外壳等级：%s 电解器等级：%s 配方最大电压：%s
+gtqtcore.eleTire1=自净等级：%s 射频等级：%s 波长：%s
 gregtech.multiblock.ele.1=耗能减免：%s 电流效率：%s 电极洁净度：%s
 gregtech.machine.kqcc.export.tooltip=§c算力的输出端,向光缆发送算力
 gregtech.machine.kqcc.import.tooltip=§a算力的输入端,从光缆请求算力
@@ -933,7 +935,7 @@ gtqtcore.machine.ele.tooltip.5=消耗洁净剂(是盐酸啦)修复电极，提�
 gtqtcore.machine.alloy_klin.name=合金窑
 gtqtcore.machine.vacuum_freezer.name=真空冷冻机
 gtqtcore.machine.large_chemical_reactor.name=工业化学反应釜
-gtqtcore.machine.three_dim_print.name=3D部件`打印机
+gtqtcore.machine.three_dim_print.name=3D部件打印机
 gtqtcore.machine.pyrolyse_oven.name=热解炉
 gtqtcore.machine.cracker.name=石油裂化机
 gtqtcore.machine.distillation_tower.name=蒸馏塔
@@ -1283,6 +1285,7 @@ metaitem.item.impregnated_substrate.name=浸渍基板
 metaitem.item.impregnated_plastic_substrate.name=固化树脂-玻璃纤维复合基板
 metaitem.item.impregnated_epoxy.name=高分子纤维强化-铂基板
 metaitem.item.impregnated_graphite_rodsa.name=预处理石墨电极
+metaitem.item.impregnated_fiber.name=工程塑料-灵敏压电基板
 
 gtqtcore.machine.cryogenic_freezer.name=凛冰冷冻机
 gtqtcore.machine.cryogenic_freezer.tooltip=不如真空冷冻机
@@ -1407,6 +1410,8 @@ metaitem.component.cosmic.manifold_oscillatory_power_cell.name=流形振荡能�
 
 metaitem.scintillator.name=闪烁体
 metaitem.scintillator_crystal.name=闪烁晶体
+
+metaitem.item.lamination_ge.name=锗层压纤维基板
 metaitem.item.insulatingmica.name=绝缘云母复合片
 gtqtcore.machine.gas_collector.name=大型集气机
 

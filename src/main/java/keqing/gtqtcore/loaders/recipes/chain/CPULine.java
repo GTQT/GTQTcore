@@ -898,11 +898,47 @@ public class CPULine {
         CHEMICAL_RECIPES.recipeBuilder()
                 .duration(100)
                 .EUt(480)
-                .input(plate,ReinforcedEpoxyResin)
+                .input(plate,Polytetrafluoroethylene)
                 .input(foil,Platinum,2)
                 .fluidInputs(StyreneButadieneRubber.getFluid(400))
-                .fluidInputs(Polytetrafluoroethylene.getFluid(576))
+                .fluidInputs(Brominatedepoxyresins.getFluid(576))
                 .output(IMPREGNATED_EPOXY,4)
                 .buildAndRegister();
+
+        //这里是EV阶段的纤维强化电路板
+        FLUID_SOLIDFICATION_RECIPES.recipeBuilder()
+                .duration(100)
+                .EUt(1920)
+                .input(plate,ReinforcedEpoxyResin,4)
+                .fluidInputs(Germanium.getFluid(288))
+                .output(LAMINATION_GE,4)
+                .buildAndRegister();
+
+        FLUID_SOLIDFICATION_RECIPES.recipeBuilder()
+                .duration(100)
+                .EUt(1920)
+                .input(plate,Zylon,1)
+                .fluidInputs(Germanium.getFluid(288))
+                .output(LAMINATION_GE,4)
+                .buildAndRegister();
+
+        FLUID_SOLIDFICATION_RECIPES.recipeBuilder()
+                .duration(100)
+                .EUt(1920)
+                .input(IMPREGNATED_FIBER)
+                .fluidInputs(PhosphoricAcid.getFluid(250))
+                .output(FIBER_BOARD)
+                .buildAndRegister();
+
+        CHEMICAL_RECIPES.recipeBuilder()
+                .duration(100)
+                .EUt(1920)
+                .input(LAMINATION_GE)
+                .input(foil,NanometerBariumTitanate,2)
+                .fluidInputs(StyreneButadieneRubber.getFluid(400))
+                .fluidInputs(Zylon.getFluid(576))
+                .output(IMPREGNATED_FIBER,4)
+                .buildAndRegister();
+
     }
 }
