@@ -14,6 +14,11 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem 你物品的名字，记得全大写;
      */
     public static final List<MetaItem<?>> ITEMS = GTQTMetaItem1.getMetaItems();
+    public static MetaItem<?>.MetaValueItem JIAO_XIAN_REN_ZHANG;
+    public static MetaItem<?>.MetaValueItem NONG_SUO_XIAN_REN_ZHANG;
+    public static MetaItem<?>.MetaValueItem NONG_SUO_TANG_JIAO;
+    public static MetaItem<?>.MetaValueItem ZHU_TAN;
+    public static MetaItem<?>.MetaValueItem JIAO_TANG_JIAO;
     public static MetaItem<?>.MetaValueItem IMPREGNATED_SUBSTRATE;
     public static MetaItem<?>.MetaValueItem IMPREGNATED_EPOXY;
     public static MetaItem<?>.MetaValueItem IMPREGNATED_FIBER;

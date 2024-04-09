@@ -43,8 +43,17 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         IMPREGNATED_EPOXY = this.addItem(5,"item.impregnated_epoxy").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
         IMPREGNATED_FIBER = this.addItem(6,"item.impregnated_fiber").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
 
-        INSULATINGMICA = this.addItem(20,"item.insulatingmica").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
-        LAMINATION_GE = this.addItem(21,"item.lamination_ge").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
+        INSULATINGMICA = this.addItem(15,"item.insulatingmica").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
+        LAMINATION_GE = this.addItem(16,"item.lamination_ge").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
+
+        //其他燃料
+        JIAO_XIAN_REN_ZHANG = this.addItem(20,"fuel.jiaoxianrenzhang").setBurnValue(4800).setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        NONG_SUO_XIAN_REN_ZHANG = this.addItem(21,"fuel.nongsuoxianrenzhang").setBurnValue(8000).setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO);
+
+        JIAO_TANG_JIAO = this.addItem(23,"fuel.tangjiao").setBurnValue(4800).setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        NONG_SUO_TANG_JIAO = this.addItem(24,"fuel.tangtan").setBurnValue(8000).setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO);
+
+        ZHU_TAN = this.addItem(25,"fuel.zhutan").setBurnValue(6400).setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO);
 
         //快乐海藻
         COMMON_ALGAE = this.addItem(30,"algae.common").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO);

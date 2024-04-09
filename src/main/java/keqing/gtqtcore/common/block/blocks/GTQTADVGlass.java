@@ -35,21 +35,28 @@ public class GTQTADVGlass extends VariantBlock<GTQTADVGlass.CasingType> {
         this.setResistance(10.0F);
         this.setSoundType(SoundType.GLASS);
         this.setHarvestLevel(ToolClasses.PICKAXE, 1);
+        this.setDefaultState(this.getState(CasingType.SILICATE_GLASS));
     }
 
-    public boolean canCreatureSpawn(@Nonnull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull EntityLiving.SpawnPlacementType type) {
+    public boolean canCreatureSpawn(@Nonnull IBlockState state,
+                                    @Nonnull IBlockAccess world,
+                                    @Nonnull BlockPos pos,
+                                    @Nonnull EntityLiving.SpawnPlacementType type) {
         return false;
     }
+
+
     @Override
     @Nonnull
     public BlockRenderLayer getRenderLayer() {
-        return BlockRenderLayer.TRANSLUCENT;
+        return BlockRenderLayer.CUTOUT;
     }
 
     @Override
     public boolean canRenderInLayer(@Nonnull IBlockState state, @Nonnull BlockRenderLayer layer) {
         return super.canRenderInLayer(state, layer);
     }
+
     @Override
     @SuppressWarnings("deprecation")
     public boolean isOpaqueCube(@Nonnull IBlockState state) {
@@ -61,27 +68,19 @@ public class GTQTADVGlass extends VariantBlock<GTQTADVGlass.CasingType> {
     public boolean isFullCube(@Nonnull IBlockState state) {
         return false;
     }
-    @SideOnly(Side.CLIENT)
-    @Override
-    public void addInformation(@Nonnull ItemStack stack, @Nullable World player, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag advanced) {
-        super.addInformation(stack, player, tooltip, advanced);
-        VariantItemBlock itemBlock = (VariantItemBlock<GTQTBlockGlassCasing.CasingType, GTQTBlockGlassCasing>) stack.getItem();
-        IBlockState stackState = itemBlock.getBlockState(stack);
-        GTQTADVGlass.CasingType casingType =  this.getState(stackState);
-        tooltip.add(I18n.format("epimorphism.glass_tier.tooltip", casingType.getTireNameColored()));
-        tooltip.add(casingType.getOpticalTierName());
 
-    }
     @Override
     @SideOnly(Side.CLIENT)
     @SuppressWarnings("deprecation")
-    public boolean shouldSideBeRendered(@Nonnull IBlockState state, IBlockAccess world, BlockPos pos, @Nonnull EnumFacing side) {
+    public boolean shouldSideBeRendered(@Nonnull IBlockState state, IBlockAccess world, BlockPos pos,
+                                        @Nonnull EnumFacing side) {
         IBlockState sideState = world.getBlockState(pos.offset(side));
 
         return sideState.getBlock() == this ?
                 getState(sideState) != getState(state) :
                 super.shouldSideBeRendered(state, world, pos, side);
     }
+
     public static enum CasingType  implements IStringSerializable, ITierGlassBlockState {
 
         SILICATE_GLASS("boron_silicate_glass"),

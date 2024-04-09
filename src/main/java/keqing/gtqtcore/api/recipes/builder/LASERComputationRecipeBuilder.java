@@ -71,7 +71,7 @@ public class LASERComputationRecipeBuilder extends RecipeBuilder<LASERComputatio
             GTLog.logger.error("Total CWU cannot be less than 0", new IllegalArgumentException());
             recipeStatus = EnumValidationResult.INVALID;
         }
-        this.applyProperty(TotalComputationProperty.getInstance(), totalCWU);
+        this.applyProperty(LASERNetProperty.getInstance(), totalCWU);
         return duration(totalCWU);
     }
 }

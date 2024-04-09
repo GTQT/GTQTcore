@@ -745,6 +745,14 @@ gregtech.material.bitterns=硫酸酸化卤水
 gregtech.material.bitterno=氧化卤水
 gregtech.material.bitternbr=离散态氧化溴
 gregtech.material.bitternobr=氧化富集溴
+
+metaitem.fuel.jiaoxianrenzhang.name=焦仙人掌
+metaitem.fuel.nongsuoxianrenzhang.name=浓缩焦仙人掌
+metaitem.fuel.tangjiao.name=糖焦
+metaitem.fuel.tangtan.name=糖碳
+metaitem.fuel.zhutan.name=竹炭
+
+tile.road.lvkuangkuangsha.name=铝矿矿砂
 #  通用电路板s
 metaitem.general_circuit.ulv.name=通用电路板 (§8ULV§r)
 metaitem.general_circuit.lv.name=通用电路板 (§7LV§r)
