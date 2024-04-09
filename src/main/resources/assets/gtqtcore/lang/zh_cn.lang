@@ -999,6 +999,7 @@ gtqt.machine.ls.2=多方块最大工作电压为外壳与二倍激光发射等�
 gtqt.machine.ls.3=当运行激光切割配方时，自动拥有等同于玻璃等级数量的并行，享受一倍耗时减免
 gtqt.machine.assembly_line.1=升级结构提高配方运行最大电压，升级玻璃获得耗时减免。
 gtqt.machine.assembly_line.2=最高运行配方电压为IV，本多方块支持研究数据输入，
+gtqt.machine.distillation_kettle.1=请保证预留输出流体产物个数的输出仓来保证你的机器正常工作！
 tile.electrobath.solar_plate_casing.name=阵列太阳能框架
 tile.electrobath.solar_plate_lv.name=基础太阳能集成板
 tile.electrobath.solar_plate_mv.name=进阶太阳能集成板

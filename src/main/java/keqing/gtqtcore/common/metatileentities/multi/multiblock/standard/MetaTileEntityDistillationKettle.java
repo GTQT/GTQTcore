@@ -63,6 +63,7 @@ public class MetaTileEntityDistillationKettle extends RecipeMapMultiblockControl
     public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("gregtech.machine.perfect_oc", new Object[0]));
+        tooltip.add(I18n.format("gtqt.machine.distillation_kettle.1"));
     }
 
 
