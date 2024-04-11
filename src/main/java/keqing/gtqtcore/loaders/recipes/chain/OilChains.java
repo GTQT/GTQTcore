@@ -24,12 +24,32 @@ import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.electrode;
 
 public class OilChains {
     public static void init() {
+        Chemical();     //化工线路
         NewOil();       //新油电
         Pre();          //预处理
         Kettle();       //原始蒸馏
         changjianya();  //常减压
         jingzhihuishou();  //精致回收
         cuihualiehua(); //催化裂化
+    }
+
+    private static void Chemical() {
+        //一氧化碳和氢氧化钠溶液在160-200 ℃和2 MPa压力下反应生成甲酸钠，然后经硫酸酸解、蒸馏即得成品。
+        CHEMICAL_RECIPES.recipeBuilder()
+                .fluidInputs(CarbonMonoxide.getFluid(1000))
+                .fluidInputs(SodiumHydroxide.getFluid(1000))
+                .fluidOutputs(SodiumFormate.getFluid(1000))
+                .circuitMeta(1)
+                .duration(120).EUt(30).buildAndRegister();
+
+        CHEMICAL_RECIPES.recipeBuilder()
+                .fluidInputs(SulfuricAcid.getFluid(1000))
+                .fluidInputs(SodiumFormate.getFluid(2000))
+                .fluidOutputs(FormicAcid.getFluid(2000))
+                .fluidOutputs(SodiumSulfate.getFluid(1000))
+                .circuitMeta(1)
+                .duration(120).EUt(30).buildAndRegister();
+
     }
 
     private static void jingzhihuishou() {

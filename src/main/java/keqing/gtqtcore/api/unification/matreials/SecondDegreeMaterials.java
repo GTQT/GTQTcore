@@ -167,7 +167,7 @@ public class SecondDegreeMaterials {
         //硫酸锌粉
         GTQTMaterials.ZincSulfate  = new Material.Builder(getMaterialsId(), gregtechId("zinc_sulfate"))
                 .dust()
-                .components(Zinc, 1, Sulfur, 2,Oxygen,8)
+                .components(Zinc, 1, Sulfur, 1,Oxygen,4)
                 .color(0x4682B4)
                 .build();
 

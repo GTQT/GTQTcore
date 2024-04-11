@@ -2428,5 +2428,13 @@ public class FirstDegreeMaterials {
                 .color(0x6B4312)
                 .iconSet(METALLIC)
                 .build();
+
+        //  25098 Sodium Formate
+        GTQTMaterials.SodiumFormate = new Material.Builder(getMaterialsId(), gregtechId("sodium_formate"))
+                .fluid()
+                .color(0x416CC0)
+                .iconSet(ROUGH)
+                .components(Carbon, 1, Hydrogen, 1, Oxygen, 2, Sodium, 1)
+                .build();
     }
 }

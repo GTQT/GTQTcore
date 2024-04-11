@@ -527,6 +527,7 @@ public class GTQTMaterials {
     public static Material SodiumNitrite;
     public static Material BenzenediazoniumTetrafluoroborate;
     public static Material CoACABCatalyst;
+    public static Material SodiumFormate;
 
     //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/api/unification/GSMaterials.java
 
