@@ -926,7 +926,7 @@ public class CPULine {
                 .duration(100)
                 .EUt(1920)
                 .input(IMPREGNATED_FIBER)
-                .fluidInputs(PhosphoricAcid.getFluid(250))
+                .fluidInputs(FluoroantimonicAcid.getFluid(250))
                 .output(FIBER_BOARD)
                 .buildAndRegister();
 

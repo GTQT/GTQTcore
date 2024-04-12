@@ -218,7 +218,8 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityMegaTurbine MEGA_STEAM_TURBINE;
     public static MetaTileEntityMegaTurbine MEGA_GAS_TURBINE;
     public static MetaTileEntityMegaTurbine MEGA_PLASMA_TURBINE;
-
+    public static MetaTileEntityLargeOreWasher LAGER_ORE_WASHER;
+    public static MetaTileEntityLargeThermalCentrifuge LAGER_THERMAL_CENTRIFUGE;
     public static MetaTileEntityNanoscaleFabricator NANOSCALE_FABRICATOR;
     public static MetaTileEntityCVDUnit CVD_UNIT;
     public static MetaTileEntityEXCVD EX_CVD;
@@ -355,9 +356,11 @@ public class GTQTMetaTileEntities {
         PYROLYSE_OVEN = registerMetaTileEntity(3252, new MetaTileEntityPyrolyseOven(gtqtcoreId("pyrolyse_oven")));
         VACUUM_FREEZER = registerMetaTileEntity(3253, new MetaTileEntityVacuumFreezer(gtqtcoreId("vacuum_freezer")));
         ASSEMBLY_LINE = registerMetaTileEntity(3254, new MetaTileEntityAssemblyLine(gtqtcoreId("assembly_line")));
-        LV_PROCESSING_ARRAY = registerMetaTileEntity(3255, new MetaTileEntityProcessingArray(gtqtcoreId("lv_processing_array"), 1));
-        MV_PROCESSING_ARRAY = registerMetaTileEntity(3256, new MetaTileEntityProcessingArray(gtqtcoreId("mv_processing_array"), 2));
-        HV_PROCESSING_ARRAY = registerMetaTileEntity(3257, new MetaTileEntityProcessingArray(gtqtcoreId("hv_processing_array"), 3));
+        LAGER_ORE_WASHER = registerMetaTileEntity(3255, new MetaTileEntityLargeOreWasher(gtqtcoreId("lager_ore_washer")));
+        LAGER_THERMAL_CENTRIFUGE = registerMetaTileEntity(3256, new MetaTileEntityLargeThermalCentrifuge(gtqtcoreId("lager_thermal_centrifuge")));
+        LV_PROCESSING_ARRAY = registerMetaTileEntity(3257, new MetaTileEntityProcessingArray(gtqtcoreId("lv_processing_array"), 1));
+        MV_PROCESSING_ARRAY = registerMetaTileEntity(3258, new MetaTileEntityProcessingArray(gtqtcoreId("mv_processing_array"), 2));
+        HV_PROCESSING_ARRAY = registerMetaTileEntity(3259, new MetaTileEntityProcessingArray(gtqtcoreId("hv_processing_array"), 3));
         //巨型设备
         HUGE_FUSION_REACTOR[0] = registerMetaTileEntity(3300, new MetaTileEntityHugeFusionReactor(gtqtcoreId("fusion_reactor.uhv"), GTValues.UHV));
         HUGE_FUSION_REACTOR[1] = registerMetaTileEntity(3301, new MetaTileEntityHugeFusionReactor(gtqtcoreId("fusion_reactor.uev"), GTValues.UEV));

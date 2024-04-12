@@ -662,6 +662,10 @@ gregtech.material.methylfuran=2,5-二甲基呋喃
 gregtech.material.ches=2-环己胺基乙磺酸
 gregtech.material.ethanesulphonate=环己胺基乙磺酸钠（生物缓冲剂）
 
+gregtech.material.ammonium_tungstate=钨酸铵
+gregtech.material.cammonium_tungstate=晶体钨酸铵
+gregtech.material.sodium_tungstate_dihydrate=钨酸钠
+gregtech.material.itungstic_acid=工业钨酸
 
 gregtech.material.enzymesaz=A型原始含菌杂质
 gregtech.material.enzymesbz=B型原始含菌杂质
@@ -979,6 +983,8 @@ gtqtcore.machine.pyrolysis_tower.name=土蒸馏&裂解塔
 recipemap.salt_fish.name=晒太阳
 gtqtcore.machine.ocean_pumper.name=海水泵机
 gtqtcore.machine.solar_plate.name=太阳能板
+gtqtcore.machine.lager_ore_washer.name=工业洗矿槽
+gtqtcore.machine.lager_thermal_centrifuge.name=工业热能离心机
 gtqtcore.machine.spa.tooltip.1=只能白天工作，需要提供水洁净太阳能吸收面,需要保证上方10*10（控制器为中心）范围内均为空气。
 gtqtcore.machine.spa.tooltip.2=内置三级太阳能升级，每次升级发电提升一个阶段。
 recipemap.soalr_plate.name=太阳神的力量

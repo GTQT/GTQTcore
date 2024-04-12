@@ -2436,5 +2436,36 @@ public class FirstDegreeMaterials {
                 .iconSet(ROUGH)
                 .components(Carbon, 1, Hydrogen, 1, Oxygen, 2, Sodium, 1)
                 .build();
+
+        //钨酸铵
+        GTQTMaterials.AmmoniumTungstate = new Material.Builder(getMaterialsId(), gregtechId("ammonium_tungstate"))
+                .fluid()
+                .color(0x008B00)
+                .iconSet(ROUGH)
+                .build()
+                .setFormula("（NH4)6W7024•6H20", true);
+        //晶体钨酸铵
+        GTQTMaterials.CammoniumTungstate = new Material.Builder(getMaterialsId(), gregtechId("cammonium_tungstate"))
+                .dust()
+                .color(0x458B00)
+                .iconSet(SHINY)
+                .build()
+                .setFormula("（NH4)6W7024", true);
+
+        //Na2WO4
+        GTQTMaterials.SodiumTungstateDihydrate = new Material.Builder(getMaterialsId(), gregtechId("sodium_tungstate_dihydrate"))
+                .dust()
+                .color(0x473C8B)
+                .iconSet(SHINY)
+                .build()
+                .setFormula("Na2WO4", true);
+
+        //工业钨酸
+        GTQTMaterials.ItungsticAcid = new Material.Builder(getMaterialsId(), gregtechId("itungstic_acid"))
+                .fluid()
+                .color(0x68228B)
+                .iconSet(SHINY)
+                .build()
+                .setFormula("H2WO4*", true);
     }
 }

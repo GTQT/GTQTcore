@@ -526,6 +526,18 @@ public class MetaTileEntityLoader {
                 MetaItems.ELECTRIC_PUMP_LV, 'C', new UnificationEntry(OrePrefix.circuit, LV), 'W',
                 new UnificationEntry(OrePrefix.cableGtSingle, Aluminium));
 
+        ModHandler.addShapedRecipe(true, "lager_ore_washer", GTQTMetaTileEntities.LAGER_ORE_WASHER.getStackForm(), "PPP", "CMC",
+                "WCW",
+                'M', ORE_WASHER[1].getStackForm(),
+                'P', ROBOT_ARM_LV, 'C', new UnificationEntry(OrePrefix.circuit, LV),
+                'W', ELECTRIC_MOTOR_LV);
+
+        ModHandler.addShapedRecipe(true, "lager_thermal_centrifuge", GTQTMetaTileEntities.LAGER_THERMAL_CENTRIFUGE.getStackForm(), "WPW", "CMC",
+                "WPW",
+                'M', THERMAL_CENTRIFUGE[1].getStackForm(),
+                'P', MetaItems.ELECTRIC_PUMP_LV, 'C', new UnificationEntry(OrePrefix.circuit, LV),
+                'W', VOLTAGE_COIL_MV);
+
         ModHandler.addShapedRecipe(true, "assembler_line", GTQTMetaTileEntities.ASSEMBLY_LINE.getStackForm(), "PPP", "CMC",
                 "WCW", 'M', MetaTileEntities.HULL[GTValues.HV].getStackForm(), 'P',
                 EMITTER_HV, 'C', new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.HV), 'W',
