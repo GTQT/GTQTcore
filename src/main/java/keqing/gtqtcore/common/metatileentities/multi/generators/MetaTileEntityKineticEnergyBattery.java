@@ -74,6 +74,7 @@ public class MetaTileEntityKineticEnergyBattery extends MultiblockWithDisplayBas
     private long runMin = 0;
     private long runS = 0;
     private int timeCheck;
+
     public int process=0;
     public int maxProcess = 100;
     private boolean isActive=true, isWorkingEnabled = true;
@@ -485,7 +486,7 @@ public class MetaTileEntityKineticEnergyBattery extends MultiblockWithDisplayBas
     }
 
 
-//先跑起来看看
+    //先跑起来看看
     public void setWorkingEnabled(boolean b) {
         this.isWorkingEnabled = b;
         markDirty();
@@ -542,19 +543,5 @@ public class MetaTileEntityKineticEnergyBattery extends MultiblockWithDisplayBas
         getFrontOverlay().renderOrientedState(renderState, translation, pipeline, getFrontFacing(), this.isActive(),
                 this.isWorkingEnabled());
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

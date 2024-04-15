@@ -1,44 +1,35 @@
 package keqing.gtqtcore.api.metaileentity.multiblock;
 
-import com.google.common.collect.Lists;
-import gregtech.api.GTValues;
-import gregtech.api.capability.GregtechDataCodes;
-import gregtech.api.capability.IEnergyContainer;
-import gregtech.api.capability.IMultipleRecipeMaps;
-import gregtech.api.capability.impl.EnergyContainerHandler;
+import gregicality.multiblocks.api.capability.IParallelMultiblock;
+import gregicality.multiblocks.api.capability.impl.GCYMMultiblockRecipeLogic;
 import gregtech.api.capability.impl.EnergyContainerList;
-import gregtech.api.capability.impl.FluidTankList;
-import gregtech.api.capability.impl.ItemHandlerList;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.Widget;
 import gregtech.api.gui.widgets.ClickButtonWidget;
 import gregtech.api.gui.widgets.WidgetGroup;
+import gregtech.api.metatileentity.multiblock.MultiMapMultiblockController;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.RecipeMap;
-import gregtech.api.util.GTUtility;
-import gregtech.api.util.TextComponentUtil;
-import keqing.gtqtcore.api.GTQTValue;
-import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
-import keqing.gtqtcore.api.utils.GTQTUtil;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraftforge.fluids.FluidStack;
 
-import javax.annotation.Nonnull;
 import java.util.List;
 
-import static gregtech.api.GTValues.VA;
-import static gregtech.api.unification.material.Materials.Lubricant;
+public abstract class GTQTRecipeMapMultiblockControllerOverwrite extends MultiMapMultiblockController implements IParallelMultiblock {
 
-public abstract class GTQTRecipeMapMultiblockOverwrite extends RecipeMapMultiblockController  {
+    public GTQTRecipeMapMultiblockControllerOverwrite(ResourceLocation metaTileEntityId, RecipeMap<?> recipeMap) {
+        this(metaTileEntityId, new RecipeMap[]{recipeMap});
+    }
+
+    public GTQTRecipeMapMultiblockControllerOverwrite(ResourceLocation metaTileEntityId, RecipeMap<?>[] recipeMaps) {
+        super(metaTileEntityId, recipeMaps);
+        this.recipeMapWorkable = new GCYMMultiblockRecipeLogic(this);
+    }
     public int ParallelLim;
     public int ParallelNumA;
     public int modern;
@@ -46,9 +37,6 @@ public abstract class GTQTRecipeMapMultiblockOverwrite extends RecipeMapMultiblo
     int tier;
 
 
-    public GTQTRecipeMapMultiblockOverwrite(ResourceLocation metaTileEntityId, RecipeMap<?> recipeMap) {
-        super(metaTileEntityId, recipeMap);
-    }
 
     /*
     int ParallelNum;

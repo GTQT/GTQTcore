@@ -80,16 +80,16 @@ public class MetaTileEntityLoader {
                 .circuitMeta(1)
                 .duration(60).EUt(20).buildAndRegister();
 
-        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(50).EUt(30)
-                .inputs(HULL[1].getStackForm(4))
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(50).EUt(120)
+                .inputs(HULL[2].getStackForm(4))
                 .input(ELECTRIC_PUMP_MV,8)
-                .input(circuit,LV,8)
+                .input(circuit,MV,8)
                 .input(rotor,Aluminium,32)
                 .input(OrePrefix.cableGtSingle, Materials.Tin, 32)
                 .fluidInputs(Polyethylene.getFluid(L * 12))
                 .outputs(GAS_COLLECTOR.getStackForm()).buildAndRegister();
 
-        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(50).EUt(30)
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(500).EUt(30)
                 .inputs(HULL[1].getStackForm(4))
                 .input(ELECTRIC_MOTOR_LV,8)
                 .input(ELECTRIC_PUMP_LV,8)
@@ -97,7 +97,27 @@ public class MetaTileEntityLoader {
                 .input(gear,Steel,8)
                 .input(OrePrefix.cableGtSingle, Materials.Tin, 32)
                 .fluidInputs(Polyethylene.getFluid(L * 12))
-                .outputs(WATER_POWER_STATION.getStackForm()).buildAndRegister();
+                .outputs(WATER_POWER_STATION[0].getStackForm()).buildAndRegister();
+
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(500).EUt(120)
+                .inputs(HULL[2].getStackForm(4))
+                .input(ELECTRIC_MOTOR_MV,8)
+                .input(ELECTRIC_PUMP_MV,8)
+                .input(circuit,MV,8)
+                .input(gear,Aluminium,8)
+                .input(OrePrefix.cableGtSingle, Materials.Tin, 32)
+                .fluidInputs(PolyvinylChloride.getFluid(L * 12))
+                .outputs(WATER_POWER_STATION[1].getStackForm()).buildAndRegister();
+
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(500).EUt(480)
+                .inputs(HULL[3].getStackForm(4))
+                .input(ELECTRIC_MOTOR_HV,8)
+                .input(ELECTRIC_PUMP_HV,8)
+                .input(circuit,HV,8)
+                .input(gear,StainlessSteel,8)
+                .input(OrePrefix.cableGtSingle, Materials.Tin, 32)
+                .fluidInputs(Epoxy.getFluid(L * 12))
+                .outputs(WATER_POWER_STATION[2].getStackForm()).buildAndRegister();
 
         ModHandler.addShapedRecipe(true, "tank0",TANK[0].getStackForm(), " R ",
                 "hCw", " R ", 'R', new UnificationEntry(OrePrefix.ring, Bronze), 'C',

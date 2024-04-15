@@ -16,6 +16,7 @@ import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
+import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.client.renderer.CubeRendererState;
 import gregtech.client.renderer.ICubeRenderer;
@@ -27,6 +28,8 @@ import gregtech.common.blocks.BlockWireCoil;
 import gregtech.core.sound.GTSoundEvents;
 import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
+import keqing.gtqtcore.api.metaileentity.GTQTRecipeMapMultiblockController;
+import keqing.gtqtcore.api.metaileentity.multiblock.GTQTRecipeMapMultiblockControllerOverwrite;
 import keqing.gtqtcore.api.metaileentity.multiblock.GTQTRecipeMapMultiblockOverwrite;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.utils.GTQTUtil;
@@ -48,14 +51,17 @@ import java.util.List;
 
 import static gregtech.api.GTValues.VA;
 
-public class MetaTileEntityLargeOreWasher extends GTQTRecipeMapMultiblockOverwrite {
+public class MetaTileEntityLargeOreWasher extends GTQTRecipeMapMultiblockControllerOverwrite {
     private int coilLevel;
     private int casingTier;
     private int tubeTier;
     private int tier;
 
     public MetaTileEntityLargeOreWasher(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, RecipeMaps.ORE_WASHER_RECIPES);
+        super(metaTileEntityId, new RecipeMap[] {
+                RecipeMaps.ORE_WASHER_RECIPES,
+                RecipeMaps.CHEMICAL_BATH_RECIPES
+        });
         this.recipeMapWorkable = new LargeChemicalReactorLogic(this);
     }
     @Override

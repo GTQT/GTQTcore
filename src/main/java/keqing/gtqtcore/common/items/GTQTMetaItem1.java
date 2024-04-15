@@ -49,11 +49,9 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         //其他燃料
         JIAO_XIAN_REN_ZHANG = this.addItem(20,"fuel.jiaoxianrenzhang").setBurnValue(4800).setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO);
         NONG_SUO_XIAN_REN_ZHANG = this.addItem(21,"fuel.nongsuoxianrenzhang").setBurnValue(8000).setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO);
-
-        JIAO_TANG_JIAO = this.addItem(23,"fuel.tangjiao").setBurnValue(4800).setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO);
-        NONG_SUO_TANG_JIAO = this.addItem(24,"fuel.tangtan").setBurnValue(8000).setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO);
-
-        ZHU_TAN = this.addItem(25,"fuel.zhutan").setBurnValue(6400).setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        JIAO_TANG_JIAO = this.addItem(22,"fuel.tangjiao").setBurnValue(4800).setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        NONG_SUO_TANG_JIAO = this.addItem(23,"fuel.tangtan").setBurnValue(8000).setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        ZHU_TAN = this.addItem(24,"fuel.zhutan").setBurnValue(6400).setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO);
 
         //快乐海藻
         COMMON_ALGAE = this.addItem(30,"algae.common").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO);
