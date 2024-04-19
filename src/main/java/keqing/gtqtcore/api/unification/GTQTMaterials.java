@@ -532,6 +532,19 @@ public class GTQTMaterials {
     public static Material CammoniumTungstate;
     public static Material SodiumTungstateDihydrate;
     public static Material ItungsticAcid;
+    public static Material Zircon;
+    public static Material Zirconf;
+    public static Material Zircons;
+    public static Material Zrso;
+    public static Material Hfso;
+    public static Material NiobiumTantalumFe;
+    public static Material NiobiumTantalumFec;
+    public static Material Nbcl;
+    public static Material Tacl;
+    public static Material Nbcla;
+    public static Material Tacla;
+    public static Material Nbclb;
+    public static Material Taclb;
 
     //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/api/unification/GSMaterials.java
 

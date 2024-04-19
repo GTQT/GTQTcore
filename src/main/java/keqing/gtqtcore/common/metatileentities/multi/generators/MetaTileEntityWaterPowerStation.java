@@ -92,14 +92,14 @@ public class MetaTileEntityWaterPowerStation extends MultiblockWithDisplayBase i
     protected void updateFormedValid() {
         this.logic.update();
         generator();
-        this.outputEu = water *coilLevel/8;
+        this.outputEu = (int) (water*Math.pow(2,tier-1) *coilLevel/8);
     }
 
     private long geteu()
     {
         Random rand = new Random();
         int randomNum = rand.nextInt(40);
-        return ((long) water *coilLevel*(randomNum+80)/800);
+        return (long) (((long) water *coilLevel*(randomNum+80)/800)*Math.pow(2,tier-1));
     }
     private void generator() {
         isWorkingEnabled=this.energyContainer.getEnergyStored()<this.energyContainer.getEnergyCapacity()&&water > 0;
@@ -171,7 +171,7 @@ public class MetaTileEntityWaterPowerStation extends MultiblockWithDisplayBase i
 
     @Override
     public double getFillPercentage(int index) {
-        return  (double)geteu()/((2*(number+1))*(2*(number+1))*coilLevel*0.6);
+        return  ((double)geteu()/(Math.pow(2,tier-1)))/((2*(number+1))*(2*(number+1))*coilLevel*0.6);
     }
 
     @Override
@@ -183,7 +183,7 @@ public class MetaTileEntityWaterPowerStation extends MultiblockWithDisplayBase i
     public void addBarHoverText(List<ITextComponent> hoverList, int index) {
             ITextComponent cwutInfo = TextComponentUtil.stringWithColor(
                     TextFormatting.AQUA,
-                    geteu()+"* 倍率："+tier+ " / " + ((2*(number+1))*(2*(number+1))*coilLevel*0.6) + " EU/t");
+                    geteu()+"* 倍率："+Math.pow(2,tier-1)+ " / " + ((2*(number+1))*(2*(number+1))*coilLevel*0.6) + " EU/t");
             hoverList.add(TextComponentUtil.translationWithColor(
                     TextFormatting.GRAY,
                     "gregtech.multiblock.wps.computation",

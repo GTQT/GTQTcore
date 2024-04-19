@@ -900,6 +900,20 @@ gregtech.material.dfeltamethrine=二溴菊酸
 gregtech.material.dfeltamethrinf=二溴菊酰氯
 gregtech.material.dfeltamethring=间苯氧基苯甲醛
 gregtech.material.dfeltamethrinh=α-氰基间苯氧基苯甲醇
+gregtech.material.zircon=锆石
+gregtech.material.zirconf=熟制锆石
+gregtech.material.zircons=酸性锆石溶液
+gregtech.material.zrso=硫酸锆溶液
+gregtech.material.hfso=硫酸铪溶液
+
+gregtech.material.niobium_tantalum_fe=钽铌铁
+gregtech.material.niobium_tantalum_fec=焙烧钽铌铁
+gregtech.material.nbcl=四氯化铌
+gregtech.material.tacl=四氯化钽
+gregtech.material.nbcla=氟化铌
+gregtech.material.tacla=氟化钽
+gregtech.material.nbclb=七氟铌酸钾
+gregtech.material.taclb=七氟铌酸钾
 
 gregtech.material.enzymese_101=α-普适矿处菌种
 gregtech.material.enzymese_102=α-定向铂系菌种
@@ -1025,6 +1039,7 @@ tile.turbinecasing1.precise_assembler_casing_mk1.name=精密装配外壳MK1
 tile.turbinecasing1.precise_assembler_casing_mk2.name=精密装配外壳MK2
 tile.turbinecasing1.precise_assembler_casing_mk3.name=精密装配外壳MK3
 tile.turbine_casing1.galvanize_steel_casing.name=镀锌钢机械外壳
+tile.turbine_casing1.clarifier_casing.name=重力沉降槽
 metaitem.prospector.uv.name=电动勘探扫描仪（UV）
 metaitem.prospector.uiv.name=电动勘探扫描仪（UIV）
 gtqtcore.machine.mining_drill.name=大型采矿钻机
@@ -1644,7 +1659,7 @@ tile.computer_competent.computer_gpui.tooltip=苏联军工
 tile.computer_competent.computer_gpuii.tooltip=哥布林代工
 tile.computer_competent.computer_gpuiii.tooltip=神威！太湖之光！
 
-gtqtcore.multiblock.kqcc.description=计算中心服务器是你在早期获得算力的唯一方法，每一台服务器拥有三排四列共计12模块的计算组件，由上至下分别为【高性能计算模块/辅助运算模块/数据缓存模块】，每一排只能插放对应的组件，但是其等级可以不一样，也可以使用空框架填充。当RAM总和均大于CPU,GPU总和时，总算力为CPU,GPU的总和；否则为RAM的总和。单位热量由CPU总和*GPU总和决定。当温度小于三百度时正常性能计算，大于三百度时性能减半，大于四百五十度强制停机。处于超频模式时，计算性能翻倍，热量四倍，冷却液消耗四倍，综合散热性能翻倍。 冷却液种类/散热性能（水-7.7/10mb 冷却液-14.4/5mb 液氮-28.8/1mb）机器在关机状态无法通过冷却液降温！
+gtqtcore.multiblock.kqcc.description=计算中心服务器是你在早期获得算力的唯一方法，每一台服务器拥有三排四列共计12模块的计算组件，由上至下分别为【辅助运算模块/高性能计算模块/数据缓存模块】，每一排只能插放对应的组件，但是其等级可以不一样，也可以使用空框架填充。当RAM总和均大于CPU,GPU总和时，总算力为CPU,GPU的总和；否则为RAM的总和。单位热量由CPU总和*GPU总和决定。当温度小于三百度时正常性能计算，大于三百度时性能减半，大于四百五十度强制停机。处于超频模式时，计算性能翻倍，热量四倍，冷却液消耗四倍，综合散热性能翻倍。 冷却液种类/散热性能（水-7.7/10mb 冷却液-14.4/5mb 液氮-28.8/1mb）机器在关机状态无法通过冷却液降温！
 
 
 

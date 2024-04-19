@@ -90,6 +90,14 @@ public class MachineCasing {
                 .outputs(GTQTMetaBlocks.TURBINE_CASING.getItemVariant(NQ_TURBINE_CASING))
                 .buildAndRegister();
 
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(200).EUt(30)
+                .input(plate,Steel, 4)
+                .input(gear,Steel, 1)
+                .input(frameGt,Talonite, 1)
+                .circuitMeta(6)
+                .outputs(GTQTMetaBlocks.TURBINE_CASING1.getItemVariant(CLARIFIER_CASING))
+                .buildAndRegister();
+
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(200).EUt(120)
                 .input(plate,Orichalcum, 6)
                 .input(frameGt,Orichalcum, 1)
