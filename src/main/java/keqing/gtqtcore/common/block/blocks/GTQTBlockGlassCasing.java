@@ -83,7 +83,7 @@ public class GTQTBlockGlassCasing extends VariantActiveBlock<GTQTBlockGlassCasin
         VariantItemBlock itemBlock = (VariantItemBlock<GTQTBlockGlassCasing.CasingType, GTQTBlockGlassCasing>) stack.getItem();
         IBlockState stackState = itemBlock.getBlockState(stack);
         GTQTBlockGlassCasing.CasingType casingType =  this.getState(stackState);
-        tooltip.add(I18n.format("epimorphism.glass_tier.tooltip", casingType.getTireNameColored()));
+        tooltip.add(I18n.format("gtqtcore.glass_tier.tooltip", casingType.getTireNameColored()));
         if (casingType.isOpticalGlass) {
             tooltip.add(casingType.getOpticalTierName());
         }

@@ -1,7 +1,6 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
 
-import gregtech.api.capability.IMultipleTankHandler;
 import gregtech.api.capability.IOpticalComputationHatch;
 import gregtech.api.capability.IOpticalComputationProvider;
 import gregtech.api.capability.IOpticalComputationReceiver;
@@ -21,7 +20,6 @@ import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
-import gregtech.api.recipes.RecipeMaps;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.core.sound.GTSoundEvents;
@@ -29,7 +27,6 @@ import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
-import keqing.gtqtcore.api.recipes.properties.KQNetProperty;
 import keqing.gtqtcore.api.recipes.properties.LASERNetProperty;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
@@ -51,13 +48,14 @@ import java.util.List;
 
 import static gregtech.api.GTValues.VA;
 
-public class MetaTileEntityStepper extends MultiMapMultiblockController implements IOpticalComputationReceiver {
+public class MetaTileEntityNanoCoating extends MultiMapMultiblockController implements IOpticalComputationReceiver {
     private int glass_tier;
     private int clean_tier;
     private int sheping_tier;
     private int laser_tier;
     private int tier;
     private int minvisa;
+    private boolean visa;
 
     @Override
     public void addInformation(ItemStack stack, World world, List<String> tooltip, boolean advanced) {
@@ -68,16 +66,37 @@ public class MetaTileEntityStepper extends MultiMapMultiblockController implemen
         tooltip.add(I18n.format("gtqt.machine.stepper.5"));
     }
     private IOpticalComputationProvider computationProvider;
-    public MetaTileEntityStepper(ResourceLocation metaTileEntityId) {
+    public MetaTileEntityNanoCoating(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{
-                GTQTcoreRecipeMaps.STEPPER_RECIPES
+                GTQTcoreRecipeMaps.TD_PRINT_RECIPES
         });
         this.recipeMapWorkable = new LaserEngravingWorkableHandler(this);
     }
 
     @Override
+    @Nonnull
+    protected Widget getFlexButton(int x, int y, int width, int height) {
+        WidgetGroup group = new WidgetGroup(x, y, width, height);
+        group.addWidget(new ClickButtonWidget(0, 0, 9, 18, "", this::decrementThreshold)
+                .setButtonTexture(GuiTextures.BUTTON_THROTTLE_MINUS)
+                .setTooltipText("效能模式"));
+        group.addWidget(new ClickButtonWidget(9, 0, 9, 18, "", this::incrementThreshold)
+                .setButtonTexture(GuiTextures.BUTTON_THROTTLE_PLUS)
+                .setTooltipText("正常模式"));
+        return group;
+    }
+
+    private void incrementThreshold(Widget.ClickData clickData) {
+            this.visa = true;
+    }
+
+    private void decrementThreshold(Widget.ClickData clickData) {
+            this.visa = false;
+    }
+
+    @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
-        return new MetaTileEntityStepper(metaTileEntityId);
+        return new MetaTileEntityNanoCoating(metaTileEntityId);
     }
 
     @Override
@@ -93,12 +112,14 @@ public class MetaTileEntityStepper extends MultiMapMultiblockController implemen
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("tier", tier);
+        data.setBoolean("visa", visa);
         return super.writeToNBT(data);
     }
     @Override
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         tier = data.getInteger("tier");
+        visa = data.getBoolean("visa");
     }
     @Override
     public void writeInitialSyncData(PacketBuffer buf) {
@@ -124,17 +145,19 @@ public class MetaTileEntityStepper extends MultiMapMultiblockController implemen
         super.addDisplayText(textList);
         textList.add(new TextComponentTranslation("gtqtcore.eleTire",tier, laser_tier, glass_tier));
         textList.add(new TextComponentTranslation("gtqtcore.eleTire1",clean_tier, sheping_tier, minvisa));
+        textList.add(new TextComponentTranslation("效能模式 ：%s",visa));
 
     }
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
-                .aisle("JXXXXXX", "JXXXXXX", "JXXGGGX")
-                .aisle("JXXXXXX", "JZZPPPX", "JXXGGGX")
-                .aisle("JXXXXXX", "JCSGGGX", "JXXGGGX")
+                .aisle("JXXXXXXX", "JXXGGGGX","JXXGGGGX", "JXXGGGGX")
+                .aisle("JXXXXXXX", "JZZPPPPX","JZZ####X", "JXXGGGGX")
+                .aisle("JXXXXXXX", "JZZPPPPX","JZZ####X", "JXXGGGGX")
+                .aisle("JXXXXXXX", "JCSGGGGX","JXXGGGGX", "JXXGGGGX")
                 .where('S', selfPredicate())
                 .where('C', abilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION))
-                .where('X', TiredTraceabilityPredicate.CP_CASING.setMinGlobalLimited(24).or(autoAbilities()))
+                .where('X', TiredTraceabilityPredicate.CP_CASING.setMinGlobalLimited(40).or(autoAbilities()))
                 .where('Z', TiredTraceabilityPredicate.CP_ZW_CASING)
                 .where('G', TiredTraceabilityPredicate.CP_LGLASS)
                 .where('J', TiredTraceabilityPredicate.CP_ZJ_CASING)
@@ -264,6 +287,11 @@ public class MetaTileEntityStepper extends MultiMapMultiblockController implemen
             super(tileEntity,ComputationType.SPORADIC);
         }
 
+        public long getMaxVoltage() {
+            if(visa)return VA[Math.min(tier-3,clean_tier*2-3)];
+            else return VA[Math.min(tier,clean_tier*2)];
+        }
+
         @Override
         public void update() {
             super.update();
@@ -289,20 +317,24 @@ public class MetaTileEntityStepper extends MultiMapMultiblockController implemen
             return sheping_tier == laser_tier;
         }
 
+        int pre;
         public void setMaxProgress(int maxProgress) {
-            if (isPrecise()) {
-                this.maxProgressTime = maxProgress*(100-glass_tier)/100;
-            } else {
-                this.maxProgressTime = maxProgress;
-            }
-        }
+            if(visa)
+                this.pre = maxProgress/2;
+            else
+                this.pre = maxProgress;
 
-        public long getMaxVoltage() {
-            return VA[Math.min(tier,clean_tier*2)];
+            if (isPrecise()) {
+                this.maxProgressTime = pre*(100-glass_tier)/100;
+            } else {
+                this.maxProgressTime = pre;
+            }
         }
 
         @Override
         public int getParallelLimit() {
+            if(visa)
+                return clean_tier*sheping_tier*4;
             if (isPrecise()) {
                 return clean_tier*sheping_tier;
             } else {
