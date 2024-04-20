@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "epimorphism:items/metaitems/separation_electromagnet"
+    "layer0": "gtqtcore:items/metaitems/separation_electromagnet"
   }
 }

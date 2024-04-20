@@ -2,6 +2,7 @@ package keqing.gtqtcore.common;
 
 import gregtech.api.GregTechAPI;
 import gregtech.api.block.VariantItemBlock;
+import gregtech.api.cover.CoverDefinition;
 import gregtech.api.recipes.recipeproperties.FusionEUToStartProperty;
 import gregtech.api.unification.stack.ItemMaterialInfo;
 import gregtech.common.items.MetaItems;
@@ -13,6 +14,7 @@ import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTBlockWireCoil;
 import keqing.gtqtcore.common.block.blocks.GTQTCrops;
 import keqing.gtqtcore.common.block.blocks.GTQTStoneVariantBlock;
+import keqing.gtqtcore.common.covers.GTQTCoverBehavior;
 import keqing.gtqtcore.common.items.GTQTMetaItems;
 import keqing.gtqtcore.common.items.metaitems.GTQTMetaToolItems;
 import keqing.gtqtcore.loaders.OreDictionaryLoader;
@@ -144,6 +146,12 @@ public class CommonProxy {
     }
 
     public CommonProxy() {
+    }
+
+    @SubscribeEvent
+    public static void registerCoverBehavior(GregTechAPI.RegisterEvent<CoverDefinition> event) {
+        GTQTLog.logger.info("Registering Cover Behaviors...");
+        GTQTCoverBehavior.init();
     }
 
     @SubscribeEvent

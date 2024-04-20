@@ -11,7 +11,7 @@
     "extra": {
       "light": 15,
       "connect_to": [
-        { "block": "epimorphism:fusion_casing:2" }
+        { "block": "gtqtcore:fusion_casing:2" }
       ]
     }
   }

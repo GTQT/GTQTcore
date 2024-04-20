@@ -295,7 +295,7 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem EMITTER_MAX;
     public static MetaItem<?>.MetaValueItem SENSOR_MAX;
     public static MetaItem<?>.MetaValueItem FIELD_GENERATOR_MAX;
-
+    public static MetaItem<?>.MetaValueItem COVER_SOLAR_PANEL_MAX;
 
 
     // Power Components

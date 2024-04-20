@@ -1,7 +1,7 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "epimorphism:items/metaitems/circuit.supracausal_processor",
-    "layer1": "epimorphism:items/metaitems/wrap_overlay"
+    "layer0": "gtqtcore:items/metaitems/circuit.supracausal_processor",
+    "layer1": "gtqtcore:items/metaitems/wrap_overlay"
   }
 }

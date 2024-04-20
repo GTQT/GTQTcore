@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "epimorphism:items/material_sets/hypogen/tool_head_buzz_saw"
+    "layer0": "gtqtcore:items/material_sets/hypogen/tool_head_buzz_saw"
   }
 }

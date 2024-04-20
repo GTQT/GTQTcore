@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "epimorphism:items/metaitems/metastable_self_healing_adhesive"
+    "layer0": "gtqtcore:items/metaitems/metastable_self_healing_adhesive"
   }
 }

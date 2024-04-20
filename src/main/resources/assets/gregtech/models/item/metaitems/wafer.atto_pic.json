@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "epimorphism:items/metaitems/wafer.atto_pic"
+    "layer0": "gtqtcore:items/metaitems/wafer.atto_pic"
   }
 }

@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "epimorphism:items/metaitems/wafer.chip.spintronic_nand_memory_chip"
+    "layer0": "gtqtcore:items/metaitems/wafer.chip.spintronic_nand_memory_chip"
   }
 }
