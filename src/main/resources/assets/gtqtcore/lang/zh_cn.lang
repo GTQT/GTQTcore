@@ -3285,6 +3285,17 @@ tile.quantum_force_transformer_casing.supracausal_continuum_shielding_core_casin
 tile.quantum_force_transformer_casing.supracausal_continuum_shielding_core_casing.tooltip=§b量子操纵者§7-屏蔽核心等级：§cIV§7
 tile.quantum_force_transformer_casing.quantum_force_transformer_coil.name=超维度转换线圈方块
 
+tile.electron_microscope.lens_i.name=电子透镜（MKI）
+tile.electron_microscope.sourse_i.name=电子源（MKI）
+tile.electron_microscope.lens_ii.name=电子透镜（MKII）
+tile.electron_microscope.sourse_ii.name=电子源（MKII）
+tile.electron_microscope.lens_iii.name=电子透镜（MKIII）
+tile.electron_microscope.sourse_iii.name=电子源（MKIII）
+tile.electron_microscope.lens_iv.name=电子透镜（MKIV）
+tile.electron_microscope.sourse_iv.name=电子源（MKIV）
+tile.electron_microscope.lens_v.name=电子透镜（MKV）
+tile.electron_microscope.sourse_v.name=电子源（MKV）
+
 gtqt.tooltip.update=本多方块支持机械外壳升级，外壳等级如下（青铜机械方块，脱氧钢机械方块，铝制防冻机械方块，洁净不锈钢机械方块，加强钛机械方块，加强钨钢机械方块，镀铑钯机械方块，硅岩合金机械方块，山铜机械方块，精金机械方块），外壳每升级一次，均拥有不同的增益效果，详情查询多方块自己的介绍。
 tile.multiblock_casing.adv_machine_tech.name=智能机器外壳
 tile.multiblock_casing.adv_machine_basic.name=智能基础外壳

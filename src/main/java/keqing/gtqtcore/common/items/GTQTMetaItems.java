@@ -40,6 +40,13 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem GENERAL_CIRCUIT_OpV;
     public static MetaItem<?>.MetaValueItem GENERAL_CIRCUIT_MAX;
 
+    public static MetaItem<?>.MetaValueItem CATALYST_FRAMEWORK_I;
+    public static MetaItem<?>.MetaValueItem CATALYST_FRAMEWORK_II;
+    public static MetaItem<?>.MetaValueItem CATALYST_FRAMEWORK_III;
+    public static MetaItem<?>.MetaValueItem CATALYST_FRAMEWORK_IV;
+    public static MetaItem<?>.MetaValueItem CATALYST_FRAMEWORK_V;
+    public static MetaItem<?>.MetaValueItem CATALYST_FRAMEWORK_VI;
+
     public static MetaItem<?>.MetaValueItem SOLAR_PLATE_MKI;
     public static MetaItem<?>.MetaValueItem SOLAR_PLATE_MKII;
     public static MetaItem<?>.MetaValueItem SOLAR_PLATE_MKIII;

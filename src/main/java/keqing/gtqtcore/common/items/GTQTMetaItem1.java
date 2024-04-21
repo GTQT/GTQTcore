@@ -49,11 +49,11 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         LAMINATION_GE = this.addItem(16,"item.lamination_ge").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
 
         //其他燃料
-        JIAO_XIAN_REN_ZHANG = this.addItem(20,"fuel.jiaoxianrenzhang").setBurnValue(4800).setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO);
-        NONG_SUO_XIAN_REN_ZHANG = this.addItem(21,"fuel.nongsuoxianrenzhang").setBurnValue(8000).setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO);
-        JIAO_TANG_JIAO = this.addItem(22,"fuel.tangjiao").setBurnValue(4800).setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO);
-        NONG_SUO_TANG_JIAO = this.addItem(23,"fuel.tangtan").setBurnValue(8000).setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO);
-        ZHU_TAN = this.addItem(24,"fuel.zhutan").setBurnValue(6400).setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        JIAO_XIAN_REN_ZHANG = this.addItem(20,"fuel.jiaoxianrenzhang").setBurnValue(9600).setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        NONG_SUO_XIAN_REN_ZHANG = this.addItem(21,"fuel.nongsuoxianrenzhang").setBurnValue(16000).setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        JIAO_TANG_JIAO = this.addItem(22,"fuel.tangjiao").setBurnValue(9600).setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        NONG_SUO_TANG_JIAO = this.addItem(23,"fuel.tangtan").setBurnValue(16000).setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        ZHU_TAN = this.addItem(24,"fuel.zhutan").setBurnValue(12800).setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO);
 
         //快乐海藻
         COMMON_ALGAE = this.addItem(30,"algae.common").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO);
@@ -140,6 +140,14 @@ public class GTQTMetaItem1 extends StandardMetaItem {
 
         GOLD_CROP = addItem(205, "gold_crop");
         GOLD_CROP.addComponents(new GTQTCropSeedBehaviour(GTQTCrops.GOLD_CROP, GOLD_CROP.getStackForm(), GOLD_CROP.getStackForm())).setCreativeTabs(CommonProxy.GTQTCore_BIO);
+
+        //催化剂框架 6种绰绰有余
+        CATALYST_FRAMEWORK_I = this.addItem(250,"catalyst_framework_i").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
+        CATALYST_FRAMEWORK_II = this.addItem(251,"catalyst_framework_ii").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
+        CATALYST_FRAMEWORK_III = this.addItem(252,"catalyst_framework_iii").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
+        CATALYST_FRAMEWORK_IV = this.addItem(253,"catalyst_framework_iv").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
+        CATALYST_FRAMEWORK_V = this.addItem(254,"catalyst_framework_v").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
+        CATALYST_FRAMEWORK_VI = this.addItem(255,"catalyst_framework_vi").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
 
 
         //快乐模具

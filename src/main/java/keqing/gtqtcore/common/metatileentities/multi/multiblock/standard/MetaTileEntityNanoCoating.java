@@ -57,6 +57,12 @@ public class MetaTileEntityNanoCoating extends MultiMapMultiblockController impl
     private int minvisa;
     private boolean visa;
 
+
+    //设备：纳米喷涂器 机制（同光刻 追加效能模式，模式下并行*2 耗时/2 限制电压为正常的-2）
+    // 配方：3D打印
+    // 精密喷涂（用于加工透镜玻璃 或者其他需要覆膜的精密材料 算力配方）
+    // 精密喷丝（编制滤网 催化剂框架 激光型算力配方）
+
     @Override
     public void addInformation(ItemStack stack, World world, List<String> tooltip, boolean advanced) {
         tooltip.add(I18n.format("gtqt.machine.stepper.1"));
@@ -68,7 +74,9 @@ public class MetaTileEntityNanoCoating extends MultiMapMultiblockController impl
     private IOpticalComputationProvider computationProvider;
     public MetaTileEntityNanoCoating(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{
-                GTQTcoreRecipeMaps.TD_PRINT_RECIPES
+                GTQTcoreRecipeMaps.TD_PRINT_RECIPES,
+                GTQTcoreRecipeMaps.PRECISION_SPRAYING,
+                GTQTcoreRecipeMaps.PRECISION_SPINNING
         });
         this.recipeMapWorkable = new LaserEngravingWorkableHandler(this);
     }
@@ -151,10 +159,10 @@ public class MetaTileEntityNanoCoating extends MultiMapMultiblockController impl
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
-                .aisle("JXXXXXXX", "JXXGGGGX","JXXGGGGX", "JXXGGGGX")
-                .aisle("JXXXXXXX", "JZZPPPPX","JZZ####X", "JXXGGGGX")
-                .aisle("JXXXXXXX", "JZZPPPPX","JZZ####X", "JXXGGGGX")
-                .aisle("JXXXXXXX", "JCSGGGGX","JXXGGGGX", "JXXGGGGX")
+                .aisle("JXXXXXXXXJ", "JXXGGGGXXJ","JXXGGGGXXJ", "JXXGGGGXXJ")
+                .aisle("JXXXXXXXXJ", "JZZPPPPZZJ","JZZ####ZZJ", "JXXGGGGXXJ")
+                .aisle("JXXXXXXXXJ", "JZZPPPPZZJ","JZZ####ZZJ", "JXXGGGGXXJ")
+                .aisle("JXXXXXXXXJ", "JCSGGGGXXJ","JXXGGGGXXJ", "JXXGGGGXXJ")
                 .where('S', selfPredicate())
                 .where('C', abilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION))
                 .where('X', TiredTraceabilityPredicate.CP_CASING.setMinGlobalLimited(40).or(autoAbilities()))
