@@ -111,6 +111,7 @@ public class ELE {
                 .input(plate,Steel, 8)
                 .input(frameGt,Steel, 8)
                 .fluidInputs(Polyethylene.getFluid(L * 4))
+                .circuitMeta(5)
                 .outputs(GTQTMetaBlocks.ELECTROBATH.getItemVariant(GTQTElectrobath.CasingType.DRILL_HEAD_LV))
                 .duration(2000).EUt(30).buildAndRegister();
 
@@ -120,6 +121,7 @@ public class ELE {
                 .input(plate,Aluminium, 8)
                 .input(frameGt,Aluminium, 8)
                 .fluidInputs(PolyvinylChloride.getFluid(L * 4))
+                .circuitMeta(5)
                 .outputs(GTQTMetaBlocks.ELECTROBATH.getItemVariant(GTQTElectrobath.CasingType.DRILL_HEAD_MV))
                 .duration(200).EUt(120).buildAndRegister();
 
@@ -129,15 +131,17 @@ public class ELE {
                 .input(plate,StainlessSteel, 8)
                 .input(frameGt,StainlessSteel, 8)
                 .fluidInputs(Epoxy.getFluid(L * 4))
+                .circuitMeta(5)
                 .outputs(GTQTMetaBlocks.ELECTROBATH.getItemVariant(GTQTElectrobath.CasingType.DRILL_HEAD_HV))
                 .duration(200).EUt(480).buildAndRegister();
 
         ASSEMBLER_RECIPES.recipeBuilder()
                 .inputs(HULL[4].getStackForm())
                 .input(ELECTRIC_MOTOR_EV, 4)
-                .input(plate,TitanSteel, 8)
-                .input(frameGt,TitanSteel, 8)
+                .input(plate,Titanium, 8)
+                .input(frameGt,Titanium, 8)
                 .fluidInputs(ReinforcedEpoxyResin.getFluid(L * 4))
+                .circuitMeta(5)
                 .outputs(GTQTMetaBlocks.ELECTROBATH.getItemVariant(GTQTElectrobath.CasingType.DRILL_HEAD_EV))
                 .duration(200).EUt(1960).buildAndRegister();
 

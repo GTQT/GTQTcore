@@ -231,10 +231,9 @@ public class MetaTileEntityCrackingUnit extends GTQTRecipeMapMultiblockOverwrite
     }
 
     @SideOnly(Side.CLIENT)
-
     @Override
     protected ICubeRenderer getFrontOverlay() {
-        return Textures.CRACKING_UNIT_OVERLAY;
+        return GTQTTextures.ALGAE_FARM_OVERLAY;
     }
 
 

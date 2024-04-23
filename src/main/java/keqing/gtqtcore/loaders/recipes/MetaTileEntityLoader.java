@@ -558,6 +558,18 @@ public class MetaTileEntityLoader {
                 'P', MetaItems.ELECTRIC_PUMP_LV, 'C', new UnificationEntry(OrePrefix.circuit, LV),
                 'W', VOLTAGE_COIL_MV);
 
+        ModHandler.addShapedRecipe(true, "lager_grind", GTQTMetaTileEntities.LAGER_GRIND.getStackForm(), "WPW", "CMC",
+                "WPW",
+                'M', MACERATOR[1].getStackForm(),
+                'P', MetaItems.ELECTRIC_PUMP_LV, 'C', new UnificationEntry(OrePrefix.circuit, LV),
+                'W', ELECTRIC_PISTON_LV);
+
+        ModHandler.addShapedRecipe(true, "lager_forging", LAGER_FORGING.getStackForm(), "WPW", "CMC",
+                "WPW",
+                'M', FORGE_HAMMER[1].getStackForm(),
+                'P', MetaItems.ELECTRIC_PUMP_LV, 'C', new UnificationEntry(OrePrefix.circuit, LV),
+                'W', ELECTRIC_MOTOR_LV);
+
         ModHandler.addShapedRecipe(true, "assembler_line", GTQTMetaTileEntities.ASSEMBLY_LINE.getStackForm(), "PPP", "CMC",
                 "WCW", 'M', MetaTileEntities.HULL[GTValues.HV].getStackForm(), 'P',
                 EMITTER_HV, 'C', new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.HV), 'W',

@@ -154,7 +154,11 @@ public class MetaTileEntityAssemblyLine extends RecipeMapMultiblockController {
                 .where(' ', any());
         return pattern.build();
     }
-
+    @SideOnly(Side.CLIENT)
+    @Override
+    protected ICubeRenderer getFrontOverlay() {
+        return GTQTTextures.ALGAE_FARM_OVERLAY;
+    }
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
@@ -453,6 +457,6 @@ public class MetaTileEntityAssemblyLine extends RecipeMapMultiblockController {
             tooltip.add(I18n.format("gregtech.machine.assembly_line.tooltip_ordered_fluids"));
         tooltip.add(I18n.format("gtqt.machine.assembly_line.1"));
         tooltip.add(I18n.format("gtqt.machine.assembly_line.2"));
-
+        tooltip.add(I18n.format("友情提醒，我只能使用ULV级的总线仓口"));
     }
 }
