@@ -18,7 +18,6 @@ import gregtech.api.metatileentity.multiblock.IProgressBarMultiblock;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.MultiblockWithDisplayBase;
 import gregtech.api.pattern.*;
-import gregtech.api.unification.material.Materials;
 import gregtech.api.util.BlockInfo;
 import gregtech.api.util.TextComponentUtil;
 import gregtech.client.renderer.ICubeRenderer;
@@ -27,11 +26,6 @@ import gregtech.client.utils.TooltipHelper;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.blocks.MetaBlocks;
-import keqing.gtqtcore.api.GTQTValue;
-import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
-import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
-import keqing.gtqtcore.api.utils.GTQTUtil;
-import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -52,7 +46,7 @@ import javax.annotation.Nonnull;
 import java.util.*;
 
 import static gregtech.api.util.RelativeDirection.*;
-import static java.lang.Math.*;
+import static java.lang.Math.round;
 
 //动能电池2024.3.14v1.0
 public class MetaTileEntityGrayElectricPowerBank extends MultiblockWithDisplayBase implements IWorkable, IControllable, IProgressBarMultiblock {
@@ -204,7 +198,7 @@ public class MetaTileEntityGrayElectricPowerBank extends MultiblockWithDisplayBa
         super.addDisplayText(textList);
         textList.add(new TextComponentTranslation("======================="));
         textList.add(new TextComponentTranslation("gtqtcore.gepb.count",length,coilLevel));
-        textList.add(new TextComponentTranslation("gtqtcore.gepb.euMax",logic.euMax()/10000,eu));
+        textList.add(new TextComponentTranslation("gtqtcore.gepb.euMax",eu/10000,logic.euMax()/10000,(double)round(eu*10000/logic.euMax())/100));
         textList.add(new TextComponentTranslation("gtqtcore.gepb.eu1", inputEu, outputEu));
         textList.add(new TextComponentTranslation("gtqtcore.gepb.eu2", euplus));
         if (this.isWorkingEnabled){
@@ -238,14 +232,14 @@ public class MetaTileEntityGrayElectricPowerBank extends MultiblockWithDisplayBa
 
     @Override
     public TextureArea getProgressBarTexture(int index) {
-        return index == 0 ? GuiTextures.PROGRESS_BAR_HPCA_COMPUTATION : GuiTextures.PROGRESS_BAR_FUSION_HEAT;
+        return GuiTextures.PROGRESS_BAR_HPCA_COMPUTATION;
     }
 
     @Override
     public void addBarHoverText(List<ITextComponent> hoverList, int index) {
             ITextComponent cwutInfo = TextComponentUtil.stringWithColor(
                     TextFormatting.AQUA,
-                    (eu*1.0)+ " / " +  logic.euMax() + "EU");
+                    (eu/10000)+ " / " +  logic.euMax()/10000 + "万EU");
             hoverList.add(TextComponentUtil.translationWithColor(
                     TextFormatting.GRAY,
                     "gregtech.multiblock.battery.EU",
@@ -314,26 +308,18 @@ public class MetaTileEntityGrayElectricPowerBank extends MultiblockWithDisplayBa
     //储能上限计算
     protected class MetaTileEntityKineticEnergyBatteryLogic {
         private final MetaTileEntityGrayElectricPowerBank metaTileEntity;
-        int tier;
         public MetaTileEntityKineticEnergyBatteryLogic(MetaTileEntityGrayElectricPowerBank metaTileEntity, int tier) {
             this.metaTileEntity = metaTileEntity;
-            this.tier = tier;
         }
 
-        long wkcl = 0;
-        int flcl = 8 ;
-//        long zjcl = 0 ;
-
-
-        //外壳储能上限计算
+        //储能上限计算
         public long euMax() {
             long euMax;
-            euMax = 1000000L * coilLevel*length;
+            euMax = 10000000L *coilLevel* coilLevel*length;
             return euMax;
         }
 
     }
-
 
     //每t更新内容
     @Override
@@ -367,9 +353,9 @@ public class MetaTileEntityGrayElectricPowerBank extends MultiblockWithDisplayBa
             euDelta = inputEu - outputEu;
             if(eu>0){
                 timeCheck++;
+                euplus = (long) (eu * coilLevel * 0.002);
                 if(timeCheck == 1200) {
                     timeCheck = 0;
-                    euplus = (long) (eu * coilLevel * 0.0001);
                     eu = eu + euplus;
                 }
             }
