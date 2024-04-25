@@ -24,6 +24,7 @@ import gregtech.api.util.TextComponentUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.TooltipHelper;
+import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.GTQTValue;
@@ -49,22 +50,22 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import java.util.*;
+
 import static gregtech.api.util.RelativeDirection.*;
 import static java.lang.Math.*;
 
 //动能电池2024.3.14v1.0
-public class MetaTileEntityKineticEnergyBattery extends MultiblockWithDisplayBase implements IWorkable, IControllable, IProgressBarMultiblock {
+public class MetaTileEntityGrayElectricPowerBank extends MultiblockWithDisplayBase implements IWorkable, IControllable, IProgressBarMultiblock {
     //定义电压
     private int tier;
     int mod;
-    //定义外壳
-    private int casing;
     //定义线圈
     private int coilLevel;
     private int coilCount;
     private int length;
     private double speed;
-    private int eu=0;
+    private long eu=0;
+    private long euplus=0;
     private long inputEu = 0;
     private long outputEu = 0;
     private long euDelta = 0;
@@ -88,11 +89,10 @@ public class MetaTileEntityKineticEnergyBattery extends MultiblockWithDisplayBas
     @Override
     public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
-        tooltip.add(I18n.format("gtqtcore.multiblock.eke.tooltip.1"));
-        tooltip.add(I18n.format("gtqtcore.multiblock.eke.tooltip.2"));
-        tooltip.add(I18n.format("gtqtcore.multiblock.eke.tooltip.3"));
-        tooltip.add(I18n.format("gtqtcore.multiblock.eke.tooltip.4"));
-        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("把电存起来", new Object[0]));
+        tooltip.add(I18n.format("gtqtcore.multiblock.gepb.tooltip.1"));
+        tooltip.add(I18n.format("gtqtcore.multiblock.gepb.tooltip.2"));
+        tooltip.add(I18n.format("gtqtcore.multiblock.gepb.tooltip.3"));
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("钱存银行能生钱，电为什么不行", new Object[0]));
     }
 
 
@@ -100,20 +100,27 @@ public class MetaTileEntityKineticEnergyBattery extends MultiblockWithDisplayBas
 
     @Override
     protected BlockPattern createStructurePattern() {
-        FactoryBlockPattern pattern = FactoryBlockPattern.start(RIGHT,UP,FRONT)
-                .aisle("  B  ", "  B  ", "BBSBB", "  B  ", "  B  ")
-                .aisle("ABBBA", "BC CB", "B B B", "BC CB", "ABBBA").setRepeatable(1, 16)
-                .aisle("  B  ", "  B  ", "BBBBB", "  B  ", "  B  ")
-                .where('S', selfPredicate())
-                .where('A', states(MetaBlocks.FRAMES.get(Materials.Steel).getBlock(Materials.Steel)))
-                .where('B', TiredTraceabilityPredicate.CP_CASING.setMinGlobalLimited(20)
+        FactoryBlockPattern pattern = FactoryBlockPattern.start(RIGHT,FRONT,UP)
+                .aisle("AAAAAAAAAAA","AAAAAAAAAAA","AAAAAAAAAAA","AAAAAAAAAAA","AAAAAAAAAAA","AAAAAAAAAAA","AAAAAAAAAAA","AAAAAAAAAAA","AAAAAAAAAAA","AAAAAAAAAAA","AAAAAAAAAAA")
+                .aisle("AAAAASAAAAA","ABAABBBAABA","AABBABABBAA","AABBABABBAA","ABAABBBAABA","ABBBBBBBBBA","ABAABBBAABA","AABBABABBAA","AABBABABBAA","ABAABBBAABA","AAAAAAAAAAA")
+                .aisle("           "," BBBBBBBBB "," BBBAAABBB "," BBBABABBB "," BAABBBAAB "," BABBBBBAB "," BAABBBAAB "," BBBABABBB "," BBBAAABBB "," BBBBBBBBB ","           ")
+                .aisle("           ","           ","  BB   BB  ","  BBABABB  ","   ABBBA   ","   BBBBB   ","   ABBBA   ","  BBABABB  ","  BB   BB  ","           ","           ")
+                .aisle("           ","           ","  BB   BB  ","  BB B BB  ","    BBB    ","   BBBBB   ","    BBB    ","  BB B BB  ","  BB   BB  ","           ","           ").setRepeatable(1, 100)
+                .aisle("           ","           ","           ","     B     ","    BBB    ","   BBBBB   ","    BBB    ","     B     ","           ","           ","           ")
+                .aisle("           ","           ","           ","     B     ","    BBB    ","   BBBBB   ","    BBB    ","     B     ","           ","           ","           ")
+                .aisle("           ","           ","           ","           ","    BBB    ","    BBB    ","    BBB    ","           ","           ","           ","           ")
+                .aisle("           ","           ","           ","           ","    BBB    ","    BBB    ","    BBB    ","           ","           ","           ","           ")
+                .aisle("           ","           ","           ","           ","     B     ","    BBB    ","     B     ","           ","           ","           ","           ")
+                .aisle("           ","           ","           ","           ","     B     ","    BBB    ","     B     ","           ","           ","           ","           ")
+                .aisle("           ","           ","           ","           ","           ","     B     ","           ","           ","           ","           ","           ")
+                .aisle("           ","           ","           ","           ","           ","     B     ","           ","           ","           ","           ","           ")
+                .where('S',selfPredicate())
+                .where('A',states(MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STEEL_SOLID))
                         .or(abilities(MultiblockAbility.MAINTENANCE_HATCH).setMinGlobalLimited(1).setMaxGlobalLimited(1).setPreviewCount(1))
-//                        .or(abilities(MultiblockAbility.EXPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1))
-//                        .or(abilities(MultiblockAbility.IMPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1))
                         .or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(16).setPreviewCount(1))
                         .or(abilities(MultiblockAbility.OUTPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(16).setPreviewCount(1))
                 )
-                .where('C',coilPredicate())
+                .where('B',coilPredicate())
                 .where(' ',any());
 
         return pattern.build();
@@ -149,38 +156,7 @@ public class MetaTileEntityKineticEnergyBattery extends MultiblockWithDisplayBas
     @SideOnly(Side.CLIENT)
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
-        switch (this.casing) {
-            case (2) -> {
-                return Textures.SOLID_STEEL_CASING;
-            }
-            case (3) -> {
-                return Textures.FROST_PROOF_CASING;
-            }
-            case (4) -> {
-                return Textures.CLEAN_STAINLESS_STEEL_CASING;
-            }
-            case (5) -> {
-                return Textures.STABLE_TITANIUM_CASING;
-            }
-            case (6) -> {
-                return Textures.ROBUST_TUNGSTENSTEEL_CASING;
-            }
-            case (7) -> {
-                return GTQTTextures.PD_CASING;
-            }
-            case (8) -> {
-                return GTQTTextures.NQ_CASING;
-            }
-            case (9) -> {
-                return GTQTTextures.ST_CASING;
-            }
-            case (10) -> {
-                return GTQTTextures.AD_CASING;
-            }
-            default -> {
-                return Textures.BRONZE_PLATED_BRICKS;
-            }
-        }
+        return Textures.SOLID_STEEL_CASING;
     }
 
 
@@ -212,23 +188,14 @@ public class MetaTileEntityKineticEnergyBattery extends MultiblockWithDisplayBas
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
         initializeAbilities();
-        Object casing = context.get("ChemicalPlantCasingTiredStats");
         Object coilType = context.get("CoilType");
-        this.casing = GTQTUtil.getOrDefault(() -> casing instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)casing).getIntTier(),
-                0);
         if (coilType instanceof IHeatingCoilBlockStats) {
             this.coilLevel = ((IHeatingCoilBlockStats) coilType).getLevel();
         } else {
             this.coilLevel = BlockWireCoil.CoilType.CUPRONICKEL.getLevel();
         }
-
         coilCount = context.getInt("Count");
-
-        this.length = coilCount/4;
-
-        this.tier = this.casing;
-        this.writeCustomData(GTQTValue.UPDATE_TIER,buf -> buf.writeInt(this.casing));
+        this.length = (coilCount-195)/29;
     }
 
     //gui数据
@@ -236,25 +203,24 @@ public class MetaTileEntityKineticEnergyBattery extends MultiblockWithDisplayBas
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
         textList.add(new TextComponentTranslation("======================="));
-        textList.add(new TextComponentTranslation("gtqtcore.eke.count",length,casing,coilLevel));
-        textList.add(new TextComponentTranslation("gtqtcore.eke.euMax",logic.euMax()/10000,eu));
-        textList.add(new TextComponentTranslation("gtqtcore.eke.eu1",logic.speedMax(),(double)(round(speed*100))/100));
-        textList.add(new TextComponentTranslation("gtqtcore.eke.eu2", inputEu, outputEu));
+        textList.add(new TextComponentTranslation("gtqtcore.gepb.count",length,coilLevel));
+        textList.add(new TextComponentTranslation("gtqtcore.gepb.euMax",logic.euMax()/10000,eu));
+        textList.add(new TextComponentTranslation("gtqtcore.gepb.eu1", inputEu, outputEu));
+        textList.add(new TextComponentTranslation("gtqtcore.gepb.eu2", euplus));
         if (this.isWorkingEnabled){
             if (euDelta>0){
-                textList.add(new TextComponentTranslation("gtqtcore.eke.output1",euDelta,logic.powerMax()));
-                textList.add(new TextComponentTranslation("gtqtcore.eke.outputA",runDay,runTime,runMin,runS));
+                textList.add(new TextComponentTranslation("gtqtcore.gepb.output1",euDelta));
+                textList.add(new TextComponentTranslation("gtqtcore.gepb.outputA",runDay,runTime,runMin,runS));
             }
             if (euDelta<0){
-                textList.add(new TextComponentTranslation("gtqtcore.eke.output2",-euDelta,logic.powerMax()));
-                textList.add(new TextComponentTranslation("gtqtcore.eke.outputB",runDay,runTime,runMin,runS));
+                textList.add(new TextComponentTranslation("gtqtcore.gepb.output2",-euDelta));
+                textList.add(new TextComponentTranslation("gtqtcore.gepb.outputB",runDay,runTime,runMin,runS));
             }
             if (euDelta==0){
-                textList.add(new TextComponentTranslation("gtqtcore.eke.output3",logic.powerMax()));
-                textList.add(new TextComponentTranslation("gtqtcore.eke.outputC",runDay,runTime,runMin,runS));
+                textList.add(new TextComponentTranslation("gtqtcore.gepb.output3"));
             }
         }else {
-            textList.add(new TextComponentTranslation("gtqtcore.eke.output4",logic.powerMax()));
+            textList.add(new TextComponentTranslation("gtqtcore.gepb.output4"));
         }
         textList.add(new TextComponentTranslation("======================="));
     }
@@ -262,13 +228,12 @@ public class MetaTileEntityKineticEnergyBattery extends MultiblockWithDisplayBas
     //进度条
     @Override
     public int getNumProgressBars() {
-        return 2;
+        return 1;
     }
 
     @Override
     public double getFillPercentage(int index) {
-        return index == 0 ? (eu*1.0) / logic.euMax() :
-                (double)((round(speed*100))/100)/logic.speedMax();
+        return ((eu*1.0) / logic.euMax());
     }
 
     @Override
@@ -278,23 +243,14 @@ public class MetaTileEntityKineticEnergyBattery extends MultiblockWithDisplayBas
 
     @Override
     public void addBarHoverText(List<ITextComponent> hoverList, int index) {
-        if (index == 0) {
             ITextComponent cwutInfo = TextComponentUtil.stringWithColor(
                     TextFormatting.AQUA,
-                    (eu*1.0)+ " / " +  logic.euMax() + " EU");
+                    (eu*1.0)+ " / " +  logic.euMax() + "EU");
             hoverList.add(TextComponentUtil.translationWithColor(
                     TextFormatting.GRAY,
                     "gregtech.multiblock.battery.EU",
                     cwutInfo));
-        } else {
-            ITextComponent tempInfo = TextComponentUtil.stringWithColor(
-                    TextFormatting.AQUA,
-                    (double)((round(speed*100))/100)+ " / " +  logic.speedMax() + " Rad/t");
-            hoverList.add(TextComponentUtil.translationWithColor(
-                    TextFormatting.GRAY,
-                    "gregtech.multiblock.battery.Rad",
-                    tempInfo));
-        }
+        
     }
     //按钮
     @Override
@@ -323,8 +279,7 @@ public class MetaTileEntityKineticEnergyBattery extends MultiblockWithDisplayBas
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setBoolean("isActive", isActive);
         data.setBoolean("isWorkingEnabled", isWorkingEnabled);
-        data.setInteger("Eu", eu);
-        data.setInteger("casing", casing);
+        data.setLong("Eu", eu);
         data.setInteger("mod", mod);
         data.setInteger("Speed", (int) speed);
         return  super.writeToNBT(data);
@@ -335,8 +290,7 @@ public class MetaTileEntityKineticEnergyBattery extends MultiblockWithDisplayBas
         super.readFromNBT(data);
         isActive = data.getBoolean("isActive");
         isWorkingEnabled = data.getBoolean("isWorkingEnabled");
-        eu = data.getInteger("Eu");
-        casing = data.getInteger("casing");
+        eu = data.getLong("Eu");
         mod = data.getInteger("mod");
         speed = data.getInteger("Speed");
 
@@ -346,7 +300,6 @@ public class MetaTileEntityKineticEnergyBattery extends MultiblockWithDisplayBas
         super.writeInitialSyncData(buf);
         buf.writeBoolean(isActive);
         buf.writeBoolean(isWorkingEnabled);
-        buf.writeInt(this.casing);
     }
 
     @Override
@@ -354,16 +307,15 @@ public class MetaTileEntityKineticEnergyBattery extends MultiblockWithDisplayBas
         super.receiveInitialSyncData(buf);
         isActive = buf.readBoolean();
         isWorkingEnabled = buf.readBoolean();
-        this.casing = buf.readInt();
     }
 
 
 
     //储能上限计算
     protected class MetaTileEntityKineticEnergyBatteryLogic {
-        private final MetaTileEntityKineticEnergyBattery metaTileEntity;
+        private final MetaTileEntityGrayElectricPowerBank metaTileEntity;
         int tier;
-        public MetaTileEntityKineticEnergyBatteryLogic(MetaTileEntityKineticEnergyBattery metaTileEntity, int tier) {
+        public MetaTileEntityKineticEnergyBatteryLogic(MetaTileEntityGrayElectricPowerBank metaTileEntity, int tier) {
             this.metaTileEntity = metaTileEntity;
             this.tier = tier;
         }
@@ -376,24 +328,9 @@ public class MetaTileEntityKineticEnergyBattery extends MultiblockWithDisplayBas
         //外壳储能上限计算
         public long euMax() {
             long euMax;
-            this.wkcl = (long) (9600000 * casing);
-//            this.zjcl = (long) (4800000 * 0);
-            euMax = ( wkcl ) * length;
+            euMax = 1000000L * coilLevel*length;
             return euMax;
         }
-        //飞轮转速上限计算
-        public long speedMax() {
-            long speedMax;
-            speedMax = (long) sqrt(euMax() / length);
-            return speedMax;
-        }
-        //飞轮充能功率上限计算
-        public long powerMax(){
-            long powerMax;
-            powerMax = (long) (length * pow(2,coilLevel)*32);
-            return powerMax;
-        }
-
 
     }
 
@@ -401,7 +338,7 @@ public class MetaTileEntityKineticEnergyBattery extends MultiblockWithDisplayBas
     //每t更新内容
     @Override
     protected void updateFormedValid() {
-        int store = 0;
+        long store;
         inputEu = 0;
         outputEu = 0;
         euDelta = 0;
@@ -414,48 +351,39 @@ public class MetaTileEntityKineticEnergyBattery extends MultiblockWithDisplayBas
         {
             if(this.inenergyContainer!=null && this.inenergyContainer.getEnergyStored()> 0 && logic.euMax() >= eu && eu >=0)
             {
-                store = (int) Math.min(Math.min(this.inenergyContainer.getEnergyStored(),logic.euMax() - eu),logic.powerMax());
+                store = Math.min(this.inenergyContainer.getEnergyStored(),logic.euMax() - eu);
                 inputEu = store;
                 this.inenergyContainer.changeEnergy(-store);
-                eu = (int) (eu + store);
+                eu = eu + store;
             }
 
-            store=0;
             if(this.outenergyContainer!=null  && eu>0)
             {
-                store = (int) Math.min(Math.min(this.outenergyContainer.getEnergyCapacity() - this.outenergyContainer.getEnergyStored(),eu),logic.powerMax());
+                store = Math.min(this.outenergyContainer.getEnergyCapacity() - this.outenergyContainer.getEnergyStored(),eu);
                 outputEu = store;
                 this.outenergyContainer.changeEnergy(store);
-                eu = (int) (eu - store);
+                eu = eu - store;
             }
             euDelta = inputEu - outputEu;
+            if(eu>0){
+                timeCheck++;
+                if(timeCheck == 1200) {
+                    timeCheck = 0;
+                    euplus = (long) (eu * coilLevel * 0.0001);
+                    eu = eu + euplus;
+                }
+            }
             if (euDelta>0){
                 runTick = (logic.euMax() - eu)/euDelta/20;
             }
             if (euDelta<0){
                 runTick = -eu/euDelta/20;
             }
-            if (euDelta == 0){
-                runTick = eu/logic.powerMax()/20;
-            }
             if (runTick !=0){
                 runDay = runTick /86400;
                 runTime = runTick %86400/3600;
                 runMin = runTick %86400%3600/60;
                 runS = runTick %86400%3600%60;
-            }
-            speed = sqrt(eu/length);
-            if(eu>logic.euMax()/100){
-                timeCheck++;
-                if(timeCheck == 12000) {
-                    timeCheck = 0;
-                    Random rand = new Random();
-                    double randomNum = rand.nextInt(10);
-                    randomNum = randomNum * 0.1;
-                    speed = speed - speed*0.001*randomNum;
-                    eu = (int)(round(speed * speed * length));
-                }
-
             }
         }
         euDelta = inputEu - outputEu;
@@ -512,24 +440,18 @@ public class MetaTileEntityKineticEnergyBattery extends MultiblockWithDisplayBas
     @Override
     public void receiveCustomData(int dataId, PacketBuffer buf) {
         super.receiveCustomData(dataId, buf);
-        if(dataId == GTQTValue.UPDATE_TIER){
-            this.casing = buf.readInt();
-        }
-        if(dataId == GTQTValue.REQUIRE_DATA_UPDATE){
-            this.writeCustomData(GTQTValue.UPDATE_TIER,buf1 -> buf1.writeInt(this.casing));
-        }
     }
 
 
 
     //未知用途
-    public MetaTileEntityKineticEnergyBattery(ResourceLocation metaTileEntityId) {
+    public MetaTileEntityGrayElectricPowerBank(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId);
         this.logic = new MetaTileEntityKineticEnergyBatteryLogic(this, tier);
     }
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {
-        return new MetaTileEntityKineticEnergyBattery(metaTileEntityId);
+        return new MetaTileEntityGrayElectricPowerBank(metaTileEntityId);
     }
 
 
