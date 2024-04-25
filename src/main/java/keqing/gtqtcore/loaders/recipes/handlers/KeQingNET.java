@@ -162,7 +162,7 @@ public class KeQingNET {
                 .input(plateDense, Aluminium, 4)
                 .output(EDATA_ACCESS_HATCH)
                 .fluidInputs(Polytetrafluoroethylene.getFluid(L * 2))
-                .duration(200).EUt(VA[EV]).buildAndRegister();
+                .duration(200).EUt(VA[HV]).buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(ITEM_IMPORT_BUS[UV])
@@ -191,6 +191,38 @@ public class KeQingNET {
                 .duration(4000).EUt(1960).buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(CENTRIFUGE[3],4)
+                .input(circuit, Tier.HV, 4)
+                .input(ELECTRIC_MOTOR_HV, 4)
+                .input(ROBOT_ARM_HV, 4)
+                .input(plateDense, NanometerBariumTitanate, 4)
+                .input(foil, Tcfour, 64)
+                .output(BIO_CENTRIFUGE)
+                .fluidInputs(SolderingAlloy.getFluid(L * 8))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 8))
+                .fluidInputs(Platinum.getFluid(L * 8))
+                .scannerResearch(b -> b
+                        .researchStack(CENTRIFUGE[3].getStackForm())
+                        .EUt(VA[HV]))
+                .duration(4000).EUt(1960).buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(BIOLOGICAL_REACTION,4)
+                .input(circuit, Tier.HV, 4)
+                .input(ELECTRIC_PUMP_HV, 4)
+                .input(ROBOT_ARM_HV, 4)
+                .input(plateDense, NanometerBariumTitanate, 4)
+                .input(foil, Tcfour, 64)
+                .output(ENZYMES_REACTOR)
+                .fluidInputs(SolderingAlloy.getFluid(L * 8))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 8))
+                .fluidInputs(Palladium.getFluid(L * 8))
+                .scannerResearch(b -> b
+                        .researchStack(BIOLOGICAL_REACTION.getStackForm())
+                        .EUt(VA[HV]))
+                .duration(4000).EUt(1960).buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .inputs(HULL[2].getStackForm())
                 .input(EMITTER_MV, 4)
                 .input(SENSOR_MV, 4)
@@ -199,7 +231,7 @@ public class KeQingNET {
                 .input(foil, Aluminium, 64)
                 .input(OPTICAL_PIPES[0], 8)
                 .fluidInputs(SolderingAlloy.getFluid(L * 4))
-                .fluidInputs(Polybenzimidazole.getFluid(L * 4))
+                .fluidInputs(Polyethylene.getFluid(L * 4))
                 .output(KQNS)
                 .scannerResearch(b -> b
                         .researchStack(DISK_0.getStackForm())
@@ -237,7 +269,59 @@ public class KeQingNET {
                 .output(TOOL_DATA_STICK)
                 .solderMultiplier(2)
                 .duration(1000).EUt(120).buildAndRegister();
-
+        //BIOLOGICAL_REACTION
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .inputs(HULL[3].getStackForm(16))
+                .input(circuit, Tier.MV, 8)
+                .input(ELECTRIC_MOTOR_MV,16)
+                .input(ELECTRIC_PUMP_MV,16)
+                .input(rotor,Steel,8)
+                .input(QUANTUM_TANK[1], 4)
+                .input(pipeHugeFluid, Steel, 4)
+                .input(plate, Aluminium, 8)
+                .fluidInputs(Polytetrafluoroethylene.getFluid(4000))
+                .fluidInputs(Aluminium.getFluid(4000))
+                .scannerResearch(b -> b
+                        .researchStack(SEPTIC_TANK.getStackForm())
+                        .duration(1200)
+                        .EUt(VA[MV]))
+                .output(BIOLOGICAL_REACTION)
+                .duration(200).EUt(120).buildAndRegister();
+        //DIGESTER
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .inputs(HULL[3].getStackForm(16))
+                .input(circuit, Tier.HV, 8)
+                .input(ELECTRIC_MOTOR_HV,16)
+                .input(VOLTAGE_COIL_HV,16)
+                .input(rotor,StainlessSteel,8)
+                .input(QUANTUM_TANK[2], 4)
+                .input(pipeHugeFluid, Polytetrafluoroethylene, 4)
+                .input(plate, NanometerBariumTitanate, 8)
+                .fluidInputs(Polytetrafluoroethylene.getFluid(4000))
+                .fluidInputs(TungstenSteel.getFluid(4000))
+                .scannerResearch(b -> b
+                        .researchStack(REACTION_FURNACE.getStackForm())
+                        .duration(1200)
+                        .EUt(VA[MV]))
+                .output(DIGESTER)
+                .duration(2000).EUt(480).buildAndRegister();
+        //ALGAE_FARM
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .inputs(HULL[3].getStackForm(16))
+                .input(circuit, Tier.HV, 8)
+                .input(ELECTRIC_PUMP_HV,16)
+                .input(VOLTAGE_COIL_MV,16)
+                .input(gear,StainlessSteel,8)
+                .input(RANDOM_ACCESS_MEMORY, 4)
+                .input(wireFine, Aluminium, 8)
+                .input(foil, Aluminium, 8)
+                .fluidInputs(Polytetrafluoroethylene.getFluid(4000))
+                .scannerResearch(b -> b
+                        .researchStack(BIOLOGICAL_REACTION.getStackForm())
+                        .duration(1200)
+                        .EUt(VA[HV]))
+                .output(ALGAE_FARM)
+                .duration(2000).EUt(480).buildAndRegister();
         //op
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .inputs(HULL[3].getStackForm(16))
@@ -248,7 +332,7 @@ public class KeQingNET {
                 .input(RANDOM_ACCESS_MEMORY, 4)
                 .input(wireFine, Aluminium, 8)
                 .input(foil, Aluminium, 8)
-                .fluidInputs(Polybenzimidazole.getFluid(4000))
+                .fluidInputs(Polytetrafluoroethylene.getFluid(4000))
                 .scannerResearch(b -> b
                         .researchStack(MACERATOR[3].getStackForm())
                         .duration(1200)
@@ -774,7 +858,7 @@ public class KeQingNET {
                 .notConsumable(SENSOR_HV)
                 .output(DISK_8)
                 .EUt(480)
-                .CWUt(120)
+                .CWUt(30)
                 .NB(8)
                 .totalCWU(100000)
                 .buildAndRegister();

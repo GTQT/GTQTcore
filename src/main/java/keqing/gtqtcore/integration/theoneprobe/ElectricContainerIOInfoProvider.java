@@ -30,7 +30,7 @@ public class ElectricContainerIOInfoProvider extends ElectricContainerInfoProvid
 
         if(inA>0) {
             probeInfo.text("{*gtqt.top.in*}");
-            probeInfo.text(" " + TextFormatting.BLUE + inA + "EU/t * " + inB + "A // " + TextFormatting.RED+inC+ "EU/s");
+            probeInfo.text(" " + TextFormatting.BLUE + inA + "EU/t * " + inB + "A // " + TextFormatting.RED+inC/20+ "EU/t");
         }
 
         long onA=capability.getOutputVoltage();
@@ -40,7 +40,9 @@ public class ElectricContainerIOInfoProvider extends ElectricContainerInfoProvid
         if(onA>0)
         {
             probeInfo.text("{*gtqt.top.on*}");
-            probeInfo.text(" " + TextFormatting.BLUE + onA + "EU/t * " + onB + "A // " + TextFormatting.RED+onC+"EU/s");
+            probeInfo.text(" " + TextFormatting.BLUE + onA + "EU/t * " + onB + "A // " + TextFormatting.RED+onC/20+"EU/t");
         }
+
+
     }
 }

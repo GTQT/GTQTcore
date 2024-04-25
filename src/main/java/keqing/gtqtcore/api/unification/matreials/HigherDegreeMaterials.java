@@ -21,9 +21,19 @@ public class HigherDegreeMaterials {
     private static int startId = 20600;
     private static final int END_ID = startId + 300;
 
+    private static int NewstartId = 23000;
+    private static final int NewEND_ID = startId + 1000;
+
     private static int getMaterialsId() {
         if (startId < END_ID) {
             return startId++;
+        }
+        throw new ArrayIndexOutOfBoundsException();
+    }
+
+    private static int NewgetMaterialsId() {
+        if (NewstartId < NewEND_ID) {
+            return NewstartId++;
         }
         throw new ArrayIndexOutOfBoundsException();
     }

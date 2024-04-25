@@ -251,6 +251,6 @@ public class MetaTileEntityVacuumFreezer extends GTQTRecipeMapMultiblockOverwrit
     @SideOnly(Side.CLIENT)
     @Override
     protected ICubeRenderer getFrontOverlay() {
-        return Textures.VACUUM_FREEZER_OVERLAY;
+        return GTQTTextures.ALGAE_FARM_OVERLAY;
     }
 }

@@ -1,9 +1,11 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.kqcc;
 
 import gregtech.api.GTValues;
+import gregtech.api.capability.IEnergyContainer;
 import gregtech.api.capability.IOpticalComputationHatch;
 import gregtech.api.capability.IOpticalComputationProvider;
 import gregtech.api.capability.IOpticalComputationReceiver;
+import gregtech.api.capability.impl.EnergyContainerList;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
@@ -16,6 +18,7 @@ import gregtech.api.util.TextComponentUtil;
 import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
+import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.BlockComputerCasing;
 import gregtech.common.blocks.MetaBlocks;
 
@@ -28,6 +31,7 @@ import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
@@ -51,16 +55,18 @@ public class MetaTileEntityKQNetworkSwitch extends MetaTileEntityDataBank implem
     private int casing_tier;
     int tire;
     private static final int EUT_PER_HATCH = VA[GTValues.IV];
-
+    private IEnergyContainer energyContainer;
     private final MultipleComputationHandler computationHandler = new MultipleComputationHandler();
 
     public MetaTileEntityKQNetworkSwitch(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId);
+        this.energyContainer = new EnergyContainerList(new ArrayList<>());
     }
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityKQNetworkSwitch(metaTileEntityId);
+
     }
 
     @Override
@@ -82,6 +88,7 @@ public class MetaTileEntityKQNetworkSwitch extends MetaTileEntityDataBank implem
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
+        this.energyContainer = new EnergyContainerList(getAbilities(MultiblockAbility.INPUT_ENERGY));
         computationHandler.onStructureForm(
                 getAbilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION),
                 getAbilities(MultiblockAbility.COMPUTATION_DATA_TRANSMISSION));
@@ -95,7 +102,7 @@ public class MetaTileEntityKQNetworkSwitch extends MetaTileEntityDataBank implem
                 0);
 
         this.writeCustomData(GTQTValue.UPDATE_TIER,buf -> buf.writeInt(this.casing_tier));
-        this.tire=Math.min(this.casing_tier,this.laser_tier);
+        this.tire=Math.min(this.casing_tier,this.laser_tier*2);
     }
 
     @Override
@@ -105,9 +112,45 @@ public class MetaTileEntityKQNetworkSwitch extends MetaTileEntityDataBank implem
     }
 
     @Override
-    protected int getEnergyUsage() {
-        return isStructureFormed() ? computationHandler.getEUt() : 0;
+    public void update() {
+        super.update();
+        consumeEnergy();
     }
+    @Override
+    protected int getEnergyUsage() {
+        return isStructureFormed() ? computationHandler.getEUt()/128 : 0;
+    }
+
+    private boolean hasNotEnoughEnergy;
+    private boolean isWorkingEnabled;
+    private void consumeEnergy() {
+        int energyToConsume =  getEnergyUsage();
+        boolean hasMaintenance = ConfigHolder.machines.enableMaintenance && hasMaintenanceMechanics();
+        if (hasMaintenance) {
+            // 10% more energy per maintenance problem
+            energyToConsume += getNumMaintenanceProblems() * energyToConsume / 10;
+        }
+
+        if (this.hasNotEnoughEnergy && energyContainer.getInputPerSec() > 19L * energyToConsume) {
+            this.hasNotEnoughEnergy = false;
+        }
+
+        if (this.energyContainer.getEnergyStored() >= energyToConsume) {
+            if (!hasNotEnoughEnergy) {
+                long consumed = this.energyContainer.removeEnergy(energyToConsume);
+                if (consumed == -energyToConsume) {
+                    isWorkingEnabled=true;
+                } else {
+                    this.hasNotEnoughEnergy = true;
+                    isWorkingEnabled=false;
+                }
+            }
+        } else {
+            this.hasNotEnoughEnergy = true;
+            isWorkingEnabled=false;
+        }
+    }
+
     public int vacwu()
     {
         if(tire<=2)return 0;
@@ -116,16 +159,14 @@ public class MetaTileEntityKQNetworkSwitch extends MetaTileEntityDataBank implem
     @Override
     public int requestCWUt(int cwut, boolean simulate,  Collection<IOpticalComputationProvider> seen) {
         seen.add(this);
-        if(computationHandler.requestCWUt(cwut, simulate, seen)>vacwu())
-        return isActive() && !hasNotEnoughEnergy ? computationHandler.requestCWUt(cwut, simulate, seen) : 0;
-        else return 0;
+        return isActive() ? computationHandler.requestCWUt(cwut, simulate, seen) : 0;
     }
 
     @Override
     public int getMaxCWUt( Collection<IOpticalComputationProvider> seen) {
         seen.add(this);
         if(computationHandler.getMaxCWUt(seen)>vacwu())
-        return isStructureFormed() ? computationHandler.getMaxCWUt(seen) : 0;
+        return isWorkingEnabled() ? computationHandler.getMaxCWUt(seen) : 0;
         else return 0;
     }
 
@@ -151,7 +192,27 @@ public class MetaTileEntityKQNetworkSwitch extends MetaTileEntityDataBank implem
                         .or(abilities(MultiblockAbility.COMPUTATION_DATA_TRANSMISSION).setMinGlobalLimited(1, 1)))
                 .build();
     }
+    @Override
+    public NBTTagCompound writeToNBT(NBTTagCompound data) {
+        data.setInteger("casing_tier", casing_tier);
+        return super.writeToNBT(data);
+    }
+    @Override
+    public void readFromNBT(NBTTagCompound data) {
+        super.readFromNBT(data);
+        casing_tier = data.getInteger("casing_tier");
+    }
+    @Override
+    public void writeInitialSyncData(PacketBuffer buf) {
+        super.writeInitialSyncData(buf);
+        buf.writeInt(this.casing_tier);
+    }
 
+    @Override
+    public void receiveInitialSyncData(PacketBuffer buf) {
+        super.receiveInitialSyncData(buf);
+        this.casing_tier = buf.readInt();
+    }
     @SideOnly(Side.CLIENT)
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
         switch (this.casing_tier) {
@@ -203,8 +264,9 @@ public class MetaTileEntityKQNetworkSwitch extends MetaTileEntityDataBank implem
         tooltip.add(I18n.format("gregtech.machine.network_switch.tooltip.1"));
         tooltip.add(I18n.format("gregtech.machine.network_switch.tooltip.2"));
         tooltip.add(I18n.format("gregtech.machine.network_switch.tooltip.3"));
+        tooltip.add(I18n.format("gtqtcore.machine.network_switch.tooltip.1"));
         tooltip.add(I18n.format("gregtech.machine.network_switch.tooltip.4",
-                TextFormattingUtil.formatNumbers(EUT_PER_HATCH)));
+                TextFormattingUtil.formatNumbers(EUT_PER_HATCH/128)));
     }
 
     @Override
@@ -248,7 +310,7 @@ public class MetaTileEntityKQNetworkSwitch extends MetaTileEntityDataBank implem
             reset();
             this.providers.addAll(providers);
             this.transmitters.addAll(transmitters);
-            this.EUt = (providers.size() + transmitters.size()) * EUT_PER_HATCH;
+            this.EUt = (providers.size() + transmitters.size()) * EUT_PER_HATCH/128;
         }
 
         private void reset() {

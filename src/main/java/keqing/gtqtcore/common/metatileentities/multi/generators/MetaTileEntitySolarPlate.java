@@ -1,16 +1,19 @@
 package keqing.gtqtcore.common.metatileentities.multi.generators;
 
 
+import codechicken.lib.render.CCRenderState;
+import codechicken.lib.render.pipeline.IVertexOperation;
+import codechicken.lib.vec.Matrix4;
 import gregtech.api.GTValues;
 import gregtech.api.capability.GregtechCapabilities;
 import gregtech.api.capability.IEnergyContainer;
+import gregtech.api.capability.impl.EnergyContainerList;
 import gregtech.api.capability.impl.MultiblockFuelRecipeLogic;
+import gregtech.api.gui.GuiTextures;
+import gregtech.api.gui.resources.TextureArea;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
-import gregtech.api.metatileentity.multiblock.FuelMultiblockController;
-import gregtech.api.metatileentity.multiblock.IMultiblockPart;
-import gregtech.api.metatileentity.multiblock.MultiblockAbility;
-import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
+import gregtech.api.metatileentity.multiblock.*;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
@@ -48,25 +51,65 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 
 import java.util.List;
+import java.util.Random;
 
 import static gregtech.api.GTValues.*;
 
-public class MetaTileEntitySolarPlate extends FuelMultiblockController {
+public class MetaTileEntitySolarPlate extends MultiblockWithDisplayBase implements  IProgressBarMultiblock {
 
+    private IEnergyContainer energyContainer;
     public MetaTileEntitySolarPlate(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, GTQTcoreRecipeMaps.SOLAR_PLATE, HV);
-        this.recipeMapWorkable = new SolarPlateWorkableHandler(this);
-        this.recipeMapWorkable.setMaximumOverclockVoltage(V[HV]);
+        super(metaTileEntityId);
     }
 
+    @Override
+    protected void updateFormedValid() {
+        isWorkingEnabled=checkNaturalLighting()&&clear();
+        if(isWorkingEnabled) this.energyContainer.addEnergy(geteu());
+    }
+    private long geteu()
+    {
+        Random rand = new Random();
+        int randomNum = rand.nextInt(40);
+        return ((long) VA[tier + 3] * 2 *(randomNum+80)/100);
+    }
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntitySolarPlate(metaTileEntityId);
     }
+
+
+    @Override
+    public int getNumProgressBars() {
+        return 1;
+    }
+
+
+    @Override
+    public double getFillPercentage(int index) {
+        return  (double)geteu()/(VA[tier + 3] * 2.4);
+    }
+
+    @Override
+    public TextureArea getProgressBarTexture(int index) {
+        return GuiTextures.PROGRESS_BAR_HPCA_COMPUTATION;
+    }
+
+    @Override
+    public void addBarHoverText(List<ITextComponent> hoverList, int index) {
+        ITextComponent cwutInfo = TextComponentUtil.stringWithColor(
+                TextFormatting.AQUA,
+                geteu()+ " / " + VA[tier + 3] * 2.4 + " EU/t");
+        hoverList.add(TextComponentUtil.translationWithColor(
+                TextFormatting.GRAY,
+                "gregtech.multiblock.wps.computation",
+                cwutInfo));
+    }
+
+
+
     int tier;
-
-
-
+    private boolean isWorkingEnabled;
     @Nonnull
     @Override
     protected BlockPattern createStructurePattern() {
@@ -80,16 +123,7 @@ public class MetaTileEntitySolarPlate extends FuelMultiblockController {
                 .where('X', selfPredicate())
                 .where('S', TiredTraceabilityPredicate.CP_SP_CASING)
                 .where('C', states(GTQTMetaBlocks.ELECTROBATH.getState(GTQTElectrobath.CasingType.SOLAR_PLATE_CASING))
-                        .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setMinGlobalLimited(1).setPreviewCount(1))
-                        .or(metaTileEntities(MultiblockAbility.REGISTRY.get(MultiblockAbility.OUTPUT_ENERGY).stream()
-                                .filter(mte -> {
-                                    IEnergyContainer container = mte.getCapability(GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER, null);
-                                    return     container.getOutputVoltage() == GTValues.V[LV]
-                                            || container.getOutputVoltage() == GTValues.V[MV]
-                                            || container.getOutputVoltage() == GTValues.V[HV];
-
-                                })
-                                .toArray(MetaTileEntity[]::new)).setExactLimit(1).setPreviewCount(1)))
+                        .or(abilities(MultiblockAbility.OUTPUT_ENERGY).setMaxGlobalLimited(4)))
                 .build();
     }
     @Override
@@ -118,7 +152,7 @@ public class MetaTileEntitySolarPlate extends FuelMultiblockController {
     }
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
-        textList.add(new TextComponentTranslation("gtqtcore.tire", tier));
+        textList.add(new TextComponentTranslation("gtqtcore.tire", tier-3));
     }
     @Override
     public boolean hasMufflerMechanics() {
@@ -127,14 +161,12 @@ public class MetaTileEntitySolarPlate extends FuelMultiblockController {
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
+        this.energyContainer = new EnergyContainerList(getAbilities(MultiblockAbility.OUTPUT_ENERGY));
         Object tier = context.get("SPTiredStats");
         this.tier = GTQTUtil.getOrDefault(() -> tier instanceof WrappedIntTired,
                 () -> ((WrappedIntTired)tier).getIntTier(),
                 0);
         this.writeCustomData(GTQTValue.UPDATE_TIER, buf -> buf.writeInt(this.tier));
-    }
-    public long getMaxVoltage() {
-        return  VA[tier];
     }
 
     @SideOnly(Side.CLIENT)
@@ -149,7 +181,15 @@ public class MetaTileEntitySolarPlate extends FuelMultiblockController {
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
         return GTQTTextures.SOLAR_PLATE_CASING;
     }
-
+    private boolean isWorkingEnabled() {
+        return isWorkingEnabled;
+    }
+    @Override
+    public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
+        super.renderMetaTileEntity(renderState, translation, pipeline);
+        getFrontOverlay().renderOrientedState(renderState, translation, pipeline, getFrontFacing(), this.isActive(),
+                this.isWorkingEnabled());
+    }
     public boolean checkNaturalLighting() {
 
         if (!this.getWorld().isDaytime())
@@ -174,29 +214,4 @@ public class MetaTileEntitySolarPlate extends FuelMultiblockController {
         return true;
     }
 
-    public  class  SolarPlateWorkableHandler extends MultiblockFuelRecipeLogic {
-
-
-
-        public SolarPlateWorkableHandler(RecipeMapMultiblockController tileEntity) {
-            super(tileEntity);
-        }
-
-        @Override
-        public long getMaxVoltage() {
-                return VA[tier];
-        }
-        @Override
-        protected void updateRecipeProgress() {
-            if (canRecipeProgress) {
-                if(checkNaturalLighting()&&clear()) {
-                    drawEnergy(recipeEUt, false);
-                    if (++progressTime > maxProgressTime) {
-                        completeRecipe();
-                    }
-                }
-            }
-        }
-
-    }
 }

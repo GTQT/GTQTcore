@@ -151,7 +151,7 @@ public class GCYSFirstDegreeMaterials {
                 .setFormula("(NH4)2PdCl6", true);
 
         SodiumNitrate = new Material.Builder(3519, gregtechId("sodium_nitrate"))
-                .dust()
+                .dust().fluid()
                 .color(0x846684)
                 .iconSet(MaterialIconSet.ROUGH)
                 .components(Sodium, 1, Nitrogen, 1, Oxygen, 3)

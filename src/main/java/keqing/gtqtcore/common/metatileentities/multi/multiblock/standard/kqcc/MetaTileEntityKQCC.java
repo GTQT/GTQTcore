@@ -209,7 +209,7 @@ public class MetaTileEntityKQCC extends MultiblockWithDisplayBase implements IOp
     @Override
     public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
         super.renderMetaTileEntity(renderState, translation, pipeline);
-        getFrontOverlay().renderOrientedState(renderState, translation, pipeline, getFrontFacing(), this.isActive(),
+        getFrontOverlay().renderOrientedState(renderState, translation, pipeline, getFrontFacing(), true,
                 this.isWorkingEnabled());
     }
 

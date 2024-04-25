@@ -11,6 +11,7 @@ import keqing.gtqtcore.api.unification.GTQTMaterials;
 
 import static gregtech.api.GTValues.*;
 import static gregtech.api.GTValues.UHV;
+import static gregtech.api.fluids.attribute.FluidAttributes.ACID;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.Materials.Tetranitromethane;
 import static gregtech.api.unification.material.info.MaterialFlags.*;
@@ -31,7 +32,7 @@ public class FirstDegreeMaterials {
     }
 
     private static int startId = 20000;
-    private static final int END_ID = startId + 300;
+    private static final int END_ID = startId + 1000;
 
     private static int getMaterialsId() {
         if (startId < END_ID) {
@@ -369,7 +370,7 @@ public class FirstDegreeMaterials {
                 .components(Barium, 1, Titanium, 1, Oxygen, 3)
                 .flags(DISABLE_DECOMPOSITION)
                 .blast(4500,MID)
-                .flags(GENERATE_PLATE, GENERATE_DENSE, GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_RING, GENERATE_ROUND, GENERATE_BOLT_SCREW, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR)
+                .flags(GENERATE_PLATE, GENERATE_DENSE, GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_RING, GENERATE_ROUND, GENERATE_BOLT_SCREW, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR,GENERATE_FOIL)
                 .build();
 
         //海绵钛
@@ -975,7 +976,7 @@ public class FirstDegreeMaterials {
 
         //  25103 Zylon
         GTQTMaterials.Zylon = new Material.Builder(getMaterialsId(), gregtechId("zylon"))
-                .polymer()
+                .polymer().fluid()
                 .color(0xFFE000)
                 .iconSet(SHINY)
                 .flags(DISABLE_DECOMPOSITION, NO_SMASHING, NO_SMELTING, GENERATE_PLATE, GENERATE_FOIL)
@@ -2150,8 +2151,417 @@ public class FirstDegreeMaterials {
         GTQTMaterials.Tcfour = new Material.Builder(getMaterialsId(), gregtechId("tcfour"))
                 .fluid()
                 .color(0xFF7F00)
+                .blast(3600,MID)
                 .components(Titanium,6,Aluminium,4,Vanadium,1)
+                .flags(DISABLE_DECOMPOSITION,GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_DENSE, GENERATE_LONG_ROD, GENERATE_ROD, GENERATE_FRAME, GENERATE_BOLT_SCREW, GENERATE_FOIL, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_ROUND, GENERATE_SPRING)
+                .build();
+
+        //生物原油
+        GTQTMaterials.Biooil = new Material.Builder(getMaterialsId(), gregtechId("biooil"))
+                .fluid()
+                .color(0xFA8072)
                 .flags(DISABLE_DECOMPOSITION)
                 .build();
+
+        //快乐细菌
+        //原始杂质
+        GTQTMaterials.Enzymesaz = new Material.Builder(getMaterialsId(), gregtechId("enzymesaz"))
+                .fluid()
+                .color(0xCDAA7D)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        GTQTMaterials.Enzymesbz = new Material.Builder(getMaterialsId(), gregtechId("enzymesbz"))
+                .fluid()
+                .color(0xCD8162)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        GTQTMaterials.Enzymescz = new Material.Builder(getMaterialsId(), gregtechId("enzymescz"))
+                .fluid()
+                .color(0xD2691E)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        GTQTMaterials.Enzymesdz = new Material.Builder(getMaterialsId(), gregtechId("enzymesdz"))
+                .fluid()
+                .color(0x68228B)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        GTQTMaterials.Enzymesez = new Material.Builder(getMaterialsId(), gregtechId("enzymesez"))
+                .fluid()
+                .color(0x0000EE)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+        //这里注册线性方程组的几个基础解系
+        GTQTMaterials.Enzymesa = new Material.Builder(getMaterialsId(), gregtechId("enzymesa"))
+                .fluid()
+                .color(0xEE00EE)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("性状：1 0 0 0 0", true);
+
+        GTQTMaterials.Enzymesb = new Material.Builder(getMaterialsId(), gregtechId("enzymesb"))
+                .fluid()
+                .color(0xCD3333)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("性状：0 1 0 0 0", true);
+
+        GTQTMaterials.Enzymesc = new Material.Builder(getMaterialsId(), gregtechId("enzymesc"))
+                .fluid()
+                .color(0xB03060)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("性状：0 0 1 0 0", true);
+
+        GTQTMaterials.Enzymesd = new Material.Builder(getMaterialsId(), gregtechId("enzymesd"))
+                .fluid()
+                .color(0xB4EEB4)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("性状：0 0 0 1 0", true);
+
+        GTQTMaterials.Enzymese = new Material.Builder(getMaterialsId(), gregtechId("enzymese"))
+                .fluid()
+                .color(0xBDB76B)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("性状：0 0 0 0 1", true);
+
+        //富集生物培养基
+        GTQTMaterials.Rnzymes = new Material.Builder(getMaterialsId(), gregtechId("rnzymes"))
+                .fluid()
+                .color(0xFA8072)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //普适矿处菌种 101
+        GTQTMaterials.Enzymesaa = new Material.Builder(getMaterialsId(), gregtechId("enzymese_101"))
+                .fluid()
+                .color(0x00E5EE)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("性状：1 0 1 0 0", true);
+        //定向铂系菌种 102
+        GTQTMaterials.Enzymesab = new Material.Builder(getMaterialsId(), gregtechId("enzymese_102"))
+                .fluid()
+                .color(0x54FF9F)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("性状：1 0 1 1 0", true);
+        //普适魔性菌种 103
+        GTQTMaterials.Enzymesac = new Material.Builder(getMaterialsId(), gregtechId("enzymese_103"))
+                .fluid()
+                .color(0x6B8E23)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("性状：1 1 0 1 0", true);
+        //普适副产菌种 104
+        GTQTMaterials.Enzymesad = new Material.Builder(getMaterialsId(), gregtechId("enzymese_104"))
+                .fluid()
+                .color(0x76EE00)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("性状：1 1 0 1 1", true);
+        //
+        //工业合成菌种I 201
+        GTQTMaterials.Enzymesba = new Material.Builder(getMaterialsId(), gregtechId("enzymese_201"))
+                .fluid()
+                .color(0xA0522D)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("性状：2 1 1 3 1", true);
+        //工业还原菌种 202
+        GTQTMaterials.Enzymesbb = new Material.Builder(getMaterialsId(), gregtechId("enzymese_202"))
+                .fluid()
+                .color(0x9932CC)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("性状：1 2 3 1 1", true);
+        //工业氧化菌种 203
+        GTQTMaterials.Enzymesbc = new Material.Builder(getMaterialsId(), gregtechId("enzymese_203"))
+                .fluid()
+                .color(0x8FBC8F)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("性状：1 3 2 1 1", true);
+        //工业催化菌种 204
+        GTQTMaterials.Enzymesbd = new Material.Builder(getMaterialsId(), gregtechId("enzymese_204"))
+                .fluid()
+                .color(0x8B7D7B)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("性状：2 1 1 3 1", true);
+        //
+        //定向脂肪酶 301
+        GTQTMaterials.Enzymesca = new Material.Builder(getMaterialsId(), gregtechId("enzymese_301"))
+                .fluid()
+                .color(0x838B8B)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("性状：4 1 1 3 2", true);
+        //普适发酵酶 302
+        GTQTMaterials.Enzymescb = new Material.Builder(getMaterialsId(), gregtechId("enzymese_302"))
+                .fluid()
+                .color(0x8B008B)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("性状：2 4 2 3 1", true);
+        //定向发酵酶 303
+        GTQTMaterials.Enzymescc = new Material.Builder(getMaterialsId(), gregtechId("enzymese_303"))
+                .fluid()
+                .color(0x8A2BE2)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("性状：2 3 2 4 1", true);
+        //
+        //活性诱变酶 401
+        GTQTMaterials.Enzymesda = new Material.Builder(getMaterialsId(), gregtechId("enzymese_401"))
+                .fluid()
+                .color(0x8B0000)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("性状：2 5 2 4 3", true);
+
+        //四氢呋喃
+        GTQTMaterials.THF = new Material.Builder(getMaterialsId(), gregtechId("thf"))
+                .fluid()
+                .color(0x66CD00)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("C4H8O", true);
+        //5-羟甲基糠醛
+        GTQTMaterials.Hydroxymethylfurfural = new Material.Builder(getMaterialsId(), gregtechId("hydroxymethylfurfural"))
+                .fluid()
+                .color(0x7A378B)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("C6H8O3", true);
+        //2,5-二甲基呋喃
+        GTQTMaterials.Methylfuran = new Material.Builder(getMaterialsId(), gregtechId("methylfuran"))
+                .fluid()
+                .color(0xA0522D)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("C5H6O", true);
+        //2-环己胺基乙磺酸
+        GTQTMaterials.CHES = new Material.Builder(getMaterialsId(), gregtechId("ches"))
+                .fluid()
+                .color(0xCD3278)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("C8H17NO3S", true);
+        //环己胺基乙磺酸钠
+        GTQTMaterials.Ethanesulphonate  = new Material.Builder(getMaterialsId(), gregtechId("ethanesulphonate "))
+                .fluid()
+                .color(0xCDAA7D)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("C8H16NNaO3S", true);
+        //冷却液
+        GTQTMaterials.GelidCryotheum = new Material.Builder(getMaterialsId(), gregtechId("gelid_cryotheum"))
+                .liquid(new FluidBuilder().temperature(8).customStill().customFlow())
+                .color(0x40B8FB)
+                .components(Ice, 2, Electrotine, 1, Water, 1)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        GTQTMaterials.SodiumPhosphomolybdate = new Material.Builder(getMaterialsId(), gregtechId("sodium_phosphomolybdate"))
+                .dust()
+                .color(0xF3E0A8)
+                .iconSet(BRIGHT)
+                .components(Oxygen, 40, Molybdenum, 12, Sodium, 3, Phosphorus, 1)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("(MoO3)12Na3PO4", true);
+
+        GTQTMaterials.FerricCatalyst = new Material.Builder(getMaterialsId(), gregtechId("ferric_catalyst"))
+                .dust()
+                .color(0xFFD700)
+                .build()
+                .setFormula("Fe2(C4H4O6)3", true);
+
+        GTQTMaterials.PhosphonitrilicChlorideTrimer = new Material.Builder(getMaterialsId(), gregtechId("phosphonitrilic_chloride_trimer"))
+                .fluid()
+                .color(0x082C38)
+                .components(Chlorine, 6, Nitrogen, 3, Phosphorus, 3)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        GTQTMaterials.SodiumTrifluoroethanolate = new Material.Builder(getMaterialsId(), gregtechId("sodium_trifluoroethanolate"))
+                .dust()
+                .color(0x50083E)
+                .iconSet(ROUGH)
+                .components(Carbon, 2, Hydrogen, 4, Fluorine, 3, Sodium, 1, Oxygen, 1)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        GTQTMaterials.OctafluoroPentanol = new Material.Builder(getMaterialsId(), gregtechId("octafluoro_pentanol"))
+                .fluid()
+                .color(0xE5EBDE)
+                .components(Carbon, 5, Hydrogen, 4, Fluorine, 8, Oxygen, 1)
+                .build();
+
+        GTQTMaterials.FluoroboricAcid = new Material.Builder(getMaterialsId(), gregtechId("fluoroboric_acid"))
+                .liquid(new FluidBuilder().attributes(ACID))
+                .color(0xD5811B)
+                .components(Hydrogen, 1, Boron, 1, Fluorine, 4)
+                .build();
+
+        GTQTMaterials.SodiumNitrite = new Material.Builder(getMaterialsId(), gregtechId("sodium_nitrite"))
+                .dust()
+                .color(0x205CA4)
+                .iconSet(DULL)
+                .components(Sodium, 1, Nitrogen, 1, Oxygen, 2)
+                .build();
+
+        GTQTMaterials. BenzenediazoniumTetrafluoroborate = new Material.Builder(getMaterialsId(), gregtechId("benzenediazonium_tetrafluoroborate"))
+                .fluid()
+                .color(0xD5C5B2)
+                .components(Carbon, 6, Hydrogen, 5, Boron, 1, Fluorine, 4, Nitrogen, 2)
+                .build();
+
+        GTQTMaterials.CoACABCatalyst = new Material.Builder(getMaterialsId(), gregtechId("co_ac_ab_catalyst"))
+                .dust()
+                .color(0x6B4312)
+                .iconSet(METALLIC)
+                .build();
+
+        //  25098 Sodium Formate
+        GTQTMaterials.SodiumFormate = new Material.Builder(getMaterialsId(), gregtechId("sodium_formate"))
+                .fluid()
+                .color(0x416CC0)
+                .iconSet(ROUGH)
+                .components(Carbon, 1, Hydrogen, 1, Oxygen, 2, Sodium, 1)
+                .build();
+
+        //钨酸铵
+        GTQTMaterials.AmmoniumTungstate = new Material.Builder(getMaterialsId(), gregtechId("ammonium_tungstate"))
+                .fluid()
+                .color(0x008B00)
+                .iconSet(ROUGH)
+                .build()
+                .setFormula("（NH4)6W7024•6H20", true);
+        //晶体钨酸铵
+        GTQTMaterials.CammoniumTungstate = new Material.Builder(getMaterialsId(), gregtechId("cammonium_tungstate"))
+                .dust()
+                .color(0x458B00)
+                .iconSet(SHINY)
+                .build()
+                .setFormula("（NH4)6W7024", true);
+
+        //Na2WO4
+        GTQTMaterials.SodiumTungstateDihydrate = new Material.Builder(getMaterialsId(), gregtechId("sodium_tungstate_dihydrate"))
+                .dust()
+                .color(0x473C8B)
+                .iconSet(SHINY)
+                .build()
+                .setFormula("Na2WO4", true);
+
+        //工业钨酸
+        GTQTMaterials.ItungsticAcid = new Material.Builder(getMaterialsId(), gregtechId("itungstic_acid"))
+                .fluid()
+                .color(0x68228B)
+                .iconSet(SHINY)
+                .build()
+                .setFormula("H2WO4*", true);
+
+        //锆石
+        GTQTMaterials.Zircon = new Material.Builder(getMaterialsId(), gregtechId("zircon"))
+                .ore().dust()
+                .color(0x8B8B00)
+                .iconSet(SHINY)
+                .build()
+                .setFormula("ZrSiO₄*", true);
+
+        //熟制锆石
+        GTQTMaterials.Zirconf = new Material.Builder(getMaterialsId(), gregtechId("zirconf"))
+                .dust()
+                .color(0xA52A2A)
+                .iconSet(SHINY)
+                .build();
+
+        //酸性锆石溶液
+        GTQTMaterials.Zircons = new Material.Builder(getMaterialsId(), gregtechId("zircons"))
+                .fluid()
+                .color(0x9AFF9A)
+                .iconSet(SHINY)
+                .build();
+
+        //硫酸锆
+        GTQTMaterials.Zrso = new Material.Builder(getMaterialsId(), gregtechId("zrso"))
+                .fluid()
+                .color(0xC6E2FF)
+                .iconSet(SHINY)
+                .build()
+                .setFormula("ZrSO₄", true);
+
+        //硫酸铪
+        GTQTMaterials.Hfso = new Material.Builder(getMaterialsId(), gregtechId("hfso"))
+                .fluid()
+                .color(0x9F79EE)
+                .iconSet(SHINY)
+                .build()
+                .setFormula("HfSO₄", true);
+
+        //钽铌铁粉
+        GTQTMaterials.NiobiumTantalumFe = new Material.Builder(getMaterialsId(), gregtechId("niobium_tantalum_fe"))
+                .dust()
+                .color(0x8B3E2F)
+                .iconSet(SHINY)
+                .build();
+
+        GTQTMaterials.NiobiumTantalumFec = new Material.Builder(getMaterialsId(), gregtechId("niobium_tantalum_fec"))
+                .fluid()
+                .color(0x8B3A62)
+                .iconSet(SHINY)
+                .build();
+
+        //氯化铌
+        GTQTMaterials.Nbcl = new Material.Builder(getMaterialsId(), gregtechId("nbcl"))
+                .fluid()
+                .color(0x6B8E23)
+                .iconSet(SHINY)
+                .build()
+                .setFormula("NbCl₄", true);
+        //氯化钽
+        GTQTMaterials.Tacl = new Material.Builder(getMaterialsId(), gregtechId("tacl"))
+                .fluid()
+                .color(0x698B22)
+                .iconSet(SHINY)
+                .build()
+                .setFormula("TaCl₄", true);
+
+        //氟化铌
+        GTQTMaterials.Nbcla = new Material.Builder(getMaterialsId(), gregtechId("nbcla"))
+                .fluid()
+                .color(0x5D478B)
+                .iconSet(SHINY)
+                .build()
+                .setFormula("NbCl₄", true);
+        //氟化钽
+        GTQTMaterials.Tacla = new Material.Builder(getMaterialsId(), gregtechId("tacla"))
+                .fluid()
+                .color(0x473C8B)
+                .iconSet(SHINY)
+                .build()
+                .setFormula("TaCl₄", true);
+
+        //七氟铌酸钾
+        GTQTMaterials.Nbclb = new Material.Builder(getMaterialsId(), gregtechId("nbclb"))
+                .fluid()
+                .color(0x218868)
+                .iconSet(SHINY)
+                .build()
+                .setFormula("NbCl₄", true);
+        //七氟铌酸钾
+        GTQTMaterials.Taclb = new Material.Builder(getMaterialsId(), gregtechId("taclb"))
+                .fluid()
+                .color(0x2E8B57)
+                .iconSet(SHINY)
+                .build()
+                .setFormula("TaCl₄", true);
     }
 }

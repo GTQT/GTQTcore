@@ -1,6 +1,7 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.gcys;
 
 import gregtech.api.capability.IHeatingCoil;
+import gregtech.api.capability.impl.HeatingCoilRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
@@ -47,6 +48,7 @@ public class MetaTileEntityRoaster extends RecipeMapMultiblockController impleme
 
     public MetaTileEntityRoaster(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.ROASTER_RECIPES);
+        this.recipeMapWorkable = new HeatingCoilRecipeLogic(this);
     };
 
     @Override
@@ -68,10 +70,10 @@ public class MetaTileEntityRoaster extends RecipeMapMultiblockController impleme
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
-                .aisle("#######", "#######", "#######", "#######", "#P###P#", "#P###P#", "#P###P#", "#P###P#")
+                .aisle("#R###R#", "#R###R#", "#R###R#", "#R###R#", "#P###P#", "#P###P#", "#P###P#", "#P###P#")
                 .aisle("#R###R#", "#R###R#", "#CCCCC#", "#CCCCC#", "#PCFCP#", "#CCCCC#", "#######", "#P###P#")
-                .aisle( "#######", "#######", "#CCCCC#", "CGGGGGC", "CGG#GGC", "CGGGGGC", "#CCCCC#", "#P###P#")
-                .aisle( "#######", "#######", "#CCECC#", "CGGGGGO", "I#####O", "CGGGGGO", "#PCMCP#", "#######")
+                .aisle("#######", "#######", "#CCCCC#", "CGGGGGC", "CGG#GGC", "CGGGGGC", "#CCCCC#", "#P###P#")
+                .aisle("#######", "#######", "#CCECC#", "CGGGGGO", "I#####O", "CGGGGGO", "#PCMCP#", "#######")
                 .aisle("#######", "#######", "#CCCCC#", "CGGGGGC", "CGGGGGC", "CGGGGGC", "#CCCCC#", "#######")
                 .aisle("#R###R#", "#R###R#", "#CCCCC#", "#CCHCC#", "#CC~CC#", "#CCCCC#", "#######", "#######")
                 .where('~', selfPredicate())
@@ -90,18 +92,24 @@ public class MetaTileEntityRoaster extends RecipeMapMultiblockController impleme
                 .where('H', abilities(MultiblockAbility.MAINTENANCE_HATCH))
                 .build();
     }
-
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World player, @Nonnull List<String> tooltip, boolean advanced) {
+        super.addInformation(stack, player, tooltip, advanced);
+        tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.1"));
+        tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.2"));
+        tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.3"));
+    }
     private IBlockState getPipeStates() {
-        return MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.STEEL_PIPE);
+        return MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.TITANIUM_PIPE);
     }
 
     private IBlockState getCasingState() {
-        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.INVAR_HEATPROOF);
+        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.TUNGSTENSTEEL_ROBUST);
     }
 
     @Nonnull
     private TraceabilityPredicate getFramePredicate() {
-        return frames(Materials.Invar);
+        return frames(Materials.TungstenSteel);
     }
 
     @Override
@@ -133,6 +141,6 @@ public class MetaTileEntityRoaster extends RecipeMapMultiblockController impleme
     @SideOnly(Side.CLIENT)
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart){
-        return Textures.HEAT_PROOF_CASING;
+        return Textures.ROBUST_TUNGSTENSTEEL_CASING;
     }
 }

@@ -24,12 +24,32 @@ import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.electrode;
 
 public class OilChains {
     public static void init() {
+        Chemical();     //化工线路
         NewOil();       //新油电
         Pre();          //预处理
         Kettle();       //原始蒸馏
         changjianya();  //常减压
         jingzhihuishou();  //精致回收
         cuihualiehua(); //催化裂化
+    }
+
+    private static void Chemical() {
+        //一氧化碳和氢氧化钠溶液在160-200 ℃和2 MPa压力下反应生成甲酸钠，然后经硫酸酸解、蒸馏即得成品。
+        CHEMICAL_RECIPES.recipeBuilder()
+                .fluidInputs(CarbonMonoxide.getFluid(1000))
+                .fluidInputs(SodiumHydroxide.getFluid(1000))
+                .fluidOutputs(SodiumFormate.getFluid(1000))
+                .circuitMeta(1)
+                .duration(120).EUt(30).buildAndRegister();
+
+        CHEMICAL_RECIPES.recipeBuilder()
+                .fluidInputs(SulfuricAcid.getFluid(1000))
+                .fluidInputs(SodiumFormate.getFluid(2000))
+                .fluidOutputs(FormicAcid.getFluid(2000))
+                .output(dust,SodiumSulfate,1)
+                .circuitMeta(1)
+                .duration(120).EUt(30).buildAndRegister();
+
     }
 
     private static void jingzhihuishou() {
@@ -80,22 +100,21 @@ public class OilChains {
         GTRecipeHandler.removeRecipesByInputs(LARGE_CHEMICAL_RECIPES, new ItemStack[]{IntCircuitIngredient.getIntegratedCircuit(24)},new FluidStack[]{Tetranitromethane.getFluid(400),BioDiesel.getFluid(10000)});
 
         CHEMICAL_PLANT.recipeBuilder()
-                .fluidInputs(Tetranitromethane.getFluid(500))
-                .fluidInputs(Diesel.getFluid(3000))
-                .fluidInputs(Tetrabromobenzene.getFluid(300))
-                .fluidInputs(MTBE.getFluid(200))
-                .fluidOutputs(CetaneBoostedDiesel.getFluid(4000))
+                .fluidInputs(Diesel.getFluid(7500))
+                .fluidInputs(Tetranitromethane.getFluid(300))
+                .fluidInputs(Tetrabromobenzene.getFluid(200))
+                .fluidOutputs(CetaneBoostedDiesel.getFluid(8000))
                 .recipeLevel(2)
                 .duration(200)
                 .EUt(480)
                 .buildAndRegister();
 
         CHEMICAL_PLANT.recipeBuilder()
+                .fluidInputs(BioDiesel.getFluid(15000))
                 .fluidInputs(Tetranitromethane.getFluid(500))
-                .fluidInputs(BioDiesel.getFluid(6000))
                 .fluidInputs(Tetrabromobenzene.getFluid(300))
                 .fluidInputs(MTBE.getFluid(200))
-                .fluidOutputs(CetaneBoostedDiesel.getFluid(4000))
+                .fluidOutputs(CetaneBoostedDiesel.getFluid(8000))
                 .recipeLevel(2)
                 .duration(200)
                 .EUt(480)

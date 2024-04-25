@@ -34,8 +34,13 @@ public class GTQTRecipesManager {
     public static void load() {
     }
     public static void init() {
+        ZirconChain.init();
         DeltamethrinChain.init();
-        //GTQTOreRecipeHandler.init();
+        RubbersChain.init();
+        BoronChain.init();
+        EnzymesRecipes.init();
+        GTQTOreRecipeHandler.init();
+        AlgaeChain.init();
         CTABChain.init();
         TitanateChain.init();
         OceanChain.init();
@@ -54,6 +59,7 @@ public class GTQTRecipesManager {
         GCYSBlockRecipeLoader.init();
         BoulesRecipes.init();
         GrapheneChain.init();
+        NanoCoatingRecipes.init();
         PreciousMetalChain.init();
         MiningDrill.init();
         HydrogenPeroxideChain.init();

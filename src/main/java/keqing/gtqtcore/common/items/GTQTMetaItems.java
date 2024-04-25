@@ -14,8 +14,15 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem 你物品的名字，记得全大写;
      */
     public static final List<MetaItem<?>> ITEMS = GTQTMetaItem1.getMetaItems();
+    public static MetaItem<?>.MetaValueItem JIAO_XIAN_REN_ZHANG;
+    public static MetaItem<?>.MetaValueItem NONG_SUO_XIAN_REN_ZHANG;
+    public static MetaItem<?>.MetaValueItem NONG_SUO_TANG_JIAO;
+    public static MetaItem<?>.MetaValueItem ZHU_TAN;
+    public static MetaItem<?>.MetaValueItem JIAO_TANG_JIAO;
     public static MetaItem<?>.MetaValueItem IMPREGNATED_SUBSTRATE;
     public static MetaItem<?>.MetaValueItem IMPREGNATED_EPOXY;
+    public static MetaItem<?>.MetaValueItem IMPREGNATED_FIBER;
+    public static MetaItem<?>.MetaValueItem LAMINATION_GE;
     public static MetaItem<?>.MetaValueItem MEMORY_CARD;
     public static MetaItem<?>.MetaValueItem GENERAL_CIRCUIT_ULV;
     public static MetaItem<?>.MetaValueItem GENERAL_CIRCUIT_LV;
@@ -32,6 +39,13 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem GENERAL_CIRCUIT_UXV;
     public static MetaItem<?>.MetaValueItem GENERAL_CIRCUIT_OpV;
     public static MetaItem<?>.MetaValueItem GENERAL_CIRCUIT_MAX;
+
+    public static MetaItem<?>.MetaValueItem CATALYST_FRAMEWORK_I;
+    public static MetaItem<?>.MetaValueItem CATALYST_FRAMEWORK_II;
+    public static MetaItem<?>.MetaValueItem CATALYST_FRAMEWORK_III;
+    public static MetaItem<?>.MetaValueItem CATALYST_FRAMEWORK_IV;
+    public static MetaItem<?>.MetaValueItem CATALYST_FRAMEWORK_V;
+    public static MetaItem<?>.MetaValueItem CATALYST_FRAMEWORK_VI;
 
     public static MetaItem<?>.MetaValueItem SOLAR_PLATE_MKI;
     public static MetaItem<?>.MetaValueItem SOLAR_PLATE_MKII;
@@ -288,7 +302,7 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem EMITTER_MAX;
     public static MetaItem<?>.MetaValueItem SENSOR_MAX;
     public static MetaItem<?>.MetaValueItem FIELD_GENERATOR_MAX;
-
+    public static MetaItem<?>.MetaValueItem COVER_SOLAR_PANEL_MAX;
 
 
     // Power Components

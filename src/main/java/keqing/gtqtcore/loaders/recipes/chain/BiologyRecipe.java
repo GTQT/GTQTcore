@@ -20,9 +20,11 @@ import net.minecraft.item.ItemStack;
 
 import static gregtech.api.GTValues.ZPM;
 import static gregtech.api.recipes.RecipeMaps.*;
+import static gregtech.api.unification.material.Materials.CarbonDioxide;
 import static gregtech.api.unification.material.Materials.Water;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.CalciumCarbonate;
 
 public class BiologyRecipe {
 
@@ -303,8 +305,17 @@ public class BiologyRecipe {
         //Cellulose Fiber Red
         EXTRACTOR_RECIPES.recipeBuilder()
                 .input(GTQTMetaItems.CELLULOSE_FIBER_RED, 3)
-                .output(dust, GTQTMaterials.CalciumCarbonate, 5)
+                .output(dust, CalciumCarbonate, 5)
                 .EUt(240).duration(90)
+                .buildAndRegister();
+
+        BLAST_RECIPES.recipeBuilder()
+                .input(dust,CalciumCarbonate, 5)
+                .output(dust,CalciumCarbide, 2)
+                .fluidOutputs(CarbonDioxide.getFluid(3000))
+                .EUt(240).duration(90)
+                .blastFurnaceTemp(1000)
+                .circuitMeta(1)
                 .buildAndRegister();
 
         //Wood Pellets

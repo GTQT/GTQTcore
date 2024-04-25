@@ -63,10 +63,10 @@ public class MetaTileEntityPReactor extends NoEnergyMultiblockController {
                 .aisle("XXX", "X&X", "X#X")
                 .aisle("XXX", "XYX", "XXX")
                 .where('X', states(MetaBlocks.STEAM_CASING.getState(BlockSteamCasing.SteamCasingType.WOOD_WALL))
-                        .or(abilities(MultiblockAbility.IMPORT_ITEMS).setMaxGlobalLimited(3))
-                        .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setMaxGlobalLimited(3))
-                        .or(abilities(MultiblockAbility.EXPORT_FLUIDS).setMaxGlobalLimited(2))
-                        .or(abilities(MultiblockAbility.EXPORT_ITEMS).setMaxGlobalLimited(3)))
+                        .or(abilities(MultiblockAbility.IMPORT_ITEMS).setMinGlobalLimited(2))
+                        .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setMinGlobalLimited(2))
+                        .or(abilities(MultiblockAbility.EXPORT_FLUIDS).setMinGlobalLimited(2))
+                        .or(abilities(MultiblockAbility.EXPORT_ITEMS).setMinGlobalLimited(2)))
                 .where('#', air())
                 .where('&', air().or(SNOW_PREDICATE)) // this won't stay in the structure, and will be broken while
                 // running
@@ -85,6 +85,7 @@ public class MetaTileEntityPReactor extends NoEnergyMultiblockController {
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("村里的大缸（远离司马光）", new Object[0]));
 }
+
 
 
     @Override

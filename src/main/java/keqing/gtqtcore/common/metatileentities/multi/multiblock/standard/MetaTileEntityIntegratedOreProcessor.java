@@ -262,6 +262,7 @@ public class MetaTileEntityIntegratedOreProcessor extends MultiblockWithDisplayB
                                @Nonnull List<String> tooltip,
                                boolean advanced) {
         super.addInformation(stack, world, tooltip, advanced);
+        tooltip.add(I18n.format("§aIt is OP. I mean Ore Processor."));
         tooltip.add(I18n.format("gtqtcore.machine.integrated_ore_processor.tooltip.1"));
         tooltip.add(I18n.format("gtqtcore.machine.integrated_ore_processor.tooltip.2"));
         tooltip.add(I18n.format("gtqtcore.machine.integrated_ore_processor.tooltip.3"));

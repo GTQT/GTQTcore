@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import gregtech.api.GTValues;
 import gregtech.api.capability.GregtechDataCodes;
 import gregtech.api.capability.IEnergyContainer;
+import gregtech.api.capability.IMultipleRecipeMaps;
 import gregtech.api.capability.impl.EnergyContainerHandler;
 import gregtech.api.capability.impl.EnergyContainerList;
 import gregtech.api.capability.impl.FluidTankList;
@@ -37,12 +38,13 @@ import java.util.List;
 import static gregtech.api.GTValues.VA;
 import static gregtech.api.unification.material.Materials.Lubricant;
 
-public abstract class GTQTRecipeMapMultiblockOverwrite extends RecipeMapMultiblockController {
+public abstract class GTQTRecipeMapMultiblockOverwrite extends RecipeMapMultiblockController  {
     public int ParallelLim;
     public int ParallelNumA;
     public int modern;
     public int P;
     int tier;
+
 
     public GTQTRecipeMapMultiblockOverwrite(ResourceLocation metaTileEntityId, RecipeMap<?> recipeMap) {
         super(metaTileEntityId, recipeMap);

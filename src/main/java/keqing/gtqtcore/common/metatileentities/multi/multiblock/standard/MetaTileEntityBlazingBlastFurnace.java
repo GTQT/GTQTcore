@@ -1,5 +1,6 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
+import gregicality.multiblocks.api.capability.IParallelMultiblock;
 import gregicality.multiblocks.api.render.GCYMTextures;
 import gregicality.multiblocks.common.block.GCYMMetaBlocks;
 import gregicality.multiblocks.common.block.blocks.BlockLargeMultiblockCasing;
@@ -20,6 +21,7 @@ import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.MultiblockShapeInfo;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
+import gregtech.api.recipes.RecipeBuilder;
 import gregtech.api.recipes.recipeproperties.TemperatureProperty;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.TextFormattingUtil;
@@ -28,6 +30,7 @@ import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
 import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.metatileentities.MetaTileEntities;
+import groovyjarjarantlr4.v4.runtime.misc.NotNull;
 import keqing.gtqtcore.api.metaileentity.multiblock.GTQTRecipeMapMultiblockOverwrite;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
@@ -56,6 +59,8 @@ import java.util.List;
 import static gregtech.api.GTValues.VA;
 import static gregtech.api.recipes.RecipeMaps.BLAST_RECIPES;
 import static gregtech.api.unification.material.Materials.Lubricant;
+import static gregtech.common.metatileentities.multi.electric.MetaTileEntityMultiSmelter.getDurationForParallel;
+import static gregtech.common.metatileentities.multi.electric.MetaTileEntityMultiSmelter.getEUtForParallel;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.Pyrotheum;
 public class MetaTileEntityBlazingBlastFurnace extends GTQTRecipeMapMultiblockOverwrite implements IHeatingCoil {
     private int blastFurnaceTemperature;
@@ -111,13 +116,11 @@ public class MetaTileEntityBlazingBlastFurnace extends GTQTRecipeMapMultiblockOv
         if (type instanceof IHeatingCoilBlockStats) {
             this.blastFurnaceTemperature = ((IHeatingCoilBlockStats) type).getCoilTemperature();
             this.heatingCoilLevel = ((IHeatingCoilBlockStats) coilType).getLevel();
-            this.heatingCoilDiscount = ((IHeatingCoilBlockStats) coilType).getEnergyDiscount();
         } else {
             this.blastFurnaceTemperature = BlockWireCoil.CoilType.CUPRONICKEL.getCoilTemperature();
             this.heatingCoilLevel = BlockWireCoil.CoilType.CUPRONICKEL.getLevel();
-            this.heatingCoilDiscount = BlockWireCoil.CoilType.CUPRONICKEL.getEnergyDiscount();
         }
-        ParallelLim=(int)Math.pow(2, 3);
+        ParallelLim=Math.min((int)Math.pow(2, heatingCoilLevel),1024);
         ParallelNum=ParallelLim;
         this.blastFurnaceTemperature += 100 * Math.max(0, GTUtility.getTierByVoltage(getEnergyContainer().getInputVoltage()) - GTValues.MV);
     }
@@ -128,24 +131,18 @@ public class MetaTileEntityBlazingBlastFurnace extends GTQTRecipeMapMultiblockOv
         return this.blastFurnaceTemperature >= recipe.getProperty(TemperatureProperty.getInstance(), 0);
     }
 
-    @Nonnull
+
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
-                .aisle("XXX", "CCC", "CCC", "CCC","XXX")
-                .aisle("XXX", "C#C", "C#C", "C#C","XMX")
-                .aisle("XSX", "CCC", "CCC", "CCC","XXX")
+                .aisle("XXX", "CCC", "CCC", "CCC", "XXX")
+                .aisle("XXX", "C#C", "C#C", "C#C", "XMX")
+                .aisle("XSX", "CCC", "CCC", "CCC", "XXX")
                 .where('S', selfPredicate())
-                .where('X', states(getCasingState())
-                        .or(abilities(MultiblockAbility.MAINTENANCE_HATCH).setExactLimit(1))
-                        .or(abilities(MultiblockAbility.IMPORT_ITEMS).setMaxGlobalLimited(4).setPreviewCount(1))
-                        .or(abilities(MultiblockAbility.EXPORT_ITEMS).setMaxGlobalLimited(4).setPreviewCount(1))
-                        .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setMaxGlobalLimited(8).setPreviewCount(1))
-                        .or(abilities(MultiblockAbility.EXPORT_FLUIDS).setMaxGlobalLimited(8).setPreviewCount(1))
-                        .or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(3))
-                )
-                .where('C', heatingCoils())
+                .where('X', states(getCasingState()).setMinGlobalLimited(9)
+                        .or(autoAbilities(true, true, true, true, true, true, false)))
                 .where('M', abilities(MultiblockAbility.MUFFLER_HATCH))
+                .where('C', heatingCoils())
                 .where('#', air())
                 .build();
     }
@@ -153,31 +150,24 @@ public class MetaTileEntityBlazingBlastFurnace extends GTQTRecipeMapMultiblockOv
     @Override
     public List<MultiblockShapeInfo> getMatchingShapes() {
         ArrayList<MultiblockShapeInfo> shapeInfo = new ArrayList<>();
-        MultiblockShapeInfo.Builder builder = null;
-        if (Blocks.AIR != null) {
-            builder = MultiblockShapeInfo.builder()
-                    .aisle("MIF", "CCC", "CCC", "CCC", "XXX")
-                    .aisle("OXX", "C#C", "C#C", "C#C", "XMX")
-                    .aisle("ESH", "CCC", "CCC", "CCC", "XXX")
-                    .where('S', GTQTMetaTileEntities.BLAZING_BLAST_FURNACE, EnumFacing.SOUTH)
-                    .where('X', getCasingState())
-                    .where('M', MetaTileEntities.MUFFLER_HATCH[GTValues.HV], EnumFacing.UP)
-                    .where('I', MetaTileEntities.ITEM_IMPORT_BUS[GTValues.HV], EnumFacing.SOUTH)
-                    .where('F', MetaTileEntities.FLUID_IMPORT_HATCH[GTValues.HV], EnumFacing.SOUTH)
-                    .where('O', MetaTileEntities.FLUID_EXPORT_HATCH[GTValues.HV], EnumFacing.SOUTH)
-                    .where('E', MetaTileEntities.ENERGY_INPUT_HATCH[GTValues.EV], EnumFacing.NORTH)
-                    .where('H', () -> ConfigHolder.machines.enableMaintenance ? MetaTileEntities.MAINTENANCE_HATCH : getCasingState(), EnumFacing.SOUTH)
-                    .where('#', Blocks.AIR.getDefaultState());
-        }
-
-        MultiblockShapeInfo.Builder finalBuilder = builder;
+        MultiblockShapeInfo.Builder builder = MultiblockShapeInfo.builder()
+                .aisle("EEM", "CCC","CCC", "CCC", "XXX")
+                .aisle("FXD", "C#C","C#C", "C#C", "XHX")
+                .aisle("ISO", "CCC","CCC", "CCC", "XXX")
+                .where('X', GTQTMetaBlocks.TURBINE_CASING.getState(GTQTTurbineCasing.TurbineCasingType.ADVANCED_INVAR_CASING))
+                .where('S', GTQTMetaTileEntities.BLAZING_BLAST_FURNACE, EnumFacing.SOUTH)
+                .where('#', Blocks.AIR.getDefaultState())
+                .where('E', MetaTileEntities.ENERGY_INPUT_HATCH[GTValues.LV], EnumFacing.NORTH)
+                .where('I', MetaTileEntities.ITEM_IMPORT_BUS[GTValues.LV], EnumFacing.SOUTH)
+                .where('O', MetaTileEntities.ITEM_EXPORT_BUS[GTValues.LV], EnumFacing.SOUTH)
+                .where('F', MetaTileEntities.FLUID_IMPORT_HATCH[GTValues.LV], EnumFacing.WEST)
+                .where('D', MetaTileEntities.FLUID_EXPORT_HATCH[GTValues.LV], EnumFacing.EAST)
+                .where('H', MetaTileEntities.MUFFLER_HATCH[GTValues.LV], EnumFacing.UP)
+                .where('M', () -> ConfigHolder.machines.enableMaintenance ? MetaTileEntities.MAINTENANCE_HATCH :
+                        GTQTMetaBlocks.TURBINE_CASING.getState(GTQTTurbineCasing.TurbineCasingType.ADVANCED_INVAR_CASING), EnumFacing.NORTH);
         GregTechAPI.HEATING_COILS.entrySet().stream()
                 .sorted(Comparator.comparingInt(entry -> entry.getValue().getTier()))
-                .forEach(entry -> {
-                    if (finalBuilder != null) {
-                        shapeInfo.add(finalBuilder.where('C', entry.getKey()).build());
-                    }
-                });
+                .forEach(entry -> shapeInfo.add(builder.where('C', entry.getKey()).build()));
         return shapeInfo;
     }
 
@@ -189,32 +179,32 @@ public class MetaTileEntityBlazingBlastFurnace extends GTQTRecipeMapMultiblockOv
     public void addInformation(ItemStack stack, @Nullable World player, @Nonnull List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(I18n.format("gregtech.machine.cracker.gtqtupdate.1"));
-        tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.1"));
-        tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.2"));
-        tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.3"));
         tooltip.add(I18n.format("gtqtcore.multiblock.vc.tooltip.1"));
         tooltip.add(I18n.format("gtqtcore.multiblock.vc.tooltip.2"));
         tooltip.add(I18n.format("gtqtcore.multiblock.vc.tooltip.3"));
+        tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.1"));
+        tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.2"));
+        tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.3"));
     }
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         if (isStructureFormed()) {
+            super.addDisplayText(textList);
             if (getInputFluidInventory() != null) {
                 FluidStack LubricantStack = getInputFluidInventory().drain(Pyrotheum.getFluid(Integer.MAX_VALUE), false);
                  int liquidOxygenAmount = LubricantStack == null ? 0 : LubricantStack.amount;
                  textList.add(new TextComponentTranslation("gtqtcore.multiblock.vc.amount", TextFormattingUtil.formatNumbers((liquidOxygenAmount))));
-                 textList.add(new TextComponentTranslation("gtqtcore.multiblock.vc.heat"));
                 }
-            textList.add(new TextComponentTranslation("gregtech.multiblock.blast_furnace.max_temperature", blastFurnaceTemperature)
-            .setStyle(new Style().setColor(TextFormatting.RED)));
-            textList.add(new TextComponentTranslation("gregtech.multiblock.multi_furnace.heating_coil_discount", heatingCoilDiscount));
+            textList.add(new TextComponentTranslation("Temperature : %s / Discount ：%s", blastFurnaceTemperature,getDiscount()));
             if(modern==0) textList.add(new TextComponentTranslation("gtqtcore.tire1",heatingCoilLevel));
             if(modern==1) textList.add(new TextComponentTranslation("gtqtcore.tire2",heatingCoilLevel));
             textList.add(new TextComponentTranslation("gtqtcore.parr",ParallelNum,ParallelLim));
         }
-        super.addDisplayText(textList);
     }
-
+    public double getDiscount()
+    {
+        return (32-heatingCoilLevel)/32.0;
+    }
     @Override
     protected void addWarningText(List<ITextComponent> textList) {
         super.addWarningText(textList);
@@ -268,7 +258,6 @@ public class MetaTileEntityBlazingBlastFurnace extends GTQTRecipeMapMultiblockOv
         super.invalidateStructure();
         blastFurnaceTemperature = 0;
         heatingCoilLevel = 0;
-        heatingCoilDiscount = 0;
     }
     protected class BlazingBlastFurnaceWorkable extends MultiblockRecipeLogic {
 
@@ -283,7 +272,7 @@ public class MetaTileEntityBlazingBlastFurnace extends GTQTRecipeMapMultiblockOv
             return ParallelNum;
         }
         protected void updateRecipeProgress() {
-            if (canRecipeProgress && drawEnergy(recipeEUt, true)) {
+            if (canRecipeProgress && drawEnergy((int) (recipeEUt*getDiscount()), true)) {
                 IMultipleTankHandler inputTank = combustionEngine.getInputFluidInventory();
                 if (LUBRICANT_STACK.isFluidStackIdentical(inputTank.drain(LUBRICANT_STACK, false))) {
                     inputTank.drain(LUBRICANT_STACK, true);
@@ -292,14 +281,22 @@ public class MetaTileEntityBlazingBlastFurnace extends GTQTRecipeMapMultiblockOv
                     }
                 }
                 else return;
-                drawEnergy(recipeEUt, false);
+                drawEnergy((int) (recipeEUt*getDiscount()), false);
 
             }
         }
 
+        @Override
         public void setMaxProgress(int maxProgress)
         {
-            this.maxProgressTime = maxProgress/heatingCoilLevel;
+            if(ParallelNum<=16)
+                this.maxProgressTime = maxProgress/ParallelNum;
+            else if(ParallelNum<=64)
+                this.maxProgressTime = maxProgress*16/ParallelNum;
+            else if(ParallelNum<=256)
+                this.maxProgressTime = maxProgress*128/ParallelNum;
+            else
+                this.maxProgressTime = maxProgress;
         }
     }
 }

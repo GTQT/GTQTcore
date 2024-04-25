@@ -152,23 +152,6 @@ public class TiredTraceabilityPredicate extends TraceabilityPredicate {
         TiredTraceabilityPredicate.MAP_GLASS.put(GTQTMetaBlocks.ADV_GLASS.getState(GTQTADVGlass.CasingType.TECH_FUSION_GLASS_VI),
                 new WrappedIntTired(GTQTADVGlass.CasingType.TECH_FUSION_GLASS_VI,4));
 
-        TiredTraceabilityPredicate.MAP_CP_BEAM.put(GTQTMetaBlocks.MULTI_CASING.getState(GTQTMultiblockCasing.CasingType.BEAM_CORE_0),
-                new WrappedIntTired(GTQTMultiblockCasing.CasingType.BEAM_CORE_0,1));
-
-        TiredTraceabilityPredicate.MAP_CP_BEAM.put(GTQTMetaBlocks.MULTI_CASING.getState(GTQTMultiblockCasing.CasingType.BEAM_CORE_1),
-                new WrappedIntTired(GTQTMultiblockCasing.CasingType.BEAM_CORE_1,2));
-
-        TiredTraceabilityPredicate.MAP_CP_BEAM.put(GTQTMetaBlocks.MULTI_CASING.getState(GTQTMultiblockCasing.CasingType.BEAM_CORE_2),
-                new WrappedIntTired(GTQTMultiblockCasing.CasingType.BEAM_CORE_2,3));
-
-        TiredTraceabilityPredicate.MAP_CP_BEAM.put(GTQTMetaBlocks.MULTI_CASING.getState(GTQTMultiblockCasing.CasingType.BEAM_CORE_3),
-                new WrappedIntTired(GTQTMultiblockCasing.CasingType.BEAM_CORE_3,4));
-
-        TiredTraceabilityPredicate.MAP_CP_BEAM.put(GTQTMetaBlocks.MULTI_CASING.getState(GTQTMultiblockCasing.CasingType.BEAM_CORE_4),
-                new WrappedIntTired(GTQTMultiblockCasing.CasingType.BEAM_CORE_4,5));
-
-
-
         //  MAP_QFT_MANIPULATOR Init
         TiredTraceabilityPredicate.MAP_QFT_MANIPULATOR.put(GTQTMetaBlocks.QUANTUM_CONSTRAINT_CASING.getState(GTQTQuantumForceTransformerCasing.CasingType.NEUTRON_PULSE_MANIPULATOR_CASING),
                 new WrappedIntTired(GTQTQuantumForceTransformerCasing.CasingType.NEUTRON_PULSE_MANIPULATOR_CASING, 1));

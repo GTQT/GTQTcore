@@ -57,9 +57,7 @@ public class MetaTileEntityStepper extends MultiMapMultiblockController implemen
     private int sheping_tier;
     private int laser_tier;
     private int tier;
-    private final int maxvisa=1000;
     private int minvisa;
-    private int visa;
 
     @Override
     public void addInformation(ItemStack stack, World world, List<String> tooltip, boolean advanced) {
@@ -75,27 +73,6 @@ public class MetaTileEntityStepper extends MultiMapMultiblockController implemen
                 GTQTcoreRecipeMaps.STEPPER_RECIPES
         });
         this.recipeMapWorkable = new LaserEngravingWorkableHandler(this);
-    }
-
-    @Override
-    @Nonnull
-    protected Widget getFlexButton(int x, int y, int width, int height) {
-        WidgetGroup group = new WidgetGroup(x, y, width, height);
-        group.addWidget(new ClickButtonWidget(0, 0, 9, 18, "", this::decrementThreshold)
-                .setButtonTexture(GuiTextures.BUTTON_THROTTLE_MINUS)
-                .setTooltipText("gtqtcore.multiblock.pcb.threshold_decrement"));
-        group.addWidget(new ClickButtonWidget(9, 0, 9, 18, "", this::incrementThreshold)
-                .setButtonTexture(GuiTextures.BUTTON_THROTTLE_PLUS)
-                .setTooltipText("gtqtcore.multiblock.pcb.threshold_increment"));
-        return group;
-    }
-
-    private void incrementThreshold(Widget.ClickData clickData) {
-            this.visa = MathHelper.clamp(visa + 10, 0, 10);
-    }
-
-    private void decrementThreshold(Widget.ClickData clickData) {
-            this.visa = MathHelper.clamp(visa - 10, 0, 10);
     }
 
     @Override
@@ -146,7 +123,7 @@ public class MetaTileEntityStepper extends MultiMapMultiblockController implemen
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
         textList.add(new TextComponentTranslation("gtqtcore.eleTire",tier, laser_tier, glass_tier));
-        textList.add(new TextComponentTranslation("gtqtcore.eleTire",clean_tier, sheping_tier, minvisa));
+        textList.add(new TextComponentTranslation("gtqtcore.eleTire1",clean_tier, sheping_tier, minvisa));
 
     }
     @Override

@@ -31,7 +31,7 @@ public class GTQTMetaBlocks {
     public static GTQTQuantumForceTransformerCasing QUANTUM_CONSTRAINT_CASING;
     public static GTQTBlockComponentAssemblyLineCasing COMPONENT_ASSEMBLY_LINE;
     public static GTQTIsaCasing ISA_CASING;
-
+    public static GTQTElectronMicroscope ELECTRON_MICROSCOPE;
     public static GTQTElectrobath ELECTROBATH;
     public static GTQTRoad ROAD;
     public static GTQTKQCC KQCC;
@@ -68,6 +68,10 @@ public class GTQTMetaBlocks {
         COMPONENT_ASSEMBLY_LINE.setRegistryName("component_assembly_line_casing");
         ISA_CASING = new GTQTIsaCasing();
         ISA_CASING.setRegistryName("isa_casing");
+
+        ELECTRON_MICROSCOPE = new GTQTElectronMicroscope();
+        ELECTRON_MICROSCOPE.setRegistryName("electron_microscope");
+
         ELECTROBATH = new GTQTElectrobath();
         ELECTROBATH.setRegistryName("electrobath");
         KQCC = new GTQTKQCC();
@@ -112,6 +116,7 @@ public class GTQTMetaBlocks {
         registerItemModel(QUANTUM_CONSTRAINT_CASING);
         registerItemModel(COMPONENT_ASSEMBLY_LINE);
         registerItemModel(ISA_CASING);
+        registerItemModel(ELECTRON_MICROSCOPE);
         registerItemModel(KQCC);
         registerItemModel(GLASS_CASING);
         registerItemModel(STEPPER);

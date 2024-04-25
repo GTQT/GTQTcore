@@ -25,8 +25,11 @@ import gregtech.client.renderer.texture.Textures;
 import gregtech.common.blocks.BlockComputerCasing;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
+import keqing.gtqtcore.api.GTQTValue;
+import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.recipes.properties.KQNetProperty;
+import keqing.gtqtcore.api.utils.GTQTUtil;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -102,46 +105,7 @@ public class MetaTileEntitykeQingNet extends RecipeMapMultiblockController imple
         textList.add(new TextComponentTranslation("gtqtcore.multiblock.kqn.thresholdPercentage",thresholdPercentage));
         textList.add(new TextComponentTranslation( String.format("gtqtcore.multiblock.kqn.nb%s",thresholdPercentage)));
     }
-        protected void formStructure(PatternMatchContext context) {
-            super.formStructure(context);
-            List<IOpticalComputationHatch> providers = this.getAbilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION);
-            if (providers != null && providers.size() >= 1) {
-                this.computationProvider = (IOpticalComputationProvider)providers.get(0);
-            }
 
-            List<IObjectHolder> holders = this.getAbilities(MultiblockAbility.OBJECT_HOLDER);
-            if (holders != null && holders.size() >= 1) {
-                this.objectHolder = (IObjectHolder)holders.get(0);
-                this.inputInventory = new ItemHandlerList(Collections.singletonList(this.objectHolder.getAsHandler()));
-            }
-
-            if (this.computationProvider == null || this.objectHolder == null) {
-                this.invalidateStructure();
-            }
-
-        }
-        public ComputationRecipeLogic getRecipeMapWorkable() {
-            return (ComputationRecipeLogic)this.recipeMapWorkable;
-        }
-
-        public void invalidateStructure() {
-            this.computationProvider = null;
-            List<IObjectHolder> holders = this.getAbilities(MultiblockAbility.OBJECT_HOLDER);
-            if (holders != null && holders.size() >= 1 && holders.get(0) == this.objectHolder) {
-                this.objectHolder.setLocked(false);
-            }
-
-            this.objectHolder = null;
-            super.invalidateStructure();
-        }
-
-        public IOpticalComputationProvider getComputationProvider() {
-            return this.computationProvider;
-        }
-
-        public IObjectHolder getObjectHolder() {
-            return this.objectHolder;
-        }
 
         @Nonnull
         protected  BlockPattern createStructurePattern() {
@@ -152,6 +116,8 @@ public class MetaTileEntitykeQingNet extends RecipeMapMultiblockController imple
                     .where('P', states(new IBlockState[]{getCasingState()})
                             .or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(1))
                             .or(abilities(MultiblockAbility.MAINTENANCE_HATCH).setExactLimit(1))
+                            .or(abilities(MultiblockAbility.IMPORT_ITEMS).setExactLimit(1))
+                            .or(abilities(MultiblockAbility.EXPORT_ITEMS).setExactLimit(1))
                             .or(abilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION).setExactLimit(1)))
                     .where('H', abilities(MultiblockAbility.OBJECT_HOLDER)).build();
         }
@@ -179,14 +145,26 @@ public class MetaTileEntitykeQingNet extends RecipeMapMultiblockController imple
         public boolean canVoidRecipeItemOutputs() {
             return true;
         }
-        /*
-        protected void addWarningText(List<ITextComponent> textList) {
-            super.addWarningText(textList);
-            if (this.isStructureFormed() && this.isActive() && this.getRecipeMapWorkable().isHasNotEnoughComputation()) {
-                textList.add((new TextComponentTranslation("gregtech.multiblock.computation.not_enough_computation")).setStyle((new Style()).setColor(TextFormatting.RED)));
-            }
+
+    public IOpticalComputationProvider getComputationProvider() {
+        return this.computationProvider;
+    }
+    @Override
+    protected void formStructure(PatternMatchContext context) {
+        super.formStructure(context);
+        List<IOpticalComputationHatch> providers = this.getAbilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION);
+        if (providers != null && providers.size() >= 1) {
+            this.computationProvider = (IOpticalComputationProvider)providers.get(0);
         }
-        */
+    }
+    /*
+    protected void addWarningText(List<ITextComponent> textList) {
+        super.addWarningText(textList);
+        if (this.isStructureFormed() && this.isActive() && this.getRecipeMapWorkable().isHasNotEnoughComputation()) {
+            textList.add((new TextComponentTranslation("gregtech.multiblock.computation.not_enough_computation")).setStyle((new Style()).setColor(TextFormatting.RED)));
+        }
+    }
+    */
         private static class ResearchStationRecipeLogic extends ComputationRecipeLogic {
             public ResearchStationRecipeLogic(MetaTileEntitykeQingNet metaTileEntity) {
                 super(metaTileEntity, ComputationType.SPORADIC);
@@ -197,38 +175,5 @@ public class MetaTileEntitykeQingNet extends RecipeMapMultiblockController imple
                 return (MetaTileEntitykeQingNet)super.getMetaTileEntity();
             }
 
-            public boolean isAllowOverclocking() {
-                return false;
-            }
-
-            protected boolean setupAndConsumeRecipeInputs( Recipe recipe,  IItemHandlerModifiable importInventory) {
-                this.overclockResults = new int[]{recipe.getEUt(), recipe.getDuration()};
-                if (!this.hasEnoughPower(this.overclockResults)) {
-                    return false;
-                } else if (recipe.matches(false, importInventory, this.getInputTank())) {
-                    this.metaTileEntity.addNotifiedInput(importInventory);
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-
-            protected void setupRecipe(Recipe recipe) {
-                IObjectHolder holder = this.getMetaTileEntity().getObjectHolder();
-                holder.setLocked(true);
-                super.setupRecipe(recipe);
-            }
-
-            protected void outputRecipeOutputs() {
-                IObjectHolder holder = this.getMetaTileEntity().getObjectHolder();
-                holder.setHeldItem(ItemStack.EMPTY);
-                ItemStack outputItem = ItemStack.EMPTY;
-                if (this.itemOutputs != null && this.itemOutputs.size() >= 1) {
-                    outputItem = (ItemStack)this.itemOutputs.get(0);
-                }
-
-                holder.setDataItem(outputItem);
-                holder.setLocked(false);
-            }
         }
     }

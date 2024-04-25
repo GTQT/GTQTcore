@@ -1,7 +1,7 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "epimorphism:items/material_sets/hypogen/plate_double",
-    "layer1": "epimorphism:items/material_sets/hypogen/plate_double_overlay"
+    "layer0": "gtqtcore:items/material_sets/hypogen/plate_double",
+    "layer1": "gtqtcore:items/material_sets/hypogen/plate_double_overlay"
   }
 }

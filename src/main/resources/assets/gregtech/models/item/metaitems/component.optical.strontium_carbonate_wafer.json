@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "epimorphism:items/metaitems/component.optical.strontium_carbonate_wafer"
+    "layer0": "gtqtcore:items/metaitems/component.optical.strontium_carbonate_wafer"
   }
 }

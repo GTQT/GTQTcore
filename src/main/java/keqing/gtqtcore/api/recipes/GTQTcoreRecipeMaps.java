@@ -104,6 +104,7 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<PARecipeBuilder> PARTICLE_ACCELERATOR_RECIPES;
     public static final RecipeMap<SimpleRecipeBuilder> DIGESTER_RECIPES;
     public static final RecipeMap<BRRecioeBuilder> BIOLOGICAL_REACTION_RECIPES;
+    public static final RecipeMap<ERRecioeBuilder> ENZYMES_REACTION_RECIPES;
     public static final RecipeMap<PHRecipeBuilder> FERMENTATION_TANK_RECIPES;
     public static final RecipeMap<FuelRecipeBuilder> NAQUADAH_REACTOR_RECIPES;
     public static final RecipeMap<SimpleRecipeBuilder> FUEL_REFINE_FACTORY_RECIPES;
@@ -133,6 +134,7 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<SimpleRecipeBuilder> DISSOLUTION_TANK_RECIPES;
     public static final RecipeMap<SimpleRecipeBuilder> FLUID_EXTRACTOR_RECIPES;
     public static final RecipeMap<SimpleRecipeBuilder> FLUID_CANNER_RECIPES;
+    public static final RecipeMap<SimpleRecipeBuilder> BIO_CENTRIFUGE;
     public static final RecipeMap<SimpleRecipeBuilder> FLOTATION_FACTORY_RECIPES;
     public static final RecipeMap<BlastRecipeBuilder> VACUUM_DRYING_FURNACE_RECIPES;
     public static final RecipeMap<GrindBallTierRecipeBuilder> ISA_MILL_GRINDER;
@@ -143,13 +145,14 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<PACasingTierRecipeBuilder> PRECISE_ASSEMBLER_RECIPES;
     public static final RecipeMap<ComputationRecipeBuilder> CW_PRECISE_ASSEMBLER_RECIPES;
     public static final RecipeMap<MDRecipeBuilder> MINING_DRILL_RECIPES;
-    public static final RecipeMap<FuelRecipeBuilder> SOLAR_PLATE;
     public static final RecipeMap<SimpleRecipeBuilder> DISTILLATION_KETTLE;
     public static final RecipeMap<SimpleRecipeBuilder> NANOHYBRID;
     public static final RecipeMap<SimpleRecipeBuilder> PYROLYSIS_TOWER;
     public static final RecipeMap<FusionRecipeBuilder> EFUSION_RECIPES;
     public static final RecipeMap<ComputationRecipeBuilder> LASER_ENGRAVING;
     public static final RecipeMap<ComputationRecipeBuilder> TD_PRINT_RECIPES;
+    public static final RecipeMap<ComputationRecipeBuilder> PRECISION_SPRAYING;
+    public static final RecipeMap<LASERComputationRecipeBuilder> PRECISION_SPINNING;
     public static final RecipeMap<SimpleRecipeBuilder> CW_LASER_ENGRAVER_RECIPES;
     public static final RecipeMap<LASERComputationRecipeBuilder> STEPPER_RECIPES;
     public static final RecipeMap<SimpleRecipeBuilder> GANTRY_CRANE;
@@ -239,6 +242,18 @@ public class GTQTcoreRecipeMaps {
                 .setSlotOverlay(false, false, true, GuiTextures.CIRCUIT_OVERLAY)
                 .setSound(GTSoundEvents.ASSEMBLER);
 
+        PRECISION_SPRAYING = new RecipeMap<>("precision_spraying", 2, 1, 2, 0, new ComputationRecipeBuilder(), false)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL)
+                .setSlotOverlay(false, false, false, GuiTextures.CIRCUIT_OVERLAY)
+                .setSlotOverlay(false, false, true, GuiTextures.CIRCUIT_OVERLAY)
+                .setSound(GTSoundEvents.CENTRIFUGE);
+
+        PRECISION_SPINNING = new RecipeMap<>("precision_spinning", 3, 1, 3, 0, new LASERComputationRecipeBuilder(), false)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL)
+                .setSlotOverlay(false, false, false, GuiTextures.CIRCUIT_OVERLAY)
+                .setSlotOverlay(false, false, true, GuiTextures.CIRCUIT_OVERLAY)
+                .setSound(GTSoundEvents.CHEMICAL_REACTOR);
+
         VACUUM_DRYING_FURNACE_RECIPES = new RecipeMap<>("vacuum_drying_furnace_recipes", 3, 9, 3, 3, new BlastRecipeBuilder(), false)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_SIFT, ProgressWidget.MoveType.HORIZONTAL)
                 .setSlotOverlay(false, false, false, GuiTextures.FURNACE_OVERLAY_1)
@@ -261,7 +276,7 @@ public class GTQTcoreRecipeMaps {
                 .setProgressBar(GuiTextures.PROGRESS_BAR_MACERATE, ProgressWidget.MoveType.HORIZONTAL)
                 .setSound(GTSoundEvents.MACERATOR);
 
-        PR_MIX = new RecipeMap<>("pr_mix", 2, 2, 2, 2, new PrimitiveRecipeBuilder(), false)
+        PR_MIX = new RecipeMap<>("pr_mix", 3, 3, 3, 3, new PrimitiveRecipeBuilder(), false)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_MACERATE, ProgressWidget.MoveType.HORIZONTAL)
                 .setSound(GTSoundEvents.CHEMICAL_REACTOR);
 
@@ -274,6 +289,10 @@ public class GTQTcoreRecipeMaps {
                 .setSound(GTSoundEvents.MACERATOR);
 
         ISA_MILL_GRINDER = new RecipeMap<>("isa_mill_recipes", 3, 3, 0, 0, new GrindBallTierRecipeBuilder(), false)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_MACERATE, ProgressWidget.MoveType.HORIZONTAL)
+                .setSound(GTSoundEvents.MACERATOR);
+
+        BIO_CENTRIFUGE = new RecipeMap<>("bio_centrifuge", 3, 3, 3, 3, new SimpleRecipeBuilder(), false)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_MACERATE, ProgressWidget.MoveType.HORIZONTAL)
                 .setSound(GTSoundEvents.MACERATOR);
 
@@ -297,6 +316,7 @@ public class GTQTcoreRecipeMaps {
                 .setProgressBar(GuiTextures.PROGRESS_BAR_EXTRACT, ProgressWidget.MoveType.HORIZONTAL)
                 .setSound(GTSoundEvents.CHEMICAL_REACTOR);
         BIOLOGICAL_REACTION_RECIPES = new RecipeMap<>("biological_reaction_recipes", 3, 3, 3, 3, new BRRecioeBuilder(), false);
+        ENZYMES_REACTION_RECIPES = new RecipeMap<>("enzymes_reaction_recipes", 3, 3, 3, 3, new ERRecioeBuilder(), false);
 
         DISSOLUTION_TANK_RECIPES = new RecipeMap<>("dissolution_tank_recipes", 4, 4, 4, 4, new SimpleRecipeBuilder(), false);
         //  Dangote Distillery RecipeMap
@@ -311,13 +331,6 @@ public class GTQTcoreRecipeMaps {
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARC_FURNACE, ProgressWidget.MoveType.HORIZONTAL);
 
         ROCKET = new RecipeMap<>("rocket",
-                0, 0, 1, 0, new FuelRecipeBuilder(), false)
-                .setSlotOverlay(false, true, true, GuiTextures.CENTRIFUGE_OVERLAY)
-                .setProgressBar(GuiTextures.PROGRESS_BAR_GAS_COLLECTOR, ProgressWidget.MoveType.HORIZONTAL)
-                .setSound(GTSoundEvents.TURBINE)
-                .allowEmptyOutput();
-
-        SOLAR_PLATE = new RecipeMap<>("soalr_plate",
                 0, 0, 1, 0, new FuelRecipeBuilder(), false)
                 .setSlotOverlay(false, true, true, GuiTextures.CENTRIFUGE_OVERLAY)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_GAS_COLLECTOR, ProgressWidget.MoveType.HORIZONTAL)
@@ -346,7 +359,7 @@ public class GTQTcoreRecipeMaps {
                 .setSound(GTSoundEvents.CHEMICAL_REACTOR);
 
         GANTRY_CRANE = new RecipeMap<>("gantry_crane",
-                9, 1, 0, 0, new SimpleRecipeBuilder(), false);
+                3, 3, 3, 3, new SimpleRecipeBuilder(), false);
 
         CLARIFIER = new RecipeMap<>("clarifire",
                 1, 1, 1, 1, new SimpleRecipeBuilder(), false);

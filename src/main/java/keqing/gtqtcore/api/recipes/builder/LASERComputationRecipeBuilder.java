@@ -33,14 +33,6 @@ public class LASERComputationRecipeBuilder extends RecipeBuilder<LASERComputatio
             this.CWUt(((Number) value).intValue());
             return true;
         }
-        if (key.equals(TotalComputationProperty.KEY)) {
-            this.totalCWU(((Number) value).intValue());
-            return true;
-        }
-        if (key.equals(LASERNetProperty.KEY)) {
-            this.totalCWU(((Number) value).intValue());
-            return true;
-        }
         return super.applyProperty(key, value);
     }
 
@@ -63,15 +55,4 @@ public class LASERComputationRecipeBuilder extends RecipeBuilder<LASERComputatio
         return this;
     }
 
-    /**
-     * The total computation for this recipe. If desired, this should be used instead of a call to duration().
-     */
-    public LASERComputationRecipeBuilder totalCWU(int totalCWU) {
-        if (totalCWU < 0) {
-            GTLog.logger.error("Total CWU cannot be less than 0", new IllegalArgumentException());
-            recipeStatus = EnumValidationResult.INVALID;
-        }
-        this.applyProperty(TotalComputationProperty.getInstance(), totalCWU);
-        return duration(totalCWU);
-    }
 }

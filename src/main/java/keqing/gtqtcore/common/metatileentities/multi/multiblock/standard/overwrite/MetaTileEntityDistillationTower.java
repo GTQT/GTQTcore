@@ -274,7 +274,7 @@ public class MetaTileEntityDistillationTower extends GTQTRecipeMapMultiblockOver
     @SideOnly(Side.CLIENT)
     @Override
     protected ICubeRenderer getFrontOverlay() {
-        return Textures.DISTILLATION_TOWER_OVERLAY;
+        return GTQTTextures.ALGAE_FARM_OVERLAY;
     }
 
     @Override

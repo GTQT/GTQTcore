@@ -2,6 +2,7 @@ package keqing.gtqtcore.common;
 
 import gregtech.api.GregTechAPI;
 import gregtech.api.block.VariantItemBlock;
+import gregtech.api.cover.CoverDefinition;
 import gregtech.api.recipes.recipeproperties.FusionEUToStartProperty;
 import gregtech.api.unification.stack.ItemMaterialInfo;
 import gregtech.common.items.MetaItems;
@@ -13,10 +14,10 @@ import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTBlockWireCoil;
 import keqing.gtqtcore.common.block.blocks.GTQTCrops;
 import keqing.gtqtcore.common.block.blocks.GTQTStoneVariantBlock;
+import keqing.gtqtcore.common.covers.GTQTCoverBehavior;
 import keqing.gtqtcore.common.items.GTQTMetaItems;
 import keqing.gtqtcore.common.items.metaitems.GTQTMetaToolItems;
 import keqing.gtqtcore.loaders.OreDictionaryLoader;
-import keqing.gtqtcore.loaders.WorldLoader;
 import keqing.gtqtcore.loaders.recipes.*;
 import keqing.gtqtcore.loaders.recipes.gcys.GCYSMaterialInfoLoader;
 import keqing.gtqtcore.loaders.recipes.handlers.*;
@@ -116,10 +117,9 @@ public class CommonProxy {
         GTQTRecipes.registerTool();
     }
     public void preLoad(){
-        //GTQTStoneTypes.init();
+        GTQTStoneTypes.init();
     }
     public void init() {
-        WorldLoader.init();
         OreDictionaryLoader.init();
         FuelRecipes.init();
         IntegratedMiningDivision.init();
@@ -149,6 +149,12 @@ public class CommonProxy {
     }
 
     @SubscribeEvent
+    public static void registerCoverBehavior(GregTechAPI.RegisterEvent<CoverDefinition> event) {
+        GTQTLog.logger.info("Registering Cover Behaviors...");
+        GTQTCoverBehavior.init();
+    }
+
+    @SubscribeEvent
     public static void initMaterialInfo(GregTechAPI.RegisterEvent<ItemMaterialInfo> event) {
         GCYSMaterialInfoLoader.init();
     }
@@ -173,6 +179,7 @@ public class CommonProxy {
         registry.register(GTQTMetaBlocks.TURBINE_CASING1);
         registry.register(GTQTMetaBlocks.QUANTUM_CONSTRAINT_CASING);
         registry.register(GTQTMetaBlocks.COMPONENT_ASSEMBLY_LINE);
+        registry.register(GTQTMetaBlocks.ELECTRON_MICROSCOPE);
         registry.register(GTQTMetaBlocks.ISA_CASING);
         registry.register(GTQTMetaBlocks.ROAD);
         registry.register(GTQTMetaBlocks.ELECTROBATH);
@@ -227,6 +234,7 @@ public class CommonProxy {
         registry.register(createItemBlock(GTQTMetaBlocks.TURBINE_CASING1, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.QUANTUM_CONSTRAINT_CASING, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.COMPONENT_ASSEMBLY_LINE, VariantItemBlock::new));
+        registry.register(createItemBlock(GTQTMetaBlocks.ELECTRON_MICROSCOPE, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.ISA_CASING, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.ELECTROBATH, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.ROAD, VariantItemBlock::new));
@@ -272,6 +280,23 @@ public class CommonProxy {
         ELEProperties.registeredTier(3,"三级");
         ELEProperties.registeredTier(4,"四级");
         ELEProperties.registeredTier(5,"五级");
+
+        ERProperty.registeredRate(101,"1 0 1 0 0 酸性");
+        ERProperty.registeredRate(102,"1 0 1 1 0 酸性");
+        ERProperty.registeredRate(103,"1 1 0 1 0 酸性");
+        ERProperty.registeredRate(104,"1 1 0 1 1 酸性");
+
+        ERProperty.registeredRate(201,"2 1 1 3 1 碱性");
+        ERProperty.registeredRate(202,"1 2 3 1 1 碱性");
+        ERProperty.registeredRate(203,"1 3 2 1 1 碱性");
+        ERProperty.registeredRate(204,"2 1 1 3 1 碱性");
+
+        ERProperty.registeredRate(301,"4 1 1 3 2 酸性");
+        ERProperty.registeredRate(302,"2 4 2 3 1 酸性");
+        ERProperty.registeredRate(303,"2 3 2 4 1 酸性");
+
+        ERProperty.registeredRate(401,"2 5 2 4 3 碱性");
+
 
         for(int i=10;i<=800;i=i+10) LASERNetProperty.registeredLaser(i, String.valueOf(i));
         for(int i=1;i<=100;i++) KQNetProperty.registeredNB(i, String.valueOf(i));

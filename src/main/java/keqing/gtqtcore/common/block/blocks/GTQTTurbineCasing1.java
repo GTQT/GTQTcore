@@ -40,7 +40,9 @@ public class GTQTTurbineCasing1 extends VariantBlock<GTQTTurbineCasing1.TurbineC
         PRECISE_ASSEMBLER_CASING_MK1("precise_assembler_casing_mk1",4),
         PRECISE_ASSEMBLER_CASING_MK2("precise_assembler_casing_mk2",4),
         PRECISE_ASSEMBLER_CASING_MK3("precise_assembler_casing_mk3",4),
-        GALVANIZE_STEEL_CASING("galvanize_steel_casing",4);
+        GALVANIZE_STEEL_CASING("galvanize_steel_casing",4),
+        ADVANCED_COLD_CASING("advanced_cold_casing", 4),
+        CLARIFIER_CASING("clarifier_casing", 4);
 
         private final String name;
         private final int harvestLevel;

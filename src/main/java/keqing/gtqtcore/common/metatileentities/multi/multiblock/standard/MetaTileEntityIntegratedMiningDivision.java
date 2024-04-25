@@ -270,9 +270,6 @@ public class MetaTileEntityIntegratedMiningDivision extends GTQTRecipeMapMultibl
             if(ParallelNum==0)this.maxProgressTime=maxProgress;
             else this.maxProgressTime = maxProgress/ParallelNum;
         }
-        public long getMaxVoltage() {
-            return Math.min(super.getMaxVoltage(), VA[casingTier]);
-        }
         @Override
         protected void modifyOverclockPost(int[] resultOverclock,  IRecipePropertyStorage storage) {
             super.modifyOverclockPost(resultOverclock, storage);

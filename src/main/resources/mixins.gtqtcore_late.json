@@ -6,10 +6,11 @@
   "minVersion": "0.8.3",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "gregtech.MixinEllipsoidGenerator",
+    "gregtech.MixinSphereGenerator",
     "gregtech.MixinMetaItem",
     "gregtech.MixinMetaPrefixItem",
     "gregtech.MixinMetaValueItem",
-    "biomesoplenty.MixinBiomesOPlenty",
     "gregtech.MixinSolarBoilerServer",
     "gregtech.MixinSteamBoilerAccess",
     "gregtech.MixinWorkableTieredMetaTileEntity",

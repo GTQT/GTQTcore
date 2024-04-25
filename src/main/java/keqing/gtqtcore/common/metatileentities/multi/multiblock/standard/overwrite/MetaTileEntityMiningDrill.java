@@ -202,7 +202,10 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
         this.writeCustomData(GTQTValue.UPDATE_TIER, buf -> buf.writeInt(this.tier));
         naijiu=drilla*15*15000;
     }
-
+    @Override
+    public boolean isMultiblockPartWeatherResistant(@Nonnull IMultiblockPart part) {
+        return true;
+    }
    @Override
   public void invalidateStructure() {
        super.invalidateStructure();

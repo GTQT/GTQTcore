@@ -19,6 +19,7 @@ public class FuelRecipes {
 
 
     public static void init(){
+
                     PARTICLE_ACCELERATOR_RECIPES.recipeBuilder()
                             .input(screw, Hdcs, 1)
                             .output(ingot,Iron)

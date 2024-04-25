@@ -55,6 +55,16 @@ public class MetaTileEntityMachine {
        registerGalvanizedSteel();
        machinecasing();
        turbine();
+       dust();
+    }
+
+    private static void dust() {
+       MIXER_RECIPES.recipeBuilder()
+               .input(dust,Titanium,6)
+               .input(dust,Aluminium,4)
+               .input(dust,Vanadium)
+               .output(dust,Tcfour,11)
+               .duration(800).EUt(VA[HV]).buildAndRegister();
     }
 
     private static void turbine() {

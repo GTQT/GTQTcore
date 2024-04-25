@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "epimorphism:items/metaitems/boule.strontium_carbonate.bohrium"
+    "layer0": "gtqtcore:items/metaitems/boule.strontium_carbonate.bohrium"
   }
 }

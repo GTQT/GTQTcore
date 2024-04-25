@@ -22,7 +22,7 @@ public class GTQTRoad extends VariantBlock<GTQTRoad.RoadType> {
         setHardness(5.0f);
         setResistance(10.0f);
         setSoundType(SoundType.METAL);
-        setDefaultState(getState(RoadType.ASPHALT_STRAGHT));
+        setDefaultState(getState(RoadType.LV_KUANG_SHA));
     }
 
     @Override
@@ -31,10 +31,8 @@ public class GTQTRoad extends VariantBlock<GTQTRoad.RoadType> {
     }
 
     public enum RoadType implements IStringSerializable, IStateHarvestLevel {
-        ASPHALT_STRAGHT("asphalt_straght",3),
-        ASPHALT_LINE("asphalt_line",3),
-        ASPHALT_RIGHT("asphalt_right",3),
-        ASPHALT_LEFT("asphalt_left",3);
+
+        LV_KUANG_SHA("lvkuangkuangsha",3);
 
         private final String name;
         private final int harvestLevel;

@@ -142,7 +142,10 @@ public class MetaTileEntityOceanPumper extends MultiblockWithDisplayBase impleme
         }
         return false;
     }
-
+    @Override
+    public boolean isMultiblockPartWeatherResistant(@Nonnull IMultiblockPart part) {
+        return true;
+    }
     public boolean isInValidLocation() {
         Biome biome = getWorld().getBiome(getPos());
         Set<BiomeDictionary.Type> biomeTypes = BiomeDictionary.getTypes(biome);

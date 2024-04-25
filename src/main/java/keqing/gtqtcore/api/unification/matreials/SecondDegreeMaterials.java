@@ -16,8 +16,8 @@ import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 
 
 public class SecondDegreeMaterials {
-    private static int startId = 20300;
-    private static final int END_ID = startId + 300;
+    private static int startId = 21000;
+    private static final int END_ID = startId + 1000;
 
     private static int getMaterialsId() {
         if (startId < END_ID) {
@@ -167,7 +167,7 @@ public class SecondDegreeMaterials {
         //硫酸锌粉
         GTQTMaterials.ZincSulfate  = new Material.Builder(getMaterialsId(), gregtechId("zinc_sulfate"))
                 .dust()
-                .components(Zinc, 1, Sulfur, 2,Oxygen,8)
+                .components(Zinc, 1, Sulfur, 1,Oxygen,4)
                 .color(0x4682B4)
                 .build();
 

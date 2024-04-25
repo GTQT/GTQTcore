@@ -283,51 +283,51 @@ public class CPULine {
         STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[HV]).notConsumable(AE_RETICLEA)
                 .Laser(600)
                 .input(AE_WAFERA).output(AE_A,1)
-                .totalCWU(9600).CWUt(16).fluidInputs(HydrogenSilsesquioxane.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
+                .CWUt(16).fluidInputs(HydrogenSilsesquioxane.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
 
         STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[HV]).notConsumable(AE_RETICLEB)
                 .Laser(600)
                 .input(AE_WAFERB).output(AE_B,1)
-                .totalCWU(9600).CWUt(16).fluidInputs(HydrogenSilsesquioxane.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
+                .CWUt(16).fluidInputs(HydrogenSilsesquioxane.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
 
         STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[HV]).notConsumable(AE_RETICLEC)
                 .Laser(600)
                 .input(AE_WAFERC).output(AE_C,1)
-                .totalCWU(9600).CWUt(16).fluidInputs(HydrogenSilsesquioxane.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
+                .CWUt(16).fluidInputs(HydrogenSilsesquioxane.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
 
 
 
         STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[HV]).notConsumable(AE_RETICLEA)
                 .Laser(200)
                 .input(AE_WAFERA).output(AE_A,4)
-                .totalCWU(32000).CWUt(32).fluidInputs(SU8_Photoresist.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
+                .CWUt(32).fluidInputs(SU8_Photoresist.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
 
         STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[HV]).notConsumable(AE_RETICLEB)
                 .Laser(200)
                 .input(AE_WAFERB).output(AE_B,4)
-                .totalCWU(32000).CWUt(32).fluidInputs(SU8_Photoresist.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
+                .CWUt(32).fluidInputs(SU8_Photoresist.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
 
         STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[HV]).notConsumable(AE_RETICLEC)
                 .Laser(200)
                 .input(AE_WAFERC).output(AE_C,4)
-                .totalCWU(32000).CWUt(32).fluidInputs(SU8_Photoresist.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
+                .CWUt(32).fluidInputs(SU8_Photoresist.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
 
 
 
         STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[HV]).notConsumable(AE_RETICLEA)
                 .Laser(60)
                 .input(AE_WAFERA).output(AE_A,16)
-                .totalCWU(64000).CWUt(64).fluidInputs(Vinylcinnamate.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
+                .CWUt(64).fluidInputs(Vinylcinnamate.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
 
         STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[HV]).notConsumable(AE_RETICLEB)
                 .Laser(60)
                 .input(AE_WAFERB).output(AE_B,16)
-                .totalCWU(64000).CWUt(64).fluidInputs(Vinylcinnamate.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
+                .CWUt(64).fluidInputs(Vinylcinnamate.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
 
         STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[HV]).notConsumable(AE_RETICLEC)
                 .Laser(60)
                 .input(AE_WAFERC).output(AE_C,16)
-                .totalCWU(64000).CWUt(64).fluidInputs(Vinylcinnamate.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
+                .CWUt(64).fluidInputs(Vinylcinnamate.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
 
     }
 
@@ -335,148 +335,148 @@ public class CPULine {
         STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[MV]).notConsumable(RETICLE_INTEGRATED_LOGIC_CIRCUIT)
                 .Laser(800)
                 .input(SILICON_WAFER).output(INTEGRATED_LOGIC_CIRCUIT_WAFER)
-                .totalCWU(9600).CWUt(8).fluidInputs(HydrogenSilsesquioxane.getFluid(1000)).buildAndRegister();
+                .CWUt(8).fluidInputs(HydrogenSilsesquioxane.getFluid(1000)).buildAndRegister();
         STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[HV]).notConsumable(RETICLE_INTEGRATED_LOGIC_CIRCUIT)
                 .Laser(600)
                 .input(PHOSPHORUS_WAFER).output(INTEGRATED_LOGIC_CIRCUIT_WAFER,4)
-                .totalCWU(9600).CWUt(8).fluidInputs(HydrogenSilsesquioxane.getFluid(1000)).buildAndRegister();
+                .CWUt(8).fluidInputs(HydrogenSilsesquioxane.getFluid(1000)).buildAndRegister();
         STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[EV]).notConsumable(RETICLE_INTEGRATED_LOGIC_CIRCUIT)
                 .Laser(400)
                 .input(NAQUADAH_WAFER).output(INTEGRATED_LOGIC_CIRCUIT_WAFER,8)
-                .totalCWU(9600).CWUt(8).fluidInputs(HydrogenSilsesquioxane.getFluid(1000)).buildAndRegister();
+                .CWUt(8).fluidInputs(HydrogenSilsesquioxane.getFluid(1000)).buildAndRegister();
         STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[IV]).notConsumable(RETICLE_INTEGRATED_LOGIC_CIRCUIT)
                 .Laser(200)
                 .input(NEUTRONIUM_WAFER).output(INTEGRATED_LOGIC_CIRCUIT_WAFER,16)
-                .totalCWU(9600).CWUt(8).fluidInputs(HydrogenSilsesquioxane.getFluid(1000)).buildAndRegister();
+                .CWUt(8).fluidInputs(HydrogenSilsesquioxane.getFluid(1000)).buildAndRegister();
 
         STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[MV]).notConsumable(RETICLE_RANDOM_ACCESS_MEMORY)
                 .Laser(800)
                 .input(SILICON_WAFER).output(RANDOM_ACCESS_MEMORY_WAFER)
-                .totalCWU(9600).CWUt(8).fluidInputs(HydrogenSilsesquioxane.getFluid(1000)).buildAndRegister();
+                .CWUt(8).fluidInputs(HydrogenSilsesquioxane.getFluid(1000)).buildAndRegister();
         STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[HV]).notConsumable(RETICLE_RANDOM_ACCESS_MEMORY)
-                .Laser(400)
-                .input(PHOSPHORUS_WAFER).output(RANDOM_ACCESS_MEMORY_WAFER,4)
-                .totalCWU(9600).CWUt(8).fluidInputs(HydrogenSilsesquioxane.getFluid(1000)).buildAndRegister();
-        STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[EV]).notConsumable(RETICLE_RANDOM_ACCESS_MEMORY)
                 .Laser(600)
+                .input(PHOSPHORUS_WAFER).output(RANDOM_ACCESS_MEMORY_WAFER,4)
+                .CWUt(8).fluidInputs(HydrogenSilsesquioxane.getFluid(1000)).buildAndRegister();
+        STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[EV]).notConsumable(RETICLE_RANDOM_ACCESS_MEMORY)
+                .Laser(400)
                 .input(NAQUADAH_WAFER).output(RANDOM_ACCESS_MEMORY_WAFER,8)
-                .totalCWU(9600).CWUt(8).fluidInputs(HydrogenSilsesquioxane.getFluid(1000)).buildAndRegister();
+                .CWUt(8).fluidInputs(HydrogenSilsesquioxane.getFluid(1000)).buildAndRegister();
         STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[IV]).notConsumable(RETICLE_RANDOM_ACCESS_MEMORY)
                 .Laser(200)
                 .input(NEUTRONIUM_WAFER).output(RANDOM_ACCESS_MEMORY_WAFER,16)
-                .totalCWU(9600).CWUt(8).fluidInputs(HydrogenSilsesquioxane.getFluid(1000)).buildAndRegister();
+                .CWUt(8).fluidInputs(HydrogenSilsesquioxane.getFluid(1000)).buildAndRegister();
 
         STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[MV]).notConsumable(RETICLE_CENTRAL_PROCESSING_UNIT)
                 .Laser(800)
                 .input(SILICON_WAFER).output(CENTRAL_PROCESSING_UNIT_WAFER)
-                .totalCWU(9600).CWUt(8).fluidInputs(HydrogenSilsesquioxane.getFluid(1000)).buildAndRegister();
+                .CWUt(8).fluidInputs(HydrogenSilsesquioxane.getFluid(1000)).buildAndRegister();
         STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[HV]).notConsumable(RETICLE_CENTRAL_PROCESSING_UNIT)
                 .Laser(600)
                 .input(PHOSPHORUS_WAFER).output(CENTRAL_PROCESSING_UNIT_WAFER,4)
-                .totalCWU(9600).CWUt(8).fluidInputs(HydrogenSilsesquioxane.getFluid(1000)).buildAndRegister();
+                .CWUt(8).fluidInputs(HydrogenSilsesquioxane.getFluid(1000)).buildAndRegister();
         STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[EV]).notConsumable(RETICLE_CENTRAL_PROCESSING_UNIT)
                 .Laser(400)
                 .input(NAQUADAH_WAFER).output(CENTRAL_PROCESSING_UNIT_WAFER,8)
-                .totalCWU(9600).CWUt(8).fluidInputs(HydrogenSilsesquioxane.getFluid(1000)).buildAndRegister();
+                .CWUt(8).fluidInputs(HydrogenSilsesquioxane.getFluid(1000)).buildAndRegister();
         STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[IV]).notConsumable(RETICLE_CENTRAL_PROCESSING_UNIT)
                 .Laser(200)
                 .input(NEUTRONIUM_WAFER).output(CENTRAL_PROCESSING_UNIT_WAFER,16)
-                .totalCWU(9600).CWUt(8).fluidInputs(HydrogenSilsesquioxane.getFluid(1000)).buildAndRegister();
+                .CWUt(8).fluidInputs(HydrogenSilsesquioxane.getFluid(1000)).buildAndRegister();
 
         STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[MV]).notConsumable(RETICLE_ULTRA_LOW_POWER_INTEGRATED_CIRCUIT)
                 .Laser(800)
                 .input(SILICON_WAFER).output(ULTRA_LOW_POWER_INTEGRATED_CIRCUIT_WAFER)
-                .totalCWU(9600).CWUt(8).fluidInputs(HydrogenSilsesquioxane.getFluid(1000)).buildAndRegister();
+                .CWUt(8).fluidInputs(HydrogenSilsesquioxane.getFluid(1000)).buildAndRegister();
         STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[HV]).notConsumable(RETICLE_ULTRA_LOW_POWER_INTEGRATED_CIRCUIT)
                 .Laser(600)
                 .input(PHOSPHORUS_WAFER).output(ULTRA_LOW_POWER_INTEGRATED_CIRCUIT_WAFER,4)
-                .totalCWU(9600).CWUt(8).fluidInputs(HydrogenSilsesquioxane.getFluid(1000)).buildAndRegister();
+                .CWUt(8).fluidInputs(HydrogenSilsesquioxane.getFluid(1000)).buildAndRegister();
         STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[EV]).notConsumable(RETICLE_ULTRA_LOW_POWER_INTEGRATED_CIRCUIT)
                 .Laser(400)
                 .input(NAQUADAH_WAFER).output(ULTRA_LOW_POWER_INTEGRATED_CIRCUIT_WAFER,8)
-                .totalCWU(9600).CWUt(8).fluidInputs(HydrogenSilsesquioxane.getFluid(1000)).buildAndRegister();
+                .CWUt(8).fluidInputs(HydrogenSilsesquioxane.getFluid(1000)).buildAndRegister();
         STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[IV]).notConsumable(RETICLE_ULTRA_LOW_POWER_INTEGRATED_CIRCUIT)
                 .Laser(200)
                 .input(NEUTRONIUM_WAFER).output(ULTRA_LOW_POWER_INTEGRATED_CIRCUIT_WAFER,16)
-                .totalCWU(9600).CWUt(8).fluidInputs(HydrogenSilsesquioxane.getFluid(1000)).buildAndRegister();
+                .CWUt(8).fluidInputs(HydrogenSilsesquioxane.getFluid(1000)).buildAndRegister();
 
         STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[MV]).notConsumable(RETICLE_LOW_POWER_INTEGRATED_CIRCUIT)
                 .Laser(800)
                 .input(SILICON_WAFER).output(LOW_POWER_INTEGRATED_CIRCUIT_WAFER)
-                .totalCWU(9600).CWUt(8).fluidInputs(HydrogenSilsesquioxane.getFluid(1000)).buildAndRegister();
+                .CWUt(8).fluidInputs(HydrogenSilsesquioxane.getFluid(1000)).buildAndRegister();
         STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[HV]).notConsumable(RETICLE_LOW_POWER_INTEGRATED_CIRCUIT) .Laser(600)
                 .input(PHOSPHORUS_WAFER).output(LOW_POWER_INTEGRATED_CIRCUIT_WAFER,4)
-                .totalCWU(9600).CWUt(8).fluidInputs(HydrogenSilsesquioxane.getFluid(1000)).buildAndRegister();
+                .CWUt(8).fluidInputs(HydrogenSilsesquioxane.getFluid(1000)).buildAndRegister();
         STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[EV]).notConsumable(RETICLE_LOW_POWER_INTEGRATED_CIRCUIT) .Laser(400)
                 .input(NAQUADAH_WAFER).output(LOW_POWER_INTEGRATED_CIRCUIT_WAFER,8)
-                .totalCWU(9600).CWUt(8).fluidInputs(HydrogenSilsesquioxane.getFluid(1000)).buildAndRegister();
+                .CWUt(8).fluidInputs(HydrogenSilsesquioxane.getFluid(1000)).buildAndRegister();
         STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[IV]).notConsumable(RETICLE_LOW_POWER_INTEGRATED_CIRCUIT) .Laser(200)
                 .input(NEUTRONIUM_WAFER).output(LOW_POWER_INTEGRATED_CIRCUIT_WAFER,16)
-                .totalCWU(9600).CWUt(8).fluidInputs(HydrogenSilsesquioxane.getFluid(1000)).buildAndRegister();
+                .CWUt(8).fluidInputs(HydrogenSilsesquioxane.getFluid(1000)).buildAndRegister();
 
         STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[MV]).notConsumable(RETICLE_SIMPLE_SYSTEM_ON_CHIP) .Laser(800)
                 .input(SILICON_WAFER).output(SIMPLE_SYSTEM_ON_CHIP_WAFER)
-                .totalCWU(9600).CWUt(8).fluidInputs(SU8_Photoresist.getFluid(1000)).buildAndRegister();
+                .CWUt(8).fluidInputs(SU8_Photoresist.getFluid(1000)).buildAndRegister();
         STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[HV]).notConsumable(RETICLE_SIMPLE_SYSTEM_ON_CHIP) .Laser(600)
                 .input(PHOSPHORUS_WAFER).output(SIMPLE_SYSTEM_ON_CHIP_WAFER,4)
-                .totalCWU(9600).CWUt(8).fluidInputs(SU8_Photoresist.getFluid(1000)).buildAndRegister();
+                .CWUt(8).fluidInputs(SU8_Photoresist.getFluid(1000)).buildAndRegister();
         STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[EV]).notConsumable(RETICLE_SIMPLE_SYSTEM_ON_CHIP) .Laser(400)
                 .input(NAQUADAH_WAFER).output(SIMPLE_SYSTEM_ON_CHIP_WAFER,8)
-                .totalCWU(9600).CWUt(8).fluidInputs(SU8_Photoresist.getFluid(1000)).buildAndRegister();
+                .CWUt(8).fluidInputs(SU8_Photoresist.getFluid(1000)).buildAndRegister();
         STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[IV]).notConsumable(RETICLE_SIMPLE_SYSTEM_ON_CHIP) .Laser(200)
                 .input(NEUTRONIUM_WAFER).output(SIMPLE_SYSTEM_ON_CHIP_WAFER,16)
-                .totalCWU(9600).CWUt(8).fluidInputs(SU8_Photoresist.getFluid(1000)).buildAndRegister();
+                .CWUt(8).fluidInputs(SU8_Photoresist.getFluid(1000)).buildAndRegister();
 
         STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[HV]).notConsumable(RETICLE_NAND_MEMORY_CHIP) .Laser(600)
                 .input(PHOSPHORUS_WAFER).output(NAND_MEMORY_CHIP_WAFER,1)
-                .totalCWU(38400).CWUt(32).fluidInputs(Vinylcinnamate.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
+                .CWUt(32).fluidInputs(Vinylcinnamate.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
         STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[EV]).notConsumable(RETICLE_NAND_MEMORY_CHIP) .Laser(400)
                 .input(NAQUADAH_WAFER).output(NAND_MEMORY_CHIP_WAFER,4)
-                .totalCWU(38400).CWUt(32).fluidInputs(Vinylcinnamate.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
+                .CWUt(32).fluidInputs(Vinylcinnamate.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
         STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[IV]).notConsumable(RETICLE_NAND_MEMORY_CHIP) .Laser(200)
                 .input(NEUTRONIUM_WAFER).output(NAND_MEMORY_CHIP_WAFER,8)
-                .totalCWU(38400).CWUt(32).fluidInputs(Vinylcinnamate.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
+                .CWUt(32).fluidInputs(Vinylcinnamate.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
 
         STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[HV]).notConsumable(RETICLE_NOR_MEMORY_CHIP) .Laser(600)
                 .input(PHOSPHORUS_WAFER).output(NOR_MEMORY_CHIP_WAFER,1)
-                .totalCWU(38400).CWUt(32).fluidInputs(Vinylcinnamate.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
+                .CWUt(32).fluidInputs(Vinylcinnamate.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
         STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[EV]).notConsumable(RETICLE_NOR_MEMORY_CHIP) .Laser(400)
                 .input(NAQUADAH_WAFER).output(NOR_MEMORY_CHIP_WAFER,4)
-                .totalCWU(38400).CWUt(32).fluidInputs(Vinylcinnamate.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
+                .CWUt(32).fluidInputs(Vinylcinnamate.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
         STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[IV]).notConsumable(RETICLE_NOR_MEMORY_CHIP) .Laser(200)
                 .input(NEUTRONIUM_WAFER).output(NOR_MEMORY_CHIP_WAFER,8)
-                .totalCWU(38400).CWUt(32).fluidInputs(Vinylcinnamate.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
+                .CWUt(32).fluidInputs(Vinylcinnamate.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
 
         STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[HV]).notConsumable(RETICLE_POWER_INTEGRATED_CIRCUIT) .Laser(400)
                 .input(PHOSPHORUS_WAFER).output(POWER_INTEGRATED_CIRCUIT_WAFER,1)
-                .totalCWU(38400).CWUt(32).fluidInputs(Vinylcinnamate.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
+                .CWUt(32).fluidInputs(Vinylcinnamate.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
         STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[EV]).notConsumable(RETICLE_POWER_INTEGRATED_CIRCUIT).Laser(200)
                 .input(NAQUADAH_WAFER).output(POWER_INTEGRATED_CIRCUIT_WAFER,4)
-                .totalCWU(38400).CWUt(32).fluidInputs(Vinylcinnamate.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
+                .CWUt(32).fluidInputs(Vinylcinnamate.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
         STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[IV]).notConsumable(RETICLE_POWER_INTEGRATED_CIRCUIT).Laser(60)
                 .input(NEUTRONIUM_WAFER).output(POWER_INTEGRATED_CIRCUIT_WAFER,8)
-                .totalCWU(38400).CWUt(32).fluidInputs(Vinylcinnamate.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
+                .CWUt(32).fluidInputs(Vinylcinnamate.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
 
         STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[HV]).notConsumable(RETICLE_SYSTEM_ON_CHIP).Laser(400)
                 .input(PHOSPHORUS_WAFER).output(SYSTEM_ON_CHIP_WAFER,1)
-                .totalCWU(38400).CWUt(32).fluidInputs(Xmt.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
+                .CWUt(32).fluidInputs(Xmt.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
         STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[EV]).notConsumable(RETICLE_SYSTEM_ON_CHIP).Laser(200)
                 .input(NAQUADAH_WAFER).output(SYSTEM_ON_CHIP_WAFER,4)
-                .totalCWU(38400).CWUt(32).fluidInputs(Xmt.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
+                .CWUt(32).fluidInputs(Xmt.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
         STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[IV]).notConsumable(RETICLE_SYSTEM_ON_CHIP).Laser(60)
                 .input(NEUTRONIUM_WAFER).output(SYSTEM_ON_CHIP_WAFER,8)
-                .totalCWU(38400).CWUt(32).fluidInputs(Xmt.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
+                .CWUt(32).fluidInputs(Xmt.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
 
         STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[EV]).notConsumable(RETICLE_ADVANCED_SYSTEM_ON_CHIP).Laser(60)
                 .input(NAQUADAH_WAFER).output(ADVANCED_SYSTEM_ON_CHIP_WAFER,1)
-                .totalCWU(153600).CWUt(128).fluidInputs(Xmt.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
+               .CWUt(128).fluidInputs(Xmt.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
         STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[IV]).notConsumable(RETICLE_ADVANCED_SYSTEM_ON_CHIP).Laser(40)
                 .input(NEUTRONIUM_WAFER).output(ADVANCED_SYSTEM_ON_CHIP_WAFER,4)
-                .totalCWU(153600).CWUt(128).fluidInputs(Xmt.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
+               .CWUt(128).fluidInputs(Xmt.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
 
         STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[IV]).notConsumable(RETICLE_HIGHLY_ADVANCED_SYSTEM_ON_CHIP).Laser(20)
                 .input(NEUTRONIUM_WAFER).output(HIGHLY_ADVANCED_SOC_WAFER,1)
-                .totalCWU(614400).CWUt(512).fluidInputs(Zrbtmst.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
+                .CWUt(512).fluidInputs(Zrbtmst.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
 
 
         //cpu
@@ -484,7 +484,7 @@ public class CPULine {
                 .notConsumable(RETICLE_NANO_CENTRAL_PROCESSING_UNIT)
                 .input(SILICON_WAFER)
                 .output(NANO_CENTRAL_PROCESSING_UNIT_WAFER)
-                .totalCWU(153600).CWUt(128)
+               .CWUt(128)
                 .fluidInputs(Water.getFluid(10000))
                 .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
 
@@ -492,7 +492,7 @@ public class CPULine {
                 .notConsumable(RETICLE_QBIT_CENTRAL_PROCESSING_UNIT)
                 .input(SILICON_WAFER)
                 .output(QUBIT_CENTRAL_PROCESSING_UNIT_WAFER)
-                .totalCWU(153600).CWUt(128)
+               .CWUt(128)
                 .fluidInputs(Water.getFluid(10000))
                 .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
 
@@ -501,7 +501,7 @@ public class CPULine {
                 .notConsumable(RETICLE_ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT)
                 .input(SILICON_WAFER)
                 .output(ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT_WAFER)
-                .totalCWU(9600).CWUt(8)
+                .CWUt(8)
                 .fluidInputs(Water.getFluid(10000))
                 .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
 
@@ -509,7 +509,7 @@ public class CPULine {
                 .notConsumable(RETICLE_HIGH_POWER_INTEGRATED_CIRCUIT)
                 .input(SILICON_WAFER)
                 .output(HIGH_POWER_INTEGRATED_CIRCUIT_WAFER)
-                .totalCWU(9600).CWUt(8)
+                .CWUt(8)
                 .fluidInputs(Water.getFluid(10000))
                 .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
 
@@ -530,17 +530,17 @@ public class CPULine {
 
 
         //TODO
-        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[HV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8)
+        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[HV]).input(RETICLE_SILICON).CWUt(8)
             .fluidInputs(Water.getFluid(10000))
             .notConsumable(EMITTER_HV).output(AE_RETICLEA)
             .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
 
-        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[HV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8)
+        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[HV]).input(RETICLE_SILICON).CWUt(8)
                 .fluidInputs(Water.getFluid(10000))
                 .notConsumable(SENSOR_HV).output(AE_RETICLEB)
                 .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
 
-        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[HV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8)
+        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[HV]).input(RETICLE_SILICON).CWUt(8)
                 .fluidInputs(Water.getFluid(10000))
                 .notConsumable(FIELD_GENERATOR_HV).output(AE_RETICLEC)
                 .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
@@ -548,77 +548,77 @@ public class CPULine {
 
 
 
-        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8)
+        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).CWUt(8)
                 .fluidInputs(Water.getFluid(10000))
                 .notConsumable(craftingLens, Color.Blue).output(RETICLE_INTEGRATED_LOGIC_CIRCUIT).buildAndRegister();
 
-        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8)
+        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).CWUt(8)
                 .fluidInputs(Water.getFluid(10000))
                 .notConsumable(craftingLens, Color.Red).output(RETICLE_RANDOM_ACCESS_MEMORY).buildAndRegister();
 
-        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8)
+        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).CWUt(8)
                 .fluidInputs(Water.getFluid(10000))
                 .notConsumable(craftingLens, Color.Purple).output(RETICLE_ADVANCED_SYSTEM_ON_CHIP)
                 .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
 
 
-        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8)
+        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).CWUt(8)
                 .fluidInputs(Water.getFluid(10000))
                 .notConsumable(craftingLens, Color.LightGray).output(RETICLE_CENTRAL_PROCESSING_UNIT).buildAndRegister();
 
-        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8)
+        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).CWUt(8)
                 .fluidInputs(Water.getFluid(10000))
                 .notConsumable(craftingLens, Color.LightBlue).output(RETICLE_LOW_POWER_INTEGRATED_CIRCUIT).buildAndRegister();
 
-        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8)
+        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).CWUt(8)
                 .fluidInputs(Water.getFluid(10000))
                 .notConsumable(craftingLens, Color.Cyan)
                 .cleanroom(CleanroomType.CLEANROOM).output(RETICLE_NAND_MEMORY_CHIP).buildAndRegister();
 
-        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8)
+        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).CWUt(8)
                 .fluidInputs(Water.getFluid(10000))
                 .notConsumable(craftingLens, Color.Black).output(RETICLE_NANO_CENTRAL_PROCESSING_UNIT)
                 .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
 
-        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8)
+        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).CWUt(8)
                 .fluidInputs(Water.getFluid(10000))
                 .notConsumable(craftingLens, Color.Gray).output(RETICLE_NOR_MEMORY_CHIP)
                 .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
 
-        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8)
+        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).CWUt(8)
                 .fluidInputs(Water.getFluid(10000))
                 .notConsumable(craftingLens, Color.Brown).output(RETICLE_POWER_INTEGRATED_CIRCUIT)
                 .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
 
-        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8)
+        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).CWUt(8)
                 .fluidInputs(Water.getFluid(10000))
                 .notConsumable(craftingLens, Color.Yellow).output(RETICLE_QBIT_CENTRAL_PROCESSING_UNIT)
                 .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
 
-        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8)
+        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).CWUt(8)
                 .fluidInputs(Water.getFluid(10000))
                 .notConsumable(craftingLens, Color.Lime).output(RETICLE_SIMPLE_SYSTEM_ON_CHIP).buildAndRegister();
 
-        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8)
+        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).CWUt(8)
                 .fluidInputs(Water.getFluid(10000))
                 .notConsumable(craftingLens, Color.Magenta).output(RETICLE_SYSTEM_ON_CHIP)
                 .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
 
-        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8)
+        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).CWUt(8)
                 .fluidInputs(Water.getFluid(10000))
                 .notConsumable(craftingLens, Color.White).output(RETICLE_ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT)
                 .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
 
-        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8)
+        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).CWUt(8)
                 .fluidInputs(Water.getFluid(10000))
                 .notConsumable(craftingLens, Color.Green).output(RETICLE_ULTRA_LOW_POWER_INTEGRATED_CIRCUIT).buildAndRegister();
 
-        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8)
+        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).CWUt(8)
                 .fluidInputs(Water.getFluid(10000))
                 .notConsumable(craftingLens, Color.Pink).output(RETICLE_HIGH_POWER_INTEGRATED_CIRCUIT)
                 .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
 
-        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).totalCWU(9600).CWUt(8)
+        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).CWUt(8)
                 .fluidInputs(Water.getFluid(10000))
                 .notConsumable(craftingLens, Color.Orange).output(RETICLE_HIGHLY_ADVANCED_SYSTEM_ON_CHIP)
                 .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
@@ -898,11 +898,47 @@ public class CPULine {
         CHEMICAL_RECIPES.recipeBuilder()
                 .duration(100)
                 .EUt(480)
-                .input(plate,ReinforcedEpoxyResin)
+                .input(plate,Polytetrafluoroethylene)
                 .input(foil,Platinum,2)
                 .fluidInputs(StyreneButadieneRubber.getFluid(400))
-                .fluidInputs(Polytetrafluoroethylene.getFluid(576))
+                .fluidInputs(Brominatedepoxyresins.getFluid(576))
                 .output(IMPREGNATED_EPOXY,4)
                 .buildAndRegister();
+
+        //这里是EV阶段的纤维强化电路板
+        FLUID_SOLIDFICATION_RECIPES.recipeBuilder()
+                .duration(100)
+                .EUt(1920)
+                .input(plate,ReinforcedEpoxyResin,4)
+                .fluidInputs(Germanium.getFluid(288))
+                .output(LAMINATION_GE,4)
+                .buildAndRegister();
+
+        FLUID_SOLIDFICATION_RECIPES.recipeBuilder()
+                .duration(100)
+                .EUt(1920)
+                .input(plate,Zylon,1)
+                .fluidInputs(Germanium.getFluid(288))
+                .output(LAMINATION_GE,4)
+                .buildAndRegister();
+
+        FLUID_SOLIDFICATION_RECIPES.recipeBuilder()
+                .duration(100)
+                .EUt(1920)
+                .input(IMPREGNATED_FIBER)
+                .fluidInputs(FluoroantimonicAcid.getFluid(250))
+                .output(FIBER_BOARD)
+                .buildAndRegister();
+
+        CHEMICAL_RECIPES.recipeBuilder()
+                .duration(100)
+                .EUt(1920)
+                .input(LAMINATION_GE)
+                .input(foil,NanometerBariumTitanate,2)
+                .fluidInputs(StyreneButadieneRubber.getFluid(400))
+                .fluidInputs(Zylon.getFluid(576))
+                .output(IMPREGNATED_FIBER,4)
+                .buildAndRegister();
+
     }
 }

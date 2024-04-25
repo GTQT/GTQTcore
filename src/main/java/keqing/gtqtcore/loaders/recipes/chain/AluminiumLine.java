@@ -62,6 +62,15 @@ public class AluminiumLine {
                 .duration(400)
                 .buildAndRegister();
 
+        AUTOCLAVE_RECIPES.recipeBuilder()
+                .input(dust,Bauxite,1)
+                .fluidInputs(Steam.getFluid(8000))
+                .output(dust,SodiumAluminate,4)
+                .fluidOutputs(Water.getFluid(2000))
+                .EUt(30)
+                .duration(400)
+                .buildAndRegister();
+
         CHEMICAL_BATH_RECIPES.recipeBuilder()
                 .input(dust,SodiumAluminate,4)
                 .fluidInputs(Water.getFluid(6000))

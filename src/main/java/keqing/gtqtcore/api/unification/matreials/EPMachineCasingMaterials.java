@@ -5,6 +5,7 @@ import gregtech.api.unification.material.Material;
 
 
 import gregtech.api.fluids.FluidBuilder;
+import gregtech.api.unification.material.properties.BlastProperty;
 import gregtech.api.unification.material.properties.BlastProperty.GasTier;
 import gregtech.api.unification.material.properties.ToolProperty;
 
@@ -48,6 +49,7 @@ public class EPMachineCasingMaterials {
         HastelloyN = new Material.Builder(getMaterialsId(), gregtechId("hastelloy_n"))
                 .ingot()
                 .liquid(new FluidBuilder().temperature(3980))
+                .fluidPipeProperties(4380, 300, true, true, true,false)
                 .color(0x939554)
                 .iconSet(DULL)
                 .flags(GENERATE_PLATE, GENERATE_ROD, GENERATE_RING, GENERATE_BOLT_SCREW, GENERATE_GEAR, GENERATE_ROTOR,
@@ -56,7 +58,10 @@ public class EPMachineCasingMaterials {
                 .rotorStats(15.0f, 7.0f, 8000)
                 .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 48000, 5)
                         .attackSpeed(0.1F).enchantability(21).build())
-                .blast(4550, GasTier.HIGHER)
+                .blast(b -> b
+                        .temp(4550, BlastProperty.GasTier.HIGHER)
+                        .blastStats(VA[EV], 800)
+                        .vacuumStats(VA[HV], 180))
                 .components(Nickel, 15, Molybdenum, 4, Chrome, 2, Titanium, 2, Yttrium, 2)
                 .build();
         //  24503 Stellite

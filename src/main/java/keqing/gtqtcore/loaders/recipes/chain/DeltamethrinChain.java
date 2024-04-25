@@ -34,7 +34,7 @@ public class DeltamethrinChain {
         //3. 然后，将2,3-二溴-2-丙酮酚与盐酸进行酸化反应，生成2,3-二溴-2-丙酮酚盐酸盐。
         CHEMICAL_RECIPES.recipeBuilder()
                 .fluidInputs(Dfeltamethrinc.getFluid(1000))
-                .fluidInputs(ChloroauricAcid.getFluid(2000))
+                .fluidInputs(HydrochloricAcid.getFluid(2000))
                 .fluidOutputs(Dfeltamethrind.getFluid(3000))
                 .duration(400).EUt(VA[IV]).buildAndRegister();
         //4. 最后，将2,3-二溴-2-丙酮酚盐酸盐与碳酸银反应，生成1R,3R-二溴菊酸。
@@ -67,7 +67,7 @@ public class DeltamethrinChain {
 
         //在吡啶存在下，二溴菊酰氯与(+)α-氰基间苯氧基苯甲醇作用得溴氰菊酯：
         CHEMICAL_RECIPES.recipeBuilder()
-                .fluidInputs(Dfeltamethring.getFluid(1000))
+                .fluidInputs(Dfeltamethrinf.getFluid(1000))
                 .fluidInputs(Dfeltamethrinh.getFluid(1000))
                 .output(OrePrefix.dust,Deltamethrin,20)
                 .duration(400).EUt(VA[IV]).buildAndRegister();

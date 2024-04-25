@@ -28,6 +28,6 @@ public interface ITierGlassBlockState extends ITier{
     }
 
     default String getOpticalTierName() {
-        return TooltipHelper.BLINKING_CYAN + I18n.format("epimorphism.optical_glass_tier.tooltip." + GTQTUniverUtil.getOpticalGlassTier(getGlassTier()));
+        return TooltipHelper.BLINKING_CYAN + I18n.format("gtqtcore.optical_glass_tier.tooltip." + GTQTUniverUtil.getOpticalGlassTier(getGlassTier()));
     }
 }

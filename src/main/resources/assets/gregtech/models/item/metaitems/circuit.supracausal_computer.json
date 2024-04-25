@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures" : {
-    "layer0": "epimorphism:items/metaitems/circuit.supracausal_computer"
+    "layer0": "gtqtcore:items/metaitems/circuit.supracausal_computer"
   }
 }

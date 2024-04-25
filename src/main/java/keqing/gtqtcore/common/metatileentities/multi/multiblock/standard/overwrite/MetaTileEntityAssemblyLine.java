@@ -65,8 +65,7 @@ import codechicken.lib.vec.Vector3;
 import java.util.List;
 import java.util.function.Function;
 
-import static gregtech.api.GTValues.IV;
-import static gregtech.api.GTValues.VA;
+import static gregtech.api.GTValues.*;
 import static gregtech.api.util.RelativeDirection.*;
 
 public class MetaTileEntityAssemblyLine extends RecipeMapMultiblockController {
@@ -95,7 +94,7 @@ public class MetaTileEntityAssemblyLine extends RecipeMapMultiblockController {
                 this.maxProgressTime = maxProgress*(100-glass_tier)/100;
         }
 
-        public long getMaxVoltage() {return Math.min(VA[tier],VA[IV]);}
+        public long getMaxVoltage() {return Math.min(VA[tier+1],VA[LuV]);}
 
     }
     @Override
@@ -127,7 +126,7 @@ public class MetaTileEntityAssemblyLine extends RecipeMapMultiblockController {
 
         this.tier = Math.min(this.casing_tier,this.laser_tier);
 
-        this.writeCustomData(GTQTValue.UPDATE_TIER,buf -> buf.writeInt(this.tier));
+        this.writeCustomData(GTQTValue.UPDATE_TIER,buf -> buf.writeInt(this.casing_tier));
     }
 
     @Override
@@ -155,7 +154,11 @@ public class MetaTileEntityAssemblyLine extends RecipeMapMultiblockController {
                 .where(' ', any());
         return pattern.build();
     }
-
+    @SideOnly(Side.CLIENT)
+    @Override
+    protected ICubeRenderer getFrontOverlay() {
+        return GTQTTextures.ALGAE_FARM_OVERLAY;
+    }
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
@@ -454,6 +457,6 @@ public class MetaTileEntityAssemblyLine extends RecipeMapMultiblockController {
             tooltip.add(I18n.format("gregtech.machine.assembly_line.tooltip_ordered_fluids"));
         tooltip.add(I18n.format("gtqt.machine.assembly_line.1"));
         tooltip.add(I18n.format("gtqt.machine.assembly_line.2"));
-
+        tooltip.add(I18n.format("友情提醒，我只能使用ULV级的总线仓口"));
     }
 }

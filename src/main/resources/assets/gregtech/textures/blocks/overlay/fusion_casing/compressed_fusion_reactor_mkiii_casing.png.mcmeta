@@ -10,7 +10,7 @@
         "layer": "BLOOM",
         "gregtech": true,
         "textures": [
-        "epimorphism:blocks/casings/ep_fusion_casing/compressed_fusion_reactor_mkiii_casing_ctm"
+        "gtqtcore:blocks/casings/ep_fusion_casing/compressed_fusion_reactor_mkiii_casing_ctm"
         ],
         "extra": {
             "connect_inside": true

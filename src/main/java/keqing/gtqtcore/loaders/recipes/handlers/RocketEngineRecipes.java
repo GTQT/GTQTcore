@@ -60,12 +60,6 @@ public class RocketEngineRecipes {
                 .duration(80*64)
                 .buildAndRegister();
 
-        SOLAR_PLATE.recipeBuilder()
-                .fluidInputs(Water.getFluid(1))
-                .EUt(30)
-                .duration(200)
-                .buildAndRegister();
-
         //  Methylhydrazine Nitrate Rocket Fuel
         DISSOLUTION_TANK_RECIPES.recipeBuilder()
                 .input(dust, Carbon)

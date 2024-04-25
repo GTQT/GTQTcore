@@ -8,28 +8,10 @@
   },
   "variants": {
     "variant": {
-      "asphalt_straght": {
+      "lvkuangkuangsha": {
         "model": "minecraft:cube_all",
         "textures": {
-          "all": "gregtech:blocks/multiblock/road/asphalt_straght"
-        }
-      },
-      "asphalt_line": {
-        "model": "minecraft:cube_all",
-        "textures": {
-          "all": "gregtech:blocks/multiblock/road/asphalt_line"
-        }
-      },
-      "asphalt_right": {
-        "model": "minecraft:cube_all",
-        "textures": {
-          "all": "gregtech:blocks/multiblock/road/asphalt_right"
-        }
-      },
-      "asphalt_left": {
-        "model": "minecraft:cube_all",
-        "textures": {
-          "all": "gregtech:blocks/multiblock/road/asphalt_left"
+          "all": "gregtech:blocks/multiblock/road/lvkuangkuangsha"
         }
       }
     }

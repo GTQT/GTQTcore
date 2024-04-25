@@ -28,8 +28,7 @@ import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 
-import static gregicality.multiblocks.api.unification.GCYMMaterials.MolybdenumDisilicide;
-import static gregicality.multiblocks.api.unification.GCYMMaterials.TitaniumCarbide;
+import static gregicality.multiblocks.api.unification.GCYMMaterials.*;
 import static gregtech.api.GTValues.L;
 import static gregtech.api.GTValues.VA;
 import static gregtech.api.recipes.RecipeMaps.*;
@@ -52,6 +51,7 @@ import static keqing.gtqtcore.api.unification.GCYSMaterials.Orichalcum;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.*;
 import static keqing.gtqtcore.common.block.blocks.BlockCrucible.CrucibleType.QUARTZ_CRUCIBLE;
+import static keqing.gtqtcore.common.block.blocks.GTQTIsaCasing.CasingType.ASEPTIC_FARM_CASING;
 import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.NQ_TURBINE_CASING;
 import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.PD_TURBINE_CASING;
 import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing1.TurbineCasingType.AD_TURBINE_CASING;
@@ -80,16 +80,16 @@ public class MetaTileEntityLoader {
                 .circuitMeta(1)
                 .duration(60).EUt(20).buildAndRegister();
 
-        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(50).EUt(30)
-                .inputs(HULL[1].getStackForm(4))
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(50).EUt(120)
+                .inputs(HULL[2].getStackForm(4))
                 .input(ELECTRIC_PUMP_MV,8)
-                .input(circuit,LV,8)
+                .input(circuit,MV,8)
                 .input(rotor,Aluminium,32)
                 .input(OrePrefix.cableGtSingle, Materials.Tin, 32)
                 .fluidInputs(Polyethylene.getFluid(L * 12))
                 .outputs(GAS_COLLECTOR.getStackForm()).buildAndRegister();
 
-        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(50).EUt(30)
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(500).EUt(30)
                 .inputs(HULL[1].getStackForm(4))
                 .input(ELECTRIC_MOTOR_LV,8)
                 .input(ELECTRIC_PUMP_LV,8)
@@ -97,7 +97,27 @@ public class MetaTileEntityLoader {
                 .input(gear,Steel,8)
                 .input(OrePrefix.cableGtSingle, Materials.Tin, 32)
                 .fluidInputs(Polyethylene.getFluid(L * 12))
-                .outputs(WATER_POWER_STATION.getStackForm()).buildAndRegister();
+                .outputs(WATER_POWER_STATION[0].getStackForm()).buildAndRegister();
+
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(500).EUt(120)
+                .inputs(HULL[2].getStackForm(4))
+                .input(ELECTRIC_MOTOR_MV,8)
+                .input(ELECTRIC_PUMP_MV,8)
+                .input(circuit,MV,8)
+                .input(gear,Aluminium,8)
+                .input(OrePrefix.cableGtSingle, Materials.Tin, 32)
+                .fluidInputs(PolyvinylChloride.getFluid(L * 12))
+                .outputs(WATER_POWER_STATION[1].getStackForm()).buildAndRegister();
+
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(500).EUt(480)
+                .inputs(HULL[3].getStackForm(4))
+                .input(ELECTRIC_MOTOR_HV,8)
+                .input(ELECTRIC_PUMP_HV,8)
+                .input(circuit,HV,8)
+                .input(gear,StainlessSteel,8)
+                .input(OrePrefix.cableGtSingle, Materials.Tin, 32)
+                .fluidInputs(Epoxy.getFluid(L * 12))
+                .outputs(WATER_POWER_STATION[2].getStackForm()).buildAndRegister();
 
         ModHandler.addShapedRecipe(true, "tank0",TANK[0].getStackForm(), " R ",
                 "hCw", " R ", 'R', new UnificationEntry(OrePrefix.ring, Bronze), 'C',
@@ -271,6 +291,16 @@ public class MetaTileEntityLoader {
                 .fluidInputs(Concrete.getFluid(1000))
                 .outputs(MetaBlocks.METAL_CASING.getItemVariant(BlockMetalCasing.MetalCasingType.PRIMITIVE_BRICKS))
                 .duration(20).EUt(30).buildAndRegister();
+
+        //海藻方块
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .inputs(MetaTileEntities.HULL[GTValues.HV].getStackForm())
+                .input(plate, NanometerBariumTitanate, 6)
+                .input(frameGt, StainlessSteel, 1)
+                .fluidInputs(Brominatedepoxyresins.getFluid(1440))
+                .circuitMeta(1)
+                .outputs(GTQTMetaBlocks.ISA_CASING.getItemVariant(ASEPTIC_FARM_CASING))
+                .duration(20).EUt(30).buildAndRegister();
         //太阳能
         ASSEMBLER_RECIPES.recipeBuilder()
                 .inputs(HULL[4].getStackForm())
@@ -359,7 +389,7 @@ public class MetaTileEntityLoader {
         //溶解罐
         ModHandler.addShapedRecipe(true, "dissolution_tank", DISSOLUTION_TANK.getStackForm(),
                 "MCM", "PHP", "MKM",
-                'M', new UnificationEntry(pipeNormalFluid, Polybenzimidazole),
+                'M', new UnificationEntry(pipeNormalFluid, Polytetrafluoroethylene),
                 'C', new UnificationEntry(circuit, MarkerMaterials.Tier.HV),
                 'P', ELECTRIC_PUMP_HV.getStackForm(),
                 'H', QUANTUM_TANK[1].getStackForm(),
@@ -371,6 +401,10 @@ public class MetaTileEntityLoader {
                 'G', new UnificationEntry(OrePrefix.gear, Wood),
                 'C', MetaBlocks.STEAM_CASING.getItemVariant(BlockSteamCasing.SteamCasingType.WOOD_WALL));
 
+        ModHandler.addShapedRecipe(true, "b_reactor", B_REACTOR.getStackForm(),
+                "CGC", "ChC", "CGC",
+                'G', new UnificationEntry(OrePrefix.gear, StainlessSteel),
+                'C', MetaBlocks.METAL_CASING.getItemVariant(STAINLESS_CLEAN));
 
         ModHandler.addShapedRecipe(true, "steam_compressor", GTQTMetaTileEntities.STEAM_COMPRESSOR.getStackForm(),
                 "CGC", "CFC", "CGC",
@@ -511,6 +545,30 @@ public class MetaTileEntityLoader {
                 "WCW", 'M', MetaTileEntities.HULL[GTValues.LV].getStackForm(), 'P',
                 MetaItems.ELECTRIC_PUMP_LV, 'C', new UnificationEntry(OrePrefix.circuit, LV), 'W',
                 new UnificationEntry(OrePrefix.cableGtSingle, Aluminium));
+
+        ModHandler.addShapedRecipe(true, "lager_ore_washer", GTQTMetaTileEntities.LAGER_ORE_WASHER.getStackForm(), "PPP", "CMC",
+                "WCW",
+                'M', ORE_WASHER[1].getStackForm(),
+                'P', ROBOT_ARM_LV, 'C', new UnificationEntry(OrePrefix.circuit, LV),
+                'W', ELECTRIC_MOTOR_LV);
+
+        ModHandler.addShapedRecipe(true, "lager_thermal_centrifuge", GTQTMetaTileEntities.LAGER_THERMAL_CENTRIFUGE.getStackForm(), "WPW", "CMC",
+                "WPW",
+                'M', THERMAL_CENTRIFUGE[1].getStackForm(),
+                'P', MetaItems.ELECTRIC_PUMP_LV, 'C', new UnificationEntry(OrePrefix.circuit, LV),
+                'W', VOLTAGE_COIL_MV);
+
+        ModHandler.addShapedRecipe(true, "lager_grind", GTQTMetaTileEntities.LAGER_GRIND.getStackForm(), "WPW", "CMC",
+                "WPW",
+                'M', MACERATOR[1].getStackForm(),
+                'P', MetaItems.ELECTRIC_PUMP_LV, 'C', new UnificationEntry(OrePrefix.circuit, LV),
+                'W', ELECTRIC_PISTON_LV);
+
+        ModHandler.addShapedRecipe(true, "lager_forging", LAGER_FORGING.getStackForm(), "WPW", "CMC",
+                "WPW",
+                'M', FORGE_HAMMER[1].getStackForm(),
+                'P', MetaItems.ELECTRIC_PUMP_LV, 'C', new UnificationEntry(OrePrefix.circuit, LV),
+                'W', ELECTRIC_MOTOR_LV);
 
         ModHandler.addShapedRecipe(true, "assembler_line", GTQTMetaTileEntities.ASSEMBLY_LINE.getStackForm(), "PPP", "CMC",
                 "WCW", 'M', MetaTileEntities.HULL[GTValues.HV].getStackForm(), 'P',
