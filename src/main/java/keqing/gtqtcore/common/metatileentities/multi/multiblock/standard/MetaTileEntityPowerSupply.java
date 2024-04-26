@@ -33,6 +33,9 @@ import keqing.gtqtcore.api.utils.GTQTLog;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 import keqing.gtqtcore.common.metatileentities.multi.generators.MetaTileEntityWaterPowerStation;
+import mcjty.theoneprobe.api.ElementAlignment;
+import mcjty.theoneprobe.api.IProbeInfo;
+import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
@@ -60,13 +63,29 @@ public class MetaTileEntityPowerSupply extends MultiblockWithDisplayBase  {
     int eu=0;
     int maxTier=0;
     private IEnergyContainer inenergyContainer;
+    private IEnergyContainer outenergyContainer;
     boolean work;
+    boolean charge=true;//供能模式
+    boolean network;//互联模式
+    boolean fastCharge;//闪充模式
+    BlockPos poss1;
+    BlockPos poss2;
+    BlockPos poss3;
+    BlockPos poss4;
+    BlockPos poss5;
+    BlockPos poss6;
+    BlockPos poss7;
+    BlockPos poss8;
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("eu", eu);
         data.setInteger("tier", tier);
         data.setInteger("maxTier", maxTier);
         data.setBoolean("work", work);
+
+        data.setBoolean("charge", charge);
+        data.setBoolean("network", network);
+        data.setBoolean("fastCharge", fastCharge);
         return super.writeToNBT(data);
     }
     @Override
@@ -76,13 +95,31 @@ public class MetaTileEntityPowerSupply extends MultiblockWithDisplayBase  {
         tier = data.getInteger("tier");
         maxTier = data.getInteger("maxTier");
         work = data.getBoolean("work");
+
+        charge = data.getBoolean("charge");
+        network = data.getBoolean("network");
+        fastCharge = data.getBoolean("fastCharge");
     }
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
-        textList.add(new TextComponentTranslation("%s %s %s", eu,tier,work));
+        textList.add(new TextComponentTranslation("蓄能：%s / %s EU  %s", eu,tier*2048,work));
+        textList.add(new TextComponentTranslation("闪充模式：%s 互联模式：%s 供能模式：%s ", fastCharge,network,charge));
+        if (isStructureFormed()&&network) {
+            if (checkNetwork(poss1, false)) textList.add(new TextComponentTranslation("连接：%s  %s / %s", poss1,getNetEu(poss1),getNetMax(poss1)));
+            if (checkNetwork(poss2, false)) textList.add(new TextComponentTranslation("连接：%s  %s / %s", poss2,getNetEu(poss2),getNetMax(poss2)));
+            if (checkNetwork(poss3, false)) textList.add(new TextComponentTranslation("连接：%s  %s / %s", poss3,getNetEu(poss3),getNetMax(poss3)));
+            if (checkNetwork(poss4, false)) textList.add(new TextComponentTranslation("连接：%s  %s / %s", poss4,getNetEu(poss4),getNetMax(poss4)));
+            if (checkNetwork(poss5, false)) textList.add(new TextComponentTranslation("连接：%s  %s / %s", poss5,getNetEu(poss5),getNetMax(poss5)));
+            if (checkNetwork(poss6, false)) textList.add(new TextComponentTranslation("连接：%s  %s / %s", poss6,getNetEu(poss6),getNetMax(poss6)));
+            if (checkNetwork(poss7, false)) textList.add(new TextComponentTranslation("连接：%s  %s / %s", poss7,getNetEu(poss7),getNetMax(poss7)));
+            if (checkNetwork(poss8, false)) textList.add(new TextComponentTranslation("连接：%s  %s / %s", poss8,getNetEu(poss8),getNetMax(poss8)));
+        }
     }
     @Override
     protected void updateFormedValid() {
+
+        final int xDir = this.getFrontFacing().getOpposite().getXOffset() * 5;
+        final int zDir = this.getFrontFacing().getOpposite().getZOffset() * 5;
 
         time++;
         if(time==2000)
@@ -90,13 +127,34 @@ public class MetaTileEntityPowerSupply extends MultiblockWithDisplayBase  {
             PreCheck();
             time=0;
         }
+        checkNetwork(poss1,network);
+        checkNetwork(poss2,network);
+        checkNetwork(poss3,network);
+        checkNetwork(poss4,network);
+        checkNetwork(poss5,network);
+        checkNetwork(poss6,network);
+        checkNetwork(poss7,network);
+        checkNetwork(poss8,network);
 
-        if (this.inenergyContainer != null && this.inenergyContainer.getEnergyStored() > 0 && eu < tier*2048) {
-            eu =eu + Math.max((int) this.inenergyContainer.getEnergyStored(), 0);
-            this.inenergyContainer.removeEnergy(this.inenergyContainer.getEnergyStored());
+        if(charge) {
+            if (this.inenergyContainer != null && this.inenergyContainer.getEnergyStored() > 0 && eu < tier * 2048) {
+                eu = eu + Math.max((int) this.inenergyContainer.getEnergyStored(), 0);
+                this.inenergyContainer.removeEnergy(this.inenergyContainer.getEnergyStored());
+            }
         }
-        final int xDir = this.getFrontFacing().getOpposite().getXOffset() * 5;
-        final int zDir = this.getFrontFacing().getOpposite().getZOffset() * 5;
+        else {
+            if (this.outenergyContainer != null && this.outenergyContainer.getEnergyStored() < this.outenergyContainer.getEnergyCapacity()) {
+                if (eu >= (this.outenergyContainer.getEnergyCapacity() - this.outenergyContainer.getEnergyStored())) {
+                    eu = (int) (eu - (this.outenergyContainer.getEnergyCapacity() - this.outenergyContainer.getEnergyStored()));
+                    this.outenergyContainer.addEnergy(this.outenergyContainer.getEnergyCapacity() - this.outenergyContainer.getEnergyStored());
+                }
+                else
+                {
+                    this.outenergyContainer.addEnergy(eu);
+                    eu=0;
+                }
+            }
+        }
         if(work) for (int i = -5; i <= 5; ++i) {
             for (int j = -5; j <= 5; ++j) {
                 BlockPos poss = this.getPos().add(xDir + i, 0, zDir + j);
@@ -107,21 +165,43 @@ public class MetaTileEntityPowerSupply extends MultiblockWithDisplayBase  {
                     for (EnumFacing facing : EnumFacing.VALUES) {
                         if (mte.getCapability(GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER, facing) instanceof IEnergyContainer) {
                             IEnergyContainer container = mte.getCapability(GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER, facing);
-                            //如果供电等级大于方块等级 则持续给满
-                            if(container.getEnergyStored()<container.getEnergyCapacity()&&container.getEnergyCapacity()<Energy&& eu>(container.getEnergyCapacity()-container.getEnergyStored()))
-                            {
-                                container.addEnergy(container.getEnergyCapacity()-container.getEnergyStored());
-                                eu -= (int) (container.getEnergyCapacity()-container.getEnergyStored());
+                            if(charge) {
+                                //如果供电等级大于方块等级 则持续给满
+                                if (!fastCharge) {
+                                    if (container.getEnergyStored() < container.getEnergyCapacity() && container.getEnergyCapacity() < Energy && eu > (container.getEnergyCapacity() - container.getEnergyStored())) {
+                                        container.addEnergy(container.getEnergyCapacity() - container.getEnergyStored());
+                                        eu -= (int) (container.getEnergyCapacity() - container.getEnergyStored());
+                                    }
+                                    //否则 只供Energy
+                                    if (container.getEnergyStored() < (container.getEnergyCapacity() - Energy) && eu > Energy) {
+                                        container.addEnergy(Energy);
+                                        eu -= Energy;
+                                    }
+                                }
+                                //闪充
+                                else if (container.getEnergyStored() < container.getEnergyCapacity()) {
+                                    if(eu > (container.getEnergyCapacity() - container.getEnergyStored()))
+                                    {
+                                        container.addEnergy(container.getEnergyCapacity() - container.getEnergyStored());
+                                        eu -= (int) (container.getEnergyCapacity() - container.getEnergyStored());
+                                    }
+                                    else
+                                    {
+                                        container.addEnergy(eu);
+                                        eu =0;
+                                    }
+                                }
                             }
-                            //否则 只供Energy
-                            if(container.getEnergyStored()<(container.getEnergyCapacity()-Energy)&& eu>Energy) {
-                                container.addEnergy(Energy);
-                                eu -= Energy;
+                            else//充能模式
+                            {
+                                if (container.getEnergyStored()>0&& eu < tier * 2048) {
+                                    eu += container.getEnergyStored();
+                                    container.removeEnergy(container.getEnergyStored());
+                                }
                             }
                         }
                     }
                 }
-
             }
         }
     }
@@ -135,6 +215,7 @@ public class MetaTileEntityPowerSupply extends MultiblockWithDisplayBase  {
     public void PreCheck()
     {
         maxTier=0;
+        work=true;
         //提前检测
         final int xDir = this.getFrontFacing().getOpposite().getXOffset() * 5;
         final int zDir = this.getFrontFacing().getOpposite().getZOffset() * 5;
@@ -142,7 +223,6 @@ public class MetaTileEntityPowerSupply extends MultiblockWithDisplayBase  {
             for (int j = -4; j <= 4; ++j) {//判断中心区域 外围无需判断
                 BlockPos poss = this.getPos().add(xDir + i, 0, zDir + j);
                 if(GetTier(poss,i,j)>maxTier)maxTier=GetTier(poss,i,j);
-                if (GetTier(poss,i,j) == 3){ GTQTLog.logger.info("我是金块");}
                 if (GetTier(poss,i,j) == 0) {tier++;}//如果是框架方块就加缓存
                 if (GetTier(poss,i,j) == 11) {
                     work=false;
@@ -151,7 +231,17 @@ public class MetaTileEntityPowerSupply extends MultiblockWithDisplayBase  {
                 //在这里对非0 11 项目存数组
             }
         }
-        work=true;
+
+        poss1 = this.getPos().add( + 11, 0,  + 11);
+        poss2 = this.getPos().add( + 11, 0,0 );
+        poss3 = this.getPos().add( + 11, 0,  - 11);
+
+        poss4 = this.getPos().add(0,0,  + 11);
+        poss5 = this.getPos().add(0, 0,  - 11);
+
+        poss6 = this.getPos().add( - 11, 0,  + 11);
+        poss7 = this.getPos().add( - 11, 0,0 );
+        poss8 = this.getPos().add( - 11, 0,  - 11);
     }
 
     public int GetTier(BlockPos poss,int i,int j)
@@ -171,13 +261,33 @@ public class MetaTileEntityPowerSupply extends MultiblockWithDisplayBase  {
     @Nonnull
     protected Widget getFlexButton(int x, int y, int width, int height) {
         WidgetGroup group = new WidgetGroup(x, y, width, height);
-        group.addWidget(new ClickButtonWidget(0, 0, 18, 18, "", this::Refresh)
+        group.addWidget(new ClickButtonWidget(0, 0, 9, 9, "", this::Refresh)
                 .setButtonTexture(GuiTextures.BUTTON_THROTTLE_MINUS)
                 .setTooltipText("刷新"));
 
+        group.addWidget(new ClickButtonWidget(9, 0, 9, 9, "", this::FastCharge)
+                .setButtonTexture(GuiTextures.BUTTON_THROTTLE_MINUS)
+                .setTooltipText("闪充模式"));
+
+        group.addWidget(new ClickButtonWidget(0, 9, 9, 9, "", this::NetWork)
+                .setButtonTexture(GuiTextures.BUTTON_THROTTLE_MINUS)
+                .setTooltipText("互联模式"));
+
+        group.addWidget(new ClickButtonWidget(9, 9, 9, 9, "", this::Mode)
+                .setButtonTexture(GuiTextures.BUTTON_THROTTLE_MINUS)
+                .setTooltipText("模式切换"));
+
         return group;
     }
-
+    private void FastCharge(Widget.ClickData clickData) {
+        fastCharge=!fastCharge;
+    }
+    private void NetWork(Widget.ClickData clickData) {
+        network=!network;
+    }
+    private void Mode(Widget.ClickData clickData) {
+        charge=!charge;
+    }
     private void Refresh(Widget.ClickData clickData) {
         tier=0;
         PreCheck();
@@ -207,7 +317,9 @@ public class MetaTileEntityPowerSupply extends MultiblockWithDisplayBase  {
                 .aisle("CCCCCSCCCCC")
                 .where('S', selfPredicate())
                 .where(' ', any())
-                .where('C', states(getCasingAState()) .or(abilities(MultiblockAbility.INPUT_ENERGY).setMaxLayerLimited(4).setMinGlobalLimited(1)))
+                .where('C', states(getCasingAState())
+                        .or(abilities(MultiblockAbility.OUTPUT_ENERGY).setMaxLayerLimited(4).setMinGlobalLimited(0))
+                        .or(abilities(MultiblockAbility.INPUT_ENERGY).setMaxLayerLimited(4).setMinGlobalLimited(0)))
                 .build();
     }
     private IBlockState getCasingAState() {
@@ -241,15 +353,102 @@ public class MetaTileEntityPowerSupply extends MultiblockWithDisplayBase  {
         PreCheck();//成型的时候刷新一遍区块
         initializeAbilities();
     }
-    //初始化能源仓室
+    public boolean checkNetwork(BlockPos poss,boolean work) {
+        MetaTileEntity mte = GTUtility.getMetaTileEntity(this.getWorld(), poss);
+        if (mte instanceof MetaTileEntityPowerSupply) {
+            if (work && ((MetaTileEntityPowerSupply) mte).isNetwork()&& ((MetaTileEntityPowerSupply) mte).isWork()) {
+                /*
+                int total = eu + ((MetaTileEntityPowerSupply) mte).getEu();
+                if((getMax())>total / 2&&(((MetaTileEntityPowerSupply) mte).getMax())>total / 2) {
+                    eu = total / 2;
+                    ((MetaTileEntityPowerSupply) mte).setEu(total / 2);
+                    total = 0;
+                }
+                else if((getMax())>total / 2&&(((MetaTileEntityPowerSupply) mte).getMax())<total / 2) {
+                    eu =total-(((MetaTileEntityPowerSupply) mte).getMax()-((MetaTileEntityPowerSupply) mte).getEu());
+                    ((MetaTileEntityPowerSupply) mte).setEu(((MetaTileEntityPowerSupply) mte).getMax());
+                    total = 0;
+                }
+                else if((getMax())<total / 2&&(((MetaTileEntityPowerSupply) mte).getMax())>total / 2) {
+                    ((MetaTileEntityPowerSupply) mte).setEu(total-(getMax()-getEu()));
+                    eu=getMax();
+                    total = 0;
+                }
+                else {
+                    eu=getMax();
+                    ((MetaTileEntityPowerSupply) mte).setEu(((MetaTileEntityPowerSupply) mte).getMax());
+                    total = 0;
+                }
 
+                 */
+                if(eu<((MetaTileEntityPowerSupply) mte).getEu()&&eu<getMax())
+                {
+                    ((MetaTileEntityPowerSupply) mte).removeEu(VA[maxTier]);
+                    eu+=VA[maxTier];
+                }
+                return true;
+            }
+        }
+        return false;
+    }
+    public int getNetMax(BlockPos poss)
+    {
+        MetaTileEntity mte =GTUtility.getMetaTileEntity(this.getWorld(),poss);
+        if (mte instanceof MetaTileEntityPowerSupply) {
+            if (work && ((MetaTileEntityPowerSupply) mte).isNetwork())
+            {
+                return ((MetaTileEntityPowerSupply) mte).getMax();
+            }
+
+        }
+        return 0;
+    }
+    public int getNetEu(BlockPos poss)
+    {
+        MetaTileEntity mte =GTUtility.getMetaTileEntity(this.getWorld(),poss);
+        if (mte instanceof MetaTileEntityPowerSupply) {
+            if (work && ((MetaTileEntityPowerSupply) mte).isNetwork())
+            {
+                return ((MetaTileEntityPowerSupply) mte).getEu();
+            }
+        }
+        return 0;
+    }
+    //初始化能源仓室
+    public int getEu()
+    {
+        return eu;
+    }
+    public void removeEu(int remove)
+    {
+        if(eu>remove)eu-=remove;
+        else eu=0;
+    }
+    public void setEu(int set)
+    {
+        if(set<tier*2048)eu=set;
+    }
+    public int getMax()
+    {
+        return tier*2048;
+    }
+    public boolean isNetwork()
+    {
+        return network;
+    }
+    public boolean isWork()
+    {
+        return work;
+    }
     private void initializeAbilities() {
         this.inenergyContainer = new EnergyContainerList(getAbilities(MultiblockAbility.INPUT_ENERGY));
+        this.outenergyContainer =new EnergyContainerList(getAbilities(MultiblockAbility.OUTPUT_ENERGY));
+
     }
     private void resetTileAbilities() {
         this.inenergyContainer = new EnergyContainerList(new ArrayList());
+        this.outenergyContainer = new EnergyContainerList(new ArrayList());
     }
-
     @Override
     public void invalidateStructure() {
         super.invalidateStructure();
