@@ -156,7 +156,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityVacuumDryingFurnace VACUUM_DRYING_FURNACE;
     public static MetaTileEntityMiningDrill MINING_DRILL;
     public static MetaTileEntityIndustrialPrimitiveBlastFurnace INDUSTRIAL_PRIMITIVE_BLAST_FURNACE;
-
+    public static MetaTileEntityADVKQCC ADV_KQCC;
     public static final SimpleGeneratorMetaTileEntity[] COMBUSTION_GENERATOR = new SimpleGeneratorMetaTileEntity[4];
     public static final SimpleGeneratorMetaTileEntity[] STEAM_TURBINE = new SimpleGeneratorMetaTileEntity[4];
     public static final SimpleGeneratorMetaTileEntity[] GAS_TURBINE = new SimpleGeneratorMetaTileEntity[4];
@@ -171,6 +171,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityOceanPumper OCEAN_PUMPER;
     public static MetaTileEntityClarifier CLARIFIER;
     public static MetaTileEntitySolarPlate SOLAR_PLATE;
+    public static MetaTileEntityPowerSupply POWER_SUPPLY;
     public static final MetaTileEntityPlusEnergyHatch[] PLUS_ENERGY_INPUT_HATCH = new MetaTileEntityPlusEnergyHatch[10];
     public static final MetaTileEntityPlusEnergyHatch[] PLUS_ENERGY_INPUT_HATCH_4A = new MetaTileEntityPlusEnergyHatch[10];
     public static final MetaTileEntityPlusEnergyHatch[] PLUS_ENERGY_INPUT_HATCH_16A = new MetaTileEntityPlusEnergyHatch[10];
@@ -359,6 +360,7 @@ public class GTQTMetaTileEntities {
         BIO_CENTRIFUGE= registerMetaTileEntity(3194, new MetaTileEntityBioCentrifuge(gtqtcoreId("bio_centrifuge")));
         CRYOGENIC_FREEZER= registerMetaTileEntity(3195, new MetaTileEntityCryogenicFreezer(gtqtcoreId("cryogenic_freezer")));
         NANO_COATING= registerMetaTileEntity(3196, new MetaTileEntityNanoCoating(gtqtcoreId("nano_coating")));
+        POWER_SUPPLY= registerMetaTileEntity(3197, new MetaTileEntityPowerSupply(gtqtcoreId("power_supply")));
         //重写设备
         DISTILLATION_TOWER = registerMetaTileEntity(3250, new MetaTileEntityDistillationTower(gtqtcoreId("distillation_tower")));
         CRACKER = registerMetaTileEntity(3251, new MetaTileEntityCrackingUnit(gtqtcoreId("cracker")));
@@ -408,7 +410,7 @@ public class GTQTMetaTileEntities {
         KQCC= registerMetaTileEntity(3450, new MetaTileEntityKQCC(gtqtcoreId("kqcc")));
         KQNS=registerMetaTileEntity(3451,new MetaTileEntityKQNetworkSwitch(gtqtcoreId("kqns")));
         KeQing_NET= registerMetaTileEntity(3452, new MetaTileEntitykeQingNet(gtqtcoreId("keqing_net")));
-
+        ADV_KQCC= registerMetaTileEntity(3453, new MetaTileEntityADVKQCC(gtqtcoreId("adv_kqcc")));
         HPCA_SUPER_COMPUTATION_COMPONENT = registerMetaTileEntity(3461, new MetaTileEntityHPCAAdvancedComputation(gtqtcoreId("hpca.super_computation_component"),false));
         HPCA_ULTIMATE_COMPUTATION_COMPONENT = registerMetaTileEntity(3462, new MetaTileEntityHPCAAdvancedComputation(gtqtcoreId("hpca.ultimate_computation_component"),  true));
         HPCA_SUPER_COOLER_COMPONENT = registerMetaTileEntity(3464, new MetaTileEntityHPCAAdvancedCooler(gtqtcoreId("hpca.super_cooler_component"), true, false));

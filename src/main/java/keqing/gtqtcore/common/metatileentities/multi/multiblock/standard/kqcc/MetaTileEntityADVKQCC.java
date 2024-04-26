@@ -15,7 +15,10 @@ import gregtech.api.gui.widgets.ClickButtonWidget;
 import gregtech.api.gui.widgets.WidgetGroup;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
-import gregtech.api.metatileentity.multiblock.*;
+import gregtech.api.metatileentity.multiblock.IMultiblockPart;
+import gregtech.api.metatileentity.multiblock.IProgressBarMultiblock;
+import gregtech.api.metatileentity.multiblock.MultiblockAbility;
+import gregtech.api.metatileentity.multiblock.MultiblockWithDisplayBase;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
@@ -52,29 +55,18 @@ import java.util.Collection;
 import java.util.List;
 
 import static gregtech.api.unification.material.Materials.*;
+import static gregtech.api.util.RelativeDirection.*;
 
-public class MetaTileEntityKQCC extends MultiblockWithDisplayBase implements IOpticalComputationProvider, IProgressBarMultiblock {
-    private boolean isActive;
+public class MetaTileEntityADVKQCC extends MultiblockWithDisplayBase implements IOpticalComputationProvider, IProgressBarMultiblock {
     private boolean isWorkingEnabled;
 
     private IFluidHandler coolantHandler;
-
+    int level;
     float HOT;
     private int CPU1;
     private int GPU1;
     private int RAM1;
-
-    private int CPU2;
-    private int GPU2;
-    private int RAM2;
-
-    private int CPU3;
-    private int GPU3;
-    private int RAM3;
     int a;
-    private int CPU4;
-    private int GPU4;
-    private int RAM4;
     int thresholdPercentage=0;
     private IEnergyContainer energyContainer;
 
@@ -100,7 +92,7 @@ public class MetaTileEntityKQCC extends MultiblockWithDisplayBase implements IOp
     }
 
 
-    public MetaTileEntityKQCC(ResourceLocation metaTileEntityId) {
+    public MetaTileEntityADVKQCC(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId);
         this.energyContainer = new EnergyContainerList(new ArrayList<>());
     }
@@ -131,40 +123,40 @@ public class MetaTileEntityKQCC extends MultiblockWithDisplayBase implements IOp
 
         if(HOT>5000) {
 
-            if(thresholdPercentage!=2) {
+            if(thresholdPercentage!=1) {
                 if (COLD_STACK.isFluidStackIdentical(coolantHandler.drain(COLD_STACK, false))) {
                     coolantHandler.drain(COLD_STACK, true);
-                    if(HOT>770) HOT = HOT - 770;
+                    if(HOT>770) HOT = HOT - 770*4;
                 }
                 if (COLD_STACKA.isFluidStackIdentical(coolantHandler.drain(COLD_STACKA, false))) {
                     coolantHandler.drain(COLD_STACKA, true);
-                    if(HOT>1440) HOT = HOT - 1440;
+                    if(HOT>1440) HOT = HOT - 1440*4;
                 }
                 if (COLD_STACKB.isFluidStackIdentical(coolantHandler.drain(COLD_STACKB, false))) {
                     coolantHandler.drain(COLD_STACKB, true);
-                    if(HOT>2880) HOT = HOT - 2880;
+                    if(HOT>2880) HOT = HOT - 2880*4;
                 }
             }
 
             if(thresholdPercentage==2) {
                 if (COLD_STACK1.isFluidStackIdentical(coolantHandler.drain(COLD_STACK1, false))){
                     coolantHandler.drain(COLD_STACK1, true);
-                    if(HOT>1440)HOT = HOT - 1440;
+                    if(HOT>1440)HOT = HOT - 1440*4;
                 }
                 if (COLD_STACKA1.isFluidStackIdentical(coolantHandler.drain(COLD_STACKA1, false))) {
                     coolantHandler.drain(COLD_STACKA1, true);
-                    if(HOT>2880)HOT = HOT - 2880;
+                    if(HOT>2880)HOT = HOT - 2880*4;
                 }
                 if (COLD_STACKB1.isFluidStackIdentical(coolantHandler.drain(COLD_STACKB1, false))) {
                     coolantHandler.drain(COLD_STACKB1, true);
-                    if(HOT>5760)HOT = HOT - 5760;
+                    if(HOT>5760)HOT = HOT - 5760*4;
                 }
             }
         }
     }
     private boolean hasNotEnoughEnergy;
     private void consumeEnergy() {
-        int energyToConsume = CWTT()*15*thresholdPercentage;
+        int energyToConsume = CWTT()*30*thresholdPercentage;
         boolean hasMaintenance = ConfigHolder.machines.enableMaintenance && hasMaintenanceMechanics();
         if (hasMaintenance) {
             // 10% more energy per maintenance problem
@@ -220,37 +212,22 @@ public class MetaTileEntityKQCC extends MultiblockWithDisplayBase implements IOp
     @SuppressWarnings("SpellCheckingInspection")
     @Override
     protected BlockPattern createStructurePattern() {
-        return FactoryBlockPattern.start()
-                .aisle("NN","NN","NN","NN")
-                .aisle("CN","BN","AN","NN")
-                .aisle("FN","EN","DN","NN")
-                .aisle("IN","HN","GN","NN")
-                .aisle("LN","KN","JN","NN")
-                .aisle("XN","SN","NN","NN")
+        FactoryBlockPattern pattern = FactoryBlockPattern.start(RIGHT, UP, FRONT)
+                .aisle("NN","SN","NN","NN")
+                .aisle("CN","BN","AN","NE").setRepeatable(4,16)
+                .aisle("XN","NN","NN","NN")
                 .where('S', selfPredicate())
                 .where('X', abilities(MultiblockAbility.COMPUTATION_DATA_TRANSMISSION))
                 .where('N', states(getCasingState())
                         .or(abilities(MultiblockAbility.MAINTENANCE_HATCH).setExactLimit(1))
-                        .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setMinGlobalLimited(1).setPreviewCount(1))
-                        .or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(2).setPreviewCount(1)))
+                        .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setMinGlobalLimited(1).setPreviewCount(1)))
+                .where('E', states(getCasingState())
+                        .or(abilities(MultiblockAbility.INPUT_ENERGY).setMinLayerLimited(1).setMaxLayerLimited(1)))
                 .where('A', TiredTraceabilityPredicate.CP_GPU_CASING1)
                 .where('B', TiredTraceabilityPredicate.CP_CPU_CASING1)
                 .where('C', TiredTraceabilityPredicate.CP_RAM_CASING1)
-
-                .where('D', TiredTraceabilityPredicate.CP_GPU_CASING2)
-                .where('E', TiredTraceabilityPredicate.CP_CPU_CASING2)
-                .where('F', TiredTraceabilityPredicate.CP_RAM_CASING2)
-
-                .where('G', TiredTraceabilityPredicate.CP_GPU_CASING3)
-                .where('H', TiredTraceabilityPredicate.CP_CPU_CASING3)
-                .where('I', TiredTraceabilityPredicate.CP_RAM_CASING3)
-
-                .where('J', TiredTraceabilityPredicate.CP_GPU_CASING4)
-                .where('K', TiredTraceabilityPredicate.CP_CPU_CASING4)
-                .where('L', TiredTraceabilityPredicate.CP_RAM_CASING4)
-                .where('#', any())
-
-                .build();
+                .where('#', any());
+        return pattern.build();
     }
     public boolean hasMufflerMechanics() {
         return false;
@@ -274,7 +251,7 @@ public class MetaTileEntityKQCC extends MultiblockWithDisplayBase implements IOp
     }
     @Override
     public String[] getDescription() {
-        return new String[]{I18n.format("gtqtcore.multiblock.kqcc.description")};
+        return new String[]{I18n.format("gtqtcore.multiblock.kqcc.description1")};
     }
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
@@ -282,7 +259,7 @@ public class MetaTileEntityKQCC extends MultiblockWithDisplayBase implements IOp
         textList.add(new TextComponentTranslation("gregtech.multiblock.kqcc.eu", CWTT()*30,HOT));
         textList.add(new TextComponentTranslation("gregtech.multiblock.kqcc.start", thresholdPercentage));
 
-        if((RAM1+RAM2+RAM3+RAM4)>=(GPU1+GPU2+GPU3+GPU4)&&(RAM1+RAM2+RAM3+RAM4)>=(CPU1+CPU2+CPU3+CPU4))
+        if((RAM1)>=(GPU1)&&(RAM1)>=(CPU1))
             textList.add(new TextComponentTranslation("gregtech.multiblock.kqcc.normal"));
         else
             textList.add(new TextComponentTranslation("gregtech.multiblock.kqcc.lack"));
@@ -298,9 +275,8 @@ public class MetaTileEntityKQCC extends MultiblockWithDisplayBase implements IOp
             int liquidNITAmount = STACKC == null ? 0 : STACKC.amount;
             textList.add(new TextComponentTranslation("gtqtcore.multiblock.kqcc.water.amount", TextFormattingUtil.formatNumbers((liquidWaterAmount)),TextFormattingUtil.formatNumbers((liquidPCBAmount)),TextFormattingUtil.formatNumbers((liquidNITAmount))));
         }
-        textList.add(new TextComponentTranslation("gregtech.multiblock.kqcc.gpu", GPU1,GPU2,GPU3,GPU4));
-        textList.add(new TextComponentTranslation("gregtech.multiblock.kqcc.cpu", CPU1,CPU2,CPU3,CPU4));
-        textList.add(new TextComponentTranslation("gregtech.multiblock.kqcc.ram", RAM1,RAM2,RAM3,RAM4));
+        textList.add(new TextComponentTranslation("GPU:%s CPU:%s RAM:%s level:%s", GPU1,CPU1,RAM1,level));
+        textList.add(new TextComponentTranslation("预估算力:%s", returncwt()));
         if(thresholdPercentage==0) textList.add(new TextComponentTranslation("gregtech.multiblock.kqcc.cwtt", returncwt(),0));
         if(thresholdPercentage==1) textList.add(new TextComponentTranslation("gregtech.multiblock.kqcc.cwtt", returncwt(),HEAT()));
         if(thresholdPercentage==2) textList.add(new TextComponentTranslation("gregtech.multiblock.kqcc.cwtt", returncwt(),HEAT()*4));
@@ -308,21 +284,21 @@ public class MetaTileEntityKQCC extends MultiblockWithDisplayBase implements IOp
 
     int CWTT()
     {
-        if((RAM1+RAM2+RAM3+RAM4)>=(GPU1+GPU2+GPU3+GPU4)&&(RAM1+RAM2+RAM3+RAM4)>=(CPU1+CPU2+CPU3+CPU4)) return (GPU1+GPU2+GPU3+GPU4)+(CPU1+CPU2+CPU3+CPU4);
-        else return (RAM1+RAM2+RAM3+RAM4);
+        if((RAM1)>=(GPU1)&&(RAM1)>=(CPU1)) return (GPU1+CPU1)*8*level;
+        else return (RAM1)*level*8;
     };
     int HEAT()
     {
-        return (GPU1+GPU2+GPU3+GPU4)*(CPU1+CPU2+CPU3+CPU4);
+        return CPU1*CPU1*level*level;
     };
     int returncwt()
     {
         if(isWorkingEnabled) {
 
-            if(thresholdPercentage==2) HOT=HOT+HEAT()*4;
+            if(thresholdPercentage==2) HOT=HOT+HEAT()*2;
             if(thresholdPercentage==1)  HOT=HOT+HEAT();
             if(HOT<30000) return CWTT()*(thresholdPercentage);
-            else return CWTT()*thresholdPercentage/2;
+            else return CWTT()*thresholdPercentage;
         }
         else return 0;
     }
@@ -344,7 +320,7 @@ public class MetaTileEntityKQCC extends MultiblockWithDisplayBase implements IOp
     @Override
     public int getMaxCWUt(Collection<IOpticalComputationProvider> seen) {
         seen.add(this);
-        return (GPU1+GPU2+GPU3+GPU4+CPU1+CPU2+CPU3+CPU4)*thresholdPercentage;
+        return (GPU1+CPU1)*thresholdPercentage*level*8;
     }
 
     @Override
@@ -354,19 +330,19 @@ public class MetaTileEntityKQCC extends MultiblockWithDisplayBase implements IOp
     }
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {
-        return new MetaTileEntityKQCC(metaTileEntityId);
+        return new MetaTileEntityADVKQCC(metaTileEntityId);
     }
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
-                return Textures.INERT_PTFE_CASING;
+        return Textures.INERT_PTFE_CASING;
     }
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
         this.energyContainer = new EnergyContainerList(getAbilities(MultiblockAbility.INPUT_ENERGY));
         this.coolantHandler = new FluidTankList(false, getAbilities(MultiblockAbility.IMPORT_FLUIDS));
-
-
+        List<IEnergyContainer> i = getAbilities(MultiblockAbility.INPUT_ENERGY);
+        this.level=i.size();
         Object CPU1 = context.get("CPU1TiredStats");
         Object GPU1 = context.get("GPU1TiredStats");
         Object RAM1 = context.get("RAM1TiredStats");
@@ -382,50 +358,6 @@ public class MetaTileEntityKQCC extends MultiblockWithDisplayBase implements IOp
                 () -> ((WrappedIntTired)RAM1).getIntTier(),
                 0);
 
-        Object CPU2 = context.get("CPU2TiredStats");
-        Object GPU2 = context.get("GPU2TiredStats");
-        Object RAM2 = context.get("RAM2TiredStats");
-        this.CPU2 = GTQTUtil.getOrDefault(() -> CPU2 instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)CPU2).getIntTier(),
-                0);
-
-        this.GPU2 = GTQTUtil.getOrDefault(() -> GPU2 instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)GPU2).getIntTier(),
-                0);
-
-        this.RAM2 = GTQTUtil.getOrDefault(() -> RAM2 instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)RAM2).getIntTier(),
-                0);
-
-        Object CPU3 = context.get("CPU3TiredStats");
-        Object GPU3 = context.get("GPU3TiredStats");
-        Object RAM3 = context.get("RAM3TiredStats");
-        this.CPU3 = GTQTUtil.getOrDefault(() -> CPU3 instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)CPU3).getIntTier(),
-                0);
-
-        this.GPU3 = GTQTUtil.getOrDefault(() -> GPU3 instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)GPU3).getIntTier(),
-                0);
-
-        this.RAM3 = GTQTUtil.getOrDefault(() -> RAM3 instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)RAM3).getIntTier(),
-                0);
-
-        Object CPU4 = context.get("CPU4TiredStats");
-        Object GPU4 = context.get("GPU4TiredStats");
-        Object RAM4 = context.get("RAM4TiredStats");
-        this.CPU4 = GTQTUtil.getOrDefault(() -> CPU4 instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)CPU4).getIntTier(),
-                0);
-
-        this.GPU4 = GTQTUtil.getOrDefault(() -> GPU4 instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)GPU4).getIntTier(),
-                0);
-
-        this.RAM4 = GTQTUtil.getOrDefault(() -> RAM4 instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)RAM4).getIntTier(),
-                0);
     }
     private TextFormatting getDisplayTemperatureColor() {
         if (HOT < 25000) {
@@ -443,7 +375,7 @@ public class MetaTileEntityKQCC extends MultiblockWithDisplayBase implements IOp
 
     @Override
     public double getFillPercentage(int index) {
-        return index == 0 ? 1.0 * returncwt() / ((GPU1+GPU2+GPU3+GPU4)+(CPU1+CPU2+CPU3+CPU4)) :
+        return index == 0 ? 1.0 * returncwt() / ((GPU1+CPU1)*level*16) :
                 Math.min(1.0, HOT / 50000);
     }
 
@@ -457,7 +389,7 @@ public class MetaTileEntityKQCC extends MultiblockWithDisplayBase implements IOp
         if (index == 0) {
             ITextComponent cwutInfo = TextComponentUtil.stringWithColor(
                     TextFormatting.AQUA,
-                    returncwt()+ " / " + ((GPU1+GPU2+GPU3+GPU4)+(CPU1+CPU2+CPU3+CPU4)) + " CWU/t");
+                    returncwt()+ " / " + ((GPU1*level)+(CPU1*level))*16 + " CWU/t");
             hoverList.add(TextComponentUtil.translationWithColor(
                     TextFormatting.GRAY,
                     "gregtech.multiblock.hpca.computation",
