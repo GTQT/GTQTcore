@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "epimorphism:items/metaitems/containment_unit.bose_einstein_condensate"
+    "layer0": "gtqtcore:items/metaitems/containment_unit.bose_einstein_condensate"
   }
 }

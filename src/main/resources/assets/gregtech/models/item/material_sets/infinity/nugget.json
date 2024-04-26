@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "epimorphism:items/material_sets/infinity/nugget"
+    "layer0": "gtqtcore:items/material_sets/infinity/nugget"
   }
 }

@@ -109,7 +109,7 @@ public class MetaTileEntityAlloykiln extends NoEnergyMultiblockController {
                         .or(abilities(MultiblockAbility.IMPORT_ITEMS).setMinGlobalLimited(1))
                         .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setMinGlobalLimited(1))
                         .or(abilities(MultiblockAbility.EXPORT_ITEMS).setMinGlobalLimited(1)))
-                .where('#', air())
+                .where('#', any())
                 .where('&', air().or(SNOW_PREDICATE)) // this won't stay in the structure, and will be broken while
                 // running
                 .where('Y', selfPredicate())

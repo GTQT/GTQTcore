@@ -2,12 +2,14 @@ package keqing.gtqtcore.loaders.recipes.handlers;
 
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.OreDictUnifier;
+import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.material.properties.PropertyKey;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.MaterialStack;
 import keqing.gtqtcore.api.unification.ore.GTQTOrePrefix;
 
+import static gregtech.api.unification.material.Materials.*;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.ALLOY_kILN;
 
 public class AllouKlin {
@@ -46,6 +48,13 @@ public class AllouKlin {
                     new MaterialStack(Materials.BlueAlloy, 1)}};
 
     public static void init(){
+        ALLOY_kILN.recipeBuilder()
+                .duration(20)
+                .input(OrePrefix.dust, RawRubber,3)
+                .input(OrePrefix.dust, Sulfur,1)
+                .output(OrePrefix.ingot,Rubber)
+                .buildAndRegister();
+
         for (MaterialStack[] stack : alloySmelterList) {
             if (stack[0].material.hasProperty(PropertyKey.INGOT)) {
                 ALLOY_kILN.recipeBuilder()

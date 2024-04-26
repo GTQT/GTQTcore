@@ -74,6 +74,7 @@ public class MetaTileEntityKineticEnergyBattery extends MultiblockWithDisplayBas
     private long runMin = 0;
     private long runS = 0;
     private int timeCheck;
+
     public int process=0;
     public int maxProcess = 100;
     private boolean isActive=true, isWorkingEnabled = true;
@@ -100,9 +101,6 @@ public class MetaTileEntityKineticEnergyBattery extends MultiblockWithDisplayBas
     @Override
     protected BlockPattern createStructurePattern() {
         FactoryBlockPattern pattern = FactoryBlockPattern.start(RIGHT,UP,FRONT)
-//                .aisle("       ", "  BBB  ", " BBBBB ", " BBSBB ", " BBBBB ", "  BBB  ", "       ")
-//                .aisle("ABBBBBA", "BC   CB", "B     B", "B  B  B", "B     B", "BC   CB", "ABBBBBA").setRepeatable(1, 16)
-//                .aisle("       ", "  BBB  ", " BBBBB ", " BBBBB ", " BBBBB ", "  BBB  ", "       ")
                 .aisle("  B  ", "  B  ", "BBSBB", "  B  ", "  B  ")
                 .aisle("ABBBA", "BC CB", "B B B", "BC CB", "ABBBA").setRepeatable(1, 16)
                 .aisle("  B  ", "  B  ", "BBBBB", "  B  ", "  B  ")
@@ -485,7 +483,7 @@ public class MetaTileEntityKineticEnergyBattery extends MultiblockWithDisplayBas
     }
 
 
-//先跑起来看看
+    //先跑起来看看
     public void setWorkingEnabled(boolean b) {
         this.isWorkingEnabled = b;
         markDirty();
@@ -542,19 +540,5 @@ public class MetaTileEntityKineticEnergyBattery extends MultiblockWithDisplayBas
         getFrontOverlay().renderOrientedState(renderState, translation, pipeline, getFrontFacing(), this.isActive(),
                 this.isWorkingEnabled());
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

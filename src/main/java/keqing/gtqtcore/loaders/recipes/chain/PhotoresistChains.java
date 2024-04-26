@@ -160,7 +160,7 @@ public class PhotoresistChains {
                 .fluidInputs(HydrochloricAcid.getFluid(2000))
                 .fluidInputs(Chloromethane.getFluid(1000))
                 .input(dust, Silicon)
-                .notConsumable(dust, Copper)
+                .circuitMeta(2)
                 .fluidOutputs(Hydrogen.getFluid(2000))
                 .fluidOutputs(Methyltrichlorosilane.getFluid(1000))
                 .buildAndRegister();

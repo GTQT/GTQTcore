@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "epimorphism:items/metaitems/wafer.chip.spin_transfer_torque_memory"
+    "layer0": "gtqtcore:items/metaitems/wafer.chip.spin_transfer_torque_memory"
   }
 }

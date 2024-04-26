@@ -131,7 +131,7 @@ public class MetaTileEntityKQCC extends MultiblockWithDisplayBase implements IOp
 
         if(HOT>5000) {
 
-            if(thresholdPercentage==1) {
+            if(thresholdPercentage!=2) {
                 if (COLD_STACK.isFluidStackIdentical(coolantHandler.drain(COLD_STACK, false))) {
                     coolantHandler.drain(COLD_STACK, true);
                     if(HOT>770) HOT = HOT - 770;
@@ -209,7 +209,7 @@ public class MetaTileEntityKQCC extends MultiblockWithDisplayBase implements IOp
     @Override
     public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
         super.renderMetaTileEntity(renderState, translation, pipeline);
-        getFrontOverlay().renderOrientedState(renderState, translation, pipeline, getFrontFacing(), this.isActive(),
+        getFrontOverlay().renderOrientedState(renderState, translation, pipeline, getFrontFacing(), true,
                 this.isWorkingEnabled());
     }
 

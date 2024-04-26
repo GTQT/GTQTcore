@@ -4,13 +4,17 @@ import gregtech.api.recipes.GTRecipeHandler;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.OreDictUnifier;
 
+import static gregtech.api.recipes.RecipeMaps.AUTOCLAVE_RECIPES;
+import static gregtech.api.recipes.RecipeMaps.CHEMICAL_RECIPES;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.DRYER_RECIPES;
+import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.SFM;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static gregtech.api.GTValues.EV;
 import static gregtech.api.GTValues.VA;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.dust;
 import static gregtech.api.unification.ore.OrePrefix.ingotHot;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 
 /**
  * The Tungsten Process
@@ -37,12 +41,67 @@ public class TungstenProcessing {
     }
 
     private static void tungstenChain() {
-        // H2O(WO3) -> WO3 + H2O
-        DRYER_RECIPES.recipeBuilder()
+        //1倍
+        // 化反H2O(WO3) +氨气+水=钨酸铵
+        CHEMICAL_RECIPES.recipeBuilder()
                 .input(dust, TungsticAcid, 7)
+                .fluidInputs(Ammonia.getFluid(6000))
+                .fluidInputs(Water.getFluid(6000))
+                .fluidOutputs(AmmoniumTungstate.getFluid(7000))
+                .duration(200).EUt(480).buildAndRegister();
+        // 结晶 钨酸铵 = 钨酸铵晶体
+        AUTOCLAVE_RECIPES.recipeBuilder()
+                .fluidInputs(AmmoniumTungstate.getFluid(7000))
+                .output(dust,CammoniumTungstate,7)
+                .duration(400).EUt(480).buildAndRegister();
+        // 钨酸铵-> WO3 + H2O
+        DRYER_RECIPES.recipeBuilder()
+                .input(dust, CammoniumTungstate, 7)
                 .output(dust, TungstenTrioxide, 4)
-                .fluidOutputs(Water.getFluid(1000))
-                .duration(160).EUt(16).buildAndRegister();
+                .fluidOutputs(Water.getFluid(6000))
+                .fluidInputs(Ammonia.getFluid(6000))
+                .duration(400).EUt(480).buildAndRegister();
+
+
+        //二倍
+        CHEMICAL_RECIPES.recipeBuilder()
+                .input(dust, Scheelite, 1)
+                .input(dust,SodaAsh,2)
+                .fluidInputs(Water.getFluid(4000))
+                .output(dust, SodiumTungstateDihydrate, 1)
+                .duration(400).EUt(480).buildAndRegister();
+
+        SFM.recipeBuilder()
+                .fluidInputs(HydrochloricAcid.getFluid(10000))
+                .input(dust,SodiumTungstateDihydrate,10)
+                .chancedOutput(dust, Powellite,10, 5000, 0)
+                .fluidOutputs(ItungsticAcid.getFluid(800))
+                .fluidOutputs(ItungsticAcid.getFluid(800))
+                .fluidOutputs(ItungsticAcid.getFluid(800))
+                .fluidOutputs(ItungsticAcid.getFluid(400))
+                .fluidOutputs(ItungsticAcid.getFluid(400))
+                .fluidOutputs(ItungsticAcid.getFluid(400))
+                .fluidOutputs(ItungsticAcid.getFluid(200))
+                .fluidOutputs(ItungsticAcid.getFluid(200))
+                .fluidOutputs(ItungsticAcid.getFluid(200))
+                .fluidOutputs(ItungsticAcid.getFluid(100))
+                .fluidOutputs(ItungsticAcid.getFluid(100))
+                .fluidOutputs(ItungsticAcid.getFluid(100))
+                .duration(2000).EUt(480).buildAndRegister();
+
+        CHEMICAL_RECIPES.recipeBuilder()
+                .fluidInputs(ItungsticAcid.getFluid(1000))
+                .fluidInputs(Ammonia.getFluid(6000))
+                .fluidInputs(Water.getFluid(6000))
+                .fluidOutputs(AmmoniumTungstate.getFluid(7000))
+                .duration(400).EUt(480).buildAndRegister();
+
+        DRYER_RECIPES.recipeBuilder()
+                .fluidInputs(ItungsticAcid.getFluid(1000))
+                .output(dust, TungstenTrioxide, 1)
+                .duration(400).EUt(480).buildAndRegister();
+
+        //下边不要动喵
 
         // 2WO3 + 3C -> 2W + 3CO2
         RecipeMaps.BLAST_RECIPES.recipeBuilder()
@@ -54,7 +113,7 @@ public class TungstenProcessing {
                 .duration(2400).EUt(VA[EV]).buildAndRegister();
 
         // WO3 + 6H -> W + 3H2O
-        RecipeMaps.CHEMICAL_RECIPES.recipeBuilder()
+        CHEMICAL_RECIPES.recipeBuilder()
                 .input(dust, TungstenTrioxide, 4)
                 .fluidInputs(Hydrogen.getFluid(6000))
                 .output(dust, Tungsten)

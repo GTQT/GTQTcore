@@ -53,17 +53,18 @@ import java.util.Random;
 import static gregtech.api.util.RelativeDirection.*;
 //水电站
 public class MetaTileEntityWaterPowerStation extends MultiblockWithDisplayBase implements  IProgressBarMultiblock {
-    private int tier;
     private int coilLevel;
     private int number;
     private int outputEu;
     private int water=0;
     private boolean isWorkingEnabled;
+    int tier;
     private final MetaTileEntityWaterPowerStationLogic logic;
     private IEnergyContainer energyContainer;
-    public MetaTileEntityWaterPowerStation(ResourceLocation metaTileEntityId) {
+    public MetaTileEntityWaterPowerStation(ResourceLocation metaTileEntityId,int tier) {
         super(metaTileEntityId);
-        this.logic = new MetaTileEntityWaterPowerStationLogic(this, tier);
+        this.logic = new MetaTileEntityWaterPowerStationLogic(this);
+        this.tier = tier;
     }
     @Override
     protected void formStructure(PatternMatchContext context) {
@@ -91,26 +92,26 @@ public class MetaTileEntityWaterPowerStation extends MultiblockWithDisplayBase i
     protected void updateFormedValid() {
         this.logic.update();
         generator();
-        this.outputEu = water *coilLevel/8;
+        this.outputEu = (int) (water*Math.pow(2,tier-1) *coilLevel/8);
     }
 
     private long geteu()
     {
         Random rand = new Random();
         int randomNum = rand.nextInt(40);
-        return (long) (water *coilLevel*(randomNum+80)/800);
+        return (long) (((long) water *coilLevel*(randomNum+80)/800)*Math.pow(2,tier-1));
     }
     private void generator() {
         isWorkingEnabled=this.energyContainer.getEnergyStored()<this.energyContainer.getEnergyCapacity()&&water > 0;
         if(isWorkingEnabled)
         {
-            this.energyContainer.addEnergy(geteu());
+            this.energyContainer.addEnergy((long) (geteu()*Math.pow(2,tier-1)));
         }
     }
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {
-        return new MetaTileEntityWaterPowerStation(metaTileEntityId);
+        return new MetaTileEntityWaterPowerStation(metaTileEntityId,tier);
     }
 
     @Override
@@ -144,7 +145,9 @@ public class MetaTileEntityWaterPowerStation extends MultiblockWithDisplayBase i
     @SideOnly(Side.CLIENT)
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
-        return Textures.SOLID_STEEL_CASING;
+        if(tier==1)return Textures.SOLID_STEEL_CASING;
+        if(tier==2)return Textures.FROST_PROOF_CASING;
+        return Textures.CLEAN_STAINLESS_STEEL_CASING;
     }
     @Override
     public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
@@ -168,7 +171,7 @@ public class MetaTileEntityWaterPowerStation extends MultiblockWithDisplayBase i
 
     @Override
     public double getFillPercentage(int index) {
-        return  (double)geteu()/((2*(number+1))*(2*(number+1))*coilLevel*0.6);
+        return  ((double)geteu()/(Math.pow(2,tier-1)))/((2*(number+1))*(2*(number+1))*coilLevel*0.6);
     }
 
     @Override
@@ -180,7 +183,7 @@ public class MetaTileEntityWaterPowerStation extends MultiblockWithDisplayBase i
     public void addBarHoverText(List<ITextComponent> hoverList, int index) {
             ITextComponent cwutInfo = TextComponentUtil.stringWithColor(
                     TextFormatting.AQUA,
-                    geteu()+ " / " + ((2*(number+1))*(2*(number+1))*coilLevel*0.6) + " EU/t");
+                    geteu()+"* 倍率："+Math.pow(2,tier-1)+ " / " + ((2*(number+1))*(2*(number+1))*coilLevel*0.6) + " EU/t");
             hoverList.add(TextComponentUtil.translationWithColor(
                     TextFormatting.GRAY,
                     "gregtech.multiblock.wps.computation",
@@ -191,18 +194,20 @@ public class MetaTileEntityWaterPowerStation extends MultiblockWithDisplayBase i
     private boolean isWorkingEnabled() {
         return isWorkingEnabled;
     }
-    private static IBlockState getCasingAState() {
-        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STEEL_SOLID);
+    private IBlockState getCasingAState() {
+        if(tier==1)return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STEEL_SOLID);
+        if(tier==2)return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.ALUMINIUM_FROSTPROOF);
+        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STAINLESS_CLEAN);
     }
-    private static IBlockState getFrameState() {
-        return MetaBlocks.FRAMES.get(Materials.Steel).getBlock(Materials.Steel);
+    private IBlockState getFrameState() {
+        if(tier==1)return MetaBlocks.FRAMES.get(Materials.Steel).getBlock(Materials.Steel);
+        if(tier==2)return MetaBlocks.FRAMES.get(Materials.Aluminium).getBlock(Materials.Aluminium);
+        return MetaBlocks.FRAMES.get(Materials.StainlessSteel).getBlock(Materials.StainlessSteel);
     }
     protected class MetaTileEntityWaterPowerStationLogic {
         private final MetaTileEntityWaterPowerStation metaTileEntity;
-        int tier;
-        public MetaTileEntityWaterPowerStationLogic(MetaTileEntityWaterPowerStation metaTileEntity,int tier) {
+        public MetaTileEntityWaterPowerStationLogic(MetaTileEntityWaterPowerStation metaTileEntity) {
             this.metaTileEntity = metaTileEntity;
-            this.tier = tier;
         }
         public int checkWater()
         {

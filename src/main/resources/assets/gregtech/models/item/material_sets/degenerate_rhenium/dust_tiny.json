@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "epimorphism:items/material_sets/degenerate_rhenium/dust_tiny"
+    "layer0": "gtqtcore:items/material_sets/degenerate_rhenium/dust_tiny"
   }
 }

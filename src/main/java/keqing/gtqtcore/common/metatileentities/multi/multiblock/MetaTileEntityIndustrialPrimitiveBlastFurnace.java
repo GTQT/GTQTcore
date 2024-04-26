@@ -197,7 +197,7 @@ public class MetaTileEntityIndustrialPrimitiveBlastFurnace extends NoEnergyMulti
         super.addDisplayText(textList);
         if (isStructureFormed()) {
             textList.add(new TextComponentTranslation("gtqtcore.multiblock.ip1.amount",thresholdPercentage*10,40));
-            textList.add(new TextComponentTranslation("gtqtcore.multiblock.ip2.amount",Temp/10,2800));
+            textList.add(new TextComponentTranslation("gtqtcore.multiblock.ip2.amount",Temp/10,2600));
             textList.add(new TextComponentTranslation("gtqtcore.multiblock.ip3.amount",cost()));
             textList.add(new TextComponentTranslation("gtqtcore.machine.industrial_primitive_blast_furnace.auxiliary_blast_furnace", auxiliaryBlastFurnaceNumber));
         }

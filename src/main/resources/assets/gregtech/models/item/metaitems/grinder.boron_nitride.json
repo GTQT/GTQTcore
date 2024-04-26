@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures" : {
-    "layer0": "epimorphism:items/metaitems/grinder.boron_nitride"
+    "layer0": "gtqtcore:items/metaitems/grinder.boron_nitride"
   }
 }

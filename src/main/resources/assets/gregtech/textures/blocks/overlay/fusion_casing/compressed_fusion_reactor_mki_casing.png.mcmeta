@@ -10,7 +10,7 @@
         "layer": "CUTOUT",
         "gregtech": true,
         "textures": [
-            "epimorphism:blocks/casings/ep_fusion_casing/compressed_fusion_reactor_mki_casing_ctm"
+            "gtqtcore:blocks/casings/ep_fusion_casing/compressed_fusion_reactor_mki_casing_ctm"
         ],
         "extra": {
             "connect_inside": true

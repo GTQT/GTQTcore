@@ -5,7 +5,7 @@
         "layer": "BLOOM",
 		"gregtech": true,
         "textures": [
-            "epimorphism:blocks/casings/ep_fusion_casing/machine_casing_fusion_6_ctm"
+            "gtqtcore:blocks/casings/ep_fusion_casing/machine_casing_fusion_6_ctm"
         ],
         "extra": {
             "connect_inside": true

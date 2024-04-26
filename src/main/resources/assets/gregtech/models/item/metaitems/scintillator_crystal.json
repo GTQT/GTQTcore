@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "epimorphism:items/metaitems/scintillator_crystal"
+    "layer0": "gtqtcore:items/metaitems/scintillator_crystal"
   }
 }

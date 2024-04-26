@@ -2436,5 +2436,132 @@ public class FirstDegreeMaterials {
                 .iconSet(ROUGH)
                 .components(Carbon, 1, Hydrogen, 1, Oxygen, 2, Sodium, 1)
                 .build();
+
+        //钨酸铵
+        GTQTMaterials.AmmoniumTungstate = new Material.Builder(getMaterialsId(), gregtechId("ammonium_tungstate"))
+                .fluid()
+                .color(0x008B00)
+                .iconSet(ROUGH)
+                .build()
+                .setFormula("（NH4)6W7024•6H20", true);
+        //晶体钨酸铵
+        GTQTMaterials.CammoniumTungstate = new Material.Builder(getMaterialsId(), gregtechId("cammonium_tungstate"))
+                .dust()
+                .color(0x458B00)
+                .iconSet(SHINY)
+                .build()
+                .setFormula("（NH4)6W7024", true);
+
+        //Na2WO4
+        GTQTMaterials.SodiumTungstateDihydrate = new Material.Builder(getMaterialsId(), gregtechId("sodium_tungstate_dihydrate"))
+                .dust()
+                .color(0x473C8B)
+                .iconSet(SHINY)
+                .build()
+                .setFormula("Na2WO4", true);
+
+        //工业钨酸
+        GTQTMaterials.ItungsticAcid = new Material.Builder(getMaterialsId(), gregtechId("itungstic_acid"))
+                .fluid()
+                .color(0x68228B)
+                .iconSet(SHINY)
+                .build()
+                .setFormula("H2WO4*", true);
+
+        //锆石
+        GTQTMaterials.Zircon = new Material.Builder(getMaterialsId(), gregtechId("zircon"))
+                .ore().dust()
+                .color(0x8B8B00)
+                .iconSet(SHINY)
+                .build()
+                .setFormula("ZrSiO₄*", true);
+
+        //熟制锆石
+        GTQTMaterials.Zirconf = new Material.Builder(getMaterialsId(), gregtechId("zirconf"))
+                .dust()
+                .color(0xA52A2A)
+                .iconSet(SHINY)
+                .build();
+
+        //酸性锆石溶液
+        GTQTMaterials.Zircons = new Material.Builder(getMaterialsId(), gregtechId("zircons"))
+                .fluid()
+                .color(0x9AFF9A)
+                .iconSet(SHINY)
+                .build();
+
+        //硫酸锆
+        GTQTMaterials.Zrso = new Material.Builder(getMaterialsId(), gregtechId("zrso"))
+                .fluid()
+                .color(0xC6E2FF)
+                .iconSet(SHINY)
+                .build()
+                .setFormula("ZrSO₄", true);
+
+        //硫酸铪
+        GTQTMaterials.Hfso = new Material.Builder(getMaterialsId(), gregtechId("hfso"))
+                .fluid()
+                .color(0x9F79EE)
+                .iconSet(SHINY)
+                .build()
+                .setFormula("HfSO₄", true);
+
+        //钽铌铁粉
+        GTQTMaterials.NiobiumTantalumFe = new Material.Builder(getMaterialsId(), gregtechId("niobium_tantalum_fe"))
+                .dust()
+                .color(0x8B3E2F)
+                .iconSet(SHINY)
+                .build();
+
+        GTQTMaterials.NiobiumTantalumFec = new Material.Builder(getMaterialsId(), gregtechId("niobium_tantalum_fec"))
+                .fluid()
+                .color(0x8B3A62)
+                .iconSet(SHINY)
+                .build();
+
+        //氯化铌
+        GTQTMaterials.Nbcl = new Material.Builder(getMaterialsId(), gregtechId("nbcl"))
+                .fluid()
+                .color(0x6B8E23)
+                .iconSet(SHINY)
+                .build()
+                .setFormula("NbCl₄", true);
+        //氯化钽
+        GTQTMaterials.Tacl = new Material.Builder(getMaterialsId(), gregtechId("tacl"))
+                .fluid()
+                .color(0x698B22)
+                .iconSet(SHINY)
+                .build()
+                .setFormula("TaCl₄", true);
+
+        //氟化铌
+        GTQTMaterials.Nbcla = new Material.Builder(getMaterialsId(), gregtechId("nbcla"))
+                .fluid()
+                .color(0x5D478B)
+                .iconSet(SHINY)
+                .build()
+                .setFormula("NbCl₄", true);
+        //氟化钽
+        GTQTMaterials.Tacla = new Material.Builder(getMaterialsId(), gregtechId("tacla"))
+                .fluid()
+                .color(0x473C8B)
+                .iconSet(SHINY)
+                .build()
+                .setFormula("TaCl₄", true);
+
+        //七氟铌酸钾
+        GTQTMaterials.Nbclb = new Material.Builder(getMaterialsId(), gregtechId("nbclb"))
+                .fluid()
+                .color(0x218868)
+                .iconSet(SHINY)
+                .build()
+                .setFormula("NbCl₄", true);
+        //七氟铌酸钾
+        GTQTMaterials.Taclb = new Material.Builder(getMaterialsId(), gregtechId("taclb"))
+                .fluid()
+                .color(0x2E8B57)
+                .iconSet(SHINY)
+                .build()
+                .setFormula("TaCl₄", true);
     }
 }

@@ -46,7 +46,7 @@ public class OilChains {
                 .fluidInputs(SulfuricAcid.getFluid(1000))
                 .fluidInputs(SodiumFormate.getFluid(2000))
                 .fluidOutputs(FormicAcid.getFluid(2000))
-                .fluidOutputs(SodiumSulfate.getFluid(1000))
+                .output(dust,SodiumSulfate,1)
                 .circuitMeta(1)
                 .duration(120).EUt(30).buildAndRegister();
 

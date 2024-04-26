@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures" : {
-    "layer0": "epimorphism:items/metaitems/component.cosmic.closed_timelike_curve_guidance_unit"
+    "layer0": "gtqtcore:items/metaitems/component.cosmic.closed_timelike_curve_guidance_unit"
   }
 }

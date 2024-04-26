@@ -251,7 +251,7 @@ public class GTQTRecipes {
                         .fluidInputs(Polytetrafluoroethylene.getFluid(144))
                         .output(cylinder, material)
                         .CWUt(24)
-                        .totalCWU(960000)
+                        .totalCWU(19200)
                         .buildAndRegister();
 
                 TD_PRINT_RECIPES.recipeBuilder()
@@ -261,7 +261,7 @@ public class GTQTRecipes {
                         .fluidInputs(Polybenzimidazole.getFluid(36))
                         .output(cylinder, material)
                         .CWUt(24)
-                        .totalCWU(960000)
+                        .totalCWU(19200)
                         .buildAndRegister();
 
                 FLUID_EXTRACTOR_RECIPES.recipeBuilder()
@@ -308,7 +308,7 @@ public class GTQTRecipes {
                         .output(motor_stick, material)
                         .fluidInputs(Polytetrafluoroethylene.getFluid(144))
                         .CWUt(24)
-                        .totalCWU(960000)
+                        .totalCWU(19200)
                         .buildAndRegister();
 
                 TD_PRINT_RECIPES.recipeBuilder()
@@ -318,7 +318,7 @@ public class GTQTRecipes {
                         .output(motor_stick, material)
                         .fluidInputs(Polybenzimidazole.getFluid(36))
                         .CWUt(24)
-                        .totalCWU(960000)
+                        .totalCWU(19200)
                         .buildAndRegister();
 
                 FLUID_EXTRACTOR_RECIPES.recipeBuilder()
@@ -373,7 +373,7 @@ public class GTQTRecipes {
                         .output(valve, material)
                         .fluidInputs(Polytetrafluoroethylene.getFluid(144))
                         .CWUt(24)
-                        .totalCWU(960000)
+                        .totalCWU(19200)
                         .buildAndRegister();
 
                 TD_PRINT_RECIPES.recipeBuilder()
@@ -383,7 +383,7 @@ public class GTQTRecipes {
                         .output(valve, material)
                         .fluidInputs(Polybenzimidazole.getFluid(36))
                         .CWUt(24)
-                        .totalCWU(960000)
+                        .totalCWU(19200)
                         .buildAndRegister();
 
                 FLUID_EXTRACTOR_RECIPES.recipeBuilder()

@@ -2,6 +2,7 @@ package keqing.gtqtcore.common;
 
 import gregtech.api.GregTechAPI;
 import gregtech.api.block.VariantItemBlock;
+import gregtech.api.cover.CoverDefinition;
 import gregtech.api.recipes.recipeproperties.FusionEUToStartProperty;
 import gregtech.api.unification.stack.ItemMaterialInfo;
 import gregtech.common.items.MetaItems;
@@ -13,6 +14,7 @@ import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTBlockWireCoil;
 import keqing.gtqtcore.common.block.blocks.GTQTCrops;
 import keqing.gtqtcore.common.block.blocks.GTQTStoneVariantBlock;
+import keqing.gtqtcore.common.covers.GTQTCoverBehavior;
 import keqing.gtqtcore.common.items.GTQTMetaItems;
 import keqing.gtqtcore.common.items.metaitems.GTQTMetaToolItems;
 import keqing.gtqtcore.loaders.OreDictionaryLoader;
@@ -147,6 +149,12 @@ public class CommonProxy {
     }
 
     @SubscribeEvent
+    public static void registerCoverBehavior(GregTechAPI.RegisterEvent<CoverDefinition> event) {
+        GTQTLog.logger.info("Registering Cover Behaviors...");
+        GTQTCoverBehavior.init();
+    }
+
+    @SubscribeEvent
     public static void initMaterialInfo(GregTechAPI.RegisterEvent<ItemMaterialInfo> event) {
         GCYSMaterialInfoLoader.init();
     }
@@ -171,6 +179,7 @@ public class CommonProxy {
         registry.register(GTQTMetaBlocks.TURBINE_CASING1);
         registry.register(GTQTMetaBlocks.QUANTUM_CONSTRAINT_CASING);
         registry.register(GTQTMetaBlocks.COMPONENT_ASSEMBLY_LINE);
+        registry.register(GTQTMetaBlocks.ELECTRON_MICROSCOPE);
         registry.register(GTQTMetaBlocks.ISA_CASING);
         registry.register(GTQTMetaBlocks.ROAD);
         registry.register(GTQTMetaBlocks.ELECTROBATH);
@@ -225,6 +234,7 @@ public class CommonProxy {
         registry.register(createItemBlock(GTQTMetaBlocks.TURBINE_CASING1, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.QUANTUM_CONSTRAINT_CASING, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.COMPONENT_ASSEMBLY_LINE, VariantItemBlock::new));
+        registry.register(createItemBlock(GTQTMetaBlocks.ELECTRON_MICROSCOPE, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.ISA_CASING, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.ELECTROBATH, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.ROAD, VariantItemBlock::new));

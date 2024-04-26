@@ -16,6 +16,8 @@ import gregtech.common.blocks.*;
 import gregtech.common.blocks.BlockBoilerCasing.BoilerCasingType;
 import gregtech.common.blocks.BlockMetalCasing.MetalCasingType;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
+import keqing.gtqtcore.common.block.GTQTMetaBlocks;
+import keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing1;
 import keqing.gtqtcore.loaders.recipes.GTQTRecipes;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
@@ -61,7 +63,7 @@ public class MetaTileEntityClarifier extends RecipeMapMultiblockController {
                 .where('A', states(MetaBlocks.STONE_BLOCKS.get(StoneVariantBlock.StoneVariant.SMOOTH).getState(StoneVariantBlock.StoneType.CONCRETE_LIGHT)).setMinGlobalLimited(250))
                 .where('B', states(MetaBlocks.METAL_CASING.getState(MetalCasingType.STEEL_SOLID)).or(autoAbilities()))
                 .where('C', states(MetaBlocks.BOILER_CASING.getState((BoilerCasingType.STEEL_PIPE))))
-                .where('D', air())
+                .where('D', states(GTQTMetaBlocks.TURBINE_CASING1.getState((GTQTTurbineCasing1.TurbineCasingType.CLARIFIER_CASING))))
                 .where('E', states(MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.STEEL_GEARBOX)))
                 .where('F', states(MetaBlocks.FRAMES.get(Materials.Steel).getBlock(Materials.Steel)))
                 .where(' ', any())

@@ -42,5 +42,7 @@ public class ElectricContainerIOInfoProvider extends ElectricContainerInfoProvid
             probeInfo.text("{*gtqt.top.on*}");
             probeInfo.text(" " + TextFormatting.BLUE + onA + "EU/t * " + onB + "A // " + TextFormatting.RED+onC/20+"EU/t");
         }
+
+
     }
 }

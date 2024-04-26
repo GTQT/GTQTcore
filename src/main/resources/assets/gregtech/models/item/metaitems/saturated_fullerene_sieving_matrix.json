@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "epimorphism:items/metaitems/saturated_fullerene_sieving_matrix"
+    "layer0": "gtqtcore:items/metaitems/saturated_fullerene_sieving_matrix"
   }
 }

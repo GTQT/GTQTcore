@@ -2,6 +2,6 @@
   "parent": "item/generated",
   "textures": {
     "layer0": "gregtech:items/metaitems/circuit.microprocessor",
-    "layer1": "epimorphism:items/metaitems/wrap_overlay"
+    "layer1": "gtqtcore:items/metaitems/wrap_overlay"
   }
 }

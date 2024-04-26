@@ -170,7 +170,7 @@ public class MetaTileEntityPyrolyseOven extends GTQTRecipeMapMultiblockOverwrite
     @SideOnly(Side.CLIENT)
     @Override
     protected ICubeRenderer getFrontOverlay() {
-        return Textures.PYROLYSE_OVEN_OVERLAY;
+        return GTQTTextures.ALGAE_FARM_OVERLAY;
     }
 
     @Override
