@@ -35,6 +35,7 @@ public class GTQTMetaBlocks {
     public static GTQTElectrobath ELECTROBATH;
     public static GTQTRoad ROAD;
     public static GTQTKQCC KQCC;
+    public static GTQTPowerSupply POWER;
     public static GTQTBlockGlassCasing GLASS_CASING;
     public static GTQTStepper STEPPER;
     public static final BlockPineLeaves PINE_LEAVES = new BlockPineLeaves();
@@ -76,6 +77,8 @@ public class GTQTMetaBlocks {
         ELECTROBATH.setRegistryName("electrobath");
         KQCC = new GTQTKQCC();
         KQCC.setRegistryName("computer_competent");
+        POWER = new GTQTPowerSupply();
+        POWER.setRegistryName("power_supply");
         GLASS_CASING = new GTQTBlockGlassCasing();
         GLASS_CASING.setRegistryName("glass_casing");
         STEPPER = new GTQTStepper();
@@ -118,6 +121,7 @@ public class GTQTMetaBlocks {
         registerItemModel(ISA_CASING);
         registerItemModel(ELECTRON_MICROSCOPE);
         registerItemModel(KQCC);
+        registerItemModel(POWER);
         registerItemModel(GLASS_CASING);
         registerItemModel(STEPPER);
 

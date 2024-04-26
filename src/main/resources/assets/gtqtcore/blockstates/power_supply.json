@@ -1,0 +1,109 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "minecraft:cube_all",
+    "textures": {
+      "all": "gregtech:blocks/rendering_error"
+    }
+  },
+  "variants": {
+    "variant": {
+      "power_supply_basic": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/power_supply/power_supply_basic"
+        }
+      },
+      "power_supply_i": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/power_supply/power_supply_i"
+        }
+      },
+      "power_supply_ii": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/power_supply/power_supply_ii"
+        }
+      },
+      "power_supply_iii": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/power_supply/power_supply_iii"
+        }
+      },
+      "power_supply_iv": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/power_supply/power_supply_iv"
+        }
+      },
+      "power_supply_v": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/power_supply/power_supply_v"
+        }
+      },
+      "power_supply_vi": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/power_supply/power_supply_vi"
+        }
+      },
+      "power_supply_vii": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/power_supply/power_supply_vii"
+        }
+      },
+      "power_supply_viii": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/power_supply/power_supply_viii"
+        }
+      },
+      "power_supply_ivv": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/power_supply/power_supply_ivv"
+        }
+      },
+      "power_supply_vv": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/power_supply/power_supply_vv"
+        }
+      },
+      "power_supply_battery_i": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/power_supply/power_supply_battery_i"
+        }
+      },
+      "power_supply_battery_ii": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/power_supply/power_supply_battery_ii"
+        }
+      },
+      "power_supply_battery_iii": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/power_supply/power_supply_battery_iii"
+        }
+      },
+      "power_supply_battery_iv": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/power_supply/power_supply_battery_iv"
+        }
+      },
+      "power_supply_battery_v": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/power_supply/power_supply_battery_v"
+        }
+      }
+    }
+  }
+}

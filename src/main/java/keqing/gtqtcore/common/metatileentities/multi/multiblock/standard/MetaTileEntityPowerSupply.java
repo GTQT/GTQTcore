@@ -23,6 +23,7 @@ import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.util.GTUtility;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
+import gregtech.client.utils.TooltipHelper;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.blocks.MetaBlocks;
@@ -31,13 +32,18 @@ import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.utils.GTQTLog;
 import keqing.gtqtcore.api.utils.GTQTUtil;
+import keqing.gtqtcore.client.textures.GTQTTextures;
+import keqing.gtqtcore.common.block.GTQTMetaBlocks;
+import keqing.gtqtcore.common.block.blocks.GTQTPowerSupply;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 import keqing.gtqtcore.common.metatileentities.multi.generators.MetaTileEntityWaterPowerStation;
 import mcjty.theoneprobe.api.ElementAlignment;
 import mcjty.theoneprobe.api.IProbeInfo;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -45,6 +51,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -53,12 +60,15 @@ import java.util.List;
 import java.util.Map;
 
 import static gregtech.api.GTValues.VA;
-import static gregtech.common.blocks.BlockMetalCasing.MetalCasingType.STAINLESS_CLEAN;
+import static gregtech.common.blocks.BlockMetalCasing.MetalCasingType.*;
 import static keqing.gtqtcore.api.utils.GTQTUniverUtil.getTileEntity;
+import static keqing.gtqtcore.common.block.blocks.GTQTPowerSupply.SupplyType.*;
+import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.*;
+import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing1.TurbineCasingType.*;
 
 public class MetaTileEntityPowerSupply extends MultiblockWithDisplayBase  {
     private final Map<BlockPos, EnumFacing> energyHandlers = new HashMap<>();
-    int tier=40;//基础电量缓存等级
+    int tier=10;//基础电量缓存等级
     int time;
     int eu=0;
     int maxTier=0;
@@ -102,7 +112,7 @@ public class MetaTileEntityPowerSupply extends MultiblockWithDisplayBase  {
     }
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
-        textList.add(new TextComponentTranslation("蓄能：%s / %s EU  %s", eu,tier*2048,work));
+        textList.add(new TextComponentTranslation("蓄能：%s / %s EU 地板功能：%s", eu,tier*2048,work));
         textList.add(new TextComponentTranslation("闪充模式：%s 互联模式：%s 供能模式：%s ", fastCharge,network,charge));
         if (isStructureFormed()&&network) {
             if (checkNetwork(poss1, false)) textList.add(new TextComponentTranslation("连接：%s  %s / %s", poss1,getNetEu(poss1),getNetMax(poss1)));
@@ -122,7 +132,7 @@ public class MetaTileEntityPowerSupply extends MultiblockWithDisplayBase  {
         final int zDir = this.getFrontFacing().getOpposite().getZOffset() * 5;
 
         time++;
-        if(time==2000)
+        if(time==200)
         {
             PreCheck();
             time=0;
@@ -206,6 +216,22 @@ public class MetaTileEntityPowerSupply extends MultiblockWithDisplayBase  {
         }
     }
     @Override
+    public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
+        super.addInformation(stack, player, tooltip, advanced);
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("谁还需要地板", new Object[0]));
+        tooltip.add(I18n.format("gtqtcore.machine.powersupply.tooltip.1"));
+        tooltip.add(I18n.format("gtqtcore.machine.powersupply.tooltip.2"));
+        tooltip.add(I18n.format("gtqtcore.machine.powersupply.tooltip.3"));
+        tooltip.add(I18n.format("gtqtcore.machine.powersupply.tooltip.4"));
+        tooltip.add(I18n.format("gtqtcore.machine.powersupply.tooltip.5"));
+        tooltip.add(I18n.format("gtqtcore.machine.powersupply.tooltip.6"));
+        tooltip.add(I18n.format("gtqtcore.machine.powersupply.tooltip.7"));
+    }
+    @Override
+    public boolean isMultiblockPartWeatherResistant(@Nonnull IMultiblockPart part) {
+        return true;
+    }
+    @Override
     protected void addWarningText(List<ITextComponent> textList) {
         super.addWarningText(textList);
         if (!work) {
@@ -217,18 +243,21 @@ public class MetaTileEntityPowerSupply extends MultiblockWithDisplayBase  {
         maxTier=0;
         work=true;
         //提前检测
+        tier=10;//送你的
         final int xDir = this.getFrontFacing().getOpposite().getXOffset() * 5;
         final int zDir = this.getFrontFacing().getOpposite().getZOffset() * 5;
         for (int i = -4; i <= 4; ++i) {
             for (int j = -4; j <= 4; ++j) {//判断中心区域 外围无需判断
                 BlockPos poss = this.getPos().add(xDir + i, 0, zDir + j);
-                if(GetTier(poss,i,j)>maxTier)maxTier=GetTier(poss,i,j);
-                if (GetTier(poss,i,j) == 0) {tier++;}//如果是框架方块就加缓存
+                if(this.getWorld().getBlockState(poss)==GTQTMetaBlocks.POWER.getState(POWER_SUPPLY_BATTERY_I)){tier+=10;}
+                if(this.getWorld().getBlockState(poss)==GTQTMetaBlocks.POWER.getState(POWER_SUPPLY_BATTERY_II)){tier+=40;}
+                if(this.getWorld().getBlockState(poss)==GTQTMetaBlocks.POWER.getState(POWER_SUPPLY_BATTERY_III)){tier+=160;}
+                if(this.getWorld().getBlockState(poss)==GTQTMetaBlocks.POWER.getState(POWER_SUPPLY_BATTERY_IV)){tier+=640;}
+                if(this.getWorld().getBlockState(poss)==GTQTMetaBlocks.POWER.getState(POWER_SUPPLY_BATTERY_V)){tier+=2560;}
+                if(GetTier(poss,i,j)>maxTier&&GetTier(poss,i,j)!=11)maxTier=GetTier(poss,i,j);
                 if (GetTier(poss,i,j) == 11) {
                     work=false;
                 }
-                else tier+=GetTier(poss,i,j);
-                //在这里对非0 11 项目存数组
             }
         }
 
@@ -246,15 +275,27 @@ public class MetaTileEntityPowerSupply extends MultiblockWithDisplayBase  {
 
     public int GetTier(BlockPos poss,int i,int j)
     {
-        if(this.getWorld().getBlockState(poss)==Blocks.STONE.getDefaultState())return 0;//框架方块
-        if(this.getWorld().getBlockState(poss)==Blocks.DIRT.getDefaultState())return 1;//超导方块1
-        if(this.getWorld().getBlockState(poss)==Blocks.COBBLESTONE.getDefaultState())return 2;//超导方块2
-        if(this.getWorld().getBlockState(poss)==Blocks.GOLD_BLOCK.getDefaultState())return 3;//超导方块3
-        //边框
         if(i==-5||i==5||j==-5||j==5)
         {
             return maxTier;//框架方块
         }
+        if(this.getWorld().getBlockState(poss)==GTQTMetaBlocks.POWER.getState(POWER_SUPPLY_BASIC))return 0;//框架方块
+        if(this.getWorld().getBlockState(poss)==GTQTMetaBlocks.POWER.getState(POWER_SUPPLY_BATTERY_I))return 0;//框架方块
+        if(this.getWorld().getBlockState(poss)==GTQTMetaBlocks.POWER.getState(POWER_SUPPLY_BATTERY_II))return 0;//框架方块
+        if(this.getWorld().getBlockState(poss)==GTQTMetaBlocks.POWER.getState(POWER_SUPPLY_BATTERY_III))return 0;//框架方块
+        if(this.getWorld().getBlockState(poss)==GTQTMetaBlocks.POWER.getState(POWER_SUPPLY_BATTERY_IV))return 0;//框架方块
+        if(this.getWorld().getBlockState(poss)==GTQTMetaBlocks.POWER.getState(POWER_SUPPLY_BATTERY_V))return 0;//框架方块
+        if(this.getWorld().getBlockState(poss)==GTQTMetaBlocks.POWER.getState(POWER_SUPPLY_I))return 1;//超导方块1
+        if(this.getWorld().getBlockState(poss)==GTQTMetaBlocks.POWER.getState(POWER_SUPPLY_II))return 2;//超导方块2
+        if(this.getWorld().getBlockState(poss)==GTQTMetaBlocks.POWER.getState(POWER_SUPPLY_III))return 3;//超导方块3
+        if(this.getWorld().getBlockState(poss)==GTQTMetaBlocks.POWER.getState(POWER_SUPPLY_IV))return 4;//超导方块4
+        if(this.getWorld().getBlockState(poss)==GTQTMetaBlocks.POWER.getState(POWER_SUPPLY_V))return 5;//超导方块5
+        if(this.getWorld().getBlockState(poss)==GTQTMetaBlocks.POWER.getState(POWER_SUPPLY_VI))return 6;//超导方块6
+        if(this.getWorld().getBlockState(poss)==GTQTMetaBlocks.POWER.getState(POWER_SUPPLY_VII))return 7;//超导方块7
+        if(this.getWorld().getBlockState(poss)==GTQTMetaBlocks.POWER.getState(POWER_SUPPLY_VIII))return 8;//超导方块8
+        if(this.getWorld().getBlockState(poss)==GTQTMetaBlocks.POWER.getState(POWER_SUPPLY_IVV))return 9;//超导方块9
+        if(this.getWorld().getBlockState(poss)==GTQTMetaBlocks.POWER.getState(POWER_SUPPLY_VV))return 10;//超导方块10
+
         return 11;//不认识就开摆
     }
     @Override
@@ -323,11 +364,11 @@ public class MetaTileEntityPowerSupply extends MultiblockWithDisplayBase  {
                 .build();
     }
     private IBlockState getCasingAState() {
-        return MetaBlocks.METAL_CASING.getState(STAINLESS_CLEAN);
+        return GTQTMetaBlocks.POWER.getState(POWER_SUPPLY_BASIC);
     }
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
-        return Textures.CLEAN_STAINLESS_STEEL_CASING;
+        return GTQTTextures.IRIDIUM_CASING;
     }
     @Override
     public boolean hasMufflerMechanics() {
@@ -357,37 +398,19 @@ public class MetaTileEntityPowerSupply extends MultiblockWithDisplayBase  {
         MetaTileEntity mte = GTUtility.getMetaTileEntity(this.getWorld(), poss);
         if (mte instanceof MetaTileEntityPowerSupply) {
             if (work && ((MetaTileEntityPowerSupply) mte).isNetwork()&& ((MetaTileEntityPowerSupply) mte).isWork()) {
-                /*
-                int total = eu + ((MetaTileEntityPowerSupply) mte).getEu();
-                if((getMax())>total / 2&&(((MetaTileEntityPowerSupply) mte).getMax())>total / 2) {
-                    eu = total / 2;
-                    ((MetaTileEntityPowerSupply) mte).setEu(total / 2);
-                    total = 0;
-                }
-                else if((getMax())>total / 2&&(((MetaTileEntityPowerSupply) mte).getMax())<total / 2) {
-                    eu =total-(((MetaTileEntityPowerSupply) mte).getMax()-((MetaTileEntityPowerSupply) mte).getEu());
-                    ((MetaTileEntityPowerSupply) mte).setEu(((MetaTileEntityPowerSupply) mte).getMax());
-                    total = 0;
-                }
-                else if((getMax())<total / 2&&(((MetaTileEntityPowerSupply) mte).getMax())>total / 2) {
-                    ((MetaTileEntityPowerSupply) mte).setEu(total-(getMax()-getEu()));
-                    eu=getMax();
-                    total = 0;
-                }
-                else {
-                    eu=getMax();
-                    ((MetaTileEntityPowerSupply) mte).setEu(((MetaTileEntityPowerSupply) mte).getMax());
-                    total = 0;
-                }
-
-                 */
-                if(eu<((MetaTileEntityPowerSupply) mte).getEu()&&eu<getMax())
+                if(eu<((MetaTileEntityPowerSupply) mte).getEu()&&eu<getMax()&&eu>=0&&((MetaTileEntityPowerSupply) mte).getEu()>=0)
                 {
+                    if(((MetaTileEntityPowerSupply) mte).getEu()>getMax()*2)
+                    {
+                        ((MetaTileEntityPowerSupply) mte).removeEu(getMax()-eu);
+                        eu=getMax();
+                    }
                     ((MetaTileEntityPowerSupply) mte).removeEu(VA[maxTier]);
-                    eu+=VA[maxTier];
+                    eu += VA[maxTier];
+
                 }
-                return true;
             }
+            return true;
         }
         return false;
     }
