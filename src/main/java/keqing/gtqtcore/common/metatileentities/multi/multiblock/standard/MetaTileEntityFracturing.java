@@ -29,8 +29,6 @@ import gregtech.api.util.GTUtility;
 import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
-import gregtech.common.blocks.BlockMetalCasing;
-import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.capability.impl.FracturingLogic;
 import keqing.gtqtcore.api.unification.GCYSMaterials;
 import keqing.gtqtcore.client.textures.GTQTTextures;
@@ -59,7 +57,6 @@ import java.util.Collections;
 import java.util.List;
 
 import static gregtech.api.unification.material.Materials.DrillingFluid;
-import static gregtech.api.unification.material.Materials.Lubricant;
 
 public class MetaTileEntityFracturing extends MultiblockWithDisplayBase implements IMiner,ITieredMetaTileEntity, IWorkable {
 

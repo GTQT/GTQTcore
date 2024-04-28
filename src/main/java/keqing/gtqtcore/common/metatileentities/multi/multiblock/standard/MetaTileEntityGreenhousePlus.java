@@ -1,7 +1,6 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
 
-import gregicality.multiblocks.api.capability.IParallelMultiblock;
 import gregtech.api.block.IHeatingCoilBlockStats;
 import gregtech.api.capability.IMultipleTankHandler;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
@@ -53,7 +52,8 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-import static gregtech.api.unification.material.Materials.*;
+import static gregtech.api.unification.material.Materials.Biomass;
+import static gregtech.api.unification.material.Materials.StainlessSteel;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.Dfeltamethrin;
 
 public class MetaTileEntityGreenhousePlus extends RecipeMapMultiblockController {

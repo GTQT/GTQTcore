@@ -45,7 +45,6 @@ import java.util.List;
 
 import static gregtech.api.GTValues.VA;
 import static gregtech.api.unification.material.Materials.HydrochloricAcid;
-import static gregtech.api.unification.material.Materials.Lubricant;
 
 public class MetaTileEntityElectrobath extends GTQTRecipeMapMultiblockOverwrite {
 

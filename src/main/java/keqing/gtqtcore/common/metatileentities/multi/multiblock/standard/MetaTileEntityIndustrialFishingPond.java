@@ -26,7 +26,6 @@ import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.util.GTTransferUtils;
 import gregtech.api.util.GTUtility;
 import gregtech.client.renderer.ICubeRenderer;
-import gregtech.client.renderer.texture.Textures;
 import keqing.gtqtcore.api.capability.impl.FishPondLogic;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;

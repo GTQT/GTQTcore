@@ -50,8 +50,6 @@ import java.util.List;
 
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.util.RelativeDirection.*;
-import static keqing.gtqtcore.api.unification.GTQTMaterials.SteamExhaustGas;
-import static keqing.gtqtcore.api.unification.GTQTMaterials.SuperheatedSteam;
 
 public class MetaTileEntityHeatExchanger extends NoEnergyMultiblockController implements IProgressBarMultiblock {
     private int coilLevel;

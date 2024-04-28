@@ -1,7 +1,6 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
 import gregtech.api.GTValues;
-import gregtech.api.capability.IMultipleTankHandler;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.Widget;
@@ -43,17 +42,12 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
-
-import static gregtech.api.GTValues.VA;
-import static gregtech.api.unification.material.Materials.Lava;
-import static gregtech.api.unification.material.Materials.Water;
 //大型流化床
 public class MetaTileEntityFluidizedBed extends RecipeMapMultiblockController implements IProgressBarMultiblock {
     boolean auxiliaryBlastFurnaceNumber;

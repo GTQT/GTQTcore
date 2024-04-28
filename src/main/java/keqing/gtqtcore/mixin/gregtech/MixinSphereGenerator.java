@@ -30,6 +30,9 @@ public abstract class MixinSphereGenerator extends ShapeGenerator {
                 for (int y = p-24; y <= p+24; y++) {
                     relativeBlockAccess.generateBlock(x, y, z);
                 }
+                for (int y = p+40; y <= p+42; y++) {
+                    relativeBlockAccess.generateBlock(x, y, z);
+                }
             }
         }
     }
