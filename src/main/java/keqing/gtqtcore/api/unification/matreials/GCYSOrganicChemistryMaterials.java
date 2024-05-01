@@ -52,7 +52,6 @@ public class GCYSOrganicChemistryMaterials {
                 .setFormula("HCO2CH3", true);
 
         FormicAcid = new Material.Builder(15005, gregtechId("formic_acid"))
-                .fluidPipeProperties(300,1000,false,true,true,true)
                 .color(0xFFAA77).fluid()
                 .flags(DISABLE_DECOMPOSITION)
                 .components(Hydrogen, 2, Carbon, 1, Oxygen, 2)

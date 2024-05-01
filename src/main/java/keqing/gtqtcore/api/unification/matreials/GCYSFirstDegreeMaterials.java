@@ -162,7 +162,6 @@ public class GCYSFirstDegreeMaterials {
                 .color(0xFA9849)
                 .flags(DISABLE_DECOMPOSITION)
                 .components(Potassium, 1, Oxygen, 1, Hydrogen, 1)
-                .fluidPipeProperties(633,1000,false)
                 .build();
 
         CarbonTetrachloride = new Material.Builder(3521, gregtechId("carbon_tetrachloride"))
@@ -624,7 +623,7 @@ public class GCYSFirstDegreeMaterials {
                 .build();
 
         GalliumTrioxide = new Material.Builder(3583, gregtechId("gallium_trioxide"))
-                .dust().fluid().fluidPipeProperties(2170,1000,false)
+                .dust().fluid()
                 .color(0xE4CDFF)
                 .iconSet(MaterialIconSet.METALLIC)
                 .components(Gallium, 1, Oxygen, 3)
