@@ -70,6 +70,7 @@ public class GTQTRecipesManager {
         OilProcessing.init();
         DimethylformamideChain.init();
         KaptonChain.init();
+        PowerSupply.init();
         AmmoniaChain.init();
         BrineChain.init();
         MethylamineChain.init();

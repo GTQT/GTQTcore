@@ -226,11 +226,11 @@ public class MetaTileEntityPowerSupply extends MultiblockWithDisplayBase  {
         for (int i = -4; i <= 4; ++i) {
             for (int j = -4; j <= 4; ++j) {//判断中心区域 外围无需判断
                 BlockPos poss = this.getPos().add(xDir + i, 0, zDir + j);
-                if(this.getWorld().getBlockState(poss)==GTQTMetaBlocks.POWER.getState(POWER_SUPPLY_BATTERY_I)){tier+=10;}
-                if(this.getWorld().getBlockState(poss)==GTQTMetaBlocks.POWER.getState(POWER_SUPPLY_BATTERY_II)){tier+=40;}
-                if(this.getWorld().getBlockState(poss)==GTQTMetaBlocks.POWER.getState(POWER_SUPPLY_BATTERY_III)){tier+=160;}
-                if(this.getWorld().getBlockState(poss)==GTQTMetaBlocks.POWER.getState(POWER_SUPPLY_BATTERY_IV)){tier+=640;}
-                if(this.getWorld().getBlockState(poss)==GTQTMetaBlocks.POWER.getState(POWER_SUPPLY_BATTERY_V)){tier+=2560;}
+                if(this.getWorld().getBlockState(poss)==GTQTMetaBlocks.POWER.getState(POWER_SUPPLY_BATTERY_I)){tier+=20;}
+                if(this.getWorld().getBlockState(poss)==GTQTMetaBlocks.POWER.getState(POWER_SUPPLY_BATTERY_II)){tier+=80;}
+                if(this.getWorld().getBlockState(poss)==GTQTMetaBlocks.POWER.getState(POWER_SUPPLY_BATTERY_III)){tier+=320;}
+                if(this.getWorld().getBlockState(poss)==GTQTMetaBlocks.POWER.getState(POWER_SUPPLY_BATTERY_IV)){tier+=1280;}
+                if(this.getWorld().getBlockState(poss)==GTQTMetaBlocks.POWER.getState(POWER_SUPPLY_BATTERY_V)){tier+=5120;}
                 if(GetTier(poss,i,j)>maxTier&&GetTier(poss,i,j)!=11)maxTier=GetTier(poss,i,j);
                 if (GetTier(poss,i,j) == 11) {
                     work=false;

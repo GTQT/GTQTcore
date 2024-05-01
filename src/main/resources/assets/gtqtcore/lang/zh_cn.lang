@@ -3333,20 +3333,20 @@ tile.power_supply.power_supply_ivv.tooltip=提供§4UHV§r级能量传输速率
 tile.power_supply.power_supply_vv.name=超导模块（§aUEV§r）
 tile.power_supply.power_supply_vv.tooltip=提供§aUEV§r级能量传输速率
 
-tile.power_supply.power_supply_battery_i.name=能量缓存模块（§7LV§r）
-tile.power_supply.power_supply_battery_i.tooltip=每单元提供基本§710*2048EU§r的能量缓存
+tile.power_supply.power_supply_battery_i.name=能量缓存模块（§1IV§r）
+tile.power_supply.power_supply_battery_i.tooltip=每单元提供基本§120*2048EU§r的能量缓存
 
-tile.power_supply.power_supply_battery_ii.name=能量缓存模块（§6HV§r）
-tile.power_supply.power_supply_battery_ii.tooltip=每单元提供基本§640*2048EU§r的能量缓存
+tile.power_supply.power_supply_battery_ii.name=能量缓存模块（§dluV§r）
+tile.power_supply.power_supply_battery_ii.tooltip=每单元提供基本§d80*2048EU§r的能量缓存
 
-tile.power_supply.power_supply_battery_iii.name=能量缓存模块（§1IV§r）
-tile.power_supply.power_supply_battery_iii.tooltip=每单元提供基本§1160*2048EU§r的能量缓存
+tile.power_supply.power_supply_battery_iii.name=能量缓存模块（§cZPM§r）
+tile.power_supply.power_supply_battery_iii.tooltip=每单元提供基本§c320*2048EU§r的能量缓存
 
-tile.power_supply.power_supply_battery_iv.name=能量缓存模块（§cZPM§r）
-tile.power_supply.power_supply_battery_iv.tooltip=每单元提供基本§c640*2048EU§r的能量缓存
+tile.power_supply.power_supply_battery_iv.name=能量缓存模块（§3UV§r）
+tile.power_supply.power_supply_battery_iv.tooltip=每单元提供基本§31280*2048EU§r的能量缓存
 
-tile.power_supply.power_supply_battery_v.name=能量缓存模块（§aUEV§r）
-tile.power_supply.power_supply_battery_v.tooltip=每单元提供基本§a2560*2048EU§r的能量缓存
+tile.power_supply.power_supply_battery_v.name=能量缓存模块（§4UHV§r）
+tile.power_supply.power_supply_battery_v.tooltip=每单元提供基本§45120*2048EU§r的能量缓存
 
 tile.electron_microscope.lens_i.name=电子透镜（MKI）
 tile.electron_microscope.sourse_i.name=电子源（MKI）

@@ -50,6 +50,7 @@ public class EPMaterialPropertyAddition {
         Iodine.setProperty(PropertyKey.FLUID, new FluidProperty());
         AmmoniumChloride.setProperty(PropertyKey.FLUID, new FluidProperty());
         Hafnium.setProperty(PropertyKey.DUST, new DustProperty());
+        Hafnium.setProperty(PropertyKey.INGOT, new IngotProperty());
         // Ore Byproducts
         //TODO Fix ore byproduct changes
         Pollucite.getProperty(PropertyKey.ORE).setOreByProducts(Aluminium, Potassium, Caesium, Pollucite);
@@ -82,5 +83,7 @@ public class EPMaterialPropertyAddition {
         IronMagnetic.addFlags(GENERATE_LONG_ROD);
         SteelMagnetic.addFlags(GENERATE_LONG_ROD);
         NeodymiumMagnetic.addFlags(GENERATE_LONG_ROD);
+        NiobiumTitanium.addFlags(GENERATE_FRAME);
+        Hafnium.addFlags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_DENSE);
     }
 }
