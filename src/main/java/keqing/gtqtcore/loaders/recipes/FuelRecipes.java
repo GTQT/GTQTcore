@@ -13,12 +13,38 @@ import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 
 import gregtech.api.metatileentity.multiblock.CleanroomType;
 import gregtech.api.unification.material.MarkerMaterials;
+import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
+import net.minecraft.init.Blocks;
 
 public class FuelRecipes {
 
 
     public static void init(){
+
+        LATEX_COLLECTOR_RECIPES.recipeBuilder()
+                .fluidInputs(Water.getFluid(10))
+                .fluidOutputs(Latex.getFluid(100))
+                .blockStates("latex_logs", MetaBlocks.RUBBER_LOG.getBlockState())
+                .duration(20)
+                .EUt(7)
+                .buildAndRegister();
+
+        LATEX_COLLECTOR_RECIPES.recipeBuilder()
+                .fluidInputs(DistilledWater.getFluid(10))
+                .fluidOutputs(Resin.getFluid(100))
+                .blockStates("extractable_logs_1", Blocks.LOG.getBlockState())
+                .duration(20)
+                .EUt(7)
+                .buildAndRegister();
+
+        LATEX_COLLECTOR_RECIPES.recipeBuilder()
+                .fluidInputs(Lubricant.getFluid(10))
+                .fluidOutputs(Resin.getFluid(100))
+                .blockStates("extractable_logs_2", Blocks.LOG2.getBlockState())
+                .duration(20)
+                .EUt(7)
+                .buildAndRegister();
 
                     PARTICLE_ACCELERATOR_RECIPES.recipeBuilder()
                             .input(screw, Hdcs, 1)

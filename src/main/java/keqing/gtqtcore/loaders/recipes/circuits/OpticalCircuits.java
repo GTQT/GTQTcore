@@ -41,6 +41,7 @@ public class OpticalCircuits {
         BURNER_REACTOR_RECIPES.recipeBuilder()
                 .input(dust, Silicon)
                 .fluidInputs(Chlorine.getFluid(4000))
+                .circuitMeta(3)
                 .fluidOutputs(SiliconTetrachloride.getFluid(1000))
                 .duration(150).EUt(VA[HV]).buildAndRegister();
 

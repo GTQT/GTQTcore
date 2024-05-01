@@ -61,6 +61,7 @@ public class EPMaterialPropertyAddition {
         wireProp.setLossPerBlock(32);
         wireProp.setVoltage((int) GTValues.V[GTValues.UIV]);
 
+        Copper.addFlags(GENERATE_BOLT_SCREW);
         WroughtIron.addFlags(GENERATE_ROTOR, GENERATE_SMALL_GEAR);
         Rhenium.addFlags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_DENSE);
         Nickel.addFlags(GENERATE_FOIL);

@@ -2261,6 +2261,7 @@ gregtech.material.zinc_cl=氯化锌
 gregtech.material.meteoric_iron=陨铁
 gregtech.material.desh=戴斯
 gregtech.material.latex=乳胶
+gregtech.material.resin=树脂
 gregtech.material.redstone_alloy=红石合金
 gregtech.material.pulsating_iron=孚能铁
 gregtech.material.conductive_iron=强电导铁
@@ -3477,6 +3478,21 @@ gregtech.material.len_gold_cl=含杂金溶液
 gregtech.material.len_gold_dr=高纯金
 gregtech.material.rich_gold_bs=焙烧富集金含杂
 gregtech.material.rich_copper_js=沉浸富集铜混合
+
+# Latex Collector
+gregtech.machine.latex_collector.steam=需要蒸汽！
+gregtech.machine.latex_collector.tooltip=从相邻的原木中提取液体。
+gtqtcore.machine.latex_collector.bronze.name=蒸汽胶乳收集器
+gtqtcore.machine.latex_collector.steel.name=高压蒸汽胶乳收集器
+gtqtcore.machine.latex_collector.lv.name=基础胶乳收集器
+gtqtcore.machine.latex_collector.mv.name=进阶胶乳收集器
+gtqtcore.machine.latex_collector.hv.name=进阶胶乳收集器 II
+gtqtcore.machine.latex_collector.ev.name=进阶胶乳收集器 III
+
+gregtech.block_group_members.extractable_logs_1.name=白桦木，丛林木，橡木或云杉木
+gregtech.block_group_members.extractable_logs_2.name=金合欢木或深色橡木
+gregtech.block_group_members.latex_logs.name=橡胶木
+gregtech.recipe.blocks=有效方块：%s
 
 tile.electrobath.i_electrobath.name=一级电解核心
 tile.electrobath.ii_electrobath.name=二级电解核心

@@ -1,5 +1,6 @@
 package keqing.gtqtcore.api.utils;
 
+import gregtech.api.GTValues;
 import keqing.gtqtcore.GTQTCore;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -12,6 +13,7 @@ import javax.annotation.Nonnull;
 import java.util.Arrays;
 import java.util.BitSet;
 import java.util.function.BooleanSupplier;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 import static keqing.gtqtcore.api.utils.GTQTUniverUtil.*;
@@ -31,7 +33,16 @@ public class GTQTUtil {
         }
         return result;
     }
-
+    public static final Function<Integer, Integer> collectorTankSizeFunction = tier -> {
+        if (tier <= GTValues.LV)
+            return 16000;
+        if (tier == GTValues.MV)
+            return 24000;
+        if (tier == GTValues.HV)
+            return 32000;
+        // EV+
+        return 64000;
+    };
     public static BitSet forIntToBitSet(int i,int length){
         return forIntToBitSet(i,length,new BitSet(length));
     }

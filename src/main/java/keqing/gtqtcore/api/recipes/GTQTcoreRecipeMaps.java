@@ -27,6 +27,11 @@ import java.util.function.Consumer;
 //怎么写请看
 //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/api/recipe/GSRecipeMaps.java
 public class GTQTcoreRecipeMaps {
+
+    public static final RecipeMap<PseudoMultiRecipeBuilder> LATEX_COLLECTOR_RECIPES = new RecipeMap<>("latex_collector", 0, 2, 1, 2, new PseudoMultiRecipeBuilder(), false)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_CRACKING, ProgressWidget.MoveType.VERTICAL_DOWNWARDS)
+            .setSound(GTSoundEvents.DRILL_TOOL);
+
     public static final RecipeMap<SimpleRecipeBuilder> DRYER_RECIPES = new RecipeMap<>("dryer_recipes",  3,  2, 1,  1, new SimpleRecipeBuilder(), false)
             .setSlotOverlay(false, false, true, GuiTextures.FURNACE_OVERLAY_1)
             .setSlotOverlay(false, true, true, GuiTextures.FURNACE_OVERLAY_2)
