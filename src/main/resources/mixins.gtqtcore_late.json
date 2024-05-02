@@ -7,7 +7,6 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "gregtech.MixinEllipsoidGenerator",
-    "gregtech.MixinSphereGenerator",
     "gregtech.MixinMetaItem",
     "gregtech.MixinMetaPrefixItem",
     "gregtech.MixinMetaValueItem",
