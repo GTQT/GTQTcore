@@ -245,23 +245,21 @@ public class GTQTRecipes {
                         .buildAndRegister();
 
                 TD_PRINT_RECIPES.recipeBuilder()
-                        .EUt(32).duration(40)
+                        .EUt(120).duration(200)
                         .circuitMeta(1)
                         .fluidInputs(material.getFluid(1296))
                         .fluidInputs(Polytetrafluoroethylene.getFluid(144))
                         .output(cylinder, material)
                         .CWUt(24)
-                        .totalCWU(19200)
                         .buildAndRegister();
 
                 TD_PRINT_RECIPES.recipeBuilder()
-                        .EUt(32).duration(40)
+                        .EUt(120).duration(200)
                         .circuitMeta(1)
                         .fluidInputs(material.getFluid(1296))
                         .fluidInputs(Polybenzimidazole.getFluid(36))
                         .output(cylinder, material)
                         .CWUt(24)
-                        .totalCWU(19200)
                         .buildAndRegister();
 
                 FLUID_EXTRACTOR_RECIPES.recipeBuilder()
@@ -302,23 +300,21 @@ public class GTQTRecipes {
                         .buildAndRegister();
 
                 TD_PRINT_RECIPES.recipeBuilder()
-                        .EUt(32).duration(40)
+                        .EUt(120).duration(200)
                         .circuitMeta(2)
                         .fluidInputs(material.getFluid(2000))
                         .output(motor_stick, material)
                         .fluidInputs(Polytetrafluoroethylene.getFluid(144))
                         .CWUt(24)
-                        .totalCWU(19200)
                         .buildAndRegister();
 
                 TD_PRINT_RECIPES.recipeBuilder()
-                        .EUt(32).duration(40)
+                        .EUt(120).duration(200)
                         .circuitMeta(2)
                         .fluidInputs(material.getFluid(2000))
                         .output(motor_stick, material)
                         .fluidInputs(Polybenzimidazole.getFluid(36))
                         .CWUt(24)
-                        .totalCWU(19200)
                         .buildAndRegister();
 
                 FLUID_EXTRACTOR_RECIPES.recipeBuilder()
@@ -367,23 +363,21 @@ public class GTQTRecipes {
                         .buildAndRegister();
 
                 TD_PRINT_RECIPES.recipeBuilder()
-                        .EUt(32).duration(40)
+                        .EUt(120).duration(200)
                         .circuitMeta(3)
                         .fluidInputs(material.getFluid(2016))
                         .output(valve, material)
                         .fluidInputs(Polytetrafluoroethylene.getFluid(144))
                         .CWUt(24)
-                        .totalCWU(19200)
                         .buildAndRegister();
 
                 TD_PRINT_RECIPES.recipeBuilder()
-                        .EUt(32).duration(40)
+                        .EUt(120).duration(200)
                         .circuitMeta(3)
                         .fluidInputs(material.getFluid(2016))
                         .output(valve, material)
                         .fluidInputs(Polybenzimidazole.getFluid(36))
                         .CWUt(24)
-                        .totalCWU(19200)
                         .buildAndRegister();
 
                 FLUID_EXTRACTOR_RECIPES.recipeBuilder()
