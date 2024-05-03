@@ -1,6 +1,18 @@
 package keqing.gtqtcore.loaders.recipes.chain;
 
+import gregtech.api.GTValues;
+import gregtech.api.fluids.store.FluidStorageKeys;
+import gregtech.api.recipes.Recipe;
+import gregtech.api.recipes.RecipeMaps;
+import gregtech.api.recipes.ingredients.GTRecipeInput;
+import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.ore.OrePrefix;
+import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidStack;
+
+import java.util.Collection;
+import java.util.List;
 
 import static gregtech.api.recipes.RecipeMaps.CHEMICAL_RECIPES;
 import static gregtech.api.recipes.RecipeMaps.DISTILLATION_RECIPES;
@@ -25,6 +37,23 @@ public class OceanChain {
                 .fluidInputs(Naphtha.getFluid(4000))
                 .fluidOutputs(Toluene.getFluid(1000))
                 .buildAndRegister();
+
+        Collection<Recipe> gasRecipes = RecipeMaps.CHEMICAL_RECIPES.getRecipeList();
+        for (Recipe recipe : gasRecipes) {
+            List<GTRecipeInput> fluidInputs = recipe.getFluidInputs();
+            List<FluidStack> fluidOutputs = recipe.getFluidOutputs();
+            Collection<GTRecipeInput> Inputs = recipe.getInputs();
+            Collection<ItemStack> Outputs = recipe.getOutputs();
+            GTQTcoreRecipeMaps.FLUIDIZED_BED.recipeBuilder()
+                    .fluidInputs(fluidInputs)
+                    .fluidOutputs(fluidOutputs)
+                    .inputIngredients(Inputs)
+                    .outputs(Outputs)
+                    .duration(recipe.getDuration()/8)
+                    .EUt(recipe.getEUt()*2)
+                    .buildAndRegister();
+
+        }
 
         FLUIDIZED_BED.recipeBuilder()
                 .duration(200)

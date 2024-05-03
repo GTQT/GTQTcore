@@ -2145,7 +2145,7 @@ gregtech.multiblock.lv_processing_array.description=处理阵列可将最多2个
 gregtech.multiblock.mv_processing_array.description=处理阵列可将最多4个单方块机器集成在一个多方块机器中，以实现更高效的自动化。
 gregtech.multiblock.hv_processing_array.description=处理阵列可将最多8个单方块机器集成在一个多方块机器中，以实现更高效的自动化。
 gtqtcore.machine.hv_machine_hatch.name=机器访问接口
-
+gtqtcore.machine.coagulation_tank.name=混凝反应池
 gtqtcore.machine.ex_cvd.name=极限粒子CVD
 gtqtcore.multiblock.wps.tooltip.1=可拓展多方块结构长度，升级线圈等级，每片结构都需要安装能源仓
 gtqtcore.multiblock.wps.tooltip.2=基础电量基于多方块结构长度为半径，高度四格以主方块为中心范围内的水
@@ -3272,6 +3272,15 @@ gtqtcore.machine.gas_turbine.ev.name=脉冲燃气轮机
 gtqtcore.machine.combustion_generator.iv.name=爆燃内燃发电机
 gtqtcore.machine.steam_turbine.iv.name=爆燃蒸气轮机
 gtqtcore.machine.gas_turbine.iv.name=爆燃燃气轮机
+
+
+gtqtcore.machine.fuel_cell_turbine.lv.name=基础促燃轮机
+gtqtcore.machine.fuel_cell_turbine.mv.name=进阶促燃轮机
+gtqtcore.machine.fuel_cell_turbine.hv.name=涡轮促燃轮机
+gtqtcore.machine.fuel_cell_turbine.ev.name=脉冲促燃轮机
+gtqtcore.machine.fuel_cell_turbine.iv.name=爆燃促燃轮机
+gtqtcore.machine.large_turbine.fuel_cell.name=大型促燃轮机
+recipemap.fuel_cell.name=促燃发电机燃料
 gtqtcore.machine.septic_tank.name=发酵池
 gtqtcore.machine.pcb.name=PCB工厂
 gtqtcore.machine.distillation_kettle.name=蒸馏反应釜

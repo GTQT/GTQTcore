@@ -1,6 +1,14 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.overwrite;
 
+import gregicality.multiblocks.api.capability.IParallelHatch;
+import gregicality.multiblocks.api.metatileentity.GCYMMultiblockAbility;
+import gregtech.api.capability.IGhostSlotConfigurable;
+import gregtech.api.capability.impl.GhostCircuitItemStackHandler;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
+import gregtech.api.gui.GuiTextures;
+import gregtech.api.gui.Widget;
+import gregtech.api.gui.widgets.ClickButtonWidget;
+import gregtech.api.gui.widgets.WidgetGroup;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
@@ -10,11 +18,15 @@ import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
+import gregtech.api.util.GTUtility;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.TooltipHelper;
 import gregtech.common.blocks.*;
 import gregtech.common.blocks.StoneVariantBlock;
+import gregtech.common.items.MetaItems;
+import gregtech.common.metatileentities.multi.multiblockpart.appeng.MetaTileEntityMEInputBus;
+import gregtech.common.pipelike.cable.tile.TileEntityCable;
 import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
@@ -33,8 +45,10 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import gregtech.api.unification.material.Materials;
+import net.minecraftforge.items.IItemHandler;
 
 import javax.annotation.Nonnull;
+import java.util.ArrayList;
 import java.util.List;
 
 import static gregtech.api.GTValues.VA;
@@ -45,6 +59,8 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
     int tube;
     int drilla;
     int naijiu;
+    int circuit;
+    boolean cycle;
 
     public MetaTileEntityMiningDrill(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.MINING_DRILL_RECIPES );
@@ -54,12 +70,16 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setDouble("naijiu", naijiu);
+        data.setDouble("circuit", circuit);
+        data.setBoolean("cycle",cycle);
         return super.writeToNBT(data);
     }
 
     @Override
     public void readFromNBT(NBTTagCompound data) {
         naijiu = data.getInteger("naijiu");
+        circuit = data.getInteger("circuit");
+        cycle=data.getBoolean("cycle");
         super.readFromNBT(data);
     }
 
@@ -68,7 +88,20 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {
         return new MetaTileEntityMiningDrill(metaTileEntityId);
     }
+    @Override
+    @Nonnull
+    protected Widget getFlexButton(int x, int y, int width, int height) {
+        WidgetGroup group = new WidgetGroup(x, y, width, height);
+        group.addWidget(new ClickButtonWidget(0, 0, 18, 18, "", this::clear)
+                .setButtonTexture(GuiTextures.BUTTON_THROTTLE_MINUS)
+                .setTooltipText("循环模式！"));
 
+        return group;
+    }
+
+    private void clear(Widget.ClickData clickData) {
+        cycle=!cycle;
+    }
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
@@ -80,7 +113,7 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
                 .aisle("               ", "DDDDDD   DDDDDD", "DDDDDD   DDDDDD", " HH         HH ", " HH         HH ", " HH         HH ", "  BB       BB  ", "  BB   E   BB  ", "  BBBAAAAABBB  ", "   BAAACAAAB   ", "     GGCGG     ", "     BGEGB     ", "     BGAGB     ", "     B   B     ", "     B   B     ", "     BB  B     ", "     B B B     ", "     B  BB     ", "     B   B     ")
                 .aisle("               ", "DDDDD  F  DDDDD", "DDDDD FFF DDDDD", "       A       ", "      BAB      ", "      BAB      ", "  BB  BAB  BB  ", "  BB  BAB  BB  ", "  BBBAAAAABBB  ", "   BAACCCAAB   ", "     GCCCG     ", "     GCCCG     ", "     GGCGG     ", "               ", "               ", "         B     ", "      ACA      ", "     BAAA      ", "               ")
                 .aisle("       F       ", "DDDDD FFF DDDDD", "DDDDD FFF DDDDD", "      ACA      ", "      ACA      ", "      ACA      ", "      ACA      ", "    EEACAEE    ", "    EAACAAE    ", "    ECCCCCE    ", "    ECCCCCE    ", "    EECCCEE    ", "     AGGGA     ", "       C       ", "       C       ", "       C       ", "     BCCCB     ", "      AAA      ", "       A       ")
-                .aisle("               ", "DDDDD  F  DDDDD", "DDDDD FFF DDDDD", "       A       ", "      BSB      ", "      BAB      ", "  BB  BAB  BB  ", "  BB  BAB  BB  ", "  BBBAAAAABBB  ", "   BAACCCAAB   ", "     GCCCG     ", "     GCCCG     ", "     GGCGG     ", "               ", "               ", "     B         ", "      ACA      ", "      AAAB     ", "               ")
+                .aisle("               ", "DDDDD  F  DDDDD", "DDDDD FFF DDDDD", "       A       ", "      BSB      ", "      BIB      ", "  BB  BAB  BB  ", "  BB  BAB  BB  ", "  BBBAAAAABBB  ", "   BAACCCAAB   ", "     GCCCG     ", "     GCCCG     ", "     GGCGG     ", "               ", "               ", "     B         ", "      ACA      ", "      AAAB     ", "               ")
                 .aisle("               ", "DDDDDD   DDDDDD", "DDDDDD   DDDDDD", " HH         HH ", " HH         HH ", " HH         HH ", "  BB       BB  ", "  BB   E   BB  ", "  BBBAAAAABBB  ", "   BAAACAAAB   ", "     GGCGG     ", "     BGEGB     ", "     BGAGB     ", "     B   B     ", "     B   B     ", "     B  BB     ", "     B B B     ", "     BB  B     ", "     B   B     ")
                 .aisle("               ", " DDDDDDDDDDDDD ", " DDDDDDDDDDDDD ", " HH         HH ", " HH         HH ", " HH         HH ", "               ", "       E       ", "     BBEBB     ", "     AAEAA     ", "       E       ", "       E       ", "               ", "               ", "               ", "               ", "               ", "               ", "               ")
                 .aisle("               ", " DDDDDDDDDDDDD ", " DDDDDDDDDDDDD ", "               ", "               ", "               ", "     BB BB     ", "     BB BB     ", "     BB BB     ", "     BB BB     ", "               ", "               ", "               ", "               ", "               ", "               ", "               ", "               ", "               ")
@@ -88,12 +121,12 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
                 .aisle("               ", "   DDDDDDDDD   ", "   DDDDDDDDD   ", "    HH   HH    ", "    HH   HH    ", "    HH   HH    ", "               ", "               ", "               ", "               ", "               ", "               ", "               ", "               ", "               ", "               ", "               ", "               ", "               ")
                 .aisle("               ", "     DDDDD     ", "     DDDDD     ", "               ", "               ", "               ", "               ", "               ", "               ", "               ", "               ", "               ", "               ", "               ", "               ", "               ", "               ", "               ", "               ")
                 .where('S', selfPredicate())
+                .where('I', abilities(MultiblockAbility.IMPORT_ITEMS))
                 .where('A', TiredTraceabilityPredicate.CP_CASING)
-                .where('B', states(MetaBlocks.FRAMES.get(Materials.Steel).getBlock(Materials.Steel)).setMinGlobalLimited(170))
+                .where('B', states(MetaBlocks.FRAMES.get(Materials.Steel).getBlock(Materials.Steel)))
                 .where('H', states(MetaBlocks.FRAMES.get(Materials.Steel).getBlock(Materials.Steel))
                         .or(abilities(MultiblockAbility.MAINTENANCE_HATCH).setExactLimit(1).setPreviewCount(1))
-                        .or(abilities(MultiblockAbility.IMPORT_ITEMS).setExactLimit(1).setPreviewCount(1))
-                        .or(abilities(MultiblockAbility.EXPORT_ITEMS).setMaxGlobalLimited(1).setMaxGlobalLimited(4).setPreviewCount(1))
+                        .or(abilities(MultiblockAbility.EXPORT_ITEMS).setMinGlobalLimited(1).setMaxGlobalLimited(4).setPreviewCount(1))
                         .or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(2).setPreviewCount(2))
                 )
                 .where('C', states(MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.STEEL_GEARBOX)))
@@ -112,7 +145,7 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
         if(casing!=tube)
             textList.add(new TextComponentTranslation("gtqtcore.equal", casing,tube));
         textList.add(new TextComponentTranslation("gtqtcore.md",tier, drilla, naijiu));
-
+        textList.add(new TextComponentTranslation("循环：%s 配方：%s",cycle,circuit));
     }
 
     @Override
@@ -177,7 +210,17 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
             this.writeCustomData(GTQTValue.UPDATE_TIER,buf1 -> buf1.writeInt(this.casing));
         }
     }
+    @Override
+    public void writeInitialSyncData(PacketBuffer buf) {
+        super.writeInitialSyncData(buf);
+        buf.writeInt(this.casing);
+    }
 
+    @Override
+    public void receiveInitialSyncData(PacketBuffer buf) {
+        super.receiveInitialSyncData(buf);
+        this.casing = buf.readInt();
+    }
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
@@ -199,7 +242,7 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
 
         this.tier = Math.min(this.casing,this.tube);
 
-        this.writeCustomData(GTQTValue.UPDATE_TIER, buf -> buf.writeInt(this.tier));
+        this.writeCustomData(GTQTValue.UPDATE_TIER, buf -> buf.writeInt(this.casing));
         naijiu=drilla*15*15000;
     }
     @Override
@@ -232,6 +275,22 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
         tooltip.add(I18n.format("gtqtcore.machine.mdi.tooltip.1"));
         tooltip.add(I18n.format("gtqtcore.machine.mdi.tooltip.2"));
         tooltip.add(I18n.format("gtqtcore.machine.mdi.tooltip.3"));
+    }
+
+    private void addCircuit() {
+        MetaTileEntity mte = GTUtility.getMetaTileEntity(this.getWorld(), this.getPos().add(0, 1, 0));
+        var s  = (IGhostSlotConfigurable)mte;
+        circuit++;if(circuit>getmaxcircuit())circuit=1;
+        s.setGhostCircuitConfig(circuit);
+
+
+    }
+    private int getmaxcircuit()
+    {
+        if(tier==1)return 5;
+        if(tier==2)return 7;
+        if(tier==3)return 9;
+        return 10;
     }
     protected class IndustrialDrillWorkableHandler extends MultiblockRecipeLogic {
 
@@ -277,6 +336,7 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
                 naijiu--;
                 if (++this.progressTime > this.maxProgressTime) {
                     this.completeRecipe();
+                    if(cycle)addCircuit();
                 }
             }
         }

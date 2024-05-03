@@ -11,17 +11,77 @@ import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 
+import gregtech.api.GTValues;
+import gregtech.api.fluids.store.FluidStorageKeys;
 import gregtech.api.metatileentity.multiblock.CleanroomType;
+import gregtech.api.recipes.Recipe;
+import gregtech.api.recipes.RecipeMaps;
+import gregtech.api.recipes.ingredients.GTRecipeInput;
 import gregtech.api.unification.material.MarkerMaterials;
+import gregtech.api.unification.material.Materials;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import net.minecraft.init.Blocks;
+
+import java.util.Collection;
+import java.util.List;
 
 public class FuelRecipes {
 
 
     public static void init(){
 
+        //燃料电池
+        Collection<Recipe> oilsRecipes = RecipeMaps.COMBUSTION_GENERATOR_FUELS.getRecipeList();
+        for (Recipe recipe : oilsRecipes) {
+            List<GTRecipeInput> fluidInputs = recipe.getFluidInputs();
+            int EUt = (int) GTValues.V[GTValues.LV];
+            int baseDuration = 4*recipe.getDuration() * recipe.getEUt() / EUt;
+            GTQTcoreRecipeMaps.FUEL_CELL.recipeBuilder()
+                    .fluidInputs(fluidInputs)
+                    .fluidInputs(Materials.Air.getFluid(baseDuration))
+                    .duration(baseDuration)
+                    .EUt(EUt)
+                    .buildAndRegister();
+            GTQTcoreRecipeMaps.FUEL_CELL.recipeBuilder()
+                    .fluidInputs(fluidInputs)
+                    .fluidInputs(Materials.Oxygen.getFluid(FluidStorageKeys.GAS, (int) Math.ceil(baseDuration * 1.5)))
+                    .duration((int) Math.floor(baseDuration * 1.5))
+                    .EUt(EUt)
+                    .buildAndRegister();
+            GTQTcoreRecipeMaps.FUEL_CELL.recipeBuilder()
+                    .fluidInputs(fluidInputs)
+                    .fluidInputs(Materials.Oxygen.getFluid(FluidStorageKeys.LIQUID, baseDuration * 8))
+                    .duration(baseDuration * 2)
+                    .EUt(EUt)
+                    .buildAndRegister();
+
+        }
+        Collection<Recipe> gasRecipes = RecipeMaps.GAS_TURBINE_FUELS.getRecipeList();
+        for (Recipe recipe : gasRecipes) {
+            List<GTRecipeInput> fluidInputs = recipe.getFluidInputs();
+            int EUt = (int) GTValues.V[GTValues.LV];
+            int baseDuration = 4*recipe.getDuration() * recipe.getEUt() / EUt;
+            GTQTcoreRecipeMaps.FUEL_CELL.recipeBuilder()
+                    .fluidInputs(fluidInputs)
+                    .fluidInputs(Materials.Air.getFluid(baseDuration))
+                    .duration(baseDuration)
+                    .EUt(EUt)
+                    .buildAndRegister();
+            GTQTcoreRecipeMaps.FUEL_CELL.recipeBuilder()
+                    .fluidInputs(fluidInputs)
+                    .fluidInputs(Materials.Oxygen.getFluid(FluidStorageKeys.GAS, (int) Math.ceil(baseDuration * 1.5)))
+                    .duration((int) Math.floor(baseDuration * 1.5))
+                    .EUt(EUt)
+                    .buildAndRegister();
+            GTQTcoreRecipeMaps.FUEL_CELL.recipeBuilder()
+                    .fluidInputs(fluidInputs)
+                    .fluidInputs(Materials.Oxygen.getFluid(FluidStorageKeys.LIQUID, baseDuration * 8))
+                    .duration(baseDuration * 2)
+                    .EUt(EUt)
+                    .buildAndRegister();
+
+        }
         LATEX_COLLECTOR_RECIPES.recipeBuilder()
                 .fluidInputs(Water.getFluid(10))
                 .fluidOutputs(Latex.getFluid(100))

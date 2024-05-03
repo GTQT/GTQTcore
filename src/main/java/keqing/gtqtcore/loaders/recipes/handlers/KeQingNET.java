@@ -763,6 +763,22 @@ public class KeQingNET {
                 .duration(100).buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .EUt(VA[IV])
+                .input(ELECTRIC_PISTON_IV,16)
+                .input(ELECTRIC_MOTOR_IV,16)
+                .input(circuit, Tier.IV, 8)
+                .input(HULL[IV],4)
+                .input(wireGtDouble,TungstenSteel,8)
+                .input(plate, NanometerBariumTitanate, 32)
+                .fluidInputs(Zylon.getFluid(GTValues.L * 24))
+                .outputs(LARGE_GAS_TURBINE.getStackForm())
+                .scannerResearch(b -> b
+                        .researchStack(DISK_4.getStackForm())
+                        .duration(1200)
+                        .EUt(VA[IV]))
+                .duration(100).buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .EUt(VA[LuV])
                 .input(ELECTRIC_PISTON_LUV,16)
                 .input(ELECTRIC_MOTOR_LuV,16)

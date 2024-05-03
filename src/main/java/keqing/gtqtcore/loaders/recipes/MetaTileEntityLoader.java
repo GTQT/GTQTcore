@@ -42,6 +42,8 @@ import static gregtech.common.blocks.MetaBlocks.MACHINE_CASING;
 import static gregtech.common.blocks.MetaBlocks.OPTICAL_PIPES;
 import static gregtech.common.items.MetaItems.*;
 import static gregtech.common.metatileentities.MetaTileEntities.*;
+import static gregtech.common.metatileentities.MetaTileEntities.COMBUSTION_GENERATOR;
+import static gregtech.common.metatileentities.MetaTileEntities.GAS_TURBINE;
 import static gregtech.common.metatileentities.MetaTileEntities.HULL;
 import static gregtech.loaders.recipe.CraftingComponent.*;
 import static gregtech.loaders.recipe.CraftingComponent.CABLE_QUAD;
@@ -1088,6 +1090,51 @@ public class MetaTileEntityLoader {
                 'E', MetaTileEntities.CHEMICAL_REACTOR[GTValues.ZPM].getStackForm(),
                 'C', new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.ZPM),
                 'F', MetaItems.ELECTRIC_PUMP_ZPM);
+
+        ModHandler.addShapedRecipe(true, "fuel_cell.lv", GTQTMetaTileEntities.FUEL_CELL_TURBINE[0].getStackForm(),
+                "PCP", "AMB", "ECE",
+                'M', HULL[GTValues.LV].getStackForm(),
+                'A', MetaTileEntities.COMBUSTION_GENERATOR[0].getStackForm(),
+                'B', MetaTileEntities.GAS_TURBINE[0].getStackForm(),
+                'P', EMITTER_LV,
+                'E', SENSOR_LV,
+                'C', new UnificationEntry(OrePrefix.circuit, LV));
+
+        ModHandler.addShapedRecipe(true, "fuel_cell.mv", GTQTMetaTileEntities.FUEL_CELL_TURBINE[1].getStackForm(),
+                "PCP", "AMB", "ECE",
+                'M', HULL[GTValues.MV].getStackForm(),
+                'A', MetaTileEntities.COMBUSTION_GENERATOR[1].getStackForm(),
+                'B', MetaTileEntities.GAS_TURBINE[1].getStackForm(),
+                'P', EMITTER_MV,
+                'E', SENSOR_MV,
+                'C', new UnificationEntry(OrePrefix.circuit, MV));
+
+        ModHandler.addShapedRecipe(true, "fuel_cell.hv", GTQTMetaTileEntities.FUEL_CELL_TURBINE[2].getStackForm(),
+                "PCP", "AMB", "ECE",
+                'M', HULL[GTValues.HV].getStackForm(),
+                'A', MetaTileEntities.COMBUSTION_GENERATOR[2].getStackForm(),
+                'B', MetaTileEntities.GAS_TURBINE[2].getStackForm(),
+                'P', EMITTER_HV,
+                'E', SENSOR_HV,
+                'C', new UnificationEntry(OrePrefix.circuit, HV));
+
+        ModHandler.addShapedRecipe(true, "fuel_cell.ev", GTQTMetaTileEntities.FUEL_CELL_TURBINE[3].getStackForm(),
+                "PCP", "AMB", "ECE",
+                'M', HULL[GTValues.EV].getStackForm(),
+                'A', GTQTMetaTileEntities.COMBUSTION_GENERATOR[0].getStackForm(),
+                'B', GTQTMetaTileEntities.GAS_TURBINE[0].getStackForm(),
+                'P', EMITTER_EV,
+                'E', SENSOR_EV,
+                'C', new UnificationEntry(OrePrefix.circuit, EV));
+
+        ModHandler.addShapedRecipe(true, "fuel_cell.iv", GTQTMetaTileEntities.FUEL_CELL_TURBINE[4].getStackForm(),
+                "PCP", "AMB", "ECE",
+                'M', HULL[GTValues.IV].getStackForm(),
+                'A', GTQTMetaTileEntities.COMBUSTION_GENERATOR[1].getStackForm(),
+                'B', GTQTMetaTileEntities.GAS_TURBINE[1].getStackForm(),
+                'P', EMITTER_IV,
+                'E', SENSOR_IV,
+                'C', new UnificationEntry(OrePrefix.circuit, IV));
 
     }
 }
