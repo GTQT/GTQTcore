@@ -65,9 +65,9 @@ public class CTABChain {
                 .duration(400).EUt(VA[HV]).buildAndRegister();
 
         COMPRESSOR_RECIPES.recipeBuilder()
-                .input(OrePrefix.dust,Wool)
-                .output(STRING)
-                .duration(20).EUt(VA[LV]).buildAndRegister();
+                .input(OrePrefix.dust,Wool,9)
+                .output(STRING,4)
+                .duration(80).EUt(VA[LV]).buildAndRegister();
         //定向培养
         //这里得到干细胞 定向
         CommmonOut(DNAe);

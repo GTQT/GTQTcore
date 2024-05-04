@@ -98,7 +98,7 @@ public class MetaTileEntityLargeForging extends GTQTRecipeMapMultiblockOverwrite
                 .aisle("FPF","XPX", "XPX", "XPX", "FPF")
                 .aisle("FFF","XXX", "XSX", "XXX", "FFF")
                 .where('S', selfPredicate())
-                .where('X', TiredTraceabilityPredicate.CP_CASING
+                .where('X', TiredTraceabilityPredicate.CP_CASING.setMinGlobalLimited(18)
                         .or(abilities(MultiblockAbility.MAINTENANCE_HATCH).setExactLimit(1))
                         .or(abilities(MultiblockAbility.EXPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1))
                         .or(abilities(MultiblockAbility.IMPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1))

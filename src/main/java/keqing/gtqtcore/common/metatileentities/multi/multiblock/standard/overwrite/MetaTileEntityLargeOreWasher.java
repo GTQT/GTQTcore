@@ -138,7 +138,7 @@ public class MetaTileEntityLargeOreWasher extends GTQTRecipeMapMultiblockControl
                 .aisle("XCCXCCX", "XPPXPPX", "X#####X")
                 .aisle("XXXXXXX", "XXXSXXX", "XXXXXXX")
                 .where('S', selfPredicate())
-                .where('X', TiredTraceabilityPredicate.CP_CASING
+                .where('X', TiredTraceabilityPredicate.CP_CASING.setMinGlobalLimited(40)
                         .or(abilities(MultiblockAbility.MAINTENANCE_HATCH).setExactLimit(1))
                         .or(abilities(MultiblockAbility.EXPORT_FLUIDS).setMinGlobalLimited(1).setPreviewCount(1))
                         .or(abilities(MultiblockAbility.EXPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1))

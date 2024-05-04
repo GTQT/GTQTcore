@@ -86,6 +86,17 @@ public class MetaTileEntityVacuumFreezer extends GTQTRecipeMapMultiblockOverwrit
         return (int)(Math.min(this.energyContainer.getEnergyCapacity()/32,VA[tier]));
 
     }
+    @Override
+    public void writeInitialSyncData(PacketBuffer buf) {
+        super.writeInitialSyncData(buf);
+        buf.writeInt(this.tier);
+    }
+
+    @Override
+    public void receiveInitialSyncData(PacketBuffer buf) {
+        super.receiveInitialSyncData(buf);
+        this.tier = buf.readInt();
+    }
     private class VacuumFreezerWorkableHandler extends MultiblockRecipeLogic {
 
         public VacuumFreezerWorkableHandler(RecipeMapMultiblockController tileEntity) {
