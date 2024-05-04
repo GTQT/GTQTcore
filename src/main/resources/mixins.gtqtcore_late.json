@@ -6,6 +6,10 @@
   "minVersion": "0.8.3",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "architecturecraft.MixinBlockSawbench",
+    "architecturecraft.MixinBlockShape",
+    "architecturecraft.MixinEnumShape",
+    "architecturecraft.MixinTileSawbench",
     "gregtech.MixinEllipsoidGenerator",
     "gregtech.MixinMetaItem",
     "gregtech.MixinMetaPrefixItem",
@@ -20,6 +24,8 @@
   ],
   "server": [],
   "client": [
+    "architecturecraft.MixinGuiSawbench",
+    "architecturecraft.MixinRenderRoof",
     "gregtech.MixinSolarBoilerClient",
     "gregtech.MixinBlockGlassCasing"
   ]

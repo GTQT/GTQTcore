@@ -102,7 +102,7 @@ public class FirstDegreeMaterials {
                 .color(0x607186)
                 .flags(DISABLE_DECOMPOSITION)
                 .build();
-        GTQTMaterials.Alubrassa = new Material.Builder(getMaterialsId(), gregtechId("alubrassa"))
+        GTQTMaterials.Alubrass = new Material.Builder(getMaterialsId(), gregtechId("alubrass"))
                 .fluid()
                 .ingot()
                 .color(0x321452)

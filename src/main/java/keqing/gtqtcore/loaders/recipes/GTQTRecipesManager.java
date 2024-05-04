@@ -114,6 +114,8 @@ public class GTQTRecipesManager {
         initCircuits();
         initOreProcessing();
         GCYSComponentRecipes.init();
+        AutoChiselRecipeLoader.init();
+        ChiselMachineRecipeLoader.init();
     }
     private static void initOreProcessing() {
         PlatinumGroupProcessing.init();

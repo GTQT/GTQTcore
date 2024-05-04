@@ -68,7 +68,8 @@ public class MetaTileEntityThreeDim extends MultiMapMultiblockController impleme
     private IOpticalComputationProvider computationProvider;
     public MetaTileEntityThreeDim(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{
-                GTQTcoreRecipeMaps.TD_PRINT_RECIPES
+                GTQTcoreRecipeMaps.TD_PRINT_RECIPES,
+                GTQTcoreRecipeMaps.AUTO_CHISEL_RECIPES
         });
         this.recipeMapWorkable = new LaserEngravingWorkableHandler(this);
     }

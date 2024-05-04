@@ -28,18 +28,25 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.util.text.Style;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 
+import java.text.DecimalFormat;
 import java.util.Objects;
 import java.util.function.Function;
 
 import static gregtech.api.GregTechAPI.HEATING_COILS;
 import static keqing.gtqtcore.api.capability.chemical_plant.ChemicalPlantProperties.registerCasingTier;
+import static keqing.gtqtcore.api.utils.ChatCalculatorHelper.eval;
 import static keqing.gtqtcore.common.block.GTQTMetaBlocks.*;
 
 
@@ -333,6 +340,54 @@ public class CommonProxy {
         CACasingTierProperty.registerCACasingTier(12, "12");
         CACasingTierProperty.registerCACasingTier(13, "13");
         CACasingTierProperty.registerCACasingTier(14, "14");
+    }
+
+    @SubscribeEvent
+    public static void registerServerChatEvents( ServerChatEvent event) {
+        String message = event.getMessage();
+
+        if (!message.startsWith("="))
+            return;
+
+        if (event.getPlayer() == null)
+            return;
+
+        event.setCanceled(true);
+
+        if (message.startsWith("=help")) { //  If player send =help, then return guide of this function.
+            for (int i = 1; i <= 12; i++) {
+                event.getPlayer().sendMessage(new TextComponentTranslation(String.format("gtqtcore.chat_calculator.help.%s", i), i == 3 ? new TextComponentString("%").setStyle(new Style().setColor(TextFormatting.AQUA)) : new TextComponentString[]{}));
+            }
+        } else {
+            double result; // calculate result
+            String stripped = message.substring(1); // strip the = sign
+            String[] split = stripped.split(","); // split into expression and args
+
+            event.getPlayer().sendMessage(new TextComponentString(stripped).setStyle(new Style().setColor(TextFormatting.AQUA))); // send the input to only the player
+            try {
+                result = eval(split[0].toLowerCase(), event.getPlayer());
+            } catch (Exception e) {
+                // send the error to the player
+                event.getPlayer().sendMessage(new TextComponentString(e.getMessage()).setStyle(new Style().setColor(TextFormatting.RED)));
+                return;
+            }
+
+            // parse arguments
+            int decimalPlaces = 3;
+            for (int i = 1; i < split.length; i++) {
+                String arg = split[i];
+                String value = arg.split("=")[1];
+                if (arg.startsWith("places")) decimalPlaces = Integer.parseInt(value.replaceAll("\\s", ""));
+            }
+
+            // format output
+            DecimalFormat formatter = new DecimalFormat("#.###");
+            formatter.setMaximumFractionDigits(decimalPlaces);
+            String formatted = formatter.format(result);
+
+            // return output
+            event.getPlayer().sendMessage(new TextComponentString(formatted).setStyle(new Style().setColor(TextFormatting.GRAY)));
+        }
     }
 
 }

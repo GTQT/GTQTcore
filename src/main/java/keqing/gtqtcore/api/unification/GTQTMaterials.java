@@ -99,7 +99,7 @@ public class GTQTMaterials {
     public static Material Methylhydrazine;
     public static Material MethylhydrazineNitrateRocketFuel;
     public static Material Alumite;
-    public static Material Alubrassa;
+    public static Material Alubrass;
     public static Material Coolant;
     public static Material SuperCoolant;
     public static Material Cryotheum;

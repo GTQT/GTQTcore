@@ -1688,7 +1688,7 @@ item.gt.tool.choocher_hv.name=电动%s两用扳手
 item.gt.tool.jinitaimei_hv.name=电动%s螺丝钳
 gregtech.material.alumite=耐酸铝
 gregtech.material.amber=琥珀
-gregtech.material.alubrassa=铝黄铜
+gregtech.material.alubrass=铝黄铜
 
 gregtech.material.cbat=CTAB
 gregtech.material.xiudaishiliuwan=溴代十六烷
@@ -3498,6 +3498,14 @@ gtqtcore.machine.latex_collector.mv.name=进阶胶乳收集器
 gtqtcore.machine.latex_collector.hv.name=进阶胶乳收集器 II
 gtqtcore.machine.latex_collector.ev.name=进阶胶乳收集器 III
 
+gtqtcore.machine.auto_chisel.lv.name=基础自动凿子
+gtqtcore.machine.auto_chisel.lv.tooltip=电子雕刻家
+gtqtcore.machine.auto_chisel.mv.name=进阶自动凿子
+gtqtcore.machine.auto_chisel.mv.tooltip=电子雕刻家
+gtqtcore.machine.auto_chisel.hv.name=进阶自动凿子 II
+gtqtcore.machine.auto_chisel.hv.tooltip=电子雕刻家
+recipemap.auto_chisel.name=自动凿子
+
 gregtech.block_group_members.extractable_logs_1.name=白桦木，丛林木，橡木或云杉木
 gregtech.block_group_members.extractable_logs_2.name=金合欢木或深色橡木
 gregtech.block_group_members.latex_logs.name=橡胶木
@@ -3750,3 +3758,21 @@ gtqt.top.in=最大输入//实际输入:
 gtqt.top.on=最大输出//实际输出:
 gtqt.top.v=电流:
 gtqt.top.i=电压:
+
+##  Chat Calculator Descriptions
+gtqtcore.chat_calculator.help.1=§a在聊天栏中使用数学表达式！§7使用§b=§7作为起始符号以使用该功能
+gtqtcore.chat_calculator.help.2=§7  §b+§7 与 §b-§7：加与减，亦或者单纯改变其符号。
+gtqtcore.chat_calculator.help.3=§7  §b*§7，§b/§7，与 §b%s§7：乘，除以及取模。
+gtqtcore.chat_calculator.help.4=§7  §b()§7：控制运算符的顺序，主要用于函数。
+gtqtcore.chat_calculator.help.5=§7  §bx§7，§by§7 与 §bz§7：x轴，y轴与z轴。
+gtqtcore.chat_calculator.help.6=§7  §bpi§7 与 §be§7：圆周率与自然常数。
+gtqtcore.chat_calculator.help.7=§7  §b^§7：乘方（取幂）。
+gtqtcore.chat_calculator.help.8=§7  §bsqrt§7：开方。
+gtqtcore.chat_calculator.help.9=§7  §blog§7 与 §bln§7：对数与自然对数。
+gtqtcore.chat_calculator.help.10=§7  §bsin§7，§bcos§7 与 §btan§7：正弦，余弦与正切函数。
+gtqtcore.chat_calculator.help.11=§7  §basin§7，§bacos§7 与 §batan§7：反正弦，反余弦与反正切函数。
+gtqtcore.chat_calculator.help.12=§7  以 §b,places=n§7 结尾的表达式代表了小数点后n位。
+gtqtcore.chat_calculator.error.unexpected_char=未知表达式：%s
+gtqtcore.chat_calculator.error.unknown_func=未知函数：%s
+gtqtcore.chat_calculator.error.parenthesis_func=表达式 %s 后缺少 ')'
+gtqtcore.chat_calculator.error.parenthesis_end=缺少 ')'

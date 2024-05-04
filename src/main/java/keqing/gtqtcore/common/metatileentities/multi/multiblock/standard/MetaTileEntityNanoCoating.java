@@ -75,6 +75,7 @@ public class MetaTileEntityNanoCoating extends MultiMapMultiblockController impl
     public MetaTileEntityNanoCoating(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{
                 GTQTcoreRecipeMaps.TD_PRINT_RECIPES,
+                GTQTcoreRecipeMaps.AUTO_CHISEL_RECIPES,
                 GTQTcoreRecipeMaps.PRECISION_SPRAYING,
                 GTQTcoreRecipeMaps.PRECISION_SPINNING
         });

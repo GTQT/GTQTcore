@@ -1,6 +1,7 @@
 package keqing.gtqtcore.loaders.recipes;
 
 import gregtech.api.GTValues;
+import gregtech.api.items.OreDictNames;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.recipes.ModHandler;
 import gregtech.api.recipes.RecipeMaps;
@@ -25,8 +26,10 @@ import keqing.gtqtcore.api.unification.ore.GTQTOrePrefix;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTElectrobath;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
+import keqing.gtqtcore.common.metatileentities.single.steam.MetaTileEntitySteamLatexCollector;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import scala.tools.cmd.Meta;
 
 import static gregicality.multiblocks.api.unification.GCYMMaterials.*;
 import static gregtech.api.GTValues.L;
@@ -37,6 +40,8 @@ import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.Materials.YttriumBariumCuprate;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.common.blocks.BlockMetalCasing.MetalCasingType.*;
+import static gregtech.common.blocks.BlockSteamCasing.SteamCasingType.BRONZE_HULL;
+import static gregtech.common.blocks.BlockSteamCasing.SteamCasingType.STEEL_BRICKS_HULL;
 import static gregtech.common.blocks.BlockWireCoil.CoilType.CUPRONICKEL;
 import static gregtech.common.blocks.MetaBlocks.MACHINE_CASING;
 import static gregtech.common.blocks.MetaBlocks.OPTICAL_PIPES;
@@ -1135,6 +1140,26 @@ public class MetaTileEntityLoader {
                 'P', EMITTER_IV,
                 'E', SENSOR_IV,
                 'C', new UnificationEntry(OrePrefix.circuit, IV));
+
+        registerMachineRecipe(GTQTMetaTileEntities.LATEX_COLLECTOR,
+                "PCP", "AMA", "PCP",
+                'M', CraftingComponent.HULL,
+                'A', PIPE_NORMAL,
+                'C', GLASS,
+                'P', CraftingComponent.PUMP);
+
+        ModHandler.addShapedRecipe(true, "latex_collector.bronze",
+                STEAM_LATEX_COLLECTOR[0].getStackForm(), "XXX", "PMP", "XXX",
+                'M', MetaBlocks.STEAM_CASING.getItemVariant(BRONZE_HULL),
+                'X', new UnificationEntry(OrePrefix.pipeSmallFluid, Bronze),
+                'P', new UnificationEntry(gear, Bronze));
+
+                ModHandler.addShapedRecipe(true, "latex_collector.steel",
+                STEAM_LATEX_COLLECTOR[1].getStackForm(), "PSP", "WMW", "PPP",
+                        'M', MetaTileEntities.STEAM_COMPRESSOR_BRONZE.getStackForm(),
+                        'S', new UnificationEntry(OrePrefix.plate, Materials.Steel),
+                        'W', new UnificationEntry(OrePrefix.plate, Lead),
+                        'P', new UnificationEntry(OrePrefix.pipeSmallFluid, Materials.TinAlloy));
 
     }
 }
