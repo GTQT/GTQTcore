@@ -4,6 +4,7 @@ import gregtech.api.GTValues;
 import gregtech.api.capability.GregtechCapabilities;
 import gregtech.api.capability.IElectricItem;
 import gregtech.api.items.toolitem.IGTTool;
+import gregtech.api.metatileentity.multiblock.CleanroomType;
 import gregtech.api.recipes.ModHandler;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.OreDictUnifier;
@@ -29,6 +30,7 @@ import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTStoneVariantBlock;
 import keqing.gtqtcore.common.items.GTQTMetaItems;
 import keqing.gtqtcore.common.items.metaitems.GTQTMetaToolItems;
+import keqing.gtqtcore.loaders.recipes.handlers.NanoCoatingRecipes;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 
@@ -43,8 +45,7 @@ import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.info.MaterialFlags.*;
-import static gregtech.api.unification.material.properties.PropertyKey.GEM;
-import static gregtech.api.unification.material.properties.PropertyKey.TOOL;
+import static gregtech.api.unification.material.properties.PropertyKey.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.common.crafting.ToolHeadReplaceRecipe.setToolHeadForTool;
 import static gregtech.common.items.MetaItems.*;
@@ -87,6 +88,62 @@ public class GTQTRecipes {
         OrePrefix.springSmall.addProcessingHandler(PropertyKey.INGOT, GTQTRecipes::processSpringSmall);
         OrePrefix.foil.addProcessingHandler(PropertyKey.INGOT, GTQTRecipes::processFoil);
         OrePrefix.rotor.addProcessingHandler(PropertyKey.INGOT, GTQTRecipes::processRotorA);
+        wireGtSingle.addProcessingHandler(PropertyKey.WIRE, GTQTRecipes::processWireSingle);
+    }
+
+    public static void processWireSingle(OrePrefix wirePrefix, Material material, WireProperties property) {
+
+        if (material.hasFluid()) {
+            PRECISION_SPINNING.recipeBuilder()
+                    .fluidInputs(material.getFluid(144 * 8))
+                    .circuitMeta(1)
+                    .output(wireGtSingle, material, 16)
+                    .duration((int) material.getMass())
+                    .EUt(120)
+                    .CWUt(96)
+                    .cleanroom(CleanroomType.CLEANROOM)
+                    .buildAndRegister();
+
+            PRECISION_SPINNING.recipeBuilder()
+                    .fluidInputs(material.getFluid(144 * 16))
+                    .circuitMeta(2)
+                    .output(wireGtDouble, material, 16)
+                    .duration((int) material.getMass() * 2)
+                    .EUt(120)
+                    .CWUt(96)
+                    .cleanroom(CleanroomType.CLEANROOM)
+                    .buildAndRegister();
+
+            PRECISION_SPINNING.recipeBuilder()
+                    .fluidInputs(material.getFluid(144 * 32))
+                    .circuitMeta(4)
+                    .output(wireGtQuadruple, material, 16)
+                    .duration((int) material.getMass() * 4)
+                    .EUt(120)
+                    .CWUt(96)
+                    .cleanroom(CleanroomType.CLEANROOM)
+                    .buildAndRegister();
+
+            PRECISION_SPINNING.recipeBuilder()
+                    .fluidInputs(material.getFluid(144 * 64))
+                    .circuitMeta(8)
+                    .output(wireGtOctal, material, 16)
+                    .duration((int) material.getMass() * 8)
+                    .EUt(120)
+                    .CWUt(96)
+                    .cleanroom(CleanroomType.CLEANROOM)
+                    .buildAndRegister();
+
+            PRECISION_SPINNING.recipeBuilder()
+                    .fluidInputs(material.getFluid(144 * 128))
+                    .circuitMeta(16)
+                    .output(wireGtHex, material, 16)
+                    .duration((int) material.getMass() * 16)
+                    .EUt(120)
+                    .CWUt(96)
+                    .cleanroom(CleanroomType.CLEANROOM)
+                    .buildAndRegister();
+        }
     }
 
     private static void processShell(OrePrefix orePrefix, Material material, IngotProperty ingotProperty) {
@@ -550,6 +607,7 @@ public class GTQTRecipes {
     }
 
     public static void processIngot(OrePrefix ingotPrefix, Material material, IngotProperty property) {
+        OrePrefix[] wireSizes = { wireGtDouble, wireGtQuadruple, wireGtOctal, wireGtHex };
         if (material.hasFluid()) {
             RecipeMaps.VACUUM_RECIPES.recipeBuilder()
                     .notConsumable(MetaItems.SHAPE_MOLD_INGOT)
@@ -557,7 +615,9 @@ public class GTQTRecipes {
                     .outputs(OreDictUnifier.get(ingotPrefix, material))
                     .duration(20).EUt(VA[MV]*4)
                     .buildAndRegister();
+
         }
+
     }
     public static void processNugget(OrePrefix orePrefix, Material material, DustProperty property) {
         if (material.hasFluid()) {

@@ -3261,6 +3261,13 @@ metaitem.component.cosmic.manifold_oscillatory_power_cell.name=流形振荡能�
 metaitem.scintillator.name=闪烁体
 metaitem.scintillator_crystal.name=闪烁晶体
 
+metaitem.catalyst_framework_i.name=催化剂基床（氧化型）
+metaitem.catalyst_framework_ii.name=催化剂基床（还原型）
+metaitem.catalyst_framework_iii.name=催化剂基床（全催化）
+metaitem.catalyst_framework_iv.name=催化剂基床（生物催化）
+metaitem.catalyst_framework_v.name=催化剂基床
+metaitem.catalyst_framework_vi.name=催化剂基床
+
 metaitem.item.lamination_ge.name=锗层压纤维基板
 metaitem.item.insulatingmica.name=绝缘云母复合片
 gtqtcore.machine.gas_collector.name=大型集气机
@@ -3281,6 +3288,11 @@ gtqtcore.machine.fuel_cell_turbine.ev.name=脉冲促燃轮机
 gtqtcore.machine.fuel_cell_turbine.iv.name=爆燃促燃轮机
 gtqtcore.machine.large_turbine.fuel_cell.name=大型促燃轮机
 recipemap.fuel_cell.name=促燃发电机燃料
+
+gtqtcore.machine.nano_coating.name=纳米镀膜室
+recipemap.precision_spinning.name=超精纳米级喷丝
+recipemap.precision_spraying.name=超精纳米级喷涂
+
 gtqtcore.machine.septic_tank.name=发酵池
 gtqtcore.machine.pcb.name=PCB工厂
 gtqtcore.machine.distillation_kettle.name=蒸馏反应釜
@@ -3491,13 +3503,13 @@ gregtech.material.rich_copper_js=沉浸富集铜混合
 # Latex Collector
 gregtech.machine.latex_collector.steam=需要蒸汽！
 gregtech.machine.latex_collector.tooltip=从相邻的原木中提取液体。
-gtqtcore.machine.latex_collector.bronze.name=蒸汽胶乳收集器
-gtqtcore.machine.latex_collector.steel.name=高压蒸汽胶乳收集器
-gtqtcore.machine.latex_collector.lv.name=基础胶乳收集器
-gtqtcore.machine.latex_collector.mv.name=进阶胶乳收集器
-gtqtcore.machine.latex_collector.hv.name=进阶胶乳收集器 II
-gtqtcore.machine.latex_collector.ev.name=进阶胶乳收集器 III
-
+gtqtcore.machine.latex_collector.bronze.name=蒸汽乳胶收集器
+gtqtcore.machine.latex_collector.steel.name=高压蒸汽乳胶收集器
+gtqtcore.machine.latex_collector.lv.name=基础乳胶收集器
+gtqtcore.machine.latex_collector.mv.name=进阶乳胶收集器
+gtqtcore.machine.latex_collector.hv.name=进阶乳胶收集器 II
+gtqtcore.machine.latex_collector.ev.name=进阶乳胶收集器 III
+recipemap.latex_collector.name=乳胶收集
 gtqtcore.machine.auto_chisel.lv.name=基础自动凿子
 gtqtcore.machine.auto_chisel.lv.tooltip=电子雕刻家
 gtqtcore.machine.auto_chisel.mv.name=进阶自动凿子

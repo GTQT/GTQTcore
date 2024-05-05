@@ -919,7 +919,6 @@ public class GCYSFirstDegreeMaterials {
                 .flags(GENERATE_FINE_WIRE)
                 .components(Silicon, 1, Carbon, 1)
                 .blast(2500, HIGH)
-                .cableProperties(GTValues.V[GTValues.UHV], 6, 8)
                 .build();
 
         ChromiumGermaniumTelluride = new Material.Builder(3622, gregtechId("cgt"))

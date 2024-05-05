@@ -184,12 +184,12 @@ public class BiochemChains {
                 .duration(480).buildAndRegister();
 
         CENTRIFUGE_RECIPES.recipeBuilder().duration(400).EUt(5)
-                .fluidInputs(Latex.getFluid(200))
+                .fluidInputs(Latex.getFluid(400))
                 .input(dust,Trona)
-                .output(dust, RawRubber, 2)
+                .output(dust, RawRubber, 4)
                 .output(dust, Salt, 1)
-                .chancedOutput(PLANT_BALL, 1000, 400)
-                .fluidOutputs(Glue.getFluid(100))
+                .chancedOutput(PLANT_BALL, 2000, 400)
+                .fluidOutputs(Glue.getFluid(200))
                 .buildAndRegister();
 
         CENTRIFUGE_RECIPES.recipeBuilder().duration(200).EUt(5)

@@ -10,17 +10,20 @@ import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.dust;
+import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.DRYER_RECIPES;
+import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.FLUIDIZED_BED;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 
 public class AmmoniaChain {
 
     public static void init() {
         // Minimized Haber-Bosch Process
-        BLAST_RECIPES.recipeBuilder()
-                .input(dust,SodiumBicarbonate,2)
-                .input(dust,SodaAsh)
-                .fluidOutputs(Water.getFluid(2000))
-                .blastFurnaceTemp(1000)
+        DRYER_RECIPES.recipeBuilder()
+                .input(dust,SodiumBicarbonate,12)
+                .circuitMeta(1)
+                .output(dust,SodaAsh,6)
+                .fluidOutputs(Water.getFluid(3000))
+                .fluidOutputs(CarbonDioxide.getFluid(3000))
                 .duration(20).EUt(VA[LV]).buildAndRegister();
         // CH4 + N -> CH4N
         MIXER_RECIPES.recipeBuilder()
