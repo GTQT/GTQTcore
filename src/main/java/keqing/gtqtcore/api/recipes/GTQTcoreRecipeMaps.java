@@ -280,7 +280,7 @@ public class GTQTcoreRecipeMaps {
                 .setProgressBar(GuiTextures.PROGRESS_BAR_BATH, ProgressWidget.MoveType.CIRCULAR)
                 .setSound(GTSoundEvents.ELECTROLYZER);
 
-        FLOTATION_FACTORY_RECIPES = new RecipeMap<>("flotation_factory_recipes", 5, 3, 3, 3, new SimpleRecipeBuilder(), false)
+        FLOTATION_FACTORY_RECIPES = new RecipeMap<>("flotation_factory_recipes", 6, 3, 3, 3, new SimpleRecipeBuilder(), false)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_BATH, ProgressWidget.MoveType.CIRCULAR)
                 .setSound(GTSoundEvents.BATH);
 

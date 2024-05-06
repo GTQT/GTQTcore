@@ -2777,7 +2777,11 @@ gregtech.material.pyrite_front=黄铁矿泡沫
 gregtech.material.tantalite_front=钽铁矿泡沫
 
 
-
+gregtech.material.copper_front=铜矿泡沫
+gregtech.material.tetrahedrite_front=黝铜矿泡沫
+gregtech.material.chalocite_front=辉铜矿泡沫
+gregtech.material.aluminium_front=铝矿泡沫
+gregtech.material.bauxite_front=铝土矿泡沫
 
 
 

@@ -504,8 +504,12 @@ public class SecondDegreeMaterials {
         GTQTMaterials.MagnetiteFront  = new Material.Builder(getMaterialsId(), gregtechId( "magnetite_front")).fluid().color(0x8B7500).build();
         GTQTMaterials.PyriteFront  = new Material.Builder(getMaterialsId(), gregtechId( "pyrite_front")).fluid().color(0x8B5A2B).build();
         GTQTMaterials.TantaliteFront  = new Material.Builder(getMaterialsId(), gregtechId( "tantalite_front")).fluid().color(0x8DEEEE).build();
-
         //铜系泡沫
-        //GTQTMaterials.CopperFront  = new Material.Builder(getMaterialsId(), gregtechId( "iron_front")).fluid().color(0xCD6600).build();
+        GTQTMaterials.CopperFront  = new Material.Builder(getMaterialsId(), gregtechId( "copper_front")).fluid().color(0xD2691E).build();
+        GTQTMaterials.TetrahedriteFront  = new Material.Builder(getMaterialsId(), gregtechId( "tetrahedrite_front")).fluid().color(0x8B2323).build();
+        GTQTMaterials.ChalcociteFront  = new Material.Builder(getMaterialsId(), gregtechId( "chalocite_front")).fluid().color(0x595959).build();
+        //铝系
+        GTQTMaterials.AluminiumFront  = new Material.Builder(getMaterialsId(), gregtechId( "aluminium_front")).fluid().color(0x1E90FF).build();
+        GTQTMaterials.BauxiteFront  = new Material.Builder(getMaterialsId(), gregtechId( "bauxite_front")).fluid().color(0x8B4726).build();
     }
 }

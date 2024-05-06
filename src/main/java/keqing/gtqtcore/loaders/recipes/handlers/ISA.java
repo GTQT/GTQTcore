@@ -41,7 +41,7 @@ public class ISA {
                 .input(GTQTOrePrefix.milled, materials1, 64)
                 .input(GTQTOrePrefix.milled, materials1, 64)
                 .EUt(1920).duration(9600)
-                .fluidInputs(GTQTMaterials.PineOil.getFluid(28000))
+                .fluidInputs(GTQTMaterials.PineOil.getFluid(12000))
                 .fluidOutputs(materials2.getFluid(1000))
                 .buildAndRegister();
 
@@ -64,6 +64,7 @@ public class ISA {
         //浮游选矿
         //32*乙基荒原酸钠+4*研磨矿+8000松油=1000泡沫
         //4000泡沫=2000红色泥浆+2000水+3*主产*64+2*副产1*64+副产2*50+副产3*10
+        //铁系
         isaLine(Iron,IronFront,Iron,Iron,Nickel,Copper);
         isaLine(BandedIron,BandedIronFront,Iron,Iron,Nickel,Tin);
         isaLine(BrownLimonite,BrownLimoniteFront,Iron,Iron,Copper,Copper);
@@ -73,7 +74,13 @@ public class ISA {
         isaLine(Magnetite,MagnetiteFront,Iron,Iron,Gold,Gold);
         isaLine(Pyrite,PyriteFront,Iron,Iron,Sulfur,TricalciumPhosphate);
         isaLine(Tantalite,TantaliteFront,Iron,Manganese,Tantalum,Niobium);
-
+        //铜系
+        isaLine(Copper,CopperFront,Copper,Nickel,Cobalt,Gold);
+        isaLine(Tetrahedrite,TetrahedriteFront,Tetrahedrite,Antimony,Cadmium,Sulfur);
+        isaLine(Chalcocite,ChalcociteFront,Copper,Copper,Sulfur,Silver);
+        //铝系
+        isaLine(Aluminium,AluminiumFront,Aluminium,Aluminium,Ilmenite,Rutile);
+        isaLine(Bauxite,BauxiteFront,Aluminium,Aluminium,Gallium,Rutile);
         GTQTcoreRecipeMaps.CHEMICAL_PLANT.recipeBuilder()
                 .recipeLevel(3)
                 .input(dust, Materials.Potash, 3)
