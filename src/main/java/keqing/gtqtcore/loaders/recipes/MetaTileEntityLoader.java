@@ -96,16 +96,6 @@ public class MetaTileEntityLoader {
                 .fluidInputs(Polyethylene.getFluid(L * 12))
                 .outputs(GAS_COLLECTOR.getStackForm()).buildAndRegister();
 
-        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(500).EUt(30)
-                .inputs(HULL[1].getStackForm(4))
-                .input(ELECTRIC_MOTOR_LV,8)
-                .input(ELECTRIC_PUMP_LV,8)
-                .input(circuit,LV,8)
-                .input(gear,Steel,8)
-                .input(OrePrefix.cableGtSingle, Materials.Tin, 32)
-                .fluidInputs(Polyethylene.getFluid(L * 12))
-                .outputs(WATER_POWER_STATION[0].getStackForm()).buildAndRegister();
-
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(500).EUt(120)
                 .inputs(HULL[2].getStackForm(4))
                 .input(ELECTRIC_MOTOR_MV,8)
@@ -113,17 +103,27 @@ public class MetaTileEntityLoader {
                 .input(circuit,MV,8)
                 .input(gear,Aluminium,8)
                 .input(OrePrefix.cableGtSingle, Materials.Tin, 32)
-                .fluidInputs(PolyvinylChloride.getFluid(L * 12))
+                .fluidInputs(Polyethylene.getFluid(L * 12))
+                .outputs(WATER_POWER_STATION[0].getStackForm()).buildAndRegister();
+
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(500).EUt(1920)
+                .inputs(HULL[4].getStackForm(4))
+                .input(ELECTRIC_MOTOR_EV,8)
+                .input(ELECTRIC_PUMP_EV,8)
+                .input(circuit,EV,8)
+                .input(gear,Titanium,8)
+                .input(OrePrefix.cableGtSingle, Platinum, 32)
+                .fluidInputs(Epoxy.getFluid(L * 12))
                 .outputs(WATER_POWER_STATION[1].getStackForm()).buildAndRegister();
 
-        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(500).EUt(480)
-                .inputs(HULL[3].getStackForm(4))
-                .input(ELECTRIC_MOTOR_HV,8)
-                .input(ELECTRIC_PUMP_HV,8)
-                .input(circuit,HV,8)
-                .input(gear,StainlessSteel,8)
-                .input(OrePrefix.cableGtSingle, Materials.Tin, 32)
-                .fluidInputs(Epoxy.getFluid(L * 12))
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(500).EUt(30720)
+                .inputs(HULL[6].getStackForm(4))
+                .input(ELECTRIC_MOTOR_LuV,8)
+                .input(ELECTRIC_PUMP_LuV,8)
+                .input(circuit,LuV,8)
+                .input(gear,RhodiumPlatedPalladium,8)
+                .input(OrePrefix.cableGtSingle, Naquadah, 32)
+                .fluidInputs(Zylon.getFluid(L * 12))
                 .outputs(WATER_POWER_STATION[2].getStackForm()).buildAndRegister();
 
         ModHandler.addShapedRecipe(true, "tank0",TANK[0].getStackForm(), " R ",
@@ -520,14 +520,14 @@ public class MetaTileEntityLoader {
                 new UnificationEntry(OrePrefix.circuit, LV), 'F', ELECTRIC_MOTOR_LV);
 
         ModHandler.addShapedRecipe(true, "ele_oil", GTQTMetaTileEntities.ELE_OIL.getStackForm(),
-                "FFF", "BMB", "CCC", 'M', MetaTileEntities.HULL[GTValues.MV].getStackForm(), 'B',
-                new UnificationEntry(gear, StainlessSteel), 'C',
-                new UnificationEntry(OrePrefix.circuit, LV), 'F', EMITTER_MV);
+                "FFF", "BMB", "CCC", 'M', MetaTileEntities.HULL[GTValues.HV].getStackForm(), 'B',
+                new UnificationEntry(gear, Titanium), 'C',
+                new UnificationEntry(OrePrefix.circuit, HV), 'F', EMITTER_HV);
 
         ModHandler.addShapedRecipe(true, "clarifier", GTQTMetaTileEntities.CLARIFIER.getStackForm(),
-                "FFF", "BMB", "CCC", 'M', MetaTileEntities.HULL[GTValues.LV].getStackForm(), 'B',
-                new UnificationEntry(plateDouble, Steel), 'C',
-                new UnificationEntry(OrePrefix.circuit, LV), 'F', ELECTRIC_PUMP_LV);
+                "FFF", "BMB", "CCC", 'M', MetaTileEntities.HULL[GTValues.MV].getStackForm(), 'B',
+                new UnificationEntry(plateDouble, Aluminium), 'C',
+                new UnificationEntry(OrePrefix.circuit, MV), 'F', ELECTRIC_PUMP_MV);
 
         ModHandler.addShapedRecipe(true, "ocean_pumper", GTQTMetaTileEntities.OCEAN_PUMPER.getStackForm(),
                 "FFF", "CMC", "FFF", 'M', MetaTileEntities.HULL[GTValues.LV].getStackForm(), 'C',

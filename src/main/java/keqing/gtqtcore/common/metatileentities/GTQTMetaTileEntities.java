@@ -118,7 +118,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityPlasmaForge PLASMA_FORGE;
     public static MetaTileEntityStarMixer STAR_MIXER;
     public static MetaTileEntitySteamCompressor STEAM_COMPRESSOR;
-    public static  MetaTileEntityStepper STEPPER;
+    public static MetaTileEntityStepper STEPPER;
     public static MetaTileEntitySteamExtractor STEAM_EXTRACTOR;
     public static MetaTileEntitySteamHammer STEAM_HAMMER;
     public static MetaTileEntityHugeCrackingUnit HUGE_CRACKING_UNIT;
@@ -306,9 +306,9 @@ public class GTQTMetaTileEntities {
 
         I_MODULAR_FISSION_REACTOR = registerMetaTileEntity(3063, new MetaTileEntityIModularFissionReactor(gtqtcoreId("i_modular_fission_reactor"),5));
 
-        WATER_POWER_STATION[0] = registerMetaTileEntity(3064, new MetaTileEntityWaterPowerStation(gtqtcoreId("water_power_station_lv"),1));
-        WATER_POWER_STATION[1] = registerMetaTileEntity(3065, new MetaTileEntityWaterPowerStation(gtqtcoreId("water_power_station_mv"),2));
-        WATER_POWER_STATION[2] = registerMetaTileEntity(3066, new MetaTileEntityWaterPowerStation(gtqtcoreId("water_power_station_hv"),3));
+        WATER_POWER_STATION[0] = registerMetaTileEntity(3064, new MetaTileEntityWaterPowerStation(gtqtcoreId("water_power_station_mk1"),1));
+        WATER_POWER_STATION[1] = registerMetaTileEntity(3065, new MetaTileEntityWaterPowerStation(gtqtcoreId("water_power_station_mk2"),2));
+        WATER_POWER_STATION[2] = registerMetaTileEntity(3066, new MetaTileEntityWaterPowerStation(gtqtcoreId("water_power_station_mk3"),3));
 
 
         MEGA_STEAM_TURBINE = registerMetaTileEntity(3067, new MetaTileEntityMegaTurbine(gtqtcoreId("mega_turbine.steam"), RecipeMaps.STEAM_TURBINE_FUELS, 3, MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.STEEL_TURBINE_CASING), MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.STEEL_GEARBOX), Textures.SOLID_STEEL_CASING, false, GTQTTextures.MEGA_TURBINE_OVERLAY));

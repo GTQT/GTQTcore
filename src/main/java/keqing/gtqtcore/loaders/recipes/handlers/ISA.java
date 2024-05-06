@@ -18,8 +18,10 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 import static gregtech.api.GTValues.*;
+import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.dust;
 import static gregtech.api.unification.ore.OrePrefix.gem;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static net.minecraft.init.Blocks.*;
 
 public class ISA {
@@ -30,7 +32,48 @@ public class ISA {
         return stack;
     }
 
+    public static void isaLine(Material materials1,Material materials2,Material materials3,Material materials4,Material materials5,Material materials6)
+    {
+        GTQTcoreRecipeMaps.FLOTATION_FACTORY_RECIPES.recipeBuilder()
+                .inputs(GTQTMetaItems.POTASSIUM_ETHYLXANTHATE.getStackForm(32))
+                .input(GTQTOrePrefix.milled, materials1, 64)
+                .input(GTQTOrePrefix.milled, materials1, 64)
+                .input(GTQTOrePrefix.milled, materials1, 64)
+                .input(GTQTOrePrefix.milled, materials1, 64)
+                .EUt(1920).duration(9600)
+                .fluidInputs(GTQTMaterials.PineOil.getFluid(28000))
+                .fluidOutputs(materials2.getFluid(1000))
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.VACUUM_DRYING_FURNACE_RECIPES.recipeBuilder()
+                .fluidInputs(materials2.getFluid(4000))
+                .output(dust, materials3, 64)
+                .output(dust, materials3, 64)
+                .output(dust, materials3, 22)
+                .output(dust, materials4, 64)
+                .output(dust, materials4, 26)
+                .output(dust, materials5, 30)
+                .output(dust, materials6, 20)
+                .circuitMeta(2)
+                .fluidOutputs(GTQTMaterials.RedMud.getFluid(2000))
+                .fluidOutputs(Materials.Water.getFluid(2000))
+                .EUt(1920).duration(2400).blastFurnaceTemp(3500)
+                .buildAndRegister();
+    }
     public static void init() {
+        //浮游选矿
+        //32*乙基荒原酸钠+4*研磨矿+8000松油=1000泡沫
+        //4000泡沫=2000红色泥浆+2000水+3*主产*64+2*副产1*64+副产2*50+副产3*10
+        isaLine(Iron,IronFront,Iron,Iron,Nickel,Copper);
+        isaLine(BandedIron,BandedIronFront,Iron,Iron,Nickel,Tin);
+        isaLine(BrownLimonite,BrownLimoniteFront,Iron,Iron,Copper,Copper);
+        isaLine(YellowLimonite,YellowLimoniteFront,Iron,Iron,Copper,Tin);
+        isaLine(Chromite,ChromiteFront,Iron,Iron,Chrome,Magnesium);
+        isaLine(Ilmenite,IlmeniteFront,Iron,Rutile,Titanium,Tungsten);
+        isaLine(Magnetite,MagnetiteFront,Iron,Iron,Gold,Gold);
+        isaLine(Pyrite,PyriteFront,Iron,Iron,Sulfur,TricalciumPhosphate);
+        isaLine(Tantalite,TantaliteFront,Iron,Manganese,Tantalum,Niobium);
+
         GTQTcoreRecipeMaps.CHEMICAL_PLANT.recipeBuilder()
                 .recipeLevel(3)
                 .input(dust, Materials.Potash, 3)
@@ -300,7 +343,7 @@ public class ISA {
                 .output(dust, Materials.Manganese, 6)
                 .output(dust, Materials.Borax, 60)
                 .output(dust, Materials.Rhenium, 20)
-                .circuitMeta(10)
+                .circuitMeta(2)
                 .fluidOutputs(GTQTMaterials.RedMud.getFluid(2000))
                 .fluidOutputs(Materials.Water.getFluid(2000))
                 .EUt(1920).duration(2400).blastFurnaceTemp(3500)
@@ -315,7 +358,7 @@ public class ISA {
                 .output(dust, Materials.Cobalt, 56)
                 .output(dust, Materials.Rhodium, 32)
                 .output(dust, Materials.Ruthenium, 16)
-                .circuitMeta(3)
+                .circuitMeta(2)
                 .fluidOutputs(GTQTMaterials.RedMud.getFluid(2000))
                 .fluidOutputs(Materials.Water.getFluid(2000))
                 .EUt(7680).duration(2400).blastFurnaceTemp(4500)
@@ -331,7 +374,7 @@ public class ISA {
                 .output(dust, Materials.Chrome, 60)
                 //TODO FireStone Dust* 45
                 .output(dust, Materials.Dysprosium, 16)
-                .circuitMeta(6)
+                .circuitMeta(2)
                 .fluidOutputs(GTQTMaterials.RedMud.getFluid(2000))
                 .fluidOutputs(Materials.Water.getFluid(2000))
                 .EUt(7680).duration(2400).blastFurnaceTemp(4500)
@@ -339,11 +382,11 @@ public class ISA {
 
         GTQTcoreRecipeMaps.VACUUM_DRYING_FURNACE_RECIPES.recipeBuilder()
                 .fluidInputs(GTQTMaterials.ChalcopyriteFront.getFluid(4000))
-                .output(dust, Materials.Copper, 64)
-                .output(dust, Materials.Copper, 64)
-                .output(dust, Materials.Copper, 52)
-                .output(dust, Materials.Iron, 64)
-                .output(dust, Materials.Iron, 44)
+                .output(dust, Copper, 64)
+                .output(dust, Copper, 64)
+                .output(dust, Copper, 52)
+                .output(dust, Iron, 64)
+                .output(dust, Iron, 44)
                 .output(dust, Materials.Cadmium, 50)
                 .output(dust, Materials.Indium, 10)
                 .circuitMeta(2)
@@ -359,7 +402,7 @@ public class ISA {
                 .output(dust, Materials.Rhodium, 40)
                 .output(dust, Materials.Selenium, 40)
                 .output(dust, Materials.Tellurium, 10)
-                .circuitMeta(4)
+                .circuitMeta(2)
                 .fluidOutputs(GTQTMaterials.RedMud.getFluid(2000))
                 .fluidOutputs(Materials.Water.getFluid(2000))
                 .EUt(30720).duration(2400).blastFurnaceTemp(5500)
@@ -374,7 +417,7 @@ public class ISA {
                 .output(dust, Materials.Aluminium, 26)
                 .output(dust, Materials.RarestMetalMixture, 30)
                 .output(dust, Materials.Strontium, 20)
-                .circuitMeta(7)
+                .circuitMeta(2)
                 .fluidOutputs(GTQTMaterials.RedMud.getFluid(2000))
                 .fluidOutputs(Materials.Water.getFluid(2000))
                 .EUt(30720).duration(2400).blastFurnaceTemp(5500)
@@ -389,7 +432,7 @@ public class ISA {
                 .output(dust, Materials.Manganese, 26)
                 .output(dust, Materials.Yttrium, 25)
                 .output(dust, Materials.Ytterbium, 15)
-                .circuitMeta(9)
+                .circuitMeta(2)
                 .fluidOutputs(GTQTMaterials.RedMud.getFluid(2000))
                 .fluidOutputs(Materials.Water.getFluid(2000))
                 .EUt(30720).duration(2400).blastFurnaceTemp(5500)
@@ -400,11 +443,11 @@ public class ISA {
                 .output(dust, Materials.Zinc, 64)
                 .output(dust, Materials.Zinc, 64)
                 .output(dust, Materials.Zinc, 52)
-                .output(dust, Materials.Iron, 64)
-                .output(dust, Materials.Iron, 56)
+                .output(dust, Iron, 64)
+                .output(dust, Iron, 56)
                 .output(dust, Materials.Indium, 64)
                 .output(dust, Materials.Germanium, 15)
-                .circuitMeta(1)
+                .circuitMeta(2)
                 .fluidOutputs(GTQTMaterials.RedMud.getFluid(2000))
                 .fluidOutputs(Materials.Water.getFluid(2000))
                 .EUt(30720).duration(2400).blastFurnaceTemp(5500)
@@ -412,14 +455,14 @@ public class ISA {
 
         GTQTcoreRecipeMaps.VACUUM_DRYING_FURNACE_RECIPES.recipeBuilder()
                 .fluidInputs(GTQTMaterials.PentlanditeFront.getFluid(4000))
-                .output(dust, Materials.Iron, 64)
-                .output(dust, Materials.Iron, 64)
-                .output(dust, Materials.Iron, 22)
+                .output(dust, Iron, 64)
+                .output(dust, Iron, 64)
+                .output(dust, Iron, 22)
                 .output(dust, Materials.Nickel, 64)
                 .output(dust, Materials.Nickel, 36)
                 .output(dust, Materials.Promethium, 20)
                 .output(dust, Materials.Hafnium, 10)
-                .circuitMeta(5)
+                .circuitMeta(2)
                 .fluidOutputs(GTQTMaterials.RedMud.getFluid(2000))
                 .fluidOutputs(Materials.Water.getFluid(2000))
                 .EUt(30720).duration(2400).blastFurnaceTemp(5500)
@@ -434,7 +477,7 @@ public class ISA {
                 .output(dust, Materials.Aluminium, 46)
                 .output(dust, Materials.Tungsten, 60)
                 .output(dust, Materials.Thallium, 15)
-                .circuitMeta(8)
+                .circuitMeta(2)
                 .fluidOutputs(GTQTMaterials.RedMud.getFluid(2000))
                 .fluidOutputs(Materials.Water.getFluid(2000))
                 .EUt(30720).duration(2400).blastFurnaceTemp(5500)
@@ -446,7 +489,7 @@ public class ISA {
                 .output(dust, Materials.Lanthanum, 32)
                 .output(dust, Materials.Lutetium, 16)
                 .output(dust, Materials.Europium, 8)
-                .circuitMeta(11)
+                .circuitMeta(2)
                 .fluidOutputs(GTQTMaterials.RedMud.getFluid(2000))
                 .fluidOutputs(Materials.Water.getFluid(2000))
                 .EUt(122880).duration(2400).blastFurnaceTemp(5500)

@@ -2,10 +2,13 @@ package keqing.gtqtcore.api.unification.matreials;
 
 import gregtech.api.fluids.FluidBuilder;
 import gregtech.api.fluids.attribute.FluidAttributes;
+import gregtech.api.recipes.Recipe;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.material.info.MaterialIconSet;
 import keqing.gtqtcore.api.unification.GTQTMaterials;
+
+import java.util.Collection;
 
 import static gregtech.api.unification.material.Materials.*;
 
@@ -72,6 +75,7 @@ public class SecondDegreeMaterials {
                         Oganesson,1)
                 .build();
 
+        //注册泡沫
         GTQTMaterials.AlmandineFront  = new Material.Builder(getMaterialsId(), gregtechId("almandine_front")).fluid().color(0xD70505).build();
         GTQTMaterials.PentlanditeFront  = new Material.Builder(getMaterialsId(), gregtechId("pentlandite_front")).fluid().color(0x8c800a).build();
         GTQTMaterials.ChalcopyriteFront  = new Material.Builder(getMaterialsId(), gregtechId( "chalcopyrite_front")).fluid().color(0x896826).build();
@@ -83,7 +87,6 @@ public class SecondDegreeMaterials {
         GTQTMaterials.RedstoneFront  = new Material.Builder(getMaterialsId(), gregtechId( "redstone_front")).fluid().color(0xAC0505).build();
         GTQTMaterials.SpessartineFront  = new Material.Builder(getMaterialsId(), gregtechId( "spessartine_front")).fluid().color(0XDF5A5A).build();
         GTQTMaterials.SphaleriteFront  = new Material.Builder(getMaterialsId(), gregtechId( "sphalerite_front")).fluid().color(0xD9D9D9).build();
-
 
         GTQTMaterials.MetallicHydrogen = new Material.Builder(getMaterialsId(), gregtechId("metallic_hydrogen"))
                 .ingot().fluid()
@@ -490,5 +493,19 @@ public class SecondDegreeMaterials {
                 .color(0x201313).iconSet(ROUGH)
                 .components(Forsterite, 3, Augite, 3, Andradite, 2, Lizardite, 1)
                 .build();
+
+        //铁系泡沫
+        GTQTMaterials.IronFront  = new Material.Builder(getMaterialsId(), gregtechId( "iron_front")).fluid().color(0xD6D6D6).build();
+        GTQTMaterials.BandedIronFront  = new Material.Builder(getMaterialsId(), gregtechId( "banded_iron_front")).fluid().color(0xDAA520).build();
+        GTQTMaterials.BrownLimoniteFront  = new Material.Builder(getMaterialsId(), gregtechId( "brown_limonite_front")).fluid().color(0xD2691E).build();
+        GTQTMaterials.YellowLimoniteFront  = new Material.Builder(getMaterialsId(), gregtechId( "yellow_limonite_front")).fluid().color(0xCDCD00).build();
+        GTQTMaterials.ChromiteFront  = new Material.Builder(getMaterialsId(), gregtechId( "chromite_front")).fluid().color(0x8E8E38).build();
+        GTQTMaterials.IlmeniteFront  = new Material.Builder(getMaterialsId(), gregtechId( "ilmenite_front")).fluid().color(0x8B814C).build();
+        GTQTMaterials.MagnetiteFront  = new Material.Builder(getMaterialsId(), gregtechId( "magnetite_front")).fluid().color(0x8B7500).build();
+        GTQTMaterials.PyriteFront  = new Material.Builder(getMaterialsId(), gregtechId( "pyrite_front")).fluid().color(0x8B5A2B).build();
+        GTQTMaterials.TantaliteFront  = new Material.Builder(getMaterialsId(), gregtechId( "tantalite_front")).fluid().color(0x8DEEEE).build();
+
+        //铜系泡沫
+        //GTQTMaterials.CopperFront  = new Material.Builder(getMaterialsId(), gregtechId( "iron_front")).fluid().color(0xCD6600).build();
     }
 }

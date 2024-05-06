@@ -71,8 +71,8 @@ public class BiologyRecipe {
                 .buildAndRegister();
 
         GTFORecipeMaps.GREENHOUSE_RECIPES.recipeBuilder()
-                .EUt(GTValues.VA[ZPM])
-                .duration(2000)
+                .EUt(1920)
+                .duration(600)
                 .input(MetaItems.FERTILIZER,2)
                 .input(GTQTMetaBlocks.PINE_SAPLING,1)
                 .fluidInputs(Water.getFluid(20000))

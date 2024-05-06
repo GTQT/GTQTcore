@@ -50,8 +50,7 @@ import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.common.crafting.ToolHeadReplaceRecipe.setToolHeadForTool;
 import static gregtech.common.items.MetaItems.*;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
-import static keqing.gtqtcore.api.unification.GTQTMaterials.Asphalt;
-import static keqing.gtqtcore.api.unification.GTQTMaterials.Gabbro;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.material.info.EPMaterialFlags.GENERATE_CURVED_PLATE;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.*;
 import static keqing.gtqtcore.common.items.metaitems.GTQTMetaToolItems.*;
@@ -734,7 +733,7 @@ public class GTQTRecipes {
     }
     public static void processMilled(OrePrefix milledPrefix, Material material, OreProperty property) {
         GTQTcoreRecipeMaps.ISA_MILL_GRINDER.recipeBuilder()
-                .EUt(GTValues.VA[ZPM])
+                .EUt(GTValues.VA[EV])
                 .duration(1500)
                 .input(OrePrefix.crushed, material, 16)
                 .output(milledPrefix, material, 16)
@@ -743,13 +742,32 @@ public class GTQTRecipes {
                 .buildAndRegister();
 
         GTQTcoreRecipeMaps.ISA_MILL_GRINDER.recipeBuilder()
-                .EUt(GTValues.VA[ZPM])
+                .EUt(GTValues.VA[EV])
                 .duration(1200)
                 .input(OrePrefix.crushed, material, 16)
                 .output(milledPrefix, material, 32)
                 .circuitMeta(10)
                 .grindBallTier(2)
                 .buildAndRegister();
+
+        DIGESTER_RECIPES.recipeBuilder()
+                .fluidInputs(HighlyPurifiedCoalTar.getFluid(100))
+                .fluidInputs(NitricAcid.getFluid(100))
+                .fluidInputs(Oxygen.getFluid(1000))
+                .input(dust, Salt, 4)
+                .input(ore, material, 16)
+                .output(crushed, material, 64)
+                .output(crushed, material, 64)
+                .circuitMeta(1)
+                .duration(1200).EUt(480).buildAndRegister();
+
+        DISSOLUTION_TANK_RECIPES.recipeBuilder()
+                .fluidInputs(NitricAcid.getFluid(100))
+                .input(dust, Alunite, 1)
+                .input(crushed, material, 32)
+                .output(dust, material, 64)
+                .circuitMeta(1)
+                .duration(300).EUt(480).buildAndRegister();
     }
 
     private static void gcmTool(OrePrefix prefix, Material material, ToolProperty property) {

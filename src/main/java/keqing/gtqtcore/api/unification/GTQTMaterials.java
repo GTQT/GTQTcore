@@ -545,6 +545,17 @@ public class GTQTMaterials {
     public static Material Tacla;
     public static Material Nbclb;
     public static Material Taclb;
+    public static Material IronFront;
+    public static Material CopperFront;
+    public static Material BandedIronFront;
+    public static Material BrownLimoniteFront;
+    public static Material YellowLimoniteFront;
+    public static Material ChromiteFront;
+    public static Material IlmeniteFront;
+    public static Material MagnetiteFront;
+    public static Material PyriteFront;
+    public static Material TantaliteFront;
+
 
     //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/api/unification/GSMaterials.java
 

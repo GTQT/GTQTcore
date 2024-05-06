@@ -374,7 +374,7 @@ public class GTQTcoreRecipeMaps {
                 3, 3, 3, 3, new SimpleRecipeBuilder(), false);
 
         CLARIFIER = new RecipeMap<>("clarifire",
-                1, 1, 1, 1, new SimpleRecipeBuilder(), false);
+                3, 3, 3, 3, new SimpleRecipeBuilder(), false);
 
         ELEOIL = new RecipeMap<>("ele_oil",
                 0, 0, 2, 2, new SimpleRecipeBuilder(), false);
