@@ -734,7 +734,7 @@ public class GTQTRecipes {
     public static void processMilled(OrePrefix milledPrefix, Material material, OreProperty property) {
         GTQTcoreRecipeMaps.ISA_MILL_GRINDER.recipeBuilder()
                 .EUt(GTValues.VA[EV])
-                .duration(1500)
+                .duration(1200)
                 .input(OrePrefix.crushed, material, 16)
                 .output(milledPrefix, material, 16)
                 .circuitMeta(11)
@@ -743,12 +743,19 @@ public class GTQTRecipes {
 
         GTQTcoreRecipeMaps.ISA_MILL_GRINDER.recipeBuilder()
                 .EUt(GTValues.VA[EV])
-                .duration(1200)
+                .duration(900)
                 .input(OrePrefix.crushed, material, 16)
                 .output(milledPrefix, material, 32)
                 .circuitMeta(10)
                 .grindBallTier(2)
                 .buildAndRegister();
+
+        DIGESTER_RECIPES.recipeBuilder()
+                .fluidInputs(HydrochloricAcid.getFluid(100))
+                .input(OrePrefix.crushed, material, 16)
+                .output(milledPrefix, material, 16)
+                .circuitMeta(1)
+                .duration(1200).EUt(1920).buildAndRegister();
 
         DIGESTER_RECIPES.recipeBuilder()
                 .fluidInputs(HighlyPurifiedCoalTar.getFluid(100))
@@ -759,7 +766,7 @@ public class GTQTRecipes {
                 .output(crushed, material, 64)
                 .output(crushed, material, 64)
                 .circuitMeta(1)
-                .duration(1200).EUt(480).buildAndRegister();
+                .duration(600).EUt(480).buildAndRegister();
 
         DISSOLUTION_TANK_RECIPES.recipeBuilder()
                 .fluidInputs(NitricAcid.getFluid(100))

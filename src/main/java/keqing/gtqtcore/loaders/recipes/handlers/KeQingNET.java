@@ -17,8 +17,9 @@ import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 import net.minecraftforge.oredict.OreDictionary;
 
-import static gregicality.multiblocks.api.unification.GCYMMaterials.TantalumCarbide;
-import static gregicality.multiblocks.api.unification.GCYMMaterials.WatertightSteel;
+import static gregicality.multiblocks.api.unification.GCYMMaterials.*;
+import static gregicality.multiblocks.common.metatileentities.GCYMMetaTileEntities.LARGE_DISTILLERY;
+import static gregicality.multiblocks.common.metatileentities.GCYMMetaTileEntities.LARGE_MACERATOR;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.MarkerMaterials.*;
@@ -43,6 +44,8 @@ import static gregtech.common.metatileentities.MetaTileEntities.ROTOR_HOLDER;
 import static gregtechfoodoption.machines.GTFOTileEntities.GREENHOUSE;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
+import static keqing.gtqtcore.common.block.blocks.GTQTIsaCasing.CasingType.FLOTATION_CASING_GEARBOX;
+import static keqing.gtqtcore.common.block.blocks.GTQTIsaCasing.CasingType.ISA_MILL_CASING_GEARBOX;
 import static keqing.gtqtcore.common.block.blocks.GTQTKQCC.CasingType.COMPUTER_VENT;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.*;
@@ -339,6 +342,103 @@ public class KeQingNET {
                         .EUt(VA[MV]))
                 .output(INTEGRATED_MINING_DIVISION)
                 .duration(2000).EUt(480).buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(HULL[EV])
+                .input(frameGt, TungstenSteel, 4)
+                .input(plate, TitaniumTungstenCarbide, 4)
+                .input(circuit, MarkerMaterials.Tier.EV, 4)
+                .input(ELECTRIC_PISTON_EV, 2)
+                .input(gear, TanmolyiumBetaC, 2)
+                .input(gearSmall, EglinSteel, 4)
+                .input(screw, AusteniticStainlessSteel904L, 16)
+                .input(foil, StainlessSteel, 8)
+                .input(cableGtQuadruple, Platinum, 4)
+                .fluidInputs(SolderingAlloy.getFluid(5760))
+                .fluidInputs(Lubricant.getFluid(3000))
+                .fluidInputs(CobaltBrass.getFluid(L * 4))
+                .output(VACUUM_DRYING_FURNACE)
+                .scannerResearch(b -> b
+                        .researchStack(DIGESTER.getStackForm())
+                        .EUt(VA[HV])
+                        .duration(600))
+                .EUt(VA[EV])
+                .duration(1200)
+                .buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(HULL[EV])
+                .input(frameGt, StainlessSteel, 4)
+                .input(plateDense, Iridium, 4)
+                .input(circuit, MarkerMaterials.Tier.EV, 4)
+                .input(ELECTRIC_PUMP_EV, 2)
+                .input(screw, TanmolyiumBetaC, 2)
+                .input(plate, TitaniumTungstenCarbide, 16)
+                .input(foil, TungstenSteel, 8)
+                .input(cableGtQuadruple, Palladium, 4)
+                .fluidInputs(SolderingAlloy.getFluid(5760))
+                .fluidInputs(Zylon.getFluid(5760))
+                .fluidInputs(CobaltBrass.getFluid(L * 4))
+                .output(FROTH_FLOTATION_TANK)
+                .scannerResearch(b -> b
+                        .researchStack(DISSOLUTION_TANK.getStackForm())
+                        .EUt(VA[HV])
+                        .duration(600))
+                .EUt(VA[EV])
+                .duration(1200)
+                .buildAndRegister();
+        //  Isa Mill
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(frameGt, IncoloyMA956)
+                .inputs(GTQTMetaBlocks.ISA_CASING.getItemVariant(ISA_MILL_CASING_GEARBOX, 4))
+                .input(COMPONENT_GRINDER_TUNGSTEN, 16)
+                .input(circuit, MarkerMaterials.Tier.LuV, 8)
+                .input(gear, Inconel625, 8)
+                .input(plate, Inconel625, 32)
+                .input(plateDouble, HSSE, 8)
+                .input(plateDouble, Stellite100, 8)
+                .input(screw, HSSG, 64)
+                .input(wireFine, NiobiumTitanium, 64)
+                .input(wireFine, NiobiumTitanium, 64)
+                .input(foil, Titanium, 32)
+                .fluidInputs(Zeron100.getFluid(2304))
+                .fluidInputs(Trinium.getFluid(4608))
+                .fluidInputs(HastelloyC276.getFluid(4608))
+                .output(ISA_MILL)
+                .EUt(VA[LuV])
+                .duration(3200)
+                .scannerResearch(b -> b
+                        .researchStack(LARGE_MACERATOR.getStackForm())
+                        .EUt(VA[IV])
+                        .duration(1200))
+                .buildAndRegister();
+
+        //  Flotation Factory
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(frameGt, HastelloyX)
+                .inputs(GTQTMetaBlocks.ISA_CASING.getItemVariant(FLOTATION_CASING_GEARBOX, 4))
+                .input(CONVEYOR_MODULE_LuV, 8)
+                .input(ELECTRIC_PUMP_LuV, 8)
+                .input(circuit, MarkerMaterials.Tier.LuV, 8)
+                .input(gear, HastelloyN, 8 )
+                .input(plate, HastelloyN, 32)
+                .input(plateDouble, Osmiridium, 8)
+                .input(plateDouble, MaragingSteel300, 8)
+                .input(screw, Trinium, 32)
+                .input(wireFine, YttriumBariumCuprate, 64)
+                .input(wireFine, YttriumBariumCuprate, 64)
+                .input(foil, NiobiumNitride, 32)
+                .fluidInputs(WatertightSteel.getFluid(2304))
+                .fluidInputs(NaquadahEnriched.getFluid(4608))
+                .fluidInputs(TitaniumTungstenCarbide.getFluid(4608))
+                .output(FLOTATION_FACTORY)
+                .EUt(VA[LuV])
+                .duration(3200)
+                .scannerResearch(b -> b
+                        .researchStack(LARGE_DISTILLERY.getStackForm())
+                        .EUt(VA[IV])
+                        .duration(1200))
+                .buildAndRegister();
 
         //Arc
         ASSEMBLER_RECIPES.recipeBuilder()

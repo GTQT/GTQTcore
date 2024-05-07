@@ -1,13 +1,20 @@
 package keqing.gtqtcore.loaders.recipes.handlers;
 
+import gregtech.api.block.VariantBlock;
+import gregtech.api.recipes.ModHandler;
 import gregtech.api.recipes.RecipeMaps;
+import gregtech.api.unification.material.Material;
+import gregtech.api.unification.stack.UnificationEntry;
+import gregtech.common.ConfigHolder;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTADVBlock;
+import keqing.gtqtcore.common.block.blocks.GTQTIsaCasing;
+import net.minecraft.util.IStringSerializable;
 
 import static gregicality.multiblocks.api.recipes.GCYMRecipeMaps.ALLOY_BLAST_RECIPES;
+import static gregicality.multiblocks.api.unification.GCYMMaterials.TitaniumCarbide;
 import static gregtech.api.GTValues.*;
-import static gregtech.api.recipes.RecipeMaps.CHEMICAL_RECIPES;
-import static gregtech.api.recipes.RecipeMaps.MIXER_RECIPES;
+import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.BLAST_ARC_RECIPES;
@@ -22,8 +29,17 @@ public class MachineCasing {
         DustMixer();
         CasingAssembler();
         Arc();
+        CasingRecipes();
+    }
+
+    private static void CasingRecipes() {
+        createCasingRecipe("red_steel_casing",
+                GTQTMetaBlocks.ISA_CASING,
+                GTQTIsaCasing.CasingType.VACUUM_CASING,
+                RedSteel);
 
     }
+
 
     private static void Arc() {
         BLAST_ARC_RECIPES.recipeBuilder()
@@ -54,6 +70,18 @@ public class MachineCasing {
     }
 
     private static void DustMixer() {
+        MIXER_RECIPES.recipeBuilder()
+                .input(dust, Titanium, 5)
+                .input(dust, Molybdenum, 5)
+                .input(dust, Vanadium, 2)
+                .input(dust, Chrome, 3)
+                .input(dust, Aluminium)
+                .circuitMeta(16)
+                .output(dust, TanmolyiumBetaC, 16)
+                .EUt(VA[EV])
+                .duration(400)
+                .buildAndRegister();
+
         MIXER_RECIPES.recipeBuilder()
                 .input(dust,Cobalt,4)
                 .input(dust,Chrome,3)
@@ -218,28 +246,28 @@ public class MachineCasing {
     }
 
     private static void CasingAssembler() {
-        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(200).EUt(120)
+        ASSEMBLER_RECIPES.recipeBuilder().duration(200).EUt(120)
                 .input(plate,Talonite, 6)
                 .input(frameGt,Talonite, 1)
                 .circuitMeta(6)
                 .outputs(GTQTMetaBlocks.ADV_BLOCK.getItemVariant(GTQTADVBlock.CasingType.Talonite))
                 .buildAndRegister();
 
-        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(200).EUt(120)
+        ASSEMBLER_RECIPES.recipeBuilder().duration(200).EUt(120)
                 .input(plate,RhodiumPlatedPalladium, 6)
                 .input(frameGt,RhodiumPlatedPalladium, 1)
                 .circuitMeta(6)
                 .outputs(GTQTMetaBlocks.TURBINE_CASING.getItemVariant(PD_TURBINE_CASING))
                 .buildAndRegister();
 
-        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(200).EUt(120)
+        ASSEMBLER_RECIPES.recipeBuilder().duration(200).EUt(120)
                 .input(plate,Naquadah, 6)
                 .input(frameGt,Naquadah, 1)
                 .circuitMeta(6)
                 .outputs(GTQTMetaBlocks.TURBINE_CASING.getItemVariant(NQ_TURBINE_CASING))
                 .buildAndRegister();
 
-        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(200).EUt(30)
+        ASSEMBLER_RECIPES.recipeBuilder().duration(200).EUt(30)
                 .input(plate,Steel, 4)
                 .input(gear,Steel, 1)
                 .input(frameGt,Talonite, 1)
@@ -248,18 +276,125 @@ public class MachineCasing {
                 .outputs(GTQTMetaBlocks.TURBINE_CASING1.getItemVariant(CLARIFIER_CASING,4))
                 .buildAndRegister();
 
-        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(200).EUt(120)
+        ASSEMBLER_RECIPES.recipeBuilder().duration(200).EUt(120)
                 .input(plate,Orichalcum, 6)
                 .input(frameGt,Orichalcum, 1)
                 .circuitMeta(6)
                 .outputs(GTQTMetaBlocks.TURBINE_CASING1.getItemVariant(ST_TURBINE_CASING))
                 .buildAndRegister();
 
-        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(200).EUt(120)
+        ASSEMBLER_RECIPES.recipeBuilder().duration(200).EUt(120)
                 .input(plate,Adamantite, 6)
                 .input(frameGt,Adamantite, 1)
                 .circuitMeta(6)
                 .outputs(GTQTMetaBlocks.TURBINE_CASING1.getItemVariant(AD_TURBINE_CASING))
+                .buildAndRegister();
+    }
+    /**
+     * Create common Metal Casing recipe.
+     *
+     * <p>
+     *     This method will add two recipe of each Metal Casing,
+     *     one is crafting table recipe by Hammer (hard) and Wrench,
+     *     another is assembler recipe.
+     * </p>
+     *
+     * @param regName           Register Name of recipe.
+     * @param outputCasingType  Variant Block class of {@code MetaBlock}.
+     * @param outputCasing      Casing type of {@code MetaBlock}.
+     * @param material          Basic {@code material} of Metal Casing,
+     *                          means plate and frame material.
+     */
+    private static <T extends Enum<T> & IStringSerializable> void createCasingRecipe(String regName,
+                                                                                     VariantBlock<T> outputCasingType,
+                                                                                     T outputCasing,
+                                                                                     Material material) {
+        ModHandler.addShapedRecipe(true, regName, outputCasingType.getItemVariant(outputCasing, ConfigHolder.recipes.casingsPerCraft),
+                "PhP", "PFP","PwP",
+                'P', new UnificationEntry(plate, material),
+                'F', new UnificationEntry(frameGt, material));
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(plate, material, 6)
+                .input(frameGt, material)
+                .circuitMeta(6)
+                .outputs(outputCasingType.getItemVariant(outputCasing, ConfigHolder.recipes.casingsPerCraft))
+                .EUt(VA[LV])
+                .duration(50)
+                .buildAndRegister();
+    }
+
+    /**
+     * Create Metal Casing recipe with different plate-frame material.
+     *
+     * <p>
+     *     This method will add two recipe of each Metal Casing,
+     *     one is crafting table recipe by Hammer (hard) and Wrench,
+     *     another is assembler recipe.
+     * </p>
+     *
+     * @param regName           Register Name of recipe.
+     * @param outputCasingType  Variant Block class of {@code MetaBlock}.
+     * @param outputCasing      Casing type of {@code MetaBlock}.
+     * @param plateMaterial     Plate {@code material} of Metal Casing.
+     * @param frameMaterial     Frame {@code material} of Metal Casing.
+     */
+    private static <T extends Enum<T> & IStringSerializable> void createCasingRecipe(String regName,
+                                                                                     VariantBlock<T> outputCasingType,
+                                                                                     T outputCasing,
+                                                                                     Material plateMaterial,
+                                                                                     Material frameMaterial) {
+        ModHandler.addShapedRecipe(true, regName, outputCasingType.getItemVariant(outputCasing, ConfigHolder.recipes.casingsPerCraft),
+                "PhP", "PFP","PwP",
+                'P', new UnificationEntry(plate, plateMaterial),
+                'F', new UnificationEntry(frameGt, frameMaterial));
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(plate, plateMaterial, 6)
+                .input(frameGt, frameMaterial)
+                .circuitMeta(6)
+                .outputs(outputCasingType.getItemVariant(outputCasing, ConfigHolder.recipes.casingsPerCraft))
+                .EUt(VA[LV])
+                .duration(50)
+                .buildAndRegister();
+    }
+
+    /**
+     * Create Metal Casing recipe with different plate-frame material and new double plate material.
+     *
+     * <p>
+     *     This method will add two recipe of each Metal Casing,
+     *     one is crafting table recipe by Hammer (hard) and Wrench,
+     *     another is assembler recipe.
+     * </p>
+     *
+     * @param regName              Register Name of recipe.
+     * @param outputCasingType     Variant Block class of {@code MetaBlock}.
+     * @param outputCasing         Casing type of {@code MetaBlock}.
+     * @param plateDoubleMaterial  Double Plate {@code material} of Metal Casing.
+     * @param plateMaterial        Plate {@code material} of Metal Casing.
+     * @param frameMaterial        Frame {@code material} of Metal Casing.
+     */
+    private static <T extends Enum<T> & IStringSerializable> void createCasingRecipe(String regName,
+                                                                                     VariantBlock<T> outputCasingType,
+                                                                                     T outputCasing,
+                                                                                     Material plateDoubleMaterial,
+                                                                                     Material plateMaterial,
+                                                                                     Material frameMaterial) {
+        ModHandler.addShapedRecipe(true, regName, outputCasingType.getItemVariant(outputCasing, ConfigHolder.recipes.casingsPerCraft),
+                "PhP", "TFT","PwP",
+                'P', new UnificationEntry(plateDouble, plateDoubleMaterial),
+                'T', new UnificationEntry(plate, plateMaterial),
+                'F', new UnificationEntry(frameGt, frameMaterial));
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(plateDouble, plateDoubleMaterial, 4)
+                .input(plate, plateMaterial, 2)
+                .input(frameGt, frameMaterial)
+                .circuitMeta(6)
+                .outputs(outputCasingType.getItemVariant(outputCasing, ConfigHolder.recipes.casingsPerCraft))
+                .EUt(VA[LV])
+                .duration(50)
                 .buildAndRegister();
     }
 }
