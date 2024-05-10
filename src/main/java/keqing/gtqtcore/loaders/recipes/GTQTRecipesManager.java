@@ -43,6 +43,7 @@ public class GTQTRecipesManager {
         AlgaeChain.init();
         CTABChain.init();
         TitanateChain.init();
+        NuclearLine.init();
         OceanChain.init();
         GermaniumChain.init();
         NaquadahChain.init();

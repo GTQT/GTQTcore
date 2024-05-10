@@ -8,6 +8,9 @@ public class GTQTElements {
     public static final Element Li7 = Elements.add(3, 4, -1, null, "Lithium-7", "Li-7", true);
     public static final Element Be7 = Elements.add(4, 3, -1, null, "Beryllium-7", "Be-7", true);
 
+    public static final Element Carbon16 = Elements.add(6, 10, -1, null, "Carbon-16", "Carbon-16", true);
+    public static final Element Ra226 = Elements.add(88, 138, -1, null, "Radium-226", "Radium-226", true);
+
     public static final Element Or = Elements.add(130, 200, -1, null, "Orichalcum", "Or", false);
     public static final Element Vb = Elements.add(152, 226, -1, null, "Vibranium", "Vb", false);
     public static final Element Ad = Elements.add(222, 580, -1, null, "Adamantium", "Ad", false);

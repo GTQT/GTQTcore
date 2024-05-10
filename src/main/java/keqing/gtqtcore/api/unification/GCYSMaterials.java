@@ -9,6 +9,8 @@ public class GCYSMaterials {
     public static Material Lithium6;
     public static Material Lithium7;
     public static Material Beryllium7;
+    public static Material Radium226;
+    public static Material Carbon16;
     public static Material Orichalcum;
     public static Material Vibranium;
     public static Material Adamantium;

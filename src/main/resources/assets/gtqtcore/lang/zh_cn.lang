@@ -1157,6 +1157,8 @@ gregtech.material.adamantium_unstable=不稳定精金
 gregtech.material.orichalcum_energized=充能山铜
 gregtech.material.adamantium_enriched=富集精金
 gregtech.material.deep_iron=深铁
+gregtech.material.radium_226=镭-226
+gregtech.material.carbon_16=碳-16
 gregtech.material.vibranium_unstable=不稳定振金
 gregtech.material.lanthanum_oxide=氧化镧
 gregtech.material.praseodymium_oxide=氧化镨
@@ -2141,6 +2143,10 @@ gtqtcore.machine.lv_processing_array.name=小型处理阵列（§7LV§r）
 gtqtcore.machine.mv_processing_array.name=小型处理阵列（§bMV§r）
 gtqtcore.machine.hv_processing_array.name=小型处理阵列（§6HV§r）
 
+gtqtcore.machine.rtg.ev.name=同位素温差发电机（§5EV§r）
+gtqtcore.machine.rtg.iv.name=同位素温差发电机（§1IV§r）
+gtqtcore.machine.rtg.luv.name=同位素温差发电机（§dLuV§r）
+
 gregtech.multiblock.lv_processing_array.description=处理阵列可将最多2个单方块机器集成在一个多方块机器中，以实现更高效的自动化。
 gregtech.multiblock.mv_processing_array.description=处理阵列可将最多4个单方块机器集成在一个多方块机器中，以实现更高效的自动化。
 gregtech.multiblock.hv_processing_array.description=处理阵列可将最多8个单方块机器集成在一个多方块机器中，以实现更高效的自动化。
@@ -2883,14 +2889,14 @@ tile.turbinecasing1.precise_assembler_casing_mk2.name=精密装配外壳MK2
 tile.turbinecasing1.precise_assembler_casing_mk3.name=精密装配外壳MK3
 tile.turbine_casing1.galvanize_steel_casing.name=镀锌钢机械外壳
 tile.turbine_casing1.clarifier_casing.name=重力沉降槽
-tile.turbine_casing1.floating_casing.name=工业二浮选槽
+tile.turbine_casing1.floating_casing.name=工业级浮选槽
 metaitem.prospector.uv.name=电动勘探扫描仪（UV）
 metaitem.prospector.uiv.name=电动勘探扫描仪（UIV）
 gtqtcore.machine.mining_drill.name=大型采矿钻机
 recipemap.mining_drill.name=矿机钻井
 
 gtqtcore.machine.bio_centrifuge.name=高速离心机（生物工程）
-recipemap.bio_centrifuge.name=高速离心（生物工程）
+recipemap.bio_centrifuge.name=高速破壁
 
 gtqtcore.machine.msf.name=大型闪蒸器
 gtqtcore.machine.green_house_plus.name=大型温室
@@ -3732,7 +3738,9 @@ metaitem.ae.fluix_firm.tooltip=特殊框架加工而成的水晶束能器，可�
 metaitem.valve.tooltip=我不让你走你就走不了
 item.material.oreprefix.valve=%s阀门
 metaitem.cylinder.tooltip=塞进发动机
-item.material.oreprefix.cylinder=%s气缸
+item.material.oreprefix.cylinder=%s气缸、
+metaitem.pellets.tooltip=迷你核电站
+item.material.oreprefix.pellets=%s燃料靶丸
 metaitem.motor_stick.tooltip=玩机械动力玩的
 item.material.oreprefix.motor_stick=%s传动轴
 metaitem.shell.tooltip=塑料玩具

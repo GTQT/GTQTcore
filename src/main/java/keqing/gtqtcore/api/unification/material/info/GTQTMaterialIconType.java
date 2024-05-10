@@ -15,6 +15,7 @@ public class GTQTMaterialIconType {
     public static final MaterialIconType fcrop = new MaterialIconType("fcrop");
     public static final MaterialIconType leaf = new MaterialIconType("leaf");
     public static final MaterialIconType plate_curved = new MaterialIconType("plate_curved");
+    public static final MaterialIconType pellets = new MaterialIconType("pellets");
     public static final MaterialIconType soldering_iron_head = new MaterialIconType("soldering_iron_head");
 
     public static final MaterialIconType shell = new MaterialIconType("shell");

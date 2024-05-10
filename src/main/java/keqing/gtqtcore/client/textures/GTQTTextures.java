@@ -17,7 +17,7 @@ import static keqing.gtqtcore.api.utils.GTQTUtil.gtqtId;
 public class GTQTTextures {
     public static OrientedOverlayRenderer SUBSONIC_AXIAL_COMPRESSOR_OVERLAY = new OrientedOverlayRenderer("multiblock/subsonic_axial_compressor");
     public static OrientedOverlayRenderer SUPERSONIC_AXIAL_COMPRESSOR_OVERLAY = new OrientedOverlayRenderer("multiblock/supersonic_axial_compressor");
-
+    public static OrientedOverlayRenderer RTG_OVERLAY= new OrientedOverlayRenderer("overlay/rtg");
     public static TextureAtlasSprite PRESSURE_PIPE_SIDE;
     public static TextureAtlasSprite PRESSURE_PIPE_OPEN;
     public static SimpleOverlayRenderer WIRELESS_HATCH_HATCH;
@@ -108,8 +108,6 @@ public class GTQTTextures {
         VACUUM_CASING = new SimpleOverlayRenderer("multiblock/isa_casing/vacuum_casing");
         NITINOL_CASING = new SimpleOverlayRenderer("multiblock/casings/nitinol_machine_casing");
         MACERATOR_CASING = new SimpleOverlayRenderer("multiblock/casing/macerator_casing");
-
-        PRECISE_ASSEMBLER_CASING_MK1 = new SimpleOverlayRenderer("multiblock/casing/precise_assembler_casing_mk1");
         PRECISE_ASSEMBLER_CASING_MK2= new SimpleOverlayRenderer("multiblock/casing/precise_assembler_casing_mk2");
         PRECISE_ASSEMBLER_CASING_MK3 = new SimpleOverlayRenderer("multiblock/casing/precise_assembler_casing_mk3");
         GALVANIZE_STEEL_CASING = new SimpleOverlayRenderer("multiblock/casing/galvanize_steel_casing");

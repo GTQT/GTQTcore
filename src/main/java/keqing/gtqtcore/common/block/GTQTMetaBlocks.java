@@ -33,6 +33,7 @@ public class GTQTMetaBlocks {
     public static GTQTIsaCasing ISA_CASING;
     public static GTQTElectronMicroscope ELECTRON_MICROSCOPE;
     public static GTQTElectrobath ELECTROBATH;
+    public static GTQTParticleAccelerator PARTICLE_ACCELERATOR;
     public static GTQTRoad ROAD;
     public static GTQTKQCC KQCC;
     public static GTQTPowerSupply POWER;
@@ -75,6 +76,8 @@ public class GTQTMetaBlocks {
 
         ELECTROBATH = new GTQTElectrobath();
         ELECTROBATH.setRegistryName("electrobath");
+        PARTICLE_ACCELERATOR = new GTQTParticleAccelerator();
+        PARTICLE_ACCELERATOR.setRegistryName("particle_accelerator");
         KQCC = new GTQTKQCC();
         KQCC.setRegistryName("computer_competent");
         POWER = new GTQTPowerSupply();
@@ -114,6 +117,7 @@ public class GTQTMetaBlocks {
         registerItemModel(WIRE_COIL);
         registerItemModel(QUANTUM_CASING);
         registerItemModel(TURBINE_CASING);
+        registerItemModel(PARTICLE_ACCELERATOR);
         registerItemModel(ROAD);
         registerItemModel(TURBINE_CASING1);
         registerItemModel(QUANTUM_CONSTRAINT_CASING);

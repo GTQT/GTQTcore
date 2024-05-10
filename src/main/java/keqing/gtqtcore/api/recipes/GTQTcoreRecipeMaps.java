@@ -131,6 +131,7 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<FlowRateRecipeBuilder> HEAT_EXCHANGE_RECIPES;
     public static final RecipeMap<PrimitiveRecipeBuilder> HEAT_EXCHANGE;
     public static final RecipeMap<FuelRecipeBuilder> STAR_MIXER;
+    public static final RecipeMap<FuelRecipeBuilder> RTG_RECIPES;
     public static final RecipeMap<FuelRecipeBuilder> PLASMA_FORGE;
     public static final RecipeMap<FuelRecipeBuilder> STAR_BIOMIMETIC_FACTORY;
     public static final RecipeMap<NoCoilTemperatureRecipeBuilder> MOLECULAR_DISTILLATION_RECIPES;
@@ -440,6 +441,11 @@ public class GTQTcoreRecipeMaps {
         NAQUADAH_REACTOR_RECIPES = new RecipeMap<>("naquadah_reactor_recipes", 0,  0,   1,  0, new FuelRecipeBuilder(), false)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, ProgressWidget.MoveType.HORIZONTAL)
                 .setSound(GTSoundEvents.COMBUSTION)
+                .allowEmptyOutput();
+
+        RTG_RECIPES = new RecipeMap<>("rtg_recipes", 1,  1,  1, 0, new FuelRecipeBuilder(), false)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL)
+                .setSound(GTSoundEvents.ARC)
                 .allowEmptyOutput();
 
         //  Hyper Reactor Mk I Recipemap

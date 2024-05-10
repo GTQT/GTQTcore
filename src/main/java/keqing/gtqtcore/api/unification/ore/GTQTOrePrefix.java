@@ -35,6 +35,9 @@ public class GTQTOrePrefix {
     public static final OrePrefix electrode = new OrePrefix("electrode", -1, null, GTQTMaterialIconType.electrode, ENABLE_UNIFICATION,
             mat -> mat.hasFlag(GENERATE_ELECTRODE));
 
+    public static final OrePrefix pellets = new OrePrefix("pellets", -1, null, GTQTMaterialIconType.pellets, ENABLE_UNIFICATION,
+            mat -> mat.hasFlag(GENERATE_PELLETS));
+
     public static final OrePrefix swarm = new OrePrefix("swarm", M, null, GTQTMaterialIconType.swarm, ENABLE_UNIFICATION,
             OrePrefix.Conditions.hasIngotProperty,  mat ->Collections.singletonList(I18n.format("metaitem.swarm.tooltip")));
 

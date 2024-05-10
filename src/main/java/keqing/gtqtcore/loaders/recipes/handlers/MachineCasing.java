@@ -276,6 +276,15 @@ public class MachineCasing {
                 .outputs(GTQTMetaBlocks.TURBINE_CASING1.getItemVariant(CLARIFIER_CASING,4))
                 .buildAndRegister();
 
+        ASSEMBLER_RECIPES.recipeBuilder().duration(200).EUt(1920)
+                .input(plate,TungstenSteel, 4)
+                .input(gear,TungstenSteel, 1)
+                .input(frameGt,NanometerBariumTitanate, 1)
+                .fluidInputs(Zylon.getFluid(576))
+                .circuitMeta(6)
+                .outputs(GTQTMetaBlocks.TURBINE_CASING1.getItemVariant(FLOATING_CASING,4))
+                .buildAndRegister();
+
         ASSEMBLER_RECIPES.recipeBuilder().duration(200).EUt(120)
                 .input(plate,Orichalcum, 6)
                 .input(frameGt,Orichalcum, 1)

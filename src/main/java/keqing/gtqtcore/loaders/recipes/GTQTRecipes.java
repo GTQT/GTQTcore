@@ -750,13 +750,16 @@ public class GTQTRecipes {
                 .grindBallTier(2)
                 .buildAndRegister();
 
-        DIGESTER_RECIPES.recipeBuilder()
+        //磨球
+        BIO_CENTRIFUGE.recipeBuilder()
                 .fluidInputs(HydrochloricAcid.getFluid(100))
+                .notConsumable(gear,TungstenSteel)
                 .input(OrePrefix.crushed, material, 16)
                 .output(milledPrefix, material, 16)
                 .circuitMeta(1)
                 .duration(1200).EUt(1920).buildAndRegister();
 
+        //矿处
         DIGESTER_RECIPES.recipeBuilder()
                 .fluidInputs(HighlyPurifiedCoalTar.getFluid(100))
                 .fluidInputs(NitricAcid.getFluid(100))
@@ -768,6 +771,7 @@ public class GTQTRecipes {
                 .circuitMeta(1)
                 .duration(600).EUt(480).buildAndRegister();
 
+        //矿处二
         DISSOLUTION_TANK_RECIPES.recipeBuilder()
                 .fluidInputs(NitricAcid.getFluid(100))
                 .input(dust, Alunite, 1)

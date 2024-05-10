@@ -5,8 +5,13 @@ import gregtech.api.unification.material.info.MaterialIconSet;
 import gregtech.api.unification.material.properties.*;
 
 
+import static gregtech.api.GTValues.UEV;
+import static gregtech.api.GTValues.VA;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.info.MaterialFlags.*;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.Plutonium244;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.Thorianite;
+import static keqing.gtqtcore.api.unification.material.info.EPMaterialFlags.GENERATE_PELLETS;
 
 public class EPMaterialPropertyAddition {
     public static void init() {
@@ -16,9 +21,69 @@ public class EPMaterialPropertyAddition {
         AcidicOsmiumSolution.setFormula("OsO4(H2O)(HCl)");
         PalladiumRaw.setFormula("PdCl2?");
 
-        // Dusts
-        Neptunium.setProperty(PropertyKey.DUST, new DustProperty());
+        //  Elements
+        Calcium.setProperty(PropertyKey.FLUID, new FluidProperty());
+        Dubnium.setProperty(PropertyKey.INGOT, new IngotProperty());
+        Dubnium.setProperty(PropertyKey.FLUID, new FluidProperty());
+        Rutherfordium.setProperty(PropertyKey.INGOT, new IngotProperty());
+        Rutherfordium.setProperty(PropertyKey.FLUID, new FluidProperty());
+        Polonium.setProperty(PropertyKey.INGOT, new IngotProperty());
+        Polonium.setProperty(PropertyKey.FLUID, new FluidProperty());
+        Bromine.setProperty(PropertyKey.FLUID, new FluidProperty());
         Iodine.setProperty(PropertyKey.DUST, new DustProperty());
+        Iodine.setProperty(PropertyKey.FLUID, new FluidProperty());
+        Livermorium.setProperty(PropertyKey.INGOT, new IngotProperty());
+        Livermorium.setProperty(PropertyKey.FLUID, new FluidProperty());
+        Seaborgium.setProperty(PropertyKey.INGOT, new IngotProperty());
+        Seaborgium.setProperty(PropertyKey.FLUID, new FluidProperty());
+        Seaborgium.setProperty(PropertyKey.WIRE, new WireProperties(VA[UEV], 32, 32, false));
+        Actinium.setProperty(PropertyKey.INGOT, new IngotProperty());
+        Actinium.setProperty(PropertyKey.FLUID, new FluidProperty());
+        Caesium.setProperty(PropertyKey.FLUID, new FluidProperty());
+        Astatine.setProperty(PropertyKey.FLUID, new FluidProperty());
+        Californium.setProperty(PropertyKey.INGOT, new IngotProperty());
+        Californium.setProperty(PropertyKey.FLUID, new FluidProperty());
+        Curium.setProperty(PropertyKey.INGOT, new IngotProperty());
+        Curium.setProperty(PropertyKey.FLUID, new FluidProperty());
+        Radium.setProperty(PropertyKey.DUST, new DustProperty());
+        Radium.setProperty(PropertyKey.FLUID, new FluidProperty());
+        Neptunium.setProperty(PropertyKey.INGOT, new IngotProperty());
+        Neptunium.setProperty(PropertyKey.FLUID, new FluidProperty());
+        Bohrium.setProperty(PropertyKey.INGOT, new IngotProperty());
+        Bohrium.setProperty(PropertyKey.FLUID, new FluidProperty());
+        Sodium.setProperty(PropertyKey.FLUID, new FluidProperty());
+        Meitnerium.setProperty(PropertyKey.INGOT, new IngotProperty());
+        Meitnerium.setProperty(PropertyKey.FLUID, new FluidProperty());
+        Roentgenium.setProperty(PropertyKey.INGOT, new IngotProperty());
+        Roentgenium.setProperty(PropertyKey.FLUID, new FluidProperty());
+        Copernicium.setProperty(PropertyKey.INGOT, new IngotProperty());
+        Copernicium.setProperty(PropertyKey.FLUID, new FluidProperty());
+        Nihonium.setProperty(PropertyKey.INGOT, new IngotProperty());
+        Nihonium.setProperty(PropertyKey.FLUID, new FluidProperty());
+        Moscovium.setProperty(PropertyKey.INGOT, new IngotProperty());
+        Moscovium.setProperty(PropertyKey.FLUID, new FluidProperty());
+        Tennessine.setProperty(PropertyKey.FLUID, new FluidProperty());
+        Francium.setProperty(PropertyKey.INGOT, new IngotProperty());
+        Francium.setProperty(PropertyKey.FLUID, new FluidProperty());
+        Technetium.setProperty(PropertyKey.INGOT, new IngotProperty());
+        Technetium.setProperty(PropertyKey.FLUID, new FluidProperty());
+        Protactinium.setProperty(PropertyKey.INGOT, new IngotProperty());
+        Protactinium.setProperty(PropertyKey.FLUID, new FluidProperty());
+        Berkelium.setProperty(PropertyKey.INGOT, new IngotProperty());
+        Berkelium.setProperty(PropertyKey.FLUID, new FluidProperty());
+        Einsteinium.setProperty(PropertyKey.INGOT, new IngotProperty());
+        Einsteinium.setProperty(PropertyKey.FLUID, new FluidProperty());
+        Fermium.setProperty(PropertyKey.INGOT, new IngotProperty());
+        Fermium.setProperty(PropertyKey.FLUID, new FluidProperty());
+        Mendelevium.setProperty(PropertyKey.INGOT, new IngotProperty());
+        Mendelevium.setProperty(PropertyKey.FLUID, new FluidProperty());
+        Nobelium.setProperty(PropertyKey.INGOT, new IngotProperty());
+        Nobelium.setProperty(PropertyKey.FLUID, new FluidProperty());
+        Lawrencium.setProperty(PropertyKey.INGOT, new IngotProperty());
+        Lawrencium.setProperty(PropertyKey.FLUID, new FluidProperty());
+        Boron.setProperty(PropertyKey.FLUID, new FluidProperty());
+
+        // Dusts
         Praseodymium.setProperty(PropertyKey.DUST, new DustProperty());
         Scandium.setProperty(PropertyKey.DUST, new DustProperty());
         Gadolinium.setProperty(PropertyKey.DUST, new DustProperty());
@@ -44,10 +109,8 @@ public class EPMaterialPropertyAddition {
         // Fluids
         SodiumHydroxide.setProperty(PropertyKey.FLUID, new FluidProperty());
         SodiumBisulfate.setProperty(PropertyKey.FLUID, new FluidProperty());
-        Bromine.setProperty(PropertyKey.FLUID, new FluidProperty());
-        Bromine.setMaterialIconSet(MaterialIconSet.FLUID);
+
         Germanium.setProperty(PropertyKey.FLUID, new FluidProperty());
-        Iodine.setProperty(PropertyKey.FLUID, new FluidProperty());
         AmmoniumChloride.setProperty(PropertyKey.FLUID, new FluidProperty());
         Hafnium.setProperty(PropertyKey.DUST, new DustProperty());
         Hafnium.setProperty(PropertyKey.INGOT, new IngotProperty());
@@ -86,5 +149,13 @@ public class EPMaterialPropertyAddition {
         NeodymiumMagnetic.addFlags(GENERATE_LONG_ROD);
         NiobiumTitanium.addFlags(GENERATE_FRAME);
         Hafnium.addFlags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_DENSE);
+
+        //pellets
+        Uranium235.addFlags(GENERATE_PELLETS);
+        Uranium238.addFlags(GENERATE_PELLETS);
+        Plutonium239.addFlags(GENERATE_PELLETS);
+        Plutonium241.addFlags(GENERATE_PELLETS);
+        Plutonium244.addFlags(GENERATE_PELLETS);
+        Thorium.addFlags(GENERATE_PELLETS);
     }
 }
