@@ -8,8 +8,27 @@ public class GTQTElements {
     public static final Element Li7 = Elements.add(3, 4, -1, null, "Lithium-7", "Li-7", true);
     public static final Element Be7 = Elements.add(4, 3, -1, null, "Beryllium-7", "Be-7", true);
 
-    public static final Element Carbon16 = Elements.add(6, 10, -1, null, "Carbon-16", "Carbon-16", true);
-    public static final Element Ra226 = Elements.add(88, 138, -1, null, "Radium-226", "Radium-226", true);
+    public static final Element Carbon16 = Elements.add(6, 10, -1, null, "Carbon-16", "C-16", true);
+
+    public static final Element Ra226 = Elements.add(88, 138, -1, null, "Radium-226", "Ra-226", true);
+
+    public static final Element Uranium233 = Elements.add(92, 141, -1, null, "Uranium-233", "U-233", true);
+    public static final Element Uranium234 = Elements.add(92, 142, -1, null, "Uranium-234", "U-234", true);
+    public static final Element Uranium236 = Elements.add(92, 144, -1, null, "Uranium-236", "U-236", true);
+
+    public static final Element Neptunium236 = Elements.add(93, 143, -1, null, "Neptunium-236", "Np-236", true);
+
+    public static final Element Plutonium238 = Elements.add(94, 144, -1, null, "Plutonium-238", "Pu-238", true);
+    public static final Element Plutonium242 = Elements.add(94, 148, -1, null, "Plutonium-242", "Pu-242", true);
+
+    public static final Element Americium241 = Elements.add(95, 146, -1, null, "Americium-241", "Am-241", true);
+    public static final Element Americium242 = Elements.add(95, 147, -1, null, "Americium-242", "Am-242", true);
+    public static final Element Americium243 = Elements.add(95, 148, -1, null, "Americium-243", "Am-243", true);
+
+    public static final Element Curium243 = Elements.add(96, 147, -1, null, "Curium-243", "Cm-243", true);
+    public static final Element Curium245 = Elements.add(96, 149, -1, null, "Curium-245", "Cm-245", true);
+    public static final Element Curium246 = Elements.add(96, 150, -1, null, "Curium-246", "Cm-246", true);
+    public static final Element Curium247 = Elements.add(96, 151, -1, null, "Curium-247", "Cm-247", true);
 
     public static final Element Or = Elements.add(130, 200, -1, null, "Orichalcum", "Or", false);
     public static final Element Vb = Elements.add(152, 226, -1, null, "Vibranium", "Vb", false);

@@ -9,7 +9,8 @@ import static gregtech.api.GTValues.UEV;
 import static gregtech.api.GTValues.VA;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.info.MaterialFlags.*;
-import static keqing.gtqtcore.api.unification.GTQTMaterials.Plutonium244;
+import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.Thorianite;
 import static keqing.gtqtcore.api.unification.material.info.EPMaterialFlags.GENERATE_PELLETS;
 
@@ -82,6 +83,12 @@ public class EPMaterialPropertyAddition {
         Lawrencium.setProperty(PropertyKey.INGOT, new IngotProperty());
         Lawrencium.setProperty(PropertyKey.FLUID, new FluidProperty());
         Boron.setProperty(PropertyKey.FLUID, new FluidProperty());
+
+        //  Isa Mill Ore Process
+        Strontium.setProperty(PropertyKey.DUST, new DustProperty());
+        Strontium.setProperty(PropertyKey.INGOT, new IngotProperty());
+        Strontium.setProperty(PropertyKey.FLUID, new FluidProperty());
+        Promethium.setProperty(PropertyKey.INGOT, new IngotProperty());
 
         // Dusts
         Praseodymium.setProperty(PropertyKey.DUST, new DustProperty());
@@ -157,5 +164,8 @@ public class EPMaterialPropertyAddition {
         Plutonium241.addFlags(GENERATE_PELLETS);
         Plutonium244.addFlags(GENERATE_PELLETS);
         Thorium.addFlags(GENERATE_PELLETS);
+        Curium.addFlags(GENERATE_PELLETS);
+        Americium.addFlags(GENERATE_PELLETS);
+        Neptunium.addFlags(GENERATE_PELLETS);
     }
 }

@@ -108,6 +108,7 @@ public class GTQTTextures {
         VACUUM_CASING = new SimpleOverlayRenderer("multiblock/isa_casing/vacuum_casing");
         NITINOL_CASING = new SimpleOverlayRenderer("multiblock/casings/nitinol_machine_casing");
         MACERATOR_CASING = new SimpleOverlayRenderer("multiblock/casing/macerator_casing");
+        PRECISE_ASSEMBLER_CASING_MK1= new SimpleOverlayRenderer("multiblock/casing/precise_assembler_casing_mk1");
         PRECISE_ASSEMBLER_CASING_MK2= new SimpleOverlayRenderer("multiblock/casing/precise_assembler_casing_mk2");
         PRECISE_ASSEMBLER_CASING_MK3 = new SimpleOverlayRenderer("multiblock/casing/precise_assembler_casing_mk3");
         GALVANIZE_STEEL_CASING = new SimpleOverlayRenderer("multiblock/casing/galvanize_steel_casing");

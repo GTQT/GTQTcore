@@ -774,7 +774,7 @@ public class CPULine {
         //石墨电极线
         //石墨+沥青=浸渍石墨
         FLUID_SOLIDFICATION_RECIPES.recipeBuilder()
-                .duration(2000)
+                .duration(1000)
                 .EUt(8)
                 .input(stick,Graphite,16)
                 .fluidInputs(HighlyPurifiedCoalTar.getFluid(100))

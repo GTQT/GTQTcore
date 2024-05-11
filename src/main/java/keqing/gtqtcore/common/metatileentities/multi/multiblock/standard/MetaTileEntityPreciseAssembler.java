@@ -26,11 +26,13 @@ import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
+import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
 import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.BlockGlassCasing;
 import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.MetaTileEntities;
+import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.capability.GTQTDataCode;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
@@ -43,6 +45,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
@@ -64,10 +67,6 @@ public class MetaTileEntityPreciseAssembler extends MultiMapMultiblockController
     private IOpticalComputationProvider computationProvider;
     private int CasingTier;
     private int InternalCasingTier;
-    private int tier;
-    private static boolean init = false;
-    private static List<IBlockState> finalListCasing;
-    private static List<IBlockState> finalListInternalCasing;
 
     public MetaTileEntityPreciseAssembler(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{
@@ -93,28 +92,30 @@ public class MetaTileEntityPreciseAssembler extends MultiMapMultiblockController
         if (providers != null && providers.size() >= 1) {
             this.computationProvider = (IOpticalComputationProvider)providers.get(0);
         }
-        Object CasingTier = context.get("PAC");
-        Object InternalCasingTier = context.get("PAI");
-
-        this.CasingTier = GTQTUtil.getOrDefault(() -> CasingTier instanceof IHeatingCoilBlockStats,
-                () ->  ((IHeatingCoilBlockStats) CasingTier).getLevel(),
-                BlockWireCoil.CoilType.CUPRONICKEL.getLevel());
+        Object CasingTier = context.get("PACTiredStats");
+        Object InternalCasingTier = context.get("PAITiredStats");
+        this.CasingTier = GTQTUtil.getOrDefault(() -> CasingTier instanceof WrappedIntTired,
+                () -> ((WrappedIntTired)CasingTier).getIntTier(),
+                0);
         this.InternalCasingTier = GTQTUtil.getOrDefault(() -> InternalCasingTier instanceof WrappedIntTired,
                 () -> ((WrappedIntTired)InternalCasingTier).getIntTier(),
                 0);
 
-        this.tier = this.CasingTier = this.InternalCasingTier;
-
         this.writeCustomData(GTQTDataCode.GTQT_CHANNEL_4, buf -> buf.writeInt(this.CasingTier));
     }
-
+    @Override
+    public void receiveCustomData(int dataId, PacketBuffer buf) {
+        super.receiveCustomData(dataId, buf);
+        if(dataId == GTQTValue.UPDATE_TIER){
+            this.CasingTier = buf.readInt();
+        }
+        if(dataId == GTQTValue.REQUIRE_DATA_UPDATE){
+            this.writeCustomData(GTQTValue.UPDATE_TIER,buf1 -> buf1.writeInt(this.CasingTier));
+        }
+    }
     @Override
     public void update() {
         super.update();
-
-        if (this.getWorld().isRemote && this.CasingTier == 0) {
-            this.writeCustomData(GTQTDataCode.GTQT_CHANNEL_7, buf -> {});
-        }
     }
 
     @SuppressWarnings("SpellCheckingInspection")
@@ -153,39 +154,39 @@ public class MetaTileEntityPreciseAssembler extends MultiMapMultiblockController
     }
 
     @SideOnly(Side.CLIENT)
-    @Nonnull
     @Override
     protected ICubeRenderer getFrontOverlay() {
-        return Textures.FUSION_REACTOR_OVERLAY;
+        return Textures.DISTILLATION_TOWER_OVERLAY;
     }
 
-    public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
-        super.renderMetaTileEntity(renderState, translation, pipeline);
-        getFrontOverlay().renderOrientedState(renderState, translation, pipeline, getFrontFacing(), this.recipeMapWorkable.isActive(), this.recipeMapWorkable.isWorkingEnabled());
-    }
 
     @SideOnly(Side.CLIENT)
     @Override
-    public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
-        return switch (this.CasingTier) {
-            case (2) -> GTQTTextures.PRECISE_ASSEMBLER_CASING_MK2;
-            case (3) -> GTQTTextures.PRECISE_ASSEMBLER_CASING_MK3;
-            default -> GTQTTextures.PRECISE_ASSEMBLER_CASING_MK1;
-        };
+    public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
+        switch (this.CasingTier) {
+            case (2) -> {
+                return GTQTTextures.PRECISE_ASSEMBLER_CASING_MK2;
+            }
+            case (3) -> {
+                return GTQTTextures.PRECISE_ASSEMBLER_CASING_MK3;
+            }
+            default -> {
+                return GTQTTextures.PRECISE_ASSEMBLER_CASING_MK1;
+            }
+        }
     }
-
-
 
     @Override
-    public void receiveCustomData(int dataId, PacketBuffer buf) {
-        super.receiveCustomData(dataId, buf);
-        if (dataId == GTQTDataCode.GTQT_CHANNEL_4) {
-            this.CasingTier = buf.readInt();
-        }
-        if (dataId == GTQTDataCode.GTQT_CHANNEL_7) {
-            this.writeCustomData(GTQTDataCode.GTQT_CHANNEL_4, buf1 -> buf1.writeInt(this.CasingTier));
-        }
+    public NBTTagCompound writeToNBT(NBTTagCompound data) {
+        data.setInteger("CasingTier", CasingTier);
+        return super.writeToNBT(data);
     }
+    @Override
+    public void readFromNBT(NBTTagCompound data) {
+        super.readFromNBT(data);
+        CasingTier = data.getInteger("CasingTier");
+    }
+
 
     @Override
     public void writeInitialSyncData(PacketBuffer buf) {

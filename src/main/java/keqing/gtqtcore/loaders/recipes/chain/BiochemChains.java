@@ -80,6 +80,17 @@ public class BiochemChains {
                 .output(dust,SodiumBicarbonate,40)
                 .buildAndRegister();
 
+        LARGE_CHEMICAL_RECIPES.recipeBuilder()
+                .duration(1000)
+                .EUt(30)
+                .input(dust,Salt,40)
+                .fluidInputs(Ammonia.getFluid(40000))
+                .fluidInputs(CarbonDioxide.getFluid(40000))
+                .fluidInputs(Water.getFluid(40000))
+                .fluidOutputs(AmmoniumChloride.getFluid(40000))
+                .output(dust,SodiumBicarbonate,40)
+                .circuitMeta(3)
+                .buildAndRegister();
 
         PR_MIX.recipeBuilder()
                 .duration(1200)

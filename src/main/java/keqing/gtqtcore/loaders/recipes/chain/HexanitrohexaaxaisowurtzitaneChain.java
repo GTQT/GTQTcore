@@ -258,16 +258,6 @@ public class HexanitrohexaaxaisowurtzitaneChain {
 
         //  Nitrogen Monoxide related recipes
         CHEMICAL_RECIPES.recipeBuilder()
-                .fluidInputs(NitrogenDioxide.getFluid(3000))
-                .fluidInputs(Water.getFluid(1000))
-                .circuitMeta(3)
-                .fluidOutputs(NitrogenMonoxide.getFluid(1000))
-                .fluidOutputs(NitricAcid.getFluid(2000))
-                .EUt(VA[HV])
-                .duration(300)
-                .buildAndRegister();
-
-        CHEMICAL_RECIPES.recipeBuilder()
                 .fluidInputs(Ammonia.getFluid(4000))
                 .fluidInputs(Oxygen.getFluid(10000))
                 .fluidOutputs(NitrogenMonoxide.getFluid(4000))

@@ -54,10 +54,10 @@ public class TiredTraceabilityPredicate extends TraceabilityPredicate {
 
         TiredTraceabilityPredicate.MAP_PA_CASING.put(GTQTMetaBlocks.TURBINE_CASING1.getState(GTQTTurbineCasing1.TurbineCasingType.PRECISE_ASSEMBLER_CASING_MK1),
                 new WrappedIntTired(GTQTTurbineCasing1.TurbineCasingType.PRECISE_ASSEMBLER_CASING_MK1, 1));
-        TiredTraceabilityPredicate.MAP_PA_CASING.put(GTQTMetaBlocks.TURBINE_CASING1.getState(GTQTTurbineCasing1.TurbineCasingType.PRECISE_ASSEMBLER_CASING_MK1),
-                new WrappedIntTired(GTQTTurbineCasing1.TurbineCasingType.PRECISE_ASSEMBLER_CASING_MK1, 2));
-        TiredTraceabilityPredicate.MAP_PA_CASING.put(GTQTMetaBlocks.TURBINE_CASING1.getState(GTQTTurbineCasing1.TurbineCasingType.PRECISE_ASSEMBLER_CASING_MK1),
-                new WrappedIntTired(GTQTTurbineCasing1.TurbineCasingType.PRECISE_ASSEMBLER_CASING_MK1, 3));
+        TiredTraceabilityPredicate.MAP_PA_CASING.put(GTQTMetaBlocks.TURBINE_CASING1.getState(GTQTTurbineCasing1.TurbineCasingType.PRECISE_ASSEMBLER_CASING_MK2),
+                new WrappedIntTired(GTQTTurbineCasing1.TurbineCasingType.PRECISE_ASSEMBLER_CASING_MK2, 2));
+        TiredTraceabilityPredicate.MAP_PA_CASING.put(GTQTMetaBlocks.TURBINE_CASING1.getState(GTQTTurbineCasing1.TurbineCasingType.PRECISE_ASSEMBLER_CASING_MK3),
+                new WrappedIntTired(GTQTTurbineCasing1.TurbineCasingType.PRECISE_ASSEMBLER_CASING_MK3, 3));
 
         TiredTraceabilityPredicate.MAP_PA_INTERNAL_CASING.put(MetaBlocks.MACHINE_CASING.getState(BlockMachineCasing.MachineCasingType.LuV),
                 new WrappedIntTired(BlockMachineCasing.MachineCasingType.LuV, 1));

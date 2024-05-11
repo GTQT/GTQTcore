@@ -445,8 +445,7 @@ public class GTQTcoreRecipeMaps {
 
         RTG_RECIPES = new RecipeMap<>("rtg_recipes", 1,  1,  1, 0, new FuelRecipeBuilder(), false)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL)
-                .setSound(GTSoundEvents.ARC)
-                .allowEmptyOutput();
+                .setSound(GTSoundEvents.ARC);
 
         //  Hyper Reactor Mk I Recipemap
         HYPER_REACTOR_MK1_RECIPES = new RecipeMap<>("hyper_reactor_mk1_recipes", 0,  0,  1, 0, new FuelRecipeBuilder(), false)
