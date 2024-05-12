@@ -132,6 +132,7 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<PrimitiveRecipeBuilder> HEAT_EXCHANGE;
     public static final RecipeMap<FuelRecipeBuilder> STAR_MIXER;
     public static final RecipeMap<FuelRecipeBuilder> RTG_RECIPES;
+    public static final RecipeMap<FuelRecipeBuilder> NUCLEAR_RECIPES;
     public static final RecipeMap<FuelRecipeBuilder> PLASMA_FORGE;
     public static final RecipeMap<FuelRecipeBuilder> STAR_BIOMIMETIC_FACTORY;
     public static final RecipeMap<NoCoilTemperatureRecipeBuilder> MOLECULAR_DISTILLATION_RECIPES;
@@ -444,6 +445,10 @@ public class GTQTcoreRecipeMaps {
                 .allowEmptyOutput();
 
         RTG_RECIPES = new RecipeMap<>("rtg_recipes", 1,  1,  1, 0, new FuelRecipeBuilder(), false)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL)
+                .setSound(GTSoundEvents.ARC);
+
+        NUCLEAR_RECIPES = new RecipeMap<>("nuclearr_recipes", 1,  1,  1, 0, new FuelRecipeBuilder(), false)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL)
                 .setSound(GTSoundEvents.ARC);
 

@@ -192,7 +192,7 @@ public class MetaTileEntityMultiblockTank extends MultiblockWithDisplayBase {
                 .widget(new LabelWidget(6, 6, getMetaFullName()))
                 .widget(new TankWidget(importFluids.getTankAt(0), 52, 18, 72, 61)
                         .setBackgroundTexture(GuiTextures.SLOT)
-                        .setContainerClicking(true, true))
+                        .setContainerClicking(false, false))
                 .bindPlayerInventory(entityPlayer.inventory, GuiTextures.SLOT, 0);
     }
 

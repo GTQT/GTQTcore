@@ -83,7 +83,7 @@ public class EPMaterialPropertyAddition {
         Lawrencium.setProperty(PropertyKey.INGOT, new IngotProperty());
         Lawrencium.setProperty(PropertyKey.FLUID, new FluidProperty());
         Boron.setProperty(PropertyKey.FLUID, new FluidProperty());
-
+        Graphene.setProperty(PropertyKey.FLUID, new FluidProperty());
         //  Isa Mill Ore Process
         Strontium.setProperty(PropertyKey.DUST, new DustProperty());
         Strontium.setProperty(PropertyKey.INGOT, new IngotProperty());
