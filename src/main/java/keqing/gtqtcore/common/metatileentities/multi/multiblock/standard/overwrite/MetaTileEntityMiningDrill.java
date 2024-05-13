@@ -3,6 +3,7 @@ package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.overwr
 import gregicality.multiblocks.api.capability.IParallelHatch;
 import gregicality.multiblocks.api.metatileentity.GCYMMultiblockAbility;
 import gregtech.api.capability.IGhostSlotConfigurable;
+import gregtech.api.capability.IMultipleTankHandler;
 import gregtech.api.capability.impl.GhostCircuitItemStackHandler;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.gui.GuiTextures;
@@ -19,6 +20,7 @@ import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.util.GTUtility;
+import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.TooltipHelper;
@@ -34,6 +36,7 @@ import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.recipes.properties.MDProperties;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.MetaTileEntityBlazingBlastFurnace;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -45,6 +48,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import gregtech.api.unification.material.Materials;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.items.IItemHandler;
 
 import javax.annotation.Nonnull;
@@ -52,9 +56,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static gregtech.api.GTValues.VA;
+import static gregtech.api.unification.material.Materials.Lubricant;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.Pyrotheum;
+
 //大矿机
 public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
-    int tier;
+    int tier=1;
     int casing;
     int tube;
     int drilla;
@@ -64,7 +71,7 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
 
     public MetaTileEntityMiningDrill(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.MINING_DRILL_RECIPES );
-        this.recipeMapWorkable = new IndustrialDrillWorkableHandler(this, true);
+        this.recipeMapWorkable = new IndustrialDrillWorkableHandler(this);
     }
 
     @Override
@@ -125,6 +132,7 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
                 .where('A', TiredTraceabilityPredicate.CP_CASING
                         .or(abilities(MultiblockAbility.MAINTENANCE_HATCH).setExactLimit(1).setPreviewCount(1))
                         .or(abilities(MultiblockAbility.EXPORT_ITEMS).setMinGlobalLimited(1).setMaxGlobalLimited(4).setPreviewCount(1))
+                        .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setMinGlobalLimited(1).setMaxGlobalLimited(1).setPreviewCount(1))
                         .or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(2).setPreviewCount(2)))
                 .where('B', states(MetaBlocks.FRAMES.get(Materials.Steel).getBlock(Materials.Steel)))
                 .where('H', states(MetaBlocks.FRAMES.get(Materials.Steel).getBlock(Materials.Steel)))
@@ -143,6 +151,11 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
         super.addDisplayText(textList);
         if(casing!=tube)
             textList.add(new TextComponentTranslation("gtqtcore.equal", casing,tube));
+        if (getInputFluidInventory() != null) {
+            FluidStack LubricantStack = getInputFluidInventory().drain(Lubricant.getFluid(Integer.MAX_VALUE), false);
+            int liquidOxygenAmount = LubricantStack == null ? 0 : LubricantStack.amount;
+            textList.add(new TextComponentTranslation("gtqtcore.multiblock.ma.amount", TextFormattingUtil.formatNumbers((liquidOxygenAmount))));
+        }
         textList.add(new TextComponentTranslation("gtqtcore.md",tier, drilla, naijiu));
         textList.add(new TextComponentTranslation("循环：%s 配方：%s",cycle,circuit));
     }
@@ -293,13 +306,10 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
     }
     protected class IndustrialDrillWorkableHandler extends MultiblockRecipeLogic {
 
-        public IndustrialDrillWorkableHandler(RecipeMapMultiblockController tileEntity, boolean hasPerfectOC) {
-            super(tileEntity, hasPerfectOC);
-        }
-
-        @Override
-        public MetaTileEntityMiningDrill getMetaTileEntity() {
-            return (MetaTileEntityMiningDrill) super.getMetaTileEntity();
+        private final MetaTileEntityMiningDrill combustionEngine;
+        public IndustrialDrillWorkableHandler(RecipeMapMultiblockController tileEntity) {
+            super(tileEntity);
+            this.combustionEngine = (MetaTileEntityMiningDrill) tileEntity;
         }
 
         @Override
@@ -328,14 +338,19 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
         public int getParallelLimit() {
             return (int) Math.pow(2, tier);
         }
+        private final FluidStack LUBRICANT_STACK = Lubricant.getFluid(tier);
 
         protected void updateRecipeProgress() {
+            IMultipleTankHandler inputTank = combustionEngine.getInputFluidInventory();
             if (this.canRecipeProgress && this.drawEnergy(this.recipeEUt, true)) {
                 this.drawEnergy(this.recipeEUt, false);
                 naijiu--;
-                if (++this.progressTime > this.maxProgressTime) {
-                    this.completeRecipe();
-                    if(cycle)addCircuit();
+                if (LUBRICANT_STACK.isFluidStackIdentical(inputTank.drain(LUBRICANT_STACK, false))) {
+                    inputTank.drain(LUBRICANT_STACK, true);
+                    if (++this.progressTime > this.maxProgressTime) {
+                        this.completeRecipe();
+                        if (cycle) addCircuit();
+                    }
                 }
             }
         }

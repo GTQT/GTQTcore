@@ -203,8 +203,8 @@ public class MetaTileEntityElectrobath extends GTQTRecipeMapMultiblockOverwrite 
             textList.add(new TextComponentTranslation("gtqtcore.equal", casingTier,tubeTier));
         textList.add(new TextComponentTranslation("gtqtcore.eleTire",tier, eleTier,GTValues.V[tier]));
         textList.add(new TextComponentTranslation("gregtech.multiblock.ele.1", 5*eleTier,eu,clean));
-        if(modern==0) textList.add(new TextComponentTranslation("gtqtcore.tire1",clean));
-        if(modern==1) textList.add(new TextComponentTranslation("gtqtcore.tire2",clean));
+        if(modern==0) textList.add(new TextComponentTranslation("gtqtcore.tire1",tier));
+        if(modern==1) textList.add(new TextComponentTranslation("gtqtcore.tire2",tier));
         textList.add(new TextComponentTranslation("gtqtcore.parr",ParallelNum,ParallelLim));
         if (getInputFluidInventory() != null) {
             FluidStack STACK = getInputFluidInventory().drain(HydrochloricAcid.getFluid(Integer.MAX_VALUE), false);
@@ -303,11 +303,6 @@ public class MetaTileEntityElectrobath extends GTQTRecipeMapMultiblockOverwrite 
     }
 
     protected class ELELogic extends MultiblockRecipeLogic {
-
-        @Override
-        public int getParallelLimit() {
-            return clean;
-        }
 
         FluidStack COLD_STACK = HydrochloricAcid.getFluid(1);
 

@@ -21,6 +21,7 @@ import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.electrode;
+import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.MSF;
 
 public class OilChains {
     public static void init() {
@@ -547,7 +548,7 @@ public class OilChains {
                 .duration(400).EUt(60).buildAndRegister();
 
         //煤油
-        DISTILLATION_RECIPES.recipeBuilder()
+        SFM.recipeBuilder()
                 .fluidInputs(CoalTar.getFluid(2000))
                 .fluidOutputs(Naphthalene.getFluid(600))
                 .fluidOutputs(HydrogenSulfide.getFluid(500))

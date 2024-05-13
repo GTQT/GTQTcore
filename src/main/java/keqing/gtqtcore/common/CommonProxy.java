@@ -274,6 +274,11 @@ public class CommonProxy {
         GTQTLog.logger.info("Registering recipes...");
 
 
+        NeutronActivatorIOPartProperty.registeredPart(1,"质子");
+        NeutronActivatorIOPartProperty.registeredPart(2,"氘核");
+        NeutronActivatorIOPartProperty.registeredPart(3,"氚核");
+        NeutronActivatorIOPartProperty.registeredPart(4,"氦核（α粒子）");
+        NeutronActivatorIOPartProperty.registeredPart(5,"电子");
         registerCasingTier(0, "一级");
         registerCasingTier(1, "二级");
         registerCasingTier(2, "三级");

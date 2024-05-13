@@ -7,8 +7,10 @@ import gregtech.api.GTValues;
 import gregtech.api.block.IHeatingCoilBlockStats;
 import gregtech.api.capability.IEnergyContainer;
 import gregtech.api.capability.IMufflerHatch;
+import gregtech.api.capability.IMultipleTankHandler;
 import gregtech.api.capability.IOpticalComputationProvider;
 import gregtech.api.capability.impl.EnergyContainerList;
+import gregtech.api.capability.impl.FluidTankList;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.resources.TextureArea;
@@ -21,6 +23,7 @@ import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.pattern.TraceabilityPredicate;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.util.TextComponentUtil;
+import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.TooltipHelper;
@@ -44,6 +47,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -52,6 +56,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 
+import static gregtech.api.unification.material.Materials.Lubricant;
 import static gregtech.api.util.RelativeDirection.*;
 import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.PD_TURBINE_CASING;
 
@@ -65,6 +70,7 @@ public class MetaTileEntityWaterPowerStation extends MultiblockWithDisplayBase i
     int tier;
     private final MetaTileEntityWaterPowerStationLogic logic;
     private IEnergyContainer energyContainer;
+    protected IMultipleTankHandler inputFluidInventory;
     public MetaTileEntityWaterPowerStation(ResourceLocation metaTileEntityId,int tier) {
         super(metaTileEntityId);
         this.logic = new MetaTileEntityWaterPowerStationLogic(this);
@@ -74,6 +80,7 @@ public class MetaTileEntityWaterPowerStation extends MultiblockWithDisplayBase i
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
         this.energyContainer = new EnergyContainerList(getAbilities(MultiblockAbility.OUTPUT_ENERGY));
+        this.inputFluidInventory = new FluidTankList(true, this.getAbilities(MultiblockAbility.IMPORT_FLUIDS));
         List<IEnergyContainer> i = getAbilities(MultiblockAbility.OUTPUT_ENERGY);
         this.number=i.size()+4;
         Object coilLevel = context.get("CoilType");
@@ -81,6 +88,9 @@ public class MetaTileEntityWaterPowerStation extends MultiblockWithDisplayBase i
                 () ->  ((IHeatingCoilBlockStats) coilLevel).getLevel(),
                 BlockWireCoil.CoilType.CUPRONICKEL.getLevel());
         this.water = logic.checkWater();
+    }
+    public IMultipleTankHandler getInputFluidInventory() {
+        return this.inputFluidInventory;
     }
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
@@ -90,6 +100,11 @@ public class MetaTileEntityWaterPowerStation extends MultiblockWithDisplayBase i
         textList.add(new TextComponentTranslation("gtqtcore.wps.checkwater", water,(number*2+1)*(number*2+1)));
         textList.add(new TextComponentTranslation("gtqtcore.wps.output1", outputEu));
         textList.add(new TextComponentTranslation("gtqtcore.wps.output2", geteu()));
+        if (getInputFluidInventory() != null) {
+            FluidStack LubricantStack = getInputFluidInventory().drain(Lubricant.getFluid(Integer.MAX_VALUE), false);
+            int liquidOxygenAmount = LubricantStack == null ? 0 : LubricantStack.amount;
+            textList.add(new TextComponentTranslation("gtqtcore.multiblock.ma.amount", TextFormattingUtil.formatNumbers((liquidOxygenAmount))));
+        }
         textList.add(new TextComponentTranslation("======================="));
     }
     @Override
@@ -105,10 +120,13 @@ public class MetaTileEntityWaterPowerStation extends MultiblockWithDisplayBase i
         int randomNum = rand.nextInt(40);
         return (long) (((long) water *coilLevel*(randomNum+80)/800)*Math.pow(2,tier-1)/4);
     }
+    private final FluidStack LUBRICANT_STACK = Lubricant.getFluid(tier);
     private void generator() {
+        IMultipleTankHandler inputTank = this.getInputFluidInventory();
         isWorkingEnabled=this.energyContainer.getEnergyStored()<this.energyContainer.getEnergyCapacity()&&water > 0;
-        if(isWorkingEnabled)
+        if(isWorkingEnabled&&LUBRICANT_STACK.isFluidStackIdentical(inputTank.drain(LUBRICANT_STACK, false)))
         {
+            inputTank.drain(LUBRICANT_STACK, true);
             this.energyContainer.addEnergy((long) (geteu()*Math.pow(2,tier-1)));
         }
     }

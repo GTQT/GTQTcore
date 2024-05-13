@@ -133,6 +133,7 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<FuelRecipeBuilder> STAR_MIXER;
     public static final RecipeMap<FuelRecipeBuilder> RTG_RECIPES;
     public static final RecipeMap<FuelRecipeBuilder> NUCLEAR_RECIPES;
+    public static final RecipeMap<NeutronActivatorIORecipeBuilder> PAC_RECIPES;
     public static final RecipeMap<FuelRecipeBuilder> PLASMA_FORGE;
     public static final RecipeMap<FuelRecipeBuilder> STAR_BIOMIMETIC_FACTORY;
     public static final RecipeMap<NoCoilTemperatureRecipeBuilder> MOLECULAR_DISTILLATION_RECIPES;
@@ -448,9 +449,14 @@ public class GTQTcoreRecipeMaps {
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL)
                 .setSound(GTSoundEvents.ARC);
 
-        NUCLEAR_RECIPES = new RecipeMap<>("nuclearr_recipes", 1,  1,  1, 0, new FuelRecipeBuilder(), false)
+        NUCLEAR_RECIPES = new RecipeMap<>("nuclear_recipes", 1,  1,  1, 1, new FuelRecipeBuilder(), false)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL)
                 .setSound(GTSoundEvents.ARC);
+
+        PAC_RECIPES = new RecipeMap<>("pac_recipes", 3,  3,  3, 3, new NeutronActivatorIORecipeBuilder(), false)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL)
+                .setSound(GTSoundEvents.ARC)
+                .allowEmptyOutput();
 
         //  Hyper Reactor Mk I Recipemap
         HYPER_REACTOR_MK1_RECIPES = new RecipeMap<>("hyper_reactor_mk1_recipes", 0,  0,  1, 0, new FuelRecipeBuilder(), false)

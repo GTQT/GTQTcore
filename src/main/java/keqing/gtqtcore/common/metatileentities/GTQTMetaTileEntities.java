@@ -214,6 +214,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityKQCCComputationHatch[] KQCC_COMPUTATION_HATCH_RECEIVER=new MetaTileEntityKQCCComputationHatch[12];
     public static MetaTileEntityKQCCComputationHatch[] KQCC_COMPUTATION_HATCH_TRANSMITTER=new MetaTileEntityKQCCComputationHatch[12];
     public static MetaTileEntityMSF MSF;
+    public static SimpleMachineMetaTileEntity PARTICLE_ACCELERATOR_IO;
     public static MetaTileEntityLargeGrind LAGER_GRIND;
     public static MetaTileEntityLargeForging LAGER_FORGING;
     public static MetaTileEntityNanoCoating NANO_COATING;
@@ -473,6 +474,10 @@ public class GTQTMetaTileEntities {
         LATEX_COLLECTOR[1] = registerMetaTileEntity(15093, new MetaTileEntityLatexCollector(gtqtcoreId("latex_collector.mv"), 2));
         LATEX_COLLECTOR[2] = registerMetaTileEntity(15094, new MetaTileEntityLatexCollector(gtqtcoreId("latex_collector.hv"), 3));
         LATEX_COLLECTOR[3] = registerMetaTileEntity(15095, new MetaTileEntityLatexCollector(gtqtcoreId("latex_collector.ev"), 4));
+        PARTICLE_ACCELERATOR_IO = registerMetaTileEntity(15096, new SimpleMachineMetaTileEntity(gtqtcoreId("particle_accelerator_io.lv"), GTQTcoreRecipeMaps.PAC_RECIPES, GTQTTextures.PARTICLE_ACCELERATOR, 1, true));
+        PARTICLE_ACCELERATOR_IO = registerMetaTileEntity(15097, new SimpleMachineMetaTileEntity(gtqtcoreId("particle_accelerator_io.mv"), GTQTcoreRecipeMaps.PAC_RECIPES, GTQTTextures.PARTICLE_ACCELERATOR, 2, true));
+        PARTICLE_ACCELERATOR_IO = registerMetaTileEntity(15098, new SimpleMachineMetaTileEntity(gtqtcoreId("particle_accelerator_io.hv"), GTQTcoreRecipeMaps.PAC_RECIPES, GTQTTextures.PARTICLE_ACCELERATOR, 3, true));
+        PARTICLE_ACCELERATOR_IO = registerMetaTileEntity(15099, new SimpleMachineMetaTileEntity(gtqtcoreId("particle_accelerator_io.ev"), GTQTcoreRecipeMaps.PAC_RECIPES, GTQTTextures.PARTICLE_ACCELERATOR, 4, true));
 
         //凿子
         AUTO_CHISEL[0] = registerMetaTileEntity(15100, new SimpleMachineMetaTileEntity(gtqtcoreId("auto_chisel.lv"), GTQTcoreRecipeMaps.AUTO_CHISEL_RECIPES, Textures.AUTOCLAVE_OVERLAY, 1, true, GTUtility.genericGeneratorTankSizeFunction));

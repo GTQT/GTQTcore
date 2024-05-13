@@ -18,6 +18,7 @@ public class GTQTTextures {
     public static OrientedOverlayRenderer SUBSONIC_AXIAL_COMPRESSOR_OVERLAY = new OrientedOverlayRenderer("multiblock/subsonic_axial_compressor");
     public static OrientedOverlayRenderer SUPERSONIC_AXIAL_COMPRESSOR_OVERLAY = new OrientedOverlayRenderer("multiblock/supersonic_axial_compressor");
     public static OrientedOverlayRenderer RTG_OVERLAY= new OrientedOverlayRenderer("overlay/rtg");
+    public static OrientedOverlayRenderer PARTICLE_ACCELERATOR= new OrientedOverlayRenderer("overlay/particle_accelerator");
     public static TextureAtlasSprite PRESSURE_PIPE_SIDE;
     public static TextureAtlasSprite PRESSURE_PIPE_OPEN;
     public static SimpleOverlayRenderer WIRELESS_HATCH_HATCH;

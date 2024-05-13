@@ -289,7 +289,7 @@ public class MetaTileEntityBiologicalReaction extends GTQTRecipeMapMultiblockCon
             if (WATER.isFluidStackIdentical(inputTank.drain(WATER, false))) {
                 if(liquid<32000) {
                     inputTank.drain(WATER, true);
-                    liquid = liquid + 100;
+                    liquid = liquid + 100*tubeTier;
                 }
 
             }

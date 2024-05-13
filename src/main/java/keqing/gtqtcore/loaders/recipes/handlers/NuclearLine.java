@@ -75,7 +75,41 @@ public class NuclearLine {
         RTG(Curium247,7);
         RTG(Curium,7);
 
+        //核素——》衰变后 + 种类 + 等级
+        PAc(Hydrogen,1,1);
+        PAc(Deuterium,2,1);
+        PAc(Tritium,3,1);
+        PAc(Helium,4,1);
+
+        PA(Uranium238,Thorium,4,3);
+        PA(Plutonium238,Uranium236,4,4);
+        PA(Americium,Neptunium,4,5);
+        PA(Curium246,Plutonium244,4,6);
+
+
     }
+    private static void PAc(Material  material1,int kind,int tier) {
+        PAC_RECIPES.recipeBuilder()
+                .fluidInputs(material1.getFluid(1000))
+                .duration(1000+tier*1000)
+                .circuitMeta(kind)
+                .part(kind)
+                .EUt(32)
+                .buildAndRegister();
+    }
+
+
+    private static void PA(Material  material1,Material material2,int kind,int tier) {
+        PAC_RECIPES.recipeBuilder()
+                .input(dust,material1)
+                .output(dust,material2)
+                .duration(1000+tier*1000)
+                .circuitMeta(kind)
+                .part(kind)
+                .EUt(32)
+                .buildAndRegister();
+    }
+
     private static void RTG(Material material,int fuel) {
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .output(pellets,material)
