@@ -2235,6 +2235,7 @@ gtqtcore.coilTire=线圈等级：%s
 gtqtcore.machine.network_switch.tooltip.1=算力负荷上限取决于多方块等级（如果用不了升级就对了）
 gtqtcore.eleTire=外壳等级：%s 电解器等级：%s 配方最大电压：%s
 gtqtcore.eleTire1=自净等级：%s 射频等级：%s 波长：%s
+gtqtcore.eleTire2=多方块等级：%s 射频等级：%s 玻璃等级：%s
 gregtech.multiblock.ele.1=耗能减免：%s 电流效率：%s 电极洁净度：%s
 gregtech.machine.kqcc.export.tooltip=§c算力的输出端,向光缆发送算力
 gregtech.machine.kqcc.import.tooltip=§a算力的输入端,从光缆请求算力

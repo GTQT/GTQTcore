@@ -201,7 +201,7 @@ public class MetaTileEntityElectrobath extends GTQTRecipeMapMultiblockOverwrite 
         super.addDisplayText(textList);
         if(casingTier!=tubeTier)
             textList.add(new TextComponentTranslation("gtqtcore.equal", casingTier,tubeTier));
-        textList.add(new TextComponentTranslation("gtqtcore.eleTire",tier, eleTier,GTValues.V[tier]));
+        textList.add(new TextComponentTranslation("多方块等级：%s 电极电极：%s",tier, eleTier));
         textList.add(new TextComponentTranslation("gregtech.multiblock.ele.1", 5*eleTier,eu,clean));
         if(modern==0) textList.add(new TextComponentTranslation("gtqtcore.tire1",tier));
         if(modern==1) textList.add(new TextComponentTranslation("gtqtcore.tire2",tier));

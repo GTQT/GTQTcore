@@ -122,7 +122,7 @@ public class MetaTileEntityStepper extends MultiMapMultiblockController implemen
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
-        textList.add(new TextComponentTranslation("gtqtcore.eleTire",tier, laser_tier, glass_tier));
+        textList.add(new TextComponentTranslation("gtqtcore.eleTire2",tier, laser_tier, glass_tier));
         textList.add(new TextComponentTranslation("gtqtcore.eleTire1",clean_tier, sheping_tier, minvisa));
 
     }

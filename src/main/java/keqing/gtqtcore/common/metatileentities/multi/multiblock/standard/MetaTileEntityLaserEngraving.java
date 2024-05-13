@@ -78,7 +78,7 @@ public class MetaTileEntityLaserEngraving extends MultiMapMultiblockController i
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
-        textList.add(new TextComponentTranslation("gtqtcore.eleTire",tier, laser_tier, glass_tier));
+        textList.add(new TextComponentTranslation("gtqtcore.eleTire2",tier, laser_tier, glass_tier));
 
     }
     @Override
