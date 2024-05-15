@@ -47,6 +47,7 @@ import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.common.block.blocks.GTQTIsaCasing.CasingType.FLOTATION_CASING_GEARBOX;
 import static keqing.gtqtcore.common.block.blocks.GTQTIsaCasing.CasingType.ISA_MILL_CASING_GEARBOX;
 import static keqing.gtqtcore.common.block.blocks.GTQTKQCC.CasingType.COMPUTER_VENT;
+import static keqing.gtqtcore.common.block.blocks.GTQTPowerSupply.SupplyType.POWER_SUPPLY_BASIC;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.*;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.COMBUSTION_GENERATOR;
@@ -439,6 +440,32 @@ public class KeQingNET {
                 .scannerResearch(b -> b
                         .researchStack(LARGE_DISTILLERY.getStackForm())
                         .EUt(VA[IV])
+                        .duration(1200))
+                .buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(frameGt, HastelloyX,16)
+                .inputs(GTQTMetaBlocks.POWER.getItemVariant(POWER_SUPPLY_BASIC, 4))
+                .input(EMITTER_EV, 8)
+                .input(SENSOR_EV, 8)
+                .input(circuit, MarkerMaterials.Tier.EV, 16)
+                .input(gear, TungstenSteel, 8 )
+                .input(plate, Platinum, 32)
+                .input(plate, Palladium, 8)
+                .input(plate, MaragingSteel300, 8)
+                .input(screw, HSSG, 32)
+                .input(stickLong, NanometerBariumTitanate, 64)
+                .input(stickLong, NanometerBariumTitanate, 64)
+                .input(foil, NiobiumNitride, 32)
+                .fluidInputs(Epoxy.getFluid(9216))
+                .fluidInputs(Zylon.getFluid(4608))
+                .fluidInputs(TitaniumTungstenCarbide.getFluid(4608))
+                .output(POWER_SUPPLY)
+                .EUt(VA[EV])
+                .duration(3200)
+                .scannerResearch(b -> b
+                        .researchStack(LAPOTRON_CRYSTAL.getStackForm())
+                        .EUt(VA[EV])
                         .duration(1200))
                 .buildAndRegister();
 

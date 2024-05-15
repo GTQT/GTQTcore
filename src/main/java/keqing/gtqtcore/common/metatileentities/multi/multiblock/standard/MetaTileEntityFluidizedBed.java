@@ -223,7 +223,7 @@ public class MetaTileEntityFluidizedBed extends RecipeMapMultiblockController im
         MultiblockShapeInfo.Builder builder = null;
         if (Blocks.AIR != null) {
             builder = MultiblockShapeInfo.builder()
-                    .aisle("AAAPPPP", "BBBQQQQ", "BBBQQQQ", "BBBQQQQ", "ABARRRR", " B     ", " B     ", " B     ", " B     ", " B     ", " B     ", " B     ")
+                    .aisle("AAAPPPP", "BNBQQQQ", "BBBQQQQ", "BBBQQQQ", "ABARRRR", " B     ", " B     ", " B     ", " B     ", " B     ", " B     ", " B     ")
                     .aisle("A A    ", "BBBQQQQ", "ICBQ  Q", "ICBQ  Q", "BCBRRRR", "BCB TT ", "BCB TT ", "BCB TT ", "BCB TT ", "OCBTTTT", "OCB    ", "BBB    ")
                     .aisle("AAAPPPP", "BBBQQQQ", "BCBQQQQ", "BBBQQQQ", "ABARRRR", " B     ", " B     ", " B     ", " B     ", " B   T ", " B     ", " B     ")
                     .aisle("       ", "BBB    ", "BCB    ", "BBB    ", "A A    ", "       ", "       ", "       ", "       ", "     T ", "       ", "       ")
@@ -240,8 +240,7 @@ public class MetaTileEntityFluidizedBed extends RecipeMapMultiblockController im
                     .where('I', MetaTileEntities.FLUID_IMPORT_HATCH[GTValues.LV], EnumFacing.WEST)
                     .where('O', MetaTileEntities.FLUID_EXPORT_HATCH[GTValues.LV], EnumFacing.WEST)
                     .where('M', MetaTileEntities.MUFFLER_HATCH[GTValues.LV], EnumFacing.SOUTH)
-
-
+                    .where('N', MetaTileEntities.MAINTENANCE_HATCH, EnumFacing.NORTH)
                     .where('C', getCasingState2())
                     .where('A', getFrameState())
                     .where('B', getCasingState())
