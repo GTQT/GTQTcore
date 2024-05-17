@@ -916,7 +916,7 @@ public class GCYSFirstDegreeMaterials {
                 .dust()
                 .color(0x4D4D4D)
                 .iconSet(MaterialIconSet.METALLIC)
-                .flags(GENERATE_FINE_WIRE)
+                .flags(GENERATE_FINE_WIRE,GENERATE_FRAME)
                 .components(Silicon, 1, Carbon, 1)
                 .blast(2500, HIGH)
                 .build();

@@ -7,6 +7,7 @@ import keqing.gtqtcore.client.utils.ShaderUtils;
 import keqing.gtqtcore.client.utils.TitleUtils;
 import keqing.gtqtcore.common.CommonProxy;
 
+import keqing.gtqtcore.common.MetaEntities;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
@@ -54,6 +55,7 @@ public class ClientProxy extends CommonProxy {
         ShaderUtils.initShaders();
         GTQTTextures.init();
         GTQTTextures.preInit();
+        MetaEntities.initRenderers();
     }
     @SubscribeEvent
     public static void onRenderWorldLast(RenderWorldLastEvent event) {

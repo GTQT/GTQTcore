@@ -3640,6 +3640,45 @@ gtqtcore.multiblock.mega_heat_exchanger.tooltip.parallel=相当于§e%s§7台大
 gtqtcore.recipe.max_rate=最大流量： %s L/s
 gtqtcore.recipe.flow_rate=流量阈值： %s L/s
 
+tile.pcb_factory_casing.basic_photolithographic_framework_casing.name=精密光刻框架外壳
+tile.pcb_factory_casing.basic_photolithographic_framework_casing.tooltip=超高精度激光蚀刻/n§6PCB工厂§7-外壳等级：§bI§7
+tile.pcb_factory_casing.mold_printing_assembly_framework_casing.name=纳米级模板印刷框架外壳
+tile.pcb_factory_casing.mold_printing_assembly_framework_casing.tooltip=家用3D打印机/n§6PCB工厂§7-外壳等级：§bII§7
+tile.pcb_factory_casing.radiation_proof_scan_framework_casing.name=抗辐射特殊器件扫描框架外壳
+tile.pcb_factory_casing.radiation_proof_scan_framework_casing.tooltip=可直接扫描核反应堆/n§6PCB工厂§7-外壳等级：§bIII§7
+tile.pcb_factory_casing.biological_sterile_machine_casing.name=生物级无菌机器外壳
+tile.pcb_factory_casing.biological_sterile_machine_casing.tooltip=比无菌超净间更干净/n§6PCB工厂§7-§a生物仓外壳§7
+tile.pcb_factory_casing.infinity_cooled_machine_casing.name=无尽冷却机器外壳
+tile.pcb_factory_casing.infinity_cooled_machine_casing.tooltip=无限接近于绝对零度/n§6PCB工厂§7-§b空冻塔外壳§7
+
+recipemap.pcb_factory.name=PCB加工
+gtqtcore.machine.pcb_factory.name=PCB工厂
+gtqtcore.machine.pcb_factory.tooltip.1=机器类型：§e电路基板工厂§7
+gtqtcore.machine.pcb_factory.tooltip.2=带有附属结构，附属结构的等级限制了最大配方等级。
+gtqtcore.machine.pcb_factory.tooltip.3=2级与3级PCB工厂支持放置额外的纳米蜂群计算并行，
+gtqtcore.machine.pcb_factory.tooltip.4=- 2级：每放入1个§r银纳米蜂群§7，并行便增加1；
+gtqtcore.machine.pcb_factory.tooltip.5=- 3级：每放入1个§6金纳米蜂群§7，并行便增加2；
+gtqtcore.machine.pcb_factory.tooltip.6=通过放置额外的纳米蜂群获得的并行没有最大上限。
+gtqtcore.machine.pcb_factory.tooltip.7=需要升级冷却结构才能解锁机器的超频功能，
+gtqtcore.machine.pcb_factory.tooltip.8=- 建造§b水冷塔§7后，解锁配方的默认超频功能；
+gtqtcore.machine.pcb_factory.tooltip.9=- 建造§9空冻塔§7后，解锁配方的
+gtqtcore.machine.pcb_factory.tooltip.9.25=无损超频
+gtqtcore.machine.pcb_factory.tooltip.9.5=功能；
+gtqtcore.machine.pcb_factory.tooltip.10=建造§2生物室§7以解锁高级电路板配方。
+gtqtcore.machine.pcb_factory.tooltip.11=调整机器的线宽（默认为§r100μm§7，每次±§r25μm§7）以获得特殊效果，
+gtqtcore.machine.pcb_factory.tooltip.12=- 线宽每缩短§r25μm§7，配方时间就减少§r20%%§7，耗能就增加§r50%%§7；
+gtqtcore.machine.pcb_factory.tooltip.13=- 线宽每放宽§r25μm§7，配方时间就增加§r20%%§7，耗能就减少§r10%%§7；
+gtqtcore.machine.pcb_factory.tooltip.14=机器的最小线宽为§r25μm§7，最大线宽为§r200μm§7。
+gtqtcore.machine.pcb_factory.description=PCB工厂（电路基板工厂）是一台多方块机器。这台机器会利用你输入的各种塑料来制造出电路基板，而不是继续使用化学反应釜慢吞吞地操作。
+gtqtcore.machine.pcb_factory.tier=PCB工厂等级：
+gtqtcore.machine.pcb_factory.bio_upgrade=需要生物仓升级
+gtqtcore.machine.pcb_factory.trace_size.decrement=§c放宽25μm线宽 /n§7配方时间增加20%%，耗电量减少10%%
+gtqtcore.machine.pcb_factory.trace_size.increment=§a缩短25μm线宽 /n§7配方时间减少20%%，耗电量增加50%%
+gtqtcore.machine.pcb_factory.structure.info=结构等级：%s (线宽：%sμm)
+gtqtcore.machine.pcb_factory.structure.cooling_tower=冷却已启用
+gtqtcore.machine.pcb_factory.structure.thermosink=内部温度正在逼近绝对零度
+gtqtcore.machine.pcb_factory.structure.bio_chamber=有机黏菌充斥于生物仓中
+
 recipemap.molecular_distillation_recipes.name=高真空分子蒸馏
 gtqtcore.machine.dangote_distillery.name=丹格特蒸馏厂
 gtqtcore.machine.dangote_distillery.tooltip.1=现代化工业蒸馏，从现在开始
@@ -3799,6 +3838,10 @@ gregica.gui.confirm=确认
 gregica.mixin.nerf.steam.solar.detail=§c工作超过1天后,输出将会在10天内线性减小到1/3
 gregtech.generator.1=§b发电效率：%d
 gregica.mixin.info.steam=当前蒸汽输出: %d l/s
+
+tile.stnt.name=迷你核弹
+tile.stnt.drops_tooltip=我很卡，劝你三思
+entity.STNT.name=迷你核弹
 
 itemGroup.gtqtcore=量子跃迁 | 纠缠之源
 itemGroup.gtqtbio=量子跃迁 | 生物工程

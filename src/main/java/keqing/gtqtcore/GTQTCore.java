@@ -3,6 +3,7 @@ package keqing.gtqtcore;
 import keqing.gtqtcore.api.utils.GTQTLog;
 import keqing.gtqtcore.client.ClientProxy;
 import keqing.gtqtcore.common.CommonProxy;
+import keqing.gtqtcore.common.MetaEntities;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.items.GTQTMetaItems;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
@@ -16,10 +17,10 @@ import net.minecraftforge.fml.common.event.*;
         name="GTQTcore",
         acceptedMinecraftVersions = "[1.12.2,1.13)",
         version = "0.0.1-beta" ,
-        dependencies = "required-after:gregtech@[2.7.4-beta,) ;"
+        dependencies = "required-after:gregtech@[2.8.8-beta,) ;"
 )
 public class GTQTCore {
-    public static final String PACK = "1.0.0_preview_0.1";
+    public static final String PACK = "1.0.0_preview_0.2";
 
     public static final String MODID = "gtqtcore";
     public static final String NAME = "GTQT Core";
@@ -43,6 +44,7 @@ public class GTQTCore {
         GTQTMetaBlocks.init();
         proxy.preLoad();
         proxy.preInit();
+        MetaEntities.init();
 
     }
     @Mod.EventHandler

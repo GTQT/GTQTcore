@@ -134,7 +134,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityFracturing BASIC_FLUID_DRILLING_RIG;
     public static MetaTileEntitySepticTank SEPTIC_TANK;
     public static MetaTileEntityIsaMill ISA_MILL;
-    public static MetaTileEntityPCB PCB;
+    public static MetaTileEntityPCBFactory PCB_FACTORY;
     public static MetaTileEntityElectricArcFurnace ELECTRIC_ARC_FURNACE;
     public static MetaTileEntityMultiblockTank[] TANK = new MetaTileEntityMultiblockTank[10];
     public static MetaTileEntityAlloykiln ALLOY_KILN;
@@ -348,7 +348,7 @@ public class GTQTMetaTileEntities {
         FERMENTATION_TANK= registerMetaTileEntity(3158, new MetaTileEntityFermentationTank(gtqtcoreId("fermentation_tank")));
         DIGESTER = registerMetaTileEntity(3159, new MetaTileEntityDigester(gtqtcoreId("digester")));
         SEPTIC_TANK = registerMetaTileEntity(3160, new MetaTileEntitySepticTank(gtqtcoreId("septic_tank")));
-        PCB = registerMetaTileEntity(3161, new MetaTileEntityPCB(gtqtcoreId("pcb")));
+        PCB_FACTORY = registerMetaTileEntity(3161, new MetaTileEntityPCBFactory(gtqtcoreId("pcb_factory")));
         INDUSTRIAL_FISHING_POND = registerMetaTileEntity(3162, new MetaTileEntityIndustrialFishingPond(gtqtcoreId("IndustrialFishingPond")));
         ISA_MILL = registerMetaTileEntity(3163, new MetaTileEntityIsaMill(gtqtcoreId("isa_mill")));
         FLOTATION_FACTORY = registerMetaTileEntity(3164, new MetaTileEntityFlotationFactory(gtqtcoreId("flotation_factory")));

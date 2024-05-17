@@ -194,7 +194,7 @@ public class CommonProxy {
         registry.register(GTQTMetaBlocks.KQCC);
         registry.register(GTQTMetaBlocks.POWER);
         registry.register(GTQTMetaBlocks.STEPPER);
-
+        registry.register(GTQTMetaBlocks.PCB_FACTORY_CASING);
 
         registry.register(GTQTCrops.COPPER_CROP);
         registry.register(GTQTCrops.IRON_CROP);
@@ -207,7 +207,7 @@ public class CommonProxy {
         registry.register(GTQTMetaBlocks.MULTIBLOCK_CASING);
         registry.register(GTQTMetaBlocks.MULTIBLOCK_CASING_ACTIVE);
         registry.register(GTQTMetaBlocks.TRANSPARENT_CASING);
-
+        registry.register(STNT);
 
         for (GTQTStoneVariantBlock block : GTQTMetaBlocks.SUSY_STONE_BLOCKS.values()) registry.register(block);
 
@@ -251,11 +251,12 @@ public class CommonProxy {
         registry.register(createItemBlock(GTQTMetaBlocks.STEPPER, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.KQCC, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.POWER, VariantItemBlock::new));
+        registry.register(createItemBlock(GTQTMetaBlocks.PCB_FACTORY_CASING, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.CRUCIBLE, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.MULTIBLOCK_CASING, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.MULTIBLOCK_CASING_ACTIVE, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.TRANSPARENT_CASING, VariantItemBlock::new));
-
+        registry.register(createItemBlock(STNT, ItemBlock::new));
         for (GTQTStoneVariantBlock block : GTQTMetaBlocks.SUSY_STONE_BLOCKS.values()) registry.register(createItemBlock(block, VariantItemBlock::new));
         registry.register(createItemBlock(PINE_LOG, ItemBlock::new));
         registry.register(createItemBlock(PINE_SAPLING, ItemBlock::new));
@@ -323,8 +324,11 @@ public class CommonProxy {
         PACasingTierProperty.registerPACasingTier(2, "2");
         PACasingTierProperty.registerPACasingTier(3,"3");
 
-        PCBPartProperty.registeredPart(1,"微生物培养仓");
-        PCBPartProperty.registeredPart(2,"化学辅助计算机");
+        PCBFactoryProperty.registerPCBFactoryTier(1, "1");
+        PCBFactoryProperty.registerPCBFactoryTier(2, "2");
+        PCBFactoryProperty.registerPCBFactoryTier(3, "3");
+        PCBFactoryBioUpgradeProperty.registerPCBFactoryBioUpgradeTier(1, "");
+
         FusionEUToStartProperty.registerFusionTier(9, "(MK4)");
         FusionEUToStartProperty.registerFusionTier(10, "(MK5)");
         FusionEUToStartProperty.registerFusionTier(11, "(MK6)");

@@ -1,0 +1,59 @@
+{
+  "forge_marker": 1,
+  "variants": {
+    "variant": {
+      "substrate_casing": {
+        "model": "minecraft:cube_bottom_top",
+        "textures": {
+          "top": "gregtech:blocks/multiblock/casing/substrate_top",
+          "side": "gregtech:blocks/multiblock/casing/substrate_side",
+          "bottom": "#side"
+        }
+      },
+      "advanced_substrate_casing": {
+        "model": "minecraft:cube_bottom_top",
+        "textures": {
+          "top": "gregtech:blocks/multiblock/casing/advanced_substrate_top",
+          "side": "gregtech:blocks/multiblock/casing/substrate_side",
+          "bottom": "#side"
+        }
+      },
+      "basic_photolithographic_framework_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casing/basic_photolithographic_framework_casing"
+        }
+      },
+      "mold_printing_assembly_framework_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casing/mold_printing_assembly_framework_casing"
+        }
+      },
+      "radiation_proof_scan_framework_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casing/radiation_proof_scan_framework_casing"
+        }
+      },
+      "biological_sterile_machine_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casing/biological_sterile_machine_casing"
+        }
+      },
+      "water_cooled_machine_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casing/water_cooled_machine_casing"
+        }
+      },
+      "infinity_cooled_machine_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casing/infinity_cooled_machine_casing"
+        }
+      }
+    }
+  }
+}

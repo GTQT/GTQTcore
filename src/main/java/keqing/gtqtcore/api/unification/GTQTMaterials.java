@@ -559,6 +559,8 @@ public class GTQTMaterials {
     public static Material ChalcociteFront;
     public static Material AluminiumFront;
     public static Material BauxiteFront;
+    public static Material ElectrolyteReflectorMixture;
+    public static Material FullerenePolymerMatrix;
 
 
     //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/api/unification/GSMaterials.java

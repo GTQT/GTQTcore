@@ -23,6 +23,7 @@ public class GTQTTextures {
     public static TextureAtlasSprite PRESSURE_PIPE_OPEN;
     public static SimpleOverlayRenderer WIRELESS_HATCH_HATCH;
     public static SimpleOverlayRenderer FISHING_CASING;
+    public static SimpleOverlayRenderer BASIC_PHOTOLITHOGRAPHIC_FRAMEWORK_CASING = new SimpleOverlayRenderer("multiblock/casing/basic_photolithographic_framework_casing");
     public static OverlayRenderer MULTIPART_BUFFER_HATCH = new OverlayRenderer("multipart/overlay_buffer_hatch");
     public static OrientedOverlayRenderer ROCKET_ENGINE_OVERLAY = new OrientedOverlayRenderer("machines/rocket_engine");
     public static OrientedOverlayRenderer NAQUADAH_REACTOR_OVERLAY = new OrientedOverlayRenderer("machines/naquadah_reactor");

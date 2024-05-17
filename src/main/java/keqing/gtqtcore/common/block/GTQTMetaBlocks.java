@@ -6,6 +6,7 @@ import gregtech.common.blocks.BlockGlassCasing;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.client.renderer.pipe.PressurePipeRenderer;
 import keqing.gtqtcore.common.block.blocks.*;
+import keqing.gtqtcore.common.block.explosive.BlockSTNT;
 import keqing.gtqtcore.common.block.wood.BlockPineLeaves;
 import keqing.gtqtcore.common.block.wood.BlockPineLog;
 import keqing.gtqtcore.common.block.wood.BlockPineSapling;
@@ -37,6 +38,7 @@ public class GTQTMetaBlocks {
     public static GTQTRoad ROAD;
     public static GTQTKQCC KQCC;
     public static GTQTPowerSupply POWER;
+    public static BlockPCBFactoryCasing PCB_FACTORY_CASING;
     public static GTQTBlockGlassCasing GLASS_CASING;
     public static GTQTStepper STEPPER;
     public static final BlockPineLeaves PINE_LEAVES = new BlockPineLeaves();
@@ -46,6 +48,7 @@ public class GTQTMetaBlocks {
     public static BlockGCYSMultiblockCasing MULTIBLOCK_CASING;
     public static BlockGCYSMultiblockCasingActive MULTIBLOCK_CASING_ACTIVE;
     public static BlockTransparentCasing TRANSPARENT_CASING;
+    public static BlockSTNT STNT;
     public static final EnumMap<GTQTStoneVariantBlock.StoneVariant, GTQTStoneVariantBlock> SUSY_STONE_BLOCKS = new EnumMap<>(GTQTStoneVariantBlock.StoneVariant.class);
     private GTQTMetaBlocks() {}
 
@@ -73,7 +76,8 @@ public class GTQTMetaBlocks {
 
         ELECTRON_MICROSCOPE = new GTQTElectronMicroscope();
         ELECTRON_MICROSCOPE.setRegistryName("electron_microscope");
-
+        PCB_FACTORY_CASING = new BlockPCBFactoryCasing();
+        PCB_FACTORY_CASING.setRegistryName("pcb_factory_casing");
         ELECTROBATH = new GTQTElectrobath();
         ELECTROBATH.setRegistryName("electrobath");
         PARTICLE_ACCELERATOR = new GTQTParticleAccelerator();
@@ -98,7 +102,8 @@ public class GTQTMetaBlocks {
         MULTIBLOCK_CASING_ACTIVE.setRegistryName("multiblock_casing_active");
         TRANSPARENT_CASING = new BlockTransparentCasing();
         TRANSPARENT_CASING.setRegistryName("transparent_casing");
-
+        STNT = new BlockSTNT();
+        STNT.setRegistryName("stnt").setTranslationKey("stnt");
 
         for (GTQTStoneVariantBlock.StoneVariant shape : GTQTStoneVariantBlock.StoneVariant.values()) {
             SUSY_STONE_BLOCKS.put(shape, new GTQTStoneVariantBlock(shape));
@@ -128,12 +133,12 @@ public class GTQTMetaBlocks {
         registerItemModel(POWER);
         registerItemModel(GLASS_CASING);
         registerItemModel(STEPPER);
-
+        registerItemModel(PCB_FACTORY_CASING);
         registerItemModel(CRUCIBLE);
         registerItemModel(MULTIBLOCK_CASING);
         registerItemModel(MULTIBLOCK_CASING_ACTIVE);
         registerItemModel(TRANSPARENT_CASING);
-
+        registerItemModel(STNT);
 
         for (GTQTStoneVariantBlock block : SUSY_STONE_BLOCKS.values())
             registerItemModel(block);
