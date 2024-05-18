@@ -3679,6 +3679,22 @@ gtqtcore.machine.pcb_factory.structure.cooling_tower=冷却已启用
 gtqtcore.machine.pcb_factory.structure.thermosink=内部温度正在逼近绝对零度
 gtqtcore.machine.pcb_factory.structure.bio_chamber=有机黏菌充斥于生物仓中
 
+metaitem.upgrade.kit.ulv.name=ULV 升级套件
+metaitem.upgrade.kit.lv.name=LV 升级套件
+metaitem.upgrade.kit.mv.name=MV 升级套件
+metaitem.upgrade.kit.hv.name=HV 升级套件
+metaitem.upgrade.kit.ev.name=EV 升级套件
+metaitem.upgrade.kit.iv.name=IV 升级套件
+metaitem.upgrade.kit.luv.name=LuV 升级套件
+metaitem.upgrade.kit.zpm.name=ZPM 升级套件
+metaitem.upgrade.kit.uv.name=UV 升级套件
+metaitem.upgrade.kit.uhv.name=UHV 升级套件
+metaitem.upgrade.kit.uev.name=UEV 升级套件
+metaitem.upgrade.kit.uiv.name=UIV 升级套件
+metaitem.upgrade.kit.uxv.name=UXV 升级套件
+
+gtqtcore.tooltips.upgrade_kit=右键为机器升级到目标电压等级,请注意不会保留机器原本的任何数据！请先将物品等取出！
+
 recipemap.molecular_distillation_recipes.name=高真空分子蒸馏
 gtqtcore.machine.dangote_distillery.name=丹格特蒸馏厂
 gtqtcore.machine.dangote_distillery.tooltip.1=现代化工业蒸馏，从现在开始

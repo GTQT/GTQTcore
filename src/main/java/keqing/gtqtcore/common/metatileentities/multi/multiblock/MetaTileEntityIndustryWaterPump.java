@@ -63,13 +63,15 @@ public class MetaTileEntityIndustryWaterPump extends MultiblockControllerBase im
     @Override
     public void update() {
         super.update();
-        if (!getWorld().isRemote && getOffsetTimer() % 20 == 0 && isStructureFormed()) {
+        if(this.getWorld().provider.getDimension()==0&&!getWorld().isRemote && getOffsetTimer() % 20 == 0 && isStructureFormed()) {
             if (biomeModifier == 0) {
                 biomeModifier = getAmount();
             } else if (biomeModifier > 0) {
                 waterTank.fill(Materials.Water.getFluid(getFluidProduction()), true);
             }
         }
+        if(this.getWorld().provider.getDimension()==-1)
+            waterTank.fill(Materials.Lava.getFluid(10), true);
     }
 
     private int getAmount() {
@@ -180,6 +182,7 @@ public class MetaTileEntityIndustryWaterPump extends MultiblockControllerBase im
     public String[] getDescription() {
         List<String> list = new ArrayList<>();
         list.add(I18n.format("四倍出水量于原始水泵！所以下边的数据你自己乘六就行"));
+        list.add(I18n.format("在地狱会自己抽岩浆！每秒200mb；"));
         list.add(I18n.format("gregtech.multiblock.primitive_water_pump.description"));
         Collections.addAll(list, LocalizationUtils.formatLines("gregtech.multiblock.primitive_water_pump.extra1"));
         Collections.addAll(list, LocalizationUtils.formatLines("gregtech.multiblock.primitive_water_pump.extra2"));
@@ -189,6 +192,7 @@ public class MetaTileEntityIndustryWaterPump extends MultiblockControllerBase im
     public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("原始水泵Plus（加强六倍）", new Object[0]));
+        tooltip.add(I18n.format("在地狱会自己抽岩浆！"));
     }
     private boolean isRainingInBiome() {
         World world = getWorld();

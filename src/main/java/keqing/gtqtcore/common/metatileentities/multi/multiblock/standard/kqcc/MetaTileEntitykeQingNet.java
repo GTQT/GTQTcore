@@ -1,12 +1,10 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.kqcc;
 
-import gregtech.api.GTValues;
 import gregtech.api.capability.IObjectHolder;
 import gregtech.api.capability.IOpticalComputationHatch;
 import gregtech.api.capability.IOpticalComputationProvider;
 import gregtech.api.capability.IOpticalComputationReceiver;
 import gregtech.api.capability.impl.ComputationRecipeLogic;
-import gregtech.api.capability.impl.ItemHandlerList;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.Widget;
 import gregtech.api.gui.widgets.ClickButtonWidget;
@@ -22,41 +20,35 @@ import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
-import gregtech.common.blocks.BlockComputerCasing;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
-import keqing.gtqtcore.api.GTQTValue;
-import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.recipes.properties.KQNetProperty;
-import keqing.gtqtcore.api.utils.GTQTUtil;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraftforge.items.IItemHandlerModifiable;
 
 import javax.annotation.Nonnull;
 import java.util.List;
-import java.util.Collections;
 
 
 public class MetaTileEntitykeQingNet extends RecipeMapMultiblockController implements IOpticalComputationReceiver {
-        private IOpticalComputationProvider computationProvider;
-        private IObjectHolder objectHolder;
+    private IOpticalComputationProvider computationProvider;
+    private IObjectHolder objectHolder;
 
-        public MetaTileEntitykeQingNet(ResourceLocation metaTileEntityId) {
+    public MetaTileEntitykeQingNet(ResourceLocation metaTileEntityId) {
             super(metaTileEntityId, GTQTcoreRecipeMaps.KEQING_NET_RECIES);
             this.recipeMapWorkable = new ResearchStationRecipeLogic(this);
-        }
+    }
 
-        public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
+    public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
             return new MetaTileEntitykeQingNet(this.metaTileEntityId);
-        }
+    }
+
     int thresholdPercentage=0;
     @Override
     @Nonnull
@@ -105,7 +97,6 @@ public class MetaTileEntitykeQingNet extends RecipeMapMultiblockController imple
         textList.add(new TextComponentTranslation("gtqtcore.multiblock.kqn.thresholdPercentage",thresholdPercentage));
         textList.add(new TextComponentTranslation( String.format("gtqtcore.multiblock.kqn.nb%s",thresholdPercentage)));
     }
-
 
         @Nonnull
         protected  BlockPattern createStructurePattern() {
@@ -157,15 +148,8 @@ public class MetaTileEntitykeQingNet extends RecipeMapMultiblockController imple
             this.computationProvider = (IOpticalComputationProvider)providers.get(0);
         }
     }
-    /*
-    protected void addWarningText(List<ITextComponent> textList) {
-        super.addWarningText(textList);
-        if (this.isStructureFormed() && this.isActive() && this.getRecipeMapWorkable().isHasNotEnoughComputation()) {
-            textList.add((new TextComponentTranslation("gregtech.multiblock.computation.not_enough_computation")).setStyle((new Style()).setColor(TextFormatting.RED)));
-        }
-    }
-    */
-        private static class ResearchStationRecipeLogic extends ComputationRecipeLogic {
+
+    private class ResearchStationRecipeLogic extends ComputationRecipeLogic {
             public ResearchStationRecipeLogic(MetaTileEntitykeQingNet metaTileEntity) {
                 super(metaTileEntity, ComputationType.SPORADIC);
             }
@@ -174,6 +158,5 @@ public class MetaTileEntitykeQingNet extends RecipeMapMultiblockController imple
             public  MetaTileEntitykeQingNet getMetaTileEntity() {
                 return (MetaTileEntitykeQingNet)super.getMetaTileEntity();
             }
-
         }
     }

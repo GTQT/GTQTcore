@@ -12,6 +12,7 @@ import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.recipes.recipeproperties.GasCollectorDimensionProperty;
+import gregtech.api.util.LocalizationUtils;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.common.blocks.BlockBoilerCasing;
@@ -23,12 +24,16 @@ import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class MetaTileEntityGasCollector extends RecipeMapMultiblockController {
 
@@ -135,4 +140,10 @@ public class MetaTileEntityGasCollector extends RecipeMapMultiblockController {
         return GTSoundEvents.BREAKDOWN_ELECTRICAL;
     }
 
+    @Override
+    public String[] getDescription() {
+        List<String> list = new ArrayList<>();
+        list.add(I18n.format("可以在任何地方抽取空气！"));
+        return list.toArray(new String[0]);
+    }
 }
