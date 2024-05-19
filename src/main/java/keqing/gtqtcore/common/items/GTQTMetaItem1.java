@@ -19,7 +19,6 @@ import keqing.gtqtcore.common.block.blocks.GTQTCrops;
 import keqing.gtqtcore.common.items.behaviors.IntBcircuitBehavior;
 import keqing.gtqtcore.common.items.behaviors.MillBallBehavior;
 import keqing.gtqtcore.common.items.behaviors.StructureWriteBehavior;
-import keqing.gtqtcore.common.items.behaviors.UpgradeKitBehavior;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
@@ -510,21 +509,6 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         DNA_DECODER = this.addItem(1013, "biological.components.dna_decoder").setCreativeTabs(CommonProxy.GTQTCore_BIO);
         DNA_DECODE_ENCODER = this.addItem(1014, "biological.components.dna_decode_encoder").setCreativeTabs(CommonProxy.GTQTCore_BIO);
 
-
-        GTQTMetaItems.UPGRADE_KIT_ULV = this.addUpgradeKit(1);
-        GTQTMetaItems.UPGRADE_KIT_LV = this.addUpgradeKit(2);
-        GTQTMetaItems.UPGRADE_KIT_MV = this.addUpgradeKit(3);
-        GTQTMetaItems.UPGRADE_KIT_HV = this.addUpgradeKit(4);
-        GTQTMetaItems.UPGRADE_KIT_EV = this.addUpgradeKit(5);
-        GTQTMetaItems.UPGRADE_KIT_IV = this.addUpgradeKit(6);
-        GTQTMetaItems.UPGRADE_KIT_LuV = this.addUpgradeKit(7);
-        GTQTMetaItems.UPGRADE_KIT_ZPM = this.addUpgradeKit(8);
-        GTQTMetaItems.UPGRADE_KIT_UV = this.addUpgradeKit(9);
-        GTQTMetaItems.UPGRADE_KIT_UHV = this.addUpgradeKit(10).setInvisibleIf(!GregTechAPI.isHighTier());
-        GTQTMetaItems.UPGRADE_KIT_UEV = this.addUpgradeKit(11).setInvisibleIf(!GregTechAPI.isHighTier());
-        GTQTMetaItems.UPGRADE_KIT_UIV = this.addUpgradeKit(12).setInvisibleIf(!GregTechAPI.isHighTier());
-        GTQTMetaItems.UPGRADE_KIT_UXV = this.addUpgradeKit(13).setInvisibleIf(!GregTechAPI.isHighTier());
-
         //蓝图
         DISK_0 = this.addItem(2000, "disk.0").setCreativeTabs(CommonProxy.GTQTCore_DISK);
         DISK_1 = this.addItem(2001, "disk.1").setCreativeTabs(CommonProxy.GTQTCore_DISK);
@@ -544,13 +528,4 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         DISK_15 = this.addItem(2015, "disk.15").setCreativeTabs(CommonProxy.GTQTCore_DISK);
     }
 
-    private MetaItem<?>.MetaValueItem addUpgradeKit(int voltage) {
-        return this.addItem(ID(), String.format("upgrade.kit.%s", UpgradeKitBehavior.toVolName(voltage))).addComponents(new IItemComponent[]{new TooltipBehavior((list) -> {
-            list.add(I18n.format("gtqtcore.tooltips.upgrade_kit", new Object[0]));
-        })}).addComponents(new IItemComponent[]{new UpgradeKitBehavior(voltage)});
-    }
-    private static int ID = 1100;
-    private static int ID() {
-        return ++ID;
-    }
 }

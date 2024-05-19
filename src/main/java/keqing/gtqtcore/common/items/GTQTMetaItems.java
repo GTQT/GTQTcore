@@ -14,20 +14,6 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem 你物品的名字，记得全大写;
      */
     public static final List<MetaItem<?>> ITEMS = GTQTMetaItem1.getMetaItems();
-    public static MetaItem<?>.MetaValueItem UPGRADE_KIT_ULV;
-    public static MetaItem<?>.MetaValueItem UPGRADE_KIT_LV;
-    public static MetaItem<?>.MetaValueItem UPGRADE_KIT_MV;
-    public static MetaItem<?>.MetaValueItem UPGRADE_KIT_HV;
-    public static MetaItem<?>.MetaValueItem UPGRADE_KIT_EV;
-    public static MetaItem<?>.MetaValueItem UPGRADE_KIT_IV;
-    public static MetaItem<?>.MetaValueItem UPGRADE_KIT_LuV;
-    public static MetaItem<?>.MetaValueItem UPGRADE_KIT_ZPM;
-    public static MetaItem<?>.MetaValueItem UPGRADE_KIT_UV;
-    public static MetaItem<?>.MetaValueItem UPGRADE_KIT_UHV;
-    public static MetaItem<?>.MetaValueItem UPGRADE_KIT_UEV;
-    public static MetaItem<?>.MetaValueItem UPGRADE_KIT_UIV;
-    public static MetaItem<?>.MetaValueItem UPGRADE_KIT_UXV;
-
     public static MetaItem<?>.MetaValueItem JIAO_XIAN_REN_ZHANG;
     public static MetaItem<?>.MetaValueItem NONG_SUO_XIAN_REN_ZHANG;
     public static MetaItem<?>.MetaValueItem NONG_SUO_TANG_JIAO;
