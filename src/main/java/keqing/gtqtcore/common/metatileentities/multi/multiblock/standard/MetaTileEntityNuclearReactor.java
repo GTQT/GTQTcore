@@ -101,7 +101,7 @@ public class MetaTileEntityNuclearReactor extends RecipeMapMultiblockController 
     }
     FluidStack WATER_STACK = Water.getFluid(1000*rate);
     FluidStack HOT_STACK1 = GTQTMaterials.HighPressureSteam.getFluid(1);
-    FluidStack HOT_STACK2 = GTQTMaterials.HighPressureSteam.getFluid((int) (heat*((cold/temp)/100)));
+    FluidStack HOT_STACK2 = GTQTMaterials.HighPressureSteam.getFluid(5);
     @Override
     public void update() {
         super.update();
