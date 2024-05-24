@@ -2592,5 +2592,12 @@ public class FirstDegreeMaterials {
                 .flags(DISABLE_DECOMPOSITION, NO_SMASHING, NO_SMELTING, GENERATE_PLATE, GENERATE_FOIL, GENERATE_ROD, GENERATE_FINE_WIRE)
                 .build();
 
+        //
+        GTQTMaterials.Lsteam = new Material.Builder(getMaterialsId(), gregtechId("lsteam"))
+                .fluid()
+                .color(0x473C8B)
+                .iconSet(SHINY)
+                .build();
+
     }
 }

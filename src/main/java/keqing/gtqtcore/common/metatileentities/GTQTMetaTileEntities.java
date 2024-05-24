@@ -101,7 +101,6 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityBReactor B_REACTOR;
     public static MetaTileEntityHugeDistillationTower HUGE_DISTILLATION_TOWER;
     public static MetaTileEntityHugeVacuum HUGE_VACUUM;
-    public static final MetaTileEntityEFusionReactor[] EFUSION_REACTOR = new MetaTileEntityEFusionReactor[3];
     public static MetaTileEntityVacuumFreezer VACUUM_FREEZER;
     public static MetaTileEntityPyrolysisTower PYROLYSIS_TOWER;
     public static MetaTileEntityQuantumForceTransformer QUANTUM_FORCE_TRANSFORMER;
@@ -214,6 +213,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityKQCCComputationHatch[] KQCC_COMPUTATION_HATCH_RECEIVER=new MetaTileEntityKQCCComputationHatch[12];
     public static MetaTileEntityKQCCComputationHatch[] KQCC_COMPUTATION_HATCH_TRANSMITTER=new MetaTileEntityKQCCComputationHatch[12];
     public static MetaTileEntityMSF MSF;
+    public static MetaTileEntityCoolingTower COOLING_TOWER;
     public static SimpleMachineMetaTileEntity PARTICLE_ACCELERATOR_IO;
     public static MetaTileEntityLargeGrind LAGER_GRIND;
     public static MetaTileEntityLargeForging LAGER_FORGING;
@@ -245,6 +245,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityIndustrialDrill INDUSTRIAL_DRILL;
     public static MetaTileEntityIonImplanter ION_IMPLANTATOR;
     public static MetaTileEntityCZPuller CZ_PULLER;
+    public static MetaTileEntityNuclearReactor NUCLEAR_REACTOR;
     public static MetaTileEntityLargeTurbine LARGE_FUEL_TURBINE;
     public static final MetaTileEntityReinforcedRotorHolder[] MULTIPART_REINFORCED_ROTOR_HOLDER = new MetaTileEntityReinforcedRotorHolder[8];
     //public static MetaTileEntityObjectHolder OBJECT_HOLDER;
@@ -288,9 +289,7 @@ public class GTQTMetaTileEntities {
         RTG[1] = registerMetaTileEntity(3021, new SimpleGeneratorMetaTileEntity(gtqtcoreId("rtg.iv"), GTQTcoreRecipeMaps.RTG_RECIPES, GTQTTextures.RTG_OVERLAY, 5, genericGeneratorTankSizeFunction,true));
         RTG[2] = registerMetaTileEntity(3022, new SimpleGeneratorMetaTileEntity(gtqtcoreId("rtg.luv"), GTQTcoreRecipeMaps.RTG_RECIPES, GTQTTextures.RTG_OVERLAY, 6, genericGeneratorTankSizeFunction,true));
         //发电设备 多方块
-        EFUSION_REACTOR[0] = registerMetaTileEntity(3050, new MetaTileEntityEFusionReactor(gtqtcoreId("fusion_reactor.luv"), LuV));
-        EFUSION_REACTOR[1] = registerMetaTileEntity(3051, new MetaTileEntityEFusionReactor(gtqtcoreId("fusion_reactor.zpm"), GTValues.ZPM));
-        EFUSION_REACTOR[2] = registerMetaTileEntity(3052, new MetaTileEntityEFusionReactor(gtqtcoreId("fusion_reactor.uv"), GTValues.UV));
+        NUCLEAR_REACTOR = registerMetaTileEntity(3050, new MetaTileEntityNuclearReactor(gtqtcoreId("nuclear_reactor")));
 
         HYPER_REACTOR_MK1 = registerMetaTileEntity(3053, new MetaTileEntityHyperReactorMk1(gtqtcoreId("hyper_reactor_mk1")));
         HYPER_REACTOR_MK2 = registerMetaTileEntity(3054, new MetaTileEntityHyperReactorMk2(gtqtcoreId("hyper_reactor_mk2")));
@@ -385,6 +384,7 @@ public class GTQTMetaTileEntities {
         NANO_COATING= registerMetaTileEntity(3196, new MetaTileEntityNanoCoating(gtqtcoreId("nano_coating")));
         POWER_SUPPLY= registerMetaTileEntity(3197, new MetaTileEntityPowerSupply(gtqtcoreId("power_supply")));
         FROTH_FLOTATION_TANK = registerMetaTileEntity(3198, new MetaTileEntityFrothFlotationTank(gtqtcoreId("froth_flotation_tank")));
+        COOLING_TOWER = registerMetaTileEntity(3199, new MetaTileEntityCoolingTower(gtqtcoreId("cooling_tower")));
         //重写设备
         DISTILLATION_TOWER = registerMetaTileEntity(3250, new MetaTileEntityDistillationTower(gtqtcoreId("distillation_tower")));
         CRACKER = registerMetaTileEntity(3251, new MetaTileEntityCrackingUnit(gtqtcoreId("cracker")));

@@ -50,6 +50,7 @@ import java.util.List;
 
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.util.RelativeDirection.*;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.Lsteam;
 
 public class MetaTileEntityHeatExchanger extends NoEnergyMultiblockController implements IProgressBarMultiblock {
     private int coilLevel;
@@ -101,7 +102,8 @@ public class MetaTileEntityHeatExchanger extends NoEnergyMultiblockController im
     }
     FluidStack WATER_STACK = Water.getFluid(thresholdPercentage*getNumber()*2*getmax(coilLevel)*getrate());
     FluidStack DWATER_STACK = DistilledWater.getFluid(thresholdPercentage*getNumber()*getmax(coilLevel)*getrate());
-    FluidStack STEAM_STACK = Steam.getFluid(thresholdPercentage*getNumber()*64*getmax(coilLevel)*getrate());
+    FluidStack STEAM_STACK = Steam.getFluid(thresholdPercentage*getNumber()*32*getmax(coilLevel)*getrate());
+    FluidStack LSTEAM_STACK = Lsteam.getFluid(thresholdPercentage*getNumber()*96*getmax(coilLevel)*getrate());
 
     public int getrate()
     {
@@ -131,6 +133,7 @@ public class MetaTileEntityHeatExchanger extends NoEnergyMultiblockController im
             TempB +=(TempA - TempB)*getmax(coilLevel)*tubeTier/ (thresholdPercentage*800.0/number);
             TempA -=(TempA - TempB)*getmax(coilLevel)*tubeTier / (thresholdPercentage*1600.0/number);
             fillTanks(STEAM_STACK,false);
+            fillTanks(LSTEAM_STACK,false);
         }
 
         if(TempA>TempB&&TempA>10000)
@@ -139,6 +142,7 @@ public class MetaTileEntityHeatExchanger extends NoEnergyMultiblockController im
                 TempB +=(TempA - TempB)*getmax(coilLevel)*tubeTier / (thresholdPercentage*720.0/number);
                 TempA -=(TempA - TempB)*getmax(coilLevel)*tubeTier / (thresholdPercentage*1440.0/number);
                 fillTanks(STEAM_STACK,false);
+                fillTanks(LSTEAM_STACK,false);
             }
 
 

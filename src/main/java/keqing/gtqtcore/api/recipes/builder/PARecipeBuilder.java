@@ -5,7 +5,6 @@ import gregtech.api.recipes.RecipeBuilder;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.util.EnumValidationResult;
 import keqing.gtqtcore.api.recipes.properties.PAPartProperty;
-import keqing.gtqtcore.api.recipes.properties.PCBPartProperty;
 import keqing.gtqtcore.api.utils.GTQTLog;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 

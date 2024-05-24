@@ -35,6 +35,7 @@ public class GTQTMetaBlocks {
     public static GTQTElectronMicroscope ELECTRON_MICROSCOPE;
     public static GTQTElectrobath ELECTROBATH;
     public static GTQTParticleAccelerator PARTICLE_ACCELERATOR;
+    public static GTQTNuclearFusion NUCLEAR_FUSION;
     public static GTQTRoad ROAD;
     public static GTQTKQCC KQCC;
     public static GTQTPowerSupply POWER;
@@ -82,6 +83,9 @@ public class GTQTMetaBlocks {
         ELECTROBATH.setRegistryName("electrobath");
         PARTICLE_ACCELERATOR = new GTQTParticleAccelerator();
         PARTICLE_ACCELERATOR.setRegistryName("particle_accelerator");
+
+        NUCLEAR_FUSION = new GTQTNuclearFusion();
+        NUCLEAR_FUSION.setRegistryName("nuclear_fusion");
         KQCC = new GTQTKQCC();
         KQCC.setRegistryName("computer_competent");
         POWER = new GTQTPowerSupply();
@@ -129,6 +133,7 @@ public class GTQTMetaBlocks {
         registerItemModel(COMPONENT_ASSEMBLY_LINE);
         registerItemModel(ISA_CASING);
         registerItemModel(ELECTRON_MICROSCOPE);
+        registerItemModel(NUCLEAR_FUSION);
         registerItemModel(KQCC);
         registerItemModel(POWER);
         registerItemModel(GLASS_CASING);

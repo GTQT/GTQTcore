@@ -7,7 +7,6 @@ import gregtech.api.recipes.recipeproperties.TotalComputationProperty;
 import gregtech.api.util.EnumValidationResult;
 import gregtech.api.util.GTLog;
 import keqing.gtqtcore.api.recipes.properties.KQNetProperty;
-import keqing.gtqtcore.api.recipes.properties.PCBPartProperty;
 import keqing.gtqtcore.api.utils.GTQTLog;
 
 

@@ -99,6 +99,7 @@ minecraft {
     args.add("-Dmixin.hotSwap=true")
     args.add("-Dmixin.checks.interfaces=true")
     args.add("-Dmixin.debug.export=true")
+    args.add("-Dfile.encoding=UTF-8")
     extraRunJvmArguments.addAll(args)
 
     // If needed, add extra tweaker classes like for mixins.

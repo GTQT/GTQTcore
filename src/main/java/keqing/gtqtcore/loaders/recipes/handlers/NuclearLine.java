@@ -191,10 +191,12 @@ public class NuclearLine {
                 .EUt(1920)
                 .buildAndRegister();
 
+        //独立要带参
         NUCLEAR_RECIPES.recipeBuilder()
                 .input(ranliaowan,material)
                 .output(kujieranliaowan,material)
-                .duration(600+fuel*80)
+                .duration(1800+fuel*240)
+                .minTemp(fuel)
                 .EUt(2048)
                 .buildAndRegister();
 

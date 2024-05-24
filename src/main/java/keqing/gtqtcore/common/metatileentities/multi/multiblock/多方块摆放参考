@@ -24,3 +24,11 @@ abilities(MultiblockAbility.EXPORT_ENERGY)
 abilities(MultiblockAbility.MUFFLER_HATCH)
 维护仓
 abilities(MultiblockAbility.MAINTENANCE_HATCH)
+
+    public boolean hasMaintenanceMechanics() {
+        return true;
+    }
+
+    public boolean hasMufflerMechanics() {
+        return false;
+    }

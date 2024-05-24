@@ -725,7 +725,8 @@ gtqtcore.machine.energy_hatch.output_16a.uev.name=16 安动力仓（UEV）
 gtqtcore.machine.energy_hatch.output_16a.uiv.name=16 安动力仓（UIV）
 gtqtcore.machine.energy_hatch.output_16a.uxv.name=16 安动力仓（UXV）
 gtqtcore.machine.energy_hatch.output_16a.opv.name=16 安动力仓（OpV）
-
+gtqtcore.machine.nuclear_reactor.name=核裂变压力反应容器
+recipemap.nuclear_recipes.name=球床裂变
 gtqtcore.machine.burner_reactor.name=燃烧反应室
 recipemap.burner_reactor_recipes.name=燃烧反应
 

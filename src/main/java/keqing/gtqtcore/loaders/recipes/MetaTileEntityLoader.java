@@ -525,9 +525,9 @@ public class MetaTileEntityLoader {
                 new UnificationEntry(OrePrefix.circuit, HV), 'F', EMITTER_HV);
 
         ModHandler.addShapedRecipe(true, "clarifier", GTQTMetaTileEntities.CLARIFIER.getStackForm(),
-                "FFF", "BMB", "CCC", 'M', MetaTileEntities.HULL[GTValues.MV].getStackForm(), 'B',
-                new UnificationEntry(plateDouble, Aluminium), 'C',
-                new UnificationEntry(OrePrefix.circuit, MV), 'F', ELECTRIC_PUMP_MV);
+                "FFF", "BMB", "CCC", 'M', MetaTileEntities.HULL[GTValues.LV].getStackForm(), 'B',
+                new UnificationEntry(plateDouble, Steel), 'C',
+                new UnificationEntry(OrePrefix.circuit, LV), 'F', ELECTRIC_PUMP_LV);
 
         ModHandler.addShapedRecipe(true, "ocean_pumper", GTQTMetaTileEntities.OCEAN_PUMPER.getStackForm(),
                 "FFF", "CMC", "FFF", 'M', MetaTileEntities.HULL[GTValues.LV].getStackForm(), 'C',

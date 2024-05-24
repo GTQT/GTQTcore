@@ -18,22 +18,10 @@ public class AluminiumLine {
     public static void init() {
         RecipeMaps.BLAST_RECIPES.recipeBuilder()
                 .input(dust, Alumina, 2)
-                .input(dust, Carbon, 3)
                 .output(ingot, Aluminium, 4)
-                .fluidOutputs(CarbonDioxide.getFluid(3000))
-                .circuitMeta(1)
+                .fluidOutputs(Oxygen.getFluid(6000))
                 .blastFurnaceTemp(1700)
                 .duration(1600).EUt(VA[MV]).buildAndRegister();
-
-        RecipeMaps.BLAST_RECIPES.recipeBuilder()
-                .input(dust, Alumina, 2)
-                .input(dust, Carbon, 3)
-                .fluidInputs(Nitrogen.getFluid(2000))
-                .output(ingot, Aluminium, 4)
-                .fluidOutputs(CarbonDioxide.getFluid(3000))
-                .circuitMeta(2)
-                .blastFurnaceTemp(1700)
-                .duration(1000).EUt(VA[MV]).buildAndRegister();
 
         RecipeMaps.BLAST_RECIPES.recipeBuilder()
                 .input(dust, Aluminium, 1)
@@ -91,9 +79,6 @@ public class AluminiumLine {
                 .tier(1)
                 .duration(200)
                 .buildAndRegister();
-
-
-
 
     }
 }

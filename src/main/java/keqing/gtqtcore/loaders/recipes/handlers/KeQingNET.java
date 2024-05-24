@@ -956,6 +956,7 @@ public class KeQingNET {
                 .totalCWU(100000)
                 .buildAndRegister();
 
+        /*
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .inputs(FUSION_CASING.getItemVariant(SUPERCONDUCTOR_COIL))
                 .input(circuit, Tier.ZPM, 8)
@@ -966,13 +967,13 @@ public class KeQingNET {
                 .input(wireGtSingle, IndiumTinBariumTitaniumCuprate, 32)
                 .fluidInputs(SolderingAlloy.getFluid(L * 8))
                 .fluidInputs(NiobiumTitanium.getFluid(L * 8))
-                .outputs(EFUSION_REACTOR[0].getStackForm())
+                .outputs(FUSION_REACTOR[0].getStackForm())
                 .scannerResearch(b -> b
                         .researchStack(DISK_6.getStackForm())
                         .duration(1200)
                         .EUt(VA[IV]))
                 .duration(800).EUt(VA[LuV]).buildAndRegister();
-
+*/
         //7 可控核聚变-聚变超导线圈
         GTQTcoreRecipeMaps.KEQING_NET_RECIES.recipeBuilder()
                 .input(DISK_0)
