@@ -79,7 +79,7 @@ public class MetaTileEntityCoolingTower extends MetaTileEntityBaseWithControl{
 
     FluidStack WATER_STACK = Water.getFluid(1000*rate);
 
-    FluidStack STEAM_STACK = GTQTMaterials.Lsteam.getFluid(50*rate);
+    FluidStack STEAM_STACK = GTQTMaterials.SteamExhaustGas.getFluid(50*rate);
     public boolean fillTanks(FluidStack stack, boolean simulate) {
         return GTTransferUtils.addFluidsToFluidHandler(getOutputFluidInventory(), simulate, Collections.singletonList(stack));
     }
@@ -202,7 +202,7 @@ public class MetaTileEntityCoolingTower extends MetaTileEntityBaseWithControl{
     @Override
     public void update() {
         super.update();
-        //pollutionParticles();
+        pollutionParticles();
 
     }
     private void pollutionParticles() {

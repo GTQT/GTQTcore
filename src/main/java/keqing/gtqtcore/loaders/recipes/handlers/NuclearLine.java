@@ -1,14 +1,17 @@
 package keqing.gtqtcore.loaders.recipes.handlers;
 
 import gregtech.api.metatileentity.multiblock.CleanroomType;
+import gregtech.api.unification.material.MarkerMaterials;
 import gregtech.api.unification.material.Material;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
+import keqing.gtqtcore.common.block.blocks.GTQTNuclearFusion;
 import keqing.gtqtcore.common.block.blocks.GTQTParticleAccelerator;
 
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
+import static gregtech.common.items.MetaItems.*;
 import static gregtech.common.metatileentities.MetaTileEntities.CENTRIFUGE;
 import static gregtech.common.metatileentities.MetaTileEntities.HULL;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
@@ -17,7 +20,10 @@ import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.TJMaterials.Cobalt60;
 import static keqing.gtqtcore.api.unification.material.info.EPMaterialFlags.GENERATE_PELLETS;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.*;
+import static keqing.gtqtcore.common.block.blocks.GTQTNuclearFusion.CasingType.NUCLEAR_FUSION_CASING;
 import static keqing.gtqtcore.common.block.blocks.GTQTPowerSupply.SupplyType.POWER_SUPPLY_BASIC;
+import static keqing.gtqtcore.common.items.GTQTMetaItems.DISK_4;
+import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.*;
 
 public class NuclearLine {
     public static void init() {
@@ -86,8 +92,138 @@ public class NuclearLine {
         PA(Americium,Neptunium,4,5);
         PA(Curium246,Plutonium244,4,6);
 
-
+        nuclearcasing();
     }
+
+    private static void nuclearcasing() {
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(HULL[3], 4)
+                .input(circuit,MarkerMaterials.Tier.HV , 16)
+                .input(ELECTRIC_PUMP_HV, 8)
+                .input(pipeHugeFluid, StainlessSteel, 8)
+                .input(plate, Talonite, 6)
+                .input(gear, Titanium, 12)
+                .input(stick, NanometerBariumTitanate, 12)
+                .input(spring, RTMAlloy, 12)
+                .input(wireGtHex, Gold, 32)
+                .fluidInputs(Polyethylene.getFluid(2000))
+                .fluidInputs(Polytetrafluoroethylene.getFluid(2000))
+                .fluidInputs(ReinforcedEpoxyResin.getFluid(2000))
+                .fluidInputs(Tin.getFluid(1000))
+                .outputs(LAGER_HEAT_EXCHANGER.getStackForm())
+                .scannerResearch(b -> b
+                        .researchStack(STEAM_TURBINE[1].getStackForm())
+                        .duration(1200)
+                        .EUt(VA[HV]))
+                .duration(400).EUt(VA[HV]).buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(HULL[4], 4)
+                .input(circuit,MarkerMaterials.Tier.EV , 16)
+                .input(ELECTRIC_PUMP_HV, 16)
+                .input(pipeHugeFluid, TungstenSteel, 8)
+                .input(plate, Palladium, 12)
+                .input(stick, HSSE, 12)
+                .input(spring, RTMAlloy, 12)
+                .input(foil, Osmiridium, 6)
+                .input(wireGtHex, Platinum, 32)
+                .fluidInputs(Polyethylene.getFluid(16000))
+                .fluidInputs(Polytetrafluoroethylene.getFluid(8000))
+                .fluidInputs(ReinforcedEpoxyResin.getFluid(4000))
+                .fluidInputs(Polybenzimidazole.getFluid(1000))
+                .outputs(HEAT_CHANGER.getStackForm())
+                .scannerResearch(b -> b
+                        .researchStack(LAGER_HEAT_EXCHANGER.getStackForm())
+                        .duration(1200)
+                        .EUt(VA[HV]))
+                .duration(400).EUt(VA[EV]).buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(HULL[4], 4)
+                .input(circuit,MarkerMaterials.Tier.EV , 16)
+                .input(ROBOT_ARM_EV, 8)
+                .input(ELECTRIC_MOTOR_EV, 8)
+                .input(plateDense, NanometerBariumTitanate, 8)
+                .input(gear, HSSG, 12)
+                .input(stick, HSSE, 12)
+                .input(spring, RTMAlloy, 12)
+                .input(foil, Osmiridium, 6)
+                .input(wireGtHex, Platinum, 32)
+                .fluidInputs(Polyethylene.getFluid(16000))
+                .fluidInputs(Polytetrafluoroethylene.getFluid(8000))
+                .fluidInputs(ReinforcedEpoxyResin.getFluid(4000))
+                .fluidInputs(Polybenzimidazole.getFluid(1000))
+                .outputs(NUCLEAR_REACTOR.getStackForm())
+                .scannerResearch(b -> b
+                        .researchStack(RTG[0].getStackForm())
+                        .duration(1200)
+                        .EUt(VA[HV]))
+                .duration(400).EUt(VA[EV]).buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(HULL[4], 4)
+                .input(circuit,MarkerMaterials.Tier.HV , 16)
+                .input(ELECTRIC_PUMP_EV, 8)
+                .input(plateDense, Aluminium, 8)
+                .input(frameGt, StainlessSteel, 12)
+                .input(stick, HSSE, 12)
+                .input(spring, RTMAlloy, 12)
+                .input(foil, Osmiridium, 6)
+                .input(wireGtHex, Platinum, 32)
+                .fluidInputs(Polyethylene.getFluid(16000))
+                .fluidInputs(Polytetrafluoroethylene.getFluid(8000))
+                .fluidInputs(ReinforcedEpoxyResin.getFluid(4000))
+                .fluidInputs(Polybenzimidazole.getFluid(1000))
+                .outputs(COOLING_TOWER.getStackForm())
+                .scannerResearch(b -> b
+                        .researchStack(VACUUM_FREEZER.getStackForm())
+                        .duration(1200)
+                        .EUt(VA[HV]))
+                .duration(1200).EUt(VA[EV]).buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(plateDense, TungstenSteel, 6)
+                .input(gear, HSSG, 6)
+                .input(stick, HSSE, 6)
+                .input(spring, RTMAlloy, 6)
+                .input(foil, Osmiridium, 6)
+                .input(wireGtHex, Platinum, 6)
+                .fluidInputs(Polyethylene.getFluid(16000))
+                .fluidInputs(Polytetrafluoroethylene.getFluid(8000))
+                .fluidInputs(ReinforcedEpoxyResin.getFluid(4000))
+                .fluidInputs(Polybenzimidazole.getFluid(1000))
+                .outputs(GTQTMetaBlocks.NUCLEAR_FUSION.getItemVariant(NUCLEAR_FUSION_CASING,4))
+                .duration(1200).EUt(VA[EV]).buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(plateDense, Titanium, 6)
+                .input(gear, HSSG, 6)
+                .input(stick, HSSE, 6)
+                .input(spring, Inconel625, 6)
+                .input(foil, Ruridit, 6)
+                .input(wireGtHex, Platinum, 6)
+                .fluidInputs(Polyethylene.getFluid(16000))
+                .fluidInputs(Polytetrafluoroethylene.getFluid(8000))
+                .fluidInputs(ReinforcedEpoxyResin.getFluid(4000))
+                .fluidInputs(Polybenzimidazole.getFluid(1000))
+                .outputs(GTQTMetaBlocks.NUCLEAR_FUSION.getItemVariant(GTQTNuclearFusion.CasingType.NUCLEAR_FUSION_FRAME,4))
+                .duration(400).EUt(VA[EV]).buildAndRegister();
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(plateDense, Aluminium, 1)
+                .input(stick, Steel, 4)
+                .outputs(GTQTMetaBlocks.NUCLEAR_FUSION.getItemVariant(GTQTNuclearFusion.CasingType.NUCLEAR_FUSION_COOLING,16))
+                .circuitMeta(10)
+                .duration(400).EUt(VA[EV]).buildAndRegister();
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(plateDense, StainlessSteel, 1)
+                .input(stick, Steel, 4)
+                .outputs(GTQTMetaBlocks.NUCLEAR_FUSION.getItemVariant(GTQTNuclearFusion.CasingType.NUCLEAR_FUSION_COOLING,64))
+                .circuitMeta(10)
+                .duration(400).EUt(VA[EV]).buildAndRegister();
+    }
+
     private static void PAc(Material  material1,int kind,int tier) {
         PAC_RECIPES.recipeBuilder()
                 .fluidInputs(material1.getFluid(1000))
@@ -207,12 +343,12 @@ public class NuclearLine {
                 .input(block,Graphite,1)
                 .input(block,Graphite,1)
                 .input(plateDense,Lead,1)
-                .input(upellets,material,1)
-                .input(upellets,material,1)
+                .input(pellets,material,1)
+                .input(pellets,material,1)
                 .input(plateDense,Lead,1)
                 .input(plateDense,Lead,1)
-                .input(upellets,material,1)
-                .input(upellets,material,1)
+                .input(pellets,material,1)
+                .input(pellets,material,1)
                 .input(plateDense,Lead,1)
                 .input(block,Graphite,1)
                 .input(block,Graphite,1)

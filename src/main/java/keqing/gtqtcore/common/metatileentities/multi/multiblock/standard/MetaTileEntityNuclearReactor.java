@@ -116,7 +116,7 @@ public class MetaTileEntityNuclearReactor extends RecipeMapMultiblockController 
         if (WATER_STACK.isFluidStackIdentical(inputTank.drain(WATER_STACK, false))&&heat>100) {
             inputTank.drain(WATER_STACK, true);
             fillTanks(HOT_STACK1,false);
-            if(temp-cold<0)fillTanks(HOT_STACK2,false);
+            if(temp-cold<=0)fillTanks(HOT_STACK2,false);
             cold=rate;
             heat-=heat*((cold/temp)/100);
             addtemp-=rate*0.0002;

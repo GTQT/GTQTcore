@@ -729,7 +729,7 @@ gtqtcore.machine.nuclear_reactor.name=核裂变压力反应容器
 recipemap.nuclear_recipes.name=球床裂变
 gtqtcore.machine.burner_reactor.name=燃烧反应室
 recipemap.burner_reactor_recipes.name=燃烧反应
-
+gtqtcore.machine.cooling_tower.name=冷却塔
 gtqtcore.machine.cryogenic_reactor.name=低温反应室
 recipemap.cryogenic_reactor_recipes.name=低温反应
 
@@ -1103,6 +1103,24 @@ gregtech.material.zinc_rich_sphalerite=富锌闪锌矿
 gregtech.material.zinc_oxide=氧化锌
 gregtech.material.waelz_oxide=威氏氧化物
 gregtech.material.waelz_slag=威氏浸出渣
+gregtech.material.hematite=赤铁矿
+gregtech.material.richmagic=富集魔力
+gregtech.material.fullerene_polymer_matrix=富勒烯聚合物基体
+gregtech.material.periodicium=元素周期表
+gregtech.material.iriduim_fluid=（II）氯化铱
+gregtech.material.neutronium_nanotube=掺中子素碳纳米管
+gregtech.material.polyacrylonitrile=聚丙烯腈
+gregtech.material.cellulose=纤维素
+gregtech.material.steam_exhaust_gas=蒸汽废气
+gregtech.material.super_heated_steam=过热蒸汽
+gregtech.material.ethanesulphonat=甲基月桂酰基牛磺酸钠
+gregtech.material.ethylenimine=亚乙基亚胺
+gregtech.material.urea_mix=尿素
+gregtech.material.fermentation_base=葡萄糖培养基
+gregtech.material.propionic_acid=丙酸
+gregtech.material.octene=辛烯
+gregtech.material.hexachloroplatinic_acid=六水合六氯铂(Ⅳ)酸
+gregtech.material.starlight=星光
 gregtech.material.impure_germanium_dioxide=含杂氧化锗
 gregtech.material.germanium_tetrachloride=四氯化锗
 gregtech.material.molybdenum_trioxide=三氧化钼
@@ -3491,6 +3509,10 @@ tile.turbine_casing.nq_machine_casing.name=硅岩合金机械外壳
 tile.turbine_casing.nq_turbine_casing.name=硅岩合计管道外壳
 tile.turbine_casing.fishing_casing.name=渔场外壳
 
+tile.nuclear_fusion.nuclear_fusion_casing.name=核裂变压力容器
+tile.nuclear_fusion.nuclear_fusion_frame.name=核裂变压力框架
+tile.nuclear_fusion.nuclear_fusion_cooling.name=冷却塔外壳
+
 tile.stepper.laser_mki.name=紫外发射器MKI
 tile.stepper.f_laser_mki.name=射频调节器MKI
 tile.stepper.clean_mki.name=自净过滤器MKI
@@ -3679,22 +3701,6 @@ gtqtcore.machine.pcb_factory.structure.info=结构等级：%s (线宽：%sμm)
 gtqtcore.machine.pcb_factory.structure.cooling_tower=冷却已启用
 gtqtcore.machine.pcb_factory.structure.thermosink=内部温度正在逼近绝对零度
 gtqtcore.machine.pcb_factory.structure.bio_chamber=有机黏菌充斥于生物仓中
-
-metaitem.upgrade.kit.ulv.name=ULV 升级套件
-metaitem.upgrade.kit.lv.name=LV 升级套件
-metaitem.upgrade.kit.mv.name=MV 升级套件
-metaitem.upgrade.kit.hv.name=HV 升级套件
-metaitem.upgrade.kit.ev.name=EV 升级套件
-metaitem.upgrade.kit.iv.name=IV 升级套件
-metaitem.upgrade.kit.luv.name=LuV 升级套件
-metaitem.upgrade.kit.zpm.name=ZPM 升级套件
-metaitem.upgrade.kit.uv.name=UV 升级套件
-metaitem.upgrade.kit.uhv.name=UHV 升级套件
-metaitem.upgrade.kit.uev.name=UEV 升级套件
-metaitem.upgrade.kit.uiv.name=UIV 升级套件
-metaitem.upgrade.kit.uxv.name=UXV 升级套件
-
-gtqtcore.tooltips.upgrade_kit=右键为机器升级到目标电压等级,请注意不会保留机器原本的任何数据！请先将物品等取出！
 
 recipemap.molecular_distillation_recipes.name=高真空分子蒸馏
 gtqtcore.machine.dangote_distillery.name=丹格特蒸馏厂

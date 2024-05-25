@@ -2366,7 +2366,7 @@ public class FirstDegreeMaterials {
                 .build()
                 .setFormula("C8H17NO3S", true);
         //环己胺基乙磺酸钠
-        GTQTMaterials.Ethanesulphonate  = new Material.Builder(getMaterialsId(), gregtechId("ethanesulphonate "))
+        GTQTMaterials.Ethanesulphonate  = new Material.Builder(getMaterialsId(), gregtechId("ethanesulphonate"))
                 .fluid()
                 .color(0xCDAA7D)
                 .flags(DISABLE_DECOMPOSITION)
@@ -2592,12 +2592,6 @@ public class FirstDegreeMaterials {
                 .flags(DISABLE_DECOMPOSITION, NO_SMASHING, NO_SMELTING, GENERATE_PLATE, GENERATE_FOIL, GENERATE_ROD, GENERATE_FINE_WIRE)
                 .build();
 
-        //
-        GTQTMaterials.Lsteam = new Material.Builder(getMaterialsId(), gregtechId("lsteam"))
-                .fluid()
-                .color(0x473C8B)
-                .iconSet(SHINY)
-                .build();
 
     }
 }

@@ -50,7 +50,7 @@ import java.util.List;
 
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.util.RelativeDirection.*;
-import static keqing.gtqtcore.api.unification.GTQTMaterials.Lsteam;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.SteamExhaustGas;
 
 public class MetaTileEntityHeatExchanger extends NoEnergyMultiblockController implements IProgressBarMultiblock {
     private int coilLevel;
@@ -102,8 +102,8 @@ public class MetaTileEntityHeatExchanger extends NoEnergyMultiblockController im
     }
     FluidStack WATER_STACK = Water.getFluid(thresholdPercentage*getNumber()*2*getmax(coilLevel)*getrate());
     FluidStack DWATER_STACK = DistilledWater.getFluid(thresholdPercentage*getNumber()*getmax(coilLevel)*getrate());
-    FluidStack STEAM_STACK = Steam.getFluid(thresholdPercentage*getNumber()*32*getmax(coilLevel)*getrate());
-    FluidStack LSTEAM_STACK = Lsteam.getFluid(thresholdPercentage*getNumber()*96*getmax(coilLevel)*getrate());
+    FluidStack STEAM_STACK = Steam.getFluid(thresholdPercentage*getNumber()*64*getmax(coilLevel)*getrate());
+    FluidStack LSTEAM_STACK = SteamExhaustGas.getFluid(thresholdPercentage*getNumber()*16*getmax(coilLevel)*getrate());
 
     public int getrate()
     {
