@@ -147,7 +147,7 @@ public class MetaTileEntityPowerSupply extends MultiblockWithDisplayBase  {
                 BlockPos poss = this.getPos().add(xDir + i, 0, zDir + j);
                 if (GetTier(poss,i,j) !=11&&GetTier(poss,i,j) !=0)//排除不供电区
                     if (GTUtility.getMetaTileEntity(this.getWorld(), poss.add(0,1,0)) instanceof MetaTileEntity) {
-                    MetaTileEntity mte = (MetaTileEntity) GTUtility.getMetaTileEntity(this.getWorld(), poss.add(0,1,0));
+                        MetaTileEntity mte = (MetaTileEntity) GTUtility.getMetaTileEntity(this.getWorld(), poss.add(0,1,0));
                     int Energy=VA[GetTier(poss,i,j)];
                     for (EnumFacing facing : EnumFacing.VALUES) {
                         if (mte.getCapability(GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER, facing) instanceof IEnergyContainer) {
