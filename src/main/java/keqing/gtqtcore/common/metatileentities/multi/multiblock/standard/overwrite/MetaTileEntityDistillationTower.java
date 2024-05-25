@@ -4,27 +4,30 @@ import gregtech.api.capability.IMultipleTankHandler;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
+import gregtech.api.metatileentity.multiblock.IMultiblockAbilityPart;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
+import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMaps;
-import gregtech.api.util.GTUtility;
-import gregtech.api.util.RelativeDirection;
-import gregtech.api.util.TextComponentUtil;
+import gregtech.api.util.*;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.common.blocks.BlockMetalCasing.MetalCasingType;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiFluidHatch;
+import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockPart;
 import gregtech.common.metatileentities.multi.multiblockpart.appeng.MetaTileEntityMEOutputHatch;
 import gregtech.core.sound.GTSoundEvents;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.metaileentity.multiblock.GTQTRecipeMapMultiblockOverwrite;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
+import keqing.gtqtcore.api.utils.GTQTLog;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.block.state.IBlockState;
@@ -40,18 +43,22 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.IFluidTank;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.items.IItemHandlerModifiable;
 
 import java.util.List;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import static gregtech.api.GTValues.VA;
 import static gregtech.api.unification.material.Materials.Lubricant;
 import static gregtech.api.util.RelativeDirection.*;
 
 public class MetaTileEntityDistillationTower extends GTQTRecipeMapMultiblockOverwrite {
-
+    protected int layerCount;
+    protected List<IFluidTank> orderedFluidOutputs;
     private int tier;
     private int casingTier;
     private int tubeTier;
@@ -132,6 +139,62 @@ public class MetaTileEntityDistillationTower extends GTQTRecipeMapMultiblockOver
         public int getParallelLimit() {
             return ParallelNum;
         }
+
+        protected boolean applyFluidToOutputs(List<FluidStack> fluids, boolean doFill) {
+            boolean valid = true;
+            for (int i = 0; i < fluids.size(); i++) {
+                IFluidTank tank = orderedFluidOutputs.get(i);
+                // void if no hatch is found on that fluid's layer
+                // this is considered trimming and thus ignores canVoid
+                if (tank == null) continue;
+                int accepted = tank.fill(fluids.get(i), doFill);
+                if (accepted != fluids.get(i).amount) valid = false;
+                if (!doFill && !valid) break;
+            }
+            return valid;
+        }
+        @Override
+        protected void outputRecipeOutputs() {
+            GTTransferUtils.addItemsToItemHandler(getOutputInventory(), false, itemOutputs);
+            this.applyFluidToOutputs(fluidOutputs, true);
+        }
+
+        @Override
+        protected boolean setupAndConsumeRecipeInputs( Recipe recipe,
+                                                       IItemHandlerModifiable importInventory,
+                                                       IMultipleTankHandler importFluids) {
+            this.overclockResults = calculateOverclock(recipe);
+
+            modifyOverclockPost(overclockResults, recipe.getRecipePropertyStorage());
+
+            if (!hasEnoughPower(overclockResults)) {
+                return false;
+            }
+
+            IItemHandlerModifiable exportInventory = getOutputInventory();
+
+            // We have already trimmed outputs and chanced outputs at this time
+            // Attempt to merge all outputs + chanced outputs into the output bus, to prevent voiding chanced outputs
+            if (!metaTileEntity.canVoidRecipeItemOutputs() &&
+                    !GTTransferUtils.addItemsToItemHandler(exportInventory, true, recipe.getAllItemOutputs())) {
+                this.isOutputsFull = true;
+                return false;
+            }
+
+            // Perform layerwise fluid checks
+            if (!metaTileEntity.canVoidRecipeFluidOutputs() &&
+                    !this.applyFluidToOutputs(recipe.getAllFluidOutputs(), false)) {
+                this.isOutputsFull = true;
+                return false;
+            }
+
+            this.isOutputsFull = false;
+            if (recipe.matches(true, importInventory, importFluids)) {
+                this.metaTileEntity.addNotifiedInput(importInventory);
+                return true;
+            }
+            return false;
+        }
     }
 
 
@@ -184,8 +247,7 @@ public class MetaTileEntityDistillationTower extends GTQTRecipeMapMultiblockOver
                         .or(metaTileEntities(MultiblockAbility.REGISTRY.get(MultiblockAbility.EXPORT_FLUIDS).stream()
                                 .filter(mte -> !(mte instanceof MetaTileEntityMultiFluidHatch) &&
                                         !(mte instanceof MetaTileEntityMEOutputHatch))
-                                .toArray(MetaTileEntity[]::new))
-                                .setMinLayerLimited(1).setMaxLayerLimited(1))
+                                .toArray(MetaTileEntity[]::new)).setMaxLayerLimited(1, 1))
                         .or(autoAbilities(true, false)))
                 .where('F', TiredTraceabilityPredicate.CP_TUBE)
                 .build();
@@ -241,10 +303,49 @@ public class MetaTileEntityDistillationTower extends GTQTRecipeMapMultiblockOver
         tooltip.add(I18n.format("gregtech.machine.cracker.gtqtupdate.1"));
         tooltip.add(I18n.format("gregtech.machine.cracker.gtqtupdate.2"));
     }
-
+    protected List<IFluidTank> determineOrderedFluidOutputs() {
+        List<MetaTileEntityMultiblockPart> fluidExportParts = this.getMultiblockParts().stream()
+                .filter(iMultiblockPart -> iMultiblockPart instanceof IMultiblockAbilityPart<?> abilityPart &&
+                        abilityPart.getAbility() == MultiblockAbility.EXPORT_FLUIDS &&
+                        abilityPart instanceof MetaTileEntityMultiblockPart)
+                .map(iMultiblockPart -> (MetaTileEntityMultiblockPart) iMultiblockPart)
+                .collect(Collectors.toList());
+        // the fluidExportParts should come sorted in smallest Y first, largest Y last.
+        List<IFluidTank> orderedTankList = new ObjectArrayList<>();
+        int firstY = this.getPos().getY() + 1;
+        int exportIndex = 0;
+        for (int y = firstY; y < firstY + this.layerCount; y++) {
+            if (fluidExportParts.size() <= exportIndex) break;
+            MetaTileEntityMultiblockPart first = fluidExportParts.get(exportIndex);
+            if (first.getPos().getY() == y) {
+                // noinspection unchecked
+                ((IMultiblockAbilityPart<IFluidTank>) first).registerAbilities(orderedTankList);
+                exportIndex++;
+            } else if (first.getPos().getY() > y) {
+                orderedTankList.add(null);
+            } else {
+                GTQTLog.logger.error("The Distillation Tower at " + this.getPos() +
+                        " had a fluid export hatch with an unexpected Y position.");
+                this.invalidateStructure();
+                return new ObjectArrayList<>();
+            }
+        }
+        return orderedTankList;
+    }
+    @Override
+    public void invalidateStructure() {
+        super.invalidateStructure();
+        this.layerCount = 0;
+    }
+    protected int determineLayerCount(BlockPattern structurePattern) {
+        return structurePattern.formedRepetitionCount[1];
+    }
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
+        if (this.structurePattern == null) return;
+        this.layerCount = determineLayerCount(this.structurePattern);
+        this.orderedFluidOutputs = determineOrderedFluidOutputs();
         Object casingTier = context.get("ChemicalPlantCasingTiredStats");
         Object tubeTier = context.get("ChemicalPlantTubeTiredStats");
         this.casingTier = GTQTUtil.getOrDefault(() -> casingTier instanceof WrappedIntTired,
@@ -261,7 +362,10 @@ public class MetaTileEntityDistillationTower extends GTQTRecipeMapMultiblockOver
         ParallelLim=(int)Math.pow(2, tier);
         ParallelNum=ParallelLim;
     }
-
+    @Override
+    public int getFluidOutputLimit() {
+        return this.layerCount;
+    }
     protected IBlockState getCasingState() {
         return MetaBlocks.METAL_CASING.getState(MetalCasingType.STAINLESS_CLEAN);
     }
@@ -277,10 +381,6 @@ public class MetaTileEntityDistillationTower extends GTQTRecipeMapMultiblockOver
         return GTQTTextures.ALGAE_FARM_OVERLAY;
     }
 
-    @Override
-    public int getFluidOutputLimit() {
-        return getOutputFluidInventory().getTanks();
-    }
 
 
 }

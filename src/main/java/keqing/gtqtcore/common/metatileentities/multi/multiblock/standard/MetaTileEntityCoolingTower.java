@@ -75,7 +75,16 @@ public class MetaTileEntityCoolingTower extends MetaTileEntityBaseWithControl{
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {
         return new MetaTileEntityCoolingTower(this.metaTileEntityId);
     }
-
+    @Override
+    public NBTTagCompound writeToNBT(NBTTagCompound data) {
+        data.setInteger("rate", rate);
+        return super.writeToNBT(data);
+    }
+    @Override
+    public void readFromNBT(NBTTagCompound data) {
+        super.readFromNBT(data);
+        rate = data.getInteger("rate");
+    }
 
     FluidStack WATER_STACK = Water.getFluid(1000*rate);
 
@@ -202,8 +211,7 @@ public class MetaTileEntityCoolingTower extends MetaTileEntityBaseWithControl{
     @Override
     public void update() {
         super.update();
-        pollutionParticles();
-
+        if(isStructureFormed())pollutionParticles();
     }
     private void pollutionParticles() {
         BlockPos pos = this.getPos();

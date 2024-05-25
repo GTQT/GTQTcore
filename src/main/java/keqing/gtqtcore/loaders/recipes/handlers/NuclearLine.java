@@ -211,17 +211,12 @@ public class NuclearLine {
 
         ASSEMBLER_RECIPES.recipeBuilder()
                 .input(plateDense, Aluminium, 1)
+                .input(frameGt, StainlessSteel, 1)
                 .input(stick, Steel, 4)
                 .outputs(GTQTMetaBlocks.NUCLEAR_FUSION.getItemVariant(GTQTNuclearFusion.CasingType.NUCLEAR_FUSION_COOLING,16))
                 .circuitMeta(10)
                 .duration(400).EUt(VA[EV]).buildAndRegister();
 
-        ASSEMBLER_RECIPES.recipeBuilder()
-                .input(plateDense, StainlessSteel, 1)
-                .input(stick, Steel, 4)
-                .outputs(GTQTMetaBlocks.NUCLEAR_FUSION.getItemVariant(GTQTNuclearFusion.CasingType.NUCLEAR_FUSION_COOLING,64))
-                .circuitMeta(10)
-                .duration(400).EUt(VA[EV]).buildAndRegister();
     }
 
     private static void PAc(Material  material1,int kind,int tier) {
