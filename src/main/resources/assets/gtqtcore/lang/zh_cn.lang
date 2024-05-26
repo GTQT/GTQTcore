@@ -590,6 +590,11 @@ gtqtcore.machine.rocket_engine.iv.tooltip=嗡嗡作响
 gtqtcore.machine.rocket_engine.luv.name=精英火箭引擎 II
 gtqtcore.machine.rocket_engine.luv.tooltip=嗡嗡作响
 
+gtqtcore.machine.particle_accelerator_io.lv.name=基本粒子源I
+gtqtcore.machine.particle_accelerator_io.mv.name=基本粒子源II
+gtqtcore.machine.particle_accelerator_io.hv.name=基本粒子源III
+gtqtcore.machine.particle_accelerator_io.ev.name=基本粒子源IV
+
 gtqtcore.machine.multiblock.glass_tier=当前玻璃等级：%s (%s)
 gtqtcore.machine.multiblock.max_parallel=最大并行数：%s
 gtqtcore.machine.multiblock.max_voltage=最大电压：%s
@@ -3001,7 +3006,7 @@ recipemap.enzymes_reaction_recipes.name=超净细菌培养
 recipemap.cw_laser_engraver.name=激光切割
 gtqtcore.machine.stepper.name=光刻机
 recipemap.heat_exchanger.name=热力对流
-gtqtcore.machine.heat_exchanger.name=热交换
+gtqtcore.machine.heat_exchanger.name=集成工业热交换机
 gtqtcore.machine.kqhpca.name=高性能计算阵列（默认加强）
 gtqtcore.machine.kqns.name=网络交换机
 gregtech.multiblock.kqns.tier=交换机等级: %s

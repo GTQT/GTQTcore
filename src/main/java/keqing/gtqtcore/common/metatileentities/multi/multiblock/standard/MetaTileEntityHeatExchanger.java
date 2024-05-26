@@ -30,6 +30,8 @@ import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
@@ -38,6 +40,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -85,6 +88,13 @@ public class MetaTileEntityHeatExchanger extends NoEnergyMultiblockController im
         }
 
 
+    }
+    @Override
+    public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
+        super.addInformation(stack, player, tooltip, advanced);
+        tooltip.add(I18n.format("运行JEI所示高温热换交换配方时，机器内部高温热缓存会上升。输入水（低温热源）与高温热源进行热交换产生蒸汽，低压蒸汽，蒸汽废气"));
+        tooltip.add(I18n.format("调节流量阀门控制低温热源交换速度，同时控制输出流量"));
+        tooltip.add(I18n.format("升级结构长度，外壳，管道，玻璃等级以获得更好的工作性能"));
     }
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {

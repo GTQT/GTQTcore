@@ -28,10 +28,12 @@ import keqing.gtqtcore.common.block.blocks.GTQTElectrobath;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 import keqing.gtqtcore.common.metatileentities.single.steam.MetaTileEntitySteamLatexCollector;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import scala.tools.cmd.Meta;
 
 import static gregicality.multiblocks.api.unification.GCYMMaterials.*;
+import static gregicality.multiblocks.common.metatileentities.GCYMMetaTileEntities.LARGE_ASSEMBLER;
 import static gregtech.api.GTValues.L;
 import static gregtech.api.GTValues.VA;
 import static gregtech.api.recipes.RecipeMaps.*;
@@ -67,6 +69,7 @@ import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.*;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.DISTILLATION_TOWER;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.GAS_COLLECTOR;
+import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.VACUUM_FREEZER;
 
 
 public class MetaTileEntityLoader {
@@ -393,6 +396,66 @@ public class MetaTileEntityLoader {
                 'P', ROBOT_ARM_HV.getStackForm(),
                 'H', MetaTileEntities.HULL[3].getStackForm()
         );
+        //  Cryogenic Freezer
+        ModHandler.addShapedRecipe(true, "cryogenic_freezer", CRYOGENIC_FREEZER.getStackForm(),
+                "SXS", "EHE", "PWP",
+                'S', new UnificationEntry(spring, HSSG),
+                'X', new UnificationEntry(circuit, MarkerMaterials.Tier.LuV),
+                'H', VACUUM_FREEZER.getStackForm(),
+                'E', ELECTRIC_PUMP_IV.getStackForm(),
+                'P', new UnificationEntry(plate, TanmolyiumBetaC),
+                'W', new UnificationEntry(cableGtSingle, Platinum));
+
+        //  Precise Assembler
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .inputs(LARGE_ASSEMBLER.getStackForm())
+                .input(frameGt, MARM200Steel, 4)
+                .input(ROBOT_ARM_IV, 2)
+                .input(CONVEYOR_MODULE_IV, 2)
+                .input(plate, Stellite100, 4)
+                .input(gear, TanmolyiumBetaC, 4)
+                .input(cableGtQuadruple, Naquadah, 4)
+                .fluidInputs(SolderingAlloy.getFluid(L * 6))
+                .fluidInputs(Lubricant.getFluid(3000))
+                .fluidInputs(HastelloyN.getFluid(L * 2))
+                .outputs(PRECISE_ASSEMBLER.getStackForm())
+                .scannerResearch(b -> b
+                        .researchStack(LARGE_ASSEMBLER.getStackForm())
+                        .EUt(VA[GTValues.IV])
+                        .duration(1200))
+                .EUt(VA[GTValues.LuV])
+                .duration(1200)
+                .buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .inputs(CHEMICAL_PLANT.getStackForm())
+                .input(frameGt, Palladium, 4)
+                .input(ROBOT_ARM_EV, 2)
+                .input(CONVEYOR_MODULE_EV, 2)
+                .input(plate, TungstenSteel, 4)
+                .input(gear, NanometerBariumTitanate, 4)
+                .input(cableGtQuadruple, Platinum, 4)
+                .fluidInputs(SolderingAlloy.getFluid(L * 6))
+                .fluidInputs(Lubricant.getFluid(3000))
+                .fluidInputs(HastelloyN.getFluid(L * 2))
+                .outputs(NANO_COATING.getStackForm())
+                .scannerResearch(b -> b
+                        .researchStack(THREE_DIM_PRINT.getStackForm())
+                        .EUt(VA[GTValues.HV])
+                        .duration(1200))
+                .EUt(VA[GTValues.EV])
+                .duration(1200)
+                .buildAndRegister();
+
+        //  ZhuHai Fishing Pond
+        ModHandler.addShapedRecipe(true, "zhuhai_fishing_pond", INDUSTRIAL_FISHING_POND.getStackForm(),
+                "FRF", "PHP", "WXW",
+                'H', FISHER[3].getStackForm(),
+                'R', Items.FISHING_ROD,
+                'P', ELECTRIC_PUMP_EV,
+                'F', FLUID_FILTER,
+                'W', new UnificationEntry(cableGtSingle, Aluminium),
+                'X', new UnificationEntry(circuit, MarkerMaterials.Tier.EV));
         //溶解罐
         ModHandler.addShapedRecipe(true, "dissolution_tank", DISSOLUTION_TANK.getStackForm(),
                 "MCM", "PHP", "MKM",
@@ -548,7 +611,7 @@ public class MetaTileEntityLoader {
                 new UnificationEntry(OrePrefix.wireGtQuadruple, Aluminium), 'E',
                 new UnificationEntry(OrePrefix.circuit, LV), 'C', MetaItems.ELECTRIC_PUMP_LV);
 
-        ModHandler.addShapedRecipe(true, "vacuum_freezer", GTQTMetaTileEntities.VACUUM_FREEZER.getStackForm(), "PPP", "CMC",
+        ModHandler.addShapedRecipe(true, "vacuum_freezer", VACUUM_FREEZER.getStackForm(), "PPP", "CMC",
                 "WCW", 'M', MetaTileEntities.HULL[GTValues.LV].getStackForm(), 'P',
                 MetaItems.ELECTRIC_PUMP_LV, 'C', new UnificationEntry(OrePrefix.circuit, LV), 'W',
                 new UnificationEntry(OrePrefix.cableGtSingle, Aluminium));
@@ -1140,6 +1203,50 @@ public class MetaTileEntityLoader {
                 'P', EMITTER_IV,
                 'E', SENSOR_IV,
                 'C', new UnificationEntry(OrePrefix.circuit, IV));
+
+
+        ModHandler.addShapedRecipe(true, "rtg.ev", GTQTMetaTileEntities.RTG[0].getStackForm(),
+                "PCP", "AMA", "ECE",
+                'M', HULL[GTValues.EV].getStackForm(),
+                'A', new UnificationEntry(OrePrefix.spring, TungstenSteel),
+                'P', ELECTRIC_MOTOR_EV,
+                'E', SENSOR_EV,
+                'C', new UnificationEntry(OrePrefix.circuit, EV));
+
+        ModHandler.addShapedRecipe(true, "rtg.iv", GTQTMetaTileEntities.RTG[1].getStackForm(),
+                "PCP", "AMA", "ECE",
+                'M', HULL[GTValues.IV].getStackForm(),
+                'A', new UnificationEntry(OrePrefix.spring, RhodiumPlatedPalladium),
+                'P', ELECTRIC_MOTOR_IV,
+                'E', SENSOR_IV,
+                'C', new UnificationEntry(OrePrefix.circuit, IV));
+
+        ModHandler.addShapedRecipe(true, "rtg.luv", GTQTMetaTileEntities.RTG[2].getStackForm(),
+                "PCP", "AMA", "ECE",
+                'M', HULL[GTValues.LuV].getStackForm(),
+                'A', new UnificationEntry(OrePrefix.spring, NaquadahAlloy),
+                'P', ELECTRIC_MOTOR_LuV,
+                'E', SENSOR_LuV,
+                'C', new UnificationEntry(OrePrefix.circuit, LuV));
+
+
+        ModHandler.addShapedRecipe(true, "lightning_rod.iv", GTQTMetaTileEntities.LIGHTNING_ROD[0].getStackForm(),
+                "AMA", "MCM", "AMA",
+                'M', HULL[GTValues.IV].getStackForm(),
+                'A', ENERGY_LAPOTRONIC_ORB,
+                'C', new UnificationEntry(OrePrefix.circuit, IV));
+
+        ModHandler.addShapedRecipe(true, "lightning_rod.luv", GTQTMetaTileEntities.LIGHTNING_ROD[1].getStackForm(),
+                "AMA", "MCM", "AMA",
+                'M', HULL[GTValues.LuV].getStackForm(),
+                'A', ENERGY_LAPOTRONIC_ORB_CLUSTER,
+                'C', new UnificationEntry(OrePrefix.circuit, LuV));
+
+        ModHandler.addShapedRecipe(true, "lightning_rod.zpm", GTQTMetaTileEntities.LIGHTNING_ROD[2].getStackForm(),
+                "AMA", "MCM", "AMA",
+                'M', HULL[GTValues.ZPM].getStackForm(),
+                'A', ENERGY_MODULE,
+                'C', new UnificationEntry(OrePrefix.circuit, ZPM));
 
         registerMachineRecipe(GTQTMetaTileEntities.LATEX_COLLECTOR,
                 "PCP", "AMA", "PCP",

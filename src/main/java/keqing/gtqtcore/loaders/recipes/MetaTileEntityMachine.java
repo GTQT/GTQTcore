@@ -30,6 +30,7 @@ import net.minecraft.item.ItemStack;
 
 import java.util.Collection;
 
+import static gregicality.multiblocks.api.unification.GCYMMaterials.WatertightSteel;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
@@ -42,6 +43,7 @@ import static keqing.gtqtcore.api.unification.GCYSMaterials.Adamantite;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.Orichalcum;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.plate_curved;
+import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.FISHING_CASING;
 import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing1.TurbineCasingType.*;
 
 public class MetaTileEntityMachine {
@@ -103,6 +105,12 @@ public class MetaTileEntityMachine {
                 "PIP", 'P', new UnificationEntry(OrePrefix.plate, Adamantite), 'F',
                 new UnificationEntry(OrePrefix.frameGt, Adamantite), 'I',
                 new UnificationEntry(OrePrefix.pipeNormalFluid, Adamantite));
+
+        ModHandler.addShapedRecipe(true, "fishing_casing",
+                GTQTMetaBlocks.TURBINE_CASING.getItemVariant(FISHING_CASING, ConfigHolder.recipes.casingsPerCraft), "PIP", "IFI",
+                "PIP", 'P', new UnificationEntry(OrePrefix.plate, Inconel792), 'F',
+                new UnificationEntry(OrePrefix.frameGt, WatertightSteel), 'I',
+                new UnificationEntry(OrePrefix.pipeNormalFluid, StainlessSteel));
     }
 
     private static void machinecasing() {

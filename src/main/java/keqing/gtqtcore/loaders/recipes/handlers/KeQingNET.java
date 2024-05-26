@@ -266,6 +266,27 @@ public class KeQingNET {
                 .output(KQCC)
                 .duration(200).EUt(120).buildAndRegister();
 
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .inputs(HULL[4].getStackForm(16))
+                .input(circuit, Tier.EV, 8)
+                .input(EMITTER_EV, 8)
+                .input(DISK_0,16)
+                .input(COVER_SCREEN)
+                .input(OPTICAL_PIPES[0], 16)
+                .input(frameGt, TungstenSteel, 8)
+                .input(plate, NanometerBariumTitanate, 8)
+                .input(wireGtHex, Platinum, 8)
+                .input(foil, Palladium, 8)
+                .fluidInputs(Epoxy.getFluid(4000))
+                .fluidInputs(Zylon.getFluid(4000))
+                .fluidInputs(Polytetrafluoroethylene.getFluid(4000))
+                .scannerResearch(b -> b
+                        .researchStack(KQCC.getStackForm())
+                        .duration(1200)
+                        .EUt(VA[HV]))
+                .output(ADV_KQCC)
+                .duration(2000).EUt(480).buildAndRegister();
+
         CIRCUIT_ASSEMBLER_RECIPES.recipeBuilder()
                 .input(PLASTIC_CIRCUIT_BOARD)
                 .input(circuit, Tier.MV, 2)

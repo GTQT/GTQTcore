@@ -100,17 +100,6 @@ public class GTQTMaterials {
     public static Material MethylhydrazineNitrateRocketFuel;
     public static Material Alumite;
     public static Material Alubrass;
-    public static Material Coolant;
-    public static Material SuperCoolant;
-    public static Material Cryotheum;
-    public static Material XPJuice;
-    public static Material Spirit;
-    public static Material Hollowtears;
-    public static Material AtomicSeparationCatalyst;
-    public static Material Tiberium;
-    public static Material NeutronsFlow;
-    public static Material ProtonFlow;
-    public static Material BismuthLeadAlloy;
     public static Material UreaMix;
     public static Material FermentationBase;
     public static Material Resin;

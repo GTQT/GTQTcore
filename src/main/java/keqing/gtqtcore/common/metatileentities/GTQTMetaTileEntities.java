@@ -90,7 +90,6 @@ public class GTQTMetaTileEntities {
     public static final SimpleGeneratorMetaTileEntity[] NAQUADAH_REACTOR = new SimpleGeneratorMetaTileEntity[3];
     public static final SimpleGeneratorMetaTileEntity[] ROCKET_ENGINE = new SimpleGeneratorMetaTileEntity[3];
     public static MetaTileEntityTurbineCombustionChamber HUGE_TURBINE_COMBUSTION_CHAMBER;
-    public static MetaTileEntityIModularFissionReactor I_MODULAR_FISSION_REACTOR;
     public static MetaTileEntityRocket ROCKET;
     public static MetaTileEntityIndustryWaterPump INDUSTRY_WATER_PUMP;
     public static MetaTileEntityKQCC KQCC;
@@ -289,31 +288,21 @@ public class GTQTMetaTileEntities {
         RTG[1] = registerMetaTileEntity(3021, new SimpleGeneratorMetaTileEntity(gtqtcoreId("rtg.iv"), GTQTcoreRecipeMaps.RTG_RECIPES, GTQTTextures.RTG_OVERLAY, 5, genericGeneratorTankSizeFunction,true));
         RTG[2] = registerMetaTileEntity(3022, new SimpleGeneratorMetaTileEntity(gtqtcoreId("rtg.luv"), GTQTcoreRecipeMaps.RTG_RECIPES, GTQTTextures.RTG_OVERLAY, 6, genericGeneratorTankSizeFunction,true));
         //发电设备 多方块
-        NUCLEAR_REACTOR = registerMetaTileEntity(3050, new MetaTileEntityNuclearReactor(gtqtcoreId("nuclear_reactor")));
 
         HYPER_REACTOR_MK1 = registerMetaTileEntity(3053, new MetaTileEntityHyperReactorMk1(gtqtcoreId("hyper_reactor_mk1")));
         HYPER_REACTOR_MK2 = registerMetaTileEntity(3054, new MetaTileEntityHyperReactorMk2(gtqtcoreId("hyper_reactor_mk2")));
         HYPER_REACTOR_MK3 = registerMetaTileEntity(3055, new MetaTileEntityHyperReactorMk3(gtqtcoreId("hyper_reactor_mk3")));
-
         NAQUADAH_REACTOR_MKI = registerMetaTileEntity(3056, new MetaTileEntityNaquadahReactorMki(gtqtcoreId("naquadah_reactor_mki")));
         NAQUADAH_REACTOR_MKII = registerMetaTileEntity(3057, new MetaTileEntityNaquadahReactorMkii(gtqtcoreId("naquadah_reactor_mkii")));
         NAQUADAH_REACTOR_MKIII = registerMetaTileEntity(3058, new MetaTileEntityNaquadahReactorMkiii(gtqtcoreId("naquadah_reactor_mkiii")));
-
         LARGE_NAQUADAH_REACTOR = registerMetaTileEntity(3059, new MetaTileEntityLargeNaquadahReactor(gtqtcoreId("large_naquadah_reactor")));
-
         ROCKET = registerMetaTileEntity(3060, new MetaTileEntityRocket(gtqtcoreId("rocket"),7));
         HUGE_TURBINE_COMBUSTION_CHAMBER = registerMetaTileEntity(3061, new MetaTileEntityTurbineCombustionChamber(gtqtcoreId("turbine_combustion_chamber"),4));
-
         SOLAR_PLATE = registerMetaTileEntity(3062, new MetaTileEntitySolarPlate(gtqtcoreId("solar_plate")));
-
-
-        I_MODULAR_FISSION_REACTOR = registerMetaTileEntity(3063, new MetaTileEntityIModularFissionReactor(gtqtcoreId("i_modular_fission_reactor"),5));
-
+        NUCLEAR_REACTOR = registerMetaTileEntity(3063, new MetaTileEntityNuclearReactor(gtqtcoreId("nuclear_reactor")));
         WATER_POWER_STATION[0] = registerMetaTileEntity(3064, new MetaTileEntityWaterPowerStation(gtqtcoreId("water_power_station_mk1"),1));
         WATER_POWER_STATION[1] = registerMetaTileEntity(3065, new MetaTileEntityWaterPowerStation(gtqtcoreId("water_power_station_mk2"),2));
         WATER_POWER_STATION[2] = registerMetaTileEntity(3066, new MetaTileEntityWaterPowerStation(gtqtcoreId("water_power_station_mk3"),3));
-
-
         MEGA_STEAM_TURBINE = registerMetaTileEntity(3067, new MetaTileEntityMegaTurbine(gtqtcoreId("mega_turbine.steam"), RecipeMaps.STEAM_TURBINE_FUELS, 3, MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.STEEL_TURBINE_CASING), MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.STEEL_GEARBOX), Textures.SOLID_STEEL_CASING, false, GTQTTextures.MEGA_TURBINE_OVERLAY));
         MEGA_GAS_TURBINE = registerMetaTileEntity(3068, new MetaTileEntityMegaTurbine(gtqtcoreId("mega_turbine.gas"), RecipeMaps.GAS_TURBINE_FUELS, 4, MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.STAINLESS_TURBINE_CASING), MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.STAINLESS_STEEL_GEARBOX), Textures.CLEAN_STAINLESS_STEEL_CASING, true, GTQTTextures.MEGA_TURBINE_OVERLAY));
         MEGA_PLASMA_TURBINE = registerMetaTileEntity(3069, new MetaTileEntityMegaTurbine(gtqtcoreId("mega_turbine.plasma"), RecipeMaps.PLASMA_GENERATOR_FUELS, 5, MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.TUNGSTENSTEEL_TURBINE_CASING), MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.TUNGSTENSTEEL_GEARBOX), Textures.ROBUST_TUNGSTENSTEEL_CASING, false, GTQTTextures.MEGA_TURBINE_OVERLAY));

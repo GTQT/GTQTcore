@@ -53,7 +53,6 @@ public class NanoCoatingRecipes {
         CHEMICAL_RECIPES.recipeBuilder()
                 .notConsumable(CATALYST_FRAMEWORK_I)
                 .circuitMeta(5)
-              
                 .fluidInputs(Methanol.getFluid(1000))
                 .fluidOutputs(Formaldehyde.getFluid(1000))
                 .duration(400).EUt(VA[GTValues.HV]).buildAndRegister();
@@ -137,37 +136,33 @@ public class NanoCoatingRecipes {
         CHEMICAL_RECIPES.recipeBuilder()
                 .notConsumable(CATALYST_FRAMEWORK_III)
                 .circuitMeta(5)
-              
                 .input(dust,Carbon,2)
                 .fluidInputs(Hydrogen.getFluid(4000))
                 .fluidOutputs(Polyethylene.getFluid(1000))
-                .duration(400).EUt(VA[GTValues.HV]).buildAndRegister();
+                .duration(4000).EUt(VA[GTValues.HV]).buildAndRegister();
 
         CHEMICAL_RECIPES.recipeBuilder()
                 .notConsumable(CATALYST_FRAMEWORK_III)
                 .circuitMeta(5)
-              
                 .input(dust,Carbon,2)
                 .fluidInputs(Fluorine.getFluid(4000))
                 .fluidOutputs(Polytetrafluoroethylene.getFluid(1000))
-                .duration(400).EUt(VA[GTValues.HV]).buildAndRegister();
+                .duration(4000).EUt(VA[GTValues.HV]).buildAndRegister();
 
         CHEMICAL_RECIPES.recipeBuilder()
                 .notConsumable(CATALYST_FRAMEWORK_III)
                 .circuitMeta(5)
-              
                 .input(dust,Carbon,6)
                 .fluidInputs(Hydrogen.getFluid(4000))
                 .fluidInputs(Oxygen.getFluid(1000))
                 .fluidOutputs(Epoxy.getFluid(1000))
-                .duration(400).EUt(VA[EV]).buildAndRegister();
+                .duration(4000).EUt(VA[EV]).buildAndRegister();
     }
 
     private static void Catalyst_iv() {
         CHEMICAL_RECIPES.recipeBuilder()
                 .notConsumable(CATALYST_FRAMEWORK_IV)
                 .circuitMeta(5)
-              
                 .fluidInputs(Biomass.getFluid(1000))
                 .fluidInputs(DistilledWater.getFluid(2000))
                 .fluidOutputs(FermentedBiomass.getFluid(3000))
