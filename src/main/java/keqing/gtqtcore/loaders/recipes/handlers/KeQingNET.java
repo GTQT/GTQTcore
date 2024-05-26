@@ -275,6 +275,8 @@ public class KeQingNET {
                 .input(OPTICAL_PIPES[0], 16)
                 .input(frameGt, TungstenSteel, 8)
                 .input(plate, NanometerBariumTitanate, 8)
+                .input(stickLong, NeodymiumMagnetic, 64)
+                .input(stickLong, NeodymiumMagnetic, 64)
                 .input(wireGtHex, Platinum, 8)
                 .input(foil, Palladium, 8)
                 .fluidInputs(Epoxy.getFluid(4000))
