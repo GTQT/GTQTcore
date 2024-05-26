@@ -120,7 +120,7 @@ public class MetaTileEntityWaterPowerStation extends MultiblockWithDisplayBase i
         int randomNum = rand.nextInt(40);
         return (long) (((long) water *coilLevel*(randomNum+80)/800)*Math.pow(2,tier-1)/4);
     }
-    private final FluidStack LUBRICANT_STACK = Lubricant.getFluid(tier);
+    private final FluidStack LUBRICANT_STACK = Lubricant.getFluid(1);
     private void generator() {
         IMultipleTankHandler inputTank = this.getInputFluidInventory();
         isWorkingEnabled=this.energyContainer.getEnergyStored()<this.energyContainer.getEnergyCapacity()&&water > 0;

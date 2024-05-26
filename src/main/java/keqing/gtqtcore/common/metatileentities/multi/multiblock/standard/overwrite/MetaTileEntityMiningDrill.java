@@ -338,7 +338,7 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
         public int getParallelLimit() {
             return (int) Math.pow(2, tier);
         }
-        private final FluidStack LUBRICANT_STACK = Lubricant.getFluid(tier);
+        private final FluidStack LUBRICANT_STACK = Lubricant.getFluid(1);
 
         protected void updateRecipeProgress() {
             IMultipleTankHandler inputTank = combustionEngine.getInputFluidInventory();
