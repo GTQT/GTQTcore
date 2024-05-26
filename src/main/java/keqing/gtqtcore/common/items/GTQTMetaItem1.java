@@ -508,6 +508,8 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         DNA_ENCODER = this.addItem(1012, "biological.components.dna_encoder").setCreativeTabs(CommonProxy.GTQTCore_BIO);
         DNA_DECODER = this.addItem(1013, "biological.components.dna_decoder").setCreativeTabs(CommonProxy.GTQTCore_BIO);
         DNA_DECODE_ENCODER = this.addItem(1014, "biological.components.dna_decode_encoder").setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        DRAGON_CELL = this.addItem(1015, "dragon_cell").setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        PRE_DRAGON_CELL = this.addItem(1016, "pre_dragon_cell").setCreativeTabs(CommonProxy.GTQTCore_BIO);
 
         //蓝图
         DISK_0 = this.addItem(2000, "disk.0").setCreativeTabs(CommonProxy.GTQTCore_DISK);

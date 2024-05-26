@@ -1,6 +1,7 @@
 package keqing.gtqtcore.api.unification.matreials;
 
 import gregtech.api.fluids.FluidBuilder;
+import gregtech.api.fluids.attribute.FluidAttributes;
 import gregtech.api.unification.Elements;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.properties.BlastProperty;
@@ -2591,6 +2592,28 @@ public class FirstDegreeMaterials {
                 .components(Lead, 1, Iron, 1, Carbon, 153, Hydrogen, 36, Nitrogen, 1, Oxygen, 2)
                 .flags(DISABLE_DECOMPOSITION, NO_SMASHING, NO_SMELTING, GENERATE_PLATE, GENERATE_FOIL, GENERATE_ROD, GENERATE_FINE_WIRE)
                 .build();
+
+
+        GTQTMaterials.DragonBreath = new Material.Builder(getMaterialsId(), gregtechId("dragon_breath"))
+                .liquid(new FluidBuilder().attributes(FluidAttributes.ACID))
+                .color(0x9400D3)
+                .build()
+                .setFormula("Dc?", false);
+
+
+        GTQTMaterials.ConcentrateDragonBreath = new Material.Builder(getMaterialsId(), gregtechId("concentrate_dragon_breath"))
+                .liquid(new FluidBuilder().attributes(FluidAttributes.ACID))
+                .color(0x9400D3)
+                .build()
+                .setFormula("Dc2?", true);
+
+
+        GTQTMaterials.DragonBlood = new Material.Builder(getMaterialsId(), gregtechId("dragon_blood"))
+                .liquid(new FluidBuilder().attributes(FluidAttributes.ACID))
+                .color(0xDC2814)
+                .iconSet(DULL)
+                .build()
+                .setFormula("*Dc*Rn?", true);
 
 
     }

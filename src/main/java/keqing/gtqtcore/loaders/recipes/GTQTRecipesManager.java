@@ -42,6 +42,7 @@ public class GTQTRecipesManager {
         GTQTOreRecipeHandler.init();
         AlgaeChain.init();
         CTABChain.init();
+        DragonChain.init();
         TitanateChain.init();
         NuclearLine.init();
         OceanChain.init();

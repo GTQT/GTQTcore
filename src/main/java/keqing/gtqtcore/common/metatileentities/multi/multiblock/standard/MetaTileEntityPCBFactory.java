@@ -351,10 +351,10 @@ public class MetaTileEntityPCBFactory extends RecipeMapMultiblockController {
                 .where('F', getFrameState("T1Frame")) // HSLA Steel frame
                 .where('G', getGlassState("T1StructureGlass")) // Laminated glass
                 .where('X', getThirdCasingState("T1Substrate")) // Substrate casing
-                .where('i', MetaTileEntities.ITEM_IMPORT_BUS_ME, EnumFacing.SOUTH)
-                .where('j', MetaTileEntities.ITEM_EXPORT_BUS_ME, EnumFacing.SOUTH)
-                .where('k', MetaTileEntities.FLUID_IMPORT_HATCH_ME, EnumFacing.SOUTH)
-                .where('m', MetaTileEntities.AUTO_MAINTENANCE_HATCH, EnumFacing.SOUTH)
+                .where('i', MetaTileEntities.ITEM_IMPORT_BUS[1], EnumFacing.SOUTH)
+                .where('j', MetaTileEntities.ITEM_IMPORT_BUS[1], EnumFacing.SOUTH)
+                .where('k', MetaTileEntities.FLUID_IMPORT_HATCH[1], EnumFacing.SOUTH)
+                .where('m', MetaTileEntities.FLUID_EXPORT_HATCH[1], EnumFacing.SOUTH)
                 .where('e', MetaTileEntities.ENERGY_INPUT_HATCH[LuV], EnumFacing.NORTH)
                 .where('#', Blocks.AIR.getDefaultState())
                 .where('*', Blocks.AIR.getDefaultState())

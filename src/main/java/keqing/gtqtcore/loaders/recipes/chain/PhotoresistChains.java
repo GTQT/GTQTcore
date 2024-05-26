@@ -1,5 +1,6 @@
 package keqing.gtqtcore.loaders.recipes.chain;
 
+import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.CHEMICAL_PLANT;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
@@ -141,9 +142,10 @@ public class PhotoresistChains {
 
         //SU-8
 
-        LARGE_CHEMICAL_RECIPES.recipeBuilder()
+        CHEMICAL_PLANT.recipeBuilder()
                 .EUt(VA[IV])
                 .duration(340)
+                .recipeLevel(4)
                 .fluidInputs(Epoxy.getFluid(1500))
                 .fluidInputs(MixedHexafluoroantimonateSalts.getFluid(500))
                 .fluidInputs(GammaButyrolactone.getFluid(500))

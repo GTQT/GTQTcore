@@ -320,6 +320,8 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem ACTINIUM_SUPERHYDRIDE_PLASMA_CONTAINMENT_CELL;
     public static MetaItem<?>.MetaValueItem QUANTUM_ANOMALY;
 
+    public static MetaItem<?>.MetaValueItem DRAGON_CELL;
+    public static MetaItem<?>.MetaValueItem PRE_DRAGON_CELL;
     //  Biological
     public static MetaItem<?>.MetaValueItem ELECTROCHEMICAL_GRADIENT_RECORDER;
     public static MetaItem<?>.MetaValueItem ULTRA_MICRO_PHASE_SEPARATOR;

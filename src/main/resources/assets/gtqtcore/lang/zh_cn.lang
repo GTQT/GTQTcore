@@ -2827,9 +2827,8 @@ gregtech.material.tetrahedrite_front=黝铜矿泡沫
 gregtech.material.chalocite_front=辉铜矿泡沫
 gregtech.material.aluminium_front=铝矿泡沫
 gregtech.material.bauxite_front=铝土矿泡沫
-
-
-
+metaitem.item.dragon_cell.name=活性龙细胞
+metaitem.item.pre_dragon_cell.name=预处理龙细胞
 metaitem.item.biology_integrated_circuit.name=生物电路板
 metaitem.item.potassium.ethylate.name=乙基黄原酸钾
 metaitem.item.potassium.ethylxanthate.name=乙醇钾
@@ -2934,7 +2933,7 @@ metaitem.prospector.uiv.name=电动勘探扫描仪（UIV）
 gtqtcore.machine.mining_drill.name=大型采矿钻机
 recipemap.mining_drill.name=矿机钻井
 
-gtqtcore.machine.bio_centrifuge.name=高速离心机（生物工程）
+gtqtcore.machine.bio_centrifuge.name=高速离心机
 recipemap.bio_centrifuge.name=高速破壁
 
 gtqtcore.machine.msf.name=大型闪蒸器
