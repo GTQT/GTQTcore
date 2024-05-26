@@ -139,7 +139,7 @@ public class MetaTileEntityWaterPowerStation extends MultiblockWithDisplayBase i
     @Override
     protected BlockPattern createStructurePattern() {
         FactoryBlockPattern pattern = FactoryBlockPattern.start(RIGHT, UP, FRONT)
-                .aisle("YYY", "YYY", "YYY", " S ")
+                .aisle("YYY", "YYY", "YYI", " S ")
                 .aisle("YYY", "YYY", "YYY", " Y ")
                 .aisle("YYY", "YYY", "YYY", " Y ")
                 .aisle("FFF", "FCF", "EYE", " E ").setRepeatable(1, 36)
@@ -150,6 +150,8 @@ public class MetaTileEntityWaterPowerStation extends MultiblockWithDisplayBase i
                 )
                 .where('E',states(getCasingAState())
                         .or(abilities(MultiblockAbility.OUTPUT_ENERGY).setMinLayerLimited(1).setMaxLayerLimited(1))
+                )
+                .where('I',abilities(MultiblockAbility.IMPORT_FLUIDS)
                 )
                 .where('C', heatingCoils())
                 .where('F', states(getFrameState()))

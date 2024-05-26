@@ -31,6 +31,8 @@ public class GTQTUtil {
         return new ResourceLocation("gtqtcore", path);
     }
 
+    public static final Function<Integer, Integer> genericGeneratorTankSizeFunctionPlus = (tier) -> Math.min(16000 * (1 << tier - 1), 128000);
+
     public static int intValueOfBitSet(BitSet set){
         int result = 0;
         for(int i = 0; i<set.length();i++){

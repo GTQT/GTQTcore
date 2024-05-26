@@ -39,20 +39,20 @@ public class FuelRecipes {
             int baseDuration = 4*recipe.getDuration() * recipe.getEUt() / EUt;
             GTQTcoreRecipeMaps.FUEL_CELL.recipeBuilder()
                     .fluidInputs(fluidInputs)
-                    .fluidInputs(Materials.Air.getFluid(baseDuration))
+                    .fluidInputs(Materials.Air.getFluid(baseDuration*4))
                     .duration(baseDuration)
                     .EUt(EUt)
                     .buildAndRegister();
             GTQTcoreRecipeMaps.FUEL_CELL.recipeBuilder()
                     .fluidInputs(fluidInputs)
-                    .fluidInputs(Materials.Oxygen.getFluid(FluidStorageKeys.GAS, (int) Math.ceil(baseDuration * 1.5)))
-                    .duration((int) Math.floor(baseDuration * 1.5))
+                    .fluidInputs(Materials.Oxygen.getFluid(FluidStorageKeys.GAS,baseDuration * 2))
+                    .duration(baseDuration * 2)
                     .EUt(EUt)
                     .buildAndRegister();
             GTQTcoreRecipeMaps.FUEL_CELL.recipeBuilder()
                     .fluidInputs(fluidInputs)
-                    .fluidInputs(Materials.Oxygen.getFluid(FluidStorageKeys.LIQUID, baseDuration * 8))
-                    .duration(baseDuration * 2)
+                    .fluidInputs(Materials.Oxygen.getFluid(FluidStorageKeys.LIQUID, baseDuration))
+                    .duration(baseDuration * 4)
                     .EUt(EUt)
                     .buildAndRegister();
 
