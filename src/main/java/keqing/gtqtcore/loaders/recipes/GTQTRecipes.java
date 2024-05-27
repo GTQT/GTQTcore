@@ -753,32 +753,34 @@ public class GTQTRecipes {
         //磨球
         BIO_CENTRIFUGE.recipeBuilder()
                 .fluidInputs(HydrochloricAcid.getFluid(100))
-                .notConsumable(gear,TungstenSteel)
+                .notConsumable(gear, TungstenSteel)
                 .input(OrePrefix.crushed, material, 16)
                 .output(milledPrefix, material, 16)
                 .circuitMeta(1)
                 .duration(1200).EUt(1920).buildAndRegister();
 
         //矿处
-        DIGESTER_RECIPES.recipeBuilder()
-                .fluidInputs(HighlyPurifiedCoalTar.getFluid(100))
-                .fluidInputs(NitricAcid.getFluid(100))
-                .fluidInputs(Oxygen.getFluid(1000))
-                .input(dust, Salt, 4)
-                .input(ore, material, 16)
-                .output(crushed, material, 64)
-                .output(crushed, material, 64)
-                .circuitMeta(1)
-                .duration(600).EUt(480).buildAndRegister();
+        if (material.hasProperty((PropertyKey.ORE))) {
+            DIGESTER_RECIPES.recipeBuilder()
+                    .fluidInputs(HighlyPurifiedCoalTar.getFluid(100))
+                    .fluidInputs(NitricAcid.getFluid(100))
+                    .fluidInputs(Oxygen.getFluid(1000))
+                    .input(dust, Salt, 4)
+                    .input(ore, material, 16)
+                    .output(crushed, material, 64)
+                    .output(crushed, material, 64)
+                    .circuitMeta(1)
+                    .duration(600).EUt(480).buildAndRegister();
 
-        //矿处二
-        DISSOLUTION_TANK_RECIPES.recipeBuilder()
-                .fluidInputs(NitricAcid.getFluid(100))
-                .input(dust, Alunite, 1)
-                .input(crushed, material, 32)
-                .output(dust, material, 64)
-                .circuitMeta(1)
-                .duration(300).EUt(480).buildAndRegister();
+            //矿处二
+            DISSOLUTION_TANK_RECIPES.recipeBuilder()
+                    .fluidInputs(NitricAcid.getFluid(100))
+                    .input(dust, Alunite, 1)
+                    .input(crushed, material, 32)
+                    .output(dust, material, 64)
+                    .circuitMeta(1)
+                    .duration(300).EUt(480).buildAndRegister();
+        }
     }
 
     private static void gcmTool(OrePrefix prefix, Material material, ToolProperty property) {

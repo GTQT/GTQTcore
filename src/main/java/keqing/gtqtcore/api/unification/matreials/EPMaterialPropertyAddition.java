@@ -106,6 +106,21 @@ public class EPMaterialPropertyAddition {
         Rubidium.setProperty(PropertyKey.DUST, new DustProperty());
         Thallium.setProperty(PropertyKey.DUST, new DustProperty());
 
+        Praseodymium.setProperty(PropertyKey.ORE, new OreProperty(1, 1, false));
+        Scandium.setProperty(PropertyKey.ORE, new OreProperty(1, 1, false));
+        Gadolinium.setProperty(PropertyKey.ORE, new OreProperty(1, 1, false));
+        Terbium.setProperty(PropertyKey.ORE, new OreProperty(1, 1, false));
+        Dysprosium.setProperty(PropertyKey.ORE, new OreProperty(1, 1, false));
+        Holmium.setProperty(PropertyKey.ORE, new OreProperty(1, 1, false));
+        Erbium.setProperty(PropertyKey.ORE, new OreProperty(1, 1, false));
+        Thulium.setProperty(PropertyKey.ORE, new OreProperty(1, 1, false));
+        Ytterbium.setProperty(PropertyKey.ORE, new OreProperty(1, 1, false));
+        Zirconium.setProperty(PropertyKey.ORE, new OreProperty(1, 1, false));
+        Tellurium.setProperty(PropertyKey.ORE, new OreProperty(1, 1, false));
+        Selenium.setProperty(PropertyKey.ORE, new OreProperty(1, 1, false));
+        Rubidium.setProperty(PropertyKey.ORE, new OreProperty(1, 1, false));
+        Thallium.setProperty(PropertyKey.ORE, new OreProperty(1, 1, false));
+        Californium.setProperty(PropertyKey.ORE, new OreProperty(1, 1, false));
         // Ingots
         Germanium.setProperty(PropertyKey.INGOT, new IngotProperty());
         Rhenium.setProperty(PropertyKey.INGOT, new IngotProperty());

@@ -859,19 +859,19 @@ public class CPULine {
         //石墨电极线
         //石墨+沥青=浸渍石墨
         FLUID_SOLIDFICATION_RECIPES.recipeBuilder()
-                .duration(1000)
-                .EUt(8)
+                .duration(400)
+                .EUt(30)
                 .input(stick,Graphite,16)
-                .fluidInputs(HighlyPurifiedCoalTar.getFluid(100))
+                .fluidInputs(HighlyPurifiedCoalTar.getFluid(400))
                 .output(IMPREGNATED_GRAPHITE_RODS)
                 .buildAndRegister();
 
         CHEMICAL_RECIPES.recipeBuilder()
-                .duration(100)
+                .duration(200)
                 .EUt(30)
                 .input(IMPREGNATED_GRAPHITE_RODS)
                 .input(dust,Graphite,16)
-                .fluidInputs(Asphalt.getFluid(500))
+                .fluidInputs(Asphalt.getFluid(1000))
                 .output(IMPREGNATED_GRAPHITE_RODSA)
                 .buildAndRegister();
 

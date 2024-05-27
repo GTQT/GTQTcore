@@ -110,7 +110,6 @@ public class TJMaterials {
     public static Material SodiumAluminate;
     public static Material SodiumAluminumSilicaSolution;
     public static Material AluminoSilicateGlass;
-    public static Material DimethylCarbonate;
     public static Material TetramethylammoniumBromide;
     public static Material CobaltChloride;
     public static Material CobaltIodide;

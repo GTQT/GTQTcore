@@ -90,6 +90,7 @@ public class GTQTElementMaterials {
                 .color(0xE61C24)
                 .iconSet(SHINY)
                 .element(Elements.Og)
+                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_RING, GENERATE_ROUND, GENERATE_BOLT_SCREW, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR,GENERATE_ROTOR)
                 .flags(GENERATE_PLATE)
                 .blast(10300, BlastProperty.GasTier.LOW)
                 .build();
@@ -100,6 +101,7 @@ public class GTQTElementMaterials {
                 .fluid()
                 .color(0x2D3A9D)
                 .iconSet(BRIGHT)
+                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_RING, GENERATE_ROUND, GENERATE_BOLT_SCREW, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR,GENERATE_ROTOR)
                 .element(Elements.Hs)
                 .flags(GENERATE_ROD)
                 .build();
@@ -110,6 +112,7 @@ public class GTQTElementMaterials {
                 .fluid()
                 .color(0x521973)
                 .iconSet(SHINY)
+                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_RING, GENERATE_ROUND, GENERATE_BOLT_SCREW, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR,GENERATE_ROTOR)
                 .element(Elements.Fl)
                 .flags(GENERATE_ROD)
                 .build();
@@ -119,7 +122,7 @@ public class GTQTElementMaterials {
                 .liquid(new FluidBuilder().temperature(2000000000))
                 .color(0x323232)
                 .iconSet(BRIGHT)
-                .flags(NO_SMELTING, NO_SMASHING)
+                .flags(NO_SMELTING, NO_SMASHING,GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_RING, GENERATE_ROUND, GENERATE_BOLT_SCREW, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR,GENERATE_ROTOR)
                 .toolStats(ToolProperty.Builder.of(40.0F, 20.0F, 2560000, 7)
                         .attackSpeed(0.1F).enchantability(21)
                         .unbreakable()
@@ -138,7 +141,7 @@ public class GTQTElementMaterials {
                 .color(0x6666FF)
                 .iconSet(CUSTOM_DEGENERATE_RHENIUM)
                 .element(Elements.Rh)
-                .flags(GENERATE_PLATE)
+                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_ROUND,GENERATE_ROTOR)
                 .build()
                 .setFormula("§cR§de", false);
 
@@ -191,7 +194,7 @@ public class GTQTElementMaterials {
                         .enchantment(Enchantments.SHARPNESS, 10)
                         .enchantment(Enchantments.LOOTING, 5)
                         .enchantment(Enchantments.SWEEPING, 3).build())
-                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE)
+                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_RING, GENERATE_ROUND, GENERATE_BOLT_SCREW, GENERATE_GEAR, GENERATE_SMALL_GEAR,GENERATE_ROTOR)
                 .build();
         //  26017 Californium-252
         GTQTMaterials.Californium252 = new Material.Builder(getMaterialsId(), gregtechId("californium_252"))
@@ -199,6 +202,7 @@ public class GTQTElementMaterials {
                 .fluid()
                 .iconSet(SHINY)
                 .element(GTQTElements.Californium252)
+                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_RING, GENERATE_ROUND, GENERATE_BOLT_SCREW, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR,GENERATE_ROTOR)
                 .color(Californium.getMaterialRGB())
                 .build();
         //  26018 Astral Titanium
@@ -210,7 +214,7 @@ public class GTQTElementMaterials {
                 //  TODO may be re-balance
                 .blast(12800, BlastProperty.GasTier.HIGHER)
                 .element(GTQTElements.AstralTitanium)
-                .flags(GENERATE_PLATE, GENERATE_FOIL)
+                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_RING, GENERATE_ROUND, GENERATE_BOLT_SCREW, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR,GENERATE_ROTOR)
                 .build();
         //  26019 Celestial Tungsten
         GTQTMaterials.CelestialTungsten = new Material.Builder(getMaterialsId(), gregtechId("celestial_tungsten"))

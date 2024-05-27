@@ -655,13 +655,6 @@ public class TJFirstDegreeMaterials {
                 .components(Aluminium, 1, Silicon, 1, Oxygen, 4)
                 .build();
 
-        DimethylCarbonate = new Material.Builder(25115, gregtechId("dimethylcarbonate"))
-                .fluid()
-                .colorAverage()
-                .components(Carbon, 3, Hydrogen, 6, Oxygen, 3)
-                .build()
-                .setFormula("(CH3O)2CO",true);
-
         TetramethylammoniumBromide = new Material.Builder(25116, gregtechId("tetramethylammoniumbromide"))
                 .dust()
                 .colorAverage()

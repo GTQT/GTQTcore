@@ -553,6 +553,41 @@ public class GTQTMaterials {
     public static Material DragonBreath;
     public static Material ConcentrateDragonBreath;
     public static Material DragonBlood;
+    public static Material IsobutyricAcid;
+    public static Material IsobutyricAnhydride;
+    public static Material Dimethylketene;
+    public static Material Tetramethylcyclobutanediol;
+    public static Material CBDOPolycarbonate;
+    public static Material DiphenylCarbonate;
+    public static Material BPAPolycarbonate;
+    public static Material Californium252Dioxide;
+    public static Material SteamCrackedCalifornium252Hexafluoride;
+    public static Material Californium252Hexafluoride;
+    public static Material CaliforniumHexafluoride;
+    public static Material CaliforniumHexachloride;
+    public static Material CaliforniumDioxide;
+    public static Material CaliforniumNitrite;
+    public static Material Celestite;
+    public static Material StrontiumCarbonate;
+    public static Material StrontiumOxide;
+    public static Material AcidicPyrochlore;
+    public static Material ThoriumUraniumSolution;
+    public static Material LeachingPyrochlore;
+    public static Material BariumStrontiumRadiumSolution;
+    public static Material FluoroniobicAcid;
+    public static Material Oxypentafluoroniobate;
+    public static Material Heptafluorotantalate;
+    public static Material PotassiumFluoride;
+    public static Material PotassiumFluoniobate;
+    public static Material PotassiumFluotantalate;
+    public static Material UraniumThoriumNitrate;
+    public static Material UraniumOxideThoriumNitrate;
+    public static Material ThoriumNitrateSolution;
+    public static Material ThoriumOxide;
+    public static Material TributylPhosphate;
+    public static Material MesitylOxide;
+    public static Material MethylIsobutylKetone;
+    public static Material TBPMIBKSolution;
 
 
     //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/api/unification/GSMaterials.java

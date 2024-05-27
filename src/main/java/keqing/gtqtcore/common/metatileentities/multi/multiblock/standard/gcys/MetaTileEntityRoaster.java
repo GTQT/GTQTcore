@@ -100,16 +100,16 @@ public class MetaTileEntityRoaster extends RecipeMapMultiblockController impleme
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.3"));
     }
     private IBlockState getPipeStates() {
-        return MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.TITANIUM_PIPE);
+        return MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.POLYTETRAFLUOROETHYLENE_PIPE);
     }
 
     private IBlockState getCasingState() {
-        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.TUNGSTENSTEEL_ROBUST);
+        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.TITANIUM_STABLE);
     }
 
     @Nonnull
     private TraceabilityPredicate getFramePredicate() {
-        return frames(Materials.TungstenSteel);
+        return frames(Materials.Titanium);
     }
 
     @Override
@@ -141,6 +141,6 @@ public class MetaTileEntityRoaster extends RecipeMapMultiblockController impleme
     @SideOnly(Side.CLIENT)
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart){
-        return Textures.ROBUST_TUNGSTENSTEEL_CASING;
+        return Textures.STABLE_TITANIUM_CASING;
     }
 }

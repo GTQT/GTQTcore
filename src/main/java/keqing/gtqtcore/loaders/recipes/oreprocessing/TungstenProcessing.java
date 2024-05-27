@@ -4,8 +4,7 @@ import gregtech.api.recipes.GTRecipeHandler;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.OreDictUnifier;
 
-import static gregtech.api.recipes.RecipeMaps.AUTOCLAVE_RECIPES;
-import static gregtech.api.recipes.RecipeMaps.CHEMICAL_RECIPES;
+import static gregtech.api.recipes.RecipeMaps.*;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.DRYER_RECIPES;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.SFM;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
@@ -55,11 +54,12 @@ public class TungstenProcessing {
                 .output(dust,CammoniumTungstate,7)
                 .duration(400).EUt(480).buildAndRegister();
         // 钨酸铵-> WO3 + H2O
-        DRYER_RECIPES.recipeBuilder()
+        BLAST_RECIPES.recipeBuilder()
                 .input(dust, CammoniumTungstate, 7)
                 .output(dust, TungstenTrioxide, 4)
                 .fluidOutputs(Water.getFluid(6000))
                 .fluidInputs(Ammonia.getFluid(6000))
+                .blastFurnaceTemp(3600)
                 .duration(400).EUt(480).buildAndRegister();
 
 

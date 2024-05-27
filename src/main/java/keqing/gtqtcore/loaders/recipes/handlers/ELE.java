@@ -187,7 +187,7 @@ public class ELE {
                 .input(electrode, Graphite, 16)
                 .input(circuit, MarkerMaterials.Tier.LV,16)
                 .input(wireFine,Copper,16)
-                .input(ELECTROLYZER[1],3)
+                .input(ELECTROLYZER[1],4)
                 .fluidInputs(Tin.getFluid(L * 4))
                 .outputs(GTQTMetaTileEntities.ELECTROBATH.getStackForm())
                 .duration(200).EUt(30).buildAndRegister();

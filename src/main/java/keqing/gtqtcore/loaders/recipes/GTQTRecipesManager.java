@@ -40,9 +40,12 @@ public class GTQTRecipesManager {
         BoronChain.init();
         EnzymesRecipes.init();
         GTQTOreRecipeHandler.init();
+        StrontiumRadiumChain.init();
         AlgaeChain.init();
         CTABChain.init();
         DragonChain.init();
+        CBDOPolycarbonateChain.init();
+        CaliforniumChain.init();
         TitanateChain.init();
         NuclearLine.init();
         OceanChain.init();

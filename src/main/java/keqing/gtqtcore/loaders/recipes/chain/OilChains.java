@@ -315,28 +315,28 @@ public class OilChains {
                 .fluidInputs(RawOil.getFluid(1000))
                 .fluidOutputs(PreTreatedCrudeOilContainingImpurities.getFluid(1000))
                 .fluidOutputs(SaltWater.getFluid(200))
-                .duration(20)
+                .duration(100)
                 .buildAndRegister();
 
         OIL_POOL.recipeBuilder()
                 .fluidInputs(OilHeavy.getFluid(1000))
                 .fluidOutputs(PreTreatedCrudeOilContainingImpurities.getFluid(1000))
                 .fluidOutputs(SaltWater.getFluid(200))
-                .duration(20)
+                .duration(100)
                 .buildAndRegister();
 
         OIL_POOL.recipeBuilder()
                 .fluidInputs(OilLight.getFluid(1000))
                 .fluidOutputs(PreTreatedCrudeOilContainingImpurities.getFluid(1000))
                 .fluidOutputs(SaltWater.getFluid(200))
-                .duration(20)
+                .duration(100)
                 .buildAndRegister();
 
         OIL_POOL.recipeBuilder()
                 .fluidInputs(Oil.getFluid(1000))
                 .fluidOutputs(PreTreatedCrudeOilContainingImpurities.getFluid(1000))
                 .fluidOutputs(SaltWater.getFluid(200))
-                .duration(20)
+                .duration(100)
                 .buildAndRegister();
 
 
@@ -346,7 +346,7 @@ public class OilChains {
                 .fluidInputs(Demulsifier.getFluid(10))
                 .fluidOutputs(PreTreatedCrudeOil.getFluid(1500))
                 .fluidOutputs(SaltWater.getFluid(200))
-                .duration(20)
+                .duration(40)
                 .EUt(120)
                 .buildAndRegister();
 
@@ -355,7 +355,7 @@ public class OilChains {
                 .fluidInputs(Demulsifier.getFluid(10))
                 .fluidOutputs(PreTreatedCrudeOil.getFluid(1500))
                 .fluidOutputs(SaltWater.getFluid(200))
-                .duration(20)
+                .duration(40)
                 .EUt(120)
                 .buildAndRegister();
 
@@ -364,7 +364,7 @@ public class OilChains {
                 .fluidInputs(Demulsifier.getFluid(10))
                 .fluidOutputs(PreTreatedCrudeOil.getFluid(1500))
                 .fluidOutputs(SaltWater.getFluid(200))
-                .duration(20)
+                .duration(40)
                 .EUt(120)
                 .buildAndRegister();
 
@@ -373,7 +373,7 @@ public class OilChains {
                 .fluidInputs(Demulsifier.getFluid(10))
                 .fluidOutputs(PreTreatedCrudeOil.getFluid(1500))
                 .fluidOutputs(SaltWater.getFluid(200))
-                .duration(20)
+                .duration(40)
                 .EUt(120)
                 .buildAndRegister();
 
