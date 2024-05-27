@@ -101,13 +101,14 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
         WidgetGroup group = new WidgetGroup(x, y, width, height);
         group.addWidget(new ClickButtonWidget(0, 0, 18, 18, "", this::clear)
                 .setButtonTexture(GuiTextures.BUTTON_THROTTLE_MINUS)
-                .setTooltipText("循环模式！"));
+                .setTooltipText("循环模式"));
 
         return group;
     }
 
     private void clear(Widget.ClickData clickData) {
         cycle=!cycle;
+        circuit=1;
     }
     @Override
     protected BlockPattern createStructurePattern() {
@@ -157,7 +158,8 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
             textList.add(new TextComponentTranslation("gtqtcore.multiblock.ma.amount", TextFormattingUtil.formatNumbers((liquidOxygenAmount))));
         }
         textList.add(new TextComponentTranslation("gtqtcore.md",tier, drilla, naijiu));
-        textList.add(new TextComponentTranslation("循环：%s 配方：%s",cycle,circuit));
+        if(cycle)textList.add(new TextComponentTranslation("循环模式：%s 正在运行配方：%s",cycle,circuit));
+        else textList.add(new TextComponentTranslation("循环模式：%s",cycle));
     }
 
     @Override
@@ -236,6 +238,7 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
+        addCircuit(true);
         Object drill = context.get("DriTiredStats");
         Object casing = context.get("ChemicalPlantCasingTiredStats");
         Object tubeTier = context.get("ChemicalPlantTubeTiredStats");
@@ -287,16 +290,23 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
         tooltip.add(I18n.format("gtqtcore.machine.mdi.tooltip.1"));
         tooltip.add(I18n.format("gtqtcore.machine.mdi.tooltip.2"));
         tooltip.add(I18n.format("gtqtcore.machine.mdi.tooltip.3"));
+        tooltip.add(I18n.format("控制器上方需要替换为输入总线！！"));
     }
 
-    private void addCircuit() {
+    private void addCircuit(Boolean start) {
         MetaTileEntity mte = GTUtility.getMetaTileEntity(this.getWorld(), this.getPos().add(0, 1, 0));
         var s  = (IGhostSlotConfigurable)mte;
-        circuit++;if(circuit>getmaxcircuit())circuit=1;
+        if(start) {
+            circuit = 1;
+            return;
+        }
+        circuit++;
+        if(circuit>getmaxcircuit())circuit=1;
         s.setGhostCircuitConfig(circuit);
 
 
     }
+
     private int getmaxcircuit()
     {
         if(tier==1)return 5;
@@ -349,7 +359,7 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
                     inputTank.drain(LUBRICANT_STACK, true);
                     if (++this.progressTime > this.maxProgressTime) {
                         this.completeRecipe();
-                        if (cycle) addCircuit();
+                        if (cycle) addCircuit(false);
                     }
                 }
             }
