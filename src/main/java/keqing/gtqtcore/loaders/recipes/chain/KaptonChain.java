@@ -2,12 +2,13 @@ package keqing.gtqtcore.loaders.recipes.chain;
 
 import gregtech.api.recipes.ingredients.IntCircuitIngredient;
 
+import static gregtech.api.recipes.RecipeMaps.*;
+import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static gregtech.api.GTValues.*;
-import static gregtech.api.recipes.RecipeMaps.CHEMICAL_RECIPES;
-import static gregtech.api.recipes.RecipeMaps.LARGE_CHEMICAL_RECIPES;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.dust;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 
 public class KaptonChain {
 
@@ -47,37 +48,46 @@ public class KaptonChain {
                 .fluidOutputs(Water.getFluid(1000))
                 .duration(300).EUt(VA[LV]).buildAndRegister();
 
-        // 2C6H5NH2 + C2H5OH -> C12H12N2O + 2CH4
-        CHEMICAL_RECIPES.recipeBuilder()
+        //  Tin dust + Aniline + Phenol + Hydrochloric Acid -> Oxydianiline + Methane
+        CHEMICAL_PLANT.recipeBuilder()
                 .notConsumable(dust, Tin)
                 .fluidInputs(Aniline.getFluid(2000))
                 .fluidInputs(Phenol.getFluid(1000))
-                .notConsumable(HydrochloricAcid.getFluid())
+                .notConsumable(HydrochloricAcid.getFluid(1))
                 .output(dust, Oxydianiline, 27)
                 .fluidOutputs(Methane.getFluid(2000))
-                .duration(100).EUt(VA[ZPM]).buildAndRegister();
+                .duration(100)
+                .EUt(VA[ZPM])
+                .recipeLevel(4)
+                .buildAndRegister();
 
-        // HOC6H4NH2 + ClC6H4NO2 + H2O -> C12H12N2O + 3O + HCl
-        LARGE_CHEMICAL_RECIPES.recipeBuilder()
+        //  Saltpeter + Aminonphenol + Nitrochlorobenzene + Water + Dimethylformamide -> Oxydianiline + Oxygen + Hydrochloric Acid
+        CHEMICAL_PLANT.recipeBuilder()
                 .notConsumable(dust, Saltpeter)
                 .fluidInputs(Aminophenol.getFluid(1000))
                 .fluidInputs(Nitrochlorobenzene.getFluid(1000))
                 .fluidInputs(Water.getFluid(1000))
-                .notConsumable(Dimethylformamide.getFluid())
+                .notConsumable(Dimethylformamide.getFluid(1))
                 .output(dust, Oxydianiline, 27)
                 .fluidOutputs(Oxygen.getFluid(3000))
                 .fluidOutputs(HydrochloricAcid.getFluid(1000))
-                .duration(200).EUt(VA[LV]).buildAndRegister();
+                .duration(200)
+                .EUt(VA[HV])
+                .recipeLevel(2)
+                .buildAndRegister();
     }
 
     private static void bpda() {
-        // C8H4O3 -> C16H6O6 + 2H
-        CHEMICAL_RECIPES.recipeBuilder()
+        //  Phthalic Anhydride + Palladium -> Biphenyl Tetracarboxylic Acid Dianhydride + Hydrogen
+        CHEMICAL_PLANT.recipeBuilder()
                 .input(dust, PhthalicAnhydride, 13)
                 .notConsumable(dust, Palladium)
                 .output(dust, BiphenylTetracarboxylicAcidDianhydride, 28)
                 .fluidOutputs(Hydrogen.getFluid(2000))
-                .duration(200).EUt(VA[HV]).buildAndRegister();
+                .duration(200)
+                .EUt(VA[HV])
+                .recipeLevel(3)
+                .buildAndRegister();
     }
 
     private static void ppd() {
@@ -113,5 +123,46 @@ public class KaptonChain {
                 .fluidInputs(KaptonK.getFluid(L))
                 .fluidOutputs(KaptonE.getFluid(L))
                 .duration(30).EUt(VA[ZPM]).buildAndRegister();
+
+
+
+
+
+
+
+
+
+
+        //  Dimethylamine + Hydrochloric Acid -> Dimethylamine Hydrochloride
+        MIXER_RECIPES.recipeBuilder()
+                .fluidInputs(Dimethylamine.getFluid(1000))
+                .fluidInputs(HydrochloricAcid.getFluid(1000))
+                .fluidOutputs(DimethylamineHydrochloride.getFluid(1000))
+                .EUt(VA[EV])
+                .duration(60)
+                .buildAndRegister();
+
+        //  Dimethylformamide (EV): Potassium Formate + Dimethylamine Hydrochloride -> Rock Salt + Dimethylformamide + Hydrogen
+        ROASTER_RECIPES.recipeBuilder()
+                .input(dust, PotassiumFormate, 1)
+                .fluidInputs(DimethylamineHydrochloride.getFluid(1000))
+                .output(dust, RockSalt, 2)
+                .fluidOutputs(Dimethylformamide.getFluid(1000))
+                .fluidOutputs(Hydrogen.getFluid(1000))
+                .EUt(VA[EV])
+                .duration(120)
+                .temperature(1488)
+                .buildAndRegister();
+
+        //  Rock Salt + Methanol -> Potassium Formate + Chlorine
+        ROASTER_RECIPES.recipeBuilder()
+                .input(dust, RockSalt, 2)
+                .fluidInputs(Methanol.getFluid(1000))
+                .output(dust, PotassiumFormate)
+                .fluidOutputs(DilutedHydrochloricAcid.getFluid(1000))
+                .EUt(VA[HV])
+                .duration(240)
+                .temperature(980)
+                .buildAndRegister();
     }
 }

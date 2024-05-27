@@ -24,6 +24,7 @@ import keqing.gtqtcore.common.block.blocks.GTQTADVGlass;
 import keqing.gtqtcore.common.block.blocks.GTQTBlockGlassCasing;
 import keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
+import keqing.gtqtcore.loaders.recipes.chain.PEEKChain;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -39,9 +40,9 @@ import static gregtech.common.blocks.MetaBlocks.MACHINE_CASING;
 import static gregtech.common.metatileentities.MetaTileEntities.ARC_FURNACE;
 import static gregtech.loaders.recipe.CraftingComponent.*;
 import static gregtech.loaders.recipe.MetaTileEntityLoader.registerMachineRecipe;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.Adamantite;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.Orichalcum;
+import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
+import static keqing.gtqtcore.api.unification.TJMaterials.Polyetheretherketone;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.plate_curved;
 import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.FISHING_CASING;
 import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing1.TurbineCasingType.*;
@@ -232,7 +233,7 @@ public class MetaTileEntityMachine {
         ModHandler.removeRecipeByName("gregtech:gregtech.machine.hull.uhv");
 
         //ulv
-        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(25).EUt(8)
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(25).EUt(2)
                 .inputs(MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.ULV))
                 .input(plate, Materials.RedAlloy, 2)
                 .input(OrePrefix.cableGtSingle, Materials.Lead, 2)
@@ -240,7 +241,7 @@ public class MetaTileEntityMachine {
                 .buildAndRegister();
 
         //lv
-        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(50).EUt(30)
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(50).EUt(8)
                 .inputs(MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.LV))
                 .input(plate, GalvanizedSteel, 2)
                 .input(OrePrefix.cableGtSingle, Materials.Tin, 2)
@@ -248,7 +249,7 @@ public class MetaTileEntityMachine {
                 .outputs(MetaTileEntities.HULL[1].getStackForm()).buildAndRegister();
 
         //mv
-        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(50).EUt(120)
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(50).EUt(30)
                 .inputs(MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.MV))
                 .input(plate,Invar, 2)
                 .input(OrePrefix.cableGtSingle, Materials.Copper, 2)
@@ -256,7 +257,7 @@ public class MetaTileEntityMachine {
                 .outputs(MetaTileEntities.HULL[2].getStackForm()).buildAndRegister();
 
         //hv
-        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(50).EUt(480)
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(50).EUt(120)
                 .inputs(MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.HV))
                 .input(plate, Talonite, 2)
                 .input(OrePrefix.cableGtSingle, Materials.Aluminium, 2)
@@ -264,7 +265,7 @@ public class MetaTileEntityMachine {
                 .outputs(MetaTileEntities.HULL[3].getStackForm()).buildAndRegister();
 
         //ev
-        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(50).EUt(1960)
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(50).EUt(480)
                 .inputs(MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.EV))
                 .input(plate, Palladium, 2)
                 .input(OrePrefix.cableGtSingle, Gold, 2)
@@ -272,35 +273,40 @@ public class MetaTileEntityMachine {
                 .buildAndRegister();
 
         //iv
-        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(50).EUt(7680)
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(50).EUt(1920)
                 .inputs(MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.IV))
                 .input(plate, Iridium, 2)
                 .input(OrePrefix.cableGtSingle, Materials.Platinum, 2)
-                .fluidInputs(Polybenzimidazole.getFluid(L * 2)).outputs(MetaTileEntities.HULL[5].getStackForm())
+                .fluidInputs(Zylon.getFluid(L * 2)).outputs(MetaTileEntities.HULL[5].getStackForm())
                 .buildAndRegister();
 
-        //待定
-        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(50).EUt(16)
+        //luv
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(50).EUt(7680)
                 .inputs(MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.LuV))
                 .input(plate, HSSS, 2)
                 .input(OrePrefix.cableGtSingle, Materials.NiobiumTitanium, 2)
-                .fluidInputs(Polytetrafluoroethylene.getFluid(L * 2)).outputs(MetaTileEntities.HULL[6].getStackForm())
+                .fluidInputs(Polybenzimidazole.getFluid(L * 2)).outputs(MetaTileEntities.HULL[6].getStackForm())
                 .buildAndRegister();
-        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(50).EUt(16)
+        //zpm
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(50).EUt(30720)
                 .inputs(MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.ZPM))
                 .input(plate, Duranium, 2)
                 .input(OrePrefix.cableGtSingle, Materials.VanadiumGallium, 2)
-                .fluidInputs(Polybenzimidazole.getFluid(L * 2)).outputs(MetaTileEntities.HULL[7].getStackForm())
+                .fluidInputs(Kevlar.getFluid(L * 2)).outputs(MetaTileEntities.HULL[7].getStackForm())
                 .buildAndRegister();
-        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(50).EUt(16)
+        //uv
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(50).EUt(12280)
                 .inputs(MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.UV))
-                .input(plate, Seaborgium, 2)
-                .input(cableGtSingle, Materials.YttriumBariumCuprate, 2).fluidInputs(Polybenzimidazole.getFluid(L * 2))
+                .input(plate, Americium, 2)
+                .input(cableGtSingle, Materials.YttriumBariumCuprate, 2)
+                .fluidInputs(Polyetheretherketone.getFluid(L * 2))
                 .outputs(MetaTileEntities.HULL[8].getStackForm()).buildAndRegister();
-        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(50).EUt(16)
+        //uhv
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(50).EUt(491520)
                 .inputs(MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.UHV))
-                .input(plate, Infinity, 2)
-                .input(cableGtSingle, Materials.Europium, 2).fluidInputs(Polybenzimidazole.getFluid(L * 2))
+                .input(plate, Neutronium, 2)
+                .input(cableGtSingle, Materials.Europium, 2)
+                .fluidInputs(KaptonE.getFluid(L * 2))
                 .outputs(MetaTileEntities.HULL[9].getStackForm()).buildAndRegister();
 
         //  Boron Silicate Glass

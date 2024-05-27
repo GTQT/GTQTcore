@@ -2706,7 +2706,7 @@ public class FirstDegreeMaterials {
                 .components(Californium252, 2, Fluorine, 6)
                 .flags(DISABLE_DECOMPOSITION)
                 .build();
-        //  24302 Californium-252 Dioxide
+
         GTQTMaterials.Californium252Dioxide = new Material.Builder(getMaterialsId(), gregtechId("californium_252_dioxide"))
                 .dust()
                 .color(0x912D01)
@@ -2715,7 +2715,7 @@ public class FirstDegreeMaterials {
                 .flags(DISABLE_DECOMPOSITION)
                 .build();
 
-        //  24249 Celestite
+
         GTQTMaterials.Celestite = new Material.Builder(getMaterialsId(), gregtechId("celestite"))
                 .gem()
                 .color(0x4AE3E6)
@@ -2723,7 +2723,7 @@ public class FirstDegreeMaterials {
                 .components(Strontium, 1, Sulfur, 1, Oxygen, 4)
                 .flags(CRYSTALLIZABLE, DISABLE_DECOMPOSITION, GENERATE_LENS)
                 .build();
-        //  24250 Strontium Carbonate
+
         GTQTMaterials.StrontiumCarbonate = new Material.Builder(getMaterialsId(), gregtechId("strontium_carbonate"))
                 .dust()
                 .color(0x1DAFD3)
@@ -2731,14 +2731,14 @@ public class FirstDegreeMaterials {
                 .components(Strontium, 1, Carbon, 1, Oxygen, 3)
                 .flags(DISABLE_DECOMPOSITION)
                 .build();
-        //  24251 Strontium Oxide
+
         GTQTMaterials.StrontiumOxide = new Material.Builder(getMaterialsId(), gregtechId("stronium_oxide"))
                 .dust()
                 .color(0x16839E)
                 .iconSet(BRIGHT)
                 .components(Strontium, 1, Oxygen, 1)
                 .build();
-        //  24252 Acidic Pyrochlore
+
         GTQTMaterials.AcidicPyrochlore = new Material.Builder(getMaterialsId(), gregtechId("acidic_pyrochlore"))
                 .dust()
                 .color(Pyrochlore.getMaterialRGB() + SulfuricAcid.getMaterialRGB())
@@ -2746,56 +2746,56 @@ public class FirstDegreeMaterials {
                 .components(Pyrochlore, 1, SulfuricAcid, 1)
                 .flags(DISABLE_DECOMPOSITION)
                 .build();
-        //  24253 Thorium-Uranium Solution
+
         GTQTMaterials.ThoriumUraniumSolution = new Material.Builder(getMaterialsId(), gregtechId("thorium_uranium_solution"))
                 .fluid()
                 .color(Thorium.getMaterialRGB() + Uranium235.getMaterialRGB())
                 .iconSet(DULL)
                 .build()
                 .setFormula("?SO4", true);
-        //  24254 Leaching Pyrochlore
+
         GTQTMaterials.LeachingPyrochlore = new Material.Builder(getMaterialsId(), gregtechId("leaching_pyrochlore"))
                 .dust()
                 .color(0xE2502C)
                 .iconSet(BRIGHT)
                 .build()
                 .setFormula("(Nb2O5)9Ta2O5?", true);
-        //  24255 Barium-Strontium-Radium Solution
+
         GTQTMaterials.BariumStrontiumRadiumSolution = new Material.Builder(getMaterialsId(), gregtechId("barium_strontium_radium_solution"))
                 .fluid()
                 .color(Barite.getMaterialRGB())
                 .components(Barite, 1, Gypsum, 1, Celestite, 1, Radium, 1, Water, 4)
                 .flags(DISABLE_DECOMPOSITION)
                 .build();
-        //  24256 Fluoroniobic Acid
+
         GTQTMaterials.FluoroniobicAcid = new Material.Builder(getMaterialsId(), gregtechId("fluoroniobic_acid"))
                 .liquid(new FluidBuilder().attributes(ACID))
                 .color(Niobium.getMaterialRGB() + HydrofluoricAcid.getMaterialRGB())
                 .components(Niobium, 1, Hydrogen, 1, Fluorine, 7)
                 .flags(DISABLE_DECOMPOSITION)
                 .build();
-        //  24257 Oxypentafluoroniobate
+
         GTQTMaterials.Oxypentafluoroniobate = new Material.Builder(getMaterialsId(), gregtechId("oxypentafluoroniobate"))
                 .fluid()
                 .color(0x17F742)
                 .components(Hydrogen, 2, Niobium, 1, Oxygen, 1, Fluorine, 5)
                 .flags(DISABLE_DECOMPOSITION)
                 .build();
-        //  24258 Heptafluorotantalate
+
         GTQTMaterials.Heptafluorotantalate = new Material.Builder(getMaterialsId(), gregtechId("heptafluorotantalate"))
                 .fluid()
                 .color(0x16EB3F)
                 .components(Hydrogen, 2, Tantalum, 1, Fluorine, 7)
                 .flags(DISABLE_DECOMPOSITION)
                 .build();
-        //  24259 Potassium Fluoride
+
         GTQTMaterials.PotassiumFluoride = new Material.Builder(getMaterialsId(), gregtechId("potassium_fluoride"))
                 .dust()
                 .color(Potassium.getMaterialRGB() + Fluorine.getMaterialRGB())
                 .iconSet(ROUGH)
                 .components(Potassium, 1, Fluorine, 1)
                 .build();
-        //  24260 Potassium Fluoniobate
+
         GTQTMaterials.PotassiumFluoniobate = new Material.Builder(getMaterialsId(), gregtechId("potassium_fluoniobate"))
                 .dust()
                 .color(PotassiumFluoride.getMaterialRGB() + FluoroniobicAcid.getMaterialRGB())
@@ -2803,7 +2803,7 @@ public class FirstDegreeMaterials {
                 .components(Potassium, 2, Niobium, 1, Fluorine, 7)
                 .flags(DISABLE_DECOMPOSITION)
                 .build();
-        //  24261 Potassium Fluotantalate
+
         GTQTMaterials.PotassiumFluotantalate = new Material.Builder(getMaterialsId(), gregtechId("potassium_fluotantalate"))
                 .dust()
                 .color(Tantalum.getMaterialRGB() + PotassiumFluoniobate.getMaterialRGB())
@@ -2811,27 +2811,27 @@ public class FirstDegreeMaterials {
                 .components(Potassium, 2, Tantalum, 1, Fluorine, 7)
                 .flags(DISABLE_DECOMPOSITION)
                 .build();
-        //  24262 Uranium Thorium Nitrate
+
         GTQTMaterials.UraniumThoriumNitrate = new Material.Builder(getMaterialsId(), gregtechId("uranium_thorium_nitrate"))
                 .dust()
                 .color(Uranium238.getMaterialRGB() + Thorium.getMaterialRGB() + Nitrogen.getMaterialRGB())
                 .iconSet(SHINY)
                 .build()
                 .setFormula("UO2(NO3)2Th(NO3)4", true);
-        //  24263 Uranium Oxide Thorium Nitrate
+
         GTQTMaterials.UraniumOxideThoriumNitrate = new Material.Builder(getMaterialsId(), gregtechId("uranium_oxide_thorium_nitrate"))
                 .dust()
                 .color(Uranium238.getMaterialRGB() + Oxygen.getMaterialRGB())
                 .iconSet(SHINY)
                 .build()
                 .setFormula("UO2Th(NO3)4", true);
-        //  24264 Thorium Nitrate Solution
+
         GTQTMaterials.ThoriumNitrateSolution = new Material.Builder(getMaterialsId(), gregtechId("thorium_nitrate_solution"))
                 .fluid()
                 .color(Thorium.getMaterialRGB())
                 .build()
                 .setFormula("Th(NO3)4(H2O)", true);
-        //  24265 Thorium Oxide
+
         GTQTMaterials.ThoriumOxide = new Material.Builder(getMaterialsId(), gregtechId("thorium_oxide"))
                 .dust()
                 .color(Thorium.getMaterialRGB() + Oxygen.getMaterialRGB())
@@ -2858,7 +2858,7 @@ public class FirstDegreeMaterials {
                 .color(0x2F5687)
                 .components(Carbon, 6, Hydrogen, 12, Oxygen, 1)
                 .build();
-        //  25139 tbp_mibk_solution
+
         GTQTMaterials.TBPMIBKSolution = new Material.Builder(getMaterialsId(), gregtechId("tbp_mibk_solutione"))
                 .fluid()
                 .color(0xBED323)
@@ -2872,5 +2872,18 @@ public class FirstDegreeMaterials {
                 .components(Carbon, 3, Hydrogen, 6, Oxygen, 3)
                 .build()
                 .setFormula("(CH3O)2CO", true);
+
+        GTQTMaterials.DimethylamineHydrochloride = new Material.Builder(getMaterialsId(), gregtechId("dimethylamine_hydrochloride"))
+                .fluid()
+                .color(0xE3EBDC)
+                .components(Dimethylamine, 1, HydrochloricAcid, 1)
+                .build()
+                .setFormula("C2H8NCl", true);
+
+        GTQTMaterials.PotassiumFormate = new Material.Builder(getMaterialsId(), gregtechId("potassium_formate"))
+                .dust()
+                .color(0x74B5A9)
+                .components(Carbon, 1, Hydrogen, 3, Oxygen, 1, Potassium, 1)
+                .build();
     }
 }

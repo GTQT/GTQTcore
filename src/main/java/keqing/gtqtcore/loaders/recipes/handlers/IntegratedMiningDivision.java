@@ -42,22 +42,22 @@ public class IntegratedMiningDivision {
                             .EUt(480).duration(20)
                             .buildAndRegister();
                     addIntegratedMiningRecipe4(material, 1)
-                            .EUt(1960).duration(20)
+                            .EUt(1920).duration(20)
                             .buildAndRegister();
                     addIntegratedMiningRecipe5(material, 1)
-                            .EUt(1960).duration(20)
+                            .EUt(1920).duration(20)
                             .buildAndRegister();
                     addIntegratedMiningRecipe6(material, 1)
-                            .EUt(1960).duration(20)
+                            .EUt(1920).duration(20)
                             .buildAndRegister();
                     addIntegratedMiningRecipe7(material, 2)
-                            .EUt(1960).duration(20)
+                            .EUt(1920).duration(20)
                             .buildAndRegister();
                     addIntegratedMiningRecipe8(material, 2)
-                            .EUt(1960).duration(20)
+                            .EUt(1920).duration(20)
                             .buildAndRegister();
                     addIntegratedMiningRecipe9(material, 2)
-                            .EUt(1960).duration(20)
+                            .EUt(1920).duration(20)
                             .buildAndRegister();
                     addIntegratedMiningRecipe10(material, 1)
                             .EUt(16).duration(160)

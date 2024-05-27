@@ -120,7 +120,7 @@ public class CPULine {
                 .scannerResearch(b -> b
                         .researchStack(EMITTER_EV.getStackForm())
                         .EUt(VA[EV]))
-                .duration(200).EUt(1960).buildAndRegister();
+                .duration(200).EUt(1920).buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .inputs(HULL[5].getStackForm())
@@ -179,7 +179,7 @@ public class CPULine {
                 .scannerResearch(b -> b
                         .researchStack(FIELD_GENERATOR_EV.getStackForm())
                         .EUt(VA[EV]))
-                .duration(200).EUt(1960).buildAndRegister();
+                .duration(200).EUt(1920).buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .inputs(HULL[5].getStackForm())
@@ -229,7 +229,7 @@ public class CPULine {
                 .input(rotor, Titanium, 16)
                 .fluidInputs(ReinforcedEpoxyResin.getFluid(L * 4))
                 .outputs(GTQTMetaBlocks.STEPPER.getItemVariant(CLEAN_MKIV))
-                .duration(200).EUt(1960).buildAndRegister();
+                .duration(200).EUt(1920).buildAndRegister();
 
         ASSEMBLER_RECIPES.recipeBuilder()
                 .inputs(HULL[5].getStackForm())
@@ -806,7 +806,7 @@ public class CPULine {
 
         CZPULLER_RECIPES.recipeBuilder()
                 .duration(2500)
-                .EUt(1960)
+                .EUt(1920)
                 .fluidInputs(Helium.getFluid(4000))
                 .input(block,CSilicon,32)
                 .input(dust,IndiumGalliumPhosphide,1)
@@ -836,7 +836,7 @@ public class CPULine {
 
         CZPULLER_RECIPES.recipeBuilder()
                 .duration(2500)
-                .EUt(1960)
+                .EUt(1920)
                 .fluidInputs(Helium.getFluid(4000))
                 .input(block,CSilicon,32)
                 .input(dust,IndiumGalliumPhosphide,4)

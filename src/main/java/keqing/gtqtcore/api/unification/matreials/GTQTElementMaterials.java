@@ -130,7 +130,6 @@ public class GTQTElementMaterials {
                         .enchantment(Enchantments.EFFICIENCY, 3)
                         .enchantment(Enchantments.FORTUNE, 2)
                         .enchantment(Enchantments.SHARPNESS, 2).build())
-
                 .element(GTQTElements.CosmicNeutronium)
                 .cableProperties(V[UIV], 256, 128, false)
                 .build();
@@ -140,7 +139,7 @@ public class GTQTElementMaterials {
                 .color(0x6666FF)
                 .iconSet(CUSTOM_DEGENERATE_RHENIUM)
                 .element(Elements.Rh)
-                .flags(GENERATE_PLATE   )
+                .flags(GENERATE_PLATE)
                 .build()
                 .setFormula("§cR§de", false);
 

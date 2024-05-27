@@ -192,7 +192,7 @@ public class KeQingNET {
                 .scannerResearch(b -> b
                         .researchStack(GREENHOUSE.getStackForm())
                         .EUt(VA[HV]))
-                .duration(4000).EUt(1960).buildAndRegister();
+                .duration(4000).EUt(1920).buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(CENTRIFUGE[3],4)
@@ -210,7 +210,7 @@ public class KeQingNET {
                 .scannerResearch(b -> b
                         .researchStack(CENTRIFUGE[3].getStackForm())
                         .EUt(VA[HV]))
-                .duration(4000).EUt(1960).buildAndRegister();
+                .duration(4000).EUt(1920).buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(BIOLOGICAL_REACTION,4)
@@ -226,7 +226,7 @@ public class KeQingNET {
                 .scannerResearch(b -> b
                         .researchStack(BIOLOGICAL_REACTION.getStackForm())
                         .EUt(VA[HV]))
-                .duration(4000).EUt(1960).buildAndRegister();
+                .duration(4000).EUt(1920).buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .inputs(HULL[2].getStackForm())

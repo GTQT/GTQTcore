@@ -387,7 +387,7 @@ public class MetaTileEntityLoader {
                 .input(plate, StainlessSteel, 16)
                 .fluidInputs(Polybenzimidazole.getFluid(L * 4))
                 .outputs(GTQTMetaBlocks.ELECTROBATH.getItemVariant(GTQTElectrobath.CasingType.SOLAR_PLATE_CASING))
-                .duration(2000).EUt(1960).buildAndRegister();
+                .duration(2000).EUt(1920).buildAndRegister();
 
         ASSEMBLER_RECIPES.recipeBuilder()
                 .inputs(HULL[4].getStackForm())
@@ -396,7 +396,7 @@ public class MetaTileEntityLoader {
                 .input(wireFine, Platinum, 16)
                 .fluidInputs(SolderingAlloy.getFluid(L * 4))
                 .output(SOLAR_PLATE)
-                .duration(2000).EUt(1960).buildAndRegister();
+                .duration(2000).EUt(1920).buildAndRegister();
 
         BLAST_RECIPES.recipeBuilder()
                 .input(dust,GalliumArsenide,16)
@@ -412,7 +412,7 @@ public class MetaTileEntityLoader {
                 .fluidInputs(Nitrogen.getFluid(4000))
                 .output(SOLAR_PLATE_MKII,1)
                 .blastFurnaceTemp(3600)
-                .duration(2000).EUt(1960).buildAndRegister();
+                .duration(2000).EUt(1920).buildAndRegister();
 
         BLAST_RECIPES.recipeBuilder()
                 .input(dust,IndiumGalliumPhosphide,16)
@@ -429,7 +429,7 @@ public class MetaTileEntityLoader {
                 .input(SOLAR_PLATE_MKI,4)
                 .fluidInputs(Polybenzimidazole.getFluid(L * 4))
                 .outputs(GTQTMetaBlocks.ELECTROBATH.getItemVariant(GTQTElectrobath.CasingType.SOLAR_PLATE_LV))
-                .duration(2000).EUt(1960).buildAndRegister();
+                .duration(2000).EUt(1920).buildAndRegister();
 
         ASSEMBLER_RECIPES.recipeBuilder()
                 .inputs(GTQTMetaBlocks.ELECTROBATH.getItemVariant(GTQTElectrobath.CasingType.SOLAR_PLATE_CASING))
@@ -438,7 +438,7 @@ public class MetaTileEntityLoader {
                 .input(SOLAR_PLATE_MKII,4)
                 .fluidInputs(Polybenzimidazole.getFluid(L * 4))
                 .outputs(GTQTMetaBlocks.ELECTROBATH.getItemVariant(GTQTElectrobath.CasingType.SOLAR_PLATE_MV))
-                .duration(2000).EUt(1960).buildAndRegister();
+                .duration(2000).EUt(1920).buildAndRegister();
 
         ASSEMBLER_RECIPES.recipeBuilder()
                 .inputs(GTQTMetaBlocks.ELECTROBATH.getItemVariant(GTQTElectrobath.CasingType.SOLAR_PLATE_CASING))
@@ -447,7 +447,7 @@ public class MetaTileEntityLoader {
                 .input(SOLAR_PLATE_MKIII,4)
                 .fluidInputs(Polybenzimidazole.getFluid(L * 4))
                 .outputs(GTQTMetaBlocks.ELECTROBATH.getItemVariant(GTQTElectrobath.CasingType.SOLAR_PLATE_HV))
-                .duration(2000).EUt(1960).buildAndRegister();
+                .duration(2000).EUt(1920).buildAndRegister();
 
         //化工厂
         ModHandler.addShapedRecipe(true, "chemical_plant", CHEMICAL_PLANT.getStackForm(),

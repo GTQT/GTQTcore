@@ -143,7 +143,7 @@ public class ELE {
                 .fluidInputs(ReinforcedEpoxyResin.getFluid(L * 4))
                 .circuitMeta(5)
                 .outputs(GTQTMetaBlocks.ELECTROBATH.getItemVariant(GTQTElectrobath.CasingType.DRILL_HEAD_EV))
-                .duration(200).EUt(1960).buildAndRegister();
+                .duration(200).EUt(1920).buildAndRegister();
 
 
         ASSEMBLER_RECIPES.recipeBuilder()
@@ -180,7 +180,7 @@ public class ELE {
                 .input(electrode, Platinum, 8)
                 .fluidInputs(ReinforcedEpoxyResin.getFluid(L * 4))
                 .outputs(GTQTMetaBlocks.ELECTROBATH.getItemVariant(GTQTElectrobath.CasingType.IV_ELECTROBATH))
-                .duration(200).EUt(1960).buildAndRegister();
+                .duration(200).EUt(1920).buildAndRegister();
         //主方块
         ASSEMBLER_RECIPES.recipeBuilder()
                 .inputs(HULL[1].getStackForm(4))

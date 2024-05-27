@@ -588,6 +588,8 @@ public class GTQTMaterials {
     public static Material MesitylOxide;
     public static Material MethylIsobutylKetone;
     public static Material TBPMIBKSolution;
+    public static Material DimethylamineHydrochloride;
+    public static Material PotassiumFormate;
 
 
     //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/api/unification/GSMaterials.java
