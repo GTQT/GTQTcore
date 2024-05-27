@@ -91,7 +91,6 @@ public class GTQTElementMaterials {
                 .iconSet(SHINY)
                 .element(Elements.Og)
                 .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_RING, GENERATE_ROUND, GENERATE_BOLT_SCREW, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR,GENERATE_ROTOR)
-                .flags(GENERATE_PLATE)
                 .blast(10300, BlastProperty.GasTier.LOW)
                 .build();
         //  TODO Radium-Radon Mixture + Scandium-Titanium-50 Mixture -> Metastable Hassium
@@ -141,7 +140,7 @@ public class GTQTElementMaterials {
                 .color(0x6666FF)
                 .iconSet(CUSTOM_DEGENERATE_RHENIUM)
                 .element(Elements.Rh)
-                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_ROUND,GENERATE_ROTOR)
+                .flags(GENERATE_PLATE   )
                 .build()
                 .setFormula("§cR§de", false);
 
@@ -194,7 +193,7 @@ public class GTQTElementMaterials {
                         .enchantment(Enchantments.SHARPNESS, 10)
                         .enchantment(Enchantments.LOOTING, 5)
                         .enchantment(Enchantments.SWEEPING, 3).build())
-                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_RING, GENERATE_ROUND, GENERATE_BOLT_SCREW, GENERATE_GEAR, GENERATE_SMALL_GEAR,GENERATE_ROTOR)
+                .flags(GENERATE_PLATE)
                 .build();
         //  26017 Californium-252
         GTQTMaterials.Californium252 = new Material.Builder(getMaterialsId(), gregtechId("californium_252"))
