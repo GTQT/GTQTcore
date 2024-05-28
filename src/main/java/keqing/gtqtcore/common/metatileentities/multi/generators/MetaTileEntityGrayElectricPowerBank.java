@@ -86,7 +86,7 @@ public class MetaTileEntityGrayElectricPowerBank extends MultiblockWithDisplayBa
         tooltip.add(I18n.format("gtqtcore.multiblock.gepb.tooltip.1"));
         tooltip.add(I18n.format("gtqtcore.multiblock.gepb.tooltip.2"));
         tooltip.add(I18n.format("gtqtcore.multiblock.gepb.tooltip.3"));
-        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("钱存银行能生钱，电为什么不行", new Object[0]));
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("地球的力量", new Object[0]));
     }
 
 
@@ -99,15 +99,15 @@ public class MetaTileEntityGrayElectricPowerBank extends MultiblockWithDisplayBa
                 .aisle("AAAAASAAAAA","ABAABBBAABA","AABBABABBAA","AABBABABBAA","ABAABBBAABA","ABBBBBBBBBA","ABAABBBAABA","AABBABABBAA","AABBABABBAA","ABAABBBAABA","AAAAAAAAAAA")
                 .aisle("           "," BBBBBBBBB "," BBBAAABBB "," BBBABABBB "," BAABBBAAB "," BABBBBBAB "," BAABBBAAB "," BBBABABBB "," BBBAAABBB "," BBBBBBBBB ","           ")
                 .aisle("           ","           ","  BB   BB  ","  BBABABB  ","   ABBBA   ","   BBBBB   ","   ABBBA   ","  BBABABB  ","  BB   BB  ","           ","           ")
-                .aisle("           ","           ","  BB   BB  ","  BB B BB  ","    BBB    ","   BBBBB   ","    BBB    ","  BB B BB  ","  BB   BB  ","           ","           ").setRepeatable(1, 100)
+                .aisle("           ","           ","  BB   BB  ","  BB B BB  ","    BBB    ","   BBBBB   ","    BBB    ","  BB B BB  ","  BB   BB  ","           ","           ")
                 .aisle("           ","           ","           ","     B     ","    BBB    ","   BBBBB   ","    BBB    ","     B     ","           ","           ","           ")
+                .aisle("           ","           ","           ","     B     ","    BBB    ","   BBBBB   ","    BBB    ","     B     ","           ","           ","           ").setRepeatable(1, 100)
                 .aisle("           ","           ","           ","     B     ","    BBB    ","   BBBBB   ","    BBB    ","     B     ","           ","           ","           ")
-                .aisle("           ","           ","           ","           ","    BBB    ","    BBB    ","    BBB    ","           ","           ","           ","           ")
-                .aisle("           ","           ","           ","           ","    BBB    ","    BBB    ","    BBB    ","           ","           ","           ","           ")
-                .aisle("           ","           ","           ","           ","     B     ","    BBB    ","     B     ","           ","           ","           ","           ")
-                .aisle("           ","           ","           ","           ","     B     ","    BBB    ","     B     ","           ","           ","           ","           ")
-                .aisle("           ","           ","           ","           ","           ","     B     ","           ","           ","           ","           ","           ")
-                .aisle("           ","           ","           ","           ","           ","     B     ","           ","           ","           ","           ","           ")
+                .aisle("           ","           ","  BB   BB  ","     B     ","    BBB    ","   BBBBB   ","    BBB    ","  BB B BB  ","           ","           ","           ")
+                .aisle("           ","           ","  BB   BB  ","  BB B BB  ","   ABBBA   ","   BBBBB   ","   ABBBA   ","  BBABABB  ","  BB   BB  ","           ","           ")
+                .aisle("           "," BBBBBBBBB "," BBBAAABBB ","  BBABABB  "," BAABBBAAB "," BABBBBBAB "," BAABBBAAB "," BBBABABBB ","  BB   BB  "," BBBBBBBBB ","           ")
+                .aisle("AAAAAAAAAAA","ABAABBBAABA","AABBABABBAA","AABBABABBAA","ABAABBBAABA","ABBBBBBBBBA","ABAABBBAABA","AABBABABBAA"," BBBAAABBB ","ABAABBBAABA","AAAAAAAAAAA")
+                .aisle("AAAAAAAAAAA","AAAAAAAAAAA","AAAAAAAAAAA","AAAAAAAAAAA","AAAAAAAAAAA","AAAAAAAAAAA","AAAAAAAAAAA","AAAAAAAAAAA","AAAAAAAAAAA","AAAAAAAAAAA","AAAAAAAAAAA")
                 .where('S',selfPredicate())
                 .where('A',states(MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STEEL_SOLID))
                         .or(abilities(MultiblockAbility.MAINTENANCE_HATCH).setMinGlobalLimited(1).setMaxGlobalLimited(1).setPreviewCount(1))

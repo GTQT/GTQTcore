@@ -295,8 +295,8 @@ public class MetaTileEntityADVKQCC extends MultiblockWithDisplayBase implements 
     {
         if(isWorkingEnabled) {
 
-            if(thresholdPercentage==2) HOT=HOT+HEAT()*2;
-            if(thresholdPercentage==1)  HOT=HOT+HEAT();
+            if(thresholdPercentage==2) HOT=HOT+ (float) HEAT() /8;
+            if(thresholdPercentage==1)  HOT=HOT+ (float) HEAT() /16;
             if(HOT<30000) return CWTT()*(thresholdPercentage);
             else return CWTT()*thresholdPercentage;
         }

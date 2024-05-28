@@ -512,7 +512,7 @@ public class MetaTileEntityLoader {
                 .input(wireFine, Platinum, 64)
                 .fluidInputs(SolderingAlloy.getFluid(L * 6))
                 .fluidInputs(Lubricant.getFluid(3000))
-                .fluidInputs(HastelloyN.getFluid(L * 2))
+                .fluidInputs(Zylon.getFluid(L * 2))
                 .outputs(NANO_COATING.getStackForm())
                 .scannerResearch(b -> b
                         .researchStack(THREE_DIM_PRINT.getStackForm())

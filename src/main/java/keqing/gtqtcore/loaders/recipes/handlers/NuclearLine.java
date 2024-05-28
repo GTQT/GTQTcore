@@ -147,7 +147,7 @@ public class NuclearLine {
                 .input(gear, HSSG, 12)
                 .input(stick, HSSE, 12)
                 .input(spring, RTMAlloy, 12)
-                .input(foil, Osmiridium, 6)
+                .input(foil, Titanium, 6)
                 .input(wireGtHex, Platinum, 32)
                 .fluidInputs(Polyethylene.getFluid(16000))
                 .fluidInputs(Polytetrafluoroethylene.getFluid(8000))

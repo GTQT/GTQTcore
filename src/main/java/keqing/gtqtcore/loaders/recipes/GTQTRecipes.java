@@ -766,9 +766,9 @@ public class GTQTRecipes {
                     .fluidInputs(NitricAcid.getFluid(100))
                     .fluidInputs(Oxygen.getFluid(1000))
                     .input(dust, Salt, 4)
-                    .input(ore, material, 16)
-                    .output(crushed, material, 64)
-                    .output(crushed, material, 64)
+                    .input(ore, material, 32)
+                    .output(crushed, material, 48)
+                    .output(crushed, material, 48)
                     .circuitMeta(1)
                     .duration(600).EUt(480).buildAndRegister();
 
@@ -777,7 +777,7 @@ public class GTQTRecipes {
                     .fluidInputs(NitricAcid.getFluid(100))
                     .input(dust, Alunite, 1)
                     .input(crushed, material, 32)
-                    .output(dust, material, 64)
+                    .output(dust, material, 48)
                     .circuitMeta(1)
                     .duration(300).EUt(480).buildAndRegister();
         }
