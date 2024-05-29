@@ -31,6 +31,7 @@ import keqing.gtqtcore.common.metatileentities.multi.multiblock.steam.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblockpart.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblockpart.MetaTileEntityDataAccessHatch;
 
+import keqing.gtqtcore.common.metatileentities.single.electric.MetaTileEntityBathCondenser;
 import keqing.gtqtcore.common.metatileentities.single.electric.MetaTileEntityLatexCollector;
 import keqing.gtqtcore.common.metatileentities.single.steam.MetaTileEntitySteamLatexCollector;
 import keqing.gtqtcore.common.metatileentities.storage.MetaTileEntityMultiblockTank;
@@ -226,7 +227,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityHPCAAdvancedCooler HPCA_ULTIMATE_COOLER_COMPONENT;
     public static MetaTileEntityIntegratedOreProcessor INTEGRATED_ORE_PROCESSOR;
     public static MetaTileEntityCrystallizationCrucible CRYSTALLIZATION_CRUCIBLE;
-    public static MetaTileEntityRoaster ROASTER;
+    public static MetaTileEntityIndustrialRoaster ROASTER;
     public static MetaTileEntityMegaTurbine MEGA_STEAM_TURBINE;
     public static MetaTileEntityMegaTurbine MEGA_GAS_TURBINE;
     public static MetaTileEntityMegaTurbine MEGA_PLASMA_TURBINE;
@@ -249,7 +250,9 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityLargeTurbine LARGE_FUEL_TURBINE;
     public static final MetaTileEntityReinforcedRotorHolder[] MULTIPART_REINFORCED_ROTOR_HOLDER = new MetaTileEntityReinforcedRotorHolder[8];
     //public static MetaTileEntityObjectHolder OBJECT_HOLDER;
-
+    public static MetaTileEntityBathCondenser[] BATH_CONDENSER=new MetaTileEntityBathCondenser[1];
+    public static MetaTileEntityHighPressureCryogenicDistillationPlant HIGH_PRESSURE_CRYOGENIC_DISTILLATION_PLANT;
+    public static MetaTileEntityLowPressureCryogenicDistillationPlant LOW_PRESSURE_CRYOGENIC_DISTILLATION_PLANT;
     private static int startId = 15600;
     private static final int END_ID = startId + 400;
 
@@ -375,6 +378,8 @@ public class GTQTMetaTileEntities {
         POWER_SUPPLY= registerMetaTileEntity(3197, new MetaTileEntityPowerSupply(gtqtcoreId("power_supply")));
         FROTH_FLOTATION_TANK = registerMetaTileEntity(3198, new MetaTileEntityFrothFlotationTank(gtqtcoreId("froth_flotation_tank")));
         COOLING_TOWER = registerMetaTileEntity(3199, new MetaTileEntityCoolingTower(gtqtcoreId("cooling_tower")));
+        HIGH_PRESSURE_CRYOGENIC_DISTILLATION_PLANT = registerMetaTileEntity(3200, new MetaTileEntityHighPressureCryogenicDistillationPlant(gtqtcoreId("high_pressure_cryogenic_distillation_plant")));
+        LOW_PRESSURE_CRYOGENIC_DISTILLATION_PLANT = registerMetaTileEntity(3201, new MetaTileEntityLowPressureCryogenicDistillationPlant(gtqtcoreId("low_pressure_cryogenic_distillation_plant")));
         //重写设备
         DISTILLATION_TOWER = registerMetaTileEntity(3250, new MetaTileEntityDistillationTower(gtqtcoreId("distillation_tower")));
         CRACKER = registerMetaTileEntity(3251, new MetaTileEntityCrackingUnit(gtqtcoreId("cracker")));
@@ -435,7 +440,7 @@ public class GTQTMetaTileEntities {
         SONICATOR = registerMetaTileEntity(3502, new MetaTileEntitySonicator(gtqtcoreId("sonicator")));
         HYDRAULIC_FRACKER = registerMetaTileEntity(3503, new MetaTileEntityFracker(gtqtcoreId("fracker"), GTValues.ZPM));
         NANOSCALE_FABRICATOR = registerMetaTileEntity(3504, new MetaTileEntityNanoscaleFabricator(gtqtcoreId("nanoscale_fabricator")));
-        ROASTER = registerMetaTileEntity(3505, new MetaTileEntityRoaster(gtqtcoreId("roaster")));
+        ROASTER = registerMetaTileEntity(3505, new MetaTileEntityIndustrialRoaster(gtqtcoreId("roaster")));
         CRYSTALLIZATION_CRUCIBLE = registerMetaTileEntity(3506, new MetaTileEntityCrystallizationCrucible(gtqtcoreId("crystallization_crucible")));
         CVD_UNIT = registerMetaTileEntity(3507, new MetaTileEntityCVDUnit(gtqtcoreId("cvd_unit")));
         BURNER_REACTOR = registerMetaTileEntity(3508, new MetaTileEntityBurnerReactor(gtqtcoreId("burner_reactor")));
@@ -473,6 +478,7 @@ public class GTQTMetaTileEntities {
         AUTO_CHISEL[0] = registerMetaTileEntity(15100, new SimpleMachineMetaTileEntity(gtqtcoreId("auto_chisel.lv"), GTQTcoreRecipeMaps.AUTO_CHISEL_RECIPES, Textures.AUTOCLAVE_OVERLAY, 1, true, GTUtility.genericGeneratorTankSizeFunction));
         AUTO_CHISEL[1] = registerMetaTileEntity(15101, new SimpleMachineMetaTileEntity(gtqtcoreId("auto_chisel.mv"), GTQTcoreRecipeMaps.AUTO_CHISEL_RECIPES, Textures.AUTOCLAVE_OVERLAY, 2, true, GTUtility.genericGeneratorTankSizeFunction));
         AUTO_CHISEL[2] = registerMetaTileEntity(15102, new SimpleMachineMetaTileEntity(gtqtcoreId("auto_chisel.hv"), GTQTcoreRecipeMaps.AUTO_CHISEL_RECIPES, Textures.AUTOCLAVE_OVERLAY, 3, true, GTUtility.genericGeneratorTankSizeFunction));
+        BATH_CONDENSER[0] = registerMetaTileEntity(15103, new MetaTileEntityBathCondenser(gtqtcoreId("bath_condenser")));
         //仓口
         for (int i = 1; i <= 10; i++) {
             String tierName = GTValues.VN[i].toLowerCase();

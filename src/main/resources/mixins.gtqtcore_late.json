@@ -16,7 +16,6 @@
     "gregtech.MixinMetaValueItem",
     "gregtech.MixinSolarBoilerServer",
     "gregtech.MixinSteamBoilerAccess",
-    "gregtech.MixinWorkableTieredMetaTileEntity",
     "multiblocks.mixinGCYMMultiblockRecipeLogic",
     "gregtech.MixinGlassCasingType",
     "gregtech.MixinMetaTileEntityFluidHatch",

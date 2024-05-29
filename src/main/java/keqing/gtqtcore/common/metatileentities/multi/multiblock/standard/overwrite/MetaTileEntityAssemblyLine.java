@@ -133,7 +133,7 @@ public class MetaTileEntityAssemblyLine extends RecipeMapMultiblockController {
     protected BlockPattern createStructurePattern() {
         FactoryBlockPattern pattern = FactoryBlockPattern.start(FRONT, UP, RIGHT)
                 .aisle("FIF", "RTR", "SAG", " Y ")
-                .aisle("FIF", "RTR", "DAG", " Y ").setRepeatable(3, 15)
+                .aisle("FIF", "RTR", "DAG", " Y ").setRepeatable(4, 15)
                 .aisle("FOF", "RTR", "DAG", " Y ")
                 .where('S', selfPredicate())
                 .where('F', TiredTraceabilityPredicate.CP_CASING

@@ -2885,5 +2885,65 @@ public class FirstDegreeMaterials {
                 .color(0x74B5A9)
                 .components(Carbon, 1, Hydrogen, 3, Oxygen, 1, Potassium, 1)
                 .build();
+
+        GTQTMaterials.LiquidNitrogen = new Material.Builder(getMaterialsId(), gregtechId("liquid_nitrogen"))
+                .liquid(new FluidBuilder().temperature(77))
+                .color(0x00BFC1)
+                .flags(DISABLE_DECOMPOSITION)
+                .components(Nitrogen,2)
+                .build();
+
+        GTQTMaterials.LiquidHydrogen = new Material.Builder(getMaterialsId(), gregtechId("liquid_hydrogen"))
+                .liquid(new FluidBuilder().temperature(20))
+                .color(0x0000B5)
+                .flags(DISABLE_DECOMPOSITION)
+                .components(Hydrogen,2)
+                .build();
+
+        GTQTMaterials.LiquidArgon = new Material.Builder(getMaterialsId(), gregtechId("liquid_argon"))
+                .liquid(new FluidBuilder().temperature(84))
+                .color(0x00FF00)
+                .flags(DISABLE_DECOMPOSITION)
+                .components(Argon,1)
+                .build();
+
+        GTQTMaterials.LiquidRadon = new Material.Builder(getMaterialsId(), gregtechId("liquid_radon"))
+                .liquid(new FluidBuilder().temperature(211))
+                .color(0xFF39FF)
+                .flags(DISABLE_DECOMPOSITION)
+                .components(Radon,1)
+                .build();
+
+        GTQTMaterials.LiquidCarbonDioxide = new Material.Builder(getMaterialsId(), gregtechId("liquid_carbon_dioxide"))
+                .liquid(new FluidBuilder().temperature(211))
+                .color(0xFFA9FF)
+                .flags(DISABLE_DECOMPOSITION)
+                .components(Carbon,1,Oxygen,2)
+                .build();
+
+        GTQTMaterials.SodiumTungstate = new Material.Builder(getMaterialsId(), gregtechId("sodium_tungstate"))
+                .fluid()
+                .color(0x595E54)
+                .components(Sodium, 1, Tungsten, 1, Oxygen, 4)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+        //  24207 Sodium Phosphotungstate
+        GTQTMaterials.SodiumPhosphotungstate = new Material.Builder(getMaterialsId(), gregtechId("sodium_phosphotungstate"))
+                .dust()
+                .color(0x4D3635)
+                .components(Oxygen, 40, Tungsten, 12, Sodium, 3, Phosphorus, 1)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("(WO3)12Na3PO4", true);
+        //  24208 Sodium Molybdate
+        GTQTMaterials.SodiumMolybdate = new Material.Builder(getMaterialsId(), gregtechId("sodium_molybdate"))
+                .dust()
+                .color(0xCCCC99)
+                .iconSet(ROUGH)
+                .components(Sodium, 2, Molybdenum, 1, Oxygen, 4)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+
     }
 }

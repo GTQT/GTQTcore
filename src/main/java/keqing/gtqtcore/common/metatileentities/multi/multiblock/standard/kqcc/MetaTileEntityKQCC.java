@@ -52,6 +52,7 @@ import java.util.Collection;
 import java.util.List;
 
 import static gregtech.api.unification.material.Materials.*;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.LiquidNitrogen;
 
 public class MetaTileEntityKQCC extends MultiblockWithDisplayBase implements IOpticalComputationProvider, IProgressBarMultiblock {
     private boolean isActive;
@@ -106,11 +107,11 @@ public class MetaTileEntityKQCC extends MultiblockWithDisplayBase implements IOp
     }
     FluidStack COLD_STACK = Water.getFluid(10);
     FluidStack COLD_STACKA = PCBCoolant.getFluid(5);
-    FluidStack COLD_STACKB = Nitrogen.getFluid(1);
+    FluidStack COLD_STACKB = LiquidNitrogen.getFluid(1);
 
     FluidStack COLD_STACK1 = Water.getFluid(40);
     FluidStack COLD_STACKA1 = PCBCoolant.getFluid(20);
-    FluidStack COLD_STACKB1 = Nitrogen.getFluid(4);
+    FluidStack COLD_STACKB1 = LiquidNitrogen.getFluid(4);
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("a", a);

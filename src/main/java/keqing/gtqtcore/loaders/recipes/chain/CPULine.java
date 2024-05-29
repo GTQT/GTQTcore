@@ -427,6 +427,16 @@ public class CPULine {
                 .input(NEUTRONIUM_WAFER).output(SIMPLE_SYSTEM_ON_CHIP_WAFER,16)
                 .CWUt(8).fluidInputs(SU8_Photoresist.getFluid(1000)).buildAndRegister();
 
+        STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[HV]).notConsumable(RETICLE_NOR_MEMORY_CHIP) .Laser(600)
+                .input(PHOSPHORUS_WAFER).output(NOR_MEMORY_CHIP_WAFER,1)
+                .CWUt(32).fluidInputs(HydrogenSilsesquioxane.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
+        STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[EV]).notConsumable(RETICLE_NOR_MEMORY_CHIP) .Laser(400)
+                .input(NAQUADAH_WAFER).output(NOR_MEMORY_CHIP_WAFER,4)
+                .CWUt(32).fluidInputs(HydrogenSilsesquioxane.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
+        STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[IV]).notConsumable(RETICLE_NOR_MEMORY_CHIP) .Laser(200)
+                .input(NEUTRONIUM_WAFER).output(NOR_MEMORY_CHIP_WAFER,8)
+                .CWUt(32).fluidInputs(HydrogenSilsesquioxane.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
+
         STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[HV]).notConsumable(RETICLE_POWER_INTEGRATED_CIRCUIT) .Laser(400)
                 .input(PHOSPHORUS_WAFER).output(POWER_INTEGRATED_CIRCUIT_WAFER,1)
                 .CWUt(32).fluidInputs(HydrogenSilsesquioxane.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
@@ -445,16 +455,6 @@ public class CPULine {
                 .CWUt(32).fluidInputs(Vinylcinnamate.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
         STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[IV]).notConsumable(RETICLE_NAND_MEMORY_CHIP) .Laser(200)
                 .input(NEUTRONIUM_WAFER).output(NAND_MEMORY_CHIP_WAFER,8)
-                .CWUt(32).fluidInputs(Vinylcinnamate.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
-
-        STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[HV]).notConsumable(RETICLE_NOR_MEMORY_CHIP) .Laser(600)
-                .input(PHOSPHORUS_WAFER).output(NOR_MEMORY_CHIP_WAFER,1)
-                .CWUt(32).fluidInputs(Vinylcinnamate.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
-        STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[EV]).notConsumable(RETICLE_NOR_MEMORY_CHIP) .Laser(400)
-                .input(NAQUADAH_WAFER).output(NOR_MEMORY_CHIP_WAFER,4)
-                .CWUt(32).fluidInputs(Vinylcinnamate.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
-        STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[IV]).notConsumable(RETICLE_NOR_MEMORY_CHIP) .Laser(200)
-                .input(NEUTRONIUM_WAFER).output(NOR_MEMORY_CHIP_WAFER,8)
                 .CWUt(32).fluidInputs(Vinylcinnamate.getFluid(1000)).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
 
         STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[HV]).notConsumable(RETICLE_SYSTEM_ON_CHIP).Laser(400)

@@ -27,6 +27,18 @@ import java.util.function.Consumer;
 //怎么写请看
 //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/api/recipe/GSRecipeMaps.java
 public class GTQTcoreRecipeMaps {
+    public static final RecipeMap<BathCondenserRecipeBuilder> BATH_CONDENSER = new RecipeMap<>("bath_condenser", 3, 3, 3, 3, new BathCondenserRecipeBuilder(), false)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_SIFT, ProgressWidget.MoveType.VERTICAL)
+            .setSound(GTSoundEvents.BATH);
+
+    public static final RecipeMap<SimpleRecipeBuilder> LOW_PRESSURE_CRYOGENIC_DISTILLATION = new RecipeMap<>("low_pressure_cryogenic_distillation", 3, 3, 3, 12, new SimpleRecipeBuilder(), false)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_SIFT, ProgressWidget.MoveType.VERTICAL)
+            .setSound(GTSoundEvents.COOLING);
+
+    public static final RecipeMap<SimpleRecipeBuilder> HIGH_PRESSURE_CRYOGENIC_DISTILLATION = new RecipeMap<>("high_pressure_cryogenic_distillation", 3, 3, 3, 12, new SimpleRecipeBuilder(), false)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_SIFT, ProgressWidget.MoveType.VERTICAL_DOWNWARDS)
+            .setSound(GTSoundEvents.COOLING);
+    
     public static final RecipeMap<SimpleRecipeBuilder> AUTO_CHISEL_RECIPES = new RecipeMap<>("auto_chisel", 2, 1, 0, 0, new SimpleRecipeBuilder(), false)
             .setSlotOverlay(false, false, false, GuiTextures.BOXED_BACKGROUND)
             .setProgressBar(GuiTextures.PROGRESS_BAR_CRACKING, ProgressWidget.MoveType.HORIZONTAL)
@@ -50,7 +62,7 @@ public class GTQTcoreRecipeMaps {
             .setProgressBar(GuiTextures.PROGRESS_BAR_CRACKING, ProgressWidget.MoveType.HORIZONTAL)
             .setSound(GTSoundEvents.FURNACE);
 
-    public static final RecipeMap<BlastRecipeBuilder> BURNER_REACTOR_RECIPES = new RecipeMap<>("burner_reactor_recipes",  3,  2,  3,  3, new BlastRecipeBuilder(), false)
+    public static final RecipeMap<BlastRecipeBuilder> BURNER_REACTOR_RECIPES = new RecipeMap<>("burner_reactor_recipes",  3,  3  ,  3,  3, new BlastRecipeBuilder(), false)
             .setProgressBar(GuiTextures.PROGRESS_BAR_ARC_FURNACE, ProgressWidget.MoveType.HORIZONTAL)
             .setSound(GTSoundEvents.ARC);
 

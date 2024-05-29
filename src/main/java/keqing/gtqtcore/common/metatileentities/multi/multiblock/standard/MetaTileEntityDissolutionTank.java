@@ -80,6 +80,7 @@ public class MetaTileEntityDissolutionTank extends GTQTRecipeMapMultiblockOverwr
         return (int)(Math.min(this.energyContainer.getEnergyCapacity()/32,VA[glass_tier]));
 
     }
+    /*
     @Override
     public boolean checkRecipe(@Nonnull Recipe recipe, boolean consumeIfSuccess) {
         if (super.checkRecipe(recipe, consumeIfSuccess)) {
@@ -129,6 +130,8 @@ public class MetaTileEntityDissolutionTank extends GTQTRecipeMapMultiblockOverwr
             return false;
         }
     }
+     */
+
     @Nonnull
     @Override
     protected BlockPattern createStructurePattern() {

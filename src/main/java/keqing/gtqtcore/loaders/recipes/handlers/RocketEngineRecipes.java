@@ -18,8 +18,8 @@ public class RocketEngineRecipes {
         //  Rocket Fuel
         ROCKET.recipeBuilder()
                 .fluidInputs(RocketFuel.getFluid(16))
-                .EUt(32)
-                .duration(20*64)
+                .EUt(2048)
+                .duration(20)
                 .buildAndRegister();
 
         //  RP-1 Rocket Fuel
@@ -41,8 +41,8 @@ public class RocketEngineRecipes {
 
         ROCKET.recipeBuilder()
                 .fluidInputs(RP1RocketFuel.getFluid(12))
-                .EUt(32)
-                .duration(60*64)
+                .EUt(2048)
+                .duration(60)
                 .buildAndRegister();
 
         //  Dense Hydrazine Mixture Fuel
@@ -56,8 +56,8 @@ public class RocketEngineRecipes {
 
         ROCKET.recipeBuilder()
                 .fluidInputs(DenseHydrazineMixtureFuel.getFluid(9))
-                .EUt(32)
-                .duration(80*64)
+                .EUt(2048)
+                .duration(80)
                 .buildAndRegister();
 
         //  Methylhydrazine Nitrate Rocket Fuel
@@ -80,8 +80,8 @@ public class RocketEngineRecipes {
 
         ROCKET.recipeBuilder()
                 .fluidInputs(MethylhydrazineNitrateRocketFuel.getFluid(6))
-                .EUt(32)
-                .duration(120*64)
+                .EUt(2048)
+                .duration(120)
                 .buildAndRegister();
 
     }

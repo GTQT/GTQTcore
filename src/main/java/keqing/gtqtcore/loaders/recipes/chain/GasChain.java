@@ -2,6 +2,8 @@ package keqing.gtqtcore.loaders.recipes.chain;
 
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
+import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.HIGH_PRESSURE_CRYOGENIC_DISTILLATION;
+import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.LOW_PRESSURE_CRYOGENIC_DISTILLATION;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.BetAir;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 
@@ -19,13 +21,8 @@ public class GasChain {
                 .dimension(20)
                 .duration(200).EUt(16).buildAndRegister();
 
-        VACUUM_RECIPES.recipeBuilder()
-                .fluidInputs(BetAir.getFluid(4000))
-                .fluidOutputs(LiquidBetAir.getFluid(4000))
-                .duration(80).EUt(120).buildAndRegister();
-
         DISTILLATION_RECIPES.recipeBuilder()
-                .fluidInputs(LiquidBetAir.getFluid(100000))
+                .fluidInputs(BetAir.getFluid(100000))
                 .fluidOutputs(Methane.getFluid(72000))
                 .fluidOutputs(CoalGas.getFluid(10000))
                 .fluidOutputs(HydrogenSulfide.getFluid(7500))
@@ -33,8 +30,7 @@ public class GasChain {
                 .fluidOutputs(Helium3.getFluid(2500))
                 .fluidOutputs(Neon.getFluid(500))
                 .fluidOutputs(Radon.getFluid(500))
-                .duration(2000).EUt(120).buildAndRegister();
-
+                .duration(20000).EUt(120).buildAndRegister();
 
         //火星
         GAS_COLLECTOR_RECIPES.recipeBuilder()
@@ -43,13 +39,8 @@ public class GasChain {
                 .dimension(-29)
                 .duration(200).EUt(16).buildAndRegister();
 
-        VACUUM_RECIPES.recipeBuilder()
-                .fluidInputs(MarsAir.getFluid(4000))
-                .fluidOutputs(LiquidMarsAir.getFluid(4000))
-                .duration(80).EUt(120).buildAndRegister();
-
         DISTILLATION_RECIPES.recipeBuilder()
-                .fluidInputs(LiquidMarsAir.getFluid(100000))
+                .fluidInputs(MarsAir.getFluid(100000))
                 .fluidOutputs(CarbonDioxide.getFluid(72000))
                 .fluidOutputs(Argon.getFluid(10000))
                 .fluidOutputs(Oxygen.getFluid(7500))
@@ -59,6 +50,8 @@ public class GasChain {
                 .fluidOutputs(Nitrogen.getFluid(500))
                 .fluidOutputs(MagicGas.getFluid(500))
                 .duration(2000).EUt(120).buildAndRegister();
+
+
     }
 
     private static void AirProgress() {

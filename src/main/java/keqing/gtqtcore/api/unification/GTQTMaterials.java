@@ -590,7 +590,14 @@ public class GTQTMaterials {
     public static Material TBPMIBKSolution;
     public static Material DimethylamineHydrochloride;
     public static Material PotassiumFormate;
-
+    public static Material LiquidNitrogen;
+    public static Material LiquidHydrogen;
+    public static Material LiquidArgon;
+    public static Material LiquidRadon;
+    public static Material LiquidCarbonDioxide;
+    public static Material SodiumTungstate;
+    public static Material SodiumPhosphotungstate;
+    public static Material SodiumMolybdate;
 
     //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/api/unification/GSMaterials.java
 

@@ -42,6 +42,8 @@ public class GTQTRecipesManager {
         GTQTOreRecipeHandler.init();
         StrontiumRadiumChain.init();
         AlgaeChain.init();
+        AirDistillation.init();
+        SodiumChain.init();
         CTABChain.init();
         DragonChain.init();
         CBDOPolycarbonateChain.init();

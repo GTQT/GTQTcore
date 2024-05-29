@@ -621,6 +621,16 @@ public class MetaTileEntityLoader {
                 new UnificationEntry(OrePrefix.pipeLargeFluid, Steel), 'C',
                 new UnificationEntry(OrePrefix.circuit, MV), 'F', MetaItems.ELECTRIC_PUMP_LV);
 
+        ModHandler.addShapedRecipe(true, "low_distillation_tower", LOW_PRESSURE_CRYOGENIC_DISTILLATION_PLANT.getStackForm(),
+                "CBC", "FMF", "CBC", 'M', MetaTileEntities.HULL[GTValues.MV].getStackForm(), 'B',
+                new UnificationEntry(OrePrefix.pipeLargeFluid, Aluminium), 'C',
+                new UnificationEntry(OrePrefix.circuit, HV), 'F', MetaItems.ELECTRIC_PUMP_MV);
+
+        ModHandler.addShapedRecipe(true, "high_distillation_tower", HIGH_PRESSURE_CRYOGENIC_DISTILLATION_PLANT.getStackForm(),
+                "CBC", "FMF", "CBC", 'M', MetaTileEntities.HULL[GTValues.EV].getStackForm(), 'B',
+                new UnificationEntry(OrePrefix.pipeLargeFluid, Titanium), 'C',
+                new UnificationEntry(OrePrefix.circuit, IV), 'F', MetaItems.ELECTRIC_PUMP_EV);
+
         ModHandler.addShapedRecipe(true, "msf", GTQTMetaTileEntities.MSF.getStackForm(),
                 "CBC", "FMF", "CBC", 'M', MetaTileEntities.HULL[GTValues.MV].getStackForm(), 'B',
                 new UnificationEntry(OrePrefix.pipeLargeFluid, Aluminium), 'C',
@@ -773,11 +783,11 @@ public class MetaTileEntityLoader {
         ModHandler.addShapedRecipe(true, "burner_reactor", BURNER_REACTOR.getStackForm(),
                 "KRK", "IHI", "CMC",
                 'K', new UnificationEntry(cableGtSingle, Platinum),
-                'R', new UnificationEntry(rotor, TungstenSteel),
-                'I', new UnificationEntry(pipeSmallFluid, Tungsten),
+                'R', new UnificationEntry(frameGt, Polytetrafluoroethylene),
+                'I', new UnificationEntry(plate, ReinforcedEpoxyResin),
                 'H', MetaTileEntities.HULL[4].getStackForm(),
-                'C', new UnificationEntry(circuit, MarkerMaterials.Tier.IV),
-                'M', ELECTRIC_MOTOR_IV.getStackForm()
+                'C', new UnificationEntry(circuit, MarkerMaterials.Tier.EV),
+                'M', ELECTRIC_MOTOR_EV.getStackForm()
         );
 
         ModHandler.addShapedRecipe(true, "cryo_reactor", CRYOGENIC_REACTOR.getStackForm(),
@@ -861,16 +871,6 @@ public class MetaTileEntityLoader {
                     'H', MetaTileEntities.HULL[3].getStackForm(),
                     'S', SENSOR_EV.getStackForm(),
                     'E', EMITTER_EV.getStackForm()
-            );
-
-            ModHandler.addShapedRecipe(true, "burner_reactor", BURNER_REACTOR.getStackForm(),
-                    "KRK", "IHI", "CMC",
-                    'K', new UnificationEntry(cableGtSingle, Platinum),
-                    'R', new UnificationEntry(rotor, TungstenSteel),
-                    'I', new UnificationEntry(pipeSmallFluid, Tungsten),
-                    'H', MetaTileEntities.HULL[4].getStackForm(),
-                    'C', new UnificationEntry(circuit, MarkerMaterials.Tier.IV),
-                    'M', ELECTRIC_MOTOR_IV.getStackForm()
             );
 
             ModHandler.addShapedRecipe(true, "cryo_reactor", CRYOGENIC_REACTOR.getStackForm(),
