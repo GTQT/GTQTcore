@@ -51,8 +51,18 @@ public class SodiumChain {
                 .output(dust, SodiumOxide, 4)
                 .fluidOutputs(Nitrogen.getFluid(1000))
                 .EUt(VA[EV])
-                .duration(480)
+                .duration(600)
                 .blastFurnaceTemp(2700)
+                .buildAndRegister();
+
+        BURNER_REACTOR_RECIPES.recipeBuilder()
+                .input(dust, SodiumNitrate, 1)
+                .notConsumable(dust, Lead, 4)
+                .output(dust, SodiumOxide, 1)
+                .fluidOutputs(Oxygen.getFluid(1000))
+                .EUt(VA[EV])
+                .duration(800)
+                .blastFurnaceTemp(3600)
                 .buildAndRegister();
 
         //  Sodium Molybdate + Phosphoric Acid -> Sodium Phosphomolybdate + Sodium Hydroxide + Sodium Oxide
