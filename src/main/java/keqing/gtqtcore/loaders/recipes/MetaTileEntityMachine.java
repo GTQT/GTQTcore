@@ -66,8 +66,16 @@ public class MetaTileEntityMachine {
                .input(dust,Titanium,6)
                .input(dust,Aluminium,4)
                .input(dust,Vanadium)
+               .circuitMeta(3)
                .output(dust,Tcfour,11)
                .duration(800).EUt(VA[HV]).buildAndRegister();
+
+        MIXER_RECIPES.recipeBuilder()
+                .input(dust,Titanium,3)
+                .input(dust,Nickel,2)
+                .output(dust,Nitinol,11)
+                .circuitMeta(3)
+                .duration(800).EUt(VA[EV]).buildAndRegister();
     }
 
     private static void turbine() {

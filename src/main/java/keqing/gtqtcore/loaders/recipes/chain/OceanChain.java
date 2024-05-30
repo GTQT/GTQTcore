@@ -38,8 +38,25 @@ public class OceanChain {
                 .fluidOutputs(Toluene.getFluid(1000))
                 .buildAndRegister();
 
-        Collection<Recipe> gasRecipes = RecipeMaps.CHEMICAL_RECIPES.getRecipeList();
+        Collection<Recipe> gasRecipes = RecipeMaps.BREWING_RECIPES.getRecipeList();
         for (Recipe recipe : gasRecipes) {
+            List<GTRecipeInput> fluidInputs = recipe.getFluidInputs();
+            List<FluidStack> fluidOutputs = recipe.getFluidOutputs();
+            Collection<GTRecipeInput> Inputs = recipe.getInputs();
+            Collection<ItemStack> Outputs = recipe.getOutputs();
+            GTQTcoreRecipeMaps.FLUIDIZED_BED.recipeBuilder()
+                    .fluidInputs(fluidInputs)
+                    .fluidOutputs(fluidOutputs)
+                    .inputIngredients(Inputs)
+                    .outputs(Outputs)
+                    .duration(recipe.getDuration()/8)
+                    .EUt(recipe.getEUt()*2)
+                    .buildAndRegister();
+
+        }
+
+        Collection<Recipe> gasRecipes1 = RecipeMaps.FERMENTING_RECIPES.getRecipeList();
+        for (Recipe recipe : gasRecipes1) {
             List<GTRecipeInput> fluidInputs = recipe.getFluidInputs();
             List<FluidStack> fluidOutputs = recipe.getFluidOutputs();
             Collection<GTRecipeInput> Inputs = recipe.getInputs();

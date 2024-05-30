@@ -13,8 +13,8 @@ public class PlatinumDeal {
         //pd
         CHEMICAL_RECIPES.recipeBuilder()
                 .fluidInputs(ChloroplatinicAcid.getFluid(1000))
-                .input(dust,Calcium,2)
-                .output(dust, CalciumChloride, 2)
+                .input(dust,Calcium,1)
+                .output(dust, CalciumChloride, 3)
                 .fluidOutputs(Hydrogen.getFluid(6000))
                 .fluidOutputs(Oxygen.getFluid(2000))
                 .output(dust,PlatinumRaw)
@@ -25,7 +25,7 @@ public class PlatinumDeal {
         CHEMICAL_RECIPES.recipeBuilder()
                 .input(dust,PlatinumRaw,2)
                 .input(dust,Calcium,1)
-                .output(dust, CalciumChloride, 1)
+                .output(dust, CalciumChloride, 3)
                 .output(dust,Platinum)
                 .duration(20)
                 .EUt(VA[HV])
@@ -100,7 +100,7 @@ public class PlatinumDeal {
                 .input(dust,RutheniumOxide,2)
                 .output(dust,RutheniumgOxide,2)
                 .input(dust,Calcium,1)
-                .output(dust, CalciumChloride, 1)
+                .output(dust, CalciumChloride, 3)
                 .duration(20)
                 .EUt(VA[HV])
                 .buildAndRegister();
@@ -142,7 +142,7 @@ public class PlatinumDeal {
                 .input(dust,IridiumFluid,1)
                 .input(dust,Calcium,1)
                 .output(dust,Iridium,1)
-                .output(dust, CalciumChloride, 1)
+                .output(dust, CalciumChloride, 3)
                 .duration(20)
                 .EUt(VA[HV])
                 .buildAndRegister();

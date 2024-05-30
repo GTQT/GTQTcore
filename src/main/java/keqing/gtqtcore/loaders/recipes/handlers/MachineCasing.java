@@ -9,6 +9,7 @@ import gregtech.common.ConfigHolder;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTADVBlock;
 import keqing.gtqtcore.common.block.blocks.GTQTIsaCasing;
+import keqing.gtqtcore.common.block.blocks.GTQTMultiblockCasing;
 import net.minecraft.util.IStringSerializable;
 
 import static gregicality.multiblocks.api.recipes.GCYMRecipeMaps.ALLOY_BLAST_RECIPES;
@@ -37,6 +38,11 @@ public class MachineCasing {
                 GTQTMetaBlocks.ISA_CASING,
                 GTQTIsaCasing.CasingType.VACUUM_CASING,
                 RedSteel);
+
+        createCasingRecipe("red_steel_casing",
+                GTQTMetaBlocks.MULTI_CASING,
+                GTQTMultiblockCasing.CasingType.NITINOL_MACHINE_CASING,
+                Nitinol);
 
     }
 

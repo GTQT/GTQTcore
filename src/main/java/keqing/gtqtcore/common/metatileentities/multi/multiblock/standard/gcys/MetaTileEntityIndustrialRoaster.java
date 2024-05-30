@@ -160,20 +160,14 @@ public class MetaTileEntityIndustrialRoaster extends RecipeMapMultiblockControll
     }
 
     @Override
-    public void addInformation(ItemStack stack,
-                               @Nullable World player,
-                               @Nonnull List<String> tooltip,
+    public void addInformation(ItemStack stack, @Nullable World world,List<String> tooltip,
                                boolean advanced) {
-        super.addInformation(stack, player, tooltip, advanced);
-        if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
-            tooltip.add(I18n.format("gtlitecore.machine.industrial_raoster.tooltip.1"));
-            tooltip.add(I18n.format("gtlitecore.machine.industrial_raoster.tooltip.2"));
-            tooltip.add(I18n.format("gtlitecore.machine.industrial_raoster.tooltip.3"));
-            tooltip.add(I18n.format("gtlitecore.machine.industrial_raoster.tooltip.4"));
-        } else {
-            tooltip.add(I18n.format("gregtech.tooltip.hold_shift"));
-        }
+        super.addInformation(stack, world, tooltip, advanced);
+        tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.1"));
+        tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.2"));
+        tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.3"));
     }
+
 
     @Override
     public int getCurrentTemperature() {

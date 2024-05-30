@@ -41,7 +41,7 @@ public class HigherDegreeMaterials {
         GTQTMaterials.Nitinol = new Material.Builder(getMaterialsId(), gregtechId("nitinol"))
                 .ingot(3)
                 .fluid()
-                .color(0x8C6464).iconSet(METALLIC)
+                .color(0x4876FF).iconSet(METALLIC)
                 .flags(EXT2_METAL, GENERATE_SMALL_GEAR, GENERATE_RING, GENERATE_FRAME, GENERATE_ROTOR, GENERATE_ROUND, GENERATE_FOIL, GENERATE_GEAR)
                 .components(Nickel, 2, Titanium, 3)
                 .rotorStats(15.0f, 7.0f, 3000)
