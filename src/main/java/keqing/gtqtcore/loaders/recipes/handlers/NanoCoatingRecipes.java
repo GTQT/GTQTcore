@@ -243,7 +243,7 @@ public class NanoCoatingRecipes {
                 .input(OrePrefix.foil,NanometerBariumTitanate,16)
                 .input(circuit, MarkerMaterials.Tier.EV,8)
                 .fluidInputs(Zylon.getFluid(1440))
-                .fluidInputs(SterileGrowthMedium.getFluid(1000))
+                .fluidInputs(Mutagen.getFluid(1000))
                 .output(CATALYST_FRAMEWORK_IV)
                 .cleanroom(CleanroomType.CLEANROOM)
                 .buildAndRegister();

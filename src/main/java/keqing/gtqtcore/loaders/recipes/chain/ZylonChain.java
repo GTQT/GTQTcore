@@ -8,6 +8,7 @@ import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.dust;
 import static gregtechfoodoption.GTFOMaterialHandler.AceticAnhydride;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.CHEMICAL_PLANT;
+import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.FLUIDIZED_BED;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.TJMaterials.*;
@@ -76,9 +77,20 @@ public class ZylonChain {
                 .buildAndRegister();
 
         //  Isochloropropane
-        CHEMICAL_RECIPES.recipeBuilder()
+        FLUIDIZED_BED.recipeBuilder()
                 .fluidInputs(Propene.getFluid(1000))
                 .fluidInputs(HydrochloricAcid.getFluid(1000))
+                .fluidOutputs(Isochloropropane.getFluid(1000))
+                .EUt(VA[HV])
+                .duration(110)
+                .buildAndRegister();
+
+        LARGE_CHEMICAL_RECIPES.recipeBuilder()
+                .circuitMeta(1)
+                .notConsumable(dust,Gold)
+                .fluidInputs(Propene.getFluid(1000))
+                .fluidInputs(Chlorine.getFluid(1000))
+                .fluidInputs(Hydrogen.getFluid(1000))
                 .fluidOutputs(Isochloropropane.getFluid(1000))
                 .EUt(VA[HV])
                 .duration(110)
