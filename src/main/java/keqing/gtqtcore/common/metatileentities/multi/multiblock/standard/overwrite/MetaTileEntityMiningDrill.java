@@ -261,10 +261,6 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
         this.writeCustomData(GTQTValue.UPDATE_TIER22, buf -> buf.writeInt(this.casing));
         naijiu=drilla*15*15000;
 
-        if(tier==1)maxCircuit= 5;
-        if(tier==2)maxCircuit= 7;
-        if(tier==3)maxCircuit= 9;
-        if(tier==4)maxCircuit= 10;
     }
     @Override
     public boolean isMultiblockPartWeatherResistant(@Nonnull IMultiblockPart part) {
@@ -302,6 +298,10 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
     private void addCircuit(Boolean start) {
         MetaTileEntity mte = GTUtility.getMetaTileEntity(this.getWorld(), this.getPos().add(0, 1, 0));
         var s  = (IGhostSlotConfigurable)mte;
+        if(drilla==1)maxCircuit= 5;
+        if(drilla==2)maxCircuit= 7;
+        if(drilla==3)maxCircuit= 9;
+        if(drilla==4)maxCircuit= 10;
         if(start) {
             circuit = 1;
             return;

@@ -750,6 +750,44 @@ public class MetaTileEntityLoader {
                 'H', MetaTileEntities.HULL[2].getStackForm(),
                 'P', new UnificationEntry(plate, Invar)
         );
+        //  Volcanus
+        ModHandler.addShapedRecipe(true, "volcanus", BLAZING_BLAST_FURNACE.getStackForm(),
+                "GXG", "RHR", "PWP",
+                'G', new UnificationEntry(gear, HSSG),
+                'X', new UnificationEntry(circuit, MarkerMaterials.Tier.LuV),
+                'H', ELECTRIC_BLAST_FURNACE.getStackForm(),
+                'R', ROBOT_ARM_IV.getStackForm(),
+                'P', new UnificationEntry(plate, AusteniticStainlessSteel904L),
+                'W', VOLTAGE_COIL_IV.getStackForm());
+
+        MIXER_RECIPES.recipeBuilder()
+                .input(dust, Electrotine)
+                .input(Items.SNOWBALL)
+                .fluidInputs(Ice.getFluid(2000))
+                .fluidOutputs(GelidCryotheum.getFluid(4000))
+                .EUt(120)
+                .duration(120)
+                .buildAndRegister();
+
+        //  Blazing Pyrotheum
+        MIXER_RECIPES.recipeBuilder()
+                .input(dust, Redstone)
+                .input(dust, Sulfur)
+                .fluidInputs(Blaze.getFluid(L * 2))
+                .fluidOutputs(Pyrotheum.getFluid(4000))
+                .EUt(120)
+                .duration(120)
+                .buildAndRegister();
+
+        //  Cryogenic Freezer
+        ModHandler.addShapedRecipe(true, "cryogenic_freezer", CRYOGENIC_FREEZER.getStackForm(),
+                "SXS", "EHE", "PWP",
+                'S', new UnificationEntry(spring, HSSG),
+                'X', new UnificationEntry(circuit, MarkerMaterials.Tier.LuV),
+                'H', VACUUM_FREEZER.getStackForm(),
+                'E', ELECTRIC_PUMP_IV.getStackForm(),
+                'P', new UnificationEntry(plate, TanmolyiumBetaC),
+                'W', new UnificationEntry(cableGtSingle, Platinum));
 
         ModHandler.addShapedRecipe(true, "roaster", ROASTER.getStackForm(),
                 "KSK", "CHC", "PPP",

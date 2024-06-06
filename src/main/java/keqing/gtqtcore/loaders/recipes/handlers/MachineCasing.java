@@ -6,6 +6,8 @@ import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.stack.UnificationEntry;
 import gregtech.common.ConfigHolder;
+import gregtech.common.blocks.BlockMetalCasing;
+import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTADVBlock;
 import keqing.gtqtcore.common.block.blocks.GTQTIsaCasing;
@@ -34,6 +36,24 @@ public class MachineCasing {
     }
 
     private static void CasingRecipes() {
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .inputs(MetaBlocks.METAL_CASING.getItemVariant(BlockMetalCasing.MetalCasingType.INVAR_HEATPROOF))
+                .circuitMeta(6)
+                .fluidInputs(AusteniticStainlessSteel904L.getFluid(L * 2))
+                .outputs(GTQTMetaBlocks.TURBINE_CASING.getItemVariant(ADVANCED_INVAR_CASING))
+                .EUt(VA[LV])
+                .duration(50)
+                .buildAndRegister();
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .inputs(MetaBlocks.METAL_CASING.getItemVariant(BlockMetalCasing.MetalCasingType.ALUMINIUM_FROSTPROOF))
+                .circuitMeta(6)
+                .fluidInputs(TanmolyiumBetaC.getFluid(L * 2))
+                .outputs(GTQTMetaBlocks.TURBINE_CASING1.getItemVariant(ADVANCED_COLD_CASING))
+                .EUt(VA[LV])
+                .duration(50)
+                .buildAndRegister();
+
         createCasingRecipe("red_steel_casing",
                 GTQTMetaBlocks.ISA_CASING,
                 GTQTIsaCasing.CasingType.VACUUM_CASING,
