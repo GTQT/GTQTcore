@@ -38,6 +38,7 @@ import keqing.gtqtcore.common.block.blocks.GTQTElectrobath;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
@@ -166,7 +167,18 @@ public class MetaTileEntitySolarPlate extends MultiblockWithDisplayBase implemen
         this.tier = GTQTUtil.getOrDefault(() -> tier instanceof WrappedIntTired,
                 () -> ((WrappedIntTired)tier).getIntTier(),
                 0);
-        this.writeCustomData(GTQTValue.UPDATE_TIER, buf -> buf.writeInt(this.tier));
+        this.writeCustomData(GTQTValue.UPDATE_TIER3, buf -> buf.writeInt(this.tier));
+    }
+
+    @Override
+    public void receiveCustomData(int dataId, PacketBuffer buf) {
+        super.receiveCustomData(dataId, buf);
+        if(dataId == GTQTValue.UPDATE_TIER3){
+            this.tier = buf.readInt();
+        }
+        if(dataId == GTQTValue.REQUIRE_DATA_UPDATE3){
+            this.writeCustomData(GTQTValue.UPDATE_TIER3,buf1 -> buf1.writeInt(this.tier));
+        }
     }
 
     @SideOnly(Side.CLIENT)

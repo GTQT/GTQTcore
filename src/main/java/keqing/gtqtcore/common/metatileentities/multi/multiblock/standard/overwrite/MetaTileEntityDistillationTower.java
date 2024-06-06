@@ -138,11 +138,11 @@ public class MetaTileEntityDistillationTower extends GTQTRecipeMapMultiblockOver
     @Override
     public void receiveCustomData(int dataId, PacketBuffer buf) {
         super.receiveCustomData(dataId, buf);
-        if(dataId == GTQTValue.UPDATE_TIER){
+        if(dataId == GTQTValue.UPDATE_TIER16){
             this.casingTier = buf.readInt();
         }
-        if(dataId == GTQTValue.REQUIRE_DATA_UPDATE){
-            this.writeCustomData(GTQTValue.UPDATE_TIER,buf1 -> buf1.writeInt(this.casingTier));
+        if(dataId == GTQTValue.REQUIRE_DATA_UPDATE16){
+            this.writeCustomData(GTQTValue.UPDATE_TIER16,buf1 -> buf1.writeInt(this.casingTier));
         }
     }
     @Override
@@ -257,7 +257,7 @@ public class MetaTileEntityDistillationTower extends GTQTRecipeMapMultiblockOver
 
         this.tier = Math.min(this.casingTier,this.tubeTier);
 
-        this.writeCustomData(GTQTValue.UPDATE_TIER,buf -> buf.writeInt(this.tier));
+        this.writeCustomData(GTQTValue.UPDATE_TIER16,buf -> buf.writeInt(this.tier));
         ParallelLim=(int)Math.pow(2, tier);
         ParallelNum=ParallelLim;
     }

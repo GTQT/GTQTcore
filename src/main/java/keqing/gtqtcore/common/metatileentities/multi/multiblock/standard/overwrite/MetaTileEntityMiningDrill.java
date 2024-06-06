@@ -67,6 +67,7 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
     int drilla;
     int naijiu;
     int circuit;
+    int maxCircuit;
     boolean cycle;
 
     public MetaTileEntityMiningDrill(ResourceLocation metaTileEntityId) {
@@ -217,11 +218,11 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
     @Override
     public void receiveCustomData(int dataId, PacketBuffer buf) {
         super.receiveCustomData(dataId, buf);
-        if(dataId == GTQTValue.UPDATE_TIER){
+        if(dataId == GTQTValue.UPDATE_TIER22){
             this.casing = buf.readInt();
         }
-        if(dataId == GTQTValue.REQUIRE_DATA_UPDATE){
-            this.writeCustomData(GTQTValue.UPDATE_TIER,buf1 -> buf1.writeInt(this.casing));
+        if(dataId == GTQTValue.REQUIRE_DATA_UPDATE22){
+            this.writeCustomData(GTQTValue.UPDATE_TIER22,buf1 -> buf1.writeInt(this.casing));
         }
     }
     @Override
@@ -257,8 +258,13 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
 
         this.tier = Math.min(this.casing,this.tube);
 
-        this.writeCustomData(GTQTValue.UPDATE_TIER, buf -> buf.writeInt(this.casing));
+        this.writeCustomData(GTQTValue.UPDATE_TIER22, buf -> buf.writeInt(this.casing));
         naijiu=drilla*15*15000;
+
+        if(tier==1)maxCircuit= 5;
+        if(tier==2)maxCircuit= 7;
+        if(tier==3)maxCircuit= 9;
+        if(tier==4)maxCircuit= 10;
     }
     @Override
     public boolean isMultiblockPartWeatherResistant(@Nonnull IMultiblockPart part) {
@@ -301,19 +307,12 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
             return;
         }
         circuit++;
-        if(circuit>getmaxcircuit())circuit=1;
+        if(circuit>maxCircuit)circuit=1;
         s.setGhostCircuitConfig(circuit);
 
 
     }
 
-    private int getmaxcircuit()
-    {
-        if(tier==1)return 5;
-        if(tier==2)return 7;
-        if(tier==3)return 9;
-        return 10;
-    }
     protected class IndustrialDrillWorkableHandler extends MultiblockRecipeLogic {
 
         private final MetaTileEntityMiningDrill combustionEngine;

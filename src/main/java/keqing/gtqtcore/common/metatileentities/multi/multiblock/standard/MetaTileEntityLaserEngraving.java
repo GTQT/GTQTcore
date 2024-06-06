@@ -68,11 +68,11 @@ public class MetaTileEntityLaserEngraving extends MultiMapMultiblockController i
     @Override
     public void receiveCustomData(int dataId, PacketBuffer buf) {
         super.receiveCustomData(dataId, buf);
-        if(dataId == GTQTValue.UPDATE_TIER){
+        if(dataId == GTQTValue.UPDATE_TIER1){
             this.tier = buf.readInt();
         }
-        if(dataId == GTQTValue.REQUIRE_DATA_UPDATE){
-            this.writeCustomData(GTQTValue.UPDATE_TIER,buf1 -> buf1.writeInt(this.tier));
+        if(dataId == GTQTValue.REQUIRE_DATA_UPDATE1){
+            this.writeCustomData(GTQTValue.UPDATE_TIER1,buf1 -> buf1.writeInt(this.tier));
         }
     }
     @Override
@@ -194,7 +194,7 @@ public class MetaTileEntityLaserEngraving extends MultiMapMultiblockController i
                 () -> ((WrappedIntTired)glass_tier).getIntTier(),
                 0);
 
-        this.writeCustomData(GTQTValue.UPDATE_TIER,buf -> buf.writeInt(this.tier));
+        this.writeCustomData(GTQTValue.UPDATE_TIER1,buf -> buf.writeInt(this.tier));
     }
 
 

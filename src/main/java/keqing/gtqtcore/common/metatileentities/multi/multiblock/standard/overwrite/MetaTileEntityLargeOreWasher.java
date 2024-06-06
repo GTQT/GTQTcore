@@ -214,7 +214,7 @@ public class MetaTileEntityLargeOreWasher extends GTQTRecipeMapMultiblockControl
                 0);
         this.tier = Math.min(this.casingTier,this.tubeTier);
 
-        this.writeCustomData(GTQTValue.UPDATE_TIER,buf -> buf.writeInt(this.casingTier));
+        this.writeCustomData(GTQTValue.UPDATE_TIER20,buf -> buf.writeInt(this.casingTier));
         ParallelLim=(int)Math.pow(2, tier);
         ParallelNum=ParallelLim;
     }
@@ -234,11 +234,11 @@ public class MetaTileEntityLargeOreWasher extends GTQTRecipeMapMultiblockControl
     @Override
     public void receiveCustomData(int dataId, PacketBuffer buf) {
         super.receiveCustomData(dataId, buf);
-        if(dataId == GTQTValue.UPDATE_TIER){
+        if(dataId == GTQTValue.UPDATE_TIER20){
             this.casingTier = buf.readInt();
         }
-        if(dataId == GTQTValue.REQUIRE_DATA_UPDATE){
-            this.writeCustomData(GTQTValue.UPDATE_TIER,buf1 -> buf1.writeInt(this.casingTier));
+        if(dataId == GTQTValue.REQUIRE_DATA_UPDATE20){
+            this.writeCustomData(GTQTValue.UPDATE_TIER20,buf1 -> buf1.writeInt(this.casingTier));
         }
     }
 

@@ -146,16 +146,6 @@ public class MetaTileEntityParticleAccelerator extends RecipeMapMultiblockContro
         getFrontOverlay().renderOrientedState(renderState, translation, pipeline, getFrontFacing(), this.recipeMapWorkable.isActive(), this.recipeMapWorkable.isWorkingEnabled());
     }
 
-    @Override
-    public void receiveCustomData(int dataId, PacketBuffer buf) {
-        super.receiveCustomData(dataId, buf);
-        if(dataId == GTQTValue.UPDATE_TIER){
-            this.casingTier = buf.readInt();
-        }
-        if(dataId == GTQTValue.REQUIRE_DATA_UPDATE){
-            this.writeCustomData(GTQTValue.UPDATE_TIER,buf1 -> buf1.writeInt(this.casingTier));
-        }
-    }
 
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
@@ -263,7 +253,6 @@ public class MetaTileEntityParticleAccelerator extends RecipeMapMultiblockContro
 
         this.tier = Math.min(this.casingTier,this.tubeTier);
 
-        this.writeCustomData(GTQTValue.UPDATE_TIER,buf -> buf.writeInt(this.casingTier));
     }
 
     @Override

@@ -150,11 +150,11 @@ public class MetaTileEntityCrackingUnit extends GTQTRecipeMapMultiblockOverwrite
     @Override
     public void receiveCustomData(int dataId, PacketBuffer buf) {
         super.receiveCustomData(dataId, buf);
-        if(dataId == GTQTValue.UPDATE_TIER){
+        if(dataId == GTQTValue.UPDATE_TIER15){
             this.casingTier = buf.readInt();
         }
-        if(dataId == GTQTValue.REQUIRE_DATA_UPDATE){
-            this.writeCustomData(GTQTValue.UPDATE_TIER,buf1 -> buf1.writeInt(this.casingTier));
+        if(dataId == GTQTValue.REQUIRE_DATA_UPDATE15){
+            this.writeCustomData(GTQTValue.UPDATE_TIER15,buf1 -> buf1.writeInt(this.casingTier));
         }
     }
     public boolean hasMufflerMechanics() {
@@ -174,7 +174,7 @@ public class MetaTileEntityCrackingUnit extends GTQTRecipeMapMultiblockOverwrite
                 () -> ((WrappedIntTired)casingTier).getIntTier(),
                 0);
 
-        this.writeCustomData(GTQTValue.UPDATE_TIER,buf -> buf.writeInt(this.casingTier));
+        this.writeCustomData(GTQTValue.UPDATE_TIER15,buf -> buf.writeInt(this.casingTier));
         ParallelLim=(int)Math.pow(2, this.casingTier);
         ParallelNum=ParallelLim;
     }

@@ -64,11 +64,11 @@ public class MetaTileEntityPyrolyseOven extends GTQTRecipeMapMultiblockOverwrite
     @Override
     public void receiveCustomData(int dataId, PacketBuffer buf) {
         super.receiveCustomData(dataId, buf);
-        if(dataId == GTQTValue.UPDATE_TIER){
+        if(dataId == GTQTValue.UPDATE_TIER23){
             this.tier = buf.readInt();
         }
-        if(dataId == GTQTValue.REQUIRE_DATA_UPDATE){
-            this.writeCustomData(GTQTValue.UPDATE_TIER,buf1 -> buf1.writeInt(this.tier));
+        if(dataId == GTQTValue.REQUIRE_DATA_UPDATE23){
+            this.writeCustomData(GTQTValue.UPDATE_TIER23,buf1 -> buf1.writeInt(this.tier));
         }
     }
     FluidStack KEEP_OPEN = Lubricant.getFluid(1);
@@ -186,7 +186,7 @@ public class MetaTileEntityPyrolyseOven extends GTQTRecipeMapMultiblockOverwrite
                 () -> ((WrappedIntTired)tier).getIntTier(),
                 0);
 
-        this.writeCustomData(GTQTValue.UPDATE_TIER,buf -> buf.writeInt(this.tier));
+        this.writeCustomData(GTQTValue.UPDATE_TIER23,buf -> buf.writeInt(this.tier));
         ParallelLim=(int)Math.pow(2, this.tier);
         ParallelNum=ParallelLim;
     }

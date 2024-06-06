@@ -228,7 +228,7 @@ public class MetaTileEntityKineticEnergyBattery extends MultiblockWithDisplayBas
         this.length = coilCount/4;
 
         this.tier = this.casing;
-        this.writeCustomData(GTQTValue.UPDATE_TIER,buf -> buf.writeInt(this.casing));
+        this.writeCustomData(GTQTValue.UPDATE_TIER2,buf -> buf.writeInt(this.casing));
     }
 
     //gui数据
@@ -512,11 +512,11 @@ public class MetaTileEntityKineticEnergyBattery extends MultiblockWithDisplayBas
     @Override
     public void receiveCustomData(int dataId, PacketBuffer buf) {
         super.receiveCustomData(dataId, buf);
-        if(dataId == GTQTValue.UPDATE_TIER){
+        if(dataId == GTQTValue.UPDATE_TIER2){
             this.casing = buf.readInt();
         }
-        if(dataId == GTQTValue.REQUIRE_DATA_UPDATE){
-            this.writeCustomData(GTQTValue.UPDATE_TIER,buf1 -> buf1.writeInt(this.casing));
+        if(dataId == GTQTValue.REQUIRE_DATA_UPDATE2){
+            this.writeCustomData(GTQTValue.UPDATE_TIER2,buf1 -> buf1.writeInt(this.casing));
         }
     }
 

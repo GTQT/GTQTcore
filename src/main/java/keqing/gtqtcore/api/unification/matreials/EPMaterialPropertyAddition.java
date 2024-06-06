@@ -1,14 +1,20 @@
 package keqing.gtqtcore.api.unification.matreials;
 
 import gregtech.api.GTValues;
+import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.info.MaterialIconSet;
 import gregtech.api.unification.material.properties.*;
 
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import static gregtech.api.GTValues.UEV;
 import static gregtech.api.GTValues.VA;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.info.MaterialFlags.*;
+import static gregtech.integration.crafttweaker.material.MaterialPropertyExpansion.addFluid;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.Thorianite;
@@ -182,5 +188,15 @@ public class EPMaterialPropertyAddition {
         Curium.addFlags(GENERATE_PELLETS);
         Americium.addFlags(GENERATE_PELLETS);
         Neptunium.addFlags(GENERATE_PELLETS);
+
+        //PLASMAS
+        /*
+        List<Material> pmats = new ArrayList<>();
+        Collections.addAll(pmats, Carbon, Hydrogen, Helium3, Radon, Krypton, Neon, Magnesium, Silicon, Sulfur, Argon,Calcium, Titanium, Potassium);
+        for (Material mat : pmats) {
+            addFluid(mat, "plasma", false);
+        }
+
+         */
     }
 }

@@ -261,11 +261,15 @@ public class MetaTileEntityIndustrialPrimitiveBlastFurnace extends NoEnergyMulti
             super(tileEntity, tileEntity.recipeMap);
         }
 
+        @Override
+        public void setMaxProgress(int maxProgress)
+        {
+            this.maxProgressTime = maxProgress/cost();
+        }
 
         protected void updateRecipeProgress() {
             if (canRecipeProgress) {
                 if(Temp<28000) Temp=Temp+thresholdPercentage;
-                if(++progressTime%3==0) maxProgressTime=maxProgressTime-cost();
                 if (++progressTime > maxProgressTime) {
                     completeRecipe();
                 }
@@ -277,9 +281,9 @@ public class MetaTileEntityIndustrialPrimitiveBlastFurnace extends NoEnergyMulti
             if(Temp<5000) return 1;
             if(Temp<10000) return 2;
             if(Temp<15000) return 4;
-            if(Temp<20000) return 8;
-            if(Temp<25000) return 16;
-            else return 24;
+            if(Temp<20000) return 6;
+            if(Temp<25000) return 8;
+            else return 10;
         }
     }
     @Override

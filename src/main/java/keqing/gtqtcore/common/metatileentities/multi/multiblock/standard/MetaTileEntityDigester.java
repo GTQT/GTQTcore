@@ -136,7 +136,7 @@ public class MetaTileEntityDigester extends GTQTRecipeMapMultiblockOverwrite {
                 .aisle("CCCCCCC", "LOAAAOL", " HAAAH ", " HLLLH ")
                 .aisle(" CCSCC ", " LOOOL ", "  CCC  ", "       ")
                 .where('S', selfPredicate())
-                .where('C', states(getCasingAState()).setMinGlobalLimited(52).or(autoAbilities()))
+                .where('C', states(getCasingAState()).setMinGlobalLimited(45).or(autoAbilities()))
                 .where('H', states(getHeatState()))
                 .where('O', heatingCoils())
                 .where('L', states(getCasingBState()))

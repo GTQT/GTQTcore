@@ -126,7 +126,7 @@ public class MetaTileEntityAssemblyLine extends RecipeMapMultiblockController {
 
         this.tier = Math.min(this.casing_tier,this.laser_tier);
 
-        this.writeCustomData(GTQTValue.UPDATE_TIER,buf -> buf.writeInt(this.casing_tier));
+        this.writeCustomData(GTQTValue.UPDATE_TIER14,buf -> buf.writeInt(this.casing_tier));
     }
 
     @Override
@@ -296,11 +296,11 @@ public class MetaTileEntityAssemblyLine extends RecipeMapMultiblockController {
             super.receiveCustomData(dataId, buf);
         }
 
-        if(dataId == GTQTValue.UPDATE_TIER){
+        if(dataId == GTQTValue.UPDATE_TIER14){
             this.casing_tier = buf.readInt();
         }
-        if(dataId == GTQTValue.REQUIRE_DATA_UPDATE){
-            this.writeCustomData(GTQTValue.UPDATE_TIER,buf1 -> buf1.writeInt(this.casing_tier));
+        if(dataId == GTQTValue.REQUIRE_DATA_UPDATE14){
+            this.writeCustomData(GTQTValue.UPDATE_TIER14,buf1 -> buf1.writeInt(this.casing_tier));
         }
     }
 

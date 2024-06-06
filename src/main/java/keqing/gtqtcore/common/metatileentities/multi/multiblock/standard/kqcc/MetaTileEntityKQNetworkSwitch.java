@@ -78,11 +78,11 @@ public class MetaTileEntityKQNetworkSwitch extends MetaTileEntityDataBank implem
     @Override
     public void receiveCustomData(int dataId, PacketBuffer buf) {
         super.receiveCustomData(dataId, buf);
-        if(dataId == GTQTValue.UPDATE_TIER){
+        if(dataId == GTQTValue.UPDATE_TIER13){
             this.casing_tier = buf.readInt();
         }
-        if(dataId == GTQTValue.REQUIRE_DATA_UPDATE){
-            this.writeCustomData(GTQTValue.UPDATE_TIER,buf1 -> buf1.writeInt(this.casing_tier));
+        if(dataId == GTQTValue.REQUIRE_DATA_UPDATE13){
+            this.writeCustomData(GTQTValue.UPDATE_TIER13,buf1 -> buf1.writeInt(this.casing_tier));
         }
     }
     @Override
@@ -101,7 +101,7 @@ public class MetaTileEntityKQNetworkSwitch extends MetaTileEntityDataBank implem
                 () -> ((WrappedIntTired)laser_tier).getIntTier(),
                 0);
 
-        this.writeCustomData(GTQTValue.UPDATE_TIER,buf -> buf.writeInt(this.casing_tier));
+        this.writeCustomData(GTQTValue.UPDATE_TIER13,buf -> buf.writeInt(this.casing_tier));
         this.tire=Math.min(this.casing_tier,this.laser_tier*2);
     }
 

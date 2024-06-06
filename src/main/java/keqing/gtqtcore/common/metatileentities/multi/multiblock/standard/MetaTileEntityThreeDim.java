@@ -93,11 +93,11 @@ public class MetaTileEntityThreeDim extends MultiMapMultiblockController impleme
     @Override
     public void receiveCustomData(int dataId, PacketBuffer buf) {
         super.receiveCustomData(dataId, buf);
-        if(dataId == GTQTValue.UPDATE_TIER){
+        if(dataId == GTQTValue.UPDATE_TIER12){
             this.tier = buf.readInt();
         }
-        if(dataId == GTQTValue.REQUIRE_DATA_UPDATE){
-            this.writeCustomData(GTQTValue.UPDATE_TIER,buf1 -> buf1.writeInt(this.tier));
+        if(dataId == GTQTValue.REQUIRE_DATA_UPDATE12){
+            this.writeCustomData(GTQTValue.UPDATE_TIER12,buf1 -> buf1.writeInt(this.tier));
         }
     }
 
@@ -204,7 +204,7 @@ public class MetaTileEntityThreeDim extends MultiMapMultiblockController impleme
         this.sheping_tier = GTQTUtil.getOrDefault(() -> sheping_tier instanceof WrappedIntTired,
                 () -> ((WrappedIntTired)sheping_tier).getIntTier(),
                 0);
-        this.writeCustomData(GTQTValue.UPDATE_TIER,buf -> buf.writeInt(this.tier));
+        this.writeCustomData(GTQTValue.UPDATE_TIER12,buf -> buf.writeInt(this.tier));
     }
 
 

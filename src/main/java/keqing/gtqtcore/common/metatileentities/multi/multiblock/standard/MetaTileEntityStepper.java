@@ -83,11 +83,11 @@ public class MetaTileEntityStepper extends MultiMapMultiblockController implemen
     @Override
     public void receiveCustomData(int dataId, PacketBuffer buf) {
         super.receiveCustomData(dataId, buf);
-        if(dataId == GTQTValue.UPDATE_TIER){
+        if(dataId == GTQTValue.UPDATE_TIER11){
             this.tier = buf.readInt();
         }
-        if(dataId == GTQTValue.REQUIRE_DATA_UPDATE){
-            this.writeCustomData(GTQTValue.UPDATE_TIER,buf1 -> buf1.writeInt(this.tier));
+        if(dataId == GTQTValue.REQUIRE_DATA_UPDATE11){
+            this.writeCustomData(GTQTValue.UPDATE_TIER11,buf1 -> buf1.writeInt(this.tier));
         }
     }
     @Override
@@ -227,7 +227,7 @@ public class MetaTileEntityStepper extends MultiMapMultiblockController implemen
         this.sheping_tier = GTQTUtil.getOrDefault(() -> sheping_tier instanceof WrappedIntTired,
                 () -> ((WrappedIntTired)sheping_tier).getIntTier(),
                 0);
-        this.writeCustomData(GTQTValue.UPDATE_TIER,buf -> buf.writeInt(this.tier));
+        this.writeCustomData(GTQTValue.UPDATE_TIER11,buf -> buf.writeInt(this.tier));
     }
 
 

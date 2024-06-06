@@ -101,16 +101,16 @@ public class MetaTileEntityPreciseAssembler extends MultiMapMultiblockController
                 () -> ((WrappedIntTired)InternalCasingTier).getIntTier(),
                 0);
 
-        this.writeCustomData(GTQTDataCode.GTQT_CHANNEL_4, buf -> buf.writeInt(this.CasingTier));
+        this.writeCustomData(GTQTValue.UPDATE_TIER9, buf -> buf.writeInt(this.CasingTier));
     }
     @Override
     public void receiveCustomData(int dataId, PacketBuffer buf) {
         super.receiveCustomData(dataId, buf);
-        if(dataId == GTQTValue.UPDATE_TIER){
+        if(dataId == GTQTValue.UPDATE_TIER9){
             this.CasingTier = buf.readInt();
         }
-        if(dataId == GTQTValue.REQUIRE_DATA_UPDATE){
-            this.writeCustomData(GTQTValue.UPDATE_TIER,buf1 -> buf1.writeInt(this.CasingTier));
+        if(dataId == GTQTValue.REQUIRE_DATA_UPDATE9){
+            this.writeCustomData(GTQTValue.UPDATE_TIER9,buf1 -> buf1.writeInt(this.CasingTier));
         }
     }
     @Override

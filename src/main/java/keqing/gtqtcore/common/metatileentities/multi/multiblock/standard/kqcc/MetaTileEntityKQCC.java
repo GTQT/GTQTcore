@@ -192,21 +192,6 @@ public class MetaTileEntityKQCC extends MultiblockWithDisplayBase implements IOp
         }
     }
 
-
-    @Override
-    public void receiveCustomData(int dataId, PacketBuffer buf) {
-        super.receiveCustomData(dataId, buf);
-        if(dataId == GTQTValue.UPDATE_TIER){
-            this.CPU1 = buf.readInt();
-            this.GPU1 = buf.readInt();
-            this.RAM1 = buf.readInt();
-        }
-        if(dataId == GTQTValue.REQUIRE_DATA_UPDATE){
-            this.writeCustomData(GTQTValue.UPDATE_TIER,buf1 -> buf1.writeInt(this.CPU1));
-            this.writeCustomData(GTQTValue.UPDATE_TIER,buf1 -> buf1.writeInt(this.GPU1));
-            this.writeCustomData(GTQTValue.UPDATE_TIER,buf1 -> buf1.writeInt(this.RAM1));
-        }
-    }
     @Override
     public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
         super.renderMetaTileEntity(renderState, translation, pipeline);
