@@ -100,7 +100,6 @@ public class GTQTRecipes {
                     .duration((int) material.getMass())
                     .EUt(120)
                     .CWUt(96)
-                    .cleanroom(CleanroomType.CLEANROOM)
                     .buildAndRegister();
 
             PRECISION_SPINNING.recipeBuilder()
@@ -110,7 +109,6 @@ public class GTQTRecipes {
                     .duration((int) material.getMass() * 2)
                     .EUt(120)
                     .CWUt(96)
-                    .cleanroom(CleanroomType.CLEANROOM)
                     .buildAndRegister();
 
             PRECISION_SPINNING.recipeBuilder()
@@ -120,7 +118,6 @@ public class GTQTRecipes {
                     .duration((int) material.getMass() * 4)
                     .EUt(120)
                     .CWUt(96)
-                    .cleanroom(CleanroomType.CLEANROOM)
                     .buildAndRegister();
 
             PRECISION_SPINNING.recipeBuilder()
@@ -130,7 +127,6 @@ public class GTQTRecipes {
                     .duration((int) material.getMass() * 8)
                     .EUt(120)
                     .CWUt(96)
-                    .cleanroom(CleanroomType.CLEANROOM)
                     .buildAndRegister();
 
             PRECISION_SPINNING.recipeBuilder()

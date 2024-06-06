@@ -205,7 +205,7 @@ public class NanoCoatingRecipes {
 
         //催化剂框架 使用激光模板
         PRECISION_SPINNING.recipeBuilder()
-                .duration(90000).EUt(VA[EV]).Laser(200).CWUt(256)
+                .duration(90000).EUt(VA[EV]).CWUt(256)
                 .input(OrePrefix.frameGt,Aluminium,8)
                 .input(OrePrefix.foil,Platinum,16)
                 .input(circuit, MarkerMaterials.Tier.EV,8)
@@ -216,7 +216,7 @@ public class NanoCoatingRecipes {
                 .buildAndRegister();
 
         PRECISION_SPINNING.recipeBuilder()
-                .duration(90000).EUt(VA[EV]).Laser(200).CWUt(256)
+                .duration(90000).EUt(VA[EV]).CWUt(256)
                 .input(OrePrefix.frameGt,HastelloyX,8)
                 .input(OrePrefix.foil,Palladium,16)
                 .input(circuit, MarkerMaterials.Tier.EV,8)
@@ -227,7 +227,7 @@ public class NanoCoatingRecipes {
                 .buildAndRegister();
 
         PRECISION_SPINNING.recipeBuilder()
-                .duration(90000).EUt(VA[EV]).Laser(200).CWUt(256)
+                .duration(90000).EUt(VA[EV]).CWUt(256)
                 .input(OrePrefix.frameGt,Ruridit,8)
                 .input(OrePrefix.foil,NiobiumTitanium,16)
                 .input(circuit, MarkerMaterials.Tier.EV,8)
@@ -238,7 +238,7 @@ public class NanoCoatingRecipes {
                 .buildAndRegister();
 
         PRECISION_SPINNING.recipeBuilder()
-                .duration(90000).EUt(VA[EV]).Laser(200).CWUt(256)
+                .duration(90000).EUt(VA[EV]).CWUt(256)
                 .input(OrePrefix.frameGt,TungstenSteel,8)
                 .input(OrePrefix.foil,NanometerBariumTitanate,16)
                 .input(circuit, MarkerMaterials.Tier.EV,8)

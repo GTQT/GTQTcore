@@ -377,7 +377,7 @@ public class KeQingNET {
                 .input(ELECTRIC_PISTON_EV, 2)
                 .input(gear, TanmolyiumBetaC, 2)
                 .input(gearSmall, EglinSteel, 4)
-                .input(screw, AusteniticStainlessSteel904L, 16)
+                .input(screw, NanometerBariumTitanate, 16)
                 .input(foil, StainlessSteel, 8)
                 .input(cableGtQuadruple, Platinum, 4)
                 .fluidInputs(SolderingAlloy.getFluid(5760))

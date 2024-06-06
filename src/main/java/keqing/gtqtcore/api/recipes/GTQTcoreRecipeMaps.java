@@ -184,7 +184,7 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<ComputationRecipeBuilder> LASER_ENGRAVING;
     public static final RecipeMap<ComputationRecipeBuilder> TD_PRINT_RECIPES;
     public static final RecipeMap<ComputationRecipeBuilder> PRECISION_SPRAYING;
-    public static final RecipeMap<LASERComputationRecipeBuilder> PRECISION_SPINNING;
+    public static final RecipeMap<ComputationRecipeBuilder> PRECISION_SPINNING;
     public static final RecipeMap<SimpleRecipeBuilder> CW_LASER_ENGRAVER_RECIPES;
     public static final RecipeMap<LASERComputationRecipeBuilder> STEPPER_RECIPES;
     public static final RecipeMap<SimpleRecipeBuilder> GANTRY_CRANE;
@@ -280,7 +280,7 @@ public class GTQTcoreRecipeMaps {
                 .setSlotOverlay(false, false, true, GuiTextures.CIRCUIT_OVERLAY)
                 .setSound(GTSoundEvents.CENTRIFUGE);
 
-        PRECISION_SPINNING = new RecipeMap<>("precision_spinning", 3, 1, 3, 0, new LASERComputationRecipeBuilder(), false)
+        PRECISION_SPINNING = new RecipeMap<>("precision_spinning", 3, 1, 3, 0, new ComputationRecipeBuilder(), false)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL)
                 .setSlotOverlay(false, false, false, GuiTextures.CIRCUIT_OVERLAY)
                 .setSlotOverlay(false, false, true, GuiTextures.CIRCUIT_OVERLAY)

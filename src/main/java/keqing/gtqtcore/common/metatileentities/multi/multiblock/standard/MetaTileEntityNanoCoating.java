@@ -70,6 +70,7 @@ public class MetaTileEntityNanoCoating extends MultiMapMultiblockController impl
         tooltip.add(I18n.format("gtqt.machine.stepper.3"));
         tooltip.add(I18n.format("gtqt.machine.stepper.4"));
         tooltip.add(I18n.format("gtqt.machine.stepper.5"));
+        tooltip.add(I18n.format("gtqt.machine.stepper.6"));
     }
     private IOpticalComputationProvider computationProvider;
     public MetaTileEntityNanoCoating(ResourceLocation metaTileEntityId) {
@@ -140,14 +141,6 @@ public class MetaTileEntityNanoCoating extends MultiMapMultiblockController impl
     public void receiveInitialSyncData(PacketBuffer buf) {
         super.receiveInitialSyncData(buf);
         this.tier = buf.readInt();
-    }
-    @Override
-    public boolean checkRecipe(@Nonnull Recipe recipe, boolean consumeIfSuccess) {
-        if(recipe.getProperty(LASERNetProperty.getInstance(), 0)>=minvisa)
-        {
-            return super.checkRecipe(recipe, consumeIfSuccess);
-        }
-        return false;
     }
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
@@ -301,27 +294,6 @@ public class MetaTileEntityNanoCoating extends MultiMapMultiblockController impl
             else return VA[Math.min(tier,clean_tier*2)];
         }
 
-        @Override
-        public void update() {
-            super.update();
-            switch (laser_tier) {
-                case 1 -> {
-                    minvisa = 600;
-                }
-                case 2 -> {
-                    minvisa = 200;
-                }
-                case 3 -> {
-                    minvisa = 80;
-                }
-                case 4 -> {
-                    minvisa = 20;
-                }
-                case 5 -> {
-                    minvisa = 10;
-                }
-            }
-        }
         private boolean isPrecise() {
             return sheping_tier == laser_tier;
         }
