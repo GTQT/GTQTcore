@@ -702,8 +702,8 @@ public class MetaTileEntityLoader {
                 new UnificationEntry(OrePrefix.circuit, LV), 'C', MetaItems.ELECTRIC_PUMP_LV);
 
         ModHandler.addShapedRecipe(true, "vacuum_freezer", VACUUM_FREEZER.getStackForm(), "PPP", "CMC",
-                "WCW", 'M', MetaTileEntities.HULL[GTValues.LV].getStackForm(), 'P',
-                MetaItems.ELECTRIC_PUMP_LV, 'C', new UnificationEntry(OrePrefix.circuit, LV), 'W',
+                "WCW", 'M', MetaTileEntities.HULL[GTValues.MV].getStackForm(), 'P',
+                MetaItems.ELECTRIC_PUMP_MV, 'C', new UnificationEntry(OrePrefix.circuit, MV), 'W',
                 new UnificationEntry(OrePrefix.cableGtSingle, Aluminium));
 
         ModHandler.addShapedRecipe(true, "lager_ore_washer", GTQTMetaTileEntities.LAGER_ORE_WASHER.getStackForm(), "PPP", "CMC",

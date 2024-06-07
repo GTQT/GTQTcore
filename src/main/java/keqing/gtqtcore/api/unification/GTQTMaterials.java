@@ -598,6 +598,7 @@ public class GTQTMaterials {
     public static Material SodiumTungstate;
     public static Material SodiumPhosphotungstate;
     public static Material SodiumMolybdate;
+    public static Material FluxedElectrum;
 
     //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/api/unification/GSMaterials.java
 

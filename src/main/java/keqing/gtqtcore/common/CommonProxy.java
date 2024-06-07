@@ -32,6 +32,7 @@ import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -125,6 +126,7 @@ public class CommonProxy {
     }
     public void preLoad(){
         GTQTStoneTypes.init();
+        MinecraftForge.EVENT_BUS.register(new GTQTEventHandler.PlayerLoginEventHandler());
     }
     public void init() {
         OreDictionaryLoader.init();

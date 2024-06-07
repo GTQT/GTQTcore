@@ -1109,7 +1109,15 @@ gregtech.material.zinc_oxide=氧化锌
 gregtech.material.waelz_oxide=威氏氧化物
 gregtech.material.waelz_slag=威氏浸出渣
 gregtech.material.hematite=赤铁矿
+
+gregtech.material.magic_gas=离散态微薄魔力
+gregtech.material.magic_fas=离散态素魔力
+gregtech.material.magic_das=离散态纯净魔力
+gregtech.material.magic_aas=凝聚态素魔力
+gregtech.material.magic_rub=魔力废液
+gregtech.material.magic=魔力
 gregtech.material.richmagic=富集魔力
+
 gregtech.material.fullerene_polymer_matrix=富勒烯聚合物基体
 gregtech.material.periodicium=元素周期表
 gregtech.material.iriduim_fluid=（II）氯化铱
@@ -2907,7 +2915,7 @@ gtqt.machine.stepper.2=紫外发射器等级决定多方块的极限加工波长
 gtqt.machine.3d.2=当玻璃等级与射频调节器等级相同时，多方块自动进入同频加工模式。
 gtqt.machine.stepper.3=同频加工模式中，多方块享受对于玻璃等级的耗时减免。
 gtqt.machine.stepper.4=多方块最大工作电压为外壳与二倍自净模块中的较小值
-gtqt.machine.stepper.5=并行数量与自净等级，射频调节器等级关联（正常模式加法，同频模式乘法）
+gtqt.machine.stepper.5=并行数量与自净等级，射频调节器等级关联（正常模式加法，同频模式乘法）`
 gtqt.machine.stepper.6=多方块切换效能模式时，最大配方电压下降三级，并行上限扩大四倍，耗时减半。
 gtqt.machine.ls.1=多方块内置升级部件：激光发射器
 gtqt.machine.ls.2=多方块最大工作电压为外壳与二倍激光发射等级中的较小值

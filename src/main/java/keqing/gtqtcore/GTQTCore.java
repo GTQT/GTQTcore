@@ -20,11 +20,11 @@ import net.minecraftforge.fml.common.event.*;
         dependencies = "required-after:gregtech@[2.8.8-beta,) ;"
 )
 public class GTQTCore {
-    public static final String PACK = "1.0.0_preview_0.2";
+    public static final String PACK = "1.0.0_preview";
 
     public static final String MODID = "gtqtcore";
     public static final String NAME = "GTQT Core";
-    public static final String VERSION = "1.0";
+    public static final String VERSION = "0.2-fix";
 
     @Mod.Instance(GTQTCore.MODID)
     public static GTQTCore instance;

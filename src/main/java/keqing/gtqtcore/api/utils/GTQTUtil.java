@@ -3,6 +3,7 @@ package keqing.gtqtcore.api.utils;
 import gregtech.api.GTValues;
 import gregtech.api.util.TextFormattingUtil;
 import keqing.gtqtcore.GTQTCore;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -14,7 +15,20 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import javax.annotation.Nonnull;
-import java.util.Arrays;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.awt.image.BufferedImage;
+import java.io.*;
+import java.lang.reflect.Type;
+import java.nio.ByteBuffer;
+import java.nio.IntBuffer;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.regex.Pattern;
 import java.util.BitSet;
 import java.util.Objects;
 import java.util.function.BooleanSupplier;
@@ -40,6 +54,7 @@ public class GTQTUtil {
         }
         return result;
     }
+
     public static final Function<Integer, Integer> collectorTankSizeFunction = tier -> {
         if (tier <= GTValues.LV)
             return 16000;

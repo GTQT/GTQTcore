@@ -1575,50 +1575,50 @@ public class FirstDegreeMaterials {
         //离散态微薄魔力
         GTQTMaterials.MagicGas = new Material.Builder(getMaterialsId(), gregtechId("magic_gas"))
                 .gas()
-                .color(0x00FFFF)
+                .color(0xB2DFEE)
                 .flags(DISABLE_DECOMPOSITION)
                 .build();
-
+        MagicGas.setFormula("-KQ-");
         //离散态素魔力
         GTQTMaterials.MagicFas = new Material.Builder(getMaterialsId(), gregtechId("magic_fas"))
                 .gas()
-                .color(0x00FFFF)
+                .color(0xAEEEEE)
                 .flags(DISABLE_DECOMPOSITION)
                 .build();
-
+        MagicFas.setFormula("-KQ-");
         //离散态纯净魔力
         GTQTMaterials.MagicDas = new Material.Builder(getMaterialsId(), gregtechId("magic_das"))
                 .gas()
-                .color(0x00FFFF)
+                .color(0x98F5FF)
                 .flags(DISABLE_DECOMPOSITION)
                 .build();
-
+        MagicDas.setFormula("-KQ-");
         //凝聚态素魔力
         GTQTMaterials.MagicAas = new Material.Builder(getMaterialsId(), gregtechId("magic_aas"))
                 .gas()
-                .color(0x00FFFF)
+                .color(0x87CEEB)
                 .flags(DISABLE_DECOMPOSITION)
                 .build();
-
+        MagicAas.setFormula("-KQ-");
         //魔力废液
         GTQTMaterials.MagicRub = new Material.Builder(getMaterialsId(), gregtechId("magic_rub"))
                 .gas()
-                .color(0x00FFFF)
+                .color(0x87CEFF)
                 .flags(DISABLE_DECOMPOSITION)
                 .build();
-
+        MagicRub.setFormula("-KQ-");
         //魔力
         GTQTMaterials.Magic = new Material.Builder(getMaterialsId(), gregtechId("magic"))
                 .fluid()
-                .color(0x428fdb)
+                .color(0x7B68EE)
                 .iconSet(DULL)
                 .element(GTQTElements.Magic)
                 .build();
 
         //富集魔力
         GTQTMaterials.Richmagic = new Material.Builder(getMaterialsId(), gregtechId("richmagic"))
-                .ingot()
-                .color(0x428fdb)
+                .ingot().fluid()
+                .color(0x7D26CD)
                 .iconSet(DULL)
                 .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD)
                 .build();
@@ -2927,7 +2927,7 @@ public class FirstDegreeMaterials {
                 .components(Sodium, 1, Tungsten, 1, Oxygen, 4)
                 .flags(DISABLE_DECOMPOSITION)
                 .build();
-        //  24207 Sodium Phosphotungstate
+
         GTQTMaterials.SodiumPhosphotungstate = new Material.Builder(getMaterialsId(), gregtechId("sodium_phosphotungstate"))
                 .dust()
                 .color(0x4D3635)
@@ -2935,7 +2935,7 @@ public class FirstDegreeMaterials {
                 .flags(DISABLE_DECOMPOSITION)
                 .build()
                 .setFormula("(WO3)12Na3PO4", true);
-        //  24208 Sodium Molybdate
+
         GTQTMaterials.SodiumMolybdate = new Material.Builder(getMaterialsId(), gregtechId("sodium_molybdate"))
                 .dust()
                 .color(0xCCCC99)
@@ -2944,6 +2944,18 @@ public class FirstDegreeMaterials {
                 .flags(DISABLE_DECOMPOSITION)
                 .build();
 
+        GTQTMaterials.FluxedElectrum = new Material.Builder(getMaterialsId(), gregtechId("fluxed_electrum"))
+                .ingot()
+                .fluid()
+                .color(0xFFE049)
+                .iconSet(BRIGHT)
+                .components(Electrum, 8, RoseGold, 4, SterlingSilver, 4, NaquadahEnriched, 2)
+                .blast(b -> b
+                        .temp(8400, BlastProperty.GasTier.HIGHER)
+                        .blastStats(VA[ZPM], 877)
+                        .vacuumStats(VA[IV], 405))
+                .flags(GENERATE_PLATE, GENERATE_ROD, GENERATE_FRAME, GENERATE_RING)
+                .build();
 
     }
 }

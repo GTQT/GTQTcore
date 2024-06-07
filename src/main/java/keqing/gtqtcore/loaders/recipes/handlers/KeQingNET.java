@@ -525,7 +525,7 @@ public class KeQingNET {
                 .input(DISK_0)
                 .notConsumable(MetaTileEntities.COMBUSTION_GENERATOR[2].getStackForm())
                 .output(DISK_1)
-                .EUt(7680)
+                .EUt(1920)
                 .CWUt(32)
                 .NB(1)
                 .totalCWU(100000)

@@ -59,6 +59,7 @@ public class GTQTRecipesManager {
         HexanitrohexaaxaisowurtzitaneChain.init();
         ZylonChain.init();
         MiscRecipes.init();
+        MagicChain.init();
         RecipeConflicts.init();
         AluminiumLine.init();
         CoilWire.init();

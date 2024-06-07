@@ -41,28 +41,19 @@ public class TitleUtils {
 
     private static String getrandom() {
         Random rand = new Random();
-        int randomNum = rand.nextInt(10);
+        int randomNum = rand.nextInt(6);
         return switch (randomNum) {
-            case 1 -> "风不来，树不动;船不摇，水不浑。";
-            case 2 -> "人生两件事：走路与识人。道曲难行，路直景稀。";
-            case 3 -> "供人以鱼，只解一餐;授人以渔，终身受用。";
-            case 4 -> "剑情絮，水梦烛。问其意，意中寻。";
-            case 5 -> "人经不住千言，树经不住千斧。早上好！";
-            case 6 -> "随时光而去的是红颜和青丝，与日俱增的是希望和信心。";
-            case 7 -> "莫将分付东邻子,回首长安佳丽地。";
-            case 8 -> "残巻生前能伴我，锦衣死后又归谁？";
-            case 9 -> "悄悄地你走了，正如你悄悄的来。";
-            default -> "珍爱身体，拒绝熬夜，别让生命戛然而止。";
+            case 1 -> "知之愈明，则行之愈笃;行之愈笃，则知之益明。——朱熹(宋)";
+            case 2 -> "为者常成，行者常至。——《晏子春秋》";
+            case 3 -> "为一身谋则愚，而为天下则智。";
+            case 4 -> "唯天下至诚为能化。——《论语》";
+            case 5 -> "如果永远是晴天，土地也会布满裂痕。";
+            default -> "宁死不背理，宁贫不堕志。";
         };
     }
 
     public static String buildTitle(String RANDOM,String STATUE) {
-        //if(STATUE!=null)return String.format("%s | 加载状态：%s | %s",DEFAULT_TITLE,STATUE,TEST);
-        //return String.format("%s | GTQT官方交流QQ群：494136307 | %s",DEFAULT_TITLE,TEST);
-
         if(STATUE!=null)return String.format("%s | 随机废话：%s | 加载状态：%s | %s",DEFAULT_TITLE,RANDOM,STATUE,TEST);
-        return String.format("%s | GTQT官方交流QQ群：1073091808 | 随机废话； %s | %s",DEFAULT_TITLE,RANDOM,TEST);
+        return String.format("%s | 官方交流QQ群：1073091808 494136307 (QQ)| 随机废话； %s | %s",DEFAULT_TITLE,RANDOM,TEST);
     }
-
-
 }
