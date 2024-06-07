@@ -98,68 +98,6 @@ public class MiscRecipes {
                 .duration(240)
                 .buildAndRegister();
 
-        //  Advanced Recipe of Optical Fiber
-        ASSEMBLER_RECIPES.recipeBuilder()
-                .input(wireFine, PMMA, 8)
-                .input(foil, Electrum, 8)
-                .fluidInputs(Polybenzimidazole.getFluid(L))
-                .output(MetaBlocks.OPTICAL_PIPES[0], 4)
-                .EUt(VA[LuV])
-                .duration(5 * SECOND)
-                .cleanroom(CleanroomType.CLEANROOM)
-                .buildAndRegister();
-
-        ASSEMBLER_RECIPES.recipeBuilder()
-                .input(wireFine, CBDOPolycarbonate, 8)
-                .input(foil, FluxedElectrum, 8)
-                .fluidInputs(Polyetheretherketone.getFluid(L))
-                .output(MetaBlocks.OPTICAL_PIPES[0], 16)
-                .EUt(VA[ZPM])
-                .duration(5 * SECOND)
-                .cleanroom(CleanroomType.CLEANROOM)
-                .buildAndRegister();
-
-        ASSEMBLER_RECIPES.recipeBuilder()
-                .input(wireFine, PraseodymiumDopedZBLANGlass, 8)
-                .input(foil, Cinobite, 8)
-                .fluidInputs(Zylon.getFluid(L))
-                .output(MetaBlocks.OPTICAL_PIPES[0], 64)
-                .EUt(VA[UV])
-                .duration(5 * SECOND)
-                .cleanroom(CleanroomType.CLEANROOM)
-                .buildAndRegister();
-
-        //  Advanced Recipe of Laser Fiber
-        ASSEMBLER_RECIPES.recipeBuilder()
-                .inputs(GTQTMetaBlocks.GLASS_CASING.getItemVariant(TI_BORON_SILICATE_GLASS))
-                .input(foil, Tritanium, 2)
-                .fluidInputs(Polybenzimidazole.getFluid(L))
-                .output(MetaBlocks.LASER_PIPES[0], 4)
-                .EUt(VA[LuV])
-                .duration(5 * SECOND)
-                .cleanroom(CleanroomType.CLEANROOM)
-                .buildAndRegister();
-
-        ASSEMBLER_RECIPES.recipeBuilder()
-                .inputs(GTQTMetaBlocks.GLASS_CASING.getItemVariant(W_BORON_SILICATE_GLASS))
-                .input(foil, Adamantium, 2)
-                .fluidInputs(Polyetheretherketone.getFluid(L))
-                .output(MetaBlocks.LASER_PIPES[0], 16)
-                .EUt(VA[ZPM])
-                .duration(5 * SECOND)
-                .cleanroom(CleanroomType.CLEANROOM)
-                .buildAndRegister();
-
-        ASSEMBLER_RECIPES.recipeBuilder()
-                .inputs(GTQTMetaBlocks.GLASS_CASING.getItemVariant(NAQ_BORON_SILICATE_GLASS))
-                .input(foil, Hdcs, 2)
-                .fluidInputs(Zylon.getFluid(L))
-                .output(MetaBlocks.LASER_PIPES[0], 64)
-                .EUt(VA[UV])
-                .duration(5 * SECOND)
-                .cleanroom(CleanroomType.CLEANROOM)
-                .buildAndRegister();
-
         AUTOCLAVE_RECIPES.recipeBuilder()
                 .input(dust, Platinum)
                 .input(plate, Richmagic)

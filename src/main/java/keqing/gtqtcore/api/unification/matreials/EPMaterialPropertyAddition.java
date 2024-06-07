@@ -27,7 +27,7 @@ public class EPMaterialPropertyAddition {
         IridiumMetalResidue.setFormula("Ir2O4(SiO2)2Au3");
         AcidicOsmiumSolution.setFormula("OsO4(H2O)(HCl)");
         PalladiumRaw.setFormula("PdCl2?");
-        NetherStar.setFormula("PtDc?Ma", true);
+        NetherStar.setFormula("PtDc?KQ", true);
         //  Elements
         Calcium.setProperty(PropertyKey.FLUID, new FluidProperty());
         Dubnium.setProperty(PropertyKey.INGOT, new IngotProperty());

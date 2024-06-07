@@ -91,7 +91,7 @@ public class EPMachineCasingMaterials {
                 .components(TungstenSteel, 12, HSSS, 9, HSSG, 6, Ruridit, 3, Naphtha, 2, Plutonium241, 1)
                 .flags(GENERATE_PLATE, GENERATE_ROD, GENERATE_RING, GENERATE_BOLT_SCREW, GENERATE_GEAR, GENERATE_ROTOR,
                         GENERATE_FRAME,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROUND,GENERATE_SMALL_GEAR
-                        ,GENERATE_SPRING,GENERATE_SPRING_SMALL)
+                        ,GENERATE_SPRING,GENERATE_SPRING_SMALL,GENERATE_FOIL)
                 .rotorStats(18.0f, 7.0f, 8000)
                 .build();
 

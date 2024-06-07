@@ -71,10 +71,8 @@ public class GTQTEventHandler {
                 BOLD + "欢迎来到格雷:量子跃迁 " + GREEN + PACK + LIGHT_PURPLE +"-"+VERSION,
                 GRAY + "当前游戏为" + RED + "测试版本" + GRAY + "或" + RED + "预览版本" + GRAY + "，在游玩过程中若遇到问题请及时反馈",
                 GRAY + "该版本中一切内容仅供预览，不保证能够按照正常的生存模式流程进行游戏。",
-                "",
                 GRAY + "官方交流群组一群：" + YELLOW + "1073091808" + GRAY + "（QQ）",
                 GRAY + "官方交流群组二群：" + YELLOW + "494136307" + GRAY + "（QQ）",
-                "",
                 GRAY + "社群链接：" + GREEN + "https://www.mcmod.cn/modpack/590.html",
                 GRAY + "问题反馈渠道：" + GREEN + "https://github.com/GTQT",
                 GOLD + "=================================================================="
