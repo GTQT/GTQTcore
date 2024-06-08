@@ -38,7 +38,7 @@ public class KQComputationRecipeBuilder extends RecipeBuilder<KQComputationRecip
             return true;
         }
         if (key.equals(KQNetProperty.KEY)) {
-            this.totalCWU(((Number) value).intValue());
+            this.NB(((Number) value).intValue());
             return true;
         }
         return super.applyProperty(key, value);

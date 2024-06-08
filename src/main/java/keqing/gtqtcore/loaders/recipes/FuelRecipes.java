@@ -114,16 +114,6 @@ public class FuelRecipes {
                             .part(11234)
                             .buildAndRegister();
 
-                    CW_PRECISE_ASSEMBLER_RECIPES.recipeBuilder()
-                            .input(screw, Hdcs, 1)
-                            .fluidInputs(SolderingAlloy.getFluid(L * 1))
-                            .output(ingot,Iron)
-                            .EUt(VA[UHV])
-                            .duration(120)
-                            .totalCWU(600)
-                            .CWUt(3)
-                            .buildAndRegister();
-
                     PRECISE_ASSEMBLER_RECIPES.recipeBuilder()
                             .input(screw, Hdcs, 4)
                             .fluidInputs(SolderingAlloy.getFluid(L * 8))
@@ -131,7 +121,8 @@ public class FuelRecipes {
                             .output(ingot,Iron)
                             .EUt(VA[UHV])
                             .duration(120)
-                            .CasingTier(3)
+                            .Tier(3)
+                            .CWUt(114)
                             .buildAndRegister();
 
 

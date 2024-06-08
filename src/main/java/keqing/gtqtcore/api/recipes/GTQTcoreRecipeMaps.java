@@ -174,8 +174,7 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMapPseudoGroup<SimpleRecipeBuilder> PROCESSING_MODE_A;
     public static final RecipeMapPseudoGroup<SimpleRecipeBuilder> PROCESSING_MODE_B;
     public static final RecipeMapPseudoGroup<SimpleRecipeBuilder> PROCESSING_MODE_C;
-    public static final RecipeMap<PACasingTierRecipeBuilder> PRECISE_ASSEMBLER_RECIPES;
-    public static final RecipeMap<ComputationRecipeBuilder> CW_PRECISE_ASSEMBLER_RECIPES;
+    public static final RecipeMap<PAComputationRecipeBuilder> PRECISE_ASSEMBLER_RECIPES;
     public static final RecipeMap<MDRecipeBuilder> MINING_DRILL_RECIPES;
     public static final RecipeMap<SimpleRecipeBuilder> DISTILLATION_KETTLE;
     public static final RecipeMap<SimpleRecipeBuilder> NANOHYBRID;
@@ -243,13 +242,7 @@ public class GTQTcoreRecipeMaps {
                 .setSlotOverlay(false, false, true, GuiTextures.CIRCUIT_OVERLAY)
                 .setSound(GTSoundEvents.ASSEMBLER);
 
-        PRECISE_ASSEMBLER_RECIPES = new RecipeMapPreciseAssembler<>("precise_assembler_recipes", 4, 1, 4, 0, new PACasingTierRecipeBuilder(), false)
-                .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL)
-                .setSlotOverlay(false, false, false, GuiTextures.CIRCUIT_OVERLAY)
-                .setSlotOverlay(false, false, true, GuiTextures.CIRCUIT_OVERLAY)
-                .setSound(GTSoundEvents.ASSEMBLER);
-
-        CW_PRECISE_ASSEMBLER_RECIPES = new RecipeMapPreciseAssembler<>("cwt_precise_assembler_recipes", 4, 1, 4, 0, new ComputationRecipeBuilder(), false)
+        PRECISE_ASSEMBLER_RECIPES = new RecipeMapPreciseAssembler<>("precise_assembler_recipes", 4, 1, 4, 0, new PAComputationRecipeBuilder(), false)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL)
                 .setSlotOverlay(false, false, false, GuiTextures.CIRCUIT_OVERLAY)
                 .setSlotOverlay(false, false, true, GuiTextures.CIRCUIT_OVERLAY)

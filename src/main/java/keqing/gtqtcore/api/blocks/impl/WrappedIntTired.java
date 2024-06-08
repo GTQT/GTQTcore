@@ -11,6 +11,10 @@ public class WrappedIntTired extends WrappedTired{
         this.tier = tier;
     }
 
+    public Object getTier() {
+        return tier;
+    }
+
     public int getIntTier() {
         return tier;
     }

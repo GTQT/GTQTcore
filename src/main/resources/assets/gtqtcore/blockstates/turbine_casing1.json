@@ -62,6 +62,24 @@
           "all": "gregtech:blocks/multiblock/casing/precise_assembler_casing_mk3"
         }
       },
+      "precise_assembler_casing_mk4": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casing/precise_assembler_casing_mk4"
+        }
+      },
+      "precise_assembler_casing_mk5": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casing/precise_assembler_casing_mk5"
+        }
+      },
+      "precise_assembler_casing_mk6": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casing/precise_assembler_casing_mk6"
+        }
+      },
       "galvanize_steel_casing": {
         "model": "minecraft:cube_all",
         "textures": {

@@ -37,6 +37,7 @@ import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.capability.GTQTDataCode;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
+import keqing.gtqtcore.api.recipes.properties.PAProperty;
 import keqing.gtqtcore.api.unification.GTQTMaterials;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
@@ -62,17 +63,22 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 import static gregtech.api.GTValues.*;
+import static gregtech.api.recipes.RecipeMaps.ASSEMBLER_RECIPES;
+import static keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate.MAP_PA_CASING;
+import static keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate.MAP_PA_INTERNAL_CASING;
+import static keqing.gtqtcore.api.utils.GTQTUniverUtil.consistentList;
+import static keqing.gtqtcore.api.utils.GTQTUniverUtil.maxLength;
 
 public class MetaTileEntityPreciseAssembler extends MultiMapMultiblockController implements IOpticalComputationReceiver {
     private IOpticalComputationProvider computationProvider;
     private int CasingTier;
     private int InternalCasingTier;
 
+
     public MetaTileEntityPreciseAssembler(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{
-                RecipeMaps.ASSEMBLER_RECIPES,
-                GTQTcoreRecipeMaps.PRECISE_ASSEMBLER_RECIPES,//普通装配
-                GTQTcoreRecipeMaps.CW_PRECISE_ASSEMBLER_RECIPES
+                ASSEMBLER_RECIPES,
+                GTQTcoreRecipeMaps.PRECISE_ASSEMBLER_RECIPES
         });
         this.recipeMapWorkable = new PreciseAssemblerRecipeLogic(this);
     }
@@ -118,7 +124,13 @@ public class MetaTileEntityPreciseAssembler extends MultiMapMultiblockController
         super.update();
     }
 
-    @SuppressWarnings("SpellCheckingInspection")
+    public boolean checkRecipe(@Nonnull Recipe recipe,
+                               boolean consumeIfSuccess) {
+        if(this.getRecipeMap() == ASSEMBLER_RECIPES)return super.checkRecipe(recipe, consumeIfSuccess);
+        return super.checkRecipe(recipe, consumeIfSuccess) && recipe.getProperty(PAProperty.getInstance(), 0) <= CasingTier;
+    }
+
+
     @Nonnull
     @Override
     protected BlockPattern createStructurePattern() {
@@ -132,7 +144,7 @@ public class MetaTileEntityPreciseAssembler extends MultiMapMultiblockController
                 .where('C', TiredTraceabilityPredicate.CP_PA_CASING)
                 .where('D', TiredTraceabilityPredicate.CP_PA_CASING
                         .setMinGlobalLimited(42)
-                        .or(autoAbilities()))
+                        .or(autoAbilities(true, true, true, true, true, true, false)))
                 .where('X', abilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION))
                 .where('F', states(getFrameState()))
                 .where('G', states(getGlassState()))
@@ -169,6 +181,15 @@ public class MetaTileEntityPreciseAssembler extends MultiMapMultiblockController
             }
             case (3) -> {
                 return GTQTTextures.PRECISE_ASSEMBLER_CASING_MK3;
+            }
+            case (4) -> {
+                return GTQTTextures.PRECISE_ASSEMBLER_CASING_MK4;
+            }
+            case (5) -> {
+                return GTQTTextures.PRECISE_ASSEMBLER_CASING_MK5;
+            }
+            case (6) -> {
+                return GTQTTextures.PRECISE_ASSEMBLER_CASING_MK6;
             }
             default -> {
                 return GTQTTextures.PRECISE_ASSEMBLER_CASING_MK1;
@@ -230,7 +251,7 @@ public class MetaTileEntityPreciseAssembler extends MultiMapMultiblockController
             if (isPrecise()) {
                 this.maxProgressTime = maxProgress ;
             } else {
-                this.maxProgressTime = maxProgress / 2;
+                this.maxProgressTime = maxProgress / Math.min(InternalCasingTier,CasingTier);
             }
         }
 
@@ -242,7 +263,7 @@ public class MetaTileEntityPreciseAssembler extends MultiMapMultiblockController
             if (isPrecise()) {
                 return 1;
             } else {
-                return (int) Math.pow(2, CasingTier + 4);
+                return (int) Math.pow(2, Math.min(InternalCasingTier,CasingTier) + 4);
             }
         }
     }

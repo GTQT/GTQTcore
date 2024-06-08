@@ -40,6 +40,9 @@ public class GTQTTextures {
     public static SimpleOverlayRenderer PRECISE_ASSEMBLER_CASING_MK1;
     public static SimpleOverlayRenderer PRECISE_ASSEMBLER_CASING_MK2;
     public static SimpleOverlayRenderer PRECISE_ASSEMBLER_CASING_MK3;
+    public static SimpleOverlayRenderer PRECISE_ASSEMBLER_CASING_MK4;
+    public static SimpleOverlayRenderer PRECISE_ASSEMBLER_CASING_MK5;
+    public static SimpleOverlayRenderer PRECISE_ASSEMBLER_CASING_MK6;
     public static SimpleOverlayRenderer AD_CASING;
     public static SimpleOverlayRenderer HastelloyX78;
     public static SimpleOverlayRenderer GALVANIZE_STEEL_CASING;
@@ -117,6 +120,9 @@ public class GTQTTextures {
         PRECISE_ASSEMBLER_CASING_MK1= new SimpleOverlayRenderer("multiblock/casing/precise_assembler_casing_mk1");
         PRECISE_ASSEMBLER_CASING_MK2= new SimpleOverlayRenderer("multiblock/casing/precise_assembler_casing_mk2");
         PRECISE_ASSEMBLER_CASING_MK3 = new SimpleOverlayRenderer("multiblock/casing/precise_assembler_casing_mk3");
+        PRECISE_ASSEMBLER_CASING_MK4 = new SimpleOverlayRenderer("multiblock/casing/precise_assembler_casing_mk4");
+        PRECISE_ASSEMBLER_CASING_MK5 = new SimpleOverlayRenderer("multiblock/casing/precise_assembler_casing_mk5");
+        PRECISE_ASSEMBLER_CASING_MK6 = new SimpleOverlayRenderer("multiblock/casing/precise_assembler_casing_mk6");
         GALVANIZE_STEEL_CASING = new SimpleOverlayRenderer("multiblock/casing/galvanize_steel_casing");
         PD_CASING = new SimpleOverlayRenderer("multiblock/casing/pd_turbine_casing");
         ST_CASING = new SimpleOverlayRenderer("multiblock/casing/st_turbine_casing");

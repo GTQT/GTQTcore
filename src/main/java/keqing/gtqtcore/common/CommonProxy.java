@@ -323,6 +323,7 @@ public class CommonProxy {
         for(int i=1;i<=100;i++) BRProperty.registeredRate(i, String.valueOf(i));
         for(int i=1;i<=100;i++) NeutronActivatorPartProperty.registeredPart(i*200, String.valueOf(i*200));
         for(int i=1;i<=10;i++) NuclearProperties.registeredminTemp(i, String.valueOf(i));
+        for(int i=1;i<=10;i++) PAProperty.registeredTier(i, String.valueOf(i));
         PAPartProperty.registeredPart(11234,"一级 + 1234");
 
         PACasingTierProperty.registerPACasingTier(1, "1");

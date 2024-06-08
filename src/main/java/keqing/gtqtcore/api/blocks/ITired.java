@@ -9,6 +9,6 @@ public interface ITired extends IStringSerializable {
     }
 
     default Object getTire(){
-        return this.getName();
+        return 0;
     }
 }
