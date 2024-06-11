@@ -498,9 +498,10 @@ public class KeQingNET {
                 .input(circuit, Tier.HV, 8)
                 .input(ELECTRIC_MOTOR_MV,16)
                 .input(ELECTRIC_PUMP_MV,16)
-                .input(gear,Aluminium,8)
-                .input(wireFine, Aluminium, 8)
-                .input(foil, Aluminium, 8)
+                .input(gear,Aluminium,64)
+                .input(wireFine, Gold, 64)
+                .input(wireFine, Gold, 64)
+                .input(foil, Aluminium, 64)
                 .fluidInputs(Bps.getFluid(4000))
                 .output(ELECTRIC_ARC_FURNACE)
                 .duration(400).EUt(120).buildAndRegister();

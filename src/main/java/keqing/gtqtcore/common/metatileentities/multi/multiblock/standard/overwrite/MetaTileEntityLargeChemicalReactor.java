@@ -237,7 +237,7 @@ public class MetaTileEntityLargeChemicalReactor extends GTQTRecipeMapMultiblockO
         }
 
         public void setMaxProgress(int maxProgress) {
-            this.maxProgressTime = maxProgress / (2 * coilLevel);
+            this.maxProgressTime = maxProgress / (coilLevel);
             this.metaTileEntity.markDirty();
         }
 

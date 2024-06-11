@@ -47,6 +47,7 @@ public class HigherDegreeMaterials {
                 .ore()
                 .dust().fluid()
                 .color(0x8B8B00)
+                .flags(DISABLE_DECOMPOSITION)
                 .components(Gold, 1, Copper, 1,Sulfur,2,Oxygen,3)
                 .build();
         //含金多金属矿石
@@ -54,6 +55,7 @@ public class HigherDegreeMaterials {
                 .ore()
                 .dust().fluid()
                 .color(0xCDCD00)
+                .flags(DISABLE_DECOMPOSITION)
                 .components(Gold, 1, Copper, 1,Iron,1,Sulfur,4,Oxygen,1)
                 .build();
 

@@ -136,11 +136,9 @@ public class MetaTileEntityMSF extends GTQTRecipeMapMultiblockController impleme
         public int getParallelLimit() {
             if(getStatue()) {
                 if (isDistilleryMode()) {
-                    return number;
-                } else if (isDistillationMode()) {
-                    return number*2;
+                    return number*3;
                 }
-                else return number*3;
+                return number*2;
             }
             return number;
         }
@@ -148,12 +146,7 @@ public class MetaTileEntityMSF extends GTQTRecipeMapMultiblockController impleme
         public void setMaxProgress(int maxProgress)
         {
             if(getStatue()) {
-                if (isDistilleryMode()) {
-                    this.maxProgressTime = maxProgress /(number);
-                } else if (isDistillationMode()) {
-                    this.maxProgressTime = maxProgress /(number*2);
-                }
-                else maxProgressTime = maxProgress /(number * 3);
+                maxProgressTime = maxProgress /(number*2);
             }
             else this.maxProgressTime = maxProgress/number;
         }

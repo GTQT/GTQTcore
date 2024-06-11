@@ -254,7 +254,7 @@ public class GTQTcoreRecipeMaps {
                 .setSlotOverlay(false, false, true, GuiTextures.CIRCUIT_OVERLAY)
                 .setSound(GTSoundEvents.ASSEMBLER);
 
-        STEPPER_RECIPES = new RecipeMap<>("stepper_recipes", 2, 1, 1, 0, new LASERComputationRecipeBuilder(), false)
+        STEPPER_RECIPES = new RecipeMap<>("stepper_recipes", 3, 3, 3, 3, new LASERComputationRecipeBuilder(), false)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL)
                 .setSlotOverlay(false, false, false, GuiTextures.CIRCUIT_OVERLAY)
                 .setSlotOverlay(false, false, true, GuiTextures.CIRCUIT_OVERLAY)

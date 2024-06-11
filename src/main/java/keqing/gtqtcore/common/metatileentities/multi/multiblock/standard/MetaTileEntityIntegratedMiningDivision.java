@@ -251,12 +251,7 @@ public class MetaTileEntityIntegratedMiningDivision extends GTQTRecipeMapMultibl
         public int getParallelLimit() {
             return ParallelNum;
         }
-        @Override
-        public void setMaxProgress(int maxProgress)
-        {
-            if(ParallelNum==0)this.maxProgressTime=maxProgress;
-            else this.maxProgressTime = maxProgress/ParallelNum;
-        }
+
         @Override
         protected void modifyOverclockPost(int[] resultOverclock,  IRecipePropertyStorage storage) {
             super.modifyOverclockPost(resultOverclock, storage);

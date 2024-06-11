@@ -280,7 +280,7 @@ public class MetaTileEntityKQCC extends MultiblockWithDisplayBase implements IOp
             FluidStack STACKB = coolantHandler.drain(PCBCoolant.getFluid(Integer.MAX_VALUE), false);
             int liquidPCBAmount = STACKB == null ? 0 : STACKB.amount;
 
-            FluidStack STACKC = coolantHandler.drain(Nitrogen.getFluid(Integer.MAX_VALUE), false);
+            FluidStack STACKC = coolantHandler.drain(LiquidNitrogen.getFluid(Integer.MAX_VALUE), false);
             int liquidNITAmount = STACKC == null ? 0 : STACKC.amount;
             textList.add(new TextComponentTranslation("gtqtcore.multiblock.kqcc.water.amount", TextFormattingUtil.formatNumbers((liquidWaterAmount)),TextFormattingUtil.formatNumbers((liquidPCBAmount)),TextFormattingUtil.formatNumbers((liquidNITAmount))));
         }

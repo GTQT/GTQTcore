@@ -132,7 +132,7 @@ public class MetaTileEntityElectricArcFurnace extends GTQTRecipeMapMultiblockCon
         super.update();
         IMultipleTankHandler inputTank = getInputFluidInventory();
 
-        ParallelLim = (int) Math.pow(2, Math.min(eleTier*2,tubeTier));
+        ParallelLim = (int) Math.pow(2, eleTier);
 
         P = (int) ((this.energyContainer.getEnergyStored() + energyContainer.getInputPerSec()) / getMinVa());
         ParallelNum = Math.min(P, ParallelLim);

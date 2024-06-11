@@ -120,7 +120,7 @@ public class RareEarthProcessing {
                 .EUt(VA[EV])
                 .duration(600)
                 .buildAndRegister();
-
+/*
         //  High Purity Rare Earth Chlorides Solution -> Neodymium Oxide
         DISTILLERY_RECIPES.recipeBuilder()
                 .fluidInputs(HighPurityRareEarthChloridesSolution.getFluid(1000))
@@ -150,7 +150,7 @@ public class RareEarthProcessing {
                 .duration(200)
                 .EUt(VA[EV])
                 .buildAndRegister();
-
+*/
         //  Low Purity Rare Earth Chlorides Slag + Cobaltite -> Yttrium Oxide, Lanthanum Oxide
         BURNER_REACTOR_RECIPES.recipeBuilder()
                 .input(dust, LowPurityRareEarthChloridesSlag, 4)
@@ -199,6 +199,7 @@ public class RareEarthProcessing {
                 .input(crushed,Bastnasite,1)
                 .fluidOutputs(Futanlanshixituzhuo.getFluid(400))
                 .output(dust,SiliconDioxide)
+                .circuitMeta(1)
                 .duration(600).EUt(120).buildAndRegister();
 
         DIGESTER_RECIPES.recipeBuilder()
@@ -206,6 +207,7 @@ public class RareEarthProcessing {
                 .input(dust,Bastnasite,2)
                 .fluidOutputs(Futanlanshixituzhuo.getFluid(400))
                 .output(dust,SiliconDioxide)
+                .circuitMeta(2)
                 .duration(600).EUt(120).buildAndRegister();
 
         DIGESTER_RECIPES.recipeBuilder()
@@ -214,6 +216,7 @@ public class RareEarthProcessing {
                 .input(dust,RareEarth,1)
                 .fluidOutputs(Futanlanshixituzhuo.getFluid(1200))
                 .output(dust,SiliconDioxide)
+                .circuitMeta(1)
                 .duration(600).EUt(120).buildAndRegister();
 
         DIGESTER_RECIPES.recipeBuilder()
@@ -222,6 +225,7 @@ public class RareEarthProcessing {
                 .input(dust,RareEarth,1)
                 .fluidOutputs(Futanlanshixituzhuo.getFluid(1200))
                 .output(dust,SiliconDioxide)
+                .circuitMeta(2)
                 .duration(600).EUt(120).buildAndRegister();
 
         CRACKING_RECIPES.recipeBuilder()
@@ -329,6 +333,7 @@ public class RareEarthProcessing {
                 .input(crushed,Monazite,1)
                 .fluidOutputs(Dujushixitu.getFluid(400))
                 .output(dust,SiliconDioxide)
+                .circuitMeta(1)
                 .duration(600).EUt(120).buildAndRegister();
 
         DIGESTER_RECIPES.recipeBuilder()
@@ -336,6 +341,7 @@ public class RareEarthProcessing {
                 .input(dust,Monazite,2)
                 .fluidOutputs(Dujushixitu.getFluid(400))
                 .output(dust,SiliconDioxide)
+                .circuitMeta(2)
                 .duration(600).EUt(120).buildAndRegister();
 
         DIGESTER_RECIPES.recipeBuilder()
@@ -344,6 +350,7 @@ public class RareEarthProcessing {
                 .input(dust,RareEarth,1)
                 .fluidOutputs(Dujushixitu.getFluid(1200))
                 .output(dust,SiliconDioxide)
+                .circuitMeta(1)
                 .duration(600).EUt(120).buildAndRegister();
 
         DIGESTER_RECIPES.recipeBuilder()
@@ -352,6 +359,7 @@ public class RareEarthProcessing {
                 .input(dust,RareEarth,1)
                 .fluidOutputs(Dujushixitu.getFluid(1200))
                 .output(dust,SiliconDioxide)
+                .circuitMeta(2)
                 .duration(600).EUt(120).buildAndRegister();
 
         DISSOLUTION_TANK_RECIPES.recipeBuilder()

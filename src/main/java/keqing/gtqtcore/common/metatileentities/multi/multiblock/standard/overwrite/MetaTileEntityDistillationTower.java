@@ -122,7 +122,7 @@ public class MetaTileEntityDistillationTower extends GTQTRecipeMapMultiblockOver
             super(tileEntity);
         }
         public void setMaxProgress(int maxProgress) {
-            this.maxProgressTime = maxProgress*(100-tier*5)/100;
+            this.maxProgressTime = maxProgress*(100-tier*2)/100;
 
         }
         public long getMaxVoltage() {

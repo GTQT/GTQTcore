@@ -2,12 +2,19 @@ package keqing.gtqtcore.loaders.recipes.gcys;
 
 import gregtech.api.recipes.GTRecipeHandler;
 import gregtech.api.recipes.ingredients.IntCircuitIngredient;
+import gregtech.api.unification.OreDictUnifier;
+import gregtech.api.unification.ore.OrePrefix;
+import gregtech.api.unification.stack.UnificationEntry;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidStack;
 
+import static gregicality.multiblocks.api.unification.GCYMMaterials.WatertightSteel;
 import static gregtech.api.GTValues.LV;
 import static gregtech.api.GTValues.VA;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.dust;
+import static gregtech.api.unification.ore.OrePrefix.stick;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.Hematite;
 
 public class RecipeConflicts {
@@ -47,6 +54,7 @@ public class RecipeConflicts {
                 .duration(72).EUt(VA[LV]).buildAndRegister();
 
         // Conflict between Salt Electrolysis and Sodium Chlorate
+        GTRecipeHandler.removeRecipesByInputs(ELECTROLYZER_RECIPES,  OreDictUnifier.get(dust, Salt,2));
         ELECTROLYZER_RECIPES.recipeBuilder()
                 .input(dust, Salt, 2)
                 .notConsumable(new IntCircuitIngredient(1))

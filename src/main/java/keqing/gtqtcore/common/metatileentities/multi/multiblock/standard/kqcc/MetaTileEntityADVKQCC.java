@@ -124,7 +124,7 @@ public class MetaTileEntityADVKQCC extends MultiblockWithDisplayBase implements 
 
         if(HOT>5000) {
 
-            if(thresholdPercentage!=1) {
+            if(thresholdPercentage!=2) {
                 if (COLD_STACK.isFluidStackIdentical(coolantHandler.drain(COLD_STACK, false))) {
                     coolantHandler.drain(COLD_STACK, true);
                     if(HOT>770) HOT = HOT - 770*4;
@@ -257,7 +257,7 @@ public class MetaTileEntityADVKQCC extends MultiblockWithDisplayBase implements 
             FluidStack STACKB = coolantHandler.drain(PCBCoolant.getFluid(Integer.MAX_VALUE), false);
             int liquidPCBAmount = STACKB == null ? 0 : STACKB.amount;
 
-            FluidStack STACKC = coolantHandler.drain(Nitrogen.getFluid(Integer.MAX_VALUE), false);
+            FluidStack STACKC = coolantHandler.drain(LiquidNitrogen.getFluid(Integer.MAX_VALUE), false);
             int liquidNITAmount = STACKC == null ? 0 : STACKC.amount;
             textList.add(new TextComponentTranslation("gtqtcore.multiblock.kqcc.water.amount", TextFormattingUtil.formatNumbers((liquidWaterAmount)),TextFormattingUtil.formatNumbers((liquidPCBAmount)),TextFormattingUtil.formatNumbers((liquidNITAmount))));
         }
@@ -270,8 +270,8 @@ public class MetaTileEntityADVKQCC extends MultiblockWithDisplayBase implements 
 
     int CWTT()
     {
-        if((RAM1)>=(GPU1)&&(RAM1)>=(CPU1)) return (GPU1+CPU1)*8*level;
-        else return (RAM1)*level*8;
+        if((RAM1)>=(GPU1)&&(RAM1)>=(CPU1)) return (GPU1+CPU1)*2*level;
+        else return (RAM1)*level*2;
     };
     int HEAT()
     {
@@ -281,8 +281,8 @@ public class MetaTileEntityADVKQCC extends MultiblockWithDisplayBase implements 
     {
         if(isWorkingEnabled) {
 
-            if(thresholdPercentage==2) HOT=HOT+ (float) HEAT() /8;
-            if(thresholdPercentage==1)  HOT=HOT+ (float) HEAT() /16;
+            if(thresholdPercentage==2) HOT=HOT+ (float) HEAT() /16;
+            if(thresholdPercentage==1)  HOT=HOT+ (float) HEAT() /32;
             if(HOT<30000) return CWTT()*(thresholdPercentage);
             else return CWTT()*thresholdPercentage;
         }
@@ -306,7 +306,7 @@ public class MetaTileEntityADVKQCC extends MultiblockWithDisplayBase implements 
     @Override
     public int getMaxCWUt(Collection<IOpticalComputationProvider> seen) {
         seen.add(this);
-        return (GPU1+CPU1)*thresholdPercentage*level*8;
+        return (GPU1+CPU1)*thresholdPercentage*level*2;
     }
 
     @Override
@@ -361,7 +361,7 @@ public class MetaTileEntityADVKQCC extends MultiblockWithDisplayBase implements 
 
     @Override
     public double getFillPercentage(int index) {
-        return index == 0 ? 1.0 * returncwt() / ((GPU1+CPU1)*level*16) :
+        return index == 0 ? 1.0 * returncwt() / ((GPU1+CPU1)*level*4) :
                 Math.min(1.0, HOT / 50000);
     }
 
@@ -375,7 +375,7 @@ public class MetaTileEntityADVKQCC extends MultiblockWithDisplayBase implements 
         if (index == 0) {
             ITextComponent cwutInfo = TextComponentUtil.stringWithColor(
                     TextFormatting.AQUA,
-                    returncwt()+ " / " + ((GPU1*level)+(CPU1*level))*16 + " CWU/t");
+                    returncwt()+ " / " + ((GPU1*level)+(CPU1*level))*4 + " CWU/t");
             hoverList.add(TextComponentUtil.translationWithColor(
                     TextFormatting.GRAY,
                     "gregtech.multiblock.hpca.computation",

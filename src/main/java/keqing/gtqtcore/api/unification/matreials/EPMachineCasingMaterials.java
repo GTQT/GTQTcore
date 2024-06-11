@@ -306,7 +306,7 @@ public class EPMachineCasingMaterials {
                 .fluid()
                 .color(0xc72fcc)
                 .iconSet(METALLIC)
-                .blast(5300, GasTier.HIGHER)
+                .blast(4400, GasTier.HIGHER)
                 .components(Titanium, 5, Molybdenum, 5, Vanadium, 2, Chrome, 3, Aluminium, 1)
                 .flags(GENERATE_PLATE, GENERATE_ROD, GENERATE_RING, GENERATE_BOLT_SCREW, GENERATE_GEAR, GENERATE_ROTOR,
                         GENERATE_FRAME,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROUND,GENERATE_SMALL_GEAR
@@ -366,7 +366,7 @@ public class EPMachineCasingMaterials {
                 .fluid()
                 .color(0x881357)
                 .iconSet(METALLIC)
-                .blast(4960, GasTier.HIGHER)
+                .blast(4400, GasTier.HIGHER)
                 .components(StainlessSteel, 8, NickelZincFerrite, 4, Kanthal, 4, Molybdenum, 4)
                 .flags(GENERATE_PLATE, GENERATE_ROD, GENERATE_RING, GENERATE_BOLT_SCREW, GENERATE_GEAR, GENERATE_ROTOR,
                         GENERATE_FRAME,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROUND,GENERATE_SMALL_GEAR

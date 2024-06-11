@@ -33,6 +33,10 @@ public class LASERComputationRecipeBuilder extends RecipeBuilder<LASERComputatio
             this.CWUt(((Number) value).intValue());
             return true;
         }
+        if (key.equals(LASERNetProperty.KEY)) {
+            this.Laser(((Number) value).intValue());
+            return true;
+        }
         return super.applyProperty(key, value);
     }
 
