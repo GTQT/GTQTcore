@@ -124,7 +124,7 @@ public class MetaTileEntityStepper extends MultiMapMultiblockController implemen
     }
     @Override
     public boolean checkRecipe(@Nonnull Recipe recipe, boolean consumeIfSuccess) {
-        if(recipe.getProperty(LASERNetProperty.getInstance(), 0)<=laser_tier)
+        if(recipe.getProperty(LASERNetProperty.getInstance(), 0)<=laser_tier&&super.checkRecipe(recipe, consumeIfSuccess))
         {
             if (LaserKind>laser_tier) {
                 if (LaserAmount - clean_tier * (LaserKind - laser_tier) * 1000 > 0)
@@ -135,7 +135,7 @@ public class MetaTileEntityStepper extends MultiMapMultiblockController implemen
                         LaserAmount-=clean_tier*LaserKind*1000;
                 else return false;
 
-            return super.checkRecipe(recipe, consumeIfSuccess);
+            return true;
         }
         return false;
     }

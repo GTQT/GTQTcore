@@ -90,6 +90,7 @@ metaitem.circuit.supracausal_computer.tooltip=超越时间之影/n§fOpV级电�
 metaitem.circuit.supracausal_mainframe.name=超因果星系级电脑主机群复合体
 metaitem.circuit.supracausal_mainframe.tooltip=万物归一者，原初的神迹/n§fMAX级电路
 
+metaitem.time_bottle.name=时间之瓶
 #  Components
 metaitem.component.optical_smd.transistor.name=光学晶体管
 metaitem.component.optical_smd.transistor.tooltip=光电子晶体管

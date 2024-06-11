@@ -1,5 +1,6 @@
 package keqing.gtqtcore.common.items.behaviors;
 
+import gregtech.api.GTValues;
 import gregtech.api.capability.GregtechCapabilities;
 import gregtech.api.capability.GregtechTileCapabilities;
 import gregtech.api.capability.IEnergyContainer;
@@ -13,6 +14,8 @@ import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.util.GTUtility;
 import keqing.gtqtcore.common.items.GTQTMetaItems;
+import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -35,6 +38,7 @@ public class TimeBottleBehavior implements IItemBehaviour {
     public TimeBottleBehavior(){}
 
     private int time;
+    private int successLimit=16000;
     public void onUpdate(ItemStack itemStack, Entity entity) {
         if (itemStack.hasTagCompound()) {
             NBTTagCompound compound = itemStack.getTagCompound();
@@ -64,7 +68,8 @@ public class TimeBottleBehavior implements IItemBehaviour {
             lines.add(I18n.format("缓存：%s小时 %s分钟 %s秒", hours, minutes, seconds));
             lines.add(I18n.format("时间缓存：%s tick", compound.getInteger("storedTime")));
             lines.add(I18n.format("加速时间：%s tick", getRapid(compound.getInteger("storedTime"))));
-            lines.add(I18n.format("右键无损加速耗电机器，也可加速熔炉，暂不支持随机刻加速"));
+            lines.add(I18n.format("右键无损加速耗电机器，也可加速熔炉"));
+            lines.add(I18n.format("潜行右键加速随机刻（大树这种）"));
         }
     }
     public int getRapid(int n)
@@ -97,34 +102,54 @@ public class TimeBottleBehavior implements IItemBehaviour {
 
         NBTTagCompound compound = stack.getTagCompound();
         if(time>0) {
-            if (GTUtility.getMetaTileEntity(world, pos) instanceof MetaTileEntity) {
-                long cache = 0;
-                MetaTileEntity mte = (MetaTileEntity) GTUtility.getMetaTileEntity(world, pos);
-                for (EnumFacing facing : EnumFacing.VALUES) {
-                    if (mte.getCapability(GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER, facing) instanceof IEnergyContainer) {
-                        IEnergyContainer container = mte.getCapability(GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER, facing);
-                        cache = container.getEnergyStored();
+            if (!player.isSneaking()) {
+                if (GTUtility.getMetaTileEntity(world, pos) instanceof MetaTileEntity) {
+                    long cache = 0;
+                    MetaTileEntity mte = (MetaTileEntity) GTUtility.getMetaTileEntity(world, pos);
+                    for (EnumFacing facing : EnumFacing.VALUES) {
+                        if (mte.getCapability(GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER, facing) instanceof IEnergyContainer) {
+                            IEnergyContainer container = mte.getCapability(GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER, facing);
+                            cache = container.getEnergyStored();
+                        }
                     }
-                }
-                TileEntity te = world.getTileEntity(pos);
-                if (te instanceof ITickable tickable) {
-                    for (int i = 0; i < getRapid(compound.getInteger("storedTime")); i++) {
-                        tickable.update();
-                        addEnergy(world, pos, cache);
+                    TileEntity te = world.getTileEntity(pos);
+                    if (te instanceof ITickable tickable) {
+                        for (int i = 0; i < getRapid(compound.getInteger("storedTime")); i++) {
+                            tickable.update();
+                            addEnergy(world, pos, cache);
+                        }
+                        time = compound.getInteger("storedTime");
+                        time -= getRapid(compound.getInteger("storedTime"));
+                        compound.setInteger("storedTime", time);
                     }
-                    time -= getRapid(compound.getInteger("storedTime"));
-                }
-            } else {
-                TileEntity te = world.getTileEntity(pos);
-                if (te instanceof ITickable tickable) {
-                    for (int i = 0; i < getRapid(compound.getInteger("storedTime")); i++) {
-                        tickable.update();
+                } else {
+                    TileEntity te = world.getTileEntity(pos);
+                    if (te instanceof ITickable tickable) {
+                        for (int i = 0; i < getRapid(compound.getInteger("storedTime")); i++) {
+                            tickable.update();
+                        }
+                        time = compound.getInteger("storedTime");
+                        time -= getRapid(compound.getInteger("storedTime"));
+                        compound.setInteger("storedTime", time);
                     }
-                    time -= getRapid(compound.getInteger("storedTime"));
                 }
             }
+            else handleRandomTickMode(world,pos,compound);
         }
         return EnumActionResult.SUCCESS;
+    }
+    private boolean handleRandomTickMode(World world, BlockPos pos,NBTTagCompound compound) {
+        time = compound.getInteger("storedTime");
+        if(time<1024)return false;
+        time -= 1024;
+        compound.setInteger("storedTime", time);
+
+        IBlockState state = world.getBlockState(pos);
+        Block block = state.getBlock();
+        if (block.getTickRandomly()) {
+            block.randomTick(world, pos, state, world.rand);
+        }
+        return true;
     }
 
 }
