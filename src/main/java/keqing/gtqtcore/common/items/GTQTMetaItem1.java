@@ -19,6 +19,7 @@ import keqing.gtqtcore.common.block.blocks.GTQTCrops;
 import keqing.gtqtcore.common.items.behaviors.IntBcircuitBehavior;
 import keqing.gtqtcore.common.items.behaviors.MillBallBehavior;
 import keqing.gtqtcore.common.items.behaviors.StructureWriteBehavior;
+import keqing.gtqtcore.common.items.behaviors.TimeBottleBehavior;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
@@ -162,7 +163,7 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         //快乐模具
         MOLD_GAS=this.addItem(300, "mold.gas").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         MOLD_MOTOR=this.addItem(301, "mold.motor").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
-
+        TIME_BOTTLE = this.addItem(97, "time_bottle").setMaxStackSize(1).addComponents(new TimeBottleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         //磨球
         GRINDBALL_SOAPSTONE = this.addItem(391, "mill.grindball_soapstone").setMaxStackSize(1).addComponents(new MillBallBehavior()).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         GRINDBALL_ALUMINIUM = this.addItem(392, "mill.grindball_aluminium").setMaxStackSize(1).addComponents(new MillBallBehavior()).setCreativeTabs(CommonProxy.GTQTCore_TAB);
