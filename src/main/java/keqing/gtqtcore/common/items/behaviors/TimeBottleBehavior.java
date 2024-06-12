@@ -38,7 +38,7 @@ public class TimeBottleBehavior implements IItemBehaviour {
     public TimeBottleBehavior(){}
 
     private int time;
-    private int successLimit=16000;
+
     public void onUpdate(ItemStack itemStack, Entity entity) {
         if (itemStack.hasTagCompound()) {
             NBTTagCompound compound = itemStack.getTagCompound();
@@ -68,15 +68,15 @@ public class TimeBottleBehavior implements IItemBehaviour {
             lines.add(I18n.format("缓存：%s小时 %s分钟 %s秒", hours, minutes, seconds));
             lines.add(I18n.format("时间缓存：%s tick", compound.getInteger("storedTime")));
             lines.add(I18n.format("加速时间：%s tick", getRapid(compound.getInteger("storedTime"))));
-            lines.add(I18n.format("右键无损加速耗电机器，也可加速熔炉"));
-            lines.add(I18n.format("潜行右键加速随机刻（大树这种）"));
+            lines.add(I18n.format("右键无损加速耗电机器（不耗电），也可加速熔炉"));
+            lines.add(I18n.format("潜行右键加速随机刻（作物，树苗），固定消耗20秒"));
         }
     }
     public int getRapid(int n)
     {
         if(n<1200)return n;
         if(n<4800)return 1200;
-        return n/4;
+        return 4800;
     }
 
     public void addEnergy(World world, BlockPos pos,long cache)
@@ -140,14 +140,13 @@ public class TimeBottleBehavior implements IItemBehaviour {
     }
     private boolean handleRandomTickMode(World world, BlockPos pos,NBTTagCompound compound) {
         time = compound.getInteger("storedTime");
-        if(time<1024)return false;
-        time -= 1024;
+        if(time<400)return false;
+        time -= 400;
         compound.setInteger("storedTime", time);
-
         IBlockState state = world.getBlockState(pos);
         Block block = state.getBlock();
         if (block.getTickRandomly()) {
-            block.randomTick(world, pos, state, world.rand);
+            for(int i=0;i<600;i++) block.randomTick(world, pos.toImmutable(), state, world.rand);
         }
         return true;
     }
