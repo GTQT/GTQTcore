@@ -100,26 +100,6 @@ public class MetaTileEntityElectrobath extends GTQTRecipeMapMultiblockOverwrite 
         return (int)(Math.min(this.energyContainer.getEnergyCapacity()/32,VA[tier]));
 
     }
-    @Override
-    @Nonnull
-    protected Widget getFlexButton(int x, int y, int width, int height) {
-        WidgetGroup group = new WidgetGroup(x, y, width, height);
-        group.addWidget(new ClickButtonWidget(0, 0, 9, 18, "", this::decrementThreshold)
-                .setButtonTexture(GuiTextures.BUTTON_THROTTLE_MINUS)
-                .setTooltipText("gtqtcore.multiblock.ele.threshold_decrement"));
-        group.addWidget(new ClickButtonWidget(9, 0, 9, 18, "", this::incrementThreshold)
-                .setButtonTexture(GuiTextures.BUTTON_THROTTLE_PLUS)
-                .setTooltipText("gtqtcore.multiblock.ele.threshold_increment"));
-        return group;
-    }
-
-    private void incrementThreshold(Widget.ClickData clickData) {
-            this.eu = MathHelper.clamp(eu + 1, 1, 20);
-    }
-
-    private void decrementThreshold(Widget.ClickData clickData) {
-            this.eu = MathHelper.clamp(eu - 1, 1, 20);
-    }
 
     public MetaTileEntityElectrobath(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.ELECTROBATH);
