@@ -127,6 +127,25 @@ public class EPMaterialPropertyAddition {
         Rubidium.setProperty(PropertyKey.ORE, new OreProperty(1, 1, false));
         Thallium.setProperty(PropertyKey.ORE, new OreProperty(1, 1, false));
         Californium.setProperty(PropertyKey.ORE, new OreProperty(1, 1, false));
+
+        Americium.setProperty(PropertyKey.ORE, new OreProperty(1, 1, false));
+        Chrome.setProperty(PropertyKey.ORE, new OreProperty(1, 1, false));
+        Iridium.setProperty(PropertyKey.ORE, new OreProperty(1, 1, false));
+        Lutetium.setProperty(PropertyKey.ORE, new OreProperty(1, 1, false));
+        Manganese.setProperty(PropertyKey.ORE, new OreProperty(1, 1, false));
+        Niobium.setProperty(PropertyKey.ORE, new OreProperty(1, 1, false));
+        Osmium.setProperty(PropertyKey.ORE, new OreProperty(1, 1, false));
+        Titanium.setProperty(PropertyKey.ORE, new OreProperty(1, 1, false));
+        Tungsten.setProperty(PropertyKey.ORE, new OreProperty(1, 1, false));
+        Uranium235.setProperty(PropertyKey.ORE, new OreProperty(1, 1, false));
+        NaquadahEnriched.setProperty(PropertyKey.ORE, new OreProperty(1, 1, false));
+        Naquadria.setProperty(PropertyKey.ORE, new OreProperty(1, 1, false));
+        Neutronium.setProperty(PropertyKey.ORE, new OreProperty(1, 1, false));
+        Trinium.setProperty(PropertyKey.ORE, new OreProperty(1, 1, false));
+        Electrum.setProperty(PropertyKey.ORE, new OreProperty(1, 1, false));
+        Rutile.setProperty(PropertyKey.ORE, new OreProperty(1, 1, false));
+        NetherStar.setProperty(PropertyKey.ORE, new OreProperty(1, 1, false));
+        Gallium.setProperty(PropertyKey.ORE, new OreProperty(1, 1, false));
         // Ingots
         Germanium.setProperty(PropertyKey.INGOT, new IngotProperty());
         Rhenium.setProperty(PropertyKey.INGOT, new IngotProperty());

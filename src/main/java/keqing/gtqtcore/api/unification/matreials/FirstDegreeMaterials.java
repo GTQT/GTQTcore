@@ -366,7 +366,7 @@ public class FirstDegreeMaterials {
 
         //纳米钛酸钡
         GTQTMaterials.NanometerBariumTitanate = new Material.Builder(getMaterialsId(), gregtechId("nanometer_barium_titanate"))
-                .ingot().dust().ore()
+                .ingot()
                 .color(0x8B6914).iconSet(METALLIC)
                 .components(Barium, 1, Titanium, 1, Oxygen, 3)
                 .flags(DISABLE_DECOMPOSITION)

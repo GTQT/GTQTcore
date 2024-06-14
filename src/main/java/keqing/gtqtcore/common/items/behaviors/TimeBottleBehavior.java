@@ -65,11 +65,11 @@ public class TimeBottleBehavior implements IItemBehaviour {
             int minutes = (storedSeconds % 3600) / 60;
             int seconds = storedSeconds % 60;
 
-            lines.add(I18n.format("缓存：%s小时 %s分钟 %s秒", hours, minutes, seconds));
+            lines.add(I18n.format("缓存：%s 小时 /%s 分钟/ %s 秒", hours, minutes, seconds));
             lines.add(I18n.format("时间缓存：%s tick", compound.getInteger("storedTime")));
             lines.add(I18n.format("加速时间：%s tick", getRapid(compound.getInteger("storedTime"))));
             lines.add(I18n.format("右键无损加速耗电机器（不耗电），也可加速熔炉"));
-            lines.add(I18n.format("潜行右键加速随机刻（作物，树苗），固定消耗20秒"));
+            lines.add(I18n.format("潜行右键加速随机刻（作物，树苗等需要光照条件），固定消耗60秒"));
         }
     }
     public int getRapid(int n)
@@ -140,8 +140,8 @@ public class TimeBottleBehavior implements IItemBehaviour {
     }
     private boolean handleRandomTickMode(World world, BlockPos pos,NBTTagCompound compound) {
         time = compound.getInteger("storedTime");
-        if(time<400)return false;
-        time -= 400;
+        if(time<1200)return false;
+        time -= 1200;
         compound.setInteger("storedTime", time);
         IBlockState state = world.getBlockState(pos);
         Block block = state.getBlock();

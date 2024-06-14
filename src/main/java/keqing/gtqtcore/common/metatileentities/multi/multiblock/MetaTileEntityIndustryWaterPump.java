@@ -72,6 +72,8 @@ public class MetaTileEntityIndustryWaterPump extends MultiblockControllerBase im
         }
         if(this.getWorld().provider.getDimension()==-1)
             waterTank.fill(Materials.Lava.getFluid(10), true);
+        if(this.getWorld().provider.getDimension()>=2)
+            waterTank.fill(Materials.Water.getFluid(10), true);
     }
 
     private int getAmount() {

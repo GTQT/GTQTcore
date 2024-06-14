@@ -285,6 +285,10 @@ public class MetaTileEntityElectricArcFurnace extends GTQTRecipeMapMultiblockCon
                 throw new IllegalArgumentException("MetaTileEntity must be instanceof IHeatingCoil");
             }
         }
+        public long getMaxVoltage() {
+            if(Arc())return VA[HV];
+            return super.getMaxVoltage();
+        }
         @Override
         public int getParallelLimit() {
             if(ArcBlast())return 1;

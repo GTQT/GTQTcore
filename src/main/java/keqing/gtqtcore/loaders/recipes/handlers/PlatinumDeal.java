@@ -33,9 +33,9 @@ public class PlatinumDeal {
 
         //rh
         CHEMICAL_RECIPES.recipeBuilder()
-                .input(dust,Zinc,3)
+                .input(dust,Zinc,1)
                 .fluidInputs(RhodiumSulfate.getFluid(1000))
-                .output(dust,ZincSulfate, 3)
+                .output(dust,ZincSulfate, 6)
                 .output(dust,RhodiumRaw,2)
                 .duration(20)
                 .EUt(VA[HV])
