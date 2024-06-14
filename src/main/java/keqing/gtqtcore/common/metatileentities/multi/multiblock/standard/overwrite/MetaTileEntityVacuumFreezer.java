@@ -243,7 +243,7 @@ public class MetaTileEntityVacuumFreezer extends GTQTRecipeMapMultiblockOverwrit
                 0);
 
         this.writeCustomData(GTQTValue.UPDATE_TIER24,buf -> buf.writeInt(this.tier));
-        ParallelLim=Math.min((int)Math.pow(2, this.tier),128);
+        ParallelLim=Math.min((int)Math.pow(2, this.tier),32);
         ParallelNum=ParallelLim;
     }
     protected IBlockState getCasingState() {

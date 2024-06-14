@@ -187,7 +187,7 @@ public class MetaTileEntityPyrolyseOven extends GTQTRecipeMapMultiblockOverwrite
                 0);
 
         this.writeCustomData(GTQTValue.UPDATE_TIER23,buf -> buf.writeInt(this.tier));
-        ParallelLim=Math.min((int)Math.pow(2, this.tier),128);
+        ParallelLim=Math.min((int)Math.pow(2, this.tier),32);
         ParallelNum=ParallelLim;
     }
 

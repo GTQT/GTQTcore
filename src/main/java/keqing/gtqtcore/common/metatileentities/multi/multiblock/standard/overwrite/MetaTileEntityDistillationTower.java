@@ -258,7 +258,7 @@ public class MetaTileEntityDistillationTower extends GTQTRecipeMapMultiblockOver
         this.tier = Math.min(this.casingTier,this.tubeTier);
 
         this.writeCustomData(GTQTValue.UPDATE_TIER16,buf -> buf.writeInt(this.tier));
-        ParallelLim=Math.min((int)Math.pow(2, this.tier),128);
+        ParallelLim=Math.min((int)Math.pow(2, this.tier),32);
         ParallelNum=ParallelLim;
     }
 

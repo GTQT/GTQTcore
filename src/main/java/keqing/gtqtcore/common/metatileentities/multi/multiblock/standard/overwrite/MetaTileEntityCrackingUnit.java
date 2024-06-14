@@ -175,7 +175,7 @@ public class MetaTileEntityCrackingUnit extends GTQTRecipeMapMultiblockOverwrite
                 0);
 
         this.writeCustomData(GTQTValue.UPDATE_TIER15,buf -> buf.writeInt(this.casingTier));
-        ParallelLim=Math.min((int)Math.pow(2, this.casingTier),128);
+        ParallelLim=Math.min((int)Math.pow(2, this.casingTier),32);
         ParallelNum=ParallelLim;
     }
 
