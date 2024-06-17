@@ -349,8 +349,8 @@ public class CPULine {
                     .Laser(tier)
                     .input(SILICON_WAFER)
                     .output(item2)
-                    .CWUt(VA[tier])
-                    .duration(1000*tier*EU)
+                    .CWUt((int) Math.pow(8,tier))
+                    .duration(250*tier*EU)
                     .buildAndRegister();
         }
         if(tier<=2) {
@@ -358,8 +358,8 @@ public class CPULine {
                     .Laser(tier)
                     .input(PHOSPHORUS_WAFER)
                     .output(item2, (int)Math.pow(2,2-tier))
-                    .CWUt(VA[tier])
-                    .duration(1000*tier*EU)
+                    .CWUt((int) Math.pow(8,tier+1))
+                    .duration(500*tier*EU)
                     .buildAndRegister();
         }
         if(tier<=3) {
@@ -367,7 +367,7 @@ public class CPULine {
                     .Laser(tier)
                     .input(NAQUADAH_WAFER)
                     .output(item2, (int)Math.pow(2,3-tier))
-                    .CWUt(VA[tier])
+                    .CWUt((int) Math.pow(8,tier+2))
                     .duration(1000*tier*EU)
                     .buildAndRegister();
         }
@@ -376,8 +376,8 @@ public class CPULine {
                     .Laser(tier)
                     .input(NEUTRONIUM_WAFER)
                     .output(item2, (int)Math.pow(2,4-tier))
-                    .CWUt(VA[tier])
-                    .duration(1000*tier*EU)
+                    .CWUt((int) Math.pow(8,tier+3))
+                    .duration(2000*tier*EU)
                     .buildAndRegister();
         }
     }

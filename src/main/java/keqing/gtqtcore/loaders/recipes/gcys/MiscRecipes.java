@@ -33,59 +33,6 @@ public class MiscRecipes {
 
     public static void init() {
         metaBlockRecipes();
-
-        //  Advanced Piston (Vanilla) recipes
-        ModHandler.addShapedRecipe("piston_tungsten_steel", new ItemStack(Blocks.PISTON, 16),
-                "WWW", "SIS", "SDS",
-                'W', "plankWood",
-                'S', "stoneCobble",
-                'I', new UnificationEntry(ingot, TungstenSteel),
-                'D', new UnificationEntry(dust, Redstone));
-
-        ASSEMBLER_RECIPES.recipeBuilder()
-                .input(plate, TungstenSteel)
-                .input("plankWood", 3)
-                .input("stoneCobble", 4)
-                .input(dust, Redstone)
-                .outputs(new ItemStack(Blocks.PISTON, 16))
-                .EUt(VA[LV])
-                .duration(5 * SECOND)
-                .buildAndRegister();
-
-        ModHandler.addShapedRecipe("piston_rhodium_plated_palladium", new ItemStack(Blocks.PISTON, 32),
-                "WWW", "SIS", "SDS",
-                'W', "plankWood",
-                'S', "stoneCobble",
-                'I', new UnificationEntry(ingot, RhodiumPlatedPalladium),
-                'D', new UnificationEntry(dust, Redstone));
-
-        ASSEMBLER_RECIPES.recipeBuilder()
-                .input(plate, RhodiumPlatedPalladium)
-                .input("plankWood", 3)
-                .input("stoneCobble", 4)
-                .input(dust, Redstone)
-                .outputs(new ItemStack(Blocks.PISTON, 32))
-                .EUt(VA[LV])
-                .duration(5 * SECOND)
-                .buildAndRegister();
-
-        ModHandler.addShapedRecipe("piston_naquadah_alloy", new ItemStack(Blocks.PISTON, 64),
-                "WWW", "SIS", "SDS",
-                'W', "plankWood",
-                'S', "stoneCobble",
-                'I', new UnificationEntry(ingot, NaquadahAlloy),
-                'D', new UnificationEntry(dust, Redstone));
-
-        ASSEMBLER_RECIPES.recipeBuilder()
-                .input(plate, NaquadahAlloy)
-                .input("plankWood", 3)
-                .input("stoneCobble", 4)
-                .input(dust, Redstone)
-                .outputs(new ItemStack(Blocks.PISTON, 64))
-                .EUt(VA[LV])
-                .duration(5 * SECOND)
-                .buildAndRegister();
-
         //  Flux Electrum
         MIXER_RECIPES.recipeBuilder()
                 .input(dust, Electrum, 8)

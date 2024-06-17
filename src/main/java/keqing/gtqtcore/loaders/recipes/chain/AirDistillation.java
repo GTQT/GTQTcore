@@ -15,8 +15,7 @@ import java.util.Collection;
 import java.util.List;
 
 import static gregtech.api.GTValues.*;
-import static gregtech.api.recipes.RecipeMaps.CENTRIFUGE_RECIPES;
-import static gregtech.api.recipes.RecipeMaps.VACUUM_RECIPES;
+import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.ingot;
 import static gregtech.api.unification.ore.OrePrefix.ingotHot;
@@ -326,11 +325,11 @@ public class AirDistillation {
 
     private static void vaccum(Material material1, Material material2, int i) {
         VACUUM_RECIPES.recipeBuilder()
-                .fluidInputs(material1.getFluid(1000))
-                .fluidOutputs(material2.getFluid(1000))
+                .fluidInputs(material2.getFluid(1000))
+                .fluidOutputs(material1.getFluid(1000))
                 .duration(200+200*i).EUt(VA[2+i]).buildAndRegister();
 
-        FLUID_EXTRACTOR_RECIPES.recipeBuilder()
+        FLUID_HEATER_RECIPES.recipeBuilder()
                 .fluidOutputs(material1.getFluid(1000))
                 .fluidInputs(material2.getFluid(1000))
                 .duration(80+20*i).EUt(VA[1+i]).buildAndRegister();

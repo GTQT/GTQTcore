@@ -171,7 +171,6 @@ public class NanoCoatingRecipes {
         CHEMICAL_RECIPES.recipeBuilder()
                 .notConsumable(CATALYST_FRAMEWORK_IV)
                 .circuitMeta(5)
-              
                 .fluidInputs(RawOil.getFluid(1000))
                 .fluidOutputs(PreTreatedCrudeOil.getFluid(2000))
                 .duration(100).EUt(VA[GTValues.HV]).buildAndRegister();
@@ -179,7 +178,6 @@ public class NanoCoatingRecipes {
          CHEMICAL_RECIPES.recipeBuilder()
                 .notConsumable(CATALYST_FRAMEWORK_IV)
                 .circuitMeta(5)
-              
                 .fluidInputs(OilHeavy.getFluid(1000))
                 .fluidOutputs(PreTreatedCrudeOil.getFluid(2000))
                 .duration(100).EUt(VA[GTValues.HV]).buildAndRegister();
@@ -187,7 +185,6 @@ public class NanoCoatingRecipes {
          CHEMICAL_RECIPES.recipeBuilder()
                 .notConsumable(CATALYST_FRAMEWORK_IV)
                 .circuitMeta(5)
-              
                 .fluidInputs(OilLight.getFluid(1000))
                 .fluidOutputs(PreTreatedCrudeOil.getFluid(2000))
                 .duration(100).EUt(VA[GTValues.HV]).buildAndRegister();
@@ -209,6 +206,7 @@ public class NanoCoatingRecipes {
                 .input(OrePrefix.frameGt,Aluminium,8)
                 .input(OrePrefix.foil,Platinum,16)
                 .input(circuit, MarkerMaterials.Tier.EV,8)
+                .fluidInputs(Enzymesbc.getFluid(1000))
                 .fluidInputs(Zylon.getFluid(1440))
                 .fluidInputs(StyreneButadieneRubber.getFluid(1440))
                 .output(CATALYST_FRAMEWORK_I)
@@ -220,6 +218,7 @@ public class NanoCoatingRecipes {
                 .input(OrePrefix.frameGt,HastelloyX,8)
                 .input(OrePrefix.foil,Palladium,16)
                 .input(circuit, MarkerMaterials.Tier.EV,8)
+                .fluidInputs(Enzymesbb.getFluid(1000))
                 .fluidInputs(Zylon.getFluid(1440))
                 .fluidInputs(StyreneButadieneRubber.getFluid(1440))
                 .output(CATALYST_FRAMEWORK_II)
@@ -231,6 +230,7 @@ public class NanoCoatingRecipes {
                 .input(OrePrefix.frameGt,Ruridit,8)
                 .input(OrePrefix.foil,NiobiumTitanium,16)
                 .input(circuit, MarkerMaterials.Tier.EV,8)
+                .fluidInputs(Enzymesba.getFluid(1000))
                 .fluidInputs(Zylon.getFluid(1440))
                 .fluidInputs(StyreneButadieneRubber.getFluid(1440))
                 .output(CATALYST_FRAMEWORK_III)
@@ -242,6 +242,7 @@ public class NanoCoatingRecipes {
                 .input(OrePrefix.frameGt,TungstenSteel,8)
                 .input(OrePrefix.foil,NanometerBariumTitanate,16)
                 .input(circuit, MarkerMaterials.Tier.EV,8)
+                .fluidInputs(Enzymesca.getFluid(1000))
                 .fluidInputs(Zylon.getFluid(1440))
                 .fluidInputs(Mutagen.getFluid(1000))
                 .output(CATALYST_FRAMEWORK_IV)

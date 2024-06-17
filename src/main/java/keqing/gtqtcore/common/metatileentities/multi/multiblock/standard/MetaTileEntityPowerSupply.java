@@ -1,5 +1,6 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
+import codechicken.lib.raytracer.CuboidRayTraceResult;
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
@@ -18,16 +19,20 @@ import gregtech.api.metatileentity.multiblock.MultiblockWithDisplayBase;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
+import gregtech.api.recipes.RecipeMap;
 import gregtech.api.util.GTUtility;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.utils.TooltipHelper;
+import keqing.gtqtcore.api.utils.GTQTLog;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
@@ -49,6 +54,8 @@ public class MetaTileEntityPowerSupply extends MultiblockWithDisplayBase  {
     int time;
     int eu=0;
     int maxTier=0;
+    int updatetime=1;
+    int t=0;
     private IEnergyContainer inenergyContainer;
     private IEnergyContainer outenergyContainer;
     boolean work;
@@ -68,6 +75,7 @@ public class MetaTileEntityPowerSupply extends MultiblockWithDisplayBase  {
         data.setInteger("eu", eu);
         data.setInteger("tier", tier);
         data.setInteger("maxTier", maxTier);
+        data.setInteger("updatetime", updatetime);
         data.setBoolean("work", work);
 
         data.setBoolean("charge", charge);
@@ -81,16 +89,24 @@ public class MetaTileEntityPowerSupply extends MultiblockWithDisplayBase  {
         eu = data.getInteger("eu");
         tier = data.getInteger("tier");
         maxTier = data.getInteger("maxTier");
+        updatetime = data.getInteger("updatetime");
         work = data.getBoolean("work");
 
         charge = data.getBoolean("charge");
         network = data.getBoolean("network");
         fastCharge = data.getBoolean("fastCharge");
     }
+
+    public boolean onScrewdriverClick(EntityPlayer playerIn, EnumHand hand, EnumFacing facing, CuboidRayTraceResult hitResult) {
+        if(updatetime<=19) updatetime++;
+        else updatetime=1;
+        playerIn.sendMessage(new TextComponentTranslation("检测频率：%s tick",updatetime));
+        return true;
+    }
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
-        textList.add(new TextComponentTranslation("蓄能：%s / %s EU 地板功能：%s", eu,tier*2048,work));
-        textList.add(new TextComponentTranslation("闪充模式：%s 互联模式：%s 供能模式：%s ", fastCharge,network,charge));
+        textList.add(new TextComponentTranslation("蓄能：%s/%sEU 状态：%s 检测频率：%s", eu,tier*2048,work,updatetime));
+        textList.add(new TextComponentTranslation("闪充：%s 互联：%s 供能模式：%s", fastCharge,network,charge));
         if (isStructureFormed()&&network) {
             if (checkNetwork(poss1, false)) textList.add(new TextComponentTranslation("连接：%s  %s / %s", poss1,getNetEu(poss1),getNetMax(poss1)));
             if (checkNetwork(poss2, false)) textList.add(new TextComponentTranslation("连接：%s  %s / %s", poss2,getNetEu(poss2),getNetMax(poss2)));
@@ -114,80 +130,82 @@ public class MetaTileEntityPowerSupply extends MultiblockWithDisplayBase  {
             PreCheck();
             time=0;
         }
-        checkNetwork(poss1,network);
-        checkNetwork(poss2,network);
-        checkNetwork(poss3,network);
-        checkNetwork(poss4,network);
-        checkNetwork(poss5,network);
-        checkNetwork(poss6,network);
-        checkNetwork(poss7,network);
-        checkNetwork(poss8,network);
 
-        if(charge) {
-            if (this.inenergyContainer != null && this.inenergyContainer.getEnergyStored() > 0 && eu < tier * 2048) {
-                eu = eu + Math.max((int) this.inenergyContainer.getEnergyStored(), 0);
-                this.inenergyContainer.removeEnergy(this.inenergyContainer.getEnergyStored());
-            }
-        }
-        else {
-            if (this.outenergyContainer != null && this.outenergyContainer.getEnergyStored() < this.outenergyContainer.getEnergyCapacity()) {
-                if (eu >= (this.outenergyContainer.getEnergyCapacity() - this.outenergyContainer.getEnergyStored())) {
-                    eu = (int) (eu - (this.outenergyContainer.getEnergyCapacity() - this.outenergyContainer.getEnergyStored()));
-                    this.outenergyContainer.addEnergy(this.outenergyContainer.getEnergyCapacity() - this.outenergyContainer.getEnergyStored());
+
+        if(updatetime==0)updatetime=1;
+        //更新频率
+        t++;
+        if(t==updatetime)
+        {
+            t=0;
+            checkNetwork(poss1,network);
+            checkNetwork(poss2,network);
+            checkNetwork(poss3,network);
+            checkNetwork(poss4,network);
+            checkNetwork(poss5,network);
+            checkNetwork(poss6,network);
+            checkNetwork(poss7,network);
+            checkNetwork(poss8,network);
+
+            if (charge) {
+                if (this.inenergyContainer != null && this.inenergyContainer.getEnergyStored() > 0 && eu < tier * 2048) {
+                    eu = eu + Math.max((int) this.inenergyContainer.getEnergyStored(), 0);
+                    this.inenergyContainer.removeEnergy(this.inenergyContainer.getEnergyStored());
                 }
-                else
-                {
-                    this.outenergyContainer.addEnergy(eu);
-                    eu=0;
+            } else {
+                if (this.outenergyContainer != null && this.outenergyContainer.getEnergyStored() < this.outenergyContainer.getEnergyCapacity()) {
+                    if (eu >= (this.outenergyContainer.getEnergyCapacity() - this.outenergyContainer.getEnergyStored())) {
+                        eu = (int) (eu - (this.outenergyContainer.getEnergyCapacity() - this.outenergyContainer.getEnergyStored()));
+                        this.outenergyContainer.addEnergy(this.outenergyContainer.getEnergyCapacity() - this.outenergyContainer.getEnergyStored());
+                    } else {
+                        this.outenergyContainer.addEnergy(eu);
+                        eu = 0;
+                    }
                 }
             }
-        }
-        if(work) for (int i = -5; i <= 5; ++i) {
-            for (int j = -5; j <= 5; ++j) {
-                BlockPos poss = this.getPos().add(xDir + i, 0, zDir + j);
-                if (GetTier(poss,i,j) !=11&&GetTier(poss,i,j) !=0)//排除不供电区
-                    if (GTUtility.getMetaTileEntity(this.getWorld(), poss.add(0,1,0)) instanceof MetaTileEntity) {
-                        MetaTileEntity mte = (MetaTileEntity) GTUtility.getMetaTileEntity(this.getWorld(), poss.add(0,1,0));
-                    int Energy=VA[GetTier(poss,i,j)];
-                    for (EnumFacing facing : EnumFacing.VALUES) {
-                        if (mte.getCapability(GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER, facing) instanceof IEnergyContainer) {
-                            IEnergyContainer container = mte.getCapability(GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER, facing);
-                            if(charge) {
-                                //如果供电等级大于方块等级 则持续给满
-                                if (!fastCharge) {
-                                    if (container.getEnergyStored() < container.getEnergyCapacity() && container.getEnergyCapacity() < Energy && eu > (container.getEnergyCapacity() - container.getEnergyStored())) {
-                                        container.addEnergy(container.getEnergyCapacity() - container.getEnergyStored());
-                                        eu -= (int) (container.getEnergyCapacity() - container.getEnergyStored());
-                                    }
-                                    //否则 只供Energy
-                                    if (container.getEnergyStored() < (container.getEnergyCapacity() - Energy) && eu > Energy) {
-                                        container.addEnergy(Energy);
-                                        eu -= Energy;
-                                    }
-                                }
-                                //闪充
-                                else if (container.getEnergyStored() < container.getEnergyCapacity()) {
-                                    if(eu > (container.getEnergyCapacity() - container.getEnergyStored()))
+            if (work) for (int i = -5; i <= 5; ++i) {
+                for (int j = -5; j <= 5; ++j) {
+                    BlockPos poss = this.getPos().add(xDir + i, 0, zDir + j);
+                    if (GetTier(poss, i, j) != 11 && GetTier(poss, i, j) != 0)//排除不供电区
+                        if (GTUtility.getMetaTileEntity(this.getWorld(), poss.add(0, 1, 0)) instanceof MetaTileEntity) {
+                            MetaTileEntity mte = (MetaTileEntity) GTUtility.getMetaTileEntity(this.getWorld(), poss.add(0, 1, 0));
+                            int Energy = VA[GetTier(poss, i, j)];
+                            for (EnumFacing facing : EnumFacing.VALUES) {
+                                if (mte.getCapability(GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER, facing) instanceof IEnergyContainer) {
+                                    IEnergyContainer container = mte.getCapability(GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER, facing);
+                                    if (charge) {
+                                        //如果供电等级大于方块等级 则持续给满
+                                        if (!fastCharge) {
+                                            if (container.getEnergyStored() < container.getEnergyCapacity() && container.getEnergyCapacity() < Energy && eu > (container.getEnergyCapacity() - container.getEnergyStored())) {
+                                                container.addEnergy(container.getEnergyCapacity() - container.getEnergyStored());
+                                                eu -= (int) (container.getEnergyCapacity() - container.getEnergyStored());
+                                            }
+                                            //否则 只供Energy
+                                            if (container.getEnergyStored() < (container.getEnergyCapacity() - Energy) && eu > Energy) {
+                                                container.addEnergy(Energy);
+                                                eu -= Energy;
+                                            }
+                                        }
+                                        //闪充
+                                        else if (container.getEnergyStored() < container.getEnergyCapacity()) {
+                                            if (eu > (container.getEnergyCapacity() - container.getEnergyStored())) {
+                                                container.addEnergy(container.getEnergyCapacity() - container.getEnergyStored());
+                                                eu -= (int) (container.getEnergyCapacity() - container.getEnergyStored());
+                                            } else {
+                                                container.addEnergy(eu);
+                                                eu = 0;
+                                            }
+                                        }
+                                    } else//充能模式
                                     {
-                                        container.addEnergy(container.getEnergyCapacity() - container.getEnergyStored());
-                                        eu -= (int) (container.getEnergyCapacity() - container.getEnergyStored());
+                                        if (container.getEnergyStored() > 0 && eu < tier * 2048) {
+                                            eu += container.getEnergyStored();
+                                            container.removeEnergy(container.getEnergyStored());
+                                        }
                                     }
-                                    else
-                                    {
-                                        container.addEnergy(eu);
-                                        eu =0;
-                                    }
-                                }
-                            }
-                            else//充能模式
-                            {
-                                if (container.getEnergyStored()>0&& eu < tier * 2048) {
-                                    eu += container.getEnergyStored();
-                                    container.removeEnergy(container.getEnergyStored());
                                 }
                             }
                         }
-                    }
                 }
             }
         }

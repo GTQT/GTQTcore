@@ -28,6 +28,7 @@ import gregtech.client.renderer.cclop.ColourOperation;
 import gregtech.client.renderer.cclop.LightMapOperation;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.BloomEffectUtil;
+import gregtech.client.utils.TooltipHelper;
 import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
@@ -38,15 +39,19 @@ import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
@@ -72,11 +77,10 @@ public class MetaTileEntitySaltField  extends NoEnergyMultiblockController {
         super(metaTileEntityId, GTQTcoreRecipeMaps.SALT_FLIED);
         this.recipeMapWorkable = new MetaTileEntitySaltField.SaltFieldLogic(this);
     }
-
+    int heat;
     public boolean hasMaintenanceMechanics() {
         return false;
     }
-
 
     protected IBlockState getCasingState() {
         return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STEEL_SOLID);
@@ -85,7 +89,6 @@ public class MetaTileEntitySaltField  extends NoEnergyMultiblockController {
     protected IBlockState getCasingState1() {
         return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STEEL_SOLID);
     }
-
     @Nonnull
     @Override
     protected BlockPattern createStructurePattern() {
@@ -119,16 +122,17 @@ public class MetaTileEntitySaltField  extends NoEnergyMultiblockController {
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
         if (isStructureFormed()) {
-            textList.add(new TextComponentTranslation("gtqtcore.multiblock.sf.1"));
-            if (getInputFluidInventory() != null) {
-                FluidStack STACK = getInputFluidInventory().drain(Water.getFluid(Integer.MAX_VALUE), false);
-                int liquidOxygenAmount = STACK == null ? 0 : STACK.amount;
-                textList.add(new TextComponentTranslation("gtqtcore.multiblock.sf.amount", TextFormattingUtil.formatNumbers((liquidOxygenAmount))));
-            }
-
+            textList.add(new TextComponentTranslation("时间：%s 阳光直射：%s",getWorld().isDaytime(),this.getWorld().canSeeSky(getPos().up())));
+            textList.add(new TextComponentTranslation("积热：%s",heat));
         }
     }
-
+    @Override
+    public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
+        super.addInformation(stack, player, tooltip, advanced);
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("古埃及掌管盐水的神", new Object[0]));
+        tooltip.add(I18n.format("如果处于白天，积热上升；如果阳光直射，积热上升"));
+        tooltip.add(I18n.format("消耗积热，配方耗时减半;运行完一轮配方后，积热下降四分之一"));
+    }
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {
         return new MetaTileEntitySaltField(metaTileEntityId);
@@ -147,80 +151,57 @@ public class MetaTileEntitySaltField  extends NoEnergyMultiblockController {
     }
 
 
-
+    @Override
+    public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
+        super.renderMetaTileEntity(renderState, translation, pipeline);
+        getFrontOverlay().renderOrientedState(renderState, translation, pipeline, getFrontFacing(),
+                recipeMapWorkable.isActive(), recipeMapWorkable.isWorkingEnabled());
+        if (recipeMapWorkable.isActive() && isStructureFormed()) {
+            EnumFacing back = getFrontFacing().getOpposite();
+            for(float i=-3;i<=3;i++) {
+                for (float j = -3; j <=3; j++) {
+                    Matrix4 offset = translation.copy().translate(back.getXOffset() * 4+i, 0.6, back.getZOffset() * 4+j);
+                    CubeRendererState op = Textures.RENDER_STATE.get();
+                    Textures.RENDER_STATE.set(new CubeRendererState(op.layer, CubeRendererState.PASS_MASK, op.world));
+                    Textures.renderFace(renderState, offset,
+                            ArrayUtils.addAll(pipeline, new LightMapOperation(240, 240), new ColourOperation(0xFF00FFFF)),
+                            EnumFacing.UP, Cuboid6.full, TextureUtils.getBlockTexture("water_still"),
+                            BloomEffectUtil.getEffectiveBloomLayer());
+                    Textures.RENDER_STATE.set(op);
+                }
+            }
+        }
+    }
+    @Override
+    public NBTTagCompound writeToNBT(NBTTagCompound data) {
+        data.setInteger("heat", heat);
+        return super.writeToNBT(data);
+    }
+    @Override
+    public void readFromNBT(NBTTagCompound data) {
+        super.readFromNBT(data);
+        heat = data.getInteger("heat");
+    }
     protected class SaltFieldLogic extends NoEnergyMultiblockRecipeLogic {
 
         public SaltFieldLogic(NoEnergyMultiblockController tileEntity) {
             super(tileEntity, tileEntity.recipeMap);
         }
-
-        public SaltFieldLogic(NoEnergyMultiblockController tileEntity, RecipeMap<?> recipeMap) {
-            super(tileEntity, recipeMap);
-        }
-
         @Override
         public void update() {
             super.update();
-
+            if (getWorld().isDaytime()&&heat<10000)heat+=5;
+            if (getWorld().canSeeSky(getPos())&&heat<10000)heat+=5;
+            else if(heat>0)heat--;
         }
-        FluidStack WATER = Water.getFluid(40);
-
         protected void updateRecipeProgress() {
-            IMultipleTankHandler inputTank = getInputFluidInventory();
             if (canRecipeProgress) {
-                int mCurrentDirectionX;
-                int mCurrentDirectionZ;
-                int mOffsetX_Lower;
-                int mOffsetX_Upper;
-                int mOffsetZ_Lower;
-                int mOffsetZ_Upper;
-
-                mCurrentDirectionX = 4;
-                mCurrentDirectionZ = 4;
-
-                mOffsetX_Lower = -4;
-                mOffsetX_Upper = 4;
-                mOffsetZ_Lower = -4;
-                mOffsetZ_Upper = 4;
-
-                // if (aBaseMetaTileEntity.fac)
-
-                final int xDir = this.metaTileEntity.getFrontFacing().getOpposite().getXOffset()
-                        * mCurrentDirectionX;
-                final int zDir = this.metaTileEntity.getFrontFacing().getOpposite().getZOffset()
-                        * mCurrentDirectionZ;
-
-                if (WATER.isFluidStackIdentical(inputTank.drain(WATER, false))) {
-                    inputTank.drain(WATER, true);
-
-
-                    for (int i = mOffsetX_Lower + 1; i <= mOffsetX_Upper - 1; ++i) {
-                        for (int j = mOffsetZ_Lower + 1; j <= mOffsetZ_Upper - 1; ++j) {
-                         for (int h = 1; h < 2; h++) {
-                              BlockPos waterCheckPos =this.metaTileEntity.getPos().add(xDir + i, h, zDir + j);
-                              this.metaTileEntity.getWorld().setBlockState(
-                                    waterCheckPos,
-                                    Blocks.WATER.getDefaultState());
-                            }
-                        }
-                    }
-
-                    if (++progressTime > maxProgressTime) {
-                        completeRecipe();
-                        for (int i = mOffsetX_Lower + 1; i <= mOffsetX_Upper - 1; ++i) {
-                            for (int j = mOffsetZ_Lower + 1; j <= mOffsetZ_Upper - 1; ++j) {
-                                for (int h = 1; h < 2; h++) {
-                                    BlockPos waterCheckPos =this.metaTileEntity.getPos().add(xDir + i, h, zDir + j);
-                                    this.metaTileEntity.getWorld().setBlockState(
-                                            waterCheckPos,
-                                            Blocks.AIR.getDefaultState());
-                                }
-                            }
-                        }
-                    }
-                 }
+                if(heat>2000){maxProgressTime=maxProgressTime/2;heat-=2000;}
+                if (++progressTime > maxProgressTime) {
+                    completeRecipe();
+                    heat=heat*3/4;
+                }
             }
         }
     }
-
 }

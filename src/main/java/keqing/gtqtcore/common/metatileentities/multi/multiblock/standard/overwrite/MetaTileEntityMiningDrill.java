@@ -292,7 +292,7 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
         tooltip.add(I18n.format("gtqtcore.machine.mdi.tooltip.1"));
         tooltip.add(I18n.format("gtqtcore.machine.mdi.tooltip.2"));
         tooltip.add(I18n.format("gtqtcore.machine.mdi.tooltip.3"));
-        tooltip.add(I18n.format("控制器上方需要替换为输入总线！！"));
+        tooltip.add(I18n.format("控制器上方需要替换为输入总线！！不要旋转多方块！！"));
     }
 
     private void addCircuit(Boolean start) {

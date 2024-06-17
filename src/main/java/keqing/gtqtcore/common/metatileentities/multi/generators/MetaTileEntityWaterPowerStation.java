@@ -61,7 +61,7 @@ import static gregtech.api.util.RelativeDirection.*;
 import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.PD_TURBINE_CASING;
 
 //水电站
-public class MetaTileEntityWaterPowerStation extends MultiblockWithDisplayBase implements  IProgressBarMultiblock {
+public class MetaTileEntityWaterPowerStation extends MultiblockWithDisplayBase {
     private int coilLevel;
     private int number;
     private int outputEu;
@@ -97,7 +97,7 @@ public class MetaTileEntityWaterPowerStation extends MultiblockWithDisplayBase i
         super.addDisplayText(textList);
         textList.add(new TextComponentTranslation("======================="));
         textList.add(new TextComponentTranslation("gtqtcore.wps.count", number,coilLevel));
-        textList.add(new TextComponentTranslation("gtqtcore.wps.checkwater", water,(number*2+1)*(number*2+1)));
+        textList.add(new TextComponentTranslation("gtqtcore.wps.checkwater", water,(number*2+1)*(number*2+1)*4));
         textList.add(new TextComponentTranslation("gtqtcore.wps.output1", outputEu));
         textList.add(new TextComponentTranslation("gtqtcore.wps.output2", geteu()));
         if (getInputFluidInventory() != null) {
@@ -107,18 +107,19 @@ public class MetaTileEntityWaterPowerStation extends MultiblockWithDisplayBase i
         }
         textList.add(new TextComponentTranslation("======================="));
     }
+
     @Override
     protected void updateFormedValid() {
         this.logic.update();
         generator();
-        this.outputEu = (int) (water*Math.pow(2,tier-1) *coilLevel/32);
+        this.outputEu = water*coilLevel*tier*tier/4;
     }
 
     private long geteu()
     {
         Random rand = new Random();
         int randomNum = rand.nextInt(40);
-        return (long) (((long) water *coilLevel*(randomNum+80)/800)*Math.pow(2,tier-1)/4);
+        return (((long) outputEu*(randomNum+80)/160));
     }
     private final FluidStack LUBRICANT_STACK = Lubricant.getFluid(1);
     private void generator() {
@@ -127,7 +128,7 @@ public class MetaTileEntityWaterPowerStation extends MultiblockWithDisplayBase i
         if(isWorkingEnabled&&LUBRICANT_STACK.isFluidStackIdentical(inputTank.drain(LUBRICANT_STACK, false)))
         {
             inputTank.drain(LUBRICANT_STACK, true);
-            this.energyContainer.addEnergy((long) (geteu()*Math.pow(2,tier-1)));
+            this.energyContainer.addEnergy(geteu());
         }
     }
 
@@ -185,33 +186,6 @@ public class MetaTileEntityWaterPowerStation extends MultiblockWithDisplayBase i
         tooltip.add(I18n.format("gtqtcore.multiblock.wps.tooltip.2"));
         tooltip.add(I18n.format("gtqtcore.multiblock.wps.tooltip.3"));
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("无中生有！现在！！", new Object[0]));
-    }
-
-    @Override
-    public int getNumProgressBars() {
-        return 1;
-    }
-
-
-    @Override
-    public double getFillPercentage(int index) {
-        return  ((double)geteu()/(Math.pow(2,tier-1)))/((2*(number+1))*(2*(number+1))*coilLevel*0.156);
-    }
-
-    @Override
-    public TextureArea getProgressBarTexture(int index) {
-        return GuiTextures.PROGRESS_BAR_HPCA_COMPUTATION;
-    }
-
-    @Override
-    public void addBarHoverText(List<ITextComponent> hoverList, int index) {
-            ITextComponent cwutInfo = TextComponentUtil.stringWithColor(
-                    TextFormatting.AQUA,
-                    geteu()+"* 倍率："+Math.pow(2,tier-1)/4+ " / " + ((2*(number+1))*(2*(number+1))*coilLevel*0.15) + " EU/t");
-            hoverList.add(TextComponentUtil.translationWithColor(
-                    TextFormatting.GRAY,
-                    "gregtech.multiblock.wps.computation",
-                    cwutInfo));
     }
 
 

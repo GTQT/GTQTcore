@@ -22,6 +22,7 @@ import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
+import gregtech.api.recipes.recipeproperties.ComputationProperty;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.core.sound.GTSoundEvents;
@@ -63,6 +64,7 @@ public class MetaTileEntityStepper extends MultiMapMultiblockController implemen
     private int sheping_tier;
     private int laser_tier;
     private int tier;
+    boolean rate;
     int LaserKind;
     int LaserAmount;
 
@@ -126,15 +128,19 @@ public class MetaTileEntityStepper extends MultiMapMultiblockController implemen
     public boolean checkRecipe(@Nonnull Recipe recipe, boolean consumeIfSuccess) {
         if(recipe.getProperty(LASERNetProperty.getInstance(), 0)<=laser_tier&&super.checkRecipe(recipe, consumeIfSuccess))
         {
-            if (LaserKind>laser_tier) {
-                if (LaserAmount - clean_tier * (LaserKind - laser_tier) * 1000 > 0)
-                    LaserAmount -= clean_tier * (LaserKind - laser_tier) * 1000;
+            IOpticalComputationProvider provider = this.getComputationProvider();
+            int recipeCWUt = recipe.getProperty(ComputationProperty.getInstance(), 0);
+            if(!(provider.requestCWUt(recipeCWUt, true) >= recipeCWUt))return false;
+
+            //并行
+            if (LaserKind*2>=laser_tier) {
+                if (LaserAmount - clean_tier * (LaserKind*2 - laser_tier +1) * 1000 > 0)
+                    LaserAmount -= clean_tier * (LaserKind*2 - laser_tier +1) * 1000;
                 else return false;
             }
-            else if(LaserAmount - clean_tier * LaserKind* 1000 > 0)
-                        LaserAmount-=clean_tier*LaserKind*1000;
-                else return false;
-
+            //不并行
+            else if(LaserAmount-1000 > 0) LaserAmount-=1000;
+            else return false;
             return true;
         }
         return false;
@@ -142,9 +148,9 @@ public class MetaTileEntityStepper extends MultiMapMultiblockController implemen
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
-        textList.add(new TextComponentTranslation("gtqtcore.eleTire2",tier, laser_tier, glass_tier));
-        textList.add(new TextComponentTranslation("gtqtcore.eleTire1",clean_tier, sheping_tier,400-laser_tier*75));
-        textList.add(new TextComponentTranslation("gtqtcore.eleTire1",LaserKind, LaserAmount));
+        textList.add(new TextComponentTranslation("外壳等级：%s 紫外等级：%s 玻璃等级：%s",tier, laser_tier, glass_tier));
+        textList.add(new TextComponentTranslation("洁净等级：%s 射频调节器等级：%s",clean_tier, sheping_tier));
+        textList.add(new TextComponentTranslation("光刻胶等级：%s 光刻胶储量%s 同频模式：%s",LaserKind, LaserAmount,rate));
     }
     @Override
     protected BlockPattern createStructurePattern() {
@@ -247,6 +253,7 @@ public class MetaTileEntityStepper extends MultiMapMultiblockController implemen
         this.sheping_tier = GTQTUtil.getOrDefault(() -> sheping_tier instanceof WrappedIntTired,
                 () -> ((WrappedIntTired)sheping_tier).getIntTier(),
                 0);
+        rate=(this.laser_tier==this.sheping_tier);
         this.writeCustomData(GTQTValue.UPDATE_TIER11,buf -> buf.writeInt(this.tier));
     }
 
@@ -303,31 +310,34 @@ public class MetaTileEntityStepper extends MultiMapMultiblockController implemen
         public void update() {
             super.update();
             IMultipleTankHandler inputTank = getInputFluidInventory();
-            if (LASER1.isFluidStackIdentical(inputTank.drain(LASER1, false))) {
-                inputTank.drain(LASER1, true);
-                addLaserAmount(1);
-            }
-            if (LASER2.isFluidStackIdentical(inputTank.drain(LASER2, false))) {
-                inputTank.drain(LASER2, true);
-                addLaserAmount(2);
-            }
-            if (LASER3.isFluidStackIdentical(inputTank.drain(LASER3, false))) {
-                inputTank.drain(LASER3, true);
-                addLaserAmount(3);
-            }
-            if (LASER4.isFluidStackIdentical(inputTank.drain(LASER4, false))) {
-                inputTank.drain(LASER4, true);
-                addLaserAmount(4);
-            }
-            if (LASER5.isFluidStackIdentical(inputTank.drain(LASER5, false))) {
-                inputTank.drain(LASER5, true);
-                addLaserAmount(5);
+            if(LaserAmount<64000) {
+                if (LASER1.isFluidStackIdentical(inputTank.drain(LASER1, false))) {
+                    inputTank.drain(LASER1, true);
+                    addLaserAmount(1);
+                }
+                if (LASER2.isFluidStackIdentical(inputTank.drain(LASER2, false))) {
+                    inputTank.drain(LASER2, true);
+                    addLaserAmount(2);
+                }
+                if (LASER3.isFluidStackIdentical(inputTank.drain(LASER3, false))) {
+                    inputTank.drain(LASER3, true);
+                    addLaserAmount(3);
+                }
+                if (LASER4.isFluidStackIdentical(inputTank.drain(LASER4, false))) {
+                    inputTank.drain(LASER4, true);
+                    addLaserAmount(4);
+                }
+                if (LASER5.isFluidStackIdentical(inputTank.drain(LASER5, false))) {
+                    inputTank.drain(LASER5, true);
+                    addLaserAmount(5);
+                }
             }
         }
 
         public void setMaxProgress(int maxProgress) {
-            if (LaserKind>laser_tier) {
-                this.maxProgressTime = maxProgress*(100-LaserKind*10)/100;
+            if (LaserKind>=laser_tier) {
+                if(rate)this.maxProgressTime = maxProgress*(100-LaserKind*20)/100;
+                else this.maxProgressTime = maxProgress*(100-LaserKind*10)/100;
             } else {
                 this.maxProgressTime = maxProgress*laser_tier;
             }
@@ -339,7 +349,7 @@ public class MetaTileEntityStepper extends MultiMapMultiblockController implemen
 
         @Override
         public int getParallelLimit() {
-            if (LaserKind>laser_tier) return clean_tier*(LaserKind-laser_tier);
+            if (LaserKind*2>=laser_tier) return clean_tier*(LaserKind*2-laser_tier+1);
             return 1;
         }
     }
