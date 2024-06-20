@@ -80,6 +80,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityCompressedFusionReactor COMPRESSED_FUSION_REACTOR_MKII;
     public static MetaTileEntityCompressedFusionReactor COMPRESSED_FUSION_REACTOR_MKIII;
     public static final MetaTileEntityCreativeEnergyHatch[] CREATIVE_ENERGY_HATCHES = new MetaTileEntityCreativeEnergyHatch[GTValues.V.length];
+    public static final MetaTileEntityMicrowaveEnergyReceiver[] MICROWAVE_ENERGY_RECEIVER = new MetaTileEntityMicrowaveEnergyReceiver[GTValues.V.length];
     public static MetaTileInfWaterHatch INF_WATER_HATCH;
     public static MetaTileEntityLightningRod[] LIGHTNING_ROD = new MetaTileEntityLightningRod[3];
     public static MetaTileEntityDangoteDistillery DANGOTE_DISTILLERY;
@@ -598,6 +599,10 @@ public class GTQTMetaTileEntities {
 
         simpleTiredInit(CREATIVE_ENERGY_HATCHES,
                 (i) -> new MetaTileEntityCreativeEnergyHatch(gtqtcoreId("creative_energy_hatch."+GTValues.VN[i].toLowerCase()),i),
+                GTQTMetaTileEntities::nextMultiPartID);
+
+        simpleTiredInit(MICROWAVE_ENERGY_RECEIVER,
+                (i) -> new MetaTileEntityMicrowaveEnergyReceiver(gtqtcoreId("microwave_energy_receiver."+GTValues.VN[i].toLowerCase()),i),
                 GTQTMetaTileEntities::nextMultiPartID);
 
     }

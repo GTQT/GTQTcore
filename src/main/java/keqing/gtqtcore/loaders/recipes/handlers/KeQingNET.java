@@ -498,7 +498,7 @@ public class KeQingNET {
                 .input(circuit, Tier.HV, 8)
                 .input(ELECTRIC_MOTOR_MV,16)
                 .input(ELECTRIC_PUMP_MV,16)
-                .input(gear,Aluminium,64)
+                .input(gear,Aluminium,16)
                 .input(wireFine, Gold, 64)
                 .input(wireFine, Gold, 64)
                 .input(foil, Aluminium, 64)

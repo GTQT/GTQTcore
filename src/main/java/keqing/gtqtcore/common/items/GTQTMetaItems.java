@@ -166,7 +166,7 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem RETICLE_SILICON;
     public static MetaItem<?>.MetaValueItem DEBUG_STRUCTURE_WRITER;
     public static MetaItem<?>.MetaValueItem DEBUG_STRUCTURE_BUILDER;
-
+    public static MetaItem<?>.MetaValueItem POS_BINDING_CARD;
     public static MetaItem<?>.MetaValueItem AE_SILICON;
     public static MetaItem<?>.MetaValueItem AE_WAFER;
     public static MetaItem<?>.MetaValueItem AE_RETICLEA;
@@ -421,14 +421,13 @@ public class GTQTMetaItems {
 
     // Process-Specific Components
     public static MetaItem<?>.MetaValueItem MAGNETRON;
-
+    public static GTQTMetaItem1 GTQT_META_ITEM;
     // Process Intermediary Items
     // Nanotubes
     public static MetaItem<?>.MetaValueItem CARBON_ALLOTROPE_MIXTURE;
     public static MetaItem<?>.MetaValueItem GRAPHENE_ALIGNED_CNT;
-    public static void initialization()
-    {
-        GTQTMetaItem1 item1 = new GTQTMetaItem1();
+    public static void initialization() {
+        GTQT_META_ITEM = new GTQTMetaItem1();
     }
     public static void initSubItems()
     {

@@ -176,7 +176,7 @@ public class ComponentAssemblyLineRecipes {
                 .input(cableGtHex, Tin, 8)
                 .input(plateDouble, Steel, 64)
                 .input(plateDouble, Steel, 32)
-                .input(gearSmall, Steel, 64)
+                .input(gearSmall, Steel, 16)
                 .input(ELECTRIC_MOTOR_LV, 64)
                 .output(ELECTRIC_PISTON_LV, 64)
                 .EUt(VA[LV])

@@ -185,9 +185,9 @@ public class MetaTileEntityKQNetworkSwitch extends MetaTileEntityDataBank implem
                 .aisle("XXX", "XSX", "XXX")
                 .where('S', selfPredicate())
                 .where('A', TiredTraceabilityPredicate.CP_ZW_CASING)
-                .where('X', TiredTraceabilityPredicate.CP_CASING.setMinGlobalLimited(7)
+                .where('X', TiredTraceabilityPredicate.CP_CASING
                         .or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(1, 1))
-                        .or(maintenancePredicate())
+                        .or(abilities(MultiblockAbility.MAINTENANCE_HATCH).setMinGlobalLimited(1, 1))
                         .or(abilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION).setMinGlobalLimited(1, 2))
                         .or(abilities(MultiblockAbility.COMPUTATION_DATA_TRANSMISSION).setMinGlobalLimited(1, 1)))
                 .build();

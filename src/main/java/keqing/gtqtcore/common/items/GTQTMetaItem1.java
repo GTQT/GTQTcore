@@ -3,9 +3,7 @@ package keqing.gtqtcore.common.items;
 import gregtech.api.GTValues;
 import gregtech.api.GregTechAPI;
 import gregtech.api.items.metaitem.ElectricStats;
-import gregtech.api.items.metaitem.MetaItem;
 import gregtech.api.items.metaitem.StandardMetaItem;
-import gregtech.api.items.metaitem.stats.IItemComponent;
 import gregtech.api.unification.material.MarkerMaterials;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.ItemMaterialInfo;
@@ -16,19 +14,9 @@ import gregtech.common.items.behaviors.TooltipBehavior;
 import keqing.gtqtcore.api.unification.GCYSMaterials;
 import keqing.gtqtcore.common.CommonProxy;
 import keqing.gtqtcore.common.block.blocks.GTQTCrops;
-import keqing.gtqtcore.common.items.behaviors.IntBcircuitBehavior;
-import keqing.gtqtcore.common.items.behaviors.MillBallBehavior;
-import keqing.gtqtcore.common.items.behaviors.StructureWriteBehavior;
-import keqing.gtqtcore.common.items.behaviors.TimeBottleBehavior;
+import keqing.gtqtcore.common.items.behaviors.*;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.world.World;
 
-import java.util.List;
-import java.util.Objects;
 
 import static gregtech.api.GTValues.M;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
@@ -204,6 +192,8 @@ public class GTQTMetaItem1 extends StandardMetaItem {
                         new ProspectorScannerBehavior(9, GTValues.UIV))
                 .setMaxStackSize(1)
                 .setCreativeTabs(CommonProxy.GTQTCore_TO);
+
+        POS_BINDING_CARD = this.addItem(417, "pos_binding_card").setMaxStackSize(1).addComponents(new PosBindingCardBehaviors()).setCreativeTabs(CommonProxy.GTQTCore_TAB);
 
         DEBUG_STRUCTURE_WRITER = this.addItem(418, "debug.structure_writer").addComponents(StructureWriteBehavior.INSTANCE).setCreativeTabs(CommonProxy.GTQTCore_TO);
         DEBUG_STRUCTURE_BUILDER = this.addItem(419, "debug.structure_builder").addComponents(new MultiblockBuilderBehavior()).setCreativeTabs(CommonProxy.GTQTCore_TO);

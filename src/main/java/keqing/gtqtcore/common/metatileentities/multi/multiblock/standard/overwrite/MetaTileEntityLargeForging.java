@@ -81,7 +81,7 @@ public class MetaTileEntityLargeForging extends GTQTRecipeMapMultiblockOverwrite
         }
         if (modern == 1)
         {
-            P = (int) ((this.energyContainer.getEnergyStored() + energyContainer.getInputPerSec()) / getMinVa());
+            P = (int) ((this.energyContainer.getEnergyStored() + energyContainer.getInputPerSec()) / getMinVa()==0?1:getMinVa());
             ParallelNum = Math.min(P, ParallelLim);
         }
     }
