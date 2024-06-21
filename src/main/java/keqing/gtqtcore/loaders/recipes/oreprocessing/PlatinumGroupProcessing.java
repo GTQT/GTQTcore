@@ -212,6 +212,7 @@ public class PlatinumGroupProcessing {
         ROASTER_RECIPES.recipeBuilder()
                 .input(dust, Sodium)
                 .fluidInputs(Oxygen.getFluid(1000))
+                .circuitMeta(2)
                 .output(dust, SodiumPeroxide, 2)
                 .temperature(403)
                 .duration(40).EUt(VA[LV]).buildAndRegister();

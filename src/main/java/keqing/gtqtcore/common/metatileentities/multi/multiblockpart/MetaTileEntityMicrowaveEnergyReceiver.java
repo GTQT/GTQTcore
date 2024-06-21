@@ -23,12 +23,21 @@ import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.renderer.texture.cube.SimpleOrientedCubeRenderer;
 import gregtech.client.renderer.texture.custom.FireboxActiveRenderer;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.commons.lang3.ArrayUtils;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.List;
 
 import static gregtech.api.GTValues.VA;
 
@@ -45,8 +54,8 @@ public class MetaTileEntityMicrowaveEnergyReceiver extends MetaTileEntity implem
             {1, 0, 0} ,
             {-1, 0, 0}
     };
-    private boolean active = false;
-    private boolean source = true;
+    public boolean active = false;
+    public boolean source = true;
     //接口暴露
     public void setAmperageVoltage(int x,int y)
     {
@@ -58,11 +67,11 @@ public class MetaTileEntityMicrowaveEnergyReceiver extends MetaTileEntity implem
             Amperage++;
         }
 
-        if (Voltage >=0&&x==0) {
+        if (Voltage >0&&x==-1) {
             Voltage--;
         }
 
-        if (Amperage >=0&&y==0) {
+        if (Amperage >0&&y==-1) {
             Amperage--;
         }
     }
@@ -220,5 +229,12 @@ public class MetaTileEntityMicrowaveEnergyReceiver extends MetaTileEntity implem
     public int getTier() {
         return this.tier;
     }
-
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void addInformation(ItemStack stack, @Nullable World world, @Nonnull List<String> tooltip, boolean advanced) {
+        super.addInformation(stack, world, tooltip, advanced);
+        tooltip.add(I18n.format("需要使用坐标卡绑定到微波控制器使用"));
+        tooltip.add(I18n.format("调节电压电流改变六面输出电量（无视电压电流限制）"));
+        tooltip.add(I18n.format("可以使用动力仓中转向导线传输电力"));
+    }
 }

@@ -2062,6 +2062,23 @@ gtqtcore.machine.creative_energy_hatch.uiv.name=创造模式能源仓（§2UIV§
 gtqtcore.machine.creative_energy_hatch.uxv.name=创造模式能源仓（§eUXV§r）
 gtqtcore.machine.creative_energy_hatch.opv.name=创造模式能源仓（§9OpV§r）
 gtqtcore.machine.creative_energy_hatch.max.name=创造模式能源仓（§c§lMAX§r）
+
+gtqtcore.machine.microwave_energy_receiver.ulv.name=无线微波接受仓（ULV）
+gtqtcore.machine.microwave_energy_receiver.lv.name=无线微波接受仓（§7LV§r）
+gtqtcore.machine.microwave_energy_receiver.mv.name=无线微波接受仓（§bMV§r）
+gtqtcore.machine.microwave_energy_receiver.hv.name=无线微波接受仓（§6HV§r）
+gtqtcore.machine.microwave_energy_receiver.ev.name=无线微波接受仓（§5EV§r）
+gtqtcore.machine.microwave_energy_receiver.iv.name=无线微波接受仓（§1IV§r）
+gtqtcore.machine.microwave_energy_receiver.luv.name=无线微波接受仓（§dLuV§r）
+gtqtcore.machine.microwave_energy_receiver.zpm.name=无线微波接受仓（§cZPM§r）
+gtqtcore.machine.microwave_energy_receiver.uv.name=无线微波接受仓（§3UV§r）
+gtqtcore.machine.microwave_energy_receiver.uhv.name=无线微波接受仓（§4UHV§r）
+gtqtcore.machine.microwave_energy_receiver.uev.name=无线微波接受仓（§aUEV§r）
+gtqtcore.machine.microwave_energy_receiver.uiv.name=无线微波接受仓（§2UIV§r）
+gtqtcore.machine.microwave_energy_receiver.uxv.name=无线微波接受仓（§eUXV§r）
+gtqtcore.machine.microwave_energy_receiver.opv.name=无线微波接受仓（§9OpV§r）
+gtqtcore.machine.microwave_energy_receiver.max.name=无线微波接受仓（§c§lMAX§r）
+
 gregtech.machine.huge_chemical_reactor=万里挑一
 gtqtcore.multiblock.fr.threshold_decrement=§c降低一单位压裂压力 /n§7流体产出降低半单位，压裂液消耗减少一单位。
 gtqtcore.multiblock.fr.threshold_increment=§a增加一单位压裂压力 /n§7流体产出增加半单位，压裂液消耗增加一单位。
@@ -2900,6 +2917,7 @@ gtqtcore.machine.pyrolysis_tower.name=土蒸馏&裂解塔
 recipemap.salt_fish.name=晒太阳
 gtqtcore.machine.ocean_pumper.name=海水泵机
 gtqtcore.machine.solar_plate.name=太阳能板
+gtqtcore.machine.microwave_energy_receiver_control.name=微波能量发射塔
 gtqtcore.machine.lager_ore_washer.name=工业洗矿槽
 gtqtcore.machine.lager_thermal_centrifuge.name=工业热能离心机
 gtqtcore.machine.spa.tooltip.1=只能白天工作，需要提供水洁净太阳能吸收面,需要保证上方10*10（控制器为中心）范围内均为空气。
@@ -3346,7 +3364,8 @@ metaitem.component.cosmic.closed_timelike_curve_computational_unit.name=封闭�
 metaitem.component.cosmic.closed_timelike_curve_guidance_unit.name=封闭类时曲线引导单元
 metaitem.component.cosmic.nuclear_clock.name=核时钟
 metaitem.component.cosmic.manifold_oscillatory_power_cell.name=流形振荡能量单元
-
+metaitem.pos_binding_card.name=坐标绑定卡
+metaitem.pos_binding_card.tooltip=适用于：微波无线仓绑定
 metaitem.scintillator.name=闪烁体
 metaitem.scintillator_crystal.name=闪烁晶体
 

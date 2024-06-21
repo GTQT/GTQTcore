@@ -236,6 +236,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityLargeThermalCentrifuge LAGER_THERMAL_CENTRIFUGE;
     public static MetaTileEntityNanoscaleFabricator NANOSCALE_FABRICATOR;
     public static MetaTileEntityCVDUnit CVD_UNIT;
+    public static MetaTileEntityMicrowaveEnergyReceiverControl MICROWAVE_ENERGY_RECEIVER_CONTROL;
     public static MetaTileEntityEXCVD EX_CVD;
     public static MetaTileEntityStewStoolStove COAGULATION_TANK;
     public static MetaTileEntityBurnerReactor BURNER_REACTOR;
@@ -381,6 +382,7 @@ public class GTQTMetaTileEntities {
         COOLING_TOWER = registerMetaTileEntity(3199, new MetaTileEntityCoolingTower(gtqtcoreId("cooling_tower")));
         HIGH_PRESSURE_CRYOGENIC_DISTILLATION_PLANT = registerMetaTileEntity(3200, new MetaTileEntityHighPressureCryogenicDistillationPlant(gtqtcoreId("high_pressure_cryogenic_distillation_plant")));
         LOW_PRESSURE_CRYOGENIC_DISTILLATION_PLANT = registerMetaTileEntity(3201, new MetaTileEntityLowPressureCryogenicDistillationPlant(gtqtcoreId("low_pressure_cryogenic_distillation_plant")));
+        MICROWAVE_ENERGY_RECEIVER_CONTROL= registerMetaTileEntity(3202, new MetaTileEntityMicrowaveEnergyReceiverControl(gtqtcoreId("microwave_energy_receiver_control")));
         //重写设备
         DISTILLATION_TOWER = registerMetaTileEntity(3250, new MetaTileEntityDistillationTower(gtqtcoreId("distillation_tower")));
         CRACKER = registerMetaTileEntity(3251, new MetaTileEntityCrackingUnit(gtqtcoreId("cracker")));

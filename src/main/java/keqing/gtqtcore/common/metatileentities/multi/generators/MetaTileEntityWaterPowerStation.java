@@ -64,7 +64,7 @@ import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasin
 public class MetaTileEntityWaterPowerStation extends MultiblockWithDisplayBase {
     private int coilLevel;
     private int number;
-    private int outputEu;
+    private long outputEu;
     private int water=0;
     private boolean isWorkingEnabled;
     int tier;
@@ -107,19 +107,29 @@ public class MetaTileEntityWaterPowerStation extends MultiblockWithDisplayBase {
         }
         textList.add(new TextComponentTranslation("======================="));
     }
-
+    @Override
+    protected void addWarningText(List<ITextComponent> textList) {
+        super.addWarningText(textList);
+        if (getInputFluidInventory() != null) {
+            FluidStack LubricantStack = getInputFluidInventory().drain(Lubricant.getFluid(Integer.MAX_VALUE), false);
+            int liquidOxygenAmount = LubricantStack == null ? 0 : LubricantStack.amount;
+            if(liquidOxygenAmount==0)
+            textList.add(new TextComponentTranslation("缺少润滑！！"));
+        }
+    }
     @Override
     protected void updateFormedValid() {
         this.logic.update();
         generator();
-        this.outputEu = water*coilLevel*tier*tier/4;
+        long pow= (long) water *coilLevel*tier*tier;
+        this.outputEu = pow/4;
     }
 
     private long geteu()
     {
         Random rand = new Random();
         int randomNum = rand.nextInt(40);
-        return (((long) outputEu*(randomNum+80)/160));
+        return outputEu*(randomNum+80)/160;
     }
     private final FluidStack LUBRICANT_STACK = Lubricant.getFluid(1);
     private void generator() {

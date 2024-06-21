@@ -228,7 +228,7 @@ public class MetaTileEntityBiologicalReaction extends GTQTRecipeMapMultiblockCon
     public boolean checkRecipe(@Nonnull Recipe recipe, boolean consumeIfSuccess) {
         if(this.getRecipeMap() != BIOLOGICAL_REACTION_RECIPES)return true;
         int number=recipe.getProperty(BRProperty.getInstance(), 0);
-        if(rate>=number)
+        if(rate*100>=number)
             return super.checkRecipe(recipe, consumeIfSuccess);
         else return false;
     }
@@ -246,10 +246,10 @@ public class MetaTileEntityBiologicalReaction extends GTQTRecipeMapMultiblockCon
             super(tileEntity,true);
         }
         FluidStack WATER = Water.getFluid(100);
-        FluidStack BIO1 = RawGrowthMedium.getFluid(1);
-        FluidStack BIO2 = EnrichedBacterialSludge .getFluid(4);
-        FluidStack BIO3 = FermentedBiomass.getFluid(8);
-        FluidStack BIO4 = Biomass.getFluid(10);
+        FluidStack BIO1 = RawGrowthMedium.getFluid(10);
+        FluidStack BIO2 = EnrichedBacterialSludge .getFluid(40);
+        FluidStack BIO3 = FermentedBiomass.getFluid(80);
+        FluidStack BIO4 = Biomass.getFluid(100);
 
 
 
