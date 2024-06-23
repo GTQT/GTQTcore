@@ -492,6 +492,32 @@ public class KeQingNET {
                         .duration(1200))
                 .buildAndRegister();
 
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(frameGt, HastelloyX,64)
+                .inputs(GTQTMetaBlocks.POWER.getItemVariant(POWER_SUPPLY_BASIC, 64))
+                .input(EMITTER_IV, 32)
+                .input(SENSOR_IV, 32)
+                .input(circuit, MarkerMaterials.Tier.IV, 64)
+                .input(gear, NaquadahAlloy, 8)
+                .input(plate, RhodiumPlatedPalladium, 32)
+                .input(plate, RTMAlloy, 32)
+                .input(plate, Ruridit, 32)
+                .input(screw, HSSS, 32)
+                .input(stickLong, NanometerBariumTitanate, 64)
+                .input(stickLong, NanometerBariumTitanate, 64)
+                .input(foil, NiobiumNitride, 32)
+                .fluidInputs(Zylon.getFluid(9216))
+                .fluidInputs(Polybenzimidazole.getFluid(4608))
+                .fluidInputs(TitaniumTungstenCarbide.getFluid(4608))
+                .output(MICROWAVE_ENERGY_RECEIVER_CONTROL)
+                .EUt(VA[IV])
+                .duration(3200)
+                .scannerResearch(b -> b
+                        .researchStack(POWER_SUPPLY.getStackForm())
+                        .EUt(VA[EV])
+                        .duration(1200))
+                .buildAndRegister();
+
         //Arc
         ASSEMBLER_RECIPES.recipeBuilder()
                 .inputs(HULL[2].getStackForm(16))

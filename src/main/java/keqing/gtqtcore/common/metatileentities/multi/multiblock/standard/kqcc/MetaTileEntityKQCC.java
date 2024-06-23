@@ -72,7 +72,6 @@ public class MetaTileEntityKQCC extends MultiblockWithDisplayBase implements IOp
     private int CPU3;
     private int GPU3;
     private int RAM3;
-    int a;
     private int CPU4;
     private int GPU4;
     private int RAM4;
@@ -93,11 +92,11 @@ public class MetaTileEntityKQCC extends MultiblockWithDisplayBase implements IOp
         return group;
     }
     private void incrementThreshold(Widget.ClickData clickData) {
-        this.a = MathHelper.clamp(a + 1, 0, 2);
+        this.thresholdPercentage = MathHelper.clamp(thresholdPercentage + 1, 0, 2);
     }
 
     private void decrementThreshold(Widget.ClickData clickData) {
-        this.a = MathHelper.clamp(a - 1, 0, 2);
+        this.thresholdPercentage = MathHelper.clamp(thresholdPercentage - 1, 0, 2);
     }
 
 
@@ -114,20 +113,19 @@ public class MetaTileEntityKQCC extends MultiblockWithDisplayBase implements IOp
     FluidStack COLD_STACKB1 = LiquidNitrogen.getFluid(4);
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
-        data.setInteger("a", a);
         data.setFloat("HOT", HOT);
+        data.setInteger("thresholdPercentage", thresholdPercentage);
         return super.writeToNBT(data);
     }
     @Override
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
-        a = data.getInteger("a");
         HOT = data.getFloat("HOT");
+        thresholdPercentage = data.getInteger("thresholdPercentage");
     }
     @Override
     protected void updateFormedValid() {
         consumeEnergy();
-        thresholdPercentage=a;
         if(HOT>10) HOT=HOT-10;
 
         if(HOT>5000) {

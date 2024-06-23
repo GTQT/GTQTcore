@@ -937,10 +937,28 @@ public class CPULine {
                 .EUt(1920)
                 .input(LAMINATION_GE)
                 .input(foil,NanometerBariumTitanate,2)
-                .fluidInputs(StyreneButadieneRubber.getFluid(400))
+                .fluidInputs(StyreneButadieneRubber.getFluid(576))
                 .fluidInputs(Zylon.getFluid(576))
                 .output(IMPREGNATED_FIBER,4)
                 .buildAndRegister();
 
+        //这里是IV的纤维强化
+        FLUID_SOLIDFICATION_RECIPES.recipeBuilder()
+                .duration(100)
+                .EUt(7680)
+                .input(IMPREGNATED_MULTILAYER_FIBER)
+                .fluidInputs(DiethylhexylPhosphoricAcid.getFluid(250))
+                .output(MULTILAYER_FIBER_BOARD)
+                .buildAndRegister();
+
+        LARGE_CHEMICAL_RECIPES.recipeBuilder()
+                .duration(100)
+                .EUt(7680)
+                .input(plate,UraniumRhodiumDinaquadide)
+                .input(foil,RhodiumPlatedPalladium,2)
+                .fluidInputs(Polyetheretherketone.getFluid(576))
+                .fluidInputs(Polybenzimidazole.getFluid(576))
+                .output(IMPREGNATED_MULTILAYER_FIBER,4)
+                .buildAndRegister();
     }
 }

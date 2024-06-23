@@ -779,15 +779,6 @@ public class MetaTileEntityLoader {
                 .duration(120)
                 .buildAndRegister();
 
-        //  Cryogenic Freezer
-        ModHandler.addShapedRecipe(true, "cryogenic_freezer", CRYOGENIC_FREEZER.getStackForm(),
-                "SXS", "EHE", "PWP",
-                'S', new UnificationEntry(spring, HSSG),
-                'X', new UnificationEntry(circuit, MarkerMaterials.Tier.LuV),
-                'H', VACUUM_FREEZER.getStackForm(),
-                'E', ELECTRIC_PUMP_IV.getStackForm(),
-                'P', new UnificationEntry(plate, TanmolyiumBetaC),
-                'W', new UnificationEntry(cableGtSingle, Platinum));
 
         ModHandler.addShapedRecipe(true, "roaster", ROASTER.getStackForm(),
                 "KSK", "CHC", "PPP",
@@ -873,6 +864,13 @@ public class MetaTileEntityLoader {
                 'H', MetaTileEntities.HULL[7].getStackForm(),
                 'M', ELECTRIC_MOTOR_UV.getStackForm()
         );
+
+        gregtech.loaders.recipe.MetaTileEntityLoader.registerMachineRecipe(true, MICROWAVE_ENERGY_RECEIVER,
+                "PCP", "EHE", "PCP",
+                'E', CraftingComponent.EMITTER,
+                'H', CraftingComponent.HULL,
+                'P', CraftingComponent.SENSOR,
+                'C', CraftingComponent.CIRCUIT);
 
         gregtech.loaders.recipe.MetaTileEntityLoader.registerMachineRecipe(true, KQCC_COMPUTATION_HATCH_RECEIVER,
                 "GEG", "PHP", "WXW",

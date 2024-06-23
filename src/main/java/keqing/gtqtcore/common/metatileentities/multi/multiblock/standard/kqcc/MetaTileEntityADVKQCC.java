@@ -67,7 +67,6 @@ public class MetaTileEntityADVKQCC extends MultiblockWithDisplayBase implements 
     private int CPU1;
     private int GPU1;
     private int RAM1;
-    int a;
     int thresholdPercentage=0;
     private IEnergyContainer energyContainer;
 
@@ -85,11 +84,11 @@ public class MetaTileEntityADVKQCC extends MultiblockWithDisplayBase implements 
         return group;
     }
     private void incrementThreshold(Widget.ClickData clickData) {
-        this.a = MathHelper.clamp(a + 1, 0, 2);
+        this.thresholdPercentage = MathHelper.clamp(thresholdPercentage + 1, 0, 2);
     }
 
     private void decrementThreshold(Widget.ClickData clickData) {
-        this.a = MathHelper.clamp(a - 1, 0, 2);
+        this.thresholdPercentage = MathHelper.clamp(thresholdPercentage - 1, 0, 2);
     }
 
 
@@ -106,20 +105,19 @@ public class MetaTileEntityADVKQCC extends MultiblockWithDisplayBase implements 
     FluidStack COLD_STACKB1 = LiquidNitrogen.getFluid(4);
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
-        data.setInteger("a", a);
         data.setFloat("HOT", HOT);
+        data.setInteger("thresholdPercentage", thresholdPercentage);
         return super.writeToNBT(data);
     }
     @Override
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
-        a = data.getInteger("a");
         HOT = data.getFloat("HOT");
+        thresholdPercentage = data.getInteger("thresholdPercentage");
     }
     @Override
     protected void updateFormedValid() {
         consumeEnergy();
-        thresholdPercentage=a;
         if(HOT>10) HOT=HOT-10;
 
         if(HOT>5000) {

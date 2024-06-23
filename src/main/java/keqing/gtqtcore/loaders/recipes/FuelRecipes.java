@@ -114,18 +114,6 @@ public class FuelRecipes {
                             .part(11234)
                             .buildAndRegister();
 
-                    PRECISE_ASSEMBLER_RECIPES.recipeBuilder()
-                            .input(screw, Hdcs, 4)
-                            .fluidInputs(SolderingAlloy.getFluid(L * 8))
-                            .fluidInputs(Kevlar.getFluid(L * 4))
-                            .output(ingot,Iron)
-                            .EUt(VA[UHV])
-                            .duration(120)
-                            .Tier(3)
-                            .CWUt(114)
-                            .buildAndRegister();
-
-
                     FLUID_EXTRACTOR_RECIPES.recipeBuilder().EUt(VA[IV]).duration(100)
                             .fluidInputs(EnrichedBacterialSludge.getFluid(1000))
                             .circuitMeta(1)

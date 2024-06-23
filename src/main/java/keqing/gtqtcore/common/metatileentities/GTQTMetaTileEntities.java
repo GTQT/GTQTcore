@@ -80,7 +80,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityCompressedFusionReactor COMPRESSED_FUSION_REACTOR_MKII;
     public static MetaTileEntityCompressedFusionReactor COMPRESSED_FUSION_REACTOR_MKIII;
     public static final MetaTileEntityCreativeEnergyHatch[] CREATIVE_ENERGY_HATCHES = new MetaTileEntityCreativeEnergyHatch[GTValues.V.length];
-    public static final MetaTileEntityMicrowaveEnergyReceiver[] MICROWAVE_ENERGY_RECEIVER = new MetaTileEntityMicrowaveEnergyReceiver[GTValues.V.length];
+    public static final MetaTileEntityMicrowaveEnergyReceiver[] MICROWAVE_ENERGY_RECEIVER = new MetaTileEntityMicrowaveEnergyReceiver[12];
     public static MetaTileInfWaterHatch INF_WATER_HATCH;
     public static MetaTileEntityLightningRod[] LIGHTNING_ROD = new MetaTileEntityLightningRod[3];
     public static MetaTileEntityDangoteDistillery DANGOTE_DISTILLERY;
@@ -487,6 +487,7 @@ public class GTQTMetaTileEntities {
             String tierName = GTValues.VN[i].toLowerCase();
             KQCC_COMPUTATION_HATCH_RECEIVER[i] = registerMetaTileEntity(15500 + i-1, new MetaTileEntityKQCCComputationHatch(gtqtcoreId("kqcccomputation_hatch.receiver." + tierName), i,  false));
             KQCC_COMPUTATION_HATCH_TRANSMITTER[i] = registerMetaTileEntity(15510 + i-1, new MetaTileEntityKQCCComputationHatch(gtqtcoreId("kqcccomputation_hatch.transmitter." + tierName), i,  true));
+            MICROWAVE_ENERGY_RECEIVER[i] = registerMetaTileEntity(15520 + i-1, new MetaTileEntityMicrowaveEnergyReceiver(gtqtcoreId("microwave_energy_receiver." + tierName), i));
         }
 
         registerMetaTileEntity(15541, new keqing.gtqtcore.common.metatileentities.multi.multiblockpart.MetaTileEntityParallelHatch(gtqtcoreId(String.format("parallel_hatch.%s", GTValues.VN[9])), 9));
@@ -601,10 +602,6 @@ public class GTQTMetaTileEntities {
 
         simpleTiredInit(CREATIVE_ENERGY_HATCHES,
                 (i) -> new MetaTileEntityCreativeEnergyHatch(gtqtcoreId("creative_energy_hatch."+GTValues.VN[i].toLowerCase()),i),
-                GTQTMetaTileEntities::nextMultiPartID);
-
-        simpleTiredInit(MICROWAVE_ENERGY_RECEIVER,
-                (i) -> new MetaTileEntityMicrowaveEnergyReceiver(gtqtcoreId("microwave_energy_receiver."+GTValues.VN[i].toLowerCase()),i),
                 GTQTMetaTileEntities::nextMultiPartID);
 
     }

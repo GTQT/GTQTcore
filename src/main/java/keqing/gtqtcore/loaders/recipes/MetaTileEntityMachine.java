@@ -421,7 +421,6 @@ public class MetaTileEntityMachine {
                 CIRCUIT,  'G', GLASS);
         registerMachineRecipe(GTQTMetaTileEntities.FLUID_CANNER, "EGE", "PGP", "CMC", 'M', HULL, 'P',  PUMP, 'E', PISTON, 'C',
                 CIRCUIT,  'G', GLASS);
-
     }
 
 }

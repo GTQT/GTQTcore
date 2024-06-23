@@ -77,6 +77,7 @@ public class GTQTRecipesManager {
         EtchingMaterialsChain.init();
         OilProcessing.init();
         DimethylformamideChain.init();
+        CleanWaterChain.init();
         KaptonChain.init();
         PowerSupply.init();
         AmmoniaChain.init();
@@ -124,6 +125,7 @@ public class GTQTRecipesManager {
         GCYSComponentRecipes.init();
         AutoChiselRecipeLoader.init();
         ChiselMachineRecipeLoader.init();
+        PreciseAssemblerChain.init();
     }
     private static void initOreProcessing() {
         PlatinumGroupProcessing.init();

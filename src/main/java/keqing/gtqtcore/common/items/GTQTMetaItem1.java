@@ -42,7 +42,7 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         IMPREGNATED_PLASTIC_SUBSTRATE = this.addItem(4,"item.impregnated_plastic_substrate").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
         IMPREGNATED_EPOXY = this.addItem(5,"item.impregnated_epoxy").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
         IMPREGNATED_FIBER = this.addItem(6,"item.impregnated_fiber").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
-
+        IMPREGNATED_MULTILAYER_FIBER = this.addItem(7,"item.impregnated_multilayer_fiber").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
         INSULATINGMICA = this.addItem(15,"item.insulatingmica").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
         LAMINATION_GE = this.addItem(16,"item.lamination_ge").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
 
@@ -216,7 +216,13 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         MANIFOLD_OSCILLATORY_POWER_CELL = addItem(434, "component.cosmic.manifold_oscillatory_power_cell").setCreativeTabs(CommonProxy.GTQTCore_HP);
         SCINTILLATOR = addItem(435, "scintillator").setCreativeTabs(CommonProxy.GTQTCore_GD);
         SCINTILLATOR_CRYSTAL = addItem(436, "scintillator_crystal").setCreativeTabs(CommonProxy.GTQTCore_GD);
-        
+
+        //440
+        CIRCUIT_GOOD_I = addItem(440, "circuit.good_i").setCreativeTabs(CommonProxy.GTQTCore_HP);
+        CIRCUIT_GOOD_II = addItem(441, "circuit.good_ii").setCreativeTabs(CommonProxy.GTQTCore_HP);
+        CIRCUIT_GOOD_III = addItem(442, "circuit.good_iii").setCreativeTabs(CommonProxy.GTQTCore_HP);
+        CIRCUIT_GOOD_IV = addItem(443, "circuit.good_iv").setCreativeTabs(CommonProxy.GTQTCore_HP);
+        CIRCUIT_GOOD_V = addItem(444, "circuit.good_v").setCreativeTabs(CommonProxy.GTQTCore_HP);
         // Circuits: ID 0-49
         GOOWARE_PROCESSOR = this.addItem(500, "circuit.gooware_processor").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.ZPM).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         GOOWARE_ASSEMBLY = this.addItem(501, "circuit.gooware_assembly").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.UV).setCreativeTabs(CommonProxy.GTQTCore_TAB);

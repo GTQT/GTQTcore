@@ -599,6 +599,14 @@ public class GTQTMaterials {
     public static Material SodiumPhosphotungstate;
     public static Material SodiumMolybdate;
     public static Material FluxedElectrum;
+    public static Material CleanWater_1;
+    public static Material CleanWater_2;
+    public static Material CleanWater_3;
+    public static Material CleanWater_4;
+    public static Material CleanWater_5;
+    public static Material CleanWater_6;
+    public static Material CleanWater_7;
+    public static Material CleanWater_8;
 
     //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/api/unification/GSMaterials.java
 

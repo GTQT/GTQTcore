@@ -2957,5 +2957,61 @@ public class FirstDegreeMaterials {
                 .flags(GENERATE_PLATE, GENERATE_ROD, GENERATE_FRAME, GENERATE_RING)
                 .build();
 
+        //净化水产线
+        GTQTMaterials.CleanWater_1 = new Material.Builder(getMaterialsId(), gregtechId("clean_water_1"))
+                .fluid()
+                .color(0x1874CD)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("H2O", true);
+
+        GTQTMaterials.CleanWater_2 = new Material.Builder(getMaterialsId(), gregtechId("clean_water_2"))
+                .fluid()
+                .color(0x1874CD)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("H2O", true);
+
+        GTQTMaterials.CleanWater_3 = new Material.Builder(getMaterialsId(), gregtechId("clean_water_3"))
+                .fluid()
+                .color(0x1874CD)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("H2O", true);
+
+        GTQTMaterials.CleanWater_4 = new Material.Builder(getMaterialsId(), gregtechId("clean_water_4"))
+                .fluid()
+                .color(0x1874CD)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("H2O", true);
+
+        GTQTMaterials.CleanWater_5 = new Material.Builder(getMaterialsId(), gregtechId("clean_water_5"))
+                .fluid()
+                .color(0x1874CD)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("H2O", true);
+
+        GTQTMaterials.CleanWater_6 = new Material.Builder(getMaterialsId(), gregtechId("clean_water_6"))
+                .fluid()
+                .color(0x1874CD)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("H2O", true);
+
+        GTQTMaterials.CleanWater_7 = new Material.Builder(getMaterialsId(), gregtechId("clean_water_7"))
+                .fluid()
+                .color(0x1874CD)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("H2O", true);
+
+        GTQTMaterials.CleanWater_8 = new Material.Builder(getMaterialsId(), gregtechId("clean_water_8"))
+                .fluid()
+                .color(0x1874CD)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("H2O", true);
     }
 }

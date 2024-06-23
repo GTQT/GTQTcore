@@ -178,7 +178,7 @@ public class EPMaterialPropertyAddition {
         Titanium.addFlags(GENERATE_FOIL);
         Germanium.addFlags(GENERATE_FOIL);
         Tungsten.addFlags(GENERATE_FINE_WIRE);
-        RhodiumPlatedPalladium.addFlags(GENERATE_FRAME, GENERATE_GEAR);
+        RhodiumPlatedPalladium.addFlags(GENERATE_FRAME, GENERATE_GEAR,GENERATE_FOIL);
         Darmstadtium.addFlags(GENERATE_FRAME, GENERATE_GEAR);
         Naquadria.addFlags(GENERATE_FRAME);
         Neutronium.addFlags(GENERATE_FRAME);

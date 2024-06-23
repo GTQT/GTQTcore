@@ -22,6 +22,7 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem IMPREGNATED_SUBSTRATE;
     public static MetaItem<?>.MetaValueItem IMPREGNATED_EPOXY;
     public static MetaItem<?>.MetaValueItem IMPREGNATED_FIBER;
+    public static MetaItem<?>.MetaValueItem IMPREGNATED_MULTILAYER_FIBER;
     public static MetaItem<?>.MetaValueItem LAMINATION_GE;
     public static MetaItem<?>.MetaValueItem TIME_BOTTLE;
     public static MetaItem<?>.MetaValueItem GENERAL_CIRCUIT_ULV;
@@ -381,6 +382,12 @@ public class GTQTMetaItems {
 
     public static MetaItem<?>.MetaValueItem SCINTILLATOR;
     public static MetaItem<?>.MetaValueItem SCINTILLATOR_CRYSTAL;
+
+    public static MetaItem<?>.MetaValueItem CIRCUIT_GOOD_I;
+    public static MetaItem<?>.MetaValueItem CIRCUIT_GOOD_II;
+    public static MetaItem<?>.MetaValueItem CIRCUIT_GOOD_III;
+    public static MetaItem<?>.MetaValueItem CIRCUIT_GOOD_IV;
+    public static MetaItem<?>.MetaValueItem CIRCUIT_GOOD_V;
     // Circuit Boards
     public static MetaItem<?>.MetaValueItem GOOWARE_BOARD;
     public static MetaItem<?>.MetaValueItem OPTICAL_BOARD;
