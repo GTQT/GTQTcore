@@ -19,10 +19,12 @@ import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.*;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
+import gregtech.api.pattern.MultiblockShapeInfo;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.recipes.recipeproperties.FusionEUToStartProperty;
+import gregtech.api.recipes.recipeproperties.IRecipePropertyStorage;
 import gregtech.api.util.RelativeDirection;
 import gregtech.api.util.TextComponentUtil;
 import gregtech.api.util.TextFormattingUtil;
@@ -34,10 +36,17 @@ import gregtech.client.shader.postprocessing.BloomEffect;
 import gregtech.client.shader.postprocessing.BloomType;
 import gregtech.client.utils.*;
 import gregtech.common.ConfigHolder;
+import gregtech.common.blocks.BlockGlassCasing;
+import gregtech.common.blocks.MetaBlocks;
+import gregtech.common.metatileentities.MetaTileEntities;
+import keqing.gtqtcore.api.gui.GTQTGuiTextures;
+import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTADVGlass;
+import keqing.gtqtcore.common.block.blocks.GTQTCompressedFusionReactor;
 import keqing.gtqtcore.common.block.blocks.GTQTMultiblockCasing;
 import keqing.gtqtcore.common.block.blocks.GTQTQuantumForceTransformerCasing;
+import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
@@ -46,6 +55,7 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
@@ -59,8 +69,13 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.DoubleSupplier;
+
+import static gregtech.api.GTValues.UEV;
+import static gregtech.api.GTValues.UHV;
 
 public class MetaTileEntityHugeFusionReactor extends RecipeMapMultiblockController
         implements IFastRenderMetaTileEntity, IBloomEffect {
@@ -81,7 +96,6 @@ public class MetaTileEntityHugeFusionReactor extends RecipeMapMultiblockControll
         this.recipeMapWorkable = new FusionRecipeLogic(this);
         this.tier = tier;
         this.energyContainer = new EnergyContainerHandler(this, 0, 0, 0, 0, 0) {
-
 
             @Override
             public String getName() {
@@ -116,49 +130,55 @@ public class MetaTileEntityHugeFusionReactor extends RecipeMapMultiblockControll
                 .aisle("######ICI######", "####GGAAAGG####", "######ICI######")
                 .aisle("###############", "######OSO######", "###############")
                 .where('S', selfPredicate())
-                .where('G', states(getCasingState(), getGlassState()))
-                .where('E', states(getCasingState(), getGlassState()).or(abilities(MultiblockAbility.INPUT_ENERGY)
-                        .setPreviewCount(16)))
+                .where('G', states(getCasingState()))
+                .where('E', states(getCasingState())
+                        .or(metaTileEntities(Arrays.stream(MetaTileEntities.ENERGY_INPUT_HATCH)
+                                .filter(mte -> mte != null && tier <= mte.getTier() && mte.getTier() <= UEV)
+                                .toArray(MetaTileEntity[]::new))
+                                .setMinGlobalLimited(1)
+                                .setPreviewCount(16))
+                )
                 .where('C', states(getCasingState()))
                 .where('K', states(getCoilState()))
-                .where('O', states(getCasingState(), getGlassState()).or(abilities(MultiblockAbility.EXPORT_FLUIDS)))
+                .where('O', states(getCasingState()).or(abilities(MultiblockAbility.EXPORT_FLUIDS)))
                 .where('A', air())
-                .where('I', states(getCasingState()).or(abilities(MultiblockAbility.IMPORT_FLUIDS).setMinGlobalLimited(2)))
+                .where('I',
+                        states(getCasingState()).or(abilities(MultiblockAbility.IMPORT_FLUIDS).setMinGlobalLimited(2)))
                 .where('#', any())
                 .build();
     }
-
     @SideOnly(Side.CLIENT)
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
         if (this.recipeMapWorkable.isActive()) {
-            return Textures.ACTIVE_FUSION_TEXTURE;
+            if (tier == UHV) {
+                return GTQTTextures.ADVANCED_ACTIVE_FUSION_TEXTURE;
+            } else {
+                return GTQTTextures.ULTIMATE_ACTIVE_FUSION_TEXTURE;
+            }
         } else {
-            return Textures.FUSION_TEXTURE;
+            if (tier == UHV) {
+                return GTQTTextures.ADVANCED_FUSION_TEXTURE;
+            } else {
+                return GTQTTextures.ULTIMATE_FUSION_TEXTURE;
+            }
         }
     }
 
     private IBlockState getGlassState() {
-        if (tier == GTValues.UHV)
-            return GTQTMetaBlocks.ADV_GLASS.getState(GTQTADVGlass.CasingType.TECH_FUSION_GLASS_IV);
-        if (tier == GTValues.UEV)
-            return GTQTMetaBlocks.ADV_GLASS.getState(GTQTADVGlass.CasingType.TECH_FUSION_GLASS_V);
-
-        return GTQTMetaBlocks.ADV_GLASS.getState(GTQTADVGlass.CasingType.TECH_FUSION_GLASS_VI);
-
+        return MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.FUSION_GLASS);
     }
 
     private IBlockState getCasingState() {
         if (tier == GTValues.UHV)
-            return GTQTMetaBlocks.MULTI_CASING.getState(GTQTMultiblockCasing.CasingType.CASING_FUSION_MKIV);
-        if (tier == GTValues.UEV)
-            return GTQTMetaBlocks.MULTI_CASING.getState(GTQTMultiblockCasing.CasingType.CASING_FUSION_MKV);
-
-        return GTQTMetaBlocks.MULTI_CASING.getState(GTQTMultiblockCasing.CasingType.CASING_FUSION_MKVI);
+            return GTQTMetaBlocks.COMPRESSED_FUSION_REACTOR.getState(GTQTCompressedFusionReactor.CasingType.CASING_FUSION_MKIV);
+        return GTQTMetaBlocks.COMPRESSED_FUSION_REACTOR.getState(GTQTCompressedFusionReactor.CasingType.CASING_FUSION_MKV);
     }
 
     private IBlockState getCoilState() {
-        return GTQTMetaBlocks.QUANTUM_CONSTRAINT_CASING.getState(GTQTQuantumForceTransformerCasing.CasingType.QUANTUM_FORCE_TRANSFORMER_COIL);
+        if (tier == GTValues.UHV)
+            return GTQTMetaBlocks.COMPRESSED_FUSION_REACTOR.getState(GTQTCompressedFusionReactor.CasingType.FUSION_COIL_MKII);
+        return GTQTMetaBlocks.COMPRESSED_FUSION_REACTOR.getState(GTQTCompressedFusionReactor.CasingType.FUSION_COIL_MKIII);
     }
 
     protected int getFusionRingColor() {
@@ -182,19 +202,6 @@ public class MetaTileEntityHugeFusionReactor extends RecipeMapMultiblockControll
         super.formStructure(context);
         this.initializeAbilities();
         ((EnergyContainerHandler) this.energyContainer).setEnergyStored(energyStored);
-    }
-
-    @Override
-    public void addInformation(ItemStack stack,  World player,  List<String> tooltip, boolean advanced) {
-        super.addInformation(stack, player, tooltip, advanced);
-        tooltip.add(I18n.format("gregtech.machine.fusion_reactor.capacity", calculateEnergyStorageFactor(16) / 1000000L));
-        tooltip.add(I18n.format("gregtech.machine.fusion_reactor.overclocking"));
-        if (tier == GTValues.UHV){
-            tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("惊 鸿 万 物", new Object[0]));}
-        if (tier == GTValues.UEV){
-            tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("破 碎 亘 古", new Object[0]));}
-        if (tier == GTValues.UIV){
-            tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("凌 驾 虚 无", new Object[0]));}
     }
 
     @Override
@@ -275,10 +282,16 @@ public class MetaTileEntityHugeFusionReactor extends RecipeMapMultiblockControll
         }
     }
 
-
+    @Override
+    public void addInformation(ItemStack stack,  World player,  List<String> tooltip,
+                               boolean advanced) {
+        super.addInformation(stack, player, tooltip, advanced);
+        tooltip.add(
+                I18n.format("gregtech.machine.fusion_reactor.capacity", calculateEnergyStorageFactor(16) / 1000000L));
+        tooltip.add(I18n.format("gregtech.machine.fusion_reactor.overclocking"));
+    }
 
     @SideOnly(Side.CLIENT)
-
     @Override
     protected ICubeRenderer getFrontOverlay() {
         return Textures.FUSION_REACTOR_OVERLAY;
@@ -324,13 +337,11 @@ public class MetaTileEntityHugeFusionReactor extends RecipeMapMultiblockControll
         // Title
         if (tier == GTValues.UHV) {
             // MK1
-            builder.widget(new ImageWidget(66, 9, 67, 12, GuiTextures.FUSION_REACTOR_MK1_TITLE).setIgnoreColor(true));
-        } else if (tier == GTValues.UEV) {
-            // MK2
-            builder.widget(new ImageWidget(65, 9, 69, 12, GuiTextures.FUSION_REACTOR_MK2_TITLE).setIgnoreColor(true));
-        } else {
+            builder.widget(new ImageWidget(66, 9, 67, 12, GTQTGuiTextures.FUSION_REACTOR_MK4_TITLE).setIgnoreColor(true));
+        }
+        else {
             // MK3
-            builder.widget(new ImageWidget(64, 9, 71, 12, GuiTextures.FUSION_REACTOR_MK3_TITLE).setIgnoreColor(true));
+            builder.widget(new ImageWidget(64, 9, 71, 12, GTQTGuiTextures.FUSION_REACTOR_MK5_TITLE).setIgnoreColor(true));
         }
 
         // Fusion Diagram + Progress Bar
@@ -570,6 +581,19 @@ public class MetaTileEntityHugeFusionReactor extends RecipeMapMultiblockControll
             return true;
         }
 
+        @Override
+        protected void modifyOverclockPre(int  [] values,  IRecipePropertyStorage storage) {
+            super.modifyOverclockPre(values, storage);
+
+            // Limit the number of OCs to the difference in fusion reactor MK.
+            // I.e., a MK2 reactor can overclock a MK1 recipe once, and a
+            // MK3 reactor can overclock a MK2 recipe once, or a MK1 recipe twice.
+            long euToStart = storage.getRecipePropertyValue(FusionEUToStartProperty.getInstance(), 0L);
+            int fusionTier = FusionEUToStartProperty.getFusionTier(euToStart);
+            if (fusionTier != 0) fusionTier = MetaTileEntityHugeFusionReactor.this.tier - fusionTier;
+            values[2] = Math.min(fusionTier, values[2]);
+        }
+
 
         @Override
         public NBTTagCompound serializeNBT() {
@@ -617,18 +641,20 @@ public class MetaTileEntityHugeFusionReactor extends RecipeMapMultiblockControll
         EnumFacing.Axis axis = RelativeDirection.UP.getRelativeFacing(getFrontFacing(), getUpwardsFacing(), isFlipped())
                 .getAxis();
 
+        buffer.begin(GL11.GL_QUAD_STRIP, DefaultVertexFormats.POSITION_COLOR);
         RenderBufferHelper.renderRing(buffer,
                 getPos().getX() - context.cameraX() + relativeBack.getXOffset() * 7 + 0.5,
                 getPos().getY() - context.cameraY() + relativeBack.getYOffset() * 7 + 0.5,
                 getPos().getZ() - context.cameraZ() + relativeBack.getZOffset() * 7 + 0.5,
                 6, 0.2, 10, 20,
                 r, g, b, a, axis);
+        Tessellator.getInstance().draw();
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public boolean shouldRenderBloomEffect( EffectRenderContext context) {
-        return this.hasFusionRingColor();
+        return this.hasFusionRingColor() && context.camera().isBoundingBoxInFrustum(getRenderBoundingBox());
     }
 
     @Override
@@ -679,14 +705,10 @@ public class MetaTileEntityHugeFusionReactor extends RecipeMapMultiblockControll
             GlStateManager.color(1, 1, 1, 1);
             OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240.0F, 240.0F);
             GlStateManager.disableTexture2D();
-
-            buffer.begin(GL11.GL_QUAD_STRIP, DefaultVertexFormats.POSITION_COLOR);
         }
 
         @Override
         public void postDraw( BufferBuilder buffer) {
-            Tessellator.getInstance().draw();
-
             GlStateManager.enableTexture2D();
             OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, lastBrightnessX, lastBrightnessY);
         }

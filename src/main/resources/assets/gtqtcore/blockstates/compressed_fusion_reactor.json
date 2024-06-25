@@ -1,0 +1,37 @@
+{
+  "forge_marker": 1,
+  "variants": {
+    "variant": {
+      "machine_casing_fusion_4": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gtqtcore:blocks/casings/compressed_fusion_reactor/machine_casing_fusion_4"
+        }
+      },
+      "machine_casing_fusion_5": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gtqtcore:blocks/casings/compressed_fusion_reactor/machine_casing_fusion_5"
+        }
+      },
+      "fusion_coil_mkii": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gtqtcore:blocks/casings/compressed_fusion_reactor/fusion_coil_mkii"
+        }
+      },
+      "fusion_coil_mkiii": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gtqtcore:blocks/casings/compressed_fusion_reactor/fusion_coil_mkiii"
+        }
+      },
+      "fusion_coil_mkiv": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gtqtcore:blocks/casings/compressed_fusion_reactor/fusion_coil_mkiv"
+        }
+      }
+    }
+  }
+}

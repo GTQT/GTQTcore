@@ -31,7 +31,7 @@ public class BoronChain {
                 .output(dust, Salt, 2)
                 .fluidOutputs(BenzenediazoniumTetrafluoroborate.getFluid(1000))
                 .fluidOutputs(Water.getFluid(2000))
-                .recipeLevel(5)
+                .recipeLevel(4)
                 .EUt(VA[LuV])
                 .duration(120)
                 .buildAndRegister();
@@ -42,7 +42,7 @@ public class BoronChain {
                 .fluidOutputs(BoronTrifluoride.getFluid(3000))
                 .fluidOutputs(Nitrogen.getFluid(2000))
                 .fluidOutputs(Fluorobenzene.getFluid(1000))
-                .EUt(VA[UV])
+                .EUt(VA[LuV])
                 .duration(6000)
                 .buildAndRegister();
 

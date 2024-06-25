@@ -15,14 +15,18 @@ import keqing.gtqtcore.common.block.blocks.GTQTMultiblockCasing;
 import net.minecraft.util.IStringSerializable;
 
 import static gregicality.multiblocks.api.recipes.GCYMRecipeMaps.ALLOY_BLAST_RECIPES;
-import static gregicality.multiblocks.api.unification.GCYMMaterials.TitaniumCarbide;
+import static gregicality.multiblocks.api.unification.GCYMMaterials.*;
+import static gregicality.multiblocks.api.unification.GCYMMaterials.WatertightSteel;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
+import static gregtech.common.items.MetaItems.COMPONENT_GRINDER_TUNGSTEN;
+import static gregtech.common.metatileentities.MetaTileEntities.HULL;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.BLAST_ARC_RECIPES;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
+import static keqing.gtqtcore.common.block.blocks.GTQTIsaCasing.CasingType.*;
 import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.*;
 import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing1.TurbineCasingType.GALVANIZE_STEEL_CASING;
 import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing1.TurbineCasingType.*;
@@ -36,6 +40,74 @@ public class MachineCasing {
     }
 
     private static void CasingRecipes() {
+        //粉碎
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(HULL[EV], 2)
+                .input(plate, Nichrome, 4)
+                .input(plate, WatertightSteel, 4)
+                .input(stickLong, HSSG, 2)
+                .input(bolt, HastelloyN, 16)
+                .fluidInputs(StainlessSteel.getFluid(L * 8))
+                .outputs(GTQTMetaBlocks.ISA_CASING.getItemVariant(FLOTATION_CASING, 2))
+                .EUt(VA[IV])
+                .duration(280)
+                .buildAndRegister();
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(frameGt, HSSG)
+                .input(plate, HSSG, 4)
+                .input(gear, HastelloyN, 3)
+                .input(gearSmall, HSSG, 6)
+                .input(bolt, TungstenCarbide, 16)
+                .fluidInputs(HastelloyX.getFluid(L * 2))
+                .outputs(GTQTMetaBlocks.ISA_CASING.getItemVariant(FLOTATION_CASING_GEARBOX, 2))
+                .EUt(VA[LuV])
+                .duration(140)
+                .buildAndRegister();
+
+        ModHandler.addShapedRecipe(true, "hastelloy_n_pipe", GTQTMetaBlocks.ISA_CASING.getItemVariant(FLOTATION_CASING_PIPE, 1),
+                "APA", "PFP", "APA",
+                'F', new UnificationEntry(frameGt, WatertightSteel),
+                'P', new UnificationEntry(pipeNormalFluid, HastelloyN),
+                'A', new UnificationEntry(plate, VanadiumGallium));
+
+        ModHandler.addShapedRecipe(true, "intake_pipe", GTQTMetaBlocks.ISA_CASING.getItemVariant(FLOTATION_INTAKE_CASING, 1),
+                "APA", "PFP", "APA",
+                'F', new UnificationEntry(frameGt, NaquadahAlloy),
+                'P', new UnificationEntry(pipeNormalFluid, Naquadah),
+                'A', new UnificationEntry(plate, VanadiumGallium));
+
+        // 研磨
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(HULL[EV], 2)
+                .input(plate, Inconel625, 4)
+                .input(plate, HSSE, 8)
+                .input(ring, Inconel625, 8)
+                .input(bolt, Inconel625, 16)
+                .fluidInputs(Titanium.getFluid(L * 8))
+                .outputs(GTQTMetaBlocks.ISA_CASING.getItemVariant(ISA_MILL_CASING, 1))
+                .EUt(VA[EV])
+                .duration(240)
+                .buildAndRegister();
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(frameGt, HSSS)
+                .input(gear, Inconel625, 3)
+                .input(gearSmall, HSSG, 6)
+                .input(bolt, HSSE, 16)
+                .input(COMPONENT_GRINDER_TUNGSTEN, 2)
+                .fluidInputs(Zeron100.getFluid(L * 2))
+                .outputs(GTQTMetaBlocks.ISA_CASING.getItemVariant(ISA_MILL_CASING_GEARBOX, 1))
+                .EUt(VA[LuV])
+                .duration(300)
+                .buildAndRegister();
+
+        ModHandler.addShapedRecipe(true, "inconel_625_pipe", GTQTMetaBlocks.ISA_CASING.getItemVariant(ISA_MILL_CASING_PIPE, 1),
+                "APA", "PFP", "APA",
+                'F', new UnificationEntry(frameGt, MaragingSteel300),
+                'P', new UnificationEntry(pipeNormalFluid, Inconel625),
+                'A', new UnificationEntry(plate, NiobiumTitanium));
+
         ASSEMBLER_RECIPES.recipeBuilder()
                 .inputs(MetaBlocks.METAL_CASING.getItemVariant(BlockMetalCasing.MetalCasingType.INVAR_HEATPROOF))
                 .circuitMeta(6)

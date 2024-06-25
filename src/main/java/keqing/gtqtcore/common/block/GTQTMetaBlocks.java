@@ -34,6 +34,7 @@ public class GTQTMetaBlocks {
     public static GTQTIsaCasing ISA_CASING;
     public static GTQTElectronMicroscope ELECTRON_MICROSCOPE;
     public static GTQTElectrobath ELECTROBATH;
+    public static GTQTCompressedFusionReactor COMPRESSED_FUSION_REACTOR;
     public static GTQTParticleAccelerator PARTICLE_ACCELERATOR;
     public static GTQTNuclearFusion NUCLEAR_FUSION;
     public static GTQTRoad ROAD;
@@ -74,7 +75,8 @@ public class GTQTMetaBlocks {
         COMPONENT_ASSEMBLY_LINE.setRegistryName("component_assembly_line_casing");
         ISA_CASING = new GTQTIsaCasing();
         ISA_CASING.setRegistryName("isa_casing");
-
+        COMPRESSED_FUSION_REACTOR = new GTQTCompressedFusionReactor();
+        COMPRESSED_FUSION_REACTOR.setRegistryName("compressed_fusion_reactor");
         ELECTRON_MICROSCOPE = new GTQTElectronMicroscope();
         ELECTRON_MICROSCOPE.setRegistryName("electron_microscope");
         PCB_FACTORY_CASING = new BlockPCBFactoryCasing();
@@ -132,6 +134,7 @@ public class GTQTMetaBlocks {
         registerItemModel(QUANTUM_CONSTRAINT_CASING);
         registerItemModel(COMPONENT_ASSEMBLY_LINE);
         registerItemModel(ISA_CASING);
+        registerItemModel(COMPRESSED_FUSION_REACTOR);
         registerItemModel(ELECTRON_MICROSCOPE);
         registerItemModel(NUCLEAR_FUSION);
         registerItemModel(KQCC);

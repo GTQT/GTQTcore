@@ -497,34 +497,6 @@ public class SecondDegreeMaterials {
                 .components(Forsterite, 3, Augite, 3, Andradite, 2, Lizardite, 1)
                 .build();
 
-        Cinobite = new Material.Builder(getMaterialsId(), gregtechId("cinobite"))
-                .ingot()
-                .fluid()
-                .color(0x010101)
-                .iconSet(SHINY)
-                .blast(b -> b
-                        .temp(10460, BlastProperty.GasTier.HIGHER)
-                        .blastStats(VA[UV], 800)
-                        .vacuumStats(VA[LuV], 140))
-                //.components(Zeron100, 8, Stellite100, 6, Titanium, 6, Naquadria, 4, Osmiridium, 3, Aluminium, 2, Tin, 1, Mercury, 1)
-                .flags(GENERATE_PLATE, GENERATE_ROD, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_ROTOR)
-                .build()
-                .setFormula("(Cr₁₃Ni₃Mo₂Cu₁₀W₂Fe₂₀)₈Nq₄Gd₃Al₂HgSnTi₆(Ir₃Os)");
-
-        //  12021 Titan Steel
-        TitanSteel = new Material.Builder(getMaterialsId(), gregtechId("titan_steel"))
-                .ingot()
-                .fluid()
-                .color(0xAA0D0D)
-                .iconSet(SHINY)
-                .blast(b -> b
-                        .temp(10600, BlastProperty.GasTier.HIGHEST)
-                        .blastStats(VA[UHV], 1200)
-                        .vacuumStats(VA[ZPM], 180))
-                //.components(TitaniumTungstenCarbide, 6, AusteniticStainlessSteel904L, 3, Ruby, 3)
-                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_BOLT_SCREW, GENERATE_ROTOR)
-                .build()
-                .setFormula("((WC)₇Ti₃)₃?₃");
         //铁系泡沫
         GTQTMaterials.IronFront  = new Material.Builder(getMaterialsId(), gregtechId( "iron_front")).fluid().color(0xD6D6D6).build();
         GTQTMaterials.BandedIronFront  = new Material.Builder(getMaterialsId(), gregtechId( "banded_iron_front")).fluid().color(0xDAA520).build();

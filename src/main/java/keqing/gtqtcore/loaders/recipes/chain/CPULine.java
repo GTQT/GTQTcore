@@ -874,10 +874,10 @@ public class CPULine {
                 .duration(100)
                 .EUt(120)
                 .input(wireFine,Fiberglass,4)
-                .input(foil,Gold,2)
+                .input(foil,Gold,8)
                 .fluidInputs(Epoxy.getFluid(576))
                 .fluidInputs(Polyethylene.getFluid(400))
-                .output(IMPREGNATED_PLASTIC_SUBSTRATE,4)
+                .output(IMPREGNATED_PLASTIC_SUBSTRATE)
                 .buildAndRegister();
 
         FLUID_SOLIDFICATION_RECIPES.recipeBuilder()
@@ -901,10 +901,10 @@ public class CPULine {
                 .duration(100)
                 .EUt(480)
                 .input(plate,Polytetrafluoroethylene)
-                .input(foil,Platinum,2)
-                .fluidInputs(StyreneButadieneRubber.getFluid(400))
+                .input(foil,Platinum,8)
+                .fluidInputs(StyreneButadieneRubber.getFluid(576))
                 .fluidInputs(Brominatedepoxyresins.getFluid(576))
-                .output(IMPREGNATED_EPOXY,4)
+                .output(IMPREGNATED_EPOXY)
                 .buildAndRegister();
 
         //这里是EV阶段的纤维强化电路板
@@ -936,10 +936,10 @@ public class CPULine {
                 .duration(100)
                 .EUt(1920)
                 .input(LAMINATION_GE)
-                .input(foil,NanometerBariumTitanate,2)
+                .input(foil,NanometerBariumTitanate,8)
                 .fluidInputs(StyreneButadieneRubber.getFluid(576))
                 .fluidInputs(Zylon.getFluid(576))
-                .output(IMPREGNATED_FIBER,4)
+                .output(IMPREGNATED_FIBER)
                 .buildAndRegister();
 
         //这里是IV的纤维强化
@@ -954,11 +954,12 @@ public class CPULine {
         LARGE_CHEMICAL_RECIPES.recipeBuilder()
                 .duration(100)
                 .EUt(7680)
-                .input(plate,UraniumRhodiumDinaquadide)
-                .input(foil,RhodiumPlatedPalladium,2)
+                .input(plate,UraniumRhodiumDinaquadide,1)
+                .input(FIBER_BOARD,2)
+                .input(foil,RhodiumPlatedPalladium,8)
                 .fluidInputs(Polyetheretherketone.getFluid(576))
                 .fluidInputs(Polybenzimidazole.getFluid(576))
-                .output(IMPREGNATED_MULTILAYER_FIBER,4)
+                .output(IMPREGNATED_MULTILAYER_FIBER)
                 .buildAndRegister();
     }
 }

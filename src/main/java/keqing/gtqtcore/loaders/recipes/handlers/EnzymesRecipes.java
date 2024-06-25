@@ -203,12 +203,14 @@ public class EnzymesRecipes {
                 .fluidInputs(THF.getFluid(1000))
                 .fluidInputs(Hydroxymethylfurfural.getFluid(1000))
                 .fluidOutputs(Methylfuran.getFluid(1000))
+                .recipeLevel(3)
                 .duration(400).EUt(VA[HV]).buildAndRegister();
 
         CHEMICAL_PLANT.recipeBuilder()
                 .fluidInputs(Methylfuran.getFluid(1000))
                 .fluidInputs(Water.getFluid(1000))
                 .fluidOutputs(CHES.getFluid(1000))
+                .recipeLevel(3)
                 .duration(400).EUt(VA[HV]).buildAndRegister();
 
         //生物缓冲剂
@@ -216,6 +218,7 @@ public class EnzymesRecipes {
                 .fluidInputs(CHES.getFluid(1000))
                 .fluidInputs(SodiumHydroxide.getFluid(1440))
                 .fluidOutputs(Ethanesulphonate.getFluid(1000))
+                .recipeLevel(3)
                 .duration(400).EUt(VA[HV]).buildAndRegister();
     }
 
@@ -228,6 +231,7 @@ public class EnzymesRecipes {
                 .fluidInputs(Isoamylalcohol.getFluid(1000))
                 .fluidInputs(DistilledWater.getFluid(1000))
                 .fluidOutputs(material2.getFluid(16000))
+                .recipeLevel(3)
                 .duration(400).EUt(VA[HV]).buildAndRegister();
     }
 

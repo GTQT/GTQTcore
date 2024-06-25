@@ -177,6 +177,7 @@ public class NaquadahChain {
                 .fluidOutputs(EnrichedNaquadahResidueSolution.getFluid(1000))
                 .fluidOutputs(HydrofluoricAcid.getFluid(8000))
                 .EUt(VA[LuV])
+                .recipeLevel(4)
                 .duration(1200)
                 .buildAndRegister();
 

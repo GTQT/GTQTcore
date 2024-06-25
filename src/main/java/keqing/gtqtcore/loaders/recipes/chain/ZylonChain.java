@@ -42,6 +42,7 @@ public class ZylonChain {
                 .fluidInputs(Bromine.getFluid(2000))
                 .fluidOutputs(Dibromomethylbenzene.getFluid(1000))
                 .EUt(VA[HV])
+                .recipeLevel(3)
                 .duration(200)
                 .buildAndRegister();
 
@@ -62,6 +63,7 @@ public class ZylonChain {
                 .fluidOutputs(HydrogenSulfide.getFluid(1000))
                 .fluidOutputs(HydrogenPeroxide.getFluid(1000))
                 .EUt(VA[HV])
+                .recipeLevel(3)
                 .duration(120)
                 .buildAndRegister();
 
@@ -125,6 +127,7 @@ public class ZylonChain {
                 .fluidOutputs(AceticAcid.getFluid(1000))
                 .fluidOutputs(SodiumAcetate.getFluid(1000))
                 .EUt(VA[HV])
+                .recipeLevel(3)
                 .duration(200)
                 .buildAndRegister();
 
@@ -136,6 +139,7 @@ public class ZylonChain {
                 .output(dust, PreZylon)
                 .fluidOutputs(Oxygen.getFluid(6000))
                 .EUt(VA[HV])
+                .recipeLevel(3)
                 .duration(50)
                 .buildAndRegister();
 

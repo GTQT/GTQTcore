@@ -6,6 +6,7 @@ import static gregicality.multiblocks.api.unification.GCYMMaterials.MaragingStee
 import static gregicality.multiblocks.api.unification.GCYMMaterials.Stellite100;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.info.MaterialFlags.*;
+import static keqing.gtqtcore.api.unification.GCYSMaterials.Orichalcum;
 import static keqing.gtqtcore.api.unification.material.info.EPMaterialFlags.*;
 
 public class EPMaterialFlagAddition {
@@ -29,6 +30,10 @@ public class EPMaterialFlagAddition {
         Naquadah.addFlags(GENERATE_FRAME);
         Coal.addFlags(GENERATE_DENSE,GENERATE_PLATE,GENERATE_DOUBLE_PLATE);
         RedSteel.addFlags(GENERATE_BOULE,GENERATE_FRAME);
+        Naquadria.addFlags(GENERATE_FRAME);
+        NaquadahEnriched.addFlags(GENERATE_FRAME);
+        Tritanium.addFlags(GENERATE_FRAME);
+        Orichalcum.addFlags(GENERATE_FRAME);
         // CarbonNanotube.addFlags(GENERATE_COIL);
 
         //  Voltage coils

@@ -19,7 +19,7 @@ public class PEEKChain {
                 .fluidOutputs(Polyetheretherketone.getFluid(2592))
                 .fluidOutputs(CarbonDioxide.getFluid(1000))
                 .fluidOutputs(Water.getFluid(1000))
-                .EUt(VA[ZPM])
+                .EUt(VA[IV])
                 .duration(240)
                 .buildAndRegister();
 
@@ -31,7 +31,8 @@ public class PEEKChain {
                 .output(dust, SodiumFluoride, 4)
                 .fluidOutputs(Polyetheretherketone.getFluid(2592))
                 .fluidOutputs(Water.getFluid(2000))
-                .EUt(VA[UHV])
+                .EUt(VA[IV])
+                .recipeLevel(3)
                 .duration(480)
                 .buildAndRegister();
 
@@ -45,6 +46,7 @@ public class PEEKChain {
                 .output(dust, Difluorobenzophenone, 24)
                 .fluidOutputs(HydrofluoricAcid.getFluid(6000))
                 .EUt(VA[EV])
+                .recipeLevel(3)
                 .duration(200)
                 .buildAndRegister();
 
@@ -80,7 +82,7 @@ public class PEEKChain {
                 .input(dust, Aluminium)
                 .fluidInputs(Chlorine.getFluid(1000))
                 .output(dust, ZnFeAlClCatalyst, 4)
-                .EUt(VA[LuV])
+                .EUt(VA[IV])
                 .duration(280)
                 .buildAndRegister();
     }

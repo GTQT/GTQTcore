@@ -27,6 +27,10 @@ public class GTQTTextures {
     public static OverlayRenderer MULTIPART_BUFFER_HATCH = new OverlayRenderer("multipart/overlay_buffer_hatch");
     public static OrientedOverlayRenderer ROCKET_ENGINE_OVERLAY = new OrientedOverlayRenderer("machines/rocket_engine");
     public static OrientedOverlayRenderer NAQUADAH_REACTOR_OVERLAY = new OrientedOverlayRenderer("machines/naquadah_reactor");
+    public static final SimpleOverlayRenderer ADVANCED_FUSION_TEXTURE = new SimpleOverlayRenderer("casings/fusion/machine_casing_advanced_fusion_hatch");
+    public static final SimpleOverlayRenderer ULTIMATE_FUSION_TEXTURE = new SimpleOverlayRenderer("casings/fusion/machine_casing_ultimate_fusion_hatch");
+    public static final SimpleOverlayRenderer ADVANCED_ACTIVE_FUSION_TEXTURE = new SimpleOverlayRenderer("casings/fusion/machine_casing_advanced_fusion_hatch_blue");
+    public static final SimpleOverlayRenderer ULTIMATE_ACTIVE_FUSION_TEXTURE = new SimpleOverlayRenderer("casings/fusion/machine_casing_ultimate_fusion_hatch_blue");
     //怎么写？请看
     //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/client/textures/GSTextures.java
     public static OrientedOverlayRenderer LIGHTNING_ROD_OVERLAY;

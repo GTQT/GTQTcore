@@ -136,6 +136,8 @@ public class GTQTElementMaterials {
         //  26013 Degenerate Rhenium
         DegenerateRhenium = new Material.Builder(getMaterialsId(), gregtechId("degenerate_rhenium"))
                 .dust()
+                .liquid()
+                .plasma(new FluidBuilder().temperature((int) V[UV]))
                 .color(0x6666FF)
                 .iconSet(CUSTOM_DEGENERATE_RHENIUM)
                 .element(Elements.Rh)

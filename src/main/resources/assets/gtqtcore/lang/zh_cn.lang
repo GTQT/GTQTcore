@@ -3221,19 +3221,27 @@ gtqtcore.machine.quantum_force_transformer.tier.2=寰宇 (2级)
 gtqtcore.machine.quantum_force_transformer.tier.3=无尽时空 (3级)
 gtqtcore.machine.quantum_force_transformer.tier.4=超因果连续体 (4级)
 
-gtqtcore.machine.large_naquadah_reactor.name=大型硅岩反应堆
-gtqtcore.machine.large_naquadah_reactor.tooltip.1=取之不尽，用之不竭
-gtqtcore.machine.large_naquadah_reactor.tooltip.2=最高产生§3UV§7级的能量
 gtqtcore.machine.electrobath.name=工业电解槽
+
+gtqtcore.machine.large_naquadah_reactor.name=大型硅岩反应堆
+gtqtcore.machine.large_naquadah_reactor.tooltip=取之不尽，用之不竭
+gtqtcore.machine.large_naquadah_reactor.plasma_oxygen_boosted=等离子体催化中。
+gtqtcore.machine.large_naquadah_reactor.tooltip.boost=提供§f50 L/s§7的氧等离子体，并消耗§f双倍§7燃料以产生高达§f%s§7 EU/t的功率。
+gtqtcore.machine.large_naquadah_reactor.plasma_amount=等离子体存量：%s
+gtqtcore.machine.large_naquadah_reactor.boost_disallowed=升级你的动力仓以激活等离子体催化
+
 gtqtcore.machine.hyper_reactor_mk1.name=超能反应堆 Mk I
-gtqtcore.machine.hyper_reactor_mk1.tooltip.1=磁约束超能聚变
-gtqtcore.machine.hyper_reactor_mk1.tooltip.2=最高产生§4UHV§7级的能量
+gtqtcore.machine.hyper_reactor_mk1.tooltip=磁约束超能聚变
+gtqtcore.machine.hyper_reactor_mk1.tooltip.boost=提供§f100 L/s§7的铁等离子体，并消耗§f双倍§7燃料以产生高达§f%s§7 EU/t的功率。
+
 gtqtcore.machine.hyper_reactor_mk2.name=超能反应堆 Mk II
-gtqtcore.machine.hyper_reactor_mk2.tooltip.1=力场约束超能聚变
-gtqtcore.machine.hyper_reactor_mk2.tooltip.2=最高产生§aUEV§7级的能量
+gtqtcore.machine.hyper_reactor_mk2.tooltip=力场约束超能聚变
+gtqtcore.machine.hyper_reactor_mk2.tooltip.boost=提供§f80 L/s§7的镅等离子体，并消耗§f双倍§7燃料以产生高达§f%s§7 EU/t的功率。
+
 gtqtcore.machine.hyper_reactor_mk3.name=超能反应堆 Mk III
-gtqtcore.machine.hyper_reactor_mk3.tooltip.1=自控制超能聚变
-gtqtcore.machine.hyper_reactor_mk3.tooltip.2=最高产生§2UIV§7级的能量
+gtqtcore.machine.hyper_reactor_mk3.tooltip=自控制超能聚变
+gtqtcore.machine.hyper_reactor_mk3.tooltip.boost=提供§f50 L/s§7的简并态铼等离子体，并消耗§f双倍§7燃料以产生高达§f%s§7 EU/t的功率。
+
 gtqtcore.multiblock.sf.1=你需要每TICK提供40L水才能工作！
 gtqtcore.multiblock.ele.no_water=电极洁净度过低！
 gtqtcore.multiblock.ele.amount=洁净剂储量：%s
@@ -3455,6 +3463,65 @@ tile.quantum_force_transformer_casing.supracausal_continuum_manipulator_casing.t
 tile.quantum_force_transformer_casing.supracausal_continuum_shielding_core_casing.name=超因果连续体扭曲核心机械方块
 tile.quantum_force_transformer_casing.supracausal_continuum_shielding_core_casing.tooltip=§b量子操纵者§7-屏蔽核心等级：§cIV§7
 tile.quantum_force_transformer_casing.quantum_force_transformer_coil.name=超维度转换线圈方块
+
+gtqtcore.machine.compressed_fusion_reactor.luv.name=压缩核聚变反应堆控制电脑 Mk I
+gtqtcore.machine.compressed_fusion_reactor.luv.tooltip.1=宇 宙 大 爆 炸
+gtqtcore.machine.compressed_fusion_reactor.luv.tooltip.2=可以放置至多32个能源仓，包括高安与无线能源仓，
+gtqtcore.machine.compressed_fusion_reactor.luv.tooltip.3=每个能源仓提供§r131,072 EU/t§7的输入与§r5M EU§7的容量。
+gtqtcore.machine.compressed_fusion_reactor.luv.tooltip.4=当配方所需的启动能量消耗高于§e(能源仓数 * 容量)§7时无法运行。
+gtqtcore.machine.compressed_fusion_reactor.luv.tooltip.5=最大并行数：
+gtqtcore.machine.compressed_fusion_reactor.luv.tooltip.6=- 启动能量 < 160,000,000 EU：§e64§7
+
+gtqtcore.machine.compressed_fusion_reactor.zpm.name=压缩核聚变反应堆控制电脑 Mk II
+gtqtcore.machine.compressed_fusion_reactor.zpm.tooltip.1=贯 穿 维 度
+gtqtcore.machine.compressed_fusion_reactor.zpm.tooltip.2=可以放置至多32个能源仓，包括高安与无线能源仓，
+gtqtcore.machine.compressed_fusion_reactor.zpm.tooltip.3=每个能源仓提供§r524,288 EU/t§7的输入与§r10M EU§7的容量。
+gtqtcore.machine.compressed_fusion_reactor.zpm.tooltip.4=当配方所需的启动能量消耗高于§e(能源仓数 * 容量)§7时无法运行。
+gtqtcore.machine.compressed_fusion_reactor.zpm.tooltip.5=最大并行数：
+gtqtcore.machine.compressed_fusion_reactor.zpm.tooltip.6=- 启动能量 < 160,000,000 EU: §e128§7
+gtqtcore.machine.compressed_fusion_reactor.zpm.tooltip.7=- 启动能量 < 320,000,000 EU: §e64§7
+
+gtqtcore.machine.compressed_fusion_reactor.uv.name=压缩核聚变反应堆控制电脑 Mk III
+gtqtcore.machine.compressed_fusion_reactor.uv.tooltip.1=大 统 一 理 论
+gtqtcore.machine.compressed_fusion_reactor.uv.tooltip.2=可以放置至多32个能源仓，包括高安与无线能源仓，
+gtqtcore.machine.compressed_fusion_reactor.uv.tooltip.3=每个能源仓提供§r1,572,864 EU/t§7的输入与§r20M EU§7的容量。
+gtqtcore.machine.compressed_fusion_reactor.uv.tooltip.4=当配方所需的启动能量消耗高于§e(能源仓数 * 容量)§7时无法运行。
+gtqtcore.machine.compressed_fusion_reactor.uv.tooltip.5=最大并行数：
+gtqtcore.machine.compressed_fusion_reactor.uv.tooltip.6=- 启动能量 < 160,000,000 EU: §e192§7
+gtqtcore.machine.compressed_fusion_reactor.uv.tooltip.7=- 启动能量 < 320,000,000 EU: §e128§7
+gtqtcore.machine.compressed_fusion_reactor.uv.tooltip.8=- 启动能量 < 640,000,000 EU: §e64§7
+
+gtqtcore.machine.compressed_fusion_reactor.uhv.name=压缩核聚变反应堆控制电脑 Mk IV
+gtqtcore.machine.compressed_fusion_reactor.uhv.tooltip.1=破 碎 亘 古
+gtqtcore.machine.compressed_fusion_reactor.uhv.tooltip.2=可以放置至多32个能源仓，包括高安与无线能源仓，
+gtqtcore.machine.compressed_fusion_reactor.uhv.tooltip.3=每个能源仓提供§r33,554,432 EU/t§7的输入与§r80M EU§7的容量。
+gtqtcore.machine.compressed_fusion_reactor.uhv.tooltip.4=当配方所需的启动能量消耗高于§e(能源仓数 * 容量)§7时无法运行。
+gtqtcore.machine.compressed_fusion_reactor.uhv.tooltip.5=最大并行数：
+gtqtcore.machine.compressed_fusion_reactor.uhv.tooltip.6=- 启动能量 < 160,000,000 EU: §e256§7
+gtqtcore.machine.compressed_fusion_reactor.uhv.tooltip.7=- 启动能量 < 320,000,000 EU: §e192§7
+gtqtcore.machine.compressed_fusion_reactor.uhv.tooltip.8=- 启动能量 < 640,000,000 EU: §e128§7
+gtqtcore.machine.compressed_fusion_reactor.uhv.tooltip.9=- 启动能量 < 1,200,000,000 EU: §e64§7
+
+gtqtcore.machine.compressed_fusion_reactor.uev.name=压缩核聚变反应堆控制电脑 Mk V
+gtqtcore.machine.compressed_fusion_reactor.uev.tooltip.1=凝 聚 虚 无
+gtqtcore.machine.compressed_fusion_reactor.uev.tooltip.2=可以放置至多32个能源仓，包括高安与无线能源仓，
+gtqtcore.machine.compressed_fusion_reactor.uev.tooltip.3=每个能源仓提供§r167,772,160 EU/t§7的输入与§r320M EU§7的容量。
+gtqtcore.machine.compressed_fusion_reactor.uev.tooltip.4=当配方所需的启动能量消耗高于§e(能源仓数 * 容量)§7时无法运行。
+gtqtcore.machine.compressed_fusion_reactor.uev.tooltip.5=最大并行数：
+gtqtcore.machine.compressed_fusion_reactor.uev.tooltip.6=- 启动能量 < 160,000,000 EU: §e320§7
+gtqtcore.machine.compressed_fusion_reactor.uev.tooltip.7=- 启动能量 < 320,000,000 EU: §e256§7
+gtqtcore.machine.compressed_fusion_reactor.uev.tooltip.8=- 启动能量 < 640,000,000 EU: §e192§7
+gtqtcore.machine.compressed_fusion_reactor.uev.tooltip.9=- 启动能量 < 1,200,000,000 EU: §e128§7
+gtqtcore.machine.compressed_fusion_reactor.uev.tooltip.10=- 启动能量 < 2,000,000,000 EU: §e128§7
+
+gtqtcore.machine.compressed_fusion_reactor.common_oc=超频将使能耗翻§r2§7倍，处理时间减少至§r1/2§7（2/2无损超频）。
+gtqtcore.machine.compressed_fusion_reactor.perfect_oc=超频将使能耗翻§r4§7倍，处理时间减少至§r1/4§7（4/4无损超频）。
+
+tile.compressed_fusion_reactor.machine_casing_fusion_4.name=聚变机器外壳 Mk IV
+tile.compressed_fusion_reactor.machine_casing_fusion_5.name=聚变机器外壳 Mk V
+tile.compressed_fusion_reactor.fusion_coil_mkii.name=高级聚变线圈方块
+tile.compressed_fusion_reactor.fusion_coil_mkiii.name=终极聚变线圈方块
+tile.compressed_fusion_reactor.fusion_coil_mkiv.name=恒星聚变线圈方块
 
 tile.power_supply.power_supply_basic.name=基本填充模块
 tile.power_supply.power_supply_basic.tooltip=最佳气氛组

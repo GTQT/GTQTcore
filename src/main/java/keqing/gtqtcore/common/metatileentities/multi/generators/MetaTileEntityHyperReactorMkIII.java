@@ -1,7 +1,5 @@
 package keqing.gtqtcore.common.metatileentities.multi.generators;
 
-import gregicality.multiblocks.common.block.GCYMMetaBlocks;
-import gregicality.multiblocks.common.block.blocks.BlockUniqueCasing;
 import gregtech.api.GTValues;
 import gregtech.api.capability.GregtechCapabilities;
 import gregtech.api.capability.IEnergyContainer;
@@ -22,17 +20,15 @@ import gregtech.api.util.TextComponentUtil;
 import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
-import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
-import gregtech.common.blocks.BlockMultiblockCasing;
+import gregtech.common.blocks.BlockGlassCasing;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
+import keqing.gtqtcore.api.unification.GTQTMaterials;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
@@ -42,29 +38,25 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
 import static gregtech.api.GTValues.*;
-import static gregtech.api.GTValues.UHV;
-import static gregtech.common.blocks.MetaBlocks.FRAMES;
-import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.HYPER_CASING;
+import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.*;
 
-public class MetaTileEntityLargeNaquadahReactor extends FuelMultiblockController implements IProgressBarMultiblock {
+public class MetaTileEntityHyperReactorMkIII extends FuelMultiblockController implements IProgressBarMultiblock {
 
     private boolean boostAllowed;
 
-    public MetaTileEntityLargeNaquadahReactor(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, GTQTcoreRecipeMaps.NAQUADAH_REACTOR, UHV);
-        this.recipeMapWorkable = new LargeNaquadahReactorWorkableHandler(this);
-        this.recipeMapWorkable.setMaximumOverclockVoltage(V[UHV]);
+    public MetaTileEntityHyperReactorMkIII(ResourceLocation metaTileEntityId) {
+        super(metaTileEntityId, GTQTcoreRecipeMaps.HYPER_REACTOR_MK3_RECIPES, UXV);
+        this.recipeMapWorkable = new HyperReactorMark3WorkableHandler(this);
+        this.recipeMapWorkable.setMaximumOverclockVoltage(V[UXV]);
     }
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
-        return new MetaTileEntityLargeNaquadahReactor(metaTileEntityId);
+        return new MetaTileEntityHyperReactorMkIII(metaTileEntityId);
     }
 
     @Override
@@ -77,10 +69,10 @@ public class MetaTileEntityLargeNaquadahReactor extends FuelMultiblockController
 
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
-        LargeNaquadahReactorWorkableHandler recipeLogic = (LargeNaquadahReactorWorkableHandler) this.recipeMapWorkable;
+        HyperReactorMark3WorkableHandler recipeLogic = (HyperReactorMark3WorkableHandler) this.recipeMapWorkable;
         MultiblockDisplayText.builder(textList, this.isStructureFormed())
                 .setWorkingStatus(recipeLogic.isWorkingEnabled(), recipeLogic.isActive())
-                .addEnergyProductionLine(GTValues.V[UEV], recipeLogic.getRecipeEUt())
+                .addEnergyProductionLine(V[OpV], recipeLogic.getRecipeEUt())
                 .addFuelNeededLine(recipeLogic.getRecipeFluidInputInfo(), recipeLogic.getPreviousRecipeDuration())
                 .addCustom((tl) -> {
                     if (this.isStructureFormed() && recipeLogic.isBoosted) {
@@ -92,44 +84,46 @@ public class MetaTileEntityLargeNaquadahReactor extends FuelMultiblockController
 
     @Override
     public void addInformation(ItemStack stack,
-                               @Nullable World player,
-                               List<String> tooltip,
+                                World player,
+                                List<String> tooltip,
                                boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
-        tooltip.add(I18n.format("gregtech.universal.tooltip.base_production_eut", GTValues.V[UHV]));
-        tooltip.add(I18n.format("gtqtcore.machine.large_naquadah_reactor.tooltip.boost", GTValues.V[UHV] * 4L));
+        tooltip.add(I18n.format("gregtech.universal.tooltip.base_production_eut", GTValues.V[UXV]));
+        tooltip.add(I18n.format("gtqtcore.machine.hyper_reactor_mk3.tooltip.boost", GTValues.V[UXV] * 4L));
         tooltip.add(I18n.format("gtqtcore.universal.tooltip.laser_output"));
     }
+
 
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
-                .aisle(" CCC ", " CUC ", " CCC ", "  C  ", "  C  ", " CCC ", " CUC ", " CCC ")
-                .aisle("CCCCC", "CP#PC", "CG#GC", " P#P ", " P#P ", "CG#GC", "CP#PC", " CCC ")
-                .aisle("CCCCC", "U#F#U", "C#F#C", "C#F#C", "C#F#C", "C#F#C", "U#F#U", " COC ")
-                .aisle("CCCCC", "CP#PC", "CG#GC", " P#P ", " P#P ", "CG#GC", "CP#PC", " CCC ")
-                .aisle(" CCC ", " CSC ", " CCC ", "  C  ", "  C  ", " CCC ", " CUC ", " CCC ")
+                .aisle("           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "    CCC    ", "   CCCCC   ", "   CCCCC   ", "   CCCCC   ", "    CCC    ", "           ", "           ", "           ")
+                .aisle("           ", "           ", "           ", "           ", "           ", "           ", "           ", "   CCCCC   ", "  CC###CC  ", "  C#####C  ", "  C#####C  ", "  C#####C  ", "  CC###CC  ", "   CCCCC   ", "           ", "           ")
+                .aisle("  F     F  ", "  F     F  ", "  F     F  ", "  F     F  ", "  F     F  ", "  F     F  ", "  FCCCCCF  ", "  C#####C  ", " C#######C ", " C#######C ", " C#######C ", " C#######C ", " C#######C ", "  C#####C  ", "   CCCCC   ", "           ")
+                .aisle("   F   F   ", "   F   F   ", "   F   F   ", "   F   F   ", "   F   F   ", "   FCCCF   ", "  CC###CC  ", " C#######C ", " C#######C ", "C#########C", "C####H####C", "C#########C", " C#######C ", " C#######C ", "  CC###CC  ", "    CCC    ")
+                .aisle("           ", "           ", "           ", "           ", "           ", "   CCCCC   ", "  C#####C  ", " C#######C ", "C#########C", "G####H####G", "G###HHH###G", "G####H####G", "C#########C", " C#######C ", "  C#####C  ", "   CCCCC   ")
+                .aisle("           ", "           ", "           ", "           ", "           ", "   CCCCC   ", "  C#####C  ", " C#######C ", "C####H####C", "G###HHH###G", "G##HHHHH##G", "G###HHH###G", "C####H####C", " C#######C ", "  C#####C  ", "   CCCCC   ")
+                .aisle("           ", "           ", "           ", "           ", "           ", "   CCCCC   ", "  C#####C  ", " C#######C ", "C#########C", "G####H####G", "G###HHH###G", "G####H####G", "C#########C", " C#######C ", "  C#####C  ", "   CCCCC   ")
+                .aisle("   F   F   ", "   F   F   ", "   F   F   ", "   F   F   ", "   F   F   ", "   FCCCF   ", "  CC###CC  ", " C#######C ", " C#######C ", "C#########C", "C####H####C", "C#########C", " C#######C ", " C#######C ", "  CC###CC  ", "    CCC    ")
+                .aisle("  F     F  ", "  F     F  ", "  F     F  ", "  F     F  ", "  F     F  ", "  F     F  ", "  FCCCCCF  ", "  C#####C  ", " C#######C ", " C#######C ", " C#######C ", " C#######C ", " C#######C ", "  C#####C  ", "   CCCCC   ", "           ")
+                .aisle("           ", "           ", "           ", "           ", "           ", "           ", "           ", "   CCCCC   ", "  CC###CC  ", "  C#####C  ", "  C#####C  ", "  C#####C  ", "  CC###CC  ", "   CCCCC   ", "           ", "           ")
+                .aisle("           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "    CCC    ", "   CCCCC   ", "   CCSCC   ", "   CCCCC   ", "    CCC    ", "           ", "           ", "           ")
                 .where('S', this.selfPredicate())
                 .where('C', states(getCasingState())
-                        .setMinGlobalLimited(70)
+                        .setMinGlobalLimited(250)
                         .or(autoAbilities(false, true, false, false, true, false, false))
                         .or(metaTileEntities(MultiblockAbility.REGISTRY.get(MultiblockAbility.OUTPUT_ENERGY).stream()
                                 .filter(mte -> {
                                     IEnergyContainer container = mte.getCapability(GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER, null);
-                                    return container != null && container.getOutputVoltage() == GTValues.V[UHV];})
+                                    return container != null && container.getOutputVoltage() == GTValues.V[UXV];})
                                 .toArray(MetaTileEntity[]::new))
-                                .setMaxGlobalLimited(1)
-                                .setPreviewCount(1))
-                        .or(abilities(MultiblockAbility.OUTPUT_LASER)
-                                .setMaxGlobalLimited(1)
+                                .setExactLimit(1)
                                 .setPreviewCount(1)))
-                .where('U', states(getUniqueCasingState()))
-                .where('G', states(getSecondCasingState()))
                 .where('F', states(getFrameState()))
-                .where('P', states(getBoilerCasingState()))
-                .where('O', abilities(MultiblockAbility.MUFFLER_HATCH))
-                .where(' ', any())
+                .where('H', states(getUniqueCasingState()))
+                .where('G', states(getGlassState()))
                 .where('#', air())
+                .where(' ', any())
                 .build();
     }
 
@@ -137,21 +131,17 @@ public class MetaTileEntityLargeNaquadahReactor extends FuelMultiblockController
         return GTQTMetaBlocks.TURBINE_CASING.getState(HYPER_CASING);
     }
 
-
-    private static IBlockState getSecondCasingState() {
-        return MetaBlocks.MULTIBLOCK_CASING.getState(gregtech.common.blocks.BlockMultiblockCasing.MultiblockCasingType.GRATE_CASING);
-    }
-
     private static IBlockState getUniqueCasingState() {
-        return GCYMMetaBlocks.UNIQUE_CASING.getState(BlockUniqueCasing.UniqueCasingType.HEAT_VENT);
+        return GTQTMetaBlocks.TURBINE_CASING.getState(HYPER_CIRE_MK3);
     }
 
-    private static IBlockState getBoilerCasingState() {
-        return GTQTMetaBlocks.TURBINE_CASING.getState(GTQTTurbineCasing.TurbineCasingType.POLYBENZIMIDAZOLE_PIPE);
-    }
 
     private static IBlockState getFrameState() {
         return MetaBlocks.FRAMES.get(Materials.Naquadria).getBlock(Materials.Naquadria);
+    }
+
+    private static IBlockState getGlassState() {
+        return MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.FUSION_GLASS);
     }
 
     @SideOnly(Side.CLIENT)
@@ -166,17 +156,11 @@ public class MetaTileEntityLargeNaquadahReactor extends FuelMultiblockController
         return Textures.POWER_SUBSTATION_OVERLAY;
     }
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    public EnumParticleTypes getMufflerParticle() {
-        return EnumParticleTypes.SPELL_WITCH;
-    }
-
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
         IEnergyContainer energyContainer = this.getEnergyContainer();
-        this.boostAllowed = energyContainer != null && energyContainer.getOutputVoltage() >= GTValues.V[UEV];
+        this.boostAllowed = energyContainer != null && energyContainer.getOutputVoltage() >= GTValues.V[OpV];
     }
 
     @Override
@@ -211,7 +195,7 @@ public class MetaTileEntityLargeNaquadahReactor extends FuelMultiblockController
         } else {
             plasmaAmount = new int[2];
             if (this.getInputFluidInventory() != null && this.isBoostAllowed()) {
-                FluidStack plasmaStack = Materials.Oxygen.getPlasma(Integer.MAX_VALUE);
+                FluidStack plasmaStack = GTQTMaterials.DegenerateRhenium.getPlasma(Integer.MAX_VALUE);
                 plasmaAmount = this.getTotalFluidAmount(plasmaStack, this.getInputFluidInventory());
             }
 
@@ -241,7 +225,7 @@ public class MetaTileEntityLargeNaquadahReactor extends FuelMultiblockController
                 plasmaStored = 0;
                 plasmaCapacity = 0;
                 if (this.isStructureFormed() && this.getInputFluidInventory() != null) {
-                    FluidStack plasmaStack = Materials.Oxygen.getPlasma(Integer.MAX_VALUE);
+                    FluidStack plasmaStack = GTQTMaterials.DegenerateRhenium.getPlasma(Integer.MAX_VALUE);
                     int[] plasmaAmount = this.getTotalFluidAmount(plasmaStack, this.getInputFluidInventory());
                     plasmaStored = plasmaAmount[0];
                     plasmaCapacity = plasmaAmount[1];
@@ -255,15 +239,15 @@ public class MetaTileEntityLargeNaquadahReactor extends FuelMultiblockController
         }
     }
 
-    private static class LargeNaquadahReactorWorkableHandler extends MultiblockFuelRecipeLogic {
+    private static class HyperReactorMark3WorkableHandler extends MultiblockFuelRecipeLogic {
 
         private boolean isBoosted = false;
-        private final MetaTileEntityLargeNaquadahReactor naquadahReactor;
-        private static final FluidStack PLASMA_OXYGEN_STACK = Materials.Oxygen.getPlasma(50); // This amount from Gregicality (Legacy).
+        private final MetaTileEntityHyperReactorMkIII hyperReactor;
+        private static final FluidStack PLASMA_RHENIUM_STACK = GTQTMaterials.DegenerateRhenium.getPlasma(50);
 
-        public LargeNaquadahReactorWorkableHandler(RecipeMapMultiblockController tileEntity) {
+        public HyperReactorMark3WorkableHandler(RecipeMapMultiblockController tileEntity) {
             super(tileEntity);
-            this.naquadahReactor = (MetaTileEntityLargeNaquadahReactor) tileEntity;
+            this.hyperReactor = (MetaTileEntityHyperReactorMkIII) tileEntity;
         }
 
         @Override
@@ -278,16 +262,16 @@ public class MetaTileEntityLargeNaquadahReactor extends FuelMultiblockController
         }
 
         protected void checkPlasma() {
-            if (this.naquadahReactor.isBoostAllowed()) {
-                IMultipleTankHandler inputTank = this.naquadahReactor.getInputFluidInventory();
-                FluidStack boosterStack = PLASMA_OXYGEN_STACK;
+            if (this.hyperReactor.isBoostAllowed()) {
+                IMultipleTankHandler inputTank = this.hyperReactor.getInputFluidInventory();
+                FluidStack boosterStack = PLASMA_RHENIUM_STACK;
                 this.isBoosted = boosterStack.isFluidStackIdentical(inputTank.drain(boosterStack, false));
             }
         }
 
         protected void drainPlasma() {
             if (this.isBoosted && this.totalContinuousRunningTime % 20L == 0L) {
-                this.naquadahReactor.getInputFluidInventory().drain(PLASMA_OXYGEN_STACK, true);
+                this.hyperReactor.getInputFluidInventory().drain(PLASMA_RHENIUM_STACK, true);
             }
         }
 
@@ -304,7 +288,7 @@ public class MetaTileEntityLargeNaquadahReactor extends FuelMultiblockController
 
         @Override
         public long getMaxVoltage() {
-            return this.isBoosted ? GTValues.V[UHV] * 2L : GTValues.V[UHV];
+            return this.isBoosted ? V[UXV] * 2L : V[UXV];
         }
 
         @Override

@@ -47,6 +47,7 @@ public class CBDOPolycarbonateChain {
                 .fluidInputs(Hydrogen.getFluid(4000))
                 .fluidOutputs(Tetramethylcyclobutanediol.getFluid(1000))
                 .EUt(VA[UV])
+                .recipeLevel(6)
                 .duration(120)
                 .buildAndRegister();
 

@@ -33,6 +33,7 @@ public class CTABChain {
                 .fluidInputs(Isoamylalcohol.getFluid(1000))
                 .fluidInputs(Chloroform.getFluid(40))
                 .fluidOutputs(DNAa.getFluid(4000))
+                .recipeLevel(3)
                 .duration(400).EUt(VA[HV]).buildAndRegister();
 
         BIOLOGICAL_REACTION_RECIPES.recipeBuilder()

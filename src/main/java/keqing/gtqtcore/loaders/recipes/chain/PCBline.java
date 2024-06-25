@@ -31,12 +31,12 @@ public class PCBline {
         addPlasticTier(Polytetrafluoroethylene, 3);
         addPlasticTier(Epoxy, 4);
         addPlasticTier(ReinforcedEpoxyResin, 5);
-        addPlasticTier(Polybenzimidazole, 6);
-        addPlasticTier(KaptonK, 7);
-        addPlasticTier(KaptonE, 8);
-        addPlasticTier(Polyetheretherketone, 9);
-        addPlasticTier(Kevlar, 10);
-        addPlasticTier(Zylon, 11);
+        addPlasticTier(Zylon, 6);
+        addPlasticTier(Polybenzimidazole, 7);
+        addPlasticTier(Polyetheretherketone, 8);
+        addPlasticTier(KaptonK, 9);
+        addPlasticTier(KaptonE, 10);
+        addPlasticTier(Kevlar, 11);
         addPlasticTier(FullerenePolymerMatrix, 12);
 
         //  Plastic Circuit Board (T1)

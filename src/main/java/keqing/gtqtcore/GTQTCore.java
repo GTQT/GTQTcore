@@ -1,5 +1,6 @@
 package keqing.gtqtcore;
 
+import gregtech.common.ConfigHolder;
 import keqing.gtqtcore.api.utils.GTQTLog;
 import keqing.gtqtcore.client.ClientProxy;
 import keqing.gtqtcore.common.CommonProxy;
@@ -17,7 +18,9 @@ import net.minecraftforge.fml.common.event.*;
         name="GTQTcore",
         acceptedMinecraftVersions = "[1.12.2,1.13)",
         version = "0.0.1-beta" ,
-        dependencies = "required-after:gregtech@[2.8.8-beta,) ;"
+        dependencies = "required-after:gregtech@[2.8.7-beta,);" +
+        "after:gcym@[1.2.7,);" +
+        "after:gregtechfoodoption@[1.11.0,);"
 )
 public class GTQTCore {
     public static final String PACK = "1.0.0_preview";
@@ -38,10 +41,12 @@ public class GTQTCore {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
+        ConfigHolder.machines.highTierContent = true;
+        ConfigHolder.machines.enableHighTierSolars = true;
         GTQTLog.init(event.getModLog());
         GTQTMetaItems.initialization();
-        GTQTMetaTileEntities.initialization();
         GTQTMetaBlocks.init();
+        GTQTMetaTileEntities.initialization();
         proxy.preLoad();
         proxy.preInit();
         MetaEntities.init();

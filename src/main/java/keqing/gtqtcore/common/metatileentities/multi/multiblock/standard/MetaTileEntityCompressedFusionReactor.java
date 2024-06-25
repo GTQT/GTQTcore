@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import com.google.common.util.concurrent.AtomicDouble;
 import gregtech.api.GTValues;
 import gregtech.api.block.IHeatingCoilBlockStats;
+import gregtech.api.capability.GregtechCapabilities;
 import gregtech.api.capability.GregtechDataCodes;
 import gregtech.api.capability.IEnergyContainer;
 import gregtech.api.capability.impl.*;
@@ -38,9 +39,11 @@ import gregtech.client.shader.postprocessing.BloomType;
 import gregtech.client.utils.*;
 import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.BlockFusionCasing;
+import gregtech.common.blocks.BlockGlassCasing;
 import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
+import keqing.gtqtcore.api.gui.GTQTGuiTextures;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
@@ -71,39 +74,45 @@ import org.lwjgl.opengl.GL11;
 import java.util.List;
 import java.util.function.DoubleSupplier;
 
-public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockController
-        implements IFastRenderMetaTileEntity, IBloomEffect {
+import static gregtech.api.GTValues.*;
+import static gregtech.api.GTValues.UEV;
 
-    protected int heatingCoilLevel;
-    protected int heatingCoilDiscount;
-    int beamTire;
-    private Integer color;
-    protected int glassTire;
+public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockController {
 
-    public int getMaxParallel(int heatingCoilLevel) {
-        if (tier == GTValues.UHV)
-            return   heatingCoilLevel;
-        if (tier == GTValues.UEV)
-            return  4 * heatingCoilLevel;
-        return  16 * heatingCoilLevel;
-    }
-    protected static final int NO_COLOR = 0;
-
+    //  Tier of CFR (Compressed Fusion Reactor), used to add more CFRs by one class,
+    //  we use {@link #LuV} to {@link #UEV} for Mark 1 to Mark 5.
     private final int tier;
+
+    //  Block State for CFR, for Mark 4 and Mark 5,
+    //  we do not need Cryostat, Divertor and Vacuum in CFR anymore.
+    //  Parameter {@code CoilState} means Fusion Coils.
+    public final IBlockState casingState;
+    public final IBlockState coilState;
+    public final IBlockState frameState;
+
+    //  Internal Energy Container, just like common Fusion Reactors.
     private EnergyContainerList inputEnergyContainers;
-    private long heat = 0; // defined in TileEntityFusionReactor but serialized in FusionRecipeLogic
-    private int fusionRingColor = NO_COLOR;
+
+    //  Heat, like common Fusion Reactors.
+    //  TODO Delete Heat system of CFR?
+    private long heat = 0;
+
+    //  Used for Special Progress Bar in Modular UI.
+    //  TODO Add new Modular UI form of CFR (different with Fusion Reactor)?
     private final FusionProgressSupplier progressBarSupplier;
 
-    @SideOnly(Side.CLIENT)
-    private boolean registeredBloomRenderTicket;
-
-    public MetaTileEntityCompressedFusionReactor(ResourceLocation metaTileEntityId, int tier) {
+    public MetaTileEntityCompressedFusionReactor(ResourceLocation metaTileEntityId,
+                                                 int tier,
+                                                 IBlockState casingState,
+                                                 IBlockState coilState,
+                                                 IBlockState frameState) {
         super(metaTileEntityId, RecipeMaps.FUSION_RECIPES);
-        this.recipeMapWorkable = new FusionRecipeLogic(this);
+        this.recipeMapWorkable = new CompressedFusionReactorRecipeLogic(this);
         this.tier = tier;
-        this.energyContainer = new EnergyContainerHandler(this, 0, 0, 0, 0, 0) {
-            
+        this.casingState = casingState;
+        this.coilState = coilState;
+        this.frameState = frameState;
+        this.energyContainer = new EnergyContainerHandler(this, Integer.MAX_VALUE, 0, 0, 0, 0) {
             @Override
             public String getName() {
                 return GregtechDataCodes.FUSION_REACTOR_ENERGY_CONTAINER_TRAIT;
@@ -114,429 +123,125 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
-        return new MetaTileEntityCompressedFusionReactor(metaTileEntityId, tier);
+        return new MetaTileEntityCompressedFusionReactor(metaTileEntityId, tier, casingState, coilState, frameState);
     }
 
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
-                .aisle(
-                        "                                               ",
-                        "                                               ",
-                        "                    FCICICF                    ",
-                        "                    PCIBICP                    ",
-                        "                    FCICICF                    ",
-                        "                                               ",
-                        "                                               ")
-                .aisle(
-                        "                                               ",
-                        "                    FCIBICF                    ",
-                        "                   CC     CC                   ",
-                        "                   PC     CP                   ",
-                        "                   CC     CC                   ",
-                        "                    FCIBICF                    ",
-                        "                                               ")
-                .aisle(
-                        "                    FCICICF                    ",
-                        "                   CC     CC                   ",
-                        "                CCCCC     CCCCC                ",
-                        "                PPPHHHHHHHHHPPP                ",
-                        "                CCCCC     CCCCC                ",
-                        "                   CC     CC                   ",
-                        "                    FCICICF                    ")
-                .aisle(
-                        "                    FCIBICF                    ",
-                        "                CCCCC     CCCCC                ",
-                        "              CCCCCHHHHHHHHHCCCCC              ",
-                        "              PPHHHHHHHHHHHHHHHPP              ",
-                        "              CCCCCHHHHHHHHHCCCCC              ",
-                        "                CCCCC     CCCCC                ",
-                        "                    FCIBICF                    ")
-                .aisle(
-                        "                    FCICICF                    ",
-                        "              CCCCCCC     CCCCCCC              ",
-                        "            CCCCHHHCC     CCHHHCCCC            ",
-                        "            PCHHHHHHHHHHHHHHHHHHHCP            ",
-                        "            CCCCHHHCC     CCHHHCCCC            ",
-                        "              CCCCCCC     CCCCCCC              ",
-                        "                    FCICICF                    ")
-                .aisle(
-                        "                                               ",
-                        "            CCCCCCC FCIBICF CCCCCCC            ",
-                        "           CCCHHCCCCC     CCCCCHHCCC           ",
-                        "           PHHHHHHHPC     CPHHHHHHHP           ",
-                        "           CCCHHCCCCC     CCCCCHHCCC           ",
-                        "            CCCCCCC FCIBICF CCCCCCC            ",
-                        "                                               ")
-                .aisle(
-                        "                                               ",
-                        "           CCCCC               CCCCC           ",
-                        "          ECHHCCCCC FCICICF CCCCCHHCE          ",
-                        "          PHHHHHPPP FCIBICF PPPHHHHHP          ",
-                        "          ECHHCCCCC FCICICF CCCCCHHCE          ",
-                        "           CCCCC               CCCCC           ",
-                        "                                               ")
-                .aisle(
-                        "                                               ",
-                        "          CCCC                   CCCC          ",
-                        "         CCHCCCC               CCCCHCC         ",
-                        "         PHHHHPP               PPHHHHP         ",
-                        "         CCHCCCC               CCCCHCC         ",
-                        "          CCCC                   CCCC          ",
-                        "                                               ")
-                .aisle(
-                        "                                               ",
-                        "         CCC                       CCC         ",
-                        "        CCHCCC                   CCCHCC        ",
-                        "        PHHHPP                   PPHHHP        ",
-                        "        CCHCCC                   CCCHCC        ",
-                        "         CCC                       CCC         ",
-                        "                                               ")
-                .aisle(
-                        "                                               ",
-                        "        CCC                         CCC        ",
-                        "       CCHCE                       ECHCC       ",
-                        "       PHHHP                       PHHHP       ",
-                        "       CCHCE                       ECHCC       ",
-                        "        CCC                         CCC        ",
-                        "                                               ")
-                .aisle(
-                        "                                               ",
-                        "       CCC                           CCC       ",
-                        "      ECHCC                         CCHCE      ",
-                        "      PHHHP                         PHHHP      ",
-                        "      ECHCC                         CCHCE      ",
-                        "       CCC                           CCC       ",
-                        "                                               ")
-                .aisle(
-                        "                                               ",
-                        "      CCC                             CCC      ",
-                        "     CCHCE                           ECHCC     ",
-                        "     PHHHP                           PHHHP     ",
-                        "     CCHCE                           ECHCC     ",
-                        "      CCC                             CCC      ",
-                        "                                               ")
-                .aisle(
-                        "                                               ",
-                        "     CCC                               CCC     ",
-                        "    CCHCC                             CCHCC    ",
-                        "    PHHHP                             PHHHP    ",
-                        "    CCHCC                             CCHCC    ",
-                        "     CCC                               CCC     ",
-                        "                                               ")
-                .aisle(
-                        "                                               ",
-                        "     CCC                               CCC     ",
-                        "    CCHCC                             CCHCC    ",
-                        "    PHHHP                             PHHHP    ",
-                        "    CCHCC                             CCHCC    ",
-                        "     CCC                               CCC     ",
-                        "                                               ")
-                .aisle(
-                        "                                               ",
-                        "    CCC                                 CCC    ",
-                        "   CCHCC                               CCHCC   ",
-                        "   PHHHP                               PHHHP   ",
-                        "   CCHCC                               CCHCC   ",
-                        "    CCC                                 CCC    ",
-                        "                                               ")
-                .aisle(
-                        "                                               ",
-                        "    CCC                                 CCC    ",
-                        "   CCHCC                               CCHCC   ",
-                        "   PHHHP                               PHHHP   ",
-                        "   CCHCC                               CCHCC   ",
-                        "    CCC                                 CCC    ",
-                        "                                               ")
-                .aisle(
-                        "                                               ",
-                        "   CCC                                   CCC   ",
-                        "  CCHCC                                 CCHCC  ",
-                        "  PHHHP                                 PHHHP  ",
-                        "  CCHCC                                 CCHCC  ",
-                        "   CCC                                   CCC   ",
-                        "                                               ")
-                .aisle(
-                        "                                               ",
-                        "   CCC                                   CCC   ",
-                        "  CCHCC                                 CCHCC  ",
-                        "  PHHHP                                 PHHHP  ",
-                        "  CCHCC                                 CCHCC  ",
-                        "   CCC                                   CCC   ",
-                        "                                               ")
-                .aisle(
-                        "                                               ",
-                        "   CCC                                   CCC   ",
-                        "  CCHCC                                 CCHCC  ",
-                        "  PHHHP                                 PHHHP  ",
-                        "  CCHCC                                 CCHCC  ",
-                        "   CCC                                   CCC   ",
-                        "                                               ")
-                .aisle(
-                        "                                               ",
-                        "  CCC                                     CCC  ",
-                        " CCHCC                                   CCHCC ",
-                        " PHHHP                                   PHHHP ",
-                        " CCHCC                                   CCHCC ",
-                        "  CCC                                     CCC  ",
-                        "                                               ")
-                .aisle(
-                        "  FFF                                     FFF  ",
-                        " FCCCF                                   FCCCF ",
-                        "FCCHCCF                                 FCCHCCF",
-                        "FCHHHCF                                 FCHHHCF",
-                        "FCCHCCF                                 FCCHCCF",
-                        " FCCCF                                   FCCCF ",
-                        "  FFF                                     FFF  ")
-                .aisle(
-                        "  CCC                                     CCC  ",
-                        " C   C                                   C   C ",
-                        "C  H  C                                 C  H  C",
-                        "C HHH C                                 C HHH C",
-                        "C  H  C                                 C  H  C",
-                        " C   C                                   C   C ",
-                        "  CCC                                     CCC  ")
-                .aisle(
-                        "  III                                     III  ",
-                        " I   I                                   I   I ",
-                        "I  H  I                                 I  H  I",
-                        "I HHH I                                 I HHH I",
-                        "I  H  I                                 I  H  I",
-                        " I   I                                   I   I ",
-                        "  III                                     III  ")
-                .aisle(
-                        "  CBC                                     CBC  ",
-                        " B   B                                   B   B ",
-                        "C  H  C                                 C  H  C",
-                        "B HHH B                                 B HHH B",
-                        "C  H  C                                 C  H  C",
-                        " B   B                                   B   B ",
-                        "  CBC                                     CBC  ")
-                .aisle(
-                        "  III                                     III  ",
-                        " I   I                                   I   I ",
-                        "I  H  I                                 I  H  I",
-                        "I HHH I                                 I HHH I",
-                        "I  H  I                                 I  H  I",
-                        " I   I                                   I   I ",
-                        "  III                                     III  ")
-                .aisle(
-                        "  CCC                                     CCC  ",
-                        " C   C                                   C   C ",
-                        "C  H  C                                 C  H  C",
-                        "C HHH C                                 C HHH C",
-                        "C  H  C                                 C  H  C",
-                        " C   C                                   C   C ",
-                        "  CCC                                     CCC  ")
-                .aisle(
-                        "  FFF                                     FFF  ",
-                        " FCCCF                                   FCCCF ",
-                        "FCCHCCF                                 FCCHCCF",
-                        "FCHHHCF                                 FCHHHCF",
-                        "FCCHCCF                                 FCCHCCF",
-                        " FCCCF                                   FCCCF ",
-                        "  FFF                                     FFF  ")
-                .aisle(
-                        "                                               ",
-                        "  CCC                                     CCC  ",
-                        " CCHCC                                   CCHCC ",
-                        " PHHHP                                   PHHHP ",
-                        " CCHCC                                   CCHCC ",
-                        "  CCC                                     CCC  ",
-                        "                                               ")
-                .aisle(
-                        "                                               ",
-                        "   CCC                                   CCC   ",
-                        "  CCHCC                                 CCHCC  ",
-                        "  PHHHP                                 PHHHP  ",
-                        "  CCHCC                                 CCHCC  ",
-                        "   CCC                                   CCC   ",
-                        "                                               ")
-                .aisle(
-                        "                                               ",
-                        "   CCC                                   CCC   ",
-                        "  CCHCC                                 CCHCC  ",
-                        "  PHHHP                                 PHHHP  ",
-                        "  CCHCC                                 CCHCC  ",
-                        "   CCC                                   CCC   ",
-                        "                                               ")
-                .aisle(
-                        "                                               ",
-                        "   CCC                                   CCC   ",
-                        "  CCHCC                                 CCHCC  ",
-                        "  PHHHP                                 PHHHP  ",
-                        "  CCHCC                                 CCHCC  ",
-                        "   CCC                                   CCC   ",
-                        "                                               ")
-                .aisle(
-                        "                                               ",
-                        "    CCC                                 CCC    ",
-                        "   CCHCC                               CCHCC   ",
-                        "   PHHHP                               PHHHP   ",
-                        "   CCHCC                               CCHCC   ",
-                        "    CCC                                 CCC    ",
-                        "                                               ")
-                .aisle(
-                        "                                               ",
-                        "    CCC                                 CCC    ",
-                        "   CCHCC                               CCHCC   ",
-                        "   PHHHP                               PHHHP   ",
-                        "   CCHCC                               CCHCC   ",
-                        "    CCC                                 CCC    ",
-                        "                                               ")
-                .aisle(
-                        "                                               ",
-                        "     CCC                               CCC     ",
-                        "    CCHCC                             CCHCC    ",
-                        "    PHHHP                             PHHHP    ",
-                        "    CCHCC                             CCHCC    ",
-                        "     CCC                               CCC     ",
-                        "                                               ")
-                .aisle(
-                        "                                               ",
-                        "     CCC                               CCC     ",
-                        "    CCHCC                             CCHCC    ",
-                        "    PHHHP                             PHHHP    ",
-                        "    CCHCC                             CCHCC    ",
-                        "     CCC                               CCC     ",
-                        "                                               ")
-                .aisle(
-                        "                                               ",
-                        "      CCC                             CCC      ",
-                        "     CCHCE                           ECHCC     ",
-                        "     PHHHP                           PHHHP     ",
-                        "     CCHCE                           ECHCC     ",
-                        "      CCC                             CCC      ",
-                        "                                               ")
-                .aisle(
-                        "                                               ",
-                        "       CCC                           CCC       ",
-                        "      ECHCC                         CCHCE      ",
-                        "      PHHHP                         PHHHP      ",
-                        "      ECHCC                         CCHCE      ",
-                        "       CCC                           CCC       ",
-                        "                                               ")
-                .aisle(
-                        "                                               ",
-                        "        CCC                         CCC        ",
-                        "       CCHCE                       ECHCC       ",
-                        "       PHHHP                       PHHHP       ",
-                        "       CCHCE                       ECHCC       ",
-                        "        CCC                         CCC        ",
-                        "                                               ")
-                .aisle(
-                        "                                               ",
-                        "         CCC                       CCC         ",
-                        "        CCHCCC                   CCCHCC        ",
-                        "        PHHHPP                   PPHHHP        ",
-                        "        CCHCCC                   CCCHCC        ",
-                        "         CCC                       CCC         ",
-                        "                                               ")
-                .aisle(
-                        "                                               ",
-                        "          CCCC                   CCCC          ",
-                        "         CCHCCCC               CCCCHCC         ",
-                        "         PHHHHPP               PPHHHHP         ",
-                        "         CCHCCCC               CCCCHCC         ",
-                        "          CCCC                   CCCC          ",
-                        "                                               ")
-                .aisle(
-                        "                                               ",
-                        "           CCCCC               CCCCC           ",
-                        "          ECHHCCCCC FCICICF CCCCCHHCE          ",
-                        "          PHHHHHPPP FCIBICF PPPHHHHHP          ",
-                        "          ECHHCCCCC FCICICF CCCCCHHCE          ",
-                        "           CCCCC               CCCCC           ",
-                        "                                               ")
-                .aisle(
-                        "                                               ",
-                        "            CCCCCCC FCIBICF CCCCCCC            ",
-                        "           CCCHHCCCCC     CCCCCHHCCC           ",
-                        "           PHHHHHHHPC     CPHHHHHHHP           ",
-                        "           CCCHHCCCCC     CCCCCHHCCC           ",
-                        "            CCCCCCC FCIBICF CCCCCCC            ",
-                        "                                               ")
-                .aisle(
-                        "                    FCICICF                    ",
-                        "              CCCCCCC     CCCCCCC              ",
-                        "            CCCCHHHCC     CCHHHCCCC            ",
-                        "            PPHHHHHHHHHHHHHHHHHHHPP            ",
-                        "            CCCCHHHCC     CCHHHCCCC            ",
-                        "              CCCCCCC     CCCCCCC              ",
-                        "                    FCICICF                    ")
-                .aisle(
-                        "                    FCIBICF                    ",
-                        "                CCCCC     CCCCC                ",
-                        "              CCCCCHHHHHHHHHCCCCC              ",
-                        "              PPHHHHHHHHHHHHHHHPP              ",
-                        "              CCCCCHHHHHHHHHCCCCC              ",
-                        "                CCCCC     CCCCC                ",
-                        "                    FCIBICF                    ")
-                .aisle(
-                        "                    FCICICF                    ",
-                        "                   CC     CC                   ",
-                        "                CCCCC     CCCCC                ",
-                        "                PPPHHHHHHHHHPPP                ",
-                        "                CCCCC     CCCCC                ",
-                        "                   CC     CC                   ",
-                        "                    FCICICF                    ")
-                .aisle(
-                        "                                               ",
-                        "                    FCIBICF                    ",
-                        "                   CC     CC                   ",
-                        "                   PC     CP                   ",
-                        "                   CC     CC                   ",
-                        "                    FCIBICF                    ",
-                        "                                               ")
-                .aisle(
-                        "                                               ",
-                        "                                               ",
-                        "                    FCICICF                    ",
-                        "                    FCI~ICF                    ",
-                        "                    FCICICF                    ",
-                        "                                               ",
-                        "                                               ")
-                .where('~', selfPredicate())
+                .aisle("                                               ", "                                               ", "                    FCCCCCF                    ", "                    FCIBICF                    ", "                    FCCCCCF                    ", "                                               ", "                                               ")
+                .aisle("                                               ", "                    FCBBBCF                    ", "                   CC#####CC                   ", "                   CC#####CC                   ", "                   CC#####CC                   ", "                    FCBBBCF                    ", "                                               ")
+                .aisle("                    FCBBBCF                    ", "                   CC#####CC                   ", "                CCCCC#####CCCCC                ", "                CCCHHHHHHHHHCCC                ", "                CCCCC#####CCCCC                ", "                   CC#####CC                   ", "                    FCBBBCF                    ")
+                .aisle("                    FCIBICF                    ", "                CCCCC#####CCCCC                ", "              CCCCCHHHHHHHHHCCCCC              ", "              CCHHHHHHHHHHHHHHHCC              ", "              CCCCCHHHHHHHHHCCCCC              ", "                CCCCC#####CCCCC                ", "                    FCIBICF                    ")
+                .aisle("                    FCBBBCF                    ", "              CCCCCCC#####CCCCCCC              ", "            CCCCHHHCC#####CCHHHCCCC            ", "            CCHHHHHHHHHHHHHHHHHHHCC            ", "            CCCCHHHCC#####CCHHHCCCC            ", "              CCCCCCC#####CCCCCCC              ", "                    FCBBBCF                    ")
+                .aisle("                                               ", "            CCCCCCC FCBBBCF CCCCCCC            ", "           CCCHHCCCCC#####CCCCCHHCCC           ", "           CHHHHHHHCC#####CCHHHHHHHC           ", "           CCCHHCCCCC#####CCCCCHHCCC           ", "            CCCCCCC FCBBBCF CCCCCCC            ", "                                               ")
+                .aisle("                                               ", "           CCCCC               CCCCC           ", "          ECHHCCCCC FCCCCCF CCCCCHHCE          ", "          CHHHHHCCC FCIBICF CCCHHHHHC          ", "          ECHHCCCCC FCCCCCF CCCCCHHCE          ", "           CCCCC               CCCCC           ", "                                               ")
+                .aisle("                                               ", "          CCCC                   CCCC          ", "         CCHCCCC               CCCCHCC         ", "         CHHHHCC               CCHHHHC         ", "         CCHCCCC               CCCCHCC         ", "          CCCC                   CCCC          ", "                                               ")
+                .aisle("                                               ", "         CCC                       CCC         ", "        CCHCCC                   CCCHCC        ", "        CHHHCC                   CCHHHC        ", "        CCHCCC                   CCCHCC        ", "         CCC                       CCC         ", "                                               ")
+                .aisle("                                               ", "        CCC                         CCC        ", "       CCHCE                       ECHCC       ", "       CHHHC                       CHHHC       ", "       CCHCE                       ECHCC       ", "        CCC                         CCC        ", "                                               ")
+                .aisle("                                               ", "       CCC                           CCC       ", "      ECHCC                         CCHCE      ", "      CHHHC                         CHHHC      ", "      ECHCC                         CCHCE      ", "       CCC                           CCC       ", "                                               ")
+                .aisle("                                               ", "      CCC                             CCC      ", "     CCHCE                           ECHCC     ", "     CHHHC                           CHHHC     ", "     CCHCE                           ECHCC     ", "      CCC                             CCC      ", "                                               ")
+                .aisle("                                               ", "     CCC                               CCC     ", "    CCHCC                             CCHCC    ", "    CHHHC                             CHHHC    ", "    CCHCC                             CCHCC    ", "     CCC                               CCC     ", "                                               ")
+                .aisle("                                               ", "     CCC                               CCC     ", "    CCHCC                             CCHCC    ", "    CHHHC                             CHHHC    ", "    CCHCC                             CCHCC    ", "     CCC                               CCC     ", "                                               ")
+                .aisle("                                               ", "    CCC                                 CCC    ", "   CCHCC                               CCHCC   ", "   CHHHC                               CHHHC   ", "   CCHCC                               CCHCC   ", "    CCC                                 CCC    ", "                                               ")
+                .aisle("                                               ", "    CCC                                 CCC    ", "   CCHCC                               CCHCC   ", "   CHHHC                               CHHHC   ", "   CCHCC                               CCHCC   ", "    CCC                                 CCC    ", "                                               ")
+                .aisle("                                               ", "   CCC                                   CCC   ", "  CCHCC                                 CCHCC  ", "  CHHHC                                 CHHHC  ", "  CCHCC                                 CCHCC  ", "   CCC                                   CCC   ", "                                               ")
+                .aisle("                                               ", "   CCC                                   CCC   ", "  CCHCC                                 CCHCC  ", "  CHHHC                                 CHHHC  ", "  CCHCC                                 CCHCC  ", "   CCC                                   CCC   ", "                                               ")
+                .aisle("                                               ", "   CCC                                   CCC   ", "  CCHCC                                 CCHCC  ", "  CHHHC                                 CHHHC  ", "  CCHCC                                 CCHCC  ", "   CCC                                   CCC   ", "                                               ")
+                .aisle("                                               ", "  CCC                                     CCC  ", " CCHCC                                   CCHCC ", " CHHHC                                   CHHHC ", " CCHCC                                   CCHCC ", "  CCC                                     CCC  ", "                                               ")
+                .aisle("  FFF                                     FFF  ", " FCCCF                                   FCCCF ", "FCCHCCF                                 FCCHCCF", "FCHHHCF                                 FCHHHCF", "FCCHCCF                                 FCCHCCF", " FCCCF                                   FCCCF ", "  FFF                                     FFF  ")
+                .aisle("  CCC                                     CCC  ", " C###C                                   C###C ", "C##H##C                                 C##H##C", "C#HHH#C                                 C#HHH#C", "C##H##C                                 C##H##C", " C###C                                   C###C ", "  CCC                                     CCC  ")
+                .aisle("  CIC                                     CIC  ", " B###B                                   B###B ", "C##H##C                                 C##H##C", "I#HHH#I                                 I#HHH#I", "C##H##C                                 C##H##C", " B###B                                   B###B ", "  CIC                                     CIC  ")
+                .aisle("  CBC                                     CBC  ", " B###B                                   B###B ", "C##H##C                                 C##H##C", "B#HHH#B                                 B#HHH#B", "C##H##C                                 C##H##C", " B###B                                   B###B ", "  CBC                                     CBC  ")
+                .aisle("  CIC                                     CIC  ", " B###B                                   B###B ", "C##H##C                                 C##H##C", "I#HHH#I                                 I#HHH#I", "C##H##C                                 C##H##C", " B###B                                   B###B ", "  CIC                                     CIC  ")
+                .aisle("  CCC                                     CCC  ", " C###C                                   C###C ", "C##H##C                                 C##H##C", "C#HHH#C                                 C#HHH#C", "C##H##C                                 C##H##C", " C###C                                   C###C ", "  CCC                                     CCC  ")
+                .aisle("  FFF                                     FFF  ", " FCCCF                                   FCCCF ", "FCCHCCF                                 FCCHCCF", "FCHHHCF                                 FCHHHCF", "FCCHCCF                                 FCCHCCF", " FCCCF                                   FCCCF ", "  FFF                                     FFF  ")
+                .aisle("                                               ", "  CCC                                     CCC  ", " CCHCC                                   CCHCC ", " CHHHC                                   CHHHC ", " CCHCC                                   CCHCC ", "  CCC                                     CCC  ", "                                               ")
+                .aisle("                                               ", "   CCC                                   CCC   ", "  CCHCC                                 CCHCC  ", "  CHHHC                                 CHHHC  ", "  CCHCC                                 CCHCC  ", "   CCC                                   CCC   ", "                                               ")
+                .aisle("                                               ", "   CCC                                   CCC   ", "  CCHCC                                 CCHCC  ", "  CHHHC                                 CHHHC  ", "  CCHCC                                 CCHCC  ", "   CCC                                   CCC   ", "                                               ")
+                .aisle("                                               ", "   CCC                                   CCC   ", "  CCHCC                                 CCHCC  ", "  CHHHC                                 CHHHC  ", "  CCHCC                                 CCHCC  ", "   CCC                                   CCC   ", "                                               ")
+                .aisle("                                               ", "    CCC                                 CCC    ", "   CCHCC                               CCHCC   ", "   CHHHC                               CHHHC   ", "   CCHCC                               CCHCC   ", "    CCC                                 CCC    ", "                                               ")
+                .aisle("                                               ", "    CCC                                 CCC    ", "   CCHCC                               CCHCC   ", "   CHHHC                               CHHHC   ", "   CCHCC                               CCHCC   ", "    CCC                                 CCC    ", "                                               ")
+                .aisle("                                               ", "     CCC                               CCC     ", "    CCHCC                             CCHCC    ", "    CHHHC                             CHHHC    ", "    CCHCC                             CCHCC    ", "     CCC                               CCC     ", "                                               ")
+                .aisle("                                               ", "     CCC                               CCC     ", "    CCHCC                             CCHCC    ", "    CHHHC                             CHHHC    ", "    CCHCC                             CCHCC    ", "     CCC                               CCC     ", "                                               ")
+                .aisle("                                               ", "      CCC                             CCC      ", "     CCHCE                           ECHCC     ", "     CHHHC                           CHHHC     ", "     CCHCE                           ECHCC     ", "      CCC                             CCC      ", "                                               ")
+                .aisle("                                               ", "       CCC                           CCC       ", "      ECHCC                         CCHCE      ", "      CHHHC                         CHHHC      ", "      ECHCC                         CCHCE      ", "       CCC                           CCC       ", "                                               ")
+                .aisle("                                               ", "        CCC                         CCC        ", "       CCHCE                       ECHCC       ", "       CHHHC                       CHHHC       ", "       CCHCE                       ECHCC       ", "        CCC                         CCC        ", "                                               ")
+                .aisle("                                               ", "         CCC                       CCC         ", "        CCHCCC                   CCCHCC        ", "        CHHHCC                   CCHHHC        ", "        CCHCCC                   CCCHCC        ", "         CCC                       CCC         ", "                                               ")
+                .aisle("                                               ", "          CCCC                   CCCC          ", "         CCHCCCC               CCCCHCC         ", "         CHHHHCC               CCHHHHC         ", "         CCHCCCC               CCCCHCC         ", "          CCCC                   CCCC          ", "                                               ")
+                .aisle("                                               ", "           CCCCC               CCCCC           ", "          ECHHCCCCC FCCCCCF CCCCCHHCE          ", "          CHHHHHCCC FCIBICF CCCHHHHHC          ", "          ECHHCCCCC FCCCCCF CCCCCHHCE          ", "           CCCCC               CCCCC           ", "                                               ")
+                .aisle("                                               ", "            CCCCCCC FCBBBCF CCCCCCC            ", "           CCCHHCCCCC#####CCCCCHHCCC           ", "           CHHHHHHHCC#####CCHHHHHHHC           ", "           CCCHHCCCCC#####CCCCCHHCCC           ", "            CCCCCCC FCBBBCF CCCCCCC            ", "                                               ")
+                .aisle("                    FCBBBCF                    ", "              CCCCCCC#####CCCCCCC              ", "            CCCCHHHCC#####CCHHHCCCC            ", "            CCHHHHHHHHHHHHHHHHHHHCC            ", "            CCCCHHHCC#####CCHHHCCCC            ", "              CCCCCCC#####CCCCCCC              ", "                    FCBBBCF                    ")
+                .aisle("                    FCIBICF                    ", "                CCCCC#####CCCCC                ", "              CCCCCHHHHHHHHHCCCCC              ", "              CCHHHHHHHHHHHHHHHCC              ", "              CCCCCHHHHHHHHHCCCCC              ", "                CCCCC#####CCCCC                ", "                    FCIBICF                    ")
+                .aisle("                    FCBBBCF                    ", "                   CC#####CC                   ", "                CCCCC#####CCCCC                ", "                CCCHHHHHHHHHCCC                ", "                CCCCC#####CCCCC                ", "                   CC#####CC                   ", "                    FCBBBCF                    ")
+                .aisle("                                               ", "                    FCBBBCF                    ", "                   CC#####CC                   ", "                   CC#####CC                   ", "                   CC#####CC                   ", "                    FCBBBCF                    ", "                                               ")
+                .aisle("                                               ", "                                               ", "                    FCCCCCF                    ", "                    FCISICF                    ", "                    FCCCCCF                    ", "                                               ", "                                               ")
+                .where('S', this.selfPredicate())
+                .where('B', states(getGlassState()))
                 .where('C', states(getCasingState()))
+                .where('I', states(getCasingState())
+                        .or(abilities(MultiblockAbility.IMPORT_FLUIDS)
+                                .setMinGlobalLimited(2)
+                                .setPreviewCount(16))
+                        .or(abilities(MultiblockAbility.EXPORT_FLUIDS)
+                                .setMinGlobalLimited(2)
+                                .setPreviewCount(16)))
+                .where('F', states(getFrameState()))
+                .where('H', states(getCoilState()))
                 .where('E', states(getCasingState())
-                        .or(abilities(MultiblockAbility.MAINTENANCE_HATCH).setExactLimit(1))
-                        .or(abilities(MultiblockAbility.IMPORT_ITEMS).setMaxGlobalLimited(4).setPreviewCount(1))
-                        .or(abilities(MultiblockAbility.EXPORT_ITEMS).setMaxGlobalLimited(4).setPreviewCount(1))
-                        .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setMaxGlobalLimited(8).setPreviewCount(1))
-                        .or(abilities(MultiblockAbility.EXPORT_FLUIDS).setMaxGlobalLimited(8).setPreviewCount(1))
-                        .or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(3))
-                )
-                .where('F', states(MetaBlocks.FRAMES.get(Materials.NaquadahAlloy).getBlock(Materials.NaquadahAlloy)))
-                .where('H', states(getCasingState1()))
-                .where('P', TiredTraceabilityPredicate.CP_BEAM)
-                .where('I', heatingCoils())
-                .where('B', TiredTraceabilityPredicate.CP_GLASS)
+                        .or(metaTileEntities(MultiblockAbility.REGISTRY.get(MultiblockAbility.INPUT_ENERGY)
+                                .stream()
+                                .filter(mte -> {
+                                    IEnergyContainer container = mte.getCapability(GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER, null);
+                                    return container != null && container.getInputVoltage() == V[tier];
+                                })
+                                .toArray(MetaTileEntity[]::new))
+                                .setMaxGlobalLimited(32)
+                                .setPreviewCount(32)))
+                .where('#', air())
                 .where(' ', any())
                 .build();
     }
 
-    private static IBlockState getCasingState1() {
-        return MetaBlocks.FUSION_CASING.getState(BlockFusionCasing.CasingType.FUSION_COIL);
+    private IBlockState getCasingState() {
+        return casingState;
+    }
+
+    private IBlockState getCoilState() {
+        return coilState;
+    }
+
+    private IBlockState getFrameState() {
+        return frameState;
+    }
+
+    private static IBlockState getGlassState() {
+        return MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.FUSION_GLASS);
     }
 
     @SideOnly(Side.CLIENT)
     @Override
-    public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
-        if (tier == GTValues.UHV)
-            return  GTQTTextures.COMPRESSED_FUSION_REACTOR_MKI_CASING;
-        if (tier == GTValues.UEV)
-            return  GTQTTextures.COMPRESSED_FUSION_REACTOR_MKII_CASING;
-        return  GTQTTextures.COMPRESSED_FUSION_REACTOR_MKIII_CASING;
+    public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
+        if (this.recipeMapWorkable.isActive()) {
+            switch (tier) {
+                case UHV -> { return GTQTTextures.ADVANCED_FUSION_TEXTURE; }
+                case UEV -> { return GTQTTextures.ULTIMATE_FUSION_TEXTURE; }
+                default -> { return Textures.ACTIVE_FUSION_TEXTURE; }
+            }
+        } else {
+            switch (tier) {
+                case UHV -> { return GTQTTextures.ADVANCED_FUSION_TEXTURE; }
+                case UEV -> { return GTQTTextures.ULTIMATE_FUSION_TEXTURE; }
+                default -> { return Textures.FUSION_TEXTURE; }
+            }
+        }
     }
 
-    private IBlockState getCasingState() {
-        if (tier == GTValues.UHV)
-            return  GTQTMetaBlocks.MULTI_CASING.getState(GTQTMultiblockCasing.CasingType.COMPRESSED_FUSION_REACTOR_MKI_CASING);
-        if (tier == GTValues.UEV)
-            return  GTQTMetaBlocks.MULTI_CASING.getState(GTQTMultiblockCasing.CasingType.COMPRESSED_FUSION_REACTOR_MKII_CASING);
-        return  GTQTMetaBlocks.MULTI_CASING.getState(GTQTMultiblockCasing.CasingType.COMPRESSED_FUSION_REACTOR_MKIII_CASING);
+    @SideOnly(Side.CLIENT)
+    @Override
+    protected ICubeRenderer getFrontOverlay() {
+        return Textures.FUSION_REACTOR_OVERLAY;
     }
-
 
     @Override
     protected void formStructure(PatternMatchContext context) {
@@ -544,66 +249,23 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
         super.formStructure(context);
         this.initializeAbilities();
         ((EnergyContainerHandler) this.energyContainer).setEnergyStored(energyStored);
-        Object coilType = context.get("CoilType");
-        Object beamTire = context.get("BeamTiredStats");
-        Object glassTire = context.get("GlassTiredStats");
-        this.glassTire = GTQTUtil.getOrDefault(() -> glassTire instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)glassTire).getIntTier(),
-                0);
-        this.beamTire = GTQTUtil.getOrDefault(() -> beamTire instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)beamTire).getIntTier(),
-                0);
-        if (coilType instanceof IHeatingCoilBlockStats) {
-            this.heatingCoilLevel = ((IHeatingCoilBlockStats) coilType).getLevel();
-            this.heatingCoilDiscount = ((IHeatingCoilBlockStats) coilType).getEnergyDiscount();
-        } else {
-            this.heatingCoilLevel = BlockWireCoil.CoilType.CUPRONICKEL.getLevel();
-            this.heatingCoilDiscount = BlockWireCoil.CoilType.CUPRONICKEL.getEnergyDiscount();
-        }
-    }
-
-    protected int getFusionRingColor() {
-        return this.fusionRingColor;
-    }
-
-    protected boolean hasFusionRingColor() {
-        return this.fusionRingColor != NO_COLOR;
-    }
-
-    protected void setFusionRingColor(int fusionRingColor) {
-        if (this.fusionRingColor != fusionRingColor) {
-            this.fusionRingColor = fusionRingColor;
-            writeCustomData(GregtechDataCodes.UPDATE_COLOR, buf -> buf.writeVarInt(fusionRingColor));
-        }
-    }
-
-
-    @Override
-    public void invalidateStructure() {
-        super.invalidateStructure();
-        this.energyContainer = new EnergyContainerHandler(this, 0, 0, 0, 0, 0) {
-            
-            @Override
-            public String getName() {
-                return GregtechDataCodes.FUSION_REACTOR_ENERGY_CONTAINER_TRAIT;
-            }
-        };
-        this.inputEnergyContainers = new EnergyContainerList(Lists.newArrayList());
-        this.heat = 0;
-        this.setFusionRingColor(NO_COLOR);
     }
 
     @Override
     protected void initializeAbilities() {
+        //  Common ability
         this.inputInventory = new ItemHandlerList(getAbilities(MultiblockAbility.IMPORT_ITEMS));
         this.inputFluidInventory = new FluidTankList(true, getAbilities(MultiblockAbility.IMPORT_FLUIDS));
         this.outputInventory = new ItemHandlerList(getAbilities(MultiblockAbility.EXPORT_ITEMS));
         this.outputFluidInventory = new FluidTankList(true, getAbilities(MultiblockAbility.EXPORT_FLUIDS));
+
+        //  Energy Input ability
         List<IEnergyContainer> energyInputs = getAbilities(MultiblockAbility.INPUT_ENERGY);
         this.inputEnergyContainers = new EnergyContainerList(energyInputs);
+
+        //  EU Capacity = Energy Hatch amount * Energy Stored (half of original Fusion Reactor).
         long euCapacity = calculateEnergyStorageFactor(energyInputs.size());
-        this.energyContainer = new EnergyContainerHandler(this, euCapacity, GTValues.V[tier], 0, 0, 0) {
-            
+        this.energyContainer = new EnergyContainerHandler(this, euCapacity, V[tier], 0, 0, 0) {
             @Override
             public String getName() {
                 return GregtechDataCodes.FUSION_REACTOR_ENERGY_CONTAINER_TRAIT;
@@ -611,55 +273,205 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
         };
     }
 
+    /**
+     * Calculate Energy Storage by Energy Hatch amount and tier.
+     *
+     * <p>
+     *     For {@code calculateEnergyStorageFactor} in common Fusion Reactor,
+     *     the parameter of {@code energyInputAmount} is 16, but for CFR, this parameter
+     *     is 32. So we need get half Energy Storage than common Fusion Reactor.
+     *     We create a long list {@code energyStored} to storage Energy Storage of all CFR:
+     *
+     *     <ul>
+     *         <li>Mark 1: {@code 5,000,000} (5M) -> {@code 160,000,000} (160M);</li>
+     *         <li>Mark 2: {@code 10,000,000} (10M) -> {@code 320,000,000} (320M);</li>
+     *         <li>Mark 3: {@code 20,000,000} (20M) -> {@code 640,000,000} (640M);</li>
+     *         <li>Mark 4: {@code 80,000,000} (80M) -> {@code 1,280,000,000} (1280M);</li>
+     *         <li>Mark 5: {@code 320,000,000} (320M) -> {@code 2,560,000,000} (2560M);</li>
+     *     </ul>
+     *
+     *     The Multiplier is {@code energyInputAmount} (32 default).
+     * </p>
+     *
+     * @param energyInputAmount  Energy Hatch amount (is fake actually).
+     * @return                   Energy Storage of Fusion Reactor.
+     */
     private long calculateEnergyStorageFactor(int energyInputAmount) {
-        return energyInputAmount * (long) Math.pow(2, tier - 6) * 10000000L;
+        long[] energyStored = { 5000000L, 10000000L, 20000000L, 80000000L, 320000000L };
+        return energyInputAmount * energyStored[tier - 6];
     }
 
     @Override
     protected void updateFormedValid() {
         if (this.inputEnergyContainers.getEnergyStored() > 0) {
             long energyAdded = this.energyContainer.addEnergy(this.inputEnergyContainers.getEnergyStored());
-            if (energyAdded > 0) this.inputEnergyContainers.removeEnergy(energyAdded);
+            if (energyAdded > 0)
+                this.inputEnergyContainers.removeEnergy(energyAdded);
         }
         super.updateFormedValid();
-        if (recipeMapWorkable.isWorking() && fusionRingColor == NO_COLOR) {
-            if (recipeMapWorkable.getPreviousRecipe() != null &&
-                    !recipeMapWorkable.getPreviousRecipe().getFluidOutputs().isEmpty()) {
-                setFusionRingColor(0xFF000000 |
-                        recipeMapWorkable.getPreviousRecipe().getFluidOutputs().get(0).getFluid().getColor());
+    }
+
+    @Override
+    protected ModularUI.Builder createUITemplate(EntityPlayer entityPlayer) {
+        //  Background
+        ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND, 198, 236);
+
+        //  Display
+        builder.image(4, 4, 190, 138, GuiTextures.DISPLAY);
+
+        //  Energy Bar
+        builder.widget(new ProgressWidget(() -> this.energyContainer.getEnergyCapacity() > 0L ? 1.0 * this.energyContainer.getEnergyStored() / (double) this.energyContainer.getEnergyCapacity() : 0.0,
+                4, 144, 94, 7, GuiTextures.PROGRESS_BAR_FUSION_ENERGY, ProgressWidget.MoveType.HORIZONTAL)
+                .setHoverTextConsumer(this::addEnergyBarHoverText));
+
+        //  Heat Bar
+        builder.widget(new ProgressWidget(() -> this.energyContainer.getEnergyCapacity() > 0L ? 1.0 * this.heat / (double) this.energyContainer.getEnergyCapacity() : 0.0,
+                100, 144, 94, 7, GuiTextures.PROGRESS_BAR_FUSION_HEAT, ProgressWidget.MoveType.HORIZONTAL)
+                .setHoverTextConsumer(this::addHeatBarHoverText));
+
+        //  Indicator Image Widget (logo)
+        builder.widget(new IndicatorImageWidget(174, 122, 17, 17, this.getLogo())
+                .setWarningStatus(this.getWarningLogo(), this::addWarningText)
+                .setErrorStatus(this.getErrorLogo(), this::addErrorText));
+
+        //  Title (MK1 to MK5)
+        switch (this.tier) {
+            case LuV -> builder.widget(new ImageWidget(66, 9, 67, 12, GuiTextures.FUSION_REACTOR_MK1_TITLE)
+                    .setIgnoreColor(true));
+            case ZPM -> builder.widget(new ImageWidget(66, 9, 67, 12, GuiTextures.FUSION_REACTOR_MK2_TITLE)
+                    .setIgnoreColor(true));
+            case UV -> builder.widget(new ImageWidget(66, 9, 67, 12, GuiTextures.FUSION_REACTOR_MK3_TITLE)
+                    .setIgnoreColor(true));
+            case UHV -> builder.widget(new ImageWidget(66, 9, 67, 12, GTQTGuiTextures.FUSION_REACTOR_MK4_TITLE)
+                    .setIgnoreColor(true));
+            case UEV -> builder.widget(new ImageWidget(66, 9, 67, 12, GTQTGuiTextures.FUSION_REACTOR_MK5_TITLE)
+                    .setIgnoreColor(true));
+        }
+
+        //  Fusion Diagram + Progress Bar
+        builder.widget(new ImageWidget(55, 24, 89, 101, GuiTextures.FUSION_REACTOR_DIAGRAM)
+                .setIgnoreColor(true));
+        builder.widget(FusionProgressSupplier.Type.BOTTOM_LEFT.getWidget(this));
+        builder.widget(FusionProgressSupplier.Type.TOP_LEFT.getWidget(this));
+        builder.widget(FusionProgressSupplier.Type.TOP_RIGHT.getWidget(this));
+        builder.widget(FusionProgressSupplier.Type.BOTTOM_RIGHT.getWidget(this));
+
+        //  Fusion Legend
+        builder.widget(new ImageWidget(7, 98, 108, 41, GuiTextures.FUSION_REACTOR_LEGEND)
+                .setIgnoreColor(true));
+
+        //  Power Button + Detail
+        builder.widget(new ImageCycleButtonWidget(173, 211, 18, 18, GuiTextures.BUTTON_POWER,
+                this.recipeMapWorkable::isWorkingEnabled, this.recipeMapWorkable::setWorkingEnabled));
+
+        //  Voiding Mode Button
+        builder.widget(new ImageCycleButtonWidget(173, 189, 18, 18, GuiTextures.BUTTON_VOID_MULTIBLOCK, 4,
+                this::getVoidingMode, this::setVoidingMode)
+                .setTooltipHoverString(MultiblockWithDisplayBase::getVoidingModeTooltip));
+
+        //  Distinct Buses Unavailable Image
+        builder.widget(new ImageWidget(173, 171, 18, 18, GuiTextures.BUTTON_NO_DISTINCT_BUSES)
+                .setTooltip("gregtech.multiblock.universal.distinct_not_supported"));
+
+        //  Flex Unavailable Image
+        builder.widget(this.getFlexButton(173, 153, 18, 18));
+
+        //  Player Inventory
+        builder.bindPlayerInventory(entityPlayer.inventory, 153);
+        return builder;
+    }
+
+    private void addEnergyBarHoverText(List<ITextComponent> hoverList) {
+        ITextComponent energyInfo = TextComponentUtil.stringWithColor(
+                TextFormatting.AQUA,
+                TextFormattingUtil.formatNumbers(this.energyContainer.getEnergyStored()) + " / "
+                        + TextFormattingUtil.formatNumbers(this.energyContainer.getEnergyCapacity()) + " EU");
+
+        hoverList.add(TextComponentUtil.translationWithColor(
+                TextFormatting.GRAY,
+                "gregtech.multiblock.energy_stored",
+                energyInfo));
+    }
+
+    private void addHeatBarHoverText(List<ITextComponent> hoverList) {
+        ITextComponent heatInfo = TextComponentUtil.stringWithColor(
+                TextFormatting.RED,
+                TextFormattingUtil.formatNumbers(this.heat) + " / "
+                        + TextFormattingUtil.formatNumbers(this.energyContainer.getEnergyCapacity()));
+
+        hoverList.add(TextComponentUtil.translationWithColor(
+                TextFormatting.GRAY,
+                "gregtech.multiblock.fusion_reactor.heat",
+                heatInfo));
+    }
+
+    @Override
+    public void addInformation(ItemStack stack, World player, List<String> tooltip,boolean advanced) {
+        long actuallyEnergyStored = calculateEnergyStorageFactor(32) / 1000000L;
+        super.addInformation(stack, player, tooltip, advanced);
+        switch (this.tier) {
+            case LuV -> {
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.luv.tooltip.1"));
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.luv.tooltip.2"));
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.luv.tooltip.3"));
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.luv.tooltip.4"));
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.luv.tooltip.5"));
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.luv.tooltip.6"));
+                tooltip.add(I18n.format("gregtech.machine.fusion_reactor.capacity", actuallyEnergyStored));
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.common_oc"));
             }
-        } else if (!recipeMapWorkable.isWorking() && isStructureFormed()) {
-            setFusionRingColor(NO_COLOR);
+            case ZPM -> {
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.zpm.tooltip.1"));
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.zpm.tooltip.2"));
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.zpm.tooltip.3"));
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.zpm.tooltip.4"));
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.zpm.tooltip.5"));
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.zpm.tooltip.6"));
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.zpm.tooltip.7"));
+                tooltip.add(I18n.format("gregtech.machine.fusion_reactor.capacity", actuallyEnergyStored));
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.common_oc"));
+            }
+            case UV -> {
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.uv.tooltip.1"));
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.uv.tooltip.2"));
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.uv.tooltip.3"));
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.uv.tooltip.4"));
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.uv.tooltip.5"));
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.uv.tooltip.6"));
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.uv.tooltip.7"));
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.uv.tooltip.8"));
+                tooltip.add(I18n.format("gregtech.machine.fusion_reactor.capacity", actuallyEnergyStored));
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.common_oc"));
+            }
+            case UHV -> {
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.uhv.tooltip.1"));
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.uhv.tooltip.2"));
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.uhv.tooltip.3"));
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.uhv.tooltip.4"));
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.uhv.tooltip.5"));
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.uhv.tooltip.6"));
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.uhv.tooltip.7"));
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.uhv.tooltip.8"));
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.uhv.tooltip.9"));
+                tooltip.add(I18n.format("gregtech.machine.fusion_reactor.capacity", actuallyEnergyStored));
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.perfect_oc"));
+            }
+            case UEV -> {
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.uev.tooltip.1"));
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.uev.tooltip.2"));
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.uev.tooltip.3"));
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.uev.tooltip.4"));
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.uev.tooltip.5"));
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.uev.tooltip.6"));
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.uev.tooltip.7"));
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.uev.tooltip.8"));
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.uev.tooltip.9"));
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.uev.tooltip.10"));
+                tooltip.add(I18n.format("gregtech.machine.fusion_reactor.capacity", actuallyEnergyStored));
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.perfect_oc"));
+            }
         }
-    }
 
-    @Override
-    public void writeInitialSyncData(PacketBuffer buf) {
-        super.writeInitialSyncData(buf);
-        buf.writeVarInt(this.fusionRingColor);
-    }
-
-    @Override
-    public void receiveInitialSyncData(PacketBuffer buf) {
-        super.receiveInitialSyncData(buf);
-        this.fusionRingColor = buf.readVarInt();
-    }
-
-    @Override
-    public void receiveCustomData(int dataId, PacketBuffer buf) {
-        if (dataId == GregtechDataCodes.UPDATE_COLOR) {
-            this.fusionRingColor = buf.readVarInt();
-        } else {
-            super.receiveCustomData(dataId, buf);
-        }
-    }
-
-
-    @SideOnly(Side.CLIENT)
-    
-    @Override
-    protected ICubeRenderer getFrontOverlay() {
-        return Textures.FUSION_REACTOR_OVERLAY;
     }
 
     @Override
@@ -671,133 +483,6 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
         return heat;
     }
 
-    @Override
-    protected void addDisplayText(List<ITextComponent> textList) {
-        super.addDisplayText(textList);
-        textList.add(new TextComponentTranslation("gtqtcore.multiblock.md.level", heatingCoilLevel));
-        textList.add(new TextComponentTranslation("gtqtcore.multiblock.fu.level", 100-10*beamTire));
-        textList.add(new TextComponentTranslation("gtqtcore.multiblock.md.glass", glassTire));
-        textList.add(new TextComponentTranslation("gregtech.multiblock.cracking_unit.energy", 100 - 2.5 * this.glassTire));
-        if (isStructureFormed()) {
-            textList.add(new TextComponentTranslation("gregtech.multiblock.fusion_reactor.energy", this.energyContainer.getEnergyStored(), this.energyContainer.getEnergyCapacity()));
-            textList.add(new TextComponentTranslation("gregtech.multiblock.fusion_reactor.heat", heat));
-        }
-    }
-
-    @Override
-    public void addInformation(ItemStack stack,  World player,  List<String> tooltip, boolean advanced) {
-        super.addInformation(stack, player, tooltip, advanced);
-        tooltip.add(I18n.format("gregtech.machine.fusion_reactor.capacity", calculateEnergyStorageFactor(16) / 1000000L));
-        tooltip.add(I18n.format("gregtech.machine.fusion_reactor.overclocking"));
-        tooltip.add(I18n.format("gtqtcore.multiblock.fu.tooltip.1"));
-        tooltip.add(I18n.format("gtqtcore.multiblock.hb.tooltip.4"));
-        tooltip.add(I18n.format("gtqtcore.multiblock.hb.tooltip.3"));
-
-        if (tier == GTValues.UHV){
-            tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.2", 24));
-            tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("惊 鸿 万 物", new Object[0]));}
-        if (tier == GTValues.UEV){
-            tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.2", 96));
-            tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("破 碎 亘 古", new Object[0]));}
-        if (tier == GTValues.UIV){
-            tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.2", 384));
-            tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("凌 驾 虚 无", new Object[0]));}
-    }
-
-    @Override
-    protected ModularUI.Builder createUITemplate(EntityPlayer entityPlayer) {
-        // Background
-        ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND, 198, 236);
-
-        // Display
-        builder.image(4, 4, 190, 138, GuiTextures.DISPLAY);
-
-        // Energy Bar
-        builder.widget(new ProgressWidget(
-                () -> energyContainer.getEnergyCapacity() > 0 ?
-                        1.0 * energyContainer.getEnergyStored() / energyContainer.getEnergyCapacity() : 0,
-                4, 144, 94, 7,
-                GuiTextures.PROGRESS_BAR_FUSION_ENERGY, ProgressWidget.MoveType.HORIZONTAL)
-                .setHoverTextConsumer(this::addEnergyBarHoverText));
-
-        // Heat Bar
-        builder.widget(new ProgressWidget(
-                () -> energyContainer.getEnergyCapacity() > 0 ? 1.0 * heat / energyContainer.getEnergyCapacity() : 0,
-                100, 144, 94, 7,
-                GuiTextures.PROGRESS_BAR_FUSION_HEAT, ProgressWidget.MoveType.HORIZONTAL)
-                .setHoverTextConsumer(this::addHeatBarHoverText));
-
-        // Indicator Widget
-        builder.widget(new IndicatorImageWidget(174, 122, 17, 17, getLogo())
-                .setWarningStatus(getWarningLogo(), this::addWarningText)
-                .setErrorStatus(getErrorLogo(), this::addErrorText));
-
-        // Title
-        if (tier == GTValues.UHV) {
-            // MK1
-            builder.widget(new ImageWidget(66, 9, 67, 12, GuiTextures.FUSION_REACTOR_MK1_TITLE).setIgnoreColor(true));
-        } else if (tier == GTValues.UEV) {
-            // MK2
-            builder.widget(new ImageWidget(65, 9, 69, 12, GuiTextures.FUSION_REACTOR_MK2_TITLE).setIgnoreColor(true));
-        } else {
-            // MK3
-            builder.widget(new ImageWidget(64, 9, 71, 12, GuiTextures.FUSION_REACTOR_MK3_TITLE).setIgnoreColor(true));
-        }
-
-        // Fusion Diagram + Progress Bar
-        builder.widget(new ImageWidget(55, 24, 89, 101, GuiTextures.FUSION_REACTOR_DIAGRAM).setIgnoreColor(true));
-        builder.widget(FusionProgressSupplier.Type.BOTTOM_LEFT.getWidget(this));
-        builder.widget(FusionProgressSupplier.Type.TOP_LEFT.getWidget(this));
-        builder.widget(FusionProgressSupplier.Type.TOP_RIGHT.getWidget(this));
-        builder.widget(FusionProgressSupplier.Type.BOTTOM_RIGHT.getWidget(this));
-
-        // Fusion Legend
-        builder.widget(new ImageWidget(7, 98, 108, 41, GuiTextures.FUSION_REACTOR_LEGEND).setIgnoreColor(true));
-
-        // Power Button + Detail
-        builder.widget(new ImageCycleButtonWidget(173, 211, 18, 18, GuiTextures.BUTTON_POWER,
-                recipeMapWorkable::isWorkingEnabled, recipeMapWorkable::setWorkingEnabled));
-        builder.widget(new ImageWidget(173, 229, 18, 6, GuiTextures.BUTTON_POWER_DETAIL));
-
-        // Voiding Mode Button
-        builder.widget(new ImageCycleButtonWidget(173, 189, 18, 18, GuiTextures.BUTTON_VOID_MULTIBLOCK,
-                4, this::getVoidingMode, this::setVoidingMode)
-                .setTooltipHoverString(MultiblockWithDisplayBase::getVoidingModeTooltip));
-
-        // Distinct Buses Unavailable Image
-        builder.widget(new ImageWidget(173, 171, 18, 18, GuiTextures.BUTTON_NO_DISTINCT_BUSES)
-                .setTooltip("gregtech.multiblock.universal.distinct_not_supported"));
-
-        // Flex Unavailable Image
-        builder.widget(getFlexButton(173, 153, 18, 18));
-
-        // Player Inventory
-        builder.bindPlayerInventory(entityPlayer.inventory, 153);
-        return builder;
-    }
-
-    private void addEnergyBarHoverText(List<ITextComponent> hoverList) {
-        ITextComponent energyInfo = TextComponentUtil.stringWithColor(
-                TextFormatting.AQUA,
-                TextFormattingUtil.formatNumbers(energyContainer.getEnergyStored()) + " / " +
-                        TextFormattingUtil.formatNumbers(energyContainer.getEnergyCapacity()) + " EU");
-        hoverList.add(TextComponentUtil.translationWithColor(
-                TextFormatting.GRAY,
-                "gregtech.multiblock.energy_stored",
-                energyInfo));
-    }
-
-    private void addHeatBarHoverText(List<ITextComponent> hoverList) {
-        ITextComponent heatInfo = TextComponentUtil.stringWithColor(
-                TextFormatting.RED,
-                TextFormattingUtil.formatNumbers(heat) + " / " +
-                        TextFormattingUtil.formatNumbers(energyContainer.getEnergyCapacity()));
-        hoverList.add(TextComponentUtil.translationWithColor(
-                TextFormatting.GRAY,
-                "gregtech.multiblock.fusion_reactor.heat",
-                heatInfo));
-    }
-
     private static class FusionProgressSupplier {
 
         private final AtomicDouble tracker = new AtomicDouble(0.0);
@@ -807,7 +492,8 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
         private final DoubleSupplier bottomRight;
 
         public FusionProgressSupplier() {
-            // Bottom Left, fill on [0, 0.25)
+
+            //  Bottom Left, fill on [0, 0.25)
             bottomLeft = new ProgressWidget.TimedProgressSupplier(200, 164, false) {
 
                 @Override
@@ -861,6 +547,7 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
             };
         }
 
+        @SuppressWarnings("unused")
         public void resetCountdown() {
             bottomLeft.resetCountdown();
         }
@@ -876,17 +563,13 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
 
         private enum Type {
 
-            BOTTOM_LEFT(
-                    61, 66, 35, 41,
+            BOTTOM_LEFT(61, 66, 35, 41,
                     GuiTextures.PROGRESS_BAR_FUSION_REACTOR_DIAGRAM_BL, ProgressWidget.MoveType.VERTICAL),
-            TOP_LEFT(
-                    61, 30, 41, 35,
+            TOP_LEFT(61, 30, 41, 35,
                     GuiTextures.PROGRESS_BAR_FUSION_REACTOR_DIAGRAM_TL, ProgressWidget.MoveType.HORIZONTAL),
-            TOP_RIGHT(
-                    103, 30, 35, 41,
+            TOP_RIGHT(103, 30, 35, 41,
                     GuiTextures.PROGRESS_BAR_FUSION_REACTOR_DIAGRAM_TR, ProgressWidget.MoveType.VERTICAL_DOWNWARDS),
-            BOTTOM_RIGHT(
-                    97, 72, 41, 35,
+            BOTTOM_RIGHT(97, 72, 41, 35,
                     GuiTextures.PROGRESS_BAR_FUSION_REACTOR_DIAGRAM_BR, ProgressWidget.MoveType.HORIZONTAL_BACKWARDS);
 
             private final int x;
@@ -920,57 +603,79 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
         }
     }
 
-    protected int getGlassTireTier() {
-        return this.glassTire;
-    }
+    private class CompressedFusionReactorRecipeLogic extends MultiblockRecipeLogic {
 
-    private class FusionRecipeLogic extends MultiblockRecipeLogic {
-
-        public FusionRecipeLogic(MetaTileEntityCompressedFusionReactor tileEntity) {
+        public CompressedFusionReactorRecipeLogic(MetaTileEntityCompressedFusionReactor tileEntity) {
             super(tileEntity);
         }
 
-        protected void modifyOverclockPost(int[] resultOverclock,  IRecipePropertyStorage storage) {
-            super.modifyOverclockPost(resultOverclock, storage);
-            int coilTier = ((MetaTileEntityCompressedFusionReactor)this.metaTileEntity).getGlassTireTier();
-            if (coilTier > 0) {
-                resultOverclock[0] = (int)((double)resultOverclock[0] * (1.0 - (double)glassTire * 0.025));
-                resultOverclock[0] = Math.max(1, resultOverclock[0]);
-            }
-        }
-        public void setMaxProgress(int maxProgress) {
-            this.maxProgressTime = maxProgress*(100-beamTire*10)/100;
-
-        }
-
-        @Override
-        public int getParallelLimit() {
-            return getMaxParallel(heatingCoilLevel);
-        }
-
-
+        /**
+         * OC Duration Divisor Getter.
+         *
+         * <p>
+         *     Get {@code 2.0D} (Duration / 2) when {@code tier} less than 4.
+         *     Get {@code 4.0D} (Duration / 4) when {@code tier} bigger than or equal to 4.
+         * </p>
+         *
+         * @return  OC Duration Divisor.
+         */
         @Override
         protected double getOverclockingDurationDivisor() {
-            return 2.0D;
+            if (tier >= 4) {
+                return 4.0D;
+            } else {
+                return 2.0D;
+            }
         }
 
+        /**
+         * OC Voltage Multiplier Getter.
+         *
+         * <p>
+         *     Get {@code 2.0D} (Energy consumed ×2) when {@code tier} less than 4.
+         *     Get {@code 4.0D} (Energy consumed ×4) when {@code tier} bigger than or equal to 4.
+         *
+         *     <ul>
+         *         <li>Mark 1-3: 2/2 Perfect OC.</li>
+         *         <li>Mark 4 and Mark 5: 4/4 Perfect OC.</li>
+         *     </ul>
+         * </p>
+         *
+         * @return  OC Voltage Multiplier.
+         */
         @Override
         protected double getOverclockingVoltageMultiplier() {
-            return 2.0D;
+            if (tier >= 4) {
+                return 4.0D;
+            } else {
+                return 2.0D;
+            }
         }
 
         @Override
         public long getMaxVoltage() {
-            return Math.min(GTValues.V[tier], super.getMaxVoltage());
+            return Math.min(V[tier], super.getMaxVoltage());
         }
+
+        /**
+         * Allowed CFR get higher Maximum Parallel Voltage to parallel recipe.
+         * Used to allowed {@link #setParallelLimit(int)} in {@link #checkRecipe(Recipe)} use more energy,
+         * whether some high energy required recipes cannot paralle.
+         *
+         * @return  Max Parallel Voltage.
+         */
+        @Override
+        public long getMaxParallelVoltage() {
+            IEnergyContainer container = ((MetaTileEntityCompressedFusionReactor) this.metaTileEntity).inputEnergyContainers;
+            return Math.min(GTValues.V[tier] * getParallelLimit(), container.getInputVoltage());
+        }
+
 
         @Override
         public void updateWorkable() {
             super.updateWorkable();
-            // Drain heat when the reactor is not active, is paused via soft mallet, or does not have enough energy and
-            // has fully wiped recipe progress
-            // Don't drain heat when there is not enough energy and there is still some recipe progress, as that makes
-            // it doubly hard to complete the recipe
+            // Drain heat when the reactor is not active, is paused via soft mallet, or does not have enough energy and has fully wiped recipe progress
+            // Don't drain heat when there is not enough energy and there is still some recipe progress, as that makes it doubly hard to complete the recipe
             // (Will have to recover heat and recipe progress)
             if (heat > 0) {
                 if (!isActive || !workingEnabled || (hasNotEnoughEnergy && progressTime == 0)) {
@@ -984,27 +689,87 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
             if (!super.checkRecipe(recipe))
                 return false;
 
-            // if the reactor is not able to hold enough energy for it, do not run the recipe
-            if (recipe.getProperty(FusionEUToStartProperty.getInstance(), 0L) > energyContainer.getEnergyCapacity())
+            //  At first, check if CFR has enough energy to run recipe (this check is very rough),
+            //  if {@code EUToStart} property of {@link RecipeMaps#FUSION_RECIPES} is bigger than energy stored, then return false.
+            long startCost = recipe.getProperty(FusionEUToStartProperty.getInstance(), 0L);
+            if (startCost > energyContainer.getEnergyCapacity())
                 return false;
 
-            long heatDiff = recipe.getProperty(FusionEUToStartProperty.getInstance(), 0L) - heat;
-            // if the stored heat is >= required energy, recipe is okay to run
+            //  An Extended check of CFR, check tier of CFR and {@code EUToStart} of recipes,
+            //  CFR cannot run recipes higher than its {@link #tier}.
+            final long[] euToStart = { 160000000L, 320000000L, 640000000L, 1280000000L, 2560000000L };
+            if (startCost > euToStart[tier - 6])
+                return false;
+
+            //  Set Parallel to Recipe Map
+            int parallelBase = 64;
+
+            switch (tier) {
+                case LuV -> {
+                    if (startCost <= 160000000L) {
+                        this.setParallelLimit(parallelBase);
+                    }
+                }
+                case ZPM -> {
+                    if (startCost <= 160000000L) {
+                        this.setParallelLimit(parallelBase * 2);
+                    } else if (startCost <= 320000000L) {
+                        this.setParallelLimit(parallelBase);
+                    }
+                }
+                case UV -> {
+                    if (startCost <= 160000000L) {
+                        this.setParallelLimit(parallelBase * 3);
+                    } else if (startCost <= 320000000L) {
+                        this.setParallelLimit(parallelBase * 2);
+                    } else if (startCost <= 640000000L) {
+                        this.setParallelLimit(parallelBase);
+                    }
+                }
+                case UHV -> {
+                    if (startCost <= 160000000L) {
+                        this.setParallelLimit(parallelBase * 4);
+                    } else if (startCost <= 320000000L) {
+                        this.setParallelLimit(parallelBase * 3);
+                    } else if (startCost <= 640000000L) {
+                        this.setParallelLimit(parallelBase * 2);
+                    } else if (startCost <= 1280000000L) {
+                        this.setParallelLimit(parallelBase);
+                    }
+                }
+                case UEV -> {
+                    if (startCost <= 160000000L) {
+                        this.setParallelLimit(parallelBase * 5);
+                    } else if (startCost <= 320000000L) {
+                        this.setParallelLimit(parallelBase * 4);
+                    } else if (startCost <= 640000000L) {
+                        this.setParallelLimit(parallelBase * 3);
+                    } else if (startCost <= 1280000000L) {
+                        this.setParallelLimit(parallelBase * 2);
+                    } else if (startCost <= 2560000000L) {
+                        this.setParallelLimit(parallelBase * 2);
+                    }
+                }
+            }
+
+            //  Differential of Heat.
+            long heatDiff = startCost - heat;
+
+            //  If Heat Stored is bigger than or equal to Energy required, then return true.
             if (heatDiff <= 0)
                 return true;
 
-            // if the remaining energy needed is more than stored, do not run
+            //  If the remaining energy needed is more than stored, do not run
             if (energyContainer.getEnergyStored() < heatDiff)
                 return false;
 
-            // remove the energy needed
+            //  Remove the energy needed
             energyContainer.removeEnergy(heatDiff);
-            // increase the stored heat
+            //  Increase the stored heat
             heat += heatDiff;
             return true;
         }
 
-        
         @Override
         public NBTTagCompound serializeNBT() {
             NBTTagCompound tag = super.serializeNBT();
@@ -1016,134 +781,6 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
         public void deserializeNBT( NBTTagCompound compound) {
             super.deserializeNBT(compound);
             heat = compound.getLong("Heat");
-        }
-
-        @Override
-        protected void setActive(boolean active) {
-            if (active != isActive) {
-                MetaTileEntityCompressedFusionReactor.this.progressBarSupplier.resetCountdown();
-            }
-            super.setActive(active);
-        }
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void renderMetaTileEntity(double x, double y, double z, float partialTicks) {
-        if (this.hasFusionRingColor() && !this.registeredBloomRenderTicket) {
-            this.registeredBloomRenderTicket = true;
-            BloomEffectUtil.registerBloomRender(FusionBloomSetup.INSTANCE, getBloomType(), this, this);
-        }
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void renderBloomEffect( BufferBuilder buffer,  EffectRenderContext context) {
-        if (!this.hasFusionRingColor()) return;
-        int color = RenderUtil.interpolateColor(this.getFusionRingColor(), -1, Eases.QUAD_IN.getInterpolation(
-                Math.abs((Math.abs(getOffsetTimer() % 50) + context.partialTicks()) - 25) / 25));
-        float a = (float) (color >> 24 & 255) / 255.0F;
-        float r = (float) (color >> 16 & 255) / 255.0F;
-        float g = (float) (color >> 8 & 255) / 255.0F;
-        float b = (float) (color & 255) / 255.0F;
-        EnumFacing relativeBack = RelativeDirection.BACK.getRelativeFacing(getFrontFacing(), getUpwardsFacing(),
-                isFlipped());
-        EnumFacing.Axis axis = RelativeDirection.UP.getRelativeFacing(getFrontFacing(), getUpwardsFacing(), isFlipped())
-                .getAxis();
-
-        RenderBufferHelper.renderRing(buffer,
-                getPos().getX() - context.cameraX() + relativeBack.getXOffset() * 23 + 0.5,
-                getPos().getY() - context.cameraY() + relativeBack.getYOffset() * 23 + 0.5,
-                getPos().getZ() - context.cameraZ() + relativeBack.getZOffset() * 23 + 0.5,
-                6, 0.2, 10, 20,
-                r, g, b, a, EnumFacing.Axis.X);
-
-        RenderBufferHelper.renderRing(buffer,
-                getPos().getX() - context.cameraX() + relativeBack.getXOffset() * 23 + 0.5,
-                getPos().getY() - context.cameraY() + relativeBack.getYOffset() * 23 + 0.5,
-                getPos().getZ() - context.cameraZ() + relativeBack.getZOffset() * 23 + 0.5,
-                6, 0.2, 10, 20,
-                r, g, b, a, EnumFacing.Axis.Y);
-
-        RenderBufferHelper.renderRing(buffer,
-                getPos().getX() - context.cameraX() + relativeBack.getXOffset() * 23 + 0.5,
-                getPos().getY() - context.cameraY() + relativeBack.getYOffset() * 23 + 0.5,
-                getPos().getZ() - context.cameraZ() + relativeBack.getZOffset() * 23 + 0.5,
-                6, 0.2, 10, 20,
-                r, g, b, a, EnumFacing.Axis.Z);
-
-        RenderBufferHelper.renderRing(buffer,
-                getPos().getX() - context.cameraX() + relativeBack.getXOffset() * 23 + 0.5,
-                getPos().getY() - context.cameraY() + relativeBack.getYOffset() * 23 + 0.5,
-                getPos().getZ() - context.cameraZ() + relativeBack.getZOffset() * 23 + 0.5,
-                12, 0.2, 10, 20,
-                r, g, b, a, EnumFacing.Axis.Y);
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public boolean shouldRenderBloomEffect( EffectRenderContext context) {
-        return this.hasFusionRingColor();
-    }
-
-    @Override
-    public AxisAlignedBB getRenderBoundingBox() {
-        EnumFacing relativeRight = RelativeDirection.RIGHT.getRelativeFacing(getFrontFacing(), getUpwardsFacing(),
-                isFlipped());
-        EnumFacing relativeBack = RelativeDirection.BACK.getRelativeFacing(getFrontFacing(), getUpwardsFacing(),
-                isFlipped());
-
-        return new AxisAlignedBB(
-                this.getPos().offset(relativeBack).offset(relativeRight, 6),
-                this.getPos().offset(relativeBack, 13).offset(relativeRight.getOpposite(), 6));
-    }
-
-    @Override
-    public boolean shouldRenderInPass(int pass) {
-        return pass == 0;
-    }
-
-    @Override
-    public boolean isGlobalRenderer() {
-        return true;
-    }
-
-    private static BloomType getBloomType() {
-        ConfigHolder.FusionBloom fusionBloom = ConfigHolder.client.shader.fusionBloom;
-        return BloomType.fromValue(fusionBloom.useShader ? fusionBloom.bloomStyle : -1);
-    }
-
-    @SideOnly(Side.CLIENT)
-    private static final class FusionBloomSetup implements IRenderSetup {
-
-        private static final FusionBloomSetup INSTANCE = new FusionBloomSetup();
-
-        float lastBrightnessX;
-        float lastBrightnessY;
-
-        @Override
-        public void preDraw( BufferBuilder buffer) {
-            BloomEffect.strength = (float) ConfigHolder.client.shader.fusionBloom.strength;
-            BloomEffect.baseBrightness = (float) ConfigHolder.client.shader.fusionBloom.baseBrightness;
-            BloomEffect.highBrightnessThreshold = (float) ConfigHolder.client.shader.fusionBloom.highBrightnessThreshold;
-            BloomEffect.lowBrightnessThreshold = (float) ConfigHolder.client.shader.fusionBloom.lowBrightnessThreshold;
-            BloomEffect.step = 1;
-
-            lastBrightnessX = OpenGlHelper.lastBrightnessX;
-            lastBrightnessY = OpenGlHelper.lastBrightnessY;
-            GlStateManager.color(1, 1, 1, 1);
-            OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240.0F, 240.0F);
-            GlStateManager.disableTexture2D();
-
-            buffer.begin(GL11.GL_QUAD_STRIP, DefaultVertexFormats.POSITION_COLOR);
-        }
-
-        @Override
-        public void postDraw( BufferBuilder buffer) {
-            Tessellator.getInstance().draw();
-
-            GlStateManager.enableTexture2D();
-            OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, lastBrightnessX, lastBrightnessY);
         }
     }
 }

@@ -210,6 +210,7 @@ public class HexanitrohexaaxaisowurtzitaneChain {
                 .output(dust, Salt, 12)
                 .fluidOutputs(Hydrogen.getFluid(6000))
                 .fluidOutputs(Water.getFluid(6000))
+                .recipeLevel(4)
                 .EUt(VA[EV])
                 .duration(400)
                 .buildAndRegister();
@@ -253,6 +254,7 @@ public class HexanitrohexaaxaisowurtzitaneChain {
                 .fluidOutputs(Ethylbenzene.getFluid(1000))
                 .fluidOutputs(HydrobromicAcid.getFluid(1000))
                 .EUt(VA[ZPM])
+                .recipeLevel(5)
                 .duration(220)
                 .buildAndRegister();
 
@@ -321,6 +323,7 @@ public class HexanitrohexaaxaisowurtzitaneChain {
                 .fluidOutputs(TetrafluoroboricAcid.getFluid(4000))
                 .fluidOutputs(AceticAcid.getFluid(4000))
                 .EUt(VA[UV])
+                .recipeLevel(6)
                 .duration(250)
                 .buildAndRegister();
 

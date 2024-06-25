@@ -44,26 +44,12 @@ public class GTQTEventHandler {
     )
     public static void registerMaterials(MaterialEvent event)
     {
-        GTQTMaterials.register();
         TJMaterials.register();
         GCYSMaterials.init();
+        GTQTMaterials.register();
         OrePrefixAdditions.init();
-        //在此处注册材料
     }
-    /**
-     * Player Login Event Handler.
-     *
-     * @author Magic_Sweepy
-     *
-     * <p>
-     *     This class is create a {@link PlayerEvent.PlayerLoggedInEvent},
-     *     when player log in world, then send message of all useful Modpack infoes to chat.
-     * </p>
-     *
-     * @see CommonProxy#preLoad()
-     *
-     * @version 2.8.8-beta
-     */
+
     public static class PlayerLoginEventHandler {
 
         private static final String[] lines = {

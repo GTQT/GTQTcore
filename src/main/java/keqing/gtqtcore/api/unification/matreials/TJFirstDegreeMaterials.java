@@ -25,7 +25,7 @@ public class TJFirstDegreeMaterials {
                 .fluid()
                 .blast(1100)
                 .color(1755371).iconSet(MaterialIconSet.DULL)
-                .flags(setMaterialFlags(STANDARDPLATE, STANDARDROD, STANDARDROTOR, STANDARDGEAR, STANDARDSPRING, STANDARDCASING))
+                .flags(GENERATE_PLATE,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_ROD,GENERATE_BOLT_SCREW,GENERATE_FRAME,GENERATE_GEAR,GENERATE_LONG_ROD,GENERATE_FOIL,GENERATE_RING,GENERATE_SPRING,GENERATE_SPRING_SMALL,GENERATE_SMALL_GEAR,GENERATE_FINE_WIRE,GENERATE_ROTOR,GENERATE_ROUND)
                 .components(Aluminium, 5, Magnesium, 1, Manganese, 1)
                 .build();
 
@@ -33,7 +33,7 @@ public class TJFirstDegreeMaterials {
                 .ingot()
                 .fluid()
                 .colorAverage().iconSet(MaterialIconSet.SHINY)
-                .flags(setMaterialFlags(STANDARDPLATE, STANDARDROD, STANDARDROTOR, STANDARDGEAR, STANDARDSPRING))
+                .flags(GENERATE_PLATE,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_ROD,GENERATE_BOLT_SCREW,GENERATE_FRAME,GENERATE_GEAR,GENERATE_LONG_ROD,GENERATE_FOIL,GENERATE_RING,GENERATE_SPRING,GENERATE_SPRING_SMALL,GENERATE_SMALL_GEAR,GENERATE_FINE_WIRE,GENERATE_ROTOR,GENERATE_ROUND)
                 .components(Iron, 3, Carbon, 1, Vanadium, 5, Titanium, 40, Aluminium, 6)
                 .blast(3400)
                 .build();
@@ -78,18 +78,19 @@ public class TJFirstDegreeMaterials {
         Draconium = new Material.Builder(25007, gregtechId("draconium"))
                 .ingot().fluid()
                 .color(0x573d85).iconSet(MaterialIconSet.DULL)
-                .flags(setMaterialFlags(STANDARDPLATE, STANDARDCASING))
+                .flags(GENERATE_PLATE,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_ROD,GENERATE_BOLT_SCREW,GENERATE_FRAME,GENERATE_GEAR,GENERATE_LONG_ROD,GENERATE_FOIL,GENERATE_RING,GENERATE_SPRING,GENERATE_SPRING_SMALL,GENERATE_SMALL_GEAR,GENERATE_FINE_WIRE,GENERATE_ROTOR,GENERATE_ROUND)
                 .build();
 
         SilicaCeramic = new Material.Builder(25008, gregtechId("silicaceramic"))
                 .ingot()
                 .blast(1000)
                 .color(0x8c7a50).iconSet(MaterialIconSet.SHINY)
-                .flags(setMaterialFlags(STANDARDPLATE,STANDARDROD,STANDARDFOIL,STANDARDROUND))
+                .flags(GENERATE_PLATE,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_ROD,GENERATE_BOLT_SCREW,GENERATE_FRAME,GENERATE_GEAR,GENERATE_LONG_ROD,GENERATE_FOIL,GENERATE_RING,GENERATE_SPRING,GENERATE_SPRING_SMALL,GENERATE_SMALL_GEAR,GENERATE_FINE_WIRE,GENERATE_ROTOR,GENERATE_ROUND)
                 .build();
 
         NickelPlatedTin = new Material.Builder(25009, gregtechId("nickelplatedtin"))
                 .ingot()
+                .flags(GENERATE_PLATE,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_ROD,GENERATE_BOLT_SCREW,GENERATE_FRAME,GENERATE_GEAR,GENERATE_LONG_ROD,GENERATE_FOIL,GENERATE_RING,GENERATE_SPRING,GENERATE_SPRING_SMALL,GENERATE_SMALL_GEAR,GENERATE_FINE_WIRE,GENERATE_ROTOR,GENERATE_ROUND)
                 .color(0x8fb7c4).iconSet(MaterialIconSet.SHINY)
                 .build();
 
@@ -98,7 +99,7 @@ public class TJFirstDegreeMaterials {
                 .fluid()
                 .ingot()
                 .color(0xbfb393)
-                .flags(setMaterialFlags(STANDARDWIREFINE,STANDARDFOIL))
+                .flags(GENERATE_PLATE,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_ROD,GENERATE_BOLT_SCREW,GENERATE_FRAME,GENERATE_GEAR,GENERATE_LONG_ROD,GENERATE_FOIL,GENERATE_RING,GENERATE_SPRING,GENERATE_SPRING_SMALL,GENERATE_SMALL_GEAR,GENERATE_FINE_WIRE,GENERATE_ROTOR,GENERATE_ROUND)
                 .flags(GENERATE_FINE_WIRE)
                 .build();
 
@@ -115,7 +116,7 @@ public class TJFirstDegreeMaterials {
                 .build();
         Fiberglass = new Material.Builder(25014, gregtechId("fiberglass"))
                 .ingot().fluid()
-                .flags(GENERATE_FINE_WIRE,GENERATE_PLATE)
+                .flags(GENERATE_PLATE,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_ROD,GENERATE_BOLT_SCREW,GENERATE_FRAME,GENERATE_GEAR,GENERATE_LONG_ROD,GENERATE_FOIL,GENERATE_RING,GENERATE_SPRING,GENERATE_SPRING_SMALL,GENERATE_SMALL_GEAR,GENERATE_FINE_WIRE,GENERATE_ROTOR,GENERATE_ROUND)
                 .color(0x99c0cf)
                 .build();
 
@@ -262,6 +263,7 @@ public class TJFirstDegreeMaterials {
                 .dust()
                 .ingot()
                 .color(0x0d0d0d)
+                .flags(GENERATE_PLATE,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_ROD,GENERATE_BOLT_SCREW,GENERATE_FRAME,GENERATE_GEAR,GENERATE_LONG_ROD,GENERATE_FOIL,GENERATE_RING,GENERATE_SPRING,GENERATE_SPRING_SMALL,GENERATE_SMALL_GEAR,GENERATE_FINE_WIRE,GENERATE_ROTOR,GENERATE_ROUND)
                 .iconSet(MaterialIconSet.SHINY)
                 .build();
 
@@ -270,6 +272,7 @@ public class TJFirstDegreeMaterials {
                 .dust()
                 .ingot()
                 .color(0x5986a8)
+                .flags(GENERATE_PLATE,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_ROD,GENERATE_BOLT_SCREW,GENERATE_FRAME,GENERATE_GEAR,GENERATE_LONG_ROD,GENERATE_FOIL,GENERATE_RING,GENERATE_SPRING,GENERATE_SPRING_SMALL,GENERATE_SMALL_GEAR,GENERATE_FINE_WIRE,GENERATE_ROTOR,GENERATE_ROUND)
                 .iconSet(MaterialIconSet.SHINY)
                 .build()
                 .setFormula("Nh-I3", false);
@@ -292,6 +295,7 @@ public class TJFirstDegreeMaterials {
 
         BismuthTelluride = new Material.Builder(25054, gregtechId("bismuth_telluride"))
                 .ingot()
+                .flags(GENERATE_PLATE,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_ROD,GENERATE_BOLT_SCREW,GENERATE_FRAME,GENERATE_GEAR,GENERATE_LONG_ROD,GENERATE_FOIL,GENERATE_RING,GENERATE_SPRING,GENERATE_SPRING_SMALL,GENERATE_SMALL_GEAR,GENERATE_FINE_WIRE,GENERATE_ROTOR,GENERATE_ROUND)
                 .colorAverage()
                 .components(Bismuth, 2, Tellurium, 3)
                 .build();
@@ -314,12 +318,14 @@ public class TJFirstDegreeMaterials {
                 .fluid()
                 .ingot()
                 .color(0x171717)
+                .flags(GENERATE_PLATE,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_ROD,GENERATE_BOLT_SCREW,GENERATE_FRAME,GENERATE_GEAR,GENERATE_LONG_ROD,GENERATE_FOIL,GENERATE_RING,GENERATE_SPRING,GENERATE_SPRING_SMALL,GENERATE_SMALL_GEAR,GENERATE_FINE_WIRE,GENERATE_ROTOR,GENERATE_ROUND)
                 .components(Gluons, 1, HeavyQuarks, 4, LightQuarks, 1)
                 .build();
 
         BismuthIridiumOxide = new Material.Builder(25058, gregtechId("bismuth_iridium_oxide"))
                 .ingot()
                 .colorAverage()
+                .flags(GENERATE_PLATE,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_ROD,GENERATE_BOLT_SCREW,GENERATE_FRAME,GENERATE_GEAR,GENERATE_LONG_ROD,GENERATE_FOIL,GENERATE_RING,GENERATE_SPRING,GENERATE_SPRING_SMALL,GENERATE_SMALL_GEAR,GENERATE_FINE_WIRE,GENERATE_ROTOR,GENERATE_ROUND)
                 .components(Bismuth, 2, Iridium, 2, Oxygen, 7)
                 .iconSet(MaterialIconSet.DULL)
                 .build();
@@ -334,6 +340,7 @@ public class TJFirstDegreeMaterials {
                 .ingot()
                 .fluid()
                 .colorAverage()
+                .flags(GENERATE_PLATE,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_ROD,GENERATE_BOLT_SCREW,GENERATE_FRAME,GENERATE_GEAR,GENERATE_LONG_ROD,GENERATE_FOIL,GENERATE_RING,GENERATE_SPRING,GENERATE_SPRING_SMALL,GENERATE_SMALL_GEAR,GENERATE_FINE_WIRE,GENERATE_ROTOR,GENERATE_ROUND)
                 .components(NaquadahEnriched, 16, Einsteinium, 4, Rhodium, 4, Technetium, 4, Astatine, 2, Erbium, 2)
                 .blast(9700)
                 .iconSet(MaterialIconSet.SHINY)
@@ -342,6 +349,7 @@ public class TJFirstDegreeMaterials {
         SodiumPotassiumNiobate = new Material.Builder(25061, gregtechId("sodium_potassium_niobate"))
                 .ingot()
                 .colorAverage()
+                .flags(GENERATE_PLATE,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_ROD,GENERATE_BOLT_SCREW,GENERATE_FRAME,GENERATE_GEAR,GENERATE_LONG_ROD,GENERATE_FOIL,GENERATE_RING,GENERATE_SPRING,GENERATE_SPRING_SMALL,GENERATE_SMALL_GEAR,GENERATE_FINE_WIRE,GENERATE_ROTOR,GENERATE_ROUND)
                 .components(Sodium, 1, Potassium, 1, Niobium, 2, Oxygen, 6)
                 .blast(3600)
                 .build();
@@ -351,6 +359,7 @@ public class TJFirstDegreeMaterials {
                 .iconSet(MaterialIconSet.SHINY)
                 .blast(10200)
                 .colorAverage()
+                .flags(GENERATE_PLATE,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_ROD,GENERATE_BOLT_SCREW,GENERATE_FRAME,GENERATE_GEAR,GENERATE_LONG_ROD,GENERATE_FOIL,GENERATE_RING,GENERATE_SPRING,GENERATE_SPRING_SMALL,GENERATE_SMALL_GEAR,GENERATE_FINE_WIRE,GENERATE_ROTOR,GENERATE_ROUND)
                 .components(Trinium, 18, Tungsten, 6, Vanadium, 4, Chrome, 2, Tantalum, 1, Cobalt, 1)
                 .build();
 
@@ -359,6 +368,7 @@ public class TJFirstDegreeMaterials {
                 .iconSet(MaterialIconSet.DULL)
                 .blast(6100)
                 .color(0x355232)
+                .flags(GENERATE_PLATE,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_ROD,GENERATE_BOLT_SCREW,GENERATE_FRAME,GENERATE_GEAR,GENERATE_LONG_ROD,GENERATE_FOIL,GENERATE_RING,GENERATE_SPRING,GENERATE_SPRING_SMALL,GENERATE_SMALL_GEAR,GENERATE_FINE_WIRE,GENERATE_ROTOR,GENERATE_ROUND)
                 .components(Lead, 12, Titanium, 1, Zirconium, 1, Oxygen, 16)
                 .build();
 
@@ -394,6 +404,7 @@ public class TJFirstDegreeMaterials {
         TerfenolD_H = new Material.Builder(25069, gregtechId("terfenol_d_heavy"))
                 .ingot()
                 .blast(10200)
+                .flags(GENERATE_PLATE,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_ROD,GENERATE_BOLT_SCREW,GENERATE_FRAME,GENERATE_GEAR,GENERATE_LONG_ROD,GENERATE_FOIL,GENERATE_RING,GENERATE_SPRING,GENERATE_SPRING_SMALL,GENERATE_SMALL_GEAR,GENERATE_FINE_WIRE,GENERATE_ROTOR,GENERATE_ROUND)
                 .components(Osmium, 12, Iron, 6, Dysprosium, 2, Terbium, 1)
                 .color(0x4d4d4d)
                 .build();
@@ -402,6 +413,7 @@ public class TJFirstDegreeMaterials {
                 .ingot()
                 .blast(10200)
                 .color(0x9c9c9c)
+                .flags(GENERATE_PLATE,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_ROD,GENERATE_BOLT_SCREW,GENERATE_FRAME,GENERATE_GEAR,GENERATE_LONG_ROD,GENERATE_FOIL,GENERATE_RING,GENERATE_SPRING,GENERATE_SPRING_SMALL,GENERATE_SMALL_GEAR,GENERATE_FINE_WIRE,GENERATE_ROTOR,GENERATE_ROUND)
                 .build();
 
         SuspendedPGQD = new Material.Builder(25071, gregtechId("suspended_pgqd"))
@@ -476,10 +488,10 @@ public class TJFirstDegreeMaterials {
                 .build();
 
         Polyetheretherketone = new Material.Builder(25086, gregtechId("peek"))
-                .ingot()
-                .fluid()
+                .ingot().fluid()
                 .iconSet(MaterialIconSet.DULL)
                 .color(0x2b2b2b)
+                .flags(GENERATE_PLATE,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_ROD,GENERATE_BOLT_SCREW,GENERATE_FRAME,GENERATE_GEAR,GENERATE_LONG_ROD,GENERATE_FOIL,GENERATE_RING,GENERATE_SPRING,GENERATE_SPRING_SMALL,GENERATE_SMALL_GEAR,GENERATE_FINE_WIRE,GENERATE_ROTOR,GENERATE_ROUND)
                 .build()
                 .setFormula("C20H12O3", true);
 
@@ -487,6 +499,7 @@ public class TJFirstDegreeMaterials {
                 .ingot()
                 .fluid()
                 .color(0x8196a3)
+                .flags(GENERATE_PLATE,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_ROD,GENERATE_BOLT_SCREW,GENERATE_FRAME,GENERATE_GEAR,GENERATE_LONG_ROD,GENERATE_FOIL,GENERATE_RING,GENERATE_SPRING,GENERATE_SPRING_SMALL,GENERATE_SMALL_GEAR,GENERATE_FINE_WIRE,GENERATE_ROTOR,GENERATE_ROUND)
                 .iconSet(MaterialIconSet.SHINY)
                 .build()
                 .setFormula("robots!", false);
@@ -494,6 +507,7 @@ public class TJFirstDegreeMaterials {
         LutetiumTantalate = new Material.Builder(25088, gregtechId("lutetium_tantalite"))
                 .ingot()
                 .iconSet(MaterialIconSet.SHINY)
+                .flags(GENERATE_PLATE,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_ROD,GENERATE_BOLT_SCREW,GENERATE_FRAME,GENERATE_GEAR,GENERATE_LONG_ROD,GENERATE_FOIL,GENERATE_RING,GENERATE_SPRING,GENERATE_SPRING_SMALL,GENERATE_SMALL_GEAR,GENERATE_FINE_WIRE,GENERATE_ROTOR,GENERATE_ROUND)
                 .components(Lutetium, 1, Tantalum, 1, Oxygen, 4)
                 .color(0xaccde6)
                 .build();
@@ -501,6 +515,7 @@ public class TJFirstDegreeMaterials {
         Iridrhodruthenium = new Material.Builder(25089, gregtechId("iridrhodruthenium"))
                 .ingot()
                 .iconSet(MaterialIconSet.SHINY)
+                .flags(GENERATE_PLATE,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_ROD,GENERATE_BOLT_SCREW,GENERATE_FRAME,GENERATE_GEAR,GENERATE_LONG_ROD,GENERATE_FOIL,GENERATE_RING,GENERATE_SPRING,GENERATE_SPRING_SMALL,GENERATE_SMALL_GEAR,GENERATE_FINE_WIRE,GENERATE_ROTOR,GENERATE_ROUND)
                 .components(Ruthenium, 8, Rhodium, 1, Iridium, 1)
                 .colorAverage()
                 .build();
@@ -508,6 +523,7 @@ public class TJFirstDegreeMaterials {
         HEA_1 = new Material.Builder(25090, gregtechId("high_entropy_alloy_1"))
                 .ingot()
                 .iconSet(MaterialIconSet.METALLIC)
+                .flags(GENERATE_PLATE,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_ROD,GENERATE_BOLT_SCREW,GENERATE_FRAME,GENERATE_GEAR,GENERATE_LONG_ROD,GENERATE_FOIL,GENERATE_RING,GENERATE_SPRING,GENERATE_SPRING_SMALL,GENERATE_SMALL_GEAR,GENERATE_FINE_WIRE,GENERATE_ROTOR,GENERATE_ROUND)
                 .components(Chrome, 5, Niobium, 8, Silicon, 7, Titanium, 3, Zirconium, 5)
                 .colorAverage()
                 .build();
@@ -516,6 +532,7 @@ public class TJFirstDegreeMaterials {
                 .ingot()
                 .fluid()
                 .iconSet(MaterialIconSet.METALLIC)
+                .flags(GENERATE_PLATE,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_ROD,GENERATE_BOLT_SCREW,GENERATE_FRAME,GENERATE_GEAR,GENERATE_LONG_ROD,GENERATE_FOIL,GENERATE_RING,GENERATE_SPRING,GENERATE_SPRING_SMALL,GENERATE_SMALL_GEAR,GENERATE_FINE_WIRE,GENERATE_ROTOR,GENERATE_ROUND)
                 .components(Zirconium, 6, Tungsten, 4, Vanadium, 5, Cobalt, 3, Manganese, 4)
                 .colorAverage()
                 .build();
@@ -524,6 +541,7 @@ public class TJFirstDegreeMaterials {
                 .ingot()
                 .fluid()
                 .iconSet(MaterialIconSet.SHINY)
+                .flags(GENERATE_PLATE,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_ROD,GENERATE_BOLT_SCREW,GENERATE_FRAME,GENERATE_GEAR,GENERATE_LONG_ROD,GENERATE_FOIL,GENERATE_RING,GENERATE_SPRING,GENERATE_SPRING_SMALL,GENERATE_SMALL_GEAR,GENERATE_FINE_WIRE,GENERATE_ROTOR,GENERATE_ROUND)
                 .components(Aluminium, 5, Chrome, 5, Molybdenum, 7, Tantalum, 9, Titanium, 6, Zirconium, 4, Nitrogen, 21)
                 .colorAverage()
                 .build();
@@ -531,18 +549,21 @@ public class TJFirstDegreeMaterials {
         HDCS_1 = new Material.Builder(25093, gregtechId("high_durability_compound_steel_1"))
                 .ingot()
                 .iconSet(MaterialIconSet.SHINY)
+                .flags(GENERATE_PLATE,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_ROD,GENERATE_BOLT_SCREW,GENERATE_FRAME,GENERATE_GEAR,GENERATE_LONG_ROD,GENERATE_FOIL,GENERATE_RING,GENERATE_SPRING,GENERATE_SPRING_SMALL,GENERATE_SMALL_GEAR,GENERATE_FINE_WIRE,GENERATE_ROTOR,GENERATE_ROUND)
                 .color(0x2e216e)
                 .build();
 
         HDCS_2 = new Material.Builder(25094, gregtechId("high_durability_compound_steel_2"))
                 .ingot()
                 .iconSet(MaterialIconSet.SHINY)
+                .flags(GENERATE_PLATE,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_ROD,GENERATE_BOLT_SCREW,GENERATE_FRAME,GENERATE_GEAR,GENERATE_LONG_ROD,GENERATE_FOIL,GENERATE_RING,GENERATE_SPRING,GENERATE_SPRING_SMALL,GENERATE_SMALL_GEAR,GENERATE_FINE_WIRE,GENERATE_ROTOR,GENERATE_ROUND)
                 .color(0x3d0b0e)
                 .build();
 
         HDCS_3 = new Material.Builder(25095, gregtechId("high_durability_compound_steel_3"))
                 .ingot()
                 .iconSet(MaterialIconSet.SHINY)
+                .flags(GENERATE_PLATE,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_ROD,GENERATE_BOLT_SCREW,GENERATE_FRAME,GENERATE_GEAR,GENERATE_LONG_ROD,GENERATE_FOIL,GENERATE_RING,GENERATE_SPRING,GENERATE_SPRING_SMALL,GENERATE_SMALL_GEAR,GENERATE_FINE_WIRE,GENERATE_ROTOR,GENERATE_ROUND)
                 .color(0x1f0126)
                 .build();
 
@@ -550,6 +571,7 @@ public class TJFirstDegreeMaterials {
                 .ingot()
                 .iconSet(MaterialIconSet.SHINY)
                 .color(0x3770bf)
+                .flags(GENERATE_PLATE,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_ROD,GENERATE_BOLT_SCREW,GENERATE_FRAME,GENERATE_GEAR,GENERATE_LONG_ROD,GENERATE_FOIL,GENERATE_RING,GENERATE_SPRING,GENERATE_SPRING_SMALL,GENERATE_SMALL_GEAR,GENERATE_FINE_WIRE,GENERATE_ROTOR,GENERATE_ROUND)
                 .components(HSSE, 12, Seaborgium, 7, Lead, 5, Molybdenum, 5, Beryllium, 3, Gallium, 3, Mercury, 2)
                 .build();
 
@@ -570,12 +592,14 @@ public class TJFirstDegreeMaterials {
         TantalumHafniumSeaborgiumCarbide = new Material.Builder(25100, gregtechId("tantalum_hafnium_seaborgium_carbide"))
                 .ingot()
                 .iconSet(MaterialIconSet.SHINY)
+                .flags(GENERATE_PLATE,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_ROD,GENERATE_BOLT_SCREW,GENERATE_FRAME,GENERATE_GEAR,GENERATE_LONG_ROD,GENERATE_FOIL,GENERATE_RING,GENERATE_SPRING,GENERATE_SPRING_SMALL,GENERATE_SMALL_GEAR,GENERATE_FINE_WIRE,GENERATE_ROTOR,GENERATE_ROUND)
                 .colorAverage()
                 .build();
 
         TantalumHafniumSeaborgiumCarboNitride = new Material.Builder(25101, gregtechId("tantalum_hafnium_seaborgium_carbonitide"))
                 .ingot()
                 .iconSet(MaterialIconSet.SHINY)
+                .flags(GENERATE_PLATE,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_ROD,GENERATE_BOLT_SCREW,GENERATE_FRAME,GENERATE_GEAR,GENERATE_LONG_ROD,GENERATE_FOIL,GENERATE_RING,GENERATE_SPRING,GENERATE_SPRING_SMALL,GENERATE_SMALL_GEAR,GENERATE_FINE_WIRE,GENERATE_ROTOR,GENERATE_ROUND)
                 .color(0x1c1c1c)
                 .components(TantalumHafniumSeaborgiumCarbide, 1, Nitrogen, 1)
                 .build()
@@ -651,6 +675,7 @@ public class TJFirstDegreeMaterials {
                 .ingot()
                 .flags(GENERATE_PLATE)
                 .color(0x9a9fb3)
+                .flags(GENERATE_PLATE,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_ROD,GENERATE_BOLT_SCREW,GENERATE_FRAME,GENERATE_GEAR,GENERATE_LONG_ROD,GENERATE_FOIL,GENERATE_RING,GENERATE_SPRING,GENERATE_SPRING_SMALL,GENERATE_SMALL_GEAR,GENERATE_FINE_WIRE,GENERATE_ROTOR,GENERATE_ROUND)
                 .iconSet(MaterialIconSet.SHINY)
                 .components(Aluminium, 1, Silicon, 1, Oxygen, 4)
                 .build();

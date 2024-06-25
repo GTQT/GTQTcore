@@ -30,7 +30,7 @@ import java.util.List;
  *
  * <p>
  *     Integrated from <a href="https://github.com/vfyjxf/GregicProbe">Gregic Probe</a> for GTCE,
- *     this mod use MIT License and is stop updating now (so we integrated it in gtlitecore).
+ *     this mod use MIT License and is stop updating now (so we integrated it in gtqtcore).
  * </p>
  */
 public class RecipeFluidOutputInfoProvider extends CapabilityInfoProvider<IWorkable> {

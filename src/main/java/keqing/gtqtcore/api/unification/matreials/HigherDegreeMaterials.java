@@ -6,12 +6,14 @@ import gregtech.api.unification.material.properties.BlastProperty;
 import gregtech.api.unification.material.properties.BlastProperty.GasTier;
 import gregtech.api.unification.material.properties.ToolProperty;
 
+import static gregicality.multiblocks.api.unification.GCYMMaterials.*;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.info.MaterialFlags.*;
 import static gregtech.api.unification.material.info.MaterialIconSet.*;
 import static gregtech.api.util.GTUtility.gregtechId;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.Adamantium;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 
 import gregtech.api.unification.material.Material;
 import keqing.gtqtcore.api.unification.GTQTMaterials;
@@ -193,5 +195,7 @@ public class HigherDegreeMaterials {
                         DISABLE_DECOMPOSITION)
                 .components(Methane,576,Water,11520)
                 .build();
+
+
     }
 }

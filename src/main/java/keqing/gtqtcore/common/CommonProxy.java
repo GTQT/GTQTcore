@@ -191,6 +191,7 @@ public class CommonProxy {
         registry.register(GTQTMetaBlocks.ELECTRON_MICROSCOPE);
         registry.register(GTQTMetaBlocks.PARTICLE_ACCELERATOR);
         registry.register(GTQTMetaBlocks.ISA_CASING);
+        registry.register(GTQTMetaBlocks.COMPRESSED_FUSION_REACTOR);
         registry.register(GTQTMetaBlocks.ROAD);
         registry.register(GTQTMetaBlocks.ELECTROBATH);
         registry.register(GTQTMetaBlocks.NUCLEAR_FUSION);
@@ -248,6 +249,7 @@ public class CommonProxy {
         registry.register(createItemBlock(GTQTMetaBlocks.COMPONENT_ASSEMBLY_LINE, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.ELECTRON_MICROSCOPE, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.ISA_CASING, VariantItemBlock::new));
+        registry.register(createItemBlock(GTQTMetaBlocks.COMPRESSED_FUSION_REACTOR, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.ELECTROBATH, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.PARTICLE_ACCELERATOR, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.ROAD, VariantItemBlock::new));
