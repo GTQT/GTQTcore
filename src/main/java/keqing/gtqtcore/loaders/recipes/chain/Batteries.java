@@ -3,6 +3,8 @@ package keqing.gtqtcore.loaders.recipes.chain;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
+import static gregtech.common.items.MetaItems.CARBON_FIBER_PLATE;
+import static gregtech.common.items.MetaItems.NEUTRON_REFLECTOR;
 import static gregtechfoodoption.GTFOMaterialHandler.*;
 import static gregtechfoodoption.GTFOMaterialHandler.Acetaldehyde;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
@@ -168,6 +170,7 @@ public class Batteries {
                 .input(plate, Titanium, 4)
                 .input(plate, Vanadium, 2)
                 .input(cableGtSingle, Aluminium, 8)
+                .inputs(CARBON_FIBER_PLATE.getStackForm(4))
                 .input(dust,NickelOxideHydroxide,2)
                 .EUt(1920)
                 .duration(100)
@@ -178,6 +181,7 @@ public class Batteries {
                 .input(plate, TungstenSteel, 4)
                 .input(plate, Vanadium, 4)
                 .input(cableGtSingle, Platinum, 8)
+                .inputs(NEUTRON_REFLECTOR.getStackForm(4))
                 .input(dust,LithiumCobaltOxide,3)
                 .EUt(7680)
                 .duration(100)
@@ -188,6 +192,7 @@ public class Batteries {
                 .input(plate, RhodiumPlatedPalladium, 4)
                 .input(plate, Vanadium, 6)
                 .input(cableGtSingle, NiobiumTitanium, 8)
+                .inputs(NEUTRON_REFLECTOR.getStackForm(4))
                 .input(dust,LithiumCobaltOxide,6)
                 .EUt(7680 * 4)
                 .duration(100)
@@ -198,12 +203,14 @@ public class Batteries {
                 .input(plate, HSSS, 4)
                 .input(plate, Naquadria, 2)
                 .input(cableGtSingle, Naquadah, 8)
+                .inputs(NEUTRON_REFLECTOR.getStackForm(4))
                 .input(dust,LithiumCobaltOxide,9)
                 .EUt(7680 * 16)
                 .duration(100)
                 .outputs(BATTERY_LARGE_LITHIUM_ION_EMPTY.getStackForm())
                 .buildAndRegister();
 
+        //
         ASSEMBLER_RECIPES.recipeBuilder()
                 .input(plate, Tritanium, 4)
                 .input(plate, Naquadria, 4)
@@ -228,8 +235,8 @@ public class Batteries {
 
         ASSEMBLER_RECIPES.recipeBuilder()
                 .input(plate, Bohrium, 4)
-                .input(cableGtSingle, TitanSteel, 8)
                 .input(plate, NaquadriaticTaranium, 2)
+                .input(cableGtSingle, TitanSteel, 8)
                 .inputs(NANOSILICON_CATHODE.getStackForm(4))
                 .input(dust,SulfurCoatedHalloysite,9)
                 .EUt(30720 * 64)
@@ -237,11 +244,12 @@ public class Batteries {
                 .outputs(BATTERY_LARGE_LIS_EMPTY.getStackForm())
                 .buildAndRegister();
 
+        //
         ASSEMBLER_RECIPES.recipeBuilder()
                 .input(plate, Neutronium, 4)
+                .input(plate, NaquadriaticTaranium, 10)
                 .input(cableGtSingle, BlackTitanium, 8)
-                .input(plate, NaquadriaticTaranium, 4)
-                .input(plate, Neutronium)
+                .inputs(HYPERDIMENSIONAL_TACHYON_CONDENSED_MATTER.getStackForm(4))
                 .input(dust,LanthanumNickelOxide,7)
                 .EUt(122880 * 4)
                 .duration(100)
@@ -249,8 +257,10 @@ public class Batteries {
                 .buildAndRegister();
 
         ASSEMBLER_RECIPES.recipeBuilder()
-                .input(plate, CosmicNeutronium, 10)
-                .input(cableGtSingle, Neutronium, 8)
+                .input(plate, CosmicNeutronium, 8)
+                .input(plate, NaquadriaticTaranium, 10)
+                .input(cableGtSingle, BlackTitanium, 8)
+                .inputs(HYPERDIMENSIONAL_TACHYON_CONDENSED_MATTER.getStackForm(4))
                 .input(dust,LanthanumNickelOxide,14)
                 .EUt(122880 * 16)
                 .duration(100)
@@ -258,9 +268,10 @@ public class Batteries {
                 .buildAndRegister();
 
         ASSEMBLER_RECIPES.recipeBuilder()
-                .input(plate, Infinity, 4)
-                .input(wireGtSingle, Neutronium, 8)
-                .input(plate, Neutronium, 10)
+                .input(plate, Infinity, 16)
+                .input(plate, NaquadriaticTaranium, 10)
+                .input(cableGtSingle, BlackTitanium, 8)
+                .inputs(HYPERDIMENSIONAL_TACHYON_CONDENSED_MATTER.getStackForm(4))
                 .input(dust,LanthanumNickelOxide,28)
                 .EUt(122880 * 64)
                 .duration(100)
