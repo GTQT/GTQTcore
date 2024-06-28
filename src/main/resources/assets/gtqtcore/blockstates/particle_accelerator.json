@@ -25,6 +25,66 @@
         "textures": {
           "all": "gregtech:blocks/multiblock/particle_accelerator/granular_source_c"
         }
+      },
+      "accelerator_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/particle_accelerator/accelerator_casing"
+        }
+      },
+      "accelerator_firm_mki": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/particle_accelerator/accelerator_firm_mki"
+        }
+      },
+      "accelerator_firm_mkii": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/particle_accelerator/accelerator_firm_mkii"
+        }
+      },
+      "accelerator_firm_mkiii": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/particle_accelerator/accelerator_firm_mkiii"
+        }
+      },
+      "accelerator_electromagnet_mki": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/particle_accelerator/accelerator_electromagnet_mki"
+        }
+      },
+      "accelerator_electromagnet_mkii": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/particle_accelerator/accelerator_electromagnet_mkii"
+        }
+      },
+      "accelerator_electromagnet_mkiii": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/particle_accelerator/accelerator_electromagnet_mkiii"
+        }
+      },
+      "accelerator_electromagnetv_mki": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/particle_accelerator/accelerator_electromagnetv_mki"
+        }
+      },
+      "accelerator_electromagnetv_mkii": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/particle_accelerator/accelerator_electromagnetv_mkii"
+        }
+      },
+      "accelerator_electromagnetv_mkiii": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/particle_accelerator/accelerator_electromagnetv_mkiii"
+        }
       }
     }
   }

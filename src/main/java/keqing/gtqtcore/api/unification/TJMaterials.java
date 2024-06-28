@@ -4,7 +4,7 @@ import gregtech.api.unification.Element;
 import gregtech.api.unification.Elements;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.info.MaterialFlag;
-import keqing.gtqtcore.api.unification.matreials.TJFirstDegreeMaterials;
+import keqing.gtqtcore.api.unification.matreials.GTQTTJFirstDegreeMaterials;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -205,8 +205,6 @@ public class TJMaterials {
     public static Material TriphenylMethoxytriazoylPerchlorate;
     public static Material SodiumMethoxide;
     public static Material TriphenylMethoxytriazole;
-    public static Material Acetaldehyde;
-    public static Material Acetoin;
     public static Material MetaNitrochlorobenzine;
     public static Material Nitroanisole;
     public static Material Anisidine;
@@ -260,7 +258,7 @@ public class TJMaterials {
 
     public static void register() {
 
-        TJFirstDegreeMaterials.registerMaterials();
+        GTQTTJFirstDegreeMaterials.registerMaterials();
 
     }
 

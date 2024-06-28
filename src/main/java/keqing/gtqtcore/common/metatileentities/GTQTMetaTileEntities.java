@@ -218,6 +218,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityMSF MSF;
     public static MetaTileEntityCoolingTower COOLING_TOWER;
     public static SimpleMachineMetaTileEntity PARTICLE_ACCELERATOR_IO;
+    public static MetaTileEntityAdvancedAssemblyLine ADVANCED_ASSEMBLY_LINE;
     public static MetaTileEntityLargeGrind LAGER_GRIND;
     public static MetaTileEntityLargeForging LAGER_FORGING;
     public static MetaTileEntityNanoCoating NANO_COATING;
@@ -406,6 +407,7 @@ public class GTQTMetaTileEntities {
         HUGE_FUSION_REACTOR[0]=registerMetaTileEntity(3295,new MetaTileEntityHugeFusionReactor(gtqtcoreId("fusion_reactor.uhv"),UHV));
         HUGE_FUSION_REACTOR[1]=registerMetaTileEntity(3296,new MetaTileEntityHugeFusionReactor(gtqtcoreId("fusion_reactor.uev"),UEV));
 
+        ADVANCED_ASSEMBLY_LINE = registerMetaTileEntity(3305, new MetaTileEntityAdvancedAssemblyLine(gtqtcoreId("advanced_assembly_line")));
         COMPONENT_ASSEMBLY_LINE = registerMetaTileEntity(3306, new MetaTileEntityComponentAssemblyLine(gtqtcoreId("component_assembly_line")));
 
         LAGER_PROCESSING_FACTORY = registerMetaTileEntity(3307, new MetaTileEntityLargeProcessingFactory(gtqtcoreId("large_processing_factory")));

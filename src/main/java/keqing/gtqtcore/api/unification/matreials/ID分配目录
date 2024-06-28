@@ -1,0 +1,22 @@
+
+GCYSElementMaterials 3100-3499
+
+GCYSFirstDegreeMaterials 3500-5999
+
+GCYSOrganicChemistryMaterials 15000-17999
+
+GCYSSecondDegreeMaterials 6000-8999
+
+GCYSUnknownCompositionMaterials  18000-19999
+
+FirstDegreeMaterials 20000+1000;
+
+GTQTElementMaterials 28000+100;
+
+GTQTMachineCasingMaterials 24501-25000
+
+SecondDegreeMaterials 21000+1000;
+
+HigherDegreeMaterials 20600+300;
+
+TJFirstDegreeMaterials 25000

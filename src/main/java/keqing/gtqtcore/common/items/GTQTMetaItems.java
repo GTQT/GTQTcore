@@ -40,7 +40,7 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem GENERAL_CIRCUIT_UXV;
     public static MetaItem<?>.MetaValueItem GENERAL_CIRCUIT_OpV;
     public static MetaItem<?>.MetaValueItem GENERAL_CIRCUIT_MAX;
-
+    public static MetaItem<?>.MetaValueItem NANOSILICON_CATHODE;
     public static MetaItem<?>.MetaValueItem CATALYST_FRAMEWORK_I;
     public static MetaItem<?>.MetaValueItem CATALYST_FRAMEWORK_II;
     public static MetaItem<?>.MetaValueItem CATALYST_FRAMEWORK_III;
@@ -370,7 +370,26 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem SEPARATION_ELECTROMAGNET;
     public static MetaItem<?>.MetaValueItem PROTONATED_FULLERENE_SIEVING_MATRIX;
     public static MetaItem<?>.MetaValueItem SATURATED_FULLERENE_SIEVING_MATRIX;
-
+    public static MetaItem<?>.MetaValueItem BATTERY_NIMH_EMPTY;
+    public static MetaItem<?>.MetaValueItem BATTERY_NIMH;
+    public static MetaItem<?>.MetaValueItem BATTERY_SMALL_LITHIUM_ION_EMPTY;
+    public static MetaItem<?>.MetaValueItem BATTERY_SMALL_LITHIUM_ION;
+    public static MetaItem<?>.MetaValueItem BATTERY_MEDIUM_LITHIUM_ION_EMPTY;
+    public static MetaItem<?>.MetaValueItem BATTERY_MEDIUM_LITHIUM_ION;
+    public static MetaItem<?>.MetaValueItem BATTERY_LARGE_LITHIUM_ION_EMPTY;
+    public static MetaItem<?>.MetaValueItem BATTERY_LARGE_LITHIUM_ION;
+    public static MetaItem<?>.MetaValueItem BATTERY_SMALL_LIS_EMPTY;
+    public static MetaItem<?>.MetaValueItem BATTERY_SMALL_LIS;
+    public static MetaItem<?>.MetaValueItem BATTERY_MEDIUM_LIS_EMPTY;
+    public static MetaItem<?>.MetaValueItem BATTERY_MEDIUM_LIS;
+    public static MetaItem<?>.MetaValueItem BATTERY_LARGE_LIS_EMPTY;
+    public static MetaItem<?>.MetaValueItem BATTERY_LARGE_LIS;
+    public static MetaItem<?>.MetaValueItem BATTERY_SMALL_FLUORIDE_EMPTY;
+    public static MetaItem<?>.MetaValueItem BATTERY_SMALL_FLUORIDE;
+    public static MetaItem<?>.MetaValueItem BATTERY_MEDIUM_FLUORIDE_EMPTY;
+    public static MetaItem<?>.MetaValueItem BATTERY_MEDIUM_FLUORIDE;
+    public static MetaItem<?>.MetaValueItem BATTERY_LARGE_FLUORIDE_EMPTY;
+    public static MetaItem<?>.MetaValueItem BATTERY_LARGE_FLUORIDE;
     public static MetaItem<?>.MetaValueItem METASTABLE_SELF_HEALING_ADHESIVE;
     public static MetaItem<?>.MetaValueItem HYPERDIMENSIONAL_TACHYON_CONDENSED_MATTER;
     public static MetaItem<?>.MetaValueItem UNSTABLE_STAR;
@@ -429,16 +448,19 @@ public class GTQTMetaItems {
     // Process-Specific Components
     public static MetaItem<?>.MetaValueItem MAGNETRON;
     public static GTQTMetaItem1 GTQT_META_ITEM;
+    public static GTQTBattery GTQT_META_BATTERY;
     // Process Intermediary Items
     // Nanotubes
     public static MetaItem<?>.MetaValueItem CARBON_ALLOTROPE_MIXTURE;
     public static MetaItem<?>.MetaValueItem GRAPHENE_ALIGNED_CNT;
     public static void initialization() {
         GTQT_META_ITEM = new GTQTMetaItem1();
+        GTQT_META_BATTERY = new GTQTBattery();
     }
     public static void initSubItems()
     {
         GTQTMetaItem1.registerItems();
+        GTQTBattery.registerItems();
     }
 
 

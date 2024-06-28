@@ -38,7 +38,17 @@ public class GTQTParticleAccelerator extends VariantBlock<GTQTParticleAccelerato
 
         GRANULAR_SOURCE_A("granular_source_a",3),
         GRANULAR_SOURCE_B("granular_source_b",3),
-        GRANULAR_SOURCE_C("granular_source_c",3);
+        GRANULAR_SOURCE_C("granular_source_c",3),
+        ACCELERATOR_CASING("accelerator_casing",3),
+        ACCELERATOR_FIRM_MKI("accelerator_firm_mki",3),
+        ACCELERATOR_FIRM_MKII("accelerator_firm_mkii",4),
+        ACCELERATOR_FIRM_MKIII("accelerator_firm_mkiii",5),
+        ACCELERATOR_ELECTROMAGNET_MKI("accelerator_electromagnet_mki",3),
+        ACCELERATOR_ELECTROMAGNET_MKII("accelerator_electromagnet_mkii",4),
+        ACCELERATOR_ELECTROMAGNET_MKIII("accelerator_electromagnet_mkiii",5),
+        ACCELERATOR_ELECTROMAGNETV_MKI("accelerator_electromagnetv_mki",3),
+        ACCELERATOR_ELECTROMAGNETV_MKII("accelerator_electromagnetv_mkii",4),
+        ACCELERATOR_ELECTROMAGNETV_MKIII("accelerator_electromagnetv_mkiii",5);
 
         private final String name;
         private final int harvestLevel;

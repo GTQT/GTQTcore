@@ -1,5 +1,6 @@
 package keqing.gtqtcore.api.unification.matreials;
 
+import gregtech.api.GTValues;
 import gregtech.api.fluids.FluidBuilder;
 import gregtech.api.fluids.attribute.FluidAttributes;
 import gregtech.api.unification.Elements;
@@ -10,6 +11,7 @@ import gregtech.api.util.GTUtility;
 import keqing.gtqtcore.api.unification.GTQTElements;
 import keqing.gtqtcore.api.unification.GTQTMaterials;
 
+import static gregicality.multiblocks.api.unification.GCYMMaterials.IncoloyMA956;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.GTValues.UHV;
 import static gregtech.api.fluids.attribute.FluidAttributes.ACID;
@@ -3013,5 +3015,186 @@ public class FirstDegreeMaterials {
                 .flags(DISABLE_DECOMPOSITION)
                 .build()
                 .setFormula("H2O", true);
+
+        GTQTMaterials.BismuthVanadate = new Material.Builder(getMaterialsId(), gregtechId("bismuth_vanadate"))
+                .dust()
+                .color(0xFFAF33)
+                .iconSet(SHINY)
+                .components(Bismuth, 1, Vanadium, 1, Oxygen, 4)
+                .build();
+
+        GTQTMaterials.MaleicAnhydride = new Material.Builder(getMaterialsId(), gregtechId("maleic_anhydride"))
+                .liquid()
+                .color(0x610C2F)
+                .components(Carbon, 4, Hydrogen, 2, Oxygen, 3)
+                .build();
+
+        GTQTMaterials.NickelOxideHydroxide = new Material.Builder(getMaterialsId(), gregtechId("nickel_oxide_hydroxide"))
+                .dust()
+                .color(0xa2f2a2)
+                .iconSet(METALLIC)
+                .build()
+                .setFormula("NiO(OH)",true);
+
+        GTQTMaterials.LithiumCarbonateSolution = new Material.Builder(getMaterialsId(), gregtechId("lithium_carbonate_solution"))
+                .liquid()
+                .color((Lithium.getMaterialRGB() + Carbon.getMaterialRGB() + Oxygen.getMaterialRGB()) / 3)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("Li2CO3(H2O)", true);
+
+        GTQTMaterials.LithiumCobaltOxide = new Material.Builder(getMaterialsId(), gregtechId("lithium_cobalt_oxide"))
+                .dust()
+                .color(0xd2a4f3)
+                .iconSet(SHINY)
+                .build()
+                .setFormula("LiCoO",true);
+
+        GTQTMaterials.BariumTriflate = new Material.Builder(getMaterialsId(), gregtechId("barium_triflate"))
+                .dust()
+                .color((Barium.getMaterialRGB() + Fluorine.getMaterialRGB()) / 2)
+                .iconSet(SHINY)
+                .build()
+                .setFormula("Ba(OSO2CF3)2", true);
+
+        GTQTMaterials.LithiumTriflate = new Material.Builder(getMaterialsId(), gregtechId("lithium_triflate"))
+                .dust()
+                .color(0xe2dae3)
+                .iconSet(SHINY)
+                .build()
+                .setFormula("LiCSO3F3",true);
+
+        GTQTMaterials.Xylose = new Material.Builder(getMaterialsId(), gregtechId("xylose"))
+                .dust()
+                .color(0xd2a4f3)
+                .iconSet(ROUGH)
+                .build()
+                .setFormula("C5H10O5",true);
+
+        GTQTMaterials.SodiumAlginateSolution = new Material.Builder(getMaterialsId(), gregtechId("sodium_alginate_solution"))
+                .liquid()
+                .color(0xca8642)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("NaC6H7O6",true);
+
+        GTQTMaterials.CalciumAlginate = new Material.Builder(getMaterialsId(), gregtechId("calcium_alginate"))
+                .dust()
+                .color(0x654321)
+                .iconSet(ROUGH)
+                .build()
+                .setFormula("CaC12H14O12",true);
+
+        GTQTMaterials.Trimethylsilane = new Material.Builder(getMaterialsId(), gregtechId("trimethylsilane"))
+                .liquid()
+                .color(0xd2a4f3)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("C3H10Si", true);
+
+        GTQTMaterials.CetaneTrimethylAmmoniumBromide = new Material.Builder(getMaterialsId(), gregtechId("cetane_trimethyl_ammonium_bromide"))
+                .liquid()
+                .color(0xb9c1c9)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("C19H42BrN",true);
+
+        GTQTMaterials.SiliconNanoparticles = new Material.Builder(getMaterialsId(), gregtechId("silicon_nanoparticles"))
+                .dust()
+                .color(Silicon.getMaterialRGB())
+                .iconSet(SHINY)
+                .build()
+                .setFormula("Si?",true);
+
+        GTQTMaterials.Glucose = new Material.Builder(getMaterialsId(), gregtechId("glucose"))
+                .dust()
+                .color((Sugar.getMaterialRGB() + 5))
+                .iconSet(ROUGH)
+                .build()
+                .setFormula("C6H12O6", true);
+
+        GTQTMaterials.StreptococcusPyogenes = new Material.Builder(getMaterialsId(), gregtechId("streptococcus_pyogenes"))
+                .dust()
+                .color(0x1c3b15)
+                .iconSet(ROUGH)
+                .build()
+                .setFormula("Bacteria", true);
+
+        GTQTMaterials.Sorbose = new Material.Builder(getMaterialsId(), gregtechId("sorbose"))
+                .dust()
+                .color(Glucose.getMaterialRGB())
+                .iconSet(DULL)
+                .build()
+                .setFormula("C6H12O6",true);
+
+        GTQTMaterials.AscorbicAcid = new Material.Builder(getMaterialsId(), gregtechId("ascorbic_acid"))
+                .liquid(new FluidBuilder().attribute(ACID))
+                .color(0xe6cd00)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("C6H8O6",true);
+
+        GTQTMaterials.DehydroascorbicAcid = new Material.Builder(getMaterialsId(), gregtechId("dehydroascorbic_acid"))
+                .liquid(new FluidBuilder().attribute(ACID))
+                .color(0xe6cd00)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("C6H6O6",true);
+
+        GTQTMaterials.GalliumChloride = new Material.Builder(getMaterialsId(), gregtechId("gallium_chloride"))
+                .dust()
+                .color(0x92867a)
+                .iconSet(ROUGH)
+                .build()
+                .setFormula("GaCl3",true);
+
+        GTQTMaterials.Halloysite = new Material.Builder(getMaterialsId(), gregtechId("halloysite"))
+                .dust()
+                .color(0x23423a)
+                .iconSet(ROUGH)
+                .build()
+                .setFormula("Al9Si10O50Ga",true);
+
+        GTQTMaterials.SulfurCoatedHalloysite = new Material.Builder(getMaterialsId(), gregtechId("sulfur_coated_halloysite"))
+                .dust()
+                .color(0x23973a)
+                .iconSet(ROUGH)
+                .build()
+                .setFormula("S2C2(Al9Si10O50Ga)",true);
+
+        GTQTMaterials.FluorideBatteryElectrolyte = new Material.Builder(getMaterialsId(), gregtechId("fluoride_battery_electrolyte"))
+                .dust()
+                .color(0x9a628a)
+                .iconSet(SHINY)
+                .build()
+                .setFormula("La9BaF29(C8H7F)",true);
+
+        GTQTMaterials.LanthanumNickelOxide = new Material.Builder(getMaterialsId(), gregtechId("lanthanum_nickel_oxide"))
+                .dust()
+                .color(0x23973a)
+                .iconSet(SHINY)
+                .build()
+                .setFormula("La2NiO4",true);
+
+
+        GTQTMaterials.AbyssalAlloy = new Material.Builder(getMaterialsId(), gregtechId("abyssal_alloy"))
+                .ingot(6).liquid()
+                .color(0x9E706A)
+                .iconSet(METALLIC)
+                .flags(DISABLE_DECOMPOSITION)
+                .cableProperties(GTValues.V[GTValues.UHV], 2, 8)
+                .components(StainlessSteel, 5, TungstenCarbide, 5, Nichrome, 5, Bronze, 5, IncoloyMA956, 5, Iodine, 1, Germanium, 1, Radon, 1)
+                .blast(9625)
+                .build();
+
+        GTQTMaterials.NaquadriaticTaranium = new Material.Builder(getMaterialsId(), gregtechId("naquadriatic_taranium"))
+                .ingot()
+                .color((Naquadria.getMaterialRGB() + Taranium.getMaterialRGB()) / 2)
+                .iconSet(SHINY)
+                .flags(STD_METAL, GENERATE_LONG_ROD)
+                .components(Naquadria, 1, Taranium, 1)
+                .cableProperties(GTValues.V[GTValues.UXV], 2, 32)
+                .blast(11200)
+                .build();
     }
 }

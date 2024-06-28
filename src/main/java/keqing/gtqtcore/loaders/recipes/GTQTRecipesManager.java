@@ -23,9 +23,7 @@ import keqing.gtqtcore.loaders.recipes.chain.MethylamineChain;
 import keqing.gtqtcore.loaders.recipes.chain.NanotubesChain;
 import keqing.gtqtcore.loaders.recipes.circuits.*;
 import keqing.gtqtcore.loaders.recipes.component.GCYSComponentRecipes;
-import keqing.gtqtcore.loaders.recipes.gcys.*;
 import keqing.gtqtcore.loaders.recipes.handlers.*;
-import keqing.gtqtcore.loaders.recipes.oreprocessing.*;
 
 public class GTQTRecipesManager {
     private GTQTRecipesManager() {
@@ -66,6 +64,7 @@ public class GTQTRecipesManager {
         GCYSMetaTileEntityLoader.init();
         GCYSBlockRecipeLoader.init();
         BoulesRecipes.init();
+        BouleRecipeHandler.register();
         GrapheneChain.init();
         NanoCoatingRecipes.init();
         PreciousMetalChain.init();
@@ -95,6 +94,7 @@ public class GTQTRecipesManager {
         NanotubesChain.init();
         IsotopesChain.init();
         FullereneChain.init();
+        Batteries.init();
         FantasyMaterials.init();
         SimpleMaterials.init();
         PedotChain.init();

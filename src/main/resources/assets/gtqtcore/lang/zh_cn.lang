@@ -2595,6 +2595,31 @@ gregtech.material.enzymesc=C型原始菌种
 gregtech.material.enzymesd=D型原始菌种
 gregtech.material.enzymese=E型原始菌种
 gregtech.material.rnzymes=富集元素培养基
+gregtech.material.bismuth_vanadate=铋钒酸盐
+gregtech.material.maleic_anhydride=马来酸酐
+gregtech.material.nickel_oxide_hydroxide=氢氧化镍
+gregtech.material.lithium_carbonate_solution=碳酸锂溶液
+gregtech.material.lithium_cobalt_oxide=钴氧化物锂
+gregtech.material.barium_triflate=钡三氟甲烷磺酸盐
+gregtech.material.lithium_triflate=三氟化锂
+gregtech.material.xylose=木糖
+gregtech.material.sodium_alginate_solution=铝酸钠溶液
+gregtech.material.calcium_alginate=铝酸钙
+gregtech.material.trimethylsilane=三甲基硅烷
+gregtech.material.cetane_trimethyl_ammonium_bromide=十六烷三甲基溴化铵
+gregtech.material.silicon_nanoparticles=硅纳米颗粒
+gregtech.material.glucose=葡萄糖
+gregtech.material.streptococcus_pyogenes=链球菌
+gregtech.material.sorbose=山梨糖
+gregtech.material.ascorbic_acid=抗坏血酸
+gregtech.material.dehydroascorbic_acid=脱氢抗坏血酸
+gregtech.material.gallium_chloride=氯化镓
+gregtech.material.halloysite=海洛石
+gregtech.material.sulfur_coated_halloysite=硫化铝石
+gregtech.material.fluoride_battery_electrolyte=氟化物蓄电池电解液
+gregtech.material.lanthanum_nickel_oxide=氧化镧镍
+gregtech.material.abyssal_alloy=深海合金
+gregtech.material.naquadriatic_taranium=超能硅岩-塔兰金属合金
 
 gregtech.material.vinylcinnamate=聚乙烯醇肉桂酸酯
 gregtech.material.xmt=xMT分子光刻胶
@@ -3221,7 +3246,21 @@ gtqtcore.machine.quantum_force_transformer.tier.2=寰宇 (2级)
 gtqtcore.machine.quantum_force_transformer.tier.3=无尽时空 (3级)
 gtqtcore.machine.quantum_force_transformer.tier.4=超因果连续体 (4级)
 
+tile.active_unique_casing.advanced_assembly_line_casing.name=进阶装配机械方块
+tile.active_unique_casing.advanced_assembly_control_casing.name=进阶装配控制外壳
+tile.active_unique_casing.circuit_assembly_line_casing.name=电路装配机械方块
+tile.active_unique_casing.circuit_assembly_control_casing.name=电路装配控制外壳
+
 gtqtcore.machine.electrobath.name=工业电解槽
+
+gtqtcore.machine.advanced_assembly_line.name=进阶装配线
+gtqtcore.machine.advanced_assembly_line.tooltip.1=超高精度装配线
+gtqtcore.machine.advanced_assembly_line.tooltip.2=效率碾压同等级装配线！
+gtqtcore.machine.advanced_assembly_line.tooltip.3=允许使用§r任意等级§7的输入总线
+gtqtcore.machine.advanced_assembly_line.tooltip.4=每一片中的输入总线§c只能§7输入同一种物品，否则会导致停机
+gtqtcore.machine.advanced_assembly_line.tooltip.5=运行配方时，运行时间减少至原本配方时间的0.8倍
+gtqtcore.machine.advanced_assembly_line.tooltip.6=输入小于等于§3UV§7级的电压时，始终获得§e4§7次并行。
+gtqtcore.machine.advanced_assembly_line.tooltip.7=输入大于等于§4UHV§7级的电压时，始终获得§e(2^(电压等级 - 8) + 4)§7次并行。
 
 gtqtcore.machine.large_naquadah_reactor.name=大型硅岩反应堆
 gtqtcore.machine.large_naquadah_reactor.tooltip=取之不尽，用之不竭
@@ -3371,6 +3410,50 @@ metaitem.circuit_suprachronal_opv.tooltip=§fOpV-等级电路/n
 metaitem.circuit_suprachronal_max.name=光子计算单位终压电路
 metaitem.circuit_suprachronal_max.tooltip=§fMAX-等级电路/n
 
+metaitem.large.fluoride.battery.empty.name=大型氟化物电池外壳
+metaitem.large.lithium.sulfide.battery.empty.name=大型硫化锂电池外壳
+metaitem.large.lithium.ion.battery.empty.name=大型锂离子电池外壳
+metaitem.medium.fluoride.battery.empty.name=中型氟化物电池外壳
+metaitem.medium.lithium.sulfide.battery.empty.name=中型硫化锂电池外壳
+metaitem.medium.lithium.ion.battery.empty.name=中型锂离子电池外壳
+metaitem.small.fluoride.battery.empty.name=小型氟化物电池外壳
+metaitem.small.lithium.sulfide.battery.empty.name=小型硫化锂电池外壳
+metaitem.small.lithium.ion.battery.empty.name=小型锂离子电池外壳
+metaitem.nickel.metal.hydride.battery.empty.name=镍氢电池外壳
+
+metaitem.large.fluoride.battery.empty.tooltip=一个空的 OpV 级电池
+metaitem.large.lithium.sulfide.battery.empty.tooltip=一个空的 UEV 级电池
+metaitem.large.lithium.ion.battery.empty.tooltip=一个空的 ZPM 级电池
+metaitem.medium.fluoride.battery.empty.tooltip=一个空的 UXV 级电池
+metaitem.medium.lithium.sulfide.battery.empty.tooltip=一个空的 UHV 级电池
+metaitem.medium.lithium.ion.battery.empty.tooltip=一个空的 LuV 级电池
+metaitem.small.fluoride.battery.empty.tooltip=一个空的 UIV 级电池
+metaitem.small.lithium.sulfide.battery.empty.tooltip=一个空的 UV 级电池
+metaitem.small.lithium.ion.battery.empty.tooltip=一个空的 IV 级电池
+metaitem.nickel.metal.hydride.battery.empty.tooltip=一个空的 EV 级电池
+
+metaitem.large.fluoride.battery.name=大型氟化物电池
+metaitem.large.lithium.sulfide.battery.name=大型硫化锂电池
+metaitem.large.lithium.ion.battery.name=大型锂离子电池
+metaitem.medium.fluoride.battery.name=中型氟化物电池
+metaitem.medium.lithium.sulfide.battery.name=中型硫化锂电池
+metaitem.medium.lithium.ion.battery.name=中型锂离子电池
+metaitem.small.fluoride.battery.name=小型氟化物电池
+metaitem.small.lithium.sulfide.battery.name=小型硫化锂电池
+metaitem.small.lithium.ion.battery.name=小型锂离子电池
+metaitem.nickel.metal.hydride.battery.name=镍氢电池
+
+metaitem.large.fluoride.battery.tooltip=可充电电池
+metaitem.large.lithium.sulfide.battery.tooltip=可充电电池
+metaitem.large.lithium.ion.battery.tooltip=可充电电池
+metaitem.medium.fluoride.battery.tooltip=可充电电池
+metaitem.medium.lithium.sulfide.battery.tooltip=可充电电池
+metaitem.medium.lithium.ion.battery.tooltip=可充电电池
+metaitem.small.fluoride.battery.tooltip=可充电电池
+metaitem.small.lithium.sulfide.battery.tooltip=可充电电池
+metaitem.small.lithium.ion.battery.tooltip=可充电电池
+metaitem.nickel.metal.hydride.battery.tooltip=可充电电池
+metaitem.nanosilicon.cathode.name=纳米硅阴极
 metaitem.reticle.advanced_system_on_chip.name=ASoC芯片光掩模
 metaitem.reticle.central_processing_unit.name=CPU芯片光掩模
 metaitem.reticle.high_power_integrated_circuit.name=HPIC芯片光掩模
@@ -3615,6 +3698,20 @@ tile.glass_casing.spacetime_supercondenser_glass.name=时空超凝聚体玻璃
 tile.glass_casing.spacetime_supercondenser_glass.tooltip=掌控万物
 tile.glass_casing.supracausal_light_cone_glass.name=超因果光锥具现化玻璃
 tile.glass_casing.supracausal_light_cone_glass.tooltip=跨越星河
+
+tile.particle_accelerator.granular_source_a.name=α粒子源
+tile.particle_accelerator.granular_source_b.name=β粒子源
+tile.particle_accelerator.granular_source_c.name=γ粒子源
+tile.particle_accelerator.accelerator_casing.name=加速器外壳
+tile.particle_accelerator.accelerator_firm_mki.name=加速器束流器(MKI)
+tile.particle_accelerator.accelerator_electromagnet_mki.name=加速器电磁轭(MKI)
+tile.particle_accelerator.accelerator_electromagnetv_mki.name=加速器粒子探针(MKI)
+tile.particle_accelerator.accelerator_firm_mkii.name=加速器束流器(MKII)
+tile.particle_accelerator.accelerator_electromagnet_mkii.name=加速器电磁轭(MKII)
+tile.particle_accelerator.accelerator_electromagnetv_mkii.name=加速器粒子探针(MKII)
+tile.particle_accelerator.accelerator_firm_mkiii.name=加速器束流器(MKIII)
+tile.particle_accelerator.accelerator_electromagnet_mkiii.name=加速器电磁轭(MKIII)
+tile.particle_accelerator.accelerator_electromagnetv_mkiii.name=加速器粒子探针(MKIII)
 
 tile.multiblock_casing.inconel_625.name=镍基合金-625外壳
 tile.multiblock_casing.hastelloy_n.name=哈斯特洛依合金-N外壳
@@ -3973,38 +4070,17 @@ item.material.oreprefix.round_cover=%s圆板
 metaitem.plate_big.tooltip=钳工实习
 item.material.oreprefix.plate_big=%s焊接板
 
-gtqt.tooltip.tiered_hatch_enabled=§2此机器配方逻辑已被修改，详情见描述。
-gtqtcore.gcymmultiblock.description=并行机制修改如下：在原有并行数量不变的基础上叠加一个等同于并行数量的耗时倍率减免，总产量不变。举例 有一个10秒出1个产物的配方，并行修改前：4并行 40秒出4个；并行修改后：4并行10秒出1个。
-gregica.gui.current_channel=§l当前绑定频道 : %s
-gregica.gui.mode.manual=手动设置频道
-gregica.gui.mode.available=可用频道
-gregica.gui.mode.all=所有频道
-gregica.gui.available_channel=频道可用
-gregica.gui.unavailable_channel=频道不可用
-gregica.gui.channel_to_bind=频道:
-gregica.gui.set_channel=选择/创建 频道
-gregica.gui.uuid=你的 UUID : %s
-gregica.gui.copy=复制
-gregica.gui.channel_mode_choose=选择频道模式:
-gregica.gui.cross_world_electricity=无线电网
-gregica.gui.create_or_op=只有创造模式玩家或OP可以使用该按钮
-gregica.gui.current_mode=模式: 未知
-gregica.gui.current_mode0=模式: 无线电网
-gregica.gui.channel=频道: %d
-gregica.gui.channel_owner_count=所有者共 %s 人
-gregica.gui.channel_choose=选择
-gregica.gui.channel_invite=邀请
-gregica.gui.channel_join=加入
-gregica.gui.channel_delete=删除
-gregica.gui.cancel=取消
-gregica.gui.confirm=确认
-gregica.mixin.nerf.steam.solar.detail=§c工作超过1天后,输出将会在10天内线性减小到1/3
-gregtech.generator.1=§b发电效率：%d
-gregica.mixin.info.steam=当前蒸汽输出: %d l/s
-
 tile.stnt.name=迷你核弹
 tile.stnt.drops_tooltip=我很卡，劝你三思
 entity.STNT.name=迷你核弹
+
+##  Universal Texts
+gtqtcore.universal.tooltip.max_parallel=最大并行数：§e%s§7
+gtqtcore.universal.tooltip.get_parallel_by_voltage=根据输入电压获得并行。
+gtqtcore.universal.tooltip.laser_input=允许使用§b激光靶仓§7替代能源仓，且二者可以并存。
+gtqtcore.universal.tooltip.laser_output=允许使用§b激光源仓§7替代动力仓，且二者可以并存。
+
+gtqtcore.universal.multiblock.energy_per_tick=产能功率：%s EUt （%s）
 
 itemGroup.gtqtcore=量子跃迁 | 纠缠之源
 itemGroup.gtqtbio=量子跃迁 | 生物工程

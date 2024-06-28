@@ -32,6 +32,7 @@ public class GTQTMetaBlocks {
     public static GTQTQuantumForceTransformerCasing QUANTUM_CONSTRAINT_CASING;
     public static GTQTBlockComponentAssemblyLineCasing COMPONENT_ASSEMBLY_LINE;
     public static GTQTIsaCasing ISA_CASING;
+    public static BlockActiveUniqueCasing ACTIVE_UNIQUE_CASING;
     public static GTQTElectronMicroscope ELECTRON_MICROSCOPE;
     public static GTQTElectrobath ELECTROBATH;
     public static GTQTCompressedFusionReactor COMPRESSED_FUSION_REACTOR;
@@ -75,6 +76,8 @@ public class GTQTMetaBlocks {
         COMPONENT_ASSEMBLY_LINE.setRegistryName("component_assembly_line_casing");
         ISA_CASING = new GTQTIsaCasing();
         ISA_CASING.setRegistryName("isa_casing");
+        ACTIVE_UNIQUE_CASING = new BlockActiveUniqueCasing();
+        ACTIVE_UNIQUE_CASING.setRegistryName("active_unique_casing");
         COMPRESSED_FUSION_REACTOR = new GTQTCompressedFusionReactor();
         COMPRESSED_FUSION_REACTOR.setRegistryName("compressed_fusion_reactor");
         ELECTRON_MICROSCOPE = new GTQTElectronMicroscope();
@@ -126,6 +129,7 @@ public class GTQTMetaBlocks {
         registerItemModel(ADV_BLOCK);
         registerItemModel(ADV_GLASS);
         registerItemModel(WIRE_COIL);
+        registerItemModel(ACTIVE_UNIQUE_CASING);
         registerItemModel(QUANTUM_CASING);
         registerItemModel(TURBINE_CASING);
         registerItemModel(PARTICLE_ACCELERATOR);

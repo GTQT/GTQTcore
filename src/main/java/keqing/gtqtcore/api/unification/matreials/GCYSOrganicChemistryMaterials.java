@@ -165,7 +165,7 @@ public class GCYSOrganicChemistryMaterials {
                 .build();
 
         EthylenediaminetetraaceticAcid = new Material.Builder(15022, gregtechId("ethylenediaminetetraacetic_acid")) //TODO EDTA Tooltip
-                .dust()
+                .fluid()
                 .color(0x87E6D9)
                 .iconSet(MaterialIconSet.ROUGH)
                 .flags(DISABLE_DECOMPOSITION)

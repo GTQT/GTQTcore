@@ -52,7 +52,7 @@ public class GTQTTraceabilityPredicate {
     }, () -> ArrayUtils.addAll(Arrays.stream(BlockFireboxCasing.FireboxCasingType.values())
             .map(type -> new BlockInfo(MetaBlocks.BOILER_FIREBOX_CASING.getState(type), null))
             .toArray(BlockInfo[]::new)))
-            .addTooltips("gtlitecore.machine.pattern.firebox");
+            .addTooltips("gtqtcore.machine.pattern.firebox");
     public static Supplier<TraceabilityPredicate> ROTOR_HOLDER = () -> new TraceabilityPredicate(blockWorldState -> {
         TileEntity tileEntity = blockWorldState.getTileEntity();
         if (tileEntity instanceof IGregTechTileEntity) {
@@ -64,7 +64,7 @@ public class GTQTTraceabilityPredicate {
                 int tier = ((ITieredMetaTileEntity) mte).getTier();
                 Object currentTier = blockWorldState.getMatchContext().getOrPut("RotorHolderTier", tier);
                 if (!currentTier.equals(tier)) {
-                    blockWorldState.setError(new PatternStringError("gtlitecore.machine.reinforced_rotor_holder.error"));
+                    blockWorldState.setError(new PatternStringError("gtqtcore.machine.reinforced_rotor_holder.error"));
                     return false;
                 }
                 Set<IMultiblockPart> partsFound = blockWorldState.getMatchContext().getOrCreate("MultiblockParts", HashSet::new);
@@ -77,7 +77,7 @@ public class GTQTTraceabilityPredicate {
             .sorted(Comparator.comparingInt(mte -> ((ITieredMetaTileEntity) mte).getTier()))
             .map(mte -> new BlockInfo(MetaBlocks.MACHINE.getDefaultState(), getTileEntity(mte)))
             .toArray(BlockInfo[]::new))
-            .addTooltips("gtlitecore.machine.reinforced_rotor_holder.error");
+            .addTooltips("gtqtcore.machine.reinforced_rotor_holder.error");
 
     public static Supplier<BlockInfo[]> getCandidates(IBlockState... allowedStates) {
         return () -> Arrays.stream(allowedStates).map(state -> new BlockInfo(state, null)).toArray(BlockInfo[]::new);

@@ -86,6 +86,7 @@ public class BlockPineSapling extends BlockBush implements IGrowable {
     @Override
     public void grow(@Nonnull World worldIn, @Nonnull Random rand, @Nonnull BlockPos pos, @Nonnull IBlockState state) {
         WorldGenPine.TREE_GROW_INSTANCE.grow(worldIn, pos, rand);
+        WorldGenBigPine.TREE_GROW_INSTANCE.grow(worldIn, pos, rand);
     }
 
     @Override

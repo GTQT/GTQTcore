@@ -15,10 +15,7 @@ public class GTQTMaterials {
     public static Material Inconel625;
     public static Material HastelloyN;
     public static Material Stellite;
-    public static Material QuantumAlloy;
-    public static Material Grisium;
     public static Material Hdcs;
-    public static Material Abyssalloy;
     public static Material Lafium;
     public static Material BlackTitanium;
     public static Material Talonite;
@@ -607,6 +604,31 @@ public class GTQTMaterials {
     public static Material CleanWater_6;
     public static Material CleanWater_7;
     public static Material CleanWater_8;
+    public static Material BismuthVanadate;
+    public static Material MaleicAnhydride;
+    public static Material NickelOxideHydroxide;
+    public static Material LithiumCarbonateSolution;
+    public static Material LithiumCobaltOxide;
+    public static Material BariumTriflate;
+    public static Material LithiumTriflate;
+    public static Material Xylose;
+    public static Material SodiumAlginateSolution;
+    public static Material CalciumAlginate;
+    public static Material Trimethylsilane;
+    public static Material CetaneTrimethylAmmoniumBromide;
+    public static Material Glucose;
+    public static Material SiliconNanoparticles;
+    public static Material StreptococcusPyogenes;
+    public static Material Sorbose;
+    public static Material AscorbicAcid;
+    public static Material DehydroascorbicAcid;
+    public static Material GalliumChloride;
+    public static Material Halloysite;
+    public static Material SulfurCoatedHalloysite;
+    public static Material FluorideBatteryElectrolyte;
+    public static Material LanthanumNickelOxide;
+    public static Material AbyssalAlloy;
+    public static Material NaquadriaticTaranium;
 
     //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/api/unification/GSMaterials.java
 
@@ -618,9 +640,9 @@ public class GTQTMaterials {
         FirstDegreeMaterials.register();
         SecondDegreeMaterials.register();
         HigherDegreeMaterials.register();
-        EPMachineCasingMaterials.register();
-        EPMaterialPropertyAddition.init();
-        EPMaterialFlagAddition.init();
+        GTQTMachineCasingMaterials.register();
+        GTQTMaterialPropertyAddition.init();
+        GTQTMaterialFlagAddition.init();
 
     }
 

@@ -24,6 +24,7 @@ public class WorldGenPine extends WorldGenerator {
         super();
     }
 
+
     @Override
     public boolean generate(@Nonnull World world, @Nonnull Random random, @Nonnull BlockPos pos) {
         return generateImpl(world, random, new BlockPos.MutableBlockPos(pos));

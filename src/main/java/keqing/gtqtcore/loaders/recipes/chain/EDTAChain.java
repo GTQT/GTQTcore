@@ -90,7 +90,7 @@ public class EDTAChain {
         CHEMICAL_RECIPES.recipeBuilder()
                 .input(dust, TetrasodiumEDTA)
                 .fluidInputs(HydrochloricAcid.getFluid(4000))
-                .output(dust, EthylenediaminetetraaceticAcid, 32)
+                .fluidOutputs(EthylenediaminetetraaceticAcid.getFluid(32000))
                 .output(dust, Salt, 8)
                 .duration(100).EUt(VA[IV]).buildAndRegister();
     }

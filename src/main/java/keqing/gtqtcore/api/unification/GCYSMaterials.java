@@ -332,15 +332,10 @@ public class GCYSMaterials {
         // 9000-11999
         GCYSThirdDegreeMaterials.init();
 
-        // 12000-14999
-        GCYSHighDegreeMaterials.init();
-
         // 15000-17999
         GCYSOrganicChemistryMaterials.init();
 
         // 18000-19999
         GCYSUnknownCompositionMaterials.init();
-
-        GCYSMaterialFlagAddition.init();
     }
 }

@@ -1,0 +1,30 @@
+{
+  "forge_marker": 1,
+  "variants": {
+    "active=false,variant=advanced_assembly_line_casing": {
+      "model": "minecraft:cube_all",
+      "textures": {
+        "all": "gtqtcore:blocks/casings/advanced_assembly_line_casing"
+      }
+    },
+    "active=true,variant=advanced_assembly_line_casing": {
+      "model": "gregtech:cube_2_layer_all",
+      "textures": {
+        "bot_all": "gtqtcore:blocks/casings/advanced_assembly_line_casing",
+        "top_all": "gregtech:blocks/casings/mechanic/machine_casing_assembly_line_bloom"
+      }
+    },
+    "active=false,variant=advanced_assembly_control_casing": {
+      "model": "minecraft:cube_all",
+      "textures": {
+        "all": "gtqtcore:blocks/casings/advanced_assembly_control_casing"
+      }
+    },
+    "active=true,variant=advanced_assembly_control_casing": {
+      "model": "minecraft:cube_all",
+      "textures": {
+        "all": "gtqtcore:blocks/casings/advanced_assembly_control_casing"
+      }
+    }
+  }
+}

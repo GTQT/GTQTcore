@@ -40,7 +40,7 @@ public class GTQTCoverBehavior {
      *     and use {@link gregtech.api.items.metaitem.MetaItem.MetaValueItem#addComponents} to add tooltips.
      * </p>
      *
-     * @param coverId          Resource Location of cover, please use modid of gtlitecore (please see: {@link GTQTCore#MODID}, do not use value in mod main class).
+     * @param coverId          Resource Location of cover, please use modid of gtqtcore (please see: {@link GTQTCore#MODID}, do not use value in mod main class).
      * @param placerItem       Set which item has this cover behavior.
      * @param behaviorCreator  Definition of cover, use lambda to define a cover (you can see some example at gregtech/common/covers).
      */
