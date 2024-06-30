@@ -405,7 +405,7 @@ public class GCYSFirstDegreeMaterials {
                 .build();
 
         Diborane = new Material.Builder(3554, gregtechId("diborane"))
-                .gas()
+                .fluid()
                 .color(0x3F3131)
                 .flags(DISABLE_DECOMPOSITION)
                 .components(Boron, 2, Hydrogen, 6)

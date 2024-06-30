@@ -102,14 +102,6 @@ public class MiscMachineRecipes {
                 .EUt(7)
                 .buildAndRegister();
 
-                    PARTICLE_ACCELERATOR_RECIPES.recipeBuilder()
-                            .input(screw, Hdcs, 1)
-                            .output(ingot,Iron)
-                            .EUt(VA[MV])
-                            .duration(120)
-                            .part(11234)
-                            .buildAndRegister();
-
                     FLUID_EXTRACTOR_RECIPES.recipeBuilder().EUt(VA[IV]).duration(100)
                             .fluidInputs(EnrichedBacterialSludge.getFluid(1000))
                             .circuitMeta(1)

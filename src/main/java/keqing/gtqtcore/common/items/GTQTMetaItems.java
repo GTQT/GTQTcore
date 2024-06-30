@@ -2,6 +2,7 @@ package keqing.gtqtcore.common.items;
 
 import gregtech.api.items.metaitem.MetaItem;
 import gregtech.api.items.metaitem.StandardMetaItem;
+import keqing.gtqtcore.common.CommonProxy;
 import keqing.gtqtcore.common.block.blocks.GTQTADVGlass;
 import net.minecraft.item.ItemStack;
 
@@ -86,6 +87,14 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem GRINDBALL_ALUMINIUM;
     public static MetaItem<?>.MetaValueItem SODIUM_ETHYLXANTHATE;
     public static MetaItem<?>.MetaValueItem POTASSIUM_ETHYLXANTHATE;
+
+    public static MetaItem<?>.MetaValueItem ACRYLIC_YARN;
+    public static MetaItem<?>.MetaValueItem HEAVY_METAL_ABSORBING_YARN;
+    public static MetaItem<?>.MetaValueItem URANIUM_SATURATED_YARN;
+    public static MetaItem<?>.MetaValueItem BORON_RETAINING_YARN;
+    public static MetaItem<?>.MetaValueItem BORON_SATURATED_YARN;
+    public static MetaItem<?>.MetaValueItem LITHIUM_SIEVE;
+    public static MetaItem<?>.MetaValueItem LITHIUM_SATURATED_LITHIUM_SIEVE;
 
     public static MetaItem<?>.MetaValueItem ROUGH_BIOLOGY_RESIN;
     public static MetaItem<?>.MetaValueItem PURIFIED_ALUMINIUM_MIXTURE;
@@ -444,6 +453,90 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem DISK_14;
     public static MetaItem<?>.MetaValueItem DISK_15;
     public static MetaItem<?>.MetaValueItem DISK_COMMON;
+
+    public static MetaItem<?>.MetaValueItem ALPHA;
+    public static MetaItem<?>.MetaValueItem ANTIALPHA;
+    public static MetaItem<?>.MetaValueItem ANTIBOTTOM_QUARK;
+    public static MetaItem<?>.MetaValueItem ANTICHARM_QUARK;
+    public static MetaItem<?>.MetaValueItem ANTIDELTA_MINUS;
+    public static MetaItem<?>.MetaValueItem ANTIDELTA_PLUS_PLUS;
+    public static MetaItem<?>.MetaValueItem ANTIDEUTERON;
+    public static MetaItem<?>.MetaValueItem ANTIDOWN_QUARK;
+    public static MetaItem<?>.MetaValueItem ANTIHELION;
+    public static MetaItem<?>.MetaValueItem ANTIKAON_NAUGHT;
+    public static MetaItem<?>.MetaValueItem ANTIMUON;
+    public static MetaItem<?>.MetaValueItem ANTINEUTRON;
+    public static MetaItem<?>.MetaValueItem ANTIPROTON;
+    public static MetaItem<?>.MetaValueItem ANTISIGMA_MINUS;
+    public static MetaItem<?>.MetaValueItem ANTISIGMA_NAUGHT;
+    public static MetaItem<?>.MetaValueItem ANTISIGMA_PLUS;
+    public static MetaItem<?>.MetaValueItem ANTISTRANGE_QUARK;
+    public static MetaItem<?>.MetaValueItem ANTITAU;
+    public static MetaItem<?>.MetaValueItem ANTITOP_QUARK;
+    public static MetaItem<?>.MetaValueItem ANTITRITON;
+    public static MetaItem<?>.MetaValueItem ANTIUP_QUARK;
+    public static MetaItem<?>.MetaValueItem BORON_ION;
+    public static MetaItem<?>.MetaValueItem BOTTOM_ETA;
+    public static MetaItem<?>.MetaValueItem BOTTOM_QUARK;
+    public static MetaItem<?>.MetaValueItem CALCIUM_48_ION;
+    public static MetaItem<?>.MetaValueItem CHARM_QUARK;
+    public static MetaItem<?>.MetaValueItem CHARMED_ETA;
+    public static MetaItem<?>.MetaValueItem DELTA_MINUS;
+    public static MetaItem<?>.MetaValueItem DELTA_PLUS_PLUS;
+    public static MetaItem<?>.MetaValueItem DEUTERON;
+    public static MetaItem<?>.MetaValueItem DOWN_QUARK;
+    public static MetaItem<?>.MetaValueItem ELECTRON;
+    public static MetaItem<?>.MetaValueItem ELECTRON_ANTINEUTRINO;
+    public static MetaItem<?>.MetaValueItem ELECTRON_NEUTRINO;
+    public static MetaItem<?>.MetaValueItem ETA;
+    public static MetaItem<?>.MetaValueItem ETA_PRIME;
+    public static MetaItem<?>.MetaValueItem GLUEBALL;
+    public static MetaItem<?>.MetaValueItem GLUON;
+    public static MetaItem<?>.MetaValueItem HELION;
+    public static MetaItem<?>.MetaValueItem HIGGS_BOSON;
+    public static MetaItem<?>.MetaValueItem KAON_MINUS;
+    public static MetaItem<?>.MetaValueItem KAON_NAUGHT;
+    public static MetaItem<?>.MetaValueItem KAON_PLUS;
+    public static MetaItem<?>.MetaValueItem MUON;
+    public static MetaItem<?>.MetaValueItem MUON_ANTINEUTRINO;
+    public static MetaItem<?>.MetaValueItem MUON_NEUTRINO;
+    public static MetaItem<?>.MetaValueItem NEUTRON;
+    public static MetaItem<?>.MetaValueItem PHOTON;
+    public static MetaItem<?>.MetaValueItem PION_MINUS;
+    public static MetaItem<?>.MetaValueItem PION_NAUGHT;
+    public static MetaItem<?>.MetaValueItem PION_PLUS;
+    public static MetaItem<?>.MetaValueItem POSITRON;
+    public static MetaItem<?>.MetaValueItem PROTON;
+    public static MetaItem<?>.MetaValueItem SIGMA_MINUS;
+    public static MetaItem<?>.MetaValueItem SIGMA_NAUGHT;
+    public static MetaItem<?>.MetaValueItem SIGMA_PLUS;
+    public static MetaItem<?>.MetaValueItem STRANGE_QUARK;
+    public static MetaItem<?>.MetaValueItem TAU;
+    public static MetaItem<?>.MetaValueItem TAU_ANTINEUTRINO;
+    public static MetaItem<?>.MetaValueItem TAU_NEUTRINO;
+    public static MetaItem<?>.MetaValueItem TOP_QUARK;
+    public static MetaItem<?>.MetaValueItem TRITON;
+    public static MetaItem<?>.MetaValueItem UP_QUARK;
+    public static MetaItem<?>.MetaValueItem W_MINUS_BOSON;
+    public static MetaItem<?>.MetaValueItem W_PLUS_BOSON;
+    public static MetaItem<?>.MetaValueItem Z_BOSON;
+
+
+
+    public static MetaItem<?>.MetaValueItem ARROW_UP_MKI;
+    public static MetaItem<?>.MetaValueItem ARROW_DOWN_MKI;
+    public static MetaItem<?>.MetaValueItem ARROW_LEFT_MKI ;
+    public static MetaItem<?>.MetaValueItem ARROW_RIGHT_MKI;
+
+    public static MetaItem<?>.MetaValueItem ARROW_UP_MKII;
+    public static MetaItem<?>.MetaValueItem ARROW_DOWN_MKII ;
+    public static MetaItem<?>.MetaValueItem ARROW_LEFT_MKII;
+    public static MetaItem<?>.MetaValueItem ARROW_RIGHT_MKII ;
+
+    public static MetaItem<?>.MetaValueItem ARROW_UP_MKIII ;
+    public static MetaItem<?>.MetaValueItem ARROW_DOWN_MKIII;
+    public static MetaItem<?>.MetaValueItem ARROW_LEFT_MKIII;
+    public static MetaItem<?>.MetaValueItem ARROW_RIGHT_MKIII ;
 
     // Process-Specific Components
     public static MetaItem<?>.MetaValueItem MAGNETRON;

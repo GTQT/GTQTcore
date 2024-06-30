@@ -108,6 +108,12 @@ public class CommonProxy {
             return GTQTMetaItems.DEBUG_STRUCTURE_WRITER.getStackForm();
         }
     };
+    public static final CreativeTabs GTQTCore_PA = new CreativeTabs("gtqttpa") {
+        @Override
+        public ItemStack createIcon() {
+            return GTQTMetaItems.ALPHA.getStackForm();
+        }
+    };
 
     public void postInit() {
     }
@@ -323,7 +329,6 @@ public class CommonProxy {
         for(int i=1;i<=100;i++) NeutronActivatorPartProperty.registeredPart(i*200, String.valueOf(i*200));
         for(int i=1;i<=10;i++) NuclearProperties.registeredminTemp(i, String.valueOf(i));
         for(int i=1;i<=10;i++) PAProperty.registeredTier(i, String.valueOf(i));
-        PAPartProperty.registeredPart(11234,"一级 + 1234");
 
         PACasingTierProperty.registerPACasingTier(1, "1");
         PACasingTierProperty.registerPACasingTier(2, "2");

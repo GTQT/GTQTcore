@@ -133,6 +133,15 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         BATTERY_MEDIUM_FLUORIDE_EMPTY = addItem(116,"medium.fluoride.battery.empty").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         BATTERY_LARGE_FLUORIDE_EMPTY = addItem(118,"large.fluoride.battery.empty").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
 
+        HEAVY_METAL_ABSORBING_YARN = addItem(150, "heavy_metal_absorbing_yarn").setMaxStackSize(1).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        URANIUM_SATURATED_YARN = addItem(151, "uranium_saturated_yarn").setMaxStackSize(1).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        BORON_RETAINING_YARN = addItem(152, "boron_retaining_yarn").setMaxStackSize(1).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        BORON_SATURATED_YARN = addItem(153, "boron_saturated_yarn").setMaxStackSize(1).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        LITHIUM_SIEVE = addItem(154, "lithium_sieve").setMaxStackSize(1).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        LITHIUM_SATURATED_LITHIUM_SIEVE = addItem(155, "lithium_saturated_lithium_sieve").setMaxStackSize(1).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        ACRYLIC_YARN = addItem(156, "acrylic_yarn").setMaxStackSize(1).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+
+
         NANOSILICON_CATHODE = addItem(199,"nanosilicon.cathode").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         //神秘农业
         COPPER_CROP = addItem(200, "copper_crop");
@@ -539,6 +548,90 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         DISK_13 = this.addItem(2013, "disk.13").setCreativeTabs(CommonProxy.GTQTCore_DISK);
         DISK_14 = this.addItem(2014, "disk.14").setCreativeTabs(CommonProxy.GTQTCore_DISK);
         DISK_15 = this.addItem(2015, "disk.15").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+
+
+        ALPHA=this.addItem(2500, "alpha").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        ANTIALPHA=this.addItem(2501, "antialpha").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        ANTIBOTTOM_QUARK=this.addItem(2502, "antibottom_quark").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        ANTICHARM_QUARK=this.addItem(2503, "anticharm_quark").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        ANTIDELTA_MINUS=this.addItem(2504, "antidelta_minus").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        ANTIDELTA_PLUS_PLUS=this.addItem(2505, "antidelta_plus_plus").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        ANTIDEUTERON=this.addItem(2506, "antideuteron").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        ANTIDOWN_QUARK=this.addItem(2507, "antidown_quark").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        ANTIHELION=this.addItem(2508, "antihelion").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        ANTIKAON_NAUGHT=this.addItem(2509, "antikaon_naught").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        ANTIMUON=this.addItem(2510, "antimuon").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        ANTINEUTRON=this.addItem(2511, "antineutron").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        ANTIPROTON=this.addItem(2512, "antiproton").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        ANTISIGMA_MINUS=this.addItem(2513, "antisigma_minus").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        ANTISIGMA_NAUGHT=this.addItem(2514, "antisigma_naught").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        ANTISIGMA_PLUS=this.addItem(2515, "antisigma_plus").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        ANTISTRANGE_QUARK=this.addItem(2516, "antistrange_quark").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        ANTITAU=this.addItem(2517, "antitau").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        ANTITOP_QUARK=this.addItem(2518, "antitop_quark").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        ANTITRITON=this.addItem(2519, "antitriton").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        ANTIUP_QUARK=this.addItem(2520, "antiup_quark").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        BORON_ION=this.addItem(2521, "boron_ion").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        BOTTOM_ETA=this.addItem(2522, "bottom_eta").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        BOTTOM_QUARK=this.addItem(2523, "bottom_quark").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        CALCIUM_48_ION=this.addItem(2524, "calcium_48_ion").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        CHARM_QUARK=this.addItem(2525, "charm_quark").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        CHARMED_ETA=this.addItem(2526, "charmed_eta").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        DELTA_MINUS=this.addItem(2527, "delta_minus").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        DELTA_PLUS_PLUS=this.addItem(2528, "delta_plus_plus").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        DEUTERON=this.addItem(2529, "deuteron").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        DOWN_QUARK=this.addItem(2530, "down_quark").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        ELECTRON=this.addItem(2531, "electron").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        ELECTRON_ANTINEUTRINO=this.addItem(2532, "electron_antineutrino").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        ELECTRON_NEUTRINO=this.addItem(2533, "electron_neutrino").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        ETA=this.addItem(2534, "eta").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        ETA_PRIME=this.addItem(2535, "eta_prime").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        GLUEBALL=this.addItem(2536, "glueball").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        GLUON=this.addItem(2537, "gluon").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        HELION=this.addItem(2538, "helion").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        HIGGS_BOSON=this.addItem(2539, "higgs_boson").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        KAON_MINUS=this.addItem(2540, "kaon_minus").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        KAON_NAUGHT=this.addItem(2541, "kaon_naught").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        KAON_PLUS=this.addItem(2542, "kaon_plus").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        MUON=this.addItem(2543, "muon").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        MUON_ANTINEUTRINO=this.addItem(2544, "muon_antineutrino").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        MUON_NEUTRINO=this.addItem(2545, "muon_neutrino").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        NEUTRON=this.addItem(2546, "neutron").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        PHOTON=this.addItem(2547, "photon").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        PION_MINUS=this.addItem(2548, "pion_minus").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        PION_NAUGHT=this.addItem(2549, "pion_naught").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        PION_PLUS=this.addItem(2550, "pion_plus").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        POSITRON=this.addItem(2551, "positron").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        PROTON=this.addItem(2552, "proton").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        SIGMA_MINUS=this.addItem(2553, "sigma_minus").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        SIGMA_NAUGHT=this.addItem(2554, "sigma_naught").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        SIGMA_PLUS=this.addItem(2555, "sigma_plus").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        STRANGE_QUARK=this.addItem(2556, "strange_quark").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        TAU=this.addItem(2557, "tau").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        TAU_ANTINEUTRINO=this.addItem(2558, "tau_antineutrino").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        TAU_NEUTRINO=this.addItem(2559, "tau_neutrino").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        TOP_QUARK=this.addItem(2560, "top_quark").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        TRITON=this.addItem(2561, "triton").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        UP_QUARK=this.addItem(2562, "up_quark").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        W_MINUS_BOSON=this.addItem(2563, "w_minus_boson").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        W_PLUS_BOSON=this.addItem(2564, "w_plus_boson").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        Z_BOSON=this.addItem(2565, "z_boson").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        //科研
+        ARROW_UP_MKI = this.addItem(3000, "arrow_up_mki").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        ARROW_DOWN_MKI = this.addItem(3001, "arrow_down_mki").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        ARROW_LEFT_MKI = this.addItem(3002, "arrow_left_mki").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        ARROW_RIGHT_MKI = this.addItem(3003, "arrow_right_mki").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+
+        ARROW_UP_MKII = this.addItem(3004, "arrow_up_mkii").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        ARROW_DOWN_MKII = this.addItem(3005, "arrow_down_mkii").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        ARROW_LEFT_MKII = this.addItem(3006, "arrow_left_mkii").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        ARROW_RIGHT_MKII = this.addItem(3007, "arrow_right_mkii").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+
+        ARROW_UP_MKIII = this.addItem(3008, "arrow_up_mkiii").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        ARROW_DOWN_MKIII = this.addItem(3009, "arrow_down_mkiii").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        ARROW_LEFT_MKIII = this.addItem(3010, "arrow_left_mkiii").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        ARROW_RIGHT_MKIII = this.addItem(3011, "arrow_right_mkiii").setCreativeTabs(CommonProxy.GTQTCore_DISK);
     }
 
 }

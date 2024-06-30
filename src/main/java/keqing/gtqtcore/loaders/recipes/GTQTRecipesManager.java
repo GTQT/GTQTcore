@@ -87,6 +87,7 @@ public class GTQTRecipesManager {
         BZChain.init();
         PhosphorusChain.init();
         EthyleneGlycolChain.init();
+        IodineChain.init();
         PMMAChain.init();
         GalliumNitrideChain.init();
         PhotoresistivesChain.init();

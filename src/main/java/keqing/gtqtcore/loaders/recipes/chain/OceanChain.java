@@ -2,6 +2,7 @@ package keqing.gtqtcore.loaders.recipes.chain;
 
 import gregtech.api.GTValues;
 import gregtech.api.fluids.store.FluidStorageKeys;
+import gregtech.api.items.metaitem.MetaItem;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.recipes.ingredients.GTRecipeInput;
@@ -14,14 +15,15 @@ import net.minecraftforge.fluids.FluidStack;
 import java.util.Collection;
 import java.util.List;
 
-import static gregtech.api.recipes.RecipeMaps.CHEMICAL_RECIPES;
-import static gregtech.api.recipes.RecipeMaps.DISTILLATION_RECIPES;
+import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
+import static gregtech.api.unification.ore.OrePrefix.dust;
 import static gregtechfoodoption.GTFOMaterialHandler.Stearin;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.FLUIDIZED_BED;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.SFM;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
+import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 
 public class OceanChain {
     public static void init() {
@@ -33,7 +35,7 @@ public class OceanChain {
         CHEMICAL_RECIPES.recipeBuilder()
                 .duration(200)
                 .EUt(120)
-                .notConsumable(OrePrefix.dust,AluminiumTrichloride,16)
+                .notConsumable(dust,AluminiumTrichloride,16)
                 .fluidInputs(Naphtha.getFluid(4000))
                 .fluidOutputs(Toluene.getFluid(1000))
                 .buildAndRegister();
@@ -75,7 +77,7 @@ public class OceanChain {
         FLUIDIZED_BED.recipeBuilder()
                 .duration(200)
                 .EUt(120)
-                .notConsumable(OrePrefix.dust,Gold,16)
+                .notConsumable(dust,Gold,16)
                 .fluidInputs(Toluene.getFluid(4000))
                 .fluidOutputs(ParaXylene.getFluid(1000))
                 .fluidOutputs(Dimethylbenzene.getFluid(1000))
@@ -85,7 +87,7 @@ public class OceanChain {
         FLUIDIZED_BED.recipeBuilder()
                 .duration(200)
                 .EUt(120)
-                .notConsumable(OrePrefix.dust,AluminiumTrichloride,16)
+                .notConsumable(dust,AluminiumTrichloride,16)
                 .fluidInputs(ParaXylene.getFluid(1000))
                 .fluidInputs(Bromine.getFluid(4000))
                 .fluidOutputs(Tetrabromo.getFluid(1000))
@@ -134,10 +136,51 @@ public class OceanChain {
                 .fluidOutputs(Iodine.getFluid(1000))
                 .buildAndRegister();
 
+        
+        BLAST_RECIPES.recipeBuilder()
+                .input(COMMON_ALGAE)
+                .output(dust,Haidaihui,1)
+                .duration(100)
+                .EUt(30)
+                .blastFurnaceTemp(1000)
+                .buildAndRegister();
+
+        BLAST_RECIPES.recipeBuilder()
+                .input(GREEN_ALGAE)
+                .output(dust,Haidaihui,1)
+                .duration(100)
+                .EUt(30)
+                .blastFurnaceTemp(1000)
+                .buildAndRegister();
+
+        BLAST_RECIPES.recipeBuilder()
+                .input(RED_ALGAE)
+                .output(dust,Haidaihui,1)
+                .duration(100)
+                .EUt(30)
+                .blastFurnaceTemp(1000)
+                .buildAndRegister();
+
+        BLAST_RECIPES.recipeBuilder()
+                .input(BROWN_ALGAE)
+                .output(dust,Haidaihui,1)
+                .duration(100)
+                .EUt(30)
+                .blastFurnaceTemp(1000)
+                .buildAndRegister();
+
+        BLAST_RECIPES.recipeBuilder()
+                .input(GOLD_ALGAE)
+                .output(dust,Haidaihui,1)
+                .duration(100)
+                .EUt(30)
+                .blastFurnaceTemp(1000)
+                .buildAndRegister();
+                
         CHEMICAL_RECIPES.recipeBuilder()
                 .duration(100)
                 .EUt(30)
-                .fluidInputs(Haidaihui.getFluid(1000))
+                .input(dust,Haidaihui)
                 .fluidInputs(CarbonTetrachloride.getFluid(1000))
                 .fluidOutputs(Cuiquhaidaihui.getFluid(2000))
                 .buildAndRegister();
@@ -206,7 +249,7 @@ public class OceanChain {
                 .duration(100)
                 .EUt(120)
                 .fluidInputs(Bitternbr.getFluid(6000))
-                .input(OrePrefix.dust,SodaAsh,10)
+                .input(dust,SodaAsh,10)
                 .fluidOutputs(Bitternobr.getFluid(200))
                 .fluidOutputs(Bitternobr.getFluid(200))
                 .fluidOutputs(Bitternobr.getFluid(200))

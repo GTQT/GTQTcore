@@ -150,7 +150,7 @@ public class GCYSOrganicChemistryMaterials {
                 .setFormula("C2H4(NH2)2", true);
 
         HydrogenCyanide = new Material.Builder(15020, gregtechId("hydrogen_cyanide"))
-                .gas()
+                .fluid()
                 .color(0xB6D1AE)
                 .flags(DISABLE_DECOMPOSITION)
                 .components(Hydrogen, 1, Carbon, 1, Nitrogen, 1)

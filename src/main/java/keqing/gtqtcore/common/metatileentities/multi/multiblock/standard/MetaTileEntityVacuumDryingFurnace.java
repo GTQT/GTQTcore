@@ -4,11 +4,13 @@ import gregtech.api.GTValues;
 import gregtech.api.GregTechAPI;
 import gregtech.api.capability.IHeatingCoil;
 import gregtech.api.capability.impl.HeatingCoilRecipeLogic;
+import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiMapMultiblockController;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
+import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.MultiblockShapeInfo;
@@ -53,14 +55,31 @@ import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.DRYER_RECIPES;
 public class MetaTileEntityVacuumDryingFurnace extends MultiMapMultiblockController implements IHeatingCoil {
 
     private int temperature;
+    int tier;
 
     public MetaTileEntityVacuumDryingFurnace(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{
                 DRYER_RECIPES,
                 GTQTcoreRecipeMaps.VACUUM_DRYING_FURNACE_RECIPES});
         this.recipeMapWorkable = new HeatingCoilRecipeLogic(this);
+        this.recipeMapWorkable = new VacuumDryingFurnaceWorkableHandler(this);
     }
+    private class VacuumDryingFurnaceWorkableHandler extends MultiblockRecipeLogic {
+        private boolean isVacuumDryingMode() {
+            return this.getRecipeMap() == GTQTcoreRecipeMaps.VACUUM_DRYING_FURNACE_RECIPES;
+        }
+        public VacuumDryingFurnaceWorkableHandler(RecipeMapMultiblockController tileEntity) {
+            super(tileEntity);
+        }
+        @Override
+        public int getParallelLimit() {
+            if(isVacuumDryingMode()) {
 
+                return (int) Math.pow(2,tier);
+            }
+            return 1;
+        }
+    }
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity holder) {
         return new MetaTileEntityVacuumDryingFurnace(metaTileEntityId);
@@ -79,8 +98,10 @@ public class MetaTileEntityVacuumDryingFurnace extends MultiMapMultiblockControl
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
         Object type = context.get("CoilType");
-        if (type instanceof BlockWireCoil.CoilType)
+        if (type instanceof BlockWireCoil.CoilType) {
             this.temperature = ((BlockWireCoil.CoilType) type).getCoilTemperature();
+            tier = ((BlockWireCoil.CoilType) type).getTier();
+        }
         else
             this.temperature = BlockWireCoil.CoilType.CUPRONICKEL.getCoilTemperature();
 

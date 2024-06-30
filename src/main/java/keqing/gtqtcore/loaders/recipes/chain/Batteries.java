@@ -34,6 +34,41 @@ public class Batteries {
                 .fluidOutputs(CarbonMonoxide.getFluid(1000))
                 .buildAndRegister();
 
+        // C + 2S -> CS2
+        BLAST_RECIPES.recipeBuilder().duration(120).EUt(120).blastFurnaceTemp(1000)
+                .input(dust, Carbon)
+                .input(dust, Sulfur, 2)
+                .fluidOutputs(CarbonSulfide.getFluid(1000))
+                .output(dustTiny, Ash)
+                .buildAndRegister();
+
+        // 6F + 2CS2 -> C2F6S2 + 2S
+        CHEMICAL_RECIPES.recipeBuilder().duration(250).EUt(120)
+                .notConsumable(dust, Iodine)
+                .fluidInputs(Fluorine.getFluid(6000))
+                .fluidInputs(CarbonSulfide.getFluid(2000))
+                .fluidOutputs(Biperfluoromethanedisulfide.getFluid(1000))
+                .output(dust, Sulfur, 2)
+                .buildAndRegister();
+
+        // Hg + 3H2O2 + C2F6S2 + BaCO3 -> [C2BaF6O6S2 + 3H2O + Hg] + C
+        CHEMICAL_RECIPES.recipeBuilder().duration(240).EUt(480)
+                .fluidInputs(Mercury.getFluid(1000))
+                .fluidInputs(Water.getFluid(3000))
+                .fluidInputs(Biperfluoromethanedisulfide.getFluid(1000))
+                .input(dust, BariumCarbonate, 5)
+                .fluidOutputs(BariumTriflateSolution.getFluid(3000))
+                .output(dust, Carbon)
+                .buildAndRegister();
+
+        // [C2BaF6O6S2 + 3H2O + Hg] -> C2BaF6O6S2 + 3H2O + Hg
+        CENTRIFUGE_RECIPES.recipeBuilder().duration(320).EUt(1920)
+                .fluidInputs(BariumTriflateSolution.getFluid(3000))
+                .output(dust, BariumTriflate, 17)
+                .fluidOutputs(Mercury.getFluid(1000))
+                .fluidOutputs(Water.getFluid(3000))
+                .buildAndRegister();
+
         // BaO6S2C2F6 + Li2CO3(H2O) -> BaCO3 + 2LiCSO3F3 + H2O (H2O lost to dehydrator)
         DRYER_RECIPES.recipeBuilder().duration(220).EUt(480)
                 .input(dust,BariumTriflate,17)

@@ -47,6 +47,9 @@ public class TiredTraceabilityPredicate extends TraceabilityPredicate {
 
         MAP_PA_INTERNAL_CASING = new Object2ObjectOpenHashMap<>();
 
+        MAP_PAF_CASING = new Object2ObjectOpenHashMap<>();
+        MAP_PAE_CASING = new Object2ObjectOpenHashMap<>();
+        MAP_PAV_CASING = new Object2ObjectOpenHashMap<>();
         //计算机
         MAP_CPU_CASING = new Object2ObjectOpenHashMap<>();
         MAP_GPU_CASING = new Object2ObjectOpenHashMap<>();
@@ -332,6 +335,30 @@ public class TiredTraceabilityPredicate extends TraceabilityPredicate {
                 new WrappedIntTired(GTQTStepper.CasingType.F_LASER_MKV, 5));
         TiredTraceabilityPredicate.MAP_ZJ_CASING.put(GTQTMetaBlocks.STEPPER.getState(GTQTStepper.CasingType.CLEAN_MKV),
                 new WrappedIntTired(GTQTStepper.CasingType.CLEAN_MKV, 5));
+
+
+
+
+        TiredTraceabilityPredicate.MAP_PAF_CASING.put(GTQTMetaBlocks.PARTICLE_ACCELERATOR.getState(GTQTParticleAccelerator.MachineType.ACCELERATOR_FIRM_MKI),
+                new WrappedIntTired(GTQTParticleAccelerator.MachineType.ACCELERATOR_FIRM_MKI, 1));
+        TiredTraceabilityPredicate.MAP_PAE_CASING.put(GTQTMetaBlocks.PARTICLE_ACCELERATOR.getState(GTQTParticleAccelerator.MachineType.ACCELERATOR_ELECTROMAGNET_MKI),
+                new WrappedIntTired(GTQTParticleAccelerator.MachineType.ACCELERATOR_ELECTROMAGNET_MKI, 1));
+        TiredTraceabilityPredicate.MAP_PAV_CASING.put(GTQTMetaBlocks.PARTICLE_ACCELERATOR.getState(GTQTParticleAccelerator.MachineType.ACCELERATOR_ELECTROMAGNETV_MKI),
+                new WrappedIntTired(GTQTParticleAccelerator.MachineType.ACCELERATOR_ELECTROMAGNETV_MKI, 1));
+
+        TiredTraceabilityPredicate.MAP_PAF_CASING.put(GTQTMetaBlocks.PARTICLE_ACCELERATOR.getState(GTQTParticleAccelerator.MachineType.ACCELERATOR_FIRM_MKII),
+                new WrappedIntTired(GTQTParticleAccelerator.MachineType.ACCELERATOR_FIRM_MKII, 2));
+        TiredTraceabilityPredicate.MAP_PAE_CASING.put(GTQTMetaBlocks.PARTICLE_ACCELERATOR.getState(GTQTParticleAccelerator.MachineType.ACCELERATOR_ELECTROMAGNET_MKII),
+                new WrappedIntTired(GTQTParticleAccelerator.MachineType.ACCELERATOR_ELECTROMAGNET_MKI, 2));
+        TiredTraceabilityPredicate.MAP_PAV_CASING.put(GTQTMetaBlocks.PARTICLE_ACCELERATOR.getState(GTQTParticleAccelerator.MachineType.ACCELERATOR_ELECTROMAGNETV_MKII),
+                new WrappedIntTired(GTQTParticleAccelerator.MachineType.ACCELERATOR_ELECTROMAGNETV_MKII, 2));
+
+        TiredTraceabilityPredicate.MAP_PAF_CASING.put(GTQTMetaBlocks.PARTICLE_ACCELERATOR.getState(GTQTParticleAccelerator.MachineType.ACCELERATOR_FIRM_MKIII),
+                new WrappedIntTired(GTQTParticleAccelerator.MachineType.ACCELERATOR_FIRM_MKIII, 3));
+        TiredTraceabilityPredicate.MAP_PAE_CASING.put(GTQTMetaBlocks.PARTICLE_ACCELERATOR.getState(GTQTParticleAccelerator.MachineType.ACCELERATOR_ELECTROMAGNET_MKIII),
+                new WrappedIntTired(GTQTParticleAccelerator.MachineType.ACCELERATOR_ELECTROMAGNET_MKIII, 3));
+        TiredTraceabilityPredicate.MAP_PAV_CASING.put(GTQTMetaBlocks.PARTICLE_ACCELERATOR.getState(GTQTParticleAccelerator.MachineType.ACCELERATOR_ELECTROMAGNETV_MKIII),
+                new WrappedIntTired(GTQTParticleAccelerator.MachineType.ACCELERATOR_ELECTROMAGNETV_MKIII, 3));
     }
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_QFT_GLASS;
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_DRI_CASING;
@@ -357,6 +384,18 @@ public class TiredTraceabilityPredicate extends TraceabilityPredicate {
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_CPU_CASING;
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_GPU_CASING;
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_RAM_CASING;
+
+    public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_PAF_CASING;
+    public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_PAE_CASING;
+    public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_PAV_CASING;
+
+    public static TraceabilityPredicate CP_PAF_CASING = new TiredTraceabilityPredicate(MAP_PAF_CASING,
+            Comparator.comparing((s) -> ((WrappedIntTired)MAP_PAF_CASING.get(s)).getIntTier()),"PAF",null);
+    public static TraceabilityPredicate CP_PAE_CASING = new TiredTraceabilityPredicate(MAP_PAE_CASING,
+            Comparator.comparing((s) -> ((WrappedIntTired)MAP_PAE_CASING.get(s)).getIntTier()),"PAE",null);
+    public static TraceabilityPredicate CP_PAV_CASING = new TiredTraceabilityPredicate(MAP_PAV_CASING,
+            Comparator.comparing((s) -> ((WrappedIntTired)MAP_PAV_CASING.get(s)).getIntTier()),"PAV",null);
+
 
     public static TraceabilityPredicate CP_CPU_CASING1 = new TiredTraceabilityPredicate(MAP_CPU_CASING,
             Comparator.comparing((s) -> ((WrappedIntTired)MAP_CPU_CASING.get(s)).getIntTier()),"CPU1",null);

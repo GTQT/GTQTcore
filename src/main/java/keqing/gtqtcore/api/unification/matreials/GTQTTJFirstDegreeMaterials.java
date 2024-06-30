@@ -460,17 +460,6 @@ public class GTQTTJFirstDegreeMaterials {
                 .build()
                 .setFormula("CH2CHCN", true);
 
-        SodiumThiocyanate = new Material.Builder(25079, gregtechId("sodium_thiocyanate"))
-                .dust()
-                .colorAverage()
-                .build();
-
-        SodiumThiocyanatePolymerizationSolution = new Material.Builder(25080, gregtechId("sodiumthiocyanatepolymerizationsolution"))
-                .fluid()
-                .colorAverage()
-                .components(Water, 1, SodiumThiocyanate, 1)
-                .build();
-
         Polyacrylonitrile = new Material.Builder(25081, gregtechId("polyacrylonitrile"))
                 .dust()
                 .color(0x854218)
@@ -621,12 +610,6 @@ public class GTQTTJFirstDegreeMaterials {
                 .components(Silicon, 1, Oxygen, 3, Carbon, 4, Hydrogen, 12)
                 .build()
                 .setFormula("[CH3Si(OCH3)3]N", true);
-
-        Cellulose = new Material.Builder(25106, gregtechId("cellulose"))
-                .dust()
-                .color(0xd9d9d9)
-                .components(Carbon, 6, Hydrogen, 10, Oxygen, 5)
-                .build();
 
         IridiumOnCubicZirconia = new Material.Builder(25107, gregtechId("iridiumoncubiczirconia"))
                 .dust()

@@ -142,9 +142,6 @@ public class TJMaterials {
     public static Material LeadZirconateTitanate;
     public static Material BismuthPhosphomolybdate;
     public static Material Acrylonitrile;
-    public static Material SodiumThiocyanate;
-    public static Material SodiumThiocyanatePolymerizationSolution;
-    public static Material Cellulose;
     public static Material ZirconiumTetrafluoride;
     public static Material BariumDifluoride;
     public static Material LanthanumTrifluoride;

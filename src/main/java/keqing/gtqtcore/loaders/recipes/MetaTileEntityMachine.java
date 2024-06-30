@@ -421,6 +421,8 @@ public class MetaTileEntityMachine {
                 CIRCUIT,  'G', GLASS);
         registerMachineRecipe(GTQTMetaTileEntities.FLUID_CANNER, "EGE", "PGP", "CMC", 'M', HULL, 'P',  PUMP, 'E', PISTON, 'C',
                 CIRCUIT,  'G', GLASS);
+        registerMachineRecipe(GTQTMetaTileEntities.DEHYDRATOR, "WCW", "MHM", "GAG", 'C', CIRCUIT, 'M', CABLE_QUAD, 'H', HULL,
+                'G', MOTOR, 'A', ROBOT_ARM, 'W', COIL_HEATING_DOUBLE);
     }
 
 }

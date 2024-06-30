@@ -24,6 +24,7 @@ import static gregtech.api.unification.material.properties.BlastProperty.GasTier
 import static gregtech.api.unification.material.properties.BlastProperty.GasTier.MID;
 import static gregtech.api.util.GTUtility.gregtechId;
 import static gregtechfoodoption.GTFOMaterialHandler.AceticAnhydride;
+import static gregtechfoodoption.GTFOMaterialHandler.SodiumSulfate;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.DimethylCarbonate;
@@ -565,11 +566,12 @@ public class FirstDegreeMaterials {
                 .components(Aluminium, 1, Nitrogen, 3, Oxygen, 9)
                 .build();
 
-        //海带灰溶液
+        //海带灰
         GTQTMaterials.Haidaihui = new Material.Builder(getMaterialsId(), gregtechId("haidaihui"))
-                .fluid()
+                .dust()
                 .color(0xd89045).iconSet(SHINY)
                 .build();
+
         //萃取海带灰（四氯化碳处理后
         GTQTMaterials.Cuiquhaidaihui = new Material.Builder(getMaterialsId(), gregtechId("cuiquhaidaihui"))
                 .fluid()
@@ -3196,5 +3198,611 @@ public class FirstDegreeMaterials {
                 .cableProperties(GTValues.V[GTValues.UXV], 2, 32)
                 .blast(11200)
                 .build();
+
+        GTQTMaterials.CarbonSulfide = new Material.Builder(getMaterialsId(), gregtechId("carbon_sulfide"))
+                .liquid()
+                .color(0x40ffbf)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("CS2", true);
+
+        GTQTMaterials.Biperfluoromethanedisulfide = new Material.Builder(getMaterialsId(), gregtechId("biperfluoromethanedisulfide"))
+                .liquid()
+                .color(0x3ada40)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("C2F6S2", true);
+
+        GTQTMaterials.BariumTriflateSolution = new Material.Builder(getMaterialsId(), gregtechId("barium_triflate_solution"))
+                .liquid()
+                .color((Barium.getMaterialRGB() + Fluorine.getMaterialRGB()) / 2)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("(H2O)3(Hg)C2BaF6O6S2", true);
+
+        GTQTMaterials.Caliche = new Material.Builder(getMaterialsId(), gregtechId("caliche"))
+                .dust(3)
+                .color(0xeb9e3f).ore()
+                .flags(DISABLE_DECOMPOSITION)
+                .iconSet(DULL)
+                .components(SodiumNitrate, 1, Potassium, 1, Nitrogen, 1, Oxygen, 3, RockSalt, 1, Sodium, 1, Iodine, 1, Oxygen, 3)
+                .build();
+
+        GTQTMaterials.CalicheIodateBrine = new Material.Builder(getMaterialsId(), gregtechId("caliche_iodate_brine"))
+                .liquid()
+                .color(0xffe6660)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("(H2O)NaNO3KNO3KClNaIO3", true);
+
+        GTQTMaterials.IodideSolution = new Material.Builder(getMaterialsId(), gregtechId("iodide_solution"))
+                .liquid()
+                .color(0x08081c)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("(H2O)NaNO3KNO3KClNaI", true);
+
+        GTQTMaterials.CalicheIodineBrine = new Material.Builder(getMaterialsId(), gregtechId("caliche_iodine_brine"))
+                .liquid()
+                .color(0xffe6660)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("(H2O)NaNO3KNO3KClNaOHI", true);
+
+        GTQTMaterials.CalicheNitrateSolution = new Material.Builder(getMaterialsId(), gregtechId("caliche_nitrate_solution"))
+                .liquid()
+                .color(0xffe6660)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("(H2O)NaNO3KNO3KClNaOH", true);
+
+        GTQTMaterials.KeroseneIodineSolution = new Material.Builder(getMaterialsId(), gregtechId("kerosene_iodine_solution"))
+                .liquid()
+                .color(0x08081c)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("C12H26I", true);
+
+        GTQTMaterials.IodizedOil = new Material.Builder(getMaterialsId(), gregtechId("iodized_oil"))
+                .liquid()
+                .color(0x666666)
+                .iconSet(FLUID)
+                .build();
+
+        GTQTMaterials.IodizedBrine = new Material.Builder(getMaterialsId(), gregtechId("iodized_brine"))
+                .liquid()
+                .color(0x525242)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("I?", true);
+
+        GTQTMaterials.IodineBrineMix = new Material.Builder(getMaterialsId(), gregtechId("iodine_brine_mix"))
+                .liquid()
+                .color(0x525242)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("I??", true);
+
+        GTQTMaterials.IodineSlurry = new Material.Builder(getMaterialsId(), gregtechId("iodine_slurry"))
+                .liquid()
+                .color(0x08081c)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("I?", true);
+
+        GTQTMaterials.Kerosene = new Material.Builder(getMaterialsId(), gregtechId("kerosene"))
+                .liquid()
+                .color(0xD570D5)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("?", true);
+
+        GTQTMaterials.Niter = new Material.Builder(getMaterialsId(), gregtechId("niter"))
+                .dust(1)
+                .color(16763080)
+                .flags(NO_SMASHING, NO_SMELTING)
+                .iconSet(FLINT)
+                .components(Saltpeter, 1)
+                .build();
+
+        GTQTMaterials.BrominatedBrine = new Material.Builder(getMaterialsId(), gregtechId("brominated_brine"))
+                .liquid()
+                .color(0xfdd48d)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("Br?", true);
+
+
+
+
+
+
+
+
+        BariumCarbonate = new Material.Builder(getMaterialsId(), gregtechId("barium_carbonate"))
+                .dust()
+                .color(Salt.getMaterialRGB() + 10)
+                .iconSet(FINE)
+                .build()
+                .setFormula("BaCO3", true);
+
+        GTQTMaterials.SodiumThiocyanate = new Material.Builder(getMaterialsId(), gregtechId("sodium_thiocyanate"))
+                .liquid()
+                .color((Sodium.getMaterialRGB() + Sulfur.getMaterialRGB()) / 2)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("NaSCN", true);
+
+        PolyacrylonitrileSolution = new Material.Builder(getMaterialsId(), gregtechId("polyacrylonitrile_solution"))
+                .liquid()
+                .color(0x9999ff)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("(C3H3N)n(NaSCN)", true);
+
+        AcrylicFibers = new Material.Builder(getMaterialsId(), gregtechId("acrylic_fibers"))
+                .dust()
+                .color(0xfdfdfb)
+                .iconSet(FINE)
+                .build()
+                .setFormula("(C5O2H8)n", true);
+
+        WetFormamide = new Material.Builder(getMaterialsId(), gregtechId("wet_formamide"))
+                .liquid()
+                .color(0x33CCFF)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("(H2O)CH3NO", true);
+
+        Formamide = new Material.Builder(getMaterialsId(), gregtechId("formamide"))
+                .liquid()
+                .color(0x33CCFF)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("CH3NO", true);
+
+        HydroxylamineDisulfate = new Material.Builder(getMaterialsId(), gregtechId("hydroxylamine_disulfate"))
+                .liquid()
+                .color(0x99add6)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("(NH3OH)2(NH4)2(SO4)2", true);
+
+        Amidoxime = new Material.Builder(getMaterialsId(), gregtechId("amidoxime"))
+                .liquid()
+                .color(0x66ff33)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("H3N2O(CH)", true);
+
+        PureUranylNitrateSolution = new Material.Builder(getMaterialsId(), gregtechId("pure_uranyl_nitrate"))
+                .liquid()
+                .color(0x33bd45)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("(H2O)UO2(NO3)2", true);
+
+        UranylNitrate = new Material.Builder(getMaterialsId(), gregtechId("uranyl_nitrate"))
+                .dust()
+                .color(0x33bd45)
+                .iconSet(SHINY)
+                .build()
+                .setFormula("UO2(NO3)2", true);
+
+        DiluteNitricAcid = new Material.Builder(getMaterialsId(), gregtechId("dilute_nitric_acid"))
+                .liquid()
+                .color((NitricAcid.getMaterialRGB() + Water.getMaterialRGB()) / 2)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("(H2O)HNO3", true);
+
+        ConcentratedBrine = new Material.Builder(getMaterialsId(), gregtechId("concentrated_brine"))
+                .liquid()
+                .color(0xfcfc95)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("?", true);
+
+        BrominatedBrine = new Material.Builder(getMaterialsId(), gregtechId("brominated_brine"))
+                .liquid()
+                .color(0xfdd48d)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("Br?", true);
+
+        AcidicBrominatedBrine = new Material.Builder(getMaterialsId(), gregtechId("acidic_brominated_brine"))
+                .liquid(new FluidBuilder().attribute(ACID))
+                .color(0xfdd48d)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("(H2SO4)Cl?", true);
+
+        CalciumFreeBrine = new Material.Builder(getMaterialsId(), gregtechId("calcium_free_brine"))
+                .liquid()
+                .color(0xfcfca6)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("?", true);
+
+        CalciumSalts = new Material.Builder(getMaterialsId(), gregtechId("calcium_salts"))
+                .dust()
+                .color(Calcium.getMaterialRGB() - 10)
+                .iconSet(ROUGH)
+                .components(Calcite, 1, Gypsum, 1)
+                .build();
+
+        SodiumFreeBrine = new Material.Builder(getMaterialsId(), gregtechId("sodium_free_brine"))
+                .liquid()
+                .color(0xfcfcb1)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("?", true);
+
+        SodiumSalts = new Material.Builder(getMaterialsId(), gregtechId("sodium_salts"))
+                .dust()
+                .color(Sodium.getMaterialRGB() - 5)
+                .iconSet(ROUGH)
+                .build()
+                .setFormula("NaCl?", true);
+
+        PotassiumFreeBrine = new Material.Builder(getMaterialsId(), gregtechId("potassium_free_brine"))
+                .liquid()
+                .color(0xfcfcbc)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("?", true);
+
+        PotassiumMagnesiumSalts = new Material.Builder(getMaterialsId(), gregtechId("kmg_salts"))
+                .dust()
+                .color(0xcacac8)
+                .iconSet(ROUGH)
+                .build()
+                .setFormula("KClMg(SO4)K2(SO4)KF", true);
+
+        BoronFreeSolution = new Material.Builder(getMaterialsId(), gregtechId("boron_free_solution"))
+                .liquid()
+                .color(0xfcfccd)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("?", true);
+
+        CalciumMagnesiumSalts = new Material.Builder(getMaterialsId(), gregtechId("camg_salts"))
+                .dust()
+                .color(0xcacac8)
+                .iconSet(ROUGH)
+                .build()
+                .setFormula("Ca(CO3)(Sr(CO3))(CO2)(MgO)", true);
+
+        SodiumLithiumSolution = new Material.Builder(getMaterialsId(), gregtechId("sodium_lithium_solution"))
+                .liquid()
+                .color(0xfcfccd)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("NaLi?", true);
+
+        SodiumAluminiumHydride = new Material.Builder(getMaterialsId(), gregtechId("sodium_aluminium_hydride"))
+                .dust()
+                .color(0x98cafc)
+                .iconSet(ROUGH)
+                .build()
+                .setFormula("NaAlH4", true);
+
+        Fructose = new Material.Builder(getMaterialsId(), gregtechId("fructose"))
+                .dust()
+                .color(0x98cafc)
+                .iconSet(ROUGH)
+                .build()
+                .setFormula("C6H12O6", true);
+
+        SodiumAzide = new Material.Builder(getMaterialsId(), gregtechId("sodium_azide"))
+                .dust()
+                .color((Sodium.getMaterialRGB() + Nitrogen.getMaterialRGB()) / 2)
+                .iconSet(FINE)
+                .build()
+                .setFormula("NaN3", true);
+
+        LithiumHydroxideSolution = new Material.Builder(getMaterialsId(), gregtechId("lithium_hydroxide_solution"))
+                .liquid()
+                .color((Lithium.getMaterialRGB() + Oxygen.getMaterialRGB() + Hydrogen.getMaterialRGB()) / 3)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("H2O)LiOH", true);
+
+        Glucosamine = new Material.Builder(getMaterialsId(), gregtechId("glucosamine"))
+                .dust()
+                .color(0x98cafc)
+                .iconSet(FINE)
+                .build()
+                .setFormula("C6H13NO5", true);
+
+        Chitosan = new Material.Builder(getMaterialsId(), gregtechId("chitosan"))
+                .liquid()
+                .color(0xb1bd42)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("?", true);
+
+        SodiumSulfateSolution = new Material.Builder(getMaterialsId(), gregtechId("sodium_sulfate_solution"))
+                .liquid()
+                .color((SodiumSulfate.getMaterialRGB() + 30))
+                .iconSet(FLUID)
+                .build()
+                .setFormula("Na2SO4(H2O)", true);
+
+        BoronOxide = new Material.Builder(getMaterialsId(), gregtechId("boron_oxide"))
+                .dust()
+                .color((Boron.getMaterialRGB() + Oxygen.getMaterialRGB()) / 2)
+                .iconSet(ROUGH)
+                .build()
+                .setFormula("B2O3", true);
+
+        LithiumAluminiumFluoride = new Material.Builder(getMaterialsId(), gregtechId("lithium_aluminium_fluoride"))
+                .dust()
+                .color((Lithium.getMaterialRGB() + Aluminium.getMaterialRGB() + Fluorine.getMaterialRGB()) / 3)
+                .iconSet(ROUGH)
+                .build()
+                .setFormula("AlF4Li", true);
+
+        CarbonSulfide = new Material.Builder(getMaterialsId(), gregtechId("carbon_sulfide"))
+                .liquid()
+                .color(0x40ffbf)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("CS2", true);
+
+        DimethylthiocarbamoilChloride = new Material.Builder(getMaterialsId(), gregtechId("dimethylthiocarbamoil_chloride"))
+                .liquid()
+                .color(0xd9ff26)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("(CH3)2NC(S)Cl", true);
+
+        Mercaptophenol = new Material.Builder(getMaterialsId(), gregtechId("mercaptophenol"))
+                .liquid()
+                .color(0xbaaf18)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("C6H6OS", true);
+
+        AmineMixture = new Material.Builder(getMaterialsId(), gregtechId("amine_mixture"))
+                .liquid()
+                .color((Methanol.getMaterialRGB() - 20 + Ammonia.getMaterialRGB() - 10) / 2)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("(NH3)CH4", true);
+
+        SodiumMolybdate = new Material.Builder(getMaterialsId(), gregtechId("sodium_molybdate"))
+                .dust()
+                .color(0xfcfc00)
+                .iconSet(ROUGH)
+                .build()
+                .setFormula("Na2MoO4", true);
+
+        SodiumPhosphomolybdate = new Material.Builder(getMaterialsId(), gregtechId("sodium_phosphomolybdate"))
+                .dust()
+                .color(0xfcfc00)
+                
+                .iconSet(SHINY)
+                .build()
+                .setFormula("(MoO3)12Na3PO4", true);
+
+        SodiumTungstate = new Material.Builder(getMaterialsId(), gregtechId("sodium_tungstate"))
+                .liquid()
+                .color(0x7a7777)
+                .flags(DISABLE_DECOMPOSITION)
+                .iconSet(FLUID)
+                .components(Sodium, 2, Tungsten, 1, Oxygen, 4)
+                .build();
+
+        SodiumPhosphotungstate = new Material.Builder(getMaterialsId(), gregtechId("sodium_phosphotungstate"))
+                .dust()
+                .color(0x7a7777)
+                .iconSet(SHINY)
+                .build()
+                .setFormula("(WO3)12Na3PO4", true);
+        
+        IridiumCyclooctadienylChlorideDimer = new Material.Builder(getMaterialsId(), gregtechId("iridium_cyclooctadienyl_chloride_dimer"))
+                .dust()
+                .color(0x888079)
+                .iconSet(SHINY)
+                .build()
+                .setFormula("Ir2(C8H12)2Cl2", true);
+
+        ChlorodiisopropylPhosphine = new Material.Builder(getMaterialsId(), gregtechId("chlorodiisopropyl_phosphine"))
+                .liquid()
+                .color(0xa2c122)
+                .iconSet(FLUID)
+                .build();
+        
+        AmmoniumPersulfate = new Material.Builder(getMaterialsId(), gregtechId("ammonium_persulfate"))
+                .liquid()
+                .color(0x6464f5)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("(NH4)2S2O8", true);
+
+        PolystyreneNanoParticles = new Material.Builder(getMaterialsId(), gregtechId("polystryrene_nanoparticles"))
+                .dust()
+                .color(0x888079)
+                .iconSet(FINE)
+                .build()
+                .setFormula("(C8H8)n", true);
+
+        Celestine = new Material.Builder(getMaterialsId(), gregtechId("celestine"))
+                .dust()
+                .color(0x9db1b8)
+                .iconSet(SHINY)
+                .components(Strontium, 1, Sulfur, 1, Oxygen, 4)
+                .build();
+
+        MagnesiumSulfate = new Material.Builder(getMaterialsId(), gregtechId("magnesium_sulfate"))
+                .dust()
+                .color(0xcacac8)
+                .iconSet(DULL)
+                .build()
+                .setFormula("MgSO4", true);
+
+        StrontiumCarbonate = new Material.Builder(getMaterialsId(), gregtechId("strontium_carbonate"))
+                .dust()
+                .color(0xcacac8)
+                .iconSet(ROUGH)
+                .build()
+                .setFormula("SrCO3", true);
+
+        StrontiumOxide = new Material.Builder(getMaterialsId(), gregtechId("strontium_oxide"))
+                .dust()
+                .color(0xcacac8)
+                .iconSet(SHINY)
+                .build()
+                .setFormula("SrO", true);
+
+        ChilledBrine = new Material.Builder(getMaterialsId(), gregtechId("chilled_brine"))
+                .liquid()
+                .color(0xfcfc95)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("?", true);
+
+        MagnesiumContainingBrine = new Material.Builder(getMaterialsId(), gregtechId("magnesium_containing_brine"))
+                .liquid()
+                .color(0xfcfcbc)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("Mg?", true);
+
+        GTQTMaterials.DebrominatedWater = new Material.Builder(getMaterialsId(), gregtechId("debrominated_brine"))
+                .liquid()
+                .color(0x0000ff)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("H2O", true);
+
+        GTQTMaterials.SulfuricBromineSolution = new Material.Builder(getMaterialsId(), gregtechId("sulfuric_bromine_solution"))
+                .liquid()
+                .color(0xff5100)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("H2SO4Br(H2O)Cl2", true);
+
+        GTQTMaterials.LithiumChlorideSolution = new Material.Builder(getMaterialsId(), gregtechId("lithium_chloride_solution"))
+                .liquid()
+                .color((Lithium.getMaterialRGB() + Chlorine.getMaterialRGB()))
+                .iconSet(FLUID)
+                .build()
+                .setFormula("LiCl(H2O)", true);
+
+        GTQTMaterials.AluminiumHydride= new Material.Builder(getMaterialsId(), gregtechId("aluminium_hydride"))
+                .dust()
+                .color(0x0b585c)
+                .iconSet(ROUGH)
+                .build()
+                .setFormula("AlH3",true);
+
+        GTQTMaterials.SodiumHydride= new Material.Builder(getMaterialsId(), gregtechId("sodium_hydride"))
+                .dust()
+                .color(0xcacac8)
+                .iconSet(ROUGH)
+                .build()
+                .setFormula("NaH",true);
+
+        GTQTMaterials.LithiumAluminiumHydride= new Material.Builder(getMaterialsId(), gregtechId("lithium_aluminium_hydride"))
+                .dust()
+                .color(0xc0defc)
+                .iconSet(ROUGH)
+                .build()
+                .setFormula("LiAlH4",true);
+
+        GTQTMaterials.SodiumAzanide = new Material.Builder(getMaterialsId(), gregtechId("sodium_azanide"))
+                .dust()
+                .color((Sodium.getMaterialRGB() + Hydrogen.getMaterialRGB() + Nitrogen.getMaterialRGB()) / 3)
+                .iconSet(FINE)
+                .build()
+                .setFormula("NaNH2", true);
+
+        GTQTMaterials.SodiumHydroxideSolution = new Material.Builder(getMaterialsId(), gregtechId("sodium_hydroxide_solution"))
+                .liquid()
+                .color(SodiumHydroxide.getMaterialRGB() + 50)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("(H2O)NaOH", true);
+
+        GTQTMaterials.BoronFluoride = new Material.Builder(getMaterialsId(), gregtechId("boron_fluoride"))
+                .liquid()
+                .color(0xD5D2D7)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("BF3",true);
+
+        GTQTMaterials.IsopropylAlcohol = new Material.Builder(getMaterialsId(), gregtechId("isopropyl_alcohol"))
+                .liquid()
+                .color((Water.getMaterialRGB() + Propene.getMaterialRGB()) / 2)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("C3H8O", true);
+
+        GTQTMaterials.BerylliumFluoride= new Material.Builder(getMaterialsId(), gregtechId("beryllium_fluoride"))
+                .ingot(2)
+                .color(0x757575)
+                .iconSet(SHINY)
+                .components(Beryllium, 1, Fluorine, 2)
+                .build();
+
+        GTQTMaterials.Oct1ene = new Material.Builder(getMaterialsId(), gregtechId("1_octene"))
+                .liquid()
+                .color(0x7e8778)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("C8H16", true);
+
+        GTQTMaterials.Ozone = new Material.Builder(getMaterialsId(), gregtechId("ozone"))
+                .gas()
+                .color(0x0099FF)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("O3", true);
+
+        GTQTMaterials.NitrogenPentoxide = new Material.Builder(getMaterialsId(), gregtechId("nitrogen_pentoxide"))
+                .liquid()
+                .color(0x0033C0)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("N2O5",true);
+
+        GTQTMaterials.TitaniumNitrate = new Material.Builder(getMaterialsId(), gregtechId("titanium_nitrate"))
+                .dust()
+                .color(0xFF0066)
+                .iconSet(FINE)
+                .build()
+                .setFormula("TiNO3",true);
+
+        GTQTMaterials.LithiumTitanate = new Material.Builder(getMaterialsId(), gregtechId("lithium_titanate"))
+                .ingot(5)
+                .color(0xfe71a9)
+                .iconSet(SHINY)
+                .flags(GENERATE_PLATE)
+                .components(Lithium, 2, Titanium, 1, Oxygen, 3)
+                .build();
+
+        GTQTMaterials.AcidicSaltWater = new Material.Builder(getMaterialsId(), gregtechId("acidic_salt_water"))
+                .liquid(new FluidBuilder().attribute(ACID))
+                .color(0x006960)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("H2SO4(NaCl)3(H2O)3Cl2", true);
+
+        GTQTMaterials.HotVapourMixture = new Material.Builder(getMaterialsId(), gregtechId("hot_vapour_mixture"))
+                .gas()
+                .color(0xff5100)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("H2SO4Br(H2O)2Cl2", true);
+
+        GTQTMaterials.DampBromine = new Material.Builder(getMaterialsId(), gregtechId("damp_bromine"))
+                .liquid()
+                .color(0xe17594)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("Br(H2O)", true);
+
     }
 }

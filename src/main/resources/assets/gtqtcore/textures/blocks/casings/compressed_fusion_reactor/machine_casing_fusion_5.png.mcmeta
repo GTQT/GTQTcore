@@ -1,0 +1,13 @@
+{
+    "ctm": {
+        "ctm_version": 1,
+        "type": "CTM",
+        "layer": "CUTOUT",
+        "textures": [
+            "gtqtcore:blocks/casings/compressed_fusion_reactor/machine_casing_fusion_5_ctm"
+        ],
+        "extra": {
+            "connect_inside": true
+        }
+    }
+}
