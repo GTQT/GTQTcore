@@ -1,12 +1,20 @@
 package keqing.gtqtcore.api.unification.matreials;
 
 import gregtech.api.GTValues;
+import gregtech.api.fluids.FluidBuilder;
+import gregtech.api.fluids.store.FluidStorageKeys;
+import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.properties.*;
 
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import static gregtech.api.GTValues.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.integration.crafttweaker.material.MaterialPropertyExpansion.addFluid;
+import static gregtech.integration.groovy.MaterialPropertyExpansion.addPlasma;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.TitanSteel;
 
 public class GTQTMaterialPropertyAddition {
@@ -159,17 +167,7 @@ public class GTQTMaterialPropertyAddition {
         wireProp.setSuperconductor(false);
         wireProp.setLossPerBlock(32);
         wireProp.setVoltage((int) GTValues.V[GTValues.UIV]);
-
-        //Cable
         TitanSteel.setProperty(PropertyKey.WIRE, new WireProperties((int) GTValues.V[GTValues.EV], 4,2));
-        //PLASMAS
-        /*
-        List<Material> pmats = new ArrayList<>();
-        Collections.addAll(pmats, Carbon, Hydrogen, Helium3, Radon, Krypton, Neon, Magnesium, Silicon, Sulfur, Argon,Calcium, Titanium, Potassium);
-        for (Material mat : pmats) {
-            addFluid(mat, "plasma", false);
-        }
 
-         */
     }
 }

@@ -7,6 +7,7 @@ import gregtech.common.items.tool.*;
 import gregtech.core.sound.GTSoundEvents;
 import keqing.gtqtcore.GTQTCore;
 import keqing.gtqtcore.api.items.toolitem.GTQTToolClasses;
+import keqing.gtqtcore.common.items.tool.VAJRABehavior;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.monster.EntityGolem;
 import net.minecraft.init.Enchantments;
@@ -131,14 +132,14 @@ public class GTQTMetaToolItems {
 
         VAJRA = register(ItemGTTool.Builder.of(GTQTCore.MODID, "vajra")
                 .toolStats(b -> b.blockBreaking().crafting().damagePerCraftingAction(2)
-                        .attackDamage(10.0F).attackSpeed(5.6F).defaultEnchantment(Enchantments.SILK_TOUCH,1)
+                        .attackDamage(10.0F).attackSpeed(5.6F)
                         .behaviors(TreeFellingBehavior.INSTANCE)
-                        .efficiencyMultiplier(10F)
-                        .behaviors(TorchPlaceBehavior.INSTANCE))
+                        .behaviors(TorchPlaceBehavior.INSTANCE)
+                        .behaviors(VAJRABehavior.INSTANCE)
+                        .efficiencyMultiplier(10F))
                 .sound(SoundEvents.BLOCK_ANVIL_LAND)
                 .electric(GTValues.IV)
-                .toolClasses(ToolClasses.WRENCH,ToolClasses.WIRE_CUTTER,ToolClasses.PICKAXE, ToolClasses.AXE,ToolClasses.SWORD,ToolClasses.SHOVEL,ToolClasses.HOE));
-
+                .toolClasses(ToolClasses.PICKAXE, ToolClasses.AXE,ToolClasses.SWORD,ToolClasses.SHOVEL,ToolClasses.HOE));
 
         BENDING_CYLINDER = ToolItems.register(ItemGTTool.Builder.of(GTQTCore.MODID, "bending_cylinder")
                 .toolStats(b -> b.crafting().cannotAttack().attackSpeed(-2.8F))

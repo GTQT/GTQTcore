@@ -12,7 +12,6 @@
     "architecturecraft.MixinTileSawbench",
     "gregtech.MixinEllipsoidGenerator",
     "gregtech.MixinMetaItem",
-    "gregtech.MixinWorldGenRubberTree",
     "gregtech.MixinMetaPrefixItem",
     "gregtech.MixinMetaValueItem",
     "gregtech.MixinSolarBoilerServer",

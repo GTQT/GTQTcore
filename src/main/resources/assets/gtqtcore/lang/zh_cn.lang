@@ -2360,7 +2360,7 @@ gtqtcore.machine.mega_turbine.mode.0=正常模式
 gtqtcore.machine.mega_turbine.mode.1=高速模式
 gtqtcore.machine.mega_turbine.description=特大涡轮是大型涡轮的升级版。
 
-
+item.gt.tool.behavior.vajra=§c激光采集：§f在精准与爆炸模式间切换
 gtqtcore.machine.integrated_ore_processor.name=集成矿石处理厂
 gtqtcore.machine.integrated_ore_processor.tooltip.1=一步完成所有矿石处理，拥有多种工作模式，内置按钮切换。
 gtqtcore.machine.integrated_ore_processor.tooltip.2=每个矿石处理需要消耗一定电量，还需要额外输入2L润滑油与200L蒸馏水。
