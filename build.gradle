@@ -148,7 +148,7 @@ dependencies {
     implementation rfg.deobf(files("libs/GregicalityMultiblocks-1.2.7.jar"))
     implementation rfg.deobf(files("libs/gregtech-1.12.2-2.8.8-beta.jar"))
     implementation rfg.deobf(files("libs/!mixinbooter-8.9.jar"))
-    implementation rfg.deobf(files("libs/ae2-uel-extended-v0.55.30-0.4.0.2-rv6-stable-7.jar"))
+    implementation rfg.deobf(files("libs/ae2-uel-v0.56.6.jar"))
     implementation rfg.deobf(files("libs/gregtechfoodoption-1.12.2-1.11.0.jar"))
     implementation rfg.deobf(files("libs/jei_1.12.2-4.16.1.1003.jar"))
     implementation rfg.deobf(files("libs/theoneprobe-1.12-1.4.28.jar"))

@@ -43,7 +43,7 @@ public class GTQTTurbineCasing1 extends VariantBlock<GTQTTurbineCasing1.TurbineC
         PRECISE_ASSEMBLER_CASING_MK4("precise_assembler_casing_mk4",5),
         PRECISE_ASSEMBLER_CASING_MK5("precise_assembler_casing_mk5",6),
         PRECISE_ASSEMBLER_CASING_MK6("precise_assembler_casing_mk6",7),
-        GALVANIZE_STEEL_CASING("galvanize_steel_casing",4),
+        GALVANIZE_STEEL_CASING("galvanize_steel_casing",1),
         ADVANCED_COLD_CASING("advanced_cold_casing", 4),
         CLARIFIER_CASING("clarifier_casing", 4),
         FLOATING_CASING("floating_casing", 4);

@@ -71,6 +71,69 @@ public class MetaTileEntityMachine {
                .duration(800).EUt(VA[HV]).buildAndRegister();
 
         MIXER_RECIPES.recipeBuilder()
+                .input(dust,EnderPearl)
+                .input(dust,Iron)
+                .input(dust,RedstoneAlloy)
+                .circuitMeta(3)
+                .output(dust,PulsatingIron,3)
+                .duration(800).EUt(VA[MV]).buildAndRegister();
+
+        MIXER_RECIPES.recipeBuilder()
+                .input(dust,Silver)
+                .input(dust,Iron)
+                .input(dust,RedstoneAlloy)
+                .circuitMeta(3)
+                .output(dust,ConductiveIron,3)
+                .duration(800).EUt(VA[MV]).buildAndRegister();
+
+        MIXER_RECIPES.recipeBuilder()
+                .input(dust,BlackSteel)
+                .input(dust,Gold)
+                .input(dust,ConductiveIron)
+                .circuitMeta(3)
+                .output(dust,EnergeticAlloy,3)
+                .duration(800).EUt(VA[MV]).buildAndRegister();
+
+        MIXER_RECIPES.recipeBuilder()
+                .input(dust,EnderEye)
+                .input(dust,EnergeticAlloy)
+                .input(dust,Chromite)
+                .circuitMeta(3)
+                .output(dust,VibrantAlloy,3)
+                .duration(800).EUt(VA[MV]).buildAndRegister();
+
+        MIXER_RECIPES.recipeBuilder()
+                .input(dust,Gold)
+                .input(dust,Carbon)
+                .circuitMeta(2)
+                .output(dust,Soularium,2)
+                .duration(800).EUt(VA[MV]).buildAndRegister();
+
+        MIXER_RECIPES.recipeBuilder()
+                .input(dust,Steel)
+                .input(dust,Coal)
+                .input(dust,Silicon)
+                .circuitMeta(3)
+                .output(dust,ElectricalSteel,3)
+                .duration(800).EUt(VA[HV]).buildAndRegister();
+
+        MIXER_RECIPES.recipeBuilder()
+                .input(dust,ElectricalSteel)
+                .input(dust,Coal)
+                .input(dust,Obsidian)
+                .circuitMeta(3)
+                .output(dust,DarkSteel,3)
+                .duration(800).EUt(VA[HV]).buildAndRegister();
+
+        MIXER_RECIPES.recipeBuilder()
+                .input(dust,DarkSteel)
+                .input(dust,Endstone)
+                .input(dust,TungstenSteel)
+                .circuitMeta(3)
+                .output(dust,EndSteel,3)
+                .duration(800).EUt(VA[EV]).buildAndRegister();
+
+        MIXER_RECIPES.recipeBuilder()
                 .input(dust,Titanium,3)
                 .input(dust,Nickel,2)
                 .output(dust,Nitinol,11)

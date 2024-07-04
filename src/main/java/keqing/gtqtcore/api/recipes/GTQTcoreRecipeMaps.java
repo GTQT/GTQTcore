@@ -179,7 +179,6 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<SimpleRecipeBuilder> DISTILLATION_KETTLE;
     public static final RecipeMap<SimpleRecipeBuilder> NANOHYBRID;
     public static final RecipeMap<SimpleRecipeBuilder> PYROLYSIS_TOWER;
-    public static final RecipeMap<FusionRecipeBuilder> EFUSION_RECIPES;
     public static final RecipeMap<ComputationRecipeBuilder> LASER_ENGRAVING;
     public static final RecipeMap<ComputationRecipeBuilder> TD_PRINT_RECIPES;
     public static final RecipeMap<ComputationRecipeBuilder> PRECISION_SPRAYING;
@@ -195,6 +194,10 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<SimpleRecipeBuilder> SFM;
     public static final RecipeMap<PrimitiveRecipeBuilder>  COAGULATION_RECIPES ;
     public static final RecipeMap<SimpleRecipeBuilder> FLUIDIZED_BED;
+    public static final RecipeMap<TARGETRecipeBuilder> TARGET_CHAMBER;
+    public static final RecipeMap<TARGETRecipeBuilder> NUCLEOSYNTHESIS;
+    public static final RecipeMap<SimpleRecipeBuilder> BEAM_COLLECTION;
+    //靶室（启动耗能+散射截面）
 
     private GTQTcoreRecipeMaps() {}
     static {
@@ -204,7 +207,15 @@ public class GTQTcoreRecipeMaps {
         PROCESSING_MODE_C = new RecipeMapPseudoGroup<>("processing_mode_c", 2, 2, 1, 1, new SimpleRecipeBuilder(), RecipeMaps.LASER_ENGRAVER_RECIPES, RecipeMaps.AUTOCLAVE_RECIPES, RecipeMaps.FLUID_SOLIDFICATION_RECIPES, true);
         COAGULATION_RECIPES = new RecipeMap<>("coagulation_tank", 2, 1, 2, 0, new PrimitiveRecipeBuilder(), false);
 
-        EFUSION_RECIPES = new RecipeMap<>("efusion_reactor",0,0,2,1,new FusionRecipeBuilder(),false)
+        BEAM_COLLECTION = new RecipeMap<>("beam_collection",1,1,0,0,new SimpleRecipeBuilder(),false)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_COMPRESS, ProgressWidget.MoveType.HORIZONTAL)
+                .setSound(GTSoundEvents.ARC);
+
+        NUCLEOSYNTHESIS = new RecipeMap<>("nucleosynthesis",3,3,3,3,new TARGETRecipeBuilder(),false)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_COMPRESS, ProgressWidget.MoveType.HORIZONTAL)
+                .setSound(GTSoundEvents.ARC);
+
+        TARGET_CHAMBER = new RecipeMap<>("target_chamber",3,3,3,3,new TARGETRecipeBuilder(),false)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_COMPRESS, ProgressWidget.MoveType.HORIZONTAL)
                 .setSound(GTSoundEvents.ARC);
 

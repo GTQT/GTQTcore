@@ -42,6 +42,7 @@ public class GTQTRecipesManager {
         AlgaeChain.init();
         AirDistillation.init();
         SodiumChain.init();
+        ParticleAccelerator.init();
         CTABChain.init();
         DragonChain.init();
         CBDOPolycarbonateChain.init();

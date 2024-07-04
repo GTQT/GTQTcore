@@ -409,6 +409,7 @@ public class FirstDegreeMaterials {
                 .fluidPipeProperties(500, 400, true, true, true, false)
                 .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_DENSE, GENERATE_LONG_ROD, GENERATE_ROD, GENERATE_FRAME, GENERATE_BOLT_SCREW, GENERATE_FOIL, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_ROUND, GENERATE_SPRING)
                 .components(EnderPearl, 1, Iron, 1, RedstoneAlloy, 1)
+                .blast(2700, LOW)
                 .build();
 
         GTQTMaterials.ConductiveIron = new Material.Builder(getMaterialsId(), gregtechId("conductive_iron"))
@@ -417,6 +418,7 @@ public class FirstDegreeMaterials {
                 .fluidPipeProperties(500, 600, true, true, true, false)
                 .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_DENSE, GENERATE_LONG_ROD, GENERATE_ROD, GENERATE_FRAME, GENERATE_BOLT_SCREW, GENERATE_FOIL, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_ROUND, GENERATE_SPRING)
                 .components(Silver, 1, Iron, 1, RedstoneAlloy, 1)
+                .blast(2700, LOW)
                 .build();
 
         GTQTMaterials.EnergeticAlloy = new Material.Builder(getMaterialsId(), gregtechId("energetic_alloy"))
@@ -444,7 +446,8 @@ public class FirstDegreeMaterials {
                 .color(0x372719).iconSet(SHINY)
                 .fluidPipeProperties(500, 1200, true, true, true, false)
                 .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_DENSE, GENERATE_LONG_ROD, GENERATE_ROD, GENERATE_FRAME, GENERATE_BOLT_SCREW, GENERATE_FOIL, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_ROUND, GENERATE_SPRING)
-                .components(Gold, 1, Ash, 1)
+                .components(Gold, 1, Carbon, 1)
+                .blast(2700, LOW)
                 .build();
 
         GTQTMaterials.ElectricalSteel = new Material.Builder(getMaterialsId(), gregtechId("electrical_steel"))
