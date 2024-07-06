@@ -1,5 +1,7 @@
 package keqing.gtqtcore.api.unification.matreials;
 
+import gregtech.api.fluids.FluidBuilder;
+import gregtech.api.fluids.store.FluidStorageKeys;
 import gregtech.api.unification.material.properties.*;
 
 import static gregtech.api.unification.material.Materials.*;
@@ -195,7 +197,7 @@ public class GTQTMaterialFlagAddition {
         Silicon.addFlags(GENERATE_DENSE);
         RedAlloy.addFlags(GENERATE_RING,GENERATE_GEAR);
         Carbon.addFlags(GENERATE_ROD);
-        Graphite.setProperty(PropertyKey.FLUID, new FluidProperty());
+        Graphite.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID,new FluidBuilder()));
         Graphite.setProperty(PropertyKey.INGOT, new IngotProperty());
         Magnesium.addFlags(GENERATE_PLATE,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_ROTOR,GENERATE_ROD,GENERATE_SPRING,GENERATE_GEAR,GENERATE_FRAME);
 

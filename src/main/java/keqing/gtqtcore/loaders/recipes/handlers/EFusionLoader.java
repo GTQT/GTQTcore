@@ -4,7 +4,6 @@ import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.material.Materials;
 
 import static gregtech.api.GTValues.*;
-import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.EFUSION_RECIPES;
 
 public class EFusionLoader {
 

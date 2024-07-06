@@ -12,10 +12,13 @@ import keqing.gtqtcore.GTQTCore;
 import keqing.gtqtcore.common.items.GTQTMetaItems;
 import net.minecraft.util.ResourceLocation;
 
+import static gregtech.api.GTValues.*;
+import static gregtech.common.covers.CoverBehaviors.registerBehavior;
+
 public class GTQTCoverBehavior {
 
     public static void init() {
-
+        
         registerBehavior(new ResourceLocation(GTQTCore.MODID, "pump.ulv"), GTQTMetaItems.ELECTRIC_PUMP_ULV,
                 (def, tile, side) -> new CoverPump(def, tile, side, GTValues.ULV, 320));
         registerBehavior(new ResourceLocation(GTQTCore.MODID, "conveyor.ulv"), GTQTMetaItems.CONVEYOR_MODULE_ULV,

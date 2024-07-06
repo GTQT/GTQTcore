@@ -117,8 +117,13 @@ public class MetaTileEntityVacuumFreezer extends GTQTRecipeMapMultiblockOverwrit
                 return;
 
             if (tier == 0) {
-                resultOverclock[1] *= 5.0 / 4; // 25% slower with cupronickel (coilTier = 0)
-            } else resultOverclock[1] *= 2.0f / (tier + 1); // each coil above kanthal (coilTier = 1) is 50% faster
+                // 75% speed with cupronickel (coilTier = 0)
+                resultOverclock[1] = 4 * resultOverclock[1] / 3;
+            } else {
+                // each coil above kanthal (coilTier = 1) is 50% faster
+                resultOverclock[1] = resultOverclock[1] * 2 / (tier + 1);
+            }
+
 
             resultOverclock[1] = Math.max(1, resultOverclock[1]);
         }

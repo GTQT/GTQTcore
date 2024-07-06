@@ -75,7 +75,7 @@ import static keqing.gtqtcore.api.unification.GTQTMaterials.LiquidNitrogen;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.ALPHA;
 
 public class MetaTileEntityParticleAccelerator extends GTQTRecipeMapMultiblockController implements IOpticalComputationReceiver {
-    private EnergyContainerList inputEnergyContainers;
+
     private IOpticalComputationProvider computationProvider;
     public IOpticalComputationProvider getComputationProvider() {
         return this.computationProvider;
@@ -371,6 +371,10 @@ public class MetaTileEntityParticleAccelerator extends GTQTRecipeMapMultiblockCo
         time++;
         if(time==20) {
             time=0;
+            //质子
+            //氘
+            //氚
+            //阿法粒子
             if (id == 1) return new ItemStack(ALPHA.getMetaItem(), amount, 2500);
             if (id == 2) return new ItemStack(GTQTMetaItems.ELECTRON.getMetaItem(), amount, 2531);
             if (id == 3) return new ItemStack(GTQTMetaItems.PHOTON.getMetaItem(), amount, 2547);
@@ -393,6 +397,8 @@ public class MetaTileEntityParticleAccelerator extends GTQTRecipeMapMultiblockCo
         return false;
     }
     public void update() {
+        super.update();
+        if (getWorld().isRemote)
         if(shuliu&&this.getRecipeMap() == BEAM_COLLECTION)
         {
             getParticle(3,0,0);
@@ -561,10 +567,7 @@ public class MetaTileEntityParticleAccelerator extends GTQTRecipeMapMultiblockCo
     }
     @Override
     protected void formStructure(PatternMatchContext context) {
-        long energyStored = this.energyContainer.getEnergyStored();
         super.formStructure(context);
-        ((EnergyContainerHandler)this.energyContainer).setEnergyStored(energyStored);
-
         List<IOpticalComputationHatch> providers = this.getAbilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION);
         if (providers != null && providers.size() >= 1) {
             this.computationProvider = (IOpticalComputationProvider)providers.get(0);
