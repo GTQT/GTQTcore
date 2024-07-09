@@ -40,6 +40,7 @@ public class GTQTMetaBlocks {
     public static GTQTNuclearFusion NUCLEAR_FUSION;
     public static GTQTRoad ROAD;
     public static GTQTKQCC KQCC;
+    public static GCYLCleanroomCasing GCYL_CLEANROOM_CASING;
     public static GTQTPowerSupply POWER;
     public static BlockPCBFactoryCasing PCB_FACTORY_CASING;
     public static GTQTBlockGlassCasing GLASS_CASING;
@@ -74,6 +75,8 @@ public class GTQTMetaBlocks {
         QUANTUM_CONSTRAINT_CASING.setRegistryName("quantum_force_transformer_casing");
         COMPONENT_ASSEMBLY_LINE = new GTQTBlockComponentAssemblyLineCasing();
         COMPONENT_ASSEMBLY_LINE.setRegistryName("component_assembly_line_casing");
+        GCYL_CLEANROOM_CASING = new GCYLCleanroomCasing();
+        GCYL_CLEANROOM_CASING.setRegistryName("gtqtcore_cleanroom_casing");
         ISA_CASING = new GTQTIsaCasing();
         ISA_CASING.setRegistryName("isa_casing");
         ACTIVE_UNIQUE_CASING = new BlockActiveUniqueCasing();
@@ -137,6 +140,7 @@ public class GTQTMetaBlocks {
         registerItemModel(TURBINE_CASING1);
         registerItemModel(QUANTUM_CONSTRAINT_CASING);
         registerItemModel(COMPONENT_ASSEMBLY_LINE);
+        registerItemModel(GCYL_CLEANROOM_CASING);
         registerItemModel(ISA_CASING);
         registerItemModel(COMPRESSED_FUSION_REACTOR);
         registerItemModel(ELECTRON_MICROSCOPE);

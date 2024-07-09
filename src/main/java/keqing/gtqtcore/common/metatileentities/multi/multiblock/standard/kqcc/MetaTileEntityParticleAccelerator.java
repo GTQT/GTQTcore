@@ -44,6 +44,7 @@ import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.recipes.properties.EUToStartProperty;
 import keqing.gtqtcore.api.recipes.properties.PAProperty;
 import keqing.gtqtcore.api.recipes.properties.ScatteringProperty;
+import keqing.gtqtcore.api.utils.GTQTLog;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTParticleAccelerator;
@@ -72,7 +73,7 @@ import static gregtech.api.recipes.RecipeMaps.ASSEMBLER_RECIPES;
 import static gregtech.api.unification.material.Materials.Lava;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.LiquidNitrogen;
-import static keqing.gtqtcore.common.items.GTQTMetaItems.ALPHA;
+import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 
 public class MetaTileEntityParticleAccelerator extends GTQTRecipeMapMultiblockController implements IOpticalComputationReceiver {
 
@@ -86,9 +87,9 @@ public class MetaTileEntityParticleAccelerator extends GTQTRecipeMapMultiblockCo
 
     private int Mode;        //加速 稳定 减速模式
 
-    Boolean shuliu;
-    Boolean bashi;
-    Boolean hehecheng;
+    boolean shuliu;
+    boolean bashi;
+    boolean hehecheng;
 
     int time;
     //粒子加速 基础
@@ -375,9 +376,10 @@ public class MetaTileEntityParticleAccelerator extends GTQTRecipeMapMultiblockCo
             //氘
             //氚
             //阿法粒子
-            if (id == 1) return new ItemStack(ALPHA.getMetaItem(), amount, 2500);
-            if (id == 2) return new ItemStack(GTQTMetaItems.ELECTRON.getMetaItem(), amount, 2531);
-            if (id == 3) return new ItemStack(GTQTMetaItems.PHOTON.getMetaItem(), amount, 2547);
+            if (id == 1) return new ItemStack(PROTON.getMetaItem(), amount, 2552);
+            if (id == 2) return new ItemStack(DEUTERON.getMetaItem(), amount, 2529);
+            if (id == 3) return new ItemStack(TRITON.getMetaItem(), amount, 2561);
+            if (id == 4) return new ItemStack(ALPHA.getMetaItem(), amount, 2500);
         }
         return null;
     }
@@ -386,25 +388,28 @@ public class MetaTileEntityParticleAccelerator extends GTQTRecipeMapMultiblockCo
     {
         if (GTUtility.getMetaTileEntity(this.getWorld(), this.getPos().add(x, y, z)) instanceof MetaTileEntity) {
             MetaTileEntity mte = GTUtility.getMetaTileEntity(this.getWorld(), this.getPos().add(x, y, z));
-            int tier=((MetaTileEntityParticleAcceleratorIO) mte).tier;
-            if (mte instanceof MetaTileEntityParticleAcceleratorIO SimpleMachineMetaTileEntity) {
-                if(SimpleMachineMetaTileEntity.isActive()) if(((MetaTileEntityParticleAcceleratorIO) mte).circuit==1) GTTransferUtils.insertItem(this.outputInventory, GTToutput(1,tier), false);
-                if(SimpleMachineMetaTileEntity.isActive()) if(((MetaTileEntityParticleAcceleratorIO) mte).circuit==2) GTTransferUtils.insertItem(this.outputInventory, GTToutput(2,tier), false);
-                if(SimpleMachineMetaTileEntity.isActive()) if(((MetaTileEntityParticleAcceleratorIO) mte).circuit==3) GTTransferUtils.insertItem(this.outputInventory, GTToutput(3,tier), false);
+            GTQTLog.logger.info("duide");
+            if (mte instanceof MetaTileEntityParticleAcceleratorIO)
+            {
+                GTQTLog.logger.info("wozaizheli");
+                int tier= ((MetaTileEntityParticleAcceleratorIO) mte).tier;
+                if(mte.isActive()&&((MetaTileEntityParticleAcceleratorIO) mte).circuit==1) GTTransferUtils.insertItem(this.outputInventory, GTToutput(((MetaTileEntityParticleAcceleratorIO) mte).circuit,tier), false);
+
                 return true;
             }
+            else  GTQTLog.logger.info("budui");
         }
         return false;
     }
     public void update() {
         super.update();
-        if (getWorld().isRemote)
+        if (!isStructureFormed()) return;
         if(shuliu&&this.getRecipeMap() == BEAM_COLLECTION)
         {
-            getParticle(3,0,0);
-            getParticle(-3,0,0);
-            getParticle(0,0,3);
-            getParticle(0,0,-3);
+            getParticle(0,2,0);
+            //getParticle(-3,0,0);
+            //getParticle(0,0,3);
+            //getParticle(0,0,-3);
         }
         else {
             long energyToDrain = GTValues.VA[EV];
@@ -512,10 +517,10 @@ public class MetaTileEntityParticleAccelerator extends GTQTRecipeMapMultiblockCo
         {
             textList.add(new TextComponentTranslation("束流收集模式启动"));
 
-            textList.add(new TextComponentTranslation("束流IO %s",getParticle(3,0,0)));
-            textList.add(new TextComponentTranslation("束流IO %s",getParticle(-3,0,0)));
-            textList.add(new TextComponentTranslation("束流IO %s",getParticle(0,0,3)));
-            textList.add(new TextComponentTranslation("束流IO %s",getParticle(0,0,-3)));
+            textList.add(new TextComponentTranslation("束流IO %s",getParticle(0,2,0)));
+            //textList.add(new TextComponentTranslation("束流IO %s",getParticle(-3,0,0)));
+            //textList.add(new TextComponentTranslation("束流IO %s",getParticle(0,0,3)));
+            //textList.add(new TextComponentTranslation("束流IO %s",getParticle(0,0,-3)));
         }
         /*
         if(Mode==1) textList.add(new TextComponentTranslation("gtqtcore.pa.mode1",angle,speed/100000));

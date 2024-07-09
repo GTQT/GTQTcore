@@ -4233,6 +4233,34 @@ metaitem.debug.structure_writer.ex=无
 metaitem.debug.structure_writer.structural_scale=结构规模： X:%s  Y:%s  Z:%s
 metaitem.debug.structure_builder.name=多方块构建工具
 
+gtqtcore.machine.mega_cleanroom.name=大型洁净室（LCF）
+gtqtcore.machine.cleanroom.tooltip.1=§b尺寸：§f21x21x10至101x101x101
+gtqtcore.machine.cleanroom.tooltip.2=§c这台多方块可能会导致严重的性能问题！
+gtqtcore.machine.cleanroom.tooltip.3=§c为了提高性能，多块仅在成型和生成世界时检查其结构模式。
+gtqtcore.machine.cleanroom.tooltip.7=§a您可以使用螺丝刀强制更新！每次添加新机器时都必须这样做！
+gtqtcore.machine.cleanroom.tooltip.4=§c§l不要试图绕过成型检测！§r§c这样做会导致多块在加载到世界上时不断检查其结构，导致主要的TPS滞后直到你完成修复多方块结构。
+gtqtcore.machine.cleanroom.tooltip.5=§c§l如果对多块进行更改，请确保结构有效！
+gtqtcore.machine.cleanroom.tooltip.6=§a如果你遇到任何问题可尝试重新放置控制器
+gtqtcore.machine.cleanroom.screwdriver=更新的结构部件和洁净室内的机器。
+gtqtcore.recipe.cleanroom_iso_3.display_name=ISO 3洁净室
+gtqtcore.recipe.cleanroom_iso_2.display_name=ISO 2洁净室
+gtqtcore.recipe.cleanroom_iso_1.display_name=ISO 1洁净室
+gtqtcore.recipe.cleanroom_iso_0.display_name=ISO 0洁净室
+tile.cleanroom_casing.filter_casing_iso_3.name=ISO 3过滤器外壳
+tile.cleanroom_casing.filter_iso_3.tooltip=创建§aISO 3规范§7环境
+tile.cleanroom_casing.filter_casing_iso_2.name=ISO 2过滤器外壳
+tile.cleanroom_casing.filter_iso_2.tooltip=创建§aISO 2规范§7环境
+tile.cleanroom_casing.filter_casing_iso_1.name=ISO 1过滤器外壳
+tile.cleanroom_casing.filter_iso_1.tooltip=创建§aISO 1规范§7环境
+tile.cleanroom_casing.filter_casing_iso_0.name=ISO 0过滤器外壳
+tile.cleanroom_casing.filter_iso_0.tooltip=创建§aISO 0规范§7环境
+tile.cleanroom_casing.warning=只能在大型清洁设施中使用！
+
+gtqtcore.machine.maintenance_hatch_sterile_cleanroom_auto.name=自动无菌过滤维护舱口
+gtqtcore.machine.maintenance_hatch_iso_3_cleanroom_auto.name=ISO 3自动过滤维护舱口
+gtqtcore.machine.maintenance_hatch_iso_2_cleanroom_auto.name=ISO 2自动过滤维护舱口
+gtqtcore.machine.maintenance_hatch_iso_1_cleanroom_auto.name=ISO 1自动过滤维护舱口
+
 #  Tools
 gt.tool.class.bending_cylinder=弯曲绕筒
 gt.tool.class.small_bending_cylinder=小型弯曲绕筒
