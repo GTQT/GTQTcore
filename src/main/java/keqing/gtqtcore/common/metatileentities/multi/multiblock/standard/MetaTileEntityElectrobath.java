@@ -1,5 +1,6 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
+import codechicken.lib.raytracer.CuboidRayTraceResult;
 import gregtech.api.GTValues;
 import gregtech.api.capability.IMultipleTankHandler;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
@@ -30,9 +31,12 @@ import keqing.gtqtcore.api.recipes.properties.ELEProperties;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
@@ -45,6 +49,7 @@ import java.util.List;
 
 import static gregtech.api.GTValues.VA;
 import static gregtech.api.unification.material.Materials.HydrochloricAcid;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.EleAcid;
 
 public class MetaTileEntityElectrobath extends GTQTRecipeMapMultiblockOverwrite {
 
@@ -56,6 +61,12 @@ public class MetaTileEntityElectrobath extends GTQTRecipeMapMultiblockOverwrite 
     private int clean=1000000;
     private int eu=10;
 
+    public boolean onScrewdriverClick(EntityPlayer playerIn, EnumHand hand, EnumFacing facing, CuboidRayTraceResult hitResult) {
+        if(eu<=10) eu++;
+        else eu=1;
+        playerIn.sendMessage(new TextComponentTranslation("电流效率：%s tick",eu));
+        return true;
+    }
     @Override
     protected void addWarningText(List<ITextComponent> textList) {
         super.addWarningText(textList);
@@ -71,6 +82,7 @@ public class MetaTileEntityElectrobath extends GTQTRecipeMapMultiblockOverwrite 
         data.setInteger("modern", modern);
         data.setInteger("casingTier", casingTier);
         data.setInteger("clean", clean);
+        data.setInteger("eu", eu);
         return super.writeToNBT(data);
     }
     @Override
@@ -79,6 +91,7 @@ public class MetaTileEntityElectrobath extends GTQTRecipeMapMultiblockOverwrite 
         modern = data.getInteger("modern");
         casingTier = data.getInteger("casingTier");
         clean = data.getInteger("clean");
+        eu = data.getInteger("eu");
     }
 
     @Override
@@ -187,7 +200,7 @@ public class MetaTileEntityElectrobath extends GTQTRecipeMapMultiblockOverwrite 
         if(modern==1) textList.add(new TextComponentTranslation("gtqtcore.tire2",tier));
         textList.add(new TextComponentTranslation("gtqtcore.parr",ParallelNum,ParallelLim));
         if (getInputFluidInventory() != null) {
-            FluidStack STACK = getInputFluidInventory().drain(HydrochloricAcid.getFluid(Integer.MAX_VALUE), false);
+            FluidStack STACK = getInputFluidInventory().drain(EleAcid.getFluid(Integer.MAX_VALUE), false);
             int liquidOxygenAmount = STACK == null ? 0 : STACK.amount;
             textList.add(new TextComponentTranslation("gtqtcore.multiblock.ele.amount", TextFormattingUtil.formatNumbers((liquidOxygenAmount))));
         }
@@ -284,7 +297,7 @@ public class MetaTileEntityElectrobath extends GTQTRecipeMapMultiblockOverwrite 
 
     protected class ELELogic extends MultiblockRecipeLogic {
 
-        FluidStack COLD_STACK = HydrochloricAcid.getFluid(1);
+        FluidStack COLD_STACK = EleAcid.getFluid(1);
 
         @Override
         public void update() {

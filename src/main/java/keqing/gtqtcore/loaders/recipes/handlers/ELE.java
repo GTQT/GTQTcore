@@ -24,6 +24,21 @@ import static keqing.gtqtcore.common.block.blocks.GTQTStepper.CasingType.*;
 
 public class ELE {
     public static void init() {
+        RecipeMaps.CHEMICAL_RECIPES.recipeBuilder()
+                .EUt(30).duration(200)
+                .input(dust, Potassium, 1)
+                .fluidInputs(Chlorine.getFluid(1000))
+                .fluidOutputs(PotassiumChloride.getFluid(1000))
+                .buildAndRegister();
+
+        RecipeMaps.CHEMICAL_RECIPES.recipeBuilder()
+                .EUt(30).duration(800)
+                .fluidInputs(PotassiumChloride.getFluid(1000))
+                .fluidInputs(SodiumHydroxideSolution.getFluid(1000))
+                .input(dust,SodiumBisulfate, 1)
+                .fluidOutputs(EleAcid.getFluid(2000))
+                .buildAndRegister();
+
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
                 .EUt(120).duration(800)
                 .input(plate, Platinum, 8)

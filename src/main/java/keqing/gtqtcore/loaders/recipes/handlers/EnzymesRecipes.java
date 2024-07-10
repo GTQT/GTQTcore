@@ -216,7 +216,7 @@ public class EnzymesRecipes {
         //生物缓冲剂
         CHEMICAL_PLANT.recipeBuilder()
                 .fluidInputs(CHES.getFluid(1000))
-                .fluidInputs(SodiumHydroxide.getFluid(1440))
+                .fluidInputs(SodiumHydroxideSolution.getFluid(1000))
                 .fluidOutputs(Ethanesulphonate.getFluid(1000))
                 .recipeLevel(3)
                 .duration(400).EUt(VA[HV]).buildAndRegister();

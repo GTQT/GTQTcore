@@ -991,12 +991,6 @@ public class GTQTTJFirstDegreeMaterials {
                 .colorAverage()
                 .build();
 
-        PerchloricAcid = new Material.Builder(25170, gregtechId("perchloric_acid"))
-                .fluid()
-                .components(Hydrogen, 1, Chlorine, 1, Oxygen, 4)
-                .colorAverage()
-                .build();
-
         Phenylhydrazine = new Material.Builder(25171, gregtechId("phenylhydrazine"))
                 .fluid()
                 .components(Carbon, 6, Hydrogen, 8, Nitrogen, 2)

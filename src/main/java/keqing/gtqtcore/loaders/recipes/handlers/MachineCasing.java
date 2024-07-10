@@ -367,8 +367,8 @@ public class MachineCasing {
 
         ASSEMBLER_RECIPES.recipeBuilder().duration(200).EUt(30)
                 .input(plate,Steel, 4)
-                .input(gear,Steel, 1)
-                .input(frameGt,Talonite, 1)
+                .input(gear,Copper, 1)
+                .input(frameGt,Steel, 1)
                 .fluidInputs(Polyethylene.getFluid(576))
                 .circuitMeta(6)
                 .outputs(GTQTMetaBlocks.TURBINE_CASING1.getItemVariant(CLARIFIER_CASING,4))

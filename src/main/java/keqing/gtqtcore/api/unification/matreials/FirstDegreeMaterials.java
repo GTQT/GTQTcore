@@ -3807,5 +3807,16 @@ public class FirstDegreeMaterials {
                 .build()
                 .setFormula("Br(H2O)", true);
 
+        GTQTMaterials.EleAcid = new Material.Builder(getMaterialsId(), gregtechId("ele_acid"))
+                .fluid()
+                .color(0xe04800)
+                .build();
+
+        GTQTMaterials.PotassiumChloride = new Material.Builder(getMaterialsId(), gregtechId("potassium_chloride"))
+                .fluid()
+                .components(Potassium,1,Chlorine,1)
+                .color(0xe04800)
+                .build();
+
     }
 }

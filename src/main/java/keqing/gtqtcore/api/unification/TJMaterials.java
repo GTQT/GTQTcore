@@ -196,7 +196,6 @@ public class TJMaterials {
     public static Material SodiumAcetate;
     public static Material DehydrogenationCatalyst;
     public static Material SodiumPerchlorate;
-    public static Material PerchloricAcid;
     public static Material Phenylhydrazine;
     public static Material BenzoylChloride;
     public static Material TriphenylMethoxytriazoylPerchlorate;

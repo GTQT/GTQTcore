@@ -146,7 +146,7 @@ dependencies {
     implementation rfg.deobf(files("libs/CTM-MC1.12.2-1.0.2.31.jar"))
     implementation rfg.deobf("curse.maven:code-chicken-lib-1-8-242818:2779848")
     implementation rfg.deobf(files("libs/GregicalityMultiblocks-1.2.9.jar"))
-    implementation rfg.deobf(files("libs/gregtech-1.12.2-2.8.9-beta.jar"))
+    implementation rfg.deobf(files("libs/gregtech-1.12.2-2.8.10-beta.jar"))
     implementation rfg.deobf(files("libs/!mixinbooter-8.9.jar"))
     implementation rfg.deobf(files("libs/ae2-uel-v0.56.6.jar"))
     implementation rfg.deobf(files("libs/gregtechfoodoption-1.12.2-1.11.0.jar"))

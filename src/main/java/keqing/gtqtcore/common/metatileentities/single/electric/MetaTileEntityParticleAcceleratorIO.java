@@ -1,6 +1,8 @@
 package keqing.gtqtcore.common.metatileentities.single.electric;
 
+import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.SimpleMachineMetaTileEntity;
+import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.client.renderer.ICubeRenderer;
 import net.minecraft.util.ResourceLocation;
@@ -16,4 +18,10 @@ public class MetaTileEntityParticleAcceleratorIO extends SimpleMachineMetaTileEn
         super.update();
         circuit=circuitInventory.getCircuitValue();
     }
+
+    @Override
+    public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
+        return new MetaTileEntityParticleAcceleratorIO(this.metaTileEntityId, this.workable.getRecipeMap(), this.renderer, this.getTier(),this.hasFrontFacing());
+    }
+
 }

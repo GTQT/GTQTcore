@@ -406,10 +406,10 @@ public class MetaTileEntityParticleAccelerator extends GTQTRecipeMapMultiblockCo
         if (!isStructureFormed()) return;
         if(shuliu&&this.getRecipeMap() == BEAM_COLLECTION)
         {
-            getParticle(0,2,0);
-            //getParticle(-3,0,0);
-            //getParticle(0,0,3);
-            //getParticle(0,0,-3);
+            getParticle(3,0,0);
+            getParticle(-3,0,0);
+            getParticle(0,0,3);
+            getParticle(0,0,-3);
         }
         else {
             long energyToDrain = GTValues.VA[EV];
@@ -517,10 +517,11 @@ public class MetaTileEntityParticleAccelerator extends GTQTRecipeMapMultiblockCo
         {
             textList.add(new TextComponentTranslation("束流收集模式启动"));
 
-            textList.add(new TextComponentTranslation("束流IO %s",getParticle(0,2,0)));
-            //textList.add(new TextComponentTranslation("束流IO %s",getParticle(-3,0,0)));
-            //textList.add(new TextComponentTranslation("束流IO %s",getParticle(0,0,3)));
-            //textList.add(new TextComponentTranslation("束流IO %s",getParticle(0,0,-3)));
+
+            textList.add(new TextComponentTranslation("束流IO %s",getParticle(3,0,0)));
+            textList.add(new TextComponentTranslation("束流IO %s",getParticle(-3,0,0)));
+            textList.add(new TextComponentTranslation("束流IO %s",getParticle(0,0,3)));
+            textList.add(new TextComponentTranslation("束流IO %s",getParticle(0,0,-3)));
         }
         /*
         if(Mode==1) textList.add(new TextComponentTranslation("gtqtcore.pa.mode1",angle,speed/100000));

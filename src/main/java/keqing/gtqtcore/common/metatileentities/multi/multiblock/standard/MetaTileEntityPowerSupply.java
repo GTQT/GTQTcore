@@ -48,7 +48,7 @@ import java.util.Map;
 import static gregtech.api.GTValues.VA;
 import static keqing.gtqtcore.common.block.blocks.GTQTPowerSupply.SupplyType.*;
 
-public class MetaTileEntityPowerSupply extends MultiblockWithDisplayBase  {
+public class  MetaTileEntityPowerSupply extends MultiblockWithDisplayBase  {
     int tier=10;//基础电量缓存等级
     int time;
     int eu=0;
