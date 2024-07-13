@@ -10,6 +10,8 @@ import net.minecraft.util.ResourceLocation;
 public class MetaTileEntityParticleAcceleratorIO extends SimpleMachineMetaTileEntity {
     public int circuit;
     public int tier;
+    public int time;
+    public boolean output;
     public MetaTileEntityParticleAcceleratorIO(ResourceLocation metaTileEntityId, RecipeMap<?> recipeMap, ICubeRenderer renderer, int tier, boolean hasFrontFacing) {
         super(metaTileEntityId, recipeMap, renderer, tier, hasFrontFacing);
         this.tier=tier;
@@ -17,6 +19,12 @@ public class MetaTileEntityParticleAcceleratorIO extends SimpleMachineMetaTileEn
     public void update() {
         super.update();
         circuit=circuitInventory.getCircuitValue();
+        time++;
+        if(isActive()&&time == 1200) {
+            output = true;
+            time = 0;
+        }
+        else output=false;
     }
 
     @Override

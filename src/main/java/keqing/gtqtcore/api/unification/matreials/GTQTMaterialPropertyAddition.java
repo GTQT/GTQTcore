@@ -18,6 +18,7 @@ import static gregtech.integration.crafttweaker.material.MaterialPropertyExpansi
 import static gregtech.integration.groovy.MaterialPropertyExpansion.addLiquid;
 import static gregtech.integration.groovy.MaterialPropertyExpansion.addPlasma;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.TitanSteel;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.Zircon;
 
 public class GTQTMaterialPropertyAddition {
     public static void init() {
@@ -28,6 +29,12 @@ public class GTQTMaterialPropertyAddition {
         PalladiumRaw.setFormula("PdCl2?");
         NetherStar.setFormula("PtDc?KQ", true);
         //  Elements
+        Sulfur.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID,new FluidBuilder()));
+        Zircon.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID,new FluidBuilder()));
+        Erbium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID,new FluidBuilder()));
+        Ytterbium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID,new FluidBuilder()));
+        Hafnium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID,new FluidBuilder()));
+        Terbium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID,new FluidBuilder()));
         Calcium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID,new FluidBuilder()));
         Dubnium.setProperty(PropertyKey.INGOT, new IngotProperty());
         Dubnium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID,new FluidBuilder()));

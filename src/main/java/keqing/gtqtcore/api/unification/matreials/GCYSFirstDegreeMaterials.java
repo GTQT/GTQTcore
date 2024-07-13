@@ -722,6 +722,7 @@ public class GCYSFirstDegreeMaterials {
 
         Lithium7Hydroxide = new Material.Builder(3595, gregtechId("lithium_7_hydroxide"))
                 .dust()
+                .fluid()
                 .color(0xAEAACA).iconSet(MaterialIconSet.FINE)
                 .flags(DECOMPOSITION_BY_ELECTROLYZING)
                 .components(Lithium7, 1, Oxygen, 1, Hydrogen, 1)

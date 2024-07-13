@@ -30,14 +30,14 @@ public class GCYSElementMaterials {
     }
     public static void init() {
         Lithium6 = new Material.Builder(getMaterialsId(), gregtechId("lithium_6"))
-                .ingot()
+                .ingot().fluid()
                 .color(0xE6E1FF)
                 .flags(GENERATE_PLATE, GENERATE_FOIL)
                 .element(GTQTElements.Li6)
                 .build();
 
         Lithium7 = new Material.Builder(getMaterialsId(), gregtechId("lithium_7"))
-                .ingot()
+                .ingot().fluid()
                 .color(0xE1DCFF).iconSet(METALLIC)
                 .element(GTQTElements.Li7)
                 .build();

@@ -33,24 +33,34 @@ import net.minecraftforge.common.capabilities.Capability;
 import java.util.List;
 
 import static gregtech.api.GTValues.VA;
+import static keqing.gtqtcore.common.items.GTQTMetaItems.TIME_BOTTLE;
 
 public class TimeBottleBehavior implements IItemBehaviour {
     public TimeBottleBehavior(){}
 
     private int time;
-
+    private int maxTime=20*3600*24;
     public void onUpdate(ItemStack itemStack, Entity entity) {
-        if (itemStack.hasTagCompound()) {
-            NBTTagCompound compound = itemStack.getTagCompound();
-            time = compound.getInteger("storedTime");
-            time++;
-            compound.setInteger("storedTime", time);
-        }
-        else
+        if (entity instanceof EntityPlayer)
         {
-            NBTTagCompound compound = new NBTTagCompound();
-            compound.setInteger("storedTime", time);
-            itemStack.setTagCompound(compound);
+            EntityPlayer player = (EntityPlayer) entity;
+            for (int i = 0; i < player.inventory.getSizeInventory(); i++) {
+                ItemStack invStack = player.inventory.getStackInSlot(i);
+
+                if (invStack.getItem() == TIME_BOTTLE.getMetaItem()) {
+                    if (itemStack.hasTagCompound()) {
+                        NBTTagCompound compound = itemStack.getTagCompound();
+                        time = compound.getInteger("storedTime");
+                        if(time<maxTime
+                        )time++;
+                        compound.setInteger("storedTime", time);
+                    } else {
+                        NBTTagCompound compound = new NBTTagCompound();
+                        compound.setInteger("storedTime", time);
+                        itemStack.setTagCompound(compound);
+                    }
+                }
+            }
         }
     }
     public void addInformation(ItemStack stack, List<String> lines) {

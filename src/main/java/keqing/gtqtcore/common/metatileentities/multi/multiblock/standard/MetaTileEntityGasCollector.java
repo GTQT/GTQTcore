@@ -1,6 +1,10 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
+import gregtech.api.gui.GuiTextures;
+import gregtech.api.gui.Widget;
+import gregtech.api.gui.widgets.ClickButtonWidget;
+import gregtech.api.gui.widgets.WidgetGroup;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
@@ -19,24 +23,47 @@ import gregtech.common.blocks.BlockBoilerCasing;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.core.sound.GTSoundEvents;
+import it.unimi.dsi.fastutil.ints.IntList;
+import it.unimi.dsi.fastutil.ints.IntListIterator;
 import it.unimi.dsi.fastutil.ints.IntLists;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class MetaTileEntityGasCollector extends RecipeMapMultiblockController {
 
+    boolean gasModel;
+
+    @Override
+    public NBTTagCompound writeToNBT(NBTTagCompound data) {
+        data.setBoolean("gasModel", gasModel);
+
+
+        return super.writeToNBT(data);
+    }
+    @Override
+    public void readFromNBT(NBTTagCompound data) {
+        super.readFromNBT(data);
+        gasModel = data.getBoolean("gasModel");
+    }
     public MetaTileEntityGasCollector(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, RecipeMaps.GAS_COLLECTOR_RECIPES);
         this.recipeMapWorkable = new GasCollectorWorkableHandler(this);
@@ -53,29 +80,44 @@ public class MetaTileEntityGasCollector extends RecipeMapMultiblockController {
         }
 
         @Override
-        public void setMaxProgress(int maxProgress)
-        {
-            this.maxProgressTime = maxProgress/clean_tier;
+        public boolean checkRecipe( Recipe recipe) {
+            return ((MetaTileEntityGasCollector)this.metaTileEntity).checkRecipe(recipe) && super.checkRecipe(recipe);
         }
+    }
+    protected boolean checkRecipe( Recipe recipe) {
+        IntListIterator var2 = ((IntList)recipe.getProperty(GasCollectorDimensionProperty.getInstance(), IntLists.EMPTY_LIST)).iterator();
+
+        int dimension;
+        do {
+            if (!var2.hasNext()) {
+                return false;
+            }
+
+            dimension = (Integer)var2.next();
+            if(dimension==0&&gasModel)return true;
+        }
+        while(dimension != this.getWorld().provider.getDimension());
+
+        return true;
+    }
+    @Override
+    @Nonnull
+    protected Widget getFlexButton(int x, int y, int width, int height) {
+        WidgetGroup group = new WidgetGroup(x, y, width, height);
+        group.addWidget(new ClickButtonWidget(0, 0, 18, 18, "", this::gasModel)
+                .setButtonTexture(GuiTextures.BUTTON_THROTTLE_MINUS)
+                .setTooltipText("普适集气模式"));
+        return group;
+    }
+
+    private void gasModel(Widget.ClickData clickData) {
+        this.gasModel =!gasModel;
     }
     private int clean_tier;
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityGasCollector(metaTileEntityId);
     }
-
-    protected boolean checkRecipe( Recipe recipe) {
-        for (int dimension : recipe.getProperty(GasCollectorDimensionProperty.getInstance(), IntLists.EMPTY_LIST)) {
-            if (dimension == 0) {
-                return true;
-            }
-            if (dimension == this.getWorld().provider.getDimension()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
 
     @Nonnull
     @Override
@@ -106,6 +148,11 @@ public class MetaTileEntityGasCollector extends RecipeMapMultiblockController {
                 0);
     }
 
+    @Override
+    protected void addDisplayText(List<ITextComponent> textList) {
+        super.addDisplayText(textList);
+        textList.add(new TextComponentTranslation("普适集气：%s", gasModel));
+    }
     public IBlockState getIntakeState() {
         return MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.STEEL_PIPE);
     }
@@ -145,5 +192,12 @@ public class MetaTileEntityGasCollector extends RecipeMapMultiblockController {
         List<String> list = new ArrayList<>();
         list.add(I18n.format("可以在任何地方抽取空气！"));
         return list.toArray(new String[0]);
+    }
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void addInformation(ItemStack stack, @Nullable World world, @Nonnull List<String> tooltip, boolean advanced) {
+        super.addInformation(stack, world, tooltip, advanced);
+        tooltip.add(I18n.format("启动普适集气后可以在任何地方抽取空气"));
+        tooltip.add(I18n.format("升级过滤模块获取并行"));
     }
 }

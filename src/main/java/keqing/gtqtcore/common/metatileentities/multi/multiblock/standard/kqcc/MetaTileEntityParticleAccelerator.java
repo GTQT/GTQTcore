@@ -82,16 +82,31 @@ public class MetaTileEntityParticleAccelerator extends GTQTRecipeMapMultiblockCo
         return this.computationProvider;
     }
 
-    private float speed;       //速度
+    private double speed;       //速度
     private int angle;       //角度
 
-    private int Mode;        //加速 稳定 减速模式
+    private int Mode=1;        //加速 稳定 减速模式
 
     boolean shuliu;
     boolean bashi;
     boolean hehecheng;
 
-    int time;
+
+    @Override
+    public NBTTagCompound writeToNBT(NBTTagCompound data) {
+        data.setInteger("angle", angle);
+        data.setInteger("Mode", Mode);
+        data.setDouble("speed", speed);
+        return super.writeToNBT(data);
+    }
+    @Override
+    public void readFromNBT(NBTTagCompound data) {
+        super.readFromNBT(data);
+        angle = data.getInteger("angle");
+        Mode = data.getInteger("Mode");
+        speed = data.getDouble("speed");
+    }
+
     //粒子加速 基础
     //靶室  拓展1（直线）
     //核合成  拓展2（环形）
@@ -369,51 +384,48 @@ public class MetaTileEntityParticleAccelerator extends GTQTRecipeMapMultiblockCo
 
 
     public ItemStack GTToutput(int id,int amount) {
-        time++;
-        if(time==20) {
-            time=0;
             //质子
             //氘
             //氚
             //阿法粒子
-            if (id == 1) return new ItemStack(PROTON.getMetaItem(), amount, 2552);
-            if (id == 2) return new ItemStack(DEUTERON.getMetaItem(), amount, 2529);
-            if (id == 3) return new ItemStack(TRITON.getMetaItem(), amount, 2561);
-            if (id == 4) return new ItemStack(ALPHA.getMetaItem(), amount, 2500);
-        }
-        return null;
+        if (id == 1) return new ItemStack(PROTON.getMetaItem(), amount, 2552);
+        if (id == 2) return new ItemStack(DEUTERON.getMetaItem(), amount, 2529);
+        if (id == 3) return new ItemStack(TRITON.getMetaItem(), amount, 2561);
+        if (id == 4) return new ItemStack(ALPHA.getMetaItem(), amount, 2500);
+        return  ItemStack.EMPTY;
     }
 
     public boolean getParticle(int x,int y,int z)
     {
         if (GTUtility.getMetaTileEntity(this.getWorld(), this.getPos().add(x, y, z)) instanceof MetaTileEntity) {
             MetaTileEntity mte = GTUtility.getMetaTileEntity(this.getWorld(), this.getPos().add(x, y, z));
-            GTQTLog.logger.info("duide");
             if (mte instanceof MetaTileEntityParticleAcceleratorIO)
             {
-                GTQTLog.logger.info("wozaizheli");
-                int tier= ((MetaTileEntityParticleAcceleratorIO) mte).tier;
-                if(mte.isActive()&&((MetaTileEntityParticleAcceleratorIO) mte).circuit==1) GTTransferUtils.insertItem(this.outputInventory, GTToutput(((MetaTileEntityParticleAcceleratorIO) mte).circuit,tier), false);
-
+                if(((MetaTileEntityParticleAcceleratorIO) mte).output) {
+                    GTTransferUtils.insertItem(this.outputInventory, GTToutput(((MetaTileEntityParticleAcceleratorIO) mte).circuit, ((MetaTileEntityParticleAcceleratorIO) mte).tier), false);
+                }
                 return true;
             }
-            else  GTQTLog.logger.info("budui");
         }
         return false;
     }
     public void update() {
         super.update();
         if (!isStructureFormed()) return;
+        long energyToDrain = GTValues.VA[EV];
+        long resultEnergy = energyContainer.getEnergyStored() - energyToDrain;
+
         if(shuliu&&this.getRecipeMap() == BEAM_COLLECTION)
         {
-            getParticle(3,0,0);
-            getParticle(-3,0,0);
-            getParticle(0,0,3);
-            getParticle(0,0,-3);
+            if (resultEnergy >= 0L && resultEnergy <= energyContainer.getEnergyCapacity()) {
+                energyContainer.changeEnergy(-energyToDrain);
+                getParticle(3, 0, 0);
+                getParticle(-3, 0, 0);
+                getParticle(0, 0, 3);
+                getParticle(0, 0, -3);
+            }
         }
         else {
-            long energyToDrain = GTValues.VA[EV];
-            long resultEnergy = energyContainer.getEnergyStored() - energyToDrain;
             FluidStack HEAT_STACK = LiquidNitrogen.getFluid(d);
             //待机默认减速
             if (speed >= 0) {
@@ -438,7 +450,7 @@ public class MetaTileEntityParticleAccelerator extends GTQTRecipeMapMultiblockCo
             }
 
             //加速模式
-            if (Mode == 1) {
+            if (Mode == 3) {
                 IMultipleTankHandler inputTank = getInputFluidInventory();
                 if (speed < 99000) {
                     if (HEAT_STACK.isFluidStackIdentical(inputTank.drain(HEAT_STACK, false))) {
@@ -462,7 +474,7 @@ public class MetaTileEntityParticleAccelerator extends GTQTRecipeMapMultiblockCo
                 }
             }
             //减速模式
-            if (Mode == 3) {
+            if (Mode == 1) {
                 if (speed > 0) speed = speed - 20;
             }
         }
@@ -501,10 +513,12 @@ public class MetaTileEntityParticleAccelerator extends GTQTRecipeMapMultiblockCo
 
     private void incrementThresholdA(Widget.ClickData clickData) {
         this.angle = MathHelper.clamp(angle + 1, 0, 8);
+        speed=speed*0.8;
     }
 
     private void decrementThresholdA(Widget.ClickData clickData) {
         this.angle = MathHelper.clamp(angle - 1, 0, 8);
+        speed=speed*0.8;
     }
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
@@ -513,58 +527,57 @@ public class MetaTileEntityParticleAccelerator extends GTQTRecipeMapMultiblockCo
         {
             textList.add(new TextComponentTranslation("科研模式启动"));
         }
-        if(this.getRecipeMap() == BEAM_COLLECTION)
+        if(this.getRecipeMap() == BEAM_COLLECTION&&shuliu)
         {
             textList.add(new TextComponentTranslation("束流收集模式启动"));
 
-
-            textList.add(new TextComponentTranslation("束流IO %s",getParticle(3,0,0)));
-            textList.add(new TextComponentTranslation("束流IO %s",getParticle(-3,0,0)));
-            textList.add(new TextComponentTranslation("束流IO %s",getParticle(0,0,3)));
-            textList.add(new TextComponentTranslation("束流IO %s",getParticle(0,0,-3)));
+            if(getParticle(3,0,0))textList.add(new TextComponentTranslation("束流IO %s",getParticle(3,0,0)));
+            if(getParticle(-3,0,0)) textList.add(new TextComponentTranslation("束流IO %s",getParticle(-3,0,0)));
+            if(getParticle(0,0,3))textList.add(new TextComponentTranslation("束流IO %s",getParticle(0,0,3)));
+            if(getParticle(0,0,-3))textList.add(new TextComponentTranslation("束流IO %s",getParticle(0,0,-3)));
         }
-        /*
-        if(Mode==1) textList.add(new TextComponentTranslation("gtqtcore.pa.mode1",angle,speed/100000));
-        if(Mode==2) textList.add(new TextComponentTranslation("gtqtcore.pa.mode2",angle,speed/100000));
-        if(Mode==3) textList.add(new TextComponentTranslation("gtqtcore.pa.mode3",angle,speed/100000));
+        if((this.getRecipeMap() == NUCLEOSYNTHESIS&&bashi)||(this.getRecipeMap() == TARGET_CHAMBER&&hehecheng)) {
+            if (Mode == 0) textList.add(new TextComponentTranslation("初始化"));
+            if (Mode == 3) textList.add(new TextComponentTranslation("gtqtcore.pa.mode1", angle, (int)speed));
+            if (Mode == 2) textList.add(new TextComponentTranslation("gtqtcore.pa.mode2", angle, (int)speed));
+            if (Mode == 1) textList.add(new TextComponentTranslation("gtqtcore.pa.mode3", angle, (int)speed));
 
-
-        textList.add(new TextComponentTranslation("gtqtcore.pa.agp1"));
-        if(angle==1)textList.add(new TextComponentTranslation("gtqtcore.pa.ag1"));
-        else {
-            if (angle == 2) textList.add(new TextComponentTranslation("gtqtcore.pa.ag2"));
-                else
-                {
+            textList.add(new TextComponentTranslation("gtqtcore.pa.agp1"));
+            if (angle == 1) textList.add(new TextComponentTranslation("gtqtcore.pa.ag1"));
+            else {
+                if (angle == 2) textList.add(new TextComponentTranslation("gtqtcore.pa.ag2"));
+                else {
                     if (angle == 8) textList.add(new TextComponentTranslation("gtqtcore.pa.ag8"));
                     else textList.add(new TextComponentTranslation("gtqtcore.pa.agp2"));
                 }
             }
 
-        if(angle==0)textList.add(new TextComponentTranslation("gtqtcore.pa.ag0"));
-        else {
-            if (angle == 3) textList.add(new TextComponentTranslation("gtqtcore.pa.ag3"));
-            else {if (angle == 7) textList.add(new TextComponentTranslation("gtqtcore.pa.ag7"));
-            else textList.add(new TextComponentTranslation("gtqtcore.pa.agp3"));
-        }}
+            if (angle == 0) textList.add(new TextComponentTranslation("gtqtcore.pa.ag0"));
+            else {
+                if (angle == 3) textList.add(new TextComponentTranslation("gtqtcore.pa.ag3"));
+                else {
+                    if (angle == 7) textList.add(new TextComponentTranslation("gtqtcore.pa.ag7"));
+                    else textList.add(new TextComponentTranslation("gtqtcore.pa.agp3"));
+                }
+            }
 
-        if(angle==4)textList.add(new TextComponentTranslation("gtqtcore.pa.ag4"));
-        else {
-            if (angle == 5) textList.add(new TextComponentTranslation("gtqtcore.pa.ag5"));
-            else
-            {if (angle == 6) textList.add(new TextComponentTranslation("gtqtcore.pa.ag6"));
-            else textList.add(new TextComponentTranslation("gtqtcore.pa.agp4"));
-        }}
-        textList.add(new TextComponentTranslation("gtqtcore.pa.agp1"));
+            if (angle == 4) textList.add(new TextComponentTranslation("gtqtcore.pa.ag4"));
+            else {
+                if (angle == 5) textList.add(new TextComponentTranslation("gtqtcore.pa.ag5"));
+                else {
+                    if (angle == 6) textList.add(new TextComponentTranslation("gtqtcore.pa.ag6"));
+                    else textList.add(new TextComponentTranslation("gtqtcore.pa.agp4"));
+                }
+            }
+            textList.add(new TextComponentTranslation("gtqtcore.pa.agp1"));
 
-        textList.add(new TextComponentTranslation("gtqtcore.pa.level", coilLevel,casingTier,tubeTier));
+            if (getInputFluidInventory() != null) {
+                FluidStack STACK = getInputFluidInventory().drain(LiquidNitrogen.getFluid(Integer.MAX_VALUE), false);
+                int liquidOxygenAmount = STACK == null ? 0 : STACK.amount;
+                textList.add(new TextComponentTranslation("gtqtcore.multiblock.pa.amount", TextFormattingUtil.formatNumbers((liquidOxygenAmount))));
+            }
 
-        if (getInputFluidInventory() != null) {
-            FluidStack STACK = getInputFluidInventory().drain(Lava.getFluid(Integer.MAX_VALUE), false);
-            int liquidOxygenAmount = STACK == null ? 0 : STACK.amount;
-            textList.add(new TextComponentTranslation("gtqtcore.multiblock.pa.amount", TextFormattingUtil.formatNumbers((liquidOxygenAmount))));
         }
-
-        */
     }
 
     @Override

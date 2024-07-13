@@ -224,7 +224,7 @@ public class GTQTcoreRecipeMaps {
                 .setSlotOverlay(true, false, true, GuiTextures.DUST_OVERLAY)
                 .setSound(GTSoundEvents.MACERATOR);
 
-        PARTICLE_ACCELERATOR_RECIPES=new RecipeMapParticleAccelerator<>("pa", 2, 1, 2, 1, new ComputationRecipeBuilder(), false)
+        PARTICLE_ACCELERATOR_RECIPES=new RecipeMap<>("particle_accelerator", 3, 3, 3, 3, new ComputationRecipeBuilder(), false)
                 .setSound(GTSoundEvents.CHEMICAL_REACTOR);
 
         NEUTRON_ACTIVATOR=new RecipeMap<>("neutron_activator", 6, 6, 1, 1, new NeutronActivatorRecipeBuilder(), false)
