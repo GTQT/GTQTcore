@@ -75,6 +75,12 @@
         "textures": {
           "all": "gregtech:blocks/multiblock/isa_casing/round"
         }
+      },
+      "separator_rotor": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/isa_casing/separator_rotor"
+        }
       }
     }
   }

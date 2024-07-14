@@ -4,9 +4,11 @@ import gregtech.api.GTValues;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.SimpleGeneratorMetaTileEntity;
 import gregtech.api.metatileentity.SimpleMachineMetaTileEntity;
+import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.util.GTUtility;
+import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.common.blocks.BlockTurbineCasing;
 import gregtech.common.blocks.MetaBlocks;
@@ -25,14 +27,13 @@ import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.gcys.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.huge.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.kqcc.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.overwrite.*;
-import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.star.MetaTileEntityCryogenicFreezer;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.MetaTileEntityCryogenicFreezer;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.star.MetaTileEntityPlasmaForge;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.star.MetaTileEntityStarBiomimeticFactory;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.star.MetaTileEntityStarMixer;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.steam.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblockpart.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblockpart.MetaTileEntityDataAccessHatch;
-
 import keqing.gtqtcore.common.metatileentities.single.electric.MetaTileEntityBathCondenser;
 import keqing.gtqtcore.common.metatileentities.single.electric.MetaTileEntityLatexCollector;
 import keqing.gtqtcore.common.metatileentities.single.electric.MetaTileEntityParticleAcceleratorIO;
@@ -44,7 +45,6 @@ import java.util.function.IntPredicate;
 import java.util.function.IntSupplier;
 
 import static gregtech.api.GTValues.*;
-import static gregtech.api.util.GTUtility.genericGeneratorTankSizeFunction;
 import static gregtech.common.metatileentities.MetaTileEntities.*;
 import static gregtech.common.metatileentities.MetaTileEntities.registerMetaTileEntity;
 import static keqing.gtqtcore.api.GTQTValue.gtqtcoreId;
@@ -120,6 +120,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityStarMixer STAR_MIXER;
     public static MetaTileEntitySteamCompressor STEAM_COMPRESSOR;
     public static MetaTileEntityStepper STEPPER;
+    public static MetaTileEntitySeismicDetector SEISMIC_DETECTOR;
     public static MetaTileEntitySteamExtractor STEAM_EXTRACTOR;
     public static MetaTileEntitySteamHammer STEAM_HAMMER;
     public static MetaTileEntityHugeCrackingUnit HUGE_CRACKING_UNIT;
@@ -163,6 +164,8 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityMiningDrill MINING_DRILL;
     public static MetaTileEntityIndustrialPrimitiveBlastFurnace INDUSTRIAL_PRIMITIVE_BLAST_FURNACE;
     public static MetaTileEntityADVKQCC ADV_KQCC;
+    public static SimpleMachineMetaTileEntity[] VACUUM_CHAMBER = new SimpleMachineMetaTileEntity[V.length - 1];
+    public static MetaTileEntityGravitySeparator GRAVITY_SEPARATOR;
     public static final SimpleGeneratorMetaTileEntity[] COMBUSTION_GENERATOR = new SimpleGeneratorMetaTileEntity[4];
     public static final SimpleGeneratorMetaTileEntity[] STEAM_TURBINE = new SimpleGeneratorMetaTileEntity[4];
     public static final SimpleGeneratorMetaTileEntity[] GAS_TURBINE = new SimpleGeneratorMetaTileEntity[4];
@@ -178,6 +181,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityOceanPumper OCEAN_PUMPER;
     public static MetaTileEntityClarifier CLARIFIER;
     public static MetaTileEntitySolarPlate SOLAR_PLATE;
+    public static MetaTileEntityCokingTower COKING_TOWER;
     public static MetaTileEntityPowerSupply POWER_SUPPLY;
     public static MetaTileEntitySteamLatexCollector[] STEAM_LATEX_COLLECTOR = new MetaTileEntitySteamLatexCollector[2];
     public static final MetaTileEntityPlusEnergyHatch[] PLUS_ENERGY_INPUT_HATCH = new MetaTileEntityPlusEnergyHatch[10];
@@ -194,7 +198,6 @@ public class GTQTMetaTileEntities {
     public static final MetaTileEntityPlusEnergyHatch[] PLUS_ENERGY_OUTPUT_HATCH_128A = new MetaTileEntityPlusEnergyHatch[10];
     public static final MetaTileEntityPlusEnergyHatch[] PLUS_ENERGY_OUTPUT_HATCH_512A = new MetaTileEntityPlusEnergyHatch[10];
     public static SimpleMachineMetaTileEntity[] ULTRAVIOLET_LAMP_CHAMBER = new SimpleMachineMetaTileEntity[GTValues.V.length - 1];
-    public static SimpleMachineMetaTileEntity[] VACUUM_CHAMBER = new SimpleMachineMetaTileEntity[GTValues.V.length - 1];
     public static SimpleMachineMetaTileEntity[] DEHYDRATOR = new SimpleMachineMetaTileEntity[GTValues.V.length - 1];
     public static MetaTileEntityMillBallHatch MULTIPART_BALL_HATCH;
     public static MetaTileEntityCatalystHatch CATALYST_HATCH;
@@ -389,6 +392,9 @@ public class GTQTMetaTileEntities {
         LOW_PRESSURE_CRYOGENIC_DISTILLATION_PLANT = registerMetaTileEntity(3201, new MetaTileEntityLowPressureCryogenicDistillationPlant(gtqtcoreId("low_pressure_cryogenic_distillation_plant")));
         MICROWAVE_ENERGY_RECEIVER_CONTROL= registerMetaTileEntity(3202, new MetaTileEntityMicrowaveEnergyReceiverControl(gtqtcoreId("microwave_energy_receiver_control")));
         MEGA_CLEANROOM = registerMetaTileEntity(3203, new MetaTileEntityMegaCleanroom(gtqtcoreId("mega_cleanroom")));
+        SEISMIC_DETECTOR = registerMetaTileEntity(3204, new MetaTileEntitySeismicDetector(gtqtcoreId("seismic_detector")));
+        GRAVITY_SEPARATOR = registerMetaTileEntity(3205, new MetaTileEntityGravitySeparator(gtqtcoreId("gravity_separator")));
+        COKING_TOWER = registerMetaTileEntity(3206, new MetaTileEntityCokingTower(gtqtcoreId("coking_tower")));
         //重写设备
         DISTILLATION_TOWER = registerMetaTileEntity(3250, new MetaTileEntityDistillationTower(gtqtcoreId("distillation_tower"),true));
         CRACKER = registerMetaTileEntity(3251, new MetaTileEntityCrackingUnit(gtqtcoreId("cracker")));

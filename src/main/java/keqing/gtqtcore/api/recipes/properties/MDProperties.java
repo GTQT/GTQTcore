@@ -22,7 +22,7 @@ public class MDProperties extends RecipeProperty<Integer> {
 
     @Override
     public void drawInfo(Minecraft minecraft, int x, int y, int color, Object value) {
-        minecraft.fontRenderer.drawString(I18n.format("钻头等级：",
+        minecraft.fontRenderer.drawString(I18n.format("",
                 castValue(value).toString()) + getTire(castValue(value)), x, y, color);
     }
 

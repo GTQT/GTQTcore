@@ -707,6 +707,9 @@ public class GTQTMaterials {
     public static Material DampBromine;
     public static Material EleAcid;
     public static Material PotassiumChloride;
+    public static Material ManganeseIronArsenicPhosphide;
+    public static Material PraseodymiumNickel;
+    public static Material GadoliniumSiliconGermanium;
 
     //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/api/unification/GSMaterials.java
 

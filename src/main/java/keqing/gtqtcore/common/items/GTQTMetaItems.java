@@ -521,12 +521,27 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem W_PLUS_BOSON;
     public static MetaItem<?>.MetaValueItem Z_BOSON;
 
-
-
+    public static MetaItem<?>.MetaValueItem DIAPHRAGMATIC;
+    public static MetaItem<?>.MetaValueItem ORTHOSTATIC;
+    public static MetaItem<?>.MetaValueItem METAMORPHIC;
+    public static MetaItem<?>.MetaValueItem BLANK;
+    public static MetaItem<?>.MetaValueItem HYDROTHERMAL;
+    public static MetaItem<?>.MetaValueItem MAGMATIC_HYDROTHERMAL;
+    public static MetaItem<?>.MetaValueItem ALLUVIAL;
+    public static MetaItem<?>.MetaValueItem POS_ORE_CARD;
     public static MetaItem<?>.MetaValueItem ARROW_UP_MKI;
     public static MetaItem<?>.MetaValueItem ARROW_DOWN_MKI;
     public static MetaItem<?>.MetaValueItem ARROW_LEFT_MKI ;
     public static MetaItem<?>.MetaValueItem ARROW_RIGHT_MKI;
+    public static MetaItem<?>.MetaValueItem END1;
+    public static MetaItem<?>.MetaValueItem END2;
+    public static MetaItem<?>.MetaValueItem END3;
+    public static MetaItem<?>.MetaValueItem END4;
+
+    public static MetaItem<?>.MetaValueItem BET1;
+    public static MetaItem<?>.MetaValueItem BET2;
+    public static MetaItem<?>.MetaValueItem BET3;
+    public static MetaItem<?>.MetaValueItem BET4;
 
     public static MetaItem<?>.MetaValueItem ARROW_UP_MKII;
     public static MetaItem<?>.MetaValueItem ARROW_DOWN_MKII ;

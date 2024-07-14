@@ -40,6 +40,7 @@ public class GTQTMetaBlocks {
     public static GTQTNuclearFusion NUCLEAR_FUSION;
     public static GTQTRoad ROAD;
     public static GTQTKQCC KQCC;
+    public static BlockCoolingCoil COOLING_COIL;
     public static GCYLCleanroomCasing GCYL_CLEANROOM_CASING;
     public static GTQTPowerSupply POWER;
     public static BlockPCBFactoryCasing PCB_FACTORY_CASING;
@@ -91,11 +92,12 @@ public class GTQTMetaBlocks {
         ELECTROBATH.setRegistryName("electrobath");
         PARTICLE_ACCELERATOR = new GTQTParticleAccelerator();
         PARTICLE_ACCELERATOR.setRegistryName("particle_accelerator");
-
         NUCLEAR_FUSION = new GTQTNuclearFusion();
         NUCLEAR_FUSION.setRegistryName("nuclear_fusion");
         KQCC = new GTQTKQCC();
         KQCC.setRegistryName("computer_competent");
+        COOLING_COIL = new BlockCoolingCoil();
+        COOLING_COIL.setRegistryName("cooling_coil");
         POWER = new GTQTPowerSupply();
         POWER.setRegistryName("power_supply");
         GLASS_CASING = new GTQTBlockGlassCasing();
@@ -146,6 +148,7 @@ public class GTQTMetaBlocks {
         registerItemModel(ELECTRON_MICROSCOPE);
         registerItemModel(NUCLEAR_FUSION);
         registerItemModel(KQCC);
+        registerItemModel(COOLING_COIL);
         registerItemModel(POWER);
         registerItemModel(GLASS_CASING);
         registerItemModel(STEPPER);

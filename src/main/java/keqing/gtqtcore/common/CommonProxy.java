@@ -8,6 +8,7 @@ import gregtech.api.unification.stack.ItemMaterialInfo;
 import keqing.gtqtcore.api.recipes.properties.*;
 import keqing.gtqtcore.api.unification.ore.GTQTStoneTypes;
 import keqing.gtqtcore.api.utils.GTQTLog;
+import keqing.gtqtcore.api.utils.GTQTOreHelper;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTBlockWireCoil;
 import keqing.gtqtcore.common.block.blocks.GTQTCrops;
@@ -199,6 +200,7 @@ public class CommonProxy {
         registry.register(GTQTMetaBlocks.ELECTROBATH);
         registry.register(GTQTMetaBlocks.NUCLEAR_FUSION);
         registry.register(GTQTMetaBlocks.KQCC);
+        registry.register(GTQTMetaBlocks.COOLING_COIL);
         registry.register(GTQTMetaBlocks.POWER);
         registry.register(GTQTMetaBlocks.STEPPER);
         registry.register(GTQTMetaBlocks.PCB_FACTORY_CASING);
@@ -252,6 +254,7 @@ public class CommonProxy {
         registry.register(createItemBlock(GTQTMetaBlocks.COMPONENT_ASSEMBLY_LINE, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.ELECTRON_MICROSCOPE, VariantItemBlock::new));
         registry.register(createItemBlock(GCYL_CLEANROOM_CASING, VariantItemBlock::new));
+        registry.register(createItemBlock(GTQTMetaBlocks.COOLING_COIL, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.ISA_CASING, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.ACTIVE_UNIQUE_CASING, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.COMPRESSED_FUSION_REACTOR, VariantItemBlock::new));
@@ -298,10 +301,10 @@ public class CommonProxy {
         registerCasingTier(4, "五级");
         registerCasingTier(5, "六级");
 
-        MDProperties.registeredTier(1,"一级");
-        MDProperties.registeredTier(2,"二级");
-        MDProperties.registeredTier(3,"三级");
-        MDProperties.registeredTier(4,"四级");
+        int[] array = {-3,-2,-1,0,1, 2, 3, 4,5,6,7,8,81,82,83,84};
+        for (int j : array) MDProperties.registeredTier(j, GTQTOreHelper.getInfo(j));
+
+
         ELEProperties.registeredTier(1,"一级");
         ELEProperties.registeredTier(2,"二级");
         ELEProperties.registeredTier(3,"三级");

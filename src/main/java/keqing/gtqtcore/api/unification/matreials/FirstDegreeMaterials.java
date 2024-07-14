@@ -5,6 +5,7 @@ import gregtech.api.fluids.FluidBuilder;
 import gregtech.api.fluids.attribute.FluidAttributes;
 import gregtech.api.unification.Elements;
 import gregtech.api.unification.material.Material;
+import gregtech.api.unification.material.info.MaterialIconSet;
 import gregtech.api.unification.material.properties.BlastProperty;
 import gregtech.api.unification.material.properties.ToolProperty;
 import gregtech.api.util.GTUtility;
@@ -3816,6 +3817,30 @@ public class FirstDegreeMaterials {
                 .fluid()
                 .components(Potassium,1,Chlorine,1)
                 .color(0xe04800)
+                .build();
+
+        GTQTMaterials.ManganeseIronArsenicPhosphide = new Material.Builder(getMaterialsId(), gregtechId("manganese_iron_arsenic_phosphide"))
+                .ingot()
+                .color(0x03FCF0).iconSet(MaterialIconSet.METALLIC)
+                .cableProperties(GTValues.V[4], 2, 4)
+                .components(Manganese, 2, Iron, 2, Arsenic, 1, Phosphorus, 1)
+                .blast(2100, BlastProperty.GasTier.LOW)
+                .build();
+
+        GTQTMaterials.PraseodymiumNickel = new Material.Builder(getMaterialsId(), gregtechId("praseodymium_nickel"))
+                .ingot()
+                .color(0x03BAFC).iconSet(MaterialIconSet.METALLIC)
+                .cableProperties(GTValues.V[4], 2, 4)
+                .components(Praseodymium, 5, Nickel, 1)
+                .blast(2100, BlastProperty.GasTier.MID)
+                .build();
+
+        GTQTMaterials.GadoliniumSiliconGermanium = new Material.Builder(getMaterialsId(), gregtechId("gadolinium_silicon_germanium"))
+                .ingot()
+                .color(0x0388FC).iconSet(MaterialIconSet.SHINY)
+                .cableProperties(GTValues.V[4], 2, 4)
+                .components(Gadolinium, 5, Silicon, 2, Germanium, 2)
+                .blast(2100, BlastProperty.GasTier.HIGH)
                 .build();
 
     }

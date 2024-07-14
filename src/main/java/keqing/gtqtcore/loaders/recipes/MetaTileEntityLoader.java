@@ -69,6 +69,7 @@ import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.*;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.DISTILLATION_TOWER;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.GAS_COLLECTOR;
+import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.PYROLYSE_OVEN;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.VACUUM_FREEZER;
 
 
@@ -341,6 +342,16 @@ public class MetaTileEntityLoader {
                         .EUt(VA[7])
                         .duration(800))
                 .buildAndRegister();
+        //  Coking Tower
+        ModHandler.addShapedRecipe(true, "coking_tower", COKING_TOWER.getStackForm(),
+                "ICX", "VHV", "IPX",
+                'H', PYROLYSE_OVEN.getStackForm(),
+                'P', ELECTRIC_PUMP_EV,
+                'I', ELECTRIC_PISTON_EV,
+                'X', new UnificationEntry(wireGtQuadruple, Platinum),
+                'C', new UnificationEntry(circuit, MarkerMaterials.Tier.EV),
+                'V', new UnificationEntry(pipeNormalFluid, VanadiumSteel));
+
         //处理阵列
         ModHandler.addShapedRecipe(true, "lv_processing_array", LV_PROCESSING_ARRAY.getStackForm(), "RCR", "SPE", "HNH", 'R',
                 MetaItems.ROBOT_ARM_MV, 'C', new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.MV), 'S',
@@ -696,7 +707,7 @@ public class MetaTileEntityLoader {
                 new UnificationEntry(OrePrefix.circuit, LV), 'H',
                 MetaTileEntities.HULL[GTValues.LV].getStackForm());
 
-        ModHandler.addShapedRecipe(true, "pyrolyse_oven", GTQTMetaTileEntities.PYROLYSE_OVEN.getStackForm(), "WEP", "EME",
+        ModHandler.addShapedRecipe(true, "pyrolyse_oven", PYROLYSE_OVEN.getStackForm(), "WEP", "EME",
                 "WCP", 'M', MetaTileEntities.HULL[GTValues.LV].getStackForm(), 'W', MetaItems.ELECTRIC_PISTON_LV, 'P',
                 new UnificationEntry(OrePrefix.wireGtQuadruple, Aluminium), 'E',
                 new UnificationEntry(OrePrefix.circuit, LV), 'C', MetaItems.ELECTRIC_PUMP_LV);

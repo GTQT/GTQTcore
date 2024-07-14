@@ -20,6 +20,7 @@ import net.minecraft.client.resources.I18n;
 
 import static gregtech.api.GTValues.M;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
+import static keqing.gtqtcore.common.items.GTQTMetaItems.BET4;
 
 
 public class GTQTMetaItem1 extends StandardMetaItem {
@@ -141,6 +142,23 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         LITHIUM_SATURATED_LITHIUM_SIEVE = addItem(155, "lithium_saturated_lithium_sieve").setMaxStackSize(1).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         ACRYLIC_YARN = addItem(156, "acrylic_yarn").setMaxStackSize(1).setCreativeTabs(CommonProxy.GTQTCore_TAB);
 
+        //ROCK
+        POS_ORE_CARD = this.addItem(180, "pos_ore_card").setMaxStackSize(1).addComponents(new OreCheckerBehavior()).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        BLANK = addItem(181, "rock.blank").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        HYDROTHERMAL = addItem(182, "rock.hydrothermal").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        MAGMATIC_HYDROTHERMAL = addItem(183, "rock.magmatic_hydrothermal").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        ALLUVIAL = addItem(184, "rock.alluvial").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        DIAPHRAGMATIC = addItem(185, "rock.diaphragmatic").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        ORTHOSTATIC = addItem(186, "rock.orthostatic").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        METAMORPHIC = addItem(187, "rock.metamorphic").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        END1 = addItem(188, "rock.end1").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        END2 = addItem(189, "rock.end2").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        END3 = addItem(190, "rock.end3").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        END4 = addItem(191, "rock.end4").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        BET1 = addItem(192, "rock.bet1").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        BET2 = addItem(193, "rock.bet2").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        BET3 = addItem(194, "rock.bet3").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        BET4 = addItem(195, "rock.bet4").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
 
         NANOSILICON_CATHODE = addItem(199,"nanosilicon.cathode").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         //神秘农业

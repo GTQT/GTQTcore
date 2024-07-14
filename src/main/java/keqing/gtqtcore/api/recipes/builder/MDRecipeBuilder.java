@@ -37,11 +37,6 @@ public class MDRecipeBuilder  extends RecipeBuilder<MDRecipeBuilder> {
     }
 
     public MDRecipeBuilder tier(int Tire) {
-        if (Tire <= 0) {
-            GTQTLog.logger.error("Casing Tier cannot be less than or equal to 0", new IllegalArgumentException());
-            recipeStatus = EnumValidationResult.INVALID;
-        }
-
         this.applyProperty(MDProperties.getInstance(), Tire);
         return this;
     }
