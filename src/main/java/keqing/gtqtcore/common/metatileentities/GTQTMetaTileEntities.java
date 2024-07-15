@@ -152,6 +152,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityFracturing ADVANCED_FLUID_DRILLING_RIG;
     public static MetaTileEntityLargeNaquadahReactor LARGE_NAQUADAH_REACTOR;
     public static MetaTileEntityCrackingUnit CRACKER;
+    public static MetaTileEntitySteamFermentationVat STEAM_VAT;
     public static MetaTileEntityPyrolyseOven PYROLYSE_OVEN;
     public static MetaTileEntityDistillationKettle DISTILLATION_KETTLE;
     public static MetaTileEntityParticleAccelerator PARTICLE_ACCELERATOR;
@@ -183,6 +184,8 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntitySolarPlate SOLAR_PLATE;
     public static MetaTileEntityCokingTower COKING_TOWER;
     public static MetaTileEntityPowerSupply POWER_SUPPLY;
+    public static MetaTileEntitySMSF SMSF;
+    public static MetaTileEntityVacuumDistillationTower VACUUM_DISTILLATION_TOWER;
     public static MetaTileEntitySteamLatexCollector[] STEAM_LATEX_COLLECTOR = new MetaTileEntitySteamLatexCollector[2];
     public static final MetaTileEntityPlusEnergyHatch[] PLUS_ENERGY_INPUT_HATCH = new MetaTileEntityPlusEnergyHatch[10];
     public static final MetaTileEntityPlusEnergyHatch[] PLUS_ENERGY_INPUT_HATCH_4A = new MetaTileEntityPlusEnergyHatch[10];
@@ -206,6 +209,7 @@ public class GTQTMetaTileEntities {
     public static SimpleMachineMetaTileEntity[] AUTO_CHISEL = new SimpleMachineMetaTileEntity[3];
     public static MetaTileEntityThreeDim THREE_DIM_PRINT;
     public static MetaTileEntityELEOil ELE_OIL;
+    public static MetaTileEntityAdvancedArcFurnace ADV_ARC_FURNACE;
     public static MetaTileEntityBioCentrifuge BIO_CENTRIFUGE;
     public static MetaTileEntityEnzymesReaction ENZYMES_REACTOR;
     public static MetaTileEntityNeutronActivator NEUTRON_ACTIVATOR;
@@ -338,6 +342,7 @@ public class GTQTMetaTileEntities {
         COAGULATION_TANK = registerMetaTileEntity(3107, new MetaTileEntityStewStoolStove(gtqtcoreId("coagulation_tank")));
         P_REACTOR= registerMetaTileEntity(3108, new MetaTileEntityPReactor(gtqtcoreId("p_reactor")));
         B_REACTOR= registerMetaTileEntity(3109, new MetaTileEntityBReactor(gtqtcoreId("b_reactor")));
+        STEAM_VAT= registerMetaTileEntity(3110, new MetaTileEntitySteamFermentationVat(gtqtcoreId("steam_vat")));
         //正常设备
         DISSOLUTION_TANK = registerMetaTileEntity(3150, new MetaTileEntityDissolutionTank(gtqtcoreId("dissolution_tank")));
         BLAZING_BLAST_FURNACE = registerMetaTileEntity(3151, new MetaTileEntityBlazingBlastFurnace(gtqtcoreId("blazing_blast_furnace")));
@@ -395,6 +400,9 @@ public class GTQTMetaTileEntities {
         SEISMIC_DETECTOR = registerMetaTileEntity(3204, new MetaTileEntitySeismicDetector(gtqtcoreId("seismic_detector")));
         GRAVITY_SEPARATOR = registerMetaTileEntity(3205, new MetaTileEntityGravitySeparator(gtqtcoreId("gravity_separator")));
         COKING_TOWER = registerMetaTileEntity(3206, new MetaTileEntityCokingTower(gtqtcoreId("coking_tower")));
+        SMSF = registerMetaTileEntity(3207, new MetaTileEntitySMSF(gtqtcoreId("smsf")));
+        VACUUM_DISTILLATION_TOWER = registerMetaTileEntity(3208, new MetaTileEntityVacuumDistillationTower(gtqtcoreId("vacuum_distillation_tower")));
+        ADV_ARC_FURNACE= registerMetaTileEntity(3209, new MetaTileEntityAdvancedArcFurnace(gtqtcoreId("adv_arc_furnace")));
         //重写设备
         DISTILLATION_TOWER = registerMetaTileEntity(3250, new MetaTileEntityDistillationTower(gtqtcoreId("distillation_tower"),true));
         CRACKER = registerMetaTileEntity(3251, new MetaTileEntityCrackingUnit(gtqtcoreId("cracker")));

@@ -1,5 +1,6 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
+
 import gregtech.api.block.IHeatingCoilBlockStats;
 import gregtech.api.capability.IMultipleTankHandler;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
@@ -49,7 +50,7 @@ import static gregtech.api.GTValues.VA;
 import static gregtech.api.unification.material.Materials.Steam;
 import static gregtech.api.util.RelativeDirection.*;
 //闪蒸
-public class MetaTileEntityMSF extends GTQTRecipeMapMultiblockController implements  IProgressBarMultiblock {
+public class MetaTileEntitySMSF extends GTQTRecipeMapMultiblockController implements  IProgressBarMultiblock {
     private int coilLevel;
     private int number;
     private int size;
@@ -61,8 +62,8 @@ public class MetaTileEntityMSF extends GTQTRecipeMapMultiblockController impleme
         if (steam[0] <= 9000) {
             IMultipleTankHandler inputTank = getInputFluidInventory();
             if (STEAM.isFluidStackIdentical(inputTank.drain(STEAM, false))) {
-                    inputTank.drain(STEAM, true);
-                    steam[0] = steam[0] + 80*coilLevel;
+                inputTank.drain(STEAM, true);
+                steam[0] = steam[0] + 80*coilLevel;
 
             }
         }
@@ -107,10 +108,9 @@ public class MetaTileEntityMSF extends GTQTRecipeMapMultiblockController impleme
         steam[2] = data.getInteger("fluid3");
     }
 
-    public MetaTileEntityMSF(ResourceLocation metaTileEntityId) {
+    public MetaTileEntitySMSF(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[] {
                 GTQTcoreRecipeMaps.SFM,
-                GTQTcoreRecipeMaps.DISTILLATION_KETTLE,
                 RecipeMaps.DISTILLATION_RECIPES
         });
         this.recipeMapWorkable = new MFSWorkableHandler(this);
@@ -124,8 +124,8 @@ public class MetaTileEntityMSF extends GTQTRecipeMapMultiblockController impleme
         tooltip.add(I18n.format("gregtech.machine.msf.tooltip.4"));
     }
     private class MFSWorkableHandler extends MultiblockRecipeLogic {
-        private boolean isDistilleryMode() {
-            return this.getRecipeMap() == GTQTcoreRecipeMaps.DISTILLATION_KETTLE;
+        private boolean isDistillationMode() {
+            return this.getRecipeMap() == RecipeMaps.DISTILLATION_RECIPES;
         }
         public MFSWorkableHandler(RecipeMapMultiblockController tileEntity) {
             super(tileEntity);
@@ -133,18 +133,16 @@ public class MetaTileEntityMSF extends GTQTRecipeMapMultiblockController impleme
         @Override
         public int getParallelLimit() {
             if(getStatue()) {
-                if (isDistilleryMode()) {
+                if (isDistillationMode()) {
                     return number*3;
                 }
                 return number*2;
             }
             return number;
         }
-
         public long getMaxVoltage() {
-            return VA[4];
+            return VA[8];
         }
-
         @Override
         public void setMaxProgress(int maxProgress)
         {
@@ -221,7 +219,7 @@ public class MetaTileEntityMSF extends GTQTRecipeMapMultiblockController impleme
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {
-        return new MetaTileEntityMSF(metaTileEntityId);
+        return new MetaTileEntitySMSF(metaTileEntityId);
     }
 
     @Override
@@ -279,7 +277,7 @@ public class MetaTileEntityMSF extends GTQTRecipeMapMultiblockController impleme
     @SideOnly(Side.CLIENT)
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
-        return Textures.FROST_PROOF_CASING;
+        return Textures.ROBUST_TUNGSTENSTEEL_CASING;
     }
     @SideOnly(Side.CLIENT)
     @Nonnull
@@ -314,12 +312,12 @@ public class MetaTileEntityMSF extends GTQTRecipeMapMultiblockController impleme
     }
 
     private static IBlockState getCasingAState() {
-        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.ALUMINIUM_FROSTPROOF);
+        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.TUNGSTENSTEEL_ROBUST);
     }
     private static IBlockState getCasingBState() {
-        return MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.STEEL_PIPE);
+        return MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.TITANIUM_PIPE);
     }
     private static IBlockState getFrameState() {
-        return MetaBlocks.FRAMES.get(Materials.Aluminium).getBlock(Materials.Aluminium);
+        return MetaBlocks.FRAMES.get(Materials.TungstenSteel).getBlock(Materials.TungstenSteel);
     }
 }

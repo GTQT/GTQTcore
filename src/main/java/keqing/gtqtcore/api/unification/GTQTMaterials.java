@@ -588,6 +588,7 @@ public class GTQTMaterials {
     public static Material DimethylamineHydrochloride;
     public static Material PotassiumFormate;
     public static Material LiquidNitrogen;
+    public static Material LiquidHelium;
     public static Material LiquidHydrogen;
     public static Material LiquidArgon;
     public static Material LiquidRadon;
@@ -710,6 +711,24 @@ public class GTQTMaterials {
     public static Material ManganeseIronArsenicPhosphide;
     public static Material PraseodymiumNickel;
     public static Material GadoliniumSiliconGermanium;
+
+    //superconductors
+    public static Material LVSuperconductor;
+    public static Material MVSuperconductor;
+    public static Material HVSuperconductor;
+    public static Material EVSuperconductor;
+    public static Material IVSuperconductor;
+    public static Material LuVSuperconductor;
+    public static Material ZPMSuperconductor;
+    public static Material UVSuperconductor;
+    public static Material UHVSuperconductor;
+
+    public static Material UEVSuperconductor;
+    public static Material UIVSuperconductor;
+    public static Material UXVSuperconductor;
+    public static Material OpVSuperconductor;
+    public static Material MAXSuperconductor;
+
 
     //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/api/unification/GSMaterials.java
 

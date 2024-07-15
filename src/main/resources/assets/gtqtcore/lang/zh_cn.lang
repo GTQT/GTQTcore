@@ -2411,7 +2411,7 @@ gtqtcore.machine.coagulation_tank.name=混凝反应池
 gtqtcore.machine.ex_cvd.name=极限粒子CVD
 gtqtcore.multiblock.wps.tooltip.1=可拓展多方块结构长度，升级线圈等级，每片结构都需要安装能源仓
 gtqtcore.multiblock.wps.tooltip.2=基础电量基于多方块结构长度为半径，高度四格以主方块为中心范围内的水
-gtqtcore.multiblock.wps.tooltip.3=发电倍率：水电站等级的平方*线圈等级*波动发电倍率（最高0.6）
+gtqtcore.multiblock.wps.tooltip.3=发电倍率：水电站等级*线圈等级*波动发电倍率（最高0.6）
 gtqtcore.multiblock.eke.tooltip.1=可拓展多方块结构长度，动能飞轮数量决定储能与效率上限倍数
 gtqtcore.multiblock.eke.tooltip.2=外壳等级决定储能上限与转速上限，每级提升1倍
 gtqtcore.multiblock.eke.tooltip.3=线圈等级决定充放电效率上限
@@ -3189,10 +3189,26 @@ metaitem.rock.bet2.name=沼泽沉积岩碎片
 metaitem.rock.bet3.name=沼泽冲击岩碎片
 metaitem.rock.bet4.name=沼泽页岩碎片
 
+gregtech.material.lv_superconductor=LV超导体
+gregtech.material.uv_superconductor=UV超导体
+gregtech.material.mv_superconductor=MV超导体
+gregtech.material.hv_superconductor=HV超导体
+gregtech.material.ev_superconductor=EV超导体
+gregtech.material.iv_superconductor=IV超导体
+gregtech.material.luv_superconductor=LuV超导体
+gregtech.material.zpm_superconductor=ZPM超导体
+gregtech.material.uhv_superconductor=UHV超导体
+gregtech.material.uev_superconductor=UEV超导体
+gregtech.material.uiv_superconductor=UIV超导体
+gregtech.material.uxv_superconductor=UXV超导体
+gregtech.material.opv_superconductor=OpV超导体
+
+
+
 metaitem.pos_ore_card.name=地质存储模块
 
 tile.isa_casing.separator_rotor.name=重力沉降分选槽
-
+gtqtcore.machine.adv_arc_furnace.name=高级电弧炉
 gtqtcore.machine.coking_tower.name=焦化塔
 gtqtcore.machine.coking_tower.tooltip.1=工业焦化厂
 gtqtcore.machine.coking_tower.tooltip.2=升级线圈获得额外超频,并行数量为线圈等级的四倍。
@@ -3202,10 +3218,12 @@ tile.cooling_coil.praseodymium_nickel.name=镨镍合金冷却线圈
 tile.cooling_coil.gadolinium_silicon_germanium.name=钆硅锗合金冷却线圈
 tile.cooling_coil.tooltip_temperature=基础制冷：§b%,dK
 
-gtqtcore.material.manganese_iron_arsenic_phosphide=锰铁砷磷合金
-gtqtcore.material.praseodymium_nickel=镨镍合金
-gtqtcore.material.gadolinium_silicon_germanium=钆硅锗合金
-
+gregtech.material.manganese_iron_arsenic_phosphide=锰铁砷磷合金
+gregtech.material.praseodymium_nickel=镨镍合金
+gregtech.material.gadolinium_silicon_germanium=钆硅锗合金
+gtqtcore.machine.smsf.name=高压闪蒸
+gtqtcore.machine.steam_vat.name=蒸汽发酵池
+gtqtcore.machine.vacuum_distillation_tower.name=真空蒸馏塔
 gtqtcore.machine.seismic_detector.name=地震地质探测器
 gtqtcore.machine.gravity_separator.name=矿物重力沉降槽
 gtqtcore.machine.ak.tooltip.1=消耗岩浆提升热量，温度达到一定范围开始工作。

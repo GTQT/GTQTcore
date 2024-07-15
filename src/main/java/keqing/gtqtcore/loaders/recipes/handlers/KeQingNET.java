@@ -351,6 +351,81 @@ public class KeQingNET {
                         .EUt(VA[HV]))
                 .output(ALGAE_FARM)
                 .duration(2000).EUt(480).buildAndRegister();
+
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .inputs(HULL[4].getStackForm(16))
+                .input(circuit, Tier.EV, 8)
+                .input(ELECTRIC_PUMP_EV,16)
+                .input(VOLTAGE_COIL_EV,16)
+                .input(gear,HSSE,16)
+                .input(NANO_CENTRAL_PROCESSING_UNIT, 4)
+                .input(wireFine, Platinum, 64)
+                .input(wireFine, TungstenSteel, 64)
+                .input(foil, Palladium, 32)
+                .fluidInputs(Zylon.getFluid(4000))
+                .scannerResearch(b -> b
+                        .researchStack(PYROLYSIS_TOWER.getStackForm())
+                        .duration(1200)
+                        .EUt(VA[EV]))
+                .output(COKING_TOWER)
+                .duration(2000).EUt(480).buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .inputs(HULL[4].getStackForm(16))
+                .input(circuit, Tier.EV, 8)
+                .input(ELECTRIC_PUMP_EV,16)
+                .input(VOLTAGE_COIL_EV,16)
+                .input(gear,HSSG,16)
+                .input(NANO_CENTRAL_PROCESSING_UNIT, 4)
+                .input(wireFine, TungstenSteel, 64)
+                .input(wireFine, TungstenSteel, 64)
+                .input(foil, Palladium, 32)
+                .fluidInputs(Zylon.getFluid(4000))
+                .scannerResearch(b -> b
+                        .researchStack(MSF.getStackForm())
+                        .duration(1200)
+                        .EUt(VA[EV]))
+                .output(SMSF)
+                .duration(2000).EUt(480).buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .inputs(HULL[4].getStackForm(16))
+                .input(circuit, Tier.IV, 8)
+                .input(ELECTRIC_PUMP_EV,16)
+                .input(VOLTAGE_COIL_EV,16)
+                .input(gear,TungstenSteel,8)
+                .input(NANO_CENTRAL_PROCESSING_UNIT, 4)
+                .input(pipeHugeFluid, TungstenSteel, 8)
+                .input(wireFine, Platinum, 64)
+                .input(wireFine, TungstenSteel, 64)
+                .input(foil, HSSE, 32)
+                .fluidInputs(Zylon.getFluid(4000))
+                .scannerResearch(b -> b
+                        .researchStack(GTQTMetaTileEntities.DISTILLATION_TOWER.getStackForm())
+                        .duration(1200)
+                        .EUt(VA[EV]))
+                .output(VACUUM_DISTILLATION_TOWER)
+                .duration(2000).EUt(480).buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .inputs(ARC_FURNACE[4].getStackForm(16))
+                .input(circuit, Tier.IV, 8)
+                .input(CONVEYOR_MODULE_EV,16)
+                .input(VOLTAGE_COIL_EV,32)
+                .input(foil,HSSG,8)
+                .input(gear,TungstenSteel,8)
+                .input(NANO_CENTRAL_PROCESSING_UNIT, 4)
+                .input(wireFine, Platinum, 64)
+                .input(wireFine, TungstenSteel, 64)
+                .input(foil, Palladium, 32)
+                .fluidInputs(Zylon.getFluid(4000))
+                .scannerResearch(b -> b
+                        .researchStack(ELECTRIC_ARC_FURNACE.getStackForm())
+                        .duration(1200)
+                        .EUt(VA[EV]))
+                .output(ADV_ARC_FURNACE)
+                .duration(2000).EUt(480).buildAndRegister();
         //op
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .inputs(HULL[3].getStackForm(16))

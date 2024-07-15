@@ -139,6 +139,30 @@ public class MetaTileEntityMachine {
                 .output(dust,Nitinol,11)
                 .circuitMeta(3)
                 .duration(800).EUt(VA[EV]).buildAndRegister();
+
+        MIXER_RECIPES.recipeBuilder()
+                .input(dust,Manganese,2)
+                .input(dust,Iron,2)
+                .input(dust,Arsenic,1)
+                .input(dust,Phosphorus,1)
+                .output(dust,ManganeseIronArsenicPhosphide,6)
+                .circuitMeta(3)
+                .duration(800).EUt(VA[EV]).buildAndRegister();
+
+        MIXER_RECIPES.recipeBuilder()
+                .input(dust,Praseodymium,5)
+                .input(dust,Nickel,1)
+                .output(dust,PraseodymiumNickel,6)
+                .circuitMeta(3)
+                .duration(800).EUt(VA[EV]).buildAndRegister();
+
+        MIXER_RECIPES.recipeBuilder()
+                .input(dust,Gadolinium,5)
+                .input(dust,Silicon,2)
+                .input(dust,Germanium,2)
+                .output(dust,GadoliniumSiliconGermanium,11)
+                .circuitMeta(3)
+                .duration(800).EUt(VA[EV]).buildAndRegister();
     }
 
     private static void turbine() {

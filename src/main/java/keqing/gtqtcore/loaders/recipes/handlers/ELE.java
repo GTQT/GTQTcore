@@ -196,6 +196,15 @@ public class ELE {
                 .fluidInputs(ReinforcedEpoxyResin.getFluid(L * 4))
                 .outputs(GTQTMetaBlocks.ELECTROBATH.getItemVariant(GTQTElectrobath.CasingType.IV_ELECTROBATH))
                 .duration(200).EUt(1920).buildAndRegister();
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .inputs(HULL[5].getStackForm())
+                .input(ELECTRIC_MOTOR_IV, 8)
+                .input(circuit, MarkerMaterials.Tier.IV,1)
+                .input(electrode, Palladium, 8)
+                .fluidInputs(Zylon.getFluid(L * 4))
+                .outputs(GTQTMetaBlocks.ELECTROBATH.getItemVariant(GTQTElectrobath.CasingType.V_ELECTROBATH))
+                .duration(200).EUt(7680).buildAndRegister();
         //主方块
         ASSEMBLER_RECIPES.recipeBuilder()
                 .inputs(HULL[1].getStackForm(4))

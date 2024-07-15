@@ -1053,7 +1053,7 @@ public class ParticleAccelerator {
         GTQTcoreRecipeMaps.TARGET_CHAMBER.recipeBuilder()
                 .input(PROTON)
                 .input(dust,Aluminium)
-                .input(dust,Sodium)
+                .output(dust,Sodium)
                 .output(PROTON)
                 .output(NEUTRON)
                 .circuitMeta(2)

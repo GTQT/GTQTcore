@@ -69,7 +69,7 @@ public class MetaTileEntitySeismicDetector extends MetaTileEntityBaseWithControl
         return random+this.getWorld().provider.getDimension()*4;
     }
     public ItemStack setCard() {
-        ItemStack card = new ItemStack(GTQTMetaItems.POS_ORE_CARD.getMetaItem(), 1, 184);
+        ItemStack card = new ItemStack(GTQTMetaItems.POS_ORE_CARD.getMetaItem(), 1, 180);
         NBTTagCompound nodeTagCompound = new NBTTagCompound();
         nodeTagCompound.setInteger("Kind", kind);
         card.setTagCompound(nodeTagCompound);

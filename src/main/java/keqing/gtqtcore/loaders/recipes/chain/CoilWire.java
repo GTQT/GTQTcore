@@ -7,12 +7,15 @@ import gregtech.api.unification.ore.OrePrefix;
 import gregtech.common.blocks.BlockWireCoil.*;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.unification.GTQTMaterials;
+import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 
 import static gregtech.api.GTValues.*;
 import static gregtech.api.GTValues.VA;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.TJMaterials.SilicaCeramic;
+import static keqing.gtqtcore.common.block.blocks.BlockCoolingCoil.CoolingCoilType.*;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.INSULATINGMICA;
 
 public class CoilWire {
@@ -30,6 +33,23 @@ public class CoilWire {
                 .output(INSULATINGMICA)
                 .duration(400)
                 .buildAndRegister();
+
+
+        //
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().EUt(VA[HV]).input(OrePrefix.wireGtDouble, ManganeseIronArsenicPhosphide, 8)
+                .input(OrePrefix.foil, Materials.StainlessSteel, 8).input(INSULATINGMICA,4)
+                .fluidInputs(Materials.Aluminium.getFluid(GTValues.L))
+                .outputs(GTQTMetaBlocks.COOLING_COIL.getItemVariant(MANGANESE_IRON_ARSENIC_PHOSPHIDE)).duration(400).buildAndRegister();
+
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().EUt(VA[EV]).input(OrePrefix.wireGtDouble, PraseodymiumNickel, 8)
+                .input(OrePrefix.foil, Materials.VanadiumSteel, 8).fluidInputs(Materials.Nichrome.getFluid(GTValues.L)).input(INSULATINGMICA,6)
+                .outputs(GTQTMetaBlocks.COOLING_COIL.getItemVariant(PRASEODYMIUM_NICKEL)).duration(500).buildAndRegister();
+
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().EUt(VA[IV]).input(OrePrefix.wireGtDouble, GadoliniumSiliconGermanium, 8)
+                .input(OrePrefix.foil, Materials.TungstenCarbide, 8).input(INSULATINGMICA,8)
+                .fluidInputs(Materials.Tungsten.getFluid(GTValues.L))
+                .outputs(GTQTMetaBlocks.COOLING_COIL.getItemVariant(GADOLINIUM_SILICON_GERMANIUM)).duration(600).buildAndRegister();
+        //
 
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().EUt(VA[LV]).input(OrePrefix.wireGtDouble, Materials.Cupronickel, 8)
                 .input(OrePrefix.foil, Materials.Bronze, 8).fluidInputs(Materials.TinAlloy.getFluid(GTValues.L)).input(INSULATINGMICA,1)

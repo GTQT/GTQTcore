@@ -610,6 +610,27 @@ public class MetaTileEntityLoader {
                 'P', new UnificationEntry(OrePrefix.plateDouble, Steel),
                 'B', PRIMITIVE_BLAST_FURNACE.getStackForm());
 
+        ModHandler.addShapedRecipe(true, "steam_vat",
+                GTQTMetaTileEntities.STEAM_VAT.getStackForm(),
+                "BPB", "PCP", "BPB",
+                'C',  new UnificationEntry(circuit, LV),
+                'P', new UnificationEntry(OrePrefix.plateDouble, Invar),
+                'B', ELECTRIC_PUMP_LV);
+
+        ModHandler.addShapedRecipe(true, "gravity_separator",
+                GTQTMetaTileEntities.GRAVITY_SEPARATOR.getStackForm(),
+                "BPB", "PCP", "BPB",
+                'C',  new UnificationEntry(circuit, MV),
+                'P', new UnificationEntry(OrePrefix.plateDouble, Aluminium),
+                'B', ELECTRIC_MOTOR_MV);
+
+        ModHandler.addShapedRecipe(true, "seismic_detector",
+                GTQTMetaTileEntities.SEISMIC_DETECTOR.getStackForm(),
+                "BPB", "PCP", "BPB",
+                'C',  new UnificationEntry(circuit, MV),
+                'P', new UnificationEntry(OrePrefix.plateDouble, Aluminium),
+                'B', SENSOR_MV);
+
         ModHandler.addShapedRecipe(true, "crystallization_crucible", CRYSTALLIZATION_CRUCIBLE.getStackForm(),
                 "CMC", "LHL", "PCP",
                 'C', new UnificationEntry(circuit, MarkerMaterials.Tier.IV),

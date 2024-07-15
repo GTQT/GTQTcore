@@ -46,6 +46,7 @@ public class GTQTRecipesManager {
         CTABChain.init();
         DragonChain.init();
         CBDOPolycarbonateChain.init();
+        SuperconductorRecipes.init();
         CaliforniumChain.init();
         TitanateChain.init();
         NuclearLine.init();

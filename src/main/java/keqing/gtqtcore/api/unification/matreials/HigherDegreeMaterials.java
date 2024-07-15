@@ -3,16 +3,15 @@ import gregtech.api.GTValues;
 import gregtech.api.fluids.FluidBuilder;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.properties.BlastProperty;
-import gregtech.api.unification.material.properties.BlastProperty.GasTier;
 import gregtech.api.unification.material.properties.ToolProperty;
 
-import static gregicality.multiblocks.api.unification.GCYMMaterials.*;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.info.MaterialFlags.*;
 import static gregtech.api.unification.material.info.MaterialIconSet.*;
 import static gregtech.api.util.GTUtility.gregtechId;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.Adamantium;
+import static keqing.gtqtcore.api.unification.GCYSMaterials.Uranium234;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 
 import gregtech.api.unification.material.Material;
@@ -195,7 +194,136 @@ public class HigherDegreeMaterials {
                         DISABLE_DECOMPOSITION)
                 .components(Methane,576,Water,11520)
                 .build();
+        
+        //超导
+        LVSuperconductor = new Material.Builder(getMaterialsId(), gregtechId("lv_superconductor"))
+                .ingot().liquid()
+                .color(0xf8f8ff)
+                .iconSet(DULL)
+                .flags(DISABLE_DECOMPOSITION)
+                .components(SolderingAlloy,10,Gallium,2)
+                .cableProperties(GTValues.V[GTValues.LV],4,0,true)
+                .build();
 
+        MVSuperconductor = new Material.Builder(getMaterialsId(), gregtechId("mv_superconductor"))
+                .ingot().liquid()
+                .color(MagnesiumDiboride .getMaterialRGB())
+                .iconSet(SHINY)
+                .flags(DISABLE_DECOMPOSITION)
+                .cableProperties(GTValues.V[GTValues.MV], 8,0,true)
+                .components(MagnesiumDiboride ,1)
+                .build();
+
+        HVSuperconductor = new Material.Builder(getMaterialsId(), gregtechId("hv_superconductor"))
+                .ingot().liquid()
+                .color(MercuryBariumCalciumCuprate .getMaterialRGB())
+                .iconSet(SHINY)
+                .flags(DISABLE_DECOMPOSITION)
+                .cableProperties(GTValues.V[GTValues.HV], 8,0,true)
+                .components(MercuryBariumCalciumCuprate ,1)
+                .build();
+
+        EVSuperconductor = new Material.Builder(getMaterialsId(), gregtechId("ev_superconductor"))
+                .ingot().liquid()
+                .color(UraniumTriplatinum .getMaterialRGB())
+                .iconSet(SHINY)
+                .flags(DISABLE_DECOMPOSITION)
+                .cableProperties(GTValues.V[GTValues.EV], 12,0,true)
+                .components(UraniumTriplatinum ,1)
+                .build();
+
+        IVSuperconductor = new Material.Builder(getMaterialsId(), gregtechId("iv_superconductor"))
+                .ingot().liquid()
+                .color(SamariumIronArsenicOxide .getMaterialRGB())
+                .iconSet(SHINY)
+                .flags(DISABLE_DECOMPOSITION)
+                .cableProperties(GTValues.V[GTValues.IV], 12,0,true)
+                .components(SamariumIronArsenicOxide ,1)
+                .build();
+
+        LuVSuperconductor = new Material.Builder(getMaterialsId(), gregtechId("luv_superconductor"))
+                .ingot().liquid()
+                .color(IndiumTinBariumTitaniumCuprate .getMaterialRGB())
+                .iconSet(SHINY)
+                .flags(DISABLE_DECOMPOSITION)
+                .components(IndiumTinBariumTitaniumCuprate ,1)
+                .cableProperties(GTValues.V[GTValues.LuV], 16,0,true)
+                .build();
+
+        ZPMSuperconductor = new Material.Builder(getMaterialsId(), gregtechId("zpm_superconductor"))
+                .ingot().liquid()
+                .color(UraniumRhodiumDinaquadide .getMaterialRGB())
+                .iconSet(SHINY)
+                .flags(DISABLE_DECOMPOSITION)
+                .cableProperties(GTValues.V[GTValues.ZPM], 16,0,true)
+                .components(UraniumRhodiumDinaquadide ,1)
+                .build();
+
+        UVSuperconductor = new Material.Builder(getMaterialsId(), gregtechId("uv_superconductor"))
+                .ingot().liquid()
+                .color(EnrichedNaquadahTriniumEuropiumDuranide .getMaterialRGB())
+                .iconSet(SHINY)
+                .flags(DISABLE_DECOMPOSITION)
+                .cableProperties(GTValues.V[UV], 32,0,true)
+                .components(EnrichedNaquadahTriniumEuropiumDuranide ,1)
+                .build();
+
+        UHVSuperconductor = new Material.Builder(getMaterialsId(), gregtechId("uhv_superconductor"))
+                .ingot().liquid()
+                .color(RutheniumTriniumAmericiumNeutronate .getMaterialRGB())
+                .iconSet(SHINY)
+                .flags(DISABLE_DECOMPOSITION)
+                .cableProperties(GTValues.V[GTValues.UHV], 48,0,true)
+                .components(RutheniumTriniumAmericiumNeutronate ,1)
+                .build();
+/*
+        UEVSuperconductor = new Material.Builder(getMaterialsId(), gregtechId("uev_superconductor"))
+                .ingot().liquid()
+                .color(UEVSuperconductorBase.getMaterialRGB())
+                .iconSet(SHINY)
+                .flags(DISABLE_DECOMPOSITION)
+                .cableProperties(GTValues.V[GTValues.UEV], 8,0,true)
+                .components(UEVSuperconductorBase,1)
+                .build();
+
+        UIVSuperconductor = new Material.Builder(getMaterialsId(), gregtechId("uiv_superconductor"))
+                .ingot().liquid()
+                .color(UIVSuperconductorBase.getMaterialRGB())
+                .iconSet(SHINY)
+                .flags(DISABLE_DECOMPOSITION)
+                .cableProperties(GTValues.V[GTValues.UIV], 16,0,true)
+                .components(UIVSuperconductorBase,1)
+                .build();
+
+        UXVSuperconductor = new Material.Builder(getMaterialsId(), gregtechId("uxv_superconductor"))
+                .ingot().liquid()
+                .color(UXVSuperconductorBase.getMaterialRGB())
+                .iconSet(SHINY)
+                .flags(DISABLE_DECOMPOSITION)
+                .cableProperties(GTValues.V[GTValues.UXV], 16,0,true)
+                .components(UXVSuperconductorBase,1)
+                .build();
+
+        OpVSuperconductor = new Material.Builder(getMaterialsId(), gregtechId("opv_superconductor"))
+                .ingot().liquid()
+                .color(OpVSuperconductorBase.getMaterialRGB())
+                .iconSet(SHINY)
+                .flags(DISABLE_DECOMPOSITION)
+                .cableProperties(GTValues.V[OpV], 16,0,true)
+                .components(OpVSuperconductorBase,1)
+                .build();
+
+        MAXSuperconductor = new Material.Builder(getMaterialsId(), gregtechId("max_superconductor"))
+                .ingot().liquid()
+                .color(0XFFFFFF)
+                .iconSet(SHINY)
+                .flags(DISABLE_DECOMPOSITION)
+                .cableProperties(GTValues.V[GTValues.MAX], 32,0,true)
+                .components(OpVSuperconductorBase,1)
+                .build();
+
+
+ */
 
     }
 }

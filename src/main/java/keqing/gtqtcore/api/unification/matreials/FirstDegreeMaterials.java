@@ -2901,6 +2901,13 @@ public class FirstDegreeMaterials {
                 .components(Nitrogen,2)
                 .build();
 
+        GTQTMaterials.LiquidHelium = new Material.Builder(getMaterialsId(), gregtechId("liquid_helium"))
+                .liquid(new FluidBuilder().temperature(2))
+                .color(0x00BFC1)
+                .flags(DISABLE_DECOMPOSITION)
+                .components(Helium,1)
+                .build();
+
         GTQTMaterials.LiquidHydrogen = new Material.Builder(getMaterialsId(), gregtechId("liquid_hydrogen"))
                 .liquid(new FluidBuilder().temperature(20))
                 .color(0x0000B5)

@@ -30,6 +30,7 @@ public class AirDistillation {
         vaccum(LiquidHydrogen,Hydrogen,2);
         vaccum(LiquidArgon,Argon,3);
         vaccum(LiquidRadon,Radon,4);
+        vaccum(LiquidHelium,Helium,5);
 
         Collection<Recipe> gasRecipes = RecipeMaps.DISTILLATION_RECIPES.getRecipeList();
         for (Recipe recipe : gasRecipes) {
@@ -327,11 +328,11 @@ public class AirDistillation {
         VACUUM_RECIPES.recipeBuilder()
                 .fluidInputs(material2.getFluid(1000))
                 .fluidOutputs(material1.getFluid(1000))
-                .duration(200+200*i).EUt(VA[2+i]).buildAndRegister();
+                .duration((int) (200*Math.pow(2,i+1))).EUt(VA[3+i]).buildAndRegister();
 
         FLUID_HEATER_RECIPES.recipeBuilder()
-                .fluidOutputs(material1.getFluid(1000))
-                .fluidInputs(material2.getFluid(1000))
-                .duration(80+20*i).EUt(VA[1+i]).buildAndRegister();
+                .fluidInputs(material1.getFluid(1000))
+                .fluidOutputs(material2.getFluid(1000))
+                .duration((int) (20*Math.pow(2,i+1))).EUt(VA[1+i]).buildAndRegister();
     }
 }

@@ -126,6 +126,13 @@ public class FantasyMaterials {
                 .EUToStart(620_000_000)
                 .duration(64).EUt(VA[ZPM] * 2).buildAndRegister();
 
+        FUSION_RECIPES.recipeBuilder()
+                .fluidInputs(Vibranium.getPlasma(L))
+                .fluidInputs(Adamantium.getPlasma(L))
+                .fluidOutputs(Neutronium.getFluid(L))
+                .EUToStart(620_000_000)
+                .duration(128).EUt(VA[UV] * 2).buildAndRegister();
+
         // remove vibranium dust -> hot ingot
         GTRecipeHandler.removeRecipesByInputs(BLAST_RECIPES, OreDictUnifier.get(dust, Vibranium), IntCircuitIngredient.getIntegratedCircuit(1));
         GTRecipeHandler.removeRecipesByInputs(BLAST_RECIPES, new ItemStack[]{OreDictUnifier.get(dust, Vibranium), IntCircuitIngredient.getIntegratedCircuit(2)}, new FluidStack[]{Argon.getFluid(50)});
