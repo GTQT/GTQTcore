@@ -38,13 +38,16 @@ import keqing.gtqtcore.common.metatileentities.single.electric.MetaTileEntityBat
 import keqing.gtqtcore.common.metatileentities.single.electric.MetaTileEntityLatexCollector;
 import keqing.gtqtcore.common.metatileentities.single.electric.MetaTileEntityParticleAcceleratorIO;
 import keqing.gtqtcore.common.metatileentities.single.steam.MetaTileEntitySteamLatexCollector;
+import keqing.gtqtcore.common.metatileentities.storage.MetaTileEntityFluidRubbishBin;
 import keqing.gtqtcore.common.metatileentities.storage.MetaTileEntityMultiblockTank;
+import keqing.gtqtcore.common.metatileentities.storage.MetaTileEntityRubbishBin;
 
 import java.util.function.IntFunction;
 import java.util.function.IntPredicate;
 import java.util.function.IntSupplier;
 
 import static gregtech.api.GTValues.*;
+import static gregtech.api.unification.material.Materials.Steel;
 import static gregtech.common.metatileentities.MetaTileEntities.*;
 import static gregtech.common.metatileentities.MetaTileEntities.registerMetaTileEntity;
 import static keqing.gtqtcore.api.GTQTValue.gtqtcoreId;
@@ -185,6 +188,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityCokingTower COKING_TOWER;
     public static MetaTileEntityPowerSupply POWER_SUPPLY;
     public static MetaTileEntitySMSF SMSF;
+    public static MetaTileEntityRubbishBin RUBISH_BIN;
     public static MetaTileEntityVacuumDistillationTower VACUUM_DISTILLATION_TOWER;
     public static MetaTileEntitySteamLatexCollector[] STEAM_LATEX_COLLECTOR = new MetaTileEntitySteamLatexCollector[2];
     public static final MetaTileEntityPlusEnergyHatch[] PLUS_ENERGY_INPUT_HATCH = new MetaTileEntityPlusEnergyHatch[10];
@@ -226,6 +230,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityKQCCComputationHatch[] KQCC_COMPUTATION_HATCH_RECEIVER=new MetaTileEntityKQCCComputationHatch[12];
     public static MetaTileEntityKQCCComputationHatch[] KQCC_COMPUTATION_HATCH_TRANSMITTER=new MetaTileEntityKQCCComputationHatch[12];
     public static MetaTileEntityMSF MSF;
+    public static MetaTileEntityFluidRubbishBin FLUID_RUBISH_BIN;
     public static MetaTileEntityCoolingTower COOLING_TOWER;
     public static MetaTileEntityParticleAcceleratorIO PARTICLE_ACCELERATOR_IO;
     public static MetaTileEntityAdvancedAssemblyLine ADVANCED_ASSEMBLY_LINE;
@@ -480,6 +485,7 @@ public class GTQTMetaTileEntities {
             String tierName = GTValues.VN[i].toLowerCase();
             TANK[i] = registerMetaTileEntity(3520 + i, new MetaTileEntityMultiblockTank(gtqtcoreId("tank." + tierName), i + 1));
         }
+
         //小机器
         registerSimpleMetaTileEntity(DEHYDRATOR, 14985, "dehydrator", GTQTcoreRecipeMaps.DRYER_RECIPES, Textures.SIFTER_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
         registerSimpleMetaTileEntity(FLUID_EXTRACTOR, 15000, "fluid_extractor", GTQTcoreRecipeMaps.FLUID_EXTRACTOR_RECIPES, Textures.EXTRACTOR_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
@@ -505,6 +511,9 @@ public class GTQTMetaTileEntities {
         AUTO_CHISEL[1] = registerMetaTileEntity(15101, new SimpleMachineMetaTileEntity(gtqtcoreId("auto_chisel.mv"), GTQTcoreRecipeMaps.AUTO_CHISEL_RECIPES, Textures.AUTOCLAVE_OVERLAY, 2, true, GTUtility.genericGeneratorTankSizeFunction));
         AUTO_CHISEL[2] = registerMetaTileEntity(15102, new SimpleMachineMetaTileEntity(gtqtcoreId("auto_chisel.hv"), GTQTcoreRecipeMaps.AUTO_CHISEL_RECIPES, Textures.AUTOCLAVE_OVERLAY, 3, true, GTUtility.genericGeneratorTankSizeFunction));
         BATH_CONDENSER[0] = registerMetaTileEntity(15103, new MetaTileEntityBathCondenser(gtqtcoreId("bath_condenser")));
+
+        RUBISH_BIN = registerMetaTileEntity(15104, new MetaTileEntityRubbishBin(gtqtcoreId("rubbish_bin")));
+        FLUID_RUBISH_BIN = registerMetaTileEntity(15105, new MetaTileEntityFluidRubbishBin(gtqtcoreId("fluid_rubbish_bin"),Steel,4000));
         //仓口
         for (int i = 1; i <= 10; i++) {
             String tierName = GTValues.VN[i].toLowerCase();

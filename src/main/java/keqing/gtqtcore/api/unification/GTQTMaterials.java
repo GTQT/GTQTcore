@@ -723,12 +723,11 @@ public class GTQTMaterials {
     public static Material UVSuperconductor;
     public static Material UHVSuperconductor;
 
-    public static Material UEVSuperconductor;
-    public static Material UIVSuperconductor;
-    public static Material UXVSuperconductor;
-    public static Material OpVSuperconductor;
-    public static Material MAXSuperconductor;
-
+    public static Material SuperGlue;
+    public static Material UltraGlue;
+    public static Material CyanoaceticAcid;
+    public static Material Ethylcyanoacetate;
+    public static Material Cyanoacrylate;
 
     //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/api/unification/GSMaterials.java
 

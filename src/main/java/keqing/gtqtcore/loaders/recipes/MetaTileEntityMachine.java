@@ -167,8 +167,8 @@ public class MetaTileEntityMachine {
 
     private static void turbine() {
         ModHandler.addShapedRecipe(true, "casing_aluminium_pipe",
-                GTQTMetaBlocks.TURBINE_CASING1.getItemVariant(AL_TURBINE_CASING, ConfigHolder.recipes.casingsPerCraft), "PIP", "IFI",
-                "PIP", 'P', new UnificationEntry(OrePrefix.plate, Aluminium), 'F',
+                GTQTMetaBlocks.TURBINE_CASING1.getItemVariant(AL_TURBINE_CASING, ConfigHolder.recipes.casingsPerCraft),
+                "PIP", "IFI", "PIP", 'P', new UnificationEntry(OrePrefix.plate, Aluminium), 'F',
                 new UnificationEntry(OrePrefix.frameGt, Materials.Aluminium), 'I',
                 new UnificationEntry(OrePrefix.pipeNormalFluid, Materials.Aluminium));
 

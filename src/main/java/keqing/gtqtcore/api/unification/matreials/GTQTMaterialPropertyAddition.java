@@ -17,8 +17,8 @@ import static gregtech.api.unification.material.Materials.*;
 import static gregtech.integration.crafttweaker.material.MaterialPropertyExpansion.addFluid;
 import static gregtech.integration.groovy.MaterialPropertyExpansion.addLiquid;
 import static gregtech.integration.groovy.MaterialPropertyExpansion.addPlasma;
-import static keqing.gtqtcore.api.unification.GTQTMaterials.TitanSteel;
-import static keqing.gtqtcore.api.unification.GTQTMaterials.Zircon;
+import static keqing.gtqtcore.api.unification.GCYSMaterials.ChloroaceticAcid;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 
 public class GTQTMaterialPropertyAddition {
     public static void init() {

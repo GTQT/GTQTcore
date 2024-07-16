@@ -1,5 +1,6 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.overwrite;
 
+import keqing.gtqtcore.api.utils.GTQTLog;
 import keqing.gtqtcore.api.utils.GTQTOreHelper;
 import gregtech.api.capability.IGhostSlotConfigurable;
 import gregtech.api.capability.IMultipleTankHandler;
@@ -166,7 +167,7 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
             textList.add(new TextComponentTranslation("gtqtcore.multiblock.ma.amount", TextFormattingUtil.formatNumbers((liquidOxygenAmount))));
         }
         textList.add(new TextComponentTranslation("gtqtcore.md",tier, drilla, naijiu));
-        if(work) {
+        if(checkCard()) {
             textList.add(new TextComponentTranslation(GTQTOreHelper.getInfo(kind)));
         }
         if(cycle)textList.add(new TextComponentTranslation("循环模式：%s 正在运行配方：%s",cycle,circuit));
@@ -281,18 +282,10 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
     public boolean isMultiblockPartWeatherResistant(@Nonnull IMultiblockPart part) {
         return true;
     }
-   @Override
-  public void invalidateStructure() {
-       super.invalidateStructure();
-}
-
     @Override
-    public boolean checkRecipe(@Nonnull Recipe recipe, boolean consumeIfSuccess) {
-        if(recipe.getProperty(MDProperties.getInstance(), 0)==random)
-            return super.checkRecipe(recipe, consumeIfSuccess);
-        else return false;
-   }
-
+    public void invalidateStructure() {
+       super.invalidateStructure();
+    }
 
     @Override
     public boolean canBeDistinct() {
@@ -324,16 +317,10 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
 
 
     }
-    boolean work;
     @Override
     protected void addWarningText(List<ITextComponent> textList) {
         super.addWarningText(textList);
-        if(!work) textList.add(new TextComponentTranslation("缺少参数或者参数不符合！！"));
-    }
-    @Override
-    public void update() {
-        super.update();
-        work=checkCard();
+        if(!checkCard()) textList.add(new TextComponentTranslation("缺少参数或者参数不符合！！"));
     }
     public boolean checkCard() {
         var slots = this.getInputInventory().getSlots();
@@ -385,9 +372,6 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
 
 
         }
-        public long getMaxVoltage() {
-            return Math.min(super.getMaxVoltage(), VA[tier]);
-        }
 
         @Override
         public int getParallelLimit() {
@@ -401,15 +385,11 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
         }
         protected void updateRecipeProgress() {
             IMultipleTankHandler inputTank = combustionEngine.getInputFluidInventory();
-            if (work&&this.canRecipeProgress && this.drawEnergy(this.recipeEUt, true)) {
-                this.drawEnergy(this.recipeEUt, false);
+            if (checkCard()&&this.canRecipeProgress && this.drawEnergy(this.recipeEUt, false)&&LUBRICANT_STACK.isFluidStackIdentical(inputTank.drain(LUBRICANT_STACK, true))) {
                 naijiu-=(5-drilla);
-                if (LUBRICANT_STACK.isFluidStackIdentical(inputTank.drain(LUBRICANT_STACK, false))) {
-                    inputTank.drain(LUBRICANT_STACK, true);
-                    if (++this.progressTime > this.maxProgressTime) {
-                        this.completeRecipe();
-                        if (cycle) addCircuit(false);
-                    }
+                if (++this.progressTime > this.maxProgressTime) {
+                    this.completeRecipe();
+                    if (cycle) addCircuit(false);
                 }
             }
         }

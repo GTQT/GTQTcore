@@ -117,7 +117,7 @@ public class GCYSOrganicChemistryMaterials {
                 .build();
 
         ChloroaceticAcid = new Material.Builder(15016, gregtechId("chloroacetic_acid"))
-                .dust()
+                .fluid()
                 .color(0x38541A)
                 .flags(DISABLE_DECOMPOSITION)
                 .iconSet(MaterialIconSet.SHINY)

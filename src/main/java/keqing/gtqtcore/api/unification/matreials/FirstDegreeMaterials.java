@@ -3850,5 +3850,36 @@ public class FirstDegreeMaterials {
                 .blast(2100, BlastProperty.GasTier.HIGH)
                 .build();
 
+        //
+        GTQTMaterials.SuperGlue = new Material.Builder(getMaterialsId(), gregtechId("super_glue"))
+                .fluid()
+                .color(0xFAFAD2)
+                .build();
+
+        GTQTMaterials.UltraGlue = new Material.Builder(getMaterialsId(), gregtechId("ultra_glue"))
+                .fluid()
+                .color(0xB2DFEE)
+                .build();
+
+        //氰乙酸
+        GTQTMaterials.CyanoaceticAcid = new Material.Builder(getMaterialsId(), gregtechId("cyanoacetic_acid"))
+                .dust()
+                .color(0xCD00CD)
+                .components(Carbon, 3, Hydrogen, 3, Nitrogen, 1,Oxygen,2)
+                .build();
+
+        //氰乙酸乙酯
+        GTQTMaterials.Ethylcyanoacetate = new Material.Builder(getMaterialsId(), gregtechId("ethylcyanoacetate"))
+                .fluid()
+                .color(0xCDCD00)
+                .components(Carbon, 5, Hydrogen, 7, Nitrogen, 1,Oxygen,2)
+                .build();
+
+        //氰基丙烯酸酯聚合物
+        GTQTMaterials.Cyanoacrylate = new Material.Builder(getMaterialsId(), gregtechId("cyanoacrylate"))
+                .fluid()
+                .color(0xB4CDCD)
+                .components(Carbon, 5, Hydrogen, 7, Nitrogen, 1,Oxygen,2)
+                .build();
     }
 }

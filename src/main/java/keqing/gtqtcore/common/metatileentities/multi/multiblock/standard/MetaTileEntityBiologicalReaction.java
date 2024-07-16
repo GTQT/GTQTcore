@@ -303,8 +303,7 @@ public class MetaTileEntityBiologicalReaction extends GTQTRecipeMapMultiblockCon
                 this.maxProgressTime = (maxProgress*(100-glass_tier*getp())/100);
         }
         protected void updateRecipeProgress() {
-            if (this.canRecipeProgress && this.drawEnergy(this.recipeEUt, true)) {
-                this.drawEnergy(this.recipeEUt, false);
+            if (this.canRecipeProgress && this.drawEnergy(this.recipeEUt, false)) {
                     if(liquid>5000) {
                         liquid = liquid - 1000;
                         if (++progressTime > maxProgressTime) {

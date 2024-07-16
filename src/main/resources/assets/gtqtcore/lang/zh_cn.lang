@@ -3154,6 +3154,14 @@ metaitem.boron_retaining_yarn.name=含硼纱线
 metaitem.boron_saturated_yarn.name=硼饱和纱线
 metaitem.lithium_sieve.name=锂离子筛
 metaitem.lithium_saturated_lithium_sieve.name=锂饱和锂离子筛
+gregtech.material.super_glue=超级胶水
+gregtech.material.ultra_glue=顶级胶水
+
+gregtech.material.ultra_glue=顶级胶水(氰基乙稀酸乙酯)
+gregtech.material.cyanoacetic_acid=氰乙酸
+gregtech.material.ethylcyanoacetate=氰乙酸乙酯
+gregtech.material.cyanoacrylate=氰基丙烯酸酯聚合物
+
 
 gregtech.material.copper_front=铜矿泡沫
 gregtech.material.tetrahedrite_front=黝铜矿泡沫

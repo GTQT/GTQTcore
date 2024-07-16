@@ -72,14 +72,14 @@ public class BZChain {
                 .fluidInputs(Trichloroethylene.getFluid(1000))
                 .fluidInputs(Water.getFluid(2000))
                 .notConsumable(SulfuricAcid.getFluid(250))
-                .output(dust, ChloroaceticAcid, 8)
+                .fluidOutputs(ChloroaceticAcid.getFluid(8000))
                 .fluidOutputs(HydrochloricAcid.getFluid(2000))
                 .duration(100).EUt(VA[EV]).buildAndRegister();
 
         // C2H3ClO2 + Na2CO3 + 2H2O -> C3H4O4 + 2NaOH + HClO
         CHEMICAL_RECIPES.recipeBuilder()
                 .input(dust, SodaAsh, 6)
-                .input(dust, ChloroaceticAcid, 8)
+                .fluidInputs(ChloroaceticAcid.getFluid(8000))
                 .fluidInputs(Water.getFluid(2000))
                 .output(dust, SodiumHydroxide, 6)
                 .output(dust, MalonicAcid, 11)

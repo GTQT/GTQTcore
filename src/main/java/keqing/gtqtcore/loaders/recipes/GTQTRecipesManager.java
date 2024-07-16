@@ -56,6 +56,7 @@ public class GTQTRecipesManager {
         MachineCasing.init();
         Bittern.init();
         GasChain.init();
+        GlueChain.init();
         HexanitrohexaaxaisowurtzitaneChain.init();
         ZylonChain.init();
         MiscRecipes.init();
