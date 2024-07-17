@@ -56,7 +56,7 @@ public class MetaTileEntityMultiblockTank extends MultiblockWithDisplayBase {
 
     public int getCapacity()
     {
-        return 1000000*(int)Math.pow(2, this.tier);
+        return 1280000*(int)Math.pow(2, this.tier+1);
     }
     @Override
     protected void initializeInventory() {

@@ -382,6 +382,41 @@ public class MetaTileEntityLoader {
                 .outputs(MetaBlocks.METAL_CASING.getItemVariant(BlockMetalCasing.MetalCasingType.PRIMITIVE_BRICKS))
                 .duration(20).EUt(30).buildAndRegister();
 
+        //垃圾桶
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(plate,Steel,16)
+                .input(stickLong, Steel, 2)
+                .input(circuit, LV, 4)
+                .input(pipeHugeItem,Nickel,1)
+                .circuitMeta(10)
+                .output(RUBBISH_BIN)
+                .duration(20).EUt(30).buildAndRegister();
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(plate,Steel,16)
+                .input(stickLong, Steel, 2)
+                .input(circuit, LV, 4)
+                .input(pipeLargeFluid,Steel,1)
+                .circuitMeta(10)
+                .output(FLUID_RUBBISH_BIN)
+                .duration(20).EUt(30).buildAndRegister();
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(FLUID_RUBBISH_BIN)
+                .input(RUBBISH_BIN)
+                .output(COMMON_RUBBISH_BIN)
+                .duration(20).EUt(30).buildAndRegister();
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(plate,Steel,32)
+                .input(stickLong, Steel, 4)
+                .input(circuit, LV, 8)
+                .input(pipeHugeItem,Nickel,1)
+                .input(pipeLargeFluid,Steel,1)
+                .circuitMeta(11)
+                .output(COMMON_RUBBISH_BIN)
+                .duration(20).EUt(30).buildAndRegister();
+
         //海藻方块
         ASSEMBLER_RECIPES.recipeBuilder()
                 .inputs(MetaTileEntities.HULL[GTValues.HV].getStackForm())

@@ -61,13 +61,9 @@ public class MetaTileEntityRubbishBin extends MetaTileEntity{
     }
     @SideOnly(Side.CLIENT)
     public Pair<TextureAtlasSprite, Integer> getParticleTexture() {
-        if (ModHandler.isMaterialWood(this.material)) {
-            return Pair.of(Textures.WOODEN_CRATE.getParticleTexture(), this.getPaintingColorForRendering());
-        } else {
-            int color = ColourRGBA.multiply(GTUtility.convertRGBtoOpaqueRGBA_CL(this.material.getMaterialRGB()), GTUtility.convertRGBtoOpaqueRGBA_CL(this.getPaintingColorForRendering()));
-            color = GTUtility.convertOpaqueRGBA_CLtoRGB(color);
-            return Pair.of(Textures.METAL_CRATE.getParticleTexture(), color);
-        }
+
+        int color = ColourRGBA.multiply(GTUtility.convertRGBtoOpaqueRGBA_CL(this.material.getMaterialRGB()), GTUtility.convertRGBtoOpaqueRGBA_CL(this.getPaintingColorForRendering()));color = GTUtility.convertOpaqueRGBA_CLtoRGB(color);return Pair.of(Textures.METAL_CRATE.getParticleTexture(), color);
+
     }
     public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
 
