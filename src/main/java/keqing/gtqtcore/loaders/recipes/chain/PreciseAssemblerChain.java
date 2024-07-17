@@ -36,7 +36,7 @@ public class PreciseAssemblerChain {
                 .fluidInputs(Lead.getFluid(L * 8))
                 .output(CIRCUIT_GOOD_I)
                 .EUt(VA[IV])
-                .duration(2000)
+                .duration(600)
                 .buildAndRegister();
 
         PRECISE_ASSEMBLER_RECIPES.recipeBuilder()
@@ -50,7 +50,7 @@ public class PreciseAssemblerChain {
                 .fluidInputs(Zylon.getFluid(L * 4))
                 .output(CIRCUIT_GOOD_II)
                 .EUt(VA[LuV])
-                .duration(2000)
+                .duration(600)
                 .Tier(2)
                 .CWUt(120)
                 .buildAndRegister();
@@ -66,7 +66,7 @@ public class PreciseAssemblerChain {
                 .fluidInputs(KaptonK.getFluid(L * 4))
                 .output(CIRCUIT_GOOD_III)
                 .EUt(VA[ZPM])
-                .duration(2000)
+                .duration(600)
                 .Tier(3)
                 .CWUt(480)
                 .buildAndRegister();
@@ -82,7 +82,7 @@ public class PreciseAssemblerChain {
                 .fluidInputs(KaptonE.getFluid(L * 4))
                 .output(CIRCUIT_GOOD_IV)
                 .EUt(VA[UV])
-                .duration(2000)
+                .duration(600)
                 .Tier(4)
                 .CWUt(1920)
                 .buildAndRegister();
@@ -98,7 +98,7 @@ public class PreciseAssemblerChain {
                 .fluidInputs(Kevlar.getFluid(L * 4))
                 .output(CIRCUIT_GOOD_V)
                 .EUt(VA[UHV])
-                .duration(2000)
+                .duration(600)
                 .Tier(5)
                 .CWUt(7680)
                 .buildAndRegister();

@@ -26,20 +26,12 @@ import gregtechfoodoption.recipe.GTFORecipeMaps;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.unification.GTQTMaterials;
 import keqing.gtqtcore.api.unification.ore.GTQTOrePrefix;
-import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.common.block.blocks.GTQTStoneVariantBlock;
 import keqing.gtqtcore.common.items.GTQTMetaItems;
 import keqing.gtqtcore.common.items.metaitems.GTQTMetaToolItems;
-import keqing.gtqtcore.loaders.recipes.handlers.NanoCoatingRecipes;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 
 import javax.annotation.Nonnull;
-
-import java.util.Arrays;
-import java.util.EnumMap;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
@@ -47,7 +39,6 @@ import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.info.MaterialFlags.*;
 import static gregtech.api.unification.material.properties.PropertyKey.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
-import static gregtech.common.crafting.ToolHeadReplaceRecipe.setToolHeadForTool;
 import static gregtech.common.items.MetaItems.*;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;

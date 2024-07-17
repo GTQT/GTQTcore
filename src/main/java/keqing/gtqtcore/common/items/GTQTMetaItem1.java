@@ -122,6 +122,7 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         SOLAR_PLATE_MKII=this.addItem(91, "solar_plate_mkii").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         SOLAR_PLATE_MKIII=this.addItem(92, "solar_plate_mkiii").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
 
+        TIME_BOTTLE = this.addItem(97, "time_bottle").setMaxStackSize(1).addComponents(new TimeBottleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         //电池
         BATTERY_NIMH_EMPTY = addItem(100, "nickel.metal.hydride.battery.empty").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         BATTERY_SMALL_LITHIUM_ION_EMPTY = addItem(102, "small.lithium.ion.battery.empty").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
@@ -192,7 +193,23 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         //快乐模具
         MOLD_GAS=this.addItem(300, "mold.gas").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         MOLD_MOTOR=this.addItem(301, "mold.motor").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        TIME_BOTTLE = this.addItem(97, "time_bottle").setMaxStackSize(1).addComponents(new TimeBottleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+
+        //阳光化合物们
+        SUN_MATTER=this.addItem(320, "sun_matter").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_HP);
+        SUNLINSE=this.addItem(321, "sunlinse").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_HP);
+
+        SUNNARIUMPART=this.addItem(322, "sunnariumpart").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_HP);
+        SUNNARIUM=this.addItem(323, "sunnarium").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_HP);
+        SUNNARIUM_PLATE=this.addItem(324, "sunnarium_plate").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_HP);
+
+        SUNNARIUM_ENRICHED=this.addItem(325, "sunnarium_enriched").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_HP);
+        SUNNARIUM_ENRICHED_PLATE=this.addItem(326, "sunnarium_enriched_plate").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_HP);
+
+        //升级
+        ADV_ENERGY_STORAGE=this.addItem(350, "adv_energy_storage").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        ADV_CAPACITOR =this.addItem(351, "adv_capacitor").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        ADV_COMPONENT_VENT=this.addItem(352, "adv_component_vent").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        ADV_HEAT_EXCHANGE=this.addItem(353, "adv_heat_exchange").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         //磨球
         GRINDBALL_SOAPSTONE = this.addItem(391, "mill.grindball_soapstone").setMaxStackSize(1).addComponents(new MillBallBehavior()).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         GRINDBALL_ALUMINIUM = this.addItem(392, "mill.grindball_aluminium").setMaxStackSize(1).addComponents(new MillBallBehavior()).setCreativeTabs(CommonProxy.GTQTCore_TAB);

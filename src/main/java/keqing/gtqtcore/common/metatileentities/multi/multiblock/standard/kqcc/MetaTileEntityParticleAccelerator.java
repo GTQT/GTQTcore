@@ -346,7 +346,7 @@ public class MetaTileEntityParticleAccelerator extends GTQTRecipeMapMultiblockCo
     }
 
     private static IBlockState getFrameState() {
-        return MetaBlocks.FRAMES.get(Materials.Steel).getBlock(Materials.Steel);
+        return MetaBlocks.FRAMES.get(Materials.Naquadah).getBlock(Materials.Naquadah);
     }
 
     private static IBlockState getGlassState() {

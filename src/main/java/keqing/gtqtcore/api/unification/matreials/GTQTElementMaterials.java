@@ -278,6 +278,9 @@ public class GTQTElementMaterials {
                 .fluid()
                 .color(0x20142C)
                 .iconSet(DULL)
+                .flags(GENERATE_PLATE, GENERATE_ROD, GENERATE_RING, GENERATE_BOLT_SCREW, GENERATE_GEAR, GENERATE_ROTOR,
+                        GENERATE_FRAME,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROUND,GENERATE_SMALL_GEAR
+                        ,GENERATE_SPRING,GENERATE_SPRING_SMALL)
                 .element(GTQTElements.VoidMetal)
                 .build();
         //  26025 Mithril
@@ -288,12 +291,17 @@ public class GTQTElementMaterials {
                 .iconSet(DULL)
                 .blast(10800, BlastProperty.GasTier.HIGHER)
                 .element(GTQTElements.Mithril)
-                .flags(GENERATE_PLATE, GENERATE_FOIL, GENERATE_FINE_WIRE)
+                .flags(GENERATE_PLATE, GENERATE_ROD, GENERATE_RING, GENERATE_BOLT_SCREW, GENERATE_GEAR, GENERATE_ROTOR,
+                        GENERATE_FRAME,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROUND,GENERATE_SMALL_GEAR
+                        ,GENERATE_SPRING,GENERATE_SPRING_SMALL)
                 .build();
         //  26026 Bismuth-209
         GTQTMaterials.Bismuth209 = new Material.Builder(getMaterialsId(), gregtechId("bismuth_209"))
                 .fluid()
                 .color(Bismuth.getMaterialRGB())
+                .flags(GENERATE_PLATE, GENERATE_ROD, GENERATE_RING, GENERATE_BOLT_SCREW, GENERATE_GEAR, GENERATE_ROTOR,
+                        GENERATE_FRAME,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROUND,GENERATE_SMALL_GEAR
+                        ,GENERATE_SPRING,GENERATE_SPRING_SMALL)
                 .element(GTQTElements.Bismuth209)
                 .build();
         //  26027 Lead-209

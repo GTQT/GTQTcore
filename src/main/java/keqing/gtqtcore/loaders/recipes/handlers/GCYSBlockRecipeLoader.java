@@ -40,21 +40,6 @@ public class GCYSBlockRecipeLoader {
                 'P', new UnificationEntry(plate, HexagonalBoronNitride)
         );
 
-        // Substrates
-        ModHandler.addShapedRecipe(true, "substrate", GTQTMetaBlocks.MULTIBLOCK_CASING.getItemVariant(BlockGCYSMultiblockCasing.CasingType.SUBSTRATE),
-                "PPP", "RFR", "R R",
-                'P', new UnificationEntry(plate, Palladium),
-                'R', new UnificationEntry(stick, RedSteel),
-                'F', new UnificationEntry(frameGt, BlueSteel)
-        );
-
-        ModHandler.addShapedRecipe(true, "advanced_substrate", GTQTMetaBlocks.MULTIBLOCK_CASING.getItemVariant(BlockGCYSMultiblockCasing.CasingType.ADVANCED_SUBSTRATE),
-                "PPP", "RFR", "R R",
-                'P', new UnificationEntry(plate, Ruridit),
-                'R', new UnificationEntry(stick, Duranium),
-                'F', new UnificationEntry(frameGt, NaquadahAlloy)
-        );
-
         // Drill Head
         ModHandler.addShapedRecipe(true, "industrial_drill_head", GTQTMetaBlocks.MULTIBLOCK_CASING.getItemVariant(BlockGCYSMultiblockCasing.CasingType.DRILL_HEAD),
                 "PGP", "MHM", "SSS",

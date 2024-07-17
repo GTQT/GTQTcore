@@ -17,6 +17,7 @@ import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.BlockGCYSMultiblockCasing;
+import keqing.gtqtcore.common.block.blocks.BlockPCBFactoryCasing;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.ResourceLocation;
 
@@ -51,7 +52,7 @@ public class MetaTileEntityCVDUnit extends RecipeMapMultiblockController {
     }
 
     private static IBlockState getSubstrateState() {
-        return GTQTMetaBlocks.MULTIBLOCK_CASING.getState(BlockGCYSMultiblockCasing.CasingType.SUBSTRATE);
+        return GTQTMetaBlocks.PCB_FACTORY_CASING.getState(BlockPCBFactoryCasing.PCBFactoryCasingType.SUBSTRATE_CASING);
     }
 
     private static IBlockState getGlassState() {

@@ -1,21 +1,304 @@
 package keqing.gtqtcore.loaders.recipes.handlers;
 
+import gregtech.api.unification.material.MarkerMaterials;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
-
+import keqing.gtqtcore.common.block.GTQTMetaBlocks;
+import static gregicality.multiblocks.api.unification.GCYMMaterials.TitaniumTungstenCarbide;
+import static gregtech.api.GTValues.*;
+import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
-import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.NUCLEOSYNTHESIS;
+import static gregtech.common.items.MetaItems.*;
+import static gregtech.common.metatileentities.MetaTileEntities.*;
+import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.PRECISE_ASSEMBLER_RECIPES;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
+import static keqing.gtqtcore.common.block.blocks.GTQTParticleAccelerator.MachineType.*;
+import static keqing.gtqtcore.common.block.blocks.GTQTPowerSupply.SupplyType.POWER_SUPPLY_BASIC;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
+import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.PARTICLE_ACCELERATOR;
 
 
 public class ParticleAccelerator {
 
     public static void init() {
+        common();
         TARGET_CHAMBER();
         PARTICLE_ACCELERATOR_RECIPES();
         NUCLEOSYNTHESIS();
+
+    }
+    public static void common()
+    {
+        PRECISE_ASSEMBLER_RECIPES.recipeBuilder()
+                .input(CIRCUIT_GOOD_I,1)
+                .input(pipeHugeFluid,TungstenSteel,8)
+                .input(wireGtSingle,IVSuperconductor,4)
+                .input(rotor,RhodiumPlatedPalladium,2)
+                .fluidInputs(LiquidHelium.getFluid(L * 8))
+                .fluidInputs(UltraGlue.getFluid(L * 8))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 4))
+                .fluidInputs(Zylon.getFluid(L * 2))
+                .output(ADV_HEAT_EXCHANGE)
+                .EUt(VA[IV])
+                .duration(200)
+                .Tier(1)
+                .CWUt(120)
+                .buildAndRegister();
+
+        PRECISE_ASSEMBLER_RECIPES.recipeBuilder()
+                .input(CIRCUIT_GOOD_I,1)
+                .input(ENERGY_LAPOTRONIC_ORB_CLUSTER,8)
+                .input(wireGtSingle,IVSuperconductor,4)
+                .input(rotor,RhodiumPlatedPalladium,2)
+                .fluidInputs(LiquidHelium.getFluid(L * 8))
+                .fluidInputs(UltraGlue.getFluid(L * 8))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 4))
+                .fluidInputs(Zylon.getFluid(L * 2))
+                .output(ADV_ENERGY_STORAGE)
+                .EUt(VA[IV])
+                .duration(200)
+                .Tier(1)
+                .CWUt(120)
+                .buildAndRegister();
+
+        PRECISE_ASSEMBLER_RECIPES.recipeBuilder()
+                .input(CIRCUIT_GOOD_I,1)
+                .input(ELECTRIC_PUMP_IV,8)
+                .input(wireGtSingle,IVSuperconductor,4)
+                .input(VOLTAGE_COIL_IV,4)
+                .fluidInputs(LiquidHelium.getFluid(L * 8))
+                .fluidInputs(UltraGlue.getFluid(L * 8))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 4))
+                .fluidInputs(Zylon.getFluid(L * 2))
+                .output(ADV_COMPONENT_VENT)
+                .EUt(VA[IV])
+                .duration(200)
+                .Tier(1)
+                .CWUt(120)
+                .buildAndRegister();
+
+        PRECISE_ASSEMBLER_RECIPES.recipeBuilder()
+                .input(CIRCUIT_GOOD_I,1)
+                .input(circuit, MarkerMaterials.Tier.LuV,8)
+                .input(wireGtSingle,IVSuperconductor,4)
+                .input(rotor,RhodiumPlatedPalladium,2)
+                .fluidInputs(LiquidHelium.getFluid(L * 8))
+                .fluidInputs(UltraGlue.getFluid(L * 8))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 4))
+                .fluidInputs(Zylon.getFluid(L * 2))
+                .output(ADV_CAPACITOR)
+                .EUt(VA[IV])
+                .duration(200)
+                .Tier(1)
+                .CWUt(120)
+                .buildAndRegister();
+
+        //控制器
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(CIRCUIT_GOOD_I,64)
+                .inputs(GTQTMetaBlocks.PARTICLE_ACCELERATOR.getItemVariant(ACCELERATOR_CASING,32))
+                .input(EMITTER_IV, 64)
+                .input(SENSOR_IV, 64)
+                .input(frameGt, NaquadahEnriched, 64)
+                .input(frameGt, NaquadahEnriched, 64)
+                .input(plate, NaquadahAlloy, 64)
+                .input(plate, NaquadahAlloy, 64)
+                .input(gearSmall,HSSS,64)
+                .input(stickLong,Samarium,64)
+                .input(screw,RhodiumPlatedPalladium,64)
+                .input(foil,NiobiumTitanium,64)
+                .input(wireFine,Ruridit,64)
+                .input(wireFine,Ruridit,64)
+                .input(wireGtSingle, IVSuperconductor, 64)
+                .input(wireGtSingle, IVSuperconductor, 64)
+                .output(PARTICLE_ACCELERATOR)
+                .fluidInputs(Polybenzimidazole.getFluid(L * 32))
+                .fluidInputs(Zylon.getFluid(L * 64))
+                .fluidInputs(TitaniumTungstenCarbide.getFluid(L * 64))
+                .fluidInputs(UltraGlue.getFluid(L * 64))
+                .scannerResearch(b -> b
+                        .researchStack(GTQTMetaBlocks.PARTICLE_ACCELERATOR.getItemVariant(ACCELERATOR_CASING))
+                        .EUt(VA[IV]))
+                .duration(200).EUt(VA[IV]).buildAndRegister();
+
+        //
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(CIRCUIT_GOOD_I)
+                .input(ADV_HEAT_EXCHANGE)
+                .input(frameGt, NaquadahEnriched, 2)
+                .input(plate, RhodiumPlatedPalladium, 8)
+                .input(gearSmall,HSSS,8)
+                .input(screw,NanometerBariumTitanate,8)
+                .input(foil,Ruridit,8)
+                .input(wireFine, Platinum, 16)
+                .outputs(GTQTMetaBlocks.PARTICLE_ACCELERATOR.getItemVariant(ACCELERATOR_CASING))
+                .fluidInputs(Polybenzimidazole.getFluid(L*2))
+                .fluidInputs(Zylon.getFluid(L * 4))
+                .fluidInputs(NiobiumTitanium.getFluid(L * 4))
+                .duration(400).EUt(VA[IV]).buildAndRegister();
+
+        //部件I
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(HULL[5])
+                .input(ADV_ENERGY_STORAGE)
+                .input(CIRCUIT_GOOD_I)
+                .input(VOLTAGE_COIL_IV,8)
+                .input(GENERAL_CIRCUIT_IV, 2)
+                .input(plate, RhodiumPlatedPalladium, 4)
+                .input(gearSmall,NiobiumTitanium,2)
+                .input(wireFine,Platinum,32)
+                .input(wireGtSingle, IVSuperconductor, 8)
+                .outputs(GTQTMetaBlocks.PARTICLE_ACCELERATOR.getItemVariant(ACCELERATOR_FIRM_MKI))
+                .fluidInputs(Polybenzimidazole.getFluid(L))
+                .fluidInputs(Zylon.getFluid(L * 2))
+                .duration(400).EUt(VA[EV]).buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(HULL[5])
+                .input(ADV_CAPACITOR)
+                .input(CIRCUIT_GOOD_I)
+                .input(VOLTAGE_COIL_IV,8)
+                .input(EMITTER_IV, 2)
+                .input(plate, RhodiumPlatedPalladium, 4)
+                .input(gearSmall,NiobiumTitanium,2)
+                .input(wireFine,Platinum,32)
+                .input(wireGtSingle, IVSuperconductor, 8)
+                .outputs(GTQTMetaBlocks.PARTICLE_ACCELERATOR.getItemVariant(ACCELERATOR_ELECTROMAGNET_MKI))
+                .fluidInputs(Polybenzimidazole.getFluid(L))
+                .fluidInputs(Zylon.getFluid(L * 2))
+                .duration(400).EUt(VA[EV]).buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(HULL[5])
+                .input(ADV_COMPONENT_VENT)
+                .input(CIRCUIT_GOOD_I)
+                .input(VOLTAGE_COIL_IV,8)
+                .input(SENSOR_IV, 2)
+                .input(plate, RhodiumPlatedPalladium, 4)
+                .input(gearSmall,NiobiumTitanium,2)
+                .input(wireFine,Platinum,32)
+                .input(wireGtSingle, IVSuperconductor, 8)
+                .outputs(GTQTMetaBlocks.PARTICLE_ACCELERATOR.getItemVariant(ACCELERATOR_ELECTROMAGNETV_MKI))
+                .fluidInputs(Polybenzimidazole.getFluid(L))
+                .fluidInputs(Zylon.getFluid(L * 2))
+                .duration(400).EUt(VA[EV]).buildAndRegister();
+
+        //部件II
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(HULL[6])
+                .input(ADV_ENERGY_STORAGE,2)
+                .input(CIRCUIT_GOOD_II)
+                .input(VOLTAGE_COIL_LuV,8)
+                .input(GENERAL_CIRCUIT_LuV, 2)
+                .input(plate, RhodiumPlatedPalladium, 4)
+                .input(gearSmall,NiobiumTitanium,2)
+                .input(wireFine,Platinum,32)
+                .input(wireGtSingle, LuVSuperconductor, 8)
+                .outputs(GTQTMetaBlocks.PARTICLE_ACCELERATOR.getItemVariant(ACCELERATOR_FIRM_MKII))
+                .stationResearch(b -> b
+                        .researchStack(GTQTMetaBlocks.PARTICLE_ACCELERATOR.getItemVariant(ACCELERATOR_FIRM_MKI))
+                        .CWUt(4000,1000000)
+                        .EUt(VA[LuV]))
+                .fluidInputs(Polybenzimidazole.getFluid(L))
+                .fluidInputs(Zylon.getFluid(L * 2))
+                .duration(400).EUt(VA[LuV]).buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(HULL[6])
+                .input(ADV_CAPACITOR,2)
+                .input(CIRCUIT_GOOD_II)
+                .input(VOLTAGE_COIL_LuV,8)
+                .input(EMITTER_LuV, 2)
+                .input(plate, RhodiumPlatedPalladium, 4)
+                .input(gearSmall,NiobiumTitanium,2)
+                .input(wireFine,Platinum,32)
+                .input(wireGtSingle, LuVSuperconductor, 8)
+                .outputs(GTQTMetaBlocks.PARTICLE_ACCELERATOR.getItemVariant(ACCELERATOR_ELECTROMAGNET_MKII))
+                .stationResearch(b -> b
+                        .researchStack(GTQTMetaBlocks.PARTICLE_ACCELERATOR.getItemVariant(ACCELERATOR_ELECTROMAGNET_MKI))
+                        .CWUt(4000,1000000)
+                        .EUt(VA[LuV]))
+                .fluidInputs(Polybenzimidazole.getFluid(L))
+                .fluidInputs(Zylon.getFluid(L * 2))
+                .duration(400).EUt(VA[LuV]).buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(HULL[6])
+                .input(ADV_COMPONENT_VENT,2)
+                .input(CIRCUIT_GOOD_II)
+                .input(VOLTAGE_COIL_LuV,8)
+                .input(SENSOR_LuV, 2)
+                .input(plate, RhodiumPlatedPalladium, 4)
+                .input(gearSmall,NiobiumTitanium,2)
+                .input(wireFine,Platinum,32)
+                .input(wireGtSingle, LuVSuperconductor, 8)
+                .outputs(GTQTMetaBlocks.PARTICLE_ACCELERATOR.getItemVariant(ACCELERATOR_ELECTROMAGNETV_MKII))
+                .stationResearch(b -> b
+                        .researchStack(GTQTMetaBlocks.PARTICLE_ACCELERATOR.getItemVariant(ACCELERATOR_ELECTROMAGNETV_MKI))
+                        .CWUt(4000,1000000)
+                        .EUt(VA[LuV]))
+                .fluidInputs(Polybenzimidazole.getFluid(L))
+                .fluidInputs(Zylon.getFluid(L * 2))
+                .duration(400).EUt(VA[LuV]).buildAndRegister();
+
+        //部件III
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(HULL[7])
+                .input(ADV_ENERGY_STORAGE,8)
+                .input(CIRCUIT_GOOD_III)
+                .input(VOLTAGE_COIL_ZPM,8)
+                .input(GENERAL_CIRCUIT_ZPM, 2)
+                .input(plate, RhodiumPlatedPalladium, 4)
+                .input(gearSmall,NiobiumTitanium,2)
+                .input(wireFine,Platinum,32)
+                .input(wireGtSingle, ZPMSuperconductor, 8)
+                .outputs(GTQTMetaBlocks.PARTICLE_ACCELERATOR.getItemVariant(ACCELERATOR_FIRM_MKIII))
+                .stationResearch(b -> b
+                        .researchStack(GTQTMetaBlocks.PARTICLE_ACCELERATOR.getItemVariant(ACCELERATOR_FIRM_MKII))
+                        .CWUt(4000,1000000)
+                        .EUt(VA[ZPM]))
+                .fluidInputs(Polybenzimidazole.getFluid(L))
+                .fluidInputs(Zylon.getFluid(L * 2))
+                .duration(400).EUt(VA[ZPM]).buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(HULL[7])
+                .input(ADV_CAPACITOR,8)
+                .input(CIRCUIT_GOOD_III)
+                .input(VOLTAGE_COIL_ZPM,8)
+                .input(EMITTER_ZPM, 2)
+                .input(plate, RhodiumPlatedPalladium, 4)
+                .input(gearSmall,NiobiumTitanium,2)
+                .input(wireFine,Platinum,32)
+                .input(wireGtSingle, ZPMSuperconductor, 8)
+                .outputs(GTQTMetaBlocks.PARTICLE_ACCELERATOR.getItemVariant(ACCELERATOR_ELECTROMAGNET_MKIII))
+                .stationResearch(b -> b
+                        .researchStack(GTQTMetaBlocks.PARTICLE_ACCELERATOR.getItemVariant(ACCELERATOR_ELECTROMAGNET_MKII))
+                        .CWUt(4000,1000000)
+                        .EUt(VA[ZPM]))
+                .fluidInputs(Polybenzimidazole.getFluid(L))
+                .fluidInputs(Zylon.getFluid(L * 2))
+                .duration(400).EUt(VA[ZPM]).buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(HULL[7])
+                .input(ADV_COMPONENT_VENT,8)
+                .input(CIRCUIT_GOOD_III)
+                .input(VOLTAGE_COIL_ZPM,8)
+                .input(SENSOR_ZPM, 2)
+                .input(plate, RhodiumPlatedPalladium, 4)
+                .input(gearSmall,NiobiumTitanium,2)
+                .input(wireFine,Platinum,32)
+                .input(wireGtSingle, ZPMSuperconductor, 8)
+                .outputs(GTQTMetaBlocks.PARTICLE_ACCELERATOR.getItemVariant(ACCELERATOR_ELECTROMAGNETV_MKIII))
+                .stationResearch(b -> b
+                        .researchStack(GTQTMetaBlocks.PARTICLE_ACCELERATOR.getItemVariant(ACCELERATOR_ELECTROMAGNETV_MKII))
+                        .CWUt(4000,1000000)
+                        .EUt(VA[ZPM]))
+                .fluidInputs(Polybenzimidazole.getFluid(L))
+                .fluidInputs(Zylon.getFluid(L * 2))
+                .duration(400).EUt(VA[ZPM]).buildAndRegister();
 
     }
     public static void NUCLEOSYNTHESIS()
@@ -465,7 +748,7 @@ public class ParticleAccelerator {
         GTQTcoreRecipeMaps.NUCLEOSYNTHESIS.recipeBuilder()
                 .input(NEUTRON)
                 .fluidInputs(Caesium.getFluid(1000))
-                .fluidOutputs(Magnesium.getFluid(1000))
+                .fluidOutputs(Neodymium.getFluid(1000))
                 .EUToStart(42000)
                 .Scattering(6)
                 .duration(100)
@@ -474,7 +757,7 @@ public class ParticleAccelerator {
 
         GTQTcoreRecipeMaps.NUCLEOSYNTHESIS.recipeBuilder()
                 .input(NEUTRON)
-                .fluidInputs(Magnesium.getFluid(1000))
+                .fluidInputs(Neodymium.getFluid(1000))
                 .fluidOutputs(Samarium.getFluid(1000))
                 .EUToStart(43000)
                 .Scattering(5)
@@ -484,7 +767,7 @@ public class ParticleAccelerator {
 
         GTQTcoreRecipeMaps.NUCLEOSYNTHESIS.recipeBuilder()
                 .input(NEUTRON)
-                .fluidInputs(Magnesium.getFluid(1000))
+                .fluidInputs(Samarium.getFluid(1000))
                 .fluidOutputs(Terbium.getFluid(1000))
                 .EUToStart(44000)
                 .Scattering(4)

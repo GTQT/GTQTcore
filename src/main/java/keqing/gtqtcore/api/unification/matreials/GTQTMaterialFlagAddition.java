@@ -18,6 +18,7 @@ public class GTQTMaterialFlagAddition {
         //  Copper (LV), Cupronickel (MV), Electrum (HV), Kanthal (EV),
         //  Graphene (IV), Ruridit (LuV), Vanadium Gallium (ZPM), Americium (UV)
         //  Europium (UHV), Carbon Nanotube (UEV)
+        Polybenzimidazole.addFlags(GENERATE_FRAME);
         Aluminium.addFlags(GENERATE_ROTOR);
         Copper.addFlags(GENERATE_COIL);
         Cupronickel.addFlags(GENERATE_COIL);

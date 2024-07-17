@@ -67,42 +67,44 @@ public class MetaTileEntityIndustryWaterPump extends MultiblockControllerBase im
             if (biomeModifier == 0) {
                 biomeModifier = getAmount();
             } else if (biomeModifier > 0) {
-                waterTank.fill(Materials.Water.getFluid(getFluidProduction()), true);
+                waterTank.fill(Materials.Water.getFluid(getFluidProduction()*4), true);
             }
         }
         if(this.getWorld().provider.getDimension()==-1)
-            waterTank.fill(Materials.Lava.getFluid(10), true);
+            waterTank.fill(Materials.Lava.getFluid(20), true);
         if(this.getWorld().provider.getDimension()>=2)
-            waterTank.fill(Materials.Water.getFluid(10), true);
+            waterTank.fill(Materials.Water.getFluid(500), true);
     }
 
     private int getAmount() {
-        WorldProvider provider = getWorld().provider;
-        if (provider.isNether() || provider.doesWaterVaporize()) {
-            return -1; // Disabled
+        WorldProvider provider = this.getWorld().provider;
+        if (!provider.isNether() && !provider.doesWaterVaporize()) {
+            Biome biome = this.getWorld().getBiome(this.getPos());
+            Set<BiomeDictionary.Type> biomeTypes = BiomeDictionary.getTypes(biome);
+            if (biomeTypes.contains(BiomeDictionary.Type.NETHER)) {
+                return -1;
+            } else if (biomeTypes.contains(BiomeDictionary.Type.WATER)) {
+                return 1000;
+            } else if (!biomeTypes.contains(BiomeDictionary.Type.SWAMP) && !biomeTypes.contains(BiomeDictionary.Type.WET)) {
+                if (biomeTypes.contains(BiomeDictionary.Type.JUNGLE)) {
+                    return 350;
+                } else if (biomeTypes.contains(BiomeDictionary.Type.SNOWY)) {
+                    return 300;
+                } else if (!biomeTypes.contains(BiomeDictionary.Type.PLAINS) && !biomeTypes.contains(BiomeDictionary.Type.FOREST)) {
+                    if (biomeTypes.contains(BiomeDictionary.Type.COLD)) {
+                        return 175;
+                    } else {
+                        return biomeTypes.contains(BiomeDictionary.Type.BEACH) ? 170 : 100;
+                    }
+                } else {
+                    return 250;
+                }
+            } else {
+                return 800;
+            }
+        } else {
+            return -1;
         }
-        Biome biome = getWorld().getBiome(getPos());
-        Set<BiomeDictionary.Type> biomeTypes = BiomeDictionary.getTypes(biome);
-        if (biomeTypes.contains(BiomeDictionary.Type.NETHER)) {
-            return -1; // Disabled
-        }
-        if (biomeTypes.contains(BiomeDictionary.Type.WATER)) {
-            return 1000;
-        } else if (biomeTypes.contains(BiomeDictionary.Type.SWAMP) || biomeTypes.contains(BiomeDictionary.Type.WET)) {
-            return 800;
-        } else if (biomeTypes.contains(BiomeDictionary.Type.JUNGLE)) {
-            return 350;
-        } else if (biomeTypes.contains(BiomeDictionary.Type.SNOWY)) {
-            return 300;
-        } else
-        if (biomeTypes.contains(BiomeDictionary.Type.PLAINS) || biomeTypes.contains(BiomeDictionary.Type.FOREST)) {
-            return 250;
-        } else if (biomeTypes.contains(BiomeDictionary.Type.COLD)) {
-            return 175;
-        } else if (biomeTypes.contains(BiomeDictionary.Type.BEACH)) {
-            return 170;
-        }
-        return 100;
     }
 
     @Override

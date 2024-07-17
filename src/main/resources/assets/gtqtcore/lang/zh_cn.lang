@@ -3197,6 +3197,19 @@ metaitem.rock.bet2.name=沼泽沉积岩碎片
 metaitem.rock.bet3.name=沼泽冲击岩碎片
 metaitem.rock.bet4.name=沼泽页岩碎片
 
+metaitem.sun_matter.name=阳光化合物
+metaitem.sunlinse.name=日光透镜
+metaitem.sunnariumpart.name=日光金属偏振片
+metaitem.sunnarium.name=日光金属
+metaitem.sunnarium_plate.name=日光金属板
+metaitem.sunnarium_enriched.name=耀光金属
+metaitem.sunnarium_enriched_plate.name=耀光金属板
+
+metaitem.adv_energy_storage.name=高级蓄能调节模块
+metaitem.adv_capacitor.name=高级中枢控制模块
+metaitem.adv_component_vent.name=高级部件散热模块
+metaitem.adv_heat_exchange.name=高级热能交换模块
+
 gregtech.material.lv_superconductor=LV超导体
 gregtech.material.uv_superconductor=UV超导体
 gregtech.material.mv_superconductor=MV超导体
@@ -4233,6 +4246,8 @@ gtqtcore.multiblock.mega_heat_exchanger.tooltip.parallel=相当于§e%s§7台大
 gtqtcore.recipe.max_rate=最大流量： %s L/s
 gtqtcore.recipe.flow_rate=流量阈值： %s L/s
 
+tile.pcb_factory_casing.substrate.name=基材外壳
+tile.pcb_factory_casing.advanced_substrate.name=高级基材外壳
 tile.pcb_factory_casing.basic_photolithographic_framework_casing.name=精密光刻框架外壳
 tile.pcb_factory_casing.basic_photolithographic_framework_casing.tooltip=超高精度激光蚀刻/n§6PCB工厂§7-外壳等级：§bI§7
 tile.pcb_factory_casing.mold_printing_assembly_framework_casing.name=纳米级模板印刷框架外壳

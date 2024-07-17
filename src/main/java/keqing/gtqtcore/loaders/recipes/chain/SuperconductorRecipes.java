@@ -21,7 +21,7 @@ public class SuperconductorRecipes {
 
     public static void init() {
 
-        ASSEMBLER_RECIPES.recipeBuilder().duration(300).EUt(VA[2])
+        ASSEMBLER_RECIPES.recipeBuilder().duration(600).EUt(VA[2])
                 .input(wireGtSingle, ManganesePhosphide , 8)
                 .input(pipeTinyFluid, Steel, 4)
                 .inputs(ELECTRIC_PUMP_LV.getStackForm(2))
@@ -39,7 +39,7 @@ public class SuperconductorRecipes {
                 .output(wireGtSingle, MVSuperconductor, 8)
                 .buildAndRegister();
 
-        ASSEMBLER_RECIPES.recipeBuilder().duration(900).EUt(VA[4])
+        ASSEMBLER_RECIPES.recipeBuilder().duration(600).EUt(VA[4])
                 .input(wireGtSingle, MercuryBariumCalciumCuprate , 8)
                 .input(pipeTinyFluid, Titanium, 4)
                 .inputs(ELECTRIC_PUMP_HV.getStackForm(2))
@@ -48,7 +48,7 @@ public class SuperconductorRecipes {
                 .output(wireGtSingle, HVSuperconductor, 8)
                 .buildAndRegister();
 
-        ASSEMBLER_RECIPES.recipeBuilder().duration(1200).EUt(VA[5])
+        ASSEMBLER_RECIPES.recipeBuilder().duration(600).EUt(VA[5])
                 .input(wireGtSingle, UraniumTriplatinum , 8)
                 .input(pipeTinyFluid, TungstenSteel, 4)
                 .inputs(ELECTRIC_PUMP_EV.getStackForm(2))
@@ -57,7 +57,7 @@ public class SuperconductorRecipes {
                 .output(wireGtSingle, EVSuperconductor, 8)
                 .buildAndRegister();
 
-        ASSEMBLER_RECIPES.recipeBuilder().duration(1500).EUt(VA[6])
+        ASSEMBLER_RECIPES.recipeBuilder().duration(600).EUt(VA[6])
                 .input(wireGtSingle, SamariumIronArsenicOxide, 8)
                 .input(pipeTinyFluid, NiobiumTitanium, 4)
                 .inputs(ELECTRIC_PUMP_IV.getStackForm(2))
@@ -66,7 +66,7 @@ public class SuperconductorRecipes {
                 .output(wireGtSingle, IVSuperconductor, 8)
                 .buildAndRegister();
 
-        ASSEMBLER_RECIPES.recipeBuilder().duration(1800).EUt(VA[7])
+        ASSEMBLER_RECIPES.recipeBuilder().duration(600).EUt(VA[7])
                 .input(wireGtSingle, IndiumTinBariumTitaniumCuprate , 8)
                 .input(pipeTinyFluid, Polybenzimidazole, 4)
                 .inputs(ELECTRIC_PUMP_LuV.getStackForm(2))
@@ -75,7 +75,7 @@ public class SuperconductorRecipes {
                 .output(wireGtSingle, LuVSuperconductor, 8)
                 .buildAndRegister();
 
-        ASSEMBLER_RECIPES.recipeBuilder().duration(2100).EUt(VA[8])
+        ASSEMBLER_RECIPES.recipeBuilder().duration(600).EUt(VA[8])
                 .input(wireGtSingle, UraniumRhodiumDinaquadide , 8)
                 .input(pipeTinyFluid, NaquadahAlloy, 4)
                 .inputs(ELECTRIC_PUMP_ZPM.getStackForm(2))
@@ -84,7 +84,7 @@ public class SuperconductorRecipes {
                 .output(wireGtSingle, ZPMSuperconductor, 8)
                 .buildAndRegister();
 
-        ASSEMBLER_RECIPES.recipeBuilder().duration(2400).EUt(VA[9])
+        ASSEMBLER_RECIPES.recipeBuilder().duration(600).EUt(VA[9])
                 .input(wireGtSingle, EnrichedNaquadahTriniumEuropiumDuranide , 8)
                 .input(pipeTinyFluid, Duranium, 4)
                 .inputs(ELECTRIC_PUMP_UV.getStackForm(2))
@@ -93,7 +93,7 @@ public class SuperconductorRecipes {
                 .output(wireGtSingle, UVSuperconductor, 8)
                 .buildAndRegister();
 
-        ASSEMBLER_RECIPES.recipeBuilder().duration(2700).EUt(VA[10])
+        ASSEMBLER_RECIPES.recipeBuilder().duration(600).EUt(VA[10])
                 .input(wireGtSingle, RutheniumTriniumAmericiumNeutronate , 8)
                 .input(pipeTinyFluid, Neutronium, 4)
                 .inputs(ELECTRIC_PUMP_UHV.getStackForm(2))

@@ -1,10 +1,6 @@
 package keqing.gtqtcore.common.items;
 
 import gregtech.api.items.metaitem.MetaItem;
-import gregtech.api.items.metaitem.StandardMetaItem;
-import keqing.gtqtcore.common.CommonProxy;
-import keqing.gtqtcore.common.block.blocks.GTQTADVGlass;
-import net.minecraft.item.ItemStack;
 
 import java.util.List;
 
@@ -121,6 +117,19 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem COSMIC_TRANSISTOR;
     public static MetaItem<?>.MetaValueItem COSMIC_INDUCTOR;
 
+    public static MetaItem<?>.MetaValueItem SUN_MATTER;
+    public static MetaItem<?>.MetaValueItem SUNLINSE;
+    public static MetaItem<?>.MetaValueItem SUNNARIUMPART;
+    public static MetaItem<?>.MetaValueItem SUNNARIUM;
+    public static MetaItem<?>.MetaValueItem SUNNARIUM_PLATE;
+    public static MetaItem<?>.MetaValueItem SUNNARIUM_ENRICHED;
+    public static MetaItem<?>.MetaValueItem SUNNARIUM_ENRICHED_PLATE;
+
+    public static MetaItem<?>.MetaValueItem ADV_ENERGY_STORAGE;
+    public static MetaItem<?>.MetaValueItem ADV_CAPACITOR;
+    public static MetaItem<?>.MetaValueItem ADV_COMPONENT_VENT;
+    public static MetaItem<?>.MetaValueItem ADV_HEAT_EXCHANGE;
+
     public static MetaItem<?>.MetaValueItem SUPRACAUSAL_CAPACITOR;
     public static MetaItem<?>.MetaValueItem SUPRACAUSAL_DIODE;
     public static MetaItem<?>.MetaValueItem SUPRACAUSAL_RESISTOR;
@@ -139,9 +148,6 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem ZEPTO_PIC_WAFER;
     public static MetaItem<?>.MetaValueItem ZEPTO_PIC_CHIP;
     public static MetaItem<?>.MetaValueItem DUBNIUM_BOULE;
-    public static MetaItem<?>.MetaValueItem DUBNIUM_WAFER;
-    public static MetaItem<?>.MetaValueItem CUBIC_ZIRCONIA_EUROPIUM_BOULE;
-    public static MetaItem<?>.MetaValueItem CUBIC_ZIRCONIA_EUROPIUM_WAFER;
     public static MetaItem<?>.MetaValueItem CRYSTAL_INTERFACE_WAFER;
     public static MetaItem<?>.MetaValueItem CRYSTAL_INTERFACE_CHIP;
     public static MetaItem<?>.MetaValueItem UHASOC_WAFER;

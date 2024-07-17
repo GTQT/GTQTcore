@@ -468,8 +468,6 @@ tile.crucible.tungsten.name=钨坩埚
 tile.crucible.graphite.name=石墨坩埚
 tile.crucible.boron_nitride.name=氮化硼坩埚
 
-tile.multiblock_casing1.substrate.name=基材外壳
-tile.multiblock_casing1.advanced_substrate.name=高级基材外壳
 tile.multiblock_casing1.drill_head.name=钻取
 
 tile.multiblock_casing1_active.airfoil.name=翼型室

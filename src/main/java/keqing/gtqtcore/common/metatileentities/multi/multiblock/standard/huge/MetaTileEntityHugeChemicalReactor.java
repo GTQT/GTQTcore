@@ -26,6 +26,7 @@ import keqing.gtqtcore.api.metaileentity.GTQTRecipeMapMultiblockController;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
+import keqing.gtqtcore.common.block.blocks.BlockPCBFactoryCasing;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -42,7 +43,6 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 import static gregtech.api.GTValues.VA;
-import static keqing.gtqtcore.common.block.blocks.BlockGCYSMultiblockCasing.CasingType.ADVANCED_SUBSTRATE;
 
 public class MetaTileEntityHugeChemicalReactor extends GTQTRecipeMapMultiblockController {
     protected int heatingCoilLevel;
@@ -129,7 +129,7 @@ public class MetaTileEntityHugeChemicalReactor extends GTQTRecipeMapMultiblockCo
         return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.PTFE_INERT_CASING);
     }
     private IBlockState getSecondCasingState() {
-        return GTQTMetaBlocks.MULTIBLOCK_CASING.getState(ADVANCED_SUBSTRATE);
+        return GTQTMetaBlocks.PCB_FACTORY_CASING.getState(BlockPCBFactoryCasing.PCBFactoryCasingType.ADVANCED_SUBSTRATE_CASING);
     }
     private IBlockState getPipeCasingState() {
         return MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.POLYTETRAFLUOROETHYLENE_PIPE);

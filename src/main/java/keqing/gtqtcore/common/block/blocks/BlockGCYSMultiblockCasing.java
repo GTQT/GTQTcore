@@ -16,12 +16,10 @@ public class BlockGCYSMultiblockCasing extends VariantBlock<BlockGCYSMultiblockC
         setResistance(10.0f);
         setSoundType(SoundType.METAL);
         setHarvestLevel("wrench", 1);
-        setDefaultState(getState(CasingType.SUBSTRATE));
+        setDefaultState(getState(CasingType.DRILL_HEAD));
     }
 
     public enum CasingType implements IStringSerializable {
-        SUBSTRATE("substrate"),
-        ADVANCED_SUBSTRATE("advanced_substrate"),
         DRILL_HEAD("drill_head"),
         SUPERHEAVY_QUANTUM_CASING("superheavy_quantum_casing"),
 
