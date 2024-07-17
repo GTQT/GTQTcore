@@ -41,7 +41,7 @@ public class ParticleAccelerator {
                 .fluidInputs(Zylon.getFluid(L * 2))
                 .output(ADV_HEAT_EXCHANGE)
                 .EUt(VA[IV])
-                .duration(200)
+                .duration(800)
                 .Tier(1)
                 .CWUt(120)
                 .buildAndRegister();
@@ -57,7 +57,7 @@ public class ParticleAccelerator {
                 .fluidInputs(Zylon.getFluid(L * 2))
                 .output(ADV_ENERGY_STORAGE)
                 .EUt(VA[IV])
-                .duration(200)
+                .duration(800)
                 .Tier(1)
                 .CWUt(120)
                 .buildAndRegister();
@@ -73,7 +73,7 @@ public class ParticleAccelerator {
                 .fluidInputs(Zylon.getFluid(L * 2))
                 .output(ADV_COMPONENT_VENT)
                 .EUt(VA[IV])
-                .duration(200)
+                .duration(800)
                 .Tier(1)
                 .CWUt(120)
                 .buildAndRegister();
@@ -89,7 +89,7 @@ public class ParticleAccelerator {
                 .fluidInputs(Zylon.getFluid(L * 2))
                 .output(ADV_CAPACITOR)
                 .EUt(VA[IV])
-                .duration(200)
+                .duration(800)
                 .Tier(1)
                 .CWUt(120)
                 .buildAndRegister();
@@ -120,7 +120,7 @@ public class ParticleAccelerator {
                 .scannerResearch(b -> b
                         .researchStack(GTQTMetaBlocks.PARTICLE_ACCELERATOR.getItemVariant(ACCELERATOR_CASING))
                         .EUt(VA[IV]))
-                .duration(200).EUt(VA[IV]).buildAndRegister();
+                .duration(2000).EUt(VA[IV]).buildAndRegister();
 
         //
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
@@ -136,7 +136,7 @@ public class ParticleAccelerator {
                 .fluidInputs(Polybenzimidazole.getFluid(L*2))
                 .fluidInputs(Zylon.getFluid(L * 4))
                 .fluidInputs(NiobiumTitanium.getFluid(L * 4))
-                .duration(400).EUt(VA[IV]).buildAndRegister();
+                .duration(800).EUt(VA[IV]).buildAndRegister();
 
         //部件I
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
@@ -152,7 +152,7 @@ public class ParticleAccelerator {
                 .outputs(GTQTMetaBlocks.PARTICLE_ACCELERATOR.getItemVariant(ACCELERATOR_FIRM_MKI))
                 .fluidInputs(Polybenzimidazole.getFluid(L))
                 .fluidInputs(Zylon.getFluid(L * 2))
-                .duration(400).EUt(VA[EV]).buildAndRegister();
+                .duration(1000).EUt(VA[EV]).buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(HULL[5])
@@ -167,7 +167,7 @@ public class ParticleAccelerator {
                 .outputs(GTQTMetaBlocks.PARTICLE_ACCELERATOR.getItemVariant(ACCELERATOR_ELECTROMAGNET_MKI))
                 .fluidInputs(Polybenzimidazole.getFluid(L))
                 .fluidInputs(Zylon.getFluid(L * 2))
-                .duration(400).EUt(VA[EV]).buildAndRegister();
+                .duration(1000).EUt(VA[EV]).buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(HULL[5])
@@ -182,7 +182,7 @@ public class ParticleAccelerator {
                 .outputs(GTQTMetaBlocks.PARTICLE_ACCELERATOR.getItemVariant(ACCELERATOR_ELECTROMAGNETV_MKI))
                 .fluidInputs(Polybenzimidazole.getFluid(L))
                 .fluidInputs(Zylon.getFluid(L * 2))
-                .duration(400).EUt(VA[EV]).buildAndRegister();
+                .duration(1000).EUt(VA[EV]).buildAndRegister();
 
         //部件II
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
@@ -202,7 +202,7 @@ public class ParticleAccelerator {
                         .EUt(VA[LuV]))
                 .fluidInputs(Polybenzimidazole.getFluid(L))
                 .fluidInputs(Zylon.getFluid(L * 2))
-                .duration(400).EUt(VA[LuV]).buildAndRegister();
+                .duration(1000).EUt(VA[LuV]).buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(HULL[6])
@@ -221,7 +221,7 @@ public class ParticleAccelerator {
                         .EUt(VA[LuV]))
                 .fluidInputs(Polybenzimidazole.getFluid(L))
                 .fluidInputs(Zylon.getFluid(L * 2))
-                .duration(400).EUt(VA[LuV]).buildAndRegister();
+                .duration(1000).EUt(VA[LuV]).buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(HULL[6])
@@ -240,7 +240,7 @@ public class ParticleAccelerator {
                         .EUt(VA[LuV]))
                 .fluidInputs(Polybenzimidazole.getFluid(L))
                 .fluidInputs(Zylon.getFluid(L * 2))
-                .duration(400).EUt(VA[LuV]).buildAndRegister();
+                .duration(1000).EUt(VA[LuV]).buildAndRegister();
 
         //部件III
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
@@ -260,7 +260,7 @@ public class ParticleAccelerator {
                         .EUt(VA[ZPM]))
                 .fluidInputs(Polybenzimidazole.getFluid(L))
                 .fluidInputs(Zylon.getFluid(L * 2))
-                .duration(400).EUt(VA[ZPM]).buildAndRegister();
+                .duration(1000).EUt(VA[ZPM]).buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(HULL[7])
@@ -279,7 +279,7 @@ public class ParticleAccelerator {
                         .EUt(VA[ZPM]))
                 .fluidInputs(Polybenzimidazole.getFluid(L))
                 .fluidInputs(Zylon.getFluid(L * 2))
-                .duration(400).EUt(VA[ZPM]).buildAndRegister();
+                .duration(1000).EUt(VA[ZPM]).buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(HULL[7])
@@ -298,7 +298,7 @@ public class ParticleAccelerator {
                         .EUt(VA[ZPM]))
                 .fluidInputs(Polybenzimidazole.getFluid(L))
                 .fluidInputs(Zylon.getFluid(L * 2))
-                .duration(400).EUt(VA[ZPM]).buildAndRegister();
+                .duration(1000).EUt(VA[ZPM]).buildAndRegister();
 
     }
     public static void NUCLEOSYNTHESIS()
