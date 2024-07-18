@@ -947,7 +947,7 @@ public class MetaTileEntityLoader {
                 'G', CraftingComponent.SENSOR,
                 'W', CraftingComponent.CABLE,
                 'X', CraftingComponent.CIRCUIT);
-        
+
         gregtech.loaders.recipe.MetaTileEntityLoader.registerMachineRecipe(true, KQCC_COMPUTATION_HATCH_TRANSMITTER,
                 "EGE", "PHP", "WXW",
                 'E', CraftingComponent.EMITTER,

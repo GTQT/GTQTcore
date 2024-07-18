@@ -152,7 +152,7 @@ dependencies {
     implementation rfg.deobf(files("libs/gregtechfoodoption-1.12.2-1.11.0.jar"))
     implementation rfg.deobf(files("libs/jei_1.12.2-4.16.1.1003.jar"))
     implementation rfg.deobf(files("libs/theoneprobe-1.12-1.4.28.jar"))
-    implementation rfg.deobf(files("libs/groovyscript-1.1.0-hotfix1.jar"))
+    implementation rfg.deobf(files("libs/groovyscript-1.1.1.jar"))
     implementation rfg.deobf(files("libs/modularui-2.4.3.jar"))
     implementation rfg.deobf(files("libs/Chisel-MC1.12.2-1.0.2.45.jar"))
     implementation rfg.deobf(files("libs/architecturecraft-1.12-3.108.jar"))
