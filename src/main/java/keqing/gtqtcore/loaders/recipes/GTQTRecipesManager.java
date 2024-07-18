@@ -35,11 +35,13 @@ public class GTQTRecipesManager {
         ZirconChain.init();
         DeltamethrinChain.init();
         RubbersChain.init();
+        BacteriaCulturesChain.init();
         BoronChain.init();
         EnzymesRecipes.init();
         GTQTOreRecipeHandler.init();
         StrontiumRadiumChain.init();
         AlgaeChain.init();
+        PPBChain.init();
         AirDistillation.init();
         SodiumChain.init();
         ParticleAccelerator.init();

@@ -32,7 +32,7 @@ public class DragonChain {
                 .input(PRE_DRAGON_CELL)
                 .input(dust,Uranium238)
                 .input(dust,Endstone,4)
-                .fluidOutputs(Mutagen.getFluid(1000))
+                .fluidInputs(Mutagen.getFluid(1000))
                 .chancedOutput(DRAGON_CELL,100,0)
                 .rate(40)
                 .duration(400).EUt(VA[HV]).buildAndRegister();
@@ -41,7 +41,7 @@ public class DragonChain {
                 .input(PRE_DRAGON_CELL)
                 .input(dust,Thorium)
                 .input(dust,Endstone,4)
-                .fluidOutputs(Mutagen.getFluid(1000))
+                .fluidInputs(Mutagen.getFluid(1000))
                 .chancedOutput(DRAGON_CELL,400,0)
                 .rate(40)
                 .duration(400).EUt(VA[HV]).buildAndRegister();
@@ -50,7 +50,7 @@ public class DragonChain {
                 .input(PRE_DRAGON_CELL)
                 .input(dust,Plutonium241)
                 .input(dust,Endstone,4)
-                .fluidOutputs(Mutagen.getFluid(1000))
+                .fluidInputs(Mutagen.getFluid(1000))
                 .chancedOutput(DRAGON_CELL,1600,0)
                 .rate(40)
                 .duration(400).EUt(VA[HV]).buildAndRegister();

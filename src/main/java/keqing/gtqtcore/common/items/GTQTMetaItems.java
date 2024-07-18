@@ -21,6 +21,7 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem IMPREGNATED_FIBER;
     public static MetaItem<?>.MetaValueItem IMPREGNATED_MULTILAYER_FIBER;
     public static MetaItem<?>.MetaValueItem LAMINATION_GE;
+    public static MetaItem<?>.MetaValueItem LAMINATION_IR;
     public static MetaItem<?>.MetaValueItem TIME_BOTTLE;
     public static MetaItem<?>.MetaValueItem GENERAL_CIRCUIT_ULV;
     public static MetaItem<?>.MetaValueItem GENERAL_CIRCUIT_LV;
@@ -44,7 +45,16 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem CATALYST_FRAMEWORK_IV;
     public static MetaItem<?>.MetaValueItem CATALYST_FRAMEWORK_V;
     public static MetaItem<?>.MetaValueItem CATALYST_FRAMEWORK_VI;
-
+    public static MetaItem<?>.MetaValueItem SHEWANELLA_CULTURE;
+    public static MetaItem<?>.MetaValueItem STREPTOCOCCUS_CULTURE;
+    public static MetaItem<?>.MetaValueItem ESCHERICHIA_CULTURE;
+    public static MetaItem<?>.MetaValueItem BIFIDOBACTERIUM_CULTURE;
+    public static MetaItem<?>.MetaValueItem BREVIBACTERIUM_CULTURE;
+    public static MetaItem<?>.MetaValueItem CUPRIVADUS_CULTURE;
+    public static MetaItem<?>.MetaValueItem STERILIZED_PETRI_DISH;
+    public static MetaItem<?>.MetaValueItem CONTAMINATED_PETRI_DISH;
+    public static MetaItem<?>.MetaValueItem ELECTRICALLY_WIRED_PETRI_DISH;
+    public static MetaItem<?>.MetaValueItem CLEAN_CULTURE;
     public static MetaItem<?>.MetaValueItem SOLAR_PLATE_MKI;
     public static MetaItem<?>.MetaValueItem SOLAR_PLATE_MKII;
     public static MetaItem<?>.MetaValueItem SOLAR_PLATE_MKIII;

@@ -22,6 +22,6 @@ public abstract class MixinSolarBoilerClient implements INerfed {
 
 
     public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
-        tooltip.add(I18n.format("gregica.mixin.nerf.steam.solar.detail"));
+        tooltip.add(I18n.format("gtqtcore.mixin.nerf.steam.solar.detail"));
     }
 }

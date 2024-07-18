@@ -103,8 +103,8 @@ public class ParticleAccelerator {
                 .input(frameGt, NaquadahEnriched, 64)
                 .input(frameGt, NaquadahEnriched, 64)
                 .input(plate, NaquadahAlloy, 64)
-                .input(plate, NaquadahAlloy, 64)
-                .input(gearSmall,HSSS,64)
+                .input(ring, HSSS, 64)
+                .input(gearSmall,PPB,64)
                 .input(stickLong,Samarium,64)
                 .input(screw,RhodiumPlatedPalladium,64)
                 .input(foil,NiobiumTitanium,64)
@@ -146,12 +146,13 @@ public class ParticleAccelerator {
                 .input(VOLTAGE_COIL_IV,8)
                 .input(GENERAL_CIRCUIT_IV, 2)
                 .input(plate, RhodiumPlatedPalladium, 4)
-                .input(gearSmall,NiobiumTitanium,2)
+                .input(gearSmall,NanometerBariumTitanate,2)
                 .input(wireFine,Platinum,32)
                 .input(wireGtSingle, IVSuperconductor, 8)
                 .outputs(GTQTMetaBlocks.PARTICLE_ACCELERATOR.getItemVariant(ACCELERATOR_FIRM_MKI))
                 .fluidInputs(Polybenzimidazole.getFluid(L))
                 .fluidInputs(Zylon.getFluid(L * 2))
+                .fluidInputs(NiobiumTitanium.getFluid(L * 2))
                 .duration(1000).EUt(VA[EV]).buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
@@ -161,12 +162,13 @@ public class ParticleAccelerator {
                 .input(VOLTAGE_COIL_IV,8)
                 .input(EMITTER_IV, 2)
                 .input(plate, RhodiumPlatedPalladium, 4)
-                .input(gearSmall,NiobiumTitanium,2)
+                .input(gearSmall,NanometerBariumTitanate,2)
                 .input(wireFine,Platinum,32)
                 .input(wireGtSingle, IVSuperconductor, 8)
                 .outputs(GTQTMetaBlocks.PARTICLE_ACCELERATOR.getItemVariant(ACCELERATOR_ELECTROMAGNET_MKI))
                 .fluidInputs(Polybenzimidazole.getFluid(L))
                 .fluidInputs(Zylon.getFluid(L * 2))
+                .fluidInputs(NiobiumTitanium.getFluid(L * 2))
                 .duration(1000).EUt(VA[EV]).buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
@@ -176,12 +178,13 @@ public class ParticleAccelerator {
                 .input(VOLTAGE_COIL_IV,8)
                 .input(SENSOR_IV, 2)
                 .input(plate, RhodiumPlatedPalladium, 4)
-                .input(gearSmall,NiobiumTitanium,2)
+                .input(gearSmall,NanometerBariumTitanate,2)
                 .input(wireFine,Platinum,32)
                 .input(wireGtSingle, IVSuperconductor, 8)
                 .outputs(GTQTMetaBlocks.PARTICLE_ACCELERATOR.getItemVariant(ACCELERATOR_ELECTROMAGNETV_MKI))
                 .fluidInputs(Polybenzimidazole.getFluid(L))
                 .fluidInputs(Zylon.getFluid(L * 2))
+                .fluidInputs(NiobiumTitanium.getFluid(L * 2))
                 .duration(1000).EUt(VA[EV]).buildAndRegister();
 
         //部件II
@@ -192,7 +195,7 @@ public class ParticleAccelerator {
                 .input(VOLTAGE_COIL_LuV,8)
                 .input(GENERAL_CIRCUIT_LuV, 2)
                 .input(plate, RhodiumPlatedPalladium, 4)
-                .input(gearSmall,NiobiumTitanium,2)
+                .input(gearSmall,PPB,2)
                 .input(wireFine,Platinum,32)
                 .input(wireGtSingle, LuVSuperconductor, 8)
                 .outputs(GTQTMetaBlocks.PARTICLE_ACCELERATOR.getItemVariant(ACCELERATOR_FIRM_MKII))
@@ -202,6 +205,7 @@ public class ParticleAccelerator {
                         .EUt(VA[LuV]))
                 .fluidInputs(Polybenzimidazole.getFluid(L))
                 .fluidInputs(Zylon.getFluid(L * 2))
+                .fluidInputs(NiobiumTitanium.getFluid(L * 2))
                 .duration(1000).EUt(VA[LuV]).buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
@@ -211,7 +215,7 @@ public class ParticleAccelerator {
                 .input(VOLTAGE_COIL_LuV,8)
                 .input(EMITTER_LuV, 2)
                 .input(plate, RhodiumPlatedPalladium, 4)
-                .input(gearSmall,NiobiumTitanium,2)
+                .input(gearSmall,PPB,2)
                 .input(wireFine,Platinum,32)
                 .input(wireGtSingle, LuVSuperconductor, 8)
                 .outputs(GTQTMetaBlocks.PARTICLE_ACCELERATOR.getItemVariant(ACCELERATOR_ELECTROMAGNET_MKII))
@@ -221,6 +225,7 @@ public class ParticleAccelerator {
                         .EUt(VA[LuV]))
                 .fluidInputs(Polybenzimidazole.getFluid(L))
                 .fluidInputs(Zylon.getFluid(L * 2))
+                .fluidInputs(NiobiumTitanium.getFluid(L * 2))
                 .duration(1000).EUt(VA[LuV]).buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
@@ -230,7 +235,7 @@ public class ParticleAccelerator {
                 .input(VOLTAGE_COIL_LuV,8)
                 .input(SENSOR_LuV, 2)
                 .input(plate, RhodiumPlatedPalladium, 4)
-                .input(gearSmall,NiobiumTitanium,2)
+                .input(gearSmall,PPB,2)
                 .input(wireFine,Platinum,32)
                 .input(wireGtSingle, LuVSuperconductor, 8)
                 .outputs(GTQTMetaBlocks.PARTICLE_ACCELERATOR.getItemVariant(ACCELERATOR_ELECTROMAGNETV_MKII))
@@ -240,6 +245,7 @@ public class ParticleAccelerator {
                         .EUt(VA[LuV]))
                 .fluidInputs(Polybenzimidazole.getFluid(L))
                 .fluidInputs(Zylon.getFluid(L * 2))
+                .fluidInputs(NiobiumTitanium.getFluid(L * 2))
                 .duration(1000).EUt(VA[LuV]).buildAndRegister();
 
         //部件III

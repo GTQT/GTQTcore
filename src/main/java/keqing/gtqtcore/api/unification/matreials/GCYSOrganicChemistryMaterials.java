@@ -179,13 +179,6 @@ public class GCYSOrganicChemistryMaterials {
                 .build()
                 .setFormula("C6H5NH2", true);
 
-        AceticAnhydride = new Material.Builder(15027, gregtechId("acetic_anhydride"))
-                .fluid()
-                .color(0xD5DDDF)
-                .components(Carbon, 4, Hydrogen, 6, Oxygen, 3)
-                .build()
-                .setFormula("(CH3CO)2O", true);
-
         ParaXylene = new Material.Builder(15030, gregtechId("para_xylene"))
                 .fluid()
                 .color(0x666040)

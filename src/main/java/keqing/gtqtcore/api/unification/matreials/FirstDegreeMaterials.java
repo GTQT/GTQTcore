@@ -3881,5 +3881,126 @@ public class FirstDegreeMaterials {
                 .color(0xB4CDCD)
                 .components(Carbon, 5, Hydrogen, 7, Nitrogen, 1,Oxygen,2)
                 .build();
+
+        GTQTMaterials.BacterialGrowthMedium = new Material.Builder(getMaterialsId(), gregtechId("bacterial_growth_medium"))
+                .liquid()
+                .color(0x0b2e12)
+                .build()
+                .setFormula("For Bacteria", true);
+
+        GTQTMaterials.DepletedGrowthMedium = new Material.Builder(getMaterialsId(), gregtechId("depleted_growth_medium"))
+                .liquid()
+                .color(0x071209)
+                .build()
+                .setFormula("Depleted", true);
+
+        GTQTMaterials.Shewanella = new Material.Builder(getMaterialsId(), gregtechId("shewanella"))
+                .dust()
+                .color(0x8752ab)
+                .iconSet(METALLIC)
+                .build()
+                .setFormula("Bacteria", true);
+
+        GTQTMaterials.BrevibacteriumFlavium = new Material.Builder(getMaterialsId(), gregtechId("brevibacterium_flavium"))
+                .dust()
+                .color(0x2c4d24)
+                .iconSet(ROUGH)
+                .build()
+                .setFormula("Bacteria", true);
+
+        GTQTMaterials.BifidobacteriumBreve = new Material.Builder(getMaterialsId(), gregtechId("bifidobacterium_breve"))
+                .dust()
+                .color(0x377528)
+                .iconSet(ROUGH)
+                .build()
+                .setFormula("Bacteria", true);
+
+        GTQTMaterials.EschericiaColi = new Material.Builder(getMaterialsId(), gregtechId("eschericia_coli"))
+                .dust()
+                .color(0x2d4228)
+                .iconSet(ROUGH)
+                .build()
+                .setFormula("Bacteria", true);
+
+        GTQTMaterials.CupriavidusNecator = new Material.Builder(getMaterialsId(), gregtechId("cupriavidus_necator"))
+                .dust()
+                .color(0x22704f)
+                .iconSet(ROUGH)
+                .build()
+                .setFormula("Bacteria", true);
+
+        GTQTMaterials.SelectivelyMutatedCupriavidiusNecator = new Material.Builder(getMaterialsId(), gregtechId("selectively_mutated_cupriavidius_necator"))
+                .dust()
+                .iconSet(SHINY)
+                .color(0xe04800)
+                .build()
+                .setFormula("Bacteria", true);
+        //ppb
+        GTQTMaterials.PPB = new Material.Builder(getMaterialsId(), gregtechId("ppb"))
+                .ingot()
+                .color(0xFF6347)
+                .flags(DISABLE_DECOMPOSITION,GENERATE_PLATE, GENERATE_ROD, GENERATE_RING, GENERATE_BOLT_SCREW, GENERATE_GEAR, GENERATE_ROTOR,
+                        GENERATE_FRAME,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROUND,GENERATE_SMALL_GEAR
+                        ,GENERATE_SPRING,GENERATE_SPRING_SMALL)
+                .components(Palladium,1,Platinum,1,Bismuth,1)
+                .blast(4500,MID)
+                .build();
+
+        GTQTMaterials.PPBFront = new Material.Builder(getMaterialsId(), gregtechId("ppbfront"))
+                .fluid()
+                .color(0xFFC125)
+                .flags(DISABLE_DECOMPOSITION)
+                .components(Palladium,1,Platinum,1,Bismuth,1)
+                .build();
+        //氧化铋
+        GTQTMaterials.BismuthOxygen = new Material.Builder(getMaterialsId(), gregtechId("bismuth_oxygen"))
+                .dust()
+                .color(0xC0FF3E)
+                .flags(DISABLE_DECOMPOSITION)
+                .components(Bismuth,2,Oxygen, 3)
+                .build();
+        //乙酸铋
+        GTQTMaterials.BismuthAcetate = new Material.Builder(getMaterialsId(), gregtechId("bismuth_acetate"))
+                .fluid()
+                .color(0x9AFF9A)
+                .flags(DISABLE_DECOMPOSITION)
+                .components(Carbon, 6, Hydrogen, 9, Bismuth,1,Oxygen, 2)
+                .build();
+
+        //乙酸丙酯
+        GTQTMaterials.PropylAcetate = new Material.Builder(getMaterialsId(), gregtechId("propyl_acetate"))
+                .fluid()
+                .color(0x8B7355)
+                .flags(DISABLE_DECOMPOSITION)
+                .components(Carbon, 5, Hydrogen, 10,Oxygen, 2)
+                .build();
+        //乙酰丙酮
+        GTQTMaterials.Acetylacetone = new Material.Builder(getMaterialsId(), gregtechId("acetylacetone"))
+                .fluid()
+                .color(0x8DB6CD)
+                .flags(DISABLE_DECOMPOSITION)
+                .components(Carbon, 5, Hydrogen, 8,Oxygen, 2)
+                .build();
+        //乙酰丙酮铂
+        GTQTMaterials.PlatinumBis = new Material.Builder(getMaterialsId(), gregtechId("platinum_bis"))
+                .fluid()
+                .color(0x7AC5CD)
+                .flags(DISABLE_DECOMPOSITION)
+                .components(Carbon, 10, Hydrogen, 14,Oxygen, 4,Platinum,1)
+                .build();
+        //乙酰丙酮钯
+        GTQTMaterials.PalladiumBis = new Material.Builder(getMaterialsId(), gregtechId("palladium_bis"))
+                .fluid()
+                .color(0x76EE00)
+                .flags(DISABLE_DECOMPOSITION)
+                .components(Carbon, 10, Hydrogen, 14,Oxygen, 4,Palladium,1)
+                .build();
+
+        //玻璃釉
+        GTQTMaterials.GlassGlaze = new Material.Builder(getMaterialsId(), gregtechId("glass_glaze"))
+                .fluid()
+                .color(0x76EE00)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
     }
 }

@@ -3210,6 +3210,37 @@ metaitem.adv_capacitor.name=高级中枢控制模块
 metaitem.adv_component_vent.name=高级部件散热模块
 metaitem.adv_heat_exchange.name=高级热能交换模块
 
+gregtech.material.bacterial_growth_medium=细胞生长质
+gregtech.material.depleted_growth_medium=枯竭细胞生长质
+gregtech.material.shewanella=希瓦氏菌
+gregtech.material.brevibacterium_flavium=短杆菌
+gregtech.material.bifidobacterium_breve=双歧杆菌
+gregtech.material.eschericia_coli=大肠杆菌
+gregtech.material.cupriavidus_necator=钩虫贪铜菌
+gregtech.material.selectively_mutated_cupriavidius_necator=选择性突变铜脱氧核糖核酸
+gregtech.material.glass_glaze=玻璃釉
+gregtech.material.bismuth_oxygen=氧化铋
+gregtech.material.bismuth_acetate=乙酸铋
+gregtech.material.ppb=铂钯铋金属间化合物
+gregtech.material.ppbfront=铂钯铋金属前驱
+gregtech.material.propyl_acetate=乙酸丙酯
+gregtech.material.acetylacetone=乙酰丙酮
+gregtech.material.platinum_bis=乙酰丙酮铂
+gregtech.material.palladium_bis=乙酰丙酮钯
+
+metaitem.dragon_cell.name=龙细胞
+metaitem.pre_dragon_cell.name=预处理龙细胞
+
+metaitem.sterilized.petri.dish.name=无菌培养皿
+metaitem.contaminated.petri.dish.name=被污染的培养皿
+metaitem.clean.culture.name=预备培养皿
+metaitem.brevibacterium.culture.name=黄色短杆菌培养皿
+metaitem.bifidobacterium.culture.name=短双歧杆菌培养皿
+metaitem.eschericia.culture.name=大肠杆菌培养皿
+metaitem.streptococcus.culture.name=酿脓链球菌培养皿
+metaitem.cupriavidus.culture.name=钩虫贪铜菌培养皿
+metaitem.shewanella.culture.name=希瓦氏菌培养皿
+
 gregtech.material.lv_superconductor=LV超导体
 gregtech.material.uv_superconductor=UV超导体
 gregtech.material.mv_superconductor=MV超导体
@@ -3838,7 +3869,7 @@ metaitem.catalyst_framework_iii.name=催化剂基床（全催化）
 metaitem.catalyst_framework_iv.name=催化剂基床（生物催化）
 metaitem.catalyst_framework_v.name=催化剂基床
 metaitem.catalyst_framework_vi.name=催化剂基床
-
+metaitem.item.lamination_ir.name=钌基厚膜电阻浆料覆膜
 metaitem.item.lamination_ge.name=锗层压纤维基板
 metaitem.item.insulatingmica.name=绝缘云母复合片
 gtqtcore.machine.gas_collector.name=大型集气机
@@ -4455,7 +4486,8 @@ gtqtcore.universal.tooltip.max_parallel=最大并行数：§e%s§7
 gtqtcore.universal.tooltip.get_parallel_by_voltage=根据输入电压获得并行。
 gtqtcore.universal.tooltip.laser_input=允许使用§b激光靶仓§7替代能源仓，且二者可以并存。
 gtqtcore.universal.tooltip.laser_output=允许使用§b激光源仓§7替代动力仓，且二者可以并存。
-
+gtqtcore.mixin.nerf.steam.solar.detail=§4工作超过1天后,输出将会在10天内线性减小到1/3
+gtqtcore.mixin.info.steam=当前蒸汽输出: %d l/s
 gtqtcore.universal.multiblock.energy_per_tick=产能功率：%s EUt （%s）
 
 itemGroup.gtqtcore=量子跃迁 | 纠缠之源

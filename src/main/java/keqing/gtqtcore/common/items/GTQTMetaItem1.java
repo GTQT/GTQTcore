@@ -46,6 +46,7 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         IMPREGNATED_MULTILAYER_FIBER = this.addItem(7,"item.impregnated_multilayer_fiber").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
         INSULATINGMICA = this.addItem(15,"item.insulatingmica").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
         LAMINATION_GE = this.addItem(16,"item.lamination_ge").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
+        LAMINATION_IR = this.addItem(17,"item.insulating_ir").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
 
         //其他燃料
         JIAO_XIAN_REN_ZHANG = this.addItem(20,"fuel.jiaoxianrenzhang").setBurnValue(9600).setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO);
@@ -189,6 +190,19 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         CATALYST_FRAMEWORK_V = this.addItem(254,"catalyst_framework_v").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
         CATALYST_FRAMEWORK_VI = this.addItem(255,"catalyst_framework_vi").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
 
+
+        //
+        CLEAN_CULTURE = addItem(276, "clean.culture");
+        STERILIZED_PETRI_DISH = addItem(277, "sterilized.petri.dish");
+        CONTAMINATED_PETRI_DISH = addItem(278, "contaminated.petri.dish");
+        ELECTRICALLY_WIRED_PETRI_DISH = addItem(279, "electrically.wired.petri.dish");
+
+        CUPRIVADUS_CULTURE = addItem(280, "cupriavidus.culture");
+        SHEWANELLA_CULTURE = addItem(281, "shewanella.culture").setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        STREPTOCOCCUS_CULTURE = addItem(282, "streptococcus.culture").setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        ESCHERICHIA_CULTURE = addItem(283, "eschericia.culture").setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        BIFIDOBACTERIUM_CULTURE = addItem(284, "bifidobacterium.culture").setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        BREVIBACTERIUM_CULTURE = addItem(285, "brevibacterium.culture").setCreativeTabs(CommonProxy.GTQTCore_BIO);
 
         //快乐模具
         MOLD_GAS=this.addItem(300, "mold.gas").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);

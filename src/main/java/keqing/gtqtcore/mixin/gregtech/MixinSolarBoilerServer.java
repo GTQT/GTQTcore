@@ -46,7 +46,7 @@ public abstract class MixinSolarBoilerServer extends SteamBoiler  {
     @Override
     public List<ITextComponent> getDataInfo() {
         List<ITextComponent> result = new ArrayList<>(super.getDataInfo());
-        result.add(new TextComponentTranslation("gregica.mixin.info.steam",
+        result.add(new TextComponentTranslation("gtqtcore.mixin.info.steam",
                 ((MixinSteamBoilerAccess)this).getCurrentTemperature()>100 ? getBaseSteamOutput() : 0));
         result.add(new TextComponentString(String.format("timer: %d",getTimer())));
         return result;

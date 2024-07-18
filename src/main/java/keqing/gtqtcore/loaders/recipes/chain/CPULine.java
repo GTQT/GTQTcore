@@ -951,10 +951,31 @@ public class CPULine {
                 .output(MULTILAYER_FIBER_BOARD)
                 .buildAndRegister();
 
-        LARGE_CHEMICAL_RECIPES.recipeBuilder()
+        BLAST_RECIPES.recipeBuilder()
                 .duration(100)
+                .EUt(1920)
+                .input(dust,SiliconDioxide,1)
+                .input(dust,Alumina,1)
+                .input(dust,BoronTrioxide,1)
+                .fluidInputs(Lead.getFluid(576))
+                .fluidOutputs(GlassGlaze.getFluid(1000))
+                .blastFurnaceTemp(2700)
+                .buildAndRegister();
+
+        CHEMICAL_RECIPES.recipeBuilder()
+                .duration(200)
                 .EUt(7680)
-                .input(plate,UraniumRhodiumDinaquadide,1)
+                .input(foil,Ruridit,4)
+                .input(wireFine,Platinum)
+                .fluidInputs(GlassGlaze.getFluid(500))
+                .fluidInputs(UltraGlue.getFluid(500))
+                .output(LAMINATION_IR)
+                .buildAndRegister();
+
+        LARGE_CHEMICAL_RECIPES.recipeBuilder()
+                .duration(200)
+                .EUt(7680)
+                .input(LAMINATION_IR)
                 .input(FIBER_BOARD,2)
                 .input(foil,RhodiumPlatedPalladium,8)
                 .fluidInputs(Polyetheretherketone.getFluid(576))

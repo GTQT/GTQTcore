@@ -728,6 +728,23 @@ public class GTQTMaterials {
     public static Material CyanoaceticAcid;
     public static Material Ethylcyanoacetate;
     public static Material Cyanoacrylate;
+    public static Material BismuthAcetate;
+    public static Material BismuthOxygen;
+    public static Material BacterialGrowthMedium;
+    public static Material DepletedGrowthMedium;
+    public static Material Shewanella;
+    public static Material BrevibacteriumFlavium;
+    public static Material BifidobacteriumBreve;
+    public static Material EschericiaColi;
+    public static Material CupriavidusNecator;
+    public static Material SelectivelyMutatedCupriavidiusNecator;
+    public static Material PropylAcetate;
+    public static Material Acetylacetone;
+    public static Material PlatinumBis;
+    public static Material PalladiumBis;
+    public static Material PPB;
+    public static Material PPBFront;
+    public static Material GlassGlaze;
 
     //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/api/unification/GSMaterials.java
 

@@ -203,7 +203,6 @@ public class GCYSMaterials {
     public static Material TetrasodiumEDTA;
     public static Material EthylenediaminetetraaceticAcid;
     public static Material Aniline;
-    public static Material AceticAnhydride;
     public static Material ParaXylene;
     public static Material Durene;
     public static Material PyromelliticDianhydride;
