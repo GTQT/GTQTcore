@@ -16,11 +16,13 @@ import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.electrode;
 
 public class AluminiumLine {
     public static void init() {
-        RecipeMaps.BLAST_RECIPES.recipeBuilder()
+
+        ELECTROBATH.recipeBuilder()
+                .notConsumable(electrode,Graphite,1)
                 .input(dust, Alumina, 2)
                 .output(ingot, Aluminium, 4)
                 .fluidOutputs(Oxygen.getFluid(6000))
-                .blastFurnaceTemp(1700)
+                .tier(1)
                 .duration(1600).EUt(VA[MV]).buildAndRegister();
 
         RecipeMaps.BLAST_RECIPES.recipeBuilder()
