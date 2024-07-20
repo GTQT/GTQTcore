@@ -290,7 +290,7 @@ public class MetaTileEntityNanoCoating extends MultiMapMultiblockController impl
         }
 
         public long getMaxVoltage() {
-            if(visa)return VA[Math.min(tier-3,clean_tier*2-3)];
+            if(visa)return VA[Math.min(Math.max((tier - 3), 1), Math.max(clean_tier * 2 - 3, 1))];
             else return VA[Math.min(tier,clean_tier*2)];
         }
 

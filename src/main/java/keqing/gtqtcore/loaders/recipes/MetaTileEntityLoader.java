@@ -868,12 +868,12 @@ public class MetaTileEntityLoader {
 
         ModHandler.addShapedRecipe(true, "cvd_unit", CVD_UNIT.getStackForm(),
                 "PKP", "CHC", "ESE",
-                'P', new UnificationEntry(plate, BlueSteel),
-                'K', new UnificationEntry(cableGtSingle, Aluminium),
-                'C', new UnificationEntry(circuit, MarkerMaterials.Tier.EV),
-                'H', MetaTileEntities.HULL[3].getStackForm(),
-                'S', SENSOR_EV.getStackForm(),
-                'E', EMITTER_EV.getStackForm()
+                'P', new UnificationEntry(plate, HSSS),
+                'K', new UnificationEntry(gear, PPB),
+                'C', new UnificationEntry(circuit, MarkerMaterials.Tier.IV),
+                'H', MetaTileEntities.HULL[5].getStackForm(),
+                'S', SENSOR_IV.getStackForm(),
+                'E', EMITTER_IV.getStackForm()
         );
 
         ModHandler.addShapedRecipe(true, "burner_reactor", BURNER_REACTOR.getStackForm(),

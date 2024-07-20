@@ -699,8 +699,7 @@ public class GCYSFirstDegreeMaterials {
                 .ingot().fluid()
                 .color(0x05090C)
                 .iconSet(MaterialIconSet.BRIGHT)
-                .flags(DISABLE_DECOMPOSITION, NO_SMELTING, GENERATE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD,
-                        GENERATE_FINE_WIRE, GENERATE_SPRING)
+                .flags(DISABLE_DECOMPOSITION, NO_WORKING, NO_SMASHING, NO_SMELTING,GENERATE_ROUND, GENERATE_FRAME, GENERATE_ROTOR, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_BOLT_SCREW, GENERATE_PLATE, GENERATE_SPRING_SMALL, GENERATE_SPRING, GENERATE_RING)
                 .cableProperties(GTValues.V[GTValues.UEV], 8, 6)
                 .components(Carbon, 48)
                 .build()

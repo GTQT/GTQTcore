@@ -20,7 +20,6 @@ public class NanotubesChain {
     public static void init() {
         CarbonNanotubeChain();
         LanthanumFullereneNanotubeChain();
-        NeutroniumNanotubeChain();
         MagnetoResonaticChain();
     }
 
@@ -70,7 +69,7 @@ public class NanotubesChain {
                 .output(ingot, CarbonNanotube)
                 .fluidOutputs(Ammonia.getFluid(10000))
                 .duration(100)
-                .EUt(VA[UV])
+                .EUt(VA[IV])
                 .buildAndRegister();
 
         //  24C2H2 + 16N -> C48 + 16NH3
@@ -336,22 +335,6 @@ public class NanotubesChain {
                 .fluidOutputs(Ammonia.getFluid(10000))
                 .duration(1200)
                 .EUt(VA[UEV])
-                .buildAndRegister();
-    }
-
-    private static void NeutroniumNanotubeChain() {
-
-        //  Neutronium Nanotube
-        CVD_RECIPES.recipeBuilder()
-                .notConsumable(plate, Rhenium)
-                .input(ingot, Neutronium)
-                .fluidInputs(Acetylene.getFluid(3000))
-                .fluidInputs(Cycloparaphenylene.getFluid(7000))
-                .fluidInputs(Nitrogen.getPlasma(10000))
-                .output(ingot, NeutroniumNanotube)
-                .fluidOutputs(Ammonia.getFluid(10000))
-                .duration(100)
-                .EUt(VA[UIV])
                 .buildAndRegister();
     }
 }
