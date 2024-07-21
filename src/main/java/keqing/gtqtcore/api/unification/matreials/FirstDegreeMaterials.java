@@ -3939,7 +3939,7 @@ public class FirstDegreeMaterials {
         GTQTMaterials.PPB = new Material.Builder(getMaterialsId(), gregtechId("ppb"))
                 .ingot()
                 .color(0xFF6347)
-                .flags(DISABLE_DECOMPOSITION,GENERATE_PLATE, GENERATE_ROD, GENERATE_RING, GENERATE_BOLT_SCREW, GENERATE_GEAR, GENERATE_ROTOR,
+                .flags(GENERATE_FOIL,DISABLE_DECOMPOSITION,GENERATE_PLATE, GENERATE_ROD, GENERATE_RING, GENERATE_BOLT_SCREW, GENERATE_GEAR, GENERATE_ROTOR,
                         GENERATE_FRAME,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROUND,GENERATE_SMALL_GEAR
                         ,GENERATE_SPRING,GENERATE_SPRING_SMALL)
                 .components(Palladium,1,Platinum,1,Bismuth,1)

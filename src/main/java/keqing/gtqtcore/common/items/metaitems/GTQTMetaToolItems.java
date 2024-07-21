@@ -139,7 +139,7 @@ public class GTQTMetaToolItems {
                         .efficiencyMultiplier(10F))
                 .sound(SoundEvents.BLOCK_ANVIL_LAND)
                 .electric(GTValues.IV)
-                .toolClasses(ToolClasses.PICKAXE, ToolClasses.AXE,ToolClasses.SWORD,ToolClasses.SHOVEL,ToolClasses.HOE));
+                .toolClasses(ToolClasses.WIRE_CUTTER,ToolClasses.WRENCH,ToolClasses.PICKAXE, ToolClasses.AXE,ToolClasses.SWORD,ToolClasses.SHOVEL,ToolClasses.HOE));
 
         BENDING_CYLINDER = ToolItems.register(ItemGTTool.Builder.of(GTQTCore.MODID, "bending_cylinder")
                 .toolStats(b -> b.crafting().cannotAttack().attackSpeed(-2.8F))

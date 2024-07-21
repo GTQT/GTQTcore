@@ -29,13 +29,22 @@ public class BacteriaCulturesChain {
                 .buildAndRegister();
 
         ASSEMBLER_RECIPES.recipeBuilder().EUt(7680).duration(400)
-                .input(wireFine, Titanium)
+                .input(plate, Titanium)
                 .fluidInputs(Polyethylene.getFluid(1008))
                 .inputs(STERILIZED_PETRI_DISH.getStackForm())
                 .outputs(ELECTRICALLY_WIRED_PETRI_DISH.getStackForm())
                 .cleanroom(CleanroomType.STERILE_CLEANROOM)
                 .buildAndRegister();
-        
+
+        AUTOCLAVE_RECIPES.recipeBuilder()
+                .inputs(PETRI_DISH.getStackForm())
+                .fluidInputs(Zylon.getFluid(100))
+                .outputs(STERILIZED_PETRI_DISH.getStackForm())
+                .cleanroom(CleanroomType.STERILE_CLEANROOM)
+                .EUt(7680)
+                .duration(25)
+                .buildAndRegister();
+
         ASSEMBLER_RECIPES.recipeBuilder().EUt(480).duration(400)
                 .inputs(STERILIZED_PETRI_DISH.getStackForm())
                 .input(dust, Agar)

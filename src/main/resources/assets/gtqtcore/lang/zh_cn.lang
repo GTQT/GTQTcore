@@ -4277,8 +4277,8 @@ gtqtcore.multiblock.mega_heat_exchanger.tooltip.parallel=相当于§e%s§7台大
 gtqtcore.recipe.max_rate=最大流量： %s L/s
 gtqtcore.recipe.flow_rate=流量阈值： %s L/s
 
-tile.pcb_factory_casing.substrate.name=基材外壳
-tile.pcb_factory_casing.advanced_substrate.name=高级基材外壳
+tile.pcb_factory_casing.substrate_casing.name=基材外壳
+tile.pcb_factory_casing.advanced_substrate_casing.name=高级基材外壳
 tile.pcb_factory_casing.basic_photolithographic_framework_casing.name=精密光刻框架外壳
 tile.pcb_factory_casing.basic_photolithographic_framework_casing.tooltip=超高精度激光蚀刻/n§6PCB工厂§7-外壳等级：§bI§7
 tile.pcb_factory_casing.mold_printing_assembly_framework_casing.name=纳米级模板印刷框架外壳

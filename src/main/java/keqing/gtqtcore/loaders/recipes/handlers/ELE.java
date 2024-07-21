@@ -33,10 +33,11 @@ public class ELE {
 
         RecipeMaps.CHEMICAL_RECIPES.recipeBuilder()
                 .EUt(30).duration(800)
-                .fluidInputs(PotassiumChloride.getFluid(1000))
-                .fluidInputs(SodiumHydroxideSolution.getFluid(1000))
+                .fluidInputs(Water.getFluid(3000))
+                .fluidInputs(PotassiumChloride.getFluid(500))
+                .fluidInputs(SodiumHydroxideSolution.getFluid(500))
                 .input(dust,SodiumBisulfate, 1)
-                .fluidOutputs(EleAcid.getFluid(2000))
+                .fluidOutputs(EleAcid.getFluid(4000))
                 .buildAndRegister();
 
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()

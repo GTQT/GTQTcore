@@ -42,7 +42,7 @@ public class VAJRABehavior implements IToolBehavior {
     public static final VAJRABehavior INSTANCE = new VAJRABehavior();
 
     Boolean model=true;
-    Boolean explosive;
+    Boolean explosive=false;
     int i;
     protected VAJRABehavior() {
 
