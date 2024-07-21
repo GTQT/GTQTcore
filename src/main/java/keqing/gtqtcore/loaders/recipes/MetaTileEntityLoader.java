@@ -846,6 +846,17 @@ public class MetaTileEntityLoader {
                 .duration(120)
                 .buildAndRegister();
 
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(plate, Steel,16)
+                .input(stick, Steel,2)
+                .input(ring, Steel, 4)
+                .input(LAPOTRON_CRYSTAL,1)
+                .input(circuit, MarkerMaterials.Tier.IV, 1)
+                .input(SENSOR_EV,1)
+                .output(POS_BINDING_CARD)
+                .circuitMeta(2)
+                .duration(600).EUt(VA[4]).buildAndRegister();
+
 
         ModHandler.addShapedRecipe(true, "roaster", ROASTER.getStackForm(),
                 "KSK", "CHC", "PPP",

@@ -53,7 +53,7 @@ public class MetaTileEntitySeismicDetector extends MetaTileEntityBaseWithControl
     @Override
     public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
-        tooltip.add(I18n.format("在输入总线内放置两个火药以及一块地质存储模块即可获取当前维度当前区块的矿床信息"));
+        tooltip.add(I18n.format("在输入总线内放置两个炸药（鞭炮样子的）以及一块地质存储模块即可获取当前维度当前区块的矿床信息"));
     }
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {

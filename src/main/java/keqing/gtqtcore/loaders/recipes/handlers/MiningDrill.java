@@ -63,9 +63,9 @@ public class MiningDrill {
                 .input(plate, Steel,16)
                 .input(stick, Steel,2)
                 .input(ring, Steel, 4)
-                .input(BATTERY_LV_LITHIUM,4)
-                .input(circuit, MarkerMaterials.Tier.MV, 16)
-                .input(SENSOR_LV,16)
+                .input(BATTERY_LV_LITHIUM,1)
+                .input(circuit, MarkerMaterials.Tier.MV, 1)
+                .input(SENSOR_LV,1)
                 .output(POS_ORE_CARD)
                 .circuitMeta(2)
                 .duration(600).EUt(30).buildAndRegister();
