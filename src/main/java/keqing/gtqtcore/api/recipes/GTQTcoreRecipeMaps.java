@@ -15,9 +15,11 @@ import gregtech.api.unification.stack.ItemMaterialInfo;
 import gregtech.api.util.AssemblyLineManager;
 import gregtech.core.sound.GTSoundEvents;
 import keqing.gtqtcore.api.capability.chemical_plant.ChemicalPlantBuilder;
+import keqing.gtqtcore.api.gui.GTQTGuiTextures;
 import keqing.gtqtcore.api.recipes.builder.*;
 import keqing.gtqtcore.api.recipes.machine.*;
 import keqing.gtqtcore.client.textures.GCYSGuiTextures;
+import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -115,7 +117,7 @@ public class GTQTcoreRecipeMaps {
             .setProgressBar(GuiTextures.PROGRESS_BAR_CRYSTALLIZATION, ProgressWidget.MoveType.HORIZONTAL)
             .setSound(GTSoundEvents.FURNACE);
 
-    public static final RecipeMap<BlastRecipeBuilder> CZPULLER_RECIPES = new RecipeMap<>("czpuller_recipes", 3, 12, 1,3,   new BlastRecipeBuilder(), false)
+    public static final RecipeMap<BlastRecipeBuilder> CZPULLER_RECIPES = new RecipeMap<>("czpuller_recipes", 3, 1, 1,0,   new BlastRecipeBuilder(), false)
             .setProgressBar(GuiTextures.PROGRESS_BAR_CRYSTALLIZATION, ProgressWidget.MoveType.HORIZONTAL)
             .setSound(GTSoundEvents.FURNACE);
 
@@ -365,8 +367,9 @@ public class GTQTcoreRecipeMaps {
                 .setSound(GTSoundEvents.CHEMICAL_REACTOR);
 
         //  Large Heat Exchanger Recipemap
-        HEAT_EXCHANGE_RECIPES = new RecipeMap<>("heat_exchanger_recipes", 0, 0, 2, 3, new FlowRateRecipeBuilder(), false)
-                .setProgressBar(GuiTextures.PROGRESS_BAR_ARC_FURNACE, ProgressWidget.MoveType.HORIZONTAL);
+        HEAT_EXCHANGE_RECIPES = new RecipeMapHeatExchanger<>("heat_exchanger_recipes", 0, 0, 2, 3, new FlowRateRecipeBuilder(), false)
+                .setProgressBar(GTQTGuiTextures.PROGRESS_BAR_HEAT_EXCHANGE, ProgressWidget.MoveType.HORIZONTAL)
+                .setSound(GTSoundEvents.BATH);
 
         HEAT_EXCHANGE = new RecipeMap<>("heat_exchanger", 0, 0, 1, 1, new PrimitiveRecipeBuilder(), false)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARC_FURNACE, ProgressWidget.MoveType.HORIZONTAL);

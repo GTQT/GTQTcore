@@ -79,6 +79,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityComponentAssemblyLine COMPONENT_ASSEMBLY_LINE;
     public static MetaTileEntityBufferHatch MULTIPART_BUFFER_HATCH;
     public static MetaTileEntityBlazingBlastFurnace BLAZING_BLAST_FURNACE ;
+    public static MetaTileEntityBlazingCZPuller BLAZING_CZ_PULLER ;
     public static MetaTileEntityHugeChemicalReactor HUGE_CHEMICAL_REACTOR;
     public static MetaTileEntityIntegratedMiningDivision INTEGRATED_MINING_DIVISION;
     public static MetaTileEntityHugeMacerator HUGE_MACERATOR;
@@ -156,6 +157,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityFracturing FLUID_DRILLING_RIG;
     public static MetaTileEntityFracturing ADVANCED_FLUID_DRILLING_RIG;
     public static MetaTileEntityLargeNaquadahReactor LARGE_NAQUADAH_REACTOR;
+    public static MetaTileEntityNeutralNetworkNexus NEUTRAL_NETWORK_NEXUS;
     public static MetaTileEntityCrackingUnit CRACKER;
     public static MetaTileEntitySteamFermentationVat STEAM_VAT;
     public static MetaTileEntityPyrolyseOven PYROLYSE_OVEN;
@@ -410,6 +412,9 @@ public class GTQTMetaTileEntities {
         SMSF = registerMetaTileEntity(3207, new MetaTileEntitySMSF(gtqtcoreId("smsf")));
         VACUUM_DISTILLATION_TOWER = registerMetaTileEntity(3208, new MetaTileEntityVacuumDistillationTower(gtqtcoreId("vacuum_distillation_tower")));
         ADV_ARC_FURNACE= registerMetaTileEntity(3209, new MetaTileEntityAdvancedArcFurnace(gtqtcoreId("adv_arc_furnace")));
+        NEUTRAL_NETWORK_NEXUS = registerMetaTileEntity(3210, new MetaTileEntityNeutralNetworkNexus(gtqtcoreId("neutral_network_nexus")));
+        BLAZING_CZ_PULLER = registerMetaTileEntity(3211, new MetaTileEntityBlazingCZPuller(gtqtcoreId("blazing_cz_puller")));
+
         //重写设备
         DISTILLATION_TOWER = registerMetaTileEntity(3250, new MetaTileEntityDistillationTower(gtqtcoreId("distillation_tower"),true));
         CRACKER = registerMetaTileEntity(3251, new MetaTileEntityCrackingUnit(gtqtcoreId("cracker")));

@@ -67,6 +67,18 @@
         "textures": {
           "all": "gregtech:blocks/multiblock/casings/machine_casing_fusion_6"
         }
+      },
+      "naquadah_alloy_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casings/naquadah_alloy_casing"
+        }
+      },
+      "naquadria_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casings/naquadria_casing"
+        }
       }
     }
   }

@@ -679,6 +679,7 @@ public class CPULine {
                 .input(dust,GalliumArsenide,1)
                 .input(dust,Boron,1)
                 .output(SILICON_BOULE)
+                .blastFurnaceTemp(1800)
                 .buildAndRegister();
 
         CZPULLER_RECIPES.recipeBuilder()
@@ -689,6 +690,7 @@ public class CPULine {
                 .input(dust,GalliumArsenide,1)
                 .input(dust,Fluix,1)
                 .output(AE_SILICON)
+                .blastFurnaceTemp(1800)
                 .buildAndRegister();
 
         CZPULLER_RECIPES.recipeBuilder()
@@ -699,6 +701,7 @@ public class CPULine {
                 .input(dust,GalliumArsenide,2)
                 .input(dust,Phosphorus,1)
                 .output(PHOSPHORUS_BOULE)
+                .blastFurnaceTemp(1800)
                 .buildAndRegister();
 
         CZPULLER_RECIPES.recipeBuilder()
@@ -709,6 +712,7 @@ public class CPULine {
                 .input(dust,GalliumArsenide,4)
                 .input(dust,Naquadah,1)
                 .output(NAQUADAH_BOULE)
+                .blastFurnaceTemp(1800)
                 .buildAndRegister();
 
         CZPULLER_RECIPES.recipeBuilder()
@@ -719,6 +723,7 @@ public class CPULine {
                 .input(dust,GalliumArsenide,8)
                 .input(dust,Neutronium,1)
                 .output(NEUTRONIUM_BOULE)
+                .blastFurnaceTemp(1800)
                 .buildAndRegister();
 
         CZPULLER_RECIPES.recipeBuilder()
@@ -729,6 +734,7 @@ public class CPULine {
                 .input(dust,IndiumGalliumPhosphide,1)
                 .input(dust,Boron,1)
                 .output(SILICON_BOULE,2)
+                .blastFurnaceTemp(1800)
                 .buildAndRegister();
 
         CZPULLER_RECIPES.recipeBuilder()
@@ -739,6 +745,7 @@ public class CPULine {
                 .input(dust,IndiumGalliumPhosphide,1)
                 .input(dust,Fluix,1)
                 .output(AE_SILICON,2)
+                .blastFurnaceTemp(1800)
                 .buildAndRegister();
 
         CZPULLER_RECIPES.recipeBuilder()
@@ -749,6 +756,7 @@ public class CPULine {
                 .input(dust,IndiumGalliumPhosphide,2)
                 .input(dust,Phosphorus,1)
                 .output(PHOSPHORUS_BOULE,2)
+                .blastFurnaceTemp(1800)
                 .buildAndRegister();
 
         CZPULLER_RECIPES.recipeBuilder()
@@ -759,6 +767,7 @@ public class CPULine {
                 .input(dust,IndiumGalliumPhosphide,4)
                 .input(dust,Naquadah,1)
                 .output(NAQUADAH_BOULE,2)
+                .blastFurnaceTemp(1800)
                 .buildAndRegister();
 
         CZPULLER_RECIPES.recipeBuilder()
@@ -769,6 +778,7 @@ public class CPULine {
                 .input(dust,IndiumGalliumPhosphide,8)
                 .input(dust,Neutronium,1)
                 .output(NEUTRONIUM_BOULE,2)
+                .blastFurnaceTemp(1800)
                 .buildAndRegister();
     }
     private static void Pre()

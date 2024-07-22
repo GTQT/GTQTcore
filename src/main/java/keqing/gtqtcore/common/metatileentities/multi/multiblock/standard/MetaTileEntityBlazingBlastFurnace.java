@@ -27,6 +27,7 @@ import gregtech.api.util.GTUtility;
 import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
+import gregtech.client.utils.TooltipHelper;
 import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.metatileentities.MetaTileEntities;
@@ -120,7 +121,7 @@ public class MetaTileEntityBlazingBlastFurnace extends GTQTRecipeMapMultiblockOv
             this.blastFurnaceTemperature = BlockWireCoil.CoilType.CUPRONICKEL.getCoilTemperature();
             this.heatingCoilLevel = BlockWireCoil.CoilType.CUPRONICKEL.getLevel();
         }
-        ParallelLim=Math.min((int)Math.pow(2, heatingCoilLevel),1024);
+        ParallelLim=Math.min((int)Math.pow(2, heatingCoilLevel),64);
         ParallelNum=ParallelLim;
         this.blastFurnaceTemperature += 100 * Math.max(0, GTUtility.getTierByVoltage(getEnergyContainer().getInputVoltage()) - GTValues.MV);
     }
@@ -178,6 +179,7 @@ public class MetaTileEntityBlazingBlastFurnace extends GTQTRecipeMapMultiblockOv
     @Override
     public void addInformation(ItemStack stack, @Nullable World player, @Nonnull List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("什么东西烧起来了", new Object[0]));
         tooltip.add(I18n.format("gregtech.machine.cracker.gtqtupdate.1"));
         tooltip.add(I18n.format("gtqtcore.multiblock.vc.tooltip.1"));
         tooltip.add(I18n.format("gtqtcore.multiblock.vc.tooltip.2"));

@@ -1,6 +1,8 @@
 package keqing.gtqtcore.client.textures;
 
 import codechicken.lib.texture.TextureUtils;
+import gregtech.api.gui.resources.SteamTexture;
+import gregtech.api.gui.resources.TextureArea;
 import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
 import gregtech.client.renderer.texture.cube.SimpleOrientedCubeRenderer;
 import gregtech.client.renderer.texture.cube.SimpleOverlayRenderer;
@@ -31,6 +33,7 @@ public class GTQTTextures {
     public static final SimpleOverlayRenderer ADVANCED_ACTIVE_FUSION_TEXTURE = new SimpleOverlayRenderer("casings/fusion/machine_casing_advanced_fusion_hatch_blue");
     public static final SimpleOverlayRenderer ULTIMATE_ACTIVE_FUSION_TEXTURE = new SimpleOverlayRenderer("casings/fusion/machine_casing_ultimate_fusion_hatch_blue");
     public static final SimpleOrientedCubeRenderer ADVANCED_FILTER_IRIDIUM_FRONT = new SimpleOrientedCubeRenderer("casings/advanced_filter_iridium_front");
+
 
     //怎么写？请看
     //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/client/textures/GSTextures.java
@@ -110,6 +113,41 @@ public class GTQTTextures {
     public static OrientedOverlayRenderer CYCLOTRON_OVERLAY = new OrientedOverlayRenderer("overlay/cyclotron");
     public static OrientedOverlayRenderer DRAGON_FUSION_OVERLAY = new OrientedOverlayRenderer("overlay/dragon_fusion");
     public static OrientedOverlayRenderer MULTIPART_BALL_HATCH = new OrientedOverlayRenderer("multiparts/overlay_ball_hatch");
+    public static OrientedOverlayRenderer CHEMICAL_DRYER_OVERLAY = new OrientedOverlayRenderer("overlay/chemical_dryer");
+    public static OrientedOverlayRenderer BIO_REACTOR_OVERLAY = new OrientedOverlayRenderer("overlay/bio_reactor");
+    public static OrientedOverlayRenderer CONDENSER_OVERLAY = new OrientedOverlayRenderer("overlay/condenser");
+    public static OrientedOverlayRenderer SIMULATOR_OVERLAY = new OrientedOverlayRenderer("overlay/simulator");
+    public static OrientedOverlayRenderer BIOMASS_GENERATOR_OVERLAY = new OrientedOverlayRenderer("overlay/biomass_generator");
+    public static OrientedOverlayRenderer HYDRAULIC_FRACKER_OVERLAY = new OrientedOverlayRenderer("overlay/hydraulic_fracker");
+    public static OrientedOverlayRenderer INDUSTRIAL_ROASTER_OVERLAY = new OrientedOverlayRenderer("overlay/industrial_roaster");
+    public static OrientedOverlayRenderer FARM_OVERLAY = new OrientedOverlayRenderer("overlay/tree_growth_factory");
+    public static OrientedOverlayRenderer VIRTUAL_COSMOS_SIMULATOR_OVERLAY = new OrientedOverlayRenderer("overlay/virtual_cosmos_simulator");
+    public static OrientedOverlayRenderer COLLIDER_OVERLAY = new OrientedOverlayRenderer("overlay/collider");
+    public static OrientedOverlayRenderer DIMENSIONAL_OSCILLATOR_OVERLAY = new OrientedOverlayRenderer("overlay/dimensional_oscillator");
+    public static OrientedOverlayRenderer DECAY_GENERATOR_OVERLAY = new OrientedOverlayRenderer("overlay/decay_generator");
+    public static OrientedOverlayRenderer SUPRACHRONAL_ASSEMBLY_LINE_OVERLAY = new OrientedOverlayRenderer("overlay/suprachronal_assembly_line");
+    public static OrientedOverlayRenderer SPACE_ELEVATOR_OVERLAY = new OrientedOverlayRenderer("overlay/space_elevator");
+    public static OrientedOverlayRenderer LARGE_PROCESSING_FACTORY_OVERLAY = new OrientedOverlayRenderer("overlay/large_processing_factory");
+    public static OrientedOverlayRenderer NEUTRAL_NETWORK_NEXUS_OVERLAY = new OrientedOverlayRenderer("overlay/neutral_network_nexus");
+    public static OrientedOverlayRenderer QUANTUM_FORCE_TRANSFORMER_OVERLAY = new OrientedOverlayRenderer("overlay/quantum_force_transformer");
+    public static OrientedOverlayRenderer TURBINE_MIXER_OVERLAY = new OrientedOverlayRenderer("overlay/turbine_mixer");
+    public static OrientedOverlayRenderer INDUSTRIAL_CENTRIFUGE_OVERLAY = new OrientedOverlayRenderer("overlay/industrial_centrifuge");
+    public static OrientedOverlayRenderer COKING_TOWER_OVERLAY = new OrientedOverlayRenderer("overlay/coking_tower");
+    public static OrientedOverlayRenderer BIOWARE_SIMULATOR_OVERLAY = new OrientedOverlayRenderer("overlay/bioware_simulator");
+    public static OrientedOverlayRenderer LARGE_ROCKET_ENGINE_OVERLAY = new OrientedOverlayRenderer("overlay/large_rocket_engine");
+    public static OrientedOverlayRenderer ALGAE_CULTURE_TANK_OVERLAY = new OrientedOverlayRenderer("overlay/algae_culture_tank");
+    public static OrientedOverlayRenderer LARGE_BIO_REACTOR_OVERLAY = new OrientedOverlayRenderer("overlay/large_bio_reactor");
+    public static OrientedOverlayRenderer ELECTROMAGNETIC_SEPARATION_PLANT_OVERLAY = new OrientedOverlayRenderer("overlay/electromagnetic_separation_plant");
+    public static OrientedOverlayRenderer DIMENSIONALLY_TRANSCENDENT_PLASMA_FORGE_OVERLAY = new OrientedOverlayRenderer("overlay/dimensionally_transcendent_plasma_forge");
+    public static OrientedOverlayRenderer DYSON_SWARM_OVERLAY = new OrientedOverlayRenderer("overlay/dyson_swarm");
+    public static OrientedOverlayRenderer LARGE_FLUID_PHASE_TRANSFORMER_OVERLAY = new OrientedOverlayRenderer("overlay/large_fluid_phase_transformer");
+    public static OrientedOverlayRenderer PRECISE_ASSEMBLER_OVERLAY = new OrientedOverlayRenderer("overlay/precise_assembler");
+    public static OrientedOverlayRenderer QUANTUM_COMPUTER_OVERLAY = new OrientedOverlayRenderer("overlay/quantum_computer");
+    public static OrientedOverlayRenderer PLANETARY_GAS_SIPHON_OVERLAY = new OrientedOverlayRenderer("overlay/planetary_gas_siphon");
+    public static OrientedOverlayRenderer NICOLL_DYSON_BEAMER_OVERLAY = new OrientedOverlayRenderer("overlay/nicoll_dyson_beamer");
+    public static OrientedOverlayRenderer SUPRACHRONAL_NEUTRONIUM_FORGE_OVERLAY = new OrientedOverlayRenderer("overlay/suprachronal_neutronium_forge");
+    public static OrientedOverlayRenderer MASS_FABRICATOR_OVERLAY = new OrientedOverlayRenderer("overlay/mass_fabricator");
+    public static OrientedOverlayRenderer ELEMENT_REPLICATOR_OVERLAY = new OrientedOverlayRenderer("overlay/element_replicator");
 
     public static void init() {
         WIRELESS_HATCH_HATCH = new SimpleOverlayRenderer("overlay/wireless_hatch/overlay_front");

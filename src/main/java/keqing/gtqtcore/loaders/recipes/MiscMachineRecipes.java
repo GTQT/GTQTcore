@@ -1,5 +1,6 @@
 package keqing.gtqtcore.loaders.recipes;
 
+import static gregtech.api.recipes.RecipeMaps.PRIMITIVE_BLAST_FURNACE_RECIPES;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.unification.material.Materials.*;

@@ -13,6 +13,7 @@ import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
+import gregtech.api.pattern.MultiblockShapeInfo;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMaps;
@@ -21,17 +22,31 @@ import gregtech.api.util.GTUtility;
 import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
+import gregtech.client.utils.TooltipHelper;
+import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.*;
+import gregtech.common.metatileentities.MetaTileEntities;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
+import keqing.gtqtcore.common.block.GTQTMetaBlocks;
+import keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing;
+import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.MetaTileEntityBlazingBlastFurnace;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -107,7 +122,35 @@ public class MetaTileEntityCZPuller extends RecipeMapMultiblockController implem
                 .where('C', heatingCoils())
                 .build();
     }
-
+    @Override
+    public List<MultiblockShapeInfo> getMatchingShapes() {
+        ArrayList<MultiblockShapeInfo> shapeInfo = new ArrayList<>();
+        MultiblockShapeInfo.Builder builder = MultiblockShapeInfo.builder()
+                .aisle(" YYYYY ", "   Y   ", "   X   ", "   G   ", "   G   ", "   G   ", "   G   ", "   G   ", "   X   ", "       ")
+                .aisle("YYYYYYY", "  YCY  ", "  XCX  ", "  XCX  ", "  XCX  ", "  XCX  ", "  XCX  ", "  XCX  ", "  XXX  ", "   X   ")
+                .aisle("YYYYYYY", " XN NY ", " XN NX ", " XN NX ", " XN NX ", " XN NX ", " XNNNX ", " XN NX ", " XRRRX ", " XXXXX ")
+                .aisle("YYYYYYY", "YC   CY", "XC   CX", "GC   CG", "GC   CG", "GC   CG", "GC   CG", "GCN NCG", "XXR RXX", " XXHXX ")
+                .aisle("YYYYYYY", " YN NY ", " XN NX ", " XN NX ", " XN NX ", " XN NX ", " XNNNX ", " XN NX ", " XRRRX ", " XXXXX ")
+                .aisle("YYYYYYY", "  YCY  ", "  XCX  ", "  XCX  ", "  XCX  ", "  XCX  ", "  XCX  ", "  XCX  ", "  XXX  ", "   X   ")
+                .aisle(" EIOFM ", "   S   ", "   X   ", "   G   ", "   G   ", "   G   ", "   G   ", "   G   ", "   X   ", "       ")
+                .where('S', GTQTMetaTileEntities.CZ_PULLER, EnumFacing.SOUTH)
+                .where('X', MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STEEL_SOLID))
+                .where('Y', MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STEEL_SOLID))
+                .where('#', Blocks.AIR.getDefaultState())
+                .where('G', MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.TEMPERED_GLASS))
+                .where('N', MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.INVAR_HEATPROOF))
+                .where('R', MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.STEEL_GEARBOX))
+                .where('E', MetaTileEntities.ENERGY_INPUT_HATCH[GTValues.LV], EnumFacing.SOUTH)
+                .where('I', MetaTileEntities.ITEM_IMPORT_BUS[GTValues.LV], EnumFacing.SOUTH)
+                .where('O', MetaTileEntities.ITEM_EXPORT_BUS[GTValues.LV], EnumFacing.SOUTH)
+                .where('F', MetaTileEntities.FLUID_IMPORT_HATCH[GTValues.LV], EnumFacing.SOUTH)
+                .where('H', MetaTileEntities.MUFFLER_HATCH[GTValues.LV], EnumFacing.UP)
+                .where('M', MetaTileEntities.MAINTENANCE_HATCH, EnumFacing.SOUTH);
+        GregTechAPI.HEATING_COILS.entrySet().stream()
+                .sorted(Comparator.comparingInt(entry -> entry.getValue().getTier()))
+                .forEach(entry -> shapeInfo.add(builder.where('C', entry.getKey()).build()));
+        return shapeInfo;
+    }
     @SideOnly(Side.CLIENT)
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
@@ -118,7 +161,14 @@ public class MetaTileEntityCZPuller extends RecipeMapMultiblockController implem
     public int getCurrentTemperature() {
         return this.czpullerTemperarure;
     }
-
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World player, @Nonnull List<String> tooltip, boolean advanced) {
+        super.addInformation(stack, player, tooltip, advanced);
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("硅宝宝之家", new Object[0]));
+        tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.1"));
+        tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.2"));
+        tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.3"));
+    }
     @SideOnly(Side.CLIENT)
     @Nonnull
     @Override

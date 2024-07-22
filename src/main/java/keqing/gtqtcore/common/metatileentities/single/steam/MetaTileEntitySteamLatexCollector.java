@@ -65,7 +65,7 @@ public class MetaTileEntitySteamLatexCollector extends PseudoMultiSteamMachineMe
     public MetaTileEntitySteamLatexCollector(ResourceLocation metaTileEntityId, boolean isHighPressure) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.LATEX_COLLECTOR_RECIPES, EXTRACTION_STEAM, GTQTTextures.DRYER_OVERLAY, false, isHighPressure);
         this.initializeInventory();
-        latexCollectionAmount = isHighPressure ? 6L : 3L;
+        latexCollectionAmount = isHighPressure ? 2L : 1L;
     }
 
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity, boolean isHighPressure) {

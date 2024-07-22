@@ -27,6 +27,8 @@ import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.BLAST_ARC_RECIPES;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.common.block.blocks.GTQTIsaCasing.CasingType.*;
+import static keqing.gtqtcore.common.block.blocks.GTQTMultiblockCasing.CasingType.NAQUADAH_ALLOY_CASING;
+import static keqing.gtqtcore.common.block.blocks.GTQTMultiblockCasing.CasingType.NAQUADRIA_CASING;
 import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.*;
 import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing1.TurbineCasingType.GALVANIZE_STEEL_CASING;
 import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing1.TurbineCasingType.*;
@@ -99,6 +101,17 @@ public class MachineCasing {
                 .fluidInputs(Zeron100.getFluid(L * 2))
                 .outputs(GTQTMetaBlocks.ISA_CASING.getItemVariant(ISA_MILL_CASING_GEARBOX, 1))
                 .EUt(VA[LuV])
+                .duration(300)
+                .buildAndRegister();
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(frameGt, Steel)
+                .input(gear, Aluminium, 3)
+                .input(gearSmall, Steel, 6)
+                .input(bolt, Gold, 16)
+                .fluidInputs(Glue.getFluid(L * 2))
+                .outputs(GTQTMetaBlocks.ISA_CASING.getItemVariant(SEPARATOR_ROTOR, 1))
+                .EUt(VA[LV])
                 .duration(300)
                 .buildAndRegister();
 

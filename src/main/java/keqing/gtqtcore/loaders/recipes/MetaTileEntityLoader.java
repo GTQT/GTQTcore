@@ -821,8 +821,17 @@ public class MetaTileEntityLoader {
         ModHandler.addShapedRecipe(true, "volcanus", BLAZING_BLAST_FURNACE.getStackForm(),
                 "GXG", "RHR", "PWP",
                 'G', new UnificationEntry(gear, HSSG),
-                'X', new UnificationEntry(circuit, MarkerMaterials.Tier.LuV),
+                'X', new UnificationEntry(circuit, MarkerMaterials.Tier.IV),
                 'H', ELECTRIC_BLAST_FURNACE.getStackForm(),
+                'R', ROBOT_ARM_IV.getStackForm(),
+                'P', new UnificationEntry(plate, AusteniticStainlessSteel904L),
+                'W', VOLTAGE_COIL_IV.getStackForm());
+
+        ModHandler.addShapedRecipe(true, "blazing_cz_puller", BLAZING_CZ_PULLER.getStackForm(),
+                "GXG", "RHR", "PWP",
+                'G', new UnificationEntry(gear, HSSS),
+                'X', new UnificationEntry(circuit, MarkerMaterials.Tier.IV),
+                'H', CZ_PULLER.getStackForm(),
                 'R', ROBOT_ARM_IV.getStackForm(),
                 'P', new UnificationEntry(plate, AusteniticStainlessSteel904L),
                 'W', VOLTAGE_COIL_IV.getStackForm());

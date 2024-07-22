@@ -8,6 +8,7 @@ import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
+import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.recipes.recipeproperties.IRecipePropertyStorage;
 import gregtech.api.unification.material.Materials;
@@ -22,8 +23,11 @@ import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.blocks.StoneVariantBlock;
 import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
+import keqing.gtqtcore.api.metaileentity.GTQTRecipeMapMultiblockController;
+import keqing.gtqtcore.api.metaileentity.multiblock.GTQTRecipeMapMultiblockControllerOverwrite;
 import keqing.gtqtcore.api.metaileentity.multiblock.GTQTRecipeMapMultiblockOverwrite;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
+import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
@@ -43,9 +47,12 @@ import java.util.List;
 
 import static gregtech.api.GTValues.VA;
 
-public class MetaTileEntityAdvancedArcFurnace extends GTQTRecipeMapMultiblockOverwrite {
+public class MetaTileEntityAdvancedArcFurnace extends GTQTRecipeMapMultiblockControllerOverwrite {
     public MetaTileEntityAdvancedArcFurnace(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, RecipeMaps.ARC_FURNACE_RECIPES);
+        super(metaTileEntityId, new RecipeMap[] {
+                RecipeMaps.ARC_FURNACE_RECIPES,
+                RecipeMaps.FURNACE_RECIPES
+        });
         this.recipeMapWorkable = new AdvancedArcFurnaceWorkableHandler(this);
     }
     private class AdvancedArcFurnaceWorkableHandler extends MultiblockRecipeLogic {

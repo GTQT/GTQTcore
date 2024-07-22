@@ -1,8 +1,13 @@
 package keqing.gtqtcore.api.utils;
 
 import gregtech.api.GTValues;
+import gregtech.api.metatileentity.MetaTileEntity;
+import gregtech.api.metatileentity.MetaTileEntityHolder;
+import gregtech.api.util.BlockInfo;
 import gregtech.api.util.TextFormattingUtil;
+import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.GTQTCore;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -25,12 +30,8 @@ import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Pattern;
-import java.util.BitSet;
-import java.util.Objects;
 import java.util.function.BooleanSupplier;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -256,7 +257,34 @@ public class GTQTUtil {
     public static FluidStack getFluidById(String name, int amount) {
         return Objects.requireNonNull(FluidRegistry.getFluidStack(name, amount));
     }
+    public static MetaTileEntityHolder getTileEntity(MetaTileEntity tile) {
+        MetaTileEntityHolder holder = new MetaTileEntityHolder();
+        holder.setMetaTileEntity(tile);
+        holder.getMetaTileEntity().onPlacement();
+        holder.getMetaTileEntity().setFrontFacing(EnumFacing.SOUTH);
+        return holder;
+    }
 
+    /**
+     * @param allowedStates  Allowed Block States.
+     * @return               Used to build upgrade multiblock.
+     */
+    public static Supplier<BlockInfo[]> getCandidates(IBlockState... allowedStates) {
+        return () -> Arrays.stream(allowedStates)
+                .map(state -> new BlockInfo(state, null))
+                .toArray(BlockInfo[]::new);
+    }
+
+    /**
+     * @param metaTileEntities  Allowed Meta Tile Entities.
+     * @return                  Used to build upgrade multiblock.
+     */
+    public static Supplier<BlockInfo[]> getCandidates(MetaTileEntity... metaTileEntities) {
+        return () -> Arrays.stream(metaTileEntities)
+                .filter(Objects::nonNull)
+                .map(tile -> new BlockInfo(MetaBlocks.MACHINE.getDefaultState(), getTileEntity(tile)))
+                .toArray(BlockInfo[]::new);
+    }
     /**
      * @param number  Long number.
      * @return        Just a rewrite of formatNumbers(),

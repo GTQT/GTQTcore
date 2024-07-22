@@ -38,7 +38,9 @@ public class GTQTMultiblockCasing extends VariantBlock<GTQTMultiblockCasing.Casi
         COMPRESSED_FUSION_REACTOR_MKIII_CASING("compressed_fusion_reactor_mkiii_casing"),
         CASING_FUSION_MKIV("machine_casing_fusion_4"),
         CASING_FUSION_MKV("machine_casing_fusion_5"),
-        CASING_FUSION_MKVI("machine_casing_fusion_6");
+        CASING_FUSION_MKVI("machine_casing_fusion_6"),
+        NAQUADRIA_CASING("naquadria_casing"),
+        NAQUADAH_ALLOY_CASING("naquadah_alloy_casing");
 
         private final String name;
 

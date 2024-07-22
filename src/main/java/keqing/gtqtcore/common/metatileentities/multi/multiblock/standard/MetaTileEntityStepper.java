@@ -134,13 +134,15 @@ public class MetaTileEntityStepper extends MultiMapMultiblockController implemen
 
             //并行
             if (LaserKind*2>=laser_tier) {
-                if (LaserAmount - clean_tier * (LaserKind*2 - laser_tier +1) * 1000 > 0)
-                    LaserAmount -= clean_tier * (LaserKind*2 - laser_tier +1) * 1000;
+                if (LaserAmount - clean_tier * (LaserKind*2 - laser_tier +1) * 1000 > 0) LaserAmount -= clean_tier * (LaserKind * 2 - laser_tier + 1) * 1000;
                 else return false;
             }
             //不并行
-            else if(LaserAmount-1000 > 0) LaserAmount-=1000;
-            else return false;
+            else {
+                if (LaserAmount - 1000 > 0) LaserAmount -= 1000;
+                else return false;
+                }
+
             return true;
         }
         return false;

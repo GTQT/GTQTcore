@@ -23,6 +23,7 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem LAMINATION_GE;
     public static MetaItem<?>.MetaValueItem LAMINATION_IR;
     public static MetaItem<?>.MetaValueItem TIME_BOTTLE;
+    public static MetaItem<?>.MetaValueItem WATER_CLEAR;
     public static MetaItem<?>.MetaValueItem GENERAL_CIRCUIT_ULV;
     public static MetaItem<?>.MetaValueItem GENERAL_CIRCUIT_LV;
     public static MetaItem<?>.MetaValueItem GENERAL_CIRCUIT_MV;

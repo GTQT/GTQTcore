@@ -124,7 +124,9 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         SOLAR_PLATE_MKIII=this.addItem(92, "solar_plate_mkiii").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
 
         TIME_BOTTLE = this.addItem(97, "time_bottle").setMaxStackSize(1).addComponents(new TimeBottleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        //电池
+        WATER_CLEAR = this.addItem(96, "water_clear").setMaxStackSize(1).addComponents(new WaterClearBehavior()).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+
+         //电池
         BATTERY_NIMH_EMPTY = addItem(100, "nickel.metal.hydride.battery.empty").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         BATTERY_SMALL_LITHIUM_ION_EMPTY = addItem(102, "small.lithium.ion.battery.empty").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         BATTERY_MEDIUM_LITHIUM_ION_EMPTY = addItem(104, "medium.lithium.ion.battery.empty").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);

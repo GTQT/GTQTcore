@@ -327,6 +327,9 @@ public class CommonProxy {
 
         ERProperty.registeredRate(401,"2 5 2 4 3 碱性");
 
+        SwarmTierProperty.registerSwarmTier(1, "I");
+        SwarmTierProperty.registerSwarmTier(2, "II");
+        SwarmTierProperty.registerSwarmTier(3, "III");
 
         for(int i=1;i<=5;i=i+1) LASERNetProperty.registeredLaser(i, String.valueOf(i));
         for(int i=1;i<=100;i++) KQNetProperty.registeredNB(i, String.valueOf(i));

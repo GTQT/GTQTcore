@@ -90,6 +90,7 @@ metaitem.circuit.supracausal_computer.tooltip=超越时间之影/n§fOpV级电�
 metaitem.circuit.supracausal_mainframe.name=超因果星系级电脑主机群复合体
 metaitem.circuit.supracausal_mainframe.tooltip=万物归一者，原初的神迹/n§fMAX级电路
 
+metaitem.water_clear.name=海绵宝宝
 metaitem.time_bottle.name=时间之瓶
 #  Components
 metaitem.component.optical_smd.transistor.name=光学晶体管
@@ -2450,7 +2451,7 @@ gtqtcore.multiblock.md.level1=线圈等级：%s 玻璃等级：%s
 gtqtcore.multiblock.md.level=线圈等级：%s
 gtqtcore.multiblock.md.glass=玻璃等级：%s
 gtqtcore.multiblock.vc.tooltip.1=需要提供§c烈焰之炽焱§7以工作,未提供§c烈焰之炽焱§7时，炽焱高炉将会停机
-gtqtcore.multiblock.vc.tooltip.2=每提升一级线圈并行数量*2（最大1024），工作时间与并行数量反比例折扣。
+gtqtcore.multiblock.vc.tooltip.2=每提升一级线圈并行数量*2（最大64），工作时间与并行数量反比例折扣。
 gtqtcore.multiblock.vc.tooltip.3=耗能减免与线圈等级正比例折扣。
 gtqtcore.multiblock.vc.no=需要提供炽焱燃料！
 gtqtcore.multiblock.vc.amount=炽焱燃料储量：%sL
@@ -3592,6 +3593,8 @@ metaitem.disk.16.tooltip=§a人工智能III
 
 gtqtcore.multiblock.ak.temp=温度过低，请加岩浆
 recipemap.alloy_klin.name=合金窑
+tile.multiblock_casing.naquadah_alloy_casing.name=超稳定硅岩合金机器外壳
+tile.multiblock_casing.naquadria_casing.name=抗辐射超能硅岩机器外壳
 tile.multiblock_casing.nitinol_machine_casing.name=镍钛诺机械外壳
 tile.multiblock_casing.compressed_fusion_reactor_mki_casing.name=压缩聚变机器外壳 Mk I
 tile.multiblock_casing.compressed_fusion_reactor_mkii_casing.name=压缩聚变机器外壳 Mk II
@@ -4317,6 +4320,11 @@ gtqtcore.machine.pcb_factory.structure.info=结构等级：%s (线宽：%sμm)
 gtqtcore.machine.pcb_factory.structure.cooling_tower=冷却已启用
 gtqtcore.machine.pcb_factory.structure.thermosink=内部温度正在逼近绝对零度
 gtqtcore.machine.pcb_factory.structure.bio_chamber=有机黏菌充斥于生物仓中
+gtqtcore.machine.blazing_cz_puller.name=炽焰柴可斯基外延单晶硅生长炉
+gtqtcore.machine.neutral_network_nexus.name=纳米锻炉
+gtqtcore.machine.neutral_network_nexus.tooltip.1=带有附属结构，附属结构的等级限制了最大配方等级。
+gtqtcore.machine.neutral_network_nexus.tooltip.2=在§r多方块结构提示§7中鼠标右击箭头按钮查看附属结构建造方式。
+gtqtcore.machine.neutral_network_nexus.tier=机器等级：
 
 recipemap.molecular_distillation_recipes.name=高真空分子蒸馏
 gtqtcore.machine.dangote_distillery.name=丹格特蒸馏厂
