@@ -1,36 +1,27 @@
 package keqing.gtqtcore.loaders.recipes;
 
 import gregtech.api.GTValues;
-import gregtech.api.items.OreDictNames;
-import gregtech.api.metatileentity.MetaTileEntity;
+import gregtech.api.metatileentity.multiblock.CleanroomType;
 import gregtech.api.recipes.ModHandler;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.MarkerMaterials;
 import gregtech.api.unification.material.Materials;
-import gregtech.api.unification.material.properties.IngotProperty;
-import gregtech.api.unification.material.properties.PropertyKey;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.UnificationEntry;
 import gregtech.common.blocks.BlockMachineCasing;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.BlockSteamCasing;
 import gregtech.common.blocks.MetaBlocks;
-import gregtech.common.blocks.wood.BlockGregPlanks;
 import gregtech.common.items.MetaItems;
 import gregtech.common.metatileentities.MetaTileEntities;
 import gregtech.loaders.recipe.CraftingComponent;
-import gregtech.loaders.recipe.MachineRecipeLoader;
-import keqing.gtqtcore.api.unification.GTQTMaterials;
-import keqing.gtqtcore.api.unification.ore.GTQTOrePrefix;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTElectrobath;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
-import keqing.gtqtcore.common.metatileentities.single.steam.MetaTileEntitySteamLatexCollector;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import scala.tools.cmd.Meta;
 
 import static gregicality.multiblocks.api.unification.GCYMMaterials.*;
 import static gregicality.multiblocks.common.metatileentities.GCYMMetaTileEntities.LARGE_ASSEMBLER;
@@ -39,38 +30,32 @@ import static gregtech.api.GTValues.VA;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.MarkerMaterials.Tier.*;
 import static gregtech.api.unification.material.Materials.*;
-import static gregtech.api.unification.material.Materials.YttriumBariumCuprate;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.common.blocks.BlockMetalCasing.MetalCasingType.*;
 import static gregtech.common.blocks.BlockSteamCasing.SteamCasingType.BRONZE_HULL;
-import static gregtech.common.blocks.BlockSteamCasing.SteamCasingType.STEEL_BRICKS_HULL;
 import static gregtech.common.blocks.BlockWireCoil.CoilType.CUPRONICKEL;
 import static gregtech.common.blocks.MetaBlocks.MACHINE_CASING;
-import static gregtech.common.blocks.MetaBlocks.OPTICAL_PIPES;
 import static gregtech.common.items.MetaItems.*;
 import static gregtech.common.metatileentities.MetaTileEntities.*;
-import static gregtech.common.metatileentities.MetaTileEntities.COMBUSTION_GENERATOR;
-import static gregtech.common.metatileentities.MetaTileEntities.GAS_TURBINE;
-import static gregtech.common.metatileentities.MetaTileEntities.HULL;
-import static gregtech.loaders.recipe.CraftingComponent.*;
-import static gregtech.loaders.recipe.CraftingComponent.CABLE_QUAD;
+import static gregtech.loaders.recipe.CraftingComponent.GLASS;
+import static gregtech.loaders.recipe.CraftingComponent.PIPE_NORMAL;
 import static gregtech.loaders.recipe.MetaTileEntityLoader.registerMachineRecipe;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.Adamantite;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.Orichalcum;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
-import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.*;
+import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.cylinder;
+import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.motor_stick;
 import static keqing.gtqtcore.common.block.blocks.BlockCrucible.CrucibleType.QUARTZ_CRUCIBLE;
 import static keqing.gtqtcore.common.block.blocks.GTQTIsaCasing.CasingType.ASEPTIC_FARM_CASING;
-import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.NQ_TURBINE_CASING;
-import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.PD_TURBINE_CASING;
+import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.*;
 import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing1.TurbineCasingType.AD_TURBINE_CASING;
 import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing1.TurbineCasingType.ST_TURBINE_CASING;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
-import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.*;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.DISTILLATION_TOWER;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.GAS_COLLECTOR;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.PYROLYSE_OVEN;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.VACUUM_FREEZER;
+import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.*;
 
 
 public class MetaTileEntityLoader {
@@ -568,6 +553,22 @@ public class MetaTileEntityLoader {
                 .duration(1200)
                 .buildAndRegister();
 
+        //  Advanced Filter Casing
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(frameGt, Iridium)
+                .inputs(MetaBlocks.CLEANROOM_CASING.getItemVariant(gregtech.common.blocks.BlockCleanroomCasing.CasingType.FILTER_CASING))
+                .input(ELECTRIC_MOTOR_UV)
+                .input(rotor, Iridium)
+                .input(ITEM_FILTER)
+                .input(FLUID_FILTER)
+                .input(stickLong, Iridium, 2)
+                .fluidInputs(SolderingAlloy.getFluid(L * 2))
+                .outputs(GTQTMetaBlocks.TURBINE_CASING.getItemVariant(ADVANCED_FILTER_CASING))
+                .EUt(VA[6])
+                .duration(200)
+                .cleanroom(CleanroomType.CLEANROOM)
+                .buildAndRegister();
+
         //  ZhuHai Fishing Pond
         ModHandler.addShapedRecipe(true, "zhuhai_fishing_pond", INDUSTRIAL_FISHING_POND.getStackForm(),
                 "FRF", "PHP", "WXW",
@@ -586,6 +587,15 @@ public class MetaTileEntityLoader {
                 'H', QUANTUM_TANK[1].getStackForm(),
                 'K', new UnificationEntry(cableGtDouble, Aluminium)
         );
+        //  Large Biomass Generator
+        ModHandler.addShapedRecipe(true, "large_biomass_generator", LARGE_BIOMASS_GENERATOR.getStackForm(),
+                "SAS", "PBP", "WFW",
+                'B', BIOMASS_GENERATOR[2].getStackForm(),
+                'P', new UnificationEntry(plateDouble, Plutonium239),
+                'W', new UnificationEntry(cableGtDouble, NiobiumTitanium),
+                'F', FIELD_GENERATOR_LuV,
+                'S', new UnificationEntry(spring, RTMAlloy),
+                'A', FLUID_CELL_LARGE_TUNGSTEN_STEEL);
 
         ModHandler.addShapedRecipe(true, "p_reactor", P_REACTOR.getStackForm(),
                 "CGC", "ChC", "CGC",
@@ -1419,6 +1429,15 @@ public class MetaTileEntityLoader {
                 'X', new UnificationEntry(OrePrefix.plate, Rubber),
                 'P', new UnificationEntry(gear, Steel));
 
-
+        //  Biomass Generator
+        gregtech.loaders.recipe.MetaTileEntityLoader.registerMachineRecipe(true, BIOMASS_GENERATOR,
+                "SOS", "IHP", "WTW",
+                'H', CraftingComponent.HULL,
+                'I', CraftingComponent.PISTON,
+                'P', CraftingComponent.PUMP,
+                'S', CraftingComponent.SPRING,
+                'T', CraftingComponent.SAWBLADE,
+                'W', CraftingComponent.CABLE,
+                'O', CraftingComponent.DOUBLE_PLATE);
     }
 }

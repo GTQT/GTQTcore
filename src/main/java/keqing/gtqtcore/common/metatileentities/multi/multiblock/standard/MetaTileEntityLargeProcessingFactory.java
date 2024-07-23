@@ -12,6 +12,7 @@ import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.recipeproperties.IRecipePropertyStorage;
 import gregtech.api.util.GTUtility;
 import gregtech.client.renderer.ICubeRenderer;
+import gregtech.client.utils.TooltipHelper;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
@@ -85,7 +86,7 @@ public class MetaTileEntityLargeProcessingFactory extends MultiMapMultiblockCont
                                List<String> tooltip,
                                boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
-
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("把你的小机器丢掉", new Object[0]));
         tooltip.add(I18n.format("gtqtcore.machine.large_processing_factory.tooltip.1"));
         tooltip.add(I18n.format("gtqtcore.machine.large_processing_factory.tooltip.2"));
         tooltip.add(I18n.format("gtqtcore.machine.large_processing_factory.tooltip.3"));
@@ -93,7 +94,6 @@ public class MetaTileEntityLargeProcessingFactory extends MultiMapMultiblockCont
         tooltip.add(I18n.format("gtqtcore.machine.large_processing_factory.tooltip.5"));
         tooltip.add(I18n.format("gtqtcore.machine.large_processing_factory.tooltip.6"));
         tooltip.add(I18n.format("gtqtcore.machine.large_processing_factory.tooltip.7"));
-        tooltip.add(I18n.format("gtqtcore.machine.large_processing_factory.tooltip.8"));
     }
 
     @Override

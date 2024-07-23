@@ -33,8 +33,23 @@ public class GTQTTextures {
     public static final SimpleOverlayRenderer ADVANCED_ACTIVE_FUSION_TEXTURE = new SimpleOverlayRenderer("casings/fusion/machine_casing_advanced_fusion_hatch_blue");
     public static final SimpleOverlayRenderer ULTIMATE_ACTIVE_FUSION_TEXTURE = new SimpleOverlayRenderer("casings/fusion/machine_casing_ultimate_fusion_hatch_blue");
     public static final SimpleOrientedCubeRenderer ADVANCED_FILTER_IRIDIUM_FRONT = new SimpleOrientedCubeRenderer("casings/advanced_filter_iridium_front");
-
-
+    public static SimpleOverlayRenderer CIRCUIT_ASSEMBLY_CONTROL_CASING = new SimpleOverlayRenderer("multiblock/advblock/osmiridium_casing");
+    public static SimpleOverlayRenderer Inconel625 = new SimpleOverlayRenderer("multiblock/advblock/inconel_625");
+    public static SimpleOverlayRenderer HastelloyN = new SimpleOverlayRenderer("multiblock/advblock/hastelloy_n");
+    public static SimpleOverlayRenderer Stellite = new SimpleOverlayRenderer("multiblock/advblock/stellite");
+    public static SimpleOverlayRenderer Hdcs = new SimpleOverlayRenderer("multiblock/advblock/hdcs");
+    public static SimpleOverlayRenderer Lafium = new SimpleOverlayRenderer("multiblock/advblock/lafium");
+    public static SimpleOverlayRenderer BlackTitanium = new SimpleOverlayRenderer("multiblock/advblock/black_titanium");
+    public static SimpleOverlayRenderer Talonite = new SimpleOverlayRenderer("multiblock/advblock/talonite");
+    public static SimpleOverlayRenderer BlackPlutonium = new SimpleOverlayRenderer("multiblock/advblock/black_plutonium");
+    public static SimpleOverlayRenderer MaragingSteel250 = new SimpleOverlayRenderer("multiblock/advblock/maraging_steel_250");
+    public static SimpleOverlayRenderer Staballoy = new SimpleOverlayRenderer("multiblock/advblock/staballoy");
+    public static SimpleOverlayRenderer BabbittAlloy = new SimpleOverlayRenderer("multiblock/advblock/babbitt_alloy");
+    public static SimpleOverlayRenderer ZirconiumCarbide = new SimpleOverlayRenderer("multiblock/advblock/zirconium_carbide");
+    public static SimpleOverlayRenderer Inconel792 = new SimpleOverlayRenderer("multiblock/advblock/inconel_792");
+    public static SimpleOverlayRenderer IncoloyMA813 = new SimpleOverlayRenderer("multiblock/advblock/incoloy_ma_813");
+    public static SimpleOverlayRenderer HastelloyX78 = new SimpleOverlayRenderer("multiblock/advblock/hastelloy_x_78");
+    public static SimpleOverlayRenderer HastelloyK243 = new SimpleOverlayRenderer("multiblock/advblock/hastelloy_k_243");
     //怎么写？请看
     //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/client/textures/GSTextures.java
     public static OrientedOverlayRenderer LIGHTNING_ROD_OVERLAY;
@@ -52,7 +67,6 @@ public class GTQTTextures {
     public static SimpleOverlayRenderer PRECISE_ASSEMBLER_CASING_MK5;
     public static SimpleOverlayRenderer PRECISE_ASSEMBLER_CASING_MK6;
     public static SimpleOverlayRenderer AD_CASING;
-    public static SimpleOverlayRenderer HastelloyX78;
     public static SimpleOverlayRenderer GALVANIZE_STEEL_CASING;
     public static SimpleOverlayRenderer ST_CASING;
     public static SimpleOverlayRenderer ASEPTIC_FARM_CASING;
@@ -182,7 +196,6 @@ public class GTQTTextures {
         IRIDIUM_CASING = new SimpleOverlayRenderer("multiblock/casing/iridium_casing");
         HC_ALLOY_CASING = new SimpleOverlayRenderer("multiblock/casings/hc_alloy_casing");
         SOLAR_PLATE_CASING = new SimpleOverlayRenderer("multiblock/electrobath/solar_generator_bottom");
-        HastelloyX78 = new SimpleOverlayRenderer("multiblock/advblock/hastelloy_x_78");
         SFTC = new SimpleOverlayRenderer("multiblock/casings/supercritical_fluid_turbine_casing");
         SFTS = new SimpleOverlayRenderer("multiblock/casings/supercritical_fluid_turbine_shaft");
         LIGHTNING_ROD_OVERLAY = new OrientedOverlayRenderer("generators/lightning_rod");

@@ -8,12 +8,14 @@ import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.MarkerMaterials;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.ore.OrePrefix;
+import gregtech.common.blocks.BlockComputerCasing;
 import gregtech.common.blocks.BlockFusionCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.items.MetaItems;
 import gregtech.common.metatileentities.MetaTileEntities;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
+import keqing.gtqtcore.common.block.blocks.GTQTPowerSupply;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -44,6 +46,7 @@ import static gregtech.common.metatileentities.MetaTileEntities.ROTOR_HOLDER;
 import static gregtechfoodoption.machines.GTFOTileEntities.GREENHOUSE;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
+import static keqing.gtqtcore.common.block.GTQTMetaBlocks.POWER;
 import static keqing.gtqtcore.common.block.blocks.GTQTIsaCasing.CasingType.FLOTATION_CASING_GEARBOX;
 import static keqing.gtqtcore.common.block.blocks.GTQTIsaCasing.CasingType.ISA_MILL_CASING_GEARBOX;
 import static keqing.gtqtcore.common.block.blocks.GTQTKQCC.CasingType.COMPUTER_VENT;
@@ -288,6 +291,67 @@ public class KeQingNET {
                         .EUt(VA[HV]))
                 .output(ADV_KQCC)
                 .duration(2000).EUt(480).buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .inputs(POWER.getItemVariant(POWER_SUPPLY_BASIC))
+                .input(circuit, Tier.IV, 8)
+                .inputNBT(TOOL_DATA_ORB, NBTMatcher.ANY, NBTCondition.ANY)
+                .input(frameGt, TungstenSteel, 32)
+                .input(plate, NanometerBariumTitanate, 32)
+                .input(wireFine, Ruridit, 64)
+                .input(wireFine, NiobiumTitanium, 64)
+                .input(OPTICAL_PIPES[0], 64)
+                .input(wireGtDouble, IVSuperconductor, 16)
+                .fluidInputs(SolderingAlloy.getFluid(L * 2))
+                .fluidInputs(Lubricant.getFluid(500))
+                .output(MINI_DATE_BANK)
+                .scannerResearch(b -> b
+                        .researchStack(DATA_ACCESS_HATCH.getStackForm())
+                        .duration(1200)
+                        .EUt(VA[EV]))
+                .duration(1200).EUt(4000).buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .inputs(COMPUTER_CASING.getItemVariant(BlockComputerCasing.CasingType.COMPUTER_CASING))
+                .input(circuit, Tier.ZPM, 8)
+                .inputNBT(TOOL_DATA_ORB, NBTMatcher.ANY, NBTCondition.ANY)
+                .input(frameGt, HSSS, 32)
+                .input(plate, PPB, 32)
+                .input(wireFine, Naquadria, 64)
+                .input(wireFine, Europium, 64)
+                .input(OPTICAL_PIPES[0], 64)
+                .input(wireGtDouble, ZPMSuperconductor, 16)
+                .fluidInputs(SolderingAlloy.getFluid(L * 2))
+                .fluidInputs(Lubricant.getFluid(500))
+                .output(DATA_BANK)
+                .scannerResearch(b -> b
+                        .researchStack(DATA_ACCESS_HATCH.getStackForm())
+                        .duration(2400)
+                        .EUt(VA[EV]))
+                .duration(1200).EUt(6000).buildAndRegister();
+
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(CIRCUIT_GOOD_I,8)
+                .input(HULL[IV],8)
+                .input(ROBOT_ARM_IV, 32)
+                .input(TOOL_DATA_STICK, 1)
+                .input(frameGt, Naquadah, 16)
+                .input(plate, Staballoy, 16)
+                .input(ring, HSSS, 32)
+                .input(gearSmall,PPB,32)
+                .input(cableGtSingle,NiobiumTitanium,64)
+                .input(cableGtSingle,NiobiumTitanium,64)
+                .output(LAGER_PROCESSING_FACTORY)
+                .fluidInputs(Polybenzimidazole.getFluid(L * 32))
+                .fluidInputs(Zylon.getFluid(L * 64))
+                .fluidInputs(TitaniumTungstenCarbide.getFluid(L * 64))
+                .fluidInputs(UltraGlue.getFluid(L * 64))
+                .scannerResearch(b -> b
+                        .researchStack(ASSEMBLER[5].getStackForm())
+                        .EUt(VA[IV]))
+                .duration(2000).EUt(VA[IV]).buildAndRegister();
+
 
         CIRCUIT_ASSEMBLER_RECIPES.recipeBuilder()
                 .input(PLASTIC_CIRCUIT_BOARD)
@@ -543,7 +607,7 @@ public class KeQingNET {
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(frameGt, HastelloyX,16)
-                .inputs(GTQTMetaBlocks.POWER.getItemVariant(POWER_SUPPLY_BASIC, 4))
+                .inputs(POWER.getItemVariant(POWER_SUPPLY_BASIC, 4))
                 .input(EMITTER_EV, 8)
                 .input(SENSOR_EV, 8)
                 .input(circuit, MarkerMaterials.Tier.EV, 16)
@@ -569,7 +633,7 @@ public class KeQingNET {
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(frameGt, HastelloyX,64)
-                .inputs(GTQTMetaBlocks.POWER.getItemVariant(POWER_SUPPLY_BASIC, 64))
+                .inputs(POWER.getItemVariant(POWER_SUPPLY_BASIC, 64))
                 .input(EMITTER_IV, 32)
                 .input(SENSOR_IV, 32)
                 .input(circuit, MarkerMaterials.Tier.IV, 64)

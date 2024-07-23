@@ -1,8 +1,11 @@
 package keqing.gtqtcore.common;
 
+import gregtech.api.GregTechAPI;
 import gregtech.api.items.metaitem.StandardMetaItem;
 import gregtech.api.items.metaitem.stats.IItemBehaviour;
+import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.event.MaterialEvent;
+import gregtech.api.unification.material.properties.PropertyKey;
 import keqing.gtqtcore.api.unification.GCYSMaterials;
 import keqing.gtqtcore.api.unification.GTQTMaterials;
 import keqing.gtqtcore.api.unification.OrePrefixAdditions;
@@ -25,8 +28,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Objects;
 
+import static gregtech.api.unification.material.info.MaterialFlags.*;
 import static keqing.gtqtcore.GTQTCore.PACK;
 import static keqing.gtqtcore.GTQTCore.VERSION;
+import static keqing.gtqtcore.api.unification.material.info.EPMaterialFlags.GENERATE_COIL;
 import static net.minecraft.util.text.TextFormatting.*;
 
 

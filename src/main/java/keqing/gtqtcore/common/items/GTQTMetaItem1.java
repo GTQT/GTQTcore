@@ -221,6 +221,7 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         SUNNARIUM_ENRICHED=this.addItem(325, "sunnarium_enriched").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_HP);
         SUNNARIUM_ENRICHED_PLATE=this.addItem(326, "sunnarium_enriched_plate").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_HP);
 
+
         //升级
         ADV_ENERGY_STORAGE=this.addItem(350, "adv_energy_storage").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         ADV_CAPACITOR =this.addItem(351, "adv_capacitor").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
@@ -451,9 +452,6 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         HELIUM_NEON_LASER = this.addItem(709, "laser.helium_neon").setCreativeTabs(CommonProxy.GTQTCore_GD);
         ND_YAG_LASER = this.addItem(710, "laser.nd_yag").setCreativeTabs(CommonProxy.GTQTCore_GD);
         OPTICAL_LASER_CONTROL_UNIT = this.addItem(711, "optical_laser_control_unit").setCreativeTabs(CommonProxy.GTQTCore_GD);
-
-
-
         // Spintronic Circuit Components: ID 220-239
         SPIN_TRANSFER_TORQUE_MEMORY = this.addItem(720, "plate.spin_transfer_torque_memory").setCreativeTabs(CommonProxy.GTQTCore_HP);
         TOPOLOGICAL_INSULATOR_TUBE = this.addItem(721, "tube.topological_insulator").setCreativeTabs(CommonProxy.GTQTCore_HP);
@@ -461,13 +459,127 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         BOSE_EINSTEIN_CONDENSATE = this.addItem(723, "bose_einstein_condensate").setCreativeTabs(CommonProxy.GTQTCore_HP);
         ESR_COMPUTATION_UNIT = this.addItem(724, "esr_computation_unit").setCreativeTabs(CommonProxy.GTQTCore_HP);
 
-        // Cosmic Circuit Components: ID 240-259
 
+        //  ID 750: Wrap Circuit Boards
+        WRAP_BASIC_CIRCUIT_BOARD = this.addItem(750, "wrap.circuit_board.basic")
+                .setCreativeTabs(CommonProxy.GTQTCore_TAB);
 
-        // Supra-Causal Circuit Components: ID 260-299
+        WRAP_GOOD_CIRCUIT_BOARD = this.addItem(751, "wrap.circuit_board.good")
+                .setCreativeTabs(CommonProxy.GTQTCore_TAB);
 
+        WRAP_PLASTIC_CIRCUIT_BOARD = this.addItem(752, "wrap.circuit_board.plastic")
+                .setCreativeTabs(CommonProxy.GTQTCore_TAB);
 
-        // Supra-Chronal Circuit Components: ID 300-349
+        WRAP_ADVANCED_CIRCUIT_BOARD = this.addItem(753, "wrap.circuit_board.advanced")
+                .setCreativeTabs(CommonProxy.GTQTCore_TAB);
+
+        WRAP_EXTREME_CIRCUIT_BOARD = this.addItem(754, "wrap.circuit_board.extreme")
+                .setCreativeTabs(CommonProxy.GTQTCore_TAB);
+
+        WRAP_ELITE_CIRCUIT_BOARD = this.addItem(755, "wrap.circuit_board.elite")
+                .setCreativeTabs(CommonProxy.GTQTCore_TAB);
+
+        WRAP_WETWARE_CIRCUIT_BOARD = this.addItem(756, "wrap.circuit_board.wetware")
+                .setCreativeTabs(CommonProxy.GTQTCore_TAB);
+
+        WRAP_GOOWARE_CIRCUIT_BOARD = this.addItem(757, "wrap.circuit_board.gooware")
+                .setCreativeTabs(CommonProxy.GTQTCore_TAB);
+
+        WRAP_OPTICAL_CIRCUIT_BOARD = this.addItem(758, "wrap.circuit_board.optical")
+                .setCreativeTabs(CommonProxy.GTQTCore_TAB);
+
+        WRAP_SPINTRONIC_CIRCUIT_BOARD = this.addItem(759, "wrap.circuit_board.spintronic")
+                .setCreativeTabs(CommonProxy.GTQTCore_TAB);
+
+        WRAP_SMD_TRANSISTOR = this.addItem(760, "wrap.smd.transistor")
+                .setCreativeTabs(CommonProxy.GTQTCore_TAB);
+
+        WRAP_SMD_RESISTOR = this.addItem(761, "wrap.smd.resistor")
+                .setCreativeTabs(CommonProxy.GTQTCore_TAB);
+
+        WRAP_SMD_CAPACITOR = this.addItem(762, "wrap.smd.capacitor")
+                .setCreativeTabs(CommonProxy.GTQTCore_TAB);
+
+        WRAP_SMD_DIODE = this.addItem(763, "wrap.smd.diode")
+                .setCreativeTabs(CommonProxy.GTQTCore_TAB);
+
+        WRAP_SMD_INDUCTOR = this.addItem(764, "wrap.smd.inductor")
+                .setCreativeTabs(CommonProxy.GTQTCore_TAB);
+
+        WRAP_ADVANCED_SMD_TRANSISTOR = this.addItem(765, "wrap.advanced_smd.transistor")
+                .setCreativeTabs(CommonProxy.GTQTCore_TAB);
+
+        WRAP_ADVANCED_SMD_RESISTOR = this.addItem(766, "wrap.advanced_smd.resistor")
+                .setCreativeTabs(CommonProxy.GTQTCore_TAB);
+
+        WRAP_ADVANCED_SMD_CAPACITOR = this.addItem(767, "wrap.advanced_smd.capacitor")
+                .setCreativeTabs(CommonProxy.GTQTCore_TAB);
+
+        WRAP_ADVANCED_SMD_DIODE = this.addItem(768, "wrap.advanced_smd.diode")
+                .setCreativeTabs(CommonProxy.GTQTCore_TAB);
+
+        WRAP_ADVANCED_SMD_INDUCTOR = this.addItem(769, "wrap.advanced_smd.inductor")
+                .setCreativeTabs(CommonProxy.GTQTCore_TAB);
+
+        WRAP_OPTICAL_SMD_TRANSISTOR = this.addItem(770, "wrap.optical_smd.transistor")
+                .setCreativeTabs(CommonProxy.GTQTCore_TAB);
+
+        WRAP_OPTICAL_SMD_RESISTOR = this.addItem(771, "wrap.optical_smd.resistor")
+                .setCreativeTabs(CommonProxy.GTQTCore_TAB);
+
+        WRAP_OPTICAL_SMD_CAPACITOR = this.addItem(772, "wrap.optical_smd.capacitor")
+                .setCreativeTabs(CommonProxy.GTQTCore_TAB);
+
+        WRAP_OPTICAL_SMD_DIODE = this.addItem(773, "wrap.optical_smd.diode")
+                .setCreativeTabs(CommonProxy.GTQTCore_TAB);
+
+        WRAP_OPTICAL_SMD_INDUCTOR = this.addItem(774, "wrap.optical_smd.inductor")
+                .setCreativeTabs(CommonProxy.GTQTCore_TAB);
+
+        WRAP_SPINTRONIC_SMD_TRANSISTOR = this.addItem(775, "wrap.spintronic_smd.transistor")
+                .setCreativeTabs(CommonProxy.GTQTCore_TAB);
+
+        WRAP_SPINTRONIC_SMD_RESISTOR = this.addItem(776, "wrap.spintronic_smd.resistor")
+                .setCreativeTabs(CommonProxy.GTQTCore_TAB);
+
+        WRAP_SPINTRONIC_SMD_CAPACITOR = this.addItem(777, "wrap.spintronic_smd.capacitor")
+                .setCreativeTabs(CommonProxy.GTQTCore_TAB);
+
+        WRAP_SPINTRONIC_SMD_DIODE = this.addItem(778, "wrap.spintronic_smd.diode")
+                .setCreativeTabs(CommonProxy.GTQTCore_TAB);
+
+        WRAP_SPINTRONIC_SMD_INDUCTOR = this.addItem(779, "wrap.spintronic_smd.inductor")
+                .setCreativeTabs(CommonProxy.GTQTCore_TAB);
+
+        WRAP_COSMIC_SMD_TRANSISTOR = this.addItem(780, "wrap.cosmic_smd.transistor")
+                .setCreativeTabs(CommonProxy.GTQTCore_TAB);
+
+        WRAP_COSMIC_SMD_RESISTOR = this.addItem(781, "wrap.cosmic_smd.resistor")
+                .setCreativeTabs(CommonProxy.GTQTCore_TAB);
+
+        WRAP_COSMIC_SMD_CAPACITOR = this.addItem(782, "wrap.cosmic_smd.capacitor")
+                .setCreativeTabs(CommonProxy.GTQTCore_TAB);
+
+        WRAP_COSMIC_SMD_DIODE = this.addItem(783, "wrap.cosmic_smd.diode")
+                .setCreativeTabs(CommonProxy.GTQTCore_TAB);
+
+        WRAP_COSMIC_SMD_INDUCTOR = this.addItem(784, "wrap.cosmic_smd.inductor")
+                .setCreativeTabs(CommonProxy.GTQTCore_TAB);
+
+        WRAP_SUPRACAUSAL_SMD_TRANSISTOR = this.addItem(785, "wrap.supracausal_smd.transistor")
+                .setCreativeTabs(CommonProxy.GTQTCore_TAB);
+
+        WRAP_SUPRACAUSAL_SMD_RESISTOR = this.addItem(786, "wrap.supracausal_smd.resistor")
+                .setCreativeTabs(CommonProxy.GTQTCore_TAB);
+
+        WRAP_SUPRACAUSAL_SMD_CAPACITOR = this.addItem(787, "wrap.supracausal_smd.capacitor")
+                .setCreativeTabs(CommonProxy.GTQTCore_TAB);
+
+        WRAP_SUPRACAUSAL_SMD_DIODE = this.addItem(788, "wrap.supracausal_smd.diode")
+                .setCreativeTabs(CommonProxy.GTQTCore_TAB);
+
+        WRAP_SUPRACAUSAL_SMD_INDUCTOR = this.addItem(789, "wrap.supracausal_smd.inductor")
+                .setCreativeTabs(CommonProxy.GTQTCore_TAB);
 
         //核物理 800
         NAQUADAH_ROD = this.addItem(800, "naquadah_rod").setCreativeTabs(CommonProxy.GTQTCore_NC);
@@ -582,6 +694,7 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         DRAGON_CELL = this.addItem(1015, "dragon_cell").setCreativeTabs(CommonProxy.GTQTCore_BIO);
         PRE_DRAGON_CELL = this.addItem(1016, "pre_dragon_cell").setCreativeTabs(CommonProxy.GTQTCore_BIO);
 
+        
         //蓝图
         DISK_0 = this.addItem(2000, "disk.0").setCreativeTabs(CommonProxy.GTQTCore_DISK);
         DISK_1 = this.addItem(2001, "disk.1").setCreativeTabs(CommonProxy.GTQTCore_DISK);

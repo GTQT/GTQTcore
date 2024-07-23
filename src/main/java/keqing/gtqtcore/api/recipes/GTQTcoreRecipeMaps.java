@@ -35,9 +35,20 @@ public class GTQTcoreRecipeMaps {
             .setSlotOverlay(true, false, true, GuiTextures.CRUSHED_ORE_OVERLAY)
             .setSound(GTSoundEvents.MACERATOR);
 
+    public static final RecipeMap<ComputationRecipeBuilder> LARGE_CIRCUIT_ASSEMBLY_LINE_RECIPES = new RecipeMapLargeCircuitAssemblyLine<>("large_circuit_assembly_line", 7, 1, 1, 0, new ComputationRecipeBuilder(), false)
+            .setSlotOverlay(false, false, false, GuiTextures.CIRCUIT_OVERLAY)
+            .setSlotOverlay(false, false, true, GuiTextures.DATA_ORB_OVERLAY)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_CIRCUIT_ASSEMBLER, ProgressWidget.MoveType.HORIZONTAL)
+            .setSound(GTSoundEvents.ASSEMBLER);
+
     public static final RecipeMap<BathCondenserRecipeBuilder> BATH_CONDENSER = new RecipeMap<>("bath_condenser", 3, 3, 3, 3, new BathCondenserRecipeBuilder(), false)
             .setProgressBar(GuiTextures.PROGRESS_BAR_SIFT, ProgressWidget.MoveType.VERTICAL)
             .setSound(GTSoundEvents.BATH);
+
+    public static final RecipeMap<FuelRecipeBuilder> BIOMASS_GENERATOR_RECIPES = new RecipeMap<>("biomass_generator", 0, 0, 1, 0, new FuelRecipeBuilder(), false)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, ProgressWidget.MoveType.HORIZONTAL)
+            .setSound(GTSoundEvents.BATH)
+            .allowEmptyOutput();
 
     public static final RecipeMap<SimpleRecipeBuilder> LOW_PRESSURE_CRYOGENIC_DISTILLATION = new RecipeMap<>("low_pressure_cryogenic_distillation", 3, 3, 3, 12, new SimpleRecipeBuilder(), false)
             .setProgressBar(GuiTextures.PROGRESS_BAR_SIFT, ProgressWidget.MoveType.VERTICAL)

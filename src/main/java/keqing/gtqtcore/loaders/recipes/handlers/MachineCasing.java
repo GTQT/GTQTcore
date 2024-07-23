@@ -12,6 +12,7 @@ import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTADVBlock;
 import keqing.gtqtcore.common.block.blocks.GTQTIsaCasing;
 import keqing.gtqtcore.common.block.blocks.GTQTMultiblockCasing;
+import keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing;
 import net.minecraft.util.IStringSerializable;
 
 import static gregicality.multiblocks.api.recipes.GCYMRecipeMaps.ALLOY_BLAST_RECIPES;
@@ -149,6 +150,23 @@ public class MachineCasing {
                 GTQTMultiblockCasing.CasingType.NITINOL_MACHINE_CASING,
                 Nitinol);
 
+        createCasingRecipe("inconel_625", GTQTMetaBlocks.ADV_BLOCK, GTQTADVBlock.CasingType.Inconel625, Inconel625);
+        createCasingRecipe("hastelloy_n", GTQTMetaBlocks.ADV_BLOCK, GTQTADVBlock.CasingType.HastelloyN, HastelloyN);
+        createCasingRecipe("stellite", GTQTMetaBlocks.ADV_BLOCK, GTQTADVBlock.CasingType.Stellite, Stellite);
+        createCasingRecipe("hdcs", GTQTMetaBlocks.ADV_BLOCK, GTQTADVBlock.CasingType.Hdcs, Hdcs);
+        createCasingRecipe("lafium", GTQTMetaBlocks.ADV_BLOCK, GTQTADVBlock.CasingType.Lafium, Lafium);
+        createCasingRecipe("black_titanium", GTQTMetaBlocks.ADV_BLOCK, GTQTADVBlock.CasingType.BlackTitanium, BlackTitanium);
+        createCasingRecipe("talonite", GTQTMetaBlocks.ADV_BLOCK, GTQTADVBlock.CasingType.Talonite, Talonite);
+        createCasingRecipe("black_plutonium", GTQTMetaBlocks.ADV_BLOCK, GTQTADVBlock.CasingType.BlackPlutonium, BlackPlutonium);
+        createCasingRecipe("maraging_steel_250", GTQTMetaBlocks.ADV_BLOCK, GTQTADVBlock.CasingType.MaragingSteel250, MaragingSteel250);
+        createCasingRecipe("staballoy", GTQTMetaBlocks.ADV_BLOCK, GTQTADVBlock.CasingType.Staballoy, Staballoy);
+        createCasingRecipe("babbitt_alloy", GTQTMetaBlocks.ADV_BLOCK, GTQTADVBlock.CasingType.BabbittAlloy, BabbittAlloy);
+        createCasingRecipe("zirconium_carbide", GTQTMetaBlocks.ADV_BLOCK, GTQTADVBlock.CasingType.ZirconiumCarbide, ZirconiumCarbide);
+        createCasingRecipe("inconel_792", GTQTMetaBlocks.ADV_BLOCK, GTQTADVBlock.CasingType.Inconel792, Inconel792);
+        createCasingRecipe("incoloy_ma_813", GTQTMetaBlocks.ADV_BLOCK, GTQTADVBlock.CasingType.IncoloyMA813, IncoloyMA813);
+        createCasingRecipe("hastelloy_x_78", GTQTMetaBlocks.ADV_BLOCK, GTQTADVBlock.CasingType.HastelloyX78, HastelloyX78);
+        createCasingRecipe("hastelloy_k_243", GTQTMetaBlocks.ADV_BLOCK, GTQTADVBlock.CasingType.HastelloyK243, HastelloyK243);
+        createCasingRecipe("iridium_casing", GTQTMetaBlocks.TURBINE_CASING, IRIDIUM_CASING,Osmiridium);
     }
 
 

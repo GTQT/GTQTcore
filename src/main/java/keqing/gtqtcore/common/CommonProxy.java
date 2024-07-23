@@ -4,6 +4,8 @@ import gregtech.api.GregTechAPI;
 import gregtech.api.block.VariantItemBlock;
 import gregtech.api.cover.CoverDefinition;
 import gregtech.api.recipes.recipeproperties.FusionEUToStartProperty;
+import gregtech.api.unification.material.Material;
+import gregtech.api.unification.material.properties.PropertyKey;
 import gregtech.api.unification.stack.ItemMaterialInfo;
 import keqing.gtqtcore.api.recipes.properties.*;
 import keqing.gtqtcore.api.unification.ore.GTQTStoneTypes;
@@ -42,7 +44,9 @@ import java.util.Objects;
 import java.util.function.Function;
 
 import static gregtech.api.GregTechAPI.HEATING_COILS;
+import static gregtech.api.unification.material.info.MaterialFlags.*;
 import static keqing.gtqtcore.api.capability.chemical_plant.ChemicalPlantProperties.registerCasingTier;
+import static keqing.gtqtcore.api.unification.material.info.EPMaterialFlags.GENERATE_COIL;
 import static keqing.gtqtcore.api.utils.ChatCalculatorHelper.eval;
 import static keqing.gtqtcore.common.block.GTQTMetaBlocks.*;
 
@@ -147,13 +151,17 @@ public class CommonProxy {
         WrapCircuits.init();
         MetaTileEntityLoader.init();
         MetaTileEntityMachine.init();
+        /*
+        for (Material material : GregTechAPI.materialManager.getRegisteredMaterials())
+        {
+             if(material.hasProperty(PropertyKey.WIRE))
+                GTQTLog.logger.info(new TextComponentTranslation("",material,material.getProperty(PropertyKey.WIRE).getAmperage(),material.getProperty(PropertyKey.WIRE).getVoltage(),material.getProperty(PropertyKey.WIRE).getLossPerBlock()));
+        }
 
-
-
+         */
         for (GTQTBlockWireCoil.CoilType type : GTQTBlockWireCoil.CoilType.values()) {
             HEATING_COILS.put(GTQTMetaBlocks.WIRE_COIL.getState(type), type);
         }
-
     }
 
     public CommonProxy() {

@@ -1,8 +1,12 @@
 package keqing.gtqtcore.loaders.recipes.handlers;
 
+import gregtech.api.recipes.ModHandler;
 import gregtech.api.unification.material.MarkerMaterials;
+import gregtech.api.unification.stack.UnificationEntry;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
+import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
+
 import static gregicality.multiblocks.api.unification.GCYMMaterials.TitaniumTungstenCarbide;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
@@ -16,6 +20,7 @@ import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.common.block.blocks.GTQTParticleAccelerator.MachineType.*;
 import static keqing.gtqtcore.common.block.blocks.GTQTPowerSupply.SupplyType.POWER_SUPPLY_BASIC;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
+import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.LAGER_PROCESSING_FACTORY;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.PARTICLE_ACCELERATOR;
 
 
@@ -48,7 +53,7 @@ public class ParticleAccelerator {
 
         PRECISE_ASSEMBLER_RECIPES.recipeBuilder()
                 .input(CIRCUIT_GOOD_I,1)
-                .input(ENERGY_LAPOTRONIC_ORB,8)
+                .input(ENERGY_LAPOTRONIC_ORB,1)
                 .input(wireGtSingle,IVSuperconductor,4)
                 .input(rotor,RhodiumPlatedPalladium,2)
                 .fluidInputs(LiquidHelium.getFluid(L * 8))
@@ -64,7 +69,7 @@ public class ParticleAccelerator {
 
         PRECISE_ASSEMBLER_RECIPES.recipeBuilder()
                 .input(CIRCUIT_GOOD_I,1)
-                .input(ELECTRIC_PUMP_IV,8)
+                .input(ELECTRIC_PUMP_IV,1)
                 .input(wireGtSingle,IVSuperconductor,4)
                 .input(VOLTAGE_COIL_IV,4)
                 .fluidInputs(LiquidHelium.getFluid(L * 8))
@@ -80,7 +85,7 @@ public class ParticleAccelerator {
 
         PRECISE_ASSEMBLER_RECIPES.recipeBuilder()
                 .input(CIRCUIT_GOOD_I,1)
-                .input(circuit, MarkerMaterials.Tier.LuV,8)
+                .input(circuit, MarkerMaterials.Tier.LuV,1)
                 .input(wireGtSingle,IVSuperconductor,4)
                 .input(rotor,RhodiumPlatedPalladium,2)
                 .fluidInputs(LiquidHelium.getFluid(L * 8))
@@ -1715,8 +1720,6 @@ public class ParticleAccelerator {
                 .duration(100)
                 .EUt(7680)
                 .buildAndRegister();
-
-        ////////////
     }
 
 

@@ -25,6 +25,31 @@
       "textures": {
         "all": "gtqtcore:blocks/casings/advanced_assembly_control_casing"
       }
+    },
+    "active=false,variant=circuit_assembly_control_casing": {
+      "model": "minecraft:cube_all",
+      "textures": {
+        "all": "gtqtcore:blocks/casings/circuit_assembly_control_casing"
+      }
+    },
+    "active=true,variant=circuit_assembly_control_casing": {
+      "model": "minecraft:cube_all",
+      "textures": {
+        "all": "gtqtcore:blocks/casings/circuit_assembly_control_casing"
+      }
+    },
+    "active=false,variant=circuit_assembly_line_casing": {
+      "model": "minecraft:cube_all",
+      "textures": {
+        "all": "gtqtcore:blocks/casings/circuit_assembly_line_casing"
+      }
+    },
+    "active=true,variant=circuit_assembly_line_casing": {
+      "model": "gregtech:cube_2_layer_all",
+      "textures": {
+        "bot_all": "gtqtcore:blocks/casings/circuit_assembly_line_casing",
+        "top_all": "gregtech:blocks/casings/mechanic/machine_casing_assembly_line_bloom"
+      }
     }
   }
 }

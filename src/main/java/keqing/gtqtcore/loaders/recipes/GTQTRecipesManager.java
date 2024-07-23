@@ -42,7 +42,9 @@ public class GTQTRecipesManager {
         StrontiumRadiumChain.init();
         AlgaeChain.init();
         PPBChain.init();
+        BioReactor.init();
         AirDistillation.init();
+        LargeCircuitAssemblyLine.init();
         SodiumChain.init();
         ParticleAccelerator.init();
         CTABChain.init();

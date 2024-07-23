@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "gtqtcore:items/metaitems/component.cosmic_smd.capacitor",
+    "layer1": "gtqtcore:items/metaitems/wrap_overlay"
+  }
+}

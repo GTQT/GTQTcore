@@ -1,0 +1,8 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "gtqtcore:items/metaitems/circuit_board.optical",
+    "layer1": "gtqtcore:items/metaitems/wrap_overlay",
+    "layer2": "gtqtcore:items/metaitems/numbers/9"
+  }
+}
