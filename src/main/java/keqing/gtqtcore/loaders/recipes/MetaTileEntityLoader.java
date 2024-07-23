@@ -1258,6 +1258,35 @@ public class MetaTileEntityLoader {
                 MetaItems.ELECTRIC_PISTON_LUV, 'E', MetaItems.ELECTRIC_MOTOR_LuV, 'C',
                 new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.LuV));
 */
+        ModHandler.addShapedRecipe(true, "particle_accelerator_iv", PARTICLE_ACCELERATOR_IO[0].getStackForm(),
+                "PPP", "CFC", "EME", 'M', HULL[GTValues.IV].getStackForm(),
+                'P', SENSOR_IV,
+                'E', ULTRAVIOLET_LAMP_CHAMBER[GTValues.IV].getStackForm(),
+                'C', new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.IV),
+                'F', MetaItems.ELECTRIC_PUMP_IV);
+
+        ModHandler.addShapedRecipe(true, "particle_accelerator_luv", GTQTMetaTileEntities.PARTICLE_ACCELERATOR_IO[1].getStackForm(),
+                "PPP", "CFC", "EME", 'M', HULL[GTValues.LuV].getStackForm(),
+                'P', SENSOR_LuV,
+                'E', ULTRAVIOLET_LAMP_CHAMBER[GTValues.LuV].getStackForm(),
+                'C', new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.LuV),
+                'F', MetaItems.ELECTRIC_PUMP_LuV);
+
+        ModHandler.addShapedRecipe(true, "particle_accelerator_zpm", GTQTMetaTileEntities.PARTICLE_ACCELERATOR_IO[2].getStackForm(),
+                "PPP", "CFC", "EME", 'M', HULL[GTValues.ZPM].getStackForm(),
+                'P', SENSOR_ZPM,
+                'E', ULTRAVIOLET_LAMP_CHAMBER[GTValues.ZPM].getStackForm(),
+                'C', new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.ZPM),
+                'F', MetaItems.ELECTRIC_PUMP_ZPM);
+
+        ModHandler.addShapedRecipe(true, "particle_accelerator_uv", GTQTMetaTileEntities.PARTICLE_ACCELERATOR_IO[3].getStackForm(),
+                "PPP", "CFC", "EME", 'M', HULL[GTValues.UV].getStackForm(),
+                'P', SENSOR_UV,
+                'E', ULTRAVIOLET_LAMP_CHAMBER[GTValues.UV].getStackForm(),
+                'C', new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.UV),
+                'F', MetaItems.ELECTRIC_PUMP_UV);
+
+
 
         ModHandler.addShapedRecipe(true, "naquadah_reactor_iv", GTQTMetaTileEntities.NAQUADAH_REACTOR[0].getStackForm(),
                 "PPP", "CFC", "EME", 'M', HULL[GTValues.IV].getStackForm(),
@@ -1377,17 +1406,19 @@ public class MetaTileEntityLoader {
                 'P', CraftingComponent.PUMP);
 
         ModHandler.addShapedRecipe(true, "latex_collector.bronze",
-                STEAM_LATEX_COLLECTOR[0].getStackForm(), "XXX", "PMP", "XXX",
+                STEAM_LATEX_COLLECTOR[0].getStackForm(), "XCX", "PMP", "XCX",
                 'M', MetaBlocks.STEAM_CASING.getItemVariant(BRONZE_HULL),
-                'X', new UnificationEntry(OrePrefix.pipeSmallFluid, Bronze),
+                'C', new UnificationEntry(OrePrefix.pipeSmallFluid, Bronze),
+                'X', new UnificationEntry(OrePrefix.plate, Rubber),
                 'P', new UnificationEntry(gear, Bronze));
 
-                ModHandler.addShapedRecipe(true, "latex_collector.steel",
-                STEAM_LATEX_COLLECTOR[1].getStackForm(), "PSP", "WMW", "PPP",
-                        'M', MetaTileEntities.STEAM_COMPRESSOR_BRONZE.getStackForm(),
-                        'S', new UnificationEntry(OrePrefix.plate, Materials.Steel),
-                        'W', new UnificationEntry(OrePrefix.plate, Lead),
-                        'P', new UnificationEntry(OrePrefix.pipeSmallFluid, Materials.TinAlloy));
+        ModHandler.addShapedRecipe(true, "latex_collector.steel",
+                STEAM_LATEX_COLLECTOR[1].getStackForm(), "XCX", "PMP", "XCX",
+                'M', MetaTileEntities.STEAM_COMPRESSOR_BRONZE.getStackForm(),
+                'C', new UnificationEntry(OrePrefix.pipeSmallFluid, Steel),
+                'X', new UnificationEntry(OrePrefix.plate, Rubber),
+                'P', new UnificationEntry(gear, Steel));
+
 
     }
 }

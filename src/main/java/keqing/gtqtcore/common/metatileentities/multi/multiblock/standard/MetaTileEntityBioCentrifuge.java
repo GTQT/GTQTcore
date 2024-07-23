@@ -60,6 +60,7 @@ public class MetaTileEntityBioCentrifuge extends GTQTRecipeMapMultiblockControll
     public MetaTileEntityBioCentrifuge(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[] {
                 RecipeMaps.CENTRIFUGE_RECIPES,
+                GTQTcoreRecipeMaps.GRAVITY_SEPARATOR_RECIPES,
                 GTQTcoreRecipeMaps.BIO_CENTRIFUGE
         });
         this.recipeMapWorkable = new BioCentrifugeWorkableHandler(this);

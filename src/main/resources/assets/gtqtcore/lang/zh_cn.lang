@@ -4325,7 +4325,7 @@ gtqtcore.machine.neutral_network_nexus.name=纳米锻炉
 gtqtcore.machine.neutral_network_nexus.tooltip.1=带有附属结构，附属结构的等级限制了最大配方等级。
 gtqtcore.machine.neutral_network_nexus.tooltip.2=在§r多方块结构提示§7中鼠标右击箭头按钮查看附属结构建造方式。
 gtqtcore.machine.neutral_network_nexus.tier=机器等级：
-
+recipemap.pac_recipes.name=粒子源
 recipemap.molecular_distillation_recipes.name=高真空分子蒸馏
 gtqtcore.machine.dangote_distillery.name=丹格特蒸馏厂
 gtqtcore.machine.dangote_distillery.tooltip.1=现代化工业蒸馏，从现在开始

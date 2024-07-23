@@ -143,7 +143,7 @@ public class NuclearLine {
                 .input(circuit,MarkerMaterials.Tier.EV , 16)
                 .input(ROBOT_ARM_EV, 8)
                 .input(ELECTRIC_MOTOR_EV, 8)
-                .input(plateDense, NanometerBariumTitanate, 8)
+                .input(plate, NanometerBariumTitanate, 64)
                 .input(gear, HSSG, 12)
                 .input(stick, HSSE, 12)
                 .input(spring, RTMAlloy, 12)
