@@ -23,6 +23,7 @@ import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.recipes.recipeproperties.ComputationProperty;
+import gregtech.api.util.GTTransferUtils;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.core.sound.GTSoundEvents;
@@ -32,6 +33,7 @@ import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.recipes.properties.KQNetProperty;
 import keqing.gtqtcore.api.recipes.properties.LASERNetProperty;
+import keqing.gtqtcore.api.utils.GTQTCPUHelper;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.client.resources.I18n;
@@ -67,7 +69,22 @@ public class MetaTileEntityStepper extends MultiMapMultiblockController implemen
     boolean rate;
     int LaserKind;
     int LaserAmount;
-
+    @Override
+    @Nonnull
+    protected Widget getFlexButton(int x, int y, int width, int height) {
+        WidgetGroup group = new WidgetGroup(x, y, width, height);
+        group.addWidget(new ClickButtonWidget(0, 0, 18, 18, "", this::outputlaser)
+                .setButtonTexture(GuiTextures.BUTTON_THROTTLE_MINUS)
+                .setTooltipText("退回缓存(返回缓存光刻胶以及晶圆)"));
+        return group;
+    }
+    private void outputlaser(Widget.ClickData clickData) {
+        if(LaserKind==1) this.getOutputFluidInventory().fill(HydrogenSilsesquioxane.getFluid(LaserAmount),true);
+        if(LaserKind==2) this.getOutputFluidInventory().fill(SU8_Photoresist.getFluid(LaserAmount),true);
+        if(LaserKind==3) this.getOutputFluidInventory().fill(Vinylcinnamate.getFluid(LaserAmount),true);
+        if(LaserKind==4) this.getOutputFluidInventory().fill(Xmt.getFluid(LaserAmount),true);
+        if(LaserKind==5) this.getOutputFluidInventory().fill(Zrbtmst.getFluid(LaserAmount),true);
+    }
     @Override
     public void addInformation(ItemStack stack, World world, List<String> tooltip, boolean advanced) {
         tooltip.add(I18n.format("gtqt.machine.stepper.1"));
@@ -300,13 +317,11 @@ public class MetaTileEntityStepper extends MultiMapMultiblockController implemen
         FluidStack LASER5 = Zrbtmst.getFluid(1000);
         public void addLaserAmount(int n)
         {
-            if(LaserKind!=n)
-            {
-                LaserAmount=1000;
+            if(LaserKind==n)LaserAmount += 1000;
+            if(LaserKind==0||LaserAmount==0) {
+                LaserAmount= 1000;
                 LaserKind=n;
-                return;
             }
-            LaserAmount+=1000;
         }
         @Override
         public void update() {

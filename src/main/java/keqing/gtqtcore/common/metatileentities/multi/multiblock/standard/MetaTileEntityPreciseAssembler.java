@@ -29,6 +29,7 @@ import gregtech.client.renderer.texture.Textures;
 import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
 import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.BlockGlassCasing;
+import gregtech.common.blocks.BlockMachineCasing;
 import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.MetaTileEntities;
@@ -68,6 +69,7 @@ import static keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate.MAP_PA_CA
 import static keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate.MAP_PA_INTERNAL_CASING;
 import static keqing.gtqtcore.api.utils.GTQTUniverUtil.consistentList;
 import static keqing.gtqtcore.api.utils.GTQTUniverUtil.maxLength;
+import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.PRECISE_ASSEMBLER;
 
 public class MetaTileEntityPreciseAssembler extends MultiMapMultiblockController implements IOpticalComputationReceiver {
     private IOpticalComputationProvider computationProvider;
@@ -130,14 +132,42 @@ public class MetaTileEntityPreciseAssembler extends MultiMapMultiblockController
         return super.checkRecipe(recipe, consumeIfSuccess) && recipe.getProperty(PAProperty.getInstance(), 0) <= CasingTier;
     }
 
+    @Override
+    public List<MultiblockShapeInfo> getMatchingShapes() {
+        ArrayList<MultiblockShapeInfo> shapeInfo = new ArrayList<>();
+        MultiblockShapeInfo.Builder builder = null;
 
+            builder = MultiblockShapeInfo.builder()
+                    .aisle("ETCCCCCCC", "F       F", "F       F", "F       F", "XYZCCCCCC")
+                    .aisle("CMMMMMMMC", "CGGGGGGGC", "CGGGGGGGC", "CGGGGGGGC", "CCCCCCCCC")
+                    .aisle("CMMMMMMMC", "C       C", "C       C", "C       C", "CCCCOCCCC")
+                    .aisle("CMMMMMMMC", "CGGGGGGGC", "CGGGGGGGC", "CGGGGGGGC", "CCCCCCCCC")
+                    .aisle("CCCISCCCC", "F       F", "F       F", "F       F", "CCCCCCCCC")
+                    .where('S', PRECISE_ASSEMBLER, EnumFacing.SOUTH)
+                    .where('I', MetaTileEntities.COMPUTATION_HATCH_RECEIVER, EnumFacing.SOUTH)
+                    .where('X', MetaTileEntities.ITEM_IMPORT_BUS[IV], EnumFacing.NORTH)
+                    .where('Y', MetaTileEntities.ITEM_EXPORT_BUS[IV], EnumFacing.NORTH)
+                    .where('Z', MetaTileEntities.FLUID_IMPORT_HATCH[IV], EnumFacing.NORTH)
+                    .where('E', MetaTileEntities.ENERGY_INPUT_HATCH[IV], EnumFacing.NORTH)
+                    .where('T', () -> ConfigHolder.machines.enableMaintenance ? MetaTileEntities.MAINTENANCE_HATCH : MetaTileEntities.ENERGY_INPUT_HATCH[LuV], EnumFacing.NORTH)
+                    .where('O', MetaTileEntities.MUFFLER_HATCH[LV], EnumFacing.UP)
+                    .where('G', getGlassState())
+                    .where('M', MetaBlocks.MACHINE_CASING.getState(BlockMachineCasing.MachineCasingType.LuV))
+                    .where('F', getFrameState())
+                    .where(' ', Blocks.AIR.getDefaultState());
+        MultiblockShapeInfo.Builder finalBuilder = builder;
+        MAP_PA_CASING.entrySet().stream()
+                    .sorted(Comparator.comparingInt(entry -> ((WrappedIntTired) entry.getValue()).getIntTier()))
+                    .forEach(entry -> shapeInfo.add(finalBuilder.where('C', entry.getKey()).build()));
+        return shapeInfo;
+    }
     @Nonnull
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
                 .aisle("DDDDDDDDD", "F       F", "F       F", "F       F", "DDDDDDDDD")
                 .aisle("CMMMMMMMC", "CGGGGGGGC", "CGGGGGGGC", "CGGGGGGGC", "DDDDDDDDD")
-                .aisle("CMMMMMMMC", "C       C", "C       C", "C       C", "DDDDDDDDD")
+                .aisle("CMMMMMMMC", "C       C", "C       C", "C       C", "DDDDODDDD")
                 .aisle("CMMMMMMMC", "CGGGGGGGC", "CGGGGGGGC", "CGGGGGGGC", "DDDDDDDDD")
                 .aisle("DDDXSDDDD", "F       F", "F       F", "F       F", "DDDDDDDDD")
                 .where('S', selfPredicate())
@@ -146,6 +176,7 @@ public class MetaTileEntityPreciseAssembler extends MultiMapMultiblockController
                         .setMinGlobalLimited(42)
                         .or(autoAbilities(true, true, true, true, true, true, false)))
                 .where('X', abilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION))
+                .where('O', abilities(MultiblockAbility.MUFFLER_HATCH))
                 .where('F', states(getFrameState()))
                 .where('G', states(getGlassState()))
                 .where('M', TiredTraceabilityPredicate.CP_PA_INTERNAL_CASING)
@@ -160,10 +191,7 @@ public class MetaTileEntityPreciseAssembler extends MultiMapMultiblockController
         return MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.LAMINATED_GLASS);
     }
 
-    @Override
-    public boolean hasMufflerMechanics() {
-        return true;
-    }
+
 
     @SideOnly(Side.CLIENT)
     @Override

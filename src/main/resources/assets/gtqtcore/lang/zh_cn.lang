@@ -2425,7 +2425,7 @@ gtqtcore.machine.mega_turbine.plasma.name=特大等离子体涡轮
 gtqtcore.machine.mega_turbine.mode.0=正常模式
 gtqtcore.machine.mega_turbine.mode.1=高速模式
 gtqtcore.machine.mega_turbine.description=特大涡轮是大型涡轮的升级版。
-
+gtqtcore.machine.photolithography_factory.name=大型光刻厂
 recipemap.large_circuit_assembly_line.name=电路装配线
 gtqtcore.machine.large_circuit_assembly_line.name=大型电路装配线
 gtqtcore.machine.large_circuit_assembly_line.tooltip.1=批量装配各式各样的电路！

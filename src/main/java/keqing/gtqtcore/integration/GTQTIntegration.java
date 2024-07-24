@@ -9,6 +9,7 @@ public class GTQTIntegration {
     public static void init() {
 
         ITheOneProbe oneProbe = TheOneProbe.theOneProbeImp;
+        oneProbe.registerProvider(new MultiblockCoreProvider());
         oneProbe.registerProvider(new MultiblockFaceProvider());
         oneProbe.registerProvider(new ElectricContainerIOInfoProvider());
         oneProbe.registerProvider(new CableInfoProvider());
