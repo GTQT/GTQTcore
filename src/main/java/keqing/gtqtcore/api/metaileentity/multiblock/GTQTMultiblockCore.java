@@ -1,37 +1,47 @@
 package keqing.gtqtcore.api.metaileentity.multiblock;
 
+import codechicken.lib.raytracer.CuboidRayTraceResult;
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
+import gregicality.multiblocks.api.capability.impl.GCYMMultiblockRecipeLogic;
 import gregtech.api.capability.IMultipleTankHandler;
 import gregtech.api.capability.impl.*;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.Widget;
 import gregtech.api.gui.widgets.ClickButtonWidget;
 import gregtech.api.gui.widgets.WidgetGroup;
+import gregtech.api.metatileentity.IDataInfoProvider;
 import gregtech.api.metatileentity.MetaTileEntity;
-import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
+import gregtech.api.metatileentity.multiblock.MultiMapMultiblockController;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
+import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.pattern.TraceabilityPredicate;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
-import gregtech.api.recipes.RecipeMaps;
-import gregtech.api.recipes.builders.SimpleRecipeBuilder;
 import gregtech.api.util.GTTransferUtils;
-import gregtech.api.util.GTUtility;
 import gregtech.api.util.TextComponentUtil;
-import gregtech.common.items.MetaItems;
-import keqing.gtqtcore.common.metatileentities.multi.multiblock.MetaTileEntityStewStoolStove;
+import gregtech.client.renderer.ICubeRenderer;
+import gregtech.client.renderer.texture.Textures;
+import gregtech.client.utils.TooltipHelper;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.MetaTileEntityBaseWithControl;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.World;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
-import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.IItemHandlerModifiable;
 
 import javax.annotation.Nonnull;
@@ -41,28 +51,37 @@ import java.util.List;
 import static gregtech.api.GTValues.UV;
 import static gregtech.api.GTValues.VA;
 
-public abstract class GTQTMultiblockCore extends MetaTileEntityBaseWithControl {
-    public long currentEU = 0;
-    public long currentRecipeEU = 0;
-
+public abstract class GTQTMultiblockCore extends MultiMapMultiblockController implements IDataInfoProvider{
     protected IItemHandlerModifiable inputInventory;
     protected IItemHandlerModifiable outputInventory;
     protected IMultipleTankHandler inputFluidInventory;
     protected IMultipleTankHandler outputFluidInventory;
-
-
+    int target = 0;
 
     //暴露
+    private final RecipeMap<?>[] recipeMaps;
+    public GTQTMultiblockCore(ResourceLocation metaTileEntityId, RecipeMap<?>[] recipeMaps) {
+        super(metaTileEntityId,recipeMaps);
+        this.recipeMapWorkable = new GCYMMultiblockRecipeLogic(this);
+        this.recipeMaps = recipeMaps;
 
+        for (int i = 0; i < getCoreNum(); i++) {
+            importItemsList.add(new ArrayList<>());
+            importFluidList.add(new ArrayList<>());
+        }
+        this.fluidInventory = new FluidTankList(false, makeFluidTanks(25));
+        this.itemInventory = new NotifiableItemStackHandler(this, 25, this, false);
+        this.exportFluids = (FluidTankList) fluidInventory;
+        this.importFluids = (FluidTankList) fluidInventory;
+        this.exportItems = (IItemHandlerModifiable) itemInventory;
+        this.importItems = (IItemHandlerModifiable) itemInventory;
+    }
     //线程数量
     public int getCoreNum() {
         return 2;
     }
     //配方
-    public RecipeMap<SimpleRecipeBuilder> getCORE_RECIPES()
-    {
-        return RecipeMaps.FURNACE_RECIPES;
-    }
+
     //最大工作电压 默认能源仓等级
     public int getMinVa()
     {
@@ -71,21 +90,24 @@ public abstract class GTQTMultiblockCore extends MetaTileEntityBaseWithControl {
     }
 
 
-
-
-    IItemHandlerModifiable []importItemsList=new IItemHandlerModifiable[getCoreNum()];
-    IMultipleTankHandler[]importFluidList=new IMultipleTankHandler[getCoreNum()];
+    //(todo)
+    //没加NBT的 dr看我
+    List<List<ItemStack>> importItemsList = new ArrayList<>();
+    List<List<FluidStack>> importFluidList = new ArrayList<>();
     boolean []ListWork=new boolean[getCoreNum()];
     public int [][]timeHelper=new int[getCoreNum()][3];
+
+
     int maxEU;
     int circuit;
     int p;
-    boolean speed;
+    public boolean speed;
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("circuit", circuit);
         data.setBoolean("speed", speed);
+        data.setInteger("target",target);
         return super.writeToNBT(data);
     }
     @Override
@@ -93,8 +115,8 @@ public abstract class GTQTMultiblockCore extends MetaTileEntityBaseWithControl {
         super.readFromNBT(data);
         circuit = data.getInteger("circuit");
         speed = data.getBoolean("speed");
+        target = data.getInteger("target");
     }
-
 
     @Override
     protected void updateFormedValid() {
@@ -103,21 +125,22 @@ public abstract class GTQTMultiblockCore extends MetaTileEntityBaseWithControl {
         {
             if(!ListWork[i]) {
                 if (inputInventory != null||inputFluidInventory != null) {
-                    Recipe coreRecipe= getCORE_RECIPES().findRecipe(VA[UV], inputInventory,inputFluidInventory);
-                    if (coreRecipe != null && coreRecipe.matches(false, inputInventory,inputFluidInventory)) {
-                        this.importItemsList[i]=inputInventory;
-                        this.importFluidList[i]=inputFluidInventory;
-                        ListWork[i]=true;
-                        coreRecipe.matches(true, inputInventory,inputFluidInventory);
+                    Recipe coreRecipe = recipeMaps[target].findRecipe(getMinVa(), inputInventory, inputFluidInventory);
+                    if (coreRecipe != null && coreRecipe.matches(false, inputInventory, inputFluidInventory)) {
+                        this.importFluidList.set(i, coreRecipe.getFluidOutputs());
+                        this.importItemsList.set(i, coreRecipe.getOutputs());
+                        ListWork[i] = true;
+                        coreRecipe.matches(true, inputInventory, inputFluidInventory);
                         //线程置入工作
-                        timeHelper[i][1]=coreRecipe.getDuration();
-                        timeHelper[i][2]=coreRecipe.getEUt();
-
-                        ListWork[i]=true;
+                        timeHelper[i][1] = coreRecipe.getDuration();
+                        timeHelper[i][2] = coreRecipe.getEUt();
+                        ListWork[i] = true;
                     }
                 }
+
             }
-            if(ListWork[i]) {
+            if(ListWork[i]&&GTTransferUtils.addFluidsToFluidHandler(outputFluidInventory, true, importFluidList.get(i))&&GTTransferUtils.addItemsToItemHandler(outputInventory, true, importItemsList.get(i)))
+            {
                 p = (int) ((this.energyContainer.getEnergyStored() + energyContainer.getInputPerSec()) / (getMinVa() == 0 ? 1 : getMinVa()));
                 if (speed && (energyContainer.getEnergyStored() - (long) timeHelper[i][2] * p > 0)) {
                     energyContainer.removeEnergy((long) timeHelper[i][2] * p);
@@ -128,14 +151,14 @@ public abstract class GTQTMultiblockCore extends MetaTileEntityBaseWithControl {
                         timeHelper[i][0]++;
                     }
                 }
-                if (timeHelper[i][0] > timeHelper[i][1]) {
-                    Recipe chemicalReactorRecipe1 = getCORE_RECIPES().findRecipe(VA[UV], this.importItemsList[i], this.importFluidList[i]);
-                    if (chemicalReactorRecipe1 != null) {
-                        GTTransferUtils.addFluidsToFluidHandler(this.outputFluidInventory, false, chemicalReactorRecipe1.getFluidOutputs());
-                        GTTransferUtils.addItemsToItemHandler(this.outputInventory, false, chemicalReactorRecipe1.getOutputs());
-                    }
+                if (timeHelper[i][0] >= timeHelper[i][1]) {
+
+                    GTTransferUtils.addFluidsToFluidHandler(outputFluidInventory, false, importFluidList.get(i));
+                    GTTransferUtils.addItemsToItemHandler(outputInventory, false, importItemsList.get(i));
+
                     timeHelper[i][0] = 0;
                     timeHelper[i][1] = 0;
+                    timeHelper[i][2] = 0;
                     ListWork[i] = false;
                 }
             }
@@ -144,7 +167,7 @@ public abstract class GTQTMultiblockCore extends MetaTileEntityBaseWithControl {
 
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
-        textList.add(new TextComponentTranslation("总线程:%s 智能超频:%s",getCoreNum(),speed));
+        textList.add(new TextComponentTranslation("总线程:%s 智能超频:%s 配方:%s",getCoreNum(),speed,recipeMaps[target].getLocalizedName()));
         if(speed) textList.add(new TextComponentTranslation("超频倍数:%s 超频单元耗能:%s EU/t",p,getMinVa()));
         textList.add(new TextComponentTranslation("=================="));
         for (int i = -2-(speed?0:1); i <= 3; i++) {
@@ -175,7 +198,7 @@ public abstract class GTQTMultiblockCore extends MetaTileEntityBaseWithControl {
                 .setTooltipText("序列向前"));
         group.addWidget(new ClickButtonWidget(0, 9, 9, 9, "", this::speed)
                 .setButtonTexture(GuiTextures.BUTTON_CLEAR_GRID)
-                .setTooltipText("超频"));
+                .setTooltipText("智能超频"));
         group.addWidget(new ClickButtonWidget(9, 9, 9, 9, "", this::stop)
                 .setButtonTexture(GuiTextures.BUTTON_LOCK)
                 .setTooltipText("紧急停机"));
@@ -197,16 +220,13 @@ public abstract class GTQTMultiblockCore extends MetaTileEntityBaseWithControl {
     private void stop(Widget.ClickData clickData) {
         for (int i = 0; i < getCoreNum(); i++)ListWork[i]=false;
     }
-    public GTQTMultiblockCore(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId);
-        this.fluidInventory = new FluidTankList(false, makeFluidTanks(25));
-        this.itemInventory = new NotifiableItemStackHandler(this, 25, this, false);
-        this.exportFluids = (FluidTankList) fluidInventory;
-        this.importFluids = (FluidTankList) fluidInventory;
-        this.exportItems = (IItemHandlerModifiable) itemInventory;
-        this.importItems = (IItemHandlerModifiable) itemInventory;
 
+    public void addInformation(ItemStack stack,  World player, List<String> tooltip, boolean advanced) {
+        super.addInformation(stack, player, tooltip, advanced);
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("工作模式：独立线程", new Object[0]));
+        tooltip.add(I18n.format(">>核心线程数量:%s", getCoreNum()));
     }
+
     @Override
     public boolean hasMaintenanceMechanics() {
         return false;
@@ -243,10 +263,20 @@ public abstract class GTQTMultiblockCore extends MetaTileEntityBaseWithControl {
         return fluidTankList;
     }
 
+    @Nonnull
     @Override
-    public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
-        super.renderMetaTileEntity(renderState, translation, pipeline);
-        getFrontOverlay().renderOrientedState(renderState, translation, pipeline, getFrontFacing(), true,
-                true);
+    protected ICubeRenderer getFrontOverlay() {
+        return Textures.FUSION_REACTOR_OVERLAY;
+    }
+    boolean work=true;
+    @Override
+    public boolean onScrewdriverClick(EntityPlayer playerIn, EnumHand hand, EnumFacing facing, CuboidRayTraceResult hitResult) {
+        work=!work;
+        if(work)
+        {
+            if(target+1>=recipeMaps.length) target = 0;
+            else target++;
+        }
+        return super.onScrewdriverClick(playerIn,hand,facing,hitResult);
     }
 }

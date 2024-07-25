@@ -44,6 +44,13 @@ public class MultiblockCoreProvider implements  IProbeInfoProvider {
 
                 }
                 if (mte instanceof GTQTMultiblockCore) {
+
+                    horizontalPane.text(TextStyleClass.INFO + "{*gtqt.top.corenumber*}");
+                    horizontalPane.text(TextStyleClass.INFO + " " +TextFormatting.RED+((GTQTMultiblockCore) mte).getCoreNum());
+
+                    horizontalPane.text(TextStyleClass.INFO + "{*gtqt.top.speed*}");
+                    horizontalPane.text(TextStyleClass.INFO + " " +TextFormatting.RED+((GTQTMultiblockCore) mte).speed);
+
                     for(int i=0;i<((GTQTMultiblockCore) mte).getCoreNum();i++) {
 
                         int timeProgress = ((GTQTMultiblockCore) mte).timeHelper[i][0];

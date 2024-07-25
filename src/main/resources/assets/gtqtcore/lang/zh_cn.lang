@@ -4604,7 +4604,8 @@ gtqt.top.in=最大输入//实际输入:
 gtqt.top.on=最大输出//实际输出:
 gtqt.top.v=电流:
 gtqt.top.i=电压:
-gtqt.top.eut=耗能:
+gtqt.top.corenumber=线程数:
+gtqt.top.speed=超频:
 ##  Chat Calculator Descriptions
 gtqtcore.chat_calculator.help.1=§a在聊天栏中使用数学表达式！§7使用§b=§7作为起始符号以使用该功能
 gtqtcore.chat_calculator.help.2=§7  §b+§7 与 §b-§7：加与减，亦或者单纯改变其符号。

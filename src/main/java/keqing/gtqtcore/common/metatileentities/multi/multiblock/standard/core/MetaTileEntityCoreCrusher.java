@@ -36,24 +36,23 @@ import javax.annotation.Nonnull;
 import java.util.LinkedList;
 import java.util.List;
 
-import static gregtech.api.GTValues.UV;
-import static gregtech.api.GTValues.VA;
-import static gregtech.api.recipes.RecipeMaps.MACERATOR_RECIPES;
+import static gregtech.api.GTValues.*;
 
 public class MetaTileEntityCoreCrusher extends GTQTMultiblockCore {
     public MetaTileEntityCoreCrusher(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId);
+        super(metaTileEntityId, new RecipeMap[] {
+                RecipeMaps.MACERATOR_RECIPES,
+                RecipeMaps.FORGE_HAMMER_RECIPES
+        });
     }
-
+    @Override
+    public int getMinVa()
+    {
+        return VA[IV];
+    }
     @Override
     public int getCoreNum() {
         return 8;
-    }
-
-    @Override
-    public RecipeMap<SimpleRecipeBuilder> getCORE_RECIPES()
-    {
-        return RecipeMaps.MACERATOR_RECIPES;
     }
 
     @Nonnull
