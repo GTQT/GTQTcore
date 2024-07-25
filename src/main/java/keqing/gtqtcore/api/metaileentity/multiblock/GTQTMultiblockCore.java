@@ -59,7 +59,6 @@ public abstract class GTQTMultiblockCore extends MultiMapMultiblockController im
     protected IMultipleTankHandler inputFluidInventory;
     protected IMultipleTankHandler outputFluidInventory;
     int target = 0;
-
     //暴露
     private final RecipeMap<?>[] recipeMaps;
     public GTQTMultiblockCore(ResourceLocation metaTileEntityId, RecipeMap<?>[] recipeMaps) {
@@ -104,12 +103,15 @@ public abstract class GTQTMultiblockCore extends MultiMapMultiblockController im
     int circuit;
     int p;
     public boolean speed;
-
+    boolean stop;
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("circuit", circuit);
         data.setBoolean("speed", speed);
+        data.setBoolean("stop", stop);
         data.setInteger("target",target);
+
+        /*
         writeItemHandlerToNBT(data,this.inputInventory,"In");
         writeItemHandlerToNBT(data,this.outputInventory,"Out");
         for (int i = 0; i <inputFluidInventory.getTanks(); i++) {
@@ -118,6 +120,8 @@ public abstract class GTQTMultiblockCore extends MultiMapMultiblockController im
         for (int i = 0; i <outputFluidInventory.getTanks(); i++) {
             data.setTag("FluidOut"+i,outputFluidInventory.getFluidTanks().get(i).trySerialize());
         }
+
+         */
         return super.writeToNBT(data);
     }
     @Override
@@ -125,7 +129,10 @@ public abstract class GTQTMultiblockCore extends MultiMapMultiblockController im
         super.readFromNBT(data);
         circuit = data.getInteger("circuit");
         speed = data.getBoolean("speed");
+        stop = data.getBoolean("stop");
         target = data.getInteger("target");
+
+        /*
         readItemHandlerFromNBT(data,this.inputInventory,"In");
         readItemHandlerFromNBT(data,this.outputInventory,"Out");
         for (int i = 0; i <inputFluidInventory.getTanks(); i++) {
@@ -138,6 +145,8 @@ public abstract class GTQTMultiblockCore extends MultiMapMultiblockController im
             if(tag!=null)
                 outputFluidInventory.getFluidTanks().get(i).tryDeserialize(tag);
         }
+
+         */
     }
     public static NBTTagCompound writeItemHandlerToNBT(NBTTagCompound compound, IItemHandlerModifiable handler,String in_out) {
         NBTTagList nbtTagList = new NBTTagList();
@@ -163,12 +172,13 @@ public abstract class GTQTMultiblockCore extends MultiMapMultiblockController im
             }
         }
     }
-
     @Override
     protected void updateFormedValid() {
         maxEU= (int) (this.energyContainer.getEnergyCapacity()/64);
+
         for (int i = 0; i < getCoreNum(); i++)
         {
+
             if(!ListWork[i]) {
                 if (inputInventory != null||inputFluidInventory != null) {
                     Recipe coreRecipe = recipeMaps[target].findRecipe(getMinVa(), inputInventory, inputFluidInventory);
@@ -185,11 +195,11 @@ public abstract class GTQTMultiblockCore extends MultiMapMultiblockController im
                 }
 
             }
-            if(ListWork[i]&&GTTransferUtils.addFluidsToFluidHandler(outputFluidInventory, true, importFluidList.get(i))&&GTTransferUtils.addItemsToItemHandler(outputInventory, true, importItemsList.get(i)))
+            if(ListWork[i]) if(stop||GTTransferUtils.addFluidsToFluidHandler(outputFluidInventory, true, importFluidList.get(i))&&GTTransferUtils.addItemsToItemHandler(outputInventory, true, importItemsList.get(i)))
             {
-                p = (int) ((this.energyContainer.getEnergyStored() + energyContainer.getInputPerSec()) / (getMinVa() == 0 ? 1 : getMinVa()));
+                p =Math.min( (int) ((this.energyContainer.getEnergyStored() + energyContainer.getInputPerSec()) / (getMinVa() == 0 ? 1 : getMinVa()))   ,20);
                 if (speed && (energyContainer.getEnergyStored() - (long) timeHelper[i][2] * p > 0)) {
-                    energyContainer.removeEnergy((long) timeHelper[i][2] * p);
+                    energyContainer.removeEnergy((long) timeHelper[i][2] * p*p);
                     timeHelper[i][0] += p;
                 } else {
                     if (energyContainer.getEnergyStored() - timeHelper[i][2] > 0) {
@@ -213,7 +223,7 @@ public abstract class GTQTMultiblockCore extends MultiMapMultiblockController im
 
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
-        textList.add(new TextComponentTranslation("总线程:%s 智能超频:%s 配方:%s",getCoreNum(),speed,recipeMaps[target].getLocalizedName()));
+        textList.add(new TextComponentTranslation("总线程:%s 超频:%s 配方:%s 溢出:%s",getCoreNum(),speed,recipeMaps[target].getLocalizedName(),stop));
         if(speed) textList.add(new TextComponentTranslation("超频倍数:%s 超频单元耗能:%s EU/t",p,getMinVa()));
         textList.add(new TextComponentTranslation("=================="));
         for (int i = -2-(speed?0:1); i <= 3; i++) {
@@ -247,7 +257,7 @@ public abstract class GTQTMultiblockCore extends MultiMapMultiblockController im
                 .setTooltipText("智能超频"));
         group.addWidget(new ClickButtonWidget(9, 9, 9, 9, "", this::stop)
                 .setButtonTexture(GuiTextures.BUTTON_LOCK)
-                .setTooltipText("紧急停机"));
+                .setTooltipText("溢出检测"));
         return group;
     }
 
@@ -264,7 +274,7 @@ public abstract class GTQTMultiblockCore extends MultiMapMultiblockController im
     }
 
     private void stop(Widget.ClickData clickData) {
-        for (int i = 0; i < getCoreNum(); i++)ListWork[i]=false;
+        stop=!stop;
     }
 
     public void addInformation(ItemStack stack,  World player, List<String> tooltip, boolean advanced) {

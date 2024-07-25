@@ -796,6 +796,15 @@ epimorphism.multipart.catalyst.only=仅能放入当前反应的催化剂
 
 gtqtcore.machine.industrial_maintenance_hatch.name=工业级维护仓
 
+
+gtqtcore.machine.industrial_crusher.name=工业破壁复合体
+gtqtcore.machine.industrial_centrifuge.name=工业离心复合体
+gtqtcore.machine.industrial_mix.name=工业搅拌复合体
+gtqtcore.machine.industrial_washer.name=工业浸洗复合体
+gtqtcore.machine.industrial_hammer.name=工业锻造复合体
+gtqtcore.machine.industrial_furnace.name=工业熔炼复合体
+
+
 gtqtcore.machine.reinforced_rotor_holder.luv.name=强化转子固定器（LuV）
 gtqtcore.machine.reinforced_rotor_holder.zpm.name=强化转子固定器（ZPM）
 gtqtcore.machine.reinforced_rotor_holder.uv.name=强化转子固定器（UV）
@@ -4236,6 +4245,7 @@ tile.isa_casing.isa_mill_casing_gearbox.name=艾萨研磨机齿轮箱
 tile.isa_casing.isa_mill_casing_pipe.name=艾萨研磨机管道
 tile.isa_casing.flotation_casing.name=工业浮选机外壳
 tile.isa_casing.flotation_casing_gearbox.name=工业浮选机齿轮箱
+tile.isa_casing.iridium_turbine.name=铱合金散热管道
 tile.isa_casing.flotation_casing_pipe.name=工业浮选机管道
 tile.isa_casing.flotation_intake_casing.name=工业浮选机摄入外壳
 tile.isa_casing.vacuum_casing.name=真空干燥外壳

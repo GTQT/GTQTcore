@@ -81,6 +81,12 @@
         "textures": {
           "all": "gregtech:blocks/multiblock/isa_casing/separator_rotor"
         }
+      },
+      "iridium_turbine": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/isa_casing/iridium_turbine"
+        }
       }
     }
   }

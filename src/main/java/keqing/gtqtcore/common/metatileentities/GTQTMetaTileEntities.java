@@ -21,7 +21,7 @@ import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.metatileentities.multi.generators.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.*;
-import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.core.MetaTileEntityCoreCrusher;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.core.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.gcys.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.huge.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.kqcc.*;
@@ -272,7 +272,14 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityIndustrialDrill INDUSTRIAL_DRILL;
     public static MetaTileEntityIonImplanter ION_IMPLANTATOR;
     public static MetaTileEntityCZPuller CZ_PULLER;
-    public static MetaTileEntityCoreCrusher CORE_CRUSHER;
+
+    public static MetaTileEntityIndustrialMacerator INDUSTRIAL_MACERATOR;
+    public static MetaTileEntityIndustrialCentrifuge INDUSTRIAL_CENTRIFUGE;
+    public static MetaTileEntityIndustrialMix INDUSTRIAL_MIX;
+    public static MetaTileEntityIndustrialWasher INDUSTRIAL_WASHER;
+    public static MetaTileEntityIndustrialHammer INDUSTRIAL_HAMMER;
+    public static MetaTileEntityIndustrialFurnace INDUSTRIAL_FURNACE;
+
     public static MetaTileEntityNuclearReactor NUCLEAR_REACTOR;
     public static MetaTileEntityLargeTurbine LARGE_FUEL_TURBINE;
     public static final MetaTileEntityReinforcedRotorHolder[] MULTIPART_REINFORCED_ROTOR_HOLDER = new MetaTileEntityReinforcedRotorHolder[8];
@@ -366,7 +373,12 @@ public class GTQTMetaTileEntities {
         STEAM_VAT= registerMetaTileEntity(3110, new MetaTileEntitySteamFermentationVat(gtqtcoreId("steam_vat")));
 
         //多核心
-        CORE_CRUSHER= registerMetaTileEntity(3120, new MetaTileEntityCoreCrusher(gtqtcoreId("core_crusher")));
+        INDUSTRIAL_MACERATOR= registerMetaTileEntity(3120, new MetaTileEntityIndustrialMacerator(gtqtcoreId("industrial_crusher")));
+        INDUSTRIAL_CENTRIFUGE= registerMetaTileEntity(3121, new MetaTileEntityIndustrialCentrifuge(gtqtcoreId("industrial_centrifuge")));
+        INDUSTRIAL_MIX= registerMetaTileEntity(3122, new MetaTileEntityIndustrialMix(gtqtcoreId("industrial_mix")));
+        INDUSTRIAL_WASHER= registerMetaTileEntity(3123, new MetaTileEntityIndustrialWasher(gtqtcoreId("industrial_washer")));
+        INDUSTRIAL_HAMMER= registerMetaTileEntity(3124, new MetaTileEntityIndustrialHammer(gtqtcoreId("industrial_hammer")));
+        INDUSTRIAL_FURNACE= registerMetaTileEntity(3125, new MetaTileEntityIndustrialFurnace(gtqtcoreId("industrial_furnace")));
         //正常设备
         DISSOLUTION_TANK = registerMetaTileEntity(3150, new MetaTileEntityDissolutionTank(gtqtcoreId("dissolution_tank")));
         BLAZING_BLAST_FURNACE = registerMetaTileEntity(3151, new MetaTileEntityBlazingBlastFurnace(gtqtcoreId("blazing_blast_furnace")));
