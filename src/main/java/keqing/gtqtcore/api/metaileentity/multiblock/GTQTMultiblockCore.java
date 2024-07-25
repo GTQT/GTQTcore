@@ -30,6 +30,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
@@ -38,6 +39,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fml.relauncher.Side;
@@ -108,6 +110,14 @@ public abstract class GTQTMultiblockCore extends MultiMapMultiblockController im
         data.setInteger("circuit", circuit);
         data.setBoolean("speed", speed);
         data.setInteger("target",target);
+        writeItemHandlerToNBT(data,this.inputInventory,"In");
+        writeItemHandlerToNBT(data,this.outputInventory,"Out");
+        for (int i = 0; i <inputFluidInventory.getTanks(); i++) {
+            data.setTag("FluidIn"+i,inputFluidInventory.getFluidTanks().get(i).trySerialize());
+        }
+        for (int i = 0; i <outputFluidInventory.getTanks(); i++) {
+            data.setTag("FluidOut"+i,outputFluidInventory.getFluidTanks().get(i).trySerialize());
+        }
         return super.writeToNBT(data);
     }
     @Override
@@ -116,6 +126,42 @@ public abstract class GTQTMultiblockCore extends MultiMapMultiblockController im
         circuit = data.getInteger("circuit");
         speed = data.getBoolean("speed");
         target = data.getInteger("target");
+        readItemHandlerFromNBT(data,this.inputInventory,"In");
+        readItemHandlerFromNBT(data,this.outputInventory,"Out");
+        for (int i = 0; i <inputFluidInventory.getTanks(); i++) {
+            NBTTagCompound tag = data.getCompoundTag("FluidIn"+i);
+            if(tag!=null)
+                inputFluidInventory.getFluidTanks().get(i).tryDeserialize(tag);
+        }
+        for (int i = 0; i <outputFluidInventory.getTanks(); i++) {
+            NBTTagCompound tag = data.getCompoundTag("FluidOut"+i);
+            if(tag!=null)
+                outputFluidInventory.getFluidTanks().get(i).tryDeserialize(tag);
+        }
+    }
+    public static NBTTagCompound writeItemHandlerToNBT(NBTTagCompound compound, IItemHandlerModifiable handler,String in_out) {
+        NBTTagList nbtTagList = new NBTTagList();
+        for (int i = 0; i < handler.getSlots(); i++) {
+            ItemStack stack = handler.getStackInSlot(i);
+            if (!stack.isEmpty()) {
+                NBTTagCompound itemTag = new NBTTagCompound();
+                itemTag.setInteger("Slot"+in_out, i);
+                stack.writeToNBT(itemTag);
+                nbtTagList.appendTag(itemTag);
+            }
+        }
+        compound.setTag(in_out+"Items", nbtTagList);
+        return compound;
+    }
+    public static void readItemHandlerFromNBT(NBTTagCompound compound, IItemHandlerModifiable handler,String in_out) {
+        NBTTagList nbtTagList = compound.getTagList(in_out + "Items", Constants.NBT.TAG_COMPOUND);
+        for (int i = 0; i < nbtTagList.tagCount(); i++) {
+            NBTTagCompound itemTag = nbtTagList.getCompoundTagAt(i);
+            int slot = itemTag.getInteger("Slot" + in_out);
+            if (slot >= 0 && slot < handler.getSlots()) {
+                handler.setStackInSlot(slot, new ItemStack(itemTag));
+            }
+        }
     }
 
     @Override
@@ -146,7 +192,7 @@ public abstract class GTQTMultiblockCore extends MultiMapMultiblockController im
                     energyContainer.removeEnergy((long) timeHelper[i][2] * p);
                     timeHelper[i][0] += p;
                 } else {
-                    if (energyContainer.getEnergyStored() - timeHelper[i][2] >= 0) {
+                    if (energyContainer.getEnergyStored() - timeHelper[i][2] > 0) {
                         energyContainer.removeEnergy(timeHelper[i][2]);
                         timeHelper[i][0]++;
                     }
