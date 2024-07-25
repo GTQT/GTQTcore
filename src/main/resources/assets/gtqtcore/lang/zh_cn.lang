@@ -4484,18 +4484,12 @@ gtqtcore.machine.biomass_generator.luv.name=涡轮生物质发电机
 gtqtcore.machine.biomass_generator.luv.tooltip=电动咀叶机
 
 #  Tools
-gt.tool.class.bending_cylinder=弯曲绕筒
-gt.tool.class.small_bending_cylinder=小型弯曲绕筒
-gt.tool.class.soldering_iron=电烙铁
 
-item.gt.tool.universal_spade.name=%s万用铲
-item.gt.tool.combination_wrench.name=%s两用扳手
 item.gt.tool.bending_cylinder.name=%s弯曲绕筒
 item.gt.tool.small_bending_cylinder.name=%s小型弯曲绕筒
 item.gt.tool.soldering_iron_lv.name=%s电烙铁
 item.gt.tool.soldering_iron_lv.tooltip=比燧石刀好用
 item.gt.tool.soldering_iron_hv.name=%s电烙铁
-item.gt.tool.soldering_iron_hv.tooltip=小心烫手！
 item.gt.tool.soldering_iron_iv.name=%s电烙铁
 item.gt.tool.soldering_iron_iv.tooltip=电路板修理者 MK523
 gtqtcore.machine.powersupply.tooltip.1=继承一切电学所需要的功能,多方块可以直接对自己正上方（11*11）的能量容器进行直接操作，无视容器电压电流限制。多方块在雨中工作不会爆炸。
@@ -4610,7 +4604,7 @@ gtqt.top.in=最大输入//实际输入:
 gtqt.top.on=最大输出//实际输出:
 gtqt.top.v=电流:
 gtqt.top.i=电压:
-
+gtqt.top.eut=耗能:
 ##  Chat Calculator Descriptions
 gtqtcore.chat_calculator.help.1=§a在聊天栏中使用数学表达式！§7使用§b=§7作为起始符号以使用该功能
 gtqtcore.chat_calculator.help.2=§7  §b+§7 与 §b-§7：加与减，亦或者单纯改变其符号。

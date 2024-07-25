@@ -1,14 +1,19 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.core;
 
 import gregtech.api.GTValues;
+import gregtech.api.capability.IMultipleTankHandler;
+import gregtech.api.items.itemhandlers.GTItemStackHandler;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
+import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
+import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
+import gregtech.api.recipes.builders.SimpleRecipeBuilder;
 import gregtech.api.util.GTTransferUtils;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.core.sound.GTSoundEvents;
@@ -20,13 +25,20 @@ import keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.MetaTileEntityStewStoolStove;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.MetaTileEntityBaseWithControl;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraftforge.items.IItemHandlerModifiable;
 
 import javax.annotation.Nonnull;
 import java.util.LinkedList;
 import java.util.List;
+
+import static gregtech.api.GTValues.UV;
+import static gregtech.api.GTValues.VA;
+import static gregtech.api.recipes.RecipeMaps.MACERATOR_RECIPES;
 
 public class MetaTileEntityCoreCrusher extends GTQTMultiblockCore {
     public MetaTileEntityCoreCrusher(ResourceLocation metaTileEntityId) {
@@ -34,24 +46,14 @@ public class MetaTileEntityCoreCrusher extends GTQTMultiblockCore {
     }
 
     @Override
-    protected void updateFormedValid() {
-        super.updateFormedValid();
+    public int getCoreNum() {
+        return 8;
+    }
 
-            GTTransferUtils.moveInventoryItems(this.inputInventory, this.itemInventory);
-            GTTransferUtils.transferFluids(this.inputFluidInventory, this.fluidInventory);
-
-            Recipe machineRecipe = RecipeMaps.MACERATOR_RECIPES.findRecipe(this.currentEU, this.importItems, this.importFluids);
-            if (machineRecipe != null && machineRecipe.matches(false, this.importItems, this.importFluids)) {
-                currentRecipeEU = (long) machineRecipe.getEUt() * machineRecipe.getDuration();
-                if (currentRecipeEU <= this.currentEU) {
-                    this.currentEU -= currentRecipeEU;
-                    this.currentRecipeEU = 0;
-                    machineRecipe.matches(true, this.importItems, this.importFluids);
-
-                    GTTransferUtils.addFluidsToFluidHandler(this.outputFluidInventory, false, machineRecipe.getFluidOutputs());
-                    GTTransferUtils.addItemsToItemHandler(this.outputInventory, false, machineRecipe.getOutputs());
-                }
-            }
+    @Override
+    public RecipeMap<SimpleRecipeBuilder> getCORE_RECIPES()
+    {
+        return RecipeMaps.MACERATOR_RECIPES;
     }
 
     @Nonnull

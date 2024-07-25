@@ -119,7 +119,7 @@ public class MetaTileEntityAdvancedArcFurnace extends GTQTRecipeMapMultiblockCon
         }
         if (modern == 1)
         {
-            P = (int) ((this.energyContainer.getEnergyStored() + energyContainer.getInputPerSec()) / getMinVa()==0?1:getMinVa());
+            P = (int) ((this.energyContainer.getEnergyStored() + energyContainer.getInputPerSec())/(getMinVa()==0?1:getMinVa()));
             ParallelNum = Math.min(P, ParallelLim);
         }
     }
