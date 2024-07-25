@@ -25,6 +25,7 @@ import gregtech.api.util.TextComponentUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.TooltipHelper;
+import keqing.gtqtcore.api.capability.impl.GTQTCoreLogic;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.MetaTileEntityBaseWithControl;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
@@ -63,7 +64,7 @@ public abstract class GTQTMultiblockCore extends MultiMapMultiblockController im
     private final RecipeMap<?>[] recipeMaps;
     public GTQTMultiblockCore(ResourceLocation metaTileEntityId, RecipeMap<?>[] recipeMaps) {
         super(metaTileEntityId,recipeMaps);
-        this.recipeMapWorkable = new GCYMMultiblockRecipeLogic(this);
+        this.recipeMapWorkable = new GTQTCoreLogic(this);
         this.recipeMaps = recipeMaps;
 
         for (int i = 0; i < getCoreNum(); i++) {
@@ -223,7 +224,7 @@ public abstract class GTQTMultiblockCore extends MultiMapMultiblockController im
 
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
-        textList.add(new TextComponentTranslation("总线程:%s 超频:%s 配方:%s 溢出:%s",getCoreNum(),speed,recipeMaps[target].getLocalizedName(),stop));
+        textList.add(new TextComponentTranslation("总线程:%s 超频:%s 配方:%s 无视溢出:%s",getCoreNum(),speed,recipeMaps[target].getLocalizedName(),stop));
         if(speed) textList.add(new TextComponentTranslation("超频倍数:%s 超频单元耗能:%s EU/t",p,getMinVa()));
         textList.add(new TextComponentTranslation("=================="));
         for (int i = -2-(speed?0:1); i <= 3; i++) {
@@ -318,12 +319,6 @@ public abstract class GTQTMultiblockCore extends MultiMapMultiblockController im
         }
         return fluidTankList;
     }
-
-    @Nonnull
-    @Override
-    protected ICubeRenderer getFrontOverlay() {
-        return Textures.FUSION_REACTOR_OVERLAY;
-    }
     boolean work=true;
     @Override
     public boolean onScrewdriverClick(EntityPlayer playerIn, EnumHand hand, EnumFacing facing, CuboidRayTraceResult hitResult) {
@@ -334,5 +329,11 @@ public abstract class GTQTMultiblockCore extends MultiMapMultiblockController im
             else target++;
         }
         return super.onScrewdriverClick(playerIn,hand,facing,hitResult);
+    }
+    public boolean isActive() {
+        return this.isStructureFormed();
+    }
+    public boolean hasMufflerMechanics() {
+        return false;
     }
 }

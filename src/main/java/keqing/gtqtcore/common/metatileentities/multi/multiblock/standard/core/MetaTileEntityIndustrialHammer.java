@@ -61,17 +61,16 @@ public class MetaTileEntityIndustrialHammer extends GTQTMultiblockCore {
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
-                .aisle("CCC", "CMC", "CCC", "FFF")
+                .aisle("CCC", "CCC", "CCC", "FFF")
                 .aisle("CCC", "CGC", "CGC", "FCF")
                 .aisle("PPP", "PSP", "PPP", "FFF")
                 .where('P', states(getCasingState()))
                 .where('S', this.selfPredicate())
                 .where('C', states(getCasingState())
-                        .setMinGlobalLimited(18)
+                        .setMinGlobalLimited(12)
                         .or(autoAbilities()))
                 .where('G', states(getSecondCasingState()))
                 .where('F', states(getFrameState()))
-                .where('M', abilities(MultiblockAbility.MUFFLER_HATCH))
                 .build();
     }
     private static IBlockState getFrameState() {

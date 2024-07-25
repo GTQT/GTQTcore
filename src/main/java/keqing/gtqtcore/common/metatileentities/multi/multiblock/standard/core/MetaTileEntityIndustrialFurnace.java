@@ -58,16 +58,15 @@ public class MetaTileEntityIndustrialFurnace extends GTQTMultiblockCore {
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
-                .aisle("CCC", "CMC", "CCC")
+                .aisle("CCC", "CCC", "CCC")
                 .aisle("CCC", "CGC", "CCC")
                 .aisle("PPP", "PSP", "PPP")
                 .where('P', states(getCasingState()))
                 .where('S', this.selfPredicate())
                 .where('C', states(getCasingState())
-                        .setMinGlobalLimited(14)
+                        .setMinGlobalLimited(10)
                         .or(autoAbilities()))
                 .where('G', states(getSecondCasingState()))
-                .where('M', abilities(MultiblockAbility.MUFFLER_HATCH))
                 .build();
     }
 
@@ -97,6 +96,7 @@ public class MetaTileEntityIndustrialFurnace extends GTQTMultiblockCore {
             return false;
         }
     }
+
 
     @Override
     public boolean onRightClick(EntityPlayer playerIn,
@@ -136,7 +136,6 @@ public class MetaTileEntityIndustrialFurnace extends GTQTMultiblockCore {
 
 
     @SideOnly(Side.CLIENT)
-
     @Override
     protected ICubeRenderer getFrontOverlay() {
         return GTQTTextures.ROASTER_OVERLAY;

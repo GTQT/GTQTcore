@@ -64,7 +64,7 @@ public class MetaTileEntityIndustrialCentrifuge extends GTQTMultiblockCore {
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
-                .aisle("CCC", "CMC", "CCC")
+                .aisle("CCC", "CCC", "CCC")
                 .aisle("CCC", "CGC", "CCC")
                 .aisle("CCC", "CGC", "CCC")
                 .aisle("PPP", "PSP", "PPP")
@@ -74,7 +74,6 @@ public class MetaTileEntityIndustrialCentrifuge extends GTQTMultiblockCore {
                         .setMinGlobalLimited(18)
                         .or(autoAbilities()))
                 .where('G', states(getSecondCasingState()))
-                .where('M', abilities(MultiblockAbility.MUFFLER_HATCH))
                 .build();
     }
 
@@ -146,7 +145,7 @@ public class MetaTileEntityIndustrialCentrifuge extends GTQTMultiblockCore {
                                      Matrix4 translation,
                                      IVertexOperation[] pipeline) {
         super.renderMetaTileEntity(renderState, translation, pipeline);
-        GTQTTextures.ISA_MILL.renderSided(renderState, translation, pipeline, getFrontFacing(), isStructureFormed(), this.energyContainer.getEnergyStored()>0);
+        GTQTTextures.ISA_MILL.renderSided(renderState, translation, pipeline, getFrontFacing(), isStructureFormed(), isStructureFormed());
     }
 
     @SideOnly(Side.CLIENT)

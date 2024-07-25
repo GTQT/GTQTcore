@@ -68,19 +68,18 @@ public class MetaTileEntityIndustrialWasher extends GTQTMultiblockCore {
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
-                .aisle("CCCCC", "CCMCC", "CCCCC")
+                .aisle("CCCCC", "CCCCC", "CCCCC")
                 .aisle("CGGGC", "CFFFC", "C###C")
                 .aisle("CGGGC", "CFFFC", "C###C")
                 .aisle("CGGGC", "CFFFC", "C###C")
                 .aisle("PPPPP", "PPSPP", "PPPPP")
                 .where('S', this.selfPredicate())
                 .where('C', states(getCasingState())
-                        .setMinGlobalLimited(38)
+                        .setMinGlobalLimited(28)
                         .or(autoAbilities()))
                 .where('G', states(getSecondCasingState()))
                 .where('F', states(getFrameState()))
                 .where('P', states(getCasingState()))
-                .where('M', abilities(MultiblockAbility.MUFFLER_HATCH))
                 .where('#', any())
                 .build();
     }

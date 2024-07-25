@@ -61,7 +61,7 @@ public class MetaTileEntityIndustrialMix extends GTQTMultiblockCore {
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
-                .aisle("FFF","CCC", "CMC", "CCC")
+                .aisle("FFF","CCC", "CCC", "CCC")
                 .aisle("F#F","CCC", "CGC", "CCC")
                 .aisle("F#F","CCC", "CGC", "CCC")
                 .aisle("FFF","PPP", "PSP", "PPP")
@@ -73,7 +73,6 @@ public class MetaTileEntityIndustrialMix extends GTQTMultiblockCore {
                 .where('G', states(getSecondCasingState()))
                 .where('#', any())
                 .where('F', states(getFrameState()))
-                .where('M', abilities(MultiblockAbility.MUFFLER_HATCH))
                 .build();
     }
     private static IBlockState getFrameState() {

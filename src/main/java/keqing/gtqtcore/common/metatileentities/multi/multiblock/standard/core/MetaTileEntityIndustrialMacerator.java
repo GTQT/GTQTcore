@@ -61,7 +61,7 @@ public class MetaTileEntityIndustrialMacerator extends GTQTMultiblockCore {
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
-                .aisle("CCC", "CMC", "CCC")
+                .aisle("CCC", "CCC", "CCC")
                 .aisle("FCF", "CGC", "FCF")
                 .aisle("FCF", "CGC", "FCF")
                 .aisle("FCF", "CGC", "FCF")
@@ -69,11 +69,10 @@ public class MetaTileEntityIndustrialMacerator extends GTQTMultiblockCore {
                 .where('P', states(getCasingState()))
                 .where('S', this.selfPredicate())
                 .where('C', states(getCasingState())
-                        .setMinGlobalLimited(24)
+                        .setMinGlobalLimited(18)
                         .or(autoAbilities()))
                 .where('G', states(getSecondCasingState()))
                 .where('F', states(getFrameState()))
-                .where('M', abilities(MultiblockAbility.MUFFLER_HATCH))
                 .build();
     }
     private static IBlockState getFrameState() {
