@@ -46,6 +46,7 @@ import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.IItemHandlerModifiable;
+import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -112,7 +113,11 @@ public abstract class GTQTMultiblockCore extends MultiMapMultiblockController im
         data.setBoolean("stop", stop);
         data.setInteger("target",target);
 
-        /*
+        data.setInteger("IN_SLOTS",this.inputInventory.getSlots());
+        data.setInteger("OUT_SLOTS",this.outputInventory.getSlots());
+        data.setInteger("IN_TANKS",this.inputFluidInventory.getTanks());
+        data.setInteger("OUT_TANKS",this.outputFluidInventory.getTanks());
+
         writeItemHandlerToNBT(data,this.inputInventory,"In");
         writeItemHandlerToNBT(data,this.outputInventory,"Out");
         for (int i = 0; i <inputFluidInventory.getTanks(); i++) {
@@ -121,8 +126,6 @@ public abstract class GTQTMultiblockCore extends MultiMapMultiblockController im
         for (int i = 0; i <outputFluidInventory.getTanks(); i++) {
             data.setTag("FluidOut"+i,outputFluidInventory.getFluidTanks().get(i).trySerialize());
         }
-
-         */
         return super.writeToNBT(data);
     }
     @Override
@@ -133,21 +136,42 @@ public abstract class GTQTMultiblockCore extends MultiMapMultiblockController im
         stop = data.getBoolean("stop");
         target = data.getInteger("target");
 
-        /*
-        readItemHandlerFromNBT(data,this.inputInventory,"In");
-        readItemHandlerFromNBT(data,this.outputInventory,"Out");
-        for (int i = 0; i <inputFluidInventory.getTanks(); i++) {
-            NBTTagCompound tag = data.getCompoundTag("FluidIn"+i);
-            if(tag!=null)
-                inputFluidInventory.getFluidTanks().get(i).tryDeserialize(tag);
+        if(data.getInteger("IN_SLOTS")>0)
+        {
+            inputInventory = new ItemStackHandler(data.getInteger("IN_SLOTS"));
+            readItemHandlerFromNBT(data,this.inputInventory,"In");
         }
-        for (int i = 0; i <outputFluidInventory.getTanks(); i++) {
-            NBTTagCompound tag = data.getCompoundTag("FluidOut"+i);
-            if(tag!=null)
-                outputFluidInventory.getFluidTanks().get(i).tryDeserialize(tag);
+        if(data.getInteger("OUT_SLOTS")>0)
+        {
+            outputInventory = new ItemStackHandler(data.getInteger("OUT_SLOTS"));
+            readItemHandlerFromNBT(data,this.outputInventory,"Out");
         }
-
-         */
+        if(data.getInteger("IN_TANKS")>0)
+        {
+            List<FluidTank> tanks = new ArrayList<>();
+            for (int i = 0; i < data.getInteger("IN_TANKS"); i++) {
+                tanks.add(new FluidTank(16000));
+            }
+            inputFluidInventory = new FluidTankList(true,tanks);
+            for (int i = 0; i <inputFluidInventory.getTanks(); i++) {
+                NBTTagCompound tag = data.getCompoundTag("FluidIn"+i);
+                if(tag!=null)
+                    inputFluidInventory.getFluidTanks().get(i).tryDeserialize(tag);
+            }
+        }
+        if(data.getInteger("OUT_TANKS")>0)
+        {
+            List<FluidTank> tanks = new ArrayList<>();
+            for (int i = 0; i < data.getInteger("OUT_TANKS"); i++) {
+                tanks.add(new FluidTank(16000));
+            }
+            outputFluidInventory = new FluidTankList(true,tanks);
+            for (int i = 0; i <outputFluidInventory.getTanks(); i++) {
+                NBTTagCompound tag = data.getCompoundTag("FluidOut"+i);
+                if(tag!=null)
+                    outputFluidInventory.getFluidTanks().get(i).tryDeserialize(tag);
+            }
+        }
     }
     public static NBTTagCompound writeItemHandlerToNBT(NBTTagCompound compound, IItemHandlerModifiable handler,String in_out) {
         NBTTagList nbtTagList = new NBTTagList();
@@ -164,10 +188,10 @@ public abstract class GTQTMultiblockCore extends MultiMapMultiblockController im
         return compound;
     }
     public static void readItemHandlerFromNBT(NBTTagCompound compound, IItemHandlerModifiable handler,String in_out) {
-        NBTTagList nbtTagList = compound.getTagList(in_out + "Items", Constants.NBT.TAG_COMPOUND);
+        NBTTagList nbtTagList = compound.getTagList(in_out+"Items", Constants.NBT.TAG_COMPOUND);
         for (int i = 0; i < nbtTagList.tagCount(); i++) {
             NBTTagCompound itemTag = nbtTagList.getCompoundTagAt(i);
-            int slot = itemTag.getInteger("Slot" + in_out);
+            int slot = itemTag.getInteger("Slot"+in_out);
             if (slot >= 0 && slot < handler.getSlots()) {
                 handler.setStackInSlot(slot, new ItemStack(itemTag));
             }
