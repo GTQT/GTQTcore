@@ -1,6 +1,7 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
 
+import codechicken.lib.raytracer.CuboidRayTraceResult;
 import gregtech.api.block.IHeatingCoilBlockStats;
 import gregtech.api.capability.IMultipleTankHandler;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
@@ -25,12 +26,16 @@ import gregtech.common.blocks.BlockBoilerCasing;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.blocks.MetaBlocks;
+import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityFluidHatch;
 import keqing.gtqtcore.api.metaileentity.GTQTRecipeMapMultiblockController;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -53,9 +58,21 @@ import static gregtech.api.util.RelativeDirection.*;
 public class MetaTileEntitySMSF extends GTQTRecipeMapMultiblockController implements  IProgressBarMultiblock {
     private int coilLevel;
     private int number;
-    private int size;
     int[] steam=new int[3];
-    FluidStack STEAM = Steam.getFluid(1000);
+    int updatetime=1;
+    boolean work=true;
+
+    public boolean onScrewdriverClick(EntityPlayer playerIn, EnumHand hand, EnumFacing facing, CuboidRayTraceResult hitResult) {
+        work=!work;
+        if(!work)return true;
+        if(updatetime<=19) updatetime++;
+        else updatetime=1;
+        playerIn.sendMessage(new TextComponentTranslation("输入效率：%s tick",updatetime));
+        return true;
+    }
+
+    FluidStack STEAM = Steam.getFluid(1000*updatetime);
+
     @Override
     public void update() {
         super.update();
@@ -63,7 +80,7 @@ public class MetaTileEntitySMSF extends GTQTRecipeMapMultiblockController implem
             IMultipleTankHandler inputTank = getInputFluidInventory();
             if (STEAM.isFluidStackIdentical(inputTank.drain(STEAM, false))) {
                 inputTank.drain(STEAM, true);
-                steam[0] = steam[0] + 80*coilLevel;
+                steam[0] = steam[0] + 160*coilLevel*updatetime;
 
             }
         }
@@ -156,7 +173,7 @@ public class MetaTileEntitySMSF extends GTQTRecipeMapMultiblockController implem
             return steam[0] > 6000 && steam[1] > 6000 && steam[2] > 6000;
         }
         protected void updateRecipeProgress() {
-            if (canRecipeProgress && drawEnergy(recipeEUt, true)&&SIZE()) {
+            if (canRecipeProgress && drawEnergy(recipeEUt, true)) {
                 this.drawEnergy(this.recipeEUt, false);
                 if (++progressTime > maxProgressTime)
                 {
@@ -176,14 +193,7 @@ public class MetaTileEntitySMSF extends GTQTRecipeMapMultiblockController implem
             if (lubricantStack == null || lubricantStack.amount < 1000) {
                 textList.add(new TextComponentTranslation("gtqtcore.multiblock.sfm.no_water1"));
             }
-            if (!SIZE()) {
-                textList.add(new TextComponentTranslation("gtqtcore.multiblock.sfm.no_water2"));
-            }
         }
-    }
-    public Boolean SIZE()
-    {
-        return size==number;
     }
     @Override
     protected void formStructure(PatternMatchContext context) {
@@ -196,9 +206,6 @@ public class MetaTileEntitySMSF extends GTQTRecipeMapMultiblockController implem
         } else {
             this.coilLevel = BlockWireCoil.CoilType.CUPRONICKEL.getLevel();
         }
-
-        List<IFluidTank> i = getAbilities(MultiblockAbility.EXPORT_FLUIDS);
-        this.size=i.size();
     }
     public  boolean getStatue()
     {
@@ -244,7 +251,9 @@ public class MetaTileEntitySMSF extends GTQTRecipeMapMultiblockController implem
                         .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setMinGlobalLimited(1).setMaxGlobalLimited(4).setPreviewCount(2))
                 )
                 .where('B',(abilities(MultiblockAbility.EXPORT_ITEMS)))
-                .where('O',(abilities(MultiblockAbility.EXPORT_FLUIDS)))
+                .where('O',metaTileEntities(MultiblockAbility.REGISTRY.get(MultiblockAbility.EXPORT_FLUIDS).stream()
+                        .filter(mte->(mte instanceof MetaTileEntityFluidHatch))
+                        .toArray(MetaTileEntity[]::new)))
                 .where('C', coilPredicate())
                 .where('F', states(getFrameState()))
                 .where(' ', any());

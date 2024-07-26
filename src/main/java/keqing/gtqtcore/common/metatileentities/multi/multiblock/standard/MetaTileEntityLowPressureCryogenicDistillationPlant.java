@@ -29,6 +29,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.function.Function;
 
@@ -123,10 +124,10 @@ public class MetaTileEntityLowPressureCryogenicDistillationPlant extends RecipeM
         return GTSoundEvents.BREAKDOWN_ELECTRICAL;
     }
 
-    @SideOnly(Side.CLIENT)
+    @Nonnull
     @Override
     protected ICubeRenderer getFrontOverlay() {
-        return GTQTTextures.ALGAE_FARM_OVERLAY;
+        return GTQTTextures.INDUSTRIAL_CENTRIFUGE_OVERLAY;
     }
 
     @Override

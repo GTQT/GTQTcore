@@ -16,12 +16,18 @@ import gregtech.common.blocks.BlockMetalCasing.MetalCasingType;
 import gregtech.common.blocks.BlockTurbineCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.blocks.StoneVariantBlock;
+import keqing.gtqtcore.api.capability.impl.NoEnergyMultiblockRecipeLogic;
+import keqing.gtqtcore.api.metaileentity.multiblock.NoEnergyMultiblockController;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
+import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing1;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
@@ -31,13 +37,61 @@ import java.util.List;
 public class MetaTileEntityClarifier extends RecipeMapMultiblockController {
     public MetaTileEntityClarifier(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.CLARIFIER);
-        this.recipeMapWorkable = new MultiblockRecipeLogic(this, true);
+        this.recipeMapWorkable = new ClarifierLogic(this);
     }
-
+    int heat;
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityClarifier(this.metaTileEntityId);
     }
+    @Override
+    public NBTTagCompound writeToNBT(NBTTagCompound data) {
+        data.setInteger("heat", heat);
+        return super.writeToNBT(data);
+    }
+    @Override
+    public void readFromNBT(NBTTagCompound data) {
+        super.readFromNBT(data);
+        heat = data.getInteger("heat");
+    }
 
+    @Override
+    protected void addDisplayText(List<ITextComponent> textList) {
+        super.addDisplayText(textList);
+        if (isStructureFormed()) {
+            textList.add(new TextComponentTranslation("时间：%s 阳光直射：%s",getWorld().isDaytime(),this.getWorld().canSeeSky(getPos().up())));
+            textList.add(new TextComponentTranslation("稳定度：%s",heat));
+        }
+    }
+
+    protected class ClarifierLogic extends MultiblockRecipeLogic {
+
+        public ClarifierLogic(RecipeMapMultiblockController tileEntity) {
+            super(tileEntity);
+        }
+        @Override
+        public void update() {
+            super.update();
+            if (!getWorld().isDaytime()&&heat<10000)heat+=5;
+            if (!getWorld().canSeeSky(getPos())&&heat<10000)heat+=5;
+            else if(heat>0)heat--;
+        }
+        protected void updateRecipeProgress() {
+            if (canRecipeProgress) {
+                if(heat>2000){maxProgressTime=maxProgressTime/2;heat-=2000;}
+                if (++progressTime > maxProgressTime) {
+                    completeRecipe();
+                    heat=heat*3/4;
+                }
+            }
+        }
+    }
+    @Override
+    public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
+        super.addInformation(stack, player, tooltip, advanced);
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("古埃及掌管放置Play的神", new Object[0]));
+        tooltip.add(I18n.format("如果处于白天或者阳光直射会导致稳定度下降"));
+        tooltip.add(I18n.format("消耗部分稳定度，配方耗时减半;运行完一轮配方后，稳定度下降四分之一"));
+    }
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
                 .aisle("      AAAA      ", "      AAAA      ", "      AAAA      ", "                ")
@@ -70,15 +124,11 @@ public class MetaTileEntityClarifier extends RecipeMapMultiblockController {
         return Textures.SOLID_STEEL_CASING;
     }
 
-    public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, boolean advanced) {
-        super.addInformation(stack, player, tooltip, advanced);
-        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("gregtech.machine.perfect_oc", new Object[0]));
-    }
 
     @Nonnull
     @Override
     protected ICubeRenderer getFrontOverlay() {
-        return Textures.FUSION_REACTOR_OVERLAY;
+        return GTQTTextures.COKING_TOWER_OVERLAY;
     }
 
     @Override

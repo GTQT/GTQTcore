@@ -61,7 +61,10 @@ public class MetaTileEntityAlgaeFarm  extends MultiblockWithDisplayBase implemen
         super(metaTileEntityId);
         this.logic = new AlgaeFarmLogic(this,GTValues.MV);
     }
-
+    @Override
+    public String[] getDescription() {
+        return new String[]{I18n.format("gtqtcore.multiblock.AlgaeFarm.description")};
+    }
     public boolean hasMaintenanceMechanics() {
         return false;
     }

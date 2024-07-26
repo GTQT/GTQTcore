@@ -9,28 +9,72 @@ import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.unification.material.Materials;
+import gregtech.api.util.GTUtility;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
+import gregtech.client.utils.TooltipHelper;
 import gregtech.common.blocks.BlockBoilerCasing.BoilerCasingType;
 import gregtech.common.blocks.BlockMetalCasing.MetalCasingType;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
+import keqing.gtqtcore.client.textures.GTQTTextures;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
+
+import java.util.List;
+
+import static gregtech.api.GTValues.EV;
+
 //电催破乳
 public class MetaTileEntityELEOil extends RecipeMapMultiblockController {
 
     public MetaTileEntityELEOil(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.ELEOIL);
-        this.recipeMapWorkable = new MultiblockRecipeLogic(this, true);
+        this.recipeMapWorkable = new ELEOilLogic(this);
+    }
+
+    protected static class ELEOilLogic extends MultiblockRecipeLogic {
+
+        public ELEOilLogic(RecipeMapMultiblockController tileEntity) {
+            super(tileEntity, true);
+        }
+
+        private int ParallelTier(int tier) {
+            if (tier - 3 <= 0) {
+                return 4;
+            } else {
+                return 4 * (tier - EV);
+            }
+        }
+
+        @Override
+        public int getParallelLimit() {
+            int tier = GTUtility.getTierByVoltage(getMaxVoltage());
+            return Math.min(ParallelTier(tier), 16);
+        }
+
+        @Override
+        public void setMaxProgress(int maxProgress) {
+            this.maxProgressTime = (int) (maxProgress *0.8);
+        }
+    }
+    @Override
+    public void addInformation( ItemStack stack, World player, List<String> tooltip, boolean advanced) {
+        super.addInformation(stack, player, tooltip, advanced);
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("石油滋生者", new Object[0]));
+        tooltip.add(I18n.format("根据输入电压获得并行，电压低于HV默认四并行，每超过HV一级并行数量加四"));
+        tooltip.add(I18n.format("默认耗时减免百分之二十"));
+        tooltip.add(I18n.format("最大并行：%s", 16));
     }
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {
         return new MetaTileEntityELEOil(metaTileEntityId);
     }
-
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
@@ -59,10 +103,9 @@ public class MetaTileEntityELEOil extends RecipeMapMultiblockController {
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
         return Textures.CLEAN_STAINLESS_STEEL_CASING;
     }
-
     @Nonnull
     @Override
     protected ICubeRenderer getFrontOverlay() {
-        return Textures.FUSION_REACTOR_OVERLAY;
+        return GTQTTextures.FRACKER_OVERLAY;
     }
 }

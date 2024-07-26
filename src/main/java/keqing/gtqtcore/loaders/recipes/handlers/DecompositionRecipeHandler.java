@@ -98,15 +98,15 @@ public class DecompositionRecipeHandler {
         if (material.hasFlag(DECOMPOSITION_BY_ELECTROLYZING)) {
             builder =  ELECTROBATH.recipeBuilder()
                     .notConsumable(electrode,Platinum,1)
-                    .tier(3)
+                    .tier(1)
                     .duration(((int) material.getProtons() * totalInputAmount * 2))
-                    .EUt(material.getMaterialComponents().size() <= 2 ? VA[EV] : 2 * VA[EV]);
+                    .EUt(material.getMaterialComponents().size() <= 2 ? VA[MV] : 2 * VA[MV]);
         } else {
             builder = ELECTROBATH.recipeBuilder()
                     .notConsumable(electrode,Palladium,1)
-                    .tier(4)
+                    .tier(2)
                     .duration((int) Math.ceil(material.getMass() * totalInputAmount * 1.5))
-                    .EUt(VA[EV]);
+                    .EUt(VA[MV]);
         }
         builder.outputs(outputs);
         builder.fluidOutputs(fluidOutputs);

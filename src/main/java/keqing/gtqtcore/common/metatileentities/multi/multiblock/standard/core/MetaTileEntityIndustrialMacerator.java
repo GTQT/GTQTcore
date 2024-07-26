@@ -92,68 +92,22 @@ public class MetaTileEntityIndustrialMacerator extends GTQTMultiblockCore {
         return GTQTTextures.IRIDIUM_CASING;
     }
 
-    private boolean onRotorHolderInteract( EntityPlayer player) {
-
-        if (player.isCreative()) return false;
-
-        if (!getWorld().isRemote && this.isActive()) {
-            player.attackEntityFrom(DamageSources.getTurbineDamage(), 7);
-            AdvancementTriggers.ROTOR_HOLDER_DEATH.trigger((EntityPlayerMP) player);
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    @Override
-    public boolean onRightClick(EntityPlayer playerIn,
-                                EnumHand hand,
-                                EnumFacing facing,
-                                CuboidRayTraceResult hitResult) {
-        return onRotorHolderInteract(playerIn) || super.onRightClick(playerIn, hand, facing, hitResult);
-    }
-
-    @Override
-    public boolean onWrenchClick(EntityPlayer playerIn,
-                                 EnumHand hand,
-                                 EnumFacing facing,
-                                 CuboidRayTraceResult hitResult) {
-        return onRotorHolderInteract(playerIn) || super.onWrenchClick(playerIn, hand, facing, hitResult);
-    }
-
-    @Override
-    public boolean onScrewdriverClick(EntityPlayer playerIn,
-                                      EnumHand hand,
-                                      EnumFacing facing,
-                                      CuboidRayTraceResult hitResult) {
-        return onRotorHolderInteract(playerIn);
-    }
-
-    @Override
-    public void onLeftClick(EntityPlayer player,
-                            EnumFacing facing,
-                            CuboidRayTraceResult hitResult) {
-        onRotorHolderInteract(player);
-    }
-
     @Override
     public void update() {
         super.update();
     }
 
-    @Override
-    public void renderMetaTileEntity(CCRenderState renderState,
-                                     Matrix4 translation,
-                                     IVertexOperation[] pipeline) {
-        super.renderMetaTileEntity(renderState, translation, pipeline);
-        GTQTTextures.ISA_MILL.renderSided(renderState, translation, pipeline, getFrontFacing(), isStructureFormed(), this.energyContainer.getEnergyStored()>0);
-    }
-
     @SideOnly(Side.CLIENT)
-
+    @Override
+    public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
+        super.renderMetaTileEntity(renderState, translation, pipeline);
+        this.getFrontOverlay().renderOrientedState(renderState, translation, pipeline, getFrontFacing(), true,
+                isStructureFormed());
+    }
+    @SideOnly(Side.CLIENT)
     @Override
     protected ICubeRenderer getFrontOverlay() {
-        return GTQTTextures.LARGE_FLUID_PHASE_TRANSFORMER_OVERLAY;
+        return GTQTTextures.CRYSTALLIZATION_CRUCIBLE_OVERLAY;
     }
 
     @Override

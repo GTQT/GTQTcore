@@ -68,7 +68,19 @@ public class MetaTileEntityFracturing extends MultiblockWithDisplayBase implemen
     protected IMultipleTankHandler inputFluidInventory;
     protected IMultipleTankHandler outputFluidInventory;
     protected IEnergyContainer energyContainer;
+    @Override
+    public NBTTagCompound writeToNBT(NBTTagCompound data) {
+        data.setInteger("thresholdPercentage", thresholdPercentage);
+        this.minerLogic.writeToNBT(data);
+        return super.writeToNBT(data);
+    }
 
+    @Override
+    public void readFromNBT(NBTTagCompound data) {
+        super.readFromNBT(data);
+        thresholdPercentage= data.getInteger("thresholdPercentage");
+        this.minerLogic.readFromNBT(data);
+    }
     @Override
     public boolean isInventoryFull() {
         return this.isInventoryFull;
@@ -272,12 +284,6 @@ public class MetaTileEntityFracturing extends MultiblockWithDisplayBase implemen
         }
     }
 
-
-
-
-    
-    
-    
     @Override
     public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, boolean advanced) {
         tooltip.add(I18n.format("gregtech.machine.miner.fluid_usage", getDrillingFluidConsumePerTick(), DrillingFluid.getLocalizedName()));
@@ -371,18 +377,6 @@ public class MetaTileEntityFracturing extends MultiblockWithDisplayBase implemen
     @Override
     public boolean hasMaintenanceMechanics() {
         return false;
-    }
-
-    @Override
-    public NBTTagCompound writeToNBT(NBTTagCompound data) {
-        super.writeToNBT(data);
-        return this.minerLogic.writeToNBT(data);
-    }
-
-    @Override
-    public void readFromNBT(NBTTagCompound data) {
-        super.readFromNBT(data);
-        this.minerLogic.readFromNBT(data);
     }
 
     @Override

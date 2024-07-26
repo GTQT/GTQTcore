@@ -19,6 +19,7 @@ import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.util.GTTransferUtils;
 import gregtech.client.renderer.ICubeRenderer;
+import gregtech.client.utils.TooltipHelper;
 import gregtech.common.blocks.BlockGlassCasing;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.GTQTValue;
@@ -28,9 +29,11 @@ import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTParticleAccelerator;
+import keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing;
 import keqing.gtqtcore.common.items.GTQTMetaItems;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.kqcc.MetaTileEntityParticleAccelerator;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -39,6 +42,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -48,6 +52,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import static gregtech.api.GTValues.V;
+import static gregtech.api.GTValues.VA;
 import static keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate.CP_PAF_CASING;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.TJMaterials.HydrogenSilsesquioxane;
@@ -244,8 +249,9 @@ public class MetaTileEntityPhotolithographyFactory extends MetaTileEntityBaseWit
         if(work)
         {
             //这里开始工作了
-            for(int i=0;i<4;i++)if(coreWork[i])
+            for(int i=0;i<4;i++)if(coreWork[i]&&this.energyContainer.getEnergyStored()- ((long) core[i][1] *VA[core[i][0]+core[i][2]])/laserTier>0)
             {
+                this.energyContainer.removeEnergy(((long) core[i][1] *VA[core[i][0]+core[i][2]])/laserTier);
                 core[i][4]++;
                 if (core[i][4] >= core[i][3]) {
                     for (int number = 0; number < item.length; number++)//辅助 数量 wafer等级 光刻胶等级
@@ -381,7 +387,7 @@ public class MetaTileEntityPhotolithographyFactory extends MetaTileEntityBaseWit
     }
 
     private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.PARTICLE_ACCELERATOR.getState(GTQTParticleAccelerator.MachineType.ACCELERATOR_CASING);
+        return GTQTMetaBlocks.TURBINE_CASING.getState(GTQTTurbineCasing.TurbineCasingType.IRIDIUM_CASING);
     }
 
     private static IBlockState getFrameState() {
@@ -395,5 +401,21 @@ public class MetaTileEntityPhotolithographyFactory extends MetaTileEntityBaseWit
     @Override
     public List<ITextComponent> getDataInfo() {
         return new LinkedList<>();
+    }
+
+    public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
+        super.addInformation(stack, player, tooltip, advanced);
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("织光织梦", new Object[0]));
+        tooltip.add(TooltipHelper.BLINKING_CYAN+I18n.format("工作模式：独立线程 >>核心线程数量:%s", 4));
+        tooltip.add(I18n.format("由输入的晶圆等级，光刻胶等级决定支持的光刻列表。基于可光刻数量（晶圆与光刻胶储量最小值）决定循环输出轮数。某类光刻晶圆输出数量（假设在列表内）如下：轮数（可光刻总数整除列表长度），如果此类光刻晶圆在余数列表内（可光刻总数取余列表长度），则输出再加一。"));
+        tooltip.add(I18n.format("对于单个线程，工作时长由：基础时长，数量，晶圆等级，光刻胶等级，加速器束流器共同决定;耗能为晶圆等级与光刻胶等级和对应的电压乘以线程工作数量除上加速器束流器等级决定。"));
+        tooltip.add(I18n.format("均分模式：开启后在各独立线程在不存在专职任务（各独立线程对不同种类的晶圆有不同的处理优先级，处理此类特定晶圆称之为专职任务）的情况下，会与最近的一个线程共享剩余任务处理进度（如果被共享的线程已完成部分工作进度，则共享未完成部分的工作进度），共同完成此任务。"));
+        tooltip.add(I18n.format("保险模式：开启后机器无论晶圆缓存持续工作，这意味着如果晶圆输入速度过慢，可光刻数量较少，设备只会输出前几类晶圆，而不会循环整个可光刻列表。"));
+        tooltip.add(I18n.format("退回缓存：返回非工作区缓存区的晶圆与光刻胶，已经进入独立线程缓存的物品不返回。"));
+        //tooltip.add(I18n.format("=================================="));
+        //tooltip.add(I18n.format("如宇宙间最精密的织梦者，以光年丈量着世界的边界，悄然模糊科技与艺术的边界。"));
+        //tooltip.add(I18n.format("如星辰运转于浩瀚银河之中，光线织工在超高速微电路上起舞绘制出纳米级的电路蓝图。"));
+        //tooltip.add(I18n.format("如同晨曦中露珠滑过蜘蛛网的细腻，每一滴都承载着光的意志，编织着电子世界的经纬。"));
+        //tooltip.add(I18n.format("如乐团中的每一位乐手，虽各自独立却又完美同步，演奏出超越物理极限的乐章。"));
     }
 }

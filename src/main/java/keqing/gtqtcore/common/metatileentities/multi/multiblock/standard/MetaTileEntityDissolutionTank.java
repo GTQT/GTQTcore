@@ -13,6 +13,7 @@ import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.ingredients.GTRecipeInput;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
+import gregtech.client.utils.TooltipHelper;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
@@ -80,7 +81,7 @@ public class MetaTileEntityDissolutionTank extends GTQTRecipeMapMultiblockOverwr
         return (int)(Math.min(this.energyContainer.getEnergyCapacity()/32,VA[glass_tier]));
 
     }
-    /*
+
     @Override
     public boolean checkRecipe(@Nonnull Recipe recipe, boolean consumeIfSuccess) {
         if (super.checkRecipe(recipe, consumeIfSuccess)) {
@@ -130,7 +131,7 @@ public class MetaTileEntityDissolutionTank extends GTQTRecipeMapMultiblockOverwr
             return false;
         }
     }
-     */
+
 
     @Nonnull
     @Override
@@ -184,6 +185,7 @@ public class MetaTileEntityDissolutionTank extends GTQTRecipeMapMultiblockOverwr
     @Override
     public void addInformation(ItemStack stack, @Nullable World world, @Nonnull List<String> tooltip, boolean advanced) {
         super.addInformation(stack, world, tooltip, advanced);
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("自动化噩梦", new Object[0]));
         tooltip.add(I18n.format("epimorphism.machine.dissolution_tank.tooltip.1"));
         tooltip.add(I18n.format("gregtech.machine.cracker.gtqtupdate.1"));
     }

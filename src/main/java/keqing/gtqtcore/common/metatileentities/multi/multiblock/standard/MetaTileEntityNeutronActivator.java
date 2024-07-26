@@ -11,7 +11,9 @@ import gregtech.api.pattern.*;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.util.BlockInfo;
 import gregtech.client.renderer.ICubeRenderer;
+import gregtech.client.renderer.texture.Textures;
 import gregtech.common.blocks.BlockGlassCasing;
+import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
@@ -33,6 +35,7 @@ import java.util.List;
 
 import static gregtech.api.util.RelativeDirection.*;
 import static keqing.gtqtcore.common.block.blocks.GTQTADVBlock.CasingType.HastelloyX78;
+import static keqing.gtqtcore.common.block.blocks.GTQTADVBlock.CasingType.Inconel792;
 
 public class MetaTileEntityNeutronActivator  extends RecipeMapMultiblockController {
     private int coilHeight;
@@ -115,7 +118,7 @@ public class MetaTileEntityNeutronActivator  extends RecipeMapMultiblockControll
         return FactoryBlockPattern.start(RIGHT, FRONT, UP)
                 .aisle("YYSYY", "YXXXY","YXXXY","YXXXY", "YYYYY")
                 .aisle("F   F", " GGG "," GHG "," GGG ", "F   F").setRepeatable(5, 25)
-                .aisle("XXXXX", "XXXXX","XXXXX","XXXXX", "XXXXX")
+                .aisle("YYYYY", "YXXXY","YXXXY","YXXXY", "YYYYY")
                 .where('S', selfPredicate())
                 .where('Y', states(getCasingState())
                         .or(abilities(MultiblockAbility.EXPORT_ITEMS).setMaxGlobalLimited(1))
@@ -124,7 +127,7 @@ public class MetaTileEntityNeutronActivator  extends RecipeMapMultiblockControll
                         .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setMaxGlobalLimited(1))
                         .or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(2))
                         .or(abilities(MultiblockAbility.MAINTENANCE_HATCH).setExactLimit(1)))
-                .where('X', states(getCasingState()))
+                .where('X', states(getCasingState1()))
                 .where('G', states(getGlassState()))
                 .where('F', states(getFrameState()))
                 .where('H', coilPredicate())
@@ -157,12 +160,21 @@ public class MetaTileEntityNeutronActivator  extends RecipeMapMultiblockControll
         return MetaBlocks.FRAMES.get(GTQTMaterials.MARM200Steel).getBlock(GTQTMaterials.MARM200Steel);
     }
     private IBlockState getCasingState() {
-        return GTQTMetaBlocks.ADV_BLOCK.getState(HastelloyX78);
+        return GTQTMetaBlocks.ADV_BLOCK.getState(Inconel792);
+    }
+    private IBlockState getCasingState1() {
+        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.TUNGSTENSTEEL_ROBUST);
     }
     @SideOnly(Side.CLIENT)
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
-        return GTQTTextures.HastelloyX78;
+        return GTQTTextures.Inconel792;
+    }
+    @SideOnly(Side.CLIENT)
+    @Nonnull
+    @Override
+    protected ICubeRenderer getFrontOverlay() {
+        return GTQTTextures.BURNER_REACTOR_OVERLAY;
     }
 
     public boolean hasMufflerMechanics() {

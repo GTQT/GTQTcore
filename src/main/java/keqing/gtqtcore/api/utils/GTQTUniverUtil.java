@@ -1,8 +1,12 @@
 package keqing.gtqtcore.api.utils;
 
+import com.google.common.collect.HashBasedTable;
+import com.google.common.collect.Table;
+import gregtech.api.GTValues;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.MetaTileEntityHolder;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
+import gregtech.api.recipes.RecipeMap;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockPart;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -27,6 +31,19 @@ public class GTQTUniverUtil {
         return defaultValue;
     }
 
+    private static final Table<RecipeMap<?>, Integer, ItemStack> MAP_TIER_TO_MACHINE_STACK = HashBasedTable.create();
+    public static ItemStack getMachineStack(RecipeMap<?> map, int tier, int count) {
+        if (tier < 0 || tier > GTValues.MAX) return ItemStack.EMPTY;
+        ItemStack stack = MAP_TIER_TO_MACHINE_STACK.get(map, tier);
+        if (stack == null) return ItemStack.EMPTY;
+        stack = stack.copy();
+        stack.setCount(count);
+        return stack;
+    }
+
+    public static ItemStack getMachineStack(RecipeMap<?> map, int tier) {
+        return getMachineStack(map, tier, 1);
+    }
     public static <T> T getOrDefault(BooleanSupplier canGet, Supplier<T> getter, T defaultValue){
         return canGet.getAsBoolean() ? getter.get() : defaultValue;
     }

@@ -35,6 +35,7 @@ import keqing.gtqtcore.api.metaileentity.multiblock.GTQTRecipeMapMultiblockOverw
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.utils.GTQTUtil;
+import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
@@ -226,6 +227,6 @@ public class MetaTileEntityBioCentrifuge extends GTQTRecipeMapMultiblockControll
     @Nonnull
     @Override
     protected ICubeRenderer getFrontOverlay() {
-        return Textures.FUSION_REACTOR_OVERLAY;
+        return GTQTTextures.INDUSTRIAL_ROASTER_OVERLAY;
     }
 }

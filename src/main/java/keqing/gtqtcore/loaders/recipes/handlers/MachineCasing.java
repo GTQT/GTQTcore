@@ -456,7 +456,7 @@ public class MachineCasing {
                 .input(plate, material, 6)
                 .input(frameGt, material)
                 .circuitMeta(6)
-                .outputs(outputCasingType.getItemVariant(outputCasing, ConfigHolder.recipes.casingsPerCraft))
+                .outputs(outputCasingType.getItemVariant(outputCasing))
                 .EUt(VA[LV])
                 .duration(50)
                 .buildAndRegister();

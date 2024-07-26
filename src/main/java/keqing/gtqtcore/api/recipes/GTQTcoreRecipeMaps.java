@@ -5,25 +5,13 @@ import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.widgets.ProgressWidget;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
-import gregtech.api.recipes.RecyclingHandler;
 import gregtech.api.recipes.builders.*;
-import gregtech.api.recipes.ingredients.GTRecipeInput;
-import gregtech.api.recipes.machines.RecipeMapAssemblyLine;
-import gregtech.api.unification.OreDictUnifier;
-import gregtech.api.unification.material.Materials;
-import gregtech.api.unification.stack.ItemMaterialInfo;
-import gregtech.api.util.AssemblyLineManager;
 import gregtech.core.sound.GTSoundEvents;
 import keqing.gtqtcore.api.capability.chemical_plant.ChemicalPlantBuilder;
 import keqing.gtqtcore.api.gui.GTQTGuiTextures;
 import keqing.gtqtcore.api.recipes.builder.*;
 import keqing.gtqtcore.api.recipes.machine.*;
 import keqing.gtqtcore.client.textures.GCYSGuiTextures;
-import keqing.gtqtcore.client.textures.GTQTTextures;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.FluidStack;
-
-import java.util.function.Consumer;
 
 
 //怎么写请看

@@ -279,7 +279,6 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityIndustrialWasher INDUSTRIAL_WASHER;
     public static MetaTileEntityIndustrialHammer INDUSTRIAL_HAMMER;
     public static MetaTileEntityIndustrialFurnace INDUSTRIAL_FURNACE;
-
     public static MetaTileEntityNuclearReactor NUCLEAR_REACTOR;
     public static MetaTileEntityLargeTurbine LARGE_FUEL_TURBINE;
     public static final MetaTileEntityReinforcedRotorHolder[] MULTIPART_REINFORCED_ROTOR_HOLDER = new MetaTileEntityReinforcedRotorHolder[8];

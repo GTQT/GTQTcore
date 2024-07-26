@@ -100,57 +100,10 @@ public class MetaTileEntityIndustrialWasher extends GTQTMultiblockCore {
         return GTQTTextures.IRIDIUM_CASING;
     }
 
-    private boolean onRotorHolderInteract( EntityPlayer player) {
-
-        if (player.isCreative()) return false;
-
-        if (!getWorld().isRemote && this.isActive()) {
-            player.attackEntityFrom(DamageSources.getTurbineDamage(), 7);
-            AdvancementTriggers.ROTOR_HOLDER_DEATH.trigger((EntityPlayerMP) player);
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    @Override
-    public boolean onRightClick(EntityPlayer playerIn,
-                                EnumHand hand,
-                                EnumFacing facing,
-                                CuboidRayTraceResult hitResult) {
-        return onRotorHolderInteract(playerIn) || super.onRightClick(playerIn, hand, facing, hitResult);
-    }
-
-    @Override
-    public boolean onWrenchClick(EntityPlayer playerIn,
-                                 EnumHand hand,
-                                 EnumFacing facing,
-                                 CuboidRayTraceResult hitResult) {
-        return onRotorHolderInteract(playerIn) || super.onWrenchClick(playerIn, hand, facing, hitResult);
-    }
-
-    @Override
-    public boolean onScrewdriverClick(EntityPlayer playerIn,
-                                      EnumHand hand,
-                                      EnumFacing facing,
-                                      CuboidRayTraceResult hitResult) {
-        return onRotorHolderInteract(playerIn);
-    }
-
-    @Override
-    public void onLeftClick(EntityPlayer player,
-                            EnumFacing facing,
-                            CuboidRayTraceResult hitResult) {
-        onRotorHolderInteract(player);
-    }
-
     @Override
     public void update() {
         super.update();
     }
-
-    @SideOnly(Side.CLIENT)
-
     @Override
     protected ICubeRenderer getFrontOverlay() {
         return GTQTTextures.LARGE_ROCKET_ENGINE_OVERLAY;
@@ -165,8 +118,8 @@ public class MetaTileEntityIndustrialWasher extends GTQTMultiblockCore {
     public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
         super.renderMetaTileEntity(renderState, translation, pipeline);
         getFrontOverlay().renderOrientedState(renderState, translation, pipeline, getFrontFacing(),
-                isStructureFormed(), this.energyContainer.getEnergyStored()>0);
-        if (this.energyContainer.getEnergyStored()>0 && isStructureFormed()) {
+                isStructureFormed(), isStructureFormed());
+        if (isStructureFormed()) {
             EnumFacing back = getFrontFacing().getOpposite();
             for(float i=-1;i<=1;i++) {
                 for (float j = -1; j <=1; j++) {

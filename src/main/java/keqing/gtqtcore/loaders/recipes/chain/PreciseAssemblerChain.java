@@ -13,16 +13,135 @@ import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.common.items.MetaItems.*;
+import static gregtech.common.metatileentities.MetaTileEntities.*;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.PRECISE_ASSEMBLER_RECIPES;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
+import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.*;
 
 public class PreciseAssemblerChain {
     public static void init() {
         MachineRecipes();//
         WorkStation();//工作站
+        Common();
     }
+
+    private static void Common() {
+        PRECISE_ASSEMBLER_RECIPES.recipeBuilder()
+                .input(CIRCUIT_GOOD_I,2)
+                .input(circuit,MarkerMaterials.Tier.LuV,8)
+                .input(CHEMICAL_PLANT,2)
+                .input(PARTICLE_ACCELERATOR_IO[1],2)
+                .fluidInputs(SolderingAlloy.getFluid(L * 8))
+                .fluidInputs(Tin.getFluid(L * 8))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 8))
+                .fluidInputs(Zylon.getFluid(L * 4))
+                .output(NEUTRON_ACTIVATOR)
+                .EUt(VA[IV])
+                .duration(600)
+                .Tier(1)
+                .CWUt(120)
+                .buildAndRegister();
+
+        //多线程设备
+        PRECISE_ASSEMBLER_RECIPES.recipeBuilder()
+                .input(CIRCUIT_GOOD_I,2)
+                .input(ELECTRIC_PISTON_IV,8)
+                .input(HULL[IV],8)
+                .input(MACERATOR[5],4)
+                .fluidInputs(SolderingAlloy.getFluid(L * 8))
+                .fluidInputs(Tin.getFluid(L * 8))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 8))
+                .fluidInputs(Zylon.getFluid(L * 4))
+                .output(INDUSTRIAL_MACERATOR)
+                .EUt(VA[IV])
+                .duration(600)
+                .Tier(1)
+                .CWUt(120)
+                .buildAndRegister();
+
+        PRECISE_ASSEMBLER_RECIPES.recipeBuilder()
+                .input(CIRCUIT_GOOD_I,2)
+                .input(ELECTRIC_MOTOR_IV,8)
+                .input(HULL[IV],8)
+                .input(CENTRIFUGE[5],4)
+                .fluidInputs(SolderingAlloy.getFluid(L * 8))
+                .fluidInputs(Tin.getFluid(L * 8))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 8))
+                .fluidInputs(Zylon.getFluid(L * 4))
+                .output(INDUSTRIAL_CENTRIFUGE)
+                .EUt(VA[IV])
+                .duration(600)
+                .Tier(1)
+                .CWUt(120)
+                .buildAndRegister();
+
+        PRECISE_ASSEMBLER_RECIPES.recipeBuilder()
+                .input(CIRCUIT_GOOD_I,2)
+                .input(ROBOT_ARM_IV,8)
+                .input(HULL[IV],8)
+                .input(MIXER[5],4)
+                .fluidInputs(SolderingAlloy.getFluid(L * 8))
+                .fluidInputs(Tin.getFluid(L * 8))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 8))
+                .fluidInputs(Zylon.getFluid(L * 4))
+                .output(INDUSTRIAL_MIX)
+                .EUt(VA[IV])
+                .duration(600)
+                .Tier(1)
+                .CWUt(120)
+                .buildAndRegister();
+
+        PRECISE_ASSEMBLER_RECIPES.recipeBuilder()
+                .input(CIRCUIT_GOOD_I,2)
+                .input(ELECTRIC_PUMP_IV)
+                .input(HULL[IV],8)
+                .input(ORE_WASHER[5],4)
+                .fluidInputs(SolderingAlloy.getFluid(L * 8))
+                .fluidInputs(Tin.getFluid(L * 8))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 8))
+                .fluidInputs(Zylon.getFluid(L * 4))
+                .output(INDUSTRIAL_WASHER)
+                .EUt(VA[IV])
+                .duration(600)
+                .Tier(1)
+                .CWUt(120)
+                .buildAndRegister();
+
+        PRECISE_ASSEMBLER_RECIPES.recipeBuilder()
+                .input(CIRCUIT_GOOD_I,2)
+                .input(CONVEYOR_MODULE_IV,8)
+                .input(HULL[IV],8)
+                .input(FORGE_HAMMER[5],4)
+                .fluidInputs(SolderingAlloy.getFluid(L * 8))
+                .fluidInputs(Tin.getFluid(L * 8))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 8))
+                .fluidInputs(Zylon.getFluid(L * 4))
+                .output(INDUSTRIAL_HAMMER)
+                .EUt(VA[IV])
+                .duration(600)
+                .Tier(1)
+                .CWUt(120)
+                .buildAndRegister();
+
+        PRECISE_ASSEMBLER_RECIPES.recipeBuilder()
+                .input(CIRCUIT_GOOD_I,2)
+                .input(VOLTAGE_COIL_IV,8)
+                .input(HULL[IV],8)
+                .input(ARC_FURNACE[5],4)
+                .fluidInputs(SolderingAlloy.getFluid(L * 8))
+                .fluidInputs(Tin.getFluid(L * 8))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 8))
+                .fluidInputs(Zylon.getFluid(L * 4))
+                .output(INDUSTRIAL_FURNACE)
+                .EUt(VA[IV])
+                .duration(600)
+                .Tier(1)
+                .CWUt(120)
+                .buildAndRegister();
+    }
+
 
     private static void WorkStation() {
         ASSEMBLER_RECIPES.recipeBuilder()

@@ -1,5 +1,6 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
+import codechicken.lib.raytracer.CuboidRayTraceResult;
 import gregtech.api.capability.IMultipleTankHandler;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.gui.GuiTextures;
@@ -17,14 +18,18 @@ import gregtech.api.util.TextComponentUtil;
 import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
+import gregtech.client.utils.TooltipHelper;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -45,6 +50,17 @@ public class MetaTileEntityGantryCrane extends RecipeMapMultiblockController imp
         super(metaTileEntityId, GTQTcoreRecipeMaps.GANTRY_CRANE);
         this.recipeMapWorkable = new MFSWorkableHandler(this);
     }
+    int updatetime=1;
+    boolean work=true;
+    public boolean onScrewdriverClick(EntityPlayer playerIn, EnumHand hand, EnumFacing facing, CuboidRayTraceResult hitResult) {
+        work=!work;
+        if(!work)return true;
+        if(updatetime<=19) updatetime++;
+        else updatetime=1;
+        playerIn.sendMessage(new TextComponentTranslation("输入效率：%s tick",updatetime));
+        return true;
+    }
+
     private class MFSWorkableHandler extends MultiblockRecipeLogic {
 
         public MFSWorkableHandler(RecipeMapMultiblockController tileEntity) {
@@ -98,7 +114,7 @@ public class MetaTileEntityGantryCrane extends RecipeMapMultiblockController imp
         return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STAINLESS_CLEAN);
     }
     int[] steam=new int[3];
-    FluidStack STEAM = Steam.getFluid(1000);
+    FluidStack STEAM = Steam.getFluid(1000*updatetime);
     @Override
     public void update() {
         super.update();
@@ -106,7 +122,7 @@ public class MetaTileEntityGantryCrane extends RecipeMapMultiblockController imp
             IMultipleTankHandler inputTank = getInputFluidInventory();
             if (STEAM.isFluidStackIdentical(inputTank.drain(STEAM, false))) {
                 inputTank.drain(STEAM, true);
-                steam[0] = steam[0] + 800;
+                steam[0] = steam[0] + 800*updatetime;
 
             }
         }
@@ -139,6 +155,7 @@ public class MetaTileEntityGantryCrane extends RecipeMapMultiblockController imp
         data.setInteger("fluid1", steam[0]);
         data.setInteger("fluid2", steam[1]);
         data.setInteger("fluid3", steam[2]);
+        data.setInteger("updatetime",updatetime);
         return super.writeToNBT(data);
     }
 
@@ -148,6 +165,7 @@ public class MetaTileEntityGantryCrane extends RecipeMapMultiblockController imp
         steam[0] = data.getInteger("fluid1");
         steam[1] = data.getInteger("fluid2");
         steam[2] = data.getInteger("fluid3");
+        updatetime = data.getInteger("updatetime");
     }
     public  boolean getStatue()
     {
@@ -201,7 +219,9 @@ public class MetaTileEntityGantryCrane extends RecipeMapMultiblockController imp
     @Override
     public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("黄焖鸡米饭", new Object[0]));
         tooltip.add(I18n.format("gregtech.machine.gc.tooltip.4"));
+        tooltip.add(I18n.format("gregtech.machine.msf.tooltip.4"));
     }
     @SideOnly(Side.CLIENT)
     @Override

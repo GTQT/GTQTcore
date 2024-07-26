@@ -27,6 +27,7 @@ import gregtech.client.utils.TooltipHelper;
 import gregtech.common.blocks.*;
 import keqing.gtqtcore.api.metaileentity.multiblock.GTQTRecipeMapMultiblockOverwrite;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
+import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
@@ -117,11 +118,11 @@ public class MetaTileEntityDigester extends GTQTRecipeMapMultiblockOverwrite {
     @Override
     public void addInformation(ItemStack stack, @Nullable World player, @Nonnull List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("这是什么，塞进去煮煮", new Object[0]));
         tooltip.add(I18n.format("gtqtcore.multiblock.hb.tooltip.3"));
         tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.1"));
         tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.2",24));
         tooltip.add(I18n.format("gregtech.machine.cracker.gtqtupdate.1"));
-        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("这是什么，塞进去煮煮", new Object[0]));
     }
 
     @Nonnull
@@ -238,6 +239,11 @@ public class MetaTileEntityDigester extends GTQTRecipeMapMultiblockOverwrite {
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
         return Textures.ROBUST_TUNGSTENSTEEL_CASING;
+    }
+    @Nonnull
+    @Override
+    protected ICubeRenderer getFrontOverlay() {
+        return GTQTTextures.BIO_REACTOR_OVERLAY;
     }
     protected int getCoilTier() {
         return this.coilTier;

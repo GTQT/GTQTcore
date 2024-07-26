@@ -15,6 +15,7 @@ import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.material.Materials;
 import gregtech.client.renderer.ICubeRenderer;
+import gregtech.client.renderer.texture.Textures;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.core.advancement.AdvancementTriggers;
 import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockCore;
@@ -89,60 +90,22 @@ public class MetaTileEntityIndustrialHammer extends GTQTMultiblockCore {
         return GTQTTextures.IRIDIUM_CASING;
     }
 
-    private boolean onRotorHolderInteract( EntityPlayer player) {
-
-        if (player.isCreative()) return false;
-
-        if (!getWorld().isRemote && this.isActive()) {
-            player.attackEntityFrom(DamageSources.getTurbineDamage(), 7);
-            AdvancementTriggers.ROTOR_HOLDER_DEATH.trigger((EntityPlayerMP) player);
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    @Override
-    public boolean onRightClick(EntityPlayer playerIn,
-                                EnumHand hand,
-                                EnumFacing facing,
-                                CuboidRayTraceResult hitResult) {
-        return onRotorHolderInteract(playerIn) || super.onRightClick(playerIn, hand, facing, hitResult);
-    }
-
-    @Override
-    public boolean onWrenchClick(EntityPlayer playerIn,
-                                 EnumHand hand,
-                                 EnumFacing facing,
-                                 CuboidRayTraceResult hitResult) {
-        return onRotorHolderInteract(playerIn) || super.onWrenchClick(playerIn, hand, facing, hitResult);
-    }
-
-    @Override
-    public boolean onScrewdriverClick(EntityPlayer playerIn,
-                                      EnumHand hand,
-                                      EnumFacing facing,
-                                      CuboidRayTraceResult hitResult) {
-        return onRotorHolderInteract(playerIn);
-    }
-
-    @Override
-    public void onLeftClick(EntityPlayer player,
-                            EnumFacing facing,
-                            CuboidRayTraceResult hitResult) {
-        onRotorHolderInteract(player);
-    }
-
     @Override
     public void update() {
         super.update();
     }
 
     @SideOnly(Side.CLIENT)
-
+    @Override
+    public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
+        super.renderMetaTileEntity(renderState, translation, pipeline);
+        this.getFrontOverlay().renderOrientedState(renderState, translation, pipeline, getFrontFacing(), true,
+                isStructureFormed());
+    }
+    @SideOnly(Side.CLIENT)
     @Override
     protected ICubeRenderer getFrontOverlay() {
-        return GTQTTextures.BURNER_REACTOR_OVERLAY;
+        return GTQTTextures.DRYER_OVERLAY;
     }
 
     @Override

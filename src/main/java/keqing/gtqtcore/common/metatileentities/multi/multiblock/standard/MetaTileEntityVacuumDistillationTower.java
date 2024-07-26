@@ -18,6 +18,7 @@ import gregtech.common.blocks.BlockBoilerCasing.BoilerCasingType;
 import gregtech.common.blocks.BlockGlassCasing;
 import gregtech.common.blocks.BlockMetalCasing.MetalCasingType;
 import gregtech.common.blocks.MetaBlocks;
+import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityFluidHatch;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiFluidHatch;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
@@ -85,7 +86,7 @@ public class MetaTileEntityVacuumDistillationTower extends RecipeMapMultiblockCo
                 .where('D', states(this.getCasingState()))
                 .where('X', states(getCasingState())
                         .or(metaTileEntities(MultiblockAbility.REGISTRY.get(MultiblockAbility.EXPORT_FLUIDS).stream()
-                                .filter(mte->!(mte instanceof MetaTileEntityMultiFluidHatch))
+                                .filter(mte->(mte instanceof MetaTileEntityFluidHatch))
                                 .toArray(MetaTileEntity[]::new))
                                 .setMinLayerLimited(1).setMaxLayerLimited(1))
                         .or(autoAbilities(true, false)))

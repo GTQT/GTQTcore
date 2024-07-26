@@ -15,6 +15,7 @@ import gregtech.api.recipes.Recipe;
 import gregtech.api.util.BlockInfo;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
+import gregtech.client.utils.TooltipHelper;
 import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.BlockWireCoil;
@@ -25,6 +26,7 @@ import gregtechfoodoption.block.GTFOMetaBlocks;
 import gregtechfoodoption.client.GTFOGuiTextures;
 import gregtechfoodoption.recipe.GTFORecipeMaps;
 import gregtechfoodoption.utils.GTFOLog;
+import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
@@ -209,6 +211,7 @@ public class MetaTileEntityGreenhousePlus extends RecipeMapMultiblockController 
     @Override
     public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("绿化", new Object[0]));
         tooltip.add(I18n.format("gregtechfoodoption.machine.greenhouse.tooltip.1"));
         tooltip.add(I18n.format("gregtechfoodoption.machine.greenhouse.tooltip.2"));
         tooltip.add(I18n.format("gtqtcore.machine.greenhouse.tooltip.4"));
@@ -346,7 +349,11 @@ public class MetaTileEntityGreenhousePlus extends RecipeMapMultiblockController 
     public boolean isMultiblockPartWeatherResistant( IMultiblockPart part) {
         return true;
     }
-
+    @Nonnull
+    @Override
+    protected ICubeRenderer getFrontOverlay() {
+        return GTQTTextures.ROASTER_OVERLAY;
+    }
     @Override
     public boolean getIsWeatherOrTerrainResistant() {
         return true;

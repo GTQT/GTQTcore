@@ -299,7 +299,7 @@ public class MetaTileEntityOceanPumper extends MultiblockWithDisplayBase impleme
     @Nonnull
     @Override
     protected ICubeRenderer getFrontOverlay() {
-        return GTQTTextures.ALGAE_FARM_OVERLAY;
+        return GTQTTextures.CVD_UNIT_OVERLAY;
     }
 
     protected IBlockState getCasingState() {
