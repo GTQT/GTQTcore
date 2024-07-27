@@ -1,0 +1,31 @@
+{
+  "forge_marker": 1,
+  "variants": {
+    "variant": {
+      "remote_graviton_flow_modulator": {
+        "model": "minecraft:cube_bottom_top",
+        "textures": {
+          "top": "gtqtcore:blocks/casings/transcendentally_amplified_magnetic_confinement_casing",
+          "side": "gtqtcore:blocks/casings/remote_graviton_flow_modulator",
+          "bottom": "#top"
+        }
+      },
+      "medial_graviton_flow_modulator": {
+        "model": "minecraft:cube_bottom_top",
+        "textures": {
+          "top": "gtqtcore:blocks/casings/transcendentally_amplified_magnetic_confinement_casing",
+          "side": "gtqtcore:blocks/casings/medial_graviton_flow_modulator",
+          "bottom": "#top"
+        }
+      },
+      "central_graviton_flow_modulator": {
+        "model": "minecraft:cube_bottom_top",
+        "textures": {
+          "top": "gtqtcore:blocks/casings/transcendentally_amplified_magnetic_confinement_casing",
+          "side": "gtqtcore:blocks/casings/central_graviton_flow_modulator",
+          "bottom": "#top"
+        }
+      }
+    }
+  }
+}

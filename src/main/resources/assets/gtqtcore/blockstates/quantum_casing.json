@@ -1,50 +1,99 @@
 {
   "forge_marker": 1,
-  "defaults": {
-    "model": "minecraft:cube_all",
-    "textures": {
-      "all": "gregtech:blocks/rendering_error"
-    }
-  },
   "variants": {
     "variant": {
-      "motorblock": {
+      "high_energy_casing": {
         "model": "minecraft:cube_all",
         "textures": {
-          "all": "gregtech:blocks/multiblock/quantumcasing/motorblock"
+          "all": "gregtech:blocks/multiblock/quantumcasing/high_energy_casing"
         }
       },
-      "annihilationcasing": {
+      "advanced_high_energy_casing": {
         "model": "minecraft:cube_all",
         "textures": {
-          "all": "gregtech:blocks/multiblock/quantumcasing/annihilationcasing"
+          "all": "gregtech:blocks/multiblock/quantumcasing/advanced_high_energy_casing"
         }
       },
-      "dimensionalcasing": {
+      "ultimate_high_energy_casing": {
         "model": "minecraft:cube_all",
         "textures": {
-          "all": "gregtech:blocks/multiblock/quantumcasing/dimensionalcasing"
+          "all": "gregtech:blocks/multiblock/quantumcasing/ultimate_high_energy_casing"
         }
       },
-      "fieldgeneratorcasing": {
-        "model": "minecraft:cube_all",
+      "molecular_coil": {
+        "model": "minecraft:cube_bottom_top",
         "textures": {
-          "all": "gregtech:blocks/multiblock/quantumcasing/fieldgeneratorcasing"
+          "top": "gregtech:blocks/multiblock/quantumcasing/molecular_coil_top",
+          "side": "gregtech:blocks/multiblock/quantumcasing/molecular_coil",
+          "bottom": "#side"
         }
       },
-      "quantumcomputercasing": {
+      "hollow_casing": {
         "model": "minecraft:cube_all",
         "textures": {
-          "all": "gregtech:blocks/multiblock/quantumcasing/quantumcomputercasing"
+          "all": "gregtech:blocks/multiblock/quantumcasing/hollow_casing"
         }
       },
-      "quantumcasing": {
+      "field_generator_casing": {
         "model": "minecraft:cube_all",
         "textures": {
-          "all": "gregtech:blocks/multiblock/quantumcasing/quantumcasing"
+          "all": "gregtech:blocks/multiblock/quantumcasing/field_generator_casing"
+        }
+      },
+      "quantum_computer_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/quantumcasing/quantum_computer_casing"
+        }
+      },
+      "spacetime_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/quantumcasing/spacetime_casing"
+        }
+      },
+      "annihilation_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/quantumcasing/annihilation_casing"
+        }
+      },
+      "dimensional_bridge_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/quantumcasing/dimensional_bridge_casing"
+        }
+      },
+      "dimensional_preserve_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/quantumcasing/dimensional_preserve_casing"
+        }
+      },
+      "singularity_reinforced_stellar_shielding_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/quantumcasing/singularity_reinforced_stellar_shielding_casing"
+        }
+      },
+      "celestial_matter_guidance_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/quantumcasing/celestial_matter_guidance_casing"
+        }
+      },
+      "boundless_gravitationally_severed_structure_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/quantumcasing/boundless_gravitationally_severed_structure_casing"
+        }
+      },
+      "transcendentally_amplified_magnetic_confinement_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/quantumcasing/transcendentally_amplified_magnetic_confinement_casing"
         }
       }
     }
   }
 }
-

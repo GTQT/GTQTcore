@@ -29,12 +29,23 @@ public class GTQTQuantumCasing extends VariantBlock<GTQTQuantumCasing.CasingType
 
     public static enum CasingType implements IStringSerializable {
 
-        MOTOR_BLOCK("motorblock"),
-        ANNIHILATION_CASING("annihilationcasing"),
-        DIMENSIONAL_CASING("dimensionalcasing"),
-        FIELD_GENERATOR_CASING("fieldgeneratorcasing"),
-        QUANTUM_CASING("quantumcasing"),
-        QUANTUM_COMPUTER_CASING("quantumcomputercasing");
+
+        HIGH_ENERGY_CASING("high_energy_casing"),
+        ADVANCED_HIGH_ENERGY_CASING("advanced_high_energy_casing"),
+        ULTIMATE_HIGH_ENERGY_CASING("ultimate_high_energy_casing"),
+        ANNIHILATION_CASING("annihilation_casing"),
+        FIELD_GENERATOR_CASING("field_generator_casing"),
+        QUANTUM_COMPUTER_CASING("quantum_computer_casing"),
+        MOLECULAR_COIL("molecular_coil"),
+        HOLLOW_CASING("hollow_casing"),
+        SPACETIME_CASING("spacetime_casing"),
+        DIMENSIONAL_BRIDGE_CASING("dimensional_bridge_casing"),
+        DIMENSIONAL_PRESERVE_CASING("dimensional_preserve_casing"),
+        SINGULARITY_REINFORCED_STELLAR_SHIELDING_CASING("singularity_reinforced_stellar_shielding_casing"),
+        CELESTIAL_MATTER_GUIDANCE_CASING("celestial_matter_guidance_casing"),
+        BOUNDLESS_GRAVITATIONALLY_SEVERED_STRUCTURE_CASING("boundless_gravitationally_severed_structure_casing"),
+        TRANSCENDENTALLY_AMPLIFIED_MAGNETIC_CONFINEMENT_CASING("transcendentally_amplified_magnetic_confinement_casing");
+
 
         private final String name;
 

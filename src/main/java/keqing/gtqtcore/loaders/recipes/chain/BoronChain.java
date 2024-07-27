@@ -1,5 +1,7 @@
 package keqing.gtqtcore.loaders.recipes.chain;
 
+import keqing.gtqtcore.common.items.GTQTMetaItems;
+
 import static gregtech.api.GTValues.*;
 import static gregtech.api.GTValues.VA;
 import static gregtech.api.recipes.RecipeMaps.*;
@@ -15,7 +17,7 @@ public class BoronChain {
 
         //  Boric Acid + Hydrofluoric Acid -> Fluoroboric Acid + Water
         CHEMICAL_RECIPES.recipeBuilder()
-                .fluidInputs(BoricAcid.getFluid(1000))
+                .input(dust,BoricAcid,1)
                 .fluidInputs(HydrofluoricAcid.getFluid(4000))
                 .fluidOutputs(FluoroboricAcid.getFluid(1000))
                 .fluidOutputs(Water.getFluid(3000))
@@ -32,7 +34,7 @@ public class BoronChain {
                 .fluidOutputs(BenzenediazoniumTetrafluoroborate.getFluid(1000))
                 .fluidOutputs(Water.getFluid(2000))
                 .recipeLevel(4)
-                .EUt(VA[LuV])
+                .EUt(VA[IV])
                 .duration(120)
                 .buildAndRegister();
 
@@ -60,7 +62,7 @@ public class BoronChain {
 
         //  Sodium Nitrate + Co/AC-AB Catalyst -> Sodium Nitrite + Oxygen + Water
         CHEMICAL_PLANT.recipeBuilder()
-                .notConsumable(dust, CoACABCatalyst)
+                .notConsumable(GTQTMetaItems.CATALYST_FRAMEWORK_I)
                 .fluidInputs(SodiumNitrate.getFluid(1000))
                 .output(dust, SodiumNitrite, 4)
                 .fluidOutputs(Oxygen.getFluid(1000))

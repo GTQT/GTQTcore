@@ -30,6 +30,7 @@ public class GTQTMetaBlocks {
     public static GTQTTurbineCasing TURBINE_CASING;
     public static GTQTTurbineCasing1 TURBINE_CASING1;
     public static GTQTQuantumForceTransformerCasing QUANTUM_CONSTRAINT_CASING;
+    public static BlockGravitonCasing GRAVITON_CASING;
     public static GTQTBlockComponentAssemblyLineCasing COMPONENT_ASSEMBLY_LINE;
     public static GTQTIsaCasing ISA_CASING;
     public static BlockActiveUniqueCasing ACTIVE_UNIQUE_CASING;
@@ -74,6 +75,8 @@ public class GTQTMetaBlocks {
         TURBINE_CASING1.setRegistryName("turbine_casing1");
         QUANTUM_CONSTRAINT_CASING = new GTQTQuantumForceTransformerCasing();
         QUANTUM_CONSTRAINT_CASING.setRegistryName("quantum_force_transformer_casing");
+        GRAVITON_CASING = new BlockGravitonCasing();
+        GRAVITON_CASING.setRegistryName("graviton_casing");
         COMPONENT_ASSEMBLY_LINE = new GTQTBlockComponentAssemblyLineCasing();
         COMPONENT_ASSEMBLY_LINE.setRegistryName("component_assembly_line_casing");
         GCYL_CLEANROOM_CASING = new GCYLCleanroomCasing();
@@ -141,6 +144,7 @@ public class GTQTMetaBlocks {
         registerItemModel(ROAD);
         registerItemModel(TURBINE_CASING1);
         registerItemModel(QUANTUM_CONSTRAINT_CASING);
+        registerItemModel(GRAVITON_CASING);
         registerItemModel(COMPONENT_ASSEMBLY_LINE);
         registerItemModel(GCYL_CLEANROOM_CASING);
         registerItemModel(ISA_CASING);

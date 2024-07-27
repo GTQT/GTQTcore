@@ -27,9 +27,7 @@ import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.huge.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.kqcc.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.overwrite.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.MetaTileEntityCryogenicFreezer;
-import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.star.MetaTileEntityPlasmaForge;
-import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.star.MetaTileEntityStarBiomimeticFactory;
-import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.star.MetaTileEntityStarMixer;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.star.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.steam.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblockpart.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblockpart.MetaTileEntityDataAccessHatch;
@@ -118,9 +116,6 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityNaquadahReactorMkiii NAQUADAH_REACTOR_MKIII;
     public static MetaTileEntityDigester DIGESTER;
     public static final MetaTileEntityHugeFusionReactor[] HUGE_FUSION_REACTOR = new MetaTileEntityHugeFusionReactor[2];
-    public static MetaTileEntityStarBiomimeticFactory STAR_BIOMIMETIC_FACTORY;
-    public static MetaTileEntityPlasmaForge PLASMA_FORGE;
-    public static MetaTileEntityStarMixer STAR_MIXER;
     public static MetaTileEntitySteamCompressor STEAM_COMPRESSOR;
     public static MetaTileEntityStepper STEPPER;
     public static MetaTileEntitySeismicDetector SEISMIC_DETECTOR;
@@ -214,6 +209,8 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityCatalystHatch CATALYST_HATCH;
     public static MetaTileEntityKQNetworkSwitch KQNS;
     public static MetaTileEntityMegaCleanroom MEGA_CLEANROOM;
+    public static MetaTileEntityDimensionalMixer DIMENSIONAL_MIXER;
+    public static MetaTileEntityDimensionallyPlasmFurnace DIMENSIONAL_PLASMA_FURNACE;
     public static SimpleMachineMetaTileEntity[] AUTO_CHISEL = new SimpleMachineMetaTileEntity[3];
     public static MetaTileEntityThreeDim THREE_DIM_PRINT;
     public static MetaTileEntityELEOil ELE_OIL;
@@ -234,6 +231,8 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityKQCCComputationHatch[] KQCC_COMPUTATION_HATCH_RECEIVER=new MetaTileEntityKQCCComputationHatch[12];
     public static MetaTileEntityKQCCComputationHatch[] KQCC_COMPUTATION_HATCH_TRANSMITTER=new MetaTileEntityKQCCComputationHatch[12];
     public static MetaTileEntityMSF MSF;
+    public static MetaTileEntityNicollDysonBeamer NICOLL_DYSON_BEAMER;
+    public static MetaTileEntityDimensionallyBiomimeticFactory DIMENSIONAL_BIOMIMETIC_FACTORY;
     public static MetaTileEntityLargeBiomassGenerator LARGE_BIOMASS_GENERATOR;
     public static MetaTileEntityFluidRubbishBin FLUID_RUBBISH_BIN;
     public static MetaTileEntityCoolingTower COOLING_TOWER;
@@ -262,6 +261,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityPhotolithographyFactory PHOTOLITHOGRAPHY_FACTORY;
     public static MetaTileEntityMicrowaveEnergyReceiverControl MICROWAVE_ENERGY_RECEIVER_CONTROL;
     public static MetaTileEntityEXCVD EX_CVD;
+    public static MetaTileEntitySuprachronalNeutroniumForge SUPRACHRONAL_NEUTRONIUM_FORGE;
     public static MetaTileEntityStewStoolStove COAGULATION_TANK;
     public static MetaTileEntityBurnerReactor BURNER_REACTOR;
     public static MetaTileEntityCryoReactor CRYOGENIC_REACTOR;
@@ -272,7 +272,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityIndustrialDrill INDUSTRIAL_DRILL;
     public static MetaTileEntityIonImplanter ION_IMPLANTATOR;
     public static MetaTileEntityCZPuller CZ_PULLER;
-
+    public static MetaTileEntityDimensionallyTranscendentPlasmaForge DIMENSIONALLY_TRANSCENDENT_PLASMA_FORGE;
     public static MetaTileEntityIndustrialMacerator INDUSTRIAL_MACERATOR;
     public static MetaTileEntityIndustrialCentrifuge INDUSTRIAL_CENTRIFUGE;
     public static MetaTileEntityIndustrialMix INDUSTRIAL_MIX;
@@ -478,9 +478,13 @@ public class GTQTMetaTileEntities {
         HUGE_CRACKING_UNIT = registerMetaTileEntity(3314, new MetaTileEntityHugeCrackingUnit(gtqtcoreId("huge_cracking_unit")));
         HUGE_CHEMICAL_REACTOR = registerMetaTileEntity(3315, new MetaTileEntityHugeChemicalReactor(gtqtcoreId("huge_chemical_reactor")));
         //star
-        STAR_BIOMIMETIC_FACTORY= registerMetaTileEntity(3350, new MetaTileEntityStarBiomimeticFactory(gtqtcoreId("star_biomimetic_factory")));
-        PLASMA_FORGE= registerMetaTileEntity(3351, new MetaTileEntityPlasmaForge(gtqtcoreId("plasma_forge")));
-        STAR_MIXER= registerMetaTileEntity(3352, new MetaTileEntityStarMixer(gtqtcoreId("star_mixer")));
+
+        DIMENSIONALLY_TRANSCENDENT_PLASMA_FORGE = registerMetaTileEntity(3350, new MetaTileEntityDimensionallyTranscendentPlasmaForge(gtqtcoreId("dimensionally_transcendent_plasma_forge")));
+        DIMENSIONAL_MIXER = registerMetaTileEntity(3351, new MetaTileEntityDimensionalMixer(gtqtcoreId("dimensional_mixer")));
+        DIMENSIONAL_PLASMA_FURNACE = registerMetaTileEntity(3352, new MetaTileEntityDimensionallyPlasmFurnace(gtqtcoreId("dimensional_plasma_furnace")));
+        DIMENSIONAL_BIOMIMETIC_FACTORY = registerMetaTileEntity(3353, new MetaTileEntityDimensionallyBiomimeticFactory(gtqtcoreId("dimensional_biomimetic_factory")));
+        NICOLL_DYSON_BEAMER = registerMetaTileEntity(3354, new MetaTileEntityNicollDysonBeamer(gtqtcoreId("nicoll_dyson_beamer")));
+        SUPRACHRONAL_NEUTRONIUM_FORGE = registerMetaTileEntity(3355, new MetaTileEntitySuprachronalNeutroniumForge(gtqtcoreId("suprachronal_neutronium_forge")));
         //资源产出
         BASIC_FLUID_DRILLING_RIG = registerMetaTileEntity(3400, new MetaTileEntityFracturing(gtqtcoreId("fracturing.iv"), 5));
         FLUID_DRILLING_RIG = registerMetaTileEntity(3401, new MetaTileEntityFracturing(gtqtcoreId("fracturing.luv"), 6));

@@ -479,7 +479,7 @@ public class CPULine {
                 .input(POWER_INTEGRATED_CIRCUIT_WAFER)
                 .input(dust, IndiumGalliumPhosphide, 2)
                 .fluidInputs(VanadiumGallium.getFluid(L * 2))
-                .output(RETICLE_ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT)
+                .output(RETICLE_HIGH_POWER_INTEGRATED_CIRCUIT)
 
                 .CWUt(240)
                 .duration(600).EUt(VA[IV]).buildAndRegister();
@@ -488,8 +488,7 @@ public class CPULine {
                 .input(HIGH_POWER_INTEGRATED_CIRCUIT_WAFER)
                 .input(dust, IndiumGalliumPhosphide, 8)
                 .fluidInputs(Naquadah.getFluid(L * 4))
-                .output(RETICLE_HIGH_POWER_INTEGRATED_CIRCUIT)
-
+                .output(RETICLE_ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT)
                 .CWUt(480)
                 .duration(600).EUt(VA[LuV]).buildAndRegister();
 

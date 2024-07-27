@@ -22,6 +22,12 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
+import static keqing.gtqtcore.common.block.GTQTMetaBlocks.GRAVITON_CASING;
+import static keqing.gtqtcore.common.block.GTQTMetaBlocks.QUANTUM_CASING;
+import static keqing.gtqtcore.common.block.blocks.BlockGravitonCasing.GravitonCasingType.*;
+import static keqing.gtqtcore.common.block.blocks.GTQTCompressedFusionReactor.CasingType.*;
+import static keqing.gtqtcore.common.block.blocks.GTQTQuantumCasing.CasingType.*;
+
 public class TiredTraceabilityPredicate extends TraceabilityPredicate {
 
 
@@ -44,9 +50,9 @@ public class TiredTraceabilityPredicate extends TraceabilityPredicate {
         MAP_ZW_CASING = new Object2ObjectOpenHashMap<>();
         MAP_TJ_CASING = new Object2ObjectOpenHashMap<>();
         MAP_ZJ_CASING = new Object2ObjectOpenHashMap<>();
-
+        MAP_DC_CASING = new Object2ObjectOpenHashMap<>();
         MAP_PA_INTERNAL_CASING = new Object2ObjectOpenHashMap<>();
-
+        MAP_ND_CASING = new Object2ObjectOpenHashMap<>();
         MAP_PAF_CASING = new Object2ObjectOpenHashMap<>();
         MAP_PAE_CASING = new Object2ObjectOpenHashMap<>();
         MAP_PAV_CASING = new Object2ObjectOpenHashMap<>();
@@ -54,6 +60,38 @@ public class TiredTraceabilityPredicate extends TraceabilityPredicate {
         MAP_CPU_CASING = new Object2ObjectOpenHashMap<>();
         MAP_GPU_CASING = new Object2ObjectOpenHashMap<>();
         MAP_RAM_CASING = new Object2ObjectOpenHashMap<>();
+
+        MAP_FUSION_COIL = new Object2ObjectOpenHashMap<>();
+        //  Fusion Coil
+        TiredTraceabilityPredicate.MAP_FUSION_COIL.put(MetaBlocks.FUSION_CASING.getState(gregtech.common.blocks.BlockFusionCasing.CasingType.SUPERCONDUCTOR_COIL),
+                new WrappedIntTired(gregtech.common.blocks.BlockFusionCasing.CasingType.SUPERCONDUCTOR_COIL, 1));
+
+        TiredTraceabilityPredicate.MAP_FUSION_COIL.put(MetaBlocks.FUSION_CASING.getState(gregtech.common.blocks.BlockFusionCasing.CasingType.FUSION_COIL),
+                new WrappedIntTired(gregtech.common.blocks.BlockFusionCasing.CasingType.FUSION_COIL, 2));
+
+        TiredTraceabilityPredicate.MAP_FUSION_COIL.put(GTQTMetaBlocks.COMPRESSED_FUSION_REACTOR.getState(FUSION_COIL_MKII),
+                new WrappedIntTired(FUSION_COIL_MKII, 3));
+
+        TiredTraceabilityPredicate.MAP_FUSION_COIL.put(GTQTMetaBlocks.COMPRESSED_FUSION_REACTOR.getState(FUSION_COIL_MKIII),
+                new WrappedIntTired(FUSION_COIL_MKIII, 4));
+
+        TiredTraceabilityPredicate.MAP_FUSION_COIL.put(GTQTMetaBlocks.COMPRESSED_FUSION_REACTOR.getState(FUSION_COIL_MKIV),
+                new WrappedIntTired(FUSION_COIL_MKIV, 5));
+
+        TiredTraceabilityPredicate.MAP_DC_CASING.put(QUANTUM_CASING.getState(HIGH_ENERGY_CASING),
+                new WrappedIntTired(HIGH_ENERGY_CASING, 1));
+        TiredTraceabilityPredicate.MAP_DC_CASING.put(QUANTUM_CASING.getState(ADVANCED_HIGH_ENERGY_CASING),
+                new WrappedIntTired(ADVANCED_HIGH_ENERGY_CASING, 2));
+        TiredTraceabilityPredicate.MAP_DC_CASING.put(QUANTUM_CASING.getState(ULTIMATE_HIGH_ENERGY_CASING),
+                new WrappedIntTired(ULTIMATE_HIGH_ENERGY_CASING, 3));
+
+        TiredTraceabilityPredicate.MAP_ND_CASING.put(GRAVITON_CASING.getState(REMOTE_GRAVITON_FLOW_MODULATOR),
+                new WrappedIntTired(REMOTE_GRAVITON_FLOW_MODULATOR, 1));
+        TiredTraceabilityPredicate.MAP_ND_CASING.put(GRAVITON_CASING.getState(MEDIAL_GRAVITON_FLOW_MODULATOR),
+                new WrappedIntTired(MEDIAL_GRAVITON_FLOW_MODULATOR, 2));
+        TiredTraceabilityPredicate.MAP_ND_CASING.put(GRAVITON_CASING.getState(CENTRAL_GRAVITON_FLOW_MODULATOR),
+                new WrappedIntTired(CENTRAL_GRAVITON_FLOW_MODULATOR, 3));
+
 
         TiredTraceabilityPredicate.MAP_PA_CASING.put(GTQTMetaBlocks.TURBINE_CASING1.getState(GTQTTurbineCasing1.TurbineCasingType.PRECISE_ASSEMBLER_CASING_MK1),
                 new WrappedIntTired(GTQTTurbineCasing1.TurbineCasingType.PRECISE_ASSEMBLER_CASING_MK1, 1));
@@ -376,6 +414,9 @@ public class TiredTraceabilityPredicate extends TraceabilityPredicate {
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_PA_CASING;
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_SP_CASING;
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_PA_INTERNAL_CASING;
+    public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_DC_CASING;
+    public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_ND_CASING;
+
     //光刻系统
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_ZW_CASING;
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_TJ_CASING;
@@ -388,6 +429,11 @@ public class TiredTraceabilityPredicate extends TraceabilityPredicate {
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_PAF_CASING;
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_PAE_CASING;
     public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_PAV_CASING;
+    public static final Object2ObjectOpenHashMap<IBlockState,ITired> MAP_FUSION_COIL;
+
+
+    public static TraceabilityPredicate CP_FC_CASING = new TiredTraceabilityPredicate(MAP_FUSION_COIL,
+            Comparator.comparing((s) -> ((WrappedIntTired)MAP_FUSION_COIL.get(s)).getIntTier()),"FusionCoil",null);
 
     public static TraceabilityPredicate CP_PAF_CASING = new TiredTraceabilityPredicate(MAP_PAF_CASING,
             Comparator.comparing((s) -> ((WrappedIntTired)MAP_PAF_CASING.get(s)).getIntTier()),"PAF",null);
@@ -443,6 +489,15 @@ public class TiredTraceabilityPredicate extends TraceabilityPredicate {
 
     public static TraceabilityPredicate CP_PA_INTERNAL_CASING =new TiredTraceabilityPredicate(MAP_PA_INTERNAL_CASING,
             Comparator.comparing((s) -> ((WrappedIntTired)MAP_PA_INTERNAL_CASING.get(s)).getIntTier()), "PAI", null);
+
+
+    public static TraceabilityPredicate CP_DM_CASING =new TiredTraceabilityPredicate(MAP_DC_CASING,
+            Comparator.comparing((s) -> ((WrappedIntTired)MAP_DC_CASING.get(s)).getIntTier()), "FieldCasing", null);
+
+
+    public static TraceabilityPredicate CP_ND_CASING =new TiredTraceabilityPredicate(MAP_ND_CASING,
+            Comparator.comparing((s) -> ((WrappedIntTired)MAP_ND_CASING.get(s)).getIntTier()), "ND", null);
+
 
     public static TraceabilityPredicate CP_SP_CASING =new TiredTraceabilityPredicate(MAP_SP_CASING,
             Comparator.comparing((s) -> ((WrappedIntTired)MAP_SP_CASING.get(s)).getIntTier()), "SP", null);
