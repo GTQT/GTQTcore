@@ -52,7 +52,7 @@ public class GTQTMaterials {
     public static Material SuperheavyHAlloy;
     public static Material SuperheavyLAlloy;
     public static Material PlatinumGroupAlloy;
-
+    public static Material Abyssalloy;
     public static Material MagnetoHydrodynamicallyConstrainedStarMatter;
     public static Material Draconium;
     public static Material AwakenedDraconium;
@@ -745,6 +745,7 @@ public class GTQTMaterials {
     public static Material PPB;
     public static Material PPBFront;
     public static Material GlassGlaze;
+    public static Material Solarium;
 
     //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/api/unification/GSMaterials.java
 

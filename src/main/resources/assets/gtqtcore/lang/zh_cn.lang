@@ -3289,7 +3289,8 @@ metaitem.rock.bet1.name=沼泽变质岩碎片
 metaitem.rock.bet2.name=沼泽沉积岩碎片
 metaitem.rock.bet3.name=沼泽冲击岩碎片
 metaitem.rock.bet4.name=沼泽页岩碎片
-
+gregtech.material.solarium=阳光合金
+gregtech.material.abyssalloy=渊狱合金
 metaitem.sun_matter.name=阳光化合物
 metaitem.sunlinse.name=日光透镜
 metaitem.sunnariumpart.name=日光金属偏振片

@@ -120,7 +120,6 @@ public class GTQTRecipesManager {
         GTComponents.init();
         PlatinumDeal.init();
         DecompositionRecipeHandler.runRecipeGeneration();
-        TESEDecompositionRecipeHandler.runRecipeGeneration();
         CircuitryMaterialChains.init();
         MetaTileEntityLoader.init();
         MetaTileEntityMachine.init();

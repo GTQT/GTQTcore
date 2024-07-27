@@ -20,8 +20,8 @@ import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 import net.minecraftforge.oredict.OreDictionary;
 
 import static gregicality.multiblocks.api.unification.GCYMMaterials.*;
-import static gregicality.multiblocks.common.metatileentities.GCYMMetaTileEntities.LARGE_DISTILLERY;
-import static gregicality.multiblocks.common.metatileentities.GCYMMetaTileEntities.LARGE_MACERATOR;
+import static gregicality.multiblocks.common.metatileentities.GCYMMetaTileEntities.*;
+import static gregicality.multiblocks.common.metatileentities.GCYMMetaTileEntities.LARGE_CIRCUIT_ASSEMBLER;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.MarkerMaterials.*;
@@ -36,6 +36,7 @@ import static gregtech.common.blocks.BlockMetalCasing.MetalCasingType.BRONZE_BRI
 import static gregtech.common.blocks.MetaBlocks.*;
 import static gregtech.common.items.MetaItems.*;
 import static gregtech.common.metatileentities.MetaTileEntities.ADVANCED_FLUID_DRILLING_RIG;
+import static gregtech.common.metatileentities.MetaTileEntities.ASSEMBLY_LINE;
 import static gregtech.common.metatileentities.MetaTileEntities.FLUID_DRILLING_RIG;
 import static gregtech.common.metatileentities.MetaTileEntities.FUSION_REACTOR;
 
@@ -291,6 +292,95 @@ public class KeQingNET {
                         .EUt(VA[HV]))
                 .output(ADV_KQCC)
                 .duration(2000).EUt(480).buildAndRegister();
+
+        //  Component Assembly Line
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(CIRCUIT_GOOD_II,8)
+                .input(ASSEMBLY_LINE,8)
+                .input(frameGt, Cinobite, 16)
+                .input(PRECISE_ASSEMBLER, 16)
+                .input(COMPONENT_ASSEMBLER[IV], 16)
+                .input(ROBOT_ARM_LuV, 64)
+                .input(CONVEYOR_MODULE_LuV, 64)
+                .input(plateDouble, Naquadria, 6)
+                .input(plateDouble, Pikyonium64B, 6)
+                .input(gear, TungstenSteel,6)
+                .input(gearSmall, TitanSteel, 32)
+                .input(wireFine, Ruridit, 64)
+                .input(wireFine, Ruridit, 64)
+                .input(wireGtSingle, LuVSuperconductor, 64)
+                .input(wireGtSingle, LuVSuperconductor, 64)
+                .fluidInputs(Polybenzimidazole.getFluid(L * 32))
+                .fluidInputs(Zylon.getFluid(L * 64))
+                .fluidInputs(TitaniumTungstenCarbide.getFluid(L * 64))
+                .fluidInputs(UltraGlue.getFluid(L * 64))
+                .output(COMPONENT_ASSEMBLY_LINE)
+                .EUt(VA[LuV])
+                .duration(1200)
+                .stationResearch(b -> b
+                        .researchStack(COMPONENT_ASSEMBLER[IV].getStackForm())
+                        .CWUt(LuV)
+                        .EUt(VA[UV]))
+                .buildAndRegister();
+
+        //  Advanced Assembly Line
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(CIRCUIT_GOOD_II,8)
+                .input(ASSEMBLY_LINE,8)
+                .input(frameGt, Pikyonium64B, 4)
+                .input(ASSEMBLER[IV], 8)
+                .input(CIRCUIT_ASSEMBLER[LuV], 8)
+                .input(ROBOT_ARM_LuV, 4)
+                .input(EMITTER_LuV, 2)
+                .input(CONVEYOR_MODULE_LuV, 2)
+                .input(plateDouble, HY1301, 6)
+                .input(plateDouble, Naquadria, 6)
+                .input(wireFine, Ruridit, 64)
+                .input(wireFine, Ruridit, 64)
+                .input(wireGtSingle, LuVSuperconductor, 64)
+                .input(wireGtSingle, LuVSuperconductor, 64)
+                .fluidInputs(Polybenzimidazole.getFluid(L * 32))
+                .fluidInputs(Zylon.getFluid(L * 64))
+                .fluidInputs(TitaniumTungstenCarbide.getFluid(L * 64))
+                .fluidInputs(UltraGlue.getFluid(L * 64))
+                .output(ADVANCED_ASSEMBLY_LINE)
+                .EUt(VA[LuV])
+                .duration(1200)
+                .stationResearch(b -> b
+                        .researchStack(ASSEMBLY_LINE.getStackForm())
+                        .CWUt(32)
+                        .EUt(VA[LuV]))
+                .buildAndRegister();
+
+        //  Large Circuit Assembly Line
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(CIRCUIT_GOOD_II,8)
+                .input(ASSEMBLY_LINE)
+                .input(LARGE_CIRCUIT_ASSEMBLER, 4)
+                .input(CIRCUIT_ASSEMBLER[LuV], 16)
+                .input(frameGt, HastelloyC59, 16)
+                .input(ROBOT_ARM_LuV, 64)
+                .input(CONVEYOR_MODULE_LuV, 64)
+                .input(plateDouble, Tantalloy61, 6)
+                .input(plateDouble, MARM200CeSteel, 6)
+                .input(gear, HSSE,6)
+                .input(gearSmall, Osmiridium, 3)
+                .input(wireFine, Ruridit, 64)
+                .input(wireFine, Ruridit, 64)
+                .input(wireGtSingle, LuVSuperconductor, 64)
+                .input(wireGtSingle, LuVSuperconductor, 64)
+                .fluidInputs(Polybenzimidazole.getFluid(L * 32))
+                .fluidInputs(Zylon.getFluid(L * 64))
+                .fluidInputs(TitaniumTungstenCarbide.getFluid(L * 64))
+                .fluidInputs(UltraGlue.getFluid(L * 64))
+                .output(LARGE_CIRCUIT_ASSEMBLY_LINE)
+                .EUt(VA[LuV])
+                .duration(1200)
+                .scannerResearch(b -> b
+                        .researchStack(LARGE_CIRCUIT_ASSEMBLER.getStackForm())
+                        .EUt(VA[IV])
+                        .duration(600))
+                .buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .inputs(POWER.getItemVariant(POWER_SUPPLY_BASIC))

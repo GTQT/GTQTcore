@@ -72,17 +72,6 @@ public class NanotubesChain {
                 .EUt(VA[IV])
                 .buildAndRegister();
 
-        //  24C2H2 + 16N -> C48 + 16NH3
-        CVD_RECIPES.recipeBuilder()
-                .input(plateDouble, Rhenium)
-                .fluidInputs(Acetylene.getFluid(24000))
-                .fluidInputs(Nitrogen.getPlasma(16000))
-                .output(stickLong, CarbonNanotube)
-                .fluidOutputs(Ammonia.getFluid(16000))
-                .duration(1200)
-                .EUt(VA[UEV])
-                .buildAndRegister();
-
         //  Decomposition
         ELECTROLYZER_RECIPES.recipeBuilder()
                 .input(dust, CarbonNanotube)

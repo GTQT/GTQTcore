@@ -3,16 +3,14 @@ package keqing.gtqtcore.loaders.recipes.handlers;
 import gregtech.api.block.VariantBlock;
 import gregtech.api.recipes.ModHandler;
 import gregtech.api.recipes.RecipeMaps;
+import gregtech.api.unification.material.MarkerMaterials;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.stack.UnificationEntry;
 import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.common.block.blocks.GTQTADVBlock;
-import keqing.gtqtcore.common.block.blocks.GTQTIsaCasing;
-import keqing.gtqtcore.common.block.blocks.GTQTMultiblockCasing;
-import keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing;
+import keqing.gtqtcore.common.block.blocks.*;
 import net.minecraft.util.IStringSerializable;
 
 import static gregicality.multiblocks.api.recipes.GCYMRecipeMaps.ALLOY_BLAST_RECIPES;
@@ -22,7 +20,8 @@ import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
-import static gregtech.common.items.MetaItems.COMPONENT_GRINDER_TUNGSTEN;
+import static gregtech.common.items.MetaItems.*;
+import static gregtech.common.items.MetaItems.ELECTRIC_MOTOR_LuV;
 import static gregtech.common.metatileentities.MetaTileEntities.HULL;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.BLAST_ARC_RECIPES;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
@@ -74,11 +73,51 @@ public class MachineCasing {
                 'P', new UnificationEntry(pipeNormalFluid, HastelloyN),
                 'A', new UnificationEntry(plate, VanadiumGallium));
 
+        ModHandler.addShapedRecipe(true, "iridium_turbine", GTQTMetaBlocks.ISA_CASING.getItemVariant(IRIDIUM_TURBINE, 1),
+                "APA", "PFP", "APA",
+                'F', new UnificationEntry(frameGt, Iridium),
+                'P', new UnificationEntry(pipeNormalFluid, Naquadah),
+                'A', new UnificationEntry(plate, Iridium));
+
         ModHandler.addShapedRecipe(true, "intake_pipe", GTQTMetaBlocks.ISA_CASING.getItemVariant(FLOTATION_INTAKE_CASING, 1),
                 "APA", "PFP", "APA",
                 'F', new UnificationEntry(frameGt, NaquadahAlloy),
                 'P', new UnificationEntry(pipeNormalFluid, Naquadah),
                 'A', new UnificationEntry(plate, VanadiumGallium));
+
+        //  Advanced Assembly Control Casing
+        ModHandler.addShapedRecipe(true, "casing_assembly_control.advanced", GTQTMetaBlocks.ACTIVE_UNIQUE_CASING.getItemVariant(BlockActiveUniqueCasing.ActiveCasingType.ADVANCED_ASSEMBLY_CONTROL_CASING, 1),
+                "OPO", "SFE", "OMO",
+                'O', new UnificationEntry(circuit, MarkerMaterials.Tier.UV),
+                'P', ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT,
+                'F', new UnificationEntry(frameGt, NaquadahAlloy),
+                'S', SENSOR_ZPM,
+                'E', EMITTER_ZPM,
+                'M', ELECTRIC_MOTOR_ZPM);
+
+        //  Advanced Assembly Casing
+        ModHandler.addShapedRecipe(true, "casing_assembly_line.advanced", GTQTMetaBlocks.ACTIVE_UNIQUE_CASING.getItemVariant(BlockActiveUniqueCasing.ActiveCasingType.ADVANCED_ASSEMBLY_LINE_CASING, 1),
+                "PGP", "RFR", "PGP",
+                'P', new UnificationEntry(plate, Iridium),
+                'G', new UnificationEntry(gear, Osmiridium),
+                'R', ROBOT_ARM_ZPM,
+                'F', new UnificationEntry(frameGt, NaquadahAlloy));
+
+        //  Circuit Assembly Casing
+        ModHandler.addShapedRecipe(true, "circuit_assembly_casing", GTQTMetaBlocks.ACTIVE_UNIQUE_CASING.getItemVariant(BlockActiveUniqueCasing.ActiveCasingType.CIRCUIT_ASSEMBLY_LINE_CASING, 1),
+                "PGP", "RFR", "PGP",
+                'P', new UnificationEntry(plate, Osmium),
+                'G', new UnificationEntry(gear, Rhodium),
+                'R', ROBOT_ARM_LuV,
+                'F', new UnificationEntry(frameGt, HSSE));
+
+        //  Advanced Grate Casing
+        ModHandler.addShapedRecipe(true, "advanced_grate_casing", GTQTMetaBlocks.ACTIVE_UNIQUE_CASING.getItemVariant(BlockActiveUniqueCasing.ActiveCasingType.CIRCUIT_ASSEMBLY_CONTROL_CASING, 1),
+                "PRP", "PXP", "PMP",
+                'X', MetaBlocks.MULTIBLOCK_CASING.getItemVariant(gregtech.common.blocks.BlockMultiblockCasing.MultiblockCasingType.GRATE_CASING),
+                'R', new UnificationEntry(rotor, StainlessSteel),
+                'M', ELECTRIC_MOTOR_LuV,
+                'P', new UnificationEntry(plate, Osmiridium));
 
         // 研磨
         ASSEMBLER_RECIPES.recipeBuilder()

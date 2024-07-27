@@ -310,6 +310,20 @@ public class GTQTElementMaterials {
                 .color(Lead.getMaterialRGB())
                 .element(GTQTElements.Lead209)
                 .build();
+
+        GTQTMaterials.Solarium = new Material.Builder(getMaterialsId(), gregtechId("solarium"))
+                .ingot()
+                .liquid()
+                .color(0xFFFF33)
+                .iconSet(BRIGHT)
+                .element(So)
+                .flags(GENERATE_PLATE, GENERATE_ROD, GENERATE_SPRING, GENERATE_SPRING_SMALL, GENERATE_FOIL, GENERATE_FINE_WIRE, GENERATE_DOUBLE_PLATE)
+                .blast(b -> b
+                        .temp(14800, BlastProperty.GasTier.HIGHEST)
+                        .blastStats(VA[UEV], 800)
+                        .vacuumStats(VA[UEV], 400))
+                .cableProperties(V[UIV], 16, 8, false)
+                .build();
     }
 
     private static int getMaterialsId() {

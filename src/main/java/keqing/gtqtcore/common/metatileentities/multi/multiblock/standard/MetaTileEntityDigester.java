@@ -243,7 +243,7 @@ public class MetaTileEntityDigester extends GTQTRecipeMapMultiblockOverwrite {
     @Nonnull
     @Override
     protected ICubeRenderer getFrontOverlay() {
-        return GTQTTextures.BIO_REACTOR_OVERLAY;
+        return GTQTTextures.COKING_TOWER_OVERLAY;
     }
     protected int getCoilTier() {
         return this.coilTier;

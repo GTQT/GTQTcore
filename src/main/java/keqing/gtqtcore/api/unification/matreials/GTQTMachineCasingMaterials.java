@@ -588,6 +588,21 @@ public class GTQTMachineCasingMaterials {
                 .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_BOLT_SCREW, GENERATE_ROTOR)
                 .build()
                 .setFormula("((WC)₇Ti₃)₃?₃");
+
+        //  12040 Abyssalloy
+        Abyssalloy = new Material.Builder(getMaterialsId(), gregtechId("abyssalloy"))
+                .ingot()
+                .fluid()
+                .color(0x9E706A)
+                .iconSet(METALLIC)
+                .blast(b -> b
+                        .temp(9625, BlastProperty.GasTier.HIGHEST)
+                        .blastStats(VA[UEV]))
+                .components(StainlessSteel, 5, TungstenCarbide, 5, Nichrome, 5, IncoloyMA956, 5, Germanium, 1, Rutherfordium, 1, Radon, 1)
+                .cableProperties(V[UIV], 64, 64, false)
+                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_DENSE, GENERATE_FOIL, GENERATE_FINE_WIRE)
+                .build();
+
     }
 
     private static int getMaterialsId() {
