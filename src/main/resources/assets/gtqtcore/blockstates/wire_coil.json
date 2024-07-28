@@ -32,11 +32,28 @@
           "all": "gregtech:blocks/multiblock/wire_coil/machine_coil_end"
         }
       },
-      "superconducting_metallic_hydrogen_coil": {
-        "model": "gregtech:cube_2_layer_all",
+      "infinity_coil_block": {
+        "model": "minecraft:cube_all",
         "textures": {
-          "bot_all": "gregtech:blocks/multiblock/wire_coil/superconducting_metallic_hydrogen_coil",
-          "top_all":"gregtech:blocks/multiblock/wire_coil/superconducting_metallic_hydrogen_coil_bloom"
+          "all": "gregtech:blocks/multiblock/wire_coil/infinity_coil_block"
+        }
+      },
+      "eternity_coil_block": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/wire_coil/eternity_coil_block"
+        }
+      },
+      "hypogen_coil_block": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/wire_coil/hypogen_coil_block"
+        }
+      },
+      "superconducting_metallic_hydrogen_coil": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/wire_coil/superconducting_metallic_hydrogen_coil"
         }
       },
       "cupar_proton_pair_coil": {

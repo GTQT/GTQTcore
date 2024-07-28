@@ -3290,6 +3290,7 @@ metaitem.rock.bet2.name=沼泽沉积岩碎片
 metaitem.rock.bet3.name=沼泽冲击岩碎片
 metaitem.rock.bet4.name=沼泽页岩碎片
 gregtech.material.solarium=阳光合金
+gregtech.material.eternity=永恒
 gregtech.material.abyssalloy=渊狱合金
 metaitem.sun_matter.name=阳光化合物
 metaitem.sunlinse.name=日光透镜
@@ -4369,27 +4370,17 @@ tile.quantum_casing.boundless_gravitationally_severed_structure_casing.tooltip=�
 tile.quantum_casing.transcendentally_amplified_magnetic_confinement_casing.name=超激发磁约束机器外壳
 tile.quantum_casing.transcendentally_amplified_magnetic_confinement_casing.tooltip=产生能够约束整颗中子星的巨大磁场/n§b§l远超800个超星系团的指数尺度
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 tile.wire_coil.draconic.name=*-态素龙线圈-*
 tile.wire_coil.wake_draconic.name=*-态素觉醒龙线圈-*
 tile.wire_coil.unive.name=*-宇宙态素中子线圈-*
-tile.wire_coil.end.name=*-寰宇支配之无尽线圈-*
+tile.wire_coil.end.name=*-无尽线圈-*
+tile.wire_coil.infinity_coil_block.name=*-寰宇支配之无尽线圈-*
+tile.wire_coil.eternity_coil_block.name=*-永恒线圈-*
+tile.wire_coil.hypogen_coil_block.name=*-海珀珍线圈-*
 tile.wire_coil.superconducting_metallic_hydrogen_coil.name=*-超导金属氢线圈-*
-tile.wire_coil.cupar_proton_pair_coil.name=*-库珀对线圈-*
-tile.wire_coil.cupara_proton_pair_coil.name=*-海珀珍线圈-*
-tile.wire_coil.cuparb_proton_pair_coil.name=*-热动力学恒星压缩物质奇点线圈-*
+tile.wire_coil.cupar_proton_pair_coil.name=*-库珀质子对线圈(I)-*
+tile.wire_coil.cupara_proton_pair_coil.name=*-库珀质子对线圈(II)-*
+tile.wire_coil.cuparb_proton_pair_coil.name=*-库珀质子对线圈(III)-*
 
 tile.computer_competent.computer_vent.name=空计算框架
 tile.computer_competent.computer_rami.name=数据缓存模块I

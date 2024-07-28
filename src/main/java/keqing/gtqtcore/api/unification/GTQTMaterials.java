@@ -23,6 +23,7 @@ public class GTQTMaterials {
     public static Material MaragingSteel250;
     public static Material Staballoy;
     public static Material BabbittAlloy;
+    public static Material Eternity;
     public static Material ZirconiumCarbide;
     public static Material Inconel792;
     public static Material IncoloyMA813;

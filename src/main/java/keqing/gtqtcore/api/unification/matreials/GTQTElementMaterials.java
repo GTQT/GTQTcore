@@ -324,6 +324,14 @@ public class GTQTElementMaterials {
                         .vacuumStats(VA[UEV], 400))
                 .cableProperties(V[UIV], 16, 8, false)
                 .build();
+
+        GTQTMaterials.Eternity = new Material.Builder(getMaterialsId(), gregtechId("eternity"))
+                .ingot()
+                .liquid()
+                .iconSet(CUSTOM_ETERNITY)
+                .element(En)
+                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_DENSE, GENERATE_ROD, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_LENS, GENERATE_ROTOR)
+                .build();
     }
 
     private static int getMaterialsId() {

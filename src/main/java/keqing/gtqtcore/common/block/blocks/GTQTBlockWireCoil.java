@@ -84,14 +84,17 @@ import java.util.List;
 
 
 
-            DRACONIC("draconic", 12600, 18, 10, Materials.Neutronium),
-            WAKE_DRACONIC("wake_draconic", 14400, 20, 12, Materials.Neutronium),
-            UNIVE("unive", 16200, 24, 18, GTQTMaterials.Draconium),
-            END("end", 18000, 26, 20,  GTQTMaterials.AwakenedDraconium),
-            SUPERCONDUCTING_METALLIC_HYDROGEN_COIL("superconducting_metallic_hydrogen_coil", 19800, 28, 18, Materials.Neutronium),
-            CUPAR_PROTON_PAIR_COIL("cupar_proton_pair_coil", 21600, 30, 20, Materials.Neutronium),
-            CUPARA_PROTON_PAIR_COIL("cupara_proton_pair_coil", 23400, 30, 20, Materials.Neutronium),
-            CUPARB_PROTON_PAIR_COIL("cuparb_proton_pair_coil", 25200, 32, 10, Materials.Neutronium);
+            DRACONIC("draconic", 12600, 18, 10, GTQTMaterials.Draconium),
+            WAKE_DRACONIC("wake_draconic", 14400, 20, 12, GTQTMaterials.AwakenedDraconium),
+            UNIVE("unive", 16200, 22, 18, Materials.Neutronium),
+            END("end", 18000, 24, 20,  GTQTMaterials.Infinity),
+            Infinity("infinity_coil_block", 19800, 26, 20,  GTQTMaterials.Infinity),
+            Eternity("eternity_coil_block", 21600, 28, 20,  GTQTMaterials.Eternity),
+            Hypogen("hypogen_coil_block", 23400, 30, 20,  GTQTMaterials.Hypogen),
+            SUPERCONDUCTING_METALLIC_HYDROGEN_COIL("superconducting_metallic_hydrogen_coil", 25200, 32, 18, Materials.Neutronium),
+            CUPAR_PROTON_PAIR_COIL("cupar_proton_pair_coil", 27000, 34, 20, Materials.Neutronium),
+            CUPARA_PROTON_PAIR_COIL("cupara_proton_pair_coil", 28800, 36, 20, Materials.Neutronium),
+            CUPARB_PROTON_PAIR_COIL("cuparb_proton_pair_coil", 30000, 38, 10, Materials.Neutronium);
             private final String name;
             //electric blast furnace properties
             private final int coilTemperature;

@@ -58,4 +58,5 @@ public class GTQTElements {
     public static final Element Mithril = Elements.add(405, 564, -1, null, "Mithril", "Mh", false);
     public static final Element Magic = Elements.add(999, 999, -1, null, "Magic", "Kq", false);
     public static final Element So     = Elements.add(159,    278,  -1,null,  "Solarium", "So",false);
+    public static final Element En      = Elements.add(100000, 100000, -1,null,"Eternity","En⦼",false);
 }
