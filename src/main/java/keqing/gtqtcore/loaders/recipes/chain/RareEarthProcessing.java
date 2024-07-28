@@ -1,4 +1,6 @@
 package keqing.gtqtcore.loaders.recipes.chain;
+import keqing.gtqtcore.common.items.GTQTMetaItems;
+
 import static gregtech.api.unification.material.Materials.Hafnium;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
@@ -8,7 +10,6 @@ import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.TJMaterials.SodiumFluoride;
-import static keqing.gtqtcore.common.items.GTQTMetaItems.PROTONATED_FULLERENE_SIEVING_MATRIX;
 
 
 public class RareEarthProcessing {
@@ -32,7 +33,7 @@ public class RareEarthProcessing {
                 .input(dust, RareEarth)
                 .fluidInputs(DistilledWater.getFluid(1000))
                 .fluidOutputs(CrudeRareEarthTurbidSolution.getFluid(2000))
-                .EUt(VA[HV])
+                .EUt(VA[EV])
                 .duration(120)
                 .buildAndRegister();
 
@@ -41,7 +42,7 @@ public class RareEarthProcessing {
                 .fluidInputs(CrudeRareEarthTurbidSolution.getFluid(2000))
                 .fluidInputs(NitricAcid.getFluid(2000))
                 .fluidOutputs(NitratedRareEarthTurbidSolution.getFluid(2000))
-                .EUt(VA[EV])
+                .EUt(VA[IV])
                 .duration(350)
                 .buildAndRegister();
 
@@ -53,7 +54,7 @@ public class RareEarthProcessing {
                 .output(dust, SodiumNitrate, 3)
                 .fluidOutputs(RareEarthHydroxidesSolution.getFluid(1000))
                 .duration(240)
-                .EUt(VA[EV])
+                .EUt(VA[IV])
                 .buildAndRegister();
 
         //  Rare Earth Hydroxides Solution + Hydrochloric Acid -> Rare Earth Chorides Slurry + Steam
@@ -64,10 +65,10 @@ public class RareEarthProcessing {
                 .fluidOutputs(Steam.getFluid(600))
                 .blastFurnaceTemp(1125)
                 .duration(120)
-                .EUt(VA[MV])
+                .EUt(VA[EV])
                 .buildAndRegister();
 
-        //  Rare Earth Chorides Slurry (MV)
+        //  Rare Earth Chorides Slurry (EV)
         ROASTER_RECIPES.recipeBuilder()
                 .input(dust, RareEarthChloridesSlurry, 4)
                 .input(dust, SodiumBicarbonate, 8)
@@ -76,11 +77,11 @@ public class RareEarthProcessing {
                 .fluidOutputs(LowPurityRareEarthChloridesSolution.getFluid(1000))
                 .fluidOutputs(CarbonDioxide.getFluid(2000))
                 .temperature(980)
-                .EUt(VA[MV])
+                .EUt(VA[EV])
                 .duration(1200)
                 .buildAndRegister();
 
-        //  Rare Earth Chorides Slurry (HV)
+        //  Rare Earth Chorides Slurry (EV)
         ROASTER_RECIPES.recipeBuilder()
                 .input(dust, RareEarthChloridesSlurry, 2)
                 .input(dust, BariumCarbonate, 4)
@@ -89,7 +90,7 @@ public class RareEarthProcessing {
                 .fluidOutputs(LowPurityRareEarthChloridesSolution.getFluid(2000))
                 .fluidOutputs(CarbonDioxide.getFluid(1000))
                 .temperature(980)
-                .EUt(VA[HV])
+                .EUt(VA[EV])
                 .duration(600)
                 .buildAndRegister();
 
@@ -98,7 +99,7 @@ public class RareEarthProcessing {
                 .fluidInputs(LowPurityRareEarthChloridesSolution.getFluid(4000))
                 .fluidInputs(AquaRegia.getFluid(2000))
                 .fluidOutputs(RoughlyPurifiedRareEarthChloridesSolution.getFluid(6000))
-                .EUt(VA[EV])
+                .EUt(VA[IV])
                 .duration(1200)
                 .buildAndRegister();
 
@@ -108,7 +109,7 @@ public class RareEarthProcessing {
                 .output(dust, HighPurityRareEarthChloridesSlurry, 3)
                 .output(dust, LowPurityRareEarthChloridesSlag, 2)
                 .fluidOutputs(DilutedHydrochloricAcid.getFluid(1000))
-                .EUt(VA[HV])
+                .EUt(VA[EV])
                 .duration(300)
                 .buildAndRegister();
 
@@ -117,49 +118,52 @@ public class RareEarthProcessing {
                 .input(dust, HighPurityRareEarthChloridesSlurry)
                 .fluidInputs(HydrochloricAcid.getFluid(1000))
                 .fluidOutputs(HighPurityRareEarthChloridesSolution.getFluid(1000))
-                .EUt(VA[EV])
+                .EUt(VA[IV])
                 .duration(600)
                 .buildAndRegister();
-/*
+
         //  High Purity Rare Earth Chlorides Solution -> Neodymium Oxide
-        DISTILLERY_RECIPES.recipeBuilder()
+        BLAST_RECIPES.recipeBuilder()
                 .fluidInputs(HighPurityRareEarthChloridesSolution.getFluid(1000))
                 .circuitMeta(1)
                 .output(dust, NeodymiumOxide)
                 .fluidOutputs(DilutedHydrochloricAcid.getFluid(500))
-                .duration(200)
-                .EUt(VA[HV])
+                .duration(600)
+                .blastFurnaceTemp(4500)
+                .EUt(VA[IV])
                 .buildAndRegister();
 
         //  High Purity Rare Earth Chlorides Solution -> Cerium Oxide
-        DISTILLERY_RECIPES.recipeBuilder()
+        BLAST_RECIPES.recipeBuilder()
                 .fluidInputs(HighPurityRareEarthChloridesSolution.getFluid(1000))
                 .circuitMeta(2)
                 .output(dust, CeriumOxide)
                 .fluidOutputs(DilutedHydrochloricAcid.getFluid(300))
-                .duration(200)
+                .duration(600)
+                .blastFurnaceTemp(4500)
                 .EUt(VA[IV])
                 .buildAndRegister();
 
         //  High Purity Rare Earth Chlorides Solution -> Samarium Oxide
-        DISTILLERY_RECIPES.recipeBuilder()
+        BLAST_RECIPES.recipeBuilder()
                 .fluidInputs(HighPurityRareEarthChloridesSolution.getFluid(1000))
                 .circuitMeta(3)
                 .output(dust, SamariumOxide)
                 .fluidOutputs(HydrochloricAcid.getFluid(800))
-                .duration(200)
-                .EUt(VA[EV])
+                .duration(600)
+                .blastFurnaceTemp(4500)
+                .EUt(VA[IV])
                 .buildAndRegister();
-*/
+
         //  Low Purity Rare Earth Chlorides Slag + Cobaltite -> Yttrium Oxide, Lanthanum Oxide
         BURNER_REACTOR_RECIPES.recipeBuilder()
                 .input(dust, LowPurityRareEarthChloridesSlag, 4)
                 .input(dust, Cobaltite, 2)
                 .output(dust, YttriumOxide)
                 .output(dust, Sulfur, 2)
-                .EUt(3840)
-                .duration(300)
-                .blastFurnaceTemp(450)
+                .duration(600)
+                .blastFurnaceTemp(4500)
+                .EUt(VA[IV])
                 .buildAndRegister();
 
         //  Low Purity Rare Earth Chlorides Slag + Ferric Oxide -> Lanthanum Oxide + Oxygen
@@ -170,14 +174,14 @@ public class RareEarthProcessing {
                 .fluidOutputs(Oxygen.getFluid(3000))
                 .duration(300)
                 .EUt(15360)
-                .blastFurnaceTemp(860)
+                .blastFurnaceTemp(450)
                 .buildAndRegister();
     }
 
     private static void lite() {
         CHEMICAL_RECIPES.recipeBuilder()
                 .fluidInputs(RareEarthHydroxidesSolution.getFluid(1000))
-                .notConsumable(PROTONATED_FULLERENE_SIEVING_MATRIX)
+                .notConsumable(GTQTMetaItems.PROTONATED_FULLERENE_SIEVING_MATRIX)
                 .fluidOutputs(RareEarthChloridesSolution.getFluid(1000))
                 .duration(120).EUt(VA[UV]).buildAndRegister();
 

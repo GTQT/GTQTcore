@@ -22,6 +22,8 @@ import gregtech.api.pattern.MultiblockShapeInfo;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeBuilder;
+import gregtech.api.recipes.RecipeMap;
+import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.recipes.recipeproperties.TemperatureProperty;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.TextFormattingUtil;
@@ -32,7 +34,9 @@ import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.metatileentities.MetaTileEntities;
 import groovyjarjarantlr4.v4.runtime.misc.NotNull;
+import keqing.gtqtcore.api.metaileentity.multiblock.GTQTRecipeMapMultiblockControllerOverwrite;
 import keqing.gtqtcore.api.metaileentity.multiblock.GTQTRecipeMapMultiblockOverwrite;
+import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing;
@@ -63,13 +67,18 @@ import static gregtech.api.unification.material.Materials.Lubricant;
 import static gregtech.common.metatileentities.multi.electric.MetaTileEntityMultiSmelter.getDurationForParallel;
 import static gregtech.common.metatileentities.multi.electric.MetaTileEntityMultiSmelter.getEUtForParallel;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.Pyrotheum;
-public class MetaTileEntityBlazingBlastFurnace extends GTQTRecipeMapMultiblockOverwrite implements IHeatingCoil {
+public class MetaTileEntityBlazingBlastFurnace extends GTQTRecipeMapMultiblockControllerOverwrite implements IHeatingCoil {
     private int blastFurnaceTemperature;
     protected static int heatingCoilLevel;
     protected int heatingCoilDiscount;
 
     public MetaTileEntityBlazingBlastFurnace(ResourceLocation metaTileEntityId) {
-            super(metaTileEntityId, BLAST_RECIPES);
+        super(metaTileEntityId, new RecipeMap[]{
+                RecipeMaps.FURNACE_RECIPES,
+                GTQTcoreRecipeMaps.REACTION_FURNACE_RECIPES,
+                GTQTcoreRecipeMaps.BURNER_REACTOR_RECIPES,
+                RecipeMaps.ALLOY_SMELTER_RECIPES
+        });
         this.recipeMapWorkable = new HeatingCoilRecipeLogic(this);
         this.recipeMapWorkable = new BlazingBlastFurnaceWorkable(this);
     }

@@ -17,9 +17,11 @@ import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.core.advancement.AdvancementTriggers;
 import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockCore;
+import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTIsaCasing;
+import keqing.gtqtcore.loaders.recipes.GTQTRecipes;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -38,6 +40,7 @@ public class MetaTileEntityIndustrialFurnace extends GTQTMultiblockCore {
     public MetaTileEntityIndustrialFurnace(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{
                 RecipeMaps.FURNACE_RECIPES,
+                GTQTcoreRecipeMaps.REACTION_FURNACE_RECIPES,
                 RecipeMaps.ALLOY_SMELTER_RECIPES
         });
     }
