@@ -128,9 +128,8 @@ public class MetaTileEntityHighPressureCryogenicDistillationPlant extends Recipe
     @Nonnull
     @Override
     protected ICubeRenderer getFrontOverlay() {
-        return GTQTTextures.INDUSTRIAL_CENTRIFUGE_OVERLAY;
+        return GTQTTextures.LARGE_ROCKET_ENGINE_OVERLAY;
     }
-
     @Override
     public int getFluidOutputLimit() {
         return getOutputFluidInventory().getTanks();

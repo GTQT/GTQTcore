@@ -39,7 +39,7 @@ public class TimeBottleBehavior implements IItemBehaviour {
     public TimeBottleBehavior(){}
 
     private int time;
-    private int maxTime=20*3600*24;
+    private int maxTime=20*3600*8;
     public void onUpdate(ItemStack itemStack, Entity entity) {
         if (entity instanceof EntityPlayer)
         {

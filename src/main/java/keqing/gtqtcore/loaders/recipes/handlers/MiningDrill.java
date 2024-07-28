@@ -7,6 +7,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 
 import static gregtech.api.recipes.RecipeMaps.ASSEMBLER_RECIPES;
+import static gregtech.api.recipes.RecipeMaps.SIFTER_RECIPES;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.Materials.Coal;
 import static gregtech.api.unification.ore.OrePrefix.*;
@@ -72,6 +73,18 @@ public class MiningDrill {
     }
     private static void GRAVITY_SEPARATOR(MetaItem.MetaValueItem Item, Material material1, Material material2, Material material3, Material material4, Material material5, Material material6)
     {
+        SIFTER_RECIPES.recipeBuilder()
+                .input(Item)
+                .chancedOutput(crushed, material1, 2000,500)
+                .chancedOutput(crushed, material2, 2000,500)
+                .chancedOutput(crushed, material3, 2000,500)
+                .chancedOutput(crushed, material4, 2000,500)
+                .chancedOutput(crushed, material5, 2000,500)
+                .chancedOutput(crushed, material6, 2000,500)
+                .EUt(120)
+                .duration(400)
+                .buildAndRegister();
+
         for(int i=-4;i<6;i++) {
             GRAVITY_SEPARATOR_RECIPES.recipeBuilder()
                     .input(Item)
@@ -84,7 +97,7 @@ public class MiningDrill {
                     .chancedOutput(crushed, material5, 3000+500*Math.abs(1-i), 2000+200*Math.abs(4-i))
                     .chancedOutput(crushed, material6, 3000+500*Math.abs(-i), 2000+200*Math.abs(5-i))
                     .EUt(120)
-                    .duration(200)
+                    .duration(100)
                     .circuitMeta(i+5)
                     .buildAndRegister();
         }

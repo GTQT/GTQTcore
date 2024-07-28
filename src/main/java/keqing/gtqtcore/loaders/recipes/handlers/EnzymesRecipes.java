@@ -8,6 +8,7 @@ import ibxm.Player;
 
 import static gregtech.api.GTValues.*;
 import static gregtech.api.GTValues.VA;
+import static gregtech.api.recipes.RecipeMaps.BREWING_RECIPES;
 import static gregtech.api.recipes.RecipeMaps.CHEMICAL_RECIPES;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
@@ -193,7 +194,7 @@ public class EnzymesRecipes {
                 .fluidOutputs(THF.getFluid(1000))
                 .duration(400).EUt(VA[HV]).buildAndRegister();
 
-        BLAST_ARC_RECIPES.recipeBuilder()
+        BREWING_RECIPES.recipeBuilder()
                 .input(dust,Sugar,16)
                 .fluidInputs(Water.getFluid(16000))
                 .fluidOutputs(Hydroxymethylfurfural.getFluid(1600))

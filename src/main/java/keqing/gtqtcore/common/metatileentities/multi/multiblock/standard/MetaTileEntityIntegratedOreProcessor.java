@@ -206,7 +206,7 @@ public class MetaTileEntityIntegratedOreProcessor extends MultiblockWithDisplayB
     @Nonnull
     @Override
     protected ICubeRenderer getFrontOverlay() {
-        return GTQTTextures.CVD_UNIT_OVERLAY;
+        return GTQTTextures.HYDRAULIC_FRACKER_OVERLAY;
     }
 
     @SideOnly(Side.CLIENT)

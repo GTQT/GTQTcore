@@ -105,7 +105,7 @@ public class MetaTileEntityPyrolysisTower extends RecipeMapMultiblockController 
     @SideOnly(Side.CLIENT)
     @Override
     protected ICubeRenderer getFrontOverlay() {
-        return Textures.POWER_SUBSTATION_OVERLAY;
+        return Textures.BENDER_OVERLAY;
     }
 
     @Override

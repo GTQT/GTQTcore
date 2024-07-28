@@ -127,7 +127,7 @@ public class MetaTileEntityLowPressureCryogenicDistillationPlant extends RecipeM
     @Nonnull
     @Override
     protected ICubeRenderer getFrontOverlay() {
-        return GTQTTextures.INDUSTRIAL_CENTRIFUGE_OVERLAY;
+        return GTQTTextures.LARGE_ROCKET_ENGINE_OVERLAY;
     }
 
     @Override

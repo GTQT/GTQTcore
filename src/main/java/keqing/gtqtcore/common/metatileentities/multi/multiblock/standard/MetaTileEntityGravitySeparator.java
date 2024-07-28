@@ -223,7 +223,7 @@ public class MetaTileEntityGravitySeparator extends GTQTRecipeMapMultiblockContr
                 .aisle(" CCCCCCC ", " CCCSCCC ", "FCCCCCCCF", "         ", "         ", "F       F")
                 .where('S', selfPredicate())
                 .where('U', states(steelRotorState()))
-                .where('C', states(getCasingState()).setMinGlobalLimited(49)
+                .where('C', states(getCasingState()).setMinGlobalLimited(80)
                         .or(autoAbilities()))
                 .where('F', this.getFramePredicate())
                 .where(' ', any())

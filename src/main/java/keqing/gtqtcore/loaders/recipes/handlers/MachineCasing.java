@@ -115,7 +115,7 @@ public class MachineCasing {
         ModHandler.addShapedRecipe(true, "advanced_grate_casing", GTQTMetaBlocks.ACTIVE_UNIQUE_CASING.getItemVariant(BlockActiveUniqueCasing.ActiveCasingType.CIRCUIT_ASSEMBLY_CONTROL_CASING, 1),
                 "PRP", "PXP", "PMP",
                 'X', MetaBlocks.MULTIBLOCK_CASING.getItemVariant(gregtech.common.blocks.BlockMultiblockCasing.MultiblockCasingType.GRATE_CASING),
-                'R', new UnificationEntry(rotor, StainlessSteel),
+                'R', new UnificationEntry(rotor, NaquadahAlloy),
                 'M', ELECTRIC_MOTOR_LuV,
                 'P', new UnificationEntry(plate, Osmiridium));
 
@@ -437,7 +437,7 @@ public class MachineCasing {
 
         ASSEMBLER_RECIPES.recipeBuilder().duration(200).EUt(30)
                 .input(plate,Steel, 4)
-                .input(gear,Brass, 1)
+                .input(gear,Steel, 1)
                 .input(frameGt,Steel, 1)
                 .fluidInputs(Polyethylene.getFluid(576))
                 .circuitMeta(6)

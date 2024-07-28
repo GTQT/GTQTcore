@@ -6,6 +6,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 import static gregtech.api.GTValues.L;
+import static gregtech.api.GTValues.VA;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.recipes.RecipeMaps.ASSEMBLER_RECIPES;
 import static gregtech.api.unification.material.Materials.*;
@@ -221,13 +222,23 @@ public class BacteriaCulturesChain {
                 .notConsumable(CATALYST_FRAMEWORK_IV)
                 .buildAndRegister();
 
-        MIXER_RECIPES.recipeBuilder()
+        BIOLOGICAL_REACTION_RECIPES.recipeBuilder()
                 .fluidInputs(DragonBlood.getFluid(10))
                 .notConsumable(CATALYST_FRAMEWORK_IV)
                 .fluidInputs(DistilledWater.getFluid(5000))
                 .fluidOutputs(BacterialGrowthMedium.getFluid(10000))
-                .EUt(7680)
-                .duration(400).cleanroom(CleanroomType.STERILE_CLEANROOM)
+                .EUt(VA[5])
+                .duration(200)
+                .buildAndRegister();
+
+        BIOLOGICAL_REACTION_RECIPES.recipeBuilder()
+                .fluidInputs(DragonBlood.getFluid(10))
+                .input(dust,Meat,8)
+                .fluidInputs(DistilledWater.getFluid(5000))
+                .fluidOutputs(BacterialGrowthMedium.getFluid(10000))
+                .rate(10)
+                .EUt(VA[4])
+                .duration(200)
                 .buildAndRegister();
 
         FERMENTING_RECIPES.recipeBuilder()

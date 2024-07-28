@@ -196,7 +196,7 @@ public class MetaTileEntityPreciseAssembler extends MultiMapMultiblockController
     @SideOnly(Side.CLIENT)
     @Override
     protected ICubeRenderer getFrontOverlay() {
-        return Textures.DISTILLATION_TOWER_OVERLAY;
+        return Textures.FUSION_REACTOR_OVERLAY;
     }
 
 

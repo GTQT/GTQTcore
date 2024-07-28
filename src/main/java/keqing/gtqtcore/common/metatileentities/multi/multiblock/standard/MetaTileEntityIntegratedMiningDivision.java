@@ -233,7 +233,7 @@ public class MetaTileEntityIntegratedMiningDivision extends GTQTRecipeMapMultibl
     @Nonnull
     @Override
     protected OrientedOverlayRenderer getFrontOverlay() {
-        return Textures.LARGE_CHEMICAL_REACTOR_OVERLAY;
+        return GTQTTextures.DRYER_OVERLAY;
     }
 
     @Override

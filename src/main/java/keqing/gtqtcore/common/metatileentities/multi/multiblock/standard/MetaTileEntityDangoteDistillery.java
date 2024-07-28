@@ -14,6 +14,7 @@ import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.util.RelativeDirection;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
+import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiFluidHatch;
 import gregtech.core.sound.GTSoundEvents;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
@@ -120,12 +121,13 @@ public class MetaTileEntityDangoteDistillery extends MultiMapMultiblockControlle
     public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
         return GTQTTextures.HC_ALLOY_CASING;
     }
-
     @SideOnly(Side.CLIENT)
     @Nonnull
-    protected ICubeRenderer getFrontOverlay() {
-        return Textures.DISTILLATION_TOWER_OVERLAY;
+    @Override
+    protected OrientedOverlayRenderer getFrontOverlay() {
+        return GTQTTextures.DRYER_OVERLAY;
     }
+
 
     public int getFluidOutputLimit() {
         return this.getOutputFluidInventory().getTanks();
