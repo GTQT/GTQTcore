@@ -521,7 +521,7 @@ public class GTQTMetaTileEntities {
         CZ_PULLER = registerMetaTileEntity(3511, new MetaTileEntityCZPuller(gtqtcoreId("cz_puller")));
         EX_CVD = registerMetaTileEntity(3512, new MetaTileEntityEXCVD(gtqtcoreId("ex_cvd")));
 
-       //存储
+        //存储
         for(int i=0;i<10;i++)
         {
             String tierName = GTValues.VN[i].toLowerCase();
