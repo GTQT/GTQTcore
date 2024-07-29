@@ -508,13 +508,13 @@ public class MetaTileEntityLoader {
 
         //  Precise Assembler
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .inputs(LARGE_ASSEMBLER.getStackForm())
-                .input(frameGt, MARM200Steel, 4)
-                .input(ROBOT_ARM_IV, 2)
-                .input(CONVEYOR_MODULE_IV, 2)
+                .inputs(LARGE_ASSEMBLER.getStackForm(4))
+                .input(frameGt, MARM200Steel, 16)
+                .input(ROBOT_ARM_IV, 8)
+                .input(CONVEYOR_MODULE_IV, 8)
                 .input(plate, Stellite100, 4)
                 .input(gear, TanmolyiumBetaC, 4)
-                .input(cableGtQuadruple, Naquadah, 4)
+                .input(wireFine, Platinum, 64)
                 .input(stickLong, SamariumMagnetic, 64)
                 .input(stickLong, SamariumMagnetic, 64)
                 .fluidInputs(SolderingAlloy.getFluid(L * 6))

@@ -161,27 +161,6 @@ public class NuclearLine {
                 .duration(400).EUt(VA[EV]).buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(HULL[4], 4)
-                .input(circuit,MarkerMaterials.Tier.HV , 16)
-                .input(ELECTRIC_PUMP_EV, 8)
-                .input(plateDense, Aluminium, 8)
-                .input(frameGt, StainlessSteel, 12)
-                .input(stick, HSSE, 12)
-                .input(spring, RTMAlloy, 12)
-                .input(foil, Osmiridium, 6)
-                .input(wireGtHex, Platinum, 32)
-                .fluidInputs(Polyethylene.getFluid(16000))
-                .fluidInputs(Polytetrafluoroethylene.getFluid(8000))
-                .fluidInputs(ReinforcedEpoxyResin.getFluid(4000))
-                .fluidInputs(Polybenzimidazole.getFluid(1000))
-                .outputs(COOLING_TOWER.getStackForm())
-                .scannerResearch(b -> b
-                        .researchStack(VACUUM_FREEZER.getStackForm())
-                        .duration(1200)
-                        .EUt(VA[HV]))
-                .duration(1200).EUt(VA[EV]).buildAndRegister();
-
-        ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(plateDense, TungstenSteel, 6)
                 .input(gear, HSSG, 6)
                 .input(stick, HSSE, 6)

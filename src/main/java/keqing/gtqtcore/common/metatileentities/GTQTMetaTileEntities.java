@@ -235,7 +235,6 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityDimensionallyBiomimeticFactory DIMENSIONAL_BIOMIMETIC_FACTORY;
     public static MetaTileEntityLargeBiomassGenerator LARGE_BIOMASS_GENERATOR;
     public static MetaTileEntityFluidRubbishBin FLUID_RUBBISH_BIN;
-    public static MetaTileEntityCoolingTower COOLING_TOWER;
     public static MetaTileEntityParticleAcceleratorIO[] PARTICLE_ACCELERATOR_IO=new MetaTileEntityParticleAcceleratorIO[4];
     public static MetaTileEntityAdvancedAssemblyLine ADVANCED_ASSEMBLY_LINE;
     public static MetaTileEntityLargeGrind LAGER_GRIND;
@@ -427,7 +426,7 @@ public class GTQTMetaTileEntities {
         NANO_COATING= registerMetaTileEntity(3196, new MetaTileEntityNanoCoating(gtqtcoreId("nano_coating")));
         POWER_SUPPLY= registerMetaTileEntity(3197, new MetaTileEntityPowerSupply(gtqtcoreId("power_supply")));
         FROTH_FLOTATION_TANK = registerMetaTileEntity(3198, new MetaTileEntityFrothFlotationTank(gtqtcoreId("froth_flotation_tank")));
-        COOLING_TOWER = registerMetaTileEntity(3199, new MetaTileEntityCoolingTower(gtqtcoreId("cooling_tower")));
+        //todo
         HIGH_PRESSURE_CRYOGENIC_DISTILLATION_PLANT = registerMetaTileEntity(3200, new MetaTileEntityHighPressureCryogenicDistillationPlant(gtqtcoreId("high_pressure_cryogenic_distillation_plant")));
         LOW_PRESSURE_CRYOGENIC_DISTILLATION_PLANT = registerMetaTileEntity(3201, new MetaTileEntityLowPressureCryogenicDistillationPlant(gtqtcoreId("low_pressure_cryogenic_distillation_plant")));
         MICROWAVE_ENERGY_RECEIVER_CONTROL= registerMetaTileEntity(3202, new MetaTileEntityMicrowaveEnergyReceiverControl(gtqtcoreId("microwave_energy_receiver_control")));

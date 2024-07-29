@@ -175,7 +175,7 @@ public class CTABChain {
         //以二硫化钠和氯乙醇为主要原料，合成二硫代二甘醇，经电解还原可制得2-巯基乙醇
         LARGE_CHEMICAL_RECIPES.recipeBuilder()
                 .input(OrePrefix.dust,SodiumSulfide)
-                .input(OrePrefix.dust,EthyleneChlorohydrin)
+                .fluidInputs(EthyleneChlorohydrin.getFluid(1000))
                 .fluidOutputs(Erliudaierganchun.getFluid(1000))
                 .duration(400).EUt(VA[HV]).buildAndRegister();
 

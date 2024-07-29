@@ -32,7 +32,7 @@ public class PreciseAssemblerChain {
                 .input(CIRCUIT_GOOD_I,2)
                 .input(circuit,MarkerMaterials.Tier.LuV,8)
                 .input(CHEMICAL_PLANT,2)
-                .input(PARTICLE_ACCELERATOR_IO[1],2)
+                .input(PARTICLE_ACCELERATOR_IO[0],2)
                 .fluidInputs(SolderingAlloy.getFluid(L * 8))
                 .fluidInputs(Tin.getFluid(L * 8))
                 .fluidInputs(Polybenzimidazole.getFluid(L * 8))

@@ -243,7 +243,7 @@ public class FirstDegreeMaterials {
 
         //氯乙醇
         GTQTMaterials.EthyleneChlorohydrin = new Material.Builder(getMaterialsId(), gregtechId("ethylene_chlorohydrin"))
-                .dust().fluid()
+                .fluid()
                 .color(0xB2DFEE)
                 .components(Carbon, 2, Hydrogen, 6, Oxygen, 1, Chlorine, 1)
                 .flags(DISABLE_DECOMPOSITION)
