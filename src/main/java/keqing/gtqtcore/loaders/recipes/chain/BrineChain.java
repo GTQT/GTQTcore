@@ -613,6 +613,12 @@ public class BrineChain {
                 .fluidOutputs(HydrochloricAcid.getFluid(2000))
                 .buildAndRegister();
 
+        CHEMICAL_RECIPES.recipeBuilder().duration(200).EUt(1200)
+                .input(dust, Beryllium, 1)
+                .fluidInputs(Fluorine.getFluid(2000))
+                .output(dust, BerylliumFluoride, 3)
+                .buildAndRegister();
+
         // C4H8 + C8H18 -> C4H10 + C8H16
         CHEMICAL_RECIPES.recipeBuilder().duration(190).EUt(120)
                 .notConsumable(dust, DehydrogenationCatalyst, 1)
