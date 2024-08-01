@@ -117,7 +117,7 @@ public class MetaTileEntityVacuumDistillationTower extends RecipeMapMultiblockCo
     @Nonnull
     @Override
     protected ICubeRenderer getFrontOverlay() {
-        return GTQTTextures.NAQUADAH_REACTOR_OVERLAY;
+        return GTQTTextures.DRYER_OVERLAY;
     }
 
     @Override

@@ -649,13 +649,6 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         SUPRACAUSAL_INDUCTOR = this.addItem(919, "component.supracausal_smd.inductor").setCreativeTabs(CommonProxy.GTQTCore_TAB);
 
         //  Covers
-        ELECTRIC_MOTOR_ULV = this.addItem(934, "cover.electric_motor.ulv").setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        ELECTRIC_PISTON_ULV = this.addItem(935, "cover.electric_piston.ulv").setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        ELECTRIC_PUMP_ULV = this.addItem(936, "cover.electric_pump.ulv").setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        CONVEYOR_MODULE_ULV = this.addItem(937, "cover.conveyor_module.ulv").setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        ROBOT_ARM_ULV = this.addItem(938, "cover.robot_arm.ulv").setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        EMITTER_ULV = this.addItem(939, "cover.emitter.ulv").setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        SENSOR_ULV = this.addItem(940, "cover.sensor.ulv").setCreativeTabs(CommonProxy.GTQTCore_TAB);
         FIELD_GENERATOR_ULV = this.addItem(941, "cover.field_generator.ulv").setCreativeTabs(CommonProxy.GTQTCore_TAB);
         ELECTRIC_MOTOR_MAX = this.addItem(942, "cover.electric_motor.max").setCreativeTabs(CommonProxy.GTQTCore_TAB);
         ELECTRIC_PISTON_MAX = this.addItem(943, "cover.electric_piston.max").setCreativeTabs(CommonProxy.GTQTCore_TAB);

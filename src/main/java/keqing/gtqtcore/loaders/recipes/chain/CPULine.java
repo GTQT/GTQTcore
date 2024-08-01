@@ -26,6 +26,7 @@ import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.TJMaterials.*;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.electrode;
+import static keqing.gtqtcore.api.utils.GTQTUtil.CWT;
 import static keqing.gtqtcore.common.block.blocks.GTQTADVGlass.CasingType.SILICATE_GLASS;
 import static keqing.gtqtcore.common.block.blocks.GTQTStepper.CasingType.*;
 import static keqing.gtqtcore.common.block.blocks.GTQTStepper.CasingType.F_LASER_MKV;
@@ -349,7 +350,7 @@ public class CPULine {
                     .Laser(tier)
                     .input(SILICON_WAFER)
                     .output(item2)
-                    .CWUt((int) Math.pow(8,tier))
+                    .CWUt(CWT[tier])
                     .duration(250*tier*EU)
                     .buildAndRegister();
         }
@@ -358,7 +359,7 @@ public class CPULine {
                     .Laser(tier)
                     .input(PHOSPHORUS_WAFER)
                     .output(item2, (int)Math.pow(2,2-tier))
-                    .CWUt((int) Math.pow(8,tier+1))
+                    .CWUt(CWT[tier+1])
                     .duration(500*tier*EU)
                     .buildAndRegister();
         }
@@ -367,7 +368,7 @@ public class CPULine {
                     .Laser(tier)
                     .input(NAQUADAH_WAFER)
                     .output(item2, (int)Math.pow(2,3-tier))
-                    .CWUt((int) Math.pow(8,tier+2))
+                    .CWUt(CWT[tier+2])
                     .duration(1000*tier*EU)
                     .buildAndRegister();
         }
@@ -376,7 +377,7 @@ public class CPULine {
                     .Laser(tier)
                     .input(NEUTRONIUM_WAFER)
                     .output(item2, (int)Math.pow(2,4-tier))
-                    .CWUt((int) Math.pow(8,tier+3))
+                    .CWUt(CWT[tier+3])
                     .duration(2000*tier*EU)
                     .buildAndRegister();
         }

@@ -237,14 +237,14 @@ public class MetaTileEntityOceanPumper extends MultiblockWithDisplayBase impleme
 
             if (this.isActive() && drainEnergy(true)) {
                 textList.add(new TextComponentTranslation("gregtech.machine.miner.working").setStyle(new Style().setColor(TextFormatting.GOLD)));
-                textList.add(new TextComponentTranslation("susy.ocean_pumper.drainrate", drainRate));
+                textList.add(new TextComponentTranslation("当前抽取速率：%s", drainRate));
             }
             else if (!drainEnergy(true))
                 textList.add(new TextComponentTranslation("gregtech.machine.miner.needspower").setStyle(new Style().setColor(TextFormatting.RED)));
             else if (!this.isWorkingEnabled())
                 textList.add(new TextComponentTranslation("gregtech.multiblock.work_paused"));
             else if (!insertFluid(true))
-                textList.add(new TextComponentTranslation("susy.ocean_pumper.full").setStyle(new Style().setColor(TextFormatting.RED)));
+                textList.add(new TextComponentTranslation("输出仓已满！").setStyle(new Style().setColor(TextFormatting.RED)));
         }
     }
 

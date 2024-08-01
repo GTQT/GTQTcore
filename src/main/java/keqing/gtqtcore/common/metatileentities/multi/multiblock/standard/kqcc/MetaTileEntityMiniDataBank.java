@@ -184,7 +184,7 @@ public class MetaTileEntityMiniDataBank extends MultiblockWithDisplayBase implem
 
     @SideOnly(Side.CLIENT)
     public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
-        return Textures.SOLID_STEEL_CASING;
+        return GTQTTextures.IRIDIUM_CASING;
     }
 
     public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {

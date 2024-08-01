@@ -116,7 +116,6 @@ public class GTQTRecipesManager {
         PEEKChain.init();
         ELE.init();
         CPULine.init();
-        AllouKlin.init();
         GTComponents.init();
         PlatinumDeal.init();
         DecompositionRecipeHandler.runRecipeGeneration();

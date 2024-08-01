@@ -149,8 +149,7 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<FuelRecipeBuilder> I_MODULAR_FISSION_REACTOR;
     public static final RecipeMap<ChemicalPlantBuilder> CHEMICAL_PLANT;
     public static final RecipeMap<SimpleRecipeBuilder> INTEGRATED_MINING_DIVISION;
-    public static final RecipeMap<FuelRecipeBuilder> STEAM_BLAST_FURNACE_RECIPES;
-    public static final RecipeMap<FuelRecipeBuilder> STEAM_ORE_WASHER_RECIPES;
+
     public static final RecipeMap<QFTCasingTierRecipeBuilder> QUANTUM_FORCE_TRANSFORMER_RECIPES;
     public static final RecipeMap<FlowRateRecipeBuilder> HEAT_EXCHANGE_RECIPES;
     public static final RecipeMap<PrimitiveRecipeBuilder> HEAT_EXCHANGE;
@@ -161,7 +160,6 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<FuelRecipeBuilder> PLASMA_FORGE;
     public static final RecipeMap<FuelRecipeBuilder> STAR_BIOMIMETIC_FACTORY;
     public static final RecipeMap<NoCoilTemperatureRecipeBuilder> MOLECULAR_DISTILLATION_RECIPES;
-    public static final RecipeMap<PrimitiveRecipeBuilder> ALLOY_kILN;
     public static final RecipeMap<PrimitiveRecipeBuilder> PR_MIX;
     public static final RecipeMap<PrimitiveRecipeBuilder> SALT_FLIED;
     public static final RecipeMap<FuelRecipeBuilder> HIGH_PRESSURE_STEAM_TURBINE_FUELS;
@@ -315,10 +313,6 @@ public class GTQTcoreRecipeMaps {
                 .setProgressBar(GuiTextures.PROGRESS_BAR_BATH, ProgressWidget.MoveType.CIRCULAR)
                 .setSound(GTSoundEvents.BATH);
 
-        ALLOY_kILN = new RecipeMap<>("alloy_klin", 2, 2, 0, 0, new PrimitiveRecipeBuilder(), false)
-                .setProgressBar(GuiTextures.PROGRESS_BAR_MACERATE, ProgressWidget.MoveType.HORIZONTAL)
-                .setSound(GTSoundEvents.MACERATOR);
-
         PR_MIX = new RecipeMap<>("pr_mix", 3, 3, 3, 3, new PrimitiveRecipeBuilder(), false)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_MACERATE, ProgressWidget.MoveType.HORIZONTAL)
                 .setSound(GTSoundEvents.CHEMICAL_REACTOR);
@@ -432,12 +426,6 @@ public class GTQTcoreRecipeMaps {
 
         PYROLYSIS_TOWER = new RecipeMap<>("pyrolysis_tower",
                 1, 1, 1, 8, new SimpleRecipeBuilder(), false);
-
-        STEAM_BLAST_FURNACE_RECIPES = new RecipeMap<>("steam_blast_furnace",
-                3, 1, 0, 0, new FuelRecipeBuilder(), false);
-
-        STEAM_ORE_WASHER_RECIPES = new RecipeMap<>("steam_ore_washer",
-                3, 1, 0, 0, new FuelRecipeBuilder(), false);
 
         QUANTUM_FORCE_TRANSFORMER_RECIPES = new RecipeMap<>("quantum_force_transformer_recipes", 6,  6,  6,  6, new QFTCasingTierRecipeBuilder(), false)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL)

@@ -100,8 +100,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityIndustryWaterPump INDUSTRY_WATER_PUMP;
     public static MetaTileEntityKQCC KQCC;
     public static MetaTileEntityGantryCrane GANTRY_CRANE;
-    public static MetaTileEntitySteamOreWasher STEAM_ORE_WASHER;
-    public static MetaTileEntitySteamBlastFurnace STEAM_BLAST_FURANCE;
+
     public static MetaTileEntityPReactor P_REACTOR;
     public static MetaTileEntityBReactor B_REACTOR;
     public static MetaTileEntityHugeDistillationTower HUGE_DISTILLATION_TOWER;
@@ -116,11 +115,10 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityNaquadahReactorMkiii NAQUADAH_REACTOR_MKIII;
     public static MetaTileEntityDigester DIGESTER;
     public static final MetaTileEntityHugeFusionReactor[] HUGE_FUSION_REACTOR = new MetaTileEntityHugeFusionReactor[2];
-    public static MetaTileEntitySteamCompressor STEAM_COMPRESSOR;
+
     public static MetaTileEntityStepper STEPPER;
     public static MetaTileEntitySeismicDetector SEISMIC_DETECTOR;
-    public static MetaTileEntitySteamExtractor STEAM_EXTRACTOR;
-    public static MetaTileEntitySteamHammer STEAM_HAMMER;
+
     public static MetaTileEntityHugeCrackingUnit HUGE_CRACKING_UNIT;
     public static MetaTileEntityHugeMiner BASIC_HUGE_MINER;
     public static MetaTileEntityGreenhousePlus GREEN_HOUSE_PLUS;
@@ -140,7 +138,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityPCBFactory PCB_FACTORY;
     public static MetaTileEntityElectricArcFurnace ELECTRIC_ARC_FURNACE;
     public static MetaTileEntityMultiblockTank[] TANK = new MetaTileEntityMultiblockTank[10];
-    public static MetaTileEntityAlloykiln ALLOY_KILN;
+
     public static MetaTileEntitySaltField SALT_FLIED;
     public static MetaTileEntityCommonRubbishBin COMMON_RUBBISH_BIN;
     public static SimpleMachineMetaTileEntity[] COMPONENT_ASSEMBLER = new SimpleMachineMetaTileEntity[GTValues.IV + 1];
@@ -358,12 +356,7 @@ public class GTQTMetaTileEntities {
         LARGE_BIOMASS_GENERATOR = registerMetaTileEntity(3073, new MetaTileEntityLargeBiomassGenerator(gtqtcoreId("large_biomass_generator")));
 
         //早期设备
-        ALLOY_KILN = registerMetaTileEntity(3100, new MetaTileEntityAlloykiln(gtqtcoreId("alloy_klin")));
-        STEAM_COMPRESSOR = registerMetaTileEntity(3101, new MetaTileEntitySteamCompressor(gtqtcoreId("steam_compressor")));
-        STEAM_EXTRACTOR = registerMetaTileEntity(3102, new MetaTileEntitySteamExtractor(gtqtcoreId("steam_extractor")));
-        STEAM_BLAST_FURANCE = registerMetaTileEntity(3103, new MetaTileEntitySteamBlastFurnace(gtqtcoreId("steam_blast_furance")));
-        STEAM_ORE_WASHER = registerMetaTileEntity(3104, new MetaTileEntitySteamOreWasher(gtqtcoreId("steam_ore_washer")));
-        STEAM_HAMMER = registerMetaTileEntity(3105, new MetaTileEntitySteamHammer(gtqtcoreId("steam_hammer")));
+
         INDUSTRIAL_PRIMITIVE_BLAST_FURNACE = registerMetaTileEntity(3106, new MetaTileEntityIndustrialPrimitiveBlastFurnace(gtqtcoreId("industrial_primitive_blast_furnace")));
         COAGULATION_TANK = registerMetaTileEntity(3107, new MetaTileEntityStewStoolStove(gtqtcoreId("coagulation_tank")));
         P_REACTOR= registerMetaTileEntity(3108, new MetaTileEntityPReactor(gtqtcoreId("p_reactor")));

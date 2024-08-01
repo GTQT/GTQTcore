@@ -97,7 +97,7 @@ public class MiningDrill {
                     .chancedOutput(crushed, material5, 3000+500*Math.abs(1-i), 2000+200*Math.abs(4-i))
                     .chancedOutput(crushed, material6, 3000+500*Math.abs(-i), 2000+200*Math.abs(5-i))
                     .EUt(120)
-                    .duration(100)
+                    .duration(200)
                     .circuitMeta(i+5)
                     .buildAndRegister();
         }

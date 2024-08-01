@@ -17,6 +17,7 @@ import gregtech.client.utils.TooltipHelper;
 import gregtech.common.blocks.BlockBoilerCasing.BoilerCasingType;
 import gregtech.common.blocks.BlockMetalCasing.MetalCasingType;
 import gregtech.common.blocks.MetaBlocks;
+import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityFluidHatch;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -78,8 +79,10 @@ public class MetaTileEntityDistillationKettle extends RecipeMapMultiblockControl
         public void setMaxProgress(int maxProgress)
         {
             if(getStatue()) {
-                maxProgressTime = maxProgress /2;
+                maxProgressTime = (int) (maxProgress *0.8);
             }
+            else  maxProgressTime = maxProgress*2;
+
         }
         public  boolean getStatue()
         {
@@ -120,12 +123,15 @@ public class MetaTileEntityDistillationKettle extends RecipeMapMultiblockControl
                 .aisle("F   F", "F   F", "CCCCC", "CPPPC", "C   C", "CPPPC", "C   C", "CPPPC", "CCCCC", "FCCCF")
                 .aisle(" F F ", " F F ", " CCC ", " CSC ", " CCC ", " CCC ", " CCC ", " CCC ", " CCC ", " FCF ")
                 .where('S', selfPredicate())
-                .where('C', states(MetaBlocks.METAL_CASING.getState(MetalCasingType.STEEL_SOLID))
+                .where('C', states(MetaBlocks.METAL_CASING.getState(MetalCasingType.STEEL_SOLID)).setMinGlobalLimited(96)
                         .or(autoAbilities(true, true, true, true, true, false, false)))
                 .where('F', states(MetaBlocks.FRAMES.get(Materials.Steel).getBlock(Materials.Steel)))
                 .where('P', states(MetaBlocks.BOILER_CASING.getState(BoilerCasingType.STEEL_PIPE)))
                 .where('E', states(MetaBlocks.METAL_CASING.getState(MetalCasingType.STEEL_SOLID)))
-                .where('O', states((MetaBlocks.METAL_CASING.getState(MetalCasingType.STEEL_SOLID))).or(abilities(MultiblockAbility.EXPORT_FLUIDS).setMinGlobalLimited(1).setPreviewCount(4)))
+                .where('O', states((MetaBlocks.METAL_CASING.getState(MetalCasingType.STEEL_SOLID)))
+                        .or(metaTileEntities(MultiblockAbility.REGISTRY.get(MultiblockAbility.EXPORT_FLUIDS).stream()
+                                .filter(mte->(mte instanceof MetaTileEntityFluidHatch))
+                                .toArray(MetaTileEntity[]::new))))
                 .where(' ', any())
                 .build();
     }

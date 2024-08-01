@@ -558,13 +558,5 @@ public class MiscMachineRecipes {
                         .circuitMeta(3)
                         .buildAndRegister();
 
-        GTQTcoreRecipeMaps.STEAM_BLAST_FURNACE_RECIPES.recipeBuilder()
-                .input(ingot, WroughtIron)
-                .output(ingot, Steel)
-                .duration(3600)
-                .EUt(24)
-                .buildAndRegister();
-
-
     }
 }

@@ -31,8 +31,10 @@ public class PPBChain {
         //乙酸丙酯
         CHEMICAL_RECIPES.recipeBuilder()
                 .fluidInputs(SodiumAcetate.getFluid(1000))
-                .fluidOutputs(NitricAcid.getFluid(1000))
-                .fluidOutputs(PropylAcetate.getFluid(3000))
+                .notConsumable(NitricAcid.getFluid(1000))
+                .fluidOutputs(Water.getFluid(1000))
+                .fluidOutputs(PropylAcetate.getFluid(1000))
+                .circuitMeta(5)
                 .duration(200).EUt(VA[IV]).buildAndRegister();
 
         //乙酰丙酮

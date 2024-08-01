@@ -59,15 +59,6 @@ public class IntegratedMiningDivision {
                     addIntegratedMiningRecipe9(material, 2)
                             .EUt(1920).duration(20)
                             .buildAndRegister();
-                    addIntegratedMiningRecipe10(material, 1)
-                            .EUt(16).duration(160)
-                            .buildAndRegister();
-                    addIntegratedMiningRecipe11(material, 1)
-                            .EUt(16).duration(160)
-                            .buildAndRegister();
-                    addIntegratedMiningRecipe12(material, 1)
-                            .EUt(16).duration(160)
-                            .buildAndRegister();
                 }
             }
         }
@@ -132,21 +123,6 @@ public class IntegratedMiningDivision {
                 .input(OrePrefix.oreEndstone, material)
                 .fluidInputs(Water.getFluid(1000))
                 .circuitMeta(1)
-                .output(OrePrefix.dust, material, output);
-    }
-    private static FuelRecipeBuilder addIntegratedMiningRecipe10(Material material, int output) {
-        return GTQTcoreRecipeMaps.STEAM_ORE_WASHER_RECIPES.recipeBuilder()
-                .input(OrePrefix.crushed, material)
-                .output(OrePrefix.crushedPurified, material, output);
-    }
-    private static FuelRecipeBuilder addIntegratedMiningRecipe11(Material material, int output) {
-        return GTQTcoreRecipeMaps.STEAM_ORE_WASHER_RECIPES.recipeBuilder()
-                .input(OrePrefix.dustPure, material)
-                .output(OrePrefix.dust, material, output);
-    }
-    private static FuelRecipeBuilder addIntegratedMiningRecipe12(Material material, int output) {
-        return GTQTcoreRecipeMaps.STEAM_ORE_WASHER_RECIPES.recipeBuilder()
-                .input(OrePrefix.dustImpure, material)
                 .output(OrePrefix.dust, material, output);
     }
 }

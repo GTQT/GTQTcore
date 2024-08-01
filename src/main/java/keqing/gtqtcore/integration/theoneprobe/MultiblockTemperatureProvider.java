@@ -32,13 +32,6 @@ public class MultiblockTemperatureProvider implements  IProbeInfoProvider {
             IProbeInfo horizontalPane = iProbeInfo.horizontal(iProbeInfo.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER));
             if (te instanceof IGregTechTileEntity igtte) {
                 MetaTileEntity mte = igtte.getMetaTileEntity();
-                if (mte instanceof  MetaTileEntityElectricBlastFurnace) {
-                    int Temperature = ((MetaTileEntityElectricBlastFurnace) mte).getCurrentTemperature();
-
-                    horizontalPane.text(TextStyleClass.INFO + "{*gtqt.top.temperature*}");
-                    horizontalPane.text(TextStyleClass.INFO + " " +TextFormatting.RED+Temperature+" K");
-                }
-
                 if (mte instanceof MetaTileEntityBlazingBlastFurnace) {
                     int Temperature = ((MetaTileEntityBlazingBlastFurnace) mte).getCurrentTemperature();
                     horizontalPane.text(TextStyleClass.INFO + "{*gtqt.top.temperature*}");

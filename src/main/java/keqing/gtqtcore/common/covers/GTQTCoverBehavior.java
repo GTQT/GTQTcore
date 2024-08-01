@@ -18,13 +18,7 @@ import static gregtech.common.covers.CoverBehaviors.registerBehavior;
 public class GTQTCoverBehavior {
 
     public static void init() {
-        
-        registerBehavior(new ResourceLocation(GTQTCore.MODID, "pump.ulv"), GTQTMetaItems.ELECTRIC_PUMP_ULV,
-                (def, tile, side) -> new CoverPump(def, tile, side, GTValues.ULV, 320));
-        registerBehavior(new ResourceLocation(GTQTCore.MODID, "conveyor.ulv"), GTQTMetaItems.CONVEYOR_MODULE_ULV,
-                (def, tile, side) -> new CoverConveyor(def, tile, side, GTValues.ULV, 4));
-        registerBehavior(new ResourceLocation(GTQTCore.MODID, "robot_arm.ulv"), GTQTMetaItems.ROBOT_ARM_ULV,
-                (def, tile, side) -> new CoverRoboticArm(def, tile, side, GTValues.ULV, 4));
+
         registerBehavior(new ResourceLocation(GTQTCore.MODID, "pump.max"), GTQTMetaItems.ELECTRIC_PUMP_MAX,
                 (def, tile, side) -> new CoverPump(def, tile, side, GTValues.MAX, 1048576));
         registerBehavior(new ResourceLocation(GTQTCore.MODID, "conveyor.max"), GTQTMetaItems.CONVEYOR_MODULE_MAX,

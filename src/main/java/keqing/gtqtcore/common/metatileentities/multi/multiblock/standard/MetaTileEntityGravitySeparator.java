@@ -100,9 +100,9 @@ public class MetaTileEntityGravitySeparator extends GTQTRecipeMapMultiblockContr
                 this.drawEnergy(this.recipeEUt, false);
                 if (++progressTime > maxProgressTime)
                 {
-                    steam[0]=(int) (steam[0]*0.48);
-                    steam[1]=(int) (steam[1]*0.64);
-                    steam[2]=(int) (steam[2]*0.72);
+                    steam[0]=(int) (steam[0]*0.72);
+                    steam[1]=(int) (steam[1]*0.84);
+                    steam[2]=(int) (steam[2]*0.96);
                     completeRecipe();
                 }
             }
