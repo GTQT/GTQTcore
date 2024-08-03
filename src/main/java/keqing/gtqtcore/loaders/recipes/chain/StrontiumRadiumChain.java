@@ -145,7 +145,7 @@ public class StrontiumRadiumChain {
         //  Heptafluorotantalate -> Potassium Fluotantalate
         CHEMICAL_RECIPES.recipeBuilder()
                 .fluidInputs(Heptafluorotantalate.getFluid(1000))
-                .fluidInputs(PotassiumHydroxide.getFluid(2000))
+                .input(dust, PotassiumHydroxide, 2)
                 .output(dust, PotassiumFluotantalate, 10)
                 .fluidOutputs(Water.getFluid(2000))
                 .EUt(VA[MV])
@@ -169,7 +169,7 @@ public class StrontiumRadiumChain {
                 .fluidInputs(Water.getFluid(9000))
                 .output(dust, TantalumPentoxide, 7)
                 .fluidOutputs(HydrofluoricAcid.getFluid(14000))
-                .fluidOutputs(PotassiumHydroxide.getFluid(4000))
+                .output(dust, PotassiumHydroxide, 4)
                 .EUt(VA[LV])
                 .duration(20)
                 .buildAndRegister();

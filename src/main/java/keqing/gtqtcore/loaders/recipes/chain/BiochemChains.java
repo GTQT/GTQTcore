@@ -57,7 +57,6 @@ public class BiochemChains {
                 .fluidOutputs(Latex.getFluid(400))
                 .buildAndRegister();
 
-
         //
         //
         CHEMICAL_RECIPES.recipeBuilder()
@@ -199,7 +198,6 @@ public class BiochemChains {
                 .fluidInputs(Latex.getFluid(400))
                 .input(dust,Trona)
                 .output(dust, RawRubber, 4)
-                .output(dust, Salt, 1)
                 .chancedOutput(PLANT_BALL, 2000, 400)
                 .fluidOutputs(Glue.getFluid(200))
                 .buildAndRegister();
@@ -207,8 +205,7 @@ public class BiochemChains {
         CENTRIFUGE_RECIPES.recipeBuilder().duration(200).EUt(5)
                 .fluidInputs(Latex.getFluid(200))
                 .input(dust,SodaAsh)
-                .output(dust, RawRubber, 3)
-                .output(dust, Salt, 1)
+                .output(dust, RawRubber, 4)
                 .chancedOutput(PLANT_BALL, 2000, 400)
                 .fluidOutputs(Glue.getFluid(200))
                 .buildAndRegister();
@@ -220,6 +217,13 @@ public class BiochemChains {
                 .fluidOutputs(Glue.getFluid(100))
                 .buildAndRegister();
 
+
+        PR_MIX.recipeBuilder().duration(200)
+                .fluidInputs(Latex.getFluid(200))
+                .input(dust,Trona)
+                .output(dust, RawRubber, 1)
+                .fluidOutputs(Glue.getFluid(200))
+                .buildAndRegister();
 
         PR_MIX.recipeBuilder().duration(200)
                 .fluidInputs(Latex.getFluid(200))

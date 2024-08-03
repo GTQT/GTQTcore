@@ -3,11 +3,11 @@ package keqing.gtqtcore.loaders.recipes.chain;
 import gregtech.api.recipes.GTRecipeHandler;
 import gregtech.api.recipes.ingredients.IntCircuitIngredient;
 import gregtech.api.unification.OreDictUnifier;
+import keqing.gtqtcore.common.items.GTQTMetaItems;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
-import static gregtech.api.GTValues.HV;
-import static gregtech.api.GTValues.VA;
+import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
@@ -52,8 +52,9 @@ public class TitanateChain {
                 .output(dust,NanometerBariumTitanate)
                 .buildAndRegister();
 
-        //酰化钛+乙酸钡
-        CHEMICAL_RECIPES.recipeBuilder().duration(400).EUt(VA[HV])
+        //硫酸钡浊液
+        CHEMICAL_RECIPES.recipeBuilder().duration(400).EUt(VA[IV])
+                .notConsumable(GTQTMetaItems.CATALYST_FRAMEWORK_I)
                 .fluidInputs(SulfuricAcid.getFluid(1000))
                 .input(dust, BariumOxide)
                 .fluidOutputs(BariumSulfateSuspension.getFluid(1000))

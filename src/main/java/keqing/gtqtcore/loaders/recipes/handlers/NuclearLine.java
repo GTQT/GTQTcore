@@ -305,7 +305,7 @@ public class NuclearLine {
         NUCLEAR_RECIPES.recipeBuilder()
                 .input(ranliaowan,material)
                 .output(kujieranliaowan,material)
-                .duration(1800+fuel*240)
+                .duration(500+fuel*500)
                 .minTemp(fuel)
                 .EUt(2048)
                 .buildAndRegister();

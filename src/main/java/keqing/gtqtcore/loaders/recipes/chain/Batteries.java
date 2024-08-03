@@ -20,7 +20,7 @@ public class Batteries {
         DRYER_RECIPES.recipeBuilder().duration(240).EUt(1300)
                 .input(dust, Garnierite, 8)
                 .fluidInputs(SulfuricAcid.getFluid(3000))
-                .fluidInputs(PotassiumHydroxide.getFluid(6000))
+                .input(dust, PotassiumHydroxide, 6)
                 .output(dust, PotassiumSulfate,21)
                 .output(dust,NickelOxideHydroxide,16)
                 .buildAndRegister();
@@ -314,7 +314,7 @@ public class Batteries {
                 .buildAndRegister();
 
         CANNER_RECIPES.recipeBuilder()
-                .fluidInputs(PotassiumHydroxide.getFluid(1000))
+                .input(dust, PotassiumHydroxide, 1)
                 .inputs(BATTERY_NIMH_EMPTY.getStackForm())
                 .EUt(480)
                 .duration(60)

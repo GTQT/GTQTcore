@@ -50,7 +50,7 @@ public class BZChain {
         // 3HBr + 3KOH -> KBrO3 + 3H2O
         CRYOGENIC_REACTOR_RECIPES.recipeBuilder()
                 .fluidInputs(Bromine.getFluid(3000))
-                .fluidInputs(PotassiumHydroxide.getFluid(L * 9))
+                .input(dust, PotassiumHydroxide, 1)
                 .output(dust, PotassiumBromate, 5)
                 .fluidOutputs(Ice.getFluid(3000))
                 .temperature(273)

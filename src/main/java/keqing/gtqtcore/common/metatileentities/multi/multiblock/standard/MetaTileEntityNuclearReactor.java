@@ -99,13 +99,14 @@ public class MetaTileEntityNuclearReactor extends RecipeMapMultiblockController 
         tooltip.add(I18n.format("调节冷却流量阀门控制换热比例(基础送水速度4000mb/t)，单位时间内进行热交换的流体更多，同时积热加速降温(最高高压蒸汽产出5+5mb/t)"));
         tooltip.add(I18n.format("当多方块进入生产超频（降温率大于升温率）,高压蒸汽生产额外获得五倍输出"));
         tooltip.add(I18n.format("当多方块温度到达5000K时会触发特大范围熔毁爆炸"));
-        tooltip.add(I18n.format("超频模式：立刻进入深度反应，积热升温倍率提高四倍"));
+        tooltip.add(I18n.format("超频模式：立刻进入深度反应，积热升温倍率提高四倍，燃料反应时间不变，但此时强制停机模式失效"));
         tooltip.add(I18n.format("高温停机模式：到达预警（5500K）临界温度时发生一次小爆炸强制停机"));
     }
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         textList.add(new TextComponentTranslation("=========核电控制台========="));
-        textList.add(new TextComponentTranslation("超频：%s | 高温强制停机：%s", open,care));
+        if(open&&care)textList.add(new TextComponentTranslation("超频：%s | 高温强制停机失效！！！"));
+        else textList.add(new TextComponentTranslation("超频：%s | 高温强制停机：%s", open,care));
         textList.add(new TextComponentTranslation("积热：%s", heat));
         textList.add(new TextComponentTranslation("升温率：%s 降温率：%s ", temp,cold));
         textList.add(new TextComponentTranslation("积热升温倍率：%s", addtemp));
@@ -116,7 +117,7 @@ public class MetaTileEntityNuclearReactor extends RecipeMapMultiblockController 
     }
     FluidStack WATER_STACK = Water.getFluid(1000*4*rate);
     FluidStack HOT_STACK1 = GTQTMaterials.HighPressureSteam.getFluid(1);
-    FluidStack HOT_STACK2 = GTQTMaterials.HighPressureSteam.getFluid(5);
+    FluidStack HOT_STACK2 = GTQTMaterials.HighPressureSteam.getFluid(2);
     @Override
     public void update() {
         super.update();
@@ -130,17 +131,16 @@ public class MetaTileEntityNuclearReactor extends RecipeMapMultiblockController 
         //逻辑：反应升温 需要熔盐
         if (WATER_STACK.isFluidStackIdentical(inputTank.drain(WATER_STACK, false))&&heat>500) {
             inputTank.drain(WATER_STACK, true);
-            fillTanks(HOT_STACK1,false);
-            if(temp-cold<=0)fillTanks(HOT_STACK2,false);
             if(heat>1000)fillTanks(HOT_STACK1,false);
-            if(heat>2000)fillTanks(HOT_STACK1,false);
             if(heat>3000)fillTanks(HOT_STACK1,false);
+            if(heat>5000)fillTanks(HOT_STACK1,false);
+            if(temp-cold<=0)fillTanks(HOT_STACK2,false);
             cold=rate;
             heat-=heat*((cold/temp)/100);
             addtemp-=rate*0.0002;
         }
         if(heat>6000)doExplosion1((float) (temp*3));
-        if(care&&heat>5500)doExplosion2(1);
+        if(!open&&care&&heat>5500)doExplosion2(1);
     }
     public void doExplosion1(float explosionPower) {
         this.setExploded();
@@ -153,7 +153,7 @@ public class MetaTileEntityNuclearReactor extends RecipeMapMultiblockController 
     public void doExplosion2(float explosionPower) {
         this.setExploded();
         this.getWorld().setBlockToAir(this.getPos());
-        this.getWorld().createExplosion((Entity)null, (double)this.getPos().getX() + 0.5, (double)this.getPos().getY() + 0.5, (double)this.getPos().getZ() + 0.5, explosionPower, true);
+        this.getWorld().createExplosion((Entity)null, (double)this.getPos().getX() + 4.5, (double)this.getPos().getY() + 0.5, (double)this.getPos().getZ() + 4.5, explosionPower, true);
     }
     @Override
     protected void addWarningText(List<ITextComponent> textList) {
@@ -163,6 +163,9 @@ public class MetaTileEntityNuclearReactor extends RecipeMapMultiblockController 
         }
         if (heat>5000) {
             textList.add(new TextComponentTranslation("高温警告！"));
+        }
+        if(open&&care){
+            textList.add(new TextComponentTranslation("保险模式失效！！！"));
         }
     }
     @Override
