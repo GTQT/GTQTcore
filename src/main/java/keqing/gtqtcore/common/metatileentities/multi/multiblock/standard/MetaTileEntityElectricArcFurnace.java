@@ -116,7 +116,7 @@ public class MetaTileEntityElectricArcFurnace extends GTQTRecipeMapMultiblockCon
     public boolean fillTanks(FluidStack stack, boolean simulate) {
         return GTTransferUtils.addFluidsToFluidHandler(getOutputFluidInventory(), simulate, Collections.singletonList(stack));
     }
-    int ParallelNum;
+    int ParallelNum=1;
     int ParallelLim;
     int P;
 

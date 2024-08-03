@@ -60,7 +60,7 @@ public class MetaTileEntityDigester extends GTQTRecipeMapMultiblockOverwrite {
         super(metaTileEntityId, GTQTcoreRecipeMaps.DIGESTER_RECIPES);
         this.recipeMapWorkable = new MetaTileEntityDigesterWorkable(this);
     }
-     int ParallelNum;
+     int ParallelNum=1;
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("modern", modern);
@@ -230,7 +230,7 @@ public class MetaTileEntityDigester extends GTQTRecipeMapMultiblockOverwrite {
     @Override
     public void invalidateStructure() {
         super.invalidateStructure();
-        this.coilTier = -1;
+        this.coilTier = 0;
         heatingCoilLevel = 0;
         heatingCoilDiscount = 0;
     }

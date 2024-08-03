@@ -66,7 +66,7 @@ public class MetaTileEntitySeismicDetector extends MetaTileEntityBaseWithControl
         if((this.getPos().getY()/64)%2==0)random+=2;
         else random+=1;
 
-        return random+this.getWorld().provider.getDimension()*4;
+        return random;
     }
     public ItemStack setCard() {
         ItemStack card = new ItemStack(GTQTMetaItems.POS_ORE_CARD.getMetaItem(), 1, 180);

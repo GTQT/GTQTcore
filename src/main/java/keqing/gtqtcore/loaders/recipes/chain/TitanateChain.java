@@ -13,6 +13,7 @@ import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.Adamantium;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
+import static keqing.gtqtcore.api.unification.TJMaterials.BariumOxide;
 import static keqing.gtqtcore.api.unification.TJMaterials.SodiumAcetate;
 
 public class TitanateChain {
@@ -50,6 +51,14 @@ public class TitanateChain {
                 .fluidInputs(Xianhuatai.getFluid(1000))
                 .output(dust,NanometerBariumTitanate)
                 .buildAndRegister();
+
+        //酰化钛+乙酸钡
+        CHEMICAL_RECIPES.recipeBuilder().duration(400).EUt(VA[HV])
+                .fluidInputs(SulfuricAcid.getFluid(1000))
+                .input(dust, BariumOxide)
+                .fluidOutputs(BariumSulfateSuspension.getFluid(1000))
+                .buildAndRegister();
+
         //酰化钛+乙酸钡
         CHEMICAL_RECIPES.recipeBuilder().duration(400).EUt(VA[HV])
                 .fluidInputs(BariumSulfateSuspension.getFluid(2000))

@@ -354,7 +354,6 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem BOSE_EINSTEIN_CONDENSATE;
     public static MetaItem<?>.MetaValueItem ESR_COMPUTATION_UNIT;
     //  Covers
-    public static MetaItem<?>.MetaValueItem FIELD_GENERATOR_ULV;
     public static MetaItem<?>.MetaValueItem ELECTRIC_MOTOR_MAX;
     public static MetaItem<?>.MetaValueItem ELECTRIC_PISTON_MAX;
     public static MetaItem<?>.MetaValueItem ELECTRIC_PUMP_MAX;

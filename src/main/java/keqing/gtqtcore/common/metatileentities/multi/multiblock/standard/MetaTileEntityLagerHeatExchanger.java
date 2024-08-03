@@ -18,7 +18,7 @@ import gregtech.common.blocks.BlockBoilerCasing;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.capability.IHeatExchanger;
-import keqing.gtqtcore.api.capability.impl.HeatExchangerLogic;
+import keqing.gtqtcore.api.capability.impl.HeatExchangerRecipeLogic;
 import keqing.gtqtcore.api.metaileentity.multiblock.NoEnergyMultiblockController;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
@@ -34,13 +34,12 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
 import static gregtech.api.gui.widgets.AdvancedTextWidget.withHoverTextTranslate;
-import static net.minecraft.util.text.TextFormatting.AQUA;
+import static net.minecraft.util.text.TextFormatting.*;
 
 public class MetaTileEntityLagerHeatExchanger extends NoEnergyMultiblockController implements IHeatExchanger {
     private final int heatTime = 150;
@@ -48,7 +47,7 @@ public class MetaTileEntityLagerHeatExchanger extends NoEnergyMultiblockControll
 
     public MetaTileEntityLagerHeatExchanger(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.HEAT_EXCHANGE_RECIPES);
-        this.recipeMapWorkable = new HeatExchangerLogic(this);
+        this.recipeMapWorkable = new HeatExchangerRecipeLogic(this);
     }
 
     @Override
@@ -69,7 +68,6 @@ public class MetaTileEntityLagerHeatExchanger extends NoEnergyMultiblockControll
                 .aisle("N#N#N", "NNNNN", "NNNNN", "NNNNN")
                 .aisle("N#N#N", "NNNNN", "IAAAE", "NNNNN")
                 .aisle("N#N#N", "NNNNN", "NCNNN", "NNNNN")
-
                 .where('C', selfPredicate())
                 .where('N', states(getCasingState()).setMinGlobalLimited(48)
                         .or(abilities(MultiblockAbility.EXPORT_FLUIDS))
@@ -98,14 +96,14 @@ public class MetaTileEntityLagerHeatExchanger extends NoEnergyMultiblockControll
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
         if (isStructureFormed()) {
-//            int efficiency = recipeLogic.getHeatScaled();
-//            textList.add(new TextComponentTranslation("gregtech.multiblock.large_boiler.efficiency",
-//                    (efficiency == 0 ? DARK_RED : efficiency <= 40 ? RED : efficiency == 100 ? GREEN : YELLOW).toString() + efficiency + "%"));
-//            textList.add(new TextComponentTranslation("gregtech.multiblock.large_boiler.steam_output", recipeLogic.getLastTickSteam()));
-
-            ITextComponent throttleText = new TextComponentTranslation("gtqtcore.multiblock.large_heat_exchanger.threshold",
+            HeatExchangerRecipeLogic logic = (HeatExchangerRecipeLogic)recipeMapWorkable;
+            textList.add(new TextComponentTranslation("gtlitecore.machine.heat_exchanger.rate." + logic.isSuperheat(), logic.getRate()));
+            int efficiency = (int) Math.ceil(logic.getHeatEfficiency() * (40 + 0.6 * thresholdPercentage));
+            textList.add(new TextComponentTranslation("gtlitecore.machine.heat_exchanger.efficiency",
+                    (efficiency == 0 ? DARK_RED : efficiency <= 40 ? RED : efficiency == 100 ? GREEN : YELLOW).toString() + efficiency + "%"));
+            ITextComponent throttleText = new TextComponentTranslation("gtlitecore.machine.heat_exchanger.threshold",
                     AQUA.toString() + getThrottle() + "%");
-            withHoverTextTranslate(throttleText, "gtqtcore.multiblock.large_heat_exchanger.threshold.tooltip");
+            withHoverTextTranslate(throttleText, "gtlitecore.machine.heat_exchanger.threshold.tooltip");
             textList.add(throttleText);
         }
     }
@@ -143,6 +141,7 @@ public class MetaTileEntityLagerHeatExchanger extends NoEnergyMultiblockControll
         tooltip.add(TooltipHelper.BLINKING_RED + I18n.format("gtqtcore.multiblock.large_heat_exchanger.explosion_tooltip"));
     }
 
+
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("ThresholdPercentage", thresholdPercentage);
@@ -170,6 +169,11 @@ public class MetaTileEntityLagerHeatExchanger extends NoEnergyMultiblockControll
     @Override
     public int getThrottle() {
         return thresholdPercentage;
+    }
+
+    @Override
+    public int getHeatTime() {
+        return heatTime;
     }
 
     @Override

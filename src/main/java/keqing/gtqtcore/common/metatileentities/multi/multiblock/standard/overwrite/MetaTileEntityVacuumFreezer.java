@@ -53,7 +53,7 @@ public class MetaTileEntityVacuumFreezer extends GTQTRecipeMapMultiblockOverwrit
         super(metaTileEntityId, RecipeMaps.VACUUM_RECIPES);
         this.recipeMapWorkable = new VacuumFreezerWorkableHandler(this);
     }
-     int ParallelNum;
+     int ParallelNum=1;
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("modern", modern);

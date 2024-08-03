@@ -45,8 +45,10 @@ import static gregtech.common.items.MetaItems.*;
 import static gregtech.common.metatileentities.MetaTileEntities.*;
 import static gregtech.common.metatileentities.MetaTileEntities.ROTOR_HOLDER;
 import static gregtechfoodoption.machines.GTFOTileEntities.GREENHOUSE;
+import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.VACUUM_CHAMBER_RECIPES;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
+import static keqing.gtqtcore.api.utils.GTQTUtil.CWT;
 import static keqing.gtqtcore.common.block.GTQTMetaBlocks.POWER;
 import static keqing.gtqtcore.common.block.blocks.GTQTIsaCasing.CasingType.FLOTATION_CASING_GEARBOX;
 import static keqing.gtqtcore.common.block.blocks.GTQTIsaCasing.CasingType.ISA_MILL_CASING_GEARBOX;
@@ -319,7 +321,7 @@ public class KeQingNET {
                 .duration(1200)
                 .stationResearch(b -> b
                         .researchStack(COMPONENT_ASSEMBLER[IV].getStackForm())
-                        .CWUt(LuV)
+                        .CWUt(CWT[LuV])
                         .EUt(VA[UV]))
                 .buildAndRegister();
 
@@ -630,7 +632,7 @@ public class KeQingNET {
                 .input(screw, TanmolyiumBetaC, 2)
                 .input(plate, TitaniumTungstenCarbide, 16)
                 .input(foil, TungstenSteel, 8)
-                .input(cableGtQuadruple, Palladium, 4)
+                .input(wireFine, Platinum, 32)
                 .fluidInputs(SolderingAlloy.getFluid(5760))
                 .fluidInputs(Zylon.getFluid(5760))
                 .fluidInputs(CobaltBrass.getFluid(L * 4))
@@ -667,6 +669,41 @@ public class KeQingNET {
                         .EUt(VA[IV])
                         .duration(1200))
                 .buildAndRegister();
+
+        //  Grindball Hatch
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .circuitMeta(15)
+                .input(TIERED_HATCH[EV])
+                .input(ITEM_IMPORT_BUS[EV])
+                .input(gear, Titanium, 4)
+                .input(COMPONENT_GRINDER_TUNGSTEN)
+                .input(wireFine, Tungsten, 16)
+                .fluidInputs(TinAlloy.getFluid(L * 8))
+                .output(MULTIPART_BALL_HATCH)
+                .EUt(VA[EV])
+                .duration(200)
+                .buildAndRegister();
+
+        //  Soapstone Grindball
+        VACUUM_CHAMBER_RECIPES.recipeBuilder()
+                .input(dust, Soapstone, 4)
+                .notConsumable(SHAPE_MOLD_BALL)
+                .fluidInputs(SolderingAlloy.getFluid(L))
+                .output(GRINDBALL_SOAPSTONE)
+                .EUt(VA[EV])
+                .duration(300)
+                .buildAndRegister();
+
+        //  Aluminium Grindball
+        VACUUM_CHAMBER_RECIPES.recipeBuilder()
+                .input(dust, Aluminium, 4)
+                .notConsumable(SHAPE_MOLD_BALL)
+                .fluidInputs(SolderingAlloy.getFluid(L))
+                .output(GRINDBALL_ALUMINIUM)
+                .EUt(VA[EV])
+                .duration(300)
+                .buildAndRegister();
+
 
         //  Flotation Factory
         ASSEMBLY_LINE_RECIPES.recipeBuilder()

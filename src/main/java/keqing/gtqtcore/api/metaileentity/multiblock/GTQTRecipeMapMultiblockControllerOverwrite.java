@@ -39,7 +39,7 @@ public abstract class GTQTRecipeMapMultiblockControllerOverwrite extends MultiMa
 
 
     /*
-    int ParallelNum;
+    int ParallelNum=1;
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("modern", modern);

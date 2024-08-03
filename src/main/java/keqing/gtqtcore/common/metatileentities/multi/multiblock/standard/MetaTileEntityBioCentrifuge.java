@@ -84,7 +84,7 @@ public class MetaTileEntityBioCentrifuge extends GTQTRecipeMapMultiblockControll
         }
     }
 
-    int ParallelNum;
+    int ParallelNum=1;
 
 
     @Override

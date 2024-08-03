@@ -220,13 +220,6 @@ public class BiochemChains {
                 .fluidOutputs(Glue.getFluid(100))
                 .buildAndRegister();
 
-        CENTRIFUGE_RECIPES.recipeBuilder().duration(400).EUt(5)
-                .fluidInputs(Latex.getFluid(200))
-                .input(dust,Trona)
-                .output(dust, RawRubber, 2)
-                .fluidOutputs(Glue.getFluid(100))
-                .buildAndRegister();
-
 
         PR_MIX.recipeBuilder().duration(200)
                 .fluidInputs(Latex.getFluid(200))
@@ -235,12 +228,6 @@ public class BiochemChains {
                 .fluidOutputs(Glue.getFluid(200))
                 .buildAndRegister();
 
-        PR_MIX.recipeBuilder().duration(200)
-                .fluidInputs(Latex.getFluid(200))
-                .input(dust,Trona)
-                .output(dust, RawRubber, 1)
-                .fluidOutputs(Glue.getFluid(200))
-                .buildAndRegister();
     }
     private static void H_E_ringPrecursors() {
 

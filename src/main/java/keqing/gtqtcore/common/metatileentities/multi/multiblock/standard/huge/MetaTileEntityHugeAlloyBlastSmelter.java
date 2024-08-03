@@ -411,7 +411,7 @@ public class MetaTileEntityHugeAlloyBlastSmelter extends RecipeMapMultiblockCont
     @Override
     public void invalidateStructure() {
         super.invalidateStructure();
-        this.coilTier = -1;
+        this.coilTier = 0;
         heatingCoilLevel = 0;
         heatingCoilDiscount = 0;
     }

@@ -224,7 +224,7 @@ public class HexanitrohexaaxaisowurtzitaneChain {
                 .fluidInputs(NitrousAcid.getFluid(1000))
                 .output(dust, PotassiumHydroxylaminedisulfonate, 13)
                 .fluidOutputs(Water.getFluid(1000))
-                .EUt(VA[LuV])
+                .EUt(VA[IV])
                 .duration(12 * SECOND)
                 .buildAndRegister();
 

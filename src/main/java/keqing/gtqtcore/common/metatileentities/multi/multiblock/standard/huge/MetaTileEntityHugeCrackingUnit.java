@@ -136,7 +136,7 @@ public class MetaTileEntityHugeCrackingUnit extends RecipeMapMultiblockControlle
 
     public void invalidateStructure() {
         super.invalidateStructure();
-        this.coilTier = -1;
+        this.coilTier = 0;
         this.heatingCoilLevel = 0;
         this.heatingCoilDiscount = 0;
     }

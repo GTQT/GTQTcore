@@ -54,7 +54,7 @@ public class MetaTileEntityLargeGrind extends GTQTRecipeMapMultiblockOverwrite {
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityLargeGrind(metaTileEntityId);
     }
-     int ParallelNum;
+     int ParallelNum=1;
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("modern", modern);

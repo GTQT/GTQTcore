@@ -649,7 +649,6 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         SUPRACAUSAL_INDUCTOR = this.addItem(919, "component.supracausal_smd.inductor").setCreativeTabs(CommonProxy.GTQTCore_TAB);
 
         //  Covers
-        FIELD_GENERATOR_ULV = this.addItem(941, "cover.field_generator.ulv").setCreativeTabs(CommonProxy.GTQTCore_TAB);
         ELECTRIC_MOTOR_MAX = this.addItem(942, "cover.electric_motor.max").setCreativeTabs(CommonProxy.GTQTCore_TAB);
         ELECTRIC_PISTON_MAX = this.addItem(943, "cover.electric_piston.max").setCreativeTabs(CommonProxy.GTQTCore_TAB);
         ELECTRIC_PUMP_MAX = this.addItem(944, "cover.electric_pump.max").setCreativeTabs(CommonProxy.GTQTCore_TAB);

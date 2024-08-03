@@ -87,7 +87,7 @@ public class MetaTileEntityBlazingBlastFurnace extends GTQTRecipeMapMultiblockCo
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity metaTileEntityHolder) {
         return new MetaTileEntityBlazingBlastFurnace(this.metaTileEntityId);
     }
-    int ParallelNum;
+    int ParallelNum=1;
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("modern", modern);
@@ -294,14 +294,17 @@ public class MetaTileEntityBlazingBlastFurnace extends GTQTRecipeMapMultiblockCo
         @Override
         public void setMaxProgress(int maxProgress)
         {
-            if(ParallelNum<=16)
-                this.maxProgressTime = maxProgress/ParallelNum;
-            else if(ParallelNum<=64)
-                this.maxProgressTime = maxProgress*16/ParallelNum;
-            else if(ParallelNum<=256)
-                this.maxProgressTime = maxProgress*128/ParallelNum;
+            if(ParallelNum==0)
+                 this.maxProgressTime = maxProgress;
+            else if (ParallelNum <= 16)
+                this.maxProgressTime = maxProgress / ParallelNum;
+            else if (ParallelNum <= 64)
+                this.maxProgressTime = maxProgress * 16 / ParallelNum;
+            else if (ParallelNum <= 256)
+                this.maxProgressTime = maxProgress * 128 / ParallelNum;
             else
                 this.maxProgressTime = maxProgress;
+
         }
     }
 }

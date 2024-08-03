@@ -90,7 +90,7 @@ public class MetaTileEntityAdvancedArcFurnace extends GTQTRecipeMapMultiblockCon
         ParallelLim=(int)Math.pow(2, 5);
         ParallelNum=ParallelLim;
     }
-    int ParallelNum;
+    int ParallelNum=1;
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);

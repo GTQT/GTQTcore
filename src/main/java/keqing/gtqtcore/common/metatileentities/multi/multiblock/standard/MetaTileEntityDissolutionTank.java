@@ -50,7 +50,7 @@ public class MetaTileEntityDissolutionTank extends GTQTRecipeMapMultiblockOverwr
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {
         return new MetaTileEntityDissolutionTank(metaTileEntityId);
     }
-     int ParallelNum;
+     int ParallelNum=1;
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("modern", modern);

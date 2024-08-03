@@ -69,7 +69,7 @@ public class MetaTileEntityIndustrialMacerator extends GTQTMultiblockCore {
                 .where('P', states(getCasingState()))
                 .where('S', this.selfPredicate())
                 .where('C', states(getCasingState())
-                        .setMinGlobalLimited(18)
+                        .setMinGlobalLimited(16)
                         .or(autoAbilities()))
                 .where('G', states(getSecondCasingState()))
                 .where('F', states(getFrameState()))
