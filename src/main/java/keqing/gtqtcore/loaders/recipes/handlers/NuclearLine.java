@@ -12,8 +12,7 @@ import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.common.items.MetaItems.*;
-import static gregtech.common.metatileentities.MetaTileEntities.CENTRIFUGE;
-import static gregtech.common.metatileentities.MetaTileEntities.HULL;
+import static gregtech.common.metatileentities.MetaTileEntities.*;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
@@ -109,13 +108,32 @@ public class NuclearLine {
                 .fluidInputs(Polyethylene.getFluid(2000))
                 .fluidInputs(Polytetrafluoroethylene.getFluid(2000))
                 .fluidInputs(ReinforcedEpoxyResin.getFluid(2000))
-                .fluidInputs(Tin.getFluid(1000))
-                .outputs(LAGER_HEAT_EXCHANGER.getStackForm())
+                .outputs(SMALL_HEAT_EXCHANGER.getStackForm())
                 .scannerResearch(b -> b
-                        .researchStack(STEAM_TURBINE[1].getStackForm())
+                        .researchStack(LARGE_STEAM_TURBINE.getStackForm())
                         .duration(1200)
                         .EUt(VA[HV]))
                 .duration(400).EUt(VA[HV]).buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(HULL[5], 4)
+                .input(circuit,MarkerMaterials.Tier.IV , 16)
+                .input(ELECTRIC_PUMP_IV, 8)
+                .input(pipeHugeFluid, TungstenSteel, 8)
+                .input(plate, Palladium, 6)
+                .input(gear, Titanium, 12)
+                .input(stick, PPB, 12)
+                .input(spring, Iridium, 12)
+                .input(wireGtHex, Platinum, 32)
+                .fluidInputs(Polybenzimidazole.getFluid(2000))
+                .fluidInputs(Zylon.getFluid(2000))
+                .fluidInputs(ReinforcedEpoxyResin.getFluid(2000))
+                .outputs(LAGER_HEAT_EXCHANGER.getStackForm())
+                .scannerResearch(b -> b
+                        .researchStack(SMALL_HEAT_EXCHANGER.getStackForm())
+                        .duration(1200)
+                        .EUt(VA[EV]))
+                .duration(400).EUt(VA[IV]).buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(HULL[4], 4)
@@ -133,7 +151,7 @@ public class NuclearLine {
                 .fluidInputs(Polybenzimidazole.getFluid(1000))
                 .outputs(HEAT_CHANGER.getStackForm())
                 .scannerResearch(b -> b
-                        .researchStack(LAGER_HEAT_EXCHANGER.getStackForm())
+                        .researchStack(SMALL_HEAT_EXCHANGER.getStackForm())
                         .duration(1200)
                         .EUt(VA[HV]))
                 .duration(400).EUt(VA[EV]).buildAndRegister();

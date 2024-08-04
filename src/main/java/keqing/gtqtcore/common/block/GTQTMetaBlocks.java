@@ -29,6 +29,7 @@ public class GTQTMetaBlocks {
     public static GTQTQuantumCasing QUANTUM_CASING;
     public static GTQTTurbineCasing TURBINE_CASING;
     public static GTQTTurbineCasing1 TURBINE_CASING1;
+    public static BlockEvaporationBed EVAPORATION_BED;
     public static GTQTQuantumForceTransformerCasing QUANTUM_CONSTRAINT_CASING;
     public static BlockGravitonCasing GRAVITON_CASING;
     public static GTQTBlockComponentAssemblyLineCasing COMPONENT_ASSEMBLY_LINE;
@@ -73,6 +74,8 @@ public class GTQTMetaBlocks {
         TURBINE_CASING.setRegistryName("turbine_casing");
         TURBINE_CASING1 = new GTQTTurbineCasing1();
         TURBINE_CASING1.setRegistryName("turbine_casing1");
+        EVAPORATION_BED = new BlockEvaporationBed();
+        EVAPORATION_BED.setRegistryName("evaporation_bed");
         QUANTUM_CONSTRAINT_CASING = new GTQTQuantumForceTransformerCasing();
         QUANTUM_CONSTRAINT_CASING.setRegistryName("quantum_force_transformer_casing");
         GRAVITON_CASING = new BlockGravitonCasing();
@@ -148,6 +151,7 @@ public class GTQTMetaBlocks {
         registerItemModel(COMPONENT_ASSEMBLY_LINE);
         registerItemModel(GCYL_CLEANROOM_CASING);
         registerItemModel(ISA_CASING);
+        registerItemModel(EVAPORATION_BED);
         registerItemModel(COMPRESSED_FUSION_REACTOR);
         registerItemModel(ELECTRON_MICROSCOPE);
         registerItemModel(NUCLEAR_FUSION);

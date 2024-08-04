@@ -452,12 +452,13 @@ public class RareEarthProcessing {
         CHEMICAL_RECIPES.recipeBuilder()
                 .input(dust,Yizhiluhuadujushi)
                 .fluidInputs(Acetone.getFluid(2000))
-                .output(dust,Baohedujushixituhunhe,3)
+                .output(dust,Baohedujushixituhunhe,4)
                 .duration(600).EUt(VA[EV]).buildAndRegister();
 
         CENTRIFUGE_RECIPES.recipeBuilder()
                 .input(dust,Baohedujushixituhunhe)
                 .output(dust,Shanjing)
+                .fluidOutputs(Acetone.getFluid(500))
                 .fluidOutputs()
                 .duration(600).EUt(VA[EV]).buildAndRegister();
 

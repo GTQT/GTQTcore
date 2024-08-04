@@ -63,7 +63,7 @@ public class MetaTileEntitySeismicDetector extends MetaTileEntityBaseWithControl
     public int getKind(){
         int random=0;
         if((this.getPos().getX()/64)%2==0)random+=2;
-        if((this.getPos().getY()/64)%2==0)random+=2;
+        if((this.getPos().getZ()/64)%2==0)random+=2;
         else random+=1;
 
         return random;

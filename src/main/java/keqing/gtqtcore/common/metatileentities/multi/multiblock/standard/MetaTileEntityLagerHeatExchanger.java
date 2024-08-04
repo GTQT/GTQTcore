@@ -58,7 +58,7 @@ public class MetaTileEntityLagerHeatExchanger extends NoEnergyMultiblockControll
     @Nonnull
     @Override
     protected OrientedOverlayRenderer getFrontOverlay() {
-        return GTQTTextures.DRYER_OVERLAY;
+        return GTQTTextures.LARGE_ROCKET_ENGINE_OVERLAY;
     }
 
     @Nonnull
@@ -80,16 +80,16 @@ public class MetaTileEntityLagerHeatExchanger extends NoEnergyMultiblockControll
     }
 
     protected IBlockState getCasingState() {
-        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.TITANIUM_STABLE);
+        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.TUNGSTENSTEEL_ROBUST);
     }
 
     protected IBlockState getBoilerState() {
-        return MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.TITANIUM_PIPE);
+        return MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.TUNGSTENSTEEL_PIPE);
     }
 
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
-        return Textures.STABLE_TITANIUM_CASING;
+        return Textures.ROBUST_TUNGSTENSTEEL_CASING;
     }
 
     @Override
@@ -178,7 +178,7 @@ public class MetaTileEntityLagerHeatExchanger extends NoEnergyMultiblockControll
 
     @Override
     public int getParallel() {
-        return 1;
+        return 2;
     }
 
     @Override

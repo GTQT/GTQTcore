@@ -18,7 +18,7 @@ public class BrineChain {
     public static void init() {
 
         CHEMICAL_RECIPES.recipeBuilder()
-                .fluidInputs(SaltWater.getFluid(1500))
+                .fluidInputs(SeaWater.getFluid(3000))
                 .fluidInputs(Chlorine.getFluid(1000))
                 .fluidInputs(SulfuricAcid.getFluid(500))
                 .fluidOutputs(AcidicSaltWater.getFluid(3000))

@@ -47,10 +47,10 @@ public class FirstDegreeMaterials {
     }
 
     public static void register() {
-        GTQTMaterials.HighPressureSteam = (new Material.Builder(getMaterialsId(), GTUtility.gregtechId("high_pressure_steam"))).fluid().color(14601607).build();
-        GTQTMaterials.SteamExhaustGas = (new Material.Builder(getMaterialsId(), GTUtility.gregtechId("steam_exhaust_gas"))).fluid().color(14601607).build();
-        GTQTMaterials.SuperheatedSteam = (new Material.Builder(getMaterialsId(), GTUtility.gregtechId("super_heated_steam"))).fluid().color(14601607).build();
-        GTQTMaterials.Pyrotheum = (new Material.Builder(getMaterialsId(), GTUtility.gregtechId("pyrotheum"))).fluid().color(14601000).build();
+        GTQTMaterials.HighPressureSteam = (new Material.Builder(getMaterialsId(), GTUtility.gregtechId("high_pressure_steam"))) .liquid(new FluidBuilder().temperature(1073)).color(14601607).build();
+        GTQTMaterials.SteamExhaustGas = (new Material.Builder(getMaterialsId(), GTUtility.gregtechId("steam_exhaust_gas"))) .liquid(new FluidBuilder().temperature(673)).color(14601607).build();
+        GTQTMaterials.SuperheatedSteam = (new Material.Builder(getMaterialsId(), GTUtility.gregtechId("super_heated_steam"))) .liquid(new FluidBuilder().temperature(323)).color(14601607).build();
+        GTQTMaterials.Pyrotheum = (new Material.Builder(getMaterialsId(), GTUtility.gregtechId("pyrotheum"))) .fluid().color(14601000).build();
 
         GTQTMaterials.StellarMaterialResidueA = (new Material.Builder(getMaterialsId(), GTUtility.gregtechId("stellar_material_residue_a"))).fluid().plasma().color(14601000).build().setFormula("ST-α", true);
         GTQTMaterials.StellarMaterialResidueB = (new Material.Builder(getMaterialsId(), GTUtility.gregtechId("stellar_material_residue_b"))).fluid().plasma().color(14600000).build().setFormula("ST-β", true);

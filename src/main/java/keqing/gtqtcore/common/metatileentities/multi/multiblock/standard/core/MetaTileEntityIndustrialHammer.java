@@ -51,7 +51,7 @@ public class MetaTileEntityIndustrialHammer extends GTQTMultiblockCore {
     }
     @Override
     public int getCoreNum() {
-        return 8;
+        return 64;
     }
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {

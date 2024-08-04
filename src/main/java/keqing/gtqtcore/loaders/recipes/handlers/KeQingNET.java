@@ -8,6 +8,7 @@ import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.MarkerMaterials;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.ore.OrePrefix;
+import gregtech.common.blocks.BlockCleanroomCasing;
 import gregtech.common.blocks.BlockComputerCasing;
 import gregtech.common.blocks.BlockFusionCasing;
 import gregtech.common.blocks.MetaBlocks;
@@ -41,10 +42,10 @@ import static gregtech.common.metatileentities.MetaTileEntities.FLUID_DRILLING_R
 import static gregtech.common.metatileentities.MetaTileEntities.FUSION_REACTOR;
 
 import static gregtech.common.blocks.BlockFusionCasing.CasingType.SUPERCONDUCTOR_COIL;
-import static gregtech.common.items.MetaItems.*;
 import static gregtech.common.metatileentities.MetaTileEntities.*;
 import static gregtech.common.metatileentities.MetaTileEntities.ROTOR_HOLDER;
 import static gregtechfoodoption.machines.GTFOTileEntities.GREENHOUSE;
+import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.PRECISE_ASSEMBLER_RECIPES;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.VACUUM_CHAMBER_RECIPES;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
@@ -95,6 +96,261 @@ public class KeQingNET {
         //12 网道行者-管网系统
 
         //13 网道行者-无线传输
+
+        //14 人工智能I
+        GTQTcoreRecipeMaps.KEQING_NET_RECIES.recipeBuilder()
+                .input(DISK_0)
+                .notConsumable(circuit,Tier.EV)
+                .output(DISK_14)
+                .EUt(VA[HV])
+                .CWUt(CWT[HV])
+                .NB(14)
+                .duration(2000)
+                .buildAndRegister();
+
+        //
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(circuit,Tier.EV,2)
+                .input(ELECTRIC_PISTON_HV,8)
+                .input(HULL[HV],8)
+                .input(MACERATOR[3],4)
+                .fluidInputs(SolderingAlloy.getFluid(L * 8))
+                .fluidInputs(Tin.getFluid(L * 8))
+                .output(CORE_MACERATOR)
+                .scannerResearch(b -> b
+                        .researchStack(DISK_14.getStackForm())
+                        .EUt(VA[HV]))
+                .EUt(VA[HV])
+                .duration(600)
+                .buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(circuit,Tier.EV,2)
+                .input(ELECTRIC_MOTOR_HV,8)
+                .input(HULL[HV],8)
+                .input(CENTRIFUGE[3],4)
+                .input(frameGt, Aluminium, 8)
+                .input(plate, StainlessSteel, 32)
+                .input(wireGtSingle, HVSuperconductor, 16)
+                .input(wireGtSingle, HVSuperconductor, 16)
+                .fluidInputs(SolderingAlloy.getFluid(L * 8))
+                .fluidInputs(Tin.getFluid(L * 8))
+                .output(CORE_CENTRIFUGE)
+                .scannerResearch(b -> b
+                        .researchStack(DISK_14.getStackForm())
+                        .EUt(VA[HV]))
+                .EUt(VA[HV])
+                .duration(600)
+                .buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(circuit,Tier.EV,2)
+                .input(ROBOT_ARM_HV,8)
+                .input(HULL[HV],8)
+                .input(MIXER[3],4)
+                .input(frameGt, Aluminium, 8)
+                .input(plate, StainlessSteel, 32)
+                .input(wireGtSingle, HVSuperconductor, 16)
+                .input(wireGtSingle, HVSuperconductor, 16)
+                .fluidInputs(SolderingAlloy.getFluid(L * 8))
+                .fluidInputs(Tin.getFluid(L * 8))
+                .output(CORE_MIX)
+                .scannerResearch(b -> b
+                        .researchStack(DISK_14.getStackForm())
+                        .EUt(VA[HV]))
+                .EUt(VA[HV])
+                .duration(600)
+                .buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(circuit,Tier.EV,2)
+                .input(ELECTRIC_PUMP_HV,8)
+                .input(HULL[HV],8)
+                .input(ORE_WASHER[3],4)
+                .input(frameGt, Aluminium, 8)
+                .input(plate, StainlessSteel, 32)
+                .input(wireGtSingle, HVSuperconductor, 16)
+                .input(wireGtSingle, HVSuperconductor, 16)
+                .fluidInputs(SolderingAlloy.getFluid(L * 8))
+                .fluidInputs(Tin.getFluid(L * 8))
+                .output(CORE_WASHER)
+                .scannerResearch(b -> b
+                        .researchStack(DISK_14.getStackForm())
+                        .EUt(VA[HV]))
+                .EUt(VA[HV])
+                .duration(600)
+                .buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(circuit,Tier.EV,2)
+                .input(CONVEYOR_MODULE_HV,8)
+                .input(HULL[HV],8)
+                .input(FORGE_HAMMER[3],4)
+                .input(frameGt, Aluminium, 8)
+                .input(plate, StainlessSteel, 32)
+                .input(wireGtSingle, HVSuperconductor, 16)
+                .input(wireGtSingle, HVSuperconductor, 16)
+                .fluidInputs(SolderingAlloy.getFluid(L * 8))
+                .fluidInputs(Tin.getFluid(L * 8))
+                .output(CORE_HAMMER)
+                .scannerResearch(b -> b
+                        .researchStack(DISK_14.getStackForm())
+                        .EUt(VA[HV]))
+                .EUt(VA[HV])
+                .duration(600)
+                .buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(circuit,Tier.EV,2)
+                .input(VOLTAGE_COIL_HV,8)
+                .input(HULL[HV],8)
+                .input(ARC_FURNACE[3],4)
+                .input(frameGt, Aluminium, 8)
+                .input(plate, StainlessSteel, 32)
+                .input(wireGtSingle, HVSuperconductor, 16)
+                .input(wireGtSingle, HVSuperconductor, 16)
+                .fluidInputs(SolderingAlloy.getFluid(L * 8))
+                .fluidInputs(Tin.getFluid(L * 8))
+                .output(CORE_FURNACE)
+                .scannerResearch(b -> b
+                        .researchStack(DISK_14.getStackForm())
+                        .EUt(VA[HV]))
+                .EUt(VA[HV])
+                .duration(600)
+                .buildAndRegister();
+
+
+        //15 人工智能II
+        GTQTcoreRecipeMaps.KEQING_NET_RECIES.recipeBuilder()
+                .input(DISK_0)
+                .notConsumable(circuit,Tier.LuV)
+                .output(DISK_15)
+                .EUt(VA[IV])
+                .CWUt(CWT[IV])
+                .NB(15)
+                .duration(2000)
+                .buildAndRegister();
+
+        //多线程设备
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(CIRCUIT_GOOD_I,2)
+                .input(ELECTRIC_PISTON_IV,8)
+                .input(HULL[IV],8)
+                .input(MACERATOR[5],4)
+                .input(frameGt, TungstenSteel, 8)
+                .input(plate, PPB, 32)
+                .input(wireGtSingle, IVSuperconductor, 64)
+                .input(wireGtSingle, IVSuperconductor, 64)
+                .fluidInputs(SolderingAlloy.getFluid(L * 8))
+                .fluidInputs(Tin.getFluid(L * 8))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 8))
+                .fluidInputs(Zylon.getFluid(L * 4))
+                .output(INDUSTRIAL_MACERATOR)
+                .EUt(VA[IV])
+                .duration(600)
+                .scannerResearch(b -> b
+                        .researchStack(DISK_15.getStackForm()))
+                .buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(CIRCUIT_GOOD_I,2)
+                .input(ELECTRIC_MOTOR_IV,8)
+                .input(HULL[IV],8)
+                .input(CENTRIFUGE[5],4)
+                .input(frameGt, TungstenSteel, 8)
+                .input(plate, PPB, 32)
+                .input(wireGtSingle, IVSuperconductor, 64)
+                .input(wireGtSingle, IVSuperconductor, 64)
+                .fluidInputs(SolderingAlloy.getFluid(L * 8))
+                .fluidInputs(Tin.getFluid(L * 8))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 8))
+                .fluidInputs(Zylon.getFluid(L * 4))
+                .output(INDUSTRIAL_CENTRIFUGE)
+                .EUt(VA[IV])
+                .duration(600)
+                .scannerResearch(b -> b
+                        .researchStack(DISK_15.getStackForm()))
+                .buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(CIRCUIT_GOOD_I,2)
+                .input(ROBOT_ARM_IV,8)
+                .input(HULL[IV],8)
+                .input(MIXER[5],4)
+                .input(frameGt, TungstenSteel, 8)
+                .input(plate, PPB, 32)
+                .input(wireGtSingle, IVSuperconductor, 64)
+                .input(wireGtSingle, IVSuperconductor, 64)
+                .fluidInputs(SolderingAlloy.getFluid(L * 8))
+                .fluidInputs(Tin.getFluid(L * 8))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 8))
+                .fluidInputs(Zylon.getFluid(L * 4))
+                .output(INDUSTRIAL_MIX)
+                .EUt(VA[IV])
+                .duration(600)
+                .scannerResearch(b -> b
+                        .researchStack(DISK_15.getStackForm()))
+                .buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(CIRCUIT_GOOD_I,2)
+                .input(ELECTRIC_PUMP_IV)
+                .input(HULL[IV],8)
+                .input(ORE_WASHER[5],4)
+                .input(frameGt, TungstenSteel, 8)
+                .input(plate, PPB, 32)
+                .input(wireGtSingle, IVSuperconductor, 64)
+                .input(wireGtSingle, IVSuperconductor, 64)
+                .fluidInputs(SolderingAlloy.getFluid(L * 8))
+                .fluidInputs(Tin.getFluid(L * 8))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 8))
+                .fluidInputs(Zylon.getFluid(L * 4))
+                .output(INDUSTRIAL_WASHER)
+                .EUt(VA[IV])
+                .duration(600)
+                .scannerResearch(b -> b
+                        .researchStack(DISK_15.getStackForm()))
+                .buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(CIRCUIT_GOOD_I,2)
+                .input(CONVEYOR_MODULE_IV,8)
+                .input(HULL[IV],8)
+                .input(FORGE_HAMMER[5],4)
+                .input(frameGt, TungstenSteel, 8)
+                .input(plate, PPB, 32)
+                .input(wireGtSingle, IVSuperconductor, 64)
+                .input(wireGtSingle, IVSuperconductor, 64)
+                .fluidInputs(SolderingAlloy.getFluid(L * 8))
+                .fluidInputs(Tin.getFluid(L * 8))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 8))
+                .fluidInputs(Zylon.getFluid(L * 4))
+                .output(INDUSTRIAL_HAMMER)
+                .EUt(VA[IV])
+                .duration(600)
+                .scannerResearch(b -> b
+                        .researchStack(DISK_15.getStackForm()))
+                .buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(CIRCUIT_GOOD_I,2)
+                .input(VOLTAGE_COIL_IV,8)
+                .input(HULL[IV],8)
+                .input(ARC_FURNACE[5],4)
+                .input(frameGt, TungstenSteel, 8)
+                .input(plate, PPB, 32)
+                .input(wireGtSingle, IVSuperconductor, 64)
+                .input(wireGtSingle, IVSuperconductor, 64)
+                .fluidInputs(SolderingAlloy.getFluid(L * 8))
+                .fluidInputs(Tin.getFluid(L * 8))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 8))
+                .fluidInputs(Zylon.getFluid(L * 4))
+                .output(INDUSTRIAL_FURNACE)
+                .EUt(VA[IV])
+                .duration(600)
+                .scannerResearch(b -> b
+                        .researchStack(DISK_15.getStackForm()))
+                .buildAndRegister();
     }
 
     private static void Pre() {
@@ -233,6 +489,28 @@ public class KeQingNET {
                         .researchStack(BIOLOGICAL_REACTION.getStackForm())
                         .EUt(VA[HV]))
                 .duration(4000).EUt(1920).buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(CIRCUIT_GOOD_I,2)
+                .input(EMITTER_IV,4)
+                .input(ELECTRIC_MOTOR_IV,4)
+                .input(HULL[IV],1)
+                .input(frameGt, Naquadah, 1)
+                .inputs(ITEM_FILTER.getStackForm(4))
+                .inputs(VOLTAGE_COIL_IV.getStackForm(16))
+                .input(pipeLargeFluid, Polybenzimidazole, 16)
+                .input(wireGtSingle, IVSuperconductor, 8)
+                .input(wireGtSingle, IVSuperconductor, 8)
+                .fluidInputs(SolderingAlloy.getFluid(L * 8))
+                .fluidInputs(Tin.getFluid(L * 8))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 8))
+                .fluidInputs(Zylon.getFluid(L * 4))
+                .outputs(MetaBlocks.CLEANROOM_CASING.getItemVariant(BlockCleanroomCasing.CasingType.FILTER_CASING_STERILE))
+                .EUt(VA[IV])
+                .duration(600)
+                .scannerResearch(b -> b
+                        .researchStack(MetaBlocks.CLEANROOM_CASING.getItemVariant(BlockCleanroomCasing.CasingType.FILTER_CASING)))
+                .buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .inputs(HULL[2].getStackForm())
@@ -809,6 +1087,18 @@ public class KeQingNET {
                 .fluidInputs(Epoxy.getFluid(4000))
                 .output(FLUIDIZED_BED)
                 .duration(200).EUt(120).buildAndRegister();
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .inputs(HULL[3].getStackForm(8))
+                .input(circuit, Tier.HV, 8)
+                .input(ELECTRIC_PISTON_HV,16)
+                .input(ELECTRIC_PUMP_HV,16)
+                .input(pipeHugeFluid,StainlessSteel,8)
+                .input(gear,Aluminium,8)
+                .input(rotor, Aluminium, 8)
+                .fluidInputs(Epoxy.getFluid(4000))
+                .output(FIX_BED)
+                .duration(200).EUt(480).buildAndRegister();
 
     }
     private static void I_VV() {

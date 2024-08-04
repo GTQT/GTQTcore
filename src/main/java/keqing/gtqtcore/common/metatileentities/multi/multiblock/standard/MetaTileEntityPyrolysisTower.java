@@ -101,13 +101,6 @@ public class MetaTileEntityPyrolysisTower extends RecipeMapMultiblockController 
                 return Textures.SOLID_STEEL_CASING;
     }
 
-
-    @SideOnly(Side.CLIENT)
-    @Override
-    protected ICubeRenderer getFrontOverlay() {
-        return Textures.BENDER_OVERLAY;
-    }
-
     @Override
     public boolean canBeDistinct() {
         return true;

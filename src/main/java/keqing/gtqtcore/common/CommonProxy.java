@@ -7,6 +7,7 @@ import gregtech.api.recipes.recipeproperties.FusionEUToStartProperty;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.properties.PropertyKey;
 import gregtech.api.unification.stack.ItemMaterialInfo;
+import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.recipes.properties.*;
 import keqing.gtqtcore.api.unification.ore.GTQTStoneTypes;
 import keqing.gtqtcore.api.utils.GTQTLog;
@@ -132,6 +133,7 @@ public class CommonProxy {
     }
     public void preLoad(){
         GTQTStoneTypes.init();
+        GTQTcoreRecipeMaps.init();
         MinecraftForge.EVENT_BUS.register(new GTQTEventHandler.PlayerLoginEventHandler());
     }
     public void init() {
@@ -202,6 +204,7 @@ public class CommonProxy {
         registry.register(GTQTMetaBlocks.ELECTRON_MICROSCOPE);
         registry.register(GTQTMetaBlocks.PARTICLE_ACCELERATOR);
         registry.register(GCYL_CLEANROOM_CASING);
+        registry.register(EVAPORATION_BED);
         registry.register(GTQTMetaBlocks.ISA_CASING);
         registry.register(GTQTMetaBlocks.ACTIVE_UNIQUE_CASING);
         registry.register(GTQTMetaBlocks.COMPRESSED_FUSION_REACTOR);
@@ -265,6 +268,7 @@ public class CommonProxy {
         registry.register(createItemBlock(GTQTMetaBlocks.ELECTRON_MICROSCOPE, VariantItemBlock::new));
         registry.register(createItemBlock(GCYL_CLEANROOM_CASING, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.COOLING_COIL, VariantItemBlock::new));
+        registry.register(createItemBlock(GTQTMetaBlocks.EVAPORATION_BED, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.ISA_CASING, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.ACTIVE_UNIQUE_CASING, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.COMPRESSED_FUSION_REACTOR, VariantItemBlock::new));

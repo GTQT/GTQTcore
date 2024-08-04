@@ -54,9 +54,60 @@ public class OilChains {
     }
 
     private static void jingzhihuishou() {
+        //常压渣油 减压渣油产线
+        /*
+        CHEMICAL_RECIPES.recipeBuilder()
+                .duration(200)
+                .EUt(30)
+                .circuitMeta(1)
+                .fluidInputs(AtmosphericResidue.getFluid(2000))
+                .fluidInputs(WaxOil.getFluid(1000))
+                .fluidOutputs(OilGas.getFluid(3000))
+                .buildAndRegister();
+        */
         //VacuumResidue 减压渣油
+
+
+        FIX_BED.recipeBuilder()
+                .duration(600)
+                .EUt(480)
+                .fluidInputs(AtmosphericResidue.getFluid(1000))
+                .fluidInputs(WaxOil.getFluid(1000))
+                .fluidInputs(Hydrogen.getFluid(7000))
+                .fluidOutputs(OilGas.getFluid(1000))
+                .buildAndRegister();
+
+        FIX_BED.recipeBuilder()
+                .duration(600)
+                .EUt(480)
+                .fluidInputs(VacuumResidue.getFluid(1000))
+                .fluidInputs(WaxOil.getFluid(1000))
+                .fluidInputs(Hydrogen.getFluid(7000))
+                .fluidOutputs(OilGas.getFluid(3000))
+                .buildAndRegister();
+        //用减压渣油和未转化催化裂化蜡油(FGO)的混合原料，在液时体积空速0.20 h-1、反应器入口氢分压16.5 MPa、氢油比700的工艺条件下，
+        // 开展了固定床渣油加氢试验。加氢常压渣油主要性质满足缓和催化裂化原料要求，利用加氢常压渣油开展了缓和催化裂化试验。
+        // 通过渣油加氢与缓和催化裂化工艺组合，使固定床渣油加氢可以加工100%减压渣油。以减压渣油进料计，多产FGO、兼顾FGO和汽油、多产汽油3种方案
+        // 汽油+柴油质量收率分别为67.77%，66.38%，61.99%，高附加值的液化石油气质量收率分别为15.69%，16.76%，19.22%，
+
+        CRACKING_RECIPES.recipeBuilder()
+                .circuitMeta(1)
+                .fluidInputs(OilGas.getFluid(1000))
+                .fluidInputs(Hydrogen.getFluid(2000))
+                .fluidOutputs(LightlyHydroCrackedDieselLight.getFluid(500))
+                .fluidOutputs(LightlyHydroCrackedDieselHeavy.getFluid(500))
+                .duration(300).EUt(120).buildAndRegister();
+
+        CRACKING_RECIPES.recipeBuilder()
+                .circuitMeta(2)
+                .fluidInputs(OilGas.getFluid(1000))
+                .fluidInputs(Hydrogen.getFluid(6000))
+                .fluidOutputs(SeverelyHydroCrackedDieselLight.getFluid(500))
+                .fluidOutputs(SeverelyHydroCrackedDieselHeavy.getFluid(500))
+                .duration(600).EUt(240).buildAndRegister();
+
         SFM.recipeBuilder()
-                .fluidInputs(VacuumResidue.getFluid(2000))
+                .fluidInputs(OilGas.getFluid(2000))
                 .circuitMeta(1)
                 .chancedOutput(dust, Carbon, 1111, 0)
                 .fluidOutputs(DieselLight.getFluid(240))
@@ -74,7 +125,7 @@ public class OilChains {
                 .duration(120).EUt(120).buildAndRegister();
 
         SFM.recipeBuilder()
-                .fluidInputs(VacuumResidue.getFluid(2000))
+                .fluidInputs(OilGas.getFluid(2000))
                 .circuitMeta(2)
                 .chancedOutput(dust, Carbon, 1111, 0)
                 .fluidOutputs(DieselHeavy.getFluid(240))
@@ -767,24 +818,6 @@ public class OilChains {
     }
     private static void cuihualiehua()
     {
-        CHEMICAL_RECIPES.recipeBuilder()
-                .duration(200)
-                .EUt(30)
-                .circuitMeta(1)
-                .fluidInputs(AtmosphericResidue.getFluid(2000))
-                .fluidInputs(WaxOil.getFluid(1000))
-                .fluidOutputs(OilGas.getFluid(3000))
-                .buildAndRegister();
-
-        CHEMICAL_RECIPES.recipeBuilder()
-                .duration(200)
-                .EUt(30)
-                .circuitMeta(1)
-                .fluidInputs(VacuumResidue.getFluid(1000))
-                .fluidInputs(WaxOil.getFluid(2000))
-                .fluidOutputs(OilGas.getFluid(9000))
-                .buildAndRegister();
-
         lightlyCrack(DieselLight, LightlyHydroCrackedDieselLight, LightlySteamCrackedDieselLight);
         severelyCrack(DieselLight, SeverelyHydroCrackedDieselLight, SeverelySteamCrackedDieselLight);
 

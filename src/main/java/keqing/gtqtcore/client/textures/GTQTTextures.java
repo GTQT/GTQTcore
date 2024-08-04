@@ -166,8 +166,16 @@ public class GTQTTextures {
     public static OrientedOverlayRenderer SUPRACHRONAL_NEUTRONIUM_FORGE_OVERLAY = new OrientedOverlayRenderer("overlay/suprachronal_neutronium_forge");
     public static OrientedOverlayRenderer MASS_FABRICATOR_OVERLAY = new OrientedOverlayRenderer("overlay/mass_fabricator");
     public static OrientedOverlayRenderer ELEMENT_REPLICATOR_OVERLAY = new OrientedOverlayRenderer("overlay/element_replicator");
-
+    public static SimpleOverlayRenderer MAINTENANCE_OVERLAY_STERILE_CLEANING;
+    public static SimpleOverlayRenderer MAINTENANCE_OVERLAY_ISO3_CLEANING;
+    public static SimpleOverlayRenderer MAINTENANCE_OVERLAY_ISO2_CLEANING;
+    public static SimpleOverlayRenderer MAINTENANCE_OVERLAY_ISO1_CLEANING;
     public static void init() {
+        MAINTENANCE_OVERLAY_STERILE_CLEANING = new SimpleOverlayRenderer("overlay/machine/overlay_maintenance_sterile_cleaning");
+        MAINTENANCE_OVERLAY_ISO3_CLEANING = new SimpleOverlayRenderer("overlay/machine/overlay_maintenance_iso_3_cleaning");
+        MAINTENANCE_OVERLAY_ISO2_CLEANING = new SimpleOverlayRenderer("overlay/machine/overlay_maintenance_iso_2_cleaning");
+        MAINTENANCE_OVERLAY_ISO1_CLEANING = new SimpleOverlayRenderer("overlay/machine/overlay_maintenance_iso_1_cleaning");
+
         WIRELESS_HATCH_HATCH = new SimpleOverlayRenderer("overlay/wireless_hatch/overlay_front");
         FLOTATION_CASING = new SimpleOverlayRenderer("multiblock/isa_casing/flotation_casing");
         ISA_CASING = new SimpleOverlayRenderer("multiblock/isa_casing/isa_mill_casing");

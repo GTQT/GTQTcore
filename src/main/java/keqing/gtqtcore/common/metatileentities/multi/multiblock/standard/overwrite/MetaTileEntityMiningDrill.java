@@ -271,7 +271,7 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
 
         random=0;
         if((this.getPos().getX()/64)%2==0)random+=2;
-        if((this.getPos().getY()/64)%2==0)random+=2;
+        if((this.getPos().getZ()/64)%2==0)random+=2;
         else random+=1;
 
         this.writeCustomData(GTQTValue.UPDATE_TIER22, buf -> buf.writeInt(this.casing));

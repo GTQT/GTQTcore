@@ -5,8 +5,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
-import static gregtech.api.GTValues.L;
-import static gregtech.api.GTValues.VA;
+import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.recipes.RecipeMaps.ASSEMBLER_RECIPES;
 import static gregtech.api.unification.material.Materials.*;
@@ -16,13 +15,15 @@ import static gregtech.api.unification.ore.OrePrefix.dust;
 import static gregtech.common.items.MetaItems.PETRI_DISH;
 import static gregtech.common.items.MetaItems.SHAPE_MOLD_CYLINDER;
 import static gregtechfoodoption.GTFOMaterialHandler.Blood;
-import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.BIOLOGICAL_REACTION_RECIPES;
+import static keqing.gtqtcore.api.GCYSValues.HV;
+import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 
 public class BacteriaCulturesChain {
     public static void init() {
+
         FLUID_SOLIDFICATION_RECIPES.recipeBuilder().duration(160).EUt(480)
                 .fluidInputs(Polystyrene.getFluid(L / 4))
                 .notConsumable(SHAPE_MOLD_CYLINDER.getStackForm())
@@ -34,14 +35,14 @@ public class BacteriaCulturesChain {
                 .fluidInputs(Polyethylene.getFluid(1008))
                 .inputs(STERILIZED_PETRI_DISH.getStackForm())
                 .outputs(ELECTRICALLY_WIRED_PETRI_DISH.getStackForm())
-                .cleanroom(CleanroomType.STERILE_CLEANROOM)
+                .cleanroom(CleanroomType.CLEANROOM)
                 .buildAndRegister();
 
         AUTOCLAVE_RECIPES.recipeBuilder()
                 .inputs(PETRI_DISH.getStackForm())
                 .fluidInputs(Zylon.getFluid(100))
                 .outputs(STERILIZED_PETRI_DISH.getStackForm())
-                .cleanroom(CleanroomType.STERILE_CLEANROOM)
+                .cleanroom(CleanroomType.CLEANROOM)
                 .EUt(7680)
                 .duration(25)
                 .buildAndRegister();
@@ -51,7 +52,7 @@ public class BacteriaCulturesChain {
                 .input(dust, Agar)
                 .fluidInputs(BacterialGrowthMedium.getFluid(1000))
                 .outputs(CLEAN_CULTURE.getStackForm())
-                .cleanroom(CleanroomType.STERILE_CLEANROOM)
+                .cleanroom(CleanroomType.CLEANROOM)
                 .buildAndRegister();
 
         BIOLOGICAL_REACTION_RECIPES.recipeBuilder().EUt(7680).duration(2400)
@@ -59,7 +60,7 @@ public class BacteriaCulturesChain {
                 .inputs(CLEAN_CULTURE.getStackForm())
                 .fluidInputs(BacterialGrowthMedium.getFluid(1000))
                 .outputs(SHEWANELLA_CULTURE.getStackForm())
-                .cleanroom(CleanroomType.STERILE_CLEANROOM)
+                .cleanroom(CleanroomType.CLEANROOM)
                 .buildAndRegister();
 
         BIOLOGICAL_REACTION_RECIPES.recipeBuilder().EUt(7680).duration(2400)
@@ -67,7 +68,7 @@ public class BacteriaCulturesChain {
                 .inputs(CLEAN_CULTURE.getStackForm())
                 .fluidInputs(BacterialGrowthMedium.getFluid(1000))
                 .outputs(BREVIBACTERIUM_CULTURE.getStackForm())
-                .cleanroom(CleanroomType.STERILE_CLEANROOM)
+                .cleanroom(CleanroomType.CLEANROOM)
                 .buildAndRegister();
 
         BIOLOGICAL_REACTION_RECIPES.recipeBuilder().EUt(7680).duration(2400)
@@ -75,7 +76,7 @@ public class BacteriaCulturesChain {
                 .inputs(CLEAN_CULTURE.getStackForm())
                 .fluidInputs(BacterialGrowthMedium.getFluid(1000))
                 .outputs(CUPRIVADUS_CULTURE.getStackForm())
-                .cleanroom(CleanroomType.STERILE_CLEANROOM)
+                .cleanroom(CleanroomType.CLEANROOM)
                 .buildAndRegister();
 
         BIOLOGICAL_REACTION_RECIPES.recipeBuilder().EUt(7680).duration(2400)
@@ -83,7 +84,7 @@ public class BacteriaCulturesChain {
                 .inputs(CLEAN_CULTURE.getStackForm())
                 .fluidInputs(BacterialGrowthMedium.getFluid(1000))
                 .outputs(ESCHERICHIA_CULTURE.getStackForm())
-                .cleanroom(CleanroomType.STERILE_CLEANROOM)
+                .cleanroom(CleanroomType.CLEANROOM)
                 .buildAndRegister();
 
         BIOLOGICAL_REACTION_RECIPES.recipeBuilder().EUt(7680).duration(2400)
@@ -91,7 +92,7 @@ public class BacteriaCulturesChain {
                 .inputs(CLEAN_CULTURE.getStackForm())
                 .fluidInputs(BacterialGrowthMedium.getFluid(1000))
                 .outputs(BIFIDOBACTERIUM_CULTURE.getStackForm())
-                .cleanroom(CleanroomType.STERILE_CLEANROOM)
+                .cleanroom(CleanroomType.CLEANROOM)
                 .buildAndRegister();
 
         BIOLOGICAL_REACTION_RECIPES.recipeBuilder().EUt(7680).duration(2400)
@@ -99,7 +100,7 @@ public class BacteriaCulturesChain {
                 .inputs(CLEAN_CULTURE.getStackForm())
                 .fluidInputs(BacterialGrowthMedium.getFluid(1000))
                 .outputs(STREPTOCOCCUS_CULTURE.getStackForm())
-                .cleanroom(CleanroomType.STERILE_CLEANROOM)
+                .cleanroom(CleanroomType.CLEANROOM)
                 .buildAndRegister();
 
         BIOLOGICAL_REACTION_RECIPES.recipeBuilder().EUt(7680).duration(200)
@@ -108,7 +109,7 @@ public class BacteriaCulturesChain {
                 .output(dust, Shewanella)
                 .fluidOutputs(DepletedGrowthMedium.getFluid(1000))
                 .outputs(CONTAMINATED_PETRI_DISH.getStackForm())
-                .cleanroom(CleanroomType.STERILE_CLEANROOM)
+                .cleanroom(CleanroomType.CLEANROOM)
                 .buildAndRegister();
 
 
@@ -118,7 +119,7 @@ public class BacteriaCulturesChain {
                 .output(dust, StreptococcusPyogenes)
                 .fluidOutputs(DepletedGrowthMedium.getFluid(1000))
                 .outputs(CONTAMINATED_PETRI_DISH.getStackForm())
-                .cleanroom(CleanroomType.STERILE_CLEANROOM)
+                .cleanroom(CleanroomType.CLEANROOM)
                 .buildAndRegister();
 
         BIOLOGICAL_REACTION_RECIPES.recipeBuilder().EUt(7680).duration(200)
@@ -127,7 +128,7 @@ public class BacteriaCulturesChain {
                 .output(dust, BifidobacteriumBreve)
                 .fluidOutputs(DepletedGrowthMedium.getFluid(1000))
                 .outputs(CONTAMINATED_PETRI_DISH.getStackForm())
-                .cleanroom(CleanroomType.STERILE_CLEANROOM)
+                .cleanroom(CleanroomType.CLEANROOM)
                 .buildAndRegister();
 
         BIOLOGICAL_REACTION_RECIPES.recipeBuilder().EUt(7680).duration(200)
@@ -136,7 +137,7 @@ public class BacteriaCulturesChain {
                 .output(dust, EschericiaColi)
                 .fluidOutputs(DepletedGrowthMedium.getFluid(1000))
                 .outputs(CONTAMINATED_PETRI_DISH.getStackForm())
-                .cleanroom(CleanroomType.STERILE_CLEANROOM)
+                .cleanroom(CleanroomType.CLEANROOM)
                 .buildAndRegister();
 
         BIOLOGICAL_REACTION_RECIPES.recipeBuilder().EUt(7680).duration(200)
@@ -145,7 +146,7 @@ public class BacteriaCulturesChain {
                 .output(dust, BrevibacteriumFlavium)
                 .fluidOutputs(DepletedGrowthMedium.getFluid(1000))
                 .outputs(CONTAMINATED_PETRI_DISH.getStackForm())
-                .cleanroom(CleanroomType.STERILE_CLEANROOM)
+                .cleanroom(CleanroomType.CLEANROOM)
                 .buildAndRegister();
 
         BIOLOGICAL_REACTION_RECIPES.recipeBuilder().EUt(7680).duration(200)
@@ -154,7 +155,7 @@ public class BacteriaCulturesChain {
                 .output(dust, CupriavidusNecator)
                 .fluidOutputs(DepletedGrowthMedium.getFluid(1000))
                 .outputs(CONTAMINATED_PETRI_DISH.getStackForm())
-                .cleanroom(CleanroomType.STERILE_CLEANROOM)
+                .cleanroom(CleanroomType.CLEANROOM)
                 .buildAndRegister();
 
         BIOLOGICAL_REACTION_RECIPES.recipeBuilder().EUt(7680).duration(400)
@@ -162,7 +163,7 @@ public class BacteriaCulturesChain {
                 .output(dust, Shewanella)
                 .fluidInputs(BacterialGrowthMedium.getFluid(250))
                 .fluidOutputs(DepletedGrowthMedium.getFluid(250))
-                .cleanroom(CleanroomType.STERILE_CLEANROOM)
+                .cleanroom(CleanroomType.CLEANROOM)
                 .buildAndRegister();
 
         BIOLOGICAL_REACTION_RECIPES.recipeBuilder().EUt(7680).duration(400)
@@ -170,7 +171,7 @@ public class BacteriaCulturesChain {
                 .output(dust, BrevibacteriumFlavium)
                 .fluidInputs(BacterialGrowthMedium.getFluid(250))
                 .fluidOutputs(DepletedGrowthMedium.getFluid(250))
-                .cleanroom(CleanroomType.STERILE_CLEANROOM)
+                .cleanroom(CleanroomType.CLEANROOM)
                 .buildAndRegister();
 
         BIOLOGICAL_REACTION_RECIPES.recipeBuilder().EUt(7680).duration(400)
@@ -178,7 +179,7 @@ public class BacteriaCulturesChain {
                 .output(dust, EschericiaColi)
                 .fluidInputs(BacterialGrowthMedium.getFluid(250))
                 .fluidOutputs(DepletedGrowthMedium.getFluid(250))
-                .cleanroom(CleanroomType.STERILE_CLEANROOM)
+                .cleanroom(CleanroomType.CLEANROOM)
                 .buildAndRegister();
 
         BIOLOGICAL_REACTION_RECIPES.recipeBuilder().EUt(7680).duration(400)
@@ -186,7 +187,7 @@ public class BacteriaCulturesChain {
                 .output(dust, StreptococcusPyogenes)
                 .fluidInputs(BacterialGrowthMedium.getFluid(250))
                 .fluidOutputs(DepletedGrowthMedium.getFluid(250))
-                .cleanroom(CleanroomType.STERILE_CLEANROOM)
+                .cleanroom(CleanroomType.CLEANROOM)
                 .buildAndRegister();
 
         BIOLOGICAL_REACTION_RECIPES.recipeBuilder().EUt(7680).duration(400)
@@ -194,7 +195,7 @@ public class BacteriaCulturesChain {
                 .output(dust, BifidobacteriumBreve)
                 .fluidInputs(BacterialGrowthMedium.getFluid(250))
                 .fluidOutputs(DepletedGrowthMedium.getFluid(250))
-                .cleanroom(CleanroomType.STERILE_CLEANROOM)
+                .cleanroom(CleanroomType.CLEANROOM)
                 .buildAndRegister();
 
         BIOLOGICAL_REACTION_RECIPES.recipeBuilder().EUt(7680).duration(400)
@@ -202,7 +203,7 @@ public class BacteriaCulturesChain {
                 .output(dust, CupriavidusNecator)
                 .fluidInputs(BacterialGrowthMedium.getFluid(250))
                 .fluidOutputs(DepletedGrowthMedium.getFluid(250))
-                .cleanroom(CleanroomType.STERILE_CLEANROOM)
+                .cleanroom(CleanroomType.CLEANROOM)
                 .buildAndRegister();
 
         MIXER_RECIPES.recipeBuilder()
@@ -211,7 +212,7 @@ public class BacteriaCulturesChain {
                 .fluidInputs(DistilledWater.getFluid(1000))
                 .fluidOutputs(BacterialGrowthMedium.getFluid(2000))
                 .EUt(7680)
-                .duration(400).cleanroom(CleanroomType.STERILE_CLEANROOM)
+                .duration(400).cleanroom(CleanroomType.CLEANROOM)
                 .buildAndRegister();
 
         BIOLOGICAL_REACTION_RECIPES.recipeBuilder().EUt(7680).duration(400)

@@ -47,14 +47,16 @@ public class PPBChain {
         //乙酰丙酮铂=乙酰丙酮+氯化
         CHEMICAL_RECIPES.recipeBuilder()
                 .fluidInputs(Acetylacetone.getFluid(1000))
-                .input(dust,PlatinumRaw)
+                .input(dust,Platinum)
+                .fluidInputs(Oxygen.getFluid(2000))
                 .fluidOutputs(HydrochloricAcid.getFluid(2000))
                 .fluidOutputs(PlatinumBis.getFluid(3000))
                 .duration(200).EUt(VA[IV]).buildAndRegister();
         //乙酰丙酮钯=乙酰丙酮+氯化
         CHEMICAL_RECIPES.recipeBuilder()
                 .fluidInputs(Acetylacetone.getFluid(1000))
-                .input(dust,PalladiumRaw)
+                .input(dust,Palladium)
+                .fluidInputs(Oxygen.getFluid(2000))
                 .fluidOutputs(HydrochloricAcid.getFluid(2000))
                 .fluidOutputs(PalladiumBis.getFluid(3000))
                 .duration(200).EUt(VA[IV]).buildAndRegister();

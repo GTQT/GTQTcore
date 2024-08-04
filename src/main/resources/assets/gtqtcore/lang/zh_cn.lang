@@ -804,6 +804,12 @@ gtqtcore.machine.industrial_washer.name=工业浸洗复合体
 gtqtcore.machine.industrial_hammer.name=工业锻造复合体
 gtqtcore.machine.industrial_furnace.name=工业熔炼复合体
 
+gtqtcore.machine.core_crusher.name=工业破壁机
+gtqtcore.machine.core_centrifuge.name=工业离心机
+gtqtcore.machine.core_mix.name=工业搅拌机
+gtqtcore.machine.core_washer.name=工业浸洗机
+gtqtcore.machine.core_hammer.name=工业锻造机
+gtqtcore.machine.core_furnace.name=工业熔炼机
 
 gtqtcore.machine.reinforced_rotor_holder.luv.name=强化转子固定器（LuV）
 gtqtcore.machine.reinforced_rotor_holder.zpm.name=强化转子固定器（ZPM）
@@ -3525,7 +3531,7 @@ gregtech.machine.msf.tooltip.1=可拓展片结构：闪蒸室，可拓展十二�
 gregtech.machine.msf.tooltip.2=多方块默认输出十二格配方，若结构没有拓展完毕，则会只输出已经拓展的数量
 gregtech.machine.msf.tooltip.3=升级线圈，延长结构获得更多加成。运行不同配方拥有不同加成效果。
 gregtech.machine.msf.tooltip.4=向多方块内压入蒸汽开始预加压（螺丝刀右键控制器调整输入速率），蒸汽输入后首先对一号舱加压，当相邻舱室压力相差过大时会自动平衡双仓压力。当三舱压力均大于百分之六十时达到最佳饱和状态，多方块获得工作性能提升。每运行完成一轮后，蒸汽有一定比例损耗，注意及时补充。
-
+gregtech.machine.fb.tooltip.4=向多方块内压入氢气开始预加压（螺丝刀右键控制器调整输入速率），蒸汽输入后首先对一号舱加压，当相邻舱室压力相差过大时会自动平衡双仓压力。当三舱压力均大于百分之六十时达到最佳饱和状态，多方块获得工作性能提升。每运行完成一轮后，蒸汽有一定比例损耗，注意及时补充。
 gtqtcore.md=钻机等级：%s 钻头等级：%s 钻头耐久：%s
 gtqtcore.machine.fluidized=冷却塔结构：%s
 gtqtcore.machine.fluidized1=流床热量缓存：%s 散热功率：%s
@@ -3806,6 +3812,7 @@ metaitem.item.impregnated_graphite_rodsa.name=预处理石墨电极
 metaitem.item.impregnated_fiber.name=工程塑料-灵敏压电基板
 metaitem.item.impregnated_multilayer_fiber.name=层压复合纤维-性能合金基板
 gtqtcore.machine.froth_flotation_tank.name=工业浮选反应罐
+gtqtcore.machine.fix_bed.name=固化床
 gtqtcore.machine.cryogenic_freezer.name=凛冰冷冻机
 gtqtcore.machine.cryogenic_freezer.tooltip=不如真空冷冻机
 gtqtcore.machine.cryogenic_freezer.tooltip.1=需要提供§b极寒之凛冰§7以工作,未提供§b极寒之凛冰§7时，凛冰冷冻机将会停机
@@ -4293,6 +4300,27 @@ gregtech.material.len_gold_dr=高纯金
 gregtech.material.rich_gold_bs=焙烧富集金含杂
 gregtech.material.rich_copper_js=沉浸富集铜混合
 
+recipemap.evaporation_pool.name=电热蒸发
+gtqtcore.machine.evaporation_pool.name=蒸发池
+gregtech.machine.evaporation_pool.tooltip.info=最大内部正方形为%dx%d，最小为1x1。更多详情请参阅信息标签和工具信息。
+gregtech.machine.evaporation_pool.tooltip.structure_info=蒸发池可以形成任何内部尺寸，从1x1到%dx%d，即使不是正方形也可以。为了形成一个有效的加热蒸发池，线圈应按照预览中所示的模式放置。更详细的解释，请查看JEI中的信息标签。
+gregtech.top.evaporation_pool_heated_preface=线圈模式：
+gregtech.top.evaporation_pool_is_heated=有效；可被加热。
+gregtech.top.evaporation_pool_not_heated=无效；无法加热。
+gregtech.top.evaporation_pool.energy_transferred=热能传输：
+gregtech.multiblock.evaporation_pool.rolling_average=平均能量输入：
+gregtech.multiblock.evaporation_pool.joules_per_tick=每刻焦耳数：J/t
+gregtech.top.evaporation_pool.kilojoules=千焦：kJ
+gregtech.multiblock.evaporation_pool.description=蒸发池具有在其描述中指定的内部尺寸，以及一个用于输入输出（IO）/控制器放置的混凝土外部结构，每种IO类型最多有两个。控制器可以放置在内部前面突出的底部行的任何位置。蒸发池可以在无电和有电两种模式下运行配方。为了在有电模式下运行配方，多方块需要以预览中所示的“蛇形”模式形成统一类型的线圈。无电蒸发池不需要任何线圈。任何配方的速度取决于提供给多方块的热量，这基于暴露在阳光下的内部块的数量、提供的能量以及线圈的等级。[目前，1EU = 10J]。每个暴露的块（检查需要时间）每秒产生1kJ的热量，而线圈提供的热量则根据线圈的温度和数量而变化。每个刻的最大配方速度是持续时间的1/4（每秒5个配方）。蒸发池将尝试在可用能量下，以前述最大进度以下的速度完成尽可能多的配方进度刻。
+gregtech.multiblock.evaporation_pool.average_speed=平均速度：
+gregtech.multiblock.evaporation_pool.exposed_blocks=暴露块的数量：
+gregtech.recipe.evaporation=理论耗能: %d J/t
+tile.evaporation_bed.dirt.name=砂壤土
+
+gtqtcore.machine.maintenance_hatch_sterile_cleanroom_auto.name=自动无菌过滤维护舱口
+gtqtcore.machine.maintenance_hatch_iso_3_cleanroom_auto.name=自动ISO 3级过滤维护舱口
+gtqtcore.machine.maintenance_hatch_iso_2_cleanroom_auto.name=自动ISO 2级过滤维护舱口
+gtqtcore.machine.maintenance_hatch_iso_1_cleanroom_auto.name=自动ISO 1级过滤维护舱口
 # Latex Collector
 gregtech.machine.latex_collector.steam=需要蒸汽！
 gregtech.machine.latex_collector.tooltip=从相邻的原木中提取液体。
@@ -4303,6 +4331,7 @@ gtqtcore.machine.latex_collector.mv.name=进阶乳胶收集器
 gtqtcore.machine.latex_collector.hv.name=进阶乳胶收集器 II
 gtqtcore.machine.latex_collector.ev.name=进阶乳胶收集器 III
 recipemap.latex_collector.name=乳胶收集
+recipemap.fix_bed.name=固化床反应
 gtqtcore.machine.auto_chisel.lv.name=基础自动凿子
 gtqtcore.machine.auto_chisel.lv.tooltip=电子雕刻家
 gtqtcore.machine.auto_chisel.mv.name=进阶自动凿子
@@ -4407,7 +4436,7 @@ gtqtcore.multiblock.kqcc.description=计算中心服务器是你在早期获得�
 
 gtqtcore.multiblock.kqcc.description1=高级计算服务器能在游戏中期为你提供大量整合算力，每一台服务器拥有三排做大拓展十六次的片状模组块，由上至下分别为【辅助运算模块/高性能计算模块/数据缓存模块】，每一排只能插放对应的组件，并且所有对应模块等级必须一致。当RAM总和均大于CPU,GPU总和时，总算力为CPU,GPU的总和；否则为RAM的总和。单位热量由CPU总和*GPU总和决定（叠算最大八倍减免）。当温度小于三百度时正常性能计算，大于三百度时性能减半，大于四百五十度强制停机。处于超频模式时，计算性能翻倍，热量四倍，冷却液消耗四倍，综合散热性能翻倍。 冷却液种类/散热性能（水-7.7/10mb 冷却液-14.4/5mb 液氮-28.8/1mb）机器在关机状态无法通过冷却液降温！
 
-
+gtqtcore.machine.small_heat_exchanger.name=小型热交换机
 gtqtcore.machine.lager_heat_exchanger.name=大型热交换机
 recipemap.heat_exchanger_recipes.name=热力交换
 gtqtcore.multiblock.large_heat_exchanger.threshold=流量阈值：%s

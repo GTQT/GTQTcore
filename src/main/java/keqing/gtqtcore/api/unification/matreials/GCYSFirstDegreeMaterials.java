@@ -161,7 +161,7 @@ public class GCYSFirstDegreeMaterials {
                 .build();
 
         PotassiumHydroxide = new Material.Builder(3520, gregtechId("potassium_hydroxide"))
-                .fluid()
+                .dust()
                 .color(0xFA9849)
                 .flags(DISABLE_DECOMPOSITION)
                 .components(Potassium, 1, Oxygen, 1, Hydrogen, 1)

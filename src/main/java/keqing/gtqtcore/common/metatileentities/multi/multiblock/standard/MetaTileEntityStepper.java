@@ -84,6 +84,7 @@ public class MetaTileEntityStepper extends MultiMapMultiblockController implemen
         if(LaserKind==3) this.getOutputFluidInventory().fill(Vinylcinnamate.getFluid(LaserAmount),true);
         if(LaserKind==4) this.getOutputFluidInventory().fill(Xmt.getFluid(LaserAmount),true);
         if(LaserKind==5) this.getOutputFluidInventory().fill(Zrbtmst.getFluid(LaserAmount),true);
+        LaserKind=0;LaserAmount=0;
     }
     @Override
     public void addInformation(ItemStack stack, World world, List<String> tooltip, boolean advanced) {

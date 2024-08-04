@@ -604,6 +604,11 @@ public class MetaTileEntityLoader {
                 new UnificationEntry(OrePrefix.circuit, MV), 'F', DISTILLATION_TOWER.getStackForm());
 
         ModHandler.addShapedRecipe(true, "salt_flied", GTQTMetaTileEntities.SALT_FLIED.getStackForm(),
+                "FFF", "CMC", "BBB", 'M', MetaTileEntities.HULL[GTValues.LV].getStackForm(), 'C',
+                new UnificationEntry(OrePrefix.pipeLargeFluid, Steel), 'B',
+                new UnificationEntry(OrePrefix.circuit, LV), 'F', MetaItems.ELECTRIC_PUMP_LV);
+
+        ModHandler.addShapedRecipe(true, "evaporation_pool", GTQTMetaTileEntities.EVAPORATION_POOL.getStackForm(),
                 "FFF", "CMC", "BBB", 'M', MetaTileEntities.HULL[GTValues.LV].getStackForm(), 'B',
                 new UnificationEntry(OrePrefix.pipeLargeFluid, Steel), 'C',
                 new UnificationEntry(OrePrefix.circuit, LV), 'F', MetaItems.ELECTRIC_PUMP_LV);

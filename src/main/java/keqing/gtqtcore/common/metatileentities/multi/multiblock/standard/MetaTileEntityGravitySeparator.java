@@ -121,9 +121,6 @@ public class MetaTileEntityGravitySeparator extends GTQTRecipeMapMultiblockContr
         if(getStatue())  textList.add(new TextComponentTranslation("gtqtcore.msf.good"));
         else textList.add(new TextComponentTranslation("gtqtcore.msf.no"));
     }
-    private static IBlockState getCasingAState() {
-        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STAINLESS_CLEAN);
-    }
     int[] steam=new int[3];
     FluidStack STEAM = Steam.getFluid(1000*updatetime);
     @Override

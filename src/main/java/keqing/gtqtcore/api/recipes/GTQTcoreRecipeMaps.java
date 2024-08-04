@@ -7,6 +7,7 @@ import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.recipes.builders.*;
 import gregtech.core.sound.GTSoundEvents;
+import gregtechfoodoption.recipe.GTFORecipeMaps;
 import keqing.gtqtcore.api.capability.chemical_plant.ChemicalPlantBuilder;
 import keqing.gtqtcore.api.gui.GTQTGuiTextures;
 import keqing.gtqtcore.api.recipes.builder.*;
@@ -17,6 +18,10 @@ import keqing.gtqtcore.client.textures.GCYSGuiTextures;
 //怎么写请看
 //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/api/recipe/GSRecipeMaps.java
 public class GTQTcoreRecipeMaps {
+    public static final RecipeMap<EvaporationPoolRecipeBuilder> EVAPORATION_POOL = new RecipeMap<>("evaporation_pool", 2, 4, 1, 1, new EvaporationPoolRecipeBuilder(), false)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_SIFT, ProgressWidget.MoveType.VERTICAL)
+            .setSound(GTSoundEvents.CHEMICAL_REACTOR);
+
     public static final RecipeMap<SimpleRecipeBuilder> GRAVITY_SEPARATOR_RECIPES = new RecipeMap<>("gravity_separator", 3, 6, 3, 3, new SimpleRecipeBuilder(), false)
             .setProgressBar(GuiTextures.PROGRESS_BAR_MACERATE, ProgressWidget.MoveType.VERTICAL)
             .setSlotOverlay(true, false, false, GuiTextures.CRUSHED_ORE_OVERLAY)
@@ -112,7 +117,7 @@ public class GTQTcoreRecipeMaps {
             .setSlotOverlay(true, false, true, GuiTextures.DUST_OVERLAY)
             .setSound(GTSoundEvents.MACERATOR);
 
-    public static final RecipeMap<BlastRecipeBuilder> CRYSTALLIZER_RECIPES = new RecipeMap<>("crystallization_recipes",  6, 1, 1,  3,   new BlastRecipeBuilder(), false)
+    public static final RecipeMap<BlastRecipeBuilder> CRYSTALLIZER_RECIPES = new RecipeMap<>("crystallization_recipes",  6, 1, 2,  3,   new BlastRecipeBuilder(), false)
             .setProgressBar(GuiTextures.PROGRESS_BAR_CRYSTALLIZATION, ProgressWidget.MoveType.HORIZONTAL)
             .setSound(GTSoundEvents.FURNACE);
 
@@ -199,6 +204,7 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<SimpleRecipeBuilder> SFM;
     public static final RecipeMap<PrimitiveRecipeBuilder>  COAGULATION_RECIPES ;
     public static final RecipeMap<SimpleRecipeBuilder> FLUIDIZED_BED;
+    public static final RecipeMap<SimpleRecipeBuilder> FIX_BED;
     public static final RecipeMap<TARGETRecipeBuilder> TARGET_CHAMBER;
     public static final RecipeMap<TARGETRecipeBuilder> NUCLEOSYNTHESIS;
     public static final RecipeMap<SimpleRecipeBuilder> BEAM_COLLECTION;
@@ -418,6 +424,11 @@ public class GTQTcoreRecipeMaps {
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL)
                 .setSound(GTSoundEvents.SCIENCE);
 
+        FIX_BED = new RecipeMap<>("fix_bed",
+                0, 0, 3, 3, new SimpleRecipeBuilder(), false)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL)
+                .setSound(GTSoundEvents.SCIENCE);
+
         DISTILLATION_KETTLE = new RecipeMapGTQTDistillationTower<>("distillation_kettle",
                 1,false, 1,false, 1,false, 12,false, new SimpleRecipeBuilder(), false).setSound(GTSoundEvents.CHEMICAL_REACTOR);
 
@@ -502,6 +513,10 @@ public class GTQTcoreRecipeMaps {
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL)
                 .setSound(GTValues.FOOLS.get() ? GTSoundEvents.SCIENCE : GTSoundEvents.CHEMICAL_REACTOR);
 
+    }
+    public static void init() {
+        RecipeMaps.BLAST_RECIPES.setMaxFluidInputs(3);
+        RecipeMaps.BLAST_RECIPES.setMaxFluidOutputs(3);
     }
 
 }
