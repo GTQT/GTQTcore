@@ -788,8 +788,8 @@ public class CPULine {
         FLUID_SOLIDFICATION_RECIPES.recipeBuilder()
                 .duration(400)
                 .EUt(30)
-                .input(stick,Graphite,16)
-                .fluidInputs(HighlyPurifiedCoalTar.getFluid(400))
+                .input(stick,Graphite,8)
+                .fluidInputs(HighlyPurifiedCoalTar.getFluid(200))
                 .output(IMPREGNATED_GRAPHITE_RODS)
                 .buildAndRegister();
 
@@ -797,13 +797,13 @@ public class CPULine {
                 .duration(200)
                 .EUt(30)
                 .input(IMPREGNATED_GRAPHITE_RODS)
-                .input(dust,Graphite,16)
-                .fluidInputs(Asphalt.getFluid(1000))
+                .input(dust,Graphite,8)
+                .fluidInputs(Asphalt.getFluid(200))
                 .output(IMPREGNATED_GRAPHITE_RODSA)
                 .buildAndRegister();
 
         BLAST_RECIPES.recipeBuilder()
-                .duration(2000)
+                .duration(1000)
                 .EUt(120)
                 .blastFurnaceTemp(1800)
                 .input(IMPREGNATED_GRAPHITE_RODSA)

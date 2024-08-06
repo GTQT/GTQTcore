@@ -406,7 +406,8 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem POOR_THORIUM_ROD_DUAL;
     public static MetaItem<?>.MetaValueItem POOR_THORIUM_ROD_QUAD;
 
-
+    public static MetaItem<?>.MetaValueItem MAGNETO_RESONATIC_BOARD;
+    public static MetaItem<?>.MetaValueItem MAGNETO_RESONATIC_CIRCUIT_BOARD;
     public static MetaItem<?>.MetaValueItem MAGNETO_RESONATIC_CIRCUIT_ULV;
     public static MetaItem<?>.MetaValueItem MAGNETO_RESONATIC_CIRCUIT_LV;
     public static MetaItem<?>.MetaValueItem MAGNETO_RESONATIC_CIRCUIT_MV;

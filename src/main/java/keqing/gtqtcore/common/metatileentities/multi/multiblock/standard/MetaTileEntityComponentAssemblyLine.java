@@ -254,16 +254,16 @@ public class MetaTileEntityComponentAssemblyLine extends RecipeMapMultiblockCont
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
         if (this.isStructureFormed() && casingTier > 0) {
-            textList.add(0, new TextComponentTranslation("epimorphism.machine.component_assembly_line.casing_tier", I18n.format("epimorphism.machine.component_assembly_line.tier." + casingTier)));
+            textList.add(0, new TextComponentTranslation("gtqtcore.machine.component_assembly_line.casing_tier", I18n.format("gtqtcore.machine.component_assembly_line.tier." + casingTier)));
         }
     }
 
     @Override
     public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
-        tooltip.add(I18n.format("epimorphism.machine.component_assembly_line.tooltip.1"));
-        tooltip.add(I18n.format("epimorphism.machine.component_assembly_line.tooltip.2"));
-        tooltip.add(I18n.format("epimorphism.machine.component_assembly_line.tooltip.3"));
-        tooltip.add(I18n.format("epimorphism.machine.component_assembly_line.tooltip.4"));
+        tooltip.add(I18n.format("gtqtcore.machine.component_assembly_line.tooltip.1"));
+        tooltip.add(I18n.format("gtqtcore.machine.component_assembly_line.tooltip.2"));
+        tooltip.add(I18n.format("gtqtcore.machine.component_assembly_line.tooltip.3"));
+        tooltip.add(I18n.format("gtqtcore.machine.component_assembly_line.tooltip.4"));
     }
 }

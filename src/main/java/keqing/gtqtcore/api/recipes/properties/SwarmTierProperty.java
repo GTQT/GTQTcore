@@ -31,7 +31,7 @@ public class SwarmTierProperty extends RecipeProperty<Integer> {
                          int y,
                          int color,
                          Object value) {
-        minecraft.fontRenderer.drawString(I18n.format("gtlitecore.machine.neutral_network_nexus.tier",
+        minecraft.fontRenderer.drawString(I18n.format("gtqtcore.machine.neutral_network_nexus.tier",
                 castValue(value).toString()) + getSwarmTier(castValue(value)), x, y, color);
     }
 

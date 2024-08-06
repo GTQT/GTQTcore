@@ -239,6 +239,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityAdvancedAssemblyLine ADVANCED_ASSEMBLY_LINE;
     public static MetaTileEntityLargeGrind LAGER_GRIND;
     public static MetaTileEntityLargeForging LAGER_FORGING;
+    public static MetaTileEntityLargeExtractor LAGER_EXTRACTOR;
     public static MetaTileEntityNanoCoating NANO_COATING;
     public static final SimpleGeneratorMetaTileEntity[] BIOMASS_GENERATOR = new SimpleGeneratorMetaTileEntity[3];
     public static MetaTileEntityCryogenicFreezer CRYOGENIC_FREEZER;
@@ -468,9 +469,10 @@ public class GTQTMetaTileEntities {
         LAGER_THERMAL_CENTRIFUGE = registerMetaTileEntity(3256, new MetaTileEntityLargeThermalCentrifuge(gtqtcoreId("lager_thermal_centrifuge")));
         LAGER_GRIND = registerMetaTileEntity(3257, new MetaTileEntityLargeGrind(gtqtcoreId("lager_grind")));
         LAGER_FORGING = registerMetaTileEntity(3258, new MetaTileEntityLargeForging(gtqtcoreId("lager_forging")));
-        LV_PROCESSING_ARRAY = registerMetaTileEntity(3259, new MetaTileEntityProcessingArray(gtqtcoreId("lv_processing_array"), 1));
-        MV_PROCESSING_ARRAY = registerMetaTileEntity(3260, new MetaTileEntityProcessingArray(gtqtcoreId("mv_processing_array"), 2));
-        HV_PROCESSING_ARRAY = registerMetaTileEntity(3261, new MetaTileEntityProcessingArray(gtqtcoreId("hv_processing_array"), 3));
+        LAGER_EXTRACTOR = registerMetaTileEntity(3259, new MetaTileEntityLargeExtractor(gtqtcoreId("lager_extractor")));
+        LV_PROCESSING_ARRAY = registerMetaTileEntity(3287, new MetaTileEntityProcessingArray(gtqtcoreId("lv_processing_array"), 1));
+        MV_PROCESSING_ARRAY = registerMetaTileEntity(3288, new MetaTileEntityProcessingArray(gtqtcoreId("mv_processing_array"), 2));
+        HV_PROCESSING_ARRAY = registerMetaTileEntity(3289, new MetaTileEntityProcessingArray(gtqtcoreId("hv_processing_array"), 3));
         //巨型设备
         COMPRESSED_FUSION_REACTOR[0] = registerMetaTileEntity(3290, new MetaTileEntityCompressedFusionReactor(gtqtcoreId("compressed_fusion_reactor.luv"), LuV, MetaBlocks.FUSION_CASING.getState(gregtech.common.blocks.BlockFusionCasing.CasingType.FUSION_CASING), MetaBlocks.FUSION_CASING.getState(gregtech.common.blocks.BlockFusionCasing.CasingType.SUPERCONDUCTOR_COIL), MetaBlocks.FRAMES.get(Materials.Naquadah).getBlock(Materials.Naquadah)));
         COMPRESSED_FUSION_REACTOR[1] = registerMetaTileEntity(3291, new MetaTileEntityCompressedFusionReactor(gtqtcoreId("compressed_fusion_reactor.zpm"), ZPM, MetaBlocks.FUSION_CASING.getState(gregtech.common.blocks.BlockFusionCasing.CasingType.FUSION_CASING_MK2), MetaBlocks.FUSION_CASING.getState(gregtech.common.blocks.BlockFusionCasing.CasingType.FUSION_COIL), MetaBlocks.FRAMES.get(Materials.NaquadahEnriched).getBlock(Materials.NaquadahEnriched)));

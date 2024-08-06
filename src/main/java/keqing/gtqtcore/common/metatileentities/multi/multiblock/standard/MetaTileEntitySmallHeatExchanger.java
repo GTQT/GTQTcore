@@ -100,13 +100,13 @@ public class MetaTileEntitySmallHeatExchanger extends NoEnergyMultiblockControll
         super.addDisplayText(textList);
         if (isStructureFormed()) {
             HeatExchangerRecipeLogic logic = (HeatExchangerRecipeLogic)recipeMapWorkable;
-            textList.add(new TextComponentTranslation("gtlitecore.machine.heat_exchanger.rate." + logic.isSuperheat(), logic.getRate()));
+            textList.add(new TextComponentTranslation("gtqtcore.machine.heat_exchanger.rate." + logic.isSuperheat(), logic.getRate()));
             int efficiency = (int) Math.ceil(logic.getHeatEfficiency() * (40 + 0.6 * thresholdPercentage));
-            textList.add(new TextComponentTranslation("gtlitecore.machine.heat_exchanger.efficiency",
+            textList.add(new TextComponentTranslation("gtqtcore.machine.heat_exchanger.efficiency",
                     (efficiency == 0 ? DARK_RED : efficiency <= 40 ? RED : efficiency == 100 ? GREEN : YELLOW).toString() + efficiency + "%"));
-            ITextComponent throttleText = new TextComponentTranslation("gtlitecore.machine.heat_exchanger.threshold",
+            ITextComponent throttleText = new TextComponentTranslation("gtqtcore.machine.heat_exchanger.threshold",
                     AQUA.toString() + getThrottle() + "%");
-            withHoverTextTranslate(throttleText, "gtlitecore.machine.heat_exchanger.threshold.tooltip");
+            withHoverTextTranslate(throttleText, "gtqtcore.machine.heat_exchanger.threshold.tooltip");
             textList.add(throttleText);
         }
     }

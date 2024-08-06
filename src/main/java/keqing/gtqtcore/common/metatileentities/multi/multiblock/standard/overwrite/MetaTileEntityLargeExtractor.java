@@ -1,8 +1,5 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.overwrite;
 
-import gregicality.multiblocks.common.block.GCYMMetaBlocks;
-import gregicality.multiblocks.common.block.blocks.BlockUniqueCasing;
-import gregtech.api.block.IHeatingCoilBlockStats;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
@@ -12,25 +9,18 @@ import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
-import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.material.Materials;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
-import gregtech.common.blocks.BlockBoilerCasing;
-import gregtech.common.blocks.BlockFireboxCasing;
-import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.core.sound.GTSoundEvents;
 import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
-import keqing.gtqtcore.api.metaileentity.multiblock.GTQTRecipeMapMultiblockControllerOverwrite;
 import keqing.gtqtcore.api.metaileentity.multiblock.GTQTRecipeMapMultiblockOverwrite;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
-import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -48,23 +38,19 @@ import java.util.List;
 
 import static gregtech.api.GTValues.VA;
 
-public class MetaTileEntityLargeThermalCentrifuge extends GTQTRecipeMapMultiblockControllerOverwrite {
-    private int coilLevel;
+public class MetaTileEntityLargeExtractor extends GTQTRecipeMapMultiblockOverwrite {
     private int casingTier;
     private int tubeTier;
     private int tier;
 
-    public MetaTileEntityLargeThermalCentrifuge(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, new RecipeMap[] {
-                RecipeMaps.THERMAL_CENTRIFUGE_RECIPES,
-                RecipeMaps.CENTRIFUGE_RECIPES
-        });
+    public MetaTileEntityLargeExtractor(ResourceLocation metaTileEntityId) {
+        super(metaTileEntityId, RecipeMaps.EXTRACTOR_RECIPES);
         this.recipeMapWorkable = new LargeChemicalReactorLogic(this);
     }
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
-        return new MetaTileEntityLargeThermalCentrifuge(metaTileEntityId);
+        return new MetaTileEntityLargeExtractor(metaTileEntityId);
     }
      int ParallelNum=1;
     @Override
@@ -84,6 +70,7 @@ public class MetaTileEntityLargeThermalCentrifuge extends GTQTRecipeMapMultibloc
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(I18n.format("gregtech.machine.cracker.gtqtupdate.1"));
         tooltip.add(I18n.format("gregtech.machine.cracker.gtqtupdate.2"));
+        tooltip.add(I18n.format("本多方块最高限制配方电压：30 EU"));
     }
     @Override
     public void update() {
@@ -107,13 +94,12 @@ public class MetaTileEntityLargeThermalCentrifuge extends GTQTRecipeMapMultibloc
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
-                .aisle(" CCC ", " CUC ", " CCC ", "  C  ", "  C  ", " CCC ", " CUC ", " CCC ")
-                .aisle("CCCCC", "CP PC", "CG GC", " P P ", " P P ", "CG GC", "CP PC", " CCC ")
-                .aisle("CCCCC", "U F U", "C F C", "C F C", "C F C", "C F C", "U F U", " CCC ")
-                .aisle("CCCCC", "CP PC", "CG GC", " P P ", " P P ", "CG GC", "CP PC", " CCC ")
-                .aisle(" CCC ", " CSC ", " CCC ", "  C  ", "  C  ", " CCC ", " CUC ", " CCC ")
+                .aisle("FXF", "XXX", "FXF")
+                .aisle("XXX", "XPX", "XXX")
+                .aisle("XXX", "XPX", "XXX")
+                .aisle("FXF", "XSX", "FXF")
                 .where('S', selfPredicate())
-                .where('C', TiredTraceabilityPredicate.CP_CASING
+                .where('X', TiredTraceabilityPredicate.CP_CASING.setMinGlobalLimited(18)
                         .or(abilities(MultiblockAbility.MAINTENANCE_HATCH).setExactLimit(1))
                         .or(abilities(MultiblockAbility.EXPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1))
                         .or(abilities(MultiblockAbility.IMPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1))
@@ -121,19 +107,16 @@ public class MetaTileEntityLargeThermalCentrifuge extends GTQTRecipeMapMultibloc
                         .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setMinGlobalLimited(0).setPreviewCount(1))
                         .or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(2).setPreviewCount(2)))
                 .where('P', TiredTraceabilityPredicate.CP_TUBE)
-                .where('U', heatingCoils())
-                .where('G', heatingCoils())
                 .where('F', states(getFrameState()))
                 .where('#', any())
                 .build();
     }
     private IBlockState getFrameState() {
-        return MetaBlocks.FRAMES.get(Materials.Aluminium).getBlock(Materials.Aluminium);
+        return MetaBlocks.FRAMES.get(Materials.Steel).getBlock(Materials.Steel);
     }
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
-        textList.add(new TextComponentTranslation("gtqtcore.coilTire", coilLevel));
         textList.add(new TextComponentTranslation("gtqtcore.casingTire", casingTier));
         textList.add(new TextComponentTranslation("gtqtcore.tubeTire", tubeTier));
         if(casingTier!=tubeTier)
@@ -180,12 +163,8 @@ public class MetaTileEntityLargeThermalCentrifuge extends GTQTRecipeMapMultibloc
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
-        Object coilType = context.get("CoilType");
         Object casingTier = context.get("ChemicalPlantCasingTiredStats");
         Object tubeTier = context.get("ChemicalPlantTubeTiredStats");
-        this.coilLevel = GTQTUtil.getOrDefault(() -> coilType instanceof IHeatingCoilBlockStats,
-                () ->  ((IHeatingCoilBlockStats) coilType).getLevel(),
-                BlockWireCoil.CoilType.CUPRONICKEL.getLevel());
         this.casingTier = GTQTUtil.getOrDefault(() -> casingTier instanceof WrappedIntTired,
                 () -> ((WrappedIntTired)casingTier).getIntTier(),
                 0);
@@ -194,8 +173,8 @@ public class MetaTileEntityLargeThermalCentrifuge extends GTQTRecipeMapMultibloc
                 0);
         this.tier = Math.min(this.casingTier,this.tubeTier);
 
-        this.writeCustomData(GTQTValue.UPDATE_TIER21,buf -> buf.writeInt(this.casingTier));
-        ParallelLim=Math.min((int)Math.pow(2, this.tier),32);
+        this.writeCustomData(GTQTValue.UPDATE_TIER19,buf -> buf.writeInt(this.casingTier));
+        ParallelLim=Math.min((int)Math.pow(2, this.tier),128);
         ParallelNum=ParallelLim;
     }
 
@@ -214,11 +193,11 @@ public class MetaTileEntityLargeThermalCentrifuge extends GTQTRecipeMapMultibloc
     @Override
     public void receiveCustomData(int dataId, PacketBuffer buf) {
         super.receiveCustomData(dataId, buf);
-        if(dataId == GTQTValue.UPDATE_TIER21){
+        if(dataId == GTQTValue.UPDATE_TIER25){
             this.casingTier = buf.readInt();
         }
-        if(dataId == GTQTValue.REQUIRE_DATA_UPDATE21){
-            this.writeCustomData(GTQTValue.UPDATE_TIER21,buf1 -> buf1.writeInt(this.casingTier));
+        if(dataId == GTQTValue.REQUIRE_DATA_UPDATE25){
+            this.writeCustomData(GTQTValue.UPDATE_TIER25,buf1 -> buf1.writeInt(this.casingTier));
         }
     }
 
@@ -246,17 +225,8 @@ public class MetaTileEntityLargeThermalCentrifuge extends GTQTRecipeMapMultibloc
             super(tileEntity,true);
         }
 
-        public void update() {
-
-        }
-
-        public void setMaxProgress(int maxProgress) {
-            this.maxProgressTime = maxProgress / (2 * coilLevel);
-            this.metaTileEntity.markDirty();
-        }
-
         public long getMaxVoltage() {
-            return Math.min(super.getMaxVoltage(), VA[tier]);
+            return 30;
         }
         @Override
         public int getParallelLimit() {

@@ -68,7 +68,7 @@ public class MetaTileEntityMillBallHatch extends MetaTileEntityMultiblockPart im
                 .widget(new SlotWidget(this.ballHolder,0, 88-9,50,true,true,true)
                         .setBackgroundTexture(GuiTextures.SLOT)
                         .setChangeListener(this::markDirty))
-                .widget(new LabelWidget(88,20,"epimorphism.multipart.ball.only")
+                .widget(new LabelWidget(88,20,"gtqtcore.multipart.ball.only")
                         .setXCentered(true));
 
         return builder.build(this.getHolder(),entityPlayer);
@@ -78,7 +78,7 @@ public class MetaTileEntityMillBallHatch extends MetaTileEntityMultiblockPart im
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World world, @Nonnull List<String> tooltip, boolean advanced) {
         super.addInformation(stack, world, tooltip, advanced);
-        tooltip.add(I18n.format("epimorphism.multipart.ball.only"));
+        tooltip.add(I18n.format("gtqtcore.multipart.ball.only"));
     }
 
     @Override

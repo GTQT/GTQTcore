@@ -17,6 +17,7 @@ import gregtech.common.metatileentities.MetaTileEntities;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTPowerSupply;
+import keqing.gtqtcore.common.items.GTQTMetaItems;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -49,6 +50,7 @@ import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.PRECISE_ASSEMBLER_R
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.VACUUM_CHAMBER_RECIPES;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
+import static keqing.gtqtcore.api.unification.TJMaterials.Polyetheretherketone;
 import static keqing.gtqtcore.api.utils.GTQTUtil.CWT;
 import static keqing.gtqtcore.common.block.GTQTMetaBlocks.POWER;
 import static keqing.gtqtcore.common.block.blocks.GTQTIsaCasing.CasingType.FLOTATION_CASING_GEARBOX;
@@ -1531,25 +1533,57 @@ public class KeQingNET {
         //5 室温超导设计
         GTQTcoreRecipeMaps.KEQING_NET_RECIES.recipeBuilder()
                 .input(DISK_0)
-                .notConsumable(wireGtSingle,IndiumTinBariumTitaniumCuprate)
+                .notConsumable(wireGtSingle,LuVSuperconductor)
                 .output(DISK_5)
                 .EUt(7680)
-                .CWUt(256)
+                .CWUt(CWT[LuV])
                 .NB(5)
                 .totalCWU(100000)
                 .buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .EUt(VA[LuV])
-                .input(OrePrefix.wireGtDouble, Materials.IndiumTinBariumTitaniumCuprate, 32)
+                .input(OrePrefix.wireGtDouble, LuVSuperconductor, 32)
                 .input(OrePrefix.foil, Materials.NiobiumTitanium, 32)
-                .fluidInputs(Materials.Trinium.getFluid(GTValues.L * 24))
+                .fluidInputs(Materials.Trinium.getFluid(3456))
                 .outputs(MetaBlocks.FUSION_CASING.getItemVariant(BlockFusionCasing.CasingType.SUPERCONDUCTOR_COIL))
                 .scannerResearch(b -> b
                         .researchStack(DISK_5.getStackForm())
                         .duration(1200)
                         .EUt(VA[IV]))
-                .duration(100).buildAndRegister();
+                .duration(800).EUt(VA[LuV]).buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(OrePrefix.wireGtDouble, ZPMSuperconductor, 16)
+                .input(OrePrefix.foil, Materials.NiobiumTitanium, 16)
+                .fluidInputs(Materials.Trinium.getFluid(2304))
+                .outputs(MetaBlocks.FUSION_CASING.getItemVariant(BlockFusionCasing.CasingType.SUPERCONDUCTOR_COIL))
+                .scannerResearch(b -> b
+                        .researchStack(DISK_5.getStackForm())
+                        .duration(1200)
+                        .EUt(VA[IV]))
+                .duration(800).EUt(VA[ZPM]).buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(OrePrefix.wireGtDouble, UVSuperconductor, 8)
+                .input(OrePrefix.foil, Materials.NiobiumTitanium, 8)
+                .fluidInputs(Materials.Trinium.getFluid(1152))
+                .outputs(MetaBlocks.FUSION_CASING.getItemVariant(BlockFusionCasing.CasingType.SUPERCONDUCTOR_COIL))
+                .scannerResearch(b -> b
+                        .researchStack(DISK_5.getStackForm())
+                        .duration(1200)
+                        .EUt(VA[IV]))
+                .duration(800).EUt(VA[UV]).buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(OrePrefix.wireGtDouble,UHVSuperconductor, 4)
+                .input(OrePrefix.foil, Materials.NiobiumTitanium, 4)
+                .fluidInputs(Materials.Trinium.getFluid(576))
+                .outputs(MetaBlocks.FUSION_CASING.getItemVariant(BlockFusionCasing.CasingType.SUPERCONDUCTOR_COIL))
+                .scannerResearch(b -> b
+                        .researchStack(DISK_5.getStackForm())
+                        .duration(1200)
+                        .EUt(VA[IV]))
+                .duration(800).EUt(VA[UHV]).buildAndRegister();
 
         //6 可控核聚变-环流器设计
         GTQTcoreRecipeMaps.KEQING_NET_RECIES.recipeBuilder()
@@ -1557,40 +1591,164 @@ public class KeQingNET {
                 .notConsumable(FUSION_REACTOR[0].getStackForm())
                 .output(DISK_6)
                 .EUt(7680)
-                .CWUt(2)
+                .CWUt(CWT[LuV])
                 .NB(6)
                 .totalCWU(100000)
                 .buildAndRegister();
 
-        /*
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(CIRCUIT_GOOD_I,8)
                 .inputs(FUSION_CASING.getItemVariant(SUPERCONDUCTOR_COIL))
-                .input(circuit, Tier.ZPM, 8)
-                .input(plateDouble, Plutonium241,4)
-                .input(plateDouble, Osmiridium,4)
-                .input(FIELD_GENERATOR_IV, 2)
+                .input(circuit, Tier.ZPM, 64)
+                .input(plateDouble, Plutonium241,6)
+                .input(plateDouble, NaquadahAlloy,6)
+                .input(FIELD_GENERATOR_IV, 32)
                 .input(ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT, 64)
-                .input(wireGtSingle, IndiumTinBariumTitaniumCuprate, 32)
-                .fluidInputs(SolderingAlloy.getFluid(L * 8))
-                .fluidInputs(NiobiumTitanium.getFluid(L * 8))
+                .input(ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT, 64)
+                .input(wireGtSingle, LuVSuperconductor, 64)
+                .input(wireGtSingle, LuVSuperconductor, 64)
+                .fluidInputs(SolderingAlloy.getFluid(L * 16))
+                .fluidInputs(NiobiumTitanium.getFluid(L * 16))
+                .fluidInputs(Zylon.getFluid(L * 16))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 16))
                 .outputs(FUSION_REACTOR[0].getStackForm())
                 .scannerResearch(b -> b
                         .researchStack(DISK_6.getStackForm())
                         .duration(1200)
                         .EUt(VA[IV]))
-                .duration(800).EUt(VA[LuV]).buildAndRegister();
-*/
+                .duration(2000).EUt(VA[LuV]).buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(CIRCUIT_GOOD_II,8)
+                .inputs(FUSION_CASING.getItemVariant(FUSION_COIL))
+                .input(circuit, Tier.UV, 64)
+                .input(plateDouble, Naquadria,6)
+                .input(plateDouble, Duranium,6)
+                .input(FIELD_GENERATOR_LuV, 32)
+                .input(ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT, 64)
+                .input(ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT, 64)
+                .input(wireGtSingle, ZPMSuperconductor, 64)
+                .input(wireGtSingle, ZPMSuperconductor, 64)
+                .fluidInputs(SolderingAlloy.getFluid(L * 16))
+                .fluidInputs(VanadiumGallium.getFluid(L * 16))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 16))
+                .fluidInputs(Polyetheretherketone.getFluid(L * 16))
+                .outputs(FUSION_REACTOR[1].getStackForm())
+                .stationResearch(b -> b
+                        .researchStack(FUSION_REACTOR[0].getStackForm())
+                        .CWUt(CWT[LuV])
+                        .EUt(VA[ZPM]))
+                .duration(2000).EUt(VA[LuV]).buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(CIRCUIT_GOOD_III,8)
+                .inputs(FUSION_CASING.getItemVariant(FUSION_COIL))
+                .input(circuit, Tier.UHV, 64)
+                .input(plateDouble, Darmstadtium,6)
+                .input(plateDouble, Americium,6)
+                .input(FIELD_GENERATOR_ZPM, 32)
+                .input(ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT, 64)
+                .input(ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT, 64)
+                .input(wireGtSingle, UHVSuperconductor, 64)
+                .input(wireGtSingle, UHVSuperconductor, 64)
+                .fluidInputs(SolderingAlloy.getFluid(L * 16))
+                .fluidInputs(YttriumBariumCuprate.getFluid(L * 16))
+                .fluidInputs(Polyetheretherketone.getFluid(L * 16))
+                .fluidInputs(KaptonK.getFluid(L * 16))
+                .outputs(FUSION_REACTOR[2].getStackForm())
+                .stationResearch(b -> b
+                        .researchStack(FUSION_REACTOR[1].getStackForm())
+                        .CWUt(CWT[ZPM])
+                        .EUt(VA[UV]))
+                .duration(2000).EUt(VA[ZPM]).buildAndRegister();
+
+        //压缩聚变
+        //  Compressed Fusion Reactor Mk I
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(CIRCUIT_GOOD_I,16)
+                .input(HULL[LuV],16)
+                .input(FUSION_REACTOR[0], 16)
+                .input(plate, Europium, 32)
+                .input(circuit, MarkerMaterials.Tier.ZPM, 64)
+                .input(ELECTRIC_PUMP_LuV, 32)
+                .input(FIELD_GENERATOR_LuV, 32)
+                .input(ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT, 64)
+                .input(wireGtSingle, LuVSuperconductor, 64)
+                .input(wireGtSingle, LuVSuperconductor, 64)
+                .fluidInputs(SolderingAlloy.getFluid(L * 16))
+                .fluidInputs(NiobiumTitanium.getFluid(L * 16))
+                .fluidInputs(Zylon.getFluid(L * 16))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 16))
+                .output(COMPRESSED_FUSION_REACTOR[0])
+                .stationResearch(b -> b
+                        .researchStack(FUSION_REACTOR[0].getStackForm())
+                        .EUt(VA[LuV])
+                        .CWUt(CWT[LuV]))
+                .EUt(VA[LuV])
+                .duration(1200)
+                .buildAndRegister();
+
+        //  Compressed Fusion Reactor Mk II
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(CIRCUIT_GOOD_II,16)
+                .input(HULL[ZPM],16)
+                .input(FUSION_REACTOR[1], 16)
+                .input(plate, Americium, 32)
+                .input(circuit, MarkerMaterials.Tier.UV, 64)
+                .input(ELECTRIC_PUMP_ZPM, 32)
+                .input(FIELD_GENERATOR_ZPM, 32)
+                .input(ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT, 64)
+                .input(wireGtSingle, ZPMSuperconductor, 64)
+                .input(wireGtSingle, ZPMSuperconductor, 64)
+                .fluidInputs(SolderingAlloy.getFluid(L * 16))
+                .fluidInputs(VanadiumGallium.getFluid(L * 16))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 16))
+                .fluidInputs(Polyetheretherketone.getFluid(L * 16))
+                .output(COMPRESSED_FUSION_REACTOR[1])
+                .stationResearch(b -> b
+                        .researchStack(FUSION_REACTOR[1].getStackForm())
+                        .EUt(VA[ZPM])
+                        .CWUt(CWT[ZPM]))
+                .EUt(VA[ZPM])
+                .duration(1200)
+                .buildAndRegister();
+
+        //  Compressed Fusion Reactor Mk III
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(CIRCUIT_GOOD_III,16)
+                .input(HULL[UV],16)
+                .input(FUSION_REACTOR[2], 16)
+                .input(plate, Darmstadtium, 32)
+                .input(circuit, MarkerMaterials.Tier.UHV, 64)
+                .input(ELECTRIC_PUMP_UV, 32)
+                .input(FIELD_GENERATOR_UV, 32)
+                .input(ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT, 64)
+                .input(wireGtSingle, UVSuperconductor, 64)
+                .input(wireGtSingle, UVSuperconductor, 64)
+                .fluidInputs(SolderingAlloy.getFluid(L * 16))
+                .fluidInputs(YttriumBariumCuprate.getFluid(L * 16))
+                .fluidInputs(Polyetheretherketone.getFluid(L * 16))
+                .fluidInputs(KaptonK.getFluid(L * 16))
+                .output(COMPRESSED_FUSION_REACTOR[2])
+                .stationResearch(b -> b
+                        .researchStack(FUSION_REACTOR[2].getStackForm())
+                        .EUt(VA[UV])
+                        .CWUt(CWT[UV]))
+                .EUt(VA[UV])
+                .duration(1200)
+                .buildAndRegister();
         //7 可控核聚变-聚变超导线圈
         GTQTcoreRecipeMaps.KEQING_NET_RECIES.recipeBuilder()
                 .input(DISK_0)
-                .notConsumable(wireGtSingle,SamariumIronArsenicOxide)
+                .notConsumable(MetaBlocks.FUSION_CASING.getItemVariant(BlockFusionCasing.CasingType.SUPERCONDUCTOR_COIL))
                 .output(DISK_7)
                 .EUt(7680)
-                .CWUt(256)
+                .CWUt(CWT[LuV])
                 .NB(7)
                 .totalCWU(100000)
                 .buildAndRegister();
 
+        //线圈
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .inputs(MetaBlocks.FUSION_CASING.getItemVariant(BlockFusionCasing.CasingType.SUPERCONDUCTOR_COIL))
                 .inputs(MetaItems.FIELD_GENERATOR_IV.getStackForm(2)).inputs(MetaItems.ELECTRIC_PUMP_IV.getStackForm())
@@ -1604,6 +1762,7 @@ public class KeQingNET {
                         .duration(1200)
                         .EUt(VA[IV]))
                 .duration(800).EUt(VA[ZPM]).buildAndRegister();
+
         //8 资源勘探I
         GTQTcoreRecipeMaps.KEQING_NET_RECIES.recipeBuilder()
                 .input(DISK_0)

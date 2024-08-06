@@ -43,6 +43,7 @@ public class MetaTileEntityIndustrialCentrifuge extends GTQTMultiblockCore {
     public MetaTileEntityIndustrialCentrifuge(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{
                 RecipeMaps.CENTRIFUGE_RECIPES,
+                RecipeMaps.EXTRACTOR_RECIPES,
                 RecipeMaps.THERMAL_CENTRIFUGE_RECIPES,
                 GTQTcoreRecipeMaps.GRAVITY_SEPARATOR_RECIPES
         });

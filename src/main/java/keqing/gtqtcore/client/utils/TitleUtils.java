@@ -10,9 +10,9 @@ import java.util.Random;
 import java.util.concurrent.CompletableFuture;
 
 public class TitleUtils {
-    public static final String DEFAULT_TITLE = "GregTech : Quantum Transition 格雷：量子跃迁 | ModPack Ver:" +GTQTCore.PACK+ " - GTQTCore Ver:"+GTQTCore.VERSION;
+    public static final String DEFAULT_TITLE = "GregTech : Quantum Transition| ModPack Ver:" +GTQTCore.PACK+ " - GTQTCore Ver:"+GTQTCore.VERSION;
     public static String currentTitle = null;
-    public static String TEST = "本整合包当前处于 内测 状态，不保证游戏完整性，仅供体验！";
+    public static String TEST = "This integration package is currently in beta testing mode!";
     public static void checkTitleState() {
         if (currentTitle == null) {
             return;
@@ -43,17 +43,17 @@ public class TitleUtils {
         Random rand = new Random();
         int randomNum = rand.nextInt(6);
         return switch (randomNum) {
-            case 1 -> "知之愈明，则行之愈笃;行之愈笃，则知之益明。——朱熹(宋)";
-            case 2 -> "为者常成，行者常至。——《晏子春秋》";
-            case 3 -> "为一身谋则愚，而为天下则智。";
-            case 4 -> "唯天下至诚为能化。——《论语》";
-            case 5 -> "如果永远是晴天，土地也会布满裂痕。";
-            default -> "宁死不背理，宁贫不堕志。";
+            case 1->"The clearer you know, the more you practice; The more diligently one acts, the more enlightened one becomes—— Zhu Xi (Song Dynasty) ";
+            case 2->"The doer always succeeds, the traveler always arrives—— Yanzi Chunqiu ";
+            case 3->"If you plan for yourself, you will be foolish, but if you plan for the world, you will be wise. ";
+            case 4->"Only sincerity in the world can be transformed—— The Analects ";
+            case 5->" it's always sunny, the land will also be filled with cracks. ";
+            default ->"Better die than betray reason, better be poor than lose heart. ";
         };
     }
 
     public static String buildTitle(String RANDOM,String STATUE) {
-        if(STATUE!=null)return String.format("%s | 随机废话：%s | 加载状态：%s | %s",DEFAULT_TITLE,RANDOM,STATUE,TEST);
-        return String.format("%s | 官方交流QQ群：1073091808 494136307 (QQ)| 随机废话； %s | %s",DEFAULT_TITLE,RANDOM,TEST);
+        if(STATUE!=null)return String.format("%s | Loading State：%s | %s",DEFAULT_TITLE,STATUE,TEST);
+        return String.format("%s | QQ group：1073091808 494136307 | %s",DEFAULT_TITLE,TEST);
     }
 }

@@ -23,6 +23,6 @@ public class PHErrorRangeProperty extends RecipeProperty<Double> {
 
     @Override
     public void drawInfo(@Nonnull Minecraft minecraft, int x, int y, int color, Object value) {
-        minecraft.fontRenderer.drawString(I18n.format("epimorphism.recipe.ph_error_range", String.format("%, .2f", castValue(value))), x, y, color);
+        minecraft.fontRenderer.drawString(I18n.format("gtqtcore.recipe.ph_error_range", String.format("%, .2f", castValue(value))), x, y, color);
     }
 }

@@ -25,9 +25,9 @@ public class GrindBallTierProperty extends RecipeProperty<Integer> {
 
     private static String getGrindBallTier(int grind_ball_tier) {
         if (grind_ball_tier == 1) {
-            return I18n.format("epimorphism.recipe.grind_ball_soapstone") ;
+            return I18n.format("gtqtcore.recipe.grind_ball_soapstone") ;
         }else {
-            return I18n.format("epimorphism.recipe.grind_ball_aluminium");
+            return I18n.format("gtqtcore.recipe.grind_ball_aluminium");
         }
     }
 }

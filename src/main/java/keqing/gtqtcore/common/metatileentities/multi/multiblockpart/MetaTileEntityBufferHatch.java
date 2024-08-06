@@ -83,8 +83,8 @@ public class MetaTileEntityBufferHatch extends MetaTileEntityMultiblockPart impl
                 builder.widget(new SlotWidget(itemHandler, 0, 89 + 1 * 9, 18, true, true, true)
                         .setBackgroundTexture(GuiTextures.SLOT)
                         .setChangeListener(this::markDirty));
-                /*builder.label(10, 20, "epimorphism.multipart.ph.name");*/
-                builder.dynamicLabel(10, 20, () -> I18n.format("epimorphism.multipart.ph.name", this.ph), 99);
+                /*builder.label(10, 20, "gtqtcore.multipart.ph.name");*/
+                builder.dynamicLabel(10, 20, () -> I18n.format("gtqtcore.multipart.ph.name", this.ph), 99);
                 builder.bindPlayerInventory(entityPlayer.inventory, GuiTextures.SLOT, 7, 18 + 18 + 12);
                 builder.bindOpenListener(this::setPH);
 
@@ -118,7 +118,7 @@ public class MetaTileEntityBufferHatch extends MetaTileEntityMultiblockPart impl
 
     @Override
     public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, boolean advanced) {
-        tooltip.add(I18n.format("epimorphism.machine.buffer_hatch.import.tooltip"));
+        tooltip.add(I18n.format("gtqtcore.machine.buffer_hatch.import.tooltip"));
         tooltip.add(I18n.format("gregtech.universal.disabled"));
     }
 

@@ -186,7 +186,7 @@ public class MetaTileEntityDissolutionTank extends GTQTRecipeMapMultiblockOverwr
     public void addInformation(ItemStack stack, @Nullable World world, @Nonnull List<String> tooltip, boolean advanced) {
         super.addInformation(stack, world, tooltip, advanced);
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("自动化噩梦", new Object[0]));
-        tooltip.add(I18n.format("epimorphism.machine.dissolution_tank.tooltip.1"));
+        tooltip.add(I18n.format("gtqtcore.machine.dissolution_tank.tooltip.1"));
         tooltip.add(I18n.format("gregtech.machine.cracker.gtqtupdate.1"));
     }
     @Override

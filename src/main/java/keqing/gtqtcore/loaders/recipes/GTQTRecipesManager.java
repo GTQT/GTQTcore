@@ -55,6 +55,7 @@ public class GTQTRecipesManager {
         TitanateChain.init();
         NuclearLine.init();
         OceanChain.init();
+        MagnetoResonaticCircuits.init();
         GermaniumChain.init();
         NaquadahChain.init();
         MachineCasing.init();
@@ -66,6 +67,7 @@ public class GTQTRecipesManager {
         MiscRecipes.init();
         MagicChain.init();
         RecipeConflicts.init();
+        removeRecipes.init();
         AluminiumLine.init();
         CoilWire.init();
         GCYSMetaTileEntityLoader.init();

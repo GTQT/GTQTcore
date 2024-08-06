@@ -298,6 +298,11 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         CIRCUIT_GOOD_III = addItem(442, "circuit.good_iii").setCreativeTabs(CommonProxy.GTQTCore_HP);
         CIRCUIT_GOOD_IV = addItem(443, "circuit.good_iv").setCreativeTabs(CommonProxy.GTQTCore_HP);
         CIRCUIT_GOOD_V = addItem(444, "circuit.good_v").setCreativeTabs(CommonProxy.GTQTCore_HP);
+
+
+        //  Magneto Resonatic Board
+        MAGNETO_RESONATIC_BOARD = this.addItem(498, "board.magneto_resonatic").setCreativeTabs(CommonProxy.GTQTCore_GD);
+        MAGNETO_RESONATIC_CIRCUIT_BOARD = this.addItem(499, "circuit_board.magneto_resonatic").setCreativeTabs(CommonProxy.GTQTCore_GD);
         // Circuits: ID 0-49
         GOOWARE_PROCESSOR = this.addItem(500, "circuit.gooware_processor").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.ZPM).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         GOOWARE_ASSEMBLY = this.addItem(501, "circuit.gooware_assembly").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.UV).setCreativeTabs(CommonProxy.GTQTCore_TAB);
@@ -340,21 +345,21 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         SUPRACHRONAL_OpV = this.addItem(533, "circuit.suprachronal.opv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.OpV).setCreativeTabs(CommonProxy.GTQTCore_HP);
         SUPRACHRONAL_MAX = this.addItem(534, "circuit.suprachronal.max").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.MAX).setCreativeTabs(CommonProxy.GTQTCore_HP);
 
-        MAGNETO_RESONATIC_CIRCUIT_ULV = this.addItem(535, "circuit.magneto_resonatic.ulv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.ULV).setCreativeTabs(CommonProxy.GTQTCore_BIO);
-        MAGNETO_RESONATIC_CIRCUIT_LV = this.addItem(536, "circuit.magneto_resonatic.lv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.LV).setCreativeTabs(CommonProxy.GTQTCore_BIO);
-        MAGNETO_RESONATIC_CIRCUIT_MV = this.addItem(537, "circuit.magneto_resonatic.mv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.MV).setCreativeTabs(CommonProxy.GTQTCore_BIO);
-        MAGNETO_RESONATIC_CIRCUIT_HV = this.addItem(538, "circuit.magneto_resonatic.hv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.HV).setCreativeTabs(CommonProxy.GTQTCore_BIO);
-        MAGNETO_RESONATIC_CIRCUIT_EV = this.addItem(539, "circuit.magneto_resonatic.ev").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.EV).setCreativeTabs(CommonProxy.GTQTCore_BIO);
-        MAGNETO_RESONATIC_CIRCUIT_IV = this.addItem(540, "circuit.magneto_resonatic.iv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.IV).setCreativeTabs(CommonProxy.GTQTCore_BIO);
-        MAGNETO_RESONATIC_CIRCUIT_LuV = this.addItem(541, "circuit.magneto_resonatic.luv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.LuV).setCreativeTabs(CommonProxy.GTQTCore_BIO);
-        MAGNETO_RESONATIC_CIRCUIT_ZPM = this.addItem(542, "circuit.magneto_resonatic.zpm").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.ZPM).setCreativeTabs(CommonProxy.GTQTCore_BIO);
-        MAGNETO_RESONATIC_CIRCUIT_UV = this.addItem(543, "circuit.magneto_resonatic.uv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.UV).setCreativeTabs(CommonProxy.GTQTCore_BIO);
-        MAGNETO_RESONATIC_CIRCUIT_UHV = this.addItem(544, "circuit.magneto_resonatic.uhv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.UHV).setCreativeTabs(CommonProxy.GTQTCore_BIO);
-        MAGNETO_RESONATIC_CIRCUIT_UEV = this.addItem(545, "circuit.magneto_resonatic.uev").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.UEV).setCreativeTabs(CommonProxy.GTQTCore_BIO);
-        MAGNETO_RESONATIC_CIRCUIT_UIV = this.addItem(546, "circuit.magneto_resonatic.uiv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.UIV).setCreativeTabs(CommonProxy.GTQTCore_BIO);
-        MAGNETO_RESONATIC_CIRCUIT_UXV = this.addItem(547, "circuit.magneto_resonatic.uxv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.UXV).setCreativeTabs(CommonProxy.GTQTCore_BIO);
-        MAGNETO_RESONATIC_CIRCUIT_OpV = this.addItem(548, "circuit.magneto_resonatic.opv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.OpV).setCreativeTabs(CommonProxy.GTQTCore_BIO);
-        MAGNETO_RESONATIC_CIRCUIT_MAX = this.addItem(549, "circuit.magneto_resonatic.max").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.MAX).setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        MAGNETO_RESONATIC_CIRCUIT_ULV = this.addItem(535, "circuit.magneto_resonatic.ulv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.ULV).setCreativeTabs(CommonProxy.GTQTCore_GD);
+        MAGNETO_RESONATIC_CIRCUIT_LV = this.addItem(536, "circuit.magneto_resonatic.lv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.LV).setCreativeTabs(CommonProxy.GTQTCore_GD);
+        MAGNETO_RESONATIC_CIRCUIT_MV = this.addItem(537, "circuit.magneto_resonatic.mv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.MV).setCreativeTabs(CommonProxy.GTQTCore_GD);
+        MAGNETO_RESONATIC_CIRCUIT_HV = this.addItem(538, "circuit.magneto_resonatic.hv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.HV).setCreativeTabs(CommonProxy.GTQTCore_GD);
+        MAGNETO_RESONATIC_CIRCUIT_EV = this.addItem(539, "circuit.magneto_resonatic.ev").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.EV).setCreativeTabs(CommonProxy.GTQTCore_GD);
+        MAGNETO_RESONATIC_CIRCUIT_IV = this.addItem(540, "circuit.magneto_resonatic.iv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.IV).setCreativeTabs(CommonProxy.GTQTCore_GD);
+        MAGNETO_RESONATIC_CIRCUIT_LuV = this.addItem(541, "circuit.magneto_resonatic.luv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.LuV).setCreativeTabs(CommonProxy.GTQTCore_GD);
+        MAGNETO_RESONATIC_CIRCUIT_ZPM = this.addItem(542, "circuit.magneto_resonatic.zpm").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.ZPM).setCreativeTabs(CommonProxy.GTQTCore_GD);
+        MAGNETO_RESONATIC_CIRCUIT_UV = this.addItem(543, "circuit.magneto_resonatic.uv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.UV).setCreativeTabs(CommonProxy.GTQTCore_GD);
+        MAGNETO_RESONATIC_CIRCUIT_UHV = this.addItem(544, "circuit.magneto_resonatic.uhv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.UHV).setCreativeTabs(CommonProxy.GTQTCore_GD);
+        MAGNETO_RESONATIC_CIRCUIT_UEV = this.addItem(545, "circuit.magneto_resonatic.uev").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.UEV).setCreativeTabs(CommonProxy.GTQTCore_GD);
+        MAGNETO_RESONATIC_CIRCUIT_UIV = this.addItem(546, "circuit.magneto_resonatic.uiv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.UIV).setCreativeTabs(CommonProxy.GTQTCore_GD);
+        MAGNETO_RESONATIC_CIRCUIT_UXV = this.addItem(547, "circuit.magneto_resonatic.uxv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.UXV).setCreativeTabs(CommonProxy.GTQTCore_GD);
+        MAGNETO_RESONATIC_CIRCUIT_OpV = this.addItem(548, "circuit.magneto_resonatic.opv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.OpV).setCreativeTabs(CommonProxy.GTQTCore_GD);
+        MAGNETO_RESONATIC_CIRCUIT_MAX = this.addItem(549, "circuit.magneto_resonatic.max").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.MAX).setCreativeTabs(CommonProxy.GTQTCore_GD);
 
         ASUPRACHRONAL_ULV = this.addItem(550, "circuit_suprachronal_ulv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.ULV).setCreativeTabs(CommonProxy.GTQTCore_GD);
         ASUPRACHRONAL_LV = this.addItem(551, "circuit_suprachronal_lv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.LV).setCreativeTabs(CommonProxy.GTQTCore_GD);

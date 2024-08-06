@@ -115,7 +115,7 @@ public class MetaTileEntityFermentationTank extends RecipeMapMultiblockControlle
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
         if (isStructureFormed())
-            textList.add(new TextComponentTranslation("epimorphism.machine.fermentation_tank.ph", String.format("%, .2f", this.pH)));
+            textList.add(new TextComponentTranslation("gtqtcore.machine.fermentation_tank.ph", String.format("%, .2f", this.pH)));
     }
 
     @Override
