@@ -304,11 +304,11 @@ public abstract class GTQTMultiblockCore extends MultiMapMultiblockController im
 
     public void addInformation(ItemStack stack,  World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
-        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("工作模式：独立线程", new Object[0]));
-        tooltip.add(TooltipHelper.BLINKING_CYAN+I18n.format(">>核心线程数量:%s", getCoreNum()));
-        tooltip.add(I18n.format("各线程间工作相互独立，拥有单独计时器,互不影响。耗电为各线程独立配方总和。"));
-        tooltip.add(I18n.format("超频模式：将自动计算各线程配方最大可超频数量，各线程最大超频电压:%s EU/t，独立线程之间速度增幅与耗电单独计算。",getMinVa()));
-        tooltip.add(I18n.format("溢出检测：关闭下开启溢出销毁。开启后检测到满仓各线程停止工作且保留工作进度，直到输出仓可以继续容纳输出。"));
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("gtqtcore.core.tooltip.1", new Object[0]));
+        tooltip.add(TooltipHelper.BLINKING_CYAN+I18n.format("gtqtcore.core.tooltip.2", getCoreNum()));
+        tooltip.add(I18n.format("gtqtcore.core.tooltip.3"));
+        tooltip.add(I18n.format("gtqtcore.core.tooltip.4",getMinVa()));
+        tooltip.add(I18n.format("gtqtcore.core.tooltip.5"));
     }
 
     @Override

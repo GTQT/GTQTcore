@@ -49,7 +49,7 @@ public class MetaTileEntityNeutronActivator  extends RecipeMapMultiblockControll
     }
     @Override
     public boolean checkRecipe(@Nonnull Recipe recipe, boolean consumeIfSuccess) {
-        if(recipe.getProperty(NeutronActivatorPartProperty.getInstance(), 0)>=pamin&&recipe.getProperty(NeutronActivatorPartProperty.getInstance(), 0)<=pamin)
+        if(recipe.getProperty(NeutronActivatorPartProperty.getInstance(), 0)>=pamin&&recipe.getProperty(NeutronActivatorPartProperty.getInstance(), 0)<=pamax)
         {
             return super.checkRecipe(recipe, consumeIfSuccess);
         }

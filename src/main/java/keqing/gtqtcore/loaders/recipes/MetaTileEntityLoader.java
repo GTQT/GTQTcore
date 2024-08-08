@@ -258,15 +258,6 @@ public class MetaTileEntityLoader {
                         .EUt(VA[7])
                         .duration(800))
                 .buildAndRegister();
-        //  Coking Tower
-        ModHandler.addShapedRecipe(true, "coking_tower", COKING_TOWER.getStackForm(),
-                "ICX", "VHV", "IPX",
-                'H', PYROLYSE_OVEN.getStackForm(),
-                'P', ELECTRIC_PUMP_EV,
-                'I', ELECTRIC_PISTON_EV,
-                'X', new UnificationEntry(wireGtQuadruple, Platinum),
-                'C', new UnificationEntry(circuit, MarkerMaterials.Tier.EV),
-                'V', new UnificationEntry(pipeNormalFluid, VanadiumSteel));
 
         //处理阵列
         ModHandler.addShapedRecipe(true, "lv_processing_array", LV_PROCESSING_ARRAY.getStackForm(), "RCR", "SPE", "HNH", 'R',

@@ -405,13 +405,13 @@ public class MetaTileEntityPhotolithographyFactory extends MetaTileEntityBaseWit
 
     public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
-        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("织光织梦", new Object[0]));
-        tooltip.add(TooltipHelper.BLINKING_CYAN+I18n.format("工作模式：独立线程 >>核心线程数量:%s", 4));
-        tooltip.add(I18n.format("由输入的晶圆等级，光刻胶等级决定支持的光刻列表。基于可光刻数量（晶圆与光刻胶储量最小值）决定循环输出轮数。某类光刻晶圆输出数量（假设在列表内）如下：轮数（可光刻总数整除列表长度），如果此类光刻晶圆在余数列表内（可光刻总数取余列表长度），则输出再加一。"));
-        tooltip.add(I18n.format("对于单个线程，工作时长由：基础时长，数量，晶圆等级，光刻胶等级，加速器束流器共同决定;耗能为晶圆等级与光刻胶等级和对应的电压乘以线程工作数量除上加速器束流器等级决定。"));
-        tooltip.add(I18n.format("均分模式：开启后在各独立线程在不存在专职任务（各独立线程对不同种类的晶圆有不同的处理优先级，处理此类特定晶圆称之为专职任务）的情况下，会与最近的一个线程共享剩余任务处理进度（如果被共享的线程已完成部分工作进度，则共享未完成部分的工作进度），共同完成此任务。"));
-        tooltip.add(I18n.format("保险模式：开启后机器无论晶圆缓存持续工作，这意味着如果晶圆输入速度过慢，可光刻数量较少，设备只会输出前几类晶圆，而不会循环整个可光刻列表。"));
-        tooltip.add(I18n.format("退回缓存：返回非工作区缓存区的晶圆与光刻胶，已经进入独立线程缓存的物品不返回。"));
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("gtqtcore.pf.tooltip.1", new Object[0]));
+        tooltip.add(TooltipHelper.BLINKING_CYAN+I18n.format("gtqtcore.pf.tooltip.2", 4));
+        tooltip.add(I18n.format("gtqtcore.pf.tooltip.3"));
+        tooltip.add(I18n.format("gtqtcore.pf.tooltip.4"));
+        tooltip.add(I18n.format("gtqtcore.pf.tooltip.5"));
+        tooltip.add(I18n.format("gtqtcore.pf.tooltip.6"));
+        tooltip.add(I18n.format("gtqtcore.pf.tooltip.7"));
         //tooltip.add(I18n.format("=================================="));
         //tooltip.add(I18n.format("如宇宙间最精密的织梦者，以光年丈量着世界的边界，悄然模糊科技与艺术的边界。"));
         //tooltip.add(I18n.format("如星辰运转于浩瀚银河之中，光线织工在超高速微电路上起舞绘制出纳米级的电路蓝图。"));

@@ -314,6 +314,9 @@ public class CommonProxy {
         registerCasingTier(3, "四级");
         registerCasingTier(4, "五级");
         registerCasingTier(5, "六级");
+        registerCasingTier(6, "七级");
+        registerCasingTier(7, "八级");
+        registerCasingTier(8, "九级");
 
         int[] array = {-3,-2,-1,0,1, 2, 3, 4,5,6,7,8,81,82,83,84};
         for (int j : array) MDProperties.registeredTier(j, GTQTOreHelper.getInfo(j));

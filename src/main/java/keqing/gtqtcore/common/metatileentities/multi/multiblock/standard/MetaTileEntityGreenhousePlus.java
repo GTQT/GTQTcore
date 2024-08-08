@@ -268,30 +268,15 @@ public class MetaTileEntityGreenhousePlus extends RecipeMapMultiblockController 
 
                 if (WATER_STACK.isFluidStackIdentical(inputTank.drain(WATER_STACK, false))) {
                     inputTank.drain(WATER_STACK, true);
-                    progressTime--;
+                    progressTime++;
                 }
 
-                if (this.hasSun)
-                    this.progressTime++;
-                else
-                    this.progressTime += Math.random() * 2;
+                if (this.hasSun) this.progressTime++;
 
-                if(temp>0)temp--;
+                if(temp>0) {temp--;progressTime++;}
+                progressTime++;
                 if (this.progressTime > this.maxProgressTime&&temp>0) {
                     this.completeRecipe();
-                }
-
-                if (this.hasNotEnoughEnergy && this.getEnergyInputPerSecond() > 19L * (long)this.recipeEUt) {
-                    this.hasNotEnoughEnergy = false;
-                }
-            } else if (this.recipeEUt > 0) {
-                this.hasNotEnoughEnergy = true;
-                if (this.progressTime >= 2) {
-                    if (ConfigHolder.machines.recipeProgressLowEnergy) {
-                        this.progressTime = 1;
-                    } else {
-                        this.progressTime = Math.max(1, this.progressTime - 2);
-                    }
                 }
             }
         }

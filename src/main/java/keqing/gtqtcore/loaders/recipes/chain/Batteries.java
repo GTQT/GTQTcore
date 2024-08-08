@@ -160,6 +160,7 @@ public class Batteries {
                 .fluidInputs(Oxygen.getFluid(15000))
                 .output(dust,Halloysite,90)
                 .fluidOutputs(AmmoniumChloride.getFluid(30000))
+                .circuitMeta(23)
                 .buildAndRegister();
 
         MIXER_RECIPES.recipeBuilder().duration(100).EUt(480)

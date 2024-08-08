@@ -73,6 +73,17 @@ public class removeRecipes {
         GTRecipeHandler.removeRecipesByInputs(ASSEMBLER_RECIPES, new ItemStack[]{OreDictUnifier.get(wireGtDouble,RutheniumTriniumAmericiumNeutronate,4),OreDictUnifier.get(foil,NiobiumTitanium,4)},new FluidStack[]{Trinium.getFluid(576)});
 
 
+        // 铝粒 * 3
+        GTRecipeHandler.removeRecipesByInputs(BLAST_RECIPES, OreDictUnifier.get(dust,Ruby,1));
+        GTRecipeHandler.removeRecipesByInputs(BLAST_RECIPES, OreDictUnifier.get(gem,Ruby,1));
+        GTRecipeHandler.removeRecipesByInputs(BLAST_RECIPES, OreDictUnifier.get(dust,GreenSapphire,1));
+        GTRecipeHandler.removeRecipesByInputs(BLAST_RECIPES, OreDictUnifier.get(gem,GreenSapphire,1));
+        GTRecipeHandler.removeRecipesByInputs(BLAST_RECIPES, OreDictUnifier.get(dust,Sapphire,1));
+        GTRecipeHandler.removeRecipesByInputs(BLAST_RECIPES, OreDictUnifier.get(gem,Sapphire,1));
+        // 铝锭 * 1
+        GTRecipeHandler.removeRecipesByInputs(BLAST_RECIPES, OreDictUnifier.get(dust,Aluminium,1),IntCircuitIngredient.getIntegratedCircuit(1));
+        GTRecipeHandler.removeRecipesByInputs(BLAST_RECIPES, new ItemStack[]{OreDictUnifier.get(dust,Aluminium,1),IntCircuitIngredient.getIntegratedCircuit(2)},new FluidStack[]{Nitrogen.getFluid(1000)});
+
         // 核聚变反应堆控制电脑MK-I * 1
         GTRecipeHandler.removeRecipesByInputs(ASSEMBLY_LINE_RECIPES, new ItemStack[]{MetaBlocks.FUSION_CASING.getItemVariant(BlockFusionCasing.CasingType.SUPERCONDUCTOR_COIL),OreDictUnifier.get(circuit,ZPM,4),OreDictUnifier.get(plateDouble,Plutonium241),OreDictUnifier.get(plateDouble,Osmiridium), MetaItems.FIELD_GENERATOR_IV.getStackForm(2), MetaItems.ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT.getStackForm(64),OreDictUnifier.get(wireGtSingle,IndiumTinBariumTitaniumCuprate,32)},new FluidStack[]{SolderingAlloy.getFluid(1152),NiobiumTitanium.getFluid(1152)});
         // 核聚变反应堆控制电脑MK-II * 1

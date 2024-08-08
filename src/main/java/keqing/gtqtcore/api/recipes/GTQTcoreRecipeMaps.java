@@ -238,7 +238,7 @@ public class GTQTcoreRecipeMaps {
         PARTICLE_ACCELERATOR_RECIPES=new RecipeMap<>("particle_accelerator", 3, 3, 3, 3, new ComputationRecipeBuilder(), false)
                 .setSound(GTSoundEvents.CHEMICAL_REACTOR);
 
-        NEUTRON_ACTIVATOR=new RecipeMap<>("neutron_activator", 6, 6, 1, 1, new NeutronActivatorRecipeBuilder(), false)
+        NEUTRON_ACTIVATOR=new RecipeMap<>("neutron_activator", 6, 6, 3, 3, new NeutronActivatorRecipeBuilder(), false)
                 .setSound(GTSoundEvents.CHEMICAL_REACTOR);
 
         VACUUM_CHAMBER_RECIPES = new RecipeMap<>("vacuum_chamber_recipes", 1, 4,  2,  1, new SimpleRecipeBuilder(), false)

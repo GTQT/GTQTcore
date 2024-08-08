@@ -360,6 +360,15 @@ public class MetaTileEntityDistillationTower extends GTQTRecipeMapMultiblockOver
             super(tileEntity);
         }
 
+        public long getMaxVoltage() {
+            return VA[tier];
+        }
+
+        @Override
+        public int getParallelLimit() {
+            return ParallelNum;
+        }
+
         protected boolean applyFluidToOutputs(List<FluidStack> fluids, boolean doFill) {
             boolean valid = true;
             for (int i = 0; i < fluids.size(); i++) {

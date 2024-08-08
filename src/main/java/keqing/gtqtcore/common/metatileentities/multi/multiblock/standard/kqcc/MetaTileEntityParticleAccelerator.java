@@ -607,12 +607,12 @@ public class MetaTileEntityParticleAccelerator extends GTQTRecipeMapMultiblockCo
     }
     public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
-        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("高能物理的摇篮", new Object[0]));
-        tooltip.add(I18n.format("迈向物理学尽头的大门，探寻物质组成的极限！"));
-        tooltip.add(I18n.format("拥有三种独立升级模块，每一模块对应解锁不同的配方类，详情请见JEI"));
-        tooltip.add(I18n.format("束流收集：在多方块粒子源放置独立的粒子源外置接口，并输入原料使其工作，多方块会自动收集其产出的粒子并将其封装作为物品输出"));
-        tooltip.add(I18n.format("粒子对撞：加速部分粒子撞击特定物质将其拆解为其他粒子与物质，是获得大量基本粒子的最好方法"));
-        tooltip.add(I18n.format("核合成室：加速部分粒子撞击特定物质使其相互合成为新物质，通过此种方法可以获得许多稀有物质"));
-        tooltip.add(I18n.format("粒子加速：获得随机思维路径，详情请见科研系统"));
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("gtqtcore.pa.tooltip.1", new Object[0]));
+        tooltip.add(I18n.format("gtqtcore.pa.tooltip.2"));
+        tooltip.add(I18n.format("gtqtcore.pa.tooltip.3"));
+        tooltip.add(I18n.format("gtqtcore.pa.tooltip.4"));
+        tooltip.add(I18n.format("gtqtcore.pa.tooltip.5"));
+        tooltip.add(I18n.format("gtqtcore.pa.tooltip.6"));
+        tooltip.add(I18n.format("gtqtcore.pa.tooltip.7"));
     }
 }

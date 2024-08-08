@@ -3846,6 +3846,36 @@ metaitem.pos_binding_card.tooltip=适用于：微波无线仓绑定
 metaitem.scintillator.name=闪烁体
 metaitem.scintillator_crystal.name=闪烁晶体
 
+gtqtcore.core.tooltip.1=工作模式：独立线程
+gtqtcore.core.tooltip.2=>>核心线程数量:%s
+gtqtcore.core.tooltip.3=各线程间工作相互独立，拥有单独计时器,互不影响。耗电为各线程独立配方总和。
+gtqtcore.core.tooltip.4=超频模式：将自动计算各线程配方最大可超频数量，各线程最大超频电压:%s EU/t，独立线程之间速度增幅与耗电单独计算。
+gtqtcore.core.tooltip.5=溢出检测：关闭下开启溢出销毁。开启后检测到满仓各线程停止工作且保留工作进度，直到输出仓可以继续容纳输出。
+
+gtqtcore.nc.tooltip.1=加入核燃料反应时，积热会根据燃料的升温率缓慢上升
+gtqtcore.nc.tooltip.2=反应时额外获得一个积热倍率的时间递增函数，如果不加以干预，温度会上升越来越快
+gtqtcore.nc.tooltip.3=积热达到500K时加入水开始继续辐射热交换生产高压蒸汽，积热每上升1000K高压蒸汽输出加倍一次
+gtqtcore.nc.tooltip.4=调节冷却流量阀门控制换热比例(基础送水速度4000mb/t)，单位时间内进行热交换的流体更多，同时积热加速降温(最高高压蒸汽产出5+5mb/t)
+gtqtcore.nc.tooltip.5=当多方块进入生产超频（降温率大于升温率）,高压蒸汽生产额外获得五倍输出
+gtqtcore.nc.tooltip.6=当多方块温度到达5000K时会触发特大范围熔毁爆炸
+gtqtcore.nc.tooltip.7=超频模式：立刻进入深度反应，积热升温倍率提高四倍，燃料反应时间不变，但此时强制停机模式失效
+gtqtcore.nc.tooltip.8=高温停机模式：到达预警（5500K）临界温度时发生一次小爆炸强制停机
+
+gtqtcore.pa.tooltip.1=高能物理的摇篮
+gtqtcore.pa.tooltip.2=迈向物理学尽头的大门，探寻物质组成的极限！
+gtqtcore.pa.tooltip.3=拥有三种独立升级模块，每一模块对应解锁不同的配方类，详情请见JEI
+gtqtcore.pa.tooltip.4=束流收集：在多方块粒子源放置独立的粒子源外置接口，并输入原料使其工作，多方块会自动收集其产出的粒子并将其封装作为物品输出
+gtqtcore.pa.tooltip.5=粒子对撞：加速部分粒子撞击特定物质将其拆解为其他粒子与物质，是获得大量基本粒子的最好方法
+gtqtcore.pa.tooltip.6=核合成室：加速部分粒子撞击特定物质使其相互合成为新物质，通过此种方法可以获得许多稀有物质
+gtqtcore.pa.tooltip.7=粒子加速：获得随机思维路径，详情请见科研系统
+
+gtqtcore.pf.tooltip.1=织光织梦
+gtqtcore.pf.tooltip.2=工作模式：独立线程 >>核心线程数量:%s
+gtqtcore.pf.tooltip.3=由输入的晶圆等级，光刻胶等级决定支持的光刻列表。基于可光刻数量（晶圆与光刻胶储量最小值）决定循环输出轮数。某类光刻晶圆输出数量（假设在列表内）如下：轮数（可光刻总数整除列表长度），如果此类光刻晶圆在余数列表内（可光刻总数取余列表长度），则输出再加一。
+gtqtcore.pf.tooltip.4=对于单个线程，工作时长由：基础时长，数量，晶圆等级，光刻胶等级，加速器束流器共同决定;耗能为晶圆等级与光刻胶等级和对应的电压乘以线程工作数量除上加速器束流器等级决定。
+gtqtcore.pf.tooltip.5=均分模式：开启后在各独立线程在不存在专职任务（各独立线程对不同种类的晶圆有不同的处理优先级，处理此类特定晶圆称之为专职任务）的情况下，会与最近的一个线程共享剩余任务处理进度（如果被共享的线程已完成部分工作进度，则共享未完成部分的工作进度），共同完成此任务。
+gtqtcore.pf.tooltip.6=保险模式：开启后机器无论晶圆缓存持续工作，这意味着如果晶圆输入速度过慢，可光刻数量较少，设备只会输出前几类晶圆，而不会循环整个可光刻列表。
+gtqtcore.pf.tooltip.7=退回缓存：返回非工作区缓存区的晶圆与光刻胶，已经进入独立线程缓存的物品不返回。
 
 metaitem.catalyst_framework_i.name=催化剂基床（氧化型）
 metaitem.catalyst_framework_ii.name=催化剂基床（还原型）

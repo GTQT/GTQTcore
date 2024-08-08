@@ -335,7 +335,10 @@ public class MetaTileEntityElectrobath extends GTQTRecipeMapMultiblockOverwrite 
             return Math.min(super.getMaxVoltage(), VA[tier]);
         }
 
-
+        @Override
+        public int getParallelLimit() {
+            return ParallelNum;
+        }
         public void setMaxProgress(int maxProgress) {
             this.maxProgressTime = maxProgress*(100-eu)/100;
         }

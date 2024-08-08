@@ -93,14 +93,14 @@ public class MetaTileEntityNuclearReactor extends RecipeMapMultiblockController 
     @Override
     public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
-        tooltip.add(I18n.format("加入核燃料反应时，积热会根据燃料的升温率缓慢上升"));
-        tooltip.add(I18n.format("反应时额外获得一个积热倍率的时间递增函数，如果不加以干预，温度会上升越来越快"));
-        tooltip.add(I18n.format("积热达到500K时加入水开始继续辐射热交换生产高压蒸汽，积热每上升1000K高压蒸汽输出加倍一次"));
-        tooltip.add(I18n.format("调节冷却流量阀门控制换热比例(基础送水速度4000mb/t)，单位时间内进行热交换的流体更多，同时积热加速降温(最高高压蒸汽产出5+5mb/t)"));
-        tooltip.add(I18n.format("当多方块进入生产超频（降温率大于升温率）,高压蒸汽生产额外获得五倍输出"));
-        tooltip.add(I18n.format("当多方块温度到达5000K时会触发特大范围熔毁爆炸"));
-        tooltip.add(I18n.format("超频模式：立刻进入深度反应，积热升温倍率提高四倍，燃料反应时间不变，但此时强制停机模式失效"));
-        tooltip.add(I18n.format("高温停机模式：到达预警（5500K）临界温度时发生一次小爆炸强制停机"));
+        tooltip.add(I18n.format("gtqtcore.nc.tooltip.1"));
+        tooltip.add(I18n.format("gtqtcore.nc.tooltip.2"));
+        tooltip.add(I18n.format("gtqtcore.nc.tooltip.3"));
+        tooltip.add(I18n.format("gtqtcore.nc.tooltip.4"));
+        tooltip.add(I18n.format("gtqtcore.nc.tooltip.5"));
+        tooltip.add(I18n.format("gtqtcore.nc.tooltip.6"));
+        tooltip.add(I18n.format("gtqtcore.nc.tooltip.7"));
+        tooltip.add(I18n.format("gtqtcore.nc.tooltip.8"));
     }
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {

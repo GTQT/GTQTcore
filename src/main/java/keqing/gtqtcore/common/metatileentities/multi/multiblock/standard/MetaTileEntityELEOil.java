@@ -53,8 +53,7 @@ public class MetaTileEntityELEOil extends RecipeMapMultiblockController {
 
         @Override
         public int getParallelLimit() {
-            int tier = GTUtility.getTierByVoltage(getMaxVoltage());
-            return Math.min(ParallelTier(tier), 16);
+            return 16;
         }
 
         @Override

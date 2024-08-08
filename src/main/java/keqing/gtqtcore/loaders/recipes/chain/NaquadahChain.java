@@ -83,7 +83,7 @@ public class NaquadahChain {
                 .input(dust,Carbon,1)
                 .output(ingotHot,Naquadah,1)
                 .fluidOutputs(CarbonDioxide.getFluid(1000))
-                .blastFurnaceTemp(6000)
+                .blastFurnaceTemp(5000)
                 .duration(100).EUt(480).buildAndRegister();
 
         LARGE_CHEMICAL_RECIPES.recipeBuilder().EUt(VA[LuV]).duration(600)
@@ -109,7 +109,7 @@ public class NaquadahChain {
                 .output(dust,SodiumSulfide,140)
                 .output(dust,Dichunliusuanchaonengguiyan,2)
                 .EUt(VA[IV])
-                .part(460)
+                .part(200)
                 .duration(400)
                 .buildAndRegister();
 
@@ -136,7 +136,7 @@ public class NaquadahChain {
                 .fluidOutputs(NaquadriaSolution.getFluid(1000))
                 .fluidOutputs(Gaochunguiyanrongye.getFluid(1000))
                 .EUt(VA[IV])
-                .part(160)
+                .part(100)
                 .duration(400)
                 .buildAndRegister();
         //硅岩后处理-----------------------------------------------------------------------------

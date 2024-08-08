@@ -47,6 +47,7 @@ import javax.annotation.Nonnull;
 
 import java.util.List;
 
+import static gregtech.api.recipes.RecipeMaps.SIFTER_RECIPES;
 import static gregtech.api.unification.material.Materials.Steam;
 import static gregtech.api.util.RelativeDirection.*;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.BIOLOGICAL_REACTION_RECIPES;
@@ -57,7 +58,7 @@ public class MetaTileEntityGravitySeparator extends GTQTRecipeMapMultiblockContr
     public MetaTileEntityGravitySeparator(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[] {
                 GRAVITY_SEPARATOR_RECIPES,
-                RecipeMaps.SIFTER_RECIPES
+                SIFTER_RECIPES
         });
         this.recipeMapWorkable = new GravitySeparatorLogic(this);
     }
@@ -72,14 +73,16 @@ public class MetaTileEntityGravitySeparator extends GTQTRecipeMapMultiblockContr
         return true;
     }
     private class GravitySeparatorLogic extends MultiblockRecipeLogic {
-
+        private boolean isCommonMode() {
+            return this.getRecipeMap() == SIFTER_RECIPES;
+        }
         public GravitySeparatorLogic(RecipeMapMultiblockController tileEntity) {
             super(tileEntity);
         }
         @Override
         public int getParallelLimit() {
             if(getStatue()) {
-                return 4;
+                return 4*(isCommonMode()?4:1);
             }
             return 1;
         }
