@@ -67,7 +67,6 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
     int tube;
     int drilla;
     int naijiu;
-    int circuit;
     int maxCircuit=10;
     int worktime;
     int random;
@@ -82,7 +81,6 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setDouble("naijiu", naijiu);
-        data.setDouble("circuit", circuit);
         data.setBoolean("cycle",cycle);
         data.setInteger("worktime",worktime);
         data.setInteger("random",random);
@@ -92,7 +90,6 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
     @Override
     public void readFromNBT(NBTTagCompound data) {
         naijiu = data.getInteger("naijiu");
-        circuit = data.getInteger("circuit");
         cycle=data.getBoolean("cycle");
         worktime=data.getInteger("worktime");
         random=data.getInteger("random");
@@ -110,14 +107,13 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
         WidgetGroup group = new WidgetGroup(x, y, width, height);
         group.addWidget(new ClickButtonWidget(0, 0, 18, 18, "", this::clear)
                 .setButtonTexture(GuiTextures.BUTTON_THROTTLE_MINUS)
-                .setTooltipText("循环模式"));
+                .setTooltipText("普适模式"));
 
         return group;
     }
 
     private void clear(Widget.ClickData clickData) {
         cycle=!cycle;
-        circuit=1;
     }
     @Override
     protected BlockPattern createStructurePattern() {
@@ -167,11 +163,15 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
             textList.add(new TextComponentTranslation("gtqtcore.multiblock.ma.amount", TextFormattingUtil.formatNumbers((liquidOxygenAmount))));
         }
         textList.add(new TextComponentTranslation("gtqtcore.md",tier, drilla, naijiu));
-        if(checkCard()) {
-            textList.add(new TextComponentTranslation(GTQTOreHelper.getInfo(kind)));
+        if(checkCard())
+        {
+            if (!cycle) {
+                textList.add(new TextComponentTranslation(GTQTOreHelper.getInfo(kind)));
+            } else {
+                textList.add(new TextComponentTranslation(GTQTOreHelper.getInfo(kind % 4)));
+            }
         }
-        if(cycle)textList.add(new TextComponentTranslation("循环模式：%s 正在运行配方：%s",cycle,circuit));
-        else textList.add(new TextComponentTranslation("循环模式：%s",cycle));
+        textList.add(new TextComponentTranslation("普适模式：%s",cycle));
     }
 
     @Override
@@ -250,7 +250,6 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
-        addCircuit(true);
         Object drill = context.get("DriTiredStats");
         Object casing = context.get("ChemicalPlantCasingTiredStats");
         Object tubeTier = context.get("ChemicalPlantTubeTiredStats");
@@ -301,22 +300,10 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
         tooltip.add(I18n.format("gtqtcore.machine.mdi.tooltip.3"));
         tooltip.add(I18n.format("gtqtcore.machine.mdi.tooltip.4"));
         tooltip.add(I18n.format("gtqtcore.machine.mdi.tooltip.5"));
-        tooltip.add(I18n.format("控制器上方需要替换为输入总线！！不要旋转多方块！！"));
+        tooltip.add(I18n.format("gtqtcore.machine.mdi.tooltip.6"));
     }
 
-    private void addCircuit(Boolean start) {
-        MetaTileEntity mte = GTUtility.getMetaTileEntity(this.getWorld(), this.getPos().add(0, 1, 0));
-        var s  = (IGhostSlotConfigurable)mte;
-        if(start) {
-            circuit = 1;
-            return;
-        }
-        circuit++;
-        if(circuit>maxCircuit)circuit=1;
-        s.setGhostCircuitConfig(circuit);
 
-
-    }
     @Override
     protected void addWarningText(List<ITextComponent> textList) {
         super.addWarningText(textList);
@@ -328,13 +315,22 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
             ItemStack item = this.getInputInventory().getStackInSlot(i);
             if (item.getItem() == GTQTMetaItems.GTQT_META_ITEM && item.getMetadata() == GTQTMetaItems.POS_ORE_CARD.getMetaValue()) {
                 NBTTagCompound compound = item.getTagCompound();
-                if (compound != null && compound.hasKey("Kind"))
+                if (compound != null && compound.hasKey("Kind")) {
+                    if(cycle)
+                    {
+                        if (compound.getInteger("Kind") == random) {
+                            kind = compound.getInteger("Kind");
+                            this.getInputInventory().extractItem(i, 1, true);
+                            return true;
+                        }
+                    }
 
                     if (compound.getInteger("Kind") == random + this.getWorld().provider.getDimension() * 4) {
-                        kind=compound.getInteger("Kind");
+                        kind = compound.getInteger("Kind");
                         this.getInputInventory().extractItem(i, 1, true);
                         return true;
                     }
+                }
             }
         }
         return false;
@@ -389,7 +385,6 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
                 naijiu-=(5-drilla);
                 if (++this.progressTime > this.maxProgressTime) {
                     this.completeRecipe();
-                    if (cycle) addCircuit(false);
                 }
             }
         }

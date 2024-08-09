@@ -21,6 +21,7 @@ import gregtech.api.util.TextComponentUtil;
 import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
+import gregtech.client.utils.TooltipHelper;
 import gregtech.common.blocks.*;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
@@ -51,6 +52,8 @@ import net.minecraftforge.fluids.FluidStack;
 
 import javax.annotation.Nonnull;
 
+import static gregtech.api.unification.material.Materials.Oxygen;
+
 public class MetaTileEntityRocket extends FuelMultiblockController implements ITieredMetaTileEntity, IProgressBarMultiblock {
 
     protected static int heatingCoilLevel;
@@ -79,7 +82,7 @@ public class MetaTileEntityRocket extends FuelMultiblockController implements IT
             if (getInputFluidInventory() != null) {
                 FluidStack WaterStack = getInputFluidInventory().drain(Materials.Lubricant.getFluid(Integer.MAX_VALUE), false);
                 FluidStack LubricantStack = getInputFluidInventory().drain(Materials.Water.getFluid(Integer.MAX_VALUE), false);
-                FluidStack liquidOxygenStack = getInputFluidInventory().drain(Materials.Oxygen.getFluid(Integer.MAX_VALUE), false);
+                FluidStack liquidOxygenStack = getInputFluidInventory().drain(Oxygen.getFluid(Integer.MAX_VALUE), false);
                 int lubricantAmount = WaterStack == null ? 0 : WaterStack.amount;
                 textList.add(new TextComponentTranslation("gtqtcore.multiblock.large_combustion_engine.water_amount", TextFormattingUtil.formatNumbers(lubricantAmount)));
                 if (boostAllowed) {
@@ -134,13 +137,10 @@ public class MetaTileEntityRocket extends FuelMultiblockController implements IT
     @Override
     public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
-        tooltip.add(I18n.format("gregtech.universal.tooltip.base_production_eut", GTValues.V[tier]));
-        tooltip.add(I18n.format("gregtech.universal.tooltip.uses_per_hour_lubricant", 1000));
-        if (isExtreme) {
-            tooltip.add(I18n.format("gregtech.machine.large_combustion_engine.tooltip.boost_extreme", GTValues.V[tier] * 4));
-        } else {
-            tooltip.add(I18n.format("gregtech.machine.large_combustion_engine.tooltip.boost_regular", GTValues.V[tier] * 3));
-        }
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("gtqtcore.rocket.tooltip.1", new Object[0]));
+        tooltip.add(I18n.format("gtqtcore.rocket.tooltip.2"));
+        tooltip.add(I18n.format("gtqtcore.rocket.tooltip.3"));
+        tooltip.add(I18n.format("gtqtcore.rocket.tooltip.4"));
     }
 
     @Override
@@ -371,13 +371,13 @@ public class MetaTileEntityRocket extends FuelMultiblockController implements IT
             this.combustionEngine =(MetaTileEntityRocket) tileEntity;
             this.isExtreme = isExtreme;
         }
-        private final FluidStack WATER_STACK = Materials.Water.getFluid(1000*getmax(heatingCoilLevel));
-        private final FluidStack LUBRICANT_STACK = Materials.Lubricant.getFluid(20*getmax(heatingCoilLevel));
-        private final FluidStack OXYGEN_STACK = Materials.Oxygen.getFluid(80*getmax(heatingCoilLevel));
+        private final FluidStack WATER_STACK = Materials.Water.getFluid(500*getmax(heatingCoilLevel));
+        private final FluidStack LUBRICANT_STACK = Materials.Lubricant.getFluid(10*getmax(heatingCoilLevel));
+        private final FluidStack OXYGEN_STACK = Oxygen.getFluid(40*getmax(heatingCoilLevel));
         public boolean fillTanks(FluidStack stack, boolean simulate) {
             return GTTransferUtils.addFluidsToFluidHandler(outputFluidInventory, simulate, Collections.singletonList(stack));
         }
-        private final FluidStack HOT_STACK = GTQTMaterials.HighPressureSteam.getFluid(120);
+        private final FluidStack HOT_STACK = GTQTMaterials.HighPressureSteam.getFluid(1);
         @Override
         public long getMaxVoltage() {
             if (isOxygenBoosted)
@@ -413,7 +413,7 @@ public class MetaTileEntityRocket extends FuelMultiblockController implements IT
                 else add=0;
 
                 drawEnergy(recipeEUt, false);
-                for(int i=0;i<getmax(heatingCoilLevel);i++) fillTanks(HOT_STACK,false);
+                fillTanks(HOT_STACK,false);
                 if(speed<getMaxRotorHolderSpeed())speed=speed+10;
                 if (++progressTime > maxProgressTime) {
                     completeRecipe();

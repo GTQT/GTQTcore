@@ -2459,6 +2459,7 @@ gtqtcore.coilTire=线圈等级：%s
 gtqtcore.machine.network_switch.tooltip.1=算力负荷上限取决于多方块等级（如果用不了升级就对了）
 gtqtcore.eleTire=外壳等级：%s 电解器等级：%s 配方最大电压：%s
 gtqtcore.eleTire1=自净等级：%s 射频等级：%s 波长：%s
+gtqtcore.eleTire4=自净等级：%s 射频等级：%s
 gtqtcore.eleTire2=多方块等级：%s 射频等级：%s 玻璃等级：%s
 gregtech.multiblock.ele.1=耗能减免：%s 电流效率：%s 电极洁净度：%s
 gregtech.machine.kqcc.export.tooltip=§c算力的输出端,向光缆发送算力
@@ -3377,7 +3378,8 @@ gtqtcore.machine.mdi.tooltip.1=还在手动挖矿？你居然还在手动挖矿�
 gtqtcore.machine.mdi.tooltip.2=工作时消耗钻头耐久度，耐久度全部消耗后结构将会删除钻头，需要手动安装。
 gtqtcore.machine.mdi.tooltip.3=多方块持续工作时会获得缓慢的效率提升，并行数量由结构等级，钻头等级共同决定
 gtqtcore.machine.mdi.tooltip.4=多方块会根据所处区块的岩层种类决定运行的配方，在输入总线放置地质存储模块提供启动参数
-gtqtcore.machine.mdi.tooltip.5=多方块拥有十种挖掘策略，每种均对应不同的开采基础倍率以及额外倍率，可在控制器开启循环模式循环配方。
+gtqtcore.machine.mdi.tooltip.5=多方块拥有十种挖掘策略，每种均对应不同的开采基础倍率以及额外倍率，
+gtqtcore.machine.mdi.tooltip.6=开启普适模式后多方块可以在任何维度运行对应岩种编号的主世界维度配方
 
 gtqtcore.machine.greenhouse.tooltip.4=升级结构，提供农药，生物质提升机器效率。
 gregtech.machine.fb.tooltip.1=可拓展结构：散热模块,装配后可调节更大范围的冷却效率
@@ -3845,6 +3847,16 @@ metaitem.pos_binding_card.name=坐标绑定卡
 metaitem.pos_binding_card.tooltip=适用于：微波无线仓绑定
 metaitem.scintillator.name=闪烁体
 metaitem.scintillator_crystal.name=闪烁晶体
+
+gtqtcore.tbcc.tooltip.1=我是爆燃那你是谁
+gtqtcore.tbcc.tooltip.2=发电等级由结构线圈等级决定（发电量为发电等级对应的电压乘1.25），使用氧促燃可使发电提高1.2倍
+gtqtcore.tbcc.tooltip.3=发电机工作时额定消耗水500mb，润滑油5mb，促燃情况下氧气20b再叠乘发电等级（每tick）
+gtqtcore.tbcc.tooltip.4=发电机工作时额定产出1mb高压蒸汽（每tick）
+
+gtqtcore.rocket.tooltip.1=爆燃上天传奇
+gtqtcore.rocket.tooltip.2=发电等级由结构线圈等级决定（发电量为发电等级对应的电压乘1.5），使用氧促燃可使发电提高1.25倍
+gtqtcore.rocket.tooltip.3=发电机工作时额定消耗水500mb，润滑油10mb，促燃情况下氧气40mb再叠乘发电等级（每tick）
+gtqtcore.rocket.tooltip.4=发电机工作时额定产出1mb高压蒸汽（每tick）
 
 gtqtcore.core.tooltip.1=工作模式：独立线程
 gtqtcore.core.tooltip.2=>>核心线程数量:%s

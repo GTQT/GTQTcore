@@ -3366,7 +3366,8 @@ gtqtcore.machine.mdi.tooltip.1=Still mining manually? You're still mining manual
 gtqtcore.machine.mdi.tooltip.2=Consumes drill head durability during operation, the drill head will be deleted when durability is fully consumed, manual installation is required.
 gtqtcore.machine.mdi.tooltip.3=The multi-block will slowly gain efficiency during continuous operation, the number of parallels is determined by the structure level and drill head level.
 gtqtcore.machine.mdi.tooltip.4=The multi-block will decide the recipe to run based on the rock layer type of the chunk it is in, place a geological storage module in the input bus to provide startup parameters.
-gtqtcore.machine.mdi.tooltip.5=The multi-block has ten mining strategies, each corresponding to different base and extra multipliers, and the control mode can be switched on the controller to cycle through recipes.
+gtqtcore.machine.mdi.tooltip.5=Multi-block machines have ten mining strategies, each corresponding to different base mining rates and additional multipliers.
+gtqtcore.machine.mdi.tooltip.6=After enabling Universal Mode, multi-block machines can operate the recipes of the Overworld dimension corresponding to the rock type number in any dimension.
 
 gtqtcore.machine.greenhouse.tooltip.4=Upgrade structures, provide pesticides, and biomass to improve machine efficiency.
 gregtech.machine.fb.tooltip.1=Expandable structure: Cooling Module, adjustable for greater cooling efficiency.
@@ -3827,6 +3828,16 @@ metaitem.pos_binding_card.name=Position Binding Card
 metaitem.pos_binding_card.tooltip=Applicable to: Microwave Wireless Storage Binding
 metaitem.scintillator.name=Scintillator
 metaitem.scintillator_crystal.name=Scintillator Crystal
+
+gtqtcore.tbcc.tooltip.1=I'm the Detonation, who are you?
+gtqtcore.tbcc.tooltip.2=The power generation level is determined by the structural coil level (power generation is the voltage corresponding to the power generation level multiplied by 1.25). Using oxygen to boost combustion can increase power generation by 1.2 times.
+gtqtcore.tbcc.tooltip.3=When the generator is operating, it consumes 500mb of water and 5mb of lubricating oil at the rated capacity. Under boosted combustion conditions, it consumes 20mb of oxygen multiplied by the power generation level (per tick).
+gtqtcore.tbcc.tooltip.4=When the generator is operating, it produces 1mb of high-pressure steam at the rated capacity (per tick).
+
+gtqtcore.rocket.tooltip.1=A Legendary Detonation Ascension
+gtqtcore.rocket.tooltip.2=The power generation level is determined by the structural coil level (power generation is the voltage corresponding to the power generation level multiplied by 1.5). Using oxygen to boost combustion can increase power generation by 1.25 times.
+gtqtcore.rocket.tooltip.3=When the generator is operating, it consumes 500mb of water and 10mb of lubricating oil at the rated capacity. Under boosted combustion conditions, it consumes 40mb of oxygen multiplied by the power generation level (per tick).
+gtqtcore.rocket.tooltip.4=When the generator is operating, it produces 1mb of high-pressure steam at the rated capacity (per tick).
 
 gtqtcore.core.tooltip.1=Operating Mode: Independent Threads
 gtqtcore.core.tooltip.2=>>Number of Core Threads: %s

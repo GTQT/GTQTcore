@@ -23,11 +23,11 @@ import net.minecraftforge.fml.common.event.*;
         "after:gregtechfoodoption@[1.11.0,);"
 )
 public class GTQTCore {
-    public static final String PACK = "1.3.0";
+    public static final String PACK = "1.5.0";
 
     public static final String MODID = "gtqtcore";
     public static final String NAME = "GTQT Core";
-    public static final String VERSION = "0.3";
+    public static final String VERSION = "0.1—test";
 
     @Mod.Instance(GTQTCore.MODID)
     public static GTQTCore instance;

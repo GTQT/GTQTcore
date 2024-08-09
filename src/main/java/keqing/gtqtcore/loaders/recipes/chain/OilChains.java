@@ -340,7 +340,7 @@ public class OilChains {
                 .duration(100)
                 .EUt(60)
                 .tier(1)
-                .notConsumable(electrode,Steel,1)
+                .notConsumable(electrode,Aluminium,1)
                 .circuitMeta(1)
                 .fluidInputs(AmmoniumSulfate.getFluid(2000))
                 .fluidInputs(Water.getFluid(2000))

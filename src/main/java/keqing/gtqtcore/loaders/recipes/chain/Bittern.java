@@ -47,7 +47,7 @@ public class Bittern {
                 .fluidInputs(Bitternso.getFluid(4000))
                 .output(dust, PotassiumSulfate, 4)
                 .fluidOutputs(SodiumBisulfate.getFluid(576))
-                .fluidOutputs(AmmoniumSulfate.getFluid(576))
+                .fluidOutputs(AmmoniumSulfate.getFluid(3000))
                 .duration(200).EUt(120).buildAndRegister();
 
         REACTION_FURNACE_RECIPES.recipeBuilder()

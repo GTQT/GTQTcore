@@ -19,6 +19,7 @@ import gregtech.api.util.GTTransferUtils;
 import gregtech.api.util.TextComponentUtil;
 import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.texture.Textures;
+import gregtech.client.utils.TooltipHelper;
 import gregtech.common.blocks.*;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.unification.GTQTMaterials;
@@ -126,15 +127,12 @@ public class MetaTileEntityTurbineCombustionChamber extends FuelMultiblockContro
     }
 
     @Override
-    public void addInformation(ItemStack stack, World player,  List<String> tooltip, boolean advanced) {
+    public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
-        tooltip.add(I18n.format("gregtech.universal.tooltip.base_production_eut", GTValues.V[tier]));
-        tooltip.add(I18n.format("gregtech.universal.tooltip.uses_per_hour_lubricant", 1000));
-        if (isExtreme) {
-            tooltip.add(I18n.format("gregtech.machine.large_combustion_engine.tooltip.boost_extreme", GTValues.V[tier] * 4));
-        } else {
-            tooltip.add(I18n.format("gregtech.machine.large_combustion_engine.tooltip.boost_regular", GTValues.V[tier] * 3));
-        }
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("gtqtcore.tbcc.tooltip.1", new Object[0]));
+        tooltip.add(I18n.format("gtqtcore.tbcc.tooltip.2"));
+        tooltip.add(I18n.format("gtqtcore.tbcc.tooltip.3"));
+        tooltip.add(I18n.format("gtqtcore.tbcc.tooltip.4"));
     }
 
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
@@ -377,7 +375,7 @@ public class MetaTileEntityTurbineCombustionChamber extends FuelMultiblockContro
         public boolean fillTanks(FluidStack stack, boolean simulate) {
             return GTTransferUtils.addFluidsToFluidHandler(outputFluidInventory, simulate, Collections.singletonList(stack));
         }
-        private final FluidStack HOT_STACK = GTQTMaterials.HighPressureSteam.getFluid(2);
+        private final FluidStack HOT_STACK = GTQTMaterials.HighPressureSteam.getFluid(1);
         @Override
         public long getMaxVoltage() {
             if (isOxygenBoosted)
@@ -413,7 +411,7 @@ public class MetaTileEntityTurbineCombustionChamber extends FuelMultiblockContro
                     else add=0;
 
                     drawEnergy(recipeEUt, false);
-                for(int i=0;i<getmax(heatingCoilLevel);i++) fillTanks(HOT_STACK,false);
+                    fillTanks(HOT_STACK,false);
                 if(speed<getMaxRotorHolderSpeed())speed=speed+10;
                 if (++progressTime > maxProgressTime) {
                     completeRecipe();

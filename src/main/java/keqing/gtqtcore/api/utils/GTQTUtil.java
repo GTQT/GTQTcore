@@ -55,7 +55,7 @@ public class GTQTUtil {
         }
         return result;
     }
-    public static final int[] CWT = new int[]{8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536, 131072};
+    public static final int[] CWT = new int[]{0,8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536, 131072};
     public static final Function<Integer, Integer> collectorTankSizeFunction = tier -> {
         if (tier <= GTValues.LV)
             return 16000;

@@ -53,16 +53,11 @@ public class MetaTileEntityThreeDim extends MultiMapMultiblockController impleme
     private int clean_tier;
     private int sheping_tier;
     private int tier;
-    private final int maxvisa=1000;
-    private int minvisa;
-    private int visa;
+
     @Override
     public void addInformation(ItemStack stack, World world, List<String> tooltip, boolean advanced) {
         tooltip.add(I18n.format("gtqt.machine.3d.1"));
         tooltip.add(I18n.format("gtqt.machine.3d.2"));
-        tooltip.add(I18n.format("gtqt.machine.stepper.3"));
-        tooltip.add(I18n.format("gtqt.machine.stepper.4"));
-        tooltip.add(I18n.format("gtqt.machine.stepper.5"));
     }
 
     private IOpticalComputationProvider computationProvider;
@@ -105,7 +100,7 @@ public class MetaTileEntityThreeDim extends MultiMapMultiblockController impleme
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
         textList.add(new TextComponentTranslation("多方块等级：%s 玻璃等级：%s",tier, glass_tier));
-        textList.add(new TextComponentTranslation("gtqtcore.eleTire1",clean_tier, sheping_tier, minvisa));
+        textList.add(new TextComponentTranslation("gtqtcore.eleTire4",clean_tier, sheping_tier));
 
     }
     @Override

@@ -194,7 +194,7 @@ public class MetaTileEntityEnzymesReaction extends GTQTRecipeMapMultiblockContro
                 .where('S', selfPredicate())
                 .where('J', TiredTraceabilityPredicate.CP_ZJ_CASING)
                 .where('G', TiredTraceabilityPredicate.CP_LGLASS)
-                .where('C', states(getCasingState()).setMinGlobalLimited(38).or(autoAbilities()))
+                .where('C', states(getCasingState()).setMinGlobalLimited(32).or(autoAbilities()))
                 .where('P', TiredTraceabilityPredicate.CP_TUBE)
                 .where(' ', any())
                 .build();

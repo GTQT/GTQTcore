@@ -251,7 +251,7 @@ public class FirstDegreeMaterials {
 
         //硫酸铵
         GTQTMaterials.AmmoniumSulfate = new Material.Builder(getMaterialsId(), gregtechId("ammonium_sulfate"))
-                .dust().fluid()
+                .fluid()
                 .color(0xB2DFEE)
                 .components(Nitrogen, 2, Hydrogen, 8, Sulfur, 1, Oxygen, 4)
                 .build();
