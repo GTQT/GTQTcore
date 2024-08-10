@@ -28,6 +28,7 @@ import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.TJMaterials.Polyetheretherketone;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.swarm;
+import static keqing.gtqtcore.api.utils.GTQTUtil.CWT;
 import static keqing.gtqtcore.common.block.blocks.GTQTParticleAccelerator.MachineType.ACCELERATOR_FIRM_MKI;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.PCB_FACTORY;
@@ -148,8 +149,8 @@ public class PCBline {
         //  PCB Factory
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(frameGt, RhodiumPlatedPalladium, 64)
-                .input(CIRCUIT_ASSEMBLER[5], 16)
-                .input(CIRCUIT_GOOD_I, 16)
+                .input(CIRCUIT_ASSEMBLER[6], 16)
+                .input(CIRCUIT_GOOD_II, 16)
                 .input(circuit, MarkerMaterials.Tier.LuV, 16)
                 .input(ROBOT_ARM_LuV, 8)
                 .input(CONVEYOR_MODULE_LuV, 8)
@@ -158,18 +159,19 @@ public class PCBline {
                 .input(gear, NaquadahAlloy, 16)
                 .input(cableGtSingle, NiobiumTitanium, 64)
                 .input(cableGtSingle, NiobiumTitanium, 64)
-                .input(wireGtSingle, IVSuperconductor, 64)
-                .input(wireGtSingle, IVSuperconductor, 64)
+                .input(wireGtSingle, LuVSuperconductor, 64)
+                .input(wireGtSingle, LuVSuperconductor, 64)
                 .fluidInputs(UltraGlue.getFluid(L * 40))
                 .fluidInputs(Polybenzimidazole.getFluid(L * 40))
                 .fluidInputs(PCBCoolant.getFluid(4000))
                 .fluidInputs(NaquadahEnriched.getFluid(L * 12))
                 .output(PCB_FACTORY)
-                .scannerResearch(b -> b
+                .stationResearch(b -> b
                         .researchStack(WETWARE_CIRCUIT_BOARD.getStackForm())
-                        .EUt(VA[IV])
-                        .duration(600))
-                .EUt(VA[LuV])
+                        .EUt(VA[LuV])
+                        .CWUt(CWT[ZPM])
+                )
+                .EUt(VA[ZPM])
                 .duration(600)
                 .buildAndRegister();
     }

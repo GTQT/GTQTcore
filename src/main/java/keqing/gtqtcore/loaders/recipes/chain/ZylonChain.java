@@ -133,25 +133,15 @@ public class ZylonChain {
 
         //  Prezylon
         CHEMICAL_PLANT.recipeBuilder()
-                .input(dust, Terephthalaldehyde, 16)
+                .input(dust, Terephthalaldehyde,16)
                 .notConsumable(dust, AuPdCCatalyst)
                 .fluidInputs(Dinitrodipropanyloxybenzene.getFluid(1000))
                 .output(dust, PreZylon)
                 .fluidOutputs(Oxygen.getFluid(6000))
                 .EUt(VA[HV])
                 .recipeLevel(3)
-                .duration(50)
-                .buildAndRegister();
-
-        CHEMICAL_RECIPES.recipeBuilder()
-                .input(dust, Terephthalaldehyde, 16)
-                .notConsumable(dust, AuPdCCatalyst)
-                .fluidInputs(Dinitrodipropanyloxybenzene.getFluid(1000))
-                .output(dust, PreZylon,16)
-                .fluidOutputs(Oxygen.getFluid(6000))
-                .EUt(VA[EV])
-                .duration(200)
                 .cleanroom(CleanroomType.CLEANROOM)
+                .duration(50)
                 .buildAndRegister();
 
         CHEMICAL_RECIPES.recipeBuilder()

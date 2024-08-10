@@ -199,7 +199,7 @@ public class MetaTileEntitySepticTank extends GTQTRecipeMapMultiblockController 
                 .aisle("XXXXX", "C###C", "C###C", "XXXXX")
                 .aisle("XXSXX", "XCCCX", "XCCCX", "XXXXX")
                 .where('S', selfPredicate())
-                .where('X', TiredTraceabilityPredicate.CP_CASING.setMinGlobalLimited(50)
+                .where('X', TiredTraceabilityPredicate.CP_CASING.get().setMinGlobalLimited(50)
                         .or(autoAbilities(true, true, true, true, true, true, false)))
                 .where('M', abilities(MultiblockAbility.MUFFLER_HATCH))
                 .where('C', heatingCoils())

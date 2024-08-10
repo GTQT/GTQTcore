@@ -51,6 +51,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import static gregtech.api.GTValues.MAX;
+import static keqing.gtqtcore.api.GTQTAPI.MAP_ND_CASING;
 import static keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate.*;
 import static keqing.gtqtcore.common.block.blocks.GTQTQuantumCasing.CasingType.*;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.NICOLL_DYSON_BEAMER;
@@ -288,11 +289,11 @@ public class MetaTileEntityNicollDysonBeamer extends MultiMapMultiblockControlle
                 .where('F', states(getFourthCasingState())
                         .setMinGlobalLimited(10)
                         .or(autoAbilities(false, true, true, true, true, true, false)))
-                .where('G', CP_ND_CASING)
+                .where('G', CP_ND_CASING.get())
                 .where('H', states(getGlassState()))
-                .where('I', CP_ND_CASING)
+                .where('I', CP_ND_CASING.get())
                 .where('J', states(getCasingState()))
-                .where('K', CP_ND_CASING)
+                .where('K', CP_ND_CASING.get())
                 .where(' ', any())
                 .build();
     }

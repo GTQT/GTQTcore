@@ -136,20 +136,20 @@ public class MetaTileEntityAssemblyLine extends RecipeMapMultiblockController {
                 .aisle("FIF", "RTR", "DAG", " Y ").setRepeatable(4, 15)
                 .aisle("FOF", "RTR", "DAG", " Y ")
                 .where('S', selfPredicate())
-                .where('F', TiredTraceabilityPredicate.CP_CASING
+                .where('F', TiredTraceabilityPredicate.CP_CASING.get()
                         .or(autoAbilities(false, true, false, false, false, false, false))
                         .or(fluidInputPredicate()))
                 .where('O', abilities(MultiblockAbility.EXPORT_ITEMS)
                         .addTooltips("gregtech.multiblock.pattern.location_end"))
-                .where('Y',TiredTraceabilityPredicate.CP_CASING
+                .where('Y',TiredTraceabilityPredicate.CP_CASING.get()
                         .or(abilities(MultiblockAbility.INPUT_ENERGY)
                                 .setMinGlobalLimited(1)
                                 .setMaxGlobalLimited(3)))
                 .where('I', metaTileEntities(MetaTileEntities.ITEM_IMPORT_BUS[GTValues.ULV]))
-                .where('G', TiredTraceabilityPredicate.CP_CASING)
-                .where('A', TiredTraceabilityPredicate.CP_ZW_CASING)
-                .where('R', TiredTraceabilityPredicate.CP_LGLASS)
-                .where('T', TiredTraceabilityPredicate.CP_CASING)
+                .where('G', TiredTraceabilityPredicate.CP_CASING.get())
+                .where('A', TiredTraceabilityPredicate.CP_ZW_CASING.get())
+                .where('R', TiredTraceabilityPredicate.CP_LGLASS.get())
+                .where('T', TiredTraceabilityPredicate.CP_CASING.get())
                 .where('D', dataHatchPredicate())
                 .where(' ', any());
         return pattern.build();
@@ -182,9 +182,9 @@ public class MetaTileEntityAssemblyLine extends RecipeMapMultiblockController {
         if (ConfigHolder.machines.enableResearch) {
             return abilities(MultiblockAbility.DATA_ACCESS_HATCH, MultiblockAbility.OPTICAL_DATA_RECEPTION)
                     .setExactLimit(1)
-                    .or(TiredTraceabilityPredicate.CP_CASING);
+                    .or(TiredTraceabilityPredicate.CP_CASING.get());
         }
-        return TiredTraceabilityPredicate.CP_CASING;
+        return TiredTraceabilityPredicate.CP_CASING.get();
     }
 
     @Override

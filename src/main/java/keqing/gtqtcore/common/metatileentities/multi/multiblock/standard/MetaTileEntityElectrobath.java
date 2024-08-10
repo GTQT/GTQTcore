@@ -142,7 +142,7 @@ public class MetaTileEntityElectrobath extends GTQTRecipeMapMultiblockOverwrite 
                 .aisle("NNNNN","N###N","N#X#N","#NMN#")
                 .aisle("NNNNN","NNCNN","NNNNN","#NNN#")
                 .where('C', selfPredicate())
-                .where('N', TiredTraceabilityPredicate.CP_CASING
+                .where('N', TiredTraceabilityPredicate.CP_CASING.get()
                         .or(abilities(MultiblockAbility.MAINTENANCE_HATCH).setExactLimit(1))
                         .or(abilities(MultiblockAbility.MUFFLER_HATCH).setExactLimit(1))
                         .or(abilities(MultiblockAbility.EXPORT_FLUIDS).setMinGlobalLimited(1).setPreviewCount(1))
@@ -150,8 +150,8 @@ public class MetaTileEntityElectrobath extends GTQTRecipeMapMultiblockOverwrite 
                         .or(abilities(MultiblockAbility.IMPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1))
                         .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setMinGlobalLimited(1).setPreviewCount(1))
                         .or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(2).setPreviewCount(1)))
-                .where('M', TiredTraceabilityPredicate.CP_ELE_CASING)
-                .where('X', TiredTraceabilityPredicate.CP_TUBE)
+                .where('M', TiredTraceabilityPredicate.CP_ELE_CASING.get())
+                .where('X', TiredTraceabilityPredicate.CP_TUBE.get())
                 .where('#', any())
 
                 .build();

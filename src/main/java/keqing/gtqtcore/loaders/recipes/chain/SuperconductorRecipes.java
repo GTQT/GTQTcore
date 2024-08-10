@@ -77,7 +77,7 @@ public class SuperconductorRecipes {
 
         ASSEMBLER_RECIPES.recipeBuilder().duration(600).EUt(VA[8])
                 .input(wireGtSingle, UraniumRhodiumDinaquadide , 8)
-                .input(pipeTinyFluid, NaquadahAlloy, 4)
+                .input(pipeTinyFluid, Naquadah, 4)
                 .inputs(ELECTRIC_PUMP_ZPM.getStackForm(2))
                 .notConsumable(IntCircuitIngredient.getIntegratedCircuit(1))
                 .fluidInputs(LiquidHelium.getFluid(8000))

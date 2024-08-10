@@ -135,7 +135,7 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
                 .aisle("               ", "     DDDDD     ", "     DDDDD     ", "               ", "               ", "               ", "               ", "               ", "               ", "               ", "               ", "               ", "               ", "               ", "               ", "               ", "               ", "               ", "               ")
                 .where('S', selfPredicate())
                 .where('I', abilities(MultiblockAbility.IMPORT_ITEMS))
-                .where('A', TiredTraceabilityPredicate.CP_CASING
+                .where('A', TiredTraceabilityPredicate.CP_CASING.get()
                         .or(abilities(MultiblockAbility.MAINTENANCE_HATCH).setExactLimit(1).setPreviewCount(1))
                         .or(abilities(MultiblockAbility.EXPORT_ITEMS).setMinGlobalLimited(1).setMaxGlobalLimited(4).setPreviewCount(1))
                         .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setMinGlobalLimited(1).setMaxGlobalLimited(1).setPreviewCount(1))
@@ -144,8 +144,8 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
                 .where('H', states(MetaBlocks.FRAMES.get(Materials.Steel).getBlock(Materials.Steel)))
                 .where('C', states(MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.STEEL_GEARBOX)))
                 .where('D', states(MetaBlocks.STONE_BLOCKS.get(StoneVariantBlock.StoneVariant.SMOOTH).getState(StoneVariantBlock.StoneType.CONCRETE_LIGHT)))
-                .where('E', TiredTraceabilityPredicate.CP_TUBE)
-                .where('F', TiredTraceabilityPredicate.CP_DRI_CASING)
+                .where('E', TiredTraceabilityPredicate.CP_TUBE.get())
+                .where('F', TiredTraceabilityPredicate.CP_DRI_CASING.get())
                 .where('G', states(MetaBlocks.MULTIBLOCK_CASING.getState(BlockMultiblockCasing.MultiblockCasingType.GRATE_CASING)))
                 .where(' ', any())
                 .build();

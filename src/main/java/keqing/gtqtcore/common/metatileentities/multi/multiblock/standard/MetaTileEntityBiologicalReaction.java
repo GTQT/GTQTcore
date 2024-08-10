@@ -185,10 +185,10 @@ public class MetaTileEntityBiologicalReaction extends GTQTRecipeMapMultiblockCon
                 .aisle("JCCCJ","JPPPJ", "G   G", "G   G", "CCCCC")
                 .aisle("JCCCJ","JCSCJ", "GGGGG", "GGGGG", "CCCCC")
                 .where('S', selfPredicate())
-                .where('J', TiredTraceabilityPredicate.CP_ZJ_CASING)
-                .where('G', TiredTraceabilityPredicate.CP_LGLASS)
+                .where('J', TiredTraceabilityPredicate.CP_ZJ_CASING.get())
+                .where('G', TiredTraceabilityPredicate.CP_LGLASS.get())
                 .where('C', states(getCasingState()).setMinGlobalLimited(38).or(autoAbilities()))
-                .where('P', TiredTraceabilityPredicate.CP_TUBE)
+                .where('P', TiredTraceabilityPredicate.CP_TUBE.get())
                 .where(' ', any())
                 .build();
     }

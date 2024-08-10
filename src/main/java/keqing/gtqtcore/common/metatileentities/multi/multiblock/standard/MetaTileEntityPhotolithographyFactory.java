@@ -368,7 +368,7 @@ public class MetaTileEntityPhotolithographyFactory extends MetaTileEntityBaseWit
                         .or(abilities(MultiblockAbility.EXPORT_FLUIDS).setMinGlobalLimited(1).setMaxGlobalLimited(1))
                         .or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(4)))
                 .where('F', states(getFrameState()))
-                .where('H', CP_PAF_CASING)
+                .where('H', CP_PAF_CASING.get())
                 .where('#', air())
                 .where(' ', any())
                 .build();

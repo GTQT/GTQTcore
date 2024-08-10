@@ -206,21 +206,21 @@ public class MetaTileEntityKQCC extends MultiblockWithDisplayBase implements IOp
                         .or(abilities(MultiblockAbility.MAINTENANCE_HATCH).setExactLimit(1))
                         .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setMinGlobalLimited(1).setPreviewCount(1))
                         .or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(2).setPreviewCount(1)))
-                .where('A', TiredTraceabilityPredicate.CP_GPU_CASING1)
-                .where('B', TiredTraceabilityPredicate.CP_CPU_CASING1)
-                .where('C', TiredTraceabilityPredicate.CP_RAM_CASING1)
+                .where('A', TiredTraceabilityPredicate.CP_GPU_CASING1.get())
+                .where('B', TiredTraceabilityPredicate.CP_CPU_CASING1.get())
+                .where('C', TiredTraceabilityPredicate.CP_RAM_CASING1.get())
 
-                .where('D', TiredTraceabilityPredicate.CP_GPU_CASING2)
-                .where('E', TiredTraceabilityPredicate.CP_CPU_CASING2)
-                .where('F', TiredTraceabilityPredicate.CP_RAM_CASING2)
+                .where('D', TiredTraceabilityPredicate.CP_GPU_CASING2.get())
+                .where('E', TiredTraceabilityPredicate.CP_CPU_CASING2.get())
+                .where('F', TiredTraceabilityPredicate.CP_RAM_CASING2.get())
 
-                .where('G', TiredTraceabilityPredicate.CP_GPU_CASING3)
-                .where('H', TiredTraceabilityPredicate.CP_CPU_CASING3)
-                .where('I', TiredTraceabilityPredicate.CP_RAM_CASING3)
+                .where('G', TiredTraceabilityPredicate.CP_GPU_CASING3.get())
+                .where('H', TiredTraceabilityPredicate.CP_CPU_CASING3.get())
+                .where('I', TiredTraceabilityPredicate.CP_RAM_CASING3.get())
 
-                .where('J', TiredTraceabilityPredicate.CP_GPU_CASING4)
-                .where('K', TiredTraceabilityPredicate.CP_CPU_CASING4)
-                .where('L', TiredTraceabilityPredicate.CP_RAM_CASING4)
+                .where('J', TiredTraceabilityPredicate.CP_GPU_CASING4.get())
+                .where('K', TiredTraceabilityPredicate.CP_CPU_CASING4.get())
+                .where('L', TiredTraceabilityPredicate.CP_RAM_CASING4.get())
                 .where('#', any())
 
                 .build();

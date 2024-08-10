@@ -147,7 +147,7 @@ public class MetaTileEntityHugeBlastFurnace extends RecipeMapMultiblockControlle
                         .or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(3))
                 )
                 .where('B', heatingCoils())
-                .where('A', TiredTraceabilityPredicate.CP_GLASS)
+                .where('A', TiredTraceabilityPredicate.CP_GLASS.get())
                 .where('S', abilities(MultiblockAbility.MUFFLER_HATCH))
                 .where(' ', air())
                 .build();

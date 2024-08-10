@@ -194,14 +194,14 @@ public class MetaTileEntityDistillationTower extends GTQTRecipeMapMultiblockOver
                 .aisle("XXX", "XFX", "XXX").setRepeatable(1, 11)
                 .aisle("XXX", "XXX", "XXX")
                 .where('S', selfPredicate())
-                .where('Y', TiredTraceabilityPredicate.CP_CASING
+                .where('Y', TiredTraceabilityPredicate.CP_CASING.get()
                         .or(abilities(MultiblockAbility.EXPORT_ITEMS).setMaxGlobalLimited(1))
                         .or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(3))
                         .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setExactLimit(1)))
-                .where('X', TiredTraceabilityPredicate.CP_CASING
+                .where('X', TiredTraceabilityPredicate.CP_CASING.get()
                         .or(abilities(MultiblockAbility.EXPORT_FLUIDS).setMaxLayerLimited(1, 1))
                         .or(autoAbilities(true, false)))
-                .where('F', TiredTraceabilityPredicate.CP_TUBE)
+                .where('F', TiredTraceabilityPredicate.CP_TUBE.get())
                 .build();
     }
 

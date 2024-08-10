@@ -134,7 +134,7 @@ public class MetaTileEntityGasCollector extends RecipeMapMultiblockController {
                         .or(abilities(MultiblockAbility.IMPORT_ITEMS).setExactLimit(1))
                         .or(abilities(MultiblockAbility.EXPORT_FLUIDS).setMaxGlobalLimited(1))
                         .or(abilities(MultiblockAbility.INPUT_ENERGY).setMaxGlobalLimited(2)))
-                .where('J', TiredTraceabilityPredicate.CP_ZJ_CASING)
+                .where('J', TiredTraceabilityPredicate.CP_ZJ_CASING.get())
                 .where(' ', any())
                 .build();
     }

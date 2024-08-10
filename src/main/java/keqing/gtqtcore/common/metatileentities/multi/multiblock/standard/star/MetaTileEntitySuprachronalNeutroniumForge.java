@@ -22,7 +22,7 @@ import gregtech.client.shader.postprocessing.BloomEffect;
 import gregtech.client.shader.postprocessing.BloomType;
 import gregtech.client.utils.BloomEffectUtil;
 import gregtech.client.utils.EffectRenderContext;
-import gregtech.client.utils.IBloomEffect;
+import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import gregtech.client.utils.RenderBufferHelper;
 import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.BlockComputerCasing;
@@ -54,8 +54,7 @@ import java.util.List;
 
 import static gregtech.api.GTValues.MAX;
 import static gregtech.api.util.RelativeDirection.*;
-import static keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate.CP_FC_CASING;
-import static keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate.MAP_FUSION_COIL;
+import static keqing.gtqtcore.api.GTQTAPI.MAP_FUSION_COIL;
 import static keqing.gtqtcore.common.block.blocks.GTQTQuantumCasing.CasingType.*;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.SUPRACHRONAL_NEUTRONIUM_FORGE;
 
@@ -141,7 +140,7 @@ public class MetaTileEntitySuprachronalNeutroniumForge extends MultiMapMultibloc
                         .or(autoAbilities()))
                 .where('B', states(getSecondCasingState()))
                 .where('C', states(getCasingState()))
-                .where('D', CP_FC_CASING)
+                .where('D', TiredTraceabilityPredicate.FUSION_COIL.get())
                 .where('E', states(getThirdCasingState()))
                 .where('F', states(getCasingState()))
                 .where('G', states(getCasingState()));

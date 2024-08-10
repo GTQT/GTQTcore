@@ -141,7 +141,7 @@ public class MetaTileEntityVacuumFreezer extends GTQTRecipeMapMultiblockOverwrit
                 .aisle("XXX", "X#X", "XXX")
                 .aisle("XXX", "XSX", "XXX")
                 .where('S', selfPredicate())
-                .where('X', TiredTraceabilityPredicate.CP_CASING.setMinGlobalLimited(14).or(autoAbilities()))
+                .where('X', TiredTraceabilityPredicate.CP_CASING.get().setMinGlobalLimited(14).or(autoAbilities()))
                 .where('#', air())
                 .build();
     }

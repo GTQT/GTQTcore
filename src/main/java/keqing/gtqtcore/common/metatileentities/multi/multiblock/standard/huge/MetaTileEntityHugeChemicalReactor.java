@@ -122,7 +122,7 @@ public class MetaTileEntityHugeChemicalReactor extends GTQTRecipeMapMultiblockCo
                 .where('M', abilities(MultiblockAbility.MUFFLER_HATCH))
                 .where('A', states(this.getSecondCasingState()))
                 .where('B', states(this.getPipeCasingState()))
-                .where('G', TiredTraceabilityPredicate.CP_LGLASS)
+                .where('G', TiredTraceabilityPredicate.CP_LGLASS.get())
                 .build();
     }
     private IBlockState getCasingState() {

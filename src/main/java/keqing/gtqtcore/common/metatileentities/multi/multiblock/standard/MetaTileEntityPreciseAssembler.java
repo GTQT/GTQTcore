@@ -65,10 +65,7 @@ import java.util.stream.Collectors;
 
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.ASSEMBLER_RECIPES;
-import static keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate.MAP_PA_CASING;
-import static keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate.MAP_PA_INTERNAL_CASING;
-import static keqing.gtqtcore.api.utils.GTQTUniverUtil.consistentList;
-import static keqing.gtqtcore.api.utils.GTQTUniverUtil.maxLength;
+import static keqing.gtqtcore.api.GTQTAPI.MAP_PA_CASING;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.PRECISE_ASSEMBLER;
 
 public class MetaTileEntityPreciseAssembler extends MultiMapMultiblockController implements IOpticalComputationReceiver {
@@ -171,15 +168,15 @@ public class MetaTileEntityPreciseAssembler extends MultiMapMultiblockController
                 .aisle("CMMMMMMMC", "CGGGGGGGC", "CGGGGGGGC", "CGGGGGGGC", "DDDDDDDDD")
                 .aisle("DDDXSDDDD", "F       F", "F       F", "F       F", "DDDDDDDDD")
                 .where('S', selfPredicate())
-                .where('C', TiredTraceabilityPredicate.CP_PA_CASING)
-                .where('D', TiredTraceabilityPredicate.CP_PA_CASING
+                .where('C', TiredTraceabilityPredicate.CP_PA_CASING.get())
+                .where('D', TiredTraceabilityPredicate.CP_PA_CASING.get()
                         .setMinGlobalLimited(42)
                         .or(autoAbilities(true, true, true, true, true, true, false)))
                 .where('X', abilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION))
                 .where('O', abilities(MultiblockAbility.MUFFLER_HATCH))
                 .where('F', states(getFrameState()))
                 .where('G', states(getGlassState()))
-                .where('M', TiredTraceabilityPredicate.CP_PA_INTERNAL_CASING)
+                .where('M', TiredTraceabilityPredicate.CP_PA_INTERNAL_CASING.get())
                 .build();
     }
 

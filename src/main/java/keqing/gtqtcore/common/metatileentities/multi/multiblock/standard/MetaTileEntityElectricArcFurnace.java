@@ -404,8 +404,8 @@ public class MetaTileEntityElectricArcFurnace extends GTQTRecipeMapMultiblockCon
                         .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setMinGlobalLimited(1).setPreviewCount(1))
                         .or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(2).setPreviewCount(2))).where('M', abilities(MultiblockAbility.MUFFLER_HATCH))
                 .where('B', heatingCoils())
-                .where('D', TiredTraceabilityPredicate.CP_ELE_CASING)
-                .where('C', TiredTraceabilityPredicate.CP_TUBE)
+                .where('D', TiredTraceabilityPredicate.CP_ELE_CASING.get())
+                .where('C', TiredTraceabilityPredicate.CP_TUBE.get())
                 .where('#', air())
                 .build();
     }

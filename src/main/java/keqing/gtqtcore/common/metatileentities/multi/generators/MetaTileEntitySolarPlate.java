@@ -122,7 +122,7 @@ public class MetaTileEntitySolarPlate extends MultiblockWithDisplayBase implemen
                 .aisle("CSSSSC")
                 .aisle("XCCCCC")
                 .where('X', selfPredicate())
-                .where('S', TiredTraceabilityPredicate.CP_SP_CASING)
+                .where('S', TiredTraceabilityPredicate.CP_SP_CASING.get())
                 .where('C', states(GTQTMetaBlocks.ELECTROBATH.getState(GTQTElectrobath.CasingType.SOLAR_PLATE_CASING))
                         .or(abilities(MultiblockAbility.OUTPUT_ENERGY).setMaxGlobalLimited(4)))
                 .build();

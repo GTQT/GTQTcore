@@ -114,7 +114,7 @@ public class MetaTileEntityPyrolyseOven extends GTQTRecipeMapMultiblockOverwrite
                 .aisle("CCCCC", "C#C#C", "CCCCC", "C#C#C", "CCCCC")
                 .aisle("XXXXX", "XXXXX", "XXSXX", "XXXXX", "XXXXX")
                 .where('S', selfPredicate())
-                .where('X',  TiredTraceabilityPredicate.CP_CASING.setMinGlobalLimited(40).or(autoAbilities()))
+                .where('X',  TiredTraceabilityPredicate.CP_CASING.get().setMinGlobalLimited(40).or(autoAbilities()))
                 .where('C', heatingCoils())
                 .where('#', air())
                 .build();

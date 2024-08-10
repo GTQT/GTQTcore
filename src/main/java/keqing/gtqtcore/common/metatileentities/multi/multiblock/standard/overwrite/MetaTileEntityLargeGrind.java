@@ -100,12 +100,12 @@ public class MetaTileEntityLargeGrind extends GTQTRecipeMapMultiblockOverwrite {
                 .aisle("XXX", "XPX", "XXX")
                 .aisle("XXX", "XSX", "XXX")
                 .where('S', selfPredicate())
-                .where('X', TiredTraceabilityPredicate.CP_CASING.setMinGlobalLimited(18)
+                .where('X', TiredTraceabilityPredicate.CP_CASING.get().setMinGlobalLimited(18)
                         .or(abilities(MultiblockAbility.MAINTENANCE_HATCH).setExactLimit(1))
                         .or(abilities(MultiblockAbility.EXPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1))
                         .or(abilities(MultiblockAbility.IMPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1))
                         .or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(2).setPreviewCount(2)))
-                .where('P', TiredTraceabilityPredicate.CP_TUBE)
+                .where('P', TiredTraceabilityPredicate.CP_TUBE.get())
                 .where('#', any())
                 .build();
     }

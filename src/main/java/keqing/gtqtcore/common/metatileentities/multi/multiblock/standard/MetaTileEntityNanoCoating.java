@@ -159,11 +159,11 @@ public class MetaTileEntityNanoCoating extends MultiMapMultiblockController impl
                 .aisle("JXXXXXXXXJ", "JCSGGGGXXJ","JXXGGGGXXJ", "JXXGGGGXXJ")
                 .where('S', selfPredicate())
                 .where('C', abilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION))
-                .where('X', TiredTraceabilityPredicate.CP_CASING.setMinGlobalLimited(40).or(autoAbilities()))
-                .where('Z', TiredTraceabilityPredicate.CP_ZW_CASING)
-                .where('G', TiredTraceabilityPredicate.CP_LGLASS)
-                .where('J', TiredTraceabilityPredicate.CP_ZJ_CASING)
-                .where('P', TiredTraceabilityPredicate.CP_TJ_CASING)
+                .where('X', TiredTraceabilityPredicate.CP_CASING.get().setMinGlobalLimited(40).or(autoAbilities()))
+                .where('Z', TiredTraceabilityPredicate.CP_ZW_CASING.get())
+                .where('G', TiredTraceabilityPredicate.CP_LGLASS.get())
+                .where('J', TiredTraceabilityPredicate.CP_ZJ_CASING.get())
+                .where('P', TiredTraceabilityPredicate.CP_TJ_CASING.get())
                 .where('#', air())
                 .build();
     }

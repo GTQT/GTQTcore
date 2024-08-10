@@ -106,7 +106,7 @@ public class MetaTileEntityKineticEnergyBattery extends MultiblockWithDisplayBas
                 .aisle("  B  ", "  B  ", "BBBBB", "  B  ", "  B  ")
                 .where('S', selfPredicate())
                 .where('A', states(MetaBlocks.FRAMES.get(Materials.Steel).getBlock(Materials.Steel)))
-                .where('B', TiredTraceabilityPredicate.CP_CASING.setMinGlobalLimited(20)
+                .where('B', TiredTraceabilityPredicate.CP_CASING.get().setMinGlobalLimited(20)
                         .or(abilities(MultiblockAbility.MAINTENANCE_HATCH).setMinGlobalLimited(1).setMaxGlobalLimited(1).setPreviewCount(1))
 //                        .or(abilities(MultiblockAbility.EXPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1))
 //                        .or(abilities(MultiblockAbility.IMPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1))

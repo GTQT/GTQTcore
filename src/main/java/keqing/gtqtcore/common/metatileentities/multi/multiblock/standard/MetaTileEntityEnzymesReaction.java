@@ -192,10 +192,10 @@ public class MetaTileEntityEnzymesReaction extends GTQTRecipeMapMultiblockContro
                 .aisle("JCCCJ","JPPPJ", "G   G", "JPPPJ","JCCCJ")
                 .aisle("JCCCJ","JCSCJ", "GGGGG", "JCCCJ","JCCCJ")
                 .where('S', selfPredicate())
-                .where('J', TiredTraceabilityPredicate.CP_ZJ_CASING)
-                .where('G', TiredTraceabilityPredicate.CP_LGLASS)
+                .where('J', TiredTraceabilityPredicate.CP_ZJ_CASING.get())
+                .where('G', TiredTraceabilityPredicate.CP_LGLASS.get())
                 .where('C', states(getCasingState()).setMinGlobalLimited(32).or(autoAbilities()))
-                .where('P', TiredTraceabilityPredicate.CP_TUBE)
+                .where('P', TiredTraceabilityPredicate.CP_TUBE.get())
                 .where(' ', any())
                 .build();
     }

@@ -45,6 +45,8 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+import static keqing.gtqtcore.api.GTQTAPI.MAP_CAL_CASING;
+
 public class MetaTileEntityComponentAssemblyLine extends RecipeMapMultiblockController {
     private int casingTier;
 
@@ -120,7 +122,7 @@ public class MetaTileEntityComponentAssemblyLine extends RecipeMapMultiblockCont
                 .where('D', states(getFrameState()))
                 .where('G', states(getPipeCasingState()))
                 .where('E', states(getThirdCasingState()))
-                .where('B', TiredTraceabilityPredicate.CAL_CASING)
+                .where('B', TiredTraceabilityPredicate.CAL_CASING.get())
                 .where('J', states(getCasingState())
                         .or(abilities(MultiblockAbility.IMPORT_ITEMS)
                                 .setMaxGlobalLimited(6)
@@ -244,7 +246,7 @@ public class MetaTileEntityComponentAssemblyLine extends RecipeMapMultiblockCont
                 .where('I', () -> ConfigHolder.machines.enableMaintenance ? MetaTileEntities.MAINTENANCE_HATCH : getCasingState(), EnumFacing.SOUTH)
                 .where('Q', MetaTileEntities.ITEM_IMPORT_BUS[4], EnumFacing.WEST)
                 .where('P', MetaTileEntities.FLUID_IMPORT_HATCH[4], EnumFacing.EAST);
-        TiredTraceabilityPredicate.MAP_CAL_CASING.entrySet().stream()
+        MAP_CAL_CASING.entrySet().stream()
                 .sorted(Comparator.comparingInt(entry -> ((WrappedIntTired) entry.getValue()).getIntTier()))
                 .forEach(entry -> shapeInfo.add(builder.where('B', entry.getKey()).build()));
         return shapeInfo;

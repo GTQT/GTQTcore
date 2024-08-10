@@ -124,7 +124,7 @@ public class MetaTileEntityIntegratedMiningDivision extends GTQTRecipeMapMultibl
                 .aisle("CBCBC", "BGGGB", "CGAGC", "BGGGB", "CBCBC")
                 .aisle("CCCCC", "CGGGC", "CGOGC", "CGGGC", "CCCCC")
                 .where('O', this.selfPredicate())
-                .where('C', TiredTraceabilityPredicate.CP_CASING
+                .where('C', TiredTraceabilityPredicate.CP_CASING.get()
                         .or(abilities(MultiblockAbility.MAINTENANCE_HATCH).setExactLimit(1))
                         .or(abilities(MultiblockAbility.IMPORT_ITEMS).setMaxGlobalLimited(4).setPreviewCount(1))
                         .or(abilities(MultiblockAbility.EXPORT_ITEMS).setMaxGlobalLimited(4).setPreviewCount(1))
@@ -134,9 +134,9 @@ public class MetaTileEntityIntegratedMiningDivision extends GTQTRecipeMapMultibl
                 )
                 .where('X', heatingCoils())
                 .where('M', abilities(MultiblockAbility.MUFFLER_HATCH))
-                .where('A', TiredTraceabilityPredicate.CP_CASING)
-                .where('B', TiredTraceabilityPredicate.CP_TUBE)
-                .where('G', TiredTraceabilityPredicate.CP_LGLASS)
+                .where('A', TiredTraceabilityPredicate.CP_CASING.get())
+                .where('B', TiredTraceabilityPredicate.CP_TUBE.get())
+                .where('G', TiredTraceabilityPredicate.CP_LGLASS.get())
                 .build();
     }
     @Override

@@ -177,9 +177,9 @@ public class MetaTileEntityBioCentrifuge extends GTQTRecipeMapMultiblockControll
                 .where('S', selfPredicate())
 
                 .where('P', states(MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.TITANIUM_STABLE)))
-                .where('F', TiredTraceabilityPredicate.CP_LGLASS)
-                .where('G', TiredTraceabilityPredicate.CP_ZJ_CASING)
-                .where('c', TiredTraceabilityPredicate.CP_TUBE)
+                .where('F', TiredTraceabilityPredicate.CP_LGLASS.get())
+                .where('G', TiredTraceabilityPredicate.CP_ZJ_CASING.get())
+                .where('c', TiredTraceabilityPredicate.CP_TUBE.get())
                 .where('X', states(MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.TITANIUM_STABLE))
                         .or(abilities(MultiblockAbility.EXPORT_FLUIDS).setMinGlobalLimited(1).setMaxGlobalLimited(3))
                         .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setMinGlobalLimited(1).setMaxGlobalLimited(3))

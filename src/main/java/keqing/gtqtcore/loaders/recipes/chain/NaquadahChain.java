@@ -36,7 +36,7 @@ public class NaquadahChain {
                 .output(dust,TitaniumTrifluoride,2)
                 .fluidOutputs(Dichunduguiyanruye.getFluid(1000))
                 .blastFurnaceTemp(3000)
-                .duration(100).EUt(480).buildAndRegister();
+                .duration(100).EUt(VA[IV]).buildAndRegister();
 
         CENTRIFUGE_RECIPES.recipeBuilder()
                 .input(dust,SodiumOxide,27)
@@ -44,21 +44,21 @@ public class NaquadahChain {
                 .output(dust,Galliumoh,70)
                 .output(dust,Antimony,15)
                 .fluidOutputs(Dichunduguiyanrongye.getFluid(9000))
-                .duration(1000).EUt(1920).buildAndRegister();
+                .duration(1000).EUt(VA[IV]).buildAndRegister();
 
         CHEMICAL_RECIPES.recipeBuilder()
                 .fluidInputs(DiethylhexylPhosphoricAcid.getFluid(4000))
                 .fluidInputs(Dichunduguiyanrongye.getFluid(36000))
                 .fluidOutputs(Nqad.getFluid(30000))
                 .fluidOutputs(Feifu.getFluid(10000))
-                .duration(1000).EUt(1920).buildAndRegister();
+                .duration(1000).EUt(VA[IV]).buildAndRegister();
 
         CHEMICAL_RECIPES.recipeBuilder()
                 .fluidInputs(Feifu.getFluid(1500))
                 .input(dust,Quicklime,30)
                 .fluidOutputs(Feiye.getFluid(1000))
                 .output(dust,CalciumDifluoride,30)
-                .duration(1000).EUt(1920).buildAndRegister();
+                .duration(1000).EUt(VA[IV]).buildAndRegister();
 
         DISTILLATION_RECIPES.recipeBuilder()
                 .fluidInputs(Feiye.getFluid(4000))
@@ -84,7 +84,7 @@ public class NaquadahChain {
                 .output(ingotHot,Naquadah,1)
                 .fluidOutputs(CarbonDioxide.getFluid(1000))
                 .blastFurnaceTemp(5000)
-                .duration(100).EUt(480).buildAndRegister();
+                .duration(100).EUt(VA[IV]).buildAndRegister();
 
         LARGE_CHEMICAL_RECIPES.recipeBuilder().EUt(VA[LuV]).duration(600)
                 .fluidInputs(FluoroantimonicAcid.getFluid(1000))
@@ -100,7 +100,7 @@ public class NaquadahChain {
                 .fluidInputs(Gaochunguiyanrongye.getFluid(5000))
                 .output(dust,Yanghuaguiyan,30)
                 .fluidOutputs(DiethylhexylPhosphoricAcid.getFluid(1000))
-                .duration(200).EUt(120).buildAndRegister();
+                .duration(200).EUt(VA[IV]).buildAndRegister();
 
         //中子活化器			6s	中子动能460~480MeV	浓缩富集硅岩矿泥粉 16			硫酸富集硅岩粉 165	低纯硫酸超能硅岩粉 2	硫酸钠粉 140
         NEUTRON_ACTIVATOR.recipeBuilder()
@@ -120,7 +120,7 @@ public class NaquadahChain {
                 .fluidInputs(DiethylhexylPhosphoricAcid.getFluid(500))
                 .fluidInputs(Water.getFluid(3000))
                 .fluidOutputs(Dichunliusuanchaonengguiyanr.getFluid(3500))
-                .duration(200).EUt(120).buildAndRegister();
+                .duration(200).EUt(VA[IV]).buildAndRegister();
 
         DISTILLATION_RECIPES.recipeBuilder()
                 .fluidInputs(Dichunliusuanchaonengguiyanr.getFluid(7000))

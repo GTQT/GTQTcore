@@ -144,7 +144,7 @@ public class MetaTileEntityDissolutionTank extends GTQTRecipeMapMultiblockOverwr
                 .aisle("M   M", "MMSMM", "MGGGM", "MGGGM", " MMM ")
                 .where('S', selfPredicate())
                 .where('M', states(getCasingAState()).or(autoAbilities()))
-                .where('G', TiredTraceabilityPredicate.CP_LGLASS)
+                .where('G', TiredTraceabilityPredicate.CP_LGLASS.get())
                 .where('N', states(getCasingBState()))
                 .where('#', air())
                 .where(' ', any())

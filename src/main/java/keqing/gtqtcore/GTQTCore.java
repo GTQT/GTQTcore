@@ -1,6 +1,7 @@
 package keqing.gtqtcore;
 
 import gregtech.common.ConfigHolder;
+import keqing.gtqtcore.api.GTQTAPI;
 import keqing.gtqtcore.api.utils.GTQTLog;
 import keqing.gtqtcore.client.ClientProxy;
 import keqing.gtqtcore.common.CommonProxy;
@@ -47,6 +48,7 @@ public class GTQTCore {
         GTQTMetaItems.initialization();
         GTQTMetaBlocks.init();
         GTQTMetaTileEntities.initialization();
+        GTQTAPI.init();
         proxy.preLoad();
         proxy.preInit();
         MetaEntities.init();

@@ -102,7 +102,7 @@ public class MetaTileEntityCrackingUnit extends GTQTRecipeMapMultiblockOverwrite
                 .aisle("HCHCH", "H###H", "HCHCH")
                 .aisle("HCHCH", "HCOCH", "HCHCH")
                 .where('O', selfPredicate())
-                .where('H', TiredTraceabilityPredicate.CP_CASING.setMinGlobalLimited(12).or(autoAbilities()))
+                .where('H', TiredTraceabilityPredicate.CP_CASING.get().setMinGlobalLimited(12).or(autoAbilities()))
                 .where('#', air())
                 .where('C', heatingCoils())
                 .build();

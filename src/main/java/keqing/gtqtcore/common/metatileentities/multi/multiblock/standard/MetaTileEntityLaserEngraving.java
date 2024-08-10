@@ -110,9 +110,9 @@ public class MetaTileEntityLaserEngraving extends MultiMapMultiblockController i
                 .aisle("XXXXXX", "CSGGGX", "XXGGGX")
                 .where('S', selfPredicate())
                 .where('C', abilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION))
-                .where('X', TiredTraceabilityPredicate.CP_CASING.setMinGlobalLimited(24).or(autoAbilities()))
-                .where('Z', TiredTraceabilityPredicate.CP_ZW_CASING)
-                .where('G', TiredTraceabilityPredicate.CP_LGLASS)
+                .where('X', TiredTraceabilityPredicate.CP_CASING.get().setMinGlobalLimited(24).or(autoAbilities()))
+                .where('Z', TiredTraceabilityPredicate.CP_ZW_CASING.get())
+                .where('G', TiredTraceabilityPredicate.CP_LGLASS.get())
                 .where('#', air())
                 .build();
     }

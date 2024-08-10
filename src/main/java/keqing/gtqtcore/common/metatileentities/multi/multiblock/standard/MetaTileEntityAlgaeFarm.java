@@ -138,7 +138,7 @@ public class MetaTileEntityAlgaeFarm  extends MultiblockWithDisplayBase implemen
                 .aisle("EXXXXXXXE", "E#######E", "E#######E")
                 .aisle("EEEESEEEE", "EEEEEEEEE", "EEEEEEEEE")
                 .where('S', selfPredicate())
-                .where('X', TiredTraceabilityPredicate.MACHINE_CASINGS)
+                .where('X', TiredTraceabilityPredicate.MACHINE_CASINGS.get())
                 .where('E', states(getCasingState()).setMinGlobalLimited(80)
                         .or(abilities(MultiblockAbility.EXPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1))
                         .or(abilities(MultiblockAbility.IMPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1))

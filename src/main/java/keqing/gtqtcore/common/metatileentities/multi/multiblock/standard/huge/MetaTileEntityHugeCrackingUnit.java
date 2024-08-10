@@ -67,7 +67,7 @@ public class MetaTileEntityHugeCrackingUnit extends RecipeMapMultiblockControlle
                 .aisle("HHHHHHOHHHHHH"," H         H "," H         H "," H         H "," H         H "," H         H "," H         H ")
                 .where('O', this.selfPredicate())
                 .where('H', states(this.getCasingState()).setMinGlobalLimited(215).or(this.autoAbilities()))
-                .where('G', TiredTraceabilityPredicate.CP_GLASS)
+                .where('G', TiredTraceabilityPredicate.CP_GLASS.get())
                 .where('#', air()).where('C', heatingCoils()).build();
     }
 

@@ -207,9 +207,9 @@ public class MetaTileEntityADVKQCC extends MultiblockWithDisplayBase implements 
                         .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setMinGlobalLimited(1).setPreviewCount(1)))
                 .where('E', states(getCasingState())
                         .or(abilities(MultiblockAbility.INPUT_ENERGY).setMinLayerLimited(1).setMaxLayerLimited(1)))
-                .where('A', TiredTraceabilityPredicate.CP_GPU_CASING1)
-                .where('B', TiredTraceabilityPredicate.CP_CPU_CASING1)
-                .where('C', TiredTraceabilityPredicate.CP_RAM_CASING1)
+                .where('A', TiredTraceabilityPredicate.CP_GPU_CASING1.get())
+                .where('B', TiredTraceabilityPredicate.CP_CPU_CASING1.get())
+                .where('C', TiredTraceabilityPredicate.CP_RAM_CASING1.get())
                 .where('#', any());
         return pattern.build();
     }

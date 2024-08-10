@@ -351,7 +351,7 @@ public class MetaTileEntityHugeAlloyBlastSmelter extends RecipeMapMultiblockCont
                         .or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(3))
                 )
                 .where('W', heatingCoils())
-                .where('G', TiredTraceabilityPredicate.CP_GLASS)
+                .where('G', TiredTraceabilityPredicate.CP_GLASS.get())
                 .where('P', abilities(MultiblockAbility.MUFFLER_HATCH))
                 .where(' ', air())
                 .build();

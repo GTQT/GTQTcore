@@ -231,9 +231,9 @@ public class MetaTileEntityHeatExchanger extends NoEnergyMultiblockController im
                 .where('O',(abilities(MultiblockAbility.EXPORT_FLUIDS)))
                 .where('I',(abilities(MultiblockAbility.IMPORT_FLUIDS)))
                 .where('C', coilPredicate())
-                .where('X', TiredTraceabilityPredicate.CP_CASING)
-                .where('T', TiredTraceabilityPredicate.CP_TUBE)
-                .where('G', TiredTraceabilityPredicate.CP_LGLASS)
+                .where('X', TiredTraceabilityPredicate.CP_CASING.get())
+                .where('T', TiredTraceabilityPredicate.CP_TUBE.get())
+                .where('G', TiredTraceabilityPredicate.CP_LGLASS.get())
                 .where(' ', any());
         return pattern.build();
     }

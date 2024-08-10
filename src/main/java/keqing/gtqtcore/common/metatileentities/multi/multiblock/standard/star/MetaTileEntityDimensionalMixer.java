@@ -26,6 +26,7 @@ import gregtech.common.blocks.BlockComputerCasing;
 import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.MetaTileEntities;
+import keqing.gtqtcore.api.GTQTAPI;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
@@ -117,7 +118,7 @@ public class MetaTileEntityDimensionalMixer extends MultiMapMultiblockController
                         .or(abilities(MultiblockAbility.EXPORT_FLUIDS)
                                 .setMaxGlobalLimited(8)))
                 .where('C', states(getThirdCasingState()))
-                .where('F', CP_DM_CASING)
+                .where('F', CP_DM_CASING.get())
                 .where('#', air())
                 .where(' ', any())
                 .build();
@@ -179,7 +180,7 @@ public class MetaTileEntityDimensionalMixer extends MultiMapMultiblockController
                 .where('C', getThirdCasingState())
                 .where('#', Blocks.AIR.getDefaultState());
         MultiblockShapeInfo.Builder finalBuilder = builder;
-        MAP_DC_CASING.entrySet().stream()
+        GTQTAPI.MAP_DC_CASING.entrySet().stream()
                 .sorted(Comparator.comparingInt(entry -> ((WrappedIntTired) entry.getValue()).getIntTier()))
                 .forEach(entry -> shapeInfo.add(finalBuilder.where('F', entry.getKey()).build()));
         return shapeInfo;
