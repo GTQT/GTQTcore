@@ -352,9 +352,9 @@ public class MetaTileEntityKQCC extends MultiblockWithDisplayBase implements IOp
         this.coolantHandler = new FluidTankList(false, getAbilities(MultiblockAbility.IMPORT_FLUIDS));
 
 
-        Object CPU1 = context.get("CPU1TiredStats");
-        Object GPU1 = context.get("GPU1TiredStats");
-        Object RAM1 = context.get("RAM1TiredStats");
+        Object CPU1 = context.get("CPU1TieredStats");
+        Object GPU1 = context.get("GPU1TieredStats");
+        Object RAM1 = context.get("RAM1TieredStats");
         this.CPU1 = GTQTUtil.getOrDefault(() -> CPU1 instanceof WrappedIntTired,
                 () -> ((WrappedIntTired)CPU1).getIntTier(),
                 0);
@@ -367,9 +367,9 @@ public class MetaTileEntityKQCC extends MultiblockWithDisplayBase implements IOp
                 () -> ((WrappedIntTired)RAM1).getIntTier(),
                 0);
 
-        Object CPU2 = context.get("CPU2TiredStats");
-        Object GPU2 = context.get("GPU2TiredStats");
-        Object RAM2 = context.get("RAM2TiredStats");
+        Object CPU2 = context.get("CPU2TieredStats");
+        Object GPU2 = context.get("GPU2TieredStats");
+        Object RAM2 = context.get("RAM2TieredStats");
         this.CPU2 = GTQTUtil.getOrDefault(() -> CPU2 instanceof WrappedIntTired,
                 () -> ((WrappedIntTired)CPU2).getIntTier(),
                 0);
@@ -382,9 +382,9 @@ public class MetaTileEntityKQCC extends MultiblockWithDisplayBase implements IOp
                 () -> ((WrappedIntTired)RAM2).getIntTier(),
                 0);
 
-        Object CPU3 = context.get("CPU3TiredStats");
-        Object GPU3 = context.get("GPU3TiredStats");
-        Object RAM3 = context.get("RAM3TiredStats");
+        Object CPU3 = context.get("CPU3TieredStats");
+        Object GPU3 = context.get("GPU3TieredStats");
+        Object RAM3 = context.get("RAM3TieredStats");
         this.CPU3 = GTQTUtil.getOrDefault(() -> CPU3 instanceof WrappedIntTired,
                 () -> ((WrappedIntTired)CPU3).getIntTier(),
                 0);
@@ -397,9 +397,9 @@ public class MetaTileEntityKQCC extends MultiblockWithDisplayBase implements IOp
                 () -> ((WrappedIntTired)RAM3).getIntTier(),
                 0);
 
-        Object CPU4 = context.get("CPU4TiredStats");
-        Object GPU4 = context.get("GPU4TiredStats");
-        Object RAM4 = context.get("RAM4TiredStats");
+        Object CPU4 = context.get("CPU4TieredStats");
+        Object GPU4 = context.get("GPU4TieredStats");
+        Object RAM4 = context.get("RAM4TieredStats");
         this.CPU4 = GTQTUtil.getOrDefault(() -> CPU4 instanceof WrappedIntTired,
                 () -> ((WrappedIntTired)CPU4).getIntTier(),
                 0);

@@ -109,10 +109,10 @@ public class MetaTileEntityAssemblyLine extends RecipeMapMultiblockController {
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
-        Object laser_tier = context.get("ZWTiredStats");
-        Object casing_tier = context.get("ChemicalPlantCasingTiredStats");
-        Object turbine_tier = context.get("ChemicalPlantTubeTiredStats");
-        Object glass_tier = context.get("LGLTiredStats");
+        Object laser_tier = context.get("ZWTieredStats");
+        Object casing_tier = context.get("ChemicalPlantCasingTieredStats");
+        Object turbine_tier = context.get("ChemicalPlantTubeTieredStats");
+        Object glass_tier = context.get("LGLTieredStats");
 
         this.laser_tier = GTQTUtil.getOrDefault(() -> laser_tier instanceof WrappedIntTired,
                 () -> ((WrappedIntTired)laser_tier).getIntTier(),

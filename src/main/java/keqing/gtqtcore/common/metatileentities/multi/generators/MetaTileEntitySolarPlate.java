@@ -163,7 +163,7 @@ public class MetaTileEntitySolarPlate extends MultiblockWithDisplayBase implemen
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
         this.energyContainer = new EnergyContainerList(getAbilities(MultiblockAbility.OUTPUT_ENERGY));
-        Object tier = context.get("SPTiredStats");
+        Object tier = context.get("SPTieredStats");
         this.tier = GTQTUtil.getOrDefault(() -> tier instanceof WrappedIntTired,
                 () -> ((WrappedIntTired)tier).getIntTier(),
                 0);

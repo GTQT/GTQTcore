@@ -213,9 +213,9 @@ public class MetaTileEntityChemicalPlant extends GTQTRecipeMapMultiblockOverwrit
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
         Object coilType = context.get("CoilType");
-        Object casingTier = context.get("ChemicalPlantCasingTiredStats");
-        Object tubeTier = context.get("ChemicalPlantTubeTiredStats");
-        Object voltageTier = context.get("MachineCasingTypeTiredStats");
+        Object casingTier = context.get("ChemicalPlantCasingTieredStats");
+        Object tubeTier = context.get("ChemicalPlantTubeTieredStats");
+        Object voltageTier = context.get("MachineCasingTypeTieredStats");
         this.coilLevel = GTQTUtil.getOrDefault(() -> coilType instanceof IHeatingCoilBlockStats,
                 () ->  ((IHeatingCoilBlockStats) coilType).getLevel(),
                 BlockWireCoil.CoilType.CUPRONICKEL.getLevel());

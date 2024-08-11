@@ -153,7 +153,7 @@ public class MetaTileEntityDissolutionTank extends GTQTRecipeMapMultiblockOverwr
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
-        Object glass_tier = context.get("LGLTiredStats");
+        Object glass_tier = context.get("LGLTieredStats");
 
         this.glass_tier = GTQTUtil.getOrDefault(() -> glass_tier instanceof WrappedIntTired,
                 () -> ((WrappedIntTired)glass_tier).getIntTier(),

@@ -92,8 +92,8 @@ public class MetaTileEntityKQNetworkSwitch extends MetaTileEntityDataBank implem
         computationHandler.onStructureForm(
                 getAbilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION),
                 getAbilities(MultiblockAbility.COMPUTATION_DATA_TRANSMISSION));
-        Object casing_tier = context.get("ChemicalPlantCasingTiredStats");
-        Object laser_tier = context.get("ZWTiredStats");
+        Object casing_tier = context.get("ChemicalPlantCasingTieredStats");
+        Object laser_tier = context.get("ZWTieredStats");
         this.casing_tier = GTQTUtil.getOrDefault(() -> casing_tier instanceof WrappedIntTired,
                 () -> ((WrappedIntTired)casing_tier).getIntTier(),
                 0);

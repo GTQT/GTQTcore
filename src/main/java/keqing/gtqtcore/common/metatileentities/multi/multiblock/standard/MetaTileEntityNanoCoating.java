@@ -231,11 +231,11 @@ public class MetaTileEntityNanoCoating extends MultiMapMultiblockController impl
         if (providers != null && providers.size() >= 1) {
             this.computationProvider = (IOpticalComputationProvider)providers.get(0);
         }
-        Object laser_tier = context.get("ZWTiredStats");
-        Object tier = context.get("ChemicalPlantCasingTiredStats");
-        Object glass_tier = context.get("LGLTiredStats");
-        Object clean_tier = context.get("ZJTiredStats");
-        Object sheping_tier = context.get("TJTiredStats");
+        Object laser_tier = context.get("ZWTieredStats");
+        Object tier = context.get("ChemicalPlantCasingTieredStats");
+        Object glass_tier = context.get("LGLTieredStats");
+        Object clean_tier = context.get("ZJTieredStats");
+        Object sheping_tier = context.get("TJTieredStats");
 
         this.laser_tier = GTQTUtil.getOrDefault(() -> laser_tier instanceof WrappedIntTired,
                 () -> ((WrappedIntTired)laser_tier).getIntTier(),

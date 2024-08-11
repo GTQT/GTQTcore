@@ -169,9 +169,9 @@ public class MetaTileEntityEnzymesReaction extends GTQTRecipeMapMultiblockContro
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
-        Object glass_tier = context.get("LGLTiredStats");
-        Object clean_tier = context.get("ZJTiredStats");
-        Object tubeTier = context.get("ChemicalPlantTubeTiredStats");
+        Object glass_tier = context.get("LGLTieredStats");
+        Object clean_tier = context.get("ZJTieredStats");
+        Object tubeTier = context.get("ChemicalPlantTubeTieredStats");
         this.tubeTier = GTQTUtil.getOrDefault(() -> tubeTier instanceof WrappedIntTired,
                 () -> ((WrappedIntTired)tubeTier).getIntTier(),
                 0);

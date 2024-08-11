@@ -65,7 +65,7 @@ public class NanotubesChain {
                 .notConsumable(plate, Rhenium)
                 .fluidInputs(Acetylene.getFluid(3000))
                 .fluidInputs(Cycloparaphenylene.getFluid(7000))
-                .fluidInputs(Nitrogen.getPlasma(10000))
+                .fluidInputs(Nitrogen.getFluid(10000))
                 .output(ingot, CarbonNanotube)
                 .fluidOutputs(Ammonia.getFluid(10000))
                 .duration(100)
@@ -126,7 +126,7 @@ public class NanotubesChain {
                 .input(dust, Diiodobiphenyl, 4)
                 .fluidInputs(SilverTetrafluoroborate.getFluid(40000))
                 .fluidInputs(TrimethyltinChloride.getFluid(40000))
-                .output(dust, PlatinumRaw, 6)
+                .output(dust, PlatinumRaw, 3)
                 .output(dust, Iodine, 8)
                 .output(dust, SilverChloride, 8)
                 .fluidOutputs(Cycloparaphenylene.getFluid(10000))
@@ -174,7 +174,25 @@ public class NanotubesChain {
                 .duration(360)
                 .buildAndRegister();
 
+        //  2C4H6 -> C8H12
+        PYROLYSE_RECIPES.recipeBuilder()
+                .notConsumable(dust, Nickel)
+                .fluidInputs(Butadiene.getFluid(2000))
+                .fluidOutputs(Cyclooctadiene.getFluid(1000))
+                .EUt(VA[HV])
+                .duration(200)
+                .buildAndRegister();
 
+
+        //  PtCl2 + 4HCl -> H2PtCl6 + 2H
+        CHEMICAL_RECIPES.recipeBuilder()
+                .input(dust, PlatinumRaw, 3)
+                .fluidInputs(HydrochloricAcid.getFluid(4000))
+                .fluidOutputs(HexachloroplatinicAcid.getFluid(1000))
+                .fluidOutputs(Hydrogen.getFluid(2000))
+                .EUt(VA[IV])
+                .duration(200)
+                .buildAndRegister();
     }
 
     private static void DiiodobiphenylChain() {

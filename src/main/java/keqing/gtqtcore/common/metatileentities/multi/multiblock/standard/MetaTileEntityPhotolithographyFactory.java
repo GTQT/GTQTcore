@@ -380,7 +380,7 @@ public class MetaTileEntityPhotolithographyFactory extends MetaTileEntityBaseWit
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
-        Object laserTier = context.get("PAFTiredStats");
+        Object laserTier = context.get("PAFTieredStats");
         this.laserTier = GTQTUtil.getOrDefault(() -> laserTier instanceof WrappedIntTired,
                 () -> ((WrappedIntTired)laserTier).getIntTier(),
                 0);

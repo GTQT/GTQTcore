@@ -78,7 +78,7 @@ public class MetaTileEntityHugeChemicalReactor extends GTQTRecipeMapMultiblockCo
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
         Object coilType = context.get("CoilType");
-        Object glass_tier = context.get("LGLTiredStats");
+        Object glass_tier = context.get("LGLTieredStats");
         if (coilType instanceof IHeatingCoilBlockStats) {
             this.heatingCoilLevel = ((IHeatingCoilBlockStats) coilType).getLevel();
             this.heatingCoilDiscount = ((IHeatingCoilBlockStats) coilType).getEnergyDiscount();

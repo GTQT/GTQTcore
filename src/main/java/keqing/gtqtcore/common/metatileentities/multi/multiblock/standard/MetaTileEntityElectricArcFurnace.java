@@ -431,8 +431,8 @@ public class MetaTileEntityElectricArcFurnace extends GTQTRecipeMapMultiblockCon
         this.blastFurnaceTemperature += 100 *
                 max(0, GTUtility.getFloorTierByVoltage(getEnergyContainer().getInputVoltage()) - GTValues.MV);
 
-        Object eleTier = context.get("EleTiredStats");
-        Object tubeTier = context.get("ChemicalPlantTubeTiredStats");
+        Object eleTier = context.get("EleTieredStats");
+        Object tubeTier = context.get("ChemicalPlantTubeTieredStats");
         this.eleTier = GTQTUtil.getOrDefault(() -> eleTier instanceof WrappedIntTired,
                 () -> ((WrappedIntTired)eleTier).getIntTier(),
                 0);

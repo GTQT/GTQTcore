@@ -250,9 +250,9 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
-        Object drill = context.get("DriTiredStats");
-        Object casing = context.get("ChemicalPlantCasingTiredStats");
-        Object tubeTier = context.get("ChemicalPlantTubeTiredStats");
+        Object drill = context.get("DriTieredStats");
+        Object casing = context.get("ChemicalPlantCasingTieredStats");
+        Object tubeTier = context.get("ChemicalPlantTubeTieredStats");
         this.casing = GTQTUtil.getOrDefault(() -> casing instanceof WrappedIntTired,
                 () -> ((WrappedIntTired)casing).getIntTier(),
                 0);

@@ -177,7 +177,7 @@ public class MetaTileEntityPyrolyseOven extends GTQTRecipeMapMultiblockOverwrite
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
         Object type = context.get("CoilType");
-        Object tier = context.get("ChemicalPlantCasingTiredStats");
+        Object tier = context.get("ChemicalPlantCasingTieredStats");
         if (type instanceof IHeatingCoilBlockStats)
             this.coilTier = ((IHeatingCoilBlockStats) type).getTier();
         else

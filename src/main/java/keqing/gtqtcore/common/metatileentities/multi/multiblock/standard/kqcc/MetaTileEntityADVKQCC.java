@@ -327,9 +327,9 @@ public class MetaTileEntityADVKQCC extends MultiblockWithDisplayBase implements 
         this.coolantHandler = new FluidTankList(false, getAbilities(MultiblockAbility.IMPORT_FLUIDS));
         List<IEnergyContainer> i = getAbilities(MultiblockAbility.INPUT_ENERGY);
         this.level=i.size();
-        Object CPU1 = context.get("CPU1TiredStats");
-        Object GPU1 = context.get("GPU1TiredStats");
-        Object RAM1 = context.get("RAM1TiredStats");
+        Object CPU1 = context.get("CPU1TieredStats");
+        Object GPU1 = context.get("GPU1TieredStats");
+        Object RAM1 = context.get("RAM1TieredStats");
         this.CPU1 = GTQTUtil.getOrDefault(() -> CPU1 instanceof WrappedIntTired,
                 () -> ((WrappedIntTired)CPU1).getIntTier(),
                 0);

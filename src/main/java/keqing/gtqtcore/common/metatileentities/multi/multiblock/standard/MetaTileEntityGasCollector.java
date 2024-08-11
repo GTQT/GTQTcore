@@ -142,7 +142,7 @@ public class MetaTileEntityGasCollector extends RecipeMapMultiblockController {
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
-        Object clean_tier = context.get("ZJTiredStats");
+        Object clean_tier = context.get("ZJTieredStats");
         this.clean_tier = GTQTUtil.getOrDefault(() -> clean_tier instanceof WrappedIntTired,
                 () -> ((WrappedIntTired)clean_tier).getIntTier(),
                 0);

@@ -147,9 +147,9 @@ public class MetaTileEntityIntegratedMiningDivision extends GTQTRecipeMapMultibl
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
         Object coilType = context.get("CoilType");
-        Object casingTier = context.get("ChemicalPlantCasingTiredStats");
-        Object tubeTier = context.get("ChemicalPlantTubeTiredStats");
-        Object glass_tier = context.get("LGLTiredStats");
+        Object casingTier = context.get("ChemicalPlantCasingTieredStats");
+        Object tubeTier = context.get("ChemicalPlantTubeTieredStats");
+        Object glass_tier = context.get("LGLTieredStats");
         this.coilType = GTQTUtil.getOrDefault(() -> coilType instanceof IHeatingCoilBlockStats,
                 () ->  ((IHeatingCoilBlockStats) coilType).getLevel(),
                 BlockWireCoil.CoilType.CUPRONICKEL.getLevel());

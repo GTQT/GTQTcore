@@ -183,9 +183,9 @@ public class MetaTileEntityQuantumForceTransformer extends RecipeMapMultiblockCo
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
-        Object manioulatorTier = context.get("ManipulatprTiredStats");
-        Object coreTier = context.get("CoreTiredStats");
-        Object glassTier = context.get("QFTGlassTiredStats");
+        Object manioulatorTier = context.get("ManipulatprTieredStats");
+        Object coreTier = context.get("CoreTieredStats");
+        Object glassTier = context.get("QFTGlassTieredStats");
         this.manioulatorTier = GTQTUtil.getOrDefault(() -> manioulatorTier instanceof WrappedIntTired,
                 () -> ((WrappedIntTired)manioulatorTier).getIntTier(),
                 0);

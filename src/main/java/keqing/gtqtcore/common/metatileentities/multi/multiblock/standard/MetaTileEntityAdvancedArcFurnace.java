@@ -83,7 +83,7 @@ public class MetaTileEntityAdvancedArcFurnace extends GTQTRecipeMapMultiblockCon
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
-        Object eleTier = context.get("EleTiredStats");
+        Object eleTier = context.get("EleTieredStats");
         this.eleTier = GTQTUtil.getOrDefault(() -> eleTier instanceof WrappedIntTired,
                 () -> ((WrappedIntTired)eleTier).getIntTier(),
                 0);

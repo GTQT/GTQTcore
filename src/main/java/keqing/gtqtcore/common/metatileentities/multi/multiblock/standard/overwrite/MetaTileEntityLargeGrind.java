@@ -158,8 +158,8 @@ public class MetaTileEntityLargeGrind extends GTQTRecipeMapMultiblockOverwrite {
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
-        Object casingTier = context.get("ChemicalPlantCasingTiredStats");
-        Object tubeTier = context.get("ChemicalPlantTubeTiredStats");
+        Object casingTier = context.get("ChemicalPlantCasingTieredStats");
+        Object tubeTier = context.get("ChemicalPlantTubeTieredStats");
         this.casingTier = GTQTUtil.getOrDefault(() -> casingTier instanceof WrappedIntTired,
                 () -> ((WrappedIntTired)casingTier).getIntTier(),
                 0);

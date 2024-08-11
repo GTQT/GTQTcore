@@ -242,7 +242,7 @@ public class MetaTileEntityVacuumFreezer extends GTQTRecipeMapMultiblockOverwrit
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
-        Object tier = context.get("ChemicalPlantCasingTiredStats");
+        Object tier = context.get("ChemicalPlantCasingTieredStats");
         this.tier = GTQTUtil.getOrDefault(() -> tier instanceof WrappedIntTired,
                 () -> ((WrappedIntTired)tier).getIntTier(),
                 0);

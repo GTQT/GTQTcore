@@ -86,7 +86,7 @@ public class MetaTileEntityHugeAlloyBlastSmelter extends RecipeMapMultiblockCont
         super.formStructure(context);
         Object type = context.get("CoilType");
         Object coilType = context.get("CoilType");
-        Object glassTire = context.get("GlassTiredStats");
+        Object glassTire = context.get("GlassTieredStats");
         this.glassTire = GTQTUtil.getOrDefault(() -> glassTire instanceof WrappedIntTired,
                 () -> ((WrappedIntTired)glassTire).getIntTier(),
                 0);

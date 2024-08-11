@@ -15,6 +15,7 @@ import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.dust;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.HexachloroplatinicAcid;
 
 /**
  * The Platinum Process
@@ -154,8 +155,6 @@ public class PlatinumGroupProcessing {
                 .fluidOutputs(ChloroplatinicAcid.getFluid(1000))
                 .fluidOutputs(Ammonia.getFluid(2000))
                 .duration(120).EUt(VA[LV]).buildAndRegister();
-
-        // Chloroplatinic Acid electrolysis proceeds from CEu
     }
 
     private static void palladium() {

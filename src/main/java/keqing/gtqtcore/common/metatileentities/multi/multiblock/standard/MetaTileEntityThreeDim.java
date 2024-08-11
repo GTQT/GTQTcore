@@ -182,10 +182,10 @@ public class MetaTileEntityThreeDim extends MultiMapMultiblockController impleme
         if (providers != null && providers.size() >= 1) {
             this.computationProvider = (IOpticalComputationProvider)providers.get(0);
         }
-        Object tier = context.get("ChemicalPlantCasingTiredStats");
-        Object glass_tier = context.get("LGLTiredStats");
-        Object clean_tier = context.get("ZJTiredStats");
-        Object sheping_tier = context.get("TJTiredStats");
+        Object tier = context.get("ChemicalPlantCasingTieredStats");
+        Object glass_tier = context.get("LGLTieredStats");
+        Object clean_tier = context.get("ZJTieredStats");
+        Object sheping_tier = context.get("TJTieredStats");
 
         this.tier = GTQTUtil.getOrDefault(() -> tier instanceof WrappedIntTired,
                 () -> ((WrappedIntTired)tier).getIntTier(),

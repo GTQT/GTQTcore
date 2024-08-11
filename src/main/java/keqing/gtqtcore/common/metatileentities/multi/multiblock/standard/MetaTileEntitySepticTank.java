@@ -166,7 +166,7 @@ public class MetaTileEntitySepticTank extends GTQTRecipeMapMultiblockController 
         this.blastFurnaceTemperature += 100 *
                 Math.max(0, GTUtility.getFloorTierByVoltage(getEnergyContainer().getInputVoltage()) - GTValues.MV);
         this.energyContainer = new EnergyContainerList(getAbilities(MultiblockAbility.INPUT_ENERGY));
-        Object tier = context.get("ChemicalPlantCasingTiredStats");
+        Object tier = context.get("ChemicalPlantCasingTieredStats");
         this.tier = GTQTUtil.getOrDefault(() -> tier instanceof WrappedIntTired,
                 () -> ((WrappedIntTired)tier).getIntTier(),
                 0);

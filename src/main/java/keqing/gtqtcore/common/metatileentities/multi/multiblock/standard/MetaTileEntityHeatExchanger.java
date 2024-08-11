@@ -370,9 +370,9 @@ public class MetaTileEntityHeatExchanger extends NoEnergyMultiblockController im
         number = context.getInt("Count")/8;
 
 
-        Object casingTier = context.get("ChemicalPlantCasingTiredStats");
-        Object tubeTier = context.get("ChemicalPlantTubeTiredStats");
-        Object glassTier = context.get("LGLTiredStats");
+        Object casingTier = context.get("ChemicalPlantCasingTieredStats");
+        Object tubeTier = context.get("ChemicalPlantTubeTieredStats");
+        Object glassTier = context.get("LGLTieredStats");
         Object coilType = context.get("CoilType");
         if (coilType instanceof IHeatingCoilBlockStats) {
             this.coilLevel = ((IHeatingCoilBlockStats) coilType).getLevel();

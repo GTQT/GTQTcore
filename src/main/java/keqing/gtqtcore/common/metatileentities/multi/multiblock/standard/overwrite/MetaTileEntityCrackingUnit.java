@@ -163,7 +163,7 @@ public class MetaTileEntityCrackingUnit extends GTQTRecipeMapMultiblockOverwrite
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
-        Object casingTier = context.get("ChemicalPlantCasingTiredStats");
+        Object casingTier = context.get("ChemicalPlantCasingTieredStats");
         Object type = context.get("CoilType");
         if (type instanceof IHeatingCoilBlockStats) {
             this.coilTier = ((IHeatingCoilBlockStats) type).getTier();

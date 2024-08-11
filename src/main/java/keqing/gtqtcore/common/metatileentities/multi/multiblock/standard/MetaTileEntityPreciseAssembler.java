@@ -97,8 +97,8 @@ public class MetaTileEntityPreciseAssembler extends MultiMapMultiblockController
         if (providers != null && providers.size() >= 1) {
             this.computationProvider = (IOpticalComputationProvider)providers.get(0);
         }
-        Object CasingTier = context.get("PACTiredStats");
-        Object InternalCasingTier = context.get("PAITiredStats");
+        Object CasingTier = context.get("PACTieredStats");
+        Object InternalCasingTier = context.get("PAITieredStats");
         this.CasingTier = GTQTUtil.getOrDefault(() -> CasingTier instanceof WrappedIntTired,
                 () -> ((WrappedIntTired)CasingTier).getIntTier(),
                 0);

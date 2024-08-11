@@ -194,9 +194,9 @@ public class MetaTileEntityBioCentrifuge extends GTQTRecipeMapMultiblockControll
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
         this.energyContainer = new EnergyContainerList(getAbilities(MultiblockAbility.INPUT_ENERGY));
-        Object glass_tier = context.get("LGLTiredStats");
-        Object clean_tier = context.get("ZJTiredStats");
-        Object tubeTier = context.get("ChemicalPlantTubeTiredStats");
+        Object glass_tier = context.get("LGLTieredStats");
+        Object clean_tier = context.get("ZJTieredStats");
+        Object tubeTier = context.get("ChemicalPlantTubeTieredStats");
         this.tubeTier = GTQTUtil.getOrDefault(() -> tubeTier instanceof WrappedIntTired,
                 () -> ((WrappedIntTired)tubeTier).getIntTier(),
                 0);

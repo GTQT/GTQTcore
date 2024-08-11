@@ -212,7 +212,7 @@ public class MetaTileEntityKineticEnergyBattery extends MultiblockWithDisplayBas
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
         initializeAbilities();
-        Object casing = context.get("ChemicalPlantCasingTiredStats");
+        Object casing = context.get("ChemicalPlantCasingTieredStats");
         Object coilType = context.get("CoilType");
         this.casing = GTQTUtil.getOrDefault(() -> casing instanceof WrappedIntTired,
                 () -> ((WrappedIntTired)casing).getIntTier(),

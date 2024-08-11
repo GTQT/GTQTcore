@@ -180,9 +180,9 @@ public class MetaTileEntityLaserEngraving extends MultiMapMultiblockController i
         if (providers != null && providers.size() >= 1) {
             this.computationProvider = (IOpticalComputationProvider)providers.get(0);
         }
-        Object laser_tier = context.get("ZWTiredStats");
-        Object tier = context.get("ChemicalPlantCasingTiredStats");
-        Object glass_tier = context.get("LGLTiredStats");
+        Object laser_tier = context.get("ZWTieredStats");
+        Object tier = context.get("ChemicalPlantCasingTieredStats");
+        Object glass_tier = context.get("LGLTieredStats");
 
         this.laser_tier = GTQTUtil.getOrDefault(() -> laser_tier instanceof WrappedIntTired,
                 () -> ((WrappedIntTired)laser_tier).getIntTier(),
