@@ -27,6 +27,7 @@ import keqing.gtqtcore.api.metaileentity.GTQTRecipeMapMultiblockController;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.recipes.properties.BRProperty;
+import keqing.gtqtcore.api.recipes.properties.ERProperty;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.block.state.IBlockState;
@@ -55,13 +56,13 @@ public class MetaTileEntityEnzymesReaction extends GTQTRecipeMapMultiblockContro
         });
         this.recipeMapWorkable = new BiologicalReactionLogic(this);
     }
+    @Override
+    public boolean canBeDistinct() {return true;}
     private int glass_tier;
     private int clean_tier;
     private int tubeTier;
 
-    int bio=0;
-    double rate=0;
-
+    double PH=0;
 
     int water;
     int s;
@@ -74,12 +75,11 @@ public class MetaTileEntityEnzymesReaction extends GTQTRecipeMapMultiblockContro
     boolean start;
     @Override
     public int getNumProgressBars() {
-        return 2;
+        return 1;
     }
     @Override
     public double getFillPercentage(int index) {
-            return index == 0 ?  (rate-4)/6 :
-                    bio / 3200.0;
+            return (PH-4)/6;
     }
     @Override
     public TextureArea getProgressBarTexture(int index) {
@@ -88,15 +88,9 @@ public class MetaTileEntityEnzymesReaction extends GTQTRecipeMapMultiblockContro
     @Override
     public void addBarHoverText(List<ITextComponent> hoverList, int index) {
         ITextComponent cwutInfo;
-        if (index == 0) {
-            cwutInfo = TextComponentUtil.stringWithColor(
+        cwutInfo = TextComponentUtil.stringWithColor(
                     TextFormatting.AQUA,
-                    4+" / " + rate + " / " + 10 + "PH");
-        } else {
-            cwutInfo = TextComponentUtil.stringWithColor(
-                    TextFormatting.AQUA,
-                    bio + " / " + 3200 + " P");
-        }
+                    4+" / " + PH + " / " + 10 + "PH");
         hoverList.add(TextComponentUtil.translationWithColor(
                 TextFormatting.GRAY,
                 "gregtech.multiblock.pb.computation",
@@ -110,8 +104,7 @@ public class MetaTileEntityEnzymesReaction extends GTQTRecipeMapMultiblockContro
         data.setInteger("s", s);
         data.setInteger("j", j);
 
-        data.setInteger("bio", bio);
-        data.setDouble("rate", rate);
+        data.setDouble("PH", PH);
         data.setInteger("A", A);
         data.setInteger("B", B);
         data.setInteger("C", C);
@@ -128,8 +121,7 @@ public class MetaTileEntityEnzymesReaction extends GTQTRecipeMapMultiblockContro
         s = data.getInteger("s");
         j = data.getInteger("j");
 
-        bio = data.getInteger("bio");
-        rate = data.getDouble("rate");
+        PH = data.getDouble("PH");
         A = data.getInteger("A");
         B = data.getInteger("B");
         C = data.getInteger("C");
@@ -156,8 +148,7 @@ public class MetaTileEntityEnzymesReaction extends GTQTRecipeMapMultiblockContro
     }
 
     private void clear(Widget.ClickData clickData) {
-        bio=0;
-        rate=0;
+        PH=0;
         water=0;
         s=0;
         j=0;
@@ -219,12 +210,12 @@ public class MetaTileEntityEnzymesReaction extends GTQTRecipeMapMultiblockContro
         super.addDisplayText(textList);
 
         textList.add(new TextComponentTranslation("gtqtcore.multiblock.br.3",glass_tier,tubeTier));
-        if(rate>8)
-            textList.add(new TextComponentTranslation("Rate:%s Ph:%s 碱性 状态：%s",bio,(int)rate,start));
-        if(rate<8&&rate>6)
-            textList.add(new TextComponentTranslation("Rate:%s Ph:%s 中性 状态：%s",bio,(int)rate,start));
-        if(rate<6)
-            textList.add(new TextComponentTranslation("Rate:%s Ph:%s 酸性 状态：%s",bio,(int)rate,start));
+        if(PH>8)
+            textList.add(new TextComponentTranslation("Ph:%s 碱性 状态：%s",(int)PH,start));
+        if(PH<8&&PH>6)
+            textList.add(new TextComponentTranslation("Ph:%s 中性 状态：%s",(int)PH,start));
+        if(PH<6)
+            textList.add(new TextComponentTranslation("Ph:%s 酸性 状态：%s",(int)PH,start));
 
         if(getEnzymes()>0&&getRare(getEnzymes()))
         textList.add(new TextComponentTranslation("%s 组合因子：%s %s %s %s %s 找到配方: "+getName(getEnzymes()),getEnzymes(),A,B,C,D,E));
@@ -266,10 +257,11 @@ public class MetaTileEntityEnzymesReaction extends GTQTRecipeMapMultiblockContro
     }
     public  boolean getRare(int n)
     {
-        if(n<200)return rate<=6;
-        if(n<300)return rate>=8;
-        if(n<400)return rate<=6;
-        if(n<500)return rate>=8;
+        if(PH<4||PH>10)return false;
+        if(n<200)return PH<=6;
+        if(n<300)return PH>=8;
+        if(n<400)return PH<=6;
+        if(n<500)return PH>=8;
         return false;
     }
 
@@ -339,7 +331,7 @@ public class MetaTileEntityEnzymesReaction extends GTQTRecipeMapMultiblockContro
     }
     @Override
     public boolean checkRecipe(@Nonnull Recipe recipe, boolean consumeIfSuccess) {
-        int number=recipe.getProperty(BRProperty.getInstance(), 0);
+        int number=recipe.getProperty(ERProperty.getInstance(), 0);
         if(getEnzymes()==number)
             if(getRare(number))
                 return super.checkRecipe(recipe, consumeIfSuccess);
@@ -367,18 +359,9 @@ public class MetaTileEntityEnzymesReaction extends GTQTRecipeMapMultiblockContro
         FluidStack BIO4 = Enzymesd.getFluid(1000);
         FluidStack BIO5 = Enzymese.getFluid(1000);
 
-        FluidStack BIOE = Rnzymes.getFluid(10);
         @Override
         public void update() {
             IMultipleTankHandler inputTank = getInputFluidInventory();
-
-            if(bio<3000) {
-                if (BIOE.isFluidStackIdentical(inputTank.drain(BIOE, false))) {
-                    inputTank.drain(BIOE, true);
-                    bio=bio+10;
-                }
-            }
-
             if (WATER.isFluidStackIdentical(inputTank.drain(WATER, false))) {
                 inputTank.drain(WATER, true);
                 water++;
@@ -392,7 +375,7 @@ public class MetaTileEntityEnzymesReaction extends GTQTRecipeMapMultiblockContro
                 j++;
             }
 
-            rate=(float)(4*s+10*j+7*water)/(s+j+water);
+            PH=(float)(4*s+10*j+7*water)/(s+j+water);
 
             if (BIO1.isFluidStackIdentical(inputTank.drain(BIO1, false))) {
                 inputTank.drain(BIO1, true);
@@ -420,43 +403,25 @@ public class MetaTileEntityEnzymesReaction extends GTQTRecipeMapMultiblockContro
 
         }
 
-        protected int getp()
-        {
-            if(bio>2600)return 2;
-            if(bio>2200)return 4;
-            if(bio>1800)return 8;
-            if(bio>1400)return 4;
-            if(bio>800)return 2;
-            if(bio>400)return 1;
-            return 1;
-        }
         @Override
         public int getParallelLimit() {
-            return getp()*clean_tier;
+            return clean_tier;
         }
         public void setMaxProgress(int maxProgress) {
-            this.maxProgressTime = (maxProgress*(100-clean_tier*getp())/100);
+            this.maxProgressTime = maxProgress*clean_tier/10;
         }
 
         protected void updateRecipeProgress() {
-            if (this.canRecipeProgress && this.drawEnergy(this.recipeEUt, true)&&start&&rate>600) {
+            if (this.canRecipeProgress && this.drawEnergy(this.recipeEUt, true)&&start&&getEnzymes()!=0) {
                 this.drawEnergy(this.recipeEUt, false);
                 if (++this.progressTime > this.maxProgressTime) {
                     this.completeRecipe();
-                    bio=bio*tubeTier/12;
+                    PH+=(7-PH)/3;
                     s= (int) (s*0.6);
                     j= (int) (j*0.6);
                     A=B=C=D=E=0;
                 }
-
-                if (this.hasNotEnoughEnergy && this.getEnergyInputPerSecond() > 19L * (long)this.recipeEUt) {
-                    this.hasNotEnoughEnergy = false;
-                }
-            } else if (this.recipeEUt > 0) {
-                this.hasNotEnoughEnergy = true;
-                this.decreaseProgress();
             }
-
         }
     }
 }

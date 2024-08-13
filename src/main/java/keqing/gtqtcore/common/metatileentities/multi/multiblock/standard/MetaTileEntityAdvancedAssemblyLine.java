@@ -72,7 +72,8 @@ public class MetaTileEntityAdvancedAssemblyLine extends RecipeMapMultiblockContr
         super(metaTileEntityId, RecipeMaps.ASSEMBLY_LINE_RECIPES);
         this.recipeMapWorkable = new AdvancedAssemblyLineRecipeLogic(this);
     }
-
+    @Override
+    public boolean canBeDistinct() {return true;}
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityAdvancedAssemblyLine(metaTileEntityId);
     }

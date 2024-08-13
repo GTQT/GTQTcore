@@ -52,7 +52,8 @@ public class MetaTileEntityLargeChemicalReactor extends GTQTRecipeMapMultiblockO
         super(metaTileEntityId, RecipeMaps.CHEMICAL_RECIPES);
         this.recipeMapWorkable = new LargeChemicalReactorLogic(this);
     }
-
+    @Override
+    public boolean canBeDistinct() {return true;}
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityLargeChemicalReactor(metaTileEntityId);

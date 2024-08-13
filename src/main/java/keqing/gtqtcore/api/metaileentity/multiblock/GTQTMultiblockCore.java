@@ -312,11 +312,6 @@ public abstract class GTQTMultiblockCore extends MultiMapMultiblockController im
     }
 
     @Override
-    public boolean hasMaintenanceMechanics() {
-        return false;
-    }
-
-    @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
         this.inputInventory = new ItemHandlerList(getAbilities(MultiblockAbility.IMPORT_ITEMS));
@@ -356,7 +351,14 @@ public abstract class GTQTMultiblockCore extends MultiMapMultiblockController im
     public boolean isActive() {
         return this.isStructureFormed();
     }
+    @Override
     public boolean hasMufflerMechanics() {
-        return false;
+        return true;
     }
+    @Override
+    public boolean hasMaintenanceMechanics() {
+        return true;
+    }
+    @Override
+    public boolean canBeDistinct() {return true;}
 }

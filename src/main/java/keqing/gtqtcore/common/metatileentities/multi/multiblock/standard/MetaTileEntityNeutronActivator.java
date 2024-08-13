@@ -48,6 +48,8 @@ public class MetaTileEntityNeutronActivator  extends RecipeMapMultiblockControll
         this.recipeMapWorkable = new NeutronActivatorLogic(this);
     }
     @Override
+    public boolean canBeDistinct() {return true;}
+    @Override
     public boolean checkRecipe(@Nonnull Recipe recipe, boolean consumeIfSuccess) {
         if(recipe.getProperty(NeutronActivatorPartProperty.getInstance(), 0)>=pamin&&recipe.getProperty(NeutronActivatorPartProperty.getInstance(), 0)<=pamax)
         {

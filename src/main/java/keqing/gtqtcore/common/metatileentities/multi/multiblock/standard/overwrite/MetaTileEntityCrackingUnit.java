@@ -94,7 +94,8 @@ public class MetaTileEntityCrackingUnit extends GTQTRecipeMapMultiblockOverwrite
         return (int)(Math.min(this.energyContainer.getEnergyCapacity()/32,VA[casingTier]));
 
     }
-
+    @Override
+    public boolean canBeDistinct() {return true;}
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()

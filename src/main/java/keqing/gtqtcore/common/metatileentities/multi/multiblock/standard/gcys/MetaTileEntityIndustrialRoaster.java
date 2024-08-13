@@ -64,7 +64,7 @@ public class MetaTileEntityIndustrialRoaster extends RecipeMapMultiblockControll
         super.formStructure(context);
         Object type = context.get("CasingType");
         if (type instanceof BlockFireboxCasing.FireboxCasingType)
-            this.temperature = ((BlockFireboxCasing.FireboxCasingType) type).ordinal() * 500 + 1000;
+            this.temperature = ((BlockFireboxCasing.FireboxCasingType) type).ordinal() * 1000 + 1000;
         else this.temperature = 0;
     }
 

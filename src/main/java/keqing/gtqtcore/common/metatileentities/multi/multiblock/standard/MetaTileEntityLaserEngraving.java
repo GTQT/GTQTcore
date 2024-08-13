@@ -54,6 +54,7 @@ public class MetaTileEntityLaserEngraving extends MultiMapMultiblockController i
         });
         this.recipeMapWorkable = new LaserEngravingWorkableHandler(this);
     }
+
     @Override
     public void addInformation(ItemStack stack, World world, List<String> tooltip, boolean advanced) {
         tooltip.add(I18n.format("gtqt.machine.ls.1"));

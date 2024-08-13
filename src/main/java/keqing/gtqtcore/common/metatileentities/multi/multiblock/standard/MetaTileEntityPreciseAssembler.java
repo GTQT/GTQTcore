@@ -81,6 +81,8 @@ public class MetaTileEntityPreciseAssembler extends MultiMapMultiblockController
         });
         this.recipeMapWorkable = new PreciseAssemblerRecipeLogic(this);
     }
+    @Override
+    public boolean canBeDistinct() {return true;}
     public IOpticalComputationProvider getComputationProvider() {
         return this.computationProvider;
     }

@@ -250,7 +250,8 @@ public class MetaTileEntityAssemblyLine extends RecipeMapMultiblockController {
     public SoundEvent getBreakdownSound() {
         return GTSoundEvents.BREAKDOWN_MECHANICAL;
     }
-
+    @Override
+    public boolean canBeDistinct() {return true;}
     @Override
     public void update() {
         super.update();

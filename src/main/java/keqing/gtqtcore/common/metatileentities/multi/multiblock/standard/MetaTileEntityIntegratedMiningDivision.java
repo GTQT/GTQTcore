@@ -54,6 +54,8 @@ public class MetaTileEntityIntegratedMiningDivision extends GTQTRecipeMapMultibl
         super(metaTileEntityId, GTQTcoreRecipeMaps.INTEGRATED_MINING_DIVISION);
         this.recipeMapWorkable = new MetaTileEntityIntegratedMiningDivisionrWorkable(this);
     }
+    @Override
+    public boolean canBeDistinct() {return true;}
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity metaTileEntityHolder) {
         return new MetaTileEntityIntegratedMiningDivision(this.metaTileEntityId);
     }

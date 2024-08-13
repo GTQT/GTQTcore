@@ -38,7 +38,8 @@ public class MetaTileEntityFlotationFactory extends RecipeMapMultiblockControlle
         super(metaTileEntityId, GTQTcoreRecipeMaps.FLOTATION_FACTORY_RECIPES);
         this.recipeMapWorkable = new MetaTileEntityFlotationFactoryrWorkable(this);
     }
-
+    @Override
+    public boolean canBeDistinct() {return true;}
     protected static class MetaTileEntityFlotationFactoryrWorkable extends MultiblockRecipeLogic {
 
         public MetaTileEntityFlotationFactoryrWorkable(RecipeMapMultiblockController tileEntity) {

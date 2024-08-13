@@ -269,4 +269,6 @@ public class MetaTileEntityVacuumFreezer extends GTQTRecipeMapMultiblockOverwrit
     protected ICubeRenderer getFrontOverlay() {
         return GTQTTextures.ALGAE_FARM_OVERLAY;
     }
+    @Override
+    public boolean canBeDistinct() {return true;}
 }

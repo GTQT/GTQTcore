@@ -65,7 +65,8 @@ public class MetaTileEntityDistillationTower extends GTQTRecipeMapMultiblockOver
     protected int layerCount;
     protected List<IFluidHandler> orderedFluidOutputs;
 
-
+    @Override
+    public boolean canBeDistinct() {return true;}
     private int tier;
     private int casingTier;
     private int tubeTier;

@@ -76,6 +76,8 @@ public class MetaTileEntityBiologicalReaction extends GTQTRecipeMapMultiblockCon
         });
         this.recipeMapWorkable = new BiologicalReactionLogic(this);
     }
+    @Override
+    public boolean canBeDistinct() {return true;}
     private int glass_tier;
     private int clean_tier;
     private int tubeTier;
@@ -84,10 +86,13 @@ public class MetaTileEntityBiologicalReaction extends GTQTRecipeMapMultiblockCon
     double rate=0;
     int updatetime=1;
     public boolean onScrewdriverClick(EntityPlayer playerIn, EnumHand hand, EnumFacing facing, CuboidRayTraceResult hitResult) {
-        if(updatetime<=19) updatetime++;
-        else updatetime=1;
-        playerIn.sendMessage(new TextComponentTranslation("输入频率：%s 次/tick",updatetime));
-        return true;
+        if(playerIn.isSneaking()) {
+            if (updatetime <= 19) updatetime++;
+            else updatetime = 1;
+            playerIn.sendMessage(new TextComponentTranslation("输入频率：%s 次/tick", updatetime));
+            return true;
+        }
+        return super.onScrewdriverClick(playerIn, hand, facing, hitResult);
     }
     @Override
     public int getNumProgressBars() {
@@ -256,7 +261,8 @@ public class MetaTileEntityBiologicalReaction extends GTQTRecipeMapMultiblockCon
         public void update() {
             IMultipleTankHandler inputTank = getInputFluidInventory();
 
-            for(int time=0;time<updatetime;time++) if(bio<2000)
+            for(int time=0;time<updatetime;time++)
+                if(bio<2000)
                 {
                 if (BIO1.isFluidStackIdentical(inputTank.drain(BIO1, false))) {
                     inputTank.drain(BIO1, true);

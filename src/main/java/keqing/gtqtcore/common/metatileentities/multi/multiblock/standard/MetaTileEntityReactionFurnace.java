@@ -37,7 +37,8 @@ public class MetaTileEntityReactionFurnace extends RecipeMapMultiblockController
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {
         return new MetaTileEntityReactionFurnace(metaTileEntityId);
     }
-
+    @Override
+    public boolean canBeDistinct() {return true;}
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()

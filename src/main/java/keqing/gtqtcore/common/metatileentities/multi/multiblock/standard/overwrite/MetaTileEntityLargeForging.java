@@ -47,7 +47,8 @@ public class MetaTileEntityLargeForging extends GTQTRecipeMapMultiblockOverwrite
         super(metaTileEntityId, RecipeMaps.FORGE_HAMMER_RECIPES);
         this.recipeMapWorkable = new LargeChemicalReactorLogic(this);
     }
-
+    @Override
+    public boolean canBeDistinct() {return true;}
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityLargeForging(metaTileEntityId);

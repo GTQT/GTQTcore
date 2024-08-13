@@ -45,6 +45,8 @@ public class MetaTileEntityDissolutionTank extends GTQTRecipeMapMultiblockOverwr
         super(metaTileEntityId, GTQTcoreRecipeMaps.DISSOLUTION_TANK_RECIPES);
         this.recipeMapWorkable = new DissolutionTankWorkableHandler(this);
     }
+    @Override
+    public boolean canBeDistinct() {return true;}
     private int glass_tier;
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {

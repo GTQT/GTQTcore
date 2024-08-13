@@ -440,7 +440,7 @@ public class MachineCasing {
                 .input(gear,Steel, 1)
                 .input(frameGt,Steel, 1)
                 .fluidInputs(Polyethylene.getFluid(576))
-                .circuitMeta(6)
+                .circuitMeta(10)
                 .outputs(GTQTMetaBlocks.TURBINE_CASING1.getItemVariant(CLARIFIER_CASING,4))
                 .buildAndRegister();
 
@@ -449,7 +449,7 @@ public class MachineCasing {
                 .input(gear,TungstenSteel, 1)
                 .input(frameGt,NanometerBariumTitanate, 1)
                 .fluidInputs(Zylon.getFluid(576))
-                .circuitMeta(6)
+                .circuitMeta(10)
                 .outputs(GTQTMetaBlocks.TURBINE_CASING1.getItemVariant(FLOATING_CASING,4))
                 .buildAndRegister();
 

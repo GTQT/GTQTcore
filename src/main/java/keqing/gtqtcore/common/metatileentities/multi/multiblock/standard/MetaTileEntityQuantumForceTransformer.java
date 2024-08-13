@@ -83,7 +83,8 @@ public class MetaTileEntityQuantumForceTransformer extends RecipeMapMultiblockCo
         super(metaTileEntityId, GTQTcoreRecipeMaps.QUANTUM_FORCE_TRANSFORMER_RECIPES);
         this.recipeMapWorkable = new MetaTileEntityQuantumForceTransformerHandler(this);
     }
-
+    @Override
+    public boolean canBeDistinct() {return true;}
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {
         return new MetaTileEntityQuantumForceTransformer(metaTileEntityId);

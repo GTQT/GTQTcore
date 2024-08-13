@@ -61,7 +61,8 @@ public class MetaTileEntityLargeThermalCentrifuge extends GTQTRecipeMapMultibloc
         });
         this.recipeMapWorkable = new LargeChemicalReactorLogic(this);
     }
-
+    @Override
+    public boolean canBeDistinct() {return true;}
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityLargeThermalCentrifuge(metaTileEntityId);

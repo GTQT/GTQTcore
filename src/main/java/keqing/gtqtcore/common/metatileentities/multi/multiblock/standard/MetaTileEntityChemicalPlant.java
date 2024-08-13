@@ -51,7 +51,8 @@ public class MetaTileEntityChemicalPlant extends GTQTRecipeMapMultiblockOverwrit
     private int voltageTier;
     private int tier;
 
-
+    @Override
+    public boolean canBeDistinct() {return true;}
     public MetaTileEntityChemicalPlant(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.CHEMICAL_PLANT);
         this.recipeMapWorkable = new ChemicalPlantLogic(this);

@@ -230,7 +230,8 @@ public class MetaTileEntityLargeOreWasher extends GTQTRecipeMapMultiblockControl
         super.receiveInitialSyncData(buf);
         this.casingTier = buf.readInt();
     }
-
+    @Override
+    public boolean canBeDistinct() {return true;}
     @Override
     public void receiveCustomData(int dataId, PacketBuffer buf) {
         super.receiveCustomData(dataId, buf);

@@ -49,7 +49,8 @@ public class MetaTileEntityLargeGrind extends GTQTRecipeMapMultiblockOverwrite {
         super(metaTileEntityId, RecipeMaps.MACERATOR_RECIPES);
         this.recipeMapWorkable = new LargeChemicalReactorLogic(this);
     }
-
+    @Override
+    public boolean canBeDistinct() {return true;}
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityLargeGrind(metaTileEntityId);

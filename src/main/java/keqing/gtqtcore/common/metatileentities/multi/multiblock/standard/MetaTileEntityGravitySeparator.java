@@ -62,15 +62,17 @@ public class MetaTileEntityGravitySeparator extends GTQTRecipeMapMultiblockContr
         });
         this.recipeMapWorkable = new GravitySeparatorLogic(this);
     }
+    @Override
+    public boolean canBeDistinct() {return true;}
     int updatetime=1;
-    boolean work=true;
     public boolean onScrewdriverClick(EntityPlayer playerIn, EnumHand hand, EnumFacing facing, CuboidRayTraceResult hitResult) {
-        work=!work;
-        if(!work)return true;
-        if(updatetime<=19) updatetime++;
-        else updatetime=1;
-        playerIn.sendMessage(new TextComponentTranslation("输入效率：%s tick",updatetime));
-        return true;
+        if(playerIn.isSneaking()) {
+            if (updatetime <= 19) updatetime++;
+            else updatetime = 1;
+            playerIn.sendMessage(new TextComponentTranslation("输入效率：%s tick", updatetime));
+            return true;
+        }
+        return super.onScrewdriverClick(playerIn, hand, facing, hitResult);
     }
     private class GravitySeparatorLogic extends MultiblockRecipeLogic {
         private boolean isCommonMode() {

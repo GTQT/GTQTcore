@@ -36,7 +36,8 @@ public class MetaTileEntityELEOil extends RecipeMapMultiblockController {
         super(metaTileEntityId, GTQTcoreRecipeMaps.ELEOIL);
         this.recipeMapWorkable = new ELEOilLogic(this);
     }
-
+    @Override
+    public boolean canBeDistinct() {return true;}
     protected static class ELEOilLogic extends MultiblockRecipeLogic {
 
         public ELEOilLogic(RecipeMapMultiblockController tileEntity) {

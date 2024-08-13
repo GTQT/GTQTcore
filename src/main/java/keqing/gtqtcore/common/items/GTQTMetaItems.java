@@ -163,11 +163,27 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem GOLD_CROP;
     public static MetaItem<?>.MetaValueItem PROSPECTOR_UV;
     public static MetaItem<?>.MetaValueItem COSMIC_CAPACITOR;
-
     public static MetaItem<?>.MetaValueItem COSMIC_DIODE;
     public static MetaItem<?>.MetaValueItem COSMIC_RESISTOR;
     public static MetaItem<?>.MetaValueItem COSMIC_TRANSISTOR;
     public static MetaItem<?>.MetaValueItem COSMIC_INDUCTOR;
+
+    //  High Energy Physics items
+    public static MetaItem<?>.MetaValueItem HYPOGEN_PLASMA_CONTAINMENT_CELL;
+    public static MetaItem<?>.MetaValueItem ACTINIUM_SUPERHYDRIDE_PLASMA_CONTAINMENT_CELL;
+    public static MetaItem<?>.MetaValueItem QUANTUM_ANOMALY;
+    public static MetaItem<?>.MetaValueItem PLASMA_CONTAINMENT_CELL;
+    public static MetaItem<?>.MetaValueItem RHENIUM_PLASMA_CONTAINMENT_CELL;
+    public static MetaItem<?>.MetaValueItem NEUTRON_PLASMA_CONTAINMENT_CELL;
+    public static MetaItem<?>.MetaValueItem EXTREMELY_DURABLE_PLASMA_CONTAINMENT_CELL;
+    public static MetaItem<?>.MetaValueItem DENSE_NEUTRON_PLASMA_CONTAINMENT_CELL;
+    public static MetaItem<?>.MetaValueItem COSMIC_NEUTRON_PLASMA_CONTAINMENT_CELL;
+    public static MetaItem<?>.MetaValueItem TIME_DILATION_CONTAINMENT_UNIT;
+    public static MetaItem<?>.MetaValueItem CONTAINED_RN_SINGULARITY;
+    public static MetaItem<?>.MetaValueItem CONTAINED_KN_SINGULARITY;
+    public static MetaItem<?>.MetaValueItem CONTAINED_KERR_SINGULARITY;
+    public static MetaItem<?>.MetaValueItem CONTAINED_HIGH_DENSITY_PROTONIC_MATTER;
+    public static MetaItem<?>.MetaValueItem CONTAINED_EXOTIC_MATTER;
 
     public static MetaItem<?>.MetaValueItem SUN_MATTER;
     public static MetaItem<?>.MetaValueItem SUNLINSE;
@@ -372,13 +388,6 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem NANO_POWER_IC;
     public static MetaItem<?>.MetaValueItem PICO_POWER_IC;
     public static MetaItem<?>.MetaValueItem FEMTO_POWER_IC;
-    //  High Energy Physics items
-    public static MetaItem<?>.MetaValueItem PLASMA_CONTAINMENT_CELL;
-    public static MetaItem<?>.MetaValueItem RHENIUM_PLASMA_CONTAINMENT_CELL;
-    public static MetaItem<?>.MetaValueItem NEUTRON_PLASMA_CONTAINMENT_CELL;
-    public static MetaItem<?>.MetaValueItem HYPOGEN_PLASMA_CONTAINMENT_CELL;
-    public static MetaItem<?>.MetaValueItem ACTINIUM_SUPERHYDRIDE_PLASMA_CONTAINMENT_CELL;
-    public static MetaItem<?>.MetaValueItem QUANTUM_ANOMALY;
 
     public static MetaItem<?>.MetaValueItem DRAGON_CELL;
     public static MetaItem<?>.MetaValueItem PRE_DRAGON_CELL;

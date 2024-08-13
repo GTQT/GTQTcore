@@ -38,6 +38,8 @@ public class MetaTileEntityDistillationKettle extends RecipeMapMultiblockControl
         super(metaTileEntityId, GTQTcoreRecipeMaps.DISTILLATION_KETTLE);
         this.recipeMapWorkable = new MFSWorkableHandler(this);
     }
+    @Override
+    public boolean canBeDistinct() {return true;}
     int steam;
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {

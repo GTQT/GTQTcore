@@ -48,7 +48,8 @@ public class MetaTileEntityFermentationTank extends RecipeMapMultiblockControlle
         super(metaTileEntityId, GTQTcoreRecipeMaps.FERMENTATION_TANK_RECIPES);
         this.recipeMapWorkable = new PHRecipeLogic(this);
     }
-
+    @Override
+    public boolean canBeDistinct() {return true;}
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity metaTileEntityHolder) {
         return new MetaTileEntityFermentationTank(metaTileEntityId);

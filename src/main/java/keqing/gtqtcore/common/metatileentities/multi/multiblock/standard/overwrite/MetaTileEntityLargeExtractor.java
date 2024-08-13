@@ -173,7 +173,7 @@ public class MetaTileEntityLargeExtractor extends GTQTRecipeMapMultiblockOverwri
                 0);
         this.tier = Math.min(this.casingTier,this.tubeTier);
 
-        this.writeCustomData(GTQTValue.UPDATE_TIER19,buf -> buf.writeInt(this.casingTier));
+        this.writeCustomData(GTQTValue.UPDATE_TIER25,buf -> buf.writeInt(this.casingTier));
         ParallelLim=Math.min((int)Math.pow(2, this.tier),128);
         ParallelNum=ParallelLim;
     }

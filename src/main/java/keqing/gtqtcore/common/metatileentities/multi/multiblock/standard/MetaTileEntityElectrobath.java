@@ -52,7 +52,8 @@ import static gregtech.api.unification.material.Materials.HydrochloricAcid;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.EleAcid;
 
 public class MetaTileEntityElectrobath extends GTQTRecipeMapMultiblockOverwrite {
-
+    @Override
+    public boolean canBeDistinct() {return true;}
     private int eleTier;
     private int casingTier;
     private int tubeTier;

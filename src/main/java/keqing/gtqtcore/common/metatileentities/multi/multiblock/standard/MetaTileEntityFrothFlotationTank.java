@@ -52,7 +52,8 @@ public class MetaTileEntityFrothFlotationTank extends RecipeMapMultiblockControl
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityFrothFlotationTank(this.metaTileEntityId);
     }
-
+    @Override
+    public boolean canBeDistinct() {return true;}
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
                 .aisle("   B   ", "   B   ", "   A   ", "       ", "       ")

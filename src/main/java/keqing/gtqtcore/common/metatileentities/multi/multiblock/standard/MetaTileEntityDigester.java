@@ -71,7 +71,8 @@ public class MetaTileEntityDigester extends GTQTRecipeMapMultiblockOverwrite {
         super.readFromNBT(data);
         modern = data.getInteger("modern");
     }
-
+    @Override
+    public boolean canBeDistinct() {return true;}
     @Override
     public void update() {
         super.update();

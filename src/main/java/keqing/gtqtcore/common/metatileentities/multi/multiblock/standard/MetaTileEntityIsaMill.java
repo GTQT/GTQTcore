@@ -47,7 +47,8 @@ public class MetaTileEntityIsaMill extends RecipeMapMultiblockController {
         super(metaTileEntityId, GTQTcoreRecipeMaps.ISA_MILL_GRINDER);
         this.recipeMapWorkable = new MetaTileEntityIsaMill.IsaMillLogic(this);
     }
-
+    @Override
+    public boolean canBeDistinct() {return true;}
     @Override
     public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);

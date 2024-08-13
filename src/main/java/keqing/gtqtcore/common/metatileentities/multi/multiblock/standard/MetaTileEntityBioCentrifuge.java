@@ -66,6 +66,8 @@ public class MetaTileEntityBioCentrifuge extends GTQTRecipeMapMultiblockControll
         });
         this.recipeMapWorkable = new BioCentrifugeWorkableHandler(this);
     }
+    @Override
+    public boolean canBeDistinct() {return true;}
     private class BioCentrifugeWorkableHandler extends MultiblockRecipeLogic {
 
         public BioCentrifugeWorkableHandler(RecipeMapMultiblockController tileEntity) {

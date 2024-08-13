@@ -78,10 +78,10 @@ public class KeQingNET {
                 .input(DISK_0)
                 .notConsumable(gem,Fluix)
                 .output(DISK_11)
-                .EUt(7680)
-                .CWUt(128)
+                .EUt(VA[HV])
+                .CWUt(CWT[HV])
+                .duration(20000)
                 .NB(11)
-                .totalCWU(100000)
                 .buildAndRegister();
 
         OreDictionary.registerOre("crystalFluix", OreDictUnifier.get(OrePrefix.gem, Fluix));
@@ -106,8 +106,8 @@ public class KeQingNET {
                 .output(DISK_14)
                 .EUt(VA[HV])
                 .CWUt(CWT[HV])
+                .duration(20000)
                 .NB(14)
-                .duration(2000)
                 .buildAndRegister();
 
         //
@@ -229,8 +229,8 @@ public class KeQingNET {
                 .output(DISK_15)
                 .EUt(VA[IV])
                 .CWUt(CWT[IV])
+                .duration(20000)
                 .NB(15)
-                .duration(2000)
                 .buildAndRegister();
 
         //多线程设备
@@ -1110,30 +1110,30 @@ public class KeQingNET {
                 .input(DISK_0)
                 .notConsumable(MetaTileEntities.COMBUSTION_GENERATOR[2].getStackForm())
                 .output(DISK_1)
-                .EUt(1920)
-                .CWUt(32)
+                .EUt(VA[EV])
+                .CWUt(CWT[EV])
+                .duration(20000)
                 .NB(1)
-                .totalCWU(100000)
                 .buildAndRegister();
 
         GTQTcoreRecipeMaps.KEQING_NET_RECIES.recipeBuilder()
                 .input(DISK_0)
                 .notConsumable(MetaTileEntities.GAS_TURBINE[2].getStackForm())
                 .output(DISK_1)
-                .EUt(7680)
-                .CWUt(32)
+                .EUt(VA[EV])
+                .CWUt(CWT[EV])
+                .duration(20000)
                 .NB(1)
-                .totalCWU(100000)
                 .buildAndRegister();
 
         GTQTcoreRecipeMaps.KEQING_NET_RECIES.recipeBuilder()
                 .input(DISK_0)
                 .notConsumable(MetaTileEntities.STEAM_TURBINE[2].getStackForm())
                 .output(DISK_1)
-                .EUt(7680)
-                .CWUt(32)
+                .EUt(VA[EV])
+                .CWUt(CWT[EV])
+                .duration(20000)
                 .NB(1)
-                .totalCWU(100000)
                 .buildAndRegister();
         //
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
@@ -1239,30 +1239,30 @@ public class KeQingNET {
                 .input(DISK_0)
                 .notConsumable(COMBUSTION_GENERATOR[1].getStackForm())
                 .output(DISK_2)
-                .EUt(7680)
-                .CWUt(96)
+                .EUt(VA[IV])
+                .CWUt(CWT[IV])
+                .duration(20000)
                 .NB(2)
-                .totalCWU(100000)
                 .buildAndRegister();
 
         GTQTcoreRecipeMaps.KEQING_NET_RECIES.recipeBuilder()
                 .input(DISK_0)
                 .notConsumable(GAS_TURBINE[1].getStackForm())
                 .output(DISK_2)
-                .EUt(7680)
-                .CWUt(96)
+                .EUt(VA[IV])
+                .CWUt(CWT[IV])
+                .duration(20000)
                 .NB(2)
-                .totalCWU(100000)
                 .buildAndRegister();
 
         GTQTcoreRecipeMaps.KEQING_NET_RECIES.recipeBuilder()
                 .input(DISK_0)
                 .notConsumable(STEAM_TURBINE[1].getStackForm())
                 .output(DISK_2)
-                .EUt(7680)
-                .CWUt(96)
+                .EUt(VA[IV])
+                .CWUt(CWT[IV])
+                .duration(20000)
                 .NB(2)
-                .totalCWU(100000)
                 .buildAndRegister();
 
         //火箭
@@ -1356,10 +1356,10 @@ public class KeQingNET {
                 .input(DISK_0)
                 .notConsumable(ROCKET_ENGINE[2].getStackForm())
                 .output(DISK_3)
-                .EUt(7680)
-                .CWUt(1024)
+                .EUt(VA[IV])
+                .CWUt(CWT[IV])
+                .duration(20000)
                 .NB(3)
-                .totalCWU(100000)
                 .buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
@@ -1477,10 +1477,10 @@ public class KeQingNET {
                 .input(DISK_0)
                 .notConsumable(ROCKET_ENGINE[0].getStackForm())
                 .output(DISK_4)
-                .EUt(7680)
-                .CWUt(128)
+                .EUt(VA[EV])
+                .CWUt(CWT[EV])
+                .duration(20000)
                 .NB(4)
-                .totalCWU(100000)
                 .buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
@@ -1535,10 +1535,10 @@ public class KeQingNET {
                 .input(DISK_0)
                 .notConsumable(wireGtSingle,LuVSuperconductor)
                 .output(DISK_5)
-                .EUt(7680)
+                .EUt(VA[LuV])
                 .CWUt(CWT[LuV])
+                .duration(20000)
                 .NB(5)
-                .totalCWU(100000)
                 .buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
@@ -1588,12 +1588,12 @@ public class KeQingNET {
         //6 可控核聚变-环流器设计
         GTQTcoreRecipeMaps.KEQING_NET_RECIES.recipeBuilder()
                 .input(DISK_0)
-                .notConsumable(FUSION_REACTOR[0].getStackForm())
+                .notConsumable(PROTON)
                 .output(DISK_6)
-                .EUt(7680)
+                .EUt(VA[LuV])
                 .CWUt(CWT[LuV])
+                .duration(20000)
                 .NB(6)
-                .totalCWU(100000)
                 .buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
@@ -1742,10 +1742,10 @@ public class KeQingNET {
                 .input(DISK_0)
                 .notConsumable(MetaBlocks.FUSION_CASING.getItemVariant(BlockFusionCasing.CasingType.SUPERCONDUCTOR_COIL))
                 .output(DISK_7)
-                .EUt(7680)
+                .EUt(VA[LuV])
                 .CWUt(CWT[LuV])
+                .duration(20000)
                 .NB(7)
-                .totalCWU(100000)
                 .buildAndRegister();
 
         //线圈
@@ -1768,10 +1768,10 @@ public class KeQingNET {
                 .input(DISK_0)
                 .notConsumable(SENSOR_HV)
                 .output(DISK_8)
-                .EUt(480)
-                .CWUt(30)
+                .EUt(VA[MV])
+                .CWUt(CWT[MV])
+                .duration(20000)
                 .NB(8)
-                .totalCWU(100000)
                 .buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
@@ -1813,10 +1813,10 @@ public class KeQingNET {
                 .input(DISK_0)
                 .notConsumable(SENSOR_IV)
                 .output(DISK_9)
-                .EUt(7680)
-                .CWUt(256)
+                .EUt(VA[EV])
+                .CWUt(CWT[EV])
+                .duration(20000)
                 .NB(8)
-                .totalCWU(100000)
                 .buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
@@ -1952,10 +1952,10 @@ public class KeQingNET {
                 .input(DISK_0)
                 .notConsumable(SENSOR_ZPM)
                 .output(DISK_10)
-                .EUt(7680)
-                .CWUt(256)
+                .EUt(VA[HV])
+                .CWUt(CWT[HV])
+                .duration(20000)
                 .NB(8)
-                .totalCWU(100000)
                 .buildAndRegister();
     }
 

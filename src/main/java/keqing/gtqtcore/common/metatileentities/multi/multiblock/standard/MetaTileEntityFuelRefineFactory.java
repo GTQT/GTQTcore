@@ -42,6 +42,8 @@ public class MetaTileEntityFuelRefineFactory extends RecipeMapMultiblockControll
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {
         return new MetaTileEntityFuelRefineFactory(metaTileEntityId);
     }
+    @Override
+    public boolean canBeDistinct() {return true;}
     @Nonnull
     @Override
     protected BlockPattern createStructurePattern() {

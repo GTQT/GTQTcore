@@ -52,6 +52,7 @@ public class MetaTileEntityFixBed extends RecipeMapMultiblockController implemen
         super(metaTileEntityId, GTQTcoreRecipeMaps.FIX_BED);
         this.recipeMapWorkable = new FixBedLogic(this);
     }
+
     int updatetime=1;
     boolean work=true;
     public boolean onScrewdriverClick(EntityPlayer playerIn, EnumHand hand, EnumFacing facing, CuboidRayTraceResult hitResult) {

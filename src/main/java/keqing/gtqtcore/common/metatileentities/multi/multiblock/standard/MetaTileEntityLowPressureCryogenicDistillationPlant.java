@@ -54,7 +54,8 @@ public class MetaTileEntityLowPressureCryogenicDistillationPlant extends RecipeM
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityLowPressureCryogenicDistillationPlant(metaTileEntityId);
     }
-
+    @Override
+    public boolean canBeDistinct() {return true;}
     @Override
     protected Function<BlockPos, Integer> multiblockPartSorter() {
         return RelativeDirection.UP.getSorter(getFrontFacing(), getUpwardsFacing(), isFlipped());

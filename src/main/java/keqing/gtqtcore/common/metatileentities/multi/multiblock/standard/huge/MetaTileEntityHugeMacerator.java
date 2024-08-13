@@ -177,6 +177,7 @@ public class MetaTileEntityHugeMacerator extends RecipeMapMultiblockController {
 
         protected void updateRecipeProgress() {
             if (canRecipeProgress && drawEnergy(recipeEUt, true)) {
+                drawEnergy(recipeEUt, false);
                 IMultipleTankHandler inputTank = combustionEngine.getInputFluidInventory();
                 if (LUBRICANT_STACK.isFluidStackIdentical(inputTank.drain(LUBRICANT_STACK, false))) {
                     inputTank.drain(LUBRICANT_STACK, true);

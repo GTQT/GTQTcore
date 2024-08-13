@@ -60,7 +60,8 @@ public class MetaTileEntityGantryCrane extends RecipeMapMultiblockController imp
         playerIn.sendMessage(new TextComponentTranslation("输入效率：%s tick",updatetime));
         return true;
     }
-
+    @Override
+    public boolean canBeDistinct() {return true;}
     private class MFSWorkableHandler extends MultiblockRecipeLogic {
 
         public MFSWorkableHandler(RecipeMapMultiblockController tileEntity) {

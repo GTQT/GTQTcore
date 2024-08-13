@@ -78,7 +78,8 @@ import static gregtech.api.GTValues.*;
 import static gregtech.api.GTValues.UEV;
 
 public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockController {
-
+    @Override
+    public boolean canBeDistinct() {return true;}
     //  Tier of CFR (Compressed Fusion Reactor), used to add more CFRs by one class,
     //  we use {@link #LuV} to {@link #UEV} for Mark 1 to Mark 5.
     private final int tier;

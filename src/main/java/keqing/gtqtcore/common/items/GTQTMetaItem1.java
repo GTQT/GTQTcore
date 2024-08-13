@@ -670,26 +670,19 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         // Process-Specific Components: ID 500-999
         MAGNETRON = this.addItem(951, "magnetron").setCreativeTabs(CommonProxy.GTQTCore_TAB);
 
-        //  High Energy Physics items
-        PLASMA_CONTAINMENT_CELL = this.addItem(1000, "plasma_containment_cell").setCreativeTabs(CommonProxy.GTQTCore_HP);
-        RHENIUM_PLASMA_CONTAINMENT_CELL = this.addItem(1001, "rhenium_plasma_containment_cell").setCreativeTabs(CommonProxy.GTQTCore_HP);
-        NEUTRON_PLASMA_CONTAINMENT_CELL = this.addItem(1002, "neutron_plasma_containment_cell").setCreativeTabs(CommonProxy.GTQTCore_HP);
-        HYPOGEN_PLASMA_CONTAINMENT_CELL = this.addItem(1003, "hypogen_plasma_containment_cell").setCreativeTabs(CommonProxy.GTQTCore_HP);
-        ACTINIUM_SUPERHYDRIDE_PLASMA_CONTAINMENT_CELL = this.addItem(1004, "actinium_superhydride_plasma_containment_cell").setCreativeTabs(CommonProxy.GTQTCore_HP);
-        QUANTUM_ANOMALY = this.addItem(1005, "quantum_anomaly").setCreativeTabs(CommonProxy.GTQTCore_HP);
 
         //  Biological Components
-        ELECTROCHEMICAL_GRADIENT_RECORDER = this.addItem(1006, "biological.components.electrochemical_gradient_recorder").setCreativeTabs(CommonProxy.GTQTCore_BIO);
-        ULTRA_MICRO_PHASE_SEPARATOR = this.addItem(1007, "biological.components.ultra_micro_phase_separator").setCreativeTabs(CommonProxy.GTQTCore_BIO);
-        QUANTUM_TUNNELING_MICROTUBULE = this.addItem(1008, "biological.components.quantum_tunneling_microtubule").setCreativeTabs(CommonProxy.GTQTCore_BIO);
-        HYPERRIBOSOME = this.addItem(1009, "biological.components.hyperribosome").setCreativeTabs(CommonProxy.GTQTCore_BIO);
-        NEUTRON_ABSORBING_PROTEIN = this.addItem(1010, "biological.components.neutron_absorbing_protein").setCreativeTabs(CommonProxy.GTQTCore_BIO);
-        SUPEREXCITED_CONDUCTIVE_POLYMER = this.addItem(1011, "biological.components.superexcited_conductive_polymer").setCreativeTabs(CommonProxy.GTQTCore_BIO);
-        DNA_ENCODER = this.addItem(1012, "biological.components.dna_encoder").setCreativeTabs(CommonProxy.GTQTCore_BIO);
-        DNA_DECODER = this.addItem(1013, "biological.components.dna_decoder").setCreativeTabs(CommonProxy.GTQTCore_BIO);
-        DNA_DECODE_ENCODER = this.addItem(1014, "biological.components.dna_decode_encoder").setCreativeTabs(CommonProxy.GTQTCore_BIO);
-        DRAGON_CELL = this.addItem(1015, "dragon_cell").setCreativeTabs(CommonProxy.GTQTCore_BIO);
-        PRE_DRAGON_CELL = this.addItem(1016, "pre_dragon_cell").setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        ELECTROCHEMICAL_GRADIENT_RECORDER = this.addItem(1000, "biological.components.electrochemical_gradient_recorder").setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        ULTRA_MICRO_PHASE_SEPARATOR = this.addItem(1001, "biological.components.ultra_micro_phase_separator").setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        QUANTUM_TUNNELING_MICROTUBULE = this.addItem(1002, "biological.components.quantum_tunneling_microtubule").setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        HYPERRIBOSOME = this.addItem(1003, "biological.components.hyperribosome").setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        NEUTRON_ABSORBING_PROTEIN = this.addItem(1004, "biological.components.neutron_absorbing_protein").setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        SUPEREXCITED_CONDUCTIVE_POLYMER = this.addItem(1005, "biological.components.superexcited_conductive_polymer").setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        DNA_ENCODER = this.addItem(1006, "biological.components.dna_encoder").setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        DNA_DECODER = this.addItem(1007, "biological.components.dna_decoder").setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        DNA_DECODE_ENCODER = this.addItem(1008, "biological.components.dna_decode_encoder").setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        DRAGON_CELL = this.addItem(1009, "dragon_cell").setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        PRE_DRAGON_CELL = this.addItem(1010, "pre_dragon_cell").setCreativeTabs(CommonProxy.GTQTCore_BIO);
 
         
         //蓝图
@@ -777,6 +770,23 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         W_MINUS_BOSON=this.addItem(2563, "w_minus_boson").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
         W_PLUS_BOSON=this.addItem(2564, "w_plus_boson").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
         Z_BOSON=this.addItem(2565, "z_boson").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        //  High Energy Physics items
+        QUANTUM_ANOMALY = this.addItem(2600, "quantum_anomaly").setCreativeTabs(CommonProxy.GTQTCore_HP);
+        PLASMA_CONTAINMENT_CELL = this.addItem(2601, "plasma_containment_cell").setCreativeTabs(CommonProxy.GTQTCore_HP);
+        RHENIUM_PLASMA_CONTAINMENT_CELL = this.addItem(2602, "rhenium_plasma_containment_cell").setCreativeTabs(CommonProxy.GTQTCore_HP);
+        NEUTRON_PLASMA_CONTAINMENT_CELL = this.addItem(2603, "neutron_plasma_containment_cell").setCreativeTabs(CommonProxy.GTQTCore_HP);
+        HYPOGEN_PLASMA_CONTAINMENT_CELL = this.addItem(2604, "hypogen_plasma_containment_cell").setCreativeTabs(CommonProxy.GTQTCore_HP);
+        ACTINIUM_SUPERHYDRIDE_PLASMA_CONTAINMENT_CELL = this.addItem(2605, "actinium_superhydride_plasma_containment_cell").setCreativeTabs(CommonProxy.GTQTCore_HP);
+        EXTREMELY_DURABLE_PLASMA_CONTAINMENT_CELL = this.addItem(2606, "extremely_durable_plasma_containment_cell").setCreativeTabs(CommonProxy.GTQTCore_HP);
+        DENSE_NEUTRON_PLASMA_CONTAINMENT_CELL = this.addItem(2607, "dense_neutron_plasma_containment_cell").setCreativeTabs(CommonProxy.GTQTCore_HP);
+        COSMIC_NEUTRON_PLASMA_CONTAINMENT_CELL = this.addItem(2608, "cosmic_neutron_plasma_containment_cell").setCreativeTabs(CommonProxy.GTQTCore_HP);
+        TIME_DILATION_CONTAINMENT_UNIT = this.addItem(2609, "time_dilation_containment_unit").setCreativeTabs(CommonProxy.GTQTCore_HP);
+        CONTAINED_RN_SINGULARITY = this.addItem(2610, "contained_reissner_nordstrom_singularity").setCreativeTabs(CommonProxy.GTQTCore_HP);
+        CONTAINED_KN_SINGULARITY = this.addItem(2611, "contained_kerr_newmann_singularity").setCreativeTabs(CommonProxy.GTQTCore_HP);
+        CONTAINED_KERR_SINGULARITY = this.addItem(2612, "contained_kerr_singularity").setCreativeTabs(CommonProxy.GTQTCore_HP);
+        CONTAINED_HIGH_DENSITY_PROTONIC_MATTER = this.addItem(2613, "contained_high_density_protonic_matter").setCreativeTabs(CommonProxy.GTQTCore_HP);
+        CONTAINED_EXOTIC_MATTER = this.addItem(2614, "contained_exotic_matter").setCreativeTabs(CommonProxy.GTQTCore_HP);
 
         //科研
         ARROW_UP_MKI = this.addItem(3000, "arrow_up_mki").setCreativeTabs(CommonProxy.GTQTCore_DISK);

@@ -57,7 +57,8 @@ public class MetaTileEntityCryogenicFreezer extends RecipeMapMultiblockControlle
         super(metaTileEntityId, RecipeMaps.VACUUM_RECIPES);
         this.recipeMapWorkable = new CryogenicFreezerRecipeLogic(this);
     }
-
+    @Override
+    public boolean canBeDistinct() {return true;}
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityCryogenicFreezer(metaTileEntityId);
@@ -271,6 +272,7 @@ public class MetaTileEntityCryogenicFreezer extends RecipeMapMultiblockControlle
         @Override
         protected void updateRecipeProgress() {
             if (canRecipeProgress && drawEnergy(recipeEUt/16, true)) {
+                drawEnergy(recipeEUt/16, false);
                 IMultipleTankHandler inputTank = freezer.getInputFluidInventory();
                 if (GELID_STACK.isFluidStackIdentical(inputTank.drain(GELID_STACK, false))) {
                     inputTank.drain(GELID_STACK, true);

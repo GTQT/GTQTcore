@@ -73,6 +73,7 @@ public class MetaTileEntityBlazingCZPuller extends GTQTRecipeMapMultiblockOverwr
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity metaTileEntityHolder) {
         return new MetaTileEntityBlazingCZPuller(this.metaTileEntityId);
     }
+
     int ParallelNum=1;
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
@@ -271,7 +272,9 @@ public class MetaTileEntityBlazingCZPuller extends GTQTRecipeMapMultiblockOverwr
         }
         protected void updateRecipeProgress() {
             IMultipleTankHandler inputTank = combustionEngine.getInputFluidInventory();
-            if (canRecipeProgress && drawEnergy((int) (recipeEUt*getDiscount()), false)&&LUBRICANT_STACK.isFluidStackIdentical(inputTank.drain(LUBRICANT_STACK, true))) {
+            if (canRecipeProgress && drawEnergy((int) (recipeEUt*getDiscount()), true)&&LUBRICANT_STACK.isFluidStackIdentical(inputTank.drain(LUBRICANT_STACK, false))) {
+                drawEnergy((int) (recipeEUt*getDiscount()), false);
+                LUBRICANT_STACK.isFluidStackIdentical(inputTank.drain(LUBRICANT_STACK, true));
                 if (++progressTime > maxProgressTime) {
                     completeRecipe();
                 }

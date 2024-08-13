@@ -55,6 +55,8 @@ public class MetaTileEntityAdvancedArcFurnace extends GTQTRecipeMapMultiblockCon
         });
         this.recipeMapWorkable = new AdvancedArcFurnaceWorkableHandler(this);
     }
+    @Override
+    public boolean canBeDistinct() {return true;}
     private class AdvancedArcFurnaceWorkableHandler extends MultiblockRecipeLogic {
         @Override
         public int getParallelLimit() {

@@ -284,7 +284,9 @@ public class MetaTileEntityBlazingBlastFurnace extends GTQTRecipeMapMultiblockCo
         }
         protected void updateRecipeProgress() {
             IMultipleTankHandler inputTank = combustionEngine.getInputFluidInventory();
-            if (canRecipeProgress && drawEnergy((int) (recipeEUt*getDiscount()), false)&&LUBRICANT_STACK.isFluidStackIdentical(inputTank.drain(LUBRICANT_STACK, true))) {
+            if (canRecipeProgress && drawEnergy((int) (recipeEUt*getDiscount()), true)&&LUBRICANT_STACK.isFluidStackIdentical(inputTank.drain(LUBRICANT_STACK, false))) {
+                drawEnergy((int) (recipeEUt*getDiscount()), false);
+                LUBRICANT_STACK.isFluidStackIdentical(inputTank.drain(LUBRICANT_STACK, true));
                 if (++progressTime > maxProgressTime) {
                     completeRecipe();
                 }

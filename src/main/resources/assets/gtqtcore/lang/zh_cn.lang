@@ -290,7 +290,32 @@ metaitem.crystal.sapphire_modulator.tooltip=转换处理电路
 metaitem.crystal.system_on_chip_socket.name=晶体SoC插槽
 metaitem.crystal.system_on_chip_socket.tooltip=桥接晶体和电路
 
-#  High Energy Physics items
+##  High Energy Physics Items
+metaitem.extremely_durable_plasma_containment_cell.name=超高耐久等离子体遏制装置
+metaitem.extremely_durable_plasma_containment_cell.tooltip=用于封装等离子体
+metaitem.dense_neutron_plasma_containment_cell.name=致密中子等离子体遏制装置
+metaitem.dense_neutron_plasma_containment_cell.tooltip=意外的泄露事故或可导致星球毁灭
+metaitem.cosmic_neutron_plasma_containment_cell.name=寰宇中子等离子体遏制装置
+metaitem.cosmic_neutron_plasma_containment_cell.tooltip=意外的泄露事故或可导致宇宙毁灭
+metaitem.time_dilation_containment_unit.name=时间膨胀遏制装置
+metaitem.time_dilation_containment_unit.tooltip=用于封装各类奇异物质
+metaitem.contained_reissner_nordstrom_singularity.name=莱斯纳-诺斯特朗黑洞奇点遏制装置
+metaitem.contained_reissner_nordstrom_singularity.tooltip=意外的泄露事故或可导致时空扭曲
+metaitem.contained_kerr_newmann_singularity.name=克尔-纽曼黑洞奇点遏制装置
+metaitem.contained_kerr_newmann_singularity.tooltip=意外的泄露事故或可导致时空扭曲
+metaitem.contained_kerr_singularity.name=克尔黑洞奇点遏制装置
+metaitem.contained_kerr_singularity.tooltip=意外的泄露事故或可导致时空扭曲
+metaitem.contained_high_density_protonic_matter.name=高密度质子物质遏制装置
+metaitem.contained_high_density_protonic_matter.tooltip=意外的泄露事故或可导致时空扭曲
+metaitem.contained_exotic_matter.name=奇异物质遏制装置
+metaitem.contained_exotic_matter.tooltip=意外的泄露事故或可导致时空扭曲
+metaitem.charged_triplet_neutronium_sphere.name=带电三重态中子素球体
+metaitem.charged_triplet_neutronium_sphere.tooltip=活体中子星
+metaitem.cosmic_fabric_plasma_containment_cell.name=寰宇织网等离子体遏制装置
+metaitem.cosmic_fabric_plasma_containment_cell.tooltip.1=一些凡夫俗子曾试图制成过此物，然而它们根本无法理解其中真髓。
+metaitem.cosmic_fabric_plasma_containment_cell.tooltip.2=它们将制成的只有此物的1%%效能的劣质造物称为“二向箔”，多么可笑。
+metaitem.cosmic_fabric_plasma_containment_cell.tooltip.3=真正的寰宇织网如今不过唾手可得之物。
+metaitem.cosmic_fabric_plasma_containment_cell.tooltip.4=使用§6等离子冷凝器§7进行冷却
 metaitem.plasma_containment_cell.name=等离子体遏制装置
 metaitem.plasma_containment_cell.tooltip=用于封装等离子体
 metaitem.rhenium_plasma_containment_cell.name=铼等离子遏制装置
@@ -2294,12 +2319,13 @@ gtqtcore.machine.pcb.tooltip.3=建造 超净循环过滤器 来提升机器工�
 gtqtcore.machine.pcb.tooltip.4=建造 高频散热模块 来控制多方块温度，消耗冷却液来降低多方块温度。
 gtqtcore.machine.pcb.tooltip.5=多方块工作时会持续升温，当温度大于阈值时会停止工作。如果没有建造 高频散热模块 模块，那么多方块只会在待机时降温，多方块温度处于不同区间时拥有不同的并行数量。
 gtqtcore.multiblock.pcb1.amount=冷却效率：%s(上限 %s )温度：%sK(上限 %s K)
+
 gregtech.machine.biorea.gtqtupdate.1=升级 过滤器 玻璃 管道等级获得性能提升
 gregtech.machine.biorea.gtqtupdate.2=使用多方块需要往其中注入（RawGrowthMedium EnrichedBacterialSludge  FermentedBiomass Biomass）以及水提供多方块基本水量以及反应底液浓度
 gregtech.machine.biorea.gtqtupdate.3=不同配方需求不同反应浓度（配方标注的为浓度下限），浓度越高多方块提升倍率越高
 gregtech.machine.biorea.gtqtupdate.4=可享受耗时减免 并行加成等提升，工作完毕后会消耗一部分反应底液，请注意补充
 
-gregtech.machine.bioreb.gtqtupdate.2=使用五种基本菌群进行线性组合，不支持倍数组合，查询JEI获取目标菌群所需要的酸碱度以及性状因子，当GUI显示找到配方时点击开始加工按钮，加工完毕后原始菌群参数全部清零
+gregtech.machine.bioreb.gtqtupdate.2=使用五种基本菌群进行线性组合，不支持倍数组合，查询JEI获取目标菌群所需要的酸碱度以及性状因子，当GUI显示找到配方时点击开始加工按钮，加工完毕后原始菌群参数全部清零.
 gregtech.machine.bioreb.gtqtupdate.3=提供富集生物培养基提升多方块并行数量（并行不额外消耗原始菌群）
 gregtech.machine.bioreb.gtqtupdate.4=提供水默认PH7 盐酸PH4 氢氧化钠PH10，暂不支持其他材料。
 
@@ -4141,10 +4167,10 @@ tile.turbine_casing.iridium_casing.name=铱强化合金外壳
 tile.turbine_casing.advanced_filter_casing.name=高级过滤器外壳
 tile.turbine_casing.polybenzimidazole_pipe.name=爆破聚能管
 tile.turbine_casing.talonite_casing.name=钴合金外壳
-tile.turbine_casing.pd_machine_casing.name=镀铑钯机械外壳
-tile.turbine_casing.pd_turbine_casing.name=镀铑钯管道外壳
-tile.turbine_casing.nq_machine_casing.name=硅岩合金机械外壳
-tile.turbine_casing.nq_turbine_casing.name=硅岩合计管道外壳
+tile.turbine_casing.pd_machine_casing.name=镀铑钯管道外壳
+tile.turbine_casing.pd_turbine_casing.name=镀铑钯机械外壳
+tile.turbine_casing.nq_machine_casing.name=硅岩合金管道外壳
+tile.turbine_casing.nq_turbine_casing.name=硅岩合金机械外壳
 tile.turbine_casing.fishing_casing.name=渔场外壳
 
 tile.nuclear_fusion.nuclear_fusion_casing.name=核裂变压力容器

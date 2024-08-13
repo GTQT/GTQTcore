@@ -53,7 +53,8 @@ public class MetaTileEntityComponentAssemblyLine extends RecipeMapMultiblockCont
     public MetaTileEntityComponentAssemblyLine(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.COMPONENT_ASSEMBLY_LINE_RECIPES);
     }
-
+    @Override
+    public boolean canBeDistinct() {return true;}
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {
         return new MetaTileEntityComponentAssemblyLine(metaTileEntityId);

@@ -57,6 +57,7 @@ public class MetaTileEntityFluidizedBed extends RecipeMapMultiblockController im
         super(metaTileEntityId, GTQTcoreRecipeMaps.FLUIDIZED_BED);
         this.recipeMapWorkable = new FluidizedBedWorkableHandler(this);
     }
+
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("temp", temp);

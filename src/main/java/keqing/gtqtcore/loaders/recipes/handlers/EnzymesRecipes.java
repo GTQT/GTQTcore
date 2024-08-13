@@ -148,6 +148,8 @@ public class EnzymesRecipes {
         Ethanesulphonate();
         //原始离心
         BioCentrifuge();
+        //富集培养基
+
     }
 
     private static void BioCentrifuge() {
