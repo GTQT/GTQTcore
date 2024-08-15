@@ -41,6 +41,7 @@ public class GTQTRecipesManager {
         GTQTOreRecipeHandler.init();
         StrontiumRadiumChain.init();
         AlgaeChain.init();
+        AcidReactor.init();
         PPBChain.init();
         BioReactor.init();
         AirDistillation.init();

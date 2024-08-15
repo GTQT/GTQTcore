@@ -2576,14 +2576,14 @@ public class FirstDegreeMaterials {
                 .color(0x218868)
                 .iconSet(SHINY)
                 .build()
-                .setFormula("NbCl₄", true);
+                .setFormula("F7NbCl4", true);
         //七氟铌酸钾
         GTQTMaterials.Taclb = new Material.Builder(getMaterialsId(), gregtechId("taclb"))
                 .fluid()
                 .color(0x2E8B57)
                 .iconSet(SHINY)
                 .build()
-                .setFormula("TaCl₄", true);
+                .setFormula("F7TaCl4", true);
 
         GTQTMaterials.ElectrolyteReflectorMixture = new Material.Builder(getMaterialsId(), gregtechId("electrolyte_reflector_mixture"))
                 .liquid(new FluidBuilder().temperature(209))

@@ -107,7 +107,7 @@ public class GermaniumChain {
         CHEMICAL_RECIPES.recipeBuilder()
                 .fluidInputs(Sgilvhuazhe.getFluid(1000))
                 .fluidInputs(Water.getFluid(2000))
-                .fluidOutputs(HydrochloricAcid.getFluid(4000))
+                .fluidOutputs(HydrochloricAcid.getFluid(1500))
                 .output(dust,Egryanghuazhe)
                 .duration(20)
                 .EUt(120)

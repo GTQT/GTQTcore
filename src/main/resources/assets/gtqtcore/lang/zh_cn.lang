@@ -789,6 +789,11 @@ gtqtcore.machine.industrial_washer.name=工业浸洗复合体
 gtqtcore.machine.industrial_hammer.name=工业锻造复合体
 gtqtcore.machine.industrial_furnace.name=工业熔炼复合体
 
+gtqtcore.machine.industrial_bender.name=工业卷板机
+gtqtcore.machine.industrial_wiremill.name=工业扎线机
+gtqtcore.machine.industrial_extruder.name=工业压模机
+gtqtcore.machine.industrial_assembly_line.name=工业装配线
+
 gtqtcore.machine.core_crusher.name=工业破壁机
 gtqtcore.machine.core_centrifuge.name=工业离心机
 gtqtcore.machine.core_mix.name=工业搅拌机
@@ -1851,9 +1856,6 @@ gtqtcore.machine.huge_turbine.plasma.name=大型超临界等离子涡轮
 gtqtcore.machine.huge_turbine.gas.name=大型超临界燃气涡轮
 gtqtcore.machine.huge_turbine.steam.name=大型超临界蒸汽涡轮
 gtqtcore.machine.turbine_combustion_chamber.name=爆燃发动机
-gtqtcore.machine.compressed_fusion_reactor_mki.name=压缩核聚变反应堆控制电脑 Mk I
-gtqtcore.machine.compressed_fusion_reactor_mkii.name=压缩核聚变反应堆控制电脑 Mk II
-gtqtcore.machine.compressed_fusion_reactor_mkiii.name=压缩核聚变反应堆控制电脑 Mk III
 gtqtcore.machine.rocket.name=火箭发动机
 gtqtcore.machine.catalyst_hatch.name=催化剂仓
 gtqtcore.machine.chemical_plant.name=化工厂
@@ -2615,7 +2617,7 @@ gregtech.material.high_entropy_alloy_3=高熵氮化物合金T-63
 gregtech.material.iridrhodruthenium=铱钌合金
 gregtech.material.lutetium_tantalite=钽酸镥
 gregtech.material.programmable_matter=可编程物质|形状：
-gregtech.material.peek=聚醚醚酮
+gregtech.material.peek=聚醚醚酮（PEEK）
 gregtech.material.galvanized_steel=镀锌钢
 gregtech.material.argon_fluorine=氩-氟混合物
 gregtech.material.excited_neon_fluoride=可激发的氖-氟混合物
@@ -3226,6 +3228,7 @@ metaitem.pre_dragon_cell.name=预处理龙细胞
 
 metaitem.sterilized.petri.dish.name=无菌培养皿
 metaitem.contaminated.petri.dish.name=被污染的培养皿
+metaitem.electrically.wired.petri.dish.name=电子接线培养皿
 metaitem.clean.culture.name=预备培养皿
 metaitem.brevibacterium.culture.name=黄色短杆菌培养皿
 metaitem.bifidobacterium.culture.name=短双歧杆菌培养皿
@@ -3599,12 +3602,6 @@ recipemap.alloy_klin.name=合金窑
 tile.multiblock_casing.naquadah_alloy_casing.name=超稳定硅岩合金机器外壳
 tile.multiblock_casing.naquadria_casing.name=抗辐射超能硅岩机器外壳
 tile.multiblock_casing.nitinol_machine_casing.name=镍钛诺机械外壳
-tile.multiblock_casing.compressed_fusion_reactor_mki_casing.name=压缩聚变机器外壳 Mk I
-tile.multiblock_casing.compressed_fusion_reactor_mkii_casing.name=压缩聚变机器外壳 Mk II
-tile.multiblock_casing.compressed_fusion_reactor_mkiii_casing.name=压缩聚变机器外壳 Mk III
-tile.multiblock_casing.machine_casing_fusion_4.name=聚变机器外壳 Mk IV
-tile.multiblock_casing.machine_casing_fusion_5.name=聚变机器外壳 Mk V
-tile.multiblock_casing.machine_casing_fusion_6.name=聚变机器外壳 Mk VI
 tile.turbine_casing1.precise_assembler_casing_mk1.name=精密组装机外壳MK1
 tile.turbine_casing1.precise_assembler_casing_mk2.name=精密组装机外壳MK2
 tile.turbine_casing1.precise_assembler_casing_mk3.name=精密组装机外壳MK3
@@ -4010,7 +4007,7 @@ gtqtcore.machine.compressed_fusion_reactor.uhv.tooltip.5=最大并行数：
 gtqtcore.machine.compressed_fusion_reactor.uhv.tooltip.6=- 启动能量 < 160,000,000 EU: §e256§7
 gtqtcore.machine.compressed_fusion_reactor.uhv.tooltip.7=- 启动能量 < 320,000,000 EU: §e192§7
 gtqtcore.machine.compressed_fusion_reactor.uhv.tooltip.8=- 启动能量 < 640,000,000 EU: §e128§7
-gtqtcore.machine.compressed_fusion_reactor.uhv.tooltip.9=- 启动能量 < 1,200,000,000 EU: §e64§7
+gtqtcore.machine.compressed_fusion_reactor.uhv.tooltip.9=- 启动能量 < 1,280,000,000 EU: §e64§7
 
 gtqtcore.machine.compressed_fusion_reactor.uev.name=压缩核聚变反应堆控制电脑 Mk V
 gtqtcore.machine.compressed_fusion_reactor.uev.tooltip.1=凝 聚 虚 无
@@ -4021,14 +4018,28 @@ gtqtcore.machine.compressed_fusion_reactor.uev.tooltip.5=最大并行数：
 gtqtcore.machine.compressed_fusion_reactor.uev.tooltip.6=- 启动能量 < 160,000,000 EU: §e320§7
 gtqtcore.machine.compressed_fusion_reactor.uev.tooltip.7=- 启动能量 < 320,000,000 EU: §e256§7
 gtqtcore.machine.compressed_fusion_reactor.uev.tooltip.8=- 启动能量 < 640,000,000 EU: §e192§7
-gtqtcore.machine.compressed_fusion_reactor.uev.tooltip.9=- 启动能量 < 1,200,000,000 EU: §e128§7
-gtqtcore.machine.compressed_fusion_reactor.uev.tooltip.10=- 启动能量 < 2,000,000,000 EU: §e128§7
+gtqtcore.machine.compressed_fusion_reactor.uev.tooltip.9=- 启动能量 < 1,280,000,000 EU: §e128§7
+gtqtcore.machine.compressed_fusion_reactor.uev.tooltip.10=- 启动能量 < 2,560,000,000 EU: §e64§7
+
+gtqtcore.machine.compressed_fusion_reactor.uiv.name=压缩核聚变反应堆控制电脑 Mk VI
+gtqtcore.machine.compressed_fusion_reactor.uiv.tooltip.1=迷 失 自 我
+gtqtcore.machine.compressed_fusion_reactor.uiv.tooltip.2=可以放置至多32个能源仓，包括高安与无线能源仓，
+gtqtcore.machine.compressed_fusion_reactor.uiv.tooltip.3=每个能源仓提供§r536,870,912 EU/t§7的输入与§r1440M EU§7的容量。
+gtqtcore.machine.compressed_fusion_reactor.uiv.tooltip.4=当配方所需的启动能量消耗高于§e(能源仓数 * 容量)§7时无法运行。
+gtqtcore.machine.compressed_fusion_reactor.uiv.tooltip.5=最大并行数：
+gtqtcore.machine.compressed_fusion_reactor.uiv.tooltip.6=- 启动能量 < 160,000,000 EU: §e384§7
+gtqtcore.machine.compressed_fusion_reactor.uiv.tooltip.7=- 启动能量 < 320,000,000 EU: §e320§7
+gtqtcore.machine.compressed_fusion_reactor.uiv.tooltip.8=- 启动能量 < 640,000,000 EU: §e256§7
+gtqtcore.machine.compressed_fusion_reactor.uiv.tooltip.9=- 启动能量 < 1,280,000,000 EU: §e192§7
+gtqtcore.machine.compressed_fusion_reactor.uiv.tooltip.10=- 启动能量 < 2,560,000,000 EU: §e128§7
+gtqtcore.machine.compressed_fusion_reactor.uiv.tooltip.11=- 启动能量 < 5,120,000,000 EU: §e64§7
 
 gtqtcore.machine.compressed_fusion_reactor.common_oc=超频将使能耗翻§r2§7倍，处理时间减少至§r1/2§7（2/2无损超频）。
 gtqtcore.machine.compressed_fusion_reactor.perfect_oc=超频将使能耗翻§r4§7倍，处理时间减少至§r1/4§7（4/4无损超频）。
 
 tile.compressed_fusion_reactor.machine_casing_fusion_4.name=聚变机器外壳 Mk IV
 tile.compressed_fusion_reactor.machine_casing_fusion_5.name=聚变机器外壳 Mk V
+tile.compressed_fusion_reactor.machine_casing_fusion_6.name=聚变机器外壳 Mk VI
 tile.compressed_fusion_reactor.fusion_coil_mkii.name=高级聚变线圈方块
 tile.compressed_fusion_reactor.fusion_coil_mkiii.name=终极聚变线圈方块
 tile.compressed_fusion_reactor.fusion_coil_mkiv.name=恒星聚变线圈方块
@@ -4486,6 +4497,14 @@ gtqtcore.machine.biomass_generator.iv.name=进阶生物质发电机
 gtqtcore.machine.biomass_generator.iv.tooltip=电动咀叶机
 gtqtcore.machine.biomass_generator.luv.name=涡轮生物质发电机
 gtqtcore.machine.biomass_generator.luv.tooltip=电动咀叶机
+
+recipemap.acid_generator.name=酸液发电
+gtqtcore.machine.acid_generator.mv.name=基础酸液发电机
+gtqtcore.machine.acid_generator.mv.tooltip=核动力柠檬电站
+gtqtcore.machine.acid_generator.hv.name=进阶酸液发电机
+gtqtcore.machine.acid_generator.hv.tooltip=核动力柠檬电站
+gtqtcore.machine.acid_generator.ev.name=涡轮酸液发电机
+gtqtcore.machine.acid_generator.ev.tooltip=核动力柠檬电站
 
 #  Tools
 

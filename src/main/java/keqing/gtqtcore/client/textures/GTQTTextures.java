@@ -30,8 +30,10 @@ public class GTQTTextures {
     public static OrientedOverlayRenderer NAQUADAH_REACTOR_OVERLAY = new OrientedOverlayRenderer("machines/naquadah_reactor");
     public static final SimpleOverlayRenderer ADVANCED_FUSION_TEXTURE = new SimpleOverlayRenderer("casings/fusion/machine_casing_advanced_fusion_hatch");
     public static final SimpleOverlayRenderer ULTIMATE_FUSION_TEXTURE = new SimpleOverlayRenderer("casings/fusion/machine_casing_ultimate_fusion_hatch");
+    public static final SimpleOverlayRenderer END_FUSION_TEXTURE = new SimpleOverlayRenderer("casings/fusion/machine_casing_end_fusion_hatch");
     public static final SimpleOverlayRenderer ADVANCED_ACTIVE_FUSION_TEXTURE = new SimpleOverlayRenderer("casings/fusion/machine_casing_advanced_fusion_hatch_blue");
     public static final SimpleOverlayRenderer ULTIMATE_ACTIVE_FUSION_TEXTURE = new SimpleOverlayRenderer("casings/fusion/machine_casing_ultimate_fusion_hatch_blue");
+    public static final SimpleOverlayRenderer END_ACTIVE_FUSION_TEXTURE = new SimpleOverlayRenderer("casings/fusion/machine_casing_end_fusion_hatch_blue");
     public static final SimpleOrientedCubeRenderer ADVANCED_FILTER_IRIDIUM_FRONT = new SimpleOrientedCubeRenderer("casings/advanced_filter_iridium_front");
     public static SimpleOverlayRenderer CIRCUIT_ASSEMBLY_CONTROL_CASING = new SimpleOverlayRenderer("multiblock/advblock/osmiridium_casing");
     public static SimpleOverlayRenderer Inconel625 = new SimpleOverlayRenderer("multiblock/advblock/inconel_625");
@@ -87,9 +89,6 @@ public class GTQTTextures {
     public static SimpleOverlayRenderer ADV_COLD_CASING;
     public static SimpleOverlayRenderer NITINOL_CASING;
     public static SimpleOverlayRenderer ISA_CASING;
-    public static SimpleOverlayRenderer COMPRESSED_FUSION_REACTOR_MKI_CASING;
-    public static SimpleOverlayRenderer COMPRESSED_FUSION_REACTOR_MKII_CASING;
-    public static SimpleOverlayRenderer COMPRESSED_FUSION_REACTOR_MKIII_CASING;
     public static SimpleOverlayRenderer NUCLEAR_FUSION_CASING;
     public static SimpleOverlayRenderer NUCLEAR_FUSION_COOLING;
     public static SimpleOverlayRenderer ADV_DIMENSIONAL_CASING_B;
@@ -214,9 +213,6 @@ public class GTQTTextures {
         INF_WATER = new SimpleOverlayRenderer("multipart/overlay_water");
         CATALYST_HATCH = new SimpleOverlayRenderer("multipart/overlay_catalysts");
         CHEMICAL_PLANT = new OrientedOverlayRenderer("multiblock/chemical_plant");
-        COMPRESSED_FUSION_REACTOR_MKI_CASING = new SimpleOverlayRenderer("multiblock/casings/compressed_fusion_reactor_mki_casing");
-        COMPRESSED_FUSION_REACTOR_MKII_CASING = new SimpleOverlayRenderer("multiblock/casings/compressed_fusion_reactor_mkii_casing");
-        COMPRESSED_FUSION_REACTOR_MKIII_CASING = new SimpleOverlayRenderer("multiblock/casings/compressed_fusion_reactor_mkiii_casing");
         ADV_DIMENSIONAL_CASING_B = new SimpleOverlayRenderer("multiblock/advblock/adv_machine_dimensional_cover_blue");
         ADV_DIMENSIONAL_CASING_O = new SimpleOverlayRenderer("multiblock/advblock/adv_machine_dimensional_cover_orange");
         ADV_MACHINE_LESU = new SimpleOverlayRenderer("multiblock/advblock/adv_machine_lesu");

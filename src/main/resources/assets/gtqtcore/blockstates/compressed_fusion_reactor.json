@@ -14,6 +14,12 @@
           "all": "gtqtcore:blocks/casings/compressed_fusion_reactor/machine_casing_fusion_5"
         }
       },
+      "machine_casing_fusion_6": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gtqtcore:blocks/casings/compressed_fusion_reactor/machine_casing_fusion_6"
+        }
+      },
       "fusion_coil_mkii": {
         "model": "minecraft:cube_all",
         "textures": {

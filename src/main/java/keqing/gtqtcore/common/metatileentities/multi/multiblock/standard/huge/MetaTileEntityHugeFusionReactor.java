@@ -74,8 +74,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.DoubleSupplier;
 
-import static gregtech.api.GTValues.UEV;
-import static gregtech.api.GTValues.UHV;
+import static gregtech.api.GTValues.*;
+import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.HUGE_FUSION_REACTOR;
 
 public class MetaTileEntityHugeFusionReactor extends RecipeMapMultiblockController
         implements IFastRenderMetaTileEntity, IBloomEffect {
@@ -130,10 +130,11 @@ public class MetaTileEntityHugeFusionReactor extends RecipeMapMultiblockControll
                 .aisle("######ICI######", "####GGAAAGG####", "######ICI######")
                 .aisle("###############", "######OSO######", "###############")
                 .where('S', selfPredicate())
-                .where('G', states(getCasingState()))
-                .where('E', states(getCasingState())
+                .where('G', states(this.getCasingState(), this.getGlassState()))
+                .where('E', states(this.getCasingState(), this.getGlassState())
                         .or(metaTileEntities(Arrays.stream(MetaTileEntities.ENERGY_INPUT_HATCH)
-                                .filter(mte -> mte != null && tier <= mte.getTier() && mte.getTier() <= UEV)
+                                //.filter(mte -> mte != null && tier <= mte.getTier() && mte.getTier() <= UIV)
+                                .filter(mte -> mte != null  && mte.getTier() <= UIV)
                                 .toArray(MetaTileEntity[]::new))
                                 .setMinGlobalLimited(1)
                                 .setPreviewCount(16))
@@ -147,38 +148,87 @@ public class MetaTileEntityHugeFusionReactor extends RecipeMapMultiblockControll
                 .where('#', any())
                 .build();
     }
+    public List<MultiblockShapeInfo> getMatchingShapes() {
+        List<MultiblockShapeInfo> shapeInfos = new ArrayList();
+        MultiblockShapeInfo.Builder baseBuilder = MultiblockShapeInfo.builder()
+                .aisle("###############", "######WGW######", "###############")
+                .aisle("######DCD######", "####GG###GG####", "######UCU######")
+                .aisle("####CC###CC####", "###w##EGE##s###", "####CC###CC####")
+                .aisle("###C#######C###", "##nKeG###GeKn##", "###C#######C###")
+                .aisle("##C#########C##", "#G#s#######w#G#", "##C#########C##")
+                .aisle("##C#########C##", "#G#G#######G#G#", "##C#########C##")
+                .aisle("#D###########D#", "N#S#########N#S", "#U###########U#")
+                .aisle("#C###########C#", "G#G#########G#G", "#C###########C#")
+                .aisle("#D###########D#", "N#S#########N#S", "#U###########U#")
+                .aisle("##C#########C##", "#G#G#######G#G#", "##C#########C##")
+                .aisle("##C#########C##", "#G#s#######w#G#", "##C#########C##")
+                .aisle("###C#######C###", "##eKnG###GnKe##", "###C#######C###")
+                .aisle("####CC###CC####", "###w##WGW##s###", "####CC###CC####")
+                .aisle("######DCD######", "####GG###GG####", "######UCU######")
+                .aisle("###############", "######EME######", "###############")
+                .where('M', HUGE_FUSION_REACTOR[this.tier-UHV], EnumFacing.SOUTH)
+                .where('C', this.getCasingState())
+                .where('G', this.getGlassState())
+                .where('K', this.getCoilState())
+                .where('W', MetaTileEntities.FLUID_EXPORT_HATCH[9], EnumFacing.NORTH)
+                .where('E', MetaTileEntities.FLUID_EXPORT_HATCH[9], EnumFacing.SOUTH)
+                .where('S', MetaTileEntities.FLUID_EXPORT_HATCH[9], EnumFacing.EAST)
+                .where('N', MetaTileEntities.FLUID_EXPORT_HATCH[9], EnumFacing.WEST)
+                .where('w', MetaTileEntities.ENERGY_INPUT_HATCH[9], EnumFacing.WEST)
+                .where('e', MetaTileEntities.ENERGY_INPUT_HATCH[9], EnumFacing.SOUTH)
+                .where('s', MetaTileEntities.ENERGY_INPUT_HATCH[9], EnumFacing.EAST)
+                .where('n', MetaTileEntities.ENERGY_INPUT_HATCH[9], EnumFacing.NORTH)
+                .where('U', MetaTileEntities.FLUID_IMPORT_HATCH[9], EnumFacing.UP)
+                .where('D', MetaTileEntities.FLUID_IMPORT_HATCH[9], EnumFacing.DOWN)
+                .where('#', Blocks.AIR.getDefaultState());
+        shapeInfos.add(baseBuilder.shallowCopy().where('G', this.getCasingState()).build());
+        shapeInfos.add(baseBuilder.build());
+        return shapeInfos;
+    }
     @SideOnly(Side.CLIENT)
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
         if (this.recipeMapWorkable.isActive()) {
             if (tier == UHV) {
                 return GTQTTextures.ADVANCED_ACTIVE_FUSION_TEXTURE;
-            } else {
+            } else if (tier == UEV) {
                 return GTQTTextures.ULTIMATE_ACTIVE_FUSION_TEXTURE;
+            }else {
+                return GTQTTextures.END_FUSION_TEXTURE;
             }
         } else {
             if (tier == UHV) {
                 return GTQTTextures.ADVANCED_FUSION_TEXTURE;
-            } else {
+            }else if (tier == UEV) {
                 return GTQTTextures.ULTIMATE_FUSION_TEXTURE;
+            } else {
+                return GTQTTextures.END_FUSION_TEXTURE;
             }
         }
     }
 
     private IBlockState getGlassState() {
-        return MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.FUSION_GLASS);
+        if (tier == GTValues.UHV)
+            return GTQTMetaBlocks.ADV_GLASS.getState(GTQTADVGlass.CasingType.TECH_FUSION_GLASS_IV);
+        if (tier == UEV)
+            return GTQTMetaBlocks.ADV_GLASS.getState(GTQTADVGlass.CasingType.TECH_FUSION_GLASS_V);
+        return GTQTMetaBlocks.ADV_GLASS.getState(GTQTADVGlass.CasingType.TECH_FUSION_GLASS_VI);
     }
 
     private IBlockState getCasingState() {
         if (tier == GTValues.UHV)
             return GTQTMetaBlocks.COMPRESSED_FUSION_REACTOR.getState(GTQTCompressedFusionReactor.CasingType.CASING_FUSION_MKIV);
-        return GTQTMetaBlocks.COMPRESSED_FUSION_REACTOR.getState(GTQTCompressedFusionReactor.CasingType.CASING_FUSION_MKV);
+        if (tier == GTValues.UEV)
+            return GTQTMetaBlocks.COMPRESSED_FUSION_REACTOR.getState(GTQTCompressedFusionReactor.CasingType.CASING_FUSION_MKV);
+        return GTQTMetaBlocks.COMPRESSED_FUSION_REACTOR.getState(GTQTCompressedFusionReactor.CasingType.CASING_FUSION_MKVI);
     }
 
     private IBlockState getCoilState() {
         if (tier == GTValues.UHV)
             return GTQTMetaBlocks.COMPRESSED_FUSION_REACTOR.getState(GTQTCompressedFusionReactor.CasingType.FUSION_COIL_MKII);
-        return GTQTMetaBlocks.COMPRESSED_FUSION_REACTOR.getState(GTQTCompressedFusionReactor.CasingType.FUSION_COIL_MKIII);
+        if (tier == GTValues.UEV)
+            return GTQTMetaBlocks.COMPRESSED_FUSION_REACTOR.getState(GTQTCompressedFusionReactor.CasingType.FUSION_COIL_MKIII);
+        return GTQTMetaBlocks.COMPRESSED_FUSION_REACTOR.getState(GTQTCompressedFusionReactor.CasingType.FUSION_COIL_MKIV);
     }
 
     protected int getFusionRingColor() {
@@ -339,9 +389,13 @@ public class MetaTileEntityHugeFusionReactor extends RecipeMapMultiblockControll
             // MK1
             builder.widget(new ImageWidget(66, 9, 67, 12, GTQTGuiTextures.FUSION_REACTOR_MK4_TITLE).setIgnoreColor(true));
         }
+        else if (tier == GTValues.UEV) {
+            // MK2
+            builder.widget(new ImageWidget(66, 9, 67, 12, GTQTGuiTextures.FUSION_REACTOR_MK5_TITLE).setIgnoreColor(true));
+        }
         else {
             // MK3
-            builder.widget(new ImageWidget(64, 9, 71, 12, GTQTGuiTextures.FUSION_REACTOR_MK5_TITLE).setIgnoreColor(true));
+            builder.widget(new ImageWidget(64, 9, 71, 12, GTQTGuiTextures.FUSION_REACTOR_MK6_TITLE).setIgnoreColor(true));
         }
 
         // Fusion Diagram + Progress Bar

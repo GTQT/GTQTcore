@@ -111,7 +111,6 @@ public class MetaTileEntityAssemblyLine extends RecipeMapMultiblockController {
         super.formStructure(context);
         Object laser_tier = context.get("ZWTieredStats");
         Object casing_tier = context.get("ChemicalPlantCasingTieredStats");
-        Object turbine_tier = context.get("ChemicalPlantTubeTieredStats");
         Object glass_tier = context.get("LGLTieredStats");
 
         this.laser_tier = GTQTUtil.getOrDefault(() -> laser_tier instanceof WrappedIntTired,
@@ -456,8 +455,8 @@ public class MetaTileEntityAssemblyLine extends RecipeMapMultiblockController {
             tooltip.add(I18n.format("gregtech.machine.assembly_line.tooltip_ordered_both"));
             tooltip.add(I18n.format("gregtech.machine.assembly_line.tooltip_ordered_items"));
             tooltip.add(I18n.format("gregtech.machine.assembly_line.tooltip_ordered_fluids"));
-        tooltip.add(I18n.format("gtqt.machine.assembly_line.1"));
-        tooltip.add(I18n.format("gtqt.machine.assembly_line.2"));
-        tooltip.add(I18n.format("友情提醒，我只能使用ULV级的总线仓口"));
+            tooltip.add(I18n.format("gtqt.machine.assembly_line.1"));
+            tooltip.add(I18n.format("gtqt.machine.assembly_line.2"));
+            tooltip.add(I18n.format("友情提醒，我只能使用ULV级的总线仓口"));
     }
 }

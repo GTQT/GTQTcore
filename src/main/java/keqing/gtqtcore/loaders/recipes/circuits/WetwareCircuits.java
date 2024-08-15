@@ -15,6 +15,7 @@ import static gregtech.api.recipes.RecipeMaps.CIRCUIT_ASSEMBLER_RECIPES;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.common.items.MetaItems.*;
+import static keqing.gtqtcore.common.items.GTQTMetaItems.ELECTRICALLY_WIRED_PETRI_DISH;
 
 public class WetwareCircuits {
 
@@ -32,14 +33,14 @@ public class WetwareCircuits {
 
 
         CIRCUIT_ASSEMBLER_RECIPES.recipeBuilder()
-                .input(plate, KaptonK, 16)
-                .input(PETRI_DISH)
+                .input(plate, KaptonK, 4)
+                .input(ELECTRICALLY_WIRED_PETRI_DISH)
                 .input(ELECTRIC_PUMP_LuV)
                 .input(SENSOR_IV)
                 .input(circuit, MarkerMaterials.Tier.IV)
                 .input(foil, NiobiumTitanium, 16)
-                .fluidInputs(SterileGrowthMedium.getFluid(4000))
-                .output(WETWARE_BOARD, 16)
+                .fluidInputs(SterileGrowthMedium.getFluid(1000))
+                .output(WETWARE_BOARD, 4)
                 .cleanroom(CleanroomType.STERILE_CLEANROOM)
                 .duration(1200).EUt(VA[LuV]).buildAndRegister();
 

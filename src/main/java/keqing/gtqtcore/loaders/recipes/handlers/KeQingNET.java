@@ -1,6 +1,7 @@
 package keqing.gtqtcore.loaders.recipes.handlers;
 
 import gregtech.api.GTValues;
+import gregtech.api.metatileentity.multiblock.CleanroomType;
 import gregtech.api.recipes.ModHandler;
 import gregtech.api.recipes.ingredients.nbtmatch.NBTCondition;
 import gregtech.api.recipes.ingredients.nbtmatch.NBTMatcher;
@@ -44,6 +45,7 @@ import static gregtech.common.metatileentities.MetaTileEntities.FUSION_REACTOR;
 
 import static gregtech.common.blocks.BlockFusionCasing.CasingType.SUPERCONDUCTOR_COIL;
 import static gregtech.common.metatileentities.MetaTileEntities.*;
+import static gregtech.common.metatileentities.MetaTileEntities.LARGE_CHEMICAL_REACTOR;
 import static gregtech.common.metatileentities.MetaTileEntities.ROTOR_HOLDER;
 import static gregtechfoodoption.machines.GTFOTileEntities.GREENHOUSE;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.PRECISE_ASSEMBLER_RECIPES;
@@ -60,6 +62,7 @@ import static keqing.gtqtcore.common.block.blocks.GTQTPowerSupply.SupplyType.POW
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.*;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.COMBUSTION_GENERATOR;
+import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.CRACKER;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.GAS_TURBINE;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.STEAM_TURBINE;
 
@@ -353,6 +356,88 @@ public class KeQingNET {
                 .scannerResearch(b -> b
                         .researchStack(DISK_15.getStackForm()))
                 .buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(CIRCUIT_GOOD_II,2)
+                .input(ELECTRIC_PISTON_LUV,8)
+                .input(HULL[LuV],8)
+                .input(BENDER[6],4)
+                .input(frameGt, NaquadahAlloy, 8)
+                .input(plate, PPB, 32)
+                .input(wireGtSingle, LuVSuperconductor, 64)
+                .input(wireGtSingle, LuVSuperconductor, 64)
+                .fluidInputs(SolderingAlloy.getFluid(L * 8))
+                .fluidInputs(Tin.getFluid(L * 8))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 8))
+                .fluidInputs(Polyetheretherketone.getFluid(L * 4))
+                .output(INDUSTRIAL_BENDER)
+                .EUt(VA[LuV])
+                .duration(600)
+                .scannerResearch(b -> b
+                        .researchStack(DISK_15.getStackForm()))
+                .buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(CIRCUIT_GOOD_II,2)
+                .input(ELECTRIC_MOTOR_LuV,8)
+                .input(HULL[LuV],8)
+                .input(WIREMILL[6],4)
+                .input(frameGt, NaquadahAlloy, 8)
+                .input(plate, PPB, 32)
+                .input(wireGtSingle, LuVSuperconductor, 64)
+                .input(wireGtSingle, LuVSuperconductor, 64)
+                .fluidInputs(SolderingAlloy.getFluid(L * 8))
+                .fluidInputs(Tin.getFluid(L * 8))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 8))
+                .fluidInputs(Polyetheretherketone.getFluid(L * 4))
+                .output(INDUSTRIAL_WIREMILL)
+                .EUt(VA[LuV])
+                .duration(600)
+                .scannerResearch(b -> b
+                        .researchStack(DISK_15.getStackForm()))
+                .buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(CIRCUIT_GOOD_II,2)
+                .input(ELECTRIC_PUMP_LuV,8)
+                .input(HULL[LuV],8)
+                .input(EXTRUDER[6],4)
+                .input(frameGt, NaquadahAlloy, 8)
+                .input(plate, PPB, 32)
+                .input(wireGtSingle, LuVSuperconductor, 64)
+                .input(wireGtSingle, LuVSuperconductor, 64)
+                .fluidInputs(SolderingAlloy.getFluid(L * 8))
+                .fluidInputs(Tin.getFluid(L * 8))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 8))
+                .fluidInputs(Polyetheretherketone.getFluid(L * 4))
+                .output(INDUSTRIAL_EXTRUDER)
+                .EUt(VA[LuV])
+                .duration(600)
+                .scannerResearch(b -> b
+                        .researchStack(DISK_15.getStackForm()))
+                .buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(CIRCUIT_GOOD_II,2)
+                .input(ROBOT_ARM_LuV,16)
+                .input(CONVEYOR_MODULE_LuV,16)
+                .input(HULL[LuV],8)
+                .input(ASSEMBLY_LINE,4)
+                .input(ASSEMBLER[6],4)
+                .input(frameGt, NaquadahAlloy, 8)
+                .input(plate, PPB, 32)
+                .input(wireGtSingle, LuVSuperconductor, 64)
+                .input(wireGtSingle, LuVSuperconductor, 64)
+                .fluidInputs(SolderingAlloy.getFluid(L * 8))
+                .fluidInputs(Tin.getFluid(L * 8))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 8))
+                .fluidInputs(Polyetheretherketone.getFluid(L * 4))
+                .output(INDUSTRIAL_ASSEMBLY_LINE)
+                .EUt(VA[LuV])
+                .duration(600)
+                .scannerResearch(b -> b
+                        .researchStack(DISK_15.getStackForm()))
+                .buildAndRegister();
     }
 
     private static void Pre() {
@@ -493,7 +578,7 @@ public class KeQingNET {
                 .duration(4000).EUt(1920).buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(CIRCUIT_GOOD_I,2)
+                .input(circuit, Tier.IV, 4)
                 .input(EMITTER_IV,4)
                 .input(ELECTRIC_MOTOR_IV,4)
                 .input(HULL[IV],1)
@@ -501,8 +586,8 @@ public class KeQingNET {
                 .inputs(ITEM_FILTER.getStackForm(4))
                 .inputs(VOLTAGE_COIL_IV.getStackForm(16))
                 .input(pipeLargeFluid, Polybenzimidazole, 16)
-                .input(wireGtSingle, IVSuperconductor, 8)
-                .input(wireGtSingle, IVSuperconductor, 8)
+                .input(wireGtSingle, EVSuperconductor, 8)
+                .input(wireGtSingle, EVSuperconductor, 8)
                 .fluidInputs(SolderingAlloy.getFluid(L * 8))
                 .fluidInputs(Tin.getFluid(L * 8))
                 .fluidInputs(Polybenzimidazole.getFluid(L * 8))
@@ -603,6 +688,106 @@ public class KeQingNET {
                         .researchStack(COMPONENT_ASSEMBLER[IV].getStackForm())
                         .CWUt(CWT[LuV])
                         .EUt(VA[UV]))
+                .buildAndRegister();
+
+        //  Mega Oil Cracking Unit
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(frameGt, HMS1J22Alloy, 16)
+                .inputs(CRACKER.getStackForm(16))
+                .input(circuit, Tier.ZPM, 16)
+                .input(CIRCUIT_GOOD_II,8)
+                .input(plateDouble, HG1223, 4)
+                .input(plateDouble, Staballoy, 4)
+                .input(gear, MaragingSteel250, 4)
+                .input(gearSmall, Stellite, 16)
+                .input(cableGtQuadruple, Aluminium, 16)
+                .fluidInputs(HSSS.getFluid(L * 32))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 16))
+                .fluidInputs(Polyetheretherketone.getFluid(L * 16))
+                .fluidInputs(NaquadahAlloy.getFluid(L * 4))
+                .outputs(HUGE_CRACKING_UNIT.getStackForm())
+                .stationResearch(b -> b
+                        .researchStack(CRACKER.getStackForm())
+                        .CWUt(CWT[IV])
+                        .EUt(VA[LuV]))
+                .EUt(VA[LuV])
+                .duration(400)
+                .cleanroom(CleanroomType.CLEANROOM)
+                .buildAndRegister();
+
+        //  Mega Chemical Reactor
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(frameGt, MARM200Steel, 16)
+                .inputs(LARGE_CHEMICAL_REACTOR.getStackForm(16))
+                .input(circuit, MarkerMaterials.Tier.ZPM, 16)
+                .input(CIRCUIT_GOOD_II,8)
+                .input(plateDouble, HMS1J79Alloy, 4)
+                .input(plateDouble, IncoloyDS, 4)
+                .input(gear, Inconel625, 4)
+                .input(gearSmall, Tantalloy61, 16)
+                .input(cableGtQuadruple, VanadiumGallium, 16)
+                .fluidInputs(HSSS.getFluid(L * 32))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 16))
+                .fluidInputs(Polyetheretherketone.getFluid(L * 16))
+                .fluidInputs(NaquadahAlloy.getFluid(L * 4))
+                .outputs(HUGE_CHEMICAL_REACTOR.getStackForm())
+                .stationResearch(b -> b
+                        .researchStack(LARGE_CHEMICAL_REACTOR.getStackForm())
+                        .CWUt(CWT[IV])
+                        .EUt(VA[LuV]))
+                .EUt(VA[IV])
+                .duration(800)
+                .cleanroom(CleanroomType.CLEANROOM)
+                .buildAndRegister();
+
+        //  Mega Alloy Blast Smelter
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(frameGt, AusteniticStainlessSteel904L, 16)
+                .inputs(ALLOY_BLAST_SMELTER.getStackForm(16))
+                .input(circuit, MarkerMaterials.Tier.ZPM, 16)
+                .input(CIRCUIT_GOOD_II,8)
+                .input(plateDouble, HSLASteel, 4)
+                .input(plateDouble, HastelloyC59, 4)
+                .input(gear, HY1301, 4)
+                .input(gearSmall, TanmolyiumBetaC, 16)
+                .input(wireGtQuadruple, NiobiumTitanium, 16)
+                .fluidInputs(HSSS.getFluid(L * 32))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 16))
+                .fluidInputs(Polyetheretherketone.getFluid(L * 16))
+                .fluidInputs(NaquadahAlloy.getFluid(L * 4))
+                .outputs(HUGE_ALLOY_BLAST_FURANCE.getStackForm())
+                .stationResearch(b -> b
+                        .researchStack(ALLOY_BLAST_SMELTER.getStackForm())
+                        .CWUt(CWT[IV])
+                        .EUt(VA[LuV]))
+                .EUt(VA[LuV])
+                .duration(1200)
+                .cleanroom(CleanroomType.CLEANROOM)
+                .buildAndRegister();
+
+        //  Mega Alloy Blast Smelter
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(frameGt, AusteniticStainlessSteel904L, 16)
+                .inputs(BLAZING_BLAST_FURNACE.getStackForm(16))
+                .input(circuit, MarkerMaterials.Tier.ZPM, 16)
+                .input(CIRCUIT_GOOD_II,8)
+                .input(plateDouble, HSLASteel, 4)
+                .input(plateDouble, HastelloyC59, 4)
+                .input(gear, HY1301, 4)
+                .input(gearSmall, TanmolyiumBetaC, 16)
+                .input(wireGtQuadruple, NiobiumTitanium, 16)
+                .fluidInputs(HSSS.getFluid(L * 32))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 16))
+                .fluidInputs(Polyetheretherketone.getFluid(L * 16))
+                .fluidInputs(NaquadahAlloy.getFluid(L * 4))
+                .outputs(HUGE_BLAST_FURANCE.getStackForm())
+                .stationResearch(b -> b
+                        .researchStack(BLAZING_BLAST_FURNACE.getStackForm())
+                        .CWUt(CWT[IV])
+                        .EUt(VA[LuV]))
+                .EUt(VA[LuV])
+                .duration(1200)
+                .cleanroom(CleanroomType.CLEANROOM)
                 .buildAndRegister();
 
         //  Advanced Assembly Line

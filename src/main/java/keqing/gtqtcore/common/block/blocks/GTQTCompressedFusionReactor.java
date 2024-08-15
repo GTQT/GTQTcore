@@ -31,6 +31,7 @@ public class GTQTCompressedFusionReactor extends VariantBlock<GTQTCompressedFusi
 
         CASING_FUSION_MKIV("machine_casing_fusion_4"),
         CASING_FUSION_MKV("machine_casing_fusion_5"),
+        CASING_FUSION_MKVI("machine_casing_fusion_6"),
         FUSION_COIL_MKII("fusion_coil_mkii"),
         FUSION_COIL_MKIII("fusion_coil_mkiii"),
         FUSION_COIL_MKIV("fusion_coil_mkiv");

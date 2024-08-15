@@ -789,6 +789,11 @@ gtqtcore.machine.industrial_washer.name=Industrial Washing Complex
 gtqtcore.machine.industrial_hammer.name=Industrial Forging Complex
 gtqtcore.machine.industrial_furnace.name=Industrial Smelting Complex
 
+gtqtcore.machine.industrial_bender.name=Industrial Plate Bending Machine
+gtqtcore.machine.industrial_wiremill.name=Industrial Wire Drawing Machine
+gtqtcore.machine.industrial_extruder.name=Industrial Extrusion Machine
+gtqtcore.machine.industrial_assembly_line.name=Industrial Assembly Line
+
 gtqtcore.machine.core_crusher.name=Industrial Crusher
 gtqtcore.machine.core_centrifuge.name=Industrial Centrifuge
 gtqtcore.machine.core_mix.name=Industrial Mixer
@@ -1848,9 +1853,6 @@ gtqtcore.machine.huge_turbine.plasma.name=Large Supercritical Plasma Turbine
 gtqtcore.machine.huge_turbine.gas.name=Large Supercritical Gas Turbine
 gtqtcore.machine.huge_turbine.steam.name=Large Supercritical Steam Turbine
 gtqtcore.machine.turbine_combustion_chamber.name=Detonation Engine
-gtqtcore.machine.compressed_fusion_reactor_mki.name=Compressed Fusion Reactor Control Computer Mk I
-gtqtcore.machine.compressed_fusion_reactor_mkii.name=Compressed Fusion Reactor Control Computer Mk II
-gtqtcore.machine.compressed_fusion_reactor_mkiii.name=Compressed Fusion Reactor Control Computer Mk III
 gtqtcore.machine.rocket.name=Rocket Engine
 gtqtcore.machine.catalyst_hatch.name=Catalyst Hatch
 gtqtcore.machine.chemical_plant.name=Chemical Plant
@@ -2603,7 +2605,7 @@ gregtech.material.high_entropy_alloy_3=High Entropy Nitride Alloy T-63
 gregtech.material.iridrhodruthenium=Iridium-Ruthenium Alloy
 gregtech.material.lutetium_tantalite=Lutetium Tantalite
 gregtech.material.programmable_matter=Programmable Matter | Shape:
-gregtech.material.peek=PEEK
+gregtech.material.peek=Polyetheretherketone (PEEK)
 gregtech.material.galvanized_steel=Galvanized Steel
 gregtech.material.argon_fluorine=Argon-Fluorine Mixture
 gregtech.material.excited_neon_fluoride=Excitable Neon-Fluoride Mixture
@@ -3213,6 +3215,7 @@ metaitem.pre_dragon_cell.name=Pre-Treated Dragon Cell
 
 metaitem.sterilized.petri.dish.name=Sterilized Petri Dish
 metaitem.contaminated.petri.dish.name=Contaminated Petri Dish
+metaitem.electrically.wired.petri.dish.name=Electrically Wired Petri Dish
 metaitem.clean.culture.name=Prepared Petri Dish
 metaitem.brevibacterium.culture.name=Brevibacterium Culture
 metaitem.bifidobacterium.culture.name=Bifidobacterium Breve Culture
@@ -3579,12 +3582,6 @@ recipemap.alloy_klin.name=Alloy Kiln
 tile.multiblock_casing.naquadah_alloy_casing.name=Superstable Naquadah Alloy Machine Casing
 tile.multiblock_casing.naquadria_casing.name=Anti-Radiation Superenergy Naquadria Machine Casing
 tile.multiblock_casing.nitinol_machine_casing.name=Nitinol Machine Casing
-tile.multiblock_casing.compressed_fusion_reactor_mki_casing.name=Compressed Fusion Reactor Machine Casing Mk I
-tile.multiblock_casing.compressed_fusion_reactor_mkii_casing.name=Compressed Fusion Reactor Machine Casing Mk II
-tile.multiblock_casing.compressed_fusion_reactor_mkiii_casing.name=Compressed Fusion Reactor Machine Casing Mk III
-tile.multiblock_casing.machine_casing_fusion_4.name=Fusion Machine Casing Mk IV
-tile.multiblock_casing.machine_casing_fusion_5.name=Fusion Machine Casing Mk V
-tile.multiblock_casing.machine_casing_fusion_6.name=Fusion Machine Casing Mk VI
 tile.turbine_casing1.precise_assembler_casing_mk1.name=Precise Assembler Casing MK1
 tile.turbine_casing1.precise_assembler_casing_mk2.name=Precise Assembler Casing MK2
 tile.turbine_casing1.precise_assembler_casing_mk3.name=Precise Assembler Casing MK3
@@ -3987,7 +3984,7 @@ gtqtcore.machine.compressed_fusion_reactor.uhv.tooltip.5=Maximum parallel times:
 gtqtcore.machine.compressed_fusion_reactor.uhv.tooltip.6=- Startup energy < 160,000,000 EU: §e256§7
 gtqtcore.machine.compressed_fusion_reactor.uhv.tooltip.7=- Startup energy < 320,000,000 EU: §e192§7
 gtqtcore.machine.compressed_fusion_reactor.uhv.tooltip.8=- Startup energy < 640,000,000 EU: §e128§7
-gtqtcore.machine.compressed_fusion_reactor.uhv.tooltip.9=- Startup energy < 1,200,000,000 EU: §e64§7
+gtqtcore.machine.compressed_fusion_reactor.uhv.tooltip.9=- Startup energy < 1,280,000,000 EU: §e64§7
 
 gtqtcore.machine.compressed_fusion_reactor.uev.name=Compressed Fusion Reactor Control Computer Mk V
 gtqtcore.machine.compressed_fusion_reactor.uev.tooltip.1=Condensing Nothingness
@@ -3998,14 +3995,28 @@ gtqtcore.machine.compressed_fusion_reactor.uev.tooltip.5=Maximum parallel times:
 gtqtcore.machine.compressed_fusion_reactor.uev.tooltip.6=- Startup energy < 160,000,000 EU: §e320§7
 gtqtcore.machine.compressed_fusion_reactor.uev.tooltip.7=- Startup energy < 320,000,000 EU: §e256§7
 gtqtcore.machine.compressed_fusion_reactor.uev.tooltip.8=- Startup energy < 640,000,000 EU: §e192§7
-gtqtcore.machine.compressed_fusion_reactor.uev.tooltip.9=- Startup energy < 1,200,000,000 EU: §e128§7
-gtqtcore.machine.compressed_fusion_reactor.uev.tooltip.10=- Startup energy < 2,000,000,000 EU: §e128§7
+gtqtcore.machine.compressed_fusion_reactor.uev.tooltip.9=- Startup energy < 1,280,000,000 EU: §e128§7
+gtqtcore.machine.compressed_fusion_reactor.uev.tooltip.10=- Startup energy < 2,560,000,000 EU: §e128§7
+
+gtqtcore.machine.compressed_fusion_reactor.uiv.name=Compressed Fusion Reactor Control Computer Mk VI
+gtqtcore.machine.compressed_fusion_reactor.uiv.tooltip.1=Dimensional Collapse
+gtqtcore.machine.compressed_fusion_reactor.uiv.tooltip.2=Can accommodate up to 32 energy chambers, including high-security and wireless energy chambers,
+gtqtcore.machine.compressed_fusion_reactor.uiv.tooltip.3=Each energy chamber provides §r536,870,912 EU/t§7 input and §r1440M EU§7 capacity.
+gtqtcore.machine.compressed_fusion_reactor.uiv.tooltip.4=Will not operate if the startup energy required by the recipe exceeds §e(number of energy chambers * capacity)§7.
+gtqtcore.machine.compressed_fusion_reactor.uiv.tooltip.5=Maximum Parallel Operations:
+gtqtcore.machine.compressed_fusion_reactor.uiv.tooltip.6=- Startup Energy < 160,000,000 EU: §e384§7
+gtqtcore.machine.compressed_fusion_reactor.uiv.tooltip.7=- Startup Energy < 320,000,000 EU: §e320§7
+gtqtcore.machine.compressed_fusion_reactor.uiv.tooltip.8=- Startup Energy < 640,000,000 EU: §e256§7
+gtqtcore.machine.compressed_fusion_reactor.uiv.tooltip.9=- Startup Energy < 1,280,000,000 EU: §e192§7
+gtqtcore.machine.compressed_fusion_reactor.uiv.tooltip.10=- Startup Energy < 2,560,000,000 EU: §e128§7
+gtqtcore.machine.compressed_fusion_reactor.uiv.tooltip.11=- Startup Energy < 5,120,000,000 EU: §e64§7
 
 gtqtcore.machine.compressed_fusion_reactor.common_oc=Overclocking will double energy consumption §r2§7 times, processing time reduced to §r1/2§7 (2/2 lossless overclocking).
 gtqtcore.machine.compressed_fusion_reactor.perfect_oc=Overclocking will quadruple energy consumption §r4§7 times, processing time reduced to §r1/4§7 (4/4 lossless overclocking).
 
 tile.compressed_fusion_reactor.machine_casing_fusion_4.name=Fusion Machine Casing Mk IV
 tile.compressed_fusion_reactor.machine_casing_fusion_5.name=Fusion Machine Casing Mk V
+tile.compressed_fusion_reactor.machine_casing_fusion_6.name=Fusion Machine Casing Mk VI
 tile.compressed_fusion_reactor.fusion_coil_mkii.name=Advanced Fusion Coil Block
 tile.compressed_fusion_reactor.fusion_coil_mkiii.name=Ultimate Fusion Coil Block
 tile.compressed_fusion_reactor.fusion_coil_mkiv.name=Stellar Fusion Coil Block
@@ -4463,6 +4474,13 @@ gtqtcore.machine.biomass_generator.iv.tooltip=Electric Chopping Machine
 gtqtcore.machine.biomass_generator.luv.name=Turbine Biomass Generator
 gtqtcore.machine.biomass_generator.luv.tooltip=Electric Chopping Machine
 
+recipemap.acid_generator.name=Acid Power Generation
+gtqtcore.machine.acid_generator.mv.name=Basic Acid Generator
+gtqtcore.machine.acid_generator.mv.tooltip=Nuclear-powered Lemon Power Station
+gtqtcore.machine.acid_generator.hv.name=Advanced Acid Generator
+gtqtcore.machine.acid_generator.hv.tooltip=Nuclear-powered Lemon Power Station
+gtqtcore.machine.acid_generator.ev.name=Turbo Acid Generator
+gtqtcore.machine.acid_generator.ev.tooltip=Nuclear-powered Lemon Power Station
 # Tools
 
 item.gt.tool.bending_cylinder.name=%s Bending Cylinder

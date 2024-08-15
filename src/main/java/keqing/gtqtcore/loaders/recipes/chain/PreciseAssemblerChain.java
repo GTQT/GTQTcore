@@ -51,7 +51,7 @@ public class PreciseAssemblerChain {
         ASSEMBLER_RECIPES.recipeBuilder()
                 .input(ELITE_CIRCUIT_BOARD)
                 .input(circuit,MarkerMaterials.Tier.IV,8)
-                .input(ADVANCED_SYSTEM_ON_CHIP,4)
+                .input(QUBIT_CENTRAL_PROCESSING_UNIT,4)
                 .input(POWER_INTEGRATED_CIRCUIT,8)
                 .input(screw,NanometerBariumTitanate,32)
                 .input(cableGtSingle,Platinum,8)

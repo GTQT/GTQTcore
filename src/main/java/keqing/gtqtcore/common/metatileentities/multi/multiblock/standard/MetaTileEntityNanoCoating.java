@@ -22,6 +22,7 @@ import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
+import gregtech.client.utils.TooltipHelper;
 import gregtech.core.sound.GTSoundEvents;
 import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
@@ -65,6 +66,7 @@ public class MetaTileEntityNanoCoating extends MultiMapMultiblockController impl
 
     @Override
     public void addInformation(ItemStack stack, World world, List<String> tooltip, boolean advanced) {
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("织靳"));
         tooltip.add(I18n.format("gtqt.machine.stepper.1"));
         tooltip.add(I18n.format("gtqt.machine.stepper.2"));
         tooltip.add(I18n.format("gtqt.machine.stepper.3"));
@@ -261,18 +263,6 @@ public class MetaTileEntityNanoCoating extends MultiMapMultiblockController impl
         super.invalidateStructure();
     }
 
-    protected int getLaserTier() {
-        return this.laser_tier;
-    }
-    protected int getGlass_tier() {
-        return this.glass_tier;
-    }
-    protected int clean_tier() {
-        return this.clean_tier;
-    }
-    protected int sheping_tier() {
-        return this.sheping_tier;
-    }
     @Override
     public boolean hasMufflerMechanics() {
         return false;

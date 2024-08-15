@@ -227,6 +227,29 @@ public class ELE {
                 .duration(800)
                 .buildAndRegister();
 
+
+        ELECTROBATH.recipeBuilder()
+                .notConsumable(electrode,Steel,1)
+                .input(dust,Salt,2)
+                .input(dust,Sodium,1)
+                .fluidOutputs(Chlorine.getFluid(8000))
+                .EUt(180)
+                .tier(1)
+                .duration(800)
+                .buildAndRegister();
+
+        ELECTROBATH.recipeBuilder()
+                .notConsumable(electrode,Steel,1)
+                .input(dust,RockSalt,2)
+                .input(dust,Potassium,1)
+                .fluidOutputs(Chlorine.getFluid(8000))
+                .EUt(180)
+                .tier(1)
+                .duration(800)
+                .buildAndRegister();
+
+
+
         ELECTROBATH.recipeBuilder()
                 .notConsumable(electrode,Steel,1)
                 .fluidInputs(Water.getFluid(4000))

@@ -43,6 +43,12 @@ public class GTQTcoreRecipeMaps {
             .setSound(GTSoundEvents.BATH)
             .allowEmptyOutput();
 
+    public static final RecipeMap<FuelRecipeBuilder> ACID_GENERATOR_RECIPES = new RecipeMap<>("acid_generator", 0, 0, 1, 0, new FuelRecipeBuilder(), false)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, ProgressWidget.MoveType.HORIZONTAL)
+            .setSound(GTSoundEvents.CHEMICAL_REACTOR)
+            .allowEmptyOutput();
+
+
     public static final RecipeMap<SimpleRecipeBuilder> LOW_PRESSURE_CRYOGENIC_DISTILLATION = new RecipeMap<>("low_pressure_cryogenic_distillation", 3, 3, 3, 12, new SimpleRecipeBuilder(), false)
             .setProgressBar(GuiTextures.PROGRESS_BAR_SIFT, ProgressWidget.MoveType.VERTICAL)
             .setSound(GTSoundEvents.COOLING);
@@ -241,7 +247,7 @@ public class GTQTcoreRecipeMaps {
         NEUTRON_ACTIVATOR=new RecipeMap<>("neutron_activator", 6, 6, 3, 3, new NeutronActivatorRecipeBuilder(), false)
                 .setSound(GTSoundEvents.CHEMICAL_REACTOR);
 
-        VACUUM_CHAMBER_RECIPES = new RecipeMap<>("vacuum_chamber_recipes", 1, 4,  2,  1, new SimpleRecipeBuilder(), false)
+        VACUUM_CHAMBER_RECIPES = new RecipeMap<>("vacuum_chamber_recipes", 3, 6,  3,  3, new SimpleRecipeBuilder(), false)
                 .setSlotOverlay(false, false, GuiTextures.CIRCUIT_OVERLAY)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_COMPRESS, ProgressWidget.MoveType.HORIZONTAL)
                 .setSound(GTSoundEvents.ASSEMBLER);

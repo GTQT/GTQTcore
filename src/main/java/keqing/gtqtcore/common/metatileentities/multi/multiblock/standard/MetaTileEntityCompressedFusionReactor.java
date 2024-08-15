@@ -48,6 +48,7 @@ import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
+import keqing.gtqtcore.common.block.blocks.GTQTADVGlass;
 import keqing.gtqtcore.common.block.blocks.GTQTMultiblockCasing;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -216,7 +217,14 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
         return frameState;
     }
 
-    private static IBlockState getGlassState() {
+    private IBlockState getGlassState() {
+        if (tier == GTValues.UHV)
+            return GTQTMetaBlocks.ADV_GLASS.getState(GTQTADVGlass.CasingType.TECH_FUSION_GLASS_IV);
+        if (tier == UEV)
+            return GTQTMetaBlocks.ADV_GLASS.getState(GTQTADVGlass.CasingType.TECH_FUSION_GLASS_V);
+        if (tier == UIV)
+            return GTQTMetaBlocks.ADV_GLASS.getState(GTQTADVGlass.CasingType.TECH_FUSION_GLASS_VI);
+
         return MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.FUSION_GLASS);
     }
 
@@ -227,12 +235,14 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
             switch (tier) {
                 case UHV -> { return GTQTTextures.ADVANCED_FUSION_TEXTURE; }
                 case UEV -> { return GTQTTextures.ULTIMATE_FUSION_TEXTURE; }
+                case UIV -> { return GTQTTextures.END_FUSION_TEXTURE; }
                 default -> { return Textures.ACTIVE_FUSION_TEXTURE; }
             }
         } else {
             switch (tier) {
                 case UHV -> { return GTQTTextures.ADVANCED_FUSION_TEXTURE; }
                 case UEV -> { return GTQTTextures.ULTIMATE_FUSION_TEXTURE; }
+                case UIV -> { return GTQTTextures.END_FUSION_TEXTURE; }
                 default -> { return Textures.FUSION_TEXTURE; }
             }
         }
@@ -274,31 +284,8 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
         };
     }
 
-    /**
-     * Calculate Energy Storage by Energy Hatch amount and tier.
-     *
-     * <p>
-     *     For {@code calculateEnergyStorageFactor} in common Fusion Reactor,
-     *     the parameter of {@code energyInputAmount} is 16, but for CFR, this parameter
-     *     is 32. So we need get half Energy Storage than common Fusion Reactor.
-     *     We create a long list {@code energyStored} to storage Energy Storage of all CFR:
-     *
-     *     <ul>
-     *         <li>Mark 1: {@code 5,000,000} (5M) -> {@code 160,000,000} (160M);</li>
-     *         <li>Mark 2: {@code 10,000,000} (10M) -> {@code 320,000,000} (320M);</li>
-     *         <li>Mark 3: {@code 20,000,000} (20M) -> {@code 640,000,000} (640M);</li>
-     *         <li>Mark 4: {@code 80,000,000} (80M) -> {@code 1,280,000,000} (1280M);</li>
-     *         <li>Mark 5: {@code 320,000,000} (320M) -> {@code 2,560,000,000} (2560M);</li>
-     *     </ul>
-     *
-     *     The Multiplier is {@code energyInputAmount} (32 default).
-     * </p>
-     *
-     * @param energyInputAmount  Energy Hatch amount (is fake actually).
-     * @return                   Energy Storage of Fusion Reactor.
-     */
     private long calculateEnergyStorageFactor(int energyInputAmount) {
-        long[] energyStored = { 5000000L, 10000000L, 20000000L, 80000000L, 320000000L };
+        long[] energyStored = { 5000000L, 10000000L, 20000000L, 80000000L, 320000000L, 1280000000L };
         return energyInputAmount * energyStored[tier - 6];
     }
 
@@ -346,6 +333,8 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
             case UHV -> builder.widget(new ImageWidget(66, 9, 67, 12, GTQTGuiTextures.FUSION_REACTOR_MK4_TITLE)
                     .setIgnoreColor(true));
             case UEV -> builder.widget(new ImageWidget(66, 9, 67, 12, GTQTGuiTextures.FUSION_REACTOR_MK5_TITLE)
+                    .setIgnoreColor(true));
+            case UIV -> builder.widget(new ImageWidget(66, 9, 67, 12, GTQTGuiTextures.FUSION_REACTOR_MK6_TITLE)
                     .setIgnoreColor(true));
         }
 
@@ -412,7 +401,7 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
         super.addInformation(stack, player, tooltip, advanced);
         switch (this.tier) {
             case LuV -> {
-                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.luv.tooltip.1"));
+                tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("gtqtcore.machine.compressed_fusion_reactor.luv.tooltip.1"));
                 tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.luv.tooltip.2"));
                 tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.luv.tooltip.3"));
                 tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.luv.tooltip.4"));
@@ -422,7 +411,7 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
                 tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.common_oc"));
             }
             case ZPM -> {
-                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.zpm.tooltip.1"));
+                tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("gtqtcore.machine.compressed_fusion_reactor.zpm.tooltip.1"));
                 tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.zpm.tooltip.2"));
                 tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.zpm.tooltip.3"));
                 tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.zpm.tooltip.4"));
@@ -433,7 +422,7 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
                 tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.common_oc"));
             }
             case UV -> {
-                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.uv.tooltip.1"));
+                tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("gtqtcore.machine.compressed_fusion_reactor.uv.tooltip.1"));
                 tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.uv.tooltip.2"));
                 tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.uv.tooltip.3"));
                 tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.uv.tooltip.4"));
@@ -445,7 +434,7 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
                 tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.common_oc"));
             }
             case UHV -> {
-                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.uhv.tooltip.1"));
+                tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("gtqtcore.machine.compressed_fusion_reactor.uhv.tooltip.1"));
                 tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.uhv.tooltip.2"));
                 tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.uhv.tooltip.3"));
                 tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.uhv.tooltip.4"));
@@ -458,7 +447,7 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
                 tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.perfect_oc"));
             }
             case UEV -> {
-                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.uev.tooltip.1"));
+                tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("gtqtcore.machine.compressed_fusion_reactor.uev.tooltip.1"));
                 tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.uev.tooltip.2"));
                 tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.uev.tooltip.3"));
                 tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.uev.tooltip.4"));
@@ -468,6 +457,21 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
                 tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.uev.tooltip.8"));
                 tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.uev.tooltip.9"));
                 tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.uev.tooltip.10"));
+                tooltip.add(I18n.format("gregtech.machine.fusion_reactor.capacity", actuallyEnergyStored));
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.perfect_oc"));
+            }
+            case UIV -> {
+                tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("gtqtcore.machine.compressed_fusion_reactor.uiv.tooltip.1"));
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.uiv.tooltip.2"));
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.uiv.tooltip.3"));
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.uiv.tooltip.4"));
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.uiv.tooltip.5"));
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.uiv.tooltip.6"));
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.uiv.tooltip.7"));
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.uiv.tooltip.8"));
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.uiv.tooltip.9"));
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.uiv.tooltip.10"));
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.uiv.tooltip.11"));
                 tooltip.add(I18n.format("gregtech.machine.fusion_reactor.capacity", actuallyEnergyStored));
                 tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.perfect_oc"));
             }
@@ -698,7 +702,7 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
 
             //  An Extended check of CFR, check tier of CFR and {@code EUToStart} of recipes,
             //  CFR cannot run recipes higher than its {@link #tier}.
-            final long[] euToStart = { 160000000L, 320000000L, 640000000L, 1280000000L, 2560000000L };
+            final long[] euToStart = { 160000000L, 320000000L, 640000000L, 1280000000L, 2560000000L,5120000000L };
             if (startCost > euToStart[tier - 6])
                 return false;
 
@@ -748,7 +752,22 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
                     } else if (startCost <= 1280000000L) {
                         this.setParallelLimit(parallelBase * 2);
                     } else if (startCost <= 2560000000L) {
+                        this.setParallelLimit(parallelBase);
+                    }
+                }
+                case UIV -> {
+                    if (startCost <= 160000000L) {
+                        this.setParallelLimit(parallelBase * 6);
+                    } else if (startCost <= 320000000L) {
+                        this.setParallelLimit(parallelBase * 5);
+                    } else if (startCost <= 640000000L) {
+                        this.setParallelLimit(parallelBase * 4);
+                    } else if (startCost <= 1280000000L) {
+                        this.setParallelLimit(parallelBase * 3);
+                    } else if (startCost <= 2560000000L) {
                         this.setParallelLimit(parallelBase * 2);
+                    } else if (startCost <= 5120000000L) {
+                        this.setParallelLimit(parallelBase);
                     }
                 }
             }

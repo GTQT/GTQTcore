@@ -32,42 +32,6 @@
           "all": "gregtech:blocks/multiblock/casings/supercritical_fluid_turbine_shaft_block"
         }
       },
-      "compressed_fusion_reactor_mki_casing": {
-        "model": "minecraft:cube_all",
-        "textures": {
-          "all": "gregtech:blocks/multiblock/casings/compressed_fusion_reactor_mki_casing"
-        }
-      },
-      "compressed_fusion_reactor_mkii_casing": {
-        "model": "minecraft:cube_all",
-        "textures": {
-          "all": "gregtech:blocks/multiblock/casings/compressed_fusion_reactor_mkii_casing"
-        }
-      },
-      "compressed_fusion_reactor_mkiii_casing": {
-        "model": "minecraft:cube_all",
-        "textures": {
-          "all": "gregtech:blocks/multiblock/casings/compressed_fusion_reactor_mkiii_casing"
-        }
-      },
-      "machine_casing_fusion_4": {
-        "model": "minecraft:cube_all",
-        "textures": {
-          "all": "gregtech:blocks/multiblock/casings/machine_casing_fusion_4"
-        }
-      },
-      "machine_casing_fusion_5": {
-        "model": "minecraft:cube_all",
-        "textures": {
-          "all": "gregtech:blocks/multiblock/casings/machine_casing_fusion_5"
-        }
-      },
-      "machine_casing_fusion_6": {
-        "model": "minecraft:cube_all",
-        "textures": {
-          "all": "gregtech:blocks/multiblock/casings/machine_casing_fusion_6"
-        }
-      },
       "naquadah_alloy_casing": {
         "model": "minecraft:cube_all",
         "textures": {

@@ -26,20 +26,25 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 
+import static keqing.gtqtcore.common.block.blocks.GTQTBlockGlassCasing.CasingType.TI_BORON_SILICATE_GLASS;
+
 @ParametersAreNonnullByDefault
 public class GTQTBlockGlassCasing extends VariantActiveBlock<GTQTBlockGlassCasing.CasingType> {
+
     public GTQTBlockGlassCasing() {
-        super(Material.GLASS);
-        setTranslationKey("glass_casing");
-        setHardness(5.0F);
-        setResistance(5.0F);
-        setSoundType(SoundType.GLASS);
-        setHarvestLevel(ToolClasses.PICKAXE, 1);
-        setDefaultState(this.getState(CasingType.TI_BORON_SILICATE_GLASS));
-        this.useNeighborBrightness = true;
+        super(Material.IRON);
+        this.setTranslationKey("glass_casing");
+        this.setHardness(5.0F);
+        this.setResistance(10.0F);
+        this.setSoundType(SoundType.GLASS);
+        this.setHarvestLevel(ToolClasses.PICKAXE, 1);
+        this.setDefaultState(this.getState(TI_BORON_SILICATE_GLASS));
     }
 
-    public boolean canCreatureSpawn(@Nonnull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull EntityLiving.SpawnPlacementType type) {
+    public boolean canCreatureSpawn(@Nonnull IBlockState state,
+                                    @Nonnull IBlockAccess world,
+                                    @Nonnull BlockPos pos,
+                                    @Nonnull EntityLiving.SpawnPlacementType type) {
         return false;
     }
 
@@ -68,7 +73,8 @@ public class GTQTBlockGlassCasing extends VariantActiveBlock<GTQTBlockGlassCasin
     @Override
     @SideOnly(Side.CLIENT)
     @SuppressWarnings("deprecation")
-    public boolean shouldSideBeRendered(@Nonnull IBlockState state, IBlockAccess world, BlockPos pos, @Nonnull EnumFacing side) {
+    public boolean shouldSideBeRendered(@Nonnull IBlockState state, IBlockAccess world, BlockPos pos,
+                                        @Nonnull EnumFacing side) {
         IBlockState sideState = world.getBlockState(pos.offset(side));
 
         return sideState.getBlock() == this ?

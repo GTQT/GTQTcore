@@ -1,14 +1,19 @@
 package keqing.gtqtcore.common;
 
 import gregtech.api.GregTechAPI;
+import gregtech.api.block.IHeatingCoilBlockStats;
 import gregtech.api.block.VariantItemBlock;
 import gregtech.api.cover.CoverDefinition;
 import gregtech.api.recipes.recipeproperties.FusionEUToStartProperty;
 import gregtech.api.unification.material.Material;
+import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.material.properties.PropertyKey;
 import gregtech.api.unification.stack.ItemMaterialInfo;
+import gregtech.common.blocks.BlockWireCoil;
+import gregtech.integration.crafttweaker.block.CTHeatingCoilBlockStats;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.recipes.properties.*;
+import keqing.gtqtcore.api.unification.GTQTMaterials;
 import keqing.gtqtcore.api.unification.ore.GTQTStoneTypes;
 import keqing.gtqtcore.api.utils.GTQTLog;
 import keqing.gtqtcore.api.utils.GTQTOreHelper;
@@ -24,6 +29,7 @@ import keqing.gtqtcore.loaders.recipes.*;
 import keqing.gtqtcore.loaders.recipes.handlers.GCYSMaterialInfoLoader;
 import keqing.gtqtcore.loaders.recipes.handlers.*;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -50,6 +56,7 @@ import static keqing.gtqtcore.api.capability.chemical_plant.ChemicalPlantPropert
 import static keqing.gtqtcore.api.unification.material.info.EPMaterialFlags.GENERATE_COIL;
 import static keqing.gtqtcore.api.utils.ChatCalculatorHelper.eval;
 import static keqing.gtqtcore.common.block.GTQTMetaBlocks.*;
+import static net.minecraft.init.Blocks.DIRT;
 
 
 @Mod.EventBusSubscriber(
@@ -164,6 +171,8 @@ public class CommonProxy {
         for (GTQTBlockWireCoil.CoilType type : GTQTBlockWireCoil.CoilType.values()) {
             HEATING_COILS.put(GTQTMetaBlocks.WIRE_COIL.getState(type), type);
         }
+
+        HEATING_COILS.put(DIRT.getDefaultState(),new CTHeatingCoilBlockStats("dirt", 300, 1, 0,1, Materials.Iron));
     }
 
     public CommonProxy() {
@@ -351,7 +360,7 @@ public class CommonProxy {
         for(int i=1;i<=5;i=i+1) LASERNetProperty.registeredLaser(i, String.valueOf(i));
         for(int i=1;i<=100;i++) KQNetProperty.registeredNB(i, String.valueOf(i));
         for(int i=1;i<=100;i++) BRProperty.registeredRate(i, String.valueOf(i));
-        for(int i=1;i<=100;i++) NeutronActivatorPartProperty.registeredPart(i*200, String.valueOf(i*200));
+        for(int i=0;i<=10;i++) NeutronActivatorPartProperty.registeredPart(i*200, String.valueOf(i*200));
         for(int i=1;i<=10;i++) NuclearProperties.registeredminTemp(i, String.valueOf(i));
         for(int i=1;i<=10;i++) PAProperty.registeredTier(i, String.valueOf(i));
 

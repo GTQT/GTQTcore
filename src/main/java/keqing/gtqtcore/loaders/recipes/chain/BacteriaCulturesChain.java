@@ -20,6 +20,7 @@ import static keqing.gtqtcore.api.GCYSValues.HV;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
+import static keqing.gtqtcore.api.unification.TJMaterials.Polyetheretherketone;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 
 public class BacteriaCulturesChain {
@@ -32,16 +33,16 @@ public class BacteriaCulturesChain {
                 .buildAndRegister();
 
         ASSEMBLER_RECIPES.recipeBuilder().EUt(7680).duration(400)
-                .input(plate, Titanium)
-                .fluidInputs(Polyethylene.getFluid(1008))
+                .input(wireFine, Naquadah)
+                .fluidInputs(Polyetheretherketone.getFluid(72))
                 .inputs(STERILIZED_PETRI_DISH.getStackForm())
                 .outputs(ELECTRICALLY_WIRED_PETRI_DISH.getStackForm())
-                .cleanroom(CleanroomType.CLEANROOM)
+                .cleanroom(CleanroomType.STERILE_CLEANROOM)
                 .buildAndRegister();
 
         AUTOCLAVE_RECIPES.recipeBuilder()
                 .inputs(PETRI_DISH.getStackForm())
-                .fluidInputs(Zylon.getFluid(100))
+                .fluidInputs(Steam.getFluid(1000))
                 .outputs(STERILIZED_PETRI_DISH.getStackForm())
                 .cleanroom(CleanroomType.CLEANROOM)
                 .EUt(7680)

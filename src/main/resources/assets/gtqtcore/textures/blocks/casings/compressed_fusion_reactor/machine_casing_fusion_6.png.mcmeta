@@ -2,10 +2,9 @@
     "ctm": {
         "ctm_version": 1,
         "type": "CTM",
-        "layer": "BLOOM",
-		"gregtech": true,
+        "layer": "CUTOUT",
         "textures": [
-            "gregtech:blocks/multiblock/casings/machine_casing_fusion_6_ctm"
+            "gtqtcore:blocks/casings/compressed_fusion_reactor/machine_casing_fusion_6_ctm"
         ],
         "extra": {
             "connect_inside": true

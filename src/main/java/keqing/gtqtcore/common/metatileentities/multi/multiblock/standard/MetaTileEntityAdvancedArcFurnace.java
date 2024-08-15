@@ -154,6 +154,7 @@ public class MetaTileEntityAdvancedArcFurnace extends GTQTRecipeMapMultiblockCon
 
     public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("彼岸双生"));
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("gregtech.machine.perfect_oc", new Object[0]));
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("升级电极获得并行以及额外超频", new Object[0]));
     }

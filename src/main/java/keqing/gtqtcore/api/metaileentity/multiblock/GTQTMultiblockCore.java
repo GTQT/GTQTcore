@@ -287,11 +287,11 @@ public abstract class GTQTMultiblockCore extends MultiMapMultiblockController im
     }
 
     private void incrementThreshold(Widget.ClickData clickData) {
-        this.circuit = MathHelper.clamp(circuit + 1, 0, getCoreNum());
+        this.circuit = MathHelper.clamp(circuit + 1, 0, getCoreNum()-1);
     }
 
     private void decrementThreshold(Widget.ClickData clickData) {
-        this.circuit = MathHelper.clamp(circuit - 1, 0, getCoreNum());
+        this.circuit = MathHelper.clamp(circuit - 1, 0, getCoreNum()-1);
     }
 
     private void speed(Widget.ClickData clickData) {

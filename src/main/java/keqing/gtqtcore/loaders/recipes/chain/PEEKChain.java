@@ -31,7 +31,7 @@ public class PEEKChain {
                 .output(dust, SodiumFluoride, 4)
                 .fluidOutputs(Polyetheretherketone.getFluid(2592))
                 .fluidOutputs(Water.getFluid(2000))
-                .EUt(VA[IV])
+                .EUt(VA[ZPM])
                 .recipeLevel(3)
                 .duration(480)
                 .buildAndRegister();

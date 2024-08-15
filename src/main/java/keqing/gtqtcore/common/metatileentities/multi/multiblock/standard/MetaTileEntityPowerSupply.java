@@ -136,6 +136,7 @@ public class  MetaTileEntityPowerSupply extends MultiblockWithDisplayBase  {
 
         if(updatetime==0)updatetime=1;
         //更新频率
+
         t++;
         if(t==updatetime)
         {

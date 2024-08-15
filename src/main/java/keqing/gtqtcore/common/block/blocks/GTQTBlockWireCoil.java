@@ -83,7 +83,6 @@ import java.util.List;
         public enum CoilType implements IStringSerializable, IHeatingCoilBlockStats {
 
 
-
             DRACONIC("draconic", 12600, 18, 10, GTQTMaterials.Draconium),
             WAKE_DRACONIC("wake_draconic", 14400, 20, 12, GTQTMaterials.AwakenedDraconium),
             UNIVE("unive", 16200, 22, 18, Materials.Neutronium),

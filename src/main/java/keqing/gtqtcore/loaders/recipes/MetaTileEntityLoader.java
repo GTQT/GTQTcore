@@ -1331,5 +1331,16 @@ public class MetaTileEntityLoader {
                 'T', CraftingComponent.SAWBLADE,
                 'W', CraftingComponent.CABLE,
                 'O', CraftingComponent.DOUBLE_PLATE);
+
+        //  Biomass Generator
+        gregtech.loaders.recipe.MetaTileEntityLoader.registerMachineRecipe(true, ACID_GENERATOR,
+                "SOS", "IHP", "WTW",
+                'H', CraftingComponent.HULL,
+                'I', CraftingComponent.PUMP,
+                'P', CraftingComponent.GLASS,
+                'S', CraftingComponent.SPRING,
+                'T', CraftingComponent.SAWBLADE,
+                'W', CraftingComponent.CABLE,
+                'O', CraftingComponent.DOUBLE_PLATE);
     }
 }

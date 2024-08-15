@@ -15,6 +15,7 @@ import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.recipes.Recipe;
+import gregtech.api.util.GTUtility;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.utils.TooltipHelper;
 import gregtech.core.advancement.AdvancementTriggers;
@@ -41,6 +42,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import java.util.List;
 
+import static gregtech.api.GTValues.*;
+
 public class MetaTileEntityIsaMill extends RecipeMapMultiblockController {
 
     public MetaTileEntityIsaMill(ResourceLocation metaTileEntityId) {
@@ -53,7 +56,8 @@ public class MetaTileEntityIsaMill extends RecipeMapMultiblockController {
     public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("粉碎！粉碎！", new Object[0]));
-
+        tooltip.add(I18n.format("gtqtcore.machine.dangote_distillery.tooltip.6"));
+        tooltip.add(I18n.format("gtqtcore.machine.dangote_distillery.tooltip.7"));
     }
     protected IBlockState getCasingState() {
         return GTQTMetaBlocks.ISA_CASING.getState(GTQTIsaCasing.CasingType.ISA_MILL_CASING);
@@ -168,6 +172,31 @@ public class MetaTileEntityIsaMill extends RecipeMapMultiblockController {
         public IsaMillLogic(MetaTileEntityIsaMill tileEntity) {
             super(tileEntity);
             this.metaTileEntity = tileEntity;
+        }
+
+
+        private int ParallelTier(int tier) {
+            return 4 * (tier * 4);
+        }
+
+        private int HigherParallelTier(int tier) {
+            return 12 * (tier * 4);
+        }
+
+        @Override
+        public int getParallelLimit() {
+            if (this.getMaxVoltage() > V[MAX]) {    //  For MAX+, get 12 * 15 * 4
+                return HigherParallelTier(15);
+            }
+            int tier = GTUtility.getTierByVoltage(getMaxVoltage());
+            if (tier == 0) {
+                return 1;
+            }
+            if (tier <= UV) {
+                return ParallelTier(tier);
+            } else {
+                return HigherParallelTier(tier);
+            }
         }
 
         @Override

@@ -136,7 +136,7 @@ public class NaquadahChain {
                 .fluidOutputs(NaquadriaSolution.getFluid(1000))
                 .fluidOutputs(Gaochunguiyanrongye.getFluid(1000))
                 .EUt(VA[IV])
-                .part(100)
+                .part(200)
                 .duration(400)
                 .buildAndRegister();
         //硅岩后处理-----------------------------------------------------------------------------
