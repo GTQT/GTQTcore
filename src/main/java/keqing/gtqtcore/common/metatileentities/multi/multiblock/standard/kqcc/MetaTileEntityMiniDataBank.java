@@ -161,7 +161,7 @@ public class MetaTileEntityMiniDataBank extends MultiblockWithDisplayBase implem
                 .where('S', this.selfPredicate())
                 .where('X', states(getOuterState()))
                 .where('D', states(getInnerState()).setMinGlobalLimited(3)
-                        .or(abilities(MultiblockAbility.DATA_ACCESS_HATCH).setPreviewCount(3))
+                        .or(abilities(MultiblockAbility.DATA_ACCESS_HATCH).setPreviewCount(2).setMaxGlobalLimited(3))
                         .or(abilities(MultiblockAbility.OPTICAL_DATA_TRANSMISSION).setMinGlobalLimited(1, 1))
                         .or(abilities(MultiblockAbility.OPTICAL_DATA_RECEPTION).setPreviewCount(1)))
                 .where('A', states(getInnerState()))

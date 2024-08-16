@@ -121,13 +121,12 @@ public class MetaTileEntityNanoCoating extends MultiMapMultiblockController impl
             this.writeCustomData(GTQTValue.UPDATE_TIER8,buf1 -> buf1.writeInt(this.tier));
         }
     }
-    @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("tier", tier);
         data.setBoolean("visa", visa);
         return super.writeToNBT(data);
     }
-    @Override
+   
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         tier = data.getInteger("tier");

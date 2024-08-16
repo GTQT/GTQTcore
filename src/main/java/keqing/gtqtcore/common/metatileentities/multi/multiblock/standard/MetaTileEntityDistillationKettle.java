@@ -41,13 +41,12 @@ public class MetaTileEntityDistillationKettle extends RecipeMapMultiblockControl
     @Override
     public boolean canBeDistinct() {return true;}
     int steam;
-    @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("steam", steam);
         return super.writeToNBT(data);
     }
 
-    @Override
+   
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         steam = data.getInteger("steam");

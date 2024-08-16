@@ -594,11 +594,6 @@ public class MetaTileEntityLoader {
                 new UnificationEntry(OrePrefix.pipeLargeFluid, Aluminium), 'C',
                 new UnificationEntry(OrePrefix.circuit, MV), 'F', DISTILLATION_TOWER.getStackForm());
 
-        ModHandler.addShapedRecipe(true, "salt_flied", GTQTMetaTileEntities.SALT_FLIED.getStackForm(),
-                "FFF", "CMC", "BBB", 'M', MetaTileEntities.HULL[GTValues.LV].getStackForm(), 'C',
-                new UnificationEntry(OrePrefix.pipeLargeFluid, Steel), 'B',
-                new UnificationEntry(OrePrefix.circuit, LV), 'F', MetaItems.ELECTRIC_PUMP_LV);
-
         ModHandler.addShapedRecipe(true, "evaporation_pool", GTQTMetaTileEntities.EVAPORATION_POOL.getStackForm(),
                 "FFF", "CMC", "BBB", 'M', MetaTileEntities.HULL[GTValues.LV].getStackForm(), 'B',
                 new UnificationEntry(OrePrefix.pipeLargeFluid, Steel), 'C',
@@ -628,6 +623,11 @@ public class MetaTileEntityLoader {
         ModHandler.addShapedRecipe(true, "oil_poll", GTQTMetaTileEntities.OIL_POOL.getStackForm(),
                 "FFF", "BMB", "CCC", 'M', MetaTileEntities.HULL[GTValues.LV].getStackForm(), 'B',
                 new UnificationEntry(OrePrefix.pipeLargeFluid, Steel), 'C',
+                new UnificationEntry(OrePrefix.circuit, LV), 'F', MetaItems.ELECTRIC_PUMP_LV);
+
+        ModHandler.addShapedRecipe(true, "salt_flied", GTQTMetaTileEntities.SALT_FLIED.getStackForm(),
+                "BBB", "CMC", "FFF", 'M', MetaTileEntities.HULL[GTValues.LV].getStackForm(), 'C',
+                new UnificationEntry(OrePrefix.pipeLargeFluid, Steel), 'B',
                 new UnificationEntry(OrePrefix.circuit, LV), 'F', MetaItems.ELECTRIC_PUMP_LV);
 
         ModHandler.addShapedRecipe(true, "mining_drill", GTQTMetaTileEntities.MINING_DRILL.getStackForm(),
@@ -762,11 +762,11 @@ public class MetaTileEntityLoader {
                 .input(stick, Steel,2)
                 .input(ring, Steel, 4)
                 .input(LAPOTRON_CRYSTAL,1)
-                .input(circuit, MarkerMaterials.Tier.IV, 1)
-                .input(SENSOR_EV,1)
+                .input(circuit, MarkerMaterials.Tier.EV, 1)
+                .input(SENSOR_HV,1)
                 .output(POS_BINDING_CARD)
                 .circuitMeta(2)
-                .duration(600).EUt(VA[4]).buildAndRegister();
+                .duration(600).EUt(VA[3]).buildAndRegister();
 
 
         ModHandler.addShapedRecipe(true, "roaster", ROASTER.getStackForm(),

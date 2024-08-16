@@ -74,7 +74,6 @@ public class MetaTileEntityPhotolithographyFactory extends MetaTileEntityBaseWit
     int updatetime=1;
     boolean make;
 
-    @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("laserTier", laserTier);
         data.setInteger("laserKind", laserKind);
@@ -98,7 +97,7 @@ public class MetaTileEntityPhotolithographyFactory extends MetaTileEntityBaseWit
         data.setBoolean("coreWork5",coreWork[4]);
         return super.writeToNBT(data);
     }
-    @Override
+   
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         laserTier = data.getInteger("laserTier");

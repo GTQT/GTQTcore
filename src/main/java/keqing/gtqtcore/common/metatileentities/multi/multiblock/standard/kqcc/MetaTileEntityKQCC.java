@@ -112,13 +112,12 @@ public class MetaTileEntityKQCC extends MultiblockWithDisplayBase implements IOp
     FluidStack COLD_STACK1 = Water.getFluid(40);
     FluidStack COLD_STACKA1 = PCBCoolant.getFluid(20);
     FluidStack COLD_STACKB1 = LiquidNitrogen.getFluid(4);
-    @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setFloat("HOT", HOT);
         data.setInteger("thresholdPercentage", thresholdPercentage);
         return super.writeToNBT(data);
     }
-    @Override
+   
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         HOT = data.getFloat("HOT");

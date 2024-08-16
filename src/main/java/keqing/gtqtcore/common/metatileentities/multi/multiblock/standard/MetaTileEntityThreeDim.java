@@ -69,12 +69,11 @@ public class MetaTileEntityThreeDim extends MultiMapMultiblockController impleme
         this.recipeMapWorkable = new LaserEngravingWorkableHandler(this);
     }
 
-    @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("tier", tier);
         return super.writeToNBT(data);
     }
-    @Override
+   
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         tier = data.getInteger("tier");

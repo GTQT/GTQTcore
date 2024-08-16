@@ -17,11 +17,14 @@ import gregtech.api.pattern.MultiblockShapeInfo;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
+import gregtech.api.recipes.logic.OverclockingLogic;
+import gregtech.api.recipes.recipeproperties.IRecipePropertyStorage;
 import gregtech.api.recipes.recipeproperties.TemperatureProperty;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
+import gregtech.client.utils.TooltipHelper;
 import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.metatileentities.MetaTileEntities;
@@ -61,7 +64,6 @@ public class MetaTileEntityVacuumDryingFurnace extends MultiMapMultiblockControl
         super(metaTileEntityId, new RecipeMap[]{
                 DRYER_RECIPES,
                 GTQTcoreRecipeMaps.VACUUM_DRYING_FURNACE_RECIPES});
-        this.recipeMapWorkable = new HeatingCoilRecipeLogic(this);
         this.recipeMapWorkable = new VacuumDryingFurnaceWorkableHandler(this);
     }
     private class VacuumDryingFurnaceWorkableHandler extends MultiblockRecipeLogic {
@@ -74,10 +76,17 @@ public class MetaTileEntityVacuumDryingFurnace extends MultiMapMultiblockControl
         @Override
         public int getParallelLimit() {
             if(isVacuumDryingMode()) {
-
                 return (int) Math.pow(2,tier);
             }
             return 1;
+        }
+        protected void modifyOverclockPre( int[] values, IRecipePropertyStorage storage) {
+            super.modifyOverclockPre(values, storage);
+            values[0] = OverclockingLogic.applyCoilEUtDiscount(values[0], ((IHeatingCoil)this.metaTileEntity).getCurrentTemperature(), (Integer)storage.getRecipePropertyValue(TemperatureProperty.getInstance(), 0));
+        }
+
+        protected  int[] runOverclockingLogic( IRecipePropertyStorage propertyStorage, int recipeEUt, long maxVoltage, int duration, int amountOC) {
+            return OverclockingLogic.heatingCoilOverclockingLogic(Math.abs(recipeEUt), maxVoltage, duration, amountOC, ((IHeatingCoil)this.metaTileEntity).getCurrentTemperature(), (Integer)propertyStorage.getRecipePropertyValue(TemperatureProperty.getInstance(), 0));
         }
     }
     @Override
@@ -100,7 +109,7 @@ public class MetaTileEntityVacuumDryingFurnace extends MultiMapMultiblockControl
         Object type = context.get("CoilType");
         if (type instanceof BlockWireCoil.CoilType) {
             this.temperature = ((BlockWireCoil.CoilType) type).getCoilTemperature();
-            tier = ((BlockWireCoil.CoilType) type).getTier();
+            tier = Math.min(((BlockWireCoil.CoilType) type).getTier(),32);
         }
         else
             this.temperature = BlockWireCoil.CoilType.CUPRONICKEL.getCoilTemperature();
@@ -144,9 +153,11 @@ public class MetaTileEntityVacuumDryingFurnace extends MultiMapMultiblockControl
     @Override
     public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("顶级桑拿", new Object[0]));
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.1"));
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.2"));
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.3"));
+        tooltip.add(I18n.format("gtqtcore.machine.vac.tooltip.1"));
     }
 
     @SideOnly(Side.CLIENT)

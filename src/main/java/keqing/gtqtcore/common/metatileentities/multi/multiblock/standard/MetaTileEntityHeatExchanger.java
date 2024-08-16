@@ -317,7 +317,6 @@ public class MetaTileEntityHeatExchanger extends NoEnergyMultiblockController im
             this.writeCustomData(GTQTValue.UPDATE_TIER6,buf1 -> buf1.writeInt(this.casingTier));
         }
     }
-    @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("casingTier", casingTier);
         data.setDouble("TempA", TempA);
@@ -325,7 +324,7 @@ public class MetaTileEntityHeatExchanger extends NoEnergyMultiblockController im
         data.setInteger("ThresholdPercentage", thresholdPercentage);
         return super.writeToNBT(data);
     }
-    @Override
+   
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         casingTier = data.getInteger("casingTier");

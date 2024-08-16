@@ -180,7 +180,7 @@ public class MetaTileEntityParallelHatch extends MetaTileEntityMultiblockPart im
         return super.writeToNBT(data);
     }
 
-    @Override
+   
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         this.currentParallel = data.getInteger("currentParallel");

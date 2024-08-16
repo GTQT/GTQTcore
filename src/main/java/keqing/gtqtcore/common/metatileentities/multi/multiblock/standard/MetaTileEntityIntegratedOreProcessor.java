@@ -343,7 +343,7 @@ public class MetaTileEntityIntegratedOreProcessor extends MultiblockWithDisplayB
         return this.logic.serializeNBT(data);
     }
 
-    @Override
+   
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         this.logic.deserializeNBT(data);

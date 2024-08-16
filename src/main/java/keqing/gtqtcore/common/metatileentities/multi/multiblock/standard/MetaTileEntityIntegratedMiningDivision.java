@@ -60,12 +60,11 @@ public class MetaTileEntityIntegratedMiningDivision extends GTQTRecipeMapMultibl
         return new MetaTileEntityIntegratedMiningDivision(this.metaTileEntityId);
     }
     int ParallelNum=1;
-    @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("modern", modern);
         return super.writeToNBT(data);
     }
-    @Override
+   
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         modern = data.getInteger("modern");

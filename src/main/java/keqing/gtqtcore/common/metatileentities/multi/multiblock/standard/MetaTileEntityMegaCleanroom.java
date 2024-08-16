@@ -488,7 +488,7 @@ public class MetaTileEntityMegaCleanroom extends MetaTileEntityCleanroom  implem
         return this.cleanroomLogic.writeToNBT(data);
     }
 
-    @Override
+   
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         this.initialForm = data.hasKey("initialForm") ? data.getBoolean("initialForm") : this.initialForm;

@@ -63,12 +63,11 @@ public class MetaTileEntityGreenhousePlus extends RecipeMapMultiblockController 
     int coilHeight;
     int heatingCoilLevel;
     int temp=0;
-    @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("temp", temp);
         return super.writeToNBT(data);
     }
-    @Override
+   
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         temp = data.getInteger("temp");

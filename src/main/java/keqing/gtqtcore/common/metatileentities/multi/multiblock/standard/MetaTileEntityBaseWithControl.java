@@ -170,7 +170,7 @@ public abstract class MetaTileEntityBaseWithControl extends MultiblockWithDispla
                 isWorkingEnabled());
     }
 
-    @Override
+
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         super.writeToNBT(data);
         data.setBoolean("isActive", isActive);
@@ -178,7 +178,7 @@ public abstract class MetaTileEntityBaseWithControl extends MultiblockWithDispla
         return data;
     }
 
-    @Override
+
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         isActive = data.getBoolean("isActive");

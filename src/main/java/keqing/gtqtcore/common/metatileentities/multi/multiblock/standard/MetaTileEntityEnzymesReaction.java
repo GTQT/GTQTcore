@@ -96,7 +96,6 @@ public class MetaTileEntityEnzymesReaction extends GTQTRecipeMapMultiblockContro
                 "gregtech.multiblock.pb.computation",
                 cwutInfo));
     }
-    @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setBoolean("start", start);
 
@@ -112,7 +111,7 @@ public class MetaTileEntityEnzymesReaction extends GTQTRecipeMapMultiblockContro
         data.setInteger("E", E);
         return super.writeToNBT(data);
     }
-    @Override
+   
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         start = data.getBoolean("start");

@@ -2265,7 +2265,7 @@ metaitem.delta_plus_plus.jei_description=Δ 重子 ++ 含有三个上夸克。�
 metaitem.antidelta_plus_plus.jei_description=反 Δ 重子 ++ 含有三个反上夸克。它们在强力下很快就会衰变。
 metaitem.delta_minus.jei_description=Δ 重子 - 含有三个下夸克。它们在强力下很快就会衰变。
 metaitem.antidelta_minus.jei_description=反 Δ 重子 - 含有三个反下夸克。它们在强力下很快就会衰变。
-
+gregtech.machine.vac.tooltip.1=运行 真空干燥配方 时，并行数量2的当前线圈等级次幂（最大64）
 gregtech.machine.huge_chemical_reactor=万里挑一
 gtqtcore.multiblock.fr.threshold_decrement=§c降低一单位压裂压力 /n§7流体产出降低半单位，压裂液消耗减少一单位。
 gtqtcore.multiblock.fr.threshold_increment=§a增加一单位压裂压力 /n§7流体产出增加半单位，压裂液消耗增加一单位。
@@ -3867,7 +3867,7 @@ metaitem.component.cosmic.closed_timelike_curve_guidance_unit.name=封闭类时�
 metaitem.component.cosmic.nuclear_clock.name=核时钟
 metaitem.component.cosmic.manifold_oscillatory_power_cell.name=流形振荡能量单元
 metaitem.pos_binding_card.name=坐标绑定卡
-metaitem.pos_binding_card.tooltip=适用于：微波无线仓绑定
+metaitem.pos_binding_card.tooltip=适用于：微波无线仓绑定 科研计算机设备绑定
 metaitem.scintillator.name=闪烁体
 metaitem.scintillator_crystal.name=闪烁晶体
 
@@ -4369,6 +4369,15 @@ tile.computer_competent.computer_gpui.tooltip=苏联军工
 tile.computer_competent.computer_gpuii.tooltip=哥布林代工
 tile.computer_competent.computer_gpuiii.tooltip=神威！太湖之光！
 
+tile.computer_competent.adv_computer_casing.name=超级计算机外壳
+tile.computer_competent.adv_computer_casing.tooltip=谁用计算机造房子
+tile.computer_competent.adv_computer_heat_vent.name=高级计算机散热口
+tile.computer_competent.adv_computer_heat_vent.tooltip=堪比空气炸锅
+tile.computer_competent.ultra_power_casing.name=超能机器外壳
+tile.computer_competent.ultra_power_casing.tooltip=再靠近一点就会爆炸！
+tile.computer_competent.ultra_computer_casing.name=特超能计算机外壳
+tile.computer_competent.ultra_computer_casing.tooltip=感觉能算出宇宙
+
 gtqtcore.multiblock.kqcc.description=计算中心服务器是你在早期获得算力的唯一方法，每一台服务器拥有三排四列共计12模块的计算组件，由上至下分别为【辅助运算模块/高性能计算模块/数据缓存模块】，每一排只能插放对应的组件，但是其等级可以不一样，也可以使用空框架填充。当RAM总和均大于CPU,GPU总和时，总算力为CPU,GPU的总和；否则为RAM的总和。单位热量由CPU总和*GPU总和决定。当温度小于三百度时正常性能计算，大于三百度时性能减半，大于四百五十度强制停机。处于超频模式时，计算性能翻倍，热量四倍，冷却液消耗四倍，综合散热性能翻倍。 冷却液种类/散热性能（水-7.7/10mb 冷却液-14.4/5mb 液氮-28.8/1mb）机器在关机状态无法通过冷却液降温！
 
 gtqtcore.multiblock.kqcc.description1=高级计算服务器能在游戏中期为你提供大量整合算力，每一台服务器拥有三排做大拓展十六次的片状模组块，由上至下分别为【辅助运算模块/高性能计算模块/数据缓存模块】，每一排只能插放对应的组件，并且所有对应模块等级必须一致。当RAM总和均大于CPU,GPU总和时，总算力为CPU,GPU的总和；否则为RAM的总和。单位热量由CPU总和*GPU总和决定（叠算最大八倍减免）。当温度小于三百度时正常性能计算，大于三百度时性能减半，大于四百五十度强制停机。处于超频模式时，计算性能翻倍，热量四倍，冷却液消耗四倍，综合散热性能翻倍。 冷却液种类/散热性能（水-7.7/10mb 冷却液-14.4/5mb 液氮-28.8/1mb）机器在关机状态无法通过冷却液降温！
@@ -4525,6 +4534,8 @@ gtqtcore.machine.powersupply.tooltip.7=供能模式：多方块充电放电功�
 gtqtcore.machine.power_supply.name=超导矩阵
 gtqtcore.machine.adv_kqcc.name=超级计算服务器
 gtqtcore.machine.mini_date_bank.name=小型数据库
+gtqtcore.machine.adv_date_bank.name=大型数据库
+gtqtcore.machine.adv_network_switch.name=大型网络交换机
 gtqtcore.machine.large_processing_factory.name=大型加工厂
 gtqtcore.machine.large_processing_factory.tooltip.1=比相同电压的单方块机器快2.5倍。
 gtqtcore.machine.large_processing_factory.tooltip.2=使用§6编程电路§7控制当前模式下的配方：

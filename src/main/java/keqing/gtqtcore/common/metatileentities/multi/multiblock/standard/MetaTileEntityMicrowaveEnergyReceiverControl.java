@@ -77,7 +77,6 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
         tooltip.add(I18n.format("升级结构来获得更大的供能范围与缓存电量"));
         tooltip.add(I18n.format("使用操作按钮配合加减按钮完成不同功能操作"));
     }
-    @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("euStore", euStore);
         data.setInteger("op", op);
@@ -87,7 +86,7 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
 
         return super.writeToNBT(data);
     }
-    @Override
+   
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         euStore = data.getInteger("euStore");

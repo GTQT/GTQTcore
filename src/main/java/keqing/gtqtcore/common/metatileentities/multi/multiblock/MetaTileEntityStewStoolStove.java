@@ -203,7 +203,6 @@ public class MetaTileEntityStewStoolStove extends MultiblockWithDisplayBase {
         }
     }
 
-    @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data = super.writeToNBT(data);
         data.setLong("currentHeat", currentHeat);
@@ -212,7 +211,6 @@ public class MetaTileEntityStewStoolStove extends MultiblockWithDisplayBase {
         return data;
     }
 
-    @Override
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         currentHeat = data.getLong("currentHeat");

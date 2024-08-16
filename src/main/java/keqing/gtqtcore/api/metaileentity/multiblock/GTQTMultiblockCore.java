@@ -106,8 +106,12 @@ public abstract class GTQTMultiblockCore extends MultiMapMultiblockController im
     int p;
     public boolean speed;
     boolean stop;
-    @Override
+
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
+        for(int i=0;i<getCoreNum();i++) data.setIntArray("timeHelper"+i,timeHelper[i]);
+        for (int i = 0; i <ListWork.length; i++) {
+            data.setBoolean("ListWork"+i, ListWork[i]);
+        }
         data.setInteger("circuit", circuit);
         data.setBoolean("speed", speed);
         data.setBoolean("stop", stop);
@@ -128,9 +132,13 @@ public abstract class GTQTMultiblockCore extends MultiMapMultiblockController im
         }
         return super.writeToNBT(data);
     }
-    @Override
+
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
+        for(int i=0;i<getCoreNum();i++) timeHelper[i]=data.getIntArray("timeHelper"+i);
+        for (int i = 0; i <ListWork.length; i++) {
+            ListWork[i]= data.getBoolean("ListWork"+i);
+        }
         circuit = data.getInteger("circuit");
         speed = data.getBoolean("speed");
         stop = data.getBoolean("stop");

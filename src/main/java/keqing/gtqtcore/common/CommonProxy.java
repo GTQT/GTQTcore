@@ -15,6 +15,7 @@ import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.recipes.properties.*;
 import keqing.gtqtcore.api.unification.GTQTMaterials;
 import keqing.gtqtcore.api.unification.ore.GTQTStoneTypes;
+import keqing.gtqtcore.api.utils.GTQTKQnetHelper;
 import keqing.gtqtcore.api.utils.GTQTLog;
 import keqing.gtqtcore.api.utils.GTQTOreHelper;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
@@ -330,6 +331,7 @@ public class CommonProxy {
         int[] array = {-3,-2,-1,0,1, 2, 3, 4,5,6,7,8,81,82,83,84};
         for (int j : array) MDProperties.registeredTier(j, GTQTOreHelper.getInfo(j));
 
+        for(int i=0;i<=30;i++) KQKindProperty.registeredKI(i, GTQTKQnetHelper.getInfo(i));
 
         ELEProperties.registeredTier(1,"一级");
         ELEProperties.registeredTier(2,"二级");

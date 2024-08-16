@@ -753,7 +753,6 @@ public class MetaTileEntityEvaporationPool extends RecipeMapMultiblockController
         }).addEnergyTierLine(GTUtility.getTierByVoltage(recipeMapWorkable.getMaxVoltage())).addParallelsLine(recipeMapWorkable.getParallelLimit()).addWorkingStatusLine().addProgressLine(recipeMapWorkable.getProgressPercent());
     }
 
-    @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         super.writeToNBT(data);
         data.setInteger("columnCount", this.columnCount);
@@ -770,7 +769,7 @@ public class MetaTileEntityEvaporationPool extends RecipeMapMultiblockController
         return data;
     }
 
-    @Override
+   
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         if (data.hasKey("columnCount")) {

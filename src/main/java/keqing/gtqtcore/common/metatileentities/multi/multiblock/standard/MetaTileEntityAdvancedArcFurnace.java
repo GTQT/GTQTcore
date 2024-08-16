@@ -101,12 +101,12 @@ public class MetaTileEntityAdvancedArcFurnace extends GTQTRecipeMapMultiblockCon
         if(modern==1) textList.add(new TextComponentTranslation("gtqtcore.tire2",5));
         textList.add(new TextComponentTranslation("gtqtcore.parr",ParallelNum,ParallelLim));
     }
-    @Override
+
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("modern", modern);
         return super.writeToNBT(data);
     }
-    @Override
+
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         modern = data.getInteger("modern");

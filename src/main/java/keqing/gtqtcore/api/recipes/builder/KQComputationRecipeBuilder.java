@@ -6,6 +6,8 @@ import gregtech.api.recipes.recipeproperties.ComputationProperty;
 import gregtech.api.recipes.recipeproperties.TotalComputationProperty;
 import gregtech.api.util.EnumValidationResult;
 import gregtech.api.util.GTLog;
+import keqing.gtqtcore.api.recipes.properties.ELEProperties;
+import keqing.gtqtcore.api.recipes.properties.KQKindProperty;
 import keqing.gtqtcore.api.recipes.properties.KQNetProperty;
 import keqing.gtqtcore.api.utils.GTQTLog;
 
@@ -41,7 +43,35 @@ public class KQComputationRecipeBuilder extends RecipeBuilder<KQComputationRecip
             this.NB(((Number) value).intValue());
             return true;
         }
+        if (key.equals(ELEProperties.KEY)) {
+            this.Tier(((Number) value).intValue());
+            return true;
+        }
+        if (key.equals(KQKindProperty.KEY)) {
+            this.KI(((Number) value).intValue());
+            return true;
+        }
         return super.applyProperty(key, value);
+    }
+
+    public KQComputationRecipeBuilder KI(int KI) {
+        if (KI < 0) {
+            GTQTLog.logger.error("NULL KI", new IllegalArgumentException());
+            recipeStatus = EnumValidationResult.INVALID;
+        }
+
+        this.applyProperty(KQKindProperty.getInstance(), KI);
+        return this;
+    }
+
+    public KQComputationRecipeBuilder Tier(int Tier) {
+        if (Tier <= 0) {
+            GTQTLog.logger.error("NULL Tier", new IllegalArgumentException());
+            recipeStatus = EnumValidationResult.INVALID;
+        }
+
+        this.applyProperty(ELEProperties.getInstance(), Tier);
+        return this;
     }
 
     public KQComputationRecipeBuilder NB(int NB) {
@@ -63,9 +93,6 @@ public class KQComputationRecipeBuilder extends RecipeBuilder<KQComputationRecip
         return this;
     }
 
-    /**
-     * The total computation for this recipe. If desired, this should be used instead of a call to duration().
-     */
     public KQComputationRecipeBuilder totalCWU(int totalCWU) {
         if (totalCWU < 0) {
             GTLog.logger.error("Total CWU cannot be less than 0", new IllegalArgumentException());

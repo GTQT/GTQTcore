@@ -150,7 +150,6 @@ public class MetaTileEntityFixBed extends RecipeMapMultiblockController implemen
         }
 
     }
-    @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("fluid1", Hydrogen[0]);
         data.setInteger("fluid2", Hydrogen[1]);
@@ -159,7 +158,7 @@ public class MetaTileEntityFixBed extends RecipeMapMultiblockController implemen
         return super.writeToNBT(data);
     }
 
-    @Override
+   
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         Hydrogen[0] = data.getInteger("fluid1");

@@ -789,16 +789,16 @@ public class CPULine {
                 .duration(400)
                 .EUt(30)
                 .input(stick,Graphite,8)
-                .fluidInputs(HighlyPurifiedCoalTar.getFluid(200))
+                .fluidInputs(HighlyPurifiedCoalTar.getFluid(500))
                 .output(IMPREGNATED_GRAPHITE_RODS)
                 .buildAndRegister();
 
         CHEMICAL_RECIPES.recipeBuilder()
-                .duration(200)
+                .duration(300)
                 .EUt(30)
                 .input(IMPREGNATED_GRAPHITE_RODS)
                 .input(dust,Graphite,8)
-                .fluidInputs(Asphalt.getFluid(200))
+                .fluidInputs(Asphalt.getFluid(500))
                 .output(IMPREGNATED_GRAPHITE_RODSA)
                 .buildAndRegister();
 

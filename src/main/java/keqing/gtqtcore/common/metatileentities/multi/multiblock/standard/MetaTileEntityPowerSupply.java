@@ -72,7 +72,6 @@ public class  MetaTileEntityPowerSupply extends MultiblockWithDisplayBase  {
     BlockPos poss6;
     BlockPos poss7;
     BlockPos poss8;
-    @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("eu", eu);
         data.setInteger("tier", tier);
@@ -85,7 +84,7 @@ public class  MetaTileEntityPowerSupply extends MultiblockWithDisplayBase  {
         data.setBoolean("fastCharge", fastCharge);
         return super.writeToNBT(data);
     }
-    @Override
+   
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         eu = data.getInteger("eu");

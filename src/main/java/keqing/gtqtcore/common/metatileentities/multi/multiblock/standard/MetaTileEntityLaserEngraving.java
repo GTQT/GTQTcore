@@ -82,12 +82,11 @@ public class MetaTileEntityLaserEngraving extends MultiMapMultiblockController i
         textList.add(new TextComponentTranslation("gtqtcore.eleTire2",tier, laser_tier, glass_tier));
 
     }
-    @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("tier", tier);
         return super.writeToNBT(data);
     }
-    @Override
+   
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         tier = data.getInteger("tier");

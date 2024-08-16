@@ -126,7 +126,6 @@ public class MetaTileEntityBiologicalReaction extends GTQTRecipeMapMultiblockCon
                 "gregtech.multiblock.pb.computation",
                 cwutInfo));
     }
-    @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("liquid", liquid);
         data.setInteger("updatetime", updatetime);
@@ -134,7 +133,7 @@ public class MetaTileEntityBiologicalReaction extends GTQTRecipeMapMultiblockCon
         data.setDouble("rate", rate);
         return super.writeToNBT(data);
     }
-    @Override
+
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         liquid = data.getInteger("liquid");

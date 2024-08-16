@@ -21,6 +21,8 @@ import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.MultiblockShapeInfo;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
+import gregtech.api.recipes.logic.OverclockingLogic;
+import gregtech.api.recipes.recipeproperties.IRecipePropertyStorage;
 import gregtech.api.recipes.recipeproperties.TemperatureProperty;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.TextFormattingUtil;
@@ -65,7 +67,6 @@ public class MetaTileEntityBlazingCZPuller extends GTQTRecipeMapMultiblockOverwr
 
     public MetaTileEntityBlazingCZPuller(ResourceLocation metaTileEntityId) {
             super(metaTileEntityId, CZPULLER_RECIPES);
-        this.recipeMapWorkable = new HeatingCoilRecipeLogic(this);
         this.recipeMapWorkable = new BlazingBlastFurnaceWorkable(this);
     }
 
@@ -75,12 +76,12 @@ public class MetaTileEntityBlazingCZPuller extends GTQTRecipeMapMultiblockOverwr
     }
 
     int ParallelNum=1;
-    @Override
+
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("modern", modern);
         return super.writeToNBT(data);
     }
-    @Override
+
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         modern = data.getInteger("modern");
@@ -280,7 +281,14 @@ public class MetaTileEntityBlazingCZPuller extends GTQTRecipeMapMultiblockOverwr
                 }
             }
         }
+        protected void modifyOverclockPre( int[] values, IRecipePropertyStorage storage) {
+            super.modifyOverclockPre(values, storage);
+            values[0] = OverclockingLogic.applyCoilEUtDiscount(values[0], ((IHeatingCoil)this.metaTileEntity).getCurrentTemperature(), (Integer)storage.getRecipePropertyValue(TemperatureProperty.getInstance(), 0));
+        }
 
+        protected  int[] runOverclockingLogic( IRecipePropertyStorage propertyStorage, int recipeEUt, long maxVoltage, int duration, int amountOC) {
+            return OverclockingLogic.heatingCoilOverclockingLogic(Math.abs(recipeEUt), maxVoltage, duration, amountOC, ((IHeatingCoil)this.metaTileEntity).getCurrentTemperature(), (Integer)propertyStorage.getRecipePropertyValue(TemperatureProperty.getInstance(), 0));
+        }
         @Override
         public void setMaxProgress(int maxProgress)
         {

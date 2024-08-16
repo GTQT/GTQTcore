@@ -77,6 +77,43 @@
           "bot_all": "gregtech:blocks/multiblock/computer/computer_venti",
           "top_all":"gregtech:blocks/multiblock/computer/gpuiii"
         }
+      },
+      "adv_computer_casing": {
+        "model": "minecraft:cube",
+        "textures": {
+          "particle": "gregtech:blocks/multiblock/computer/computer_casing/front",
+          "down": "gregtech:blocks/multiblock/computer/computer_casing/bottom",
+          "up": "gregtech:blocks/multiblock/computer/computer_casing/top",
+          "north": "gregtech:blocks/multiblock/computer/computer_casing/side",
+          "east": "gregtech:blocks/multiblock/computer/computer_casing/side",
+          "south": "gregtech:blocks/multiblock/computer/computer_casing/side",
+          "west": "gregtech:blocks/multiblock/computer/computer_casing/side"
+        }
+      },
+      "adv_computer_heat_vent": {
+        "model": "minecraft:cube_bottom_top",
+        "textures": {
+          "bottom": "gregtech:blocks/multiblock/computer/computer_heat_vent_top_bot",
+          "top": "#bottom",
+          "side": "gregtech:blocks/multiblock/computer/computer_heat_vent_side"
+        }
+      },
+      "ultra_power_casing": {
+        "textures": {
+          "all": "gregtech:blocks/multiblock/computer/high_power_casing"
+        }
+      },
+      "ultra_computer_casing": {
+        "model": "minecraft:cube",
+        "textures": {
+          "particle": "gregtech:blocks/multiblock/computer/advanced_computer_casing/front",
+          "down": "gregtech:blocks/multiblock/computer/advanced_computer_casing/bottom",
+          "up": "gregtech:blocks/multiblock/computer/advanced_computer_casing/top",
+          "north": "gregtech:blocks/multiblock/computer/advanced_computer_casing/side",
+          "east": "gregtech:blocks/multiblock/computer/advanced_computer_casing/side",
+          "south": "gregtech:blocks/multiblock/computer/advanced_computer_casing/side",
+          "west": "gregtech:blocks/multiblock/computer/advanced_computer_casing/side"
+        }
       }
     }
   }

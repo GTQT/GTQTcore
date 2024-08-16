@@ -191,14 +191,14 @@ public abstract class NoEnergyMultiblockController extends MultiblockWithDisplay
         this.getFrontOverlay().renderOrientedState(renderState, translation, pipeline, getFrontFacing(), recipeMapWorkable.isActive(), recipeMapWorkable.isWorkingEnabled());
     }
 
-    @Override
+
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         super.writeToNBT(data);
         data.setBoolean("isDistinct", isDistinct);
         return data;
     }
 
-    @Override
+
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         isDistinct = data.getBoolean("isDistinct");

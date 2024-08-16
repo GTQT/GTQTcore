@@ -191,12 +191,11 @@ public class MetaTileEntityAssemblyLine extends RecipeMapMultiblockController {
         // player's right when looking at the controller, but the controller's left
         return RelativeDirection.LEFT.getSorter(getFrontFacing(), getUpwardsFacing(), isFlipped());
     }
-    @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("casingTier", casing_tier);
         return super.writeToNBT(data);
     }
-    @Override
+   
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         casing_tier = data.getInteger("casingTier");

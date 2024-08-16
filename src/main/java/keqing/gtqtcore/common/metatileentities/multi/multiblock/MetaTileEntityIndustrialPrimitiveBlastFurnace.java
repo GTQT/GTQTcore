@@ -54,13 +54,13 @@ public class MetaTileEntityIndustrialPrimitiveBlastFurnace extends NoEnergyMulti
     private byte auxiliaryBlastFurnaceNumber = 0;
     int Temp=3000;
     private static final TraceabilityPredicate IS_SNOW_LAYER = new TraceabilityPredicate(bws -> GTUtility.isBlockSnow(bws.getBlockState()));
-    @Override
+
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("Temp", Temp);
         data.setInteger("thresholdPercentage", thresholdPercentage);
         return super.writeToNBT(data);
     }
-    @Override
+
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         Temp = data.getInteger("Temp");

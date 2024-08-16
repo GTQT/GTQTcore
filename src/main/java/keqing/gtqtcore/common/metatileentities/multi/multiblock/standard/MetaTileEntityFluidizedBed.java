@@ -58,13 +58,12 @@ public class MetaTileEntityFluidizedBed extends RecipeMapMultiblockController im
         this.recipeMapWorkable = new FluidizedBedWorkableHandler(this);
     }
 
-    @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("temp", temp);
         data.setInteger("tick", tick);
         return super.writeToNBT(data);
     }
-    @Override
+   
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         temp = data.getInteger("temp");

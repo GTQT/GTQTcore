@@ -18,19 +18,28 @@ import gregtech.client.renderer.cclop.ColourOperation;
 import gregtech.client.renderer.cclop.LightMapOperation;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.BloomEffectUtil;
+import gregtech.client.utils.TooltipHelper;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.BlockTransparentCasing;
 import keqing.gtqtcore.common.block.blocks.GTQTIsaCasing;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.commons.lang3.ArrayUtils;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
+import java.util.List;
+
+import static gregtech.api.GTValues.*;
 
 public class MetaTileEntityFlotationFactory extends RecipeMapMultiblockController {
 
@@ -45,14 +54,37 @@ public class MetaTileEntityFlotationFactory extends RecipeMapMultiblockControlle
         public MetaTileEntityFlotationFactoryrWorkable(RecipeMapMultiblockController tileEntity) {
             super(tileEntity);
         }
+        private int ParallelTier(int tier) {
+            return 4 * (tier * 4);
+        }
+
+        private int HigherParallelTier(int tier) {
+            return 12 * (tier * 4);
+        }
+
+        private int getTier(long vol) {
+            for (int i = 0; i < V.length; i++) {
+                if (V[i] == vol) {
+                    return i;
+                }
+            }
+            return 0;
+        }
+
         @Override
         public int getParallelLimit() {
-            return 32;
-        }
-        @Override
-        public void setMaxProgress(int maxProgress)
-        {
-            this.maxProgressTime = maxProgress/32;
+            if (this.getMaxVoltage() > V[MAX]) {    //  For MAX+, get 4 * 15 * 4
+                return HigherParallelTier(15);
+            }
+            int tier = getTier(getMaxVoltage());
+            if (tier == 0) {
+                return 1;
+            }
+            if (tier <= UV) {
+                return ParallelTier(getTier(getMaxVoltage()));
+            } else {
+                return HigherParallelTier(getTier(getMaxVoltage()));
+            }
         }
     }
     @Override
@@ -118,6 +150,13 @@ public class MetaTileEntityFlotationFactory extends RecipeMapMultiblockControlle
                 }
             }
         }
+    }
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, boolean advanced) {
+        super.addInformation(stack, player, tooltip, advanced);
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("我爱洗澡", new Object[0]));
+        tooltip.add(I18n.format("gtqtcore.machine.dangote_distillery.tooltip.6"));
+        tooltip.add(I18n.format("gtqtcore.machine.dangote_distillery.tooltip.7"));
     }
 
     @SideOnly(Side.CLIENT)

@@ -24,6 +24,8 @@ import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeBuilder;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
+import gregtech.api.recipes.logic.OverclockingLogic;
+import gregtech.api.recipes.recipeproperties.IRecipePropertyStorage;
 import gregtech.api.recipes.recipeproperties.TemperatureProperty;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.TextFormattingUtil;
@@ -62,10 +64,6 @@ import java.util.Comparator;
 import java.util.List;
 
 import static gregtech.api.GTValues.VA;
-import static gregtech.api.recipes.RecipeMaps.BLAST_RECIPES;
-import static gregtech.api.unification.material.Materials.Lubricant;
-import static gregtech.common.metatileentities.multi.electric.MetaTileEntityMultiSmelter.getDurationForParallel;
-import static gregtech.common.metatileentities.multi.electric.MetaTileEntityMultiSmelter.getEUtForParallel;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.Pyrotheum;
 public class MetaTileEntityBlazingBlastFurnace extends GTQTRecipeMapMultiblockControllerOverwrite implements IHeatingCoil {
     private int blastFurnaceTemperature;
@@ -79,7 +77,6 @@ public class MetaTileEntityBlazingBlastFurnace extends GTQTRecipeMapMultiblockCo
                 GTQTcoreRecipeMaps.BURNER_REACTOR_RECIPES,
                 RecipeMaps.ALLOY_SMELTER_RECIPES
         });
-        this.recipeMapWorkable = new HeatingCoilRecipeLogic(this);
         this.recipeMapWorkable = new BlazingBlastFurnaceWorkable(this);
     }
 
@@ -88,12 +85,12 @@ public class MetaTileEntityBlazingBlastFurnace extends GTQTRecipeMapMultiblockCo
         return new MetaTileEntityBlazingBlastFurnace(this.metaTileEntityId);
     }
     int ParallelNum=1;
-    @Override
+
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("modern", modern);
         return super.writeToNBT(data);
     }
-    @Override
+
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         modern = data.getInteger("modern");
@@ -130,7 +127,7 @@ public class MetaTileEntityBlazingBlastFurnace extends GTQTRecipeMapMultiblockCo
             this.blastFurnaceTemperature = BlockWireCoil.CoilType.CUPRONICKEL.getCoilTemperature();
             this.heatingCoilLevel = BlockWireCoil.CoilType.CUPRONICKEL.getLevel();
         }
-        ParallelLim=Math.min((int)Math.pow(2, heatingCoilLevel),64);
+        ParallelLim=Math.min((int)Math.pow(2, heatingCoilLevel),16);
         ParallelNum=ParallelLim;
         this.blastFurnaceTemperature += 100 * Math.max(0, GTUtility.getTierByVoltage(getEnergyContainer().getInputVoltage()) - GTValues.MV);
     }
@@ -281,6 +278,14 @@ public class MetaTileEntityBlazingBlastFurnace extends GTQTRecipeMapMultiblockCo
         @Override
         public int getParallelLimit() {
             return ParallelNum;
+        }
+        protected void modifyOverclockPre( int[] values, IRecipePropertyStorage storage) {
+            super.modifyOverclockPre(values, storage);
+            values[0] = OverclockingLogic.applyCoilEUtDiscount(values[0], ((IHeatingCoil)this.metaTileEntity).getCurrentTemperature(), (Integer)storage.getRecipePropertyValue(TemperatureProperty.getInstance(), 0));
+        }
+
+        protected  int[] runOverclockingLogic( IRecipePropertyStorage propertyStorage, int recipeEUt, long maxVoltage, int duration, int amountOC) {
+            return OverclockingLogic.heatingCoilOverclockingLogic(Math.abs(recipeEUt), maxVoltage, duration, amountOC, ((IHeatingCoil)this.metaTileEntity).getCurrentTemperature(), (Integer)propertyStorage.getRecipePropertyValue(TemperatureProperty.getInstance(), 0));
         }
         protected void updateRecipeProgress() {
             IMultipleTankHandler inputTank = combustionEngine.getInputFluidInventory();

@@ -52,14 +52,13 @@ public class MetaTileEntityGasCollector extends RecipeMapMultiblockController {
 
     boolean gasModel;
 
-    @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setBoolean("gasModel", gasModel);
 
 
         return super.writeToNBT(data);
     }
-    @Override
+   
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         gasModel = data.getBoolean("gasModel");

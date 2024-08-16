@@ -19,7 +19,9 @@ import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.MultiblockShapeInfo;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.RecipeMaps;
+import gregtech.api.recipes.logic.OverclockingLogic;
 import gregtech.api.recipes.recipeproperties.IRecipePropertyStorage;
+import gregtech.api.recipes.recipeproperties.TemperatureProperty;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.TextComponentUtil;
 import gregtech.api.util.TextFormattingUtil;
@@ -72,7 +74,6 @@ public class MetaTileEntityHugeCrackingUnit extends GTQTRecipeMapMultiblockOverw
     public MetaTileEntityHugeCrackingUnit(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, RecipeMaps.CRACKING_RECIPES);
         this.recipeMapWorkable = new MegaOilCrackingUnitWorkableHandler(this);
-        this.recipeMapWorkable = new HeatingCoilRecipeLogic(this);
     }
     public int getCurrentTemperature() {
         return this.blastFurnaceTemperature;
@@ -82,12 +83,11 @@ public class MetaTileEntityHugeCrackingUnit extends GTQTRecipeMapMultiblockOverw
         return new MetaTileEntityHugeCrackingUnit(metaTileEntityId);
     }
     int ParallelNum=1;
-    @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("modern", modern);
         return super.writeToNBT(data);
     }
-    @Override
+   
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         modern = data.getInteger("modern");
@@ -138,7 +138,7 @@ public class MetaTileEntityHugeCrackingUnit extends GTQTRecipeMapMultiblockOverw
             this.heatingCoilLevel = BlockWireCoil.CoilType.CUPRONICKEL.getLevel();
             this.coilTier = BlockWireCoil.CoilType.CUPRONICKEL.getTier();
         }
-        ParallelLim=Math.min((int)Math.pow(2, coilTier),1024);
+        ParallelLim=Math.min((int)Math.pow(2, coilTier),256);
         ParallelNum=ParallelLim;
         this.blastFurnaceTemperature += 100 * Math.max(0, GTUtility.getTierByVoltage(getEnergyContainer().getInputVoltage()) - GTValues.MV);
     }
@@ -209,7 +209,7 @@ public class MetaTileEntityHugeCrackingUnit extends GTQTRecipeMapMultiblockOverw
         tooltip.add(I18n.format("gregtech.machine.cracker.gtqtupdate.2"));
         tooltip.add(I18n.format("gtqtcore.multiblock.hb.tooltip.2"));
         tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.1"));
-        tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.2",1024));
+        tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.2",256));
     }
 
     @Override
@@ -279,6 +279,14 @@ public class MetaTileEntityHugeCrackingUnit extends GTQTRecipeMapMultiblockOverw
 
             resultOverclock[0] *= (int) (1.0f - Tier * 0.1);
             resultOverclock[0] = Math.max(1, resultOverclock[0]);
+        }
+        protected void modifyOverclockPre( int[] values, IRecipePropertyStorage storage) {
+            super.modifyOverclockPre(values, storage);
+            values[0] = OverclockingLogic.applyCoilEUtDiscount(values[0], ((IHeatingCoil)this.metaTileEntity).getCurrentTemperature(), (Integer)storage.getRecipePropertyValue(TemperatureProperty.getInstance(), 0));
+        }
+
+        protected  int[] runOverclockingLogic( IRecipePropertyStorage propertyStorage, int recipeEUt, long maxVoltage, int duration, int amountOC) {
+            return OverclockingLogic.heatingCoilOverclockingLogic(Math.abs(recipeEUt), maxVoltage, duration, amountOC, ((IHeatingCoil)this.metaTileEntity).getCurrentTemperature(), (Integer)propertyStorage.getRecipePropertyValue(TemperatureProperty.getInstance(), 0));
         }
     }
 }

@@ -368,7 +368,6 @@ public class MetaTileEntityReinforcedRotorHolder extends MetaTileEntityMultibloc
         clearInventory(itemBuffer, inventory);
     }
 
-    @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         super.writeToNBT(data);
         data.setTag("inventory", inventory.serializeNBT());
@@ -378,7 +377,7 @@ public class MetaTileEntityReinforcedRotorHolder extends MetaTileEntityMultibloc
         return data;
     }
 
-    @Override
+   
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         this.inventory.deserializeNBT(data.getCompoundTag("inventory"));

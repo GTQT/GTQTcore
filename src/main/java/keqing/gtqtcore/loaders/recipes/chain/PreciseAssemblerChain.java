@@ -152,7 +152,7 @@ public class PreciseAssemblerChain {
                 .input(plateDouble, HastelloyC59, 2)
                 .input(CIRCUIT_GOOD_I)
                 .input(gearSmall, TanmolyiumBetaC, 8)
-                .input(cableGtQuadruple, Tritanium, 2)
+                .input(cableGtQuadruple, NaquadahAlloy, 2)
                 .input(screw, HSSE, 32)
                 .fluidInputs(Zeron100.getFluid(576))
                 .outputs(GTQTMetaBlocks.TURBINE_CASING1.getItemVariant(GTQTTurbineCasing1.TurbineCasingType.PRECISE_ASSEMBLER_CASING_MK2,4))

@@ -15,6 +15,7 @@ import gregtech.api.util.RelativeDirection;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
+import gregtech.client.utils.TooltipHelper;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiFluidHatch;
 import gregtech.core.sound.GTSoundEvents;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
@@ -137,6 +138,7 @@ public class MetaTileEntityDangoteDistillery extends MultiMapMultiblockControlle
     @Override
     public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("超级蒸馏塔", new Object[0]));
         tooltip.add(I18n.format("gtqtcore.machine.dangote_distillery.tooltip.1"));
         tooltip.add(I18n.format("gtqtcore.machine.dangote_distillery.tooltip.2"));
         tooltip.add(I18n.format("gtqtcore.machine.dangote_distillery.tooltip.3"));

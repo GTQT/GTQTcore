@@ -145,13 +145,12 @@ public class MetaTileEntitySmallHeatExchanger extends NoEnergyMultiblockControll
     }
 
 
-    @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("ThresholdPercentage", thresholdPercentage);
         return super.writeToNBT(data);
     }
 
-    @Override
+   
     public void readFromNBT(NBTTagCompound data) {
         thresholdPercentage = data.getInteger("ThresholdPercentage");
         super.readFromNBT(data);

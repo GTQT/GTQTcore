@@ -291,13 +291,12 @@ public class MetaTileEntityPCBFactory extends RecipeMapMultiblockController {
         this.traceSize = clamp(traceSize + 25, minTraceSize, maxTraceSize);
     }
 
-    @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("TraceSize", traceSize);
         return super.writeToNBT(data);
     }
 
-    @Override
+   
     public void readFromNBT(NBTTagCompound data) {
         traceSize = data.getInteger("TraceSize");
         super.readFromNBT(data);

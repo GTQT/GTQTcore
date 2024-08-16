@@ -55,15 +55,13 @@ public abstract class MixinSolarBoilerServer extends SteamBoiler  {
     public long getTimer(){
         return timer;
     }
-    
-    @Override
+
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         NBTTagCompound result =  super.writeToNBT(data);
         result.setLong("MixinTimer",timer);
         return result;
     }
-    
-    @Override
+
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         this.timer = data.getLong("MixinTimer");

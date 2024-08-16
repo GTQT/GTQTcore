@@ -84,7 +84,6 @@ public class MetaTileEntityParticleAccelerator extends GTQTRecipeMapMultiblockCo
     public IOpticalComputationProvider getComputationProvider() {
         return this.computationProvider;
     }
-
     private double speed;       //速度
     private int angle;       //角度
 
@@ -95,14 +94,13 @@ public class MetaTileEntityParticleAccelerator extends GTQTRecipeMapMultiblockCo
     boolean hehecheng;
 
 
-    @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("angle", angle);
         data.setInteger("Mode", Mode);
         data.setDouble("speed", speed);
         return super.writeToNBT(data);
     }
-    @Override
+   
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         angle = data.getInteger("angle");

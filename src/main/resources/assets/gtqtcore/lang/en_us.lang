@@ -2256,6 +2256,7 @@ metaitem.delta_plus_plus.jei_description=Delta++ baryon is composed of three up 
 metaitem.antidelta_plus_plus.jei_description=Anti-Delta++ baryon is the antimatter counterpart of Delta++ baryon.
 metaitem.delta_minus.jei_description=Delta- baryon is composed of three down quarks.
 metaitem.antidelta_minus.jei_description=Anti-Delta- baryon is the antimatter counterpart of Delta- baryon.
+gregtech.machine.vac.tooltip.1=When running the vacuum drying formula, parallel quantity 2 to the power of the current coil level (maximum 64)
 gregtech.machine.huge_chemical_reactor=One in a Million
 gtqtcore.multiblock.fr.threshold_decrement=§cDecrease one unit of fracturing pressure /n§7Fluid output decreases by half a unit, fracturing fluid consumption decreases by one unit.
 gtqtcore.multiblock.fr.threshold_increment=§aIncrease one unit of fracturing pressure /n§7Fluid output increases by half a unit, fracturing fluid consumption increases by one unit.
@@ -4345,6 +4346,15 @@ tile.computer_competent.computer_gpui.tooltip=Soviet Military Engineering
 tile.computer_competent.computer_gpuii.tooltip=Goblin Manufacturing
 tile.computer_competent.computer_gpuiii.tooltip=Sunway TaihuLight!
 
+tile.computer_competent.adv_computer_casing.name=Supercomputer Case
+tile.computer_competent.adv_computer_casing.tooltip=Who Builds Houses with Computers
+tile.computer_competent.adv_computer_heat_vent.name=Advanced Computer Heat Vent
+tile.computer_competent.adv_computer_heat_vent.tooltip=Comparable to an Air Fryer
+tile.computer_competent.ultra_power_casing.name=Ultra-Powerful Machine Case
+tile.computer_competent.ultra_power_casing.tooltip=Get any closer and it'll explode!
+tile.computer_competent.ultra_computer_casing.name=Ultra-Advanced Computer Case
+tile.computer_competent.ultra_computer_casing.tooltip=Feels like it can calculate the universe
+
 gtqtcore.multiblock.kqcc.description=The Computing Center Server is your only way to gain computing power in the early game. Each server has three rows and four columns of computing components, totaling 12 modules. From top to bottom, they are [Auxiliary Computing Module/High-Performance Computing Module/Data Cache Module]. Each row can only contain the corresponding components, but the levels can be different, and empty frames can also be used for filling. When the total RAM exceeds the combined CPU and GPU, the total computing power is the sum of CPU and GPU; otherwise, it is the sum of RAM. Unit heat is determined by CPU sum * GPU sum. When the temperature is below 300 degrees, it computes normally; above 300 degrees, performance is halved; above 450 degrees, it forces shutdown. In overclocking mode, computing performance doubles, heat quadruples, coolant consumption quadruples, and overall cooling performance doubles. Coolant types/cooling performance (Water-7.7/10mb, Coolant-14.4/5mb, Liquid Nitrogen-28.8/1mb). The machine cannot cool down with coolant while shut down!
 
 gtqtcore.multiblock.kqcc.description1=Advanced Computing Server provides a large amount of integrated computing power in the mid-game. Each server has three rows and can be expanded up to sixteen times with sheet modules. From top to bottom, they are [Auxiliary Computing Module/High-Performance Computing Module/Data Cache Module]. Each row can only contain the corresponding components, and all corresponding module levels must be consistent. When the total RAM exceeds the combined CPU and GPU, the total computing power is the sum of CPU and GPU; otherwise, it is the sum of RAM. Unit heat is determined by CPU sum * GPU sum (stacking up to eight times reduction). When the temperature is below 300 degrees, it computes normally; above 300 degrees, performance is halved; above 450 degrees, it forces shutdown. In overclocking mode, computing performance doubles, heat quadruples, coolant consumption quadruples, and overall cooling performance doubles. Coolant types/cooling performance (Water-7.7/10mb, Coolant-14.4/5mb, Liquid Nitrogen-28.8/1mb). The machine cannot cool down with coolant while shut down!
@@ -4500,6 +4510,8 @@ gtqtcore.machine.powersupply.tooltip.7=Supply Mode: Multi-block charge and disch
 gtqtcore.machine.power_supply.name=Superconducting Matrix
 gtqtcore.machine.adv_kqcc.name=Super Computing Server
 gtqtcore.machine.mini_date_bank.name=Mini Database
+gtqtcore.machine.adv_date_bank.name=Advance Database
+gtqtcore.machine.adv_network_switch.name=Advance Network Switch
 gtqtcore.machine.large_processing_factory.name=Large Processing Factory
 gtqtcore.machine.large_processing_factory.tooltip.1=2.5 times faster than single-block machines of the same voltage.
 gtqtcore.machine.large_processing_factory.tooltip.2=Use §6Programmed Circuit§7 to control the current mode of recipes:

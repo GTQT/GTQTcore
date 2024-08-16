@@ -324,7 +324,6 @@ public class MetaTileEntityHugeMiner extends MultiblockWithDisplayBase implement
         return GTQTTextures.ST_CASING;
     }
 
-    @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         super.writeToNBT(data);
         data.setTag("chunkMode", new NBTTagInt(chunkMode ? 1 : 0));
@@ -332,7 +331,7 @@ public class MetaTileEntityHugeMiner extends MultiblockWithDisplayBase implement
         return this.minerLogic.writeToNBT(data);
     }
 
-    @Override
+   
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         chunkMode = data.getInteger("chunkMode") != 0;

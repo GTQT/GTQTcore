@@ -78,7 +78,6 @@ public class MetaTileEntityElectricArcFurnace extends GTQTRecipeMapMultiblockCon
     private boolean isInput=false;
     private int runTime = 0;
     private int maxTime = 0;
-    @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("simulateTemp", simulateTemp);
         data.setInteger("Fe", Fe);
@@ -87,7 +86,7 @@ public class MetaTileEntityElectricArcFurnace extends GTQTRecipeMapMultiblockCon
         data.setInteger("Cr", Cr);
         return super.writeToNBT(data);
     }
-    @Override
+   
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         simulateTemp = data.getInteger("simulateTemp");

@@ -78,7 +78,6 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
         this.recipeMapWorkable = new IndustrialDrillWorkableHandler(this);
     }
 
-    @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setDouble("naijiu", naijiu);
         data.setBoolean("cycle",cycle);
@@ -87,7 +86,7 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
         return super.writeToNBT(data);
     }
 
-    @Override
+   
     public void readFromNBT(NBTTagCompound data) {
         naijiu = data.getInteger("naijiu");
         cycle=data.getBoolean("cycle");

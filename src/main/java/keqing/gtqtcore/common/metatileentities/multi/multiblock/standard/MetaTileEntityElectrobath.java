@@ -78,7 +78,6 @@ public class MetaTileEntityElectrobath extends GTQTRecipeMapMultiblockOverwrite 
         }
     }
      int ParallelNum=1;
-    @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("modern", modern);
         data.setInteger("casingTier", casingTier);
@@ -86,7 +85,7 @@ public class MetaTileEntityElectrobath extends GTQTRecipeMapMultiblockOverwrite 
         data.setInteger("eu", eu);
         return super.writeToNBT(data);
     }
-    @Override
+   
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         modern = data.getInteger("modern");

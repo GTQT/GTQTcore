@@ -53,7 +53,6 @@ public class MetaTileEntityNuclearReactor extends RecipeMapMultiblockController 
     boolean care;
     double temp;
     double addtemp;
-    @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setDouble("heat", heat);
         data.setInteger("rate", rate);
@@ -64,7 +63,7 @@ public class MetaTileEntityNuclearReactor extends RecipeMapMultiblockController 
         data.setBoolean("care", care);
         return super.writeToNBT(data);
     }
-    @Override
+   
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         heat = data.getDouble("heat");

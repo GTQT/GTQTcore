@@ -129,7 +129,7 @@ public class MetaTileEntityBufferHatch extends MetaTileEntityMultiblockPart impl
         super.addToolUsages(stack, world, tooltip, advanced);
     }
 
-    @Override
+   
     public void readFromNBT(NBTTagCompound data) {
         this.itemHandler.deserializeNBT(data.getCompoundTag("BufferItem"));
         this.fluidTank.readFromNBT(data);
@@ -137,7 +137,6 @@ public class MetaTileEntityBufferHatch extends MetaTileEntityMultiblockPart impl
         super.readFromNBT(data);
     }
 
-    @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setTag("BufferItem", this.itemHandler.serializeNBT());
         data.setBoolean("needupdate", this.needUpdate);

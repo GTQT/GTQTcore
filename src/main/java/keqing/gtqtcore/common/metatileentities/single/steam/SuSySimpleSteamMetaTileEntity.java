@@ -131,14 +131,12 @@ public class SuSySimpleSteamMetaTileEntity extends SteamMetaTileEntity implement
         return createGuiTemplate(entityPlayer).build(getHolder(), entityPlayer);
     }
 
-    @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         super.writeToNBT(data);
         if (circuitInventory != null) this.circuitInventory.write(data);
         return data;
     }
 
-    @Override
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         if (circuitInventory != null) {

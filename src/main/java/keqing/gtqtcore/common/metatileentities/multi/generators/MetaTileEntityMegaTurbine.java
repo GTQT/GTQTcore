@@ -487,13 +487,13 @@ public class MetaTileEntityMegaTurbine extends FuelMultiblockController implemen
         this.mode = buf.readByte();
     }
 
-    @Override
+
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setByte("mode", (byte) mode);
         return super.writeToNBT(data);
     }
 
-    @Override
+
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         this.mode = data.getByte("mode");

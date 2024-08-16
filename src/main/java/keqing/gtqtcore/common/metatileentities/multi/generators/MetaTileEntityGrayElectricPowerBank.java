@@ -269,7 +269,7 @@ public class MetaTileEntityGrayElectricPowerBank extends MultiblockWithDisplayBa
     }
 
     //主方块数据存储
-    @Override
+
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setBoolean("isActive", isActive);
         data.setBoolean("isWorkingEnabled", isWorkingEnabled);
@@ -279,7 +279,6 @@ public class MetaTileEntityGrayElectricPowerBank extends MultiblockWithDisplayBa
         return  super.writeToNBT(data);
     }
 //NBT读写这块需要搬过来  还有
-    @Override
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         isActive = data.getBoolean("isActive");

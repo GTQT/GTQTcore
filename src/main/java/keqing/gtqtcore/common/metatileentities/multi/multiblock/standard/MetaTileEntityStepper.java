@@ -117,14 +117,13 @@ public class MetaTileEntityStepper extends MultiMapMultiblockController implemen
             this.writeCustomData(GTQTValue.UPDATE_TIER11,buf1 -> buf1.writeInt(this.tier));
         }
     }
-    @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("tier", tier);
         data.setInteger("LaserKind", LaserKind);
         data.setInteger("LaserAmount", LaserAmount);
         return super.writeToNBT(data);
     }
-    @Override
+   
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         tier = data.getInteger("tier");

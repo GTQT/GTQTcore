@@ -68,14 +68,13 @@ public class MetaTileEntityFracturing extends MultiblockWithDisplayBase implemen
     protected IMultipleTankHandler inputFluidInventory;
     protected IMultipleTankHandler outputFluidInventory;
     protected IEnergyContainer energyContainer;
-    @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("thresholdPercentage", thresholdPercentage);
         this.minerLogic.writeToNBT(data);
         return super.writeToNBT(data);
     }
 
-    @Override
+   
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         thresholdPercentage= data.getInteger("thresholdPercentage");

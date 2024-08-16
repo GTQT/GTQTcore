@@ -21,7 +21,7 @@ public class ELEProperties extends RecipeProperty<Integer> {
 
     @Override
     public void drawInfo(Minecraft minecraft, int x, int y, int color, Object value) {
-        minecraft.fontRenderer.drawString(I18n.format("电解器等级：",
+        minecraft.fontRenderer.drawString(I18n.format("设备等级：",
                 castValue(value).toString()) + getTire(castValue(value)), x, y, color);
     }
 

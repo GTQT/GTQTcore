@@ -172,12 +172,11 @@ public class MetaTileEntitySaltField  extends NoEnergyMultiblockController {
             }
         }
     }
-    @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("heat", heat);
         return super.writeToNBT(data);
     }
-    @Override
+   
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         heat = data.getInteger("heat");

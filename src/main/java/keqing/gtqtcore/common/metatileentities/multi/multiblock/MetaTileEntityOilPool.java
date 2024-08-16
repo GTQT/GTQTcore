@@ -68,7 +68,7 @@ public class MetaTileEntityOilPool extends NoEnergyMultiblockController {
     float rate=0;   //破乳度
     double sperate;//盐度
     //需要加水将盐度下降到10%，根据加水量添加破乳剂，反应片刻后破乳度达到80%排放
-    @Override
+
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setDouble("sperate", sperate);
         data.setDouble("poruji", poruji);
@@ -76,7 +76,6 @@ public class MetaTileEntityOilPool extends NoEnergyMultiblockController {
         return super.writeToNBT(data);
     }
 
-    @Override
     public void readFromNBT(NBTTagCompound data) {
         sperate = data.getInteger("sperate");
         poruji = data.getInteger("poruji");

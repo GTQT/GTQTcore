@@ -4,6 +4,7 @@ import gregtech.api.items.metaitem.MetaItem;
 import gregtech.api.recipes.GTRecipeHandler;
 import gregtech.api.recipes.ingredients.IntCircuitIngredient;
 import gregtech.api.unification.OreDictUnifier;
+import gregtech.common.blocks.BlockComputerCasing;
 import gregtech.common.blocks.BlockFusionCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.items.MetaItems;
@@ -16,6 +17,7 @@ import static gregtech.api.unification.material.MarkerMaterials.Tier.*;
 import static gregtech.api.unification.material.Materials.*;
 
 import static gregtech.api.unification.ore.OrePrefix.*;
+import static gregtech.common.blocks.MetaBlocks.OPTICAL_PIPES;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.Vibranium;
 
 public class removeRecipes {
@@ -90,6 +92,11 @@ public class removeRecipes {
         GTRecipeHandler.removeRecipesByInputs(ASSEMBLY_LINE_RECIPES, new ItemStack[]{MetaBlocks.FUSION_CASING.getItemVariant(BlockFusionCasing.CasingType.FUSION_COIL),OreDictUnifier.get(circuit,UV,4),OreDictUnifier.get(plateDouble,Naquadria),OreDictUnifier.get(plateDouble,Europium), MetaItems.FIELD_GENERATOR_LuV.getStackForm(2), MetaItems.ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT.getStackForm(64),MetaItems.ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT.getStackForm(32),OreDictUnifier.get(wireGtSingle,UraniumRhodiumDinaquadide,32)},new FluidStack[]{SolderingAlloy.getFluid(1152),VanadiumGallium.getFluid(1152)});
         // 核聚变反应堆控制电脑MK-III * 1
         GTRecipeHandler.removeRecipesByInputs(ASSEMBLY_LINE_RECIPES, new ItemStack[]{MetaBlocks.FUSION_CASING.getItemVariant(BlockFusionCasing.CasingType.FUSION_COIL),OreDictUnifier.get(circuit,UHV,4),MetaItems.QUANTUM_STAR.getStackForm(),OreDictUnifier.get(plateDouble,Americium), MetaItems.FIELD_GENERATOR_ZPM.getStackForm(2), MetaItems.ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT.getStackForm(64),MetaItems.ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT.getStackForm(64),OreDictUnifier.get(wireGtSingle,EnrichedNaquadahTriniumEuropiumDuranide,32)},new FluidStack[]{SolderingAlloy.getFluid(1152),YttriumBariumCuprate.getFluid(1152)});
+
+
+        // 数据库 * 1
+        GTRecipeHandler.removeRecipesByInputs(ASSEMBLY_LINE_RECIPES, new ItemStack[]{MetaBlocks.COMPUTER_CASING.getItemVariant(BlockComputerCasing.CasingType.COMPUTER_CASING),OreDictUnifier.get(circuit,LuV,8),MetaItems.TOOL_DATA_ORB.getStackForm(),OreDictUnifier.get(wireFine,Cobalt,64),OreDictUnifier.get(wireFine,Copper,64),new ItemStack( OPTICAL_PIPES[0],4),OreDictUnifier.get(wireGtDouble,IndiumTinBariumTitaniumCuprate,16)},new FluidStack[]{SolderingAlloy.getFluid(288),Lubricant.getFluid(500)});
+
 
 
     }

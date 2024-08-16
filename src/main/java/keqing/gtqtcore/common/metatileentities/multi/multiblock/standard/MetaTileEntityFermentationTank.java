@@ -164,13 +164,12 @@ public class MetaTileEntityFermentationTank extends RecipeMapMultiblockControlle
         this.markDirty();
     }
 
-    @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setDouble("ph", this.pH);
         return super.writeToNBT(data);
     }
 
-    @Override
+   
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         this.pH = data.getDouble("ph");

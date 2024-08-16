@@ -105,7 +105,7 @@ public class HigherDegreeMaterials {
                 .ore()
                 .dust().fluid()
                 .color(0xA4D3EE)
-                .components(Lithium,1,Sodium,1,Aluminium,1,Phosphate,1,Oxygen,4,Fluorine,1,Hydrogen,1)
+                .components(Lithium,1,Sodium,1,Aluminium,1,Phosphate,1,Hydrogen,1)
                 .build();
 
         // 琥珀

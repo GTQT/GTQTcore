@@ -187,7 +187,9 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityCokingTower COKING_TOWER;
     public static MetaTileEntityPowerSupply POWER_SUPPLY;
     public static MetaTileEntitySMSF SMSF;
+    public static MetaTileEntityADVNetworkSwitch ADV_NETWORK_SWITCH;
     public static MetaTileEntityMiniDataBank MINI_DATE_BANK;
+    public static MetaTileEntityADVDataBank ADV_DATE_BANK;
     public static MetaTileEntityRubbishBin RUBBISH_BIN;
     public static MetaTileEntityVacuumDistillationTower VACUUM_DISTILLATION_TOWER;
     public static MetaTileEntitySteamLatexCollector[] STEAM_LATEX_COLLECTOR = new MetaTileEntitySteamLatexCollector[2];
@@ -541,6 +543,9 @@ public class GTQTMetaTileEntities {
         HPCA_SUPER_COOLER_COMPONENT = registerMetaTileEntity(3464, new MetaTileEntityHPCAAdvancedCooler(gtqtcoreId("hpca.super_cooler_component"), true, false));
         HPCA_ULTIMATE_COOLER_COMPONENT = registerMetaTileEntity(3465, new MetaTileEntityHPCAAdvancedCooler(gtqtcoreId("hpca.ultimate_cooler_component"),  false, true));
         MINI_DATE_BANK = registerMetaTileEntity(3466, new MetaTileEntityMiniDataBank(gtqtcoreId("mini_date_bank")));
+        ADV_NETWORK_SWITCH = registerMetaTileEntity(3467, new MetaTileEntityADVNetworkSwitch(gtqtcoreId("adv_network_switch")));
+        ADV_DATE_BANK = registerMetaTileEntity(3468, new MetaTileEntityADVDataBank(gtqtcoreId("adv_date_bank")));
+
         //GCYS
         INDUSTRIAL_DRILL = registerMetaTileEntity(3500, new MetaTileEntityIndustrialDrill(gtqtcoreId("industrial_drill")));
         CATALYTIC_REFORMER = registerMetaTileEntity(3501, new MetaTileEntityCatalyticReformer(gtqtcoreId("catalytic_reformer")));

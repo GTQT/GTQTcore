@@ -46,7 +46,7 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.items.IItemHandlerModifiable;
-
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.kqcc.MetaTileEntityMiniDataBank;
 public class MetaTileEntityDataAccessHatch extends MetaTileEntityMultiblockNotifiablePart implements IMultiblockAbilityPart<IDataAccessHatch>, IDataAccessHatch, IDataInfoProvider {
     private final Set<Recipe> recipes;
     private final boolean isCreative;
@@ -56,6 +56,7 @@ public class MetaTileEntityDataAccessHatch extends MetaTileEntityMultiblockNotif
         this.isCreative = isCreative;
         this.recipes = (Set)(isCreative ? Collections.emptySet() : new ObjectOpenHashSet());
         this.rebuildData(this.getController() instanceof MetaTileEntityDataBank);
+        this.rebuildData(this.getController() instanceof MetaTileEntityMiniDataBank);
     }
 
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
@@ -67,11 +68,12 @@ public class MetaTileEntityDataAccessHatch extends MetaTileEntityMultiblockNotif
             public void onContentsChanged(int slot) {
                 super.onContentsChanged(slot);
                 MetaTileEntityDataAccessHatch.this.rebuildData(MetaTileEntityDataAccessHatch.this.getController() instanceof MetaTileEntityDataBank);
+                MetaTileEntityDataAccessHatch.this.rebuildData(MetaTileEntityDataAccessHatch.this.getController() instanceof MetaTileEntityMiniDataBank);
             }
 
             public  ItemStack insertItem(int slot,  ItemStack stack, boolean simulate) {
                 MultiblockControllerBase controller = MetaTileEntityDataAccessHatch.this.getController();
-                boolean isDataBank = controller instanceof MetaTileEntityDataBank;
+                boolean isDataBank = controller instanceof MetaTileEntityDataBank||controller instanceof MetaTileEntityMiniDataBank;
                 return AssemblyLineManager.isStackDataItem(stack, isDataBank) && AssemblyLineManager.hasResearchTag(stack) ? super.insertItem(slot, stack, simulate) : stack;
             }
         });
@@ -213,6 +215,7 @@ public class MetaTileEntityDataAccessHatch extends MetaTileEntityMultiblockNotif
 
     public void addToMultiBlock(MultiblockControllerBase controllerBase) {
         this.rebuildData(controllerBase instanceof MetaTileEntityDataBank);
+        this.rebuildData(controllerBase instanceof MetaTileEntityMiniDataBank);
         super.addToMultiBlock(controllerBase);
     }
 }

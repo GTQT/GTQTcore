@@ -109,7 +109,6 @@ public class MetaTileEntitySMSF extends GTQTRecipeMapMultiblockController implem
 
     }
 
-    @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("fluid1", steam[0]);
         data.setInteger("fluid2", steam[1]);
@@ -117,7 +116,7 @@ public class MetaTileEntitySMSF extends GTQTRecipeMapMultiblockController implem
         return super.writeToNBT(data);
     }
 
-    @Override
+   
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         steam[0] = data.getInteger("fluid1");

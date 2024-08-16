@@ -224,12 +224,11 @@ public class MetaTileEntityPreciseAssembler extends MultiMapMultiblockController
         }
     }
 
-    @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("CasingTier", CasingTier);
         return super.writeToNBT(data);
     }
-    @Override
+   
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         CasingTier = data.getInteger("CasingTier");

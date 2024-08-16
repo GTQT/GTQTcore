@@ -45,12 +45,12 @@ public class MetaTileEntityClarifier extends RecipeMapMultiblockController {
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityClarifier(this.metaTileEntityId);
     }
-    @Override
+
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("heat", heat);
         return super.writeToNBT(data);
     }
-    @Override
+
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         heat = data.getInteger("heat");

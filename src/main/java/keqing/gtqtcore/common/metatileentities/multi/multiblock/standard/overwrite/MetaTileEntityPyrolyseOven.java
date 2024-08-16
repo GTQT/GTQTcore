@@ -73,13 +73,12 @@ public class MetaTileEntityPyrolyseOven extends GTQTRecipeMapMultiblockOverwrite
     }
     FluidStack KEEP_OPEN = Lubricant.getFluid(1);
      int ParallelNum=1;
-    @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("modern", modern);
         data.setInteger("tier", tier);
         return super.writeToNBT(data);
     }
-    @Override
+   
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         modern = data.getInteger("modern");

@@ -192,12 +192,11 @@ public class MetaTileEntityKQNetworkSwitch extends MetaTileEntityDataBank implem
                         .or(abilities(MultiblockAbility.COMPUTATION_DATA_TRANSMISSION).setMinGlobalLimited(1, 1)))
                 .build();
     }
-    @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("casing_tier", casing_tier);
         return super.writeToNBT(data);
     }
-    @Override
+   
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         casing_tier = data.getInteger("casing_tier");
