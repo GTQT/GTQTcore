@@ -9,7 +9,13 @@ import java.util.function.Supplier;
 import static keqing.gtqtcore.api.GTQTAPI.*;
 
 public class TiredTraceabilityPredicate {
-    
+
+    public static Supplier<TierTraceabilityPredicate> CP_LENS = () -> new TierTraceabilityPredicate(MAP_LS_CASING,
+            Comparator.comparing((s) -> ((WrappedIntTired) MAP_LS_CASING.get(s)).getIntTier()), "LENS", null);
+
+    public static Supplier<TierTraceabilityPredicate> CP_SOURSE = () -> new TierTraceabilityPredicate(MAP_SS_CASING,
+            Comparator.comparing((s) -> ((WrappedIntTired) MAP_SS_CASING.get(s)).getIntTier()), "SOURSE", null);
+
     //  Fusion Coil Predicate
     public static Supplier<TierTraceabilityPredicate> FUSION_COIL = () -> new TierTraceabilityPredicate(MAP_FUSION_COIL,
             Comparator.comparing((s) -> ((WrappedIntTired) MAP_FUSION_COIL.get(s)).getIntTier()), "FusionCoil", null);

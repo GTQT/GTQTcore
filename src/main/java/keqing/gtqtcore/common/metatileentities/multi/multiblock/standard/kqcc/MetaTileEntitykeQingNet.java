@@ -32,6 +32,7 @@ import keqing.gtqtcore.api.recipes.properties.KQKindProperty;
 import keqing.gtqtcore.api.recipes.properties.KQNetProperty;
 import keqing.gtqtcore.api.utils.GTQTKQnetHelper;
 import keqing.gtqtcore.common.items.GTQTMetaItems;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.MetaTileEntityElectronMicroscope;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.MetaTileEntityPhotolithographyFactory;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
@@ -295,6 +296,12 @@ public class MetaTileEntitykeQingNet extends RecipeMapMultiblockController imple
         if (te instanceof IGregTechTileEntity igtte) {
             MetaTileEntity mte = igtte.getMetaTileEntity();
             //找到加速器
+            if (mte instanceof MetaTileEntityElectronMicroscope) {
+                if(((MetaTileEntityElectronMicroscope) mte).isStructureFormed()) {
+                    io[i][4] = 1;
+                    return true;
+                }
+            }
             if (mte instanceof MetaTileEntityParticleAccelerator) {
                 if(((MetaTileEntityParticleAccelerator) mte).isStructureFormed()) {
                     io[i][4] = 2;

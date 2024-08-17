@@ -5,9 +5,9 @@ public class GTQTKQnetHelper {
 
         //0 普通
         if (kind == 0) return"无需设备";
-        //1 物理-透射电镜
+        //1 物理-透射电镜 OK
         if (kind == 1) return"物理-透射电镜";
-        //2 物理-粒子加速器
+        //2 物理-粒子加速器 OK
         if (kind == 2) return"物理-粒子加速器";
         //3 物理-量子计算机
         if (kind == 3) return"物理-量子计算机";
@@ -20,7 +20,7 @@ public class GTQTKQnetHelper {
         //21 光学-质谱仪
         if (kind == 21) return"光学-质谱仪";
 
-        //设备升级区
+        //设备升级区 OK
         //30 设备-辅助计算机I
         if (kind == 30) return"设备-辅助计算机I";
         //31 设备-辅助计算机II

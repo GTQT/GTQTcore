@@ -155,7 +155,7 @@ public class GCYSElementMaterials {
                 .ingot().fluid()
                 .fluidPipeProperties(16000,32000,true)
                 .color(0x72A0C1).iconSet(METALLIC)
-                .flags(GENERATE_PLATE, GENERATE_ROTOR, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_ROUND, GENERATE_FRAME)
+                .flags(GENERATE_FOIL,GENERATE_DENSE,GENERATE_FINE_WIRE,GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_RING, GENERATE_ROUND, GENERATE_BOLT_SCREW, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR,GENERATE_ROTOR)
                 .element(GTQTElements.Or)
                 .toolStats(ToolProperty.Builder.of(7.0F, 25.0F, 17000, 22).build())
                 .blast(9000, BlastProperty.GasTier.HIGH)
@@ -164,7 +164,7 @@ public class GCYSElementMaterials {
         Vibranium = new Material.Builder(getMaterialsId(), gregtechId("vibranium"))
                 .ingot().fluid().plasma()
                 .color(0xC880FF).iconSet(SHINY)
-                .flags(GENERATE_PLATE, GENERATE_FOIL)
+                .flags(GENERATE_FOIL,GENERATE_DENSE,GENERATE_FINE_WIRE,GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_RING, GENERATE_ROUND, GENERATE_BOLT_SCREW, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR,GENERATE_ROTOR)
                 .element(GTQTElements.Vb)
                 .blast(4852, BlastProperty.GasTier.HIGH)
                 .build();
@@ -172,7 +172,7 @@ public class GCYSElementMaterials {
         Adamantium = new Material.Builder(getMaterialsId(), gregtechId("adamantium"))
                 .ingot().fluid().plasma()
                 .color(0xFF0040).iconSet(METALLIC)
-                .flags(GENERATE_PLATE, GENERATE_FOIL,GENERATE_ROTOR, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_ROUND)
+                .flags(GENERATE_FOIL,GENERATE_DENSE,GENERATE_FINE_WIRE,GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_RING, GENERATE_ROUND, GENERATE_BOLT_SCREW, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR,GENERATE_ROTOR)
                 .element(GTQTElements.Ad)
                 .blast(5225, BlastProperty.GasTier.HIGH)
                 .build();

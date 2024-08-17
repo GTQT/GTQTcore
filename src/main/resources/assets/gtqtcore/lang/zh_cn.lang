@@ -943,6 +943,12 @@ gtqtcore.machine.stellar_furnace.tooltip.4=部分产物在使用相应的§6遏�
 
 recipemap.dimensional_oscillator_recipes.name=超维度震荡
 
+recipemap.molecular_transformer.name=原子重组
+gtqtcore.machine.electron_microscope.name=大型电子透镜
+gtqtcore.machine.molecular_transformer.tooltip.1=原子在干什么
+gtqtcore.machine.molecular_transformer.tooltip.2=电压等级低于EV，并行为电子源等级。否则为电子源*电压等级与EV的差值
+gtqtcore.machine.molecular_transformer.tooltip.3=每提升一级透镜等级，减少十分之一耗时
+
 recipemap.precise_assembler_recipes.name=精密组装机
 gtqtcore.machine.precise_assembler.name=精密自动组装机MT-3662
 gtqtcore.machine.precise_assembler.tooltip.1=误差不超过7nm

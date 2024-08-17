@@ -942,6 +942,12 @@ gtqtcore.machine.stellar_furnace.tooltip.4=Some products need to be condensed us
 
 recipemap.dimensional_oscillator_recipes.name=Dimensional Oscillation
 
+recipemap.molecular_transformer.name=Atomic Rearranger
+gtqtcore.machine.electron_microscope.name=Large-Scale Electron Microscope
+gtqtcore.machine.molecular_transformer.tooltip.1=What are the atoms doing?
+gtqtcore.machine.molecular_transformer.tooltip.2=If the voltage level is below EV, it operates at the electron source level. Otherwise, it operates at the difference between the electron source's voltage level and EV.
+gtqtcore.machine.molecular_transformer.tooltip.3=For every increase in lens level, the processing time is reduced by one-tenth.
+
 recipemap.precise_assembler_recipes.name=Precision Assembler
 gtqtcore.machine.precise_assembler.name=Precision Automatic Assembler MT-3662
 gtqtcore.machine.precise_assembler.tooltip.1=Accuracy within 7nm

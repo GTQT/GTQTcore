@@ -22,6 +22,7 @@ import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockCore;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
+import keqing.gtqtcore.common.block.blocks.GTQTADVBlock;
 import keqing.gtqtcore.common.block.blocks.GTQTIsaCasing;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -80,7 +81,7 @@ public class MetaTileEntityIndustrialCentrifuge extends GTQTMultiblockCore {
     }
 
     private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.TURBINE_CASING.getState(IRIDIUM_CASING);
+        return GTQTMetaBlocks.ADV_BLOCK.getState(GTQTADVBlock.CasingType.Hdcs);
     }
 
     private static IBlockState getSecondCasingState() {
@@ -90,7 +91,7 @@ public class MetaTileEntityIndustrialCentrifuge extends GTQTMultiblockCore {
     @SideOnly(Side.CLIENT)
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
-        return GTQTTextures.IRIDIUM_CASING;
+        return GTQTTextures.Hdcs;
     }
 
 

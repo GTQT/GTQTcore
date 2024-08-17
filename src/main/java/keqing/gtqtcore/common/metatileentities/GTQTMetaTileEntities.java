@@ -84,6 +84,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityLagerHeatExchanger LAGER_HEAT_EXCHANGER;
     public static MetaTileEntitySmallHeatExchanger SMALL_HEAT_EXCHANGER;
     public static MetaTileEntityEvaporationPool EVAPORATION_POOL;
+    public static MetaTileEntityElectronMicroscope ELECTRON_MICROSCOPE;
     public static MetaTileEntityHugeBlastFurnace HUGE_BLAST_FURANCE;
     public static final MetaTileEntityCreativeEnergyHatch[] CREATIVE_ENERGY_HATCHES = new MetaTileEntityCreativeEnergyHatch[GTValues.V.length];
     public static final MetaTileEntityMicrowaveEnergyReceiver[] MICROWAVE_ENERGY_RECEIVER = new MetaTileEntityMicrowaveEnergyReceiver[12];
@@ -476,6 +477,7 @@ public class GTQTMetaTileEntities {
         PHOTOLITHOGRAPHY_FACTORY = registerMetaTileEntity(3213, new MetaTileEntityPhotolithographyFactory(gtqtcoreId("photolithography_factory")));
         DANGOTE_DISTILLERY = registerMetaTileEntity(3214, new MetaTileEntityDangoteDistillery(gtqtcoreId("dangote_distillery")));
         EVAPORATION_POOL = registerMetaTileEntity(3215, new MetaTileEntityEvaporationPool(gtqtcoreId("evaporation_pool")));
+        ELECTRON_MICROSCOPE = registerMetaTileEntity(3216, new MetaTileEntityElectronMicroscope(gtqtcoreId("electron_microscope")));
         //重写设备
         DISTILLATION_TOWER = registerMetaTileEntity(3250, new MetaTileEntityDistillationTower(gtqtcoreId("distillation_tower"),true));
         CRACKER = registerMetaTileEntity(3251, new MetaTileEntityCrackingUnit(gtqtcoreId("cracker")));

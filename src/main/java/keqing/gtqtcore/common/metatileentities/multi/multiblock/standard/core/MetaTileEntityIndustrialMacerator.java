@@ -19,8 +19,10 @@ import gregtech.common.blocks.MetaBlocks;
 import gregtech.core.advancement.AdvancementTriggers;
 import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockCore;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
+import keqing.gtqtcore.api.unification.GTQTMaterials;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
+import keqing.gtqtcore.common.block.blocks.GTQTADVBlock;
 import keqing.gtqtcore.common.block.blocks.GTQTIsaCasing;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -76,20 +78,20 @@ public class MetaTileEntityIndustrialMacerator extends GTQTMultiblockCore {
                 .build();
     }
     private static IBlockState getFrameState() {
-        return MetaBlocks.FRAMES.get(Materials.Naquadah).getBlock(Materials.Naquadah);
+        return MetaBlocks.FRAMES.get(GTQTMaterials.BlackTitanium).getBlock(GTQTMaterials.BlackTitanium);
     }
     private static IBlockState getCasingState() {
         return GTQTMetaBlocks.TURBINE_CASING.getState(IRIDIUM_CASING);
     }
 
     private static IBlockState getSecondCasingState() {
-        return GTQTMetaBlocks.ISA_CASING.getState(GTQTIsaCasing.CasingType.IRIDIUM_TURBINE);
+        return GTQTMetaBlocks.ADV_BLOCK.getState(GTQTADVBlock.CasingType.Hdcs);
     }
 
     @SideOnly(Side.CLIENT)
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
-        return GTQTTextures.IRIDIUM_CASING;
+        return GTQTTextures.Hdcs;
     }
 
     @Override

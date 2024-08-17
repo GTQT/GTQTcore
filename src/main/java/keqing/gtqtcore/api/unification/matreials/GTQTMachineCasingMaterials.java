@@ -89,7 +89,7 @@ public class GTQTMachineCasingMaterials {
                 .color(0x334433)
                 .iconSet(SHINY)
                 .toolStats(new ToolProperty(20.0F, 10.0F, 180000, 4))
-                .blast(11900, GasTier.HIGHER)
+                .blast(4625, GasTier.HIGHER)
                 .components(TungstenSteel, 12, HSSS, 9, HSSG, 6, Ruridit, 3, Naphtha, 2, Plutonium241, 1)
                 .flags(GENERATE_PLATE, GENERATE_ROD, GENERATE_RING, GENERATE_BOLT_SCREW, GENERATE_GEAR, GENERATE_ROTOR,
                         GENERATE_FRAME,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROUND,GENERATE_SMALL_GEAR
@@ -116,7 +116,7 @@ public class GTQTMachineCasingMaterials {
         BlackTitanium = new Material.Builder(getMaterialsId(), gregtechId("black_titanium"))
                 .ingot()
                 .fluid()
-                .color(0x6C003B)
+                .color(0x4A4A4A)
                 .iconSet(SHINY)
                 .cableProperties(GTValues.V[GTValues.UIV], 2, 32)
                 .blast(11500, GasTier.HIGHER)
@@ -144,7 +144,7 @@ public class GTQTMachineCasingMaterials {
                 .fluid()
                 .color(0x060606)
                 .iconSet(BRIGHT)
-                .blast(12960, GasTier.HIGHER)
+                .blast(6000, GasTier.HIGHER)
                 .flags(GENERATE_PLATE, GENERATE_ROD, GENERATE_RING, GENERATE_BOLT_SCREW, GENERATE_GEAR, GENERATE_ROTOR,
                         GENERATE_FRAME,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROUND,GENERATE_SMALL_GEAR
                         ,GENERATE_SPRING,GENERATE_SPRING_SMALL)

@@ -15,6 +15,7 @@ import static keqing.gtqtcore.common.block.blocks.BlockGravitonCasing.GravitonCa
 import static keqing.gtqtcore.common.block.blocks.BlockGravitonCasing.GravitonCasingType.CENTRAL_GRAVITON_FLOW_MODULATOR;
 import static keqing.gtqtcore.common.block.blocks.GTQTCompressedFusionReactor.CasingType.*;
 import static keqing.gtqtcore.common.block.blocks.GTQTCompressedFusionReactor.CasingType.FUSION_COIL_MKIV;
+import static keqing.gtqtcore.common.block.blocks.GTQTElectronMicroscope.CasingType.*;
 import static keqing.gtqtcore.common.block.blocks.GTQTQuantumCasing.CasingType.*;
 import static keqing.gtqtcore.common.block.blocks.GTQTQuantumCasing.CasingType.ULTIMATE_HIGH_ENERGY_CASING;
 
@@ -38,6 +39,9 @@ public class GTQTAPI {
     public static final Object2ObjectOpenHashMap<IBlockState,IBlockTier> MAP_DC_CASING= new Object2ObjectOpenHashMap<>();
     public static final Object2ObjectOpenHashMap<IBlockState,IBlockTier> MAP_ND_CASING= new Object2ObjectOpenHashMap<>();
 
+    //电子透镜
+    public static final Object2ObjectOpenHashMap<IBlockState,IBlockTier> MAP_LS_CASING= new Object2ObjectOpenHashMap<>();
+    public static final Object2ObjectOpenHashMap<IBlockState,IBlockTier> MAP_SS_CASING= new Object2ObjectOpenHashMap<>();
     //光刻系统
     public static final Object2ObjectOpenHashMap<IBlockState,IBlockTier> MAP_ZW_CASING= new Object2ObjectOpenHashMap<>();
     public static final Object2ObjectOpenHashMap<IBlockState,IBlockTier> MAP_TJ_CASING= new Object2ObjectOpenHashMap<>();
@@ -53,19 +57,38 @@ public class GTQTAPI {
     public static final Object2ObjectOpenHashMap<IBlockState,IBlockTier> MAP_FUSION_COIL= new Object2ObjectOpenHashMap<>();
 
     public static void init() {
+        MAP_LS_CASING.put(GTQTMetaBlocks.ELECTRON_MICROSCOPE.getState(LENS_I),
+                new WrappedIntTired(LENS_I, 1));
+        MAP_LS_CASING.put(GTQTMetaBlocks.ELECTRON_MICROSCOPE.getState(LENS_II),
+                new WrappedIntTired(LENS_II, 2));
+        MAP_LS_CASING.put(GTQTMetaBlocks.ELECTRON_MICROSCOPE.getState(LENS_III),
+                new WrappedIntTired(LENS_III, 3));
+        MAP_LS_CASING.put(GTQTMetaBlocks.ELECTRON_MICROSCOPE.getState(LENS_IV),
+                new WrappedIntTired(LENS_IV, 4));
+        MAP_LS_CASING.put(GTQTMetaBlocks.ELECTRON_MICROSCOPE.getState(LENS_V),
+                new WrappedIntTired(LENS_V, 5));
+
+        MAP_SS_CASING.put(GTQTMetaBlocks.ELECTRON_MICROSCOPE.getState(SOURSE_I),
+                new WrappedIntTired(SOURSE_I, 1));
+        MAP_SS_CASING.put(GTQTMetaBlocks.ELECTRON_MICROSCOPE.getState(SOURSE_II),
+                new WrappedIntTired(SOURSE_II, 2));
+        MAP_SS_CASING.put(GTQTMetaBlocks.ELECTRON_MICROSCOPE.getState(SOURSE_III),
+                new WrappedIntTired(SOURSE_III, 3));
+        MAP_SS_CASING.put(GTQTMetaBlocks.ELECTRON_MICROSCOPE.getState(SOURSE_IV),
+                new WrappedIntTired(SOURSE_IV, 4));
+        MAP_SS_CASING.put(GTQTMetaBlocks.ELECTRON_MICROSCOPE.getState(SOURSE_V),
+                new WrappedIntTired(SOURSE_V, 5));
+
         //  Fusion Coil
         MAP_FUSION_COIL.put(MetaBlocks.FUSION_CASING.getState(gregtech.common.blocks.BlockFusionCasing.CasingType.SUPERCONDUCTOR_COIL),
                 new WrappedIntTired(gregtech.common.blocks.BlockFusionCasing.CasingType.SUPERCONDUCTOR_COIL, 1));
-
         MAP_FUSION_COIL.put(MetaBlocks.FUSION_CASING.getState(gregtech.common.blocks.BlockFusionCasing.CasingType.FUSION_COIL),
                 new WrappedIntTired(gregtech.common.blocks.BlockFusionCasing.CasingType.FUSION_COIL, 2));
 
         MAP_FUSION_COIL.put(GTQTMetaBlocks.COMPRESSED_FUSION_REACTOR.getState(FUSION_COIL_MKII),
                 new WrappedIntTired(FUSION_COIL_MKII, 3));
-
         MAP_FUSION_COIL.put(GTQTMetaBlocks.COMPRESSED_FUSION_REACTOR.getState(FUSION_COIL_MKIII),
                 new WrappedIntTired(FUSION_COIL_MKIII, 4));
-
         MAP_FUSION_COIL.put(GTQTMetaBlocks.COMPRESSED_FUSION_REACTOR.getState(FUSION_COIL_MKIV),
                 new WrappedIntTired(FUSION_COIL_MKIV, 5));
 

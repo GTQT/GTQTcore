@@ -25,6 +25,7 @@ import gregtech.client.utils.BloomEffectUtil;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.core.advancement.AdvancementTriggers;
 import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockCore;
+import keqing.gtqtcore.api.unification.GTQTMaterials;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTIsaCasing;
@@ -40,6 +41,7 @@ import org.apache.commons.lang3.ArrayUtils;
 
 import static gregtech.api.GTValues.IV;
 import static gregtech.api.GTValues.VA;
+import static keqing.gtqtcore.common.block.blocks.GTQTADVBlock.CasingType.Hdcs;
 import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.IRIDIUM_CASING;
 
 public class MetaTileEntityIndustrialWasher extends GTQTMultiblockCore {
@@ -84,10 +86,10 @@ public class MetaTileEntityIndustrialWasher extends GTQTMultiblockCore {
                 .build();
     }
     private static IBlockState getFrameState() {
-        return MetaBlocks.FRAMES.get(Materials.Naquadah).getBlock(Materials.Naquadah);
+        return MetaBlocks.FRAMES.get(GTQTMaterials.BlackTitanium).getBlock(GTQTMaterials.BlackTitanium);
     }
     private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.TURBINE_CASING.getState(IRIDIUM_CASING);
+        return GTQTMetaBlocks.ADV_BLOCK.getState(Hdcs);
     }
 
     private static IBlockState getSecondCasingState() {
@@ -97,7 +99,7 @@ public class MetaTileEntityIndustrialWasher extends GTQTMultiblockCore {
     @SideOnly(Side.CLIENT)
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
-        return GTQTTextures.IRIDIUM_CASING;
+        return GTQTTextures.Hdcs;
     }
 
     @Override

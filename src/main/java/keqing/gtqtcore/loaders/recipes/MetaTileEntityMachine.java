@@ -186,9 +186,9 @@ public class MetaTileEntityMachine {
 
         ModHandler.addShapedRecipe(true, "casing_nq_pipe",
                 GTQTMetaBlocks.TURBINE_CASING.getItemVariant(GTQTTurbineCasing.TurbineCasingType.NQ_MACHINE_CASING, ConfigHolder.recipes.casingsPerCraft), "PIP", "IFI",
-                "PIP", 'P', new UnificationEntry(OrePrefix.plate, Naquadah), 'F',
-                new UnificationEntry(OrePrefix.frameGt, Materials.Naquadah), 'I',
-                new UnificationEntry(OrePrefix.pipeNormalFluid, Materials.Naquadah));
+                "PIP", 'P', new UnificationEntry(OrePrefix.plate, NaquadahAlloy), 'F',
+                new UnificationEntry(OrePrefix.frameGt, Materials.NaquadahAlloy), 'I',
+                new UnificationEntry(OrePrefix.pipeNormalFluid, Materials.NaquadahAlloy));
 
         ModHandler.addShapedRecipe(true, "casing_st_pipe",
                 GTQTMetaBlocks.TURBINE_CASING1.getItemVariant(ST_MACHINE_CASING, ConfigHolder.recipes.casingsPerCraft), "PIP", "IFI",

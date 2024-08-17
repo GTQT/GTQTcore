@@ -13,6 +13,7 @@ import keqing.gtqtcore.api.gui.GTQTGuiTextures;
 import keqing.gtqtcore.api.recipes.builder.*;
 import keqing.gtqtcore.api.recipes.machine.*;
 import keqing.gtqtcore.client.textures.GCYSGuiTextures;
+import keqing.gtqtcore.loaders.recipes.chain.PreciseAssemblerChain;
 
 
 //怎么写请看
@@ -191,6 +192,7 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMapPseudoGroup<SimpleRecipeBuilder> PROCESSING_MODE_B;
     public static final RecipeMapPseudoGroup<SimpleRecipeBuilder> PROCESSING_MODE_C;
     public static final RecipeMap<PAComputationRecipeBuilder> PRECISE_ASSEMBLER_RECIPES;
+    public static final RecipeMap<PAComputationRecipeBuilder> MOLECULAR_TRANSFORMER_RECIPES;
     public static final RecipeMap<MDRecipeBuilder> MINING_DRILL_RECIPES;
     public static final RecipeMap<SimpleRecipeBuilder> DISTILLATION_KETTLE;
     public static final RecipeMap<SimpleRecipeBuilder> NANOHYBRID;
@@ -275,6 +277,12 @@ public class GTQTcoreRecipeMaps {
                 .setSlotOverlay(false, false, false, GuiTextures.CIRCUIT_OVERLAY)
                 .setSlotOverlay(false, false, true, GuiTextures.CIRCUIT_OVERLAY)
                 .setSound(GTSoundEvents.ASSEMBLER);
+
+        MOLECULAR_TRANSFORMER_RECIPES = new RecipeMap<>("molecular_transformer", 1, 1, 0, 0, new PAComputationRecipeBuilder(), false)
+                .setSlotOverlay(false, false, true, GuiTextures.MOLECULAR_OVERLAY_1)
+                .setSlotOverlay(true, false, true, GuiTextures.MOLECULAR_OVERLAY_2)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_COMPRESS, ProgressWidget.MoveType.HORIZONTAL)
+                .setSound(GTValues.FOOLS.get() ? GTSoundEvents.SCIENCE : GTSoundEvents.ARC);
 
         LASER_ENGRAVING = new RecipeMap<>("laser_engraving", 2, 1, 1, 0, new ComputationRecipeBuilder(), false)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL)

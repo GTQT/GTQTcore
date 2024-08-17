@@ -109,7 +109,7 @@ public abstract class GTQTMultiblockCore extends MultiMapMultiblockController im
 
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         for(int i=0;i<getCoreNum();i++) data.setIntArray("timeHelper"+i,timeHelper[i]);
-        for (int i = 0; i <ListWork.length; i++) {
+        for (int i = 0; i <getCoreNum(); i++) {
             data.setBoolean("ListWork"+i, ListWork[i]);
         }
         data.setInteger("circuit", circuit);
@@ -166,7 +166,7 @@ public abstract class GTQTMultiblockCore extends MultiMapMultiblockController im
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         for(int i=0;i<getCoreNum();i++) timeHelper[i]=data.getIntArray("timeHelper"+i);
-        for (int i = 0; i <ListWork.length; i++) {
+        for (int i = 0; i <getCoreNum(); i++) {
             ListWork[i]= data.getBoolean("ListWork"+i);
         }
         circuit = data.getInteger("circuit");

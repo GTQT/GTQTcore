@@ -272,7 +272,7 @@ public class MetaTileEntityADVKQCC extends MultiblockWithDisplayBase implements 
     };
     int HEAT()
     {
-        return CPU1*CPU1*level*level;
+        return CPU1*CPU1*level;
     };
     int returncwt()
     {

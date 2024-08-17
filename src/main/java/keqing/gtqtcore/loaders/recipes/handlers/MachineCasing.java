@@ -429,8 +429,8 @@ public class MachineCasing {
                 .buildAndRegister();
 
         ASSEMBLER_RECIPES.recipeBuilder().duration(200).EUt(120)
-                .input(plate,Naquadah, 6)
-                .input(frameGt,Naquadah, 1)
+                .input(plate,NaquadahAlloy, 6)
+                .input(frameGt,NaquadahAlloy, 1)
                 .circuitMeta(6)
                 .outputs(GTQTMetaBlocks.TURBINE_CASING.getItemVariant(NQ_TURBINE_CASING))
                 .buildAndRegister();
