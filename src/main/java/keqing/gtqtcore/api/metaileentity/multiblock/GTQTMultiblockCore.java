@@ -116,19 +116,49 @@ public abstract class GTQTMultiblockCore extends MultiMapMultiblockController im
         data.setBoolean("speed", speed);
         data.setBoolean("stop", stop);
         data.setInteger("target",target);
-
-        data.setInteger("IN_SLOTS",this.inputInventory.getSlots());
-        data.setInteger("OUT_SLOTS",this.outputInventory.getSlots());
-        data.setInteger("IN_TANKS",this.inputFluidInventory.getTanks());
-        data.setInteger("OUT_TANKS",this.outputFluidInventory.getTanks());
-
-        writeItemHandlerToNBT(data,this.inputInventory,"In");
-        writeItemHandlerToNBT(data,this.outputInventory,"Out");
-        for (int i = 0; i <inputFluidInventory.getTanks(); i++) {
-            data.setTag("FluidIn"+i,inputFluidInventory.getFluidTanks().get(i).trySerialize());
+        if(!importItemsList.isEmpty())
+        {
+            //总尺寸
+            data.setInteger("importItemsListSize",importItemsList.size());
+            for (int i=0;i<importItemsList.size();i++)
+            {
+               if(!importItemsList.get(i).isEmpty())
+               {
+                   var list = importItemsList.get(i);
+                   //单个列表尺寸
+                   data.setInteger("importItemsListContentSize"+i,list.size());
+                   NBTTagCompound tag = new NBTTagCompound();
+                   for (int j = 0; j < list.size(); j++) {
+                        NBTTagCompound ctag = new NBTTagCompound();
+                        list.get(j).writeToNBT(ctag);
+                        tag.setTag("ContentItem"+j,ctag);
+                   }
+                   //单个列表物品
+                   data.setTag("importItemsListContentItem"+i,tag);
+               }
+            }
         }
-        for (int i = 0; i <outputFluidInventory.getTanks(); i++) {
-            data.setTag("FluidOut"+i,outputFluidInventory.getFluidTanks().get(i).trySerialize());
+        if(!importFluidList.isEmpty())
+        {
+            //总尺寸
+            int TotalSize = importFluidList.size();
+            data.setInteger("importFluidListSize",TotalSize);
+            for (int i = 0; i < TotalSize; i++) {
+                //单列表
+                if(!importFluidList.get(i).isEmpty())
+                {
+                    var list = importFluidList.get(i);
+                    data.setInteger("importFluidListContentSize"+i,list.size());
+                    NBTTagCompound tag = new NBTTagCompound();
+                    for (int j = 0; j < list.size(); j++) {
+                        NBTTagCompound ctag = new NBTTagCompound();
+                        list.get(j).writeToNBT(ctag);
+                        tag.setTag("ContentFluid"+j,ctag);
+                    }
+                    //单个列表流体
+                    data.setTag("importItemsListContentFluid"+i,tag);
+                }
+            }
         }
         return super.writeToNBT(data);
     }
@@ -143,68 +173,46 @@ public abstract class GTQTMultiblockCore extends MultiMapMultiblockController im
         speed = data.getBoolean("speed");
         stop = data.getBoolean("stop");
         target = data.getInteger("target");
+        //总尺寸>0
+        if(data.hasKey("importItemsListSize") && data.getInteger("importItemsListSize")>0)
+        {
+            int totalsize = data.getInteger("importItemsListSize");
+            importItemsList = new ArrayList<>();
+            for (int i = 0; i < totalsize; i++) {
+                //获取单列列表尺寸
+                List<ItemStack> ls=  new ArrayList<>();
+                if(data.hasKey("importItemsListContentSize"+i) && data.getInteger("importItemsListContentSize"+i)>0)
+                {
+                    int singlesize = data.getInteger("importItemsListContentSize"+i);
+                    NBTTagCompound tag = data.getCompoundTag("importItemsListContentItem"+i);
+                    for (int j = 0; j < singlesize; j++) {
+                        ls.add(new ItemStack(tag.getCompoundTag("ContentItem"+j)));
+                    }
+                }
+                importItemsList.add(ls);
+            }
+        }
+        //总尺寸>0
+        if(data.hasKey("importFluidListSize") && data.getInteger("importFluidListSize")>0)
+        {
+            int totalsize = data.getInteger("importFluidListSize");
+            importFluidList = new ArrayList<>();
+            for (int i = 0; i < totalsize; i++) {
+                //获取单列列表尺寸
+                List<FluidStack> ls=  new ArrayList<>();
+                if(data.hasKey("importFluidListContentSize"+i) && data.getInteger("importFluidListContentSize"+i)>0)
+                {
+                    int singlesize = data.getInteger("importFluidListContentSize"+i);
+                    NBTTagCompound tag = data.getCompoundTag("importItemsListContentFluid"+i);
+                    for (int j = 0; j < singlesize; j++) {
+                        ls.add(FluidStack.loadFluidStackFromNBT(tag.getCompoundTag("ContentFluid"+j)));
+                    }
+                }
+                importFluidList.add(ls);
+            }
+        }
+    }
 
-        if(data.getInteger("IN_SLOTS")>0)
-        {
-            inputInventory = new ItemStackHandler(data.getInteger("IN_SLOTS"));
-            readItemHandlerFromNBT(data,this.inputInventory,"In");
-        }
-        if(data.getInteger("OUT_SLOTS")>0)
-        {
-            outputInventory = new ItemStackHandler(data.getInteger("OUT_SLOTS"));
-            readItemHandlerFromNBT(data,this.outputInventory,"Out");
-        }
-        if(data.getInteger("IN_TANKS")>0)
-        {
-            List<FluidTank> tanks = new ArrayList<>();
-            for (int i = 0; i < data.getInteger("IN_TANKS"); i++) {
-                tanks.add(new FluidTank(16000));
-            }
-            inputFluidInventory = new FluidTankList(true,tanks);
-            for (int i = 0; i <inputFluidInventory.getTanks(); i++) {
-                NBTTagCompound tag = data.getCompoundTag("FluidIn"+i);
-                if(tag!=null)
-                    inputFluidInventory.getFluidTanks().get(i).tryDeserialize(tag);
-            }
-        }
-        if(data.getInteger("OUT_TANKS")>0)
-        {
-            List<FluidTank> tanks = new ArrayList<>();
-            for (int i = 0; i < data.getInteger("OUT_TANKS"); i++) {
-                tanks.add(new FluidTank(16000));
-            }
-            outputFluidInventory = new FluidTankList(true,tanks);
-            for (int i = 0; i <outputFluidInventory.getTanks(); i++) {
-                NBTTagCompound tag = data.getCompoundTag("FluidOut"+i);
-                if(tag!=null)
-                    outputFluidInventory.getFluidTanks().get(i).tryDeserialize(tag);
-            }
-        }
-    }
-    public static NBTTagCompound writeItemHandlerToNBT(NBTTagCompound compound, IItemHandlerModifiable handler,String in_out) {
-        NBTTagList nbtTagList = new NBTTagList();
-        for (int i = 0; i < handler.getSlots(); i++) {
-            ItemStack stack = handler.getStackInSlot(i);
-            if (!stack.isEmpty()) {
-                NBTTagCompound itemTag = new NBTTagCompound();
-                itemTag.setInteger("Slot"+in_out, i);
-                stack.writeToNBT(itemTag);
-                nbtTagList.appendTag(itemTag);
-            }
-        }
-        compound.setTag(in_out+"Items", nbtTagList);
-        return compound;
-    }
-    public static void readItemHandlerFromNBT(NBTTagCompound compound, IItemHandlerModifiable handler,String in_out) {
-        NBTTagList nbtTagList = compound.getTagList(in_out+"Items", Constants.NBT.TAG_COMPOUND);
-        for (int i = 0; i < nbtTagList.tagCount(); i++) {
-            NBTTagCompound itemTag = nbtTagList.getCompoundTagAt(i);
-            int slot = itemTag.getInteger("Slot"+in_out);
-            if (slot >= 0 && slot < handler.getSlots()) {
-                handler.setStackInSlot(slot, new ItemStack(itemTag));
-            }
-        }
-    }
     @Override
     protected void updateFormedValid() {
         maxEU= (int) (this.energyContainer.getEnergyCapacity()/64);
