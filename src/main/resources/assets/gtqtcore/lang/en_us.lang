@@ -3517,7 +3517,7 @@ gregtech.multiblock.parr.throttle_increment=§aIncrease Parallel Units
 gtqtcore.multiblock.kqn.threshold_decrement1=§cSelect Forward 10
 gtqtcore.multiblock.kqn.threshold_increment1=§aSelect Backward 10
 
-gtqtcore.multiblock.kqn.thresholdPercentage=Research Number: %s
+gtqtcore.multiblock.kqn.thresholdPercentage=Research Number: %s Research Kind: %s
 gtqtcore.machine.keqing_net.name=Research Computer
 
 gtqtcore.multiblock.kqn.nb0=Welcome to KQCC Research Computer Integration System!
@@ -3567,10 +3567,14 @@ metaitem.disk.10.tooltip=§aResource Exploration III
 gtqtcore.multiblock.kqn.nb11=Project: Netwalker - Element Storage Through the basic analysis of Fluix crystals and the basic digital system, the conversion between matter and elemental components can be basically realized. Of course, this conversion is limited by a very unique device structure and cannot exist outside of this structure.
 metaitem.disk.11.name=Data Storage
 metaitem.disk.11.tooltip=§eNetwalker - Element Storage
+
 gtqtcore.multiblock.kqn.nb12=Project: Net Walker - Pipe Network System Combining current optoelectronic technology to analyze the flow characteristics of elemental components, under specific conditions, elemental components can actually be transported at high speed in Fluix pipes. If we perform material <-> element component conversion respectively in the Fluxi network, our logistics automation will reach unprecedented heights.
 metaitem.disk.12.name=Data Storage
 metaitem.disk.12.tooltip=§eNet Walker - Pipe Network System
-metaitem.disk.13.tooltip=§eNet Walker - Wireless Transmission
+
+gtqtcore.multiblock.kqn.nb13=Project: Netway Walker - Wireless Transmission. Leveraging high-energy physics, we can effortlessly observe atomic movements during the conversion of matter <-> elemental components. The operational principle of Fluix enables us to directly achieve wireless transmission of elemental components, independent of pipeline restrictions. However, this necessitates significant power consumption to catalyze Fluix's material conversion processes.
+metaitem.disk.13.name=Data Storage
+metaitem.disk.13.tooltip=§eNetway Walker - Wireless Transmission
 
 gtqtcore.multiblock.kqn.nb14=Project: Artificial Intelligence I Based on simple logic circuit networks, we can enable devices to achieve very primitive automated interaction modes. Of course, this logical complexity is far inferior to even a single-celled organism, but it can meet most mechanical manual operations. The era of machine-assisted human work is coming.
 metaitem.disk.14.name=Data Storage
@@ -3583,6 +3587,95 @@ metaitem.disk.15.tooltip=§aArtificial Intelligence II
 gtqtcore.multiblock.kqn.nb16=Project: Artificial Intelligence III The size of electronic components has reached its limit, but its computational complexity still cannot match animals. Based on bioengineering technology, through the induced growth of cells combined with the operation principle analysis of simple control circuits, brain-computer interfaces or wetware circuits may be realized.
 metaitem.disk.16.name=Data Storage
 metaitem.disk.16.tooltip=§aArtificial Intelligence III
+
+gtqtcore.multiblock.kqn.nb17=Project: Bioengineering I. The discovery of microorganisms undoubtedly marks a significant milestone in the history of bioengineering. Through in-depth research on bacteria and DNA, we can cultivate targeted strains through hybrid breeding methods. These strains exhibit extreme activity under specific working conditions, significantly shortening the original complex chemical routes using bacterial catalysis for production.
+
+metaitem.disk.17.name=Data Storage Unit
+metaitem.disk.17.tooltip=§aBioengineering I
+
+gtqtcore.multiblock.kqn.nb18=Project: Bioengineering II. Based on the ever-advancing development of transmission electron microscopes and chemical technologies, we can now directly manipulate the genes of various organisms through extremely complex yet sophisticated methods. This step saves us a considerable amount of time in cultivating original strains, and the outstanding traits exhibited by the offspring are more stable!
+
+metaitem.disk.18.name=Data Storage Unit
+metaitem.disk.18.tooltip=§aBioengineering II
+
+gtqtcore.multiblock.kqn.nb19=Project: Bioengineering III. Nothing is more exciting than brain-computer interfaces, but if there is, biocomputers will be the pinnacle of this industry and discipline! Thanks to the wonders of nature, by cultivating synaptic nerve cells from the brain, we now possess biological circuits that rival the most advanced quantum computers!
+
+metaitem.disk.19.name=Data Storage Unit
+metaitem.disk.19.tooltip=§aBioengineering III
+
+gtqtcore.multiblock.kqn.nb20=Project: Standardized Operations. Based on detailed process decomposition and strict operational norms, we can construct an efficient and standardized operational system. Standardized operations not only lay a solid foundation for mechanized production but also herald a new era of production management—an era characterized by precision, efficiency, and controllability.
+
+metaitem.disk.20.name=Data Storage Unit
+metaitem.disk.20.tooltip=§aStandardized Operations
+
+gtqtcore.multiblock.kqn.nb21=Project: High-Precision Processing. Focusing on micrometer and even nanometer-level processing accuracy, it showcases its remarkable potential in modern manufacturing. Despite its far greater technical complexity than traditional processing methods and stringent requirements for process control, high-precision processing brings unparalleled product performance enhancements and resource utilization optimization.
+
+metaitem.disk.21.name=Data Storage Unit
+metaitem.disk.21.tooltip=§aHigh-Precision Processing
+
+gtqtcore.multiblock.kqn.nb22=Project: Automated Management. By integrating information technology, artificial intelligence, and operational process optimization, we have achieved intelligent monitoring and efficient scheduling of production and business activities. Although its initial implementation requires in-depth transformation and adaptation of the existing production system, the resulting efficiency gains, faster decision-making, and optimized cost control undoubtedly bring significant competitive advantages to production.
+
+metaitem.disk.22.name=Data Storage Unit
+metaitem.disk.22.tooltip=§aAutomated Management
+
+gtqtcore.multiblock.kqn.nb23=Project: IoT Integrated Control. As another milestone in the field of information technology, it seamlessly connects various smart devices, sensors, network infrastructure, and software systems, building a vast and interactive bridge between the physical and digital worlds. It enables real-time data exchange and sharing among devices, analysis and decision-making, and collaborative control capabilities.
+
+metaitem.disk.23.name=Data Storage Unit
+metaitem.disk.23.tooltip=§aIoT Integrated Control
+
+gtqtcore.multiblock.kqn.bio0=Welcome to the KQCC Scientific Research Computer Integrated System!
+metaitem.bio.0.name=Genetic Storage Unit
+metaitem.bio.0.tooltip=§aNULL
+
+gtqtcore.multiblock.kqn.bio1=Project: Targeted Genetic Templates. Based on advanced biological cultivation technology and the support of more advanced electron microscopes, we can utilize certain templates to replicate most of the information from simple organisms. With only some basic raw materials for radiation-induced mutation, we can easily transform them, eliminating the need for cumbersome strain hybridization.
+
+metaitem.bio.1.name=Genetic Storage Unit
+metaitem.bio.1.tooltip=§aStored Strain: α-Universal Ore-Processing Strain
+
+metaitem.bio.2.name=Genetic Storage Unit
+metaitem.bio.2.tooltip=§aStored Strain: α-Targeted Platinum-Series Strain
+
+metaitem.bio.3.name=Gene Storage Unit
+metaitem.bio.3.tooltip=§aStores Species: α-Universal Magical Species
+
+metaitem.bio.4.name=Gene Storage Unit
+metaitem.bio.4.tooltip=§aStores Species: α-Universal Byproduct Species
+
+metaitem.bio.5.name=Gene Storage Unit
+metaitem.bio.5.tooltip=§aStores Species: α-Industrial Synthetic Species I
+
+metaitem.bio.6.name=Gene Storage Unit
+metaitem.bio.6.tooltip=§aStores Species: α-Industrial Reducing Species
+
+metaitem.bio.7.name=Gene Storage Unit
+metaitem.bio.7.tooltip=§aStores Species: α-Industrial Oxidizing Species
+
+metaitem.bio.8.name=Gene Storage Unit
+metaitem.bio.8.tooltip=§aStores Species: α-Industrial Catalytic Species
+
+metaitem.bio.9.name=Gene Storage Unit
+metaitem.bio.9.tooltip=§aStores Species: α-Directional Lipase
+
+metaitem.bio.10.name=Gene Storage Unit
+metaitem.bio.10.tooltip=§aStores Species: α-Universal Fermentation Enzyme
+
+metaitem.bio.11.name=Gene Storage Unit
+metaitem.bio.11.tooltip=§aStores Species: α-Directional Fermentation Enzyme
+
+metaitem.bio.12.name=Gene Storage Unit
+metaitem.bio.12.tooltip=§aStores Species: α-Active Mutagenic Enzyme
+
+metaitem.bio.13.name=Gene Storage Unit
+metaitem.bio.13.tooltip=§aStores Species: (Placeholder - Needs to be specified)
+
+metaitem.bio.14.name=Gene Storage Unit
+metaitem.bio.14.tooltip=§aStores Species: (Placeholder - Needs to be specified)
+
+metaitem.bio.15.name=Gene Storage Unit
+metaitem.bio.15.tooltip=§aStores Species: (Placeholder - Needs to be specified)
+
+gtqtcore.machine.gene_mutagenesis.name=Gene Mutagenesis Chamber
+recipemap.gene_mutagenesis.name=Gene Mutagenesis
 
 gtqtcore.multiblock.ak.temp=Temperature too low, please add lava
 recipemap.alloy_klin.name=Alloy Kiln

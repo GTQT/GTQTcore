@@ -3532,7 +3532,7 @@ gregtech.multiblock.parr.throttle_increment=§a并行增加单位
 gtqtcore.multiblock.kqn.threshold_decrement1=§c选取向前 10
 gtqtcore.multiblock.kqn.threshold_increment1=§a选取向后 10
 
-gtqtcore.multiblock.kqn.thresholdPercentage=研究序号：%s
+gtqtcore.multiblock.kqn.thresholdPercentage=研究序号：%s 研究大类：%s
 gtqtcore.machine.keqing_net.name=科研计算机
 
 gtqtcore.multiblock.kqn.nb0=欢迎使用KQCC科研计算机集成系统！
@@ -3602,6 +3602,87 @@ metaitem.disk.15.tooltip=§a人工智能II
 gtqtcore.multiblock.kqn.nb16=项目：人工智能III 电子元件的尺寸已经到达极限，但是其运算复杂度依旧无法匹敌动物，基于生物工程技术，通过对细胞的诱导生长结合简单的控制电路的运作原理分析，脑机接口又或是湿件电路或将实现。
 metaitem.disk.16.name=数据存储器
 metaitem.disk.16.tooltip=§a人工智能III
+
+gtqtcore.multiblock.kqn.nb17=项目：生物工程I 微生物的发现无疑是生物工程发展历史上重大里程碑，通过对细菌以及DNA的深入研究，我们可以通过杂交繁殖的方法培育定向菌种，此类菌种在特定工作条件下表现极为活跃，使用菌种催化生产将大大缩减原有的繁杂化工路线。
+metaitem.disk.17.name=数据存储器
+metaitem.disk.17.tooltip=§a生物工程I
+
+gtqtcore.multiblock.kqn.nb18=项目：生物工程II 基于透射电镜与化学技术的日益发展，我们能通过极其复杂而精妙的方法直接对各位生物的基因进行直接操作，这一步骤将节约我们大量培育原始菌种的时间，并且子代所表现的突出性状更为稳定！
+metaitem.disk.18.name=数据存储器
+metaitem.disk.18.tooltip=§a生物工程II
+
+gtqtcore.multiblock.kqn.nb19=项目：生物工程III 没有什么比脑机接口更令人兴奋的了，如果有，那么生物计算机将是这个行业学科的最高峰！感谢来自大自然的奇迹。通过培育来自大脑的突触神经细胞，我们现在拥有媲美最先进量子计算机的生物电路！
+metaitem.disk.19.name=数据存储器
+metaitem.disk.19.tooltip=§a生物工程III
+
+gtqtcore.multiblock.kqn.nb20=项目：标准化作业 基于精细的流程分解与严格的作业规范，我们能够构建出一套高效执行的标准化作业体系。标准化作业不仅为机械化生产奠定了坚实基础，更预示着生产管理迈入了一个全新的时代——一个以精确、高效、可控为核心特征的时代。
+metaitem.disk.20.name=数据存储器
+metaitem.disk.20.tooltip=§a标准化作业
+
+gtqtcore.multiblock.kqn.nb21=项目：高精加工 聚焦于微米乃至纳米级别的加工精度，展现了其在现代制造业中的非凡潜力。尽管其技术复杂度远超传统加工方法，且对工艺控制的要求极为苛刻，但高精加工所带来的产品性能提升以及资源利用率的优化，是传统加工方式难以匹敌的。
+metaitem.disk.21.name=数据存储器
+metaitem.disk.21.tooltip=§a高精加工
+
+gtqtcore.multiblock.kqn.nb22=项目：自动化管理 通过集成信息技术、人工智能与作业流程优化，实现了对生产营活动的智能监控与高效调度。尽管其初期实施需要对生产现有体系进行深度改造与适应，但带来的效率提升、决策速度加快以及成本控制的优化，无疑为生产带来了显著的竞争优势。
+metaitem.disk.22.name=数据存储器
+metaitem.disk.22.tooltip=§a自动化管理
+
+gtqtcore.multiblock.kqn.nb23=项目：物联网集成控制 作为信息技术领域的又一里程碑，通过将各种智能设备、传感器、网络基础设施及软件系统无缝连接，构建了一个庞大的、可交互的物理世界与数字世界的桥梁。实现了设备间的实时数据交换与共享，分析决策与协同控制能力。
+metaitem.disk.23.name=数据存储器
+metaitem.disk.23.tooltip=§a物联网集成控制
+
+gtqtcore.multiblock.kqn.bio0=欢迎使用KQCC科研计算机集成系统！
+metaitem.bio.0.name=基因存储器
+metaitem.bio.0.tooltip=§aNULL
+
+gtqtcore.multiblock.kqn.bio1=项目：定向基因模板 基于先进生物培养技术以及更加高级电镜的支持，我们能够利用某种模板复印大多数简单生物的全部信息，只需要一些辐射诱变最基础的原材料便可轻松将其转化，不再需要繁琐的菌种杂交。
+metaitem.bio.1.name=基因存储器
+metaitem.bio.1.tooltip=§a存储菌种：α-普适矿处菌种
+
+metaitem.bio.2.name=基因存储器
+metaitem.bio.2.tooltip=§a存储菌种：α-定向铂系菌种
+
+metaitem.bio.3.name=基因存储器
+metaitem.bio.3.tooltip=§a存储菌种：α-普适魔性菌种
+
+metaitem.bio.4.name=基因存储器
+metaitem.bio.4.tooltip=§a存储菌种：α-普适副产菌种
+
+metaitem.bio.5.name=基因存储器
+metaitem.bio.5.tooltip=§a存储菌种：α-工业合成菌种I
+
+metaitem.bio.6.name=基因存储器
+metaitem.bio.6.tooltip=§a存储菌种：α-工业还原菌种
+
+metaitem.bio.7.name=基因存储器
+metaitem.bio.7.tooltip=§a存储菌种：α-工业氧化菌种
+
+metaitem.bio.8.name=基因存储器
+metaitem.bio.8.tooltip=§a存储菌种：α-工业催化菌种
+
+metaitem.bio.9.name=基因存储器
+metaitem.bio.9.tooltip=§a存储菌种：α-定向脂肪酶
+
+metaitem.bio.10.name=基因存储器
+metaitem.bio.10.tooltip=§a存储菌种：α-普适发酵酶
+
+metaitem.bio.11.name=基因存储器
+metaitem.bio.11.tooltip=§a存储菌种：α-定向发酵酶
+
+metaitem.bio.12.name=基因存储器
+metaitem.bio.12tooltip=§a存储菌种：α-活性诱变酶
+
+metaitem.bio.13.name=基因存储器
+metaitem.bio.13.tooltip=§a存储菌种：
+
+metaitem.bio.14.name=基因存储器
+metaitem.bio.14.tooltip=§a存储菌种：
+
+metaitem.bio.15.name=基因存储器
+metaitem.bio.15.tooltip=§a存储菌种：
+
+gtqtcore.machine.gene_mutagenesis.name=基因诱变室
+recipemap.gene_mutagenesis.name=基因诱变
 
 gtqtcore.multiblock.ak.temp=温度过低，请加岩浆
 recipemap.alloy_klin.name=合金窑

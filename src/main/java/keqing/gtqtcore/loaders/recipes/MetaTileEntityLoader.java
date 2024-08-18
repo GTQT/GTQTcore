@@ -40,6 +40,7 @@ import static gregtech.common.metatileentities.MetaTileEntities.*;
 import static gregtech.loaders.recipe.CraftingComponent.GLASS;
 import static gregtech.loaders.recipe.CraftingComponent.PIPE_NORMAL;
 import static gregtech.loaders.recipe.MetaTileEntityLoader.registerMachineRecipe;
+import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.GENE_MUTAGENESIS;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.Adamantite;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.Orichalcum;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
@@ -254,7 +255,7 @@ public class MetaTileEntityLoader {
                 .EUt(VA[7])
                 .duration(1600)
                 .scannerResearch(b -> b
-                        .researchStack(COMPONENT_GRINDER_TUNGSTEN.getStackForm())
+                        .researchStack(DISK_22.getStackForm())
                         .EUt(VA[7])
                         .duration(800))
                 .buildAndRegister();
@@ -444,7 +445,7 @@ public class MetaTileEntityLoader {
                 .fluidInputs(HastelloyN.getFluid(L * 2))
                 .outputs(PRECISE_ASSEMBLER.getStackForm())
                 .scannerResearch(b -> b
-                        .researchStack(LARGE_ASSEMBLER.getStackForm())
+                        .researchStack(DISK_21.getStackForm())
                         .EUt(VA[GTValues.IV])
                         .duration(1200))
                 .EUt(VA[GTValues.LuV])
@@ -468,7 +469,7 @@ public class MetaTileEntityLoader {
                 .fluidInputs(Zylon.getFluid(L * 2))
                 .outputs(NANO_COATING.getStackForm())
                 .scannerResearch(b -> b
-                        .researchStack(THREE_DIM_PRINT.getStackForm())
+                        .researchStack(DISK_20.getStackForm())
                         .EUt(VA[GTValues.HV])
                         .duration(1200))
                 .EUt(VA[GTValues.EV])

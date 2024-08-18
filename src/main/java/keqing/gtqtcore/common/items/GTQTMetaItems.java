@@ -512,6 +512,39 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem DISK_13;
     public static MetaItem<?>.MetaValueItem DISK_14;
     public static MetaItem<?>.MetaValueItem DISK_15;
+
+    public static MetaItem<?>.MetaValueItem DISK_16;
+    public static MetaItem<?>.MetaValueItem DISK_17;
+    public static MetaItem<?>.MetaValueItem DISK_18;
+    public static MetaItem<?>.MetaValueItem DISK_19;
+    public static MetaItem<?>.MetaValueItem DISK_20;
+    public static MetaItem<?>.MetaValueItem DISK_21;
+    public static MetaItem<?>.MetaValueItem DISK_22;
+    public static MetaItem<?>.MetaValueItem DISK_23;
+    public static MetaItem<?>.MetaValueItem DISK_24;
+    public static MetaItem<?>.MetaValueItem DISK_25;
+    public static MetaItem<?>.MetaValueItem DISK_26;
+    public static MetaItem<?>.MetaValueItem DISK_27;
+    public static MetaItem<?>.MetaValueItem DISK_28;
+    public static MetaItem<?>.MetaValueItem DISK_29;
+    public static MetaItem<?>.MetaValueItem DISK_30;
+
+    public static MetaItem<?>.MetaValueItem BIO_0;
+    public static MetaItem<?>.MetaValueItem BIO_1;
+    public static MetaItem<?>.MetaValueItem BIO_2;
+    public static MetaItem<?>.MetaValueItem BIO_3;
+    public static MetaItem<?>.MetaValueItem BIO_4;
+    public static MetaItem<?>.MetaValueItem BIO_5;
+    public static MetaItem<?>.MetaValueItem BIO_6;
+    public static MetaItem<?>.MetaValueItem BIO_7;
+    public static MetaItem<?>.MetaValueItem BIO_8;
+    public static MetaItem<?>.MetaValueItem BIO_9;
+    public static MetaItem<?>.MetaValueItem BIO_10;
+    public static MetaItem<?>.MetaValueItem BIO_11;
+    public static MetaItem<?>.MetaValueItem BIO_12;
+    public static MetaItem<?>.MetaValueItem BIO_13;
+    public static MetaItem<?>.MetaValueItem BIO_14;
+    public static MetaItem<?>.MetaValueItem BIO_15;
     public static MetaItem<?>.MetaValueItem DISK_COMMON;
 
     public static MetaItem<?>.MetaValueItem ALPHA;

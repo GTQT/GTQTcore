@@ -38,6 +38,10 @@ public class MetaTileEntityCreativeEnergyHatch extends MetaTileEntityMultiblockP
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {
         return new MetaTileEntityCreativeEnergyHatch(this.metaTileEntityId,getTier());
     }
+    public void update() {
+        super.update();
+        if(this.energyContainer.getEnergyStored()<this.energyContainer.getEnergyCapacity())this.energyContainer.addEnergy(this.energyContainer.getEnergyCapacity()-this.energyContainer.getEnergyStored());
+    }
 
     @Override
     @SideOnly(Side.CLIENT)

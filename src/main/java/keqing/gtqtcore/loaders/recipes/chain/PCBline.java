@@ -167,7 +167,7 @@ public class PCBline {
                 .fluidInputs(NaquadahEnriched.getFluid(L * 12))
                 .output(PCB_FACTORY)
                 .stationResearch(b -> b
-                        .researchStack(WETWARE_CIRCUIT_BOARD.getStackForm())
+                        .researchStack(DISK_22.getStackForm())
                         .EUt(VA[LuV])
                         .CWUt(CWT[ZPM])
                 )

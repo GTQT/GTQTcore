@@ -12,10 +12,10 @@ public class GTQTKQnetHelper {
         //3 物理-量子计算机
         if (kind == 3) return"物理-量子计算机";
 
-        //11 生物-DNA解析计算机
-        if (kind == 11) return"生物-DNA解析计算机";
-        //12 生物-基因测序计算机
-        if (kind == 12) return"生物-基因测序计算机";
+        //11 生物-细菌培养缸
+        if (kind == 11) return"生物-细菌培养缸";
+        //12 生物-基因诱变室
+        if (kind == 12) return"生物-基因诱变室";
 
         //21 光学-质谱仪
         if (kind == 21) return"光学-质谱仪";
@@ -31,6 +31,8 @@ public class GTQTKQnetHelper {
         if (kind == 33) return"设备-辅助数据库I";
         //34 设备-辅助数据库
         if (kind == 34) return"设备-辅助数据库II";
+        //34 设备-辅助数据库
+        if (kind == 35) return"设备-辅助数据库III";
         return "null";
     }
 }

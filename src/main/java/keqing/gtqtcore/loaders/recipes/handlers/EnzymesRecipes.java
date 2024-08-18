@@ -1,10 +1,12 @@
 package keqing.gtqtcore.loaders.recipes.handlers;
 
 import com.cleanroommc.groovyscript.api.IIngredient;
+import gregtech.api.items.metaitem.MetaItem;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.UnificationEntry;
 import ibxm.Player;
+import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 
 import static gregtech.api.GTValues.*;
 import static gregtech.api.GTValues.VA;
@@ -17,6 +19,8 @@ import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.Enzymesca;
+import static keqing.gtqtcore.api.utils.GTQTUtil.CWT;
+import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 
 public class EnzymesRecipes {
     public static void init() {
@@ -26,21 +30,21 @@ public class EnzymesRecipes {
         growth(Enzymesdz,Enzymesd);
         growth(Enzymesez,Enzymese);
 
-        enzymesmix(Enzymesaa,Iron,101,1);
-        enzymesmix(Enzymesab,Gold,102,1);
-        enzymesmix(Enzymesac,Mercury,103,1);
-        enzymesmix(Enzymesad,Titanium,104,1);
+        enzymesmix(Enzymesaa,Iron,101,1,1);
+        enzymesmix(Enzymesab,Gold,102,1,2);
+        enzymesmix(Enzymesac,Mercury,103,1,3);
+        enzymesmix(Enzymesad,Titanium,104,1,4);
 
-        enzymesmix(Enzymesba,Polyethylene,201,2);
-        enzymesmix(Enzymesbb,Oxygen,202,2);
-        enzymesmix(Enzymesbc,Hydrogen,203,2);
-        enzymesmix(Enzymesbd,Benzene,204,2);
+        enzymesmix(Enzymesba,Polyethylene,201,2,5);
+        enzymesmix(Enzymesbb,Oxygen,202,2,6);
+        enzymesmix(Enzymesbc,Hydrogen,203,2,7);
+        enzymesmix(Enzymesbd,Benzene,204,2,8);
 
-        enzymesmix(Enzymesca,Stearin,301,3);
-        enzymesmix(Enzymescb,Biomass,302,3);
-        enzymesmix(Enzymescc,Methane,303,3);
+        enzymesmix(Enzymesca,Stearin,301,3,9);
+        enzymesmix(Enzymescb,Biomass,302,3,10);
+        enzymesmix(Enzymescc,Methane,303,3,11);
 
-        enzymesmix(Enzymesda,Brominatedepoxyresins,401,4);
+        enzymesmix(Enzymesda,Brominatedepoxyresins,401,4,12);
 
 
         //物尽其用
@@ -493,8 +497,37 @@ public class EnzymesRecipes {
                 .circuitMeta(circuit)
                 .duration(100*tier).EUt(VA[MV+tier]).buildAndRegister();
     }
-    public static void enzymesmix(Material material1,Material material2, int rate, int tier)
+
+    public static MetaItem<?>.MetaValueItem[]DISK={BIO_0,BIO_1,BIO_2,BIO_3,BIO_4,BIO_5,BIO_6,BIO_7,BIO_8,BIO_9,BIO_10,BIO_11,BIO_12};
+
+
+    public static void enzymesmix(Material material1,Material material2, int rate, int tier,int num)
     {
+        GTQTcoreRecipeMaps.KEQING_NET_RECIES.recipeBuilder()
+                .Tier(2)
+                .KI(12)
+                .input(BIO_0)
+                .notConsumable(material1.getFluid(1000))
+                .output(DISK[num])
+                .EUt(VA[LuV])
+                .CWUt(CWT[LuV])
+                .duration(20000)
+                .NB(num)
+                .buildAndRegister();
+
+        GENE_MUTAGENESIS.recipeBuilder()
+                .notConsumable(DISK[num])
+                .fluidInputs(Enzymesa.getFluid(1000))
+                .fluidInputs(Enzymesb.getFluid(1000))
+                .fluidInputs(Enzymesc.getFluid(1000))
+                .fluidInputs(Enzymesd.getFluid(1000))
+                .fluidInputs(Enzymese.getFluid(1000))
+                .fluidInputs(Rnzymes.getFluid(500))
+                .fluidOutputs(material1.getFluid(5000))
+                .EUt(VA[HV+tier])
+                .duration(960*tier)
+                .rate(tier*20)
+                .buildAndRegister();
         //自交
         ENZYMES_REACTION_RECIPES.recipeBuilder()
                 .fluidInputs(material1.getFluid(10))

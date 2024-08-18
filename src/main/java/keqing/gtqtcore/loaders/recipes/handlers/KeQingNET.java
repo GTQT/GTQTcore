@@ -38,21 +38,17 @@ import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.common.blocks.BlockFusionCasing.CasingType.FUSION_COIL;
 import static gregtech.common.blocks.BlockFusionCasing.CasingType.SUPERCONDUCTOR_COIL;
-import static gregtech.common.blocks.BlockMetalCasing.MetalCasingType.BRONZE_BRICKS;
 import static gregtech.common.blocks.MetaBlocks.*;
 import static gregtech.common.items.MetaItems.*;
 import static gregtech.common.metatileentities.MetaTileEntities.ADVANCED_FLUID_DRILLING_RIG;
 import static gregtech.common.metatileentities.MetaTileEntities.ASSEMBLY_LINE;
 import static gregtech.common.metatileentities.MetaTileEntities.FLUID_DRILLING_RIG;
 import static gregtech.common.metatileentities.MetaTileEntities.FUSION_REACTOR;
-
-import static gregtech.common.blocks.BlockFusionCasing.CasingType.SUPERCONDUCTOR_COIL;
-import static gregtech.common.metatileentities.MetaTileEntities.*;
 import static gregtech.common.metatileentities.MetaTileEntities.LARGE_CHEMICAL_REACTOR;
 import static gregtech.common.metatileentities.MetaTileEntities.ROTOR_HOLDER;
 import static gregtechfoodoption.machines.GTFOTileEntities.GREENHOUSE;
-import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.PRECISE_ASSEMBLER_RECIPES;
-import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.VACUUM_CHAMBER_RECIPES;
+import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
+import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.GENE_MUTAGENESIS;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.TJMaterials.Polyetheretherketone;
@@ -64,9 +60,16 @@ import static keqing.gtqtcore.common.block.blocks.GTQTKQCC.CasingType.*;
 import static keqing.gtqtcore.common.block.blocks.GTQTPowerSupply.SupplyType.POWER_SUPPLY_BASIC;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.*;
+import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.BIO_CENTRIFUGE;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.COMBUSTION_GENERATOR;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.CRACKER;
+import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.FIX_BED;
+import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.FLUIDIZED_BED;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.GAS_TURBINE;
+import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.INTEGRATED_MINING_DIVISION;
+import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.PYROLYSIS_TOWER;
+import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.ROCKET;
+import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.SEPTIC_TANK;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.STEAM_TURBINE;
 
 public class KeQingNET {
@@ -109,10 +112,27 @@ public class KeQingNET {
         //13 网道行者-无线传输
 
         //14 人工智能I
-        KQ_NET(0,2,14,DISK_14,circuit,Tier.EV);
+        KQ_NET(0,1,14,DISK_14,circuit,Tier.EV);
         //15 人工智能II
-        KQ_NET(0,3,15,DISK_15,circuit,Tier.LuV);
+        KQ_NET(0,2,15,DISK_15,circuit,Tier.LuV);
+        //16 人工智能III
+        KQ_NET(3,3,16,DISK_15,circuit,Tier.UV);
 
+        //17 生物工程I
+        KQ_NET(0,1,17,DISK_17,SEPTIC_TANK.getStackForm());
+        //18 生物工程II
+        KQ_NET(11,2,18,DISK_18,WETWARE_CIRCUIT_BOARD);
+        //19 生物工程III
+        KQ_NET(12,3,19,DISK_19, INTRAVITAL_SOC);
+
+        //20 标准化作业
+        KQ_NET(0,1,20,DISK_20,ASSEMBLER[2].getStackForm());
+        //21 高精加工
+        KQ_NET(0,2,21,DISK_21,ASSEMBLY_LINE.getStackForm());
+        //22 自动化管理
+        KQ_NET(0,3,22,DISK_22,PRECISE_ASSEMBLER.getStackForm());
+        //22 物联网集成控制
+        KQ_NET(3,4,23,DISK_23,ADVANCED_ASSEMBLY_LINE.getStackForm());
     }
 
 
@@ -443,6 +463,23 @@ public class KeQingNET {
                 .scannerResearch(b -> b
                         .researchStack(DISK_15.getStackForm()))
                 .buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(CIRCUIT_GOOD_II,1)
+                .input(WETWARE_CIRCUIT_BOARD,16)
+                .input(foil, NaquadahAlloy, 8)
+                .input(OPTICAL_PIPES[0], 64)
+                .input(OPTICAL_PIPES[0], 64)
+                .fluidInputs(SolderingAlloy.getFluid(L * 8))
+                .fluidInputs(Tin.getFluid(L * 8))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 8))
+                .fluidInputs(Polyetheretherketone.getFluid(L * 4))
+                .output(BIO_0)
+                .EUt(VA[LuV])
+                .duration(600)
+                .scannerResearch(b -> b
+                        .researchStack(DISK_18.getStackForm()))
+                .buildAndRegister();
     }
 
     private static void Pre() {
@@ -534,7 +571,7 @@ public class KeQingNET {
                 .fluidInputs(SolderingAlloy.getFluid(L * 8))
                 .fluidInputs(Polybenzimidazole.getFluid(L * 8))
                 .scannerResearch(b -> b
-                        .researchStack(GREENHOUSE.getStackForm())
+                        .researchStack(DISK_17.getStackForm())
                         .EUt(VA[HV]))
                 .duration(4000).EUt(1920).buildAndRegister();
 
@@ -552,7 +589,7 @@ public class KeQingNET {
                 .fluidInputs(Polybenzimidazole.getFluid(L * 8))
                 .fluidInputs(Platinum.getFluid(L * 8))
                 .scannerResearch(b -> b
-                        .researchStack(CENTRIFUGE[3].getStackForm())
+                        .researchStack(DISK_17.getStackForm())
                         .EUt(VA[HV]))
                 .duration(4000).EUt(1920).buildAndRegister();
 
@@ -568,9 +605,30 @@ public class KeQingNET {
                 .fluidInputs(Polybenzimidazole.getFluid(L * 8))
                 .fluidInputs(Palladium.getFluid(L * 8))
                 .scannerResearch(b -> b
-                        .researchStack(BIOLOGICAL_REACTION.getStackForm())
+                        .researchStack(DISK_17.getStackForm())
                         .EUt(VA[HV]))
                 .duration(4000).EUt(1920).buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(ENZYMES_REACTOR,4)
+                .input(circuit, Tier.UV, 4)
+                .input(circuit, Tier.ZPM, 16)
+                .input(ELECTRIC_PUMP_LuV, 4)
+                .input(ROBOT_ARM_LuV, 4)
+                .input(frameGt, Europium, 8)
+                .input(plateDense, NaquadahAlloy, 4)
+                .input(foil, PPB, 64)
+                .input(wireGtSingle,IVSuperconductor,16)
+                .output(GTQTMetaTileEntities.GENE_MUTAGENESIS)
+                .fluidInputs(Polybenzimidazole.getFluid(L * 32))
+                .fluidInputs(Zylon.getFluid(L * 64))
+                .fluidInputs(TitaniumTungstenCarbide.getFluid(L * 64))
+                .fluidInputs(UltraGlue.getFluid(L * 64))
+                .stationResearch(b -> b
+                        .researchStack(DISK_18.getStackForm())
+                        .CWUt(CWT[IV])
+                        .EUt(VA[LuV]))
+                .duration(4000).EUt(VA[LuV]).buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(circuit, Tier.IV, 4)
@@ -680,7 +738,7 @@ public class KeQingNET {
                 .EUt(VA[LuV])
                 .duration(1200)
                 .stationResearch(b -> b
-                        .researchStack(COMPONENT_ASSEMBLER[IV].getStackForm())
+                        .researchStack(DISK_22.getStackForm())
                         .CWUt(CWT[LuV])
                         .EUt(VA[UV]))
                 .buildAndRegister();
@@ -702,7 +760,7 @@ public class KeQingNET {
                 .fluidInputs(NaquadahAlloy.getFluid(L * 4))
                 .outputs(HUGE_CRACKING_UNIT.getStackForm())
                 .stationResearch(b -> b
-                        .researchStack(CRACKER.getStackForm())
+                        .researchStack(DISK_23.getStackForm())
                         .CWUt(CWT[IV])
                         .EUt(VA[LuV]))
                 .EUt(VA[LuV])
@@ -727,7 +785,7 @@ public class KeQingNET {
                 .fluidInputs(NaquadahAlloy.getFluid(L * 4))
                 .outputs(HUGE_CHEMICAL_REACTOR.getStackForm())
                 .stationResearch(b -> b
-                        .researchStack(LARGE_CHEMICAL_REACTOR.getStackForm())
+                        .researchStack(DISK_23.getStackForm())
                         .CWUt(CWT[IV])
                         .EUt(VA[LuV]))
                 .EUt(VA[IV])
@@ -752,7 +810,7 @@ public class KeQingNET {
                 .fluidInputs(NaquadahAlloy.getFluid(L * 4))
                 .outputs(HUGE_ALLOY_BLAST_FURANCE.getStackForm())
                 .stationResearch(b -> b
-                        .researchStack(ALLOY_BLAST_SMELTER.getStackForm())
+                        .researchStack(DISK_23.getStackForm())
                         .CWUt(CWT[IV])
                         .EUt(VA[LuV]))
                 .EUt(VA[LuV])
@@ -777,7 +835,7 @@ public class KeQingNET {
                 .fluidInputs(NaquadahAlloy.getFluid(L * 4))
                 .outputs(HUGE_BLAST_FURANCE.getStackForm())
                 .stationResearch(b -> b
-                        .researchStack(BLAZING_BLAST_FURNACE.getStackForm())
+                        .researchStack(DISK_23.getStackForm())
                         .CWUt(CWT[IV])
                         .EUt(VA[LuV]))
                 .EUt(VA[LuV])
@@ -956,7 +1014,7 @@ public class KeQingNET {
                 .EUt(VA[LuV])
                 .duration(1200)
                 .stationResearch(b -> b
-                        .researchStack(ASSEMBLY_LINE.getStackForm())
+                        .researchStack(DISK_22.getStackForm())
                         .CWUt(CWT[LuV])
                         .EUt(VA[LuV]))
                 .buildAndRegister();
@@ -986,7 +1044,7 @@ public class KeQingNET {
                 .EUt(VA[LuV])
                 .duration(1200)
                 .scannerResearch(b -> b
-                        .researchStack(LARGE_CIRCUIT_ASSEMBLER.getStackForm())
+                        .researchStack(DISK_22.getStackForm())
                         .EUt(VA[IV])
                         .duration(600))
                 .buildAndRegister();
@@ -1061,6 +1119,7 @@ public class KeQingNET {
                 .output(TOOL_DATA_STICK)
                 .solderMultiplier(2)
                 .duration(1000).EUt(120).buildAndRegister();
+
         //BIOLOGICAL_REACTION
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .inputs(HULL[3].getStackForm(16))
@@ -1074,11 +1133,12 @@ public class KeQingNET {
                 .fluidInputs(Polytetrafluoroethylene.getFluid(4000))
                 .fluidInputs(Aluminium.getFluid(4000))
                 .scannerResearch(b -> b
-                        .researchStack(SEPTIC_TANK.getStackForm())
+                        .researchStack(DISK_17.getStackForm())
                         .duration(1200)
                         .EUt(VA[MV]))
                 .output(BIOLOGICAL_REACTION)
                 .duration(200).EUt(120).buildAndRegister();
+
         //DIGESTER
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .inputs(HULL[3].getStackForm(16))
@@ -1092,7 +1152,7 @@ public class KeQingNET {
                 .fluidInputs(Polytetrafluoroethylene.getFluid(4000))
                 .fluidInputs(TungstenSteel.getFluid(4000))
                 .scannerResearch(b -> b
-                        .researchStack(REACTION_FURNACE.getStackForm())
+                        .researchStack(DISK_20.getStackForm())
                         .duration(1200)
                         .EUt(VA[MV]))
                 .output(DIGESTER)
@@ -1109,7 +1169,7 @@ public class KeQingNET {
                 .input(foil, Aluminium, 8)
                 .fluidInputs(Polytetrafluoroethylene.getFluid(4000))
                 .scannerResearch(b -> b
-                        .researchStack(BIOLOGICAL_REACTION.getStackForm())
+                        .researchStack(DISK_20.getStackForm())
                         .duration(1200)
                         .EUt(VA[HV]))
                 .output(ALGAE_FARM)
@@ -1128,7 +1188,7 @@ public class KeQingNET {
                 .input(foil, Palladium, 32)
                 .fluidInputs(Zylon.getFluid(4000))
                 .scannerResearch(b -> b
-                        .researchStack(PYROLYSIS_TOWER.getStackForm())
+                        .researchStack(DISK_20.getStackForm())
                         .duration(1200)
                         .EUt(VA[EV]))
                 .output(COKING_TOWER)
@@ -1146,7 +1206,7 @@ public class KeQingNET {
                 .input(foil, Palladium, 32)
                 .fluidInputs(Zylon.getFluid(4000))
                 .scannerResearch(b -> b
-                        .researchStack(MSF.getStackForm())
+                        .researchStack(DISK_21.getStackForm())
                         .duration(1200)
                         .EUt(VA[EV]))
                 .output(SMSF)
@@ -1165,7 +1225,7 @@ public class KeQingNET {
                 .input(foil, HSSE, 32)
                 .fluidInputs(Zylon.getFluid(4000))
                 .scannerResearch(b -> b
-                        .researchStack(GTQTMetaTileEntities.DISTILLATION_TOWER.getStackForm())
+                        .researchStack(DISK_21.getStackForm())
                         .duration(1200)
                         .EUt(VA[EV]))
                 .output(VACUUM_DISTILLATION_TOWER)
@@ -1184,7 +1244,7 @@ public class KeQingNET {
                 .input(foil, Palladium, 32)
                 .fluidInputs(Zylon.getFluid(4000))
                 .scannerResearch(b -> b
-                        .researchStack(ELECTRIC_ARC_FURNACE.getStackForm())
+                        .researchStack(DISK_21.getStackForm())
                         .duration(1200)
                         .EUt(VA[EV]))
                 .output(ADV_ARC_FURNACE)
@@ -1201,7 +1261,7 @@ public class KeQingNET {
                 .input(foil, Aluminium, 8)
                 .fluidInputs(Polytetrafluoroethylene.getFluid(4000))
                 .scannerResearch(b -> b
-                        .researchStack(MACERATOR[3].getStackForm())
+                        .researchStack(DISK_20.getStackForm())
                         .duration(1200)
                         .EUt(VA[MV]))
                 .output(INTEGRATED_MINING_DIVISION)
@@ -1223,7 +1283,7 @@ public class KeQingNET {
                 .fluidInputs(CobaltBrass.getFluid(L * 4))
                 .output(VACUUM_DRYING_FURNACE)
                 .scannerResearch(b -> b
-                        .researchStack(DIGESTER.getStackForm())
+                        .researchStack(DISK_20.getStackForm())
                         .EUt(VA[HV])
                         .duration(600))
                 .EUt(VA[EV])
@@ -1245,7 +1305,7 @@ public class KeQingNET {
                 .fluidInputs(CobaltBrass.getFluid(L * 4))
                 .output(FROTH_FLOTATION_TANK)
                 .scannerResearch(b -> b
-                        .researchStack(DISSOLUTION_TANK.getStackForm())
+                        .researchStack(DISK_20.getStackForm())
                         .EUt(VA[HV])
                         .duration(600))
                 .EUt(VA[EV])
@@ -1272,7 +1332,7 @@ public class KeQingNET {
                 .EUt(VA[LuV])
                 .duration(3200)
                 .scannerResearch(b -> b
-                        .researchStack(LARGE_MACERATOR.getStackForm())
+                        .researchStack(DISK_21.getStackForm())
                         .EUt(VA[IV])
                         .duration(1200))
                 .buildAndRegister();
@@ -1334,7 +1394,7 @@ public class KeQingNET {
                 .EUt(VA[LuV])
                 .duration(3200)
                 .scannerResearch(b -> b
-                        .researchStack(LARGE_DISTILLERY.getStackForm())
+                        .researchStack(DISK_21.getStackForm())
                         .EUt(VA[IV])
                         .duration(1200))
                 .buildAndRegister();

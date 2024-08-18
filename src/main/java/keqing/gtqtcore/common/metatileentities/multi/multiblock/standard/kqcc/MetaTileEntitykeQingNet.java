@@ -33,6 +33,8 @@ import keqing.gtqtcore.api.recipes.properties.KQNetProperty;
 import keqing.gtqtcore.api.utils.GTQTKQnetHelper;
 import keqing.gtqtcore.common.items.GTQTMetaItems;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.MetaTileEntityElectronMicroscope;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.MetaTileEntityEnzymesReaction;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.MetaTileEntityGeneMutagenesis;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.MetaTileEntityPhotolithographyFactory;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
@@ -61,6 +63,7 @@ public class MetaTileEntitykeQingNet extends RecipeMapMultiblockController imple
     int x;
     int y;
     int z;
+    int card;
     boolean preLoad=false;
     int [][] io=new int[40][5];
 
@@ -130,6 +133,7 @@ public class MetaTileEntitykeQingNet extends RecipeMapMultiblockController imple
 
             if (io[i][4] == 33) helpTier += 0.25;
             if (io[i][4] == 34) helpTier += 0.5;
+            if (io[i][4] == 35) helpTier += 1.0;
         }
 
         if (helpTier != tier) tier = helpTier;
@@ -164,9 +168,9 @@ public class MetaTileEntitykeQingNet extends RecipeMapMultiblockController imple
         group.addWidget(new ClickButtonWidget(0, 9, 9, 9, "", this::page)
                 .setButtonTexture(GuiTextures.ARROW_DOUBLE)
                 .setTooltipText("切换页面"));
-        group.addWidget(new ClickButtonWidget(9, 9, 9, 9, "", this::clear)
+        group.addWidget(new ClickButtonWidget(9, 9, 9, 9, "", this::replace)
                 .setButtonTexture(GuiTextures.BUTTON_CLEAR_GRID)
-                .setTooltipText("清空绑定"));
+                .setTooltipText("研究类型"));
         return group;
     }
     private void incrementThreshold(Widget.ClickData clickData) {
@@ -181,8 +185,9 @@ public class MetaTileEntitykeQingNet extends RecipeMapMultiblockController imple
         if(page<2)page++;
         else page=0;
     }
-    private void clear(Widget.ClickData clickData) {
-        for(int i=0;i<40;i++)io[i][0]=0;
+    private void replace(Widget.ClickData clickData) {
+        if(card<2)card++;
+        else card=0;
     }
     @Override
     public boolean checkRecipe(@Nonnull Recipe recipe, boolean consumeIfSuccess) {
@@ -198,8 +203,20 @@ public class MetaTileEntitykeQingNet extends RecipeMapMultiblockController imple
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         if(page==0) {
-            textList.add(new TextComponentTranslation("gtqtcore.multiblock.kqn.thresholdPercentage", thresholdPercentage));
-            textList.add(new TextComponentTranslation(String.format("gtqtcore.multiblock.kqn.nb%s", thresholdPercentage)));
+
+            if(card==0) {
+                textList.add(new TextComponentTranslation("gtqtcore.multiblock.kqn.thresholdPercentage", thresholdPercentage,"传统科研"));
+                textList.add(new TextComponentTranslation(String.format("gtqtcore.multiblock.kqn.nb%s", thresholdPercentage)));
+            }
+            if(card==1) {
+                textList.add(new TextComponentTranslation("gtqtcore.multiblock.kqn.thresholdPercentage", thresholdPercentage,"基因定向"));
+                if(thresholdPercentage==0)textList.add(new TextComponentTranslation("gtqtcore.multiblock.kqn.bio0"));
+                if(thresholdPercentage<=15&&thresholdPercentage>0) {
+                    textList.add(new TextComponentTranslation("gtqtcore.multiblock.kqn.bio1"));
+                    textList.add(new TextComponentTranslation(String.format("metaitem.bio.%s.tooltip",thresholdPercentage)));
+                }
+                if(thresholdPercentage>15) textList.add(new TextComponentTranslation(String.format("gtqtcore.multiblock.kqn.bio%s", thresholdPercentage)));
+            }
         }
         if(page==1)
         {
@@ -290,7 +307,7 @@ public class MetaTileEntitykeQingNet extends RecipeMapMultiblockController imple
     }
     public boolean MachineCheck(int i,int x,int y,int z)
     {
-        if(getDistance(x,y,z)<48)return false;
+        if(getDistance(x,y,z)>48)return false;
         //触发加载
         TileEntity te = this.getWorld().getTileEntity(new BlockPos(x,y,z));
         if (te instanceof IGregTechTileEntity igtte) {
@@ -305,6 +322,18 @@ public class MetaTileEntitykeQingNet extends RecipeMapMultiblockController imple
             if (mte instanceof MetaTileEntityParticleAccelerator) {
                 if(((MetaTileEntityParticleAccelerator) mte).isStructureFormed()) {
                     io[i][4] = 2;
+                    return true;
+                }
+            }
+            if (mte instanceof MetaTileEntityEnzymesReaction) {
+                if(((MetaTileEntityEnzymesReaction) mte).isStructureFormed()) {
+                    io[i][4] = 11;
+                    return true;
+                }
+            }
+            if (mte instanceof MetaTileEntityGeneMutagenesis) {
+                if(((MetaTileEntityGeneMutagenesis) mte).isStructureFormed()) {
+                    io[i][4] = 12;
                     return true;
                 }
             }
@@ -335,6 +364,12 @@ public class MetaTileEntitykeQingNet extends RecipeMapMultiblockController imple
             if (mte instanceof MetaTileEntityDataBank) {
                 if(((MetaTileEntityDataBank) mte).isStructureFormed()) {
                     io[i][4] = 34;
+                    return true;
+                }
+            }
+            if (mte instanceof MetaTileEntityADVDataBank) {
+                if(((MetaTileEntityADVDataBank) mte).isStructureFormed()) {
+                    io[i][4] = 35;
                     return true;
                 }
             }

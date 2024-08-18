@@ -684,7 +684,25 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         DRAGON_CELL = this.addItem(1009, "dragon_cell").setCreativeTabs(CommonProxy.GTQTCore_BIO);
         PRE_DRAGON_CELL = this.addItem(1010, "pre_dragon_cell").setCreativeTabs(CommonProxy.GTQTCore_BIO);
 
-        
+
+        //生物基因模板
+        BIO_0= this.addItem(1500, "bio.0").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        BIO_1= this.addItem(1501, "bio.1").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        BIO_2= this.addItem(1502, "bio.2").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        BIO_3= this.addItem(1503, "bio.3").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        BIO_4= this.addItem(1504, "bio.4").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        BIO_5= this.addItem(1505, "bio.5").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        BIO_6= this.addItem(1506, "bio.6").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        BIO_7= this.addItem(1507, "bio.7").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        BIO_8= this.addItem(1508, "bio.8").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        BIO_9= this.addItem(1509, "bio.9").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        BIO_10= this.addItem(1510, "bio.10").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        BIO_11= this.addItem(1511, "bio.11").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        BIO_12= this.addItem(1512, "bio.12").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        BIO_13= this.addItem(1513, "bio.13").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        BIO_14= this.addItem(1514, "bio.14").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        BIO_15= this.addItem(1515, "bio.15").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+
         //蓝图
         DISK_0 = this.addItem(2000, "disk.0").setCreativeTabs(CommonProxy.GTQTCore_DISK);
         DISK_1 = this.addItem(2001, "disk.1").setCreativeTabs(CommonProxy.GTQTCore_DISK);
@@ -702,6 +720,22 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         DISK_13 = this.addItem(2013, "disk.13").setCreativeTabs(CommonProxy.GTQTCore_DISK);
         DISK_14 = this.addItem(2014, "disk.14").setCreativeTabs(CommonProxy.GTQTCore_DISK);
         DISK_15 = this.addItem(2015, "disk.15").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        DISK_16 = this.addItem(2016, "disk.16").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        DISK_17 = this.addItem(2017, "disk.17").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        DISK_18 = this.addItem(2018, "disk.18").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        DISK_19 = this.addItem(2019, "disk.19").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        DISK_20 = this.addItem(2020, "disk.20").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        DISK_21 = this.addItem(2021, "disk.21").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        DISK_22 = this.addItem(2022, "disk.22").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        DISK_23 = this.addItem(2023, "disk.23").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        DISK_24 = this.addItem(2024, "disk.24").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        DISK_25 = this.addItem(2025, "disk.25").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        DISK_26 = this.addItem(2026, "disk.26").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        DISK_27 = this.addItem(2027, "disk.27").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        DISK_28 = this.addItem(2028, "disk.28").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        DISK_29 = this.addItem(2029, "disk.29").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        DISK_30 = this.addItem(2030, "disk.30").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+
 
 
         ALPHA=this.addItem(2500, "alpha").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);

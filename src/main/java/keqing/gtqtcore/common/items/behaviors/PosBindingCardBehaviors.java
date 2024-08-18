@@ -23,8 +23,8 @@ public class PosBindingCardBehaviors implements IItemBehaviour {
             NBTTagCompound compound = stack.getTagCompound();
 
             int x = compound.getInteger("x");
-            int y = compound.getInteger("x");
-            int z = compound.getInteger("x");
+            int y = compound.getInteger("y");
+            int z = compound.getInteger("z");
 
             lines.add(I18n.format("右键下蹲获取对应方块坐标，右键清空物品缓存坐标"));
             lines.add(I18n.format("-------------------"));
