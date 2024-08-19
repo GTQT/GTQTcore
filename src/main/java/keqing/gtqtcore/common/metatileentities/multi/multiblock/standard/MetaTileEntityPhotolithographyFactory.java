@@ -71,7 +71,6 @@ public class MetaTileEntityPhotolithographyFactory extends MetaTileEntityBaseWit
     boolean check;
     boolean []coreWork= {false,false,false,false,false};
     public int [][]core={{0,0,0,0,0},{0,0,0,0,0},{0,0,0,0,0},{0,0,0,0,0}};
-    int updatetime=1;
     boolean make;
 
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
@@ -122,15 +121,6 @@ public class MetaTileEntityPhotolithographyFactory extends MetaTileEntityBaseWit
         coreWork[4]=data.getBoolean("coreWork5");
     }
 
-
-    public boolean onScrewdriverClick(EntityPlayer playerIn, EnumHand hand, EnumFacing facing, CuboidRayTraceResult hitResult) {
-        make=!make;
-        if(!make)return false;
-        if(updatetime<=19) updatetime++;
-        else updatetime=1;
-        playerIn.sendMessage(new TextComponentTranslation("输入频率：%s 次/tick",updatetime));
-        return true;
-    }
     //核心缓存： wafer等级0 wafer数量1 光刻胶等级2 耗时3
     public MetaTileEntityPhotolithographyFactory(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId);
@@ -167,8 +157,8 @@ public class MetaTileEntityPhotolithographyFactory extends MetaTileEntityBaseWit
     }
     private void outputlaser(Widget.ClickData clickData) {
         if(laserKind==1) this.getOutputFluidInventory().fill(HydrogenSilsesquioxane.getFluid(LaserAmount),true);
-        if(laserKind==2) this.getOutputFluidInventory().fill(SU8_Photoresist.getFluid(LaserAmount),true);
-        if(laserKind==3) this.getOutputFluidInventory().fill(Vinylcinnamate.getFluid(LaserAmount),true);
+        if(laserKind==2) this.getOutputFluidInventory().fill(Vinylcinnamate.getFluid(LaserAmount),true);
+        if(laserKind==3) this.getOutputFluidInventory().fill(SU8_Photoresist.getFluid(LaserAmount),true);
         if(laserKind==4) this.getOutputFluidInventory().fill(Xmt.getFluid(LaserAmount),true);
         if(laserKind==5) this.getOutputFluidInventory().fill(Zrbtmst.getFluid(LaserAmount),true);
         LaserAmount=0;
@@ -192,7 +182,7 @@ public class MetaTileEntityPhotolithographyFactory extends MetaTileEntityBaseWit
         InputWafer();//检查
         //光刻胶操作
         IMultipleTankHandler inputTank = getInputFluidInventory();
-        for(int time=0;time<updatetime;time++)if(LaserAmount<640000) {
+        if(LaserAmount<640000) {
             if (LASER1.isFluidStackIdentical(inputTank.drain(LASER1, true))) {
                 addLaserAmount(1);
             }
@@ -283,8 +273,8 @@ public class MetaTileEntityPhotolithographyFactory extends MetaTileEntityBaseWit
 
     //光刻胶等级
     FluidStack LASER1 = HydrogenSilsesquioxane.getFluid(1000);
-    FluidStack LASER2 = SU8_Photoresist .getFluid(1000);
-    FluidStack LASER3 = Vinylcinnamate.getFluid(1000);
+    FluidStack LASER2 = Vinylcinnamate .getFluid(1000);
+    FluidStack LASER3 = SU8_Photoresist.getFluid(1000);
     FluidStack LASER4 = Xmt.getFluid(1000);
     FluidStack LASER5 = Zrbtmst.getFluid(1000);
     public void addLaserAmount(int n)

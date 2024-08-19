@@ -59,7 +59,17 @@ public class MetaTileEntityThreeDim extends MultiMapMultiblockController impleme
         tooltip.add(I18n.format("gtqt.machine.3d.1"));
         tooltip.add(I18n.format("gtqt.machine.3d.2"));
     }
+    @Override
+    public void writeInitialSyncData(PacketBuffer buf) {
+        super.writeInitialSyncData(buf);
+        buf.writeInt(this.tier);
+    }
 
+    @Override
+    public void receiveInitialSyncData(PacketBuffer buf) {
+        super.receiveInitialSyncData(buf);
+        this.tier = buf.readInt();
+    }
     private IOpticalComputationProvider computationProvider;
     public MetaTileEntityThreeDim(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{

@@ -91,7 +91,7 @@ public class MetaTileEntityAssemblyLine extends RecipeMapMultiblockController {
         }
 
         public void setMaxProgress(int maxProgress) {
-                this.maxProgressTime = maxProgress*(100-glass_tier)/100;
+                this.maxProgressTime = maxProgress*(100-glass_tier*5)/100;
         }
 
         public long getMaxVoltage() {return Math.min(VA[tier+1],VA[LuV]);}
@@ -278,13 +278,13 @@ public class MetaTileEntityAssemblyLine extends RecipeMapMultiblockController {
     @Override
     public void writeInitialSyncData(PacketBuffer buf) {
         super.writeInitialSyncData(buf);
-        writeParticles(buf);
+        buf.writeInt(this.casing_tier);
     }
 
     @Override
     public void receiveInitialSyncData(PacketBuffer buf) {
         super.receiveInitialSyncData(buf);
-        readParticles(buf);
+        this.casing_tier = buf.readInt();
     }
 
     @Override

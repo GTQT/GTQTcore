@@ -4,7 +4,10 @@ import codechicken.lib.raytracer.CuboidRayTraceResult;
 import gregtech.api.capability.IMultipleTankHandler;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.gui.GuiTextures;
+import gregtech.api.gui.Widget;
 import gregtech.api.gui.resources.TextureArea;
+import gregtech.api.gui.widgets.ClickButtonWidget;
+import gregtech.api.gui.widgets.WidgetGroup;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
@@ -31,6 +34,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
@@ -52,13 +56,25 @@ public class MetaTileEntityGantryCrane extends RecipeMapMultiblockController imp
     }
     int updatetime=1;
     boolean work=true;
-    public boolean onScrewdriverClick(EntityPlayer playerIn, EnumHand hand, EnumFacing facing, CuboidRayTraceResult hitResult) {
-        work=!work;
-        if(!work)return true;
-        if(updatetime<=19) updatetime++;
-        else updatetime=1;
-        playerIn.sendMessage(new TextComponentTranslation("输入效率：%s tick",updatetime));
-        return true;
+    @Override
+    @Nonnull
+    protected Widget getFlexButton(int x, int y, int width, int height) {
+        WidgetGroup group = new WidgetGroup(x, y, width, height);
+        group.addWidget(new ClickButtonWidget(0, 0, 9, 9, "", this::decrementThreshold)
+                .setButtonTexture(GuiTextures.BUTTON_THROTTLE_MINUS)
+                .setTooltipText("increment"));
+        group.addWidget(new ClickButtonWidget(9, 0, 9, 9, "", this::incrementThreshold)
+                .setButtonTexture(GuiTextures.BUTTON_THROTTLE_PLUS)
+                .setTooltipText("decrement"));
+        return group;
+    }
+
+    private void incrementThreshold(Widget.ClickData clickData) {
+        this.updatetime = MathHelper.clamp(updatetime+1, 1, 20);
+    }
+
+    private void decrementThreshold(Widget.ClickData clickData) {
+        this.updatetime = MathHelper.clamp(updatetime-1, 1, 20);
     }
     @Override
     public boolean canBeDistinct() {return true;}

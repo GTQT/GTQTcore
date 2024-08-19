@@ -12,6 +12,7 @@ import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.common.items.MetaItems.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
+import static keqing.gtqtcore.api.unification.MaterialHelper.Superconductor;
 import static keqing.gtqtcore.common.block.blocks.GTQTPowerSupply.SupplyType.POWER_SUPPLY_BASIC;
 import static keqing.gtqtcore.common.block.blocks.GTQTPowerSupply.SupplyType.*;
 
@@ -26,15 +27,15 @@ public class PowerSupply {
                 .circuitMeta(1)
                 .duration(400).EUt(480).buildAndRegister();
         //超导方块 基础方块+对应等级的超导+冷却液+铪
-        ChaoDao(ManganesePhosphide,POWER_SUPPLY_I,1);
-        ChaoDao(MagnesiumDiboride,POWER_SUPPLY_II,2);
-        ChaoDao(MercuryBariumCalciumCuprate ,POWER_SUPPLY_III,3);
-        ChaoDao(UraniumTriplatinum,POWER_SUPPLY_IV,4);
-        ChaoDao(SamariumIronArsenicOxide,POWER_SUPPLY_V,5);
-        ChaoDao(IndiumTinBariumTitaniumCuprate,POWER_SUPPLY_VI,6);
-        ChaoDao(UraniumRhodiumDinaquadide,POWER_SUPPLY_VII,7);
-        ChaoDao(EnrichedNaquadahTriniumEuropiumDuranide ,POWER_SUPPLY_VIII,8);
-        ChaoDao(RutheniumTriniumAmericiumNeutronate,POWER_SUPPLY_IVV,9);
+        ChaoDao(Superconductor[0],POWER_SUPPLY_I,1);
+        ChaoDao(Superconductor[1],POWER_SUPPLY_II,2);
+        ChaoDao(Superconductor[2] ,POWER_SUPPLY_III,3);
+        ChaoDao(Superconductor[3],POWER_SUPPLY_IV,4);
+        ChaoDao(Superconductor[4],POWER_SUPPLY_V,5);
+        ChaoDao(Superconductor[5],POWER_SUPPLY_VI,6);
+        ChaoDao(Superconductor[6],POWER_SUPPLY_VII,7);
+        ChaoDao(Superconductor[7] ,POWER_SUPPLY_VIII,8);
+        ChaoDao(Superconductor[8],POWER_SUPPLY_IVV,9);
         //电池方块 基础方块+电池+线圈+锆
         DianChi(ENERGY_LAPOTRONIC_ORB,POWER_SUPPLY_BATTERY_I,5);
         DianChi(ENERGY_LAPOTRONIC_ORB_CLUSTER,POWER_SUPPLY_BATTERY_II,6);

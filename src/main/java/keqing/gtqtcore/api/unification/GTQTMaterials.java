@@ -747,6 +747,15 @@ public class GTQTMaterials {
     public static Material PPBFront;
     public static Material GlassGlaze;
     public static Material Solarium;
+    public static Material CinnamicAcid;
+    public static Material EthylCinnamate;
+    public static Material SodiumCinnamate;
+    public static Material OxalylChloride;
+    public static Material PhosphorusPentachloride;
+    public static Material PhosphorusOxychloride;
+    public static Material TransPhenylacryloylChloride;
+    public static Material PolyvinylAlcoholVinylalcoholPolymer;
+    public static Material Pyridine;
 
     //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/api/unification/GSMaterials.java
 

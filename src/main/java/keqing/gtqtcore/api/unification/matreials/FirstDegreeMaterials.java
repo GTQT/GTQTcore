@@ -327,18 +327,20 @@ public class FirstDegreeMaterials {
 
         GTQTMaterials.CopperCl = new Material.Builder(getMaterialsId(), gregtechId("copper_cl"))
                 .ingot()
-                .color(0x8B4C39).iconSet(METALLIC)
+                .color(0x8B4C39)
+                .iconSet(METALLIC)
                 .flags(GENERATE_FOIL)
                 .components(Copper, 1, Chlorine, 2)
-                .blast(2273) // no gas tier for silicon
+                .blast(2273)
                 .build();
 
         //聚乙烯醇肉桂酸酯
         GTQTMaterials.Vinylcinnamate = new Material.Builder(getMaterialsId(), gregtechId("vinylcinnamate"))
-                .fluid().dust()
-                .color(0xFF8C00).iconSet(METALLIC)
-                .flags(GENERATE_FOIL)
+                .fluid()
+                .color(0xFF8C00)
+                .iconSet(SHINY)
                 .build();
+
         //感光树脂-聚乙烯醇肉桂酸酯
 
         //增感剂
@@ -346,9 +348,9 @@ public class FirstDegreeMaterials {
 
         //xMT分子光刻
         GTQTMaterials.Xmt = new Material.Builder(getMaterialsId(), gregtechId("xmt"))
-                .fluid().dust()
-                .color(0x3C3C50).iconSet(METALLIC)
-                .flags(GENERATE_FOIL)
+                .fluid()
+                .color(0x3C3C50)
+                .iconSet(SHINY)
                 .build();
 
         //xMT
@@ -4001,6 +4003,79 @@ public class FirstDegreeMaterials {
                 .fluid()
                 .color(0x76EE00)
                 .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //肉桂酸
+        GTQTMaterials.CinnamicAcid = new Material.Builder(getMaterialsId(), gregtechId("cinnamic_acid"))
+                .fluid()
+                .color(0x8E8E38)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("C6H5CH=CHCOOH", true);
+
+        //肉桂酸乙酯
+        GTQTMaterials.EthylCinnamate = new Material.Builder(getMaterialsId(), gregtechId("ethyl_cinnamate"))
+                .fluid()
+                .color(0xA52A2A)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("C6H5CH=CHCOOCH3", true);
+
+        //肉桂酸钠
+        GTQTMaterials.SodiumCinnamate = new Material.Builder(getMaterialsId(), gregtechId("sodium_cinnamate"))
+                .fluid()
+                .color(0xA0522D)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("C6H5CH=CHCOONa", true);
+
+        //乙二酰氯
+        GTQTMaterials.OxalylChloride = new Material.Builder(getMaterialsId(), gregtechId("oxalyl_chloride"))
+                .fluid()
+                .color(0xBCEE68)
+                .flags(DISABLE_DECOMPOSITION)
+                .components(Carbon, 1,Oxygen,1, Chlorine,2)
+                .build()
+                .setFormula("COCl2", true);
+
+        //五氯化磷
+        GTQTMaterials.PhosphorusPentachloride = new Material.Builder(getMaterialsId(), gregtechId("phosphorus_pentachloride"))
+                .dust()
+                .color(0xAB82FF)
+                .flags(DISABLE_DECOMPOSITION)
+                .components(Phosphorus, 1, Chlorine,5)
+                .build();
+
+        //三氯氧磷
+        GTQTMaterials.PhosphorusOxychloride = new Material.Builder(getMaterialsId(), gregtechId("phosphorus_oxychloride"))
+                .fluid()
+                .color(0xBF3EFF)
+                .flags(DISABLE_DECOMPOSITION)
+                .components(Phosphorus, 1,Oxygen,1, Chlorine,3)
+                .build();
+
+        //肉桂酰氯
+        GTQTMaterials.TransPhenylacryloylChloride = new Material.Builder(getMaterialsId(), gregtechId("trans_phenylacryloyl_chloride"))
+                .fluid()
+                .color(0xC1FFC1)
+                .flags(DISABLE_DECOMPOSITION)
+                .components(Carbon, 9,Hydrogen,7,Chlorine,1, Oxygen,1)
+                .build();
+
+        //聚乙烯醇
+        GTQTMaterials.PolyvinylAlcoholVinylalcoholPolymer = new Material.Builder(getMaterialsId(), gregtechId("polyvinyl_alcohol_vinylalcohol_polymer"))
+                .fluid().dust()
+                .color(0xEE9A00)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("[C2H4O]n", true);
+
+        //吡啶
+        GTQTMaterials.Pyridine = new Material.Builder(getMaterialsId(), gregtechId("pyridine"))
+                .fluid()
+                .color(0xE0FFFF)
+                .flags(DISABLE_DECOMPOSITION)
+                .components(Carbon, 5,Hydrogen,5,Nitrogen,1)
                 .build();
     }
 }

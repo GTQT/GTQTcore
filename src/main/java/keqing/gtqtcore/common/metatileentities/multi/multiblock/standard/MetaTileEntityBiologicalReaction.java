@@ -85,14 +85,29 @@ public class MetaTileEntityBiologicalReaction extends GTQTRecipeMapMultiblockCon
     int bio=0;
     double rate=0;
     int updatetime=1;
-    public boolean onScrewdriverClick(EntityPlayer playerIn, EnumHand hand, EnumFacing facing, CuboidRayTraceResult hitResult) {
-        if(playerIn.isSneaking()) {
-            if (updatetime <= 19) updatetime++;
-            else updatetime = 1;
-            playerIn.sendMessage(new TextComponentTranslation("输入频率：%s 次/tick", updatetime));
-            return true;
-        }
-        return super.onScrewdriverClick(playerIn, hand, facing, hitResult);
+
+    @Override
+    @Nonnull
+    protected Widget getFlexButton(int x, int y, int width, int height) {
+        WidgetGroup group = new WidgetGroup(x, y, width, height);
+        group.addWidget(new ClickButtonWidget(0, 0, 9, 9, "", this::decrementThreshold)
+                .setButtonTexture(GuiTextures.BUTTON_THROTTLE_MINUS)
+                .setTooltipText("increment"));
+        group.addWidget(new ClickButtonWidget(9, 0, 9, 9, "", this::incrementThreshold)
+                .setButtonTexture(GuiTextures.BUTTON_THROTTLE_PLUS)
+                .setTooltipText("decrement"));
+        group.addWidget(new ClickButtonWidget(0, 9, 18, 9, "", this::clear)
+                .setButtonTexture(GuiTextures.BUTTON_THROTTLE_MINUS)
+                .setTooltipText("我不要了！"));
+        return group;
+    }
+
+    private void incrementThreshold(Widget.ClickData clickData) {
+        this.updatetime = MathHelper.clamp(updatetime+1, 1, 20);
+    }
+
+    private void decrementThreshold(Widget.ClickData clickData) {
+        this.updatetime = MathHelper.clamp(updatetime-1, 1, 20);
     }
     @Override
     public int getNumProgressBars() {
@@ -145,17 +160,6 @@ public class MetaTileEntityBiologicalReaction extends GTQTRecipeMapMultiblockCon
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {
         return new MetaTileEntityBiologicalReaction(metaTileEntityId);
-    }
-
-    @Override
-    @Nonnull
-    protected Widget getFlexButton(int x, int y, int width, int height) {
-        WidgetGroup group = new WidgetGroup(x, y, width, height);
-        group.addWidget(new ClickButtonWidget(0, 0, 18, 18, "", this::clear)
-                .setButtonTexture(GuiTextures.BUTTON_THROTTLE_MINUS)
-                .setTooltipText("我不要了！"));
-
-        return group;
     }
 
     private void clear(Widget.ClickData clickData) {

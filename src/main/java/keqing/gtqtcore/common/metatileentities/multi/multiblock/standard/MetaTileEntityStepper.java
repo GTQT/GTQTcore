@@ -80,8 +80,8 @@ public class MetaTileEntityStepper extends MultiMapMultiblockController implemen
     }
     private void outputlaser(Widget.ClickData clickData) {
         if(LaserKind==1) this.getOutputFluidInventory().fill(HydrogenSilsesquioxane.getFluid(LaserAmount),true);
-        if(LaserKind==2) this.getOutputFluidInventory().fill(SU8_Photoresist.getFluid(LaserAmount),true);
-        if(LaserKind==3) this.getOutputFluidInventory().fill(Vinylcinnamate.getFluid(LaserAmount),true);
+        if(LaserKind==2) this.getOutputFluidInventory().fill(Vinylcinnamate.getFluid(LaserAmount),true);
+        if(LaserKind==3) this.getOutputFluidInventory().fill(SU8_Photoresist.getFluid(LaserAmount),true);
         if(LaserKind==4) this.getOutputFluidInventory().fill(Xmt.getFluid(LaserAmount),true);
         if(LaserKind==5) this.getOutputFluidInventory().fill(Zrbtmst.getFluid(LaserAmount),true);
         LaserKind=0;LaserAmount=0;
@@ -311,8 +311,8 @@ public class MetaTileEntityStepper extends MultiMapMultiblockController implemen
         }
         //光刻胶等级
         FluidStack LASER1 = HydrogenSilsesquioxane.getFluid(1000);
-        FluidStack LASER2 = SU8_Photoresist .getFluid(1000);
-        FluidStack LASER3 = Vinylcinnamate.getFluid(1000);
+        FluidStack LASER2 = Vinylcinnamate .getFluid(1000);
+        FluidStack LASER3 = SU8_Photoresist.getFluid(1000);
         FluidStack LASER4 = Xmt.getFluid(1000);
         FluidStack LASER5 = Zrbtmst.getFluid(1000);
         public void addLaserAmount(int n)

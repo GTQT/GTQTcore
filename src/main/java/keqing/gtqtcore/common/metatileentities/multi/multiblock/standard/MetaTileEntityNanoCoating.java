@@ -69,8 +69,6 @@ public class MetaTileEntityNanoCoating extends MultiMapMultiblockController impl
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("织靳"));
         tooltip.add(I18n.format("gtqt.machine.stepper.1"));
         tooltip.add(I18n.format("gtqt.machine.stepper.2"));
-        tooltip.add(I18n.format("gtqt.machine.stepper.3"));
-        tooltip.add(I18n.format("gtqt.machine.stepper.4"));
         tooltip.add(I18n.format("gtqt.machine.stepper.5"));
         tooltip.add(I18n.format("gtqt.machine.stepper.6"));
     }

@@ -94,7 +94,7 @@ public class KeQingNET {
         //4 蒸燃联合体系 爆燃 大火箭
         KQ_NET(0,2,4,DISK_4,ROCKET_ENGINE[0].getStackForm());
         //5 室温超导设计
-        KQ_NET(1,3,5,DISK_5,wireGtSingle,LuVSuperconductor);
+        KQ_NET(1,3,5,DISK_5,wireGtSingle,SamariumIronArsenicOxide);
         //6 可控核聚变-环流器设计
         KQ_NET(2,3,6,DISK_6,PROTON);
         //7 可控核聚变-聚变超导线圈
@@ -1832,6 +1832,17 @@ public class KeQingNET {
                         .duration(1200)
                         .EUt(VA[LuV]))
                 .duration(100).buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(OrePrefix.wireGtDouble, IVSuperconductor, 64)
+                .input(OrePrefix.foil, Materials.NiobiumTitanium, 64)
+                .fluidInputs(Materials.Trinium.getFluid(4608))
+                .outputs(MetaBlocks.FUSION_CASING.getItemVariant(BlockFusionCasing.CasingType.SUPERCONDUCTOR_COIL))
+                .scannerResearch(b -> b
+                        .researchStack(DISK_5.getStackForm())
+                        .duration(1200)
+                        .EUt(VA[IV]))
+                .duration(800).EUt(VA[LuV]).buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(OrePrefix.wireGtDouble, LuVSuperconductor, 32)

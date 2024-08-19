@@ -58,6 +58,7 @@ public class GTQTRecipesManager {
         NuclearLine.init();
         OceanChain.init();
         MagnetoResonaticCircuits.init();
+        VinylcinnamateChain.init();
         GermaniumChain.init();
         NaquadahChain.init();
         MachineCasing.init();
