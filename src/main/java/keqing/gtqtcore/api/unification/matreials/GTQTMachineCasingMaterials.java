@@ -118,8 +118,8 @@ public class GTQTMachineCasingMaterials {
                 .fluid()
                 .color(0x4A4A4A)
                 .iconSet(SHINY)
-                .cableProperties(GTValues.V[GTValues.UIV], 2, 32)
-                .blast(11500, GasTier.HIGHER)
+                .cableProperties(GTValues.V[GTValues.IV], 2, 32)
+                .blast(6000, GasTier.HIGHER)
                 .flags(GENERATE_PLATE, GENERATE_ROD, GENERATE_RING, GENERATE_BOLT_SCREW, GENERATE_GEAR, GENERATE_ROTOR,
                         GENERATE_FRAME,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROUND,GENERATE_SMALL_GEAR
                         ,GENERATE_SPRING,GENERATE_SPRING_SMALL)
@@ -144,7 +144,7 @@ public class GTQTMachineCasingMaterials {
                 .fluid()
                 .color(0x060606)
                 .iconSet(BRIGHT)
-                .blast(6000, GasTier.HIGHER)
+                .blast(8000, GasTier.HIGHER)
                 .flags(GENERATE_PLATE, GENERATE_ROD, GENERATE_RING, GENERATE_BOLT_SCREW, GENERATE_GEAR, GENERATE_ROTOR,
                         GENERATE_FRAME,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROUND,GENERATE_SMALL_GEAR
                         ,GENERATE_SPRING,GENERATE_SPRING_SMALL)
