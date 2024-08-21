@@ -1,6 +1,7 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
 import codechicken.lib.raytracer.CuboidRayTraceResult;
+import com.me.gtqtcore.Tags;
 import gregtech.api.capability.IMultipleTankHandler;
 import gregtech.api.capability.IOpticalComputationHatch;
 import gregtech.api.capability.IOpticalComputationProvider;
@@ -10,6 +11,7 @@ import gregtech.api.gui.Widget;
 import gregtech.api.gui.resources.TextureArea;
 import gregtech.api.gui.widgets.ClickButtonWidget;
 import gregtech.api.gui.widgets.WidgetGroup;
+import gregtech.api.metatileentity.IFastRenderMetaTileEntity;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
@@ -33,6 +35,8 @@ import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.capability.chemical_plant.ChemicalPlantProperties;
 import keqing.gtqtcore.api.metaileentity.GTQTRecipeMapMultiblockController;
+import keqing.gtqtcore.api.obj.AdvancedModelLoader;
+import keqing.gtqtcore.api.obj.IModelCustom;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.recipes.properties.BRProperty;
@@ -41,6 +45,7 @@ import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTIsaCasing;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -49,6 +54,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
@@ -56,6 +62,7 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -66,8 +73,13 @@ import java.util.Random;
 
 import static gregtech.api.unification.material.Materials.*;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.BIOLOGICAL_REACTION_RECIPES;
-
-public class MetaTileEntityBiologicalReaction extends GTQTRecipeMapMultiblockController implements IProgressBarMultiblock {
+//要实现大机器中的渲染需要重写IFastRenderMetaTileEntity 接口，并实现renderMetaTileEntity和getRenderBoundingBox方法
+public class MetaTileEntityBiologicalReaction extends GTQTRecipeMapMultiblockController implements IProgressBarMultiblock, IFastRenderMetaTileEntity {
+    //Dr新增带MTL文件的加载方式，需要传递模型的地址，mtl文件要与模型同名  这种方式可以在渲染中额外绑定图片 效果我测试会叠加一起
+    public static final IModelCustom Dna_Model = AdvancedModelLoader.loadModelWithMtl(new ResourceLocation("gtqtcore", "models/obj/mdna.obj"));
+    //常规不带mtl文件的加载方式，这种方式也可以在渲染中绑定图片，如果图片在编辑器中能和模型对上，mc自己的绑定方法也会完美绑定
+    public static final IModelCustom Dna_Model1 = AdvancedModelLoader.loadModel(new ResourceLocation("gtqtcore", "models/obj/mdna.obj"));
+    public static final ResourceLocation test_pic = new ResourceLocation("pollution", "models/obj/test.png");
     public MetaTileEntityBiologicalReaction(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[] {
                 BIOLOGICAL_REACTION_RECIPES,
@@ -203,12 +215,14 @@ public class MetaTileEntityBiologicalReaction extends GTQTRecipeMapMultiblockCon
 
     private static IBlockState getCasingState() {
         return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STAINLESS_CLEAN);
+
     }
 
     @SideOnly(Side.CLIENT)
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
         return Textures.CLEAN_STAINLESS_STEEL_CASING;
+
     }
     @Nonnull
     @Override
@@ -247,6 +261,42 @@ public class MetaTileEntityBiologicalReaction extends GTQTRecipeMapMultiblockCon
         tooltip.add(I18n.format("gregtech.machine.biorea.gtqtupdate.3"));
         tooltip.add(I18n.format("gregtech.machine.biorea.gtqtupdate.4"));
     }
+    //渲染模型的位置
+    @Override
+    public void renderMetaTileEntity(double x, double y, double z, float partialTicks) {
+        IFastRenderMetaTileEntity.super.renderMetaTileEntity(x, y, z, partialTicks);
+        //机器开启才会进行渲染
+       if(isActive())
+       {
+           //这是一些opengl的操作,GlStateManager是mc自身封装的一部分方法  前四条详情请看 https://turou.fun/minecraft/legacy-render-tutor/
+           //opengl方法一般需要成对出现，实际上他是一个状态机，改装状态后要还原  一般情况按照我这些去写就OK
+           GlStateManager.pushAttrib(); //保存变换前的位置和角度
+           GlStateManager.pushMatrix();
+           GlStateManager.disableLighting();
+           GlStateManager.disableCull();
+           //FMLClientHandler.instance().getClient().getTextureManager().bindTexture(test_pic); //自带的材质绑定 需要传递一个ResourceLocation
+           GlStateManager.translate(x, y, z);//translate是移动方法 这个移动到xyz是默认的 不要动
+           GlStateManager.translate(0.5, 2, 0.5);//这个是模型有偏差进行位置修正的
+           float angle = (System.currentTimeMillis() % 3600) / 10.0f; //我写的随时间变化旋转的角度
+             GlStateManager.rotate(90, 0F, 1F, 0F);//rotate是旋转模型的方法  DNA的初始位置不太对 我旋转了一下   四个参数为：旋转角度，xyz轴，可以控制模型围绕哪个轴旋转
+             GlStateManager.rotate(angle, 0F, 0F, 1F);//我让dna围绕z轴旋转，角度是实时变化的
+           GlStateManager.scale(0.1,0.1,0.1);
+          //Dna_Model.renderAllWithMtl(); //这个是模型加载器的渲染方法  这是带MTL的加载方式
+           //Dna_Model1.renderAll(); //这个是模型加载器的渲染方法  这是不带MTL的加载方式
+
+           GlStateManager.popMatrix();//读取变换前的位置和角度(恢复原状) 下面都是还原状态机的语句
+           GlStateManager.enableLighting();
+           GlStateManager.popAttrib();
+           GlStateManager.enableCull();
+       }
+    }
+
+    @Override
+    public AxisAlignedBB getRenderBoundingBox() {
+        //这个影响模型的可视范围，正常方块都是 1 1 1，长宽高各为1，当这个方块离线玩家视线后，obj模型渲染会停止，所以可以适当放大这个大小能让模型有更多角度的可视
+        return new AxisAlignedBB(getPos(),getPos().add(5,5,5));
+    }
+
     protected class BiologicalReactionLogic extends MultiblockRecipeLogic {
 
         public BiologicalReactionLogic(RecipeMapMultiblockController tileEntity) {
