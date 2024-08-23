@@ -169,8 +169,7 @@ public class PCBline {
                 .stationResearch(b -> b
                         .researchStack(DISK_22.getStackForm())
                         .EUt(VA[LuV])
-                        .CWUt(CWT[ZPM])
-                )
+                        .CWUt(CWT[LuV]))
                 .EUt(VA[ZPM])
                 .duration(600)
                 .buildAndRegister();

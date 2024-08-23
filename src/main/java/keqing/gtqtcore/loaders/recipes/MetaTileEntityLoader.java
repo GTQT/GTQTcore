@@ -26,6 +26,7 @@ import net.minecraft.item.ItemStack;
 import static gregicality.multiblocks.api.unification.GCYMMaterials.*;
 import static gregicality.multiblocks.common.metatileentities.GCYMMetaTileEntities.LARGE_ASSEMBLER;
 import static gregtech.api.GTValues.L;
+import static gregtech.api.GTValues.LuV;
 import static gregtech.api.GTValues.VA;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.MarkerMaterials.Tier.*;
@@ -46,6 +47,7 @@ import static keqing.gtqtcore.api.unification.GCYSMaterials.Orichalcum;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.cylinder;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.motor_stick;
+import static keqing.gtqtcore.api.utils.GTQTUtil.CWT;
 import static keqing.gtqtcore.common.block.blocks.BlockCrucible.CrucibleType.QUARTZ_CRUCIBLE;
 import static keqing.gtqtcore.common.block.blocks.GTQTIsaCasing.CasingType.ASEPTIC_FARM_CASING;
 import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.*;
@@ -110,7 +112,7 @@ public class MetaTileEntityLoader {
                 .inputs(HULL[6].getStackForm(4))
                 .input(ELECTRIC_MOTOR_LuV,8)
                 .input(ELECTRIC_PUMP_LuV,8)
-                .input(circuit,LuV,8)
+                .input(circuit, MarkerMaterials.Tier.LuV,8)
                 .input(gear,RhodiumPlatedPalladium,8)
                 .input(OrePrefix.cableGtSingle, Naquadah, 32)
                 .fluidInputs(Zylon.getFluid(L * 12))
@@ -254,10 +256,10 @@ public class MetaTileEntityLoader {
                 .output(INTEGRATED_ORE_PROCESSOR)
                 .EUt(VA[7])
                 .duration(1600)
-                .scannerResearch(b -> b
+                .stationResearch(b -> b
                         .researchStack(DISK_22.getStackForm())
-                        .EUt(VA[7])
-                        .duration(800))
+                        .EUt(VA[LuV])
+                        .CWUt(CWT[LuV]))
                 .buildAndRegister();
 
         //处理阵列
@@ -1280,7 +1282,7 @@ public class MetaTileEntityLoader {
                 'A', new UnificationEntry(OrePrefix.spring, NaquadahAlloy),
                 'P', ELECTRIC_MOTOR_LuV,
                 'E', SENSOR_LuV,
-                'C', new UnificationEntry(OrePrefix.circuit, LuV));
+                'C', new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.LuV));
 
 
         ModHandler.addShapedRecipe(true, "lightning_rod.iv", GTQTMetaTileEntities.LIGHTNING_ROD[0].getStackForm(),
@@ -1293,7 +1295,7 @@ public class MetaTileEntityLoader {
                 "AMA", "MCM", "AMA",
                 'M', HULL[GTValues.LuV].getStackForm(),
                 'A', ENERGY_LAPOTRONIC_ORB_CLUSTER,
-                'C', new UnificationEntry(OrePrefix.circuit, LuV));
+                'C', new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.LuV));
 
         ModHandler.addShapedRecipe(true, "lightning_rod.zpm", GTQTMetaTileEntities.LIGHTNING_ROD[2].getStackForm(),
                 "AMA", "MCM", "AMA",

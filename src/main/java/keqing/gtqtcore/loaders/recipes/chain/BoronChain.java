@@ -104,11 +104,10 @@ public class BoronChain {
 
         //  Sodium Nitrate + Co/AC-AB Catalyst -> Sodium Nitrite + Oxygen + Water
         CHEMICAL_PLANT.recipeBuilder()
-                .notConsumable(GTQTMetaItems.CATALYST_FRAMEWORK_I)
-                .fluidInputs(SodiumNitrate.getFluid(1000))
+                .notConsumable(dust,AuPdCCatalyst)
+                .input(dust,SodiumNitrate,5)
                 .output(dust, SodiumNitrite, 4)
                 .fluidOutputs(Oxygen.getFluid(1000))
-                .fluidOutputs(Water.getFluid(1000))
                 .recipeLevel(1)
                 .EUt(VA[MV])
                 .duration(300)

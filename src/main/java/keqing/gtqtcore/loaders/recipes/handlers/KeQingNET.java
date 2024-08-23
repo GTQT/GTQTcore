@@ -812,8 +812,8 @@ public class KeQingNET {
                 .duration(1200)
                 .stationResearch(b -> b
                         .researchStack(DISK_22.getStackForm())
-                        .CWUt(CWT[LuV])
-                        .EUt(VA[UV]))
+                        .EUt(VA[LuV])
+                        .CWUt(CWT[LuV]))
                 .buildAndRegister();
 
         //  Mega Oil Cracking Unit
@@ -1042,9 +1042,9 @@ public class KeQingNET {
                 .inputs(GTQTMetaBlocks.KQCC.getItemVariant(ADV_COMPUTER_CASING))
                 .input(GENERAL_CIRCUIT_UV, 16)
                 .input(circuit, Tier.UHV, 8)
-                .inputNBT(TOOL_DATA_ORB, NBTMatcher.ANY, NBTCondition.ANY)
-                .input(stickLong, Orichalcum, 64)
-                .input(stickLong, Orichalcum, 64)
+                .inputNBT(TOOL_DATA_MODULE, NBTMatcher.ANY, NBTCondition.ANY)
+                .input(frameGt,Tritanium,16)
+                .input(wireFine, Orichalcum, 64)
                 .input(OPTICAL_PIPES[0], 64)
                 .input(wireGtDouble, RutheniumTriniumAmericiumNeutronate, 32)
                 .input(wireGtSingle, UVSuperconductor,64)
@@ -1065,7 +1065,7 @@ public class KeQingNET {
 
         //  Advanced Assembly Line
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(CIRCUIT_GOOD_III,8)
+                .input(CIRCUIT_GOOD_II,8)
                 .input(ASSEMBLY_LINE,8)
                 .input(frameGt, Pikyonium64B, 4)
                 .input(ASSEMBLER[IV], 8)
@@ -1088,13 +1088,13 @@ public class KeQingNET {
                 .duration(1200)
                 .stationResearch(b -> b
                         .researchStack(DISK_22.getStackForm())
-                        .CWUt(CWT[LuV])
-                        .EUt(VA[LuV]))
+                        .EUt(VA[LuV])
+                        .CWUt(CWT[LuV]))
                 .buildAndRegister();
 
         //  Large Circuit Assembly Line
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(CIRCUIT_GOOD_III,8)
+                .input(CIRCUIT_GOOD_II,8)
                 .input(ASSEMBLY_LINE)
                 .input(LARGE_CIRCUIT_ASSEMBLER, 4)
                 .input(CIRCUIT_ASSEMBLER[LuV], 16)
@@ -1116,10 +1116,10 @@ public class KeQingNET {
                 .output(LARGE_CIRCUIT_ASSEMBLY_LINE)
                 .EUt(VA[LuV])
                 .duration(1200)
-                .scannerResearch(b -> b
+                .stationResearch(b -> b
                         .researchStack(DISK_22.getStackForm())
-                        .EUt(VA[IV])
-                        .duration(600))
+                        .EUt(VA[LuV])
+                        .CWUt(CWT[LuV]))
                 .buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
