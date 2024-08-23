@@ -125,7 +125,8 @@ public class MetaTileEntitykeQingNet extends RecipeMapMultiblockController imple
                 io[i][3] = 0;
                 io[i][4] = 0;
             }
-
+            //量子计算机 HPCA
+            if (io[i][4] == 3) helpTier += 1.0;
 
             if (io[i][4] == 30) helpTier += 0.25;
             if (io[i][4] == 31) helpTier += 0.5;
@@ -151,7 +152,11 @@ public class MetaTileEntitykeQingNet extends RecipeMapMultiblockController imple
     @Override
     public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
-        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("设备等级：一级", new Object[0]));
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("我是真理", new Object[0]));
+        tooltip.add(I18n.format("gtqtcore.machine.kqnet.tooltip.1"));
+        tooltip.add(I18n.format("gtqtcore.machine.kqnet.tooltip.2"));
+        tooltip.add(I18n.format("gtqtcore.machine.kqnet.tooltip.3"));
+        tooltip.add(I18n.format("gtqtcore.machine.kqnet.tooltip.4"));
     }
 
     int thresholdPercentage=0;
@@ -235,7 +240,7 @@ public class MetaTileEntitykeQingNet extends RecipeMapMultiblockController imple
             textList.add(new TextComponentTranslation("科研计算机系统-科研等级水平：%s",tier));
             for(int i=0;i<40;i++)
             {
-                if(io[i][0] == 1&&io[i][4]>=30)
+                if(io[i][0] == 1&&(io[i][4]>=30||io[i][4]==3))
                 {
                     textList.add(new TextComponentTranslation(String.format("X: "+io[i][1]+" Y: "+io[i][2]+" Z: "+io[i][3]+" /"+GTQTKQnetHelper.getInfo(io[i][4]))));
                 }
@@ -349,9 +354,10 @@ public class MetaTileEntitykeQingNet extends RecipeMapMultiblockController imple
                     return true;
                 }
             }
+            //量子计算机
             if (mte instanceof MetaTileEntityHPCA) {
                 if(((MetaTileEntityHPCA) mte).isStructureFormed()) {
-                    io[i][4] = 32;
+                    io[i][4] = 3;
                     return true;
                 }
             }

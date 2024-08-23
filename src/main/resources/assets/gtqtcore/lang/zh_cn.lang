@@ -3542,6 +3542,11 @@ gtqtcore.multiblock.kqn.threshold_increment1=§a选取向后 10
 gtqtcore.multiblock.kqn.thresholdPercentage=研究序号：%s 研究大类：%s
 gtqtcore.machine.keqing_net.name=科研计算机
 
+gtqtcore.machine.kqnet.tooltip.1=提供算力，研究对象与数据记录卡，选定好研究项目即可开始研究
+gtqtcore.machine.kqnet.tooltip.2=在界面内使用按钮进行操作，在研究界面内可通过切换类型转换研究对象
+gtqtcore.machine.kqnet.tooltip.3=使用坐标绑定卡绑定附属结构控制器坐标后（须在控制器半径48格内）放入输入总线即可完成绑定，可在接入拓展列表内查看
+gtqtcore.machine.kqnet.tooltip.4=使用坐标绑定卡绑定数据库，计算机等结构可升级科研等级，可在科技等级列表内查看
+
 gtqtcore.multiblock.kqn.nb0=欢迎使用KQCC科研计算机集成系统！
 metaitem.disk.0.name=数据存储器
 metaitem.disk.0.tooltip=§aNULL
@@ -3637,6 +3642,10 @@ metaitem.disk.22.tooltip=§a自动化管理
 gtqtcore.multiblock.kqn.nb23=项目：物联网集成控制 作为信息技术领域的又一里程碑，通过将各种智能设备、传感器、网络基础设施及软件系统无缝连接，构建了一个庞大的、可交互的物理世界与数字世界的桥梁。实现了设备间的实时数据交换与共享，分析决策与协同控制能力。
 metaitem.disk.23.name=数据存储器
 metaitem.disk.23.tooltip=§a物联网集成控制
+
+gtqtcore.multiblock.kqn.nb24=项目：计算科学 原子级别，传统计算结构的极限！我们无法在此基础上继续突破底层结构了。我们制作出了这个宇宙中最精密的传统结构计算机，他的性能是其下位的八倍，利用他我们可以大幅度减少交换机以及计算服务器的数量。
+metaitem.disk.24.name=数据存储器
+metaitem.disk.24.tooltip=§a计算科学
 
 gtqtcore.multiblock.kqn.bio0=欢迎使用KQCC科研计算机集成系统！
 metaitem.bio.0.name=基因存储器
@@ -4703,6 +4712,41 @@ tile.stnt.name=迷你核弹
 tile.stnt.drops_tooltip=我很卡，劝你三思
 entity.STNT.name=迷你核弹
 
+#cover
+metaitem.cover.dual_cover.lv.name=LV 双重覆盖板
+metaitem.cover.dual_cover.mv.name=MV 双重覆盖板
+metaitem.cover.dual_cover.hv.name=HV 双重覆盖板
+metaitem.cover.dual_cover.ev.name=EV 双重覆盖板
+metaitem.cover.dual_cover.iv.name=IV 双重覆盖板
+metaitem.cover.dual_cover.luv.name=LuV 双重覆盖板
+metaitem.cover.dual_cover.zpm.name=ZPM 双重覆盖板
+metaitem.cover.dual_cover.uv.name=UV 双重覆盖板
+metaitem.cover.dual_cover.uhv.name=UHV 双重覆盖板
+metaitem.cover.dual_cover.uev.name=UEV 双重覆盖板
+metaitem.cover.dual_cover.uiv.name=UIV 双重覆盖板
+metaitem.cover.dual_cover.uxv.name=UXV 双重覆盖板
+metaitem.cover.dual_cover.opv.name=OpV 双重覆盖板
+metaitem.cover.dual_cover.tooltip=作为§f覆盖物§7，以特定速率传输§f物品§7和§f流体§7。
+cover.dual_cover.title=双重覆盖设置（%s）  
+
+metaitem.cover.precise_dual_cover.lv.name=LV 精准双重覆盖板
+metaitem.cover.precise_dual_cover.mv.name=MV 精准双重覆盖板
+metaitem.cover.precise_dual_cover.hv.name=HV 精准双重覆盖板
+metaitem.cover.precise_dual_cover.ev.name=EV 精准双重覆盖板
+metaitem.cover.precise_dual_cover.iv.name=IV 精准双重覆盖板
+metaitem.cover.precise_dual_cover.luv.name=LuV 精准双重覆盖板
+metaitem.cover.precise_dual_cover.zpm.name=ZPM 精准双重覆盖板
+metaitem.cover.precise_dual_cover.uv.name=UV 精准双重覆盖板
+metaitem.cover.precise_dual_cover.uhv.name=UHV 精准双重覆盖板
+metaitem.cover.precise_dual_cover.uev.name=UEV 精准双重覆盖板
+metaitem.cover.precise_dual_cover.uiv.name=UIV 精准双重覆盖板
+metaitem.cover.precise_dual_cover.uxv.name=UXV 精准双重覆盖板
+metaitem.cover.precise_dual_cover.opv.name=OpV 精准双重覆盖板
+metaitem.cover.precise_dual_cover.tooltip=作为§f覆盖物§7，限制§f物品§7和§f流体§7的特定数量。
+cover.precise_dual_cover.title=精确双重覆盖设置（%s）
+metaitem.cover.dual.tooltip.transfer_rate=§b传输速率：§f%,d 个物品/秒§7 和 §f%,d L/tick
+metaitem.cover.dual.tooltip.transfer_rate.stacks=§b传输速率：§f%,d 堆/秒§7 和 §f%,d L/tick
+cover.dual_cover.mode_changer=点击以切换物品和流体设置
 ##  Universal Texts
 gtqtcore.universal.tooltip.max_parallel=最大并行数：§e%s§7
 gtqtcore.universal.tooltip.get_parallel_by_voltage=根据输入电压获得并行。

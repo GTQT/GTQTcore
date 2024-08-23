@@ -38,6 +38,7 @@ public class GTQTRecipesManager {
         BacteriaCulturesChain.init();
         BoronChain.init();
         EnzymesRecipes.init();
+        CoverRecipes.init();
         GTQTOreRecipeHandler.init();
         MolecularTransformer.init();
         StrontiumRadiumChain.init();

@@ -111,7 +111,7 @@ public class GTQTTextures {
     public static SimpleOverlayRenderer SFTC;
     public static SimpleOverlayRenderer SFTS;
     public static TextureAtlasSprite FORCE_FIELD;
-
+    public static TextureArea ITEM_FLUID_OVERLAY;
     public static IsaMillRenderer ISA_MILL = new IsaMillRenderer();
 
     public static OrientedOverlayRenderer CATALYTIC_REFORMER_OVERLAY = new OrientedOverlayRenderer("overlay/catalytic_reformer");
@@ -174,6 +174,8 @@ public class GTQTTextures {
     public static SimpleOverlayRenderer MAINTENANCE_OVERLAY_ISO2_CLEANING;
     public static SimpleOverlayRenderer MAINTENANCE_OVERLAY_ISO1_CLEANING;
     public static void init() {
+        ITEM_FLUID_OVERLAY = TextureArea.fullImage("textures/gui/widget/item_fluid.png");
+
         MAINTENANCE_OVERLAY_STERILE_CLEANING = new SimpleOverlayRenderer("overlay/machine/overlay_maintenance_sterile_cleaning");
         MAINTENANCE_OVERLAY_ISO3_CLEANING = new SimpleOverlayRenderer("overlay/machine/overlay_maintenance_iso_3_cleaning");
         MAINTENANCE_OVERLAY_ISO2_CLEANING = new SimpleOverlayRenderer("overlay/machine/overlay_maintenance_iso_2_cleaning");

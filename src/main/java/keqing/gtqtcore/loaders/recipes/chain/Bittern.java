@@ -91,7 +91,7 @@ public class Bittern {
                 .duration(20).EUt(120).buildAndRegister();
 
         REACTION_FURNACE_RECIPES.recipeBuilder()
-                .fluidInputs(Ulexite.getFluid(11000))
+                .fluidInputs(Ulexite.getFluid(144*11))
                 .output(dust, SodiumHydroxide, 1)
                 .output(dust, CalciumHydroxide, 1)
                 .output(dust, Borax, 1)

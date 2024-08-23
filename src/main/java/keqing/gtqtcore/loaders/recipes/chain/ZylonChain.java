@@ -140,7 +140,6 @@ public class ZylonChain {
                 .fluidOutputs(Oxygen.getFluid(6000))
                 .EUt(VA[HV])
                 .recipeLevel(3)
-                .cleanroom(CleanroomType.CLEANROOM)
                 .duration(50)
                 .buildAndRegister();
 

@@ -2,6 +2,7 @@ package keqing.gtqtcore.loaders.recipes.handlers;
 import static gregtech.common.metatileentities.MetaTileEntities.*;
 import gregtech.api.GTValues;
 import gregtech.api.items.metaitem.MetaItem;
+import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.multiblock.CleanroomType;
 import gregtech.api.recipes.ModHandler;
 import gregtech.api.recipes.ingredients.nbtmatch.NBTCondition;
@@ -116,7 +117,7 @@ public class KeQingNET {
         //15 人工智能II
         KQ_NET(0,2,15,DISK_15,circuit,Tier.LuV);
         //16 人工智能III
-        KQ_NET(3,3,16,DISK_15,circuit,Tier.UV);
+        KQ_NET(3,3,16,DISK_16,circuit,Tier.UV);
 
         //17 生物工程I
         KQ_NET(0,1,17,DISK_17,SEPTIC_TANK.getStackForm());
@@ -131,12 +132,84 @@ public class KeQingNET {
         KQ_NET(0,2,21,DISK_21,ASSEMBLY_LINE.getStackForm());
         //22 自动化管理
         KQ_NET(0,3,22,DISK_22,PRECISE_ASSEMBLER.getStackForm());
-        //22 物联网集成控制
+        //23 物联网集成控制
         KQ_NET(3,4,23,DISK_23,ADVANCED_ASSEMBLY_LINE.getStackForm());
+        //24 计算科学
+        KQ_NET(3,3,24,DISK_24, HIGH_PERFORMANCE_COMPUTING_ARRAY.getStackForm());
     }
 
 
     private static void VVI_VVVV() {
+        //24
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(CIRCUIT_GOOD_II,8)
+                .input(frameGt,NaquadahAlloy,4)
+                .input(plate,Naquadria,8)
+                .input(HPCA_COMPUTATION_COMPONENT,8)
+                .output(HPCA_SUPER_COMPUTATION_COMPONENT)
+                .fluidInputs(VanadiumGallium.getFluid(L * 16))
+                .fluidInputs(KaptonK.getFluid(L * 16))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 16))
+                .fluidInputs(Polyetheretherketone.getFluid(L * 16))
+                .stationResearch(b -> b
+                        .researchStack(DISK_24.getStackForm())
+                        .CWUt(CWT[LuV])
+                        .EUt(VA[ZPM]))
+                .EUt(VA[ZPM])
+                .duration(1000).buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(CIRCUIT_GOOD_II,8)
+                .input(frameGt,NaquadahAlloy,4)
+                .input(plate,Naquadria,8)
+                .input(HPCA_ADVANCED_COMPUTATION_COMPONENT,8)
+                .output(HPCA_ULTIMATE_COMPUTATION_COMPONENT)
+                .fluidInputs(VanadiumGallium.getFluid(L * 16))
+                .fluidInputs(KaptonK.getFluid(L * 16))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 16))
+                .fluidInputs(Polyetheretherketone.getFluid(L * 16))
+                .stationResearch(b -> b
+                        .researchStack(DISK_24.getStackForm())
+                        .CWUt(CWT[LuV])
+                        .EUt(VA[ZPM]))
+                .EUt(VA[ZPM])
+                .duration(1000).buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(CIRCUIT_GOOD_II,8)
+                .input(frameGt,NaquadahAlloy,4)
+                .input(plate,Naquadria,8)
+                .input(HPCA_HEAT_SINK_COMPONENT,8)
+                .output(HPCA_SUPER_COOLER_COMPONENT)
+                .fluidInputs(VanadiumGallium.getFluid(L * 16))
+                .fluidInputs(KaptonK.getFluid(L * 16))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 16))
+                .fluidInputs(Polyetheretherketone.getFluid(L * 16))
+                .stationResearch(b -> b
+                        .researchStack(DISK_24.getStackForm())
+                        .CWUt(CWT[LuV])
+                        .EUt(VA[ZPM]))
+                .EUt(VA[ZPM])
+                .duration(1000).buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(CIRCUIT_GOOD_II,8)
+                .input(frameGt,NaquadahAlloy,4)
+                .input(plate,Naquadria,8)
+                .input(HPCA_ACTIVE_COOLER_COMPONENT,8)
+                .output(HPCA_ULTIMATE_COOLER_COMPONENT)
+                .fluidInputs(VanadiumGallium.getFluid(L * 16))
+                .fluidInputs(KaptonK.getFluid(L * 16))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 16))
+                .fluidInputs(Polyetheretherketone.getFluid(L * 16))
+                .stationResearch(b -> b
+                        .researchStack(DISK_24.getStackForm())
+                        .CWUt(CWT[LuV])
+                        .EUt(VA[ZPM]))
+                .EUt(VA[ZPM])
+                .duration(1000).buildAndRegister();
+
+
         OreDictionary.registerOre("crystalFluix", OreDictUnifier.get(OrePrefix.gem, Fluix));
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
@@ -715,7 +788,7 @@ public class KeQingNET {
 
         //  Component Assembly Line
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(CIRCUIT_GOOD_II,8)
+                .input(CIRCUIT_GOOD_III,8)
                 .input(ASSEMBLY_LINE,8)
                 .input(frameGt, Cinobite, 16)
                 .input(PRECISE_ASSEMBLER, 16)
@@ -747,14 +820,14 @@ public class KeQingNET {
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(frameGt, HMS1J22Alloy, 16)
                 .inputs(CRACKER.getStackForm(16))
-                .input(circuit, Tier.ZPM, 16)
-                .input(CIRCUIT_GOOD_II,8)
+                .input(circuit, Tier.UHV, 16)
+                .input(CIRCUIT_GOOD_IV,8)
                 .input(plateDouble, HG1223, 4)
                 .input(plateDouble, Staballoy, 4)
                 .input(gear, MaragingSteel250, 4)
                 .input(gearSmall, Stellite, 16)
                 .input(cableGtQuadruple, Aluminium, 16)
-                .fluidInputs(HSSS.getFluid(L * 32))
+                .fluidInputs(KaptonK.getFluid(L * 32))
                 .fluidInputs(Polybenzimidazole.getFluid(L * 16))
                 .fluidInputs(Polyetheretherketone.getFluid(L * 16))
                 .fluidInputs(NaquadahAlloy.getFluid(L * 4))
@@ -772,14 +845,14 @@ public class KeQingNET {
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(frameGt, MARM200Steel, 16)
                 .inputs(LARGE_CHEMICAL_REACTOR.getStackForm(16))
-                .input(circuit, MarkerMaterials.Tier.ZPM, 16)
-                .input(CIRCUIT_GOOD_II,8)
+                .input(circuit, MarkerMaterials.Tier.UHV, 16)
+                .input(CIRCUIT_GOOD_IV,8)
                 .input(plateDouble, HMS1J79Alloy, 4)
                 .input(plateDouble, IncoloyDS, 4)
                 .input(gear, Inconel625, 4)
                 .input(gearSmall, Tantalloy61, 16)
                 .input(cableGtQuadruple, VanadiumGallium, 16)
-                .fluidInputs(HSSS.getFluid(L * 32))
+                .fluidInputs(KaptonK.getFluid(L * 32))
                 .fluidInputs(Polybenzimidazole.getFluid(L * 16))
                 .fluidInputs(Polyetheretherketone.getFluid(L * 16))
                 .fluidInputs(NaquadahAlloy.getFluid(L * 4))
@@ -797,14 +870,14 @@ public class KeQingNET {
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(frameGt, AusteniticStainlessSteel904L, 16)
                 .inputs(ALLOY_BLAST_SMELTER.getStackForm(16))
-                .input(circuit, MarkerMaterials.Tier.ZPM, 16)
-                .input(CIRCUIT_GOOD_II,8)
+                .input(circuit, MarkerMaterials.Tier.UHV, 16)
+                .input(CIRCUIT_GOOD_IV,8)
                 .input(plateDouble, HSLASteel, 4)
                 .input(plateDouble, HastelloyC59, 4)
                 .input(gear, HY1301, 4)
                 .input(gearSmall, TanmolyiumBetaC, 16)
                 .input(wireGtQuadruple, NiobiumTitanium, 16)
-                .fluidInputs(HSSS.getFluid(L * 32))
+                .fluidInputs(KaptonK.getFluid(L * 32))
                 .fluidInputs(Polybenzimidazole.getFluid(L * 16))
                 .fluidInputs(Polyetheretherketone.getFluid(L * 16))
                 .fluidInputs(NaquadahAlloy.getFluid(L * 4))
@@ -822,14 +895,14 @@ public class KeQingNET {
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(frameGt, AusteniticStainlessSteel904L, 16)
                 .inputs(BLAZING_BLAST_FURNACE.getStackForm(16))
-                .input(circuit, MarkerMaterials.Tier.ZPM, 16)
-                .input(CIRCUIT_GOOD_II,8)
+                .input(circuit, MarkerMaterials.Tier.UHV, 16)
+                .input(CIRCUIT_GOOD_IV,8)
                 .input(plateDouble, HSLASteel, 4)
                 .input(plateDouble, HastelloyC59, 4)
                 .input(gear, HY1301, 4)
                 .input(gearSmall, TanmolyiumBetaC, 16)
                 .input(wireGtQuadruple, NiobiumTitanium, 16)
-                .fluidInputs(HSSS.getFluid(L * 32))
+                .fluidInputs(KaptonK.getFluid(L * 32))
                 .fluidInputs(Polybenzimidazole.getFluid(L * 16))
                 .fluidInputs(Polyetheretherketone.getFluid(L * 16))
                 .fluidInputs(NaquadahAlloy.getFluid(L * 4))
@@ -992,7 +1065,7 @@ public class KeQingNET {
 
         //  Advanced Assembly Line
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(CIRCUIT_GOOD_II,8)
+                .input(CIRCUIT_GOOD_III,8)
                 .input(ASSEMBLY_LINE,8)
                 .input(frameGt, Pikyonium64B, 4)
                 .input(ASSEMBLER[IV], 8)
@@ -1021,7 +1094,7 @@ public class KeQingNET {
 
         //  Large Circuit Assembly Line
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(CIRCUIT_GOOD_II,8)
+                .input(CIRCUIT_GOOD_III,8)
                 .input(ASSEMBLY_LINE)
                 .input(LARGE_CIRCUIT_ASSEMBLER, 4)
                 .input(CIRCUIT_ASSEMBLER[LuV], 16)

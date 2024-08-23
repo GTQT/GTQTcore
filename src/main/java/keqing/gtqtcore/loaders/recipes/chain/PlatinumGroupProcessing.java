@@ -168,12 +168,11 @@ public class PlatinumGroupProcessing {
                 .duration(100).EUt(VA[MV]).buildAndRegister();
 
         // CH3OH + CO -> HCO2CH3
-        CHEMICAL_RECIPES.recipeBuilder()
-                .notConsumable(dust, SodiumHydroxide)
-                .fluidInputs(Methanol.getFluid(1000))
+        LARGE_CHEMICAL_RECIPES.recipeBuilder()
                 .fluidInputs(CarbonMonoxide.getFluid(1000))
+                .fluidInputs(Methanol.getFluid(1000))
                 .fluidOutputs(MethylFormate.getFluid(1000))
-                .duration(16).EUt(VA[LV]).buildAndRegister();
+                .duration(40).EUt(VA[LV]).buildAndRegister();
 
 
         // PdCl2 + HCOOH -> Pd + 2HCl + CO2
