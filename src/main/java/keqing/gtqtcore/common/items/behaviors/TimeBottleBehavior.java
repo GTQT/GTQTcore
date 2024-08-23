@@ -9,6 +9,9 @@ import gregtech.api.capability.impl.AbstractRecipeLogic;
 import gregtech.api.items.metaitem.stats.IItemBehaviour;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
+import gregtech.api.metatileentity.multiblock.MultiblockAbility;
+import gregtech.api.metatileentity.multiblock.MultiblockControllerBase;
+import gregtech.api.metatileentity.multiblock.RecipeMapSteamMultiblockController;
 import gregtech.api.pipenet.tile.TileEntityPipeBase;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.Materials;
@@ -116,21 +119,86 @@ public class TimeBottleBehavior implements IItemBehaviour {
                 if (GTUtility.getMetaTileEntity(world, pos) instanceof MetaTileEntity) {
                     long cache = 0;
                     MetaTileEntity mte = (MetaTileEntity) GTUtility.getMetaTileEntity(world, pos);
-                    for (EnumFacing facing : EnumFacing.VALUES) {
-                        if (mte.getCapability(GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER, facing) instanceof IEnergyContainer) {
-                            IEnergyContainer container = mte.getCapability(GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER, facing);
-                            cache = container.getEnergyStored();
+                    TileEntity te = world.getTileEntity(pos);
+                    if(mte instanceof MultiblockControllerBase){
+                        var mcb = ((MultiblockControllerBase) mte);
+                        if(mcb.isStructureFormed() && mcb.isValid())
+                        {
+                            final var inenergy =  mcb.getAbilities(MultiblockAbility.INPUT_ENERGY);
+                            if(inenergy.size()>0)
+                            {
+                                long[] energys = new long[inenergy.size()];
+                                for (int j = 0; j < inenergy.size(); j++) {
+                                    energys[j] = inenergy.get(j).getEnergyStored();
+                                }
+                                if(te instanceof ITickable)
+                                {
+                                    for (int i = 0; i < getRapid(compound.getInteger("storedTime")); i++) {
+                                        ((ITickable) te).update();
+                                        for (int j = 0; j < inenergy.size(); j++) {
+                                            if(inenergy.get(j).getEnergyStored()<energys[j])
+                                                inenergy.get(j).addEnergy(energys[j]-inenergy.get(j).getEnergyStored());
+                                        }
+                                    }
+                                    time = compound.getInteger("storedTime");
+                                    time -= getRapid(compound.getInteger("storedTime"));
+                                    compound.setInteger("storedTime", time);
+
+                                }
+                            }else if(mte instanceof RecipeMapSteamMultiblockController)
+                            {
+                                var smte = ((RecipeMapSteamMultiblockController) mte);
+                                final var fin = smte.getSteamFluidTank();
+                                int[] energys = new int[fin.getTanks()];
+                                for (int j = 0; j < fin.getTanks(); j++) {
+                                    energys[j] = fin.getTankAt(j).getFluidAmount();
+                                }
+                                if(te instanceof ITickable)
+                                {
+                                    for (int i = 0; i < getRapid(compound.getInteger("storedTime")); i++) {
+                                        ((ITickable) te).update();
+                                        for (int j = 0; j < fin.getTanks(); j++)
+                                        {
+                                            if(fin.getTankAt(j).getFluidAmount()<energys[j])
+                                            {
+                                                fin.getTankAt(j).fill(Materials.Steam.getFluid(energys[j]-fin.getTankAt(j).getFluidAmount()),true);
+                                            }
+
+                                        }
+                                    }
+                                    time = compound.getInteger("storedTime");
+                                    time -= getRapid(compound.getInteger("storedTime"));
+                                    compound.setInteger("storedTime", time);
+                                }
+                            }
+                            else
+                            {
+                                for (int i = 0; i < getRapid(compound.getInteger("storedTime")); i++) {
+                                    ((ITickable) te).update();
+                                }
+                                time = compound.getInteger("storedTime");
+                                time -= getRapid(compound.getInteger("storedTime"));
+                                compound.setInteger("storedTime", time);
+                                ((ITickable) te).update();
+                            }
                         }
                     }
-                    TileEntity te = world.getTileEntity(pos);
-                    if (te instanceof ITickable tickable) {
-                        for (int i = 0; i < getRapid(compound.getInteger("storedTime")); i++) {
-                            tickable.update();
-                            addEnergy(world, pos, cache);
+                  else{
+                        for (EnumFacing facing : EnumFacing.VALUES) {
+                            if (mte.getCapability(GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER, facing) instanceof IEnergyContainer) {
+                                IEnergyContainer container = mte.getCapability(GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER, facing);
+                                cache = container.getEnergyStored();
+                            }
                         }
-                        time = compound.getInteger("storedTime");
-                        time -= getRapid(compound.getInteger("storedTime"));
-                        compound.setInteger("storedTime", time);
+                        if (te instanceof ITickable tickable) {
+                            for (int i = 0; i < getRapid(compound.getInteger("storedTime")); i++) {
+                                tickable.update();
+                                addEnergy(world, pos, cache);
+                            }
+                            time = compound.getInteger("storedTime");
+                            time -= getRapid(compound.getInteger("storedTime"));
+                            compound.setInteger("storedTime", time);
+                        }
                     }
                 } else {
                     TileEntity te = world.getTileEntity(pos);
