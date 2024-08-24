@@ -203,7 +203,6 @@ public class TJMaterials {
     public static Material TriphenylMethoxytriazole;
     public static Material MetaNitrochlorobenzine;
     public static Material Nitroanisole;
-    public static Material Anisidine;
     public static Material MethylBromoacetate;
     public static Material CarbethoxymethyleneTriphenylphosphorane;
     public static Material PropargylAlcohol;

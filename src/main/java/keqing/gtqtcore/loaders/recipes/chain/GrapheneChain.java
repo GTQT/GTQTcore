@@ -8,10 +8,12 @@ import gregtech.common.items.MetaItems;
 import keqing.gtqtcore.common.items.GTQTMetaItems;
 
 import static gregicality.multiblocks.api.unification.GCYMMaterials.HSLASteel;
+import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.PRECISE_ASSEMBLER_RECIPES;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
+import static keqing.gtqtcore.api.utils.GTQTUtil.CWT;
 
 public class GrapheneChain {
 
@@ -71,11 +73,14 @@ public class GrapheneChain {
                 .output(dust, BerylliumOxide, 2)
                 .duration(60).EUt(VA[LV]).buildAndRegister();
 
-        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
+        PRECISE_ASSEMBLER_RECIPES.recipeBuilder()
+                .CWUt(CWT[ZPM]).Tier(2)
                 .input(ring, BerylliumOxide, 64)
                 .input(ring, BerylliumOxide, 64)
                 .input(plate, HSLASteel, 6)
                 .inputs(MetaItems.VACUUM_TUBE.getStackForm())
+                .fluidInputs(Naquadria.getFluid(1440))
+                .fluidInputs(VanadiumGallium.getFluid(1440))
                 .outputs(GTQTMetaItems.MAGNETRON.getStackForm())
                 .duration(600).EUt(VA[ZPM]).buildAndRegister();
 

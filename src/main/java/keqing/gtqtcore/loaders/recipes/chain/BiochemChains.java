@@ -34,7 +34,7 @@ public class BiochemChains {
         dehydrogenationCatalyst();
         camphor();
         acetoin();
-        anisidine();
+        Aniline();
     }
 
     private static void latex()
@@ -384,7 +384,7 @@ public class BiochemChains {
                 .buildAndRegister();
     }
 
-    private static void anisidine() {
+    private static void Aniline() {
         CHEMICAL_RECIPES.recipeBuilder()
                 .duration(145)
                 .EUt(VA[EV])
@@ -410,7 +410,7 @@ public class BiochemChains {
                 .fluidInputs(Hydrogen.getFluid(6000))
                 .notConsumable(dust, Nickel)
                 .notConsumable(dust, Aluminium)
-                .fluidOutputs(Anisidine.getFluid(1000))
+                .fluidOutputs(Aniline.getFluid(1000))
                 .fluidOutputs(Water.getFluid(2000))
                 .buildAndRegister();
     }
