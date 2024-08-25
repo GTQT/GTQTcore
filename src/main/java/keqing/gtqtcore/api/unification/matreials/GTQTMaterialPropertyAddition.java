@@ -14,6 +14,7 @@ import java.util.List;
 
 import static gregtech.api.GTValues.*;
 import static gregtech.api.unification.material.Materials.*;
+import static gregtech.api.unification.material.properties.BlastProperty.GasTier.LOW;
 import static gregtech.integration.crafttweaker.material.MaterialPropertyExpansion.addFluid;
 import static gregtech.integration.groovy.MaterialPropertyExpansion.addLiquid;
 import static gregtech.integration.groovy.MaterialPropertyExpansion.addPlasma;
@@ -155,6 +156,7 @@ public class GTQTMaterialPropertyAddition {
         // Blast
         Germanium.setProperty(PropertyKey.BLAST, new BlastProperty(1211));
 
+        StainlessSteel.getProperty(PropertyKey.BLAST).setBlastTemperature(2700);
         // Fluids
         SodiumHydroxide.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID,new FluidBuilder()));
         SodiumBisulfate.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID,new FluidBuilder()));

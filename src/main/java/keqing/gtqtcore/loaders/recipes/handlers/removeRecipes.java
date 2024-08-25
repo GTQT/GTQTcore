@@ -101,6 +101,10 @@ public class removeRecipes {
         // UHPIC晶圆 * 1
         GTRecipeHandler.removeRecipesByInputs(CHEMICAL_RECIPES, new ItemStack[]{MetaItems.HIGH_POWER_INTEGRATED_CIRCUIT.getStackForm(1), OreDictUnifier.get(dust,IndiumGalliumPhosphide,2)},new FluidStack[]{Naquadah.getFluid(576)});
 
+        // 不锈钢粉 * 9
+        GTRecipeHandler.removeRecipesByInputs(MIXER_RECIPES, OreDictUnifier.get(dust,Iron,4), OreDictUnifier.get(dust,Invar,3), OreDictUnifier.get(dust,Manganese,1),OreDictUnifier.get(dust,Chrome,1),IntCircuitIngredient.getIntegratedCircuit(1));
+        GTRecipeHandler.removeRecipesByInputs(MIXER_RECIPES, OreDictUnifier.get(dust,Iron,6), OreDictUnifier.get(dust,Nickel,1), OreDictUnifier.get(dust,Manganese,1),OreDictUnifier.get(dust,Chrome,1),IntCircuitIngredient.getIntegratedCircuit(3));
+
     }
 
 }

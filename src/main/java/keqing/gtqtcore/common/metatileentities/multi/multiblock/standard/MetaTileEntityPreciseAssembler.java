@@ -24,6 +24,7 @@ import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
+import gregtech.api.recipes.recipeproperties.ComputationProperty;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
@@ -65,6 +66,7 @@ import java.util.stream.Collectors;
 
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.ASSEMBLER_RECIPES;
+import static java.lang.Thread.sleep;
 import static keqing.gtqtcore.api.GTQTAPI.MAP_PA_CASING;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.PRECISE_ASSEMBLER;
 
@@ -127,6 +129,7 @@ public class MetaTileEntityPreciseAssembler extends MultiMapMultiblockController
 
     public boolean checkRecipe(@Nonnull Recipe recipe,
                                boolean consumeIfSuccess) {
+
         if(this.getRecipeMap() == ASSEMBLER_RECIPES)return super.checkRecipe(recipe, consumeIfSuccess);
         return super.checkRecipe(recipe, consumeIfSuccess) && recipe.getProperty(PAProperty.getInstance(), 0) <= CasingTier;
     }
@@ -262,7 +265,18 @@ public class MetaTileEntityPreciseAssembler extends MultiMapMultiblockController
             super(tileEntity,ComputationType.SPORADIC);
         }
 
-
+        public boolean checkRecipe(Recipe recipe) {
+            if(isPrecise()&&getParallelLimit()>1)return false;
+            if (!super.checkRecipe(recipe)) {
+                return false;
+            } else if (!recipe.hasProperty(ComputationProperty.getInstance())) {
+                return true;
+            } else {
+                IOpticalComputationProvider provider = this.getComputationProvider();
+                int recipeCWUt = (Integer)recipe.getProperty(ComputationProperty.getInstance(), 0);
+                return provider.requestCWUt(recipeCWUt, true) >= recipeCWUt;
+            }
+        }
         /**
          * @return Check if machine in PA
          */
