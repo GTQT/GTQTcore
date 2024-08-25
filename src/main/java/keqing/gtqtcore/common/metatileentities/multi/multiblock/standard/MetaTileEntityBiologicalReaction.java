@@ -31,6 +31,7 @@ import gregtech.client.renderer.texture.Textures;
 import gregtech.common.blocks.BlockBoilerCasing;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
+import keqing.gtqtcore.GTQTCoreConfig;
 import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.capability.chemical_plant.ChemicalPlantProperties;
@@ -263,7 +264,7 @@ public class MetaTileEntityBiologicalReaction extends GTQTRecipeMapMultiblockCon
     public void renderMetaTileEntity(double x, double y, double z, float partialTicks) {
         IFastRenderMetaTileEntity.super.renderMetaTileEntity(x, y, z, partialTicks);
         //机器开启才会进行渲染
-       if(isActive())
+       if(isActive() && GTQTCoreConfig.MachineSwitch.EnableObj && GTQTCoreConfig.MachineSwitch.EnableObjBiologicalReaction)
        {
            //这是一些opengl的操作,GlStateManager是mc自身封装的一部分方法  前四条详情请看 https://turou.fun/minecraft/legacy-render-tutor/
            //opengl方法一般需要成对出现，实际上他是一个状态机，改装状态后要还原  一般情况按照我这些去写就OK
