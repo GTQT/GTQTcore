@@ -215,7 +215,12 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem ATTO_PIC_CHIP;
     public static MetaItem<?>.MetaValueItem ZEPTO_PIC_WAFER;
     public static MetaItem<?>.MetaValueItem ZEPTO_PIC_CHIP;
+    public static MetaItem<?>.MetaValueItem EUROPIUM_BOULE;
+    public static MetaItem<?>.MetaValueItem EUROPIUM_WAFER;
+    public static MetaItem<?>.MetaValueItem AMERICIUM_BOULE;
+    public static MetaItem<?>.MetaValueItem AMERICIUM_WAFER;
     public static MetaItem<?>.MetaValueItem DUBNIUM_BOULE;
+    public static MetaItem<?>.MetaValueItem DUBNIUM_WAFER;
     public static MetaItem<?>.MetaValueItem CRYSTAL_INTERFACE_WAFER;
     public static MetaItem<?>.MetaValueItem CRYSTAL_INTERFACE_CHIP;
     public static MetaItem<?>.MetaValueItem UHASOC_WAFER;
@@ -224,6 +229,7 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem STRONTIUM_CARBONATE_BOHRIUM_BOULE;
     public static MetaItem<?>.MetaValueItem STRONTIUM_CARBONATE_BOHRIUM_WAFER;
     public static MetaItem<?>.MetaValueItem STRONTIUM_CARBONATE_OPTICAL_WAFER;
+    public static MetaItem<?>.MetaValueItem STRONTIUM_CARBONATE_OPTICAL_CHIP;
     public static MetaItem<?>.MetaValueItem OPTICAL_IMC_BOARD;
     public static MetaItem<?>.MetaValueItem PHOTOELECTRON_SOC;
     public static MetaItem<?>.MetaValueItem HELIUM_LASER;

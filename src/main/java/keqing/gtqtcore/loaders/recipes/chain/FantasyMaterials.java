@@ -13,6 +13,7 @@ import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.dust;
 import static gregtech.api.unification.ore.OrePrefix.ingotHot;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 
 public class FantasyMaterials {
 
@@ -31,10 +32,10 @@ public class FantasyMaterials {
 
         ELECTROMAGNETIC_SEPARATOR_RECIPES.recipeBuilder()
                 .input(dust, Bedrock)
-//                .chancedOutput(dust, Slate, 7000, 0) //TODO Worldgen Rewrite
+                .chancedOutput(dust, Slate, 7000, 0)
                 .chancedOutput(dust, Adamantite, 3000, 500)
                 .chancedOutput(dust, Monazite, 2, 3000, 0)
-//                .chancedOutput(dust, Zircon, 3, 3000, 0) //TODO CEu Nuclear
+                .chancedOutput(dust, Zircon, 3, 3000, 0)
                 .chancedOutput(dust, Graphite, 3, 3000, 0)
                 .duration(120).EUt(VA[IV]).buildAndRegister();
 
@@ -125,13 +126,6 @@ public class FantasyMaterials {
                 .fluidOutputs(Vibranium.getPlasma(L))
                 .EUToStart(620_000_000)
                 .duration(64).EUt(VA[ZPM] * 2).buildAndRegister();
-
-        FUSION_RECIPES.recipeBuilder()
-                .fluidInputs(Vibranium.getPlasma(L))
-                .fluidInputs(Adamantium.getPlasma(L))
-                .fluidOutputs(Neutronium.getFluid(L))
-                .EUToStart(620_000_000)
-                .duration(128).EUt(VA[UV] * 2).buildAndRegister();
 
         // remove vibranium dust -> hot ingot
         GTRecipeHandler.removeRecipesByInputs(BLAST_RECIPES, OreDictUnifier.get(dust, Vibranium), IntCircuitIngredient.getIntegratedCircuit(1));

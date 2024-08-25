@@ -406,14 +406,20 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         // Nano Circuit Components: ID 90-109
 
 
-        // Quantum Circuit Components: ID 110-129
-
+        //  ID 206-211: High Tier Boule and Wafers
+        EUROPIUM_BOULE = this.addItem(610, "boule.europium").setCreativeTabs(CommonProxy.GTQTCore_GD);
+        EUROPIUM_WAFER = this.addItem(611, "wafer.europium").setCreativeTabs(CommonProxy.GTQTCore_GD);
+        AMERICIUM_BOULE = this.addItem(612, "boule.americium").setCreativeTabs(CommonProxy.GTQTCore_GD);
+        AMERICIUM_WAFER = this.addItem(613, "wafer.americium").setCreativeTabs(CommonProxy.GTQTCore_GD);
+        DUBNIUM_BOULE = this.addItem(614, "boule.dubnium").setCreativeTabs(CommonProxy.GTQTCore_GD);
+        DUBNIUM_WAFER = this.addItem(615, "wafer.dubnium").setCreativeTabs(CommonProxy.GTQTCore_GD);
 
         // Crystal Circuit Components: ID 130-159
-        STRONTIUM_CARBONATE_OPTICAL_WAFER = this.addItem(625, "component.optical.strontium_carbonate_wafer").setCreativeTabs(CommonProxy.GTQTCore_GD);
-        STRONTIUM_CARBONATE_BOHRIUM_BOULE = this.addItem(626, "boule.strontium_carbonate.bohrium").setCreativeTabs(CommonProxy.GTQTCore_GD);
-        STRONTIUM_CARBONATE_BOHRIUM_WAFER = this.addItem(627, "wafer.strontium_carbonate.bohrium").setCreativeTabs(CommonProxy.GTQTCore_GD);
-        DUBNIUM_BOULE = this.addItem(628, "boule.dubnium").setCreativeTabs(CommonProxy.GTQTCore_GD);
+        STRONTIUM_CARBONATE_BOHRIUM_BOULE = this.addItem(620, "boule.strontium_carbonate.bohrium").setCreativeTabs(CommonProxy.GTQTCore_GD);
+        STRONTIUM_CARBONATE_BOHRIUM_WAFER = this.addItem(621, "wafer.strontium_carbonate.bohrium").setCreativeTabs(CommonProxy.GTQTCore_GD);
+        STRONTIUM_CARBONATE_OPTICAL_WAFER = this.addItem(622, "component.optical.strontium_carbonate_wafer").setCreativeTabs(CommonProxy.GTQTCore_GD);
+        STRONTIUM_CARBONATE_OPTICAL_CHIP = this.addItem(623, "component.optical.strontium_carbonate_chip").setCreativeTabs(CommonProxy.GTQTCore_GD);
+
         EU_DOPED_CUBIC_ZIRCONIA_BOULE = this.addItem(630, "boule.cubic_zirconia.europium").setCreativeTabs(CommonProxy.GTQTCore_GD);
         EU_DOPED_CUBIC_ZIRCONIA_WAFER = this.addItem(631, "wafer.cubic_zirconia.europium").setCreativeTabs(CommonProxy.GTQTCore_GD);
         CRYSTAL_INTERFACE_WAFER = this.addItem(632, "wafer.crystal.interface").setCreativeTabs(CommonProxy.GTQTCore_GD);

@@ -6,6 +6,7 @@ import keqing.gtqtcore.common.items.GTQTMetaItems;
 import net.minecraft.item.ItemStack;
 
 import static gregtech.common.items.MetaItems.*;
+import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 
 public class GTQTCPUHelper {
     /*
@@ -23,12 +24,27 @@ public class GTQTCPUHelper {
     Stepper(4,3,HIGHLY_ADVANCED_SOC_WAFER);
 
      */
-    public static MetaItem.MetaValueItem []item={INTEGRATED_LOGIC_CIRCUIT_WAFER,RANDOM_ACCESS_MEMORY_WAFER,CENTRAL_PROCESSING_UNIT_WAFER,ULTRA_LOW_POWER_INTEGRATED_CIRCUIT_WAFER,
-            LOW_POWER_INTEGRATED_CIRCUIT_WAFER,SIMPLE_SYSTEM_ON_CHIP_WAFER,NOR_MEMORY_CHIP_WAFER,POWER_INTEGRATED_CIRCUIT_WAFER,NAND_MEMORY_CHIP_WAFER,
-            SYSTEM_ON_CHIP_WAFER,ADVANCED_SYSTEM_ON_CHIP_WAFER,HIGHLY_ADVANCED_SOC_WAFER};
+    public static MetaItem.MetaValueItem []item={
+            INTEGRATED_LOGIC_CIRCUIT_WAFER,
+            RANDOM_ACCESS_MEMORY_WAFER,
+            CENTRAL_PROCESSING_UNIT_WAFER,
+            ULTRA_LOW_POWER_INTEGRATED_CIRCUIT_WAFER,
+            LOW_POWER_INTEGRATED_CIRCUIT_WAFER,
+            SIMPLE_SYSTEM_ON_CHIP_WAFER,
+            NANO_CENTRAL_PROCESSING_UNIT_WAFER,
+            QUBIT_CENTRAL_PROCESSING_UNIT_WAFER,
+            ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT_WAFER,
+            HIGH_POWER_INTEGRATED_CIRCUIT_WAFER,
+            NOR_MEMORY_CHIP_WAFER,
+            POWER_INTEGRATED_CIRCUIT_WAFER,
+            NAND_MEMORY_CHIP_WAFER,
+            SYSTEM_ON_CHIP_WAFER,
+            ADVANCED_SYSTEM_ON_CHIP_WAFER,
+            HIGHLY_ADVANCED_SOC_WAFER
+    };
 
-    public static MetaItem.MetaValueItem []wafer={SILICON_WAFER,PHOSPHORUS_WAFER,NAQUADAH_WAFER,NEUTRONIUM_WAFER};
-    static int [][]kind={{1,2},{1,2},{1,2},{1,2},{1,2},{1,2},{2,3},{2,3},{2,3},{2,3},{3,3},{4,3}};
+    public static MetaItem.MetaValueItem []wafer={SILICON_WAFER,PHOSPHORUS_WAFER,NAQUADAH_WAFER,EUROPIUM_BOULE,AMERICIUM_BOULE,DUBNIUM_BOULE,NEUTRONIUM_WAFER};
+    static int [][]kind={{1,2},{1,2},{1,2},{1,2},{1,2},{1,2},{2,2},{2,2},{2,3},{2,3},{2,3},{2,3},{2,3},{2,3},{3,3},{4,3}};
 
     //public boolean checkWafer(boolean sim) {
     //        var slots = this.getInputInventory().getSlots();

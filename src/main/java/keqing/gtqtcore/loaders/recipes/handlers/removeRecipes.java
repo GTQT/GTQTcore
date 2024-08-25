@@ -23,7 +23,6 @@ import static keqing.gtqtcore.api.unification.GCYSMaterials.Vibranium;
 public class removeRecipes {
     public static void init() {
         GTRecipeHandler.removeRecipesByInputs(CHEMICAL_RECIPES, Ethylene.getFluid(1000), Chlorine.getFluid(2000));
-
         // 钢矿车车轮 * 1
         GTRecipeHandler.removeRecipesByInputs(ASSEMBLER_RECIPES, OreDictUnifier.get(stick, Steel,1),OreDictUnifier.get(ring, Steel,2));
         // 铁矿车车轮 * 1
@@ -97,7 +96,10 @@ public class removeRecipes {
         // 数据库 * 1
         GTRecipeHandler.removeRecipesByInputs(ASSEMBLY_LINE_RECIPES, new ItemStack[]{MetaBlocks.COMPUTER_CASING.getItemVariant(BlockComputerCasing.CasingType.COMPUTER_CASING),OreDictUnifier.get(circuit,LuV,8),MetaItems.TOOL_DATA_ORB.getStackForm(),OreDictUnifier.get(wireFine,Cobalt,64),OreDictUnifier.get(wireFine,Copper,64),new ItemStack( OPTICAL_PIPES[0],4),OreDictUnifier.get(wireGtDouble,IndiumTinBariumTitaniumCuprate,16)},new FluidStack[]{SolderingAlloy.getFluid(288),Lubricant.getFluid(500)});
 
-
+        // HPIC晶圆 * 1
+        GTRecipeHandler.removeRecipesByInputs(CHEMICAL_RECIPES, new ItemStack[]{MetaItems.POWER_INTEGRATED_CIRCUIT.getStackForm(1), OreDictUnifier.get(dust,IndiumGalliumPhosphide,2)},new FluidStack[]{VanadiumGallium.getFluid(288)});
+        // UHPIC晶圆 * 1
+        GTRecipeHandler.removeRecipesByInputs(CHEMICAL_RECIPES, new ItemStack[]{MetaItems.HIGH_POWER_INTEGRATED_CIRCUIT.getStackForm(1), OreDictUnifier.get(dust,IndiumGalliumPhosphide,2)},new FluidStack[]{Naquadah.getFluid(576)});
 
     }
 

@@ -3,6 +3,7 @@ import appeng.client.render.effects.AssemblerFX;
 import gregtech.api.items.metaitem.MetaItem;
 import gregtech.api.metatileentity.multiblock.CleanroomType;
 import gregtech.api.unification.material.MarkerMaterials;
+import gregtech.api.unification.material.Material;
 import gregtech.common.items.MetaItems;
 import gregtech.api.unification.material.MarkerMaterials.Color;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
@@ -375,10 +376,37 @@ public class CPULine {
         if(tier<=4) {
             STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[EU + 3]).notConsumable(item1)
                     .Laser(tier)
-                    .input(NEUTRONIUM_WAFER)
+                    .input(EUROPIUM_WAFER)
                     .output(item2, (int)Math.pow(2,4-tier))
                     .CWUt(CWT[tier+3])
+                    .duration(1500*tier*EU)
+                    .buildAndRegister();
+        }
+        if(tier<=5) {
+            STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[EU + 4]).notConsumable(item1)
+                    .Laser(tier)
+                    .input(AMERICIUM_WAFER)
+                    .output(item2, (int)Math.pow(2,5-tier))
+                    .CWUt(CWT[tier+4])
                     .duration(2000*tier*EU)
+                    .buildAndRegister();
+        }
+        if(tier<=6) {
+            STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[EU + 5]).notConsumable(item1)
+                    .Laser(tier)
+                    .input(DUBNIUM_WAFER)
+                    .output(item2, (int)Math.pow(2,6-tier))
+                    .CWUt(CWT[tier+5])
+                    .duration(4000*tier*EU)
+                    .buildAndRegister();
+        }
+        if(tier<=7) {
+            STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[EU + 6]).notConsumable(item1)
+                    .Laser(tier)
+                    .input(NEUTRONIUM_WAFER)
+                    .output(item2, (int)Math.pow(2,7-tier))
+                    .CWUt(CWT[tier+6])
+                    .duration(8000*tier*EU)
                     .buildAndRegister();
         }
     }
@@ -389,6 +417,10 @@ public class CPULine {
         Stepper(1,2,RETICLE_ULTRA_LOW_POWER_INTEGRATED_CIRCUIT,ULTRA_LOW_POWER_INTEGRATED_CIRCUIT_WAFER);
         Stepper(1,2,RETICLE_LOW_POWER_INTEGRATED_CIRCUIT,LOW_POWER_INTEGRATED_CIRCUIT_WAFER);
         Stepper(1,2,RETICLE_SIMPLE_SYSTEM_ON_CHIP,SIMPLE_SYSTEM_ON_CHIP_WAFER);
+        Stepper(2,2,RETICLE_NANO_CENTRAL_PROCESSING_UNIT,NANO_CENTRAL_PROCESSING_UNIT_WAFER);
+        Stepper(2,2,RETICLE_QBIT_CENTRAL_PROCESSING_UNIT,QUBIT_CENTRAL_PROCESSING_UNIT_WAFER);
+        Stepper(2,3,RETICLE_ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT,ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT_WAFER);
+        Stepper(2,3,RETICLE_HIGH_POWER_INTEGRATED_CIRCUIT,HIGH_POWER_INTEGRATED_CIRCUIT_WAFER);
         Stepper(2,3,RETICLE_NOR_MEMORY_CHIP,NOR_MEMORY_CHIP_WAFER);
         Stepper(2,3,RETICLE_POWER_INTEGRATED_CIRCUIT,POWER_INTEGRATED_CIRCUIT_WAFER);
         Stepper(2,3,RETICLE_NAND_MEMORY_CHIP,NAND_MEMORY_CHIP_WAFER);
@@ -425,56 +457,6 @@ public class CPULine {
                 .CWUt(120)
                 .duration(400).EUt(VA[EV]).buildAndRegister();
 
-        //
-        STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[EV]).input(RETICLE_NANO_CENTRAL_PROCESSING_UNIT)
-                .input(SILICON_WAFER)
-                .output(NANO_CENTRAL_PROCESSING_UNIT_WAFER)
-                .CWUt(128).Laser(2)
-                .buildAndRegister();
-
-        STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[EV]).input(RETICLE_NANO_CENTRAL_PROCESSING_UNIT)
-                .input(PHOSPHORUS_WAFER)
-                .output(NANO_CENTRAL_PROCESSING_UNIT_WAFER,4)
-                .CWUt(256).Laser(3)
-                .buildAndRegister();
-
-        STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[EV]).input(RETICLE_NANO_CENTRAL_PROCESSING_UNIT)
-                .input(NAQUADAH_WAFER)
-                .output(NANO_CENTRAL_PROCESSING_UNIT_WAFER,8)
-                .CWUt(1024).Laser(4)
-                .buildAndRegister();
-
-        STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[EV]).input(RETICLE_NANO_CENTRAL_PROCESSING_UNIT)
-                .input(NEUTRONIUM_WAFER)
-                .output(NANO_CENTRAL_PROCESSING_UNIT_WAFER,16)
-                .CWUt(2048).Laser(5)
-                .buildAndRegister();
-
-
-        STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[EV]).input(RETICLE_QBIT_CENTRAL_PROCESSING_UNIT)
-                .input(SILICON_WAFER)
-                .output(QUBIT_CENTRAL_PROCESSING_UNIT_WAFER)
-                .CWUt(128).Laser(2)
-                .buildAndRegister();
-
-        STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[EV]).input(RETICLE_QBIT_CENTRAL_PROCESSING_UNIT)
-                .input(PHOSPHORUS_WAFER)
-                .output(QUBIT_CENTRAL_PROCESSING_UNIT_WAFER,4)
-                .CWUt(256).Laser(3)
-                .buildAndRegister();
-
-        STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[EV]).input(RETICLE_QBIT_CENTRAL_PROCESSING_UNIT)
-                .input(NAQUADAH_WAFER)
-                .output(QUBIT_CENTRAL_PROCESSING_UNIT_WAFER,8)
-                .CWUt(1024).Laser(4)
-                .buildAndRegister();
-
-        STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[EV]).input(RETICLE_QBIT_CENTRAL_PROCESSING_UNIT)
-                .input(NEUTRONIUM_WAFER)
-                .output(QUBIT_CENTRAL_PROCESSING_UNIT_WAFER,16)
-                .CWUt(2048).Laser(5)
-                .buildAndRegister();
-
         //pic
         PRECISION_SPINNING.recipeBuilder()
                 .input(POWER_INTEGRATED_CIRCUIT_WAFER)
@@ -492,47 +474,6 @@ public class CPULine {
                 .output(RETICLE_ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT)
                 .CWUt(480)
                 .duration(600).EUt(VA[LuV]).buildAndRegister();
-
-        STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[IV]).input(RETICLE_ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT)
-                .input(SILICON_WAFER)
-                .output(ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT_WAFER)
-                .CWUt(128).Laser(2).buildAndRegister();
-
-        STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[IV]).input(RETICLE_ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT)
-                .input(PHOSPHORUS_WAFER)
-                .output(ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT_WAFER,4)
-                .CWUt(256).Laser(3).buildAndRegister();
-
-        STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[IV]).input(RETICLE_ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT)
-                .input(NAQUADAH_WAFER)
-                .output(ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT_WAFER,8)
-                .CWUt(1024).Laser(4).buildAndRegister();
-
-        STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[IV]).input(RETICLE_ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT)
-                .input(NEUTRONIUM_WAFER)
-                .output(ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT_WAFER,16)
-                .CWUt(2048).Laser(5).buildAndRegister();
-
-        STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[IV]).input(RETICLE_HIGH_POWER_INTEGRATED_CIRCUIT)
-                .input(SILICON_WAFER)
-                .output(HIGH_POWER_INTEGRATED_CIRCUIT_WAFER)
-                .CWUt(128).Laser(2).buildAndRegister();
-
-        STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[IV]).input(RETICLE_HIGH_POWER_INTEGRATED_CIRCUIT)
-                .input(PHOSPHORUS_WAFER)
-                .output(HIGH_POWER_INTEGRATED_CIRCUIT_WAFER,4)
-                .CWUt(256).Laser(3).buildAndRegister();
-
-        STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[IV]).input(RETICLE_HIGH_POWER_INTEGRATED_CIRCUIT)
-                .input(NAQUADAH_WAFER)
-                .output(HIGH_POWER_INTEGRATED_CIRCUIT_WAFER,8)
-                .CWUt(1024).Laser(4).buildAndRegister();
-
-        STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[IV]).input(RETICLE_HIGH_POWER_INTEGRATED_CIRCUIT)
-                .input(NEUTRONIUM_WAFER)
-                .output(HIGH_POWER_INTEGRATED_CIRCUIT_WAFER,16)
-                .CWUt(2048).Laser(5).buildAndRegister();
-
         //TODO gcys pic
 
     }
@@ -671,115 +612,81 @@ public class CPULine {
                 .EUt(30)
                 .buildAndRegister();
 
-        CZPULLER_RECIPES.recipeBuilder()
-                .duration(5000)
-                .EUt(120)
-                .fluidInputs(Nitrogen.getFluid(16000))
-                .input(block,CSilicon,32)
-                .input(dust,GalliumArsenide,1)
-                .input(dust,Boron,1)
-                .output(SILICON_BOULE)
-                .blastFurnaceTemp(1800)
-                .buildAndRegister();
+        czpuller(SILICON_BOULE,Boron,MV);
+        czpuller(AE_SILICON,Fluix,MV);
+        czpuller(PHOSPHORUS_BOULE,Phosphorus,HV);
+        czpuller(NAQUADAH_BOULE,Naquadah,EV);
 
-        CZPULLER_RECIPES.recipeBuilder()
-                .duration(5000)
-                .EUt(120)
-                .fluidInputs(Nitrogen.getFluid(16000))
-                .input(block,CSilicon,32)
-                .input(dust,GalliumArsenide,1)
-                .input(dust,Fluix,1)
-                .output(AE_SILICON)
-                .blastFurnaceTemp(1800)
-                .buildAndRegister();
+        czpuller(EUROPIUM_BOULE,Europium,IV);
+        czpuller(AMERICIUM_BOULE,Americium,LuV);
+        czpuller(DUBNIUM_BOULE,Dubnium,ZPM);
 
-        CZPULLER_RECIPES.recipeBuilder()
-                .duration(5000)
-                .EUt(480)
-                .fluidInputs(Nitrogen.getFluid(16000))
-                .input(block,CSilicon,32)
-                .input(dust,GalliumArsenide,2)
-                .input(dust,Phosphorus,1)
-                .output(PHOSPHORUS_BOULE)
-                .blastFurnaceTemp(1800)
-                .buildAndRegister();
+        czpuller(NEUTRONIUM_BOULE,Neutronium,UV);
 
-        CZPULLER_RECIPES.recipeBuilder()
-                .duration(5000)
-                .EUt(480)
-                .fluidInputs(Nitrogen.getFluid(16000))
-                .input(block,CSilicon,32)
-                .input(dust,GalliumArsenide,4)
-                .input(dust,Naquadah,1)
-                .output(NAQUADAH_BOULE)
-                .blastFurnaceTemp(1800)
-                .buildAndRegister();
+    }
+    public static void czpuller(MetaItem<?>.MetaValueItem doule, Material material, int tier)
+    {
+        if(tier<=2) {
+            CZPULLER_RECIPES.recipeBuilder()
+                    .duration(20000/(4-tier))
+                    .EUt(VA[tier])
+                    .fluidInputs(Helium.getFluid(4000))
+                    .input(block, CSilicon, 32)
+                    .input(dust, GalliumArsenide, 8)
+                    .input(dust, material, 1)
+                    .output(doule, (4-tier)/2)
+                    .blastFurnaceTemp(1800+900*tier)
+                    .buildAndRegister();
+        }
+        if(tier<=4) {
+            CZPULLER_RECIPES.recipeBuilder()
+                    .duration(20000/(6-tier))
+                    .EUt(VA[tier])
+                    .fluidInputs(Nitrogen.getFluid(4000))
+                    .input(block, CSilicon, 32)
+                    .input(dust, IndiumGalliumPhosphide, 8)
+                    .input(dust, material, 1)
+                    .output(doule, (6-tier)/2)
+                    .blastFurnaceTemp(1800+900*tier)
+                    .buildAndRegister();
+        }
+        if(tier<=6) {
+            CZPULLER_RECIPES.recipeBuilder()
+                    .duration(20000/(8-tier))
+                    .EUt(VA[tier])
+                    .fluidInputs(Xenon.getFluid(4000))
+                    .input(block, CSilicon, 32)
+                    .input(dust, GalliumArsenide, 8)
+                    .input(dust, material, 1)
+                    .output(doule, (8-tier)/2)
+                    .blastFurnaceTemp(1800+900*tier)
+                    .buildAndRegister();
+        }
+        if(tier<=8) {
+            CZPULLER_RECIPES.recipeBuilder()
+                    .duration(20000/(10-tier))
+                    .EUt(VA[tier])
+                    .fluidInputs(Radon.getFluid(4000))
+                    .input(block, CSilicon, 32)
+                    .input(dust, GalliumArsenide, 8)
+                    .input(dust, material, 1)
+                    .output(doule, (10-tier)/2)
+                    .blastFurnaceTemp(1800+900*tier)
+                    .buildAndRegister();
+        }
+        if(tier<=10) {
+            CZPULLER_RECIPES.recipeBuilder()
+                    .duration(20000/(12-tier))
+                    .EUt(VA[tier])
+                    .fluidInputs(MetastableOganesson.getFluid(4000))
+                    .input(block, CSilicon, 32)
+                    .input(dust, GalliumArsenide, 8)
+                    .input(dust, material, 1)
+                    .output(doule, (12-tier)/2)
+                    .blastFurnaceTemp(1800+900*tier)
+                    .buildAndRegister();
+        }
 
-        CZPULLER_RECIPES.recipeBuilder()
-                .duration(5000)
-                .EUt(7680)
-                .fluidInputs(Nitrogen.getFluid(16000))
-                .input(block,CSilicon,32)
-                .input(dust,GalliumArsenide,8)
-                .input(dust,Neutronium,1)
-                .output(NEUTRONIUM_BOULE)
-                .blastFurnaceTemp(1800)
-                .buildAndRegister();
-
-        CZPULLER_RECIPES.recipeBuilder()
-                .duration(2500)
-                .EUt(1920)
-                .fluidInputs(Helium.getFluid(4000))
-                .input(block,CSilicon,32)
-                .input(dust,IndiumGalliumPhosphide,1)
-                .input(dust,Boron,1)
-                .output(SILICON_BOULE,2)
-                .blastFurnaceTemp(1800)
-                .buildAndRegister();
-
-        CZPULLER_RECIPES.recipeBuilder()
-                .duration(5000)
-                .EUt(120)
-                .fluidInputs(Nitrogen.getFluid(16000))
-                .input(block,CSilicon,32)
-                .input(dust,IndiumGalliumPhosphide,1)
-                .input(dust,Fluix,1)
-                .output(AE_SILICON,2)
-                .blastFurnaceTemp(1800)
-                .buildAndRegister();
-
-        CZPULLER_RECIPES.recipeBuilder()
-                .duration(2500)
-                .EUt(480)
-                .fluidInputs(Helium.getFluid(4000))
-                .input(block,CSilicon,32)
-                .input(dust,IndiumGalliumPhosphide,2)
-                .input(dust,Phosphorus,1)
-                .output(PHOSPHORUS_BOULE,2)
-                .blastFurnaceTemp(1800)
-                .buildAndRegister();
-
-        CZPULLER_RECIPES.recipeBuilder()
-                .duration(2500)
-                .EUt(1920)
-                .fluidInputs(Helium.getFluid(4000))
-                .input(block,CSilicon,32)
-                .input(dust,IndiumGalliumPhosphide,4)
-                .input(dust,Naquadah,1)
-                .output(NAQUADAH_BOULE,2)
-                .blastFurnaceTemp(1800)
-                .buildAndRegister();
-
-        CZPULLER_RECIPES.recipeBuilder()
-                .duration(2500)
-                .EUt(7680)
-                .fluidInputs(Helium.getFluid(4000))
-                .input(block,CSilicon,32)
-                .input(dust,IndiumGalliumPhosphide,8)
-                .input(dust,Neutronium,1)
-                .output(NEUTRONIUM_BOULE,2)
-                .blastFurnaceTemp(1800)
-                .buildAndRegister();
     }
     private static void Pre()
     {

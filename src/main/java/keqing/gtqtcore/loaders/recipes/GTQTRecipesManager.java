@@ -36,8 +36,10 @@ public class GTQTRecipesManager {
         DeltamethrinChain.init();
         RubbersChain.init();
         BacteriaCulturesChain.init();
+        FusionLoader.init();
         BoronChain.init();
         EnzymesRecipes.init();
+        ChipHelper.init();
         CoverRecipes.init();
         GTQTOreRecipeHandler.init();
         MolecularTransformer.init();

@@ -321,9 +321,14 @@ public class HigherDegreeMaterials {
                 .cableProperties(GTValues.V[GTValues.MAX], 32,0,true)
                 .components(OpVSuperconductorBase,1)
                 .build();
+*/
 
-
- */
+        getMaterialsId();
+        getMaterialsId();
+        getMaterialsId();
+        getMaterialsId();
+        getMaterialsId();
+        //高级矿物
 
     }
 }

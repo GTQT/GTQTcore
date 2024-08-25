@@ -49,6 +49,7 @@ import keqing.gtqtcore.api.utils.GTQTLog;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTParticleAccelerator;
+import keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing;
 import keqing.gtqtcore.common.items.GTQTMetaItems;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 import keqing.gtqtcore.common.metatileentities.single.electric.MetaTileEntityParticleAcceleratorIO;
@@ -300,7 +301,7 @@ public class MetaTileEntityParticleAccelerator extends GTQTRecipeMapMultiblockCo
                     .aisle("                                               ", "                                               ", "                   A XYZWO A                   ", "                   ALAABTALA                   ", "                   A AAAAA A                   ", "                                               ", "                                               ")
 
                     .where('B', GTQTMetaTileEntities.PARTICLE_ACCELERATOR, EnumFacing.SOUTH)
-                    .where('L', GTQTMetaTileEntities.PARTICLE_ACCELERATOR_IO[0], EnumFacing.SOUTH)
+                    .where('L', getCasingStateTest())
                     .where('A', getCasingState())
                     .where('C', getFrameState())
                     .where('D', getGlassState())
@@ -330,6 +331,9 @@ public class MetaTileEntityParticleAccelerator extends GTQTRecipeMapMultiblockCo
                     .build());
         }
         return shapeInfo;
+    }
+    private static IBlockState getCasingStateTest() {
+        return GTQTMetaBlocks.TURBINE_CASING.getState(GTQTTurbineCasing.TurbineCasingType.NQ_TURBINE_CASING);
     }
     private static IBlockState getCasingState() {
         return GTQTMetaBlocks.PARTICLE_ACCELERATOR.getState(GTQTParticleAccelerator.MachineType.ACCELERATOR_CASING);
