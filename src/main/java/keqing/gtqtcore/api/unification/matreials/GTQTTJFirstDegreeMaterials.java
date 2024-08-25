@@ -1035,12 +1035,6 @@ public class GTQTTJFirstDegreeMaterials {
                 .colorAverage()
                 .build();
 
-        Anisidine = new Material.Builder(25182, gregtechId("anisidine"))
-                .fluid()
-                .components(Carbon, 7, Hydrogen, 9, Nitrogen, 1, Oxygen, 1)
-                .colorAverage()
-                .build();
-
         MethylBromoacetate = new Material.Builder(25183, gregtechId("methyl_bromoacetate"))
                 .dust()
                 .colorAverage()

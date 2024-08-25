@@ -27,6 +27,42 @@ public class GTQTCoverBehavior {
                 (def, tile, side) -> new CoverRoboticArm(def, tile, side, GTValues.MAX, 1024));
         registerBehavior(new ResourceLocation(GTQTCore.MODID,  "solar_panel.max"), GTQTMetaItems.COVER_SOLAR_PANEL_MAX,
                 (def, tile, side) -> new CoverSolarPanel(def, tile, side, GTValues.V[GTValues.MAX]));
+
+
+        registerBehavior(new ResourceLocation(GTQTCore.MODID, "dual_cover.lv"), GTQTMetaItems.DUAL_COVER_LV,
+                (def, tile, side) -> new CoverDualCover(def, tile, side, GTValues.LV, 8, 1280));
+        registerBehavior(new ResourceLocation(GTQTCore.MODID, "dual_cover.mv"), GTQTMetaItems.DUAL_COVER_MV,
+                (def, tile, side) -> new CoverDualCover(def, tile, side, GTValues.MV, 32, 1280 * 4));
+        registerBehavior(new ResourceLocation(GTQTCore.MODID, "dual_cover.hv"), GTQTMetaItems.DUAL_COVER_HV,
+                (def, tile, side) -> new CoverDualCover(def, tile, side, GTValues.HV, 64, 1280 * 16));
+        registerBehavior(new ResourceLocation(GTQTCore.MODID, "dual_cover.ev"), GTQTMetaItems.DUAL_COVER_EV,
+                (def, tile, side) -> new CoverDualCover(def, tile, side, GTValues.EV, 3 * 64, 1280 * 64));
+        registerBehavior(new ResourceLocation(GTQTCore.MODID, "dual_cover.iv"), GTQTMetaItems.DUAL_COVER_IV,
+                (def, tile, side) -> new CoverDualCover(def, tile, side, GTValues.IV, 8 * 64, 1280 * 64 * 4));
+        registerBehavior(new ResourceLocation(GTQTCore.MODID, "dual_cover.luv"), GTQTMetaItems.DUAL_COVER_LuV,
+                (def, tile, side) -> new CoverDualCover(def, tile, side, GTValues.LuV, 16 * 64, 1280 * 64 * 16));
+        registerBehavior(new ResourceLocation(GTQTCore.MODID, "dual_cover.zpm"), GTQTMetaItems.DUAL_COVER_ZPM,
+                (def, tile, side) -> new CoverDualCover(def, tile, side, GTValues.ZPM, 16 * 64, 1280 * 64 * 64));
+        registerBehavior(new ResourceLocation(GTQTCore.MODID, "dual_cover.uv"), GTQTMetaItems.DUAL_COVER_UV,
+                (def, tile, side) -> new CoverDualCover(def, tile, side, GTValues.UV, 16 * 64, 1280 * 64 * 64 * 4));
+
+        registerBehavior(new ResourceLocation(GTQTCore.MODID, "precise_dual_cover.lv"), GTQTMetaItems.PRECISE_DUAL_COVER_LV,
+                (def, tile, side) -> new CoverPreciseDualCover(def, tile, side, GTValues.LV, 8, 1280));
+        registerBehavior(new ResourceLocation(GTQTCore.MODID, "precise_dual_cover.mv"), GTQTMetaItems.PRECISE_DUAL_COVER_MV,
+                (def, tile, side) -> new CoverPreciseDualCover(def, tile, side, GTValues.MV, 32, 1280 * 4));
+        registerBehavior(new ResourceLocation(GTQTCore.MODID, "precise_dual_cover.hv"), GTQTMetaItems.PRECISE_DUAL_COVER_HV,
+                (def, tile, side) -> new CoverPreciseDualCover(def, tile, side, GTValues.HV, 64, 1280 * 16));
+        registerBehavior(new ResourceLocation(GTQTCore.MODID, "precise_dual_cover.ev"), GTQTMetaItems.PRECISE_DUAL_COVER_EV,
+                (def, tile, side) -> new CoverPreciseDualCover(def, tile, side, GTValues.EV, 3 * 64, 1280 * 64));
+        registerBehavior(new ResourceLocation(GTQTCore.MODID, "precise_dual_cover.iv"), GTQTMetaItems.PRECISE_DUAL_COVER_IV,
+                (def, tile, side) -> new CoverPreciseDualCover(def, tile, side, GTValues.IV, 8 * 64, 1280 * 64 * 4));
+        registerBehavior(new ResourceLocation(GTQTCore.MODID, "precise_dual_cover.luv"), GTQTMetaItems.PRECISE_DUAL_COVER_LuV,
+                (def, tile, side) -> new CoverPreciseDualCover(def, tile, side, GTValues.LuV, 16 * 64, 1280 * 64 * 16));
+        registerBehavior(new ResourceLocation(GTQTCore.MODID, "precise_dual_cover.zpm"), GTQTMetaItems.PRECISE_DUAL_COVER_ZPM,
+                (def, tile, side) -> new CoverPreciseDualCover(def, tile, side, GTValues.ZPM, 16 * 64, 1280 * 64 * 64));
+        registerBehavior(new ResourceLocation(GTQTCore.MODID, "precise_dual_cover.uv"), GTQTMetaItems.PRECISE_DUAL_COVER_UV,
+                (def, tile, side) -> new CoverPreciseDualCover(def, tile, side, GTValues.UV, 16 * 64,
+                        1280 * 64 * 64 * 4));
     }
 
     /**

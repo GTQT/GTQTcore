@@ -981,7 +981,7 @@ public class GCYSFirstDegreeMaterials {
                 .build();
 
         Hematite = new Material.Builder(3630, gregtechId("hematite"))
-                .dust()
+                .dust().ore()
                 .color(0xa52222)
                 .components(Iron, 2, Oxygen, 3)
                 .build();

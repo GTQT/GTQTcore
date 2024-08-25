@@ -156,6 +156,7 @@ dependencies {
     implementation rfg.deobf(files("libs/modularui-2.4.3.jar"))
     implementation rfg.deobf(files("libs/Chisel-MC1.12.2-1.0.2.45.jar"))
     implementation rfg.deobf(files("libs/architecturecraft-1.12-3.108.jar"))
+
     if (project.use_mixins.toBoolean()) {
         // Change your mixin refmap name here:
         String mixin = modUtils.enableMixins('org.spongepowered:mixin:0.8.3', "mixins.${project.archives_base_name}.refmap.json")

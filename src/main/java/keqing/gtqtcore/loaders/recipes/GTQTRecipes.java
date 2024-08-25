@@ -198,6 +198,7 @@ public class GTQTRecipes {
                 RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
                         .EUt(30).duration(1200)
                         .input(plate, material, 4)
+                        .circuitMeta(10)
                         .output(plate_big, material)
                         .fluidInputs(Tin.getFluid(36))
                         .buildAndRegister();

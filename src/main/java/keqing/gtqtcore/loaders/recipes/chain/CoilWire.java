@@ -13,8 +13,10 @@ import static gregtech.api.GTValues.*;
 import static gregtech.api.GTValues.VA;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
+import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.PRECISE_ASSEMBLER_RECIPES;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.TJMaterials.SilicaCeramic;
+import static keqing.gtqtcore.api.utils.GTQTUtil.CWT;
 import static keqing.gtqtcore.common.block.blocks.BlockCoolingCoil.CoolingCoilType.*;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.INSULATINGMICA;
 
@@ -68,14 +70,17 @@ public class CoilWire {
                 .input(OrePrefix.foil, Materials.TungstenCarbide, 8).input(INSULATINGMICA,8)
                 .fluidInputs(Materials.Tungsten.getFluid(GTValues.L))
                 .outputs(MetaBlocks.WIRE_COIL.getItemVariant(CoilType.HSS_G)).duration(600).buildAndRegister();
-        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().EUt(VA[LuV]).input(OrePrefix.wireGtDouble, Materials.Naquadah, 8)
+        PRECISE_ASSEMBLER_RECIPES.recipeBuilder().EUt(VA[LuV]).input(OrePrefix.wireGtDouble, Materials.Naquadah, 8)
+                .Tier(1).CWUt(CWT[LuV])
                 .input(OrePrefix.foil, Materials.Osmium, 8).fluidInputs(Materials.TungstenSteel.getFluid(GTValues.L)).input(INSULATINGMICA,16)
                 .outputs(MetaBlocks.WIRE_COIL.getItemVariant(CoilType.NAQUADAH)).duration(700).buildAndRegister();
-        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().EUt(VA[ZPM]).input(OrePrefix.wireGtDouble, Materials.Trinium, 8)
+        PRECISE_ASSEMBLER_RECIPES.recipeBuilder().EUt(VA[ZPM]).input(OrePrefix.wireGtDouble, Materials.Trinium, 8)
+                .Tier(2).CWUt(CWT[ZPM])
                 .input(OrePrefix.foil, Materials.NaquadahEnriched, 8).input(INSULATINGMICA,32)
                 .fluidInputs(Materials.Naquadah.getFluid(GTValues.L))
                 .outputs(MetaBlocks.WIRE_COIL.getItemVariant(CoilType.TRINIUM)).duration(800).buildAndRegister();
-        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().EUt(VA[UV]).input(OrePrefix.wireGtDouble, Materials.Tritanium, 8)
+        PRECISE_ASSEMBLER_RECIPES.recipeBuilder().EUt(VA[UV]).input(OrePrefix.wireGtDouble, Materials.Tritanium, 8)
+                .Tier(3).CWUt(CWT[UV])
                 .input(OrePrefix.foil, Materials.Naquadria, 8).fluidInputs(Materials.Trinium.getFluid(GTValues.L)).input(INSULATINGMICA,64)
                 .outputs(MetaBlocks.WIRE_COIL.getItemVariant(CoilType.TRITANIUM)).duration(900).buildAndRegister();
     }

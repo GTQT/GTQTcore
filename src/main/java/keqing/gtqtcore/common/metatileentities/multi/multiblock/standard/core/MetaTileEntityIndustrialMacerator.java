@@ -35,6 +35,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import static gregtech.api.GTValues.IV;
 import static gregtech.api.GTValues.VA;
+import static keqing.gtqtcore.common.block.blocks.GTQTADVBlock.CasingType.Hdcs;
 import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.IRIDIUM_CASING;
 
 public class MetaTileEntityIndustrialMacerator extends GTQTMultiblockCore {
@@ -81,11 +82,11 @@ public class MetaTileEntityIndustrialMacerator extends GTQTMultiblockCore {
         return MetaBlocks.FRAMES.get(GTQTMaterials.BlackTitanium).getBlock(GTQTMaterials.BlackTitanium);
     }
     private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.TURBINE_CASING.getState(IRIDIUM_CASING);
+        return GTQTMetaBlocks.ADV_BLOCK.getState(GTQTADVBlock.CasingType.Hdcs);
     }
 
     private static IBlockState getSecondCasingState() {
-        return GTQTMetaBlocks.ADV_BLOCK.getState(GTQTADVBlock.CasingType.Hdcs);
+        return GTQTMetaBlocks.ISA_CASING.getState(GTQTIsaCasing.CasingType.IRIDIUM_TURBINE);
     }
 
     @SideOnly(Side.CLIENT)

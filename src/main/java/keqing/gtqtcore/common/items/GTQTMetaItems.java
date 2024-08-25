@@ -646,6 +646,35 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem ARROW_LEFT_MKIII;
     public static MetaItem<?>.MetaValueItem ARROW_RIGHT_MKIII ;
 
+    public static MetaItem<?>.MetaValueItem DUAL_COVER_LV;
+    public static MetaItem<?>.MetaValueItem DUAL_COVER_MV;
+    public static MetaItem<?>.MetaValueItem DUAL_COVER_HV;
+    public static MetaItem<?>.MetaValueItem DUAL_COVER_EV;
+    public static MetaItem<?>.MetaValueItem DUAL_COVER_IV;
+    public static MetaItem<?>.MetaValueItem DUAL_COVER_LuV;
+    public static MetaItem<?>.MetaValueItem DUAL_COVER_ZPM;
+    public static MetaItem<?>.MetaValueItem DUAL_COVER_UV;
+    public static MetaItem<?>.MetaValueItem DUAL_COVER_UHV;
+    public static MetaItem<?>.MetaValueItem DUAL_COVER_UEV;
+    public static MetaItem<?>.MetaValueItem DUAL_COVER_UIV;
+    public static MetaItem<?>.MetaValueItem DUAL_COVER_UXV;
+    public static MetaItem<?>.MetaValueItem DUAL_COVER_OpV;
+
+    public static MetaItem<?>.MetaValueItem PRECISE_DUAL_COVER_LV;
+    public static MetaItem<?>.MetaValueItem PRECISE_DUAL_COVER_MV;
+    public static MetaItem<?>.MetaValueItem PRECISE_DUAL_COVER_HV;
+    public static MetaItem<?>.MetaValueItem PRECISE_DUAL_COVER_EV;
+    public static MetaItem<?>.MetaValueItem PRECISE_DUAL_COVER_IV;
+    public static MetaItem<?>.MetaValueItem PRECISE_DUAL_COVER_LuV;
+    public static MetaItem<?>.MetaValueItem PRECISE_DUAL_COVER_ZPM;
+    public static MetaItem<?>.MetaValueItem PRECISE_DUAL_COVER_UV;
+    public static MetaItem<?>.MetaValueItem PRECISE_DUAL_COVER_UHV;
+    public static MetaItem<?>.MetaValueItem PRECISE_DUAL_COVER_UEV;
+    public static MetaItem<?>.MetaValueItem PRECISE_DUAL_COVER_UIV;
+    public static MetaItem<?>.MetaValueItem PRECISE_DUAL_COVER_UXV;
+    public static MetaItem<?>.MetaValueItem PRECISE_DUAL_COVER_OpV;
+
+
     // Process-Specific Components
     public static MetaItem<?>.MetaValueItem MAGNETRON;
     public static GTQTMetaItem1 GTQT_META_ITEM;

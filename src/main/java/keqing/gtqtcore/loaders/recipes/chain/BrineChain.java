@@ -580,7 +580,6 @@ public class BrineChain {
                 .fluidInputs(Water.getFluid(1000))
                 .fluidOutputs(IsopropylAlcohol.getFluid(1000))
                 .notConsumable(dust, SodiumPhosphomolybdate, 1)
-                .notConsumable(dust, SodiumPhosphotungstate, 1)
                 .buildAndRegister();
 
         //2 IrCl3 + 2 C8H12 -> (C8H12)2Ir2Cl2 + 4 Cl

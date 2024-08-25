@@ -39,7 +39,7 @@ public class TitanateChain {
         BLAST_RECIPES.recipeBuilder().duration(1200).EUt(VA[HV])
                 .input(ingot, Htitanate,2)
                 .output(ingotHot, Titanium)
-                .fluidInputs(Helium.getFluid(1000))
+                .fluidInputs(Helium.getFluid(100))
                 .circuitMeta(2)
                 .blastFurnaceTemp(Titanium.getBlastTemperature() + 200)
                 .buildAndRegister();

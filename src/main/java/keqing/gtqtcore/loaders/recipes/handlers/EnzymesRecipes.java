@@ -10,8 +10,7 @@ import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 
 import static gregtech.api.GTValues.*;
 import static gregtech.api.GTValues.VA;
-import static gregtech.api.recipes.RecipeMaps.BREWING_RECIPES;
-import static gregtech.api.recipes.RecipeMaps.CHEMICAL_RECIPES;
+import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtechfoodoption.GTFOMaterialHandler.*;
@@ -154,6 +153,14 @@ public class EnzymesRecipes {
         BioCentrifuge();
         //富集培养基
 
+        CHEMICAL_PLANT.recipeBuilder()
+                .input(dust,Meat,4)
+                .input(dust,Calcium)
+                .fluidInputs(Biomass.getFluid(1000))
+                .fluidInputs(DistilledWater.getFluid(1000))
+                .fluidOutputs(Rnzymes.getFluid(1000))
+                .recipeLevel(3)
+                .duration(4000).EUt(VA[HV]).buildAndRegister();
     }
 
     private static void BioCentrifuge() {

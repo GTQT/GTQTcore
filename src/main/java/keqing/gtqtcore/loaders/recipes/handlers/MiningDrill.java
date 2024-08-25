@@ -89,7 +89,7 @@ public class MiningDrill {
             GRAVITY_SEPARATOR_RECIPES.recipeBuilder()
                     .input(Item)
                     .fluidInputs(Water.getFluid(1000))
-                    .fluidInputs(Lubricant.getFluid(100))
+                    .fluidInputs(Lubricant.getFluid(10))
                     .chancedOutput(crushed, material1, 3000+500*Math.abs(5-i), 2000+200*Math.abs(-i))
                     .chancedOutput(crushed, material2, 3000+500*Math.abs(4-i), 2000+200*Math.abs(1-i))
                     .chancedOutput(crushed, material3, 3000+500*Math.abs(3-i), 2000+200*Math.abs(2-i))

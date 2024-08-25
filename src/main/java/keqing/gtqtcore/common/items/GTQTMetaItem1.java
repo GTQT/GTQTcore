@@ -837,6 +837,126 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         ARROW_DOWN_MKIII = this.addItem(3009, "arrow_down_mkiii").setCreativeTabs(CommonProxy.GTQTCore_DISK);
         ARROW_LEFT_MKIII = this.addItem(3010, "arrow_left_mkiii").setCreativeTabs(CommonProxy.GTQTCore_DISK);
         ARROW_RIGHT_MKIII = this.addItem(3011, "arrow_right_mkiii").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+
+        // Dual Covers: 0-12
+        DUAL_COVER_LV = addItem(4000, "cover.dual_cover.lv").addComponents(new TooltipBehavior(lines -> {
+            lines.add(I18n.format("metaitem.cover.dual_cover.tooltip"));
+            lines.add(I18n.format("metaitem.cover.dual.tooltip.transfer_rate", 8, 1280 / 20));
+        }));
+        DUAL_COVER_MV = addItem(4001, "cover.dual_cover.mv").addComponents(new TooltipBehavior(lines -> {
+            lines.add(I18n.format("metaitem.cover.dual_cover.tooltip"));
+            lines.add(I18n.format("metaitem.cover.dual.tooltip.transfer_rate", 32, 1280 * 4 / 20));
+        }));
+        DUAL_COVER_HV = addItem(4002, "cover.dual_cover.hv").addComponents(new TooltipBehavior(lines -> {
+            lines.add(I18n.format("metaitem.cover.dual_cover.tooltip"));
+            lines.add(I18n.format("metaitem.cover.dual.tooltip.transfer_rate", 64, 1280 * 16 / 20));
+        }));
+        DUAL_COVER_EV = addItem(4003, "cover.dual_cover.ev").addComponents(new TooltipBehavior(lines -> {
+            lines.add(I18n.format("metaitem.cover.dual_cover.tooltip"));
+            lines.add(I18n.format("metaitem.cover.dual.tooltip.transfer_rate.stacks", 3, 1280 * 64 / 20));
+        }));
+        DUAL_COVER_IV = addItem(4004, "cover.dual_cover.iv").addComponents(new TooltipBehavior(lines -> {
+            lines.add(I18n.format("metaitem.cover.dual_cover.tooltip"));
+            lines.add(I18n.format("metaitem.cover.dual.tooltip.transfer_rate.stacks", 8, 1280 * 64 * 4 / 20));
+        }));
+        DUAL_COVER_LuV = addItem(4005, "cover.dual_cover.luv").addComponents(new TooltipBehavior(lines -> {
+            lines.add(I18n.format("metaitem.cover.dual_cover.tooltip"));
+            lines.add(I18n.format("metaitem.cover.dual.tooltip.transfer_rate.stacks", 16, 1280 * 64 * 16 / 20));
+        }));
+        DUAL_COVER_ZPM = addItem(4006, "cover.dual_cover.zpm").addComponents(new TooltipBehavior(lines -> {
+            lines.add(I18n.format("metaitem.cover.dual_cover.tooltip"));
+            lines.add(I18n.format("metaitem.cover.dual.tooltip.transfer_rate.stacks", 16, 1280 * 64 * 64 / 20));
+        }));
+        DUAL_COVER_UV = addItem(4007, "cover.dual_cover.uv").addComponents(new TooltipBehavior(lines -> {
+            lines.add(I18n.format("metaitem.cover.dual_cover.tooltip"));
+            lines.add(I18n.format("metaitem.cover.dual.tooltip.transfer_rate.stacks", 16, 1280 * 64 * 64 * 4 / 20));
+        }));
+        DUAL_COVER_UHV = addItem(4008, "cover.dual_cover.uhv").addComponents(new TooltipBehavior(lines -> {
+            lines.add(I18n.format("metaitem.cover.dual_cover.tooltip"));
+            lines.add(I18n.format("metaitem.cover.dual.tooltip.transfer_rate.stacks", 16, 1280 * 64 * 64 * 4 / 20));
+        })).setInvisibleIf(!GregTechAPI.isHighTier());
+        DUAL_COVER_UEV = addItem(4009, "cover.dual_cover.uev").addComponents(new TooltipBehavior(lines -> {
+            lines.add(I18n.format("metaitem.cover.dual_cover.tooltip"));
+            lines.add(I18n.format("metaitem.cover.dual.tooltip.transfer_rate.stacks", 16, 1280 * 64 * 64 * 4 / 20));
+        })).setInvisibleIf(!GregTechAPI.isHighTier());
+        DUAL_COVER_UIV = addItem(4010, "cover.dual_cover.uiv").addComponents(new TooltipBehavior(lines -> {
+            lines.add(I18n.format("metaitem.cover.dual_cover.tooltip"));
+            lines.add(I18n.format("metaitem.cover.dual.tooltip.transfer_rate.stacks", 16, 1280 * 64 * 64 * 4 / 20));
+        })).setInvisibleIf(!GregTechAPI.isHighTier());
+        DUAL_COVER_UXV = addItem(4011, "cover.dual_cover.uxv").addComponents(new TooltipBehavior(lines -> {
+            lines.add(I18n.format("metaitem.cover.dual_cover.tooltip"));
+            lines.add(I18n.format("metaitem.cover.dual.tooltip.transfer_rate.stacks", 16, 1280 * 64 * 64 * 4 / 20));
+        })).setInvisibleIf(!GregTechAPI.isHighTier());
+        DUAL_COVER_OpV = addItem(4012, "cover.dual_cover.opv").addComponents(new TooltipBehavior(lines -> {
+            lines.add(I18n.format("metaitem.cover.dual_cover.tooltip"));
+            lines.add(I18n.format("metaitem.cover.dual.tooltip.transfer_rate.stacks", 16, 1280 * 64 * 64 * 4 / 20));
+        })).setInvisibleIf(!GregTechAPI.isHighTier());
+
+        // Precise Dual Covers: 13-25
+        PRECISE_DUAL_COVER_LV = addItem(4013, "cover.precise_dual_cover.lv").addComponents(new TooltipBehavior(lines -> {
+            lines.add(I18n.format("metaitem.cover.precise_dual_cover.tooltip"));
+            lines.add(I18n.format("metaitem.cover.dual.tooltip.transfer_rate", 8, 1280 / 20));
+        }));
+        PRECISE_DUAL_COVER_MV = addItem(4014, "cover.precise_dual_cover.mv").addComponents(new TooltipBehavior(lines -> {
+            lines.add(I18n.format("metaitem.cover.precise_dual_cover.tooltip"));
+            lines.add(I18n.format("metaitem.cover.dual.tooltip.transfer_rate", 32, 1280 * 4 / 20));
+        }));
+        PRECISE_DUAL_COVER_HV = addItem(4015, "cover.precise_dual_cover.hv").addComponents(new TooltipBehavior(lines -> {
+            lines.add(I18n.format("metaitem.cover.precise_dual_cover.tooltip"));
+            lines.add(I18n.format("metaitem.cover.dual.tooltip.transfer_rate", 64, 1280 * 16 / 20));
+        }));
+        PRECISE_DUAL_COVER_EV = addItem(4016, "cover.precise_dual_cover.ev").addComponents(new TooltipBehavior(lines -> {
+            lines.add(I18n.format("metaitem.cover.precise_dual_cover.tooltip"));
+            lines.add(I18n.format("metaitem.cover.dual.tooltip.transfer_rate.stacks", 3, 1280 * 64 / 20));
+        }));
+        PRECISE_DUAL_COVER_IV = addItem(4017, "cover.precise_dual_cover.iv").addComponents(new TooltipBehavior(lines -> {
+            lines.add(I18n.format("metaitem.cover.precise_dual_cover.tooltip"));
+            lines.add(I18n.format("metaitem.cover.dual.tooltip.transfer_rate.stacks", 8, 1280 * 64 * 4 / 20));
+        }));
+        PRECISE_DUAL_COVER_LuV = addItem(4018, "cover.precise_dual_cover.luv")
+                .addComponents(new TooltipBehavior(lines -> {
+                    lines.add(I18n.format("metaitem.cover.precise_dual_cover.tooltip"));
+                    lines.add(I18n.format("metaitem.cover.dual.tooltip.transfer_rate.stacks", 16, 1280 * 64 * 16 / 20));
+                }));
+        PRECISE_DUAL_COVER_ZPM = addItem(4019, "cover.precise_dual_cover.zpm")
+                .addComponents(new TooltipBehavior(lines -> {
+                    lines.add(I18n.format("metaitem.cover.precise_dual_cover.tooltip"));
+                    lines.add(I18n.format("metaitem.cover.dual.tooltip.transfer_rate.stacks", 16, 1280 * 64 * 64 / 20));
+                }));
+        PRECISE_DUAL_COVER_UV = addItem(4020, "cover.precise_dual_cover.uv").addComponents(new TooltipBehavior(lines -> {
+            lines.add(I18n.format("metaitem.cover.precise_dual_cover.tooltip"));
+            lines.add(I18n.format("metaitem.cover.dual.tooltip.transfer_rate.stacks", 16, 1280 * 64 * 64 * 4 / 20));
+        }));
+        PRECISE_DUAL_COVER_UHV = addItem(4021, "cover.precise_dual_cover.uhv")
+                .addComponents(new TooltipBehavior(lines -> {
+                    lines.add(I18n.format("metaitem.cover.precise_dual_cover.tooltip"));
+                    lines.add(I18n.format("metaitem.cover.dual.tooltip.transfer_rate.stacks", 16,
+                            1280 * 64 * 64 * 4 / 20));
+                })).setInvisibleIf(!GregTechAPI.isHighTier());
+        PRECISE_DUAL_COVER_UEV = addItem(4022, "cover.precise_dual_cover.uev")
+                .addComponents(new TooltipBehavior(lines -> {
+                    lines.add(I18n.format("metaitem.cover.precise_dual_cover.tooltip"));
+                    lines.add(I18n.format("metaitem.cover.dual.tooltip.transfer_rate.stacks", 16,
+                            1280 * 64 * 64 * 4 / 20));
+                })).setInvisibleIf(!GregTechAPI.isHighTier());
+        PRECISE_DUAL_COVER_UIV = addItem(4023, "cover.precise_dual_cover.uiv")
+                .addComponents(new TooltipBehavior(lines -> {
+                    lines.add(I18n.format("metaitem.cover.precise_dual_cover.tooltip"));
+                    lines.add(I18n.format("metaitem.cover.dual.tooltip.transfer_rate.stacks", 16,
+                            1280 * 64 * 64 * 4 / 20));
+                })).setInvisibleIf(!GregTechAPI.isHighTier());
+        PRECISE_DUAL_COVER_UXV = addItem(4024, "cover.precise_dual_cover.uxv")
+                .addComponents(new TooltipBehavior(lines -> {
+                    lines.add(I18n.format("metaitem.cover.precise_dual_cover.tooltip"));
+                    lines.add(I18n.format("metaitem.cover.dual.tooltip.transfer_rate.stacks", 16,
+                            1280 * 64 * 64 * 4 / 20));
+                })).setInvisibleIf(!GregTechAPI.isHighTier());
+        PRECISE_DUAL_COVER_OpV = addItem(4025, "cover.precise_dual_cover.opv")
+                .addComponents(new TooltipBehavior(lines -> {
+                    lines.add(I18n.format("metaitem.cover.precise_dual_cover.tooltip"));
+                    lines.add(I18n.format("metaitem.cover.dual.tooltip.transfer_rate.stacks", 16,
+                            1280 * 64 * 64 * 4 / 20));
+                })).setInvisibleIf(!GregTechAPI.isHighTier());
     }
 
 }

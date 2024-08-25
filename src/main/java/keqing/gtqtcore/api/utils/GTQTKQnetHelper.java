@@ -10,7 +10,7 @@ public class GTQTKQnetHelper {
         //2 物理-粒子加速器 OK
         if (kind == 2) return"物理-粒子加速器";
         //3 物理-量子计算机
-        if (kind == 3) return"物理-量子计算机";
+        if (kind == 3) return"物理-高性能计算阵列";
 
         //11 生物-细菌培养缸
         if (kind == 11) return"生物-细菌培养缸";
@@ -25,8 +25,9 @@ public class GTQTKQnetHelper {
         if (kind == 30) return"设备-辅助计算机I";
         //31 设备-辅助计算机II
         if (kind == 31) return"设备-辅助计算机II";
-        //32 设备-辅助计算机III
+        //32 设备-辅助计算机III null
         if (kind == 32) return"设备-辅助计算机III";
+
         //33 设备-辅助数据库
         if (kind == 33) return"设备-辅助数据库I";
         //34 设备-辅助数据库
