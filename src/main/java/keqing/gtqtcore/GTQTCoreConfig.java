@@ -30,6 +30,16 @@ public class GTQTCoreConfig {
         @Config.RequiresMcRestart
         @Config.Name("UHV+ IO Switch")
         public boolean UHVIOSwitch = false;
+
+        @Config.Comment("OBJ模型渲染开启")
+        @Config.RequiresMcRestart
+        @Config.Name("Enable obj Model")
+        public boolean EnableObj = false;
+
+        @Config.Comment("生物反应室OBJ模型渲染开启")
+        @Config.RequiresMcRestart
+        @Config.Name("Enable obj Model BiologicalReaction")
+        public boolean EnableObjBiologicalReaction = false;
     }
 
 }
