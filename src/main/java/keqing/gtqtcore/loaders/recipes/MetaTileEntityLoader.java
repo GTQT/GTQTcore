@@ -422,18 +422,34 @@ public class MetaTileEntityLoader {
                 'H', MetaTileEntities.HULL[3].getStackForm()
         );
         //  Cryogenic Freezer
-        ModHandler.addShapedRecipe(true, "cryogenic_freezer", CRYOGENIC_FREEZER.getStackForm(),
-                "SXS", "EHE", "PWP",
-                'S', new UnificationEntry(spring, HSSG),
-                'X', new UnificationEntry(circuit, MarkerMaterials.Tier.LuV),
-                'H', VACUUM_FREEZER.getStackForm(),
-                'E', ELECTRIC_PUMP_IV.getStackForm(),
-                'P', new UnificationEntry(plate, TanmolyiumBetaC),
-                'W', new UnificationEntry(cableGtSingle, Platinum));
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .inputs(VACUUM_FREEZER.getStackForm(4))
+                .input(CIRCUIT_GOOD_I)
+                .input(circuit, MarkerMaterials.Tier.LuV,16)
+                .input(frameGt, HSSG, 16)
+                .input(ROBOT_ARM_IV, 8)
+                .input(ELECTRIC_PUMP_IV, 8)
+                .input(plate, TanmolyiumBetaC, 4)
+                .input(gear, Stellite100, 4)
+                .input(wireFine, Platinum, 64)
+                .input(stickLong, SamariumMagnetic, 64)
+                .input(stickLong, SamariumMagnetic, 64)
+                .fluidInputs(SolderingAlloy.getFluid(L * 6))
+                .fluidInputs(Lubricant.getFluid(3000))
+                .fluidInputs(HastelloyN.getFluid(L * 2))
+                .outputs(CRYOGENIC_FREEZER.getStackForm())
+                .scannerResearch(b -> b
+                        .researchStack(DISK_21.getStackForm())
+                        .EUt(VA[GTValues.IV])
+                        .duration(1200))
+                .EUt(VA[GTValues.LuV])
+                .duration(1200)
+                .buildAndRegister();
 
         //  Precise Assembler
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .inputs(LARGE_ASSEMBLER.getStackForm(4))
+                .input(circuit, MarkerMaterials.Tier.LuV,16)
                 .input(frameGt, MARM200Steel, 16)
                 .input(ROBOT_ARM_IV, 8)
                 .input(CONVEYOR_MODULE_IV, 8)

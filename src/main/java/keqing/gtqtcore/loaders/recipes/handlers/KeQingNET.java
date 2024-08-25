@@ -1,5 +1,8 @@
 package keqing.gtqtcore.loaders.recipes.handlers;
 import static gregtech.common.metatileentities.MetaTileEntities.*;
+
+import gregicality.multiblocks.api.unification.GCYMMaterials;
+import gregicality.multiblocks.common.metatileentities.GCYMMetaTileEntities;
 import gregtech.api.GTValues;
 import gregtech.api.items.metaitem.MetaItem;
 import gregtech.api.metatileentity.MetaTileEntity;
@@ -58,6 +61,7 @@ import static keqing.gtqtcore.common.block.GTQTMetaBlocks.POWER;
 import static keqing.gtqtcore.common.block.blocks.GTQTIsaCasing.CasingType.FLOTATION_CASING_GEARBOX;
 import static keqing.gtqtcore.common.block.blocks.GTQTIsaCasing.CasingType.ISA_MILL_CASING_GEARBOX;
 import static keqing.gtqtcore.common.block.blocks.GTQTKQCC.CasingType.*;
+import static keqing.gtqtcore.common.block.blocks.GTQTParticleAccelerator.MachineType.ACCELERATOR_CASING;
 import static keqing.gtqtcore.common.block.blocks.GTQTPowerSupply.SupplyType.POWER_SUPPLY_BASIC;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.*;
@@ -816,17 +820,48 @@ public class KeQingNET {
                         .CWUt(CWT[LuV]))
                 .buildAndRegister();
 
-        //  Mega Oil Cracking Unit
+
+        //大型光刻厂
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(frameGt, HMS1J22Alloy, 16)
-                .inputs(CRACKER.getStackForm(16))
-                .input(circuit, Tier.UHV, 16)
                 .input(CIRCUIT_GOOD_IV,8)
+                .inputs(GCYMMetaTileEntities.LARGE_ENGRAVER.getStackForm(16))
+                .input(circuit, MarkerMaterials.Tier.UHV,4)
+                .input(circuit, MarkerMaterials.Tier.UV,16)
+                .input(circuit, MarkerMaterials.Tier.ZPM,32)
+                .input(frameGt, HMS1J22Alloy, 16)
                 .input(plateDouble, HG1223, 4)
                 .input(plateDouble, Staballoy, 4)
                 .input(gear, MaragingSteel250, 4)
                 .input(gearSmall, Stellite, 16)
-                .input(cableGtQuadruple, Aluminium, 16)
+                .input(cableGtQuadruple, VanadiumGallium, 16)
+                .input(wireGtSingle, ZPMSuperconductor, 64)
+                .input(wireGtSingle, ZPMSuperconductor, 64)
+                .output(PHOTOLITHOGRAPHY_FACTORY)
+                .fluidInputs(KaptonK.getFluid(L * 32))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 16))
+                .fluidInputs(Polyetheretherketone.getFluid(L * 16))
+                .fluidInputs(NaquadahAlloy.getFluid(L * 4))
+                .stationResearch(b -> b
+                        .researchStack(DISK_23.getStackForm())
+                        .CWUt(CWT[IV])
+                        .EUt(VA[LuV]))
+                .EUt(VA[LuV])
+                .duration(400)
+                .cleanroom(CleanroomType.CLEANROOM)
+                .buildAndRegister();
+        //  Mega Oil Cracking Unit
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(CIRCUIT_GOOD_IV,8)
+                .input(frameGt, HMS1J22Alloy, 16)
+                .inputs(CRACKER.getStackForm(16))
+                .input(circuit, MarkerMaterials.Tier.UHV,4)
+                .input(circuit, MarkerMaterials.Tier.UV,16)
+                .input(circuit, MarkerMaterials.Tier.ZPM,32)
+                .input(plateDouble, HG1223, 4)
+                .input(plateDouble, Staballoy, 4)
+                .input(gear, MaragingSteel250, 4)
+                .input(gearSmall, Stellite, 16)
+                .input(cableGtQuadruple, VanadiumGallium, 16)
                 .fluidInputs(KaptonK.getFluid(L * 32))
                 .fluidInputs(Polybenzimidazole.getFluid(L * 16))
                 .fluidInputs(Polyetheretherketone.getFluid(L * 16))
@@ -843,10 +878,12 @@ public class KeQingNET {
 
         //  Mega Chemical Reactor
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(CIRCUIT_GOOD_IV,8)
                 .input(frameGt, MARM200Steel, 16)
                 .inputs(LARGE_CHEMICAL_REACTOR.getStackForm(16))
-                .input(circuit, MarkerMaterials.Tier.UHV, 16)
-                .input(CIRCUIT_GOOD_IV,8)
+                .input(circuit, MarkerMaterials.Tier.UHV,4)
+                .input(circuit, MarkerMaterials.Tier.UV,16)
+                .input(circuit, MarkerMaterials.Tier.ZPM,32)
                 .input(plateDouble, HMS1J79Alloy, 4)
                 .input(plateDouble, IncoloyDS, 4)
                 .input(gear, Inconel625, 4)
@@ -868,10 +905,12 @@ public class KeQingNET {
 
         //  Mega Alloy Blast Smelter
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(CIRCUIT_GOOD_IV,8)
                 .input(frameGt, AusteniticStainlessSteel904L, 16)
                 .inputs(ALLOY_BLAST_SMELTER.getStackForm(16))
-                .input(circuit, MarkerMaterials.Tier.UHV, 16)
-                .input(CIRCUIT_GOOD_IV,8)
+                .input(circuit, MarkerMaterials.Tier.UHV,4)
+                .input(circuit, MarkerMaterials.Tier.UV,16)
+                .input(circuit, MarkerMaterials.Tier.ZPM,32)
                 .input(plateDouble, HSLASteel, 4)
                 .input(plateDouble, HastelloyC59, 4)
                 .input(gear, HY1301, 4)
@@ -895,7 +934,9 @@ public class KeQingNET {
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(frameGt, AusteniticStainlessSteel904L, 16)
                 .inputs(BLAZING_BLAST_FURNACE.getStackForm(16))
-                .input(circuit, MarkerMaterials.Tier.UHV, 16)
+                .input(circuit, MarkerMaterials.Tier.UHV,4)
+                .input(circuit, MarkerMaterials.Tier.UV,16)
+                .input(circuit, MarkerMaterials.Tier.ZPM,32)
                 .input(CIRCUIT_GOOD_IV,8)
                 .input(plateDouble, HSLASteel, 4)
                 .input(plateDouble, HastelloyC59, 4)
@@ -920,7 +961,9 @@ public class KeQingNET {
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(frameGt, Adamantium,8)
                 .input(plate, Neutronium, 16)
-                .input(circuit, Tier.UHV,32)
+                .input(circuit, MarkerMaterials.Tier.UHV,4)
+                .input(circuit, MarkerMaterials.Tier.UV,16)
+                .input(circuit, MarkerMaterials.Tier.ZPM,32)
                 .input(CIRCUIT_GOOD_IV,8)
                 .input(stick, Orichalcum, 32)
                 .input(wireFine, Tritanium, 64)
@@ -943,7 +986,9 @@ public class KeQingNET {
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(frameGt, Tritanium,8)
                 .input(plate, Neutronium, 16)
-                .input(circuit, Tier.UHV,32)
+                .input(circuit, MarkerMaterials.Tier.UHV,4)
+                .input(circuit, MarkerMaterials.Tier.UV,16)
+                .input(circuit, MarkerMaterials.Tier.ZPM,32)
                 .input(CIRCUIT_GOOD_IV,8)
                 .input(stick, Orichalcum, 32)
                 .input(gearSmall, Duranium, 64)
@@ -965,7 +1010,9 @@ public class KeQingNET {
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .inputs(GTQTMetaBlocks.KQCC.getItemVariant(ADV_COMPUTER_CASING))
-                .input(circuit, Tier.UHV,32)
+                .input(circuit, MarkerMaterials.Tier.UHV,4)
+                .input(circuit, MarkerMaterials.Tier.UV,16)
+                .input(circuit, MarkerMaterials.Tier.ZPM,32)
                 .input(CIRCUIT_GOOD_IV,8)
                 .input(stick, Orichalcum, 32)
                 .input(ring, Tritanium, 64)

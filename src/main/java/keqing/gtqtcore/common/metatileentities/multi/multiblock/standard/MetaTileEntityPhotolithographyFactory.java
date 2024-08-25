@@ -1,6 +1,9 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
 import codechicken.lib.raytracer.CuboidRayTraceResult;
+import codechicken.lib.render.CCRenderState;
+import codechicken.lib.render.pipeline.IVertexOperation;
+import codechicken.lib.vec.Matrix4;
 import gregtech.api.capability.GregtechCapabilities;
 import gregtech.api.capability.IEnergyContainer;
 import gregtech.api.capability.IMultipleTankHandler;
@@ -19,6 +22,7 @@ import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.util.GTTransferUtils;
 import gregtech.client.renderer.ICubeRenderer;
+import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.TooltipHelper;
 import gregtech.common.blocks.BlockGlassCasing;
 import gregtech.common.blocks.MetaBlocks;
@@ -289,7 +293,7 @@ public class MetaTileEntityPhotolithographyFactory extends MetaTileEntityBaseWit
     @SideOnly(Side.CLIENT)
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
-        return GTQTTextures.IRIDIUM_CASING;
+        return GTQTTextures.NQ_CASING;
     }
 
     @Override
@@ -362,6 +366,19 @@ public class MetaTileEntityPhotolithographyFactory extends MetaTileEntityBaseWit
                 .where(' ', any())
                 .build();
     }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
+        super.renderMetaTileEntity(renderState, translation, pipeline);
+        this.getFrontOverlay().renderOrientedState(renderState, translation, pipeline, getFrontFacing(), true,
+                isStructureFormed());
+    }
+    @SideOnly(Side.CLIENT)
+    @Override
+    protected ICubeRenderer getFrontOverlay() {
+        return Textures.DATA_BANK_OVERLAY;
+    }
     @Override
     public boolean hasMufflerMechanics() {
         return false;
@@ -376,15 +393,15 @@ public class MetaTileEntityPhotolithographyFactory extends MetaTileEntityBaseWit
     }
 
     private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.TURBINE_CASING.getState(GTQTTurbineCasing.TurbineCasingType.IRIDIUM_CASING);
+        return GTQTMetaBlocks.TURBINE_CASING.getState(GTQTTurbineCasing.TurbineCasingType.NQ_TURBINE_CASING);
     }
 
     private static IBlockState getFrameState() {
-        return MetaBlocks.FRAMES.get(Materials.Naquadah).getBlock(Materials.Naquadah);
+        return MetaBlocks.FRAMES.get(Materials.Naquadria).getBlock(Materials.Naquadria);
     }
 
     private static IBlockState getGlassState() {
-        return MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.LAMINATED_GLASS);
+        return MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.FUSION_GLASS);
     }
     @Nonnull
     @Override

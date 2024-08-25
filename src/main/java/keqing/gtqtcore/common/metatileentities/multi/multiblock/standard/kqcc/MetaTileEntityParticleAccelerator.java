@@ -297,9 +297,10 @@ public class MetaTileEntityParticleAccelerator extends GTQTRecipeMapMultiblockCo
                     .aisle("                    CAADAAC                    ", "                AAAAA     AAAAAeeeeeeeeeeeeeeee", "              AAAAAGGGGGGGGGAAAAAiiiiiiiiiiiiie", "              AAGGGGGGGGGGGGGGGAA             e", "              AAAAAGGGGGGGGGAAAAAiiiiiiiiiiiiie", "                AAAAA     AAAAAeeeeeeeeeeeeeeee", "                    CAADAAC                    ")
                     .aisle("                    CADDDAC                    ", "                   AA     AAeeeeeeeeeeeeeeeeeee", "                AAAAA     AAAAAiiiiiiiiiiiiiiie", "                AAAGGGGGGGGGAAAiiiiiiiiiiiiiiie", "                AAAAA     AAAAAiiiiiiiiiiiiiiie", "                   AA     AAeeeeeeeeeeeeeeeeeee", "                    CADDDAC                    ")
                     .aisle("                                               ", "                    CADDDAC                    ", "                   AA     AAeeeeeeeeeeeeeeeeeee", "                   AA     AAeeeeeeeeeeeeeeeeeee", "                   AA     AAeeeeeeeeeeeeeeeeeee", "                    CADDDAC                    ", "                                               ")
-                    .aisle("                                               ", "                                               ", "                   A XYZWO A                   ", "                   A AABTA A                   ", "                   A AAAAA A                   ", "                                               ", "                                               ")
+                    .aisle("                                               ", "                                               ", "                   A XYZWO A                   ", "                   ALAABTALA                   ", "                   A AAAAA A                   ", "                                               ", "                                               ")
 
                     .where('B', GTQTMetaTileEntities.PARTICLE_ACCELERATOR, EnumFacing.SOUTH)
+                    .where('L', GTQTMetaTileEntities.PARTICLE_ACCELERATOR_IO[0], EnumFacing.SOUTH)
                     .where('A', getCasingState())
                     .where('C', getFrameState())
                     .where('D', getGlassState())

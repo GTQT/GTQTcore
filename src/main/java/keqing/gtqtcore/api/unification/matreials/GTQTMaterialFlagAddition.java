@@ -9,6 +9,7 @@ import gregtech.api.unification.material.properties.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.info.MaterialFlags.*;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.Plutonium244;
 import static keqing.gtqtcore.api.unification.material.info.EPMaterialFlags.*;
 
@@ -20,6 +21,43 @@ public class GTQTMaterialFlagAddition {
         {
             materials.addFlags(GENERATE_FOIL,GENERATE_DENSE,GENERATE_FINE_WIRE,GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_RING, GENERATE_ROUND, GENERATE_BOLT_SCREW, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR,GENERATE_ROTOR);
         }
+        OreProperty oreProp = Molybdenite.getProperty(PropertyKey.ORE);
+        oreProp.setDirectSmeltResult(null);
+
+        oreProp = LeanGoldSulphide.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Copper,Iron,Sulfur);
+        oreProp.setWashedIn(Mercury);
+        oreProp.setDirectSmeltResult(Gold);
+
+        oreProp = RichGoldSulphide.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Copper,Iron,Sulfur);
+        oreProp.setWashedIn(Mercury);
+        oreProp.setDirectSmeltResult(Gold);
+
+        oreProp = Pyrargyrite.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Copper,Iron,Antimony);
+        oreProp.setWashedIn(SodiumPersulfate);
+        oreProp.setDirectSmeltResult(Silver);
+
+        oreProp = Zincantimonygalvanite.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Zinc,Sulfur,Tin);
+        oreProp.setWashedIn(SodiumPersulfate);
+        oreProp.setDirectSmeltResult(Silver);
+
+        oreProp = Crocoite.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Lead,Chromite,Silver);
+        oreProp.setWashedIn(SodiumPersulfate);
+        oreProp.setDirectSmeltResult(Lead);
+
+        oreProp = Amblygonite.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Alumina,Phosphate,Sulfur);
+        oreProp.setWashedIn(SodiumPersulfate);
+        oreProp.setDirectSmeltResult(Lithium);
+
+        oreProp = Ulexite.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Borax,Calcium,Calcium);
+        oreProp.setWashedIn(SodiumPersulfate);
+        oreProp.setDirectSmeltResult(Sodium);
         //  Coils
         //  Motor coils
         //  Copper (LV), Cupronickel (MV), Electrum (HV), Kanthal (EV),
@@ -262,8 +300,7 @@ public class GTQTMaterialFlagAddition {
         Tantalite.addFlags(DISABLE_DECOMPOSITION);
 
         Molybdenite.addFlags(DISABLE_DECOMPOSITION);
-        OreProperty oreProp = Molybdenite.getProperty(PropertyKey.ORE);
-        oreProp.setDirectSmeltResult(null);
+
         Powellite.addFlags(DISABLE_DECOMPOSITION);
         Wulfenite.addFlags(DISABLE_DECOMPOSITION);
 

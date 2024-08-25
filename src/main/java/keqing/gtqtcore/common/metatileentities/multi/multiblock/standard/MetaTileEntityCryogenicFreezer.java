@@ -248,7 +248,7 @@ public class MetaTileEntityCryogenicFreezer extends RecipeMapMultiblockControlle
                 resultOverclock[1] = 4 * resultOverclock[1] / 3;
             } else {
                 // each coil above kanthal (coilTier = 1) is 50% faster
-                resultOverclock[1] = resultOverclock[1] * 2 / (coilTier + 1);
+                resultOverclock[1] = resultOverclock[1] * 2 / coilTier;
             }
 
             resultOverclock[1] = Math.max(1, resultOverclock[1]);
@@ -261,7 +261,7 @@ public class MetaTileEntityCryogenicFreezer extends RecipeMapMultiblockControlle
 
 
         public void setMaxProgress(int maxProgress) {
-            this.maxProgressTime = maxProgressTime/16;
+            this.maxProgressTime = maxProgressTime/8;
         }
 
         @Override
@@ -271,8 +271,8 @@ public class MetaTileEntityCryogenicFreezer extends RecipeMapMultiblockControlle
 
         @Override
         protected void updateRecipeProgress() {
-            if (canRecipeProgress && drawEnergy(recipeEUt/16, true)) {
-                drawEnergy(recipeEUt/16, false);
+            if (canRecipeProgress && drawEnergy(recipeEUt/8, true)) {
+                drawEnergy(recipeEUt/8, false);
                 IMultipleTankHandler inputTank = freezer.getInputFluidInventory();
                 if (GELID_STACK.isFluidStackIdentical(inputTank.drain(GELID_STACK, false))) {
                     inputTank.drain(GELID_STACK, true);
@@ -281,7 +281,7 @@ public class MetaTileEntityCryogenicFreezer extends RecipeMapMultiblockControlle
                     }
                 }
                 else return;
-                drawEnergy(recipeEUt/16, false);
+                drawEnergy(recipeEUt/8, false);
             }
         }
     }

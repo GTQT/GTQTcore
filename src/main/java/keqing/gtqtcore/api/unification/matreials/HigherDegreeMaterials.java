@@ -45,7 +45,7 @@ public class HigherDegreeMaterials {
 
         //贫硫化金矿石
         GTQTMaterials.LeanGoldSulphide= new Material.Builder(getMaterialsId(), gregtechId("lean_gold_sulphide"))
-                .ore()
+                .ore(1,1)
                 .dust().fluid()
                 .color(0x8B8B00)
                 .flags(DISABLE_DECOMPOSITION)
@@ -72,14 +72,14 @@ public class HigherDegreeMaterials {
 
         // 深红银矿
         GTQTMaterials.Pyrargyrite= new Material.Builder(getMaterialsId(), gregtechId("pyrargyrite"))
-                .ore()
+                .ore(true)
                 .dust().fluid()
                 .color(0x8B4726)
                 .components(Silver, 3,Antimony,1,Sulfur,3)
                 .build();
         // 锌锑方辉银矿
         GTQTMaterials.Zincantimonygalvanite= new Material.Builder(getMaterialsId(), gregtechId("zincantimonygalvanite"))
-                .ore()
+                .ore(true)
                 .dust().fluid()
                 .color(0x8B2252)
                 .components(Silver, 2,Zinc,1,Sulfur,2,Oxygen,1)
@@ -93,7 +93,7 @@ public class HigherDegreeMaterials {
                 .build();
         // 冰晶石
         GTQTMaterials.Cryolite= new Material.Builder(getMaterialsId(), gregtechId("cryolite"))
-                .ore().dust().fluid()
+                .ore(true).dust().fluid()
                 .color(0x98F5FF)
                 .components(Sodium,3,Aluminium,1,Fluorine,6)
                 .build();
@@ -110,7 +110,7 @@ public class HigherDegreeMaterials {
 
         // 琥珀
         GTQTMaterials.Amber= new Material.Builder(getMaterialsId(), gregtechId("amber"))
-                .ore()
+                .ore(true)
                 .dust().fluid()
                 .color(0x8B4C39)
                 .components(Carbon,10,Hydrogen,16,Oxygen,1)
@@ -118,17 +118,17 @@ public class HigherDegreeMaterials {
 
         //方钍石
         GTQTMaterials.Thorianite= new Material.Builder(getMaterialsId(), gregtechId("thorianite"))
-                .ore().dust()
-                .color(0x8B4C39)
+                .ore(true).dust()
+                .color(0x8FBC8F)
                 .flags(DISABLE_DECOMPOSITION)
                 .components(Thorium,1,Oxygen,2)
                 .build();
 
         //氧化硅岩
         GTQTMaterials.Yanghuaguiyan= new Material.Builder(getMaterialsId(), gregtechId("yanghuaguiyan"))
-                .ore().dust()
+                .ore(true).dust()
                 .flags(DISABLE_DECOMPOSITION)
-                .color(0x8B4C39)
+                .color(0x636363)
                 .components(Naquadah,1,Oxygen,2)
                 .build();
 
