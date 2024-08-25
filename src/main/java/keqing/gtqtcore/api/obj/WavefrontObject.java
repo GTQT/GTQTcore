@@ -611,7 +611,8 @@ public class WavefrontObject implements IModelCustom {
         public void render(Tessellator tessellator, MaterialLibrary materialLibrary) {
             if (this.faces.size() > 0) {
                 boolean hasTexture = false;
-                this.material = materialLibrary.get(materialName);
+                if(materialName!=null)
+                    this.material = materialLibrary.get(materialName);
                 // 检查材质和材质库
                 if (this.material != null && materialLibrary != null) {
                     String texturePath = materialLibrary.getTexture(this.material.Name, "diffuse");
