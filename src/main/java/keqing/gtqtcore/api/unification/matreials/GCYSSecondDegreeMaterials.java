@@ -69,7 +69,7 @@ public class GCYSSecondDegreeMaterials {
                 .build();
 
         AmmoniumNitrate = new Material.Builder(6015, gregtechId("ammonium_nitrate"))
-                .dust().fluid()
+                .fluid()
                 .color(0xA59ED7)
                 .iconSet(MaterialIconSet.METALLIC)
                 .components(Ammonia, 1, NitricAcid, 1)

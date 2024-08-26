@@ -28,6 +28,7 @@ import keqing.gtqtcore.api.unification.GTQTMaterials;
 import keqing.gtqtcore.api.unification.ore.GTQTOrePrefix;
 import keqing.gtqtcore.common.items.GTQTMetaItems;
 import keqing.gtqtcore.common.items.metaitems.GTQTMetaToolItems;
+import keqing.gtqtcore.loaders.recipes.handlers.BouleRecipeHandler;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 
@@ -52,6 +53,7 @@ public class GTQTRecipes {
     }
 
     public static void registerTool(){
+        OrePrefix.gem.addProcessingHandler(PropertyKey.GEM, BouleRecipeHandler::processCrystallizer);
         plate.addProcessingHandler(PropertyKey.TOOL, GTQTRecipes::gcmTool);
         milled.addProcessingHandler(PropertyKey.ORE,GTQTRecipes::processMilled);
         fcrop.addProcessingHandler(PropertyKey.INGOT,GTQTRecipes::processCrops);

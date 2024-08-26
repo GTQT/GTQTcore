@@ -1,6 +1,7 @@
 package keqing.gtqtcore.api.unification.matreials;
 
 import gregtech.api.GTValues;
+import gregtech.api.fluids.FluidBuilder;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.info.MaterialIconSet;
 import gregtech.api.unification.material.properties.BlastProperty;
@@ -162,6 +163,7 @@ public class GCYSFirstDegreeMaterials {
 
         PotassiumHydroxide = new Material.Builder(3520, gregtechId("potassium_hydroxide"))
                 .dust()
+                .liquid(new FluidBuilder().temperature(633))
                 .color(0xFA9849)
                 .flags(DISABLE_DECOMPOSITION)
                 .components(Potassium, 1, Oxygen, 1, Hydrogen, 1)
@@ -699,8 +701,8 @@ public class GCYSFirstDegreeMaterials {
                 .ingot().fluid()
                 .color(0x05090C)
                 .iconSet(MaterialIconSet.BRIGHT)
-                .flags(DISABLE_DECOMPOSITION, NO_WORKING, NO_SMASHING, NO_SMELTING,GENERATE_ROUND, GENERATE_FRAME, GENERATE_ROTOR, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_BOLT_SCREW, GENERATE_PLATE, GENERATE_SPRING_SMALL, GENERATE_SPRING, GENERATE_RING)
-                .cableProperties(GTValues.V[GTValues.UEV], 8, 6)
+                .cableProperties(V[UEV], 8, 6, false)
+                .flags(DISABLE_DECOMPOSITION, NO_WORKING, NO_SMASHING, NO_SMELTING,GENERATE_ROUND,GENERATE_FINE_WIRE, GENERATE_FRAME, GENERATE_ROTOR, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_BOLT_SCREW, GENERATE_PLATE, GENERATE_SPRING_SMALL, GENERATE_SPRING, GENERATE_RING)
                 .components(Carbon, 48)
                 .build()
                 .setFormula("CNT", false);

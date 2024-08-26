@@ -205,7 +205,8 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         ESCHERICHIA_CULTURE = addItem(283, "eschericia.culture").setCreativeTabs(CommonProxy.GTQTCore_BIO);
         BIFIDOBACTERIUM_CULTURE = addItem(284, "bifidobacterium.culture").setCreativeTabs(CommonProxy.GTQTCore_BIO);
         BREVIBACTERIUM_CULTURE = addItem(285, "brevibacterium.culture").setCreativeTabs(CommonProxy.GTQTCore_BIO);
-
+        BIO_CELL = this.addItem(286, "component.gooware.bio_cell").setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        BIO_DISH = this.addItem(287, "component.gooware.bio_dish").setCreativeTabs(CommonProxy.GTQTCore_BIO);
         //快乐模具
         MOLD_GAS=this.addItem(300, "mold.gas").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         MOLD_MOTOR=this.addItem(301, "mold.motor").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
@@ -277,7 +278,7 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         GRAPHENE_ALIGNED_CNT = this.addItem(421, "cnt.graphene_aligned").setCreativeTabs(CommonProxy.GTQTCore_CH);
 
         BORON_NITRIDE_GRINDER = this.addItem(422, "grinder.boron_nitride").setCreativeTabs(CommonProxy.GTQTCore_HP);
-        VACUUM_TUBE_COMPONENT = this.addItem(423, "component.vacuum_tube").setCreativeTabs(CommonProxy.GTQTCore_HP);
+        VACUUM_TUBE_COMPONENTS = this.addItem(423, "component.vacuum_tube").setCreativeTabs(CommonProxy.GTQTCore_HP);
         SEPARATION_ELECTROMAGNET = this.addItem(424, "separation_electromagnet").setCreativeTabs(CommonProxy.GTQTCore_HP);
         PROTONATED_FULLERENE_SIEVING_MATRIX = this.addItem(425, "protonated_fullerene_sieving_matrix").setCreativeTabs(CommonProxy.GTQTCore_CH);
         SATURATED_FULLERENE_SIEVING_MATRIX = this.addItem( 426, "saturated_fullerene_sieving_matrix").setCreativeTabs(CommonProxy.GTQTCore_CH);
@@ -291,6 +292,7 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         MANIFOLD_OSCILLATORY_POWER_CELL = addItem(434, "component.cosmic.manifold_oscillatory_power_cell").setCreativeTabs(CommonProxy.GTQTCore_HP);
         SCINTILLATOR = addItem(435, "scintillator").setCreativeTabs(CommonProxy.GTQTCore_GD);
         SCINTILLATOR_CRYSTAL = addItem(436, "scintillator_crystal").setCreativeTabs(CommonProxy.GTQTCore_GD);
+
 
         //440
         CIRCUIT_GOOD_I = addItem(440, "circuit.good_i").setCreativeTabs(CommonProxy.GTQTCore_HP);
@@ -394,18 +396,6 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         GENERAL_CIRCUIT_OpV = this.addItem(578, "general_circuit.opv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.OpV).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         GENERAL_CIRCUIT_MAX = this.addItem(579, "general_circuit.max").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.MAX).setCreativeTabs(CommonProxy.GTQTCore_TAB);
 
-        // Primitive Circuit Components: ID 50-59
-        VACUUM_TUBE_COMPONENTS = this.addItem(600, "vacuum_tube.components").setCreativeTabs(CommonProxy.GTQTCore_TAB);
-
-        // Electronic Circuit Components: ID 60-69
-
-
-        // Micro Circuit Components: ID 70-89
-
-
-        // Nano Circuit Components: ID 90-109
-
-
         //  ID 206-211: High Tier Boule and Wafers
         EUROPIUM_BOULE = this.addItem(610, "boule.europium").setCreativeTabs(CommonProxy.GTQTCore_GD);
         EUROPIUM_WAFER = this.addItem(611, "wafer.europium").setCreativeTabs(CommonProxy.GTQTCore_GD);
@@ -414,7 +404,7 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         DUBNIUM_BOULE = this.addItem(614, "boule.dubnium").setCreativeTabs(CommonProxy.GTQTCore_GD);
         DUBNIUM_WAFER = this.addItem(615, "wafer.dubnium").setCreativeTabs(CommonProxy.GTQTCore_GD);
 
-        // Crystal Circuit Components: ID 130-159
+        // Optical SoC Components (Special Optical Crystal Boule and Wafers)
         STRONTIUM_CARBONATE_BOHRIUM_BOULE = this.addItem(620, "boule.strontium_carbonate.bohrium").setCreativeTabs(CommonProxy.GTQTCore_GD);
         STRONTIUM_CARBONATE_BOHRIUM_WAFER = this.addItem(621, "wafer.strontium_carbonate.bohrium").setCreativeTabs(CommonProxy.GTQTCore_GD);
         STRONTIUM_CARBONATE_OPTICAL_WAFER = this.addItem(622, "component.optical.strontium_carbonate_wafer").setCreativeTabs(CommonProxy.GTQTCore_GD);
@@ -434,24 +424,38 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         INTRAVITAL_SOC = this.addItem(641, "component.gooware.intravital_soc").setCreativeTabs(CommonProxy.GTQTCore_BIO);
         OPTICAL_IMC_BOARD = this.addItem(642, "component.optical.optical_imc_board").setCreativeTabs(CommonProxy.GTQTCore_GD);
         PHOTOELECTRON_SOC = this.addItem(643, "component.optical.photoelectron_soc").setCreativeTabs(CommonProxy.GTQTCore_GD);
-
-        // Wetware Circuit Components: ID 160-179
-
+        WETWARE_CRYSTAL_CHIP = this.addItem(644, "component.wetware.crystal_chip").setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        RICH_BACTERIA_SOC = this.addItem(645, "component.wetware.rich_bacteria_soc").setCreativeTabs(CommonProxy.GTQTCore_BIO);
 
         // Gooware Circuit Components: ID 180-199
-        BZ_REACTION_CHAMBER = this.addItem(680, "reaction_chamber.bz").setCreativeTabs(CommonProxy.GTQTCore_CH);
-        NONLINEAR_CHEMICAL_OSCILLATOR = this.addItem(681, "nonlinear_chemical_oscillator").setCreativeTabs(CommonProxy.GTQTCore_CH);
+        BZ_REACTION_CHAMBER = this.addItem(650, "reaction_chamber.bz").setCreativeTabs(CommonProxy.GTQTCore_CH);
+        NONLINEAR_CHEMICAL_OSCILLATOR = this.addItem(651, "nonlinear_chemical_oscillator").setCreativeTabs(CommonProxy.GTQTCore_CH);
 
         //  Cosmic Components
-        COSMIC_INFORMATION_MODULE = this.addItem(682, "component.cosmic.information_module").setCreativeTabs(CommonProxy.GTQTCore_HP);
-        HOLOGRAPHIC_INFORMATION_IMC = this.addItem(683, "component.cosmic.holographic_imc").setCreativeTabs(CommonProxy.GTQTCore_HP);
+        COSMIC_INFORMATION_MODULE = this.addItem(655, "component.cosmic.information_module").setCreativeTabs(CommonProxy.GTQTCore_HP);
+        HOLOGRAPHIC_INFORMATION_IMC = this.addItem(656, "component.cosmic.holographic_imc").setCreativeTabs(CommonProxy.GTQTCore_HP);
 
         //  Supracausal Components
-        SPACETIME_CONDENSER = this.addItem(684, "component.supracausal.spacetime_condenser").setCreativeTabs(CommonProxy.GTQTCore_HP);
-        LIGHT_CONE_MODULE = this.addItem(685, "component.supracausal.light_cone_module").setCreativeTabs(CommonProxy.GTQTCore_HP);
+        SPACETIME_CONDENSER = this.addItem(660, "component.supracausal.spacetime_condenser").setCreativeTabs(CommonProxy.GTQTCore_HP);
+        LIGHT_CONE_MODULE = this.addItem(661, "component.supracausal.light_cone_module").setCreativeTabs(CommonProxy.GTQTCore_HP);
+        //  ID 341-342: Pseudo Crafting Tools of Gooware SoC Processing
+        ULTRASONIC_HOMOGENIZER = this.addItem(665, "ultrasonic_homogenizer").setCreativeTabs(CommonProxy.GTQTCore_CH);
+        PIEZOELECTRIC_CRYSTAL = this.addItem(666, "piezoelectric_crystal").setCreativeTabs(CommonProxy.GTQTCore_CH);
+        COSMIC_FABRIC = this.addItem(667, "cosmic_fabric").setCreativeTabs(CommonProxy.GTQTCore_CH);
+        MEMORY_FOAM_PLATE = this.addItem(668, "memory_foam_plate").setCreativeTabs(CommonProxy.GTQTCore_CH);
+        FULLERENE_FIBER = this.addItem(669, "highly_insulating_fullerene_foil").setCreativeTabs(CommonProxy.GTQTCore_CH);
+        //  ID 122-130: Spintronic SoC Components
+        RYDBERG_SPINORIAL_ASSEMBLY = this.addItem(670, "component.spintronic.rydberg_spinorial_assembly").setCreativeTabs(CommonProxy.GTQTCore_HP);
+        CRYOGENIC_INTERFACE = this.addItem(671, "component.spintronic.cryogenic_interface").setCreativeTabs(CommonProxy.GTQTCore_HP);
+        EXCITATION_MAINTAINER = this.addItem(672, "component.spintronic.excitation_maintainer").setCreativeTabs(CommonProxy.GTQTCore_HP);
+        X_RAY_WAVEGUIDE = this.addItem(673, "component.spintronic.x_ray_waveguide").setCreativeTabs(CommonProxy.GTQTCore_HP);
+        ELECTRON_SOURCE = this.addItem(674, "component.spintronic.electron_source").setCreativeTabs(CommonProxy.GTQTCore_HP);
+        X_RAY_LASER = this.addItem(675, "component.spintronic.x_ray_laser").setCreativeTabs(CommonProxy.GTQTCore_HP);
+        X_RAY_MIRROR = this.addItem(676, "component.spintronic.x_ray_mirror").setCreativeTabs(CommonProxy.GTQTCore_HP);
+        MICROFOCUS_X_RAY_TUBE = this.addItem(677, "component.spintronic.microfocus_x_ray_tube").setCreativeTabs(CommonProxy.GTQTCore_HP);
+        EXOTIC_SOC = this.addItem(678, "component.spintronic.exotic_soc").setCreativeTabs(CommonProxy.GTQTCore_HP);
 
         // Optical Circuit Components: ID 200-219
-        PHASE_CHANGE_MEMORY = this.addItem(700, "plate.phase_change_memory").setCreativeTabs(CommonProxy.GTQTCore_GD);
         OPTICAL_FIBER = this.addItem(701, "optical_fiber").setCreativeTabs(CommonProxy.GTQTCore_GD);
         DIELECTRIC_MIRROR = this.addItem(702, "dielectric_mirror").setCreativeTabs(CommonProxy.GTQTCore_GD);
         EMPTY_LASER_ASSEMBLY = this.addItem(703, "laser.assembly.empty").setCreativeTabs(CommonProxy.GTQTCore_GD);
@@ -464,13 +468,10 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         ND_YAG_LASER = this.addItem(710, "laser.nd_yag").setCreativeTabs(CommonProxy.GTQTCore_GD);
         OPTICAL_LASER_CONTROL_UNIT = this.addItem(711, "optical_laser_control_unit").setCreativeTabs(CommonProxy.GTQTCore_GD);
         // Spintronic Circuit Components: ID 220-239
-        SPIN_TRANSFER_TORQUE_MEMORY = this.addItem(720, "plate.spin_transfer_torque_memory").setCreativeTabs(CommonProxy.GTQTCore_HP);
         TOPOLOGICAL_INSULATOR_TUBE = this.addItem(721, "tube.topological_insulator").setCreativeTabs(CommonProxy.GTQTCore_HP);
         BOSE_EINSTEIN_CONDENSATE_CONTAINMENT_UNIT = this.addItem(722, "containment_unit.bose_einstein_condensate").setCreativeTabs(CommonProxy.GTQTCore_HP);
         BOSE_EINSTEIN_CONDENSATE = this.addItem(723, "bose_einstein_condensate").setCreativeTabs(CommonProxy.GTQTCore_HP);
         ESR_COMPUTATION_UNIT = this.addItem(724, "esr_computation_unit").setCreativeTabs(CommonProxy.GTQTCore_HP);
-
-
         //  ID 750: Wrap Circuit Boards
         WRAP_BASIC_CIRCUIT_BOARD = this.addItem(750, "wrap.circuit_board.basic")
                 .setCreativeTabs(CommonProxy.GTQTCore_TAB);
@@ -610,22 +611,37 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         POOR_THORIUM_ROD_QUAD = this.addItem(811, "poor_thorium_rod_quad").setCreativeTabs(CommonProxy.GTQTCore_NC);
 
         // Power Components: ID 356-379
-        NANO_POWER_IC_WAFER = this.addItem(856, "wafer.nano_power_integrated_circuit").setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        PICO_POWER_IC_WAFER = this.addItem(857, "wafer.pico_power_integrated_circuit").setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        FEMTO_POWER_IC_WAFER = this.addItem(858, "wafer.femto_power_integrated_circuit").setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        ATTO_PIC_WAFER = this.addItem(859, "wafer.atto_pic").setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        ZEPTO_PIC_WAFER = this.addItem(860, "wafer.zepto_pic").setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        UHASOC_WAFER = this.addItem(861, "wafer.uhasoc").setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        OPTICAL_NOR_MEMORY_CHIP = this.addItem(862, "wafer.chip.optical_nor_memory_chip").setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        NANO_POWER_IC_WAFER = this.addItem(840, "wafer.nano_power_integrated_circuit").setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        PICO_POWER_IC_WAFER = this.addItem(841, "wafer.pico_power_integrated_circuit").setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        FEMTO_POWER_IC_WAFER = this.addItem(842, "wafer.femto_power_integrated_circuit").setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        ATTO_PIC_WAFER = this.addItem(843, "wafer.atto_pic").setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        ZEPTO_PIC_WAFER = this.addItem(844, "wafer.zepto_pic").setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        UHASOC_WAFER = this.addItem(845, "wafer.uhasoc").setCreativeTabs(CommonProxy.GTQTCore_TAB);
 
-        NANO_POWER_IC = this.addItem(865, "plate.nano_power_integrated_circuit").setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        PICO_POWER_IC = this.addItem(866, "plate.pico_power_integrated_circuit").setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        FEMTO_POWER_IC = this.addItem(867, "plate.femto_power_integrated_circuit").setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        ATTO_PIC_CHIP = this.addItem(868, "wafer.chip.atto_pic").setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        ZEPTO_PIC_CHIP = this.addItem(869, "wafer.chip.zepto_pic").setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        UHASOC_CHIP = this.addItem(870, "wafer.chip.uhasoc").setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        SPINTRONIC_NAND_MEMORY_CHIP = this.addItem(871, "wafer.chip.spintronic_nand_memory_chip").setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        RETICLE_NANO_POWER_IC_WAFER = this.addItem(850, "reticle.nano_power_integrated_circuit").setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        RETICLE_PICO_POWER_IC_WAFER = this.addItem(851, "reticle.pico_power_integrated_circuit").setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        RETICLE_FEMTO_POWER_IC_WAFER = this.addItem(852, "reticle.femto_power_integrated_circuit").setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        RETICLE_ATTO_PIC_WAFER = this.addItem(853, "reticle.atto_pic").setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        RETICLE_ZEPTO_PIC_WAFER = this.addItem(854, "reticle.zepto_pic").setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        RETICLE_UHASOC_WAFER = this.addItem(855, "reticle.uhasoc").setCreativeTabs(CommonProxy.GTQTCore_TAB);
 
+        NANO_POWER_IC = this.addItem(860, "plate.nano_power_integrated_circuit").setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        PICO_POWER_IC = this.addItem(861, "plate.pico_power_integrated_circuit").setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        FEMTO_POWER_IC = this.addItem(862, "plate.femto_power_integrated_circuit").setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        ATTO_PIC_CHIP = this.addItem(863, "wafer.chip.atto_pic").setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        ZEPTO_PIC_CHIP = this.addItem(864, "wafer.chip.zepto_pic").setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        UHASOC_CHIP = this.addItem(865, "wafer.chip.uhasoc").setCreativeTabs(CommonProxy.GTQTCore_TAB);
+
+        //  ID 212-219: Special Wafer and Chips for Circuits
+        PHASE_CHANGE_MEMORY = this.addItem(870, "wafer.chip.phase_change_memory").setCreativeTabs(CommonProxy.GTQTCore_HP);
+        OPTICAL_NOR_MEMORY_CHIP = this.addItem(871, "wafer.chip.optical_nor_memory_chip").setCreativeTabs(CommonProxy.GTQTCore_HP);
+        SPIN_TRANSFER_TORQUE_MEMORY = this.addItem(872, "wafer.chip.spin_transfer_torque_memory").setCreativeTabs(CommonProxy.GTQTCore_HP);
+        SPINTRONIC_NAND_MEMORY_CHIP = this.addItem(873, "wafer.chip.spintronic_nand_memory_chip").setCreativeTabs(CommonProxy.GTQTCore_HP);
+        UNTREATED_COSMIC_CPU = this.addItem(874, "wafer.untreated_cosmic_cpu").setCreativeTabs(CommonProxy.GTQTCore_HP);
+        COSMIC_CPU = this.addItem(875, "wafer.cosmic_cpu").setCreativeTabs(CommonProxy.GTQTCore_HP);
+        COSMIC_CPU_CHIP = this.addItem(876, "wafer.chip.cosmic_cpu").setCreativeTabs(CommonProxy.GTQTCore_HP);
+        COSMIC_MEMORY_CHIP = this.addItem(877, "wafer.chip.cosmic_memory").setCreativeTabs(CommonProxy.GTQTCore_HP);
+        SUPRACAUSAL_MEMORY_CHIP = this.addItem(878, "wafer.chip.supracausal_memory").setCreativeTabs(CommonProxy.GTQTCore_HP);
 
         // Circuit Boards: ID 380-419
         GOOWARE_BOARD = this.addItem(894, "board.gooware").setCreativeTabs(CommonProxy.GTQTCore_TAB);
@@ -689,7 +705,6 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         DNA_DECODE_ENCODER = this.addItem(1008, "biological.components.dna_decode_encoder").setCreativeTabs(CommonProxy.GTQTCore_BIO);
         DRAGON_CELL = this.addItem(1009, "dragon_cell").setCreativeTabs(CommonProxy.GTQTCore_BIO);
         PRE_DRAGON_CELL = this.addItem(1010, "pre_dragon_cell").setCreativeTabs(CommonProxy.GTQTCore_BIO);
-
 
         //生物基因模板
         BIO_0= this.addItem(1500, "bio.0").setCreativeTabs(CommonProxy.GTQTCore_DISK);

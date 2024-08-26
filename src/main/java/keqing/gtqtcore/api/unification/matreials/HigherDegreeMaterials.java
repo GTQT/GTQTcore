@@ -10,8 +10,7 @@ import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.info.MaterialFlags.*;
 import static gregtech.api.unification.material.info.MaterialIconSet.*;
 import static gregtech.api.util.GTUtility.gregtechId;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.Adamantium;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.Uranium234;
+import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 
 import gregtech.api.unification.material.Material;
@@ -188,7 +187,7 @@ public class HigherDegreeMaterials {
 
         // 可燃冰
         GTQTMaterials.Gashydrate = new Material.Builder(getMaterialsId(), gregtechId("gashydrate"))
-                .gem(1, 96000).ore(2, 1) // default coal burn time in vanilla
+                .gem(1, 6400).ore(2, 1) // default coal burn time in vanilla
                 .color(0xE0FFFF).iconSet(LIGNITE)
                 .flags(FLAMMABLE, NO_SMELTING, NO_SMASHING, MORTAR_GRINDABLE, EXCLUDE_BLOCK_CRAFTING_BY_HAND_RECIPES,
                         DISABLE_DECOMPOSITION)

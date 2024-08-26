@@ -4,6 +4,10 @@ import gregtech.api.unification.material.Material;
 import keqing.gtqtcore.api.unification.matreials.*;
 
 public class GTQTMaterials {
+    public static Material B27;
+    public static Material CAT;
+    public static Material BFGF;
+    public static Material EGF;
     public static  Material CHES;
     public static  Material THF ;
     public static  Material TRISP;
@@ -756,6 +760,54 @@ public class GTQTMaterials {
     public static Material TransPhenylacryloylChloride;
     public static Material PolyvinylAlcoholVinylalcoholPolymer;
     public static Material Pyridine;
+    public static Material NaquadriaGalliumIndium;
+    public static Material LithiumNiobate;
+    public static Material NiobiumPentachloride;
+    public static Material LuTmYChloridesSolution;
+    public static Material SodiumVanadate;
+    public static Material Carbamide;
+    public static Material LuTmDopedYttriumVanadateDeposition;
+    public static Material LuTmYVO;
+    public static Material AmmoniumFluoride;
+    public static Material AmmoniumDifluoride;
+    public static Material BerylliumDifluoride;
+    public static Material PrHoYNitratesSolution;
+    public static Material PrHoYLF;
+    public static Material UnprocessedNdYAGSolution;
+    public static Material AluminaSolution;
+    public static Material AluminiumNitrate;
+    public static Material NeodymiumDopedYttriumOxide;
+    public static Material ManganeseSulfate;
+    public static Material PotassiumPermanganate;
+    public static Material PotassiumManganate;
+    public static Material AmmoniumCyanate;
+    public static Material Tributylamine;
+    public static Material Dichloromethane;
+    public static Material FluorinatedEthylenePropylene;
+    public static Material LeadZirconateTitanate;
+    public static Material BloodCells;
+    public static Material BloodPlasma;
+    public static Material Biotin;
+    public static Material LinoleicAcid;
+    public static Material Cyclopentadiene;
+    public static Material VitaminA;
+    public static Material BetaIonone;
+    public static Material Citral;
+    public static Material PropargylChloride;
+    public static Material Ethanolamine;
+    public static Material PropargylAlcohol;
+    public static Material ExoticMutagen;
+    public static Material CeLAG;
+    public static Material LithiumCyclopentadienide;
+    public static Material CaliforniumCyclopentadienide;
+    public static Material CaliforniumTrichloride;
+    public static Material FreeElectronGas;
+    public static Material HeavyQuarkDegenerateMatter;
+    public static Material QuantumAlloy;
+    public static Material PolyethyleneTerephthalate;
+    public static Material ParaToluicAcid;
+    public static Material Methylparatoluate;
+    public static Material DimethylTerephthalate;
 
     //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/api/unification/GSMaterials.java
 

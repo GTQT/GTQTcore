@@ -9,6 +9,7 @@ import gregtech.api.fluids.FluidBuilder;
 import gregtech.api.unification.material.properties.BlastProperty;
 import gregtech.api.unification.material.properties.BlastProperty.GasTier;
 import gregtech.api.unification.material.properties.ToolProperty;
+import keqing.gtqtcore.api.unification.GTQTMaterials;
 
 import static gregicality.multiblocks.api.unification.GCYMMaterials.*;
 import static gregtech.api.GTValues.*;
@@ -16,6 +17,7 @@ import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.info.MaterialFlags.*;
 import static gregtech.api.unification.material.info.MaterialIconSet.*;
 import static gregtech.api.util.GTUtility.gregtechId;
+import static keqing.gtqtcore.api.unification.GCYSMaterials.CadmiumSelenide;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 
 public class GTQTMachineCasingMaterials {
@@ -601,6 +603,35 @@ public class GTQTMachineCasingMaterials {
                 .components(StainlessSteel, 5, TungstenCarbide, 5, Nichrome, 5, IncoloyMA956, 5, Germanium, 1, Rutherfordium, 1, Radon, 1)
                 .cableProperties(V[UIV], 64, 64, false)
                 .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_DENSE, GENERATE_FOIL, GENERATE_FINE_WIRE)
+                .build();
+
+        //  12022 Quantum Alloy
+        GTQTMaterials.QuantumAlloy = new Material.Builder(getMaterialsId(), gregtechId("quantum_alloy"))
+                .ingot()
+                .fluid()
+                .color(0x954FE0)
+                .iconSet(BRIGHT)
+                .blast(b -> b
+                        .temp(13501, BlastProperty.GasTier.HIGHEST)
+                        .blastStats(VA[UHV], 1400)
+                        .vacuumStats(VA[LuV], 240))
+                .components(Stellite, 15, CadmiumSelenide, 8, Emerald, 5, Gallium, 5, Americium, 5, Palladium, 5, Bismuth, 5, Germanium, 5)
+                .cableProperties(V[UEV], 32, 0, true)
+                .flags(GENERATE_PLATE, GENERATE_FOIL, GENERATE_FINE_WIRE, GENERATE_ROD)
+                .build();
+
+        //  12036 Fullerene Superconductor
+        FullereneSuperconductor = new Material.Builder(getMaterialsId(), gregtechId("fullerene_superconductor"))
+                .ingot()
+                .fluid()
+                .color(0x8BF743)
+                .iconSet(BRIGHT)
+                .components(TitaniumTungstenCarbide, 16, LanthanumFullereneNanotube, 4, MetastableOganesson, 4, Cinobite, 3, Radium, 2, Astatine, 2)
+                .blast(b -> b
+                        .temp(14960, BlastProperty.GasTier.HIGHEST)
+                        .blastStats(VA[UIV], 560))
+                .cableProperties(V[UIV], 256, 0, true)
+                .flags(GENERATE_PLATE, GENERATE_FOIL, GENERATE_FINE_WIRE)
                 .build();
 
     }

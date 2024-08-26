@@ -40,11 +40,14 @@ public class GTQTCPUHelper {
             NAND_MEMORY_CHIP_WAFER,
             SYSTEM_ON_CHIP_WAFER,
             ADVANCED_SYSTEM_ON_CHIP_WAFER,
-            HIGHLY_ADVANCED_SOC_WAFER
+            HIGHLY_ADVANCED_SOC_WAFER,
+            NANO_POWER_IC_WAFER,
+            PICO_POWER_IC_WAFER,
+            FEMTO_POWER_IC_WAFER,
     };
 
     public static MetaItem.MetaValueItem []wafer={SILICON_WAFER,PHOSPHORUS_WAFER,NAQUADAH_WAFER,EUROPIUM_BOULE,AMERICIUM_BOULE,DUBNIUM_BOULE,NEUTRONIUM_WAFER};
-    static int [][]kind={{1,2},{1,2},{1,2},{1,2},{1,2},{1,2},{2,2},{2,2},{2,3},{2,3},{2,3},{2,3},{2,3},{2,3},{3,3},{4,3}};
+    static int [][]kind={{1,2},{1,2},{1,2},{1,2},{1,2},{1,2},{2,2},{2,2},{2,3},{2,3},{2,3},{2,3},{2,3},{2,3},{3,3},{4,3},{4,4},{4,5},{5,5}};
 
     //public boolean checkWafer(boolean sim) {
     //        var slots = this.getInputInventory().getSlots();

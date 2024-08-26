@@ -540,16 +540,17 @@ public class GTQTMetaTileEntities {
         //KQCC
         KQCC= registerMetaTileEntity(3450, new MetaTileEntityKQCC(gtqtcoreId("kqcc")));
         KQNS=registerMetaTileEntity(3451,new MetaTileEntityKQNetworkSwitch(gtqtcoreId("kqns")));
-        KeQing_NET= registerMetaTileEntity(3452, new MetaTileEntitykeQingNet(gtqtcoreId("keqing_net")));
-        ADV_KQCC= registerMetaTileEntity(3453, new MetaTileEntityADVKQCC(gtqtcoreId("adv_kqcc")));
-        HPCA_SUPER_COMPUTATION_COMPONENT = registerMetaTileEntity(3461, new MetaTileEntityHPCAAdvancedComputation(gtqtcoreId("hpca.super_computation_component"),false));
-        HPCA_ULTIMATE_COMPUTATION_COMPONENT = registerMetaTileEntity(3462, new MetaTileEntityHPCAAdvancedComputation(gtqtcoreId("hpca.ultimate_computation_component"),  true));
-        HPCA_SUPER_COOLER_COMPONENT = registerMetaTileEntity(3464, new MetaTileEntityHPCAAdvancedCooler(gtqtcoreId("hpca.super_cooler_component"), true, false));
-        HPCA_ULTIMATE_COOLER_COMPONENT = registerMetaTileEntity(3465, new MetaTileEntityHPCAAdvancedCooler(gtqtcoreId("hpca.ultimate_cooler_component"),  false, true));
-        MINI_DATE_BANK = registerMetaTileEntity(3466, new MetaTileEntityMiniDataBank(gtqtcoreId("mini_date_bank")));
-        ADV_NETWORK_SWITCH = registerMetaTileEntity(3467, new MetaTileEntityADVNetworkSwitch(gtqtcoreId("adv_network_switch")));
-        ADV_DATE_BANK = registerMetaTileEntity(3468, new MetaTileEntityADVDataBank(gtqtcoreId("adv_date_bank")));
+        ADV_KQCC= registerMetaTileEntity(3452, new MetaTileEntityADVKQCC(gtqtcoreId("adv_kqcc")));
+        MINI_DATE_BANK = registerMetaTileEntity(3453, new MetaTileEntityMiniDataBank(gtqtcoreId("mini_date_bank")));
+        ADV_NETWORK_SWITCH = registerMetaTileEntity(3464, new MetaTileEntityADVNetworkSwitch(gtqtcoreId("adv_network_switch")));
+        ADV_DATE_BANK = registerMetaTileEntity(3455, new MetaTileEntityADVDataBank(gtqtcoreId("adv_date_bank")));
 
+        HPCA_SUPER_COMPUTATION_COMPONENT = registerMetaTileEntity(3460, new MetaTileEntityHPCAAdvancedComputation(gtqtcoreId("hpca.super_computation_component"),false));
+        HPCA_ULTIMATE_COMPUTATION_COMPONENT = registerMetaTileEntity(3461, new MetaTileEntityHPCAAdvancedComputation(gtqtcoreId("hpca.ultimate_computation_component"),  true));
+        HPCA_SUPER_COOLER_COMPONENT = registerMetaTileEntity(3462, new MetaTileEntityHPCAAdvancedCooler(gtqtcoreId("hpca.super_cooler_component"), true, false));
+        HPCA_ULTIMATE_COOLER_COMPONENT = registerMetaTileEntity(3463, new MetaTileEntityHPCAAdvancedCooler(gtqtcoreId("hpca.ultimate_cooler_component"),  false, true));
+
+        KeQing_NET= registerMetaTileEntity(3470, new MetaTileEntitykeQingNet(gtqtcoreId("keqing_net")));
         //GCYS
         INDUSTRIAL_DRILL = registerMetaTileEntity(3500, new MetaTileEntityIndustrialDrill(gtqtcoreId("industrial_drill")));
         CATALYTIC_REFORMER = registerMetaTileEntity(3501, new MetaTileEntityCatalyticReformer(gtqtcoreId("catalytic_reformer")));

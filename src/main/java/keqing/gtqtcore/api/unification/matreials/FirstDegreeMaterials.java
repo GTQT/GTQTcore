@@ -11,6 +11,7 @@ import gregtech.api.unification.material.properties.ToolProperty;
 import gregtech.api.util.GTUtility;
 import keqing.gtqtcore.api.unification.GTQTElements;
 import keqing.gtqtcore.api.unification.GTQTMaterials;
+import net.minecraft.util.text.TextFormatting;
 
 import static gregicality.multiblocks.api.unification.GCYMMaterials.IncoloyMA956;
 import static gregtech.api.GTValues.*;
@@ -3655,13 +3656,6 @@ public class FirstDegreeMaterials {
                 .build()
                 .setFormula("MgSO4", true);
 
-        StrontiumCarbonate = new Material.Builder(getMaterialsId(), gregtechId("strontium_carbonate"))
-                .dust()
-                .color(0xcacac8)
-                .iconSet(ROUGH)
-                .build()
-                .setFormula("SrCO3", true);
-
         StrontiumOxide = new Material.Builder(getMaterialsId(), gregtechId("strontium_oxide"))
                 .dust()
                 .color(0xcacac8)
@@ -4077,5 +4071,206 @@ public class FirstDegreeMaterials {
                 .flags(DISABLE_DECOMPOSITION)
                 .components(Carbon, 5,Hydrogen,5,Nitrogen,1)
                 .build();
+
+        //超能硅岩化镓
+        GTQTMaterials.NaquadriaGalliumIndium = new Material.Builder(getMaterialsId(), gregtechId("naquadria_gallium_indium"))
+                .dust()
+                .color(0x71C671)
+                .iconSet(SHINY)
+                .components(Naquadria,1,Gallium,1,Indium,1)
+                .build();
+
+        //  11157 Lithium Niobate
+        GTQTMaterials.LithiumNiobate = new Material.Builder(getMaterialsId(), gregtechId("lithium_niobate"))
+                .ingot()
+                .color(0xD27700)
+                .iconSet(SHINY)
+                .components(Lithium, 1, Niobium, 1, Oxygen, 4)
+                .blast(6700)
+                .flags(DISABLE_DECOMPOSITION)
+                .flags(GENERATE_PLATE, GENERATE_LENS)
+                .build();
+
+        //  11156 Niobium Pentachloride
+        GTQTMaterials.NiobiumPentachloride = new Material.Builder(getMaterialsId(), gregtechId("niobium_pentachloride"))
+                .dust()
+                .color(Niobium.getMaterialRGB() + Chlorine.getMaterialRGB())
+                .iconSet(SHINY)
+                .components(Niobium, 1, Chlorine, 5)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //  11164 Lu-Tm-Y Chlorides Solution
+        GTQTMaterials.LuTmYChloridesSolution = new Material.Builder(getMaterialsId(), gregtechId("lu_tm_y_chlorides_solution"))
+                .liquid()
+                .color(Lutetium.getMaterialRGB() + Thulium.getMaterialRGB() + Yttrium.getMaterialRGB())
+                .components(Lutetium, 2, Thulium, 2, Yttrium, 6, Chlorine, 30, Hydrogen, 30, Oxygen, 15)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("(LuCl3)2(TmCl3)2(YCl3)6(H2O)15", true);
+
+        //  11159 Sodium Vanadate
+        GTQTMaterials.SodiumVanadate = new Material.Builder(getMaterialsId(), gregtechId("sodium_vanadate"))
+                .dust()
+                .color(0xCC9933)
+                .iconSet(BRIGHT)
+                .flags(DISABLE_DECOMPOSITION)
+                .components(Sodium, 3, Vanadium, 1, Oxygen, 4)
+                .build();
+
+        //  13098 Carbamide
+        GTQTMaterials.Carbamide = new Material.Builder(getMaterialsId(), gregtechId("carbamide"))
+                .dust()
+                .color(0x16EF57)
+                .iconSet(ROUGH)
+                .components(Carbon, 1, Hydrogen, 4, Nitrogen, 2, Oxygen, 1)
+                .build();
+
+        //  11165 Lu-Tm-doped Yttrium Vanadate Deposition
+        GTQTMaterials.LuTmDopedYttriumVanadateDeposition = new Material.Builder(getMaterialsId(), gregtechId("lu_tm_doped_yttrium_vanadate_deposition"))
+                .dust()
+                .color(Yttrium.getMaterialRGB() + Vanadium.getMaterialRGB() + Lutetium.getMaterialRGB())
+                .iconSet(FINE)
+                .build()
+                .setFormula("Lu/Tm:YVO?", false);
+
+        //  11167 Lu/Tm:YVO
+        GTQTMaterials.LuTmYVO = new Material.Builder(getMaterialsId(), gregtechId("lu_tm_yvo"))
+                .gem()
+                .color(0x8C1B23)
+                .iconSet(GEM_HORIZONTAL)
+                .flags(DISABLE_DECOMPOSITION, GENERATE_LENS, CRYSTALLIZABLE)
+                .components(Yttrium, 1, Vanadium, 1, Oxygen, 1, Lutetium, 1, Thulium, 1)
+                .build()
+                .setFormula("Lu/Tm:YVO", false);
+
+        //  11171 Ammonium Fluoride
+        GTQTMaterials.AmmoniumFluoride = new Material.Builder(getMaterialsId(), gregtechId("ammonium_fluoride"))
+                .liquid()
+                .color(Ammonia.getMaterialRGB() + Fluorine.getMaterialRGB())
+                .components(Nitrogen, 1, Hydrogen, 4, Fluorine, 1)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //  11172 Ammonium Difluoride
+        GTQTMaterials.AmmoniumDifluoride = new Material.Builder(getMaterialsId(), gregtechId("ammonium_difluoride"))
+                .dust()
+                .color(AmmoniumFluoride.getMaterialRGB())
+                .iconSet(FINE)
+                .components(Nitrogen, 1, Hydrogen, 5, Fluorine, 2)
+                .build()
+                .setFormula("NH4HF2", true);
+
+        //  11173 Beryllium Difluoride
+        GTQTMaterials.BerylliumDifluoride = new Material.Builder(getMaterialsId(), gregtechId("beryllium_difluoride"))
+                .dust()
+                .color(Beryllium.getMaterialRGB() + Fluorine.getMaterialRGB())
+                .iconSet(SHINY)
+                .components(Beryllium, 1, Fluorine, 2)
+                .build();
+
+
+        //  11168 Pr-Ho-Y Nitrates Solution
+        GTQTMaterials.PrHoYNitratesSolution = new Material.Builder(getMaterialsId(), gregtechId("pr_ho_y_nitrates_solution"))
+                .liquid(new FluidBuilder().attributes(FluidAttributes.ACID))
+                .color(Praseodymium.getMaterialRGB() + Holmium.getMaterialRGB() + Yttrium.getMaterialRGB())
+                .components(Praseodymium, 2, Holmium, 2, Yttrium, 6, Nitrogen, 30, Oxygen, 105, Hydrogen, 30)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("(Pr(NO3)3)2(Ho(NO3)3)2(Y(NO3)3)6(H2O)15", true);
+
+        //  11174 Pr:Ho/YLF
+        GTQTMaterials.PrHoYLF = new Material.Builder(getMaterialsId(), gregtechId("pr_ho_ylf"))
+                .gem()
+                .color(Praseodymium.getMaterialRGB() + Holmium.getMaterialRGB() + Yttrium.getMaterialRGB() + Lithium.getMaterialRGB())
+                .iconSet(RUBY)
+                .components(Praseodymium, 1, Holmium, 1, Lithium, 1, Yttrium, 1, Fluorine, 4)
+                .flags(DISABLE_DECOMPOSITION, GENERATE_LENS, CRYSTALLIZABLE)
+                .build()
+                .setFormula("Pr/Ho:YLF", false);
+
+        //  11148 Potassium Manganate
+        GTQTMaterials.PotassiumManganate = new Material.Builder(getMaterialsId(), gregtechId("potassium_manganate"))
+                .dust()
+                .color(0x873883)
+                .iconSet(METALLIC)
+                .components(Potassium, 2, Manganese, 1, Oxygen, 4)
+                .build();
+
+        //  11149 Potassium Manganate
+        GTQTMaterials.PotassiumPermanganate = new Material.Builder(getMaterialsId(), gregtechId("potassium_permanganate"))
+                .dust()
+                .color(0x871D82)
+                .iconSet(DULL)
+                .components(Potassium, 1, Manganese, 1, Oxygen, 4)
+                .build();
+
+        //  11150 Manganese Sulfate
+        GTQTMaterials.ManganeseSulfate = new Material.Builder(getMaterialsId(), gregtechId("manganese_sulfate"))
+                .dust()
+                .color(0xF0F895)
+                .iconSet(ROUGH)
+                .components(Manganese, 1, Sulfur, 1, Oxygen, 4)
+                .build();
+
+        //  11152 Neodymium-Doped Yttrium Oxide
+        GTQTMaterials.NeodymiumDopedYttriumOxide = new Material.Builder(getMaterialsId(), gregtechId("neodymium_doped_yttrium_oxide"))
+                .dust()
+                .color(0x5AD55F)
+                .iconSet(DULL)
+                .build()
+                .setFormula("Nd:Y?", false);
+
+        //  11153 Aluminium Nitrate
+        GTQTMaterials.AluminiumNitrate = new Material.Builder(getMaterialsId(), gregtechId("aluminium_nitrate"))
+                .dust()
+                .color(0x3AB3AA)
+                .iconSet(SHINY)
+                .components(Aluminium, 1, Nitrogen, 3, Oxygen, 9)
+                .build()
+                .setFormula("Al(NO3)3", true);
+
+        //  11154 Alumina Solution
+        GTQTMaterials.AluminaSolution = new Material.Builder(getMaterialsId(), gregtechId("alumina_solution"))
+                .liquid()
+                .color(0x6C4DC1)
+                .components(Alumina, 1, Carbon, 25, Hydrogen, 56, Chlorine, 2, Nitrogen, 2)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("(Al2O3)(CH2Cl2)(C12H27N)2", true);
+
+        //  11155 Unprocessed Nd:YAG Solution
+        GTQTMaterials.UnprocessedNdYAGSolution = new Material.Builder(getMaterialsId(), gregtechId("unprocessed_nd_yag_solution"))
+                .liquid()
+                .color(0x6f20af)
+                .iconSet(DULL)
+                .build()
+                .setFormula("Nd:YAG?", false);
+
+        //  13097 Ammonium Cyanate
+        GTQTMaterials.AmmoniumCyanate = new Material.Builder(getMaterialsId(), gregtechId("ammonium_cyanate"))
+                .liquid()
+                .color(0x3a5dcf)
+                .components(Hydrogen, 4, Nitrogen, 2, Carbon, 1, Oxygen, 1)
+                .build()
+                .setFormula("NH4CNO", true);
+
+        //  13099 Tributylamine
+        GTQTMaterials.Tributylamine = new Material.Builder(getMaterialsId(), gregtechId("tributylamine"))
+                .liquid()
+                .color(0x801a80)
+                .components(Carbon, 12, Hydrogen, 27, Nitrogen, 1)
+                .build()
+                .setFormula("(C4H9)3N", true);
+
+        //  13100 Dichloromethane
+        GTQTMaterials.Dichloromethane = new Material.Builder(getMaterialsId(), gregtechId("dichloromethane"))
+                .liquid()
+                .color(0xB87FC7)
+                .components(Carbon, 1, Hydrogen, 2, Chlorine, 2)
+                .build();
+
+
+
     }
 }

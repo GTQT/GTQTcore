@@ -16,7 +16,7 @@ import static keqing.gtqtcore.api.unification.material.info.EPMaterialFlags.*;
 public class GTQTMaterialFlagAddition {
 
     public static void init() {
-        Material[]material={Tritanium,Duranium};
+        Material[]material={Tritanium,Duranium,Technetium};
         for(Material materials:material)
         {
             materials.addFlags(GENERATE_FOIL,GENERATE_DENSE,GENERATE_FINE_WIRE,GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_RING, GENERATE_ROUND, GENERATE_BOLT_SCREW, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR,GENERATE_ROTOR);

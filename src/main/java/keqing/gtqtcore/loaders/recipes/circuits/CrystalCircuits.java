@@ -1,5 +1,6 @@
 package keqing.gtqtcore.loaders.recipes.circuits;
 
+import gregtech.api.metatileentity.multiblock.CleanroomType;
 import gregtech.api.recipes.GTRecipeHandler;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.OreDictUnifier;
@@ -12,7 +13,11 @@ import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.common.items.MetaItems.*;
+import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.PLASMA_CVD_RECIPES;
+import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.PRECISE_ASSEMBLER_RECIPES;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.CeLAG;
+import static keqing.gtqtcore.api.utils.GTQTUtil.CWT;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 
 public class CrystalCircuits {
@@ -21,7 +26,7 @@ public class CrystalCircuits {
         crystalInterface();
         crystalModulators();
         crystalSOC();
-
+        AdvancedCrystalSoC();
         removeGTCERecipes();
 
     }
@@ -126,5 +131,55 @@ public class CrystalCircuits {
                 .input(CRYSTAL_CENTRAL_PROCESSING_UNIT)
                 .output(CRYSTAL_SYSTEM_ON_CHIP)
                 .duration(100).EUt(VA[ZPM]).buildAndRegister();
+    }
+    private static void AdvancedCrystalSoC() {
+
+        //  1/2 CeO2 + 1/5 Lu2O3 + Al2O3 -> Ce:LAG
+        //  this recipe just has some tweak, e.g. half consume of materials (because recipe should be more chip).
+        MIXER_RECIPES.recipeBuilder()
+                .input(dust, CeriumOxide)
+                .input(dust, LutetiumOxide)
+                .input(dust, Alumina, 5)
+                .circuitMeta(3)
+                .output(dust, CeLAG, 7)
+                .EUt(VA[ZPM])
+                .duration(10 * 20)
+                .buildAndRegister();
+
+        //  Advanced Crystal CPU recipes
+        //  use Ce:LAG lens, and 1 step to get Crystal CPU (this machine required material over ZPM, so is not too imba).
+        PLASMA_CVD_RECIPES.recipeBuilder()
+                .input(plate, Emerald)
+                .notConsumable(lens, CeLAG)
+                .fluidInputs(Europium.getFluid(4))
+                .output(CRYSTAL_CENTRAL_PROCESSING_UNIT)
+                .EUt(VA[HV])
+                .duration(10 * 20)
+                .cleanroom(CleanroomType.CLEANROOM)
+                .buildAndRegister();
+
+        PLASMA_CVD_RECIPES.recipeBuilder()
+                .input(plate, Olivine)
+                .notConsumable(lens, CeLAG)
+                .fluidInputs(Europium.getFluid(4))
+                .output(CRYSTAL_CENTRAL_PROCESSING_UNIT)
+                .EUt(VA[HV])
+                .duration(10 * 20)
+                .cleanroom(CleanroomType.CLEANROOM)
+                .buildAndRegister();
+
+        //  Advanced Crystal SoC Socket recipe
+        PRECISE_ASSEMBLER_RECIPES.recipeBuilder()
+                .input(plate, Naquadah)
+                .input(CRYSTAL_INTERFACE_CHIP)
+                .input(ring, RhodiumPlatedPalladium, 2)
+                .input(wireFine, Europium, 4)
+                .fluidInputs(SolderingAlloy.getFluid(L))
+                .output(CRYSTAL_SYSTEM_ON_CHIP_SOCKET, 2)
+                .EUt(VA[UV])
+                .CWUt(CWT[UV])
+                .duration(200)
+                .Tier(3) // UV
+                .buildAndRegister();
     }
 }

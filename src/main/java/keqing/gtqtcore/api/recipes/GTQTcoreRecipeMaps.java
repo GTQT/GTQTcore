@@ -253,7 +253,7 @@ public class GTQTcoreRecipeMaps {
         NEUTRON_ACTIVATOR=new RecipeMap<>("neutron_activator", 6, 6, 3, 3, new NeutronActivatorRecipeBuilder(), false)
                 .setSound(GTSoundEvents.CHEMICAL_REACTOR);
 
-        VACUUM_CHAMBER_RECIPES = new RecipeMap<>("vacuum_chamber_recipes", 3, 6,  3,  3, new SimpleRecipeBuilder(), false)
+        VACUUM_CHAMBER_RECIPES = new RecipeMap<>("vacuum_chamber_recipes", 6, 3,  3,  3, new SimpleRecipeBuilder(), false)
                 .setSlotOverlay(false, false, GuiTextures.CIRCUIT_OVERLAY)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_COMPRESS, ProgressWidget.MoveType.HORIZONTAL)
                 .setSound(GTSoundEvents.ASSEMBLER);

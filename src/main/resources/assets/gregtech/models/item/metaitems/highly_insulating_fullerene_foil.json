@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures" : {
+    "layer0": "gtqtcore:items/metaitems/highly_insulating_fullerene_foil"
+  }
+}

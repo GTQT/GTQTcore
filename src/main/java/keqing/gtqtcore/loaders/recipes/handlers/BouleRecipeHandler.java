@@ -26,10 +26,6 @@ import static gregtech.api.GTValues.VA;
 
 public class BouleRecipeHandler {
 
-    public static void register() {
-        OrePrefix.gem.addProcessingHandler(PropertyKey.GEM, BouleRecipeHandler::processCrystallizer);
-    }
-
     public static void processCrystallizer(OrePrefix gem, @Nonnull Material material, GemProperty property) {
         // Not crystallizable materials cannot be made into boules
         if (!material.hasFlag(MaterialFlags.CRYSTALLIZABLE) || material.hasFlag(EPMaterialFlags.DISABLE_CRYSTALLIZATION))
@@ -118,8 +114,8 @@ public class BouleRecipeHandler {
         builder.buildAndRegister();
 
         // Cut boules into one exquisite gem
-        RecipeMaps.CUTTER_RECIPES.recipeBuilder().
-                input(GTQTOrePrefix.boule, material)
+        RecipeMaps.CUTTER_RECIPES.recipeBuilder()
+                .input(GTQTOrePrefix.boule, material)
                 .output(OrePrefix.gemExquisite, material)
                 .output(GTQTOrePrefix.seedCrystal, material)
                 .duration((int) (material.getMass() * 4))

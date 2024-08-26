@@ -19,6 +19,7 @@ import static gregtech.integration.crafttweaker.material.MaterialPropertyExpansi
 import static gregtech.integration.groovy.MaterialPropertyExpansion.addLiquid;
 import static gregtech.integration.groovy.MaterialPropertyExpansion.addPlasma;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.ChloroaceticAcid;
+import static keqing.gtqtcore.api.unification.GCYSMaterials.SiliconCarbide;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 
 public class GTQTMaterialPropertyAddition {
@@ -158,6 +159,7 @@ public class GTQTMaterialPropertyAddition {
 
         StainlessSteel.getProperty(PropertyKey.BLAST).setBlastTemperature(2700);
         // Fluids
+        SiliconCarbide.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID,new FluidBuilder()));
         SodiumHydroxide.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID,new FluidBuilder()));
         SodiumBisulfate.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID,new FluidBuilder()));
 

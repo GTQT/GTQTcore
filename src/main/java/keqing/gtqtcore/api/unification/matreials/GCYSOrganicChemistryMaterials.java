@@ -531,7 +531,7 @@ public class GCYSOrganicChemistryMaterials {
         PedotTMA = new Material.Builder(15078, gregtechId("pedot_tma"))
                 .ingot().fluid()
                 .color(0x5E9EE1)
-                .flags(DISABLE_DECOMPOSITION, GENERATE_ROD, GENERATE_SPRING)
+                .flags(DISABLE_DECOMPOSITION,GENERATE_ROUND,GENERATE_FINE_WIRE, GENERATE_FRAME, GENERATE_ROTOR, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_BOLT_SCREW, GENERATE_PLATE, GENERATE_SPRING_SMALL, GENERATE_SPRING, GENERATE_RING)
                 .components(Edot, 1, PMMA, 2)
                 .cableProperties(V[UEV], 8, 6)
                 .build();

@@ -39,8 +39,8 @@ public class LargeCircuitAssemblyLine {
         GoowareCircuits();     // ZPM-UEV
         OpticalCircuits();     // UV-UIV
         SpintronicCircuits();  // UHV-UXV
-        //CosmicCircuits();      // UEV-OpV
-        //SupracausalCircuits(); // UIV-MAX
+        CosmicCircuits();      // UEV-OpV
+        SupracausalCircuits(); // UIV-MAX
 
         //  Duration List
         //  ULV: 10s, LV-MV: 20s, HV-EV: 40s, IV-LuV: 60s, ZPM-UV: 80s,
@@ -772,7 +772,7 @@ public class LargeCircuitAssemblyLine {
         //  back to Assembly Line recipes
     }
 
-    /*
+
     private static void CosmicCircuits() {
         for (FluidStack stack : new FluidStack[] {
                 SolderingAlloy.getFluid(72 * 64),
@@ -867,7 +867,7 @@ public class LargeCircuitAssemblyLine {
         //  back to Assembly Line recipes
     }
 
-     */
+
     private static void WrapCircuitBoard() {
 
         //  Basic Circuit Board

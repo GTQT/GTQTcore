@@ -57,12 +57,12 @@ public class TaraniumProcessing {
         CHEMICAL_RECIPES.recipeBuilder()
                 .fluidInputs(Ammonia.getFluid(1000))
                 .fluidInputs(NitricAcid.getFluid(1000))
-                .output(dust, AmmoniumNitrate, 2)
+                .fluidOutputs(AmmoniumNitrate.getFluid(2000))
                 .duration(60).EUt(VA[LV]).buildAndRegister();
 
-        MIXER_RECIPES.recipeBuilder()
+        CHEMICAL_PLANT.recipeBuilder()
                 .input(dust, Naquadah)
-                .input(dust, AmmoniumNitrate, 2)
+                .fluidInputs(AmmoniumNitrate.getFluid(2000))
                 .fluidInputs(BedrockSmoke.getFluid(1000))
                 .fluidInputs(Water.getFluid(1000))
                 .fluidOutputs(BedrockSootSolution.getFluid(1000))

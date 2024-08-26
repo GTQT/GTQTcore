@@ -184,6 +184,7 @@ public class GTQTElementMaterials {
                 .element(GTQTElements.Hypogen)
                 .color(0xDC784B)
                 .iconSet(CUSTOM_HYPOGEN)
+                .cableProperties(V[UXV], 32, 16, false)
                 .toolStats(ToolProperty.Builder.of(20.0F, 200.0F, 200000000, 200)
                         .unbreakable()
                         .enchantability(33)

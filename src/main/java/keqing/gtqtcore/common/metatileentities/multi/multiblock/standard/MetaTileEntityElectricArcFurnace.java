@@ -93,9 +93,6 @@ public class MetaTileEntityElectricArcFurnace extends GTQTRecipeMapMultiblockCon
             this.maxProgressTime = maxProgress / eleTier;
         }
 
-        /**
-         * @return If machine in PA, then no parallel, if machine in common assembler, then get 2^{CasingTier + 4} (Mk1:32, Mk2:64, Mk3:128) parallel.
-         */
         @Override
         public int getParallelLimit() {
             return (int) Math.pow(2,tubeTier);
@@ -155,7 +152,7 @@ public class MetaTileEntityElectricArcFurnace extends GTQTRecipeMapMultiblockCon
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
                 .aisle("AAA", "CCC", "BBB", "BBB", "BBB", "AAA")
-                .aisle("AAA", "CCC", "BCB", "BCB", "BCB", "AMA")
+                .aisle("AAA", "CDC", "BDB", "BDB", "BDB", "AMA")
                 .aisle("ASA", "CCC", "BBB", "BBB", "BBB", "AAA")
                 .where('S', selfPredicate())
                 .where('A', states(getCasingState()).setMinGlobalLimited(8)
@@ -177,10 +174,10 @@ public class MetaTileEntityElectricArcFurnace extends GTQTRecipeMapMultiblockCon
         ArrayList<MultiblockShapeInfo> shapeInfo = new ArrayList<>();
         MultiblockShapeInfo.Builder builder = MultiblockShapeInfo.builder()
                 .aisle("MEE", "CCC", "BBB", "BBB", "BBB", "AAA")
-                .aisle("FAD", "CCC", "BCB", "BCB", "BCB", "AHA")
+                .aisle("FAD", "CDC", "BDB", "BDB", "BDB", "AHA")
                 .aisle("ISO", "CCC", "BBB", "BBB", "BBB", "AAA")
                 .where('A', getCasingState())
-                .where('B', GTQTMetaBlocks.ELECTROBATH.getState(GTQTElectrobath.CasingType.I_ELECTROBATH))
+                .where('D', GTQTMetaBlocks.ELECTROBATH.getState(GTQTElectrobath.CasingType.I_ELECTROBATH))
                 .where('C', MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.BRONZE_PIPE))
                 .where('S', GTQTMetaTileEntities.ELECTRIC_ARC_FURNACE, EnumFacing.SOUTH)
                 .where('E', MetaTileEntities.ENERGY_INPUT_HATCH[GTValues.LV], EnumFacing.NORTH)

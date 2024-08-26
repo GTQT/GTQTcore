@@ -6,7 +6,7 @@ public class GTQTKQnetHelper {
         //0 普通
         if (kind == 0) return"无需设备";
         //1 物理-透射电镜 OK
-        if (kind == 1) return"物理-透射电镜";
+        if (kind == 1) return"物理-大型电子透镜";
         //2 物理-粒子加速器 OK
         if (kind == 2) return"物理-粒子加速器";
         //3 物理-量子计算机

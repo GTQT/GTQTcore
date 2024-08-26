@@ -161,11 +161,10 @@ public class CTABChain {
                 .fluidOutputs(TRIS.getFluid(100))
                 .duration(4000).EUt(VA[HV]).buildAndRegister();
 
-        CRYSTALLIZER_RECIPES.recipeBuilder()
+        LARGE_CHEMICAL_RECIPES.recipeBuilder()
                 .fluidInputs(TRISN.getFluid(1000))
                 .fluidInputs(Hydrogen.getFluid(2000))
                 .fluidOutputs(TRIS.getFluid(1000))
-                .blastFurnaceTemp(4500)
                 .duration(400).EUt(VA[IV]).buildAndRegister();
 
 

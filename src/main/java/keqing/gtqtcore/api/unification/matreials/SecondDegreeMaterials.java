@@ -8,6 +8,7 @@ import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.material.info.MaterialIconSet;
 import gregtech.api.unification.material.properties.BlastProperty;
 import keqing.gtqtcore.api.unification.GTQTMaterials;
+import net.minecraft.util.text.TextFormatting;
 
 import java.util.Collection;
 
@@ -18,6 +19,7 @@ import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.info.MaterialFlags.*;
 import static gregtech.api.unification.material.info.MaterialIconSet.*;
 import static gregtech.api.util.GTUtility.gregtechId;
+import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 
 
@@ -514,5 +516,234 @@ public class SecondDegreeMaterials {
         //铝系
         GTQTMaterials.AluminiumFront  = new Material.Builder(getMaterialsId(), gregtechId( "aluminium_front")).fluid().color(0x1E90FF).build();
         GTQTMaterials.BauxiteFront  = new Material.Builder(getMaterialsId(), gregtechId( "bauxite_front")).fluid().color(0x8B4726).build();
+
+        //  13085 Fluorinated Ethylene Propylene
+        GTQTMaterials.FluorinatedEthylenePropylene = new Material.Builder(getMaterialsId(), gregtechId("fluorinated_ethylene_propylene"))
+                .liquid() // TODO polymer?
+                .color(0xC8C8C8)
+                .iconSet(DULL)
+                .components(Carbon, 5, Fluorine, 10)
+                .build();
+
+        //  11248 Lead Zirconate Titanate
+        GTQTMaterials.LeadZirconateTitanate = new Material.Builder(getMaterialsId(), gregtechId("lead_zirconate_titanate"))
+                .gem(3)
+                .color(0x359ADE)
+                .iconSet(OPAL)
+                .flags(CRYSTALLIZABLE, DECOMPOSITION_BY_CENTRIFUGING, GENERATE_LENS)
+                .components(Lead, 1, Titanium, 1, CubicZirconia, 1, Oxygen, 1)
+                .build()
+                .setFormula("PbZrTiO3", true);
+
+        //  24086 Blood Cells
+        GTQTMaterials.BloodCells = new Material.Builder(getMaterialsId(), gregtechId("blood_cells"))
+                .liquid()
+                .color(0xC43A31)
+                .iconSet(DULL)
+                .build();
+
+        //  24087 Blood Plasma
+        GTQTMaterials.BloodPlasma = new Material.Builder(getMaterialsId(), gregtechId("blood_plasma"))
+                .liquid()
+                .color(0x882822)
+                .build();
+
+        //  24088 bFGF
+        GTQTMaterials.BFGF = new Material.Builder(getMaterialsId(), gregtechId("bfgf"))
+                .liquid()
+                .color(0xA15C72)
+                .build()
+                .setFormula("bFGF", false);
+
+        //  24089 EGF
+        GTQTMaterials.EGF = new Material.Builder(getMaterialsId(), gregtechId("egf"))
+                .liquid()
+                .color(0x993300)
+                .build()
+                .setFormula("EGF", false);
+
+        //  24090 CAT
+        GTQTMaterials.CAT = new Material.Builder(getMaterialsId(), gregtechId("cat"))
+                .liquid()
+                .color(0x72B5EA)
+                .build()
+                .setFormula("CAT", false);
+
+        //  13169 Biotin
+        GTQTMaterials.Biotin = new Material.Builder(getMaterialsId(), gregtechId("biotin"))
+                .liquid()
+                .color(0x08C74A)
+                .components(Carbon, 10, Hydrogen, 16, Nitrogen, 2, Oxygen, 3, Sulfur, 1)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //  13170 Linoleic Acid
+        GTQTMaterials.LinoleicAcid = new Material.Builder(getMaterialsId(), gregtechId("linoleic_acid"))
+                .liquid()
+                .color(0x919C2B)
+                .components(Carbon, 18, Hydrogen, 32, Oxygen, 2)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //  13161 Cyclopentadiene
+        GTQTMaterials.Cyclopentadiene = new Material.Builder(getMaterialsId(), gregtechId("cyclopentadiene"))
+                .liquid()
+                .color(0x8BEB2A)
+                .components(Carbon, 5, Hydrogen, 6)
+                .build();
+
+        //  13171 Vitamin A
+        GTQTMaterials.VitaminA = new Material.Builder(getMaterialsId(), gregtechId("vitamin_a"))
+                .liquid()
+                .color(0xAB5EC3)
+                .components(Carbon, 20, Hydrogen, 30, Oxygen, 1)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //  13172 β-Ionone
+        GTQTMaterials.BetaIonone = new Material.Builder(getMaterialsId(), gregtechId("beta_ionone"))
+                .liquid()
+                .color(0xC3A0B2)
+                .components(Carbon, 13, Hydrogen, 20, Oxygen, 1)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //  13173 Citral
+        GTQTMaterials.Citral = new Material.Builder(getMaterialsId(), gregtechId("citral"))
+                .liquid()
+                .color(0xE4E77E)
+                .components(Carbon, 10, Hydrogen, 16, Oxygen, 1)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //  13175 Propargyl Chloride
+        GTQTMaterials.PropargylChloride = new Material.Builder(getMaterialsId(), gregtechId("propargyl_chloride"))
+                .liquid()
+                .color(0x156101)
+                .components(Carbon, 3, Hydrogen, 3, Chlorine, 1)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("HC2CH2Cl", true);
+
+        //  13177 Ethanolamine
+        GTQTMaterials.Ethanolamine = new Material.Builder(getMaterialsId(), gregtechId("ethanolamine"))
+                .liquid()
+                .color(0xD3DEA2)
+                .components(Carbon, 2, Hydrogen, 7, Nitrogen, 1, Oxygen, 1)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("HOCH2CH2NH2", true);
+
+        //  13176 Propargyl Alcohol
+        GTQTMaterials.PropargylAlcohol = new Material.Builder(getMaterialsId(), gregtechId("propargyl_alcohol"))
+                .liquid()
+                .color(0xB7AB44)
+                .components(Carbon, 3, Hydrogen, 4, Oxygen, 1)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("CHCCH2OH", true);
+
+        //  24075 Exotic Mutagen
+        GTQTMaterials.ExoticMutagen = new Material.Builder(getMaterialsId(), gregtechId("exotic_mutagen"))
+                .liquid(new FluidBuilder().temperature(18406).attributes(FluidAttributes.ACID))
+                .color(0x9C31F9)
+                .build()
+                .setFormula(TextFormatting.OBFUSCATED + "aaa", false);
+
+        //  13168 B27
+        GTQTMaterials.B27 = new Material.Builder(getMaterialsId(), gregtechId("b_27"))
+                .liquid()
+                .color(0xC2B7E3)
+                .components(Carbon, 142, Hydrogen, 230, Nitrogen, 36, Oxygen, 44, Sulfur, 1)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //  11247 Ce:LAG
+        GTQTMaterials.CeLAG = new Material.Builder(getMaterialsId(), gregtechId("ce_lag"))
+                .gem()
+                .color(0x00A816)
+                .iconSet(GEM_VERTICAL)
+                .flags(CRYSTALLIZABLE, DECOMPOSITION_BY_CENTRIFUGING, GENERATE_LENS)
+                .components(CeriumOxide, 1, LutetiumOxide, 1, Alumina, 5)
+                .build()
+                .setFormula("Ce:LAG", true);
+
+        //  13162 Lithium Cyclopentadienide
+        GTQTMaterials.LithiumCyclopentadienide = new Material.Builder(getMaterialsId(), gregtechId("lithium_cyclopentadienide"))
+                .liquid()
+                .color(0x963D5F)
+                .components(Carbon, 5, Hydrogen, 5, Lithium, 1)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //  13163 Californium Cyclopentadienide
+        GTQTMaterials.CaliforniumCyclopentadienide = new Material.Builder(getMaterialsId(), gregtechId("californium_cyclopentadienide"))
+                .liquid()
+                .color(0x821554)
+                .components(Carbon, 15, Hydrogen, 15, Californium, 1)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //  11236 Californium Trichloride
+        GTQTMaterials.CaliforniumTrichloride = new Material.Builder(getMaterialsId(), gregtechId("californium_trichloride"))
+                .dust()
+                .color(0x8B67D1)
+                .iconSet(METALLIC)
+                .components(Californium, 1, Chlorine, 3)
+                .build();
+
+        //  24064 Free Electron Gas
+        GTQTMaterials.FreeElectronGas = new Material.Builder(getMaterialsId(), gregtechId("free_electron_gas"))
+                .gas(new FluidBuilder()
+                        .translation("gregtech.fluid.generic"))
+                .color(0x507BB3)
+                .build()
+                .setFormula(TextFormatting.OBFUSCATED  + "a" + TextFormatting.RESET + "§ee" + TextFormatting.OBFUSCATED + "a", false);
+
+
+        //  15012 Heavy Quark Degenerate Matter
+        GTQTMaterials.HeavyQuarkDegenerateMatter = new Material.Builder(getMaterialsId(), gregtechId("heavy_quark_degenerate_matter"))
+                .ingot()
+                .liquid(new FluidBuilder().temperature((int) (V[UV] + V[HV] * V[HV])))
+                .plasma(new FluidBuilder().temperature((int) (V[UV] * V[HV])))
+                .color(0x5DBD3A)
+                .iconSet(BRIGHT)
+                .blast(b -> b
+                        .temp(14960, BlastProperty.GasTier.HIGHEST)
+                        .blastStats(VA[UIV]))
+                .flags(DISABLE_DECOMPOSITION, GENERATE_PLATE, GENERATE_FOIL, GENERATE_FINE_WIRE, GENERATE_ROD, GENERATE_FRAME, GENERATE_DOUBLE_PLATE)
+                .cableProperties(V[UXV], 576, 1024, false)
+                .build()
+                .setFormula(TextFormatting.OBFUSCATED + "aaaaaa", false);
+
+        //  13200 Polyethylene Terephthalate (PET)
+        GTQTMaterials.PolyethyleneTerephthalate = new Material.Builder(getMaterialsId(), gregtechId("polyethylene_terephthalate"))
+                .polymer()
+                .liquid()
+                .color(0x1E5C58)
+                .components(Carbon, 10, Hydrogen, 6, Oxygen, 4)
+                .flags(GENERATE_PLATE, GENERATE_FOIL)
+                .build();
+
+        //  13197 Para Toluic Acid
+        GTQTMaterials.ParaToluicAcid = new Material.Builder(getMaterialsId(), gregtechId("para_toluic_acid"))
+                .liquid(new FluidBuilder().attribute(FluidAttributes.ACID))
+                .color(0x4FA597)
+                .components(Carbon, 8, Hydrogen, 8, Oxygen, 2)
+                .build();
+
+        //  13198 Methylparatoluate
+        GTQTMaterials.Methylparatoluate = new Material.Builder(getMaterialsId(), gregtechId("methylparatoluate"))
+                .liquid()
+                .color(0x76BCB0)
+                .components(Carbon, 9, Hydrogen, 10, Oxygen, 2)
+                .build();
+
+        //  13199 Dimethyl Terephthalate
+        GTQTMaterials.DimethylTerephthalate = new Material.Builder(getMaterialsId(), gregtechId("dimethyl_terephthalate"))
+                .liquid()
+                .color(0x05D8AF)
+                .components(Carbon, 10, Hydrogen, 10, Oxygen, 4)
+                .build();
     }
 }

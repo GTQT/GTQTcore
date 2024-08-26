@@ -4,6 +4,7 @@ import gregtech.api.items.metaitem.MetaItem;
 import gregtech.api.metatileentity.multiblock.CleanroomType;
 import gregtech.api.unification.material.MarkerMaterials;
 import gregtech.api.unification.material.Material;
+import gregtech.api.unification.material.Materials;
 import gregtech.common.items.MetaItems;
 import gregtech.api.unification.material.MarkerMaterials.Color;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
@@ -11,6 +12,7 @@ import keqing.gtqtcore.common.block.blocks.GTQTElectrobath;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 import net.minecraft.item.Item;
 
+import static gregtech.api.unification.material.info.MaterialFlags.GENERATE_LENS;
 import static gregtech.common.blocks.MetaBlocks.OPTICAL_PIPES;
 import static gregtech.common.items.MetaItems.*;
 import static gregtech.common.items.MetaItems.ELECTRIC_MOTOR_IV;
@@ -344,8 +346,21 @@ public class CPULine {
                 .buildAndRegister();
 
     }
-    public static void Stepper(int tier, int EU, MetaItem<?>.MetaValueItem item1,MetaItem<?>.MetaValueItem item2)
+    public static void Stepper(int tier, int EU, MetaItem<?>.MetaValueItem item1, MetaItem<?>.MetaValueItem item2, Material materials)
     {
+        if(materials!=null) {
+            if(materials.hasFlag(GENERATE_LENS))
+            {
+                LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[tier]).input(RETICLE_SILICON).CWUt(CWT[tier])
+                        .fluidInputs(Water.getFluid(10000))
+                        .notConsumable(lens, materials).output(item1).buildAndRegister();
+            }
+            else {
+                LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[tier]).input(RETICLE_SILICON).CWUt(CWT[tier])
+                        .fluidInputs(Water.getFluid(10000))
+                        .notConsumable(craftingLens, materials).output(item1).buildAndRegister();
+            }
+        }
         if(tier<=1) {
             STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[EU]).notConsumable(item1)
                     .Laser(tier)
@@ -411,24 +426,26 @@ public class CPULine {
         }
     }
     private static void LaserStepper() {
-        Stepper(1,2,RETICLE_INTEGRATED_LOGIC_CIRCUIT,INTEGRATED_LOGIC_CIRCUIT_WAFER);
-        Stepper(1,2,RETICLE_RANDOM_ACCESS_MEMORY,RANDOM_ACCESS_MEMORY_WAFER);
-        Stepper(1,2,RETICLE_CENTRAL_PROCESSING_UNIT,CENTRAL_PROCESSING_UNIT_WAFER);
-        Stepper(1,2,RETICLE_ULTRA_LOW_POWER_INTEGRATED_CIRCUIT,ULTRA_LOW_POWER_INTEGRATED_CIRCUIT_WAFER);
-        Stepper(1,2,RETICLE_LOW_POWER_INTEGRATED_CIRCUIT,LOW_POWER_INTEGRATED_CIRCUIT_WAFER);
-        Stepper(1,2,RETICLE_SIMPLE_SYSTEM_ON_CHIP,SIMPLE_SYSTEM_ON_CHIP_WAFER);
-        Stepper(2,2,RETICLE_NANO_CENTRAL_PROCESSING_UNIT,NANO_CENTRAL_PROCESSING_UNIT_WAFER);
-        Stepper(2,2,RETICLE_QBIT_CENTRAL_PROCESSING_UNIT,QUBIT_CENTRAL_PROCESSING_UNIT_WAFER);
-        Stepper(2,3,RETICLE_ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT,ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT_WAFER);
-        Stepper(2,3,RETICLE_HIGH_POWER_INTEGRATED_CIRCUIT,HIGH_POWER_INTEGRATED_CIRCUIT_WAFER);
-        Stepper(2,3,RETICLE_NOR_MEMORY_CHIP,NOR_MEMORY_CHIP_WAFER);
-        Stepper(2,3,RETICLE_POWER_INTEGRATED_CIRCUIT,POWER_INTEGRATED_CIRCUIT_WAFER);
-        Stepper(2,3,RETICLE_NAND_MEMORY_CHIP,NAND_MEMORY_CHIP_WAFER);
-        Stepper(2,3,RETICLE_SYSTEM_ON_CHIP,SYSTEM_ON_CHIP_WAFER);
-        Stepper(3,3,RETICLE_ADVANCED_SYSTEM_ON_CHIP,ADVANCED_SYSTEM_ON_CHIP_WAFER);
-        Stepper(4,3,RETICLE_HIGHLY_ADVANCED_SYSTEM_ON_CHIP,HIGHLY_ADVANCED_SOC_WAFER);
+        Stepper(1,2,RETICLE_INTEGRATED_LOGIC_CIRCUIT,INTEGRATED_LOGIC_CIRCUIT_WAFER,Color.Blue);
+        Stepper(1,2,RETICLE_RANDOM_ACCESS_MEMORY,RANDOM_ACCESS_MEMORY_WAFER,Color.Red);
+        Stepper(1,2,RETICLE_CENTRAL_PROCESSING_UNIT,CENTRAL_PROCESSING_UNIT_WAFER,Color.LightGray);
+        Stepper(1,2,RETICLE_ULTRA_LOW_POWER_INTEGRATED_CIRCUIT,ULTRA_LOW_POWER_INTEGRATED_CIRCUIT_WAFER,Color.Green);
+        Stepper(1,2,RETICLE_LOW_POWER_INTEGRATED_CIRCUIT,LOW_POWER_INTEGRATED_CIRCUIT_WAFER,Color.LightBlue);
+        Stepper(1,2,RETICLE_SIMPLE_SYSTEM_ON_CHIP,SIMPLE_SYSTEM_ON_CHIP_WAFER,Color.Lime);
+        Stepper(2,2,RETICLE_NANO_CENTRAL_PROCESSING_UNIT,NANO_CENTRAL_PROCESSING_UNIT_WAFER,null);
+        Stepper(2,2,RETICLE_QBIT_CENTRAL_PROCESSING_UNIT,QUBIT_CENTRAL_PROCESSING_UNIT_WAFER,null);
+        Stepper(2,3,RETICLE_ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT,ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT_WAFER,null);
+        Stepper(2,3,RETICLE_HIGH_POWER_INTEGRATED_CIRCUIT,HIGH_POWER_INTEGRATED_CIRCUIT_WAFER,null);
+        Stepper(2,3,RETICLE_NOR_MEMORY_CHIP,NOR_MEMORY_CHIP_WAFER,Color.Gray);
+        Stepper(2,3,RETICLE_POWER_INTEGRATED_CIRCUIT,POWER_INTEGRATED_CIRCUIT_WAFER,Color.Brown);
+        Stepper(2,3,RETICLE_NAND_MEMORY_CHIP,NAND_MEMORY_CHIP_WAFER,Color.Cyan);
+        Stepper(2,3,RETICLE_SYSTEM_ON_CHIP,SYSTEM_ON_CHIP_WAFER,Color.Magenta);
+        Stepper(3,3,RETICLE_ADVANCED_SYSTEM_ON_CHIP,ADVANCED_SYSTEM_ON_CHIP_WAFER,Color.Purple);
+        Stepper(4,3,RETICLE_HIGHLY_ADVANCED_SYSTEM_ON_CHIP,HIGHLY_ADVANCED_SOC_WAFER,Color.Orange);
 
-
+        Stepper(4,4,RETICLE_NANO_POWER_IC_WAFER,NANO_POWER_IC_WAFER,LithiumNiobate);
+        Stepper(4,5,RETICLE_PICO_POWER_IC_WAFER,PICO_POWER_IC_WAFER,LuTmYVO);
+        Stepper(5,5,RETICLE_FEMTO_POWER_IC_WAFER,FEMTO_POWER_IC_WAFER,PrHoYLF);
         //cpu EV
         PRECISION_SPINNING.recipeBuilder()
                 .input(CENTRAL_PROCESSING_UNIT_WAFER)
@@ -488,8 +505,6 @@ public class CPULine {
                 .EUt(120)
                 .buildAndRegister();
 
-
-
         //TODO
         LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[HV]).input(RETICLE_SILICON).CWUt(8)
             .fluidInputs(Water.getFluid(10000))
@@ -505,67 +520,6 @@ public class CPULine {
                 .fluidInputs(Water.getFluid(10000))
                 .notConsumable(FIELD_GENERATOR_HV).output(AE_RETICLEC)
                 .buildAndRegister();
-
-
-
-
-        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).CWUt(8)
-                .fluidInputs(Water.getFluid(10000))
-                .notConsumable(craftingLens, Color.Blue).output(RETICLE_INTEGRATED_LOGIC_CIRCUIT).buildAndRegister();
-
-        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).CWUt(8)
-                .fluidInputs(Water.getFluid(10000))
-                .notConsumable(craftingLens, Color.Red).output(RETICLE_RANDOM_ACCESS_MEMORY).buildAndRegister();
-
-        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).CWUt(8)
-                .fluidInputs(Water.getFluid(10000))
-                .notConsumable(craftingLens, Color.Purple).output(RETICLE_ADVANCED_SYSTEM_ON_CHIP)
-                .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
-
-
-        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).CWUt(8)
-                .fluidInputs(Water.getFluid(10000))
-                .notConsumable(craftingLens, Color.LightGray).output(RETICLE_CENTRAL_PROCESSING_UNIT).buildAndRegister();
-
-        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).CWUt(8)
-                .fluidInputs(Water.getFluid(10000))
-                .notConsumable(craftingLens, Color.LightBlue).output(RETICLE_LOW_POWER_INTEGRATED_CIRCUIT).buildAndRegister();
-
-        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).CWUt(8)
-                .fluidInputs(Water.getFluid(10000))
-                .notConsumable(craftingLens, Color.Cyan)
-                .cleanroom(CleanroomType.CLEANROOM).output(RETICLE_NAND_MEMORY_CHIP).buildAndRegister();
-
-        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).CWUt(8)
-                .fluidInputs(Water.getFluid(10000))
-                .notConsumable(craftingLens, Color.Gray).output(RETICLE_NOR_MEMORY_CHIP)
-                .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
-
-        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).CWUt(8)
-                .fluidInputs(Water.getFluid(10000))
-                .notConsumable(craftingLens, Color.Brown).output(RETICLE_POWER_INTEGRATED_CIRCUIT)
-                .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
-
-        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).CWUt(8)
-                .fluidInputs(Water.getFluid(10000))
-                .notConsumable(craftingLens, Color.Lime).output(RETICLE_SIMPLE_SYSTEM_ON_CHIP).buildAndRegister();
-
-        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).CWUt(8)
-                .fluidInputs(Water.getFluid(10000))
-                .notConsumable(craftingLens, Color.Magenta).output(RETICLE_SYSTEM_ON_CHIP)
-                .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
-
-
-        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).CWUt(8)
-                .fluidInputs(Water.getFluid(10000))
-                .notConsumable(craftingLens, Color.Green).output(RETICLE_ULTRA_LOW_POWER_INTEGRATED_CIRCUIT).buildAndRegister();
-
-
-        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[MV]).input(RETICLE_SILICON).CWUt(8)
-                .fluidInputs(Water.getFluid(10000))
-                .notConsumable(craftingLens, Color.Orange).output(RETICLE_HIGHLY_ADVANCED_SYSTEM_ON_CHIP)
-                .cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
-
     }
 
     private static void Silicon()
@@ -623,6 +577,19 @@ public class CPULine {
 
         czpuller(NEUTRONIUM_BOULE,Neutronium,UV);
 
+
+
+
+        //  SrSO4 + Bh -> Bh-doped SrSO4 Boule
+        CZPULLER_RECIPES.recipeBuilder()
+                .duration(20000)
+                .EUt(VA[ZPM])
+                .fluidInputs(MetastableOganesson.getFluid(4000))
+                .input(dust, StrontiumCarbonate, 64)
+                .input(dust, Bohrium, 8)
+                .output(STRONTIUM_CARBONATE_BOHRIUM_BOULE)
+                .blastFurnaceTemp(9000)
+                .buildAndRegister();
     }
     public static void czpuller(MetaItem<?>.MetaValueItem doule, Material material, int tier)
     {
@@ -644,7 +611,7 @@ public class CPULine {
                     .EUt(VA[tier])
                     .fluidInputs(Nitrogen.getFluid(4000))
                     .input(block, CSilicon, 32)
-                    .input(dust, IndiumGalliumPhosphide, 8)
+                    .input(dust, GalliumArsenide, 8)
                     .input(dust, material, 1)
                     .output(doule, (6-tier)/2)
                     .blastFurnaceTemp(1800+900*tier)
@@ -656,7 +623,7 @@ public class CPULine {
                     .EUt(VA[tier])
                     .fluidInputs(Xenon.getFluid(4000))
                     .input(block, CSilicon, 32)
-                    .input(dust, GalliumArsenide, 8)
+                    .input(dust, IndiumGalliumPhosphide, 8)
                     .input(dust, material, 1)
                     .output(doule, (8-tier)/2)
                     .blastFurnaceTemp(1800+900*tier)
@@ -668,7 +635,7 @@ public class CPULine {
                     .EUt(VA[tier])
                     .fluidInputs(Radon.getFluid(4000))
                     .input(block, CSilicon, 32)
-                    .input(dust, GalliumArsenide, 8)
+                    .input(dust, IndiumGalliumPhosphide, 8)
                     .input(dust, material, 1)
                     .output(doule, (10-tier)/2)
                     .blastFurnaceTemp(1800+900*tier)
@@ -680,7 +647,7 @@ public class CPULine {
                     .EUt(VA[tier])
                     .fluidInputs(MetastableOganesson.getFluid(4000))
                     .input(block, CSilicon, 32)
-                    .input(dust, GalliumArsenide, 8)
+                    .input(dust, NaquadriaGalliumIndium, 8)
                     .input(dust, material, 1)
                     .output(doule, (12-tier)/2)
                     .blastFurnaceTemp(1800+900*tier)

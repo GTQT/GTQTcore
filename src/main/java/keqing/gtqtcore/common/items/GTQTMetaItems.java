@@ -1,6 +1,7 @@
 package keqing.gtqtcore.common.items;
 
 import gregtech.api.items.metaitem.MetaItem;
+import keqing.gtqtcore.common.CommonProxy;
 
 import java.util.List;
 
@@ -55,6 +56,8 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem STERILIZED_PETRI_DISH;
     public static MetaItem<?>.MetaValueItem CONTAMINATED_PETRI_DISH;
     public static MetaItem<?>.MetaValueItem ELECTRICALLY_WIRED_PETRI_DISH;
+    public static MetaItem<?>.MetaValueItem BIO_CELL;
+    public static MetaItem<?>.MetaValueItem BIO_DISH;
     public static MetaItem<?>.MetaValueItem CLEAN_CULTURE;
     public static MetaItem<?>.MetaValueItem SOLAR_PLATE_MKI;
     public static MetaItem<?>.MetaValueItem SOLAR_PLATE_MKII;
@@ -223,6 +226,13 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem DUBNIUM_WAFER;
     public static MetaItem<?>.MetaValueItem CRYSTAL_INTERFACE_WAFER;
     public static MetaItem<?>.MetaValueItem CRYSTAL_INTERFACE_CHIP;
+
+    public static MetaItem<?>.MetaValueItem RETICLE_UHASOC_WAFER;
+    public static MetaItem<?>.MetaValueItem RETICLE_ZEPTO_PIC_WAFER;
+    public static MetaItem<?>.MetaValueItem RETICLE_ATTO_PIC_WAFER;
+    public static MetaItem<?>.MetaValueItem RETICLE_FEMTO_POWER_IC_WAFER;
+    public static MetaItem<?>.MetaValueItem RETICLE_PICO_POWER_IC_WAFER;
+    public static MetaItem<?>.MetaValueItem RETICLE_NANO_POWER_IC_WAFER;
     public static MetaItem<?>.MetaValueItem UHASOC_WAFER;
     public static MetaItem<?>.MetaValueItem UHASOC_CHIP;
     public static MetaItem<?>.MetaValueItem INTRAVITAL_SOC;
@@ -232,6 +242,25 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem STRONTIUM_CARBONATE_OPTICAL_CHIP;
     public static MetaItem<?>.MetaValueItem OPTICAL_IMC_BOARD;
     public static MetaItem<?>.MetaValueItem PHOTOELECTRON_SOC;
+    public static MetaItem<?>.MetaValueItem WETWARE_CRYSTAL_CHIP;
+    public static MetaItem<?>.MetaValueItem RICH_BACTERIA_SOC;
+    public static MetaItem<?>.MetaValueItem ULTRASONIC_HOMOGENIZER;
+    public static MetaItem<?>.MetaValueItem PIEZOELECTRIC_CRYSTAL;
+
+    public static MetaItem<?>.MetaValueItem RYDBERG_SPINORIAL_ASSEMBLY;
+    public static MetaItem<?>.MetaValueItem CRYOGENIC_INTERFACE;
+    public static MetaItem<?>.MetaValueItem EXCITATION_MAINTAINER;
+    public static MetaItem<?>.MetaValueItem X_RAY_WAVEGUIDE;
+    public static MetaItem<?>.MetaValueItem ELECTRON_SOURCE;
+    public static MetaItem<?>.MetaValueItem X_RAY_LASER;
+    public static MetaItem<?>.MetaValueItem X_RAY_MIRROR;
+    public static MetaItem<?>.MetaValueItem MICROFOCUS_X_RAY_TUBE;
+    public static MetaItem<?>.MetaValueItem EXOTIC_SOC;
+
+    public static MetaItem<?>.MetaValueItem COSMIC_FABRIC;
+    public static MetaItem<?>.MetaValueItem MEMORY_FOAM_PLATE;
+    public static MetaItem<?>.MetaValueItem FULLERENE_FIBER;
+
     public static MetaItem<?>.MetaValueItem HELIUM_LASER;
     public static MetaItem<?>.MetaValueItem NEON_LASER;
     public static MetaItem<?>.MetaValueItem ARGON_LASER;
@@ -343,7 +372,7 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem ASUPRACHRONAL_OpV;
     public static MetaItem<?>.MetaValueItem ASUPRACHRONAL_MAX;
     // Primitive Circuit Components
-    public static MetaItem<?>.MetaValueItem VACUUM_TUBE_COMPONENTS;
+    public static MetaItem<?>.MetaValueItem VACUUM_TUBE_COMPONENT;
 
     // Crystal Circuit Components
     public static MetaItem<?>.MetaValueItem EU_DOPED_CUBIC_ZIRCONIA_BOULE;
@@ -375,6 +404,12 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem BOSE_EINSTEIN_CONDENSATE_CONTAINMENT_UNIT;
     public static MetaItem<?>.MetaValueItem BOSE_EINSTEIN_CONDENSATE;
     public static MetaItem<?>.MetaValueItem ESR_COMPUTATION_UNIT;
+
+    public static MetaItem<?>.MetaValueItem UNTREATED_COSMIC_CPU;
+    public static MetaItem<?>.MetaValueItem COSMIC_CPU;
+    public static MetaItem<?>.MetaValueItem COSMIC_CPU_CHIP;
+    public static MetaItem<?>.MetaValueItem COSMIC_MEMORY_CHIP;
+    public static MetaItem<?>.MetaValueItem SUPRACAUSAL_MEMORY_CHIP;
     //  Covers
     public static MetaItem<?>.MetaValueItem ELECTRIC_MOTOR_MAX;
     public static MetaItem<?>.MetaValueItem ELECTRIC_PISTON_MAX;
@@ -441,7 +476,7 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem CARBON_ALLOTROPE;
     public static MetaItem<?>.MetaValueItem GRAPHENE_ALIGNED;
     public static MetaItem<?>.MetaValueItem BORON_NITRIDE_GRINDER;
-    public static MetaItem<?>.MetaValueItem VACUUM_TUBE_COMPONENT;
+    public static MetaItem<?>.MetaValueItem VACUUM_TUBE_COMPONENTS;
     public static MetaItem<?>.MetaValueItem SEPARATION_ELECTROMAGNET;
     public static MetaItem<?>.MetaValueItem PROTONATED_FULLERENE_SIEVING_MATRIX;
     public static MetaItem<?>.MetaValueItem SATURATED_FULLERENE_SIEVING_MATRIX;

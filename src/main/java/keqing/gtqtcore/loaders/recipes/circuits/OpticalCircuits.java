@@ -7,59 +7,31 @@ import keqing.gtqtcore.api.unification.ore.GTQTOrePrefix;
 import net.minecraftforge.fluids.FluidStack;
 
 import static gregicality.multiblocks.api.recipes.GCYMRecipeMaps.ALLOY_BLAST_RECIPES;
+import static gregtech.common.items.MetaItems.*;
+import static gregtech.common.items.MetaItems.SHAPE_EXTRUDER_WIRE;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
-import static gregtech.common.items.MetaItems.CRYSTAL_CENTRAL_PROCESSING_UNIT;
-import static gregtech.common.items.MetaItems.NOR_MEMORY_CHIP;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.ElectrolyteReflectorMixture;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
+import static keqing.gtqtcore.api.unification.TJMaterials.Polyetheretherketone;
+import static keqing.gtqtcore.api.utils.GTQTUtil.CWT;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 public class OpticalCircuits {
 
+    static int SECOND=20;
+    static int MINUTE=1200;
     public static void init() {
-        pram();
-        opticalFiber();
-        dielectricMirror();
-        lasers();
         board();
         smd();
+        SoC();
         circuits();
+        CircuitComponent();
     }
-
-    private static void pram() {
-        FORMING_PRESS_RECIPES.recipeBuilder()
-                .input(plate, GSTGlass, 2)
-                .input(foil, Americium, 8)
-                .output(PHASE_CHANGE_MEMORY, 4)
-                .duration(200).EUt(VA[UHV]).buildAndRegister();
-    }
-
-    private static void opticalFiber() {
-        // Si + 4Cl -> SiCl4
-        BURNER_REACTOR_RECIPES.recipeBuilder()
-                .input(dust, Silicon)
-                .fluidInputs(Chlorine.getFluid(4000))
-                .circuitMeta(3)
-                .fluidOutputs(SiliconTetrachloride.getFluid(1000))
-                .duration(150).EUt(VA[HV]).buildAndRegister();
-
-        // Ge + 2O -> GeO2
-        CHEMICAL_RECIPES.recipeBuilder()
-                .input(dust, Germanium)
-                .fluidInputs(Oxygen.getFluid(2000))
-                .output(dust, GermaniumDioxide, 3)
-                .duration(150).EUt(VA[HV]).buildAndRegister();
-
-        // 0.25GeCl4 + 0.25POCl3 + SiCl4-> 0.25GePSi4 + 5.75Cl
-        CVD_RECIPES.recipeBuilder()
-                .fluidInputs(GermaniumTetrachloride.getFluid(250))
-                .fluidInputs(PhosphorylChloride.getFluid(250))
-                .fluidInputs(SiliconTetrachloride.getFluid(1000))
-                .notConsumable(MetaItems.SHAPE_EXTRUDER_WIRE)
-                .output(OPTICAL_FIBER, 8)
-                .duration(400).EUt(VA[IV]).buildAndRegister();
+    private static void CircuitComponent() {
 
         //TODO Low Gravity
         ALLOY_BLAST_RECIPES.recipeBuilder()
@@ -74,98 +46,269 @@ public class OpticalCircuits {
                 .blastFurnaceTemp(1073)
                 .duration(1800).EUt(VA[HV]).buildAndRegister();
 
+        ALLOY_BLAST_RECIPES.recipeBuilder()
+                .input(dust, Zirconium, 5)
+                .input(dust, Barium, 2)
+                .input(dust, Lanthanum)
+                .input(dust, Aluminium)
+                .input(dust, Sodium, 2)
+                .fluidInputs(Fluorine.getFluid(6200))
+                .circuitMeta(5)
+                .fluidOutputs(ZBLANGlass.getFluid(L * 11))
+                .EUt(VA[HV])
+                .duration(MINUTE + MINUTE / 2)
+                .blastFurnaceTemp(1073)
+                .buildAndRegister();
+
+        //  GST Glass
+        MIXER_RECIPES.recipeBuilder()
+                .input(dust, Germanium, 2)
+                .input(dust, Antimony, 2)
+                .input(dust, Tellurium, 5)
+                .circuitMeta(3)
+                .output(dust, GSTGlass, 9)
+                .EUt(VA[HV])
+                .duration(12 * SECOND + 10)
+                .buildAndRegister();
+
+        ALLOY_BLAST_RECIPES.recipeBuilder()
+                .input(dust, Germanium, 2)
+                .input(dust, Antimony, 2)
+                .input(dust, Tellurium, 5)
+                .circuitMeta(3)
+                .fluidOutputs(GSTGlass.getFluid(L * 9))
+                .EUt(VA[HV])
+                .duration(MINUTE + 20 * SECOND)
+                .blastFurnaceTemp(873)
+                .buildAndRegister();
+
+        //  Er-doped ZBLAN Glass
         ALLOY_SMELTER_RECIPES.recipeBuilder()
                 .input(ingot, ZBLANGlass)
                 .input(dust, Erbium)
                 .output(ingot, ErbiumDopedZBLANGlass, 2)
-                .duration(200).EUt(VA[HV]).buildAndRegister();
+                .EUt(VA[HV])
+                .duration(10 * SECOND)
+                .buildAndRegister();
 
+        //  Pr-doped ZBLAN Glass
         ALLOY_SMELTER_RECIPES.recipeBuilder()
                 .input(ingot, ZBLANGlass)
                 .input(dust, Praseodymium)
                 .output(ingot, PraseodymiumDopedZBLANGlass, 2)
-                .duration(200).EUt(VA[HV]).buildAndRegister();
+                .EUt(VA[HV])
+                .duration(10 * SECOND)
+                .buildAndRegister();
 
-        //TODO Implement Optical Fiber Cables
-//        CHEMICAL_BATH_RECIPES.recipeBuilder()
-//                .input(OPTICAL_FIBER, 4)
-//                .fluidInputs(KaptonK.getFluid(L * 2))
-//                .output(OPTICAL_FIBER_CABLE)
-//                .duration(100).EUt(VA[HV]).buildAndRegister();
-//
-//        CHEMICAL_BATH_RECIPES.recipeBuilder()
-//                .input(OPTICAL_FIBER, 4)
-//                .fluidInputs(Kevlar.getFluid(L / 9))
-//                .output(OPTICAL_FIBER_CABLE)
-//                .duration(100).EUt(VA[HV]).buildAndRegister();
-    }
+        //  PRAM
+        FORMING_PRESS_RECIPES.recipeBuilder()
+                .input(RANDOM_ACCESS_MEMORY)
+                .input(plate, GSTGlass, 2)
+                .input(foil, Americium, 8)
+                .output(PHASE_CHANGE_MEMORY, 4)
+                .EUt(VA[UHV])
+                .duration(10 * SECOND)
+                .cleanroom(CleanroomType.CLEANROOM)
+                .buildAndRegister();
 
-    private static void dielectricMirror() {
-        // 2Ta + 5O -> Ta2O5
+        //  ACNOR
+        FORMING_PRESS_RECIPES.recipeBuilder()
+                .input(NOR_MEMORY_CHIP)
+                .input(OPTICAL_FIBER, 2)
+                .input(foil, Trinium, 8)
+                .output(OPTICAL_NOR_MEMORY_CHIP, 4)
+                .EUt(VA[UHV])
+                .duration(10 * SECOND)
+                .cleanroom(CleanroomType.CLEANROOM)
+                .buildAndRegister();
+
+        //  Si + 4Cl -> SiCl4
         CHEMICAL_RECIPES.recipeBuilder()
-                .input(dust, Tantalum, 2)
-                .fluidInputs(Oxygen.getFluid(5000))
-                .output(dust, TantalumPentoxide, 7)
-                .duration(110).EUt(VA[LV]).buildAndRegister();
+                .input(dust, Silicon)
+                .fluidInputs(Chlorine.getFluid(4000))
+                .circuitMeta(1)
+                .fluidOutputs(SiliconTetrachloride.getFluid(1000))
+                .EUt(VA[LV])
+                .duration(15 * SECOND)
+                .buildAndRegister();
 
+        //  Another GeCl4 recipe
+        //  You can get GeCl4 by Germanium process, but when you make optical circuit,
+        //  through Isa mill chain, you can directly get Germanium, so maybe this recipe is useful.
+        CHEMICAL_RECIPES.recipeBuilder()
+                .input(dust, Germanium)
+                .circuitMeta(4)
+                .fluidInputs(Chlorine.getFluid(4000))
+                .fluidOutputs(GermaniumTetrachloride.getFluid(1000))
+                .EUt(VA[MV])
+                .duration(17 * SECOND + 10)
+                .buildAndRegister();
+
+        //  Optical Fiber
+        PLASMA_CVD_RECIPES.recipeBuilder()
+                .notConsumable(SHAPE_EXTRUDER_WIRE)
+                .fluidInputs(GermaniumTetrachloride.getFluid(250))
+                .fluidInputs(PhosphorylChloride.getFluid(250))
+                .fluidInputs(SiliconTetrachloride.getFluid(1000))
+                .output(OPTICAL_FIBER, 8)
+                .EUt(VA[LuV])
+                .duration(20 * SECOND)
+                .cleanroom(CleanroomType.CLEANROOM)
+                .buildAndRegister();
+
+        //  Dielectric Mirror
         MOLECULAR_BEAM_RECIPES.recipeBuilder()
+                .input(foil, Polybenzimidazole)
                 .input(dust, ErbiumDopedZBLANGlass, 2)
                 .input(dust, PraseodymiumDopedZBLANGlass, 2)
-                .input(dust, TantalumPentoxide, 2)
-                .fluidInputs(Polybenzimidazole.getFluid(144))
+                .input(dust, TantalumPentoxide, 7)
                 .output(DIELECTRIC_MIRROR)
-                .temperature(2520)
-                .duration(250).EUt(VA[IV]).buildAndRegister();
-    }
+                .EUt(VA[LuV])
+                .duration(MINUTE / 2)
+                .temperature(2820)
+                .cleanroom(CleanroomType.CLEANROOM)
+                .buildAndRegister();
 
-    private static void lasers() {
-        MIXER_RECIPES.recipeBuilder()
-                .fluidInputs(Helium.getFluid(900))
-                .fluidInputs(Neon.getFluid(100))
-                .fluidOutputs(HeliumNeon.getFluid(1000))
-                .duration(300).EUt(16).buildAndRegister();
-
-        // 2Y + 3O -> Y2O3
-        CHEMICAL_RECIPES.recipeBuilder()
-                .input(dust, Yttrium, 2)
-                .fluidInputs(Oxygen.getFluid(3000))
-                .output(dust, YttriumOxide, 5)
-                .duration(100).EUt(16).buildAndRegister();
-
-        // 2Nd + 3O -> Bd2O3
-        CHEMICAL_RECIPES.recipeBuilder()
-                .input(dust, Neodymium, 2)
-                .fluidInputs(Oxygen.getFluid(3000))
-                .output(dust, NeodymiumOxide, 5)
-                .duration(100).EUt(16).buildAndRegister();
-
-        AUTOCLAVE_RECIPES.recipeBuilder()
-                .input(dust, YttriumOxide, 5)
-                .input(dust, Alumina, 5)
-                .fluidInputs(DistilledWater.getFluid(8000))
-                .output(GTQTOrePrefix.seedCrystal, NdYAG)
-                .duration(288).EUt(VA[IV]).buildAndRegister();
-
-        ASSEMBLER_RECIPES.recipeBuilder()
+        //  Empty Laser
+        VACUUM_CHAMBER_RECIPES.recipeBuilder()
                 .input(DIELECTRIC_MIRROR)
                 .input(plate, SterlingSilver, 2)
                 .input(ring, TungstenSteel, 2)
                 .input(cableGtSingle, Platinum, 2)
                 .fluidInputs(BorosilicateGlass.getFluid(L * 2))
                 .output(EMPTY_LASER_ASSEMBLY)
-                .duration(100).EUt(VA[IV]).buildAndRegister();
+                .EUt(VA[IV])
+                .duration(5 * SECOND)
+                .buildAndRegister();
+
+        //  Helium-Neon Laser
+        MIXER_RECIPES.recipeBuilder()
+                .fluidInputs(Helium.getFluid(1000))
+                .fluidInputs(Neon.getFluid(1000))
+                .fluidOutputs(HeliumNeon.getFluid(1000))
+                .EUt(VA[MV])
+                .duration(6 * SECOND)
+                .buildAndRegister();
 
         CANNER_RECIPES.recipeBuilder()
                 .input(EMPTY_LASER_ASSEMBLY)
                 .fluidInputs(HeliumNeon.getFluid(1000))
                 .output(HELIUM_NEON_LASER)
-                .duration(120).EUt(16).buildAndRegister();
+                .EUt(VA[HV])
+                .duration(6 * SECOND)
+                .cleanroom(CleanroomType.CLEANROOM)
+                .buildAndRegister();
 
+        //  Nd:YAG Laser
         CANNER_RECIPES.recipeBuilder()
                 .input(EMPTY_LASER_ASSEMBLY)
                 .input(gem, NdYAG)
                 .output(ND_YAG_LASER)
-                .duration(120).EUt(16).buildAndRegister();
+                .EUt(VA[HV])
+                .duration(6 * SECOND)
+                .cleanroom(CleanroomType.CLEANROOM)
+                .buildAndRegister();
+
+        //  Optical Laser Control Unit
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(OPTICAL_CIRCUIT_BOARD)
+                .input(HELIUM_NEON_LASER)
+                .input(ND_YAG_LASER)
+                .input(lens, Diamond, 2)
+                .fluidInputs(SolderingAlloy.getFluid(L))
+                .output(OPTICAL_LASER_CONTROL_UNIT)
+                .duration(MINUTE / 2)
+                .EUt(VA[UHV])
+                .cleanroom(CleanroomType.CLEANROOM)
+                .buildAndRegister();
+    }
+    private static void SoC() {
+        //  MnF2 + ZnS + Ta2O5 + TiO2 + C2H6O -> Electrolyte Reflector Mixture
+        MIXER_RECIPES.recipeBuilder()
+                .input(dust, ManganeseDifluoride, 3)
+                .input(dust, ZincSulfide, 2)
+                .input(dust, TantalumPentoxide, 7)
+                .input(dust, Rutile, 3)
+                .fluidInputs(Ethanol.getFluid(1000))
+                .fluidOutputs(ElectrolyteReflectorMixture.getFluid(1000))
+                .EUt(VA[UHV])
+                .duration(10 * SECOND)
+                .cleanroom(CleanroomType.CLEANROOM)
+                .buildAndRegister();
+
+        //  Centrifuge recipe of Electrolyte Reflector Mixture
+        //  This recipe should in Cleanroom environment.
+        CENTRIFUGE_RECIPES.recipeBuilder()
+                .fluidInputs(ElectrolyteReflectorMixture.getFluid(1000))
+                .output(dust, ManganeseDifluoride, 3)
+                .output(dust, ZincSulfide, 2)
+                .output(dust, TantalumPentoxide, 7)
+                .output(dust, Rutile, 3)
+                .fluidOutputs(Ethanol.getFluid(1000))
+                .EUt(VA[LuV])
+                .duration(20 * SECOND)
+                .cleanroom(CleanroomType.CLEANROOM)
+                .buildAndRegister();
+
+        //  Bh-doped SrSO4 Boule -> Bh-doped SrSO4 Wafer
+        CUTTER_RECIPES.recipeBuilder()
+                .input(STRONTIUM_CARBONATE_BOHRIUM_BOULE)
+                .fluidInputs(Lubricant.getFluid(300))
+                .outputs(STRONTIUM_CARBONATE_BOHRIUM_WAFER.getStackForm(6))
+                .EUt(VA[EV])
+                .duration(10 * SECOND)
+                .cleanroom(CleanroomType.CLEANROOM)
+                .buildAndRegister();
+
+        //  Bh-doped SrSO4 Wafer -> Optical Wafer
+        //  This is a special wafer for Optical SoC process.
+        CHEMICAL_BATH_RECIPES.recipeBuilder()
+                .input(STRONTIUM_CARBONATE_BOHRIUM_WAFER)
+                .fluidInputs(ElectrolyteReflectorMixture.getFluid(16))
+                .output(STRONTIUM_CARBONATE_OPTICAL_WAFER)
+                .EUt(VA[UV])
+                .duration(6 * SECOND)
+                .cleanroom(CleanroomType.CLEANROOM)
+                .buildAndRegister();
+
+        //  Optical Wafer -> Optical Chip
+        CUTTER_RECIPES.recipeBuilder()
+                .input(STRONTIUM_CARBONATE_OPTICAL_WAFER)
+                .fluidInputs(Lubricant.getFluid(200))
+                .output(STRONTIUM_CARBONATE_OPTICAL_CHIP, 8)
+                .EUt(VA[EV])
+                .duration(5 * SECOND)
+                .cleanroom(CleanroomType.CLEANROOM)
+                .buildAndRegister();
+
+        //  Optical IMC Board
+        PRECISE_ASSEMBLER_RECIPES.recipeBuilder()
+                .input(plate, PedotTMA)
+                .input(STRONTIUM_CARBONATE_OPTICAL_CHIP, 2)
+                .input(lens, LithiumNiobate)
+                .input(dust, ZBLANGlass, 2)
+                .fluidInputs(TinAlloy.getFluid(L * 2))
+                .output(OPTICAL_IMC_BOARD, 2)
+                .EUt(VA[UEV])
+                .duration(20 * SECOND)
+                .Tier(3) // UV
+                .CWUt(CWT[UHV])
+                .buildAndRegister();
+
+        //  Optical SoC
+        PRECISE_ASSEMBLER_RECIPES.recipeBuilder()
+                .input(OPTICAL_IMC_BOARD)
+                .input(UHASOC_CHIP, 2)
+                .input(OPTICAL_FIBER, 4)
+                .input(wireFine, Solarium, 4)
+                .fluidInputs(SiliconCarbide.getFluid(L * 2))
+                .fluidInputs(Glowstone.getFluid(4000))
+                .output(PHOTOELECTRON_SOC, 4)
+                .EUt(VA[UEV])
+                .CWUt(CWT[UEV])
+                .duration(10 * SECOND)
+                .Tier(5)
+                .buildAndRegister();
     }
 
     private static void board() {
@@ -185,66 +328,89 @@ public class OpticalCircuits {
                     .cleanroom(CleanroomType.CLEANROOM)
                     .duration(210).EUt(VA[IV]).buildAndRegister();
         }
-
-        ASSEMBLER_RECIPES.recipeBuilder()
-                .input(OPTICAL_CIRCUIT_BOARD)
-                .input(HELIUM_NEON_LASER)
-                .input(ND_YAG_LASER)
-//                .input(OPTICAL_FIBER_CABLE, 2) //TODO optical fiber cables
-                .input(lens, Diamond, 2)
-                .fluidInputs(SolderingAlloy.getFluid(L))
-                .output(OPTICAL_LASER_CONTROL_UNIT)
-                .duration(600).EUt(UHV).buildAndRegister();
     }
 
     private static void smd() {
         ASSEMBLER_RECIPES.recipeBuilder()
                 .input(wireFine, Naquadah, 4)
                 .input(dust, CadmiumSulfide)
-                .output(OPTICAL_RESISTOR, 16)
                 .fluidInputs(KaptonE.getFluid(L * 2))
-                .duration(160).EUt(VA[UV]).buildAndRegister();
+                .output(OPTICAL_RESISTOR, 16)
+                .EUt(VA[UV])
+                .duration(8 * SECOND)
+                .cleanroom(CleanroomType.CLEANROOM)
+                .buildAndRegister();
 
         ASSEMBLER_RECIPES.recipeBuilder()
                 .input(wireFine, Iridium, 8)
                 .input(foil, Germanium)
                 .fluidInputs(KaptonE.getFluid(L))
                 .output(OPTICAL_TRANSISTOR, 16)
-                .duration(160).EUt(VA[UV]).buildAndRegister();
+                .EUt(VA[UV])
+                .duration(8 * SECOND)
+                .cleanroom(CleanroomType.CLEANROOM)
+                .buildAndRegister();
 
-        ASSEMBLER_RECIPES.recipeBuilder()
+        PLASMA_CVD_RECIPES.recipeBuilder()
                 .input(OPTICAL_FIBER, 2)
                 .input(plate, ErbiumDopedZBLANGlass)
                 .fluidInputs(KaptonE.getFluid(L / 4))
                 .output(OPTICAL_CAPACITOR, 16)
-                .duration(160).EUt(VA[UV]).buildAndRegister();
+                .EUt(VA[UV])
+                .duration(8 * SECOND)
+                .cleanroom(CleanroomType.CLEANROOM)
+                .buildAndRegister();
 
         ASSEMBLER_RECIPES.recipeBuilder()
                 .input(dust, Terbium)
                 .input(wireFine, BorosilicateGlass, 4)
                 .fluidInputs(KaptonE.getFluid(L / 2))
                 .output(OPTICAL_DIODE, 16)
-                .duration(160).EUt(VA[UV]).buildAndRegister();
+                .EUt(VA[UV])
+                .duration(8 * SECOND)
+                .cleanroom(CleanroomType.CLEANROOM)
+                .buildAndRegister();
 
         ION_IMPLANTATOR_RECIPES.recipeBuilder()
                 .input(dust, Silver, 4)
-                .fluidInputs(PMMA.getFluid(144))
+                .input(plate, PMMA)
+                .fluidInputs(KaptonE.getFluid(L))
                 .output(OPTICAL_INDUCTOR, 16)
-                .duration(160).EUt(VA[UV]).buildAndRegister();
+                .EUt(VA[UV])
+                .duration(8 * SECOND)
+                .cleanroom(CleanroomType.CLEANROOM)
+                .buildAndRegister();
     }
 
     private static void circuits() {
-        //TODO SoC Recipe
+        //  Processor
         CIRCUIT_ASSEMBLER_RECIPES.recipeBuilder()
                 .input(OPTICAL_LASER_CONTROL_UNIT)
-                .input(CRYSTAL_CENTRAL_PROCESSING_UNIT) //TODO new CPU
+                .input(CRYSTAL_CENTRAL_PROCESSING_UNIT)
                 .input(OPTICAL_RESISTOR, 8)
                 .input(OPTICAL_CAPACITOR, 8)
                 .input(OPTICAL_TRANSISTOR, 8)
                 .input(OPTICAL_FIBER, 8)
-                .output(OPTICAL_PROCESSOR)
-                .duration(200).EUt(VA[UHV]).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
+                .output(OPTICAL_PROCESSOR, 2)
+                .solderMultiplier(1)
+                .EUt(VA[UHV])
+                .duration(10 * SECOND)
+                .cleanroom(CleanroomType.CLEANROOM)
+                .buildAndRegister();
 
+        CIRCUIT_ASSEMBLER_RECIPES.recipeBuilder()
+                .input(OPTICAL_CIRCUIT_BOARD)
+                .input(PHOTOELECTRON_SOC)
+                .input(wireFine, PedotPSS, 8)
+                .input(bolt, Adamantium, 8)
+                .output(OPTICAL_PROCESSOR, 4)
+                .solderMultiplier(1)
+                .EUt(VA[UEV])
+                .duration(5 * SECOND)
+                .cleanroom(CleanroomType.CLEANROOM)
+                .buildAndRegister();
+
+        //  Assembly
         CIRCUIT_ASSEMBLER_RECIPES.recipeBuilder()
                 .input(OPTICAL_CIRCUIT_BOARD)
                 .input(OPTICAL_PROCESSOR, 2)
@@ -252,46 +418,59 @@ public class OpticalCircuits {
                 .input(OPTICAL_CAPACITOR, 12)
                 .input(PHASE_CHANGE_MEMORY, 24)
                 .input(OPTICAL_FIBER, 16)
-                .output(OPTICAL_ASSEMBLY)
+                .output(OPTICAL_ASSEMBLY, 2)
                 .solderMultiplier(2)
-                .duration(400).EUt(VA[UHV]).cleanroom(CleanroomType.CLEANROOM).buildAndRegister();
+                .EUt(VA[UHV])
+                .duration(20 * SECOND)
+                .cleanroom(CleanroomType.CLEANROOM)
+                .buildAndRegister();
 
+        //  Computer
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(OPTICAL_CIRCUIT_BOARD)
                 .input(OPTICAL_ASSEMBLY, 2)
                 .input(OPTICAL_DIODE, 8)
-                .input(NOR_MEMORY_CHIP, 16) //TODO new NOR Gate
+                .input(OPTICAL_NOR_MEMORY_CHIP, 16)
                 .input(PHASE_CHANGE_MEMORY, 32)
                 .input(OPTICAL_FIBER, 24)
                 .input(foil, KaptonE, 32)
                 .input(plate, Tritanium, 4)
-                .fluidInputs(SolderingAlloy.getFluid(L * 12))
+                .fluidInputs(SolderingAlloy.getFluid(4320))
+                .fluidInputs(Polyetheretherketone.getFluid(2304))
+                .fluidInputs(Vibranium.getFluid(1152))
                 .output(OPTICAL_COMPUTER)
+                .EUt(VA[UHV])
+                .duration(20 * SECOND)
                 .stationResearch(b -> b
                         .researchStack(OPTICAL_ASSEMBLY.getStackForm())
-                        .CWUt(576,230400)
+                        .CWUt(64)
                         .EUt(VA[UHV]))
-                .duration(400).EUt(614400).buildAndRegister();
+                .buildAndRegister();
 
+        //  Mainframe
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(frameGt, Tritanium, 2)
+                .input(frameGt, Orichalcum, 2)
                 .input(OPTICAL_COMPUTER, 2)
-                .input(OPTICAL_DIODE, 8)
-                .input(NOR_MEMORY_CHIP, 16) //TODO new NOR Gate
-                .input(PHASE_CHANGE_MEMORY, 32)
-                .input(NANO_POWER_IC, 2)
-//                .input(OPTICAL_FIBER_CABLE, 8) //TODO Optical Fiber Cable
-                .input(OPTICAL_INDUCTOR, 8)
+                .input(OPTICAL_DIODE, 16)
                 .input(OPTICAL_CAPACITOR, 16)
-                .input(OPTICAL_RESISTOR, 8)
-                .input(plate, Tritanium, 8)
-                .fluidInputs(SolderingAlloy.getFluid(L * 20))
-                .fluidInputs(Kevlar.getFluid(L * 9))
+                .input(OPTICAL_TRANSISTOR, 16)
+                .input(OPTICAL_RESISTOR, 16)
+                .input(OPTICAL_INDUCTOR, 16)
+                .input(foil, KaptonE, 64)
+                .input(PHASE_CHANGE_MEMORY, 32)
+                .input(wireGtDouble, Tritanium, 16)
+                .input(plate, Infinity, 8)
+                .fluidInputs(SolderingAlloy.getFluid(5472))
+                .fluidInputs(Polyetheretherketone.getFluid(4320))
+                .fluidInputs(Vibranium.getFluid(2304))
+                .fluidInputs(KaptonK.getFluid(1152))
                 .output(OPTICAL_MAINFRAME)
+                .EUt(VA[UEV])
+                .duration(MINUTE)
                 .stationResearch(b -> b
                         .researchStack(OPTICAL_COMPUTER.getStackForm())
-                        .CWUt(3456,1382400)
+                        .CWUt(384)
                         .EUt(VA[UEV]))
-                .duration(1200).EUt(4_800_000).buildAndRegister();
+                .buildAndRegister();
     }
 }

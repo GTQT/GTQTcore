@@ -79,12 +79,14 @@ public class GTQTRecipesManager {
         GCYSMetaTileEntityLoader.init();
         GCYSBlockRecipeLoader.init();
         BoulesRecipes.init();
-        BouleRecipeHandler.register();
+        FEPChain.init();
+        NdYAGChain.init();
         GrapheneChain.init();
         NanoCoatingRecipes.init();
         PreciousMetalChain.init();
         MiningDrill.init();
         HydrogenPeroxideChain.init();
+        PETChain.init();
         AcetyleneChain.init();
         TurpentineChain.init();
         EDTAChain.init();

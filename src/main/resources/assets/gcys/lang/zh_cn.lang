@@ -563,7 +563,12 @@ metaitem.plate.pico_power_integrated_circuit.tooltip=微微功率集成电路
 metaitem.plate.femto_power_integrated_circuit.name=FPIC
 metaitem.plate.femto_power_integrated_circuit.tooltip=毫微微功率集成电路
 
-
+metaitem.reticle.nano_power_integrated_circuit.name=NPIC晶圆光刻掩模
+metaitem.reticle.pico_power_integrated_circuit.name=PPIC晶圆光刻掩模
+metaitem.reticle.femto_power_integrated_circuit.name=FPIC晶圆光刻掩模
+metaitem.reticle.atto_pic.name=APIC晶圆光刻掩模
+metaitem.reticle.zepto_pic.name=ZPIC晶圆光刻掩模
+metaitem.reticle.uhasoc.name=UHASOC晶圆光刻掩模
 # Item Behaviors
 metaitem.behavior.held_item_destroy.message=拿着%s损坏了它！
 
@@ -619,7 +624,16 @@ metaitem.optical_laser_control_unit.name=光学激光控制装置
 metaitem.optical_laser_control_unit.tooltip=激光信息传输
 metaitem.esr_computation_unit.name=ESR计算单元
 metaitem.esr_computation_unit.tooltip=电子自旋共振量子计算！
-
+metaitem.wafer.untreated_cosmic_cpu.name=未处理的寰宇计算中央处理器（CCCPU）晶圆
+metaitem.wafer.untreated_cosmic_cpu.tooltip=待处理寰宇电路
+metaitem.wafer.cosmic_cpu.name=寰宇计算中央处理器（CCCPU）晶圆
+metaitem.wafer.cosmic_cpu.tooltip=寰宇计算中央处理器原料
+metaitem.wafer.chip.cosmic_cpu.name=寰宇计算中央处理器（CCCPU）晶片
+metaitem.wafer.chip.cosmic_cpu.tooltip=寰宇计算中央处理器
+metaitem.wafer.chip.cosmic_memory.name=世界线信息存储器（WLRAM）晶片
+metaitem.wafer.chip.cosmic_memory.tooltip=世界线信息存储器
+metaitem.wafer.chip.supracausal_memory.name=维度因果循环存储器（DCRAM）晶片
+metaitem.wafer.chip.supracausal_memory.tooltip=维度因果循环存储器
 # Circuits
 # Gooware
 metaitem.circuit.gooware_processor.name=化学处理器
