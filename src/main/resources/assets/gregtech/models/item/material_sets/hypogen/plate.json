@@ -1,7 +1,7 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "gtqtcore:items/material_sets/hypogen/plate",
-    "layer1": "gtqtcore:items/material_sets/hypogen/plate_overlay"
+    "layer0": "gtqtcore:items/material_sets/nuclear/plate",
+    "layer1": "gtqtcore:items/material_sets/nuclear/plate_overlay"
   }
 }

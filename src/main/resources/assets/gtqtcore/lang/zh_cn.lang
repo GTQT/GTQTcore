@@ -3787,6 +3787,7 @@ recipemap.alloy_klin.name=合金窑
 tile.multiblock_casing.naquadah_alloy_casing.name=超稳定硅岩合金机器外壳
 tile.multiblock_casing.naquadria_casing.name=抗辐射超能硅岩机器外壳
 tile.multiblock_casing.nitinol_machine_casing.name=镍钛诺机械外壳
+tile.multiblock_casing.hc_alloy_casing.name=化学惰性HG-1223耐热机器外壳
 tile.turbine_casing1.precise_assembler_casing_mk1.name=精密组装机外壳MK1
 tile.turbine_casing1.precise_assembler_casing_mk2.name=精密组装机外壳MK2
 tile.turbine_casing1.precise_assembler_casing_mk3.name=精密组装机外壳MK3

@@ -16,8 +16,10 @@ import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
 import gregtech.client.utils.TooltipHelper;
+import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityFluidHatch;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiFluidHatch;
 import gregtech.core.sound.GTSoundEvents;
+import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
@@ -42,6 +44,7 @@ import java.util.List;
 import java.util.function.Function;
 
 import static gregtech.api.GTValues.*;
+import static gregtech.api.util.RelativeDirection.*;
 
 public class MetaTileEntityDangoteDistillery extends MultiMapMultiblockController {
 
@@ -54,12 +57,9 @@ public class MetaTileEntityDangoteDistillery extends MultiMapMultiblockControlle
     }
     @Override
     public boolean canBeDistinct() {return true;}
+
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityDangoteDistillery(this.metaTileEntityId);
-    }
-
-    protected Function<BlockPos, Integer> multiblockPartSorter() {
-        return Vec3i::getY;
     }
 
     protected void addDisplayText(List<ITextComponent> textList) {
@@ -75,39 +75,30 @@ public class MetaTileEntityDangoteDistillery extends MultiMapMultiblockControlle
     }
 
 
-    @Nonnull
+    @Override
     protected BlockPattern createStructurePattern() {
-        return FactoryBlockPattern.start(RelativeDirection.RIGHT, RelativeDirection.FRONT, RelativeDirection.UP)
+        return FactoryBlockPattern.start(RIGHT, FRONT, UP)
                 .aisle("YSY", "YYY", "YYY")
-                .aisle("XXX", "XPX", "XXX").setRepeatable(1, 11)
+                .aisle("XXX", "XFX", "XXX").setRepeatable(11)
                 .aisle("XXX", "XXX", "XXX")
-                .where('S', this.selfPredicate())
-                .where('Y', states(getCasingState())
-                        .or(abilities(MultiblockAbility.IMPORT_ITEMS)
-                                .setMaxGlobalLimited(1))
-                        .or(abilities(MultiblockAbility.EXPORT_ITEMS)
-                                .setMaxGlobalLimited(1))
-                        .or(abilities(MultiblockAbility.INPUT_ENERGY)
-                                .setMinGlobalLimited(1)
-                                .setMaxGlobalLimited(3))
-                        .or(abilities(MultiblockAbility.IMPORT_FLUIDS)
-                                .setExactLimit(1)))
-                .where('X', states(getCasingState())
-                        .or(metaTileEntities(MultiblockAbility.REGISTRY.get(MultiblockAbility.EXPORT_FLUIDS)
-                                .stream()
-                                .filter(mte->!(mte instanceof MetaTileEntityMultiFluidHatch))
+                .where('S', selfPredicate())
+                .where('Y', states(this.getCasingState())
+                        .or(abilities(MultiblockAbility.EXPORT_ITEMS).setMaxGlobalLimited(1))
+                        .or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(3))
+                        .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setExactLimit(1)))
+                .where('X', states(this.getCasingState())
+                        .or(metaTileEntities(MultiblockAbility.REGISTRY.get(MultiblockAbility.EXPORT_FLUIDS).stream()
+                                .filter(mte->(mte instanceof MetaTileEntityFluidHatch))
                                 .toArray(MetaTileEntity[]::new))
                                 .setMinLayerLimited(1).setMaxLayerLimited(1))
-                        .or(this.autoAbilities(true, false)))
-                .where('P', states(getPipeCasingState()))
+                        .or(autoAbilities(true, false)))
+                .where('F', states(this.getCasingState()))
                 .build();
     }
-
-    private IBlockState getCasingState() {
-        return GTQTMetaBlocks.MULTI_CASING.getState(GTQTMultiblockCasing.CasingType.HC_ALLOY_CASING);
+    public boolean hasMufflerMechanics() {
+        return false;
     }
-
-    private IBlockState getPipeCasingState() {
+    private IBlockState getCasingState() {
         return GTQTMetaBlocks.MULTI_CASING.getState(GTQTMultiblockCasing.CasingType.HC_ALLOY_CASING);
     }
 

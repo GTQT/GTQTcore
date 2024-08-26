@@ -194,7 +194,7 @@ public class GTQTElementMaterials {
                         .enchantment(Enchantments.SHARPNESS, 10)
                         .enchantment(Enchantments.LOOTING, 5)
                         .enchantment(Enchantments.SWEEPING, 3).build())
-                .flags(GENERATE_PLATE)
+                .flags(GENERATE_FRAME,GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD)
                 .build();
         //  26017 Californium-252
         GTQTMaterials.Californium252 = new Material.Builder(getMaterialsId(), gregtechId("californium_252"))

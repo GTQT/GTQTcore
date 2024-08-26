@@ -3771,6 +3771,7 @@ recipemap.alloy_klin.name=Alloy Kiln
 tile.multiblock_casing.naquadah_alloy_casing.name=Superstable Naquadah Alloy Machine Casing
 tile.multiblock_casing.naquadria_casing.name=Anti-Radiation Superenergy Naquadria Machine Casing
 tile.multiblock_casing.nitinol_machine_casing.name=Nitinol Machine Casing
+tile.multiblock_casing.hc_alloy_casing.name=化学惰性HG-1223耐热机器外壳
 tile.turbine_casing1.precise_assembler_casing_mk1.name=Precise Assembler Casing MK1
 tile.turbine_casing1.precise_assembler_casing_mk2.name=Precise Assembler Casing MK2
 tile.turbine_casing1.precise_assembler_casing_mk3.name=Precise Assembler Casing MK3

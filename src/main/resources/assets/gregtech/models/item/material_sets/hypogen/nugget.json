@@ -1,7 +1,7 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "gtqtcore:items/material_sets/hypogen/nugget",
-    "layer1": "gtqtcore:items/material_sets/hypogen/nugget_overlay"
+    "layer0": "gtqtcore:items/material_sets/nuclear/nugget",
+    "layer1": "gtqtcore:items/material_sets/nuclear/nugget_overlay"
   }
 }

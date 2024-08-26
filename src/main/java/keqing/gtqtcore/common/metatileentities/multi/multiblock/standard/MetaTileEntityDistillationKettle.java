@@ -129,10 +129,9 @@ public class MetaTileEntityDistillationKettle extends RecipeMapMultiblockControl
                 .where('F', states(MetaBlocks.FRAMES.get(Materials.Steel).getBlock(Materials.Steel)))
                 .where('P', states(MetaBlocks.BOILER_CASING.getState(BoilerCasingType.STEEL_PIPE)))
                 .where('E', states(MetaBlocks.METAL_CASING.getState(MetalCasingType.STEEL_SOLID)))
-                .where('O', states((MetaBlocks.METAL_CASING.getState(MetalCasingType.STEEL_SOLID)))
-                        .or(metaTileEntities(MultiblockAbility.REGISTRY.get(MultiblockAbility.EXPORT_FLUIDS).stream()
+                .where('O', metaTileEntities(MultiblockAbility.REGISTRY.get(MultiblockAbility.EXPORT_FLUIDS).stream()
                                 .filter(mte->(mte instanceof MetaTileEntityFluidHatch))
-                                .toArray(MetaTileEntity[]::new))))
+                                .toArray(MetaTileEntity[]::new)))
                 .where(' ', any())
                 .build();
     }

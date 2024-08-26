@@ -19,6 +19,7 @@ import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.common.blocks.BlockMetalCasing.MetalCasingType;
 import gregtech.common.blocks.MetaBlocks;
+import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityFluidHatch;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiFluidHatch;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockPart;
 import gregtech.common.metatileentities.multi.multiblockpart.appeng.MetaTileEntityMEOutputHatch;
@@ -199,7 +200,10 @@ public class MetaTileEntityDistillationTower extends GTQTRecipeMapMultiblockOver
                         .or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(3))
                         .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setExactLimit(1)))
                 .where('X', TiredTraceabilityPredicate.CP_CASING.get()
-                        .or(abilities(MultiblockAbility.EXPORT_FLUIDS).setMaxLayerLimited(1, 1))
+                        .or(metaTileEntities(MultiblockAbility.REGISTRY.get(MultiblockAbility.EXPORT_FLUIDS).stream()
+                                .filter(mte->(mte instanceof MetaTileEntityFluidHatch))
+                                .toArray(MetaTileEntity[]::new))
+                                .setMinLayerLimited(1).setMaxLayerLimited(1))
                         .or(autoAbilities(true, false)))
                 .where('F', TiredTraceabilityPredicate.CP_TUBE.get())
                 .build();

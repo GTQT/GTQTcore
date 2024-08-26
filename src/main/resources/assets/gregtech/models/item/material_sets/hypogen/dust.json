@@ -1,7 +1,7 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "gtqtcore:items/material_sets/hypogen/dust",
-    "layer1": "gtqtcore:items/material_sets/hypogen/dust_overlay"
+    "layer0": "gtqtcore:items/material_sets/nuclear/dust",
+    "layer1": "gtqtcore:items/material_sets/nuclear/dust_overlay"
   }
 }

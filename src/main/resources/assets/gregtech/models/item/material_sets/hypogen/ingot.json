@@ -1,7 +1,7 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "gtqtcore:items/material_sets/hypogen/ingot",
-    "layer1": "gtqtcore:items/material_sets/hypogen/ingot_overlay"
+    "layer0": "gtqtcore:items/material_sets/nuclear/ingot",
+    "layer1": "gtqtcore:items/material_sets/nuclear/ingot_overlay"
   }
 }
