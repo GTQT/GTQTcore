@@ -215,7 +215,7 @@ public class NaquadahChain {
         //  Bromine + Chlorine -> Bromine Trifluoride
         CHEMICAL_RECIPES.recipeBuilder()
                 .fluidInputs(Bromine.getFluid(1000))
-                .fluidInputs(Chlorine.getFluid(3000))
+                .fluidInputs(Fluorine.getFluid(3000))
                 .circuitMeta(3)
                 .fluidOutputs(BromineTrifluoride.getFluid(1000))
                 .EUt(VA[LV])

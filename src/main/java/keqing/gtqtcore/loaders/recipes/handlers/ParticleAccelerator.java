@@ -698,7 +698,7 @@ public class ParticleAccelerator {
 
         GTQTcoreRecipeMaps.NUCLEOSYNTHESIS.recipeBuilder()
                 .input(NEUTRON)
-                .fluidInputs(Zircon.getFluid(1000))
+                .fluidInputs(Zirconium.getFluid(1000))
                 .fluidOutputs(Molybdenum.getFluid(1000))
                 .EUToStart(36000)
                 .Scattering(6)
