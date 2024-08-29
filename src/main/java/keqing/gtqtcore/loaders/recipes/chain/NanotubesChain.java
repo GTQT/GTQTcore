@@ -31,7 +31,7 @@ public class NanotubesChain {
                 .fluidInputs(DistilledWater.getFluid(L))
                 .output(seedCrystal, Prasiolite)
                 .duration(400)
-                .EUt(VA[MV])
+                .EUt(VA[EV])
                 .buildAndRegister();
 
         //  3Te + 2Bi -> Be2Te3

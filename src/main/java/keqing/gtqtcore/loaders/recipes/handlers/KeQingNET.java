@@ -102,7 +102,7 @@ public class KeQingNET {
         KQ_NET(0,2,4,DISK_4,GAS_TURBINE[1].getStackForm());
         KQ_NET(0,2,4,DISK_4,STEAM_TURBINE[1].getStackForm());
         //5 室温超导设计
-        KQ_NET(1,3,5,DISK_5,wireGtSingle,SamariumIronArsenicOxide);
+        KQ_NET(0,2,5,DISK_5,wireGtSingle,UraniumTriplatinum);
         //6 可控核聚变-环流器设计
         KQ_NET(2,3,6,DISK_6,PROTON);
         //7 可控核聚变-聚变超导线圈
@@ -143,6 +143,9 @@ public class KeQingNET {
         KQ_NET(3,4,23,DISK_23,ADVANCED_ASSEMBLY_LINE.getStackForm());
         //24 计算科学
         KQ_NET(3,3,24,DISK_24, HIGH_PERFORMANCE_COMPUTING_ARRAY.getStackForm());
+        //25 计算科学
+        KQ_NET(0,2,25,DISK_25, MINI_DATE_BANK.getStackForm());
+
     }
 
 
@@ -253,8 +256,8 @@ public class KeQingNET {
                 .input(CENTRIFUGE[3],4)
                 .input(frameGt, Aluminium, 8)
                 .input(plate, StainlessSteel, 32)
-                .input(wireGtSingle, HVSuperconductor, 16)
-                .input(wireGtSingle, HVSuperconductor, 16)
+                .input(wireGtSingle, MercuryBariumCalciumCuprate, 16)
+                .input(wireGtSingle, MercuryBariumCalciumCuprate, 16)
                 .fluidInputs(SolderingAlloy.getFluid(L * 8))
                 .fluidInputs(Tin.getFluid(L * 8))
                 .output(CORE_CENTRIFUGE)
@@ -272,8 +275,8 @@ public class KeQingNET {
                 .input(MIXER[3],4)
                 .input(frameGt, Aluminium, 8)
                 .input(plate, StainlessSteel, 32)
-                .input(wireGtSingle, HVSuperconductor, 16)
-                .input(wireGtSingle, HVSuperconductor, 16)
+                .input(wireGtSingle, MercuryBariumCalciumCuprate, 16)
+                .input(wireGtSingle, MercuryBariumCalciumCuprate, 16)
                 .fluidInputs(SolderingAlloy.getFluid(L * 8))
                 .fluidInputs(Tin.getFluid(L * 8))
                 .output(CORE_MIX)
@@ -291,8 +294,8 @@ public class KeQingNET {
                 .input(ORE_WASHER[3],4)
                 .input(frameGt, Aluminium, 8)
                 .input(plate, StainlessSteel, 32)
-                .input(wireGtSingle, HVSuperconductor, 16)
-                .input(wireGtSingle, HVSuperconductor, 16)
+                .input(wireGtSingle, MercuryBariumCalciumCuprate, 16)
+                .input(wireGtSingle, MercuryBariumCalciumCuprate, 16)
                 .fluidInputs(SolderingAlloy.getFluid(L * 8))
                 .fluidInputs(Tin.getFluid(L * 8))
                 .output(CORE_WASHER)
@@ -310,8 +313,8 @@ public class KeQingNET {
                 .input(FORGE_HAMMER[3],4)
                 .input(frameGt, Aluminium, 8)
                 .input(plate, StainlessSteel, 32)
-                .input(wireGtSingle, HVSuperconductor, 16)
-                .input(wireGtSingle, HVSuperconductor, 16)
+                .input(wireGtSingle, MercuryBariumCalciumCuprate, 16)
+                .input(wireGtSingle, MercuryBariumCalciumCuprate, 16)
                 .fluidInputs(SolderingAlloy.getFluid(L * 8))
                 .fluidInputs(Tin.getFluid(L * 8))
                 .output(CORE_HAMMER)
@@ -329,8 +332,8 @@ public class KeQingNET {
                 .input(ARC_FURNACE[3],4)
                 .input(frameGt, Aluminium, 8)
                 .input(plate, StainlessSteel, 32)
-                .input(wireGtSingle, HVSuperconductor, 16)
-                .input(wireGtSingle, HVSuperconductor, 16)
+                .input(wireGtSingle, MercuryBariumCalciumCuprate, 16)
+                .input(wireGtSingle, MercuryBariumCalciumCuprate, 16)
                 .fluidInputs(SolderingAlloy.getFluid(L * 8))
                 .fluidInputs(Tin.getFluid(L * 8))
                 .output(CORE_FURNACE)
@@ -1193,6 +1196,7 @@ public class KeQingNET {
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .inputs(COMPUTER_CASING.getItemVariant(BlockComputerCasing.CasingType.COMPUTER_CASING))
+                .input(MINI_DATE_BANK, 8)
                 .input(circuit, Tier.ZPM, 8)
                 .inputNBT(TOOL_DATA_ORB, NBTMatcher.ANY, NBTCondition.ANY)
                 .input(frameGt, HSSS, 32)
@@ -1204,9 +1208,9 @@ public class KeQingNET {
                 .fluidInputs(SolderingAlloy.getFluid(L * 2))
                 .fluidInputs(Lubricant.getFluid(500))
                 .output(DATA_BANK)
-                .stationResearch(b -> b
-                        .researchStack(MINI_DATE_BANK.getStackForm())
-                        .CWUt(CWT[LuV])
+                .scannerResearch(b -> b
+                        .researchStack(DISK_25.getStackForm())
+                        .duration(1200)
                         .EUt(VA[LuV]))
                 .duration(1200).EUt(6000).buildAndRegister();
 
@@ -1964,7 +1968,7 @@ public class KeQingNET {
                 .scannerResearch(b -> b
                         .researchStack(DISK_5.getStackForm())
                         .duration(1200)
-                        .EUt(VA[IV]))
+                        .EUt(VA[EV]))
                 .duration(800).EUt(VA[LuV]).buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
@@ -1975,7 +1979,7 @@ public class KeQingNET {
                 .scannerResearch(b -> b
                         .researchStack(DISK_5.getStackForm())
                         .duration(1200)
-                        .EUt(VA[IV]))
+                        .EUt(VA[EV]))
                 .duration(800).EUt(VA[LuV]).buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
@@ -1986,7 +1990,7 @@ public class KeQingNET {
                 .scannerResearch(b -> b
                         .researchStack(DISK_5.getStackForm())
                         .duration(1200)
-                        .EUt(VA[IV]))
+                        .EUt(VA[EV]))
                 .duration(800).EUt(VA[ZPM]).buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
@@ -1997,7 +2001,7 @@ public class KeQingNET {
                 .scannerResearch(b -> b
                         .researchStack(DISK_5.getStackForm())
                         .duration(1200)
-                        .EUt(VA[IV]))
+                        .EUt(VA[EV]))
                 .duration(800).EUt(VA[UV]).buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
@@ -2008,7 +2012,7 @@ public class KeQingNET {
                 .scannerResearch(b -> b
                         .researchStack(DISK_5.getStackForm())
                         .duration(1200)
-                        .EUt(VA[IV]))
+                        .EUt(VA[EV]))
                 .duration(800).EUt(VA[UHV]).buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()

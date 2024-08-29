@@ -14,7 +14,7 @@ public class GTQTCoreConfig {
         @Config.Comment("终局设备开关，包括尼戴，神锻。注意，严重影响加载时间！！！")
         @Config.RequiresMcRestart
         @Config.Name("End game machine switch")
-        public boolean EndGameSwitch = false;
+        public boolean EndGameSwitch = true;
 
         @Config.Comment("后期设备开关，包括鸿蒙之眼，等离子锻炉，移相器（暂未实装实际功能）")
         @Config.RequiresMcRestart

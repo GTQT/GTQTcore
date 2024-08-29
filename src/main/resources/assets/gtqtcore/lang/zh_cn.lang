@@ -806,7 +806,7 @@ gtqtcore.machine.industrial_hammer.name=工业锻造复合体
 gtqtcore.machine.industrial_furnace.name=工业熔炼复合体
 
 gtqtcore.machine.industrial_bender.name=工业卷板机
-gtqtcore.machine.industrial_wiremill.name=工业扎线机
+gtqtcore.machine.industrial_wiremill.name=工业轧线机
 gtqtcore.machine.industrial_extruder.name=工业压模机
 gtqtcore.machine.industrial_assembly_line.name=工业装配线
 
@@ -3763,6 +3763,10 @@ metaitem.disk.23.tooltip=§a物联网集成控制
 gtqtcore.multiblock.kqn.nb24=项目：计算科学 原子级别，传统计算结构的极限！我们无法在此基础上继续突破底层结构了。我们制作出了这个宇宙中最精密的传统结构计算机，他的性能是其下位的八倍，利用他我们可以大幅度减少交换机以及计算服务器的数量。
 metaitem.disk.24.name=数据存储器
 metaitem.disk.24.tooltip=§a计算科学
+
+gtqtcore.multiblock.kqn.nb25=项目：云数据存储 由分布式处理、并行处理和网格计算的发展通过云计算技术，网络服务提供者可以在数秒之内，处理数以千万计甚至亿计的信息，达到和”超级计算机”同样强大的网络服务。
+metaitem.disk.25.name=数据存储器
+metaitem.disk.25.tooltip=§a云数据存储
 
 gtqtcore.multiblock.kqn.bio0=欢迎使用KQCC科研计算机集成系统！
 metaitem.bio.0.name=基因存储器

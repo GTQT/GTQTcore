@@ -34,7 +34,6 @@ public class SuperconductorRecipes {
                 .input(wireGtSingle, ManganesePhosphide , 8)
                 .input(pipeTinyFluid, Steel, 4)
                 .inputs(ELECTRIC_PUMP_LV.getStackForm(2))
-                .notConsumable(IntCircuitIngredient.getIntegratedCircuit(1))
                 .fluidInputs(LiquidNitrogen.getFluid(1000))
                 .output(wireGtSingle, LVSuperconductor, 8)
                 .buildAndRegister();
@@ -45,7 +44,6 @@ public class SuperconductorRecipes {
                 .input(wireGtSingle, MagnesiumDiboride, 8)
                 .input(pipeTinyFluid, StainlessSteel, 4)
                 .inputs(ELECTRIC_PUMP_MV.getStackForm(2))
-                .notConsumable(IntCircuitIngredient.getIntegratedCircuit(1))
                 .fluidInputs(LiquidNitrogen.getFluid(1000))
                 .output(wireGtSingle, MVSuperconductor, 8)
                 .buildAndRegister();
@@ -56,7 +54,6 @@ public class SuperconductorRecipes {
                 .input(wireGtSingle, MercuryBariumCalciumCuprate , 8)
                 .input(pipeTinyFluid, Titanium, 4)
                 .inputs(ELECTRIC_PUMP_HV.getStackForm(2))
-                .notConsumable(IntCircuitIngredient.getIntegratedCircuit(1))
                 .fluidInputs(LiquidNitrogen.getFluid(2000))
                 .output(wireGtSingle, HVSuperconductor, 8)
                 .buildAndRegister();
@@ -67,7 +64,6 @@ public class SuperconductorRecipes {
                 .input(wireGtSingle, UraniumTriplatinum , 8)
                 .input(pipeTinyFluid, TungstenSteel, 4)
                 .inputs(ELECTRIC_PUMP_EV.getStackForm(2))
-                .notConsumable(IntCircuitIngredient.getIntegratedCircuit(1))
                 .fluidInputs(LiquidNitrogen.getFluid(2000))
                 .output(wireGtSingle, EVSuperconductor, 8)
                 .buildAndRegister();
@@ -78,7 +74,6 @@ public class SuperconductorRecipes {
                 .input(wireGtSingle, SamariumIronArsenicOxide, 8)
                 .input(pipeTinyFluid, NiobiumTitanium, 4)
                 .inputs(ELECTRIC_PUMP_IV.getStackForm(2))
-                .notConsumable(IntCircuitIngredient.getIntegratedCircuit(1))
                 .fluidInputs(LiquidNitrogen.getFluid(4000))
                 .output(wireGtSingle, IVSuperconductor, 8)
                 .buildAndRegister();
@@ -89,7 +84,6 @@ public class SuperconductorRecipes {
                 .input(wireGtSingle, IndiumTinBariumTitaniumCuprate , 8)
                 .input(pipeTinyFluid, Polybenzimidazole, 4)
                 .inputs(ELECTRIC_PUMP_LuV.getStackForm(2))
-                .notConsumable(IntCircuitIngredient.getIntegratedCircuit(1))
                 .fluidInputs(LiquidNitrogen.getFluid(4000))
                 .output(wireGtSingle, LuVSuperconductor, 8)
                 .buildAndRegister();
@@ -102,7 +96,6 @@ public class SuperconductorRecipes {
                 .input(wireGtSingle, UraniumRhodiumDinaquadide , 8)
                 .input(pipeTinyFluid, Naquadah, 4)
                 .inputs(ELECTRIC_PUMP_ZPM.getStackForm(2))
-                .notConsumable(IntCircuitIngredient.getIntegratedCircuit(1))
                 .fluidInputs(LiquidHelium.getFluid(8000))
                 .output(wireGtSingle, ZPMSuperconductor, 8)
                 .buildAndRegister();
@@ -115,7 +108,6 @@ public class SuperconductorRecipes {
                 .input(wireGtSingle, EnrichedNaquadahTriniumEuropiumDuranide , 8)
                 .input(pipeTinyFluid, Duranium, 4)
                 .inputs(ELECTRIC_PUMP_UV.getStackForm(2))
-                .notConsumable(IntCircuitIngredient.getIntegratedCircuit(1))
                 .fluidInputs(LiquidHelium.getFluid(8000))
                 .output(wireGtSingle, UVSuperconductor, 8)
                 .buildAndRegister();
@@ -128,7 +120,6 @@ public class SuperconductorRecipes {
                 .input(wireGtSingle, RutheniumTriniumAmericiumNeutronate , 8)
                 .input(pipeTinyFluid, Neutronium, 4)
                 .inputs(ELECTRIC_PUMP_UHV.getStackForm(2))
-                .notConsumable(IntCircuitIngredient.getIntegratedCircuit(1))
                 .fluidInputs(LiquidHelium.getFluid(12000))
                 .output(wireGtSingle, UHVSuperconductor, 8)
                 .buildAndRegister();

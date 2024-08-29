@@ -303,13 +303,8 @@ public class GCYSMaterials {
     public static Material LightHyperFuel;
     public static Material MediumHyperFuel;
     public static Material HeavyHyperFuel;
-
     public static Material Alumina;
-
     public static Material Hematite;
-
-    public static Material BlueVitriol;
-
     public static Material ChloroplatinicAcid;
     public static Material ZincRichSphalerite;
 

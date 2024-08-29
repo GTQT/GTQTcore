@@ -201,7 +201,7 @@ public class HigherDegreeMaterials {
                 .iconSet(DULL)
                 .flags(DISABLE_DECOMPOSITION)
                 .components(SolderingAlloy,10,Gallium,2)
-                .cableProperties(GTValues.V[GTValues.LV],4,0,true)
+                .cableProperties(GTValues.V[GTValues.LV],8,0,true)
                 .build();
 
         MVSuperconductor = new Material.Builder(getMaterialsId(), gregtechId("mv_superconductor"))
@@ -209,7 +209,7 @@ public class HigherDegreeMaterials {
                 .color(MagnesiumDiboride .getMaterialRGB())
                 .iconSet(SHINY)
                 .flags(DISABLE_DECOMPOSITION)
-                .cableProperties(GTValues.V[GTValues.MV], 8,0,true)
+                .cableProperties(GTValues.V[GTValues.MV], 16,0,true)
                 .components(MagnesiumDiboride ,1)
                 .build();
 
@@ -218,7 +218,7 @@ public class HigherDegreeMaterials {
                 .color(MercuryBariumCalciumCuprate .getMaterialRGB())
                 .iconSet(SHINY)
                 .flags(DISABLE_DECOMPOSITION)
-                .cableProperties(GTValues.V[GTValues.HV], 8,0,true)
+                .cableProperties(GTValues.V[GTValues.HV], 16,0,true)
                 .components(MercuryBariumCalciumCuprate ,1)
                 .build();
 
@@ -227,7 +227,7 @@ public class HigherDegreeMaterials {
                 .color(UraniumTriplatinum .getMaterialRGB())
                 .iconSet(SHINY)
                 .flags(DISABLE_DECOMPOSITION)
-                .cableProperties(GTValues.V[GTValues.EV], 12,0,true)
+                .cableProperties(GTValues.V[GTValues.EV], 24,0,true)
                 .components(UraniumTriplatinum ,1)
                 .build();
 
@@ -236,7 +236,7 @@ public class HigherDegreeMaterials {
                 .color(SamariumIronArsenicOxide .getMaterialRGB())
                 .iconSet(SHINY)
                 .flags(DISABLE_DECOMPOSITION)
-                .cableProperties(GTValues.V[GTValues.IV], 12,0,true)
+                .cableProperties(GTValues.V[GTValues.IV], 24,0,true)
                 .components(SamariumIronArsenicOxide ,1)
                 .build();
 
@@ -246,7 +246,7 @@ public class HigherDegreeMaterials {
                 .iconSet(SHINY)
                 .flags(DISABLE_DECOMPOSITION)
                 .components(IndiumTinBariumTitaniumCuprate ,1)
-                .cableProperties(GTValues.V[GTValues.LuV], 16,0,true)
+                .cableProperties(GTValues.V[GTValues.LuV], 32,0,true)
                 .build();
 
         ZPMSuperconductor = new Material.Builder(getMaterialsId(), gregtechId("zpm_superconductor"))
@@ -254,7 +254,7 @@ public class HigherDegreeMaterials {
                 .color(UraniumRhodiumDinaquadide .getMaterialRGB())
                 .iconSet(SHINY)
                 .flags(DISABLE_DECOMPOSITION)
-                .cableProperties(GTValues.V[GTValues.ZPM], 16,0,true)
+                .cableProperties(GTValues.V[GTValues.ZPM], 32,0,true)
                 .components(UraniumRhodiumDinaquadide ,1)
                 .build();
 
@@ -263,7 +263,7 @@ public class HigherDegreeMaterials {
                 .color(EnrichedNaquadahTriniumEuropiumDuranide .getMaterialRGB())
                 .iconSet(SHINY)
                 .flags(DISABLE_DECOMPOSITION)
-                .cableProperties(GTValues.V[UV], 32,0,true)
+                .cableProperties(GTValues.V[UV], 64,0,true)
                 .components(EnrichedNaquadahTriniumEuropiumDuranide ,1)
                 .build();
 
@@ -272,7 +272,7 @@ public class HigherDegreeMaterials {
                 .color(RutheniumTriniumAmericiumNeutronate .getMaterialRGB())
                 .iconSet(SHINY)
                 .flags(DISABLE_DECOMPOSITION)
-                .cableProperties(GTValues.V[GTValues.UHV], 48,0,true)
+                .cableProperties(GTValues.V[GTValues.UHV], 96,0,true)
                 .components(RutheniumTriniumAmericiumNeutronate ,1)
                 .build();
 /*

@@ -3748,6 +3748,11 @@ gtqtcore.multiblock.kqn.nb24=Project：Computing Atomic level, the limit of trad
 metaitem.disk.24.name=Data Storage Unit
 metaitem.disk.24.tooltip=§aComputing
 
+gtqtcore.multiblock.kqn.nb25=Project: Cloud Data Storage. Through the development of distributed processing, parallel processing, and grid computing, cloud computing technology enables network service providers to process tens of millions to even billions of pieces of information within seconds, achieving the same powerful network services as a "supercomputer".
+
+metaitem.disk.25.name=Data Storage Unit
+metaitem.disk.25.tooltip=§aCloud Data Storage
+
 gtqtcore.multiblock.kqn.bio0=Welcome to the KQCC Scientific Research Computer Integrated System!
 metaitem.bio.0.name=Genetic Storage Unit
 metaitem.bio.0.tooltip=§aNULL

@@ -17,6 +17,9 @@ import keqing.gtqtcore.api.recipes.machine.*;
 import keqing.gtqtcore.client.textures.GCYSGuiTextures;
 import keqing.gtqtcore.loaders.recipes.chain.PreciseAssemblerChain;
 
+import static gregtech.api.recipes.RecipeMaps.*;
+import static gregtech.api.recipes.RecipeMaps.REPLICATOR_RECIPES;
+
 
 //怎么写请看
 //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/api/recipe/GSRecipeMaps.java
@@ -539,6 +542,14 @@ public class GTQTcoreRecipeMaps {
     public static void init() {
         RecipeMaps.BLAST_RECIPES.setMaxFluidInputs(3);
         RecipeMaps.BLAST_RECIPES.setMaxFluidOutputs(3);
+        CUTTER_RECIPES.setMaxOutputs(4);
+        ELECTROLYZER_RECIPES.setMaxFluidInputs(2);
+        ELECTROLYZER_RECIPES.setSlotOverlay(false, true, false, GuiTextures.LIGHTNING_OVERLAY_2);
+        LASER_ENGRAVER_RECIPES.setMaxOutputs(2);
+        MASS_FABRICATOR_RECIPES.setSlotOverlay(false, false, GuiTextures.DUST_OVERLAY);
+        REPLICATOR_RECIPES.setMaxFluidInputs(3);
+        REPLICATOR_RECIPES.setSlotOverlay(false, false, GuiTextures.DUST_OVERLAY);
+        REPLICATOR_RECIPES.setSlotOverlay(true, false, GuiTextures.DUST_OVERLAY);
     }
 
 }

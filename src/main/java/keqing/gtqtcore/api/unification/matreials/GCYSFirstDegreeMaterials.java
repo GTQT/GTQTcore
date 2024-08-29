@@ -988,12 +988,6 @@ public class GCYSFirstDegreeMaterials {
                 .components(Iron, 2, Oxygen, 3)
                 .build();
 
-        BlueVitriol = new Material.Builder(3631, gregtechId("bluevitriol"))
-                .dust().fluid()
-                .color(0x0026ff).iconSet(MaterialIconSet.SHINY)
-                .components(Copper, 1, SulfuricAcid, 1)
-                .build();
-
         ChloroplatinicAcid = new Material.Builder(3632, gregtechId("chloroplatinicacid"))
                 .fluid()
                 .color(0xe04800)
