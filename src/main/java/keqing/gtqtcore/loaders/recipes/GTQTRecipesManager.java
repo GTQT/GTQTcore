@@ -58,6 +58,10 @@ public class GTQTRecipesManager {
         SuperconductorRecipes.init();
         CaliforniumChain.init();
         TitanateChain.init();
+        EnergyHatches.init();
+        FluidHatches.init();
+        MultiFluidHatches.init();
+        ItemBuses.init();
         NuclearLine.init();
         OceanChain.init();
         MagnetoResonaticCircuits.init();

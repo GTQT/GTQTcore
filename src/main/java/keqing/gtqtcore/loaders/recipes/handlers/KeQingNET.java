@@ -91,13 +91,16 @@ public class KeQingNET {
         KQ_NET(0,1,1,DISK_1,MetaTileEntities.GAS_TURBINE[2].getStackForm());
         KQ_NET(0,1,1,DISK_1,MetaTileEntities.STEAM_TURBINE[2].getStackForm());
         //2 涡轮效率升级II 小火箭
-        KQ_NET(0,2,2,DISK_2,COMBUSTION_GENERATOR[1].getStackForm());
-        KQ_NET(0,2,2,DISK_2,GAS_TURBINE[1].getStackForm());
-        KQ_NET(0,2,2,DISK_2,STEAM_TURBINE[1].getStackForm());
+        KQ_NET(0,2,2,DISK_2,COMBUSTION_GENERATOR[0].getStackForm());
+        KQ_NET(0,2,2,DISK_2,GAS_TURBINE[0].getStackForm());
+        KQ_NET(0,2,2,DISK_2,STEAM_TURBINE[0].getStackForm());
         //3 涡轮效率升级III 特大轮机
-        KQ_NET(0,3,3,DISK_3,ROCKET_ENGINE[2].getStackForm());
+        KQ_NET(0,3,3,DISK_3,EXTREME_COMBUSTION_ENGINE.getStackForm());
+        KQ_NET(0,3,3,DISK_3,LARGE_COMBUSTION_ENGINE.getStackForm());
         //4 蒸燃联合体系 爆燃 大火箭
-        KQ_NET(0,2,4,DISK_4,ROCKET_ENGINE[0].getStackForm());
+        KQ_NET(0,2,4,DISK_4,COMBUSTION_GENERATOR[1].getStackForm());
+        KQ_NET(0,2,4,DISK_4,GAS_TURBINE[1].getStackForm());
+        KQ_NET(0,2,4,DISK_4,STEAM_TURBINE[1].getStackForm());
         //5 室温超导设计
         KQ_NET(1,3,5,DISK_5,wireGtSingle,SamariumIronArsenicOxide);
         //6 可控核聚变-环流器设计

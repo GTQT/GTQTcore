@@ -46,7 +46,7 @@ public class GTQTCPUHelper {
             FEMTO_POWER_IC_WAFER,
     };
 
-    public static MetaItem.MetaValueItem []wafer={SILICON_WAFER,PHOSPHORUS_WAFER,NAQUADAH_WAFER,EUROPIUM_BOULE,AMERICIUM_BOULE,DUBNIUM_BOULE,NEUTRONIUM_WAFER};
+    public static MetaItem.MetaValueItem []wafer={SILICON_WAFER,PHOSPHORUS_WAFER,NAQUADAH_WAFER,EUROPIUM_WAFER,AMERICIUM_WAFER,DUBNIUM_WAFER,NEUTRONIUM_WAFER};
     static int [][]kind={{1,2},{1,2},{1,2},{1,2},{1,2},{1,2},{2,2},{2,2},{2,3},{2,3},{2,3},{2,3},{2,3},{2,3},{3,3},{4,3},{4,4},{4,5},{5,5}};
 
     //public boolean checkWafer(boolean sim) {

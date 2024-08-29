@@ -1,28 +1,79 @@
 package keqing.gtqtcore.integration.jei;
 
-import gregtech.api.GTValues;
-import gregtech.api.modules.GregTechModule;
-import gregtech.api.util.Mods;
+import gregtech.api.items.metaitem.MetaItem;
 import gregtech.integration.IntegrationSubmodule;
-import gregtech.modules.GregTechModules;
+import keqing.gtqtcore.api.utils.GTQTCPUHelper;
+import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
+import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
 import mezz.jei.api.JEIPlugin;
 import mezz.jei.api.ingredients.VanillaTypes;
+import mezz.jei.api.recipe.IRecipeCategoryRegistration;
+import net.minecraft.item.ItemStack;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static gregtech.common.items.MetaItems.*;
+import static gregtech.common.items.MetaItems.VACUUM_TUBE;
+import static keqing.gtqtcore.GTQTCore.MODID;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 
 @JEIPlugin
-@GregTechModule(
-        moduleID = GregTechModules.MODULE_JEI,
-        containerID = GTValues.MODID,
-        modDependencies = Mods.Names.JUST_ENOUGH_ITEMS,
-        name = "GregTech JEI Integration",
-        description = "JustEnoughItems Integration Module")
 public class JustEnoughItemsModule extends IntegrationSubmodule implements IModPlugin {
+    public static IGuiHelper guiHelper;
+    @Override
+    public void registerCategories( IRecipeCategoryRegistration registry) {
+        guiHelper = registry.getJeiHelpers().getGuiHelper();
 
+        registry.addRecipeCategories(new PhotolithographyFactoryJeiCategory(registry.getJeiHelpers().getGuiHelper()));
+        registry.addRecipeCategories(new CircuitJeiCategory(registry.getJeiHelpers().getGuiHelper()));
+    }
     @Override
     public void register(IModRegistry registry) {
+
+        String PA = MODID + ":" + "PhotolithographyFactory";
+        List<PhotolithographyFactoryJei> PAInfo = new ArrayList<>();
+        List<ItemStack> wafer=new ArrayList<>();
+        List<ItemStack> output=new ArrayList<>();
+        for(MetaItem.MetaValueItem item:GTQTCPUHelper.wafer) wafer.add(item.getStackForm());
+        for(MetaItem.MetaValueItem item:GTQTCPUHelper.item) output.add(item.getStackForm());
+        PAInfo.add(new PhotolithographyFactoryJei(wafer,output));
+        registry.addRecipes(PAInfo, PA);
+        registry.addRecipeCatalyst(GTQTMetaTileEntities.PHOTOLITHOGRAPHY_FACTORY.getStackForm(), PA);
+
+        String Circuit = MODID + ":" + "Circuit";
+        List<CircuitJei> CircuitInfo = new ArrayList<>();
+        MetaItem.MetaValueItem [] tier1={VACUUM_TUBE,ELECTRONIC_CIRCUIT_LV,ELECTRONIC_CIRCUIT_MV};
+        MetaItem.MetaValueItem [] tier2={INTEGRATED_CIRCUIT_LV,INTEGRATED_CIRCUIT_MV,INTEGRATED_CIRCUIT_HV};
+        MetaItem.MetaValueItem [] tier3={NAND_CHIP_ULV,MICROPROCESSOR_LV,PROCESSOR_MV,PROCESSOR_ASSEMBLY_HV,WORKSTATION_EV,MAINFRAME_IV};
+        MetaItem.MetaValueItem [] tier4={NANO_PROCESSOR_HV,NANO_PROCESSOR_ASSEMBLY_EV,NANO_COMPUTER_IV,NANO_MAINFRAME_LUV};
+        MetaItem.MetaValueItem [] tier5={QUANTUM_PROCESSOR_EV,QUANTUM_ASSEMBLY_IV,QUANTUM_COMPUTER_LUV,QUANTUM_MAINFRAME_ZPM};
+        MetaItem.MetaValueItem [] tier6={CRYSTAL_PROCESSOR_IV,CRYSTAL_ASSEMBLY_LUV,CRYSTAL_COMPUTER_ZPM,CRYSTAL_MAINFRAME_UV};
+        MetaItem.MetaValueItem [] tier7={WETWARE_PROCESSOR_LUV,WETWARE_PROCESSOR_ASSEMBLY_ZPM,WETWARE_SUPER_COMPUTER_UV,WETWARE_MAINFRAME_UHV};
+        MetaItem.MetaValueItem [] tier8={GOOWARE_PROCESSOR,GOOWARE_ASSEMBLY,GOOWARE_COMPUTER,GOOWARE_MAINFRAME};
+        MetaItem.MetaValueItem [] tier9={OPTICAL_PROCESSOR,OPTICAL_ASSEMBLY,OPTICAL_COMPUTER,OPTICAL_MAINFRAME};
+        MetaItem.MetaValueItem [] tier10={SPINTRONIC_PROCESSOR,SPINTRONIC_ASSEMBLY,SPINTRONIC_COMPUTER,SPINTRONIC_MAINFRAME};
+        MetaItem.MetaValueItem [] tier11={COSMIC_PROCESSOR,COSMIC_ASSEMBLY,COSMIC_COMPUTER,COSMIC_MAINFRAME};
+        MetaItem.MetaValueItem [] tier12={SUPRACAUSAL_PROCESSOR,SUPRACAUSAL_ASSEMBLY,SUPRACAUSAL_COMPUTER,SUPRACAUSAL_MAINFRAME};
+
+        CircuitInfo.add(new CircuitJei(tier1));
+        CircuitInfo.add(new CircuitJei(tier2));
+        CircuitInfo.add(new CircuitJei(tier3));
+        CircuitInfo.add(new CircuitJei(tier4));
+        CircuitInfo.add(new CircuitJei(tier5));
+        CircuitInfo.add(new CircuitJei(tier6));
+        CircuitInfo.add(new CircuitJei(tier7));
+        CircuitInfo.add(new CircuitJei(tier8));
+        CircuitInfo.add(new CircuitJei(tier9));
+        CircuitInfo.add(new CircuitJei(tier10));
+        CircuitInfo.add(new CircuitJei(tier11));
+        CircuitInfo.add(new CircuitJei(tier12));
+        registry.addRecipes(CircuitInfo, Circuit);
+
+
+
         registry.addIngredientInfo( ALPHA.getStackForm(), VanillaTypes.ITEM, "metaitem.alpha.jei_description");
         registry.addIngredientInfo( ANTIALPHA.getStackForm(), VanillaTypes.ITEM, "metaitem.antialpha.jei_description");
         registry.addIngredientInfo( ANTIBOTTOM_QUARK.getStackForm(), VanillaTypes.ITEM, "metaitem.antibottom_quark.jei_description");

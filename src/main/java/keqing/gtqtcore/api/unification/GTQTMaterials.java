@@ -138,12 +138,6 @@ public class GTQTMaterials {
     public static Material Crocoite;
     public static Material Cryolite;
     public static Material Lignite;
-    public static Material infused_air;
-    public static Material infused_fire;
-    public static Material infused_water;
-    public static Material infused_earth;
-    public static Material infused_entropy;
-    public static Material infused_order;
     public static Material Amblygonite;
     public static Material PreTreatedCrudeOilContainingImpurities;
     public static Material Demulsifier;

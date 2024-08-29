@@ -99,7 +99,7 @@ public class GTQTMaterialPropertyAddition {
         Strontium.setProperty(PropertyKey.INGOT, new IngotProperty());
         Strontium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID,new FluidBuilder()));
         Promethium.setProperty(PropertyKey.INGOT, new IngotProperty());
-
+        Zirconium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID,new FluidBuilder()));
         // Dusts
         Praseodymium.setProperty(PropertyKey.DUST, new DustProperty());
         Scandium.setProperty(PropertyKey.DUST, new DustProperty());
@@ -116,6 +116,8 @@ public class GTQTMaterialPropertyAddition {
         Rubidium.setProperty(PropertyKey.DUST, new DustProperty());
         Thallium.setProperty(PropertyKey.DUST, new DustProperty());
 
+        Rhodium.setProperty(PropertyKey.ORE, new OreProperty(1, 1, false));
+        Ruthenium.setProperty(PropertyKey.ORE, new OreProperty(1, 1, false));
         Praseodymium.setProperty(PropertyKey.ORE, new OreProperty(1, 1, false));
         Scandium.setProperty(PropertyKey.ORE, new OreProperty(1, 1, false));
         Gadolinium.setProperty(PropertyKey.ORE, new OreProperty(1, 1, false));
