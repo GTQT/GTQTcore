@@ -4,6 +4,7 @@ import codechicken.lib.raytracer.CuboidRayTraceResult;
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
+import gregtech.api.capability.IHeatingCoil;
 import gregtech.api.damagesources.DamageSources;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
@@ -11,8 +12,10 @@ import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
+import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
+import gregtech.api.recipes.recipeproperties.TemperatureProperty;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.core.advancement.AdvancementTriggers;
@@ -36,7 +39,7 @@ import static gregtech.api.GTValues.IV;
 import static gregtech.api.GTValues.VA;
 import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.IRIDIUM_CASING;
 
-public class MetaTileEntityIndustrialFurnace extends GTQTMultiblockCore {
+public class MetaTileEntityIndustrialFurnace extends GTQTMultiblockCore implements IHeatingCoil {
 
     public MetaTileEntityIndustrialFurnace(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{
@@ -45,6 +48,10 @@ public class MetaTileEntityIndustrialFurnace extends GTQTMultiblockCore {
                 GTQTcoreRecipeMaps.BURNER_REACTOR_RECIPES,
                 RecipeMaps.ALLOY_SMELTER_RECIPES
         });
+    }
+    @Override
+    public boolean checkRecipe(Recipe recipe, boolean consumeIfSuccess) {
+        return 6000 >= recipe.getProperty(TemperatureProperty.getInstance(), 0);
     }
     @Override
     public int getMinVa()
@@ -111,6 +118,11 @@ public class MetaTileEntityIndustrialFurnace extends GTQTMultiblockCore {
     @Override
     public boolean canBeDistinct() {
         return true;
+    }
+
+    @Override
+    public int getCurrentTemperature() {
+        return 6000;
     }
 }
 

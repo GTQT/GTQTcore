@@ -358,15 +358,6 @@ public class GTQTTJFirstDegreeMaterials {
                 .components(Trinium, 18, Tungsten, 6, Vanadium, 4, Chrome, 2, Tantalum, 1, Cobalt, 1)
                 .build();
 
-        LeadZirconateTitanate = new Material.Builder(25063, gregtechId("lead_zirconate_titanate"))
-                .ingot()
-                .iconSet(MaterialIconSet.DULL)
-                .blast(6100)
-                .color(0x355232)
-                .flags(GENERATE_PLATE,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_ROD,GENERATE_BOLT_SCREW,GENERATE_FRAME,GENERATE_GEAR,GENERATE_LONG_ROD,GENERATE_FOIL,GENERATE_RING,GENERATE_SPRING,GENERATE_SPRING_SMALL,GENERATE_SMALL_GEAR,GENERATE_FINE_WIRE,GENERATE_ROTOR,GENERATE_ROUND)
-                .components(Lead, 12, Titanium, 1, Zirconium, 1, Oxygen, 16)
-                .build();
-
         XenonFluorideSupercondiveMix = new Material.Builder(25064, gregtechId("xenon_fluoride_mix"))
                 .fluid()
                 .color(0x251a33)

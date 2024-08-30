@@ -530,8 +530,8 @@ public class SecondDegreeMaterials {
                 .gem(3)
                 .color(0x359ADE)
                 .iconSet(OPAL)
-                .flags(CRYSTALLIZABLE, DECOMPOSITION_BY_CENTRIFUGING, GENERATE_LENS)
-                .components(Lead, 1, Titanium, 1, CubicZirconia, 1, Oxygen, 1)
+                .flags(GENERATE_PLATE,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_ROD,GENERATE_BOLT_SCREW,GENERATE_FRAME,GENERATE_GEAR,GENERATE_LONG_ROD,GENERATE_FOIL,GENERATE_RING,GENERATE_SPRING,GENERATE_SPRING_SMALL,GENERATE_SMALL_GEAR,GENERATE_FINE_WIRE,GENERATE_ROTOR,GENERATE_ROUND)
+                .components(Lead, 12, Titanium, 1, Zirconium, 1, Oxygen, 16)
                 .build()
                 .setFormula("PbZrTiO3", true);
 

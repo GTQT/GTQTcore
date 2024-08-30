@@ -23,8 +23,7 @@ public class KevlarChain {
         // Amoco Process for Terephthalic Acid
 
         // 4Br + C2H2 -> C2H2Br4
-        // TODO Vacuum
-        CHEMICAL_RECIPES.recipeBuilder()
+        VACUUM_RECIPES.recipeBuilder()
                 .fluidInputs(Bromine.getFluid(4000))
                 .fluidInputs(Acetylene.getFluid(1000))
                 .fluidOutputs(Tetrabromoethane.getFluid(1000))
@@ -44,7 +43,7 @@ public class KevlarChain {
                 .output(dust, TerephthalicAcid, 3)
                 .fluidOutputs(Water.getFluid(2000))
                 .duration(240)
-                .EUt(VA[ZPM])
+                .EUt(VA[LuV])
                 .buildAndRegister();
 
         // C6H4(CCl3)2 + C6H4(CO2H)2 -> 2 C6H4(COCl)2 + 2 HCl
@@ -54,7 +53,7 @@ public class KevlarChain {
                 .output(dust, TerephthaloylChloride, 6)
                 .fluidOutputs(HydrochloricAcid.getFluid(2000))
                 .duration(100)
-                .EUt(240)
+                .EUt(VA[HV])
                 .buildAndRegister();
 
         // C4H8 + HClO + H2O -> C4H10O2 + HCl
@@ -65,7 +64,7 @@ public class KevlarChain {
                 .fluidOutputs(Butanediol.getFluid(1000))
                 .fluidOutputs(HydrochloricAcid.getFluid(1000))
                 .duration(60)
-                .EUt(VA[HV])
+                .EUt(VA[IV])
                 .buildAndRegister();
 
         // C4H10O2 -> C4H6O2 + 4H (4H lost)
@@ -104,6 +103,6 @@ public class KevlarChain {
                 .output(dust, Kevlar, 4)
                 .fluidOutputs(HydrochloricAcid.getFluid(1000))
                 .duration(400)
-                .EUt(VA[UV]).buildAndRegister();
+                .EUt(VA[LuV]).buildAndRegister();
     }
 }

@@ -4,6 +4,7 @@ import gregtech.api.metatileentity.multiblock.CleanroomType;
 import gregtech.api.recipes.GTRecipeHandler;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.MarkerMaterials;
+import keqing.gtqtcore.common.items.GTQTMetaItems;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -53,12 +54,12 @@ public class WetwareCircuits {
 
         CIRCUIT_ASSEMBLER_RECIPES.recipeBuilder()
                 .input(plate, KaptonK, 16)
-                .input(PETRI_DISH)
+                .input(ELECTRICALLY_WIRED_PETRI_DISH)
                 .input(ELECTRIC_PUMP_LuV)
                 .input(SENSOR_IV)
-                .input(circuit, MarkerMaterials.Tier.IV)
-                .input(foil, NiobiumTitanium, 16)
-                .fluidInputs(SterileGrowthMedium.getFluid(4000))
+                .input(circuit, MarkerMaterials.Tier.LuV)
+                .input(foil, NaquadahAlloy, 16)
+                .fluidInputs(SterileGrowthMedium.getFluid(16000))
                 .output(WETWARE_BOARD, 16)
                 .cleanroom(CleanroomType.STERILE_CLEANROOM)
                 .duration(1200)

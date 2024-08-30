@@ -139,7 +139,6 @@ public class TJMaterials {
     public static Material SilicaCeramic;
     public static Material Fiberglass;
     public static Material SynthDiamond;
-    public static Material LeadZirconateTitanate;
     public static Material BismuthPhosphomolybdate;
     public static Material Acrylonitrile;
     public static Material ZirconiumTetrafluoride;

@@ -37,8 +37,7 @@ public class CircuitryMaterialChains {
                 .fluidOutputs(SiliconTetrachloride.getFluid(3000))
                 .buildAndRegister();
 
-        CHEMICAL_PLANT.recipeBuilder()
-                .recipeLevel(4)
+        CHEMICAL_RECIPES.recipeBuilder()
                 .duration(140)
                 .EUt(VA[EV])
                 .fluidInputs(Argon.getFluid(1000))
@@ -73,12 +72,12 @@ public class CircuitryMaterialChains {
                 .duration(220)
                 .EUt(VA[LuV])
                 .fluidInputs(ArgonSilane.getPlasma(1000))
-                .chancedOutput(dust, LuminescentSiliconNanocrystals, 800, 100)
-                .chancedOutput(dust, LuminescentSiliconNanocrystals, 800, 100)
-                .chancedOutput(dust, LuminescentSiliconNanocrystals, 800, 100)
-                .chancedOutput(dust, LuminescentSiliconNanocrystals, 800, 100)
-                .chancedOutput(dust, LuminescentSiliconNanocrystals, 800, 100)
-                .chancedOutput(dust, LuminescentSiliconNanocrystals, 800, 100)
+                .chancedOutput(dust, LuminescentSiliconNanocrystals, 1200, 200)
+                .chancedOutput(dust, LuminescentSiliconNanocrystals, 1200, 200)
+                .chancedOutput(dust, LuminescentSiliconNanocrystals, 1200, 200)
+                .chancedOutput(dust, LuminescentSiliconNanocrystals, 1200, 200)
+                .chancedOutput(dust, LuminescentSiliconNanocrystals, 1200, 200)
+                .chancedOutput(dust, LuminescentSiliconNanocrystals, 1200, 200)
                 .fluidOutputs(Silane.getFluid(400))
                 .fluidOutputs(Argon.getFluid(400))
                 .buildAndRegister();
@@ -89,7 +88,7 @@ public class CircuitryMaterialChains {
                 .fluidInputs(Krypton.getFluid(1000))
                 .fluidOutputs(SuspendedPGQD.getFluid(1000))
                 .EUt(VA[IV])
-                .duration(3200)
+                .duration(800)
                 .buildAndRegister();
     }
 }
