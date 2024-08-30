@@ -1,38 +1,28 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
 
-import gregtech.api.block.IHeatingCoilBlockStats;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.IFastRenderMetaTileEntity;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
-import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
-import gregtech.api.pattern.MultiblockShapeInfo;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.recipeproperties.IRecipePropertyStorage;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.shader.postprocessing.BloomEffect;
-
-
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.capability.GTQTDataCode;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
-import keqing.gtqtcore.api.utils.GTQTUniverUtil;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.client.utils.BloomEffectUtil;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.common.block.blocks.GTQTADVBlock;
-import keqing.gtqtcore.common.block.blocks.GTQTADVGlass;
-import keqing.gtqtcore.common.block.blocks.GTQTQuantumCasing;
 import keqing.gtqtcore.common.block.blocks.GTQTQuantumForceTransformerCasing;
-import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -44,12 +34,9 @@ import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
@@ -62,11 +49,7 @@ import org.lwjgl.opengl.GL11;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Collectors;
-
-import static gregtech.api.GTValues.UHV;
+import java.util.List;
 
 public class MetaTileEntityQuantumForceTransformer extends RecipeMapMultiblockController implements IFastRenderMetaTileEntity {
     private int ManipulatorCasingTier;

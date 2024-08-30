@@ -31,7 +31,6 @@ import gregtech.common.blocks.BlockGlassCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiFluidHatch;
 import gregtech.core.sound.GTSoundEvents;
-
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import net.minecraft.block.state.IBlockState;

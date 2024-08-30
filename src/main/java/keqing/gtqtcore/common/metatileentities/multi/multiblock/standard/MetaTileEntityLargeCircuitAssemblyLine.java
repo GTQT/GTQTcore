@@ -9,7 +9,6 @@ import gregtech.api.capability.IOpticalComputationHatch;
 import gregtech.api.capability.IOpticalComputationProvider;
 import gregtech.api.capability.IOpticalComputationReceiver;
 import gregtech.api.capability.impl.ComputationRecipeLogic;
-import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;

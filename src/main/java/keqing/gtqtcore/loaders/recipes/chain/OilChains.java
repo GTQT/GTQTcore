@@ -36,18 +36,20 @@ public class OilChains {
 
     private static void Chemical() {
         //一氧化碳和氢氧化钠溶液在160-200 ℃和2 MPa压力下反应生成甲酸钠，然后经硫酸酸解、蒸馏即得成品。
+        //CO NaOH HCOONa
         CHEMICAL_RECIPES.recipeBuilder()
                 .fluidInputs(CarbonMonoxide.getFluid(1000))
                 .fluidInputs(SodiumHydroxideSolution.getFluid(1000))
                 .fluidOutputs(SodiumFormate.getFluid(1000))
                 .circuitMeta(1)
                 .duration(120).EUt(30).buildAndRegister();
-
+        //2HCOONa    H2SO4     CH₂O₂  Na2SO4
         CHEMICAL_RECIPES.recipeBuilder()
                 .fluidInputs(SulfuricAcid.getFluid(1000))
                 .fluidInputs(SodiumFormate.getFluid(2000))
+                .fluidInputs(Oxygen.getFluid(2000))
                 .fluidOutputs(FormicAcid.getFluid(2000))
-                .output(dust,SodiumSulfate,1)
+                .output(dust,SodiumSulfate,7)
                 .circuitMeta(1)
                 .duration(120).EUt(30).buildAndRegister();
 

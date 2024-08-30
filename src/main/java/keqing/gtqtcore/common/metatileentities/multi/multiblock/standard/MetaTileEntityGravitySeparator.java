@@ -1,6 +1,5 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
-import codechicken.lib.raytracer.CuboidRayTraceResult;
 import gregtech.api.capability.IMultipleTankHandler;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.gui.GuiTextures;
@@ -12,13 +11,11 @@ import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.IProgressBarMultiblock;
-import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.TraceabilityPredicate;
 import gregtech.api.recipes.RecipeMap;
-import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.util.TextComponentUtil;
 import gregtech.api.util.TextFormattingUtil;
@@ -28,16 +25,12 @@ import gregtech.client.utils.TooltipHelper;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.metaileentity.GTQTRecipeMapMultiblockController;
-import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
@@ -47,14 +40,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 
 import javax.annotation.Nonnull;
-
-
 import java.util.List;
 
 import static gregtech.api.recipes.RecipeMaps.SIFTER_RECIPES;
 import static gregtech.api.unification.material.Materials.Steam;
-import static gregtech.api.util.RelativeDirection.*;
-import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.BIOLOGICAL_REACTION_RECIPES;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.GRAVITY_SEPARATOR_RECIPES;
 import static keqing.gtqtcore.common.block.blocks.GTQTIsaCasing.CasingType.SEPARATOR_ROTOR;
 

@@ -128,18 +128,19 @@ public class PlatinumDeal {
                 .EUt(VA[HV])
                 .buildAndRegister();
 
-        //ir
+        //ir  IrCl3
         BLAST_RECIPES.recipeBuilder()
-                .input(dust,IridiumChloride,1)
+                .input(dust,IridiumChloride,4)
                 .fluidInputs(Hydrogen.getFluid(1000))
                 .fluidOutputs(HydrochloricAcid.getFluid(1000))
-                .output(dust,IridiumFluid,1)
+                .output(dust,IridiumFluid,3)
                 .duration(20)
                 .EUt(VA[HV])
                 .buildAndRegister();
 
+        //Ca   +2Cl    =CaCl2
         CHEMICAL_RECIPES.recipeBuilder()
-                .input(dust,IridiumFluid,1)
+                .input(dust,IridiumFluid,3)
                 .input(dust,Calcium,1)
                 .output(dust,Iridium,1)
                 .output(dust, CalciumChloride, 3)

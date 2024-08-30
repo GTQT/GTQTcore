@@ -26,7 +26,6 @@ import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.metaileentity.GTQTRecipeMapMultiblockController;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
-import keqing.gtqtcore.api.recipes.properties.BRProperty;
 import keqing.gtqtcore.api.recipes.properties.ERProperty;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;

@@ -16,7 +16,6 @@ import gregtech.api.util.BlockInfo;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.TooltipHelper;
-import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.blocks.MetaBlocks;

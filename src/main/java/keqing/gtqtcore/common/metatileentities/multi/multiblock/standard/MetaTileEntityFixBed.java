@@ -1,6 +1,5 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
-import codechicken.lib.raytracer.CuboidRayTraceResult;
 import gregtech.api.capability.IMultipleTankHandler;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.gui.GuiTextures;
@@ -21,7 +20,6 @@ import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.TooltipHelper;
-import gregtech.common.blocks.BlockBoilerCasing;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.core.sound.GTSoundEvents;
@@ -29,11 +27,8 @@ import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.MathHelper;

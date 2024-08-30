@@ -21,6 +21,8 @@ import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.metatileentities.multi.generators.*;
+import keqing.gtqtcore.common.metatileentities.multi.generators.Tide.MetaTileEntityTideControl;
+import keqing.gtqtcore.common.metatileentities.multi.generators.Tide.MetaTileEntityTideUnit;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.core.*;
@@ -155,6 +157,9 @@ public class GTQTMetaTileEntities {
 
     public static MetaTileEntityStepper STEPPER;
     public static MetaTileEntitySeismicDetector SEISMIC_DETECTOR;
+
+    public static MetaTileEntityTideControl TIDE_CONTROL;
+    public static MetaTileEntityTideUnit TIDE_UNIT;
 
     public static MetaTileEntityHugeCrackingUnit HUGE_CRACKING_UNIT;
     public static MetaTileEntityHugeMiner BASIC_HUGE_MINER;
@@ -399,6 +404,9 @@ public class GTQTMetaTileEntities {
                 Textures.ROBUST_TUNGSTENSTEEL_CASING, true, Textures.LARGE_GAS_TURBINE_OVERLAY));
 
         LARGE_BIOMASS_GENERATOR = registerMetaTileEntity(3073, new MetaTileEntityLargeBiomassGenerator(gtqtcoreId("large_biomass_generator")));
+
+        TIDE_CONTROL = registerMetaTileEntity(3075, new MetaTileEntityTideControl(gtqtcoreId("tide_control")));
+        TIDE_UNIT = registerMetaTileEntity(3076, new MetaTileEntityTideUnit(gtqtcoreId("tide_unit")));
 
         //早期设备
 

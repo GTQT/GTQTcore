@@ -12,7 +12,6 @@ import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
-import gregtech.api.unification.material.Materials;
 import gregtech.client.renderer.CubeRendererState;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.cclop.ColourOperation;
@@ -24,18 +23,15 @@ import gregtech.common.blocks.BlockBoilerCasing.BoilerCasingType;
 import gregtech.common.blocks.BlockMetalCasing.MetalCasingType;
 import gregtech.common.blocks.BlockTurbineCasing;
 import gregtech.common.blocks.MetaBlocks;
-import gregtech.common.blocks.StoneVariantBlock;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing1;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import org.apache.commons.lang3.ArrayUtils;
-
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

@@ -6,7 +6,6 @@ import codechicken.lib.vec.Matrix4;
 import gregtech.api.block.IHeatingCoilBlockStats;
 import gregtech.api.capability.GregtechCapabilities;
 import gregtech.api.capability.IEnergyContainer;
-import gregtech.api.capability.impl.EnergyContainerList;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.Widget;
 import gregtech.api.gui.widgets.ClickButtonWidget;
@@ -16,7 +15,6 @@ import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.MultiblockDisplayText;
-import gregtech.api.metatileentity.multiblock.MultiblockWithDisplayBase;
 import gregtech.api.pattern.*;
 import gregtech.api.util.BlockInfo;
 import gregtech.api.util.GTTransferUtils;
@@ -26,7 +24,6 @@ import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.blocks.MetaBlocks;
-import gregtech.common.metatileentities.multi.electric.MetaTileEntityElectricBlastFurnace;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.items.GTQTMetaItems;
@@ -47,10 +44,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 
-import java.util.*;
-
-import static gregtech.api.GTValues.*;
+import static gregtech.api.GTValues.VA;
 import static gregtech.api.util.RelativeDirection.*;
 import static keqing.gtqtcore.common.block.blocks.GTQTPowerSupply.SupplyType.POWER_SUPPLY_BASIC;
 

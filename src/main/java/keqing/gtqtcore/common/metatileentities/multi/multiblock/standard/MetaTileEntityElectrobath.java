@@ -1,13 +1,8 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
 import codechicken.lib.raytracer.CuboidRayTraceResult;
-import gregtech.api.GTValues;
 import gregtech.api.capability.IMultipleTankHandler;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
-import gregtech.api.gui.GuiTextures;
-import gregtech.api.gui.Widget;
-import gregtech.api.gui.widgets.ClickButtonWidget;
-import gregtech.api.gui.widgets.WidgetGroup;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
@@ -38,7 +33,6 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
@@ -48,7 +42,6 @@ import javax.annotation.Nonnull;
 import java.util.List;
 
 import static gregtech.api.GTValues.VA;
-import static gregtech.api.unification.material.Materials.HydrochloricAcid;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.EleAcid;
 
 public class MetaTileEntityElectrobath extends GTQTRecipeMapMultiblockOverwrite {

@@ -48,9 +48,6 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-import static codechicken.lib.util.ClientUtils.getWorld;
-import static gregtech.api.metatileentity.multiblock.MultiblockControllerBase.*;
-
 public class MetaTileEntityAlgaeFarm  extends MultiblockWithDisplayBase implements IDataInfoProvider, IWorkable {
     private final AlgaeFarmLogic logic;
     protected IMultipleTankHandler inputFluidInventory;

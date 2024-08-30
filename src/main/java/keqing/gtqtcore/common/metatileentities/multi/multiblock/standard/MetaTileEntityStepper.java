@@ -5,7 +5,6 @@ import gregtech.api.capability.IMultipleTankHandler;
 import gregtech.api.capability.IOpticalComputationHatch;
 import gregtech.api.capability.IOpticalComputationProvider;
 import gregtech.api.capability.IOpticalComputationReceiver;
-import gregtech.api.capability.impl.ComputationRecipeLogic;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.Widget;
 import gregtech.api.gui.widgets.ClickButtonWidget;
@@ -21,19 +20,16 @@ import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
-import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.recipes.recipeproperties.ComputationProperty;
-import gregtech.api.util.GTTransferUtils;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.core.sound.GTSoundEvents;
 import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
+import keqing.gtqtcore.api.capability.impl.ComputationRecipeLogic;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
-import keqing.gtqtcore.api.recipes.properties.KQNetProperty;
 import keqing.gtqtcore.api.recipes.properties.LASERNetProperty;
-import keqing.gtqtcore.api.utils.GTQTCPUHelper;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.client.resources.I18n;
@@ -42,7 +38,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
@@ -54,8 +49,6 @@ import javax.annotation.Nonnull;
 import java.util.List;
 
 import static gregtech.api.GTValues.VA;
-import static gregtech.api.unification.material.Materials.*;
-import static gregtech.api.unification.material.Materials.Biomass;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.TJMaterials.HydrogenSilsesquioxane;
 import static keqing.gtqtcore.api.unification.TJMaterials.SU8_Photoresist;
@@ -147,20 +140,7 @@ public class MetaTileEntityStepper extends MultiMapMultiblockController implemen
         {
             IOpticalComputationProvider provider = this.getComputationProvider();
             int recipeCWUt = recipe.getProperty(ComputationProperty.getInstance(), 0);
-            if(!(provider.requestCWUt(recipeCWUt, true) >= recipeCWUt))return false;
-
-            //并行
-            if (LaserKind*2>=laser_tier) {
-                if (LaserAmount - clean_tier * (LaserKind*2 - laser_tier +1) * 1000 > 0) LaserAmount -= clean_tier * (LaserKind * 2 - laser_tier + 1) * 1000;
-                else return false;
-            }
-            //不并行
-            else {
-                if (LaserAmount - 1000 > 0) LaserAmount -= 1000;
-                else return false;
-                }
-
-            return true;
+            return provider.requestCWUt(recipeCWUt, true) >= recipeCWUt;
         }
         return false;
     }
@@ -321,6 +301,52 @@ public class MetaTileEntityStepper extends MultiMapMultiblockController implemen
             if(LaserKind==0||LaserAmount==0) {
                 LaserAmount= 1000;
                 LaserKind=n;
+            }
+        }
+        @Override
+        protected void updateRecipeProgress() {
+            if (this.recipeCWUt == 0) {
+                super.updateRecipeProgress();
+            } else {
+                if (this.canRecipeProgress && this.drawEnergy(this.recipeEUt, true)) {
+                    //并行
+                    if (LaserKind*2>=laser_tier) if (LaserAmount - clean_tier * (LaserKind*2 - laser_tier +1) * 1000 <= 0) return;
+                    else if (LaserAmount - 1000 <= 0) return;
+
+                    this.drawEnergy(this.recipeEUt, false);
+                    IOpticalComputationProvider provider = this.getComputationProvider();
+                    int availableCWUt = provider.requestCWUt(Integer.MAX_VALUE, true);
+                    if (availableCWUt >= this.recipeCWUt) {
+                        this.hasNotEnoughComputation = false;
+                        if (this.isDurationTotalCWU) {
+                            this.currentDrawnCWUt = provider.requestCWUt(availableCWUt, false);
+                            this.progressTime += this.currentDrawnCWUt;
+                        } else {
+                            provider.requestCWUt(this.recipeCWUt, false);
+                            ++this.progressTime;
+                        }
+                        if (this.progressTime > this.maxProgressTime) {
+                            if (LaserKind*2>=laser_tier) LaserAmount -= clean_tier * (LaserKind * 2 - laser_tier + 1) * 1000;
+                            else if (LaserAmount - 1000 > 0) LaserAmount -= 1000;
+
+                            this.completeRecipe();
+                        }
+                    } else {
+                        this.currentDrawnCWUt = 0;
+                        this.hasNotEnoughComputation = true;
+                        if (this.type == ComputationType.STEADY) {
+                            this.decreaseProgress();
+                        }
+                    }
+
+                    if (this.hasNotEnoughEnergy && this.getEnergyInputPerSecond() > 19L * (long)this.recipeEUt) {
+                        this.hasNotEnoughEnergy = false;
+                    }
+                } else if (this.recipeEUt > 0) {
+                    this.hasNotEnoughEnergy = true;
+                    this.decreaseProgress();
+                }
+
             }
         }
         @Override

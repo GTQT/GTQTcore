@@ -1,17 +1,10 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
 import gregtech.api.GTValues;
-import gregtech.api.GregTechAPI;
 import gregtech.api.block.IHeatingCoilBlockStats;
 import gregtech.api.capability.IHeatingCoil;
-import gregtech.api.capability.IMultipleTankHandler;
 import gregtech.api.capability.impl.EnergyContainerList;
-import gregtech.api.capability.impl.HeatingCoilRecipeLogic;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
-import gregtech.api.gui.GuiTextures;
-import gregtech.api.gui.Widget;
-import gregtech.api.gui.widgets.ClickButtonWidget;
-import gregtech.api.gui.widgets.WidgetGroup;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
@@ -20,9 +13,7 @@ import gregtech.api.metatileentity.multiblock.MultiblockDisplayText;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
-import gregtech.api.pattern.MultiblockShapeInfo;
 import gregtech.api.pattern.PatternMatchContext;
-import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.recipes.logic.OverclockingLogic;
@@ -34,46 +25,33 @@ import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.TooltipHelper;
-import gregtech.common.ConfigHolder;
-import gregtech.common.blocks.BlockMetalCasing.MetalCasingType;
 import gregtech.common.blocks.BlockWireCoil.CoilType;
-import gregtech.common.blocks.MetaBlocks;
-import gregtech.common.metatileentities.MetaTileEntities;
 import gregtech.core.sound.GTSoundEvents;
-
 import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.metaileentity.GTQTRecipeMapMultiblockController;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
-import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing;
-import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.overwrite.MetaTileEntityCrackingUnit;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
 import static gregtech.api.GTValues.VA;
-import static gregtech.api.unification.material.Materials.Lubricant;
 
 public class MetaTileEntitySepticTank extends GTQTRecipeMapMultiblockController implements IHeatingCoil {
     private int tier;

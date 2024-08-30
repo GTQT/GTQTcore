@@ -30,7 +30,6 @@ import net.minecraftforge.fluids.FluidStack;
 
 import java.util.List;
 
-import static gregtech.api.GTValues.VA;
 import static gregtech.api.unification.material.Materials.Steam;
 
 public class MetaTileEntityDistillationKettle extends RecipeMapMultiblockController {

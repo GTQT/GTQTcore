@@ -1,10 +1,7 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
-import gregicality.multiblocks.api.render.GCYMTextures;
 import gregicality.multiblocks.common.block.GCYMMetaBlocks;
 import gregicality.multiblocks.common.block.blocks.BlockUniqueCasing;
-import gregtech.api.capability.impl.EnergyContainerList;
-import gregtech.api.capability.impl.FluidTankList;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
@@ -15,13 +12,9 @@ import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
-import gregtech.api.recipes.RecipeMap;
-import gregtech.api.recipes.RecipeMaps;
-import gregtech.api.unification.material.Materials;
 import gregtech.api.util.GTUtility;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.utils.TooltipHelper;
-import gregtech.common.blocks.BlockBoilerCasing;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
@@ -44,7 +37,6 @@ import javax.annotation.Nonnull;
 import java.util.List;
 
 import static gregtech.api.GTValues.EV;
-import static gregtech.api.recipes.RecipeMaps.ASSEMBLER_RECIPES;
 
 public class MetaTileEntityElectronMicroscope extends RecipeMapMultiblockController {
 

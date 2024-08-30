@@ -1,32 +1,32 @@
 package keqing.gtqtcore.common.metatileentities.multi.generators;
 
-import java.util.Collections;
-import java.util.List;
-
-import gregicality.multiblocks.api.render.GCYMTextures;
+import gregtech.api.GTValues;
 import gregtech.api.block.IHeatingCoilBlockStats;
-import gregtech.api.capability.IEnergyContainer;
-import gregtech.api.capability.IHeatingCoil;
 import gregtech.api.capability.IMultipleTankHandler;
 import gregtech.api.capability.impl.MultiblockFuelRecipeLogic;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.resources.TextureArea;
 import gregtech.api.metatileentity.ITieredMetaTileEntity;
+import gregtech.api.metatileentity.MetaTileEntity;
+import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.*;
+import gregtech.api.pattern.BlockPattern;
+import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.util.GTTransferUtils;
-import gregtech.api.util.GTUtility;
 import gregtech.api.util.TextComponentUtil;
 import gregtech.api.util.TextFormattingUtil;
+import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
 import gregtech.client.utils.TooltipHelper;
-import gregtech.common.blocks.*;
-import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
+import gregtech.common.blocks.BlockBoilerCasing;
+import gregtech.common.blocks.BlockMultiblockCasing;
+import gregtech.common.blocks.BlockWireCoil;
+import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.unification.GTQTMaterials;
-import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTMultiblockCasing;
@@ -38,19 +38,13 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
-
-import gregtech.api.GTValues;
-import gregtech.api.metatileentity.MetaTileEntity;
-import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
-import gregtech.api.pattern.BlockPattern;
-import gregtech.api.pattern.FactoryBlockPattern;
-import gregtech.client.renderer.ICubeRenderer;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
 import javax.annotation.Nonnull;
+import java.util.Collections;
+import java.util.List;
 
 import static gregtech.api.unification.material.Materials.Oxygen;
 

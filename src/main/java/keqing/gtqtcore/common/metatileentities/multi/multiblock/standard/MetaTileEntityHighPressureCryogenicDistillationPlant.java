@@ -18,7 +18,6 @@ import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiFluidHatch;
 import gregtech.common.metatileentities.multi.multiblockpart.appeng.MetaTileEntityMEOutputHatch;
 import gregtech.core.sound.GTSoundEvents;
-import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.ResourceLocation;

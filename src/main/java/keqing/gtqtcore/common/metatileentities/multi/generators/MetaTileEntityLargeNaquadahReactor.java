@@ -22,8 +22,6 @@ import gregtech.api.util.TextComponentUtil;
 import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
-import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
-import gregtech.common.blocks.BlockMultiblockCasing;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
@@ -42,14 +40,11 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
 import static gregtech.api.GTValues.*;
-import static gregtech.api.GTValues.UHV;
-import static gregtech.common.blocks.MetaBlocks.FRAMES;
 import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.HYPER_CASING;
 
 public class MetaTileEntityLargeNaquadahReactor extends FuelMultiblockController implements IProgressBarMultiblock {

@@ -1,16 +1,9 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
-import gregicality.multiblocks.api.unification.GCYMMaterials;
-import gregicality.multiblocks.common.block.GCYMMetaBlocks;
-import gregicality.multiblocks.common.block.blocks.BlockUniqueCasing;
 import gregtech.api.GTValues;
 import gregtech.api.GregTechAPI;
 import gregtech.api.block.IHeatingCoilBlockStats;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
-import gregtech.api.gui.GuiTextures;
-import gregtech.api.gui.Widget;
-import gregtech.api.gui.widgets.ClickButtonWidget;
-import gregtech.api.gui.widgets.WidgetGroup;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
@@ -23,7 +16,6 @@ import gregtech.api.unification.material.Materials;
 import gregtech.api.util.GTUtility;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
-import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.*;
 import gregtech.common.metatileentities.MetaTileEntities;
 import gregtech.core.sound.GTSoundEvents;
@@ -37,18 +29,16 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nonnull;
-import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
-import static gregtech.api.GTValues.EV;
-import static gregtech.api.GTValues.LV;
 import static keqing.gtqtcore.api.utils.GTQTUniverUtil.consistentList;
 import static keqing.gtqtcore.api.utils.GTQTUniverUtil.maxLength;
 

@@ -42,7 +42,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static gregtech.api.GTValues.*;
-import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.*;
+import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.HYPER_CASING;
+import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.HYPER_CIRE_MK3;
 
 public class MetaTileEntityHyperReactorMkIII extends FuelMultiblockController implements IProgressBarMultiblock {
 

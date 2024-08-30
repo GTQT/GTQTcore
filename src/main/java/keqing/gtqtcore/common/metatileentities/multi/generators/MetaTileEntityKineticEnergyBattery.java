@@ -49,6 +49,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import java.util.*;
+
 import static gregtech.api.util.RelativeDirection.*;
 import static java.lang.Math.*;
 

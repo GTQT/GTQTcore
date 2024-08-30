@@ -24,7 +24,6 @@ import keqing.gtqtcore.api.unification.GTQTMaterials;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
-import keqing.gtqtcore.loaders.recipes.GTQTRecipes;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.init.Blocks;

@@ -64,6 +64,8 @@ public class removeRecipes {
         // 多层纤维强化电路基板 * 1
         GTRecipeHandler.removeRecipesByInputs(CHEMICAL_RECIPES, new ItemStack[]{MetaItems.FIBER_BOARD.getStackForm(2), OreDictUnifier.get(foil,Palladium,8)},new FluidStack[]{SulfuricAcid.getFluid(500)});
         GTRecipeHandler.removeRecipesByInputs(LARGE_CHEMICAL_RECIPES, new ItemStack[]{MetaItems.FIBER_BOARD.getStackForm(2), OreDictUnifier.get(foil,Palladium,8)},new FluidStack[]{SulfuricAcid.getFluid(500)});
+        // 硫酸 * 1000
+        GTRecipeHandler.removeRecipesByInputs(LARGE_CHEMICAL_RECIPES, new ItemStack[]{OreDictUnifier.get(dust,Sulfur,4),IntCircuitIngredient.getIntegratedCircuit(24)},new FluidStack[]{Water.getFluid(4000)});
 
         // 聚变线圈方块 * 1
         GTRecipeHandler.removeRecipesByInputs(ASSEMBLER_RECIPES, new ItemStack[]{MetaBlocks.FUSION_CASING.getItemVariant(BlockFusionCasing.CasingType.SUPERCONDUCTOR_COIL), MetaItems.FIELD_GENERATOR_IV.getStackForm(2), MetaItems.ELECTRIC_PUMP_IV.getStackForm(), MetaItems.NEUTRON_REFLECTOR.getStackForm(2), OreDictUnifier.get(circuit,LuV,4),OreDictUnifier.get(pipeSmallFluid,Naquadah,4), OreDictUnifier.get(plate,Europium,4)},new FluidStack[]{VanadiumGallium.getFluid(576)});

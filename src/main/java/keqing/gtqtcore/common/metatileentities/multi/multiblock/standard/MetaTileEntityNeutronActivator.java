@@ -11,7 +11,6 @@ import gregtech.api.pattern.*;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.util.BlockInfo;
 import gregtech.client.renderer.ICubeRenderer;
-import gregtech.client.renderer.texture.Textures;
 import gregtech.common.blocks.BlockGlassCasing;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.BlockWireCoil;
@@ -34,7 +33,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import static gregtech.api.util.RelativeDirection.*;
-import static keqing.gtqtcore.common.block.blocks.GTQTADVBlock.CasingType.HastelloyX78;
 import static keqing.gtqtcore.common.block.blocks.GTQTADVBlock.CasingType.Inconel792;
 
 public class MetaTileEntityNeutronActivator  extends RecipeMapMultiblockController {

@@ -16,8 +16,6 @@ import gregtech.common.blocks.BlockMetalCasing.MetalCasingType;
 import gregtech.common.blocks.BlockTurbineCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.blocks.StoneVariantBlock;
-import keqing.gtqtcore.api.capability.impl.NoEnergyMultiblockRecipeLogic;
-import keqing.gtqtcore.api.metaileentity.multiblock.NoEnergyMultiblockController;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
@@ -31,7 +29,6 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.List;
 
 public class MetaTileEntityClarifier extends RecipeMapMultiblockController {

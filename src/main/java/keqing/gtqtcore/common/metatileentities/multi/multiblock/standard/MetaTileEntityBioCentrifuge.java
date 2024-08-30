@@ -1,7 +1,5 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
-import gregicality.multiblocks.api.capability.IParallelMultiblock;
-import gregtech.api.capability.IHeatingCoil;
 import gregtech.api.capability.impl.EnergyContainerList;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.gui.GuiTextures;
@@ -18,20 +16,12 @@ import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
-import gregtech.api.recipes.logic.OverclockingLogic;
-import gregtech.api.recipes.recipeproperties.IRecipePropertyStorage;
-import gregtech.api.recipes.recipeproperties.TemperatureProperty;
-import gregtech.api.unification.material.Materials;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
-import gregtech.common.blocks.BlockBoilerCasing.BoilerCasingType;
-import gregtech.common.blocks.BlockFireboxCasing;
 import gregtech.common.blocks.BlockMetalCasing;
-import gregtech.common.blocks.BlockMetalCasing.MetalCasingType;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.metaileentity.GTQTRecipeMapMultiblockController;
-import keqing.gtqtcore.api.metaileentity.multiblock.GTQTRecipeMapMultiblockOverwrite;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.utils.GTQTUtil;

@@ -1,9 +1,7 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
-import com.google.common.collect.Lists;
 import com.google.common.util.concurrent.AtomicDouble;
 import gregtech.api.GTValues;
-import gregtech.api.block.IHeatingCoilBlockStats;
 import gregtech.api.capability.GregtechCapabilities;
 import gregtech.api.capability.GregtechDataCodes;
 import gregtech.api.capability.IEnergyContainer;
@@ -15,7 +13,6 @@ import gregtech.api.gui.widgets.ImageCycleButtonWidget;
 import gregtech.api.gui.widgets.ImageWidget;
 import gregtech.api.gui.widgets.IndicatorImageWidget;
 import gregtech.api.gui.widgets.ProgressWidget;
-import gregtech.api.metatileentity.IFastRenderMetaTileEntity;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.*;
@@ -25,58 +22,33 @@ import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.recipes.recipeproperties.FusionEUToStartProperty;
-import gregtech.api.recipes.recipeproperties.IRecipePropertyStorage;
-import gregtech.api.unification.material.Materials;
-import gregtech.api.util.RelativeDirection;
 import gregtech.api.util.TextComponentUtil;
 import gregtech.api.util.TextFormattingUtil;
-import gregtech.api.util.interpolate.Eases;
 import gregtech.client.renderer.ICubeRenderer;
-import gregtech.client.renderer.IRenderSetup;
 import gregtech.client.renderer.texture.Textures;
-import gregtech.client.shader.postprocessing.BloomEffect;
-import gregtech.client.shader.postprocessing.BloomType;
-import gregtech.client.utils.*;
-import gregtech.common.ConfigHolder;
-import gregtech.common.blocks.BlockFusionCasing;
+import gregtech.client.utils.TooltipHelper;
 import gregtech.common.blocks.BlockGlassCasing;
-import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.blocks.MetaBlocks;
-import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.gui.GTQTGuiTextures;
-import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
-import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTADVGlass;
-import keqing.gtqtcore.common.block.blocks.GTQTMultiblockCasing;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.BufferBuilder;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.lwjgl.opengl.GL11;
 
 import java.util.List;
 import java.util.function.DoubleSupplier;
 
 import static gregtech.api.GTValues.*;
-import static gregtech.api.GTValues.UEV;
 
 public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockController {
     @Override

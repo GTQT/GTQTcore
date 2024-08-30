@@ -4706,6 +4706,9 @@ tile.cleanroom_casing.warning=Can only be used in Large Clean Facilities!
 gtqtcore.machine.large_biomass_generator.name=Large Biomass Reactor
 gtqtcore.machine.large_biomass_generator.tooltip.1=Plant Blending Power Generator
 
+gtqtcore.machine.tide_unit.name=潮汐浮标单元
+gtqtcore.machine.tide_control.name=潮汐浮标控制器
+
 recipemap.biomass_generator.name=Biomass Power Generation
 gtqtcore.machine.biomass_generator.ev.name=Basic Biomass Generator
 gtqtcore.machine.biomass_generator.ev.tooltip=Electric Chopping Machine

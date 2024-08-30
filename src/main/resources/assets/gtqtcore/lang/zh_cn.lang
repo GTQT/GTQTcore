@@ -4724,6 +4724,9 @@ tile.cleanroom_casing.warning=只能在大型清洁设施中使用！
 gtqtcore.machine.large_biomass_generator.name=大型生物质反应炉
 gtqtcore.machine.large_biomass_generator.tooltip.1=植物混融物发电机
 
+gtqtcore.machine.tide_unit.name=潮汐浮标单元
+gtqtcore.machine.tide_control.name=潮汐浮标控制器
+
 recipemap.biomass_generator.name=生物质发电
 gtqtcore.machine.biomass_generator.ev.name=基础生物质发电机
 gtqtcore.machine.biomass_generator.ev.tooltip=电动咀叶机
