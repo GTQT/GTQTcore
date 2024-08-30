@@ -181,6 +181,7 @@ public class PetrochemRecipes {
         CRYSTALLIZER_RECIPES.recipeBuilder()
                 .duration(120)
                 .EUt(VA[EV])
+                .blastFurnaceTemp(3000)
                 .fluidInputs(SodiumAluminumSilicaSolution.getFluid(1000))
                 .notConsumable(dust, TetramethylammoniumBromide)
                 .output(dust, ZSM_5_ZEOLITE)

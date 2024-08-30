@@ -35,6 +35,7 @@ public class GTQTRecipesManager {
         ZirconChain.init();
         DeltamethrinChain.init();
         RubbersChain.init();
+        CrystalRaw.init();
         BacteriaCulturesChain.init();
         FusionLoader.init();
         BoronChain.init();

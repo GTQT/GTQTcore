@@ -296,9 +296,6 @@ public class MetaTileEntityIndustrialPrimitiveBlastFurnace extends NoEnergyMulti
         if (this.isActive()) {
             if (getWorld().isRemote) {
                 pollutionParticles();
-
-            } else {
-                damageEntitiesAndBreakSnow();
             }
         }
     }
@@ -321,14 +318,6 @@ public class MetaTileEntityIndustrialPrimitiveBlastFurnace extends NoEnergyMulti
 
     public void arunMufflerEffect(float xPos, float yPos, float zPos, float xSpd, float ySpd, float zSpd) {
         this.getWorld().spawnParticle(EnumParticleTypes.SMOKE_LARGE, (double)xPos, (double)yPos, (double)zPos, (double)xSpd, (double)ySpd, (double)zSpd, new int[0]);
-    }
-
-
-    private void damageEntitiesAndBreakSnow() {
-        BlockPos middlePos = this.getPos();
-        middlePos = middlePos.offset(getFrontFacing().getOpposite());
-        this.getWorld().getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(middlePos)).forEach(entity -> entity.attackEntityFrom(DamageSource.LAVA, 3.0f));
-
     }
 
 }

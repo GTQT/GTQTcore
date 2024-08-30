@@ -67,6 +67,18 @@ public class removeRecipes {
         // 硫酸 * 1000
         GTRecipeHandler.removeRecipesByInputs(LARGE_CHEMICAL_RECIPES, new ItemStack[]{OreDictUnifier.get(dust,Sulfur,4),IntCircuitIngredient.getIntegratedCircuit(24)},new FluidStack[]{Water.getFluid(4000)});
 
+
+        // HPIC晶圆 * 1
+        GTRecipeHandler.removeRecipesByInputs(CHEMICAL_RECIPES, new ItemStack[]{MetaItems.POWER_INTEGRATED_CIRCUIT_WAFER.getStackForm(1), OreDictUnifier.get(dust,IndiumGalliumPhosphide,2)},new FluidStack[]{VanadiumGallium.getFluid(288)});
+        // UHPIC晶圆 * 1
+        GTRecipeHandler.removeRecipesByInputs(CHEMICAL_RECIPES, new ItemStack[]{MetaItems.HIGH_POWER_INTEGRATED_CIRCUIT_WAFER.getStackForm(1), OreDictUnifier.get(dust,IndiumGalliumPhosphide,8)},new FluidStack[]{Naquadah.getFluid(576)});
+        // HPIC晶圆 * 1
+        GTRecipeHandler.removeRecipesByInputs(LARGE_CHEMICAL_RECIPES, new ItemStack[]{MetaItems.POWER_INTEGRATED_CIRCUIT_WAFER.getStackForm(1), OreDictUnifier.get(dust,IndiumGalliumPhosphide,2)},new FluidStack[]{VanadiumGallium.getFluid(288)});
+        // UHPIC晶圆 * 1
+        GTRecipeHandler.removeRecipesByInputs(LARGE_CHEMICAL_RECIPES, new ItemStack[]{MetaItems.HIGH_POWER_INTEGRATED_CIRCUIT_WAFER.getStackForm(1), OreDictUnifier.get(dust,IndiumGalliumPhosphide,8)},new FluidStack[]{Naquadah.getFluid(576)});
+
+
+
         // 聚变线圈方块 * 1
         GTRecipeHandler.removeRecipesByInputs(ASSEMBLER_RECIPES, new ItemStack[]{MetaBlocks.FUSION_CASING.getItemVariant(BlockFusionCasing.CasingType.SUPERCONDUCTOR_COIL), MetaItems.FIELD_GENERATOR_IV.getStackForm(2), MetaItems.ELECTRIC_PUMP_IV.getStackForm(), MetaItems.NEUTRON_REFLECTOR.getStackForm(2), OreDictUnifier.get(circuit,LuV,4),OreDictUnifier.get(pipeSmallFluid,Naquadah,4), OreDictUnifier.get(plate,Europium,4)},new FluidStack[]{VanadiumGallium.getFluid(576)});
         // 超导线圈方块 * 1
@@ -106,6 +118,18 @@ public class removeRecipes {
         // 不锈钢粉 * 9
         GTRecipeHandler.removeRecipesByInputs(MIXER_RECIPES, OreDictUnifier.get(dust,Iron,4), OreDictUnifier.get(dust,Invar,3), OreDictUnifier.get(dust,Manganese,1),OreDictUnifier.get(dust,Chrome,1),IntCircuitIngredient.getIntegratedCircuit(1));
         GTRecipeHandler.removeRecipesByInputs(MIXER_RECIPES, OreDictUnifier.get(dust,Iron,6), OreDictUnifier.get(dust,Nickel,1), OreDictUnifier.get(dust,Manganese,1),OreDictUnifier.get(dust,Chrome,1),IntCircuitIngredient.getIntegratedCircuit(3));
+
+        //晶体芯片原料
+        GTRecipeHandler.removeRecipesByInputs(AUTOCLAVE_RECIPES, new ItemStack[]{OreDictUnifier.get(gemExquisite,Olivine,1)},new FluidStack[]{Europium.getFluid(16)});
+        GTRecipeHandler.removeRecipesByInputs(AUTOCLAVE_RECIPES, new ItemStack[]{OreDictUnifier.get(gemExquisite,Emerald,1)},new FluidStack[]{Europium.getFluid(16)});
+
+        // 晶体芯片部件原料 * 9
+        GTRecipeHandler.removeRecipesByInputs(FORGE_HAMMER_RECIPES, MetaItems.RAW_CRYSTAL_CHIP_PART.getStackForm());
+
+        // 晶体芯片原料 * 1
+        GTRecipeHandler.removeRecipesByInputs(AUTOCLAVE_RECIPES, new ItemStack[]{MetaItems.RAW_CRYSTAL_CHIP_PART.getStackForm()},new FluidStack[]{BacterialSludge.getFluid(250)});
+        GTRecipeHandler.removeRecipesByInputs(AUTOCLAVE_RECIPES, new ItemStack[]{MetaItems.RAW_CRYSTAL_CHIP_PART.getStackForm()},new FluidStack[]{Mutagen.getFluid(250)});
+        GTRecipeHandler.removeRecipesByInputs(AUTOCLAVE_RECIPES, new ItemStack[]{MetaItems.RAW_CRYSTAL_CHIP_PART.getStackForm()},new FluidStack[]{Europium.getFluid(16)});
 
     }
 

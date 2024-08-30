@@ -24,6 +24,7 @@ import keqing.gtqtcore.common.block.blocks.GTQTADVGlass;
 import keqing.gtqtcore.common.block.blocks.GTQTBlockGlassCasing;
 import keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
+import keqing.gtqtcore.loaders.recipes.chain.CrystalRaw;
 import keqing.gtqtcore.loaders.recipes.chain.PEEKChain;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;

@@ -484,9 +484,9 @@ public class RareEarthProcessing {
 
         BLAST_RECIPES.recipeBuilder()
                 .fluidInputs(Silvhuaha.getFluid(1000))
-                .input(dust,Magnesium,2)
+                .input(dust,Magnesium,4)
                 .output(dust,Dilvhuaha,1)
-                .output(dust,MagnesiumChloride,2)
+                .output(dust,MagnesiumChloride,12)
                 .duration(600).EUt(VA[EV]).buildAndRegister();
 
         CHEMICAL_RECIPES.recipeBuilder()

@@ -118,6 +118,31 @@ public class MetaTileEntityLoader {
                 .fluidInputs(Zylon.getFluid(L * 12))
                 .outputs(WATER_POWER_STATION[2].getStackForm()).buildAndRegister();
 
+
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(500).EUt(480)
+                .inputs(HULL[3].getStackForm(4))
+                .input(circuit,EV,8)
+                .input(EMITTER_HV,4)
+                .input(ELECTRIC_PUMP_HV,8)
+                .input(gear,StainlessSteel,8)
+                .input(stick,Talonite,8)
+                .input(OrePrefix.cableGtSingle, Aluminium, 32)
+                .circuitMeta(10)
+                .fluidInputs(Epoxy.getFluid(L * 12))
+                .outputs(TIDE_CONTROL.getStackForm()).buildAndRegister();
+
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(500).EUt(480)
+                .input(frameGt,StainlessSteel,8)
+                .input(circuit,EV,8)
+                .input(SENSOR_HV,2)
+                .input(ELECTRIC_PUMP_EV,4)
+                .input(VOLTAGE_COIL_HV,8)
+                .input(gear,Steel,8)
+                .input(OrePrefix.cableGtSingle, Aluminium, 32)
+                .circuitMeta(10)
+                .fluidInputs(Epoxy.getFluid(L * 12))
+                .outputs(TIDE_UNIT.getStackForm()).buildAndRegister();
+
         ModHandler.addShapedRecipe(true, "tank0",TANK[0].getStackForm(), " R ",
                 "hCw", " R ", 'R', new UnificationEntry(OrePrefix.ring, Bronze), 'C',
                 MetaBlocks.METAL_CASING.getItemVariant(BRONZE_BRICKS));

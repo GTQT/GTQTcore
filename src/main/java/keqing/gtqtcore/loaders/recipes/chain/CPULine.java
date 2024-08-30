@@ -248,65 +248,6 @@ public class CPULine {
     }
 
     private static void AE() {
-        STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[HV]).notConsumable(AE_RETICLEA)
-                .Laser(1)
-                .circuitMeta(1)
-                .input(AE_WAFERA).output(AE_A,1)
-                .CWUt(16).buildAndRegister();
-
-        STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[HV]).notConsumable(AE_RETICLEB)
-                .Laser(1)
-                .circuitMeta(1)
-                .input(AE_WAFERB).output(AE_B,1)
-                .CWUt(16).buildAndRegister();
-
-        STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[HV]).notConsumable(AE_RETICLEC)
-                .Laser(1)
-                .circuitMeta(1)
-                .input(AE_WAFERC).output(AE_C,1)
-                .CWUt(16).buildAndRegister();
-
-
-
-        STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[HV]).notConsumable(AE_RETICLEA)
-                .Laser(2)
-                .circuitMeta(2)
-                .input(AE_WAFERA).output(AE_A,4)
-                .CWUt(32).buildAndRegister();
-
-        STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[HV]).notConsumable(AE_RETICLEB)
-                .Laser(2)
-                .circuitMeta(2)
-                .input(AE_WAFERB).output(AE_B,4)
-                .CWUt(32).buildAndRegister();
-
-        STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[HV]).notConsumable(AE_RETICLEC)
-                .Laser(2)
-                .circuitMeta(2)
-                .input(AE_WAFERC).output(AE_C,4)
-                .CWUt(32).buildAndRegister();
-
-
-
-        STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[HV]).notConsumable(AE_RETICLEA)
-                .Laser(3)
-                .circuitMeta(3)
-                .input(AE_WAFERA).output(AE_A,16)
-                .CWUt(64).buildAndRegister();
-
-        STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[HV]).notConsumable(AE_RETICLEB)
-                .Laser(3)
-                .circuitMeta(3)
-                .input(AE_WAFERB).output(AE_B,16)
-                .CWUt(64).buildAndRegister();
-
-        STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[HV]).notConsumable(AE_RETICLEC)
-                .Laser(3)
-                .circuitMeta(3)
-                .input(AE_WAFERC).output(AE_C,16)
-                .CWUt(64).buildAndRegister();
-
-
         BLAST_RECIPES.recipeBuilder()
                 .input(AE_WAFER)
                 .input(dust,Gold,16)
@@ -425,7 +366,151 @@ public class CPULine {
                     .buildAndRegister();
         }
     }
+    public static void AE(int tier, int EU, MetaItem<?>.MetaValueItem item1, MetaItem<?>.MetaValueItem item2,MetaItem<?>.MetaValueItem item3)
+    {
+        if(tier<=1) {
+            STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[EU]).notConsumable(item1)
+                    .Laser(1)
+                    .input(item3)
+                    .output(item2)
+                    .CWUt(CWT[tier])
+                    .circuitMeta(1)
+                    .duration(250*tier*EU)
+                    .buildAndRegister();
+        }
+        if(tier<=2) {
+            STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[EU + 1]).notConsumable(item1)
+                    .Laser(2)
+                    .input(item3)
+                    .circuitMeta(2)
+                    .output(item2, (int)Math.pow(2,2-tier))
+                    .CWUt(CWT[tier+1])
+                    .duration(500*tier*EU)
+                    .buildAndRegister();
+        }
+        if(tier<=3) {
+            STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[EU + 2]).notConsumable(item1)
+                    .Laser(3)
+                    .input(item3)
+                    .circuitMeta(3)
+                    .output(item2, (int)Math.pow(2,3-tier))
+                    .CWUt(CWT[tier+2])
+                    .duration(1000*tier*EU)
+                    .buildAndRegister();
+        }
+        if(tier<=4) {
+            STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[EU + 3]).notConsumable(item1)
+                    .Laser(4)
+                    .input(item3)
+                    .circuitMeta(4)
+                    .output(item2, (int)Math.pow(2,4-tier))
+                    .CWUt(CWT[tier+3])
+                    .duration(1500*tier*EU)
+                    .buildAndRegister();
+        }
+        if(tier<=5) {
+            STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[EU + 4]).notConsumable(item1)
+                    .Laser(4)
+                    .input(item3)
+                    .circuitMeta(5)
+                    .output(item2, (int)Math.pow(2,5-tier))
+                    .CWUt(CWT[tier+4])
+                    .duration(2000*tier*EU)
+                    .buildAndRegister();
+        }
+        if(tier<=6) {
+            STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[EU + 5]).notConsumable(item1)
+                    .Laser(5)
+                    .input(item3)
+                    .circuitMeta(6)
+                    .output(item2, (int)Math.pow(2,6-tier))
+                    .CWUt(CWT[tier+5])
+                    .duration(4000*tier*EU)
+                    .buildAndRegister();
+        }
+        if(tier<=7) {
+            STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[EU + 6]).notConsumable(item1)
+                    .Laser(5)
+                    .input(item3)
+                    .circuitMeta(7)
+                    .output(item2, (int)Math.pow(2,7-tier))
+                    .CWUt(CWT[tier+6])
+                    .duration(8000*tier*EU)
+                    .buildAndRegister();
+        }
+    }
+    public static void PIC(int tier, int EU, MetaItem<?>.MetaValueItem item1, MetaItem<?>.MetaValueItem item2)
+    {
+        if(tier<=1) {
+            STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[EU]).input(item1)
+                    .Laser(tier)
+                    .input(SILICON_WAFER)
+                    .output(item2)
+                    .CWUt(CWT[tier])
+                    .duration(250*tier*EU)
+                    .buildAndRegister();
+        }
+        if(tier<=2) {
+            STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[EU + 1]).input(item1)
+                    .Laser(tier)
+                    .input(PHOSPHORUS_WAFER)
+                    .output(item2, (int)Math.pow(2,2-tier))
+                    .CWUt(CWT[tier+1])
+                    .duration(500*tier*EU)
+                    .buildAndRegister();
+        }
+        if(tier<=3) {
+            STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[EU + 2]).input(item1)
+                    .Laser(tier)
+                    .input(NAQUADAH_WAFER)
+                    .output(item2, (int)Math.pow(2,3-tier))
+                    .CWUt(CWT[tier+2])
+                    .duration(1000*tier*EU)
+                    .buildAndRegister();
+        }
+        if(tier<=4) {
+            STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[EU + 3]).input(item1)
+                    .Laser(tier)
+                    .input(EUROPIUM_WAFER)
+                    .output(item2, (int)Math.pow(2,4-tier))
+                    .CWUt(CWT[tier+3])
+                    .duration(1500*tier*EU)
+                    .buildAndRegister();
+        }
+        if(tier<=5) {
+            STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[EU + 4]).input(item1)
+                    .Laser(tier)
+                    .input(AMERICIUM_WAFER)
+                    .output(item2, (int)Math.pow(2,5-tier))
+                    .CWUt(CWT[tier+4])
+                    .duration(2000*tier*EU)
+                    .buildAndRegister();
+        }
+        if(tier<=6) {
+            STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[EU + 5]).input(item1)
+                    .Laser(tier)
+                    .input(DUBNIUM_WAFER)
+                    .output(item2, (int)Math.pow(2,6-tier))
+                    .CWUt(CWT[tier+5])
+                    .duration(4000*tier*EU)
+                    .buildAndRegister();
+        }
+        if(tier<=7) {
+            STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[EU + 6]).input(item1)
+                    .Laser(tier)
+                    .input(NEUTRONIUM_WAFER)
+                    .output(item2, (int)Math.pow(2,7-tier))
+                    .CWUt(CWT[tier+6])
+                    .duration(8000*tier*EU)
+                    .buildAndRegister();
+        }
+    }
     private static void LaserStepper() {
+        //
+        AE(1,2,AE_RETICLEA,AE_A,AE_WAFERA);
+        AE(1,2,AE_RETICLEB,AE_B,AE_WAFERB);
+        AE(1,2,AE_RETICLEC,AE_C,AE_WAFERC);
+
         Stepper(1,2,RETICLE_INTEGRATED_LOGIC_CIRCUIT,INTEGRATED_LOGIC_CIRCUIT_WAFER,Color.Blue);
         Stepper(1,2,RETICLE_RANDOM_ACCESS_MEMORY,RANDOM_ACCESS_MEMORY_WAFER,Color.Red);
         Stepper(1,2,RETICLE_CENTRAL_PROCESSING_UNIT,CENTRAL_PROCESSING_UNIT_WAFER,Color.LightGray);
@@ -434,8 +519,8 @@ public class CPULine {
         Stepper(1,2,RETICLE_SIMPLE_SYSTEM_ON_CHIP,SIMPLE_SYSTEM_ON_CHIP_WAFER,Color.Lime);
         Stepper(2,2,RETICLE_NANO_CENTRAL_PROCESSING_UNIT,NANO_CENTRAL_PROCESSING_UNIT_WAFER,null);
         Stepper(2,2,RETICLE_QBIT_CENTRAL_PROCESSING_UNIT,QUBIT_CENTRAL_PROCESSING_UNIT_WAFER,null);
-        Stepper(2,3,RETICLE_ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT,ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT_WAFER,null);
-        Stepper(2,3,RETICLE_HIGH_POWER_INTEGRATED_CIRCUIT,HIGH_POWER_INTEGRATED_CIRCUIT_WAFER,null);
+        PIC(2,3,RETICLE_ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT,ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT_WAFER);
+        PIC(2,3,RETICLE_HIGH_POWER_INTEGRATED_CIRCUIT,HIGH_POWER_INTEGRATED_CIRCUIT_WAFER);
         Stepper(2,3,RETICLE_NOR_MEMORY_CHIP,NOR_MEMORY_CHIP_WAFER,Color.Gray);
         Stepper(2,3,RETICLE_POWER_INTEGRATED_CIRCUIT,POWER_INTEGRATED_CIRCUIT_WAFER,Color.Brown);
         Stepper(2,3,RETICLE_NAND_MEMORY_CHIP,NAND_MEMORY_CHIP_WAFER,Color.Cyan);
@@ -446,6 +531,8 @@ public class CPULine {
         Stepper(4,4,RETICLE_NANO_POWER_IC_WAFER,NANO_POWER_IC_WAFER,LithiumNiobate);
         Stepper(4,5,RETICLE_PICO_POWER_IC_WAFER,PICO_POWER_IC_WAFER,LuTmYVO);
         Stepper(5,5,RETICLE_FEMTO_POWER_IC_WAFER,FEMTO_POWER_IC_WAFER,PrHoYLF);
+        //PIC
+
         //cpu EV
         PRECISION_SPINNING.recipeBuilder()
                 .input(CENTRAL_PROCESSING_UNIT_WAFER)
