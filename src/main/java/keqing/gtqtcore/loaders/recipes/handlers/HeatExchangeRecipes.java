@@ -1,5 +1,6 @@
 package keqing.gtqtcore.loaders.recipes.handlers;
 
+import gregtech.api.unification.material.Material;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 
 import static gregtech.api.unification.material.Materials.*;
@@ -8,6 +9,15 @@ import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 
 public class HeatExchangeRecipes {
+    static int SECOND=20;
+    public static void heatExchange(Material material, int time)
+    {
+        HEAT_EXCHANGE.recipeBuilder()
+                .fluidInputs(material.getPlasma(1))
+                .fluidOutputs(material.getFluid(1))
+                .duration(time)
+                .buildAndRegister();
+    }
     public static void init() {
         HEAT_EXCHANGE.recipeBuilder()
                 .fluidInputs(HighPressureSteam.getFluid(1))
@@ -27,47 +37,38 @@ public class HeatExchangeRecipes {
                 .duration(1)
                 .buildAndRegister();
 
-        HEAT_EXCHANGE.recipeBuilder()
-                .fluidInputs(Oxygen.getPlasma(1))
-                .fluidOutputs(Oxygen.getFluid(1))
-                .duration(24)
-                .buildAndRegister();
+        heatExchange(Oxygen,30);
 
-        HEAT_EXCHANGE.recipeBuilder()
-                .fluidInputs(Nitrogen.getPlasma(1))
-                .fluidOutputs(Nitrogen.getFluid(1))
-                .duration(32)
-                .buildAndRegister();
+        heatExchange(Nitrogen,36);
+        heatExchange(Argon,48);
 
-        HEAT_EXCHANGE.recipeBuilder()
-                .fluidInputs(Argon.getPlasma(1))
-                .fluidOutputs(Argon.getFluid(1))
-                .duration(48)
-                .buildAndRegister();
+        heatExchange(Iron,56);
+        heatExchange(Tin,64);
+        heatExchange(Nickel,72);
+        heatExchange(Americium,160);
+        heatExchange(Calcium,4 * SECOND);
+        heatExchange(Boron, (int) (3.2 * SECOND));
+        heatExchange(Neon, (int) (4.5 * SECOND));
+        heatExchange(Sodium, (int) (2.5 * SECOND));
+        heatExchange(Sulfur, (int) (5.6 * SECOND));
+        heatExchange(Zinc, (int) (4.9 * SECOND));
+        heatExchange(Niobium, (int) (5.2 * SECOND));
+        heatExchange(Titanium, (int) (7.6 * SECOND));
+        heatExchange(Krypton, (int) (7.2 * SECOND));
+        heatExchange(Rhenium, (int) (10.4 * SECOND));
+        heatExchange(Silver, (int) (8.4 * SECOND));
+        heatExchange(Bismuth, (int) (9.2 * SECOND));
+        heatExchange(Xenon, (int) (17.4 * SECOND));
+        heatExchange(Radon, (int) (18.9 * SECOND));
+        heatExchange(Chrome, (int) (14.8 * SECOND));
+        heatExchange(Neptunium, (int) (34.5 * SECOND));
+        heatExchange(Fermium, (int) (38.7 * SECOND));
+        heatExchange(Gadolinium, (int) (44.3 * SECOND));
+        heatExchange(Plutonium241, (int) (47.8 * SECOND));
+        heatExchange(Lead, (int) (46.4 * SECOND));
+        heatExchange(Thorium, (int) (52.2 * SECOND));
+        heatExchange(Germanium, (int) (61.2 * SECOND));
 
-        HEAT_EXCHANGE.recipeBuilder()
-                .fluidInputs(Iron.getPlasma(1))
-                .fluidOutputs(Iron.getFluid(1))
-                .duration(56)
-                .buildAndRegister();
-
-        HEAT_EXCHANGE.recipeBuilder()
-                .fluidInputs(Tin.getPlasma(1))
-                .fluidOutputs(Tin.getFluid(1))
-                .duration(64)
-                .buildAndRegister();
-
-        HEAT_EXCHANGE.recipeBuilder()
-                .fluidInputs(Nickel.getPlasma(1))
-                .fluidOutputs(Nickel.getFluid(1))
-                .duration(96)
-                .buildAndRegister();
-
-        HEAT_EXCHANGE.recipeBuilder()
-                .fluidInputs(Americium.getPlasma(1))
-                .fluidOutputs(Americium.getFluid(1))
-                .duration(160)
-                .buildAndRegister();
         //  Exhaust gas heat exchange
         HEAT_EXCHANGE_RECIPES.recipeBuilder()
                 .fluidInputs(DistilledWater.getFluid(10))

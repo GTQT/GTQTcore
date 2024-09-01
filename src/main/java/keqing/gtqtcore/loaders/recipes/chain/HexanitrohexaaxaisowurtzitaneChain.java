@@ -264,7 +264,7 @@ public class HexanitrohexaaxaisowurtzitaneChain {
         CHEMICAL_RECIPES.recipeBuilder()
                 .fluidInputs(NitrogenDioxide.getFluid(3000))
                 .fluidInputs(Water.getFluid(1000))
-                .circuitMeta(3)
+                .circuitMeta(4)
                 .fluidOutputs(NitrogenMonoxide.getFluid(1000))
                 .fluidOutputs(NitricAcid.getFluid(2000))
                 .EUt(VA[HV])

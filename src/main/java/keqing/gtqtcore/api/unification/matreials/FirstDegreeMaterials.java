@@ -2397,7 +2397,7 @@ public class FirstDegreeMaterials {
                 .color(0xF3E0A8)
                 .iconSet(BRIGHT)
                 .components(Oxygen, 40, Molybdenum, 12, Sodium, 3, Phosphorus, 1)
-                .flags(DISABLE_DECOMPOSITION)
+                .flags(DECOMPOSITION_BY_ELECTROLYZING)
                 .build()
                 .setFormula("(MoO3)12Na3PO4", true);
 
@@ -2950,7 +2950,7 @@ public class FirstDegreeMaterials {
                 .dust()
                 .color(0x4D3635)
                 .components(Oxygen, 40, Tungsten, 12, Sodium, 3, Phosphorus, 1)
-                .flags(DISABLE_DECOMPOSITION)
+                .flags(DECOMPOSITION_BY_ELECTROLYZING)
                 .build()
                 .setFormula("(WO3)12Na3PO4", true);
 
@@ -3319,26 +3319,11 @@ public class FirstDegreeMaterials {
                 .components(Saltpeter, 1)
                 .build();
 
-        GTQTMaterials.BrominatedBrine = new Material.Builder(getMaterialsId(), gregtechId("brominated_brine"))
-                .liquid()
-                .color(0xfdd48d)
-                .iconSet(FLUID)
-                .build()
-                .setFormula("Br?", true);
+        //TODO
+        getMaterialsId();//占位
 
-
-
-
-
-
-
-
-        BariumCarbonate = new Material.Builder(getMaterialsId(), gregtechId("barium_carbonate"))
-                .dust()
-                .color(Salt.getMaterialRGB() + 10)
-                .iconSet(FINE)
-                .build()
-                .setFormula("BaCO3", true);
+        //TODO
+        getMaterialsId();//占位
 
         GTQTMaterials.SodiumThiocyanate = new Material.Builder(getMaterialsId(), gregtechId("sodium_thiocyanate"))
                 .liquid()
@@ -3557,12 +3542,8 @@ public class FirstDegreeMaterials {
                 .build()
                 .setFormula("AlF4Li", true);
 
-        CarbonSulfide = new Material.Builder(getMaterialsId(), gregtechId("carbon_sulfide"))
-                .liquid()
-                .color(0x40ffbf)
-                .iconSet(FLUID)
-                .build()
-                .setFormula("CS2", true);
+        //TODO
+        getMaterialsId();//占位
 
         DimethylthiocarbamoilChloride = new Material.Builder(getMaterialsId(), gregtechId("dimethylthiocarbamoil_chloride"))
                 .liquid()
@@ -3591,14 +3572,8 @@ public class FirstDegreeMaterials {
                 .iconSet(ROUGH)
                 .build()
                 .setFormula("Na2MoO4", true);
-
-        SodiumPhosphomolybdate = new Material.Builder(getMaterialsId(), gregtechId("sodium_phosphomolybdate"))
-                .dust()
-                .color(0xfcfc00)
-                
-                .iconSet(SHINY)
-                .build()
-                .setFormula("(MoO3)12Na3PO4", true);
+        //TODO
+        getMaterialsId();//占位
 
         SodiumTungstate = new Material.Builder(getMaterialsId(), gregtechId("sodium_tungstate"))
                 .liquid()
@@ -3608,12 +3583,8 @@ public class FirstDegreeMaterials {
                 .components(Sodium, 2, Tungsten, 1, Oxygen, 4)
                 .build();
 
-        SodiumPhosphotungstate = new Material.Builder(getMaterialsId(), gregtechId("sodium_phosphotungstate"))
-                .dust()
-                .color(0x7a7777)
-                .iconSet(SHINY)
-                .build()
-                .setFormula("(WO3)12Na3PO4", true);
+        //TODO
+        getMaterialsId();//占位
         
         IridiumCyclooctadienylChlorideDimer = new Material.Builder(getMaterialsId(), gregtechId("iridium_cyclooctadienyl_chloride_dimer"))
                 .dust()

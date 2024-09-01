@@ -56,6 +56,7 @@ public class GTQTTextures {
     public static SimpleOverlayRenderer ULTIMATE_HIGH_ENERGY_CASING = new SimpleOverlayRenderer("multiblock/quantumcasing/ultimate_high_energy_casing");
     public static SimpleOverlayRenderer TRANSCENDENTALLY_AMPLIFIED_MAGNETIC_CONFINEMENT_CASING = new SimpleOverlayRenderer("casings/transcendentally_amplified_magnetic_confinement_casing");
     public static SimpleOverlayRenderer SINGULARITY_REINFORCED_STELLAR_SHIELDING_CASING = new SimpleOverlayRenderer("casings/singularity_reinforced_stellar_shielding_casing");
+    public static SimpleOverlayRenderer DIRT = new SimpleOverlayRenderer("stones/concrete_light/concrete_light_smooth");
 
     public static SimpleOverlayRenderer ADV_COMPUTER_HEAT_VENT_CASING = new SimpleOverlayRenderer("multiblock/computer/computer_heat_vent_side");
     public static SimpleOverlayRenderer ADV_COMPUTER_CASING = new SimpleOverlayRenderer("multiblock/computer/computer_casing/front");

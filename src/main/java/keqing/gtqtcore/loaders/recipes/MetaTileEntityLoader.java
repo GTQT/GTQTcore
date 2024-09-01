@@ -455,7 +455,7 @@ public class MetaTileEntityLoader {
                 .input(ROBOT_ARM_IV, 8)
                 .input(ELECTRIC_PUMP_IV, 8)
                 .input(plate, TanmolyiumBetaC, 4)
-                .input(gear, Stellite100, 4)
+                .input(plate, Stellite100, 4)
                 .input(wireFine, Platinum, 64)
                 .input(stickLong, SamariumMagnetic, 64)
                 .input(stickLong, SamariumMagnetic, 64)
@@ -471,6 +471,30 @@ public class MetaTileEntityLoader {
                 .duration(1200)
                 .buildAndRegister();
 
+        //BLAZING_BLAST_FURNACE
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .inputs(VACUUM_FREEZER.getStackForm(4))
+                .input(CIRCUIT_GOOD_I)
+                .input(circuit, MarkerMaterials.Tier.LuV,16)
+                .input(frameGt, HSSG, 16)
+                .input(ROBOT_ARM_IV, 8)
+                .input(VOLTAGE_COIL_IV, 16)
+                .input(plate, TanmolyiumBetaC, 4)
+                .input(plate, AusteniticStainlessSteel904L, 4)
+                .input(wireFine, Palladium, 64)
+                .input(stickLong, SamariumMagnetic, 64)
+                .input(stickLong, SamariumMagnetic, 64)
+                .fluidInputs(SolderingAlloy.getFluid(L * 6))
+                .fluidInputs(Lubricant.getFluid(3000))
+                .fluidInputs(HastelloyN.getFluid(L * 2))
+                .outputs(BLAZING_BLAST_FURNACE.getStackForm())
+                .scannerResearch(b -> b
+                        .researchStack(DISK_21.getStackForm())
+                        .EUt(VA[GTValues.IV])
+                        .duration(1200))
+                .EUt(VA[GTValues.LuV])
+                .duration(1200)
+                .buildAndRegister();
         //  Precise Assembler
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .inputs(LARGE_ASSEMBLER.getStackForm(4))
@@ -763,15 +787,6 @@ public class MetaTileEntityLoader {
                 'H', MetaTileEntities.HULL[2].getStackForm(),
                 'P', new UnificationEntry(plate, Invar)
         );
-        //  Volcanus
-        ModHandler.addShapedRecipe(true, "volcanus", BLAZING_BLAST_FURNACE.getStackForm(),
-                "GXG", "RHR", "PWP",
-                'G', new UnificationEntry(gear, HSSG),
-                'X', new UnificationEntry(circuit, MarkerMaterials.Tier.IV),
-                'H', ELECTRIC_BLAST_FURNACE.getStackForm(),
-                'R', ROBOT_ARM_IV.getStackForm(),
-                'P', new UnificationEntry(plate, AusteniticStainlessSteel904L),
-                'W', VOLTAGE_COIL_IV.getStackForm());
 
         ModHandler.addShapedRecipe(true, "blazing_cz_puller", BLAZING_CZ_PULLER.getStackForm(),
                 "GXG", "RHR", "PWP",

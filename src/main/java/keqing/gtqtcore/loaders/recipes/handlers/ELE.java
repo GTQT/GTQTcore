@@ -1,12 +1,24 @@
 package keqing.gtqtcore.loaders.recipes.handlers;
 
+import gregtech.api.GTValues;
+import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMaps;
+import gregtech.api.recipes.ingredients.GTRecipeInput;
 import gregtech.api.unification.material.MarkerMaterials;
+import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.ore.OrePrefix;
+import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.unification.ore.GTQTOrePrefix;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTElectrobath;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidStack;
+
+import java.util.Collection;
+import java.util.List;
 
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.ASSEMBLER_RECIPES;
@@ -248,8 +260,6 @@ public class ELE {
                 .duration(800)
                 .buildAndRegister();
 
-
-
         ELECTROBATH.recipeBuilder()
                 .notConsumable(electrode,Steel,1)
                 .fluidInputs(Water.getFluid(4000))
@@ -446,5 +456,83 @@ public class ELE {
                 .output(dust, Uranium238)
                 .fluidOutputs(Fluorine.getFluid(6000))
                 .buildAndRegister();
+
+        //SeparationRecipes
+        // Electrolyzer
+        ELECTROBATH.recipeBuilder()
+                .notConsumable(electrode,Zinc,1)
+                .input(dust, SodiumBisulfate, 7)
+                .fluidOutputs(SodiumPersulfate.getFluid(500))
+                .fluidOutputs(Hydrogen.getFluid(1000))
+                .duration(150).EUt(VA[LV]).buildAndRegister();
+
+        ELECTROBATH.recipeBuilder()
+                .notConsumable(electrode,Zinc,1)
+                .input(dust, Sphalerite, 2)
+                .output(dust, Zinc)
+                .output(dust, Sulfur)
+                .chancedOutput(dust, Gallium, 500, 250)
+                .duration(200).EUt(VA[LV]).buildAndRegister();
+
+        ELECTROBATH.recipeBuilder()
+                .notConsumable(electrode,Zinc,1)
+                .inputs(new ItemStack(Items.DYE, 3))
+                .output(dust, Calcium)
+                .duration(96).EUt(26).buildAndRegister();
+
+        ELECTROBATH.recipeBuilder()
+                .notConsumable(electrode,Zinc,1)
+                .inputs(new ItemStack(Blocks.SAND, 8))
+                .output(dust, SiliconDioxide)
+                .duration(500).EUt(25).buildAndRegister();
+
+        ELECTROBATH.recipeBuilder()
+                .notConsumable(electrode,Zinc,1)
+                .input(dust, Diamond)
+                .output(dust, Carbon, 64)
+                .duration(768).EUt(VA[LV]).buildAndRegister();
+
+        ELECTROBATH.recipeBuilder()
+                .notConsumable(electrode,Zinc,1)
+                .input(dust, Trona, 16)
+                .output(dust, SodaAsh, 6)
+                .output(dust, SodiumBicarbonate, 6)
+                .fluidOutputs(Water.getFluid(2000))
+                .duration(784).EUt(VA[LV] * 2).buildAndRegister();
+
+        ELECTROBATH.recipeBuilder()
+                .notConsumable(electrode,Zinc,1)
+                .input(dust, Bauxite, 15)
+                .output(dust, Aluminium, 6)
+                .output(dust, Rutile)
+                .fluidOutputs(Oxygen.getFluid(9000))
+                .duration(270).EUt(VA[LV] * 2).buildAndRegister();
+
+        ELECTROBATH.recipeBuilder()
+                .notConsumable(electrode,Zinc,1)
+                .input(dust, Zeolite, 41)
+                .output(dust, Sodium)
+                .output(dust, Calcium, 4)
+                .output(dust, Silicon, 27)
+                .output(dust, Aluminium, 9)
+                .duration(656).EUt(VA[MV]).buildAndRegister();
+
+        ELECTROBATH.recipeBuilder()
+                .notConsumable(electrode,Zinc,1)
+                .input(dust, Bentonite, 30)
+                .output(dust, Sodium)
+                .output(dust, Magnesium, 6)
+                .output(dust, Silicon, 12)
+                .fluidOutputs(Water.getFluid(5000))
+                .fluidOutputs(Hydrogen.getFluid(6000))
+                .duration(480).EUt(VA[MV]).buildAndRegister();
+
+        ELECTROBATH.recipeBuilder()
+                .notConsumable(electrode,Zinc,1)
+                .input(dust, TungsticAcid, 7)
+                .output(dust, Tungsten)
+                .fluidOutputs(Hydrogen.getFluid(2000))
+                .fluidOutputs(Oxygen.getFluid(4000))
+                .duration(210).EUt(960).buildAndRegister();
     }
 }

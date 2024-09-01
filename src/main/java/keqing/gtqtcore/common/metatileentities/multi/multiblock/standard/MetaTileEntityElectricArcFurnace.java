@@ -164,7 +164,7 @@ public class MetaTileEntityElectricArcFurnace extends GTQTRecipeMapMultiblockCon
         ArrayList<MultiblockShapeInfo> shapeInfo = new ArrayList<>();
         MultiblockShapeInfo.Builder builder = MultiblockShapeInfo.builder()
                 .aisle("MEE", "CCC", "BBB", "BBB", "BBB", "AAA")
-                .aisle("FAD", "CDC", "BDB", "BDB", "BDB", "AHA")
+                .aisle("FAX", "CDC", "BDB", "BDB", "BDB", "AHA")
                 .aisle("ISO", "CCC", "BBB", "BBB", "BBB", "AAA")
                 .where('A', getCasingState())
                 .where('D', GTQTMetaBlocks.ELECTROBATH.getState(GTQTElectrobath.CasingType.I_ELECTROBATH))
@@ -174,10 +174,9 @@ public class MetaTileEntityElectricArcFurnace extends GTQTRecipeMapMultiblockCon
                 .where('I', MetaTileEntities.ITEM_IMPORT_BUS[GTValues.LV], EnumFacing.SOUTH)
                 .where('O', MetaTileEntities.ITEM_EXPORT_BUS[GTValues.LV], EnumFacing.SOUTH)
                 .where('F', MetaTileEntities.FLUID_IMPORT_HATCH[GTValues.LV], EnumFacing.WEST)
-                .where('D', MetaTileEntities.FLUID_EXPORT_HATCH[GTValues.LV], EnumFacing.EAST)
+                .where('X', MetaTileEntities.FLUID_EXPORT_HATCH[GTValues.LV], EnumFacing.EAST)
                 .where('H', MetaTileEntities.MUFFLER_HATCH[GTValues.LV], EnumFacing.UP)
-                .where('M', () -> ConfigHolder.machines.enableMaintenance ? MetaTileEntities.MAINTENANCE_HATCH :
-                        GTQTMetaBlocks.TURBINE_CASING.getState(GTQTTurbineCasing.TurbineCasingType.ADVANCED_INVAR_CASING), EnumFacing.NORTH);
+                .where('M', MetaTileEntities.MAINTENANCE_HATCH,EnumFacing.NORTH);
         GregTechAPI.HEATING_COILS.entrySet().stream()
                 .sorted(Comparator.comparingInt(entry -> entry.getValue().getTier()))
                 .forEach(entry -> shapeInfo.add(builder.where('B', entry.getKey()).build()));

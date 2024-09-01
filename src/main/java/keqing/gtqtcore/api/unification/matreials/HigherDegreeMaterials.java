@@ -134,7 +134,6 @@ public class HigherDegreeMaterials {
         //钠硼解石
         GTQTMaterials.Ulexite= new Material.Builder(getMaterialsId(), gregtechId("ulexite"))
                 .ore().dust().fluid()
-                .flags(DISABLE_DECOMPOSITION)
                 .color(0xFFFAFA)
                 .components(Sodium,1,Calcium,1,Borax,1, Oxygen, 2, Hydrogen, 2,Water,6)
                 .build();

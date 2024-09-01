@@ -29,6 +29,7 @@ import gregtech.common.metatileentities.MetaTileEntities;
 import keqing.gtqtcore.api.capability.impl.EvapRecipeLogic;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.recipes.properties.EvaporationEnergyProperty;
+import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.BlockEvaporationBed;
 import keqing.gtqtcore.integration.theoneprobe.EvaporationPoolInfoProvider;
@@ -907,7 +908,7 @@ public class MetaTileEntityEvaporationPool extends RecipeMapMultiblockController
     }
 
     public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
-        return Textures.SOLID_STEEL_CASING;
+        return GTQTTextures.DIRT;
     }
 
     @Nonnull

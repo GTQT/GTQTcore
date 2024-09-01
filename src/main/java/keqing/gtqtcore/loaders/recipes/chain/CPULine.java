@@ -654,18 +654,13 @@ public class CPULine {
                 .buildAndRegister();
 
         czpuller(SILICON_BOULE,Boron,MV);
-        czpuller(AE_SILICON,Fluix,MV);
-        czpuller(PHOSPHORUS_BOULE,Phosphorus,HV);
-        czpuller(NAQUADAH_BOULE,Naquadah,EV);
-
-        czpuller(EUROPIUM_BOULE,Europium,IV);
-        czpuller(AMERICIUM_BOULE,Americium,LuV);
-        czpuller(DUBNIUM_BOULE,Dubnium,ZPM);
-
-        czpuller(NEUTRONIUM_BOULE,Neutronium,UV);
-
-
-
+        czpuller(AE_SILICON,Fluix,HV);
+        czpuller(PHOSPHORUS_BOULE,Phosphorus,EV);
+        czpuller(NAQUADAH_BOULE,Naquadah,IV);
+        czpuller(EUROPIUM_BOULE,Europium,LuV);
+        czpuller(AMERICIUM_BOULE,Americium,ZPM);
+        czpuller(DUBNIUM_BOULE,Dubnium,UV);
+        czpuller(NEUTRONIUM_BOULE,Neutronium,UHV);
 
         //  SrSO4 + Bh -> Bh-doped SrSO4 Boule
         CZPULLER_RECIPES.recipeBuilder()
@@ -684,48 +679,48 @@ public class CPULine {
             CZPULLER_RECIPES.recipeBuilder()
                     .duration(20000/(4-tier))
                     .EUt(VA[tier])
-                    .fluidInputs(Helium.getFluid(4000))
+                    .fluidInputs(Nitrogen.getFluid(4000))
                     .input(block, CSilicon, 32)
                     .input(dust, GalliumArsenide, 8)
                     .input(dust, material, 1)
                     .output(doule, (4-tier)/2)
-                    .blastFurnaceTemp(1800+900*tier)
+                    .blastFurnaceTemp(900*tier)
                     .buildAndRegister();
         }
         if(tier<=4) {
             CZPULLER_RECIPES.recipeBuilder()
                     .duration(20000/(6-tier))
                     .EUt(VA[tier])
-                    .fluidInputs(Nitrogen.getFluid(4000))
+                    .fluidInputs(Helium.getFluid(4000))
                     .input(block, CSilicon, 32)
                     .input(dust, GalliumArsenide, 8)
                     .input(dust, material, 1)
                     .output(doule, (6-tier)/2)
-                    .blastFurnaceTemp(1800+900*tier)
+                    .blastFurnaceTemp(900*tier)
                     .buildAndRegister();
         }
         if(tier<=6) {
             CZPULLER_RECIPES.recipeBuilder()
                     .duration(20000/(8-tier))
                     .EUt(VA[tier])
-                    .fluidInputs(Xenon.getFluid(4000))
+                    .fluidInputs(Radon.getFluid(4000))
                     .input(block, CSilicon, 32)
                     .input(dust, IndiumGalliumPhosphide, 8)
                     .input(dust, material, 1)
                     .output(doule, (8-tier)/2)
-                    .blastFurnaceTemp(1800+900*tier)
+                    .blastFurnaceTemp(900*tier)
                     .buildAndRegister();
         }
         if(tier<=8) {
             CZPULLER_RECIPES.recipeBuilder()
                     .duration(20000/(10-tier))
                     .EUt(VA[tier])
-                    .fluidInputs(Radon.getFluid(4000))
+                    .fluidInputs(Xenon.getFluid(4000))
                     .input(block, CSilicon, 32)
                     .input(dust, IndiumGalliumPhosphide, 8)
                     .input(dust, material, 1)
                     .output(doule, (10-tier)/2)
-                    .blastFurnaceTemp(1800+900*tier)
+                    .blastFurnaceTemp(900*tier)
                     .buildAndRegister();
         }
         if(tier<=10) {
@@ -737,7 +732,7 @@ public class CPULine {
                     .input(dust, NaquadriaGalliumIndium, 8)
                     .input(dust, material, 1)
                     .output(doule, (12-tier)/2)
-                    .blastFurnaceTemp(1800+900*tier)
+                    .blastFurnaceTemp(900*tier)
                     .buildAndRegister();
         }
 
