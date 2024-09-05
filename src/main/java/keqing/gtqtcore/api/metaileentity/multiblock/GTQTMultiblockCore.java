@@ -21,6 +21,7 @@ import gregtech.api.pattern.TraceabilityPredicate;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.util.GTTransferUtils;
+import gregtech.api.util.GTUtility;
 import gregtech.api.util.TextComponentUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
@@ -52,8 +53,7 @@ import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
-import static gregtech.api.GTValues.UV;
-import static gregtech.api.GTValues.VA;
+import static gregtech.api.GTValues.*;
 
 public abstract class GTQTMultiblockCore extends MultiMapMultiblockController implements IDataInfoProvider{
     protected IItemHandlerModifiable inputInventory;
@@ -224,10 +224,20 @@ public abstract class GTQTMultiblockCore extends MultiMapMultiblockController im
                 if (inputInventory != null||inputFluidInventory != null) {
                     Recipe coreRecipe = recipeMaps[target].findRecipe(getMinVa(), inputInventory, inputFluidInventory);
                     if (coreRecipe != null && coreRecipe.matches(false, inputInventory, inputFluidInventory)) {
-                        this.importFluidList.set(i, coreRecipe.getFluidOutputs());
-                        this.importItemsList.set(i, coreRecipe.getOutputs());
-                        ListWork[i] = true;
                         coreRecipe.matches(true, inputInventory, inputFluidInventory);
+
+                        int recipeTier = GTUtility.getTierByVoltage(coreRecipe.getEUt());
+                        int machineTier =IV;
+
+                        this.importFluidList.set(i,GTUtility
+                                .copyFluidList(coreRecipe.getResultFluidOutputs(recipeTier, machineTier, recipeMaps[target])));
+
+                        this.importItemsList.set(i,GTUtility
+                                .copyStackList(coreRecipe.getResultItemOutputs(recipeTier, machineTier, recipeMaps[target])));
+
+
+                        ListWork[i] = true;
+
                         //线程置入工作
                         timeHelper[i][1] = coreRecipe.getDuration();
                         timeHelper[i][2] = coreRecipe.getEUt();
@@ -236,9 +246,10 @@ public abstract class GTQTMultiblockCore extends MultiMapMultiblockController im
                 }
 
             }
-            if(ListWork[i]) if(stop||GTTransferUtils.addFluidsToFluidHandler(outputFluidInventory, true, importFluidList.get(i))&&GTTransferUtils.addItemsToItemHandler(outputInventory, true, importItemsList.get(i)))
+            if(ListWork[i]) if(stop||(GTTransferUtils.addFluidsToFluidHandler(outputFluidInventory, true, importFluidList.get(i))&&GTTransferUtils.addItemsToItemHandler(outputInventory, true, importItemsList.get(i))))
             {
                 p =Math.min( (int) ((this.energyContainer.getEnergyStored() + energyContainer.getInputPerSec()) / (getMinVa() == 0 ? 1 : getMinVa()))   ,20);
+
                 if (speed && (energyContainer.getEnergyStored() - (long) timeHelper[i][2] * p > 0)) {
                     energyContainer.removeEnergy((long) timeHelper[i][2] * p*p);
                     timeHelper[i][0] += p;
@@ -248,10 +259,14 @@ public abstract class GTQTMultiblockCore extends MultiMapMultiblockController im
                         timeHelper[i][0]++;
                     }
                 }
+
                 if (timeHelper[i][0] >= timeHelper[i][1]) {
 
                     GTTransferUtils.addFluidsToFluidHandler(outputFluidInventory, false, importFluidList.get(i));
                     GTTransferUtils.addItemsToItemHandler(outputInventory, false, importItemsList.get(i));
+
+                    this.importFluidList.set(i, null);
+                    this.importItemsList.set(i, null);
 
                     timeHelper[i][0] = 0;
                     timeHelper[i][1] = 0;
@@ -270,14 +285,9 @@ public abstract class GTQTMultiblockCore extends MultiMapMultiblockController im
         for (int i = -2-(speed?0:1); i <= 3; i++) {
 
             if (i == 0) {
-
-                {
-                    textList.add(TextComponentUtil.translationWithColor(TextFormatting.GOLD,">>线程:%s 状态：%s 耗能：%s 耗时 %s/%s",circuit+1,ListWork[circuit],timeHelper[circuit][2],timeHelper[circuit][0],timeHelper[circuit][1]));
-                }
+                textList.add(TextComponentUtil.translationWithColor(TextFormatting.GOLD,">>线程:%s 状态：%s 耗能：%s 耗时 %s/%s",circuit+1,ListWork[circuit],timeHelper[circuit][2],timeHelper[circuit][0],timeHelper[circuit][1]));
             } else if (circuit + i >= 0 && circuit + i < getCoreNum()) {
-                {
-                    textList.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY,">>线程:%s 状态：%s 耗能：%s 耗时 %s/%s",circuit+i+1,ListWork[circuit+i],timeHelper[circuit+i][2],timeHelper[circuit+i][0],timeHelper[circuit+i][1]));
-                }
+                textList.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY,">>线程:%s 状态：%s 耗能：%s 耗时 %s/%s",circuit+i+1,ListWork[circuit+i],timeHelper[circuit+i][2],timeHelper[circuit+i][0],timeHelper[circuit+i][1]));
             }
         }
 

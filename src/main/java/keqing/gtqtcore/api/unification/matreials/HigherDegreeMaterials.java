@@ -85,14 +85,14 @@ public class HigherDegreeMaterials {
                 .build();
         //铬铅矿
         GTQTMaterials.Crocoite= new Material.Builder(getMaterialsId(), gregtechId("crocoite"))
-                .ore()
+                .ore(true)
                 .dust().fluid()
                 .color(0x321452)
                 .components(Lead,1,Chromite,1,Oxygen,4)
                 .build();
         // 冰晶石
         GTQTMaterials.Cryolite= new Material.Builder(getMaterialsId(), gregtechId("cryolite"))
-                .ore(true).dust().fluid()
+                .ore(true).dust()
                 .color(0x98F5FF)
                 .components(Sodium,3,Aluminium,1,Fluorine,6)
                 .build();
@@ -186,7 +186,7 @@ public class HigherDegreeMaterials {
 
         // 可燃冰
         GTQTMaterials.Gashydrate = new Material.Builder(getMaterialsId(), gregtechId("gashydrate"))
-                .gem(1, 6400).ore(2, 1) // default coal burn time in vanilla
+                .gem(1, 128000).ore(2, 1) // default coal burn time in vanilla
                 .color(0xE0FFFF).iconSet(LIGNITE)
                 .flags(FLAMMABLE, NO_SMELTING, NO_SMASHING, MORTAR_GRINDABLE, EXCLUDE_BLOCK_CRAFTING_BY_HAND_RECIPES,
                         DISABLE_DECOMPOSITION)

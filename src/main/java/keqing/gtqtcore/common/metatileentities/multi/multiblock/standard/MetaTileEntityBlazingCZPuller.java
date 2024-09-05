@@ -286,7 +286,9 @@ public class MetaTileEntityBlazingCZPuller extends GTQTRecipeMapMultiblockOverwr
         @Override
         public void setMaxProgress(int maxProgress)
         {
-            if(ParallelNum<=16)
+            if(ParallelNum==0)
+                this.maxProgressTime = maxProgress;
+            else if(ParallelNum<=16)
                 this.maxProgressTime = maxProgress/ParallelNum;
             else if(ParallelNum<=64)
                 this.maxProgressTime = maxProgress*16/ParallelNum;

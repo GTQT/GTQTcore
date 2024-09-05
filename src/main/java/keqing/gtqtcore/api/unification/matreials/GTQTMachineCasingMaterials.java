@@ -222,7 +222,7 @@ public class GTQTMachineCasingMaterials {
                 .color(0x6CF076)
                 .iconSet(SHINY)
                 .components(Nickel, 2, Niobium, 1, Aluminium, 2, Nichrome, 1)
-                .blast(6200, GasTier.HIGHER)
+                .blast(5600, GasTier.HIGHER)
                 .flags(GENERATE_PLATE, GENERATE_ROD, GENERATE_RING, GENERATE_BOLT_SCREW, GENERATE_GEAR, GENERATE_ROTOR,
                         GENERATE_FRAME,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROUND,GENERATE_SMALL_GEAR
                         ,GENERATE_SPRING,GENERATE_SPRING_SMALL)

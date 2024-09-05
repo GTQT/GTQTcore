@@ -980,7 +980,7 @@ public class MetaTileEntityLoader {
                 .input(circuit, MarkerMaterials.Tier.ULV)
                 .circuitMeta(5)
                 .output(GENERAL_CIRCUIT_ULV)
-                .EUt(VA[8])
+                .EUt(VA[2])
                 .duration(20)
                 .buildAndRegister();
 
@@ -993,7 +993,7 @@ public class MetaTileEntityLoader {
                 .input(circuit, MarkerMaterials.Tier.LV)
                 .circuitMeta(5)
                 .output(GENERAL_CIRCUIT_LV)
-                .EUt(VA[8])
+                .EUt(VA[2])
                 .duration(20)
                 .buildAndRegister();
 
@@ -1006,7 +1006,7 @@ public class MetaTileEntityLoader {
                 .input(circuit, MarkerMaterials.Tier.MV)
                 .circuitMeta(5)
                 .output(GENERAL_CIRCUIT_MV)
-                .EUt(VA[8])
+                .EUt(VA[2])
                 .duration(20)
                 .buildAndRegister();
 
@@ -1019,7 +1019,7 @@ public class MetaTileEntityLoader {
                 .input(circuit, MarkerMaterials.Tier.HV)
                 .circuitMeta(5)
                 .output(GENERAL_CIRCUIT_HV)
-                .EUt(VA[8])
+                .EUt(VA[2])
                 .duration(20)
                 .buildAndRegister();
 
@@ -1032,7 +1032,7 @@ public class MetaTileEntityLoader {
                 .input(circuit, MarkerMaterials.Tier.EV)
                 .circuitMeta(5)
                 .output(GENERAL_CIRCUIT_EV)
-                .EUt(VA[8])
+                .EUt(VA[2])
                 .duration(20)
                 .buildAndRegister();
 
@@ -1045,7 +1045,7 @@ public class MetaTileEntityLoader {
                 .input(circuit, MarkerMaterials.Tier.IV)
                 .circuitMeta(5)
                 .output(GENERAL_CIRCUIT_IV)
-                .EUt(VA[8])
+                .EUt(VA[2])
                 .duration(20)
                 .buildAndRegister();
 
@@ -1058,7 +1058,7 @@ public class MetaTileEntityLoader {
                 .input(circuit, MarkerMaterials.Tier.LuV)
                 .circuitMeta(5)
                 .output(GENERAL_CIRCUIT_LuV)
-                .EUt(VA[8])
+                .EUt(VA[2])
                 .duration(20)
                 .buildAndRegister();
 
@@ -1071,7 +1071,7 @@ public class MetaTileEntityLoader {
                 .input(circuit, MarkerMaterials.Tier.ZPM)
                 .circuitMeta(5)
                 .output(GENERAL_CIRCUIT_ZPM)
-                .EUt(VA[8])
+                .EUt(VA[2])
                 .duration(20)
                 .buildAndRegister();
 
@@ -1084,7 +1084,7 @@ public class MetaTileEntityLoader {
                 .input(circuit, MarkerMaterials.Tier.UV)
                 .circuitMeta(5)
                 .output(GENERAL_CIRCUIT_UV)
-                .EUt(VA[8])
+                .EUt(VA[2])
                 .duration(20)
                 .buildAndRegister();
 
@@ -1097,7 +1097,7 @@ public class MetaTileEntityLoader {
                 .input(circuit, MarkerMaterials.Tier.UHV)
                 .circuitMeta(5)
                 .output(GENERAL_CIRCUIT_UHV)
-                .EUt(VA[8])
+                .EUt(VA[2])
                 .duration(20)
                 .buildAndRegister();
 
@@ -1110,7 +1110,7 @@ public class MetaTileEntityLoader {
                 .input(circuit, MarkerMaterials.Tier.UEV)
                 .circuitMeta(5)
                 .output(GENERAL_CIRCUIT_UEV)
-                .EUt(VA[8])
+                .EUt(VA[2])
                 .duration(20)
                 .buildAndRegister();
 
@@ -1123,7 +1123,7 @@ public class MetaTileEntityLoader {
                 .input(circuit, MarkerMaterials.Tier.UIV)
                 .circuitMeta(5)
                 .output(GENERAL_CIRCUIT_UIV)
-                .EUt(VA[8])
+                .EUt(VA[2])
                 .duration(20)
                 .buildAndRegister();
 
@@ -1136,7 +1136,7 @@ public class MetaTileEntityLoader {
                 .input(circuit, MarkerMaterials.Tier.UXV)
                 .circuitMeta(5)
                 .output(GENERAL_CIRCUIT_UXV)
-                .EUt(VA[8])
+                .EUt(VA[2])
                 .duration(20)
                 .buildAndRegister();
 
@@ -1149,7 +1149,7 @@ public class MetaTileEntityLoader {
                 .input(circuit, MarkerMaterials.Tier.OpV)
                 .circuitMeta(5)
                 .output(GENERAL_CIRCUIT_OpV)
-                .EUt(VA[8])
+                .EUt(VA[2])
                 .duration(20)
                 .buildAndRegister();
 
@@ -1162,7 +1162,7 @@ public class MetaTileEntityLoader {
                 .input(circuit, MarkerMaterials.Tier.MAX)
                 .circuitMeta(5)
                 .output(GENERAL_CIRCUIT_MAX)
-                .EUt(VA[8])
+                .EUt(VA[2])
                 .duration(20)
                 .buildAndRegister();
 
