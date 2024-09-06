@@ -979,6 +979,21 @@ public class GTQTMetaItem1 extends StandardMetaItem {
                     lines.add(I18n.format("metaitem.cover.dual.tooltip.transfer_rate.stacks", 16,
                             1280 * 64 * 64 * 4 / 20));
                 })).setInvisibleIf(!GregTechAPI.isHighTier());
+
+        MICROWAVE_ENERGY_RECEIVER_LV= addItem(4026, "cover.microwave_cover.lv");
+        MICROWAVE_ENERGY_RECEIVER_MV= addItem(4027, "cover.microwave_cover.mv");
+        MICROWAVE_ENERGY_RECEIVER_HV= addItem(4028, "cover.microwave_cover.hv");
+        MICROWAVE_ENERGY_RECEIVER_EV= addItem(4029, "cover.microwave_cover.ev");
+        MICROWAVE_ENERGY_RECEIVER_IV= addItem(4030, "cover.microwave_cover.iv");
+        MICROWAVE_ENERGY_RECEIVER_LuV= addItem(4031, "cover.microwave_cover.luv");
+        MICROWAVE_ENERGY_RECEIVER_ZPM= addItem(4032, "cover.microwave_cover.zpm");
+        MICROWAVE_ENERGY_RECEIVER_UV= addItem(4033, "cover.microwave_cover.uv");
+        MICROWAVE_ENERGY_RECEIVER_UHV= addItem(4034, "cover.microwave_cover.uhv");
+        MICROWAVE_ENERGY_RECEIVER_UEV= addItem(4035, "cover.microwave_cover.uev");
+        MICROWAVE_ENERGY_RECEIVER_UIV= addItem(4036, "cover.microwave_cover.uiv");
+        MICROWAVE_ENERGY_RECEIVER_UXV= addItem(4037, "cover.microwave_cover.uxv");
+        MICROWAVE_ENERGY_RECEIVER_OpV= addItem(4038, "cover.microwave_cover.opv");
+
     }
 
 }

@@ -4872,6 +4872,21 @@ cover.precise_dual_cover.title=精确双重覆盖设置（%s）
 metaitem.cover.dual.tooltip.transfer_rate=§b传输速率：§f%,d 个物品/秒§7 和 §f%,d L/tick
 metaitem.cover.dual.tooltip.transfer_rate.stacks=§b传输速率：§f%,d 堆/秒§7 和 §f%,d L/tick
 cover.dual_cover.mode_changer=点击以切换物品和流体设置
+
+
+metaitem.cover.microwave_cover.lv.name=LV 微波无线接收覆盖板
+metaitem.cover.microwave_cover.mv.name=MV 微波无线接收覆盖板
+metaitem.cover.microwave_cover.hv.name=HV 微波无线接收覆盖板
+metaitem.cover.microwave_cover.ev.name=EV 微波无线接收覆盖板
+metaitem.cover.microwave_cover.iv.name=IV 微波无线接收覆盖板
+metaitem.cover.microwave_cover.luv.name=LuV 微波无线接收覆盖板
+metaitem.cover.microwave_cover.zpm.name=ZPM 微波无线接收覆盖板
+metaitem.cover.microwave_cover.uv.name=UV 微波无线接收覆盖板
+metaitem.cover.microwave_cover.uhv.name=UHV 微波无线接收覆盖板
+metaitem.cover.microwave_cover.uev.name=UEV 微波无线接收覆盖板
+metaitem.cover.microwave_cover.uiv.name=UIV 微波无线接收覆盖板
+metaitem.cover.microwave_cover.uxv.name=UXV 微波无线接收覆盖板
+metaitem.cover.microwave_cover.opv.name=OpV 微波无线接收覆盖板
 ##  Universal Texts
 gtqtcore.universal.tooltip.max_parallel=最大并行数：§e%s§7
 gtqtcore.universal.tooltip.get_parallel_by_voltage=根据输入电压获得并行。

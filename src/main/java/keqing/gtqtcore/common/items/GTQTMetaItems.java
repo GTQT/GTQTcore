@@ -716,7 +716,19 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem PRECISE_DUAL_COVER_UXV;
     public static MetaItem<?>.MetaValueItem PRECISE_DUAL_COVER_OpV;
 
-
+    public static MetaItem<?>.MetaValueItem MICROWAVE_ENERGY_RECEIVER_LV;
+    public static MetaItem<?>.MetaValueItem MICROWAVE_ENERGY_RECEIVER_MV;
+    public static MetaItem<?>.MetaValueItem MICROWAVE_ENERGY_RECEIVER_HV;
+    public static MetaItem<?>.MetaValueItem MICROWAVE_ENERGY_RECEIVER_EV;
+    public static MetaItem<?>.MetaValueItem MICROWAVE_ENERGY_RECEIVER_IV;
+    public static MetaItem<?>.MetaValueItem MICROWAVE_ENERGY_RECEIVER_LuV;
+    public static MetaItem<?>.MetaValueItem MICROWAVE_ENERGY_RECEIVER_ZPM;
+    public static MetaItem<?>.MetaValueItem MICROWAVE_ENERGY_RECEIVER_UV;
+    public static MetaItem<?>.MetaValueItem MICROWAVE_ENERGY_RECEIVER_UHV;
+    public static MetaItem<?>.MetaValueItem MICROWAVE_ENERGY_RECEIVER_UEV;
+    public static MetaItem<?>.MetaValueItem MICROWAVE_ENERGY_RECEIVER_UIV;
+    public static MetaItem<?>.MetaValueItem MICROWAVE_ENERGY_RECEIVER_UXV;
+    public static MetaItem<?>.MetaValueItem MICROWAVE_ENERGY_RECEIVER_OpV;
     // Process-Specific Components
     public static MetaItem<?>.MetaValueItem MAGNETRON;
     public static GTQTMetaItem1 GTQT_META_ITEM;

@@ -4,7 +4,6 @@ import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.ColourMultiplier;
 import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
-import gregtech.api.GTValues;
 import gregtech.api.capability.GregtechCapabilities;
 import gregtech.api.capability.GregtechDataCodes;
 import gregtech.api.capability.IEnergyContainer;
@@ -39,7 +38,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-import static gregtech.api.GTValues.VA;
+import static gregtech.api.GTValues.V;
 
 public class MetaTileEntityMicrowaveEnergyReceiver extends MetaTileEntity implements EnergyContainerHandler.IEnergyChangeListener, ITieredMetaTileEntity {
     int tier;
@@ -93,7 +92,7 @@ public class MetaTileEntityMicrowaveEnergyReceiver extends MetaTileEntity implem
     public MetaTileEntityMicrowaveEnergyReceiver(ResourceLocation metaTileEntityId, int tier) {
         super(metaTileEntityId);
         this.tier = tier;
-        this.energyContainer = EnergyContainerHandler.receiverContainer(this, GTValues.V[tier] * 64L ,tier, 16);
+        this.energyContainer = EnergyContainerHandler.receiverContainer(this, V[tier]*16*20L ,tier, 16);
     }
 
     public void update() {
@@ -107,25 +106,17 @@ public class MetaTileEntityMicrowaveEnergyReceiver extends MetaTileEntity implem
                 for (EnumFacing facing : EnumFacing.VALUES) {
                     if (mte.getCapability(GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER, facing) instanceof IEnergyContainer) {
                         IEnergyContainer container = mte.getCapability(GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER, facing);
-                            if (energyContainer.getEnergyStored() > (long) Voltage * Amperage*20) {
-                                if (container.getEnergyCapacity() - container.getEnergyStored() < (long) Voltage * Amperage * 20) {
+                            if (energyContainer.getEnergyStored() > V[Voltage] * Amperage) {
+                                if (  (container.getEnergyCapacity() - container.getEnergyStored())  < V[Voltage] * Amperage) {
                                     container.addEnergy(container.getEnergyCapacity() - container.getEnergyStored());
                                     energyContainer.removeEnergy(container.getEnergyCapacity() - container.getEnergyStored());
                                 } else {
-                                    container.addEnergy((long) Voltage * Amperage * 20);
-                                    energyContainer.removeEnergy((long) Voltage * Amperage * 20);
+                                    container.addEnergy(V[Voltage] * Amperage);
+                                    energyContainer.removeEnergy(V[Voltage] * Amperage);
                                 }
                             }
-                            else if(energyContainer.getEnergyStored() > (long) Voltage * Amperage) {
-                                if (container.getEnergyCapacity() - container.getEnergyStored() < (long) Voltage * Amperage) {
-                                    container.addEnergy(container.getEnergyCapacity() - container.getEnergyStored());
-                                    energyContainer.removeEnergy(container.getEnergyCapacity() - container.getEnergyStored());
-                                } else {
-                                    container.addEnergy((long) Voltage * Amperage);
-                                    energyContainer.removeEnergy((long) Voltage * Amperage);
-                                }
-                            } else {
-                                if (container.getEnergyCapacity() - container.getEnergyStored() < energyContainer.getEnergyStored()) {
+                            else {
+                                if (  (container.getEnergyCapacity() - container.getEnergyStored())   < energyContainer.getEnergyStored()) {
                                     container.addEnergy(container.getEnergyCapacity() - container.getEnergyStored());
                                     energyContainer.removeEnergy(container.getEnergyCapacity() - container.getEnergyStored());
                                 } else {
@@ -149,7 +140,7 @@ public class MetaTileEntityMicrowaveEnergyReceiver extends MetaTileEntity implem
 
         ModularUI.Builder builder = ModularUI.defaultBuilder();
 
-        builder.dynamicLabel(7, 10, () -> "微波无线能量接收器 等级：" + tier, 0x232323);
+        builder.dynamicLabel(7, 10, () -> "微波无线能量接收器-等级：" + tier, 0x232323);
 
         builder.label(7, 32, "gregtech.creative.energy.voltage");
         builder.widget(new ClickButtonWidget(7, 45, 20, 20, "-", data -> Voltage = --Voltage == -1 ? 0 : Voltage));
@@ -179,7 +170,7 @@ public class MetaTileEntityMicrowaveEnergyReceiver extends MetaTileEntity implem
             }
         }));
 
-        builder.dynamicLabel(7, 110, () -> "能量传输量: " + Amperage*VA[Voltage]+" EU/tick", 0x232323);
+        builder.dynamicLabel(7, 110, () -> "能量传输量: " + Amperage*V[Voltage]+" EU/tick", 0x232323);
 
         builder.widget(new CycleButtonWidget(7, 139, 77, 20, () -> active, this::setActive,
                 "gregtech.creative.activity.off", "gregtech.creative.activity.on"));

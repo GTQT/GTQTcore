@@ -5,7 +5,10 @@ import static gregtech.api.recipes.RecipeMaps.ASSEMBLER_RECIPES;
 import static gregtech.api.recipes.RecipeMaps.ASSEMBLY_LINE_RECIPES;
 import static gregtech.common.items.MetaItems.*;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
+import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.MICROWAVE_ENERGY_RECEIVER;
 
+import gregtech.api.items.metaitem.MetaItem;
+import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.unification.material.MarkerMaterials;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.ore.OrePrefix;
@@ -15,6 +18,30 @@ public class CoverRecipes {
     public static void init() {
         dualCovers();
         preciseDualCovers();
+        wireless(MICROWAVE_ENERGY_RECEIVER[1],MICROWAVE_ENERGY_RECEIVER_LV,1);
+        wireless(MICROWAVE_ENERGY_RECEIVER[2],MICROWAVE_ENERGY_RECEIVER_MV,2);
+        wireless(MICROWAVE_ENERGY_RECEIVER[3],MICROWAVE_ENERGY_RECEIVER_HV,3);
+        wireless(MICROWAVE_ENERGY_RECEIVER[4],MICROWAVE_ENERGY_RECEIVER_EV,4);
+        wireless(MICROWAVE_ENERGY_RECEIVER[5],MICROWAVE_ENERGY_RECEIVER_IV,5);
+        wireless(MICROWAVE_ENERGY_RECEIVER[6],MICROWAVE_ENERGY_RECEIVER_LuV,6);
+        wireless(MICROWAVE_ENERGY_RECEIVER[7],MICROWAVE_ENERGY_RECEIVER_ZPM,7);
+        wireless(MICROWAVE_ENERGY_RECEIVER[8],MICROWAVE_ENERGY_RECEIVER_UV,8);
+        wireless(MICROWAVE_ENERGY_RECEIVER[9],MICROWAVE_ENERGY_RECEIVER_UHV,9);
+        wireless(MICROWAVE_ENERGY_RECEIVER[10],MICROWAVE_ENERGY_RECEIVER_UEV,10);
+    }
+
+    private static void wireless(MetaTileEntity mte, MetaItem.MetaValueItem item,int tier) {
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(mte)
+                .output(item)
+                .EUt(VA[tier]).duration(200)
+                .buildAndRegister();
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .output(mte)
+                .input(item)
+                .EUt(VA[tier]).duration(200)
+                .buildAndRegister();
     }
 
     private static void dualCovers() {

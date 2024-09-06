@@ -312,9 +312,10 @@ public class OilChains {
                 .duration(100)
                 .EUt(30)
                 .circuitMeta(1)
-                .input(dust,Quicklime)
+                .input(dust,Quicklime,2)
                 .fluidInputs(EthyleneChlorohydrin.getFluid(1000))
                 .fluidOutputs(EthyleneOxide.getFluid(1000))
+                .fluidOutputs(DilutedHydrochloricAcid.getFluid(1000))
                 .output(dust,Calcium)
                 .buildAndRegister();
         //环氧丙烷

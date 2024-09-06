@@ -145,6 +145,9 @@ public class GTQTTextures {
     public static OrientedOverlayRenderer FARM_OVERLAY = new OrientedOverlayRenderer("overlay/tree_growth_factory");
     public static OrientedOverlayRenderer VIRTUAL_COSMOS_SIMULATOR_OVERLAY = new OrientedOverlayRenderer("overlay/virtual_cosmos_simulator");
     public static OrientedOverlayRenderer COLLIDER_OVERLAY = new OrientedOverlayRenderer("overlay/collider");
+
+    public static SimpleOverlayRenderer WIRELESS_OVERLAY = new SimpleOverlayRenderer("overlay/wireless/overlay_front");
+
     public static OrientedOverlayRenderer DIMENSIONAL_OSCILLATOR_OVERLAY = new OrientedOverlayRenderer("overlay/dimensional_oscillator");
     public static OrientedOverlayRenderer DECAY_GENERATOR_OVERLAY = new OrientedOverlayRenderer("overlay/decay_generator");
     public static OrientedOverlayRenderer SUPRACHRONAL_ASSEMBLY_LINE_OVERLAY = new OrientedOverlayRenderer("overlay/suprachronal_assembly_line");

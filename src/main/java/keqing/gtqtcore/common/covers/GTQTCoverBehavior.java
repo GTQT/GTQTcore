@@ -12,8 +12,7 @@ import keqing.gtqtcore.GTQTCore;
 import keqing.gtqtcore.common.items.GTQTMetaItems;
 import net.minecraft.util.ResourceLocation;
 
-import static gregtech.api.GTValues.*;
-import static gregtech.common.covers.CoverBehaviors.registerBehavior;
+import static gregtech.api.GTValues.OpV;
 
 public class GTQTCoverBehavior {
 
@@ -63,6 +62,33 @@ public class GTQTCoverBehavior {
         registerBehavior(new ResourceLocation(GTQTCore.MODID, "precise_dual_cover.uv"), GTQTMetaItems.PRECISE_DUAL_COVER_UV,
                 (def, tile, side) -> new CoverPreciseDualCover(def, tile, side, GTValues.UV, 16 * 64,
                         1280 * 64 * 64 * 4));
+
+        registerBehavior(new ResourceLocation(GTQTCore.MODID, "microwave_cover.lv"), GTQTMetaItems.MICROWAVE_ENERGY_RECEIVER_LV,
+                (def, tile, side) -> new CoverMicrowaveEnergyReceiver(def, tile, side, GTValues.LV));
+        registerBehavior(new ResourceLocation(GTQTCore.MODID, "microwave_cover.mv"), GTQTMetaItems.MICROWAVE_ENERGY_RECEIVER_MV,
+                (def, tile, side) -> new CoverMicrowaveEnergyReceiver(def, tile, side, GTValues.MV));
+        registerBehavior(new ResourceLocation(GTQTCore.MODID, "microwave_cover.hv"), GTQTMetaItems.MICROWAVE_ENERGY_RECEIVER_HV,
+                (def, tile, side) -> new CoverMicrowaveEnergyReceiver(def, tile, side, GTValues.HV));
+        registerBehavior(new ResourceLocation(GTQTCore.MODID, "microwave_cover.ev"), GTQTMetaItems.MICROWAVE_ENERGY_RECEIVER_EV,
+                (def, tile, side) -> new CoverMicrowaveEnergyReceiver(def, tile, side, GTValues.EV));
+        registerBehavior(new ResourceLocation(GTQTCore.MODID, "microwave_cover.iv"), GTQTMetaItems.MICROWAVE_ENERGY_RECEIVER_IV,
+                (def, tile, side) -> new CoverMicrowaveEnergyReceiver(def, tile, side, GTValues.IV));
+        registerBehavior(new ResourceLocation(GTQTCore.MODID, "microwave_cover.luv"), GTQTMetaItems.MICROWAVE_ENERGY_RECEIVER_LuV,
+                (def, tile, side) -> new CoverMicrowaveEnergyReceiver(def, tile, side, GTValues.LuV));
+        registerBehavior(new ResourceLocation(GTQTCore.MODID, "microwave_cover.zpm"), GTQTMetaItems.MICROWAVE_ENERGY_RECEIVER_ZPM,
+                (def, tile, side) -> new CoverMicrowaveEnergyReceiver(def, tile, side, GTValues.ZPM));
+        registerBehavior(new ResourceLocation(GTQTCore.MODID, "microwave_cover.uv"), GTQTMetaItems.MICROWAVE_ENERGY_RECEIVER_UV,
+                (def, tile, side) -> new CoverMicrowaveEnergyReceiver(def, tile, side, GTValues.UV));
+        registerBehavior(new ResourceLocation(GTQTCore.MODID, "microwave_cover.uhv"), GTQTMetaItems.MICROWAVE_ENERGY_RECEIVER_UHV,
+                (def, tile, side) -> new CoverMicrowaveEnergyReceiver(def, tile, side, GTValues.UHV));
+        registerBehavior(new ResourceLocation(GTQTCore.MODID, "microwave_cover.uev"), GTQTMetaItems.MICROWAVE_ENERGY_RECEIVER_UEV,
+                (def, tile, side) -> new CoverMicrowaveEnergyReceiver(def, tile, side, GTValues.UEV));
+        registerBehavior(new ResourceLocation(GTQTCore.MODID, "microwave_cover.uiv"), GTQTMetaItems.MICROWAVE_ENERGY_RECEIVER_UIV,
+                (def, tile, side) -> new CoverMicrowaveEnergyReceiver(def, tile, side, GTValues.UIV));
+        registerBehavior(new ResourceLocation(GTQTCore.MODID, "microwave_cover.uxv"), GTQTMetaItems.MICROWAVE_ENERGY_RECEIVER_UXV,
+                (def, tile, side) -> new CoverMicrowaveEnergyReceiver(def, tile, side, GTValues.UXV));
+        registerBehavior(new ResourceLocation(GTQTCore.MODID, "microwave_cover.opv"), GTQTMetaItems.MICROWAVE_ENERGY_RECEIVER_OpV,
+                (def, tile, side) -> new CoverMicrowaveEnergyReceiver(def, tile, side, OpV));
     }
 
     /**
