@@ -6,19 +6,23 @@ import gregtech.api.capability.IOpticalComputationProvider;
 import gregtech.api.capability.IOpticalComputationReceiver;
 import gregtech.api.capability.impl.ComputationRecipeLogic;
 import gregtech.api.gui.GuiTextures;
+import gregtech.api.gui.ModularUI;
 import gregtech.api.gui.Widget;
+import gregtech.api.gui.widgets.AdvancedTextWidget;
 import gregtech.api.gui.widgets.ClickButtonWidget;
 import gregtech.api.gui.widgets.WidgetGroup;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
+import gregtech.api.metatileentity.multiblock.MultiblockDisplayText;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.util.GTTransferUtils;
+import gregtech.api.util.TextComponentUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.TooltipHelper;
@@ -38,6 +42,7 @@ import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.MetaTil
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.MetaTileEntityPhotolithographyFactory;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -46,6 +51,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -57,7 +63,6 @@ import java.util.List;
 
 public class MetaTileEntitykeQingNet extends RecipeMapMultiblockController implements IOpticalComputationReceiver {
     private IOpticalComputationProvider computationProvider;
-    private IObjectHolder objectHolder;
     double tier;
     int page=0;
     int x;
@@ -160,40 +165,7 @@ public class MetaTileEntitykeQingNet extends RecipeMapMultiblockController imple
     }
 
     int thresholdPercentage=0;
-    @Override
-    @Nonnull
-    protected Widget getFlexButton(int x, int y, int width, int height) {
-        WidgetGroup group = new WidgetGroup(x, y, width, height);
-        group.addWidget(new ClickButtonWidget(0, 0, 9, 9, "", this::decrementThreshold)
-                .setButtonTexture(GuiTextures.BUTTON_THROTTLE_MINUS)
-                .setTooltipText("gtqtcore.multiblock.kqn.threshold_decrement"));
-        group.addWidget(new ClickButtonWidget(9, 0, 9, 9, "", this::incrementThreshold)
-                .setButtonTexture(GuiTextures.BUTTON_THROTTLE_PLUS)
-                .setTooltipText("gtqtcore.multiblock.kqn.threshold_increment"));
-        group.addWidget(new ClickButtonWidget(0, 9, 9, 9, "", this::page)
-                .setButtonTexture(GuiTextures.ARROW_DOUBLE)
-                .setTooltipText("切换页面"));
-        group.addWidget(new ClickButtonWidget(9, 9, 9, 9, "", this::replace)
-                .setButtonTexture(GuiTextures.BUTTON_CLEAR_GRID)
-                .setTooltipText("研究类型"));
-        return group;
-    }
-    private void incrementThreshold(Widget.ClickData clickData) {
-            this.thresholdPercentage = MathHelper.clamp(thresholdPercentage + 1, 0, 100);
-    }
 
-    private void decrementThreshold(Widget.ClickData clickData) {
-            this.thresholdPercentage = MathHelper.clamp(thresholdPercentage - 1, 0, 100);
-    }
-
-    private void page(Widget.ClickData clickData) {
-        if(page<2)page++;
-        else page=0;
-    }
-    private void replace(Widget.ClickData clickData) {
-        if(card<2)card++;
-        else card=0;
-    }
     @Override
     public boolean checkRecipe(@Nonnull Recipe recipe, boolean consumeIfSuccess) {
         if(recipe.getProperty(KQNetProperty.getInstance(), 0)==thresholdPercentage&&
@@ -205,6 +177,162 @@ public class MetaTileEntitykeQingNet extends RecipeMapMultiblockController imple
         return false;
     }
 
+    protected void addInfo1(List<ITextComponent> textList) {
+        MultiblockDisplayText.builder(textList, isStructureFormed())
+                .addCustom(tl -> {
+                    if (isStructureFormed()&&thresholdPercentage-2>0) {
+                        tl.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY, "序号：%s", thresholdPercentage - 2));
+                        if(card==0) {
+                            tl.add(new TextComponentTranslation(String.format("gtqtcore.multiblock.kqn.nb%s", thresholdPercentage - 2)));
+                        }
+                        if(card==1)
+                        {
+                            if(thresholdPercentage-2<=15&&thresholdPercentage-2>0) {
+                                textList.add(new TextComponentTranslation("gtqtcore.multiblock.kqn.bio1"));
+                            }
+                        }
+                    }});
+    }
+
+    protected void addInfo2(List<ITextComponent> textList) {
+        MultiblockDisplayText.builder(textList, isStructureFormed())
+                .addCustom(tl -> {
+                    if (isStructureFormed()&&thresholdPercentage-1>0) {
+                        tl.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY, "序号：%s", thresholdPercentage -1));
+                        if(card==0) {
+                            tl.add(new TextComponentTranslation(String.format("gtqtcore.multiblock.kqn.nb%s", thresholdPercentage - 1)));
+                        }
+                        if(card==1)
+                        {
+                            if(thresholdPercentage-1<=15&&thresholdPercentage-1>0) {
+                                textList.add(new TextComponentTranslation("gtqtcore.multiblock.kqn.bio1"));
+                            }
+                        }
+                    }});
+    }
+
+    protected void addInfo3(List<ITextComponent> textList) {
+        MultiblockDisplayText.builder(textList, isStructureFormed())
+                .addCustom(tl -> {
+                    if (isStructureFormed()) {
+                        tl.add(TextComponentUtil.translationWithColor(TextFormatting.GOLD, "序号：%s", thresholdPercentage));
+                        if(card==0) {
+                            tl.add(new TextComponentTranslation(String.format("gtqtcore.multiblock.kqn.nb%s", thresholdPercentage)));
+                        }
+                        if(card==1)
+                        {
+                            if(thresholdPercentage<=15&&thresholdPercentage>0) {
+                                textList.add(new TextComponentTranslation("gtqtcore.multiblock.kqn.bio1"));
+                            }
+                        }
+                    }});
+    }
+
+    protected void addInfo4(List<ITextComponent> textList) {
+        MultiblockDisplayText.builder(textList, isStructureFormed())
+                .addCustom(tl -> {
+                    tl.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY, "序号：%s", thresholdPercentage +1));
+                    if (isStructureFormed()&&thresholdPercentage+1<100) {
+                        if(card==0) {
+                            tl.add(new TextComponentTranslation(String.format("gtqtcore.multiblock.kqn.nb%s", thresholdPercentage +1)));
+                        }
+                        if(card==1)
+                        {
+                            if(thresholdPercentage+1<=15&&thresholdPercentage+1>0) {
+                                textList.add(new TextComponentTranslation("gtqtcore.multiblock.kqn.bio1"));
+                            }
+                        }
+                    }});
+    }
+
+
+    protected void addInfo5(List<ITextComponent> textList) {
+        MultiblockDisplayText.builder(textList, isStructureFormed())
+                .addCustom(tl -> {
+                    if (isStructureFormed()&&thresholdPercentage+2<100) {
+                        tl.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY, "序号：%s", thresholdPercentage + 2));
+                        if(card==0) {
+                            tl.add(new TextComponentTranslation(String.format("gtqtcore.multiblock.kqn.nb%s", thresholdPercentage + 2)));
+                        }
+                        if(card==1)
+                        {
+                            if(thresholdPercentage+2<=15&&thresholdPercentage+2>0) {
+                                textList.add(new TextComponentTranslation("gtqtcore.multiblock.kqn.bio1"));
+                            }
+                        }
+                    }});
+    }
+    
+
+    @Override
+    protected ModularUI.Builder createUITemplate(EntityPlayer entityPlayer) {
+        ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND, 300, 240);
+
+        // Display
+        builder.image(132, 4, 162, 115, GuiTextures.DISPLAY);
+        builder.dynamicLabel(135, 8, () -> "科研计算机", 0xFFFFFF);
+        builder.widget((new AdvancedTextWidget(135, 20, this::addDisplayText, 16777215)).setMaxWidthLimit(160).setClickHandler(this::handleDisplayClick));
+
+        int j=0;
+        //1号
+        builder.image(3, 4+j*30, 130, 30, GuiTextures.DISPLAY);
+        builder.widget((new AdvancedTextWidget(7, 8+j*30, this::addInfo1, 16777215)).setMaxWidthLimit(120).setClickHandler(this::handleDisplayClick));
+        builder.widget(new ClickButtonWidget(118, 4+j*30, 15, 30, "-2", data -> this.thresholdPercentage = MathHelper.clamp(thresholdPercentage -2, 0, 100)  ));
+        j++;
+        //2号
+        builder.image(3, 4+j*30, 130, 30, GuiTextures.DISPLAY);
+        builder.widget((new AdvancedTextWidget(7, 8+j*30, this::addInfo2, 16777215)).setMaxWidthLimit(120).setClickHandler(this::handleDisplayClick));
+        builder.widget(new ClickButtonWidget(118, 4+j*30, 15, 30, "-1", data ->  this.thresholdPercentage = MathHelper.clamp(thresholdPercentage - 1, 0, 100) ));
+        j++;
+        //3号
+        builder.image(3, 4+j*30, 130, 30, GuiTextures.DISPLAY);
+        builder.widget((new AdvancedTextWidget(7, 8+j*30, this::addInfo3, 16777215)).setMaxWidthLimit(120).setClickHandler(this::handleDisplayClick));
+        builder.widget(new ClickButtonWidget(118, 4+j*30, 15, 30, "->", data -> thresholdPercentage+=0));
+        j++;
+        //4号
+        builder.image(3, 4+j*30, 130, 30, GuiTextures.DISPLAY);
+        builder.widget((new AdvancedTextWidget(7, 8+j*30, this::addInfo4, 16777215)).setMaxWidthLimit(120).setClickHandler(this::handleDisplayClick));
+        builder.widget(new ClickButtonWidget(118, 4+j*30, 15, 30, "+1", data -> this.thresholdPercentage = MathHelper.clamp(thresholdPercentage + 1, 0, 100)   ));
+        j++;
+        //5号
+        builder.image(3, 4+j*30, 130, 30, GuiTextures.DISPLAY);
+        builder.widget((new AdvancedTextWidget(7, 8+j*30, this::addInfo5, 16777215)).setMaxWidthLimit(120).setClickHandler(this::handleDisplayClick));
+        builder.widget(new ClickButtonWidget(118, 4+j*30, 15, 30, "+2", data -> this.thresholdPercentage = MathHelper.clamp(thresholdPercentage + 2, 0, 100)  ));
+
+        // Display
+        builder.image(3, 154, 130, 82, GuiTextures.DISPLAY);
+        builder.widget((new AdvancedTextWidget(7, 158, this::addTotal, 16777215)).setMaxWidthLimit(130).setClickHandler(this::handleDisplayClick));
+
+
+        builder.widget(new ClickButtonWidget(132, 120, 48, 18, "研究项目", data -> page = 0));
+        builder.widget(new ClickButtonWidget(180, 120, 48, 18, "接入设备", data -> page = 1));
+        builder.widget(new ClickButtonWidget(228, 120, 48, 18, "科研等级",data -> page = 2));
+
+        builder.widget(new ClickButtonWidget(132, 140, 24, 18, "+1", data -> this.thresholdPercentage = MathHelper.clamp(thresholdPercentage + 1, 0, 100)));
+        builder.widget(new ClickButtonWidget(156, 140, 24, 18, "+5", data -> this.thresholdPercentage = MathHelper.clamp(thresholdPercentage + 5, 0, 100)));
+        builder.widget(new ClickButtonWidget(180, 140, 24, 18, "-1", data -> this.thresholdPercentage = MathHelper.clamp(thresholdPercentage - 1, 0, 100)));
+        builder.widget(new ClickButtonWidget(204, 140, 24, 18, "-5", data -> this.thresholdPercentage = MathHelper.clamp(thresholdPercentage - 5, 0, 100)));
+
+        builder.widget(new ClickButtonWidget(228, 140, 48, 18, "研究类型",data->{
+            if(card<2)card++;
+            else card=0;
+        }));
+
+        builder.bindPlayerInventory(entityPlayer.inventory, GuiTextures.SLOT, 132,160);
+        return builder;
+    }
+
+    protected void addTotal(List<ITextComponent> textList) {
+        textList.add(new TextComponentTranslation("科研系统-等级：%s",tier));
+        textList.add(new TextComponentTranslation("接入设备列表："));
+        for(int i=0;i<40;i++)
+        {
+            if(io[i][0] == 1)
+            {
+                textList.add(new TextComponentTranslation(String.format(GTQTKQnetHelper.getInfo(io[i][4]))));
+            }
+        }
+    }
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         if(page==0) {
@@ -212,6 +340,7 @@ public class MetaTileEntitykeQingNet extends RecipeMapMultiblockController imple
             if(card==0) {
                 textList.add(new TextComponentTranslation("gtqtcore.multiblock.kqn.thresholdPercentage", thresholdPercentage,"传统科研"));
                 textList.add(new TextComponentTranslation(String.format("gtqtcore.multiblock.kqn.nb%s", thresholdPercentage)));
+                textList.add(new TextComponentTranslation(String.format("gtqtcore.multiblock.kqn.nx%s", thresholdPercentage)));
             }
             if(card==1) {
                 textList.add(new TextComponentTranslation("gtqtcore.multiblock.kqn.thresholdPercentage", thresholdPercentage,"基因定向"));
@@ -230,7 +359,7 @@ public class MetaTileEntitykeQingNet extends RecipeMapMultiblockController imple
             {
                 if(io[i][0] == 1&&io[i][4]<30)
                 {
-                    textList.add(new TextComponentTranslation(String.format("X: "+io[i][1]+" Y: "+io[i][2]+" Z: "+io[i][3]+" /"+GTQTKQnetHelper.getInfo(io[i][4]))));
+                    textList.add(new TextComponentTranslation(String.format("X:"+io[i][1]+" Y:"+io[i][2]+" Z:"+io[i][3]+"/"+GTQTKQnetHelper.getInfo(io[i][4]))));
                 }
             }
 
@@ -242,7 +371,7 @@ public class MetaTileEntitykeQingNet extends RecipeMapMultiblockController imple
             {
                 if(io[i][0] == 1&&(io[i][4]>=30||io[i][4]==3))
                 {
-                    textList.add(new TextComponentTranslation(String.format("X: "+io[i][1]+" Y: "+io[i][2]+" Z: "+io[i][3]+" /"+GTQTKQnetHelper.getInfo(io[i][4]))));
+                    textList.add(new TextComponentTranslation(String.format("X:"+io[i][1]+" Y:"+io[i][2]+" Z:"+io[i][3]+"/"+GTQTKQnetHelper.getInfo(io[i][4]))));
                 }
             }
         }

@@ -50,7 +50,7 @@ public class GalliumNitrideChain {
                 .input(dust, AluminiumHydroxide, 2)
                 .output(dust, Alumina, 1)
                 .fluidOutputs(Water.getFluid(3000))
-                .duration(60).EUt(16).buildAndRegister();
+                .duration(40).EUt(480).buildAndRegister();
 
         // 2Ga(CH3)3 + 3H2O -> Ga2O3 + 3CH4 + 3H (H lost)
         CVD_RECIPES.recipeBuilder()

@@ -3664,107 +3664,133 @@ gtqtcore.machine.kqnet.tooltip.2=在界面内使用按钮进行操作，在研�
 gtqtcore.machine.kqnet.tooltip.3=使用坐标绑定卡绑定附属结构控制器坐标后（须在控制器半径48格内）放入输入总线即可完成绑定，可在接入拓展列表内查看
 gtqtcore.machine.kqnet.tooltip.4=使用坐标绑定卡绑定数据库，计算机等结构可升级科研等级，可在科技等级列表内查看
 
-gtqtcore.multiblock.kqn.nb0=欢迎使用KQCC科研计算机集成系统！
+gtqtcore.multiblock.kqn.nb0=欢迎界面
+gtqtcore.multiblock.kqn.nx0=欢迎使用KQCC科研计算机集成系统！
 metaitem.disk.0.name=数据存储器
 metaitem.disk.0.tooltip=§aNULL
 
-gtqtcore.multiblock.kqn.nb1=项目：涡轮效率升级I 通过对小型内燃发电机的涡轮外形继续重新设计以及机器外壳的材料设计，采用新结构的内燃机工作效率大大提升，并且可以适应更加恶劣的工作条件。
+gtqtcore.multiblock.kqn.nb1=涡轮效率升级I 
+gtqtcore.multiblock.kqn.nx1=通过对小型内燃发电机的涡轮外形继续重新设计以及机器外壳的材料设计，采用新结构的内燃机工作效率大大提升，并且可以适应更加恶劣的工作条件。
 metaitem.disk.1.name=数据存储器
 metaitem.disk.1.tooltip=§a涡轮效率升级I
 
-gtqtcore.multiblock.kqn.nb2=项目：涡轮效率升级II 继续对涡轮叶片外形结构进行重新设计优化，使得涡轮叶片尖端的最高速度能够突破声速，并且最大化降低，损耗涡轮热机再起效率大大提升。
+gtqtcore.multiblock.kqn.nb2=涡轮效率升级II 
+gtqtcore.multiblock.kqn.nx2=继续对涡轮叶片外形结构进行重新设计优化，使得涡轮叶片尖端的最高速度能够突破声速，并且最大化降低，损耗涡轮热机再起效率大大提升。
 metaitem.disk.2.name=数据存储器
 metaitem.disk.2.tooltip=§a涡轮效率升级II
 
-gtqtcore.multiblock.kqn.nb3=项目：涡轮效率升级III 传统的涡轮结以及无法满足日益增长的产能需求，采用KQCC-泵推轮机一体化设计，在叶片材料外形不变的情况下，将总体效率推到新高度。
+gtqtcore.multiblock.kqn.nb3=涡轮效率升级III 
+gtqtcore.multiblock.kqn.nx3=传统的涡轮结以及无法满足日益增长的产能需求，采用KQCC-泵推轮机一体化设计，在叶片材料外形不变的情况下，将总体效率推到新高度。
 metaitem.disk.3.name=数据存储器
 metaitem.disk.3.tooltip=§a涡轮效率升级III
 
-gtqtcore.multiblock.kqn.nb4=项目：蒸燃联合体系 燃气蒸汽联合循环是以燃气为高温工质,蒸汽为低温工质.由燃气轮机的排气作为蒸汽轮机装置循环的加热源的联合循环。相较于同等级柴油机，总发电效率提高几乎一倍！
+gtqtcore.multiblock.kqn.nb4=蒸燃联合体系 
+gtqtcore.multiblock.kqn.nx4=燃气蒸汽联合循环是以燃气为高温工质,蒸汽为低温工质.由燃气轮机的排气作为蒸汽轮机装置循环的加热源的联合循环。相较于同等级柴油机，总发电效率提高几乎一倍！
 metaitem.disk.4.name=数据存储器
 metaitem.disk.4.tooltip=§a蒸燃联合体系
 
-gtqtcore.multiblock.kqn.nb5=项目：室温超导设计 通过对加工手段的精进，材料学的认知进步,有望在所有电和磁的领域让室温超导材料得到大规模应用，极大提高装置的性能和效率，得以支持更加极端的工作环境。
+gtqtcore.multiblock.kqn.nb5=室温超导设计 
+gtqtcore.multiblock.kqn.nx5=通过对加工手段的精进，材料学的认知进步,有望在所有电和磁的领域让室温超导材料得到大规模应用，极大提高装置的性能和效率，得以支持更加极端的工作环境。
 metaitem.disk.5.name=数据存储器
 metaitem.disk.5.tooltip=§a室温超导设计
 
-gtqtcore.multiblock.kqn.nb6=项目：可控核聚变-环流器设计 相较于传统结构的核聚变装置，使用新结构的聚变（环流器）在特定工作条件下的运行表现更加优异，无论是耗电还是产率都具有极其可观的加成。
+gtqtcore.multiblock.kqn.nb6=可控核聚变-环流器设计 
+gtqtcore.multiblock.kqn.nx6=相较于传统结构的核聚变装置，使用新结构的聚变（环流器）在特定工作条件下的运行表现更加优异，无论是耗电还是产率都具有极其可观的加成。
 metaitem.disk.6.name=数据存储器
 metaitem.disk.6.tooltip=§a可控核聚变-环流器设计
 
-gtqtcore.multiblock.kqn.nb7=项目：可控核聚变-聚变超导线圈 使用先进材料复合的超导线圈能够适应更加极端的工作条件，通过应用在在核聚变领域，能够使机器将粒子加速到更加极端的程度。
+gtqtcore.multiblock.kqn.nb7=可控核聚变-聚变超导线圈 
+gtqtcore.multiblock.kqn.nx7=使用先进材料复合的超导线圈能够适应更加极端的工作条件，通过应用在在核聚变领域，能够使机器将粒子加速到更加极端的程度。
 metaitem.disk.7.name=数据存储器
 metaitem.disk.7.tooltip=§a可控核聚变-聚变超导线圈
 
-gtqtcore.multiblock.kqn.nb8=项目：资源勘探I 借助基础的物理地理手段，通过地震波探测地表下的矿脉，流体含量，种类，并且引导设备进行开采，采用此技术的设备将大幅度避开现实的资源枯竭（即虚空矿机）。
+gtqtcore.multiblock.kqn.nb8=资源勘探I 
+gtqtcore.multiblock.kqn.nx8=借助基础的物理地理手段，通过地震波探测地表下的矿脉，流体含量，种类，并且引导设备进行开采，采用此技术的设备将大幅度避开现实的资源枯竭（即虚空矿机）。
 metaitem.disk.8.name=数据存储器
 metaitem.disk.8.tooltip=§a资源勘探I
 
-gtqtcore.multiblock.kqn.nb9=项目：资源勘探II 基于光电工程的飞速进步，以及卫星探测设备的大力支持，我们得以通过光谱分析直接获取各类天体的各种矿藏种类，含量。此技术因与自动导航技术相结合来作为采矿无人机的核心。
+gtqtcore.multiblock.kqn.nb9=资源勘探II 
+gtqtcore.multiblock.kqn.nx9=基于光电工程的飞速进步，以及卫星探测设备的大力支持，我们得以通过光谱分析直接获取各类天体的各种矿藏种类，含量。此技术因与自动导航技术相结合来作为采矿无人机的核心。
 metaitem.disk.9.name=数据存储器
 metaitem.disk.9.tooltip=§a资源勘探II
 
-gtqtcore.multiblock.kqn.nb10=项目：资源勘探III 受限于传统资源开采探测的不确定性，得益于高能物理的飞速发展，采用最前沿科技的暗物质-引力波探测技术将完美避开所有风险，整个星系的资源将一览无余！
+gtqtcore.multiblock.kqn.nb10=资源勘探III 
+gtqtcore.multiblock.kqn.nx10=受限于传统资源开采探测的不确定性，得益于高能物理的飞速发展，采用最前沿科技的暗物质-引力波探测技术将完美避开所有风险，整个星系的资源将一览无余！
 metaitem.disk.10.name=数据存储器
 metaitem.disk.10.tooltip=§a资源勘探III
 
-gtqtcore.multiblock.kqn.nb11=项目：网道行者-元素存储 通过对Fluix水晶体的基本分析，借助基本的数电系统，能够基本实现物质<->元素组分的转换，当然，这种转换受限于一种极其独特的设备结构，并且无法脱离此结构存在。
+gtqtcore.multiblock.kqn.nb11=网道行者-元素存储 
+gtqtcore.multiblock.kqn.nx11=通过对Fluix水晶体的基本分析，借助基本的数电系统，能够基本实现物质<->元素组分的转换，当然，这种转换受限于一种极其独特的设备结构，并且无法脱离此结构存在。
 metaitem.disk.11.name=数据存储器
 metaitem.disk.11.tooltip=§e网道行者-元素存储
 
-gtqtcore.multiblock.kqn.nb12=项目：网道行者-管网系统 结合当前光电技术分析元素组分流动特性，在特定的条件下元素组分居然能够以极快的速度在Fluix管道内传输，如果我们在Fluxi管网分别进行物质<->元素组分转换，将使我们的物流自动化达到前所未有的高度。
+gtqtcore.multiblock.kqn.nb12=网道行者-管网系统 
+gtqtcore.multiblock.kqn.nx12=结合当前光电技术分析元素组分流动特性，在特定的条件下元素组分居然能够以极快的速度在Fluix管道内传输，如果我们在Fluxi管网分别进行物质<->元素组分转换，将使我们的物流自动化达到前所未有的高度。
 metaitem.disk.12.name=数据存储器
 metaitem.disk.12.tooltip=§e网道行者-管网系统
 
-gtqtcore.multiblock.kqn.nb13=项目：网道行者-无线传输 借助高能物理，我们能轻松的观察物质<->元素组分转换时的原子运动情况，Fluix的运行原理，我们是能够脱离管网限制直接实现无线传输元素组分，当然，这需要消耗大量的电力来催使Fluix对物质转换。
+gtqtcore.multiblock.kqn.nb13=网道行者-无线传输 
+gtqtcore.multiblock.kqn.nx13=借助高能物理，我们能轻松的观察物质<->元素组分转换时的原子运动情况，Fluix的运行原理，我们是能够脱离管网限制直接实现无线传输元素组分，当然，这需要消耗大量的电力来催使Fluix对物质转换。
 metaitem.disk.13.name=数据存储器
 metaitem.disk.13.tooltip=§e网道行者-无线传输
 
-gtqtcore.multiblock.kqn.nb14=项目：人工智能I 基于简单的逻辑电路网络，我们可以让设备实现极其原始的自动化交互模式，当然，这种逻辑复杂度甚至远远不及一只单细胞，但是至少能够满足大部分机械化人工操作，机器辅助人工的时代即将到来
+gtqtcore.multiblock.kqn.nb14=人工智能I 
+gtqtcore.multiblock.kqn.nx14=基于简单的逻辑电路网络，我们可以让设备实现极其原始的自动化交互模式，当然，这种逻辑复杂度甚至远远不及一只单细胞，但是至少能够满足大部分机械化人工操作，机器辅助人工的时代即将到来
 metaitem.disk.14.name=数据存储器
 metaitem.disk.14.tooltip=§a人工智能I
 
-gtqtcore.multiblock.kqn.nb15=项目：人工智能II 随着光刻技术的提高，中央处理器的体积越来越小，在单位体积内排列更多的电子原件，设备能够操作的复杂度显著提高，这项技术已经完全能够应用到各行各业的基础领域，无人化操作不再是梦想。
+gtqtcore.multiblock.kqn.nb15=人工智能II 
+gtqtcore.multiblock.kqn.nx15=随着光刻技术的提高，中央处理器的体积越来越小，在单位体积内排列更多的电子原件，设备能够操作的复杂度显著提高，这项技术已经完全能够应用到各行各业的基础领域，无人化操作不再是梦想。
 metaitem.disk.15.name=数据存储器
 metaitem.disk.15.tooltip=§a人工智能II
 
-gtqtcore.multiblock.kqn.nb16=项目：人工智能III 电子元件的尺寸已经到达极限，但是其运算复杂度依旧无法匹敌动物，基于生物工程技术，通过对细胞的诱导生长结合简单的控制电路的运作原理分析，脑机接口又或是湿件电路或将实现。
+gtqtcore.multiblock.kqn.nb16=人工智能III 
+gtqtcore.multiblock.kqn.nx16=电子元件的尺寸已经到达极限，但是其运算复杂度依旧无法匹敌动物，基于生物工程技术，通过对细胞的诱导生长结合简单的控制电路的运作原理分析，脑机接口又或是湿件电路或将实现。
 metaitem.disk.16.name=数据存储器
 metaitem.disk.16.tooltip=§a人工智能III
 
-gtqtcore.multiblock.kqn.nb17=项目：生物工程I 微生物的发现无疑是生物工程发展历史上重大里程碑，通过对细菌以及DNA的深入研究，我们可以通过杂交繁殖的方法培育定向菌种，此类菌种在特定工作条件下表现极为活跃，使用菌种催化生产将大大缩减原有的繁杂化工路线。
+gtqtcore.multiblock.kqn.nb17=生物工程I 
+gtqtcore.multiblock.kqn.nx17=微生物的发现无疑是生物工程发展历史上重大里程碑，通过对细菌以及DNA的深入研究，我们可以通过杂交繁殖的方法培育定向菌种，此类菌种在特定工作条件下表现极为活跃，使用菌种催化生产将大大缩减原有的繁杂化工路线。
 metaitem.disk.17.name=数据存储器
 metaitem.disk.17.tooltip=§a生物工程I
 
-gtqtcore.multiblock.kqn.nb18=项目：生物工程II 基于透射电镜与化学技术的日益发展，我们能通过极其复杂而精妙的方法直接对各位生物的基因进行直接操作，这一步骤将节约我们大量培育原始菌种的时间，并且子代所表现的突出性状更为稳定！
+gtqtcore.multiblock.kqn.nb18=生物工程II 
+gtqtcore.multiblock.kqn.nx18=基于透射电镜与化学技术的日益发展，我们能通过极其复杂而精妙的方法直接对各位生物的基因进行直接操作，这一步骤将节约我们大量培育原始菌种的时间，并且子代所表现的突出性状更为稳定！
 metaitem.disk.18.name=数据存储器
 metaitem.disk.18.tooltip=§a生物工程II
 
-gtqtcore.multiblock.kqn.nb19=项目：生物工程III 没有什么比脑机接口更令人兴奋的了，如果有，那么生物计算机将是这个行业学科的最高峰！感谢来自大自然的奇迹。通过培育来自大脑的突触神经细胞，我们现在拥有媲美最先进量子计算机的生物电路！
+gtqtcore.multiblock.kqn.nb19=生物工程III 
+gtqtcore.multiblock.kqn.nx19=没有什么比脑机接口更令人兴奋的了，如果有，那么生物计算机将是这个行业学科的最高峰！感谢来自大自然的奇迹。通过培育来自大脑的突触神经细胞，我们现在拥有媲美最先进量子计算机的生物电路！
 metaitem.disk.19.name=数据存储器
 metaitem.disk.19.tooltip=§a生物工程III
 
-gtqtcore.multiblock.kqn.nb20=项目：标准化作业 基于精细的流程分解与严格的作业规范，我们能够构建出一套高效执行的标准化作业体系。标准化作业不仅为机械化生产奠定了坚实基础，更预示着生产管理迈入了一个全新的时代——一个以精确、高效、可控为核心特征的时代。
+gtqtcore.multiblock.kqn.nb20=标准化作业 
+gtqtcore.multiblock.kqn.nx20=基于精细的流程分解与严格的作业规范，我们能够构建出一套高效执行的标准化作业体系。标准化作业不仅为机械化生产奠定了坚实基础，更预示着生产管理迈入了一个全新的时代——一个以精确、高效、可控为核心特征的时代。
 metaitem.disk.20.name=数据存储器
 metaitem.disk.20.tooltip=§a标准化作业
 
-gtqtcore.multiblock.kqn.nb21=项目：高精加工 聚焦于微米乃至纳米级别的加工精度，展现了其在现代制造业中的非凡潜力。尽管其技术复杂度远超传统加工方法，且对工艺控制的要求极为苛刻，但高精加工所带来的产品性能提升以及资源利用率的优化，是传统加工方式难以匹敌的。
+gtqtcore.multiblock.kqn.nb21=高精加工 
+gtqtcore.multiblock.kqn.nx21=聚焦于微米乃至纳米级别的加工精度，展现了其在现代制造业中的非凡潜力。尽管其技术复杂度远超传统加工方法，且对工艺控制的要求极为苛刻，但高精加工所带来的产品性能提升以及资源利用率的优化，是传统加工方式难以匹敌的。
 metaitem.disk.21.name=数据存储器
 metaitem.disk.21.tooltip=§a高精加工
 
-gtqtcore.multiblock.kqn.nb22=项目：自动化管理 通过集成信息技术、人工智能与作业流程优化，实现了对生产营活动的智能监控与高效调度。尽管其初期实施需要对生产现有体系进行深度改造与适应，但带来的效率提升、决策速度加快以及成本控制的优化，无疑为生产带来了显著的竞争优势。
+gtqtcore.multiblock.kqn.nb22=自动化管理 
+gtqtcore.multiblock.kqn.nx22=通过集成信息技术、人工智能与作业流程优化，实现了对生产营活动的智能监控与高效调度。尽管其初期实施需要对生产现有体系进行深度改造与适应，但带来的效率提升、决策速度加快以及成本控制的优化，无疑为生产带来了显著的竞争优势。
 metaitem.disk.22.name=数据存储器
 metaitem.disk.22.tooltip=§a自动化管理
 
-gtqtcore.multiblock.kqn.nb23=项目：物联网集成控制 作为信息技术领域的又一里程碑，通过将各种智能设备、传感器、网络基础设施及软件系统无缝连接，构建了一个庞大的、可交互的物理世界与数字世界的桥梁。实现了设备间的实时数据交换与共享，分析决策与协同控制能力。
+gtqtcore.multiblock.kqn.nb23=物联网集成控制 
+gtqtcore.multiblock.kqn.nx23=作为信息技术领域的又一里程碑，通过将各种智能设备、传感器、网络基础设施及软件系统无缝连接，构建了一个庞大的、可交互的物理世界与数字世界的桥梁。实现了设备间的实时数据交换与共享，分析决策与协同控制能力。
 metaitem.disk.23.name=数据存储器
 metaitem.disk.23.tooltip=§a物联网集成控制
 
-gtqtcore.multiblock.kqn.nb24=项目：计算科学 原子级别，传统计算结构的极限！我们无法在此基础上继续突破底层结构了。我们制作出了这个宇宙中最精密的传统结构计算机，他的性能是其下位的八倍，利用他我们可以大幅度减少交换机以及计算服务器的数量。
+gtqtcore.multiblock.kqn.nb24=计算科学 
+gtqtcore.multiblock.kqn.nx24=原子级别，传统计算结构的极限！我们无法在此基础上继续突破底层结构了。我们制作出了这个宇宙中最精密的传统结构计算机，他的性能是其下位的八倍，利用他我们可以大幅度减少交换机以及计算服务器的数量。
 metaitem.disk.24.name=数据存储器
 metaitem.disk.24.tooltip=§a计算科学
 
-gtqtcore.multiblock.kqn.nb25=项目：云数据存储 由分布式处理、并行处理和网格计算的发展通过云计算技术，网络服务提供者可以在数秒之内，处理数以千万计甚至亿计的信息，达到和”超级计算机”同样强大的网络服务。
+gtqtcore.multiblock.kqn.nb25=云数据存储 
+gtqtcore.multiblock.kqn.nx25=由分布式处理、并行处理和网格计算的发展通过云计算技术，网络服务提供者可以在数秒之内，处理数以千万计甚至亿计的信息，达到和”超级计算机”同样强大的网络服务。
 metaitem.disk.25.name=数据存储器
 metaitem.disk.25.tooltip=§a云数据存储
 
@@ -3772,7 +3798,8 @@ gtqtcore.multiblock.kqn.bio0=欢迎使用KQCC科研计算机集成系统！
 metaitem.bio.0.name=基因存储器
 metaitem.bio.0.tooltip=§aNULL
 
-gtqtcore.multiblock.kqn.bio1=项目：定向基因模板 基于先进生物培养技术以及更加高级电镜的支持，我们能够利用某种模板复印大多数简单生物的全部信息，只需要一些辐射诱变最基础的原材料便可轻松将其转化，不再需要繁琐的菌种杂交。
+gtqtcore.multiblock.kqn.bio1=定向基因模板 
+gtqtcore.multiblock.kqn.biox1=基于先进生物培养技术以及更加高级电镜的支持，我们能够利用某种模板复印大多数简单生物的全部信息，只需要一些辐射诱变最基础的原材料便可轻松将其转化，不再需要繁琐的菌种杂交。
 metaitem.bio.1.name=基因存储器
 metaitem.bio.1.tooltip=§a存储菌种：α-普适矿处菌种
 

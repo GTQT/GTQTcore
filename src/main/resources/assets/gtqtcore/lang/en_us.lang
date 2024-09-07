@@ -3647,162 +3647,185 @@ gtqtcore.machine.kqnet.tooltip.1=Provide computing power, research objects and d
 gtqtcore.machine.kqnet.tooltip.2=Use buttons within the interface for operation, and switch types within the research interface to change research objects
 gtqtcore.machine.kqnet.tooltip.3=After binding the coordinates of the auxiliary structure controller using a coordinate binding card (within a radius of 48 blocks from the controller), place it in the input bus to complete the binding. You can view it in the access expansion list
 gtqtcore.machine.kqnet.tooltip.4=Use a coordinate binding card to bind structures such as databases and computers to upgrade the scientific research level. You can view it in the technology level list
-
-gtqtcore.multiblock.kqn.nb0=Welcome to KQCC Research Computer Integration System!
-metaitem.disk.0.name=Data Storage
+gtqtcore.multiblock.kqn.nb0=欢迎使用KQCC科研计算机集成系统！
+metaitem.disk.0.name=数据存储器
 metaitem.disk.0.tooltip=§aNULL
 
-gtqtcore.multiblock.kqn.nb1=Project: Turbine Efficiency Upgrade I By continuing to redesign the turbine shape of the small internal combustion generator and the material design of the machine shell, the efficiency of the new structure internal combustion engine is greatly improved and can adapt to more severe working conditions.
-metaitem.disk.1.name=Data Storage
-metaitem.disk.1.tooltip=§aTurbine Efficiency Upgrade I
+gtqtcore.multiblock.kqn.nb1=涡轮效率升级I
+gtqtcore.multiblock.kqn.nx1=通过对小型内燃发电机的涡轮外形继续重新设计以及机器外壳的材料设计，采用新结构的内燃机工作效率大大提升，并且可以适应更加恶劣的工作条件。
+metaitem.disk.1.name=数据存储器
+metaitem.disk.1.tooltip=§a涡轮效率升级I
 
-gtqtcore.multiblock.kqn.nb2=Project: Turbine Efficiency Upgrade II Continue to optimize the redesign of the turbine blade shape structure, so that the maximum speed of the turbine blade tip can break the sound barrier, and minimize the loss, and the efficiency of the turbine heat engine is greatly improved.
-metaitem.disk.2.name=Data Storage
-metaitem.disk.2.tooltip=§aTurbine Efficiency Upgrade II
+gtqtcore.multiblock.kqn.nb2=涡轮效率升级II
+gtqtcore.multiblock.kqn.nx2=继续对涡轮叶片外形结构进行重新设计优化，使得涡轮叶片尖端的最高速度能够突破声速，并且最大化降低，损耗涡轮热机再起效率大大提升。
+metaitem.disk.2.name=数据存储器
+metaitem.disk.2.tooltip=§a涡轮效率升级II
 
-gtqtcore.multiblock.kqn.nb3=Project: Turbine Efficiency Upgrade III The traditional turbine structure can no longer meet the growing capacity demand. The KQCC-pump turbine integrated design is adopted. While the blade material shape remains unchanged, the overall efficiency is pushed to a new height.
-metaitem.disk.3.name=Data Storage
-metaitem.disk.3.tooltip=§aTurbine Efficiency Upgrade III
+gtqtcore.multiblock.kqn.nb3=涡轮效率升级III
+gtqtcore.multiblock.kqn.nx3=传统的涡轮结以及无法满足日益增长的产能需求，采用KQCC-泵推轮机一体化设计，在叶片材料外形不变的情况下，将总体效率推到新高度。
+metaitem.disk.3.name=数据存储器
+metaitem.disk.3.tooltip=§a涡轮效率升级III
 
-gtqtcore.multiblock.kqn.nb4=Project: Combined Cycle The combined cycle of gas and steam uses gas as the high-temperature working medium and steam as the low-temperature working medium. The exhaust gas from the gas turbine is used as the heating source for the steam turbine device cycle. Compared with the same level of diesel engines, the overall power generation efficiency is nearly doubled!
-metaitem.disk.4.name=Data Storage
-metaitem.disk.4.tooltip=§aCombined Cycle
+gtqtcore.multiblock.kqn.nb4=蒸燃联合体系
+gtqtcore.multiblock.kqn.nx4=燃气蒸汽联合循环是以燃气为高温工质,蒸汽为低温工质.由燃气轮机的排气作为蒸汽轮机装置循环的加热源的联合循环。相较于同等级柴油机，总发电效率提高几乎一倍！
+metaitem.disk.4.name=数据存储器
+metaitem.disk.4.tooltip=§a蒸燃联合体系
 
-gtqtcore.multiblock.kqn.nb5=Project: Room Temperature Superconducting Design Through the improvement of processing methods and the advancement of material science, room temperature superconducting materials are expected to be widely used in all fields of electricity and magnetism, greatly improving the performance and efficiency of devices and supporting more extreme working environments.
-metaitem.disk.5.name=Data Storage
-metaitem.disk.5.tooltip=§aRoom Temperature Superconducting Design
+gtqtcore.multiblock.kqn.nb5=室温超导设计
+gtqtcore.multiblock.kqn.nx5=通过对加工手段的精进，材料学的认知进步,有望在所有电和磁的领域让室温超导材料得到大规模应用，极大提高装置的性能和效率，得以支持更加极端的工作环境。
+metaitem.disk.5.name=数据存储器
+metaitem.disk.5.tooltip=§a室温超导设计
 
-gtqtcore.multiblock.kqn.nb6=Project: Controlled Nuclear Fusion - Circulator Design Compared with the traditional structure of nuclear fusion devices, the new structure of fusion (circulator) has better performance under specific working conditions, with extremely considerable additions to power consumption and yield.
-metaitem.disk.6.name=Data Storage
-metaitem.disk.6.tooltip=§aControlled Nuclear Fusion - Circulator Design
+gtqtcore.multiblock.kqn.nb6=可控核聚变-环流器设计
+gtqtcore.multiblock.kqn.nx6=相较于传统结构的核聚变装置，使用新结构的聚变（环流器）在特定工作条件下的运行表现更加优异，无论是耗电还是产率都具有极其可观的加成。
+metaitem.disk.6.name=数据存储器
+metaitem.disk.6.tooltip=§a可控核聚变-环流器设计
 
-gtqtcore.multiblock.kqn.nb7=Project: Controlled Nuclear Fusion - Fusion Superconducting Coil The superconducting coil made of advanced materials can adapt to more extreme working conditions. By applying it in the field of nuclear fusion, the machine can accelerate particles to more extreme levels.
-metaitem.disk.7.name=Data Storage
-metaitem.disk.7.tooltip=§aControlled Nuclear Fusion - Fusion Superconducting Coil
+gtqtcore.multiblock.kqn.nb7=可控核聚变-聚变超导线圈
+gtqtcore.multiblock.kqn.nx7=使用先进材料复合的超导线圈能够适应更加极端的工作条件，通过应用在在核聚变领域，能够使机器将粒子加速到更加极端的程度。
+metaitem.disk.7.name=数据存储器
+metaitem.disk.7.tooltip=§a可控核聚变-聚变超导线圈
 
-gtqtcore.multiblock.kqn.nb8=Project: Resource Exploration I Using basic physical and geographical methods, the ore veins, fluid content, and types below the surface are detected by seismic waves, and the equipment is guided for mining. The equipment using this technology will greatly avoid the depletion of real resources (i.e., void miners).
-metaitem.disk.8.name=Data Storage
-metaitem.disk.8.tooltip=§aResource Exploration I
+gtqtcore.multiblock.kqn.nb8=资源勘探I
+gtqtcore.multiblock.kqn.nx8=借助基础的物理地理手段，通过地震波探测地表下的矿脉，流体含量，种类，并且引导设备进行开采，采用此技术的设备将大幅度避开现实的资源枯竭（即虚空矿机）。
+metaitem.disk.8.name=数据存储器
+metaitem.disk.8.tooltip=§a资源勘探I
 
-gtqtcore.multiblock.kqn.nb9=Project: Resource Exploration II Based on the rapid progress of optoelectronic engineering and the strong support of satellite detection equipment, we can directly obtain various types of mineral resources and content of various celestial bodies through spectral analysis. This technology is combined with automatic navigation technology to serve as the core of mining drones.
-metaitem.disk.9.name=Data Storage
-metaitem.disk.9.tooltip=§aResource Exploration II
+gtqtcore.multiblock.kqn.nb9=资源勘探II
+gtqtcore.multiblock.kqn.nx9=基于光电工程的飞速进步，以及卫星探测设备的大力支持，我们得以通过光谱分析直接获取各类天体的各种矿藏种类，含量。此技术因与自动导航技术相结合来作为采矿无人机的核心。
+metaitem.disk.9.name=数据存储器
+metaitem.disk.9.tooltip=§a资源勘探II
 
-gtqtcore.multiblock.kqn.nb10=Project: Resource Exploration III Due to the uncertainty of traditional resource exploration and mining, thanks to the rapid development of high-energy physics, the most cutting-edge dark matter-gravitational wave detection technology will perfectly avoid all risks, and the resources of the entire galaxy will be fully visible!
-metaitem.disk.10.name=Data Storage
-metaitem.disk.10.tooltip=§aResource Exploration III
+gtqtcore.multiblock.kqn.nb10=资源勘探III
+gtqtcore.multiblock.kqn.nx10=受限于传统资源开采探测的不确定性，得益于高能物理的飞速发展，采用最前沿科技的暗物质-引力波探测技术将完美避开所有风险，整个星系的资源将一览无余！
+metaitem.disk.10.name=数据存储器
+metaitem.disk.10.tooltip=§a资源勘探III
 
-gtqtcore.multiblock.kqn.nb11=Project: Netwalker - Element Storage Through the basic analysis of Fluix crystals and the basic digital system, the conversion between matter and elemental components can be basically realized. Of course, this conversion is limited by a very unique device structure and cannot exist outside of this structure.
-metaitem.disk.11.name=Data Storage
-metaitem.disk.11.tooltip=§eNetwalker - Element Storage
+gtqtcore.multiblock.kqn.nb11=网道行者-元素存储
+gtqtcore.multiblock.kqn.nx11=通过对Fluix水晶体的基本分析，借助基本的数电系统，能够基本实现物质<->元素组分的转换，当然，这种转换受限于一种极其独特的设备结构，并且无法脱离此结构存在。
+metaitem.disk.11.name=数据存储器
+metaitem.disk.11.tooltip=§e网道行者-元素存储
 
-gtqtcore.multiblock.kqn.nb12=Project: Net Walker - Pipe Network System Combining current optoelectronic technology to analyze the flow characteristics of elemental components, under specific conditions, elemental components can actually be transported at high speed in Fluix pipes. If we perform material <-> element component conversion respectively in the Fluxi network, our logistics automation will reach unprecedented heights.
-metaitem.disk.12.name=Data Storage
-metaitem.disk.12.tooltip=§eNet Walker - Pipe Network System
+gtqtcore.multiblock.kqn.nb12=网道行者-管网系统
+gtqtcore.multiblock.kqn.nx12=结合当前光电技术分析元素组分流动特性，在特定的条件下元素组分居然能够以极快的速度在Fluix管道内传输，如果我们在Fluxi管网分别进行物质<->元素组分转换，将使我们的物流自动化达到前所未有的高度。
+metaitem.disk.12.name=数据存储器
+metaitem.disk.12.tooltip=§e网道行者-管网系统
 
-gtqtcore.multiblock.kqn.nb13=Project: Netway Walker - Wireless Transmission. Leveraging high-energy physics, we can effortlessly observe atomic movements during the conversion of matter <-> elemental components. The operational principle of Fluix enables us to directly achieve wireless transmission of elemental components, independent of pipeline restrictions. However, this necessitates significant power consumption to catalyze Fluix's material conversion processes.
-metaitem.disk.13.name=Data Storage
-metaitem.disk.13.tooltip=§eNetway Walker - Wireless Transmission
+gtqtcore.multiblock.kqn.nb13=网道行者-无线传输
+gtqtcore.multiblock.kqn.nx13=借助高能物理，我们能轻松的观察物质<->元素组分转换时的原子运动情况，Fluix的运行原理，我们是能够脱离管网限制直接实现无线传输元素组分，当然，这需要消耗大量的电力来催使Fluix对物质转换。
+metaitem.disk.13.name=数据存储器
+metaitem.disk.13.tooltip=§e网道行者-无线传输
 
-gtqtcore.multiblock.kqn.nb14=Project: Artificial Intelligence I Based on simple logic circuit networks, we can enable devices to achieve very primitive automated interaction modes. Of course, this logical complexity is far inferior to even a single-celled organism, but it can meet most mechanical manual operations. The era of machine-assisted human work is coming.
-metaitem.disk.14.name=Data Storage
-metaitem.disk.14.tooltip=§aArtificial Intelligence I
+gtqtcore.multiblock.kqn.nb14=人工智能I
+gtqtcore.multiblock.kqn.nx14=基于简单的逻辑电路网络，我们可以让设备实现极其原始的自动化交互模式，当然，这种逻辑复杂度甚至远远不及一只单细胞，但是至少能够满足大部分机械化人工操作，机器辅助人工的时代即将到来
+metaitem.disk.14.name=数据存储器
+metaitem.disk.14.tooltip=§a人工智能I
 
-gtqtcore.multiblock.kqn.nb15=Project: Artificial Intelligence II With the improvement of lithography technology, the size of central processors is getting smaller and smaller, arranging more electronic components in a unit volume, significantly improving the complexity of device operations. This technology is fully applicable to the basic fields of various industries, and unmanned operations are no longer a dream.
-metaitem.disk.15.name=Data Storage
-metaitem.disk.15.tooltip=§aArtificial Intelligence II
+gtqtcore.multiblock.kqn.nb15=人工智能II
+gtqtcore.multiblock.kqn.nx15=随着光刻技术的提高，中央处理器的体积越来越小，在单位体积内排列更多的电子原件，设备能够操作的复杂度显著提高，这项技术已经完全能够应用到各行各业的基础领域，无人化操作不再是梦想。
+metaitem.disk.15.name=数据存储器
+metaitem.disk.15.tooltip=§a人工智能II
 
-gtqtcore.multiblock.kqn.nb16=Project: Artificial Intelligence III The size of electronic components has reached its limit, but its computational complexity still cannot match animals. Based on bioengineering technology, through the induced growth of cells combined with the operation principle analysis of simple control circuits, brain-computer interfaces or wetware circuits may be realized.
-metaitem.disk.16.name=Data Storage
-metaitem.disk.16.tooltip=§aArtificial Intelligence III
+gtqtcore.multiblock.kqn.nb16=人工智能III
+gtqtcore.multiblock.kqn.nx16=电子元件的尺寸已经到达极限，但是其运算复杂度依旧无法匹敌动物，基于生物工程技术，通过对细胞的诱导生长结合简单的控制电路的运作原理分析，脑机接口又或是湿件电路或将实现。
+metaitem.disk.16.name=数据存储器
+metaitem.disk.16.tooltip=§a人工智能III
 
-gtqtcore.multiblock.kqn.nb17=Project: Bioengineering I. The discovery of microorganisms undoubtedly marks a significant milestone in the history of bioengineering. Through in-depth research on bacteria and DNA, we can cultivate targeted strains through hybrid breeding methods. These strains exhibit extreme activity under specific working conditions, significantly shortening the original complex chemical routes using bacterial catalysis for production.
-metaitem.disk.17.name=Data Storage Unit
-metaitem.disk.17.tooltip=§aBioengineering I
+gtqtcore.multiblock.kqn.nb17=生物工程I
+gtqtcore.multiblock.kqn.nx17=微生物的发现无疑是生物工程发展历史上重大里程碑，通过对细菌以及DNA的深入研究，我们可以通过杂交繁殖的方法培育定向菌种，此类菌种在特定工作条件下表现极为活跃，使用菌种催化生产将大大缩减原有的繁杂化工路线。
+metaitem.disk.17.name=数据存储器
+metaitem.disk.17.tooltip=§a生物工程I
 
-gtqtcore.multiblock.kqn.nb18=Project: Bioengineering II. Based on the ever-advancing development of transmission electron microscopes and chemical technologies, we can now directly manipulate the genes of various organisms through extremely complex yet sophisticated methods. This step saves us a considerable amount of time in cultivating original strains, and the outstanding traits exhibited by the offspring are more stable!
-metaitem.disk.18.name=Data Storage Unit
-metaitem.disk.18.tooltip=§aBioengineering II
+gtqtcore.multiblock.kqn.nb18=生物工程II
+gtqtcore.multiblock.kqn.nx18=基于透射电镜与化学技术的日益发展，我们能通过极其复杂而精妙的方法直接对各位生物的基因进行直接操作，这一步骤将节约我们大量培育原始菌种的时间，并且子代所表现的突出性状更为稳定！
+metaitem.disk.18.name=数据存储器
+metaitem.disk.18.tooltip=§a生物工程II
 
-gtqtcore.multiblock.kqn.nb19=Project: Bioengineering III. Nothing is more exciting than brain-computer interfaces, but if there is, biocomputers will be the pinnacle of this industry and discipline! Thanks to the wonders of nature, by cultivating synaptic nerve cells from the brain, we now possess biological circuits that rival the most advanced quantum computers!
-metaitem.disk.19.name=Data Storage Unit
-metaitem.disk.19.tooltip=§aBioengineering III
+gtqtcore.multiblock.kqn.nb19=生物工程III
+gtqtcore.multiblock.kqn.nx19=没有什么比脑机接口更令人兴奋的了，如果有，那么生物计算机将是这个行业学科的最高峰！感谢来自大自然的奇迹。通过培育来自大脑的突触神经细胞，我们现在拥有媲美最先进量子计算机的生物电路！
+metaitem.disk.19.name=数据存储器
+metaitem.disk.19.tooltip=§a生物工程III
 
-gtqtcore.multiblock.kqn.nb20=Project: Standardized Operations. Based on detailed process decomposition and strict operational norms, we can construct an efficient and standardized operational system. Standardized operations not only lay a solid foundation for mechanized production but also herald a new era of production management—an era characterized by precision, efficiency, and controllability.
-metaitem.disk.20.name=Data Storage Unit
-metaitem.disk.20.tooltip=§aStandardized Operations
+gtqtcore.multiblock.kqn.nb20=标准化作业
+gtqtcore.multiblock.kqn.nx20=基于精细的流程分解与严格的作业规范，我们能够构建出一套高效执行的标准化作业体系。标准化作业不仅为机械化生产奠定了坚实基础，更预示着生产管理迈入了一个全新的时代——一个以精确、高效、可控为核心特征的时代。
+metaitem.disk.20.name=数据存储器
+metaitem.disk.20.tooltip=§a标准化作业
 
-gtqtcore.multiblock.kqn.nb21=Project: High-Precision Processing. Focusing on micrometer and even nanometer-level processing accuracy, it showcases its remarkable potential in modern manufacturing. Despite its far greater technical complexity than traditional processing methods and stringent requirements for process control, high-precision processing brings unparalleled product performance enhancements and resource utilization optimization.
-metaitem.disk.21.name=Data Storage Unit
-metaitem.disk.21.tooltip=§aHigh-Precision Processing
+gtqtcore.multiblock.kqn.nb21=高精加工
+gtqtcore.multiblock.kqn.nx21=聚焦于微米乃至纳米级别的加工精度，展现了其在现代制造业中的非凡潜力。尽管其技术复杂度远超传统加工方法，且对工艺控制的要求极为苛刻，但高精加工所带来的产品性能提升以及资源利用率的优化，是传统加工方式难以匹敌的。
+metaitem.disk.21.name=数据存储器
+metaitem.disk.21.tooltip=§a高精加工
 
-gtqtcore.multiblock.kqn.nb22=Project: Automated Management. By integrating information technology, artificial intelligence, and operational process optimization, we have achieved intelligent monitoring and efficient scheduling of production and business activities. Although its initial implementation requires in-depth transformation and adaptation of the existing production system, the resulting efficiency gains, faster decision-making, and optimized cost control undoubtedly bring significant competitive advantages to production.
-metaitem.disk.22.name=Data Storage Unit
-metaitem.disk.22.tooltip=§aAutomated Management
+gtqtcore.multiblock.kqn.nb22=自动化管理
+gtqtcore.multiblock.kqn.nb22=通过集成信息技术、人工智能与作业流程优化，实现了对生产营活动的智能监控与高效调度。尽管其初期实施需要对生产现有体系进行深度改造与适应，但带来的效率提升、决策速度加快以及成本控制的优化，无疑为生产带来了显著的竞争优势。
+metaitem.disk.22.name=数据存储器
+metaitem.disk.22.tooltip=§a自动化管理
 
-gtqtcore.multiblock.kqn.nb23=Project: IoT Integrated Control. As another milestone in the field of information technology, it seamlessly connects various smart devices, sensors, network infrastructure, and software systems, building a vast and interactive bridge between the physical and digital worlds. It enables real-time data exchange and sharing among devices, analysis and decision-making, and collaborative control capabilities.
-metaitem.disk.23.name=Data Storage Unit
-metaitem.disk.23.tooltip=§aIoT Integrated Control
+gtqtcore.multiblock.kqn.nb23=物联网集成控制
+gtqtcore.multiblock.kqn.nx23=作为信息技术领域的又一里程碑，通过将各种智能设备、传感器、网络基础设施及软件系统无缝连接，构建了一个庞大的、可交互的物理世界与数字世界的桥梁。实现了设备间的实时数据交换与共享，分析决策与协同控制能力。
+metaitem.disk.23.name=数据存储器
+metaitem.disk.23.tooltip=§a物联网集成控制
 
-gtqtcore.multiblock.kqn.nb24=Project：Computing Atomic level, the limit of traditional computing structures! We cannot continue to break through the underlying structure on this basis. We have created the most sophisticated traditional structured computer in this universe, with performance eight times that of its lower level counterparts. With its help, we can significantly reduce the number of switches and computing servers.
-metaitem.disk.24.name=Data Storage Unit
-metaitem.disk.24.tooltip=§aComputing
+gtqtcore.multiblock.kqn.nb24=计算科学
+gtqtcore.multiblock.kqn.nx24=原子级别，传统计算结构的极限！我们无法在此基础上继续突破底层结构了。我们制作出了这个宇宙中最精密的传统结构计算机，他的性能是其下位的八倍，利用他我们可以大幅度减少交换机以及计算服务器的数量。
+metaitem.disk.24.name=数据存储器
+metaitem.disk.24.tooltip=§a计算科学
 
-gtqtcore.multiblock.kqn.nb25=Project: Cloud Data Storage. Through the development of distributed processing, parallel processing, and grid computing, cloud computing technology enables network service providers to process tens of millions to even billions of pieces of information within seconds, achieving the same powerful network services as a "supercomputer".
+gtqtcore.multiblock.kqn.nb25=云数据存储
+gtqtcore.multiblock.kqn.nx25=由分布式处理、并行处理和网格计算的发展通过云计算技术，网络服务提供者可以在数秒之内，处理数以千万计甚至亿计的信息，达到和”超级计算机”同样强大的网络服务。
+metaitem.disk.25.name=数据存储器
+metaitem.disk.25.tooltip=§a云数据存储
 
-metaitem.disk.25.name=Data Storage Unit
-metaitem.disk.25.tooltip=§aCloud Data Storage
-
-gtqtcore.multiblock.kqn.bio0=Welcome to the KQCC Scientific Research Computer Integrated System!
-metaitem.bio.0.name=Genetic Storage Unit
+gtqtcore.multiblock.kqn.bio0=欢迎使用KQCC科研计算机集成系统！
+metaitem.bio.0.name=基因存储器
 metaitem.bio.0.tooltip=§aNULL
 
-gtqtcore.multiblock.kqn.bio1=Project: Targeted Genetic Templates. Based on advanced biological cultivation technology and the support of more advanced electron microscopes, we can utilize certain templates to replicate most of the information from simple organisms. With only some basic raw materials for radiation-induced mutation, we can easily transform them, eliminating the need for cumbersome strain hybridization.
+gtqtcore.multiblock.kqn.bio1=定向基因模板
+gtqtcore.multiblock.kqn.biox1=基于先进生物培养技术以及更加高级电镜的支持，我们能够利用某种模板复印大多数简单生物的全部信息，只需要一些辐射诱变最基础的原材料便可轻松将其转化，不再需要繁琐的菌种杂交。
+metaitem.bio.1.name=基因存储器
+metaitem.bio.1.tooltip=§a存储菌种：α-普适矿处菌种
 
-metaitem.bio.1.name=Genetic Storage Unit
-metaitem.bio.1.tooltip=§aStored Strain: α-Universal Ore-Processing Strain
+metaitem.bio.2.name=基因存储器
+metaitem.bio.2.tooltip=§a存储菌种：α-定向铂系菌种
 
-metaitem.bio.2.name=Genetic Storage Unit
-metaitem.bio.2.tooltip=§aStored Strain: α-Targeted Platinum-Series Strain
+metaitem.bio.3.name=基因存储器
+metaitem.bio.3.tooltip=§a存储菌种：α-普适魔性菌种
 
-metaitem.bio.3.name=Gene Storage Unit
-metaitem.bio.3.tooltip=§aStores Species: α-Universal Magical Species
+metaitem.bio.4.name=基因存储器
+metaitem.bio.4.tooltip=§a存储菌种：α-普适副产菌种
 
-metaitem.bio.4.name=Gene Storage Unit
-metaitem.bio.4.tooltip=§aStores Species: α-Universal Byproduct Species
+metaitem.bio.5.name=基因存储器
+metaitem.bio.5.tooltip=§a存储菌种：α-工业合成菌种I
 
-metaitem.bio.5.name=Gene Storage Unit
-metaitem.bio.5.tooltip=§aStores Species: α-Industrial Synthetic Species I
+metaitem.bio.6.name=基因存储器
+metaitem.bio.6.tooltip=§a存储菌种：α-工业还原菌种
 
-metaitem.bio.6.name=Gene Storage Unit
-metaitem.bio.6.tooltip=§aStores Species: α-Industrial Reducing Species
+metaitem.bio.7.name=基因存储器
+metaitem.bio.7.tooltip=§a存储菌种：α-工业氧化菌种
 
-metaitem.bio.7.name=Gene Storage Unit
-metaitem.bio.7.tooltip=§aStores Species: α-Industrial Oxidizing Species
+metaitem.bio.8.name=基因存储器
+metaitem.bio.8.tooltip=§a存储菌种：α-工业催化菌种
 
-metaitem.bio.8.name=Gene Storage Unit
-metaitem.bio.8.tooltip=§aStores Species: α-Industrial Catalytic Species
+metaitem.bio.9.name=基因存储器
+metaitem.bio.9.tooltip=§a存储菌种：α-定向脂肪酶
 
-metaitem.bio.9.name=Gene Storage Unit
-metaitem.bio.9.tooltip=§aStores Species: α-Directional Lipase
+metaitem.bio.10.name=基因存储器
+metaitem.bio.10.tooltip=§a存储菌种：α-普适发酵酶
 
-metaitem.bio.10.name=Gene Storage Unit
-metaitem.bio.10.tooltip=§aStores Species: α-Universal Fermentation Enzyme
+metaitem.bio.11.name=基因存储器
+metaitem.bio.11.tooltip=§a存储菌种：α-定向发酵酶
 
-metaitem.bio.11.name=Gene Storage Unit
-metaitem.bio.11.tooltip=§aStores Species: α-Directional Fermentation Enzyme
+metaitem.bio.12.name=基因存储器
+metaitem.bio.12tooltip=§a存储菌种：α-活性诱变酶
 
-metaitem.bio.12.name=Gene Storage Unit
-metaitem.bio.12.tooltip=§aStores Species: α-Active Mutagenic Enzyme
+metaitem.bio.13.name=基因存储器
+metaitem.bio.13.tooltip=§a存储菌种：
 
-metaitem.bio.13.name=Gene Storage Unit
-metaitem.bio.13.tooltip=§aStores Species: (Placeholder - Needs to be specified)
+metaitem.bio.14.name=基因存储器
+metaitem.bio.14.tooltip=§a存储菌种：
 
-metaitem.bio.14.name=Gene Storage Unit
-metaitem.bio.14.tooltip=§aStores Species: (Placeholder - Needs to be specified)
-
-metaitem.bio.15.name=Gene Storage Unit
-metaitem.bio.15.tooltip=§aStores Species: (Placeholder - Needs to be specified)
+metaitem.bio.15.name=基因存储器
+metaitem.bio.15.tooltip=§a存储菌种：
 
 gtqtcore.machine.gene_mutagenesis.name=Gene Mutagenesis Chamber
 recipemap.gene_mutagenesis.name=Gene Mutagenesis

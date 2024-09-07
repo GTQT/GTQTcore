@@ -1,5 +1,6 @@
 package keqing.gtqtcore.common.covers;
-
+import gregtech.common.terminal.app.console.ConsoleApp;
+import gregtech.api.terminal.os.TerminalOSWidget;
 import codechicken.lib.raytracer.CuboidRayTraceResult;
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
@@ -117,6 +118,9 @@ public class CoverMicrowaveEnergyReceiver extends CoverBase implements CoverWith
                 .widget(primaryGroup)
                 .bindPlayerInventory(player.inventory, GuiTextures.SLOT, 7, 166);
         return buildUI(builder, player);
+    }
+
+    private void open(boolean b) {
     }
 
     public void setAmperageVoltage(int x,int y)
