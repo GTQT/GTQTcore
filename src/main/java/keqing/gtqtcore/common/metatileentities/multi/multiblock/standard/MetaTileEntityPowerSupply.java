@@ -1,6 +1,5 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
-import codechicken.lib.raytracer.CuboidRayTraceResult;
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
@@ -8,18 +7,21 @@ import gregtech.api.capability.GregtechCapabilities;
 import gregtech.api.capability.IEnergyContainer;
 import gregtech.api.capability.impl.EnergyContainerList;
 import gregtech.api.gui.GuiTextures;
-import gregtech.api.gui.Widget;
+import gregtech.api.gui.ModularUI;
+import gregtech.api.gui.widgets.AdvancedTextWidget;
 import gregtech.api.gui.widgets.ClickButtonWidget;
-import gregtech.api.gui.widgets.WidgetGroup;
+import gregtech.api.gui.widgets.ProgressWidget;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
+import gregtech.api.metatileentity.multiblock.MultiblockDisplayText;
 import gregtech.api.metatileentity.multiblock.MultiblockWithDisplayBase;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.util.GTUtility;
+import gregtech.api.util.TextComponentUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.TooltipHelper;
@@ -31,11 +33,12 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -94,26 +97,241 @@ public class  MetaTileEntityPowerSupply extends MultiblockWithDisplayBase  {
         fastCharge = data.getBoolean("fastCharge");
     }
 
-    public boolean onScrewdriverClick(EntityPlayer playerIn, EnumHand hand, EnumFacing facing, CuboidRayTraceResult hitResult) {
-        if(updatetime<=19) updatetime++;
-        else updatetime=1;
-        playerIn.sendMessage(new TextComponentTranslation("检测频率：%s tick",updatetime));
-        return true;
-    }
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
-        textList.add(new TextComponentTranslation("蓄能：%s/%sEU 状态：%s 检测频率：%s", eu,tier*2048,work,updatetime));
-        textList.add(new TextComponentTranslation("闪充：%s 互联：%s 供能模式：%s", fastCharge,network,charge));
-        if (isStructureFormed()&&network) {
-            if (checkNetwork(poss1, false)) textList.add(new TextComponentTranslation("连接：%s  %s / %s", poss1,getNetEu(poss1),getNetMax(poss1)));
-            if (checkNetwork(poss2, false)) textList.add(new TextComponentTranslation("连接：%s  %s / %s", poss2,getNetEu(poss2),getNetMax(poss2)));
-            if (checkNetwork(poss3, false)) textList.add(new TextComponentTranslation("连接：%s  %s / %s", poss3,getNetEu(poss3),getNetMax(poss3)));
-            if (checkNetwork(poss4, false)) textList.add(new TextComponentTranslation("连接：%s  %s / %s", poss4,getNetEu(poss4),getNetMax(poss4)));
-            if (checkNetwork(poss5, false)) textList.add(new TextComponentTranslation("连接：%s  %s / %s", poss5,getNetEu(poss5),getNetMax(poss5)));
-            if (checkNetwork(poss6, false)) textList.add(new TextComponentTranslation("连接：%s  %s / %s", poss6,getNetEu(poss6),getNetMax(poss6)));
-            if (checkNetwork(poss7, false)) textList.add(new TextComponentTranslation("连接：%s  %s / %s", poss7,getNetEu(poss7),getNetMax(poss7)));
-            if (checkNetwork(poss8, false)) textList.add(new TextComponentTranslation("连接：%s  %s / %s", poss8,getNetEu(poss8),getNetMax(poss8)));
-        }
+        textList.add(new TextComponentTranslation("供能：%s 互联：%s 闪充：%s", charge, network, fastCharge));
+        textList.add(new TextComponentTranslation("状态：%s 检测频率：%s", work, updatetime));
+        textList.add(new TextComponentTranslation("蓄能：%s / %s EU", eu, tier * 2048));
+
+    }
+
+    protected void ventInfo(List<ITextComponent> textList) {
+        if (inenergyContainer != null)
+            textList.add(new TextComponentTranslation("能源仓缓存：%s  EU", inenergyContainer.getEnergyStored()));
+        if (inenergyContainer != null)
+            textList.add(new TextComponentTranslation("能源仓蓄能：%s  EU", inenergyContainer.getEnergyCapacity()));
+
+        if (outenergyContainer != null)
+            textList.add(new TextComponentTranslation("动力仓缓存：%s  EU", outenergyContainer.getEnergyStored()));
+        if (outenergyContainer != null)
+            textList.add(new TextComponentTranslation("动力仓蓄能：%s  EU", outenergyContainer.getEnergyCapacity()));
+        if (!work)
+            textList.add(TextComponentUtil.translationWithColor(TextFormatting.RED, "模块填充错误！请填充完毕后刷新加载！"));
+
+    }
+
+    protected void addInfo1(List<ITextComponent> textList) {
+        MultiblockDisplayText.builder(textList, isStructureFormed())
+                .addCustom(tl -> {
+                    if (isStructureFormed() && network) {
+                        if (checkNetwork(poss1, false)) {
+                            if (checkNet(poss1)) {
+                                textList.add(new TextComponentTranslation("连接：%s %s %s", poss1.getX(), poss1.getY(), poss1.getZ()));
+                                textList.add(new TextComponentTranslation("EU:%s / %s", getNetEu(poss1), getNetMax(poss1)));
+                            } else
+                                textList.add(TextComponentUtil.translationWithColor(TextFormatting.RED, "访问被拒！"));
+                        }
+                    }
+
+                });
+    }
+
+    protected void addInfo2(List<ITextComponent> textList) {
+        MultiblockDisplayText.builder(textList, isStructureFormed())
+                .addCustom(tl -> {
+                    if (isStructureFormed() && network) {
+                        if (checkNetwork(poss2, false)) {
+                            if (checkNet(poss2)) {
+                                textList.add(new TextComponentTranslation("连接：%s %s %s", poss2.getX(), poss2.getY(), poss2.getZ()));
+                                textList.add(new TextComponentTranslation("EU:%s / %s", getNetEu(poss2), getNetMax(poss2)));
+                            } else
+                                textList.add(TextComponentUtil.translationWithColor(TextFormatting.RED, "访问被拒！"));
+                        }
+                    }
+
+                });
+    }
+
+    protected void addInfo3(List<ITextComponent> textList) {
+        MultiblockDisplayText.builder(textList, isStructureFormed())
+                .addCustom(tl -> {
+                    if (isStructureFormed() && network) {
+                        if (checkNetwork(poss3, false)) {
+                            if (checkNet(poss3)) {
+                                textList.add(new TextComponentTranslation("连接：%s %s %s", poss3.getX(), poss3.getY(), poss3.getZ()));
+                                textList.add(new TextComponentTranslation("EU:%s / %s", getNetEu(poss3), getNetMax(poss3)));
+                            } else
+                                textList.add(TextComponentUtil.translationWithColor(TextFormatting.RED, "访问被拒！"));
+                        }
+                    }
+
+                });
+    }
+
+    protected void addInfo4(List<ITextComponent> textList) {
+        MultiblockDisplayText.builder(textList, isStructureFormed())
+                .addCustom(tl -> {
+                    if (isStructureFormed() && network) {
+                        if (checkNetwork(poss4, false)) {
+                            if (checkNet(poss4)) {
+                                textList.add(new TextComponentTranslation("连接：%s %s %s", poss4.getX(), poss4.getY(), poss4.getZ()));
+                                textList.add(new TextComponentTranslation("EU:%s / %s", getNetEu(poss4), getNetMax(poss4)));
+                            } else
+                                textList.add(TextComponentUtil.translationWithColor(TextFormatting.RED, "访问被拒！"));
+                        }
+                    }
+
+                });
+    }
+
+    protected void addInfo5(List<ITextComponent> textList) {
+        MultiblockDisplayText.builder(textList, isStructureFormed())
+                .addCustom(tl -> {
+                    if (isStructureFormed() && network) {
+                        if (checkNetwork(poss5, false)) {
+                            if (checkNet(poss5)) {
+                                textList.add(new TextComponentTranslation("连接：%s %s %s", poss5.getX(), poss5.getY(), poss5.getZ()));
+                                textList.add(new TextComponentTranslation("EU:%s / %s", getNetEu(poss5), getNetMax(poss5)));
+                            } else
+                                textList.add(TextComponentUtil.translationWithColor(TextFormatting.RED, "访问被拒！"));
+                        }
+                    }
+
+                });
+    }
+
+    protected void addInfo6(List<ITextComponent> textList) {
+        MultiblockDisplayText.builder(textList, isStructureFormed())
+                .addCustom(tl -> {
+                    if (isStructureFormed() && network) {
+                        if (checkNetwork(poss6, false)) {
+                            if (checkNet(poss6)) {
+                                textList.add(new TextComponentTranslation("连接：%s %s %s", poss6.getX(), poss6.getY(), poss6.getZ()));
+                                textList.add(new TextComponentTranslation("EU:%s / %s", getNetEu(poss6), getNetMax(poss6)));
+                            } else
+                                textList.add(TextComponentUtil.translationWithColor(TextFormatting.RED, "访问被拒！"));
+                        }
+                    }
+
+                });
+    }
+
+    protected void addInfo7(List<ITextComponent> textList) {
+        MultiblockDisplayText.builder(textList, isStructureFormed())
+                .addCustom(tl -> {
+                    if (isStructureFormed() && network) {
+                        if (checkNetwork(poss7, false)) {
+                            if (checkNet(poss7)) {
+                                textList.add(new TextComponentTranslation("连接：%s %s %s", poss7.getX(), poss7.getY(), poss7.getZ()));
+                                textList.add(new TextComponentTranslation("EU:%s / %s", getNetEu(poss7), getNetMax(poss7)));
+                            } else
+                                textList.add(TextComponentUtil.translationWithColor(TextFormatting.RED, "访问被拒！"));
+                        }
+                    }
+
+                });
+    }
+
+    protected void addInfo8(List<ITextComponent> textList) {
+        MultiblockDisplayText.builder(textList, isStructureFormed())
+                .addCustom(tl -> {
+                    if (isStructureFormed() && network) {
+                        if (checkNetwork(poss8, false)) {
+                            if (checkNet(poss8)) {
+                                textList.add(new TextComponentTranslation("连接：%s %s %s", poss8.getX(), poss8.getY(), poss8.getZ()));
+                                textList.add(new TextComponentTranslation("EU:%s / %s", getNetEu(poss8), getNetMax(poss8)));
+                            } else
+                                textList.add(TextComponentUtil.translationWithColor(TextFormatting.RED, "访问被拒！"));
+                        }
+                    }
+
+                });
+    }
+
+    @Override
+    protected ModularUI.Builder createUITemplate(EntityPlayer entityPlayer) {
+        ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND, 260, 240);
+
+        int j = 0;
+        //1号
+        builder.image(3, 0, 90, 30, GuiTextures.DISPLAY);
+        builder.widget((new AdvancedTextWidget(7, 4, this::addInfo1, 16777215)).setMaxWidthLimit(90).setClickHandler(this::handleDisplayClick));
+        j++;
+        //2号
+        builder.image(3, j * 30, 90, 30, GuiTextures.DISPLAY);
+        builder.widget((new AdvancedTextWidget(7, j * 30 + 4, this::addInfo2, 16777215)).setMaxWidthLimit(90).setClickHandler(this::handleDisplayClick));
+        j++;
+        //3号
+        builder.image(3, j * 30, 90, 30, GuiTextures.DISPLAY);
+        builder.widget((new AdvancedTextWidget(7, j * 30 + 4, this::addInfo3, 16777215)).setMaxWidthLimit(90).setClickHandler(this::handleDisplayClick));
+        j++;
+        //4号
+        builder.image(3, j * 30, 90, 30, GuiTextures.DISPLAY);
+        builder.widget((new AdvancedTextWidget(7, j * 30 + 4, this::addInfo4, 16777215)).setMaxWidthLimit(90).setClickHandler(this::handleDisplayClick));
+        j++;
+        //5号
+        builder.image(3, j * 30, 90, 30, GuiTextures.DISPLAY);
+        builder.widget((new AdvancedTextWidget(7, j * 30 + 4, this::addInfo5, 16777215)).setMaxWidthLimit(90).setClickHandler(this::handleDisplayClick));
+        j++;
+        //6号
+        builder.image(3, j * 30, 90, 30, GuiTextures.DISPLAY);
+        builder.widget((new AdvancedTextWidget(7, j * 30 + 4, this::addInfo6, 16777215)).setMaxWidthLimit(90).setClickHandler(this::handleDisplayClick));
+        j++;
+        //7号
+        builder.image(3, j * 30, 90, 30, GuiTextures.DISPLAY);
+        builder.widget((new AdvancedTextWidget(7, j * 30 + 4, this::addInfo7, 16777215)).setMaxWidthLimit(90).setClickHandler(this::handleDisplayClick));
+        j++;
+        //8号
+        builder.image(3, j * 30, 90, 30, GuiTextures.DISPLAY);
+        builder.widget((new AdvancedTextWidget(7, j * 30 + 4, this::addInfo8, 16777215)).setMaxWidthLimit(90).setClickHandler(this::handleDisplayClick));
+
+
+        builder.image(92, 4, 162, 50, GuiTextures.DISPLAY);
+        builder.dynamicLabel(95, 8, () -> "超导矩阵管理中心", 0xFFFFFF);
+        builder.widget((new AdvancedTextWidget(95, 20, this::addDisplayText, 16777215)).setMaxWidthLimit(162).setClickHandler(this::handleDisplayClick));
+
+        //UI
+        builder.image(92, 54, 162, 62, GuiTextures.DISPLAY);
+        builder.widget((new AdvancedTextWidget(95, 58, this::ventInfo, 16777215)).setMaxWidthLimit(162).setClickHandler(this::handleDisplayClick));
+
+        builder.widget(new ClickButtonWidget(132 - 32, 120, 48, 18, "充能模式", data -> charge = !charge).setTooltipText("切换供能模式与发电模式"));
+        builder.widget(new ClickButtonWidget(180 - 32, 120, 48, 18, "互联模式", data -> network = !network).setTooltipText("开启后将允许九宫格内的超导矩阵组网"));
+        builder.widget(new ClickButtonWidget(228 - 32, 120, 48, 18, "闪充模式", data -> fastCharge = !fastCharge).setTooltipText("开启后对低于模块等级的设备瞬间完成供能"));
+
+        builder.widget(new ClickButtonWidget(132 - 32, 140, 24, 18, "+1", data -> this.updatetime = MathHelper.clamp(updatetime + 1, 1, 40)));
+        builder.widget(new ClickButtonWidget(156 - 32, 140, 24, 18, "+5", data -> this.updatetime = MathHelper.clamp(updatetime + 5, 1, 40)));
+        builder.widget(new ClickButtonWidget(180 - 32, 140, 24, 18, "-1", data -> this.updatetime = MathHelper.clamp(updatetime - 1, 1, 40)));
+        builder.widget(new ClickButtonWidget(204 - 32, 140, 24, 18, "-5", data -> this.updatetime = MathHelper.clamp(updatetime - 5, 1, 40)));
+
+        builder.widget(new ClickButtonWidget(228 - 32, 140, 48, 18, "检测刷新", data -> {
+            tier = 0;
+            PreCheck();
+        }).setTooltipText("重载所有模块信息"));
+
+
+        builder.widget((new ProgressWidget(() -> (double) eu / (tier * 2048), 92, 53, 162, 4, GuiTextures.PROGRESS_BAR_MULTI_ENERGY_YELLOW, ProgressWidget.MoveType.HORIZONTAL)).setHoverTextConsumer((list) -> addBarHoverText(list, eu, tier * 2048L)));
+
+        builder.widget((new ProgressWidget(() -> getNetMax(poss1) == 0 ? 0 : (double) getNetEu(poss1) / getNetMax(poss1), 3, 28, 88, 3, GuiTextures.PROGRESS_BAR_MULTI_ENERGY_YELLOW, ProgressWidget.MoveType.HORIZONTAL)).setHoverTextConsumer((list) -> addBarHoverText(list, getNetEu(poss1), getNetMax(poss1))));
+        builder.widget((new ProgressWidget(() -> getNetMax(poss2) == 0 ? 0 : (double) getNetEu(poss2) / getNetMax(poss2), 3, 58, 88, 3, GuiTextures.PROGRESS_BAR_MULTI_ENERGY_YELLOW, ProgressWidget.MoveType.HORIZONTAL)).setHoverTextConsumer((list) -> addBarHoverText(list, getNetEu(poss2), getNetMax(poss2))));
+        builder.widget((new ProgressWidget(() -> getNetMax(poss3) == 0 ? 0 : (double) getNetEu(poss3) / getNetMax(poss3), 3, 88, 88, 3, GuiTextures.PROGRESS_BAR_MULTI_ENERGY_YELLOW, ProgressWidget.MoveType.HORIZONTAL)).setHoverTextConsumer((list) -> addBarHoverText(list, getNetEu(poss3), getNetMax(poss3))));
+        builder.widget((new ProgressWidget(() -> getNetMax(poss4) == 0 ? 0 : (double) getNetEu(poss4) / getNetMax(poss4), 3, 118, 88, 3, GuiTextures.PROGRESS_BAR_MULTI_ENERGY_YELLOW, ProgressWidget.MoveType.HORIZONTAL)).setHoverTextConsumer((list) -> addBarHoverText(list, getNetEu(poss4), getNetMax(poss4))));
+        builder.widget((new ProgressWidget(() -> getNetMax(poss5) == 0 ? 0 : (double) getNetEu(poss5) / getNetMax(poss5), 3, 148, 88, 3, GuiTextures.PROGRESS_BAR_MULTI_ENERGY_YELLOW, ProgressWidget.MoveType.HORIZONTAL)).setHoverTextConsumer((list) -> addBarHoverText(list, getNetEu(poss5), getNetMax(poss5))));
+        builder.widget((new ProgressWidget(() -> getNetMax(poss6) == 0 ? 0 : (double) getNetEu(poss6) / getNetMax(poss6), 3, 178, 88, 3, GuiTextures.PROGRESS_BAR_MULTI_ENERGY_YELLOW, ProgressWidget.MoveType.HORIZONTAL)).setHoverTextConsumer((list) -> addBarHoverText(list, getNetEu(poss6), getNetMax(poss6))));
+        builder.widget((new ProgressWidget(() -> getNetMax(poss7) == 0 ? 0 : (double) getNetEu(poss7) / getNetMax(poss7), 3, 208, 88, 3, GuiTextures.PROGRESS_BAR_MULTI_ENERGY_YELLOW, ProgressWidget.MoveType.HORIZONTAL)).setHoverTextConsumer((list) -> addBarHoverText(list, getNetEu(poss7), getNetMax(poss7))));
+        builder.widget((new ProgressWidget(() -> getNetMax(poss8) == 0 ? 0 : (double) getNetEu(poss8) / getNetMax(poss8), 3, 238, 88, 3, GuiTextures.PROGRESS_BAR_MULTI_ENERGY_YELLOW, ProgressWidget.MoveType.HORIZONTAL)).setHoverTextConsumer((list) -> addBarHoverText(list, getNetEu(poss8), getNetMax(poss8))));
+
+        builder.bindPlayerInventory(entityPlayer.inventory, GuiTextures.SLOT, 92, 160);
+        return builder;
+    }
+
+    public void addBarHoverText(List<ITextComponent> hoverList, long a, long b) {
+        ITextComponent cwutInfo = TextComponentUtil.stringWithColor(
+                TextFormatting.AQUA,
+                a + " / " + b + " EU");
+        hoverList.add(TextComponentUtil.translationWithColor(
+                TextFormatting.GRAY,
+                "存储电量: %s",
+                cwutInfo));
     }
     @Override
     protected void updateFormedValid() {
@@ -234,7 +452,6 @@ public class  MetaTileEntityPowerSupply extends MultiblockWithDisplayBase  {
     public void PreCheck()
     {
         maxTier=0;
-        work=true;
         //提前检测
         tier=10;//送你的
         final int xDir = this.getFrontFacing().getOpposite().getXOffset() * 5;
@@ -250,9 +467,12 @@ public class  MetaTileEntityPowerSupply extends MultiblockWithDisplayBase  {
                 if(GetTier(poss,i,j)>maxTier&&GetTier(poss,i,j)!=11)maxTier=GetTier(poss,i,j);
                 if (GetTier(poss,i,j) == 11) {
                     work=false;
+                    return;
                 }
             }
         }
+
+        work = true;
 
         poss1 = this.getPos().add( + 11, 0,  + 11);
         poss2 = this.getPos().add( + 11, 0,0 );
@@ -290,41 +510,6 @@ public class  MetaTileEntityPowerSupply extends MultiblockWithDisplayBase  {
         if(this.getWorld().getBlockState(poss)==GTQTMetaBlocks.POWER.getState(POWER_SUPPLY_VV))return 10;//超导方块10
 
         return 11;//不认识就开摆
-    }
-    @Override
-    @Nonnull
-    protected Widget getFlexButton(int x, int y, int width, int height) {
-        WidgetGroup group = new WidgetGroup(x, y, width, height);
-        group.addWidget(new ClickButtonWidget(0, 0, 9, 9, "", this::Refresh)
-                .setButtonTexture(GuiTextures.BUTTON_THROTTLE_MINUS)
-                .setTooltipText("刷新"));
-
-        group.addWidget(new ClickButtonWidget(9, 0, 9, 9, "", this::FastCharge)
-                .setButtonTexture(GuiTextures.BUTTON_THROTTLE_MINUS)
-                .setTooltipText("闪充模式"));
-
-        group.addWidget(new ClickButtonWidget(0, 9, 9, 9, "", this::NetWork)
-                .setButtonTexture(GuiTextures.BUTTON_THROTTLE_MINUS)
-                .setTooltipText("互联模式"));
-
-        group.addWidget(new ClickButtonWidget(9, 9, 9, 9, "", this::Mode)
-                .setButtonTexture(GuiTextures.BUTTON_THROTTLE_MINUS)
-                .setTooltipText("模式切换"));
-
-        return group;
-    }
-    private void FastCharge(Widget.ClickData clickData) {
-        fastCharge=!fastCharge;
-    }
-    private void NetWork(Widget.ClickData clickData) {
-        network=!network;
-    }
-    private void Mode(Widget.ClickData clickData) {
-        charge=!charge;
-    }
-    private void Refresh(Widget.ClickData clickData) {
-        tier=0;
-        PreCheck();
     }
 
     public MetaTileEntityPowerSupply(ResourceLocation metaTileEntityId) {
@@ -402,8 +587,16 @@ public class  MetaTileEntityPowerSupply extends MultiblockWithDisplayBase  {
         }
         return false;
     }
+
+    public boolean checkNet(BlockPos poss) {
+        MetaTileEntity mte = GTUtility.getMetaTileEntity(this.getWorld(), poss);
+        if (mte instanceof MetaTileEntityPowerSupply)
+            return ((MetaTileEntityPowerSupply) mte).network;
+        return false;
+    }
     public int getNetMax(BlockPos poss)
     {
+        if (!network) return 0;
         MetaTileEntity mte =GTUtility.getMetaTileEntity(this.getWorld(),poss);
         if (mte instanceof MetaTileEntityPowerSupply) {
             if (work && ((MetaTileEntityPowerSupply) mte).isNetwork())
@@ -416,6 +609,7 @@ public class  MetaTileEntityPowerSupply extends MultiblockWithDisplayBase  {
     }
     public int getNetEu(BlockPos poss)
     {
+        if (!network) return 0;
         MetaTileEntity mte =GTUtility.getMetaTileEntity(this.getWorld(),poss);
         if (mte instanceof MetaTileEntityPowerSupply) {
             if (work && ((MetaTileEntityPowerSupply) mte).isNetwork())
@@ -428,7 +622,7 @@ public class  MetaTileEntityPowerSupply extends MultiblockWithDisplayBase  {
     //初始化能源仓室
     public int getEu()
     {
-        return eu;
+        return this.eu;
     }
     public void removeEu(int remove)
     {

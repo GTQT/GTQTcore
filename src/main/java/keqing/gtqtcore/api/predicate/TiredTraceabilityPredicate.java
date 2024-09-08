@@ -22,39 +22,6 @@ public class TiredTraceabilityPredicate {
     
     public static Supplier<TierTraceabilityPredicate> CP_PAF_CASING = () -> new TierTraceabilityPredicate(MAP_PAF_CASING,
             Comparator.comparing((s) -> ((WrappedIntTired) MAP_PAF_CASING.get(s)).getIntTier()), "PAF", null);
-    public static Supplier<TierTraceabilityPredicate> CP_PAE_CASING = () -> new TierTraceabilityPredicate(MAP_PAE_CASING,
-            Comparator.comparing((s) -> ((WrappedIntTired) MAP_PAE_CASING.get(s)).getIntTier()), "PAE", null);
-    public static Supplier<TierTraceabilityPredicate> CP_PAV_CASING = () -> new TierTraceabilityPredicate(MAP_PAV_CASING,
-            Comparator.comparing((s) -> ((WrappedIntTired) MAP_PAV_CASING.get(s)).getIntTier()), "PAV", null);
-
-    public static Supplier<TierTraceabilityPredicate> CP_CPU_CASING1 = () -> new TierTraceabilityPredicate(MAP_CPU_CASING,
-            Comparator.comparing((s) -> ((WrappedIntTired) MAP_CPU_CASING.get(s)).getIntTier()), "CPU1", null);
-    public static Supplier<TierTraceabilityPredicate> CP_GPU_CASING1 = () -> new TierTraceabilityPredicate(MAP_GPU_CASING,
-            Comparator.comparing((s) -> ((WrappedIntTired) MAP_GPU_CASING.get(s)).getIntTier()), "GPU1", null);
-    public static Supplier<TierTraceabilityPredicate> CP_RAM_CASING1 = () -> new TierTraceabilityPredicate(MAP_RAM_CASING,
-            Comparator.comparing((s) -> ((WrappedIntTired) MAP_RAM_CASING.get(s)).getIntTier()), "RAM1", null);
-
-
-    public static Supplier<TierTraceabilityPredicate> CP_CPU_CASING2 = () -> new TierTraceabilityPredicate(MAP_CPU_CASING,
-            Comparator.comparing((s) -> ((WrappedIntTired) MAP_CPU_CASING.get(s)).getIntTier()), "CPU2", null);
-    public static Supplier<TierTraceabilityPredicate> CP_GPU_CASING2 = () -> new TierTraceabilityPredicate(MAP_GPU_CASING,
-            Comparator.comparing((s) -> ((WrappedIntTired) MAP_GPU_CASING.get(s)).getIntTier()), "GPU2", null);
-    public static Supplier<TierTraceabilityPredicate> CP_RAM_CASING2 = () -> new TierTraceabilityPredicate(MAP_RAM_CASING,
-            Comparator.comparing((s) -> ((WrappedIntTired) MAP_RAM_CASING.get(s)).getIntTier()), "RAM2", null);
-
-    public static Supplier<TierTraceabilityPredicate> CP_CPU_CASING3 = () -> new TierTraceabilityPredicate(MAP_CPU_CASING,
-            Comparator.comparing((s) -> ((WrappedIntTired) MAP_CPU_CASING.get(s)).getIntTier()), "CPU3", null);
-    public static Supplier<TierTraceabilityPredicate> CP_GPU_CASING3 = () -> new TierTraceabilityPredicate(MAP_GPU_CASING,
-            Comparator.comparing((s) -> ((WrappedIntTired) MAP_GPU_CASING.get(s)).getIntTier()), "GPU3", null);
-    public static Supplier<TierTraceabilityPredicate> CP_RAM_CASING3 = () -> new TierTraceabilityPredicate(MAP_RAM_CASING,
-            Comparator.comparing((s) -> ((WrappedIntTired) MAP_RAM_CASING.get(s)).getIntTier()), "RAM3", null);
-
-    public static Supplier<TierTraceabilityPredicate> CP_CPU_CASING4 = () -> new TierTraceabilityPredicate(MAP_CPU_CASING,
-            Comparator.comparing((s) -> ((WrappedIntTired) MAP_CPU_CASING.get(s)).getIntTier()), "CPU4", null);
-    public static Supplier<TierTraceabilityPredicate> CP_GPU_CASING4 = () -> new TierTraceabilityPredicate(MAP_GPU_CASING,
-            Comparator.comparing((s) -> ((WrappedIntTired) MAP_GPU_CASING.get(s)).getIntTier()), "GPU4", null);
-    public static Supplier<TierTraceabilityPredicate> CP_RAM_CASING4 = () -> new TierTraceabilityPredicate(MAP_RAM_CASING,
-            Comparator.comparing((s) -> ((WrappedIntTired) MAP_RAM_CASING.get(s)).getIntTier()), "RAM4", null);
 
     public static Supplier<TierTraceabilityPredicate> CP_ZW_CASING = () -> new TierTraceabilityPredicate(MAP_ZW_CASING,
             Comparator.comparing((s) -> ((WrappedIntTired) MAP_ZW_CASING.get(s)).getIntTier()), "ZW", null);

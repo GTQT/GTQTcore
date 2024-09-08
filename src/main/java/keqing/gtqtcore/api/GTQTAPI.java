@@ -47,9 +47,6 @@ public class GTQTAPI {
     public static final Object2ObjectOpenHashMap<IBlockState,IBlockTier> MAP_TJ_CASING= new Object2ObjectOpenHashMap<>();
     public static final Object2ObjectOpenHashMap<IBlockState,IBlockTier> MAP_ZJ_CASING= new Object2ObjectOpenHashMap<>();
     //计算机
-    public static final Object2ObjectOpenHashMap<IBlockState,IBlockTier> MAP_CPU_CASING= new Object2ObjectOpenHashMap<>();
-    public static final Object2ObjectOpenHashMap<IBlockState,IBlockTier> MAP_GPU_CASING= new Object2ObjectOpenHashMap<>();
-    public static final Object2ObjectOpenHashMap<IBlockState,IBlockTier> MAP_RAM_CASING= new Object2ObjectOpenHashMap<>();
 
     public static final Object2ObjectOpenHashMap<IBlockState,IBlockTier> MAP_PAF_CASING= new Object2ObjectOpenHashMap<>();
     public static final Object2ObjectOpenHashMap<IBlockState,IBlockTier> MAP_PAE_CASING= new Object2ObjectOpenHashMap<>();
@@ -324,33 +321,6 @@ public class GTQTAPI {
                 new WrappedIntTired(GTQTElectrobath.CasingType.SOLAR_PLATE_MV, 2));
         MAP_SP_CASING.put(GTQTMetaBlocks.ELECTROBATH.getState(GTQTElectrobath.CasingType.SOLAR_PLATE_HV),
                 new WrappedIntTired(GTQTElectrobath.CasingType.SOLAR_PLATE_MV, 3));
-
-        MAP_CPU_CASING.put(GTQTMetaBlocks.KQCC.getState(GTQTKQCC.CasingType.COMPUTER_VENT),
-                new WrappedIntTired(GTQTKQCC.CasingType.COMPUTER_VENT, 0));
-        MAP_CPU_CASING.put(GTQTMetaBlocks.KQCC.getState(GTQTKQCC.CasingType.COMPUTER_CPUI),
-                new WrappedIntTired(GTQTKQCC.CasingType.COMPUTER_CPUI, 1));
-        MAP_CPU_CASING.put(GTQTMetaBlocks.KQCC.getState(GTQTKQCC.CasingType.COMPUTER_CPUII),
-                new WrappedIntTired(GTQTKQCC.CasingType.COMPUTER_CPUII, 2));
-        MAP_CPU_CASING.put(GTQTMetaBlocks.KQCC.getState(GTQTKQCC.CasingType.COMPUTER_CPUIII),
-                new WrappedIntTired(GTQTKQCC.CasingType.COMPUTER_CPUIII, 3));
-
-        MAP_GPU_CASING.put(GTQTMetaBlocks.KQCC.getState(GTQTKQCC.CasingType.COMPUTER_VENT),
-                new WrappedIntTired(GTQTKQCC.CasingType.COMPUTER_VENT, 0));
-        MAP_GPU_CASING.put(GTQTMetaBlocks.KQCC.getState(GTQTKQCC.CasingType.COMPUTER_GPUI),
-                new WrappedIntTired(GTQTKQCC.CasingType.COMPUTER_CPUI, 1));
-        MAP_GPU_CASING.put(GTQTMetaBlocks.KQCC.getState(GTQTKQCC.CasingType.COMPUTER_GPUII),
-                new WrappedIntTired(GTQTKQCC.CasingType.COMPUTER_CPUII, 2));
-        MAP_GPU_CASING.put(GTQTMetaBlocks.KQCC.getState(GTQTKQCC.CasingType.COMPUTER_GPUIII),
-                new WrappedIntTired(GTQTKQCC.CasingType.COMPUTER_CPUIII, 3));
-
-        MAP_RAM_CASING.put(GTQTMetaBlocks.KQCC.getState(GTQTKQCC.CasingType.COMPUTER_VENT),
-                new WrappedIntTired(GTQTKQCC.CasingType.COMPUTER_VENT, 0));
-        MAP_RAM_CASING.put(GTQTMetaBlocks.KQCC.getState(GTQTKQCC.CasingType.COMPUTER_RAMI),
-                new WrappedIntTired(GTQTKQCC.CasingType.COMPUTER_CPUI, 1));
-        MAP_RAM_CASING.put(GTQTMetaBlocks.KQCC.getState(GTQTKQCC.CasingType.COMPUTER_RAMII),
-                new WrappedIntTired(GTQTKQCC.CasingType.COMPUTER_CPUII, 2));
-        MAP_RAM_CASING.put(GTQTMetaBlocks.KQCC.getState(GTQTKQCC.CasingType.COMPUTER_RAMIII),
-                new WrappedIntTired(GTQTKQCC.CasingType.COMPUTER_CPUIII, 3));
 
         MAP_ZW_CASING.put(GTQTMetaBlocks.STEPPER.getState(GTQTStepper.CasingType.LASER_MKI),
                 new WrappedIntTired(GTQTStepper.CasingType.LASER_MKI, 1));
