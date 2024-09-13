@@ -185,6 +185,16 @@ public class MetaTileEntityMachine {
                 new UnificationEntry(OrePrefix.frameGt, Materials.RhodiumPlatedPalladium), 'I',
                 new UnificationEntry(OrePrefix.pipeNormalFluid, NiobiumTitanium));
 
+        ModHandler.addShapedRecipe(true, "brick",
+                GTQTMetaBlocks.TURBINE_CASING.getItemVariant(GTQTTurbineCasing.TurbineCasingType.BRICK),
+                "PIP", "IFI", "PIP",
+                'P', new UnificationEntry(OrePrefix.plate, Wood),
+                'F', new UnificationEntry(OrePrefix.frameGt, Materials.Wood),
+                'I', Blocks.BRICK_BLOCK);
+
+
+
+
         ModHandler.addShapedRecipe(true, "casing_nq_pipe",
                 GTQTMetaBlocks.TURBINE_CASING.getItemVariant(GTQTTurbineCasing.TurbineCasingType.NQ_MACHINE_CASING, ConfigHolder.recipes.casingsPerCraft), "PIP", "IFI",
                 "PIP", 'P', new UnificationEntry(OrePrefix.plate, NaquadahAlloy), 'F',

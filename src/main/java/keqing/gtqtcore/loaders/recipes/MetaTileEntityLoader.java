@@ -23,6 +23,10 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import static gregicality.multiblocks.api.unification.GCYMMaterials.*;
 import static gregicality.multiblocks.common.metatileentities.GCYMMetaTileEntities.LARGE_ASSEMBLER;
 import static gregtech.api.GTValues.L;
@@ -59,11 +63,16 @@ import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.GAS_C
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.PYROLYSE_OVEN;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.VACUUM_FREEZER;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.*;
+import static net.minecraft.init.Blocks.IRON_BARS;
 
 
 public class MetaTileEntityLoader {
+    public static CraftingComponent.Component SXA_HULL;
 
     public static void init() {
+
+        SXA_HULL = new CraftingComponent.Component((Map) Stream.of(new Object[]{0, HULL[0].getStackForm()},new Object[]{1, OUTPUT_ENERGY_HATCH_16A[0].getStackForm()}, new Object[]{2, OUTPUT_ENERGY_HATCH_16A[1].getStackForm()}, new Object[]{3, OUTPUT_ENERGY_HATCH_16A[2].getStackForm()}, new Object[]{4, OUTPUT_ENERGY_HATCH_16A[3].getStackForm()}, new Object[]{5, ENERGY_OUTPUT_HATCH_16A[0].getStackForm()}, new Object[]{6, MetaTileEntities.ENERGY_OUTPUT_HATCH_16A[1].getStackForm()}, new Object[]{7, MetaTileEntities.ENERGY_OUTPUT_HATCH_16A[2].getStackForm()}, new Object[]{8, MetaTileEntities.ENERGY_OUTPUT_HATCH_16A[3].getStackForm()}, new Object[]{9, MetaTileEntities.ENERGY_OUTPUT_HATCH_16A[4].getStackForm()}, new Object[]{10, OUTPUT_ENERGY_HATCH_16A[4].getStackForm()}, new Object[]{11, OUTPUT_ENERGY_HATCH_16A[5].getStackForm()}, new Object[]{12, OUTPUT_ENERGY_HATCH_16A[6].getStackForm()}, new Object[]{13, OUTPUT_ENERGY_HATCH_16A[7].getStackForm()}).collect(Collectors.toMap((data) -> (Integer)data[0], (data) -> data[1])));
+
         // Minecart wheels
         ASSEMBLER_RECIPES.recipeBuilder()
                 .input(stick, Iron)
@@ -604,6 +613,26 @@ public class MetaTileEntityLoader {
                 'P', new UnificationEntry(OrePrefix.plateDouble, Steel),
                 'B', PRIMITIVE_BLAST_FURNACE.getStackForm());
 
+        ModHandler.addShapedRecipe("primitive_roaster", PRIMITIVE_ROASTER.getStackForm(),
+                "BhB", "BIB", "BPB",
+                'I', new ItemStack(IRON_BARS),
+                'B', MetaBlocks.METAL_CASING.getItemVariant(PRIMITIVE_BRICKS),
+                'P', OreDictUnifier.get(plate, Iron));
+
+        ModHandler.addShapedRecipe(true, "tree_farmer",
+                GTQTMetaTileEntities.PRIMITIVE_TREE_FARMER.getStackForm(),
+                "BPB", "PCP", "BPB",
+                'C', new UnificationEntry(circuit, ULV),
+                'P', new UnificationEntry(plate, Wood),
+                'B', new UnificationEntry(frameGt, Iron));
+
+        ModHandler.addShapedRecipe(true, "saw_mill",
+                GTQTMetaTileEntities.SAW_MILL.getStackForm(),
+                "BPB", "PCP", "BPB",
+                'C', new UnificationEntry(circuit, ULV),
+                'P', new UnificationEntry(plate, Wood),
+                'B', new UnificationEntry(frameGt, Bronze));
+
         ModHandler.addShapedRecipe(true, "steam_vat",
                 GTQTMetaTileEntities.STEAM_VAT.getStackForm(),
                 "BPB", "PCP", "BPB",
@@ -916,9 +945,11 @@ public class MetaTileEntityLoader {
         gregtech.loaders.recipe.MetaTileEntityLoader.registerMachineRecipe(true, MICROWAVE_ENERGY_RECEIVER,
                 "PCP", "EHE", "PCP",
                 'E', CraftingComponent.EMITTER,
-                'H', CraftingComponent.HULL,
+                'H', SXA_HULL,
                 'P', CraftingComponent.SENSOR,
                 'C', CraftingComponent.CIRCUIT);
+
+
 
         gregtech.loaders.recipe.MetaTileEntityLoader.registerMachineRecipe(true, KQCC_COMPUTATION_HATCH_RECEIVER,
                 "GEG", "PHP", "WXW",

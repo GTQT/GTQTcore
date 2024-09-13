@@ -40,6 +40,7 @@ public class GTQTRecipesManager {
         FusionLoader.init();
         BoronChain.init();
         EnzymesRecipes.init();
+        ArgChain.init();
         ChipHelper.init();
         CoverRecipes.init();
         GTQTOreRecipeHandler.init();
@@ -50,6 +51,7 @@ public class GTQTRecipesManager {
         PPBChain.init();
         BioReactor.init();
         AirDistillation.init();
+        SawmillChain.init();
         LargeCircuitAssemblyLine.init();
         SodiumChain.init();
         ParticleAccelerator.init();

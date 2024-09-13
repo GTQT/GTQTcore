@@ -1013,6 +1013,12 @@ gtqtcore.machine.industrial_primitive_blast_furnace.auxiliary_blast_furnace=Auxi
 
 gtqtcore.machine.large_steam_compressor.name=Large Steam Compressor
 
+gtqtcore.machine.primitive_tree_farmer.name=Primitive Tree Farmer
+gtqtcore.machine.saw_mill.name=Saw Mill
+recipemap.saw_mill.name=Saw Mill
+
+gtqtcore.machine.primitive_roaster.name=Primitive Roaster
+recipemap.primitive_roaster.name=Primitive Roaster
 # Materials
 
 ## Element Materials
@@ -3273,6 +3279,7 @@ metaitem.rock.bet3.name=Swamp Impact Rock Fragment
 metaitem.rock.bet4.name=Swamp Shale Fragment
 gregtech.material.solarium=Solarium
 gregtech.material.eternity=Eternity
+gregtech.material.spacetime=Space Time
 metaitem.sun_matter.name=Sun Compound
 metaitem.sunlinse.name=Sun Lens
 metaitem.sunnariumpart.name=Sun Metal Polarizing Sheet
@@ -4460,7 +4467,7 @@ tile.multiblock_casing.tech_fusion_glass_5.name=Reinforced Mid-Grade Fusion Glas
 tile.multiblock_casing.tech_fusion_glass_6.name=Reinforced High-Grade Fusion Glass
 gregtech.material.csilicon=Solar Grade Polycrystalline Silicon
 gregtech.material.copper_cl=Copper Chloride
-gregtech.material.fluix=FLUIX
+gregtech.material.fluix=福鲁伊克斯
 gregtech.material.ealuminium=Aluminum Nitrate
 
 gregtech.material.len_gold_bs=Roasted Low-grade Gold Containing Impurities

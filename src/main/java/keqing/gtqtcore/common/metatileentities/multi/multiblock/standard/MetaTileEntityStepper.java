@@ -262,18 +262,6 @@ public class MetaTileEntityStepper extends MultiMapMultiblockController implemen
         super.invalidateStructure();
     }
 
-    protected int getLaserTier() {
-        return this.laser_tier;
-    }
-    protected int getGlass_tier() {
-        return this.glass_tier;
-    }
-    protected int clean_tier() {
-        return this.clean_tier;
-    }
-    protected int sheping_tier() {
-        return this.sheping_tier;
-    }
     @Override
     public boolean hasMufflerMechanics() {
         return false;

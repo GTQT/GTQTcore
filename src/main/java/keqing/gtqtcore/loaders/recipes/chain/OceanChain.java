@@ -15,6 +15,8 @@ import net.minecraftforge.fluids.FluidStack;
 import java.util.Collection;
 import java.util.List;
 
+import static gregtech.api.GTValues.EV;
+import static gregtech.api.GTValues.VA;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.dust;
@@ -83,10 +85,29 @@ public class OceanChain {
                 .fluidOutputs(Dimethylbenzene.getFluid(1000))
                 .buildAndRegister();
 
+        LARGE_CHEMICAL_RECIPES.recipeBuilder()
+                .duration(200)
+                .EUt(VA[EV])
+                .notConsumable(dust,Gold,16)
+                .fluidInputs(Toluene.getFluid(4000))
+                .fluidOutputs(ParaXylene.getFluid(1000))
+                .fluidOutputs(Dimethylbenzene.getFluid(1000))
+                .buildAndRegister();
+
         //在AlCl3催化下，对二甲苯与Br2反应，得到2，3，5，6-四溴对二甲苯。
         FLUIDIZED_BED.recipeBuilder()
                 .duration(200)
                 .EUt(120)
+                .notConsumable(dust,AluminiumTrichloride,16)
+                .fluidInputs(ParaXylene.getFluid(1000))
+                .fluidInputs(Bromine.getFluid(4000))
+                .fluidOutputs(Tetrabromo.getFluid(1000))
+                .fluidOutputs(Hydrogen.getFluid(4000))
+                .buildAndRegister();
+
+        LARGE_CHEMICAL_RECIPES.recipeBuilder()
+                .duration(200)
+                .EUt(VA[EV])
                 .notConsumable(dust,AluminiumTrichloride,16)
                 .fluidInputs(ParaXylene.getFluid(1000))
                 .fluidInputs(Bromine.getFluid(4000))
@@ -99,10 +120,18 @@ public class OceanChain {
                 .duration(400)
                 .EUt(120)
                 .fluidInputs(Tetrabromo.getFluid(1000))
-                .fluidInputs(CarbonTetrachloride.getFluid(4000))
+                .notConsumable(CarbonTetrachloride.getFluid(4000))
                 .fluidInputs(Bromine.getFluid(2000))
                 .fluidOutputs(Tetrabromobenzene.getFluid(1000))
-                .fluidOutputs(CarbonTetrachloride.getFluid(4000))
+                .fluidOutputs(Hydrogen.getFluid(2000))
+                .buildAndRegister();
+
+        LARGE_CHEMICAL_RECIPES.recipeBuilder()
+                .duration(400)
+                .EUt(VA[EV])
+                .fluidInputs(Tetrabromo.getFluid(1000))
+                .fluidInputs(Bromine.getFluid(2000))
+                .fluidOutputs(Tetrabromobenzene.getFluid(1000))
                 .fluidOutputs(Hydrogen.getFluid(2000))
                 .buildAndRegister();
 

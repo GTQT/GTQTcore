@@ -391,7 +391,7 @@ public class FirstDegreeMaterials {
 
         GTQTMaterials.Fluix = new Material.Builder(getMaterialsId(), gregtechId("fluix"))
                 .gem(1).ore()
-                .color(0x7D26CD).iconSet(CERTUS)
+                .color(0x7D26CD).iconSet(SHINY)
                 .flags(GENERATE_PLATE, CRYSTALLIZABLE)
                 .components(Silicon, 1, Oxygen, 2)
                 .build();
@@ -3319,8 +3319,12 @@ public class FirstDegreeMaterials {
                 .components(Saltpeter, 1)
                 .build();
 
-        //TODO
-        getMaterialsId();//占位
+        Cellulose = new Material.Builder(getMaterialsId(), gregtechId("cellulose"))
+                .dust()
+                .color(0xfefefc)
+                .iconSet(DULL)
+                .build()
+                .setFormula("C6H10O5", true);
 
         //TODO
         getMaterialsId();//占位

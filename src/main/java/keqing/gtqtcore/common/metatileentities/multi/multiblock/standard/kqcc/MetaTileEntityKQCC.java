@@ -94,7 +94,7 @@ public class MetaTileEntityKQCC extends MultiblockWithDisplayBase implements IOp
     private void consumeEnergy() {
         int energyToConsume = CWTT()*15*thresholdPercentage;
 
-        if (this.hasNotEnoughEnergy && energyContainer.getInputPerSec() > 19L * energyToConsume) {
+        if (this.hasNotEnoughEnergy && energyContainer.getEnergyStored() >energyToConsume) {
             this.hasNotEnoughEnergy = false;
         }
 
@@ -182,8 +182,8 @@ public class MetaTileEntityKQCC extends MultiblockWithDisplayBase implements IOp
 
         int j=0;
         //1号
-        builder.image(3, 52+j*40, 90, 40, GuiTextures.DISPLAY);
-        builder.widget((new AdvancedTextWidget(7, 58+j*40, this::addInfo1, 16777215)).setMaxWidthLimit(90).setClickHandler(this::handleDisplayClick));
+        builder.image(3, 52, 90, 40, GuiTextures.DISPLAY);
+        builder.widget((new AdvancedTextWidget(7, 58, this::addInfo1, 16777215)).setMaxWidthLimit(90).setClickHandler(this::handleDisplayClick));
         j++;
         //2号
         builder.image(3, 52+j*40, 90, 40, GuiTextures.DISPLAY);

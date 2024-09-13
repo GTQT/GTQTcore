@@ -9,6 +9,7 @@ import keqing.gtqtcore.api.unification.GCYSMaterials;
 import keqing.gtqtcore.api.unification.GTQTElements;
 import keqing.gtqtcore.api.unification.GTQTMaterials;
 import net.minecraft.init.Enchantments;
+import net.minecraft.util.text.TextFormatting;
 
 import static gregtech.api.GTValues.*;
 import static gregtech.api.unification.material.Materials.*;
@@ -332,8 +333,27 @@ public class GTQTElementMaterials {
                 .element(En)
                 .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_DENSE, GENERATE_ROD, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_LENS, GENERATE_ROTOR)
                 .build();
-    }
 
+        //  10009 Spacetime
+        GTQTMaterials.Spacetime = new Material.Builder(getMaterialsId(), gregtechId("spacetime"))
+                .ingot()
+                .liquid(new FluidBuilder().customStill())
+                .iconSet(CUSTOM_SPACETIME)
+                .blast(b -> b
+                        .temp(16000, BlastProperty.GasTier.HIGHEST)
+                        .blastStats(VA[OpV], 100)
+                        .vacuumStats(VA[OpV], 100))
+                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_DENSE, GENERATE_ROD, GENERATE_RING, GENERATE_ROTOR, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_LENS, GENERATE_LONG_ROD, GENERATE_FOIL)
+                .element(St)
+                .rotorStats(360.0F, 1.0F, 524288000)
+                .build()
+                .setFormula(addObfuscatedFormula(), false);
+
+
+    }
+    public static String addObfuscatedFormula() {
+        return TextFormatting.OBFUSCATED + "aaaaaa";
+    }
     private static int getMaterialsId() {
         if (startId < END_ID) {
             return startId++;

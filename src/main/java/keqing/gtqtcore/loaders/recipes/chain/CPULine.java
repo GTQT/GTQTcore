@@ -841,8 +841,8 @@ public class CPULine {
                 .EUt(120)
                 .input(wireFine,Fiberglass,4)
                 .input(foil,Gold,8)
-                .fluidInputs(Epoxy.getFluid(576))
-                .fluidInputs(Polyethylene.getFluid(400))
+                .fluidInputs(Bps.getFluid(576))
+                .fluidInputs(Polyethylene.getFluid(576))
                 .output(IMPREGNATED_PLASTIC_SUBSTRATE)
                 .buildAndRegister();
 
@@ -868,8 +868,8 @@ public class CPULine {
                 .EUt(480)
                 .input(plate,Polytetrafluoroethylene)
                 .input(foil,Platinum,8)
-                .fluidInputs(StyreneButadieneRubber.getFluid(576))
                 .fluidInputs(Brominatedepoxyresins.getFluid(576))
+                .fluidInputs(StyreneButadieneRubber.getFluid(576))
                 .output(IMPREGNATED_EPOXY)
                 .buildAndRegister();
 

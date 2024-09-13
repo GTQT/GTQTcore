@@ -685,7 +685,8 @@ public class KeQingNET {
                 .input(foil, Tcfour, 64)
                 .output(ENZYMES_REACTOR)
                 .fluidInputs(SolderingAlloy.getFluid(L * 8))
-                .fluidInputs(Polybenzimidazole.getFluid(L * 8))
+                .fluidInputs(Brominatedepoxyresins.getFluid(4000))
+                .fluidInputs(Polyethylene.getFluid(4000))
                 .fluidInputs(Palladium.getFluid(L * 8))
                 .scannerResearch(b -> b
                         .researchStack(DISK_17.getStackForm())
@@ -788,6 +789,7 @@ public class KeQingNET {
                 .input(foil, Palladium, 8)
                 .fluidInputs(Epoxy.getFluid(4000))
                 .fluidInputs(Zylon.getFluid(4000))
+                .fluidInputs(Brominatedepoxyresins.getFluid(4000))
                 .fluidInputs(Polytetrafluoroethylene.getFluid(4000))
                 .scannerResearch(b -> b
                         .researchStack(KQCC.getStackForm())
@@ -1259,6 +1261,8 @@ public class KeQingNET {
                 .input(plate, Aluminium, 8)
                 .fluidInputs(Polytetrafluoroethylene.getFluid(4000))
                 .fluidInputs(Aluminium.getFluid(4000))
+                .fluidInputs(Brominatedepoxyresins.getFluid(4000))
+                .fluidInputs(Polyethylene.getFluid(4000))
                 .scannerResearch(b -> b
                         .researchStack(DISK_17.getStackForm())
                         .duration(1200)
@@ -1295,6 +1299,9 @@ public class KeQingNET {
                 .input(wireFine, Aluminium, 8)
                 .input(foil, Aluminium, 8)
                 .fluidInputs(Polytetrafluoroethylene.getFluid(4000))
+                .fluidInputs(SolderingAlloy.getFluid(L * 8))
+                .fluidInputs(Brominatedepoxyresins.getFluid(4000))
+                .fluidInputs(Polyethylene.getFluid(4000))
                 .scannerResearch(b -> b
                         .researchStack(DISK_20.getStackForm())
                         .duration(1200)
@@ -1387,6 +1394,9 @@ public class KeQingNET {
                 .input(wireFine, Aluminium, 8)
                 .input(foil, Aluminium, 8)
                 .fluidInputs(Polytetrafluoroethylene.getFluid(4000))
+                .fluidInputs(SolderingAlloy.getFluid(L * 8))
+                .fluidInputs(Brominatedepoxyresins.getFluid(4000))
+                .fluidInputs(Polyethylene.getFluid(4000))
                 .scannerResearch(b -> b
                         .researchStack(DISK_20.getStackForm())
                         .duration(1200)

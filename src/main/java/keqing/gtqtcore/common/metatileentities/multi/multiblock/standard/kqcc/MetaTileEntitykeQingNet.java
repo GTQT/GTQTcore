@@ -388,6 +388,7 @@ public class MetaTileEntitykeQingNet extends RecipeMapMultiblockController imple
                             .or(abilities(MultiblockAbility.MAINTENANCE_HATCH).setExactLimit(1))
                             .or(abilities(MultiblockAbility.IMPORT_ITEMS).setExactLimit(1))
                             .or(abilities(MultiblockAbility.EXPORT_ITEMS).setExactLimit(1))
+                            .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setMaxGlobalLimited(1))
                             .or(abilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION).setExactLimit(1)))
                     .build();
         }

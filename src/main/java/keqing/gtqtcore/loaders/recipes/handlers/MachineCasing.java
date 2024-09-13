@@ -347,14 +347,14 @@ public class MachineCasing {
     }
 
     private static void DustMixer() {
-        MIXER_RECIPES.recipeBuilder()
-                .input(dust, Naquadria, 1)
+        LARGE_CHEMICAL_RECIPES.recipeBuilder()
+                .fluidInputs(Naquadria.getFluid(144))
                 .input(dust, Gallium, 1)
                 .input(dust, Indium, 1)
                 .circuitMeta(15)
                 .output(dust, NaquadriaGalliumIndium, 3)
-                .EUt(VA[IV])
-                .duration(400)
+                .EUt(VA[LuV])
+                .duration(800)
                 .buildAndRegister();
 
         MIXER_RECIPES.recipeBuilder()

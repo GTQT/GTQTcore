@@ -61,6 +61,7 @@ public abstract class MixinEllipsoidGenerator extends ShapeGenerator {
         }
     }
     public void generateBlock(int x, int y, int z, IBlockGeneratorAccess blockAccess) {
+
         blockAccess.generateBlock(x, y, z);
     }
 }

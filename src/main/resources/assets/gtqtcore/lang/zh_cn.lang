@@ -1014,6 +1014,12 @@ gtqtcore.machine.industrial_primitive_blast_furnace.auxiliary_blast_furnace=附�
 
 gtqtcore.machine.large_steam_compressor.name=大型蒸汽压缩机
 
+gtqtcore.machine.primitive_tree_farmer.name=原始林场
+gtqtcore.machine.saw_mill.name=锯木机
+recipemap.saw_mill.name=锯木机
+
+gtqtcore.machine.primitive_roaster.name=原始焙烧炉
+recipemap.primitive_roaster.name=焙烧炉
 #  Materials
 
 ##  Element Materials
@@ -3286,6 +3292,7 @@ metaitem.rock.bet3.name=沼泽冲击岩碎片
 metaitem.rock.bet4.name=沼泽页岩碎片
 gregtech.material.solarium=阳光合金
 gregtech.material.eternity=永恒
+gregtech.material.spacetime=时空
 metaitem.sun_matter.name=阳光化合物
 metaitem.sunlinse.name=日光透镜
 metaitem.sunnariumpart.name=日光金属偏振片
@@ -3720,7 +3727,7 @@ metaitem.disk.10.name=数据存储器
 metaitem.disk.10.tooltip=§a资源勘探III
 
 gtqtcore.multiblock.kqn.nb11=网道行者-元素存储 
-gtqtcore.multiblock.kqn.nx11=通过对Fluix水晶体的基本分析，借助基本的数电系统，能够基本实现物质<->元素组分的转换，当然，这种转换受限于一种极其独特的设备结构，并且无法脱离此结构存在。
+gtqtcore.multiblock.kqn.nx11=通过对福鲁伊克斯 水晶体的基本分析，借助基本的数电系统，能够基本实现物质<->元素组分的转换，当然，这种转换受限于一种极其独特的设备结构，并且无法脱离此结构存在。
 metaitem.disk.11.name=数据存储器
 metaitem.disk.11.tooltip=§e网道行者-元素存储
 
@@ -3730,7 +3737,7 @@ metaitem.disk.12.name=数据存储器
 metaitem.disk.12.tooltip=§e网道行者-管网系统
 
 gtqtcore.multiblock.kqn.nb13=网道行者-无线传输 
-gtqtcore.multiblock.kqn.nx13=借助高能物理，我们能轻松的观察物质<->元素组分转换时的原子运动情况，Fluix的运行原理，我们是能够脱离管网限制直接实现无线传输元素组分，当然，这需要消耗大量的电力来催使Fluix对物质转换。
+gtqtcore.multiblock.kqn.nx13=借助高能物理，我们能轻松的观察物质<->元素组分转换时的原子运动情况，福鲁伊克斯 的运行原理，我们是能够脱离管网限制直接实现无线传输元素组分，当然，这需要消耗大量的电力来催使福鲁伊克斯 对物质转换。
 metaitem.disk.13.name=数据存储器
 metaitem.disk.13.tooltip=§e网道行者-无线传输
 
@@ -4482,7 +4489,7 @@ tile.multiblock_casing.tech_fusion_glass_5.name=强化中阶聚变玻璃
 tile.multiblock_casing.tech_fusion_glass_6.name=强化高阶聚变玻璃
 gregtech.material.csilicon=太阳能级多晶硅
 gregtech.material.copper_cl=氯化铜
-gregtech.material.fluix=FLUIX
+gregtech.material.fluix=福鲁伊克斯
 gregtech.material.ealuminium=硝酸铝
 
 gregtech.material.len_gold_bs=焙烧贫瘠金含杂
@@ -4837,7 +4844,7 @@ metaitem.ae.waferc.name=待蚀刻工程芯片晶圆
 metaitem.ae.a.name=逻辑芯片晶圆
 metaitem.ae.b.name=运算芯片晶圆
 metaitem.ae.c.name=工程芯片晶圆
-metaitem.ae.fluix_firm.name=FLUIX水晶束能器
+metaitem.ae.fluix_firm.name=福鲁伊克斯 水晶束能器
 metaitem.ae.fluix_firm.tooltip=特殊框架加工而成的水晶束能器，可以实现物质<->元素转换。
 metaitem.valve.tooltip=我不让你走你就走不了
 item.material.oreprefix.valve=%s阀门

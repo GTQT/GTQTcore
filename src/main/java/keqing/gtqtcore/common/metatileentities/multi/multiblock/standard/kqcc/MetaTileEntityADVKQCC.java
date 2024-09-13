@@ -95,7 +95,7 @@ public class MetaTileEntityADVKQCC extends MultiblockWithDisplayBase implements 
     private void consumeEnergy() {
         int energyToConsume = CWTT()*15*thresholdPercentage;
 
-        if (this.hasNotEnoughEnergy && energyContainer.getInputPerSec() > 19L * energyToConsume) {
+        if (this.hasNotEnoughEnergy && energyContainer.getEnergyStored() >energyToConsume) {
             this.hasNotEnoughEnergy = false;
         }
 
@@ -307,13 +307,13 @@ public class MetaTileEntityADVKQCC extends MultiblockWithDisplayBase implements 
 
     int CWTT()
     {
-        if((RAM)>=(GPU)&&(RAM)>=(CPU)) return (GPU)+(CPU)*2;
-        else return (RAM)*2;
-    };
+        if((RAM)>=(GPU)&&(RAM)>=(CPU)) return ((GPU)+(CPU))*8;
+        else return (RAM)*8;
+    }
     int HEAT()
     {
         return (GPU)*(CPU);
-    };
+    }
     int returncwt()
     {
         if(isWorkingEnabled) {
@@ -340,7 +340,7 @@ public class MetaTileEntityADVKQCC extends MultiblockWithDisplayBase implements 
     @Override
     public int getMaxCWUt(Collection<IOpticalComputationProvider> seen) {
         seen.add(this);
-        return (GPU+CPU)*thresholdPercentage*2;
+        return (GPU+CPU)*thresholdPercentage*8;
     }
 
     @Override
