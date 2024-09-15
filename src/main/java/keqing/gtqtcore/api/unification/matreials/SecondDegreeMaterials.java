@@ -643,13 +643,6 @@ public class SecondDegreeMaterials {
                 .build()
                 .setFormula("CHCCH2OH", true);
 
-        //  24075 Exotic Mutagen
-        GTQTMaterials.ExoticMutagen = new Material.Builder(getMaterialsId(), gregtechId("exotic_mutagen"))
-                .liquid(new FluidBuilder().temperature(18406).attributes(FluidAttributes.ACID))
-                .color(0x9C31F9)
-                .build()
-                .setFormula(TextFormatting.OBFUSCATED + "aaa", false);
-
         //  13168 B27
         GTQTMaterials.B27 = new Material.Builder(getMaterialsId(), gregtechId("b_27"))
                 .liquid()
@@ -745,5 +738,68 @@ public class SecondDegreeMaterials {
                 .color(0x05D8AF)
                 .components(Carbon, 10, Hydrogen, 10, Oxygen, 4)
                 .build();
+
+        //  24075 Exotic Mutagen
+        ExoticMutagen = new Material.Builder(getMaterialsId(), gregtechId("exotic_mutagen"))
+                .liquid(new FluidBuilder().temperature(18406).attributes(FluidAttributes.ACID))
+                .color(0x9C31F9)
+                .build()
+                .setFormula(TextFormatting.OBFUSCATED + "aaa", false);
+
+        //  24076 Crude Exotic Gas
+        CrudeExoticGas = new Material.Builder(getMaterialsId(), gregtechId("crude_exotic_gas"))
+                .gas(new FluidBuilder().temperature(8090))
+                .color(0xBEF32C)
+                .iconSet(DULL)
+                .build()
+                .setFormula(TextFormatting.OBFUSCATED + "aaa", false);
+
+        //  24077 Cracked Crude Exotic Gas
+        CrackedCrudeExoticGas = new Material.Builder(getMaterialsId(), gregtechId("cracked_crude_exotic_gas"))
+                .gas(new FluidBuilder().temperature(12390))
+                .color(0xEA1798)
+                .iconSet(DULL)
+                .build()
+                .setFormula(TextFormatting.OBFUSCATED + "aaa", false);
+
+        //  24078 Naquadic Exotic Gas
+        NaquadicExoticGas = new Material.Builder(getMaterialsId(), gregtechId("naquadic_exotic_gas"))
+                .gas(new FluidBuilder().temperature(40223))
+                .color(0xB01172)
+                .iconSet(DULL)
+                .build()
+                .setFormula(TextFormatting.OBFUSCATED + "aaa", false);
+
+        //  24079 Superheavy Exotic Gas
+        SuperheavyExoticGas = new Material.Builder(getMaterialsId(), gregtechId("superheavy_exotic_gas"))
+                .gas()
+                .color(0x33FF99)
+                .iconSet(DULL)
+                .build()
+                .setFormula(TextFormatting.OBFUSCATED + "aaa", false);
+
+        //  24080 Heavy Exotic Gas
+        HeavyExoticGas = new Material.Builder(getMaterialsId(), gregtechId("heavy_exotic_gas"))
+                .gas()
+                .color(0x57FFBC)
+                .iconSet(DULL)
+                .build()
+                .setFormula(TextFormatting.OBFUSCATED + "aaa", false);
+
+        //  24081 Medium Exotic Gas
+        MediumExoticGas = new Material.Builder(getMaterialsId(), gregtechId("medium_exotic_gas"))
+                .gas()
+                .color(0x1FFFA6)
+                .iconSet(DULL)
+                .build()
+                .setFormula(TextFormatting.OBFUSCATED + "aaa", false);
+
+        //  24082 Light Exotic Gas
+        LightExoticGas = new Material.Builder(getMaterialsId(), gregtechId("light_exotic_gas"))
+                .gas()
+                .color(0x62FFC1)
+                .iconSet(DULL)
+                .build()
+                .setFormula(TextFormatting.OBFUSCATED + "aaa", false);
     }
 }

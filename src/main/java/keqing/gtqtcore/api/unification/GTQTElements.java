@@ -34,6 +34,7 @@ public class GTQTElements {
     public static final Element Vb = Elements.add(152, 226, -1, null, "Vibranium", "Vb", false);
     public static final Element Ad = Elements.add(222, 580, -1, null, "Adamantium", "Ad", false);
     public static final Element Tn = Elements.add(321, 478, -1, null, "Taranium", "Tn", false);
+    public static final Element Tu = Elements.add(349, 175, -1, null, "Tiberium", "Tu", false);
 
     public static final Element Plutonium244 = Elements.add(94, 152, -1, null, "Plutonium-244", "Pu-244", true);
     public static final Element Californium252 = Elements.add(98, 154, -1, null, "Californium-252", "Cf-252", true);
@@ -57,7 +58,7 @@ public class GTQTElements {
     public static final Element VoidMetal = Elements.add(165, 281, -1, null, "VoidMetal", "⚶", false);
     public static final Element Mithril = Elements.add(405, 564, -1, null, "Mithril", "Mh", false);
     public static final Element Magic = Elements.add(999, 999, -1, null, "Magic", "Kq", false);
-    public static final Element So     = Elements.add(159,    278,  -1,null,  "Solarium", "So",false);
-    public static final Element En      = Elements.add(100000, 100000, -1,null,"Eternity","En⦼",false);
-    public static final Element St   = Elements.add(10000,  10000,  -1,null,"Spacetime","-*St*-",false);
+    public static final Element So = Elements.add(159, 278, -1, null, "Solarium", "So", false);
+    public static final Element En = Elements.add(100000, 100000, -1, null, "Eternity", "En⦼", false);
+    public static final Element St = Elements.add(10000, 10000, -1, null, "Spacetime", "-*St*-", false);
 }

@@ -54,39 +54,43 @@ public class MetaTileEntityWaterPowerStation extends MultiblockWithDisplayBase {
     private int coilLevel;
     private int number;
     private long outputEu;
-    private int water=0;
+    private int water = 0;
     private boolean isWorkingEnabled;
     int tier;
     private final MetaTileEntityWaterPowerStationLogic logic;
     private IEnergyContainer energyContainer;
     protected IMultipleTankHandler inputFluidInventory;
-    public MetaTileEntityWaterPowerStation(ResourceLocation metaTileEntityId,int tier) {
+
+    public MetaTileEntityWaterPowerStation(ResourceLocation metaTileEntityId, int tier) {
         super(metaTileEntityId);
         this.logic = new MetaTileEntityWaterPowerStationLogic(this);
         this.tier = tier;
     }
+
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
         this.energyContainer = new EnergyContainerList(getAbilities(MultiblockAbility.OUTPUT_ENERGY));
         this.inputFluidInventory = new FluidTankList(true, this.getAbilities(MultiblockAbility.IMPORT_FLUIDS));
         List<IEnergyContainer> i = getAbilities(MultiblockAbility.OUTPUT_ENERGY);
-        this.number=i.size()+4;
+        this.number = i.size() + 4;
         Object coilLevel = context.get("CoilType");
         this.coilLevel = GTQTUtil.getOrDefault(() -> coilLevel instanceof IHeatingCoilBlockStats,
-                () ->  ((IHeatingCoilBlockStats) coilLevel).getLevel(),
+                () -> ((IHeatingCoilBlockStats) coilLevel).getLevel(),
                 BlockWireCoil.CoilType.CUPRONICKEL.getLevel());
         this.water = logic.checkWater();
     }
+
     public IMultipleTankHandler getInputFluidInventory() {
         return this.inputFluidInventory;
     }
+
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
         textList.add(new TextComponentTranslation("======================="));
-        textList.add(new TextComponentTranslation("gtqtcore.wps.count", number,coilLevel));
-        textList.add(new TextComponentTranslation("gtqtcore.wps.checkwater", water,(number*2+1)*(number*2+1)*4));
+        textList.add(new TextComponentTranslation("gtqtcore.wps.count", number, coilLevel));
+        textList.add(new TextComponentTranslation("gtqtcore.wps.checkwater", water, (number * 2 + 1) * (number * 2 + 1) * 4));
         textList.add(new TextComponentTranslation("gtqtcore.wps.output1", outputEu));
         textList.add(new TextComponentTranslation("gtqtcore.wps.output2", geteu()));
         if (getInputFluidInventory() != null) {
@@ -96,36 +100,38 @@ public class MetaTileEntityWaterPowerStation extends MultiblockWithDisplayBase {
         }
         textList.add(new TextComponentTranslation("======================="));
     }
+
     @Override
     protected void addWarningText(List<ITextComponent> textList) {
         super.addWarningText(textList);
         if (getInputFluidInventory() != null) {
             FluidStack LubricantStack = getInputFluidInventory().drain(Lubricant.getFluid(Integer.MAX_VALUE), false);
             int liquidOxygenAmount = LubricantStack == null ? 0 : LubricantStack.amount;
-            if(liquidOxygenAmount==0)
-            textList.add(new TextComponentTranslation("缺少润滑！！"));
+            if (liquidOxygenAmount == 0)
+                textList.add(new TextComponentTranslation("缺少润滑！！"));
         }
     }
+
     @Override
     protected void updateFormedValid() {
         this.logic.update();
         generator();
-        long pow= (long) water *coilLevel*tier;
-        this.outputEu = pow/16;
+        long pow = (long) water * coilLevel * tier;
+        this.outputEu = pow / 16;
     }
 
-    private long geteu()
-    {
+    private long geteu() {
         Random rand = new Random();
         int randomNum = rand.nextInt(40);
-        return outputEu*(randomNum+80)/160;
+        return outputEu * (randomNum + 80) / 160;
     }
+
     private final FluidStack LUBRICANT_STACK = Lubricant.getFluid(1);
+
     private void generator() {
         IMultipleTankHandler inputTank = this.getInputFluidInventory();
-        isWorkingEnabled=this.energyContainer.getEnergyStored()<this.energyContainer.getEnergyCapacity()&&water > 0;
-        if(isWorkingEnabled&&LUBRICANT_STACK.isFluidStackIdentical(inputTank.drain(LUBRICANT_STACK, false)))
-        {
+        isWorkingEnabled = this.energyContainer.getEnergyStored() < this.energyContainer.getEnergyCapacity() && water > 0;
+        if (isWorkingEnabled && LUBRICANT_STACK.isFluidStackIdentical(inputTank.drain(LUBRICANT_STACK, false))) {
             inputTank.drain(LUBRICANT_STACK, true);
             this.energyContainer.addEnergy(geteu());
         }
@@ -133,7 +139,7 @@ public class MetaTileEntityWaterPowerStation extends MultiblockWithDisplayBase {
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {
-        return new MetaTileEntityWaterPowerStation(metaTileEntityId,tier);
+        return new MetaTileEntityWaterPowerStation(metaTileEntityId, tier);
     }
 
     @Override
@@ -145,13 +151,13 @@ public class MetaTileEntityWaterPowerStation extends MultiblockWithDisplayBase {
                 .aisle("FFF", "FCF", "EYE", " E ").setRepeatable(1, 36)
                 .aisle("YYY", "YYY", "YYY", " Y ")
                 .where('S', selfPredicate())
-                .where('Y',states(getCasingAState())
+                .where('Y', states(getCasingAState())
                         .or(abilities(MultiblockAbility.MAINTENANCE_HATCH).setExactLimit(1).setPreviewCount(1))
                 )
-                .where('E',states(getCasingAState())
+                .where('E', states(getCasingAState())
                         .or(abilities(MultiblockAbility.OUTPUT_ENERGY).setMinLayerLimited(1).setMaxLayerLimited(1))
                 )
-                .where('I',abilities(MultiblockAbility.IMPORT_FLUIDS)
+                .where('I', abilities(MultiblockAbility.IMPORT_FLUIDS)
                 )
                 .where('C', heatingCoils())
                 .where('F', states(getFrameState()))
@@ -162,17 +168,20 @@ public class MetaTileEntityWaterPowerStation extends MultiblockWithDisplayBase {
     public boolean hasMufflerMechanics() {
         return false;
     }
+
     @Override
     protected boolean shouldShowVoidingModeButton() {
         return false;
     }
+
     @SideOnly(Side.CLIENT)
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
-        if(tier==1)return Textures.FROST_PROOF_CASING;
-        if(tier==2)return Textures.STABLE_TITANIUM_CASING;
+        if (tier == 1) return Textures.FROST_PROOF_CASING;
+        if (tier == 2) return Textures.STABLE_TITANIUM_CASING;
         return GTQTTextures.PD_CASING;
     }
+
     @SideOnly(Side.CLIENT)
     @Override
     public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
@@ -180,11 +189,13 @@ public class MetaTileEntityWaterPowerStation extends MultiblockWithDisplayBase {
         this.getFrontOverlay().renderOrientedState(renderState, translation, pipeline, getFrontFacing(), true,
                 isStructureFormed());
     }
+
     @SideOnly(Side.CLIENT)
     @Override
     protected ICubeRenderer getFrontOverlay() {
         return GTQTTextures.LARGE_ROCKET_ENGINE_OVERLAY;
     }
+
     public void addInformation(ItemStack stack, @Nullable World player, @Nonnull List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(I18n.format("gtqtcore.multiblock.wps.tooltip.1"));
@@ -197,24 +208,28 @@ public class MetaTileEntityWaterPowerStation extends MultiblockWithDisplayBase {
     private boolean isWorkingEnabled() {
         return isWorkingEnabled;
     }
+
     private IBlockState getCasingAState() {
-        if(tier==1)return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.ALUMINIUM_FROSTPROOF);
-        if(tier==2)return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.TITANIUM_STABLE);
+        if (tier == 1) return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.ALUMINIUM_FROSTPROOF);
+        if (tier == 2) return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.TITANIUM_STABLE);
         return GTQTMetaBlocks.TURBINE_CASING.getState(PD_TURBINE_CASING);
     }
+
     private IBlockState getFrameState() {
-        if(tier==1)return MetaBlocks.FRAMES.get(Materials.Aluminium).getBlock(Materials.Aluminium);
-        if(tier==2)return MetaBlocks.FRAMES.get(Materials.Titanium).getBlock(Materials.Titanium);
+        if (tier == 1) return MetaBlocks.FRAMES.get(Materials.Aluminium).getBlock(Materials.Aluminium);
+        if (tier == 2) return MetaBlocks.FRAMES.get(Materials.Titanium).getBlock(Materials.Titanium);
         return MetaBlocks.FRAMES.get(Materials.RhodiumPlatedPalladium).getBlock(Materials.RhodiumPlatedPalladium);
     }
+
     protected class MetaTileEntityWaterPowerStationLogic {
         private final MetaTileEntityWaterPowerStation metaTileEntity;
+
         public MetaTileEntityWaterPowerStationLogic(MetaTileEntityWaterPowerStation metaTileEntity) {
             this.metaTileEntity = metaTileEntity;
         }
-        public int checkWater()
-        {
-            int waterpos=0;
+
+        public int checkWater() {
+            int waterpos = 0;
             int mOffsetX_Lower;
             int mOffsetX_Upper;
             int mOffsetZ_Lower;
@@ -231,8 +246,9 @@ public class MetaTileEntityWaterPowerStation extends MultiblockWithDisplayBase {
             for (int i = mOffsetX_Lower + 1; i <= mOffsetX_Upper - 1; ++i) {
                 for (int j = mOffsetZ_Lower + 1; j <= mOffsetZ_Upper - 1; ++j) {
                     for (int h = -4; h < 0; h++) {
-                        BlockPos waterCheckPos =this.metaTileEntity.getPos().add(xDir + i, h, zDir + j);
-                        if(this.metaTileEntity.getWorld().getBlockState(waterCheckPos)== Blocks.WATER.getDefaultState())waterpos++;
+                        BlockPos waterCheckPos = this.metaTileEntity.getPos().add(xDir + i, h, zDir + j);
+                        if (this.metaTileEntity.getWorld().getBlockState(waterCheckPos) == Blocks.WATER.getDefaultState())
+                            waterpos++;
                     }
                 }
             }

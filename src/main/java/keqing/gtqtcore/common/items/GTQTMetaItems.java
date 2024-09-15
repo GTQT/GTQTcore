@@ -538,6 +538,18 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem SPINTRONIC_TRANSISTOR;
     public static MetaItem<?>.MetaValueItem SPINTRONIC_INDUCTOR;
 
+    public static MetaItem<?>.MetaValueItem BARNARDA_C_CHLORELLA;
+    public static MetaItem<?>.MetaValueItem BARNARDA_C_BRYOPSIS_HYPNOIDES;
+    public static MetaItem<?>.MetaValueItem BARNARDA_C_ZOOXANTHELLAE;
+
+    public static MetaItem<?>.MetaValueItem TAU_CETI_F_SCENEDESMUS_OBLIQUUS;
+    public static MetaItem<?>.MetaValueItem TAU_CETI_F_PHAEOPHYTA;
+    public static MetaItem<?>.MetaValueItem TAU_CETI_F_SPIRULINA;
+
+    public static MetaItem<?>.MetaValueItem PROXIMA_B_CONCHOSPORE;
+    public static MetaItem<?>.MetaValueItem PROXIMA_B_POLYSIPHONIA_SENTICULOSA;
+    public static MetaItem<?>.MetaValueItem PROXIMA_B_SPIROGYRA;
+
     public static MetaItem<?>.MetaValueItem DISK_0;
     public static MetaItem<?>.MetaValueItem DISK_1;
     public static MetaItem<?>.MetaValueItem DISK_2;

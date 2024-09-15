@@ -28,7 +28,7 @@ public class GCYSMaterials {
     public static Material Vibranium;
     public static Material Adamantium;
     public static Material Taranium;
-
+    public static Material Tiberium;
     // First Degree Materials
     public static Material LanthanumOxide;
     public static Material PraseodymiumOxide;

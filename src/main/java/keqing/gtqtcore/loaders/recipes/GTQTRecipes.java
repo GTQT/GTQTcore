@@ -49,15 +49,15 @@ import static keqing.gtqtcore.common.items.metaitems.GTQTMetaToolItems.*;
 
 public class GTQTRecipes {
 
-    public static void register(){
+    public static void register() {
     }
 
-    public static void registerTool(){
+    public static void registerTool() {
         OrePrefix.gem.addProcessingHandler(PropertyKey.GEM, BouleRecipeHandler::processCrystallizer);
         plate.addProcessingHandler(PropertyKey.TOOL, GTQTRecipes::gcmTool);
-        milled.addProcessingHandler(PropertyKey.ORE,GTQTRecipes::processMilled);
-        fcrop.addProcessingHandler(PropertyKey.INGOT,GTQTRecipes::processCrops);
-        leaf.addProcessingHandler(PropertyKey.INGOT,GTQTRecipes::processLeaf);
+        milled.addProcessingHandler(PropertyKey.ORE, GTQTRecipes::processMilled);
+        fcrop.addProcessingHandler(PropertyKey.INGOT, GTQTRecipes::processCrops);
+        leaf.addProcessingHandler(PropertyKey.INGOT, GTQTRecipes::processLeaf);
         plate_curved.addProcessingHandler(PropertyKey.INGOT, GTQTRecipes::processPlateCurved);
         plate_big.addProcessingHandler(PropertyKey.INGOT, GTQTRecipes::processPlateBig);
         round_cover.addProcessingHandler(PropertyKey.INGOT, GTQTRecipes::processRoundCover);
@@ -139,7 +139,7 @@ public class GTQTRecipes {
                 .input(plate_big, material, 1)
                 .fluidInputs(Water.getFluid(1000))
                 .outputs(OreDictUnifier.get(orePrefix, material, 4))
-                .output(dust,material,1)
+                .output(dust, material, 1)
                 .duration(100)
                 .circuitMeta(1)
                 .EUt(GTValues.VA[HV])
@@ -151,7 +151,7 @@ public class GTQTRecipes {
                 .input(plate_big, material, 1)
                 .fluidInputs(Water.getFluid(1000))
                 .outputs(OreDictUnifier.get(orePrefix, material, 1))
-                .output(dust,material,1)
+                .output(dust, material, 1)
                 .duration(100)
                 .circuitMeta(2)
                 .EUt(GTValues.VA[HV])
@@ -164,7 +164,7 @@ public class GTQTRecipes {
                 RecipeMaps.VACUUM_RECIPES.recipeBuilder()
                         .notConsumable(GTQTMetaItems.MOLD_GAS)
                         .fluidInputs(material.getFluid(L * 10))
-                        .output(cylinder,material)
+                        .output(cylinder, material)
                         .duration(400)
                         .EUt(GTValues.VA[MV])
                         .buildAndRegister();
@@ -172,7 +172,7 @@ public class GTQTRecipes {
                 RecipeMaps.VACUUM_RECIPES.recipeBuilder()
                         .notConsumable(GTQTMetaItems.MOLD_MOTOR)
                         .fluidInputs(material.getFluid(L * 10))
-                        .output(motor_stick,material)
+                        .output(motor_stick, material)
                         .duration(400)
                         .EUt(GTValues.VA[MV])
                         .buildAndRegister();
@@ -253,7 +253,7 @@ public class GTQTRecipes {
 
                 ModHandler.addShapedRecipe(String.format("acylinder_%s", material),
                         OreDictUnifier.get(cylinder, material),
-                        "hCT", "SAS","LCB",
+                        "hCT", "SAS", "LCB",
                         'T', new UnificationEntry(gearSmall, material),
                         'L', new UnificationEntry(stick, material),
                         'S', new UnificationEntry(plate_curved, material),
@@ -262,7 +262,7 @@ public class GTQTRecipes {
                         'B', SOLDERING_IRON_LV);
                 ModHandler.addShapedRecipe(String.format("bcylinder_%s", material),
                         OreDictUnifier.get(cylinder, material),
-                        "hCT", "SAS","LCB",
+                        "hCT", "SAS", "LCB",
                         'T', new UnificationEntry(gearSmall, material),
                         'L', new UnificationEntry(stick, material),
                         'S', new UnificationEntry(plate_curved, material),
@@ -271,7 +271,7 @@ public class GTQTRecipes {
                         'B', SOLDERING_IRON_HV);
                 ModHandler.addShapedRecipe(String.format("ccylinder_%s", material),
                         OreDictUnifier.get(cylinder, material),
-                        "hCT", "SAS","LCB",
+                        "hCT", "SAS", "LCB",
                         'T', new UnificationEntry(gearSmall, material),
                         'L', new UnificationEntry(stick, material),
                         'S', new UnificationEntry(plate_curved, material),
@@ -316,21 +316,21 @@ public class GTQTRecipes {
 
                 ModHandler.addShapedRecipe(String.format("amotor_stick_%s", material),
                         OreDictUnifier.get(motor_stick, material),
-                        "ACh", "SSS","AfB",
+                        "ACh", "SSS", "AfB",
                         'S', new UnificationEntry(stickLong, material),
                         'A', new UnificationEntry(gear, material),
                         'C', new UnificationEntry(springSmall, material),
                         'B', SOLDERING_IRON_LV);
                 ModHandler.addShapedRecipe(String.format("bmotor_stick_%s", material),
                         OreDictUnifier.get(motor_stick, material),
-                        "ACh", "SSS","AfB",
+                        "ACh", "SSS", "AfB",
                         'S', new UnificationEntry(stickLong, material),
                         'A', new UnificationEntry(gear, material),
                         'C', new UnificationEntry(springSmall, material),
                         'B', SOLDERING_IRON_HV);
                 ModHandler.addShapedRecipe(String.format("cmotor_stick_%s", material),
                         OreDictUnifier.get(motor_stick, material),
-                        "ACh", "SSS","AfB",
+                        "ACh", "SSS", "AfB",
                         'S', new UnificationEntry(stickLong, material),
                         'A', new UnificationEntry(gear, material),
                         'C', new UnificationEntry(springSmall, material),
@@ -371,7 +371,7 @@ public class GTQTRecipes {
 
                 ModHandler.addShapedRecipe(String.format("avalve_%s", material),
                         OreDictUnifier.get(valve, material),
-                        "SAL", "fCh","STB",
+                        "SAL", "fCh", "STB",
                         'S', new UnificationEntry(shell, material),
                         'T', new UnificationEntry(cylinder, material),
                         'A', new UnificationEntry(gearSmall, material),
@@ -380,7 +380,7 @@ public class GTQTRecipes {
                         'B', SOLDERING_IRON_LV);
                 ModHandler.addShapedRecipe(String.format("bvalve_%s", material),
                         OreDictUnifier.get(valve, material),
-                        "SAL", "fCh","STB",
+                        "SAL", "fCh", "STB",
                         'S', new UnificationEntry(shell, material),
                         'T', new UnificationEntry(cylinder, material),
                         'A', new UnificationEntry(gearSmall, material),
@@ -389,7 +389,7 @@ public class GTQTRecipes {
                         'B', SOLDERING_IRON_HV);
                 ModHandler.addShapedRecipe(String.format("cvalve_%s", material),
                         OreDictUnifier.get(valve, material),
-                        "SAL", "fCh","STB",
+                        "SAL", "fCh", "STB",
                         'S', new UnificationEntry(shell, material),
                         'T', new UnificationEntry(cylinder, material),
                         'A', new UnificationEntry(gearSmall, material),
@@ -446,13 +446,13 @@ public class GTQTRecipes {
     }
 
     public static void processSolderingIron(OrePrefix SolderingPrefix, Material material, IngotProperty property) {
-                RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
-                        .EUt(32).duration(40)
-                        .input(OrePrefix.plate, material, 2)
-                        .input(OrePrefix.stick, material, 2)
-                        .output(SolderingPrefix, material)
-                        .circuitMeta(20)
-                        .buildAndRegister();
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
+                .EUt(32).duration(40)
+                .input(OrePrefix.plate, material, 2)
+                .input(OrePrefix.stick, material, 2)
+                .output(SolderingPrefix, material)
+                .circuitMeta(20)
+                .buildAndRegister();
 
         ToolHeadReplaceRecipe.setToolHeadForTool(soldering_iron_head, SOLDERING_IRON_LV);
         ToolHeadReplaceRecipe.setToolHeadForTool(soldering_iron_head, SOLDERING_IRON_HV);
@@ -465,7 +465,7 @@ public class GTQTRecipes {
                 ModHandler.addShapedRecipe(String.format("plate_curved_%s", material),
                         OreDictUnifier.get(GTQTOrePrefix.plate_curved, material),
                         "h", "P", "B",
-                        'P', new UnificationEntry(OrePrefix.plate,material),
+                        'P', new UnificationEntry(OrePrefix.plate, material),
                         'B', BENDING_CYLINDER);
                 RecipeMaps.BENDER_RECIPES.recipeBuilder().EUt(32).duration(40)
                         .input(OrePrefix.plate, material, 1)
@@ -492,6 +492,7 @@ public class GTQTRecipes {
             }
         }
     }
+
     public static void processSpringSmall(OrePrefix springSmallPrefix, Material material, IngotProperty property) {
         if (material.hasFlag(MaterialFlags.GENERATE_ROD)) {
             if (!material.hasFlag(MaterialFlags.NO_SMASHING)) {
@@ -503,17 +504,19 @@ public class GTQTRecipes {
             }
         }
     }
+
     public static void processFoil(OrePrefix foilPrefix, Material material, IngotProperty property) {
         if (material.hasFlag(GENERATE_PLATE)) {
             if (!material.hasFlag(MaterialFlags.NO_SMASHING)) {
                 ModHandler.addShapedRecipe(String.format("bending_foil_%s", material),
                         OreDictUnifier.get(OrePrefix.foil, material, 2),
                         "hPB",
-                        'P', new UnificationEntry(OrePrefix.plate,material),
+                        'P', new UnificationEntry(OrePrefix.plate, material),
                         'B', SMALL_BENDING_CYLINDER);
             }
         }
     }
+
     public static void processRotorA(OrePrefix rotorPrefix, Material material, IngotProperty property) {
         if (material.hasFlag(GENERATE_PLATE)) {
             if (!material.hasFlag(MaterialFlags.NO_SMASHING)) {
@@ -552,7 +555,7 @@ public class GTQTRecipes {
 
     public static void addToolRecipe(@Nonnull Material material, @Nonnull IGTTool tool, boolean mirrored, Object... recipe) {
         if (mirrored) {
-            ModHandler.addMirroredShapedRecipe(String.format("%s_%s",tool.getToolId(), material),
+            ModHandler.addMirroredShapedRecipe(String.format("%s_%s", tool.getToolId(), material),
                     tool.get(material), recipe);
         } else {
             ModHandler.addShapedRecipe(String.format("%s_%s", tool.getToolId(), material),
@@ -596,30 +599,32 @@ public class GTQTRecipes {
     }
 
     public static void processIngot(OrePrefix ingotPrefix, Material material, IngotProperty property) {
-        OrePrefix[] wireSizes = { wireGtDouble, wireGtQuadruple, wireGtOctal, wireGtHex };
+        OrePrefix[] wireSizes = {wireGtDouble, wireGtQuadruple, wireGtOctal, wireGtHex};
         if (material.hasFluid()) {
             RecipeMaps.VACUUM_RECIPES.recipeBuilder()
                     .notConsumable(MetaItems.SHAPE_MOLD_INGOT)
                     .fluidInputs(material.getFluid(L))
                     .outputs(OreDictUnifier.get(ingotPrefix, material))
-                    .duration(20).EUt(VA[MV]*4)
+                    .duration(20).EUt(VA[MV] * 4)
                     .buildAndRegister();
 
         }
 
     }
+
     public static void processNugget(OrePrefix orePrefix, Material material, DustProperty property) {
         if (material.hasFluid()) {
             RecipeMaps.VACUUM_RECIPES.recipeBuilder()
                     .notConsumable(MetaItems.SHAPE_MOLD_NUGGET)
                     .fluidInputs(material.getFluid(L))
                     .outputs(OreDictUnifier.get(orePrefix, material, 9))
-                    .duration((int) material.getMass()*4)
+                    .duration((int) material.getMass() * 4)
                     .EUt(VA[MV])
                     .buildAndRegister();
         }
 
     }
+
     public static void processBlock(OrePrefix blockPrefix, Material material, DustProperty property) {
         ItemStack blockStack = OreDictUnifier.get(blockPrefix, material);
         long materialAmount = blockPrefix.getMaterialAmount(material);
@@ -628,12 +633,13 @@ public class GTQTRecipes {
                     .notConsumable(MetaItems.SHAPE_MOLD_BLOCK)
                     .fluidInputs(material.getFluid((int) (materialAmount * L / M)))
                     .outputs(blockStack)
-                    .duration((int) material.getMass()*4).EUt(VA[MV])
+                    .duration((int) material.getMass() * 4).EUt(VA[MV])
                     .buildAndRegister();
         }
 
     }
-        public static void processGear(OrePrefix gearPrefix, Material material, DustProperty property) {
+
+    public static void processGear(OrePrefix gearPrefix, Material material, DustProperty property) {
         ItemStack stack = OreDictUnifier.get(gearPrefix, material);
         boolean isSmall = gearPrefix == OrePrefix.gearSmall;
         if (material.hasFluid()) {
@@ -648,6 +654,7 @@ public class GTQTRecipes {
         }
 
     }
+
     public static void processPlate(OrePrefix platePrefix, Material material, DustProperty property) {
         if (material.hasFlag(GENERATE_CURVED_PLATE)) {
             CW_LASER_ENGRAVER_RECIPES.recipeBuilder()
@@ -683,15 +690,15 @@ public class GTQTRecipes {
         }
 
     }
-    public static void processCrops(OrePrefix fcropPrefix, Material material, IngotProperty property)
-    {
+
+    public static void processCrops(OrePrefix fcropPrefix, Material material, IngotProperty property) {
         GTFORecipeMaps.GREENHOUSE_RECIPES.recipeBuilder()
                 .EUt(GTValues.VA[ZPM])
                 .duration(4500)
-                .input(MetaItems.FERTILIZER,12)
+                .input(MetaItems.FERTILIZER, 12)
                 .fluidInputs(RawGrowthMedium.getFluid(12000))
                 .notConsumable(fcropPrefix, material, 1)
-                .chancedOutput(fcropPrefix, material, 100,100)
+                .chancedOutput(fcropPrefix, material, 100, 100)
                 .circuitMeta(1)
                 .buildAndRegister();
 
@@ -699,28 +706,29 @@ public class GTQTRecipes {
                 .EUt(GTValues.VA[ZPM])
                 .duration(1500)
                 .fluidInputs(RawGrowthMedium.getFluid(4000))
-                .input(MetaItems.FERTILIZER,4)
+                .input(MetaItems.FERTILIZER, 4)
                 .notConsumable(fcropPrefix, material, 1)
-                .chancedOutput(GTQTOrePrefix.leaf, material, 2000,1000)
-                .chancedOutput(GTQTOrePrefix.leaf, material, 2000,1000)
-                .chancedOutput(GTQTOrePrefix.leaf, material, 2000,1000)
-                .chancedOutput(GTQTOrePrefix.leaf, material, 2000,1000)
+                .chancedOutput(GTQTOrePrefix.leaf, material, 2000, 1000)
+                .chancedOutput(GTQTOrePrefix.leaf, material, 2000, 1000)
+                .chancedOutput(GTQTOrePrefix.leaf, material, 2000, 1000)
+                .chancedOutput(GTQTOrePrefix.leaf, material, 2000, 1000)
                 .circuitMeta(2)
                 .buildAndRegister();
 
     }
-    public static void processLeaf(OrePrefix leafPrefix, Material material, IngotProperty property)
-    {
+
+    public static void processLeaf(OrePrefix leafPrefix, Material material, IngotProperty property) {
         MACERATOR_RECIPES.recipeBuilder()
                 .EUt(GTValues.VA[ZPM])
                 .duration(1500)
                 .input(leafPrefix, material, 1)
-                .chancedOutput(OrePrefix.dust, material, 500,125)
-                .chancedOutput(OrePrefix.dust, material, 500,125)
-                .chancedOutput(OrePrefix.dust, material, 500,125)
-                .chancedOutput(OrePrefix.dust, material, 500,125)
+                .chancedOutput(OrePrefix.dust, material, 500, 125)
+                .chancedOutput(OrePrefix.dust, material, 500, 125)
+                .chancedOutput(OrePrefix.dust, material, 500, 125)
+                .chancedOutput(OrePrefix.dust, material, 500, 125)
                 .buildAndRegister();
     }
+
     public static void processMilled(OrePrefix milledPrefix, Material material, OreProperty property) {
         GTQTcoreRecipeMaps.ISA_MILL_GRINDER.recipeBuilder()
                 .EUt(GTValues.VA[EV])
@@ -782,8 +790,7 @@ public class GTQTRecipes {
         if (material.hasFlag(MaterialFlags.GENERATE_LONG_ROD)) {
             UnificationEntry rod = new UnificationEntry(stickLong, material);
             if (material.hasFlag(GENERATE_PLATE)) {
-                if (material.hasFlag(MaterialFlags.GENERATE_BOLT_SCREW))
-                {
+                if (material.hasFlag(MaterialFlags.GENERATE_BOLT_SCREW)) {
                     addToolRecipe(material, GTQTMetaToolItems.Choocher, false, "IdP", "IPP", "ST ", 'I', ingot, 'P', plate, 'T', new UnificationEntry(OrePrefix.screw, material), 'S', rod);
                     addToolRecipe(material, GTQTMetaToolItems.Jinitaimei, false, "SdS", "IPI", " T ", 'I', ingot, 'P', plate, 'T', new UnificationEntry(OrePrefix.screw, material), 'S', rod);
                 }
@@ -956,7 +963,6 @@ public class GTQTRecipes {
             }
         }
     }
-
 
 
 }

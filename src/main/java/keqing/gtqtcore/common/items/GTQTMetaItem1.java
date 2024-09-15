@@ -56,12 +56,13 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         ZHU_TAN = this.addItem(24,"fuel.zhutan").setBurnValue(12800).setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO);
 
         //快乐海藻
-        COMMON_ALGAE = this.addItem(30,"algae.common").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO);
-        GREEN_ALGAE = this.addItem(31,"algae.green").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO);
-        RED_ALGAE = this.addItem(32,"algae.red").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO);
-        BROWN_ALGAE = this.addItem(33,"algae.brown").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO);
-        GOLD_ALGAE = this.addItem(34,"algae.gold").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        COMMON_ALGAE = this.addItem(30,"algae.common").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO).addOreDict("algaeOrdinary");
+        GREEN_ALGAE = this.addItem(31,"algae.green").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO).addOreDict("algaeGreen");
+        RED_ALGAE = this.addItem(32,"algae.red").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO).addOreDict("algaeRed");
+        BROWN_ALGAE = this.addItem(33,"algae.brown").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO).addOreDict("algaeBrown");
+        GOLD_ALGAE = this.addItem(34,"algae.gold").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO).addOreDict("algaeGold");
         T_ALGAE = this.addItem(35,"algae.t").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO);
+
         BIOLOGY_INTEGRATED_CIRCUIT = this.addItem(40, "item.biology_integrated_circuit").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO).addComponents(new IntBcircuitBehavior());
         ROUGH_BIOLOGY_RESIN=this.addItem(41, "item.biology_resin").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO);
         PURIFIED_ALUMINIUM_MIXTURE=this.addItem(42, "item.aluminium_mixture").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO);
@@ -706,6 +707,35 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         DNA_DECODE_ENCODER = this.addItem(1008, "biological.components.dna_decode_encoder").setCreativeTabs(CommonProxy.GTQTCore_BIO);
         DRAGON_CELL = this.addItem(1009, "dragon_cell").setCreativeTabs(CommonProxy.GTQTCore_BIO);
         PRE_DRAGON_CELL = this.addItem(1010, "pre_dragon_cell").setCreativeTabs(CommonProxy.GTQTCore_BIO);
+
+        //  ID 711-715 Alien Algae
+        BARNARDA_C_CHLORELLA = this.addItem(1050, "algae.barnarda_c.chlorella")
+                .addOreDict("dyePurple").setCreativeTabs(CommonProxy.GTQTCore_BIO);;
+
+        BARNARDA_C_BRYOPSIS_HYPNOIDES = this.addItem(1051, "algae.barnarda_c.bryopsis_hypnoides")
+                .addOreDict("dyeGreen").setCreativeTabs(CommonProxy.GTQTCore_BIO);
+
+        BARNARDA_C_ZOOXANTHELLAE = this.addItem(1052, "algae.barnarda_c.zooxanthellae")
+                .addOreDict("dyeOrange").setCreativeTabs(CommonProxy.GTQTCore_BIO);
+
+        TAU_CETI_F_SCENEDESMUS_OBLIQUUS = this.addItem(1053, "algae.tau_ceti_f.scenedesmus_obliquus")
+                .addOreDict("dyeLime").setCreativeTabs(CommonProxy.GTQTCore_BIO);
+
+        TAU_CETI_F_PHAEOPHYTA = this.addItem(1054, "algae.tau_ceti_f.phaeophyta")
+                .addOreDict("dyeBrown").setCreativeTabs(CommonProxy.GTQTCore_BIO);
+
+        TAU_CETI_F_SPIRULINA = this.addItem(1055, "algae.tau_ceti_f.spirulina")
+                .addOreDict("dyeBlue").setCreativeTabs(CommonProxy.GTQTCore_BIO);
+
+        PROXIMA_B_CONCHOSPORE = this.addItem(1056, "algae.proxima_b.conchospore")
+                .addOreDict("dyeRed").setCreativeTabs(CommonProxy.GTQTCore_BIO);
+
+        PROXIMA_B_POLYSIPHONIA_SENTICULOSA = this.addItem(1057, "algae.proxima_b.polysiphonia_senticulosa")
+                .addOreDict("dyeYellow").setCreativeTabs(CommonProxy.GTQTCore_BIO);
+
+        PROXIMA_B_SPIROGYRA = this.addItem(1058, "algae.proxima_b.spirogyra")
+                .addOreDict("dyeGray").setCreativeTabs(CommonProxy.GTQTCore_BIO);
+
 
         //生物基因模板
         BIO_0= this.addItem(1500, "bio.0").setCreativeTabs(CommonProxy.GTQTCore_DISK);

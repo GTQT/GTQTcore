@@ -791,6 +791,13 @@ public class GTQTMaterials {
     public static Material Ethanolamine;
     public static Material PropargylAlcohol;
     public static Material ExoticMutagen;
+    public static Material CrudeExoticGas;
+    public static Material CrackedCrudeExoticGas;
+    public static Material NaquadicExoticGas;
+    public static Material SuperheavyExoticGas;
+    public static Material HeavyExoticGas;
+    public static Material MediumExoticGas;
+    public static Material LightExoticGas;
     public static Material CeLAG;
     public static Material LithiumCyclopentadienide;
     public static Material CaliforniumCyclopentadienide;

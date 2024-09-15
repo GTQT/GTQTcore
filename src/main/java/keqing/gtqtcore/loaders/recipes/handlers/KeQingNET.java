@@ -1,4 +1,5 @@
 package keqing.gtqtcore.loaders.recipes.handlers;
+
 import static gregtech.common.metatileentities.MetaTileEntities.*;
 
 import gregicality.multiblocks.api.unification.GCYMMaterials;
@@ -15,6 +16,7 @@ import gregtech.api.unification.material.MarkerMaterials;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.ore.OrePrefix;
+import gregtech.api.unification.stack.UnificationEntry;
 import gregtech.common.blocks.BlockCleanroomCasing;
 import gregtech.common.blocks.BlockComputerCasing;
 import gregtech.common.blocks.BlockFusionCasing;
@@ -87,75 +89,231 @@ public class KeQingNET {
 
         //辅助计算项目 科研计算机等级 序号
         //1 涡轮效率升级I 大型涡轮
-        KQ_NET(0,1,1,DISK_1,MetaTileEntities.COMBUSTION_GENERATOR[2].getStackForm());
-        KQ_NET(0,1,1,DISK_1,MetaTileEntities.GAS_TURBINE[2].getStackForm());
-        KQ_NET(0,1,1,DISK_1,MetaTileEntities.STEAM_TURBINE[2].getStackForm());
+        KQ_NET(0, 1, 1, DISK_1, MetaTileEntities.COMBUSTION_GENERATOR[2].getStackForm());
+        KQ_NET(0, 1, 1, DISK_1, MetaTileEntities.GAS_TURBINE[2].getStackForm());
+        KQ_NET(0, 1, 1, DISK_1, MetaTileEntities.STEAM_TURBINE[2].getStackForm());
         //2 涡轮效率升级II 小火箭
-        KQ_NET(0,2,2,DISK_2,COMBUSTION_GENERATOR[0].getStackForm());
-        KQ_NET(0,2,2,DISK_2,GAS_TURBINE[0].getStackForm());
-        KQ_NET(0,2,2,DISK_2,STEAM_TURBINE[0].getStackForm());
+        KQ_NET(0, 2, 2, DISK_2, COMBUSTION_GENERATOR[0].getStackForm());
+        KQ_NET(0, 2, 2, DISK_2, GAS_TURBINE[0].getStackForm());
+        KQ_NET(0, 2, 2, DISK_2, STEAM_TURBINE[0].getStackForm());
         //3 涡轮效率升级III 特大轮机
-        KQ_NET(0,3,3,DISK_3,EXTREME_COMBUSTION_ENGINE.getStackForm());
-        KQ_NET(0,3,3,DISK_3,LARGE_COMBUSTION_ENGINE.getStackForm());
+        KQ_NET(0, 3, 3, DISK_3, EXTREME_COMBUSTION_ENGINE.getStackForm());
+        KQ_NET(0, 3, 3, DISK_3, LARGE_COMBUSTION_ENGINE.getStackForm());
         //4 蒸燃联合体系 爆燃 大火箭
-        KQ_NET(0,2,4,DISK_4,COMBUSTION_GENERATOR[1].getStackForm());
-        KQ_NET(0,2,4,DISK_4,GAS_TURBINE[1].getStackForm());
-        KQ_NET(0,2,4,DISK_4,STEAM_TURBINE[1].getStackForm());
+        KQ_NET(0, 2, 4, DISK_4, COMBUSTION_GENERATOR[1].getStackForm());
+        KQ_NET(0, 2, 4, DISK_4, GAS_TURBINE[1].getStackForm());
+        KQ_NET(0, 2, 4, DISK_4, STEAM_TURBINE[1].getStackForm());
         //5 室温超导设计
-        KQ_NET(0,2,5,DISK_5,wireGtSingle,UraniumTriplatinum);
+        KQ_NET(0, 2, 5, DISK_5, wireGtSingle, UraniumTriplatinum);
         //6 可控核聚变-环流器设计
-        KQ_NET(2,3,6,DISK_6,PROTON);
+        KQ_NET(2, 3, 6, DISK_6, PROTON);
         //7 可控核聚变-聚变超导线圈
-        KQ_NET(2,3,7,DISK_7,MetaBlocks.FUSION_CASING.getItemVariant(BlockFusionCasing.CasingType.SUPERCONDUCTOR_COIL));
+        KQ_NET(2, 3, 7, DISK_7, MetaBlocks.FUSION_CASING.getItemVariant(BlockFusionCasing.CasingType.SUPERCONDUCTOR_COIL));
         //8 资源勘探I
-        KQ_NET(0,1,8,DISK_8,SENSOR_HV);
+        KQ_NET(0, 1, 8, DISK_8, SENSOR_HV);
         //9 资源勘探II
-        KQ_NET(0,2,9,DISK_9,SENSOR_IV);
+        KQ_NET(0, 2, 9, DISK_9, SENSOR_IV);
         //10 资源勘探III
-        KQ_NET(3,3,10,DISK_10,SENSOR_ZPM);
+        KQ_NET(3, 3, 10, DISK_10, SENSOR_ZPM);
         //11 网道行者-元素存储
-        KQ_NET(21,1,11,DISK_11,gem,Fluix);
+        KQ_NET(21, 1, 11, DISK_11, gem, Fluix);
         //12 网道行者-管网系统
 
         //13 网道行者-无线传输
 
         //14 人工智能I
-        KQ_NET(0,1,14,DISK_14,circuit,Tier.EV);
+        KQ_NET(0, 1, 14, DISK_14, circuit, Tier.EV);
         //15 人工智能II
-        KQ_NET(0,2,15,DISK_15,circuit,Tier.LuV);
+        KQ_NET(0, 2, 15, DISK_15, circuit, Tier.LuV);
         //16 人工智能III
-        KQ_NET(3,3,16,DISK_16,circuit,Tier.UV);
+        KQ_NET(3, 3, 16, DISK_16, circuit, Tier.UV);
 
         //17 生物工程I
-        KQ_NET(0,1,17,DISK_17,SEPTIC_TANK.getStackForm());
+        KQ_NET(0, 1, 17, DISK_17, SEPTIC_TANK.getStackForm());
         //18 生物工程II
-        KQ_NET(11,2,18,DISK_18,WETWARE_CIRCUIT_BOARD);
+        KQ_NET(11, 2, 18, DISK_18, WETWARE_CIRCUIT_BOARD);
         //19 生物工程III
-        KQ_NET(12,3,19,DISK_19, INTRAVITAL_SOC);
+        KQ_NET(12, 3, 19, DISK_19, INTRAVITAL_SOC);
 
         //20 标准化作业
-        KQ_NET(0,1,20,DISK_20,ASSEMBLER[2].getStackForm());
+        KQ_NET(0, 1, 20, DISK_20, ASSEMBLER[2].getStackForm());
         //21 高精加工
-        KQ_NET(0,2,21,DISK_21,ASSEMBLY_LINE.getStackForm());
+        KQ_NET(0, 2, 21, DISK_21, ASSEMBLY_LINE.getStackForm());
         //22 自动化管理
-        KQ_NET(0,3,22,DISK_22,PRECISE_ASSEMBLER.getStackForm());
+        KQ_NET(0, 3, 22, DISK_22, PRECISE_ASSEMBLER.getStackForm());
         //23 物联网集成控制
-        KQ_NET(3,4,23,DISK_23,ADVANCED_ASSEMBLY_LINE.getStackForm());
+        KQ_NET(3, 4, 23, DISK_23, ADVANCED_ASSEMBLY_LINE.getStackForm());
         //24 计算科学
-        KQ_NET(3,3,24,DISK_24, HIGH_PERFORMANCE_COMPUTING_ARRAY.getStackForm());
-        //25 计算科学
-        KQ_NET(0,2,25,DISK_25, MINI_DATE_BANK.getStackForm());
+        KQ_NET(3, 3, 24, DISK_24, HIGH_PERFORMANCE_COMPUTING_ARRAY.getStackForm());
+        //25 云数据存储
+        KQ_NET(0, 2, 25, DISK_25, MINI_DATE_BANK.getStackForm());
+        //26 硅岩燃料
+        KQ_NET(3, 4, 26, DISK_26, screw, Naquadria);
+        //27 奇异燃料
+        KQ_NET(3, 4, 27, DISK_27, LARGE_NAQUADAH_REACTOR.getStackForm());
 
     }
 
 
     private static void VVI_VVVV() {
+        //26
+        //  Large Naquadah Reactor
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(frameGt, Naquadria,16)
+                .input(GTQTMetaTileEntities.NAQUADAH_REACTOR[2],4)
+                .input(ELECTRIC_PUMP_UV, 16)
+                .input(FIELD_GENERATOR_UV, 16)
+                .input(plate, Moscovium, 32)
+                .input(circuit, MarkerMaterials.Tier.UHV, 16)
+                .input(circuit, MarkerMaterials.Tier.UV, 32)
+                .input(circuit, MarkerMaterials.Tier.ZPM, 64)
+                .input(NANO_POWER_IC, 64)
+                .input(NANO_POWER_IC, 64)
+                .input(cableGtQuadruple, YttriumBariumCuprate, 64)
+                .input(cableGtQuadruple, YttriumBariumCuprate, 64)
+                .fluidInputs(Nihonium.getFluid(L * 4))
+                .fluidInputs(NaquadahAlloy.getFluid(L * 4))
+                .fluidInputs(Kevlar.getFluid(L * 16))
+                .fluidInputs(IncoloyMA813.getFluid(L * 16))
+                .stationResearch(b -> b
+                        .researchStack(DISK_26.getStackForm())
+                        .CWUt(CWT[UHV])
+                        .EUt(VA[UV]))
+                .EUt(VA[UV])
+                .output(LARGE_NAQUADAH_REACTOR)
+                .EUt(VA[UHV])
+                .duration(600)
+                .cleanroom(CleanroomType.CLEANROOM)
+                .buildAndRegister();
+
+
+        //27
+        //  Fuel Refine Factory
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(frameGt, HastelloyC276,16)
+                .input(HUGE_CHEMICAL_REACTOR,8)
+                .input(pipeHugeFluid, Duranium, 32)
+                .input(rotor, Orichalcum, 32)
+                .input(circuit, MarkerMaterials.Tier.UHV, 16)
+                .input(circuit, MarkerMaterials.Tier.UV, 32)
+                .input(circuit, Tier.ZPM, 64)
+                .input(ELECTRIC_PUMP_UV, 16)
+                .input(FIELD_GENERATOR_UV, 16)
+                .input(NANO_POWER_IC, 64)
+                .input(NANO_POWER_IC, 64)
+                .input(gear, Roentgenium, 8)
+                .input(screw, Dubnium, 32)
+                .input(cableGtQuadruple, Europium, 64)
+                .input(cableGtQuadruple, Europium, 64)
+                .fluidInputs(SolderingAlloy.getFluid(L * 40))
+                .fluidInputs(BlackTitanium.getFluid(L * 20))
+                .fluidInputs(Kevlar.getFluid(L * 10))
+                .fluidInputs(KaptonK.getFluid(L * 5))
+                .output(FUEL_REFINE_FACTORY)
+                .stationResearch(b -> b
+                        .researchStack(DISK_27.getStackForm())
+                        .CWUt(CWT[UHV])
+                        .EUt(VA[UV]))
+                .EUt(VA[UHV])
+                .duration(600)
+                .buildAndRegister();
+
+        //  Hyper Reactor Mk I
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(frameGt, HastelloyC276,16)
+                .input(LARGE_NAQUADAH_REACTOR,8)
+                .input(plate, Meitnerium, 32)
+                .input(plate, Vibranium, 32)
+                .input(circuit, MarkerMaterials.Tier.UEV, 4)
+                .input(circuit, MarkerMaterials.Tier.UHV, 16)
+                .input(circuit, MarkerMaterials.Tier.UV, 32)
+                .input(ELECTRIC_PUMP_UHV, 16)
+                .input(FIELD_GENERATOR_UHV, 16)
+                .input(NANO_POWER_IC, 64)
+                .input(NANO_POWER_IC, 64)
+                .input(gear, Roentgenium, 8)
+                .input(screw, Dubnium, 32)
+                .input(cableGtQuadruple, Europium, 64)
+                .input(cableGtQuadruple, Europium, 64)
+                .fluidInputs(SolderingAlloy.getFluid(L * 40))
+                .fluidInputs(BlackTitanium.getFluid(L * 20))
+                .fluidInputs(Kevlar.getFluid(L * 10))
+                .fluidInputs(KaptonK.getFluid(L * 5))
+                .output(HYPER_REACTOR_MKI)
+                .stationResearch(b -> b
+                        .researchStack(DISK_27.getStackForm())
+                        .CWUt(CWT[UHV])
+                        .EUt(VA[UV]))
+                .EUt(VA[UHV])
+                .duration(600)
+                .buildAndRegister();
+
+        //  Hyper Reactor Mk II
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(frameGt, HastelloyX78,16)
+                .input(HYPER_REACTOR_MKI,8)
+                .input(plate, Nobelium, 32)
+                .input(plate, Rhugnor, 32)
+                .input(circuit, MarkerMaterials.Tier.UIV, 4)
+                .input(circuit, MarkerMaterials.Tier.UEV, 16)
+                .input(circuit, MarkerMaterials.Tier.UHV, 32)
+                .input(ELECTRIC_PUMP_UEV, 16)
+                .input(FIELD_GENERATOR_UEV, 16)
+                .input(PICO_POWER_IC, 64)
+                .input(PICO_POWER_IC, 64)
+                .input(gear, Lawrencium, 8)
+                .input(screw, Livermorium, 32)
+                .input(cableGtQuadruple, PedotTMA, 64)
+                .input(cableGtQuadruple, PedotTMA, 64)
+                .fluidInputs(SolderingAlloy.getFluid(L * 40))
+                .fluidInputs(BlackTitanium.getFluid(L * 20))
+                .fluidInputs(Kevlar.getFluid(L * 10))
+                .fluidInputs(KaptonE.getFluid(L * 5))
+                .output(HYPER_REACTOR_MKII)
+                .stationResearch(b -> b
+                        .researchStack(DISK_27.getStackForm())
+                        .CWUt(CWT[UHV])
+                        .EUt(VA[UV]))
+                .EUt(VA[UEV])
+                .duration(600)
+                .buildAndRegister();
+
+        //  Hyper Reactor Mk III
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(frameGt, HastelloyK243,16)
+                .input(HYPER_REACTOR_MKII,8)
+                .input(plate, MetastableHassium, 32)
+                .input(plate, Hypogen, 32)
+                .input(circuit, MarkerMaterials.Tier.UXV, 4)
+                .input(circuit, MarkerMaterials.Tier.UIV, 16)
+                .input(circuit, MarkerMaterials.Tier.UEV, 32)
+                .input(ELECTRIC_PUMP_UIV, 16)
+                .input(FIELD_GENERATOR_UIV, 16)
+                .input(FEMTO_POWER_IC, 64)
+                .input(FEMTO_POWER_IC, 64)
+                .input(gear, MetastableOganesson, 8)
+                .input(screw, MetastableFlerovium, 32)
+                .input(cableGtQuadruple, Solarium, 64)
+                .input(cableGtQuadruple, Solarium, 64)
+                .fluidInputs(SolderingAlloy.getFluid(L * 40))
+                .fluidInputs(BlackTitanium.getFluid(L * 20))
+                .fluidInputs(Kevlar.getFluid(L * 10))
+                .fluidInputs(KaptonE.getFluid(L * 5))
+                .output(HYPER_REACTOR_MKIII)
+                .stationResearch(b -> b
+                        .researchStack(DISK_27.getStackForm())
+                        .CWUt(CWT[UHV])
+                        .EUt(VA[UV]))
+                .EUt(VA[UIV])
+                .duration(600)
+                .buildAndRegister();
+
         //24
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(CIRCUIT_GOOD_II,8)
-                .input(frameGt,NaquadahAlloy,4)
-                .input(plate,Naquadria,8)
-                .input(HPCA_COMPUTATION_COMPONENT,8)
+                .input(CIRCUIT_GOOD_II, 8)
+                .input(frameGt, NaquadahAlloy, 4)
+                .input(plate, Naquadria, 8)
+                .input(HPCA_COMPUTATION_COMPONENT, 8)
                 .output(HPCA_SUPER_COMPUTATION_COMPONENT)
                 .fluidInputs(VanadiumGallium.getFluid(L * 16))
                 .fluidInputs(KaptonK.getFluid(L * 16))
@@ -169,10 +327,10 @@ public class KeQingNET {
                 .duration(1000).buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(CIRCUIT_GOOD_II,8)
-                .input(frameGt,NaquadahAlloy,4)
-                .input(plate,Naquadria,8)
-                .input(HPCA_ADVANCED_COMPUTATION_COMPONENT,8)
+                .input(CIRCUIT_GOOD_II, 8)
+                .input(frameGt, NaquadahAlloy, 4)
+                .input(plate, Naquadria, 8)
+                .input(HPCA_ADVANCED_COMPUTATION_COMPONENT, 8)
                 .output(HPCA_ULTIMATE_COMPUTATION_COMPONENT)
                 .fluidInputs(VanadiumGallium.getFluid(L * 16))
                 .fluidInputs(KaptonK.getFluid(L * 16))
@@ -186,10 +344,10 @@ public class KeQingNET {
                 .duration(1000).buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(CIRCUIT_GOOD_II,8)
-                .input(frameGt,NaquadahAlloy,4)
-                .input(plate,Naquadria,8)
-                .input(HPCA_HEAT_SINK_COMPONENT,8)
+                .input(CIRCUIT_GOOD_II, 8)
+                .input(frameGt, NaquadahAlloy, 4)
+                .input(plate, Naquadria, 8)
+                .input(HPCA_HEAT_SINK_COMPONENT, 8)
                 .output(HPCA_SUPER_COOLER_COMPONENT)
                 .fluidInputs(VanadiumGallium.getFluid(L * 16))
                 .fluidInputs(KaptonK.getFluid(L * 16))
@@ -203,10 +361,10 @@ public class KeQingNET {
                 .duration(1000).buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(CIRCUIT_GOOD_II,8)
-                .input(frameGt,NaquadahAlloy,4)
-                .input(plate,Naquadria,8)
-                .input(HPCA_ACTIVE_COOLER_COMPONENT,8)
+                .input(CIRCUIT_GOOD_II, 8)
+                .input(frameGt, NaquadahAlloy, 4)
+                .input(plate, Naquadria, 8)
+                .input(HPCA_ACTIVE_COOLER_COMPONENT, 8)
                 .output(HPCA_ULTIMATE_COOLER_COMPONENT)
                 .fluidInputs(VanadiumGallium.getFluid(L * 16))
                 .fluidInputs(KaptonK.getFluid(L * 16))
@@ -224,9 +382,9 @@ public class KeQingNET {
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .EUt(VA[HV])
-                .input(gem,Fluix)
+                .input(gem, Fluix)
                 .input(EMITTER_HV)
-                .input(plate,StainlessSteel,4)
+                .input(plate, StainlessSteel, 4)
                 .fluidInputs(Polybenzimidazole.getFluid(GTValues.L * 4))
                 .output(AE_FLUIX_FIRM)
                 .scannerResearch(b -> b.researchStack(DISK_11.getStackForm()).duration(1200).EUt(VA[HV]))
@@ -235,10 +393,10 @@ public class KeQingNET {
 
         //
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(circuit,Tier.EV,2)
-                .input(ELECTRIC_PISTON_HV,8)
-                .input(HULL[HV],8)
-                .input(MACERATOR[3],4)
+                .input(circuit, Tier.EV, 2)
+                .input(ELECTRIC_PISTON_HV, 8)
+                .input(HULL[HV], 8)
+                .input(MACERATOR[3], 4)
                 .fluidInputs(SolderingAlloy.getFluid(L * 8))
                 .fluidInputs(Tin.getFluid(L * 8))
                 .output(CORE_MACERATOR)
@@ -250,10 +408,10 @@ public class KeQingNET {
                 .buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(circuit,Tier.EV,2)
-                .input(ELECTRIC_MOTOR_HV,8)
-                .input(HULL[HV],8)
-                .input(CENTRIFUGE[3],4)
+                .input(circuit, Tier.EV, 2)
+                .input(ELECTRIC_MOTOR_HV, 8)
+                .input(HULL[HV], 8)
+                .input(CENTRIFUGE[3], 4)
                 .input(frameGt, Aluminium, 8)
                 .input(plate, StainlessSteel, 32)
                 .input(wireGtSingle, MercuryBariumCalciumCuprate, 16)
@@ -269,10 +427,10 @@ public class KeQingNET {
                 .buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(circuit,Tier.EV,2)
-                .input(ROBOT_ARM_HV,8)
-                .input(HULL[HV],8)
-                .input(MIXER[3],4)
+                .input(circuit, Tier.EV, 2)
+                .input(ROBOT_ARM_HV, 8)
+                .input(HULL[HV], 8)
+                .input(MIXER[3], 4)
                 .input(frameGt, Aluminium, 8)
                 .input(plate, StainlessSteel, 32)
                 .input(wireGtSingle, MercuryBariumCalciumCuprate, 16)
@@ -288,10 +446,10 @@ public class KeQingNET {
                 .buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(circuit,Tier.EV,2)
-                .input(ELECTRIC_PUMP_HV,8)
-                .input(HULL[HV],8)
-                .input(ORE_WASHER[3],4)
+                .input(circuit, Tier.EV, 2)
+                .input(ELECTRIC_PUMP_HV, 8)
+                .input(HULL[HV], 8)
+                .input(ORE_WASHER[3], 4)
                 .input(frameGt, Aluminium, 8)
                 .input(plate, StainlessSteel, 32)
                 .input(wireGtSingle, MercuryBariumCalciumCuprate, 16)
@@ -307,10 +465,10 @@ public class KeQingNET {
                 .buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(circuit,Tier.EV,2)
-                .input(CONVEYOR_MODULE_HV,8)
-                .input(HULL[HV],8)
-                .input(FORGE_HAMMER[3],4)
+                .input(circuit, Tier.EV, 2)
+                .input(CONVEYOR_MODULE_HV, 8)
+                .input(HULL[HV], 8)
+                .input(FORGE_HAMMER[3], 4)
                 .input(frameGt, Aluminium, 8)
                 .input(plate, StainlessSteel, 32)
                 .input(wireGtSingle, MercuryBariumCalciumCuprate, 16)
@@ -326,10 +484,10 @@ public class KeQingNET {
                 .buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(circuit,Tier.EV,2)
-                .input(VOLTAGE_COIL_HV,8)
-                .input(HULL[HV],8)
-                .input(ARC_FURNACE[3],4)
+                .input(circuit, Tier.EV, 2)
+                .input(VOLTAGE_COIL_HV, 8)
+                .input(HULL[HV], 8)
+                .input(ARC_FURNACE[3], 4)
                 .input(frameGt, Aluminium, 8)
                 .input(plate, StainlessSteel, 32)
                 .input(wireGtSingle, MercuryBariumCalciumCuprate, 16)
@@ -346,10 +504,10 @@ public class KeQingNET {
 
         //多线程设备
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(CIRCUIT_GOOD_I,2)
-                .input(ELECTRIC_PISTON_IV,8)
-                .input(HULL[IV],8)
-                .input(MACERATOR[5],4)
+                .input(CIRCUIT_GOOD_I, 2)
+                .input(ELECTRIC_PISTON_IV, 8)
+                .input(HULL[IV], 8)
+                .input(MACERATOR[5], 4)
                 .input(frameGt, TungstenSteel, 8)
                 .input(plate, PPB, 32)
                 .input(wireGtSingle, IVSuperconductor, 64)
@@ -366,10 +524,10 @@ public class KeQingNET {
                 .buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(CIRCUIT_GOOD_I,2)
-                .input(ELECTRIC_MOTOR_IV,8)
-                .input(HULL[IV],8)
-                .input(CENTRIFUGE[5],4)
+                .input(CIRCUIT_GOOD_I, 2)
+                .input(ELECTRIC_MOTOR_IV, 8)
+                .input(HULL[IV], 8)
+                .input(CENTRIFUGE[5], 4)
                 .input(frameGt, TungstenSteel, 8)
                 .input(plate, PPB, 32)
                 .input(wireGtSingle, IVSuperconductor, 64)
@@ -386,10 +544,10 @@ public class KeQingNET {
                 .buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(CIRCUIT_GOOD_I,2)
-                .input(ROBOT_ARM_IV,8)
-                .input(HULL[IV],8)
-                .input(MIXER[5],4)
+                .input(CIRCUIT_GOOD_I, 2)
+                .input(ROBOT_ARM_IV, 8)
+                .input(HULL[IV], 8)
+                .input(MIXER[5], 4)
                 .input(frameGt, TungstenSteel, 8)
                 .input(plate, PPB, 32)
                 .input(wireGtSingle, IVSuperconductor, 64)
@@ -406,10 +564,10 @@ public class KeQingNET {
                 .buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(CIRCUIT_GOOD_I,2)
+                .input(CIRCUIT_GOOD_I, 2)
                 .input(ELECTRIC_PUMP_IV)
-                .input(HULL[IV],8)
-                .input(ORE_WASHER[5],4)
+                .input(HULL[IV], 8)
+                .input(ORE_WASHER[5], 4)
                 .input(frameGt, TungstenSteel, 8)
                 .input(plate, PPB, 32)
                 .input(wireGtSingle, IVSuperconductor, 64)
@@ -426,10 +584,10 @@ public class KeQingNET {
                 .buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(CIRCUIT_GOOD_I,2)
-                .input(CONVEYOR_MODULE_IV,8)
-                .input(HULL[IV],8)
-                .input(FORGE_HAMMER[5],4)
+                .input(CIRCUIT_GOOD_I, 2)
+                .input(CONVEYOR_MODULE_IV, 8)
+                .input(HULL[IV], 8)
+                .input(FORGE_HAMMER[5], 4)
                 .input(frameGt, TungstenSteel, 8)
                 .input(plate, PPB, 32)
                 .input(wireGtSingle, IVSuperconductor, 64)
@@ -446,10 +604,10 @@ public class KeQingNET {
                 .buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(CIRCUIT_GOOD_I,2)
-                .input(VOLTAGE_COIL_IV,8)
-                .input(HULL[IV],8)
-                .input(ARC_FURNACE[5],4)
+                .input(CIRCUIT_GOOD_I, 2)
+                .input(VOLTAGE_COIL_IV, 8)
+                .input(HULL[IV], 8)
+                .input(ARC_FURNACE[5], 4)
                 .input(frameGt, TungstenSteel, 8)
                 .input(plate, PPB, 32)
                 .input(wireGtSingle, IVSuperconductor, 64)
@@ -466,10 +624,10 @@ public class KeQingNET {
                 .buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(CIRCUIT_GOOD_II,2)
-                .input(ELECTRIC_PISTON_LUV,8)
-                .input(HULL[LuV],8)
-                .input(BENDER[6],4)
+                .input(CIRCUIT_GOOD_II, 2)
+                .input(ELECTRIC_PISTON_LUV, 8)
+                .input(HULL[LuV], 8)
+                .input(BENDER[6], 4)
                 .input(frameGt, NaquadahAlloy, 8)
                 .input(plate, PPB, 32)
                 .input(wireGtSingle, LuVSuperconductor, 64)
@@ -486,10 +644,10 @@ public class KeQingNET {
                 .buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(CIRCUIT_GOOD_II,2)
-                .input(ELECTRIC_MOTOR_LuV,8)
-                .input(HULL[LuV],8)
-                .input(WIREMILL[6],4)
+                .input(CIRCUIT_GOOD_II, 2)
+                .input(ELECTRIC_MOTOR_LuV, 8)
+                .input(HULL[LuV], 8)
+                .input(WIREMILL[6], 4)
                 .input(frameGt, NaquadahAlloy, 8)
                 .input(plate, PPB, 32)
                 .input(wireGtSingle, LuVSuperconductor, 64)
@@ -506,10 +664,10 @@ public class KeQingNET {
                 .buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(CIRCUIT_GOOD_II,2)
-                .input(ELECTRIC_PUMP_LuV,8)
-                .input(HULL[LuV],8)
-                .input(EXTRUDER[6],4)
+                .input(CIRCUIT_GOOD_II, 2)
+                .input(ELECTRIC_PUMP_LuV, 8)
+                .input(HULL[LuV], 8)
+                .input(EXTRUDER[6], 4)
                 .input(frameGt, NaquadahAlloy, 8)
                 .input(plate, PPB, 32)
                 .input(wireGtSingle, LuVSuperconductor, 64)
@@ -526,12 +684,12 @@ public class KeQingNET {
                 .buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(CIRCUIT_GOOD_II,2)
-                .input(ROBOT_ARM_LuV,16)
-                .input(CONVEYOR_MODULE_LuV,16)
-                .input(HULL[LuV],8)
-                .input(ASSEMBLY_LINE,4)
-                .input(ASSEMBLER[6],4)
+                .input(CIRCUIT_GOOD_II, 2)
+                .input(ROBOT_ARM_LuV, 16)
+                .input(CONVEYOR_MODULE_LuV, 16)
+                .input(HULL[LuV], 8)
+                .input(ASSEMBLY_LINE, 4)
+                .input(ASSEMBLER[6], 4)
                 .input(frameGt, NaquadahAlloy, 8)
                 .input(plate, PPB, 32)
                 .input(wireGtSingle, LuVSuperconductor, 64)
@@ -548,8 +706,8 @@ public class KeQingNET {
                 .buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(CIRCUIT_GOOD_II,1)
-                .input(WETWARE_CIRCUIT_BOARD,16)
+                .input(CIRCUIT_GOOD_II, 1)
+                .input(WETWARE_CIRCUIT_BOARD, 16)
                 .input(foil, NaquadahAlloy, 8)
                 .input(OPTICAL_PIPES[0], 64)
                 .input(OPTICAL_PIPES[0], 64)
@@ -579,7 +737,7 @@ public class KeQingNET {
                 .input(foil, Silver, 8)
                 .input(plateDense, Aluminium, 1)
                 .fluidInputs(Epoxy.getFluid(L))
-                .output(OPTICAL_PIPES[0],2)
+                .output(OPTICAL_PIPES[0], 2)
                 .duration(100).EUt(VA[MV]).buildAndRegister();
 
         ASSEMBLER_RECIPES.recipeBuilder()
@@ -587,7 +745,7 @@ public class KeQingNET {
                 .input(foil, Silver, 8)
                 .input(plateDense, Aluminium, 1)
                 .fluidInputs(Polytetrafluoroethylene.getFluid(L))
-                .output(OPTICAL_PIPES[0],4)
+                .output(OPTICAL_PIPES[0], 4)
                 .duration(100).EUt(VA[MV]).buildAndRegister();
 
         ASSEMBLER_RECIPES.recipeBuilder()
@@ -595,13 +753,13 @@ public class KeQingNET {
                 .input(foil, Silver, 8)
                 .input(plateDense, Aluminium, 1)
                 .fluidInputs(KaptonK.getFluid(L))
-                .output(OPTICAL_PIPES[0],8)
+                .output(OPTICAL_PIPES[0], 8)
                 .duration(100).EUt(VA[MV]).buildAndRegister();
 
         //物品支架
         ASSEMBLER_RECIPES.recipeBuilder()
                 .input(GOOD_CIRCUIT_BOARD)
-                .input(circuit, Tier.MV,2)
+                .input(circuit, Tier.MV, 2)
                 .input(wireFine, Aluminium, 2)
                 .input(gearSmall, Copper, 4)
                 .input(plateDense, Aluminium, 4)
@@ -612,12 +770,12 @@ public class KeQingNET {
 
         //计算框架
         ASSEMBLER_RECIPES.recipeBuilder()
-                .input(frameGt,Steel, 4)
+                .input(frameGt, Steel, 4)
                 .input(plate, Aluminium, 4)
                 .input(OPTICAL_PIPES[0], 2)
                 .input(plateDense, Aluminium, 4)
-                .fluidInputs(Polytetrafluoroethylene.getFluid(L*8))
-                .outputs( GTQTMetaBlocks.KQCC.getItemVariant(COMPUTER_VENT))
+                .fluidInputs(Polytetrafluoroethylene.getFluid(L * 8))
+                .outputs(GTQTMetaBlocks.KQCC.getItemVariant(COMPUTER_VENT))
                 .duration(1000).EUt(120).buildAndRegister();
         //数据仓
         ASSEMBLER_RECIPES.recipeBuilder()
@@ -644,7 +802,7 @@ public class KeQingNET {
                 .duration(4000000).EUt(6000).buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(GREENHOUSE,4)
+                .input(GREENHOUSE, 4)
                 .input(circuit, Tier.HV, 4)
                 .input(ELECTRIC_PUMP_HV, 4)
                 .input(ROBOT_ARM_HV, 4)
@@ -659,13 +817,13 @@ public class KeQingNET {
                 .duration(4000).EUt(1920).buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(CENTRIFUGE[3],4)
+                .input(CENTRIFUGE[3], 4)
                 .input(circuit, Tier.HV, 4)
                 .input(ELECTRIC_MOTOR_HV, 4)
                 .input(ROBOT_ARM_HV, 4)
                 .input(plateDense, NanometerBariumTitanate, 4)
-                .input(gear,TungstenSteel,16)
-                .input(screw,Titanium,8)
+                .input(gear, TungstenSteel, 16)
+                .input(screw, Titanium, 8)
                 .input(foil, Tcfour, 64)
                 .output(BIO_CENTRIFUGE)
                 .fluidInputs(SolderingAlloy.getFluid(L * 8))
@@ -677,7 +835,7 @@ public class KeQingNET {
                 .duration(4000).EUt(1920).buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(BIOLOGICAL_REACTION,4)
+                .input(BIOLOGICAL_REACTION, 4)
                 .input(circuit, Tier.HV, 4)
                 .input(ELECTRIC_PUMP_HV, 4)
                 .input(ROBOT_ARM_HV, 4)
@@ -694,7 +852,7 @@ public class KeQingNET {
                 .duration(4000).EUt(1920).buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(ENZYMES_REACTOR,4)
+                .input(ENZYMES_REACTOR, 4)
                 .input(circuit, Tier.UV, 4)
                 .input(circuit, Tier.ZPM, 16)
                 .input(ELECTRIC_PUMP_LuV, 4)
@@ -702,7 +860,7 @@ public class KeQingNET {
                 .input(frameGt, Europium, 8)
                 .input(plateDense, NaquadahAlloy, 4)
                 .input(foil, PPB, 64)
-                .input(wireGtSingle,IVSuperconductor,16)
+                .input(wireGtSingle, IVSuperconductor, 16)
                 .output(GTQTMetaTileEntities.GENE_MUTAGENESIS)
                 .fluidInputs(Polybenzimidazole.getFluid(L * 32))
                 .fluidInputs(Zylon.getFluid(L * 64))
@@ -716,9 +874,9 @@ public class KeQingNET {
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(circuit, Tier.IV, 4)
-                .input(EMITTER_IV,4)
-                .input(ELECTRIC_MOTOR_IV,4)
-                .input(HULL[IV],1)
+                .input(EMITTER_IV, 4)
+                .input(ELECTRIC_MOTOR_IV, 4)
+                .input(HULL[IV], 1)
                 .input(frameGt, Naquadah, 1)
                 .inputs(ITEM_FILTER.getStackForm(4))
                 .inputs(VOLTAGE_COIL_IV.getStackForm(16))
@@ -755,7 +913,7 @@ public class KeQingNET {
         ASSEMBLER_RECIPES.recipeBuilder()
                 .inputs(HULL[2].getStackForm())
                 .input(FIELD_GENERATOR_LV, 8)
-                .input(DISK_0,4)
+                .input(DISK_0, 4)
                 .input(COVER_SCREEN)
                 .input(wireFine, Aluminium, 16)
                 .input(OPTICAL_PIPES[0], 8)
@@ -766,7 +924,7 @@ public class KeQingNET {
         ASSEMBLER_RECIPES.recipeBuilder()
                 .inputs(HULL[2].getStackForm())
                 .input(EMITTER_LV, 8)
-                .input(DISK_0,4)
+                .input(DISK_0, 4)
                 .input(COVER_SCREEN)
                 .input(wireFine, Aluminium, 16)
                 .input(OPTICAL_PIPES[0], 8)
@@ -778,7 +936,7 @@ public class KeQingNET {
                 .inputs(HULL[4].getStackForm(16))
                 .input(circuit, Tier.EV, 8)
                 .input(EMITTER_EV, 8)
-                .input(DISK_0,16)
+                .input(DISK_0, 16)
                 .input(COVER_SCREEN)
                 .input(OPTICAL_PIPES[0], 16)
                 .input(frameGt, TungstenSteel, 8)
@@ -800,8 +958,8 @@ public class KeQingNET {
 
         //  Component Assembly Line
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(CIRCUIT_GOOD_III,8)
-                .input(ASSEMBLY_LINE,8)
+                .input(CIRCUIT_GOOD_III, 8)
+                .input(ASSEMBLY_LINE, 8)
                 .input(frameGt, Cinobite, 16)
                 .input(PRECISE_ASSEMBLER, 16)
                 .input(COMPONENT_ASSEMBLER[IV], 16)
@@ -809,7 +967,7 @@ public class KeQingNET {
                 .input(CONVEYOR_MODULE_LuV, 64)
                 .input(plateDouble, Naquadria, 6)
                 .input(plateDouble, Pikyonium64B, 6)
-                .input(gear, TungstenSteel,6)
+                .input(gear, TungstenSteel, 6)
                 .input(gearSmall, TitanSteel, 32)
                 .input(wireFine, Ruridit, 64)
                 .input(wireFine, Ruridit, 64)
@@ -831,11 +989,11 @@ public class KeQingNET {
 
         //大型光刻厂
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(CIRCUIT_GOOD_IV,8)
+                .input(CIRCUIT_GOOD_IV, 8)
                 .inputs(GCYMMetaTileEntities.LARGE_ENGRAVER.getStackForm(16))
-                .input(circuit, MarkerMaterials.Tier.UHV,4)
-                .input(circuit, MarkerMaterials.Tier.UV,16)
-                .input(circuit, MarkerMaterials.Tier.ZPM,32)
+                .input(circuit, MarkerMaterials.Tier.UHV, 4)
+                .input(circuit, MarkerMaterials.Tier.UV, 16)
+                .input(circuit, MarkerMaterials.Tier.ZPM, 32)
                 .input(frameGt, HMS1J22Alloy, 16)
                 .input(plateDouble, HG1223, 4)
                 .input(plateDouble, Staballoy, 4)
@@ -859,12 +1017,12 @@ public class KeQingNET {
                 .buildAndRegister();
         //  Mega Oil Cracking Unit
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(CIRCUIT_GOOD_IV,8)
+                .input(CIRCUIT_GOOD_IV, 8)
                 .input(frameGt, HMS1J22Alloy, 16)
                 .inputs(CRACKER.getStackForm(16))
-                .input(circuit, MarkerMaterials.Tier.UHV,4)
-                .input(circuit, MarkerMaterials.Tier.UV,16)
-                .input(circuit, MarkerMaterials.Tier.ZPM,32)
+                .input(circuit, MarkerMaterials.Tier.UHV, 4)
+                .input(circuit, MarkerMaterials.Tier.UV, 16)
+                .input(circuit, MarkerMaterials.Tier.ZPM, 32)
                 .input(plateDouble, HG1223, 4)
                 .input(plateDouble, Staballoy, 4)
                 .input(gear, MaragingSteel250, 4)
@@ -886,12 +1044,12 @@ public class KeQingNET {
 
         //  Mega Chemical Reactor
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(CIRCUIT_GOOD_IV,8)
+                .input(CIRCUIT_GOOD_IV, 8)
                 .input(frameGt, MARM200Steel, 16)
                 .inputs(LARGE_CHEMICAL_REACTOR.getStackForm(16))
-                .input(circuit, MarkerMaterials.Tier.UHV,4)
-                .input(circuit, MarkerMaterials.Tier.UV,16)
-                .input(circuit, MarkerMaterials.Tier.ZPM,32)
+                .input(circuit, MarkerMaterials.Tier.UHV, 4)
+                .input(circuit, MarkerMaterials.Tier.UV, 16)
+                .input(circuit, MarkerMaterials.Tier.ZPM, 32)
                 .input(plateDouble, HMS1J79Alloy, 4)
                 .input(plateDouble, IncoloyDS, 4)
                 .input(gear, Inconel625, 4)
@@ -913,12 +1071,12 @@ public class KeQingNET {
 
         //  Mega Alloy Blast Smelter
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(CIRCUIT_GOOD_IV,8)
+                .input(CIRCUIT_GOOD_IV, 8)
                 .input(frameGt, AusteniticStainlessSteel904L, 16)
                 .inputs(ALLOY_BLAST_SMELTER.getStackForm(16))
-                .input(circuit, MarkerMaterials.Tier.UHV,4)
-                .input(circuit, MarkerMaterials.Tier.UV,16)
-                .input(circuit, MarkerMaterials.Tier.ZPM,32)
+                .input(circuit, MarkerMaterials.Tier.UHV, 4)
+                .input(circuit, MarkerMaterials.Tier.UV, 16)
+                .input(circuit, MarkerMaterials.Tier.ZPM, 32)
                 .input(plateDouble, HSLASteel, 4)
                 .input(plateDouble, HastelloyC59, 4)
                 .input(gear, HY1301, 4)
@@ -942,10 +1100,10 @@ public class KeQingNET {
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(frameGt, AusteniticStainlessSteel904L, 16)
                 .inputs(BLAZING_BLAST_FURNACE.getStackForm(16))
-                .input(circuit, MarkerMaterials.Tier.UHV,4)
-                .input(circuit, MarkerMaterials.Tier.UV,16)
-                .input(circuit, MarkerMaterials.Tier.ZPM,32)
-                .input(CIRCUIT_GOOD_IV,8)
+                .input(circuit, MarkerMaterials.Tier.UHV, 4)
+                .input(circuit, MarkerMaterials.Tier.UV, 16)
+                .input(circuit, MarkerMaterials.Tier.ZPM, 32)
+                .input(CIRCUIT_GOOD_IV, 8)
                 .input(plateDouble, HSLASteel, 4)
                 .input(plateDouble, HastelloyC59, 4)
                 .input(gear, HY1301, 4)
@@ -967,16 +1125,16 @@ public class KeQingNET {
 
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(frameGt, Adamantium,8)
+                .input(frameGt, Adamantium, 8)
                 .input(plate, Neutronium, 16)
-                .input(circuit, MarkerMaterials.Tier.UHV,4)
-                .input(circuit, MarkerMaterials.Tier.UV,16)
-                .input(circuit, MarkerMaterials.Tier.ZPM,32)
-                .input(CIRCUIT_GOOD_IV,8)
+                .input(circuit, MarkerMaterials.Tier.UHV, 4)
+                .input(circuit, MarkerMaterials.Tier.UV, 16)
+                .input(circuit, MarkerMaterials.Tier.ZPM, 32)
+                .input(CIRCUIT_GOOD_IV, 8)
                 .input(stick, Orichalcum, 32)
                 .input(wireFine, Tritanium, 64)
-                .input(wireGtSingle, UVSuperconductor,16)
-                .input(wireGtSingle, UVSuperconductor,16)
+                .input(wireGtSingle, UVSuperconductor, 16)
+                .input(wireGtSingle, UVSuperconductor, 16)
                 .outputs(GTQTMetaBlocks.KQCC.getItemVariant(ULTRA_POWER_CASING))
                 .fluidInputs(Kevlar.getFluid(L * 8))
                 .fluidInputs(KaptonE.getFluid(L * 16))
@@ -992,16 +1150,16 @@ public class KeQingNET {
                 .buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(frameGt, Tritanium,8)
+                .input(frameGt, Tritanium, 8)
                 .input(plate, Neutronium, 16)
-                .input(circuit, MarkerMaterials.Tier.UHV,4)
-                .input(circuit, MarkerMaterials.Tier.UV,16)
-                .input(circuit, MarkerMaterials.Tier.ZPM,32)
-                .input(CIRCUIT_GOOD_IV,8)
+                .input(circuit, MarkerMaterials.Tier.UHV, 4)
+                .input(circuit, MarkerMaterials.Tier.UV, 16)
+                .input(circuit, MarkerMaterials.Tier.ZPM, 32)
+                .input(CIRCUIT_GOOD_IV, 8)
                 .input(stick, Orichalcum, 32)
                 .input(gearSmall, Duranium, 64)
-                .input(wireGtSingle, UVSuperconductor,16)
-                .input(wireGtSingle, UVSuperconductor,16)
+                .input(wireGtSingle, UVSuperconductor, 16)
+                .input(wireGtSingle, UVSuperconductor, 16)
                 .outputs(GTQTMetaBlocks.KQCC.getItemVariant(ADV_COMPUTER_CASING))
                 .fluidInputs(Kevlar.getFluid(L * 8))
                 .fluidInputs(KaptonE.getFluid(L * 16))
@@ -1018,14 +1176,14 @@ public class KeQingNET {
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .inputs(GTQTMetaBlocks.KQCC.getItemVariant(ADV_COMPUTER_CASING))
-                .input(circuit, MarkerMaterials.Tier.UHV,4)
-                .input(circuit, MarkerMaterials.Tier.UV,16)
-                .input(circuit, MarkerMaterials.Tier.ZPM,32)
-                .input(CIRCUIT_GOOD_IV,8)
+                .input(circuit, MarkerMaterials.Tier.UHV, 4)
+                .input(circuit, MarkerMaterials.Tier.UV, 16)
+                .input(circuit, MarkerMaterials.Tier.ZPM, 32)
+                .input(CIRCUIT_GOOD_IV, 8)
                 .input(stick, Orichalcum, 32)
                 .input(ring, Tritanium, 64)
-                .input(wireGtSingle, UVSuperconductor,16)
-                .input(wireGtSingle, UVSuperconductor,16)
+                .input(wireGtSingle, UVSuperconductor, 16)
+                .input(wireGtSingle, UVSuperconductor, 16)
                 .outputs(GTQTMetaBlocks.KQCC.getItemVariant(ULTRA_COMPUTER_CASING))
                 .fluidInputs(Kevlar.getFluid(L * 8))
                 .fluidInputs(KaptonE.getFluid(L * 16))
@@ -1041,14 +1199,14 @@ public class KeQingNET {
                 .buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(frameGt, Tritanium,16)
+                .input(frameGt, Tritanium, 16)
                 .input(ELECTRIC_MOTOR_UHV, 32)
                 .input(rotor, Adamantium, 64)
                 .input(rotor, Adamantium, 64)
                 .input(pipeTinyFluid, Neutronium, 16)
                 .input(plate, Orichalcum, 32)
-                .input(wireGtSingle, UVSuperconductor,16)
-                .input(wireGtSingle, UVSuperconductor,16)
+                .input(wireGtSingle, UVSuperconductor, 16)
+                .input(wireGtSingle, UVSuperconductor, 16)
                 .outputs(GTQTMetaBlocks.KQCC.getItemVariant(ADV_COMPUTER_HEAT_VENT))
                 .fluidInputs(Kevlar.getFluid(L * 8))
                 .fluidInputs(KaptonE.getFluid(L * 16))
@@ -1064,8 +1222,6 @@ public class KeQingNET {
                 .buildAndRegister();
 
 
-
-
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .inputs(GTQTMetaBlocks.KQCC.getItemVariant(ADV_COMPUTER_CASING))
                 .input(EMITTER_UV, 16)
@@ -1076,8 +1232,8 @@ public class KeQingNET {
                 .input(foil, Vibranium, 64)
                 .input(OPTICAL_PIPES[0], 64)
                 .input(OPTICAL_PIPES[0], 64)
-                .input(wireGtSingle, UVSuperconductor,64)
-                .input(wireGtSingle, UVSuperconductor,64)
+                .input(wireGtSingle, UVSuperconductor, 64)
+                .input(wireGtSingle, UVSuperconductor, 64)
                 .output(ADV_NETWORK_SWITCH)
                 .fluidInputs(Kevlar.getFluid(L * 16))
                 .fluidInputs(KaptonE.getFluid(L * 32))
@@ -1098,12 +1254,12 @@ public class KeQingNET {
                 .input(GENERAL_CIRCUIT_UV, 16)
                 .input(circuit, Tier.UHV, 8)
                 .inputNBT(TOOL_DATA_MODULE, NBTMatcher.ANY, NBTCondition.ANY)
-                .input(frameGt,Tritanium,16)
+                .input(frameGt, Tritanium, 16)
                 .input(wireFine, Orichalcum, 64)
                 .input(OPTICAL_PIPES[0], 64)
                 .input(wireGtDouble, RutheniumTriniumAmericiumNeutronate, 32)
-                .input(wireGtSingle, UVSuperconductor,64)
-                .input(wireGtSingle, UVSuperconductor,64)
+                .input(wireGtSingle, UVSuperconductor, 64)
+                .input(wireGtSingle, UVSuperconductor, 64)
                 .fluidInputs(Kevlar.getFluid(L * 16))
                 .fluidInputs(KaptonE.getFluid(L * 32))
                 .fluidInputs(Polyetheretherketone.getFluid(L * 64))
@@ -1120,8 +1276,8 @@ public class KeQingNET {
 
         //  Advanced Assembly Line
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(CIRCUIT_GOOD_II,8)
-                .input(ASSEMBLY_LINE,8)
+                .input(CIRCUIT_GOOD_II, 8)
+                .input(ASSEMBLY_LINE, 8)
                 .input(frameGt, Pikyonium64B, 4)
                 .input(ASSEMBLER[IV], 8)
                 .input(CIRCUIT_ASSEMBLER[LuV], 8)
@@ -1149,7 +1305,7 @@ public class KeQingNET {
 
         //  Large Circuit Assembly Line
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(CIRCUIT_GOOD_II,8)
+                .input(CIRCUIT_GOOD_II, 8)
                 .input(ASSEMBLY_LINE)
                 .input(LARGE_CIRCUIT_ASSEMBLER, 4)
                 .input(CIRCUIT_ASSEMBLER[LuV], 16)
@@ -1158,7 +1314,7 @@ public class KeQingNET {
                 .input(CONVEYOR_MODULE_LuV, 64)
                 .input(plateDouble, Tantalloy61, 6)
                 .input(plateDouble, MARM200CeSteel, 6)
-                .input(gear, HSSE,6)
+                .input(gear, HSSE, 6)
                 .input(gearSmall, Osmiridium, 3)
                 .input(wireFine, Ruridit, 64)
                 .input(wireFine, Ruridit, 64)
@@ -1218,16 +1374,16 @@ public class KeQingNET {
 
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(CIRCUIT_GOOD_I,8)
-                .input(HULL[IV],8)
+                .input(CIRCUIT_GOOD_I, 8)
+                .input(HULL[IV], 8)
                 .input(ROBOT_ARM_IV, 32)
                 .input(TOOL_DATA_STICK, 1)
                 .input(frameGt, Naquadah, 16)
                 .input(plate, Staballoy, 16)
                 .input(ring, HSSS, 32)
-                .input(gearSmall,PPB,32)
-                .input(cableGtSingle,NiobiumTitanium,64)
-                .input(cableGtSingle,NiobiumTitanium,64)
+                .input(gearSmall, PPB, 32)
+                .input(cableGtSingle, NiobiumTitanium, 64)
+                .input(cableGtSingle, NiobiumTitanium, 64)
                 .output(LAGER_PROCESSING_FACTORY)
                 .fluidInputs(Polybenzimidazole.getFluid(L * 32))
                 .fluidInputs(Zylon.getFluid(L * 64))
@@ -1253,9 +1409,9 @@ public class KeQingNET {
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .inputs(HULL[3].getStackForm(16))
                 .input(circuit, Tier.MV, 8)
-                .input(ELECTRIC_MOTOR_MV,16)
-                .input(ELECTRIC_PUMP_MV,16)
-                .input(rotor,Steel,8)
+                .input(ELECTRIC_MOTOR_MV, 16)
+                .input(ELECTRIC_PUMP_MV, 16)
+                .input(rotor, Steel, 8)
                 .input(QUANTUM_TANK[1], 4)
                 .input(pipeHugeFluid, Steel, 4)
                 .input(plate, Aluminium, 8)
@@ -1274,9 +1430,9 @@ public class KeQingNET {
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .inputs(HULL[3].getStackForm(16))
                 .input(circuit, Tier.HV, 8)
-                .input(ELECTRIC_MOTOR_HV,16)
-                .input(VOLTAGE_COIL_HV,16)
-                .input(rotor,StainlessSteel,8)
+                .input(ELECTRIC_MOTOR_HV, 16)
+                .input(VOLTAGE_COIL_HV, 16)
+                .input(rotor, StainlessSteel, 8)
                 .input(QUANTUM_TANK[2], 4)
                 .input(pipeHugeFluid, Polytetrafluoroethylene, 4)
                 .input(plate, NanometerBariumTitanate, 8)
@@ -1292,9 +1448,9 @@ public class KeQingNET {
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .inputs(HULL[3].getStackForm(16))
                 .input(circuit, Tier.HV, 8)
-                .input(ELECTRIC_PUMP_HV,16)
-                .input(VOLTAGE_COIL_MV,16)
-                .input(gear,StainlessSteel,8)
+                .input(ELECTRIC_PUMP_HV, 16)
+                .input(VOLTAGE_COIL_MV, 16)
+                .input(gear, StainlessSteel, 8)
                 .input(RANDOM_ACCESS_MEMORY, 4)
                 .input(wireFine, Aluminium, 8)
                 .input(foil, Aluminium, 8)
@@ -1313,9 +1469,9 @@ public class KeQingNET {
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .inputs(HULL[4].getStackForm(16))
                 .input(circuit, Tier.EV, 8)
-                .input(ELECTRIC_PUMP_EV,16)
-                .input(VOLTAGE_COIL_EV,16)
-                .input(gear,HSSE,16)
+                .input(ELECTRIC_PUMP_EV, 16)
+                .input(VOLTAGE_COIL_EV, 16)
+                .input(gear, HSSE, 16)
                 .input(NANO_CENTRAL_PROCESSING_UNIT, 4)
                 .input(wireFine, Platinum, 64)
                 .input(wireFine, TungstenSteel, 64)
@@ -1331,9 +1487,9 @@ public class KeQingNET {
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .inputs(HULL[4].getStackForm(16))
                 .input(circuit, Tier.EV, 8)
-                .input(ELECTRIC_PUMP_EV,16)
-                .input(VOLTAGE_COIL_EV,16)
-                .input(gear,HSSG,16)
+                .input(ELECTRIC_PUMP_EV, 16)
+                .input(VOLTAGE_COIL_EV, 16)
+                .input(gear, HSSG, 16)
                 .input(NANO_CENTRAL_PROCESSING_UNIT, 4)
                 .input(wireFine, TungstenSteel, 64)
                 .input(wireFine, TungstenSteel, 64)
@@ -1349,9 +1505,9 @@ public class KeQingNET {
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .inputs(HULL[4].getStackForm(16))
                 .input(circuit, Tier.IV, 8)
-                .input(ELECTRIC_PUMP_EV,16)
-                .input(VOLTAGE_COIL_EV,16)
-                .input(gear,TungstenSteel,8)
+                .input(ELECTRIC_PUMP_EV, 16)
+                .input(VOLTAGE_COIL_EV, 16)
+                .input(gear, TungstenSteel, 8)
                 .input(NANO_CENTRAL_PROCESSING_UNIT, 4)
                 .input(pipeHugeFluid, TungstenSteel, 8)
                 .input(wireFine, Platinum, 64)
@@ -1368,10 +1524,10 @@ public class KeQingNET {
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .inputs(ARC_FURNACE[4].getStackForm(16))
                 .input(circuit, Tier.IV, 8)
-                .input(CONVEYOR_MODULE_EV,16)
-                .input(VOLTAGE_COIL_EV,32)
-                .input(foil,HSSG,8)
-                .input(gear,TungstenSteel,8)
+                .input(CONVEYOR_MODULE_EV, 16)
+                .input(VOLTAGE_COIL_EV, 32)
+                .input(foil, HSSG, 8)
+                .input(gear, TungstenSteel, 8)
                 .input(NANO_CENTRAL_PROCESSING_UNIT, 4)
                 .input(wireFine, Platinum, 64)
                 .input(wireFine, TungstenSteel, 64)
@@ -1387,9 +1543,9 @@ public class KeQingNET {
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .inputs(HULL[3].getStackForm(16))
                 .input(circuit, Tier.HV, 8)
-                .input(ELECTRIC_MOTOR_HV,16)
-                .input(ELECTRIC_PUMP_HV,16)
-                .input(gear,StainlessSteel,8)
+                .input(ELECTRIC_MOTOR_HV, 16)
+                .input(ELECTRIC_PUMP_HV, 16)
+                .input(gear, StainlessSteel, 8)
                 .input(RANDOM_ACCESS_MEMORY, 4)
                 .input(wireFine, Aluminium, 8)
                 .input(foil, Aluminium, 8)
@@ -1516,7 +1672,7 @@ public class KeQingNET {
                 .input(CONVEYOR_MODULE_LuV, 8)
                 .input(ELECTRIC_PUMP_LuV, 8)
                 .input(circuit, MarkerMaterials.Tier.LuV, 8)
-                .input(gear, HastelloyN, 8 )
+                .input(gear, HastelloyN, 8)
                 .input(plate, HastelloyN, 32)
                 .input(plateDouble, Osmiridium, 8)
                 .input(plate, MaragingSteel300, 8)
@@ -1537,12 +1693,12 @@ public class KeQingNET {
                 .buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(frameGt, HastelloyX,16)
+                .input(frameGt, HastelloyX, 16)
                 .inputs(POWER.getItemVariant(POWER_SUPPLY_BASIC, 4))
                 .input(EMITTER_EV, 8)
                 .input(SENSOR_EV, 8)
                 .input(circuit, MarkerMaterials.Tier.EV, 16)
-                .input(gear, TungstenSteel, 8 )
+                .input(gear, TungstenSteel, 8)
                 .input(plate, Platinum, 32)
                 .input(plate, Palladium, 8)
                 .input(plate, MaragingSteel300, 8)
@@ -1563,7 +1719,7 @@ public class KeQingNET {
                 .buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(frameGt, HastelloyX,64)
+                .input(frameGt, HastelloyX, 64)
                 .inputs(POWER.getItemVariant(POWER_SUPPLY_BASIC, 64))
                 .input(EMITTER_IV, 32)
                 .input(SENSOR_IV, 32)
@@ -1592,9 +1748,9 @@ public class KeQingNET {
         ASSEMBLER_RECIPES.recipeBuilder()
                 .inputs(HULL[2].getStackForm(16))
                 .input(circuit, Tier.HV, 8)
-                .input(ELECTRIC_MOTOR_MV,16)
-                .input(ELECTRIC_PUMP_MV,16)
-                .input(gear,Aluminium,16)
+                .input(ELECTRIC_MOTOR_MV, 16)
+                .input(ELECTRIC_PUMP_MV, 16)
+                .input(gear, Aluminium, 16)
                 .input(wireFine, Gold, 64)
                 .input(wireFine, Gold, 64)
                 .input(foil, Aluminium, 64)
@@ -1605,10 +1761,10 @@ public class KeQingNET {
         ASSEMBLER_RECIPES.recipeBuilder()
                 .inputs(HULL[2].getStackForm(8))
                 .input(circuit, Tier.HV, 8)
-                .input(ELECTRIC_PISTON_MV,16)
-                .input(ELECTRIC_PUMP_MV,16)
-                .input(pipeHugeFluid,Steel,8)
-                .input(gear,Aluminium,8)
+                .input(ELECTRIC_PISTON_MV, 16)
+                .input(ELECTRIC_PUMP_MV, 16)
+                .input(pipeHugeFluid, Steel, 8)
+                .input(gear, Aluminium, 8)
                 .input(rotor, Aluminium, 8)
                 .fluidInputs(Epoxy.getFluid(4000))
                 .output(FLUIDIZED_BED)
@@ -1617,26 +1773,27 @@ public class KeQingNET {
         ASSEMBLER_RECIPES.recipeBuilder()
                 .inputs(HULL[3].getStackForm(8))
                 .input(circuit, Tier.HV, 8)
-                .input(ELECTRIC_PISTON_HV,16)
-                .input(ELECTRIC_PUMP_HV,16)
-                .input(pipeHugeFluid,StainlessSteel,8)
-                .input(gear,Aluminium,8)
+                .input(ELECTRIC_PISTON_HV, 16)
+                .input(ELECTRIC_PUMP_HV, 16)
+                .input(pipeHugeFluid, StainlessSteel, 8)
+                .input(gear, Aluminium, 8)
                 .input(rotor, Aluminium, 8)
                 .fluidInputs(Epoxy.getFluid(4000))
                 .output(FIX_BED)
                 .duration(200).EUt(480).buildAndRegister();
 
     }
+
     private static void I_VV() {
         //
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .EUt(VA[EV])
-                .input(ELECTRIC_PISTON_EV,4)
-                .input(ELECTRIC_MOTOR_EV,4)
+                .input(ELECTRIC_PISTON_EV, 4)
+                .input(ELECTRIC_MOTOR_EV, 4)
                 .input(circuit, Tier.EV, 2)
                 .input(HULL[EV])
-                .input(cableGtSingle,Aluminium,2)
-                .input(gear,Titanium,2)
+                .input(cableGtSingle, Aluminium, 2)
+                .input(gear, Titanium, 2)
                 .fluidInputs(Polytetrafluoroethylene.getFluid(GTValues.L * 24))
                 .outputs(COMBUSTION_GENERATOR[0].getStackForm())
                 .scannerResearch(b -> b
@@ -1647,12 +1804,12 @@ public class KeQingNET {
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .EUt(VA[IV])
-                .input(ELECTRIC_PISTON_IV,4)
-                .input(ELECTRIC_MOTOR_IV,4)
+                .input(ELECTRIC_PISTON_IV, 4)
+                .input(ELECTRIC_MOTOR_IV, 4)
                 .input(circuit, Tier.IV, 2)
                 .input(HULL[IV])
-                .input(cableGtSingle,Platinum,2)
-                .input(gear,TungstenSteel,2)
+                .input(cableGtSingle, Platinum, 2)
+                .input(gear, TungstenSteel, 2)
                 .fluidInputs(Polybenzimidazole.getFluid(GTValues.L * 24))
                 .outputs(COMBUSTION_GENERATOR[1].getStackForm())
                 .scannerResearch(b -> b
@@ -1663,12 +1820,12 @@ public class KeQingNET {
         //
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .EUt(VA[EV])
-                .input(ELECTRIC_PISTON_EV,4)
-                .input(ELECTRIC_MOTOR_EV,4)
+                .input(ELECTRIC_PISTON_EV, 4)
+                .input(ELECTRIC_MOTOR_EV, 4)
                 .input(circuit, Tier.EV, 2)
                 .input(HULL[EV])
-                .input(cableGtSingle,Aluminium,2)
-                .input(rotor,Titanium,2)
+                .input(cableGtSingle, Aluminium, 2)
+                .input(rotor, Titanium, 2)
                 .fluidInputs(Polytetrafluoroethylene.getFluid(GTValues.L * 24))
                 .outputs(GAS_TURBINE[0].getStackForm())
                 .scannerResearch(b -> b
@@ -1679,12 +1836,12 @@ public class KeQingNET {
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .EUt(VA[IV])
-                .input(ELECTRIC_PISTON_IV,4)
-                .input(ELECTRIC_MOTOR_IV,4)
+                .input(ELECTRIC_PISTON_IV, 4)
+                .input(ELECTRIC_MOTOR_IV, 4)
                 .input(circuit, Tier.IV, 2)
                 .input(HULL[IV])
-                .input(cableGtSingle,Platinum,2)
-                .input(rotor,TungstenSteel,2)
+                .input(cableGtSingle, Platinum, 2)
+                .input(rotor, TungstenSteel, 2)
                 .fluidInputs(Polybenzimidazole.getFluid(GTValues.L * 24))
                 .outputs(GAS_TURBINE[1].getStackForm())
                 .scannerResearch(b -> b
@@ -1695,12 +1852,12 @@ public class KeQingNET {
         //
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .EUt(VA[EV])
-                .input(ELECTRIC_PISTON_EV,4)
-                .input(ELECTRIC_MOTOR_EV,4)
+                .input(ELECTRIC_PISTON_EV, 4)
+                .input(ELECTRIC_MOTOR_EV, 4)
                 .input(circuit, Tier.EV, 2)
                 .input(HULL[EV])
-                .input(cableGtSingle,Aluminium,2)
-                .input(pipeNormalFluid,Titanium,2)
+                .input(cableGtSingle, Aluminium, 2)
+                .input(pipeNormalFluid, Titanium, 2)
                 .fluidInputs(Polytetrafluoroethylene.getFluid(GTValues.L * 24))
                 .outputs(STEAM_TURBINE[0].getStackForm())
                 .scannerResearch(b -> b
@@ -1711,12 +1868,12 @@ public class KeQingNET {
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .EUt(VA[IV])
-                .input(ELECTRIC_PISTON_IV,4)
-                .input(ELECTRIC_MOTOR_IV,4)
+                .input(ELECTRIC_PISTON_IV, 4)
+                .input(ELECTRIC_MOTOR_IV, 4)
                 .input(circuit, Tier.IV, 2)
                 .input(HULL[IV])
-                .input(cableGtSingle,Platinum,2)
-                .input(pipeNormalFluid,TungstenSteel,2)
+                .input(cableGtSingle, Platinum, 2)
+                .input(pipeNormalFluid, TungstenSteel, 2)
                 .fluidInputs(Polybenzimidazole.getFluid(GTValues.L * 24))
                 .outputs(STEAM_TURBINE[1].getStackForm())
                 .scannerResearch(b -> b
@@ -1728,11 +1885,11 @@ public class KeQingNET {
         //火箭
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .EUt(VA[EV])
-                .input(ELECTRIC_PISTON_EV,8)
-                .input(ELECTRIC_MOTOR_EV,8)
+                .input(ELECTRIC_PISTON_EV, 8)
+                .input(ELECTRIC_MOTOR_EV, 8)
                 .input(circuit, Tier.EV, 4)
                 .input(HULL[EV])
-                .input(wireGtDouble,UraniumTriplatinum,8)
+                .input(wireGtDouble, UraniumTriplatinum, 8)
                 .input(OrePrefix.foil, Titanium, 32)
                 .fluidInputs(Materials.Polytetrafluoroethylene.getFluid(GTValues.L * 24))
                 .outputs(ROCKET_ENGINE[0].getStackForm())
@@ -1744,11 +1901,11 @@ public class KeQingNET {
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .EUt(VA[IV])
-                .input(ELECTRIC_PISTON_IV,8)
-                .input(ELECTRIC_MOTOR_IV,8)
+                .input(ELECTRIC_PISTON_IV, 8)
+                .input(ELECTRIC_MOTOR_IV, 8)
                 .input(circuit, Tier.IV, 4)
                 .input(HULL[IV])
-                .input(wireGtDouble,SamariumIronArsenicOxide,8)
+                .input(wireGtDouble, SamariumIronArsenicOxide, 8)
                 .input(OrePrefix.foil, TungstenSteel, 32)
                 .fluidInputs(Materials.Polybenzimidazole.getFluid(GTValues.L * 24))
                 .outputs(ROCKET_ENGINE[1].getStackForm())
@@ -1760,11 +1917,11 @@ public class KeQingNET {
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .EUt(VA[LuV])
-                .input(ELECTRIC_PISTON_LUV,8)
-                .input(ELECTRIC_MOTOR_LuV,8)
+                .input(ELECTRIC_PISTON_LUV, 8)
+                .input(ELECTRIC_MOTOR_LuV, 8)
                 .input(circuit, Tier.LuV, 4)
                 .input(HULL[LuV])
-                .input(wireGtDouble,IndiumTinBariumTitaniumCuprate,8)
+                .input(wireGtDouble, IndiumTinBariumTitaniumCuprate, 8)
                 .input(OrePrefix.foil, Materials.NiobiumTitanium, 32)
                 .fluidInputs(Materials.Trinium.getFluid(GTValues.L * 24))
                 .outputs(ROCKET_ENGINE[2].getStackForm())
@@ -1778,12 +1935,12 @@ public class KeQingNET {
         ModHandler.removeRecipeByName("gregtech:large_combustion_engine");
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .EUt(VA[EV])
-                .input(ELECTRIC_PISTON_EV,8)
-                .input(ELECTRIC_MOTOR_EV,8)
+                .input(ELECTRIC_PISTON_EV, 8)
+                .input(ELECTRIC_MOTOR_EV, 8)
                 .input(circuit, Tier.EV, 8)
-                .input(HULL[EV],4)
-                .input(wireGtDouble,UraniumTriplatinum,16)
-                .input(gear,Titanium,2)
+                .input(HULL[EV], 4)
+                .input(wireGtDouble, UraniumTriplatinum, 16)
+                .input(gear, Titanium, 2)
                 .input(plateDouble, Titanium, 32)
                 .fluidInputs(Polytetrafluoroethylene.getFluid(GTValues.L * 24))
                 .outputs(LARGE_COMBUSTION_ENGINE.getStackForm())
@@ -1796,12 +1953,12 @@ public class KeQingNET {
         ModHandler.removeRecipeByName("gregtech:extreme_combustion_engine");
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .EUt(VA[IV])
-                .input(ELECTRIC_PISTON_IV,8)
-                .input(ELECTRIC_MOTOR_IV,8)
+                .input(ELECTRIC_PISTON_IV, 8)
+                .input(ELECTRIC_MOTOR_IV, 8)
                 .input(circuit, Tier.IV, 8)
-                .input(HULL[IV],4)
-                .input(wireGtDouble,SamariumIronArsenicOxide,16)
-                .input(gear,TungstenSteel,2)
+                .input(HULL[IV], 4)
+                .input(wireGtDouble, SamariumIronArsenicOxide, 16)
+                .input(gear, TungstenSteel, 2)
                 .input(plateDouble, TungstenSteel, 32)
                 .fluidInputs(Polybenzimidazole.getFluid(GTValues.L * 24))
                 .outputs(EXTREME_COMBUSTION_ENGINE.getStackForm())
@@ -1812,7 +1969,7 @@ public class KeQingNET {
                 .duration(100).buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(LARGE_STEAM_TURBINE,6)
+                .input(LARGE_STEAM_TURBINE, 6)
                 .input(plate, WatertightSteel, 8)
                 .input(circuit, MarkerMaterials.Tier.LuV, 32)
                 .input(ELECTRIC_PUMP_IV, 4)
@@ -1831,7 +1988,7 @@ public class KeQingNET {
 
         //  Mega Gas Turbine
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(LARGE_GAS_TURBINE,6)
+                .input(LARGE_GAS_TURBINE, 6)
                 .input(plate, TantalumCarbide, 8)
                 .input(circuit, MarkerMaterials.Tier.ZPM, 32)
                 .input(ELECTRIC_PUMP_LuV, 4)
@@ -1850,7 +2007,7 @@ public class KeQingNET {
 
         //  Mega Plasma Turbine
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(LARGE_PLASMA_TURBINE,6)
+                .input(LARGE_PLASMA_TURBINE, 6)
                 .input(plate, HMS1J79Alloy, 8)
                 .input(circuit, MarkerMaterials.Tier.UV, 32)
                 .input(ELECTRIC_PUMP_ZPM, 4)
@@ -1924,11 +2081,11 @@ public class KeQingNET {
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .EUt(VA[IV])
-                .input(ELECTRIC_PISTON_IV,16)
-                .input(ELECTRIC_MOTOR_IV,16)
+                .input(ELECTRIC_PISTON_IV, 16)
+                .input(ELECTRIC_MOTOR_IV, 16)
                 .input(circuit, Tier.IV, 8)
-                .input(HULL[IV],4)
-                .input(wireGtDouble,SamariumIronArsenicOxide,8)
+                .input(HULL[IV], 4)
+                .input(wireGtDouble, SamariumIronArsenicOxide, 8)
                 .input(plate, TungstenSteel, 32)
                 .fluidInputs(Materials.Polybenzimidazole.getFluid(GTValues.L * 24))
                 .outputs(HUGE_TURBINE_COMBUSTION_CHAMBER.getStackForm())
@@ -1940,11 +2097,11 @@ public class KeQingNET {
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .EUt(VA[IV])
-                .input(ELECTRIC_PISTON_IV,16)
-                .input(ELECTRIC_MOTOR_IV,16)
+                .input(ELECTRIC_PISTON_IV, 16)
+                .input(ELECTRIC_MOTOR_IV, 16)
                 .input(circuit, Tier.IV, 8)
-                .input(HULL[IV],4)
-                .input(wireGtDouble,TungstenSteel,8)
+                .input(HULL[IV], 4)
+                .input(wireGtDouble, TungstenSteel, 8)
                 .input(plate, NanometerBariumTitanate, 32)
                 .fluidInputs(Zylon.getFluid(GTValues.L * 24))
                 .outputs(LARGE_GAS_TURBINE.getStackForm())
@@ -1956,11 +2113,11 @@ public class KeQingNET {
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .EUt(VA[LuV])
-                .input(ELECTRIC_PISTON_LUV,16)
-                .input(ELECTRIC_MOTOR_LuV,16)
+                .input(ELECTRIC_PISTON_LUV, 16)
+                .input(ELECTRIC_MOTOR_LuV, 16)
                 .input(circuit, Tier.LuV, 4)
-                .input(HULL[LuV],4)
-                .input(wireGtDouble,IndiumTinBariumTitaniumCuprate,8)
+                .input(HULL[LuV], 4)
+                .input(wireGtDouble, IndiumTinBariumTitaniumCuprate, 8)
                 .input(plate, Materials.NiobiumTitanium, 32)
                 .fluidInputs(Materials.Trinium.getFluid(GTValues.L * 24))
                 .outputs(ROCKET.getStackForm())
@@ -2015,7 +2172,7 @@ public class KeQingNET {
                 .duration(800).EUt(VA[UV]).buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(OrePrefix.wireGtDouble,UHVSuperconductor, 4)
+                .input(OrePrefix.wireGtDouble, UHVSuperconductor, 4)
                 .input(OrePrefix.foil, Materials.NiobiumTitanium, 4)
                 .fluidInputs(Materials.Trinium.getFluid(576))
                 .outputs(MetaBlocks.FUSION_CASING.getItemVariant(BlockFusionCasing.CasingType.SUPERCONDUCTOR_COIL))
@@ -2026,11 +2183,11 @@ public class KeQingNET {
                 .duration(800).EUt(VA[UHV]).buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(CIRCUIT_GOOD_I,8)
+                .input(CIRCUIT_GOOD_I, 8)
                 .inputs(FUSION_CASING.getItemVariant(SUPERCONDUCTOR_COIL))
                 .input(circuit, Tier.ZPM, 64)
-                .input(plateDouble, Plutonium241,6)
-                .input(plateDouble, NaquadahAlloy,6)
+                .input(plateDouble, Plutonium241, 6)
+                .input(plateDouble, NaquadahAlloy, 6)
                 .input(FIELD_GENERATOR_IV, 32)
                 .input(ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT, 64)
                 .input(ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT, 64)
@@ -2048,11 +2205,11 @@ public class KeQingNET {
                 .duration(2000).EUt(VA[LuV]).buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(CIRCUIT_GOOD_II,8)
+                .input(CIRCUIT_GOOD_II, 8)
                 .inputs(FUSION_CASING.getItemVariant(FUSION_COIL))
                 .input(circuit, Tier.UV, 64)
-                .input(plateDouble, Naquadria,6)
-                .input(plateDouble, Duranium,6)
+                .input(plateDouble, Naquadria, 6)
+                .input(plateDouble, Duranium, 6)
                 .input(FIELD_GENERATOR_LuV, 32)
                 .input(ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT, 64)
                 .input(ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT, 64)
@@ -2070,11 +2227,11 @@ public class KeQingNET {
                 .duration(2000).EUt(VA[LuV]).buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(CIRCUIT_GOOD_III,8)
+                .input(CIRCUIT_GOOD_III, 8)
                 .inputs(FUSION_CASING.getItemVariant(FUSION_COIL))
                 .input(circuit, Tier.UHV, 64)
-                .input(plateDouble, Darmstadtium,6)
-                .input(plateDouble, Americium,6)
+                .input(plateDouble, Darmstadtium, 6)
+                .input(plateDouble, Americium, 6)
                 .input(FIELD_GENERATOR_ZPM, 32)
                 .input(ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT, 64)
                 .input(ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT, 64)
@@ -2094,8 +2251,8 @@ public class KeQingNET {
         //压缩聚变
         //  Compressed Fusion Reactor Mk I
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(CIRCUIT_GOOD_I,16)
-                .input(HULL[LuV],16)
+                .input(CIRCUIT_GOOD_I, 16)
+                .input(HULL[LuV], 16)
                 .input(FUSION_REACTOR[0], 16)
                 .input(plate, Europium, 32)
                 .input(circuit, MarkerMaterials.Tier.ZPM, 64)
@@ -2119,8 +2276,8 @@ public class KeQingNET {
 
         //  Compressed Fusion Reactor Mk II
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(CIRCUIT_GOOD_II,16)
-                .input(HULL[ZPM],16)
+                .input(CIRCUIT_GOOD_II, 16)
+                .input(HULL[ZPM], 16)
                 .input(FUSION_REACTOR[1], 16)
                 .input(plate, Americium, 32)
                 .input(circuit, MarkerMaterials.Tier.UV, 64)
@@ -2144,8 +2301,8 @@ public class KeQingNET {
 
         //  Compressed Fusion Reactor Mk III
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(CIRCUIT_GOOD_III,16)
-                .input(HULL[UV],16)
+                .input(CIRCUIT_GOOD_III, 16)
+                .input(HULL[UV], 16)
                 .input(FUSION_REACTOR[2], 16)
                 .input(plate, Darmstadtium, 32)
                 .input(circuit, MarkerMaterials.Tier.UHV, 64)
@@ -2339,49 +2496,49 @@ public class KeQingNET {
                 .output(GTQTMetaTileEntities.ADVANCED_FLUID_DRILLING_RIG)
                 .stationResearch(b -> b
                         .researchStack(DISK_9.getStackForm())
-                        .CWUt(1000,4000000)
+                        .CWUt(1000, 4000000)
                         .EUt(VA[LuV]))
                 .duration(400).EUt(VA[LuV]).buildAndRegister();
 
     }
-    public static void KQ_NET(int kind,int tier, int number, MetaItem<?>.MetaValueItem item, OrePrefix prefix, Material material)
-    {
+
+    public static void KQ_NET(int kind, int tier, int number, MetaItem<?>.MetaValueItem item, OrePrefix prefix, Material material) {
         GTQTcoreRecipeMaps.KEQING_NET_RECIES.recipeBuilder()
                 .Tier(tier)
                 .KI(kind)
                 .input(DISK_0)
-                .notConsumable(prefix,material)
+                .notConsumable(prefix, material)
                 .output(item)
-                .EUt(VA[2*tier])
-                .CWUt(CWT[2*tier])
+                .EUt(VA[2 * tier])
+                .CWUt(CWT[2 * tier])
                 .duration(20000)
                 .NB(number)
                 .buildAndRegister();
     }
-    public static void KQ_NET(int kind,int tier, int number, MetaItem<?>.MetaValueItem item1, MetaItem<?>.MetaValueItem item2)
-    {
+
+    public static void KQ_NET(int kind, int tier, int number, MetaItem<?>.MetaValueItem item1, MetaItem<?>.MetaValueItem item2) {
         GTQTcoreRecipeMaps.KEQING_NET_RECIES.recipeBuilder()
                 .Tier(tier)
                 .KI(kind)
                 .input(DISK_0)
                 .notConsumable(item2)
                 .output(item1)
-                .EUt(VA[2*tier])
-                .CWUt(CWT[2*tier])
+                .EUt(VA[2 * tier])
+                .CWUt(CWT[2 * tier])
                 .duration(20000)
                 .NB(number)
                 .buildAndRegister();
     }
-    public static void KQ_NET(int kind,int tier, int number, MetaItem<?>.MetaValueItem item, ItemStack itemStack)
-    {
+
+    public static void KQ_NET(int kind, int tier, int number, MetaItem<?>.MetaValueItem item, ItemStack itemStack) {
         GTQTcoreRecipeMaps.KEQING_NET_RECIES.recipeBuilder()
                 .Tier(tier)
                 .KI(kind)
                 .input(DISK_0)
                 .notConsumable(itemStack)
                 .output(item)
-                .EUt(VA[2*tier])
-                .CWUt(CWT[2*tier])
+                .EUt(VA[2 * tier])
+                .CWUt(CWT[2 * tier])
                 .duration(20000)
                 .NB(number)
                 .buildAndRegister();

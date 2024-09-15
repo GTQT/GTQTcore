@@ -29,6 +29,7 @@ import java.util.stream.Stream;
 
 import static gregicality.multiblocks.api.unification.GCYMMaterials.*;
 import static gregicality.multiblocks.common.metatileentities.GCYMMetaTileEntities.LARGE_ASSEMBLER;
+import static gregicality.multiblocks.common.metatileentities.GCYMMetaTileEntities.LARGE_DISTILLERY;
 import static gregtech.api.GTValues.L;
 import static gregtech.api.GTValues.LuV;
 import static gregtech.api.GTValues.VA;
@@ -656,11 +657,11 @@ public class MetaTileEntityLoader {
 
         ModHandler.addShapedRecipe(true, "crystallization_crucible", CRYSTALLIZATION_CRUCIBLE.getStackForm(),
                 "CMC", "LHL", "PCP",
-                'C', new UnificationEntry(circuit, MarkerMaterials.Tier.IV),
+                'C', new UnificationEntry(circuit, MarkerMaterials.Tier.LuV),
                 'M', new UnificationEntry(plateDouble, MolybdenumDisilicide),
                 'L', new UnificationEntry(pipeNormalFluid, Titanium),
-                'H', MetaTileEntities.HULL[3].getStackForm(),
-                'P', new UnificationEntry(plate, Titanium)
+                'H', MetaTileEntities.HULL[5].getStackForm(),
+                'P', new UnificationEntry(plate, TungstenSteel)
         );
 
         ModHandler.addShapedRecipe(true, "cz_puller",
@@ -726,6 +727,16 @@ public class MetaTileEntityLoader {
                 "BBB", "CMC", "FFF", 'M', MetaTileEntities.HULL[GTValues.LV].getStackForm(), 'C',
                 new UnificationEntry(OrePrefix.pipeLargeFluid, Steel), 'B',
                 new UnificationEntry(OrePrefix.circuit, LV), 'F', MetaItems.ELECTRIC_PUMP_LV);
+
+        //  Dangote Distillery
+        ModHandler.addShapedRecipe(true, "dangote_distillery", DANGOTE_DISTILLERY.getStackForm(),
+                "SWS", "PHP", "pGp",
+                'H', LARGE_DISTILLERY.getStackForm(),
+                'P', ELECTRIC_PUMP_LuV,
+                'p', new UnificationEntry(plate, HG1223),
+                'G', new UnificationEntry(gear, Osmiridium),
+                'S', new UnificationEntry(spring, MolybdenumDisilicide),
+                'W', new UnificationEntry(cableGtSingle, NiobiumTitanium));
 
         ModHandler.addShapedRecipe(true, "mining_drill", GTQTMetaTileEntities.MINING_DRILL.getStackForm(),
                 "FFF", "BMB", "CCC", 'M', MetaTileEntities.HULL[GTValues.LV].getStackForm(), 'B',
@@ -1278,25 +1289,27 @@ public class MetaTileEntityLoader {
                 'C', new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.UV),
                 'F', MetaItems.ELECTRIC_PUMP_UV);
 
-
-
+        //  Naquadah Reactor
         ModHandler.addShapedRecipe(true, "naquadah_reactor_iv", GTQTMetaTileEntities.NAQUADAH_REACTOR[0].getStackForm(),
-                "PPP", "CFC", "EME", 'M', HULL[GTValues.IV].getStackForm(),
-                'P', MetaItems.ELECTRIC_PISTON_IV,
+                "PPP", "CFC", "EME",
+                'M', HULL[GTValues.IV].getStackForm(),
+                'P', FIELD_GENERATOR_IV,
                 'E', MetaTileEntities.CHEMICAL_REACTOR[GTValues.IV].getStackForm(),
                 'C', new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.IV),
                 'F', MetaItems.ELECTRIC_PUMP_IV);
 
         ModHandler.addShapedRecipe(true, "naquadah_reactor_luv", GTQTMetaTileEntities.NAQUADAH_REACTOR[1].getStackForm(),
-                "PPP", "CFC", "EME", 'M', HULL[GTValues.LuV].getStackForm(),
-                'P', MetaItems.ELECTRIC_PISTON_LUV,
+                "PPP", "CFC", "EME",
+                'M', HULL[GTValues.LuV].getStackForm(),
+                'P', FIELD_GENERATOR_LuV,
                 'E', MetaTileEntities.CHEMICAL_REACTOR[GTValues.LuV].getStackForm(),
                 'C', new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.LuV),
                 'F', MetaItems.ELECTRIC_PUMP_LuV);
 
         ModHandler.addShapedRecipe(true, "naquadah_reactor_zpm", GTQTMetaTileEntities.NAQUADAH_REACTOR[2].getStackForm(),
-                "PPP", "CFC", "EME", 'M', HULL[GTValues.ZPM].getStackForm(),
-                'P', MetaItems.ELECTRIC_PISTON_ZPM,
+                "PPP", "CFC", "EME",
+                'M', HULL[GTValues.ZPM].getStackForm(),
+                'P', FIELD_GENERATOR_ZPM,
                 'E', MetaTileEntities.CHEMICAL_REACTOR[GTValues.ZPM].getStackForm(),
                 'C', new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.ZPM),
                 'F', MetaItems.ELECTRIC_PUMP_ZPM);

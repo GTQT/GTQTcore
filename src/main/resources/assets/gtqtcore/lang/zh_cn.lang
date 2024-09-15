@@ -1029,6 +1029,7 @@ gregtech.material.orichalcum=山铜
 gregtech.material.vibranium=振金
 gregtech.material.adamantium=精金
 gregtech.material.taranium=塔兰金属
+gregtech.material.tiberium=泰伯利安
 gregtech.material.plutonium_244=钚-244
 gregtech.material.metastable_oganesson=亚稳态气奥
 gregtech.material.metastable_hassium=亚稳态钅黑
@@ -1163,6 +1164,13 @@ gregtech.material.polyethylene_terephthalate=聚对苯二甲酸乙二醇酯（PE
 gregtech.material.para_toluic_acid=对甲基苯甲酸
 gregtech.material.methylparatoluate=对甲基苯甲酸甲酯
 gregtech.material.dimethyl_terephthalate=对苯二甲酸二甲酯
+gregtech.material.crude_exotic_gas=粗异星天然气
+gregtech.material.cracked_crude_exotic_gas=气奥裂化的粗异星天然气
+gregtech.material.naquadic_exotic_gas=硅岩化异星天然气
+gregtech.material.superheavy_exotic_gas=超重异星天然气
+gregtech.material.heavy_exotic_gas=重异星天然气
+gregtech.material.medium_exotic_gas=异星天然气
+gregtech.material.light_exotic_gas=轻异星天然气
 gregtech.material.ammonium_difluoride=二氟化铵
 gregtech.material.beryllium_difluoride=二氟化铍
 gregtech.material.pr_ho_y_nitrates_solution=硝酸镨-钬-钇溶液
@@ -3332,6 +3340,18 @@ gregtech.material.palladium_bis=乙酰丙酮钯
 metaitem.dragon_cell.name=龙细胞
 metaitem.pre_dragon_cell.name=预处理龙细胞
 
+metaitem.algae.barnarda_c.chlorella.name=巴纳德C球藻
+metaitem.algae.barnarda_c.bryopsis_hypnoides.name=巴纳德C藓羽藻
+metaitem.algae.barnarda_c.zooxanthellae.name=巴纳德C黄藻
+
+metaitem.algae.tau_ceti_f.scenedesmus_obliquus.name=天仓五斜生栅藻
+metaitem.algae.tau_ceti_f.phaeophyta.name=天苍五褐藻
+metaitem.algae.tau_ceti_f.spirulina.name=天苍五螺旋蓝藻
+
+metaitem.algae.proxima_b.conchospore.name=比邻星B壳班藻
+metaitem.algae.proxima_b.polysiphonia_senticulosa.name=比邻星B多管藻
+metaitem.algae.proxima_b.spirogyra.name=比邻星B水绵藻
+
 metaitem.sterilized.petri.dish.name=无菌培养皿
 metaitem.contaminated.petri.dish.name=被污染的培养皿
 metaitem.electrically.wired.petri.dish.name=电子接线培养皿
@@ -3388,8 +3408,7 @@ gregtech.material.uiv_superconductor=UIV超导体
 gregtech.material.uxv_superconductor=UXV超导体
 gregtech.material.opv_superconductor=OpV超导体
 
-
-
+gregtech.machine.network_switch.tooltip.5=最大算力通量 1024 CWU/t
 metaitem.pos_ore_card.name=地质存储模块
 
 tile.isa_casing.separator_rotor.name=重力沉降分选槽
@@ -3800,6 +3819,16 @@ gtqtcore.multiblock.kqn.nb25=云数据存储
 gtqtcore.multiblock.kqn.nx25=由分布式处理、并行处理和网格计算的发展通过云计算技术，网络服务提供者可以在数秒之内，处理数以千万计甚至亿计的信息，达到和”超级计算机”同样强大的网络服务。
 metaitem.disk.25.name=数据存储器
 metaitem.disk.25.tooltip=§a云数据存储
+
+gtqtcore.multiblock.kqn.nb26=硅岩燃料萃取
+gtqtcore.multiblock.kqn.nx26=通过从小行星带获取的硅岩物质进行处理，研究发现其精炼产物超能硅岩拥有巨大的蕴藏能量，将这种能量控制、利用，以实现超能硅岩的能源利用，而其产物不具有任何污染性。
+metaitem.disk.26.name=数据存储器
+metaitem.disk.26.tooltip=§a硅岩燃料萃取
+
+gtqtcore.multiblock.kqn.nb27=奇异燃料提炼
+gtqtcore.multiblock.kqn.nx27=通过对在基岩气中发现的塔兰金属进行处理，研究发现将Ta-226与超能硅岩燃料混合，并且额外加入部分放射性元素即可激发释放来自硅岩与裂变原料的大部分能量。
+metaitem.disk.27.name=数据存储器
+metaitem.disk.27.tooltip=§a奇异燃料提炼
 
 gtqtcore.multiblock.kqn.bio0=欢迎使用KQCC科研计算机集成系统！
 metaitem.bio.0.name=基因存储器

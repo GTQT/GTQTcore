@@ -52,9 +52,9 @@ public class MetaTileEntityLargeNaquadahReactor extends FuelMultiblockController
     private boolean boostAllowed;
 
     public MetaTileEntityLargeNaquadahReactor(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, GTQTcoreRecipeMaps.NAQUADAH_REACTOR, UHV);
+        super(metaTileEntityId, GTQTcoreRecipeMaps.NAQUADAH_REACTOR_RECIPES, UV);
         this.recipeMapWorkable = new LargeNaquadahReactorWorkableHandler(this);
-        this.recipeMapWorkable.setMaximumOverclockVoltage(V[UHV]);
+        this.recipeMapWorkable.setMaximumOverclockVoltage(V[UV]);
     }
 
     @Override
@@ -75,7 +75,7 @@ public class MetaTileEntityLargeNaquadahReactor extends FuelMultiblockController
         LargeNaquadahReactorWorkableHandler recipeLogic = (LargeNaquadahReactorWorkableHandler) this.recipeMapWorkable;
         MultiblockDisplayText.builder(textList, this.isStructureFormed())
                 .setWorkingStatus(recipeLogic.isWorkingEnabled(), recipeLogic.isActive())
-                .addEnergyProductionLine(GTValues.V[UEV], recipeLogic.getRecipeEUt())
+                .addEnergyProductionLine(GTValues.V[UHV], recipeLogic.getRecipeEUt())
                 .addFuelNeededLine(recipeLogic.getRecipeFluidInputInfo(), recipeLogic.getPreviousRecipeDuration())
                 .addCustom((tl) -> {
                     if (this.isStructureFormed() && recipeLogic.isBoosted) {
@@ -91,8 +91,8 @@ public class MetaTileEntityLargeNaquadahReactor extends FuelMultiblockController
                                List<String> tooltip,
                                boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
-        tooltip.add(I18n.format("gregtech.universal.tooltip.base_production_eut", GTValues.V[UHV]));
-        tooltip.add(I18n.format("gtqtcore.machine.large_naquadah_reactor.tooltip.boost", GTValues.V[UHV] * 4L));
+        tooltip.add(I18n.format("gregtech.universal.tooltip.base_production_eut", GTValues.V[UV]));
+        tooltip.add(I18n.format("gtqtcore.machine.large_naquadah_reactor.tooltip.boost", GTValues.V[UV] * 4L));
         tooltip.add(I18n.format("gtqtcore.universal.tooltip.laser_output"));
     }
 
@@ -111,7 +111,7 @@ public class MetaTileEntityLargeNaquadahReactor extends FuelMultiblockController
                         .or(metaTileEntities(MultiblockAbility.REGISTRY.get(MultiblockAbility.OUTPUT_ENERGY).stream()
                                 .filter(mte -> {
                                     IEnergyContainer container = mte.getCapability(GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER, null);
-                                    return container != null && container.getOutputVoltage() == GTValues.V[UHV];})
+                                    return container != null && container.getOutputVoltage() == GTValues.V[UV];})
                                 .toArray(MetaTileEntity[]::new))
                                 .setMaxGlobalLimited(1)
                                 .setPreviewCount(1))
@@ -171,7 +171,7 @@ public class MetaTileEntityLargeNaquadahReactor extends FuelMultiblockController
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
         IEnergyContainer energyContainer = this.getEnergyContainer();
-        this.boostAllowed = energyContainer != null && energyContainer.getOutputVoltage() >= GTValues.V[UEV];
+        this.boostAllowed = energyContainer != null && energyContainer.getOutputVoltage() >= GTValues.V[UHV];
     }
 
     @Override
@@ -299,7 +299,7 @@ public class MetaTileEntityLargeNaquadahReactor extends FuelMultiblockController
 
         @Override
         public long getMaxVoltage() {
-            return this.isBoosted ? GTValues.V[UHV] * 2L : GTValues.V[UHV];
+            return this.isBoosted ? GTValues.V[UV] * 2L : GTValues.V[UV];
         }
 
         @Override

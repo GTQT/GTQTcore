@@ -28,6 +28,20 @@ public class DragonChain {
                 .chancedOutput(PRE_DRAGON_CELL,1000,0)
                 .duration(4000).EUt(VA[HV]).buildAndRegister();
 
+        GENE_MUTAGENESIS.recipeBuilder()
+                .inputs(new ItemStack(Blocks.DRAGON_EGG))
+                .output(PRE_DRAGON_CELL,64)
+                .output(PRE_DRAGON_CELL,64)
+                .fluidOutputs(DragonBreath.getFluid(400))
+                .fluidInputs(DistilledWater.getFluid(16000))
+                .fluidInputs(Rnzymes.getFluid(4000))
+                .fluidInputs(Ethanesulphonate.getFluid(200))
+                .EUt(VA[IV])
+                .rate(80)
+                .duration(1200 * SECOND)
+                .cleanroom(CleanroomType.CLEANROOM)
+                .buildAndRegister();
+
         BIOLOGICAL_REACTION_RECIPES.recipeBuilder()
                 .input(PRE_DRAGON_CELL)
                 .input(dust,Uranium238)
@@ -61,23 +75,24 @@ public class DragonChain {
                 .input(BONE,64)
                 .fluidInputs(DNAe.getFluid(1000))
                 .fluidInputs(Enzymesda.getFluid(1000))
+                .fluidOutputs(DragonBreath.getFluid(200))
                 .outputs(new ItemStack(DRAGON_EGG))
-                .fluidOutputs(DragonBlood.getFluid(200))
                 .rate(80)
                 .duration(8000).EUt(VA[HV]).buildAndRegister();
+
 
         //  Compatibility of Vanilla Dragon Breath (bottle?)
         EXTRACTOR_RECIPES.recipeBuilder()
                 .input(Items.DRAGON_BREATH)
                 .output(Items.GLASS_BOTTLE)
-                .fluidOutputs(DragonBreath.getFluid(1000))
+                .fluidOutputs(DragonBreath.getFluid(100))
                 .EUt(VA[HV])
                 .duration(2 * SECOND + 10)
                 .buildAndRegister();
 
         CANNER_RECIPES.recipeBuilder()
                 .input(Items.GLASS_BOTTLE)
-                .fluidInputs(DragonBreath.getFluid(1000))
+                .fluidInputs(DragonBreath.getFluid(100))
                 .output(Items.DRAGON_BREATH)
                 .EUt(VA[ULV])
                 .duration(5 * SECOND)
@@ -86,18 +101,16 @@ public class DragonChain {
         //  Dragon breath -> Concentrate Dragon Breath
         CHEMICAL_BATH_RECIPES.recipeBuilder()
                 .notConsumable(new ItemStack(DRAGON_EGG))
-                .fluidInputs(DragonBreath.getFluid(1000))
-                .fluidOutputs(ConcentrateDragonBreath.getFluid(1000))
+                .fluidInputs(DragonBreath.getFluid(200))
+                .fluidOutputs(ConcentrateDragonBreath.getFluid(100))
                 .EUt(VA[IV])
                 .duration(10 * SECOND)
                 .cleanroom(CleanroomType.CLEANROOM)
                 .buildAndRegister();
 
-        //  Concentrate Dragon Breath + Rn -> Dragon Blood
-        //  This is a material for Hypogen's fusion recipe, another material is Rhugnor.
         //  TODO rebalanced it.
         SONICATION_RECIPES.recipeBuilder()
-                .fluidInputs(ConcentrateDragonBreath.getFluid(200))
+                .fluidInputs(ConcentrateDragonBreath.getFluid(2000))
                 .fluidInputs(Radon.getFluid(1000))
                 .chancedOutput(dust, Endstone, 2000, 0)
                 .fluidOutputs(DragonBlood.getFluid(1000))

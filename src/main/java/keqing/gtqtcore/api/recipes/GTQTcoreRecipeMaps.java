@@ -422,7 +422,7 @@ public class GTQTcoreRecipeMaps {
                 .setSound(GTSoundEvents.ASSEMBLER);
 
         NAQUADAH_REACTOR = new RecipeMap<>("naquadah_reactor",
-                3, 1, 1, 1, new FuelRecipeBuilder(), false)
+                1, 1, 0, 0, new FuelRecipeBuilder(), false)
                 .allowEmptyOutput();
 
         I_MODULAR_FISSION_REACTOR = new RecipeMap<>("i_modular_fission_reactor",

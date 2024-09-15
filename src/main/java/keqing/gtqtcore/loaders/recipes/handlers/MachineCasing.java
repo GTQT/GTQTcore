@@ -24,14 +24,17 @@ import static gregtech.common.items.MetaItems.*;
 import static gregtech.common.items.MetaItems.ELECTRIC_MOTOR_LuV;
 import static gregtech.common.metatileentities.MetaTileEntities.HULL;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.BLAST_ARC_RECIPES;
+import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.PRECISE_ASSEMBLER_RECIPES;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
+import static keqing.gtqtcore.api.utils.GTQTUtil.CWT;
 import static keqing.gtqtcore.common.block.blocks.GTQTIsaCasing.CasingType.*;
 import static keqing.gtqtcore.common.block.blocks.GTQTMultiblockCasing.CasingType.NAQUADAH_ALLOY_CASING;
 import static keqing.gtqtcore.common.block.blocks.GTQTMultiblockCasing.CasingType.NAQUADRIA_CASING;
 import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.*;
 import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing1.TurbineCasingType.GALVANIZE_STEEL_CASING;
 import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing1.TurbineCasingType.*;
+import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 
 public class MachineCasing {
     public static void init() {
@@ -160,6 +163,63 @@ public class MachineCasing {
                 'F', new UnificationEntry(frameGt, MaragingSteel300),
                 'P', new UnificationEntry(pipeNormalFluid, Inconel625),
                 'A', new UnificationEntry(plate, NiobiumTitanium));
+
+
+        ModHandler.addShapedRecipe(true, "talonite_casing", GTQTMetaBlocks.TURBINE_CASING.getItemVariant(TALONITE_CASING, 1),
+                "APA", "PFP", "APA",
+                'F', new UnificationEntry(frameGt, Neutronium),
+                'P', new UnificationEntry(pipeNormalFluid, Naquadah),
+                'A', new UnificationEntry(plate, Talonite));
+
+        //  Naquadria Casing
+        ModHandler.addShapedRecipe(true, "naquadria_casing", GTQTMetaBlocks.MULTI_CASING.getItemVariant(NAQUADRIA_CASING, 1),
+                "APA", "PFP", "APA",
+                'F', new UnificationEntry(frameGt, Tritanium),
+                'P', new UnificationEntry(stick, Naquadria),
+                'A', new UnificationEntry(plate, Naquadria));
+
+        //  Naquadri alloy Casing
+        ModHandler.addShapedRecipe(true, "naquadri_alloy_casing", GTQTMetaBlocks.MULTI_CASING.getItemVariant(NAQUADAH_ALLOY_CASING, 1),
+                "APA", "PFP", "APA",
+                'F', new UnificationEntry(frameGt, Neutronium),
+                'P', new UnificationEntry(stick, NaquadahAlloy),
+                'A', new UnificationEntry(plate, NaquadahAlloy));
+
+        //  Polybenzimidazole Pipe Casing
+        PRECISE_ASSEMBLER_RECIPES.recipeBuilder()
+                .input(CIRCUIT_GOOD_III,4)
+                .inputs(GTQTMetaBlocks.TURBINE_CASING.getItemVariant(NQ_MACHINE_CASING))
+                .input(frameGt,Tritanium,2)
+                .input(plate,BlackPlutonium,8)
+                .fluidInputs(Polybenzimidazole.getFluid(L * 24))
+                .fluidInputs(Kevlar.getFluid(L * 16))
+                .fluidInputs(KaptonE.getFluid(L * 8))
+                .fluidInputs(BlackPlutonium.getFluid(L * 4))
+                .outputs(GTQTMetaBlocks.TURBINE_CASING.getItemVariant(POLYBENZIMIDAZOLE_PIPE))
+                .EUt(VA[ZPM])
+                .duration(800)
+                .Tier(3)
+                .CWUt(CWT[ZPM])
+                .buildAndRegister();
+
+        //  Hyper casings
+        PRECISE_ASSEMBLER_RECIPES.recipeBuilder()
+                .input(CIRCUIT_GOOD_III,4)
+                .inputs(GTQTMetaBlocks.TURBINE_CASING.getItemVariant(NQ_TURBINE_CASING))
+                .input(frameGt,Tritanium,2)
+                .input(plate,BlackPlutonium,8)
+                .fluidInputs(Polybenzimidazole.getFluid(L * 24))
+                .fluidInputs(Kevlar.getFluid(L * 16))
+                .fluidInputs(KaptonE.getFluid(L * 8))
+                .fluidInputs(BlackPlutonium.getFluid(L * 4))
+                .outputs(GTQTMetaBlocks.TURBINE_CASING.getItemVariant(HYPER_CASING))
+                .EUt(VA[ZPM])
+                .duration(800)
+                .Tier(3)
+                .CWUt(CWT[ZPM])
+                .buildAndRegister();
+
+
 
         ASSEMBLER_RECIPES.recipeBuilder()
                 .inputs(MetaBlocks.METAL_CASING.getItemVariant(BlockMetalCasing.MetalCasingType.INVAR_HEATPROOF))

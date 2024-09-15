@@ -17,6 +17,7 @@ import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.recipeproperties.ComputationProperty;
+import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.common.ConfigHolder;
@@ -40,7 +41,10 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -52,6 +56,7 @@ import java.util.List;
 
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.ASSEMBLER_RECIPES;
+import static gregtech.api.unification.material.Materials.Steam;
 import static keqing.gtqtcore.api.GTQTAPI.MAP_PA_CASING;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.PRECISE_ASSEMBLER;
 
@@ -60,6 +65,13 @@ public class MetaTileEntityPreciseAssembler extends MultiMapMultiblockController
     private int CasingTier;
     private int InternalCasingTier;
 
+    @Override
+    protected void addDisplayText(List<ITextComponent> textList) {
+        super.addDisplayText(textList);
+
+        textList.add(new TextComponentTranslation("外壳等级：%s 机器方块等级:%s", CasingTier,InternalCasingTier));
+        textList.add(new TextComponentTranslation("配方运行等级:%s", Math.min(InternalCasingTier,CasingTier)));
+    }
 
     public MetaTileEntityPreciseAssembler(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{
@@ -250,18 +262,6 @@ public class MetaTileEntityPreciseAssembler extends MultiMapMultiblockController
             super(tileEntity,ComputationType.SPORADIC);
         }
 
-        public boolean checkRecipe(Recipe recipe) {
-            if(isPrecise()&&getParallelLimit()>1)return false;
-            if (!super.checkRecipe(recipe)) {
-                return false;
-            } else if (!recipe.hasProperty(ComputationProperty.getInstance())) {
-                return true;
-            } else {
-                IOpticalComputationProvider provider = this.getComputationProvider();
-                int recipeCWUt = (Integer)recipe.getProperty(ComputationProperty.getInstance(), 0);
-                return provider.requestCWUt(recipeCWUt, true) >= recipeCWUt;
-            }
-        }
         /**
          * @return Check if machine in PA
          */

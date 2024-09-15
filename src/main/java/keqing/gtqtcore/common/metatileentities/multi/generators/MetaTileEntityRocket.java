@@ -56,15 +56,17 @@ public class MetaTileEntityRocket extends FuelMultiblockController implements IT
     private final boolean isExtreme;
     private boolean boostAllowed;
     int speed;
-    int naijiu=100;
+    int naijiu = 100;
     int add;
+
     public MetaTileEntityRocket(ResourceLocation metaTileEntityId, int tier) {
-        super(metaTileEntityId,GTQTcoreRecipeMaps.ROCKET, tier);
+        super(metaTileEntityId, GTQTcoreRecipeMaps.ROCKET, tier);
         this.recipeMapWorkable = new TurbineCombustionEngineWorkableHandler(this, false);
         this.recipeMapWorkable.setMaximumOverclockVoltage(GTValues.V[tier]);
         this.tier = tier;
         this.isExtreme = false;
     }
+
     public int getTier() {
         return tier;
     }
@@ -88,8 +90,7 @@ public class MetaTileEntityRocket extends FuelMultiblockController implements IT
                         } else {
                             textList.add(new TextComponentTranslation("gtqtcore.multiblock.large_combustion_engine.supply_lubricant_to_boost"));
                         }
-                    }
-                    else {
+                    } else {
                         if (((TurbineCombustionEngineWorkableHandler) recipeMapWorkable).isOxygenBoosted) {
                             int liquidOxygenAmount = liquidOxygenStack == null ? 0 : liquidOxygenStack.amount;
                             textList.add(new TextComponentTranslation("gtqtcore.multiblock.large_combustion_engine.liquid_lubricant_amount", TextFormattingUtil.formatNumbers((liquidOxygenAmount))));
@@ -124,6 +125,7 @@ public class MetaTileEntityRocket extends FuelMultiblockController implements IT
             textList.add(new TextComponentTranslation("gregtech.multiblock.large_combustion_engine.obstructed"));
         }
     }
+
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityRocket(metaTileEntityId, tier);
     }
@@ -152,7 +154,7 @@ public class MetaTileEntityRocket extends FuelMultiblockController implements IT
 
     @Nonnull
     @Override
-    protected  BlockPattern createStructurePattern() {
+    protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
                 .aisle("MMM", "MEM", "MMM")
                 .aisle("MMM", "MBM", "MIM")
@@ -166,7 +168,7 @@ public class MetaTileEntityRocket extends FuelMultiblockController implements IT
                 .where('C', selfPredicate())
                 .where('M', states(getCasingState()).setMinGlobalLimited(35)
                         .or(autoAbilities(false, true, true, true, true, true, false)))
-                .where('N',  heatingCoils())
+                .where('N', heatingCoils())
                 .where('A', states(getCasingState2()))
                 .where('B', states(getCasingState3()))
                 .where('O', abilities(MultiblockAbility.EXPORT_FLUIDS))
@@ -228,6 +230,7 @@ public class MetaTileEntityRocket extends FuelMultiblockController implements IT
         }
         return false;
     }
+
     public int getNumProgressBars() {
         return 3;
     }
@@ -245,11 +248,12 @@ public class MetaTileEntityRocket extends FuelMultiblockController implements IT
             }
             return fuelAmount[1] != 0 ? 1.0 * fuelAmount[0] / fuelAmount[1] : 0;
         } else if (index == 1) {
-            return  1.0 * getRotorSpeed() / getMaxRotorHolderSpeed() ;
+            return 1.0 * getRotorSpeed() / getMaxRotorHolderSpeed();
         } else {
-            return  1.0 * naijiu / 100 ;
+            return 1.0 * naijiu / 100;
         }
     }
+
     public TextureArea getProgressBarTexture(int index) {
         if (index == 0) {
             return GuiTextures.PROGRESS_BAR_LCE_FUEL;
@@ -318,70 +322,75 @@ public class MetaTileEntityRocket extends FuelMultiblockController implements IT
             return TextFormatting.GREEN;
         }
     }
-    public int getmax(int heatingCoilLevel)
-    {
-        if(heatingCoilLevel == 1)return 3+add;
-        if(heatingCoilLevel == 2)return 4+add;
-        if(heatingCoilLevel == 4)return 5+add;
-        if(heatingCoilLevel == 8)return 6+add;
-        if(heatingCoilLevel<=16)return 7+add;
-        if(heatingCoilLevel<=24)return 8+add;
-        if(heatingCoilLevel<=28)return 9+add;
-        if(heatingCoilLevel<=32)return 10+add;
-        if(heatingCoilLevel<=36)return 11+add;
+
+    public int getmax(int heatingCoilLevel) {
+        if (heatingCoilLevel == 1) return 3 + add;
+        if (heatingCoilLevel == 2) return 4 + add;
+        if (heatingCoilLevel == 4) return 5 + add;
+        if (heatingCoilLevel == 8) return 6 + add;
+        if (heatingCoilLevel <= 16) return 7 + add;
+        if (heatingCoilLevel <= 24) return 8 + add;
+        if (heatingCoilLevel <= 28) return 9 + add;
+        if (heatingCoilLevel <= 32) return 10 + add;
+        if (heatingCoilLevel <= 36) return 11 + add;
         return 1;
     }
-    int getRotorSpeed()
-    {
+
+    int getRotorSpeed() {
         return speed;
     }
-    int getRotorDurabilityPercent()
-    {
+
+    int getRotorDurabilityPercent() {
         return naijiu;
     }
 
-    int getMaxRotorHolderSpeed()
-    {
-        return 3600*getmax(heatingCoilLevel);
+    int getMaxRotorHolderSpeed() {
+        return 3600 * getmax(heatingCoilLevel);
     }
+
     private class TurbineCombustionEngineWorkableHandler extends MultiblockFuelRecipeLogic {
 
         private boolean isOxygenBoosted = false;
 
         private final MetaTileEntityRocket combustionEngine;
-        private boolean isExtreme;
+        private final boolean isExtreme;
 
         public void update() {
             super.update();
-            if(speed>1)speed--;
-            if(speed>=5000)speed--;
-            if(speed>=10000)speed--;
-            if(speed>=15000)speed--;
+            if (speed > 1) speed--;
+            if (speed >= 5000) speed--;
+            if (speed >= 10000) speed--;
+            if (speed >= 15000) speed--;
 
         }
 
         public TurbineCombustionEngineWorkableHandler(RecipeMapMultiblockController tileEntity, boolean isExtreme) {
             super(tileEntity);
-            this.combustionEngine =(MetaTileEntityRocket) tileEntity;
+            this.combustionEngine = (MetaTileEntityRocket) tileEntity;
             this.isExtreme = isExtreme;
         }
-        private final FluidStack WATER_STACK = Materials.Water.getFluid(500*getmax(heatingCoilLevel));
-        private final FluidStack LUBRICANT_STACK = Materials.Lubricant.getFluid(10*getmax(heatingCoilLevel));
-        private final FluidStack OXYGEN_STACK = Oxygen.getFluid(40*getmax(heatingCoilLevel));
+
+        private final FluidStack WATER_STACK = Materials.Water.getFluid(500 * getmax(heatingCoilLevel));
+        private final FluidStack LUBRICANT_STACK = Materials.Lubricant.getFluid(10 * getmax(heatingCoilLevel));
+        private final FluidStack OXYGEN_STACK = Oxygen.getFluid(40 * getmax(heatingCoilLevel));
+
         public boolean fillTanks(FluidStack stack, boolean simulate) {
             return GTTransferUtils.addFluidsToFluidHandler(outputFluidInventory, simulate, Collections.singletonList(stack));
         }
+
         private final FluidStack HOT_STACK = GTQTMaterials.HighPressureSteam.getFluid(1);
+
         @Override
         public long getMaxVoltage() {
             if (isOxygenBoosted)
-                return GTValues.V[getmax(heatingCoilLevel)]*15/8;
+                return GTValues.V[getmax(heatingCoilLevel)] * 15 / 8;
             else
-                return GTValues.V[getmax(heatingCoilLevel)]*3/2;
+                return GTValues.V[getmax(heatingCoilLevel)] * 3 / 2;
         }
+
         @Override
         protected void updateRecipeProgress() {
-            if (canRecipeProgress ) {
+            if (canRecipeProgress) {
 
                 //这里是蒸燃联合需要的水
                 IMultipleTankHandler inputTank = combustionEngine.getInputFluidInventory();
@@ -403,23 +412,23 @@ public class MetaTileEntityRocket extends FuelMultiblockController implements IT
                 if (OXYGEN_STACK.isFluidStackIdentical(inputTank.drain(OXYGEN_STACK, false))) {
                     inputTank.drain(OXYGEN_STACK, true);
                     add = 1;
-                }
-                else add=0;
+                } else add = 0;
 
                 drawEnergy(recipeEUt, false);
-                fillTanks(HOT_STACK,false);
-                if(speed<getMaxRotorHolderSpeed())speed=speed+10;
+                fillTanks(HOT_STACK, false);
+                if (speed < getMaxRotorHolderSpeed()) speed = speed + 10;
                 if (++progressTime > maxProgressTime) {
                     completeRecipe();
                     //naijiu--;
                 }
             }
         }
+
         @Override
         protected long boostProduction(long production) {
             if (isOxygenBoosted)
-                return production * 3/2*speed/getMaxRotorHolderSpeed();
-            return production  *speed/getMaxRotorHolderSpeed();
+                return production * 3 / 2 * speed / getMaxRotorHolderSpeed();
+            return production * speed / getMaxRotorHolderSpeed();
         }
 
         @Override

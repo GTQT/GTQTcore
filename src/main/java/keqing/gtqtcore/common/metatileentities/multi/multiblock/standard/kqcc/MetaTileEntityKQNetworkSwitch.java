@@ -49,6 +49,8 @@ import java.util.List;
 import java.util.Set;
 
 import static gregtech.api.GTValues.VA;
+import static gregtech.api.GTValues.ZPM;
+import static keqing.gtqtcore.api.utils.GTQTUtil.CWT;
 
 public class MetaTileEntityKQNetworkSwitch extends MetaTileEntityDataBank implements IOpticalComputationProvider {
     private int laser_tier;
@@ -166,7 +168,7 @@ public class MetaTileEntityKQNetworkSwitch extends MetaTileEntityDataBank implem
     public int getMaxCWUt( Collection<IOpticalComputationProvider> seen) {
         seen.add(this);
         if(computationHandler.getMaxCWUt(seen)>vacwu())
-        return isWorkingEnabled() ? computationHandler.getMaxCWUt(seen) : 0;
+        return Math.min(1024, isWorkingEnabled() ? computationHandler.getMaxCWUt(seen) : 0);
         else return 0;
     }
 
@@ -263,6 +265,7 @@ public class MetaTileEntityKQNetworkSwitch extends MetaTileEntityDataBank implem
         tooltip.add(I18n.format("gregtech.machine.network_switch.tooltip.1"));
         tooltip.add(I18n.format("gregtech.machine.network_switch.tooltip.2"));
         tooltip.add(I18n.format("gregtech.machine.network_switch.tooltip.3"));
+        tooltip.add(I18n.format("gregtech.machine.network_switch.tooltip.5"));
         tooltip.add(I18n.format("gtqtcore.machine.network_switch.tooltip.1"));
         tooltip.add(I18n.format("gregtech.machine.network_switch.tooltip.4",
                 TextFormattingUtil.formatNumbers(EUT_PER_HATCH/128)));

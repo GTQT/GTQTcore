@@ -919,6 +919,16 @@ public class ParticleAccelerator {
         GTQTcoreRecipeMaps.NUCLEOSYNTHESIS.recipeBuilder()
                 .input(NEUTRON)
                 .fluidInputs(Polonium.getFluid(1000))
+                .fluidOutputs(Astatine.getFluid(1000))
+                .EUToStart(57000)
+                .Scattering(4)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.NUCLEOSYNTHESIS.recipeBuilder()
+                .input(NEUTRON)
+                .fluidInputs(Astatine.getFluid(1000))
                 .fluidOutputs(Radium.getFluid(1000))
                 .EUToStart(58000)
                 .Scattering(6)

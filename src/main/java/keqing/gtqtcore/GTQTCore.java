@@ -28,7 +28,7 @@ public class GTQTCore {
 
     public static final String MODID = "gtqtcore";
     public static final String NAME = "GTQT Core";
-    public static final String VERSION = "0.1(2024/9/12)";
+    public static final String VERSION = "0.5(2024/9/15)";
 
     @Mod.Instance(GTQTCore.MODID)
     public static GTQTCore instance;

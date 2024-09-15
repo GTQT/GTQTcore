@@ -7,10 +7,10 @@ import keqing.gtqtcore.api.unification.GTQTElements;
 import net.minecraftforge.fml.common.asm.transformers.deobf.FMLRemappingAdapter;
 
 import static gregtech.api.unification.Elements.Hf;
+import static gregtech.api.unification.material.Materials.NaquadahEnriched;
+import static gregtech.api.unification.material.info.MaterialIconSet.*;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static gregtech.api.unification.material.info.MaterialFlags.*;
-import static gregtech.api.unification.material.info.MaterialIconSet.METALLIC;
-import static gregtech.api.unification.material.info.MaterialIconSet.SHINY;
 import static gregtech.api.util.GTUtility.gregtechId;
 import static keqing.gtqtcore.api.unification.material.info.EPMaterialFlags.GENERATE_PELLETS;
 
@@ -181,6 +181,18 @@ public class GCYSElementMaterials {
                 .dust()
                 .color(0x4F404F).iconSet(METALLIC)
                 .element(GTQTElements.Tn)
+                .build();
+
+        //  10025 Tiberium
+        Tiberium = new Material.Builder(getMaterialsId(), gregtechId("tiberium"))
+                .ore(2, 2)
+                .gem()
+                .liquid()
+                .addOreByproducts(NaquadahEnriched)
+                .color(0x79B349)
+                .iconSet(RUBY)
+                .flags(GENERATE_PLATE, GENERATE_LENS)
+                .element(GTQTElements.Tu)
                 .build();
 
     }

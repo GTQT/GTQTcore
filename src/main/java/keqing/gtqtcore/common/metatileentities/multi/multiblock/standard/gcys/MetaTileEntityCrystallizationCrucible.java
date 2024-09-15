@@ -118,7 +118,7 @@ public class MetaTileEntityCrystallizationCrucible extends RecipeMapMultiblockCo
 
     @Nonnull
     private static IBlockState getCasingState() {
-        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.TITANIUM_STABLE);
+        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.TUNGSTENSTEEL_ROBUST);
     }
 
     @Nonnull
@@ -175,7 +175,7 @@ public class MetaTileEntityCrystallizationCrucible extends RecipeMapMultiblockCo
                 .aisle("XXXXX", "#VCV#", "#VCV#", "XXXXX")
                 .aisle("IOSMF", "G###G", "G###G", "XXXXX")
                 .where('S', GTQTMetaTileEntities.CRYSTALLIZATION_CRUCIBLE, EnumFacing.SOUTH)
-                .where('X', MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.TITANIUM_STABLE))
+                .where('X', MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.TUNGSTENSTEEL_ROBUST))
                 .where('G', MetaBlocks.FRAMES.get(Titanium).getBlock(Titanium))
                 .where('V', GCYMMetaBlocks.UNIQUE_CASING.getState(BlockUniqueCasing.UniqueCasingType.HEAT_VENT))
                 .where('#', Blocks.AIR.getDefaultState())

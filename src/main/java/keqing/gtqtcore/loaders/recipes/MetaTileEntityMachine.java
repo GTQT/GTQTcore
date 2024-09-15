@@ -49,119 +49,119 @@ import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasin
 import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing1.TurbineCasingType.*;
 
 public class MetaTileEntityMachine {
-    static int L=144;
+    static int L = 144;
 
-   public static void init() {
-       VanillaOverrideRecipes();
+    public static void init() {
+        VanillaOverrideRecipes();
         Hull();
         removeOldMachines();
         registerElectric();
-       registerGalvanizedSteel();
-       machinecasing();
-       turbine();
-       dust();
+        registerGalvanizedSteel();
+        machinecasing();
+        turbine();
+        dust();
     }
 
     private static void dust() {
-       MIXER_RECIPES.recipeBuilder()
-               .input(dust,Titanium,6)
-               .input(dust,Aluminium,4)
-               .input(dust,Vanadium)
-               .circuitMeta(3)
-               .output(dust,Tcfour,11)
-               .duration(800).EUt(VA[HV]).buildAndRegister();
+        MIXER_RECIPES.recipeBuilder()
+                .input(dust, Titanium, 6)
+                .input(dust, Aluminium, 4)
+                .input(dust, Vanadium)
+                .circuitMeta(3)
+                .output(dust, Tcfour, 11)
+                .duration(800).EUt(VA[HV]).buildAndRegister();
 
         MIXER_RECIPES.recipeBuilder()
-                .input(dust,EnderPearl)
-                .input(dust,Iron)
-                .input(dust,RedstoneAlloy)
+                .input(dust, EnderPearl)
+                .input(dust, Iron)
+                .input(dust, RedstoneAlloy)
                 .circuitMeta(3)
-                .output(dust,PulsatingIron,3)
+                .output(dust, PulsatingIron, 3)
                 .duration(800).EUt(VA[MV]).buildAndRegister();
 
         MIXER_RECIPES.recipeBuilder()
-                .input(dust,Silver)
-                .input(dust,Iron)
-                .input(dust,RedstoneAlloy)
+                .input(dust, Silver)
+                .input(dust, Iron)
+                .input(dust, RedstoneAlloy)
                 .circuitMeta(3)
-                .output(dust,ConductiveIron,3)
+                .output(dust, ConductiveIron, 3)
                 .duration(800).EUt(VA[MV]).buildAndRegister();
 
         MIXER_RECIPES.recipeBuilder()
-                .input(dust,BlackSteel)
-                .input(dust,Gold)
-                .input(dust,ConductiveIron)
+                .input(dust, BlackSteel)
+                .input(dust, Gold)
+                .input(dust, ConductiveIron)
                 .circuitMeta(3)
-                .output(dust,EnergeticAlloy,3)
+                .output(dust, EnergeticAlloy, 3)
                 .duration(800).EUt(VA[MV]).buildAndRegister();
 
         MIXER_RECIPES.recipeBuilder()
-                .input(dust,EnderEye)
-                .input(dust,EnergeticAlloy)
-                .input(dust,Chromite)
+                .input(dust, EnderEye)
+                .input(dust, EnergeticAlloy)
+                .input(dust, Chromite)
                 .circuitMeta(3)
-                .output(dust,VibrantAlloy,3)
+                .output(dust, VibrantAlloy, 3)
                 .duration(800).EUt(VA[MV]).buildAndRegister();
 
         MIXER_RECIPES.recipeBuilder()
-                .input(dust,Gold)
-                .input(dust,Carbon)
+                .input(dust, Gold)
+                .input(dust, Carbon)
                 .circuitMeta(2)
-                .output(dust,Soularium,2)
+                .output(dust, Soularium, 2)
                 .duration(800).EUt(VA[MV]).buildAndRegister();
 
         MIXER_RECIPES.recipeBuilder()
-                .input(dust,Steel)
-                .input(dust,Coal)
-                .input(dust,Silicon)
+                .input(dust, Steel)
+                .input(dust, Coal)
+                .input(dust, Silicon)
                 .circuitMeta(3)
-                .output(dust,ElectricalSteel,3)
+                .output(dust, ElectricalSteel, 3)
                 .duration(800).EUt(VA[HV]).buildAndRegister();
 
         MIXER_RECIPES.recipeBuilder()
-                .input(dust,ElectricalSteel)
-                .input(dust,Coal)
-                .input(dust,Obsidian)
+                .input(dust, ElectricalSteel)
+                .input(dust, Coal)
+                .input(dust, Obsidian)
                 .circuitMeta(3)
-                .output(dust,DarkSteel,3)
+                .output(dust, DarkSteel, 3)
                 .duration(800).EUt(VA[HV]).buildAndRegister();
 
         MIXER_RECIPES.recipeBuilder()
-                .input(dust,DarkSteel)
-                .input(dust,Endstone)
-                .input(dust,TungstenSteel)
+                .input(dust, DarkSteel)
+                .input(dust, Endstone)
+                .input(dust, TungstenSteel)
                 .circuitMeta(3)
-                .output(dust,EndSteel,3)
+                .output(dust, EndSteel, 3)
                 .duration(800).EUt(VA[EV]).buildAndRegister();
 
         MIXER_RECIPES.recipeBuilder()
-                .input(dust,Titanium,3)
-                .input(dust,Nickel,2)
-                .output(dust,Nitinol,11)
-                .circuitMeta(3)
-                .duration(800).EUt(VA[EV]).buildAndRegister();
-
-        MIXER_RECIPES.recipeBuilder()
-                .input(dust,Manganese,2)
-                .input(dust,Iron,2)
-                .input(dust,Arsenic,1)
-                .input(dust,Phosphorus,1)
-                .output(dust,ManganeseIronArsenicPhosphide,6)
+                .input(dust, Titanium, 3)
+                .input(dust, Nickel, 2)
+                .output(dust, Nitinol, 11)
                 .circuitMeta(3)
                 .duration(800).EUt(VA[EV]).buildAndRegister();
 
         MIXER_RECIPES.recipeBuilder()
-                .input(dust,Praseodymium,5)
-                .input(dust,Nickel,1)
-                .output(dust,PraseodymiumNickel,6)
+                .input(dust, Manganese, 2)
+                .input(dust, Iron, 2)
+                .input(dust, Arsenic, 1)
+                .input(dust, Phosphorus, 1)
+                .output(dust, ManganeseIronArsenicPhosphide, 6)
                 .circuitMeta(3)
                 .duration(800).EUt(VA[EV]).buildAndRegister();
 
         MIXER_RECIPES.recipeBuilder()
-                .input(dust,Gadolinium,5)
-                .input(dust,Silicon,2)
-                .input(dust,Germanium,2)
-                .output(dust,GadoliniumSiliconGermanium,11)
+                .input(dust, Praseodymium, 5)
+                .input(dust, Nickel, 1)
+                .output(dust, PraseodymiumNickel, 6)
+                .circuitMeta(3)
+                .duration(800).EUt(VA[EV]).buildAndRegister();
+
+        MIXER_RECIPES.recipeBuilder()
+                .input(dust, Gadolinium, 5)
+                .input(dust, Silicon, 2)
+                .input(dust, Germanium, 2)
+                .output(dust, GadoliniumSiliconGermanium, 11)
                 .circuitMeta(3)
                 .duration(800).EUt(VA[EV]).buildAndRegister();
     }
@@ -193,8 +193,6 @@ public class MetaTileEntityMachine {
                 'I', Blocks.BRICK_BLOCK);
 
 
-
-
         ModHandler.addShapedRecipe(true, "casing_nq_pipe",
                 GTQTMetaBlocks.TURBINE_CASING.getItemVariant(GTQTTurbineCasing.TurbineCasingType.NQ_MACHINE_CASING, ConfigHolder.recipes.casingsPerCraft), "PIP", "IFI",
                 "PIP", 'P', new UnificationEntry(OrePrefix.plate, NaquadahAlloy), 'F',
@@ -222,8 +220,8 @@ public class MetaTileEntityMachine {
 
     private static void machinecasing() {
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(50).EUt(30)
-                .input(plate,GalvanizedSteel, 6)
-                .input(frameGt,GalvanizedSteel, 1)
+                .input(plate, GalvanizedSteel, 6)
+                .input(frameGt, GalvanizedSteel, 1)
                 .circuitMeta(6)
                 .outputs(GTQTMetaBlocks.TURBINE_CASING1.getItemVariant(GALVANIZE_STEEL_CASING))
                 .buildAndRegister();
@@ -299,33 +297,35 @@ public class MetaTileEntityMachine {
             if (material.hasFlag(MaterialFlags.GENERATE_SPRING_SMALL) && !material.hasFlag(MaterialFlags.NO_SMASHING)) {
                 ModHandler.removeRecipeByName(String.format("gregtech:spring_small_%s", material));
             }
-            if (material.hasFlag(MaterialFlags.GENERATE_ROTOR) && !material.hasFlag(MaterialFlags.NO_SMASHING))  {
+            if (material.hasFlag(MaterialFlags.GENERATE_ROTOR) && !material.hasFlag(MaterialFlags.NO_SMASHING)) {
                 ModHandler.removeRecipeByName(String.format("gregtech:rotor_%s", material));
             }
         }
     }
-    private static void registerGalvanizedSteel() {
-            OrePrefix[] galvanizedSteelPrefix = new OrePrefix[]{ingot, plate, stick, stickLong, bolt, screw, ring, gear, gearSmall, rotor, round};
-            int tinyQuantity;
-            for (OrePrefix prefix : galvanizedSteelPrefix) {
-                tinyQuantity = (int) ((prefix.getMaterialAmount(Steel)) / M) + 1;
-                ALLOY_SMELTER_RECIPES.recipeBuilder()
-                        .duration(tinyQuantity * 16)
-                        .EUt(8)
-                        .input(prefix, Steel, 1)
-                        .input(dustTiny, Zinc, tinyQuantity)
-                        .output(prefix, GalvanizedSteel)
-                        .buildAndRegister();
 
-                CHEMICAL_BATH_RECIPES.recipeBuilder()
-                        .duration(tinyQuantity * 8)
-                        .EUt(32)
-                        .input(prefix, Steel)
-                        .fluidInputs(Zinc.getFluid(16))
-                        .output(prefix, GalvanizedSteel)
-                        .buildAndRegister();
-            }
+    private static void registerGalvanizedSteel() {
+        OrePrefix[] galvanizedSteelPrefix = new OrePrefix[]{ingot, plate, stick, stickLong, bolt, screw, ring, gear, gearSmall, rotor, round};
+        int tinyQuantity;
+        for (OrePrefix prefix : galvanizedSteelPrefix) {
+            tinyQuantity = (int) ((prefix.getMaterialAmount(Steel)) / M) + 1;
+            ALLOY_SMELTER_RECIPES.recipeBuilder()
+                    .duration(tinyQuantity * 16)
+                    .EUt(8)
+                    .input(prefix, Steel, 1)
+                    .input(dustTiny, Zinc, tinyQuantity)
+                    .output(prefix, GalvanizedSteel)
+                    .buildAndRegister();
+
+            CHEMICAL_BATH_RECIPES.recipeBuilder()
+                    .duration(tinyQuantity * 8)
+                    .EUt(32)
+                    .input(prefix, Steel)
+                    .fluidInputs(Zinc.getFluid(16))
+                    .output(prefix, GalvanizedSteel)
+                    .buildAndRegister();
+        }
     }
+
     private static void Hull() {
         ModHandler.removeRecipeByName("gregtech:gregtech.machine.hull.ulv");
         ModHandler.removeRecipeByName("gregtech:gregtech.machine.hull.lv");
@@ -357,7 +357,7 @@ public class MetaTileEntityMachine {
         //mv
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(50).EUt(30)
                 .inputs(MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.MV))
-                .input(plate,Invar, 2)
+                .input(plate, Invar, 2)
                 .input(OrePrefix.cableGtSingle, Materials.Copper, 2)
                 .fluidInputs(Materials.Polyethylene.getFluid(L * 2))
                 .outputs(MetaTileEntities.HULL[2].getStackForm()).buildAndRegister();
@@ -492,6 +492,7 @@ public class MetaTileEntityMachine {
                 new ItemMaterialInfo(new MaterialStack(BorosilicateGlass, M * 4),
                         new MaterialStack(Naquadah, M * 4)));
     }
+
     private static void removeOldMachines() {
         //电弧炉
         ModHandler.removeRecipeByName("gregtech:gregtech.machine.arc_furnace.lv");
@@ -509,16 +510,17 @@ public class MetaTileEntityMachine {
                 'P', DOUBLE_PLATE,
                 'C', CIRCUIT,
                 'W', CABLE_QUAD,
-                'G',  new UnificationEntry(GTQTOrePrefix.electrode, Materials.Graphite));
+                'G', new UnificationEntry(GTQTOrePrefix.electrode, Materials.Graphite));
 
 
     }
+
     private static void registerElectric() {
 
-        registerMachineRecipe(GTQTMetaTileEntities.FLUID_EXTRACTOR, "PGP", "EGE", "CMC", 'M', HULL, 'P',  PUMP, 'E', PISTON, 'C',
-                CIRCUIT,  'G', GLASS);
-        registerMachineRecipe(GTQTMetaTileEntities.FLUID_CANNER, "EGE", "PGP", "CMC", 'M', HULL, 'P',  PUMP, 'E', PISTON, 'C',
-                CIRCUIT,  'G', GLASS);
+        registerMachineRecipe(GTQTMetaTileEntities.FLUID_EXTRACTOR, "PGP", "EGE", "CMC", 'M', HULL, 'P', PUMP, 'E', PISTON, 'C',
+                CIRCUIT, 'G', GLASS);
+        registerMachineRecipe(GTQTMetaTileEntities.FLUID_CANNER, "EGE", "PGP", "CMC", 'M', HULL, 'P', PUMP, 'E', PISTON, 'C',
+                CIRCUIT, 'G', GLASS);
         registerMachineRecipe(GTQTMetaTileEntities.DEHYDRATOR, "WCW", "MHM", "GAG", 'C', CIRCUIT, 'M', CABLE_QUAD, 'H', HULL,
                 'G', MOTOR, 'A', ROBOT_ARM, 'W', COIL_HEATING_DOUBLE);
     }
