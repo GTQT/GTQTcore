@@ -20,6 +20,7 @@ import gregtech.client.renderer.texture.Textures;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.blocks.wood.BlockGregPlanks;
 import gregtech.common.metatileentities.MetaTileEntities;
+import keqing.gtqtcore.GTQTCoreConfig;
 import keqing.gtqtcore.client.objmodels.ObjModels;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
@@ -205,7 +206,8 @@ public class MetaTileEntityPrimitiveTreeFarmer extends MultiblockWithDisplayBase
     public void renderMetaTileEntity(double x, double y, double z, float partialTicks) {
         IFastRenderMetaTileEntity.super.renderMetaTileEntity(x, y, z, partialTicks);
 
-        if(isStructureFormed()) {
+        if(isStructureFormed()&& GTQTCoreConfig.MachineSwitch.EnableObj && GTQTCoreConfig.MachineSwitch.EnableObjPrimitiveTreeFarmer)
+        {
             final int xDir = this.getFrontFacing().getOpposite().getXOffset();
             final int zDir = this.getFrontFacing().getOpposite().getZOffset();
             //机器开启才会进行渲染

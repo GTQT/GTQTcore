@@ -17,4 +17,8 @@ public class ObjModels {
     //常规不带mtl文件的加载方式，这种方式也可以在渲染中绑定图片，如果图片在编辑器中能和模型对上，mc自己的绑定方法也会完美绑定
     public static final IModelCustom Tree_Model1 = AdvancedModelLoader.loadModel(new ResourceLocation("gtqtcore", "models/obj/tree.obj"));
     public static final ResourceLocation Tree_pic = new ResourceLocation("gtqtcore", "models/obj/tree.png");
+
+    //常规不带mtl文件的加载方式，这种方式也可以在渲染中绑定图片，如果图片在编辑器中能和模型对上，mc自己的绑定方法也会完美绑定
+    public static final IModelCustom Robot_Model1 = AdvancedModelLoader.loadModel(new ResourceLocation("gtqtcore", "models/obj/robot_arm.obj"));
+
 }

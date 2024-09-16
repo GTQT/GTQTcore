@@ -221,6 +221,7 @@ public class HexanitrohexaaxaisowurtzitaneChain {
                 .fluidInputs(Acetylene.getFluid(1000))
                 .fluidInputs(Formaldehyde.getFluid(2000))
                 .fluidInputs(Hydrogen.getFluid(4000))
+                .circuitMeta(2)
                 .fluidOutputs(Tetrahydrofuran.getFluid(1000))
                 .EUt(VA[IV])
                 .duration(166)

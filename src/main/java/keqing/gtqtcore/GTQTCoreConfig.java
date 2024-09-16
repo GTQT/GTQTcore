@@ -34,12 +34,22 @@ public class GTQTCoreConfig {
         @Config.Comment("OBJ模型渲染开启")
         @Config.RequiresMcRestart
         @Config.Name("Enable obj Model")
-        public boolean EnableObj = false;
+        public boolean EnableObj = true;
 
         @Config.Comment("生物反应室OBJ模型渲染开启")
         @Config.RequiresMcRestart
-        @Config.Name("Enable obj Model BiologicalReaction")
-        public boolean EnableObjBiologicalReaction = false;
+        @Config.Name("Enable obj Model Biological Reaction")
+        public boolean EnableObjBiologicalReaction = true;
+
+        @Config.Comment("原始林场OBJ模型渲染开启")
+        @Config.RequiresMcRestart
+        @Config.Name("Enable obj Model Primitive Tree Farmer")
+        public boolean EnableObjPrimitiveTreeFarmer = true;
+
+        @Config.Comment("精密组装机OBJ模型渲染开启")
+        @Config.RequiresMcRestart
+        @Config.Name("Enable obj Model Precis eAssembler ")
+        public boolean EnableObjPreciseAssembler= true;
     }
 
 }

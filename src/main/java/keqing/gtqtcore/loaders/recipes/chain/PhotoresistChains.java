@@ -7,6 +7,7 @@ import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static keqing.gtqtcore.api.unification.TJMaterials.*;
+import static gregtechfoodoption.GTFOMaterialHandler.*;
 
 public class PhotoresistChains {
 
@@ -20,6 +21,7 @@ public class PhotoresistChains {
         CHEMICAL_RECIPES.recipeBuilder()
                 .EUt(VA[HV])
                 .duration(60)
+                .circuitMeta(1)
                 .fluidInputs(Acetylene.getFluid(1000))
                 .fluidInputs(Formaldehyde.getFluid(2000))
                 .fluidOutputs(Butynediol.getFluid(1000))

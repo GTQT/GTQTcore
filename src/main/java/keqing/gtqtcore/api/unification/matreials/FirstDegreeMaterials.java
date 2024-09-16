@@ -2349,13 +2349,9 @@ public class FirstDegreeMaterials {
                 .build()
                 .setFormula("性状：2 5 2 4 3", true);
 
-        //四氢呋喃
-        GTQTMaterials.THF = new Material.Builder(getMaterialsId(), gregtechId("thf"))
-                .fluid()
-                .color(0x66CD00)
-                .flags(DISABLE_DECOMPOSITION)
-                .build()
-                .setFormula("C4H8O", true);
+        //四氢呋喃 TODO
+        getMaterialsId();
+
         //5-羟甲基糠醛
         GTQTMaterials.Hydroxymethylfurfural = new Material.Builder(getMaterialsId(), gregtechId("hydroxymethylfurfural"))
                 .fluid()

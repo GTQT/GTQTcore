@@ -201,12 +201,6 @@ public class EnzymesRecipes {
     }
 
     private static void Ethanesulphonate() {
-        CHEMICAL_RECIPES.recipeBuilder()
-                .fluidInputs(Butanediol.getFluid(1000))
-                .fluidInputs(SulfuricAcid.getFluid(1000))
-                .fluidOutputs(THF.getFluid(1000))
-                .duration(400).EUt(VA[HV]).buildAndRegister();
-
         BREWING_RECIPES.recipeBuilder()
                 .input(dust,Sugar,16)
                 .fluidInputs(Water.getFluid(16000))
@@ -214,7 +208,7 @@ public class EnzymesRecipes {
                 .duration(400).EUt(VA[HV]).buildAndRegister();
 
         CHEMICAL_PLANT.recipeBuilder()
-                .fluidInputs(THF.getFluid(1000))
+                .fluidInputs(Tetrahydrofuran.getFluid(1000))
                 .fluidInputs(Hydroxymethylfurfural.getFluid(1000))
                 .fluidOutputs(Methylfuran.getFluid(1000))
                 .recipeLevel(3)

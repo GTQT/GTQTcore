@@ -9,7 +9,6 @@ public class GTQTMaterials {
     public static Material BFGF;
     public static Material EGF;
     public static  Material CHES;
-    public static  Material THF ;
     public static  Material TRISP;
     public static Material TRISN;
     public static  Material TRIS ;
