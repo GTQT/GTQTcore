@@ -63,6 +63,22 @@ public class PreciseAssemblerChain {
                 .buildAndRegister();
 
         PRECISE_ASSEMBLER_RECIPES.recipeBuilder()
+                .input(ELITE_CIRCUIT_BOARD,2)
+                .input(circuit,MarkerMaterials.Tier.IV,8)
+                .input(POWER_INTEGRATED_CIRCUIT,32)
+                .input(rotor,TungstenSteel,2)
+                .fluidInputs(SolderingAlloy.getFluid(L * 8))
+                .fluidInputs(Tin.getFluid(L * 8))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 8))
+                .fluidInputs(Zylon.getFluid(L * 4))
+                .output(CIRCUIT_GOOD_I)
+                .EUt(VA[IV])
+                .duration(600)
+                .Tier(1)
+                .CWUt(120)
+                .buildAndRegister();
+
+        PRECISE_ASSEMBLER_RECIPES.recipeBuilder()
                 .input(CIRCUIT_GOOD_I,2)
                 .input(circuit,MarkerMaterials.Tier.LuV,8)
                 .input(ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT,32)

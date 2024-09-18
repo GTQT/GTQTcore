@@ -354,7 +354,7 @@ public class RareEarthProcessing {
                 .input(dust,RareEarth,1)
                 .fluidOutputs(Dujushixitu.getFluid(1200))
                 .output(dust,SiliconDioxide)
-                .circuitMeta(1)
+                .circuitMeta(3)
                 .duration(600).EUt(VA[EV]).buildAndRegister();
 
         DIGESTER_RECIPES.recipeBuilder()
@@ -363,7 +363,7 @@ public class RareEarthProcessing {
                 .input(dust,RareEarth,1)
                 .fluidOutputs(Dujushixitu.getFluid(1200))
                 .output(dust,SiliconDioxide)
-                .circuitMeta(2)
+                .circuitMeta(4)
                 .duration(600).EUt(VA[EV]).buildAndRegister();
 
         DISSOLUTION_TANK_RECIPES.recipeBuilder()

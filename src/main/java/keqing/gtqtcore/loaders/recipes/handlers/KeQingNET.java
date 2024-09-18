@@ -2352,7 +2352,7 @@ public class KeQingNET {
                 .scannerResearch(b -> b
                         .researchStack(DISK_8.getStackForm())
                         .duration(1200)
-                        .EUt(VA[EV]))
+                        .EUt(VA[HV]))
                 .duration(400).EUt(VA[EV]).buildAndRegister();
 
 
@@ -2369,7 +2369,7 @@ public class KeQingNET {
                 .scannerResearch(b -> b
                         .researchStack(DISK_8.getStackForm())
                         .duration(1200)
-                        .EUt(VA[EV]))
+                        .EUt(VA[HV]))
                 .duration(400).EUt(VA[EV]).buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()

@@ -370,7 +370,7 @@ public class MetaTileEntityStepper extends MultiMapMultiblockController implemen
                 if(rate)this.maxProgressTime = maxProgress*(100-LaserKind*20)/100;
                 else this.maxProgressTime = maxProgress*(100-LaserKind*10)/100;
             } else {
-                this.maxProgressTime = maxProgress*laser_tier;
+                this.maxProgressTime = maxProgress*(laser_tier-LaserKind);
             }
         }
 
