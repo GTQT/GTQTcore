@@ -14,7 +14,7 @@ public class GTQTCoreConfig {
         @Config.Comment("终局设备开关，包括尼戴，神锻。注意，严重影响加载时间！！！")
         @Config.RequiresMcRestart
         @Config.Name("End game machine switch")
-        public boolean EndGameSwitch = true;
+        public boolean EndGameSwitch = false;
 
         @Config.Comment("后期设备开关，包括鸿蒙之眼，等离子锻炉，移相器（暂未实装实际功能）")
         @Config.RequiresMcRestart
@@ -25,11 +25,6 @@ public class GTQTCoreConfig {
         @Config.RequiresMcRestart
         @Config.Name("Huge Machine Switch")
         public boolean HugeSwitch = false;
-
-        @Config.Comment("UHV+ IO开关（ceu 2.9即将内置，所以关闭）")
-        @Config.RequiresMcRestart
-        @Config.Name("UHV+ IO Switch")
-        public boolean UHVIOSwitch = false;
 
         @Config.Comment("OBJ模型渲染开启")
         @Config.RequiresMcRestart
