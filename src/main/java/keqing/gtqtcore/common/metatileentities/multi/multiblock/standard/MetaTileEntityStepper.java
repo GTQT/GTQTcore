@@ -48,6 +48,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import java.util.List;
 
+import static gregtech.api.GTValues.V;
 import static gregtech.api.GTValues.VA;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.TJMaterials.HydrogenSilsesquioxane;
@@ -375,7 +376,7 @@ public class MetaTileEntityStepper extends MultiMapMultiblockController implemen
         }
 
         public long getMaxVoltage() {
-            return VA[Math.min(tier,clean_tier*2)];
+            return V[Math.min(tier,clean_tier*2)];
         }
 
         @Override

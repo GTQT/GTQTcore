@@ -30,6 +30,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
+import static gregtech.api.GTValues.V;
 import static gregtech.api.GTValues.VA;
 import static gregtech.api.util.RelativeDirection.*;
 
@@ -51,7 +52,7 @@ public class MetaTileEntityVacuumDistillationTower extends RecipeMapMultiblockCo
         }
 
         public long getMaxVoltage() {
-            return VA[6];
+            return V[6];
         }
 
         @Override

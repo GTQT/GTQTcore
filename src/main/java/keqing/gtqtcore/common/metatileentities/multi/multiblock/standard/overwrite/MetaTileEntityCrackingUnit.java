@@ -46,6 +46,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
+import static gregtech.api.GTValues.V;
 import static gregtech.api.GTValues.VA;
 import static gregtech.api.unification.material.Materials.Lubricant;
 
@@ -269,7 +270,7 @@ public class MetaTileEntityCrackingUnit extends GTQTRecipeMapMultiblockOverwrite
             return ParallelNum;
         }
         public long getMaxVoltage() {
-            return Math.min(super.getMaxVoltage(), VA[casingTier]);
+            return Math.min(super.getMaxVoltage(), V[casingTier]);
         }
         @Override
         protected void modifyOverclockPost(int[] resultOverclock,  IRecipePropertyStorage storage) {

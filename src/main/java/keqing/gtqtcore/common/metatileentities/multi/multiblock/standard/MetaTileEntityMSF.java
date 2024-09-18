@@ -49,6 +49,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
+import static gregtech.api.GTValues.V;
 import static gregtech.api.GTValues.VA;
 import static gregtech.api.unification.material.Materials.Steam;
 import static gregtech.api.util.RelativeDirection.*;
@@ -170,7 +171,7 @@ public class MetaTileEntityMSF extends GTQTRecipeMapMultiblockController impleme
         }
 
         public long getMaxVoltage() {
-            return VA[4];
+            return V[4];
         }
 
         @Override

@@ -45,6 +45,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
+import static gregtech.api.GTValues.V;
 import static gregtech.api.GTValues.VA;
 import static gregtech.api.unification.material.Materials.Lubricant;
 
@@ -280,7 +281,7 @@ public class MetaTileEntityPyrolyseOven extends GTQTRecipeMapMultiblockOverwrite
             super(tileEntity);
         }
         public long getMaxVoltage() {
-            return Math.min(super.getMaxVoltage(), VA[tier]);
+            return Math.min(super.getMaxVoltage(), V[tier]);
         }
         @Override
         public int getParallelLimit() {

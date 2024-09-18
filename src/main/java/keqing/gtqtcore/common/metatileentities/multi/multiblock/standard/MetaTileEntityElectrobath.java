@@ -41,6 +41,7 @@ import net.minecraftforge.fluids.FluidStack;
 import javax.annotation.Nonnull;
 import java.util.List;
 
+import static gregtech.api.GTValues.V;
 import static gregtech.api.GTValues.VA;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.EleAcid;
 
@@ -325,7 +326,7 @@ public class MetaTileEntityElectrobath extends GTQTRecipeMapMultiblockOverwrite 
         }
 
         public long getMaxVoltage() {
-            return Math.min(super.getMaxVoltage(), VA[tier]);
+            return Math.min(super.getMaxVoltage(), V[tier]);
         }
 
         @Override

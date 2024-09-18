@@ -38,6 +38,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
+import static gregtech.api.GTValues.V;
 import static gregtech.api.GTValues.VA;
 
 public class MetaTileEntityThreeDim extends MultiMapMultiblockController implements IOpticalComputationReceiver {
@@ -240,7 +241,7 @@ public class MetaTileEntityThreeDim extends MultiMapMultiblockController impleme
         }
 
         public long getMaxVoltage() {
-            return VA[Math.min(tier,clean_tier*2)];
+            return V[Math.min(tier,clean_tier*2)];
         }
 
         @Override

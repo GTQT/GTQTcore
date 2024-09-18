@@ -39,6 +39,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
+import static gregtech.api.GTValues.V;
 import static gregtech.api.GTValues.VA;
 
 public class MetaTileEntityLaserEngraving extends MultiMapMultiblockController implements IOpticalComputationReceiver {
@@ -238,7 +239,7 @@ public class MetaTileEntityLaserEngraving extends MultiMapMultiblockController i
         }
 
         public long getMaxVoltage() {
-            return VA[Math.min(tier,laser_tier*2)];
+            return V[Math.min(tier,laser_tier*2)];
         }
 
         @Override

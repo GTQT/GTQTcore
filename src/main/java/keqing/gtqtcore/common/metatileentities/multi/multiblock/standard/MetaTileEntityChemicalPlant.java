@@ -41,6 +41,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import java.util.List;
 
+import static gregtech.api.GTValues.V;
 import static gregtech.api.GTValues.VA;
 
 public class MetaTileEntityChemicalPlant extends GTQTRecipeMapMultiblockOverwrite {
@@ -269,7 +270,7 @@ public class MetaTileEntityChemicalPlant extends GTQTRecipeMapMultiblockOverwrit
         }
 
         public long getMaxVoltage() {
-            return Math.min(super.getMaxVoltage(), VA[voltageTier]);
+            return Math.min(super.getMaxVoltage(), V[voltageTier]);
         }
 
         @Override

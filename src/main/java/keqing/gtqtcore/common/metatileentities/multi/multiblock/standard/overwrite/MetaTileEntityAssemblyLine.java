@@ -94,7 +94,7 @@ public class MetaTileEntityAssemblyLine extends RecipeMapMultiblockController {
                 this.maxProgressTime = maxProgress*(100-glass_tier*5)/100;
         }
 
-        public long getMaxVoltage() {return Math.min(VA[tier+1],VA[LuV]);}
+        public long getMaxVoltage() {return Math.min(V[tier+1],V[LuV]);}
 
     }
     @Override

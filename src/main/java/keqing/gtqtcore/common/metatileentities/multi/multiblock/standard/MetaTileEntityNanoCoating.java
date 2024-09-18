@@ -44,6 +44,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import java.util.List;
 
+import static gregtech.api.GTValues.V;
 import static gregtech.api.GTValues.VA;
 
 public class MetaTileEntityNanoCoating extends MultiMapMultiblockController implements IOpticalComputationReceiver {
@@ -274,8 +275,8 @@ public class MetaTileEntityNanoCoating extends MultiMapMultiblockController impl
         }
 
         public long getMaxVoltage() {
-            if(visa)return VA[Math.min(Math.max((tier - 3), 1), Math.max(clean_tier * 2 - 3, 1))];
-            else return VA[Math.min(tier,clean_tier*2)];
+            if(visa)return V[Math.min(Math.max((tier - 3), 1), Math.max(clean_tier * 2 - 3, 1))];
+            else return V[Math.min(tier,clean_tier*2)];
         }
 
         private boolean isPrecise() {

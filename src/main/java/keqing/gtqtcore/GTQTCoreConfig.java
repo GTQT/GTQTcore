@@ -40,11 +40,6 @@ public class GTQTCoreConfig {
         @Config.RequiresMcRestart
         @Config.Name("Enable obj Model Primitive Tree Farmer")
         public boolean EnableObjPrimitiveTreeFarmer = true;
-
-        @Config.Comment("精密组装机OBJ模型渲染开启")
-        @Config.RequiresMcRestart
-        @Config.Name("Enable obj Model Precis eAssembler ")
-        public boolean EnableObjPreciseAssembler= true;
     }
 
 }

@@ -197,11 +197,7 @@ public class MetaTileEntityPrimitiveTreeFarmer extends MultiblockWithDisplayBase
     @Override
     protected ICubeRenderer getFrontOverlay() {
         return Textures.BLOWER_OVERLAY;
-    }
-
-
-    //渲染模型的位置
-    @Override
+    }    @Override
     @SideOnly(Side.CLIENT)
     public void renderMetaTileEntity(double x, double y, double z, float partialTicks) {
         IFastRenderMetaTileEntity.super.renderMetaTileEntity(x, y, z, partialTicks);
@@ -237,6 +233,10 @@ public class MetaTileEntityPrimitiveTreeFarmer extends MultiblockWithDisplayBase
         }
 
     }
+
+
+    //渲染模型的位置
+
 
     @Override
     public AxisAlignedBB getRenderBoundingBox() {

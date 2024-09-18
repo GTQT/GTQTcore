@@ -51,6 +51,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
+import static gregtech.api.GTValues.V;
 import static gregtech.api.GTValues.VA;
 
 public class MetaTileEntitySepticTank extends GTQTRecipeMapMultiblockController implements IHeatingCoil {
@@ -87,7 +88,7 @@ public class MetaTileEntitySepticTank extends GTQTRecipeMapMultiblockController 
             return tier;
         }
         public long getMaxVoltage() {
-            return Math.min(super.getMaxVoltage(), VA[tier]);
+            return Math.min(super.getMaxVoltage(), V[tier]);
         }
     }
     @Override

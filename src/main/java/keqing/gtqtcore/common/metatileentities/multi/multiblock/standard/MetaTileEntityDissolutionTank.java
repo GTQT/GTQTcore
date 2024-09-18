@@ -38,6 +38,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
+import static gregtech.api.GTValues.V;
 import static gregtech.api.GTValues.VA;
 
 public class MetaTileEntityDissolutionTank extends GTQTRecipeMapMultiblockOverwrite {
@@ -212,7 +213,7 @@ public class MetaTileEntityDissolutionTank extends GTQTRecipeMapMultiblockOverwr
             }
 
         public long getMaxVoltage() {
-            return VA[glass_tier];
+            return V[glass_tier];
         }
 
         @Override

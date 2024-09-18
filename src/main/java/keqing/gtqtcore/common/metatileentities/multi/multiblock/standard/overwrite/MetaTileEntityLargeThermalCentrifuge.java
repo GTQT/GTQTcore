@@ -46,6 +46,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
+import static gregtech.api.GTValues.V;
 import static gregtech.api.GTValues.VA;
 
 public class MetaTileEntityLargeThermalCentrifuge extends GTQTRecipeMapMultiblockControllerOverwrite {
@@ -256,7 +257,7 @@ public class MetaTileEntityLargeThermalCentrifuge extends GTQTRecipeMapMultibloc
         }
 
         public long getMaxVoltage() {
-            return Math.min(super.getMaxVoltage(), VA[tier]);
+            return Math.min(super.getMaxVoltage(), V[tier]);
         }
         @Override
         public int getParallelLimit() {

@@ -55,6 +55,7 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import static gregtech.api.GTValues.V;
 import static gregtech.api.GTValues.VA;
 import static gregtech.api.unification.material.Materials.Lubricant;
 import static gregtech.api.util.RelativeDirection.*;
@@ -145,7 +146,7 @@ public class MetaTileEntityDistillationTower extends GTQTRecipeMapMultiblockOver
 
         }
         public long getMaxVoltage() {
-            return Math.min(super.getMaxVoltage(), VA[tier]);
+            return Math.min(super.getMaxVoltage(), V[tier]);
         }
         @Override
         public int getParallelLimit() {
@@ -365,7 +366,7 @@ public class MetaTileEntityDistillationTower extends GTQTRecipeMapMultiblockOver
         }
 
         public long getMaxVoltage() {
-            return VA[tier];
+            return V[tier];
         }
 
         @Override
