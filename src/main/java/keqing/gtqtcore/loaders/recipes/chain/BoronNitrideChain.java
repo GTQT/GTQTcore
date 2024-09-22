@@ -118,14 +118,13 @@ public class BoronNitrideChain {
     private static void BoronNitrideProcess() {
 
         //  B3H6N3 + 3O -> 3BN + 3H2O
-        CRYSTALLIZER_RECIPES.recipeBuilder()
+        CHEMICAL_RECIPES.recipeBuilder()
                 .fluidInputs(Borazine.getFluid(1000))
                 .fluidInputs(Oxygen.getFluid(3000))
                 .output(gem, HexagonalBoronNitride, 6)
                 .fluidOutputs(Water.getFluid(3000))
                 .EUt(VA[LuV])
                 .duration(20 * SECOND)
-                .blastFurnaceTemp(1300)
                 .buildAndRegister();
 
         //  B + N -> BN
@@ -140,12 +139,12 @@ public class BoronNitrideChain {
                 .buildAndRegister();
 
         //  h-BN -> c-BN
-        CRYSTALLIZER_RECIPES.recipeBuilder()
+        AUTOCLAVE_RECIPES.recipeBuilder()
                 .input(dust, HexagonalBoronNitride)
                 .output(gem, CubicBoronNitride)
+                .fluidInputs(DistilledWater.getFluid(1000))
                 .EUt(VA[LuV])
                 .duration(5 * SECOND)
-                .blastFurnaceTemp(3501)
                 .buildAndRegister();
 
         //  B3Cl3H3N3 -> 3 a-BN + 3HCl
@@ -195,13 +194,12 @@ public class BoronNitrideChain {
                 .buildAndRegister();
 
         //  BCN + C -> c-BC2N
-        CRYSTALLIZER_RECIPES.recipeBuilder()
+        CHEMICAL_RECIPES.recipeBuilder()
                 .input(dust, Heterodiamond)
                 .input(dust, Carbon)
                 .output(gem, CubicHeterodiamond)
                 .EUt(VA[LuV])
                 .duration(20 * SECOND)
-                .blastFurnaceTemp(500)
                 .buildAndRegister();
     }
 }

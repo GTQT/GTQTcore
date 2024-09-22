@@ -4,6 +4,7 @@ import gregtech.api.capability.IOpticalComputationHatch;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import keqing.gtqtcore.api.capability.IBall;
 import keqing.gtqtcore.api.capability.IBuffer;
+import keqing.gtqtcore.api.capability.ILaser;
 import keqing.gtqtcore.api.capability.IReinforcedRotorHolder;
 
 public class GTQTMultiblockAbility {
@@ -12,5 +13,8 @@ public class GTQTMultiblockAbility {
     public static final MultiblockAbility<IOpticalComputationHatch> KQCC_COMPUTATION_DATA_TRANSMISSION = new MultiblockAbility("kqcccomputation_data_transmission");
     public static final MultiblockAbility<IBuffer> BUFFER_MULTIBLOCK_ABILITY = new MultiblockAbility<>("buffer");
     public static final MultiblockAbility<IBall> GRINDBALL_MULTIBLOCK_ABILITY = new MultiblockAbility<>("ball");
+
+    public static final MultiblockAbility<ILaser> LASER_INPUT = new MultiblockAbility<>("laser_input");
+    public static final MultiblockAbility<ILaser> LASER_OUTPUT = new MultiblockAbility<>("laser_output");
 
 }

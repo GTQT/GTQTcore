@@ -1,6 +1,7 @@
 package keqing.gtqtcore.loaders.recipes.chain;
 
 import static gregtechfoodoption.GTFOMaterialHandler.PerchloricAcid;
+import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.CHEMICAL_PLANT;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
@@ -258,9 +259,10 @@ public class BiochemChains {
                 .fluidOutputs(Aminopropionitrile.getFluid(1000))
                 .buildAndRegister();
 
-        CHEMICAL_RECIPES.recipeBuilder()
+        LARGE_CHEMICAL_RECIPES.recipeBuilder()
                 .duration(145)
                 .EUt(VA[EV])
+                .circuitMeta(1)
                 .fluidInputs(Aminopropionitrile.getFluid(1000))
                 .fluidInputs(Hydrogen.getFluid(4000))
                 .notConsumable(dust, Nickel)
@@ -403,9 +405,10 @@ public class BiochemChains {
                 .fluidOutputs(Nitroanisole.getFluid(1000))
                 .buildAndRegister();
 
-        CHEMICAL_RECIPES.recipeBuilder()
+        LARGE_CHEMICAL_RECIPES.recipeBuilder()
                 .duration(145)
                 .EUt(VA[EV])
+                .circuitMeta(2)
                 .fluidInputs(Nitroanisole.getFluid(1000))
                 .fluidInputs(Hydrogen.getFluid(6000))
                 .notConsumable(dust, Nickel)

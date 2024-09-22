@@ -25,6 +25,9 @@ import keqing.gtqtcore.common.metatileentities.multi.generators.Tide.MetaTileEnt
 import keqing.gtqtcore.common.metatileentities.multi.generators.Tide.MetaTileEntityTideUnit;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.*;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.LaserSystem.MetaTileEntityLaserEmitter;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.LaserSystem.MetaTileEntityLaserTranslation;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.LaserSystem.MetaTileEntitySwitch;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.core.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.gcys.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.huge.*;
@@ -256,6 +259,11 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityAssemblyLine ASSEMBLY_LINE;
     public static MetaTileEntityKQCCComputationHatch[] KQCC_COMPUTATION_HATCH_RECEIVER = new MetaTileEntityKQCCComputationHatch[GTValues.V.length - 1];
     public static MetaTileEntityKQCCComputationHatch[] KQCC_COMPUTATION_HATCH_TRANSMITTER = new MetaTileEntityKQCCComputationHatch[GTValues.V.length - 1];
+
+    public static MetaTileHEL[] LASER_INPUT = new MetaTileHEL[GTValues.V.length - 1];
+    public static MetaTileHEL[] LASER_OUTPUT = new MetaTileHEL[GTValues.V.length - 1];
+
+
     public static final MetaTileEntityMicrowaveEnergyReceiver[] MICROWAVE_ENERGY_RECEIVER = new MetaTileEntityMicrowaveEnergyReceiver[GTValues.V.length - 1];
     public static MetaTileEntityMSF MSF;
     public static MetaTileEntityNicollDysonBeamer NICOLL_DYSON_BEAMER;
@@ -265,6 +273,9 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityParticleAcceleratorIO[] PARTICLE_ACCELERATOR_IO = new MetaTileEntityParticleAcceleratorIO[4];
     public static MetaTileEntityAdvancedAssemblyLine ADVANCED_ASSEMBLY_LINE;
     public static MetaTileEntityLargeGrind LAGER_GRIND;
+    public static MetaTileEntityLaserEmitter LASER_EMITTER;
+    public static MetaTileEntityLaserTranslation LASER_TRANSLATION;
+    public static MetaTileEntitySwitch LASER_SWITCH;
     public static MetaTileEntityLargeForging LAGER_FORGING;
     public static MetaTileEntityPrimitiveRoaster PRIMITIVE_ROASTER;
     public static MetaTileEntityLargeExtractor LAGER_EXTRACTOR;
@@ -381,9 +392,9 @@ public class GTQTMetaTileEntities {
         ACID_GENERATOR[2] = registerMetaTileEntity(3028, new SimpleGeneratorMetaTileEntity(gtqtcoreId("acid_generator.ev"), GTQTcoreRecipeMaps.ACID_GENERATOR_RECIPES, Textures.CHEMICAL_REACTOR_OVERLAY, 4, GTUtility.genericGeneratorTankSizeFunction));
 
         //发电设备 多方块
-        HYPER_REACTOR_MKI = registerMetaTileEntity(3053, new MetaTileEntityHyperReactorMkI(gtqtcoreId("hyper_reactor_mk1")));
-        HYPER_REACTOR_MKII = registerMetaTileEntity(3054, new MetaTileEntityHyperReactorMkII(gtqtcoreId("hyper_reactor_mk2")));
-        HYPER_REACTOR_MKIII = registerMetaTileEntity(3055, new MetaTileEntityHyperReactorMkIII(gtqtcoreId("hyper_reactor_mk3")));
+        HYPER_REACTOR_MKI = registerMetaTileEntity(3050, new MetaTileEntityHyperReactorMkI(gtqtcoreId("hyper_reactor_mk1")));
+        HYPER_REACTOR_MKII = registerMetaTileEntity(3051, new MetaTileEntityHyperReactorMkII(gtqtcoreId("hyper_reactor_mk2")));
+        HYPER_REACTOR_MKIII = registerMetaTileEntity(3052, new MetaTileEntityHyperReactorMkIII(gtqtcoreId("hyper_reactor_mk3")));
 
         LARGE_NAQUADAH_REACTOR = registerMetaTileEntity(3059, new MetaTileEntityLargeNaquadahReactor(gtqtcoreId("large_naquadah_reactor")));
         ROCKET = registerMetaTileEntity(3060, new MetaTileEntityRocket(gtqtcoreId("rocket"), 7));
@@ -409,6 +420,10 @@ public class GTQTMetaTileEntities {
         TIDE_CONTROL = registerMetaTileEntity(3075, new MetaTileEntityTideControl(gtqtcoreId("tide_control")));
         TIDE_UNIT = registerMetaTileEntity(3076, new MetaTileEntityTideUnit(gtqtcoreId("tide_unit")));
 
+        //激光
+        LASER_EMITTER = registerMetaTileEntity(3090, new MetaTileEntityLaserEmitter(gtqtcoreId("laser_emitter")));
+        LASER_TRANSLATION = registerMetaTileEntity(3091, new MetaTileEntityLaserTranslation(gtqtcoreId("laser_translation")));
+        LASER_SWITCH = registerMetaTileEntity(3092, new MetaTileEntitySwitch(gtqtcoreId("laser_switch")));
         //早期设备
         PRIMITIVE_TREE_FARMER = registerMetaTileEntity(3100, new MetaTileEntityPrimitiveTreeFarmer(gtqtcoreId("primitive_tree_farmer")));
         SAW_MILL = registerMetaTileEntity(3101, new MetaTileEntitySawMill(gtqtcoreId("saw_mill")));
@@ -644,6 +659,9 @@ public class GTQTMetaTileEntities {
             KQCC_COMPUTATION_HATCH_RECEIVER[i] = registerMetaTileEntity(15400 + i - 1, new MetaTileEntityKQCCComputationHatch(gtqtcoreId("kqcccomputation_hatch.receiver." + tierName), i, false));
             KQCC_COMPUTATION_HATCH_TRANSMITTER[i] = registerMetaTileEntity(15415 + i - 1, new MetaTileEntityKQCCComputationHatch(gtqtcoreId("kqcccomputation_hatch.transmitter." + tierName), i, true));
             MICROWAVE_ENERGY_RECEIVER[i] = registerMetaTileEntity(15430 + i - 1, new MetaTileEntityMicrowaveEnergyReceiver(gtqtcoreId("microwave_energy_receiver." + tierName), i));
+
+            LASER_INPUT[i] = registerMetaTileEntity(15445 + i - 1, new MetaTileHEL(gtqtcoreId("laser.input." + tierName), i, false));
+            LASER_OUTPUT[i] = registerMetaTileEntity(15460 + i - 1, new MetaTileHEL(gtqtcoreId("laser.output." + tierName), i, true));
         }
 
         registerMetaTileEntity(15541, new keqing.gtqtcore.common.metatileentities.multi.multiblockpart.MetaTileEntityParallelHatch(gtqtcoreId(String.format("parallel_hatch.%s", GTValues.VN[9])), 9));

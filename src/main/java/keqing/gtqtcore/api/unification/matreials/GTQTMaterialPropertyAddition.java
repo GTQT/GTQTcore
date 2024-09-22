@@ -161,7 +161,6 @@ public class GTQTMaterialPropertyAddition {
 
         StainlessSteel.getProperty(PropertyKey.BLAST).setBlastTemperature(2700);
         // Fluids
-        SiliconCarbide.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
         SodiumHydroxide.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
         SodiumBisulfate.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
 

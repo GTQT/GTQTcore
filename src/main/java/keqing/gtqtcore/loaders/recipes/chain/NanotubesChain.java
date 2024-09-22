@@ -28,10 +28,10 @@ public class NanotubesChain {
         AUTOCLAVE_RECIPES.recipeBuilder()
                 .input(dust, SiliconDioxide, 5)
                 .input(dust, Iron)
-                .fluidInputs(DistilledWater.getFluid(L))
+                .fluidInputs(Steam.getFluid(L))
                 .output(seedCrystal, Prasiolite)
                 .duration(400)
-                .EUt(VA[EV])
+                .EUt(VA[IV])
                 .buildAndRegister();
 
         //  3Te + 2Bi -> Be2Te3

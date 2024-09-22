@@ -2218,6 +2218,41 @@ gtqtcore.machine.microwave_energy_receiver.uxv.name=Wireless Microwave Receiver 
 gtqtcore.machine.microwave_energy_receiver.opv.name=Wireless Microwave Receiver (§9OpV§r)
 gtqtcore.machine.microwave_energy_receiver.max.name=Wireless Microwave Receiver (§c§lMAX§r)
 
+gtqtcore.machine.laser.input.lv.name=High-Energy Wireless Laser Target Chamber (§7LV§r)
+gtqtcore.machine.laser.input.mv.name=High-Energy Wireless Laser Target Chamber (§bMV§r)
+gtqtcore.machine.laser.input.hv.name=High-Energy Wireless Laser Target Chamber (§6HV§r)
+gtqtcore.machine.laser.input.ev.name=High-Energy Wireless Laser Target Chamber (§5EV§r)
+gtqtcore.machine.laser.input.iv.name=High-Energy Wireless Laser Target Chamber (§1IV§r)
+gtqtcore.machine.laser.input.luv.name=High-Energy Wireless Laser Target Chamber (§dLuV§r)
+gtqtcore.machine.laser.input.zpm.name=High-Energy Wireless Laser Target Chamber (§cZPM§r)
+gtqtcore.machine.laser.input.uv.name=High-Energy Wireless Laser Target Chamber (§3UV§r)
+gtqtcore.machine.laser.input.uhv.name=High-Energy Wireless Laser Target Chamber (§4UHV§r)
+gtqtcore.machine.laser.input.uev.name=High-Energy Wireless Laser Target Chamber (§aUEV§r)
+gtqtcore.machine.laser.input.uiv.name=High-Energy Wireless Laser Target Chamber (§2UIV§r)
+gtqtcore.machine.laser.input.uxv.name=High-Energy Wireless Laser Target Chamber (§eUXV§r)
+gtqtcore.machine.laser.input.opv.name=High-Energy Wireless Laser Target Chamber (§9OpV§r)
+gtqtcore.machine.laser.input.max.name=High-Energy Wireless Laser Target Chamber (§c§lMAX§r)
+
+gtqtcore.machine.laser.output.ulv.name=High-Energy Wireless Laser Source Chamber (ULV)
+gtqtcore.machine.laser.output.lv.name=High-Energy Wireless Laser Source Chamber (§7LV§r)
+gtqtcore.machine.laser.output.mv.name=High-Energy Wireless Laser Source Chamber (§bMV§r)
+gtqtcore.machine.laser.output.hv.name=High-Energy Wireless Laser Source Chamber (§6HV§r)
+gtqtcore.machine.laser.output.ev.name=High-Energy Wireless Laser Source Chamber (§5EV§r)
+gtqtcore.machine.laser.output.iv.name=High-Energy Wireless Laser Source Chamber (§1IV§r)
+gtqtcore.machine.laser.output.luv.name=High-Energy Wireless Laser Source Chamber (§dLuV§r)
+gtqtcore.machine.laser.output.zpm.name=High-Energy Wireless Laser Source Chamber (§cZPM§r)
+gtqtcore.machine.laser.output.uv.name=High-Energy Wireless Laser Source Chamber (§3UV§r)
+gtqtcore.machine.laser.output.uhv.name=High-Energy Wireless Laser Source Chamber (§4UHV§r)
+gtqtcore.machine.laser.output.uev.name=High-Energy Wireless Laser Source Chamber (§aUEV§r)
+gtqtcore.machine.laser.output.uiv.name=High-Energy Wireless Laser Source Chamber (§2UIV§r)
+gtqtcore.machine.laser.output.uxv.name=High-Energy Wireless Laser Source Chamber (§eUXV§r)
+gtqtcore.machine.laser.output.opv.name=High-Energy Wireless Laser Source Chamber (§9OpV§r)
+gtqtcore.machine.laser.output.max.name=High-Energy Wireless Laser Source Chamber (§c§lMAX§r)
+
+gtqtcore.machine.laser_switch.name=High-Energy Laser Distribution Unit
+gtqtcore.machine.laser_translation.name=High-Energy Laser Reception Chamber
+gtqtcore.machine.laser_emitter.name=High-Energy Laser Emission Chamber
+
 metaitem.arrow_up_mki.name=Abstract Thought Node I
 metaitem.arrow_down_mki.name=Concrete Thought Node I
 metaitem.arrow_left_mki.name=Divergent Thought Node I
@@ -4776,8 +4811,8 @@ tile.cleanroom_casing.warning=Can only be used in Large Clean Facilities!
 gtqtcore.machine.large_biomass_generator.name=Large Biomass Reactor
 gtqtcore.machine.large_biomass_generator.tooltip.1=Plant Blending Power Generator
 
-gtqtcore.machine.tide_unit.name=潮汐浮标单元
-gtqtcore.machine.tide_control.name=潮汐浮标控制器
+gtqtcore.machine.tide_unit.name=Tide Unit
+gtqtcore.machine.tide_control.name=Tide Control
 
 recipemap.biomass_generator.name=Biomass Power Generation
 gtqtcore.machine.biomass_generator.ev.name=Basic Biomass Generator

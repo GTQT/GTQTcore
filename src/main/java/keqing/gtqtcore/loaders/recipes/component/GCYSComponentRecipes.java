@@ -11,6 +11,8 @@ import static gregtech.api.recipes.RecipeMaps.ASSEMBLY_LINE_RECIPES;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.common.items.MetaItems.*;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
+import static keqing.gtqtcore.api.unification.TJMaterials.*;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.GOOWARE_ASSEMBLY;
 
 public class GCYSComponentRecipes {
@@ -45,6 +47,28 @@ public class GCYSComponentRecipes {
                         .CWUt(64)
                         .EUt(VA[UV]))
                 .duration(600).EUt(400000).buildAndRegister();
+
+        //  UEV
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(stickLong, ChromiumGermaniumTellurideMagnetic)
+                .input(stickLong, Hdcs, 4)
+                .input(ring, Hdcs, 4)
+                .input(round, Hdcs, 8)
+                .input(wireFine, Seaborgium, 64)
+                .input(wireFine, Seaborgium, 64)
+                .input(cableGtSingle, PedotTMA, 2)
+                .fluidInputs(SolderingAlloy.getFluid(L * 16))
+                .fluidInputs(Lubricant.getFluid(5000))
+                .fluidInputs(Polyetheretherketone.getFluid(L * 2))
+                .fluidInputs(Ichorium.getFluid(L))
+                .output(ELECTRIC_MOTOR_UEV)
+                .duration(1800)
+                .EUt(2000000)
+                .stationResearch(b -> b
+                        .researchStack(ELECTRIC_MOTOR_UHV.getStackForm())
+                        .CWUt(128)
+                        .EUt(VA[UHV]))
+                .buildAndRegister();
     }
 
     private static void conveyor() {
@@ -65,6 +89,27 @@ public class GCYSComponentRecipes {
                         .CWUt(64)
                         .EUt(VA[UV]))
                 .duration(600).EUt(400000).buildAndRegister();
+
+        //  UEV
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(ELECTRIC_MOTOR_UEV, 2)
+                .input(plate, Hdcs, 2)
+                .input(ring, Hdcs, 4)
+                .input(round, Hdcs, 16)
+                .input(screw, Hdcs, 4)
+                .input(cableGtSingle, PedotTMA, 2)
+                .fluidInputs(SolderingAlloy.getFluid(L * 16))
+                .fluidInputs(Lubricant.getFluid(5000))
+                .fluidInputs(PolyPhosphonitrileFluoroRubber.getFluid(L * 40))
+                .fluidInputs(Ichorium.getFluid(L * 2))
+                .output(CONVEYOR_MODULE_UEV)
+                .duration(1800)
+                .EUt(2000000)
+                .stationResearch(b -> b
+                        .researchStack(CONVEYOR_MODULE_UHV.getStackForm())
+                        .CWUt(128)
+                        .EUt(VA[UHV]))
+                .buildAndRegister();
     }
 
     private static void piston() {
@@ -86,6 +131,29 @@ public class GCYSComponentRecipes {
                         .CWUt(64)
                         .EUt(VA[UV]))
                 .duration(600).EUt(400000).buildAndRegister();
+
+        //  UEV
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(ELECTRIC_MOTOR_UEV)
+                .input(plate, Hdcs, 4)
+                .input(ring, Hdcs, 4)
+                .input(round, Hdcs, 16)
+                .input(stick, Hdcs, 4)
+                .input(gear, Adamantium)
+                .input(gearSmall, Adamantium, 2)
+                .input(cableGtSingle, PedotTMA, 2)
+                .fluidInputs(SolderingAlloy.getFluid(L * 16))
+                .fluidInputs(Lubricant.getFluid(5000))
+                .fluidInputs(Polyetheretherketone.getFluid(L * 2))
+                .fluidInputs(Ichorium.getFluid(L))
+                .output(ELECTRIC_PISTON_UEV)
+                .duration(1800)
+                .EUt(2000000)
+                .stationResearch(b -> b
+                        .researchStack(ELECTRIC_PISTON_UHV.getStackForm())
+                        .CWUt(128)
+                        .EUt(VA[UHV]))
+                .buildAndRegister();
     }
 
     private static void robotArm() {
@@ -108,6 +176,30 @@ public class GCYSComponentRecipes {
                         .CWUt(64)
                         .EUt(VA[UV]))
                 .duration(600).EUt(400000).buildAndRegister();
+
+        //  UEV
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(stickLong, Hdcs, 4)
+                .input(gear, Hdcs)
+                .input(gearSmall, Hdcs, 3)
+                .input(ELECTRIC_MOTOR_UEV, 2)
+                .input(ELECTRIC_PISTON_UEV)
+                .input(circuit, MarkerMaterials.Tier.UEV)
+                .input(circuit, MarkerMaterials.Tier.UHV, 2)
+                .input(circuit, MarkerMaterials.Tier.UV, 4)
+                .input(cableGtSingle, PedotTMA, 4)
+                .fluidInputs(SolderingAlloy.getFluid(L * 20))
+                .fluidInputs(Lubricant.getFluid(5000))
+                .fluidInputs(Polyetheretherketone.getFluid(L * 2))
+                .fluidInputs(Ichorium.getFluid(L))
+                .output(ROBOT_ARM_UEV)
+                .duration(1800)
+                .EUt(2000000)
+                .stationResearch(b -> b
+                        .researchStack(ROBOT_ARM_UHV.getStackForm())
+                        .CWUt(128)
+                        .EUt(VA[UHV]))
+                .buildAndRegister();
     }
 
     private static void pump() {
@@ -128,6 +220,28 @@ public class GCYSComponentRecipes {
                         .CWUt(64)
                         .EUt(VA[UV]))
                 .duration(600).EUt(400000).buildAndRegister();
+
+        //  UEV
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(ELECTRIC_MOTOR_UEV)
+                .input(pipeLargeFluid, Lafium)
+                .input(plate, Hdcs, 2)
+                .input(screw, Hdcs, 8)
+                .input(ring, NitrileButadieneRubber, 64)
+                .input(rotor, Adamantium)
+                .input(cableGtSingle, PedotTMA, 2)
+                .fluidInputs(SolderingAlloy.getFluid(L * 16))
+                .fluidInputs(Lubricant.getFluid(5000))
+                .fluidInputs(Polyetheretherketone.getFluid(L * 2))
+                .fluidInputs(Ichorium.getFluid(L))
+                .output(ELECTRIC_PUMP_UEV)
+                .duration(1800)
+                .EUt(2000000)
+                .stationResearch(b -> b
+                        .researchStack(ELECTRIC_PUMP_UHV.getStackForm())
+                        .CWUt(128)
+                        .EUt(VA[UHV]))
+                .buildAndRegister();
     }
 
     private static void emitter() {
@@ -148,6 +262,28 @@ public class GCYSComponentRecipes {
                         .CWUt(64)
                         .EUt(VA[UV]))
                 .duration(600).EUt(400000).buildAndRegister();
+
+        //  UEV
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(frameGt, Hdcs)
+                .input(ELECTRIC_MOTOR_UEV)
+                .input(stickLong, Hdcs, 4)
+                .input(GRAVI_STAR, 4)
+                .input(circuit, MarkerMaterials.Tier.UEV, 2)
+                .input(foil, Ichorium, 64)
+                .input(foil, Ichorium, 32)
+                .input(cableGtSingle, PedotTMA, 4)
+                .fluidInputs(SolderingAlloy.getFluid(L * 32))
+                .fluidInputs(Polyetheretherketone.getFluid(L * 2))
+                .fluidInputs(Ichorium.getFluid(L))
+                .output(EMITTER_UEV)
+                .duration(1800)
+                .EUt(2000000)
+                .stationResearch(b -> b
+                        .researchStack(EMITTER_UHV.getStackForm())
+                        .CWUt(128)
+                        .EUt(VA[UHV]))
+                .buildAndRegister();
     }
 
     private static void sensor() {
@@ -168,6 +304,28 @@ public class GCYSComponentRecipes {
                         .CWUt(64)
                         .EUt(VA[UV]))
                 .duration(600).EUt(400000).buildAndRegister();
+
+        //  UEV
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(frameGt, Hdcs)
+                .input(ELECTRIC_MOTOR_UEV)
+                .input(plate, Hdcs, 4)
+                .input(GRAVI_STAR, 4)
+                .input(circuit, MarkerMaterials.Tier.UEV, 2)
+                .input(foil, Seaborgium, 64)
+                .input(foil, Seaborgium, 32)
+                .input(cableGtSingle, PedotTMA, 4)
+                .fluidInputs(SolderingAlloy.getFluid(L * 32))
+                .fluidInputs(Polyetheretherketone.getFluid(L * 2))
+                .fluidInputs(Ichorium.getFluid(L))
+                .output(SENSOR_UEV)
+                .duration(1800)
+                .EUt(2000000)
+                .stationResearch(b -> b
+                        .researchStack(SENSOR_UHV.getStackForm())
+                        .CWUt(128)
+                        .EUt(VA[UHV]))
+                .buildAndRegister();
     }
 
     private static void fieldGenerator() {
@@ -188,6 +346,29 @@ public class GCYSComponentRecipes {
                         .CWUt(64)
                         .EUt(VA[UV]))
                 .duration(600).EUt(400000).buildAndRegister();
+
+        //  UEV
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(frameGt, Hdcs)
+                .input(plate, Hdcs, 6)
+                .input(GRAVI_STAR, 4)
+                .input(EMITTER_UEV, 2)
+                .input(circuit, MarkerMaterials.Tier.UEV, 2)
+                .input(wireFine, QuantumAlloy, 64)
+                .input(wireFine, QuantumAlloy, 64)
+                .input(cableGtSingle, PedotTMA, 4)
+                .fluidInputs(SolderingAlloy.getFluid(L * 20))
+                .fluidInputs(Polyetheretherketone.getFluid(L * 2))
+                .fluidInputs(Ichorium.getFluid(L))
+                .output(FIELD_GENERATOR_UEV)
+                .duration(1800)
+                .EUt(2000000)
+                .stationResearch(b -> b
+                        .researchStack(FIELD_GENERATOR_UHV.getStackForm())
+                        .CWUt(128)
+                        .EUt(VA[UHV]))
+                .buildAndRegister();
+
     }
 
     private static void craftingComponents() {

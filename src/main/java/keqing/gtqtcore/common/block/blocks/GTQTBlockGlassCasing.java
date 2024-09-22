@@ -2,6 +2,7 @@ package keqing.gtqtcore.common.block.blocks;
 
 import gregtech.api.GTValues;
 import gregtech.api.block.VariantActiveBlock;
+import gregtech.api.block.VariantBlock;
 import gregtech.api.block.VariantItemBlock;
 import gregtech.api.items.toolitem.ToolClasses;
 import keqing.gtqtcore.api.blocks.ITierGlassBlockState;
@@ -28,8 +29,7 @@ import java.util.List;
 
 import static keqing.gtqtcore.common.block.blocks.GTQTBlockGlassCasing.CasingType.TI_BORON_SILICATE_GLASS;
 
-@ParametersAreNonnullByDefault
-public class GTQTBlockGlassCasing extends VariantActiveBlock<GTQTBlockGlassCasing.CasingType> {
+public class GTQTBlockGlassCasing extends VariantBlock<GTQTBlockGlassCasing.CasingType> {
 
     public GTQTBlockGlassCasing() {
         super(Material.IRON);

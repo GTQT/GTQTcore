@@ -1,14 +1,12 @@
 {
   "ctm": {
         "ctm_version": 1,
-		"type": "CTM",
-        "layer": "BLOOM",
-        "gregtech": true,
+        "type": "CTM","layer": "TRANSLUCENT",
 		"textures": [
             "gregtech:blocks/multiblock/advglass/boron_silicate_glass_ctm"
         ],
         "extra": {
-            "light": 15
+            "connect_inside": true
         }
     }
 }

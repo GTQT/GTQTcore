@@ -9,6 +9,7 @@ import gregtech.api.unification.material.properties.ToolProperty;
 
 import static gregtech.api.GTValues.*;
 import static gregtech.api.GTValues.VA;
+import static gregtech.api.unification.material.info.MaterialIconSet.METALLIC;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.info.MaterialFlags.*;
@@ -918,13 +919,18 @@ public class GCYSFirstDegreeMaterials {
                 .build();
 
         SiliconCarbide = new Material.Builder(3621, gregtechId("silicon_carbide")) //TODO Carborundum tooltip
+                .dust()
+                .fluid()
+                .color(0x4D4D4D)
+                .iconSet(METALLIC)
+                .flags(GENERATE_FINE_WIRE)
+                .components(Silicon, 1, Carbon, 1)
                 .blast(b -> b
                         .temp(2500, BlastProperty.GasTier.HIGH)
                         .blastStats(VA[UV])
                         .vacuumStats(VA[EV], 280))
-                .cableProperties(VA[UHV], 6, 8, false)
-                .flags(GENERATE_PLATE, GENERATE_FOIL, GENERATE_ROD,GENERATE_RING, GENERATE_ROUND, GENERATE_ROTOR, GENERATE_BOLT_SCREW, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_LONG_ROD, GENERATE_FRAME)
-
+                .cableProperties(V[UHV], 6, 8, false)
+                .flags(GENERATE_PLATE, GENERATE_FOIL, GENERATE_ROD, GENERATE_GEAR, GENERATE_FRAME, GENERATE_DOUBLE_PLATE)
                 .build();
 
         ChromiumGermaniumTelluride = new Material.Builder(3622, gregtechId("cgt"))

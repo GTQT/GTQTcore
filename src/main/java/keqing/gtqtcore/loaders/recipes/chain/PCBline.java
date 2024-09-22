@@ -169,7 +169,6 @@ public class PCBline {
                 .input(circuit, MarkerMaterials.Tier.EV, 32)
                 .input(stick, RedSteel, 2)
                 .input(plate, BlueSteel, 12)
-                .circuitMeta(6)
                 .outputs(GTQTMetaBlocks.PCB_FACTORY_CASING.getItemVariant(BlockPCBFactoryCasing.PCBFactoryCasingType.SUBSTRATE_CASING, ConfigHolder.recipes.casingsPerCraft))
                 .stationResearch(b -> b
                         .researchStack(CHEMICAL_PLANT.getStackForm())

@@ -53,7 +53,7 @@ public class MolecularTransformer {
                 .input(HULL[3+tier])
                 .input(frameGt, MaterialHelper.Plate[3+tier],8)
                 .inputs(GTQTMetaBlocks.GLASS_CASING.getItemVariant(MaterialHelper.Glass[tier],8))
-                .input(ring, MaterialHelper.Pipe[3+tier],8)
+                .input(ring, MaterialHelper.Plate[3+tier],8)
                 .input(circuit, MarkerMaterial.create(GTValues.VN[4+tier].toLowerCase()), 8)
                 .circuitMeta(5)
                 .EUt(VA[3+tier])
