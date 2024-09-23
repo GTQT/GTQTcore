@@ -25,6 +25,7 @@ import keqing.gtqtcore.common.metatileentities.multi.generators.Tide.MetaTileEnt
 import keqing.gtqtcore.common.metatileentities.multi.generators.Tide.MetaTileEntityTideUnit;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.*;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.LaserSystem.MetaTileEntityLaserBlastFurnace;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.LaserSystem.MetaTileEntityLaserEmitter;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.LaserSystem.MetaTileEntityLaserTranslation;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.LaserSystem.MetaTileEntitySwitch;
@@ -237,6 +238,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityMillBallHatch MULTIPART_BALL_HATCH;
     public static MetaTileEntityCatalystHatch CATALYST_HATCH;
     public static MetaTileEntityKQNetworkSwitch KQNS;
+    public static MetaTileEntityLaserBlastFurnace LASER_BLAST_FURNACE;
     public static MetaTileEntityMegaCleanroom MEGA_CLEANROOM;
     public static MetaTileEntityDimensionalMixer DIMENSIONAL_MIXER;
     public static MetaTileEntityDimensionallyPlasmFurnace DIMENSIONAL_PLASMA_FURNACE;
@@ -424,6 +426,8 @@ public class GTQTMetaTileEntities {
         LASER_EMITTER = registerMetaTileEntity(3090, new MetaTileEntityLaserEmitter(gtqtcoreId("laser_emitter")));
         LASER_TRANSLATION = registerMetaTileEntity(3091, new MetaTileEntityLaserTranslation(gtqtcoreId("laser_translation")));
         LASER_SWITCH = registerMetaTileEntity(3092, new MetaTileEntitySwitch(gtqtcoreId("laser_switch")));
+        LASER_BLAST_FURNACE= registerMetaTileEntity(3093, new MetaTileEntityLaserBlastFurnace(gtqtcoreId("laser_blast_furnace")));
+
         //早期设备
         PRIMITIVE_TREE_FARMER = registerMetaTileEntity(3100, new MetaTileEntityPrimitiveTreeFarmer(gtqtcoreId("primitive_tree_farmer")));
         SAW_MILL = registerMetaTileEntity(3101, new MetaTileEntitySawMill(gtqtcoreId("saw_mill")));

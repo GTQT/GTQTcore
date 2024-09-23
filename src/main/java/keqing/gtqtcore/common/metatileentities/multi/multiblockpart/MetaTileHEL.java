@@ -21,6 +21,9 @@ import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMulti
 import keqing.gtqtcore.api.capability.ILaser;
 import keqing.gtqtcore.api.utils.GTQTLog;
 import keqing.gtqtcore.client.particle.LaserBeamParticle;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.LaserSystem.MetaTileEntityLaserEmitter;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.LaserSystem.MetaTileEntityLaserTranslation;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.LaserSystem.MetaTileEntitySwitch;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
@@ -56,11 +59,18 @@ public class MetaTileHEL extends MetaTileEntityMultiblockNotifiablePart implemen
         data.setLong("Laser", Laser);
         data.setLong("SetLaser", SetLaser);
         data.setLong("MaxLaser", MaxLaser);
-        data.setInteger("X", TargetPos.getX());
-        data.setInteger("Y", TargetPos.getY());
-        data.setInteger("Z", TargetPos.getZ());
+        if(isExportHatch) {
+            data.setInteger("X1", TargetPos.getX());
+            data.setInteger("Y1", TargetPos.getY());
+            data.setInteger("Z1", TargetPos.getZ());
+        }
+
+        data.setInteger("X2", machinePos.getX());
+        data.setInteger("Y2", machinePos.getY());
+        data.setInteger("Z2", machinePos.getZ());
 
         data.setBoolean("findTarget",findTarget);
+        data.setBoolean("findMachine",findMachine);
         return super.writeToNBT(data);
     }
 
@@ -72,14 +82,19 @@ public class MetaTileHEL extends MetaTileEntityMultiblockNotifiablePart implemen
         SetLaser = data.getLong("SetLaser");
         MaxLaser = data.getLong("MaxLaser");
 
-        TargetPos= new BlockPos(data.getInteger("X"), data.getInteger("Y"), data.getInteger("Z"));
+        if(isExportHatch)TargetPos= new BlockPos(data.getInteger("X1"), data.getInteger("Y1"), data.getInteger("Z1"));
+        machinePos= new BlockPos(data.getInteger("X2"), data.getInteger("Y2"), data.getInteger("Z2"));
 
         findTarget=data.getBoolean("findTarget");
+        findMachine=data.getBoolean("findMachine");
     }
 
 
-    BlockPos TargetPos = new BlockPos(0, 0, 0);
+    BlockPos TargetPos;
     boolean findTarget = false;
+
+    BlockPos machinePos;
+    boolean findMachine = false;
 
     public MetaTileHEL(ResourceLocation metaTileEntityId, int tier, boolean isExportHatch) {
         super(metaTileEntityId, tier, isExportHatch);
@@ -91,60 +106,98 @@ public class MetaTileHEL extends MetaTileEntityMultiblockNotifiablePart implemen
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileHEL(this.metaTileEntityId, this.getTier(), this.isExportHatch);
     }
+    public boolean checkMachine(BlockPos pos){
+        if(isExportHatch)if(GTUtility.getMetaTileEntity(this.getWorld(), pos) instanceof MetaTileEntityLaserEmitter mte)if(mte.isWorkingEnabled()&&mte.isStructureFormed())return true;
 
+        if(!isExportHatch)if(GTUtility.getMetaTileEntity(this.getWorld(), pos) instanceof MetaTileEntityLaserTranslation mte)if(mte.isWorkingEnabled()&&mte.isStructureFormed())return true;
+
+        if(GTUtility.getMetaTileEntity(this.getWorld(), pos) instanceof MetaTileEntitySwitch mte)if(mte.isWorkingEnabled()&&mte.isStructureFormed())return true;
+
+        if(!isExportHatch)if(GTUtility.getMetaTileEntity(this.getWorld(), pos) instanceof MetaTileHEL mte) return mte.isExportHatch;
+        return false;
+    }
     public void update() {
         super.update();
-        if(Voltage>=14||Voltage<0)Voltage=0;
-        if(Amperage>4||Amperage<0)Amperage=0;
 
-        SetLaser= Amperage*V[Voltage];
-        Laser=Math.min(Laser, SetLaser);
+        if (Voltage >= 14 || Voltage < 0) {
+            Voltage = 0;
+        }
+        if (Amperage > 4 || Amperage < 0) {
+            Amperage = 0;
+        }
 
-        if (!isExportHatch) return;//如果是输入激光端就等着艾草就行了
+        SetLaser = Amperage * V[Voltage];
+        Laser = Math.min(Laser, SetLaser);
 
-        //如果是输出端就去找操谁
+        // 对于输出来讲，需要与自己的机器通讯
+        // 对于输入来讲，需要与自己的绑定的输出通讯
+        if (!findMachine) {
+            if (findTarget) {
+                if (GTUtility.getMetaTileEntity(this.getWorld(), TargetPos) instanceof MetaTileHEL target) {
+                    if (target.isExportHatch) {
+                        return;
+                    }
+                    target.setLaser(0);
+                    target.setMachinePos(this.getPos());
+                    // 目标最大容量就是他的最大额定接收
+                }
+            }
+            return;
+        }
 
+        if (!checkMachine(machinePos)) {
+            Laser = 0;
+            findMachine = false;
+            return;
+        }
+
+        if (!isExportHatch) {
+            return; // 如果是输入激光端就等着艾草就行了
+        }
+
+        // 如果是输出端就去找目标
         final int xDir = this.getFrontFacing().getOpposite().getXOffset();
         final int zDir = this.getFrontFacing().getOpposite().getZOffset();
         if (!findTarget) {
-            for (int i = 1; i <= MaxLength; i++) {
-                //注意 查找是往反向找！！！！！！！
-                if(!findTarget) {
-                    if (this.getFrontFacing() == UP) {
-                        if (GTUtility.getMetaTileEntity(this.getWorld(), this.getPos().add(0, i, 0)) instanceof MetaTileHEL target) {
-                            TargetPos = this.getPos().add(0, i, 0);
-                            //只要不是输入端就一直找
-                            if (!target.isExportHatch) findTarget = true;
+            for (int i = 1; i <= MaxLength && !findTarget; i++) {
+                if (this.getFrontFacing() == UP) {
+                    if (GTUtility.getMetaTileEntity(this.getWorld(), this.getPos().add(0, i, 0)) instanceof MetaTileHEL target) {
+                        TargetPos = this.getPos().add(0, i, 0);
+                        if (!target.isExportHatch && !target.findMachine) {
+                            findTarget = true;
                         }
-                    } else if (this.getFrontFacing() == DOWN) {
-                        if (GTUtility.getMetaTileEntity(this.getWorld(), this.getPos().add(0, -i, 0)) instanceof MetaTileHEL target) {
-                            TargetPos = this.getPos().add(0, -i, 0);
-                            //只要不是输入端就一直找
-                            if (!target.isExportHatch) findTarget = true;
+                    }
+                } else if (this.getFrontFacing() == DOWN) {
+                    if (GTUtility.getMetaTileEntity(this.getWorld(), this.getPos().add(0, -i, 0)) instanceof MetaTileHEL target) {
+                        TargetPos = this.getPos().add(0, -i, 0);
+                        if (!target.isExportHatch && !target.findMachine) {
+                            findTarget = true;
                         }
-                    } else if (GTUtility.getMetaTileEntity(this.getWorld(), this.getPos().add(-xDir * i, 0, -zDir * i)) instanceof MetaTileHEL target) {
-                        TargetPos = this.getPos().add(-xDir * i, 0, -zDir * i);
-                        //只要不是输入端就一直找
-                        if (!target.isExportHatch) findTarget = true;
+                    }
+                } else if (GTUtility.getMetaTileEntity(this.getWorld(), this.getPos().add(-xDir * i, 0, -zDir * i)) instanceof MetaTileHEL target) {
+                    TargetPos = this.getPos().add(-xDir * i, 0, -zDir * i);
+                    if (!target.isExportHatch && !target.findMachine) {
+                        findTarget = true;
                     }
                 }
             }
         } else {
             if (GTUtility.getMetaTileEntity(this.getWorld(), TargetPos) instanceof MetaTileHEL target) {
-                if (target.isExportHatch)//你怎么突然变成输出端了
-                {
-                    findTarget = false;
-                } else {
-                    writeCustomData(GregtechDataCodes.UPDATE_PARTICLE, this::writeParticles);
-                    target.setLaser(Laser);
-                    //目标最大容量就是他的最大额定接收
+                if (target.isExportHatch) {
+                    return;
                 }
-            } else//我超 找不到了
-            {
+
+                if (Laser > 0) {
+                    writeCustomData(GregtechDataCodes.UPDATE_PARTICLE, this::writeParticles);
+                }
+
+                target.setLaser(Laser);
+                target.setMachinePos(this.getPos());
+                // 目标最大容量就是他的最大额定接收
+            } else {
                 findTarget = false;
             }
         }
-
     }
 
     public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
@@ -165,47 +218,52 @@ public class MetaTileHEL extends MetaTileEntityMultiblockNotifiablePart implemen
         if (isExportHatch) builder.dynamicLabel(7, 10, () -> "激光传输器输出端-等级：" + tier, 0x232323);
 
         else builder.dynamicLabel(7, 10, () -> "激光传输器输入端-等级：" + tier, 0x232323);
-        if(isExportHatch)builder.dynamicLabel(7, 20, () -> "绑定状态：" + findTarget+" "+TargetPos, 0x232323);
 
-        builder.label(7, 32, "折算电压 面向："+this.getFrontFacing());
-        builder.widget(new ClickButtonWidget(7, 45, 20, 20, "-", data -> Voltage = --Voltage == -1 ? 0 : Voltage));
-        builder.widget(new ImageWidget(29, 45, 118, 20, GuiTextures.DISPLAY));
-        builder.widget(new TextFieldWidget2(31, 51, 114, 16, () -> String.valueOf(Voltage), value1 -> {
+        builder.label(7, 20, "折算电压 面向："+this.getFrontFacing());
+        builder.widget(new ClickButtonWidget(7, 30, 20, 20, "-", data -> Voltage = --Voltage == -1 ? 0 : Voltage));
+        builder.widget(new ImageWidget(29, 30, 118, 20, GuiTextures.DISPLAY));
+        builder.widget(new TextFieldWidget2(31, 36, 114, 16, () -> String.valueOf(Voltage), value1 -> {
             if (!value1.isEmpty()) {
                 Voltage = Integer.parseInt(value1);
             }
         }).setMaxLength(10).setNumbersOnly(0, tier));
-        builder.widget(new ClickButtonWidget(149, 45, 20, 20, "+", data -> {
+        builder.widget(new ClickButtonWidget(149, 30, 20, 20, "+", data -> {
             if (Voltage <tier) {
                 Voltage++;
             }
         }));
 
-        builder.label(7, 70, "折算电流");
-        builder.widget(new ClickButtonWidget(7, 80, 20, 20, "-", data -> Amperage = --Amperage == -1 ? 0 : Amperage));
-        builder.widget(new ImageWidget(29, 80, 118, 20, GuiTextures.DISPLAY));
-        builder.widget(new TextFieldWidget2(31, 86, 114, 16, () -> String.valueOf(Amperage), value2 -> {
+        builder.label(7, 55, "折算电流");
+        builder.widget(new ClickButtonWidget(7, 65, 20, 20, "-", data -> Amperage = --Amperage == -1 ? 0 : Amperage));
+        builder.widget(new ImageWidget(29, 65, 118, 20, GuiTextures.DISPLAY));
+        builder.widget(new TextFieldWidget2(31, 71, 114, 16, () -> String.valueOf(Amperage), value2 -> {
             if (!value2.isEmpty()) {
                 Amperage = Integer.parseInt(value2);
             }
         }).setMaxLength(10).setNumbersOnly(0, 4));
-        builder.widget(new ClickButtonWidget(149, 80, 20, 20, "+", data -> {
+        builder.widget(new ClickButtonWidget(149, 65, 20, 20, "+", data -> {
             if (Amperage < 4) {
                 Amperage++;
             }
         }));
 
-        builder.widget(new ClickButtonWidget(7, 105, 80, 20, "=MAX", data -> {
+        builder.widget(new ClickButtonWidget(7, 90, 80, 20, "=MAX", data -> {
             Voltage=tier;
             Amperage=4;
         }));
-        builder.widget(new ClickButtonWidget(90, 105, 80, 20, "=0", data -> SetLaser = 0));
+        builder.widget(new ClickButtonWidget(90, 90, 80, 20, "=0", data -> {
+            Voltage=0;
+            Amperage=0;
+        }));
 
-        builder.widget((new AdvancedTextWidget(7, 130, this::addDisplayText, 2302755)).setMaxWidthLimit(181));
+        builder.widget((new AdvancedTextWidget(7, 110, this::addDisplayText, 2302755)).setMaxWidthLimit(181));
 
         return builder.build(getHolder(), entityPlayer);
     }
     protected void addDisplayText(List<ITextComponent> textList) {
+        if(isExportHatch)textList.add(new TextComponentString( "绑定状态： " + findTarget+" "+TargetPos));
+        textList.add(new TextComponentString( "设备状态：" + findMachine+" "+machinePos));
+
         textList.add(new TextComponentString( "实际 传输激光: " + Laser+" "+VN[GTUtility.getTierByVoltage(Laser)]));
         textList.add(new TextComponentString( "额定 传输激光: " + SetLaser+" "+VN[GTUtility.getTierByVoltage(SetLaser)]));
         textList.add(new TextComponentString( "最大 传输激光: " + MaxLaser+" "+VN[GTUtility.getTierByVoltage(MaxLaser)]));
@@ -228,6 +286,11 @@ public class MetaTileHEL extends MetaTileEntityMultiblockNotifiablePart implemen
     @Override
     public long Laser() {
         return Laser;
+    }
+    @Override
+    public void setMachinePos(BlockPos pos) {
+        machinePos=pos;
+        findMachine=true;
     }
     @Override
     public long MaxLaser()

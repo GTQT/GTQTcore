@@ -26,8 +26,11 @@ import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.MetaTil
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import java.util.Collections;
@@ -38,6 +41,7 @@ import static gregtech.api.GTValues.VN;
 import static gregtech.api.metatileentity.multiblock.MultiblockAbility.INPUT_ENERGY;
 import static keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility.LASER_OUTPUT;
 import static keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility.LASER_OUTPUT;
+import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.NQ_TURBINE_CASING;
 
 public class MetaTileEntityLaserEmitter extends MetaTileEntityBaseWithControl {
 
@@ -50,6 +54,7 @@ public class MetaTileEntityLaserEmitter extends MetaTileEntityBaseWithControl {
     long MaxLaser;
     long SetLaser;// 设定 的 最大激光强度
     int tier;
+
     @Override
     protected void updateFormedValid() {
         Amperage=this.getAbilities(LASER_OUTPUT).get(0).Amperage();
@@ -58,21 +63,21 @@ public class MetaTileEntityLaserEmitter extends MetaTileEntityBaseWithControl {
         MaxLaser=this.getAbilities(LASER_OUTPUT).get(0).MaxLaser();
         SetLaser=this.getAbilities(LASER_OUTPUT).get(0).SetLaser();
         tier=this.getAbilities(LASER_OUTPUT).get(0).tier();
+        this.getAbilities(LASER_OUTPUT).get(0).setMachinePos(this.getPos());
 
         if(isWorkingEnabled()) {
-
             if (this.energyContainer.getEnergyStored() >= 0) {
                 this.getAbilities(LASER_OUTPUT).get(0).setLaser(Math.min(this.getAbilities(LASER_OUTPUT).get(0).SetLaser(), this.energyContainer.getEnergyStored()));
                 this.energyContainer.removeEnergy(Math.min(this.getAbilities(LASER_OUTPUT).get(0).SetLaser(), this.energyContainer.getEnergyStored()));
             } else this.getAbilities(LASER_OUTPUT).get(0).setLaser(0);
         }
         else this.getAbilities(LASER_OUTPUT).get(0).setLaser(0);
-
     }
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
         this.energyContainer = new EnergyContainerList(getAbilities(MultiblockAbility.INPUT_ENERGY));
+        this.getAbilities(LASER_OUTPUT).get(0).setMachinePos(this.getPos());
     }
     @Override
     protected ModularUI.Builder createUITemplate(EntityPlayer entityPlayer) {
@@ -114,6 +119,7 @@ public class MetaTileEntityLaserEmitter extends MetaTileEntityBaseWithControl {
         textList.add(new TextComponentString( "实际 传输激光: " + Laser+" "+VN[GTUtility.getTierByVoltage(Laser)]));
         textList.add(new TextComponentString( "额定 传输激光: " + SetLaser+" "+VN[GTUtility.getTierByVoltage(SetLaser)]));
         textList.add(new TextComponentString( "最大 传输激光: " + MaxLaser+" "+VN[GTUtility.getTierByVoltage(MaxLaser)]));
+
         textList.add(new TextComponentString( "能量 缓存容量： " + energyContainer.getEnergyStored()));
         textList.add(new TextComponentString( "能量 容量上限: " + energyContainer.getEnergyCapacity()));
     }
@@ -142,17 +148,18 @@ public class MetaTileEntityLaserEmitter extends MetaTileEntityBaseWithControl {
     }
 
     private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.MULTI_CASING.getState(GTQTMultiblockCasing.CasingType.NITINOL_MACHINE_CASING);
+        return GTQTMetaBlocks.TURBINE_CASING.getState(NQ_TURBINE_CASING);
     }
 
+    @SideOnly(Side.CLIENT)
     @Override
-    public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
-        return GTQTTextures.NITINOL_CASING;
+    public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
+        return GTQTTextures.NQ_CASING;
     }
 
     @Override
     protected OrientedOverlayRenderer getFrontOverlay() {
-        return Textures.POWER_SUBSTATION_OVERLAY;
+        return Textures.FUSION_REACTOR_OVERLAY;
     }
 
     @Override

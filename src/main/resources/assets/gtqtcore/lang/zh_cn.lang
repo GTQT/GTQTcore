@@ -2258,6 +2258,7 @@ gtqtcore.machine.laser.output.max.name=高能无线激光源仓（§c§lMAX§r�
 gtqtcore.machine.laser_switch.name=高能激光分配单元
 gtqtcore.machine.laser_translation.name=高能激光接收仓
 gtqtcore.machine.laser_emitter.name=高能激光发射仓
+gtqtcore.machine.laser_blast_furnace.name=高能激光高炉
 
 metaitem.arrow_up_mki.name=思维抽象节点I
 metaitem.arrow_down_mki.name=思维具象节点I

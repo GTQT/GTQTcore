@@ -2252,6 +2252,7 @@ gtqtcore.machine.laser.output.max.name=High-Energy Wireless Laser Source Chamber
 gtqtcore.machine.laser_switch.name=High-Energy Laser Distribution Unit
 gtqtcore.machine.laser_translation.name=High-Energy Laser Reception Chamber
 gtqtcore.machine.laser_emitter.name=High-Energy Laser Emission Chamber
+gtqtcore.machine.laser_blast_furnace.name=High-Energy Laser EBF
 
 metaitem.arrow_up_mki.name=Abstract Thought Node I
 metaitem.arrow_down_mki.name=Concrete Thought Node I

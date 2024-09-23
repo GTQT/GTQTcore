@@ -1,6 +1,9 @@
 package keqing.gtqtcore.api.capability;
 
-public interface ILaser {
+import gregtech.api.capability.IEnergyContainer;
+import net.minecraft.util.math.BlockPos;
+
+public interface ILaser{
     long Laser();
     long SetLaser();
     long MaxLaser();
@@ -14,4 +17,6 @@ public interface ILaser {
 
     void addVoltage(int i);
     void addAmperage(int i);
+
+    void setMachinePos(BlockPos pos);
 }

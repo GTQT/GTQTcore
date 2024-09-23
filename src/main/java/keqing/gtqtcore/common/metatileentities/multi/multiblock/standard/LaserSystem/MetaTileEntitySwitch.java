@@ -26,7 +26,9 @@ import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTMultiblockCasing;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.MetaTileEntityBaseWithControl;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -34,6 +36,9 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 
@@ -45,6 +50,7 @@ import static gregtech.api.GTValues.VN;
 import static gregtech.api.metatileentity.multiblock.MultiblockAbility.OUTPUT_ENERGY;
 import static keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility.LASER_INPUT;
 import static keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility.LASER_OUTPUT;
+import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.NQ_TURBINE_CASING;
 
 public class MetaTileEntitySwitch extends MetaTileEntityBaseWithControl {
     long Laser;//当前的激光
@@ -62,9 +68,6 @@ public class MetaTileEntitySwitch extends MetaTileEntityBaseWithControl {
         super(metaTileEntityId);
     }
 
-    private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.MULTI_CASING.getState(GTQTMultiblockCasing.CasingType.NITINOL_MACHINE_CASING);
-    }
 
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("inputNum", inputNum);
@@ -111,16 +114,18 @@ public class MetaTileEntitySwitch extends MetaTileEntityBaseWithControl {
                 La[p] = this.getAbilities(LASER_INPUT).get(p).Laser();
                 Se[p] = this.getAbilities(LASER_INPUT).get(p).SetLaser();
                 Ma[p] = this.getAbilities(LASER_INPUT).get(p).MaxLaser();
+                this.getAbilities(LASER_INPUT).get(p).setMachinePos(this.getPos());
             } else if (p < inputNum + outputNum) {
                 c += this.getAbilities(LASER_OUTPUT).get(p - inputNum).Laser();
                 io[p][1] = this.getAbilities(LASER_OUTPUT).get(p - inputNum).tier();
                 La[p] = this.getAbilities(LASER_OUTPUT).get(p - inputNum).Laser();
                 Se[p] = this.getAbilities(LASER_OUTPUT).get(p - inputNum).SetLaser();
                 Ma[p] = this.getAbilities(LASER_OUTPUT).get(p - inputNum).MaxLaser();
-                if(Se[p]>La[p]&&Cost>0)
+                this.getAbilities(LASER_OUTPUT).get(p - inputNum).setMachinePos(this.getPos());
+                if(Se[p]>La[p])
                 {
-                    if(Cost>Se[p]-La[p]) this.getAbilities(LASER_OUTPUT).get(p - inputNum).setLaser(Se[p]);
-                    else this.getAbilities(LASER_OUTPUT).get(p - inputNum).setLaser(La[p]+Cost);
+                    if(More>Se[p]-La[p]) this.getAbilities(LASER_OUTPUT).get(p - inputNum).setLaser(Se[p]);
+                    else if(More>0)this.getAbilities(LASER_OUTPUT).get(p - inputNum).setLaser(La[p]+More);
                 }
             }
         }
@@ -339,11 +344,27 @@ public class MetaTileEntitySwitch extends MetaTileEntityBaseWithControl {
         textList.add(new TextComponentTranslation("阈值：%s %s", Se[circuit], VN[GTUtility.getTierByVoltage(Se[circuit])]));
         textList.add(new TextComponentTranslation("极值：%s %s", Ma[circuit], VN[GTUtility.getTierByVoltage(Ma[circuit])]));
     }
+    @Override
+    public void addInformation(ItemStack stack, World world, List<String> tooltip,
+                               boolean advanced) {
+        super.addInformation(stack, world, tooltip, advanced);
+        tooltip.add(I18n.format("高能激光分配单元"));
+        tooltip.add(I18n.format("最多支持总计6台高能激光源或靶仓的能量交换工作"));
+        tooltip.add(I18n.format("在UI或各仓内控制工作状态"));
+    }
 
     @Nonnull
     @Override
     protected BlockPattern createStructurePattern() {
-        return FactoryBlockPattern.start().aisle("MMM", "MOM", "MMM").aisle("MOM", "OMO", "MOM").aisle("MCM", "MOM", "MMM").where('C', selfPredicate()).where('M', states(getCasingState())).where('O', abilities(LASER_INPUT).or(abilities(LASER_OUTPUT))).build();
+        return FactoryBlockPattern.start()
+                .aisle("MMM", "MMM", "MMM")
+                .aisle("MMM", "MMM", "MMM")
+                .aisle("MMM", "MCM", "MMM")
+                .where('C', selfPredicate())
+                .where('M', states(getCasingState()).setMaxGlobalLimited(20)
+                        .or(abilities(LASER_INPUT).setMinGlobalLimited(1).setMaxGlobalLimited(5))
+                        .or(abilities(LASER_OUTPUT).setMinGlobalLimited(1).setMaxGlobalLimited(5)))
+                .build();
     }
 
     public boolean hasMaintenanceMechanics() {
@@ -354,14 +375,19 @@ public class MetaTileEntitySwitch extends MetaTileEntityBaseWithControl {
         return false;
     }
 
+    private static IBlockState getCasingState() {
+        return GTQTMetaBlocks.TURBINE_CASING.getState(NQ_TURBINE_CASING);
+    }
+
+    @SideOnly(Side.CLIENT)
     @Override
-    public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
-        return GTQTTextures.NITINOL_CASING;
+    public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
+        return GTQTTextures.NQ_CASING;
     }
 
     @Override
     protected OrientedOverlayRenderer getFrontOverlay() {
-        return Textures.POWER_SUBSTATION_OVERLAY;
+        return Textures.FUSION_REACTOR_OVERLAY;
     }
 
     @Override

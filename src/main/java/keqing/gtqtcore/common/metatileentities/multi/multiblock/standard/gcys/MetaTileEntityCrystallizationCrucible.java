@@ -141,7 +141,7 @@ public class MetaTileEntityCrystallizationCrucible extends RecipeMapMultiblockCo
 
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
-        return Textures.STABLE_TITANIUM_CASING;
+        return Textures.ROBUST_TUNGSTENSTEEL_CASING;
     }
 
     @Nonnull

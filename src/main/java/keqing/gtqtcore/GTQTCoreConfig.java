@@ -26,6 +26,11 @@ public class GTQTCoreConfig {
         @Config.Name("Huge Machine Switch")
         public boolean HugeSwitch = false;
 
+        @Config.Comment("多线程设备NBT存储，由于转存NBT存在问题，所以关闭")
+        @Config.RequiresMcRestart
+        @Config.Name("Core Machine NBT Store Switch")
+        public boolean CoreMachineNBTStoreSwitch = false;
+
         @Config.Comment("OBJ模型渲染开启")
         @Config.RequiresMcRestart
         @Config.Name("Enable obj Model")

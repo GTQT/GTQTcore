@@ -16,6 +16,7 @@ import gregtech.api.util.GTUtility;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
+import keqing.gtqtcore.api.utils.GTQTLog;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTMultiblockCasing;
@@ -26,6 +27,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import java.util.Collections;
@@ -37,6 +40,7 @@ import static gregtech.api.metatileentity.multiblock.MultiblockAbility.INPUT_ENE
 import static gregtech.api.metatileentity.multiblock.MultiblockAbility.OUTPUT_ENERGY;
 import static keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility.LASER_INPUT;
 import static keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility.LASER_OUTPUT;
+import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.NQ_TURBINE_CASING;
 
 public class MetaTileEntityLaserTranslation extends MetaTileEntityBaseWithControl {
 
@@ -57,7 +61,6 @@ public class MetaTileEntityLaserTranslation extends MetaTileEntityBaseWithContro
         MaxLaser=this.getAbilities(LASER_INPUT).get(0).MaxLaser();
         SetLaser=this.getAbilities(LASER_INPUT).get(0).SetLaser();
         tier=this.getAbilities(LASER_INPUT).get(0).tier();
-
         this.energyContainer.addEnergy(this.getAbilities(LASER_INPUT).get(0).Laser());
     }
     @Override
@@ -133,17 +136,18 @@ public class MetaTileEntityLaserTranslation extends MetaTileEntityBaseWithContro
     }
 
     private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.MULTI_CASING.getState(GTQTMultiblockCasing.CasingType.NITINOL_MACHINE_CASING);
+        return GTQTMetaBlocks.TURBINE_CASING.getState(NQ_TURBINE_CASING);
     }
 
+    @SideOnly(Side.CLIENT)
     @Override
-    public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
-        return GTQTTextures.NITINOL_CASING;
+    public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
+        return GTQTTextures.NQ_CASING;
     }
 
     @Override
     protected OrientedOverlayRenderer getFrontOverlay() {
-        return Textures.POWER_SUBSTATION_OVERLAY;
+        return Textures.FUSION_REACTOR_OVERLAY;
     }
 
     @Override

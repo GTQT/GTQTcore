@@ -54,6 +54,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static gregtech.api.GTValues.*;
+import static keqing.gtqtcore.GTQTCoreConfig.MachineSwitch;
 
 public abstract class GTQTMultiblockCore extends MultiMapMultiblockController implements IDataInfoProvider{
     protected IItemHandlerModifiable inputInventory;
@@ -108,55 +109,52 @@ public abstract class GTQTMultiblockCore extends MultiMapMultiblockController im
     boolean stop;
 
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
-        for(int i=0;i<getCoreNum();i++) data.setIntArray("timeHelper"+i,timeHelper[i]);
-        for (int i = 0; i <getCoreNum(); i++) {
-            data.setBoolean("ListWork"+i, ListWork[i]);
-        }
-        data.setInteger("circuit", circuit);
-        data.setBoolean("speed", speed);
-        data.setBoolean("stop", stop);
-        data.setInteger("target",target);
-        if(!importItemsList.isEmpty())
-        {
-            //总尺寸
-            data.setInteger("importItemsListSize",importItemsList.size());
-            for (int i=0;i<importItemsList.size();i++)
-            {
-               if(!importItemsList.get(i).isEmpty())
-               {
-                   var list = importItemsList.get(i);
-                   //单个列表尺寸
-                   data.setInteger("importItemsListContentSize"+i,list.size());
-                   NBTTagCompound tag = new NBTTagCompound();
-                   for (int j = 0; j < list.size(); j++) {
-                        NBTTagCompound ctag = new NBTTagCompound();
-                        list.get(j).writeToNBT(ctag);
-                        tag.setTag("ContentItem"+j,ctag);
-                   }
-                   //单个列表物品
-                   data.setTag("importItemsListContentItem"+i,tag);
-               }
+        if(MachineSwitch.CoreMachineNBTStoreSwitch) {
+            for (int i = 0; i < getCoreNum(); i++) data.setIntArray("timeHelper" + i, timeHelper[i]);
+            for (int i = 0; i < getCoreNum(); i++) {
+                data.setBoolean("ListWork" + i, ListWork[i]);
             }
-        }
-        if(!importFluidList.isEmpty())
-        {
-            //总尺寸
-            int TotalSize = importFluidList.size();
-            data.setInteger("importFluidListSize",TotalSize);
-            for (int i = 0; i < TotalSize; i++) {
-                //单列表
-                if(!importFluidList.get(i).isEmpty())
-                {
-                    var list = importFluidList.get(i);
-                    data.setInteger("importFluidListContentSize"+i,list.size());
-                    NBTTagCompound tag = new NBTTagCompound();
-                    for (int j = 0; j < list.size(); j++) {
-                        NBTTagCompound ctag = new NBTTagCompound();
-                        list.get(j).writeToNBT(ctag);
-                        tag.setTag("ContentFluid"+j,ctag);
+            data.setInteger("circuit", circuit);
+            data.setBoolean("speed", speed);
+            data.setBoolean("stop", stop);
+            data.setInteger("target", target);
+            if (!importItemsList.isEmpty()) {
+                //总尺寸
+                data.setInteger("importItemsListSize", importItemsList.size());
+                for (int i = 0; i < importItemsList.size(); i++) {
+                    if (!importItemsList.get(i).isEmpty()) {
+                        var list = importItemsList.get(i);
+                        //单个列表尺寸
+                        data.setInteger("importItemsListContentSize" + i, list.size());
+                        NBTTagCompound tag = new NBTTagCompound();
+                        for (int j = 0; j < list.size(); j++) {
+                            NBTTagCompound ctag = new NBTTagCompound();
+                            list.get(j).writeToNBT(ctag);
+                            tag.setTag("ContentItem" + j, ctag);
+                        }
+                        //单个列表物品
+                        data.setTag("importItemsListContentItem" + i, tag);
                     }
-                    //单个列表流体
-                    data.setTag("importItemsListContentFluid"+i,tag);
+                }
+            }
+            if (!importFluidList.isEmpty()) {
+                //总尺寸
+                int TotalSize = importFluidList.size();
+                data.setInteger("importFluidListSize", TotalSize);
+                for (int i = 0; i < TotalSize; i++) {
+                    //单列表
+                    if (!importFluidList.get(i).isEmpty()) {
+                        var list = importFluidList.get(i);
+                        data.setInteger("importFluidListContentSize" + i, list.size());
+                        NBTTagCompound tag = new NBTTagCompound();
+                        for (int j = 0; j < list.size(); j++) {
+                            NBTTagCompound ctag = new NBTTagCompound();
+                            list.get(j).writeToNBT(ctag);
+                            tag.setTag("ContentFluid" + j, ctag);
+                        }
+                        //单个列表流体
+                        data.setTag("importItemsListContentFluid" + i, tag);
+                    }
                 }
             }
         }
@@ -165,50 +163,48 @@ public abstract class GTQTMultiblockCore extends MultiMapMultiblockController im
 
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
-        for(int i=0;i<getCoreNum();i++) timeHelper[i]=data.getIntArray("timeHelper"+i);
-        for (int i = 0; i <getCoreNum(); i++) {
-            ListWork[i]= data.getBoolean("ListWork"+i);
-        }
-        circuit = data.getInteger("circuit");
-        speed = data.getBoolean("speed");
-        stop = data.getBoolean("stop");
-        target = data.getInteger("target");
-        //总尺寸>0
-        if(data.hasKey("importItemsListSize") && data.getInteger("importItemsListSize")>0)
-        {
-            int totalsize = data.getInteger("importItemsListSize");
-            importItemsList = new ArrayList<>();
-            for (int i = 0; i < totalsize; i++) {
-                //获取单列列表尺寸
-                List<ItemStack> ls=  new ArrayList<>();
-                if(data.hasKey("importItemsListContentSize"+i) && data.getInteger("importItemsListContentSize"+i)>0)
-                {
-                    int singlesize = data.getInteger("importItemsListContentSize"+i);
-                    NBTTagCompound tag = data.getCompoundTag("importItemsListContentItem"+i);
-                    for (int j = 0; j < singlesize; j++) {
-                        ls.add(new ItemStack(tag.getCompoundTag("ContentItem"+j)));
-                    }
-                }
-                importItemsList.add(ls);
+        if(MachineSwitch.CoreMachineNBTStoreSwitch) {
+            for (int i = 0; i < getCoreNum(); i++) timeHelper[i] = data.getIntArray("timeHelper" + i);
+            for (int i = 0; i < getCoreNum(); i++) {
+                ListWork[i] = data.getBoolean("ListWork" + i);
             }
-        }
-        //总尺寸>0
-        if(data.hasKey("importFluidListSize") && data.getInteger("importFluidListSize")>0)
-        {
-            int totalsize = data.getInteger("importFluidListSize");
-            importFluidList = new ArrayList<>();
-            for (int i = 0; i < totalsize; i++) {
-                //获取单列列表尺寸
-                List<FluidStack> ls=  new ArrayList<>();
-                if(data.hasKey("importFluidListContentSize"+i) && data.getInteger("importFluidListContentSize"+i)>0)
-                {
-                    int singlesize = data.getInteger("importFluidListContentSize"+i);
-                    NBTTagCompound tag = data.getCompoundTag("importItemsListContentFluid"+i);
-                    for (int j = 0; j < singlesize; j++) {
-                        ls.add(FluidStack.loadFluidStackFromNBT(tag.getCompoundTag("ContentFluid"+j)));
+            circuit = data.getInteger("circuit");
+            speed = data.getBoolean("speed");
+            stop = data.getBoolean("stop");
+            target = data.getInteger("target");
+            //总尺寸>0
+            if (data.hasKey("importItemsListSize") && data.getInteger("importItemsListSize") > 0) {
+                int totalsize = data.getInteger("importItemsListSize");
+                importItemsList = new ArrayList<>();
+                for (int i = 0; i < totalsize; i++) {
+                    //获取单列列表尺寸
+                    List<ItemStack> ls = new ArrayList<>();
+                    if (data.hasKey("importItemsListContentSize" + i) && data.getInteger("importItemsListContentSize" + i) > 0) {
+                        int singlesize = data.getInteger("importItemsListContentSize" + i);
+                        NBTTagCompound tag = data.getCompoundTag("importItemsListContentItem" + i);
+                        for (int j = 0; j < singlesize; j++) {
+                            ls.add(new ItemStack(tag.getCompoundTag("ContentItem" + j)));
+                        }
                     }
+                    importItemsList.add(ls);
                 }
-                importFluidList.add(ls);
+            }
+            //总尺寸>0
+            if (data.hasKey("importFluidListSize") && data.getInteger("importFluidListSize") > 0) {
+                int totalsize = data.getInteger("importFluidListSize");
+                importFluidList = new ArrayList<>();
+                for (int i = 0; i < totalsize; i++) {
+                    //获取单列列表尺寸
+                    List<FluidStack> ls = new ArrayList<>();
+                    if (data.hasKey("importFluidListContentSize" + i) && data.getInteger("importFluidListContentSize" + i) > 0) {
+                        int singlesize = data.getInteger("importFluidListContentSize" + i);
+                        NBTTagCompound tag = data.getCompoundTag("importItemsListContentFluid" + i);
+                        for (int j = 0; j < singlesize; j++) {
+                            ls.add(FluidStack.loadFluidStackFromNBT(tag.getCompoundTag("ContentFluid" + j)));
+                        }
+                    }
+                    importFluidList.add(ls);
+                }
             }
         }
     }
@@ -335,6 +331,8 @@ public abstract class GTQTMultiblockCore extends MultiMapMultiblockController im
         tooltip.add(I18n.format("gtqtcore.core.tooltip.3"));
         tooltip.add(I18n.format("gtqtcore.core.tooltip.4",getMinVa()));
         tooltip.add(I18n.format("gtqtcore.core.tooltip.5"));
+        if(MachineSwitch.CoreMachineNBTStoreSwitch)tooltip.add(I18n.format("config中已开启NBT转存，会导致你的控制器在存档重载后消失！"));
+        else tooltip.add(I18n.format("config中未开启NBT转存，会清空离线时的运行配方，存档重载后回归初始状态！"));
     }
 
     @Override
