@@ -2253,6 +2253,7 @@ gtqtcore.machine.laser_switch.name=High-Energy Laser Distribution Unit
 gtqtcore.machine.laser_translation.name=High-Energy Laser Reception Chamber
 gtqtcore.machine.laser_emitter.name=High-Energy Laser Emission Chamber
 gtqtcore.machine.laser_blast_furnace.name=High-Energy Laser EBF
+gtqtcore.machine.laser_alloy_furnace.name=High-Energy Laser EAF
 
 metaitem.arrow_up_mki.name=Abstract Thought Node I
 metaitem.arrow_down_mki.name=Concrete Thought Node I
@@ -3798,15 +3799,14 @@ gtqtcore.multiblock.kqn.nb17=Bioengineering I
 gtqtcore.multiblock.kqn.nx17=The discovery of microorganisms is undoubtedly a significant milestone in the history of bioengineering development. Through in-depth research on bacteria and DNA, we can cultivate targeted strains through hybrid breeding methods. These strains perform extremely actively under specific working conditions, greatly reducing the complexity of traditional chemical processes.
 metaitem.disk.17.name=Data Storage
 metaitem.disk.17.tooltip=§aBioengineering I
+
 gtqtcore.multiblock.kqn.nb18=Bioengineering II
 gtqtcore.multiblock.kqn.nx18=With the ever-advancing transmission electron microscopy and chemical technologies, we are now capable of directly manipulating the genes of various organisms through extremely complex yet intricate methods. This process saves us immense time in cultivating original strains, and the outstanding traits exhibited by the offspring are more stable!
-
 metaitem.disk.18.name=Data Storage Unit
 metaitem.disk.18.tooltip=§aBioengineering II
 
 gtqtcore.multiblock.kqn.nb19=Bioengineering III
 gtqtcore.multiblock.kqn.nx19=Nothing is more exciting than brain-computer interfaces, but if there is, it would be biological computers, the pinnacle of this field! Thanks to the wonders of nature, by cultivating synaptic nerve cells from the brain, we now possess biological circuits that rival the most advanced quantum computers!
-
 metaitem.disk.19.name=Data Storage Unit
 metaitem.disk.19.tooltip=§aBioengineering III
 
@@ -3815,7 +3815,6 @@ gtqtcore.multiblock.kqn.nx20=Based on meticulous process decomposition and rigor
 
 metaitem.disk.20.name=Data Storage Unit
 metaitem.disk.20.tooltip=§aStandardized Operations
-
 gtqtcore.multiblock.kqn.nb21=High-Precision Processing
 gtqtcore.multiblock.kqn.nx21=Focusing on micrometer and even nanometer-level processing precision, it demonstrates remarkable potential in modern manufacturing. Despite its significantly higher technical complexity than traditional processing methods and the stringent requirements for process control, the enhanced product performance and optimized resource utilization brought about by high-precision processing are unmatched by traditional methods.
 
@@ -3824,39 +3823,43 @@ metaitem.disk.21.tooltip=§aHigh-Precision Processing
 
 gtqtcore.multiblock.kqn.nb22=Automated Management
 gtqtcore.multiblock.kqn.nx22=By integrating information technology, artificial intelligence, and workflow optimization, intelligent monitoring and efficient scheduling of production and business activities are achieved. Although its initial implementation requires a deep transformation and adaptation of existing production systems, the resulting efficiency gains, faster decision-making, and optimized cost control undoubtedly provide significant competitive advantages to production.
-
 metaitem.disk.22.name=Data Storage Unit
 metaitem.disk.22.tooltip=§aAutomated Management
 
 gtqtcore.multiblock.kqn.nb23=IoT Integrated Control
 gtqtcore.multiblock.kqn.nx23=As another milestone in the field of information technology, the seamless connection of various smart devices, sensors, network infrastructure, and software systems has built a vast bridge between the physical and digital worlds. It enables real-time data exchange and sharing among devices, as well as analysis, decision-making, and collaborative control capabilities.
-
 metaitem.disk.23.name=Data Storage Unit
 metaitem.disk.23.tooltip=§aIoT Integrated Control
 
 gtqtcore.multiblock.kqn.nb24=Computational Science
 gtqtcore.multiblock.kqn.nx24=Atomic-level, the limit of traditional computing structures! We cannot make further breakthroughs in the underlying structure. We have created the most sophisticated traditional structural computer in the universe, with a performance eight times that of its predecessor. Utilizing it, we can significantly reduce the number of switches and computing servers.
-
 metaitem.disk.24.name=Data Storage Unit
 metaitem.disk.24.tooltip=§aComputational Science
 
 gtqtcore.multiblock.kqn.nb25=Cloud Data Storage
 gtqtcore.multiblock.kqn.nx25=Driven by the development of distributed processing, parallel processing, and grid computing, cloud computing technology enables network service providers to process tens of millions or even billions of pieces of information within seconds, achieving the same powerful network services as "supercomputers."
-
 metaitem.disk.25.name=Data Storage Unit
 metaitem.disk.25.tooltip=§aCloud Data Storage
 
 gtqtcore.multiblock.kqn.nb26=Silica Fuel Extraction
 gtqtcore.multiblock.kqn.nx26=By processing silica materials obtained from the asteroid belt, research has discovered that its refined product, super-energy silica, possesses immense energy potential. Controlling and utilizing this energy realizes the energy utilization of super-energy silica, and its products are non-polluting.
-
 metaitem.disk.26.name=Data Storage Unit
 metaitem.disk.26.tooltip=§aSilica Fuel Extraction
 
 gtqtcore.multiblock.kqn.nb27=Exotic Fuel Refining
 gtqtcore.multiblock.kqn.nx27=By processing Thallium (Ta) metal discovered in bedrock gas, research has found that mixing Ta-226 with super-energy silica fuel and adding additional radioactive elements can stimulate and release most of the energy from the silica and fission material.
-
 metaitem.disk.27.name=Data Storage Unit
 metaitem.disk.27.tooltip=§aExotic Fuel Refining
+
+gtqtcore.multiblock.kqn.nb28=Ultra-High Energy Laser
+gtqtcore.multiblock.kqn.nx28=With the construction and operation of large photolithography plants, our research into high-energy lasers has become increasingly advanced. Although we were able to create simple lasers as early as the IV stage, we still need more energy to practically apply them in production processes.
+metaitem.disk.28.name=Data Storage Device
+metaitem.disk.28.tooltip=§aUltra-High Energy Laser
+
+gtqtcore.multiblock.kqn.nb29=Sky-Based Refractive Prism
+gtqtcore.multiblock.kqn.nx29=We have become proficient at using ultra-high energy lasers in production and have replaced a significant portion of the original power grid structure. However, there are still major issues with long-distance power transmission and ultra-high energy beam emission. It would be great if we could directly use the sky for laser reflection and transmission...
+metaitem.disk.29.name=Data Storage Device
+metaitem.disk.29.tooltip=§aSky-Based Refractive Prism
 
 gtqtcore.multiblock.kqn.bio0=Welcome to the KQCC Scientific Research Computer Integration System!
 metaitem.bio.0.name=Genetic Storage Unit

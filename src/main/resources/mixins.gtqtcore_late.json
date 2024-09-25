@@ -10,6 +10,7 @@
     "architecturecraft.MixinBlockShape",
     "architecturecraft.MixinEnumShape",
     "architecturecraft.MixinTileSawbench",
+    "gregtech.MixinAssemblyLineManager",
     "gregtech.MixinEllipsoidGenerator",
     "gregtech.MixinMetaItem",
     "gregtech.MixinMetaPrefixItem",

@@ -29,9 +29,9 @@ public class ChipHelper {
     }
 
     private static void wafer() {
-        cutter(EUROPIUM_BOULE,EUROPIUM_WAFER,5,CleanroomType.CLEANROOM);
-        cutter(AMERICIUM_BOULE,AMERICIUM_WAFER,6,CleanroomType.CLEANROOM);
-        cutter(DUBNIUM_BOULE,DUBNIUM_WAFER,7,CleanroomType.CLEANROOM);
+        cutter(96,EUROPIUM_BOULE,EUROPIUM_WAFER,5,CleanroomType.CLEANROOM);
+        cutter(128,AMERICIUM_BOULE,AMERICIUM_WAFER,6,CleanroomType.CLEANROOM);
+        cutter(160,DUBNIUM_BOULE,DUBNIUM_WAFER,7,CleanroomType.CLEANROOM);
         //接中子素
         //  Delete Neutronium Boule -> Wafer recipes
         GTRecipeHandler.removeRecipesByInputs(CUTTER_RECIPES,
@@ -45,7 +45,7 @@ public class ChipHelper {
         GTRecipeHandler.removeRecipesByInputs(CUTTER_RECIPES,
                 new ItemStack[]{NEUTRONIUM_BOULE.getStackForm()},
                 new FluidStack[]{Lubricant.getFluid(250)});
-        cutter(NEUTRONIUM_BOULE,NEUTRONIUM_WAFER,8,CleanroomType.STERILE_CLEANROOM);
+        cutter(192,NEUTRONIUM_BOULE,NEUTRONIUM_WAFER,8,CleanroomType.STERILE_CLEANROOM);
     }
 
     private static void pic() {
@@ -209,6 +209,82 @@ public class ChipHelper {
                 .duration(10 * SECOND)
                 .buildAndRegister();
     }
+    public static void cutter(int amount,MetaItem<?>.MetaValueItem wafer, MetaItem<?>.MetaValueItem chip, int tier,CleanroomType a)
+    {
+        if(amount==96) {
+            CUTTER_RECIPES.recipeBuilder()
+                    .input(wafer)
+                    .output(chip, 64)
+                    .output(chip, 32)
+                    .EUt(VA[tier])
+                    .duration(90 * 20)
+                    .cleanroom(a)
+                    .buildAndRegister();
+        }
+        else if(amount==128)
+        {
+            CUTTER_RECIPES.recipeBuilder()
+                    .input(wafer)
+                    .output(chip, 64)
+                    .output(chip, 64)
+                    .EUt(VA[tier])
+                    .duration(90 * 20)
+                    .cleanroom(a)
+                    .buildAndRegister();
+        }
+        else if(amount==160)
+        {
+            CUTTER_RECIPES.recipeBuilder()
+                    .input(wafer)
+                    .output(chip, 64)
+                    .output(chip, 64)
+                    .output(chip, 32)
+                    .EUt(VA[tier])
+                    .duration(90 * 20)
+                    .cleanroom(a)
+                    .buildAndRegister();
+        }
+        else if(amount==192)
+        {
+            CUTTER_RECIPES.recipeBuilder()
+                    .input(wafer)
+                    .output(chip, 64)
+                    .output(chip, 64)
+                    .output(chip, 64)
+                    .EUt(VA[tier])
+                    .duration(90 * 20)
+                    .cleanroom(a)
+                    .buildAndRegister();
+        }
+        else if(amount==224)
+        {
+            CUTTER_RECIPES.recipeBuilder()
+                    .input(wafer)
+                    .output(chip, 64)
+                    .output(chip, 64)
+                    .output(chip, 64)
+                    .output(chip, 32)
+                    .EUt(VA[tier])
+                    .duration(90 * 20)
+                    .cleanroom(a)
+                    .buildAndRegister();
+        }
+        else if(amount==256)
+        {
+            CUTTER_RECIPES.recipeBuilder()
+                    .input(wafer)
+                    .output(chip, 64)
+                    .output(chip, 64)
+                    .output(chip, 64)
+                    .output(chip, 64)
+                    .EUt(VA[tier])
+                    .duration(90 * 20)
+                    .cleanroom(a)
+                    .buildAndRegister();
+        }
+
+    }
+
     public static void cutter(MetaItem<?>.MetaValueItem wafer, MetaItem<?>.MetaValueItem chip, int tier,CleanroomType a)
     {
         CUTTER_RECIPES.recipeBuilder()

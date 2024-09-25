@@ -307,8 +307,8 @@ public class MetaTileEntityADVKQCC extends MultiblockWithDisplayBase implements 
 
     int CWTT()
     {
-        if((RAM)>=(GPU)&&(RAM)>=(CPU)) return ((GPU)+(CPU))*8;
-        else return (RAM)*8;
+        if((RAM)>=(GPU)&&(RAM)>=(CPU)) return ((GPU)+(CPU))*4;
+        else return (RAM)*4;
     }
     int HEAT()
     {

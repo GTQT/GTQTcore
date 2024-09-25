@@ -6,6 +6,7 @@ import gregtech.api.unification.material.MarkerMaterials;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.stack.UnificationEntry;
 import gregtech.common.ConfigHolder;
+import gregtech.common.metatileentities.MetaTileEntities;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.BlockGCYSMultiblockCasing;
 import keqing.gtqtcore.common.block.blocks.BlockPCBFactoryCasing;
@@ -21,8 +22,7 @@ import static gregtech.api.recipes.RecipeMaps.ASSEMBLY_LINE_RECIPES;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.common.items.MetaItems.*;
-import static gregtech.common.metatileentities.MetaTileEntities.CIRCUIT_ASSEMBLER;
-import static gregtech.common.metatileentities.MetaTileEntities.HULL;
+import static gregtech.common.metatileentities.MetaTileEntities.*;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.PCB_FACTORY_RECIPES;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
@@ -202,7 +202,10 @@ public class PCBline {
         //  PCB Factory
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(frameGt, RhodiumPlatedPalladium, 64)
-                .input(CIRCUIT_ASSEMBLER[6], 16)
+                .input(CIRCUIT_ASSEMBLER[6], 32)
+                .input(ASSEMBLER[6], 32)
+                .input(FLUID_SOLIDIFIER[6], 32)
+                .input(MetaTileEntities.LARGE_CHEMICAL_REACTOR, 32)
                 .input(CIRCUIT_GOOD_II, 16)
                 .input(circuit, MarkerMaterials.Tier.ZPM, 8)
                 .input(circuit, MarkerMaterials.Tier.LuV, 16)
@@ -214,8 +217,6 @@ public class PCBline {
                 .input(gear, NaquadahAlloy, 16)
                 .input(cableGtSingle, NiobiumTitanium, 64)
                 .input(cableGtSingle, NiobiumTitanium, 64)
-                .input(wireGtSingle, LuVSuperconductor, 64)
-                .input(wireGtSingle, LuVSuperconductor, 64)
                 .fluidInputs(UltraGlue.getFluid(L * 40))
                 .fluidInputs(Polybenzimidazole.getFluid(L * 40))
                 .fluidInputs(PCBCoolant.getFluid(4000))

@@ -10,6 +10,7 @@ import gregtech.common.blocks.BlockComputerCasing;
 import gregtech.common.blocks.BlockFusionCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.items.MetaItems;
+import gregtech.common.metatileentities.MetaTileEntities;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -23,6 +24,8 @@ import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.common.blocks.MetaBlocks.OPTICAL_PIPES;
 import static gregtech.common.items.MetaItems.*;
 import static gregtech.common.items.MetaItems.NEUTRONIUM_WAFER;
+import static gregtech.common.metatileentities.MetaTileEntities.POWER_TRANSFORMER;
+
 public class removeRecipes {
     public static void init() {
         GTRecipeHandler.removeRecipesByInputs(CHEMICAL_RECIPES, Ethylene.getFluid(1000), Chlorine.getFluid(2000));
@@ -151,6 +154,9 @@ public class removeRecipes {
             for(MarkerMaterial color:VALUES)
         GTRecipeHandler.removeRecipesByInputs(LASER_ENGRAVER_RECIPES, item.getStackForm(),OreDictUnifier.get(craftingLens, color,1));
 
+
+        // 有源变压器 * 1
+        GTRecipeHandler.removeRecipesByInputs(ASSEMBLER_RECIPES, new ItemStack[]{POWER_TRANSFORMER[6].getStackForm(),OreDictUnifier.get(circuit,LuV,2),OreDictUnifier.get(wireGtSingle,IndiumTinBariumTitaniumCuprate,8),ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT.getStackForm(2)},new FluidStack[]{PCBCoolant.getFluid(1000)});
 
 
     }

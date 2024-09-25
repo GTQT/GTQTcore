@@ -24,6 +24,7 @@ import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.items.MetaItems;
 import gregtech.common.metatileentities.MetaTileEntities;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
+import keqing.gtqtcore.api.utils.GTQTKQnetHelper;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTPowerSupply;
 import keqing.gtqtcore.common.items.GTQTMetaItems;
@@ -57,6 +58,7 @@ import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.GENE_MUTAGENESIS;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
+import static keqing.gtqtcore.api.unification.MaterialHelper.Superconductor;
 import static keqing.gtqtcore.api.unification.TJMaterials.Polyetheretherketone;
 import static keqing.gtqtcore.api.utils.GTQTUtil.CWT;
 import static keqing.gtqtcore.common.block.GTQTMetaBlocks.POWER;
@@ -85,7 +87,7 @@ public class KeQingNET {
         Pre();
         I_VV();
         VVI_VVVV();
-        // #GTQTKQnetHelper
+        //#GTQTKQnetHelper
 
         //辅助计算项目 科研计算机等级 序号
         //1 涡轮效率升级I 大型涡轮
@@ -151,11 +153,152 @@ public class KeQingNET {
         KQ_NET(3, 4, 26, DISK_26, screw, Naquadria);
         //27 奇异燃料
         KQ_NET(3, 4, 27, DISK_27, LARGE_NAQUADAH_REACTOR.getStackForm());
-
+        //28 超高能激光器
+        KQ_NET(4, 5,28, DISK_28, POWER_SUBSTATION.getStackForm());
+        //29 天基折射棱镜
+        KQ_NET(4, 5, 29, DISK_29, LASER_SWITCH.getStackForm());
     }
 
 
     private static void VVI_VVVV() {
+        //28 激光发射
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(frameGt, NaquadahAlloy,16)
+                .input(LASER_OUTPUT_HATCH_1024[LuV],16)
+                .input(EMITTER_LuV, 64)
+                .input(FIELD_GENERATOR_LuV, 64)
+                .input(plate, Duranium, 32)
+                .input(circuit, MarkerMaterials.Tier.UV, 16)
+                .input(circuit, MarkerMaterials.Tier.ZPM, 32)
+                .input(circuit, MarkerMaterials.Tier.LuV, 64)
+                .input(HIGH_POWER_INTEGRATED_CIRCUIT, 64)
+                .input(HIGH_POWER_INTEGRATED_CIRCUIT, 64)
+                .input(wireGtSingle, Superconductor[LuV], 64)
+                .input(wireGtSingle, Superconductor[LuV], 64)
+                .fluidInputs(KaptonK.getFluid(L * 32))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 16))
+                .fluidInputs(Polyetheretherketone.getFluid(L * 16))
+                .fluidInputs(NaquadahAlloy.getFluid(L * 4))
+                .stationResearch(b -> b
+                        .researchStack(DISK_28.getStackForm())
+                        .CWUt(CWT[LuV])
+                        .EUt(VA[LuV]))
+                .output(LASER_EMITTER)
+                .EUt(VA[LuV])
+                .duration(1000)
+                .buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(frameGt, NaquadahAlloy,16)
+                .input(LASER_INPUT_HATCH_1024[LuV],16)
+                .input(SENSOR_LuV, 64)
+                .input(FIELD_GENERATOR_LuV, 64)
+                .input(plate, Duranium, 32)
+                .input(circuit, MarkerMaterials.Tier.UV, 16)
+                .input(circuit, MarkerMaterials.Tier.ZPM, 32)
+                .input(circuit, MarkerMaterials.Tier.LuV, 64)
+                .input(HIGH_POWER_INTEGRATED_CIRCUIT, 64)
+                .input(HIGH_POWER_INTEGRATED_CIRCUIT, 64)
+                .input(wireGtSingle, Superconductor[LuV], 64)
+                .input(wireGtSingle, Superconductor[LuV], 64)
+                .fluidInputs(KaptonK.getFluid(L * 32))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 16))
+                .fluidInputs(Polyetheretherketone.getFluid(L * 16))
+                .fluidInputs(NaquadahAlloy.getFluid(L * 4))
+                .stationResearch(b -> b
+                        .researchStack(DISK_28.getStackForm())
+                        .CWUt(CWT[LuV])
+                        .EUt(VA[LuV]))
+                .output(LASER_TRANSLATION)
+                .EUt(VA[LuV])
+                .duration(1000)
+                .buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(frameGt, NaquadahAlloy,16)
+                .input(CIRCUIT_GOOD_III, 64)
+                .input(FIELD_GENERATOR_LuV, 64)
+                .input(FIELD_GENERATOR_LuV, 64)
+                .input(plate, Duranium, 32)
+                .input(circuit, MarkerMaterials.Tier.UV, 16)
+                .input(circuit, MarkerMaterials.Tier.ZPM, 32)
+                .input(circuit, MarkerMaterials.Tier.LuV, 64)
+                .input(HIGH_POWER_INTEGRATED_CIRCUIT, 64)
+                .input(HIGH_POWER_INTEGRATED_CIRCUIT, 64)
+                .input(wireGtSingle, Superconductor[LuV], 64)
+                .input(wireGtSingle, Superconductor[LuV], 64)
+                .fluidInputs(KaptonK.getFluid(L * 32))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 16))
+                .fluidInputs(Polyetheretherketone.getFluid(L * 16))
+                .fluidInputs(NaquadahAlloy.getFluid(L * 4))
+                .stationResearch(b -> b
+                        .researchStack(DISK_28.getStackForm())
+                        .CWUt(CWT[LuV])
+                        .EUt(VA[LuV]))
+                .output(LASER_SWITCH)
+                .EUt(VA[LuV])
+                .duration(1000)
+                .buildAndRegister();
+        //设备
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(BLAZING_BLAST_FURNACE, 64)
+                .input(BLAZING_BLAST_FURNACE, 64)
+                .input(frameGt, NaquadahAlloy,16)
+                .input(LASER_OUTPUT_HATCH_1024[2],8)
+                .input(VOLTAGE_COIL_LuV, 64)
+                .input(plate, Duranium, 32)
+                .input(screw, PPB, 64)
+                .input(gear, HG1223, 6)
+                .input(stick, Staballoy, 32)
+                .input(circuit, MarkerMaterials.Tier.UV, 16)
+                .input(circuit, MarkerMaterials.Tier.ZPM, 32)
+                .input(circuit, MarkerMaterials.Tier.LuV, 64)
+                .input(HIGH_POWER_INTEGRATED_CIRCUIT, 64)
+                .input(HIGH_POWER_INTEGRATED_CIRCUIT, 64)
+                .input(wireGtSingle, Superconductor[LuV], 64)
+                .input(wireGtSingle, Superconductor[LuV], 64)
+                .fluidInputs(KaptonK.getFluid(L * 32))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 16))
+                .fluidInputs(Polyetheretherketone.getFluid(L * 16))
+                .fluidInputs(NaquadahAlloy.getFluid(L * 4))
+                .stationResearch(b -> b
+                        .researchStack(DISK_28.getStackForm())
+                        .CWUt(CWT[LuV])
+                        .EUt(VA[LuV]))
+                .output(LASER_BLAST_FURNACE)
+                .EUt(VA[LuV])
+                .duration(1000)
+                .buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(ALLOY_BLAST_SMELTER, 64)
+                .input(ALLOY_BLAST_SMELTER, 64)
+                .input(frameGt, NaquadahAlloy,16)
+                .input(LASER_OUTPUT_HATCH_1024[2],8)
+                .input(VOLTAGE_COIL_LuV, 64)
+                .input(plate, Duranium, 32)
+                .input(screw, PPB, 64)
+                .input(gear, HG1223, 6)
+                .input(stick, Staballoy, 32)
+                .input(circuit, MarkerMaterials.Tier.UV, 16)
+                .input(circuit, MarkerMaterials.Tier.ZPM, 32)
+                .input(circuit, MarkerMaterials.Tier.LuV, 64)
+                .input(HIGH_POWER_INTEGRATED_CIRCUIT, 64)
+                .input(HIGH_POWER_INTEGRATED_CIRCUIT, 64)
+                .input(wireGtSingle, Superconductor[LuV], 64)
+                .input(wireGtSingle, Superconductor[LuV], 64)
+                .fluidInputs(KaptonK.getFluid(L * 32))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 16))
+                .fluidInputs(Polyetheretherketone.getFluid(L * 16))
+                .fluidInputs(NaquadahAlloy.getFluid(L * 4))
+                .stationResearch(b -> b
+                        .researchStack(DISK_28.getStackForm())
+                        .CWUt(CWT[LuV])
+                        .EUt(VA[LuV]))
+                .output(LASER_ALLOY_FURNACE)
+                .EUt(VA[LuV])
+                .duration(1000)
+                .buildAndRegister();
         //26
         //  Large Naquadah Reactor
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
@@ -179,7 +322,6 @@ public class KeQingNET {
                         .researchStack(DISK_26.getStackForm())
                         .CWUt(CWT[UHV])
                         .EUt(VA[UV]))
-                .EUt(VA[UV])
                 .output(LARGE_NAQUADAH_REACTOR)
                 .EUt(VA[UHV])
                 .duration(600)
@@ -989,8 +1131,11 @@ public class KeQingNET {
 
         //大型光刻厂
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .inputs(GCYMMetaTileEntities.LARGE_ENGRAVER.getStackForm(64))
+                .inputs(GCYMMetaTileEntities.LARGE_ENGRAVER.getStackForm(64))
+                .inputs(GCYMMetaTileEntities.LARGE_ENGRAVER.getStackForm(64))
+                .inputs(GCYMMetaTileEntities.LARGE_ENGRAVER.getStackForm(64))
                 .input(CIRCUIT_GOOD_IV, 8)
-                .inputs(GCYMMetaTileEntities.LARGE_ENGRAVER.getStackForm(16))
                 .input(circuit, MarkerMaterials.Tier.UHV, 4)
                 .input(circuit, MarkerMaterials.Tier.UV, 16)
                 .input(circuit, MarkerMaterials.Tier.ZPM, 32)
@@ -1017,9 +1162,12 @@ public class KeQingNET {
                 .buildAndRegister();
         //  Mega Oil Cracking Unit
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .inputs(CRACKER.getStackForm(64))
+                .inputs(CRACKER.getStackForm(64))
+                .inputs(CRACKER.getStackForm(64))
+                .inputs(CRACKER.getStackForm(64))
                 .input(CIRCUIT_GOOD_IV, 8)
                 .input(frameGt, HMS1J22Alloy, 16)
-                .inputs(CRACKER.getStackForm(16))
                 .input(circuit, MarkerMaterials.Tier.UHV, 4)
                 .input(circuit, MarkerMaterials.Tier.UV, 16)
                 .input(circuit, MarkerMaterials.Tier.ZPM, 32)
@@ -1027,7 +1175,8 @@ public class KeQingNET {
                 .input(plateDouble, Staballoy, 4)
                 .input(gear, MaragingSteel250, 4)
                 .input(gearSmall, Stellite, 16)
-                .input(cableGtQuadruple, VanadiumGallium, 16)
+                .input(cableGtQuadruple, VanadiumGallium, 64)
+                .input(cableGtQuadruple, VanadiumGallium, 64)
                 .fluidInputs(KaptonK.getFluid(L * 32))
                 .fluidInputs(Polybenzimidazole.getFluid(L * 16))
                 .fluidInputs(Polyetheretherketone.getFluid(L * 16))
@@ -1044,9 +1193,13 @@ public class KeQingNET {
 
         //  Mega Chemical Reactor
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .inputs(LARGE_CHEMICAL_REACTOR.getStackForm(64))
+                .inputs(LARGE_CHEMICAL_REACTOR.getStackForm(64))
+                .inputs(LARGE_CHEMICAL_REACTOR.getStackForm(64))
+                .inputs(LARGE_CHEMICAL_REACTOR.getStackForm(64))
                 .input(CIRCUIT_GOOD_IV, 8)
+                .input(ELECTRIC_PUMP_UV, 32)
                 .input(frameGt, MARM200Steel, 16)
-                .inputs(LARGE_CHEMICAL_REACTOR.getStackForm(16))
                 .input(circuit, MarkerMaterials.Tier.UHV, 4)
                 .input(circuit, MarkerMaterials.Tier.UV, 16)
                 .input(circuit, MarkerMaterials.Tier.ZPM, 32)
@@ -1054,7 +1207,8 @@ public class KeQingNET {
                 .input(plateDouble, IncoloyDS, 4)
                 .input(gear, Inconel625, 4)
                 .input(gearSmall, Tantalloy61, 16)
-                .input(cableGtQuadruple, VanadiumGallium, 16)
+                .input(cableGtQuadruple, VanadiumGallium, 64)
+                .input(cableGtQuadruple, VanadiumGallium, 64)
                 .fluidInputs(KaptonK.getFluid(L * 32))
                 .fluidInputs(Polybenzimidazole.getFluid(L * 16))
                 .fluidInputs(Polyetheretherketone.getFluid(L * 16))
@@ -1071,9 +1225,12 @@ public class KeQingNET {
 
         //  Mega Alloy Blast Smelter
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .inputs(ALLOY_BLAST_SMELTER.getStackForm(64))
+                .inputs(ALLOY_BLAST_SMELTER.getStackForm(64))
+                .inputs(ALLOY_BLAST_SMELTER.getStackForm(64))
+                .inputs(ALLOY_BLAST_SMELTER.getStackForm(64))
                 .input(CIRCUIT_GOOD_IV, 8)
                 .input(frameGt, AusteniticStainlessSteel904L, 16)
-                .inputs(ALLOY_BLAST_SMELTER.getStackForm(16))
                 .input(circuit, MarkerMaterials.Tier.UHV, 4)
                 .input(circuit, MarkerMaterials.Tier.UV, 16)
                 .input(circuit, MarkerMaterials.Tier.ZPM, 32)
@@ -1081,7 +1238,8 @@ public class KeQingNET {
                 .input(plateDouble, HastelloyC59, 4)
                 .input(gear, HY1301, 4)
                 .input(gearSmall, TanmolyiumBetaC, 16)
-                .input(wireGtQuadruple, NiobiumTitanium, 16)
+                .input(cableGtQuadruple, VanadiumGallium, 64)
+                .input(cableGtQuadruple, VanadiumGallium, 64)
                 .fluidInputs(KaptonK.getFluid(L * 32))
                 .fluidInputs(Polybenzimidazole.getFluid(L * 16))
                 .fluidInputs(Polyetheretherketone.getFluid(L * 16))
@@ -1098,8 +1256,11 @@ public class KeQingNET {
 
         //  Mega Alloy Blast Smelter
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .inputs(BLAZING_BLAST_FURNACE.getStackForm(64))
+                .inputs(BLAZING_BLAST_FURNACE.getStackForm(64))
+                .inputs(BLAZING_BLAST_FURNACE.getStackForm(64))
+                .inputs(BLAZING_BLAST_FURNACE.getStackForm(64))
                 .input(frameGt, AusteniticStainlessSteel904L, 16)
-                .inputs(BLAZING_BLAST_FURNACE.getStackForm(16))
                 .input(circuit, MarkerMaterials.Tier.UHV, 4)
                 .input(circuit, MarkerMaterials.Tier.UV, 16)
                 .input(circuit, MarkerMaterials.Tier.ZPM, 32)
@@ -1108,7 +1269,8 @@ public class KeQingNET {
                 .input(plateDouble, HastelloyC59, 4)
                 .input(gear, HY1301, 4)
                 .input(gearSmall, TanmolyiumBetaC, 16)
-                .input(wireGtQuadruple, NiobiumTitanium, 16)
+                .input(cableGtQuadruple, VanadiumGallium, 64)
+                .input(cableGtQuadruple, VanadiumGallium, 64)
                 .fluidInputs(KaptonK.getFluid(L * 32))
                 .fluidInputs(Polybenzimidazole.getFluid(L * 16))
                 .fluidInputs(Polyetheretherketone.getFluid(L * 16))
@@ -1302,6 +1464,23 @@ public class KeQingNET {
                         .EUt(VA[LuV])
                         .CWUt(CWT[LuV]))
                 .buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(CIRCUIT_GOOD_II, 8)
+                .input(POWER_TRANSFORMER[LuV],4)
+                .input(circuit, Tier.LuV, 16)
+                .input(wireGtSingle, IndiumTinBariumTitaniumCuprate, 32)
+                .input(ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT, 8)
+                .fluidInputs(PCBCoolant.getFluid(1000))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 8))
+                .fluidInputs(Zylon.getFluid(L * 16))
+                .fluidInputs(TitaniumTungstenCarbide.getFluid(L * 16))
+                .stationResearch(b -> b
+                        .researchStack(DISK_22.getStackForm())
+                        .EUt(VA[LuV])
+                        .CWUt(CWT[LuV]))
+                .output(ACTIVE_TRANSFORMER)
+                .duration(600).EUt(VA[LuV]).buildAndRegister();
 
         //  Large Circuit Assembly Line
         ASSEMBLY_LINE_RECIPES.recipeBuilder()

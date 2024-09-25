@@ -71,6 +71,15 @@ public class BiochemChains {
                 .output(dust,SodiumBicarbonate,1)
                 .buildAndRegister();
 
+        //原始混凝土
+        PR_MIX.recipeBuilder()
+                .input(dust, Calcite,2)
+                .input(dust, Clay)
+                .input(dust, Stone, 1)
+                .fluidInputs(Water.getFluid(1000))
+                .fluidOutputs(Concrete.getFluid(1000))
+                .duration(400).buildAndRegister();
+
         PR_MIX.recipeBuilder()
                 .duration(4000)
                 .input(dust,Salt,40)

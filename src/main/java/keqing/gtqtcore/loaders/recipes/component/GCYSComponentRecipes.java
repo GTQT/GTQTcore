@@ -13,6 +13,7 @@ import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.common.items.MetaItems.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.TJMaterials.*;
+import static keqing.gtqtcore.api.utils.GTQTUtil.CWT;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.GOOWARE_ASSEMBLY;
 
 public class GCYSComponentRecipes {
@@ -44,7 +45,7 @@ public class GCYSComponentRecipes {
                 .output(ELECTRIC_MOTOR_UHV)
                 .stationResearch(b -> b
                         .researchStack(ELECTRIC_MOTOR_UV.getStackForm())
-                        .CWUt(64)
+                        .CWUt(CWT[UV])
                         .EUt(VA[UV]))
                 .duration(600).EUt(400000).buildAndRegister();
 
@@ -66,7 +67,7 @@ public class GCYSComponentRecipes {
                 .EUt(2000000)
                 .stationResearch(b -> b
                         .researchStack(ELECTRIC_MOTOR_UHV.getStackForm())
-                        .CWUt(128)
+                        .CWUt(CWT[UHV])
                         .EUt(VA[UHV]))
                 .buildAndRegister();
     }
@@ -86,7 +87,7 @@ public class GCYSComponentRecipes {
                 .output(CONVEYOR_MODULE_UHV)
                 .stationResearch(b -> b
                         .researchStack(CONVEYOR_MODULE_UV.getStackForm())
-                        .CWUt(64)
+                        .CWUt(CWT[UV])
                         .EUt(VA[UV]))
                 .duration(600).EUt(400000).buildAndRegister();
 
@@ -107,7 +108,7 @@ public class GCYSComponentRecipes {
                 .EUt(2000000)
                 .stationResearch(b -> b
                         .researchStack(CONVEYOR_MODULE_UHV.getStackForm())
-                        .CWUt(128)
+                        .CWUt(CWT[UHV])
                         .EUt(VA[UHV]))
                 .buildAndRegister();
     }
@@ -128,7 +129,7 @@ public class GCYSComponentRecipes {
                 .output(ELECTRIC_PISTON_UHV)
                 .stationResearch(b -> b
                         .researchStack(ELECTRIC_PISTON_UV.getStackForm())
-                        .CWUt(64)
+                        .CWUt(CWT[UV])
                         .EUt(VA[UV]))
                 .duration(600).EUt(400000).buildAndRegister();
 
@@ -151,7 +152,7 @@ public class GCYSComponentRecipes {
                 .EUt(2000000)
                 .stationResearch(b -> b
                         .researchStack(ELECTRIC_PISTON_UHV.getStackForm())
-                        .CWUt(128)
+                        .CWUt(CWT[UHV])
                         .EUt(VA[UHV]))
                 .buildAndRegister();
     }
@@ -173,7 +174,7 @@ public class GCYSComponentRecipes {
                 .output(ROBOT_ARM_UHV)
                 .stationResearch(b -> b
                         .researchStack(ROBOT_ARM_UV.getStackForm())
-                        .CWUt(64)
+                        .CWUt(CWT[UV])
                         .EUt(VA[UV]))
                 .duration(600).EUt(400000).buildAndRegister();
 
@@ -197,7 +198,7 @@ public class GCYSComponentRecipes {
                 .EUt(2000000)
                 .stationResearch(b -> b
                         .researchStack(ROBOT_ARM_UHV.getStackForm())
-                        .CWUt(128)
+                        .CWUt(CWT[UHV])
                         .EUt(VA[UHV]))
                 .buildAndRegister();
     }
@@ -217,7 +218,7 @@ public class GCYSComponentRecipes {
                 .output(ELECTRIC_PUMP_UHV)
                 .stationResearch(b -> b
                         .researchStack(ELECTRIC_PUMP_UV.getStackForm())
-                        .CWUt(64)
+                        .CWUt(CWT[UV])
                         .EUt(VA[UV]))
                 .duration(600).EUt(400000).buildAndRegister();
 
@@ -239,7 +240,7 @@ public class GCYSComponentRecipes {
                 .EUt(2000000)
                 .stationResearch(b -> b
                         .researchStack(ELECTRIC_PUMP_UHV.getStackForm())
-                        .CWUt(128)
+                        .CWUt(CWT[UHV])
                         .EUt(VA[UHV]))
                 .buildAndRegister();
     }
@@ -259,7 +260,7 @@ public class GCYSComponentRecipes {
                 .output(EMITTER_UHV)
                 .stationResearch(b -> b
                         .researchStack(EMITTER_UV.getStackForm())
-                        .CWUt(64)
+                        .CWUt(CWT[UV])
                         .EUt(VA[UV]))
                 .duration(600).EUt(400000).buildAndRegister();
 
@@ -281,7 +282,7 @@ public class GCYSComponentRecipes {
                 .EUt(2000000)
                 .stationResearch(b -> b
                         .researchStack(EMITTER_UHV.getStackForm())
-                        .CWUt(128)
+                        .CWUt(CWT[UHV])
                         .EUt(VA[UHV]))
                 .buildAndRegister();
     }
@@ -301,7 +302,7 @@ public class GCYSComponentRecipes {
                 .output(SENSOR_UHV)
                 .stationResearch(b -> b
                         .researchStack(SENSOR_UV.getStackForm())
-                        .CWUt(64)
+                        .CWUt(CWT[UV])
                         .EUt(VA[UV]))
                 .duration(600).EUt(400000).buildAndRegister();
 
@@ -323,7 +324,7 @@ public class GCYSComponentRecipes {
                 .EUt(2000000)
                 .stationResearch(b -> b
                         .researchStack(SENSOR_UHV.getStackForm())
-                        .CWUt(128)
+                        .CWUt(CWT[UHV])
                         .EUt(VA[UHV]))
                 .buildAndRegister();
     }
@@ -343,7 +344,7 @@ public class GCYSComponentRecipes {
                 .output(FIELD_GENERATOR_UHV)
                 .stationResearch(b -> b
                         .researchStack(FIELD_GENERATOR_UV.getStackForm())
-                        .CWUt(64)
+                        .CWUt(CWT[UV])
                         .EUt(VA[UV]))
                 .duration(600).EUt(400000).buildAndRegister();
 
@@ -365,7 +366,7 @@ public class GCYSComponentRecipes {
                 .EUt(2000000)
                 .stationResearch(b -> b
                         .researchStack(FIELD_GENERATOR_UHV.getStackForm())
-                        .CWUt(128)
+                        .CWUt(CWT[UHV])
                         .EUt(VA[UHV]))
                 .buildAndRegister();
 

@@ -789,7 +789,7 @@ public class LargeCircuitAssemblyLine {
                     .input(wireFine, Infinity, 256)
                     .fluidInputs(new FluidStack[]{stack})
                     .output(COSMIC_PROCESSOR, 64)
-                    .EUt(VA[UEV])
+                    .EUt(VA[UEV]).CWUt(CWT[UEV])
                     .duration(2000)
                     .buildAndRegister();
 
@@ -811,7 +811,7 @@ public class LargeCircuitAssemblyLine {
                     .input(wireFine, Infinity, 512)
                     .fluidInputs(new FluidStack[]{stack})
                     .output(COSMIC_ASSEMBLY, 64)
-                    .EUt(VA[UIV])
+                    .EUt(VA[UIV]).CWUt(CWT[UIV])
                     .duration(2400)
                     .buildAndRegister();
         }
@@ -836,7 +836,7 @@ public class LargeCircuitAssemblyLine {
                     .input(wireGtHex, Hypogen, 8) // 8 * 16 = 2 * 64 wire = 4 * 64 fine wire
                     .fluidInputs(new FluidStack[]{stack})
                     .output(SUPRACAUSAL_PROCESSOR, 64)
-                    .EUt(VA[UIV])
+                    .EUt(VA[UIV]).CWUt(CWT[UIV])
                     .duration(2400)
                     .buildAndRegister();
 
@@ -858,7 +858,7 @@ public class LargeCircuitAssemblyLine {
                     .input(wireGtHex, Hypogen, 16)
                     .fluidInputs(new FluidStack[]{stack})
                     .output(SUPRACAUSAL_ASSEMBLY, 64)
-                    .EUt(VA[UXV])
+                    .EUt(VA[UXV]).CWUt(CWT[UXV])
                     .duration(2400)
                     .buildAndRegister();
         }

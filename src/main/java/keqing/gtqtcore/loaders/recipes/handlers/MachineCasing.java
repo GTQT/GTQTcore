@@ -164,26 +164,43 @@ public class MachineCasing {
                 'P', new UnificationEntry(pipeNormalFluid, Inconel625),
                 'A', new UnificationEntry(plate, NiobiumTitanium));
 
-
-        ModHandler.addShapedRecipe(true, "talonite_casing", GTQTMetaBlocks.TURBINE_CASING.getItemVariant(TALONITE_CASING, 1),
-                "APA", "PFP", "APA",
-                'F', new UnificationEntry(frameGt, Neutronium),
-                'P', new UnificationEntry(pipeNormalFluid, Naquadah),
-                'A', new UnificationEntry(plate, Talonite));
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(frameGt, Neutronium)
+                .input(pipeNormalFluid, Naquadah, 2)
+                .input(plate, Talonite, 4)
+                .input(bolt, Duranium, 8)
+                .fluidInputs(Kevlar.getFluid(L * 2))
+                .outputs(GTQTMetaBlocks.TURBINE_CASING.getItemVariant(TALONITE_CASING, 1))
+                .circuitMeta(10)
+                .EUt(VA[ZPM])
+                .duration(800)
+                .buildAndRegister();
 
         //  Naquadria Casing
-        ModHandler.addShapedRecipe(true, "naquadria_casing", GTQTMetaBlocks.MULTI_CASING.getItemVariant(NAQUADRIA_CASING, 1),
-                "APA", "PFP", "APA",
-                'F', new UnificationEntry(frameGt, Tritanium),
-                'P', new UnificationEntry(stick, Naquadria),
-                'A', new UnificationEntry(plate, Naquadria));
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(frameGt, Tritanium)
+                .input(gear, Naquadria, 2)
+                .input(stick, Naquadria, 4)
+                .input(bolt, Duranium, 8)
+                .fluidInputs(Kevlar.getFluid(L * 2))
+                .outputs(GTQTMetaBlocks.MULTI_CASING.getItemVariant(NAQUADRIA_CASING, 1))
+                .circuitMeta(10)
+                .EUt(VA[ZPM])
+                .duration(800)
+                .buildAndRegister();
 
         //  Naquadri alloy Casing
-        ModHandler.addShapedRecipe(true, "naquadri_alloy_casing", GTQTMetaBlocks.MULTI_CASING.getItemVariant(NAQUADAH_ALLOY_CASING, 1),
-                "APA", "PFP", "APA",
-                'F', new UnificationEntry(frameGt, Neutronium),
-                'P', new UnificationEntry(stick, NaquadahAlloy),
-                'A', new UnificationEntry(plate, NaquadahAlloy));
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(frameGt, Neutronium)
+                .input(gear, NaquadahAlloy, 2)
+                .input(stick, NaquadahAlloy, 4)
+                .input(bolt, Duranium, 8)
+                .fluidInputs(Kevlar.getFluid(L * 2))
+                .outputs(GTQTMetaBlocks.MULTI_CASING.getItemVariant(NAQUADAH_ALLOY_CASING, 1))
+                .circuitMeta(10)
+                .EUt(VA[ZPM])
+                .duration(800)
+                .buildAndRegister();
 
         //  Polybenzimidazole Pipe Casing
         PRECISE_ASSEMBLER_RECIPES.recipeBuilder()

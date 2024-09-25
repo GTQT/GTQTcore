@@ -428,6 +428,12 @@ public class MetaTileEntitykeQingNet extends RecipeMapMultiblockController imple
                     return true;
                 }
             }
+            if (mte instanceof MetaTileEntityPhotolithographyFactory) {
+                if (((MetaTileEntityPhotolithographyFactory) mte).isStructureFormed()) {
+                    io[i][4] = 4;
+                    return true;
+                }
+            }
             if (mte instanceof MetaTileEntityEnzymesReaction) {
                 if (((MetaTileEntityEnzymesReaction) mte).isStructureFormed()) {
                     io[i][4] = 11;

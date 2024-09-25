@@ -2259,6 +2259,7 @@ gtqtcore.machine.laser_switch.name=高能激光分配单元
 gtqtcore.machine.laser_translation.name=高能激光接收仓
 gtqtcore.machine.laser_emitter.name=高能激光发射仓
 gtqtcore.machine.laser_blast_furnace.name=高能激光高炉
+gtqtcore.machine.laser_alloy_furnace.name=高能激光合金炉
 
 metaitem.arrow_up_mki.name=思维抽象节点I
 metaitem.arrow_down_mki.name=思维具象节点I
@@ -3272,7 +3273,7 @@ gregtech.material.debrominated_brine=脱溴盐水
 gregtech.material.sulfuric_bromine_solution=硫酸溴
 gregtech.material.lithium_chloride_solution=氯化锂溶液
 gregtech.material.aluminium_hydride=铝氢化物
-gregtech.material.sodium_hydride=碳酸氢钠
+gregtech.material.sodium_hydride=氢化钠
 gregtech.material.lithium_aluminium_hydride=锂铝氢化物
 gregtech.material.sodium_azanide=碘化钠
 gregtech.material.sodium_hydroxide_solution=氢氧化钠溶液
@@ -3863,6 +3864,16 @@ gtqtcore.multiblock.kqn.nb27=奇异燃料提炼
 gtqtcore.multiblock.kqn.nx27=通过对在基岩气中发现的塔兰金属进行处理，研究发现将Ta-226与超能硅岩燃料混合，并且额外加入部分放射性元素即可激发释放来自硅岩与裂变原料的大部分能量。
 metaitem.disk.27.name=数据存储器
 metaitem.disk.27.tooltip=§a奇异燃料提炼
+
+gtqtcore.multiblock.kqn.nb28=超高能激光器
+gtqtcore.multiblock.kqn.nx28=随着大型光刻厂的建成与投产，我们对于高能激光的研究愈发深入，虽然早在IV阶段我们便能制作简单的激光器，但是要将其实际运用到生产实践中,我们仍然需要更多的能量。
+metaitem.disk.28.name=数据存储器
+metaitem.disk.28.tooltip=§a超高能激光器
+
+gtqtcore.multiblock.kqn.nb29=天基折射棱镜
+gtqtcore.multiblock.kqn.nx29=我们已经熟练的将超高能激光器运用到生产中，并且取代几大部分原始线网结构，然而，在超长距离电力投射与超高能束能发射下仍然有着较大的问题，如果能直接利用天空就行激光反射传输就好了.....
+metaitem.disk.29.name=数据存储器
+metaitem.disk.29.tooltip=§a天基折射棱镜
 
 gtqtcore.multiblock.kqn.bio0=欢迎使用KQCC科研计算机集成系统！
 metaitem.bio.0.name=基因存储器

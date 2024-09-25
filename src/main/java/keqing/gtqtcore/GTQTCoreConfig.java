@@ -19,7 +19,7 @@ public class GTQTCoreConfig {
         @Config.Comment("后期设备开关，包括鸿蒙之眼，等离子锻炉，移相器（暂未实装实际功能）")
         @Config.RequiresMcRestart
         @Config.Name("Last game machine switch")
-        public boolean LastSwitch = true;
+        public boolean LastSwitch = false;
 
         @Config.Comment("巨型设备开关，包括巨型高炉，巨型真空冷冻机（因为长得丑还没用，所以暂时关闭）")
         @Config.RequiresMcRestart
