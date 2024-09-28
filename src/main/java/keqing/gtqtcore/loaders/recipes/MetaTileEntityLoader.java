@@ -153,46 +153,6 @@ public class MetaTileEntityLoader {
                 .fluidInputs(Epoxy.getFluid(L * 12))
                 .outputs(TIDE_UNIT.getStackForm()).buildAndRegister();
 
-        ModHandler.addShapedRecipe(true, "tank0",TANK[0].getStackForm(), " R ",
-                "hCw", " R ", 'R', new UnificationEntry(OrePrefix.ring, Bronze), 'C',
-                MetaBlocks.METAL_CASING.getItemVariant(BRONZE_BRICKS));
-
-        ModHandler.addShapedRecipe(true, "tank1",TANK[1].getStackForm(), " R ",
-                "hCw", " R ", 'R', new UnificationEntry(OrePrefix.ring, Materials.Steel), 'C',
-                MetaBlocks.METAL_CASING.getItemVariant(STEEL_SOLID));
-
-        ModHandler.addShapedRecipe(true, "tank2",TANK[2].getStackForm(), " R ",
-                "hCw", " R ", 'R', new UnificationEntry(OrePrefix.ring, Aluminium), 'C',
-                MetaBlocks.METAL_CASING.getItemVariant(ALUMINIUM_FROSTPROOF));
-
-        ModHandler.addShapedRecipe(true, "tank3",TANK[3].getStackForm(), " R ",
-                "hCw", " R ", 'R', new UnificationEntry(OrePrefix.ring, StainlessSteel), 'C',
-                MetaBlocks.METAL_CASING.getItemVariant(STAINLESS_CLEAN));
-
-        ModHandler.addShapedRecipe(true, "tank4",TANK[4].getStackForm(), " R ",
-                "hCw", " R ", 'R', new UnificationEntry(OrePrefix.ring, Titanium), 'C',
-                MetaBlocks.METAL_CASING.getItemVariant(TITANIUM_STABLE));
-
-        ModHandler.addShapedRecipe(true, "tank5",TANK[5].getStackForm(), " R ",
-                "hCw", " R ", 'R', new UnificationEntry(OrePrefix.ring, TungstenSteel), 'C',
-                MetaBlocks.METAL_CASING.getItemVariant(TUNGSTENSTEEL_ROBUST));
-
-        ModHandler.addShapedRecipe(true, "tank6",TANK[6].getStackForm(), " R ",
-                "hCw", " R ", 'R', new UnificationEntry(OrePrefix.ring, RhodiumPlatedPalladium), 'C',
-                GTQTMetaBlocks.TURBINE_CASING.getItemVariant(PD_TURBINE_CASING));
-
-        ModHandler.addShapedRecipe(true, "tank7",TANK[7].getStackForm(), " R ",
-                "hCw", " R ", 'R', new UnificationEntry(OrePrefix.ring, NaquadahAlloy), 'C',
-                GTQTMetaBlocks.TURBINE_CASING.getItemVariant(NQ_TURBINE_CASING));
-
-        ModHandler.addShapedRecipe(true, "tank8",TANK[8].getStackForm(), " R ",
-                "hCw", " R ", 'R', new UnificationEntry(OrePrefix.ring, Orichalcum), 'C',
-                GTQTMetaBlocks.TURBINE_CASING1.getItemVariant(ST_TURBINE_CASING));
-
-        ModHandler.addShapedRecipe(true, "tank9",TANK[9].getStackForm(), " R ",
-                "hCw", " R ", 'R', new UnificationEntry(OrePrefix.ring, Adamantite), 'C',
-                GTQTMetaBlocks.TURBINE_CASING1.getItemVariant(AD_TURBINE_CASING));
-
         ModHandler.addShapedRecipe(true, "industry_pump",INDUSTRY_WATER_PUMP.getStackForm(),
                 "ABA", "CHC","ABA",
                 'H', MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.LV),

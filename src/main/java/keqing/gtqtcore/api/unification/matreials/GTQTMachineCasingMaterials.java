@@ -296,7 +296,7 @@ public class GTQTMachineCasingMaterials {
                 .fluid()
                 .color(0x383030)
                 .iconSet(BRIGHT)
-                .blast(7500, GasTier.HIGHER)
+                .blast(5500, GasTier.HIGHER)
                 .components(MARM200Steel, 18, Cerium, 1)
                 .flags(GENERATE_PLATE, GENERATE_ROD, GENERATE_RING, GENERATE_BOLT_SCREW, GENERATE_GEAR, GENERATE_ROTOR,
                         GENERATE_FRAME,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROUND,GENERATE_SMALL_GEAR

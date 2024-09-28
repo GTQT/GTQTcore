@@ -9,10 +9,12 @@ import keqing.gtqtcore.common.MetaEntities;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.items.GTQTMetaItems;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
+import keqing.gtqtcore.common.worldgen.WorldGenAbandonedBase;
 import keqing.gtqtcore.integration.GTQTIntegration;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.*;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 @Mod(
         modid = "gtqtcore",
@@ -24,11 +26,11 @@ import net.minecraftforge.fml.common.event.*;
         "after:gregtechfoodoption@[1.11.0,);"
 )
 public class GTQTCore {
-    public static final String PACK = "1.5.3";
+    public static final String PACK = "1.6.0";
 
     public static final String MODID = "gtqtcore";
     public static final String NAME = "GTQT Core";
-    public static final String VERSION = "0.5(2024/9/15)";
+    public static final String VERSION = "0.2(2024/9/28)";
 
     @Mod.Instance(GTQTCore.MODID)
     public static GTQTCore instance;
@@ -57,6 +59,7 @@ public class GTQTCore {
     @Mod.EventHandler
     public void onInit(FMLInitializationEvent event) {
         GTQTIntegration.init();
+        GameRegistry.registerWorldGenerator(new WorldGenAbandonedBase(), 20000);
     }
     @Mod.EventHandler
     public void init(FMLInitializationEvent event)

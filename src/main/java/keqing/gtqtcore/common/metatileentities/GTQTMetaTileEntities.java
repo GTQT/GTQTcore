@@ -2,7 +2,6 @@ package keqing.gtqtcore.common.metatileentities;
 
 import gregtech.api.GTValues;
 import gregtech.api.GregTechAPI;
-import gregtech.api.items.metaitem.MetaItem;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.SimpleGeneratorMetaTileEntity;
 import gregtech.api.metatileentity.SimpleMachineMetaTileEntity;
@@ -42,7 +41,6 @@ import keqing.gtqtcore.common.metatileentities.single.electric.MetaTileEntityPar
 import keqing.gtqtcore.common.metatileentities.single.steam.MetaTileEntitySteamLatexCollector;
 import keqing.gtqtcore.common.metatileentities.storage.MetaTileEntityCommonRubbishBin;
 import keqing.gtqtcore.common.metatileentities.storage.MetaTileEntityFluidRubbishBin;
-import keqing.gtqtcore.common.metatileentities.storage.MetaTileEntityMultiblockTank;
 import keqing.gtqtcore.common.metatileentities.storage.MetaTileEntityRubbishBin;
 import keqing.gtqtcore.GTQTCoreConfig;
 
@@ -166,7 +164,6 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityIsaMill ISA_MILL;
     public static MetaTileEntityPCBFactory PCB_FACTORY;
     public static MetaTileEntityElectricArcFurnace ELECTRIC_ARC_FURNACE;
-    public static MetaTileEntityMultiblockTank[] TANK = new MetaTileEntityMultiblockTank[10];
     public static MetaTileEntitySaltField SALT_FLIED;
     public static MetaTileEntityCommonRubbishBin COMMON_RUBBISH_BIN;
     public static SimpleMachineMetaTileEntity[] COMPONENT_ASSEMBLER = new SimpleMachineMetaTileEntity[GTValues.IV + 1];
@@ -603,12 +600,6 @@ public class GTQTMetaTileEntities {
         ION_IMPLANTATOR = registerMetaTileEntity(3510, new MetaTileEntityIonImplanter(gtqtcoreId("ion_implantator")));
         CZ_PULLER = registerMetaTileEntity(3511, new MetaTileEntityCZPuller(gtqtcoreId("cz_puller")));
         EX_CVD = registerMetaTileEntity(3512, new MetaTileEntityEXCVD(gtqtcoreId("ex_cvd")));
-
-        //存储
-        for (int i = 0; i < 10; i++) {
-            String tierName = GTValues.VN[i].toLowerCase();
-            TANK[i] = registerMetaTileEntity(3520 + i, new MetaTileEntityMultiblockTank(gtqtcoreId("tank." + tierName), i + 1));
-        }
 
         //小机器
         registerSimpleMetaTileEntity(DEHYDRATOR, 14985, "dehydrator", GTQTcoreRecipeMaps.DRYER_RECIPES, Textures.SIFTER_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);

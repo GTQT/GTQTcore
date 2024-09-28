@@ -9,7 +9,13 @@ public class GTQTCoreConfig {
 
     @Config.Comment("Config options for GTQTCore")
     public static MachineSwitch MachineSwitch = new MachineSwitch();
+    public static WorldGenSwitch WorldGenSwitch = new WorldGenSwitch();
 
+    public static class WorldGenSwitch {
+        @Config.Comment("Chance of generating abandoned base in chunk = 1 / 100 * THIS_VALUE. 0 disables abandoned base generation. Default: 5 ,0 to close"  )
+        public int abandonedBaseRarity = 5;
+
+    }
     public static class MachineSwitch {
         @Config.Comment("终局设备开关，包括尼戴，神锻。注意，严重影响加载时间！！！")
         @Config.RequiresMcRestart
