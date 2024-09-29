@@ -68,7 +68,6 @@ public class MetaTileEntityNanoCoating extends MultiMapMultiblockController impl
         tooltip.add(I18n.format("gtqt.machine.stepper.1"));
         tooltip.add(I18n.format("gtqt.machine.stepper.2"));
         tooltip.add(I18n.format("gtqt.machine.stepper.5"));
-        tooltip.add(I18n.format("gtqt.machine.stepper.6"));
     }
     private IOpticalComputationProvider computationProvider;
     public MetaTileEntityNanoCoating(ResourceLocation metaTileEntityId) {

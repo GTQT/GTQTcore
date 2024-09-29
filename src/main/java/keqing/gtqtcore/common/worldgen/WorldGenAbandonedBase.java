@@ -22,24 +22,26 @@ import static keqing.gtqtcore.GTQTCoreConfig.WorldGenSwitch;
 public class WorldGenAbandonedBase implements IWorldGenerator {
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
-        if(GTQTCoreConfig.WorldGenSwitch.abandonedBaseRarity==0)return;
+        if (GTQTCoreConfig.WorldGenSwitch.abandonedBaseRarity == 0) return;
 
-        if (GTQTCoreConfig.WorldGenSwitch.abandonedBaseRarity*100== 0 ||
-                world.getWorldType() == WorldType.FLAT ||
-                world.provider.getDimensionType() != DimensionType.OVERWORLD ||
-                !world.getWorldInfo().isMapFeaturesEnabled()) {
+        if (GTQTCoreConfig.WorldGenSwitch.abandonedBaseRarity*100 == 0 || world.getWorldType() == WorldType.FLAT || world.provider.getDimensionType() != DimensionType.OVERWORLD || !world.getWorldInfo().isMapFeaturesEnabled()) {
             return; //do not generate in flat worlds, or in non-surface worlds
         }
         BlockPos randomPos = new BlockPos(chunkX * 16 + 8, 0, chunkZ * 16 + 8);
 
         if (random.nextInt(WorldGenSwitch.abandonedBaseRarity*100) == 0) {
-            int variantNumber = random.nextInt(7);
+            int variantNumber = random.nextInt(8);
+
+
             Rotation rotation = Rotation.values()[random.nextInt(Rotation.values().length)];
             ResourceLocation templateId = new ResourceLocation(GTValues.MODID, "abandoned_base/abandoned_base_1_" + variantNumber);
             Template template = TemplateManager.getBuiltinTemplate(world, templateId);
             BlockPos originPos = template.getZeroPositionWithTransform(randomPos, Mirror.NONE, rotation);
             originPos = TemplateManager.calculateAverageGroundLevel(world, originPos, template.getSize());
-            template.addBlocksToWorld(world, originPos, new PlacementSettings().setRotation(rotation));
+            if (variantNumber == 7)
+                template.addBlocksToWorld(world, originPos.add(0, -26, 0), new PlacementSettings().setRotation(rotation));
+            else template.addBlocksToWorld(world, originPos, new PlacementSettings().setRotation(rotation));
+
         }
     }
 }

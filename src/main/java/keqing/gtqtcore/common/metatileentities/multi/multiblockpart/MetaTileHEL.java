@@ -64,10 +64,11 @@ public class MetaTileHEL extends MetaTileEntityMultiblockNotifiablePart implemen
             data.setInteger("Y1", TargetPos.getY());
             data.setInteger("Z1", TargetPos.getZ());
         }
-
-        data.setInteger("X2", machinePos.getX());
-        data.setInteger("Y2", machinePos.getY());
-        data.setInteger("Z2", machinePos.getZ());
+        if(machinePos!=null) {
+            data.setInteger("X2", machinePos.getX());
+            data.setInteger("Y2", machinePos.getY());
+            data.setInteger("Z2", machinePos.getZ());
+        }
 
         data.setBoolean("findTarget",findTarget);
         data.setBoolean("findMachine",findMachine);

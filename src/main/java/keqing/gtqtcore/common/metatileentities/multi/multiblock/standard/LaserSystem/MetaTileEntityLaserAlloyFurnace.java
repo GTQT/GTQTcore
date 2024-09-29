@@ -57,8 +57,7 @@ import java.util.List;
 
 import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.NQ_MACHINE_CASING;
 import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.NQ_TURBINE_CASING;
-import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.LASER_BLAST_FURNACE;
-import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.LASER_INPUT;
+import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.*;
 
 public class MetaTileEntityLaserAlloyFurnace extends RecipeMapLaserMultiblockController implements IHeatingCoil {
 
@@ -144,25 +143,31 @@ public class MetaTileEntityLaserAlloyFurnace extends RecipeMapLaserMultiblockCon
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
-                .aisle("  GGG  ", "  AAA  ", "   A   ", "       ", "       ", "       ", "       ", "       ", "   A   ", "  BBB  ", "  AAA  ")
-                .aisle(" GAAAG ", " AAAAA ", " CADAC ", " CA AC ", " C   C ", " C   C ", " C   C ", " CA AC ", " CADAC ", " BAAAB ", " AAAAA ")
-                .aisle("GAAAAAG", "AAEEEAA", " AFFFA ", " AEDEA ", "  EDE  ", "  EDE  ", "  EDE  ", " AEDEA ", " AFFFA ", "BAEEEAB", "AAAAAAA")
-                .aisle("GAAAAAG", "AAEEEAA", "ADFFFDA", "  DFD  ", "  DFD  ", "  DFD  ", "  DFD  ", "  DFD  ", "ADFFFDA", "BAEEEAB", "AAAPAAA")
-                .aisle("GAAAAAG", "AAEEEAA", " AFFFA ", " AEDEA ", "  EDE  ", "  EDE  ", "  EDE  ", " AEDEA ", " AFFFA ", "BAEEEAB", "AAAAAAA")
-                .aisle(" GAAAG ", " AAAAA ", " CADAC ", " CA AC ", " C   C ", " C   C ", " C   C ", " CA AC ", " CADAC ", " BAAAB ", " AAAAA ")
-                .aisle("  GGG  ", "  ASA  ", "   Q   ", "       ", "       ", "       ", "       ", "       ", "   A   ", "  BBB  ", "  AAA  ")
+                .aisle("    GGG    ", "    GGG    ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "    AAA    ", "    AAA    ")
+                .aisle("   GAAAG   ", "   GBABG   ", "   CDADC   ", "   CDDDC   ", "   CDDDC   ", "   CDDDC   ", "   CDDDC   ", "   CDDDC   ", "   CDADC   ", "   ABABA   ", "   AAAAA   ")
+                .aisle("  GAAAAAG  ", "  GAEEEAG  ", "   DBBBD   ", "   DFFFD   ", "   DFFFD   ", "   DFFFD   ", "   DFFFD   ", "   DFFFD   ", "   DBBBD   ", "  AAEEEAA  ", "  AAAAAAA  ")
+                .aisle(" GAAAAAAAG ", " GAEEEEEAG ", " CDBFFFBDC ", " CDF   FDC ", " CDF   FDC ", " CDF   FDC ", " CDF   FDC ", " CDF   FDC ", " CDBFFFBDC ", " AAEEEEEAA ", " AAAAAAAAA ")
+                .aisle("GAAAAAAAAAG", "GBEEBBBEEBG", " DBFFFFFBD ", " DF F F FD ", " DF F F FD ", " DF F F FD ", " DF F F FD ", " DF F F FD ", " DBFFFFFBD ", "ABEEBBBEEBA", "AAAAAAAAAAA")
+                .aisle("GAAAAAAAAAG", "GAEEBEBEEAG", " ABFFFFFBA ", " DF     FD ", " DF     FD ", " DF     FD ", " DF     FD ", " DF     FD ", " ABFFFFFBA ", "AAEEBEBEEAA", "AAAAAPAAAAA")
+                .aisle("GAAAAAAAAAG", "GBEEBBBEEBG", " DBFFFFFBD ", " DF F F FD ", " DF F F FD ", " DF F F FD ", " DF F F FD ", " DF F F FD ", " DBFFFFFBD ", "ABEEBBBEEBA", "AAAAAAAAAAA")
+                .aisle(" GAAAAAAAG ", " GAEEEEEAG ", " CDBFFFBDC ", " CDF   FDC ", " CDF   FDC ", " CDF   FDC ", " CDF   FDC ", " CDF   FDC ", " CDBFFFBDC ", " AAEEEEEAA ", " AAAAAAAAA ")
+                .aisle("  GAAAAAG  ", "  GAEEEAG  ", "   DBBBD   ", "   DFFFD   ", "   DFFFD   ", "   DFFFD   ", "   DFFFD   ", "   DFFFD   ", "   DBBBD   ", "  AAEEEAA  ", "  AAAAAAA  ")
+                .aisle("   GAAAG   ", "   GBABG   ", "   CDADC   ", "   CDDDC   ", "   CDDDC   ", "   CDDDC   ", "   CDDDC   ", "   CDDDC   ", "   CDADC   ", "   ABABA   ", "   AAAAA   ")
+                .aisle("    GQG    ", "    GSG    ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "    AAA    ", "    AAA    ")
+
 
                 .where('S', selfPredicate())
                 .where('A', states(getCasingState()))
-                .where('G', states(getCasingState()).setMinGlobalLimited(9)
-                        .or(autoAbilities(false, false, true, true, true, true, false))
+                .where('G', states(getCasingState()).setMinGlobalLimited(18)
+
+                        .or(autoAbilities(false, false, true, false, true, true, false))
                         .or(abilities(GTQTMultiblockAbility.LASER_INPUT).setMinGlobalLimited(1).setMaxGlobalLimited(2))
                 )
-                .where('B', states(getVentState()))//散热片
-                .where('C', states(getFrameState()))//框架
-                .where('D', states(getGlassState()))//玻璃
-                .where('E', states(getSecondCasingState()))//管道
-                .where('F', heatingCoils())//线圈
+                .where('B', states(getVentState()))//散热片 F
+                .where('C', states(getFrameState()))//框架 F
+                .where('D', states(getGlassState()))//玻璃 F
+                .where('E', states(getSecondCasingState()))//管道 F
+                .where('F', heatingCoils())//线圈 F
                 .where('P', abilities(MultiblockAbility.MUFFLER_HATCH))
                 .where('Q', abilities(MultiblockAbility.MAINTENANCE_HATCH))
                 .where(' ', any())
@@ -228,16 +233,22 @@ public class MetaTileEntityLaserAlloyFurnace extends RecipeMapLaserMultiblockCon
     public List<MultiblockShapeInfo> getMatchingShapes() {
         ArrayList<MultiblockShapeInfo> shapeInfo = new ArrayList<>();
         MultiblockShapeInfo.Builder builder = MultiblockShapeInfo.builder()
-                .aisle("  GGG  ", "  AAA  ", "   A   ", "       ", "       ", "       ", "       ", "       ", "   A   ", "  BBB  ", "  AAA  ")
-                .aisle(" GAAAG ", " AAAAA ", " CADAC ", " CA AC ", " C   C ", " C   C ", " C   C ", " CA AC ", " CADAC ", " BAAAB ", " AAAAA ")
-                .aisle("GAAAAAG", "AAEEEAA", " AFFFA ", " AEDEA ", "  EDE  ", "  EDE  ", "  EDE  ", " AEDEA ", " AFFFA ", "BAEEEAB", "AAAAAAA")
-                .aisle("KAAAAAI", "AAEEEAA", "ADFFFDA", "  DFD  ", "  DFD  ", "  DFD  ", "  DFD  ", "  DFD  ", "ADFFFDA", "BAEEEAB", "AAAPAAA")
-                .aisle("LAAAAAJ", "AAEEEAA", " AFFFA ", " AEDEA ", "  EDE  ", "  EDE  ", "  EDE  ", " AEDEA ", " AFFFA ", "BAEEEAB", "AAAAAAA")
-                .aisle(" GAAAG ", " AAAAA ", " CADAC ", " CA AC ", " C   C ", " C   C ", " C   C ", " CA AC ", " CADAC ", " BAAAB ", " AAAAA ")
-                .aisle("  HGH  ", "  ASA  ", "   Q   ", "       ", "       ", "       ", "       ", "       ", "   A   ", "  BBB  ", "  AAA  ")
+
+                .aisle("    GGG    ", "    GGG    ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "    AAA    ", "    AAA    ")
+                .aisle("   GAAAG   ", "   GBABG   ", "   CDADC   ", "   CDDDC   ", "   CDDDC   ", "   CDDDC   ", "   CDDDC   ", "   CDDDC   ", "   CDADC   ", "   ABABA   ", "   AAAAA   ")
+                .aisle("  GAAAAAG  ", "  GAEEEAG  ", "   DBBBD   ", "   DFFFD   ", "   DFFFD   ", "   DFFFD   ", "   DFFFD   ", "   DFFFD   ", "   DBBBD   ", "  AAEEEAA  ", "  AAAAAAA  ")
+                .aisle(" GAAAAAAAG ", " GAEEEEEAG ", " CDBFFFBDC ", " CDF   FDC ", " CDF   FDC ", " CDF   FDC ", " CDF   FDC ", " CDF   FDC ", " CDBFFFBDC ", " AAEEEEEAA ", " AAAAAAAAA ")
+                .aisle("KAAAAAAAAAI", "GBEEBBBEEBG", " DBFFFFFBD ", " DF F F FD ", " DF F F FD ", " DF F F FD ", " DF F F FD ", " DF F F FD ", " DBFFFFFBD ", "ABEEBBBEEBA", "AAAAAAAAAAA")
+                .aisle("GAAAAAAAAAG", "GAEEBEBEEAG", " ABFFFFFBA ", " DF     FD ", " DF     FD ", " DF     FD ", " DF     FD ", " DF     FD ", " ABFFFFFBA ", "AAEEBEBEEAA", "AAAAAPAAAAA")
+                .aisle("LAAAAAAAAAJ", "GBEEBBBEEBG", " DBFFFFFBD ", " DF F F FD ", " DF F F FD ", " DF F F FD ", " DF F F FD ", " DF F F FD ", " DBFFFFFBD ", "ABEEBBBEEBA", "AAAAAAAAAAA")
+                .aisle(" GAAAAAAAG ", " GAEEEEEAG ", " CDBFFFBDC ", " CDF   FDC ", " CDF   FDC ", " CDF   FDC ", " CDF   FDC ", " CDF   FDC ", " CDBFFFBDC ", " AAEEEEEAA ", " AAAAAAAAA ")
+                .aisle("  GAAAAAG  ", "  GAEEEAG  ", "   DBBBD   ", "   DFFFD   ", "   DFFFD   ", "   DFFFD   ", "   DFFFD   ", "   DFFFD   ", "   DBBBD   ", "  AAEEEAA  ", "  AAAAAAA  ")
+                .aisle("   GAAAG   ", "   GBABG   ", "   CDADC   ", "   CDDDC   ", "   CDDDC   ", "   CDDDC   ", "   CDDDC   ", "   CDDDC   ", "   CDADC   ", "   ABABA   ", "   AAAAA   ")
+                .aisle("    HQH    ", "    GSG    ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "    AAA    ", "    AAA    ")
+
                 .where(' ', Blocks.AIR.getDefaultState())
 
-                .where('S', LASER_BLAST_FURNACE, EnumFacing.SOUTH)
+                .where('S', LASER_ALLOY_FURNACE, EnumFacing.SOUTH)
 
                 .where('A', getCasingState())
                 .where('B', getVentState())//散热片
@@ -248,7 +259,7 @@ public class MetaTileEntityLaserAlloyFurnace extends RecipeMapLaserMultiblockCon
 
                 .where('H', LASER_INPUT[GTValues.LV], EnumFacing.SOUTH)
                 .where('I', MetaTileEntities.ITEM_IMPORT_BUS[GTValues.LV], EnumFacing.EAST)
-                .where('J', MetaTileEntities.ITEM_EXPORT_BUS[GTValues.LV], EnumFacing.EAST)
+                .where('J', MetaTileEntities.FLUID_IMPORT_HATCH[GTValues.LV], EnumFacing.EAST)
                 .where('K', MetaTileEntities.FLUID_IMPORT_HATCH[GTValues.LV], EnumFacing.WEST)
                 .where('L', MetaTileEntities.FLUID_EXPORT_HATCH[GTValues.LV], EnumFacing.WEST)
 
