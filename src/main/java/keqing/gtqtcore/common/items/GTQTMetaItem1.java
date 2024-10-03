@@ -185,6 +185,11 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         GOLD_CROP = addItem(205, "gold_crop");
         GOLD_CROP.addComponents(new GTQTCropSeedBehaviour(GTQTCrops.GOLD_CROP, GOLD_CROP.getStackForm(), GOLD_CROP.getStackForm())).setCreativeTabs(CommonProxy.GTQTCore_BIO);
 
+        //240天基折射升级
+        HIGH_REFLECT = this.addItem(240,"high_reflect").setMaxStackSize(1).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        REFLECT_GLASS = this.addItem(241,"reflect_glass").setMaxStackSize(1).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        LASER_GROUP = this.addItem(242,"laser_group").setMaxStackSize(1).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+
         //催化剂框架 6种绰绰有余
         CATALYST_FRAMEWORK_I = this.addItem(250,"catalyst_framework_i").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
         CATALYST_FRAMEWORK_II = this.addItem(251,"catalyst_framework_ii").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);

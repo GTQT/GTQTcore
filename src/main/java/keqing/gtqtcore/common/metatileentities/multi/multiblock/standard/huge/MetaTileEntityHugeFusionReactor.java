@@ -91,7 +91,8 @@ public class MetaTileEntityHugeFusionReactor extends RecipeMapMultiblockControll
     @SideOnly(Side.CLIENT)
     private boolean registeredBloomRenderTicket;
 
-    public MetaTileEntityHugeFusionReactor(ResourceLocation metaTileEntityId, int tier) {
+    public
+    MetaTileEntityHugeFusionReactor(ResourceLocation metaTileEntityId, int tier) {
         super(metaTileEntityId, RecipeMaps.FUSION_RECIPES);
         this.recipeMapWorkable = new FusionRecipeLogic(this);
         this.tier = tier;

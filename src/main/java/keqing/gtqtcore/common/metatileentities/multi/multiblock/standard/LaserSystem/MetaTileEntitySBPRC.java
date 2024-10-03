@@ -9,6 +9,9 @@ import gregtech.api.gui.ModularUI;
 import gregtech.api.gui.Widget;
 import gregtech.api.gui.widgets.AdvancedTextWidget;
 import gregtech.api.gui.widgets.ClickButtonWidget;
+import gregtech.api.gui.widgets.ImageWidget;
+import gregtech.api.gui.widgets.SlotWidget;
+import gregtech.api.items.itemhandlers.GTItemStackHandler;
 import gregtech.api.metatileentity.IFastRenderMetaTileEntity;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
@@ -52,6 +55,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
 import java.io.IOException;
@@ -69,8 +73,8 @@ public class MetaTileEntitySBPRC extends MetaTileEntityBaseWithControl implement
     int switchInput;
     int switchOutput;
     int[] weightOutput = new int[32];
-    int[][] input = new int[32][5];
-    int[][] output = new int[32][5];
+    int[][] input = new int[64][5];
+    int[][] output = new int[64][5];
     int maxLength = 8;
     //0位 状态   1 2 3位置坐标 4位 数值
     int inputAmount;
@@ -85,19 +89,16 @@ public class MetaTileEntitySBPRC extends MetaTileEntityBaseWithControl implement
     boolean LaserGroup;
     boolean ReflectGlass;
     boolean HighReflect;
+
+    private final ItemStackHandler containerInventory;
+
     public MetaTileEntitySBPRC(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId);
+        this.containerInventory = new GTItemStackHandler(this, 3);
     }
 
     //第一位 1-》输入 2-》输出
     //第二位 等级
-    @Override
-    protected void formStructure(PatternMatchContext context) {
-        super.formStructure(context);
-        if(LaserGroup)maxLength*=2;
-        if(ReflectGlass)maxLength*=2;
-        if(HighReflect)maxLength*=2;
-    }
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setBoolean("LaserGroup",LaserGroup);
         data.setBoolean("ReflectGlass",ReflectGlass);
@@ -110,6 +111,7 @@ public class MetaTileEntitySBPRC extends MetaTileEntityBaseWithControl implement
         data.setInteger("weightTotal", weightTotal);
         data.setInteger("maxLength", maxLength);
         data.setIntArray("weightOutput", weightOutput);
+        data.setTag("ContainerInventory", this.containerInventory.serializeNBT());
         for (int i = 0; i < maxLength; i++) {
             data.setIntArray("input" + i, input[i]);
             data.setIntArray("output" + i, output[i]);
@@ -130,6 +132,7 @@ public class MetaTileEntitySBPRC extends MetaTileEntityBaseWithControl implement
         weightTotal = data.getInteger("weightTotal");
         maxLength = data.getInteger("maxLength");
         weightOutput = data.getIntArray("weightOutput");
+        this.containerInventory.deserializeNBT(data.getCompoundTag("ContainerInventory"));
         for (int i = 0; i < maxLength; i++) {
             input[i] = data.getIntArray("input" + i);
             output[i] = data.getIntArray("output" + i);
@@ -139,6 +142,50 @@ public class MetaTileEntitySBPRC extends MetaTileEntityBaseWithControl implement
     /////////////////////////////////////////
     @Override
     protected void updateFormedValid() {
+
+
+        if (this.containerInventory.getStackInSlot(0).getItem() == GTQTMetaItems.GTQT_META_ITEM && this.containerInventory.getStackInSlot(0).getMetadata() == GTQTMetaItems.HIGH_REFLECT.getMetaValue()) {
+            if(!HighReflect){
+                HighReflect = true;
+                maxLength*=2;
+            }
+        }
+        else
+        {
+            if(HighReflect)
+            {
+                HighReflect = false;
+                maxLength/=2;
+            }
+        }
+        if (this.containerInventory.getStackInSlot(1).getItem() == GTQTMetaItems.GTQT_META_ITEM && this.containerInventory.getStackInSlot(1).getMetadata() == GTQTMetaItems.REFLECT_GLASS.getMetaValue()) {
+            if(!ReflectGlass){
+                ReflectGlass = true;
+                maxLength*=2;
+            }
+        }
+        else
+        {
+            if(ReflectGlass)
+            {
+                ReflectGlass = false;
+                maxLength/=2;
+            }
+        }
+        if (this.containerInventory.getStackInSlot(2).getItem() == GTQTMetaItems.GTQT_META_ITEM && this.containerInventory.getStackInSlot(2).getMetadata() == GTQTMetaItems.LASER_GROUP.getMetaValue()) {
+            if(!LaserGroup) {
+                LaserGroup = true;
+                maxLength*=2;
+            }
+        }
+        else
+        {
+            if(LaserGroup)
+            {
+                LaserGroup = false;
+                maxLength/=2;
+            }
+        }
         extraAmount = inputAmount - outputAmount;
         //初始化检查
         if (checkLocate(true, true) == 1) for (int i = 0; i < maxLength; i++) {
@@ -386,11 +433,27 @@ public class MetaTileEntitySBPRC extends MetaTileEntityBaseWithControl implement
         builder.image(200, 80, 180, 60, GuiTextures.DISPLAY);
         builder.widget((new AdvancedTextWidget(204, 84, this::addTotal, 16777215)).setMaxWidthLimit(180).setClickHandler(this::handleDisplayClick));
 
+        builder.widget(new SlotWidget(containerInventory, 0, 205, 60, true, true)
+                .setBackgroundTexture(GuiTextures.PRIMITIVE_SLOT)
+                .setTooltipText("高敏反射层 升级插槽"));
+
+
+        builder.widget(new SlotWidget(containerInventory, 1, 225, 60, true, true)
+                .setBackgroundTexture(GuiTextures.PRIMITIVE_SLOT)
+                .setTooltipText("反射列镜面 升级插槽"));
+
+        builder.widget(new SlotWidget(containerInventory, 2, 245, 60, true, true)
+                .setBackgroundTexture(GuiTextures.PRIMITIVE_SLOT)
+                .setTooltipText("激光群优化 升级插槽"));
+
+        builder.widget(new ImageWidget(205, 78, 18, 6, GuiTextures.BUTTON_POWER_DETAIL));
+        builder.widget(new ImageWidget(225, 78, 18, 6, GuiTextures.BUTTON_POWER_DETAIL));
+        builder.widget(new ImageWidget(245, 78, 18, 6, GuiTextures.BUTTON_POWER_DETAIL));
         //按钮
-        builder.widget(new ClickButtonWidget(200, 140, 45, 20, "+1", this::incrementThresholdWeightO));
-        builder.widget(new ClickButtonWidget(245, 140, 45, 20, "-1", this::decrementThresholdWeightO));
-        builder.widget(new ClickButtonWidget(290, 140, 45, 20, "+5", this::incrementThresholdWeighF));
-        builder.widget(new ClickButtonWidget(335, 140, 45, 20, "-5", this::decrementThresholdWeightF));
+        builder.widget(new ClickButtonWidget(200, 140, 45, 20, "+1", this::incrementThresholdWeightO).setTooltipText("增加对应单位 1 权重"));
+        builder.widget(new ClickButtonWidget(245, 140, 45, 20, "-1", this::decrementThresholdWeightO).setTooltipText("降低对应单位 1 权重"));
+        builder.widget(new ClickButtonWidget(290, 140, 45, 20, "+5", this::incrementThresholdWeighF).setTooltipText("增加对应单位 5 权重"));
+        builder.widget(new ClickButtonWidget(335, 140, 45, 20, "-5", this::decrementThresholdWeightF).setTooltipText("降低对应单位 5 权重"));
 
         builder.bindPlayerInventory(entityPlayer.inventory, GuiTextures.SLOT, 205, 160);
 
@@ -649,7 +712,7 @@ public class MetaTileEntitySBPRC extends MetaTileEntityBaseWithControl implement
     @Override
     public AxisAlignedBB getRenderBoundingBox() {
         //这个影响模型的可视范围，正常方块都是 1 1 1，长宽高各为1，当这个方块离线玩家视线后，obj模型渲染会停止，所以可以适当放大这个大小能让模型有更多角度的可视
-        return new AxisAlignedBB(this.getPos().add(-100,-100,-100),this.getPos().add(100,100,100));
+        return new AxisAlignedBB(this.getPos().add(-50,-50,-50),this.getPos().add(50,50,50));
     }
     public boolean isGlobalRenderer() {
         return true;

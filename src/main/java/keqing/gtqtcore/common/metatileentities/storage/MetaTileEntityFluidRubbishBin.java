@@ -53,7 +53,7 @@ import static gregtech.api.unification.material.Materials.Steel;
 public class MetaTileEntityFluidRubbishBin extends MetaTileEntity{
     private final IPropertyFluidFilter fluidFilter;
     private final int color=Steel.getMaterialRGB();
-    private final int tankSize=4000;
+    private final int tankSize=16000;
     private FilteredFluidHandler fluidTank;
 
     public MetaTileEntityFluidRubbishBin(ResourceLocation metaTileEntityId) {

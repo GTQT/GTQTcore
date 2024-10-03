@@ -4911,6 +4911,10 @@ metaitem.gold_crop.name=金杂交稻
 metaitem.bronze_crop.name=青铜杂交稻
 metaitem.carbon_crop.name=碳杂交稻
 
+metaitem.high_reflect.name=高敏反射层 升级
+metaitem.reflect_glass.name=反射列镜面 升级
+metaitem.laser_group.name=激光群优化 升级
+
 metaitem.ae.silicon.name=孚能硅束
 metaitem.ae.wafer.name=待烧制孚能晶圆
 metaitem.ae.reticlea.name=逻辑芯片光掩模

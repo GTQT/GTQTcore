@@ -4894,6 +4894,10 @@ metaitem.gold_crop.name=Gold Hybrid Rice
 metaitem.bronze_crop.name=Bronze Hybrid Rice
 metaitem.carbon_crop.name=Carbon Hybrid Rice
 
+metaitem.high_reflect.name=High Sensitivity Reflective Layer Upgrade
+metaitem.reflect_glass.name=Reflective Mirror Upgrade
+metaitem.laser_group.name=Laser Cluster Optimization Upgrade
+
 metaitem.ae.silicon.name=Funeng Silicon Bundle
 metaitem.ae.wafer.name=Funeng Wafer to be Fired
 metaitem.ae.reticlea.name=Logic Chip Photomask

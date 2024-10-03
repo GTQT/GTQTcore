@@ -171,6 +171,9 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem COSMIC_TRANSISTOR;
     public static MetaItem<?>.MetaValueItem COSMIC_INDUCTOR;
 
+    public static MetaItem<?>.MetaValueItem HIGH_REFLECT;
+    public static MetaItem<?>.MetaValueItem REFLECT_GLASS;
+    public static MetaItem<?>.MetaValueItem LASER_GROUP;
     //  High Energy Physics items
     public static MetaItem<?>.MetaValueItem HYPOGEN_PLASMA_CONTAINMENT_CELL;
     public static MetaItem<?>.MetaValueItem ACTINIUM_SUPERHYDRIDE_PLASMA_CONTAINMENT_CELL;

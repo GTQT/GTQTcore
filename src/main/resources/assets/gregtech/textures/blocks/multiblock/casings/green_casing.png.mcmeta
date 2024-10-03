@@ -1,0 +1,14 @@
+{
+    "ctm": {
+        "ctm_version": 1,
+        "type": "CTM",
+        "layer": "CUTOUT",
+        "textures": [
+            "gregtech:blocks/multiblock/casings/green_casing_ctm"
+        ],
+        "extra": {
+            "connect_inside": true
+        }
+    }
+}
+

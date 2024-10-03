@@ -37,6 +37,7 @@ public class GTQTMetaBlocks {
     public static BlockActiveUniqueCasing ACTIVE_UNIQUE_CASING;
     public static GTQTElectronMicroscope ELECTRON_MICROSCOPE;
     public static GTQTElectrobath ELECTROBATH;
+    public static GTQTHCasing H_CASING;
     public static GTQTCompressedFusionReactor COMPRESSED_FUSION_REACTOR;
     public static GTQTParticleAccelerator PARTICLE_ACCELERATOR;
     public static GTQTNuclearFusion NUCLEAR_FUSION;
@@ -96,6 +97,8 @@ public class GTQTMetaBlocks {
         PCB_FACTORY_CASING.setRegistryName("pcb_factory_casing");
         ELECTROBATH = new GTQTElectrobath();
         ELECTROBATH.setRegistryName("electrobath");
+        H_CASING = new GTQTHCasing();
+        H_CASING.setRegistryName("h_casing");
         PARTICLE_ACCELERATOR = new GTQTParticleAccelerator();
         PARTICLE_ACCELERATOR.setRegistryName("particle_accelerator");
         NUCLEAR_FUSION = new GTQTNuclearFusion();
@@ -136,6 +139,7 @@ public class GTQTMetaBlocks {
         registerItemModel(PINE_LOG);
         registerItemModel(PINE_SAPLING);
         registerItemModel(ELECTROBATH);
+        registerItemModel(H_CASING);
         registerItemModel(MULTI_CASING);
         registerItemModel(ADV_BLOCK);
         registerItemModel(ADV_GLASS);

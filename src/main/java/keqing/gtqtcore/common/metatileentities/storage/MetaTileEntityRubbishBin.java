@@ -35,7 +35,7 @@ public class MetaTileEntityRubbishBin extends MetaTileEntity{
     public MetaTileEntityRubbishBin(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId);
         this.material = Steel;
-        this.inventorySize = 72;
+        this.inventorySize = 5;
         this.initializeInventory();
     }
 
@@ -75,7 +75,11 @@ public class MetaTileEntityRubbishBin extends MetaTileEntity{
 
     protected ModularUI createUI(EntityPlayer entityPlayer) {
         ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND, 176, 130).label(10, 5, this.getMetaFullName());
-        builder.slot(this.inventory, 0, 81 , 18 , GuiTextures.SLOT);
+        builder.slot(this.inventory, 0, 43 , 18 , GuiTextures.SLOT);
+        builder.slot(this.inventory, 1, 61 , 18 , GuiTextures.SLOT);
+        builder.slot(this.inventory, 2, 79 , 18 , GuiTextures.SLOT);
+        builder.slot(this.inventory, 3, 97 , 18 , GuiTextures.SLOT);
+        builder.slot(this.inventory, 4, 115 , 18 , GuiTextures.SLOT);
         return builder.bindPlayerInventory(entityPlayer.inventory, GuiTextures.SLOT, 7, 48).build(this.getHolder(), entityPlayer);
     }
     public int getItemStackLimit(ItemStack stack) {
