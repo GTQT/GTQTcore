@@ -36,6 +36,7 @@ import keqing.gtqtcore.api.unification.GTQTMaterials;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -201,6 +202,7 @@ public class MetaTileEntityLaserAlloyFurnace extends RecipeMapLaserMultiblockCon
     public void addInformation(ItemStack stack, World world, List<String> tooltip,
                                boolean advanced) {
         super.addInformation(stack, world, tooltip, advanced);
+        tooltip.add(I18n.format("实际线圈温度为 激光最大换热温度温度 与 线圈理论 温度的最大值，初次工作由0开始增长至最大值"));
     }
 
     @Override

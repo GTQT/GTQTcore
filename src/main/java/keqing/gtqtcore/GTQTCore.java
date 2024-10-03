@@ -11,6 +11,7 @@ import keqing.gtqtcore.common.items.GTQTMetaItems;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 import keqing.gtqtcore.common.worldgen.WorldGenAbandonedBase;
 import keqing.gtqtcore.integration.GTQTIntegration;
+import net.minecraft.client.Minecraft;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.*;
@@ -26,6 +27,8 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
         "after:gregtechfoodoption@[1.11.0,);"
 )
 public class GTQTCore {
+    public static final Minecraft MC = Minecraft.getMinecraft();
+
     public static final String PACK = "1.6.0";
 
     public static final String MODID = "gtqtcore";

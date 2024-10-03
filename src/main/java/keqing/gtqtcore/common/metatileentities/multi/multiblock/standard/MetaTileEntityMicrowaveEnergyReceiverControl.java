@@ -82,9 +82,9 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
     public void addInformation(ItemStack stack, @Nullable World world, @Nonnull List<String> tooltip, boolean advanced) {
         super.addInformation(stack, world, tooltip, advanced);
         tooltip.add(I18n.format("在输入总线放置绑定微波仓（覆盖板）的数据卡来将其存入系统对其供能，绑定的微波仓需要在多方块的供能范围内，否则不会存入系统"));
-        tooltip.add(I18n.format("升级结构来获得更大的供能范围与缓存电量,最大容量为 V[Math.min(heatingCoilLevel,9)]*320*coilHeight"));
-        tooltip.add(I18n.format("使用操作按钮配合加减按钮完成不同功能操作"));
+        tooltip.add(I18n.format("升级结构来获得更大的供能范围与缓存电量,最大容量为 V[Math.min(heatingCoilLevel,9)]*16*coilHeight EU"));
         tooltip.add(I18n.format("最多管理：%s 个设备,升级线圈获得更多的管理容量",64));
+        tooltip.add(I18n.format("使用操作按钮配合加减按钮完成不同功能操作"));
     }
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setLong("euStore", euStore);
@@ -245,27 +245,27 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
         int j=0;
         //1号
         builder.image(3, 4+j*30, 90, 30, GuiTextures.DISPLAY);
-        builder.widget((new AdvancedTextWidget(7, 8+j*30, this::addInfo1, 16777215)).setMaxWidthLimit(30).setClickHandler(this::handleDisplayClick));
+        builder.widget((new AdvancedTextWidget(7, 8+j*30, this::addInfo1, 16777215)).setMaxWidthLimit(70).setClickHandler(this::handleDisplayClick));
         builder.widget(new ClickButtonWidget(77, 4+j*30, 15, 30, "-2", data -> this.circuit = MathHelper.clamp(circuit -2, 0, maxLength-1)  ));
         j++;
         //2号
         builder.image(3, 4+j*30, 90, 30, GuiTextures.DISPLAY);
-        builder.widget((new AdvancedTextWidget(7, 8+j*30, this::addInfo2, 16777215)).setMaxWidthLimit(30).setClickHandler(this::handleDisplayClick));
+        builder.widget((new AdvancedTextWidget(7, 8+j*30, this::addInfo2, 16777215)).setMaxWidthLimit(70).setClickHandler(this::handleDisplayClick));
         builder.widget(new ClickButtonWidget(77, 4+j*30, 15, 30, "-1", data ->  this.circuit = MathHelper.clamp(circuit - 1, 0, maxLength-1) ));
         j++;
         //3号
         builder.image(3, 4+j*30, 90, 30, GuiTextures.DISPLAY);
-        builder.widget((new AdvancedTextWidget(7, 8+j*30, this::addInfo3, 16777215)).setMaxWidthLimit(30).setClickHandler(this::handleDisplayClick));
+        builder.widget((new AdvancedTextWidget(7, 8+j*30, this::addInfo3, 16777215)).setMaxWidthLimit(70).setClickHandler(this::handleDisplayClick));
         builder.widget(new ClickButtonWidget(77, 4+j*30, 15, 30, "->", data -> setStatue(!getStatue(circuit),circuit)));
         j++;
         //4号
         builder.image(3, 4+j*30, 90, 30, GuiTextures.DISPLAY);
-        builder.widget((new AdvancedTextWidget(7, 8+j*30, this::addInfo4, 16777215)).setMaxWidthLimit(30).setClickHandler(this::handleDisplayClick));
+        builder.widget((new AdvancedTextWidget(7, 8+j*30, this::addInfo4, 16777215)).setMaxWidthLimit(70).setClickHandler(this::handleDisplayClick));
         builder.widget(new ClickButtonWidget(77, 4+j*30, 15, 30, "+1", data -> this.circuit = MathHelper.clamp(circuit + 1, 0, maxLength-1)   ));
         j++;
         //5号
         builder.image(3, 4+j*30, 90, 30, GuiTextures.DISPLAY);
-        builder.widget((new AdvancedTextWidget(7, 8+j*30, this::addInfo5, 16777215)).setMaxWidthLimit(30).setClickHandler(this::handleDisplayClick));
+        builder.widget((new AdvancedTextWidget(7, 8+j*30, this::addInfo5, 16777215)).setMaxWidthLimit(70).setClickHandler(this::handleDisplayClick));
         builder.widget(new ClickButtonWidget(77, 4+j*30, 15, 30, "+2", data -> this.circuit = MathHelper.clamp(circuit + 2, 0, maxLength-1)  ));
 
 
@@ -338,7 +338,7 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
     }
     public long maxStore()
     {
-        return V[Math.min(heatingCoilLevel,9)]*320*coilHeight;
+        return V[Math.min(heatingCoilLevel,9)]*20*coilHeight;
     }
     @Override
     protected void updateFormedValid() {
@@ -617,6 +617,14 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
                     x = compound.getInteger("x");
                     y = compound.getInteger("y");
                     z = compound.getInteger("z");
+
+                    if(sim)for(int j=0;j<maxLength;j++)
+                    {
+                        if(io[i][0]==1)
+                        {
+                            if(x==io[i][1]&&y==io[i][2]&&z==io[i][3])return false;
+                        }
+                    }
 
                     MetaTileEntity mte = GTUtility.getMetaTileEntity(this.getWorld(), new BlockPos(x,y,z));
                     if (mte instanceof MetaTileEntityMicrowaveEnergyReceiver) {

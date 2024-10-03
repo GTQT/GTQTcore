@@ -12,7 +12,7 @@ import java.util.concurrent.CompletableFuture;
 public class TitleUtils {
     public static final String DEFAULT_TITLE = "GregTech : Quantum Transition| ModPack Ver:" +GTQTCore.PACK+ " - GTQTCore Ver:"+GTQTCore.VERSION;
     public static String currentTitle = null;
-    public static String TEST = "This integration package is currently in beta testing mode!";
+    public static String TEST = "";
     public static void checkTitleState() {
         if (currentTitle == null) {
             return;
@@ -54,6 +54,6 @@ public class TitleUtils {
 
     public static String buildTitle(String RANDOM,String STATUE) {
         if(STATUE!=null)return String.format("%s | Loading State：%s | %s",DEFAULT_TITLE,STATUE,TEST);
-        return String.format("%s | QQ group：1073091808 494136307 | %s",DEFAULT_TITLE,TEST);
+        return String.format("%s | QQ：1073091808 494136307 | %s",DEFAULT_TITLE,TEST);
     }
 }

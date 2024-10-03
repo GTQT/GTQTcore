@@ -393,7 +393,7 @@ public class MetaTileEntityMegaCleanroom extends MetaTileEntityCleanroom  implem
     protected void initializeAbilities() {
         this.energyContainer = new EnergyContainerList(this.getAbilities(MultiblockAbility.INPUT_ENERGY));
     }
-
+/*
     @Override
     public List<MultiblockShapeInfo> getMatchingShapes() {
         ArrayList<MultiblockShapeInfo> shapeInfo = new ArrayList<>();
@@ -449,6 +449,8 @@ public class MetaTileEntityMegaCleanroom extends MetaTileEntityCleanroom  implem
 
         return shapeInfo;
     }
+
+ */
 
     @Override
     public void addInformation(ItemStack stack,  World player, List<String> tooltip, boolean advanced) {

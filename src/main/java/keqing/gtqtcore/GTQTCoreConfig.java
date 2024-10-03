@@ -1,6 +1,8 @@
 package keqing.gtqtcore;
 
 import net.minecraftforge.common.config.Config;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import static keqing.gtqtcore.GTQTCore.MODID;
 
@@ -10,11 +12,33 @@ public class GTQTCoreConfig {
     @Config.Comment("Config options for GTQTCore")
     public static MachineSwitch MachineSwitch = new MachineSwitch();
     public static WorldGenSwitch WorldGenSwitch = new WorldGenSwitch();
+    public static OBJRenderSwitch OBJRenderSwitch = new OBJRenderSwitch();
 
     public static class WorldGenSwitch {
         @Config.Comment("Chance of generating abandoned base in chunk = 1 / 100 * THIS_VALUE. 0 disables abandoned base generation. Default: 5 ,0 to close"  )
         public int abandonedBaseRarity = 5;
 
+    }
+    public static class OBJRenderSwitch {
+        @Config.Comment("OBJ模型渲染开启")
+        @Config.RequiresMcRestart
+        @Config.Name("Enable obj Model")
+        public boolean EnableObj = true;
+
+        @Config.Comment("生物反应室OBJ模型渲染开启")
+        @Config.RequiresMcRestart
+        @Config.Name("Enable obj Model Biological Reaction")
+        public boolean EnableObjBiologicalReaction = true;
+
+        @Config.Comment("原始林场OBJ模型渲染开启")
+        @Config.RequiresMcRestart
+        @Config.Name("Enable obj Model Primitive Tree Farmer")
+        public boolean EnableObjPrimitiveTreeFarmer = true;
+
+        @Config.Comment("天基折射棱镜中央控制系统OBJ模型渲染开启")
+        @Config.RequiresMcRestart
+        @Config.Name("Enable obj Model SBPRC")
+        public boolean EnableObjSBPRC = true;
     }
     public static class MachineSwitch {
         @Config.Comment("终局设备开关，包括尼戴，神锻。注意，严重影响加载时间！！！")
@@ -36,21 +60,5 @@ public class GTQTCoreConfig {
         @Config.RequiresMcRestart
         @Config.Name("Core Machine NBT Store Switch")
         public boolean CoreMachineNBTStoreSwitch = false;
-
-        @Config.Comment("OBJ模型渲染开启")
-        @Config.RequiresMcRestart
-        @Config.Name("Enable obj Model")
-        public boolean EnableObj = true;
-
-        @Config.Comment("生物反应室OBJ模型渲染开启")
-        @Config.RequiresMcRestart
-        @Config.Name("Enable obj Model Biological Reaction")
-        public boolean EnableObjBiologicalReaction = true;
-
-        @Config.Comment("原始林场OBJ模型渲染开启")
-        @Config.RequiresMcRestart
-        @Config.Name("Enable obj Model Primitive Tree Farmer")
-        public boolean EnableObjPrimitiveTreeFarmer = true;
     }
-
 }

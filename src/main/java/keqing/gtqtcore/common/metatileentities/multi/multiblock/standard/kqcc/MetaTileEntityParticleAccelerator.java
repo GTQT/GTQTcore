@@ -9,13 +9,14 @@ import gregtech.api.block.IHeatingCoilBlockStats;
 import gregtech.api.capability.*;
 import gregtech.api.capability.impl.*;
 import gregtech.api.gui.GuiTextures;
+import gregtech.api.gui.ModularUI;
 import gregtech.api.gui.Widget;
-import gregtech.api.gui.widgets.ClickButtonWidget;
-import gregtech.api.gui.widgets.WidgetGroup;
+import gregtech.api.gui.widgets.*;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
+import gregtech.api.metatileentity.multiblock.MultiblockWithDisplayBase;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.*;
 import gregtech.api.recipes.Recipe;
@@ -25,6 +26,7 @@ import gregtech.api.recipes.recipeproperties.FusionEUToStartProperty;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.util.GTTransferUtils;
 import gregtech.api.util.GTUtility;
+import gregtech.api.util.LocalizationUtils;
 import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
@@ -55,6 +57,7 @@ import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 import keqing.gtqtcore.common.metatileentities.single.electric.MetaTileEntityParticleAcceleratorIO;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -366,9 +369,8 @@ public class MetaTileEntityParticleAccelerator extends GTQTRecipeMapMultiblockCo
     }
     @Override
     protected boolean shouldShowVoidingModeButton() {
-        return false;
+        return true;
     }
-
     @Nonnull
     @Override
     protected ICubeRenderer getFrontOverlay() {
@@ -420,7 +422,7 @@ public class MetaTileEntityParticleAccelerator extends GTQTRecipeMapMultiblockCo
         if (!isStructureFormed()) return;
         long energyToDrain = GTValues.VA[EV];
         long resultEnergy = energyContainer.getEnergyStored() - energyToDrain;
-
+        if(this.getRecipeMap() == PARTICLE_ACCELERATOR_RECIPES)return;
         if(shuliu&&this.getRecipeMap() == BEAM_COLLECTION)
         {
             if (resultEnergy >= 0L && resultEnergy <= energyContainer.getEnergyCapacity()) {
@@ -431,7 +433,8 @@ public class MetaTileEntityParticleAccelerator extends GTQTRecipeMapMultiblockCo
                 getParticle(0, 0, -3);
             }
         }
-        else {
+        if((this.getRecipeMap() == NUCLEOSYNTHESIS&&bashi)||(this.getRecipeMap() == TARGET_CHAMBER&&hehecheng))
+        {
             FluidStack HEAT_STACK = LiquidNitrogen.getFluid(d);
             //待机默认减速
             if (speed >= 0) {
@@ -484,65 +487,134 @@ public class MetaTileEntityParticleAccelerator extends GTQTRecipeMapMultiblockCo
                 if (speed > 0) speed = speed - 20;
             }
         }
-
-
     }
-
 
     @Override
-    @Nonnull
-    protected Widget getFlexButton(int x, int y, int width, int height) {
-        WidgetGroup group = new WidgetGroup(x, y, width, height);
-        group.addWidget(new ClickButtonWidget(0, 0, 9, 9, "", this::decrementThresholdS)
-                .setButtonTexture(GuiTextures.BUTTON_THROTTLE_MINUS)
-                .setTooltipText("gtqtcore.multiblock.pam.threshold_decrement"));
-        group.addWidget(new ClickButtonWidget(9, 0, 9, 9, "", this::incrementThresholdS)
-                .setButtonTexture(GuiTextures.BUTTON_THROTTLE_PLUS)
-                .setTooltipText("gtqtcore.multiblock.pam.threshold_increment"));
+    protected ModularUI.Builder createUITemplate(EntityPlayer entityPlayer) {
+        ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND, 300, 240);
 
-        group.addWidget(new ClickButtonWidget(0, 9, 9, 9, "", this::decrementThresholdA)
-                .setButtonTexture(GuiTextures.BUTTON_THROTTLE_MINUS)
-                .setTooltipText("gtqtcore.multiblock.paa.threshold_decrement"));
-        group.addWidget(new ClickButtonWidget(9, 9, 9, 9, "", this::incrementThresholdA)
-                .setButtonTexture(GuiTextures.BUTTON_THROTTLE_PLUS)
-                .setTooltipText("gtqtcore.multiblock.paa.threshold_increment"));
-        return group;
+        // Display
+        builder.image(132, 4, 162, 115, GuiTextures.DISPLAY);
+        builder.dynamicLabel(135, 8, () -> "大型粒子对撞研究复合体", 0xFFFFFF);
+        builder.widget((new AdvancedTextWidget(135, 20, this::addDisplayText, 16777215)).setMaxWidthLimit(160).setClickHandler(this::handleDisplayClick));
+
+        // Display
+        builder.image(3, 4, 130, 115, GuiTextures.DISPLAY);
+        builder.widget((new AdvancedTextWidget(7, 8, this::addTotal, 16777215)).setMaxWidthLimit(130).setClickHandler(this::handleDisplayClick));
+
+        // Energy
+        builder.image(3, 120, 130, 115, GuiTextures.DISPLAY);
+        builder.widget((new AdvancedTextWidget(7, 128, this::addEnergy, 16777215)).setMaxWidthLimit(130).setClickHandler(this::handleDisplayClick));
+
+
+        IControllable controllable = getCapability(GregtechTileCapabilities.CAPABILITY_CONTROLLABLE, null);
+        if (controllable != null) {
+            builder.widget(new ImageCycleButtonWidget(8, 100, 18, 18, GuiTextures.BUTTON_POWER,
+                    controllable::isWorkingEnabled, controllable::setWorkingEnabled));
+        }
+
+        // Voiding Mode Button
+        builder.widget(new ImageCycleButtonWidget(38, 100, 18, 18, GuiTextures.BUTTON_VOID_MULTIBLOCK,
+                4, this::getVoidingMode, this::setVoidingMode)
+                .setTooltipHoverString(MultiblockWithDisplayBase::getVoidingModeTooltip));
+
+        // Distinct Buses Button
+        builder.widget(new ImageCycleButtonWidget(68, 100, 18, 18, GuiTextures.BUTTON_DISTINCT_BUSES,
+                this::isDistinct, this::setDistinct)
+                .setTooltipHoverString(i -> "gregtech.multiblock.universal.distinct_" +
+                        (i == 0 ? "disabled" : "enabled")));
+
+        builder.widget((new ImageCycleButtonWidget(98, 100, 18, 18, GuiTextures.BUTTON_MULTI_MAP, this.getAvailableRecipeMaps().length, this::getRecipeMapIndex, this::setRecipeMapIndex)).shouldUseBaseBackground().singleTexture().setTooltipHoverString((i) -> LocalizationUtils.format("gregtech.multiblock.multiple_recipemaps.header") + " " + LocalizationUtils.format("recipemap." + this.getAvailableRecipeMaps()[i].getUnlocalizedName() + ".name"))
+        );
+
+        builder.widget(new ClickButtonWidget(132, 120, 48, 18, "核子合成", data ->this.setRecipeMapIndex(1)));
+        builder.widget(new ClickButtonWidget(180, 120, 48, 18, "靶室轰击", data ->this.setRecipeMapIndex(2)));
+        builder.widget(new ClickButtonWidget(228, 120, 48, 18, "束流收集", data ->this.setRecipeMapIndex(3)));
+
+        builder.widget(new ClickButtonWidget(132, 140, 24, 18, "V+", data -> this.Mode = MathHelper.clamp(Mode + 1, 1, 3) ));
+        builder.widget(new ClickButtonWidget(156, 140, 24, 18, "V-", data -> this.Mode = MathHelper.clamp(Mode - 1, 1, 3)   ));
+        builder.widget(new ClickButtonWidget(180, 140, 24, 18, "A+", data -> {
+            this.angle = MathHelper.clamp(angle + 1, 0, 8);
+            speed=speed*0.8;
+        }));
+        builder.widget(new ClickButtonWidget(204, 140, 24, 18, "A-", data -> {
+            this.angle = MathHelper.clamp(angle - 1, 0, 8);
+            speed=speed*0.8;
+        }));
+
+        builder.widget(new ClickButtonWidget(228, 140, 48, 18, "科研模式", data ->this.setRecipeMapIndex(0)));
+
+        builder.bindPlayerInventory(entityPlayer.inventory, GuiTextures.SLOT, 132, 160);
+        return builder;
     }
-
-    private void incrementThresholdS(Widget.ClickData clickData) {
-        this.Mode = MathHelper.clamp(Mode + 1, 1, 3);
+    protected void addEnergy(List<ITextComponent> textList) {
+        if(!isStructureFormed())
+        {
+            textList.add(new TextComponentTranslation("结构未成型！"));
+            return;
+        }
+        textList.add(new TextComponentTranslation("机器能源终端："));
+        textList.add(new TextComponentTranslation("蓄能上限：%s ",this.energyContainer.getEnergyCapacity()));
+        textList.add(new TextComponentTranslation("能量缓存：%s", this.energyContainer.getEnergyStored()));
     }
+    protected void addTotal(List<ITextComponent> textList) {
+        if(!isStructureFormed())
+        {
+            textList.add(new TextComponentTranslation("结构未成型！"));
+            return;
+        }
+        textList.add(new TextComponentTranslation("拓展结构："));
+        textList.add(new TextComponentTranslation("束流收集：%s ",shuliu));
+        textList.add(new TextComponentTranslation("靶室轰击：%s", bashi));
+        textList.add(new TextComponentTranslation("核子合成：%s", hehecheng));
 
-    private void decrementThresholdS(Widget.ClickData clickData) {
-        this.Mode = MathHelper.clamp(Mode - 1, 1, 3);
-    }
-
-    private void incrementThresholdA(Widget.ClickData clickData) {
-        this.angle = MathHelper.clamp(angle + 1, 0, 8);
-        speed=speed*0.8;
-    }
-
-    private void decrementThresholdA(Widget.ClickData clickData) {
-        this.angle = MathHelper.clamp(angle - 1, 0, 8);
-        speed=speed*0.8;
     }
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
-        textList.add(new TextComponentTranslation("部件束流：%s 靶室：%s 核合成：%s",shuliu,bashi,hehecheng));
+        if(!isStructureFormed())
+        {
+            textList.add(new TextComponentTranslation("结构未成型！"));
+            return;
+        }
         if(this.getRecipeMap() == PARTICLE_ACCELERATOR_RECIPES)
         {
-            textList.add(new TextComponentTranslation("科研模式启动"));
+            textList.add(new TextComponentTranslation("科研模式"));
         }
-        if(this.getRecipeMap() == BEAM_COLLECTION&&shuliu)
+        if(this.getRecipeMap() == BEAM_COLLECTION)
         {
-            textList.add(new TextComponentTranslation("束流收集模式启动"));
+            if(shuliu) {
+                textList.add(new TextComponentTranslation("束流收集模式"));
 
-            if(getParticle(3,0,0))textList.add(new TextComponentTranslation("束流IO %s",getParticle(3,0,0)));
-            if(getParticle(-3,0,0)) textList.add(new TextComponentTranslation("束流IO %s",getParticle(-3,0,0)));
-            if(getParticle(0,0,3))textList.add(new TextComponentTranslation("束流IO %s",getParticle(0,0,3)));
-            if(getParticle(0,0,-3))textList.add(new TextComponentTranslation("束流IO %s",getParticle(0,0,-3)));
+                textList.add(new TextComponentTranslation("请在多方块的粒子源端口安装对应粒子源机器（名字叫基本了粒子源！ID是15096-15099！！），粒子源机器工作时多方块会自动根据其工作情况输出对应粒子"));
+
+                if (getParticle(3, 0, 0)) textList.add(new TextComponentTranslation("束流IO %s", getParticle(3, 0, 0)));
+                if (getParticle(-3, 0, 0))
+                    textList.add(new TextComponentTranslation("束流IO %s", getParticle(-3, 0, 0)));
+                if (getParticle(0, 0, 3)) textList.add(new TextComponentTranslation("束流IO %s", getParticle(0, 0, 3)));
+                if (getParticle(0, 0, -3))
+                    textList.add(new TextComponentTranslation("束流IO %s", getParticle(0, 0, -3)));
+            }
+            else textList.add(new TextComponentTranslation("未安装 束流收集 拓展结构！"));
+        }
+        if(this.getRecipeMap() == NUCLEOSYNTHESIS) {
+            if(bashi)textList.add(new TextComponentTranslation("核子合成"));
+            else textList.add(new TextComponentTranslation("未安装 核子合成 拓展结构！"));
+        }
+        if(this.getRecipeMap() == TARGET_CHAMBER) {
+            if(bashi)textList.add(new TextComponentTranslation("靶室轰击"));
+            else textList.add(new TextComponentTranslation("未安装 靶室轰击 拓展结构！"));
         }
         if((this.getRecipeMap() == NUCLEOSYNTHESIS&&bashi)||(this.getRecipeMap() == TARGET_CHAMBER&&hehecheng)) {
+
+
+            textList.add(new TextComponentTranslation("在本模式下加速粒子需要消耗液氮！"));
+
+            if (getInputFluidInventory() != null) {
+                FluidStack STACK = getInputFluidInventory().drain(LiquidNitrogen.getFluid(Integer.MAX_VALUE), false);
+                int liquidOxygenAmount = STACK == null ? 0 : STACK.amount;
+                textList.add(new TextComponentTranslation("gtqtcore.multiblock.pa.amount", TextFormattingUtil.formatNumbers((liquidOxygenAmount))));
+            }
+
             if (Mode == 0) textList.add(new TextComponentTranslation("初始化"));
             if (Mode == 3) textList.add(new TextComponentTranslation("gtqtcore.pa.mode1", angle, (int)speed));
             if (Mode == 2) textList.add(new TextComponentTranslation("gtqtcore.pa.mode2", angle, (int)speed));
@@ -577,14 +649,13 @@ public class MetaTileEntityParticleAccelerator extends GTQTRecipeMapMultiblockCo
             }
             textList.add(new TextComponentTranslation("gtqtcore.pa.agp1"));
 
-            if (getInputFluidInventory() != null) {
-                FluidStack STACK = getInputFluidInventory().drain(LiquidNitrogen.getFluid(Integer.MAX_VALUE), false);
-                int liquidOxygenAmount = STACK == null ? 0 : STACK.amount;
-                textList.add(new TextComponentTranslation("gtqtcore.multiblock.pa.amount", TextFormattingUtil.formatNumbers((liquidOxygenAmount))));
-            }
+
 
         }
     }
+
+
+
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {

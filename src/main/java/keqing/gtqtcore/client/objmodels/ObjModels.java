@@ -18,6 +18,9 @@ public class ObjModels {
     public static final IModelCustom Tree_Model1 = AdvancedModelLoader.loadModel(new ResourceLocation("gtqtcore", "models/obj/tree.obj"));
     public static final ResourceLocation Tree_pic = new ResourceLocation("gtqtcore", "models/obj/tree.png");
 
+    public static final IModelCustom SpaceLJ = AdvancedModelLoader.loadModel(new ResourceLocation("gtqtcore", "models/obj/spacelj.obj"));
+    public static final ResourceLocation SpaceLJ_pic = new ResourceLocation("gtqtcore", "models/obj/spacelj.png");
+
 
 
 }

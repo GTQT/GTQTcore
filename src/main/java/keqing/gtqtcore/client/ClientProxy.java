@@ -1,5 +1,5 @@
 package keqing.gtqtcore.client;
-
+import keqing.gtqtcore.client.utils.TextureUtils;
 import keqing.gtqtcore.api.utils.GTQTLog;
 import keqing.gtqtcore.client.renderer.handler.StructureSelectRenderer;
 import keqing.gtqtcore.client.textures.GTQTTextures;
@@ -28,6 +28,7 @@ public class ClientProxy extends CommonProxy {
     public void construction() {
         super.construction();
         TitleUtils.setRandomTitle("*Construction*");
+        TextureUtils.setWindowIcon();
     }
     public void preInit() {
         super.preInit();

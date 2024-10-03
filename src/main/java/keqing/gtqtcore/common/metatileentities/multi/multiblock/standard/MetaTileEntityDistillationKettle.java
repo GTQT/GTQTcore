@@ -142,7 +142,7 @@ public class MetaTileEntityDistillationKettle extends RecipeMapMultiblockControl
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("谁家LV做石化", new Object[0]));
         tooltip.add(I18n.format("gtqt.machine.distillation_kettle.1"));
-        tooltip.add(I18n.format("输入蒸汽来为机器预热！每轮配方会消耗百分之六十四的蒸汽缓存"));
+        tooltip.add(I18n.format("输入蒸汽来为机器预热！每轮配方会消耗64%%的蒸汽缓存"));
         tooltip.add(I18n.format("当蒸汽缓存大于8000时享有二倍并行，配方耗时减半"));
     }
 

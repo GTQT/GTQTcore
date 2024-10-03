@@ -164,6 +164,7 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<SimpleRecipeBuilder> DECAY_CHAMBER_RECIPES;
     public static final RecipeMap<CACasingTierRecipeBuilder> COMPONENT_ASSEMBLY_LINE_RECIPES;
     public static final RecipeMap<ELERecipeBuilder> ELECTROBATH;
+    public static final RecipeMap<SimpleRecipeBuilder> SWARM_GROWTH;
     public static final RecipeMap<ComputationRecipeBuilder> PARTICLE_ACCELERATOR_RECIPES;
     public static final RecipeMap<SimpleRecipeBuilder> DIGESTER_RECIPES;
     public static final RecipeMap<BRRecioeBuilder> BIOLOGICAL_REACTION_RECIPES;
@@ -281,6 +282,10 @@ public class GTQTcoreRecipeMaps {
                 .setSound(GTSoundEvents.CHEMICAL_REACTOR);
 
         DECAY_CHAMBER_RECIPES = new RecipeMap<>("decay_chamber_recipes",  1,  1,  1,  1, new SimpleRecipeBuilder(), false)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_HAMMER, ProgressWidget.MoveType.VERTICAL_DOWNWARDS)
+                .setSound(GTSoundEvents.SCIENCE);
+
+        SWARM_GROWTH = new RecipeMap<>("swarm_growth",  16,  1,  0,  0, new SimpleRecipeBuilder(), false)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_HAMMER, ProgressWidget.MoveType.VERTICAL_DOWNWARDS)
                 .setSound(GTSoundEvents.SCIENCE);
 
@@ -415,7 +420,7 @@ public class GTQTcoreRecipeMaps {
                 .setSound(GTSoundEvents.TURBINE)
                 .allowEmptyOutput();
 
-        CW_LASER_ENGRAVER_RECIPES = new RecipeMap<>("cw_laser_engraver", 2, 2, 1, 0, new SimpleRecipeBuilder(), false)
+        CW_LASER_ENGRAVER_RECIPES = new RecipeMap<>("cw_laser_engraver", 2, 6, 1, 0, new SimpleRecipeBuilder(), false)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL)
                 .setSlotOverlay(false, false, false, GuiTextures.CIRCUIT_OVERLAY)
                 .setSlotOverlay(false, false, true, GuiTextures.CIRCUIT_OVERLAY)

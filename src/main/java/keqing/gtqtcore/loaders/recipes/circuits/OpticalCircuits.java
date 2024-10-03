@@ -122,16 +122,6 @@ public class OpticalCircuits {
                 .cleanroom(CleanroomType.CLEANROOM)
                 .buildAndRegister();
 
-        //  Si + 4Cl -> SiCl4
-        CHEMICAL_RECIPES.recipeBuilder()
-                .input(dust, Silicon)
-                .fluidInputs(Chlorine.getFluid(4000))
-                .circuitMeta(1)
-                .fluidOutputs(SiliconTetrachloride.getFluid(1000))
-                .EUt(VA[LV])
-                .duration(15 * SECOND)
-                .buildAndRegister();
-
         //  Another GeCl4 recipe
         //  You can get GeCl4 by Germanium process, but when you make optical circuit,
         //  through Isa mill chain, you can directly get Germanium, so maybe this recipe is useful.

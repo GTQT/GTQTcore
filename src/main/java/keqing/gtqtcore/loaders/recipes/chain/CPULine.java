@@ -619,40 +619,46 @@ public class CPULine {
                 .EUt(30)
                 .buildAndRegister();
 
+        //  Si + 4Cl -> SiCl4
         CHEMICAL_RECIPES.recipeBuilder()
-                .notConsumable(dust,CopperCl)
-                .fluidInputs(Trichlorosilane.getFluid(4000))
-                .fluidOutputs(Silane.getFluid(1000))
-                .fluidOutputs(SiliconTetrachloride.getFluid(3000))
-                .duration(200)
-                .EUt(30)
+                .input(dust, Silicon)
+                .fluidInputs(Chlorine.getFluid(4000))
+                .circuitMeta(1)
+                .fluidOutputs(SiliconTetrachloride.getFluid(1000))
+                .EUt(VA[MV])
+                .duration(300)
                 .buildAndRegister();
 
         CHEMICAL_RECIPES.recipeBuilder()
                 .fluidInputs(SiliconTetrachloride.getFluid(1000))
                 .input(dust,Sodium,4)
-                .output(dust,CSilicon)
+                .output(dust,Polysilicon)
                 .output(dust,Salt,8)
-                .duration(200)
-                .EUt(30)
+                .duration(600)
+                .EUt(VA[MV])
                 .buildAndRegister();
 
-        ELECTROLYZER_RECIPES.recipeBuilder()
-                .fluidInputs(SiliconTetrachloride.getFluid(1000))
-                .fluidOutputs(Chlorine.getFluid(4000))
-                .output(dust, CSilicon, 1)
-                .duration(200)
-                .EUt(30)
+        //三氯氢硅
+        CHEMICAL_RECIPES.recipeBuilder()
+                .duration(300)
+                .EUt(VA[MV])
+                .input(dust, Silicon)
+                .circuitMeta(1)
+                .fluidInputs(HydrochloricAcid.getFluid(3000))
+                .fluidOutputs(Trichlorosilane.getFluid(1000))
+                .fluidOutputs(Hydrogen.getFluid(2000))
                 .buildAndRegister();
 
-        ELECTROLYZER_RECIPES.recipeBuilder()
-                .fluidInputs(Silane.getFluid(1000))
-                .fluidOutputs(Hydrogen.getFluid(4000))
-                .output(dust, CSilicon, 1)
-                .duration(200)
-                .EUt(30)
-                .buildAndRegister();
+        CHEMICAL_RECIPES.recipeBuilder()
+                .duration(300) // 反应持续时间设为300个ticks
+                .EUt(VA[MV]) // 设定电力消耗等级为MV
+                .fluidInputs(Trichlorosilane.getFluid(1000)) // 输入1000mB的三氯硅烷
+                .fluidInputs(Hydrogen.getFluid(2000)) // 输入2000mB的氢气
+                .fluidOutputs(HydrochloricAcid.getFluid(3000)) // 输出3000mB的盐酸
+                .output(dust, Polysilicon, 1) // 输出1个多晶硅粉
+                .buildAndRegister(); // 构建并注册此化学反应
 
+        //长大
         czpuller(SILICON_BOULE,Boron,MV);
         czpuller(AE_SILICON,Fluix,HV);
         czpuller(PHOSPHORUS_BOULE,Phosphorus,EV);
@@ -680,7 +686,7 @@ public class CPULine {
                     .duration(20000/(4-tier))
                     .EUt(VA[tier])
                     .fluidInputs(Nitrogen.getFluid(4000))
-                    .input(block, CSilicon, 32)
+                    .input(block, Polysilicon, 32)
                     .input(dust, GalliumArsenide, 8)
                     .input(dust, material, 1)
                     .output(doule, (4-tier)/2)
@@ -692,7 +698,7 @@ public class CPULine {
                     .duration(20000/(6-tier))
                     .EUt(VA[tier])
                     .fluidInputs(Helium.getFluid(4000))
-                    .input(block, CSilicon, 32)
+                    .input(block, Polysilicon, 32)
                     .input(dust, GalliumArsenide, 8)
                     .input(dust, material, 1)
                     .output(doule, (6-tier)/2)
@@ -704,7 +710,7 @@ public class CPULine {
                     .duration(20000/(8-tier))
                     .EUt(VA[tier])
                     .fluidInputs(Radon.getFluid(4000))
-                    .input(block, CSilicon, 32)
+                    .input(block, Polysilicon, 32)
                     .input(dust, IndiumGalliumPhosphide, 8)
                     .input(dust, material, 1)
                     .output(doule, (8-tier)/2)
@@ -716,7 +722,7 @@ public class CPULine {
                     .duration(20000/(10-tier))
                     .EUt(VA[tier])
                     .fluidInputs(Xenon.getFluid(4000))
-                    .input(block, CSilicon, 32)
+                    .input(block, Polysilicon, 32)
                     .input(dust, IndiumGalliumPhosphide, 8)
                     .input(dust, material, 1)
                     .output(doule, (10-tier)/2)
@@ -728,7 +734,7 @@ public class CPULine {
                     .duration(20000/(12-tier))
                     .EUt(VA[tier])
                     .fluidInputs(MetastableOganesson.getFluid(4000))
-                    .input(block, CSilicon, 32)
+                    .input(block, Polysilicon, 32)
                     .input(dust, NaquadriaGalliumIndium, 8)
                     .input(dust, material, 1)
                     .output(doule, (12-tier)/2)
@@ -868,7 +874,7 @@ public class CPULine {
                 .EUt(480)
                 .input(plate,Polytetrafluoroethylene)
                 .input(foil,Platinum,8)
-                .fluidInputs(Brominatedepoxyresins.getFluid(576))
+                .fluidInputs(Bps.getFluid(576))
                 .fluidInputs(StyreneButadieneRubber.getFluid(576))
                 .output(IMPREGNATED_EPOXY)
                 .buildAndRegister();

@@ -318,7 +318,7 @@ public class FirstDegreeMaterials {
                 .color(0xFFFADA)
                 .build();
 
-        GTQTMaterials.CSilicon = new Material.Builder(getMaterialsId(), gregtechId("csilicon"))
+        GTQTMaterials.Polysilicon = new Material.Builder(getMaterialsId(), gregtechId("polysilicon"))
                 .ingot()
                 .color(0x3C3C50).iconSet(METALLIC)
                 .flags(GENERATE_FOIL)

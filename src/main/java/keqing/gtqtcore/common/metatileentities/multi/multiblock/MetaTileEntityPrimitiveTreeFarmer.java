@@ -202,7 +202,7 @@ public class MetaTileEntityPrimitiveTreeFarmer extends MultiblockWithDisplayBase
     public void renderMetaTileEntity(double x, double y, double z, float partialTicks) {
         IFastRenderMetaTileEntity.super.renderMetaTileEntity(x, y, z, partialTicks);
 
-        if(isStructureFormed()&& GTQTCoreConfig.MachineSwitch.EnableObj && GTQTCoreConfig.MachineSwitch.EnableObjPrimitiveTreeFarmer)
+        if(isStructureFormed()&& GTQTCoreConfig.OBJRenderSwitch.EnableObj && GTQTCoreConfig.OBJRenderSwitch.EnableObjPrimitiveTreeFarmer)
         {
             final int xDir = this.getFrontFacing().getOpposite().getXOffset();
             final int zDir = this.getFrontFacing().getOpposite().getZOffset();

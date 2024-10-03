@@ -13,10 +13,12 @@ public class OrePrefixAdditions {
         MetaItems.addOrePrefix(GTQTOrePrefix.nanosensor);
         MetaItems.addOrePrefix(GTQTOrePrefix.soldering_iron_head);
         MetaItems.addOrePrefix(GTQTOrePrefix.plate_curved);
+
         MetaItems.addOrePrefix(GTQTOrePrefix.swarm);
         MetaItems.addOrePrefix(GTQTOrePrefix.singularity);
         MetaItems.addOrePrefix(GTQTOrePrefix.leaf);
         MetaItems.addOrePrefix(GTQTOrePrefix.fcrop);
+
         MetaItems.addOrePrefix(GTQTOrePrefix.pellets);
         MetaItems.addOrePrefix(GTQTOrePrefix.upellets);
         MetaItems.addOrePrefix(GTQTOrePrefix.ranliaowan);

@@ -327,7 +327,7 @@ public class MetaTileEntityLoader {
                 .inputs(MetaTileEntities.HULL[GTValues.HV].getStackForm())
                 .input(plate, NanometerBariumTitanate, 6)
                 .input(frameGt, StainlessSteel, 1)
-                .fluidInputs(Brominatedepoxyresins.getFluid(1440))
+                .fluidInputs(Bps.getFluid(1440))
                 .circuitMeta(1)
                 .outputs(GTQTMetaBlocks.ISA_CASING.getItemVariant(ASEPTIC_FARM_CASING))
                 .duration(20).EUt(30).buildAndRegister();
@@ -351,7 +351,7 @@ public class MetaTileEntityLoader {
 
         BLAST_RECIPES.recipeBuilder()
                 .input(dust,GalliumArsenide,16)
-                .input(plate,CSilicon,16)
+                .input(plate,Polysilicon,16)
                 .fluidInputs(Nitrogen.getFluid(4000))
                 .output(SOLAR_PLATE_MKI,1)
                 .blastFurnaceTemp(2700)
@@ -359,7 +359,7 @@ public class MetaTileEntityLoader {
 
         BLAST_RECIPES.recipeBuilder()
                 .input(dust,Germanium,16)
-                .input(plate,CSilicon,16)
+                .input(plate,Polysilicon,16)
                 .fluidInputs(Nitrogen.getFluid(4000))
                 .output(SOLAR_PLATE_MKII,1)
                 .blastFurnaceTemp(3600)
@@ -367,7 +367,7 @@ public class MetaTileEntityLoader {
 
         BLAST_RECIPES.recipeBuilder()
                 .input(dust,IndiumGalliumPhosphide,16)
-                .input(plate,CSilicon,16)
+                .input(plate,Polysilicon,16)
                 .fluidInputs(Nitrogen.getFluid(4000))
                 .output(SOLAR_PLATE_MKIII,1)
                 .blastFurnaceTemp(4500)

@@ -17,26 +17,6 @@ public class CircuitryMaterialChains {
     }
 
     private static void SiliconNanocrystals() {
-
-        CHEMICAL_RECIPES.recipeBuilder()
-                .duration(300)
-                .EUt(VA[MV])
-                .input(dust, Silicon)
-                .circuitMeta(1)
-                .fluidInputs(HydrochloricAcid.getFluid(3000))
-                .fluidOutputs(Trichlorosilane.getFluid(1000))
-                .fluidOutputs(Hydrogen.getFluid(2000))
-                .buildAndRegister();
-
-        CHEMICAL_RECIPES.recipeBuilder()
-                .duration(300)
-                .EUt(VA[MV])
-                .notConsumable(dust, RutheniumChloride)
-                .fluidInputs(Trichlorosilane.getFluid(4000))
-                .fluidOutputs(Silane.getFluid(1000))
-                .fluidOutputs(SiliconTetrachloride.getFluid(3000))
-                .buildAndRegister();
-
         CHEMICAL_RECIPES.recipeBuilder()
                 .duration(140)
                 .EUt(VA[EV])

@@ -10,6 +10,7 @@ import gregtech.api.unification.material.Materials;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 
 import java.util.Collection;
 import java.util.List;
@@ -26,7 +27,25 @@ public class MiscMachineRecipes {
 
 
     public static void init() {
+        Collection<Recipe> cutterRecipes = RecipeMaps.CUTTER_RECIPES.getRecipeList();
+        for (Recipe recipe : cutterRecipes) {
+            List<GTRecipeInput> itemInputs = recipe.getInputs();
+            List<ItemStack> itemOutputs = recipe.getOutputs();
+            int EUt = recipe.getEUt()*4;
+            int baseDuration;
 
+            if(EUt<=V[IV]) baseDuration= recipe.getDuration()*4;
+            else baseDuration= recipe.getDuration();
+
+            CW_LASER_ENGRAVER_RECIPES.recipeBuilder()
+                    .fluidInputs(DistilledWater.getFluid(100))
+                    .inputIngredients(itemInputs)
+                    .outputs(itemOutputs)
+                    .duration(baseDuration)
+                    .EUt(EUt)
+                    .circuitMeta(6)
+                    .buildAndRegister();
+        }
         //燃料电池
         Collection<Recipe> oilsRecipes = RecipeMaps.COMBUSTION_GENERATOR_FUELS.getRecipeList();
         for (Recipe recipe : oilsRecipes) {

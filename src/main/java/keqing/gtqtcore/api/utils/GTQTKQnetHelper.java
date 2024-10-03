@@ -12,7 +12,7 @@ public class GTQTKQnetHelper {
         //3 物理-量子计算机
         if (kind == 3) return"物理-高性能计算阵列";
         //4 物理-光电研究中心
-        if (kind == 4) return"物理-光电研究中心";
+        if (kind == 4) return"物理-大型光刻厂";
 
         //11 生物-细菌培养缸
         if (kind == 11) return"生物-细菌培养缸";

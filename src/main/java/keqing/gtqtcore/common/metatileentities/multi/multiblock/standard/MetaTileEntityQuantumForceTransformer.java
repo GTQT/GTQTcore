@@ -144,8 +144,8 @@ public class MetaTileEntityQuantumForceTransformer extends RecipeMapMultiblockCo
         tooltip.add(I18n.format("gtqtcore.machine.quantum_force_transformer.tooltip.1"));
         tooltip.add(I18n.format("gtqtcore.machine.quantum_force_transformer.tooltip.2"));
         tooltip.add(I18n.format("gtqtcore.machine.quantum_force_transformer.tooltip.3"));
-        tooltip.add(I18n.format("结构内玻璃每升级一次，耗能减百分之五"));
-        tooltip.add(I18n.format("结构内核心每升级一次，耗时减百分之十"));
+        tooltip.add(I18n.format("结构内玻璃每升级一次，耗能减50%%"));
+        tooltip.add(I18n.format("结构内核心每升级一次，耗时减10%%"));
         tooltip.add(I18n.format("结构内主体升级一次，并行翻倍"));
     }
 

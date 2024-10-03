@@ -23,6 +23,7 @@ import keqing.gtqtcore.api.utils.GTQTLog;
 import keqing.gtqtcore.client.particle.LaserBeamParticle;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.LaserSystem.MetaTileEntityLaserEmitter;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.LaserSystem.MetaTileEntityLaserTranslation;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.LaserSystem.MetaTileEntitySBPRO;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.LaserSystem.MetaTileEntitySwitch;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -59,7 +60,7 @@ public class MetaTileHEL extends MetaTileEntityMultiblockNotifiablePart implemen
         data.setLong("Laser", Laser);
         data.setLong("SetLaser", SetLaser);
         data.setLong("MaxLaser", MaxLaser);
-        if(isExportHatch) {
+        if(isExportHatch&&TargetPos!=null) {
             data.setInteger("X1", TargetPos.getX());
             data.setInteger("Y1", TargetPos.getY());
             data.setInteger("Z1", TargetPos.getZ());
@@ -109,6 +110,7 @@ public class MetaTileHEL extends MetaTileEntityMultiblockNotifiablePart implemen
     }
     public boolean checkMachine(BlockPos pos){
         if(isExportHatch)if(GTUtility.getMetaTileEntity(this.getWorld(), pos) instanceof MetaTileEntityLaserEmitter mte)if(mte.isWorkingEnabled()&&mte.isStructureFormed())return true;
+        if(isExportHatch)if(GTUtility.getMetaTileEntity(this.getWorld(), pos) instanceof MetaTileEntitySBPRO mte)if(mte.isStructureFormed())return true;
 
         if(!isExportHatch)if(GTUtility.getMetaTileEntity(this.getWorld(), pos) instanceof MetaTileEntityLaserTranslation mte)if(mte.isWorkingEnabled()&&mte.isStructureFormed())return true;
 

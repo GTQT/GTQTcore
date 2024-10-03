@@ -137,6 +137,7 @@ public class GTQTRecipesManager {
         GTComponents.init();
         PlatinumDeal.init();
         DecompositionRecipeHandler.runRecipeGeneration();
+        SwarmRecipeHandler.runRecipeGeneration();
         CircuitryMaterialChains.init();
         MetaTileEntityLoader.init();
         MetaTileEntityMachine.init();

@@ -201,6 +201,7 @@ public class MetaTileEntityLaserBlastFurnace extends RecipeMapLaserMultiblockCon
     public void addInformation(ItemStack stack, World world, List<String> tooltip,
                                boolean advanced) {
         super.addInformation(stack, world, tooltip, advanced);
+        tooltip.add(I18n.format("实际线圈温度为 激光最大换热温度温度 与 线圈理论 温度的最大值，初次工作由0开始增长至最大值"));
     }
 
     @Override

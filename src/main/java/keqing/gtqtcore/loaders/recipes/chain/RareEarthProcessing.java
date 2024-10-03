@@ -506,7 +506,7 @@ public class RareEarthProcessing {
     private static void fuguisuanna() {
         CHEMICAL_RECIPES.recipeBuilder()
                 .fluidInputs(HydrofluoricAcid.getFluid(6000))
-                .input(dust,CSilicon,1)
+                .input(dust,Polysilicon,1)
                 .fluidOutputs(Hydrogen.getFluid(4000))
                 .fluidOutputs(HexafluorosilicicAcid.getFluid(1000))
                 .duration(600).EUt(VA[EV]).buildAndRegister();

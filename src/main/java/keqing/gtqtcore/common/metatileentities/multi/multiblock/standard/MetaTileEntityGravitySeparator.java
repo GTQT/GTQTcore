@@ -6,6 +6,7 @@ import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.Widget;
 import gregtech.api.gui.resources.TextureArea;
 import gregtech.api.gui.widgets.ClickButtonWidget;
+import gregtech.api.gui.widgets.ImageCycleButtonWidget;
 import gregtech.api.gui.widgets.WidgetGroup;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
@@ -17,6 +18,7 @@ import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.TraceabilityPredicate;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.unification.material.Materials;
+import gregtech.api.util.LocalizationUtils;
 import gregtech.api.util.TextComponentUtil;
 import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
@@ -68,6 +70,9 @@ public class MetaTileEntityGravitySeparator extends GTQTRecipeMapMultiblockContr
         group.addWidget(new ClickButtonWidget(9, 0, 9, 9, "", this::incrementThreshold)
                 .setButtonTexture(GuiTextures.BUTTON_THROTTLE_PLUS)
                 .setTooltipText("decrement"));
+        group.addWidget(
+                (new ImageCycleButtonWidget(0, 9, 18, 9, GuiTextures.BUTTON_MULTI_MAP, this.getAvailableRecipeMaps().length, this::getRecipeMapIndex, this::setRecipeMapIndex)).shouldUseBaseBackground().singleTexture().setTooltipHoverString((i) -> LocalizationUtils.format("gregtech.multiblock.multiple_recipemaps.header") + " " + LocalizationUtils.format("recipemap." + this.getAvailableRecipeMaps()[i].getUnlocalizedName() + ".name"))
+        );
         return group;
     }
 

@@ -146,7 +146,6 @@ public abstract class RecipeMapLaserMultiblockController extends MultiblockWithD
                                boolean advanced) {
         super.addInformation(stack, world, tooltip, advanced);
         tooltip.add(I18n.format("使用高能无线激光靶仓代替能源仓，可以使用双仓升压.注意，请手动打开你的激光源仓！"));
-        tooltip.add(I18n.format("实际线圈温度为 激光最大换热温度温度 与 线圈理论 温度的最大值，初次工作由0开始增长至最大值"));
         tooltip.add(I18n.format("最大并行：Math.pow(2, 激光靶仓等级)"));
         tooltip.add(I18n.format("耗时减免：1-激光靶仓等级*0.05"));
     }

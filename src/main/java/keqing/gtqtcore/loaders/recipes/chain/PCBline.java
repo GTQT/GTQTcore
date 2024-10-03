@@ -103,7 +103,7 @@ public class PCBline {
                 .input(wireGtSingle, IVSuperconductor, 8)
                 .outputs(GTQTMetaBlocks.PCB_FACTORY_CASING.getItemVariant(BlockPCBFactoryCasing.PCBFactoryCasingType.BASIC_PHOTOLITHOGRAPHIC_FRAMEWORK_CASING, ConfigHolder.recipes.casingsPerCraft))
                 .stationResearch(b -> b
-                        .researchStack(LASER_ENGRAVING.getStackForm())
+                        .researchStack(LASER_ENV.getStackForm())
                         .CWUt(CWT[ZPM])
                         .EUt(VA[LuV]))
                 .fluidInputs(Polybenzimidazole.getFluid(L*16))

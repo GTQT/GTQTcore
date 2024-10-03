@@ -169,7 +169,7 @@ public class GTQTMaterials {
     public static Material SeverelySteamCrackedDieselHeavy;
     public static Material Phenolic;
     public static Material Latex;
-    public static Material CSilicon;
+    public static Material Polysilicon;
     public static Material CopperCl;
     public static Material Vinylcinnamate;
     public static Material Xmt;

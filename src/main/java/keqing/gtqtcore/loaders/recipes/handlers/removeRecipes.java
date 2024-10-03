@@ -8,6 +8,7 @@ import gregtech.api.unification.material.MarkerMaterial;
 import gregtech.api.unification.material.MarkerMaterials;
 import gregtech.common.blocks.BlockComputerCasing;
 import gregtech.common.blocks.BlockFusionCasing;
+import gregtech.common.blocks.BlockMachineCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.items.MetaItems;
 import gregtech.common.metatileentities.MetaTileEntities;
@@ -158,7 +159,16 @@ public class removeRecipes {
         // 有源变压器 * 1
         GTRecipeHandler.removeRecipesByInputs(ASSEMBLER_RECIPES, new ItemStack[]{POWER_TRANSFORMER[6].getStackForm(),OreDictUnifier.get(circuit,LuV,2),OreDictUnifier.get(wireGtSingle,IndiumTinBariumTitaniumCuprate,8),ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT.getStackForm(2)},new FluidStack[]{PCBCoolant.getFluid(1000)});
 
+        // 四氯化硅 * 1000
+        GTRecipeHandler.removeRecipesByInputs(CHEMICAL_RECIPES, new ItemStack[]{OreDictUnifier.get(dust,Silicon,1), IntCircuitIngredient.getIntegratedCircuit(1)},new FluidStack[]{Chlorine.getFluid(4000)});
 
+
+        //机器外壳 * 1
+        GTRecipeHandler.removeRecipesByInputs(ASSEMBLER_RECIPES, new ItemStack[]{MetaBlocks.MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.IV),OreDictUnifier.get(cableGtSingle,Platinum,2)},new FluidStack[]{Polytetrafluoroethylene.getFluid(288)});
+        GTRecipeHandler.removeRecipesByInputs(ASSEMBLER_RECIPES, new ItemStack[]{MetaBlocks.MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.LuV),OreDictUnifier.get(cableGtSingle,NiobiumTitanium,2)},new FluidStack[]{Polytetrafluoroethylene.getFluid(288)});
+        GTRecipeHandler.removeRecipesByInputs(ASSEMBLER_RECIPES, new ItemStack[]{MetaBlocks.MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.ZPM),OreDictUnifier.get(cableGtSingle,VanadiumGallium,2)},new FluidStack[]{Polybenzimidazole.getFluid(288)});
+        GTRecipeHandler.removeRecipesByInputs(ASSEMBLER_RECIPES, new ItemStack[]{MetaBlocks.MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.UV),OreDictUnifier.get(cableGtSingle,YttriumBariumCuprate,2)},new FluidStack[]{Polybenzimidazole.getFluid(288)});
+        GTRecipeHandler.removeRecipesByInputs(ASSEMBLER_RECIPES, new ItemStack[]{MetaBlocks.MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.UHV),OreDictUnifier.get(cableGtSingle,Europium,2)},new FluidStack[]{Polybenzimidazole.getFluid(288)});
     }
 
 }

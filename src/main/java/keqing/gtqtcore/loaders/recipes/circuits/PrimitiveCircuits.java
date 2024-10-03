@@ -14,7 +14,7 @@ import net.minecraftforge.fluids.FluidStack;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
-import static keqing.gtqtcore.api.unification.GTQTMaterials.CSilicon;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.Polysilicon;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.electrode;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 import static gregtech.api.GTValues.*;

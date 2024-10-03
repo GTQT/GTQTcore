@@ -220,7 +220,7 @@ public class MetaTileEntityBiologicalReaction extends GTQTRecipeMapMultiblockCon
     public void renderMetaTileEntity(double x, double y, double z, float partialTicks) {
         IFastRenderMetaTileEntity.super.renderMetaTileEntity(x, y, z, partialTicks);
         //机器开启才会进行渲染
-        if (isActive() && GTQTCoreConfig.MachineSwitch.EnableObj && GTQTCoreConfig.MachineSwitch.EnableObjBiologicalReaction) {
+        if (isActive() && GTQTCoreConfig.OBJRenderSwitch.EnableObj && GTQTCoreConfig.OBJRenderSwitch.EnableObjBiologicalReaction) {
             //这是一些opengl的操作,GlStateManager是mc自身封装的一部分方法  前四条详情请看 https://turou.fun/minecraft/legacy-render-tutor/
             //opengl方法一般需要成对出现，实际上他是一个状态机，改装状态后要还原  一般情况按照我这些去写就OK
             GlStateManager.pushAttrib(); //保存变换前的位置和角度
