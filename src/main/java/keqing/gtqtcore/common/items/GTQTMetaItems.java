@@ -134,6 +134,13 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem WRAP_SUPRACAUSAL_SMD_DIODE;
     public static MetaItem<?>.MetaValueItem WRAP_SUPRACAUSAL_SMD_INDUCTOR;
 
+    public static MetaItem<?>.MetaValueItem WIND_ROTOR_STEEL;
+    public static MetaItem<?>.MetaValueItem WIND_ROTOR_ALUMINIUM;
+    public static MetaItem<?>.MetaValueItem WIND_ROTOR_STAINLESSSTEEL;
+    public static MetaItem<?>.MetaValueItem WIND_ROTOR_TITANIUM;
+    public static MetaItem<?>.MetaValueItem WIND_ROTOR_TUNGSTENSTEEL;
+    public static MetaItem<?>.MetaValueItem WIND_ROTOR_RHODIUMPLATEDPALLADIUM;
+
     public static MetaItem<?>.MetaValueItem GRINDBALL_SOAPSTONE;
     public static MetaItem<?>.MetaValueItem GRINDBALL_ALUMINIUM;
     public static MetaItem<?>.MetaValueItem SODIUM_ETHYLXANTHATE;

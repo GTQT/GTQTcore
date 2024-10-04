@@ -50,8 +50,7 @@ import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.GENE_MUTAGENESIS;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.Adamantite;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.Orichalcum;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
-import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.cylinder;
-import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.motor_stick;
+import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.*;
 import static keqing.gtqtcore.api.utils.GTQTUtil.CWT;
 import static keqing.gtqtcore.common.block.blocks.BlockCrucible.CrucibleType.QUARTZ_CRUCIBLE;
 import static keqing.gtqtcore.common.block.blocks.GTQTIsaCasing.CasingType.ASEPTIC_FARM_CASING;
@@ -74,6 +73,60 @@ public class MetaTileEntityLoader {
 
         SXA_HULL = new CraftingComponent.Component((Map) Stream.of(new Object[]{0, HULL[0].getStackForm()},new Object[]{1, OUTPUT_ENERGY_HATCH_16A[0].getStackForm()}, new Object[]{2, OUTPUT_ENERGY_HATCH_16A[1].getStackForm()}, new Object[]{3, OUTPUT_ENERGY_HATCH_16A[2].getStackForm()}, new Object[]{4, OUTPUT_ENERGY_HATCH_16A[3].getStackForm()}, new Object[]{5, ENERGY_OUTPUT_HATCH_16A[0].getStackForm()}, new Object[]{6, MetaTileEntities.ENERGY_OUTPUT_HATCH_16A[1].getStackForm()}, new Object[]{7, MetaTileEntities.ENERGY_OUTPUT_HATCH_16A[2].getStackForm()}, new Object[]{8, MetaTileEntities.ENERGY_OUTPUT_HATCH_16A[3].getStackForm()}, new Object[]{9, MetaTileEntities.ENERGY_OUTPUT_HATCH_16A[4].getStackForm()}, new Object[]{10, OUTPUT_ENERGY_HATCH_16A[4].getStackForm()}, new Object[]{11, OUTPUT_ENERGY_HATCH_16A[5].getStackForm()}, new Object[]{12, OUTPUT_ENERGY_HATCH_16A[6].getStackForm()}, new Object[]{13, OUTPUT_ENERGY_HATCH_16A[7].getStackForm()}).collect(Collectors.toMap((data) -> (Integer)data[0], (data) -> data[1])));
 
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(plate_big, Steel,32)
+                .input(stick, Steel, 16)
+                .input(ring, Steel, 8)
+                .input(rotor, Steel, 4)
+                .output(WIND_ROTOR_STEEL)
+                .circuitMeta(11)
+                .duration(600).EUt(120).buildAndRegister();
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(plate_big, Aluminium,32)
+                .input(stick, Aluminium, 16)
+                .input(ring, Aluminium, 8)
+                .input(rotor, Aluminium, 4)
+                .output(WIND_ROTOR_ALUMINIUM)
+                .circuitMeta(11)
+                .duration(600).EUt(120).buildAndRegister();
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(plate_big, StainlessSteel,32)
+                .input(stick, StainlessSteel, 16)
+                .input(ring, StainlessSteel, 8)
+                .input(rotor, StainlessSteel, 4)
+                .output(WIND_ROTOR_STAINLESSSTEEL)
+                .circuitMeta(11)
+                .duration(600).EUt(120).buildAndRegister();
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(plate_big, Titanium,32)
+                .input(stick, Titanium, 16)
+                .input(ring, Titanium, 8)
+                .input(rotor, Titanium, 4)
+                .output(WIND_ROTOR_TITANIUM)
+                .circuitMeta(11)
+                .duration(600).EUt(120).buildAndRegister();
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(plate_big, TungstenSteel,32)
+                .input(stick, TungstenSteel, 16)
+                .input(ring, TungstenSteel, 8)
+                .input(rotor, TungstenSteel, 4)
+                .output(WIND_ROTOR_TUNGSTENSTEEL)
+                .circuitMeta(11)
+                .duration(600).EUt(120).buildAndRegister();
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(plate_big, RhodiumPlatedPalladium,32)
+                .input(stick, RhodiumPlatedPalladium, 16)
+                .input(ring, RhodiumPlatedPalladium, 8)
+                .input(rotor, RhodiumPlatedPalladium, 4)
+                .output(WIND_ROTOR_RHODIUMPLATEDPALLADIUM)
+                .circuitMeta(11)
+                .duration(600).EUt(120).buildAndRegister();
         // Minecart wheels
         ASSEMBLER_RECIPES.recipeBuilder()
                 .input(stick, Iron)

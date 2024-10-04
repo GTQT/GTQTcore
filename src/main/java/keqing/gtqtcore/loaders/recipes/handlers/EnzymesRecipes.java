@@ -2,6 +2,7 @@ package keqing.gtqtcore.loaders.recipes.handlers;
 
 import com.cleanroommc.groovyscript.api.IIngredient;
 import gregtech.api.items.metaitem.MetaItem;
+import gregtech.api.metatileentity.multiblock.CleanroomType;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.UnificationEntry;
@@ -22,7 +23,40 @@ import static keqing.gtqtcore.api.utils.GTQTUtil.CWT;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 
 public class EnzymesRecipes {
+    public static void SpecialLanthanum()
+    {
+        GENE_MUTAGENESIS.recipeBuilder()
+                .input(dustTiny,Naquadria)
+                .input(dustTiny,Platinum)
+                .notConsumable(CATALYST_FRAMEWORK_III)
+                .fluidInputs(Europium.getFluid(10))
+                .fluidInputs(Enzymesab.getFluid(10))
+                .fluidOutputs(Enzymesea.getFluid(20))
+                .EUt(VA[ZPM])
+                .duration(1200)
+                .circuitMeta(1)
+                .rate(60)
+                .cleanroom(CleanroomType.STERILE_CLEANROOM)
+                .buildAndRegister();
+
+        //镧系注册
+        SpecialOutCircuitWithCleanroom(Enzymesea,20,1,dust,Monazite,1,dust, Europium,1,5,60);
+        SpecialOutCircuitWithCleanroom(Enzymesea,20,2,dust,Monazite,1,dust, Gadolinium,1,5,60);
+        SpecialOutCircuitWithCleanroom(Enzymesea,20,3,dust,Monazite,1,dust, Terbium,1,5,60);
+        SpecialOutCircuitWithCleanroom(Enzymesea,20,4,dust,Monazite,1,dust, Dysprosium,1,5,60);
+        SpecialOutCircuitWithCleanroom(Enzymesea,20,5,dust,Monazite,1,dust, Erbium,1,5,60);
+        SpecialOutCircuitWithCleanroom(Enzymesea,20,6,dust,Monazite,1,dust, Holmium,1,5,60);
+
+        SpecialOutCircuitWithCleanroom(Enzymesea,20,1,dust,Bastnasite,1,dust, Lanthanum,1,5,60);
+        SpecialOutCircuitWithCleanroom(Enzymesea,20,2,dust,Bastnasite,1,dust, Cerium,1,5,60);
+        SpecialOutCircuitWithCleanroom(Enzymesea,20,3,dust,Bastnasite,1,dust, Praseodymium,1,5,60);
+        SpecialOutCircuitWithCleanroom(Enzymesea,20,4,dust,Bastnasite,1,dust, Neodymium,1,5,60);
+        SpecialOutCircuitWithCleanroom(Enzymesea,20,5,dust,Bastnasite,1,dust, Promethium,1,5,60);
+        SpecialOutCircuitWithCleanroom(Enzymesea,20,6,dust,Bastnasite,1,dust, Samarium,1,5,60);
+    }
     public static void init() {
+        SpecialLanthanum();
+
         growth(Enzymesaz,Enzymesa);
         growth(Enzymesbz,Enzymesb);
         growth(Enzymescz,Enzymesc);
@@ -44,7 +78,6 @@ public class EnzymesRecipes {
         enzymesmix(Enzymescc,Methane,303,3,11);
 
         enzymesmix(Enzymesda,Brominatedepoxyresins,401,4,12);
-
 
         //物尽其用
         /*
@@ -495,12 +528,21 @@ public class EnzymesRecipes {
                 .input(orePrefix1,material2,input)
                 .output(orePrefix2,material3,output)
                 .rate(rate)
+                .cleanroom(CleanroomType.CLEANROOM)
                 .circuitMeta(circuit)
                 .duration(100*tier).EUt(VA[MV+tier]).buildAndRegister();
     }
-
+    private static void SpecialOutCircuitWithCleanroom(Material material1,int origin,int circuit, OrePrefix orePrefix1,Material material2,int input, OrePrefix orePrefix2, Material material3,int output, int tier, int rate) {
+        BIOLOGICAL_REACTION_RECIPES.recipeBuilder()
+                .fluidInputs(material1.getFluid(origin))
+                .input(orePrefix1,material2,input)
+                .output(orePrefix2,material3,output)
+                .rate(rate)
+                .cleanroom(CleanroomType.STERILE_CLEANROOM)
+                .circuitMeta(circuit)
+                .duration(100*tier).EUt(VA[MV+tier]).buildAndRegister();
+    }
     public static MetaItem<?>.MetaValueItem[]DISK={BIO_0,BIO_1,BIO_2,BIO_3,BIO_4,BIO_5,BIO_6,BIO_7,BIO_8,BIO_9,BIO_10,BIO_11,BIO_12};
-
 
     public static void enzymesmix(Material material1,Material material2, int rate, int tier,int num)
     {

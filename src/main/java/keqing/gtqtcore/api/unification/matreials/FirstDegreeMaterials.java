@@ -2349,8 +2349,13 @@ public class FirstDegreeMaterials {
                 .build()
                 .setFormula("性状：2 5 2 4 3", true);
 
-        //四氢呋喃 TODO
-        getMaterialsId();
+        //定向镧系菌种
+        GTQTMaterials.Enzymesea = new Material.Builder(getMaterialsId(), gregtechId("enzymese_501"))
+                .fluid()
+                .color(0x54FF9F)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("性状：* * * * *", true);
 
         //5-羟甲基糠醛
         GTQTMaterials.Hydroxymethylfurfural = new Material.Builder(getMaterialsId(), gregtechId("hydroxymethylfurfural"))

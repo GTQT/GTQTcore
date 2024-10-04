@@ -673,6 +673,10 @@ public class MetaTileEntitySBPRC extends MetaTileEntityBaseWithControl implement
     public boolean hasMufflerMechanics() {
         return false;
     }
+    @Override
+    public boolean shouldRenderInPass(int pass) {
+        return pass == 0;
+    }
     @SideOnly(Side.CLIENT)
     public void renderMetaTileEntity(double x, double y, double z, float partialTicks) {
         IFastRenderMetaTileEntity.super.renderMetaTileEntity(x, y, z, partialTicks);

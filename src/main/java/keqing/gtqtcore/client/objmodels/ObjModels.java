@@ -21,6 +21,8 @@ public class ObjModels {
     public static final IModelCustom SpaceLJ = AdvancedModelLoader.loadModel(new ResourceLocation("gtqtcore", "models/obj/spacelj.obj"));
     public static final ResourceLocation SpaceLJ_pic = new ResourceLocation("gtqtcore", "models/obj/spacelj.png");
 
+    public static final IModelCustom WindRotor = AdvancedModelLoader.loadModel(new ResourceLocation("gtqtcore", "models/obj/windrotor.obj"));
+    public static final ResourceLocation WindRotor_pic = new ResourceLocation("gtqtcore", "models/obj/windrotor.png");
 
 
 }

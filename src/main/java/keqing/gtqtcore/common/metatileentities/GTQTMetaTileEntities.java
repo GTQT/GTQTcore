@@ -24,6 +24,7 @@ import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.metatileentities.multi.generators.*;
 import keqing.gtqtcore.common.metatileentities.multi.generators.Tide.MetaTileEntityTideControl;
 import keqing.gtqtcore.common.metatileentities.multi.generators.Tide.MetaTileEntityTideUnit;
+import keqing.gtqtcore.common.metatileentities.multi.generators.Wind.MetaTileEntityWindGenerator;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.LaserSystem.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.*;
@@ -39,6 +40,7 @@ import keqing.gtqtcore.common.metatileentities.multi.multiblockpart.*;
 import keqing.gtqtcore.common.metatileentities.single.electric.MetaTileEntityBathCondenser;
 import keqing.gtqtcore.common.metatileentities.single.electric.MetaTileEntityLatexCollector;
 import keqing.gtqtcore.common.metatileentities.single.electric.MetaTileEntityParticleAcceleratorIO;
+import keqing.gtqtcore.common.metatileentities.single.electric.MetaTileLaserBooster;
 import keqing.gtqtcore.common.metatileentities.single.steam.MetaTileEntitySteamLatexCollector;
 import keqing.gtqtcore.common.metatileentities.storage.MetaTileEntityCommonRubbishBin;
 import keqing.gtqtcore.common.metatileentities.storage.MetaTileEntityFluidRubbishBin;
@@ -145,6 +147,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntitySeismicDetector SEISMIC_DETECTOR;
     public static MetaTileEntityTideControl TIDE_CONTROL;
     public static MetaTileEntityTideUnit TIDE_UNIT;
+    public static MetaTileEntityWindGenerator WIND_GENERATOR;
     public static MetaTileEntityHugeCrackingUnit HUGE_CRACKING_UNIT;
     public static MetaTileEntityGreenhousePlus GREEN_HOUSE_PLUS;
     public static MetaTileEntityDataAccessHatch EDATA_ACCESS_HATCH;
@@ -227,6 +230,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityChemicalPlant CHEMICAL_PLANT;
     public static MetaTileEntityLaserEngraving LASER_ENGRAVING;
     public static MetaTileEntityWaterPowerStation[] WATER_POWER_STATION = new MetaTileEntityWaterPowerStation[3];
+    public static MetaTileLaserBooster[] LASER_BOOSTER = new MetaTileLaserBooster[6];
     public static MetaTileEntityKineticEnergyBattery KINETIC_ENERGY_BATTERY;
     //public static MetaTileEntityGrayElectricPowerBank GRAY_ELECTRIC_POWER_BANK;
     public static MetaTileEntityAssemblyLine ASSEMBLY_LINE;
@@ -395,6 +399,8 @@ public class GTQTMetaTileEntities {
 
         TIDE_CONTROL = registerMetaTileEntity(3075, new MetaTileEntityTideControl(gtqtcoreId("tide_control")));
         TIDE_UNIT = registerMetaTileEntity(3076, new MetaTileEntityTideUnit(gtqtcoreId("tide_unit")));
+
+        WIND_GENERATOR = registerMetaTileEntity(3077, new MetaTileEntityWindGenerator(gtqtcoreId("wind_generator")));
 
         //激光
         LASER_EMITTER = registerMetaTileEntity(3090, new MetaTileEntityLaserEmitter(gtqtcoreId("laser_emitter")));
@@ -638,6 +644,12 @@ public class GTQTMetaTileEntities {
             LASER_INPUT[i] = registerMetaTileEntity(15445 + i - 1, new MetaTileHEL(gtqtcoreId("laser.input." + tierName), i, false));
             LASER_OUTPUT[i] = registerMetaTileEntity(15460 + i - 1, new MetaTileHEL(gtqtcoreId("laser.output." + tierName), i, true));
         }
+        LASER_BOOSTER[0] = registerMetaTileEntity(15475, new MetaTileLaserBooster(gtqtcoreId("laser_booster." + LuV), LuV));
+        LASER_BOOSTER[1] = registerMetaTileEntity(15476, new MetaTileLaserBooster(gtqtcoreId("laser_booster." + ZPM), ZPM));
+        LASER_BOOSTER[2] = registerMetaTileEntity(15477, new MetaTileLaserBooster(gtqtcoreId("laser_booster." + UV), UV));
+        LASER_BOOSTER[3] = registerMetaTileEntity(15478, new MetaTileLaserBooster(gtqtcoreId("laser_booster." + UHV), UHV));
+        LASER_BOOSTER[4] = registerMetaTileEntity(15479, new MetaTileLaserBooster(gtqtcoreId("laser_booster." + UIV), UIV));
+        LASER_BOOSTER[5] = registerMetaTileEntity(15480, new MetaTileLaserBooster(gtqtcoreId("laser_booster." + UEV), UEV));
 
         registerMetaTileEntity(15541, new keqing.gtqtcore.common.metatileentities.multi.multiblockpart.MetaTileEntityParallelHatch(gtqtcoreId(String.format("parallel_hatch.%s", GTValues.VN[9])), 9));
         registerMetaTileEntity(15542, new keqing.gtqtcore.common.metatileentities.multi.multiblockpart.MetaTileEntityParallelHatch(gtqtcoreId(String.format("parallel_hatch.%s", GTValues.VN[10])), 10));

@@ -347,6 +347,25 @@ metaitem.quantum_anomaly.name=Quantum Anomaly
 metaitem.mill.grindball_soapstone.name=Soapstone Grinding Ball
 metaitem.mill.grindball_aluminium.name=Aluminium Grinding Ball
 
+# steel wind rotor
+metaitem.wind_rotor.steel.name=Steel Wind Rotor
+metaitem.wind_rotor.steel.description=Maximum Durability: 240000, Tier: 1
+# aluminium wind rotor
+metaitem.wind_rotor.aluminium.name=Aluminium Wind Rotor
+metaitem.wind_rotor.aluminium.description=Maximum Durability: 480000, Tier: 2
+# stainless steel wind rotor
+metaitem.wind_rotor.stainlesssteel.name=Stainless Steel Wind Rotor
+metaitem.wind_rotor.stainlesssteel.description=Maximum Durability: 960000, Tier: 3
+# titanium wind rotor
+metaitem.wind_rotor.titanium.name=Titanium Wind Rotor
+metaitem.wind_rotor.titanium.description=Maximum Durability: 1920000, Tier: 4
+# tungsten steel wind rotor
+metaitem.wind_rotor.tungstensteel.name=Tungsten Steel Wind Rotor
+metaitem.wind_rotor.tungstensteel.description=Maximum Durability: 3840000, Tier: 5
+# rhodium-plated palladium wind rotor
+metaitem.wind_rotor.rhodiumplatedpalladium.name=Rhodium-Plated Palladium Wind Rotor
+metaitem.wind_rotor.rhodiumplatedpalladium.description=Maximum Durability: 7680000, Tier: 6
+
 # Debug
 tile.component_assembly_line_casing.lv.name=Component Assembly Line Casing (LV)
 tile.component_assembly_line_casing.lv.tooltip=Simple Assembly Unit
@@ -2249,6 +2268,13 @@ gtqtcore.machine.laser.output.uxv.name=High-Energy Wireless Laser Source Chamber
 gtqtcore.machine.laser.output.opv.name=High-Energy Wireless Laser Source Chamber (§9OpV§r)
 gtqtcore.machine.laser.output.max.name=High-Energy Wireless Laser Source Chamber (§c§lMAX§r)
 
+gtqtcore.machine.laser_booster.6.name=High-Energy Laser Igniter (§dLuV§r)
+gtqtcore.machine.laser_booster.7.name=High-Energy Laser Igniter (§cZPM§r)
+gtqtcore.machine.laser_booster.8.name=High-Energy Laser Igniter (§3UV§r)
+gtqtcore.machine.laser_booster.9.name=High-Energy Laser Igniter (§4UHV§r)
+gtqtcore.machine.laser_booster.10.name=High-Energy Laser Igniter (§aUEV§r)
+gtqtcore.machine.laser_booster.11.name=High-Energy Laser Igniter (§2UIV§r)
+
 gtqtcore.machine.laser_switch.name=High-Energy Laser Distribution Unit
 gtqtcore.machine.laser_translation.name=High-Energy Laser Reception Chamber
 gtqtcore.machine.laser_emitter.name=High-Energy Laser Emission Chamber
@@ -3195,6 +3221,7 @@ gregtech.material.enzymese_301=Alpha-Directional Lipase
 gregtech.material.enzymese_302=Alpha-Universal Fermentation Enzyme
 gregtech.material.enzymese_303=Alpha-Directional Fermentation Enzyme
 gregtech.material.enzymese_401=Alpha-Active Mutation Enzyme
+gregtech.material.enzymese_501=Beta - oriented lanthanide bacteria
 metaitem.solar_plate_mki.name=Coarse Solar Panel
 metaitem.solar_plate_mkii.name=Standard Solar Panel
 metaitem.solar_plate_mkiii.name=Refined Solar Panel

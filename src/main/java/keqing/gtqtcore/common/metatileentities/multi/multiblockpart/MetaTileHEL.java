@@ -19,12 +19,12 @@ import gregtech.client.particle.GTParticleManager;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockNotifiablePart;
 import keqing.gtqtcore.api.capability.ILaser;
-import keqing.gtqtcore.api.utils.GTQTLog;
 import keqing.gtqtcore.client.particle.LaserBeamParticle;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.LaserSystem.MetaTileEntityLaserEmitter;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.LaserSystem.MetaTileEntityLaserTranslation;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.LaserSystem.MetaTileEntitySBPRO;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.LaserSystem.MetaTileEntitySwitch;
+import keqing.gtqtcore.common.metatileentities.single.electric.MetaTileLaserBooster;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
@@ -32,17 +32,17 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.io.IOException;
 import java.util.List;
 
-import static gregtech.api.GTValues.*;
+import static gregtech.api.GTValues.V;
+import static gregtech.api.GTValues.VN;
 import static keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility.LASER_INPUT;
 import static keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility.LASER_OUTPUT;
-import static net.minecraft.util.EnumFacing.DOWN;
-import static net.minecraft.util.EnumFacing.UP;
 
 public class MetaTileHEL extends MetaTileEntityMultiblockNotifiablePart implements IMultiblockAbilityPart<ILaser>, ILaser {
 
@@ -53,26 +53,38 @@ public class MetaTileHEL extends MetaTileEntityMultiblockNotifiablePart implemen
     long MaxLaser;
     long SetLaser;// 设定 的 最大激光强度
     int tier;
-    int MaxLength=64;
+    int MaxLength = 64;
+    BlockPos TargetPos;
+    boolean findTarget = false;
+    BlockPos machinePos;
+    boolean findMachine = false;
+
+    public MetaTileHEL(ResourceLocation metaTileEntityId, int tier, boolean isExportHatch) {
+        super(metaTileEntityId, tier, isExportHatch);
+        this.tier = tier;
+        this.MaxLaser = V[tier] * 4;
+        this.initializeInventory();
+    }
+
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("Amperage", Amperage);
         data.setInteger("Voltage", Voltage);
         data.setLong("Laser", Laser);
         data.setLong("SetLaser", SetLaser);
         data.setLong("MaxLaser", MaxLaser);
-        if(isExportHatch&&TargetPos!=null) {
+        if (isExportHatch && TargetPos != null) {
             data.setInteger("X1", TargetPos.getX());
             data.setInteger("Y1", TargetPos.getY());
             data.setInteger("Z1", TargetPos.getZ());
         }
-        if(machinePos!=null) {
+        if (machinePos != null) {
             data.setInteger("X2", machinePos.getX());
             data.setInteger("Y2", machinePos.getY());
             data.setInteger("Z2", machinePos.getZ());
         }
 
-        data.setBoolean("findTarget",findTarget);
-        data.setBoolean("findMachine",findMachine);
+        data.setBoolean("findTarget", findTarget);
+        data.setBoolean("findMachine", findMachine);
         return super.writeToNBT(data);
     }
 
@@ -84,41 +96,55 @@ public class MetaTileHEL extends MetaTileEntityMultiblockNotifiablePart implemen
         SetLaser = data.getLong("SetLaser");
         MaxLaser = data.getLong("MaxLaser");
 
-        if(isExportHatch)TargetPos= new BlockPos(data.getInteger("X1"), data.getInteger("Y1"), data.getInteger("Z1"));
-        machinePos= new BlockPos(data.getInteger("X2"), data.getInteger("Y2"), data.getInteger("Z2"));
+        if (isExportHatch)
+            TargetPos = new BlockPos(data.getInteger("X1"), data.getInteger("Y1"), data.getInteger("Z1"));
+        machinePos = new BlockPos(data.getInteger("X2"), data.getInteger("Y2"), data.getInteger("Z2"));
 
-        findTarget=data.getBoolean("findTarget");
-        findMachine=data.getBoolean("findMachine");
-    }
-
-
-    BlockPos TargetPos;
-    boolean findTarget = false;
-
-    BlockPos machinePos;
-    boolean findMachine = false;
-
-    public MetaTileHEL(ResourceLocation metaTileEntityId, int tier, boolean isExportHatch) {
-        super(metaTileEntityId, tier, isExportHatch);
-        this.tier = tier;
-        this.MaxLaser =V[tier] * 4;
-        this.initializeInventory();
+        findTarget = data.getBoolean("findTarget");
+        findMachine = data.getBoolean("findMachine");
     }
 
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileHEL(this.metaTileEntityId, this.getTier(), this.isExportHatch);
     }
-    public boolean checkMachine(BlockPos pos){
-        if(isExportHatch)if(GTUtility.getMetaTileEntity(this.getWorld(), pos) instanceof MetaTileEntityLaserEmitter mte)if(mte.isWorkingEnabled()&&mte.isStructureFormed())return true;
-        if(isExportHatch)if(GTUtility.getMetaTileEntity(this.getWorld(), pos) instanceof MetaTileEntitySBPRO mte)if(mte.isStructureFormed())return true;
 
-        if(!isExportHatch)if(GTUtility.getMetaTileEntity(this.getWorld(), pos) instanceof MetaTileEntityLaserTranslation mte)if(mte.isWorkingEnabled()&&mte.isStructureFormed())return true;
+    public boolean checkMachine(BlockPos pos) {
+        World world = this.getWorld();
+        if (world == null) {
+            return false; // 处理 getWorld() 可能返回 null 的情况
+        }
+        MetaTileEntity mte = GTUtility.getMetaTileEntity(world, pos);
+        if (isExportHatch) {
+            if (mte instanceof MetaTileEntityLaserEmitter laserEmitter) {
+                if (laserEmitter.isWorkingEnabled() && laserEmitter.isStructureFormed()) {
+                    return true;
+                }
+            } else if (mte instanceof MetaTileEntitySBPRO sbpro) {
+                if (sbpro.isStructureFormed()) {
+                    return true;
+                }
+            } else if (mte instanceof MetaTileLaserBooster) {
+                return true;
+            }
+        } else {
+            if (mte instanceof MetaTileEntityLaserTranslation laserTranslation) {
+                if (laserTranslation.isWorkingEnabled() && laserTranslation.isStructureFormed()) {
+                    return true;
+                }
+            } else if (mte instanceof MetaTileHEL hel) {
+                return hel.isExportHatch;
+            }
+        }
 
-        if(GTUtility.getMetaTileEntity(this.getWorld(), pos) instanceof MetaTileEntitySwitch mte)if(mte.isWorkingEnabled()&&mte.isStructureFormed())return true;
+        if (mte instanceof MetaTileEntitySwitch switchMte) {
+            if (switchMte.isWorkingEnabled() && switchMte.isStructureFormed()) {
+                return true;
+            }
+        }
 
-        if(!isExportHatch)if(GTUtility.getMetaTileEntity(this.getWorld(), pos) instanceof MetaTileHEL mte) return mte.isExportHatch;
         return false;
     }
+
     public void update() {
         super.update();
 
@@ -163,40 +189,39 @@ public class MetaTileHEL extends MetaTileEntityMultiblockNotifiablePart implemen
         final int zDir = this.getFrontFacing().getOpposite().getZOffset();
         if (!findTarget) {
             for (int i = 1; i <= MaxLength && !findTarget; i++) {
-                if (this.getFrontFacing() == UP) {
-                    if (GTUtility.getMetaTileEntity(this.getWorld(), this.getPos().add(0, i, 0)) instanceof MetaTileHEL target) {
-                        TargetPos = this.getPos().add(0, i, 0);
-                        if (!target.isExportHatch && !target.findMachine) {
-                            findTarget = true;
-                        }
-                    }
-                } else if (this.getFrontFacing() == DOWN) {
-                    if (GTUtility.getMetaTileEntity(this.getWorld(), this.getPos().add(0, -i, 0)) instanceof MetaTileHEL target) {
-                        TargetPos = this.getPos().add(0, -i, 0);
-                        if (!target.isExportHatch && !target.findMachine) {
-                            findTarget = true;
-                        }
-                    }
-                } else if (GTUtility.getMetaTileEntity(this.getWorld(), this.getPos().add(-xDir * i, 0, -zDir * i)) instanceof MetaTileHEL target) {
-                    TargetPos = this.getPos().add(-xDir * i, 0, -zDir * i);
+                BlockPos posToCheck = switch (frontFacing) {
+                    case UP -> this.getPos().add(0, i, 0);
+                    case DOWN -> this.getPos().add(0, -i, 0);
+                    default -> this.getPos().add(-xDir * i, 0, -zDir * i);
+                };
+
+                MetaTileEntity metaTileEntity = GTUtility.getMetaTileEntity(this.getWorld(), posToCheck);
+
+                if (metaTileEntity instanceof MetaTileHEL target) {
+                    TargetPos = posToCheck;
                     if (!target.isExportHatch && !target.findMachine) {
                         findTarget = true;
                     }
-                }
-            }
-        } else {
-            if (GTUtility.getMetaTileEntity(this.getWorld(), TargetPos) instanceof MetaTileHEL target) {
-                if (target.isExportHatch) {
-                    return;
+                } else if (metaTileEntity instanceof MetaTileLaserBooster) {
+                    TargetPos = posToCheck;
+                    findTarget = true;
                 }
 
+            }
+        } else {
+            if (GTUtility.getMetaTileEntity(this.getWorld(), TargetPos) instanceof MetaTileHEL metaTileHEL) {
+                if (metaTileHEL.isExportHatch) {
+                    return;
+                }
                 if (Laser > 0) {
                     writeCustomData(GregtechDataCodes.UPDATE_PARTICLE, this::writeParticles);
                 }
-
-                target.setLaser(Laser);
-                target.setMachinePos(this.getPos());
+                metaTileHEL.setLaser(Laser);
+                metaTileHEL.setMachinePos(this.getPos());
                 // 目标最大容量就是他的最大额定接收
+            } else if (GTUtility.getMetaTileEntity(this.getWorld(), TargetPos) instanceof MetaTileLaserBooster metaTileLaserBooster) {
+                metaTileLaserBooster.addLaser(Laser);
+                writeCustomData(GregtechDataCodes.UPDATE_PARTICLE, this::writeParticles);
             } else {
                 findTarget = false;
             }
@@ -222,7 +247,7 @@ public class MetaTileHEL extends MetaTileEntityMultiblockNotifiablePart implemen
 
         else builder.dynamicLabel(7, 10, () -> "激光传输器输入端-等级：" + tier, 0x232323);
 
-        builder.label(7, 20, "折算电压 面向："+this.getFrontFacing());
+        builder.label(7, 20, "折算电压 面向：" + this.getFrontFacing());
         builder.widget(new ClickButtonWidget(7, 30, 20, 20, "-", data -> Voltage = --Voltage == -1 ? 0 : Voltage));
         builder.widget(new ImageWidget(29, 30, 118, 20, GuiTextures.DISPLAY));
         builder.widget(new TextFieldWidget2(31, 36, 114, 16, () -> String.valueOf(Voltage), value1 -> {
@@ -231,7 +256,7 @@ public class MetaTileHEL extends MetaTileEntityMultiblockNotifiablePart implemen
             }
         }).setMaxLength(10).setNumbersOnly(0, tier));
         builder.widget(new ClickButtonWidget(149, 30, 20, 20, "+", data -> {
-            if (Voltage <tier) {
+            if (Voltage < tier) {
                 Voltage++;
             }
         }));
@@ -251,27 +276,29 @@ public class MetaTileHEL extends MetaTileEntityMultiblockNotifiablePart implemen
         }));
 
         builder.widget(new ClickButtonWidget(7, 90, 80, 20, "=MAX", data -> {
-            Voltage=tier;
-            Amperage=4;
+            Voltage = tier;
+            Amperage = 4;
         }));
         builder.widget(new ClickButtonWidget(90, 90, 80, 20, "=0", data -> {
-            Voltage=0;
-            Amperage=0;
+            Voltage = 0;
+            Amperage = 0;
         }));
 
         builder.widget((new AdvancedTextWidget(7, 110, this::addDisplayText, 2302755)).setMaxWidthLimit(181));
 
         return builder.build(getHolder(), entityPlayer);
     }
-    protected void addDisplayText(List<ITextComponent> textList) {
-        if(isExportHatch)textList.add(new TextComponentString( "绑定状态： " + findTarget+" "+TargetPos));
-        textList.add(new TextComponentString( "设备状态：" + findMachine+" "+machinePos));
 
-        textList.add(new TextComponentString( "实际 传输激光: " + Laser+" "+VN[GTUtility.getTierByVoltage(Laser)]));
-        textList.add(new TextComponentString( "额定 传输激光: " + SetLaser+" "+VN[GTUtility.getTierByVoltage(SetLaser)]));
-        textList.add(new TextComponentString( "最大 传输激光: " + MaxLaser+" "+VN[GTUtility.getTierByVoltage(MaxLaser)]));
+    protected void addDisplayText(List<ITextComponent> textList) {
+        if (isExportHatch) textList.add(new TextComponentString("绑定状态： " + findTarget + " " + TargetPos));
+        textList.add(new TextComponentString("设备状态：" + findMachine + " " + machinePos));
+
+        textList.add(new TextComponentString("实际 传输激光: " + Laser + " " + VN[GTUtility.getTierByVoltage(Laser)]));
+        textList.add(new TextComponentString("额定 传输激光: " + SetLaser + " " + VN[GTUtility.getTierByVoltage(SetLaser)]));
+        textList.add(new TextComponentString("最大 传输激光: " + MaxLaser + " " + VN[GTUtility.getTierByVoltage(MaxLaser)]));
 
     }
+
     @Override
     public MultiblockAbility<ILaser> getAbility() {
         return this.isExportHatch ? LASER_OUTPUT : LASER_INPUT;
@@ -281,25 +308,28 @@ public class MetaTileHEL extends MetaTileEntityMultiblockNotifiablePart implemen
     public void registerAbilities(List<ILaser> list) {
         list.add(this);
     }
+
     @Override
-    public void setLaser(long i)
-    {
-        Laser =Math.min(i,this.SetLaser);
+    public void setLaser(long i) {
+        Laser = Math.min(i, this.SetLaser);
     }
+
     @Override
     public long Laser() {
         return Laser;
     }
+
     @Override
     public void setMachinePos(BlockPos pos) {
-        machinePos=pos;
-        findMachine=true;
+        machinePos = pos;
+        findMachine = true;
     }
+
     @Override
-    public long MaxLaser()
-    {
+    public long MaxLaser() {
         return MaxLaser;
     }
+
     @Override
     public long SetLaser() {
         return SetLaser;
@@ -314,34 +344,31 @@ public class MetaTileHEL extends MetaTileEntityMultiblockNotifiablePart implemen
     public int Amperage() {
         return Amperage;
     }
+
     @Override
     public int tier() {
         return getTier();
     }
+
     @Override
-    public void addVoltage(int i)
-    {
-        if(i>0) {
+    public void addVoltage(int i) {
+        if (i > 0) {
             if (Voltage + i <= tier) Voltage += i;
             else Voltage = tier;
-        }
-        else
-        {
-            if(Voltage+i>=0)Voltage+=i;
-            else Voltage=0;
+        } else {
+            if (Voltage + i >= 0) Voltage += i;
+            else Voltage = 0;
         }
     }
+
     @Override
-    public void addAmperage(int i)
-    {
-        if(i>0) {
+    public void addAmperage(int i) {
+        if (i > 0) {
             if (Amperage + i <= 4) Amperage += i;
             else Amperage = 4;
-        }
-        else
-        {
-            if(Amperage+i>=0)Amperage +=i;
-            else Amperage=0;
+        } else {
+            if (Amperage + i >= 0) Amperage += i;
+            else Amperage = 0;
         }
     }
 
@@ -365,6 +392,7 @@ public class MetaTileHEL extends MetaTileEntityMultiblockNotifiablePart implemen
             throw new RuntimeException(e);
         }
     }
+
     @Override
     public void receiveCustomData(int dataId, PacketBuffer buf) {
         super.receiveCustomData(dataId, buf);
@@ -377,33 +405,34 @@ public class MetaTileHEL extends MetaTileEntityMultiblockNotifiablePart implemen
         }
 
     }
+
     private void writeParticles(PacketBuffer buf) {
         NBTTagCompound tag = new NBTTagCompound();
-        if(findTarget)
-        {
-            tag.setInteger("Sx",this.getPos().getX());
-            tag.setInteger("Sy",this.getPos().getY());
-            tag.setInteger("Sz",this.getPos().getZ());
-            tag.setInteger("Ex",TargetPos.getX());
-            tag.setInteger("Ey",TargetPos.getY());
-            tag.setInteger("Ez",TargetPos.getZ());
+        if (findTarget) {
+            tag.setInteger("Sx", this.getPos().getX());
+            tag.setInteger("Sy", this.getPos().getY());
+            tag.setInteger("Sz", this.getPos().getZ());
+            tag.setInteger("Ex", TargetPos.getX());
+            tag.setInteger("Ey", TargetPos.getY());
+            tag.setInteger("Ez", TargetPos.getZ());
 
         }
         buf.writeCompoundTag(tag);
     }
+
     @SideOnly(Side.CLIENT)
-    private void readParticles( PacketBuffer buf) throws IOException {
+    private void readParticles(PacketBuffer buf) throws IOException {
         NBTTagCompound tag = buf.readCompoundTag();
-        if(tag.hasKey("Ex"))
-        {
-            BlockPos Spos = new BlockPos(tag.getInteger("Sx"),tag.getInteger("Sy"),tag.getInteger("Sz"));
-            BlockPos Epos = new BlockPos(tag.getInteger("Ex"),tag.getInteger("Ey"),tag.getInteger("Ez"));
-            operateClient(Spos,Epos,20);
+        if (tag.hasKey("Ex")) {
+            BlockPos Spos = new BlockPos(tag.getInteger("Sx"), tag.getInteger("Sy"), tag.getInteger("Sz"));
+            BlockPos Epos = new BlockPos(tag.getInteger("Ex"), tag.getInteger("Ey"), tag.getInteger("Ez"));
+            operateClient(Spos, Epos, 20);
         }
 
     }
+
     @SideOnly(Side.CLIENT)
-    public void operateClient(BlockPos Spos,BlockPos Epos,int age) {
-        GTParticleManager.INSTANCE.addEffect(new LaserBeamParticle(this,Spos,Epos,age));
+    public void operateClient(BlockPos Spos, BlockPos Epos, int age) {
+        GTParticleManager.INSTANCE.addEffect(new LaserBeamParticle(this, Spos, Epos, age));
     }
 }

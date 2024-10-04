@@ -97,38 +97,34 @@ public class MetaTileEntityMicrowaveEnergyReceiver extends MetaTileEntity implem
 
     public void update() {
         super.update();
-        if (!active||Voltage <= 0 || Amperage <= 0) return;
+        if (!active || Voltage <= 0 || Amperage <= 0) return;
 
-        for(int i=0;i<6;i++) {
-            BlockPos poss = this.getPos();
-            if (GTUtility.getMetaTileEntity(this.getWorld(), poss.add(pos[i][0], pos[i][1], pos[i][2])) instanceof MetaTileEntity) {
-                MetaTileEntity mte = (MetaTileEntity) GTUtility.getMetaTileEntity(this.getWorld(), poss.add(pos[i][0], pos[i][1], pos[i][2]));
+        int[][] pos = { {1, 0, 0}, {-1, 0, 0}, {0, 1, 0}, {0, -1, 0}, {0, 0, 1}, {0, 0, -1} };
+
+        for (int i = 0; i < 6; i++) {
+            BlockPos poss = this.getPos().add(pos[i][0], pos[i][1], pos[i][2]);
+            MetaTileEntity mte = GTUtility.getMetaTileEntity(this.getWorld(), poss);
+            if (mte != null) {
                 for (EnumFacing facing : EnumFacing.VALUES) {
                     if (mte.getCapability(GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER, facing) instanceof IEnergyContainer) {
                         IEnergyContainer container = mte.getCapability(GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER, facing);
-                            if (energyContainer.getEnergyStored() > V[Voltage] * Amperage) {
-                                if (  (container.getEnergyCapacity() - container.getEnergyStored())  < V[Voltage] * Amperage) {
-                                    container.addEnergy(container.getEnergyCapacity() - container.getEnergyStored());
-                                    energyContainer.removeEnergy(container.getEnergyCapacity() - container.getEnergyStored());
-                                } else {
-                                    container.addEnergy(V[Voltage] * Amperage);
-                                    energyContainer.removeEnergy(V[Voltage] * Amperage);
-                                }
-                            }
-                            else {
-                                if (  (container.getEnergyCapacity() - container.getEnergyStored())   < energyContainer.getEnergyStored()) {
-                                    container.addEnergy(container.getEnergyCapacity() - container.getEnergyStored());
-                                    energyContainer.removeEnergy(container.getEnergyCapacity() - container.getEnergyStored());
-                                } else {
-                                    container.addEnergy(energyContainer.getEnergyStored());
-                                    energyContainer.removeEnergy(energyContainer.getEnergyStored());
-                                }
-                            }
+                        assert container != null;
+                        transferEnergy(container);
                     }
                 }
             }
         }
+    }
 
+    private void transferEnergy(IEnergyContainer container) {
+        long energyToTransfer = Math.min(V[Voltage] * Amperage, energyContainer.getEnergyStored());
+        long maxCapacity = container.getEnergyCapacity() - container.getEnergyStored();
+
+        if (energyToTransfer > 0 && maxCapacity > 0) {
+            long transferAmount = Math.min(energyToTransfer, maxCapacity);
+            container.addEnergy(transferAmount);
+            energyContainer.removeEnergy(transferAmount);
+        }
     }
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
@@ -200,12 +196,13 @@ public class MetaTileEntityMicrowaveEnergyReceiver extends MetaTileEntity implem
 
     public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
         ICubeRenderer baseTexture = this.getBaseTexture();
-        pipeline = (IVertexOperation[])ArrayUtils.add(pipeline, new ColourMultiplier(GTUtility.convertRGBtoOpaqueRGBA_CL(this.getPaintingColorForRendering())));
+        pipeline = ArrayUtils.add(pipeline, new ColourMultiplier(GTUtility.convertRGBtoOpaqueRGBA_CL(this.getPaintingColorForRendering())));
         if (!(baseTexture instanceof FireboxActiveRenderer) && !(baseTexture instanceof SimpleOrientedCubeRenderer)) {
             baseTexture.render(renderState, translation, pipeline);
         } else {
             baseTexture.renderOriented(renderState, translation, pipeline, this.getFrontFacing());
         }
+        Textures.ENERGY_OUT.renderSided(this.getFrontFacing(), renderState, translation, pipeline);
 
     }
     public ICubeRenderer getBaseTexture() {

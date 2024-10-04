@@ -348,6 +348,25 @@ metaitem.quantum_anomaly.name=量子反常
 metaitem.mill.grindball_soapstone.name=皂石研磨球
 metaitem.mill.grindball_aluminium.name=铝研磨球
 
+# 钢制风力发电机转子
+metaitem.wind_rotor.steel.name=钢制风力发电机转子
+metaitem.wind_rotor.steel.description=最大耐久度: 240000, 层级: 1
+# 铝制风力发电机转子
+metaitem.wind_rotor.aluminium.name=铝制风力发电机转子
+metaitem.wind_rotor.aluminium.description=最大耐久度: 480000, 层级: 2
+# 不锈钢风力发电机转子
+metaitem.wind_rotor.stainlesssteel.name=不锈钢风力发电机转子
+metaitem.wind_rotor.stainlesssteel.description=最大耐久度: 960000, 层级: 3
+# 钛制风力发电机转子
+metaitem.wind_rotor.titanium.name=钛制风力发电机转子
+metaitem.wind_rotor.titanium.description=最大耐久度: 1920000, 层级: 4
+# 钨钢风力发电机转子
+metaitem.wind_rotor.tungstensteel.name=钨钢风力发电机转子
+metaitem.wind_rotor.tungstensteel.description=最大耐久度: 3840000, 层级: 5
+# 镀铑钯风力发电机转子
+metaitem.wind_rotor.rhodiumplatedpalladium.name=镀铑钯风力发电机转子
+metaitem.wind_rotor.rhodiumplatedpalladium.description=最大耐久度: 7680000, 层级: 6
+
 #  Debug
 tile.component_assembly_line_casing.lv.name=部件装配线外壳（LV）
 tile.component_assembly_line_casing.lv.tooltip=简易装配单元
@@ -2255,6 +2274,13 @@ gtqtcore.machine.laser.output.uxv.name=高能无线激光源仓（§eUXV§r）
 gtqtcore.machine.laser.output.opv.name=高能无线激光源仓（§9OpV§r）
 gtqtcore.machine.laser.output.max.name=高能无线激光源仓（§c§lMAX§r）
 
+gtqtcore.machine.laser_booster.6.name=高能激光点火器（§dLuV§r）
+gtqtcore.machine.laser_booster.7.name=高能激光点火器（§cZPM§r）
+gtqtcore.machine.laser_booster.8.name=高能激光点火器（§3UV§r）
+gtqtcore.machine.laser_booster.9.name=高能激光点火器（§4UHV§r）
+gtqtcore.machine.laser_booster.10.name=高能激光点火器（§aUEV§r）
+gtqtcore.machine.laser_booster.11.name=高能激光点火器（§2UIV§r）
+
 gtqtcore.machine.laser_switch.name=高能激光分配单元
 gtqtcore.machine.laser_translation.name=高能激光接收仓
 gtqtcore.machine.laser_emitter.name=高能激光发射仓
@@ -3207,6 +3233,7 @@ gregtech.material.enzymese_301=α-定向脂肪酶
 gregtech.material.enzymese_302=α-普适发酵酶
 gregtech.material.enzymese_303=α-定向发酵酶
 gregtech.material.enzymese_401=α-活性诱变酶
+gregtech.material.enzymese_501=β-定向镧系菌种
 metaitem.solar_plate_mki.name=粗制光伏板
 metaitem.solar_plate_mkii.name=标准光伏板
 metaitem.solar_plate_mkiii.name=精致光伏板

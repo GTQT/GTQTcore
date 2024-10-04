@@ -1958,7 +1958,6 @@ public class KeQingNET {
                 .duration(300)
                 .buildAndRegister();
 
-
         //  Flotation Factory
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(frameGt, HastelloyX)

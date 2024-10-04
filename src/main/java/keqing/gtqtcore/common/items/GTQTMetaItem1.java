@@ -19,6 +19,7 @@ import net.minecraft.client.resources.I18n;
 
 
 import static gregtech.api.GTValues.M;
+import static gregtech.api.unification.material.Materials.*;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.BET4;
 
@@ -234,6 +235,14 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         ADV_CAPACITOR =this.addItem(351, "adv_capacitor").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         ADV_COMPONENT_VENT=this.addItem(352, "adv_component_vent").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         ADV_HEAT_EXCHANGE=this.addItem(353, "adv_heat_exchange").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        //风电扇叶（注册6个）
+        WIND_ROTOR_STEEL = this.addItem(380, "wind_rotor.steel").setMaxStackSize(1).addComponents(new WindRotorBehavior(240000,1,Steel)).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        WIND_ROTOR_ALUMINIUM = this.addItem(381, "wind_rotor.aluminium").setMaxStackSize(1).addComponents(new WindRotorBehavior(480000,2,Aluminium)).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        WIND_ROTOR_STAINLESSSTEEL = this.addItem(382, "wind_rotor.stainlesssteel").setMaxStackSize(1).addComponents(new WindRotorBehavior(960000,3,StainlessSteel)).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        WIND_ROTOR_TITANIUM = this.addItem(383, "wind_rotor.titanium").setMaxStackSize(1).addComponents(new WindRotorBehavior(1920000,4,Titanium)).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        WIND_ROTOR_TUNGSTENSTEEL = this.addItem(384, "wind_rotor.tungstensteel").setMaxStackSize(1).addComponents(new WindRotorBehavior(3840000,5,TungstenSteel)).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        WIND_ROTOR_RHODIUMPLATEDPALLADIUM = this.addItem(385, "wind_rotor.rhodiumplatedpalladium").setMaxStackSize(1).addComponents(new WindRotorBehavior(7680000,6,RhodiumPlatedPalladium)).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+
         //磨球
         GRINDBALL_SOAPSTONE = this.addItem(391, "mill.grindball_soapstone").setMaxStackSize(1).addComponents(new MillBallBehavior()).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         GRINDBALL_ALUMINIUM = this.addItem(392, "mill.grindball_aluminium").setMaxStackSize(1).addComponents(new MillBallBehavior()).setCreativeTabs(CommonProxy.GTQTCore_TAB);

@@ -809,6 +809,7 @@ public class GTQTMaterials {
     public static Material Methylparatoluate;
     public static Material DimethylTerephthalate;
     public static Material Spacetime;
+    public static Material Enzymesea;
 
     //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/api/unification/GSMaterials.java
 
