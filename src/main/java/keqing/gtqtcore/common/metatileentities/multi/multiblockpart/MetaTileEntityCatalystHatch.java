@@ -12,10 +12,10 @@ import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockAbilityPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockPart;
-import keqing.gtqtcore.api.capability.GTQTCapabilities;
-import keqing.gtqtcore.api.capability.impl.WrappedCatalyst;
-import keqing.gtqtcore.api.capability.item.ICatalyst;
+import keqing.gtqtcore.api.capability.ICatalystHatch;
+import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
 import keqing.gtqtcore.client.textures.GTQTTextures;
+import keqing.gtqtcore.common.items.behaviors.CatalystBehavior;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -34,123 +34,80 @@ import net.minecraftforge.items.ItemStackHandler;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
-public class MetaTileEntityCatalystHatch extends MetaTileEntityMultiblockPart implements IMultiblockAbilityPart<ICatalyst> {
+public class MetaTileEntityCatalystHatch extends MetaTileEntityMultiblockPart implements IMultiblockAbilityPart<ICatalystHatch>, ICatalystHatch {
 
-    private final ItemStackHandler itemStack = new ItemStackHandler(1){
-        @Override
-        public boolean isItemValid(int slot,  ItemStack stack) {
-            return stack.getItem() instanceof ICatalyst;
-        }
-
-        @Override
-        protected void onLoad() {
-            onContentsChanged(0);
-        }
-
-        @Override
-        protected void onContentsChanged(int slot) {
-            needUpdate = true;
-            ItemStack item = this.getStackInSlot(0);
-            catalyst.update(item.isEmpty() ? () -> Optional.of("") : (ICatalyst)item.getItem() );
-        }
-    };
-    private final WrappedCatalyst catalyst = new WrappedCatalyst(Optional::empty){
-        @Override
-        public void consumeCatalyst(int amount) {
-            ItemStack item = itemStack.getStackInSlot(0);
-            if(!item.isEmpty() && item.isItemStackDamageable()){
-                int left = item.getMaxDamage() - item.getItemDamage();
-                if(left>amount){
-                    item.setItemDamage(item.getItemDamage()+amount);
-                }
-                else {
-                    item.shrink(1);
-                }
-            }
-
-        }
-    };
-
-    private boolean needUpdate = false;
-
+    private final CatalystHolder catalystHolder;
+    private boolean needUpdate;
 
     public MetaTileEntityCatalystHatch(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, 4);
-    }
-
-
-    @Override
-    public void update() {
-        super.update();
-        if(needUpdate){
-            needUpdate = false;
-            this.markDirty();
-        }
+        super(metaTileEntityId, 2);
+        this.catalystHolder = new CatalystHolder();
     }
 
     @Override
-    public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {
-        return new MetaTileEntityCatalystHatch(this.metaTileEntityId);
+    public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
+        return new MetaTileEntityCatalystHatch(metaTileEntityId);
     }
 
-    @Override
     @SideOnly(Side.CLIENT)
+    @Override
     public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
         super.renderMetaTileEntity(renderState, translation, pipeline);
-        if (this.shouldRenderOverlay()){
+        if (this.shouldRenderOverlay()) {
             GTQTTextures.CATALYST_HATCH.renderSided(getFrontFacing(), renderState, translation, pipeline);
         }
-
     }
 
     @Override
     protected ModularUI createUI(EntityPlayer entityPlayer) {
-        ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND, 176, 209)
-                .bindPlayerInventory(entityPlayer.inventory, 126)
-                .widget(new SlotWidget(this.itemStack,0, 88-9,50,true,true,true)
-                        .setBackgroundTexture(GuiTextures.SLOT)
-                        .setChangeListener(this::markDirty))
-                .widget(new LabelWidget(88,20,"gtqtcore.multipart.catalyst.only")
-                        .setXCentered(true));
+        ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND, 176, 209).bindPlayerInventory(entityPlayer.inventory, 126).widget(new SlotWidget(this.catalystHolder, 0, 88 - 9, 50, true, true, true).setBackgroundTexture(GuiTextures.SLOT).setChangeListener(this::markDirty)).widget(new LabelWidget(88, 20, "只能使用催化剂喵！").setXCentered(true));
 
-        return builder.build(this.getHolder(),entityPlayer);
+        return builder.build(this.getHolder(), entityPlayer);
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void addInformation(ItemStack stack, World world, List<String> tooltip, boolean advanced) {
+        super.addInformation(stack, world, tooltip, advanced);
+        tooltip.add(I18n.format("只能放置催化剂喵！"));
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void addToolUsages(ItemStack stack, World world, List<String> tooltip, boolean advanced) {
+        tooltip.add(I18n.format("gregtech.tool_action.screwdriver.access_covers"));
+        tooltip.add(I18n.format("gregtech.tool_action.wrench.set_facing"));
+        super.addToolUsages(stack, world, tooltip, advanced);
     }
 
     @Override
-    public MultiblockAbility<ICatalyst> getAbility() {
-        return GTQTCapabilities.CATALYST;
-    }
-
-    @Override
-    public void registerAbilities(List<ICatalyst> list) {
-        list.add(catalyst);
-    }
-
     public void writeInitialSyncData(PacketBuffer buf) {
         super.writeInitialSyncData(buf);
         buf.writeBoolean(this.needUpdate);
-        buf.writeCompoundTag(itemStack.serializeNBT());
+        buf.writeCompoundTag(this.catalystHolder.serializeNBT());
     }
 
+    @Override
     public void receiveInitialSyncData(PacketBuffer buf) {
         super.receiveInitialSyncData(buf);
         this.needUpdate = buf.readBoolean();
         try {
-            itemStack.deserializeNBT(Objects.requireNonNull(buf.readCompoundTag()));
+            this.catalystHolder.deserializeNBT(Objects.requireNonNull(buf.readCompoundTag()));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
+    @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         super.writeToNBT(data);
         data.setBoolean("needUpdate", this.needUpdate);
-        data.setTag("item", this.itemStack.serializeNBT());
+        data.setTag("item", this.catalystHolder.serializeNBT());
         return data;
     }
 
+    @Override
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         if (data.hasKey("needUpdate")) {
@@ -158,14 +115,13 @@ public class MetaTileEntityCatalystHatch extends MetaTileEntityMultiblockPart im
         }
 
         if (data.hasKey("item")) {
-            itemStack.deserializeNBT(data.getCompoundTag("item"));
+            this.catalystHolder.deserializeNBT(data.getCompoundTag("item"));
         }
-
     }
 
     @Override
     public void clearMachineInventory(NonNullList<ItemStack> itemBuffer) {
-        clearInventory(itemBuffer, this.itemStack);
+        clearInventory(itemBuffer, this.catalystHolder);
     }
 
     @Override
@@ -175,22 +131,105 @@ public class MetaTileEntityCatalystHatch extends MetaTileEntityMultiblockPart im
 
     @Override
     public <T> T getCapability(Capability<T> capability, EnumFacing side) {
-        return capability== CapabilityItemHandler.ITEM_HANDLER_CAPABILITY ?
-                CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(itemStack) : super.getCapability(capability, side);
+        return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY ? CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(this.catalystHolder) : super.getCapability(capability, side);
     }
 
     @Override
-    @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack stack,  World world,  List<String> tooltip, boolean advanced) {
-        super.addInformation(stack, world, tooltip, advanced);
-        tooltip.add(I18n.format("gregica.multipart.catalyst.only"));
+    public boolean hasCatalyst() {
+        return this.catalystHolder.hasCatalyst();
     }
 
     @Override
-    @SideOnly(Side.CLIENT)
-    public void addToolUsages(ItemStack stack, @javax.annotation.Nullable World world, List<String> tooltip, boolean advanced) {
-        tooltip.add(I18n.format("gregtech.tool_action.screwdriver.access_covers"));
-        tooltip.add(I18n.format("gregtech.tool_action.wrench.set_facing"));
-        super.addToolUsages(stack, world, tooltip, advanced);
+    public void catalystConsumed(int amount) {
+        this.catalystHolder.damageCatalyst(amount);
+    }
+
+    @Override
+    public MultiblockAbility<ICatalystHatch> getAbility() {
+        return GTQTMultiblockAbility.CATALYST_MULTIBLOCK_ABILITY;
+    }
+
+    @Override
+    public void registerAbilities(List<ICatalystHatch> list) {
+        list.add(this);
+    }
+
+    @Override
+    public void setStackInSlot(int slot, ItemStack stack) {
+        this.catalystHolder.setStackInSlot(slot, stack);
+    }
+
+    @Override
+    public int getSlots() {
+        return this.catalystHolder.getSlots();
+    }
+
+
+    @Override
+    public ItemStack getStackInSlot(int slot) {
+        return this.catalystHolder.getStackInSlot(slot);
+    }
+
+
+    @Override
+    public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
+        return this.catalystHolder.insertItem(slot, stack, simulate);
+    }
+
+
+    @Override
+    public ItemStack extractItem(int slot, int amount, boolean simulate) {
+        return this.catalystHolder.extractItem(slot, amount, simulate);
+    }
+
+    @Override
+    public int getSlotLimit(int slot) {
+        return this.catalystHolder.getSlotLimit(slot);
+    }
+
+    private class CatalystHolder extends ItemStackHandler {
+
+
+        private CatalystBehavior getCatalystBehavior() {
+            ItemStack stack = this.getStackInSlot(0);
+            if (stack.isEmpty()) return null;
+            return CatalystBehavior.getInstanceFor(stack);
+        }
+
+        @Override
+        public int getSlotLimit(int slot) {
+            return 1;
+        }
+
+        private void damageCatalyst(int damageAmount) {
+            if (!this.hasCatalyst()) return;
+            Objects.requireNonNull(this.getCatalystBehavior()).applyCatalystDamage(this.getStackInSlot(0), damageAmount);
+        }
+
+
+        private ItemStack getCatalystStack() {
+            if (!this.hasCatalyst()) return null;
+            return this.getStackInSlot(0);
+        }
+
+        @Override
+        public boolean isItemValid(int slot, ItemStack stack) {
+            return CatalystBehavior.getInstanceFor(stack) != null && super.isItemValid(slot, stack);
+        }
+
+        @Override
+        protected void onLoad() {
+            this.onContentsChanged(0);
+        }
+
+        @Override
+        protected void onContentsChanged(int slot) {
+            needUpdate = true;
+        }
+
+        private boolean hasCatalyst() {
+            return this.getCatalystBehavior() != null;
+        }
+
     }
 }

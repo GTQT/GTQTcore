@@ -164,6 +164,15 @@ public class removeRecipes {
 
 
         //机器外壳 * 1
+        // §bMV§r机器外壳 * 1
+
+        GTRecipeHandler.removeRecipesByInputs(ASSEMBLER_RECIPES, new ItemStack[]{MetaBlocks.MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.ULV),OreDictUnifier.get(cableGtSingle,RedAlloy,2)},new FluidStack[]{Polyethylene.getFluid(288)});
+        GTRecipeHandler.removeRecipesByInputs(ASSEMBLER_RECIPES, new ItemStack[]{MetaBlocks.MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.LV),OreDictUnifier.get(cableGtSingle,Tin,2)},new FluidStack[]{Polyethylene.getFluid(288)});
+        GTRecipeHandler.removeRecipesByInputs(ASSEMBLER_RECIPES, new ItemStack[]{MetaBlocks.MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.MV),OreDictUnifier.get(cableGtSingle,AnnealedCopper,2)},new FluidStack[]{Polyethylene.getFluid(288)});
+        GTRecipeHandler.removeRecipesByInputs(ASSEMBLER_RECIPES, new ItemStack[]{MetaBlocks.MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.MV),OreDictUnifier.get(cableGtSingle,Copper,2)},new FluidStack[]{Polyethylene.getFluid(288)});
+        GTRecipeHandler.removeRecipesByInputs(ASSEMBLER_RECIPES, new ItemStack[]{MetaBlocks.MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.HV),OreDictUnifier.get(cableGtSingle,Gold,2)},new FluidStack[]{Polyethylene.getFluid(288)});
+        GTRecipeHandler.removeRecipesByInputs(ASSEMBLER_RECIPES, new ItemStack[]{MetaBlocks.MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.EV),OreDictUnifier.get(cableGtSingle,Aluminium,2)},new FluidStack[]{Polyethylene.getFluid(288)});
+
         GTRecipeHandler.removeRecipesByInputs(ASSEMBLER_RECIPES, new ItemStack[]{MetaBlocks.MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.IV),OreDictUnifier.get(cableGtSingle,Platinum,2)},new FluidStack[]{Polytetrafluoroethylene.getFluid(288)});
         GTRecipeHandler.removeRecipesByInputs(ASSEMBLER_RECIPES, new ItemStack[]{MetaBlocks.MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.LuV),OreDictUnifier.get(cableGtSingle,NiobiumTitanium,2)},new FluidStack[]{Polytetrafluoroethylene.getFluid(288)});
         GTRecipeHandler.removeRecipesByInputs(ASSEMBLER_RECIPES, new ItemStack[]{MetaBlocks.MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.ZPM),OreDictUnifier.get(cableGtSingle,VanadiumGallium,2)},new FluidStack[]{Polybenzimidazole.getFluid(288)});

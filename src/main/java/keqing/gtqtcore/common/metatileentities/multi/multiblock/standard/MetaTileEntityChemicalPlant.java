@@ -20,8 +20,10 @@ import gregtech.client.utils.TooltipHelper;
 import gregtech.common.blocks.BlockWireCoil;
 import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
-import keqing.gtqtcore.api.capability.GTQTCapabilities;
+import keqing.gtqtcore.api.capability.IBall;
+import keqing.gtqtcore.api.capability.ICatalystHatch;
 import keqing.gtqtcore.api.capability.chemical_plant.ChemicalPlantProperties;
+import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
 import keqing.gtqtcore.api.metaileentity.multiblock.GTQTRecipeMapMultiblockOverwrite;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
@@ -107,7 +109,7 @@ public class MetaTileEntityChemicalPlant extends GTQTRecipeMapMultiblockOverwrit
                         .or(abilities(MultiblockAbility.EXPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1))
                         .or(abilities(MultiblockAbility.IMPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1))
                         .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setMinGlobalLimited(1).setPreviewCount(1))
-                        .or(abilities(GTQTCapabilities.CATALYST).setMaxGlobalLimited(2).setPreviewCount(1))
+                        .or(abilities(GTQTMultiblockAbility.CATALYST_MULTIBLOCK_ABILITY).setMaxGlobalLimited(2).setPreviewCount(1))
                         .or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(2).setPreviewCount(1)))
                 .where('C',TiredTraceabilityPredicate.CP_CASING.get())
                 .where('X', heatingCoils())
@@ -117,7 +119,12 @@ public class MetaTileEntityChemicalPlant extends GTQTRecipeMapMultiblockOverwrit
                 .where('A', air())
                 .build();
     }
-
+    public ICatalystHatch getCatalystHatch() {
+        List<ICatalystHatch> abilities = getAbilities(GTQTMultiblockAbility.CATALYST_MULTIBLOCK_ABILITY);
+        if (abilities.isEmpty())
+            return null;
+        return abilities.get(0);
+    }
     @Override
     protected boolean shouldShowVoidingModeButton() {
         return false;
@@ -258,10 +265,6 @@ public class MetaTileEntityChemicalPlant extends GTQTRecipeMapMultiblockOverwrit
         }
 
         public void update() {
-//            if (metaTileEntity.getWorld().isRemote) {
-//
-//            }
-
         }
 
         public void setMaxProgress(int maxProgress) {
@@ -277,7 +280,6 @@ public class MetaTileEntityChemicalPlant extends GTQTRecipeMapMultiblockOverwrit
         public boolean checkRecipe(@Nonnull Recipe recipe) {
             if (!super.checkRecipe(recipe))
                 return false;
-
             return recipe.getProperty(ChemicalPlantProperties.getInstance(), 0) <= tier;
         }
 

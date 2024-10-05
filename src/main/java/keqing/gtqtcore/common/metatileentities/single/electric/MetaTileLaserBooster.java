@@ -64,7 +64,7 @@ public class MetaTileLaserBooster extends MetaTileEntity{
     public MetaTileLaserBooster(ResourceLocation metaTileEntityId, int tier) {
         super(metaTileEntityId);
         this.tier=tier;
-        this.LaserStoreMax=V[tier]*16*500;
+        this.LaserStoreMax=V[tier]*32*10;
     }
     @Override
     public void update() {

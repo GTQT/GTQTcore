@@ -690,16 +690,6 @@ public class MetaTileEntityLoader {
                 new UnificationEntry(OrePrefix.pipeLargeFluid, Steel), 'C',
                 new UnificationEntry(OrePrefix.circuit, MV), 'F', MetaItems.ELECTRIC_PUMP_LV);
 
-        ModHandler.addShapedRecipe(true, "low_distillation_tower", LOW_PRESSURE_CRYOGENIC_DISTILLATION_PLANT.getStackForm(),
-                "CBC", "FMF", "CBC", 'M', MetaTileEntities.HULL[GTValues.MV].getStackForm(), 'B',
-                new UnificationEntry(OrePrefix.pipeLargeFluid, Aluminium), 'C',
-                new UnificationEntry(OrePrefix.circuit, HV), 'F', MetaItems.ELECTRIC_PUMP_MV);
-
-        ModHandler.addShapedRecipe(true, "high_distillation_tower", HIGH_PRESSURE_CRYOGENIC_DISTILLATION_PLANT.getStackForm(),
-                "CBC", "FMF", "CBC", 'M', MetaTileEntities.HULL[GTValues.EV].getStackForm(), 'B',
-                new UnificationEntry(OrePrefix.pipeLargeFluid, Titanium), 'C',
-                new UnificationEntry(OrePrefix.circuit, IV), 'F', MetaItems.ELECTRIC_PUMP_EV);
-
         ModHandler.addShapedRecipe(true, "msf", GTQTMetaTileEntities.MSF.getStackForm(),
                 "CBC", "FMF", "CBC", 'M', MetaTileEntities.HULL[GTValues.MV].getStackForm(), 'B',
                 new UnificationEntry(OrePrefix.pipeLargeFluid, Aluminium), 'C',
@@ -1221,59 +1211,6 @@ public class MetaTileEntityLoader {
                 .duration(20)
                 .buildAndRegister();
 
-/*
-        ModHandler.addShapedRecipe(true, "diesel_generator_ev", GTQTMetaTileEntities.COMBUSTION_GENERATOR[0].getStackForm(),
-                "PCP", "EME", "GWG", 'M', HULL[GTValues.EV].getStackForm(), 'P',
-                MetaItems.ELECTRIC_PISTON_EV, 'E', MetaItems.ELECTRIC_MOTOR_EV ,'C',
-                new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.EV), 'W',
-                new UnificationEntry(OrePrefix.cableGtSingle, Materials.Aluminium), 'G',
-                new UnificationEntry(OrePrefix.gear, Materials.Titanium));
-        ModHandler.addShapedRecipe(true, "diesel_generator_iv", GTQTMetaTileEntities.COMBUSTION_GENERATOR[1].getStackForm(),
-                "PCP", "EME", "GWG", 'M', HULL[GTValues.IV].getStackForm(), 'P',
-                MetaItems.ELECTRIC_PISTON_IV, 'E', MetaItems.ELECTRIC_MOTOR_IV, 'C',
-                new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.IV), 'W',
-                new UnificationEntry(OrePrefix.cableGtSingle, Materials.Platinum), 'G',
-                new UnificationEntry(OrePrefix.gear, Materials.TungstenSteel));
-
-        ModHandler.addShapedRecipe(true, "gas_turbine_ev", GTQTMetaTileEntities.GAS_TURBINE[0].getStackForm(), "CRC", "RMR",
-                "EWE", 'M', HULL[GTValues.EV].getStackForm(), 'E', MetaItems.ELECTRIC_MOTOR_EV, 'R',
-                new UnificationEntry(OrePrefix.rotor, Materials.Aluminium), 'C',
-                new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.EV), 'W',
-                new UnificationEntry(OrePrefix.cableGtSingle, Materials.Aluminium));
-        ModHandler.addShapedRecipe(true, "gas_turbine_iv", GTQTMetaTileEntities.GAS_TURBINE[1].getStackForm(), "CRC", "RMR",
-                "EWE", 'M', HULL[GTValues.IV].getStackForm(), 'E', MetaItems.ELECTRIC_MOTOR_IV, 'R',
-                new UnificationEntry(OrePrefix.rotor, Materials.StainlessSteel), 'C',
-                new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.IV), 'W',
-                new UnificationEntry(OrePrefix.cableGtSingle, Materials.Platinum));
-
-        ModHandler.addShapedRecipe(true, "steam_turbine_ev", GTQTMetaTileEntities.STEAM_TURBINE[0].getStackForm(), "PCP",
-                "RMR", "EWE", 'M', HULL[GTValues.EV].getStackForm(), 'E', MetaItems.ELECTRIC_MOTOR_EV,
-                'R', new UnificationEntry(OrePrefix.rotor, Materials.Aluminium), 'C',
-                new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.EV), 'W',
-                new UnificationEntry(OrePrefix.cableGtSingle, Materials.Aluminium), 'P',
-                new UnificationEntry(OrePrefix.pipeNormalFluid, Materials.StainlessSteel));
-        ModHandler.addShapedRecipe(true, "steam_turbine_iv", GTQTMetaTileEntities.STEAM_TURBINE[1].getStackForm(), "PCP",
-                "RMR", "EWE", 'M', HULL[GTValues.IV].getStackForm(), 'E', MetaItems.ELECTRIC_MOTOR_IV,
-                'R', new UnificationEntry(OrePrefix.rotor, Materials.StainlessSteel), 'C',
-                new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.IV), 'W',
-                new UnificationEntry(OrePrefix.cableGtSingle, Materials.Platinum), 'P',
-                new UnificationEntry(OrePrefix.pipeNormalFluid, Materials.TungstenSteel));
-
-        ModHandler.addShapedRecipe(true, "rocket_engine_ev", GTQTMetaTileEntities.ROCKET_ENGINE[0].getStackForm(),
-                "PPP", "CMC", "EEE", 'M', HULL[GTValues.EV].getStackForm(), 'P',
-                MetaItems.ELECTRIC_PISTON_EV, 'E', MetaItems.ELECTRIC_MOTOR_EV ,'C',
-                new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.EV));
-
-        ModHandler.addShapedRecipe(true, "rocket_engine_iv", GTQTMetaTileEntities.ROCKET_ENGINE[1].getStackForm(),
-                "PPP", "CMC", "EEE", 'M', HULL[GTValues.IV].getStackForm(), 'P',
-                MetaItems.ELECTRIC_PISTON_IV, 'E', MetaItems.ELECTRIC_MOTOR_IV, 'C',
-                new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.IV));
-
-        ModHandler.addShapedRecipe(true, "rocket_engine_luv", GTQTMetaTileEntities.ROCKET_ENGINE[2].getStackForm(),
-                "PPP", "CMC", "EEE", 'M', HULL[GTValues.LuV].getStackForm(), 'P',
-                MetaItems.ELECTRIC_PISTON_LUV, 'E', MetaItems.ELECTRIC_MOTOR_LuV, 'C',
-                new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.LuV));
-*/
         ModHandler.addShapedRecipe(true, "particle_accelerator_iv", PARTICLE_ACCELERATOR_IO[0].getStackForm(),
                 "PPP", "CFC", "EME", 'M', HULL[GTValues.IV].getStackForm(),
                 'P', SENSOR_IV,

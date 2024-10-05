@@ -291,5 +291,14 @@ public class AlgaeChain {
                 .input(items, 1)
                 .fluidOutputs(Biooil.getFluid(2000))
                 .duration(1600).EUt(480).buildAndRegister();
+
+        CHEMICAL_PLANT.recipeBuilder()
+                .notConsumable(CATALYST_FRAMEWORK_V)
+                .input(items, 1)
+                .fluidOutputs(Biooil.getFluid(2000))
+                .recipeLevel(2)
+                .duration(1200)
+                .EUt(VA[EV])
+                .buildAndRegister();
     }
 }

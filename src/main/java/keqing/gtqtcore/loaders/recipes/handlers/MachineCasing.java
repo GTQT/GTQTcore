@@ -293,7 +293,7 @@ public class MachineCasing {
                 .circuitMeta(1)
                 .output(ingotHot,TungstenSteel,2)
                 .blastFurnaceTemp(4500)
-                .duration(4000*2)
+                .duration(400*2)
                 .EUt(VA[EV])
                 .buildAndRegister();
 
@@ -305,7 +305,7 @@ public class MachineCasing {
                 .circuitMeta(3)
                 .output(ingotHot,StainlessSteel,9)
                 .blastFurnaceTemp(2700)
-                .duration(2000*9)
+                .duration(400*9)
                 .EUt(VA[HV])
                 .buildAndRegister();
 
@@ -315,7 +315,7 @@ public class MachineCasing {
                 .circuitMeta(2)
                 .fluidOutputs(Invar.getFluid(144*2))
                 .blastFurnaceTemp(1800)
-                .duration(1000*2)
+                .duration(400*2)
                 .EUt(VA[MV])
                 .buildAndRegister();
 
@@ -326,11 +326,11 @@ public class MachineCasing {
                 .circuitMeta(2)
                 .fluidOutputs(VanadiumSteel.getFluid(144*9))
                 .blastFurnaceTemp(1800)
-                .duration(500*9)
+                .duration(400*9)
                 .EUt(VA[MV])
                 .buildAndRegister();
 
-        BLAST_ARC_RECIPES.recipeBuilder().duration(3000).EUt(VA[MV])
+        BLAST_ARC_RECIPES.recipeBuilder().duration(400*3).EUt(VA[MV])
                 .input(dust, Iron)
                 .input(dust, Aluminium)
                 .input(dust, Chrome)
@@ -339,7 +339,7 @@ public class MachineCasing {
                 .blastFurnaceTemp(1800)
                 .buildAndRegister();
 
-        BLAST_ARC_RECIPES.recipeBuilder().duration(2000).EUt(VA[MV])
+        BLAST_ARC_RECIPES.recipeBuilder().duration(400*5).EUt(VA[MV])
                 .input(dust, Nickel, 4)
                 .input(dust, Chrome)
                 .circuitMeta(2)
@@ -347,7 +347,7 @@ public class MachineCasing {
                 .blastFurnaceTemp(1800)
                 .buildAndRegister();
 
-        BLAST_ARC_RECIPES.recipeBuilder().duration(1800).EUt(VA[MV])
+        BLAST_ARC_RECIPES.recipeBuilder().duration(400*9).EUt(VA[MV])
                 .input(dust, Brass, 7)
                 .input(dust, Aluminium)
                 .input(dust, Cobalt)
@@ -356,7 +356,7 @@ public class MachineCasing {
                 .blastFurnaceTemp(1800)
                 .buildAndRegister();
 
-        BLAST_ARC_RECIPES.recipeBuilder().duration(2000).EUt(VA[MV])
+        BLAST_ARC_RECIPES.recipeBuilder().duration(400*2).EUt(VA[MV])
                 .input(dust, Copper)
                 .input(dust, Nickel)
                 .circuitMeta(1)
@@ -364,7 +364,7 @@ public class MachineCasing {
                 .blastFurnaceTemp(1800)
                 .buildAndRegister();
 
-        BLAST_ARC_RECIPES.recipeBuilder().duration(1500).EUt(VA[HV])
+        BLAST_ARC_RECIPES.recipeBuilder().duration(400*25).EUt(VA[HV])
                 .input(dust, Copper, 3)
                 .input(dust, Gold)
                 .input(dust, Silver)
@@ -375,7 +375,7 @@ public class MachineCasing {
                 .blastFurnaceTemp(1800)
                 .buildAndRegister();
 
-        BLAST_ARC_RECIPES.recipeBuilder().duration(400).EUt(VA[HV])
+        BLAST_ARC_RECIPES.recipeBuilder().duration(400*4).EUt(VA[HV])
                 .input(dust, Copper, 3)
                 .input(dust, Tin)
                 .circuitMeta(1)

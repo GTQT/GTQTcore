@@ -154,11 +154,11 @@ public class ZylonChain {
 
         //  Prezylon -> Zylon + Propane
         BLAST_RECIPES.recipeBuilder()
-                .input(dust, PreZylon,16)
-                .output(dust, Zylon,16)
-                .fluidOutputs(Propane.getFluid(32000))
+                .input(dust, PreZylon,1)
+                .output(dust, Zylon,1)
+                .fluidOutputs(Propane.getFluid(2000))
                 .EUt(VA[HV])
-                .duration(1600)
+                .duration(100)
                 .blastFurnaceTemp(3500)
                 .buildAndRegister();
     }

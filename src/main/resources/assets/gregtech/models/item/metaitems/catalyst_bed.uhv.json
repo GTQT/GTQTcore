@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures" : {
+    "layer0": "gtqtcore:items/metaitems/catalyst/catalyst_bed",
+    "layer1": "gtqtcore:items/metaitems/voltages/uhv"
+  }
+}

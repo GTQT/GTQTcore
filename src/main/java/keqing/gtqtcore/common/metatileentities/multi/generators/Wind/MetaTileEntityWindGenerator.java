@@ -233,15 +233,15 @@ public class MetaTileEntityWindGenerator extends MetaTileEntityBaseWithControl  
             GlStateManager.disableCull();
             FMLClientHandler.instance().getClient().getTextureManager().bindTexture(ObjModels.WindRotor_pic); //自带的材质绑定 需要传递一个ResourceLocation
             GlStateManager.translate(x, y, z);//translate是移动方法 这个移动到xyz是默认的 不要动
-            GlStateManager.translate(xDir * 3 + 0.5, 31, zDir * 3 + 0.5);//translate是移动方法 这个移动到xyz是默认的 不要动
 
+            GlStateManager.translate(xDir * 3 + 0.5, 31, zDir * 3 + 0.5);
 
             float angle = (System.currentTimeMillis() % 3600) / 10.0f; //我写的随时间变化旋转的角度
 
             if (this.frontFacing == EnumFacing.WEST) {
-                GlStateManager.rotate(90, 0F, 1F, 0F);
-            } else if (this.frontFacing == EnumFacing.EAST) {
                 GlStateManager.rotate(-90, 0F, 1F, 0F);
+            } else if (this.frontFacing == EnumFacing.EAST) {
+                GlStateManager.rotate(90, 0F, 1F, 0F);
             } else if (this.frontFacing == EnumFacing.NORTH) {
                 GlStateManager.rotate(180, 0F, 1F, 0F);
             }

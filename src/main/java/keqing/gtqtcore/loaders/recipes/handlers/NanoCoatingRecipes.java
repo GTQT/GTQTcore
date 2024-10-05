@@ -2,33 +2,26 @@ package keqing.gtqtcore.loaders.recipes.handlers;
 
 import gregtech.api.GTValues;
 import gregtech.api.metatileentity.multiblock.CleanroomType;
-import gregtech.api.recipes.Recipe;
-import gregtech.api.recipes.RecipeMaps;
-import gregtech.api.recipes.ingredients.GTRecipeInput;
 import gregtech.api.unification.material.MarkerMaterials;
 import gregtech.api.unification.material.Material;
-import gregtech.api.unification.material.properties.PropertyKey;
-import gregtech.api.unification.material.properties.WireProperties;
 import gregtech.api.unification.ore.OrePrefix;
-import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.FluidStack;
 
-import java.util.Collection;
+import java.util.Arrays;
 import java.util.List;
 
-import static gregicality.multiblocks.api.unification.GCYMMaterials.*;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.CHEMICAL_RECIPES;
-import static gregtech.api.unification.material.MarkerMaterials.Tier.HV;
+import static gregtech.api.recipes.RecipeMaps.LARGE_CHEMICAL_RECIPES;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
-import static gregtech.common.items.MetaItems.*;
 import static gregtechfoodoption.GTFOMaterialHandler.Acetaldehyde;
-import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.Formaldehyde;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.FormicAcid;
+import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.CHEMICAL_PLANT;
+import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.PRECISION_SPINNING;
+import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
+import static keqing.gtqtcore.api.unification.TJMaterials.Polyetheretherketone;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 
 public class NanoCoatingRecipes {
@@ -44,6 +37,8 @@ public class NanoCoatingRecipes {
         Catalyst_ii();
         Catalyst_iii();
         Catalyst_iv();
+        Catalyst_v();
+        Catalyst_vi();
     }
 
     private static void Catalyst_i() {
@@ -60,7 +55,7 @@ public class NanoCoatingRecipes {
         CHEMICAL_RECIPES.recipeBuilder()
                 .notConsumable(CATALYST_FRAMEWORK_I)
                 .circuitMeta(5)
-              
+
                 .fluidInputs(Formaldehyde.getFluid(1000))
                 .fluidOutputs(FormicAcid.getFluid(1000))
                 .duration(400).EUt(VA[GTValues.HV]).buildAndRegister();
@@ -68,7 +63,7 @@ public class NanoCoatingRecipes {
         CHEMICAL_RECIPES.recipeBuilder()
                 .notConsumable(CATALYST_FRAMEWORK_I)
                 .circuitMeta(5)
-              
+
                 .fluidInputs(Ethanol.getFluid(1000))
                 .fluidOutputs(Acetaldehyde.getFluid(1000))
                 .duration(400).EUt(VA[GTValues.HV]).buildAndRegister();
@@ -76,7 +71,7 @@ public class NanoCoatingRecipes {
         CHEMICAL_RECIPES.recipeBuilder()
                 .notConsumable(CATALYST_FRAMEWORK_I)
                 .circuitMeta(5)
-              
+
                 .fluidInputs(Ethylene.getFluid(1000))
                 .fluidOutputs(Acetaldehyde.getFluid(1000))
                 .duration(400).EUt(VA[GTValues.HV]).buildAndRegister();
@@ -84,7 +79,7 @@ public class NanoCoatingRecipes {
         CHEMICAL_RECIPES.recipeBuilder()
                 .notConsumable(CATALYST_FRAMEWORK_I)
                 .circuitMeta(5)
-              
+
                 .fluidInputs(Acetaldehyde.getFluid(1000))
                 .fluidOutputs(AceticAcid.getFluid(1000))
                 .duration(400).EUt(VA[GTValues.HV]).buildAndRegister();
@@ -101,7 +96,7 @@ public class NanoCoatingRecipes {
         CHEMICAL_RECIPES.recipeBuilder()
                 .notConsumable(CATALYST_FRAMEWORK_II)
                 .circuitMeta(5)
-              
+
                 .fluidInputs(Formaldehyde.getFluid(1000))
                 .fluidOutputs(Methanol.getFluid(1000))
                 .duration(400).EUt(VA[GTValues.HV]).buildAndRegister();
@@ -109,7 +104,7 @@ public class NanoCoatingRecipes {
         CHEMICAL_RECIPES.recipeBuilder()
                 .notConsumable(CATALYST_FRAMEWORK_II)
                 .circuitMeta(5)
-              
+
                 .fluidInputs(FormicAcid.getFluid(1000))
                 .fluidOutputs(Formaldehyde.getFluid(1000))
                 .duration(400).EUt(VA[GTValues.HV]).buildAndRegister();
@@ -117,7 +112,7 @@ public class NanoCoatingRecipes {
         CHEMICAL_RECIPES.recipeBuilder()
                 .notConsumable(CATALYST_FRAMEWORK_II)
                 .circuitMeta(5)
-              
+
                 .fluidInputs(Acetaldehyde.getFluid(1000))
                 .fluidOutputs(Ethanol.getFluid(1000))
                 .duration(400).EUt(VA[GTValues.HV]).buildAndRegister();
@@ -125,7 +120,7 @@ public class NanoCoatingRecipes {
         CHEMICAL_RECIPES.recipeBuilder()
                 .notConsumable(CATALYST_FRAMEWORK_II)
                 .circuitMeta(5)
-              
+
                 .fluidInputs(AceticAcid.getFluid(1000))
                 .fluidOutputs(Acetaldehyde.getFluid(1000))
                 .duration(400).EUt(VA[GTValues.HV]).buildAndRegister();
@@ -133,30 +128,81 @@ public class NanoCoatingRecipes {
     }
 
     private static void Catalyst_iii() {
-        CHEMICAL_RECIPES.recipeBuilder()
+        CHEMICAL_PLANT.recipeBuilder()
                 .notConsumable(CATALYST_FRAMEWORK_III)
+                .input(dustTiny, Gold)
                 .circuitMeta(5)
-                .input(dust,Carbon,2)
+                .input(dust, Carbon, 2)
                 .fluidInputs(Hydrogen.getFluid(4000))
                 .fluidOutputs(Polyethylene.getFluid(1000))
-                .duration(4000).EUt(VA[GTValues.HV]).buildAndRegister();
+                .recipeLevel(1)
+                .duration(1000).EUt(VA[HV]).buildAndRegister();
 
-        CHEMICAL_RECIPES.recipeBuilder()
+        CHEMICAL_PLANT.recipeBuilder()
                 .notConsumable(CATALYST_FRAMEWORK_III)
+                .input(dustTiny, Gold)
                 .circuitMeta(5)
-                .input(dust,Carbon,2)
+                .input(dust, Carbon, 2)
                 .fluidInputs(Fluorine.getFluid(4000))
                 .fluidOutputs(Polytetrafluoroethylene.getFluid(1000))
-                .duration(4000).EUt(VA[GTValues.HV]).buildAndRegister();
+                .recipeLevel(2)
+                .duration(1000).EUt(VA[HV]).buildAndRegister();
 
-        CHEMICAL_RECIPES.recipeBuilder()
+        CHEMICAL_PLANT.recipeBuilder()
                 .notConsumable(CATALYST_FRAMEWORK_III)
+                .input(dustTiny, Gold)
+                .circuitMeta(6)
+                .input(dust, Carbon, 2)
+                .fluidInputs(Hydrogen.getFluid(3000))
+                .fluidInputs(Chlorine.getFluid(1000))
+                .fluidOutputs(PolyvinylChloride.getFluid(1000))
+                .recipeLevel(3)
+                .duration(1000).EUt(VA[HV]).buildAndRegister();
+
+        CHEMICAL_PLANT.recipeBuilder()
+                .notConsumable(CATALYST_FRAMEWORK_III)
+                .input(dustTiny, Platinum)
                 .circuitMeta(5)
-                .input(dust,Carbon,6)
+                .input(dust, Carbon, 6)
                 .fluidInputs(Hydrogen.getFluid(4000))
                 .fluidInputs(Oxygen.getFluid(1000))
                 .fluidOutputs(Epoxy.getFluid(1000))
-                .duration(4000).EUt(VA[EV]).buildAndRegister();
+                .recipeLevel(4)
+                .duration(1000).EUt(VA[EV]).buildAndRegister();
+
+        CHEMICAL_PLANT.recipeBuilder()
+                .notConsumable(CATALYST_FRAMEWORK_III)
+                .input(dustTiny, Samarium)
+                .circuitMeta(6)
+                .input(dust, Carbon, 14)
+                .fluidInputs(Hydrogen.getFluid(6000))
+                .fluidInputs(Nitrogen.getFluid(2000))
+                .fluidInputs(Oxygen.getFluid(2000))
+                .fluidOutputs(Zylon.getFluid(144))
+                .recipeLevel(5)
+                .duration(1000).EUt(VA[IV]).buildAndRegister();
+
+        CHEMICAL_PLANT.recipeBuilder()
+                .notConsumable(CATALYST_FRAMEWORK_III)
+                .input(dustTiny, Naquadah)
+                .circuitMeta(6)
+                .input(dust, Carbon, 20)
+                .fluidInputs(Hydrogen.getFluid(12000))
+                .fluidInputs(Nitrogen.getFluid(4000))
+                .fluidOutputs(Polybenzimidazole.getFluid(1000))
+                .recipeLevel(6)
+                .duration(1000).EUt(VA[LuV]).buildAndRegister();
+
+        CHEMICAL_PLANT.recipeBuilder()
+                .notConsumable(CATALYST_FRAMEWORK_III)
+                .input(dustTiny, Naquadria)
+                .circuitMeta(6)
+                .input(dust, Carbon, 20)
+                .fluidInputs(Hydrogen.getFluid(12000))
+                .fluidInputs(Oxygen.getFluid(3000))
+                .fluidOutputs(Polyetheretherketone.getFluid(1000))
+                .recipeLevel(7)
+                .duration(1000).EUt(VA[ZPM]).buildAndRegister();
     }
 
     private static void Catalyst_iv() {
@@ -175,37 +221,273 @@ public class NanoCoatingRecipes {
                 .fluidOutputs(PreTreatedCrudeOil.getFluid(2000))
                 .duration(100).EUt(VA[GTValues.HV]).buildAndRegister();
 
-         CHEMICAL_RECIPES.recipeBuilder()
+        CHEMICAL_RECIPES.recipeBuilder()
                 .notConsumable(CATALYST_FRAMEWORK_IV)
                 .circuitMeta(5)
                 .fluidInputs(OilHeavy.getFluid(1000))
                 .fluidOutputs(PreTreatedCrudeOil.getFluid(2000))
                 .duration(100).EUt(VA[GTValues.HV]).buildAndRegister();
 
-         CHEMICAL_RECIPES.recipeBuilder()
+        CHEMICAL_RECIPES.recipeBuilder()
                 .notConsumable(CATALYST_FRAMEWORK_IV)
                 .circuitMeta(5)
                 .fluidInputs(OilLight.getFluid(1000))
                 .fluidOutputs(PreTreatedCrudeOil.getFluid(2000))
                 .duration(100).EUt(VA[GTValues.HV]).buildAndRegister();
 
-         CHEMICAL_RECIPES.recipeBuilder()
+        CHEMICAL_RECIPES.recipeBuilder()
                 .notConsumable(CATALYST_FRAMEWORK_IV)
                 .circuitMeta(5)
-              
+
                 .fluidInputs(Oil.getFluid(1000))
                 .fluidOutputs(PreTreatedCrudeOil.getFluid(2000))
                 .duration(100).EUt(VA[GTValues.HV]).buildAndRegister();
     }
-    
+
+    //嬗变
+    private static void Catalyst_v() {
+        CHEMICAL_PLANT.recipeBuilder()
+                .notConsumable(CATALYST_FRAMEWORK_V)
+                .fluidInputs(Zircons.getFluid(6000))
+                .input(OrePrefix.dust, Sodium, 10)
+                .fluidOutputs(Zrso.getFluid(800))
+                .fluidOutputs(Hfso.getFluid(800))
+                .fluidOutputs(SulfuricNickelSolution.getFluid(800))
+                .recipeLevel(5)
+                .duration(800)
+                .EUt(VA[EV])
+                .buildAndRegister();
+
+        CHEMICAL_PLANT.recipeBuilder()
+                .notConsumable(CATALYST_FRAMEWORK_V)
+                .fluidInputs(HydrochloricAcid.getFluid(10000))
+                .input(dust, SodiumTungstateDihydrate, 10)
+                .chancedOutput(dust, Powellite, 10, 5000, 0)
+                .fluidOutputs(ItungsticAcid.getFluid(800))
+                .fluidOutputs(ItungsticAcid.getFluid(800))
+                .fluidOutputs(ItungsticAcid.getFluid(800))
+                .fluidOutputs(ItungsticAcid.getFluid(800))
+                .fluidOutputs(ItungsticAcid.getFluid(800))
+                .fluidOutputs(ItungsticAcid.getFluid(800))
+                .recipeLevel(5)
+                .duration(800)
+                .EUt(VA[EV])
+                .buildAndRegister();
+
+        CHEMICAL_PLANT.recipeBuilder()
+                .notConsumable(CATALYST_FRAMEWORK_V)
+                .fluidInputs(Rzousuan.getFluid(2000))
+                .input(OrePrefix.dust, Carbon, 80)
+                .fluidOutputs(HydrobromicAcid.getFluid(200))
+                .fluidOutputs(Rousuan.getFluid(800))
+                .recipeLevel(5)
+                .duration(800)
+                .EUt(VA[EV])
+                .buildAndRegister();
+
+        CHEMICAL_PLANT.recipeBuilder()
+                .notConsumable(CATALYST_FRAMEWORK_V)
+                .fluidInputs(Biooil.getFluid(6000))
+                .input(OrePrefix.dust, SodaAsh, 10)
+                .fluidOutputs(RawOil.getFluid(750))
+                .fluidOutputs(RawOil.getFluid(750))
+                .fluidOutputs(RawOil.getFluid(750))
+                .fluidOutputs(Biomass.getFluid(600))
+                .recipeLevel(5)
+                .duration(800)
+                .EUt(VA[EV])
+                .buildAndRegister();
+
+        CHEMICAL_PLANT.recipeBuilder()
+                .notConsumable(CATALYST_FRAMEWORK_V)
+                .fluidInputs(Biooil.getFluid(6000))
+                .input(OrePrefix.dust, Meat, 10)
+                .fluidOutputs(RawOil.getFluid(750))
+                .fluidOutputs(RawOil.getFluid(750))
+                .fluidOutputs(RawOil.getFluid(750))
+                .fluidOutputs(Biomass.getFluid(600))
+                .recipeLevel(5)
+                .duration(800)
+                .EUt(VA[EV])
+                .buildAndRegister();
+
+        CHEMICAL_PLANT.recipeBuilder()
+                .notConsumable(CATALYST_FRAMEWORK_V)
+                .fluidInputs(Biooil.getFluid(6000))
+                .input(OrePrefix.dust, Bone, 10)
+                .fluidOutputs(RawOil.getFluid(750))
+                .fluidOutputs(RawOil.getFluid(750))
+                .fluidOutputs(RawOil.getFluid(750))
+                .fluidOutputs(Biomass.getFluid(600))
+                .recipeLevel(5)
+                .duration(800)
+                .EUt(VA[EV])
+                .buildAndRegister();
+    }
+
+    //裂解
+    private static void Catalyst_vi() {
+        //木头线
+        CHEMICAL_PLANT.recipeBuilder()
+                .notConsumable(CATALYST_FRAMEWORK_VI)
+                .input(log, Wood, 64)
+                .circuitMeta(1)
+                .outputs(new ItemStack(Items.COAL, 64, 1))
+                .fluidOutputs(Creosote.getFluid(300 * 8))
+                .fluidOutputs(Phenol.getFluid(75 * 8))
+                .fluidOutputs(Benzene.getFluid(350 * 8))
+                .fluidOutputs(Toluene.getFluid(75 * 8))
+                .fluidOutputs(Dimethylbenzene.getFluid(200 * 8))
+                .recipeLevel(4)
+                .duration(800)
+                .EUt(VA[EV])
+                .buildAndRegister();
+
+        CHEMICAL_PLANT.recipeBuilder()
+                .notConsumable(CATALYST_FRAMEWORK_VI)
+                .input(log, Wood, 64)
+                .circuitMeta(2)
+                .outputs(new ItemStack(Items.COAL, 64, 1))
+                .fluidOutputs(AceticAcid.getFluid(100 * 8))
+                .fluidOutputs(Water.getFluid(500 * 8))
+                .fluidOutputs(Ethanol.getFluid(10 * 8))
+                .fluidOutputs(Methanol.getFluid(300 * 8))
+                .fluidOutputs(Acetone.getFluid(50 * 8))
+                .fluidOutputs(MethylAcetate.getFluid(10 * 8))
+                .recipeLevel(4)
+                .duration(800)
+                .EUt(VA[EV])
+                .buildAndRegister();
+
+        CHEMICAL_PLANT.recipeBuilder()
+                .notConsumable(CATALYST_FRAMEWORK_VI)
+                .input(log, Wood, 64)
+                .circuitMeta(3)
+                .outputs(new ItemStack(Items.COAL, 64, 1))
+                .fluidOutputs(CarbonDioxide.getFluid(490 * 8))
+                .fluidOutputs(Ethylene.getFluid(20 * 8))
+                .fluidOutputs(Methane.getFluid(130 * 8))
+                .fluidOutputs(CarbonMonoxide.getFluid(340 * 8))
+                .fluidOutputs(Hydrogen.getFluid(20 * 8))
+                .recipeLevel(4)
+                .duration(800)
+                .EUt(VA[EV])
+                .buildAndRegister();
+        //石油线
+        List<Material> oilTypes = Arrays.asList(Oil, OilLight, OilHeavy, RawOil);
+        for (Material oil : oilTypes) {
+            CHEMICAL_PLANT.recipeBuilder()
+                    .notConsumable(CATALYST_FRAMEWORK_VI)
+                    .fluidInputs(oil.getFluid(1000))
+                    .fluidInputs(Hydrogen.getFluid(2000))
+                    .circuitMeta(2)
+                    .output(dust, Carbon, 1)
+                    .fluidOutputs(Octane.getFluid(100))
+                    .fluidOutputs(Naphtha.getFluid(250))
+                    .fluidOutputs(Butane.getFluid(300))
+                    .fluidOutputs(Propane.getFluid(300))
+                    .fluidOutputs(Ethane.getFluid(175))
+                    .fluidOutputs(Methane.getFluid(175))
+                    .recipeLevel(5)
+                    .duration(800)
+                    .EUt(VA[IV])
+                    .buildAndRegister();
+
+            CHEMICAL_PLANT.recipeBuilder()
+                    .notConsumable(CATALYST_FRAMEWORK_VI)
+                    .fluidInputs(oil.getFluid(1000))
+                    .fluidInputs(Steam.getFluid(2000))
+                    .circuitMeta(2)
+                    .output(dust, Carbon, 1)
+                    .fluidOutputs(Toluene.getFluid(80))
+                    .fluidOutputs(Benzene.getFluid(400))
+                    .fluidOutputs(Butene.getFluid(80))
+                    .fluidOutputs(Butadiene.getFluid(50))
+                    .fluidOutputs(Propene.getFluid(100))
+                    .fluidOutputs(Ethylene.getFluid(150))
+                    .recipeLevel(5)
+                    .duration(800)
+                    .EUt(VA[IV])
+                    .buildAndRegister();
+        }
+        ////////////////////////////////////////////////////
+        CHEMICAL_PLANT.recipeBuilder()
+                .notConsumable(CATALYST_FRAMEWORK_VI)
+                .fluidInputs(Oil.getFluid(1000))
+                .circuitMeta(1)
+                .chancedOutput(dust, Sulfur, 1000, 0)
+                .fluidOutputs(HeavyFuel.getFluid(300))
+                .fluidOutputs(LightFuel.getFluid(1000))
+                .fluidOutputs(Naphtha.getFluid(400))
+                .fluidOutputs(OilGas.getFluid(1200))
+                .recipeLevel(5)
+                .duration(800)
+                .EUt(VA[IV])
+                .buildAndRegister();
+
+        CHEMICAL_PLANT.recipeBuilder()
+                .notConsumable(CATALYST_FRAMEWORK_VI)
+                .fluidInputs(OilLight.getFluid(1500))
+                .circuitMeta(1)
+                .chancedOutput(dust, Sulfur, 1000, 0)
+                .fluidOutputs(HeavyFuel.getFluid(100))
+                .fluidOutputs(LightFuel.getFluid(200))
+                .fluidOutputs(Naphtha.getFluid(300))
+                .fluidOutputs(OilGas.getFluid(2400))
+                .recipeLevel(5)
+                .duration(800)
+                .EUt(VA[IV])
+                .buildAndRegister();
+
+        CHEMICAL_PLANT.recipeBuilder()
+                .notConsumable(CATALYST_FRAMEWORK_VI)
+                .fluidInputs(OilHeavy.getFluid(1000))
+                .circuitMeta(1)
+                .chancedOutput(dust, Sulfur, 1000, 0)
+                .fluidOutputs(HeavyFuel.getFluid(2500))
+                .fluidOutputs(LightFuel.getFluid(450))
+                .fluidOutputs(Naphtha.getFluid(150))
+                .fluidOutputs(OilGas.getFluid(600))
+                .recipeLevel(5)
+                .duration(800)
+                .EUt(VA[IV])
+                .buildAndRegister();
+
+        CHEMICAL_PLANT.recipeBuilder()
+                .notConsumable(CATALYST_FRAMEWORK_VI)
+                .fluidInputs(RawOil.getFluid(1000))
+                .circuitMeta(1)
+                .chancedOutput(dust, Sulfur, 1000, 0)
+                .fluidOutputs(HeavyFuel.getFluid(100))
+                .fluidOutputs(LightFuel.getFluid(500))
+                .fluidOutputs(Naphtha.getFluid(1500))
+                .fluidOutputs(OilGas.getFluid(600))
+                .recipeLevel(5)
+                .duration(800)
+                .EUt(VA[IV])
+                .buildAndRegister();
+    }
+
     private static void PRECISION_SPINNING() {
+
+        LARGE_CHEMICAL_RECIPES.recipeBuilder()
+                .duration(90000).EUt(VA[EV])
+                .input(frameGt, StainlessSteel, 8)
+                .input(OrePrefix.foil, Titanium, 16)
+                .input(wireFine, Platinum, 16)
+                .fluidInputs(Biomass.getFluid(1000))
+                .fluidInputs(Zylon.getFluid(1440))
+                .fluidInputs(StyreneButadieneRubber.getFluid(144))
+                .output(CATALYST_FRAMEWORK_BLANK)
+                .cleanroom(CleanroomType.CLEANROOM)
+                .buildAndRegister();
 
         //催化剂框架 使用激光模板
         PRECISION_SPINNING.recipeBuilder()
                 .duration(90000).EUt(VA[EV]).CWUt(256)
-                .input(OrePrefix.frameGt,Aluminium,8)
-                .input(OrePrefix.foil,Platinum,16)
-                .input(circuit, MarkerMaterials.Tier.EV,8)
+                .input(CATALYST_FRAMEWORK_BLANK)
+                .input(OrePrefix.foil, Platinum, 16)
+                .input(circuit, MarkerMaterials.Tier.EV, 8)
                 .fluidInputs(Enzymesbc.getFluid(1000))
                 .fluidInputs(Zylon.getFluid(1440))
                 .fluidInputs(StyreneButadieneRubber.getFluid(1440))
@@ -215,9 +497,9 @@ public class NanoCoatingRecipes {
 
         PRECISION_SPINNING.recipeBuilder()
                 .duration(90000).EUt(VA[EV]).CWUt(256)
-                .input(OrePrefix.frameGt,HastelloyX,8)
-                .input(OrePrefix.foil,Palladium,16)
-                .input(circuit, MarkerMaterials.Tier.EV,8)
+                .input(CATALYST_FRAMEWORK_BLANK)
+                .input(OrePrefix.foil, Palladium, 16)
+                .input(circuit, MarkerMaterials.Tier.EV, 8)
                 .fluidInputs(Enzymesbb.getFluid(1000))
                 .fluidInputs(Zylon.getFluid(1440))
                 .fluidInputs(StyreneButadieneRubber.getFluid(1440))
@@ -227,9 +509,9 @@ public class NanoCoatingRecipes {
 
         PRECISION_SPINNING.recipeBuilder()
                 .duration(90000).EUt(VA[EV]).CWUt(256)
-                .input(OrePrefix.frameGt,Ruridit,8)
-                .input(OrePrefix.foil,NiobiumTitanium,16)
-                .input(circuit, MarkerMaterials.Tier.EV,8)
+                .input(CATALYST_FRAMEWORK_BLANK)
+                .input(OrePrefix.foil, NiobiumTitanium, 16)
+                .input(circuit, MarkerMaterials.Tier.EV, 8)
                 .fluidInputs(Enzymesba.getFluid(1000))
                 .fluidInputs(Zylon.getFluid(1440))
                 .fluidInputs(StyreneButadieneRubber.getFluid(1440))
@@ -239,13 +521,37 @@ public class NanoCoatingRecipes {
 
         PRECISION_SPINNING.recipeBuilder()
                 .duration(90000).EUt(VA[EV]).CWUt(256)
-                .input(OrePrefix.frameGt,TungstenSteel,8)
-                .input(OrePrefix.foil,NanometerBariumTitanate,16)
-                .input(circuit, MarkerMaterials.Tier.EV,8)
+                .input(CATALYST_FRAMEWORK_BLANK)
+                .input(OrePrefix.foil, NanometerBariumTitanate, 16)
+                .input(circuit, MarkerMaterials.Tier.EV, 8)
                 .fluidInputs(Enzymesca.getFluid(1000))
                 .fluidInputs(Zylon.getFluid(1440))
                 .fluidInputs(Mutagen.getFluid(1000))
                 .output(CATALYST_FRAMEWORK_IV)
+                .cleanroom(CleanroomType.CLEANROOM)
+                .buildAndRegister();
+
+        PRECISION_SPINNING.recipeBuilder()
+                .duration(90000).EUt(VA[EV]).CWUt(256)
+                .input(CATALYST_FRAMEWORK_BLANK)
+                .input(OrePrefix.foil, Osmium, 16)
+                .input(circuit, MarkerMaterials.Tier.EV, 8)
+                .fluidInputs(Enzymesbd.getFluid(1000))
+                .fluidInputs(Zylon.getFluid(1440))
+                .fluidInputs(Mutagen.getFluid(1000))
+                .output(CATALYST_FRAMEWORK_V)
+                .cleanroom(CleanroomType.CLEANROOM)
+                .buildAndRegister();
+
+        PRECISION_SPINNING.recipeBuilder()
+                .duration(90000).EUt(VA[EV]).CWUt(256)
+                .input(CATALYST_FRAMEWORK_BLANK)
+                .input(OrePrefix.foil, Iridium, 16)
+                .input(circuit, MarkerMaterials.Tier.EV, 8)
+                .fluidInputs(Enzymesab.getFluid(1000))
+                .fluidInputs(Zylon.getFluid(1440))
+                .fluidInputs(Mutagen.getFluid(1000))
+                .output(CATALYST_FRAMEWORK_VI)
                 .cleanroom(CleanroomType.CLEANROOM)
                 .buildAndRegister();
     }

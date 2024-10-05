@@ -60,15 +60,6 @@ public class GTQTcoreRecipeMaps {
             .setSound(GTSoundEvents.CHEMICAL_REACTOR)
             .allowEmptyOutput();
 
-
-    public static final RecipeMap<SimpleRecipeBuilder> LOW_PRESSURE_CRYOGENIC_DISTILLATION = new RecipeMap<>("low_pressure_cryogenic_distillation", 3, 3, 3, 12, new SimpleRecipeBuilder(), false)
-            .setProgressBar(GuiTextures.PROGRESS_BAR_SIFT, ProgressWidget.MoveType.VERTICAL)
-            .setSound(GTSoundEvents.COOLING);
-
-    public static final RecipeMap<SimpleRecipeBuilder> HIGH_PRESSURE_CRYOGENIC_DISTILLATION = new RecipeMap<>("high_pressure_cryogenic_distillation", 3, 3, 3, 12, new SimpleRecipeBuilder(), false)
-            .setProgressBar(GuiTextures.PROGRESS_BAR_SIFT, ProgressWidget.MoveType.VERTICAL_DOWNWARDS)
-            .setSound(GTSoundEvents.COOLING);
-
     public static final RecipeMap<SimpleRecipeBuilder> AUTO_CHISEL_RECIPES = new RecipeMap<>("auto_chisel", 2, 1, 0, 0, new SimpleRecipeBuilder(), false)
             .setSlotOverlay(false, false, false, GuiTextures.BOXED_BACKGROUND)
             .setProgressBar(GuiTextures.PROGRESS_BAR_CRACKING, ProgressWidget.MoveType.HORIZONTAL)

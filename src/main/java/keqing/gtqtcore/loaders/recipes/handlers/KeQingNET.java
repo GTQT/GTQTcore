@@ -360,7 +360,7 @@ public class KeQingNET {
                 .input(LASER_CUTTER, 64)
                 .input(frameGt, NaquadahAlloy, 16)
                 .input(LASER_OUTPUT_HATCH_1024[2], 8)
-                .input(toolHeadBuzzSaw,NaquadahAlloy, 64)
+                .input(toolHeadBuzzSaw, NaquadahAlloy, 64)
                 .input(plate, Duranium, 32)
                 .input(screw, PPB, 64)
                 .input(gear, HG1223, 6)
@@ -1203,7 +1203,7 @@ public class KeQingNET {
                 .input(wireGtHex, Platinum, 8)
                 .input(foil, Palladium, 8)
                 .fluidInputs(Epoxy.getFluid(4000))
-                .fluidInputs(Zylon.getFluid(4000))
+                .fluidInputs(Zylon.getFluid(5706))
                 .fluidInputs(Brominatedepoxyresins.getFluid(4000))
                 .fluidInputs(Polytetrafluoroethylene.getFluid(4000))
                 .scannerResearch(b -> b
@@ -1770,7 +1770,7 @@ public class KeQingNET {
                 .input(wireFine, Platinum, 64)
                 .input(wireFine, TungstenSteel, 64)
                 .input(foil, Palladium, 32)
-                .fluidInputs(Zylon.getFluid(4000))
+                .fluidInputs(Zylon.getFluid(5706))
                 .scannerResearch(b -> b
                         .researchStack(DISK_20.getStackForm())
                         .duration(1200)
@@ -1788,7 +1788,7 @@ public class KeQingNET {
                 .input(wireFine, TungstenSteel, 64)
                 .input(wireFine, TungstenSteel, 64)
                 .input(foil, Palladium, 32)
-                .fluidInputs(Zylon.getFluid(4000))
+                .fluidInputs(Zylon.getFluid(5706))
                 .scannerResearch(b -> b
                         .researchStack(DISK_21.getStackForm())
                         .duration(1200)
@@ -1807,7 +1807,7 @@ public class KeQingNET {
                 .input(wireFine, Platinum, 64)
                 .input(wireFine, TungstenSteel, 64)
                 .input(foil, HSSE, 32)
-                .fluidInputs(Zylon.getFluid(4000))
+                .fluidInputs(Zylon.getFluid(5706))
                 .scannerResearch(b -> b
                         .researchStack(DISK_21.getStackForm())
                         .duration(1200)
@@ -1826,7 +1826,7 @@ public class KeQingNET {
                 .input(wireFine, Platinum, 64)
                 .input(wireFine, TungstenSteel, 64)
                 .input(foil, Palladium, 32)
-                .fluidInputs(Zylon.getFluid(4000))
+                .fluidInputs(Zylon.getFluid(5706))
                 .scannerResearch(b -> b
                         .researchStack(DISK_21.getStackForm())
                         .duration(1200)

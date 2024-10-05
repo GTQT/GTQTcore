@@ -2,10 +2,7 @@ package keqing.gtqtcore.api.metaileentity.multiblock;
 
 import gregtech.api.capability.IOpticalComputationHatch;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
-import keqing.gtqtcore.api.capability.IBall;
-import keqing.gtqtcore.api.capability.IBuffer;
-import keqing.gtqtcore.api.capability.ILaser;
-import keqing.gtqtcore.api.capability.IReinforcedRotorHolder;
+import keqing.gtqtcore.api.capability.*;
 
 public class GTQTMultiblockAbility {
     public static final MultiblockAbility<IReinforcedRotorHolder> REINFORCED_ROTOR_HOLDER_ABILITY = new MultiblockAbility<>("reinforced_rotor_holder");
@@ -17,4 +14,5 @@ public class GTQTMultiblockAbility {
     public static final MultiblockAbility<ILaser> LASER_INPUT = new MultiblockAbility<>("laser_input");
     public static final MultiblockAbility<ILaser> LASER_OUTPUT = new MultiblockAbility<>("laser_output");
 
+    public static final MultiblockAbility<ICatalystHatch> CATALYST_MULTIBLOCK_ABILITY = new MultiblockAbility<>("catalyst");
 }
