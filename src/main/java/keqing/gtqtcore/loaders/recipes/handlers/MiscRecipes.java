@@ -11,12 +11,14 @@ import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.Materials.NetherStar;
 import static gregtech.api.unification.ore.OrePrefix.*;
+import static gregtech.common.items.MetaItems.*;
 import static java.util.Calendar.SECOND;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.CRYSTALLIZER_RECIPES;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.boule;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.seedCrystal;
+import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 
 /**
  * Use this class to add miscellaneous recipes which have no category otherwise
@@ -25,6 +27,7 @@ public class MiscRecipes {
 
     public static void init() {
         metaBlockRecipes();
+        ExoticExtruders();
         //  Flux Electrum
         MIXER_RECIPES.recipeBuilder()
                 .input(dust, Electrum, 8)
@@ -96,6 +99,179 @@ public class MiscRecipes {
                 .input(gemExquisite, CubicBoronNitride)
                 .output(toolHeadBuzzSaw, CubicBoronNitride)
                 .duration((int) (CubicBoronNitride.getMass() * 4)).EUt(240).buildAndRegister();
+    }
+    private static void ExoticExtruders() {
+
+        //  Plate
+        CHEMICAL_BATH_RECIPES.recipeBuilder()
+                .input(SHAPE_EXTRUDER_PLATE)
+                .fluidInputs(Infinity.getFluid(L * 4))
+                .output(EXOTIC_SHAPE_EXTRUDER_PLATE)
+                .EUt(VA[UXV])
+                .duration(200)
+                .buildAndRegister();
+
+        //  Rod
+        CHEMICAL_BATH_RECIPES.recipeBuilder()
+                .input(SHAPE_EXTRUDER_ROD)
+                .fluidInputs(Infinity.getFluid(L * 4))
+                .output(EXOTIC_SHAPE_EXTRUDER_ROD)
+                .EUt(VA[UXV])
+                .duration(200)
+                .buildAndRegister();
+
+        //  Bolt
+        CHEMICAL_BATH_RECIPES.recipeBuilder()
+                .input(SHAPE_EXTRUDER_BOLT)
+                .fluidInputs(Infinity.getFluid(L * 4))
+                .output(EXOTIC_SHAPE_EXTRUDER_BOLT)
+                .EUt(VA[UXV])
+                .duration(200)
+                .buildAndRegister();
+
+        //  Ring
+        CHEMICAL_BATH_RECIPES.recipeBuilder()
+                .input(SHAPE_EXTRUDER_RING)
+                .fluidInputs(Infinity.getFluid(L * 4))
+                .output(EXOTIC_SHAPE_EXTRUDER_RING)
+                .EUt(VA[UXV])
+                .duration(200)
+                .buildAndRegister();
+
+        //  Cell
+        CHEMICAL_BATH_RECIPES.recipeBuilder()
+                .input(SHAPE_EXTRUDER_CELL)
+                .fluidInputs(Infinity.getFluid(L * 4))
+                .output(EXOTIC_SHAPE_EXTRUDER_CELL)
+                .EUt(VA[UXV])
+                .duration(200)
+                .buildAndRegister();
+
+        //  Ingot
+        CHEMICAL_BATH_RECIPES.recipeBuilder()
+                .input(SHAPE_EXTRUDER_INGOT)
+                .fluidInputs(Infinity.getFluid(L * 4))
+                .output(EXOTIC_SHAPE_EXTRUDER_INGOT)
+                .EUt(VA[UXV])
+                .duration(200)
+                .buildAndRegister();
+
+        //  Wire
+        CHEMICAL_BATH_RECIPES.recipeBuilder()
+                .input(SHAPE_EXTRUDER_WIRE)
+                .fluidInputs(Infinity.getFluid(L * 4))
+                .output(EXOTIC_SHAPE_EXTRUDER_WIRE)
+                .EUt(VA[UXV])
+                .duration(200)
+                .buildAndRegister();
+
+        //  Pipe Tiny
+        CHEMICAL_BATH_RECIPES.recipeBuilder()
+                .input(SHAPE_EXTRUDER_PIPE_TINY)
+                .fluidInputs(Infinity.getFluid(L * 4))
+                .output(EXOTIC_SHAPE_EXTRUDER_PIPE_TINY)
+                .EUt(VA[UXV])
+                .duration(200)
+                .buildAndRegister();
+
+        //  Pipe Small
+        CHEMICAL_BATH_RECIPES.recipeBuilder()
+                .input(SHAPE_EXTRUDER_PIPE_SMALL)
+                .fluidInputs(Infinity.getFluid(L * 4))
+                .output(EXOTIC_SHAPE_EXTRUDER_PIPE_SMALL)
+                .EUt(VA[UXV])
+                .duration(200)
+                .buildAndRegister();
+
+        //  Pipe Normal
+        CHEMICAL_BATH_RECIPES.recipeBuilder()
+                .input(SHAPE_EXTRUDER_PIPE_NORMAL)
+                .fluidInputs(Infinity.getFluid(L * 4))
+                .output(EXOTIC_SHAPE_EXTRUDER_PIPE_NORMAL)
+                .EUt(VA[UXV])
+                .duration(200)
+                .buildAndRegister();
+
+        //  Pipe Large
+        CHEMICAL_BATH_RECIPES.recipeBuilder()
+                .input(SHAPE_EXTRUDER_PIPE_LARGE)
+                .fluidInputs(Infinity.getFluid(L * 4))
+                .output(EXOTIC_SHAPE_EXTRUDER_PIPE_LARGE)
+                .EUt(VA[UXV])
+                .duration(200)
+                .buildAndRegister();
+
+        //  Pipe Huge
+        CHEMICAL_BATH_RECIPES.recipeBuilder()
+                .input(SHAPE_EXTRUDER_PIPE_HUGE)
+                .fluidInputs(Infinity.getFluid(L * 4))
+                .output(EXOTIC_SHAPE_EXTRUDER_PIPE_HUGE)
+                .EUt(VA[UXV])
+                .duration(200)
+                .buildAndRegister();
+
+        //  Block
+        CHEMICAL_BATH_RECIPES.recipeBuilder()
+                .input(SHAPE_EXTRUDER_BLOCK)
+                .fluidInputs(Infinity.getFluid(L * 4))
+                .output(EXOTIC_SHAPE_EXTRUDER_BLOCK)
+                .EUt(VA[UXV])
+                .duration(200)
+                .buildAndRegister();
+
+        //  Gear
+        CHEMICAL_BATH_RECIPES.recipeBuilder()
+                .input(SHAPE_EXTRUDER_GEAR)
+                .fluidInputs(Infinity.getFluid(L * 4))
+                .output(EXOTIC_SHAPE_EXTRUDER_GEAR)
+                .EUt(VA[UXV])
+                .duration(200)
+                .buildAndRegister();
+
+        //  Bottle
+        CHEMICAL_BATH_RECIPES.recipeBuilder()
+                .input(SHAPE_EXTRUDER_BOTTLE)
+                .fluidInputs(Infinity.getFluid(L * 4))
+                .output(EXOTIC_SHAPE_EXTRUDER_BOTTLE)
+                .EUt(VA[UXV])
+                .duration(200)
+                .buildAndRegister();
+
+        //  Foil
+        CHEMICAL_BATH_RECIPES.recipeBuilder()
+                .input(SHAPE_EXTRUDER_FOIL)
+                .fluidInputs(Infinity.getFluid(L * 4))
+                .output(EXOTIC_SHAPE_EXTRUDER_FOIL)
+                .EUt(VA[UXV])
+                .duration(200)
+                .buildAndRegister();
+
+        //  Small Gear
+        CHEMICAL_BATH_RECIPES.recipeBuilder()
+                .input(SHAPE_EXTRUDER_GEAR_SMALL)
+                .fluidInputs(Infinity.getFluid(L * 4))
+                .output(EXOTIC_SHAPE_EXTRUDER_GEAR_SMALL)
+                .EUt(VA[UXV])
+                .duration(200)
+                .buildAndRegister();
+
+        //  Long Rod
+        CHEMICAL_BATH_RECIPES.recipeBuilder()
+                .input(SHAPE_EXTRUDER_ROD_LONG)
+                .fluidInputs(Infinity.getFluid(L * 4))
+                .output(EXOTIC_SHAPE_EXTRUDER_ROD_LONG)
+                .EUt(VA[UXV])
+                .duration(200)
+                .buildAndRegister();
+
+        //  Rotor
+        CHEMICAL_BATH_RECIPES.recipeBuilder()
+                .input(SHAPE_EXTRUDER_ROTOR)
+                .fluidInputs(Infinity.getFluid(L * 4))
+                .output(EXOTIC_SHAPE_EXTRUDER_ROTOR)
+                .EUt(VA[UXV])
+                .duration(200)
+                .buildAndRegister();
     }
 
     private static void metaBlockRecipes() {

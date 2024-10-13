@@ -8,22 +8,21 @@ import gregtech.api.unification.material.Material;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.UnificationEntry;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
 
-import static gregtech.api.recipes.RecipeMaps.*;
-import static gregtech.api.unification.ore.OrePrefix.*;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
-import static keqing.gtqtcore.api.unification.GTQTMaterials.Polysilicon;
-import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.electrode;
-import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 import static gregtech.api.GTValues.*;
+import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
-import static gregtech.common.items.MetaItems.GLASS_TUBE;
-import static gregtech.common.items.MetaItems.VACUUM_TUBE;
+import static gregtech.api.unification.ore.OrePrefix.*;
+import static gregtech.common.items.MetaItems.*;
+import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.VACUUM_CHAMBER_RECIPES;
+import static keqing.gtqtcore.api.unification.GCYSMaterials.Kovar;
+import static keqing.gtqtcore.common.items.GTQTMetaItems.VACUUM_TUBE_COMPONENTS;
 
 public class PrimitiveCircuits {
 
+    private static final int MINUTE = 1200;
+    private static final int SECOND = 20;
     public static void init() {
         ModHandler.addShapelessRecipe("dust_kovar", OreDictUnifier.get(OrePrefix.dust, Kovar, 6),
                 OreDictUnifier.get(OrePrefix.dust, Iron),
@@ -43,46 +42,73 @@ public class PrimitiveCircuits {
                 .output(OrePrefix.dust, Kovar, 7)
                 .duration(160).EUt(VA[ULV]).buildAndRegister();
 
-        ModHandler.addShapedRecipe("vacuum_tube_components", VACUUM_TUBE_COMPONENTS.getStackForm(),
-                "RGR", "WWW",
-                'R', new UnificationEntry(OrePrefix.stick, Steel),
-                'G', new UnificationEntry(OrePrefix.dust, Glowstone),
-                'W', new UnificationEntry(wireGtSingle, Copper));
-
-        ModHandler.addShapedRecipe("vacuum_tube_components_foil", VACUUM_TUBE_COMPONENTS.getStackForm(),
-                "RGR", "WWW",
-                'R', new UnificationEntry(OrePrefix.stick, Steel),
-                'G', new UnificationEntry(OrePrefix.foil, Gold),
-                'W', new UnificationEntry(wireGtSingle, Copper));
         //普通硅保护气配方
         BLAST_RECIPES.recipeBuilder()
                 .duration(800)
                 .EUt(120)
                 .blastFurnaceTemp(1800)
-                .input(dust,Silicon)
+                .input(dust, Silicon)
                 .fluidInputs(Nitrogen.getFluid(1000))
                 .circuitMeta(2)
                 .output(ingotHot, Silicon, 1)
                 .buildAndRegister();
 
-        for (Material copper : new Material[]{Copper, AnnealedCopper}) {
-            ASSEMBLER_RECIPES.recipeBuilder()
-                    .input(OrePrefix.foil, Gold)
-                    .input(OrePrefix.bolt, Steel, 2)
-                    .input(wireGtSingle, copper, 2)
-                    .circuitMeta(1)
-                    .output(VACUUM_TUBE_COMPONENTS, copper == Copper ? 2 : 4)
-                    .duration(120).EUt(VA[ULV]).buildAndRegister();
+        Recipes();
 
-            ASSEMBLER_RECIPES.recipeBuilder()
-                    .input(OrePrefix.foil, Gold)
-                    .input(OrePrefix.bolt, Steel)
-                    .input(wireGtSingle, copper, 2)
-                    .fluidInputs(RedAlloy.getFluid(L / 8))
-                    .output(VACUUM_TUBE_COMPONENTS, copper == Copper ? 4 : 6)
-                    .duration(120).EUt(VA[ULV]).buildAndRegister();
-        }
+        //  ULV Glue recipe
+        VACUUM_CHAMBER_RECIPES.recipeBuilder()
+                .input(STICKY_RESIN, 4)
+                .notConsumable(stickLong, Iron)
+                .fluidInputs(Water.getFluid(1000))
+                .fluidOutputs(Glue.getFluid(200))
+                .EUt((int) V[ULV])
+                .duration(MINUTE / 2)
+                .buildAndRegister();
+    }
+    private static void Recipes() {
 
+        //  ULV Glue recipe
+        VACUUM_CHAMBER_RECIPES.recipeBuilder()
+                .input(STICKY_RESIN, 4)
+                .notConsumable(stickLong, Iron)
+                .fluidInputs(Water.getFluid(1000))
+                .fluidOutputs(Glue.getFluid(200))
+                .EUt((int) V[ULV])
+                .duration(MINUTE / 2)
+                .buildAndRegister();
 
+        //  Glass Tube -> Vacuum Tube Component
+        ModHandler.addShapedRecipe(true, "vacuum_tube_component", VACUUM_TUBE_COMPONENTS.getStackForm(4),
+                "FGF", "WWW",
+                'F', new UnificationEntry(foil, Tin),
+                'W', new UnificationEntry(wireGtSingle, Lead),
+                'G', GLASS_TUBE.getStackForm());
+
+        //  Vacuum Tube
+        VACUUM_CHAMBER_RECIPES.recipeBuilder()
+                .input(VACUUM_TUBE_COMPONENTS)
+                .input(ring, Steel, 2)
+                .input(wireFine, Copper, 4)
+                .fluidInputs(Glue.getFluid(200))
+                .output(VACUUM_TUBE, 2)
+                .EUt((int) V[ULV])
+                .duration(10 * SECOND)
+                .buildAndRegister();
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(VACUUM_TUBE_COMPONENTS)
+                .input(wireFine, Copper, 4)
+                .output(VACUUM_TUBE, 2)
+                .EUt(VA[LV])
+                .duration(6 * SECOND)
+                .buildAndRegister();
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(VACUUM_TUBE_COMPONENTS)
+                .input(wireFine, AnnealedCopper, 4)
+                .output(VACUUM_TUBE, 2)
+                .EUt(VA[LV])
+                .duration(6 * SECOND)
+                .buildAndRegister();
     }
 }

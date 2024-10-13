@@ -18,6 +18,9 @@ import static keqing.gtqtcore.api.utils.GTQTUtil.gtqtId;
 
 
 public class GTQTTextures {
+    public static final SteamTexture FLUID_SLOT_STEAM = SteamTexture.fullImage("textures/gui/base/fluid_slot_%s.png");
+    public static final SteamTexture INT_CIRCUIT_OVERLAY_STEAM = SteamTexture.fullImage("textures/gui/overlay/int_circuit_overlay_%s.png");
+
     public static OrientedOverlayRenderer RTG_OVERLAY= new OrientedOverlayRenderer("overlay/rtg");
     public static OrientedOverlayRenderer PARTICLE_ACCELERATOR= new OrientedOverlayRenderer("overlay/particle_accelerator");
     public static TextureAtlasSprite PRESSURE_PIPE_SIDE;

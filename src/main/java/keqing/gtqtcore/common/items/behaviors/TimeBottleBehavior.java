@@ -62,6 +62,7 @@ public class TimeBottleBehavior implements IItemBehaviour {
                         compound.setInteger("storedTime", time);
                         itemStack.setTagCompound(compound);
                     }
+                    return;
                 }
             }
         }

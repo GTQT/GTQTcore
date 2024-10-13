@@ -139,6 +139,13 @@ public class CommonProxy {
         GTQTMetaToolItems.init();
         GTQTRecipes.registerTool();
     }
+    @SubscribeEvent
+    public static void registerRecipeHandlers(RegistryEvent.Register<IRecipe> event) {
+        GTQTLog.logger.info("Registering recipe handlers...");
+        MaterialRecipeHandler.register();
+        PipeRecipeHandler.register();
+        PartRecipeHandler.register();
+    }
     public void preLoad(){
         GTQTStoneTypes.init();
         GTQTcoreRecipeMaps.init();

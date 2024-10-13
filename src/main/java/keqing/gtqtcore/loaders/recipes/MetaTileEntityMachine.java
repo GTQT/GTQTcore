@@ -3,6 +3,7 @@ package keqing.gtqtcore.loaders.recipes;
 import gregtech.api.recipes.ModHandler;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.OreDictUnifier;
+import gregtech.api.unification.material.MarkerMaterials;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.material.info.MaterialFlags;
@@ -47,6 +48,7 @@ import static keqing.gtqtcore.api.unification.TJMaterials.Polyetheretherketone;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.plate_curved;
 import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.FISHING_CASING;
 import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing1.TurbineCasingType.*;
+import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.STEAM_VACUUM_CHAMBER;
 
 public class MetaTileEntityMachine {
     static int L = 144;
@@ -427,7 +429,7 @@ public class MetaTileEntityMachine {
                 new ItemMaterialInfo(new MaterialStack(BorosilicateGlass, M * 4)));
 
         //  Thorium-reinforced Glass
-        ALLOY_SMELTER_RECIPES.recipeBuilder()
+        VACUUM_RECIPES.recipeBuilder()
                 .inputs(GTQTMetaBlocks.ADV_GLASS.getItemVariant(GTQTADVGlass.CasingType.SILICATE_GLASS))
                 .input(plate, Thorium, 4)
                 .outputs(GTQTMetaBlocks.ADV_GLASS.getItemVariant(GTQTADVGlass.CasingType.THY_SILICATE_GLASS))
@@ -440,7 +442,7 @@ public class MetaTileEntityMachine {
                         new MaterialStack(Thorium, M * 4)));
 
         //  Titanium-reinforced Glass
-        ALLOY_SMELTER_RECIPES.recipeBuilder()
+        VACUUM_RECIPES.recipeBuilder()
                 .inputs(GTQTMetaBlocks.ADV_GLASS.getItemVariant(GTQTADVGlass.CasingType.SILICATE_GLASS))
                 .input(plate, Titanium, 4)
                 .outputs(GTQTMetaBlocks.GLASS_CASING.getItemVariant(GTQTBlockGlassCasing.CasingType.TI_BORON_SILICATE_GLASS))
@@ -453,7 +455,7 @@ public class MetaTileEntityMachine {
                         new MaterialStack(Titanium, M * 4)));
 
         //  Tungsten-reinforced Glass
-        ALLOY_SMELTER_RECIPES.recipeBuilder()
+        VACUUM_RECIPES.recipeBuilder()
                 .inputs(GTQTMetaBlocks.ADV_GLASS.getItemVariant(GTQTADVGlass.CasingType.SILICATE_GLASS))
                 .input(plate, Tungsten, 4)
                 .outputs(GTQTMetaBlocks.GLASS_CASING.getItemVariant(GTQTBlockGlassCasing.CasingType.W_BORON_SILICATE_GLASS))
@@ -467,7 +469,7 @@ public class MetaTileEntityMachine {
 
 
         //  Osmiridium-reinforced Glass
-        ALLOY_SMELTER_RECIPES.recipeBuilder()
+        VACUUM_RECIPES.recipeBuilder()
                 .inputs(GTQTMetaBlocks.ADV_GLASS.getItemVariant(GTQTADVGlass.CasingType.SILICATE_GLASS))
                 .input(plate, Osmiridium, 4)
                 .outputs(GTQTMetaBlocks.GLASS_CASING.getItemVariant(GTQTBlockGlassCasing.CasingType.OSMIR_BORON_SILICATE_GLASS))
@@ -480,7 +482,7 @@ public class MetaTileEntityMachine {
                         new MaterialStack(Osmiridium, M * 4)));
 
         //  Naquadah-reinforced Glass
-        ALLOY_SMELTER_RECIPES.recipeBuilder()
+        VACUUM_RECIPES.recipeBuilder()
                 .inputs(GTQTMetaBlocks.ADV_GLASS.getItemVariant(GTQTADVGlass.CasingType.SILICATE_GLASS))
                 .input(plate, Naquadah, 4)
                 .outputs(GTQTMetaBlocks.GLASS_CASING.getItemVariant(GTQTBlockGlassCasing.CasingType.NAQ_BORON_SILICATE_GLASS))
@@ -516,6 +518,23 @@ public class MetaTileEntityMachine {
     }
 
     private static void registerElectric() {
+
+        //  Steam Vacuum Chamber
+        ModHandler.addShapedRecipe(true, "steam_vacuum_chamber.bronze", STEAM_VACUUM_CHAMBER[0].getStackForm(),
+                "GCG", "PHP", "GWG",
+                'W', new UnificationEntry(pipeTinyFluid, Bronze),
+                'C', new UnificationEntry(gem, Diamond),
+                'P', Blocks.PISTON,
+                'G', "blockGlass",
+                'H', MetaBlocks.STEAM_CASING.getItemVariant(BlockSteamCasing.SteamCasingType.BRONZE_HULL));
+
+        ModHandler.addShapedRecipe(true, "steam_vacuum_chamber.steel", STEAM_VACUUM_CHAMBER[1].getStackForm(),
+                "GCG", "PHP", "GWG",
+                'W', new UnificationEntry(pipeTinyFluid, TinAlloy),
+                'C', new UnificationEntry(circuit, MarkerMaterials.Tier.ULV),
+                'P', Blocks.PISTON,
+                'G', "blockGlass",
+                'H', MetaBlocks.STEAM_CASING.getItemVariant(BlockSteamCasing.SteamCasingType.STEEL_HULL));
 
         registerMachineRecipe(GTQTMetaTileEntities.FLUID_EXTRACTOR, "PGP", "EGE", "CMC", 'M', HULL, 'P', PUMP, 'E', PISTON, 'C',
                 CIRCUIT, 'G', GLASS);

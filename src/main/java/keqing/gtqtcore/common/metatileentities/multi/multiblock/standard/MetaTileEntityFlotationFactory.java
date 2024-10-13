@@ -53,6 +53,13 @@ public class MetaTileEntityFlotationFactory extends RecipeMapMultiblockControlle
         public MetaTileEntityFlotationFactoryrWorkable(RecipeMapMultiblockController tileEntity) {
             super(tileEntity);
         }
+
+        @Override
+        public void setMaxProgress(int maxProgress) {
+            int MaxProgress = (int) Math.floor(maxProgress * Math.pow(0.95, getTier(getMaxVoltage())));
+            super.setMaxProgress(MaxProgress);
+        }
+
         private int ParallelTier(int tier) {
             return 4 * (tier * 4);
         }

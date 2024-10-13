@@ -77,7 +77,7 @@ public class MetaTileEntityIndustrialWasher extends GTQTMultiblockCore {
                 .aisle("PPPPP", "PPSPP", "PPPPP")
                 .where('S', this.selfPredicate())
                 .where('C', states(getCasingState())
-                        .setMinGlobalLimited(28)
+                        .setMinGlobalLimited(26)
                         .or(autoAbilities()))
                 .where('G', states(getSecondCasingState()))
                 .where('F', states(getFrameState()))

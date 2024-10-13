@@ -430,9 +430,6 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem ASUPRACHRONAL_UXV;
     public static MetaItem<?>.MetaValueItem ASUPRACHRONAL_OpV;
     public static MetaItem<?>.MetaValueItem ASUPRACHRONAL_MAX;
-    // Primitive Circuit Components
-    public static MetaItem<?>.MetaValueItem VACUUM_TUBE_COMPONENT;
-
     // Crystal Circuit Components
     public static MetaItem<?>.MetaValueItem EU_DOPED_CUBIC_ZIRCONIA_BOULE;
     public static MetaItem<?>.MetaValueItem EU_DOPED_CUBIC_ZIRCONIA_WAFER;
@@ -444,6 +441,27 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem CRYSTAL_MODULATOR_SAPPHIRE;
     public static MetaItem<?>.MetaValueItem CRYSTAL_SYSTEM_ON_CHIP_SOCKET;
 
+    //  Extruders
+    public static final MetaItem<?>.MetaValueItem[] EXOTIC_SHAPE_EXTRUDERS = new MetaItem.MetaValueItem[27];
+    public static MetaItem<?>.MetaValueItem EXOTIC_SHAPE_EXTRUDER_PLATE;
+    public static MetaItem<?>.MetaValueItem EXOTIC_SHAPE_EXTRUDER_ROD;
+    public static MetaItem<?>.MetaValueItem EXOTIC_SHAPE_EXTRUDER_BOLT;
+    public static MetaItem<?>.MetaValueItem EXOTIC_SHAPE_EXTRUDER_RING;
+    public static MetaItem<?>.MetaValueItem EXOTIC_SHAPE_EXTRUDER_CELL;
+    public static MetaItem<?>.MetaValueItem EXOTIC_SHAPE_EXTRUDER_INGOT;
+    public static MetaItem<?>.MetaValueItem EXOTIC_SHAPE_EXTRUDER_WIRE;
+    public static MetaItem<?>.MetaValueItem EXOTIC_SHAPE_EXTRUDER_PIPE_TINY;
+    public static MetaItem<?>.MetaValueItem EXOTIC_SHAPE_EXTRUDER_PIPE_SMALL;
+    public static MetaItem<?>.MetaValueItem EXOTIC_SHAPE_EXTRUDER_PIPE_NORMAL;
+    public static MetaItem<?>.MetaValueItem EXOTIC_SHAPE_EXTRUDER_PIPE_LARGE;
+    public static MetaItem<?>.MetaValueItem EXOTIC_SHAPE_EXTRUDER_PIPE_HUGE;
+    public static MetaItem<?>.MetaValueItem EXOTIC_SHAPE_EXTRUDER_BLOCK;
+    public static MetaItem<?>.MetaValueItem EXOTIC_SHAPE_EXTRUDER_GEAR;
+    public static MetaItem<?>.MetaValueItem EXOTIC_SHAPE_EXTRUDER_BOTTLE;
+    public static MetaItem<?>.MetaValueItem EXOTIC_SHAPE_EXTRUDER_FOIL;
+    public static MetaItem<?>.MetaValueItem EXOTIC_SHAPE_EXTRUDER_GEAR_SMALL;
+    public static MetaItem<?>.MetaValueItem EXOTIC_SHAPE_EXTRUDER_ROD_LONG;
+    public static MetaItem<?>.MetaValueItem EXOTIC_SHAPE_EXTRUDER_ROTOR;
     // Gooware Circuit Components
     public static MetaItem<?>.MetaValueItem BZ_REACTION_CHAMBER;
     public static MetaItem<?>.MetaValueItem NONLINEAR_CHEMICAL_OSCILLATOR;

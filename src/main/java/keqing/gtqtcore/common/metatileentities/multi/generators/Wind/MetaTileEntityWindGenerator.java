@@ -220,7 +220,7 @@ public class MetaTileEntityWindGenerator extends MetaTileEntityBaseWithControl  
     public void renderMetaTileEntity(double x, double y, double z, float partialTicks) {
         IFastRenderMetaTileEntity.super.renderMetaTileEntity(x, y, z, partialTicks);
 
-        if(isStructureFormed()&& GTQTCoreConfig.OBJRenderSwitch.EnableObj&& GTQTCoreConfig.OBJRenderSwitch.EnableObjSBPRC)
+        if(isStructureFormed()&& GTQTCoreConfig.OBJRenderSwitch.EnableObj&& GTQTCoreConfig.OBJRenderSwitch.EnableObjSWind)
         {
             final int xDir = this.getFrontFacing().getOpposite().getXOffset();
             final int zDir = this.getFrontFacing().getOpposite().getZOffset();

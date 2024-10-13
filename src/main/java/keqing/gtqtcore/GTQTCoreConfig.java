@@ -39,6 +39,11 @@ public class GTQTCoreConfig {
         @Config.RequiresMcRestart
         @Config.Name("Enable obj Model SBPRC")
         public boolean EnableObjSBPRC = true;
+
+        @Config.Comment("风力发电机OBJ模型渲染开启")
+        @Config.RequiresMcRestart
+        @Config.Name("Enable obj Model Wind")
+        public boolean EnableObjSWind = true;
     }
     public static class MachineSwitch {
         @Config.Comment("终局设备开关，包括尼戴，神锻。注意，严重影响加载时间！！！")
