@@ -1,6 +1,8 @@
 package keqing.gtqtcore.integration.jei;
 
 import gregtech.api.items.metaitem.MetaItem;
+import gregtech.api.metatileentity.MetaTileEntity;
+import gregtech.common.metatileentities.MetaTileEntities;
 import gregtech.integration.IntegrationSubmodule;
 import keqing.gtqtcore.api.utils.GTQTCPUHelper;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
@@ -72,7 +74,9 @@ public class JustEnoughItemsModule extends IntegrationSubmodule implements IModP
         CircuitInfo.add(new CircuitJei(tier12));
         registry.addRecipes(CircuitInfo, Circuit);
 
-
+        String oreByProductId = "gregtech:ore_by_product";
+        registry.addRecipeCatalyst(GTQTMetaTileEntities.INTEGRATED_ORE_PROCESSOR.getStackForm(), oreByProductId);
+        registry.addRecipeCatalyst(GTQTMetaTileEntities.INTEGRATED_MINING_DIVISION.getStackForm(), oreByProductId);
 
         registry.addIngredientInfo( ALPHA.getStackForm(), VanillaTypes.ITEM, "metaitem.alpha.jei_description");
         registry.addIngredientInfo( ANTIALPHA.getStackForm(), VanillaTypes.ITEM, "metaitem.antialpha.jei_description");

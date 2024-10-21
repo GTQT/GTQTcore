@@ -257,7 +257,8 @@ public class MetaTileEntityPhotolithographyFactory extends MetaTileEntityBaseWit
             {
                 if(GTQTCPUHelper.checkWafer(item,GTQTCPUHelper.wafer[j])) {
                     this.getInputInventory().extractItem(i, 1, false);
-                    wafer[j]++;
+                    //获取对应晶圆的等级
+                    wafer[j]+=GTQTCPUHelper.getLevelFromWafer(item);
                 }
             }
         }

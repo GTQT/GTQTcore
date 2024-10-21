@@ -62,9 +62,9 @@ public class GTQTCPUHelper {
     //        }
     //        return false;
     //    }
-    public int getLevelFromWafer(ItemStack item)
+    public static int getLevelFromWafer(ItemStack item)
     {
-        for(int i=0;i<wafer.length;i++) if (item.getMetadata() == wafer[i].getMetaValue())return i;
+        for(int i=0;i<wafer.length;i++) if (item.getMetadata() == wafer[i].getMetaValue())return (int) Math.pow(2,i+1);
         return 0;
     }
     public static boolean checkWafer(ItemStack itemStack, MetaItem.MetaValueItem item)

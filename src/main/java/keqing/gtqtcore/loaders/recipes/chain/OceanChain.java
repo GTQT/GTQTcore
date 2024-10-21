@@ -122,7 +122,7 @@ public class OceanChain {
                 .fluidInputs(Tetrabromo.getFluid(1000))
                 .notConsumable(CarbonTetrachloride.getFluid(4000))
                 .fluidInputs(Bromine.getFluid(2000))
-                .fluidOutputs(Tetrabromobenzene.getFluid(1000))
+                .fluidOutputs(Tetrabromobenzene.getFluid(3000))
                 .fluidOutputs(Hydrogen.getFluid(2000))
                 .buildAndRegister();
 
@@ -131,7 +131,7 @@ public class OceanChain {
                 .EUt(VA[EV])
                 .fluidInputs(Tetrabromo.getFluid(1000))
                 .fluidInputs(Bromine.getFluid(2000))
-                .fluidOutputs(Tetrabromobenzene.getFluid(1000))
+                .fluidOutputs(Tetrabromobenzene.getFluid(3000))
                 .fluidOutputs(Hydrogen.getFluid(2000))
                 .buildAndRegister();
 
@@ -141,7 +141,7 @@ public class OceanChain {
                 .EUt(120)
                 .fluidInputs(Tetrabromobenzene.getFluid(4000))
                 .fluidInputs(Polystyrene.getFluid(1000))
-                .fluidOutputs(Bps.getFluid(1000))
+                .fluidOutputs(Bps.getFluid(5000))
                 .buildAndRegister();
 
         CHEMICAL_RECIPES.recipeBuilder()
@@ -149,7 +149,7 @@ public class OceanChain {
                 .EUt(120)
                 .fluidInputs(Tetrabromobenzene.getFluid(4000))
                 .fluidInputs(Epoxy.getFluid(1000))
-                .fluidOutputs(Brominatedepoxyresins.getFluid(1000))
+                .fluidOutputs(Brominatedepoxyresins.getFluid(5000))
                 .buildAndRegister();
     }
 

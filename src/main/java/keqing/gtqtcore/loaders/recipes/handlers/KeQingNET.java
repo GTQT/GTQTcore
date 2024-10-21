@@ -94,11 +94,13 @@ public class KeQingNET {
         KQ_NET(0, 2, 9, DISK_9, SENSOR_IV);
         //10 资源勘探III
         KQ_NET(3, 3, 10, DISK_10, SENSOR_ZPM);
-        //11 网道行者-元素存储
-        KQ_NET(21, 1, 11, DISK_11, gem, Fluix);
-        //12 网道行者-管网系统
 
+        //11 网道行者-元素存储
+        KQ_NET(0, 1, 11, DISK_11, gem, Fluix);
+        //12 网道行者-管网系统
+        KQ_NET(0, 2, 12, DISK_12, ADV_KQCC.getStackForm());
         //13 网道行者-无线传输
+        KQ_NET(0, 3, 13, DISK_13, MICROWAVE_ENERGY_RECEIVER_CONTROL.getStackForm());
 
         //14 人工智能I
         KQ_NET(0, 1, 14, DISK_14, circuit, Tier.EV);
@@ -639,14 +641,46 @@ public class KeQingNET {
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .EUt(VA[HV])
-                .input(gem, Fluix)
-                .input(EMITTER_HV)
-                .input(plate, StainlessSteel, 4)
-                .fluidInputs(Polybenzimidazole.getFluid(GTValues.L * 4))
-                .output(AE_FLUIX_FIRM)
+                .input(frameGt,StainlessSteel)
+                .input(circuit,Tier.EV)
+                .input("crystalFluix")
+                .input(plate, Aluminium, 4)
+                .input(wireFine,Gold,16)
+                .fluidInputs(Lubricant.getFluid(GTValues.L * 4))
+                .fluidInputs(Polytetrafluoroethylene.getFluid(GTValues.L * 4))
+                .fluidInputs(Epoxy.getFluid(GTValues.L * 4))
+                .output(AE_FLUIX_FIRM,4)
                 .scannerResearch(b -> b.researchStack(DISK_11.getStackForm()).duration(1200).EUt(VA[HV]))
                 .duration(100).buildAndRegister();
 
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .EUt(VA[EV])
+                .input(frameGt,Titanium)
+                .input(circuit,Tier.IV)
+                .input("crystalFluix")
+                .input(FIELD_GENERATOR_EV,2)
+                .input(wireFine,Platinum,16)
+                .fluidInputs(Lubricant.getFluid(GTValues.L * 4))
+                .fluidInputs(Epoxy.getFluid(GTValues.L * 4))
+                .fluidInputs(ReinforcedEpoxyResin.getFluid(GTValues.L * 4))
+                .output(AE_FLUIX_NET,4)
+                .scannerResearch(b -> b.researchStack(DISK_12.getStackForm()).duration(1200).EUt(VA[EV]))
+                .duration(100).buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .EUt(VA[IV])
+                .input(frameGt,TungstenSteel)
+                .input(circuit,Tier.LuV)
+                .input("crystalFluix")
+                .input(SENSOR_IV)
+                .input(EMITTER_IV)
+                .input(wireFine,Samarium,16)
+                .fluidInputs(Lubricant.getFluid(GTValues.L * 4))
+                .fluidInputs(ReinforcedEpoxyResin.getFluid(GTValues.L * 4))
+                .fluidInputs(Zylon.getFluid(GTValues.L * 4))
+                .output(AE_FLUIX_BOOSTER,4)
+                .scannerResearch(b -> b.researchStack(DISK_13.getStackForm()).duration(1200).EUt(VA[IV]))
+                .duration(100).buildAndRegister();
 
         //
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
@@ -1028,7 +1062,7 @@ public class KeQingNET {
         //计算框架
         ASSEMBLER_RECIPES.recipeBuilder()
                 .input(frameGt, Steel, 4)
-                .input(plate, Aluminium, 4)
+                .input(plate, Copper, 4)
                 .input(OPTICAL_PIPES[0], 2)
                 .input(plateDense, Aluminium, 4)
                 .fluidInputs(Polytetrafluoroethylene.getFluid(L * 8))

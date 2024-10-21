@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "gtqtcore:items/metaitems/fluix_firm"
+    "layer0": "gtqtcore:items/metaitems/fluix_net"
   }
 }

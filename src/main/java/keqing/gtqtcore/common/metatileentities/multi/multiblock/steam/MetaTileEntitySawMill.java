@@ -44,7 +44,7 @@ public class MetaTileEntitySawMill extends RecipeMapSteamMultiblockController {
                 .where('F', states(MetaBlocks.FRAMES.get(Materials.TreatedWood).getBlock(Materials.TreatedWood)))
                 .where('X', states(MetaBlocks.PLANKS.getState(BlockGregPlanks.BlockType.TREATED_PLANK))
                         .or(autoAbilities(true, false, true, true, false)))
-                .where(' ', air())
+                .where(' ', any())
                 .build();
     }
 

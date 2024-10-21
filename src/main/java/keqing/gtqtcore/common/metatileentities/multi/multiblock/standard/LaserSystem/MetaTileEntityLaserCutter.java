@@ -31,6 +31,7 @@ import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasin
 import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.NQ_TURBINE_CASING;
 
 public class MetaTileEntityLaserCutter extends RecipeMapLaserMultiblockController {
+
     public MetaTileEntityLaserCutter(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.CW_LASER_ENGRAVER_RECIPES);
         this.recipeMapWorkable = new MultiblockLaserRecipeLogic(this);

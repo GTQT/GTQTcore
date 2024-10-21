@@ -27,13 +27,11 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
         "after:gregtechfoodoption@[1.11.0,);"
 )
 public class GTQTCore {
-    public static final Minecraft MC = Minecraft.getMinecraft();
-
-    public static final String PACK = "1.6.0";
+    public static final String PACK = "1.6.1";
 
     public static final String MODID = "gtqtcore";
     public static final String NAME = "GTQT Core";
-    public static final String VERSION = "0.3(2024/10/13)";
+    public static final String VERSION = "0.1(2024/10/14)";
 
     @Mod.Instance(GTQTCore.MODID)
     public static GTQTCore instance;

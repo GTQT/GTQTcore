@@ -9,13 +9,13 @@ import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.*;
 import net.minecraft.block.state.IBlockState;
 
-import static keqing.gtqtcore.common.block.GTQTMetaBlocks.GRAVITON_CASING;
-import static keqing.gtqtcore.common.block.GTQTMetaBlocks.QUANTUM_CASING;
+import static keqing.gtqtcore.common.block.GTQTMetaBlocks.*;
 import static keqing.gtqtcore.common.block.blocks.BlockGravitonCasing.GravitonCasingType.*;
 import static keqing.gtqtcore.common.block.blocks.BlockGravitonCasing.GravitonCasingType.CENTRAL_GRAVITON_FLOW_MODULATOR;
 import static keqing.gtqtcore.common.block.blocks.GTQTCompressedFusionReactor.CasingType.*;
 import static keqing.gtqtcore.common.block.blocks.GTQTCompressedFusionReactor.CasingType.FUSION_COIL_MKIV;
 import static keqing.gtqtcore.common.block.blocks.GTQTElectronMicroscope.CasingType.*;
+import static keqing.gtqtcore.common.block.blocks.GTQTHCasing.CasingType.*;
 import static keqing.gtqtcore.common.block.blocks.GTQTQuantumCasing.CasingType.*;
 import static keqing.gtqtcore.common.block.blocks.GTQTQuantumCasing.CasingType.ULTIMATE_HIGH_ENERGY_CASING;
 
@@ -38,7 +38,7 @@ public class GTQTAPI {
     public static final Object2ObjectOpenHashMap<IBlockState,IBlockTier> MAP_PA_INTERNAL_CASING= new Object2ObjectOpenHashMap<>();
     public static final Object2ObjectOpenHashMap<IBlockState,IBlockTier> MAP_DC_CASING= new Object2ObjectOpenHashMap<>();
     public static final Object2ObjectOpenHashMap<IBlockState,IBlockTier> MAP_ND_CASING= new Object2ObjectOpenHashMap<>();
-
+    public static final Object2ObjectOpenHashMap<IBlockState,IBlockTier> MAP_FU_CASING= new Object2ObjectOpenHashMap<>();
     //电子透镜
     public static final Object2ObjectOpenHashMap<IBlockState,IBlockTier> MAP_LS_CASING= new Object2ObjectOpenHashMap<>();
     public static final Object2ObjectOpenHashMap<IBlockState,IBlockTier> MAP_SS_CASING= new Object2ObjectOpenHashMap<>();
@@ -103,6 +103,12 @@ public class GTQTAPI {
         MAP_ND_CASING.put(GRAVITON_CASING.getState(CENTRAL_GRAVITON_FLOW_MODULATOR),
                 new WrappedIntTired(CENTRAL_GRAVITON_FLOW_MODULATOR, 3));
 
+        MAP_FU_CASING.put(H_CASING.getState(MACHINE_CASING_FUSION),
+                new WrappedIntTired(MACHINE_CASING_FUSION, 1));
+        MAP_FU_CASING.put(H_CASING.getState(MACHINE_CASING_FUSION_2),
+                new WrappedIntTired(MACHINE_CASING_FUSION_2, 2));
+        MAP_FU_CASING.put(H_CASING.getState(MACHINE_CASING_FUSION_3),
+                new WrappedIntTired(MACHINE_CASING_FUSION_3, 3));
 
         MAP_PA_CASING.put(GTQTMetaBlocks.TURBINE_CASING1.getState(GTQTTurbineCasing1.TurbineCasingType.PRECISE_ASSEMBLER_CASING_MK1),
                 new WrappedIntTired(GTQTTurbineCasing1.TurbineCasingType.PRECISE_ASSEMBLER_CASING_MK1, 1));

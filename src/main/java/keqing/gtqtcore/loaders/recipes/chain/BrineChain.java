@@ -320,13 +320,13 @@ public class BrineChain {
         CHEMICAL_RECIPES.recipeBuilder().duration(80).EUt(120)
                 .input(dust, Aluminium,1)
                 .fluidInputs(Hydrogen.getFluid(3000))
-                .output(dust, AluminiumHydride, 1)
+                .output(dust, AluminiumHydride, 4)
                 .buildAndRegister();
 
         // NaH + AlH3 -> NaAlH4
         MIXER_RECIPES.recipeBuilder().duration(190).EUt(120)
                 .input(dust, SodiumHydride, 2)
-                .input(dust, AluminiumHydride, 1)
+                .input(dust, AluminiumHydride, 4)
                 .output(dust, SodiumAluminiumHydride, 6)
                 .buildAndRegister();
 
@@ -399,13 +399,13 @@ public class BrineChain {
                 .fluidOutputs(Nitrogen.getFluid(2000))
                 .fluidOutputs(LithiumHydroxideSolution.getFluid(1000))
                 .output(dust, Glucosamine, 25)
-                .output(dust, AluminiumHydride, 1)
+                .output(dust, AluminiumHydride, 4)
                 .output(dust, SodiumBisulfate, 7)
                 .buildAndRegister();
 
         // AlH3 + 3H2O -> Al(OH)3 + 6H
         CHEMICAL_RECIPES.recipeBuilder().duration(100).EUt(30)
-                .input(dust, AluminiumHydride, 1)
+                .input(dust, AluminiumHydride, 4)
                 .fluidInputs(Water.getFluid(3000))
                 .output(dust, AluminiumHydroxide, 1)
                 .fluidOutputs(Hydrogen.getFluid(6000))
@@ -515,7 +515,7 @@ public class BrineChain {
                 .fluidOutputs(Mercaptophenol.getFluid(1000))
                 .fluidOutputs(Dimethylformamide.getFluid(1000))
                 .output(dust, LithiumChloride, 2)
-                .output(dust, AluminiumHydride, 1)
+                .output(dust, AluminiumHydride, 4)
                 .buildAndRegister();
 
         CRACKING_RECIPES.recipeBuilder().duration(40).EUt(120)

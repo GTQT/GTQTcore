@@ -64,6 +64,11 @@ public class GTQTTextures {
     public static SimpleOverlayRenderer ADV_COMPUTER_HEAT_VENT_CASING = new SimpleOverlayRenderer("multiblock/computer/computer_heat_vent_side");
     public static SimpleOverlayRenderer ADV_COMPUTER_CASING = new SimpleOverlayRenderer("multiblock/computer/computer_casing/front");
     public static SimpleOverlayRenderer ULTRA_POWER_CASING = new SimpleOverlayRenderer("multiblock/computer/high_power_casing");
+
+    public static SimpleOverlayRenderer FUSION_MKI = new SimpleOverlayRenderer("multiblock/casings/machine_casing_fusion");
+    public static SimpleOverlayRenderer FUSION_MKII = new SimpleOverlayRenderer("multiblock/casings/machine_casing_fusion_2");
+    public static SimpleOverlayRenderer FUSION_MKIII = new SimpleOverlayRenderer("multiblock/casings/machine_casing_fusion_3");
+
     //怎么写？请看
     //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/client/textures/GSTextures.java
     public static OrientedOverlayRenderer LIGHTNING_ROD_OVERLAY;

@@ -119,6 +119,9 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         AE_C = this.addItem(85, "ae.c").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_NE);
         //fluix束能器
         AE_FLUIX_FIRM = this.addItem(86, "ae.fluix_firm").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_NE);
+        AE_FLUIX_NET = this.addItem(87, "ae.fluix_net").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_NE);
+        AE_FLUIX_BOOSTER = this.addItem(88, "ae.fluix_booster").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_NE);
+
         //光伏板
         SOLAR_PLATE_MKI = this.addItem(90, "solar_plate_mki").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         SOLAR_PLATE_MKII = this.addItem(91, "solar_plate_mkii").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);

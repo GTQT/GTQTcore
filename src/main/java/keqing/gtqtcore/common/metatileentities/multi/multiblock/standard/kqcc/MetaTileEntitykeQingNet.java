@@ -226,8 +226,8 @@ public class MetaTileEntitykeQingNet extends RecipeMapMultiblockController imple
 
     protected void addInfo4(List<ITextComponent> textList) {
         MultiblockDisplayText.builder(textList, isStructureFormed()).addCustom(tl -> {
-            tl.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY, "序号：%s", thresholdPercentage + 1));
             if (isStructureFormed() && thresholdPercentage + 1 < 100) {
+                tl.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY, "序号：%s", thresholdPercentage + 1));
                 if (card == 0) {
                     tl.add(new TextComponentTranslation(String.format("gtqtcore.multiblock.kqn.nb%s", thresholdPercentage + 1)));
                 }

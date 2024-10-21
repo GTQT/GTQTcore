@@ -475,6 +475,8 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem ND_YAG_LASER;
     public static MetaItem<?>.MetaValueItem OPTICAL_LASER_CONTROL_UNIT;
     public static MetaItem<?>.MetaValueItem AE_FLUIX_FIRM;
+    public static MetaItem<?>.MetaValueItem AE_FLUIX_BOOSTER;
+    public static MetaItem<?>.MetaValueItem AE_FLUIX_NET;
     public static MetaItem<?>.MetaValueItem INSULATINGMICA;
     // Spintronic Circuit Components
     public static MetaItem<?>.MetaValueItem TOPOLOGICAL_INSULATOR_TUBE;

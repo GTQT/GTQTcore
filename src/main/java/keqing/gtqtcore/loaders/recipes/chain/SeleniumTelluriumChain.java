@@ -17,19 +17,8 @@ public class SeleniumTelluriumChain {
     static int MINUTE=1200;
     public static void init() {
 
-        //  Fix GTFO Blue Vitriol original Electrolyzer recipe
-        ELECTROLYZER_RECIPES.recipeBuilder()
-                .circuitMeta(1)
-                .fluidInputs(BlueVitriol.getFluid(1000))
-                .output(dust, Copper)
-                .output(dust, Sulfur)
-                .fluidOutputs(Oxygen.getFluid(4000))
-                .EUt(VA[MV])
-                .duration((int) (7.2 * SECOND))
-                .buildAndRegister();
-
         //  CuSO4 + H2O -> H2SO4 + Cu + O
-        ELECTROLYZER_RECIPES.recipeBuilder()
+        CHEMICAL_RECIPES.recipeBuilder()
                 .circuitMeta(3)
                 .fluidInputs(BlueVitriol.getFluid(1000))
                 .fluidInputs(Water.getFluid(1000))
