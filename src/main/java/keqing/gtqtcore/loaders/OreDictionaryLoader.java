@@ -21,6 +21,7 @@ public class OreDictionaryLoader {
             OreDictUnifier.registerOre(smooth, type.getOrePrefix(), type.getMaterial());
             OreDictionary.registerOre("stone", smooth);
             OreDictionary.registerOre("cobblestone", cobble);
+            OreDictionary.registerOre("stoneCobble", cobble);
         }
 
         for (StoneVariantBlock.StoneType type : StoneVariantBlock.StoneType.values()) {
