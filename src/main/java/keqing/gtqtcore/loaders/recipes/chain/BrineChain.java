@@ -84,6 +84,12 @@ public class BrineChain {
                 .duration(200)
                 .buildAndRegister();
 
+        CHEMICAL_RECIPES.recipeBuilder().duration(10).EUt(30)
+                .input(dust,Sodium,2)
+                .fluidInputs(Water.getFluid(4000))
+                .fluidOutputs(SodiumHydroxideSolution.getFluid(2000))
+                .fluidOutputs(Hydrogen.getFluid(2000))
+                .buildAndRegister();
 
         CENTRIFUGE_RECIPES.recipeBuilder().duration(100).EUt(30)
                 .fluidInputs(SodiumHydroxideSolution.getFluid(1000))

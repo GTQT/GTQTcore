@@ -77,7 +77,7 @@ public class MetaTileEntityIndustrialWasher extends GTQTMultiblockCore {
                 .aisle("PPPPP", "PPSPP", "PPPPP")
                 .where('S', this.selfPredicate())
                 .where('C', states(getCasingState())
-                        .setMinGlobalLimited(26)
+                        .setMinGlobalLimited(24)
                         .or(autoAbilities()))
                 .where('G', states(getSecondCasingState()))
                 .where('F', states(getFrameState()))
@@ -120,7 +120,7 @@ public class MetaTileEntityIndustrialWasher extends GTQTMultiblockCore {
     public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
         super.renderMetaTileEntity(renderState, translation, pipeline);
         getFrontOverlay().renderOrientedState(renderState, translation, pipeline, getFrontFacing(),
-                isStructureFormed(), isStructureFormed());
+                this.recipeMapWorkable.isWorkingEnabled(), isActive());
         if (isStructureFormed()) {
             EnumFacing back = getFrontFacing().getOpposite();
             for(float i=-1;i<=1;i++) {

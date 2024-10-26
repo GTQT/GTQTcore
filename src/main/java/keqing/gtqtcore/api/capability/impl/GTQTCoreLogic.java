@@ -3,6 +3,7 @@ package keqing.gtqtcore.api.capability.impl;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.recipes.Recipe;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.huge.MetaTileEntityHugeFusionReactor;
 
 public class GTQTCoreLogic extends MultiblockRecipeLogic {
 
@@ -18,5 +19,8 @@ public class GTQTCoreLogic extends MultiblockRecipeLogic {
     public boolean checkRecipe( Recipe recipe) {
         return false;
     }
-
+    @Override
+    public void setActive(boolean active) {
+        super.setActive(active);
+    }
 }

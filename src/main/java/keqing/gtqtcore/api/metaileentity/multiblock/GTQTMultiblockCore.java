@@ -73,12 +73,14 @@ public abstract class GTQTMultiblockCore extends MultiMapMultiblockController im
             importItemsList.add(new ArrayList<>());
             importFluidList.add(new ArrayList<>());
         }
-        this.fluidInventory = new FluidTankList(false, makeFluidTanks(25));
-        this.itemInventory = new NotifiableItemStackHandler(this, 25, this, false);
-        this.exportFluids = (FluidTankList) fluidInventory;
-        this.importFluids = (FluidTankList) fluidInventory;
-        this.exportItems = (IItemHandlerModifiable) itemInventory;
-        this.importItems = (IItemHandlerModifiable) itemInventory;
+        if(MachineSwitch.CoreMachineNBTStoreSwitch) {
+            this.fluidInventory = new FluidTankList(false, makeFluidTanks(25));
+            this.itemInventory = new NotifiableItemStackHandler(this, 25, this, false);
+            this.exportFluids = (FluidTankList) fluidInventory;
+            this.importFluids = (FluidTankList) fluidInventory;
+            this.exportItems = (IItemHandlerModifiable) itemInventory;
+            this.importItems = (IItemHandlerModifiable) itemInventory;
+        }
     }
     //线程数量
     public int getCoreNum() {
@@ -89,8 +91,7 @@ public abstract class GTQTMultiblockCore extends MultiMapMultiblockController im
     //最大工作电压 默认能源仓等级
     public int getMinVa()
     {
-        if((Math.min(this.energyContainer.getEnergyCapacity()/32,maxEU)*20)==0)return 1;
-        return (int)(Math.min(this.energyContainer.getEnergyCapacity()/32,maxEU));
+        return (int) (this.energyContainer.getEnergyCapacity()/16+this.energyContainer.getInputVoltage());
     }
 
 
@@ -211,7 +212,7 @@ public abstract class GTQTMultiblockCore extends MultiMapMultiblockController im
 
     @Override
     protected void updateFormedValid() {
-        maxEU= (int) (this.energyContainer.getEnergyCapacity()/64);
+        if(!this.recipeMapWorkable.isWorkingEnabled())return;
 
         for (int i = 0; i < getCoreNum(); i++)
         {
@@ -373,7 +374,10 @@ public abstract class GTQTMultiblockCore extends MultiMapMultiblockController im
         return super.onScrewdriverClick(playerIn, hand, facing, hitResult);
     }
     public boolean isActive() {
-        return this.isStructureFormed();
+        if(!isStructureFormed())return false;
+        for (int i = 0; i < getCoreNum(); i++)
+            if(ListWork[i])return true;
+        return false;
     }
     @Override
     public boolean hasMufflerMechanics() {

@@ -67,7 +67,7 @@ public class MetaTileEntityCoreMacerator extends GTQTMultiblockCore {
                 .where('P', states(getCasingState()))
                 .where('S', this.selfPredicate())
                 .where('C', states(getCasingState())
-                        .setMinGlobalLimited(16)
+                        .setMinGlobalLimited(12)
                         .or(autoAbilities()))
                 .where('G', states(getSecondCasingState()))
                 .where('F', states(getFrameState()))
@@ -98,8 +98,8 @@ public class MetaTileEntityCoreMacerator extends GTQTMultiblockCore {
     @Override
     public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
         super.renderMetaTileEntity(renderState, translation, pipeline);
-        this.getFrontOverlay().renderOrientedState(renderState, translation, pipeline, getFrontFacing(), true,
-                isStructureFormed());
+        this.getFrontOverlay().renderOrientedState(renderState, translation, pipeline, getFrontFacing(), this.recipeMapWorkable.isWorkingEnabled(),
+                isActive());
     }
     @SideOnly(Side.CLIENT)
     @Override

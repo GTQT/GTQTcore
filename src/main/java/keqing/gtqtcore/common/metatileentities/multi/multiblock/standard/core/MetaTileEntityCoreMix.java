@@ -97,8 +97,8 @@ public class MetaTileEntityCoreMix extends GTQTMultiblockCore {
     @Override
     public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
         super.renderMetaTileEntity(renderState, translation, pipeline);
-        this.getFrontOverlay().renderOrientedState(renderState, translation, pipeline, getFrontFacing(), true,
-                isStructureFormed());
+        this.getFrontOverlay().renderOrientedState(renderState, translation, pipeline, getFrontFacing(), this.recipeMapWorkable.isWorkingEnabled(),
+                isActive());
     }
     @SideOnly(Side.CLIENT)
     @Override

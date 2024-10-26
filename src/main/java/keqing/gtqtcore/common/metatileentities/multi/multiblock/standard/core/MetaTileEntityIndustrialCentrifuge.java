@@ -105,7 +105,7 @@ public class MetaTileEntityIndustrialCentrifuge extends GTQTMultiblockCore {
                                      Matrix4 translation,
                                      IVertexOperation[] pipeline) {
         super.renderMetaTileEntity(renderState, translation, pipeline);
-        GTQTTextures.ISA_MILL.renderSided(renderState, translation, pipeline, getFrontFacing(), isStructureFormed(), isStructureFormed());
+        GTQTTextures.ISA_MILL.renderSided(renderState, translation, pipeline, getFrontFacing(), this.recipeMapWorkable.isWorkingEnabled(), isActive());
     }
 
     @SideOnly(Side.CLIENT)

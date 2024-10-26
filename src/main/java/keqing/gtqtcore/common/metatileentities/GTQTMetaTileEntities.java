@@ -314,6 +314,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityISO3CleaningMaintenanceHatch ISO3_CLEANING_MAINTENANCE_HATCH;
     public static MetaTileEntityISO2CleaningMaintenanceHatch ISO2_CLEANING_MAINTENANCE_HATCH;
     public static MetaTileEntityISO1CleaningMaintenanceHatch ISO1_CLEANING_MAINTENANCE_HATCH;
+
     private static int startId = 15600;
     private static final int END_ID = startId + 400;
 
@@ -609,6 +610,8 @@ public class GTQTMetaTileEntities {
         ION_IMPLANTATOR = registerMetaTileEntity(3510, new MetaTileEntityIonImplanter(gtqtcoreId("ion_implantator")));
         CZ_PULLER = registerMetaTileEntity(3511, new MetaTileEntityCZPuller(gtqtcoreId("cz_puller")));
         EX_CVD = registerMetaTileEntity(3512, new MetaTileEntityEXCVD(gtqtcoreId("ex_cvd")));
+
+        //Appeng 4000
 
         //小机器
         registerSimpleSteamMetaTileEntity(STEAM_VACUUM_CHAMBER, 14800, "vacuum_chamber", GTQTcoreRecipeMaps .VACUUM_CHAMBER_RECIPES, SteamProgressIndicators.COMPRESS, Textures.GAS_COLLECTOR_OVERLAY, false);

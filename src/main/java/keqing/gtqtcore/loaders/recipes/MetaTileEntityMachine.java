@@ -19,6 +19,7 @@ import gregtech.common.items.MetaItems;
 import gregtech.common.metatileentities.MetaTileEntities;
 import gregtech.core.unification.material.internal.MaterialRegistryManager;
 import gregtech.loaders.recipe.CraftingComponent;
+import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.unification.ore.GTQTOrePrefix;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTADVGlass;
@@ -39,6 +40,7 @@ import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.common.blocks.MetaBlocks.MACHINE_CASING;
+import static gregtech.common.items.MetaItems.SHAPE_MOLD_BLOCK;
 import static gregtech.common.metatileentities.MetaTileEntities.ARC_FURNACE;
 import static gregtech.loaders.recipe.CraftingComponent.*;
 import static gregtech.loaders.recipe.MetaTileEntityLoader.registerMachineRecipe;
@@ -416,20 +418,25 @@ public class MetaTileEntityMachine {
                 .input(cableGtSingle, Materials.Europium, 2)
                 .fluidInputs(KaptonE.getFluid(L * 2))
                 .outputs(MetaTileEntities.HULL[9].getStackForm()).buildAndRegister();
-
-        //  Boron Silicate Glass
-        COMPRESSOR_RECIPES.recipeBuilder()
-                .input(dust, BorosilicateGlass, 4)
-                .outputs(GTQTMetaBlocks.ADV_GLASS.getItemVariant(GTQTADVGlass.CasingType.SILICATE_GLASS))
-                .duration(400)
-                .EUt(2)
+        //////////////////////////////////////玻璃
+        FLUID_SOLIDFICATION_RECIPES.recipeBuilder().duration(12).EUt(4)
+                .fluidInputs(BorosilicateGlass.getFluid(L*4))
+                .notConsumable(SHAPE_MOLD_BLOCK)
+                .outputs(new ItemStack(Blocks.GLASS))
                 .buildAndRegister();
 
+        RecipeMaps.ALLOY_SMELTER_RECIPES.recipeBuilder().duration(120).EUt(16)
+                .input(dust, BorosilicateGlass,4)
+                .notConsumable(SHAPE_MOLD_BLOCK.getStackForm())
+                .outputs(new ItemStack(Blocks.GLASS, 1))
+                .buildAndRegister();
+
+        //  Boron Silicate Glass
         OreDictUnifier.registerOre(GTQTMetaBlocks.ADV_GLASS.getItemVariant(GTQTADVGlass.CasingType.SILICATE_GLASS),
                 new ItemMaterialInfo(new MaterialStack(BorosilicateGlass, M * 4)));
 
         //  Thorium-reinforced Glass
-        VACUUM_RECIPES.recipeBuilder()
+        GTQTcoreRecipeMaps.VACUUM_CHAMBER_RECIPES.recipeBuilder()
                 .inputs(GTQTMetaBlocks.ADV_GLASS.getItemVariant(GTQTADVGlass.CasingType.SILICATE_GLASS))
                 .input(plate, Thorium, 4)
                 .outputs(GTQTMetaBlocks.ADV_GLASS.getItemVariant(GTQTADVGlass.CasingType.THY_SILICATE_GLASS))
@@ -442,7 +449,7 @@ public class MetaTileEntityMachine {
                         new MaterialStack(Thorium, M * 4)));
 
         //  Titanium-reinforced Glass
-        VACUUM_RECIPES.recipeBuilder()
+        GTQTcoreRecipeMaps.VACUUM_CHAMBER_RECIPES.recipeBuilder()
                 .inputs(GTQTMetaBlocks.ADV_GLASS.getItemVariant(GTQTADVGlass.CasingType.SILICATE_GLASS))
                 .input(plate, Titanium, 4)
                 .outputs(GTQTMetaBlocks.GLASS_CASING.getItemVariant(GTQTBlockGlassCasing.CasingType.TI_BORON_SILICATE_GLASS))
@@ -455,7 +462,7 @@ public class MetaTileEntityMachine {
                         new MaterialStack(Titanium, M * 4)));
 
         //  Tungsten-reinforced Glass
-        VACUUM_RECIPES.recipeBuilder()
+        GTQTcoreRecipeMaps.VACUUM_CHAMBER_RECIPES.recipeBuilder()
                 .inputs(GTQTMetaBlocks.ADV_GLASS.getItemVariant(GTQTADVGlass.CasingType.SILICATE_GLASS))
                 .input(plate, Tungsten, 4)
                 .outputs(GTQTMetaBlocks.GLASS_CASING.getItemVariant(GTQTBlockGlassCasing.CasingType.W_BORON_SILICATE_GLASS))
@@ -469,7 +476,7 @@ public class MetaTileEntityMachine {
 
 
         //  Osmiridium-reinforced Glass
-        VACUUM_RECIPES.recipeBuilder()
+        GTQTcoreRecipeMaps.VACUUM_CHAMBER_RECIPES.recipeBuilder()
                 .inputs(GTQTMetaBlocks.ADV_GLASS.getItemVariant(GTQTADVGlass.CasingType.SILICATE_GLASS))
                 .input(plate, Osmiridium, 4)
                 .outputs(GTQTMetaBlocks.GLASS_CASING.getItemVariant(GTQTBlockGlassCasing.CasingType.OSMIR_BORON_SILICATE_GLASS))
@@ -482,7 +489,7 @@ public class MetaTileEntityMachine {
                         new MaterialStack(Osmiridium, M * 4)));
 
         //  Naquadah-reinforced Glass
-        VACUUM_RECIPES.recipeBuilder()
+        GTQTcoreRecipeMaps.VACUUM_CHAMBER_RECIPES.recipeBuilder()
                 .inputs(GTQTMetaBlocks.ADV_GLASS.getItemVariant(GTQTADVGlass.CasingType.SILICATE_GLASS))
                 .input(plate, Naquadah, 4)
                 .outputs(GTQTMetaBlocks.GLASS_CASING.getItemVariant(GTQTBlockGlassCasing.CasingType.NAQ_BORON_SILICATE_GLASS))
