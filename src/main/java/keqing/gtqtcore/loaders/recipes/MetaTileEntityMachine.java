@@ -71,7 +71,7 @@ public class MetaTileEntityMachine {
                 .input(dust, Titanium, 6)
                 .input(dust, Aluminium, 4)
                 .input(dust, Vanadium)
-                .circuitMeta(3)
+                .circuitMeta(11)
                 .output(dust, Tcfour, 11)
                 .duration(800).EUt(VA[HV]).buildAndRegister();
 
@@ -141,8 +141,8 @@ public class MetaTileEntityMachine {
         MIXER_RECIPES.recipeBuilder()
                 .input(dust, Titanium, 3)
                 .input(dust, Nickel, 2)
-                .output(dust, Nitinol, 11)
-                .circuitMeta(3)
+                .output(dust, Nitinol, 5)
+                .circuitMeta(5)
                 .duration(800).EUt(VA[EV]).buildAndRegister();
 
         MIXER_RECIPES.recipeBuilder()
@@ -151,22 +151,22 @@ public class MetaTileEntityMachine {
                 .input(dust, Arsenic, 1)
                 .input(dust, Phosphorus, 1)
                 .output(dust, ManganeseIronArsenicPhosphide, 6)
-                .circuitMeta(3)
+                .circuitMeta(6)
                 .duration(800).EUt(VA[EV]).buildAndRegister();
 
         MIXER_RECIPES.recipeBuilder()
                 .input(dust, Praseodymium, 5)
                 .input(dust, Nickel, 1)
                 .output(dust, PraseodymiumNickel, 6)
-                .circuitMeta(3)
+                .circuitMeta(6)
                 .duration(800).EUt(VA[EV]).buildAndRegister();
 
         MIXER_RECIPES.recipeBuilder()
                 .input(dust, Gadolinium, 5)
                 .input(dust, Silicon, 2)
                 .input(dust, Germanium, 2)
-                .output(dust, GadoliniumSiliconGermanium, 11)
-                .circuitMeta(3)
+                .output(dust, GadoliniumSiliconGermanium, 9)
+                .circuitMeta(11)
                 .duration(800).EUt(VA[EV]).buildAndRegister();
     }
 

@@ -69,11 +69,12 @@ public abstract class GTQTMultiblockCore extends MultiMapMultiblockController im
         this.recipeMapWorkable = new GTQTCoreLogic(this);
         this.recipeMaps = recipeMaps;
 
-        for (int i = 0; i < getCoreNum(); i++) {
-            importItemsList.add(new ArrayList<>());
-            importFluidList.add(new ArrayList<>());
-        }
+
         if(MachineSwitch.CoreMachineNBTStoreSwitch) {
+            for (int i = 0; i < getCoreNum(); i++) {
+                importItemsList.add(new ArrayList<>());
+                importFluidList.add(new ArrayList<>());
+            }
             this.fluidInventory = new FluidTankList(false, makeFluidTanks(25));
             this.itemInventory = new NotifiableItemStackHandler(this, 25, this, false);
             this.exportFluids = (FluidTankList) fluidInventory;
@@ -110,15 +111,16 @@ public abstract class GTQTMultiblockCore extends MultiMapMultiblockController im
     boolean stop;
 
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
+            data.setInteger("circuit", circuit);
+            data.setBoolean("speed", speed);
+            data.setBoolean("stop", stop);
+            data.setInteger("target", target);
         if(MachineSwitch.CoreMachineNBTStoreSwitch) {
             for (int i = 0; i < getCoreNum(); i++) data.setIntArray("timeHelper" + i, timeHelper[i]);
             for (int i = 0; i < getCoreNum(); i++) {
                 data.setBoolean("ListWork" + i, ListWork[i]);
             }
-            data.setInteger("circuit", circuit);
-            data.setBoolean("speed", speed);
-            data.setBoolean("stop", stop);
-            data.setInteger("target", target);
+
             if (!importItemsList.isEmpty()) {
                 //总尺寸
                 data.setInteger("importItemsListSize", importItemsList.size());
@@ -164,15 +166,15 @@ public abstract class GTQTMultiblockCore extends MultiMapMultiblockController im
 
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
+        circuit = data.getInteger("circuit");
+        speed = data.getBoolean("speed");
+        stop = data.getBoolean("stop");
+        target = data.getInteger("target");
         if(MachineSwitch.CoreMachineNBTStoreSwitch) {
             for (int i = 0; i < getCoreNum(); i++) timeHelper[i] = data.getIntArray("timeHelper" + i);
             for (int i = 0; i < getCoreNum(); i++) {
                 ListWork[i] = data.getBoolean("ListWork" + i);
             }
-            circuit = data.getInteger("circuit");
-            speed = data.getBoolean("speed");
-            stop = data.getBoolean("stop");
-            target = data.getInteger("target");
             //总尺寸>0
             if (data.hasKey("importItemsListSize") && data.getInteger("importItemsListSize") > 0) {
                 int totalsize = data.getInteger("importItemsListSize");

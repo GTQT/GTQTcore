@@ -62,10 +62,9 @@ public class GTQTCPUHelper {
     //        }
     //        return false;
     //    }
-    public static int getLevelFromWafer(ItemStack item)
+    public static int getRateFromWaferLevel(int i)
     {
-        for(int i=0;i<wafer.length;i++) if (item.getMetadata() == wafer[i].getMetaValue())return (int) Math.pow(2,i+1);
-        return 0;
+        return (int) Math.pow(2,i+1);
     }
     public static boolean checkWafer(ItemStack itemStack, MetaItem.MetaValueItem item)
     {
@@ -100,7 +99,7 @@ public class GTQTCPUHelper {
     {
         if(number>=getRangeFromStatue(wafer,level))return ItemStack.EMPTY;
         if(getPreAmount(number,amount,wafer,level)==0)return ItemStack.EMPTY;
-        return new ItemStack(item[number].getMetaItem(), getPreAmount(number,amount,wafer,level), item[number].getMetaValue());
+        return new ItemStack(item[number].getMetaItem(), getPreAmount(number,amount*getRateFromWaferLevel(wafer),wafer,level), item[number].getMetaValue());
     }
 
     //先把输入总线的晶圆全部转化为虚拟晶圆，然后分别输出不同等级晶圆的产品
