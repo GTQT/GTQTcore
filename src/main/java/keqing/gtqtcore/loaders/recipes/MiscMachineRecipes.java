@@ -3,24 +3,30 @@ package keqing.gtqtcore.loaders.recipes;
 import gregtech.api.GTValues;
 import gregtech.api.fluids.store.FluidStorageKeys;
 import gregtech.api.metatileentity.multiblock.CleanroomType;
+import gregtech.api.recipes.GTRecipeHandler;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.recipes.ingredients.GTRecipeInput;
+import gregtech.api.recipes.ingredients.IntCircuitIngredient;
+import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Materials;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidStack;
 
 import java.util.Collection;
 import java.util.List;
 
 import static gregtech.api.GTValues.*;
+import static gregtech.api.recipes.RecipeMaps.ASSEMBLER_RECIPES;
+import static gregtech.api.recipes.RecipeMaps.MIXER_RECIPES;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.dust;
-import static gregtech.api.unification.ore.OrePrefix.screw;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
+import static keqing.gtqtcore.api.unification.GCYSMaterials.Adamantium;
+import static keqing.gtqtcore.api.unification.GCYSMaterials.Vibranium;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 
 public class MiscMachineRecipes {
@@ -31,11 +37,11 @@ public class MiscMachineRecipes {
         for (Recipe recipe : cutterRecipes) {
             List<GTRecipeInput> itemInputs = recipe.getInputs();
             List<ItemStack> itemOutputs = recipe.getOutputs();
-            int EUt = recipe.getEUt()*4;
+            int EUt = recipe.getEUt() * 4;
             int baseDuration;
 
-            if(EUt<=V[IV]) baseDuration= recipe.getDuration()*4;
-            else baseDuration= recipe.getDuration();
+            if (EUt <= V[IV]) baseDuration = recipe.getDuration() * 4;
+            else baseDuration = recipe.getDuration();
 
             CW_LASER_ENGRAVER_RECIPES.recipeBuilder()
                     .fluidInputs(DistilledWater.getFluid(100))
@@ -226,5 +232,17 @@ public class MiscMachineRecipes {
                 .circuitMeta(3)
                 .buildAndRegister();
 
+        // 砷化镓粉 * 2
+        GTRecipeHandler.removeRecipesByInputs(MIXER_RECIPES, OreDictUnifier.get(dust, Gallium), OreDictUnifier.get(dust, Arsenic), IntCircuitIngredient.getIntegratedCircuit(1));
+        RecipeMaps.BLAST_RECIPES.recipeBuilder()
+                .input(dust, Gallium)
+                .input(dust, Arsenic)
+                .circuitMeta(2)
+                .output(dust, GalliumArsenide, 2)
+                .blastFurnaceTemp(1700)
+                .EUt(120)
+                .duration(900)
+                .buildAndRegister();
+        
     }
 }

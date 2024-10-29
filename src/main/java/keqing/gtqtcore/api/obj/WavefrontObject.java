@@ -721,4 +721,5 @@ public class WavefrontObject implements IModelCustom {
             this.w = w;
         }
     }
+
 }

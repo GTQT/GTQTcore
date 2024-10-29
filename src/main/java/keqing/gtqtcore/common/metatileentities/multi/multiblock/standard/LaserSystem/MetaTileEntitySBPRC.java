@@ -14,6 +14,7 @@ import gregtech.api.gui.widgets.SlotWidget;
 import gregtech.api.items.itemhandlers.GTItemStackHandler;
 import gregtech.api.metatileentity.IFastRenderMetaTileEntity;
 import gregtech.api.metatileentity.MetaTileEntity;
+import gregtech.api.metatileentity.MetaTileEntityHolder;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
@@ -65,6 +66,7 @@ import java.util.List;
 import static keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility.LASER_INPUT;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.MaragingSteel250;
 import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.NQ_TURBINE_CASING;
+import static net.minecraft.tileentity.TileEntity.INFINITE_EXTENT_AABB;
 
 public class MetaTileEntitySBPRC extends MetaTileEntityBaseWithControl implements IFastRenderMetaTileEntity {
     int x;
@@ -709,18 +711,30 @@ public class MetaTileEntitySBPRC extends MetaTileEntityBaseWithControl implement
             GlStateManager.enableLighting();
             GlStateManager.popAttrib();
             GlStateManager.enableCull();
+
         }
 
     }
     //渲染模型的位置
     @Override
-    public AxisAlignedBB getRenderBoundingBox() {
-        //这个影响模型的可视范围，正常方块都是 1 1 1，长宽高各为1，当这个方块离线玩家视线后，obj模型渲染会停止，所以可以适当放大这个大小能让模型有更多角度的可视
-        return new AxisAlignedBB(this.getPos().add(-50,-50,-50),this.getPos().add(50,50,50));
+    public AxisAlignedBB getRenderBoundingBox()
+    {
+        return INFINITE_EXTENT_AABB;
     }
+    /*
+    @Override
+    public double getMaxRenderDistanceSquared()
+    {
+        return 40960.0D;
+    }
+
+     */
+    //渲染模型的位置
+    @Override
     public boolean isGlobalRenderer() {
         return true;
     }
+
     @Override
     public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
         super.renderMetaTileEntity(renderState, translation, pipeline);
