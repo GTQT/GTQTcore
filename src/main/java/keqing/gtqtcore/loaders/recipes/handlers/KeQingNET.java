@@ -1309,6 +1309,7 @@ public class KeQingNET {
                 .duration(400)
                 .cleanroom(CleanroomType.CLEANROOM)
                 .buildAndRegister();
+
         //  Mega Oil Cracking Unit
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .inputs(CRACKER.getStackForm(64))

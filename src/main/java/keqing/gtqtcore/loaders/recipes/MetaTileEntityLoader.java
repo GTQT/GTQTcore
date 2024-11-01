@@ -1,6 +1,7 @@
 package keqing.gtqtcore.loaders.recipes;
 
 import gregtech.api.GTValues;
+import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.multiblock.CleanroomType;
 import gregtech.api.recipes.ModHandler;
 import gregtech.api.recipes.RecipeMaps;
@@ -484,7 +485,8 @@ public class MetaTileEntityLoader {
                 .input(stickLong, SamariumMagnetic, 64)
                 .fluidInputs(SolderingAlloy.getFluid(L * 6))
                 .fluidInputs(Lubricant.getFluid(3000))
-                .fluidInputs(HastelloyN.getFluid(L * 2))
+                .fluidInputs(HastelloyN.getFluid(L * 16))
+                .fluidInputs(Zylon.getFluid(L * 16))
                 .outputs(CRYOGENIC_FREEZER.getStackForm())
                 .scannerResearch(b -> b
                         .researchStack(DISK_21.getStackForm())
@@ -496,7 +498,7 @@ public class MetaTileEntityLoader {
 
         //BLAZING_BLAST_FURNACE
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .inputs(VACUUM_FREEZER.getStackForm(4))
+                .inputs(ELECTRIC_BLAST_FURNACE.getStackForm(16))
                 .input(CIRCUIT_GOOD_I)
                 .input(circuit, MarkerMaterials.Tier.LuV,16)
                 .input(frameGt, HSSG, 16)
@@ -509,13 +511,39 @@ public class MetaTileEntityLoader {
                 .input(stickLong, SamariumMagnetic, 64)
                 .fluidInputs(SolderingAlloy.getFluid(L * 6))
                 .fluidInputs(Lubricant.getFluid(3000))
-                .fluidInputs(HastelloyN.getFluid(L * 2))
+                .fluidInputs(HastelloyN.getFluid(L * 16))
+                .fluidInputs(Zylon.getFluid(L * 16))
                 .outputs(BLAZING_BLAST_FURNACE.getStackForm())
                 .scannerResearch(b -> b
                         .researchStack(DISK_21.getStackForm())
                         .EUt(VA[GTValues.IV])
                         .duration(1200))
-                .EUt(VA[GTValues.LuV])
+                .EUt(VA[GTValues.IV])
+                .duration(1200)
+                .buildAndRegister();
+        //炽焰
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .inputs(ELECTRIC_FURNACE[4].getStackForm(16))
+                .input(CIRCUIT_GOOD_I)
+                .input(circuit, MarkerMaterials.Tier.LuV,16)
+                .input(frameGt, HSSG, 16)
+                .input(CONVEYOR_MODULE_IV, 8)
+                .input(VOLTAGE_COIL_IV, 16)
+                .input(plate, TanmolyiumBetaC, 4)
+                .input(plate, AusteniticStainlessSteel904L, 4)
+                .input(wireFine, Palladium, 64)
+                .input(stickLong, SamariumMagnetic, 64)
+                .input(stickLong, SamariumMagnetic, 64)
+                .fluidInputs(SolderingAlloy.getFluid(L * 6))
+                .fluidInputs(Lubricant.getFluid(3000))
+                .fluidInputs(HastelloyN.getFluid(L * 16))
+                .fluidInputs(Zylon.getFluid(L * 16))
+                .outputs(INDUSTRIAL_INDUCTION_FURNACE.getStackForm())
+                .scannerResearch(b -> b
+                        .researchStack(DISK_21.getStackForm())
+                        .EUt(VA[GTValues.IV])
+                        .duration(1200))
+                .EUt(VA[GTValues.IV])
                 .duration(1200)
                 .buildAndRegister();
         //  Precise Assembler
@@ -532,7 +560,8 @@ public class MetaTileEntityLoader {
                 .input(stickLong, SamariumMagnetic, 64)
                 .fluidInputs(SolderingAlloy.getFluid(L * 6))
                 .fluidInputs(Lubricant.getFluid(3000))
-                .fluidInputs(HastelloyN.getFluid(L * 2))
+                .fluidInputs(HastelloyN.getFluid(L * 16))
+                .fluidInputs(Zylon.getFluid(L * 16))
                 .outputs(PRECISE_ASSEMBLER.getStackForm())
                 .scannerResearch(b -> b
                         .researchStack(DISK_21.getStackForm())
@@ -607,6 +636,15 @@ public class MetaTileEntityLoader {
                 'P', new UnificationEntry(plateDouble, Plutonium239),
                 'W', new UnificationEntry(cableGtDouble, NiobiumTitanium),
                 'F', FIELD_GENERATOR_LuV,
+                'S', new UnificationEntry(spring, RTMAlloy),
+                'A', FLUID_CELL_LARGE_TUNGSTEN_STEEL);
+
+        ModHandler.addShapedRecipe(true, "large_fuel_generator", LARGE_FUEL_TURBINE.getStackForm(),
+                "SAS", "PBP", "WFW",
+                'B', FUEL_CELL_TURBINE[4].getStackForm(),
+                'P', new UnificationEntry(plateDouble, Plutonium239),
+                'W', new UnificationEntry(cableGtDouble, NiobiumTitanium),
+                'F', ELECTRIC_PISTON_LUV,
                 'S', new UnificationEntry(spring, RTMAlloy),
                 'A', FLUID_CELL_LARGE_TUNGSTEN_STEEL);
 

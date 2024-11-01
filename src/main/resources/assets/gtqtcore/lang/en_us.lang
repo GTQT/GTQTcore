@@ -2236,6 +2236,14 @@ gtqtcore.machine.tank.zpm.name=Structural Tank (§cZPM§r)
 gtqtcore.machine.tank.uv.name=Structural Tank (§3UV§r)
 gtqtcore.machine.tank.uhv.name=Structural Tank (§4UHV§r)
 
+gtqtcore.machine.parallel_hatch.lv.name=Parallel Control Hatch（§7LV§r）
+gtqtcore.machine.parallel_hatch.mv.name=Parallel Control Hatch（§bMV§r）
+gtqtcore.machine.parallel_hatch.hv.name=Parallel Control Hatch（§6HV§r）
+gtqtcore.machine.parallel_hatch.ev.name=Parallel Control Hatch（§5EV§r）
+gtqtcore.machine.parallel_hatch.iv.name=Parallel Control Hatch（§1IV§r）
+gtqtcore.machine.parallel_hatch.luv.name=Parallel Control Hatch（§dLuV§r）
+gtqtcore.machine.parallel_hatch.zpm.name=Parallel Control Hatch（§cZPM§r）
+gtqtcore.machine.parallel_hatch.uv.name=Parallel Control Hatch（§3UV§r）
 gtqtcore.machine.parallel_hatch.uhv.name=Parallel Control Hatch (§4UHV§r)
 gtqtcore.machine.parallel_hatch.uev.name=Parallel Control Hatch (§aUEV§r)
 gtqtcore.machine.parallel_hatch.uiv.name=Parallel Control Hatch (§2UIV§r)
@@ -4006,6 +4014,12 @@ metaitem.bio.15.tooltip=§aStored Strain:
 
 gtqtcore.machine.gene_mutagenesis.name=Gene Mutagenesis Chamber
 recipemap.gene_mutagenesis.name=Gene Mutagenesis
+
+gtqtcore.machine.industrial_induction_furnace.name=Industrial Induction Furnace
+gtqtcore.machine.industrial_induction_furnace.tooltip=King of Furnaces
+gregtech.machine.iif.1=Energy Consumption: 4 * Math.max(1, parallel / 8 / discount)
+gregtech.machine.iif.2=Parallel Processing: 2^min(heatingCoilLevel, 8)
+gregtech.machine.iif.3=Duration: (256 * parallel) / max(1, parallelLimit)
 
 gtqtcore.multiblock.ak.temp=Temperature too low, please add lava
 recipemap.alloy_klin.name=Alloy Kiln

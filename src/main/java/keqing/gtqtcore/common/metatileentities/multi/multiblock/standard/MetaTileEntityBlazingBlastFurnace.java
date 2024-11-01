@@ -31,6 +31,7 @@ import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.metatileentities.MetaTileEntities;
 import keqing.gtqtcore.api.metaileentity.multiblock.GTQTRecipeMapMultiblockControllerOverwrite;
+import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing;
@@ -64,7 +65,7 @@ public class MetaTileEntityBlazingBlastFurnace extends GTQTRecipeMapMultiblockCo
     private int blastFurnaceTemperature;
 
     public MetaTileEntityBlazingBlastFurnace(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, new RecipeMap[]{RecipeMaps.FURNACE_RECIPES, RecipeMaps.BLAST_RECIPES});
+        super(metaTileEntityId, new RecipeMap[]{RecipeMaps.BLAST_RECIPES,GTQTcoreRecipeMaps.BURNER_REACTOR_RECIPES,});
         this.recipeMapWorkable = new BlazingBlastFurnaceWorkable(this);
     }
 

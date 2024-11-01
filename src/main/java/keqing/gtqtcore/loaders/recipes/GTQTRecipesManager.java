@@ -38,6 +38,7 @@ public class GTQTRecipesManager {
         CrystalRaw.init();
         BacteriaCulturesChain.init();
         FusionLoader.init();
+        FuckGCYM.init();
         BoronChain.init();
         EnzymesRecipes.init();
         ArgChain.init();

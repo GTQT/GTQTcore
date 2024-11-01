@@ -2244,6 +2244,14 @@ gtqtcore.machine.tank.zpm.name=结构储罐（§cZPM§r）
 gtqtcore.machine.tank.uv.name=结构储罐（§3UV§r）
 gtqtcore.machine.tank.uhv.name=结构储罐（§4UHV§r）
 
+gtqtcore.machine.parallel_hatch.lv.name=并行控制仓（§7LV§r）
+gtqtcore.machine.parallel_hatch.mv.name=并行控制仓（§bMV§r）
+gtqtcore.machine.parallel_hatch.hv.name=并行控制仓（§6HV§r）
+gtqtcore.machine.parallel_hatch.ev.name=并行控制仓（§5EV§r）
+gtqtcore.machine.parallel_hatch.iv.name=并行控制仓（§1IV§r）
+gtqtcore.machine.parallel_hatch.luv.name=并行控制仓（§dLuV§r）
+gtqtcore.machine.parallel_hatch.zpm.name=并行控制仓（§cZPM§r）
+gtqtcore.machine.parallel_hatch.uv.name=并行控制仓（§3UV§r）
 gtqtcore.machine.parallel_hatch.uhv.name=并行控制仓（§4UHV§r）
 gtqtcore.machine.parallel_hatch.uev.name=并行控制仓（§aUEV§r）
 gtqtcore.machine.parallel_hatch.uiv.name=并行控制仓（§2UIV§r）
@@ -4019,6 +4027,12 @@ metaitem.bio.15.tooltip=§a存储菌种：
 
 gtqtcore.machine.gene_mutagenesis.name=基因诱变室
 recipemap.gene_mutagenesis.name=基因诱变
+
+gtqtcore.machine.industrial_induction_furnace.name=工业感应炉
+gtqtcore.machine.industrial_induction_furnace.tooltip=熔炉大王
+gregtech.machine.iif.1=耗能：4 * Math.max(1, parallel / 8 / discount)
+gregtech.machine.iif.2=并行：2^min(heatingCoilLevel, 8)
+gregtech.machine.iif.3=耗时：(256 * parallel) / max(1, parallelLimit)
 
 gtqtcore.multiblock.ak.temp=温度过低，请加岩浆
 recipemap.alloy_klin.name=合金窑

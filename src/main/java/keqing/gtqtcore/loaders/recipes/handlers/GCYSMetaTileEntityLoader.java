@@ -39,14 +39,10 @@ public class GCYSMetaTileEntityLoader {
     public static void init() {
         singleBlocks();
         energy();
-        multiblocks();
         hulls();
     }
 
     private static void singleBlocks() {
-        // Steam Pressure Machines
-
-
         ModHandler.removeRecipeByName("gregtech:hermetic_casing_max");
         ModHandler.addShapedRecipe(true, "hermetic_casing_max", MetaBlocks.HERMETIC_CASING.getItemVariant(HERMETIC_UHV),
                 "PPP", "PFP", "PPP",
@@ -174,34 +170,9 @@ public class GCYSMetaTileEntityLoader {
         MetaTileEntityLoader.registerMachineRecipe(ArrayUtils.subarray(TRANSFORMER, GTValues.UHV, GTValues.MAX), "WCC", "TH ", "WCC", 'W', POWER_COMPONENT, 'C', CABLE, 'T', CABLE_TIER_UP, 'H', HULL);
 
     }
-
-    private static void multiblocks() {
-
-
-
-        ModHandler.addShapedRecipe(true, "rotary_hearth_furnace", GCYMMetaTileEntities.MEGA_BLAST_FURNACE.getStackForm(),
-                "SCS", "FEF", "PKP",
-                'S', new UnificationEntry(spring, Europium),
-                'C', new UnificationEntry(circuit, MarkerMaterials.Tier.UHV),
-                'F', FIELD_GENERATOR_UHV.getStackForm(),
-                'E', ELECTRIC_BLAST_FURNACE.getStackForm(),
-                'P', new UnificationEntry(plate, Vibranium),
-                'K', new UnificationEntry(cableGtHex, SiliconCarbide));
-
-        ModHandler.addShapedRecipe(true, "mega_vacuum_freezer", GCYMMetaTileEntities.MEGA_VACUUM_FREEZER.getStackForm(),
-                "SCS", "FEF", "PKP",
-                'S', new UnificationEntry(pipeHugeFluid, Duranium),
-                'C', new UnificationEntry(circuit, MarkerMaterials.Tier.UHV),
-                'F', FIELD_GENERATOR_UHV.getStackForm(),
-                'E', ELECTRIC_BLAST_FURNACE.getStackForm(),
-                'P', new UnificationEntry(plate, Vibranium),
-                'K', new UnificationEntry(cableGtHex, SiliconCarbide));
-    }
-
     private static void hulls() {
         ModHandler.removeRecipeByName("gregtech:casing_uhv");
-        //TODO remove the aaaaaaaaaaaaaa after CEu #1119 is merged
-        ModHandler.addShapedRecipe(true, "casing_uhvaaaaaaaaaaaaaa", MetaBlocks.MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.UHV),
+        ModHandler.addShapedRecipe(true, "casing_uhv", MetaBlocks.MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.UHV),
                 "PPP", "PwP", "PPP",
                 'P', new UnificationEntry(plate, Orichalcum));
 

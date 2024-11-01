@@ -191,10 +191,11 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntitySawMill SAW_MILL;
     public static MetaTileEntityADVKQCC ADV_KQCC;
     public static MetaTileEntityGeneMutagenesis GENE_MUTAGENESIS;
+    public static MetaTileEntityIndustrialInductionFurnace INDUSTRIAL_INDUCTION_FURNACE;
     public static MetaTileEntityParticleAggregator PARTICLE_AGGREGATOR;
     public static SimpleMachineMetaTileEntity[] VACUUM_CHAMBER = new SimpleMachineMetaTileEntity[V.length - 1];
     public static SimpleSteamMetaTileEntity[] STEAM_VACUUM_CHAMBER = new SimpleSteamMetaTileEntity[2];
-
+    public static MetaTileEntityParallelHatch[] PARALLEL_HATCH = new MetaTileEntityParallelHatch[V.length - 1];
     public static MetaTileEntityGravitySeparator GRAVITY_SEPARATOR;
     public static MetaTileEntityFrothFlotationTank FROTH_FLOTATION_TANK;
     public static MetaTileEntityOceanPumper OCEAN_PUMPER;
@@ -517,6 +518,7 @@ public class GTQTMetaTileEntities {
         ELECTRON_MICROSCOPE = registerMetaTileEntity(3216, new MetaTileEntityElectronMicroscope(gtqtcoreId("electron_microscope")));
         GENE_MUTAGENESIS = registerMetaTileEntity(3217, new MetaTileEntityGeneMutagenesis(gtqtcoreId("gene_mutagenesis")));
         PARTICLE_AGGREGATOR = registerMetaTileEntity(3218, new MetaTileEntityParticleAggregator(gtqtcoreId("particle_aggregator")));
+        INDUSTRIAL_INDUCTION_FURNACE = registerMetaTileEntity(3219, new MetaTileEntityIndustrialInductionFurnace(gtqtcoreId("industrial_induction_furnace")));
 
         //重写设备
         DISTILLATION_TOWER = registerMetaTileEntity(3250, new MetaTileEntityDistillationTower(gtqtcoreId("distillation_tower"), true));
@@ -661,12 +663,21 @@ public class GTQTMetaTileEntities {
         LASER_BOOSTER[4] = registerMetaTileEntity(15479, new MetaTileLaserBooster(gtqtcoreId("laser_booster." + UIV), UIV));
         LASER_BOOSTER[5] = registerMetaTileEntity(15480, new MetaTileLaserBooster(gtqtcoreId("laser_booster." + UEV), UEV));
 
-        registerMetaTileEntity(15541, new keqing.gtqtcore.common.metatileentities.multi.multiblockpart.MetaTileEntityParallelHatch(gtqtcoreId(String.format("parallel_hatch.%s", GTValues.VN[9])), 9));
-        registerMetaTileEntity(15542, new keqing.gtqtcore.common.metatileentities.multi.multiblockpart.MetaTileEntityParallelHatch(gtqtcoreId(String.format("parallel_hatch.%s", GTValues.VN[10])), 10));
-        registerMetaTileEntity(15543, new keqing.gtqtcore.common.metatileentities.multi.multiblockpart.MetaTileEntityParallelHatch(gtqtcoreId(String.format("parallel_hatch.%s", GTValues.VN[11])), 11));
-        registerMetaTileEntity(15544, new keqing.gtqtcore.common.metatileentities.multi.multiblockpart.MetaTileEntityParallelHatch(gtqtcoreId(String.format("parallel_hatch.%s", GTValues.VN[12])), 12));
-        registerMetaTileEntity(15545, new keqing.gtqtcore.common.metatileentities.multi.multiblockpart.MetaTileEntityParallelHatch(gtqtcoreId(String.format("parallel_hatch.%s", GTValues.VN[13])), 13));
-        registerMetaTileEntity(15546, new keqing.gtqtcore.common.metatileentities.multi.multiblockpart.MetaTileEntityParallelHatch(gtqtcoreId(String.format("parallel_hatch.%s", GTValues.VN[14])), 14));
+        PARALLEL_HATCH[0]=registerMetaTileEntity(15533, new MetaTileEntityParallelHatch(gtqtcoreId(String.format("parallel_hatch.%s", GTValues.VN[1])), 1));
+        PARALLEL_HATCH[1]=registerMetaTileEntity(15534, new MetaTileEntityParallelHatch(gtqtcoreId(String.format("parallel_hatch.%s", GTValues.VN[2])), 2));
+        PARALLEL_HATCH[2]=registerMetaTileEntity(15535, new MetaTileEntityParallelHatch(gtqtcoreId(String.format("parallel_hatch.%s", GTValues.VN[3])), 3));
+        PARALLEL_HATCH[3]=registerMetaTileEntity(15536, new MetaTileEntityParallelHatch(gtqtcoreId(String.format("parallel_hatch.%s", GTValues.VN[4])), 4));
+        PARALLEL_HATCH[4]=registerMetaTileEntity(15537, new MetaTileEntityParallelHatch(gtqtcoreId(String.format("parallel_hatch.%s", GTValues.VN[5])), 5));
+        PARALLEL_HATCH[5]=registerMetaTileEntity(15538, new MetaTileEntityParallelHatch(gtqtcoreId(String.format("parallel_hatch.%s", GTValues.VN[6])), 6));
+        PARALLEL_HATCH[6]=registerMetaTileEntity(15539, new MetaTileEntityParallelHatch(gtqtcoreId(String.format("parallel_hatch.%s", GTValues.VN[7])), 7));
+        PARALLEL_HATCH[7]=registerMetaTileEntity(15540, new MetaTileEntityParallelHatch(gtqtcoreId(String.format("parallel_hatch.%s", GTValues.VN[8])), 8));
+        PARALLEL_HATCH[8]=registerMetaTileEntity(15541, new MetaTileEntityParallelHatch(gtqtcoreId(String.format("parallel_hatch.%s", GTValues.VN[9])), 9));
+        PARALLEL_HATCH[9]=registerMetaTileEntity(15542, new MetaTileEntityParallelHatch(gtqtcoreId(String.format("parallel_hatch.%s", GTValues.VN[10])), 10));
+        PARALLEL_HATCH[10]=registerMetaTileEntity(15543, new MetaTileEntityParallelHatch(gtqtcoreId(String.format("parallel_hatch.%s", GTValues.VN[11])), 11));
+        PARALLEL_HATCH[11]=registerMetaTileEntity(15544, new MetaTileEntityParallelHatch(gtqtcoreId(String.format("parallel_hatch.%s", GTValues.VN[12])), 12));
+        PARALLEL_HATCH[12]=registerMetaTileEntity(15545, new MetaTileEntityParallelHatch(gtqtcoreId(String.format("parallel_hatch.%s", GTValues.VN[13])), 13));
+        PARALLEL_HATCH[13]=registerMetaTileEntity(15546, new MetaTileEntityParallelHatch(gtqtcoreId(String.format("parallel_hatch.%s", GTValues.VN[14])), 14));
+
         INF_WATER_HATCH = registerMetaTileEntity(15547, new MetaTileInfWaterHatch(gtqtcoreId("infinite_water_hatch")));
         CATALYST_HATCH = registerMetaTileEntity(15548, new MetaTileEntityCatalystHatch(gtqtcoreId("catalyst_hatch")));
         MULTIPART_BUFFER_HATCH = registerMetaTileEntity(15549, new MetaTileEntityBufferHatch(gtqtcoreId("buffer_hatch")));

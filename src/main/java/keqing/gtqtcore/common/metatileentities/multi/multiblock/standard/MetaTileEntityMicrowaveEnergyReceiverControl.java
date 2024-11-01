@@ -7,6 +7,9 @@ import gregtech.api.block.IHeatingCoilBlockStats;
 import gregtech.api.capability.GregtechCapabilities;
 import gregtech.api.capability.GregtechTileCapabilities;
 import gregtech.api.capability.IEnergyContainer;
+import gregtech.api.capability.impl.EnergyContainerList;
+import gregtech.api.capability.impl.FluidTankList;
+import gregtech.api.capability.impl.ItemHandlerList;
 import gregtech.api.cover.CoverableView;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.ModularUI;
@@ -50,10 +53,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 import static gregtech.api.GTValues.V;
 import static gregtech.api.util.RelativeDirection.*;
@@ -80,9 +80,19 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
     }
 
     @Override
+    protected void initializeAbilities() {
+        this.inputInventory = new ItemHandlerList(this.getAbilities(MultiblockAbility.IMPORT_ITEMS));
+        this.outputInventory = new ItemHandlerList(this.getAbilities(MultiblockAbility.EXPORT_ITEMS));
+        List<IEnergyContainer> energyContainer = new ArrayList<>(this.getAbilities(MultiblockAbility.INPUT_ENERGY));
+        energyContainer.addAll(this.getAbilities(MultiblockAbility.INPUT_LASER));
+        this.energyContainer=new EnergyContainerList(energyContainer);
+    }
+
+    @Override
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World world, @Nonnull List<String> tooltip, boolean advanced) {
         super.addInformation(stack, world, tooltip, advanced);
+        tooltip.add(I18n.format("本多方块允许使用能源仓，激光仓；最多可放置4个能源仓。"));
         tooltip.add(I18n.format("在输入总线放置绑定微波仓（覆盖板）的数据卡来将其存入系统对其供能，绑定的微波仓需要在多方块的供能范围内，否则不会存入系统"));
         tooltip.add(I18n.format("升级结构来获得更大的供能范围与缓存电量,最大容量为 V[Math.min(heatingCoilLevel,9)]*16*coilHeight EU"));
         tooltip.add(I18n.format("最多管理：%s 个设备,升级线圈获得更多的管理容量", 64));
@@ -686,7 +696,7 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
                 .where('C', states(getCasingAState())
                         .or(abilities(MultiblockAbility.IMPORT_ITEMS).setMaxGlobalLimited(1))
                         .or(abilities(MultiblockAbility.EXPORT_ITEMS).setMaxGlobalLimited(1))
-                        .or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(2)))
+                        .or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(4)))
                 .where('H', coilPredicate())
                 .build();
     }

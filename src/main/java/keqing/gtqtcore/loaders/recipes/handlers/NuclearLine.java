@@ -269,7 +269,7 @@ public class NuclearLine {
                 .input(pellets,material)
                 .output(upellets,material)
                 .fluidInputs(Argon.getFluid(1000))
-                .duration(1200+fuel*160)
+                .duration(2400+fuel*240)
                 .EUt(2048)
                 .buildAndRegister();
 
@@ -277,7 +277,7 @@ public class NuclearLine {
                 .input(pellets,material)
                 .output(upellets,material)
                 .fluidInputs(Helium.getFluid(1000))
-                .duration(800+fuel*120)
+                .duration(1600+fuel*180)
                 .EUt(2048)
                 .buildAndRegister();
 
@@ -285,7 +285,7 @@ public class NuclearLine {
                 .input(pellets,material)
                 .output(upellets,material)
                 .fluidInputs(Nitrogen.getFluid(1000))
-                .duration(600+fuel*80)
+                .duration(1200+fuel*120)
                 .EUt(2048)
                 .buildAndRegister();
 

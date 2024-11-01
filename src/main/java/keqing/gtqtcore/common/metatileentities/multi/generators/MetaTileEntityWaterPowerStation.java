@@ -249,6 +249,7 @@ public class MetaTileEntityWaterPowerStation extends MultiblockWithDisplayBase {
                         BlockPos waterCheckPos = this.metaTileEntity.getPos().add(xDir + i, h, zDir + j);
                         if (this.metaTileEntity.getWorld().getBlockState(waterCheckPos) == Blocks.WATER.getDefaultState())
                             waterpos++;
+
                     }
                 }
             }

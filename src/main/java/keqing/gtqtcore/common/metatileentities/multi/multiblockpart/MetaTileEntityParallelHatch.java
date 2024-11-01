@@ -42,7 +42,7 @@ public class MetaTileEntityParallelHatch extends MetaTileEntityMultiblockPart im
 
     public MetaTileEntityParallelHatch(ResourceLocation metaTileEntityId, int tier) {
         super(metaTileEntityId, tier);
-        this.maxParallel = (int) Math.pow(4, tier - GTValues.HV);
+        this.maxParallel = (int) Math.pow(2, tier+1);
         this.currentParallel = this.maxParallel;
     }
 
@@ -66,10 +66,10 @@ public class MetaTileEntityParallelHatch extends MetaTileEntityMultiblockPart im
         parallelAmountGroup.addWidget(new ImageWidget(62, 36, 53, 20, GuiTextures.DISPLAY)
                 .setTooltip("gcym.machine.parallel_hatch.display"));
 
-        parallelAmountGroup.addWidget(new IncrementButtonWidget(118, 36, 30, 20, 1024, 4096, 16384, 65536, this::setCurrentParallel)
+        parallelAmountGroup.addWidget(new IncrementButtonWidget(118, 36, 30, 20, maxParallel>64?maxParallel/64:1,  maxParallel>32?maxParallel/32:1, maxParallel>16?maxParallel/16:1, maxParallel/4, this::setCurrentParallel)
                 .setDefaultTooltip()
                 .setShouldClientCallback(false));
-        parallelAmountGroup.addWidget(new IncrementButtonWidget(29, 36, 30, 20, -1024, -4096, -16384, -65536, this::setCurrentParallel)
+        parallelAmountGroup.addWidget(new IncrementButtonWidget(29, 36, 30, 20,  maxParallel>64?-maxParallel/64:-1, maxParallel>32?-maxParallel/32:-1,  maxParallel>16?-maxParallel/16:-1, -maxParallel/4, this::setCurrentParallel)
                 .setDefaultTooltip()
                 .setShouldClientCallback(false));
 
@@ -148,22 +148,14 @@ public class MetaTileEntityParallelHatch extends MetaTileEntityMultiblockPart im
     }
 
     private OrientedOverlayRenderer getOrientedOverlayRenderer() {
-        OrientedOverlayRenderer overlayRenderer;
-        if (getTier() == GTValues.EV)
-            overlayRenderer = GCYMTextures.PARALLEL_HATCH_MK1_OVERLAY;
-        else if (getTier() == GTValues.IV)
-            overlayRenderer = GCYMTextures.PARALLEL_HATCH_MK1_OVERLAY;
-        else if (getTier() == GTValues.LuV)
-            overlayRenderer = GCYMTextures.PARALLEL_HATCH_MK2_OVERLAY;
-        else if (getTier() == GTValues.ZPM)
-            overlayRenderer = GCYMTextures.PARALLEL_HATCH_MK2_OVERLAY;
-        else if (getTier() == GTValues.UV)
-            overlayRenderer = GCYMTextures.PARALLEL_HATCH_MK3_OVERLAY;
-        else if (getTier() == GTValues.UHV)
-            overlayRenderer = GCYMTextures.PARALLEL_HATCH_MK3_OVERLAY;
+        if (getTier() <= GTValues.HV)
+            return GCYMTextures.PARALLEL_HATCH_MK1_OVERLAY;
+        else if (getTier() <= GTValues.LuV)
+            return GCYMTextures.PARALLEL_HATCH_MK2_OVERLAY;
+        else if (getTier() <= GTValues.UHV)
+            return GCYMTextures.PARALLEL_HATCH_MK3_OVERLAY;
         else
-            overlayRenderer = GCYMTextures.PARALLEL_HATCH_MK4_OVERLAY;
-        return overlayRenderer;
+            return GCYMTextures.PARALLEL_HATCH_MK4_OVERLAY;
     }
 
     @Override
