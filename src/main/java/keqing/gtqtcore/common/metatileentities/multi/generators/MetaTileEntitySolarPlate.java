@@ -46,6 +46,7 @@ import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.Random;
 
+import static gregtech.api.GTValues.V;
 import static gregtech.api.GTValues.VA;
 
 public class MetaTileEntitySolarPlate extends MultiblockWithDisplayBase implements  IProgressBarMultiblock {
@@ -64,7 +65,7 @@ public class MetaTileEntitySolarPlate extends MultiblockWithDisplayBase implemen
     {
         Random rand = new Random();
         int randomNum = rand.nextInt(40);
-        return ((long) VA[tier + 3] * 2 *(randomNum+80)/100);
+        return (long) (V[2] *Math.pow(2,tier) * 2 *(randomNum+80)/100);
     }
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
@@ -80,7 +81,7 @@ public class MetaTileEntitySolarPlate extends MultiblockWithDisplayBase implemen
 
     @Override
     public double getFillPercentage(int index) {
-        return  (double)geteu()/(VA[tier + 3] * 2.4);
+        return  (double)geteu()/(V[2] *Math.pow(2,tier) * 2.4);
     }
 
     @Override
@@ -208,12 +209,13 @@ public class MetaTileEntitySolarPlate extends MultiblockWithDisplayBase implemen
     }
     public boolean clear()
     {
+
         int aX = this.getPos().getX();
         int aY = this.getPos().getY();
         int aZ = this.getPos().getZ();
-        for(int i=1;i<10;i++)
-            for(int x=-5;x<=5;x++)
-                for(int y=-5;y<=5;y++)
+        for(int i=1;i<5;i++)
+            for(int x=-2;x<=2;x++)
+                for(int y=-2;y<=2;y++)
             if (this.getWorld().getBlockState(new BlockPos(aX+x, aY+i, aZ+y)).getBlock() != Blocks.AIR) return false;
         return true;
     }

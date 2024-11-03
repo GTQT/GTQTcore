@@ -220,6 +220,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityLaserAlloyFurnace LASER_ALLOY_FURNACE;
     public static MetaTileEntityLaserCutter LASER_CUTTER;
     public static MetaTileEntityLaserENV LASER_ENV;
+    public static MetaTileEntityLaserChemicalPlant LASER_CHEMICAL_PLANT;
     public static MetaTileEntitySBPRC SBPRC;
     public static MetaTileEntitySBPRI SBPRI;
     public static MetaTileEntitySBPRO SBPRO;
@@ -409,13 +410,15 @@ public class GTQTMetaTileEntities {
         WIND_GENERATOR = registerMetaTileEntity(3077, new MetaTileEntityWindGenerator(gtqtcoreId("wind_generator")));
 
         //激光
+        LASER_BLAST_FURNACE = registerMetaTileEntity(3080, new MetaTileEntityLaserBlastFurnace(gtqtcoreId("laser_blast_furnace")));
+        LASER_ALLOY_FURNACE = registerMetaTileEntity(3081, new MetaTileEntityLaserAlloyFurnace(gtqtcoreId("laser_alloy_furnace")));
+        LASER_CUTTER = registerMetaTileEntity(3082, new MetaTileEntityLaserCutter(gtqtcoreId("laser_cutter")));
+        LASER_ENV = registerMetaTileEntity(3083, new MetaTileEntityLaserENV(gtqtcoreId("laser_env")));
+        LASER_CHEMICAL_PLANT = registerMetaTileEntity(3084, new MetaTileEntityLaserChemicalPlant(gtqtcoreId("laser_chemical_plant")));
+
         LASER_EMITTER = registerMetaTileEntity(3090, new MetaTileEntityLaserEmitter(gtqtcoreId("laser_emitter")));
         LASER_TRANSLATION = registerMetaTileEntity(3091, new MetaTileEntityLaserTranslation(gtqtcoreId("laser_translation")));
         LASER_SWITCH = registerMetaTileEntity(3092, new MetaTileEntitySwitch(gtqtcoreId("laser_switch")));
-        LASER_BLAST_FURNACE = registerMetaTileEntity(3093, new MetaTileEntityLaserBlastFurnace(gtqtcoreId("laser_blast_furnace")));
-        LASER_ALLOY_FURNACE = registerMetaTileEntity(3094, new MetaTileEntityLaserAlloyFurnace(gtqtcoreId("laser_alloy_furnace")));
-        LASER_CUTTER = registerMetaTileEntity(3095, new MetaTileEntityLaserCutter(gtqtcoreId("laser_cutter")));
-        LASER_ENV = registerMetaTileEntity(3096, new MetaTileEntityLaserENV(gtqtcoreId("laser_env")));
 
         SBPRC = registerMetaTileEntity(3097, new MetaTileEntitySBPRC(gtqtcoreId("sbprc")));
         SBPRI = registerMetaTileEntity(3098, new MetaTileEntitySBPRI(gtqtcoreId("sbpri")));

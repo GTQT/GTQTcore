@@ -416,6 +416,36 @@ public class KeQingNET {
                 .EUt(VA[LuV])
                 .duration(1000)
                 .buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(CHEMICAL_PLANT, 64)
+                .input(CHEMICAL_PLANT, 64)
+                .input(frameGt, NaquadahAlloy, 16)
+                .input(LASER_OUTPUT_HATCH_1024[2], 8)
+                .input(ELECTRIC_PUMP_LuV, 64)
+                .input(plate, Duranium, 32)
+                .input(screw, PPB, 64)
+                .input(gear, HG1223, 6)
+                .input(stick, Staballoy, 32)
+                .input(circuit, MarkerMaterials.Tier.UV, 16)
+                .input(circuit, MarkerMaterials.Tier.ZPM, 32)
+                .input(circuit, MarkerMaterials.Tier.LuV, 64)
+                .input(HIGH_POWER_INTEGRATED_CIRCUIT, 64)
+                .input(HIGH_POWER_INTEGRATED_CIRCUIT, 64)
+                .input(wireGtSingle, Superconductor[LuV], 64)
+                .input(wireGtSingle, Superconductor[LuV], 64)
+                .fluidInputs(KaptonK.getFluid(L * 32))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 16))
+                .fluidInputs(Polyetheretherketone.getFluid(L * 16))
+                .fluidInputs(NaquadahAlloy.getFluid(L * 4))
+                .stationResearch(b -> b
+                        .researchStack(DISK_28.getStackForm())
+                        .CWUt(CWT[LuV])
+                        .EUt(VA[LuV]))
+                .output(LASER_CHEMICAL_PLANT)
+                .EUt(VA[LuV])
+                .duration(1000)
+                .buildAndRegister();
         //26
         //  Large Naquadah Reactor
         ASSEMBLY_LINE_RECIPES.recipeBuilder()

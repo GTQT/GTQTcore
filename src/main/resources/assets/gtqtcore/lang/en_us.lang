@@ -2349,6 +2349,7 @@ gtqtcore.machine.laser_blast_furnace.name=High-Energy Laser EBF
 gtqtcore.machine.laser_alloy_furnace.name=High-Energy Laser EAF
 gtqtcore.machine.laser_cutter.name=High-Energy Laser Cutter
 gtqtcore.machine.laser_env.name=High-Energy Laser ENV
+gtqtcore.machine.laser_chemical_plant.name=High-Energy Laser Chemical Plant
 gtqtcore.machine.sbpri.name=Space based Prism Laser Focuser（SBPRI）
 gtqtcore.machine.sbpro.name=Space based Prism Laser Discretizer（SBPRO）
 gtqtcore.machine.sbprc.name=Space based Prism Laser Controller（SBPRC）

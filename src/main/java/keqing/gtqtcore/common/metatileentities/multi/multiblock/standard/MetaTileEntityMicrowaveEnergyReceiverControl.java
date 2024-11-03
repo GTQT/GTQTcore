@@ -432,13 +432,14 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
 
                 assert container != null;
                 long energyNeeded = container.getEnergyCapacity() - container.getEnergyStored();
-                if (energyNeeded < voltage * amperage) {
-                    container.addEnergy((int) energyNeeded);
-                    euStore -= (int) energyNeeded;
+                if (energyNeeded < voltage * amperage && euStore>energyNeeded) {
+                    container.addEnergy(energyNeeded);
+                    euStore -= energyNeeded;
                     return;
                 } else if (euStore > voltage * amperage) {
                     container.addEnergy(voltage * amperage);
                     euStore -= voltage * amperage;
+                    return;
                 } else {
                     container.addEnergy(euStore);
                     euStore = 0;

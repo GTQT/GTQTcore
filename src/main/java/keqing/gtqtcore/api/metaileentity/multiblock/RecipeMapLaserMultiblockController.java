@@ -300,4 +300,5 @@ public abstract class RecipeMapLaserMultiblockController extends MultiblockWithD
         return (int) Math.pow(2, getTier());
     }
 
+
 }

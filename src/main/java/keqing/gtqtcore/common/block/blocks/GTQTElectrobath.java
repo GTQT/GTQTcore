@@ -43,7 +43,7 @@ public class GTQTElectrobath extends VariantBlock<GTQTElectrobath.CasingType> {
         SOLAR_PLATE_LV("solar_plate_lv"),
         SOLAR_PLATE_MV("solar_plate_mv"),
         SOLAR_PLATE_HV("solar_plate_hv"),
-        SOLAR_PLATE_CASING("solar_plate_casing"),;
+        SOLAR_PLATE_CASING("solar_plate_casing");
 
         private final String name;
 

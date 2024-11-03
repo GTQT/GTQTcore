@@ -1,6 +1,7 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.LaserSystem;
 
 import gregtech.api.GTValues;
+import gregtech.api.capability.IEnergyContainer;
 import gregtech.api.capability.impl.EnergyContainerList;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.ModularUI;
@@ -33,6 +34,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -76,7 +78,11 @@ public class MetaTileEntityLaserEmitter extends MetaTileEntityBaseWithControl {
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
-        this.energyContainer = new EnergyContainerList(getAbilities(MultiblockAbility.INPUT_ENERGY));
+
+        List<IEnergyContainer> energyContainer = new ArrayList<>(this.getAbilities(MultiblockAbility.INPUT_ENERGY));
+        energyContainer.addAll(this.getAbilities(MultiblockAbility.INPUT_LASER));
+        this.energyContainer=new EnergyContainerList(energyContainer);
+
         this.getAbilities(LASER_OUTPUT).get(0).setMachinePos(this.getPos());
     }
     @Override

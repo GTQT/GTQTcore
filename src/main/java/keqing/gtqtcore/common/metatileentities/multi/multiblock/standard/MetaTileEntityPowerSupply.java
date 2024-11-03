@@ -405,13 +405,12 @@ public class MetaTileEntityPowerSupply extends MultiblockWithDisplayBase {
                         if (tier!= 11 &&tier!= 0) {
                             MetaTileEntity mte = GTUtility.getMetaTileEntity(this.getWorld(), pos.add(0, 1, 0));
                             if (mte instanceof MetaTileEntity) {
-                                GTQTLog.logger.info("定位成功");
                                 long energyLimit = V[tier];
                                 for (EnumFacing facing : EnumFacing.VALUES) {
                                     if (mte.getCapability(GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER, facing) instanceof IEnergyContainer) {
                                         IEnergyContainer container = mte.getCapability(GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER, facing);
+                                        assert container != null;
                                         if (charge) {
-                                            assert container != null;
                                             if (!fastCharge) {
                                                 if (container.getEnergyStored() < container.getEnergyCapacity() && eu > energyLimit) {
                                                     long energyToAdd = Math.min(container.getEnergyCapacity() - container.getEnergyStored(), eu);
@@ -426,7 +425,6 @@ public class MetaTileEntityPowerSupply extends MultiblockWithDisplayBase {
                                                 }
                                             }
                                         } else {
-                                            assert container != null;
                                             if (container.getEnergyStored() > 0 && eu < tier * ENERGY_CAPACITY_MAX) {
                                                 long energyToAdd = container.getEnergyStored();
                                                 eu += (int) energyToAdd;
