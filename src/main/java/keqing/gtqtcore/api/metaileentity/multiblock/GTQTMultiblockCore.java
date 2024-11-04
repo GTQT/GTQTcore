@@ -70,11 +70,12 @@ public abstract class GTQTMultiblockCore extends MultiMapMultiblockController im
         this.recipeMaps = recipeMaps;
 
 
-        if(MachineSwitch.CoreMachineNBTStoreSwitch) {
+
             for (int i = 0; i < getCoreNum(); i++) {
                 importItemsList.add(new ArrayList<>());
                 importFluidList.add(new ArrayList<>());
             }
+        if(MachineSwitch.CoreMachineNBTStoreSwitch) {
             this.fluidInventory = new FluidTankList(false, makeFluidTanks(25));
             this.itemInventory = new NotifiableItemStackHandler(this, 25, this, false);
             this.exportFluids = (FluidTankList) fluidInventory;

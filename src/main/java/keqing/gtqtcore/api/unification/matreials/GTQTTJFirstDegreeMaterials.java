@@ -240,9 +240,18 @@ public class GTQTTJFirstDegreeMaterials {
                 .components(Carbon, 24, Hydrogen, 16, Oxygen, 8, Nitrogen, 4, Phosphorus, 4, Fluorine, 40)
                 .build();
 
+        SilaneB = new Material.Builder(25043, gregtechId("silaneb"))
+                .fluid()
+                .colorAverage()
+                .flags(DISABLE_DECOMPOSITION)
+                .components(Silicon, 1, Hydrogen, 2,Chlorine,2)
+                .build()
+                .setFormula("SiH2Cl2", true);
+
         Silane = new Material.Builder(25045, gregtechId("silane"))
                 .fluid()
                 .colorAverage()
+                .flags(DISABLE_DECOMPOSITION)
                 .components(Silicon, 1, Hydrogen, 4)
                 .build()
                 .setFormula("SiH4", true);
@@ -252,7 +261,6 @@ public class GTQTTJFirstDegreeMaterials {
                 .components(Argon, 1, Silane, 1)
                 .color(0x24BB18)
                 .build();
-
 
         CarbonNanotubePolymer = new Material.Builder(25046, gregtechId("carbon_nanotube_polymer"))
                 .dust()

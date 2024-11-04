@@ -17,12 +17,41 @@ public class CircuitryMaterialChains {
     }
 
     private static void SiliconNanocrystals() {
+
+        CHEMICAL_RECIPES.recipeBuilder()
+                .duration(200)
+                .EUt(VA[IV])
+                .input(dust,Silicon)
+                .fluidInputs(SiliconTetrachloride.getFluid(1000))
+                .fluidInputs(Hydrogen.getFluid(2000))
+                .fluidOutputs(Trichlorosilane.getFluid(1000))
+                .fluidOutputs(HydrochloricAcid.getFluid(1000))
+                .buildAndRegister();
+
+        CHEMICAL_RECIPES.recipeBuilder()
+                .duration(200)
+                .EUt(VA[IV])
+                .notConsumable(plate,Palladium)
+                .fluidInputs(Trichlorosilane.getFluid(2000))
+                .fluidOutputs(SiliconTetrachloride.getFluid(1000))
+                .fluidOutputs(SilaneB.getFluid(1000))
+                .buildAndRegister();
+
+        CHEMICAL_RECIPES.recipeBuilder()
+                .duration(200)
+                .EUt(VA[IV])
+                .notConsumable(plate,Platinum)
+                .fluidInputs(SilaneB.getFluid(3000))
+                .fluidOutputs(Trichlorosilane.getFluid(2000))
+                .fluidOutputs(Silane.getFluid(1000))
+                .buildAndRegister();
+
         CHEMICAL_RECIPES.recipeBuilder()
                 .duration(140)
-                .EUt(VA[EV])
+                .EUt(VA[IV])
                 .fluidInputs(Argon.getFluid(1000))
                 .fluidInputs(Silane.getFluid(1000))
-                .fluidOutputs(ArgonSilane.getFluid(2000))
+                .fluidOutputs(ArgonSilane.getFluid(1000))
                 .buildAndRegister();
 
         //  Alumino Silicate Glass Tube

@@ -49,11 +49,11 @@ public class ChipHelper {
     }
 
     private static void pic() {
-        cutter(NANO_POWER_IC_WAFER,NANO_POWER_IC,9,CleanroomType.STERILE_CLEANROOM);
-        cutter(PICO_POWER_IC_WAFER,PICO_POWER_IC,10,CleanroomType.STERILE_CLEANROOM);
-        cutter(FEMTO_POWER_IC_WAFER,FEMTO_POWER_IC,11, GCYLCleanroomType.ISO3);
-        cutter(ATTO_PIC_WAFER,ATTO_PIC_CHIP,12,GCYLCleanroomType.ISO2);
-        cutter(ZEPTO_PIC_WAFER,ZEPTO_PIC_CHIP,13,GCYLCleanroomType.ISO1);
+        cutter(NANO_POWER_IC_WAFER,NANO_POWER_IC,8,CleanroomType.STERILE_CLEANROOM);
+        cutter(PICO_POWER_IC_WAFER,PICO_POWER_IC,9,CleanroomType.STERILE_CLEANROOM);
+        cutter(FEMTO_POWER_IC_WAFER,FEMTO_POWER_IC,10, GCYLCleanroomType.ISO3);
+        cutter(ATTO_PIC_WAFER,ATTO_PIC_CHIP,11,GCYLCleanroomType.ISO2);
+        cutter(ZEPTO_PIC_WAFER,ZEPTO_PIC_CHIP,12,GCYLCleanroomType.ISO1);
 
         NanoPIC();
         PicoPIC();

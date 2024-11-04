@@ -68,6 +68,7 @@ public class TJMaterials {
     public static Material Methyltrimethoxysilane;
     public static Material Polymethylsilesquioxane;
     public static Material Silane;
+    public static Material SilaneB;
     public static Material TriphenylPhosphine;
     public static Material PhenylmagnesiumBromide;
     public static Material Bromobenzene;

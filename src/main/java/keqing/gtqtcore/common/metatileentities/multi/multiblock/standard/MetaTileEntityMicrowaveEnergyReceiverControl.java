@@ -697,6 +697,7 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
                 .where('C', states(getCasingAState())
                         .or(abilities(MultiblockAbility.IMPORT_ITEMS).setMaxGlobalLimited(1))
                         .or(abilities(MultiblockAbility.EXPORT_ITEMS).setMaxGlobalLimited(1))
+                        .or(abilities(MultiblockAbility.INPUT_LASER).setMinGlobalLimited(1).setMaxGlobalLimited(4))
                         .or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(4)))
                 .where('H', coilPredicate())
                 .build();
