@@ -366,11 +366,12 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
 
     @Override
     protected void updateFormedValid() {
+        if(euStore<0)euStore=0;
 
         if (this.energyContainer != null && this.energyContainer.getEnergyStored() > 0 && euStore < maxStore()) {
             if (euStore + this.energyContainer.getEnergyStored() > maxStore()) {
-                euStore = maxStore();
                 this.energyContainer.removeEnergy(maxStore() - euStore);
+                euStore = maxStore();
             } else {
                 euStore = euStore + Math.max((int) this.energyContainer.getEnergyStored(), 0);
                 this.energyContainer.removeEnergy(this.energyContainer.getEnergyStored());

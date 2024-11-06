@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static gregicality.multiblocks.api.unification.GCYMMaterials.Trinaquadalloy;
+import static gregicality.multiblocks.common.metatileentities.GCYMMetaTileEntities.MEGA_VACUUM_FREEZER;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.ASSEMBLER_RECIPES;
 import static gregtech.api.recipes.RecipeMaps.ASSEMBLY_LINE_RECIPES;
@@ -40,30 +41,32 @@ public class PCBline {
 
     public static void common()
     {
+        //1级外壳
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(HULL[6])
-                .input(CIRCUIT_GOOD_II)
-                .input(circuit, MarkerMaterials.Tier.ZPM, 1)
-                .input(circuit, MarkerMaterials.Tier.LuV, 2)
-                .input(circuit, MarkerMaterials.Tier.IV, 4)
-                .input(CONVEYOR_MODULE_ZPM,2)
-                .input(ELECTRIC_PUMP_ZPM, 2)
-                .input(plate, Duranium, 4)
-                .input(plate, Americium, 4)
-                .input(gear,Tritanium,4)
-                .input(stickLong,Darmstadtium,2)
-                .input(wireGtSingle, ZPMSuperconductor, 8)
-                .outputs(GTQTMetaBlocks.PCB_FACTORY_CASING.getItemVariant(BlockPCBFactoryCasing.PCBFactoryCasingType.RADIATION_PROOF_SCAN_FRAMEWORK_CASING, ConfigHolder.recipes.casingsPerCraft))
+                .input(HULL[5])
+                .input(CIRCUIT_GOOD_I)
+                .input(circuit, MarkerMaterials.Tier.LuV, 1)
+                .input(circuit, MarkerMaterials.Tier.IV, 2)
+                .input(circuit, MarkerMaterials.Tier.EV, 4)
+                .input(CONVEYOR_MODULE_IV,2)
+                .input(ELECTRIC_PUMP_IV, 2)
+                .input(plate, Naquadah, 4)
+                .input(plate, RhodiumPlatedPalladium, 4)
+                .input(gear,HSSS,4)
+                .input(stickLong,Samarium,2)
+                .input(wireGtSingle, IVSuperconductor, 8)
+                .outputs(GTQTMetaBlocks.PCB_FACTORY_CASING.getItemVariant(BlockPCBFactoryCasing.PCBFactoryCasingType.BASIC_PHOTOLITHOGRAPHIC_FRAMEWORK_CASING, ConfigHolder.recipes.casingsPerCraft))
                 .stationResearch(b -> b
                         .researchStack(NANO_COATING.getStackForm())
-                        .CWUt(CWT[ZPM])
-                        .EUt(VA[LuV]))
+                        .CWUt(CWT[EV])
+                        .EUt(VA[IV]))
                 .fluidInputs(Polybenzimidazole.getFluid(L*4))
                 .fluidInputs(Ruridit.getFluid(L*4))
                 .fluidInputs(Kevlar.getFluid(L*4))
                 .fluidInputs(Zylon.getFluid(L * 8))
-                .duration(400).EUt(VA[ZPM]).buildAndRegister();
+                .duration(400).EUt(VA[IV]).buildAndRegister();
 
+        //2级外壳
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(HULL[6])
                 .input(CIRCUIT_GOOD_II)
@@ -80,84 +83,89 @@ public class PCBline {
                 .outputs(GTQTMetaBlocks.PCB_FACTORY_CASING.getItemVariant(BlockPCBFactoryCasing.PCBFactoryCasingType.MOLD_PRINTING_ASSEMBLY_FRAMEWORK_CASING, ConfigHolder.recipes.casingsPerCraft))
                 .stationResearch(b -> b
                         .researchStack(PHOTOLITHOGRAPHY_FACTORY.getStackForm())
-                        .CWUt(CWT[ZPM])
+                        .CWUt(CWT[IV])
                         .EUt(VA[LuV]))
                 .fluidInputs(Polybenzimidazole.getFluid(L*4))
                 .fluidInputs(Ruridit.getFluid(L*4))
                 .fluidInputs(Kevlar.getFluid(L*4))
                 .fluidInputs(Zylon.getFluid(L * 8))
                 .duration(400).EUt(VA[LuV]).buildAndRegister();
-
+        //三级
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(HULL[5])
-                .input(CIRCUIT_GOOD_I)
-                .input(circuit, MarkerMaterials.Tier.ZPM, 1)
-                .input(circuit, MarkerMaterials.Tier.LuV, 2)
-                .input(circuit, MarkerMaterials.Tier.IV, 4)
-                .input(CONVEYOR_MODULE_IV,2)
-                .input(ELECTRIC_PUMP_IV, 2)
-                .input(plate, Naquadah, 4)
-                .input(plate, RhodiumPlatedPalladium, 4)
-                .input(gear,HSSS,4)
-                .input(stickLong,Samarium,2)
-                .input(wireGtSingle, IVSuperconductor, 8)
-                .outputs(GTQTMetaBlocks.PCB_FACTORY_CASING.getItemVariant(BlockPCBFactoryCasing.PCBFactoryCasingType.BASIC_PHOTOLITHOGRAPHIC_FRAMEWORK_CASING, ConfigHolder.recipes.casingsPerCraft))
+                .input(HULL[7])
+                .input(CIRCUIT_GOOD_II)
+                .input(circuit, MarkerMaterials.Tier.UV, 1)
+                .input(circuit, MarkerMaterials.Tier.ZPM, 2)
+                .input(circuit, MarkerMaterials.Tier.LuV, 4)
+                .input(CONVEYOR_MODULE_ZPM,2)
+                .input(ELECTRIC_PUMP_ZPM, 2)
+                .input(plate, Duranium, 4)
+                .input(plate, Americium, 4)
+                .input(gear,Tritanium,4)
+                .input(stickLong,Darmstadtium,2)
+                .input(wireGtSingle, ZPMSuperconductor, 8)
+                .outputs(GTQTMetaBlocks.PCB_FACTORY_CASING.getItemVariant(BlockPCBFactoryCasing.PCBFactoryCasingType.RADIATION_PROOF_SCAN_FRAMEWORK_CASING, ConfigHolder.recipes.casingsPerCraft))
                 .stationResearch(b -> b
                         .researchStack(LASER_ENV.getStackForm())
-                        .CWUt(CWT[ZPM])
-                        .EUt(VA[LuV]))
+                        .CWUt(CWT[LuV])
+                        .EUt(VA[ZPM]))
                 .fluidInputs(Polybenzimidazole.getFluid(L*4))
                 .fluidInputs(Ruridit.getFluid(L*4))
                 .fluidInputs(Kevlar.getFluid(L*4))
                 .fluidInputs(Zylon.getFluid(L * 8))
-                .duration(400).EUt(VA[IV]).buildAndRegister();
+                .duration(400).EUt(VA[ZPM]).buildAndRegister();
 
-        //  Biological Sterile Machine Casing (Bio Chamber Casing)
+        //4级  Biological Sterile Machine Casing (Bio Chamber Casing)
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(CHEMICAL_REACTOR[5])
+                .input(CHEMICAL_REACTOR[8])
                 .input(frameGt, Polybenzimidazole,2)
                 .input(CIRCUIT_GOOD_I)
-                .input(circuit, MarkerMaterials.Tier.ZPM, 1)
-                .input(circuit, MarkerMaterials.Tier.LuV, 2)
-                .input(circuit, MarkerMaterials.Tier.IV, 4)
-                .input(PETRI_DISH, 2)
-                .input(CONVEYOR_MODULE_LuV,2)
-                .input(ELECTRIC_PUMP_LuV, 2)
+                .input(circuit, MarkerMaterials.Tier.UHV, 1)
+                .input(circuit, MarkerMaterials.Tier.UV, 2)
+                .input(circuit, MarkerMaterials.Tier.ZPM, 4)
+                .input(PETRI_DISH, 4)
+                .input(ELECTRIC_PUMP_UV, 2)
                 .input(plate, Trinaquadalloy, 4)
                 .input(plate, Europium, 4)
                 .input(gear,Pikyonium64B,4)
-                .input(stickLong,Naquadah,2)
                 .input(plate, KaptonK, 12)
+                .input(wireGtSingle, UVSuperconductor, 8)
                 .outputs(GTQTMetaBlocks.PCB_FACTORY_CASING.getItemVariant(BlockPCBFactoryCasing.PCBFactoryCasingType.BIOLOGICAL_STERILE_MACHINE_CASING, ConfigHolder.recipes.casingsPerCraft))
                 .stationResearch(b -> b
                         .researchStack(GENE_MUTAGENESIS.getStackForm())
                         .CWUt(CWT[ZPM])
-                        .EUt(VA[LuV]))
+                        .EUt(VA[UV]))
                 .fluidInputs(Mutagen.getFluid(L*4))
                 .fluidInputs(Ruridit.getFluid(L*4))
                 .fluidInputs(Kevlar.getFluid(L*4))
                 .fluidInputs(Zylon.getFluid(L * 8))
-                .duration(400).EUt(VA[IV]).buildAndRegister();
+                .duration(400).EUt(VA[UV]).buildAndRegister();
 
-        //  Infinity Cooling Casing (Thermosink Casing)
+        //5级  Infinity Cooling Casing (Thermosink Casing)
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(frameGt, VoidMetal)
+                .input(HULL[9])
+                .input(frameGt, VoidMetal,2)
                 .input(CIRCUIT_GOOD_V)
                 .input(circuit, MarkerMaterials.Tier.UEV, 1)
                 .input(circuit, MarkerMaterials.Tier.UHV, 2)
                 .input(circuit, MarkerMaterials.Tier.UV, 4)
+                .input(CONVEYOR_MODULE_UHV,2)
+                .input(ELECTRIC_PUMP_UHV, 2)
                 .input(rotor, Infinity, 2)
                 .input(plate, Draconium, 12)
+                .input(gear,Pikyonium64B,4)
+                .input(stickLong,Naquadah,2)
+                .input(wireGtSingle, UHVSuperconductor, 8)
                 .outputs(GTQTMetaBlocks.PCB_FACTORY_CASING.getItemVariant(BlockPCBFactoryCasing.PCBFactoryCasingType.INFINITY_COOLED_MACHINE_CASING, ConfigHolder.recipes.casingsPerCraft))
                 .stationResearch(b -> b
-                        .researchStack(CRYOGENIC_FREEZER.getStackForm())
-                        .CWUt(CWT[UHV])
+                        .researchStack(MEGA_VACUUM_FREEZER.getStackForm())
+                        .CWUt(CWT[UV])
                         .EUt(VA[UHV]))
                 .fluidInputs(GelidCryotheum.getFluid(L*4))
                 .fluidInputs(Ruridit.getFluid(L*4))
                 .fluidInputs(Kevlar.getFluid(L*4))
                 .fluidInputs(Zylon.getFluid(L * 8))
-                .duration(400).EUt(VA[UEV]).buildAndRegister();
+                .duration(400).EUt(VA[UHV]).buildAndRegister();
 
         // Substrates
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
@@ -200,11 +208,11 @@ public class PCBline {
 
         //  PCB Factory
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(frameGt, RhodiumPlatedPalladium, 64)
                 .input(CIRCUIT_ASSEMBLER[6], 32)
                 .input(ASSEMBLER[6], 32)
                 .input(FLUID_SOLIDIFIER[6], 32)
                 .input(MetaTileEntities.LARGE_CHEMICAL_REACTOR, 32)
+                .input(frameGt, RhodiumPlatedPalladium, 64)
                 .input(CIRCUIT_GOOD_II, 16)
                 .input(circuit, MarkerMaterials.Tier.ZPM, 8)
                 .input(circuit, MarkerMaterials.Tier.LuV, 16)

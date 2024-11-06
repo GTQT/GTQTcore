@@ -33,7 +33,7 @@ public class KevlarChain {
 
         // C6H4(CH3)2 + 6O -> C6H4(CO2H)2 + 2H2O
         LARGE_CHEMICAL_RECIPES.recipeBuilder() // TODO corrosion proof reactor
-                .input(foil, Titanium, 10)
+                .notConsumable(foil, Titanium, 10)
                 .notConsumable(dust, Manganese)
                 .notConsumable(dust, Cobalt)
                 .notConsumable(Acetone.getFluid())

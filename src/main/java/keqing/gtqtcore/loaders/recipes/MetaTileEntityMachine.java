@@ -419,16 +419,16 @@ public class MetaTileEntityMachine {
                 .fluidInputs(KaptonE.getFluid(L * 2))
                 .outputs(MetaTileEntities.HULL[9].getStackForm()).buildAndRegister();
         //////////////////////////////////////玻璃
-        FLUID_SOLIDFICATION_RECIPES.recipeBuilder().duration(12).EUt(4)
+        FLUID_SOLIDFICATION_RECIPES.recipeBuilder().duration(120).EUt(120)
                 .fluidInputs(BorosilicateGlass.getFluid(L*4))
                 .notConsumable(SHAPE_MOLD_BLOCK)
-                .outputs(new ItemStack(Blocks.GLASS))
+                .outputs(GTQTMetaBlocks.ADV_GLASS.getItemVariant(GTQTADVGlass.CasingType.SILICATE_GLASS))
                 .buildAndRegister();
 
-        RecipeMaps.ALLOY_SMELTER_RECIPES.recipeBuilder().duration(120).EUt(16)
+        RecipeMaps.ALLOY_SMELTER_RECIPES.recipeBuilder().duration(480).EUt(120)
                 .input(dust, BorosilicateGlass,4)
                 .notConsumable(SHAPE_MOLD_BLOCK.getStackForm())
-                .outputs(new ItemStack(Blocks.GLASS, 1))
+                .outputs(GTQTMetaBlocks.ADV_GLASS.getItemVariant(GTQTADVGlass.CasingType.SILICATE_GLASS))
                 .buildAndRegister();
 
         //  Boron Silicate Glass
@@ -441,7 +441,7 @@ public class MetaTileEntityMachine {
                 .input(plate, Thorium, 4)
                 .outputs(GTQTMetaBlocks.ADV_GLASS.getItemVariant(GTQTADVGlass.CasingType.THY_SILICATE_GLASS))
                 .EUt(VA[HV])
-                .duration(100)
+                .duration(500)
                 .buildAndRegister();
 
         OreDictUnifier.registerOre(GTQTMetaBlocks.ADV_GLASS.getItemVariant(GTQTADVGlass.CasingType.THY_SILICATE_GLASS),
@@ -454,7 +454,7 @@ public class MetaTileEntityMachine {
                 .input(plate, Titanium, 4)
                 .outputs(GTQTMetaBlocks.GLASS_CASING.getItemVariant(GTQTBlockGlassCasing.CasingType.TI_BORON_SILICATE_GLASS))
                 .EUt(VA[HV])
-                .duration(100)
+                .duration(500)
                 .buildAndRegister();
 
         OreDictUnifier.registerOre(GTQTMetaBlocks.GLASS_CASING.getItemVariant(GTQTBlockGlassCasing.CasingType.TI_BORON_SILICATE_GLASS),
@@ -467,7 +467,7 @@ public class MetaTileEntityMachine {
                 .input(plate, Tungsten, 4)
                 .outputs(GTQTMetaBlocks.GLASS_CASING.getItemVariant(GTQTBlockGlassCasing.CasingType.W_BORON_SILICATE_GLASS))
                 .EUt(VA[EV])
-                .duration(100)
+                .duration(500)
                 .buildAndRegister();
 
         OreDictUnifier.registerOre(GTQTMetaBlocks.GLASS_CASING.getItemVariant(GTQTBlockGlassCasing.CasingType.W_BORON_SILICATE_GLASS),
@@ -481,7 +481,7 @@ public class MetaTileEntityMachine {
                 .input(plate, Osmiridium, 4)
                 .outputs(GTQTMetaBlocks.GLASS_CASING.getItemVariant(GTQTBlockGlassCasing.CasingType.OSMIR_BORON_SILICATE_GLASS))
                 .EUt(VA[IV])
-                .duration(100)
+                .duration(500)
                 .buildAndRegister();
 
         OreDictUnifier.registerOre(GTQTMetaBlocks.GLASS_CASING.getItemVariant(GTQTBlockGlassCasing.CasingType.OSMIR_BORON_SILICATE_GLASS),
@@ -494,7 +494,7 @@ public class MetaTileEntityMachine {
                 .input(plate, Naquadah, 4)
                 .outputs(GTQTMetaBlocks.GLASS_CASING.getItemVariant(GTQTBlockGlassCasing.CasingType.NAQ_BORON_SILICATE_GLASS))
                 .EUt(VA[LuV])
-                .duration(100)
+                .duration(500)
                 .buildAndRegister();
 
         OreDictUnifier.registerOre(GTQTMetaBlocks.GLASS_CASING.getItemVariant(GTQTBlockGlassCasing.CasingType.NAQ_BORON_SILICATE_GLASS),

@@ -326,6 +326,7 @@ public class BrineChain {
         CHEMICAL_RECIPES.recipeBuilder().duration(80).EUt(120)
                 .input(dust, Aluminium,1)
                 .fluidInputs(Hydrogen.getFluid(3000))
+                .circuitMeta(3)
                 .output(dust, AluminiumHydride, 4)
                 .buildAndRegister();
 
@@ -626,7 +627,7 @@ public class BrineChain {
 
         // C4H8 + C8H18 -> C4H10 + C8H16
         CHEMICAL_RECIPES.recipeBuilder().duration(190).EUt(120)
-                .notConsumable(dust, DehydrogenationCatalyst, 1)
+                .notConsumable(plate, Thorium, 1)
                 .fluidInputs(Butene.getFluid(1000))
                 .fluidInputs(Octane.getFluid(1000))
                 .fluidOutputs(Butane.getFluid(1000))
