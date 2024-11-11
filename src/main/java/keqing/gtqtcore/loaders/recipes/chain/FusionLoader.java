@@ -197,6 +197,17 @@ public class FusionLoader {
                 .duration(6 * SECOND)
                 .EUToStart(250000000L) // MK2
                 .buildAndRegister();
+        
+        //  Americium + Neon -> Dubnium
+        FUSION_RECIPES.recipeBuilder()
+                .fluidInputs(Americium.getFluid(16))
+                .fluidInputs(Neon.getFluid(125))
+                .fluidOutputs(Dubnium.getFluid(125))
+                .EUt(VA[ZPM])
+                .duration(8 * SECOND)
+                .EUToStart(280000000L) // MK2
+                .buildAndRegister();
+
 
         /* -------------------------------- MK3 -------------------------------- */
 
@@ -296,16 +307,6 @@ public class FusionLoader {
                 .EUToStart(380000000L) // MK3
                 .buildAndRegister();
 */
-        //  Americium + Neon -> Dubnium
-        FUSION_RECIPES.recipeBuilder()
-                .fluidInputs(Americium.getFluid(16))
-                .fluidInputs(Neon.getFluid(125))
-                .fluidOutputs(Dubnium.getFluid(125))
-                .EUt(VA[ZPM])
-                .duration(8 * SECOND)
-                .EUToStart(380000000L) // MK3
-                .buildAndRegister();
-
         //  Nickel + Polonium -> Copernicium
         FUSION_RECIPES.recipeBuilder()
                 .fluidInputs(Nickel.getPlasma(L * 4))
