@@ -38,7 +38,6 @@ public class GCYSMetaTileEntityLoader {
 
     public static void init() {
         singleBlocks();
-        energy();
         hulls();
     }
 
@@ -65,110 +64,6 @@ public class GCYSMetaTileEntityLoader {
                 'U', MetaItems.ELECTRIC_PUMP_UV.getStackForm(),
                 'G', MetaItems.FIELD_GENERATOR_UV.getStackForm(),
                 'H', MetaBlocks.HERMETIC_CASING.getItemVariant(HERMETIC_UHV));
-    }
-
-    private static void energy() {
-        // Energy Hatches
-        // Input
-        GTRecipeHandler.removeRecipesByInputs(ASSEMBLY_LINE_RECIPES,
-                new ItemStack[]{MetaTileEntities.HULL[8].getStackForm(), OreDictUnifier.get(cableGtSingle, Europium, 4),
-                        ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT.getStackForm(2), OreDictUnifier.get(circuit, MarkerMaterials.Tier.UHV),
-                        OreDictUnifier.get(wireGtDouble, RutheniumTriniumAmericiumNeutronate, 2)},
-                new FluidStack[]{SodiumPotassium.getFluid(12000), SolderingAlloy.getFluid(5760)});
-
-        ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(MetaTileEntities.HULL[8])
-                .input(cableGtSingle, Europium, 4)
-                .input(NANO_POWER_IC, 2)
-                .input(circuit, MarkerMaterials.Tier.UHV)
-                .input(VOLTAGE_COIL_UHV, 2)
-                .fluidInputs(SodiumPotassium.getFluid(12000))
-                .fluidInputs(SolderingAlloy.getFluid(5760))
-                .output(ENERGY_INPUT_HATCH[8])
-                .stationResearch(b -> b
-                        .researchStack(ENERGY_INPUT_HATCH[7].getStackForm())
-                        .CWUt(64)
-                        .EUt(VA[UV]))
-                .duration(1000).EUt(VA[UHV]).buildAndRegister();
-
-        GTRecipeHandler.removeRecipesByInputs(ASSEMBLER_RECIPES,
-                ENERGY_INPUT_HATCH[8].getStackForm(2), ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT.getStackForm(),
-                OreDictUnifier.get(wireGtDouble, RutheniumTriniumAmericiumNeutronate), OreDictUnifier.get(wireGtQuadruple, Europium, 2));
-
-        ASSEMBLER_RECIPES.recipeBuilder()
-                .input(TRANSFORMER[8])
-                .input(ENERGY_INPUT_HATCH[8])
-                .input(NANO_POWER_IC)
-                .input(VOLTAGE_COIL_UHV)
-                .input(wireGtQuadruple, Europium, 2)
-                .output(ENERGY_INPUT_HATCH_4A[5])
-                .duration(100).EUt(VA[UHV]).buildAndRegister();
-
-        GTRecipeHandler.removeRecipesByInputs(ASSEMBLER_RECIPES,
-                ENERGY_INPUT_HATCH_4A[5].getStackForm(2), ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT.getStackForm(2),
-                OreDictUnifier.get(wireGtDouble, RutheniumTriniumAmericiumNeutronate), OreDictUnifier.get(wireGtOctal, Europium, 2));
-
-        ASSEMBLER_RECIPES.recipeBuilder()
-               // .input(ADJUSTABLE_TRANSFORMER[UHV])
-                .input(ENERGY_INPUT_HATCH_4A[5])
-                .input(NANO_POWER_IC, 2)
-                .input(VOLTAGE_COIL_UHV)
-                .input(wireGtOctal, Europium, 2)
-                .output(ENERGY_INPUT_HATCH_16A[4])
-                .duration(200).EUt(VA[UHV]).buildAndRegister();
-
-        // Output
-        GTRecipeHandler.removeRecipesByInputs(ASSEMBLY_LINE_RECIPES,
-                new ItemStack[]{MetaTileEntities.HULL[8].getStackForm(), OreDictUnifier.get(spring, Europium, 4),
-                        ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT.getStackForm(2), OreDictUnifier.get(circuit, MarkerMaterials.Tier.UHV),
-                        OreDictUnifier.get(wireGtDouble, RutheniumTriniumAmericiumNeutronate, 2)},
-                new FluidStack[]{SodiumPotassium.getFluid(12000), SolderingAlloy.getFluid(5760)});
-
-        ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(MetaTileEntities.HULL[8])
-                .input(spring, Europium, 4)
-                .input(NANO_POWER_IC, 2)
-                .input(circuit, MarkerMaterials.Tier.UHV)
-                .input(VOLTAGE_COIL_UHV, 2)
-                .fluidInputs(SodiumPotassium.getFluid(12000))
-                .fluidInputs(SolderingAlloy.getFluid(5760))
-                .output(ENERGY_OUTPUT_HATCH[8])
-                .stationResearch(b -> b
-                        .researchStack(ENERGY_OUTPUT_HATCH[7].getStackForm())
-                        .CWUt(64)
-                        .EUt(VA[UV]))
-                .duration(1000).EUt(VA[UHV]).buildAndRegister();
-
-        GTRecipeHandler.removeRecipesByInputs(ASSEMBLER_RECIPES,
-                ENERGY_OUTPUT_HATCH[8].getStackForm(2), ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT.getStackForm(),
-                OreDictUnifier.get(wireGtDouble, RutheniumTriniumAmericiumNeutronate), OreDictUnifier.get(wireGtQuadruple, Europium, 2));
-
-        ASSEMBLER_RECIPES.recipeBuilder()
-                .input(TRANSFORMER[8])
-                .input(ENERGY_OUTPUT_HATCH[8])
-                .input(NANO_POWER_IC)
-                .input(VOLTAGE_COIL_UHV)
-                .input(wireGtQuadruple, Europium, 2)
-                .output(ENERGY_OUTPUT_HATCH_4A[5])
-                .duration(100).EUt(VA[UHV]).buildAndRegister();
-
-        GTRecipeHandler.removeRecipesByInputs(ASSEMBLER_RECIPES,
-                ENERGY_OUTPUT_HATCH_4A[5].getStackForm(2), ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT.getStackForm(2),
-                OreDictUnifier.get(wireGtDouble, RutheniumTriniumAmericiumNeutronate), OreDictUnifier.get(wireGtOctal, Europium, 2));
-
-        ASSEMBLER_RECIPES.recipeBuilder()
-              //  .input(ADJUSTABLE_TRANSFORMER[UHV])
-                .input(ENERGY_OUTPUT_HATCH_4A[5])
-                .input(NANO_POWER_IC, 2)
-                .input(VOLTAGE_COIL_UHV)
-                .input(wireGtOctal, Europium, 2)
-                .output(ENERGY_OUTPUT_HATCH_16A[4])
-                .duration(200).EUt(VA[UHV]).buildAndRegister();
-
-        // Transformers
-        // Regular
-        MetaTileEntityLoader.registerMachineRecipe(ArrayUtils.subarray(TRANSFORMER, GTValues.UHV, GTValues.MAX), "WCC", "TH ", "WCC", 'W', POWER_COMPONENT, 'C', CABLE, 'T', CABLE_TIER_UP, 'H', HULL);
-
     }
     private static void hulls() {
         ModHandler.removeRecipeByName("gregtech:casing_uhv");

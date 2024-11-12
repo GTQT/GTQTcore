@@ -194,15 +194,11 @@ public class MetaTileEntityBlazingCZPuller extends GTQTRecipeMapMultiblockOverwr
                  int liquidOxygenAmount = LubricantStack == null ? 0 : LubricantStack.amount;
                  textList.add(new TextComponentTranslation("gtqtcore.multiblock.vc.amount", TextFormattingUtil.formatNumbers((liquidOxygenAmount))));
                 }
-            textList.add(new TextComponentTranslation("Temperature : %s / Discount ：%s", blastFurnaceTemperature,getDiscount()));
+            textList.add(new TextComponentTranslation("Temperature : %s", blastFurnaceTemperature));
             if(modern==0) textList.add(new TextComponentTranslation("gtqtcore.tire1",heatingCoilLevel));
             if(modern==1) textList.add(new TextComponentTranslation("gtqtcore.tire2",heatingCoilLevel));
             textList.add(new TextComponentTranslation("gtqtcore.parr",ParallelNum,ParallelLim));
         }
-    }
-    public double getDiscount()
-    {
-        return (32-heatingCoilLevel)/32.0;
     }
     @Override
     protected void addWarningText(List<ITextComponent> textList) {
@@ -261,18 +257,20 @@ public class MetaTileEntityBlazingCZPuller extends GTQTRecipeMapMultiblockOverwr
             this.combustionEngine = (MetaTileEntityBlazingCZPuller) tileEntity;
         }
 
-        @Override
-        public int getParallelLimit() {
-            return ParallelNum;
-        }
         protected void updateRecipeProgress() {
             IMultipleTankHandler inputTank = combustionEngine.getInputFluidInventory();
-            if (canRecipeProgress && drawEnergy((int) (recipeEUt*getDiscount()), true)&&LUBRICANT_STACK.isFluidStackIdentical(inputTank.drain(LUBRICANT_STACK, false))) {
-                drawEnergy((int) (recipeEUt*getDiscount()), false);
+            if (canRecipeProgress && drawEnergy(recipeEUt, true) && LUBRICANT_STACK.isFluidStackIdentical(inputTank.drain(LUBRICANT_STACK, false))) {
+                drawEnergy(recipeEUt, false);
                 LUBRICANT_STACK.isFluidStackIdentical(inputTank.drain(LUBRICANT_STACK, true));
                 if (++progressTime > maxProgressTime) {
                     completeRecipe();
                 }
+                if (this.hasNotEnoughEnergy && this.getEnergyInputPerSecond() > 19L * (long) this.recipeEUt) {
+                    this.hasNotEnoughEnergy = false;
+                }
+            } else if (canRecipeProgress && !drawEnergy(recipeEUt, true)&&this.recipeEUt > 0) {
+                this.hasNotEnoughEnergy = true;
+                this.decreaseProgress();
             }
         }
         protected void modifyOverclockPre( int[] values, IRecipePropertyStorage storage) {
@@ -284,18 +282,13 @@ public class MetaTileEntityBlazingCZPuller extends GTQTRecipeMapMultiblockOverwr
             return OverclockingLogic.heatingCoilOverclockingLogic(Math.abs(recipeEUt), maxVoltage, duration, amountOC, ((IHeatingCoil)this.metaTileEntity).getCurrentTemperature(), (Integer)propertyStorage.getRecipePropertyValue(TemperatureProperty.getInstance(), 0));
         }
         @Override
-        public void setMaxProgress(int maxProgress)
-        {
-            if(ParallelNum==0)
-                this.maxProgressTime = maxProgress;
-            else if(ParallelNum<=16)
-                this.maxProgressTime = maxProgress/ParallelNum;
-            else if(ParallelNum<=64)
-                this.maxProgressTime = maxProgress*16/ParallelNum;
-            else if(ParallelNum<=256)
-                this.maxProgressTime = maxProgress*128/ParallelNum;
-            else
-                this.maxProgressTime = maxProgress;
+        public void setMaxProgress(int maxProgress) {
+            if (ParallelNum == 0) this.maxProgressTime = maxProgress;
+            else if (ParallelNum <= 16) this.maxProgressTime = (int) (maxProgress*1.0 / ParallelNum);
+            else if (ParallelNum <= 64) this.maxProgressTime = (int) (maxProgress * 16.0 / ParallelNum);
+            else if (ParallelNum <= 256) this.maxProgressTime = (int) (maxProgress * 128.0 / ParallelNum);
+            else this.maxProgressTime = maxProgress;
+
         }
     }
 }

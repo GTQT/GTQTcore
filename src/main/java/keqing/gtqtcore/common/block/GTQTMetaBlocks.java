@@ -42,6 +42,7 @@ public class GTQTMetaBlocks {
     public static GTQTParticleAccelerator PARTICLE_ACCELERATOR;
     public static GTQTNuclearFusion NUCLEAR_FUSION;
     public static GTQTRoad ROAD;
+    public static BlockEnergyCell ENERGY_CELL;
     public static GTQTKQCC KQCC;
     public static BlockCoolingCoil COOLING_COIL;
     public static GCYLCleanroomCasing GCYL_CLEANROOM_CASING;
@@ -113,7 +114,8 @@ public class GTQTMetaBlocks {
         GLASS_CASING.setRegistryName("glass_casing");
         STEPPER = new GTQTStepper();
         STEPPER.setRegistryName("stepper");
-
+        ENERGY_CELL = new BlockEnergyCell();
+        ENERGY_CELL.setRegistryName("energy_cell");
         ROAD = new GTQTRoad();
         ROAD.setRegistryName("road");
 
@@ -149,6 +151,7 @@ public class GTQTMetaBlocks {
         registerItemModel(TURBINE_CASING);
         registerItemModel(PARTICLE_ACCELERATOR);
         registerItemModel(ROAD);
+        registerItemModel(ENERGY_CELL);
         registerItemModel(TURBINE_CASING1);
         registerItemModel(QUANTUM_CONSTRAINT_CASING);
         registerItemModel(GRAVITON_CASING);

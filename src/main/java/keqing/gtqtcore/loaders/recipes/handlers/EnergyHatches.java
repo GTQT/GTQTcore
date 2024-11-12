@@ -1,8 +1,12 @@
 package keqing.gtqtcore.loaders.recipes.handlers;
 
+import gregtech.api.recipes.GTRecipeHandler;
 import gregtech.api.recipes.ModHandler;
+import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.MarkerMaterials;
 import gregtech.api.unification.stack.UnificationEntry;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidStack;
 
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.ASSEMBLER_RECIPES;
@@ -32,6 +36,59 @@ public class EnergyHatches {
         HiAmpTransformers();
     }
     private static void EnergyHatches1A() {
+        //  Delete UHV vanilla recipes
+        GTRecipeHandler.removeRecipesByInputs(ASSEMBLY_LINE_RECIPES,
+                new ItemStack[]{HULL[UHV].getStackForm(),
+                        OreDictUnifier.get(cableGtSingle, Europium, 4),
+                        ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT.getStackForm(2),
+                        OreDictUnifier.get(circuit, MarkerMaterials.Tier.UHV),
+                        OreDictUnifier.get(wireGtDouble, RutheniumTriniumAmericiumNeutronate, 2)},
+                new FluidStack[]{SodiumPotassium.getFluid(12000),
+                        SolderingAlloy.getFluid(5760)});
+
+        GTRecipeHandler.removeRecipesByInputs(ASSEMBLY_LINE_RECIPES,
+                new ItemStack[]{HULL[UHV].getStackForm(),
+                        OreDictUnifier.get(spring, Europium, 4),
+                        ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT.getStackForm(2),
+                        OreDictUnifier.get(circuit, MarkerMaterials.Tier.UHV),
+                        OreDictUnifier.get(wireGtDouble, RutheniumTriniumAmericiumNeutronate, 2)},
+                new FluidStack[]{SodiumPotassium.getFluid(12000),
+                        SolderingAlloy.getFluid(5760)});
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(HULL[UHV])
+                .input(cableGtSingle, Europium, 4)
+                .input(ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT, 2)
+                .input(circuit, MarkerMaterials.Tier.UHV)
+                .input(VOLTAGE_COIL_UHV, 2)
+                .fluidInputs(SodiumPotassium.getFluid(12000))
+                .fluidInputs(SolderingAlloy.getFluid(5760))
+                .output(ENERGY_INPUT_HATCH[UHV])
+                .EUt(VA[UHV])
+                .duration(1000)
+                .stationResearch(b -> b
+                        .researchStack(ENERGY_INPUT_HATCH[UV].getStackForm())
+                        .CWUt(128)
+                        .EUt(VA[UV]))
+                .buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(HULL[UHV])
+                .input(spring, Europium, 4)
+                .input(ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT, 2)
+                .input(circuit, MarkerMaterials.Tier.UHV)
+                .input(VOLTAGE_COIL_UHV, 2)
+                .fluidInputs(SodiumPotassium.getFluid(12000))
+                .fluidInputs(SolderingAlloy.getFluid(5760))
+                .output(ENERGY_OUTPUT_HATCH[UHV])
+                .EUt(VA[UHV])
+                .duration(1000)
+                .stationResearch(b -> b
+                        .researchStack(ENERGY_OUTPUT_HATCH[UV].getStackForm())
+                        .CWUt(128)
+                        .EUt(VA[UV]))
+                .buildAndRegister();
+
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(HULL[UEV])
                 .input(cableGtSingle, PedotTMA, 4)

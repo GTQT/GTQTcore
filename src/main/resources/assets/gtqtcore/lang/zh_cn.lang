@@ -457,6 +457,12 @@ tile.component_assembly_line_casing.opv.tooltip=宇宙装配单元
 tile.component_assembly_line_casing.max.name=部件装配线外壳（MAX）
 tile.component_assembly_line_casing.max.tooltip=时空装配单元
 
+tile.nuclear_fusion.energy_cell.name=蓄能塔外壳
+tile.energy_cell.ulv.name=粗制能量单元
+tile.energy_cell.lv.name=原始能量单元
+tile.energy_cell.mv.name=稳定能量单元
+tile.energy_cell.hv.name=致密能量单元
+tile.energy_cell.ev.name=先进能量单元
 #  Others
 metaitem.magnetron.name=磁控管
 metaitem.carbon_allotrope.name=碳同素异构体混合物
@@ -4036,6 +4042,24 @@ gregtech.machine.iif.1=耗能：4 * Math.max(1, parallel / 8 / discount)
 gregtech.machine.iif.2=并行：2^min(heatingCoilLevel, 8)
 gregtech.machine.iif.3=耗时：(256 * parallel) / max(1, parallelLimit)
 
+gtqtcore.machine.energy_substation.name=储能塔
+gtqtcore.machine.energy_substation.tooltip.1=机器类型：§e能量缓存器§7
+gtqtcore.machine.energy_substation.tooltip.2=统筹管理你的能量。
+gtqtcore.machine.energy_substation.tooltip.3=结构中的§6能量单元§7决定了储能塔能够储存的最大能量。
+gtqtcore.machine.energy_substation.tooltip.4=最多放置§f%d层§7能量单元，且可以混搭不同等级。
+gtqtcore.machine.energy_substation.tooltip.5=现实时间每§f24小时§7损失总容量的§f1%%§7的能量。
+gtqtcore.machine.energy_substation.tooltip.6=每个能量单元的损失上限为§f%,d EU/t§7。
+gtqtcore.machine.energy_substation.tooltip.7=允许使用几乎所有种类的能量仓室，包括激光源/靶仓。
+gtqtcore.machine.energy_substation.tooltip.8=允许使用无线能源/动力仓。
+
+gtqtcore.machine.energy_substation.idling=缓存模式
+gtqtcore.machine.energy_substation.paused=待机模式
+gtqtcore.machine.energy_substation.running=桥接模式
+gtqtcore.machine.energy_substation.stored=已存储：%s
+gtqtcore.machine.energy_substation.capacity=最大容量：%s
+gtqtcore.machine.energy_substation.average_in_hover=储能塔内部的平均功率输入
+gtqtcore.machine.energy_substation.average_out_hover=储能塔内部的平均功率输出（包括被动损耗和输出）
+
 gtqtcore.multiblock.ak.temp=温度过低，请加岩浆
 recipemap.alloy_klin.name=合金窑
 tile.multiblock_casing.naquadah_alloy_casing.name=超稳定硅岩合金机器外壳
@@ -5018,6 +5042,12 @@ gtqtcore.machine.acid_generator.hv.tooltip=核动力柠檬电站
 gtqtcore.machine.acid_generator.ev.name=涡轮酸液发电机
 gtqtcore.machine.acid_generator.ev.tooltip=核动力柠檬电站
 
+gtqtcore.machine.lbg.steam.1.name=大型基础蒸汽发电机
+gtqtcore.machine.lbg.gas.1.name=大型高级燃气发电机
+gtqtcore.machine.lbg.gas.2.name=大型基础燃气发电机
+gtqtcore.machine.lbg.combustion.1.name=大型基础内燃发电机
+gtqtcore.machine.lbg.combustion.2.name=大型高级内燃发电机
+gtqtcore.machine.lbg.combustion.3.name=大型涡轮内燃发电机
 #  Tools
 
 item.gt.tool.bending_cylinder.name=%s弯曲绕筒
@@ -5178,6 +5208,29 @@ gtqtcore.universal.tooltip.laser_output=允许使用§b激光源仓§7替代动�
 gtqtcore.mixin.nerf.steam.solar.detail=§4工作超过1天后,输出将会在10天内线性减小到1/3
 gtqtcore.mixin.info.steam=当前蒸汽输出: %d l/s
 gtqtcore.universal.multiblock.energy_per_tick=产能功率：%s EUt （%s）
+
+gtqtcore.machine.air_intake_universal.rate=每 %,d 个刻收集 %,d mB 的空气
+
+gtqtcore.machine.air_intake_hatch.name=空气吸入舱
+gtqtcore.machine.air_intake_hatch.tooltip=为多块结构从世界中收集空气
+
+gtqtcore.machine.extreme_air_intake_hatch.name=极限空气吸入舱
+gtqtcore.machine.extreme_air_intake_hatch.tooltip=为多块结构从世界中收集空气
+
+gtqtcore.machine.single_item_input_bus.name=单物品输入总线
+gtqtcore.machine.single_item_input_bus.stack_size=§6最大堆叠数量: §f%,d
+
+gtqtcore.machine.super_input_bus.name=超级输入总线
+gtqtcore.machine.super_input_bus.tooltip=有 16 个槽位，但每个槽位可以容纳多达 MAX_INT 个物品！
+gtqtcore.machine.super_input_bus.return_items.button.enabled=停止返回物品
+gtqtcore.machine.super_input_bus.return_items.button.disabled=点击将物品返回到面对的方块
+gtqtcore.machine.super_input_bus.return_items.screwdriver.enabled=已开始返回物品
+gtqtcore.machine.super_input_bus.return_items.screwdriver.disabled=已停止返回物品
+gtqtcore.machine.super_input_bus.auto_pull.enabled=已启用物品自动拉取
+gtqtcore.machine.super_input_bus.auto_pull.disabled=已禁用物品自动拉取
+gtqtcore.machine.super_input_bus.slot_limit=设置槽位限制
+gtqtcore.machine.super_input_bus.screwdriver=§8使用螺丝刀切换将物品送回面对的方块
+gtqtcore.machine.super_input_bus.soft_mallet=§8使用软锤切换自动拉取物品
 
 itemGroup.gtqtcore=量子跃迁 | 纠缠之源
 itemGroup.gtqtbio=量子跃迁 | 生物工程

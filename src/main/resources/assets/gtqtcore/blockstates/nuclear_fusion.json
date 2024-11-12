@@ -25,6 +25,14 @@
         "textures": {
           "all": "gregtech:blocks/multiblock/casings/nuclear_fusion_cooling"
         }
+      },
+      "energy_cell": {
+        "model": "minecraft:cube_bottom_top",
+        "textures": {
+          "bottom": "gtqtcore:blocks/casings/batteries/top",
+          "top": "#bottom",
+          "side": "gtqtcore:blocks/casings/batteries/side"
+        }
       }
     }
   }

@@ -68,6 +68,7 @@ public class GTQTTextures {
     public static SimpleOverlayRenderer FUSION_MKI = new SimpleOverlayRenderer("multiblock/casings/machine_casing_fusion");
     public static SimpleOverlayRenderer FUSION_MKII = new SimpleOverlayRenderer("multiblock/casings/machine_casing_fusion_2");
     public static SimpleOverlayRenderer FUSION_MKIII = new SimpleOverlayRenderer("multiblock/casings/machine_casing_fusion_3");
+    public static SimpleOverlayRenderer ENERGY_CELL = new SimpleOverlayRenderer("casings/energy_cell_side");
 
     //怎么写？请看
     //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/client/textures/GSTextures.java
@@ -185,9 +186,10 @@ public class GTQTTextures {
     public static SimpleOverlayRenderer MAINTENANCE_OVERLAY_ISO3_CLEANING;
     public static SimpleOverlayRenderer MAINTENANCE_OVERLAY_ISO2_CLEANING;
     public static SimpleOverlayRenderer MAINTENANCE_OVERLAY_ISO1_CLEANING;
+    public static TextureArea AUTO_PULL;
     public static void init() {
+        AUTO_PULL = TextureArea.fullImage("textures/gui/widget/auto_pull.png");
         ITEM_FLUID_OVERLAY = TextureArea.fullImage("textures/gui/widget/item_fluid.png");
-
         MAINTENANCE_OVERLAY_STERILE_CLEANING = new SimpleOverlayRenderer("overlay/machine/overlay_maintenance_sterile_cleaning");
         MAINTENANCE_OVERLAY_ISO3_CLEANING = new SimpleOverlayRenderer("overlay/machine/overlay_maintenance_iso_3_cleaning");
         MAINTENANCE_OVERLAY_ISO2_CLEANING = new SimpleOverlayRenderer("overlay/machine/overlay_maintenance_iso_2_cleaning");

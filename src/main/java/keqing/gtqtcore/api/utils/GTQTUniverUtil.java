@@ -24,6 +24,16 @@ import static net.minecraft.util.EnumFacing.*;
 import static net.minecraft.util.EnumFacing.SOUTH;
 
 public class GTQTUniverUtil {
+
+    public static final int SECOND = 20;
+
+    public static final int MINUTE = 60 * SECOND;
+
+    public static final int HOUR = 60 * MINUTE;
+
+    public static final int HALF_HOUR = HOUR / 2;
+
+    public static final int QUAT_HOUR = HOUR / 4;
     public static int getOrDefault(NBTTagCompound tag, String key, int defaultValue){
         if(tag.hasKey(key)){
             return tag.getInteger(key);
