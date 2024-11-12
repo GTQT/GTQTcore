@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class PosBindingCardBehaviors implements IItemBehaviour {
+
     public PosBindingCardBehaviors() {}
 
     public void addInformation(ItemStack stack, List<String> lines) {

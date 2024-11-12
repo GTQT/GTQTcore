@@ -455,6 +455,12 @@ tile.component_assembly_line_casing.opv.tooltip=Cosmic Assembly Unit
 tile.component_assembly_line_casing.max.name=Component Assembly Line Casing (MAX)
 tile.component_assembly_line_casing.max.tooltip=Spacetime Assembly Unit
 
+tile.nuclear_fusion.energy_cell.name=蓄能塔外壳
+tile.energy_cell.ulv.name=粗制能量单元
+tile.energy_cell.lv.name=原始能量单元
+tile.energy_cell.mv.name=稳定能量单元
+tile.energy_cell.hv.name=致密能量单元
+tile.energy_cell.ev.name=先进能量单元
 # Others
 metaitem.magnetron.name=Magnetron
 metaitem.carbon_allotrope.name=Carbon Allotrope Mixture
@@ -4022,6 +4028,24 @@ gregtech.machine.iif.1=Energy Consumption: 4 * Math.max(1, parallel / 8 / discou
 gregtech.machine.iif.2=Parallel Processing: 2^min(heatingCoilLevel, 8)
 gregtech.machine.iif.3=Duration: (256 * parallel) / max(1, parallelLimit)
 
+gtqtcore.machine.energy_substation.name=储能塔
+gtqtcore.machine.energy_substation.tooltip.1=机器类型：§e能量缓存器§7
+gtqtcore.machine.energy_substation.tooltip.2=统筹管理你的能量。
+gtqtcore.machine.energy_substation.tooltip.3=结构中的§6能量单元§7决定了储能塔能够储存的最大能量。
+gtqtcore.machine.energy_substation.tooltip.4=最多放置§f%d层§7能量单元，且可以混搭不同等级。
+gtqtcore.machine.energy_substation.tooltip.5=现实时间每§f24小时§7损失总容量的§f1%%§7的能量。
+gtqtcore.machine.energy_substation.tooltip.6=每个能量单元的损失上限为§f%,d EU/t§7。
+gtqtcore.machine.energy_substation.tooltip.7=允许使用几乎所有种类的能量仓室，包括激光源/靶仓。
+gtqtcore.machine.energy_substation.tooltip.8=允许使用无线能源/动力仓。
+
+gtqtcore.machine.energy_substation.idling=缓存模式
+gtqtcore.machine.energy_substation.paused=待机模式
+gtqtcore.machine.energy_substation.running=桥接模式
+gtqtcore.machine.energy_substation.stored=已存储：%s
+gtqtcore.machine.energy_substation.capacity=最大容量：%s
+gtqtcore.machine.energy_substation.average_in_hover=储能塔内部的平均功率输入
+gtqtcore.machine.energy_substation.average_out_hover=储能塔内部的平均功率输出（包括被动损耗和输出）
+
 gtqtcore.multiblock.ak.temp=Temperature too low, please add lava
 recipemap.alloy_klin.name=Alloy Kiln
 tile.multiblock_casing.naquadah_alloy_casing.name=Superstable Naquadah Alloy Machine Casing
@@ -4999,6 +5023,13 @@ gtqtcore.machine.acid_generator.hv.name=Advanced Acid Generator
 gtqtcore.machine.acid_generator.hv.tooltip=Nuclear-powered Lemon Power Station
 gtqtcore.machine.acid_generator.ev.name=Turbo Acid Generator
 gtqtcore.machine.acid_generator.ev.tooltip=Nuclear-powered Lemon Power Station
+
+gtqtcore.machine.lbg.steam.1.name=Large Basic Steam Generator
+gtqtcore.machine.lbg.gas.1.name=Large Advanced Gas Generator
+gtqtcore.machine.lbg.gas.2.name=Large Basic Gas Generator
+gtqtcore.machine.lbg.combustion.1.name=Large Basic Combustion Generator
+gtqtcore.machine.lbg.combustion.2.name=Large Advanced Combustion Generator
+gtqtcore.machine.lbg.combustion.3.name=Large Turbo Combustion Generator
 # Tools
 
 item.gt.tool.bending_cylinder.name=%s Bending Cylinder
@@ -5159,6 +5190,29 @@ gtqtcore.universal.tooltip.laser_output=Allows using §bLaser Source Chamber§7 
 gtqtcore.mixin.nerf.steam.solar.detail=§4After working for more than 1 day, output will decrease linearly to 1/3 within 10 days
 gtqtcore.mixin.info.steam=Current Steam Output: %d l/s
 gtqtcore.universal.multiblock.energy_per_tick=Energy Production: %s EUt (%s)
+
+gtqtcore.machine.air_intake_universal.rate=Collects %,d mB of air every %,d ticks
+
+gtqtcore.machine.air_intake_hatch.name=Air Intake Hatch
+gtqtcore.machine.air_intake_hatch.tooltip=Collects air from the world for multiblocks
+
+gtqtcore.machine.extreme_air_intake_hatch.name=Extreme Air Intake Hatch
+gtqtcore.machine.extreme_air_intake_hatch.tooltip=Collects air from the world for multiblocks
+
+gtqtcore.machine.single_item_input_bus.name=Single Item Input Bus
+gtqtcore.machine.single_item_input_bus.stack_size=§6Max stack size: §f%,d
+
+gtqtcore.machine.super_input_bus.name=Super Input Bus
+gtqtcore.machine.super_input_bus.tooltip=Has 16 slots but can hold up to MAX_INT items per slot!
+gtqtcore.machine.super_input_bus.return_items.button.enabled=Stop returning items
+gtqtcore.machine.super_input_bus.return_items.button.disabled=Click to return items to the faced block
+gtqtcore.machine.super_input_bus.return_items.screwdriver.enabled=Started returning items
+gtqtcore.machine.super_input_bus.return_items.screwdriver.disabled=Stopped returning items
+gtqtcore.machine.super_input_bus.auto_pull.enabled=Item auto pulling enabled
+gtqtcore.machine.super_input_bus.auto_pull.disabled=Item auto pulling disabled
+gtqtcore.machine.super_input_bus.slot_limit=Set slot limit
+gtqtcore.machine.super_input_bus.screwdriver=§8Use Screwdriver to toggle sending item back to the faced block
+gtqtcore.machine.super_input_bus.soft_mallet=§8use Soft mallet to toggle auto pulling items
 
 itemGroup.gtqtcore=GTQT| Entanglement Source
 itemGroup.gtqtbio=GTQT| Bioengineering

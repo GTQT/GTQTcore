@@ -22,15 +22,14 @@ import gregtech.loaders.recipe.CraftingComponent;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.unification.ore.GTQTOrePrefix;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.common.block.blocks.GTQTADVGlass;
-import keqing.gtqtcore.common.block.blocks.GTQTBlockGlassCasing;
-import keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing;
+import keqing.gtqtcore.common.block.blocks.*;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 import keqing.gtqtcore.loaders.recipes.chain.CrystalRaw;
 import keqing.gtqtcore.loaders.recipes.chain.PEEKChain;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import org.lwjgl.openal.AL;
 
 import java.util.Collection;
 
@@ -40,6 +39,7 @@ import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.common.blocks.MetaBlocks.MACHINE_CASING;
+import static gregtech.common.items.MetaItems.ELECTRIC_PISTON_LV;
 import static gregtech.common.items.MetaItems.SHAPE_MOLD_BLOCK;
 import static gregtech.common.metatileentities.MetaTileEntities.ARC_FURNACE;
 import static gregtech.loaders.recipe.CraftingComponent.*;
@@ -48,9 +48,10 @@ import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.TJMaterials.Polyetheretherketone;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.plate_curved;
+import static keqing.gtqtcore.api.utils.GTQTUniverUtil.SECOND;
 import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.FISHING_CASING;
 import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing1.TurbineCasingType.*;
-import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.STEAM_VACUUM_CHAMBER;
+import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.*;
 
 public class MetaTileEntityMachine {
     static int L = 144;
@@ -64,8 +65,173 @@ public class MetaTileEntityMachine {
         machinecasing();
         turbine();
         dust();
+        EnergyCells();
+        LBG();
     }
 
+    private static void LBG() {
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(MetaTileEntities.STEAM_TURBINE[0],16)
+                .input(plate,Steel,8)
+                .input(rotor,Tin,4)
+                .input(cableGtSingle,Tin, 4)
+                .input(circuit, MarkerMaterials.Tier.MV, 4)
+                .fluidInputs(Tin.getFluid(576))
+                .outputs(LBG[0].getStackForm())
+                .EUt(VA[LV])
+                .duration(100)
+                .buildAndRegister();
+
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(MetaTileEntities.GAS_TURBINE[0],16)
+                .input(plate,Steel,8)
+                .input(rotor,Tin,4)
+                .input(cableGtSingle,Tin, 4)
+                .input(circuit, MarkerMaterials.Tier.MV, 4)
+                .fluidInputs(Tin.getFluid(576))
+                .outputs(LBG[1].getStackForm())
+                .EUt(VA[LV])
+                .duration(100)
+                .buildAndRegister();
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(MetaTileEntities.GAS_TURBINE[1],16)
+                .input(plate,Aluminium,8)
+                .input(rotor,Steel,4)
+                .input(cableGtSingle,Copper, 4)
+                .input(circuit, MarkerMaterials.Tier.HV, 4)
+                .fluidInputs(Tin.getFluid(576))
+                .outputs(LBG[2].getStackForm())
+                .EUt(VA[MV])
+                .duration(100)
+                .buildAndRegister();
+
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(MetaTileEntities.COMBUSTION_GENERATOR[0],16)
+                .input(plate,Steel,8)
+                .input(rotor,Tin,4)
+                .input(cableGtSingle,Tin, 4)
+                .input(circuit, MarkerMaterials.Tier.MV, 4)
+                .fluidInputs(Tin.getFluid(576))
+                .outputs(LBG[3].getStackForm())
+                .EUt(VA[LV])
+                .duration(100)
+                .buildAndRegister();
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(MetaTileEntities.COMBUSTION_GENERATOR[1],16)
+                .input(plate,Aluminium,8)
+                .input(rotor,Steel,4)
+                .input(cableGtSingle,Copper, 4)
+                .input(circuit, MarkerMaterials.Tier.HV, 4)
+                .fluidInputs(Tin.getFluid(576))
+                .outputs(LBG[4].getStackForm())
+                .EUt(VA[MV])
+                .duration(100)
+                .buildAndRegister();
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(MetaTileEntities.COMBUSTION_GENERATOR[2],16)
+                .input(plate,StainlessSteel,8)
+                .input(rotor,Aluminium,4)
+                .input(cableGtSingle, Gold, 4)
+                .input(circuit, MarkerMaterials.Tier.EV, 4)
+                .fluidInputs(Tin.getFluid(576))
+                .outputs(LBG[5].getStackForm())
+                .EUt(VA[HV])
+                .duration(100)
+                .buildAndRegister();
+    }
+
+    private static void EnergyCells() {
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .circuitMeta(4)
+                .input(plate, Aluminium, 4)
+                .input(frameGt, Steel, 2)
+                .input(stickLong, Steel, 2)
+                .input(block, Lapis)
+                .outputs(GTQTMetaBlocks.NUCLEAR_FUSION.getItemVariant(GTQTNuclearFusion.CasingType.ENERGY_CELL))
+                .EUt(VA[LV])
+                .duration(100)
+                .buildAndRegister();
+
+        //  Energy Substation
+        ModHandler.addShapedRecipe(true, "energy_substation", ENERGY_SUBSTATION.getStackForm(),
+                "XBX", "BHB", "XBX",
+                'H', MetaTileEntities.HULL[MV].getStackForm(),
+                'B', new UnificationEntry(battery, MarkerMaterials.Tier.MV),
+                'X', new UnificationEntry(circuit, MarkerMaterials.Tier.MV));
+
+        //  ULV
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .circuitMeta(4)
+                .input(frameGt, Iron)
+                .input(plate, Copper, 4)
+                .input(battery, MarkerMaterials.Tier.ULV, 4)
+                .input(circuit, MarkerMaterials.Tier.ULV, 4)
+                .input(wireGtSingle, RedAlloy, 16)
+                .fluidInputs(Helium.getFluid(4000))
+                .outputs(GTQTMetaBlocks.ENERGY_CELL.getItemVariant(BlockEnergyCell.CellTier.ULV))
+                .EUt(VA[ULV])
+                .duration(6 * SECOND)
+                .buildAndRegister();
+        //  LV
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .circuitMeta(4)
+                .input(frameGt, Steel)
+                .input(plate, Tin, 4)
+                .input(battery, MarkerMaterials.Tier.LV, 4)
+                .input(circuit, MarkerMaterials.Tier.LV, 4)
+                .input(wireGtSingle, ManganesePhosphide, 16)
+                .fluidInputs(Helium.getFluid(4000))
+                .outputs(GTQTMetaBlocks.ENERGY_CELL.getItemVariant(BlockEnergyCell.CellTier.LV))
+                .EUt(VA[LV])
+                .duration(6 * SECOND)
+                .buildAndRegister();
+
+        //  MV
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .circuitMeta(4)
+                .input(frameGt, Aluminium)
+                .input(plate, Lead, 4)
+                .input(battery, MarkerMaterials.Tier.MV, 4)
+                .input(circuit, MarkerMaterials.Tier.MV, 4)
+                .input(wireGtSingle, MagnesiumDiboride, 16)
+                .fluidInputs(Helium.getFluid(4000))
+                .outputs(GTQTMetaBlocks.ENERGY_CELL.getItemVariant(BlockEnergyCell.CellTier.MV))
+                .EUt(VA[MV])
+                .duration(6 * SECOND)
+                .buildAndRegister();
+        //  HV
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .circuitMeta(4)
+                .input(frameGt, StainlessSteel)
+                .input(plate, Gold, 4)
+                .input(battery, MarkerMaterials.Tier.HV, 4)
+                .input(circuit, MarkerMaterials.Tier.HV, 4)
+                .input(wireGtSingle, MercuryBariumCalciumCuprate, 16)
+                .fluidInputs(Helium.getFluid(4000))
+                .outputs(GTQTMetaBlocks.ENERGY_CELL.getItemVariant(BlockEnergyCell.CellTier.HV))
+                .EUt(VA[HV])
+                .duration(6 * SECOND)
+                .buildAndRegister();
+
+        //  EV
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .circuitMeta(4)
+                .input(frameGt, Titanium)
+                .input(plate, Vanadium, 4)
+                .input(battery, MarkerMaterials.Tier.EV, 4)
+                .input(circuit, MarkerMaterials.Tier.EV, 4)
+                .input(wireGtSingle, UraniumTriplatinum, 16)
+                .fluidInputs(Neon.getFluid(4000))
+                .outputs(GTQTMetaBlocks.ENERGY_CELL.getItemVariant(BlockEnergyCell.CellTier.EV))
+                .EUt(VA[EV])
+                .duration((int) (3.2 * SECOND))
+                .buildAndRegister();
+    }
     private static void dust() {
         MIXER_RECIPES.recipeBuilder()
                 .input(dust, Titanium, 6)

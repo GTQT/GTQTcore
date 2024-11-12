@@ -4,6 +4,7 @@ import gregtech.common.blocks.*;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import keqing.gtqtcore.api.blocks.IBlockTier;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
+import keqing.gtqtcore.api.metaileentity.multiblock.ICellData;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.*;
@@ -39,6 +40,7 @@ public class GTQTAPI {
     public static final Object2ObjectOpenHashMap<IBlockState,IBlockTier> MAP_DC_CASING= new Object2ObjectOpenHashMap<>();
     public static final Object2ObjectOpenHashMap<IBlockState,IBlockTier> MAP_ND_CASING= new Object2ObjectOpenHashMap<>();
     public static final Object2ObjectOpenHashMap<IBlockState,IBlockTier> MAP_FU_CASING= new Object2ObjectOpenHashMap<>();
+    public static final Object2ObjectOpenHashMap<IBlockState, ICellData> MAP_ES_CELLS = new Object2ObjectOpenHashMap<>();
     //电子透镜
     public static final Object2ObjectOpenHashMap<IBlockState,IBlockTier> MAP_LS_CASING= new Object2ObjectOpenHashMap<>();
     public static final Object2ObjectOpenHashMap<IBlockState,IBlockTier> MAP_SS_CASING= new Object2ObjectOpenHashMap<>();
@@ -54,6 +56,11 @@ public class GTQTAPI {
     public static final Object2ObjectOpenHashMap<IBlockState,IBlockTier> MAP_FUSION_COIL= new Object2ObjectOpenHashMap<>();
 
     public static void init() {
+        //  Energy Cell Init
+        for (BlockEnergyCell.CellTier tier : BlockEnergyCell.CellTier.values()) {
+            MAP_ES_CELLS.put(GTQTMetaBlocks.ENERGY_CELL.getState(tier), tier);
+        }
+
         MAP_LS_CASING.put(GTQTMetaBlocks.ELECTRON_MICROSCOPE.getState(LENS_I),
                 new WrappedIntTired(LENS_I, 1));
         MAP_LS_CASING.put(GTQTMetaBlocks.ELECTRON_MICROSCOPE.getState(LENS_II),

@@ -24,11 +24,11 @@ public abstract class mixinGCYMMultiblockRecipeLogic  extends MultiblockRecipeLo
         if(((IParallelMultiblock)this.metaTileEntity).getMaxParallel()<=16)
             this.maxProgressTime = maxProgress;
         else if (((IParallelMultiblock) this.metaTileEntity).getMaxParallel() <= 64)
-                this.maxProgressTime = maxProgress * 2 / ((IParallelMultiblock) this.metaTileEntity).getMaxParallel();
+                this.maxProgressTime = (int) (maxProgress * 2.0 / ((IParallelMultiblock) this.metaTileEntity).getMaxParallel());
         else if (((IParallelMultiblock) this.metaTileEntity).getMaxParallel() <= 256)
-                this.maxProgressTime = maxProgress * 16 / ((IParallelMultiblock) this.metaTileEntity).getMaxParallel();
+                this.maxProgressTime = (int) (maxProgress * 16.0 / ((IParallelMultiblock) this.metaTileEntity).getMaxParallel());
         else if (((IParallelMultiblock) this.metaTileEntity).getMaxParallel() <= 1024)
-                this.maxProgressTime = maxProgress * 128 / ((IParallelMultiblock) this.metaTileEntity).getMaxParallel();
+                this.maxProgressTime = (int) (maxProgress * 128.0 / ((IParallelMultiblock) this.metaTileEntity).getMaxParallel());
         else this.maxProgressTime = maxProgress;
 
     }

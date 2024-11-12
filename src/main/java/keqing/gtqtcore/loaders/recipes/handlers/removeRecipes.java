@@ -26,6 +26,8 @@ import static gregtech.common.metatileentities.MetaTileEntities.POWER_TRANSFORME
 
 public class removeRecipes {
     public static void init() {
+        ModHandler.removeRecipeByName("gregtech:shape_mold_credit");
+
         GTRecipeHandler.removeRecipesByInputs(CHEMICAL_RECIPES, Ethylene.getFluid(1000), Chlorine.getFluid(2000));
         // 钢矿车车轮 * 1
         GTRecipeHandler.removeRecipesByInputs(ASSEMBLER_RECIPES, OreDictUnifier.get(stick, Steel, 1), OreDictUnifier.get(ring, Steel, 2));

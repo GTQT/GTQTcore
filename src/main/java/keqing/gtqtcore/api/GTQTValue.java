@@ -89,4 +89,6 @@ public class GTQTValue {
     public static final int UPDATE_TIER26 = 1026;
     public static final int REQUIRE_DATA_UPDATE26 = 2026;
 
+    public static final int UPDATE_TIER27 = 1027;
+    public static final int REQUIRE_DATA_UPDATE27 = 2027;
 }

@@ -237,7 +237,7 @@ public class GTQTMachineCasingMaterials {
                 .color(0x6CF076)
                 .iconSet(SHINY)
                 .components(VanadiumSteel, 4, Osmiridium, 2, HSSS, 3, Germanium, 4, Duranium, 5, Dubnium, 1)
-                .blast(9900, GasTier.HIGHER)
+                .blast(9000, GasTier.HIGHER)
                 .flags(GENERATE_PLATE, GENERATE_ROD, GENERATE_RING, GENERATE_BOLT_SCREW, GENERATE_GEAR, GENERATE_ROTOR,
                         GENERATE_FRAME,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROUND,GENERATE_SMALL_GEAR
                         ,GENERATE_SPRING,GENERATE_SPRING_SMALL)

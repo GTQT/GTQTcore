@@ -1,0 +1,47 @@
+{
+  "forge_marker": 1,
+  "variants": {
+    "variant": {
+      "ulv": {
+        "model": "minecraft:cube_bottom_top",
+        "textures": {
+          "bottom": "gtqtcore:blocks/casings/batteries/cell.ulv",
+          "top": "#bottom",
+          "side": "gtqtcore:blocks/casings/batteries/cell.ulv_top"
+        }
+      },
+      "lv": {
+        "model": "minecraft:cube_bottom_top",
+        "textures": {
+          "bottom": "gtqtcore:blocks/casings/batteries/cell.lv",
+          "top": "#bottom",
+          "side": "gtqtcore:blocks/casings/batteries/cell.lv_top"
+        }
+      },
+      "mv": {
+        "model": "minecraft:cube_bottom_top",
+        "textures": {
+          "bottom": "gtqtcore:blocks/casings/batteries/cell.mv",
+          "top": "#bottom",
+          "side": "gtqtcore:blocks/casings/batteries/cell.mv_top"
+        }
+      },
+      "hv": {
+        "model": "minecraft:cube_bottom_top",
+        "textures": {
+          "bottom": "gtqtcore:blocks/casings/batteries/cell.hv",
+          "top": "#bottom",
+          "side": "gtqtcore:blocks/casings/batteries/cell.hv_top"
+        }
+      },
+      "ev": {
+        "model": "minecraft:cube_bottom_top",
+        "textures": {
+          "bottom": "gtqtcore:blocks/casings/batteries/cell.ev",
+          "top": "#bottom",
+          "side": "gtqtcore:blocks/casings/batteries/cell.ev_top"
+        }
+      }
+    }
+  }
+}
