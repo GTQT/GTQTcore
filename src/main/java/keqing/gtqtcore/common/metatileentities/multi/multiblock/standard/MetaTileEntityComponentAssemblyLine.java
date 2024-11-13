@@ -1,5 +1,10 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
+import gregtech.api.block.IHeatingCoilBlockStats;
+import gregtech.api.capability.IEnergyContainer;
+import gregtech.api.capability.impl.EnergyContainerList;
+import gregtech.api.capability.impl.FluidTankList;
+import gregtech.api.capability.impl.ItemHandlerList;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
@@ -16,6 +21,7 @@ import gregtech.client.renderer.texture.Textures;
 import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.BlockGlassCasing;
 import gregtech.common.blocks.BlockMultiblockCasing;
+import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.MetaTileEntities;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
@@ -24,6 +30,7 @@ import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.recipes.properties.CACasingTierProperty;
 import keqing.gtqtcore.api.unification.GTQTMaterials;
 import keqing.gtqtcore.api.utils.GTQTUniverUtil;
+import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing;
@@ -63,11 +70,20 @@ public class MetaTileEntityComponentAssemblyLine extends RecipeMapMultiblockCont
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
-        Object type = context.get("CATieredCasingTieredStats");
-        this.casingTier = GTQTUniverUtil.getOrDefault(() -> type instanceof WrappedIntTired,
-                () -> ((WrappedIntTired) type).getIntTier(), 0);
+        Object casingTier = context.get("CALCasingTieredStats");
+        this.casingTier = GTQTUniverUtil.getOrDefault(() -> casingTier instanceof WrappedIntTired,
+                () -> ((WrappedIntTired) casingTier).getIntTier(), 0);
     }
-
+    @Override
+    protected void initializeAbilities() {
+        this.inputInventory = new ItemHandlerList(this.getAbilities(MultiblockAbility.IMPORT_ITEMS));
+        this.inputFluidInventory = new FluidTankList(this.allowSameFluidFillForOutputs(), this.getAbilities(MultiblockAbility.IMPORT_FLUIDS));
+        this.outputInventory = new ItemHandlerList(this.getAbilities(MultiblockAbility.EXPORT_ITEMS));
+        this.outputFluidInventory = new FluidTankList(this.allowSameFluidFillForOutputs(), this.getAbilities(MultiblockAbility.EXPORT_FLUIDS));
+        List<IEnergyContainer> energyContainer = new ArrayList<>(this.getAbilities(MultiblockAbility.INPUT_ENERGY));
+        energyContainer.addAll(this.getAbilities(MultiblockAbility.INPUT_LASER));
+        this.energyContainer=new EnergyContainerList(energyContainer);
+    }
     @Override
     public void invalidateStructure() {
         super.invalidateStructure();

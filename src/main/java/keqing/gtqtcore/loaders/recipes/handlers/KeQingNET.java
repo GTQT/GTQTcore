@@ -1280,8 +1280,8 @@ public class KeQingNET {
         //  Component Assembly Line
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(CIRCUIT_GOOD_III, 8)
-                .input(ASSEMBLY_LINE, 8)
                 .input(frameGt, Cinobite, 16)
+                .input(ASSEMBLY_LINE, 8)
                 .input(PRECISE_ASSEMBLER, 16)
                 .input(COMPONENT_ASSEMBLER[IV], 16)
                 .input(ROBOT_ARM_LuV, 32)
