@@ -6,6 +6,7 @@ import gregtech.api.unification.material.Material;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTNuclearFusion;
 import keqing.gtqtcore.common.block.blocks.GTQTParticleAccelerator;
+import net.minecraft.command.CommandEntityData;
 
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
@@ -402,5 +403,13 @@ public class NuclearLine {
                 .circuitMeta(1)
                 .cleanroom(CleanroomType.CLEANROOM)
                 .duration(400).EUt(1920).buildAndRegister();
+
+        //钚244的低效率配方
+        CENTRIFUGE_RECIPES.recipeBuilder()
+                .input(dust,Plutonium241, 1)
+                .chancedOutput(dustSmall, Plutonium244, 1,1000, 250)
+                .chancedOutput(dustSmall, Plutonium239, 2,2000, 250)
+                .cleanroom(CleanroomType.CLEANROOM)
+                .duration(1600).EUt(7680).buildAndRegister();
     }
 }
