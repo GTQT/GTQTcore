@@ -9,7 +9,7 @@ import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.common.items.MetaItems.*;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.LARGE_CIRCUIT_ASSEMBLY_LINE_RECIPES;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.CarbonNanotube;
+import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.utils.GTQTUtil.CWT;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
@@ -62,7 +62,7 @@ public class LargeCircuitAssemblyLine {
             //  LV Electronic Circuit
             LARGE_CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
                     .notConsumable(ELECTRONIC_CIRCUIT_LV)
-                    .input(WRAP_BASIC_CIRCUIT_BOARD, 1) // (4 * 16) / 2
+                    .input(WRAP_BASIC_CIRCUIT_BOARD, 2) // (4 * 16) / 2
                     .input(WRAP_SMD_RESISTOR, 1) // (8 * 16 = 2 * 64) / 2
                     .input(WRAP_SMD_RESISTOR, 1)
                     .input(wireGtHex, RedAlloy, 2) // (2 * 64 = 8 * 16) / 2
@@ -99,8 +99,8 @@ public class LargeCircuitAssemblyLine {
             //  LV Integrated Circuit
             LARGE_CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
                     .notConsumable(INTEGRATED_CIRCUIT_LV)
-                    .input(WRAP_BASIC_CIRCUIT_BOARD, 1) // (4 * 16) / 2
-                    .input(INTEGRATED_LOGIC_CIRCUIT_WAFER, 2) // 1 wafer = 8 chip = 16 circuit
+                    .input(WRAP_BASIC_CIRCUIT_BOARD, 2) // (4 * 16) / 2
+                    .input(INTEGRATED_LOGIC_CIRCUIT_WAFER, 4) // 1 wafer = 8 chip = 16 circuit
                     .input(WRAP_SMD_RESISTOR, 2) // (8 * 16 = 2 * 64) / 2
                     .input(WRAP_SMD_DIODE, 2) // (8 * 16 = 2 * 64) / 2
                     .input(wireGtHex, Copper, 1) // [4 * 16 = 64 (wire) = 2 * 64 (fine wire)] / 2
@@ -114,7 +114,7 @@ public class LargeCircuitAssemblyLine {
             //  MV Integrated Circuit
             LARGE_CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
                     .notConsumable(INTEGRATED_CIRCUIT_MV)
-                    .input(WRAP_GOOD_CIRCUIT_BOARD, 1) // (4 * 16) / 2
+                    .input(WRAP_GOOD_CIRCUIT_BOARD, 2) // (4 * 16) / 2
                     .input(WRAP_CIRCUIT_LV, 2) // (8 * 16 = 2 * 64) / 2
                     .input(WRAP_SMD_RESISTOR, 2) // (8 * 16 = 2 * 64) / 2
                     .input(WRAP_SMD_DIODE, 2) // (8 * 16 = 2 * 64) / 2
@@ -129,12 +129,12 @@ public class LargeCircuitAssemblyLine {
             //  HV Integrated Circuit
             LARGE_CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
                     .notConsumable(INTEGRATED_CIRCUIT_HV)
-                    .input(WRAP_CIRCUIT_MV, 4) // (8 * 16 = 2 * 64)
-                    .input(INTEGRATED_LOGIC_CIRCUIT_WAFER, 4) // 1 wafer = 8 chip = 4 circuit
-                    .input(RANDOM_ACCESS_MEMORY_WAFER, 2) // 1 wafer = 32 chip = 16 circuit
-                    .input(WRAP_SMD_TRANSISTOR, 8) // (16 * 16 = 4 * 64)
-                    .input(wireGtHex, Electrum, 8) // [16 * 16 = 4 * 64 (wire) =  8 * 64 (fine wire)]
-                    .input(stickLong, AnnealedCopper, 32) // [64 long stick = 2 * 64 stick = 8 * 64 bolt]
+                    .input(WRAP_CIRCUIT_MV, 2) // (8 * 16 = 2 * 64)
+                    .input(INTEGRATED_LOGIC_CIRCUIT_WAFER, 2) // 1 wafer = 8 chip = 4 circuit
+                    .input(RANDOM_ACCESS_MEMORY_WAFER, 1) // 1 wafer = 32 chip = 16 circuit
+                    .input(WRAP_SMD_TRANSISTOR, 4) // (16 * 16 = 4 * 64)
+                    .input(wireGtHex, Electrum, 4) // [16 * 16 = 4 * 64 (wire) =  8 * 64 (fine wire)]
+                    .input(stickLong, AnnealedCopper, 16) // [64 long stick = 2 * 64 stick = 8 * 64 bolt]
                     .fluidInputs(new FluidStack[]{stack})
                     .output(INTEGRATED_CIRCUIT_HV, 64)
                     .EUt(VA[HV]).CWUt(CWT[HV])
@@ -148,18 +148,55 @@ public class LargeCircuitAssemblyLine {
                 SolderingAlloy.getFluid(72 * 64),
                 Tin.getFluid(144 * 64)
         }) {
-            //  ULV NAND Chip (todo)
+            //  ULV NAND Chip
+            LARGE_CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                    .notConsumable(NAND_CHIP_ULV)
+                    .input(WRAP_PLASTIC_CIRCUIT_BOARD, 2)
+                    .input(SIMPLE_SYSTEM_ON_CHIP_WAFER, 2)
+                    .input(SIMPLE_SYSTEM_ON_CHIP_WAFER, 2)
+                    .input(stick, RedAlloy, 2)
+                    .input(stick, RedAlloy, 2)
+                    .input(wireGtQuadruple, Tin, 1)
+                    .fluidInputs(new FluidStack[]{stack})
+                    .output(NAND_CHIP_ULV, 384)
+                    .EUt(VA[MV]).CWUt(CWT[MV])
+                    .duration(400)
+                    .buildAndRegister();
 
-            //  ULV NAND Chip SoC recipe (todo)
+            //  LV Microprocessor
+            LARGE_CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                    .notConsumable(MICROPROCESSOR_LV)
+                    .input(WRAP_PLASTIC_CIRCUIT_BOARD, 2) // (4 * 16) / 2
+                    .input(CENTRAL_PROCESSING_UNIT_WAFER, 2) // 1 wafer = 8 chip = 16 circuit
+                    .input(WRAP_SMD_RESISTOR, 2) // (16 * 16 = 4 * 64) / 2
+                    .input(WRAP_SMD_CAPACITOR, 2) // (16 * 16 = 4 * 64) / 2
+                    .input(WRAP_SMD_TRANSISTOR, 2) // (16 * 16 = 4 * 64) / 2
+                    .input(wireGtHex, Copper, 1) // [8 * 16 = 128 (wire) = 4 * 64 (fine wire)] / 2
+                    .fluidInputs(new FluidStack[]{stack})
+                    .output(MICROPROCESSOR_LV, 96)
+                    .EUt(VA[MV]).CWUt(CWT[MV])
+                    .duration(400)
+                    .buildAndRegister();
 
-            //  LV Microprocessor (todo)
-
-            //  LV Microprocessor SoC recipe (todo)
+            //  LV Microprocessor SoC recipe
+            LARGE_CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                    .notConsumable(MICROPROCESSOR_LV)
+                    .input(WRAP_PLASTIC_CIRCUIT_BOARD, 2) // (4 * 16) / 2
+                    .input(SYSTEM_ON_CHIP_WAFER, 2) // 1 wafer = 8 chip = 16 circuit
+                    .input(SYSTEM_ON_CHIP_WAFER, 2) // 1 wafer = 8 chip = 16 circuit
+                    .input(stickLong, Tin, 2) // [8 * 16 = 128 (wire) = 4 * 64 (fine wire)] / 2
+                    .input(stickLong, Tin, 2) // [8 * 16 = 128 (wire) = 4 * 64 (fine wire)] / 2
+                    .input(wireGtHex, Copper, 1) // [8 * 16 = 128 (wire) = 4 * 64 (fine wire)] / 2
+                    .fluidInputs(new FluidStack[]{stack})
+                    .output(MICROPROCESSOR_LV, 192)
+                    .EUt(VA[EV]).CWUt(CWT[EV])
+                    .duration(400)
+                    .buildAndRegister();
 
             //  MV Processor
             LARGE_CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
                     .notConsumable(PROCESSOR_MV)
-                    .input(WRAP_PLASTIC_CIRCUIT_BOARD, 1) // (4 * 16) / 2
+                    .input(WRAP_PLASTIC_CIRCUIT_BOARD, 2) // (4 * 16) / 2
                     .input(CENTRAL_PROCESSING_UNIT_WAFER, 2) // 1 wafer = 8 chip = 16 circuit
                     .input(WRAP_SMD_RESISTOR, 4) // (16 * 16 = 4 * 64) / 2
                     .input(WRAP_SMD_CAPACITOR, 4) // (16 * 16 = 4 * 64) / 2
@@ -171,8 +208,20 @@ public class LargeCircuitAssemblyLine {
                     .duration(400)
                     .buildAndRegister();
 
-            //  MV Processor SoC recipe (todo)
-
+            //  MV Processor SoC recipe
+            LARGE_CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                    .notConsumable(PROCESSOR_MV)
+                    .input(WRAP_PLASTIC_CIRCUIT_BOARD, 2) // (4 * 16) / 2
+                    .input(SYSTEM_ON_CHIP_WAFER, 2) // 1 wafer = 8 chip = 16 circuit
+                    .input(SYSTEM_ON_CHIP_WAFER, 2) // (16 * 16 = 4 * 64) / 2
+                    .input(stickLong, AnnealedCopper, 4) // (16 * 16 = 4 * 64) / 2
+                    .input(stickLong, AnnealedCopper, 4) // [8 * 16 = 128 (wire) = 4 * 64 (fine wire)] / 2
+                    .input(wireGtHex, RedAlloy, 2) // [8 * 16 = 128 (wire) = 4 * 64 (fine wire)] / 2
+                    .fluidInputs(new FluidStack[]{stack})
+                    .output(PROCESSOR_MV, 128)
+                    .EUt(VA[IV]).CWUt(CWT[IV])
+                    .duration(400)
+                    .buildAndRegister();
         }
 
         for (FluidStack stack : new FluidStack[] {
@@ -182,7 +231,7 @@ public class LargeCircuitAssemblyLine {
             //  HV Processor Assembly
             LARGE_CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
                     .notConsumable(PROCESSOR_ASSEMBLY_HV)
-                    .input(WRAP_PLASTIC_CIRCUIT_BOARD, 1) // (4 * 16) / 2
+                    .input(WRAP_PLASTIC_CIRCUIT_BOARD, 2) // (4 * 16) / 2
                     .input(WRAP_CIRCUIT_MV, 2) // (8 * 16 = 2 * 64) / 2
                     .input(WRAP_SMD_INDUCTOR, 4) // (16 * 16 = 4 * 64) / 2
                     .input(WRAP_SMD_CAPACITOR, 8) // (32 * 16 = 8 * 64) / 2
@@ -217,7 +266,7 @@ public class LargeCircuitAssemblyLine {
             //  IV Computer Mainframe
             LARGE_CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
                     .notConsumable(MAINFRAME_IV)
-                    .input(frameGt, Aluminium, 64) // 2 * 64
+                    .input(frameGt, Aluminium, 32) // 2 * 64
                     .input(WRAP_CIRCUIT_EV, 2) // 8 * 16 = 2 * 64
                     .input(WRAP_SMD_INDUCTOR, 16) // 32 * 16 = 8 * 64
                     .input(WRAP_SMD_CAPACITOR, 32) // 64 * 16
@@ -232,7 +281,7 @@ public class LargeCircuitAssemblyLine {
             //  IV Computer Mainframe Advanced SMD recipe
             LARGE_CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
                     .notConsumable(MAINFRAME_IV)
-                    .input(frameGt, Aluminium, 64) // 2 * 64
+                    .input(frameGt, Aluminium, 32) // 2 * 64
                     .input(WRAP_CIRCUIT_EV, 2) // 8 * 16 = 2 * 64
                     .input(WRAP_ADVANCED_SMD_INDUCTOR, 4) // (32 * 16 = 8 * 64) / 4
                     .input(WRAP_ADVANCED_SMD_CAPACITOR, 8) // (64 * 16) / 4
@@ -254,12 +303,12 @@ public class LargeCircuitAssemblyLine {
             //  HV Nano Processor
             LARGE_CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
                     .notConsumable(NANO_PROCESSOR_HV)
-                    .input(WRAP_ADVANCED_CIRCUIT_BOARD, 1) // (4 * 16) / 2
+                    .input(WRAP_ADVANCED_CIRCUIT_BOARD, 2) // (4 * 16) / 2
                     .input(NANO_CENTRAL_PROCESSING_UNIT_WAFER, 2) // 1 wafer = 8 chip = 16 circuit
                     .input(WRAP_SMD_RESISTOR, 8) // (32 * 16 = 8 * 64) / 2
                     .input(WRAP_SMD_CAPACITOR, 8) // (32 * 16 = 8 * 64) / 2
                     .input(WRAP_SMD_TRANSISTOR, 8) // (32 * 16 = 8 * 64) / 2
-                    .input(wireGtHex, Electrum, 4) // (16 * 16 = 4 * 64 wire = 8 * 64 fine wire) / 2
+                    .input(wireGtHex, Electrum, 2) // (16 * 16 = 4 * 64 wire = 8 * 64 fine wire) / 2
                     .fluidInputs(new FluidStack[]{stack})
                     .output(NANO_PROCESSOR_HV, 64)
                     .EUt(VA[HV]).CWUt(CWT[HV])
@@ -269,12 +318,12 @@ public class LargeCircuitAssemblyLine {
             //  HV Nano Processor Advanced SMD recipe
             LARGE_CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
                     .notConsumable(NANO_PROCESSOR_HV)
-                    .input(WRAP_ADVANCED_CIRCUIT_BOARD, 1) // (4 * 16) / 2
+                    .input(WRAP_ADVANCED_CIRCUIT_BOARD, 2) // (4 * 16) / 2
                     .input(NANO_CENTRAL_PROCESSING_UNIT_WAFER, 2) // 1 wafer = 8 chip = 16 circuit
                     .input(WRAP_SMD_RESISTOR, 2) // (32 * 16 = 8 * 64) / 2 / 4
                     .input(WRAP_SMD_CAPACITOR, 2) // (32 * 16 = 8 * 64) / 2 / 4
                     .input(WRAP_SMD_TRANSISTOR, 2) // (32 * 16 = 8 * 64) / 2 / 4
-                    .input(wireGtHex, Electrum, 4) // (16 * 16 = 4 * 64 wire = 8 * 64 fine wire) / 2
+                    .input(wireGtHex, Electrum, 2) // (16 * 16 = 4 * 64 wire = 8 * 64 fine wire) / 2
                     .fluidInputs(new FluidStack[]{stack})
                     .output(NANO_PROCESSOR_HV, 64)
                     .EUt(VA[HV]).CWUt(CWT[HV])
@@ -282,6 +331,19 @@ public class LargeCircuitAssemblyLine {
                     .buildAndRegister();
 
             //  HV Nano Processor SoC recipe (todo)
+            LARGE_CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                    .notConsumable(NANO_PROCESSOR_HV)
+                    .input(WRAP_ADVANCED_CIRCUIT_BOARD, 2) // (4 * 16) / 2
+                    .input(ADVANCED_SYSTEM_ON_CHIP_WAFER, 2) // 1 wafer = 8 chip = 16 circuit
+                    .input(ADVANCED_SYSTEM_ON_CHIP_WAFER, 2) // 1 wafer = 8 chip = 16 circuit
+                    .input(stickLong, Platinum, 4) // (32 * 16 = 8 * 64) / 2 / 4
+                    .input(stickLong, Platinum, 4) // (32 * 16 = 8 * 64) / 2 / 4
+                    .input(wireGtHex, Electrum, 1) // (16 * 16 = 4 * 64 wire = 8 * 64 fine wire) / 2
+                    .fluidInputs(new FluidStack[]{stack})
+                    .output(NANO_PROCESSOR_HV, 128)
+                    .EUt(VA[LuV]).CWUt(CWT[LuV])
+                    .duration(800)
+                    .buildAndRegister();
         }
 
         for (FluidStack stack : new FluidStack[] {
@@ -291,12 +353,12 @@ public class LargeCircuitAssemblyLine {
             //  EV Nano Assembly
             LARGE_CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
                     .notConsumable(NANO_PROCESSOR_ASSEMBLY_EV)
-                    .input(WRAP_ADVANCED_CIRCUIT_BOARD, 1) // (4 * 16) / 2
+                    .input(WRAP_ADVANCED_CIRCUIT_BOARD, 2) // (4 * 16) / 2
                     .input(WRAP_CIRCUIT_HV, 2) // (8 * 16 = 2 * 64) / 2
                     .input(WRAP_SMD_INDUCTOR, 4) // (16 * 16 = 4 * 64) / 2
                     .input(WRAP_SMD_CAPACITOR, 8) // (32 * 16 = 8 * 64) / 2
                     .input(RANDOM_ACCESS_MEMORY_WAFER, 4) // 1 wafer = 32 chip = 8 circuit
-                    .input(wireGtHex, Electrum, 8) // (32 * 16 = 8 * 64 wire = 16 * 64 fine wire) / 2
+                    .input(wireGtHex, Electrum, 4) // (32 * 16 = 8 * 64 wire = 16 * 64 fine wire) / 2
                     .fluidInputs(new FluidStack[]{stack})
                     .output(NANO_PROCESSOR_ASSEMBLY_EV, 64)
                     .EUt(VA[EV]).CWUt(CWT[EV])
@@ -306,12 +368,12 @@ public class LargeCircuitAssemblyLine {
             //  EV Nano Assembly Advanced SMD recipe
             LARGE_CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
                     .notConsumable(NANO_PROCESSOR_ASSEMBLY_EV)
-                    .input(WRAP_ADVANCED_CIRCUIT_BOARD, 1) // (4 * 16) / 2
+                    .input(WRAP_ADVANCED_CIRCUIT_BOARD, 2) // (4 * 16) / 2
                     .input(WRAP_CIRCUIT_HV, 2) // (8 * 16 = 2 * 64) / 2
                     .input(WRAP_ADVANCED_SMD_INDUCTOR, 1) // (16 * 16 = 4 * 64) / 2 / 4
                     .input(WRAP_ADVANCED_SMD_CAPACITOR, 2) // (32 * 16 = 8 * 64) / 2 / 4
                     .input(RANDOM_ACCESS_MEMORY_WAFER, 4) // 1 wafer = 32 chip = 8 circuit
-                    .input(wireGtHex, Electrum, 8) // (32 * 16 = 8 * 64 wire = 16 * 64 fine wire) / 2
+                    .input(wireGtHex, Electrum, 4) // (32 * 16 = 8 * 64 wire = 16 * 64 fine wire) / 2
                     .fluidInputs(new FluidStack[]{stack})
                     .output(NANO_PROCESSOR_ASSEMBLY_EV, 64)
                     .EUt(VA[EV]).CWUt(CWT[EV])
@@ -326,7 +388,7 @@ public class LargeCircuitAssemblyLine {
                     .input(WRAP_SMD_DIODE, 16) // 32 * 16 = 8 * 64
                     .input(NOR_MEMORY_CHIP_WAFER, 8) // 1 wafer = 16 chip = 4 circuit
                     .input(RANDOM_ACCESS_MEMORY_WAFER, 16) // 1 wafer = 32 chip = 2 circuit
-                    .input(wireGtHex, Electrum, 16) // 32 * 16 = 8 * 64 wire = 16 * 64 fine wire
+                    .input(wireGtHex, Electrum, 8) // 32 * 16 = 8 * 64 wire = 16 * 64 fine wire
                     .fluidInputs(new FluidStack[]{stack})
                     .output(NANO_COMPUTER_IV, 64)
                     .EUt(VA[IV]).CWUt(CWT[IV])
@@ -337,11 +399,11 @@ public class LargeCircuitAssemblyLine {
             LARGE_CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
                     .notConsumable(NANO_COMPUTER_IV)
                     .input(WRAP_ADVANCED_CIRCUIT_BOARD, 2) // 4 * 16
-                    .input(WRAP_CIRCUIT_EV, 4) // 8 * 16 = 2 * 64
+                    .input(WRAP_CIRCUIT_EV, 2) // 8 * 16 = 2 * 64
                     .input(WRAP_ADVANCED_SMD_DIODE, 4) // (32 * 16 = 8 * 64) / 4
                     .input(NOR_MEMORY_CHIP_WAFER, 8) // 1 wafer = 16 chip = 4 circuit
                     .input(RANDOM_ACCESS_MEMORY_WAFER, 16) // 1 wafer = 32 chip = 2 circuit
-                    .input(wireGtHex, Electrum, 16) // 32 * 16 = 8 * 64 wire = 16 * 64 fine wire
+                    .input(wireGtHex, Electrum, 8) // 32 * 16 = 8 * 64 wire = 16 * 64 fine wire
                     .fluidInputs(new FluidStack[]{stack})
                     .output(NANO_COMPUTER_IV, 64)
                     .EUt(VA[IV]).CWUt(CWT[IV])
@@ -356,12 +418,12 @@ public class LargeCircuitAssemblyLine {
             //  LuV Nano Mainframe
             LARGE_CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
                     .notConsumable(NANO_MAINFRAME_LUV)
-                    .input(frameGt, Aluminium, 64)
+                    .input(frameGt, Aluminium, 32)
                     .input(WRAP_CIRCUIT_IV, 2) // 8 * 16 = 2 * 64
                     .input(WRAP_SMD_INDUCTOR, 32) // 16 * 64
                     .input(WRAP_SMD_CAPACITOR, 64) // 128 * 16 = 64 * 32
                     .input(RANDOM_ACCESS_MEMORY_WAFER, 16) // 1 wafer = 32 chip = 2 circuit
-                    .input(wireGtHex, AnnealedCopper, 64) // 1 circuit = 2 hex wire
+                    .input(wireGtHex, AnnealedCopper, 32) // 1 circuit = 2 hex wire
                     .fluidInputs(new FluidStack[]{stack})
                     .output(NANO_MAINFRAME_LUV, 64)
                     .EUt(VA[LuV]).CWUt(CWT[LuV])
@@ -371,12 +433,12 @@ public class LargeCircuitAssemblyLine {
             //  LuV Nano Mainframe Advanced SMD recipe
             LARGE_CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
                     .notConsumable(NANO_MAINFRAME_LUV)
-                    .input(frameGt, Aluminium, 64)
-                    .input(WRAP_CIRCUIT_IV, 4) // 8 * 16 = 2 * 64
+                    .input(frameGt, Aluminium, 32)
+                    .input(WRAP_CIRCUIT_IV, 2) // 8 * 16 = 2 * 64
                     .input(WRAP_ADVANCED_SMD_INDUCTOR, 8) // (16 * 64) / 4
                     .input(WRAP_ADVANCED_SMD_CAPACITOR, 16) // (128 * 16 = 64 * 32) / 4
                     .input(RANDOM_ACCESS_MEMORY_WAFER, 16) // 1 wafer = 32 chip = 2 circuit
-                    .input(wireGtHex, AnnealedCopper, 64) // 1 circuit = 2 hex wire
+                    .input(wireGtHex, AnnealedCopper, 32) // 1 circuit = 2 hex wire
                     .fluidInputs(new FluidStack[]{stack})
                     .output(NANO_MAINFRAME_LUV, 64)
                     .EUt(VA[LuV]).CWUt(CWT[LuV])
@@ -393,7 +455,7 @@ public class LargeCircuitAssemblyLine {
             //  EV Quantum Processor
             LARGE_CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
                     .notConsumable(QUANTUM_PROCESSOR_EV)
-                    .input(WRAP_EXTREME_CIRCUIT_BOARD, 1) // (4 * 16) / 2
+                    .input(WRAP_EXTREME_CIRCUIT_BOARD, 2) // (4 * 16) / 2
                     .input(QUBIT_CENTRAL_PROCESSING_UNIT_WAFER, 4) // 1 wafer = 4 chip = 8 circuit
                     .input(NANO_CENTRAL_PROCESSING_UNIT_WAFER, 2) // 1 wafer = 8 chip = 16 circuit
                     .input(WRAP_SMD_CAPACITOR, 12) // (48 * 16 = 12 * 64) / 2
@@ -408,7 +470,7 @@ public class LargeCircuitAssemblyLine {
             //  EV Quantum Processor Advanced SMD recipe
             LARGE_CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
                     .notConsumable(QUANTUM_PROCESSOR_EV)
-                    .input(WRAP_EXTREME_CIRCUIT_BOARD, 1) // (4 * 16) / 2
+                    .input(WRAP_EXTREME_CIRCUIT_BOARD, 2) // (4 * 16) / 2
                     .input(QUBIT_CENTRAL_PROCESSING_UNIT_WAFER, 4) // 1 wafer = 4 chip = 8 circuit
                     .input(NANO_CENTRAL_PROCESSING_UNIT_WAFER, 2) // 1 wafer = 8 chip = 16 circuit
                     .input(WRAP_ADVANCED_SMD_CAPACITOR, 3) // (48 * 16 = 12 * 64) / 2 / 4
@@ -421,6 +483,19 @@ public class LargeCircuitAssemblyLine {
                     .buildAndRegister();
 
             //  EV Quantum Processor Soc recipe (todo)
+            LARGE_CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                    .notConsumable(QUANTUM_PROCESSOR_EV)
+                    .input(WRAP_EXTREME_CIRCUIT_BOARD, 2) // (4 * 16) / 2
+                    .input(ADVANCED_SYSTEM_ON_CHIP_WAFER, 2) // 1 wafer = 8 chip = 16 circuit
+                    .input(ADVANCED_SYSTEM_ON_CHIP_WAFER, 2) // 1 wafer = 8 chip = 16 circuit
+                    .input(stickLong, NiobiumTitanium, 8) // (32 * 16 = 8 * 64) / 2 / 4
+                    .input(stickLong, NiobiumTitanium, 8) // (32 * 16 = 8 * 64) / 2 / 4
+                    .input(wireGtHex, Platinum, 3) // (16 * 16 = 4 * 64 wire = 8 * 64 fine wire) / 2
+                    .fluidInputs(new FluidStack[]{stack})
+                    .output(QUANTUM_PROCESSOR_EV, 128)
+                    .EUt(VA[ZPM]).CWUt(CWT[ZPM])
+                    .duration(800)
+                    .buildAndRegister();
         }
 
         for (FluidStack stack : new FluidStack[] {
@@ -430,7 +505,7 @@ public class LargeCircuitAssemblyLine {
             //  IV Quantum Assembly
             LARGE_CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
                     .notConsumable(QUANTUM_ASSEMBLY_IV)
-                    .input(WRAP_EXTREME_CIRCUIT_BOARD, 1) // (4 * 16) / 2
+                    .input(WRAP_EXTREME_CIRCUIT_BOARD, 2) // (4 * 16) / 2
                     .input(WRAP_CIRCUIT_EV, 2) // (8 * 16) / 2
                     .input(WRAP_SMD_INDUCTOR, 8) // (32 * 16 = 8 * 64) / 2
                     .input(WRAP_SMD_CAPACITOR, 16) // (16 * 64) / 2
@@ -445,7 +520,7 @@ public class LargeCircuitAssemblyLine {
             //  IV Quantum Assembly Advanced SMD recipe
             LARGE_CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
                     .notConsumable(QUANTUM_ASSEMBLY_IV)
-                    .input(WRAP_EXTREME_CIRCUIT_BOARD, 1) // (4 * 16) / 2
+                    .input(WRAP_EXTREME_CIRCUIT_BOARD, 2) // (4 * 16) / 2
                     .input(WRAP_CIRCUIT_EV, 2) // (8 * 16) / 2
                     .input(WRAP_ADVANCED_SMD_INDUCTOR, 2) // (32 * 16 = 8 * 64) / 2 / 4
                     .input(WRAP_ADVANCED_SMD_CAPACITOR, 4) // (16 * 64) / 2 / 4
@@ -495,7 +570,7 @@ public class LargeCircuitAssemblyLine {
             //  ZPM Quantum Mainframe
             LARGE_CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
                     .notConsumable(QUANTUM_MAINFRAME_ZPM)
-                    .input(frameGt, HSSG, 64)
+                    .input(frameGt, HSSG, 32)
                     .input(WRAP_CIRCUIT_LuV, 2) // 8 * 16 = 2 * 64
                     .input(WRAP_SMD_INDUCTOR, 48) // 96 * 16 = 24 * 64
                     .input(WRAP_SMD_CAPACITOR, 96) // 192 * 16 = 48 * 64
@@ -510,7 +585,7 @@ public class LargeCircuitAssemblyLine {
             //  ZPM Quantum Mainframe Advanced SMD recipe
             LARGE_CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
                     .notConsumable(QUANTUM_MAINFRAME_ZPM)
-                    .input(frameGt, HSSG, 64)
+                    .input(frameGt, HSSG, 32)
                     .input(WRAP_CIRCUIT_LuV, 2) // 8 * 16 = 2 * 64
                     .input(WRAP_ADVANCED_SMD_INDUCTOR, 12) // 96 * 16 = 24 * 64 / 4
                     .input(WRAP_ADVANCED_SMD_CAPACITOR, 24) // 192 * 16 = 48 * 64 / 4
@@ -532,7 +607,7 @@ public class LargeCircuitAssemblyLine {
             //  IV Crystal Processor
             LARGE_CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
                     .notConsumable(CRYSTAL_PROCESSOR_IV)
-                    .input(WRAP_ELITE_CIRCUIT_BOARD, 1) // (4 * 16) / 2
+                    .input(WRAP_ELITE_CIRCUIT_BOARD, 2) // (4 * 16) / 2
                     .input(CRYSTAL_CENTRAL_PROCESSING_UNIT, 32)
                     .input(NANO_CENTRAL_PROCESSING_UNIT_WAFER, 4) // 1 wafer = 8 chip = 8 circuit
                     .input(WRAP_ADVANCED_SMD_CAPACITOR, 6) // (24 * 16 = 6 * 64) / 2
@@ -545,6 +620,19 @@ public class LargeCircuitAssemblyLine {
                     .buildAndRegister();
 
             //  IV Crystal Processor SoC recipe (todo)
+            LARGE_CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                    .notConsumable(CRYSTAL_PROCESSOR_IV)
+                    .input(WRAP_EXTREME_CIRCUIT_BOARD, 2) // (4 * 16) / 2
+                    .input(CRYSTAL_SYSTEM_ON_CHIP, 24) // 1 wafer = 8 chip = 16 circuit
+                    .input(CRYSTAL_SYSTEM_ON_CHIP, 24) // 1 wafer = 8 chip = 16 circuit
+                    .input(stickLong, YttriumBariumCuprate, 8) // (32 * 16 = 8 * 64) / 2 / 4
+                    .input(stickLong, YttriumBariumCuprate, 8) // (32 * 16 = 8 * 64) / 2 / 4
+                    .input(wireGtHex, NiobiumTitanium, 2) // (16 * 16 = 4 * 64 wire = 8 * 64 fine wire) / 2
+                    .fluidInputs(new FluidStack[]{stack})
+                    .output(CRYSTAL_PROCESSOR_IV, 128)
+                    .EUt(VA[ZPM]).CWUt(CWT[ZPM])
+                    .duration(800)
+                    .buildAndRegister();
         }
 
         for (FluidStack stack : new FluidStack[] {
@@ -554,7 +642,7 @@ public class LargeCircuitAssemblyLine {
             //  LuV Crystal Assembly
             LARGE_CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
                     .notConsumable(CRYSTAL_ASSEMBLY_LUV)
-                    .input(WRAP_ELITE_CIRCUIT_BOARD, 1) // (4 * 16) / 2
+                    .input(WRAP_ELITE_CIRCUIT_BOARD, 2) // (4 * 16) / 2
                     .input(WRAP_CIRCUIT_IV, 2) // (8 * 16 = 2 * 64) / 2
                     .input(WRAP_ADVANCED_SMD_INDUCTOR, 4) // (16 * 16 = 4 * 64) / 2
                     .input(WRAP_ADVANCED_SMD_CAPACITOR, 8) // (32 * 16 = 8 * 64) / 2
@@ -569,7 +657,7 @@ public class LargeCircuitAssemblyLine {
             //  ZPM Crystal Supercomputer
             LARGE_CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
                     .notConsumable(CRYSTAL_COMPUTER_ZPM)
-                    .input(WRAP_ELITE_CIRCUIT_BOARD, 1) // 4 * 16
+                    .input(WRAP_ELITE_CIRCUIT_BOARD, 2) // 4 * 16
                     .input(WRAP_CIRCUIT_LuV, 2) // 8 * 16 = 2 * 64
                     .input(RANDOM_ACCESS_MEMORY_WAFER, 2) // 1 wafer = 32 chip = 8 circuit
                     .input(NOR_MEMORY_CHIP_WAFER, 32) // 1 Wafer = 16 chip = 0.5 circuit
@@ -607,6 +695,19 @@ public class LargeCircuitAssemblyLine {
                     .buildAndRegister();
 
             //  LuV Wetware Processor SoC recipe (todo)
+            LARGE_CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                    .notConsumable(WETWARE_PROCESSOR_LUV)
+                    .input(WRAP_WETWARE_CIRCUIT_BOARD, 2) // (4 * 16) / 2
+                    .input(RICH_BACTERIA_SOC, 24) // 1 wafer = 8 chip = 16 circuit
+                    .input(RICH_BACTERIA_SOC, 24) // 1 wafer = 8 chip = 16 circuit
+                    .input(stickLong, Naquadah, 8) // (32 * 16 = 8 * 64) / 2 / 4
+                    .input(stickLong, Naquadah, 8) // (32 * 16 = 8 * 64) / 2 / 4
+                    .input(wireGtHex, YttriumBariumCuprate, 2) // (16 * 16 = 4 * 64 wire = 8 * 64 fine wire) / 2
+                    .fluidInputs(new FluidStack[]{stack})
+                    .output(WETWARE_PROCESSOR_LUV, 128)
+                    .EUt(VA[UV]).CWUt(CWT[UV])
+                    .duration(800)
+                    .buildAndRegister();
         }
 
         for (FluidStack stack : new FluidStack[] {
@@ -616,7 +717,7 @@ public class LargeCircuitAssemblyLine {
             //  ZPM Wetware Assembly
             LARGE_CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
                     .notConsumable(WETWARE_PROCESSOR_ASSEMBLY_ZPM)
-                    .input(WRAP_WETWARE_CIRCUIT_BOARD, 1) // (4 * 16) / 2
+                    .input(WRAP_WETWARE_CIRCUIT_BOARD, 2) // (4 * 16) / 2
                     .input(WRAP_CIRCUIT_LuV, 2) // (8 * 16 = 2 * 64) / 2
                     .input(WRAP_ADVANCED_SMD_INDUCTOR, 6) // (24 * 16 = 6 * 64) / 2
                     .input(WRAP_ADVANCED_SMD_CAPACITOR, 12) // (48 * 16 = 12 * 64) / 2
@@ -641,7 +742,7 @@ public class LargeCircuitAssemblyLine {
             //  ZPM Gooware Processor
             LARGE_CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
                     .notConsumable(GOOWARE_PROCESSOR)
-                    .input(WRAP_GOOWARE_CIRCUIT_BOARD, 1) // (4 * 16) / 2
+                    .input(WRAP_GOOWARE_CIRCUIT_BOARD, 2) // (4 * 16) / 2
                     .input(NONLINEAR_CHEMICAL_OSCILLATOR, 16)
                     .input(CRYSTAL_CENTRAL_PROCESSING_UNIT, 16)
                     .input(WRAP_ADVANCED_SMD_CAPACITOR, 32) // 16 * 64
@@ -654,6 +755,19 @@ public class LargeCircuitAssemblyLine {
                     .buildAndRegister();
 
             //  ZPM Gooware Processor SoC recipe (todo)
+            LARGE_CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                    .notConsumable(GOOWARE_PROCESSOR)
+                    .input(WRAP_GOOWARE_CIRCUIT_BOARD, 2) // (4 * 16) / 2
+                    .input(INTRAVITAL_SOC, 24) // 1 wafer = 8 chip = 16 circuit
+                    .input(INTRAVITAL_SOC, 24) // 1 wafer = 8 chip = 16 circuit
+                    .input(stickLong, Orichalcum, 8) // (32 * 16 = 8 * 64) / 2 / 4
+                    .input(stickLong, Orichalcum, 8) // (32 * 16 = 8 * 64) / 2 / 4
+                    .input(wireGtHex, Europium, 2) // (16 * 16 = 4 * 64 wire = 8 * 64 fine wire) / 2
+                    .fluidInputs(new FluidStack[]{stack})
+                    .output(GOOWARE_PROCESSOR, 128)
+                    .EUt(VA[UHV]).CWUt(CWT[UHV])
+                    .duration(800)
+                    .buildAndRegister();
         }
 
         for (FluidStack stack : new FluidStack[] {
@@ -663,7 +777,7 @@ public class LargeCircuitAssemblyLine {
             //  UV Gooware Assembly
             LARGE_CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
                     .notConsumable(GOOWARE_ASSEMBLY)
-                    .input(WRAP_GOOWARE_CIRCUIT_BOARD, 1) // (4 * 16) / 2
+                    .input(WRAP_GOOWARE_CIRCUIT_BOARD, 2) // (4 * 16) / 2
                     .input(WRAP_CIRCUIT_ZPM, 2) // (8 * 16 = 2 * 64) / 2
                     .input(WRAP_ADVANCED_SMD_INDUCTOR, 32) // 16 * 64
                     .input(WRAP_ADVANCED_SMD_CAPACITOR, 64) // 32 * 64
@@ -701,6 +815,19 @@ public class LargeCircuitAssemblyLine {
                     .buildAndRegister();
 
             //  UV Optical Processor SoC recipe (todo)
+            LARGE_CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                    .notConsumable(OPTICAL_PROCESSOR)
+                    .input(WRAP_OPTICAL_CIRCUIT_BOARD, 2) // (4 * 16) / 2
+                    .input(PHOTOELECTRON_SOC, 24) // 1 wafer = 8 chip = 16 circuit
+                    .input(PHOTOELECTRON_SOC, 24) // 1 wafer = 8 chip = 16 circuit
+                    .input(stickLong, Adamantium, 8) // (32 * 16 = 8 * 64) / 2 / 4
+                    .input(stickLong, Adamantium, 8) // (32 * 16 = 8 * 64) / 2 / 4
+                    .input(wireGtHex, PedotPSS, 2) // (16 * 16 = 4 * 64 wire = 8 * 64 fine wire) / 2
+                    .fluidInputs(new FluidStack[]{stack})
+                    .output(OPTICAL_PROCESSOR, 128)
+                    .EUt(VA[UEV]).CWUt(CWT[UEV])
+                    .duration(800)
+                    .buildAndRegister();
         }
 
         for (FluidStack stack : new FluidStack[] {
@@ -710,7 +837,7 @@ public class LargeCircuitAssemblyLine {
             //  UHV Optical Assembly
             LARGE_CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
                     .notConsumable(OPTICAL_ASSEMBLY)
-                    .input(WRAP_OPTICAL_CIRCUIT_BOARD, 1) // (4 * 16) / 2
+                    .input(WRAP_OPTICAL_CIRCUIT_BOARD, 2) // (4 * 16) / 2
                     .input(WRAP_CIRCUIT_UV, 2) // (8 * 16 = 2 * 64) / 2
                     .input(WRAP_OPTICAL_SMD_INDUCTOR, 6) // (24 * 16 = 6 * 64) / 2
                     .input(WRAP_OPTICAL_SMD_CAPACITOR, 12) // (48 * 16  = 12 * 64) / 2
@@ -746,6 +873,21 @@ public class LargeCircuitAssemblyLine {
                     .EUt(VA[UHV]).CWUt(CWT[UHV])
                     .duration(2000)
                     .buildAndRegister();
+
+            // UHV Spintronic Processor SOC
+            LARGE_CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                    .notConsumable(SPINTRONIC_PROCESSOR)
+                    .input(WRAP_SPINTRONIC_CIRCUIT_BOARD, 2) // (4 * 16) / 2
+                    .input(EXOTIC_SOC, 24) // 1 wafer = 8 chip = 16 circuit
+                    .input(EXOTIC_SOC, 24) // 1 wafer = 8 chip = 16 circuit
+                    .input(stickLong, Infinity, 8) // (32 * 16 = 8 * 64) / 2 / 4
+                    .input(stickLong, Infinity, 8) // (32 * 16 = 8 * 64) / 2 / 4
+                    .input(wireGtHex, PedotTMA, 2) // (16 * 16 = 4 * 64 wire = 8 * 64 fine wire) / 2
+                    .fluidInputs(new FluidStack[]{stack})
+                    .output(SPINTRONIC_PROCESSOR, 128)
+                    .EUt(VA[UIV]).CWUt(CWT[UIV])
+                    .duration(800)
+                    .buildAndRegister();
         }
 
         for (FluidStack stack : new FluidStack[] {
@@ -755,7 +897,7 @@ public class LargeCircuitAssemblyLine {
             //  UEV Spintronic Assembly
             LARGE_CIRCUIT_ASSEMBLY_LINE_RECIPES.recipeBuilder()
                     .notConsumable(SPINTRONIC_ASSEMBLY)
-                    .input(WRAP_SPINTRONIC_CIRCUIT_BOARD, 1) // (4 * 16) / 2
+                    .input(WRAP_SPINTRONIC_CIRCUIT_BOARD, 2) // (4 * 16) / 2
                     .input(WRAP_CIRCUIT_UHV, 2) // (8 * 16) / 2
                     .input(WRAP_SPINTRONIC_SMD_INDUCTOR, 6) // (24 * 16 = 6 * 64) / 2
                     .input(WRAP_SPINTRONIC_SMD_CAPACITOR, 12) // (48 * 16  = 12 * 64) / 2
@@ -794,6 +936,7 @@ public class LargeCircuitAssemblyLine {
                     .buildAndRegister();
 
             //  UEV Cosmic Processor SoC recipe (todo)
+
         }
 
         for (FluidStack stack : new FluidStack[] {
@@ -872,7 +1015,7 @@ public class LargeCircuitAssemblyLine {
 
         //  Basic Circuit Board
         PACKER_RECIPES.recipeBuilder()
-                .input(BASIC_CIRCUIT_BOARD, 8)
+                .input(BASIC_CIRCUIT_BOARD, 16)
                 .circuitMeta(16)
                 .output(WRAP_BASIC_CIRCUIT_BOARD)
                 .EUt(VA[ULV])
@@ -881,7 +1024,7 @@ public class LargeCircuitAssemblyLine {
 
         //  Good Circuit Board
         PACKER_RECIPES.recipeBuilder()
-                .input(GOOD_CIRCUIT_BOARD, 8)
+                .input(GOOD_CIRCUIT_BOARD, 16)
                 .circuitMeta(16)
                 .output(WRAP_GOOD_CIRCUIT_BOARD)
                 .EUt(VA[ULV])
@@ -890,7 +1033,7 @@ public class LargeCircuitAssemblyLine {
 
         //  Plastic Circuit Board
         PACKER_RECIPES.recipeBuilder()
-                .input(PLASTIC_CIRCUIT_BOARD, 8)
+                .input(PLASTIC_CIRCUIT_BOARD, 16)
                 .circuitMeta(16)
                 .output(WRAP_PLASTIC_CIRCUIT_BOARD)
                 .EUt(VA[ULV])
@@ -899,7 +1042,7 @@ public class LargeCircuitAssemblyLine {
 
         //  Advanced Circuit Board
         PACKER_RECIPES.recipeBuilder()
-                .input(ADVANCED_CIRCUIT_BOARD, 8)
+                .input(ADVANCED_CIRCUIT_BOARD, 16)
                 .circuitMeta(16)
                 .output(WRAP_ADVANCED_CIRCUIT_BOARD)
                 .EUt(VA[ULV])
@@ -908,7 +1051,7 @@ public class LargeCircuitAssemblyLine {
 
         //  Extreme Circuit Board
         PACKER_RECIPES.recipeBuilder()
-                .input(EXTREME_CIRCUIT_BOARD, 8)
+                .input(EXTREME_CIRCUIT_BOARD, 16)
                 .circuitMeta(16)
                 .output(WRAP_EXTREME_CIRCUIT_BOARD)
                 .EUt(VA[ULV])
@@ -917,7 +1060,7 @@ public class LargeCircuitAssemblyLine {
 
         //  Elite Circuit Board
         PACKER_RECIPES.recipeBuilder()
-                .input(ELITE_CIRCUIT_BOARD, 8)
+                .input(ELITE_CIRCUIT_BOARD, 16)
                 .circuitMeta(16)
                 .output(WRAP_ELITE_CIRCUIT_BOARD)
                 .EUt(VA[ULV])
@@ -926,7 +1069,7 @@ public class LargeCircuitAssemblyLine {
 
         //  Wetware Circuit Board
         PACKER_RECIPES.recipeBuilder()
-                .input(WETWARE_CIRCUIT_BOARD, 8)
+                .input(WETWARE_CIRCUIT_BOARD, 16)
                 .circuitMeta(16)
                 .output(WRAP_WETWARE_CIRCUIT_BOARD)
                 .EUt(VA[ULV])
@@ -935,7 +1078,7 @@ public class LargeCircuitAssemblyLine {
 
         //  Gooware Circuit Board
         PACKER_RECIPES.recipeBuilder()
-                .input(GOOWARE_CIRCUIT_BOARD, 8)
+                .input(GOOWARE_CIRCUIT_BOARD, 16)
                 .circuitMeta(16)
                 .output(WRAP_GOOWARE_CIRCUIT_BOARD)
                 .EUt(VA[ULV])
@@ -944,7 +1087,7 @@ public class LargeCircuitAssemblyLine {
 
         //  Optical Circuit Board
         PACKER_RECIPES.recipeBuilder()
-                .input(OPTICAL_CIRCUIT_BOARD, 8)
+                .input(OPTICAL_CIRCUIT_BOARD, 16)
                 .circuitMeta(16)
                 .output(WRAP_OPTICAL_CIRCUIT_BOARD)
                 .EUt(VA[ULV])
@@ -953,7 +1096,7 @@ public class LargeCircuitAssemblyLine {
 
         //  Spintronic Circuit Board
         PACKER_RECIPES.recipeBuilder()
-                .input(SPINTRONIC_CIRCUIT_BOARD, 8)
+                .input(SPINTRONIC_CIRCUIT_BOARD, 16)
                 .circuitMeta(16)
                 .output(WRAP_SPINTRONIC_CIRCUIT_BOARD)
                 .EUt(VA[ULV])
@@ -965,7 +1108,7 @@ public class LargeCircuitAssemblyLine {
 
         //  SMD Transistor
         PACKER_RECIPES.recipeBuilder()
-                .input(SMD_TRANSISTOR, 8)
+                .input(SMD_TRANSISTOR, 16)
                 .circuitMeta(16)
                 .output(WRAP_SMD_TRANSISTOR)
                 .EUt(VA[ULV])
@@ -974,7 +1117,7 @@ public class LargeCircuitAssemblyLine {
 
         //  Advanced SMD Transistor
         PACKER_RECIPES.recipeBuilder()
-                .input(ADVANCED_SMD_TRANSISTOR, 8)
+                .input(ADVANCED_SMD_TRANSISTOR, 16)
                 .circuitMeta(16)
                 .output(WRAP_ADVANCED_SMD_TRANSISTOR)
                 .EUt(VA[ULV])
@@ -983,7 +1126,7 @@ public class LargeCircuitAssemblyLine {
 
         //  Optical Transistor
         PACKER_RECIPES.recipeBuilder()
-                .input(OPTICAL_TRANSISTOR, 8)
+                .input(OPTICAL_TRANSISTOR, 16)
                 .circuitMeta(16)
                 .output(WRAP_OPTICAL_SMD_TRANSISTOR)
                 .EUt(VA[ULV])
@@ -992,7 +1135,7 @@ public class LargeCircuitAssemblyLine {
 
         //  Spintronic Transistor
         PACKER_RECIPES.recipeBuilder()
-                .input(SPINTRONIC_TRANSISTOR, 8)
+                .input(SPINTRONIC_TRANSISTOR, 16)
                 .circuitMeta(16)
                 .output(WRAP_SPINTRONIC_SMD_TRANSISTOR)
                 .EUt(VA[ULV])
@@ -1001,7 +1144,7 @@ public class LargeCircuitAssemblyLine {
 
         //  Cosmic Transistor
         PACKER_RECIPES.recipeBuilder()
-                .input(COSMIC_TRANSISTOR, 8)
+                .input(COSMIC_TRANSISTOR, 16)
                 .circuitMeta(16)
                 .output(WRAP_COSMIC_SMD_TRANSISTOR)
                 .EUt(VA[ULV])
@@ -1010,7 +1153,7 @@ public class LargeCircuitAssemblyLine {
 
         //  Supracausal Transistor
         PACKER_RECIPES.recipeBuilder()
-                .input(SUPRACAUSAL_TRANSISTOR, 8)
+                .input(SUPRACAUSAL_TRANSISTOR, 16)
                 .circuitMeta(16)
                 .output(WRAP_SUPRACAUSAL_SMD_TRANSISTOR)
                 .EUt(VA[ULV])
@@ -1019,7 +1162,7 @@ public class LargeCircuitAssemblyLine {
 
         //  SMD Resistor
         PACKER_RECIPES.recipeBuilder()
-                .input(SMD_RESISTOR, 8)
+                .input(SMD_RESISTOR, 16)
                 .circuitMeta(16)
                 .output(WRAP_SMD_RESISTOR)
                 .EUt(VA[ULV])
@@ -1028,7 +1171,7 @@ public class LargeCircuitAssemblyLine {
 
         //  Advanced SMD Resistor
         PACKER_RECIPES.recipeBuilder()
-                .input(ADVANCED_SMD_RESISTOR, 8)
+                .input(ADVANCED_SMD_RESISTOR, 16)
                 .circuitMeta(16)
                 .output(WRAP_ADVANCED_SMD_RESISTOR)
                 .EUt(VA[ULV])
@@ -1037,7 +1180,7 @@ public class LargeCircuitAssemblyLine {
 
         //  Optical Resistor
         PACKER_RECIPES.recipeBuilder()
-                .input(OPTICAL_RESISTOR, 8)
+                .input(OPTICAL_RESISTOR, 16)
                 .circuitMeta(16)
                 .output(WRAP_OPTICAL_SMD_RESISTOR)
                 .EUt(VA[ULV])
@@ -1046,7 +1189,7 @@ public class LargeCircuitAssemblyLine {
 
         //  Spintronic Resistor
         PACKER_RECIPES.recipeBuilder()
-                .input(SPINTRONIC_RESISTOR, 8)
+                .input(SPINTRONIC_RESISTOR, 16)
                 .circuitMeta(16)
                 .output(WRAP_SPINTRONIC_SMD_RESISTOR)
                 .EUt(VA[ULV])
@@ -1055,7 +1198,7 @@ public class LargeCircuitAssemblyLine {
 
         //  Cosmic Resistor
         PACKER_RECIPES.recipeBuilder()
-                .input(COSMIC_RESISTOR, 8)
+                .input(COSMIC_RESISTOR, 16)
                 .circuitMeta(16)
                 .output(WRAP_COSMIC_SMD_RESISTOR)
                 .EUt(VA[ULV])
@@ -1064,7 +1207,7 @@ public class LargeCircuitAssemblyLine {
 
         //  Supracausal Resistor
         PACKER_RECIPES.recipeBuilder()
-                .input(SUPRACAUSAL_RESISTOR, 8)
+                .input(SUPRACAUSAL_RESISTOR, 16)
                 .circuitMeta(16)
                 .output(WRAP_SUPRACAUSAL_SMD_RESISTOR)
                 .EUt(VA[ULV])
@@ -1073,7 +1216,7 @@ public class LargeCircuitAssemblyLine {
 
         //  SMD Capacitor
         PACKER_RECIPES.recipeBuilder()
-                .input(SMD_CAPACITOR, 8)
+                .input(SMD_CAPACITOR, 16)
                 .circuitMeta(16)
                 .output(WRAP_SMD_CAPACITOR)
                 .EUt(VA[ULV])
@@ -1082,7 +1225,7 @@ public class LargeCircuitAssemblyLine {
 
         //  Advanced SMD Capacitor
         PACKER_RECIPES.recipeBuilder()
-                .input(ADVANCED_SMD_CAPACITOR, 8)
+                .input(ADVANCED_SMD_CAPACITOR, 16)
                 .circuitMeta(16)
                 .output(WRAP_ADVANCED_SMD_CAPACITOR)
                 .EUt(VA[ULV])
@@ -1091,7 +1234,7 @@ public class LargeCircuitAssemblyLine {
 
         //  Optical Capacitor
         PACKER_RECIPES.recipeBuilder()
-                .input(OPTICAL_CAPACITOR, 8)
+                .input(OPTICAL_CAPACITOR, 16)
                 .circuitMeta(16)
                 .output(WRAP_OPTICAL_SMD_CAPACITOR)
                 .EUt(VA[ULV])
@@ -1100,7 +1243,7 @@ public class LargeCircuitAssemblyLine {
 
         //  Spintronic Capacitor
         PACKER_RECIPES.recipeBuilder()
-                .input(SPINTRONIC_CAPACITOR, 8)
+                .input(SPINTRONIC_CAPACITOR, 16)
                 .circuitMeta(16)
                 .output(WRAP_SPINTRONIC_SMD_CAPACITOR)
                 .EUt(VA[ULV])
@@ -1109,7 +1252,7 @@ public class LargeCircuitAssemblyLine {
 
         //  Cosmic Capacitor
         PACKER_RECIPES.recipeBuilder()
-                .input(COSMIC_CAPACITOR, 8)
+                .input(COSMIC_CAPACITOR, 16)
                 .circuitMeta(16)
                 .output(WRAP_COSMIC_SMD_CAPACITOR)
                 .EUt(VA[ULV])
@@ -1118,7 +1261,7 @@ public class LargeCircuitAssemblyLine {
 
         //  Supracausal Capacitor
         PACKER_RECIPES.recipeBuilder()
-                .input(SUPRACAUSAL_CAPACITOR, 8)
+                .input(SUPRACAUSAL_CAPACITOR, 16)
                 .circuitMeta(16)
                 .output(WRAP_SUPRACAUSAL_SMD_CAPACITOR)
                 .EUt(VA[ULV])
@@ -1127,7 +1270,7 @@ public class LargeCircuitAssemblyLine {
 
         //  SMD Diode
         PACKER_RECIPES.recipeBuilder()
-                .input(SMD_DIODE, 8)
+                .input(SMD_DIODE, 16)
                 .circuitMeta(16)
                 .output(WRAP_SMD_DIODE)
                 .EUt(VA[ULV])
@@ -1136,7 +1279,7 @@ public class LargeCircuitAssemblyLine {
 
         //  Advanced SMD Diode
         PACKER_RECIPES.recipeBuilder()
-                .input(ADVANCED_SMD_DIODE, 8)
+                .input(ADVANCED_SMD_DIODE, 16)
                 .circuitMeta(16)
                 .output(WRAP_ADVANCED_SMD_DIODE)
                 .EUt(VA[ULV])
@@ -1145,7 +1288,7 @@ public class LargeCircuitAssemblyLine {
 
         //  Optical Diode
         PACKER_RECIPES.recipeBuilder()
-                .input(OPTICAL_DIODE, 8)
+                .input(OPTICAL_DIODE, 16)
                 .circuitMeta(16)
                 .output(WRAP_OPTICAL_SMD_DIODE)
                 .EUt(VA[ULV])
@@ -1154,7 +1297,7 @@ public class LargeCircuitAssemblyLine {
 
         //  Spintronic Diode
         PACKER_RECIPES.recipeBuilder()
-                .input(SPINTRONIC_DIODE, 8)
+                .input(SPINTRONIC_DIODE, 16)
                 .circuitMeta(16)
                 .output(WRAP_SPINTRONIC_SMD_DIODE)
                 .EUt(VA[ULV])
@@ -1163,7 +1306,7 @@ public class LargeCircuitAssemblyLine {
 
         //  Cosmic Diode
         PACKER_RECIPES.recipeBuilder()
-                .input(COSMIC_DIODE, 8)
+                .input(COSMIC_DIODE, 16)
                 .circuitMeta(16)
                 .output(WRAP_COSMIC_SMD_DIODE)
                 .EUt(VA[ULV])
@@ -1172,7 +1315,7 @@ public class LargeCircuitAssemblyLine {
 
         //  Supracausal Diode
         PACKER_RECIPES.recipeBuilder()
-                .input(SUPRACAUSAL_DIODE, 8)
+                .input(SUPRACAUSAL_DIODE, 16)
                 .circuitMeta(16)
                 .output(WRAP_SUPRACAUSAL_SMD_DIODE)
                 .EUt(VA[ULV])
@@ -1181,7 +1324,7 @@ public class LargeCircuitAssemblyLine {
 
         //  SMD Inductor
         PACKER_RECIPES.recipeBuilder()
-                .input(SMD_INDUCTOR, 8)
+                .input(SMD_INDUCTOR, 16)
                 .circuitMeta(16)
                 .output(WRAP_SMD_INDUCTOR)
                 .EUt(VA[ULV])
@@ -1190,7 +1333,7 @@ public class LargeCircuitAssemblyLine {
 
         //  Advanced SMD Inductor
         PACKER_RECIPES.recipeBuilder()
-                .input(ADVANCED_SMD_INDUCTOR, 8)
+                .input(ADVANCED_SMD_INDUCTOR, 16)
                 .circuitMeta(16)
                 .output(WRAP_ADVANCED_SMD_INDUCTOR)
                 .EUt(VA[ULV])
@@ -1199,7 +1342,7 @@ public class LargeCircuitAssemblyLine {
 
         //  Optical Inductor
         PACKER_RECIPES.recipeBuilder()
-                .input(OPTICAL_INDUCTOR, 8)
+                .input(OPTICAL_INDUCTOR, 16)
                 .circuitMeta(16)
                 .output(WRAP_OPTICAL_SMD_INDUCTOR)
                 .EUt(VA[ULV])
@@ -1208,7 +1351,7 @@ public class LargeCircuitAssemblyLine {
 
         //  Spintronic Inductor
         PACKER_RECIPES.recipeBuilder()
-                .input(SPINTRONIC_INDUCTOR, 8)
+                .input(SPINTRONIC_INDUCTOR, 16)
                 .circuitMeta(16)
                 .output(WRAP_SPINTRONIC_SMD_INDUCTOR)
                 .EUt(VA[ULV])
@@ -1217,7 +1360,7 @@ public class LargeCircuitAssemblyLine {
 
         //  Cosmic Inductor
         PACKER_RECIPES.recipeBuilder()
-                .input(COSMIC_INDUCTOR, 8)
+                .input(COSMIC_INDUCTOR, 16)
                 .circuitMeta(16)
                 .output(WRAP_COSMIC_SMD_INDUCTOR)
                 .EUt(VA[ULV])
@@ -1226,7 +1369,7 @@ public class LargeCircuitAssemblyLine {
 
         //  Supracausal Inductor
         PACKER_RECIPES.recipeBuilder()
-                .input(SUPRACAUSAL_INDUCTOR, 8)
+                .input(SUPRACAUSAL_INDUCTOR, 16)
                 .circuitMeta(16)
                 .output(WRAP_SUPRACAUSAL_SMD_INDUCTOR)
                 .EUt(VA[ULV])
