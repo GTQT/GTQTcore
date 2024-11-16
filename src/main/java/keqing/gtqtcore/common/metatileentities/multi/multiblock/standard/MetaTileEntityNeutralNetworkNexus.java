@@ -19,11 +19,13 @@ import gregtech.client.utils.TooltipHelper;
 import gregtech.common.blocks.BlockMultiblockCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.MetaTileEntities;
+import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.recipes.properties.SwarmTierProperty;
 import keqing.gtqtcore.api.unification.GTQTMaterials;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
+import keqing.gtqtcore.loaders.recipes.GTQTRecipes;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.init.Blocks;
@@ -50,10 +52,7 @@ public class MetaTileEntityNeutralNetworkNexus extends MultiMapMultiblockControl
 
     public MetaTileEntityNeutralNetworkNexus(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{
-                RecipeMaps.BLAST_RECIPES});
-                //GTLiteRecipeMaps.NEUTRAL_NETWORK_NEXUS_ASSEMBLING_MODE,
-                //GTLiteRecipeMaps.NEUTRAL_NETWORK_NEXUS_BREEDING_MODE,
-                //GTLiteRecipeMaps.NEUTRAL_NETWORK_NEXUS_HYBRIDIZING_MODE});
+                GTQTcoreRecipeMaps.NEUTRAL_NETWORK_NEXUS_BREEDING_MODE});
         this.recipeMapWorkable = new MultiblockRecipeLogic(this, true);
     }
 

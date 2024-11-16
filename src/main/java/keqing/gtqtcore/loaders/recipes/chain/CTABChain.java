@@ -38,7 +38,7 @@ public class CTABChain {
 
         BIOLOGICAL_REACTION_RECIPES.recipeBuilder()
                 .fluidInputs(DNAa.getFluid(400))
-                .fluidInputs(AmmoniumChloride.getFluid(500))
+                .fluidInputs(AmmoniumChloride.getFluid(144))
                 .fluidOutputs(DNAb.getFluid(400))
                 .rate(60)
                 .duration(400).EUt(VA[HV]).buildAndRegister();

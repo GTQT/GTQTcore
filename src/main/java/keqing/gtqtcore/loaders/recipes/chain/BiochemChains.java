@@ -67,7 +67,7 @@ public class BiochemChains {
                 .fluidInputs(Ammonia.getFluid(1000))
                 .fluidInputs(CarbonDioxide.getFluid(1000))
                 .fluidInputs(Water.getFluid(1000))
-                .fluidOutputs(AmmoniumChloride.getFluid(1000))
+                .fluidOutputs(AmmoniumChloride.getFluid(144))
                 .output(dust,SodiumBicarbonate,1)
                 .buildAndRegister();
 
@@ -86,7 +86,7 @@ public class BiochemChains {
                 .fluidInputs(Ammonia.getFluid(40000))
                 .fluidInputs(CarbonDioxide.getFluid(40000))
                 .fluidInputs(Water.getFluid(40000))
-                .fluidOutputs(AmmoniumChloride.getFluid(40000))
+                .fluidOutputs(AmmoniumChloride.getFluid(40*144))
                 .output(dust,SodiumBicarbonate,40)
                 .buildAndRegister();
 
@@ -97,7 +97,7 @@ public class BiochemChains {
                 .fluidInputs(Ammonia.getFluid(40000))
                 .fluidInputs(CarbonDioxide.getFluid(40000))
                 .fluidInputs(Water.getFluid(40000))
-                .fluidOutputs(AmmoniumChloride.getFluid(40000))
+                .fluidOutputs(AmmoniumChloride.getFluid(40*144))
                 .output(dust,SodiumBicarbonate,40)
                 .circuitMeta(3)
                 .buildAndRegister();

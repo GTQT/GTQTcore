@@ -113,6 +113,13 @@ public class BoronNitrideChain {
                 .EUt(VA[IV])
                 .duration(20 * SECOND)
                 .buildAndRegister();
+
+        AUTOCLAVE_RECIPES.recipeBuilder()
+                .fluidInputs(AmmoniumChloride.getFluid(144))
+                .output(dust,AmmoniumChloride)
+                .EUt(VA[LV])
+                .duration(5 * SECOND)
+                .buildAndRegister();
     }
 
     private static void BoronNitrideProcess() {

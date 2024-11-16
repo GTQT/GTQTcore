@@ -86,7 +86,7 @@ public class HexanitrohexaaxaisowurtzitaneChain {
                 .fluidInputs(HydrochloricAcid.getFluid(2000))
                 .fluidInputs(Water.getFluid(6000))
                 .fluidOutputs(Benzylamine.getFluid(1000))
-                .fluidOutputs(AmmoniumChloride.getFluid(3000))
+                .fluidOutputs(AmmoniumChloride.getFluid(3*144))
                 .fluidOutputs(Formaldehyde.getFluid(6000))
                 .EUt(VA[IV])
                 .duration(200)

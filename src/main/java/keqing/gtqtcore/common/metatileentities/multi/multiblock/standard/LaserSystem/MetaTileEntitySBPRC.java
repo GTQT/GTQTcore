@@ -74,10 +74,10 @@ public class MetaTileEntitySBPRC extends MetaTileEntityBaseWithControl implement
     int z;
     int switchInput;
     int switchOutput;
-    int[] weightOutput = new int[32];
-    int[][] input = new int[64][5];
-    int[][] output = new int[64][5];
-    int maxLength = 8;
+    int[] weightOutput = new int[64];
+    int[][] input = new int[128][5];
+    int[][] output = new int[128][5];
+    int maxLength = 16;
     //0位 状态   1 2 3位置坐标 4位 数值
     int inputAmount;
     int outputAmount;
@@ -639,7 +639,7 @@ public class MetaTileEntitySBPRC extends MetaTileEntityBaseWithControl implement
         tooltip.add(I18n.format("如何高效的传输激光？答：在天上放置一面镜子"));
         tooltip.add(I18n.format("将激光终端绑定至本多方块即可自动进行管理"));
         tooltip.add(I18n.format("默认对所有输出IO进行权重均为1的输出"));
-        tooltip.add(I18n.format("最多同时管理64+64台设备"));
+        tooltip.add(I18n.format("最多同时管理128+128台设备"));
     }
 
     private static IBlockState getCasingState() {

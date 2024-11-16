@@ -140,7 +140,7 @@ public class GCYSSecondDegreeMaterials {
                 .gem()
                 .color(0xD99DE4)
                 .iconSet(MaterialIconSet.GEM_VERTICAL)
-                .flags(CRYSTALLIZABLE, DECOMPOSITION_BY_CENTRIFUGING)
+                .flags(CRYSTALLIZABLE, DECOMPOSITION_BY_CENTRIFUGING,GENERATE_LENS)
                 .components(YttriumOxide, 2, NeodymiumOxide, 1, Alumina, 5)
                 .build()
                 .setFormula("NdY2Al5O12", true);

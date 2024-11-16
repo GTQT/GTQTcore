@@ -38,6 +38,7 @@ public class GTQTRecipesManager {
         CrystalRaw.init();
         BacteriaCulturesChain.init();
         FusionLoader.init();
+        NeutralNetworkNexus.init();
         FuckGCYM.init();
         BoronChain.init();
         EnzymesRecipes.init();
@@ -139,6 +140,7 @@ public class GTQTRecipesManager {
         PlatinumDeal.init();
         DecompositionRecipeHandler.runRecipeGeneration();
         SwarmRecipeHandler.runRecipeGeneration();
+        SwarmRecipeHandler.runRecipeBreeding();
         CircuitryMaterialChains.init();
         MetaTileEntityLoader.init();
         MetaTileEntityMachine.init();

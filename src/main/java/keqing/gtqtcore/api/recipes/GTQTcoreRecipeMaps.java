@@ -24,6 +24,15 @@ import static gregtech.api.recipes.RecipeMaps.REPLICATOR_RECIPES;
 //怎么写请看
 //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/api/recipe/GSRecipeMaps.java
 public class GTQTcoreRecipeMaps {
+    public static final RecipeMap<SwarmTierRecipeBuilder> NEUTRAL_NETWORK_NEXUS_BREEDING_MODE = new RecipeMap<>("neutral_network_nexus_breeding_mode", 6, 1, 3, 0, new SwarmTierRecipeBuilder(), false)
+            .setSlotOverlay(false, false, false, GuiTextures.CIRCUIT_OVERLAY)
+            .setSlotOverlay(false, false, true, GuiTextures.CIRCUIT_OVERLAY)
+            .setSlotOverlay(false, true, false, GuiTextures.MOLECULAR_OVERLAY_3)
+            .setSlotOverlay(false, true, true, GuiTextures.MOLECULAR_OVERLAY_4)
+            .setSlotOverlay(true, false, true, GuiTextures.EXTRACTOR_OVERLAY)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_CIRCUIT, ProgressWidget.MoveType.HORIZONTAL)
+            .setSound(GTSoundEvents.ASSEMBLER);
+
     public static final RecipeMap<PrimitiveRecipeBuilder> PRIMITIVE_ROASTING_RECIPES = new RecipeMap<>("primitive_roaster", 3, 3,  1, 1, new PrimitiveRecipeBuilder(), false)
             .setSlotOverlay(false, false, GuiTextures.FURNACE_OVERLAY_1)
             .setSlotOverlay(true, false, GuiTextures.OUT_SLOT_OVERLAY)

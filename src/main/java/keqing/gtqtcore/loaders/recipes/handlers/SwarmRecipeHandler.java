@@ -1,9 +1,11 @@
 package keqing.gtqtcore.loaders.recipes.handlers;
 
 import gregtech.api.GregTechAPI;
+import gregtech.api.items.metaitem.MetaItem;
 import gregtech.api.recipes.RecipeBuilder;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Material;
+import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.material.properties.PropertyKey;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.MaterialStack;
@@ -13,15 +15,17 @@ import net.minecraftforge.fluids.FluidStack;
 import java.util.ArrayList;
 import java.util.List;
 
-import static gregtech.api.GTValues.LV;
-import static gregtech.api.GTValues.VA;
-import static gregtech.api.unification.material.Materials.Copper;
-import static gregtech.api.unification.material.Materials.Zinc;
+import static gregtech.api.GTValues.*;
+import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.info.MaterialFlags.*;
-import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.ELECTROBATH;
-import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.SWARM_GROWTH;
-import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.electrode;
-import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.swarm;
+import static gregtech.api.unification.ore.OrePrefix.*;
+import static gregtech.common.items.MetaItems.*;
+import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
+import static keqing.gtqtcore.api.unification.GCYSMaterials.CarbonNanotube;
+import static keqing.gtqtcore.api.unification.GCYSMaterials.NdYAG;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
+import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.*;
+import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.nanosensor;
 
 public class SwarmRecipeHandler {
 
@@ -32,6 +36,114 @@ public class SwarmRecipeHandler {
             if(i>30)i=1;
             OrePrefix prefix = material.hasProperty(PropertyKey.INGOT)||material.hasProperty(PropertyKey.FLUID) ? swarm : null;
             processDecomposition(prefix, material,i);
+        }
+    }
+    public static void runRecipeBreeding() {
+        for (Material material : GregTechAPI.materialManager.getRegisteredMaterials()) {
+            processBreeding(material);
+        }
+    }
+    public static Material []lenListCommon={
+            Diamond,Glass,Sapphire,Ruby,Emerald
+    };
+    public static Material []lenListAdvance={
+            NetherStar,Prasiolite,LeadZirconateTitanate
+    };
+    public static Material []lenListElite={
+            LuTmYVO,Celestite,PrHoYLF,CeLAG,NdYAG
+    };
+    static int eliteIndex = 0;
+    static int advanceIndex = 0;
+    static int commonIndex = 0;
+    private static void processBreeding(Material material) {
+        if (!material.isElement())
+            return;
+
+        if(material.hasProperty(PropertyKey.INGOT))
+        {
+            if (material.getBlastTemperature() >= 6000) {
+                NEUTRAL_NETWORK_NEXUS_BREEDING_MODE.recipeBuilder()
+                        .notConsumable(lens, lenListElite[eliteIndex % lenListElite.length])
+                        .input(block, material, 64)
+                        .input(HIGHLY_ADVANCED_SOC, 8)
+                        .input(dust, CarbonNanotube, 32)
+                        .fluidInputs(UUMatter.getFluid(16000))
+                        .output(swarm, material)
+                        .EUt(VA[UV])
+                        .duration(material.getBlastTemperature()/2)
+                        .tier(3)
+                        .buildAndRegister();
+                eliteIndex++;
+            } else if (material.getBlastTemperature() >= 3000) {
+                NEUTRAL_NETWORK_NEXUS_BREEDING_MODE.recipeBuilder()
+                        .notConsumable(lens, lenListAdvance[advanceIndex % lenListAdvance.length])
+                        .input(block, material, 64)
+                        .input(ADVANCED_SYSTEM_ON_CHIP, 8)
+                        .input(stickLong, CarbonNanotube, 16)
+                        .fluidInputs(UUMatter.getFluid(8000))
+                        .output(swarm, material)
+                        .EUt(VA[ZPM])
+                        .duration((int) (material.getBlastTemperature()/1.5))
+                        .tier(2)
+                        .buildAndRegister();
+                advanceIndex++;
+            } else {
+                NEUTRAL_NETWORK_NEXUS_BREEDING_MODE.recipeBuilder()
+                        .notConsumable(lens, lenListCommon[commonIndex % lenListCommon.length])
+                        .input(block, material, 64)
+                        .input(SYSTEM_ON_CHIP, 8)
+                        .input(stickLong, CarbonNanotube, 4)
+                        .fluidInputs(UUMatter.getFluid(4000))
+                        .output(swarm, material)
+                        .EUt(VA[LuV])
+                        .duration(1000)
+                        .tier(1)
+                        .buildAndRegister();
+                commonIndex++;
+            }
+        }
+        else if(material.hasProperty(PropertyKey.FLUID))
+        {
+            if (material.getBlastTemperature() >= 6000) {
+                NEUTRAL_NETWORK_NEXUS_BREEDING_MODE.recipeBuilder()
+                        .notConsumable(lens, lenListElite[eliteIndex % lenListElite.length])
+                        .input(HIGHLY_ADVANCED_SOC, 8)
+                        .input(stickLong, CarbonNanotube, 32)
+                        .fluidInputs(material.getFluid(64*9*144))
+                        .fluidInputs(UUMatter.getFluid(16000))
+                        .output(swarm, material)
+                        .EUt(VA[UV])
+                        .duration(material.getBlastTemperature()/2)
+                        .tier(3)
+                        .buildAndRegister();
+                eliteIndex++;
+            } else if (material.getBlastTemperature() >= 3000) {
+                NEUTRAL_NETWORK_NEXUS_BREEDING_MODE.recipeBuilder()
+                        .notConsumable(lens, lenListAdvance[advanceIndex % lenListAdvance.length])
+                        .input(ADVANCED_SYSTEM_ON_CHIP, 8)
+                        .input(stickLong, CarbonNanotube, 16)
+                        .fluidInputs(material.getFluid(64*9*144))
+                        .fluidInputs(UUMatter.getFluid(8000))
+                        .output(swarm, material)
+                        .EUt(VA[ZPM])
+                        .duration((int) (material.getBlastTemperature()/1.5))
+                        .tier(2)
+                        .buildAndRegister();
+                advanceIndex++;
+            } else {
+                NEUTRAL_NETWORK_NEXUS_BREEDING_MODE.recipeBuilder()
+                        .notConsumable(lens, lenListCommon[commonIndex % lenListCommon.length])
+                        .input(SYSTEM_ON_CHIP, 8)
+                        .input(stickLong, CarbonNanotube, 4)
+                        .fluidInputs(material.getFluid(64*9*144))
+                        .fluidInputs(UUMatter.getFluid(4000))
+                        .output(swarm, material)
+                        .EUt(VA[LuV])
+                        .duration(1000)
+                        .tier(1)
+                        .buildAndRegister();
+                commonIndex++;
+            }
         }
     }
 

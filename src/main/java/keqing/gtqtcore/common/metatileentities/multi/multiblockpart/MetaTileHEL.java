@@ -62,7 +62,7 @@ public class MetaTileHEL extends MetaTileEntityMultiblockNotifiablePart implemen
     public MetaTileHEL(ResourceLocation metaTileEntityId, int tier, boolean isExportHatch) {
         super(metaTileEntityId, tier, isExportHatch);
         this.tier = tier;
-        this.MaxLaser = V[tier] * 4;
+        this.MaxLaser = V[tier] * 16;
         this.initializeInventory();
     }
 
@@ -151,7 +151,7 @@ public class MetaTileHEL extends MetaTileEntityMultiblockNotifiablePart implemen
         if (Voltage >= 14 || Voltage < 0) {
             Voltage = 0;
         }
-        if (Amperage > 4 || Amperage < 0) {
+        if (Amperage > 16 || Amperage < 0) {
             Amperage = 0;
         }
 
@@ -270,14 +270,14 @@ public class MetaTileHEL extends MetaTileEntityMultiblockNotifiablePart implemen
             }
         }).setMaxLength(10).setNumbersOnly(0, 4));
         builder.widget(new ClickButtonWidget(149, 65, 20, 20, "+", data -> {
-            if (Amperage < 4) {
+            if (Amperage < 16) {
                 Amperage++;
             }
         }));
 
         builder.widget(new ClickButtonWidget(7, 90, 80, 20, "=MAX", data -> {
             Voltage = tier;
-            Amperage = 4;
+            Amperage = 16;
         }));
         builder.widget(new ClickButtonWidget(90, 90, 80, 20, "=0", data -> {
             Voltage = 0;
@@ -364,8 +364,8 @@ public class MetaTileHEL extends MetaTileEntityMultiblockNotifiablePart implemen
     @Override
     public void addAmperage(int i) {
         if (i > 0) {
-            if (Amperage + i <= 4) Amperage += i;
-            else Amperage = 4;
+            if (Amperage + i <= 16) Amperage += i;
+            else Amperage = 16;
         } else {
             if (Amperage + i >= 0) Amperage += i;
             else Amperage = 0;

@@ -63,7 +63,7 @@ public class RubbersChain {
         BURNER_REACTOR_RECIPES.recipeBuilder()
                 .input(dust, Carbon, 6)
                 .fluidInputs(PhosphorylChloride.getFluid(3000))
-                .fluidInputs(AmmoniumChloride.getFluid(3000))
+                .fluidInputs(AmmoniumChloride.getFluid(3*144))
                 .fluidOutputs(PhosphonitrilicChlorideTrimer.getFluid(1000))
                 .fluidOutputs(Steam.getFluid(3000))
                 .fluidOutputs(DilutedHydrochloricAcid.getFluid(6000))

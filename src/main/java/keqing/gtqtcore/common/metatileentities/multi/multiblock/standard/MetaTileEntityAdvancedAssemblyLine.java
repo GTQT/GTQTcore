@@ -130,7 +130,7 @@ public class MetaTileEntityAdvancedAssemblyLine extends RecipeMapMultiblockContr
     protected static TraceabilityPredicate fluidInputPredicate() {
         return ConfigHolder.machines.orderedFluidAssembly ? metaTileEntities((MetaTileEntity[])((List) MultiblockAbility.REGISTRY.get(MultiblockAbility.IMPORT_FLUIDS)).stream()
                 .filter((mte) -> !(mte instanceof MetaTileEntityMultiFluidHatch))
-                .toArray((x$0) -> new MetaTileEntity[x$0]))
+                .toArray(MetaTileEntity[]::new))
                 .setMaxGlobalLimited(4) : abilities(MultiblockAbility.IMPORT_FLUIDS);
     }
 
@@ -210,10 +210,8 @@ public class MetaTileEntityAdvancedAssemblyLine extends RecipeMapMultiblockContr
         super.onRemoval();
         if (this.getWorld().isRemote && this.beamParticles != null) {
             GTLaserBeamParticle[][] var1 = this.beamParticles;
-            int var2 = var1.length;
 
-            for (int var3 = 0; var3 < var2; ++var3) {
-                GTLaserBeamParticle[] particle = var1[var3];
+            for (GTLaserBeamParticle[] particle : var1) {
                 if (particle[0] != null) {
                     particle[0].setExpired();
                     particle[1].setExpired();
@@ -279,7 +277,7 @@ public class MetaTileEntityAdvancedAssemblyLine extends RecipeMapMultiblockContr
     }
 
     @Override
-    public boolean checkRecipe( Recipe recipe, boolean consumeIfSuccess) {
+    public boolean checkRecipe(Recipe recipe, boolean consumeIfSuccess) {
         if (consumeIfSuccess) {
             return true;
         } else {
@@ -332,7 +330,7 @@ public class MetaTileEntityAdvancedAssemblyLine extends RecipeMapMultiblockContr
     }
 
     private static boolean isRecipeAvailable( Iterable<? extends IDataAccessHatch> hatches,  Recipe recipe) {
-        Iterator var2 = hatches.iterator();
+        Iterator<? extends IDataAccessHatch> var2 = hatches.iterator();
 
         IDataAccessHatch hatch;
         do {
@@ -340,7 +338,7 @@ public class MetaTileEntityAdvancedAssemblyLine extends RecipeMapMultiblockContr
                 return false;
             }
 
-            hatch = (IDataAccessHatch)var2.next();
+            hatch = var2.next();
             if (hatch.isCreative()) {
                 return true;
             }

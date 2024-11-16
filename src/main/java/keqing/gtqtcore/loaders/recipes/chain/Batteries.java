@@ -29,7 +29,6 @@ public class Batteries {
         DRYER_RECIPES.recipeBuilder().duration(240).EUt(4000)
                 .input(dust, CobaltOxide, 4)
                 .fluidInputs(LithiumCarbonateSolution.getFluid(1000))
-                .notConsumable(Oxygen.getFluid(0))
                 .output(dust, LithiumCobaltOxide,6)
                 .fluidOutputs(CarbonMonoxide.getFluid(1000))
                 .buildAndRegister();
@@ -159,7 +158,7 @@ public class Batteries {
                 .fluidInputs(Ammonia.getFluid(30000))
                 .fluidInputs(Oxygen.getFluid(15000))
                 .output(dust,Halloysite,90)
-                .fluidOutputs(AmmoniumChloride.getFluid(30000))
+                .fluidOutputs(AmmoniumChloride.getFluid(30*144))
                 .circuitMeta(23)
                 .buildAndRegister();
 
