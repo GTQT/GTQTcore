@@ -6,6 +6,7 @@ import gregtech.api.gui.Widget;
 import gregtech.api.gui.resources.TextureArea;
 import gregtech.api.gui.widgets.ClickButtonWidget;
 import gregtech.api.gui.widgets.WidgetGroup;
+import gregtech.api.metatileentity.IDataInfoProvider;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
@@ -38,6 +39,7 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.IFluidTank;
 
 import javax.annotation.Nonnull;
 import java.util.Collections;

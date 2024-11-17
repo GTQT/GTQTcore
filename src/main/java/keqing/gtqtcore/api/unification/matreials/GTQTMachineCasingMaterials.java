@@ -153,7 +153,7 @@ public class GTQTMachineCasingMaterials {
                 .rotorStats(18.0f, 7.0f, 8000)
                 .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 60000, 6)
                         .attackSpeed(0.1F).enchantability(21).build())
-                .components(Plutonium244, 18, Cerium, 9, Gadolinium, 3, Dysprosium, 3, Thulium, 2, TungstenCarbide, 6, RedSteel, 6, Duranium, 2, Radon, 2)
+                .components(Plutonium241, 18, Cerium, 9, Gadolinium, 3, Dysprosium, 3, Thulium, 2, TungstenCarbide, 6, RedSteel, 6, Duranium, 2, Radon, 2)
                 .build();
         //  24512 Maraging Steel-250
         MaragingSteel250 = new Material.Builder(getMaterialsId(), gregtechId("maraging_steel_250"))

@@ -4,16 +4,17 @@ import gregtech.api.unification.material.MarkerMaterials;
 import gregtech.common.blocks.BlockMachineCasing;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
+import keqing.gtqtcore.common.block.blocks.GTQTNuclearFusion;
 import keqing.gtqtcore.common.block.blocks.GTQTPowerSupply;
 import keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing1;
 
 import static gregicality.multiblocks.api.unification.GCYMMaterials.Zeron100;
 import static gregtech.api.GTValues.*;
-import static gregtech.api.recipes.RecipeMaps.*;
+import static gregtech.api.recipes.RecipeMaps.ASSEMBLER_RECIPES;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.common.items.MetaItems.*;
-import static gregtech.common.metatileentities.MetaTileEntities.*;
+import static gregtech.common.metatileentities.MetaTileEntities.HULL;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.PRECISE_ASSEMBLER_RECIPES;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
@@ -24,15 +25,15 @@ public class PreciseAssemblerChain {
     public static void init() {
         MachineRecipes();//
         WorkStation();//工作站
-        Common();
+        NeutronActivator();
     }
 
-    private static void Common() {
+    private static void NeutronActivator() {
         PRECISE_ASSEMBLER_RECIPES.recipeBuilder()
-                .input(CIRCUIT_GOOD_I,2)
-                .input(circuit,MarkerMaterials.Tier.LuV,8)
-                .input(CHEMICAL_PLANT,2)
-                .input(PARTICLE_ACCELERATOR_IO[0],2)
+                .input(CIRCUIT_GOOD_I, 2)
+                .input(circuit, MarkerMaterials.Tier.LuV, 8)
+                .input(CHEMICAL_PLANT, 2)
+                .input(PARTICLE_ACCELERATOR_IO[0], 2)
                 .fluidInputs(SolderingAlloy.getFluid(L * 8))
                 .fluidInputs(Tin.getFluid(L * 8))
                 .fluidInputs(Polybenzimidazole.getFluid(L * 8))
@@ -44,18 +45,37 @@ public class PreciseAssemblerChain {
                 .CWUt(120)
                 .buildAndRegister();
 
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(HULL[5], 1)
+                .input(frameGt, TungstenSteel, 4)
+                .input(stick, RhodiumPlatedPalladium, 4)
+                .fluidInputs(Zylon.getFluid(576))
+                .outputs(GTQTMetaBlocks.NUCLEAR_FUSION.getItemVariant(GTQTNuclearFusion.CasingType.NEUTRON_ACTIVATOR_FRAME, 2))
+                .circuitMeta(10)
+                .duration(400).EUt(VA[IV]).buildAndRegister();
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(HULL[5], 1)
+                .input(plate, Iridium, 4)
+                .input(stick, RhodiumPlatedPalladium, 4)
+                .fluidInputs(Zylon.getFluid(576))
+                .outputs(GTQTMetaBlocks.NUCLEAR_FUSION.getItemVariant(GTQTNuclearFusion.CasingType.NEUTRON_ACTIVATOR_CASING, 2))
+                .circuitMeta(10)
+                .duration(400).EUt(VA[IV]).buildAndRegister();
+
+
     }
 
 
     private static void WorkStation() {
         ASSEMBLER_RECIPES.recipeBuilder()
                 .input(ELITE_CIRCUIT_BOARD)
-                .input(circuit,MarkerMaterials.Tier.IV,8)
-                .input(QUBIT_CENTRAL_PROCESSING_UNIT,4)
-                .input(POWER_INTEGRATED_CIRCUIT,8)
-                .input(screw,NanometerBariumTitanate,32)
-                .input(cableGtSingle,Platinum,8)
-                .input(rotor,TungstenSteel,8)
+                .input(circuit, MarkerMaterials.Tier.IV, 8)
+                .input(QUBIT_CENTRAL_PROCESSING_UNIT, 4)
+                .input(POWER_INTEGRATED_CIRCUIT, 8)
+                .input(screw, NanometerBariumTitanate, 32)
+                .input(cableGtSingle, Platinum, 8)
+                .input(rotor, TungstenSteel, 8)
                 .fluidInputs(Lead.getFluid(L * 8))
                 .output(CIRCUIT_GOOD_I)
                 .EUt(VA[IV])
@@ -63,10 +83,10 @@ public class PreciseAssemblerChain {
                 .buildAndRegister();
 
         PRECISE_ASSEMBLER_RECIPES.recipeBuilder()
-                .input(ELITE_CIRCUIT_BOARD,2)
-                .input(circuit,MarkerMaterials.Tier.IV,8)
-                .input(POWER_INTEGRATED_CIRCUIT,32)
-                .input(rotor,TungstenSteel,2)
+                .input(ELITE_CIRCUIT_BOARD, 2)
+                .input(circuit, MarkerMaterials.Tier.IV, 8)
+                .input(POWER_INTEGRATED_CIRCUIT, 32)
+                .input(rotor, TungstenSteel, 2)
                 .fluidInputs(SolderingAlloy.getFluid(L * 8))
                 .fluidInputs(Tin.getFluid(L * 8))
                 .fluidInputs(Polybenzimidazole.getFluid(L * 8))
@@ -79,10 +99,10 @@ public class PreciseAssemblerChain {
                 .buildAndRegister();
 
         PRECISE_ASSEMBLER_RECIPES.recipeBuilder()
-                .input(CIRCUIT_GOOD_I,2)
-                .input(circuit,MarkerMaterials.Tier.LuV,8)
-                .input(HIGH_POWER_INTEGRATED_CIRCUIT,32)
-                .input(rotor,RhodiumPlatedPalladium,2)
+                .input(CIRCUIT_GOOD_I, 2)
+                .input(circuit, MarkerMaterials.Tier.LuV, 8)
+                .input(HIGH_POWER_INTEGRATED_CIRCUIT, 32)
+                .input(rotor, RhodiumPlatedPalladium, 2)
                 .fluidInputs(SolderingAlloy.getFluid(L * 8))
                 .fluidInputs(Tin.getFluid(L * 8))
                 .fluidInputs(Polybenzimidazole.getFluid(L * 8))
@@ -95,10 +115,10 @@ public class PreciseAssemblerChain {
                 .buildAndRegister();
 
         PRECISE_ASSEMBLER_RECIPES.recipeBuilder()
-                .input(CIRCUIT_GOOD_II,2)
-                .input(circuit,MarkerMaterials.Tier.ZPM,8)
-                .input(ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT,32)
-                .input(rotor,NaquadahAlloy,2)
+                .input(CIRCUIT_GOOD_II, 2)
+                .input(circuit, MarkerMaterials.Tier.ZPM, 8)
+                .input(ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT, 32)
+                .input(rotor, NaquadahAlloy, 2)
                 .fluidInputs(SolderingAlloy.getFluid(L * 8))
                 .fluidInputs(Tin.getFluid(L * 8))
                 .fluidInputs(Zylon.getFluid(L * 8))
@@ -111,10 +131,10 @@ public class PreciseAssemblerChain {
                 .buildAndRegister();
 
         PRECISE_ASSEMBLER_RECIPES.recipeBuilder()
-                .input(CIRCUIT_GOOD_III,2)
-                .input(circuit,MarkerMaterials.Tier.UV,8)
-                .input(NANO_POWER_IC,32)
-                .input(rotor,Adamantium,2)
+                .input(CIRCUIT_GOOD_III, 2)
+                .input(circuit, MarkerMaterials.Tier.UV, 8)
+                .input(NANO_POWER_IC, 32)
+                .input(rotor, Adamantium, 2)
                 .fluidInputs(SolderingAlloy.getFluid(L * 8))
                 .fluidInputs(Tin.getFluid(L * 8))
                 .fluidInputs(KaptonK.getFluid(L * 8))
@@ -127,10 +147,10 @@ public class PreciseAssemblerChain {
                 .buildAndRegister();
 
         PRECISE_ASSEMBLER_RECIPES.recipeBuilder()
-                .input(CIRCUIT_GOOD_IV,2)
-                .input(circuit,MarkerMaterials.Tier.UHV,8)
-                .input(PICO_POWER_IC,32)
-                .input(rotor,Neutronium,2)
+                .input(CIRCUIT_GOOD_IV, 2)
+                .input(circuit, MarkerMaterials.Tier.UHV, 8)
+                .input(PICO_POWER_IC, 32)
+                .input(rotor, Neutronium, 2)
                 .fluidInputs(SolderingAlloy.getFluid(L * 8))
                 .fluidInputs(Tin.getFluid(L * 8))
                 .fluidInputs(KaptonE.getFluid(L * 8))
@@ -155,7 +175,7 @@ public class PreciseAssemblerChain {
                 .input(cableGtQuadruple, VanadiumGallium, 2)
                 .input(screw, HSSG, 32)
                 .fluidInputs(BlackSteel.getFluid(L * 4))
-                .outputs(GTQTMetaBlocks.TURBINE_CASING1.getItemVariant(GTQTTurbineCasing1.TurbineCasingType.PRECISE_ASSEMBLER_CASING_MK1,4))
+                .outputs(GTQTMetaBlocks.TURBINE_CASING1.getItemVariant(GTQTTurbineCasing1.TurbineCasingType.PRECISE_ASSEMBLER_CASING_MK1, 4))
                 .EUt(VA[IV])
                 .duration(400)
                 .buildAndRegister();
@@ -171,7 +191,7 @@ public class PreciseAssemblerChain {
                 .input(cableGtQuadruple, NaquadahAlloy, 2)
                 .input(screw, HSSE, 32)
                 .fluidInputs(Zeron100.getFluid(576))
-                .outputs(GTQTMetaBlocks.TURBINE_CASING1.getItemVariant(GTQTTurbineCasing1.TurbineCasingType.PRECISE_ASSEMBLER_CASING_MK2,4))
+                .outputs(GTQTMetaBlocks.TURBINE_CASING1.getItemVariant(GTQTTurbineCasing1.TurbineCasingType.PRECISE_ASSEMBLER_CASING_MK2, 4))
                 .EUt(VA[LuV])
                 .duration(400)
                 .buildAndRegister();
@@ -187,7 +207,7 @@ public class PreciseAssemblerChain {
                 .input(cableGtQuadruple, SiliconCarbide, 2)
                 .input(screw, HSSS, 32)
                 .fluidInputs(IncoloyMA813.getFluid(L * 4))
-                .outputs(GTQTMetaBlocks.TURBINE_CASING1.getItemVariant(GTQTTurbineCasing1.TurbineCasingType.PRECISE_ASSEMBLER_CASING_MK3,4))
+                .outputs(GTQTMetaBlocks.TURBINE_CASING1.getItemVariant(GTQTTurbineCasing1.TurbineCasingType.PRECISE_ASSEMBLER_CASING_MK3, 4))
                 .EUt(VA[ZPM])
                 .duration(400)
                 .buildAndRegister();
@@ -202,7 +222,7 @@ public class PreciseAssemblerChain {
                 .input(gearSmall, Cinobite, 8)
                 .input(screw, Orichalcum, 32)
                 .fluidInputs(Neutronium.getFluid(L * 4))
-                .outputs(GTQTMetaBlocks.TURBINE_CASING1.getItemVariant(GTQTTurbineCasing1.TurbineCasingType.PRECISE_ASSEMBLER_CASING_MK4,4))
+                .outputs(GTQTMetaBlocks.TURBINE_CASING1.getItemVariant(GTQTTurbineCasing1.TurbineCasingType.PRECISE_ASSEMBLER_CASING_MK4, 4))
                 .EUt(VA[UV])
                 .duration(400)
                 .buildAndRegister();
@@ -217,7 +237,7 @@ public class PreciseAssemblerChain {
                 .input(gearSmall, TitanSteel, 8)
                 .input(screw, SuperheavyLAlloy, 32)
                 .fluidInputs(Adamantium.getFluid(L * 4))
-                .outputs(GTQTMetaBlocks.TURBINE_CASING1.getItemVariant(GTQTTurbineCasing1.TurbineCasingType.PRECISE_ASSEMBLER_CASING_MK5,4))
+                .outputs(GTQTMetaBlocks.TURBINE_CASING1.getItemVariant(GTQTTurbineCasing1.TurbineCasingType.PRECISE_ASSEMBLER_CASING_MK5, 4))
                 .EUt(VA[UHV])
                 .duration(400)
                 .buildAndRegister();
@@ -232,7 +252,7 @@ public class PreciseAssemblerChain {
                 .input(gearSmall, Infinity, 8)
                 .input(screw, LanthanumFullereneNanotube, 32)
                 .fluidInputs(RutheniumTriniumAmericiumNeutronate.getFluid(L * 4))
-                .outputs(GTQTMetaBlocks.TURBINE_CASING1.getItemVariant(GTQTTurbineCasing1.TurbineCasingType.PRECISE_ASSEMBLER_CASING_MK6,4))
+                .outputs(GTQTMetaBlocks.TURBINE_CASING1.getItemVariant(GTQTTurbineCasing1.TurbineCasingType.PRECISE_ASSEMBLER_CASING_MK6, 4))
                 .EUt(VA[UEV])
                 .duration(400)
                 .buildAndRegister();

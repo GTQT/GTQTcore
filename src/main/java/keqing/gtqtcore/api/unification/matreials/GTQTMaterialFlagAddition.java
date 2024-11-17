@@ -3,22 +3,32 @@ package keqing.gtqtcore.api.unification.matreials;
 import gregtech.api.fluids.FluidBuilder;
 import gregtech.api.fluids.store.FluidStorageKeys;
 import gregtech.api.unification.material.Material;
-import gregtech.api.unification.material.Materials;
-import gregtech.api.unification.material.properties.*;
+import gregtech.api.unification.material.properties.FluidProperty;
+import gregtech.api.unification.material.properties.IngotProperty;
+import gregtech.api.unification.material.properties.OreProperty;
+import gregtech.api.unification.material.properties.PropertyKey;
 
+import static gregicality.multiblocks.api.unification.GCYMMaterials.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.info.MaterialFlags.*;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
+import static keqing.gtqtcore.api.unification.GCYSMaterials.Alumina;
+import static keqing.gtqtcore.api.unification.GCYSMaterials.Orichalcum;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
-import static keqing.gtqtcore.api.unification.GTQTMaterials.Plutonium244;
 import static keqing.gtqtcore.api.unification.material.info.EPMaterialFlags.*;
 
 public class GTQTMaterialFlagAddition {
 
     public static void init() {
-        Material[] material = {Samarium,Tritanium, Duranium, Technetium,Meitnerium,Roentgenium,Nobelium,Lawrencium,Moscovium,Lutetium};
+        Material[] material = {
+                Lanthanum,Praseodymium,Neodymium,Cerium,Scandium,Europium,Gadolinium,Yttrium,Terbium,Dysprosium,Holmium,Erbium,Thulium,Ytterbium,Lutetium,Niobium,Palladium,Ruthenium,Naquadria,Samarium,
+                Tritanium, Duranium, Technetium, Meitnerium, Roentgenium, Nobelium, Lawrencium, Moscovium, Lutetium,
+                Stellite100, WatertightSteel, MaragingSteel300, HastelloyC276, HastelloyX, Trinaquadalloy, Zeron100, TitaniumCarbide,
+                TantalumCarbide, MolybdenumDisilicide, HSLASteel, TitaniumTungstenCarbide, IncoloyMA956
+        };
         for (Material materials : material) {
-            materials.addFlags(GENERATE_FOIL, GENERATE_DENSE, GENERATE_FINE_WIRE, GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_RING, GENERATE_ROUND, GENERATE_BOLT_SCREW, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_ROTOR);
+            if(!materials.hasProperty(PropertyKey.INGOT))materials.setProperty(PropertyKey.INGOT, new IngotProperty());
+            if(!materials.hasProperty(PropertyKey.ORE))materials.setProperty(PropertyKey.ORE, new OreProperty());
+            materials.addFlags(GENERATE_SPRING,GENERATE_SPRING_SMALL,GENERATE_FOIL, GENERATE_DENSE, GENERATE_FINE_WIRE, GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_RING, GENERATE_ROUND, GENERATE_BOLT_SCREW, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_ROTOR);
         }
 
         OreProperty oreProp = Molybdenite.getProperty(PropertyKey.ORE);
@@ -202,7 +212,7 @@ public class GTQTMaterialFlagAddition {
         Electrum.addFlags(GENERATE_CURVED_PLATE, GENERATE_SPRING, GENERATE_SPRING_SMALL, GENERATE_SMALL_GEAR);
         Platinum.addFlags(GENERATE_CURVED_PLATE, GENERATE_SPRING, GENERATE_SPRING_SMALL, GENERATE_SMALL_GEAR);
         Brass.addFlags(GENERATE_CURVED_PLATE, GENERATE_SPRING, GENERATE_SPRING_SMALL, GENERATE_SMALL_GEAR);
-        Osmium.addFlags(GENERATE_CURVED_PLATE, GENERATE_SPRING, GENERATE_SPRING_SMALL, GENERATE_SMALL_GEAR,GENERATE_FINE_WIRE);
+        Osmium.addFlags(GENERATE_CURVED_PLATE, GENERATE_SPRING, GENERATE_SPRING_SMALL, GENERATE_SMALL_GEAR, GENERATE_FINE_WIRE);
         Ultimet.addFlags(GENERATE_CURVED_PLATE, GENERATE_SPRING, GENERATE_SPRING_SMALL, GENERATE_SMALL_GEAR);
         Osmiridium.addFlags(GENERATE_CURVED_PLATE, GENERATE_SPRING, GENERATE_SPRING_SMALL, GENERATE_SMALL_GEAR);
         Nickel.addFlags(GENERATE_CURVED_PLATE, GENERATE_SPRING, GENERATE_SPRING_SMALL, GENERATE_DENSE, GENERATE_SMALL_GEAR);

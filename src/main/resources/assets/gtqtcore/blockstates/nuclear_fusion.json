@@ -26,6 +26,18 @@
           "all": "gregtech:blocks/multiblock/casings/nuclear_fusion_cooling"
         }
       },
+      "neutron_activator_frame": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casings/neutron_activator_frame"
+        }
+      },
+      "neutron_activator_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casings/neutron_activator_casing"
+        }
+      },
       "energy_cell": {
         "model": "minecraft:cube_bottom_top",
         "textures": {

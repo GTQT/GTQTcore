@@ -190,7 +190,7 @@ public class NuclearLine {
                 .fluidInputs(Polytetrafluoroethylene.getFluid(8000))
                 .fluidInputs(ReinforcedEpoxyResin.getFluid(4000))
                 .fluidInputs(Polybenzimidazole.getFluid(1000))
-                .outputs(GTQTMetaBlocks.NUCLEAR_FUSION.getItemVariant(NUCLEAR_FUSION_CASING,4))
+                .outputs(GTQTMetaBlocks.NUCLEAR_FUSION.getItemVariant(NUCLEAR_FUSION_CASING,2))
                 .duration(1200).EUt(VA[EV]).buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
@@ -204,17 +204,16 @@ public class NuclearLine {
                 .fluidInputs(Polytetrafluoroethylene.getFluid(8000))
                 .fluidInputs(ReinforcedEpoxyResin.getFluid(4000))
                 .fluidInputs(Polybenzimidazole.getFluid(1000))
-                .outputs(GTQTMetaBlocks.NUCLEAR_FUSION.getItemVariant(GTQTNuclearFusion.CasingType.NUCLEAR_FUSION_FRAME,4))
+                .outputs(GTQTMetaBlocks.NUCLEAR_FUSION.getItemVariant(GTQTNuclearFusion.CasingType.NUCLEAR_FUSION_FRAME,2))
                 .duration(400).EUt(VA[EV]).buildAndRegister();
 
         ASSEMBLER_RECIPES.recipeBuilder()
                 .input(plateDense, Aluminium, 1)
                 .input(frameGt, StainlessSteel, 1)
                 .input(stick, Steel, 4)
-                .outputs(GTQTMetaBlocks.NUCLEAR_FUSION.getItemVariant(GTQTNuclearFusion.CasingType.NUCLEAR_FUSION_COOLING,16))
+                .outputs(GTQTMetaBlocks.NUCLEAR_FUSION.getItemVariant(GTQTNuclearFusion.CasingType.NUCLEAR_FUSION_COOLING,2))
                 .circuitMeta(10)
                 .duration(400).EUt(VA[EV]).buildAndRegister();
-
     }
 
     private static void PAc(Material  material1,int kind,int tier) {

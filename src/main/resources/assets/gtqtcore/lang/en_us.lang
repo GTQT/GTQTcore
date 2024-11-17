@@ -1103,6 +1103,8 @@ recipemap.saw_mill.name=Saw Mill
 
 gtqtcore.machine.primitive_roaster.name=Primitive Roaster
 recipemap.primitive_roaster.name=Primitive Roaster
+
+recipemap.neutral_network_nexus_breeding_mode.name=Neutral Network Nexus Breeding Mode
 # Materials
 
 ## Element Materials
@@ -1774,6 +1776,7 @@ gregtech.material.nitrated_rare_earth_turbid_solution=Nitrated Rare Earth Turbid
 gregtech.material.rare_earth_hydroxides_solution=Rare Earth Hydroxides Solution
 gregtech.material.rare_earth_chlorides_slurry=Rare Earth Chlorides Slurry
 gregtech.material.low_purity_rare_earth_chlorides_solution=Low Purity Rare Earth Chlorides Solution
+gregtech.material.rare_earth_chlorides_solution=Rare Earth Chlorides Solution
 gregtech.material.roughly_purified_rare_earth_chlorides_solution=Roughly Purified Rare Earth Chlorides Solution
 gregtech.material.high_purity_rare_earth_chlorides_slurry=High Purity Rare Earth Chlorides Slurry
 gregtech.material.high_purity_rare_earth_chlorides_solution=High Purity Rare Earth Chlorides Solution
@@ -4684,6 +4687,8 @@ tile.turbine_casing.fishing_casing.name=Fishery Casing
 tile.nuclear_fusion.nuclear_fusion_casing.name=Nuclear Fission Pressure Vessel
 tile.nuclear_fusion.nuclear_fusion_frame.name=Nuclear Fission Pressure Frame
 tile.nuclear_fusion.nuclear_fusion_cooling.name=Cooling Tower Casing
+tile.nuclear_fusion.neutron_activator_casing.name=Neutron Activator Casing
+tile.nuclear_fusion.neutron_activator_frame.name=Neutron Activator Frame
 
 tile.h_casing.machine_casing_fusion.name=First-order Particle Fusion Casing
 tile.h_casing.machine_casing_fusion_2.name=Second-order Particle Fusion Casing
@@ -5025,8 +5030,8 @@ gtqtcore.machine.acid_generator.ev.name=Turbo Acid Generator
 gtqtcore.machine.acid_generator.ev.tooltip=Nuclear-powered Lemon Power Station
 
 gtqtcore.machine.lbg.steam.1.name=Large Basic Steam Generator
-gtqtcore.machine.lbg.gas.1.name=Large Advanced Gas Generator
-gtqtcore.machine.lbg.gas.2.name=Large Basic Gas Generator
+gtqtcore.machine.lbg.gas.1.name=Large Basic Gas Generator
+gtqtcore.machine.lbg.gas.2.name=Large Advanced Gas Generator
 gtqtcore.machine.lbg.combustion.1.name=Large Basic Combustion Generator
 gtqtcore.machine.lbg.combustion.2.name=Large Advanced Combustion Generator
 gtqtcore.machine.lbg.combustion.3.name=Large Turbo Combustion Generator

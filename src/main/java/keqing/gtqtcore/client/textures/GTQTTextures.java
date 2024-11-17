@@ -105,6 +105,8 @@ public class GTQTTextures {
     public static SimpleOverlayRenderer ISA_CASING;
     public static SimpleOverlayRenderer NUCLEAR_FUSION_CASING;
     public static SimpleOverlayRenderer NUCLEAR_FUSION_COOLING;
+    public static SimpleOverlayRenderer NEUTRON_ACTIVATOR_CASING;
+    public static SimpleOverlayRenderer NUCLEAR_FUSION_FRAME;
     public static SimpleOverlayRenderer ADV_DIMENSIONAL_CASING_B;
     public static SimpleOverlayRenderer ADV_DIMENSIONAL_CASING_O;
     public static SimpleOverlayRenderer ADV_MACHINE_LESU;
@@ -205,6 +207,8 @@ public class GTQTTextures {
         MACERATOR_CASING = new SimpleOverlayRenderer("multiblock/casing/macerator_casing");
         NUCLEAR_FUSION_CASING = new SimpleOverlayRenderer("multiblock/casings/nuclear_fusion_casing");
         NUCLEAR_FUSION_COOLING = new SimpleOverlayRenderer("multiblock/casings/nuclear_fusion_cooling");
+        NEUTRON_ACTIVATOR_CASING = new SimpleOverlayRenderer("multiblock/casings/neutron_activator_casing");
+        NUCLEAR_FUSION_FRAME = new SimpleOverlayRenderer("multiblock/casings/nuclear_fusion_frame");
         PRECISE_ASSEMBLER_CASING_MK1= new SimpleOverlayRenderer("multiblock/casing/precise_assembler_casing_mk1");
         PRECISE_ASSEMBLER_CASING_MK2= new SimpleOverlayRenderer("multiblock/casing/precise_assembler_casing_mk2");
         PRECISE_ASSEMBLER_CASING_MK3 = new SimpleOverlayRenderer("multiblock/casing/precise_assembler_casing_mk3");

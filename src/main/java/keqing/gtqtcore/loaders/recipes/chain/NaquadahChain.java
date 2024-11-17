@@ -72,7 +72,7 @@ public class NaquadahChain {
                 .fluidOutputs(Gaochunguiyanrongye.getFluid(2000))
                 .output(dust,Nongsuofujiguiyankuangni,1)
                 .output(dust,Yanghuaguiyanhunhe,2)
-                .output(dust,Adamantite,1)
+                .output(dust,Adamantium,1)
                 .EUt(VA[IV])
                 .part(200)
                 .duration(400)

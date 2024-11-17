@@ -187,8 +187,10 @@ public class MachineCasing {
                 .fluidInputs(KaptonE.getFluid(L * 4))
                 .fluidInputs(EnrichedNaquadahResidueSolution.getFluid(L * 2))
                 .outputs(GTQTMetaBlocks.MULTI_CASING.getItemVariant(NAQUADRIA_CASING, 2))
-                .EUt(VA[ZPM])
-                .duration(800)
+                .EUt(VA[UV])
+                .duration(1000)
+                .Tier(3)
+                .CWUt(CWT[ZPM])
                 .buildAndRegister();
 
         //  Naquadri alloy Casing
@@ -203,7 +205,9 @@ public class MachineCasing {
                 .fluidInputs(EnrichedNaquadahResidueSolution.getFluid(L))
                 .outputs(GTQTMetaBlocks.MULTI_CASING.getItemVariant(NAQUADAH_ALLOY_CASING, 2))
                 .EUt(VA[ZPM])
-                .duration(800)
+                .duration(1000)
+                .Tier(2)
+                .CWUt(CWT[LuV])
                 .buildAndRegister();
 
         //  Polybenzimidazole Pipe Casing
@@ -234,13 +238,11 @@ public class MachineCasing {
                 .fluidInputs(KaptonE.getFluid(L * 8))
                 .fluidInputs(BlackPlutonium.getFluid(L * 4))
                 .outputs(GTQTMetaBlocks.TURBINE_CASING.getItemVariant(HYPER_CASING,2))
-                .EUt(VA[ZPM])
-                .duration(800)
+                .EUt(VA[UHV])
+                .duration(1000)
                 .Tier(3)
-                .CWUt(CWT[ZPM])
+                .CWUt(CWT[UV])
                 .buildAndRegister();
-
-
 
         ASSEMBLER_RECIPES.recipeBuilder()
                 .inputs(MetaBlocks.METAL_CASING.getItemVariant(BlockMetalCasing.MetalCasingType.INVAR_HEATPROOF))
@@ -661,8 +663,8 @@ public class MachineCasing {
                 .buildAndRegister();
 
         ASSEMBLER_RECIPES.recipeBuilder().duration(200).EUt(120)
-                .input(plate,Adamantite, 6)
-                .input(frameGt,Adamantite, 1)
+                .input(plate,Adamantium, 6)
+                .input(frameGt,Adamantium, 1)
                 .circuitMeta(6)
                 .outputs(GTQTMetaBlocks.TURBINE_CASING1.getItemVariant(AD_TURBINE_CASING))
                 .buildAndRegister();

@@ -27,7 +27,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
         "after:gregtechfoodoption@[1.11.0,);"
 )
 public class GTQTCore {
-    public static final String PACK = "1.6.4";
+    public static final String PACK = "1.6.5";
 
     public static final String MODID = "gtqtcore";
     public static final String NAME = "GTQT Core";

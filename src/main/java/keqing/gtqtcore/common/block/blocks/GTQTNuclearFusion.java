@@ -33,7 +33,9 @@ public class GTQTNuclearFusion extends VariantBlock<GTQTNuclearFusion.CasingType
         NUCLEAR_FUSION_CASING("nuclear_fusion_casing"),
         NUCLEAR_FUSION_FRAME("nuclear_fusion_frame"),
         NUCLEAR_FUSION_COOLING("nuclear_fusion_cooling"),
-        ENERGY_CELL("energy_cell");
+        ENERGY_CELL("energy_cell"),
+        NEUTRON_ACTIVATOR_CASING("neutron_activator_casing"),
+        NEUTRON_ACTIVATOR_FRAME("neutron_activator_frame");
 
         private final String name;
 

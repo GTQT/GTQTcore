@@ -772,7 +772,7 @@ public class MetaTileEntityLoader {
         ModHandler.addShapedRecipe(true, "dangote_distillery", DANGOTE_DISTILLERY.getStackForm(),
                 "SWS", "PHP", "pGp",
                 'H', LARGE_DISTILLERY.getStackForm(),
-                'P', ELECTRIC_PUMP_LuV,
+                'P', ELECTRIC_PUMP_ZPM,
                 'p', new UnificationEntry(plate, HG1223),
                 'G', new UnificationEntry(gear, Osmiridium),
                 'S', new UnificationEntry(spring, MolybdenumDisilicide),

@@ -5,7 +5,6 @@ import gregtech.api.GregTechAPI;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.SimpleGeneratorMetaTileEntity;
 import gregtech.api.metatileentity.SimpleMachineMetaTileEntity;
-import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.util.GTUtility;
@@ -62,6 +61,7 @@ import static gregtech.api.GTValues.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.common.metatileentities.MetaTileEntities.*;
 import static keqing.gtqtcore.api.GTQTValue.gtqtcoreId;
+import static keqing.gtqtcore.api.unification.GCYSMaterials.Adamantium;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.utils.GTQTUtil.genericGeneratorTankSizeFunctionPlus;
 import static keqing.gtqtcore.api.utils.MultiblockRegistryHelper.registerSimpleSteamMetaTileEntity;
@@ -605,7 +605,6 @@ public class GTQTMetaTileEntities {
             SUPRACHRONAL_NEUTRONIUM_FORGE = registerMetaTileEntity(3355, new MetaTileEntitySuprachronalNeutroniumForge(gtqtcoreId("suprachronal_neutronium_forge")));
 
         //资源产出
-
         GAS_COLLECTOR = registerMetaTileEntity(3406, new MetaTileEntityGasCollector(gtqtcoreId("gas_collector")));
         INDUSTRY_WATER_PUMP = registerMetaTileEntity(3407, new MetaTileEntityIndustryWaterPump(gtqtcoreId("industry_water_pump")));
         //KQCC

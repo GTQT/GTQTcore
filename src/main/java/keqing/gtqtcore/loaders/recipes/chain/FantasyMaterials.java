@@ -33,7 +33,7 @@ public class FantasyMaterials {
         ELECTROMAGNETIC_SEPARATOR_RECIPES.recipeBuilder()
                 .input(dust, Bedrock)
                 .chancedOutput(dust, Slate, 7000, 0)
-                .chancedOutput(dust, Adamantite, 3000, 500)
+                .chancedOutput(dust, Adamantium, 3000, 500)
                 .chancedOutput(dust, Monazite, 2, 3000, 0)
                 .chancedOutput(dust, Zircon, 3, 3000, 0)
                 .chancedOutput(dust, Graphite, 3, 3000, 0)

@@ -377,9 +377,9 @@ public class MetaTileEntityMachine {
 
         ModHandler.addShapedRecipe(true, "casing_ad_pipe",
                 GTQTMetaBlocks.TURBINE_CASING1.getItemVariant(AD_MACHINE_CASING, ConfigHolder.recipes.casingsPerCraft), "PIP", "IFI",
-                "PIP", 'P', new UnificationEntry(OrePrefix.plate, Adamantite), 'F',
-                new UnificationEntry(OrePrefix.frameGt, Adamantite), 'I',
-                new UnificationEntry(OrePrefix.pipeNormalFluid, Adamantite));
+                "PIP", 'P', new UnificationEntry(OrePrefix.plate, Adamantium), 'F',
+                new UnificationEntry(OrePrefix.frameGt, Adamantium), 'I',
+                new UnificationEntry(OrePrefix.pipeNormalFluid, Adamantium));
 
         ModHandler.addShapedRecipe(true, "fishing_casing",
                 GTQTMetaBlocks.TURBINE_CASING.getItemVariant(FISHING_CASING, ConfigHolder.recipes.casingsPerCraft), "PIP", "IFI",

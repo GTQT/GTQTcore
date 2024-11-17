@@ -34,6 +34,7 @@ import java.util.List;
 
 import static gregtech.api.util.RelativeDirection.*;
 import static keqing.gtqtcore.common.block.blocks.GTQTADVBlock.CasingType.Inconel792;
+import static keqing.gtqtcore.common.block.blocks.GTQTNuclearFusion.CasingType.*;
 
 public class MetaTileEntityNeutronActivator  extends RecipeMapMultiblockController {
     private int coilHeight;
@@ -160,15 +161,15 @@ public class MetaTileEntityNeutronActivator  extends RecipeMapMultiblockControll
         return MetaBlocks.FRAMES.get(GTQTMaterials.MARM200Steel).getBlock(GTQTMaterials.MARM200Steel);
     }
     private IBlockState getCasingState() {
-        return GTQTMetaBlocks.ADV_BLOCK.getState(Inconel792);
+        return GTQTMetaBlocks.NUCLEAR_FUSION.getState(NEUTRON_ACTIVATOR_CASING);
     }
     private IBlockState getCasingState1() {
-        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.TUNGSTENSTEEL_ROBUST);
+        return GTQTMetaBlocks.NUCLEAR_FUSION.getState(NEUTRON_ACTIVATOR_FRAME);
     }
     @SideOnly(Side.CLIENT)
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
-        return GTQTTextures.Inconel792;
+        return GTQTTextures.NEUTRON_ACTIVATOR_CASING;
     }
     @SideOnly(Side.CLIENT)
     @Nonnull

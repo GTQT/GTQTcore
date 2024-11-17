@@ -71,7 +71,7 @@ public class GTQTElementMaterials {
                 .fluid()
                 .color(0x2C195A)
                 .iconSet(SHINY)
-                .flags(NO_SMELTING, GENERATE_PLATE, GENERATE_DOUBLE_PLATE)
+                .flags(GENERATE_FOIL,GENERATE_DENSE,GENERATE_FINE_WIRE,GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_RING, GENERATE_ROUND, GENERATE_BOLT_SCREW, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR,GENERATE_ROTOR)
                 .element(GTQTElements.ChaoticDraconium)
                 .cableProperties(V[UEV], 32, 16)
                 .build();

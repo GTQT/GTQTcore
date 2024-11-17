@@ -1105,6 +1105,8 @@ recipemap.saw_mill.name=锯木机
 
 gtqtcore.machine.primitive_roaster.name=原始焙烧炉
 recipemap.primitive_roaster.name=焙烧炉
+
+recipemap.neutral_network_nexus_breeding_mode.name=纳米煅烧
 #  Materials
 
 ##  Element Materials
@@ -1779,6 +1781,7 @@ gregtech.material.nitrated_rare_earth_turbid_solution=硝化稀土浊溶液
 gregtech.material.rare_earth_hydroxides_solution=稀土氢氧化物溶液
 gregtech.material.rare_earth_chlorides_slurry=稀土氯化物泥浆
 gregtech.material.low_purity_rare_earth_chlorides_solution=低纯度稀土氯化物溶液
+gregtech.material.rare_earth_chlorides_solution=稀土氯化物溶液
 gregtech.material.roughly_purified_rare_earth_chlorides_solution=粗提纯稀土氯化物溶液
 gregtech.material.high_purity_rare_earth_chlorides_slurry=高纯度稀土氯化物泥浆
 gregtech.material.high_purity_rare_earth_chlorides_solution=高纯度稀土氯化物溶液
@@ -4702,6 +4705,8 @@ tile.turbine_casing.fishing_casing.name=渔场外壳
 tile.nuclear_fusion.nuclear_fusion_casing.name=核裂变压力容器
 tile.nuclear_fusion.nuclear_fusion_frame.name=核裂变压力框架
 tile.nuclear_fusion.nuclear_fusion_cooling.name=冷却塔外壳
+tile.nuclear_fusion.neutron_activator_casing.name=中子活化仪外壳
+tile.nuclear_fusion.neutron_activator_frame.name=中子活化仪框架
 
 tile.h_casing.machine_casing_fusion.name=一阶粒子聚合仪外壳
 tile.h_casing.machine_casing_fusion_2.name=二阶粒子聚合仪外壳
@@ -5043,8 +5048,8 @@ gtqtcore.machine.acid_generator.ev.name=涡轮酸液发电机
 gtqtcore.machine.acid_generator.ev.tooltip=核动力柠檬电站
 
 gtqtcore.machine.lbg.steam.1.name=大型基础蒸汽发电机
-gtqtcore.machine.lbg.gas.1.name=大型高级燃气发电机
-gtqtcore.machine.lbg.gas.2.name=大型基础燃气发电机
+gtqtcore.machine.lbg.gas.1.name=大型基础燃气发电机
+gtqtcore.machine.lbg.gas.2.name=大型高级燃气发电机
 gtqtcore.machine.lbg.combustion.1.name=大型基础内燃发电机
 gtqtcore.machine.lbg.combustion.2.name=大型高级内燃发电机
 gtqtcore.machine.lbg.combustion.3.name=大型涡轮内燃发电机

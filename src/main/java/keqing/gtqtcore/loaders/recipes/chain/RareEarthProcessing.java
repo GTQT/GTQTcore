@@ -10,6 +10,7 @@ import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.TJMaterials.SodiumFluoride;
+import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.swarm;
 
 
 public class RareEarthProcessing {
@@ -24,6 +25,10 @@ public class RareEarthProcessing {
         caosuan();
         fuguisuanna();
         p507();
+        NanoSwarm();
+    }
+
+    private static void NanoSwarm() {
 
     }
 
@@ -41,7 +46,7 @@ public class RareEarthProcessing {
         CHEMICAL_RECIPES.recipeBuilder()
                 .fluidInputs(CrudeRareEarthTurbidSolution.getFluid(2000))
                 .fluidInputs(NitricAcid.getFluid(2000))
-                .fluidOutputs(NitratedRareEarthTurbidSolution.getFluid(2000))
+                .fluidOutputs(NitratedRareEarthTurbidSolution.getFluid(4000))
                 .EUt(VA[IV])
                 .duration(350)
                 .buildAndRegister();
@@ -172,7 +177,7 @@ public class RareEarthProcessing {
                 .input(dust, FerricOxide, 2)
                 .output(dust, LanthanumOxide)
                 .fluidOutputs(Oxygen.getFluid(3000))
-                .duration(300)
+                .duration(600)
                 .EUt(15360)
                 .blastFurnaceTemp(450)
                 .buildAndRegister();
@@ -181,9 +186,9 @@ public class RareEarthProcessing {
     private static void lite() {
         CHEMICAL_RECIPES.recipeBuilder()
                 .fluidInputs(RareEarthHydroxidesSolution.getFluid(1000))
-                .notConsumable(GTQTMetaItems.PROTONATED_FULLERENE_SIEVING_MATRIX)
+                .notConsumable(swarm,Carbon)
                 .fluidOutputs(RareEarthChloridesSolution.getFluid(1000))
-                .duration(120).EUt(VA[UV]).buildAndRegister();
+                .duration(1200).EUt(VA[UV]).buildAndRegister();
 
         MOLECULAR_DISTILLATION_RECIPES.recipeBuilder()
                 .fluidInputs(RareEarthChloridesSolution.getFluid(1000))
@@ -193,7 +198,7 @@ public class RareEarthProcessing {
                 .fluidOutputs(YTbDyHoOxidesSolution.getFluid(250))
                 .fluidOutputs(ErTmYbLuOxidesSolution.getFluid(250))
                 .fluidOutputs(HydrochloricAcid.getFluid(1000))
-                .duration(200).EUt(VA[UV]).buildAndRegister();
+                .duration(600).EUt(VA[UV]).buildAndRegister();
     }
 
     private static void bastnasite() {
