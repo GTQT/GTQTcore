@@ -85,7 +85,6 @@ public class FusionLoader {
                 .buildAndRegister();
 
         /* -------------------------------- MK2 -------------------------------- */
-
         //  Aluminium + Lithium -> Sulfur (plasma)
         FUSION_RECIPES.recipeBuilder()
                 .fluidInputs(Aluminium.getFluid(16))
@@ -206,6 +205,38 @@ public class FusionLoader {
                 .EUt(VA[ZPM])
                 .duration(8 * SECOND)
                 .EUToStart(300000000L) // MK2
+                .buildAndRegister();
+
+        FUSION_RECIPES.recipeBuilder()
+                .fluidInputs(Lead.getFluid(144))
+                .fluidInputs(Lithium.getFluid(144))
+                .fluidOutputs(Astatine.getPlasma(144))
+                .EUt(VA[ZPM])
+                .duration((int) (5.4 * SECOND))
+                .EUToStart(300000000L) // MK2
+                .buildAndRegister();
+
+        PLASMA_GENERATOR_FUELS.recipeBuilder()
+                .fluidInputs(Astatine.getPlasma(1))
+                .fluidOutputs(Astatine.getFluid(1))
+                .EUt((int) V[EV])
+                .duration((int) (8.2 * SECOND))
+                .buildAndRegister();
+
+        FUSION_RECIPES.recipeBuilder()
+                .fluidInputs(Lead.getFluid(144))
+                .fluidInputs(Helium.getFluid(144))
+                .fluidOutputs(Polonium.getPlasma(144))
+                .EUt(VA[ZPM])
+                .duration((int) (3.6 * SECOND))
+                .EUToStart(300000000L) // MK2
+                .buildAndRegister();
+
+        PLASMA_GENERATOR_FUELS.recipeBuilder()
+                .fluidInputs(Polonium.getPlasma(1))
+                .fluidOutputs(Polonium.getFluid(1))
+                .EUt((int) V[EV])
+                .duration((int) (7.6 * SECOND))
                 .buildAndRegister();
         /* -------------------------------- MK3 -------------------------------- */
 

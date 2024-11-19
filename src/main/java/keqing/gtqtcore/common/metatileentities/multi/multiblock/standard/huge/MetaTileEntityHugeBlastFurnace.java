@@ -215,6 +215,7 @@ public class MetaTileEntityHugeBlastFurnace extends GTQTRecipeMapMultiblockOverw
                         .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setMaxGlobalLimited(8).setPreviewCount(1))
                         .or(abilities(MultiblockAbility.EXPORT_FLUIDS).setMaxGlobalLimited(8).setPreviewCount(1))
                         .or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(3))
+                        .or(abilities(MultiblockAbility.INPUT_LASER).setMinGlobalLimited(1).setMaxGlobalLimited(3))
                 )
                 .where('B', heatingCoils())
                 .where('A', TiredTraceabilityPredicate.CP_GLASS.get())

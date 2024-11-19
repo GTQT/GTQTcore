@@ -24,6 +24,19 @@ import static gregtech.api.recipes.RecipeMaps.REPLICATOR_RECIPES;
 //怎么写请看
 //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/api/recipe/GSRecipeMaps.java
 public class GTQTcoreRecipeMaps {
+
+    public static final RecipeMap<FuelRecipeBuilder> HIGH_PRESSURE_STEAM_TURBINE_RECIPES = new RecipeMap<>("high_pressure_steam_turbine", 0, 0, 1, 1, new FuelRecipeBuilder(), false)
+            .setSlotOverlay(false, true, true, GuiTextures.DARK_CANISTER_OVERLAY)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_GAS_COLLECTOR, ProgressWidget.MoveType.HORIZONTAL)
+            .allowEmptyOutput()
+            .setSound(GTSoundEvents.TURBINE);
+
+    public static final RecipeMap<FuelRecipeBuilder> SUPERCRITICAL_STEAM_TURBINE_RECIPES = new RecipeMap<>("supercritical_steam_turbine", 0, 0, 1, 1, new FuelRecipeBuilder(), false)
+            .setSlotOverlay(false, true, true, GuiTextures.DARK_CANISTER_OVERLAY)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_GAS_COLLECTOR, ProgressWidget.MoveType.HORIZONTAL)
+            .allowEmptyOutput()
+            .setSound(GTSoundEvents.TURBINE);
+
     public static final RecipeMap<SwarmTierRecipeBuilder> NEUTRAL_NETWORK_NEXUS_BREEDING_MODE = new RecipeMap<>("neutral_network_nexus_breeding_mode", 6, 1, 3, 0, new SwarmTierRecipeBuilder(), false)
             .setSlotOverlay(false, false, false, GuiTextures.CIRCUIT_OVERLAY)
             .setSlotOverlay(false, false, true, GuiTextures.CIRCUIT_OVERLAY)
@@ -173,6 +186,7 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<PHRecipeBuilder> FERMENTATION_TANK_RECIPES;
     public static final RecipeMap<FuelRecipeBuilder> NAQUADAH_REACTOR_RECIPES;
     public static final RecipeMap<SimpleRecipeBuilder> FUEL_REFINE_FACTORY_RECIPES;
+    public static final RecipeMap<BlastRecipeBuilder> NAQUADAH_REFINE_FACTORY_RECIPES;
     public static final RecipeMap<FuelRecipeBuilder> ROCKET;
     public static final RecipeMap<FuelRecipeBuilder> NAQUADAH_REACTOR;
     public static final RecipeMap<FuelRecipeBuilder> I_MODULAR_FISSION_REACTOR;
@@ -181,7 +195,6 @@ public class GTQTcoreRecipeMaps {
 
     public static final RecipeMap<QFTCasingTierRecipeBuilder> QUANTUM_FORCE_TRANSFORMER_RECIPES;
     public static final RecipeMap<FlowRateRecipeBuilder> HEAT_EXCHANGE_RECIPES;
-    public static final RecipeMap<PrimitiveRecipeBuilder> HEAT_EXCHANGE;
     public static final RecipeMap<FuelRecipeBuilder> STAR_MIXER;
     public static final RecipeMap<FuelRecipeBuilder> RTG_RECIPES;
     public static final RecipeMap<NuclearRecipeBuilder> NUCLEAR_RECIPES;
@@ -191,9 +204,7 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<NoCoilTemperatureRecipeBuilder> MOLECULAR_DISTILLATION_RECIPES;
     public static final RecipeMap<PrimitiveRecipeBuilder> PR_MIX;
     public static final RecipeMap<PrimitiveRecipeBuilder> SALT_FLIED;
-    public static final RecipeMap<FuelRecipeBuilder> HIGH_PRESSURE_STEAM_TURBINE_FUELS;
     public static final RecipeMap<KQComputationRecipeBuilder> KEQING_NET_RECIES;
-    public static final RecipeMap<FuelRecipeBuilder> SUPERCRITICAL_STEAM_TURBINE_FUELS;
     public static final RecipeMap<FuelRecipeBuilder> HYPER_REACTOR_MK1_RECIPES;
     public static final RecipeMap<FuelRecipeBuilder> HYPER_REACTOR_MK2_RECIPES;
     public static final RecipeMap<FuelRecipeBuilder> HYPER_REACTOR_MK3_RECIPES;
@@ -410,9 +421,6 @@ public class GTQTcoreRecipeMaps {
                 .setProgressBar(GTQTGuiTextures.PROGRESS_BAR_HEAT_EXCHANGE, ProgressWidget.MoveType.HORIZONTAL)
                 .setSound(GTSoundEvents.BATH);
 
-        HEAT_EXCHANGE = new RecipeMap<>("heat_exchanger", 0, 0, 1, 1, new PrimitiveRecipeBuilder(), false)
-                .setProgressBar(GuiTextures.PROGRESS_BAR_ARC_FURNACE, ProgressWidget.MoveType.HORIZONTAL);
-
         ROCKET = new RecipeMap<>("rocket",
                 0, 0, 1, 0, new FuelRecipeBuilder(), false)
                 .setSlotOverlay(false, true, true, GuiTextures.CENTRIFUGE_OVERLAY)
@@ -494,12 +502,6 @@ public class GTQTcoreRecipeMaps {
         NANOHYBRID = new RecipeMap<>("nanohybrid",
                 9, 1, 3, 0, new SimpleRecipeBuilder(), false);
 
-        //  High Pressure Steam Turbine Recipemap
-        HIGH_PRESSURE_STEAM_TURBINE_FUELS = new RecipeMap<>("high_pressure_steam_turbine_fuels", 0, 0, 1, 1, new FuelRecipeBuilder(), false);
-
-        //  Supercritical Steam Turbine Recipemap
-        SUPERCRITICAL_STEAM_TURBINE_FUELS = new RecipeMap<>("supercritical_steam_turbine_fuels",  0, 0, 1, 1, new FuelRecipeBuilder(), false);
-
         KEQING_NET_RECIES = new RecipeMap<>("keqing_net_recipes", 2, 1, 1, 0, new KQComputationRecipeBuilder(), false)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, ProgressWidget.MoveType.HORIZONTAL)
                 .setSlotOverlay(false, false, GuiTextures.SCANNER_OVERLAY)
@@ -507,7 +509,7 @@ public class GTQTcoreRecipeMaps {
                 .setSound(GTValues.FOOLS.get() ? GTSoundEvents.SCIENCE : GTSoundEvents.COMPUTATION);
 
 
-        NAQUADAH_REACTOR_RECIPES = new RecipeMap<>("naquadah_reactor_recipes", 0,  0,   1,  0, new FuelRecipeBuilder(), false)
+        NAQUADAH_REACTOR_RECIPES = new RecipeMap<>("naquadah_reactor_recipes", 0,  0,   1,  1, new FuelRecipeBuilder(), false)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, ProgressWidget.MoveType.HORIZONTAL)
                 .setSound(GTSoundEvents.COMBUSTION)
                 .allowEmptyOutput();
@@ -543,7 +545,7 @@ public class GTQTcoreRecipeMaps {
                 .setSound(GTSoundEvents.ARC)
                 .allowEmptyOutput();
 
-        FUEL_REFINE_FACTORY_RECIPES = new RecipeMap<>("fuel_refine_factory_recipes", 3,  4,  4, 2, new SimpleRecipeBuilder(), false)
+        FUEL_REFINE_FACTORY_RECIPES = new RecipeMap<>("fuel_refine_factory_recipes", 3,  6,  6, 3, new SimpleRecipeBuilder(), false)
                 .setSlotOverlay(false, false, false, GuiTextures.MOLECULAR_OVERLAY_1)
                 .setSlotOverlay(false, false, true, GuiTextures.MOLECULAR_OVERLAY_2)
                 .setSlotOverlay(false, true, false, GuiTextures.MOLECULAR_OVERLAY_3)
@@ -553,6 +555,15 @@ public class GTQTcoreRecipeMaps {
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL)
                 .setSound(GTValues.FOOLS.get() ? GTSoundEvents.SCIENCE : GTSoundEvents.CHEMICAL_REACTOR);
 
+        NAQUADAH_REFINE_FACTORY_RECIPES = new RecipeMap<>("naquadah_refine_factory_recipes", 3,  6,  6, 3, new BlastRecipeBuilder(), false)
+                .setSlotOverlay(false, false, false, GuiTextures.MOLECULAR_OVERLAY_1)
+                .setSlotOverlay(false, false, true, GuiTextures.MOLECULAR_OVERLAY_2)
+                .setSlotOverlay(false, true, false, GuiTextures.MOLECULAR_OVERLAY_3)
+                .setSlotOverlay(false, true, true, GuiTextures.MOLECULAR_OVERLAY_4)
+                .setSlotOverlay(true, false, GuiTextures.VIAL_OVERLAY_1)
+                .setSlotOverlay(true, true, GuiTextures.VIAL_OVERLAY_2)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL)
+                .setSound(GTValues.FOOLS.get() ? GTSoundEvents.SCIENCE : GTSoundEvents.CHEMICAL_REACTOR);
     }
     public static void init() {
         RecipeMaps.BLAST_RECIPES.setMaxFluidInputs(3);

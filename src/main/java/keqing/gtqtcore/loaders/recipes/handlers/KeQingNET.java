@@ -129,7 +129,7 @@ public class KeQingNET {
         //25 云数据存储
         KQ_NET(0, 2, 25, DISK_25, MINI_DATE_BANK.getStackForm());
         //26 硅岩燃料
-        KQ_NET(3, 4, 26, DISK_26, screw, Naquadria);
+        KQ_NET(3, 4, 26, DISK_26, FUEL_REFINE_FACTORY.getStackForm());
         //27 奇异燃料
         KQ_NET(3, 4, 27, DISK_27, LARGE_NAQUADAH_REACTOR.getStackForm());
         //28 超高能激光器
@@ -470,7 +470,7 @@ public class KeQingNET {
                         .CWUt(CWT[UHV])
                         .EUt(VA[UV]))
                 .output(LARGE_NAQUADAH_REACTOR)
-                .EUt(VA[UHV])
+                .EUt(VA[UV])
                 .duration(600)
                 .cleanroom(CleanroomType.CLEANROOM)
                 .buildAndRegister();
@@ -481,29 +481,53 @@ public class KeQingNET {
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(frameGt, HastelloyC276, 16)
                 .input(HUGE_CHEMICAL_REACTOR, 8)
-                .input(pipeHugeFluid, Duranium, 32)
-                .input(rotor, Orichalcum, 32)
-                .input(circuit, MarkerMaterials.Tier.UHV, 16)
-                .input(circuit, MarkerMaterials.Tier.UV, 32)
-                .input(circuit, Tier.ZPM, 64)
-                .input(ELECTRIC_PUMP_UV, 16)
-                .input(FIELD_GENERATOR_UV, 16)
-                .input(NANO_POWER_IC, 64)
-                .input(NANO_POWER_IC, 64)
+                .input(pipeHugeFluid, TungstenSteel, 32)
+                .input(rotor, RhodiumPlatedPalladium, 32)
+                .input(circuit, Tier.ZPM, 16)
+                .input(circuit, Tier.LuV, 32)
+                .input(circuit, Tier.IV, 64)
+                .input(ELECTRIC_PUMP_LuV, 16)
+                .input(HIGH_POWER_INTEGRATED_CIRCUIT, 64)
                 .input(gear, Roentgenium, 8)
-                .input(screw, Dubnium, 32)
-                .input(cableGtQuadruple, Europium, 64)
-                .input(cableGtQuadruple, Europium, 64)
-                .fluidInputs(SolderingAlloy.getFluid(L * 40))
-                .fluidInputs(BlackTitanium.getFluid(L * 20))
-                .fluidInputs(Kevlar.getFluid(L * 10))
-                .fluidInputs(KaptonK.getFluid(L * 5))
+                .input(screw, Naquadah, 32)
+                .input(wireFine, Samarium, 32)
+                .fluidInputs(VanadiumGallium.getFluid(L * 16))
+                .fluidInputs(KaptonK.getFluid(L * 16))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 16))
+                .fluidInputs(Polyetheretherketone.getFluid(L * 16))
                 .output(FUEL_REFINE_FACTORY)
                 .stationResearch(b -> b
-                        .researchStack(DISK_27.getStackForm())
-                        .CWUt(CWT[UHV])
+                        .researchStack(CHEMICAL_PLANT.getStackForm())
+                        .CWUt(CWT[LuV])
+                        .EUt(VA[ZPM]))
+                .EUt(VA[ZPM])
+                .duration(600)
+                .buildAndRegister();
+
+        //  Naquadah Refine Factory
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(frameGt, Tritanium, 16)
+                .input(FUEL_REFINE_FACTORY, 8)
+                .input(pipeHugeItem, Americium, 32)
+                .input(rotor, Vibranium, 32)
+                .input(circuit, MarkerMaterials.Tier.UHV, 4)
+                .input(circuit, MarkerMaterials.Tier.UV, 16)
+                .input(circuit, Tier.ZPM, 32)
+                .input(ELECTRIC_PUMP_UV, 16)
+                .input(HIGH_POWER_INTEGRATED_CIRCUIT, 64)
+                .input(gear, HMS1J79Alloy, 8)
+                .input(screw, BlackPlutonium, 32)
+                .input(cableGtQuadruple, Europium, 64)
+                .fluidInputs(VanadiumGallium.getFluid(L * 16))
+                .fluidInputs(KaptonK.getFluid(L * 16))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 16))
+                .fluidInputs(Polyetheretherketone.getFluid(L * 16))
+                .output(NAQUADAH_FUEL_FACTORY)
+                .stationResearch(b -> b
+                        .researchStack(DISK_26.getStackForm())
+                        .CWUt(CWT[ZPM])
                         .EUt(VA[UV]))
-                .EUt(VA[UHV])
+                .EUt(VA[UV])
                 .duration(600)
                 .buildAndRegister();
 

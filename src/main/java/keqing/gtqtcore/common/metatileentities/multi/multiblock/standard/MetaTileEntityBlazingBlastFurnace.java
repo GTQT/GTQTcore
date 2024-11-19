@@ -55,17 +55,21 @@ import java.util.Comparator;
 import java.util.List;
 
 import static gregtech.api.GTValues.VA;
+import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.DRYER_RECIPES;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.Pyrotheum;
 
 public class MetaTileEntityBlazingBlastFurnace extends GTQTRecipeMapMultiblockControllerOverwrite implements IHeatingCoil {
     protected static int heatingCoilLevel;
     private final FluidStack LUBRICANT_STACK = Pyrotheum.getFluid(heatingCoilLevel);
-    protected int heatingCoilDiscount;
     int ParallelNum = 1;
     private int blastFurnaceTemperature;
 
     public MetaTileEntityBlazingBlastFurnace(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, new RecipeMap[]{RecipeMaps.BLAST_RECIPES,GTQTcoreRecipeMaps.BURNER_REACTOR_RECIPES,});
+        super(metaTileEntityId, new RecipeMap[]{
+                RecipeMaps.BLAST_RECIPES,
+                GTQTcoreRecipeMaps.BURNER_REACTOR_RECIPES,
+                DRYER_RECIPES
+        });
         this.recipeMapWorkable = new BlazingBlastFurnaceWorkable(this);
     }
 

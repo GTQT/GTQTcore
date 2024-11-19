@@ -31,8 +31,8 @@ public class GTQTMultiblockCasing extends VariantBlock<GTQTMultiblockCasing.Casi
 
         NITINOL_MACHINE_CASING("nitinol_machine_casing"),
         HC_ALLOY_CASING("hc_alloy_casing"),
-        SFTC("supercritical_fluid_turbine_casing"),
-        SFTS("supercritical_fluid_turbine_shaft_block"),
+        SFTC("supercritical_fuel_trans_casing"),
+        SFTS("supercritical_fuel_trans_score"),
         NAQUADRIA_CASING("naquadria_casing"),
         NAQUADAH_ALLOY_CASING("naquadah_alloy_casing");
 

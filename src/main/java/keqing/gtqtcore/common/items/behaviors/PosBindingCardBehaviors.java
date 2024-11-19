@@ -26,10 +26,12 @@ public class PosBindingCardBehaviors implements IItemBehaviour {
             int x = compound.getInteger("x");
             int y = compound.getInteger("y");
             int z = compound.getInteger("z");
-
+            int dim = compound.getInteger("dim");
             lines.add(I18n.format("右键下蹲获取对应方块坐标，右键清空物品缓存坐标"));
             lines.add(I18n.format("-------------------"));
             lines.add(I18n.format("x：%s y：%s z：%s", x, y, z));
+            lines.add(I18n.format("DIM：%s ", dim));
+
         }
     }
     @Override
@@ -42,12 +44,14 @@ public class PosBindingCardBehaviors implements IItemBehaviour {
                 compound.setInteger("x", pos.getX());
                 compound.setInteger("y", pos.getY());
                 compound.setInteger("z", pos.getZ());
+                compound.setInteger("dim", player.world.provider.getDimension());
             } else {
                 NBTTagCompound compound = new NBTTagCompound();
                 compound.setBoolean("hasPos", false);
                 compound.setInteger("x", pos.getX());
                 compound.setInteger("y", pos.getY());
                 compound.setInteger("z", pos.getZ());
+                compound.setInteger("dim", player.world.provider.getDimension());
                 stack.setTagCompound(compound);
             }
         } else {
@@ -59,6 +63,7 @@ public class PosBindingCardBehaviors implements IItemBehaviour {
                 compound.setInteger("x", Integer.MIN_VALUE);
                 compound.setInteger("y", Integer.MAX_VALUE);
                 compound.setInteger("z", Integer.MAX_VALUE);
+                compound.setInteger("dim", Integer.MAX_VALUE);
                 stack.setTagCompound(compound);
             }
         }

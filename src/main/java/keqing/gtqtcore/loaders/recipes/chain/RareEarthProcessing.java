@@ -571,9 +571,9 @@ public class RareEarthProcessing {
                 .duration(600).EUt(VA[EV]).buildAndRegister();
     }
     private static void p507() {
-        CHEMICAL_RECIPES.recipeBuilder()
+        LARGE_CHEMICAL_RECIPES.recipeBuilder()
                 .fluidInputs(Ethanol.getFluid(2000))
-                .notConsumable(dust, SodiumHydroxide, 1)
+                .notConsumable(dust, LithiumHydroxide, 1)
                 .fluidOutputs(Crotonaldehyde.getFluid(1000))
                 .fluidOutputs(Water.getFluid(1000))
                 .duration(600).EUt(VA[EV]).buildAndRegister();

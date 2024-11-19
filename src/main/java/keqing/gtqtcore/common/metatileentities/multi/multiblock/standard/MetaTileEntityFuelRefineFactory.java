@@ -12,6 +12,7 @@ import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
+import gregtech.common.blocks.BlockBoilerCasing;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
@@ -29,6 +30,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
+import static gregtech.api.unification.material.Materials.Naquadah;
 import static gregtech.api.unification.material.Materials.NaquadahAlloy;
 
 public class MetaTileEntityFuelRefineFactory extends RecipeMapMultiblockController {
@@ -83,7 +85,7 @@ public class MetaTileEntityFuelRefineFactory extends RecipeMapMultiblockControll
     }
 
     private static IBlockState getPipeCasingState() {
-        return GTQTMetaBlocks.TURBINE_CASING.getState(GTQTTurbineCasing.TurbineCasingType.POLYBENZIMIDAZOLE_PIPE);
+        return MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.POLYTETRAFLUOROETHYLENE_PIPE);
     }
 
     private static IBlockState getUniqueCasingState() {
@@ -91,7 +93,7 @@ public class MetaTileEntityFuelRefineFactory extends RecipeMapMultiblockControll
     }
 
     private static IBlockState getFrameState() {
-        return MetaBlocks.FRAMES.get(NaquadahAlloy).getBlock(NaquadahAlloy);
+        return MetaBlocks.FRAMES.get(Naquadah).getBlock(Naquadah);
     }
 
     @SideOnly(Side.CLIENT)

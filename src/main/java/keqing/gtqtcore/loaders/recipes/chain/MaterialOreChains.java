@@ -199,7 +199,7 @@ public class MaterialOreChains {
                 .blastFurnaceTemp(2100)
                 .buildAndRegister();
 
-        VACUUM_DRYING_FURNACE_RECIPES.recipeBuilder()
+        DRYER_RECIPES.recipeBuilder()
                 .duration(160)
                 .EUt(VA[HV])
                 .input(dust, Molybdenite,3)
@@ -207,7 +207,6 @@ public class MaterialOreChains {
                 .fluidOutputs(SulfurDioxide.getFluid(2000))
                 .fluidOutputs(MolybdenumFlue.getFluid(1000))
                 .output(dust, MolybdenumTrioxide, 4)
-                .blastFurnaceTemp(3200)
                 .buildAndRegister();
 
         BLAST_RECIPES.recipeBuilder()

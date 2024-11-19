@@ -20,16 +20,16 @@
           "all": "gregtech:blocks/multiblock/casings/hc_alloy_casing"
         }
       },
-      "supercritical_fluid_turbine_casing": {
+      "supercritical_fuel_trans_casing": {
         "model": "minecraft:cube_all",
         "textures": {
-          "all": "gregtech:blocks/multiblock/casings/supercritical_fluid_turbine_casing"
+          "all": "gregtech:blocks/multiblock/casings/supercritical_fuel_trans_casing"
         }
       },
-      "supercritical_fluid_turbine_shaft_block": {
+      "supercritical_fuel_trans_score": {
         "model": "minecraft:cube_all",
         "textures": {
-          "all": "gregtech:blocks/multiblock/casings/supercritical_fluid_turbine_shaft_block"
+          "all": "gregtech:blocks/multiblock/casings/supercritical_fuel_trans_score"
         }
       },
       "naquadah_alloy_casing": {

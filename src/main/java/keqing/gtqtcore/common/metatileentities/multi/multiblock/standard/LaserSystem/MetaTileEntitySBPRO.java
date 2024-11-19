@@ -40,6 +40,8 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
+import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -66,16 +68,17 @@ public class MetaTileEntitySBPRO extends MetaTileEntityBaseWithControl {
     long[] La = new long[6];
     long[] Se = new long[6];
     long[] Ma = new long[6];
-
+    int dim;
     public MetaTileEntitySBPRO(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId);
     }
     BlockPos TargetPos;
     boolean findTarget = false;
-    public void setMachinePos(BlockPos pos)
+    public void setMachinePos(BlockPos pos,int dim)
     {
         findTarget=true;
         TargetPos=pos;
+        this.dim=dim;
     }
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("length", length);
@@ -83,6 +86,7 @@ public class MetaTileEntitySBPRO extends MetaTileEntityBaseWithControl {
         data.setLong("Cost", Cost);
         data.setLong("More", More);
         data.setInteger("circuit", circuit);
+        data.setInteger("dim", dim);
         for (int i = 0; i < 6; i++) {
             data.setLong("La" + i, La[i]);
             data.setLong("Se" + i, Se[i]);
@@ -103,6 +107,7 @@ public class MetaTileEntitySBPRO extends MetaTileEntityBaseWithControl {
         Cost = data.getLong("Cost");
         More = data.getLong("More");
         circuit = data.getInteger("circuit");
+        dim = data.getInteger("dim");
         for (int i = 0; i < 6; i++) {
             La[i] = data.getLong("La" + i);
             Se[i] = data.getLong("Se" + i);
@@ -113,7 +118,7 @@ public class MetaTileEntitySBPRO extends MetaTileEntityBaseWithControl {
 
     @Override
     protected void updateFormedValid() {
-        MetaTileEntity mte = GTUtility.getMetaTileEntity(this.getWorld(), TargetPos);
+        MetaTileEntity mte = GTUtility.getMetaTileEntity(DimensionManager.getWorld(dim), TargetPos);
         if (mte instanceof MetaTileEntitySBPRC && ((MetaTileEntitySBPRC) mte).isStructureFormed()) {
             findTarget=true;
             writeCustomData(GregtechDataCodes.UPDATE_PARTICLE, this::writeParticles);
@@ -122,6 +127,7 @@ public class MetaTileEntitySBPRO extends MetaTileEntityBaseWithControl {
         {
             findTarget=false;
             TargetPos=null;
+            dim=0;
         }
 
         long c = 0;
@@ -325,6 +331,7 @@ public class MetaTileEntitySBPRO extends MetaTileEntityBaseWithControl {
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
         textList.add(new TextComponentTranslation("控制器绑定状态:%s", findTarget));
+        textList.add(new TextComponentTranslation("目标坐标：%s %s %s D:%s", TargetPos.getX(), TargetPos.getY(), TargetPos.getZ(), dim));
         textList.add(new TextComponentTranslation("仓号:%s", circuit + 1));
         if (io[circuit][0] == 2)
             textList.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY, "激光输出-等级：%s", io[circuit][1]));

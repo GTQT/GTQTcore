@@ -308,7 +308,6 @@ public class MetaTileEntityDangoteDistillery extends MultiMapMultiblockControlle
         protected IMultipleTankHandler getOutputTank() {
             if (usesAdvHatchLogic())
                 return handler.getFluidTanks();
-
             return super.getOutputTank();
         }
     }

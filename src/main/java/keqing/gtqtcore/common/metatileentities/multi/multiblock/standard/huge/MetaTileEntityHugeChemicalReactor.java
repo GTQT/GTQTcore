@@ -197,6 +197,7 @@ public class MetaTileEntityHugeChemicalReactor extends GTQTRecipeMapMultiblockCo
                         .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setMaxGlobalLimited(8).setPreviewCount(1))
                         .or(abilities(MultiblockAbility.EXPORT_FLUIDS).setMaxGlobalLimited(8).setPreviewCount(1))
                         .or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(3))
+                        .or(abilities(MultiblockAbility.INPUT_LASER).setMinGlobalLimited(1).setMaxGlobalLimited(3))
                 )
                 .where('X', heatingCoils())
                 .where('M', abilities(MultiblockAbility.MUFFLER_HATCH))

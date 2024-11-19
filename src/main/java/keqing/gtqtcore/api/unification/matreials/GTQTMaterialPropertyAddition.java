@@ -2,25 +2,14 @@ package keqing.gtqtcore.api.unification.matreials;
 
 import gregtech.api.GTValues;
 import gregtech.api.fluids.FluidBuilder;
-import gregtech.api.fluids.store.FluidStorageKey;
 import gregtech.api.fluids.store.FluidStorageKeys;
-import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.properties.*;
 
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import static gregtech.api.GTValues.*;
+import static gregtech.api.GTValues.UEV;
+import static gregtech.api.GTValues.VA;
 import static gregtech.api.unification.material.Materials.*;
-import static gregtech.api.unification.material.properties.BlastProperty.GasTier.LOW;
-import static gregtech.integration.crafttweaker.material.MaterialPropertyExpansion.addFluid;
-import static gregtech.integration.groovy.MaterialPropertyExpansion.addLiquid;
-import static gregtech.integration.groovy.MaterialPropertyExpansion.addPlasma;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.ChloroaceticAcid;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.SiliconCarbide;
-import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.TitanSteel;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.Zircon;
 
 public class GTQTMaterialPropertyAddition {
     public static void init() {
@@ -31,6 +20,7 @@ public class GTQTMaterialPropertyAddition {
         PalladiumRaw.setFormula("PdCl2?");
         NetherStar.setFormula("PtDc?KQ", true);
         //  Elements
+        Thulium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
         Tellurium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
         Zircon.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
         Erbium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
@@ -42,7 +32,6 @@ public class GTQTMaterialPropertyAddition {
         Rutherfordium.setProperty(PropertyKey.INGOT, new IngotProperty());
         Rutherfordium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
         Polonium.setProperty(PropertyKey.INGOT, new IngotProperty());
-        Polonium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
         Bromine.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
         Iodine.setProperty(PropertyKey.DUST, new DustProperty());
         Iodine.setProperty(PropertyKey.INGOT, new IngotProperty());
@@ -55,7 +44,6 @@ public class GTQTMaterialPropertyAddition {
         Actinium.setProperty(PropertyKey.INGOT, new IngotProperty());
         Actinium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
         Caesium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
-        Astatine.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
         Californium.setProperty(PropertyKey.INGOT, new IngotProperty());
         Californium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
         Curium.setProperty(PropertyKey.INGOT, new IngotProperty());
@@ -229,6 +217,8 @@ public class GTQTMaterialPropertyAddition {
 
         Thorium.getProperty(PropertyKey.FLUID).enqueueRegistration(FluidStorageKeys.PLASMA, new FluidBuilder());
 
+        Hydrogen.getProperty(PropertyKey.FLUID).enqueueRegistration(FluidStorageKeys.PLASMA, new FluidBuilder());
+
         var fpPropertyGermanium = new FluidProperty();
         fpPropertyGermanium.enqueueRegistration(FluidStorageKeys.LIQUID, new FluidBuilder());
         fpPropertyGermanium.enqueueRegistration(FluidStorageKeys.PLASMA, new FluidBuilder());
@@ -250,5 +240,20 @@ public class GTQTMaterialPropertyAddition {
         fpPropertyRhenium.enqueueRegistration(FluidStorageKeys.LIQUID, new FluidBuilder());
         fpPropertyRhenium.enqueueRegistration(FluidStorageKeys.PLASMA, new FluidBuilder());
         Rhenium.setProperty(PropertyKey.FLUID, fpPropertyRhenium);
+
+        var fpPropertyPraseodymium = new FluidProperty();
+        fpPropertyPraseodymium.enqueueRegistration(FluidStorageKeys.LIQUID, new FluidBuilder());
+        fpPropertyPraseodymium.enqueueRegistration(FluidStorageKeys.PLASMA, new FluidBuilder());
+        Praseodymium.setProperty(PropertyKey.FLUID, fpPropertyPraseodymium);
+
+        var fpPropertyPolonium = new FluidProperty();
+        fpPropertyPolonium.enqueueRegistration(FluidStorageKeys.LIQUID, new FluidBuilder());
+        fpPropertyPolonium.enqueueRegistration(FluidStorageKeys.PLASMA, new FluidBuilder());
+        Polonium.setProperty(PropertyKey.FLUID, fpPropertyPolonium);
+
+        var fpPropertyAstatine = new FluidProperty();
+        fpPropertyAstatine.enqueueRegistration(FluidStorageKeys.LIQUID, new FluidBuilder());
+        fpPropertyAstatine.enqueueRegistration(FluidStorageKeys.PLASMA, new FluidBuilder());
+        Astatine.setProperty(PropertyKey.FLUID, fpPropertyAstatine);
     }
 }

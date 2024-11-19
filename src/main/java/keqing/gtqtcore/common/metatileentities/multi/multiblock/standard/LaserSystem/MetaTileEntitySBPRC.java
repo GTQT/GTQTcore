@@ -1,5 +1,5 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.LaserSystem;
-
+import net.minecraftforge.common.DimensionManager;
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
@@ -72,13 +72,14 @@ public class MetaTileEntitySBPRC extends MetaTileEntityBaseWithControl implement
     int x;
     int y;
     int z;
+    int dim;
     int switchInput;
     int switchOutput;
     int[] weightOutput = new int[64];
-    int[][] input = new int[128][5];
-    int[][] output = new int[128][5];
+    int[][] input = new int[128][6];
+    int[][] output = new int[128][6];
     int maxLength = 16;
-    //0位 状态   1 2 3位置坐标 4位 数值
+    //0位 状态   1 2 3位置坐标 4位 数值 5位dim
     int inputAmount;
     int outputAmount;
     int extraAmount;
@@ -196,11 +197,13 @@ public class MetaTileEntitySBPRC extends MetaTileEntityBaseWithControl implement
                 input[i][1] = x;
                 input[i][2] = y;
                 input[i][3] = z;
+                input[i][5] = dim;
                 checkLocate(false, false);
                 GTTransferUtils.insertItem(this.outputInventory, setCard(), false);
                 x = 0;
                 y = 0;
                 z = 0;
+                dim=0;
                 return;
             }
         }
@@ -210,12 +213,14 @@ public class MetaTileEntitySBPRC extends MetaTileEntityBaseWithControl implement
                 output[i][1] = x;
                 output[i][2] = y;
                 output[i][3] = z;
+                output[i][5] = dim;
                 weightOutput[i] = 1;
                 checkLocate(false, false);
                 GTTransferUtils.insertItem(this.outputInventory, setCard(), false);
                 x = 0;
                 y = 0;
                 z = 0;
+                dim=0;
                 return;
             }
 
@@ -255,16 +260,16 @@ public class MetaTileEntitySBPRC extends MetaTileEntityBaseWithControl implement
         }
     }
     public void setLaser(int point, long amount) {
-        MetaTileEntity mte = GTUtility.getMetaTileEntity(this.getWorld(), new BlockPos(output[point][1], output[point][2], output[point][3]));
+        MetaTileEntity mte = GTUtility.getMetaTileEntity(DimensionManager.getWorld(output[point][5]), new BlockPos(output[point][1], output[point][2], output[point][3]));
         ((MetaTileEntitySBPRO) mte).setLaser(amount);
     }
 
     public int refreshList(int point, boolean isOutput) {
 
         if (isOutput) {
-            MetaTileEntity mte = GTUtility.getMetaTileEntity(this.getWorld(), new BlockPos(output[point][1], output[point][2], output[point][3]));
+            MetaTileEntity mte = GTUtility.getMetaTileEntity(DimensionManager.getWorld(output[point][5]), new BlockPos(output[point][1], output[point][2], output[point][3]));
             if (mte instanceof MetaTileEntitySBPRO) {
-                ((MetaTileEntitySBPRO) mte).setMachinePos(this.getPos());
+                ((MetaTileEntitySBPRO) mte).setMachinePos(this.getPos(),this.getWorld().provider.getDimension());
                 return ((MetaTileEntitySBPRO) mte).getLaser();
             } else {
                 output[point][0] = 0;
@@ -272,14 +277,15 @@ public class MetaTileEntitySBPRC extends MetaTileEntityBaseWithControl implement
                 output[point][2] = 0;
                 output[point][3] = 0;
                 output[point][4] = 0;
+                output[point][5] = 0;
                 weightOutput[point] = 0;
                 return 0;
             }
 
         } else {
-            MetaTileEntity mte = GTUtility.getMetaTileEntity(this.getWorld(), new BlockPos(input[point][1], input[point][2], input[point][3]));
+            MetaTileEntity mte = GTUtility.getMetaTileEntity(DimensionManager.getWorld(input[point][5]), new BlockPos(input[point][1], input[point][2], input[point][3]));
             if (mte instanceof MetaTileEntitySBPRI) {
-                ((MetaTileEntitySBPRI) mte).setMachinePos(this.getPos());
+                ((MetaTileEntitySBPRI) mte).setMachinePos(this.getPos(),this.getWorld().provider.getDimension());
                 return (int) ((MetaTileEntitySBPRI) mte).Laser;
             } else {
                 input[point][0] = 0;
@@ -287,6 +293,7 @@ public class MetaTileEntitySBPRC extends MetaTileEntityBaseWithControl implement
                 input[point][2] = 0;
                 input[point][3] = 0;
                 input[point][4] = 0;
+                input[point][5] = 0;
                 return 0;
             }
         }
@@ -300,10 +307,11 @@ public class MetaTileEntitySBPRC extends MetaTileEntityBaseWithControl implement
             ItemStack item = this.getInputInventory().getStackInSlot(i);
             if (item.getItem() == GTQTMetaItems.GTQT_META_ITEM && item.getMetadata() == GTQTMetaItems.POS_BINDING_CARD.getMetaValue()) {
                 NBTTagCompound compound = item.getTagCompound();
-                if (compound != null && compound.hasKey("x") && compound.hasKey("y") && compound.hasKey("z")) {
+                if (compound != null && compound.hasKey("x") && compound.hasKey("y") && compound.hasKey("z") && compound.hasKey("dim")) {
                     x = compound.getInteger("x");
                     y = compound.getInteger("y");
                     z = compound.getInteger("z");
+                    dim = compound.getInteger("dim");
 
                     if (!old) {
                         this.getInputInventory().extractItem(i, 1, sim);
@@ -312,15 +320,14 @@ public class MetaTileEntitySBPRC extends MetaTileEntityBaseWithControl implement
 
                     for (int j = 0; j < maxLength; j++) {
                         if (output[j][0] == 1) {
-                            if (x == output[j][1] && y == output[j][2] && z == output[j][3]) return 0;
+                            if (x == output[j][1] && y == output[j][2] && z == output[j][3] &&dim==output[j][5]) return 0;
                         }
                         if (input[j][0] == 1) {
-                            if (x == input[j][1] && y == input[j][2] && z == input[j][3]) return 0;
+                            if (x == input[j][1] && y == input[j][2] && z == input[j][3] &&dim==input[j][5]) return 0;
                         }
                     }
 
-
-                    MetaTileEntity mte = GTUtility.getMetaTileEntity(this.getWorld(), new BlockPos(x, y, z));
+                    MetaTileEntity mte = GTUtility.getMetaTileEntity(DimensionManager.getWorld(dim), new BlockPos(x, y, z));
                     if (mte instanceof MetaTileEntitySBPRI) {
                         this.getInputInventory().extractItem(i, 1, sim);
                         return 1;
@@ -345,7 +352,7 @@ public class MetaTileEntitySBPRC extends MetaTileEntityBaseWithControl implement
         builder.widget((new AdvancedTextWidget(4, 4, this::addInputDisplayText, 16777215)).setMaxWidthLimit(100).setClickHandler(this::handleDisplayClick));
 
         builder.image(0, 40, 100, 50, GuiTextures.DISPLAY);
-        builder.widget((new AdvancedTextWidget(4, 44, this::addInfoInput1, 16777215)).setMaxWidthLimit(80).setClickHandler(this::handleDisplayClick));
+        builder.widget((new AdvancedTextWidget(4, 44, this::addInfoInput1, 16777215)).setMaxWidthLimit(100).setClickHandler(this::handleDisplayClick));
         builder.widget(new ClickButtonWidget(80, 40, 20, 25, "-5", data ->
         {
             if (switchInput > 5)
@@ -358,7 +365,7 @@ public class MetaTileEntitySBPRC extends MetaTileEntityBaseWithControl implement
         }));
 
         builder.image(0, 90, 100, 50, GuiTextures.DISPLAY);
-        builder.widget((new AdvancedTextWidget(4, 94, this::addInfoInput2, 16777215)).setMaxWidthLimit(80).setClickHandler(this::handleDisplayClick));
+        builder.widget((new AdvancedTextWidget(4, 94, this::addInfoInput2, 16777215)).setMaxWidthLimit(100).setClickHandler(this::handleDisplayClick));
         builder.widget(new ClickButtonWidget(80, 90, 20, 50, "+1", data ->
         {
             if (switchInput + 1 < maxLength)
@@ -367,7 +374,7 @@ public class MetaTileEntitySBPRC extends MetaTileEntityBaseWithControl implement
         }));
 
         builder.image(0, 140, 100, 50, GuiTextures.DISPLAY);
-        builder.widget((new AdvancedTextWidget(4, 144, this::addInfoInput3, 16777215)).setMaxWidthLimit(80).setClickHandler(this::handleDisplayClick));
+        builder.widget((new AdvancedTextWidget(4, 144, this::addInfoInput3, 16777215)).setMaxWidthLimit(100).setClickHandler(this::handleDisplayClick));
         builder.widget(new ClickButtonWidget(80, 140, 20, 50, "+2", data ->
         {
             if (switchInput + 2 < maxLength)
@@ -376,7 +383,7 @@ public class MetaTileEntitySBPRC extends MetaTileEntityBaseWithControl implement
         }));
 
         builder.image(0, 190, 100, 50, GuiTextures.DISPLAY);
-        builder.widget((new AdvancedTextWidget(4, 194, this::addInfoInput4, 16777215)).setMaxWidthLimit(80).setClickHandler(this::handleDisplayClick));
+        builder.widget((new AdvancedTextWidget(4, 194, this::addInfoInput4, 16777215)).setMaxWidthLimit(100).setClickHandler(this::handleDisplayClick));
         builder.widget(new ClickButtonWidget(80, 190, 20, 50, "+3", data ->
         {
             if (switchInput + 3 < maxLength)
@@ -389,7 +396,7 @@ public class MetaTileEntitySBPRC extends MetaTileEntityBaseWithControl implement
         builder.widget((new AdvancedTextWidget(104, 4, this::addOutputDisplayText, 16777215)).setMaxWidthLimit(100).setClickHandler(this::handleDisplayClick));
 
         builder.image(100, 40, 100, 50, GuiTextures.DISPLAY);
-        builder.widget((new AdvancedTextWidget(104, 44, this::addInfoOutput1, 16777215)).setMaxWidthLimit(80).setClickHandler(this::handleDisplayClick));
+        builder.widget((new AdvancedTextWidget(104, 44, this::addInfoOutput1, 16777215)).setMaxWidthLimit(100).setClickHandler(this::handleDisplayClick));
         builder.widget(new ClickButtonWidget(180, 40, 20, 25, "-5", data ->
         {
             if (switchOutput > 5)
@@ -403,7 +410,7 @@ public class MetaTileEntitySBPRC extends MetaTileEntityBaseWithControl implement
         }));
 
         builder.image(100, 90, 100, 50, GuiTextures.DISPLAY);
-        builder.widget((new AdvancedTextWidget(104, 94, this::addInfoOutput2, 16777215)).setMaxWidthLimit(80).setClickHandler(this::handleDisplayClick));
+        builder.widget((new AdvancedTextWidget(104, 94, this::addInfoOutput2, 16777215)).setMaxWidthLimit(100).setClickHandler(this::handleDisplayClick));
         builder.widget(new ClickButtonWidget(180, 90, 20, 50, "+1", data ->
         {
             if (switchOutput + 1 < maxLength)
@@ -412,7 +419,7 @@ public class MetaTileEntitySBPRC extends MetaTileEntityBaseWithControl implement
         }));
 
         builder.image(100, 140, 100, 50, GuiTextures.DISPLAY);
-        builder.widget((new AdvancedTextWidget(104, 144, this::addInfoOutput3, 16777215)).setMaxWidthLimit(80).setClickHandler(this::handleDisplayClick));
+        builder.widget((new AdvancedTextWidget(104, 144, this::addInfoOutput3, 16777215)).setMaxWidthLimit(100).setClickHandler(this::handleDisplayClick));
         builder.widget(new ClickButtonWidget(180, 140, 20, 50, "+2", data ->
         {
             if (switchOutput + 2 < maxLength)
@@ -420,7 +427,7 @@ public class MetaTileEntitySBPRC extends MetaTileEntityBaseWithControl implement
             else switchOutput = maxLength - 1;
         }));
         builder.image(100, 190, 100, 50, GuiTextures.DISPLAY);
-        builder.widget((new AdvancedTextWidget(104, 194, this::addInfoOutput4, 16777215)).setMaxWidthLimit(80).setClickHandler(this::handleDisplayClick));
+        builder.widget((new AdvancedTextWidget(104, 194, this::addInfoOutput4, 16777215)).setMaxWidthLimit(100).setClickHandler(this::handleDisplayClick));
         builder.widget(new ClickButtonWidget(180, 190, 20, 50, "+3", data ->
         {
             if (switchOutput + 3 < maxLength)
@@ -511,7 +518,7 @@ public class MetaTileEntitySBPRC extends MetaTileEntityBaseWithControl implement
         MultiblockDisplayText.builder(textList, isStructureFormed()).addCustom(tl -> {
             if (input[switchInput][0] == 0) return;
             tl.add(TextComponentUtil.translationWithColor(TextFormatting.GOLD, "序列：%s", switchInput + 1));
-            tl.add(new TextComponentTranslation(String.format("X:%s Y:%s Z:%s", input[switchInput][1], input[switchInput][2], input[switchInput][3])));
+            tl.add(new TextComponentTranslation(String.format("X:%s Y:%s Z:%s D:%s", input[switchInput][1], input[switchInput][2], input[switchInput][3], input[switchInput][5])));
             tl.add(new TextComponentTranslation(String.format("激光通量:%s", input[switchInput][4])));
         });
     }
@@ -521,7 +528,7 @@ public class MetaTileEntitySBPRC extends MetaTileEntityBaseWithControl implement
             if (input[switchInput + 1][0] == 0) return;
             if (switchInput + 1 <= maxLength) {
                 tl.add(TextComponentUtil.translationWithColor(TextFormatting.BLUE, "序列：%s", switchInput + 2));
-                tl.add(new TextComponentTranslation(String.format("X:%s Y:%s Z:%s", input[switchInput + 1][1], input[switchInput + 1][2], input[switchInput + 1][3])));
+                tl.add(new TextComponentTranslation(String.format("X:%s Y:%s Z:%s D:%s", input[switchInput + 1][1], input[switchInput + 1][2], input[switchInput + 1][3], input[switchInput + 1][5])));
                 tl.add(new TextComponentTranslation(String.format("激光通量:%s", input[switchInput + 1][4])));
             }
         });
@@ -532,7 +539,7 @@ public class MetaTileEntitySBPRC extends MetaTileEntityBaseWithControl implement
             if (input[switchInput + 2][0] == 0) return;
             if (switchInput + 2 <= maxLength) {
                 tl.add(TextComponentUtil.translationWithColor(TextFormatting.BLUE, "序列：%s", switchInput + 3));
-                tl.add(new TextComponentTranslation(String.format("X:%s Y:%s Z:%s", input[switchInput + 2][1], input[switchInput + 2][2], input[switchInput + 2][3])));
+                tl.add(new TextComponentTranslation(String.format("X:%s Y:%s Z:%s D:%s", input[switchInput + 2][1], input[switchInput + 2][2], input[switchInput + 2][3], input[switchInput + 2][5])));
                 tl.add(new TextComponentTranslation(String.format("激光通量:%s", input[switchInput + 2][4])));
             }
         });
@@ -543,7 +550,7 @@ public class MetaTileEntitySBPRC extends MetaTileEntityBaseWithControl implement
             if (input[switchInput + 3][0] == 0) return;
             if (switchInput + 3 <= maxLength) {
                 tl.add(TextComponentUtil.translationWithColor(TextFormatting.BLUE, "序列：%s", switchInput + 4));
-                tl.add(new TextComponentTranslation(String.format("X:%s Y:%s Z:%s", input[switchInput + 3][1], input[switchInput + 3][2], input[switchInput + 3][3])));
+                tl.add(new TextComponentTranslation(String.format("X:%s Y:%s Z:%s D:%s", input[switchInput + 3][1], input[switchInput + 3][2], input[switchInput + 3][3], input[switchInput + 3][5])));
                 tl.add(new TextComponentTranslation(String.format("激光通量:%s", input[switchInput + 3][4])));
             }
         });
@@ -561,7 +568,7 @@ public class MetaTileEntitySBPRC extends MetaTileEntityBaseWithControl implement
         MultiblockDisplayText.builder(textList, isStructureFormed()).addCustom(tl -> {
             if (output[switchOutput][0] == 0) return;
             tl.add(TextComponentUtil.translationWithColor(TextFormatting.GOLD, "序列：%s", switchOutput + 1));
-            tl.add(new TextComponentTranslation(String.format("X:%s Y:%s Z:%s", output[switchOutput][1], output[switchOutput][2], output[switchOutput][3])));
+            tl.add(new TextComponentTranslation(String.format("X:%s Y:%s Z:%s D:%s", output[switchOutput][1], output[switchOutput][2], output[switchOutput][3], output[switchOutput][5])));
             tl.add(new TextComponentTranslation(String.format("激光通量:%s", output[switchOutput][4])));
             tl.add(new TextComponentTranslation(String.format("输出权重:%s", weightOutput[switchOutput])));
         });
@@ -572,7 +579,7 @@ public class MetaTileEntitySBPRC extends MetaTileEntityBaseWithControl implement
             if (output[switchOutput + 1][0] == 0) return;
             if (switchOutput + 1 <= maxLength) {
                 tl.add(TextComponentUtil.translationWithColor(TextFormatting.BLUE, "序列：%s", switchOutput + 2));
-                tl.add(new TextComponentTranslation(String.format("X:%s Y:%s Z:%s", output[switchOutput + 1][1], output[switchOutput + 1][2], output[switchOutput + 1][3])));
+                tl.add(new TextComponentTranslation(String.format("X:%s Y:%s Z:%s D:%s", output[switchOutput + 1][1], output[switchOutput + 1][2], output[switchOutput + 1][3], output[switchOutput + 1][5])));
                 tl.add(new TextComponentTranslation(String.format("激光通量:%s", output[switchOutput + 1][4])));
                 tl.add(new TextComponentTranslation(String.format("输出权重:%s", weightOutput[switchOutput + 1])));
             }
@@ -584,7 +591,7 @@ public class MetaTileEntitySBPRC extends MetaTileEntityBaseWithControl implement
             if (output[switchOutput + 2][0] == 0) return;
             if (switchOutput + 2 <= maxLength) {
                 tl.add(TextComponentUtil.translationWithColor(TextFormatting.BLUE, "序列：%s", switchOutput + 3));
-                tl.add(new TextComponentTranslation(String.format("X:%s Y:%s Z:%s", output[switchOutput + 2][1], output[switchOutput + 2][2], output[switchOutput + 2][3])));
+                tl.add(new TextComponentTranslation(String.format("X:%s Y:%s Z:%s D:%s", output[switchOutput + 2][1], output[switchOutput + 2][2], output[switchOutput + 2][3], output[switchOutput + 2][5])));
                 tl.add(new TextComponentTranslation(String.format("激光通量:%s", output[switchOutput + 2][4])));
                 tl.add(new TextComponentTranslation(String.format("输出权重:%s", weightOutput[switchOutput + 2])));
             }
@@ -596,7 +603,7 @@ public class MetaTileEntitySBPRC extends MetaTileEntityBaseWithControl implement
             if (output[switchOutput + 3][0] == 0) return;
             if (switchOutput + 3 <= maxLength) {
                 tl.add(TextComponentUtil.translationWithColor(TextFormatting.BLUE, "序列：%s", switchOutput + 4));
-                tl.add(new TextComponentTranslation(String.format("X:%s Y:%s Z:%s", output[switchOutput + 3][1], output[switchOutput + 3][2], output[switchOutput + 3][3])));
+                tl.add(new TextComponentTranslation(String.format("X:%s Y:%s Z:%s D:%s", output[switchOutput + 3][1], output[switchOutput + 3][2], output[switchOutput + 3][3], output[switchOutput + 3][5])));
                 tl.add(new TextComponentTranslation(String.format("激光通量:%s", output[switchOutput + 3][4])));
                 tl.add(new TextComponentTranslation(String.format("输出权重:%s", weightOutput[switchOutput + 3])));
             }
@@ -610,6 +617,7 @@ public class MetaTileEntitySBPRC extends MetaTileEntityBaseWithControl implement
         nodeTagCompound.setInteger("x", x);
         nodeTagCompound.setInteger("y", y);
         nodeTagCompound.setInteger("z", z);
+        nodeTagCompound.setInteger("dim", dim);
         card.setTagCompound(nodeTagCompound);
         return card;
     }

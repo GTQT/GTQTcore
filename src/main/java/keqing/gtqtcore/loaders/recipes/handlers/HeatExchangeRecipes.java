@@ -3,105 +3,366 @@ package keqing.gtqtcore.loaders.recipes.handlers;
 import gregtech.api.unification.material.Material;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 
+import static gregtech.api.GTValues.EV;
+import static gregtech.api.GTValues.V;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.Materials.Oxygen;
+import static keqing.gtqtcore.api.GCYSValues.MV;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 
 public class HeatExchangeRecipes {
-    static int SECOND=20;
-    public static void heatExchange(Material material, int time)
-    {
-        HEAT_EXCHANGE.recipeBuilder()
-                .fluidInputs(material.getPlasma(1))
-                .fluidOutputs(material.getFluid(1))
-                .duration(time)
+
+    public static void init() {
+        BasicHeatExchange();
+        Fuels();
+    }
+    private static void Fuels() {
+        //  Superheated Steam
+        HIGH_PRESSURE_STEAM_TURBINE_RECIPES.recipeBuilder()
+                .fluidInputs(SuperheatedSteam.getFluid(320))
+                .fluidOutputs(DistilledWater.getFluid(64))
+                .EUt((int) V[MV])
+                .duration(10)
+                .buildAndRegister();
+
+        //  Supercritical Steam
+        SUPERCRITICAL_STEAM_TURBINE_RECIPES.recipeBuilder()
+                .fluidInputs(HighPressureSteam.getFluid(640))
+                .fluidOutputs(DistilledWater.getFluid(128))
+                .EUt((int) V[EV])
+                .duration(10)
                 .buildAndRegister();
     }
-    public static void init() {
-        HEAT_EXCHANGE.recipeBuilder()
-                .fluidInputs(HighPressureSteam.getFluid(1))
-                .fluidOutputs(SuperheatedSteam.getFluid(40))
-                .duration(2)
-                .buildAndRegister();
-
-        HEAT_EXCHANGE.recipeBuilder()
-                .fluidInputs(SuperheatedSteam.getFluid(1))
-                .fluidOutputs(SteamExhaustGas.getFluid(40))
-                .duration(1)
-                .buildAndRegister();
-
-        HEAT_EXCHANGE.recipeBuilder()
-                .fluidInputs(SteamExhaustGas.getFluid(600))
-                .fluidOutputs(Water.getFluid(600))
-                .duration(1)
-                .buildAndRegister();
-
-        heatExchange(Oxygen,30);
-
-        heatExchange(Nitrogen,36);
-        heatExchange(Argon,48);
-
-        heatExchange(Iron,56);
-        heatExchange(Tin,64);
-        heatExchange(Nickel,72);
-        heatExchange(Americium,160);
-        heatExchange(Calcium,4 * SECOND);
-        heatExchange(Boron, (int) (3.2 * SECOND));
-        heatExchange(Neon, (int) (4.5 * SECOND));
-        heatExchange(Sodium, (int) (2.5 * SECOND));
-        heatExchange(Sulfur, (int) (5.6 * SECOND));
-        heatExchange(Zinc, (int) (4.9 * SECOND));
-        heatExchange(Niobium, (int) (5.2 * SECOND));
-        heatExchange(Titanium, (int) (7.6 * SECOND));
-        heatExchange(Krypton, (int) (7.2 * SECOND));
-        heatExchange(Rhenium, (int) (10.4 * SECOND));
-        heatExchange(Silver, (int) (8.4 * SECOND));
-        heatExchange(Bismuth, (int) (9.2 * SECOND));
-        heatExchange(Xenon, (int) (17.4 * SECOND));
-        heatExchange(Radon, (int) (18.9 * SECOND));
-        heatExchange(Chrome, (int) (14.8 * SECOND));
-        heatExchange(Neptunium, (int) (34.5 * SECOND));
-        heatExchange(Fermium, (int) (38.7 * SECOND));
-        heatExchange(Gadolinium, (int) (44.3 * SECOND));
-        heatExchange(Plutonium241, (int) (47.8 * SECOND));
-        heatExchange(Lead, (int) (46.4 * SECOND));
-        heatExchange(Thorium, (int) (52.2 * SECOND));
-        heatExchange(Germanium, (int) (61.2 * SECOND));
-
-        //  Exhaust gas heat exchange
+    private static void BasicHeatExchange() {
+        //  Lava
         HEAT_EXCHANGE_RECIPES.recipeBuilder()
-                .fluidInputs(DistilledWater.getFluid(10))
-                .fluidInputs(HighPressureSteam.getFluid(2))
-                .fluidOutputs(Steam.getFluid(160 * 10))
-                .fluidOutputs(SuperheatedSteam.getFluid(80 * 10))
-                .fluidOutputs(SteamExhaustGas.getFluid(2))
-                .maxRate(3200)
-                .flowRate(1000)
-                .duration(1)
+                .fluidInputs(DistilledWater.getFluid(5))
+                .fluidInputs(Lava.getFluid(1))
+                .fluidOutputs(Steam.getFluid(160 * 5))
+                .fluidOutputs(SuperheatedSteam.getFluid(80 * 5))
+                .fluidOutputs(HighPressureSteam.getFluid(1))
+                .maxRate(1600)
+                .flowRate(500)
+                .duration(20)
                 .buildAndRegister();
 
+        Mark1Fusion();
+        Mark2Fusion();
+        Mark3Fusion();
+        Mark4Fusion();
+        Mark5Fusion();
+    }
+
+    private static void Mark1Fusion() {
+        //  Helium Plasma
         HEAT_EXCHANGE_RECIPES.recipeBuilder()
-                .fluidInputs(DistilledWater.getFluid(10))
-                .fluidInputs(SuperheatedSteam.getFluid(20))
-                .fluidOutputs(Steam.getFluid(160 * 10))
-                .fluidOutputs(Steam.getFluid(80 * 10))
-                .fluidOutputs(SteamExhaustGas.getFluid(20))
-                .maxRate(3200)
-                .flowRate(1000)
-                .duration(1)
+                .fluidInputs(DistilledWater.getFluid(5))
+                .fluidInputs(Helium.getPlasma(1))
+                .fluidOutputs(SuperheatedSteam.getFluid(160 * 5))
+                .fluidOutputs(HighPressureSteam.getFluid(80 * 5))
+                .fluidOutputs(Helium.getFluid(1))
+                .maxRate(1600)
+                .flowRate(500)
+                .duration(20)
                 .buildAndRegister();
 
+        //  Calcium Plasma
         HEAT_EXCHANGE_RECIPES.recipeBuilder()
-                .fluidInputs(DistilledWater.getFluid(10))
-                .fluidInputs(SteamExhaustGas.getFluid(200))
-                .fluidOutputs(Steam.getFluid(160 * 10))
-                .fluidOutputs(Steam.getFluid(80 * 10))
-                .fluidOutputs(Steam.getFluid(20))
-                .maxRate(3200)
-                .flowRate(1000)
-                .duration(1)
+                .fluidInputs(DistilledWater.getFluid(5))
+                .fluidInputs(Calcium.getPlasma(1))
+                .fluidOutputs(SuperheatedSteam.getFluid(160 * 5))
+                .fluidOutputs(HighPressureSteam.getFluid(80 * 5))
+                .fluidOutputs(Calcium.getFluid(1))
+                .maxRate(1600)
+                .flowRate(500)
+                .duration(20)
                 .buildAndRegister();
 
+        //  Boron Plasma
+        HEAT_EXCHANGE_RECIPES.recipeBuilder()
+                .fluidInputs(DistilledWater.getFluid(5))
+                .fluidInputs(Boron.getPlasma(1))
+                .fluidOutputs(SuperheatedSteam.getFluid(160 * 5))
+                .fluidOutputs(HighPressureSteam.getFluid(80 * 5))
+                .fluidOutputs(Boron.getFluid(1))
+                .maxRate(1600)
+                .flowRate(500)
+                .duration(20)
+                .buildAndRegister();
+
+        //  Noen Plasma
+        HEAT_EXCHANGE_RECIPES.recipeBuilder()
+                .fluidInputs(DistilledWater.getFluid(5))
+                .fluidInputs(Neon.getPlasma(1))
+                .fluidOutputs(SuperheatedSteam.getFluid(160 * 5))
+                .fluidOutputs(HighPressureSteam.getFluid(80 * 5))
+                .fluidOutputs(Neon.getFluid(1))
+                .maxRate(1600)
+                .flowRate(500)
+                .duration(20)
+                .buildAndRegister();
+    }
+
+    private static void Mark2Fusion() {
+        //  Nitrogen Plasma
+        HEAT_EXCHANGE_RECIPES.recipeBuilder()
+                .fluidInputs(DistilledWater.getFluid(5))
+                .fluidInputs(Nitrogen.getPlasma(1))
+                .fluidOutputs(SuperheatedSteam.getFluid(320 * 5))
+                .fluidOutputs(HighPressureSteam.getFluid(160 * 5))
+                .fluidOutputs(Nitrogen.getFluid(1))
+                .maxRate(3200)
+                .flowRate(500)
+                .duration(20)
+                .buildAndRegister();
+
+        //  Oxygen Plasma
+        HEAT_EXCHANGE_RECIPES.recipeBuilder()
+                .fluidInputs(DistilledWater.getFluid(5))
+                .fluidInputs(Oxygen.getPlasma(1))
+                .fluidOutputs(SuperheatedSteam.getFluid(320 * 5))
+                .fluidOutputs(HighPressureSteam.getFluid(160 * 5))
+                .fluidOutputs(Oxygen.getFluid(1))
+                .maxRate(3200)
+                .flowRate(500)
+                .duration(20)
+                .buildAndRegister();
+
+        //  Argon Plasma
+        HEAT_EXCHANGE_RECIPES.recipeBuilder()
+                .fluidInputs(DistilledWater.getFluid(5))
+                .fluidInputs(Argon.getPlasma(1))
+                .fluidOutputs(SuperheatedSteam.getFluid(320 * 5))
+                .fluidOutputs(HighPressureSteam.getFluid(160 * 5))
+                .fluidOutputs(Argon.getFluid(1))
+                .maxRate(3200)
+                .flowRate(500)
+                .duration(20)
+                .buildAndRegister();
+
+        //  Iron Plasma
+        HEAT_EXCHANGE_RECIPES.recipeBuilder()
+                .fluidInputs(DistilledWater.getFluid(5))
+                .fluidInputs(Iron.getPlasma(1))
+                .fluidOutputs(SuperheatedSteam.getFluid(320 * 5))
+                .fluidOutputs(HighPressureSteam.getFluid(160 * 5))
+                .fluidOutputs(Iron.getFluid(1))
+                .maxRate(3200)
+                .flowRate(500)
+                .duration(20)
+                .buildAndRegister();
+
+        //  Tin Plasma
+        HEAT_EXCHANGE_RECIPES.recipeBuilder()
+                .fluidInputs(DistilledWater.getFluid(5))
+                .fluidInputs(Tin.getPlasma(1))
+                .fluidOutputs(SuperheatedSteam.getFluid(320 * 5))
+                .fluidOutputs(HighPressureSteam.getFluid(160 * 5))
+                .fluidOutputs(Tin.getFluid(1))
+                .maxRate(3200)
+                .flowRate(500)
+                .duration(20)
+                .buildAndRegister();
+
+        //  Sulfur Plasma
+        HEAT_EXCHANGE_RECIPES.recipeBuilder()
+                .fluidInputs(DistilledWater.getFluid(5))
+                .fluidInputs(Sulfur.getPlasma(1))
+                .fluidOutputs(SuperheatedSteam.getFluid(320 * 5))
+                .fluidOutputs(HighPressureSteam.getFluid(160 * 5))
+                .fluidOutputs(Sulfur.getFluid(1))
+                .maxRate(3200)
+                .flowRate(500)
+                .duration(20)
+                .buildAndRegister();
+
+        //  Zinc Plasma
+        HEAT_EXCHANGE_RECIPES.recipeBuilder()
+                .fluidInputs(DistilledWater.getFluid(5))
+                .fluidInputs(Zinc.getPlasma(1))
+                .fluidOutputs(SuperheatedSteam.getFluid(320 * 5))
+                .fluidOutputs(HighPressureSteam.getFluid(160 * 5))
+                .fluidOutputs(Zinc.getFluid(1))
+                .maxRate(3200)
+                .flowRate(500)
+                .duration(20)
+                .buildAndRegister();
+
+        //  Niobium Plasma
+        HEAT_EXCHANGE_RECIPES.recipeBuilder()
+                .fluidInputs(DistilledWater.getFluid(5))
+                .fluidInputs(Niobium.getPlasma(1))
+                .fluidOutputs(SuperheatedSteam.getFluid(320 * 5))
+                .fluidOutputs(HighPressureSteam.getFluid(160 * 5))
+                .fluidOutputs(Niobium.getFluid(1))
+                .maxRate(3200)
+                .flowRate(500)
+                .duration(20)
+                .buildAndRegister();
+
+        //  Titanium Plasma
+        HEAT_EXCHANGE_RECIPES.recipeBuilder()
+                .fluidInputs(DistilledWater.getFluid(5))
+                .fluidInputs(Titanium.getPlasma(1))
+                .fluidOutputs(SuperheatedSteam.getFluid(320 * 5))
+                .fluidOutputs(HighPressureSteam.getFluid(160 * 5))
+                .fluidOutputs(Titanium.getFluid(1))
+                .maxRate(3200)
+                .flowRate(500)
+                .duration(20)
+                .buildAndRegister();
+
+        //  Krypton Plasma
+        HEAT_EXCHANGE_RECIPES.recipeBuilder()
+                .fluidInputs(DistilledWater.getFluid(5))
+                .fluidInputs(Krypton.getPlasma(1))
+                .fluidOutputs(SuperheatedSteam.getFluid(320 * 5))
+                .fluidOutputs(HighPressureSteam.getFluid(160 * 5))
+                .fluidOutputs(Krypton.getFluid(1))
+                .maxRate(3200)
+                .flowRate(500)
+                .duration(20)
+                .buildAndRegister();
+    }
+
+    private static void Mark3Fusion() {
+        //  Nickel Plasma
+        HEAT_EXCHANGE_RECIPES.recipeBuilder()
+                .fluidInputs(DistilledWater.getFluid(5))
+                .fluidInputs(Nickel.getPlasma(1))
+                .fluidOutputs(SuperheatedSteam.getFluid(640 * 5))
+                .fluidOutputs(HighPressureSteam.getFluid(320 * 5))
+                .fluidOutputs(Nickel.getFluid(1))
+                .maxRate(6400)
+                .flowRate(500)
+                .duration(20)
+                .buildAndRegister();
+
+        //  Americium Plasma
+        HEAT_EXCHANGE_RECIPES.recipeBuilder()
+                .fluidInputs(DistilledWater.getFluid(5))
+                .fluidInputs(Americium.getPlasma(1))
+                .fluidOutputs(SuperheatedSteam.getFluid(640 * 5))
+                .fluidOutputs(HighPressureSteam.getFluid(320 * 5))
+                .fluidOutputs(Americium.getFluid(1))
+                .maxRate(6400)
+                .flowRate(500)
+                .duration(20)
+                .buildAndRegister();
+
+        //  Silver Plasma
+        HEAT_EXCHANGE_RECIPES.recipeBuilder()
+                .fluidInputs(DistilledWater.getFluid(5))
+                .fluidInputs(Silver.getPlasma(1))
+                .fluidOutputs(SuperheatedSteam.getFluid(640 * 5))
+                .fluidOutputs(HighPressureSteam.getFluid(320 * 5))
+                .fluidOutputs(Silver.getFluid(1))
+                .maxRate(6400)
+                .flowRate(500)
+                .duration(20)
+                .buildAndRegister();
+
+        //  Bismuth Plasma
+        HEAT_EXCHANGE_RECIPES.recipeBuilder()
+                .fluidInputs(DistilledWater.getFluid(5))
+                .fluidInputs(Bismuth.getPlasma(1))
+                .fluidOutputs(SuperheatedSteam.getFluid(640 * 5))
+                .fluidOutputs(HighPressureSteam.getFluid(320 * 5))
+                .fluidOutputs(Bismuth.getFluid(1))
+                .maxRate(6400)
+                .flowRate(500)
+                .duration(20)
+                .buildAndRegister();
+
+        //  Xenon Plasma
+        HEAT_EXCHANGE_RECIPES.recipeBuilder()
+                .fluidInputs(DistilledWater.getFluid(5))
+                .fluidInputs(Xenon.getPlasma(1))
+                .fluidOutputs(SuperheatedSteam.getFluid(640 * 5))
+                .fluidOutputs(HighPressureSteam.getFluid(320 * 5))
+                .fluidOutputs(Xenon.getFluid(1))
+                .maxRate(6400)
+                .flowRate(500)
+                .duration(20)
+                .buildAndRegister();
+
+        //  Radon Plasma
+        HEAT_EXCHANGE_RECIPES.recipeBuilder()
+                .fluidInputs(DistilledWater.getFluid(5))
+                .fluidInputs(Radon.getPlasma(1))
+                .fluidOutputs(SuperheatedSteam.getFluid(640 * 5))
+                .fluidOutputs(HighPressureSteam.getFluid(320 * 5))
+                .fluidOutputs(Radon.getFluid(1))
+                .maxRate(6400)
+                .flowRate(500)
+                .duration(20)
+                .buildAndRegister();
+    }
+
+    private static void Mark4Fusion() {
+        //  Neptunium Plasma
+        HEAT_EXCHANGE_RECIPES.recipeBuilder()
+                .fluidInputs(DistilledWater.getFluid(5))
+                .fluidInputs(Neptunium.getPlasma(1))
+                .fluidOutputs(SuperheatedSteam.getFluid(1280 * 5))
+                .fluidOutputs(HighPressureSteam.getFluid(640 * 5))
+                .fluidOutputs(Neptunium.getFluid(1))
+                .maxRate(12800)
+                .flowRate(500)
+                .duration(20)
+                .buildAndRegister();
+
+        //  Fermium Plasma
+        HEAT_EXCHANGE_RECIPES.recipeBuilder()
+                .fluidInputs(DistilledWater.getFluid(5))
+                .fluidInputs(Fermium.getPlasma(1))
+                .fluidOutputs(SuperheatedSteam.getFluid(1280 * 5))
+                .fluidOutputs(HighPressureSteam.getFluid(640 * 5))
+                .fluidOutputs(Fermium.getFluid(1))
+                .maxRate(12800)
+                .flowRate(500)
+                .duration(20)
+                .buildAndRegister();
+
+    }
+
+    private static void Mark5Fusion() {
+
+        //  Plutonium-241 Plasma
+        HEAT_EXCHANGE_RECIPES.recipeBuilder()
+                .fluidInputs(DistilledWater.getFluid(5))
+                .fluidInputs(Plutonium241.getPlasma(1))
+                .fluidOutputs(SuperheatedSteam.getFluid(2560 * 5))
+                .fluidOutputs(HighPressureSteam.getFluid(1280 * 5))
+                .fluidOutputs(Plutonium241.getFluid(1))
+                .maxRate(25600)
+                .flowRate(500)
+                .duration(20)
+                .buildAndRegister();
+
+        //  Lead Plasma
+        HEAT_EXCHANGE_RECIPES.recipeBuilder()
+                .fluidInputs(DistilledWater.getFluid(5))
+                .fluidInputs(Lead.getPlasma(1))
+                .fluidOutputs(SuperheatedSteam.getFluid(2560 * 5))
+                .fluidOutputs(HighPressureSteam.getFluid(1280 * 5))
+                .fluidOutputs(Lead.getFluid(1))
+                .maxRate(25600)
+                .flowRate(500)
+                .duration(20)
+                .buildAndRegister();
+
+        //  Thorium Plasma
+        HEAT_EXCHANGE_RECIPES.recipeBuilder()
+                .fluidInputs(DistilledWater.getFluid(5))
+                .fluidInputs(Thorium.getPlasma(1))
+                .fluidOutputs(SuperheatedSteam.getFluid(2560 * 5))
+                .fluidOutputs(HighPressureSteam.getFluid(1280 * 5))
+                .fluidOutputs(Thorium.getFluid(1))
+                .maxRate(25600)
+                .flowRate(500)
+                .duration(20)
+                .buildAndRegister();
     }
 }

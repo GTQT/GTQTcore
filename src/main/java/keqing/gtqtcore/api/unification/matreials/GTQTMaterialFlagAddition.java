@@ -21,9 +21,9 @@ public class GTQTMaterialFlagAddition {
     public static void init() {
         Material[] material = {
                 Lanthanum,Praseodymium,Neodymium,Cerium,Scandium,Europium,Gadolinium,Yttrium,Terbium,Dysprosium,Holmium,Erbium,Thulium,Ytterbium,Lutetium,Niobium,Palladium,Ruthenium,Naquadria,Samarium,
-                Tritanium, Duranium, Technetium, Meitnerium, Roentgenium, Nobelium, Lawrencium, Moscovium, Lutetium,
+                Tritanium, Duranium, Technetium, Meitnerium, Roentgenium, Nobelium, Lawrencium, Moscovium, Lutetium,NaquadahEnriched,
                 Stellite100, WatertightSteel, MaragingSteel300, HastelloyC276, HastelloyX, Trinaquadalloy, Zeron100, TitaniumCarbide,
-                TantalumCarbide, MolybdenumDisilicide, HSLASteel, TitaniumTungstenCarbide, IncoloyMA956
+                Americium,TantalumCarbide, MolybdenumDisilicide, HSLASteel, TitaniumTungstenCarbide, IncoloyMA956
         };
         for (Material materials : material) {
             if(!materials.hasProperty(PropertyKey.INGOT))materials.setProperty(PropertyKey.INGOT, new IngotProperty());

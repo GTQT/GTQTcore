@@ -22,9 +22,7 @@ public class BlockGCYSMultiblockCasing extends VariantBlock<BlockGCYSMultiblockC
     public enum CasingType implements IStringSerializable {
         DRILL_HEAD("drill_head"),
         SUPERHEAVY_QUANTUM_CASING("superheavy_quantum_casing"),
-
         EXTREME_STRENGTH_TRITANIUM_CASING("extreme_strength_tritanium_casing"),
-
         MASS_NULLIFIER_PLATFORM("mass_nullifier_platform");
 
         private final String name;

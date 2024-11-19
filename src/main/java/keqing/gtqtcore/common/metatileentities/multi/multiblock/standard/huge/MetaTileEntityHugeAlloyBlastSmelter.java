@@ -210,7 +210,15 @@ public class MetaTileEntityHugeAlloyBlastSmelter extends GTQTRecipeMapMultiblock
                 .where('W', heatingCoils())
                 .where('C', states(getCasingState())
                         .setMinGlobalLimited(15)
-                        .or(autoAbilities(true, true, true, false, true, true, false)))
+                        .or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(2))
+                        .or(abilities(MultiblockAbility.INPUT_LASER).setMinGlobalLimited(1).setMaxGlobalLimited(2))
+
+                        .or(abilities(MultiblockAbility.MAINTENANCE_HATCH).setExactLimit(1))
+                        .or(abilities(MultiblockAbility.IMPORT_ITEMS).setMaxGlobalLimited(4).setPreviewCount(1))
+                        .or(abilities(MultiblockAbility.EXPORT_ITEMS).setMaxGlobalLimited(4).setPreviewCount(1))
+                        .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setMaxGlobalLimited(8).setPreviewCount(1))
+                        .or(abilities(MultiblockAbility.EXPORT_FLUIDS).setMaxGlobalLimited(8).setPreviewCount(1))
+                )
                 .where('M', abilities(MultiblockAbility.MUFFLER_HATCH))
                 .where(' ', any())
                 .build();

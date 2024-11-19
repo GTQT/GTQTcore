@@ -1,4 +1,4 @@
-package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
+package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.heatExchanger;
 
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.Widget;
@@ -14,6 +14,7 @@ import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
 import gregtech.client.utils.TooltipHelper;
+import gregtech.common.blocks.BlockBoilerCasing;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.capability.IHeatExchanger;
@@ -21,7 +22,6 @@ import keqing.gtqtcore.api.capability.impl.HeatExchangerRecipeLogic;
 import keqing.gtqtcore.api.metaileentity.multiblock.NoEnergyMultiblockController;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
-import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -40,21 +40,20 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 import static gregtech.api.gui.widgets.AdvancedTextWidget.withHoverTextTranslate;
-import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing1.TurbineCasingType.SA_TURBINE_CASING;
 import static net.minecraft.util.text.TextFormatting.*;
 
-public class MetaTileEntitySmallHeatExchanger extends NoEnergyMultiblockController implements IHeatExchanger {
-    private final int heatTime = 150;
+public class MetaTileEntityLagerHeatExchanger extends NoEnergyMultiblockController implements IHeatExchanger {
+    private final int heatTime = 300;
     private int thresholdPercentage = 100;
 
-    public MetaTileEntitySmallHeatExchanger(ResourceLocation metaTileEntityId) {
+    public MetaTileEntityLagerHeatExchanger(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.HEAT_EXCHANGE_RECIPES);
         this.recipeMapWorkable = new HeatExchangerRecipeLogic(this);
     }
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {
-        return new MetaTileEntitySmallHeatExchanger(metaTileEntityId);
+        return new MetaTileEntityLagerHeatExchanger(metaTileEntityId);
     }
     @SideOnly(Side.CLIENT)
     @Nonnull
@@ -82,16 +81,16 @@ public class MetaTileEntitySmallHeatExchanger extends NoEnergyMultiblockControll
     }
 
     protected IBlockState getCasingState() {
-        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STAINLESS_CLEAN);
+        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.TUNGSTENSTEEL_ROBUST);
     }
 
     protected IBlockState getBoilerState() {
-        return GTQTMetaBlocks.TURBINE_CASING1.getState(SA_TURBINE_CASING);
+        return MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.TUNGSTENSTEEL_PIPE);
     }
 
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
-        return Textures.CLEAN_STAINLESS_STEEL_CASING;
+        return Textures.ROBUST_TUNGSTENSTEEL_CASING;
     }
 
     @Override
@@ -179,7 +178,7 @@ public class MetaTileEntitySmallHeatExchanger extends NoEnergyMultiblockControll
 
     @Override
     public int getParallel() {
-        return 1;
+        return 4;
     }
 
     @Override

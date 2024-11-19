@@ -8,12 +8,12 @@ public class GTQTMaterials {
     public static Material CAT;
     public static Material BFGF;
     public static Material EGF;
-    public static  Material CHES;
-    public static  Material TRISP;
+    public static Material CHES;
+    public static Material TRISP;
     public static Material TRISN;
-    public static  Material TRIS ;
-    public static  Material CTAB;
-    public static  Material MTBE;
+    public static Material TRIS;
+    public static Material CTAB;
+    public static Material MTBE;
     public static Material GalvanizedSteel;
     public static Material Inconel625;
     public static Material HastelloyN;
@@ -122,7 +122,6 @@ public class GTQTMaterials {
     public static Material RedstoneFront;
     public static Material SpessartineFront;
     public static Material SphaleriteFront;
-
 
 
     public static Material Thaumium;
@@ -797,6 +796,22 @@ public class GTQTMaterials {
     public static Material HeavyExoticGas;
     public static Material MediumExoticGas;
     public static Material LightExoticGas;
+    public static Material RadioactiveSludge;
+    public static Material AcidicNaquadahEmulsion;
+    public static Material NaquadahEmulsion;
+    public static Material CrudeNaquadahFuel;
+    public static Material NaquadahAsphalt;
+    public static Material NaquadahGas;
+    public static Material UnstableNaquadahPowder;
+    public static Material NaquadahFuelMKI;
+    public static Material NaquadahFuelMKII;
+    public static Material NaquadahFuelMKIII;
+    public static Material NaquadahFuelMKIV;
+    public static Material NaquadahFuelMKV;
+    public static Material NaquadahResidueMKI;
+    public static Material NaquadahResidueMKII;
+    public static Material NaquadahResidueMKIII;
+    public static Material NaquadahResidueMKIV;
     public static Material CeLAG;
     public static Material LithiumCyclopentadienide;
     public static Material CaliforniumCyclopentadienide;
@@ -813,7 +828,8 @@ public class GTQTMaterials {
 
     //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/api/unification/GSMaterials.java
 
-    public GTQTMaterials() {}
+    public GTQTMaterials() {
+    }
 
     public static void register() {
 
