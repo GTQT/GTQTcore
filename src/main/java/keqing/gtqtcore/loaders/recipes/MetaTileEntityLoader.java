@@ -1432,5 +1432,14 @@ public class MetaTileEntityLoader {
                 'T', CraftingComponent.SAWBLADE,
                 'W', CraftingComponent.CABLE,
                 'O', CraftingComponent.DOUBLE_PLATE);
+
+        //小等离子
+        gregtech.loaders.recipe.MetaTileEntityLoader.registerMachineRecipe(true, PLASMA_GENERATOR,
+                "TPT", "IHI", "SPS",
+                'H', CraftingComponent.HULL,
+                'I', CraftingComponent.FIELD_GENERATOR,
+                'P', CraftingComponent.CIRCUIT,
+                'S', CraftingComponent.CABLE_HEX,
+                'T', CraftingComponent.STICK_DISTILLATION);
     }
 }

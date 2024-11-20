@@ -117,7 +117,7 @@ public class MetaTileEntityWaterPowerStation extends MultiblockWithDisplayBase {
         this.logic.update();
         generator();
         long pow = (long) water * coilLevel * tier;
-        this.outputEu = pow / 16;
+        this.outputEu = pow / 4;
     }
 
     private long geteu() {

@@ -16,7 +16,7 @@ public class GTQTCoreConfig {
 
     public static class WorldGenSwitch {
         @Config.Comment("Chance of generating abandoned base in chunk = 1 / 100 * THIS_VALUE. 0 disables abandoned base generation. Default: 5 ,0 to close"  )
-        public int abandonedBaseRarity = 5;
+        public int abandonedBaseRarity = 10;
 
     }
     public static class OBJRenderSwitch {

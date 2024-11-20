@@ -22,7 +22,7 @@ public class RubbersChain {
                 .fluidOutputs(Acrylonitrile.getFluid(1000))
                 .EUt(VA[EV])
                 .duration(120)
-                .recipeLevel(2)
+                .recipeLevel(5)
                 .buildAndRegister();
 
         //  Acrylonitrile (LuV): Propene + Ammonia + Air + Water -> Acrylonitrile + Hydrogen
@@ -36,7 +36,7 @@ public class RubbersChain {
                 .fluidOutputs(Hydrogen.getFluid(2000))
                 .EUt(VA[LuV])
                 .duration(120)
-                .recipeLevel(3)
+                .recipeLevel(6)
                 .buildAndRegister();
 
         //  Ferric Catalyst
@@ -106,7 +106,7 @@ public class RubbersChain {
                 .fluidOutputs(PhosphorylChloride.getFluid(3000))
                 .EUt(VA[UV])
                 .duration(400)
-                .recipeLevel(4)
+                .recipeLevel(8)
                 .buildAndRegister();
 
 

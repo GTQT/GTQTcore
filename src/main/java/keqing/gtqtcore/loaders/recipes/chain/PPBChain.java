@@ -69,7 +69,7 @@ public class PPBChain {
                 .output(dust,PPB,5)
                 .fluidOutputs(AceticAnhydride.getFluid(1000))
                 .fluidOutputs(AceticAcid.getFluid(1000))
-                .recipeLevel(4)
+                .recipeLevel(5)
                 .duration(400).EUt(VA[IV]).buildAndRegister();
 
 

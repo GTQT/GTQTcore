@@ -425,6 +425,17 @@ public class BiochemChains {
                 .fluidOutputs(Aniline.getFluid(1000))
                 .fluidOutputs(Water.getFluid(2000))
                 .buildAndRegister();
+
+        // 6H + C6H5NO2 -> C6H5NH2 + 2H2O
+        CHEMICAL_RECIPES.recipeBuilder()
+                .fluidInputs(Hydrogen.getFluid(6000))
+                .fluidInputs(Nitrobenzene.getFluid(1000))
+                .notConsumable(dust, Zinc)
+                .fluidOutputs(Aniline.getFluid(1000))
+                .fluidOutputs(Water.getFluid(2000))
+                .EUt(30)
+                .duration(100)
+                .buildAndRegister();
     }
 
 

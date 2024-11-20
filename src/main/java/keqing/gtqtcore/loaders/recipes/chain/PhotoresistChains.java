@@ -147,7 +147,7 @@ public class PhotoresistChains {
         CHEMICAL_PLANT.recipeBuilder()
                 .EUt(VA[IV])
                 .duration(340)
-                .recipeLevel(4)
+                .recipeLevel(5)
                 .fluidInputs(Epoxy.getFluid(1500))
                 .fluidInputs(MixedHexafluoroantimonateSalts.getFluid(500))
                 .fluidInputs(GammaButyrolactone.getFluid(500))

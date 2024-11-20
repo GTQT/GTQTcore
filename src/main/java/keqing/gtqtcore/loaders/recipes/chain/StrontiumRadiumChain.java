@@ -108,7 +108,7 @@ public class StrontiumRadiumChain {
                 .fluidOutputs(Heptafluorotantalate.getFluid(1000))
                 .EUt(VA[IV])
                 .duration(130)
-                .recipeLevel(4)
+                .recipeLevel(5)
                 .buildAndRegister();
 
         //  Potassium Fluoride

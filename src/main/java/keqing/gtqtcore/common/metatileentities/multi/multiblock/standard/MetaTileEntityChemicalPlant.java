@@ -287,7 +287,5 @@ public class MetaTileEntityChemicalPlant extends GTQTRecipeMapMultiblockOverwrit
         public int getParallelLimit() {
             return ParallelNum;
         }
-
-
     }
 }

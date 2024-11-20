@@ -18,7 +18,112 @@ public class NaquadahFuelChain {
         //FuelRefineChain();
         HyperReactorFuel();
         CommonFuel();
+        FuelRefineChainOT();
         FuelRefineChainNQ();
+    }
+
+    private static void FuelRefineChainOT() {
+        CHEMICAL_PLANT.recipeBuilder()
+                .fluidOutputs(ThoriumFluidFuelExcited.getFluid(1000))
+                .fluidInputs(Helium.getPlasma(500))
+                .fluidInputs(Mercury.getFluid(1000))
+                .input(dust, Lithium, 4)
+                .input(dust, Draconium, 2)
+                .input(dust, Uranium238, 64)
+                .input(dust, Uranium235, 32)
+                .input(dust, Uranium234, 8)
+                .input(dust, Naquadria, 2)
+                .recipeLevel(6)
+                .EUt(1920)
+                .duration(180)
+                .buildAndRegister();
+
+        CHEMICAL_PLANT.recipeBuilder()
+                .fluidOutputs(UraniumFluidFuelExcited.getFluid(1000))
+                .fluidInputs(Hydrogen.getPlasma(500))
+                .fluidInputs(Radon.getPlasma(1000))
+                .input(dust, Lithium, 4)
+                .input(dust, Draconium, 2)
+                .input(dust, Uranium238, 64)
+                .input(dust, Uranium235, 32)
+                .input(dust, Uranium234, 8)
+                .input(dust, Adamantium, 2)
+                .recipeLevel(6)
+                .EUt(1920)
+                .duration(180)
+                .buildAndRegister();
+
+        CHEMICAL_PLANT.recipeBuilder()
+                .fluidOutputs(PlutoniumFluidFuelExcited.getFluid(1000))
+                .fluidInputs(Lutetium.getFluid(576))
+                .fluidInputs(Xenon.getPlasma(1000))
+                .input(dust, Lithium, 4)
+                .input(dust, Draconium, 2)
+                .input(dust, Plutonium241, 64)
+                .input(dust, Plutonium242, 32)
+                .input(dust, Plutonium244, 8)
+                .input(dust, Adamantium, 2)
+                .recipeLevel(6)
+                .EUt(1920)
+                .duration(180)
+                .buildAndRegister();
+
+        NAQUADAH_REACTOR_RECIPES.recipeBuilder()
+                .fluidInputs(ThoriumFluidFuelExcited.getFluid(1))
+                .fluidOutputs(GTQTMaterials.ThoriumFluidFuelDepleted.getFluid(1))
+                .EUt(131072)
+                .duration(8)
+                .buildAndRegister();
+
+        CENTRIFUGE_RECIPES.recipeBuilder()
+                .fluidInputs(GTQTMaterials.ThoriumFluidFuelDepleted.getFluid(500))
+                .output(dust, Uranium233, 16)
+                .chancedOutput(dust, Uranium236, 5000, 200)
+                .output(dust, Praseodymium, 2)
+                .chancedOutput(dust, Praseodymium, 2000, 200)
+                .output(dust, Indium, 2)
+                .fluidOutputs(Radon.getFluid(20))
+                .EUt(480)
+                .duration(600)
+                .buildAndRegister();
+
+        NAQUADAH_REACTOR_RECIPES.recipeBuilder()
+                .fluidInputs(UraniumFluidFuelExcited.getFluid(1))
+                .fluidOutputs(GTQTMaterials.UraniumFluidFuelDepleted.getFluid(1))
+                .EUt(131072)
+                .duration(10)
+                .buildAndRegister();
+
+        CENTRIFUGE_RECIPES.recipeBuilder()
+                .fluidInputs(GTQTMaterials.UraniumFluidFuelDepleted.getFluid(500))
+                .output(dust, Europium, 4)
+                .chancedOutput(dust, Europium, 1500, 200)
+                .output(dust, Bismuth, 2)
+                .chancedOutput(dust, Bismuth, 2000, 200)
+                .output(dust, RhodiumOxide, 1)
+                .fluidOutputs(Xenon.getFluid(20))
+                .EUt(480)
+                .duration(600)
+                .buildAndRegister();
+
+        NAQUADAH_REACTOR_RECIPES.recipeBuilder()
+                .fluidInputs(PlutoniumFluidFuelExcited.getFluid(1))
+                .fluidOutputs(GTQTMaterials.PlutoniumFluidFuelDepleted.getFluid(1))
+                .EUt(131072)
+                .duration(36)
+                .buildAndRegister();
+
+        CENTRIFUGE_RECIPES.recipeBuilder()
+                .fluidInputs(GTQTMaterials.PlutoniumFluidFuelDepleted.getFluid(500))
+                .output(dust, Tritanium, 4)
+                .chancedOutput(dust, Tritanium, 1500, 200)
+                .output(dust, CeriumOxide, 2)
+                .chancedOutput(dust, CeriumOxide, 2000, 200)
+                .output(dust, Samarium, 1)
+                .fluidOutputs(Xenon.getFluid(20))
+                .EUt(480)
+                .duration(600)
+                .buildAndRegister();
     }
 
     private static void FuelRefineChainNQ() {
@@ -208,7 +313,7 @@ public class NaquadahFuelChain {
                 .fluidInputs(Uranium235.getFluid(500))
                 .fluidInputs(Nitrogen.getFluid(500))
                 .circuitMeta(1)
-                .fluidOutputs(LightNaquadahFuel.getFluid(1000))
+                .fluidOutputs(LightNaquadahFuel.getFluid(500))
                 .duration(300)
                 .EUt(VA[ZPM])
                 .buildAndRegister();
@@ -218,7 +323,7 @@ public class NaquadahFuelChain {
                 .fluidInputs(EnergeticNaquadria.getFluid(1000))
                 .fluidInputs(Nitrogen.getPlasma(1000))
                 .circuitMeta(11)
-                .fluidOutputs(LightNaquadahFuel.getFluid(4000))
+                .fluidOutputs(LightNaquadahFuel.getFluid(2000))
                 .duration(300)
                 .blastFurnaceTemp(6000)
                 .EUt(VA[UV])
@@ -231,7 +336,7 @@ public class NaquadahFuelChain {
                 .fluidInputs(Plutonium241.getFluid(500))
                 .circuitMeta(2)
                 .output(dust, Plutonium239)
-                .fluidOutputs(MediumNaquadahFuel.getFluid(1000))
+                .fluidOutputs(MediumNaquadahFuel.getFluid(500))
                 .duration(300)
                 .EUt(VA[ZPM])
                 .buildAndRegister();
@@ -241,7 +346,7 @@ public class NaquadahFuelChain {
                 .fluidInputs(EnergeticNaquadria.getFluid(1000))
                 .fluidInputs(Nitrogen.getPlasma(1000))
                 .circuitMeta(12)
-                .fluidOutputs(MediumNaquadahFuel.getFluid(4000))
+                .fluidOutputs(MediumNaquadahFuel.getFluid(2000))
                 .duration(300)
                 .blastFurnaceTemp(6000)
                 .EUt(VA[UV])
@@ -254,7 +359,7 @@ public class NaquadahFuelChain {
                 .fluidInputs(Nitrogen.getPlasma(500))
                 .circuitMeta(3)
                 .output(dust, Naquadah)
-                .fluidOutputs(HeavyNaquadahFuel.getFluid(1000))
+                .fluidOutputs(HeavyNaquadahFuel.getFluid(500))
                 .duration(300)
                 .EUt(VA[ZPM])
                 .buildAndRegister();
@@ -264,7 +369,7 @@ public class NaquadahFuelChain {
                 .fluidInputs(EnergeticNaquadria.getFluid(1000))
                 .fluidInputs(Nitrogen.getPlasma(1000))
                 .circuitMeta(13)
-                .fluidOutputs(HeavyNaquadahFuel.getFluid(4000))
+                .fluidOutputs(HeavyNaquadahFuel.getFluid(2000))
                 .duration(300)
                 .blastFurnaceTemp(6000)
                 .EUt(VA[UV])

@@ -892,5 +892,169 @@ public class SecondDegreeMaterials {
                 .color(0xFF4500) // 橙红色
                 .build();
 
+        // 注册钍基流体燃料（激发）
+        ThoriumFluidFuelExcited = new Material.Builder(getMaterialsId(), gregtechId("thorium_fluid_fuel_excited"))
+                .fluid()
+                .color(0xFFFF00) // 黄色
+                .build();
+
+        // 注册钍基流体燃料（枯竭）
+        ThoriumFluidFuelDepleted = new Material.Builder(getMaterialsId(), gregtechId("thorium_fluid_fuel_depleted"))
+                .fluid()
+                .color(0x8B4513) // 棕色
+                .build();
+
+        // 注册铀基流体燃料（激发）
+        UraniumFluidFuelExcited = new Material.Builder(getMaterialsId(), gregtechId("uranium_fluid_fuel_excited"))
+                .fluid()
+                .color(0x00FF00) // 绿色
+                .build();
+
+        // 注册铀基流体燃料（枯竭）
+        UraniumFluidFuelDepleted = new Material.Builder(getMaterialsId(), gregtechId("uranium_fluid_fuel_depleted"))
+                .fluid()
+                .color(0x808080) // 灰色
+                .build();
+
+        // 注册钚基流体燃料（激发）
+        PlutoniumFluidFuelExcited = new Material.Builder(getMaterialsId(), gregtechId("plutonium_fluid_fuel_excited"))
+                .fluid()
+                .color(0x00FFFF) // 青色
+                .build();
+
+        // 注册钚基流体燃料（枯竭）
+        PlutoniumFluidFuelDepleted = new Material.Builder(getMaterialsId(), gregtechId("plutonium_fluid_fuel_depleted"))
+                .fluid()
+                .color(0x8B0000) // 深红色
+                .build();
+
+        AcetylsulfanilylChloride = new Material.Builder(getMaterialsId(), gregtechId("acetylsulfanilyl_chloride"))
+                .liquid()
+                .color(0x00FFFF)
+                .flags(DISABLE_DECOMPOSITION)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("C8H8ClNO3S", true);
+
+        Sulfanilamide = new Material.Builder(getMaterialsId(), gregtechId("sulfanilamide"))
+                .liquid()
+                .color(0x523b0a)
+                .flags(DISABLE_DECOMPOSITION)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("C6H8N2O2S", true);
+
+        AnimalCells = new Material.Builder(getMaterialsId(), gregtechId("animal_cells"))
+                .liquid()
+                .color(0xc94996)
+                .flags(DISABLE_DECOMPOSITION)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("???", true);
+
+        GeneTherapyFluid = new Material.Builder(getMaterialsId(), gregtechId("pluripotency_induction_gene_therapy_fluid"))
+                .liquid()
+                .color(0x6b2f66)
+                .flags(DISABLE_DECOMPOSITION)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("?", true);
+
+        GenePlasmids = new Material.Builder(getMaterialsId(), gregtechId("pluripotency_induction_gene_plasmids"))
+                .liquid()
+                .color(0xabe053)
+                .flags(DISABLE_DECOMPOSITION)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("?", true);
+        
+        RapidlyReplicatingAnimalCells = new Material.Builder(getMaterialsId(), gregtechId("rapidly_replicating_animal_cells"))
+                .liquid()
+                .color(0x7a335e)
+                .flags(DISABLE_DECOMPOSITION)
+                .iconSet(FLUID)
+                .build()
+                .setFormula(TextFormatting.OBFUSCATED + "????", true);
+
+        Oct4Gene = new Material.Builder(getMaterialsId(), gregtechId("oct_4_gene"))
+                .liquid()
+                .color(0x374f0d)
+                .flags(DISABLE_DECOMPOSITION)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("?", true);
+
+        SOX2Gene = new Material.Builder(getMaterialsId(), gregtechId("sox_2_gene"))
+                .liquid()
+                .color(0x5d8714)
+                .flags(DISABLE_DECOMPOSITION)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("?", true);
+
+        KFL4Gene = new Material.Builder(getMaterialsId(), gregtechId("kfl_4_gene"))
+                .liquid()
+                .color(0x759143)
+                .flags(DISABLE_DECOMPOSITION)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("?", true);
+
+        Cas9 = new Material.Builder(getMaterialsId(), gregtechId("cas_9"))
+                .liquid()
+                .color(0x5f6e46)
+                .flags(DISABLE_DECOMPOSITION)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("?", true);
+
+        MycGene = new Material.Builder(getMaterialsId(), gregtechId("myc_gene"))
+                .liquid()
+                .color(0x445724)
+                .flags(DISABLE_DECOMPOSITION)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("?", true);
+
+        Chitin = new Material.Builder(getMaterialsId(), gregtechId("chitin"))
+                .liquid()
+                .color(0xcbd479)
+                .flags(DISABLE_DECOMPOSITION)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("?", true);
+        
+        Catalase = new Material.Builder(getMaterialsId(), gregtechId("catalase"))
+                .liquid()
+                .color(0xdb6596)
+                .flags(DISABLE_DECOMPOSITION)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("?", true);
+
+        B27Supplement = new Material.Builder(getMaterialsId(), gregtechId("b_27_supplement"))
+                .liquid()
+                .color(0x386939)
+                .flags(DISABLE_DECOMPOSITION)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("C142H230N36O44S", true);
+
+        CleanAmmoniaSolution = new Material.Builder(getMaterialsId(), gregtechId("clear_ammonia_solution"))
+                .liquid()
+                .color(0x53c9a0)
+                .flags(DISABLE_DECOMPOSITION)
+                .iconSet(FLUID)
+                .build()
+                .setFormula("NH3(H2O)", true);
+
+        Glutamine = new Material.Builder(getMaterialsId(), gregtechId("glutamine"))
+                .dust()
+                .color(0xede9b4)
+                .flags(DISABLE_DECOMPOSITION)
+                .iconSet(DULL)
+                .build()
+                .setFormula("C5H10N2O3", true);
+
     }
 }

@@ -11,10 +11,7 @@ import javax.annotation.Nonnull;
 
 public class ChemicalPlantBuilder extends RecipeBuilder<ChemicalPlantBuilder> {
 
-    public ChemicalPlantBuilder() {
-
-    }
-
+    public ChemicalPlantBuilder() {}
     public ChemicalPlantBuilder(Recipe recipe, RecipeMap<ChemicalPlantBuilder> recipeMap) {
         super(recipe, recipeMap);
     }

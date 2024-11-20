@@ -13,7 +13,6 @@ import gregtech.common.blocks.BlockBoilerCasing;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.BlockTurbineCasing;
 import gregtech.common.blocks.MetaBlocks;
-import gregtech.common.metatileentities.MetaTileEntities;
 import gregtech.common.metatileentities.multi.electric.generator.MetaTileEntityLargeTurbine;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMachineHatch;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityRotorHolder;
@@ -112,6 +111,7 @@ public class GTQTMetaTileEntities {
     public static final MetaTileEntityMicrowaveEnergyReceiver[] MICROWAVE_ENERGY_RECEIVER = new MetaTileEntityMicrowaveEnergyReceiver[GTValues.V.length - 1];
     public static final SimpleGeneratorMetaTileEntity[] BIOMASS_GENERATOR = new SimpleGeneratorMetaTileEntity[3];
     public static final SimpleGeneratorMetaTileEntity[] ACID_GENERATOR = new SimpleGeneratorMetaTileEntity[3];
+    public static final SimpleGeneratorMetaTileEntity[] PLASMA_GENERATOR = new SimpleGeneratorMetaTileEntity[5];
 
     public static final MetaTileEntityLargeBasicGenerator[] LBG = new MetaTileEntityLargeBasicGenerator[6];
 
@@ -401,6 +401,12 @@ public class GTQTMetaTileEntities {
         ACID_GENERATOR[0] = registerMetaTileEntity(3026, new SimpleGeneratorMetaTileEntity(gtqtcoreId("acid_generator.mv"), GTQTcoreRecipeMaps.ACID_GENERATOR_RECIPES, Textures.CHEMICAL_REACTOR_OVERLAY, 2, GTUtility.genericGeneratorTankSizeFunction));
         ACID_GENERATOR[1] = registerMetaTileEntity(3027, new SimpleGeneratorMetaTileEntity(gtqtcoreId("acid_generator.hv"), GTQTcoreRecipeMaps.ACID_GENERATOR_RECIPES, Textures.CHEMICAL_REACTOR_OVERLAY, 3, GTUtility.genericGeneratorTankSizeFunction));
         ACID_GENERATOR[2] = registerMetaTileEntity(3028, new SimpleGeneratorMetaTileEntity(gtqtcoreId("acid_generator.ev"), GTQTcoreRecipeMaps.ACID_GENERATOR_RECIPES, Textures.CHEMICAL_REACTOR_OVERLAY, 4, GTUtility.genericGeneratorTankSizeFunction));
+
+        PLASMA_GENERATOR[0]= registerMetaTileEntity(3029, new SimpleGeneratorMetaTileEntity(gtqtcoreId("plasma_generator.ev"), RecipeMaps.PLASMA_GENERATOR_FUELS, Textures.FUSION_REACTOR_OVERLAY, 4, GTUtility.genericGeneratorTankSizeFunction));
+        PLASMA_GENERATOR[1]= registerMetaTileEntity(3030, new SimpleGeneratorMetaTileEntity(gtqtcoreId("plasma_generator.iv"), RecipeMaps.PLASMA_GENERATOR_FUELS, Textures.FUSION_REACTOR_OVERLAY, 5, GTUtility.genericGeneratorTankSizeFunction));
+        PLASMA_GENERATOR[2]= registerMetaTileEntity(3031, new SimpleGeneratorMetaTileEntity(gtqtcoreId("plasma_generator.luv"), RecipeMaps.PLASMA_GENERATOR_FUELS, Textures.FUSION_REACTOR_OVERLAY, 6, GTUtility.genericGeneratorTankSizeFunction));
+        PLASMA_GENERATOR[3]= registerMetaTileEntity(3032, new SimpleGeneratorMetaTileEntity(gtqtcoreId("plasma_generator.zpm"), RecipeMaps.PLASMA_GENERATOR_FUELS, Textures.FUSION_REACTOR_OVERLAY, 7, GTUtility.genericGeneratorTankSizeFunction));
+        PLASMA_GENERATOR[4]= registerMetaTileEntity(3033, new SimpleGeneratorMetaTileEntity(gtqtcoreId("plasma_generator.uv"), RecipeMaps.PLASMA_GENERATOR_FUELS, Textures.FUSION_REACTOR_OVERLAY, 8, GTUtility.genericGeneratorTankSizeFunction));
 
         //发电设备 多方块
         LBG[0] = registerMetaTileEntity(3050, new MetaTileEntityLargeBasicGenerator(gtqtcoreId("lbg.steam.1"), RecipeMaps.STEAM_TURBINE_FUELS, 1, MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STEEL_SOLID), MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.STEEL_PIPE), Steel));
@@ -861,12 +867,5 @@ public class GTQTMetaTileEntities {
         NONUPLE_EXPORT_FLUID_HATCH[3] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedMultiFluidHatch(gtqtcoreId("fluid_hatch.export_9x.opv"), OpV, 9, true));
 
         simpleTiredInit(CREATIVE_ENERGY_HATCHES, (i) -> new MetaTileEntityCreativeEnergyHatch(gtqtcoreId("creative_energy_hatch." + GTValues.VN[i].toLowerCase()), i), GTQTMetaTileEntities::nextMultiPartID);
-
     }
-
-    private static <T extends MetaTileEntity> T registerSingleMetaTileEntity(int id, T mte) {
-        if (id > 300) return null;
-        return MetaTileEntities.registerMetaTileEntity(id + 20000, mte);
-    }
-
 }

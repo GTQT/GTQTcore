@@ -41,7 +41,7 @@ public class MetaTileEntityIndustrialExtruder extends GTQTMultiblockCore {
     }
     @Override
     public int getCoreNum() {
-        return 8;
+        return 16;
     }
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {

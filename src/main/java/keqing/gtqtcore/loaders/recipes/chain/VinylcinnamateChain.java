@@ -23,7 +23,7 @@ public class VinylcinnamateChain {
                 .fluidInputs(PolyvinylAlcoholVinylalcoholPolymer.getFluid(576))
                 .fluidInputs(TransPhenylacryloylChloride.getFluid(1000))
                 .fluidOutputs(Vinylcinnamate.getFluid(5000))
-                .recipeLevel(3)
+                .recipeLevel(5)
                 .duration(2000).EUt(VA[EV]).buildAndRegister();
 
         //吡啶+6水+4二氧化碳=5乙醛+5甲醛+4氨

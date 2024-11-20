@@ -1275,6 +1275,29 @@ gregtech.material.naquadah_residue_mki=Depleted Naquadah Fluid Fuel - MKI
 gregtech.material.naquadah_residue_mkii=Depleted Naquadah Fluid Fuel - MKII
 gregtech.material.naquadah_residue_mkiii=Depleted Naquadah Fluid Fuel - MKIII
 gregtech.material.naquadah_residue_mkiv=Depleted Naquadah Fluid Fuel - MKIV
+gregtech.material.thorium_fluid_fuel_excited=Excited Thorium Fluid Fuel
+gregtech.material.thorium_fluid_fuel_depleted=Depleted Thorium Fluid Fuel
+gregtech.material.uranium_fluid_fuel_excited=Excited Uranium Fluid Fuel
+gregtech.material.uranium_fluid_fuel_depleted=Depleted Uranium Fluid Fuel
+gregtech.material.plutonium_fluid_fuel_excited=Excited Plutonium Fluid Fuel
+gregtech.material.plutonium_fluid_fuel_depleted=Depleted Plutonium Fluid Fuel
+gregtech.material.acetylsulfanilyl_chloride=Acetylsulfanilide Chloride
+gregtech.material.sulfanilamide=Sulfanilamide
+gregtech.material.animal_cells=Animal Cells
+gregtech.material.pluripotency_induction_gene_therapy_fluid=Pluripotency Induction Gene Therapy Fluid
+gregtech.material.pluripotency_induction_gene_plasmids=Pluripotency Induction Gene Plasmids
+gregtech.material.rapidly_replicating_animal_cells=Rapidly Replicating Animal Cells
+gregtech.material.oct_4_gene=Oct4 Gene
+gregtech.material.sox_2_gene=SOX2 Gene
+gregtech.material.kfl_4_gene=KFL4 Gene
+gregtech.material.cas_9=Cas9
+gregtech.material.myc_gene=Myc Gene
+gregtech.material.chitin=Chitin
+gregtech.material.catalase=Catalase
+gregtech.material.b_27_supplement=B27 Supplement
+gregtech.material.clear_ammonia_solution=Clear Ammonia Solution
+gregtech.material.glutamine=Glutamine
+
 gregtech.material.ammonium_difluoride=Ammonium Difluoride
 gregtech.material.beryllium_difluoride=Beryllium Difluoride
 gregtech.material.pr_ho_y_nitrates_solution=Praseodymium-Holmium-Yttrium Nitrate Solution
@@ -5058,6 +5081,17 @@ gtqtcore.machine.lbg.gas.2.name=Large Advanced Gas Generator
 gtqtcore.machine.lbg.combustion.1.name=Large Basic Combustion Generator
 gtqtcore.machine.lbg.combustion.2.name=Large Advanced Combustion Generator
 gtqtcore.machine.lbg.combustion.3.name=Large Turbo Combustion Generator
+
+gtqtcore.machine.plasma_generator.ev.name=Plasma Generator - MKI
+gtqtcore.machine.plasma_generator.ev.tooltip=Mini Sun
+gtqtcore.machine.plasma_generator.iv.name=Plasma Generator - MKII
+gtqtcore.machine.plasma_generator.iv.tooltip=Mini Sun
+gtqtcore.machine.plasma_generator.luv.name=Plasma Generator - MKIII
+gtqtcore.machine.plasma_generator.luv.tooltip=Mini Sun
+gtqtcore.machine.plasma_generator.zpm.name=Plasma Generator - MKIV
+gtqtcore.machine.plasma_generator.zpm.tooltip=Mini Sun
+gtqtcore.machine.plasma_generator.uv.name=Plasma Generator - MKV
+gtqtcore.machine.plasma_generator.uv.tooltip=Mini Sun
 # Tools
 
 item.gt.tool.bending_cylinder.name=%s Bending Cylinder
