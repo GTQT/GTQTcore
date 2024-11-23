@@ -679,7 +679,7 @@ public class MetaTileEntityMachine {
         ModHandler.removeRecipeByName("gregtech:gregtech.machine.arc_furnace.zpm");
         ModHandler.removeRecipeByName("gregtech:gregtech.machine.arc_furnace.uv");
         ModHandler.removeRecipeByName("gregtech:gregtech.machine.arc_furnace.uhv");
-        gregtech.loaders.recipe.MetaTileEntityLoader.registerMachineRecipe(true, ARC_FURNACE
+        registerMachineRecipe(true, ARC_FURNACE
                 , "WGW", "CMC", "PPP",
                 'M', CraftingComponent.HULL,
                 'P', DOUBLE_PLATE,
@@ -708,6 +708,17 @@ public class MetaTileEntityMachine {
                 'P', Blocks.PISTON,
                 'G', "blockGlass",
                 'H', MetaBlocks.STEAM_CASING.getItemVariant(BlockSteamCasing.SteamCasingType.STEEL_HULL));
+
+                //  Bio Reactor
+        registerMachineRecipe(true, BIO_REACTOR,
+                "PXX", "pHp", "PMW",
+                'H', CraftingComponent.HULL,
+                'P', CraftingComponent.PUMP,
+                'p', CraftingComponent.PIPE_NORMAL,
+                'X', CraftingComponent.CIRCUIT,
+                'W', CraftingComponent.CABLE,
+                'M', CraftingComponent.MOTOR);
+
 
         registerMachineRecipe(GTQTMetaTileEntities.FLUID_EXTRACTOR, "PGP", "EGE", "CMC", 'M', HULL, 'P', PUMP, 'E', PISTON, 'C',
                 CIRCUIT, 'G', GLASS);

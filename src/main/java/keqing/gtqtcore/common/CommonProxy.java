@@ -168,6 +168,7 @@ public class CommonProxy {
         WrapCircuits.init();
         MetaTileEntityLoader.init();
         MetaTileEntityMachine.init();
+        CopyRecipesHandlers.init();
         /*
         for (Material material : GregTechAPI.materialManager.getRegisteredMaterials())
         {

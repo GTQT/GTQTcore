@@ -22,6 +22,7 @@ import net.minecraft.client.resources.I18n;
 
 import static gregtech.api.GTValues.*;
 import static gregtech.api.unification.material.Materials.*;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 
 
@@ -730,6 +731,26 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         POOR_THORIUM_ROD = this.addItem(809, "poor_thorium_rod").setCreativeTabs(CommonProxy.GTQTCore_NC);
         POOR_THORIUM_ROD_DUAL = this.addItem(810, "poor_thorium_rod_dual").setCreativeTabs(CommonProxy.GTQTCore_NC);
         POOR_THORIUM_ROD_QUAD = this.addItem(811, "poor_thorium_rod_quad").setCreativeTabs(CommonProxy.GTQTCore_NC);
+
+        /* -------------------------------------------------------------------- Nuclear Items --------------------------------------------------------------------- */
+
+        HIGH_DENSITY_THORIUM = this.addItem(820, "high_density_thorium")
+                .setMaterialInfo(new ItemMaterialInfo(
+                        new MaterialStack(UraniumThoriumCarbides, M * 64), // 64 * Th12UC3
+                        new MaterialStack(TungstenSteel, (M / 4) * 16) // 16 * Tungsten Steel foil
+                ));
+
+        HIGH_DENSITY_URANIUM = this.addItem(821, "high_density_uranium")
+                .setMaterialInfo(new ItemMaterialInfo(
+                        new MaterialStack(GraphiteUraniumMixture, M * 36), // 36 * C3U dust
+                        new MaterialStack(TungstenCarbide, (M / 4) * 16) // 16 * Tungsten Carbide foil
+                ));
+
+        HIGH_DENSITY_PLUTONIUM = this.addItem(822, "high_density_plutonium")
+                .setMaterialInfo(new ItemMaterialInfo(
+                        new MaterialStack(PlutoniumUraniumOxides, M * 64), // 64 * Pu10O12U2C8
+                        new MaterialStack(HSSS, (M / 4) * 16) // 16 * HSSS foil
+                ));
 
         // Power Components: ID 356-379
         NANO_POWER_IC_WAFER = this.addItem(840, "wafer.nano_power_integrated_circuit").setCreativeTabs(CommonProxy.GTQTCore_TAB);

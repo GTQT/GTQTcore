@@ -1148,7 +1148,7 @@ public class KeQingNET {
                 .input(ROBOT_ARM_HV, 4)
                 .input(plateDense, StainlessSteel, 4)
                 .input(foil, StainlessSteel, 64)
-                .output(GREEN_HOUSE_PLUS)
+                .output(EXTREME_INDUSTRIAL_GREENHOUSE)
                 .fluidInputs(SolderingAlloy.getFluid(L * 8))
                 .fluidInputs(Polybenzimidazole.getFluid(L * 8))
                 .scannerResearch(b -> b
@@ -2799,6 +2799,7 @@ public class KeQingNET {
                         .EUt(VA[IV]))
                 .duration(800).EUt(VA[ZPM]).buildAndRegister();
 
+        //钻机
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(HULL[EV])
                 .input(frameGt, Titanium, 4)
@@ -2807,7 +2808,6 @@ public class KeQingNET {
                 .input(ELECTRIC_PUMP_EV, 4)
                 .input(CONVEYOR_MODULE_EV, 4)
                 .input(gear, Tungsten, 4)
-                .circuitMeta(2)
                 .fluidInputs(Polyethylene.getFluid(GTValues.L * 4))
                 .output(BASIC_LARGE_MINER)
                 .scannerResearch(b -> b
@@ -2824,7 +2824,6 @@ public class KeQingNET {
                 .input(ELECTRIC_MOTOR_EV, 4)
                 .input(ELECTRIC_PUMP_EV, 4)
                 .input(gear, TungstenCarbide, 4)
-                .circuitMeta(2)
                 .fluidInputs(Polyethylene.getFluid(GTValues.L * 4))
                 .output(FLUID_DRILLING_RIG)
                 .scannerResearch(b -> b
@@ -2841,15 +2840,14 @@ public class KeQingNET {
                 .input(ELECTRIC_PUMP_IV, 4)
                 .input(CONVEYOR_MODULE_IV, 4)
                 .input(gear, Iridium, 4)
-                .circuitMeta(2)
                 .fluidInputs(ReinforcedEpoxyResin.getFluid(GTValues.L * 4))
                 .fluidInputs(Polytetrafluoroethylene.getFluid(GTValues.L * 4))
                 .fluidInputs(Polybenzimidazole.getFluid(GTValues.L * 4))
                 .output(LARGE_MINER)
-                .stationResearch(b -> b
-                        .researchStack(DISK_9.getStackForm())
-                        .CWUt(CWT[IV])
-                        .EUt(VA[IV]))
+                .scannerResearch(b -> b
+                        .researchStack(DISK_8.getStackForm())
+                        .duration(1200)
+                        .EUt(VA[HV]))
                 .duration(400).EUt(VA[IV]).buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
@@ -2862,12 +2860,11 @@ public class KeQingNET {
                 .fluidInputs(ReinforcedEpoxyResin.getFluid(GTValues.L * 4))
                 .fluidInputs(Polytetrafluoroethylene.getFluid(GTValues.L * 4))
                 .fluidInputs(Polybenzimidazole.getFluid(GTValues.L * 4))
-                .circuitMeta(2)
                 .output(ADVANCED_FLUID_DRILLING_RIG)
-                .stationResearch(b -> b
-                        .researchStack(DISK_9.getStackForm())
-                        .CWUt(CWT[IV])
-                        .EUt(VA[LuV]))
+                .scannerResearch(b -> b
+                        .researchStack(DISK_8.getStackForm())
+                        .duration(1200)
+                        .EUt(VA[HV]))
                 .duration(400).EUt(VA[LuV]).buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
@@ -2881,12 +2878,11 @@ public class KeQingNET {
                 .fluidInputs(ReinforcedEpoxyResin.getFluid(GTValues.L * 4))
                 .fluidInputs(Polytetrafluoroethylene.getFluid(GTValues.L * 4))
                 .fluidInputs(Polybenzimidazole.getFluid(GTValues.L * 4))
-                .circuitMeta(2)
                 .output(ADVANCED_LARGE_MINER)
-                .stationResearch(b -> b
-                        .researchStack(DISK_9.getStackForm())
-                        .CWUt(CWT[IV])
-                        .EUt(VA[LuV]))
+                .scannerResearch(b -> b
+                        .researchStack(DISK_8.getStackForm())
+                        .duration(1200)
+                        .EUt(VA[HV]))
                 .duration(400).EUt(VA[LuV]).buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
@@ -2899,13 +2895,163 @@ public class KeQingNET {
                 .fluidInputs(ReinforcedEpoxyResin.getFluid(GTValues.L * 4))
                 .fluidInputs(Polytetrafluoroethylene.getFluid(GTValues.L * 4))
                 .fluidInputs(Polybenzimidazole.getFluid(GTValues.L * 4))
-                .circuitMeta(2)
                 .output(ADVANCED_FLUID_DRILLING_RIG)
+                .scannerResearch(b -> b
+                        .researchStack(DISK_8.getStackForm())
+                        .duration(1200)
+                        .EUt(VA[HV]))
+                .duration(400).EUt(VA[LuV]).buildAndRegister();
+
+
+        //  Extreme Large Miner
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(HULL[ZPM])
+                .input(frameGt, Osmiridium, 4)
+                .input(circuit, MarkerMaterials.Tier.ZPM, 4)
+                .input(ELECTRIC_MOTOR_ZPM, 4)
+                .input(ELECTRIC_PUMP_ZPM, 4)
+                .input(CONVEYOR_MODULE_ZPM, 4)
+                .input(gear, Pikyonium64B, 4)
+                .fluidInputs(VanadiumGallium.getFluid(L * 16))
+                .fluidInputs(KaptonK.getFluid(L * 16))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 16))
+                .fluidInputs(Polyetheretherketone.getFluid(L * 16))
+                .output(EXTREME_LARGE_MINER)
+                .EUt(VA[ZPM])
+                .duration(400)
                 .stationResearch(b -> b
                         .researchStack(DISK_9.getStackForm())
-                        .CWUt(CWT[IV])
-                        .EUt(VA[LuV]))
-                .duration(400).EUt(VA[LuV]).buildAndRegister();
+                        .EUt(VA[ZPM])
+                        .CWUt(CWT[ZPM]))
+                .buildAndRegister();
+
+        //  Ultimate Large Miner
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(HULL[UV])
+                .input(frameGt, Tritanium, 4)
+                .input(circuit, MarkerMaterials.Tier.UV, 4)
+                .input(ELECTRIC_MOTOR_UV, 4)
+                .input(ELECTRIC_PUMP_UV, 4)
+                .input(CONVEYOR_MODULE_UV, 4)
+                .input(gear, Cinobite, 4)
+                .fluidInputs(VanadiumGallium.getFluid(L * 16))
+                .fluidInputs(KaptonK.getFluid(L * 16))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 16))
+                .fluidInputs(Polyetheretherketone.getFluid(L * 16))
+                .output(ULTIMATE_LARGE_MINER)
+                .EUt(VA[UV])
+                .duration(400)
+                .stationResearch(b -> b
+                        .researchStack(DISK_9.getStackForm())
+                        .EUt(VA[ZPM])
+                        .CWUt(CWT[ZPM]))
+                .buildAndRegister();
+
+        //  Infinity Large Miner
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(HULL[UHV])
+                .input(frameGt, Adamantium, 4)
+                .input(circuit, MarkerMaterials.Tier.UHV, 4)
+                .input(ELECTRIC_MOTOR_UHV, 4)
+                .input(ELECTRIC_PUMP_UHV, 4)
+                .input(CONVEYOR_MODULE_UHV, 4)
+                .input(gear, TitanSteel, 4)
+                .fluidInputs(SolderingAlloy.getFluid(L * 40))
+                .fluidInputs(BlackTitanium.getFluid(L * 20))
+                .fluidInputs(Kevlar.getFluid(L * 10))
+                .fluidInputs(KaptonE.getFluid(L * 5))
+                .output(INFINITY_LARGE_MINER)
+                .EUt(VA[UHV])
+                .duration(400)
+                .stationResearch(b -> b
+                        .researchStack(DISK_10.getStackForm())
+                        .EUt(VA[UHV])
+                        .CWUt(CWT[UHV]))
+                .buildAndRegister();
+
+        //  Advanced Fluid Drill Rig
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(HULL[ZPM])
+                .input(frameGt, HSSG, 4)
+                .input(circuit, MarkerMaterials.Tier.ZPM, 4)
+                .input(ELECTRIC_MOTOR_ZPM, 4)
+                .input(ELECTRIC_PUMP_ZPM, 4)
+                .input(gear, HY1301, 4)
+                .fluidInputs(VanadiumGallium.getFluid(L * 16))
+                .fluidInputs(KaptonK.getFluid(L * 16))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 16))
+                .fluidInputs(Polyetheretherketone.getFluid(L * 16))
+                .output(ADVANCED_FLUID_DRILL_RIG)
+                .EUt(VA[ZPM])
+                .stationResearch(b -> b
+                        .researchStack(DISK_9.getStackForm())
+                        .EUt(VA[ZPM])
+                        .CWUt(CWT[ZPM]))
+                .duration(400)
+                .buildAndRegister();
+
+        //  Extreme Fluid Drill Rig
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(HULL[UV])
+                .input(frameGt, Naquadah, 4)
+                .input(circuit, MarkerMaterials.Tier.UV, 4)
+                .input(ELECTRIC_MOTOR_UV, 4)
+                .input(ELECTRIC_PUMP_UV, 4)
+                .input(gear, IncoloyMA813, 4)
+                .fluidInputs(KaptonK.getFluid(L * 32))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 16))
+                .fluidInputs(Polyetheretherketone.getFluid(L * 16))
+                .fluidInputs(NaquadahAlloy.getFluid(L * 4))
+                .output(EXTREME_FLUID_DRILL_RIG)
+                .EUt(VA[UV])
+                .stationResearch(b -> b
+                        .researchStack(DISK_9.getStackForm())
+                        .EUt(VA[ZPM])
+                        .CWUt(CWT[ZPM]))
+                .duration(400)
+                .buildAndRegister();
+
+        //  Ultimate Fluid Drill Rig
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(HULL[UHV])
+                .input(frameGt, Trinium, 4)
+                .input(circuit, MarkerMaterials.Tier.UHV, 4)
+                .input(ELECTRIC_MOTOR_UHV, 4)
+                .input(ELECTRIC_PUMP_UHV, 4)
+                .input(gear, SiliconCarbide, 4)
+                .fluidInputs(SolderingAlloy.getFluid(L * 40))
+                .fluidInputs(BlackTitanium.getFluid(L * 20))
+                .fluidInputs(Kevlar.getFluid(L * 10))
+                .fluidInputs(KaptonE.getFluid(L * 5))
+                .output(ULTIMATE_FLUID_DRILL_RIG)
+                .EUt(VA[UHV])
+                .duration(400)
+                .stationResearch(b -> b
+                        .researchStack(DISK_10.getStackForm())
+                        .EUt(VA[UHV])
+                        .CWUt(CWT[UHV]))
+                .buildAndRegister();
+
+        //  Infinity Fluid Drill Rig
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(HULL[UEV])
+                .input(frameGt, Tritanium, 4)
+                .input(circuit, MarkerMaterials.Tier.UEV, 4)
+                .input(ELECTRIC_MOTOR_UEV, 4)
+                .input(ELECTRIC_PUMP_UEV, 4)
+                .input(gear, Lafium, 4)
+                .fluidInputs(SolderingAlloy.getFluid(L * 40))
+                .fluidInputs(BlackTitanium.getFluid(L * 20))
+                .fluidInputs(Kevlar.getFluid(L * 10))
+                .fluidInputs(KaptonE.getFluid(L * 5))
+                .output(INFINITY_FLUID_DRILL_RIG)
+                .EUt(VA[UEV])
+                .duration(400)
+                .stationResearch(b -> b
+                        .researchStack(DISK_10.getStackForm())
+                        .EUt(VA[UHV])
+                        .CWUt(CWT[UHV]))
+                .buildAndRegister();
 
     }
 

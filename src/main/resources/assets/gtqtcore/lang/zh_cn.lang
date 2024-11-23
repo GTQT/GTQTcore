@@ -925,6 +925,33 @@ gtqtcore.machine.dehydrator.uiv.name=次世代化学脱水机 III
 gtqtcore.machine.dehydrator.uxv.name=次世代化学脱水机 IV
 gtqtcore.machine.dehydrator.opv.name=终焉化学脱水机
 
+gtqtcore.machine.bio_reactor.lv.name=基础生物反应室
+gtqtcore.machine.bio_reactor.lv.tooltip=制糖厂
+gtqtcore.machine.bio_reactor.mv.name=进阶生物反应室
+gtqtcore.machine.bio_reactor.mv.tooltip=制糖厂
+gtqtcore.machine.bio_reactor.hv.name=进阶生物反应室 II
+gtqtcore.machine.bio_reactor.hv.tooltip=制糖厂
+gtqtcore.machine.bio_reactor.ev.name=进阶生物反应室 III
+gtqtcore.machine.bio_reactor.ev.tooltip=制糖厂
+gtqtcore.machine.bio_reactor.iv.name=精英生物反应室
+gtqtcore.machine.bio_reactor.iv.tooltip=细菌培养皿
+gtqtcore.machine.bio_reactor.luv.name=精英生物反应室 II
+gtqtcore.machine.bio_reactor.luv.tooltip=细菌培养皿
+gtqtcore.machine.bio_reactor.zpm.name=精英生物反应室 III
+gtqtcore.machine.bio_reactor.zpm.tooltip=细菌培养皿
+gtqtcore.machine.bio_reactor.uv.name=终极生物反应室
+gtqtcore.machine.bio_reactor.uv.tooltip=基因编辑器
+gtqtcore.machine.bio_reactor.uhv.name=史诗生物反应室
+gtqtcore.machine.bio_reactor.uhv.tooltip=基因编辑器
+gtqtcore.machine.bio_reactor.uev.name=史诗生物反应室 II
+gtqtcore.machine.bio_reactor.uev.tooltip=基因编辑器
+gtqtcore.machine.bio_reactor.uiv.name=史诗生物反应室 III
+gtqtcore.machine.bio_reactor.uiv.tooltip=基因编辑器
+gtqtcore.machine.bio_reactor.uxv.name=史诗生物反应室 IV
+gtqtcore.machine.bio_reactor.uxv.tooltip=基因编辑器
+gtqtcore.machine.bio_reactor.opv.name=传奇生物反应室
+gtqtcore.machine.bio_reactor.opv.tooltip=基因编辑器
+
 gtqtcore.machine.mega_alloy_blast_smelter.name=巨型合金冶炼炉
 gtqtcore.machine.mega_alloy_blast_smelter.tooltip.1=玻璃等级决定了最大电压。
 gtqtcore.machine.mega_alloy_blast_smelter.tooltip.2=最大并行数量为线圈等级的四倍。
@@ -1271,7 +1298,7 @@ gregtech.material.naquadah_fuel_mkii=硅岩基流体燃料-MKII
 gregtech.material.naquadah_fuel_mkiii=硅岩基流体燃料-MKIII
 gregtech.material.naquadah_fuel_mkiv=硅岩基流体燃料-MKIV
 gregtech.material.naquadah_fuel_mkv=硅岩基流体燃料-MKV
-gregtech.material.naquadah_residue_mki=枯竭硅岩基流体燃料-MKIV
+gregtech.material.naquadah_residue_mki=枯竭硅岩基流体燃料-MKI
 gregtech.material.naquadah_residue_mkii=枯竭硅岩基流体燃料-MKII
 gregtech.material.naquadah_residue_mkiii=枯竭硅岩基流体燃料-MKIII
 gregtech.material.naquadah_residue_mkiv=枯竭硅岩基流体燃料-MKIV
@@ -1281,6 +1308,13 @@ gregtech.material.uranium_fluid_fuel_excited=激发铀基流体燃料
 gregtech.material.uranium_fluid_fuel_depleted=枯竭铀基流体燃料
 gregtech.material.plutonium_fluid_fuel_excited=激发钚基流体燃料
 gregtech.material.plutonium_fluid_fuel_depleted=枯竭钚基流体燃料
+gregtech.material.uranium_thorium_carbides=碳化铀钍混合物
+gregtech.material.thorium_based_liquid_fuel=钍基流体燃料
+gregtech.material.graphite_uranium_mixture=石墨铀混合物
+gregtech.material.uranium_based_liquid_fuel=铀基流体燃料
+gregtech.material.plutonium_uranium_oxides=氧化钚铀混合物
+gregtech.material.plutonium_based_liquid_fuel=钚基流体燃料
+
 gregtech.material.acetylsulfanilyl_chloride=乙酰磺胺氯
 gregtech.material.sulfanilamide=磺胺
 gregtech.material.animal_cells=动物细胞
@@ -3707,9 +3741,16 @@ tile.electrobath.solar_plate_mv.name=进阶太阳能集成板
 tile.electrobath.solar_plate_hv.name=高级太阳能集成板
 gregtech.multiblock.ocean_pumper.description=海水泵机是一台电力时代的多方块机器。当它的控制器方块被放置在海洋生物群系中，且高度介于Y = 70与Y = 75（含）之间时将每秒收集8,000 L海水(不是盐水)。他需要输出仓、维修仓、能源仓各一。
 gtqtcore.machine.pcb.name=PCB工厂
-gtqtcore.machine.large_miner.zpm.name=微重力轨道采集场(UV)
-gtqtcore.machine.large_miner.uv.name=微重力轨道采集场(UV)
-gtqtcore.machine.large_miner.uhv.name=微重力轨道采集场(UHV)
+
+gtqtcore.machine.large_miner.zpm.name=极限采矿场
+gtqtcore.machine.large_miner.uv.name=终极采矿场
+gtqtcore.machine.large_miner.uhv.name=究极采矿场
+
+gtqtcore.machine.fluid_drill_rig.iv.name=精英流体钻机
+gtqtcore.machine.fluid_drill_rig.luv.name=极限流体钻机
+gtqtcore.machine.fluid_drill_rig.zpm.name=终极流体钻机
+gtqtcore.machine.fluid_drill_rig.uv.name=究极流体钻机
+
 tile.electrobath.drill_head_lv.name=钻头(一级)
 tile.electrobath.drill_head_mv.name=钻头(二级)
 tile.electrobath.drill_head_hv.name=钻头(三级)
@@ -3729,7 +3770,15 @@ gtqtcore.machine.bio_centrifuge.name=高速离心机
 recipemap.bio_centrifuge.name=高速破壁
 
 gtqtcore.machine.msf.name=大型闪蒸器
-gtqtcore.machine.green_house_plus.name=大型温室
+
+gtqtcore.machine.extreme_industrial_greenhouse.name=极限工业温室
+gtqtcore.machine.extreme_industrial_greenhouse.tooltip.1=超级作物培养仓
+gtqtcore.machine.extreme_industrial_greenhouse.tooltip.2=结构上方没有日光照射不会降低配方运行速度。
+gtqtcore.machine.extreme_industrial_greenhouse.tooltip.3=根据输入电压获得并行与配方时间减免。
+gtqtcore.machine.extreme_industrial_greenhouse.tooltip.4=输入小于§1IV§7级的电压时，始终获得§e64§7次并行。
+gtqtcore.machine.extreme_industrial_greenhouse.tooltip.5=输入大于§1IV§7级的电压时，始终获得§e256§7次并行。
+gtqtcore.machine.extreme_industrial_greenhouse.tooltip.6=输入大于§1IV§7级的电压时，配方运行时间减半。
+
 recipemap.sfm.name=闪蒸
 gtqtcore.machine.electric_arc_furnace.name=大型电极电弧炉
 recipemap.blast_arc_furnace.name=冶金
@@ -4228,6 +4277,12 @@ metaitem.thorium_rod_quad.name=四联钍燃料棒
 metaitem.poor_thorium_rod.name=枯竭钍燃料棒
 metaitem.poor_thorium_rod_dual.name=枯竭双联钍燃料棒
 metaitem.poor_thorium_rod_quad.name=枯竭四联钍燃料棒
+
+##  Nuclear Items
+metaitem.high_density_thorium.name=浓缩钍
+metaitem.high_density_uranium.name=浓缩铀
+metaitem.high_density_plutonium.name=浓缩钚
+
 gtqt.multiblock.yot_tank.fluid_type=%s 流体类型:%s 存储：%s
 gtqt.multiblock.tfft.computation=填充：%s
 gtqt.multiblock.power_substation.stored=容量：%s

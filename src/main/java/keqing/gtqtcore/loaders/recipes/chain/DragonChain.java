@@ -48,7 +48,6 @@ public class DragonChain {
                 .input(dust,Endstone,4)
                 .fluidInputs(Mutagen.getFluid(1000))
                 .chancedOutput(DRAGON_CELL,100,0)
-                .rate(40)
                 .duration(400).EUt(VA[HV]).buildAndRegister();
 
         BIOLOGICAL_REACTION_RECIPES.recipeBuilder()
@@ -57,7 +56,6 @@ public class DragonChain {
                 .input(dust,Endstone,4)
                 .fluidInputs(Mutagen.getFluid(1000))
                 .chancedOutput(DRAGON_CELL,400,0)
-                .rate(40)
                 .duration(400).EUt(VA[HV]).buildAndRegister();
 
         BIOLOGICAL_REACTION_RECIPES.recipeBuilder()
@@ -66,7 +64,6 @@ public class DragonChain {
                 .input(dust,Endstone,4)
                 .fluidInputs(Mutagen.getFluid(1000))
                 .chancedOutput(DRAGON_CELL,1600,0)
-                .rate(40)
                 .duration(400).EUt(VA[HV]).buildAndRegister();
 
         BIOLOGICAL_REACTION_RECIPES.recipeBuilder()
@@ -77,7 +74,7 @@ public class DragonChain {
                 .fluidInputs(Enzymesda.getFluid(1000))
                 .fluidOutputs(DragonBreath.getFluid(200))
                 .outputs(new ItemStack(DRAGON_EGG))
-                .rate(80)
+                .rate(60)
                 .duration(8000).EUt(VA[HV]).buildAndRegister();
 
 

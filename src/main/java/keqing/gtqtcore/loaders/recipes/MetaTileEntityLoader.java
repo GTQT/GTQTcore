@@ -521,6 +521,29 @@ public class MetaTileEntityLoader {
                 .EUt(VA[GTValues.IV])
                 .duration(1200)
                 .buildAndRegister();
+
+        //  Plasma Condenser
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(frameGt, HSSS)
+                .input(plate, RhodiumPlatedPalladium, 4)
+                .input(circuit, MarkerMaterials.Tier.UV, 2)
+                .input(ELECTRIC_MOTOR_UV, 2)
+                .input(ELECTRIC_PUMP_UV, 2)
+                .input(SENSOR_UV, 2)
+                .input(gear, TungstenCarbide, 4)
+                .input(screw, Inconel792, 16)
+                .fluidInputs(SolderingAlloy.getFluid(1440))
+                .fluidInputs(BlueSteel.getFluid(2880))
+                .fluidInputs(CobaltBrass.getFluid(2880))
+                .outputs(PLASMA_CONDENSER.getStackForm())
+                .EUt(VA[8])
+                .duration(600)
+                .stationResearch(b -> b
+                        .researchStack(VACUUM_FREEZER.getStackForm())
+                        .CWUt(30)
+                        .EUt(VA[7]))
+                .buildAndRegister();
+
         //炽焰
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .inputs(ELECTRIC_FURNACE[4].getStackForm(16))

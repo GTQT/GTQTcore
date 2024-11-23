@@ -283,7 +283,6 @@ public class AlgaeChain {
                 .fluidInputs(SterileGrowthMedium.getFluid(100))
                 .notConsumable(items)
                 .chancedOutput(items, 4000, 500)
-                .rate(rate)
                 .duration(400).EUt(VA[HV]).buildAndRegister();
 
         GANTRY_CRANE.recipeBuilder()

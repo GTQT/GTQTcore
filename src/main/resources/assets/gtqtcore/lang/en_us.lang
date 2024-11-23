@@ -924,6 +924,34 @@ gtqtcore.machine.dehydrator.uiv.name=Next-Generation Chemical Dehydrator III
 gtqtcore.machine.dehydrator.uxv.name=Next-Generation Chemical Dehydrator IV
 gtqtcore.machine.dehydrator.opv.name=Endgame Chemical Dehydrator
 
+gtqtcore.machine.bio_reactor.lv.name=Basic Bio Reactor
+gtqtcore.machine.bio_reactor.lv.tooltip=Sugar Factory
+gtqtcore.machine.bio_reactor.mv.name=Advanced Bio Reactor
+gtqtcore.machine.bio_reactor.mv.tooltip=Sugar Factory
+gtqtcore.machine.bio_reactor.hv.name=Advanced Bio Reactor II
+gtqtcore.machine.bio_reactor.hv.tooltip=Sugar Factory
+gtqtcore.machine.bio_reactor.ev.name=Advanced Bio Reactor III
+gtqtcore.machine.bio_reactor.ev.tooltip=Sugar Factory
+gtqtcore.machine.bio_reactor.iv.name=Elite Bio Reactor
+gtqtcore.machine.bio_reactor.iv.tooltip=Bacterial Petri Dish
+gtqtcore.machine.bio_reactor.luv.name=Elite Bio Reactor II
+gtqtcore.machine.bio_reactor.luv.tooltip=Bacterial Petri Dish
+gtqtcore.machine.bio_reactor.zpm.name=Elite Bio Reactor III
+gtqtcore.machine.bio_reactor.zpm.tooltip=Bacterial Petri Dish
+gtqtcore.machine.bio_reactor.uv.name=Ultimate Bio Reactor
+gtqtcore.machine.bio_reactor.uv.tooltip=Gene Editor
+gtqtcore.machine.bio_reactor.uhv.name=Epic Bio Reactor
+gtqtcore.machine.bio_reactor.uhv.tooltip=Gene Editor
+gtqtcore.machine.bio_reactor.uev.name=Epic Bio Reactor II
+gtqtcore.machine.bio_reactor.uev.tooltip=Gene Editor
+gtqtcore.machine.bio_reactor.uiv.name=Epic Bio Reactor III
+gtqtcore.machine.bio_reactor.uiv.tooltip=Gene Editor
+gtqtcore.machine.bio_reactor.uxv.name=Epic Bio Reactor IV
+gtqtcore.machine.bio_reactor.uxv.tooltip=Gene Editor
+gtqtcore.machine.bio_reactor.opv.name=Legendary Bio Reactor
+gtqtcore.machine.bio_reactor.opv.tooltip=Gene Editor
+
+
 gtqtcore.machine.mega_alloy_blast_smelter.name=Mega Alloy Blast Smelter
 gtqtcore.machine.mega_alloy_blast_smelter.tooltip.1=Glass tier determines maximum voltage.
 gtqtcore.machine.mega_alloy_blast_smelter.tooltip.2=Maximum parallel count is four times the coil tier.
@@ -1281,6 +1309,12 @@ gregtech.material.uranium_fluid_fuel_excited=Excited Uranium Fluid Fuel
 gregtech.material.uranium_fluid_fuel_depleted=Depleted Uranium Fluid Fuel
 gregtech.material.plutonium_fluid_fuel_excited=Excited Plutonium Fluid Fuel
 gregtech.material.plutonium_fluid_fuel_depleted=Depleted Plutonium Fluid Fuel
+gregtech.material.uranium_thorium_carbides=Uranium Thorium Carbides
+gregtech.material.thorium_based_liquid_fuel=Thorium-based Liquid Fuel
+gregtech.material.graphite_uranium_mixture=Graphite Uranium Mixture
+gregtech.material.uranium_based_liquid_fuel=Uranium-based Liquid Fuel
+gregtech.material.plutonium_uranium_oxides=Plutonium Uranium Oxides
+gregtech.material.plutonium_based_liquid_fuel=Plutonium-based Liquid Fuel
 gregtech.material.acetylsulfanilyl_chloride=Acetylsulfanilide Chloride
 gregtech.material.sulfanilamide=Sulfanilamide
 gregtech.material.animal_cells=Animal Cells
@@ -3693,9 +3727,16 @@ tile.electrobath.solar_plate_mv.name=Advanced Solar Integration Panel
 tile.electrobath.solar_plate_hv.name=High-Level Solar Integration Panel
 gregtech.multiblock.ocean_pumper.description=The seawater pump is a multi-block machine of the electric age. When its controller block is placed in an ocean biome and its height is between Y = 70 and Y = 75 (inclusive), it will collect 8,000 L of seawater (not brine) per second. It requires one output bus, one maintenance hatch, and one energy hatch.
 gtqtcore.machine.pcb.name=PCB Factory
-gtqtcore.machine.large_miner.zpm.name=Microgravity Orbital Mining Field (UV)
-gtqtcore.machine.large_miner.uv.name=Microgravity Orbital Mining Field (UV)
-gtqtcore.machine.large_miner.uhv.name=Microgravity Orbital Mining Field (UHV)
+
+gtqtcore.machine.large_miner.zpm.name=Extreme Miner
+gtqtcore.machine.large_miner.uv.name=Ultimate Miner
+gtqtcore.machine.large_miner.uhv.name=Supreme Miner
+
+gtqtcore.machine.fluid_drill_rig.iv.name=Elite Fluid Drill Rig
+gtqtcore.machine.fluid_drill_rig.luv.name=Extreme Fluid Drill Rig
+gtqtcore.machine.fluid_drill_rig.zpm.name=Ultimate Fluid Drill Rig
+gtqtcore.machine.fluid_drill_rig.uv.name=Supreme Fluid Drill Rig
+
 tile.electrobath.drill_head_lv.name=Drill Head (Level 1)
 tile.electrobath.drill_head_mv.name=Drill Head (Level 2)
 tile.electrobath.drill_head_hv.name=Drill Head (Level 3)
@@ -3715,7 +3756,15 @@ gtqtcore.machine.bio_centrifuge.name=High-Speed Centrifuge
 recipemap.bio_centrifuge.name=High-Speed Wall Breaking
 
 gtqtcore.machine.msf.name=Large Flash Evaporator
-gtqtcore.machine.green_house_plus.name=Large Greenhouse
+
+gtqtcore.machine.extreme_industrial_greenhouse.name=极限工业温室
+gtqtcore.machine.extreme_industrial_greenhouse.tooltip.1=超级作物培养仓
+gtqtcore.machine.extreme_industrial_greenhouse.tooltip.2=结构上方没有日光照射不会降低配方运行速度。
+gtqtcore.machine.extreme_industrial_greenhouse.tooltip.3=根据输入电压获得并行与配方时间减免。
+gtqtcore.machine.extreme_industrial_greenhouse.tooltip.4=输入小于§1IV§7级的电压时，始终获得§e64§7次并行。
+gtqtcore.machine.extreme_industrial_greenhouse.tooltip.5=输入大于§1IV§7级的电压时，始终获得§e256§7次并行。
+gtqtcore.machine.extreme_industrial_greenhouse.tooltip.6=输入大于§1IV§7级的电压时，配方运行时间减半。
+
 recipemap.sfm.name=Flash Evaporation
 gtqtcore.machine.electric_arc_furnace.name=Large Electrode Arc Furnace
 recipemap.blast_arc_furnace.name=Metallurgy
@@ -4215,6 +4264,12 @@ metaitem.thorium_rod_quad.name=Quad Thorium Fuel Rod
 metaitem.poor_thorium_rod.name=Depleted Thorium Fuel Rod
 metaitem.poor_thorium_rod_dual.name=Dual Depleted Thorium Fuel Rod
 metaitem.poor_thorium_rod_quad.name=Quad Depleted Thorium Fuel Rod
+
+##  Nuclear Items
+metaitem.high_density_thorium.name=浓缩钍
+metaitem.high_density_uranium.name=浓缩铀
+metaitem.high_density_plutonium.name=浓缩钚
+
 gtqt.multiblock.yot_tank.fluid_type=%s Fluid Type: %s Storage: %s
 gtqt.multiblock.tfft.computation=Fill: %s
 gtqt.multiblock.power_substation.stored=Capacity: %s

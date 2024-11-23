@@ -812,6 +812,14 @@ public class GTQTMaterials {
     public static Material NaquadahResidueMKII;
     public static Material NaquadahResidueMKIII;
     public static Material NaquadahResidueMKIV;
+
+    public static Material UraniumThoriumCarbides;
+    public static Material ThoriumBasedLiquidFuel;
+    public static Material GraphiteUraniumMixture;
+    public static Material UraniumBasedLiquidFuel;
+    public static Material PlutoniumUraniumOxides;
+    public static Material PlutoniumBasedLiquidFuel;
+
     public static Material ThoriumFluidFuelExcited;
     public static Material ThoriumFluidFuelDepleted;
     public static Material UraniumFluidFuelExcited;

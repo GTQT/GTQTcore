@@ -11,6 +11,7 @@ import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.utils.GTQTUniverUtil.SECOND;
+import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 
 public class NaquadahFuelChain {
     public static void init() {
@@ -18,56 +19,181 @@ public class NaquadahFuelChain {
         //FuelRefineChain();
         HyperReactorFuel();
         CommonFuel();
+        ThoriumBasedLiquidFuelChain();
+        UraniumBasedLiquidFuelChain();
+        PlutoniumBasedLiquidFuelChain();
         FuelRefineChainOT();
         FuelRefineChainNQ();
     }
+private static void ThoriumBasedLiquidFuelChain() {
 
-    private static void FuelRefineChainOT() {
-        CHEMICAL_PLANT.recipeBuilder()
-                .fluidOutputs(ThoriumFluidFuelExcited.getFluid(1000))
-                .fluidInputs(Helium.getPlasma(500))
+        //  12Th + U-235 + 3C -> Th12UC3
+        MIXER_RECIPES.recipeBuilder()
+                .input(dust, Thorium, 12)
+                .input(dust, Uranium235)
+                .input(dust, Carbon, 3)
+                .circuitMeta(4)
+                .output(dust, UraniumThoriumCarbides, 16)
+                .EUt(VA[HV])
+                .duration(10 * SECOND)
+                .buildAndRegister();
+
+        //  High Density Thorium
+        IMPLOSION_RECIPES.recipeBuilder()
+                .input(dust, UraniumThoriumCarbides, 64)
+                .input(foil, TungstenSteel, 16)
+                .output(HIGH_DENSITY_THORIUM)
+                .EUt(VA[IV])
+                .duration(5 * SECOND)
+                .explosivesAmount(32)
+                .buildAndRegister();
+
+        //  High Density Thorium + 4Li + 2Ba + Hg -> Th64Li4Ba2Hg
+        MIXER_RECIPES.recipeBuilder()
+                .input(HIGH_DENSITY_THORIUM)
+                .input(dust, Lithium, 4)
+                .input(dust, Barium, 2)
+                .circuitMeta(4)
                 .fluidInputs(Mercury.getFluid(1000))
-                .input(dust, Lithium, 4)
-                .input(dust, Draconium, 2)
-                .input(dust, Uranium238, 64)
-                .input(dust, Uranium235, 32)
-                .input(dust, Uranium234, 8)
-                .input(dust, Naquadria, 2)
-                .recipeLevel(6)
-                .EUt(1920)
-                .duration(180)
+                .fluidOutputs(ThoriumBasedLiquidFuel.getFluid(1000))
+                .EUt(VA[IV])
+                .duration(20 * SECOND)
                 .buildAndRegister();
 
-        CHEMICAL_PLANT.recipeBuilder()
-                .fluidOutputs(UraniumFluidFuelExcited.getFluid(1000))
-                .fluidInputs(Hydrogen.getPlasma(500))
-                .fluidInputs(Radon.getPlasma(1000))
-                .input(dust, Lithium, 4)
-                .input(dust, Draconium, 2)
-                .input(dust, Uranium238, 64)
-                .input(dust, Uranium235, 32)
-                .input(dust, Uranium234, 8)
-                .input(dust, Adamantium, 2)
-                .recipeLevel(6)
-                .EUt(1920)
-                .duration(180)
+        //  Th64Li4Ba2Hg Combustion Generator Recipe
+        COMBUSTION_GENERATOR_FUELS.recipeBuilder()
+                .fluidInputs(ThoriumBasedLiquidFuel.getFluid(10))
+                .EUt(VA[IV])
+                .duration((int) (2.5 * SECOND))
                 .buildAndRegister();
 
-        CHEMICAL_PLANT.recipeBuilder()
-                .fluidOutputs(PlutoniumFluidFuelExcited.getFluid(1000))
-                .fluidInputs(Lutetium.getFluid(576))
-                .fluidInputs(Xenon.getPlasma(1000))
-                .input(dust, Lithium, 4)
-                .input(dust, Draconium, 2)
-                .input(dust, Plutonium241, 64)
-                .input(dust, Plutonium242, 32)
-                .input(dust, Plutonium244, 8)
-                .input(dust, Adamantium, 2)
-                .recipeLevel(6)
-                .EUt(1920)
-                .duration(180)
+        //  Th64Li4Ba2Hg -> *Th64Li4Ba2Hg*
+        FUSION_RECIPES.recipeBuilder()
+                .fluidInputs(ThoriumBasedLiquidFuel.getFluid(1000))
+                .fluidInputs(Helium.getPlasma(250))
+                .fluidOutputs(ThoriumFluidFuelExcited.getFluid(L))
+                .EUt(VA[IV])
+                .duration(SECOND)
+                .EUToStart(120000000L) // MK1
                 .buildAndRegister();
 
+        //  *Th64Li4Ba2Hg* Naquadah Reactor Recipe
+        //  back to Taranium Processing class.
+    }
+
+    private static void UraniumBasedLiquidFuelChain() {
+
+        //  3C + U-238 -> C3U
+        MIXER_RECIPES.recipeBuilder()
+                .input(dust, Graphite, 3)
+                .input(dust, Uranium238)
+                .circuitMeta(2)
+                .output(dust, GraphiteUraniumMixture, 4)
+                .EUt(VA[MV])
+                .duration(5 * SECOND)
+                .buildAndRegister();
+
+        //  High Density Uranium
+        IMPLOSION_RECIPES.recipeBuilder()
+                .input(dust, GraphiteUraniumMixture, 36)
+                .input(foil, TungstenCarbide, 16)
+                .output(HIGH_DENSITY_URANIUM)
+                .EUt(VA[LuV])
+                .duration(10 * SECOND)
+                .explosivesAmount(32)
+                .buildAndRegister();
+
+        //  High Density Uranium + 8K + 4Nq + Rn -> U36K8Nq4Rn
+        MIXER_RECIPES.recipeBuilder()
+                .input(HIGH_DENSITY_URANIUM)
+                .input(dust, Potassium, 8)
+                .input(dust, Naquadah, 4)
+                .circuitMeta(4)
+                .fluidInputs(Radon.getFluid(1000))
+                .fluidOutputs(UraniumBasedLiquidFuel.getFluid(1000))
+                .EUt(VA[LuV])
+                .duration(10 * SECOND)
+                .buildAndRegister();
+
+        //  U36K8Nq4Rn Combustion Generator Recipe
+        COMBUSTION_GENERATOR_FUELS.recipeBuilder()
+                .fluidInputs(UraniumBasedLiquidFuel.getFluid(10))
+                .EUt(VA[IV])
+                .duration(5 * SECOND)
+                .buildAndRegister();
+
+        //  U36K8Nq4Rn -> *U36K8Nq4Rn*
+        FUSION_RECIPES.recipeBuilder()
+                .fluidInputs(UraniumBasedLiquidFuel.getFluid(1000))
+                .fluidInputs(Argon.getPlasma(250))
+                .fluidOutputs(UraniumFluidFuelExcited.getFluid(L))
+                .EUt(VA[LuV])
+                .duration(SECOND)
+                .EUToStart(240000000L) // MK2
+                .buildAndRegister();
+
+        //  *U36K8Nq4Rn* Naquadah Reactor recipe
+        //  back to Taranium Processing class.
+    }
+
+    private static void PlutoniumBasedLiquidFuelChain() {
+
+        //  10Pu-239 + 2U-238 + 8C + 12O -> Pu10O12U2C8
+        MIXER_RECIPES.recipeBuilder()
+                .input(dust, Plutonium239, 10)
+                .input(dust, Uranium238, 2)
+                .input(dust, Carbon, 8)
+                .circuitMeta(4)
+                .fluidInputs(Oxygen.getFluid(12000))
+                .output(dust, PlutoniumUraniumOxides, 32)
+                .EUt(VA[HV])
+                .duration((int) (2.5 * SECOND))
+                .buildAndRegister();
+
+        //  High Density Plutonium
+        IMPLOSION_RECIPES.recipeBuilder()
+                .input(dust, PlutoniumUraniumOxides, 64)
+                .input(foil, HSSS, 16)
+                .output(HIGH_DENSITY_PLUTONIUM)
+                .EUt(VA[ZPM])
+                .duration(10 * SECOND)
+                .explosivesAmount(32)
+                .buildAndRegister();
+
+        //  High Density Plutonium + 8Rb + 16Cs + 2Nq+ -> Pu64Rb8Cs16Nq+2
+        MIXER_RECIPES.recipeBuilder()
+                .input(HIGH_DENSITY_PLUTONIUM)
+                .input(dust, Rubidium, 8)
+                .input(dust, Caesium, 16)
+                .input(dust, NaquadahEnriched, 2)
+                .circuitMeta(4)
+                .fluidOutputs(PlutoniumBasedLiquidFuel.getFluid(1000))
+                .EUt(VA[ZPM])
+                .duration(10 * SECOND)
+                .buildAndRegister();
+
+        //  Pu64Rb8Cs16Nq+2 Combustion Generator Recipe
+        COMBUSTION_GENERATOR_FUELS.recipeBuilder()
+                .fluidInputs(PlutoniumBasedLiquidFuel.getFluid(10))
+                .EUt(VA[IV])
+                .duration((int) (7.5 * SECOND))
+                .buildAndRegister();
+
+        //  Pu64Rb8Cs16Nq+2 -> *Pu64Rb8Cs16Nq+2*
+        FUSION_RECIPES.recipeBuilder()
+                .fluidInputs(PlutoniumBasedLiquidFuel.getFluid(1000))
+                .fluidInputs(Xenon.getPlasma(250))
+                .fluidOutputs(PlutoniumFluidFuelExcited.getFluid(L))
+                .EUt(VA[ZPM])
+                .duration(SECOND)
+                .EUToStart(360000000L) // MK3
+                .buildAndRegister();
+
+        //  *Pu64Rb8Cs16Nq+2* Naquadah Reactor recipe
+        //  back to Taranium Processing class
+
+    }
+    private static void FuelRefineChainOT() {
         NAQUADAH_REACTOR_RECIPES.recipeBuilder()
                 .fluidInputs(ThoriumFluidFuelExcited.getFluid(1))
                 .fluidOutputs(GTQTMaterials.ThoriumFluidFuelDepleted.getFluid(1))
@@ -256,20 +382,20 @@ public class NaquadahFuelChain {
         NAQUADAH_REFINE_FACTORY_RECIPES.recipeBuilder()
                 .input(dust, NetherStar, 8)
                 .input(dust, Phosphorus, 4)
-                .input(dust, Uranium238, 2)
+                .input(HIGH_DENSITY_THORIUM, 2)
                 .fluidInputs(Helium.getPlasma(1440))
                 .fluidInputs(NaquadahFuelMKI.getFluid(2000))
                 .fluidInputs(NaquadahGas.getFluid(1500))
                 .fluidOutputs(NaquadahFuelMKII.getFluid(500))
                 .EUt(525000)
                 .duration(25 * SECOND)
-                .circuitMeta(1)
+                .blastFurnaceTemp(8000)
                 .buildAndRegister();
 
         NAQUADAH_REFINE_FACTORY_RECIPES.recipeBuilder()
                 .input(dust, Adamantium, 8)
                 .input(dust, UnstableNaquadahPowder, 4)
-                .input(dust, Plutonium241, 2)
+                .input(HIGH_DENSITY_URANIUM, 2)
                 .fluidInputs(Nitrogen.getPlasma(1440))
                 .fluidInputs(NaquadahFuelMKII.getFluid(2000))
                 .fluidInputs(NaquadahGas.getFluid(1500))
@@ -282,7 +408,7 @@ public class NaquadahFuelChain {
         NAQUADAH_REFINE_FACTORY_RECIPES.recipeBuilder()
                 .input(dust, Adamantium, 16)
                 .input(dust, UnstableNaquadahPowder, 8)
-                .input(dust, Americium241, 8)
+                .input(HIGH_DENSITY_PLUTONIUM, 4)
                 .fluidInputs(HeavyNaquadahFuel.getFluid(300))
                 .fluidInputs(MediumNaquadahFuel.getFluid(400))
                 .fluidInputs(LightNaquadahFuel.getFluid(500))
@@ -799,7 +925,6 @@ public class NaquadahFuelChain {
                 .EUt(8192)
                 .duration(240)
                 .buildAndRegister();
-
          */
 
     }

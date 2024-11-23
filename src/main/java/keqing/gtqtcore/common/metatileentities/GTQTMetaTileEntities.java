@@ -19,6 +19,8 @@ import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityRotor
 import keqing.gtqtcore.GTQTCoreConfig;
 import keqing.gtqtcore.api.metaileentity.SimpleSteamMetaTileEntity;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
+import keqing.gtqtcore.api.unification.GCYSMaterials;
+import keqing.gtqtcore.api.unification.GTQTMaterials;
 import keqing.gtqtcore.api.utils.GTQTLog;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.api.utils.SteamProgressIndicators;
@@ -43,6 +45,8 @@ import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.heatExc
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.huge.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.kqcc.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.overwrite.*;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.resourse.MetaTileEntityAdvancedFluidDrill;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.resourse.MetaTileEntityAdvancedLargeMiner;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.star.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.steam.MetaTileEntitySawMill;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.steam.MetaTileEntitySteamFermentationVat;
@@ -161,7 +165,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityTideUnit TIDE_UNIT;
     public static MetaTileEntityWindGenerator WIND_GENERATOR;
     public static MetaTileEntityHugeCrackingUnit HUGE_CRACKING_UNIT;
-    public static MetaTileEntityGreenhousePlus GREEN_HOUSE_PLUS;
+    public static MetaTileEntityExtremeIndustrialGreenhouse EXTREME_INDUSTRIAL_GREENHOUSE;
     public static MetaTileEntityDataAccessHatch EDATA_ACCESS_HATCH;
     public static MetaTileEntityDataAccessHatch FDATA_ACCESS_HATCH;
     public static MetaTileEntityDissolutionTank DISSOLUTION_TANK;
@@ -225,6 +229,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityLatexCollector[] LATEX_COLLECTOR = new MetaTileEntityLatexCollector[4];
     public static SimpleMachineMetaTileEntity[] ULTRAVIOLET_LAMP_CHAMBER = new SimpleMachineMetaTileEntity[GTValues.V.length - 1];
     public static SimpleMachineMetaTileEntity[] DEHYDRATOR = new SimpleMachineMetaTileEntity[GTValues.V.length - 1];
+    public static SimpleMachineMetaTileEntity[] BIO_REACTOR = new SimpleMachineMetaTileEntity[V.length - 1];
     public static MetaTileEntityMillBallHatch MULTIPART_BALL_HATCH;
     public static MetaTileEntityCatalystHatch CATALYST_HATCH;
     public static MetaTileEntityKQNetworkSwitch KQNS;
@@ -237,6 +242,14 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntitySBPRI SBPRI;
     public static MetaTileEntitySBPRO SBPRO;
     //public static MetaTileEntityMegaCleanroom MEGA_CLEANROOM;
+    public static MetaTileEntityAdvancedLargeMiner EXTREME_LARGE_MINER;
+    public static MetaTileEntityAdvancedLargeMiner ULTIMATE_LARGE_MINER;
+    public static MetaTileEntityAdvancedLargeMiner INFINITY_LARGE_MINER;
+    public static MetaTileEntityAdvancedFluidDrill ADVANCED_FLUID_DRILL_RIG;
+    public static MetaTileEntityAdvancedFluidDrill EXTREME_FLUID_DRILL_RIG;
+    public static MetaTileEntityAdvancedFluidDrill ULTIMATE_FLUID_DRILL_RIG;
+    public static MetaTileEntityAdvancedFluidDrill INFINITY_FLUID_DRILL_RIG;
+
     public static MetaTileEntityDimensionalMixer DIMENSIONAL_MIXER;
     public static MetaTileEntityDimensionallyPlasmFurnace DIMENSIONAL_PLASMA_FURNACE;
     public static SimpleMachineMetaTileEntity[] AUTO_CHISEL = new SimpleMachineMetaTileEntity[3];
@@ -312,6 +325,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityFixBed FIX_BED;
     public static MetaTileEntityEnergySubstation ENERGY_SUBSTATION;
     public static MetaTileEntityNaquadahFuelFactory NAQUADAH_FUEL_FACTORY;
+    public static MetaTileEntityPlasmaCondenser PLASMA_CONDENSER;
     public static MetaTileEntityDimensionallyTranscendentPlasmaForge DIMENSIONALLY_TRANSCENDENT_PLASMA_FORGE;
     public static MetaTileEntityIndustrialMacerator INDUSTRIAL_MACERATOR;
     public static MetaTileEntityIndustrialCentrifuge INDUSTRIAL_CENTRIFUGE;
@@ -534,7 +548,7 @@ public class GTQTMetaTileEntities {
         INTEGRATED_ORE_PROCESSOR = registerMetaTileEntity(3189, new MetaTileEntityIntegratedOreProcessor(gtqtcoreId("integrated_ore_processor")));
         FLUIDIZED_BED = registerMetaTileEntity(3190, new MetaTileEntityFluidizedBed(gtqtcoreId("fluidzed_bed")));
         ELECTRIC_ARC_FURNACE = registerMetaTileEntity(3191, new MetaTileEntityElectricArcFurnace(gtqtcoreId("electric_arc_furnace")));
-        GREEN_HOUSE_PLUS = registerMetaTileEntity(3192, new MetaTileEntityGreenhousePlus(gtqtcoreId("green_house_plus")));
+        EXTREME_INDUSTRIAL_GREENHOUSE = registerMetaTileEntity(3192, new MetaTileEntityExtremeIndustrialGreenhouse(gtqtcoreId("extreme_industrial_greenhouse")));
         ENZYMES_REACTOR = registerMetaTileEntity(3193, new MetaTileEntityEnzymesReaction(gtqtcoreId("enzymes_reactor")));
         BIO_CENTRIFUGE = registerMetaTileEntity(3194, new MetaTileEntityBioCentrifuge(gtqtcoreId("bio_centrifuge")));
         CRYOGENIC_FREEZER = registerMetaTileEntity(3195, new MetaTileEntityCryogenicFreezer(gtqtcoreId("cryogenic_freezer")));
@@ -563,6 +577,7 @@ public class GTQTMetaTileEntities {
         INDUSTRIAL_INDUCTION_FURNACE = registerMetaTileEntity(3219, new MetaTileEntityIndustrialInductionFurnace(gtqtcoreId("industrial_induction_furnace")));
         ENERGY_SUBSTATION = registerMetaTileEntity(3220, new MetaTileEntityEnergySubstation(gtqtcoreId("energy_substation")));
         NAQUADAH_FUEL_FACTORY = registerMetaTileEntity(3221, new MetaTileEntityNaquadahFuelFactory(gtqtcoreId("naquadah_fuel_factory")));
+        PLASMA_CONDENSER = registerMetaTileEntity(3222, new MetaTileEntityPlasmaCondenser(gtqtcoreId("plasma_condenser")));
 
         //重写设备
         DISTILLATION_TOWER = registerMetaTileEntity(3250, new MetaTileEntityDistillationTower(gtqtcoreId("distillation_tower"), true));
@@ -620,6 +635,15 @@ public class GTQTMetaTileEntities {
         //资源产出
         GAS_COLLECTOR = registerMetaTileEntity(3406, new MetaTileEntityGasCollector(gtqtcoreId("gas_collector")));
         INDUSTRY_WATER_PUMP = registerMetaTileEntity(3407, new MetaTileEntityIndustryWaterPump(gtqtcoreId("industry_water_pump")));
+
+        EXTREME_LARGE_MINER = registerMetaTileEntity(3420, new MetaTileEntityAdvancedLargeMiner(gtqtcoreId("large_miner.zpm"), 7, 1, 9, 7, Materials.Naquadah, 64));
+        ULTIMATE_LARGE_MINER = registerMetaTileEntity(3421, new MetaTileEntityAdvancedLargeMiner(gtqtcoreId("large_miner.uv"), 8, 1, 18, 8, GCYSMaterials.Orichalcum, 128));
+        INFINITY_LARGE_MINER = registerMetaTileEntity(3422, new MetaTileEntityAdvancedLargeMiner(gtqtcoreId("large_miner.uhv"), 9, 1, 36, 9, GCYSMaterials.Adamantium, 256));
+
+        ADVANCED_FLUID_DRILL_RIG = registerMetaTileEntity(3423, new MetaTileEntityAdvancedFluidDrill(gtqtcoreId("fluid_drill_rig.iv"), 5));
+        EXTREME_FLUID_DRILL_RIG = registerMetaTileEntity(3424, new MetaTileEntityAdvancedFluidDrill(gtqtcoreId("fluid_drill_rig.luv"), 6));
+        ULTIMATE_FLUID_DRILL_RIG = registerMetaTileEntity(3425, new MetaTileEntityAdvancedFluidDrill(gtqtcoreId("fluid_drill_rig.zpm"), 7));
+        INFINITY_FLUID_DRILL_RIG = registerMetaTileEntity(3426, new MetaTileEntityAdvancedFluidDrill(gtqtcoreId("fluid_drill_rig.uv"), 8));
         //KQCC
         KQCC = registerMetaTileEntity(3450, new MetaTileEntityKQCC(gtqtcoreId("kqcc")));
         KQNS = registerMetaTileEntity(3451, new MetaTileEntityKQNetworkSwitch(gtqtcoreId("kqns")));
@@ -653,7 +677,7 @@ public class GTQTMetaTileEntities {
 
         //小机器
         registerSimpleSteamMetaTileEntity(STEAM_VACUUM_CHAMBER, 14800, "vacuum_chamber", GTQTcoreRecipeMaps.VACUUM_CHAMBER_RECIPES, SteamProgressIndicators.COMPRESS, Textures.GAS_COLLECTOR_OVERLAY, false);
-
+        registerSimpleMetaTileEntity(BIO_REACTOR, 14970, "bio_reactor", GTQTcoreRecipeMaps.BIOLOGICAL_REACTION_RECIPES, GTQTTextures.BIO_REACTOR_OVERLAY, true, GTQTUtil::gtqtId, (tier) -> 16000);
         registerSimpleMetaTileEntity(DEHYDRATOR, 14985, "dehydrator", GTQTcoreRecipeMaps.DRYER_RECIPES, Textures.SIFTER_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
         registerSimpleMetaTileEntity(FLUID_EXTRACTOR, 15000, "fluid_extractor", GTQTcoreRecipeMaps.FLUID_EXTRACTOR_RECIPES, Textures.EXTRACTOR_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
         registerSimpleMetaTileEntity(FLUID_CANNER, 15015, "fluid_canner", GTQTcoreRecipeMaps.FLUID_CANNER_RECIPES, Textures.CANNER_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
@@ -661,6 +685,7 @@ public class GTQTMetaTileEntities {
         registerSimpleMetaTileEntity(DECAY_CHAMBER, 15045, "decay_chamber", GTQTcoreRecipeMaps.DECAY_CHAMBER_RECIPES, Textures.CHEMICAL_BATH_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
         registerSimpleMetaTileEntity(VACUUM_CHAMBER, 15060, "vacuum_chamber", GTQTcoreRecipeMaps.VACUUM_CHAMBER_RECIPES, Textures.GAS_COLLECTOR_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
         registerSimpleMetaTileEntity(ULTRAVIOLET_LAMP_CHAMBER, 15075, "ultraviolet_lamp_chamber", GTQTcoreRecipeMaps.ULTRAVIOLET_LAMP_CHAMBER_RECIPES, Textures.LASER_ENGRAVER_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
+
 
         STEAM_LATEX_COLLECTOR[0] = registerMetaTileEntity(15090, new MetaTileEntitySteamLatexCollector(gtqtcoreId("latex_collector.bronze"), false));
         STEAM_LATEX_COLLECTOR[1] = registerMetaTileEntity(15091, new MetaTileEntitySteamLatexCollector(gtqtcoreId("latex_collector.steel"), true));

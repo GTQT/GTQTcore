@@ -534,6 +534,10 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem POOR_THORIUM_ROD;
     public static MetaItem<?>.MetaValueItem POOR_THORIUM_ROD_DUAL;
     public static MetaItem<?>.MetaValueItem POOR_THORIUM_ROD_QUAD;
+    //  Nuclear Items
+    public static MetaItem<?>.MetaValueItem HIGH_DENSITY_THORIUM;
+    public static MetaItem<?>.MetaValueItem HIGH_DENSITY_URANIUM;
+    public static MetaItem<?>.MetaValueItem HIGH_DENSITY_PLUTONIUM;
 
     public static MetaItem<?>.MetaValueItem MAGNETO_RESONATIC_BOARD;
     public static MetaItem<?>.MetaValueItem MAGNETO_RESONATIC_CIRCUIT_BOARD;

@@ -40,21 +40,18 @@ public class CTABChain {
                 .fluidInputs(DNAa.getFluid(400))
                 .fluidInputs(AmmoniumChloride.getFluid(144))
                 .fluidOutputs(DNAb.getFluid(400))
-                .rate(60)
                 .duration(400).EUt(VA[HV]).buildAndRegister();
 
         BIOLOGICAL_REACTION_RECIPES.recipeBuilder()
                 .fluidInputs(DNAb.getFluid(100))
                 .fluidInputs(Bacteria.getFluid(200))
                 .fluidOutputs(DNAc.getFluid(100))
-                .rate(60)
                 .duration(400).EUt(VA[HV]).buildAndRegister();
 
         BIOLOGICAL_REACTION_RECIPES.recipeBuilder()
                 .fluidInputs(DNAc.getFluid(100))
                 .fluidInputs(Biomass.getFluid(200))
                 .fluidOutputs(DNAd.getFluid(100))
-                .rate(60)
                 .duration(400).EUt(VA[HV]).buildAndRegister();
 
         BIOLOGICAL_REACTION_RECIPES.recipeBuilder()
@@ -62,7 +59,6 @@ public class CTABChain {
                 .fluidInputs(Biomass.getFluid(200))
                 .input(OrePrefix.dust,Agar)
                 .fluidOutputs(DNAe.getFluid(100))
-                .rate(60)
                 .duration(400).EUt(VA[HV]).buildAndRegister();
 
         COMPRESSOR_RECIPES.recipeBuilder()
@@ -115,7 +111,6 @@ public class CTABChain {
                 .fluidInputs(Mutagen.getFluid(1000))
                 .fluidOutputs(DNAe.getFluid(200))
                 .circuitMeta(2)
-                .rate(60)
                 .duration(400).EUt(VA[HV]).buildAndRegister();
 
         BIOLOGICAL_REACTION_RECIPES.recipeBuilder()
@@ -123,7 +118,6 @@ public class CTABChain {
                 .output(OrePrefix.dust,Bone,16)
                 .output(OrePrefix.dust,Meat,16)
                 .circuitMeta(3)
-                .rate(60)
                 .duration(4000).EUt(VA[HV]).buildAndRegister();
     }
     private static void Isoamylalcohol() {

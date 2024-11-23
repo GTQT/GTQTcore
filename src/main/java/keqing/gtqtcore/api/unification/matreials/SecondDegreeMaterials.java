@@ -892,6 +892,63 @@ public class SecondDegreeMaterials {
                 .color(0xFF4500) // 橙红色
                 .build();
 
+        //  11260 Uranium-Thorium Carbides
+        UraniumThoriumCarbides = new Material.Builder(getMaterialsId(), gregtechId("uranium_thorium_carbides"))
+                .dust()
+                .color(0x163207)
+                .iconSet(DULL)
+                .components(Thorium, 12, Uranium235, 1, Carbon, 3)
+                .build()
+                .setFormula("Th12UC3", true);
+
+        //  11261 Thorium Based Liquid Fuel
+        ThoriumBasedLiquidFuel = new Material.Builder(getMaterialsId(), gregtechId("thorium_based_liquid_fuel"))
+                .liquid()
+                .color(0x503266)
+                .iconSet(DULL)
+                .components(Thorium, 64, Lithium, 4, Barium, 2, Mercury, 1)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("Th64Li4Ba2Hg", true);
+
+        //  11262 Graphite-Uranium Mixture
+        GraphiteUraniumMixture = new Material.Builder(getMaterialsId(), gregtechId("graphite_uranium_mixture"))
+                .dust()
+                .color(0x3A773D)
+                .iconSet(DULL)
+                .components(Graphite, 3, Uranium238, 1)
+                .build()
+                .setFormula("C3U", true);
+
+        //  11263 Uranium Based Liquid Fuel
+        UraniumBasedLiquidFuel = new Material.Builder(getMaterialsId(), gregtechId("uranium_based_liquid_fuel"))
+                .liquid()
+                .color(0x00FF00)
+                .iconSet(DULL)
+                .components(Uranium238, 36, Potassium, 8, Naquadah, 4, Radon, 1)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("U36K8Nq4Rn", true);
+
+        //  11264 Plutonium Uranium Oxides
+        PlutoniumUraniumOxides = new Material.Builder(getMaterialsId(), gregtechId("plutonium_uranium_oxides"))
+                .dust()
+                .color(0xD11F4A)
+                .iconSet(SHINY)
+                .components(Plutonium239, 10, Uranium238, 2, Carbon, 8, Oxygen, 12)
+                .build()
+                .setFormula("Pu10O12U2C8", true);
+
+        //  11265 Plutonium Based Liquid Fuel
+        PlutoniumBasedLiquidFuel = new Material.Builder(getMaterialsId(), gregtechId("plutonium_based_liquid_fuel"))
+                .liquid()
+                .color(0xEF1515)
+                .iconSet(DULL)
+                .components()
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("Pu64Rb8Cs16Nq+2", true);
+
         // 注册钍基流体燃料（激发）
         ThoriumFluidFuelExcited = new Material.Builder(getMaterialsId(), gregtechId("thorium_fluid_fuel_excited"))
                 .fluid()

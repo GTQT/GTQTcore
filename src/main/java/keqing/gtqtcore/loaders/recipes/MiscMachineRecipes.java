@@ -1,26 +1,15 @@
 package keqing.gtqtcore.loaders.recipes;
 
-import gregtech.api.GTValues;
-import gregtech.api.fluids.store.FluidStorageKeys;
 import gregtech.api.metatileentity.multiblock.CleanroomType;
 import gregtech.api.recipes.GTRecipeHandler;
-import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMaps;
-import gregtech.api.recipes.ingredients.GTRecipeInput;
 import gregtech.api.recipes.ingredients.IntCircuitIngredient;
 import gregtech.api.unification.OreDictUnifier;
-import gregtech.api.unification.material.Materials;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.FluidStack;
-
-import java.util.Collection;
-import java.util.List;
 
 import static gregtech.api.GTValues.*;
-import static gregtech.api.recipes.RecipeMaps.ASSEMBLER_RECIPES;
 import static gregtech.api.recipes.RecipeMaps.MIXER_RECIPES;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.dust;
@@ -33,76 +22,6 @@ public class MiscMachineRecipes {
 
 
     public static void init() {
-        Collection<Recipe> cutterRecipes = RecipeMaps.CUTTER_RECIPES.getRecipeList();
-        for (Recipe recipe : cutterRecipes) {
-            List<GTRecipeInput> itemInputs = recipe.getInputs();
-            List<ItemStack> itemOutputs = recipe.getOutputs();
-            int EUt = recipe.getEUt() * 4;
-            int baseDuration;
-
-            if (EUt <= V[IV]) baseDuration = recipe.getDuration() * 4;
-            else baseDuration = recipe.getDuration();
-
-            CW_LASER_ENGRAVER_RECIPES.recipeBuilder()
-                    .fluidInputs(DistilledWater.getFluid(100))
-                    .inputIngredients(itemInputs)
-                    .outputs(itemOutputs)
-                    .duration(baseDuration)
-                    .EUt(EUt)
-                    .circuitMeta(6)
-                    .buildAndRegister();
-        }
-        //燃料电池
-        Collection<Recipe> oilsRecipes = RecipeMaps.COMBUSTION_GENERATOR_FUELS.getRecipeList();
-        for (Recipe recipe : oilsRecipes) {
-            List<GTRecipeInput> fluidInputs = recipe.getFluidInputs();
-            int EUt = (int) GTValues.V[GTValues.LV];
-            int baseDuration = 4 * recipe.getDuration() * recipe.getEUt() / EUt;
-            GTQTcoreRecipeMaps.FUEL_CELL.recipeBuilder()
-                    .fluidInputs(fluidInputs)
-                    .fluidInputs(Materials.Air.getFluid(baseDuration * 4))
-                    .duration(baseDuration)
-                    .EUt(EUt)
-                    .buildAndRegister();
-            GTQTcoreRecipeMaps.FUEL_CELL.recipeBuilder()
-                    .fluidInputs(fluidInputs)
-                    .fluidInputs(Materials.Oxygen.getFluid(FluidStorageKeys.GAS, baseDuration * 2))
-                    .duration(baseDuration * 2)
-                    .EUt(EUt)
-                    .buildAndRegister();
-            GTQTcoreRecipeMaps.FUEL_CELL.recipeBuilder()
-                    .fluidInputs(fluidInputs)
-                    .fluidInputs(Materials.Oxygen.getFluid(FluidStorageKeys.LIQUID, baseDuration))
-                    .duration(baseDuration * 4)
-                    .EUt(EUt)
-                    .buildAndRegister();
-
-        }
-        Collection<Recipe> gasRecipes = RecipeMaps.GAS_TURBINE_FUELS.getRecipeList();
-        for (Recipe recipe : gasRecipes) {
-            List<GTRecipeInput> fluidInputs = recipe.getFluidInputs();
-            int EUt = (int) GTValues.V[GTValues.LV];
-            int baseDuration = 4 * recipe.getDuration() * recipe.getEUt() / EUt;
-            GTQTcoreRecipeMaps.FUEL_CELL.recipeBuilder()
-                    .fluidInputs(fluidInputs)
-                    .fluidInputs(Materials.Air.getFluid(baseDuration))
-                    .duration(baseDuration)
-                    .EUt(EUt)
-                    .buildAndRegister();
-            GTQTcoreRecipeMaps.FUEL_CELL.recipeBuilder()
-                    .fluidInputs(fluidInputs)
-                    .fluidInputs(Materials.Oxygen.getFluid(FluidStorageKeys.GAS, (int) Math.ceil(baseDuration * 1.5)))
-                    .duration((int) Math.floor(baseDuration * 1.5))
-                    .EUt(EUt)
-                    .buildAndRegister();
-            GTQTcoreRecipeMaps.FUEL_CELL.recipeBuilder()
-                    .fluidInputs(fluidInputs)
-                    .fluidInputs(Materials.Oxygen.getFluid(FluidStorageKeys.LIQUID, baseDuration * 8))
-                    .duration(baseDuration * 2)
-                    .EUt(EUt)
-                    .buildAndRegister();
-
-        }
         LATEX_COLLECTOR_RECIPES.recipeBuilder()
                 .fluidInputs(Water.getFluid(10))
                 .fluidOutputs(Latex.getFluid(100))
@@ -243,6 +162,6 @@ public class MiscMachineRecipes {
                 .EUt(120)
                 .duration(900)
                 .buildAndRegister();
-        
+
     }
 }
