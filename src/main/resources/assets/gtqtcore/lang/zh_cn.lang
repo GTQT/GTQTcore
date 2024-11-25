@@ -4439,13 +4439,13 @@ metaitem.scintillator_crystal.name=闪烁晶体
 
 gtqtcore.tbcc.tooltip.1=我是爆燃那你是谁
 gtqtcore.tbcc.tooltip.2=发电等级由结构线圈等级决定（发电量为发电等级对应的电压乘1.25），使用氧促燃可使发电提高1.2倍
-gtqtcore.tbcc.tooltip.3=发电机工作时额定消耗水500mb，润滑油5mb，促燃情况下氧气20b再叠乘发电等级（每tick）
-gtqtcore.tbcc.tooltip.4=发电机工作时额定产出1mb高压蒸汽（每tick）
+gtqtcore.tbcc.tooltip.3=发电机工作时额定消耗水512mb，润滑油5mb，促燃情况下氧气20b再叠乘发电等级（每tick）
+gtqtcore.tbcc.tooltip.4=发电机工作时额定产出640*2mb高压蒸汽（每tick）
 
 gtqtcore.rocket.tooltip.1=爆燃上天传奇
 gtqtcore.rocket.tooltip.2=发电等级由结构线圈等级决定（发电量为发电等级对应的电压乘1.5），使用氧促燃可使发电提高1.25倍
-gtqtcore.rocket.tooltip.3=发电机工作时额定消耗水500mb，润滑油10mb，促燃情况下氧气40mb再叠乘发电等级（每tick）
-gtqtcore.rocket.tooltip.4=发电机工作时额定产出1mb高压蒸汽（每tick）
+gtqtcore.rocket.tooltip.3=发电机工作时额定消耗水512mb，润滑油10mb，促燃情况下氧气40mb再叠乘发电等级（每tick）
+gtqtcore.rocket.tooltip.4=发电机工作时额定产出640*4mb高压蒸汽（每tick）
 
 gtqtcore.core.tooltip.1=工作模式：独立线程
 gtqtcore.core.tooltip.2=>>核心线程数量:%s

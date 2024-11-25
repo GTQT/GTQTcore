@@ -4424,13 +4424,13 @@ metaitem.scintillator_crystal.name=Scintillator Crystal
 
 gtqtcore.tbcc.tooltip.1=I'm the Detonation, who are you?
 gtqtcore.tbcc.tooltip.2=The power generation level is determined by the structural coil level (power generation is the voltage corresponding to the power generation level multiplied by 1.25). Using oxygen to boost combustion can increase power generation by 1.2 times.
-gtqtcore.tbcc.tooltip.3=When the generator is operating, it consumes 500mb of water and 5mb of lubricating oil at the rated capacity. Under boosted combustion conditions, it consumes 20mb of oxygen multiplied by the power generation level (per tick).
-gtqtcore.tbcc.tooltip.4=When the generator is operating, it produces 1mb of high-pressure steam at the rated capacity (per tick).
+gtqtcore.tbcc.tooltip.3=When the generator is operating, it consumes 512mb of water and 5mb of lubricating oil at the rated capacity. Under boosted combustion conditions, it consumes 20mb of oxygen multiplied by the power generation level (per tick).
+gtqtcore.tbcc.tooltip.4=When the generator is operating, it produces 640*2 mb of high-pressure steam at the rated capacity (per tick).
 
 gtqtcore.rocket.tooltip.1=A Legendary Detonation Ascension
 gtqtcore.rocket.tooltip.2=The power generation level is determined by the structural coil level (power generation is the voltage corresponding to the power generation level multiplied by 1.5). Using oxygen to boost combustion can increase power generation by 1.25 times.
-gtqtcore.rocket.tooltip.3=When the generator is operating, it consumes 500mb of water and 10mb of lubricating oil at the rated capacity. Under boosted combustion conditions, it consumes 40mb of oxygen multiplied by the power generation level (per tick).
-gtqtcore.rocket.tooltip.4=When the generator is operating, it produces 1mb of high-pressure steam at the rated capacity (per tick).
+gtqtcore.rocket.tooltip.3=When the generator is operating, it consumes 512mb of water and 10mb of lubricating oil at the rated capacity. Under boosted combustion conditions, it consumes 40mb of oxygen multiplied by the power generation level (per tick).
+gtqtcore.rocket.tooltip.4=When the generator is operating, it produces 640*4 mb of high-pressure steam at the rated capacity (per tick).
 
 gtqtcore.core.tooltip.1=Operating Mode: Independent Threads
 gtqtcore.core.tooltip.2=>>Number of Core Threads: %s

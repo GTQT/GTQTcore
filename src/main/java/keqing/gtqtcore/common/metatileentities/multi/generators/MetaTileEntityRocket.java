@@ -340,10 +340,10 @@ public class MetaTileEntityRocket extends FuelMultiblockController implements IT
     private class TurbineCombustionEngineWorkableHandler extends MultiblockFuelRecipeLogic {
 
         private final MetaTileEntityRocket combustionEngine;
-        private final FluidStack WATER_STACK = Materials.Water.getFluid(500 * getMax(heatingCoilLevel));
+        private final FluidStack WATER_STACK = Materials.Water.getFluid(512 * getMax(heatingCoilLevel));
         private final FluidStack LUBRICANT_STACK = Materials.Lubricant.getFluid(10 * getMax(heatingCoilLevel));
         private final FluidStack OXYGEN_STACK = Oxygen.getFluid(40 * getMax(heatingCoilLevel));
-        private final FluidStack HOT_STACK = GTQTMaterials.HighPressureSteam.getFluid(1);
+        private final FluidStack HOT_STACK = GTQTMaterials.SupercriticalSteam.getFluid(640 * 4 * getMax(heatingCoilLevel));
         private boolean isOxygenBoosted = false;
         public TurbineCombustionEngineWorkableHandler(RecipeMapMultiblockController tileEntity) {
             super(tileEntity);

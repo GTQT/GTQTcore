@@ -363,13 +363,13 @@ public class MetaTileEntityTurbineCombustionChamber extends FuelMultiblockContro
             this.combustionEngine = (MetaTileEntityTurbineCombustionChamber) tileEntity;
             this.isExtreme = isExtreme;
         }
-        private final FluidStack WATER_STACK = Materials.Water.getFluid(500*getmax(heatingCoilLevel));
+        private final FluidStack WATER_STACK = Materials.Water.getFluid(512*getmax(heatingCoilLevel));
         private final FluidStack LUBRICANT_STACK = Materials.Lubricant.getFluid(5*getmax(heatingCoilLevel));
         private final FluidStack OXYGEN_STACK = Materials.Oxygen.getFluid(20*getmax(heatingCoilLevel));
         public boolean fillTanks(FluidStack stack, boolean simulate) {
             return GTTransferUtils.addFluidsToFluidHandler(outputFluidInventory, simulate, Collections.singletonList(stack));
         }
-        private final FluidStack HOT_STACK = GTQTMaterials.HighPressureSteam.getFluid(1);
+        private final FluidStack HOT_STACK = GTQTMaterials.SupercriticalSteam.getFluid(640 * 2 * getmax(heatingCoilLevel));
         @Override
         public long getMaxVoltage() {
             if (isOxygenBoosted)

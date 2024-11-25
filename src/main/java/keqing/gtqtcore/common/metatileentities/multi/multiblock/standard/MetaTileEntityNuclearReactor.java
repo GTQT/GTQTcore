@@ -116,9 +116,9 @@ public class MetaTileEntityNuclearReactor extends RecipeMapMultiblockController 
         textList.add(new TextComponentTranslation("============================="));
         textList.add(new TextComponentTranslation("安全生产 人民放心 安全工作 重于泰山"));
     }
-    FluidStack WATER_STACK = Water.getFluid(1000*4*rate);
-    FluidStack HOT_STACK1 = GTQTMaterials.HighPressureSteam.getFluid(1);
-    FluidStack HOT_STACK2 = GTQTMaterials.HighPressureSteam.getFluid(2);
+    FluidStack WATER_STACK = Water.getFluid(1024*4*rate);
+    FluidStack HOT_STACK1 = GTQTMaterials.SupercriticalSteam.getFluid(640*4*rate);
+    FluidStack HOT_STACK2 = GTQTMaterials.SupercriticalSteam.getFluid(640*8*rate);
     @Override
     public void update() {
         super.update();

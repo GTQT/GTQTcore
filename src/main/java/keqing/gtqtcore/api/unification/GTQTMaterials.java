@@ -81,8 +81,6 @@ public class GTQTMaterials {
     public static Material Mithril;
     public static Material Bismuth209;
     public static Material Lead209;
-    public static Material HighPressureSteam;
-    public static Material SteamExhaustGas;
     public static Material SuperheatedSteam;
     public static Material Nitinol;
     public static Material Pyrotheum;
@@ -775,6 +773,7 @@ public class GTQTMaterials {
     public static Material AmmoniumCyanate;
     public static Material Tributylamine;
     public static Material Dichloromethane;
+    public static Material SupercriticalSteam;
     public static Material FluorinatedEthylenePropylene;
     public static Material LeadZirconateTitanate;
     public static Material BloodCells;
