@@ -58,7 +58,7 @@ public class MetaTileEntityBlazingCZPuller extends GTQTRecipeMapMultiblockOverwr
     private int blastFurnaceTemperature;
     protected static int heatingCoilLevel;
     protected int heatingCoilDiscount;
-
+    private  FluidStack LUBRICANT_STACK;
     public MetaTileEntityBlazingCZPuller(ResourceLocation metaTileEntityId) {
             super(metaTileEntityId, CZPULLER_RECIPES);
         this.recipeMapWorkable = new BlazingBlastFurnaceWorkable(this);
@@ -115,6 +115,7 @@ public class MetaTileEntityBlazingCZPuller extends GTQTRecipeMapMultiblockOverwr
         ParallelLim=Math.min((int)Math.pow(2, heatingCoilLevel),64);
         ParallelNum=ParallelLim;
         this.blastFurnaceTemperature += 100 * Math.max(0, GTUtility.getTierByVoltage(getEnergyContainer().getInputVoltage()) - GTValues.MV);
+        LUBRICANT_STACK = Pyrotheum.getFluid(heatingCoilLevel);
     }
 
 
@@ -241,13 +242,14 @@ public class MetaTileEntityBlazingCZPuller extends GTQTRecipeMapMultiblockOverwr
 
 
 
-    private final FluidStack LUBRICANT_STACK = Pyrotheum.getFluid(heatingCoilLevel);
+
 
     @Override
     public void invalidateStructure() {
         super.invalidateStructure();
         blastFurnaceTemperature = 0;
         heatingCoilLevel = 0;
+        LUBRICANT_STACK=null;
     }
     protected class BlazingBlastFurnaceWorkable extends MultiblockRecipeLogic {
 
