@@ -1,5 +1,7 @@
 package keqing.gtqtcore.loaders.recipes.handlers;
 
+import gregtech.api.recipes.RecipeMap;
+import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.material.Material;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 
@@ -19,6 +21,12 @@ public class HeatExchangeRecipes {
     }
 
     private static void BasicHeatExchange() {
+        RecipeMaps.SEMI_FLUID_GENERATOR_FUELS.recipeBuilder()
+                .fluidInputs(Lava.getFluid(100))
+                .EUt(32)
+                .duration(20)
+                .buildAndRegister();
+
         //  Lava
         HEAT_EXCHANGE_RECIPES.recipeBuilder()
                 .fluidInputs(DistilledWater.getFluid(5))
