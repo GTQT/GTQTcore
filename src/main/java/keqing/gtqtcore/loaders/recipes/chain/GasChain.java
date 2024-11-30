@@ -12,6 +12,11 @@ public class GasChain {
     }
 
     private static void CollectAir() {
+        GAS_COLLECTOR_RECIPES.recipeBuilder()
+                .circuitMeta(30)
+                .fluidOutputs(Air.getFluid(10000))
+                .duration(200).EUt(16).buildAndRegister();
+
         //交错
         GAS_COLLECTOR_RECIPES.recipeBuilder()
                 .circuitMeta(4)

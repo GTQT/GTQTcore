@@ -20,7 +20,7 @@ public class AluminiumLine {
         ELECTROBATH.recipeBuilder()
                 .notConsumable(electrode,Graphite,1)
                 .input(dust, Alumina, 2)
-                .output(ingot, Aluminium, 4)
+                .fluidOutputs(Aluminium.getFluid(576))
                 .fluidOutputs(Oxygen.getFluid(6000))
                 .tier(1)
                 .duration(1600).EUt(VA[MV]).buildAndRegister();
