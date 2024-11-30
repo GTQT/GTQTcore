@@ -60,7 +60,7 @@ import static keqing.gtqtcore.api.unification.GTQTMaterials.Pyrotheum;
 
 public class MetaTileEntityBlazingBlastFurnace extends GTQTRecipeMapMultiblockControllerOverwrite implements IHeatingCoil {
     protected static int heatingCoilLevel;
-    private final FluidStack LUBRICANT_STACK = Pyrotheum.getFluid(heatingCoilLevel);
+    private  FluidStack LUBRICANT_STACK;
     int ParallelNum = 1;
     private int blastFurnaceTemperature;
 
@@ -133,6 +133,7 @@ public class MetaTileEntityBlazingBlastFurnace extends GTQTRecipeMapMultiblockCo
         ParallelLim = Math.min((int) Math.pow(2, heatingCoilLevel), 16);
         ParallelNum = ParallelLim;
         this.blastFurnaceTemperature += 100 * Math.max(0, GTUtility.getTierByVoltage(getEnergyContainer().getInputVoltage()) - GTValues.MV);
+        LUBRICANT_STACK = Pyrotheum.getFluid(heatingCoilLevel);
     }
 
     @Override
@@ -224,6 +225,7 @@ public class MetaTileEntityBlazingBlastFurnace extends GTQTRecipeMapMultiblockCo
         super.invalidateStructure();
         blastFurnaceTemperature = 0;
         heatingCoilLevel = 0;
+        LUBRICANT_STACK = null;
     }
 
     protected class BlazingBlastFurnaceWorkable extends MultiblockRecipeLogic {
@@ -251,9 +253,9 @@ public class MetaTileEntityBlazingBlastFurnace extends GTQTRecipeMapMultiblockCo
 
         protected void updateRecipeProgress() {
             IMultipleTankHandler inputTank = combustionEngine.getInputFluidInventory();
-            if (canRecipeProgress && drawEnergy(recipeEUt, true) && LUBRICANT_STACK.isFluidStackIdentical(inputTank.drain(LUBRICANT_STACK, false))) {
+            if (canRecipeProgress && drawEnergy(recipeEUt, true) && LUBRICANT_STACK.isFluidStackIdentical(inputTank.drain(LUBRICANT_STACK.copy(), false))) {
                 drawEnergy(recipeEUt, false);
-                LUBRICANT_STACK.isFluidStackIdentical(inputTank.drain(LUBRICANT_STACK, true));
+                LUBRICANT_STACK.isFluidStackIdentical(inputTank.drain(LUBRICANT_STACK.copy(), true));
                 if (++progressTime > maxProgressTime) {
                     completeRecipe();
                 }
