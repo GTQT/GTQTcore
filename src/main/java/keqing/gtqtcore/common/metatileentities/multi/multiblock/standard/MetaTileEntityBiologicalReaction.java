@@ -176,6 +176,7 @@ public class MetaTileEntityBiologicalReaction extends GTQTRecipeMapMultiblockCon
 
     }
 
+
     @Nonnull
     @Override
     protected ICubeRenderer getFrontOverlay() {

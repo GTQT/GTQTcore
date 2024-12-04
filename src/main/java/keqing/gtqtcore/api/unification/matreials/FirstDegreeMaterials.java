@@ -1416,7 +1416,6 @@ public class FirstDegreeMaterials {
         GTQTMaterials.PreciousMetal = new Material.Builder(getMaterialsId(), gregtechId("precious_metal"))
                 .ore(1, 1, false)
                 .ingot()
-                .addOreByproducts(Iron)
                 .color(0xDAA520)
                 .iconSet(SHINY)
                 .build()
@@ -1431,6 +1430,7 @@ public class FirstDegreeMaterials {
                 .flags(DISABLE_DECOMPOSITION)
                 .build()
                 .setFormula("Cu3Au?", true);
+
         //  24267 Leaching Gold
         GTQTMaterials.LeachingGold = new Material.Builder(getMaterialsId(), gregtechId("leaching_gold"))
                 .dust()

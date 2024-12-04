@@ -101,7 +101,7 @@ public class MetaTileEntityThreeDim extends MultiMapMultiblockController impleme
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
-        textList.add(new TextComponentTranslation("多方块等级：%s 玻璃等级：%s",tier, glass_tier));
+        textList.add(new TextComponentTranslation("结构等级：%s 玻璃等级：%s",tier, glass_tier));
         textList.add(new TextComponentTranslation("gtqtcore.eleTire4",clean_tier, sheping_tier));
 
     }

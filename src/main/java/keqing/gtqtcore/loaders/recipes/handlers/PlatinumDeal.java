@@ -53,7 +53,7 @@ public class PlatinumDeal {
 
         CHEMICAL_RECIPES.recipeBuilder()
                 .input(dust,SodiumNitrate,1)
-                .fluidInputs(RhodiumSalt.getFluid(1000))
+                .input(dust,RhodiumSalt,1)
                 .output(dust,RhodiumNitrateSolution, 1)
                 .output(dust,Salt,3)
                 .duration(20)

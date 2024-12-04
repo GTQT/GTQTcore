@@ -1,10 +1,8 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
-import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
-import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.unification.material.Materials;
@@ -16,6 +14,8 @@ import gregtech.common.blocks.BlockMetalCasing.MetalCasingType;
 import gregtech.common.blocks.BlockTurbineCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.blocks.StoneVariantBlock;
+import keqing.gtqtcore.api.capability.impl.NoEnergyMultiblockRecipeLogic;
+import keqing.gtqtcore.api.metaileentity.multiblock.NoEnergyMultiblockController;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
@@ -31,14 +31,19 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public class MetaTileEntityClarifier extends RecipeMapMultiblockController {
+public class MetaTileEntityClarifier extends NoEnergyMultiblockController {
+    int heat;
+
     public MetaTileEntityClarifier(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.CLARIFIER);
         this.recipeMapWorkable = new ClarifierLogic(this);
     }
+
     @Override
-    public boolean canBeDistinct() {return true;}
-    int heat;
+    public boolean canBeDistinct() {
+        return true;
+    }
+
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityClarifier(this.metaTileEntityId);
     }
@@ -57,40 +62,19 @@ public class MetaTileEntityClarifier extends RecipeMapMultiblockController {
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
         if (isStructureFormed()) {
-            textList.add(new TextComponentTranslation("时间：%s 阳光直射：%s",getWorld().isDaytime(),this.getWorld().canSeeSky(getPos().up())));
-            textList.add(new TextComponentTranslation("稳定度：%s",heat));
+            textList.add(new TextComponentTranslation("时间：%s 阳光直射：%s", getWorld().isDaytime(), this.getWorld().canSeeSky(getPos().up())));
+            textList.add(new TextComponentTranslation("反应池稳定度：%s", heat));
         }
     }
 
-    protected class ClarifierLogic extends MultiblockRecipeLogic {
-
-        public ClarifierLogic(RecipeMapMultiblockController tileEntity) {
-            super(tileEntity);
-        }
-        @Override
-        public void update() {
-            super.update();
-            if (!getWorld().isDaytime()&&heat<10000)heat+=5;
-            if (!getWorld().canSeeSky(getPos())&&heat<10000)heat+=5;
-            else if(heat>0)heat--;
-        }
-        protected void updateRecipeProgress() {
-            if (canRecipeProgress) {
-                if(heat>2000){maxProgressTime=maxProgressTime/2;heat-=2000;}
-                if (++progressTime > maxProgressTime) {
-                    completeRecipe();
-                    heat=heat*3/4;
-                }
-            }
-        }
-    }
     @Override
     public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("古埃及掌管放置Play的神", new Object[0]));
         tooltip.add(I18n.format("如果处于白天或者阳光直射会导致稳定度下降"));
-        tooltip.add(I18n.format("消耗部分稳定度，配方耗时减半;运行完一轮配方后，稳定度下降四分之一"));
+        tooltip.add(I18n.format("稳定度每大于2000，则耗时减免10%%（可重复计算），减免后降低2000稳定度"));
     }
+
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
                 .aisle("      AAAA      ", "      AAAA      ", "      AAAA      ", "                ")
@@ -119,10 +103,10 @@ public class MetaTileEntityClarifier extends RecipeMapMultiblockController {
                 .where(' ', any())
                 .build();
     }
+
     public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
         return Textures.SOLID_STEEL_CASING;
     }
-
 
     @Nonnull
     @Override
@@ -133,5 +117,33 @@ public class MetaTileEntityClarifier extends RecipeMapMultiblockController {
     @Override
     public boolean getIsWeatherOrTerrainResistant() {
         return true;
+    }
+
+    protected class ClarifierLogic extends NoEnergyMultiblockRecipeLogic {
+
+        public ClarifierLogic(NoEnergyMultiblockController tileEntity) {
+            super(tileEntity, tileEntity.recipeMap);
+        }
+
+        @Override
+        public void update() {
+            super.update();
+            if (!getWorld().isDaytime() && heat < 10000) heat += 2;
+            if (!getWorld().canSeeSky(getPos()) && heat < 10000) heat += 2;
+            else if (heat > 0) heat--;
+        }
+
+        protected void updateRecipeProgress() {
+            if (canRecipeProgress) {
+                if (heat > 2000) {
+                    maxProgressTime = (int) (maxProgressTime * 0.9);
+                    heat -= 2000;
+                }
+                if (++progressTime > maxProgressTime) {
+                    completeRecipe();
+                    heat = heat * 3 / 4;
+                }
+            }
+        }
     }
 }

@@ -1,5 +1,6 @@
 package keqing.gtqtcore.loaders.recipes.handlers;
 
+import static gregtech.api.unification.ore.OrePrefix.dustTiny;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
@@ -18,28 +19,57 @@ public class OreDeal {
         //焙烧
         BLAST_RECIPES.recipeBuilder()
                 .input(dust,LeanGoldSulphide)
-                .output(dust,LeanGoldBs)
-                .fluidInputs(Oxygen.getFluid(1000))
+                .output(dust,LeanGoldBs,4)
                 .fluidOutputs(SulfurDioxide.getFluid(1000))
-                .blastFurnaceTemp(1700)
+                .blastFurnaceTemp(1600)
+                .duration(100)
+                .EUt(30)
+                .buildAndRegister();
+
+        COKE_OVEN_RECIPES.recipeBuilder()
+                .input(dust,LeanGoldSulphide)
+                .output(dust,LeanGoldBs)
+                .fluidOutputs(SulfurDioxide.getFluid(1000))
+                .duration(400)
+                .buildAndRegister();
+
+        ARC_FURNACE_RECIPES.recipeBuilder()
+                .input(dust,LeanGoldBs)
+                .output(dust,Gold,1)
+                .fluidInputs(Oxygen.getFluid(1000))
                 .duration(100)
                 .EUt(30)
                 .buildAndRegister();
 
         CLARIFIER.recipeBuilder()
-                .input(dust,LeanGoldBs,10)
-                .fluidInputs(SodiumCyanide.getFluid(1000))
-                .fluidOutputs(LeanGoldJc.getFluid(10000))
-                .output(dust,LeanCopperJc,10)
+                .input(dust,LeanGoldBs,24)
+                .fluidOutputs(LeanGoldJc.getFluid(16000))
+                .output(dust,LeanCopperJc,8)
+                .duration(1200)
+                .buildAndRegister();
+
+        CENTRIFUGE_RECIPES.recipeBuilder()
+                .input(dust,LeanGoldBs,12)
+                .fluidOutputs(LeanGoldJc.getFluid(6000))
+                .output(dust,LeanCopperJc,6)
+                .duration(100)
+                .EUt(120)
+                .buildAndRegister();
+
+        //置换
+        CHEMICAL_RECIPES.recipeBuilder()
+                .input(dust,Zinc)
+                .fluidInputs(LeanGoldJc.getFluid(4000))
+                .output(dust,ZincSulfate)
+                .fluidOutputs(LeanGoldCl.getFluid(4000))
                 .duration(100)
                 .EUt(30)
                 .buildAndRegister();
 
-        CHEMICAL_RECIPES.recipeBuilder()
-                .input(dust,Zinc)
+        ARC_FURNACE_RECIPES.recipeBuilder()
                 .fluidInputs(LeanGoldJc.getFluid(1000))
-                .output(dust,ZincSulfate)
-                .fluidOutputs(LeanGoldCl.getFluid(1000))
+                .output(dust,Gold)
+                .fluidOutputs(SulfuricAcid.getFluid(1000))
                 .fluidOutputs()
                 .duration(100)
                 .EUt(30)
@@ -48,18 +78,17 @@ public class OreDeal {
         CHEMICAL_RECIPES.recipeBuilder()
                 .fluidInputs(SulfuricAcid.getFluid(1000))
                 .fluidInputs(LeanGoldCl.getFluid(1000))
-                .output(dust,LeanGoldDr)
+                .output(dust,LeanGoldDr,4)
                 .fluidOutputs(SulfuricNickelSolution.getFluid(1000))
                 .fluidOutputs()
                 .duration(100)
                 .EUt(30)
                 .buildAndRegister();
 
-        BLAST_RECIPES.recipeBuilder()
+        ARC_FURNACE_RECIPES.recipeBuilder()
                 .input(dust,LeanGoldDr)
-                .output(dust,Gold)
+                .output(dust,Gold,2)
                 .fluidInputs(Oxygen.getFluid(1000))
-                .blastFurnaceTemp(1700)
                 .duration(100)
                 .EUt(30)
                 .buildAndRegister();
@@ -73,22 +102,49 @@ public class OreDeal {
                 .EUt(30)
                 .buildAndRegister();
 
-
         BLAST_RECIPES.recipeBuilder()
                 .input(dust,RichGoldSulphide)
                 .output(dust,RichGoldBs)
-                .fluidInputs(Oxygen.getFluid(7000))
                 .fluidOutputs(SulfurDioxide.getFluid(4000))
                 .blastFurnaceTemp(1700)
                 .duration(100)
                 .EUt(30)
                 .buildAndRegister();
 
+        COKE_OVEN_RECIPES.recipeBuilder()
+                .input(dust,RichGoldSulphide)
+                .output(dust,RichGoldBs,4)
+                .fluidOutputs(SulfurDioxide.getFluid(1000))
+                .duration(400)
+                .buildAndRegister();
+
+        ARC_FURNACE_RECIPES.recipeBuilder()
+                .input(dust,RichGoldBs)
+                .output(dust,Gold,2)
+                .fluidInputs(Oxygen.getFluid(1000))
+                .duration(100)
+                .EUt(30)
+                .buildAndRegister();
+
         CLARIFIER.recipeBuilder()
-                .input(dust,RichGoldBs,10)
-                .fluidInputs(SodiumCyanide.getFluid(1000))
-                .fluidOutputs(LeanGoldJc.getFluid(20000))
-                .output(dust,RichCopperJc,20)
+                .input(dust,RichGoldBs,24)
+                .fluidOutputs(LeanGoldJc.getFluid(16000))
+                .output(dust,RichCopperJc,8)
+                .duration(1200)
+                .buildAndRegister();
+
+        CENTRIFUGE_RECIPES.recipeBuilder()
+                .input(dust,RichGoldBs,12)
+                .fluidOutputs(LeanGoldJc.getFluid(6000))
+                .output(dust,RichCopperJc,6)
+                .duration(100)
+                .EUt(120)
+                .buildAndRegister();
+
+        ARC_FURNACE_RECIPES.recipeBuilder()
+                .input(dust,RichCopperJc)
+                .output(dust,Gold,4)
+                .fluidInputs(Oxygen.getFluid(1000))
                 .duration(100)
                 .EUt(30)
                 .buildAndRegister();

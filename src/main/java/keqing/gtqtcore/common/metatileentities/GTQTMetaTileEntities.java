@@ -20,7 +20,6 @@ import keqing.gtqtcore.GTQTCoreConfig;
 import keqing.gtqtcore.api.metaileentity.SimpleSteamMetaTileEntity;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.unification.GCYSMaterials;
-import keqing.gtqtcore.api.unification.GTQTMaterials;
 import keqing.gtqtcore.api.utils.GTQTLog;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.api.utils.SteamProgressIndicators;
@@ -121,6 +120,7 @@ public class GTQTMetaTileEntities {
 
     public static final MetaTileEntityReinforcedRotorHolder[] MULTIPART_REINFORCED_ROTOR_HOLDER = new MetaTileEntityReinforcedRotorHolder[8];
     public static final MetaTileEntityCompressedFusionReactor[] COMPRESSED_FUSION_REACTOR = new MetaTileEntityCompressedFusionReactor[6];
+    public static final MetaTileEntityBioHatch[] BIO_HATCH = new MetaTileEntityBioHatch[14];
     public static int currentMultiPartID = 16120;
     //////////////////////////
     public static MetaTileEntityOilPool OIL_POOL;
@@ -416,11 +416,11 @@ public class GTQTMetaTileEntities {
         ACID_GENERATOR[1] = registerMetaTileEntity(3027, new SimpleGeneratorMetaTileEntity(gtqtcoreId("acid_generator.hv"), GTQTcoreRecipeMaps.ACID_GENERATOR_RECIPES, Textures.CHEMICAL_REACTOR_OVERLAY, 3, GTUtility.genericGeneratorTankSizeFunction));
         ACID_GENERATOR[2] = registerMetaTileEntity(3028, new SimpleGeneratorMetaTileEntity(gtqtcoreId("acid_generator.ev"), GTQTcoreRecipeMaps.ACID_GENERATOR_RECIPES, Textures.CHEMICAL_REACTOR_OVERLAY, 4, GTUtility.genericGeneratorTankSizeFunction));
 
-        PLASMA_GENERATOR[0]= registerMetaTileEntity(3029, new SimpleGeneratorMetaTileEntity(gtqtcoreId("plasma_generator.ev"), RecipeMaps.PLASMA_GENERATOR_FUELS, Textures.FUSION_REACTOR_OVERLAY, 4, GTUtility.genericGeneratorTankSizeFunction));
-        PLASMA_GENERATOR[1]= registerMetaTileEntity(3030, new SimpleGeneratorMetaTileEntity(gtqtcoreId("plasma_generator.iv"), RecipeMaps.PLASMA_GENERATOR_FUELS, Textures.FUSION_REACTOR_OVERLAY, 5, GTUtility.genericGeneratorTankSizeFunction));
-        PLASMA_GENERATOR[2]= registerMetaTileEntity(3031, new SimpleGeneratorMetaTileEntity(gtqtcoreId("plasma_generator.luv"), RecipeMaps.PLASMA_GENERATOR_FUELS, Textures.FUSION_REACTOR_OVERLAY, 6, GTUtility.genericGeneratorTankSizeFunction));
-        PLASMA_GENERATOR[3]= registerMetaTileEntity(3032, new SimpleGeneratorMetaTileEntity(gtqtcoreId("plasma_generator.zpm"), RecipeMaps.PLASMA_GENERATOR_FUELS, Textures.FUSION_REACTOR_OVERLAY, 7, GTUtility.genericGeneratorTankSizeFunction));
-        PLASMA_GENERATOR[4]= registerMetaTileEntity(3033, new SimpleGeneratorMetaTileEntity(gtqtcoreId("plasma_generator.uv"), RecipeMaps.PLASMA_GENERATOR_FUELS, Textures.FUSION_REACTOR_OVERLAY, 8, GTUtility.genericGeneratorTankSizeFunction));
+        PLASMA_GENERATOR[0] = registerMetaTileEntity(3029, new SimpleGeneratorMetaTileEntity(gtqtcoreId("plasma_generator.ev"), RecipeMaps.PLASMA_GENERATOR_FUELS, Textures.FUSION_REACTOR_OVERLAY, 4, GTUtility.genericGeneratorTankSizeFunction));
+        PLASMA_GENERATOR[1] = registerMetaTileEntity(3030, new SimpleGeneratorMetaTileEntity(gtqtcoreId("plasma_generator.iv"), RecipeMaps.PLASMA_GENERATOR_FUELS, Textures.FUSION_REACTOR_OVERLAY, 5, GTUtility.genericGeneratorTankSizeFunction));
+        PLASMA_GENERATOR[2] = registerMetaTileEntity(3031, new SimpleGeneratorMetaTileEntity(gtqtcoreId("plasma_generator.luv"), RecipeMaps.PLASMA_GENERATOR_FUELS, Textures.FUSION_REACTOR_OVERLAY, 6, GTUtility.genericGeneratorTankSizeFunction));
+        PLASMA_GENERATOR[3] = registerMetaTileEntity(3032, new SimpleGeneratorMetaTileEntity(gtqtcoreId("plasma_generator.zpm"), RecipeMaps.PLASMA_GENERATOR_FUELS, Textures.FUSION_REACTOR_OVERLAY, 7, GTUtility.genericGeneratorTankSizeFunction));
+        PLASMA_GENERATOR[4] = registerMetaTileEntity(3033, new SimpleGeneratorMetaTileEntity(gtqtcoreId("plasma_generator.uv"), RecipeMaps.PLASMA_GENERATOR_FUELS, Textures.FUSION_REACTOR_OVERLAY, 8, GTUtility.genericGeneratorTankSizeFunction));
 
         //发电设备 多方块
         LBG[0] = registerMetaTileEntity(3050, new MetaTileEntityLargeBasicGenerator(gtqtcoreId("lbg.steam.1"), RecipeMaps.STEAM_TURBINE_FUELS, 1, MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STEEL_SOLID), MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.STEEL_PIPE), Steel));
@@ -724,20 +724,19 @@ public class GTQTMetaTileEntities {
         LASER_BOOSTER[4] = registerMetaTileEntity(15479, new MetaTileLaserBooster(gtqtcoreId("laser_booster." + UIV), UIV));
         LASER_BOOSTER[5] = registerMetaTileEntity(15480, new MetaTileLaserBooster(gtqtcoreId("laser_booster." + UEV), UEV));
 
-        PARALLEL_HATCH[0] = registerMetaTileEntity(15533, new MetaTileEntityParallelHatch(gtqtcoreId(String.format("parallel_hatch.%s", GTValues.VN[1])), 1));
-        PARALLEL_HATCH[1] = registerMetaTileEntity(15534, new MetaTileEntityParallelHatch(gtqtcoreId(String.format("parallel_hatch.%s", GTValues.VN[2])), 2));
-        PARALLEL_HATCH[2] = registerMetaTileEntity(15535, new MetaTileEntityParallelHatch(gtqtcoreId(String.format("parallel_hatch.%s", GTValues.VN[3])), 3));
-        PARALLEL_HATCH[3] = registerMetaTileEntity(15536, new MetaTileEntityParallelHatch(gtqtcoreId(String.format("parallel_hatch.%s", GTValues.VN[4])), 4));
-        PARALLEL_HATCH[4] = registerMetaTileEntity(15537, new MetaTileEntityParallelHatch(gtqtcoreId(String.format("parallel_hatch.%s", GTValues.VN[5])), 5));
-        PARALLEL_HATCH[5] = registerMetaTileEntity(15538, new MetaTileEntityParallelHatch(gtqtcoreId(String.format("parallel_hatch.%s", GTValues.VN[6])), 6));
-        PARALLEL_HATCH[6] = registerMetaTileEntity(15539, new MetaTileEntityParallelHatch(gtqtcoreId(String.format("parallel_hatch.%s", GTValues.VN[7])), 7));
-        PARALLEL_HATCH[7] = registerMetaTileEntity(15540, new MetaTileEntityParallelHatch(gtqtcoreId(String.format("parallel_hatch.%s", GTValues.VN[8])), 8));
-        PARALLEL_HATCH[8] = registerMetaTileEntity(15541, new MetaTileEntityParallelHatch(gtqtcoreId(String.format("parallel_hatch.%s", GTValues.VN[9])), 9));
-        PARALLEL_HATCH[9] = registerMetaTileEntity(15542, new MetaTileEntityParallelHatch(gtqtcoreId(String.format("parallel_hatch.%s", GTValues.VN[10])), 10));
-        PARALLEL_HATCH[10] = registerMetaTileEntity(15543, new MetaTileEntityParallelHatch(gtqtcoreId(String.format("parallel_hatch.%s", GTValues.VN[11])), 11));
-        PARALLEL_HATCH[11] = registerMetaTileEntity(15544, new MetaTileEntityParallelHatch(gtqtcoreId(String.format("parallel_hatch.%s", GTValues.VN[12])), 12));
-        PARALLEL_HATCH[12] = registerMetaTileEntity(15545, new MetaTileEntityParallelHatch(gtqtcoreId(String.format("parallel_hatch.%s", GTValues.VN[13])), 13));
-        PARALLEL_HATCH[13] = registerMetaTileEntity(15546, new MetaTileEntityParallelHatch(gtqtcoreId(String.format("parallel_hatch.%s", GTValues.VN[14])), 14));
+        for (int i = 0; i < BIO_HATCH.length; i++) {
+            int idOffset = 15481; // 假设从 15600 开始分配 ID
+            BIO_HATCH[i] = registerMetaTileEntity(
+                    idOffset + i,
+                    new MetaTileEntityBioHatch(gtqtcoreId(String.format("bio_hatch.%s", GTValues.VN[i + 1])), i + 1)
+            );
+        }
+
+        for (int i = 0; i < 14; i++) {
+            int id = 15533 + i;
+            String name = String.format("parallel_hatch.%s", GTValues.VN[i + 1]);
+            PARALLEL_HATCH[i] = registerMetaTileEntity(id, new MetaTileEntityParallelHatch(gtqtcoreId(name), i + 1));
+        }
 
         INF_WATER_HATCH = registerMetaTileEntity(15547, new MetaTileInfWaterHatch(gtqtcoreId("infinite_water_hatch")));
         CATALYST_HATCH = registerMetaTileEntity(15548, new MetaTileEntityCatalystHatch(gtqtcoreId("catalyst_hatch")));

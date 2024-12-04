@@ -748,7 +748,7 @@ public class CPULine {
         //石墨电极线
         //石墨+沥青=浸渍石墨
         FLUID_SOLIDFICATION_RECIPES.recipeBuilder()
-                .duration(400)
+                .duration(300)
                 .EUt(30)
                 .input(stick,Graphite,8)
                 .fluidInputs(HighlyPurifiedCoalTar.getFluid(500))
@@ -759,8 +759,8 @@ public class CPULine {
                 .duration(300)
                 .EUt(30)
                 .input(IMPREGNATED_GRAPHITE_RODS)
-                .input(dust,Graphite,8)
-                .fluidInputs(Asphalt.getFluid(500))
+                .input(dust,Carbon,8)
+                .fluidInputs(Asphalt.getFluid(72))
                 .output(IMPREGNATED_GRAPHITE_RODSA)
                 .buildAndRegister();
 
@@ -770,7 +770,7 @@ public class CPULine {
                 .blastFurnaceTemp(1800)
                 .input(IMPREGNATED_GRAPHITE_RODSA)
                 .input(dust,Diamond)
-                .fluidInputs(Nitrogen.getFluid(1000))
+                .fluidInputs(Nitrogen.getFluid(200))
                 .output(electrode,Graphite)
                 .buildAndRegister();
 

@@ -32,6 +32,9 @@ import net.minecraft.item.ItemStack;
 import org.lwjgl.openal.AL;
 
 import java.util.Collection;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static gregicality.multiblocks.api.unification.GCYMMaterials.WatertightSteel;
 import static gregtech.api.GTValues.*;
@@ -679,6 +682,7 @@ public class MetaTileEntityMachine {
         ModHandler.removeRecipeByName("gregtech:gregtech.machine.arc_furnace.zpm");
         ModHandler.removeRecipeByName("gregtech:gregtech.machine.arc_furnace.uv");
         ModHandler.removeRecipeByName("gregtech:gregtech.machine.arc_furnace.uhv");
+
         registerMachineRecipe(true, ARC_FURNACE
                 , "WGW", "CMC", "PPP",
                 'M', CraftingComponent.HULL,
@@ -687,7 +691,27 @@ public class MetaTileEntityMachine {
                 'W', CABLE_QUAD,
                 'G', new UnificationEntry(GTQTOrePrefix.electrode, Materials.Graphite));
 
+        //蒸馏室
+        ModHandler.removeRecipeByName("gregtech:gregtech.machine.distillery.lv");
+        ModHandler.removeRecipeByName("gregtech:gregtech.machine.distillery.mv");
+        ModHandler.removeRecipeByName("gregtech:gregtech.machine.distillery.hv");
+        ModHandler.removeRecipeByName("gregtech:gregtech.machine.distillery.ev");
+        ModHandler.removeRecipeByName("gregtech:gregtech.machine.distillery.iv");
+        ModHandler.removeRecipeByName("gregtech:gregtech.machine.distillery.luv");
+        ModHandler.removeRecipeByName("gregtech:gregtech.machine.distillery.zpm");
+        ModHandler.removeRecipeByName("gregtech:gregtech.machine.distillery.uv");
+        ModHandler.removeRecipeByName("gregtech:gregtech.machine.distillery.uhv");
 
+        Component HIGH_TIER_CIRCUIT=new Component((Map) Stream.of(new Object[]{0, new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.LV)}, new Object[]{1, new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.MV)}, new Object[]{2, new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.HV)}, new Object[]{3, new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.EV)}, new Object[]{4, new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.IV)}, new Object[]{5, new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.LuV)}, new Object[]{6, new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.ZPM)}, new Object[]{7, new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.UV)}, new Object[]{8, new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.UHV)}, new Object[]{9, new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.UEV)}, new Object[]{10, new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.UIV)}, new Object[]{11, new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.UXV)}, new Object[]{12, new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.OpV)}, new Object[]{13, new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.MAX)}).collect(Collectors.toMap((data) -> (Integer)data[0], (data) -> data[1])));
+
+        registerMachineRecipe(MetaTileEntities.DISTILLERY,
+                "GBG", "CMC", "WPW",
+                'M', HULL,
+                'P', PUMP,
+                'B', STICK_DISTILLATION,
+                'C', HIGH_TIER_CIRCUIT,
+                'W', CABLE,
+                'G', GLASS);
     }
 
     private static void registerElectric() {

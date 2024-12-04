@@ -235,7 +235,7 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<SimpleRecipeBuilder> CW_LASER_ENGRAVER_RECIPES;
     public static final RecipeMap<LASERComputationRecipeBuilder> STEPPER_RECIPES;
     public static final RecipeMap<SimpleRecipeBuilder> GANTRY_CRANE;
-    public static final RecipeMap<SimpleRecipeBuilder> CLARIFIER;
+    public static final RecipeMap<PrimitiveRecipeBuilder> CLARIFIER;
     public static final RecipeMap<SimpleRecipeBuilder>  ELEOIL;
     public static final RecipeMap<SimpleRecipeBuilder>  REACTION_FURNACE_RECIPES;
     public static final RecipeMap<BlastRecipeBuilder>  BLAST_ARC_RECIPES;
@@ -456,7 +456,7 @@ public class GTQTcoreRecipeMaps {
                 3, 3, 3, 3, new SimpleRecipeBuilder(), false);
 
         CLARIFIER = new RecipeMap<>("clarifire",
-                3, 3, 3, 3, new SimpleRecipeBuilder(), false);
+                3, 3, 3, 3, new PrimitiveRecipeBuilder(), false);
 
         ELEOIL = new RecipeMap<>("ele_oil",
                 0, 0, 2, 2, new SimpleRecipeBuilder(), false);

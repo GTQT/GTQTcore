@@ -68,6 +68,11 @@ public class GTQTMaterialFlagAddition {
         oreProp.setOreByProducts(Borax, Calcium, Calcium);
         oreProp.setWashedIn(SodiumPersulfate);
         oreProp.setDirectSmeltResult(Sodium);
+
+        oreProp = PreciousMetal.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(LeanGoldSulphide, RichGoldSulphide);
+        oreProp.setWashedIn(SodiumPersulfate);
+        oreProp.setDirectSmeltResult(PreciousMetal);
         //  Coils
         //  Motor coils
         //  Copper (LV), Cupronickel (MV), Electrum (HV), Kanthal (EV),

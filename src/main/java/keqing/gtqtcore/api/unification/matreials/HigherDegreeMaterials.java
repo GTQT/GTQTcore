@@ -41,19 +41,19 @@ public class HigherDegreeMaterials {
                 .blast(1300, BlastProperty.GasTier.LOW)
                 .build();
 
-
         //贫硫化金矿石
         GTQTMaterials.LeanGoldSulphide= new Material.Builder(getMaterialsId(), gregtechId("lean_gold_sulphide"))
                 .ore(1,1)
-                .dust().fluid()
+                .dust()
                 .color(0x8B8B00)
                 .flags(DISABLE_DECOMPOSITION)
                 .components(Gold, 1, Copper, 1,Sulfur,2,Oxygen,3)
                 .build();
+
         //含金多金属矿石
         GTQTMaterials.RichGoldSulphide= new Material.Builder(getMaterialsId(), gregtechId("rich_gold_sulphide"))
-                .ore()
-                .dust().fluid()
+                .ore(1,1)
+                .dust()
                 .color(0xCDCD00)
                 .flags(DISABLE_DECOMPOSITION)
                 .components(Gold, 1, Copper, 1,Iron,1,Sulfur,4,Oxygen,1)
@@ -67,7 +67,6 @@ public class HigherDegreeMaterials {
                         DISABLE_DECOMPOSITION)
                 .components(Carbon, 1)
                 .build();
-
 
         // 深红银矿
         GTQTMaterials.Pyrargyrite= new Material.Builder(getMaterialsId(), gregtechId("pyrargyrite"))

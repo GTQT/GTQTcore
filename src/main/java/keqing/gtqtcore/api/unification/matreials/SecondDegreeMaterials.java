@@ -183,7 +183,7 @@ public class SecondDegreeMaterials {
 
         //铑盐粉
         GTQTMaterials.RhodiumSalt = new Material.Builder(getMaterialsId(), gregtechId("rhodium_salt"))
-                .fluid().dust()
+                .dust()
                 .color(0x8DB6CD)
                 .build();
         //硝酸铑粉
