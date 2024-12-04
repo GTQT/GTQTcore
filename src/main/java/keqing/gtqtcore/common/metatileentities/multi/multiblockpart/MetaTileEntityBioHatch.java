@@ -1,5 +1,6 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblockpart;
 
+import gregtech.api.capability.impl.FluidTankList;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.ModularUI;
 import gregtech.api.gui.widgets.*;
@@ -18,41 +19,57 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.items.CapabilityItemHandler;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MetaTileEntityBioHatch extends MetaTileEntityMultiblockPart implements IMultiblockAbilityPart<IBio>, IBio {
 
-    private final FluidTank waterTank;
-    private final FluidTank bioTank;
+
+    private final FluidTankList fluidTankList;
     private final int tier;
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         super.writeToNBT(data);
-        data.setTag("WaterTank", waterTank.writeToNBT(new NBTTagCompound()));
-        data.setTag("BioTank", bioTank.writeToNBT(new NBTTagCompound()));
+        if(fluidTankList!=null)
+            data.setTag("fluidlist", fluidTankList.serializeNBT());
         return data;
     }
 
     @Override
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
-        waterTank.readFromNBT(data.getCompoundTag("WaterTank"));
-        bioTank.readFromNBT(data.getCompoundTag("BioTank"));
+        if(data.hasKey("fluidlist"))
+            fluidTankList.deserializeNBT(data.getCompoundTag("fluidlist"));
     }
 
     public MetaTileEntityBioHatch(ResourceLocation metaTileEntityId, int tier) {
         super(metaTileEntityId, tier);
-        this.waterTank = new FluidTank(16000); // 设置水槽容量为16000 mB
-        this.bioTank = new FluidTank(16000);   // 设置生物流体槽容量为16000 mB
         this.tier = tier;
+        FluidTank[] list= new FluidTank[2];
+        FluidTank water = new FluidTank(16000){
+            @Override
+            public boolean canFillFluidType(FluidStack fluid) {
+                return (fluid==null?false:fluid.getFluid()==FluidRegistry.WATER);
+            }
+        };
+        FluidTank bio = new FluidTank(16000){
+            @Override
+            public boolean canFillFluidType(FluidStack fluid) {
+                return (fluid==null?false:fluid.getFluid()==Materials.Biomass.getFluid());
+            }
+        };
+        list[0] = water;
+        list[1] = bio;
+        this.fluidTankList = new FluidTankList(false,list);
     }
     public void update() {
         super.update();
@@ -72,7 +89,7 @@ public class MetaTileEntityBioHatch extends MetaTileEntityMultiblockPart impleme
 
         // Water Tank Section
         builder.widget(new LabelWidget(10, 10, "Water Tank", 0xFFFFFF)); // Adjusted position and color
-        builder.widget(new TankWidget(waterTank, 10, 20, 24, 64) // Adjusted size and position
+        builder.widget(new TankWidget(fluidTankList.getTankAt(0), 10, 20, 24, 64) // Adjusted size and position
                 .setBackgroundTexture(GuiTextures.SLOT) // Changed texture for better appearance
                 .setContainerClicking(true, true)
                 .setAlwaysShowFull(true)
@@ -82,7 +99,7 @@ public class MetaTileEntityBioHatch extends MetaTileEntityMultiblockPart impleme
 
         // Bio Tank Section
         builder.widget(new LabelWidget(100, 10, "Bio Tank", 0xFFFFFF)); // Adjusted position and color
-        builder.widget(new TankWidget(bioTank, 100, 20, 24, 64) // Adjusted size and position
+        builder.widget(new TankWidget(fluidTankList.getTankAt(1), 100, 20, 24, 64) // Adjusted size and position
                 .setBackgroundTexture(GuiTextures.SLOT) // Changed texture for better appearance
                 .setContainerClicking(true, true)
                 .setAlwaysShowFull(true)
@@ -97,25 +114,34 @@ public class MetaTileEntityBioHatch extends MetaTileEntityMultiblockPart impleme
     }
 
     protected void addWaterTankAmountText(List<ITextComponent> textList) {
-        textList.add(new TextComponentString("Amount: " + waterTank.getFluidAmount()));
+        textList.add(new TextComponentString("Amount: " + fluidTankList.getTankAt(0).getFluidAmount()));
     }
 
     protected void addWaterTankFluidText(List<ITextComponent> textList) {
-        if(waterTank.getFluid()!=null)textList.add(new TextComponentString("Fluid: " + waterTank.getFluid().getLocalizedName()));
+        if(fluidTankList.getTankAt(0).getFluid()!=null)textList.add(new TextComponentString("Fluid: " + fluidTankList.getTankAt(0).getFluid().getLocalizedName()));
         else textList.add(new TextComponentString("Fluid: null"));
     }
 
     protected void addBioTankAmountText(List<ITextComponent> textList) {
-        textList.add(new TextComponentString("Amount: " + bioTank.getFluidAmount()));
+        textList.add(new TextComponentString("Amount: " + fluidTankList.getTankAt(1).getFluidAmount()));
     }
 
     protected void addBioTankFluidText(List<ITextComponent> textList) {
-        if(bioTank.getFluid()!=null)textList.add(new TextComponentString("Fluid: " + bioTank.getFluid().getLocalizedName()));
+        if(fluidTankList.getTankAt(1).getFluid()!=null)textList.add(new TextComponentString("Fluid: " + fluidTankList.getTankAt(1).getFluid().getLocalizedName()));
         else textList.add(new TextComponentString("Fluid: null"));
     }
 
     public MultiblockAbility<IBio> getAbility() {
         return GTQTMultiblockAbility.BIO_MULTIBLOCK_ABILITY;
+    }
+
+    @Override
+    public <T> T getCapability(Capability<T> capability, EnumFacing side) {
+        if(capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY)
+        {
+            return CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY.cast(this.fluidTankList);
+        }
+        return super.getCapability(capability, side);
     }
 
     public void registerAbilities(List<IBio> list) {
@@ -124,12 +150,12 @@ public class MetaTileEntityBioHatch extends MetaTileEntityMultiblockPart impleme
 
     @Override
     public int getWaterAmount() {
-        return waterTank.getFluidAmount();
+        return fluidTankList.getTankAt(0).getFluidAmount();
     }
 
     @Override
     public int getBioAmount() {
-        return bioTank.getFluidAmount();
+        return fluidTankList.getTankAt(1).getFluidAmount();
     }
 
     @Override
@@ -138,11 +164,11 @@ public class MetaTileEntityBioHatch extends MetaTileEntityMultiblockPart impleme
     }
 
     public IFluidHandler getWaterTank() {
-        return waterTank;
+        return fluidTankList.getTankAt(0);
     }
 
     public IFluidHandler getBioTank() {
-        return bioTank;
+        return fluidTankList.getTankAt(1);
     }
 }
 
