@@ -28,14 +28,12 @@ import static gregtech.api.unification.ore.OrePrefix.*;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.TJMaterials.*;
-import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.electrode;
 import static keqing.gtqtcore.api.utils.GTQTUtil.CWT;
 import static keqing.gtqtcore.common.block.blocks.GTQTADVGlass.CasingType.SILICATE_GLASS;
 import static keqing.gtqtcore.common.block.blocks.GTQTStepper.CasingType.*;
 import static keqing.gtqtcore.common.block.blocks.GTQTStepper.CasingType.F_LASER_MKV;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.RETICLE_POWER_INTEGRATED_CIRCUIT;
-import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.*;
 
 public class CPULine {
     public static void init() {
@@ -745,35 +743,6 @@ public class CPULine {
     }
     private static void Pre()
     {
-        //石墨电极线
-        //石墨+沥青=浸渍石墨
-        FLUID_SOLIDFICATION_RECIPES.recipeBuilder()
-                .duration(300)
-                .EUt(30)
-                .input(stick,Graphite,8)
-                .fluidInputs(HighlyPurifiedCoalTar.getFluid(500))
-                .output(IMPREGNATED_GRAPHITE_RODS)
-                .buildAndRegister();
-
-        CHEMICAL_RECIPES.recipeBuilder()
-                .duration(300)
-                .EUt(30)
-                .input(IMPREGNATED_GRAPHITE_RODS)
-                .input(dust,Carbon,8)
-                .fluidInputs(Asphalt.getFluid(72))
-                .output(IMPREGNATED_GRAPHITE_RODSA)
-                .buildAndRegister();
-
-        BLAST_RECIPES.recipeBuilder()
-                .duration(1000)
-                .EUt(120)
-                .blastFurnaceTemp(1800)
-                .input(IMPREGNATED_GRAPHITE_RODSA)
-                .input(dust,Diamond)
-                .fluidInputs(Nitrogen.getFluid(200))
-                .output(electrode,Graphite)
-                .buildAndRegister();
-
         //酚醛基板
         CHEMICAL_RECIPES.recipeBuilder()
                 .duration(100)

@@ -16,10 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static gregtech.api.GTValues.*;
-import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.info.MaterialFlags.*;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.ELECTROBATH;
-import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.electrode;
 
 public class DecompositionRecipeHandler {
 
@@ -97,14 +95,14 @@ public class DecompositionRecipeHandler {
         RecipeBuilder<?> builder;
         if (material.hasFlag(DECOMPOSITION_BY_ELECTROLYZING)) {
             builder =  ELECTROBATH.recipeBuilder()
-                    .notConsumable(electrode,Zinc,1)
                     .tier(1)
+                    .circuitMeta(1)
                     .duration(((int) material.getProtons() * totalInputAmount * 2))
                     .EUt(material.getMaterialComponents().size() <= 2 ? VA[LV] : 2 * VA[LV]);
         } else {
             builder = ELECTROBATH.recipeBuilder()
-                    .notConsumable(electrode,Copper,1)
                     .tier(2)
+                    .circuitMeta(2)
                     .duration((int) Math.ceil(material.getMass() * totalInputAmount * 1.5))
                     .EUt(VA[LV]);
         }

@@ -1,8 +1,6 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.steam;
 
-import gregtech.api.capability.IMultipleTankHandler;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
-import gregtech.api.capability.impl.SteamMultiWorkable;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
@@ -17,16 +15,9 @@ import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.common.blocks.BlockMachineCasing.MachineCasingType;
 import gregtech.common.blocks.MetaBlocks;
-import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.overwrite.MetaTileEntityMiningDrill;
-import net.minecraft.init.Blocks;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.fluids.FluidStack;
 
 import javax.annotation.Nonnull;
-
-import static gregtech.api.GTValues.VA;
-import static gregtech.api.unification.material.Materials.Lubricant;
 
 public class MetaTileEntitySteamFermentationVat extends RecipeMapMultiblockController {
 

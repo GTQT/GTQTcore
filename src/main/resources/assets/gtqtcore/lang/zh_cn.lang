@@ -426,6 +426,52 @@ metaitem.wind_rotor.tungstensteel.description=最大耐久度: 3840000, 层级: 
 # 镀铑钯风力发电机转子
 metaitem.wind_rotor.rhodiumplatedpalladium.name=镀铑钯风力发电机转子
 metaitem.wind_rotor.rhodiumplatedpalladium.description=最大耐久度: 7680000, 层级: 6
+# 石墨电极
+metaitem.electrode_graphite.name=石墨电极
+metaitem.electrode_graphite.description=最大耐久度: 2400000, 层级: 1
+# 银电极
+metaitem.electrode_silver.name=银电极
+metaitem.electrode_silver.description=最大耐久度: 3600000, 层级: 2
+# 钼电极
+metaitem.electrode_molybdenum.name=钼电极
+metaitem.electrode_molybdenum.description=最大耐久度: 4800000, 层级: 3
+# 金电极
+metaitem.electrode_gold.name=金电极
+metaitem.electrode_gold.description=最大耐久度: 6400000, 层级: 4
+# 铂电极
+metaitem.electrode_platinum.name=铂电极
+metaitem.electrode_platinum.description=最大耐久度: 7200000, 层级: 5
+# 钢钻头
+metaitem.drill_head.steel.name=钢钻头
+metaitem.drill_head.steel.description=最大耐久度: 2400000, 层级: 1
+# 铝钻头
+metaitem.drill_head.aluminium.name=铝钻头
+metaitem.drill_head.aluminium.description=最大耐久度: 3600000, 层级: 2
+# 不锈钢钻头
+metaitem.drill_head.stainlesssteel.name=不锈钢钻头
+metaitem.drill_head.stainlesssteel.description=最大耐久度: 4800000, 层级: 3
+# 钛钻头
+metaitem.drill_head.titanium.name=钛钻头
+metaitem.drill_head.titanium.description=最大耐久度: 6400000, 层级: 4
+# 钨钢钻头
+metaitem.drill_head.tungstensteel.name=钨钢钻头
+metaitem.drill_head.tungstensteel.description=最大耐久度: 7200000, 层级: 5
+# 铀-235 放射源
+metaitem.radiation.U235.name=铀-235 放射源
+metaitem.radiation.U235.description=最大辐射量: 120000, 辐射等级: 10
+# 铀-238 放射源
+metaitem.radiation.U238.name=铀-238 放射源
+metaitem.radiation.U238.description=最大辐射量: 180000, 辐射等级: 15
+# 钚-241 放射源
+metaitem.radiation.P241.name=钚-241 放射源
+metaitem.radiation.P241.description=最大辐射量: 240000, 辐射等级: 25
+# 钚-244 放射源
+metaitem.radiation.P244.name=钚-244 放射源
+metaitem.radiation.P244.description=最大辐射量: 320000, 辐射等级: 50
+# 锆-241 放射源
+metaitem.radiation.Am241.name=镅-241 放射源
+metaitem.radiation.Am241.description=最大辐射量: 640000, 辐射等级: 75
+
 
 #  Debug
 tile.component_assembly_line_casing.lv.name=部件装配线外壳（LV）
@@ -2342,6 +2388,26 @@ gtqtcore.machine.parallel_hatch.uxv.name=并行控制仓（§eUXV§r）
 gtqtcore.machine.parallel_hatch.opv.name=并行控制仓（§eOPV§r）
 gtqtcore.machine.parallel_hatch.max.name=并行控制仓（§eMAX§r）
 
+gtqtcore.machine.radiation_hatch.ev.name=辐射舱口（§5EV§r）
+gtqtcore.machine.radiation_hatch.iv.name=辐射舱口（§1IV§r）
+gtqtcore.machine.radiation_hatch.luv.name=辐射舱口（§dLuV§r）
+gtqtcore.machine.radiation_hatch.zpm.name=辐射舱口（§cZPM§r）
+gtqtcore.machine.radiation_hatch.uv.name=辐射舱口（§3UV§r）
+
+gtqtcore.machine.electrode_hatch.lv.name=电极舱口（§7LV§r）
+gtqtcore.machine.electrode_hatch.mv.name=电极舱口（§bMV§r）
+gtqtcore.machine.electrode_hatch.hv.name=电极舱口（§6HV§r）
+gtqtcore.machine.electrode_hatch.ev.name=电极舱口（§5EV§r）
+gtqtcore.machine.electrode_hatch.iv.name=电极舱口（§1IV§r）
+
+gtqtcore.machine.drill_head_hatch.lv.name=钻头舱口（§7LV§r）
+gtqtcore.machine.drill_head_hatch.mv.name=钻头舱口（§bMV§r）
+gtqtcore.machine.drill_head_hatch.hv.name=钻头舱口（§6HV§r）
+gtqtcore.machine.drill_head_hatch.ev.name=钻头舱口（§5EV§r）
+gtqtcore.machine.drill_head_hatch.iv.name=钻头舱口（§1IV§r）
+
+
+
 metaitem.mold.gas.name=气缸铸模
 metaitem.mold.motor.name=传动轴铸模
 
@@ -2656,9 +2722,9 @@ gtqtcore.machine.pcb.tooltip.5=多方块工作时会持续升温，当温度大�
 gtqtcore.multiblock.pcb1.amount=冷却效率：%s(上限 %s )温度：%sK(上限 %s K)
 
 gregtech.machine.biorea.gtqtupdate.1=升级 过滤器 玻璃 管道等级获得性能提升
-gregtech.machine.biorea.gtqtupdate.2=使用多方块需要往其中注入（RawGrowthMedium EnrichedBacterialSludge  FermentedBiomass Biomass）以及水提供多方块基本水量以及反应底液浓度
+gregtech.machine.biorea.gtqtupdate.2=请往多方块的生物仓里注入水与生物质，反应前确保水量为4000mb
 gregtech.machine.biorea.gtqtupdate.3=不同配方需求不同反应浓度（配方标注的为浓度下限），浓度越高多方块提升倍率越高
-gregtech.machine.biorea.gtqtupdate.4=可享受耗时减免 并行加成等提升，工作完毕后会消耗一部分反应底液，请注意补充
+gregtech.machine.biorea.gtqtupdate.4=可享受耗时减免 并行加成等提升，工作完毕后会消耗12.5%%的反应底液，请注意补充
 
 gregtech.machine.bioreb.gtqtupdate.2=使用五种基本菌群进行线性组合，不支持倍数组合，查询JEI获取目标菌群所需要的酸碱度以及性状因子，当GUI显示找到配方时点击开始加工按钮，加工完毕后原始菌群参数全部清零.
 gregtech.machine.bioreb.gtqtupdate.3=提供富集生物培养基提升多方块并行数量（并行不额外消耗原始菌群）
@@ -3751,10 +3817,10 @@ gtqtcore.machine.fluid_drill_rig.luv.name=极限流体钻机
 gtqtcore.machine.fluid_drill_rig.zpm.name=终极流体钻机
 gtqtcore.machine.fluid_drill_rig.uv.name=究极流体钻机
 
-tile.electrobath.drill_head_lv.name=钻头(一级)
-tile.electrobath.drill_head_mv.name=钻头(二级)
-tile.electrobath.drill_head_hv.name=钻头(三级)
-tile.electrobath.drill_head_ev.name=钻头(四级)
+tile.electrobath.drill_head_lv.name=强化钻头基座(一级)
+tile.electrobath.drill_head_mv.name=强化钻头基座(二级)
+tile.electrobath.drill_head_hv.name=强化钻头基座(三级)
+tile.electrobath.drill_head_ev.name=强化钻头基座(四级)
 tile.turbinecasing1.precise_assembler_casing_mk1.name=精密装配外壳MK1
 tile.turbinecasing1.precise_assembler_casing_mk2.name=精密装配外壳MK2
 tile.turbinecasing1.precise_assembler_casing_mk3.name=精密装配外壳MK3
@@ -3823,7 +3889,7 @@ gtqtcore.multiblock.na.tooltips2=动能区间：%s--%s--%s MeV
 gregtech.multiblock.pb.computation=占比：%s
 gtqtcore.multiblock.br.amount=水箱储量：%s
 gtqtcore.multiblock.br.1=注水量：%s 培养液储量：%s 培养液浓度：%s
-gtqtcore.multiblock.br.3=玻璃等级：%s 管道等级：%s,输入速率：%s
+gtqtcore.multiblock.br.3=玻璃等级：%s 管道等级：%s
 gtqtcore.multiblock.br.2=浓度过高！！！
 gtqtcore.machine.arc1=电极等级：%s 通风管道等级：%s
 gtqtcore.machine.arc2=欢迎使用合金冶炼配方 炉温：%s

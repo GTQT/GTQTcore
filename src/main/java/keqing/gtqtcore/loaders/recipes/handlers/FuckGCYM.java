@@ -3,6 +3,7 @@ package keqing.gtqtcore.loaders.recipes.handlers;
 import gregicality.multiblocks.common.metatileentities.GCYMMetaTileEntities;
 import gregtech.api.metatileentity.multiblock.CleanroomType;
 import gregtech.api.recipes.ModHandler;
+import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.MarkerMaterials;
 import gregtech.api.unification.stack.UnificationEntry;
 import gregtech.common.items.MetaItems;
@@ -25,11 +26,9 @@ import static gregtech.loaders.recipe.MetaTileEntityLoader.registerMachineRecipe
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.TJMaterials.Polyetheretherketone;
-import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.electrode;
 import static keqing.gtqtcore.api.utils.GTQTUtil.CWT;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.DISK_22;
-import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.*;
 
 public class FuckGCYM {
     public static void init() {
@@ -552,8 +551,7 @@ public class FuckGCYM {
                 .input(ALLOY_SMELTER[EV], 8)
                 .input(VOLTAGE_COIL_EV,16)
                 .input(CONVEYOR_MODULE_EV, 4)
-                .input(electrode, Graphite, 8)
-                .input(electrode, Platinum, 8)
+                .input(ELECTRODE_GRAPHITE, 8)
                 .input(plate, TantalumCarbide, 16)
                 .input(plate, Rhodium, 16)
                 .input(wireFine, Ruridit, 32)

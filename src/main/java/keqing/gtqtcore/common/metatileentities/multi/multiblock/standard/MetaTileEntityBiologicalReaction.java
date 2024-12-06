@@ -1,6 +1,8 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
-import gregtech.api.capability.IMultipleTankHandler;
+import codechicken.lib.render.CCRenderState;
+import codechicken.lib.render.pipeline.IVertexOperation;
+import codechicken.lib.vec.Matrix4;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.Widget;
@@ -12,6 +14,7 @@ import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.IProgressBarMultiblock;
+import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
@@ -27,7 +30,10 @@ import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.GTQTCoreConfig;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
+import keqing.gtqtcore.api.capability.IBio;
+import keqing.gtqtcore.api.capability.ICatalystHatch;
 import keqing.gtqtcore.api.metaileentity.GTQTRecipeMapMultiblockController;
+import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.properties.BRProperty;
 import keqing.gtqtcore.api.utils.GTQTUtil;
@@ -53,7 +59,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-import static gregtech.api.unification.material.Materials.*;
+import static gregtech.api.unification.material.Materials.Water;
+import static keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility.BIO_MULTIBLOCK_ABILITY;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.BIOLOGICAL_REACTION_RECIPES;
 
 //要实现大机器中的渲染需要重写IFastRenderMetaTileEntity 接口，并实现renderMetaTileEntity和getRenderBoundingBox方法
@@ -61,10 +68,10 @@ public class MetaTileEntityBiologicalReaction extends GTQTRecipeMapMultiblockCon
     int liquid = 0;
     int bio = 0;
     double rate = 0;
-    int updatetime = 1;
     private int glass_tier;
     private int clean_tier;
     private int tubeTier;
+
     public MetaTileEntityBiologicalReaction(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{BIOLOGICAL_REACTION_RECIPES, RecipeMaps.FERMENTING_RECIPES, RecipeMaps.BREWING_RECIPES});
         this.recipeMapWorkable = new BiologicalReactionLogic(this);
@@ -84,19 +91,10 @@ public class MetaTileEntityBiologicalReaction extends GTQTRecipeMapMultiblockCon
     @Nonnull
     protected Widget getFlexButton(int x, int y, int width, int height) {
         WidgetGroup group = new WidgetGroup(x, y, width, height);
-        group.addWidget(new ClickButtonWidget(0, 0, 9, 9, "", this::decrementThreshold).setButtonTexture(GuiTextures.BUTTON_THROTTLE_MINUS).setTooltipText("increment"));
-        group.addWidget(new ClickButtonWidget(9, 0, 9, 9, "", this::incrementThreshold).setButtonTexture(GuiTextures.BUTTON_THROTTLE_PLUS).setTooltipText("decrement"));
-        group.addWidget(new ClickButtonWidget(0, 9, 18, 9, "", this::clear).setButtonTexture(GuiTextures.BUTTON_THROTTLE_MINUS).setTooltipText("我不要了！"));
+        group.addWidget(new ClickButtonWidget(0, 0, 18, 18, "", this::clear).setButtonTexture(GuiTextures.BUTTON_THROTTLE_MINUS).setTooltipText("我不要了！"));
         return group;
     }
 
-    private void incrementThreshold(Widget.ClickData clickData) {
-        this.updatetime = MathHelper.clamp(updatetime + 1, 1, 20);
-    }
-
-    private void decrementThreshold(Widget.ClickData clickData) {
-        this.updatetime = MathHelper.clamp(updatetime - 1, 1, 20);
-    }
 
     @Override
     public int getNumProgressBars() {
@@ -105,8 +103,8 @@ public class MetaTileEntityBiologicalReaction extends GTQTRecipeMapMultiblockCon
 
     @Override
     public double getFillPercentage(int index) {
-        if (rate > 2) return index == 0 ? 2 : bio / 2000.0;
-        else return index == 0 ? rate : bio / 2000.0;
+        if (bio * 1.0 / liquid <= 1) return index == 0 ? rate : bio * 1.0 / liquid;
+        else return index == 0 ? rate : 1;
     }
 
     @Override
@@ -120,14 +118,13 @@ public class MetaTileEntityBiologicalReaction extends GTQTRecipeMapMultiblockCon
         if (index == 0) {
             cwutInfo = TextComponentUtil.stringWithColor(TextFormatting.AQUA, rate * 100 + " / " + 100 + "R");
         } else {
-            cwutInfo = TextComponentUtil.stringWithColor(TextFormatting.AQUA, bio + " / " + 3200 + " P");
+            cwutInfo = TextComponentUtil.stringWithColor(TextFormatting.AQUA, bio + " / " + 4000 + " P");
         }
         hoverList.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY, "gregtech.multiblock.pb.computation", cwutInfo));
     }
 
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("liquid", liquid);
-        data.setInteger("updatetime", updatetime);
         data.setInteger("bio", bio);
         data.setDouble("rate", rate);
         return super.writeToNBT(data);
@@ -136,7 +133,6 @@ public class MetaTileEntityBiologicalReaction extends GTQTRecipeMapMultiblockCon
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         liquid = data.getInteger("liquid");
-        updatetime = data.getInteger("updatetime");
         bio = data.getInteger("bio");
         rate = data.getDouble("rate");
     }
@@ -147,8 +143,8 @@ public class MetaTileEntityBiologicalReaction extends GTQTRecipeMapMultiblockCon
     }
 
     private void clear(Widget.ClickData clickData) {
-        liquid = 0;
-        bio = 0;
+        this.getBiotHatch().drainBioAmount(bio);
+        this.getBiotHatch().drainWaterAmount(liquid);
         rate = 0;
     }
 
@@ -161,12 +157,23 @@ public class MetaTileEntityBiologicalReaction extends GTQTRecipeMapMultiblockCon
         this.tubeTier = GTQTUtil.getOrDefault(() -> tubeTier instanceof WrappedIntTired, () -> ((WrappedIntTired) tubeTier).getIntTier(), 0);
         this.glass_tier = GTQTUtil.getOrDefault(() -> glass_tier instanceof WrappedIntTired, () -> ((WrappedIntTired) glass_tier).getIntTier(), 0);
         this.clean_tier = GTQTUtil.getOrDefault(() -> clean_tier instanceof WrappedIntTired, () -> ((WrappedIntTired) clean_tier).getIntTier(), 0);
+
     }
 
     @Nonnull
     @Override
     protected BlockPattern createStructurePattern() {
-        return FactoryBlockPattern.start().aisle("JCCCJ", "JCCCJ", "GGGGG", "GGGGG", "CCCCC").aisle("JCCCJ", "JPPPJ", "G   G", "G   G", "CCCCC").aisle("JCCCJ", "JPPPJ", "G   G", "G   G", "CCCCC").aisle("JCCCJ", "JPPPJ", "G   G", "G   G", "CCCCC").aisle("JCCCJ", "JCSCJ", "GGGGG", "GGGGG", "CCCCC").where('S', selfPredicate()).where('J', TiredTraceabilityPredicate.CP_ZJ_CASING.get()).where('G', TiredTraceabilityPredicate.CP_LGLASS.get()).where('C', states(getCasingState()).setMinGlobalLimited(38).or(autoAbilities())).where('P', TiredTraceabilityPredicate.CP_TUBE.get()).where(' ', any()).build();
+        return FactoryBlockPattern.start().aisle("JCCCJ", "JCCCJ", "GGGGG", "GGGGG", "CCCCC").aisle("JCCCJ", "JPPPJ", "G   G", "G   G", "CCCCC").aisle("JCCCJ", "JPPPJ", "G   G", "G   G", "CCCCC").aisle("JCCCJ", "JPPPJ", "G   G", "G   G", "CCCCC").aisle("JCCCJ", "JCSCJ", "GGGGG", "GGGGG", "CCCCC").where('S', selfPredicate()).where('J', TiredTraceabilityPredicate.CP_ZJ_CASING.get()).where('G', TiredTraceabilityPredicate.CP_LGLASS.get()).where('C', states(getCasingState()).setMinGlobalLimited(38)
+                        .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setMaxGlobalLimited(2))
+                        .or(abilities(MultiblockAbility.EXPORT_FLUIDS).setMaxGlobalLimited(2))
+                        .or(abilities(MultiblockAbility.IMPORT_ITEMS).setMaxGlobalLimited(2))
+                        .or(abilities(MultiblockAbility.EXPORT_ITEMS).setMaxGlobalLimited(2))
+                        .or(abilities(MultiblockAbility.INPUT_ENERGY).setMaxGlobalLimited(1))
+                        .or(abilities(MultiblockAbility.MAINTENANCE_HATCH).setExactLimit(1))
+                        .or(abilities(MultiblockAbility.MUFFLER_HATCH).setExactLimit(1))
+                        .or(abilities(BIO_MULTIBLOCK_ABILITY).setExactLimit(1))
+                )
+                .where('P', TiredTraceabilityPredicate.CP_TUBE.get()).where(' ', any()).build();
     }
 
     @SideOnly(Side.CLIENT)
@@ -175,7 +182,6 @@ public class MetaTileEntityBiologicalReaction extends GTQTRecipeMapMultiblockCon
         return Textures.CLEAN_STAINLESS_STEEL_CASING;
 
     }
-
 
     @Nonnull
     @Override
@@ -186,23 +192,15 @@ public class MetaTileEntityBiologicalReaction extends GTQTRecipeMapMultiblockCon
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
-
-        if (getInputFluidInventory() != null) {
-            FluidStack STACK = getInputFluidInventory().drain(Water.getFluid(Integer.MAX_VALUE), false);
-            int liquidOxygenAmount = STACK == null ? 0 : STACK.amount;
-            textList.add(new TextComponentTranslation("gtqtcore.multiblock.br.amount", TextFormattingUtil.formatNumbers((liquidOxygenAmount))));
-        }
         textList.add(new TextComponentTranslation("gtqtcore.multiblock.br.1", liquid, bio, rate));
-        textList.add(new TextComponentTranslation("gtqtcore.multiblock.br.3", glass_tier, tubeTier, updatetime));
-        if (rate > 100) textList.add(new TextComponentTranslation("gtqtcore.multiblock.br.2"));
+        textList.add(new TextComponentTranslation("gtqtcore.multiblock.br.3", glass_tier, tubeTier));
     }
-
 
     @Override
     public boolean checkRecipe(@Nonnull Recipe recipe, boolean consumeIfSuccess) {
-        if (this.getRecipeMap() != BIOLOGICAL_REACTION_RECIPES) return true;
-        int number = recipe.getProperty(BRProperty.getInstance(), 0);
-        if (rate * 100 >= number) return super.checkRecipe(recipe, consumeIfSuccess);
+        if (this.getRecipeMap() != BIOLOGICAL_REACTION_RECIPES) return super.checkRecipe(recipe, consumeIfSuccess);
+        if (rate * 100 >= recipe.getProperty(BRProperty.getInstance(), 0))
+            return super.checkRecipe(recipe, consumeIfSuccess);
         else return false;
     }
 
@@ -250,80 +248,60 @@ public class MetaTileEntityBiologicalReaction extends GTQTRecipeMapMultiblockCon
         return new AxisAlignedBB(getPos(), getPos().add(5, 5, 5));
     }
 
+    @Override
+    public void updateFormedValid() {
+        if (!isStructureFormed()) return;
+        bio = this.getBiotHatch().getBioAmount();
+        liquid = this.getBiotHatch().getWaterAmount();
+
+
+        if (liquid == 0) rate = 0;
+        else rate = bio * 1.0 / 4000;
+    }
+
+    public void consume() {
+        if (this.getBiotHatch() != null) {
+            this.getBiotHatch().drainBioAmount(bio / 8);
+            this.getBiotHatch().drainWaterAmount(bio / 8);
+        }
+    }
+    public IBio getBiotHatch() {
+        List<IBio> abilities = getAbilities(GTQTMultiblockAbility.BIO_MULTIBLOCK_ABILITY);
+        if (abilities.isEmpty())
+            return null;
+        return abilities.get(0);
+    }
+
+    protected int getRateRating() {
+        if (rate > 0.8) return 8;
+        if (rate > 0.6) return 4;
+        if (rate > 0.4) return 2;
+        return 1;
+    }
+
     protected class BiologicalReactionLogic extends MultiblockRecipeLogic {
 
-        FluidStack WATER = Water.getFluid(100);
-        FluidStack BIO1 = RawGrowthMedium.getFluid(10);
-        FluidStack BIO2 = EnrichedBacterialSludge.getFluid(40);
-        FluidStack BIO3 = FermentedBiomass.getFluid(80);
-        FluidStack BIO4 = Biomass.getFluid(100);
+
         public BiologicalReactionLogic(RecipeMapMultiblockController tileEntity) {
             super(tileEntity, true);
         }
 
         @Override
-        public void update() {
-            IMultipleTankHandler inputTank = getInputFluidInventory();
-
-            for (int time = 0; time < updatetime; time++)
-                if (bio < 2000) {
-                    if (BIO1.isFluidStackIdentical(inputTank.drain(BIO1, false))) {
-                        inputTank.drain(BIO1, true);
-                        bio = bio + 100;
-                    }
-                    if (BIO2.isFluidStackIdentical(inputTank.drain(BIO2, false))) {
-                        inputTank.drain(BIO2, true);
-                        bio = bio + 100;
-                    }
-                    if (BIO3.isFluidStackIdentical(inputTank.drain(BIO3, false))) {
-                        inputTank.drain(BIO3, true);
-                        bio = bio + 100;
-                    }
-                    if (BIO4.isFluidStackIdentical(inputTank.drain(BIO4, false))) {
-                        inputTank.drain(BIO4, true);
-                        bio = bio + 100;
-                    }
-                }
-            if (WATER.isFluidStackIdentical(inputTank.drain(WATER, false))) {
-                if (liquid < 20000) {
-                    inputTank.drain(WATER, true);
-                    liquid = liquid + 100 * tubeTier;
-                }
-
-            }
-            if (liquid == 0) rate = 0;
-            else rate = (double) bio * 10 / liquid;
-        }
-
-        protected int getp() {
-            if (rate > 1.2) return 2;
-            if (rate > 1.1) return 4;
-            if (rate > 0.9) return 8;
-            if (rate > 0.8) return 4;
-            if (rate > 0.6) return 2;
-            if (rate > 0.4) return 1;
-            return 1;
-        }
-
-        @Override
         public int getParallelLimit() {
-            return getp() * clean_tier;
+            return getRateRating() * clean_tier;
         }
 
         public void setMaxProgress(int maxProgress) {
-            this.maxProgressTime = (maxProgress * (100 - glass_tier * getp()) / 100);
+            this.maxProgressTime = (maxProgress * (100 - glass_tier * getRateRating()) / 100);
         }
 
         protected void updateRecipeProgress() {
             if (this.canRecipeProgress && this.drawEnergy(this.recipeEUt, true)) {
-                if (liquid > 5000) {
+                if (liquid >= 4000) {
                     this.drawEnergy(this.recipeEUt, false);
-                    liquid = liquid - 1000;
                     if (++progressTime > maxProgressTime) {
                         completeRecipe();
-                        liquid = liquid * tubeTier / 16;
-                        bio = bio * tubeTier / 12;
-                        //checjwater();
+                        consume();
                     }
                     if (this.hasNotEnoughEnergy && this.getEnergyInputPerSecond() > 19L * (long) this.recipeEUt) {
                         this.hasNotEnoughEnergy = false;

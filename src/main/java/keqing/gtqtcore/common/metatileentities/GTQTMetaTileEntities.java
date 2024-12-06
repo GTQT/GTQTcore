@@ -120,9 +120,9 @@ public class GTQTMetaTileEntities {
 
     public static final MetaTileEntityReinforcedRotorHolder[] MULTIPART_REINFORCED_ROTOR_HOLDER = new MetaTileEntityReinforcedRotorHolder[8];
     public static final MetaTileEntityCompressedFusionReactor[] COMPRESSED_FUSION_REACTOR = new MetaTileEntityCompressedFusionReactor[6];
-    public static final MetaTileEntityBioHatch[] BIO_HATCH = new MetaTileEntityBioHatch[14];
     public static int currentMultiPartID = 16120;
     //////////////////////////
+    public static MetaTileEntityBioHatch BIO_HATCH;
     public static MetaTileEntityOilPool OIL_POOL;
     public static MetaTileEntityAlgaeFarm ALGAE_FARM;
     public static MetaTileEntityComponentAssemblyLine COMPONENT_ASSEMBLY_LINE;
@@ -208,6 +208,9 @@ public class GTQTMetaTileEntities {
     public static SimpleMachineMetaTileEntity[] VACUUM_CHAMBER = new SimpleMachineMetaTileEntity[V.length - 1];
     public static SimpleSteamMetaTileEntity[] STEAM_VACUUM_CHAMBER = new SimpleSteamMetaTileEntity[2];
     public static MetaTileEntityParallelHatch[] PARALLEL_HATCH = new MetaTileEntityParallelHatch[V.length - 1];
+    public static MetaTileEntityRadiationHatch[] RADIATION_HATCH = new MetaTileEntityRadiationHatch[5];
+    public static MetaTileEntityElectrodeHatch[] ELECTRODE_HATCH = new MetaTileEntityElectrodeHatch[5];
+    public static MetaTileEntityDrillHeadHatch[] DRILL_HEAD_HATCH = new MetaTileEntityDrillHeadHatch[5];
     public static MetaTileEntityGravitySeparator GRAVITY_SEPARATOR;
     public static MetaTileEntityFrothFlotationTank FROTH_FLOTATION_TANK;
     public static MetaTileEntityOceanPumper OCEAN_PUMPER;
@@ -724,20 +727,30 @@ public class GTQTMetaTileEntities {
         LASER_BOOSTER[4] = registerMetaTileEntity(15479, new MetaTileLaserBooster(gtqtcoreId("laser_booster." + UIV), UIV));
         LASER_BOOSTER[5] = registerMetaTileEntity(15480, new MetaTileLaserBooster(gtqtcoreId("laser_booster." + UEV), UEV));
 
-        for (int i = 0; i < BIO_HATCH.length; i++) {
-            int idOffset = 15481; // 假设从 15600 开始分配 ID
-            BIO_HATCH[i] = registerMetaTileEntity(
-                    idOffset + i,
-                    new MetaTileEntityBioHatch(gtqtcoreId(String.format("bio_hatch.%s", GTValues.VN[i + 1])), i + 1)
-            );
-        }
-
         for (int i = 0; i < 14; i++) {
-            int id = 15533 + i;
+            int id = 15481 + i;
             String name = String.format("parallel_hatch.%s", GTValues.VN[i + 1]);
             PARALLEL_HATCH[i] = registerMetaTileEntity(id, new MetaTileEntityParallelHatch(gtqtcoreId(name), i + 1));
         }
+        for (int i = 0; i < 5; i++) {
+            int id = 15495 + i;
+            String name = String.format("radiation_hatch.%s", GTValues.VN[4 + i]);
+            RADIATION_HATCH[i] = registerMetaTileEntity(id, new MetaTileEntityRadiationHatch(gtqtcoreId(name),4+i));
+        }
 
+        for (int i = 0; i < 5; i++) {
+            int id = 15500 + i;
+            String name = String.format("electrode_hatch.%s", GTValues.VN[i+ 1]);
+            ELECTRODE_HATCH[i] = registerMetaTileEntity(id, new MetaTileEntityElectrodeHatch(gtqtcoreId(name),i+1));
+        }
+        for (int i = 0; i < 5; i++) {
+            int id = 15505 + i;
+            String name = String.format("drill_head_hatch.%s", GTValues.VN[i+ 1]);
+            DRILL_HEAD_HATCH[i] = registerMetaTileEntity(id, new MetaTileEntityDrillHeadHatch(gtqtcoreId(name),i+1));
+        }
+
+
+        BIO_HATCH = registerMetaTileEntity(15546, new MetaTileEntityBioHatch(gtqtcoreId("bio_hatch")));
         INF_WATER_HATCH = registerMetaTileEntity(15547, new MetaTileInfWaterHatch(gtqtcoreId("infinite_water_hatch")));
         CATALYST_HATCH = registerMetaTileEntity(15548, new MetaTileEntityCatalystHatch(gtqtcoreId("catalyst_hatch")));
         MULTIPART_BUFFER_HATCH = registerMetaTileEntity(15549, new MetaTileEntityBufferHatch(gtqtcoreId("buffer_hatch")));

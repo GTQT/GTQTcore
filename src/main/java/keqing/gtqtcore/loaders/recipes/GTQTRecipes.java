@@ -451,7 +451,7 @@ public class GTQTRecipes {
                 .input(OrePrefix.plate, material, 2)
                 .input(OrePrefix.stick, material, 2)
                 .output(SolderingPrefix, material)
-                .circuitMeta(20)
+                .circuitMeta(21)
                 .buildAndRegister();
 
         ToolHeadReplaceRecipe.setToolHeadForTool(soldering_iron_head, SOLDERING_IRON_LV);

@@ -15,21 +15,16 @@ import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.BlockMachineCasing;
 import gregtech.common.blocks.BlockSteamCasing;
 import gregtech.common.blocks.MetaBlocks;
-import gregtech.common.items.MetaItems;
 import gregtech.common.metatileentities.MetaTileEntities;
 import gregtech.core.unification.material.internal.MaterialRegistryManager;
 import gregtech.loaders.recipe.CraftingComponent;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
-import keqing.gtqtcore.api.unification.ore.GTQTOrePrefix;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.*;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
-import keqing.gtqtcore.loaders.recipes.chain.CrystalRaw;
-import keqing.gtqtcore.loaders.recipes.chain.PEEKChain;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import org.lwjgl.openal.AL;
 
 import java.util.Collection;
 import java.util.Map;
@@ -42,7 +37,6 @@ import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.common.blocks.MetaBlocks.MACHINE_CASING;
-import static gregtech.common.items.MetaItems.ELECTRIC_PISTON_LV;
 import static gregtech.common.items.MetaItems.SHAPE_MOLD_BLOCK;
 import static gregtech.common.metatileentities.MetaTileEntities.ARC_FURNACE;
 import static gregtech.loaders.recipe.CraftingComponent.*;
@@ -54,6 +48,7 @@ import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.plate_curved;
 import static keqing.gtqtcore.api.utils.GTQTUniverUtil.SECOND;
 import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.FISHING_CASING;
 import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing1.TurbineCasingType.*;
+import static keqing.gtqtcore.common.items.GTQTMetaItems.ELECTRODE_GRAPHITE;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.*;
 
 public class MetaTileEntityMachine {
@@ -74,10 +69,10 @@ public class MetaTileEntityMachine {
 
     private static void LBG() {
         ASSEMBLER_RECIPES.recipeBuilder()
-                .input(MetaTileEntities.STEAM_TURBINE[0],16)
-                .input(plate,Steel,8)
-                .input(rotor,Tin,4)
-                .input(cableGtSingle,Tin, 4)
+                .input(MetaTileEntities.STEAM_TURBINE[0], 16)
+                .input(plate, Steel, 8)
+                .input(rotor, Tin, 4)
+                .input(cableGtSingle, Tin, 4)
                 .input(circuit, MarkerMaterials.Tier.MV, 4)
                 .fluidInputs(Tin.getFluid(576))
                 .outputs(LBG[0].getStackForm())
@@ -87,10 +82,10 @@ public class MetaTileEntityMachine {
 
 
         ASSEMBLER_RECIPES.recipeBuilder()
-                .input(MetaTileEntities.GAS_TURBINE[0],16)
-                .input(plate,Steel,8)
-                .input(rotor,Tin,4)
-                .input(cableGtSingle,Tin, 4)
+                .input(MetaTileEntities.GAS_TURBINE[0], 16)
+                .input(plate, Steel, 8)
+                .input(rotor, Tin, 4)
+                .input(cableGtSingle, Tin, 4)
                 .input(circuit, MarkerMaterials.Tier.MV, 4)
                 .fluidInputs(Tin.getFluid(576))
                 .outputs(LBG[1].getStackForm())
@@ -99,10 +94,10 @@ public class MetaTileEntityMachine {
                 .buildAndRegister();
 
         ASSEMBLER_RECIPES.recipeBuilder()
-                .input(MetaTileEntities.GAS_TURBINE[1],16)
-                .input(plate,Aluminium,8)
-                .input(rotor,Steel,4)
-                .input(cableGtSingle,Copper, 4)
+                .input(MetaTileEntities.GAS_TURBINE[1], 16)
+                .input(plate, Aluminium, 8)
+                .input(rotor, Steel, 4)
+                .input(cableGtSingle, Copper, 4)
                 .input(circuit, MarkerMaterials.Tier.HV, 4)
                 .fluidInputs(Tin.getFluid(576))
                 .outputs(LBG[2].getStackForm())
@@ -112,10 +107,10 @@ public class MetaTileEntityMachine {
 
 
         ASSEMBLER_RECIPES.recipeBuilder()
-                .input(MetaTileEntities.COMBUSTION_GENERATOR[0],16)
-                .input(plate,Steel,8)
-                .input(rotor,Tin,4)
-                .input(cableGtSingle,Tin, 4)
+                .input(MetaTileEntities.COMBUSTION_GENERATOR[0], 16)
+                .input(plate, Steel, 8)
+                .input(rotor, Tin, 4)
+                .input(cableGtSingle, Tin, 4)
                 .input(circuit, MarkerMaterials.Tier.MV, 4)
                 .fluidInputs(Tin.getFluid(576))
                 .outputs(LBG[3].getStackForm())
@@ -124,10 +119,10 @@ public class MetaTileEntityMachine {
                 .buildAndRegister();
 
         ASSEMBLER_RECIPES.recipeBuilder()
-                .input(MetaTileEntities.COMBUSTION_GENERATOR[1],16)
-                .input(plate,Aluminium,8)
-                .input(rotor,Steel,4)
-                .input(cableGtSingle,Copper, 4)
+                .input(MetaTileEntities.COMBUSTION_GENERATOR[1], 16)
+                .input(plate, Aluminium, 8)
+                .input(rotor, Steel, 4)
+                .input(cableGtSingle, Copper, 4)
                 .input(circuit, MarkerMaterials.Tier.HV, 4)
                 .fluidInputs(Tin.getFluid(576))
                 .outputs(LBG[4].getStackForm())
@@ -136,9 +131,9 @@ public class MetaTileEntityMachine {
                 .buildAndRegister();
 
         ASSEMBLER_RECIPES.recipeBuilder()
-                .input(MetaTileEntities.COMBUSTION_GENERATOR[2],16)
-                .input(plate,StainlessSteel,8)
-                .input(rotor,Aluminium,4)
+                .input(MetaTileEntities.COMBUSTION_GENERATOR[2], 16)
+                .input(plate, StainlessSteel, 8)
+                .input(rotor, Aluminium, 4)
                 .input(cableGtSingle, Gold, 4)
                 .input(circuit, MarkerMaterials.Tier.EV, 4)
                 .fluidInputs(Tin.getFluid(576))
@@ -235,6 +230,7 @@ public class MetaTileEntityMachine {
                 .duration((int) (3.2 * SECOND))
                 .buildAndRegister();
     }
+
     private static void dust() {
         MIXER_RECIPES.recipeBuilder()
                 .input(dust, Titanium, 6)
@@ -589,13 +585,13 @@ public class MetaTileEntityMachine {
                 .outputs(MetaTileEntities.HULL[9].getStackForm()).buildAndRegister();
         //////////////////////////////////////玻璃
         FLUID_SOLIDFICATION_RECIPES.recipeBuilder().duration(120).EUt(120)
-                .fluidInputs(BorosilicateGlass.getFluid(L*4))
+                .fluidInputs(BorosilicateGlass.getFluid(L * 4))
                 .notConsumable(SHAPE_MOLD_BLOCK)
                 .outputs(GTQTMetaBlocks.ADV_GLASS.getItemVariant(GTQTADVGlass.CasingType.SILICATE_GLASS))
                 .buildAndRegister();
 
         RecipeMaps.ALLOY_SMELTER_RECIPES.recipeBuilder().duration(480).EUt(120)
-                .input(dust, BorosilicateGlass,4)
+                .input(dust, BorosilicateGlass, 4)
                 .notConsumable(SHAPE_MOLD_BLOCK.getStackForm())
                 .outputs(GTQTMetaBlocks.ADV_GLASS.getItemVariant(GTQTADVGlass.CasingType.SILICATE_GLASS))
                 .buildAndRegister();
@@ -689,7 +685,7 @@ public class MetaTileEntityMachine {
                 'P', DOUBLE_PLATE,
                 'C', CIRCUIT,
                 'W', CABLE_QUAD,
-                'G', new UnificationEntry(GTQTOrePrefix.electrode, Materials.Graphite));
+                'G', ELECTRODE_GRAPHITE);
 
         //蒸馏室
         ModHandler.removeRecipeByName("gregtech:gregtech.machine.distillery.lv");
@@ -702,7 +698,7 @@ public class MetaTileEntityMachine {
         ModHandler.removeRecipeByName("gregtech:gregtech.machine.distillery.uv");
         ModHandler.removeRecipeByName("gregtech:gregtech.machine.distillery.uhv");
 
-        Component HIGH_TIER_CIRCUIT=new Component((Map) Stream.of(new Object[]{0, new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.LV)}, new Object[]{1, new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.MV)}, new Object[]{2, new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.HV)}, new Object[]{3, new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.EV)}, new Object[]{4, new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.IV)}, new Object[]{5, new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.LuV)}, new Object[]{6, new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.ZPM)}, new Object[]{7, new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.UV)}, new Object[]{8, new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.UHV)}, new Object[]{9, new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.UEV)}, new Object[]{10, new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.UIV)}, new Object[]{11, new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.UXV)}, new Object[]{12, new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.OpV)}, new Object[]{13, new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.MAX)}).collect(Collectors.toMap((data) -> (Integer)data[0], (data) -> data[1])));
+        Component HIGH_TIER_CIRCUIT = new Component(Stream.of(new Object[]{0, new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.LV)}, new Object[]{1, new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.MV)}, new Object[]{2, new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.HV)}, new Object[]{3, new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.EV)}, new Object[]{4, new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.IV)}, new Object[]{5, new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.LuV)}, new Object[]{6, new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.ZPM)}, new Object[]{7, new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.UV)}, new Object[]{8, new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.UHV)}, new Object[]{9, new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.UEV)}, new Object[]{10, new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.UIV)}, new Object[]{11, new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.UXV)}, new Object[]{12, new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.OpV)}, new Object[]{13, new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.MAX)}).collect(Collectors.toMap((data) -> (Integer) data[0], (data) -> data[1])));
 
         registerMachineRecipe(MetaTileEntities.DISTILLERY,
                 "GBG", "CMC", "WPW",
@@ -733,7 +729,7 @@ public class MetaTileEntityMachine {
                 'G', "blockGlass",
                 'H', MetaBlocks.STEAM_CASING.getItemVariant(BlockSteamCasing.SteamCasingType.STEEL_HULL));
 
-                //  Bio Reactor
+        //  Bio Reactor
         registerMachineRecipe(true, BIO_REACTOR,
                 "PXX", "pHp", "PMW",
                 'H', CraftingComponent.HULL,
@@ -750,6 +746,27 @@ public class MetaTileEntityMachine {
                 CIRCUIT, 'G', GLASS);
         registerMachineRecipe(GTQTMetaTileEntities.DEHYDRATOR, "WCW", "MHM", "GAG", 'C', CIRCUIT, 'M', CABLE_QUAD, 'H', HULL,
                 'G', MOTOR, 'A', ROBOT_ARM, 'W', COIL_HEATING_DOUBLE);
+
+        registerMachineRecipe(GTQTMetaTileEntities.RADIATION_HATCH,
+                "SCS", "EHE", "SCS",
+                'C', CIRCUIT,
+                'H', HULL,
+                'S', OreDictUnifier.get(plateDense, Lead),
+                'E', OreDictUnifier.get(screw, TungstenSteel));
+
+        registerMachineRecipe(GTQTMetaTileEntities.ELECTRODE_HATCH,
+                "SCS", "EHE", "SCS",
+                'C', CIRCUIT,
+                'H', HULL,
+                'S', OreDictUnifier.get(stick, Steel),
+                'E', OreDictUnifier.get(screw, Copper));
+
+        registerMachineRecipe(GTQTMetaTileEntities.DRILL_HEAD_HATCH,
+                "SCS", "EHE", "SCS",
+                'C', CIRCUIT,
+                'H', HULL,
+                'S', OreDictUnifier.get(rotor, Aluminium),
+                'E', OreDictUnifier.get(screw, Invar));
     }
 
 }

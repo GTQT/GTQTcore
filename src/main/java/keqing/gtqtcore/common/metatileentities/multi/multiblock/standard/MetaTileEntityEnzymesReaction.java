@@ -1,5 +1,6 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
+import keqing.gtqtcore.api.utils.EnzymesUtils;
 import gregtech.api.capability.IMultipleTankHandler;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.gui.GuiTextures;
@@ -23,10 +24,13 @@ import gregtech.client.renderer.texture.Textures;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
+import keqing.gtqtcore.api.capability.IPHValue;
 import keqing.gtqtcore.api.metaileentity.GTQTRecipeMapMultiblockController;
+import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.recipes.properties.ERProperty;
+import keqing.gtqtcore.api.utils.GTQTMathUtil;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.block.state.IBlockState;
@@ -48,7 +52,7 @@ import java.util.List;
 import static gregtech.api.unification.material.Materials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 
-public class MetaTileEntityEnzymesReaction extends GTQTRecipeMapMultiblockController implements IProgressBarMultiblock {
+public class MetaTileEntityEnzymesReaction extends GTQTRecipeMapMultiblockController implements IPHValue {
     public MetaTileEntityEnzymesReaction(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[] {
                 GTQTcoreRecipeMaps.ENZYMES_REACTION_RECIPES
@@ -61,46 +65,19 @@ public class MetaTileEntityEnzymesReaction extends GTQTRecipeMapMultiblockContro
     private int clean_tier;
     private int tubeTier;
 
-    double PH=0;
+    private double PH = 7;
 
-    int water;
-    int s;
-    int j;
+    int p;
+
     int A;
     int B;
     int C;
     int D;
     int E;
     boolean start;
-    @Override
-    public int getNumProgressBars() {
-        return 1;
-    }
-    @Override
-    public double getFillPercentage(int index) {
-            return (PH-4)/6;
-    }
-    @Override
-    public TextureArea getProgressBarTexture(int index) {
-        return GuiTextures.PROGRESS_BAR_LCE_FUEL;
-    }
-    @Override
-    public void addBarHoverText(List<ITextComponent> hoverList, int index) {
-        ITextComponent cwutInfo;
-        cwutInfo = TextComponentUtil.stringWithColor(
-                    TextFormatting.AQUA,
-                    4+" / " + PH + " / " + 10 + "PH");
-        hoverList.add(TextComponentUtil.translationWithColor(
-                TextFormatting.GRAY,
-                "gregtech.multiblock.pb.computation",
-                cwutInfo));
-    }
+
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setBoolean("start", start);
-
-        data.setInteger("water", water);
-        data.setInteger("s", s);
-        data.setInteger("j", j);
 
         data.setDouble("PH", PH);
         data.setInteger("A", A);
@@ -114,10 +91,6 @@ public class MetaTileEntityEnzymesReaction extends GTQTRecipeMapMultiblockContro
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         start = data.getBoolean("start");
-
-        water = data.getInteger("water");
-        s = data.getInteger("s");
-        j = data.getInteger("j");
 
         PH = data.getDouble("PH");
         A = data.getInteger("A");
@@ -146,10 +119,7 @@ public class MetaTileEntityEnzymesReaction extends GTQTRecipeMapMultiblockContro
     }
 
     private void clear(Widget.ClickData clickData) {
-        PH=0;
-        water=0;
-        s=0;
-        j=0;
+        PH=7D;
         A=B=C=D=E=0;
     }
     private void work(Widget.ClickData clickData) {
@@ -183,7 +153,10 @@ public class MetaTileEntityEnzymesReaction extends GTQTRecipeMapMultiblockContro
                 .where('S', selfPredicate())
                 .where('J', TiredTraceabilityPredicate.CP_ZJ_CASING.get())
                 .where('G', TiredTraceabilityPredicate.CP_LGLASS.get())
-                .where('C', states(getCasingState()).setMinGlobalLimited(32).or(autoAbilities()))
+                .where('C', states(getCasingState()).setMinGlobalLimited(32)
+                        .or(autoAbilities())
+                        .or(abilities(GTQTMultiblockAbility.BUFFER_MULTIBLOCK_ABILITY).setExactLimit(1))
+                )
                 .where('P', TiredTraceabilityPredicate.CP_TUBE.get())
                 .where(' ', any())
                 .build();
@@ -209,14 +182,14 @@ public class MetaTileEntityEnzymesReaction extends GTQTRecipeMapMultiblockContro
 
         textList.add(new TextComponentTranslation("gtqtcore.multiblock.br.3",glass_tier,tubeTier));
         if(PH>8)
-            textList.add(new TextComponentTranslation("Ph:%s 碱性 状态：%s",(int)PH,start));
+            textList.add(new TextComponentTranslation("Ph:%s 碱性 状态：%s",PH,start));
         if(PH<8&&PH>6)
-            textList.add(new TextComponentTranslation("Ph:%s 中性 状态：%s",(int)PH,start));
+            textList.add(new TextComponentTranslation("Ph:%s 中性 状态：%s",PH,start));
         if(PH<6)
-            textList.add(new TextComponentTranslation("Ph:%s 酸性 状态：%s",(int)PH,start));
+            textList.add(new TextComponentTranslation("Ph:%s 酸性 状态：%s",PH,start));
 
         if(getEnzymes()>0&&getRare(getEnzymes()))
-        textList.add(new TextComponentTranslation("%s 组合因子：%s %s %s %s %s 找到配方: "+getName(getEnzymes()),getEnzymes(),A,B,C,D,E));
+        textList.add(new TextComponentTranslation("%s 组合因子：%s %s %s %s %s 找到配方: "+EnzymesUtils.getName(getEnzymes()),getEnzymes(),A,B,C,D,E));
         else textList.add(new TextComponentTranslation("组合因子：%s %s %s %s %s 找不到可行配方！",A,B,C,D,E));
     }
 
@@ -263,68 +236,15 @@ public class MetaTileEntityEnzymesReaction extends GTQTRecipeMapMultiblockContro
         return false;
     }
 
-    public String getName(int n)
-    {
-        //普适矿处菌种 101
-        //定向铂系菌种 102
-        //普适魔性菌种 103
-        //普适副产菌种 104
-        //
-        //工业合成菌种I 201
-        //工业还原菌种 202
-        //工业氧化菌种 203
-        //工业催化菌种 204
-        //
-        //定向脂肪酶 301
-        //普适发酵酶 302
-        //定向发酵酶 303
-        //
-        //活性诱变酶 401
-        switch (n) {
-            case 101 -> {
-                return "普适矿处菌种";
-            }
-            case 102 -> {
-                return "定向铂系菌种";
-            }
-            case 103 -> {
-                return "普适魔性菌种";
-            }
-            case 104 -> {
-                return "普适副产菌种";
-            }
-            case 201 -> {
-                return "工业合成菌种I";
-            }
-            case 202 -> {
-                return "工业还原菌种";
-            }
-            case 203 -> {
-                return "工业氧化菌种";
-            }
-            case 204 -> {
-                return "工业催化菌种";
-            }
-            case 301 -> {
-                return "定向脂肪酶";
-            }
-            case 302 -> {
-                return "普适发酵酶";
-            }
-            case 303 -> {
-                return "定向发酵酶";
-            }
-            case 401 -> {
-                return "活性诱变酶";
-            }
-            default -> {
-                return null;
-            }
-        }
-    }
+
     public boolean cE(int a,int b,int c,int d,int e)
     {
-        if(A==a)if(B==b)if(C==c)if(D==d)if(E==e)return true;
+        int k = A / a;
+        if (k > 0 && A % a == 0 && B == k * b && C == k * c && D == k * d && E == k * e)
+        {
+            p=k;
+            return true;
+        }
         return false;
     }
     @Override
@@ -335,6 +255,13 @@ public class MetaTileEntityEnzymesReaction extends GTQTRecipeMapMultiblockContro
                 return super.checkRecipe(recipe, consumeIfSuccess);
         return false;
     }
+    @Override
+    public void invalidateStructure() {
+        super.invalidateStructure();
+        this.PH = 7D;
+        this.markDirty();
+    }
+
     @Override
     public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
@@ -348,9 +275,6 @@ public class MetaTileEntityEnzymesReaction extends GTQTRecipeMapMultiblockContro
         public BiologicalReactionLogic(RecipeMapMultiblockController tileEntity) {
             super(tileEntity,true);
         }
-        FluidStack WATER = Water.getFluid(100);
-        FluidStack S = HydrochloricAcid.getFluid(100);
-        FluidStack J = SodiumHydroxide.getFluid(100);
         FluidStack BIO1 = Enzymesa.getFluid(1000);
         FluidStack BIO2 = Enzymesb .getFluid(1000);
         FluidStack BIO3 = Enzymesc.getFluid(1000);
@@ -360,21 +284,6 @@ public class MetaTileEntityEnzymesReaction extends GTQTRecipeMapMultiblockContro
         @Override
         public void update() {
             IMultipleTankHandler inputTank = getInputFluidInventory();
-            if (WATER.isFluidStackIdentical(inputTank.drain(WATER, false))) {
-                inputTank.drain(WATER, true);
-                water++;
-            }
-            if (S.isFluidStackIdentical(inputTank.drain(S, false))) {
-                inputTank.drain(S, true);
-                s++;
-            }
-            if (J.isFluidStackIdentical(inputTank.drain(J, false))) {
-                inputTank.drain(J, true);
-                j++;
-            }
-
-            PH=(float)(4*s+10*j+7*water)/(s+j+water);
-
             if (BIO1.isFluidStackIdentical(inputTank.drain(BIO1, false))) {
                 inputTank.drain(BIO1, true);
                 A = A + 1;
@@ -403,10 +312,10 @@ public class MetaTileEntityEnzymesReaction extends GTQTRecipeMapMultiblockContro
 
         @Override
         public int getParallelLimit() {
-            return clean_tier;
+            return Math.max(clean_tier,p);
         }
         public void setMaxProgress(int maxProgress) {
-            this.maxProgressTime = maxProgress*clean_tier/10;
+            this.maxProgressTime = (int) (maxProgress*((10-clean_tier)/10.0));
         }
 
         protected void updateRecipeProgress() {
@@ -414,12 +323,33 @@ public class MetaTileEntityEnzymesReaction extends GTQTRecipeMapMultiblockContro
                 this.drawEnergy(this.recipeEUt, false);
                 if (++this.progressTime > this.maxProgressTime) {
                     this.completeRecipe();
-                    PH+=(7-PH)/3;
-                    s= (int) (s*0.6);
-                    j= (int) (j*0.6);
+                    changeCurrentPHValue(Math.signum(7 - PH) * 0.125*p);
                     A=B=C=D=E=0;
                 }
             }
         }
+    }
+
+    @Override
+    public double getCurrentPHValue() {
+        return this.PH;
+    }
+
+    @Override
+    public void changeCurrentPHValue(double ph_change) {
+        this.PH = GTQTMathUtil.clamp(PH + ph_change, 0, 14);
+        this.markDirty();
+    }
+
+    @Override
+    public void changeCurrentPHValue(double ph_change, double ph_change_limit) {
+        if (ph_change > 0) {
+            double ph = this.PH + ph_change;
+            this.PH = Math.min(ph, ph_change_limit);
+        } else {
+            double ph = this.PH + ph_change;
+            this.PH = Math.max(ph, ph_change_limit);
+        }
+        this.markDirty();
     }
 }

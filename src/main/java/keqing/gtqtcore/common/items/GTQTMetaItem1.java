@@ -22,6 +22,7 @@ import net.minecraft.client.resources.I18n;
 
 import static gregtech.api.GTValues.*;
 import static gregtech.api.unification.material.Materials.*;
+import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 
@@ -328,13 +329,36 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         ADV_CAPACITOR = this.addItem(351, "adv_capacitor").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         ADV_COMPONENT_VENT = this.addItem(352, "adv_component_vent").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         ADV_HEAT_EXCHANGE = this.addItem(353, "adv_heat_exchange").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+
+        //电极注册（5个）
+        //石墨
+        ELECTRODE_GRAPHITE = this.addItem(360, "electrode_graphite").setMaxStackSize(1).addComponents(new ElectrodeBehavior(2400000, 1, Graphite)).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        ELECTRODE_SILVER = this.addItem(361, "electrode_silver").setMaxStackSize(1).addComponents(new ElectrodeBehavior(3600000, 2, Silver)).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        ELECTRODE_MOLOYBDENUM = this.addItem(362, "electrode_molybdenum").setMaxStackSize(1).addComponents(new ElectrodeBehavior(4800000, 3, Molybdenum)).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        ELECTRODE_GOLD = this.addItem(363, "electrode_gold").setMaxStackSize(1).addComponents(new ElectrodeBehavior(6400000, 4, Gold)).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        ELECTRODE_PLATINUM = this.addItem(364, "electrode_platinum").setMaxStackSize(1).addComponents(new ElectrodeBehavior(7200000, 5, Platinum)).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+
+        //钻头
+        DRILL_HEAD_STEEL = this.addItem(365, "drill_head.steel").setMaxStackSize(1).addComponents(new DrillHeadBehavior(2400000, 1, Steel)).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        DRILL_HEAD_ALUMINIUM = this.addItem(366, "drill_head.aluminium").setMaxStackSize(1).addComponents(new DrillHeadBehavior(3600000, 2, Aluminium)).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        DRILL_HEAD_STAINLESSSTEEL = this.addItem(367, "drill_head.stainlesssteel").setMaxStackSize(1).addComponents(new DrillHeadBehavior(4800000, 3, StainlessSteel)).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        DRILL_HEAD_TITANIUM = this.addItem(368, "drill_head.titanium").setMaxStackSize(1).addComponents(new DrillHeadBehavior(6400000, 4, Titanium)).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        DRILL_HEAD_TUNGSTENSTEEL = this.addItem(369, "drill_head.tungstensteel").setMaxStackSize(1).addComponents(new DrillHeadBehavior(7200000, 5, TungstenSteel)).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+
         //风电扇叶（注册6个）
-        WIND_ROTOR_STEEL = this.addItem(380, "wind_rotor.steel").setMaxStackSize(1).addComponents(new WindRotorBehavior(240000, 1, Steel)).setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        WIND_ROTOR_ALUMINIUM = this.addItem(381, "wind_rotor.aluminium").setMaxStackSize(1).addComponents(new WindRotorBehavior(480000, 2, Aluminium)).setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        WIND_ROTOR_STAINLESSSTEEL = this.addItem(382, "wind_rotor.stainlesssteel").setMaxStackSize(1).addComponents(new WindRotorBehavior(960000, 3, StainlessSteel)).setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        WIND_ROTOR_TITANIUM = this.addItem(383, "wind_rotor.titanium").setMaxStackSize(1).addComponents(new WindRotorBehavior(1920000, 4, Titanium)).setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        WIND_ROTOR_TUNGSTENSTEEL = this.addItem(384, "wind_rotor.tungstensteel").setMaxStackSize(1).addComponents(new WindRotorBehavior(3840000, 5, TungstenSteel)).setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        WIND_ROTOR_RHODIUMPLATEDPALLADIUM = this.addItem(385, "wind_rotor.rhodiumplatedpalladium").setMaxStackSize(1).addComponents(new WindRotorBehavior(7680000, 6, RhodiumPlatedPalladium)).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        WIND_ROTOR_STEEL = this.addItem(380, "wind_rotor.steel").setMaxStackSize(1).addComponents(new WindRotorBehavior(2400000, 1, Steel)).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        WIND_ROTOR_ALUMINIUM = this.addItem(381, "wind_rotor.aluminium").setMaxStackSize(1).addComponents(new WindRotorBehavior(4800000, 2, Aluminium)).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        WIND_ROTOR_STAINLESSSTEEL = this.addItem(382, "wind_rotor.stainlesssteel").setMaxStackSize(1).addComponents(new WindRotorBehavior(9600000, 3, StainlessSteel)).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        WIND_ROTOR_TITANIUM = this.addItem(383, "wind_rotor.titanium").setMaxStackSize(1).addComponents(new WindRotorBehavior(19200000, 4, Titanium)).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        WIND_ROTOR_TUNGSTENSTEEL = this.addItem(384, "wind_rotor.tungstensteel").setMaxStackSize(1).addComponents(new WindRotorBehavior(38400000, 5, TungstenSteel)).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        WIND_ROTOR_RHODIUMPLATEDPALLADIUM = this.addItem(385, "wind_rotor.rhodiumplatedpalladium").setMaxStackSize(1).addComponents(new WindRotorBehavior(76800000, 6, RhodiumPlatedPalladium)).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+
+        //放射源
+        RADIATION_U235 = this.addItem(386, "radiation.U235").setMaxStackSize(1).addComponents(new RadiationBehavior(120000, 10, Uranium235)).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        RADIATION_U238 = this.addItem(387, "radiation.U238").setMaxStackSize(1).addComponents(new RadiationBehavior(180000, 15, Uranium238)).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        RADIATION_U241 = this.addItem(388, "radiation.P241").setMaxStackSize(1).addComponents(new RadiationBehavior(240000, 25, Plutonium241)).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        RADIATION_U244 = this.addItem(389, "radiation.P244").setMaxStackSize(1).addComponents(new RadiationBehavior(320000, 50, Plutonium244)).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        RADIATION_Am241 = this.addItem(390, "radiation.Am241").setMaxStackSize(1).addComponents(new RadiationBehavior(640000, 75, Americium241)).setCreativeTabs(CommonProxy.GTQTCore_TAB);
 
         //磨球
         GRINDBALL_SOAPSTONE = this.addItem(391, "mill.grindball_soapstone").setMaxStackSize(1).addComponents(new MillBallBehavior()).setCreativeTabs(CommonProxy.GTQTCore_TAB);

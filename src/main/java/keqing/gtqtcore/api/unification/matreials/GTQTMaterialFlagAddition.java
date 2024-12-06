@@ -235,15 +235,6 @@ public class GTQTMaterialFlagAddition {
         Olivine.addFlags(CRYSTALLIZABLE);
         Amethyst.addFlags(CRYSTALLIZABLE);
         Opal.addFlags(CRYSTALLIZABLE);
-        Platinum.addFlags(GENERATE_ELECTRODE);
-        Graphite.addFlags(GENERATE_ELECTRODE);
-        Palladium.addFlags(GENERATE_ELECTRODE);
-        Silver.addFlags(GENERATE_ELECTRODE);
-        Copper.addFlags(GENERATE_ELECTRODE);
-        Aluminium.addFlags(GENERATE_ELECTRODE);
-        Zinc.addFlags(GENERATE_ELECTRODE);
-        Steel.addFlags(GENERATE_ELECTRODE);
-        Brass.addFlags(GENERATE_ELECTRODE);
 
         Carbon.addFlags(GENERATE_NANOTUBE, GENERATE_NANOSENSOR); // W.I.P
         Graphene.addFlags(GENERATE_NANOTUBE, GENERATE_NANOSENSOR); // W.I.P

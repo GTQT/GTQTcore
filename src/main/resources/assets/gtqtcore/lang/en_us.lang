@@ -424,7 +424,51 @@ metaitem.wind_rotor.tungstensteel.description=Maximum Durability: 3840000, Tier:
 # rhodium-plated palladium wind rotor
 metaitem.wind_rotor.rhodiumplatedpalladium.name=Rhodium-Plated Palladium Wind Rotor
 metaitem.wind_rotor.rhodiumplatedpalladium.description=Maximum Durability: 7680000, Tier: 6
-
+# 石墨电极
+metaitem.electrode_graphite.name=石墨电极
+metaitem.electrode_graphite.description=最大耐久度: 2400000, 层级: 1
+# 银电极
+metaitem.electrode_silver.name=银电极
+metaitem.electrode_silver.description=最大耐久度: 3600000, 层级: 2
+# 钼电极
+metaitem.electrode_molybdenum.name=钼电极
+metaitem.electrode_molybdenum.description=最大耐久度: 4800000, 层级: 3
+# 金电极
+metaitem.electrode_gold.name=金电极
+metaitem.electrode_gold.description=最大耐久度: 6400000, 层级: 4
+# 铂电极
+metaitem.electrode_platinum.name=铂电极
+metaitem.electrode_platinum.description=最大耐久度: 7200000, 层级: 5
+# 钢钻头
+metaitem.drill_head.steel.name=钢钻头
+metaitem.drill_head.steel.description=最大耐久度: 2400000, 层级: 1
+# 铝钻头
+metaitem.drill_head.aluminium.name=铝钻头
+metaitem.drill_head.aluminium.description=最大耐久度: 3600000, 层级: 2
+# 不锈钢钻头
+metaitem.drill_head.stainlesssteel.name=不锈钢钻头
+metaitem.drill_head.stainlesssteel.description=最大耐久度: 4800000, 层级: 3
+# 钛钻头
+metaitem.drill_head.titanium.name=钛钻头
+metaitem.drill_head.titanium.description=最大耐久度: 6400000, 层级: 4
+# 钨钢钻头
+metaitem.drill_head.tungstensteel.name=钨钢钻头
+metaitem.drill_head.tungstensteel.description=最大耐久度: 7200000, 层级: 5
+# 铀-235 放射源
+metaitem.radiation.U235.name=铀-235 放射源
+metaitem.radiation.U235.description=最大辐射量: 120000, 辐射等级: 10
+# 铀-238 放射源
+metaitem.radiation.U238.name=铀-238 放射源
+metaitem.radiation.U238.description=最大辐射量: 180000, 辐射等级: 15
+# 钚-241 放射源
+metaitem.radiation.P241.name=钚-241 放射源
+metaitem.radiation.P241.description=最大辐射量: 240000, 辐射等级: 25
+# 钚-244 放射源
+metaitem.radiation.P244.name=钚-244 放射源
+metaitem.radiation.P244.description=最大辐射量: 320000, 辐射等级: 50
+# 锆-241 放射源
+metaitem.radiation.Am241.name=镅-241 放射源
+metaitem.radiation.Am241.description=最大辐射量: 640000, 辐射等级: 75
 # Debug
 tile.component_assembly_line_casing.lv.name=Component Assembly Line Casing (LV)
 tile.component_assembly_line_casing.lv.tooltip=Simple Assembly Unit
@@ -2334,6 +2378,24 @@ gtqtcore.machine.parallel_hatch.uxv.name=Parallel Control Hatch (§eUXV§r)
 gtqtcore.machine.parallel_hatch.opv.name=Parallel Control Hatch (§eOPV§r)
 gtqtcore.machine.parallel_hatch.max.name=Parallel Control Hatch (§eMAX§r)
 
+gtqtcore.machine.radiation_hatch.ev.name=辐射舱口（§5EV§r）
+gtqtcore.machine.radiation_hatch.iv.name=辐射舱口（§1IV§r）
+gtqtcore.machine.radiation_hatch.luv.name=辐射舱口（§dLuV§r）
+gtqtcore.machine.radiation_hatch.zpm.name=辐射舱口（§cZPM§r）
+gtqtcore.machine.radiation_hatch.uv.name=辐射舱口（§3UV§r）
+
+gtqtcore.machine.electrode_hatch.lv.name=电极舱口（§7LV§r）
+gtqtcore.machine.electrode_hatch.mv.name=电极舱口（§bMV§r）
+gtqtcore.machine.electrode_hatch.hv.name=电极舱口（§6HV§r）
+gtqtcore.machine.electrode_hatch.ev.name=电极舱口（§5EV§r）
+gtqtcore.machine.electrode_hatch.iv.name=电极舱口（§1IV§r）
+
+gtqtcore.machine.drill_head_hatch.lv.name=钻头舱口（§7LV§r）
+gtqtcore.machine.drill_head_hatch.mv.name=钻头舱口（§bMV§r）
+gtqtcore.machine.drill_head_hatch.hv.name=钻头舱口（§6HV§r）
+gtqtcore.machine.drill_head_hatch.ev.name=钻头舱口（§5EV§r）
+gtqtcore.machine.drill_head_hatch.iv.name=钻头舱口（§1IV§r）
+
 metaitem.mold.gas.name=Gas Cylinder Mold
 metaitem.mold.motor.name=Drive Shaft Mold
 
@@ -3737,10 +3799,10 @@ gtqtcore.machine.fluid_drill_rig.luv.name=Extreme Fluid Drill Rig
 gtqtcore.machine.fluid_drill_rig.zpm.name=Ultimate Fluid Drill Rig
 gtqtcore.machine.fluid_drill_rig.uv.name=Supreme Fluid Drill Rig
 
-tile.electrobath.drill_head_lv.name=Drill Head (Level 1)
-tile.electrobath.drill_head_mv.name=Drill Head (Level 2)
-tile.electrobath.drill_head_hv.name=Drill Head (Level 3)
-tile.electrobath.drill_head_ev.name=Drill Head (Level 4)
+tile.electrobath.drill_head_lv.name=Drill Head Bed(Level 1)
+tile.electrobath.drill_head_mv.name=Drill Head Bed(Level 2)
+tile.electrobath.drill_head_hv.name=Drill Head Bed(Level 3)
+tile.electrobath.drill_head_ev.name=Drill Head Bed(Level 4)
 tile.turbinecasing1.precise_assembler_casing_mk1.name=Precise Assembler Casing MK1
 tile.turbinecasing1.precise_assembler_casing_mk2.name=Precise Assembler Casing MK2
 tile.turbinecasing1.precise_assembler_casing_mk3.name=Precise Assembler Casing MK3
@@ -3809,7 +3871,7 @@ gtqtcore.multiblock.na.tooltips2=Kinetic Range: %s--%s--%s MeV
 gregtech.multiblock.pb.computation=Ratio: %s
 gtqtcore.multiblock.br.amount=Water Tank Capacity: %s
 gtqtcore.multiblock.br.1=Water Injection: %s Culture Medium Capacity: %s Culture Medium Concentration: %s
-gtqtcore.multiblock.br.3=Glass Grade: %s Pipe Grade: %s, Input Rate: %s
+gtqtcore.multiblock.br.3=Glass Grade: %s Pipe Grade: %s
 gtqtcore.multiblock.br.2=Concentration Too High!!!
 gtqtcore.machine.arc1=Electrode Grade: %s Ventilation Pipe Grade: %s
 gtqtcore.machine.arc2=Welcome to use Alloy Smelting Recipe Furnace Temperature: %s

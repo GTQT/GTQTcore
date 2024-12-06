@@ -246,9 +246,7 @@ public class MetaTileEntityWindGenerator extends MetaTileEntityBaseWithControl  
                 GlStateManager.rotate(180, 0F, 1F, 0F);
             }
 
-
             GlStateManager.rotate(angle, 0F, 0F, 1F);//我让dna围绕z轴旋转，角度是实时变化的
-
 
             GlStateManager.scale(3, 3, 3);
             // ObjModels.Tree_Model.renderAllWithMtl(); //这个是模型加载器的渲染方法  这是带MTL的加载方式

@@ -29,8 +29,6 @@ public class GTQTElectrobath extends VariantBlock<GTQTElectrobath.CasingType> {
     }
 
     public static enum CasingType implements IStringSerializable {
-
-
         I_ELECTROBATH("i_electrobath"),
         II_ELECTROBATH("ii_electrobath"),
         III_ELECTROBATH("iii_electrobath"),

@@ -8,21 +8,19 @@ import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.ELECTROBATH;
-import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.REACTION_FURNACE_RECIPES;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.Alumina;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.AluminiumHydroxide;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
-import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.electrode;
 
 public class AluminiumLine {
     public static void init() {
 
         ELECTROBATH.recipeBuilder()
-                .notConsumable(electrode,Graphite,1)
                 .input(dust, Alumina, 2)
                 .fluidOutputs(Aluminium.getFluid(576))
                 .fluidOutputs(Oxygen.getFluid(6000))
                 .tier(1)
+                .circuitMeta(4)
                 .duration(1600).EUt(VA[MV]).buildAndRegister();
 
         RecipeMaps.BLAST_RECIPES.recipeBuilder()
@@ -71,7 +69,6 @@ public class AluminiumLine {
 
 
         ELECTROBATH.recipeBuilder()
-                .notConsumable(electrode,Graphite,1)
                 .input(dust,AluminiumHydroxide,10)
                 .input(dust,Cryolite,10)
                 .output(dust,Sodium,3)
@@ -79,6 +76,7 @@ public class AluminiumLine {
                 .fluidOutputs(Fluorine.getFluid(6000))
                 .output(dust,Alumina,5)
                 .fluidOutputs(Water.getFluid(3000))
+                .circuitMeta(4)
                 .EUt(120)
                 .tier(1)
                 .duration(200)

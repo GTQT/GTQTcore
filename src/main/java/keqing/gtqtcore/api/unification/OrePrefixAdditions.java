@@ -8,7 +8,6 @@ public class OrePrefixAdditions {
         MetaItems.addOrePrefix(GTQTOrePrefix.seedCrystal);
         MetaItems.addOrePrefix(GTQTOrePrefix.boule);
         MetaItems.addOrePrefix(GTQTOrePrefix.milled);
-        MetaItems.addOrePrefix(GTQTOrePrefix.electrode);
         MetaItems.addOrePrefix(GTQTOrePrefix.nanotube);
         MetaItems.addOrePrefix(GTQTOrePrefix.nanosensor);
         MetaItems.addOrePrefix(GTQTOrePrefix.soldering_iron_head);

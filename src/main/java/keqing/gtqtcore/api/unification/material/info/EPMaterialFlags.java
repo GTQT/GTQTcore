@@ -23,11 +23,6 @@ public class EPMaterialFlags {
             .requireProps(PropertyKey.GEM)
             .build();
 
-    public static final MaterialFlag GENERATE_ELECTRODE = new MaterialFlag.Builder("electrode")
-            .requireFlags(GENERATE_ROD)
-            .requireProps(PropertyKey.INGOT)
-            .build();
-
     public static final MaterialFlag GENERATE_PELLETS = new MaterialFlag.Builder("pellets")
             .build();
 

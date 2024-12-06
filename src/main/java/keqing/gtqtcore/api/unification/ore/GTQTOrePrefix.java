@@ -24,8 +24,6 @@ public class GTQTOrePrefix {
             hasGemProperty.and(mat -> mat.hasFlag(GENERATE_BOULE) || (mat.hasFlag(MaterialFlags.CRYSTALLIZABLE) && !mat.hasFlag(EPMaterialFlags.DISABLE_CRYSTALLIZATION))));
     public static final OrePrefix milled = new OrePrefix("milled", -1, null, GTQTMaterialIconType.milled, ENABLE_UNIFICATION,
             OrePrefix.Conditions.hasOreProperty, mat -> Collections.singletonList(I18n.format("metaitem.milled.tooltip.flotation")));
-    public static final OrePrefix electrode = new OrePrefix("electrode", -1, null, GTQTMaterialIconType.electrode, ENABLE_UNIFICATION,
-            mat -> mat.hasFlag(GENERATE_ELECTRODE));
     public static final OrePrefix pellets = new OrePrefix("pellets", -1, null, GTQTMaterialIconType.pellets, ENABLE_UNIFICATION,
             mat -> mat.hasFlag(GENERATE_PELLETS));
     public static final OrePrefix upellets = new OrePrefix("upellets", -1, null, GTQTMaterialIconType.upellets, ENABLE_UNIFICATION,

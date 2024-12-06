@@ -2,15 +2,11 @@ package keqing.gtqtcore.loaders.recipes.chain;
 
 import keqing.gtqtcore.api.unification.GTQTMaterials;
 
-import static gregtech.api.GTValues.HV;
-import static gregtech.api.GTValues.VA;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.dust;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
-import static keqing.gtqtcore.api.unification.TJMaterials.BariumHydroxide;
-import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.electrode;
 
 public class Bittern {
     public static void init() {

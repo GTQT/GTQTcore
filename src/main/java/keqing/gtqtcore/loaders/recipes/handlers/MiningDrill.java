@@ -3,15 +3,20 @@ package keqing.gtqtcore.loaders.recipes.handlers;
 import gregtech.api.items.metaitem.MetaItem;
 import gregtech.api.unification.material.MarkerMaterials;
 import gregtech.api.unification.material.Material;
+import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
+import keqing.gtqtcore.common.block.GTQTMetaBlocks;
+import keqing.gtqtcore.common.block.blocks.GTQTElectrobath;
+import keqing.gtqtcore.loaders.recipes.GTQTRecipes;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 
-import static gregtech.api.recipes.RecipeMaps.ASSEMBLER_RECIPES;
-import static gregtech.api.recipes.RecipeMaps.SIFTER_RECIPES;
+import static gregtech.api.GTValues.L;
+import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.Materials.Coal;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.common.items.MetaItems.*;
+import static gregtech.common.metatileentities.MetaTileEntities.HULL;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.GRAVITY_SEPARATOR_RECIPES;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.MINING_DRILL_RECIPES;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
@@ -21,6 +26,93 @@ import static net.minecraft.init.Blocks.SAND;
 
 public class MiningDrill {
     public static void init() {
+        //钻头
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .inputs(HULL[1].getStackForm())
+                .input(ELECTRIC_MOTOR_LV, 4)
+                .input(plate, Steel, 8)
+                .input(frameGt, Steel, 8)
+                .fluidInputs(Polyethylene.getFluid(L * 4))
+                .circuitMeta(5)
+                .outputs(GTQTMetaBlocks.ELECTROBATH.getItemVariant(GTQTElectrobath.CasingType.DRILL_HEAD_LV))
+                .duration(2000).EUt(30).buildAndRegister();
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .inputs(HULL[2].getStackForm())
+                .input(ELECTRIC_MOTOR_MV, 4)
+                .input(plate, Aluminium, 8)
+                .input(frameGt, Aluminium, 8)
+                .fluidInputs(PolyvinylChloride.getFluid(L * 4))
+                .circuitMeta(5)
+                .outputs(GTQTMetaBlocks.ELECTROBATH.getItemVariant(GTQTElectrobath.CasingType.DRILL_HEAD_MV))
+                .duration(200).EUt(120).buildAndRegister();
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .inputs(HULL[3].getStackForm())
+                .input(ELECTRIC_MOTOR_HV, 4)
+                .input(plate, StainlessSteel, 8)
+                .input(frameGt, StainlessSteel, 8)
+                .fluidInputs(Epoxy.getFluid(L * 4))
+                .circuitMeta(5)
+                .outputs(GTQTMetaBlocks.ELECTROBATH.getItemVariant(GTQTElectrobath.CasingType.DRILL_HEAD_HV))
+                .duration(200).EUt(480).buildAndRegister();
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .inputs(HULL[4].getStackForm())
+                .input(ELECTRIC_MOTOR_EV, 4)
+                .input(plate, Titanium, 8)
+                .input(frameGt, Titanium, 8)
+                .fluidInputs(ReinforcedEpoxyResin.getFluid(L * 4))
+                .circuitMeta(5)
+                .outputs(GTQTMetaBlocks.ELECTROBATH.getItemVariant(GTQTElectrobath.CasingType.DRILL_HEAD_EV))
+                .duration(200).EUt(1920).buildAndRegister();
+
+        //钻头
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(dust,Diamond,8)
+                .input(toolHeadDrill,Steel,16)
+                .input(stick,Steel,4)
+                .input(ELECTRIC_PUMP_LV,4)
+                .output(DRILL_HEAD_STEEL)
+                .fluidInputs(Polyethylene.getFluid(1440))
+                .duration(200).EUt(30).buildAndRegister();
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(dust,Diamond,8)
+                .input(toolHeadDrill,Aluminium,16)
+                .input(stick,Aluminium,4)
+                .input(ELECTRIC_PUMP_MV,4)
+                .output(DRILL_HEAD_ALUMINIUM)
+                .fluidInputs(Polyethylene.getFluid(1440))
+                .duration(200).EUt(120).buildAndRegister();
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(dust,Diamond,8)
+                .input(toolHeadDrill,StainlessSteel,16)
+                .input(stick,StainlessSteel,4)
+                .input(ELECTRIC_PUMP_HV,4)
+                .output(DRILL_HEAD_STAINLESSSTEEL)
+                .fluidInputs(Polyethylene.getFluid(1440))
+                .duration(200).EUt(480).buildAndRegister();
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(dust,Diamond,8)
+                .input(toolHeadDrill,Titanium,16)
+                .input(stick,Titanium,4)
+                .input(ELECTRIC_PUMP_EV,4)
+                .output(DRILL_HEAD_TITANIUM)
+                .fluidInputs(Polyethylene.getFluid(1440))
+                .duration(200).EUt(1960).buildAndRegister();
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(dust,Diamond,8)
+                .input(toolHeadDrill,TungstenSteel,16)
+                .input(stick,TungstenSteel,4)
+                .input(ELECTRIC_PUMP_IV,4)
+                .output(DRILL_HEAD_TUNGSTENSTEEL)
+                .fluidInputs(Polyethylene.getFluid(1440))
+                .duration(200).EUt(7680).buildAndRegister();
+
         //MiningDrillR();
         MiningDrill(BLANK,1);
         MiningDrill(HYDROTHERMAL,2);

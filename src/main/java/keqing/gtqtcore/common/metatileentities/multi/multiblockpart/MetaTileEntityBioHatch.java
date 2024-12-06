@@ -1,5 +1,8 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblockpart;
 
+import codechicken.lib.render.CCRenderState;
+import codechicken.lib.render.pipeline.IVertexOperation;
+import codechicken.lib.vec.Matrix4;
 import gregtech.api.capability.impl.FluidTankList;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.ModularUI;
@@ -13,6 +16,7 @@ import gregtech.api.unification.material.Materials;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockPart;
 import keqing.gtqtcore.api.capability.IBio;
 import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
+import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -25,6 +29,8 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 
 import java.util.ArrayList;
@@ -34,8 +40,6 @@ public class MetaTileEntityBioHatch extends MetaTileEntityMultiblockPart impleme
 
 
     private final FluidTankList fluidTankList;
-    private final int tier;
-
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         super.writeToNBT(data);
@@ -51,17 +55,25 @@ public class MetaTileEntityBioHatch extends MetaTileEntityMultiblockPart impleme
             fluidTankList.deserializeNBT(data.getCompoundTag("fluidlist"));
     }
 
-    public MetaTileEntityBioHatch(ResourceLocation metaTileEntityId, int tier) {
-        super(metaTileEntityId, tier);
-        this.tier = tier;
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
+        super.renderMetaTileEntity(renderState, translation, pipeline);
+        if (this.shouldRenderOverlay()) {
+            GTQTTextures.CATALYST_HATCH.renderSided(getFrontFacing(), renderState, translation, pipeline);
+        }
+    }
+
+    public MetaTileEntityBioHatch(ResourceLocation metaTileEntityId) {
+        super(metaTileEntityId, 3);
         FluidTank[] list= new FluidTank[2];
-        FluidTank water = new FluidTank(16000){
+        FluidTank water = new FluidTank(4000){
             @Override
             public boolean canFillFluidType(FluidStack fluid) {
                 return (fluid==null?false:fluid.getFluid()==FluidRegistry.WATER);
             }
         };
-        FluidTank bio = new FluidTank(16000){
+        FluidTank bio = new FluidTank(4000){
             @Override
             public boolean canFillFluidType(FluidStack fluid) {
                 return (fluid==null?false:fluid.getFluid()==Materials.Biomass.getFluid());
@@ -80,7 +92,7 @@ public class MetaTileEntityBioHatch extends MetaTileEntityMultiblockPart impleme
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {
-        return new MetaTileEntityBioHatch(metaTileEntityId, getTier());
+        return new MetaTileEntityBioHatch(metaTileEntityId);
     }
 
     @Override
@@ -159,8 +171,21 @@ public class MetaTileEntityBioHatch extends MetaTileEntityMultiblockPart impleme
     }
 
     @Override
-    public int getTier() {
-        return tier;
+    public boolean drainWaterAmount(int amount) {
+        if(amount>=fluidTankList.getTankAt(0).getFluidAmount()) {
+            fluidTankList.getTankAt(0).drain(amount, true);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean drainBioAmount(int amount) {
+        if(amount>=fluidTankList.getTankAt(1).getFluidAmount()) {
+            fluidTankList.getTankAt(1).drain(amount, true);
+            return true;
+        }
+        return false;
     }
 
     public IFluidHandler getWaterTank() {
@@ -170,5 +195,7 @@ public class MetaTileEntityBioHatch extends MetaTileEntityMultiblockPart impleme
     public IFluidHandler getBioTank() {
         return fluidTankList.getTankAt(1);
     }
+
+
 }
 

@@ -20,8 +20,6 @@ import static gregtechfoodoption.GTFOMaterialHandler.*;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
-import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.electrode;
-import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.MSF;
 
 public class OilChains {
     public static void init() {
@@ -354,8 +352,7 @@ public class OilChains {
                 .duration(100)
                 .EUt(60)
                 .tier(1)
-                .notConsumable(electrode,Aluminium,1)
-                .circuitMeta(1)
+                .circuitMeta(4)
                 .fluidInputs(AmmoniumSulfate.getFluid(2000))
                 .fluidInputs(Water.getFluid(2000))
                 .fluidOutputs(Hydrogen.getFluid(1000))

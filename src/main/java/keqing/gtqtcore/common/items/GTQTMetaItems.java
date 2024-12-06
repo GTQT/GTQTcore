@@ -189,6 +189,12 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem WIND_ROTOR_TUNGSTENSTEEL;
     public static MetaItem<?>.MetaValueItem WIND_ROTOR_RHODIUMPLATEDPALLADIUM;
 
+    public static MetaItem<?>.MetaValueItem RADIATION_U235;
+    public static MetaItem<?>.MetaValueItem RADIATION_U238;
+    public static MetaItem<?>.MetaValueItem RADIATION_U241;
+    public static MetaItem<?>.MetaValueItem RADIATION_U244;
+    public static MetaItem<?>.MetaValueItem RADIATION_Am241;
+
     public static MetaItem<?>.MetaValueItem GRINDBALL_SOAPSTONE;
     public static MetaItem<?>.MetaValueItem GRINDBALL_ALUMINIUM;
     public static MetaItem<?>.MetaValueItem SODIUM_ETHYLXANTHATE;
@@ -258,6 +264,18 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem ADV_CAPACITOR;
     public static MetaItem<?>.MetaValueItem ADV_COMPONENT_VENT;
     public static MetaItem<?>.MetaValueItem ADV_HEAT_EXCHANGE;
+
+    public static MetaItem<?>.MetaValueItem ELECTRODE_GRAPHITE;
+    public static MetaItem<?>.MetaValueItem ELECTRODE_SILVER;
+    public static MetaItem<?>.MetaValueItem ELECTRODE_MOLOYBDENUM;
+    public static MetaItem<?>.MetaValueItem ELECTRODE_GOLD;
+    public static MetaItem<?>.MetaValueItem ELECTRODE_PLATINUM;
+
+    public static MetaItem<?>.MetaValueItem DRILL_HEAD_STEEL;
+    public static MetaItem<?>.MetaValueItem DRILL_HEAD_ALUMINIUM;
+    public static MetaItem<?>.MetaValueItem DRILL_HEAD_STAINLESSSTEEL;
+    public static MetaItem<?>.MetaValueItem DRILL_HEAD_TITANIUM;
+    public static MetaItem<?>.MetaValueItem DRILL_HEAD_TUNGSTENSTEEL;
 
     public static MetaItem<?>.MetaValueItem SUPRACAUSAL_CAPACITOR;
     public static MetaItem<?>.MetaValueItem SUPRACAUSAL_DIODE;

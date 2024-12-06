@@ -14,6 +14,8 @@ import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockAbilityPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.MultiblockControllerBase;
+import gregtech.api.unification.OreDictUnifier;
+import gregtech.api.unification.stack.UnificationEntry;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockPart;
@@ -46,6 +48,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static gregtech.api.unification.material.Materials.*;
+import static gregtech.api.unification.ore.OrePrefix.dust;
+
 public class MetaTileEntityBufferHatch extends MetaTileEntityMultiblockPart implements IMultiblockAbilityPart<IBuffer>, IBuffer {
 
     private final BufferFluidTank fluidTank;
@@ -63,6 +68,13 @@ public class MetaTileEntityBufferHatch extends MetaTileEntityMultiblockPart impl
         super(metaTileEntityId, 5);
         this.fluidTank = new BufferFluidTank(8000, this);
         this.itemHandler = new BufferItemHandler();
+
+        BufferItemMap.put(GTQTUniverUtil.stackToInt(OreDictUnifier.get(dust, SodiumHydroxide)), new double[]{3.15, 13.55});
+        BufferItemMap.put(GTQTUniverUtil.stackToInt(OreDictUnifier.get(dust, SodiumBicarbonate)), new double[]{1.15, 5.55});
+
+        // 初始化 BufferFluidMap
+        BufferFluidMap.put("sulfuric_acid", new double[]{-3.15, 1.55});
+        BufferFluidMap.put("hydrochloric_acid", new double[]{-1.85, 2.85});
     }
 
     @Override
