@@ -5044,25 +5044,29 @@ tile.wire_coil.cupara_proton_pair_coil.name=*-库珀质子对线圈(II)-*
 tile.wire_coil.cuparb_proton_pair_coil.name=*-库珀质子对线圈(III)-*
 
 tile.computer_competent.computer_vent.name=空计算框架
-tile.computer_competent.computer_rami.name=数据缓存模块I
-tile.computer_competent.computer_ramii.name=数据缓存模块II
-tile.computer_competent.computer_ramiii.name=数据缓存模块III
-tile.computer_competent.computer_cpui.name=高性能计算模块I
-tile.computer_competent.computer_cpuii.name=高性能计算模块II
-tile.computer_competent.computer_cpuiii.name=高性能计算模块III
-tile.computer_competent.computer_gpui.name=辅助运算模块I
-tile.computer_competent.computer_gpuii.name=辅助运算模块II
-tile.computer_competent.computer_gpuiii.name=辅助运算模块III
+tile.computer_competent.computer_casing.name=空计算框架
 
-tile.computer_competent.computer_rami.tooltip=八百加八百等于十六百
-tile.computer_competent.computer_ramii.tooltip=记住全部！
-tile.computer_competent.computer_ramiii.tooltip=DDR114514
-tile.computer_competent.computer_cpui.tooltip=厘米级工艺
-tile.computer_competent.computer_cpuii.tooltip=人列计算机
-tile.computer_competent.computer_cpuiii.tooltip=我超，原子
-tile.computer_competent.computer_gpui.tooltip=苏联军工
-tile.computer_competent.computer_gpuii.tooltip=哥布林代工
-tile.computer_competent.computer_gpuiii.tooltip=神威！太湖之光！
+gtqtcore.machine.kqcc_hatch.ram.1.name=数据缓存模块I
+gtqtcore.machine.kqcc_hatch.ram.2.name=数据缓存模块II
+gtqtcore.machine.kqcc_hatch.ram.3.name=数据缓存模块III
+gtqtcore.machine.kqcc_hatch.cpu.1.name=高性能计算模块I
+gtqtcore.machine.kqcc_hatch.cpu.2.name=高性能计算模块II
+gtqtcore.machine.kqcc_hatch.cpu.3.name=高性能计算模块III
+gtqtcore.machine.kqcc_hatch.gpu.1.name=辅助运算模块I
+gtqtcore.machine.kqcc_hatch.gpu.2.name=辅助运算模块II
+gtqtcore.machine.kqcc_hatch.gpu.3.name=辅助运算模块III
+
+gtqtcore.machine.kqcc_hatch.ram.1.tooltip=八百加八百等于十六百
+gtqtcore.machine.kqcc_hatch.ram.2.tooltip=记住全部！
+gtqtcore.machine.kqcc_hatch.ram.3.tooltip=DDR114514
+gtqtcore.machine.kqcc_hatch.cpu.1.tooltip=厘米级工艺
+gtqtcore.machine.kqcc_hatch.cpu.2.tooltip=人列计算机
+gtqtcore.machine.kqcc_hatch.cpu.3.tooltip=我超，原子
+gtqtcore.machine.kqcc_hatch.gpu.1.tooltip=苏联军工
+gtqtcore.machine.kqcc_hatch.gpu.2.tooltip=哥布林代工
+gtqtcore.machine.kqcc_hatch.gpu.3.tooltip=神威！太湖之光！
+
+gtqtcore.machine.bio_hatch.name=生物仓
 
 tile.computer_competent.adv_computer_casing.name=超级计算机外壳
 tile.computer_competent.adv_computer_casing.tooltip=谁用计算机造房子

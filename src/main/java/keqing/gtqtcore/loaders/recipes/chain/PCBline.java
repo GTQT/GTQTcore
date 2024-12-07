@@ -243,9 +243,9 @@ public class PCBline {
         //  used to auto-generated all PCB Factory recipes.
         addPlasticTier(Polyethylene, 1);
         addPlasticTier(PolyvinylChloride, 2);
-        addPlasticTier(Polytetrafluoroethylene, 3);
-        addPlasticTier(Epoxy, 4);
-        addPlasticTier(ReinforcedEpoxyResin, 5);
+        addPlasticTier(Epoxy, 3);
+        addPlasticTier(ReinforcedEpoxyResin, 4);
+        addPlasticTier(Polytetrafluoroethylene, 5);
         addPlasticTier(Zylon, 6);
         addPlasticTier(Polybenzimidazole, 7);
         addPlasticTier(Polyetheretherketone, 8);

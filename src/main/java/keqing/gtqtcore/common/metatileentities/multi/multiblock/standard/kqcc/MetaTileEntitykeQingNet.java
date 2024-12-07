@@ -35,6 +35,8 @@ import keqing.gtqtcore.api.recipes.properties.ELEProperties;
 import keqing.gtqtcore.api.recipes.properties.KQKindProperty;
 import keqing.gtqtcore.api.recipes.properties.KQNetProperty;
 import keqing.gtqtcore.api.utils.GTQTKQnetHelper;
+import keqing.gtqtcore.client.textures.GTQTTextures;
+import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.items.GTQTMetaItems;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.MetaTileEntityElectronMicroscope;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.MetaTileEntityEnzymesReaction;
@@ -59,6 +61,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import java.util.Arrays;
 import java.util.List;
+
+import static keqing.gtqtcore.common.block.blocks.GTQTKQCC.CasingType.KQCC_COMPUTER_CASING;
 
 
 public class MetaTileEntitykeQingNet extends RecipeMapMultiblockController implements IOpticalComputationReceiver {
@@ -368,17 +372,28 @@ public class MetaTileEntitykeQingNet extends RecipeMapMultiblockController imple
 
     @Nonnull
     protected BlockPattern createStructurePattern() {
-        return FactoryBlockPattern.start().aisle("PPP", "PPP", "PPP").aisle("PPP", "PSP", "PPP").where('S', this.selfPredicate()).where('P', states(new IBlockState[]{getCasingState()}).or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(2)).or(abilities(MultiblockAbility.MAINTENANCE_HATCH).setExactLimit(1)).or(abilities(MultiblockAbility.IMPORT_ITEMS).setExactLimit(1)).or(abilities(MultiblockAbility.EXPORT_ITEMS).setExactLimit(1)).or(abilities(MultiblockAbility.IMPORT_FLUIDS).setMaxGlobalLimited(1)).or(abilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION).setExactLimit(1))).build();
+        return FactoryBlockPattern.start()
+                .aisle("PPP", "PPP", "PPP")
+                .aisle("PPP", "PPP", "PPP")
+                .aisle("PPP", "PSP", "PPP")
+                .where('S', this.selfPredicate())
+                .where('P', states(new IBlockState[]{getCasingState()}).or(abilities(MultiblockAbility.INPUT_ENERGY)
+                        .setMinGlobalLimited(1).setMaxGlobalLimited(2)).or(abilities(MultiblockAbility.MAINTENANCE_HATCH)
+                        .setExactLimit(1)).or(abilities(MultiblockAbility.IMPORT_ITEMS).setExactLimit(1))
+                        .or(abilities(MultiblockAbility.EXPORT_ITEMS).setExactLimit(1))
+                        .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setMaxGlobalLimited(1))
+                        .or(abilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION)
+                                .setExactLimit(1)))
+                .build();
     }
-
 
     protected IBlockState getCasingState() {
-        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.PTFE_INERT_CASING);
+        return GTQTMetaBlocks.KQCC.getState(KQCC_COMPUTER_CASING);
     }
 
-    @SideOnly(Side.CLIENT)
-    public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
-        return Textures.INERT_PTFE_CASING;
+    @Override
+    public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
+        return GTQTTextures.KQCC_COMMON;
     }
 
     @Nonnull

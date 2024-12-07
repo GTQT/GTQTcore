@@ -701,7 +701,7 @@ public class KeQingNET {
                 .input(plate, Aluminium, 4)
                 .input(wireFine, Gold, 16)
                 .fluidInputs(Lubricant.getFluid(GTValues.L * 4))
-                .fluidInputs(Polytetrafluoroethylene.getFluid(GTValues.L * 4))
+                .fluidInputs(Epoxy.getFluid(GTValues.L * 4))
                 .fluidInputs(Epoxy.getFluid(GTValues.L * 4))
                 .output(AE_FLUIX_FIRM, 4)
                 .scannerResearch(b -> b.researchStack(DISK_11.getStackForm()).duration(1200).EUt(VA[HV]))
@@ -1084,7 +1084,7 @@ public class KeQingNET {
                 .input(wireFine, BorosilicateGlass, 8)
                 .input(foil, Silver, 8)
                 .input(plateDense, Aluminium, 1)
-                .fluidInputs(Polytetrafluoroethylene.getFluid(L))
+                .fluidInputs(Polyethylene.getFluid(L))
                 .output(OPTICAL_PIPES[0], 4)
                 .duration(100).EUt(VA[MV]).buildAndRegister();
 
@@ -1114,9 +1114,17 @@ public class KeQingNET {
                 .input(plate, Copper, 4)
                 .input(OPTICAL_PIPES[0], 2)
                 .input(plateDense, Aluminium, 4)
-                .fluidInputs(Polytetrafluoroethylene.getFluid(L * 8))
+                .fluidInputs(Polyethylene.getFluid(L * 8))
                 .outputs(GTQTMetaBlocks.KQCC.getItemVariant(COMPUTER_VENT))
                 .duration(1000).EUt(120).buildAndRegister();
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(frameGt, Polyethylene, 1)
+                .input(plate, Polyethylene, 6)
+                .fluidInputs(Tin.getFluid(L * 4))
+                .outputs(GTQTMetaBlocks.KQCC.getItemVariant(KQCC_COMPUTER_CASING))
+                .duration(1000).EUt(120).buildAndRegister();
+
         //数据仓
         ASSEMBLER_RECIPES.recipeBuilder()
                 .input(ITEM_IMPORT_BUS[MV])
@@ -1124,7 +1132,7 @@ public class KeQingNET {
                 .input(circuit, Tier.MV, 4)
                 .input(plateDense, Aluminium, 4)
                 .output(EDATA_ACCESS_HATCH)
-                .fluidInputs(Polytetrafluoroethylene.getFluid(L * 2))
+                .fluidInputs(Polyethylene.getFluid(L * 2))
                 .duration(200).EUt(VA[HV]).buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
@@ -1272,6 +1280,7 @@ public class KeQingNET {
                 .output(KQCC)
                 .duration(200).EUt(120).buildAndRegister();
 
+
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .inputs(HULL[4].getStackForm(16))
                 .input(circuit, Tier.EV, 8)
@@ -1288,13 +1297,15 @@ public class KeQingNET {
                 .fluidInputs(Epoxy.getFluid(4000))
                 .fluidInputs(Zylon.getFluid(5706))
                 .fluidInputs(Brominatedepoxyresins.getFluid(4000))
-                .fluidInputs(Polytetrafluoroethylene.getFluid(4000))
+                .fluidInputs(Polyethylene.getFluid(4000))
                 .scannerResearch(b -> b
                         .researchStack(KQCC.getStackForm())
                         .duration(1200)
                         .EUt(VA[HV]))
                 .output(ADV_KQCC)
                 .duration(2000).EUt(480).buildAndRegister();
+
+
 
         //  Component Assembly Line
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
@@ -1797,7 +1808,7 @@ public class KeQingNET {
                 .input(QUANTUM_TANK[1], 4)
                 .input(pipeHugeFluid, Steel, 4)
                 .input(plate, Aluminium, 8)
-                .fluidInputs(Polytetrafluoroethylene.getFluid(4000))
+                .fluidInputs(Epoxy.getFluid(4000))
                 .fluidInputs(Aluminium.getFluid(4000))
                 .fluidInputs(Brominatedepoxyresins.getFluid(4000))
                 .fluidInputs(Polyethylene.getFluid(4000))
@@ -1816,9 +1827,9 @@ public class KeQingNET {
                 .input(VOLTAGE_COIL_HV, 16)
                 .input(rotor, StainlessSteel, 8)
                 .input(QUANTUM_TANK[2], 4)
-                .input(pipeHugeFluid, Polytetrafluoroethylene, 4)
+                .input(pipeHugeFluid, Polyethylene, 4)
                 .input(plate, NanometerBariumTitanate, 8)
-                .fluidInputs(Polytetrafluoroethylene.getFluid(4000))
+                .fluidInputs(Polyethylene.getFluid(4000))
                 .fluidInputs(TungstenSteel.getFluid(4000))
                 .scannerResearch(b -> b
                         .researchStack(DISK_20.getStackForm())
@@ -1836,7 +1847,7 @@ public class KeQingNET {
                 .input(RANDOM_ACCESS_MEMORY, 4)
                 .input(wireFine, Aluminium, 8)
                 .input(foil, Aluminium, 8)
-                .fluidInputs(Polytetrafluoroethylene.getFluid(4000))
+                .fluidInputs(Epoxy.getFluid(4000))
                 .fluidInputs(SolderingAlloy.getFluid(L * 8))
                 .fluidInputs(Brominatedepoxyresins.getFluid(4000))
                 .fluidInputs(Polyethylene.getFluid(4000))
@@ -1931,7 +1942,7 @@ public class KeQingNET {
                 .input(RANDOM_ACCESS_MEMORY, 4)
                 .input(wireFine, Aluminium, 8)
                 .input(foil, Aluminium, 8)
-                .fluidInputs(Polytetrafluoroethylene.getFluid(4000))
+                .fluidInputs(Epoxy.getFluid(4000))
                 .fluidInputs(SolderingAlloy.getFluid(L * 8))
                 .fluidInputs(Brominatedepoxyresins.getFluid(4000))
                 .fluidInputs(Polyethylene.getFluid(4000))

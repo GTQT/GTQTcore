@@ -12,70 +12,15 @@
         "model": "minecraft:cube_bottom_top",
         "textures": {
           "side": "gregtech:blocks/multiblock/computer/computer_vent",
-          "bottom": "gregtech:blocks/multiblock/computer/computer_top",
-          "top": "gregtech:blocks/multiblock/computer/computer_top"
+          "bottom": "gregtech:blocks/multiblock/computer/computer_vent",
+          "top": "gregtech:blocks/multiblock/computer/computer_vent"
         }
       },
-      "computer_rami": {
+      "computer_casing": {
         "model": "gregtech:cube_2_layer_all",
         "textures": {
-          "bot_all": "gregtech:blocks/multiblock/computer/computer_vent",
-          "top_all":"gregtech:blocks/multiblock/computer/rami"
-        }
-      },
-      "computer_cpui": {
-        "model": "gregtech:cube_2_layer_all",
-        "textures": {
-          "bot_all": "gregtech:blocks/multiblock/computer/computer_vent",
-          "top_all":"gregtech:blocks/multiblock/computer/cpui"
-        }
-      },"computer_gpui": {
-        "model": "gregtech:cube_2_layer_all",
-        "textures": {
-          "bot_all": "gregtech:blocks/multiblock/computer/computer_venti",
-          "top_all":"gregtech:blocks/multiblock/computer/gpui"
-        }
-      },
-
-      "computer_ramii": {
-        "model": "gregtech:cube_2_layer_all",
-        "textures": {
-          "bot_all": "gregtech:blocks/multiblock/computer/computer_vent",
-          "top_all":"gregtech:blocks/multiblock/computer/ramii"
-        }
-      },
-      "computer_cpuii": {
-        "model": "gregtech:cube_2_layer_all",
-        "textures": {
-          "bot_all": "gregtech:blocks/multiblock/computer/computer_vent",
-          "top_all":"gregtech:blocks/multiblock/computer/cpuii"
-        }
-      },"computer_gpuii": {
-        "model": "gregtech:cube_2_layer_all",
-        "textures": {
-          "bot_all": "gregtech:blocks/multiblock/computer/computer_venti",
-          "top_all":"gregtech:blocks/multiblock/computer/gpuii"
-        }
-      },
-
-      "computer_ramiii": {
-        "model": "gregtech:cube_2_layer_all",
-        "textures": {
-          "bot_all": "gregtech:blocks/multiblock/computer/computer_vent",
-          "top_all":"gregtech:blocks/multiblock/computer/ramiii"
-        }
-      },
-      "computer_cpuiii": {
-        "model": "gregtech:cube_2_layer_all",
-        "textures": {
-          "bot_all": "gregtech:blocks/multiblock/computer/computer_vent",
-          "top_all":"gregtech:blocks/multiblock/computer/cpuiii"
-        }
-      },"computer_gpuiii": {
-        "model": "gregtech:cube_2_layer_all",
-        "textures": {
-          "bot_all": "gregtech:blocks/multiblock/computer/computer_venti",
-          "top_all":"gregtech:blocks/multiblock/computer/gpuiii"
+          "bot_all": "gregtech:blocks/multiblock/computer/computer_top",
+          "top_all":"gregtech:blocks/multiblock/computer/computer_top"
         }
       },
       "adv_computer_casing": {

@@ -31,15 +31,7 @@ public class GTQTKQCC extends VariantBlock<GTQTKQCC.CasingType> {
     public static enum CasingType implements IStringSerializable {
 
         COMPUTER_VENT("computer_vent"),
-        COMPUTER_RAMI("computer_rami"),
-        COMPUTER_RAMII("computer_ramii"),
-        COMPUTER_RAMIII("computer_ramiii"),
-        COMPUTER_CPUI("computer_cpui"),
-        COMPUTER_CPUII("computer_cpuii"),
-        COMPUTER_CPUIII("computer_cpuiii"),
-        COMPUTER_GPUI("computer_gpui"),
-        COMPUTER_GPUII("computer_gpuii"),
-        COMPUTER_GPUIII("computer_gpuiii"),
+        KQCC_COMPUTER_CASING("computer_casing"),
 
         ADV_COMPUTER_CASING("adv_computer_casing"),
         ADV_COMPUTER_HEAT_VENT("adv_computer_heat_vent"),

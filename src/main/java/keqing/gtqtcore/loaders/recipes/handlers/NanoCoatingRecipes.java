@@ -145,8 +145,8 @@ public class NanoCoatingRecipes {
                 .input(dust, Carbon, 2)
                 .fluidInputs(Fluorine.getFluid(4000))
                 .fluidOutputs(Polytetrafluoroethylene.getFluid(1000))
-                .recipeLevel(2)
-                .duration(1000).EUt(VA[HV]).buildAndRegister();
+                .recipeLevel(4)
+                .duration(1000).EUt(VA[IV]).buildAndRegister();
 
         CHEMICAL_PLANT.recipeBuilder()
                 .notConsumable(CATALYST_FRAMEWORK_III)

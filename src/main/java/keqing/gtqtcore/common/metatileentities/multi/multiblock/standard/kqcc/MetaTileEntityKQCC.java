@@ -29,6 +29,10 @@ import gregtech.client.renderer.texture.Textures;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.core.sound.GTSoundEvents;
+import keqing.gtqtcore.api.capability.IKQCC;
+import keqing.gtqtcore.api.capability.ILaser;
+import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
+import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
@@ -48,9 +52,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 import static gregtech.api.unification.material.Materials.PCBCoolant;
 import static gregtech.api.unification.material.Materials.Water;
+import static keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility.KQCC_MULTIBLOCK_ABILITY;
+import static keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility.LASER_INPUT;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.LiquidNitrogen;
 import static keqing.gtqtcore.common.block.blocks.GTQTKQCC.CasingType.*;
 
@@ -63,6 +70,8 @@ public class MetaTileEntityKQCC extends MultiblockWithDisplayBase implements IOp
     private int CPU;
     private int GPU;
     private int RAM;
+
+    int length;
 
     int thresholdPercentage=0;
     private IEnergyContainer energyContainer;
@@ -81,6 +90,9 @@ public class MetaTileEntityKQCC extends MultiblockWithDisplayBase implements IOp
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setFloat("HOT", HOT);
         data.setInteger("thresholdPercentage", thresholdPercentage);
+        data.setInteger("CPU", CPU);
+        data.setInteger("GPU", GPU);
+        data.setInteger("RAM", RAM);
         return super.writeToNBT(data);
     }
    
@@ -88,6 +100,9 @@ public class MetaTileEntityKQCC extends MultiblockWithDisplayBase implements IOp
         super.readFromNBT(data);
         HOT = data.getFloat("HOT");
         thresholdPercentage = data.getInteger("thresholdPercentage");
+        CPU = data.getInteger("CPU");
+        GPU = data.getInteger("GPU");
+        RAM = data.getInteger("RAM");
     }
 
     private boolean hasNotEnoughEnergy;
@@ -133,10 +148,12 @@ public class MetaTileEntityKQCC extends MultiblockWithDisplayBase implements IOp
                         .or(abilities(MultiblockAbility.MAINTENANCE_HATCH).setExactLimit(1))
                         .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setMinGlobalLimited(1).setPreviewCount(1))
                         .or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(2).setPreviewCount(1)))
-                .where('A', any())
-
+                .where('A', abilities(GTQTMultiblockAbility.KQCC_MULTIBLOCK_ABILITY)
+                        .or(states(getVentState()))
+                )
                 .build();
     }
+
     public boolean hasMufflerMechanics() {
         return false;
     }
@@ -155,7 +172,10 @@ public class MetaTileEntityKQCC extends MultiblockWithDisplayBase implements IOp
     }
 
     protected IBlockState getCasingState() {
-        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.PTFE_INERT_CASING);
+        return GTQTMetaBlocks.KQCC.getState(KQCC_COMPUTER_CASING);
+    }
+    protected IBlockState getVentState() {
+        return GTQTMetaBlocks.KQCC.getState(COMPUTER_VENT);
     }
     @Override
     public String[] getDescription() {
@@ -164,49 +184,47 @@ public class MetaTileEntityKQCC extends MultiblockWithDisplayBase implements IOp
 
     @Override
     protected ModularUI.Builder createUITemplate(EntityPlayer entityPlayer) {
-        ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND, 260, 240);
-
-
-        builder.image(3, 4, 90, 48, GuiTextures.DISPLAY);
+        ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND, 280, 240);
+        builder.image(3, 4, 110, 48, GuiTextures.DISPLAY);
         builder.dynamicLabel(7, 8, () -> "散热模块", 0xFFFFFF);
-        builder.widget((new AdvancedTextWidget(7, 20, this::addHeatManager, 16777215)).setMaxWidthLimit(90).setClickHandler(this::handleDisplayClick));
+        builder.widget((new AdvancedTextWidget(7, 20, this::addHeatManager, 16777215)).setMaxWidthLimit(110).setClickHandler(this::handleDisplayClick));
 
 
-        builder.image(92, 4, 162, 48, GuiTextures.DISPLAY);
-        builder.dynamicLabel(95, 8, () -> "计算模块", 0xFFFFFF);
-        builder.widget((new AdvancedTextWidget(95, 20, this::addCwtManager, 16777215)).setMaxWidthLimit(162).setClickHandler(this::handleDisplayClick));
+        builder.image(112, 4, 162, 48, GuiTextures.DISPLAY);
+        builder.dynamicLabel(115, 8, () -> "计算模块", 0xFFFFFF);
+        builder.widget((new AdvancedTextWidget(115, 20, this::addCwtManager, 16777215)).setMaxWidthLimit(162).setClickHandler(this::handleDisplayClick));
 
         //UI
-        builder.image(92, 52, 162, 80, GuiTextures.DISPLAY);
-        builder.widget((new AdvancedTextWidget(95, 56, this::ventInfo, 16777215)).setMaxWidthLimit(162).setClickHandler(this::handleDisplayClick));
+        builder.image(112, 52, 162, 80, GuiTextures.DISPLAY);
+        builder.widget((new AdvancedTextWidget(115, 56, this::ventInfo, 16777215)).setMaxWidthLimit(162).setClickHandler(this::handleDisplayClick));
 
         int j=0;
         //1号
-        builder.image(3, 52, 90, 40, GuiTextures.DISPLAY);
-        builder.widget((new AdvancedTextWidget(7, 58, this::addInfo1, 16777215)).setMaxWidthLimit(90).setClickHandler(this::handleDisplayClick));
+        builder.image(3, 52, 110, 40, GuiTextures.DISPLAY);
+        builder.widget((new AdvancedTextWidget(7, 58, this::addInfo1, 16777215)).setMaxWidthLimit(110).setClickHandler(this::handleDisplayClick));
         j++;
         //2号
-        builder.image(3, 52+j*40, 90, 40, GuiTextures.DISPLAY);
-        builder.widget((new AdvancedTextWidget(7, 58+j*40, this::addInfo2, 16777215)).setMaxWidthLimit(90).setClickHandler(this::handleDisplayClick));
+        builder.image(3, 52+j*40, 110, 40, GuiTextures.DISPLAY);
+        builder.widget((new AdvancedTextWidget(7, 58+j*40, this::addInfo2, 16777215)).setMaxWidthLimit(110).setClickHandler(this::handleDisplayClick));
         j++;
         //3号
-        builder.image(3, 52+j*40, 90, 40, GuiTextures.DISPLAY);
-        builder.widget((new AdvancedTextWidget(7, 58+j*40, this::addInfo3, 16777215)).setMaxWidthLimit(90).setClickHandler(this::handleDisplayClick));
+        builder.image(3, 52+j*40, 110, 40, GuiTextures.DISPLAY);
+        builder.widget((new AdvancedTextWidget(7, 58+j*40, this::addInfo3, 16777215)).setMaxWidthLimit(110).setClickHandler(this::handleDisplayClick));
 
         j++;
-        builder.image(3, 52+j*40, 90, 66, GuiTextures.DISPLAY);
-        builder.widget((new AdvancedTextWidget(7, 58+j*40, this::addInfo4, 16777215)).setMaxWidthLimit(90).setClickHandler(this::handleDisplayClick));
+        builder.image(3, 52+j*40, 110, 66, GuiTextures.DISPLAY);
+        builder.widget((new AdvancedTextWidget(7, 58+j*40, this::addInfo4, 16777215)).setMaxWidthLimit(110).setClickHandler(this::handleDisplayClick));
 
         //op
-        builder.widget(new ClickButtonWidget(100, 138, 48, 18, "关机", data -> thresholdPercentage = 0));
-        builder.widget(new ClickButtonWidget(150, 138, 48, 18, "开机", data -> thresholdPercentage = 1));
-        builder.widget(new ClickButtonWidget(200, 138, 48, 18, "超频", data -> thresholdPercentage = 2));
+        builder.widget(new ClickButtonWidget(120, 138, 48, 18, "关机", data -> thresholdPercentage = 0));
+        builder.widget(new ClickButtonWidget(170, 138, 48, 18, "开机", data -> thresholdPercentage = 1));
+        builder.widget(new ClickButtonWidget(220, 138, 48, 18, "超频", data -> thresholdPercentage = 2));
 
-        builder.widget((new ProgressWidget(() -> (double) HOT /50000, 5, 51, 85, 3, GuiTextures.PROGRESS_BAR_FUSION_HEAT, ProgressWidget.MoveType.HORIZONTAL)).setHoverTextConsumer((list) -> addBarHoverText(list, (long) HOT,50000,"热量: %s")));
+        builder.widget((new ProgressWidget(() -> (double) HOT /50000, 5, 51, 105, 3, GuiTextures.PROGRESS_BAR_FUSION_HEAT, ProgressWidget.MoveType.HORIZONTAL)).setHoverTextConsumer((list) -> addBarHoverText(list, (long) HOT,50000,"热量: %s")));
 
-        builder.widget((new ProgressWidget(() ->  (double) returncwt() / (CWTT()*2), 93, 51, 157, 3, GuiTextures.PROGRESS_BAR_HPCA_COMPUTATION, ProgressWidget.MoveType.HORIZONTAL)).setHoverTextConsumer((list) -> addBarHoverText(list, returncwt(),CWTT()* 2L,"CWUt: %s")));
+        builder.widget((new ProgressWidget(() ->  (double) returncwt() / (CWTT()*2), 113, 51, 157, 3, GuiTextures.PROGRESS_BAR_HPCA_COMPUTATION, ProgressWidget.MoveType.HORIZONTAL)).setHoverTextConsumer((list) -> addBarHoverText(list, returncwt(),CWTT()* 2L,"CWUt: %s")));
 
-        builder.bindPlayerInventory(entityPlayer.inventory, GuiTextures.SLOT, 92,160);
+        builder.bindPlayerInventory(entityPlayer.inventory, GuiTextures.SLOT, 112,160);
         return builder;
     }
     public void addBarHoverText(List<ITextComponent> hoverList,long a,long b,String string) {
@@ -272,12 +290,6 @@ public class MetaTileEntityKQCC extends MultiblockWithDisplayBase implements IOp
 
     protected void ventInfo(List<ITextComponent> textList) {
         super.addDisplayText(textList);
-        final int xDir = this.getFrontFacing().getOpposite().getXOffset();
-        final int zDir = this.getFrontFacing().getOpposite().getZOffset();
-        textList.add(new TextComponentTranslation("安装组件："));
-        textList.add(new TextComponentTranslation("%s | %s | %s | %s",getStringFromPos(this.getPos().add(xDir, -1, zDir)),getStringFromPos(this.getPos().add(xDir * 2, -1, zDir * 2)),getStringFromPos(this.getPos().add(xDir * 3, -1, zDir * 3)),getStringFromPos(this.getPos().add(xDir * 4, -1, zDir * 4))));
-        textList.add(new TextComponentTranslation("%s | %s | %s | %s",getStringFromPos(this.getPos().add(xDir, 0, zDir)),getStringFromPos(this.getPos().add(xDir * 2, 0, zDir * 2)),getStringFromPos(this.getPos().add(xDir * 3, 0, zDir * 3)),getStringFromPos(this.getPos().add(xDir * 4, 0, zDir * 4))));
-        textList.add(new TextComponentTranslation("%s | %s | %s | %s",getStringFromPos(this.getPos().add(xDir, 1, zDir)),getStringFromPos(this.getPos().add(xDir * 2, 1, zDir * 2)),getStringFromPos(this.getPos().add(xDir * 3, 1, zDir * 3)),getStringFromPos(this.getPos().add(xDir * 4, 1, zDir * 4))));
         textList.add(new TextComponentTranslation("数据汇总："));
         textList.add(new TextComponentTranslation("CPU： %s | GPU： %s | RAM： %s", CPU,GPU,RAM));
     }
@@ -373,7 +385,7 @@ public class MetaTileEntityKQCC extends MultiblockWithDisplayBase implements IOp
     }
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
-                return Textures.INERT_PTFE_CASING;
+                return GTQTTextures.KQCC_COMMON;
     }
     @Override
     protected void formStructure(PatternMatchContext context) {
@@ -381,32 +393,23 @@ public class MetaTileEntityKQCC extends MultiblockWithDisplayBase implements IOp
         this.energyContainer = new EnergyContainerList(getAbilities(MultiblockAbility.INPUT_ENERGY));
         this.coolantHandler = new FluidTankList(false, getAbilities(MultiblockAbility.IMPORT_FLUIDS));
 
+        List<IKQCC> i = getAbilities(KQCC_MULTIBLOCK_ABILITY);
+        this.length = i.size();
+
+        CPU=0;
+        GPU=0;
+        RAM=0;
+        for(int Q=0;Q<length;Q++) {
+            if(Objects.equals(this.getAbilities(KQCC_MULTIBLOCK_ABILITY).get(Q).getType(), "ram"))
+                CPU+=this.getAbilities(KQCC_MULTIBLOCK_ABILITY).get(Q).getLevel();
+            if(Objects.equals(this.getAbilities(KQCC_MULTIBLOCK_ABILITY).get(Q).getType(), "cpu"))
+                GPU+=this.getAbilities(KQCC_MULTIBLOCK_ABILITY).get(Q).getLevel();
+            if(Objects.equals(this.getAbilities(KQCC_MULTIBLOCK_ABILITY).get(Q).getType(), "gpu"))
+                RAM+=this.getAbilities(KQCC_MULTIBLOCK_ABILITY).get(Q).getLevel();
+        }
     }
-    int shortCPU;
-    int shortGPU;
-    int shortRAM;
     @Override
     protected void updateFormedValid() {
-        //每次提供算力都检查
-        final int xDir = this.getFrontFacing().getOpposite().getXOffset();
-        final int zDir = this.getFrontFacing().getOpposite().getZOffset();
-        int h;
-
-        shortCPU=0;
-        shortGPU=0;
-        shortRAM=0;
-        for(int i=1;i<5;i++) {
-            for (h = -1; h < 2; h++) {
-                if(!cehckPart(this.getPos().add(xDir * i, h, zDir * i)))return;
-            }
-        }
-        if(shortCPU!=CPU)CPU=shortCPU;
-        if(shortGPU!=GPU)GPU=shortGPU;
-        if(shortRAM!=RAM)RAM=shortRAM;
-        shortCPU=0;
-        shortGPU=0;
-        shortRAM=0;
-
         //能量消耗 如果能力多就开放算力输出功能
         consumeEnergy();
 
@@ -446,41 +449,5 @@ public class MetaTileEntityKQCC extends MultiblockWithDisplayBase implements IOp
             }
         }
 
-    }
-    public String getStringFromPos(BlockPos poss)
-    {
-        if(this.getWorld().getBlockState(poss)== GTQTMetaBlocks.KQCC.getState(COMPUTER_VENT)) return"NULL  ";
-        if(this.getWorld().getBlockState(poss)== GTQTMetaBlocks.KQCC.getState(COMPUTER_RAMI))return "RAM I  ";
-        if(this.getWorld().getBlockState(poss)== GTQTMetaBlocks.KQCC.getState(COMPUTER_RAMII))return "RAM II ";
-        if(this.getWorld().getBlockState(poss)== GTQTMetaBlocks.KQCC.getState(COMPUTER_RAMIII))return "RAM III";
-
-        if(this.getWorld().getBlockState(poss)== GTQTMetaBlocks.KQCC.getState(COMPUTER_CPUI))return "CPU I  ";
-        if(this.getWorld().getBlockState(poss)== GTQTMetaBlocks.KQCC.getState(COMPUTER_CPUII))return "CPU II ";
-        if(this.getWorld().getBlockState(poss)== GTQTMetaBlocks.KQCC.getState(COMPUTER_CPUIII))return "CPU III";
-
-        if(this.getWorld().getBlockState(poss)== GTQTMetaBlocks.KQCC.getState(COMPUTER_GPUI))return "GPU I  ";
-        if(this.getWorld().getBlockState(poss)== GTQTMetaBlocks.KQCC.getState(COMPUTER_GPUII))return "GPU II ";
-        if(this.getWorld().getBlockState(poss)== GTQTMetaBlocks.KQCC.getState(COMPUTER_GPUIII))return "GPU III";
-        return "       ";
-    }
-    public boolean cehckPart(BlockPos poss)
-    {
-        if(this.getWorld().getBlockState(poss)== GTQTMetaBlocks.KQCC.getState(COMPUTER_VENT))return true;
-        if(this.getWorld().getBlockState(poss)== GTQTMetaBlocks.KQCC.getState(COMPUTER_RAMI)){shortRAM+=1;return true;}
-        if(this.getWorld().getBlockState(poss)== GTQTMetaBlocks.KQCC.getState(COMPUTER_RAMII)){shortRAM+=2;return true;}
-        if(this.getWorld().getBlockState(poss)== GTQTMetaBlocks.KQCC.getState(COMPUTER_RAMIII)){shortRAM+=3;return true;}
-
-        if(this.getWorld().getBlockState(poss)== GTQTMetaBlocks.KQCC.getState(COMPUTER_CPUI)){shortCPU+=1;return true;}
-        if(this.getWorld().getBlockState(poss)== GTQTMetaBlocks.KQCC.getState(COMPUTER_CPUII)){shortCPU+=2;return true;}
-        if(this.getWorld().getBlockState(poss)== GTQTMetaBlocks.KQCC.getState(COMPUTER_CPUIII)){shortCPU+=3;return true;}
-
-        if(this.getWorld().getBlockState(poss)== GTQTMetaBlocks.KQCC.getState(COMPUTER_GPUI)){shortGPU+=1;return true;}
-        if(this.getWorld().getBlockState(poss)== GTQTMetaBlocks.KQCC.getState(COMPUTER_GPUII)){shortGPU+=2;return true;}
-        if(this.getWorld().getBlockState(poss)== GTQTMetaBlocks.KQCC.getState(COMPUTER_GPUIII)){shortGPU+=3;return true;}
-        return false;
-    }
-    @Override
-    public void checkStructurePattern() {
-        super.checkStructurePattern();
     }
 }

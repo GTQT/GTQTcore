@@ -494,16 +494,7 @@ public class EnzymesRecipes {
                 .fluidInputs(Enzymesba.getFluid(10))
                 .input(dust,Carbon,2)
                 .fluidInputs(Hydrogen.getFluid(4000))
-                .fluidOutputs(Polyethylene.getFluid(1000))
-                .circuitMeta(1)
-                .rate(20)
-                .duration(400).EUt(VA[HV]).buildAndRegister();
-
-        BIOLOGICAL_REACTION_RECIPES.recipeBuilder()
-                .fluidInputs(Enzymesba.getFluid(10))
-                .input(dust,Carbon,2)
-                .fluidInputs(Fluorine.getFluid(4000))
-                .fluidOutputs(Polytetrafluoroethylene.getFluid(1000))
+                .fluidOutputs(Polyethylene.getFluid(1440))
                 .circuitMeta(1)
                 .rate(20)
                 .duration(400).EUt(VA[HV]).buildAndRegister();
@@ -513,10 +504,19 @@ public class EnzymesRecipes {
                 .input(dust,Carbon,6)
                 .fluidInputs(Hydrogen.getFluid(4000))
                 .fluidInputs(Oxygen.getFluid(1000))
-                .fluidOutputs(Epoxy.getFluid(1000))
+                .fluidOutputs(Epoxy.getFluid(1440))
                 .circuitMeta(2)
                 .rate(20)
                 .duration(400).EUt(VA[EV]).buildAndRegister();
+
+        BIOLOGICAL_REACTION_RECIPES.recipeBuilder()
+                .fluidInputs(Enzymesba.getFluid(10))
+                .input(dust,Carbon,2)
+                .fluidInputs(Fluorine.getFluid(4000))
+                .fluidOutputs(Polytetrafluoroethylene.getFluid(1440))
+                .circuitMeta(1)
+                .rate(20)
+                .duration(400).EUt(VA[IV]).buildAndRegister();
     }
 
     private static void SpecialOut(Material material1,int origin, OrePrefix orePrefix1,Material material2,int input, OrePrefix orePrefix2, Material material3,int output, int tier, int rate) {

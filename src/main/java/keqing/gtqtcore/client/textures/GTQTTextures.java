@@ -70,8 +70,20 @@ public class GTQTTextures {
     public static SimpleOverlayRenderer FUSION_MKIII = new SimpleOverlayRenderer("multiblock/casings/machine_casing_fusion_3");
     public static SimpleOverlayRenderer ENERGY_CELL = new SimpleOverlayRenderer("casings/energy_cell_side");
 
+    public static SimpleOverlayRenderer KQCC_COMMON = new SimpleOverlayRenderer("multiblock/computer/computer_top");
+    public static SimpleOverlayRenderer KQCC_RAM_1 = new SimpleOverlayRenderer("multiblock/computer/rami");
+    public static SimpleOverlayRenderer KQCC_CPU_1 = new SimpleOverlayRenderer("multiblock/computer/cpui");
+    public static SimpleOverlayRenderer KQCC_GPU_1 = new SimpleOverlayRenderer("multiblock/computer/gpui");
+
+    public static SimpleOverlayRenderer KQCC_RAM_2 = new SimpleOverlayRenderer("multiblock/computer/ramii");
+    public static SimpleOverlayRenderer KQCC_CPU_2 = new SimpleOverlayRenderer("multiblock/computer/cpuii");
+    public static SimpleOverlayRenderer KQCC_GPU_2 = new SimpleOverlayRenderer("multiblock/computer/gpuii");
+
+    public static SimpleOverlayRenderer KQCC_RAM_3 = new SimpleOverlayRenderer("multiblock/computer/ramiii");
+    public static SimpleOverlayRenderer KQCC_CPU_3 = new SimpleOverlayRenderer("multiblock/computer/cpuiii");
+    public static SimpleOverlayRenderer KQCC_GPU_3 = new SimpleOverlayRenderer("multiblock/computer/gpuiii");
+
     //怎么写？请看
-    //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/client/textures/GSTextures.java
     public static OrientedOverlayRenderer LIGHTNING_ROD_OVERLAY;
     public static OrientedOverlayRenderer CHEMICAL_PLANT;
     public static SimpleOverlayRenderer CATALYST_HATCH;

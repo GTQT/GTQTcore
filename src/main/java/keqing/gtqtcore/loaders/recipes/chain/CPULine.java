@@ -46,14 +46,6 @@ public class CPULine {
     }
 
     private static void Assembler() {
-        //四氟乙烯
-        CHEMICAL_RECIPES.recipeBuilder()
-                .notConsumable(dust,CopperCl)
-                .fluidInputs(Chloroform.getFluid(2000))
-                .fluidInputs(HydrofluoricAcid.getFluid(4000))
-                .fluidOutputs(HydrochloricAcid.getFluid(6000))
-                .fluidOutputs(Tetrafluoroethylene.getFluid(1000))
-                .duration(120).EUt(120).buildAndRegister();
         //
         ASSEMBLER_RECIPES.recipeBuilder()
                 .inputs(HULL[2].getStackForm(4))
@@ -137,7 +129,6 @@ public class CPULine {
                         .researchStack(EMITTER_IV.getStackForm())
                         .EUt(VA[IV]))
                 .duration(200).EUt(7680).buildAndRegister();
-
 
         //射频
         ASSEMBLER_RECIPES.recipeBuilder()
@@ -841,7 +832,7 @@ public class CPULine {
         CHEMICAL_RECIPES.recipeBuilder()
                 .duration(100)
                 .EUt(480)
-                .input(plate,Polytetrafluoroethylene)
+                .input(plate,Epoxy)
                 .input(foil,Platinum,8)
                 .fluidInputs(Bps.getFluid(576))
                 .fluidInputs(StyreneButadieneRubber.getFluid(576))

@@ -211,6 +211,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityRadiationHatch[] RADIATION_HATCH = new MetaTileEntityRadiationHatch[5];
     public static MetaTileEntityElectrodeHatch[] ELECTRODE_HATCH = new MetaTileEntityElectrodeHatch[5];
     public static MetaTileEntityDrillHeadHatch[] DRILL_HEAD_HATCH = new MetaTileEntityDrillHeadHatch[5];
+    public static MetaTileEntityKQCCPartHatch[] KQCC_HATCH = new MetaTileEntityKQCCPartHatch[9];
     public static MetaTileEntityGravitySeparator GRAVITY_SEPARATOR;
     public static MetaTileEntityFrothFlotationTank FROTH_FLOTATION_TANK;
     public static MetaTileEntityOceanPumper OCEAN_PUMPER;
@@ -735,20 +736,31 @@ public class GTQTMetaTileEntities {
         for (int i = 0; i < 5; i++) {
             int id = 15495 + i;
             String name = String.format("radiation_hatch.%s", GTValues.VN[4 + i]);
-            RADIATION_HATCH[i] = registerMetaTileEntity(id, new MetaTileEntityRadiationHatch(gtqtcoreId(name),4+i));
+            RADIATION_HATCH[i] = registerMetaTileEntity(id, new MetaTileEntityRadiationHatch(gtqtcoreId(name), 4 + i));
         }
 
         for (int i = 0; i < 5; i++) {
             int id = 15500 + i;
-            String name = String.format("electrode_hatch.%s", GTValues.VN[i+ 1]);
-            ELECTRODE_HATCH[i] = registerMetaTileEntity(id, new MetaTileEntityElectrodeHatch(gtqtcoreId(name),i+1));
+            String name = String.format("electrode_hatch.%s", GTValues.VN[i + 1]);
+            ELECTRODE_HATCH[i] = registerMetaTileEntity(id, new MetaTileEntityElectrodeHatch(gtqtcoreId(name), i + 1));
         }
         for (int i = 0; i < 5; i++) {
             int id = 15505 + i;
-            String name = String.format("drill_head_hatch.%s", GTValues.VN[i+ 1]);
-            DRILL_HEAD_HATCH[i] = registerMetaTileEntity(id, new MetaTileEntityDrillHeadHatch(gtqtcoreId(name),i+1));
+            String name = String.format("drill_head_hatch.%s", GTValues.VN[i + 1]);
+            DRILL_HEAD_HATCH[i] = registerMetaTileEntity(id, new MetaTileEntityDrillHeadHatch(gtqtcoreId(name), i + 1));
         }
 
+        KQCC_HATCH[0] = registerMetaTileEntity(15510, new MetaTileEntityKQCCPartHatch(gtqtcoreId("kqcc_hatch.ram.1"), "ram", 1));
+        KQCC_HATCH[1] = registerMetaTileEntity(15511, new MetaTileEntityKQCCPartHatch(gtqtcoreId("kqcc_hatch.ram.2"), "ram", 2));
+        KQCC_HATCH[2] = registerMetaTileEntity(15512, new MetaTileEntityKQCCPartHatch(gtqtcoreId("kqcc_hatch.ram.3"), "ram", 3));
+
+        KQCC_HATCH[3] = registerMetaTileEntity(15513, new MetaTileEntityKQCCPartHatch(gtqtcoreId("kqcc_hatch.cpu.1"), "cpu", 1));
+        KQCC_HATCH[4] = registerMetaTileEntity(15514, new MetaTileEntityKQCCPartHatch(gtqtcoreId("kqcc_hatch.cpu.2"), "cpu", 2));
+        KQCC_HATCH[5] = registerMetaTileEntity(15515, new MetaTileEntityKQCCPartHatch(gtqtcoreId("kqcc_hatch.cpu.3"), "cpu", 3));
+
+        KQCC_HATCH[6] = registerMetaTileEntity(15516, new MetaTileEntityKQCCPartHatch(gtqtcoreId("kqcc_hatch.gpu.1"), "gpu", 1));
+        KQCC_HATCH[7] = registerMetaTileEntity(15517, new MetaTileEntityKQCCPartHatch(gtqtcoreId("kqcc_hatch.gpu.2"), "gpu", 2));
+        KQCC_HATCH[8] = registerMetaTileEntity(15518, new MetaTileEntityKQCCPartHatch(gtqtcoreId("kqcc_hatch.gpu.3"), "gpu", 3));
 
         BIO_HATCH = registerMetaTileEntity(15546, new MetaTileEntityBioHatch(gtqtcoreId("bio_hatch")));
         INF_WATER_HATCH = registerMetaTileEntity(15547, new MetaTileInfWaterHatch(gtqtcoreId("infinite_water_hatch")));
