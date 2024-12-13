@@ -23,6 +23,9 @@ public class GTQTCoreConfig {
 
         @Config.Comment({ "Allows cleaning by water instead of a cauldron.", "Default: true" })
         public boolean easyCleaning = true;
+
+        @Config.Comment({ "时间之瓶最大时间储量（单位: 小时）", "Default: 8" })
+        public static int TimeBottleStoreMaxHour = 8;
     }
     public static class WorldGenSwitch {
         @Config.Comment("Chance of generating abandoned base in chunk = 1 / 100 * THIS_VALUE. 0 disables abandoned base generation. Default: 5 ,0 to close"  )

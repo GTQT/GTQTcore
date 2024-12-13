@@ -375,6 +375,7 @@ public class OilChains {
         //含杂预处理
         OIL_POOL.recipeBuilder()
                 .fluidInputs(RawOil.getFluid(1000))
+                .fluidInputs(Demulsifier.getFluid(100))
                 .fluidOutputs(PreTreatedCrudeOilContainingImpurities.getFluid(1000))
                 .fluidOutputs(SaltWater.getFluid(200))
                 .duration(100)
@@ -382,6 +383,7 @@ public class OilChains {
 
         OIL_POOL.recipeBuilder()
                 .fluidInputs(OilHeavy.getFluid(1000))
+                .fluidInputs(Demulsifier.getFluid(100))
                 .fluidOutputs(PreTreatedCrudeOilContainingImpurities.getFluid(1000))
                 .fluidOutputs(SaltWater.getFluid(200))
                 .duration(100)
@@ -389,6 +391,7 @@ public class OilChains {
 
         OIL_POOL.recipeBuilder()
                 .fluidInputs(OilLight.getFluid(1000))
+                .fluidInputs(Demulsifier.getFluid(100))
                 .fluidOutputs(PreTreatedCrudeOilContainingImpurities.getFluid(1000))
                 .fluidOutputs(SaltWater.getFluid(200))
                 .duration(100)
@@ -396,6 +399,7 @@ public class OilChains {
 
         OIL_POOL.recipeBuilder()
                 .fluidInputs(Oil.getFluid(1000))
+                .fluidInputs(Demulsifier.getFluid(100))
                 .fluidOutputs(PreTreatedCrudeOilContainingImpurities.getFluid(1000))
                 .fluidOutputs(SaltWater.getFluid(200))
                 .duration(100)

@@ -84,6 +84,10 @@ public class MetaTileEntityRadiationHatch extends MetaTileEntityMultiblockPart i
     }
 
     public void update() {
+        if(this.getController()==null)
+        {
+            work=false;
+        }
         // 确保槽位存在且不为空
         ItemStack stack = containerInventory.getStackInSlot(0);
         if (stack.isEmpty()) {

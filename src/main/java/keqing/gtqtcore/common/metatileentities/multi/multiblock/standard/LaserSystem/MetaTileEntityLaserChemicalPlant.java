@@ -131,6 +131,7 @@ public class MetaTileEntityLaserChemicalPlant extends RecipeMapLaserMultiblockCo
     }
     @Override
     public boolean checkRecipe(@Nonnull Recipe recipe, boolean consumeIfSuccess) {
+        if(!super.checkRecipe(recipe, consumeIfSuccess))return false;
         return (int)((long) this.getTemp() /1800) >= recipe.getProperty(ChemicalPlantProperties.getInstance(), 0);
     }
     @Override

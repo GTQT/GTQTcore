@@ -41,6 +41,7 @@ import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.gcys.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.heatExchanger.MetaTileEntityHeatExchanger;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.heatExchanger.MetaTileEntityLagerHeatExchanger;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.heatExchanger.MetaTileEntitySmallHeatExchanger;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.heatSystem.MetaTileEntityHeatHatchExchange;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.huge.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.kqcc.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.overwrite.*;
@@ -50,10 +51,7 @@ import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.star.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.steam.MetaTileEntitySawMill;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.steam.MetaTileEntitySteamFermentationVat;
 import keqing.gtqtcore.common.metatileentities.multi.multiblockpart.*;
-import keqing.gtqtcore.common.metatileentities.single.electric.MetaTileEntityBathCondenser;
-import keqing.gtqtcore.common.metatileentities.single.electric.MetaTileEntityLatexCollector;
-import keqing.gtqtcore.common.metatileentities.single.electric.MetaTileEntityParticleAcceleratorIO;
-import keqing.gtqtcore.common.metatileentities.single.electric.MetaTileLaserBooster;
+import keqing.gtqtcore.common.metatileentities.single.electric.*;
 import keqing.gtqtcore.common.metatileentities.single.steam.MetaTileEntitySteamLatexCollector;
 import keqing.gtqtcore.common.metatileentities.storage.MetaTileEntityCommonRubbishBin;
 import keqing.gtqtcore.common.metatileentities.storage.MetaTileEntityFluidRubbishBin;
@@ -123,6 +121,8 @@ public class GTQTMetaTileEntities {
     public static int currentMultiPartID = 16120;
     //////////////////////////
     public static MetaTileEntityBioHatch BIO_HATCH;
+    public static MetaTileEntityHeatHatch[] HEAT_HATCH=new MetaTileEntityHeatHatch[5];
+    public static MetaTileEntityElectricHeater[] ELECTRIC_HEATER=new MetaTileEntityElectricHeater[5];
     public static MetaTileEntityOilPool OIL_POOL;
     public static MetaTileEntityAlgaeFarm ALGAE_FARM;
     public static MetaTileEntityComponentAssemblyLine COMPONENT_ASSEMBLY_LINE;
@@ -228,6 +228,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityAirIntakeHatch EXTREME_AIR_INTAKE_HATCH;
     public static MetaTileEntitySingleItemInputBus SINGLE_ITEM_INPUT_BUS;
     public static MetaTileEntitySuperInputBus SUPER_INPUT_BUS;
+    public static MetaTileEntitySingleInputBus SINGLE_INPUT_BUS;
     public static MetaTileEntityVacuumDistillationTower VACUUM_DISTILLATION_TOWER;
     public static MetaTileEntitySteamLatexCollector[] STEAM_LATEX_COLLECTOR = new MetaTileEntitySteamLatexCollector[2];
     public static MetaTileEntityLatexCollector[] LATEX_COLLECTOR = new MetaTileEntityLatexCollector[4];
@@ -330,6 +331,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityEnergySubstation ENERGY_SUBSTATION;
     public static MetaTileEntityNaquadahFuelFactory NAQUADAH_FUEL_FACTORY;
     public static MetaTileEntityPlasmaCondenser PLASMA_CONDENSER;
+    public static MetaTileEntityHeatHatchExchange HEAT_HATCH_EXCHANGE;
     public static MetaTileEntityDimensionallyTranscendentPlasmaForge DIMENSIONALLY_TRANSCENDENT_PLASMA_FORGE;
     public static MetaTileEntityIndustrialMacerator INDUSTRIAL_MACERATOR;
     public static MetaTileEntityIndustrialCentrifuge INDUSTRIAL_CENTRIFUGE;
@@ -582,6 +584,7 @@ public class GTQTMetaTileEntities {
         ENERGY_SUBSTATION = registerMetaTileEntity(3220, new MetaTileEntityEnergySubstation(gtqtcoreId("energy_substation")));
         NAQUADAH_FUEL_FACTORY = registerMetaTileEntity(3221, new MetaTileEntityNaquadahFuelFactory(gtqtcoreId("naquadah_fuel_factory")));
         PLASMA_CONDENSER = registerMetaTileEntity(3222, new MetaTileEntityPlasmaCondenser(gtqtcoreId("plasma_condenser")));
+        HEAT_HATCH_EXCHANGE = registerMetaTileEntity(3223, new MetaTileEntityHeatHatchExchange(gtqtcoreId("heat_hatch_exchange")));
 
         //重写设备
         DISTILLATION_TOWER = registerMetaTileEntity(3250, new MetaTileEntityDistillationTower(gtqtcoreId("distillation_tower"), true));
@@ -762,6 +765,16 @@ public class GTQTMetaTileEntities {
         KQCC_HATCH[7] = registerMetaTileEntity(15517, new MetaTileEntityKQCCPartHatch(gtqtcoreId("kqcc_hatch.gpu.2"), "gpu", 2));
         KQCC_HATCH[8] = registerMetaTileEntity(15518, new MetaTileEntityKQCCPartHatch(gtqtcoreId("kqcc_hatch.gpu.3"), "gpu", 3));
 
+        for (int i = 0; i < 5; i++) {
+            int id = 15520 + i;
+            String name = String.format("heat_hatch.%s", GTValues.VN[i + 1]);
+            HEAT_HATCH[i] = registerMetaTileEntity(id, new MetaTileEntityHeatHatch(gtqtcoreId(name), i + 1));
+        }
+        for (int i = 0; i < 5; i++) {
+            int id = 15525 + i;
+            String name = String.format("electric_heater.%s", GTValues.VN[i + 1]);
+            ELECTRIC_HEATER[i] = registerMetaTileEntity(id, new MetaTileEntityElectricHeater(gtqtcoreId(name), i + 1));
+        }
         BIO_HATCH = registerMetaTileEntity(15546, new MetaTileEntityBioHatch(gtqtcoreId("bio_hatch")));
         INF_WATER_HATCH = registerMetaTileEntity(15547, new MetaTileInfWaterHatch(gtqtcoreId("infinite_water_hatch")));
         CATALYST_HATCH = registerMetaTileEntity(15548, new MetaTileEntityCatalystHatch(gtqtcoreId("catalyst_hatch")));
@@ -788,6 +801,7 @@ public class GTQTMetaTileEntities {
         EXTREME_AIR_INTAKE_HATCH = registerMetaTileEntity(15567, new MetaTileEntityAirIntakeHatch(gtqtcoreId("extreme_air_intake_hatch"), GTValues.LuV, 256_000, 8000));
         SINGLE_ITEM_INPUT_BUS = registerMetaTileEntity(15568, new MetaTileEntitySingleItemInputBus(gtqtcoreId("single_item_input_bus")));
         SUPER_INPUT_BUS = registerMetaTileEntity(15569, new MetaTileEntitySuperInputBus(gtqtcoreId("super_input_bus")));
+        SINGLE_INPUT_BUS = registerMetaTileEntity(15570, new MetaTileEntitySingleInputBus(gtqtcoreId("single_input_bus")));
 
         ROTOR_HOLDER[6] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityRotorHolder(gtqtcoreId("rotor_holder.uhv"), GTValues.UHV));
         ROTOR_HOLDER[7] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityRotorHolder(gtqtcoreId("rotor_holder.uev"), GTValues.UEV));

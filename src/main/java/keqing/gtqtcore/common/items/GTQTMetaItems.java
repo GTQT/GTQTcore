@@ -374,6 +374,12 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem AE_A;
     public static MetaItem<?>.MetaValueItem AE_B;
     public static MetaItem<?>.MetaValueItem AE_C;
+
+    public static MetaItem<?>.MetaValueItem HEAT_SHIELD_MKI;
+    public static MetaItem<?>.MetaValueItem HEAT_SHIELD_MKII;
+    public static MetaItem<?>.MetaValueItem HEAT_SHIELD_MKIII;
+    public static MetaItem<?>.MetaValueItem HEAT_SHIELD_MKIV;
+    public static MetaItem<?>.MetaValueItem HEAT_SHIELD_MKV;
     // Crafting Components
     public static MetaItem<?>.MetaValueItem COMPONENT_GRINDER_BORON_NITRIDE;
     // Voltage Coils

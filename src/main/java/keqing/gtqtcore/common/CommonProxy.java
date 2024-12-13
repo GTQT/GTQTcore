@@ -330,15 +330,15 @@ public class CommonProxy {
         NeutronActivatorIOPartProperty.registeredPart(3,"氚核");
         NeutronActivatorIOPartProperty.registeredPart(4,"氦核（α粒子）");
         NeutronActivatorIOPartProperty.registeredPart(5,"电子");
-        registerCasingTier(0, "一级");
-        registerCasingTier(1, "二级");
-        registerCasingTier(2, "三级");
-        registerCasingTier(3, "四级");
-        registerCasingTier(4, "五级");
-        registerCasingTier(5, "六级");
-        registerCasingTier(6, "七级");
-        registerCasingTier(7, "八级");
-        registerCasingTier(8, "九级");
+        registerCasingTier(1, "一级");
+        registerCasingTier(2, "二级");
+        registerCasingTier(3, "三级");
+        registerCasingTier(4, "四级");
+        registerCasingTier(5, "五级");
+        registerCasingTier(6, "六级");
+        registerCasingTier(7, "七级");
+        registerCasingTier(8, "八级");
+        registerCasingTier(9, "九级");
 
         int[] array = {-3,-2,-1,0,1, 2, 3, 4,5,6,7,8,81,82,83,84};
         for (int j : array) MDProperties.registeredTier(j, GTQTOreHelper.getInfo(j));

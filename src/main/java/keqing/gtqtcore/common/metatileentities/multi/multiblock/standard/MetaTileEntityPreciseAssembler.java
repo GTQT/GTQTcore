@@ -132,16 +132,15 @@ public class MetaTileEntityPreciseAssembler extends MultiMapMultiblockController
 
     public boolean checkRecipe(@Nonnull Recipe recipe,
                                boolean consumeIfSuccess) {
-
-        if(this.getRecipeMap() == ASSEMBLER_RECIPES)return super.checkRecipe(recipe, consumeIfSuccess);
-        return super.checkRecipe(recipe, consumeIfSuccess) && recipe.getProperty(PAProperty.getInstance(), 0) <= CasingTier;
+        if (!super.checkRecipe(recipe, consumeIfSuccess)) return false;
+        if(this.getRecipeMap() == ASSEMBLER_RECIPES)return true;
+        else return recipe.getProperty(PAProperty.getInstance(), 0) <= CasingTier;
     }
 
     @Override
     public List<MultiblockShapeInfo> getMatchingShapes() {
         ArrayList<MultiblockShapeInfo> shapeInfo = new ArrayList<>();
-        MultiblockShapeInfo.Builder builder = null;
-
+        MultiblockShapeInfo.Builder builder;
             builder = MultiblockShapeInfo.builder()
                     .aisle("ETCCCCCCC", "F       F", "F       F", "F       F", "XYZCCCCCC")
                     .aisle("CMMMMMMMC", "CGGGGGGGC", "CGGGGGGGC", "CGGGGGGGC", "CCCCCCCCC")

@@ -67,22 +67,13 @@ public class MetaTileEntityBlazingBlastFurnace extends GTQTRecipeMapMultiblockCo
     public MetaTileEntityBlazingBlastFurnace(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{
                 RecipeMaps.BLAST_RECIPES,
-                GTQTcoreRecipeMaps.BURNER_REACTOR_RECIPES,
-                DRYER_RECIPES
+                GTQTcoreRecipeMaps.BURNER_REACTOR_RECIPES
         });
         this.recipeMapWorkable = new BlazingBlastFurnaceWorkable(this);
     }
 
     private static IBlockState getCasingState() {
         return GTQTMetaBlocks.TURBINE_CASING.getState(GTQTTurbineCasing.TurbineCasingType.ADVANCED_INVAR_CASING);
-    }
-
-    /**
-     * @param heatingCoilLevel the level to get the parallel for
-     * @return the max parallel for the heating coil level
-     */
-    public static int getMaxParallel(int heatingCoilLevel) {
-        return heatingCoilLevel;
     }
 
     @Override
@@ -138,6 +129,7 @@ public class MetaTileEntityBlazingBlastFurnace extends GTQTRecipeMapMultiblockCo
 
     @Override
     public boolean checkRecipe(@Nonnull Recipe recipe, boolean consumeIfSuccess) {
+        if (!super.checkRecipe(recipe, consumeIfSuccess)) return false;
         return this.blastFurnaceTemperature >= recipe.getProperty(TemperatureProperty.getInstance(), 0);
     }
 
@@ -149,7 +141,20 @@ public class MetaTileEntityBlazingBlastFurnace extends GTQTRecipeMapMultiblockCo
     @Override
     public List<MultiblockShapeInfo> getMatchingShapes() {
         ArrayList<MultiblockShapeInfo> shapeInfo = new ArrayList<>();
-        MultiblockShapeInfo.Builder builder = MultiblockShapeInfo.builder().aisle("EEM", "CCC", "CCC", "CCC", "XXX").aisle("FXD", "C#C", "C#C", "C#C", "XHX").aisle("ISO", "CCC", "CCC", "CCC", "XXX").where('X', GTQTMetaBlocks.TURBINE_CASING.getState(GTQTTurbineCasing.TurbineCasingType.ADVANCED_INVAR_CASING)).where('S', GTQTMetaTileEntities.BLAZING_BLAST_FURNACE, EnumFacing.SOUTH).where('#', Blocks.AIR.getDefaultState()).where('E', MetaTileEntities.ENERGY_INPUT_HATCH[GTValues.LV], EnumFacing.NORTH).where('I', MetaTileEntities.ITEM_IMPORT_BUS[GTValues.LV], EnumFacing.SOUTH).where('O', MetaTileEntities.ITEM_EXPORT_BUS[GTValues.LV], EnumFacing.SOUTH).where('F', MetaTileEntities.FLUID_IMPORT_HATCH[GTValues.LV], EnumFacing.WEST).where('D', MetaTileEntities.FLUID_EXPORT_HATCH[GTValues.LV], EnumFacing.EAST).where('H', MetaTileEntities.MUFFLER_HATCH[GTValues.LV], EnumFacing.UP).where('M', () -> ConfigHolder.machines.enableMaintenance ? MetaTileEntities.MAINTENANCE_HATCH : GTQTMetaBlocks.TURBINE_CASING.getState(GTQTTurbineCasing.TurbineCasingType.ADVANCED_INVAR_CASING), EnumFacing.NORTH);
+        MultiblockShapeInfo.Builder builder = MultiblockShapeInfo.builder()
+                .aisle("EEM", "CCC", "CCC", "CCC", "XXX")
+                .aisle("FXD", "C#C", "C#C", "C#C", "XHX")
+                .aisle("ISO", "CCC", "CCC", "CCC", "XXX")
+                .where('X', GTQTMetaBlocks.TURBINE_CASING.getState(GTQTTurbineCasing.TurbineCasingType.ADVANCED_INVAR_CASING))
+                .where('S', GTQTMetaTileEntities.BLAZING_BLAST_FURNACE, EnumFacing.SOUTH)
+                .where('#', Blocks.AIR.getDefaultState())
+                .where('E', MetaTileEntities.ENERGY_INPUT_HATCH[GTValues.LV], EnumFacing.NORTH)
+                .where('I', MetaTileEntities.ITEM_IMPORT_BUS[GTValues.LV], EnumFacing.SOUTH)
+                .where('O', MetaTileEntities.ITEM_EXPORT_BUS[GTValues.LV], EnumFacing.SOUTH)
+                .where('F', MetaTileEntities.FLUID_IMPORT_HATCH[GTValues.LV], EnumFacing.WEST)
+                .where('D', MetaTileEntities.FLUID_EXPORT_HATCH[GTValues.LV], EnumFacing.EAST)
+                .where('H', MetaTileEntities.MUFFLER_HATCH[GTValues.LV], EnumFacing.UP)
+                .where('M', () -> ConfigHolder.machines.enableMaintenance ? MetaTileEntities.MAINTENANCE_HATCH : GTQTMetaBlocks.TURBINE_CASING.getState(GTQTTurbineCasing.TurbineCasingType.ADVANCED_INVAR_CASING), EnumFacing.NORTH);
         GregTechAPI.HEATING_COILS.entrySet().stream().sorted(Comparator.comparingInt(entry -> entry.getValue().getTier())).forEach(entry -> shapeInfo.add(builder.where('C', entry.getKey()).build()));
         return shapeInfo;
     }

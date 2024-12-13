@@ -60,104 +60,7 @@ import java.util.List;
 
 import static gregtech.api.unification.material.Materials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.Demulsifier;
-//预沉降池
 public class MetaTileEntityOilPool extends NoEnergyMultiblockController {
-
-    float poruji; //破乳剂
-    float amount;  //水量
-    float rate=0;   //破乳度
-    double sperate;//盐度
-    //需要加水将盐度下降到10%，根据加水量添加破乳剂，反应片刻后破乳度达到80%排放
-
-    public NBTTagCompound writeToNBT(NBTTagCompound data) {
-        data.setDouble("sperate", sperate);
-        data.setDouble("poruji", poruji);
-        data.setDouble("amount", amount);
-        return super.writeToNBT(data);
-    }
-
-    public void readFromNBT(NBTTagCompound data) {
-        sperate = data.getInteger("sperate");
-        poruji = data.getInteger("poruji");
-        amount = data.getInteger("amount");
-        super.readFromNBT(data);
-    }
-
-    @Override
-    public void writeInitialSyncData(PacketBuffer buf) {
-        super.writeInitialSyncData(buf);
-        buf.writeDouble(sperate);
-    }
-
-    @Override
-    public void receiveInitialSyncData(PacketBuffer buf) {
-        super.receiveInitialSyncData(buf);
-        sperate = buf.readDouble();
-    }
-
-
-    @Override
-    @Nonnull
-    protected Widget getFlexButton(int x, int y, int width, int height) {
-        WidgetGroup group = new WidgetGroup(x, y, width, height);
-        group.addWidget(new ClickButtonWidget(0, 0, 18, 18, "", this::clear)
-                .setButtonTexture(GuiTextures.BUTTON_THROTTLE_MINUS)
-                .setTooltipText("我不要了！"));
-
-        return group;
-    }
-
-    private void clear(Widget.ClickData clickData) {
-        amount=0;
-        rate=0;
-    }
-    protected class AKLogic extends NoEnergyMultiblockRecipeLogic {
-
-        FluidStack WATER = Water.getFluid(20);
-
-        FluidStack PORUJI = Demulsifier.getFluid(1);
-        @Override
-        public void update() {
-            super.update();
-            IMultipleTankHandler inputTank = getInputFluidInventory();
-            if (WATER.isFluidStackIdentical(inputTank.drain(WATER, false))) {
-                if(amount<10000) {
-                    inputTank.drain(WATER, true);
-                    amount = amount + 20;
-                }
-            }
-            if (poruji<10000&&PORUJI.isFluidStackIdentical(inputTank.drain(PORUJI, false))) {
-                inputTank.drain(PORUJI, true);
-                poruji = poruji + 20;
-            }
-
-        }
-        public void setMaxProgress(int maxProgress) {
-        }
-        protected void updateRecipeProgress() {
-            sperate=80;
-            if (this.canRecipeProgress && this.drawEnergy(this.recipeEUt, false)) {
-                sperate=(1600/(2000+amount))*100;
-                if(sperate<=20&&poruji>1&&rate<1000) {
-                    rate=rate+3*(6000/amount);
-                    poruji=poruji-1;
-                    if(rate>=800)
-                    {
-                        if (++progressTime > maxProgressTime)
-                        {
-                            completeRecipe();
-                            rate=0;
-                            if(amount>2000) amount=amount-2000;
-                            else amount=0;
-                        }
-                    }
-                }
-            }
-        }
-        public AKLogic(NoEnergyMultiblockController tileEntity) {
-            super(tileEntity, tileEntity.recipeMap);
-        }
-    }
 
     @Override
     public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
@@ -181,31 +84,8 @@ public class MetaTileEntityOilPool extends NoEnergyMultiblockController {
         }
     }
 
-    @Override
-    protected void addDisplayText(List<ITextComponent> textList) {
-        super.addDisplayText(textList);
-        if (isStructureFormed()) {
-            textList.add(new TextComponentTranslation("gtqtcore.multiblock.op.sperate",sperate));
-            textList.add(new TextComponentTranslation("gtqtcore.multiblock.op.rate", rate));
-            textList.add(new TextComponentTranslation("gtqtcore.multiblock.op.amount",amount ));
-            textList.add(new TextComponentTranslation("gtqtcore.multiblock.op.poruji", poruji));
-            if (getInputFluidInventory() != null) {
-                FluidStack STACK = getInputFluidInventory().drain(Water.getFluid(Integer.MAX_VALUE), false);
-                int liquidOxygenAmount = STACK == null ? 0 : STACK.amount;
-                textList.add(new TextComponentTranslation("gtqtcore.multiblock.op.amount1", TextFormattingUtil.formatNumbers((liquidOxygenAmount))));
-            }
-            if (getInputFluidInventory() != null) {
-                FluidStack STACK = getInputFluidInventory().drain(Demulsifier.getFluid(Integer.MAX_VALUE), false);
-                int liquidOxygenAmount = STACK == null ? 0 : STACK.amount;
-                textList.add(new TextComponentTranslation("gtqtcore.multiblock.op.amount2", TextFormattingUtil.formatNumbers((liquidOxygenAmount))));
-            }
-
-        }
-    }
-
     public MetaTileEntityOilPool(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.OIL_POOL);
-        this.recipeMapWorkable = new MetaTileEntityOilPool.AKLogic(this);
     }
 
     @Override

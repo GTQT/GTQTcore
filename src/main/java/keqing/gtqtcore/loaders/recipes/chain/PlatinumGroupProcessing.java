@@ -266,6 +266,7 @@ public class PlatinumGroupProcessing {
                 .output(dust, OsmiumTetroxide, 5)
                 .output(dust, Salt, 4)
                 .temperature(1304)
+                .circuitMeta(2)
                 .duration(200).EUt(VA[IV]).buildAndRegister();
 
         // Ir2O3 + 6HCl -> 2IrCl3 + 3H2O

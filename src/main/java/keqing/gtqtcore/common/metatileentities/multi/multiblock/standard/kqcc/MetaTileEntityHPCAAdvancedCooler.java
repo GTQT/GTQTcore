@@ -60,8 +60,8 @@ public class MetaTileEntityHPCAAdvancedCooler extends MetaTileEntityHPCAComponen
     @Override//维持(EU/t) T/F
     public int getUpkeepEUt() {
         if (isDamaged())
-            return GTValues.VA[supers ? GTValues.UEV : GTValues.UV];
-        return GTValues.VA[ultimate ? GTValues.UIV : GTValues.UV];
+            return GTValues.VA[supers ? 8 : 6];
+        return GTValues.VA[ultimate ? 9 : 6];
     }
 
     @Override//冷却量 T/F

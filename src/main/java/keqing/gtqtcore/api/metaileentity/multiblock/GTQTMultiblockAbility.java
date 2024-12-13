@@ -16,6 +16,7 @@ public class GTQTMultiblockAbility {
     public static final MultiblockAbility<IElectrode> ELECTRODE_MULTIBLOCK_ABILITY = new MultiblockAbility<>("electrode");
     public static final MultiblockAbility<IDrillHead> DRILL_HEAD_MULTIBLOCK_ABILITY = new MultiblockAbility<>("drill_head");
     public static final MultiblockAbility<IKQCC> KQCC_MULTIBLOCK_ABILITY = new MultiblockAbility<>("kqcc");
+    public static final MultiblockAbility<IHeat> HEAT_MULTIBLOCK_ABILITY = new MultiblockAbility<>("heat");
 
 
     public static final MultiblockAbility<ILaser> LASER_INPUT = new MultiblockAbility<>("laser_input");

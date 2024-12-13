@@ -249,6 +249,7 @@ public class MaterialOreChains {
                 .output(dust, OsmiumTetroxide, 5)
                 .output(dust, Salt, 4)
                 .blastFurnaceTemp(5400)
+                .circuitMeta(1)
                 .buildAndRegister();
 
         BLAST_RECIPES.recipeBuilder()

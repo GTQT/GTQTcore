@@ -53,12 +53,12 @@ public class MetaTileEntityHPCAAdvancedComputation extends MetaTileEntityHPCACom
 
     @Override//维持(EU/t) T/F
     public int getUpkeepEUt() {
-        return GTValues.VA[ultimate ? GTValues.UHV: GTValues.UV ];
+        return GTValues.VA[ultimate ? 8: 6 ];
     }
 
     @Override//最大(EU/t) T/F
     public int getMaxEUt() {
-        return GTValues.VA[ultimate ? GTValues.UIV : GTValues.UEV ];
+        return GTValues.VA[ultimate ? 9 : 6 ];
     }
 
     @Override//算力 T/F

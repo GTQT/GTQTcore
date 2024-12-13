@@ -55,38 +55,22 @@ import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.DRYER_RECIPES;
 
 public class MetaTileEntityVacuumDryingFurnace extends MultiMapMultiblockController implements IHeatingCoil {
 
-    private int temperature;
     int tier;
+    private int temperature;
 
     public MetaTileEntityVacuumDryingFurnace(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{
-                DRYER_RECIPES,
-                GTQTcoreRecipeMaps.VACUUM_DRYING_FURNACE_RECIPES});
+                GTQTcoreRecipeMaps.VACUUM_DRYING_FURNACE_RECIPES,
+                DRYER_RECIPES
+        });
         this.recipeMapWorkable = new VacuumDryingFurnaceWorkableHandler(this);
     }
-    private class VacuumDryingFurnaceWorkableHandler extends MultiblockRecipeLogic {
-        private boolean isVacuumDryingMode() {
-            return this.getRecipeMap() == GTQTcoreRecipeMaps.VACUUM_DRYING_FURNACE_RECIPES;
-        }
-        public VacuumDryingFurnaceWorkableHandler(RecipeMapMultiblockController tileEntity) {
-            super(tileEntity);
-        }
-        @Override
-        public int getParallelLimit() {
-            if(isVacuumDryingMode()) {
-                return (int) Math.pow(2,tier);
-            }
-            return 1;
-        }
-        protected void modifyOverclockPre( int[] values, IRecipePropertyStorage storage) {
-            super.modifyOverclockPre(values, storage);
-            values[0] = OverclockingLogic.applyCoilEUtDiscount(values[0], ((IHeatingCoil)this.metaTileEntity).getCurrentTemperature(), (Integer)storage.getRecipePropertyValue(TemperatureProperty.getInstance(), 0));
-        }
 
-        protected  int[] runOverclockingLogic( IRecipePropertyStorage propertyStorage, int recipeEUt, long maxVoltage, int duration, int amountOC) {
-            return OverclockingLogic.heatingCoilOverclockingLogic(Math.abs(recipeEUt), maxVoltage, duration, amountOC, ((IHeatingCoil)this.metaTileEntity).getCurrentTemperature(), (Integer)propertyStorage.getRecipePropertyValue(TemperatureProperty.getInstance(), 0));
-        }
+    @Nonnull
+    private static IBlockState getCasingState() {
+        return GTQTMetaBlocks.ISA_CASING.getState(GTQTIsaCasing.CasingType.VACUUM_CASING);
     }
+
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity holder) {
         return new MetaTileEntityVacuumDryingFurnace(metaTileEntityId);
@@ -107,9 +91,8 @@ public class MetaTileEntityVacuumDryingFurnace extends MultiMapMultiblockControl
         Object type = context.get("CoilType");
         if (type instanceof BlockWireCoil.CoilType) {
             this.temperature = ((BlockWireCoil.CoilType) type).getCoilTemperature();
-            tier = Math.min(((BlockWireCoil.CoilType) type).getTier(),32);
-        }
-        else
+            tier = Math.min(((BlockWireCoil.CoilType) type).getTier(), 32);
+        } else
             this.temperature = BlockWireCoil.CoilType.CUPRONICKEL.getCoilTemperature();
 
         this.temperature += 100 * Math.max(0, GTUtility.getTierByVoltage(getEnergyContainer().getInputVoltage()) - GTValues.MV);
@@ -123,7 +106,10 @@ public class MetaTileEntityVacuumDryingFurnace extends MultiMapMultiblockControl
 
     @Override
     public boolean checkRecipe(@Nonnull Recipe recipe, boolean consumeIfSuccess) {
-        return this.temperature >= recipe.getProperty(TemperatureProperty.getInstance(), 0);
+        if (!super.checkRecipe(recipe, consumeIfSuccess)) return false;
+        if (recipe.hasProperty(TemperatureProperty.getInstance()))
+            return this.temperature >= recipe.getProperty(TemperatureProperty.getInstance(), 0);
+        else return true;
     }
 
     @Nonnull
@@ -134,18 +120,13 @@ public class MetaTileEntityVacuumDryingFurnace extends MultiMapMultiblockControl
                 .aisle("XXX", "C#C", "C#C", "C#C", "XMX")
                 .aisle("XSX", "CCC", "CCC", "CCC", "XXX")
                 .where('S', this.selfPredicate())
-                .where('X', states(new IBlockState[]{this.getCasingState()})
+                .where('X', states(getCasingState())
                         .setMinGlobalLimited(9)
                         .or(this.autoAbilities(true, true, true, true, true, true, false)))
-                .where('M', abilities(new MultiblockAbility[]{MultiblockAbility.MUFFLER_HATCH}))
+                .where('M', abilities(MultiblockAbility.MUFFLER_HATCH))
                 .where('C', heatingCoils())
                 .where('#', air())
                 .build();
-    }
-
-    @Nonnull
-    private static IBlockState getCasingState() {
-       return GTQTMetaBlocks.ISA_CASING.getState(GTQTIsaCasing.CasingType.VACUUM_CASING);
     }
 
     @Override
@@ -204,9 +185,7 @@ public class MetaTileEntityVacuumDryingFurnace extends MultiMapMultiblockControl
                     .where('D', MetaTileEntities.FLUID_EXPORT_HATCH[4], EnumFacing.EAST)
                     .where('H', MetaTileEntities.MUFFLER_HATCH[1], EnumFacing.UP)
                     .where('#', Blocks.AIR.getDefaultState())
-                    .where('M', () -> {
-                        return ConfigHolder.machines.enableMaintenance ? MetaTileEntities.MAINTENANCE_HATCH :  GTQTMetaBlocks.ISA_CASING.getState(GTQTIsaCasing.CasingType.VACUUM_CASING);
-                    }, EnumFacing.NORTH);
+                    .where('M', () -> ConfigHolder.machines.enableMaintenance ? MetaTileEntities.MAINTENANCE_HATCH : GTQTMetaBlocks.ISA_CASING.getState(GTQTIsaCasing.CasingType.VACUUM_CASING), EnumFacing.NORTH);
         }
         MultiblockShapeInfo.Builder finalBuilder = builder;
         GregTechAPI.HEATING_COILS.entrySet().stream()
@@ -217,5 +196,25 @@ public class MetaTileEntityVacuumDryingFurnace extends MultiMapMultiblockControl
                     }
                 });
         return shapeInfo;
+    }
+
+    private class VacuumDryingFurnaceWorkableHandler extends MultiblockRecipeLogic {
+        public VacuumDryingFurnaceWorkableHandler(RecipeMapMultiblockController tileEntity) {
+            super(tileEntity);
+        }
+
+        @Override
+        public int getParallelLimit() {
+            return (int) Math.pow(2, tier);
+        }
+
+        protected void modifyOverclockPre(int[] values, IRecipePropertyStorage storage) {
+            super.modifyOverclockPre(values, storage);
+            values[0] = OverclockingLogic.applyCoilEUtDiscount(values[0], ((IHeatingCoil) this.metaTileEntity).getCurrentTemperature(), storage.getRecipePropertyValue(TemperatureProperty.getInstance(), 0));
+        }
+
+        protected int[] runOverclockingLogic(IRecipePropertyStorage propertyStorage, int recipeEUt, long maxVoltage, int duration, int amountOC) {
+            return OverclockingLogic.heatingCoilOverclockingLogic(Math.abs(recipeEUt), maxVoltage, duration, amountOC, ((IHeatingCoil) this.metaTileEntity).getCurrentTemperature(), propertyStorage.getRecipePropertyValue(TemperatureProperty.getInstance(), 0));
+        }
     }
 }

@@ -1,41 +1,32 @@
 package keqing.gtqtcore.common.items.behaviors;
 
-import gregtech.api.capability.IActiveOutputSide;
-import gregtech.api.capability.IGhostSlotConfigurable;
-import gregtech.api.capability.impl.GhostCircuitItemStackHandler;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.ModularUI;
-import gregtech.api.gui.widgets.*;
+import gregtech.api.gui.widgets.ClickButtonWidget;
 import gregtech.api.items.gui.ItemUIFactory;
 import gregtech.api.items.gui.PlayerInventoryHolder;
 import gregtech.api.items.metaitem.stats.IItemBehaviour;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.SimpleMachineMetaTileEntity;
-import gregtech.api.metatileentity.multiblock.MultiblockControllerBase;
-import gregtech.api.terminal.os.TerminalOSWidget;
 import gregtech.api.util.GTUtility;
-import gregtech.common.entities.DynamiteEntity;
-import gregtech.common.terminal.app.console.ConsoleApp;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.List;
-import java.util.function.Function;
-import java.util.function.IntSupplier;
 
-public class MTECopyCardBehaviors implements IItemBehaviour , ItemUIFactory {
-    public MTECopyCardBehaviors() {}
+public class MTECopyCardBehaviors implements IItemBehaviour, ItemUIFactory {
     boolean isAutoOutputItems;
     boolean isAutoOutputFluids;
     boolean isAllowInputFromOutputSideItems;
@@ -43,10 +34,38 @@ public class MTECopyCardBehaviors implements IItemBehaviour , ItemUIFactory {
     private EnumFacing frontFacing;
     private EnumFacing outputFacingItems;
     private EnumFacing outputFacingFluids;
+    private int circuit;
 
-    int circuit=0;
+    public MTECopyCardBehaviors() {
+    }
+
+    private static int getCircuitValue(MetaTileEntity mte) throws NoSuchFieldException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
+        Field circuitInventoryField = SimpleMachineMetaTileEntity.class.getDeclaredField("circuitInventory");
+        circuitInventoryField.setAccessible(true);
+        Object circuitInventory = circuitInventoryField.get(mte);
+
+        // 使用反射调用 getCircuitValue 方法
+        Method getCircuitValueMethod = circuitInventory.getClass().getDeclaredMethod("getCircuitValue");
+        getCircuitValueMethod.setAccessible(true);
+        int circuitValue = (int) getCircuitValueMethod.invoke(circuitInventory);
+        return circuitValue;
+    }
+
     public void addInformation(ItemStack stack, List<String> lines) {
-
+        lines.add("电路: " + circuit);
+        lines.add("自动输出物品: " + (isAutoOutputItems ? "是" : "否"));
+        lines.add("自动输出流体: " + (isAutoOutputFluids ? "是" : "否"));
+        lines.add("允许从输出侧输入物品: " + (isAllowInputFromOutputSideItems ? "是" : "否"));
+        lines.add("允许从输出侧输入流体: " + (isAllowInputFromOutputSideFluids ? "是" : "否"));
+        if (frontFacing != null) {
+            lines.add("前方朝向: " + frontFacing.getName());
+        }
+        if (outputFacingItems != null) {
+            lines.add("物品输出朝向: " + outputFacingItems.getName());
+        }
+        if (outputFacingFluids != null) {
+            lines.add("流体输出朝向: " + outputFacingFluids.getName());
+        }
     }
 
     @Override
@@ -54,50 +73,85 @@ public class MTECopyCardBehaviors implements IItemBehaviour , ItemUIFactory {
         if (player.isSneaking()) {
             if (GTUtility.getMetaTileEntity(world, pos) instanceof MetaTileEntity) {
 
-                MetaTileEntity mte = (MetaTileEntity) GTUtility.getMetaTileEntity(world, pos);
+                MetaTileEntity mte = GTUtility.getMetaTileEntity(world, pos);
 
-                frontFacing=mte.getFrontFacing();
+                frontFacing = mte.getFrontFacing();
                 if (mte instanceof SimpleMachineMetaTileEntity) {
-                    isAutoOutputItems=((SimpleMachineMetaTileEntity) mte).isAutoOutputItems();
-                    isAutoOutputFluids=((SimpleMachineMetaTileEntity) mte).isAutoOutputFluids();
+                    isAutoOutputItems = ((SimpleMachineMetaTileEntity) mte).isAutoOutputItems();
+                    isAutoOutputFluids = ((SimpleMachineMetaTileEntity) mte).isAutoOutputFluids();
 
-                    isAllowInputFromOutputSideItems=((SimpleMachineMetaTileEntity) mte).isAllowInputFromOutputSideItems();
-                    isAllowInputFromOutputSideFluids=((SimpleMachineMetaTileEntity) mte).isAllowInputFromOutputSideFluids();
+                    isAllowInputFromOutputSideItems = ((SimpleMachineMetaTileEntity) mte).isAllowInputFromOutputSideItems();
+                    isAllowInputFromOutputSideFluids = ((SimpleMachineMetaTileEntity) mte).isAllowInputFromOutputSideFluids();
 
-                    outputFacingItems=((SimpleMachineMetaTileEntity) mte).getOutputFacingItems();
-                    outputFacingFluids=((SimpleMachineMetaTileEntity) mte).getOutputFacingFluids();
+                    outputFacingItems = ((SimpleMachineMetaTileEntity) mte).getOutputFacingItems();
+                    outputFacingFluids = ((SimpleMachineMetaTileEntity) mte).getOutputFacingFluids();
 
 
-                    player.sendMessage(new TextComponentTranslation("复制"));
+                    // 使用反射获取 circuitInventory 字段
+                    try {
+                        circuit = getCircuitValue(mte);
+                    } catch (NoSuchFieldException | IllegalAccessException | NoSuchMethodException |
+                             InvocationTargetException e) {
+                        e.printStackTrace();
+                    }
+                    player.sendStatusMessage(new TextComponentTranslation("复制"), true);
+
+                    String machineName = mte.getMetaFullName();
+                    int x = pos.getX();
+                    int y = pos.getY();
+                    int z = pos.getZ();
+                    if (!world.isRemote) {
+                        TextComponentString detailedInfo = new TextComponentString("\n======================================\n");
+                        detailedInfo.appendSibling(new TextComponentString("已复制：").appendSibling(new TextComponentTranslation(machineName)));
+                        detailedInfo.appendSibling(new TextComponentString("\n坐标：X=")
+                                .appendSibling(new TextComponentString(String.valueOf(x)))
+                                .appendSibling(new TextComponentString(", Y="))
+                                .appendSibling(new TextComponentString(String.valueOf(y)))
+                                .appendSibling(new TextComponentString(", Z="))
+                                .appendSibling(new TextComponentString(String.valueOf(z))));
+
+                        detailedInfo.appendSibling(new TextComponentString("\n内部参数 ："));
+                        
+                        detailedInfo.appendSibling(new TextComponentString("\n自动输出物品：").appendSibling(new TextComponentString(String.valueOf(isAutoOutputItems))));
+                        detailedInfo.appendSibling(new TextComponentString("\n自动输出流体：").appendSibling(new TextComponentString(String.valueOf(isAutoOutputFluids))));
+                        detailedInfo.appendSibling(new TextComponentString("\n允许从输出侧输入物品：").appendSibling(new TextComponentString(String.valueOf(isAllowInputFromOutputSideItems))));
+                        detailedInfo.appendSibling(new TextComponentString("\n允许从输出侧输入流体：").appendSibling(new TextComponentString(String.valueOf(isAllowInputFromOutputSideFluids))));
+                        detailedInfo.appendSibling(new TextComponentString("\n输出物品方向：").appendSibling(new TextComponentString(String.valueOf(outputFacingItems))));
+                        detailedInfo.appendSibling(new TextComponentString("\n输出流体方向：").appendSibling(new TextComponentString(String.valueOf(outputFacingFluids))));
+                        detailedInfo.appendSibling(new TextComponentString("\n电路配置：").appendSibling(new TextComponentString(String.valueOf(circuit))));
+                        detailedInfo.appendSibling(new TextComponentString("\n======================================"));
+
+                        player.sendMessage(detailedInfo);
+                    }
                 }
-            }
-            else
-            {
+            } else {
                 if (!world.isRemote) {
                     PlayerInventoryHolder holder = new PlayerInventoryHolder(player, hand);
                     holder.openUI();
                 }
             }
         } else {
-                if (GTUtility.getMetaTileEntity(world, pos) instanceof MetaTileEntity) {
+            if (GTUtility.getMetaTileEntity(world, pos) instanceof MetaTileEntity) {
 
-                    MetaTileEntity mte = (MetaTileEntity) GTUtility.getMetaTileEntity(world, pos);
+                MetaTileEntity mte = GTUtility.getMetaTileEntity(world, pos);
 
-                    if(frontFacing!=null)mte.setFrontFacing(frontFacing);
-                    if (mte instanceof SimpleMachineMetaTileEntity) {
-                        ((SimpleMachineMetaTileEntity) mte).setAutoOutputItems(isAutoOutputItems);
-                        ((SimpleMachineMetaTileEntity) mte).setAutoOutputFluids(isAutoOutputFluids);
+                if (frontFacing != null) mte.setFrontFacing(frontFacing);
+                if (mte instanceof SimpleMachineMetaTileEntity) {
+                    ((SimpleMachineMetaTileEntity) mte).setAutoOutputItems(isAutoOutputItems);
+                    ((SimpleMachineMetaTileEntity) mte).setAutoOutputFluids(isAutoOutputFluids);
 
-                        ((SimpleMachineMetaTileEntity) mte).setAllowInputFromOutputSideItems(isAllowInputFromOutputSideItems);
-                        ((SimpleMachineMetaTileEntity) mte).setAllowInputFromOutputSideFluids(isAllowInputFromOutputSideFluids);
+                    ((SimpleMachineMetaTileEntity) mte).setAllowInputFromOutputSideItems(isAllowInputFromOutputSideItems);
+                    ((SimpleMachineMetaTileEntity) mte).setAllowInputFromOutputSideFluids(isAllowInputFromOutputSideFluids);
 
-                        if(outputFacingItems!=null)((SimpleMachineMetaTileEntity) mte).setOutputFacingItems(outputFacingItems);
-                        if(outputFacingFluids!=null)((SimpleMachineMetaTileEntity) mte).setOutputFacingFluids(outputFacingFluids);
+                    if (outputFacingItems != null)
+                        ((SimpleMachineMetaTileEntity) mte).setOutputFacingItems(outputFacingItems);
+                    if (outputFacingFluids != null)
+                        ((SimpleMachineMetaTileEntity) mte).setOutputFacingFluids(outputFacingFluids);
 
-                        ((SimpleMachineMetaTileEntity) mte).setGhostCircuitConfig(circuit);
-                        player.sendMessage(new TextComponentTranslation("粘贴"));
-                    }
+                    ((SimpleMachineMetaTileEntity) mte).setGhostCircuitConfig(circuit);
+                    player.sendStatusMessage(new TextComponentTranslation("粘贴"), true);
                 }
+            }
         }
         return EnumActionResult.SUCCESS;
     }
@@ -112,17 +166,17 @@ public class MTECopyCardBehaviors implements IItemBehaviour , ItemUIFactory {
                 .widget(new ClickButtonWidget(90, 91, 77, 20, I18n.format("-5"), clickData -> addCircuit(-5)))
                 .build(playerInventoryHolder, entityPlayer);
     }
-    public void addCircuit(int i)
-    {
-        if(i>0&&circuit+i>32) {
-            circuit=32;
+
+    public void addCircuit(int i) {
+        if (i > 0 && circuit + i > 32) {
+            circuit = 32;
             return;
         }
-        if(i<0&&circuit+i<0) {
-            circuit=0;
+        if (i < 0 && circuit + i < 0) {
+            circuit = 0;
             return;
         }
 
-        circuit+=i;
+        circuit += i;
     }
 }

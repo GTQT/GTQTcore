@@ -3,6 +3,8 @@ package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
+import gregtech.api.GTValues;
+import gregtech.api.GregTechAPI;
 import gregtech.api.capability.GregtechCapabilities;
 import gregtech.api.capability.IEnergyContainer;
 import gregtech.api.capability.impl.EnergyContainerList;
@@ -19,19 +21,26 @@ import gregtech.api.metatileentity.multiblock.MultiblockDisplayText;
 import gregtech.api.metatileentity.multiblock.MultiblockWithDisplayBase;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
+import gregtech.api.pattern.MultiblockShapeInfo;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.TextComponentUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.TooltipHelper;
+import gregtech.common.ConfigHolder;
+import gregtech.common.metatileentities.MetaTileEntities;
+import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.utils.GTQTLog;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTPowerSupply;
+import keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing;
+import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -47,11 +56,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Function;
 
 import static gregtech.api.GTValues.V;
 import static gregtech.api.GTValues.VA;
+import static keqing.gtqtcore.api.GTQTAPI.MAP_PA_CASING;
+import static keqing.gtqtcore.api.GTQTAPI.MAP_PS_CASING;
 import static keqing.gtqtcore.common.block.blocks.GTQTPowerSupply.SupplyType.*;
 
 public class MetaTileEntityPowerSupply extends MultiblockWithDisplayBase {
@@ -362,11 +374,8 @@ public class MetaTileEntityPowerSupply extends MultiblockWithDisplayBase {
         }
 
         // 更新频率
-        if (updatetime == 0) updatetime = 1;
+        if (getOffsetTimer()%updatetime==0) {
 
-        t++;
-        if (t == updatetime) {
-            t = 0;
             for (int i = 1; i <= 8; i++) {
                 BlockPos pos = switch (i) {
                     case 1 -> poss1;
@@ -598,6 +607,32 @@ public class MetaTileEntityPowerSupply extends MultiblockWithDisplayBase {
                         .or(abilities(MultiblockAbility.OUTPUT_ENERGY).setMaxLayerLimited(4).setMinGlobalLimited(0))
                         .or(abilities(MultiblockAbility.INPUT_ENERGY).setMaxLayerLimited(4).setMinGlobalLimited(0)))
                 .build();
+    }
+    @Override
+    public List<MultiblockShapeInfo> getMatchingShapes() {
+        ArrayList<MultiblockShapeInfo> shapeInfo = new ArrayList<>();
+        MultiblockShapeInfo.Builder builder;
+        builder = MultiblockShapeInfo.builder()
+                .aisle("CCCCCCCCCCC")
+                .aisle("C         C")
+                .aisle("C         C")
+                .aisle("C         C")
+                .aisle("C         C")
+                .aisle("C         C")
+                .aisle("C         C")
+                .aisle("C         C")
+                .aisle("C         C")
+                .aisle("C         C")
+                .aisle("CCCCISOCCCC")
+                .where('S', GTQTMetaTileEntities.POWER_SUPPLY, EnumFacing.SOUTH)
+                .where('C', getCasingAState())
+                .where('I', MetaTileEntities.ENERGY_INPUT_HATCH[GTValues.LV], EnumFacing.SOUTH)
+                .where('O', MetaTileEntities.ENERGY_OUTPUT_HATCH[GTValues.LV], EnumFacing.SOUTH);
+        MultiblockShapeInfo.Builder finalBuilder = builder;
+        MAP_PS_CASING.entrySet().stream()
+                .sorted(Comparator.comparingInt(entry -> ((WrappedIntTired) entry.getValue()).getIntTier()))
+                .forEach(entry -> shapeInfo.add(finalBuilder.where(' ', entry.getKey()).build()));
+        return shapeInfo;
     }
 
     private IBlockState getCasingAState() {

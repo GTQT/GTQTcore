@@ -16,6 +16,7 @@ import gregtech.api.pipenet.tile.TileEntityPipeBase;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.util.GTUtility;
+import keqing.gtqtcore.GTQTCoreConfig;
 import keqing.gtqtcore.common.items.GTQTMetaItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -42,7 +43,7 @@ public class TimeBottleBehavior implements IItemBehaviour {
     public TimeBottleBehavior(){}
 
     private int time;
-    private int maxTime=20*3600*8;
+    private final int maxTime=20*3600* GTQTCoreConfig.DifficultySwitch.TimeBottleStoreMaxHour;
     public void onUpdate(ItemStack itemStack, Entity entity) {
         if (entity instanceof EntityPlayer)
         {
