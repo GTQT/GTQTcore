@@ -8,8 +8,7 @@ import gregicality.multiblocks.common.block.blocks.BlockUniqueCasing;
 import gregtech.api.GTValues;
 import gregtech.api.GregTechAPI;
 import gregtech.api.block.IHeatingCoilBlockStats;
-import gregtech.api.capability.IEnergyContainer;
-import gregtech.api.capability.IHeatingCoil;
+import gregtech.api.capability.*;
 import gregtech.api.capability.impl.*;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
@@ -69,15 +68,20 @@ import java.util.Comparator;
 import java.util.List;
 
 import static gregtech.api.GTValues.VA;
+import static keqing.gtqtcore.api.utils.GTQTUtil.getAccelerateByCWU;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.HUGE_ALLOY_BLAST_FURANCE;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.HUGE_BLAST_FURANCE;
 
-public class MetaTileEntityHugeBlastFurnace extends GTQTRecipeMapMultiblockOverwrite implements IHeatingCoil {
+public class MetaTileEntityHugeBlastFurnace extends GTQTRecipeMapMultiblockOverwrite implements IHeatingCoil, IOpticalComputationReceiver {
 
     private int blastFurnaceTemperature;
     protected int heatingCoilLevel;
     protected int coilTier;
     protected int glassTire;
+
+    int requestCWUt;
+    private IOpticalComputationProvider computationProvider;
+
     public MetaTileEntityHugeBlastFurnace(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, RecipeMaps.BLAST_RECIPES);
         this.recipeMapWorkable = new MetaTileEntityHugeBlastFurnacerWorkable(this);
@@ -110,6 +114,10 @@ public class MetaTileEntityHugeBlastFurnace extends GTQTRecipeMapMultiblockOverw
     @Override
     public void update() {
         super.update();
+        if(isStructureFormed()&&isActive())
+        {
+            requestCWUt=computationProvider.requestCWUt(1024, false);
+        }
         if (modern == 0)
         {
             ParallelNum=ParallelNumA;
@@ -131,6 +139,7 @@ public class MetaTileEntityHugeBlastFurnace extends GTQTRecipeMapMultiblockOverw
         super.addDisplayText(textList);
         ITextComponent heatString = TextComponentUtil.stringWithColor(TextFormatting.RED, TextFormattingUtil.formatNumbers(this.blastFurnaceTemperature) + "K");
         textList.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY, "gregtech.multiblock.blast_furnace.max_temperature", heatString));
+        textList.add(new TextComponentTranslation("gtqtcore.kqcc_accelerate",requestCWUt,getAccelerateByCWU(requestCWUt)));
         if(modern==0) textList.add(new TextComponentTranslation("gtqtcore.tire1",coilTier));
         if(modern==1) textList.add(new TextComponentTranslation("gtqtcore.tire2",coilTier));
         textList.add(new TextComponentTranslation("gtqtcore.parr",ParallelNum,ParallelLim));
@@ -150,10 +159,20 @@ public class MetaTileEntityHugeBlastFurnace extends GTQTRecipeMapMultiblockOverw
         tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.2",256));
         tooltip.add(I18n.format("本机器允许使用激光能源仓代替能源仓！"));
     }
-
+    @Override
+    public IOpticalComputationProvider getComputationProvider() {
+        return this.computationProvider;
+    }
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
+
+        List<IOpticalComputationHatch> providers = this.getAbilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION);
+        if (providers != null && !providers.isEmpty()) {
+            this.computationProvider = providers.get(0);
+        }
+
+
         Object glassTire = context.get("GlassTieredStats");
         this.glassTire = GTQTUtil.getOrDefault(() -> glassTire instanceof WrappedIntTired,
                 () -> ((WrappedIntTired)glassTire).getIntTier(),
@@ -218,6 +237,7 @@ public class MetaTileEntityHugeBlastFurnace extends GTQTRecipeMapMultiblockOverw
                                 .setMaxGlobalLimited(3))
                         .or(abilities(MultiblockAbility.INPUT_LASER)
                                 .setMaxGlobalLimited(1))
+                        .or(abilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION).setExactLimit(1))
                 )
                 .where('B', heatingCoils())
                 .where('A', TiredTraceabilityPredicate.CP_GLASS.get())
@@ -248,13 +268,14 @@ public class MetaTileEntityHugeBlastFurnace extends GTQTRecipeMapMultiblockOverw
                 .aisle("MMMMMMMMMMMMMMM","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","MMMMMMMMMMMMMMM")
                 .aisle("MMMMMMMMMMMMMMM","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","AB           BA","MMMMMMMMMMMMMMM")
                 .aisle("MMMMMMMMMMMMMMM","ABBBBBBBBBBBBBA","ABBBBBBBBBBBBBA","ABBBBBBBBBBBBBA","ABBBBBBBBBBBBBA","ABBBBBBBBBBBBBA","ABBBBBBBBBBBBBA","ABBBBBBBBBBBBBA","ABBBBBBBBBBBBBA","ABBBBBBBBBBBBBA","ABBBBBBBBBBBBBA","ABBBBBBBBBBBBBA","ABBBBBBBBBBBBBA","ABBBBBBBBBBBBBA","ABBBBBBBBBBBBBA","ABBBBBBBBBBBBBA","ABBBBBBBBBBBBBA","ABBBBBBBBBBBBBA","ABBBBBBBBBBBBBA","MMMMMMMMMMMMMMM")
-                .aisle("EENILJMXMMMMMMM","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","MMMMMMMMMMMMMMM")
+                .aisle("EENILJMXKMMMMMM","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","AAAAAAAAAAAAAAA","MMMMMMMMMMMMMMM")
                 .where('X', HUGE_BLAST_FURANCE, EnumFacing.SOUTH)
                 .where('A', MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.FUSION_GLASS))
                 .where('M', getCasingState())
                 .where('E', MetaTileEntities.ENERGY_INPUT_HATCH[5], EnumFacing.SOUTH)
                 .where('N',MetaTileEntities.MAINTENANCE_HATCH, EnumFacing.SOUTH)
                 .where('I', MetaTileEntities.FLUID_IMPORT_HATCH[4], EnumFacing.SOUTH)
+                .where('K', MetaTileEntities.COMPUTATION_HATCH_RECEIVER, EnumFacing.SOUTH)
                 .where('L', MetaTileEntities.ITEM_IMPORT_BUS[4], EnumFacing.SOUTH)
                 .where('J', MetaTileEntities.FLUID_EXPORT_HATCH[4], EnumFacing.SOUTH)
                 .where('S', MetaTileEntities.MUFFLER_HATCH[1], EnumFacing.UP)
@@ -300,7 +321,7 @@ public class MetaTileEntityHugeBlastFurnace extends GTQTRecipeMapMultiblockOverw
 
         @Override
         public void setMaxProgress(int maxProgress) {
-            int MaxProgress = (int) Math.floor(maxProgress * Math.pow(0.8, glassTire));
+            int MaxProgress = (int) Math.floor(maxProgress * Math.pow(0.8, glassTire)*getAccelerateByCWU(requestCWUt));
             super.setMaxProgress(MaxProgress);
         }
 

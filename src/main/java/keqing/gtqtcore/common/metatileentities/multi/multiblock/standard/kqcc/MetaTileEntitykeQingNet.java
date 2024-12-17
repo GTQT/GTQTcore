@@ -1,16 +1,14 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.kqcc;
 
-import gregtech.api.capability.IObjectHolder;
 import gregtech.api.capability.IOpticalComputationHatch;
 import gregtech.api.capability.IOpticalComputationProvider;
 import gregtech.api.capability.IOpticalComputationReceiver;
 import gregtech.api.capability.impl.ComputationRecipeLogic;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.ModularUI;
-import gregtech.api.gui.Widget;
 import gregtech.api.gui.widgets.AdvancedTextWidget;
 import gregtech.api.gui.widgets.ClickButtonWidget;
-import gregtech.api.gui.widgets.WidgetGroup;
+import gregtech.api.metatileentity.IFastRenderMetaTileEntity;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
@@ -26,10 +24,9 @@ import gregtech.api.util.TextComponentUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.TooltipHelper;
-import gregtech.common.blocks.BlockMetalCasing;
-import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.multi.electric.MetaTileEntityDataBank;
 import gregtech.common.metatileentities.multi.electric.MetaTileEntityHPCA;
+import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.recipes.properties.ELEProperties;
 import keqing.gtqtcore.api.recipes.properties.KQKindProperty;
@@ -43,12 +40,21 @@ import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.MetaTil
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.MetaTileEntityGeneMutagenesis;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.MetaTileEntityPhotolithographyFactory;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.renderer.BufferBuilder;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
@@ -57,15 +63,16 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.lwjgl.opengl.GL11;
 
 import javax.annotation.Nonnull;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 import static keqing.gtqtcore.common.block.blocks.GTQTKQCC.CasingType.KQCC_COMPUTER_CASING;
 
 
-public class MetaTileEntitykeQingNet extends RecipeMapMultiblockController implements IOpticalComputationReceiver {
+public class MetaTileEntitykeQingNet extends RecipeMapMultiblockController implements IOpticalComputationReceiver, IFastRenderMetaTileEntity {
     double tier;
     int page = 0;
     int x;
@@ -85,7 +92,7 @@ public class MetaTileEntitykeQingNet extends RecipeMapMultiblockController imple
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("page", page);
         for (int i = 0; i < 40; i++) data.setIntArray("io" + i, io[i]);
-
+        data.setInteger("thresholdPercentage", thresholdPercentage); // 添加这一行
         return super.writeToNBT(data);
     }
 
@@ -94,6 +101,8 @@ public class MetaTileEntitykeQingNet extends RecipeMapMultiblockController imple
 
         page = data.getInteger("page");
         for (int i = 0; i < 40; i++) io[i] = data.getIntArray("io" + i);
+        thresholdPercentage = data.getInteger("thresholdPercentage"); // 添加这一行
+
     }
 
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
@@ -101,8 +110,160 @@ public class MetaTileEntitykeQingNet extends RecipeMapMultiblockController imple
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
+    public void renderMetaTileEntity(double x, double y, double z, float partialTicks) {
+        IFastRenderMetaTileEntity.super.renderMetaTileEntity(x, y, z, partialTicks);
+        //请以 this.getFrontFacing() 为正面方向渲染如下内容
+        // 机器开启才会进行渲染
+        if (isStructureFormed()) {
+            GlStateManager.pushMatrix();
+            try {
+                // 设置渲染位置
+                GlStateManager.translate(x + 0.5, y + 4.5, z + 0.5);
+                GlStateManager.scale(1.0, 1.0, 1.0);
+
+                // 根据正面方向进行旋转
+                EnumFacing frontFacing = this.getFrontFacing();
+                switch (frontFacing) {
+                    case NORTH:
+                        GlStateManager.rotate(0, 0.0f, 1.0f, 0.0f);
+                        break;
+                    case SOUTH:
+                        GlStateManager.rotate(180.0f, 0.0f, 1.0f, 0.0f);
+                        break;
+                    case WEST:
+                        GlStateManager.rotate(90.0f, 0.0f, 1.0f, 0.0f);
+                        break;
+                    case EAST:
+                        GlStateManager.rotate(-90.0f, 0.0f, 1.0f, 0.0f);
+                        break;
+                    case UP:
+                        break;
+                    case DOWN:
+                        break;
+                }
+
+                // 绘制蓝色半透矩形背景
+                GlStateManager.disableTexture2D();
+                GlStateManager.enableBlend();
+                GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+                GlStateManager.color(0.0f, 0.0f, 1.0f, 0.5f); // 蓝色，半透明
+                Tessellator tessellator = Tessellator.getInstance();
+                BufferBuilder buffer = tessellator.getBuffer();
+                buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION);
+                buffer.pos(-2.0, -1.5, 0.1).endVertex(); // 调整z值为0.1
+                buffer.pos(-2.0, 1.5, 0.1).endVertex();
+                buffer.pos(2.0, 1.5, 0.1).endVertex();
+                buffer.pos(2.0, -1.5, 0.1).endVertex();
+                tessellator.draw();
+                GlStateManager.disableBlend();
+                GlStateManager.enableTexture2D();
+
+                // 计算背景中心
+                double centerX = 0.0;
+                double centerY = 0.0;
+
+                // 创建文本列表
+                List<ITextComponent> textList = new ArrayList<>();
+                textList.add(new TextComponentTranslation(String.format("gtqtcore.multiblock.kqn.nb%s", thresholdPercentage)));
+                textList.add(new TextComponentTranslation(String.format("gtqtcore.multiblock.kqn.nx%s", thresholdPercentage)));
+
+                // 渲染文本
+                GlStateManager.translate(centerX, centerY, 0.1); // 移动到背景中心
+                GlStateManager.scale(0.02, 0.02, 0.02); // 调整文本大小
+                GlStateManager.disableLighting();
+                GlStateManager.disableDepth();
+                GlStateManager.enableBlend();
+                GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+
+                FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
+
+                // 第一行文本居中
+                String firstLine = textList.get(0).getFormattedText();
+                int firstLineWidth = fontRenderer.getStringWidth(firstLine);
+                GlStateManager.pushMatrix();
+                try {
+                    GlStateManager.translate(-firstLineWidth / 2.0, 0.0, 0.0); // 居中文本
+                    GlStateManager.rotate(180.0f, 0.0f, 1.0f, 0.0f); // 水平翻转180度
+                    GlStateManager.rotate(180.0f, 1.0f, 0.0f, 0.0f); // 垂直翻转180度
+                    fontRenderer.drawString(firstLine, -firstLineWidth, -70, 0xFFFFFFFF); // 顶格居中
+                } finally {
+                    GlStateManager.popMatrix();
+                }
+
+                // 第二行文本左对齐并换行
+                String secondLine = textList.get(1).getFormattedText();
+                List<String> wrappedSecondLine = splitTextIntoChunks(secondLine, 21); // 每行最多16个汉字
+                for (int i = 0; i < wrappedSecondLine.size(); i++) {
+                    String line = wrappedSecondLine.get(i);
+                    GlStateManager.pushMatrix();
+                    try {
+                        GlStateManager.translate(95, - i * 15, 0.0); // 居中文本
+                        GlStateManager.rotate(180.0f, 0.0f, 1.0f, 0.0f); // 水平翻转180度
+                        GlStateManager.rotate(180.0f, 1.0f, 0.0f, 0.0f); // 垂直翻转180度
+                        fontRenderer.drawString(line, 0, -55, 0xFFFFFFFF); // 左对齐，每行间隔10个像素
+                    } finally {
+                        GlStateManager.popMatrix();
+                    }
+                }
+
+                GlStateManager.enableDepth();
+                GlStateManager.enableLighting();
+                GlStateManager.disableBlend();
+            } finally {
+                GlStateManager.popMatrix();
+            }
+        }
+    }
+
+    public List<String> splitTextIntoChunks(String text, int chunkSize) {
+        List<String> chunks = new ArrayList<>();
+        for (int i = 0; i < text.length(); i += chunkSize) {
+            int end = Math.min(i + chunkSize, text.length());
+            chunks.add(text.substring(i, end));
+        }
+        return chunks;
+    }
+
+    @Override
+    public void writeInitialSyncData(PacketBuffer buf) {
+        super.writeInitialSyncData(buf);
+        buf.writeInt(this.thresholdPercentage);
+    }
+
+    @Override
+    public void receiveInitialSyncData(PacketBuffer buf) {
+        super.receiveInitialSyncData(buf);
+        this.thresholdPercentage = buf.readInt();
+    }
+
+    // 假设这个方法返回当前的 thresholdPercentage 值
+    private int getThresholdPercentage() {
+        // 这里返回实际的 thresholdPercentage 值
+        return this.thresholdPercentage; // 假设 thresholdPercentage 是类的成员变量
+    }
+
+    @Override
+    public AxisAlignedBB getRenderBoundingBox() {
+        //这个影响模型的可视范围，正常方块都是 1 1 1，长宽高各为1，当这个方块离线玩家视线后，obj模型渲染会停止，所以可以适当放大这个大小能让模型有更多角度的可视
+        return new AxisAlignedBB(getPos(), getPos().add(5, 5, 5));
+    }
+
+    @Override
+    public void receiveCustomData(int dataId, PacketBuffer buf) {
+        super.receiveCustomData(dataId, buf);
+        if (dataId == GTQTValue.UPDATE_TIER27) {
+            this.thresholdPercentage = buf.readInt();
+        }
+        if (dataId == GTQTValue.REQUIRE_DATA_UPDATE27) {
+            this.writeCustomData(GTQTValue.UPDATE_TIER27, buf1 -> buf1.writeInt(this.thresholdPercentage));
+        }
+    }
+
+    @Override
     public void update() {
         super.update();
+        this.writeCustomData(GTQTValue.UPDATE_TIER27, buf -> buf.writeInt(this.thresholdPercentage));
         //更新 如果有输入坐标
         if (checkLoacl(true)) for (int i = 0; i < 40; i++) {
             //有空位&&找到结构
@@ -378,8 +539,8 @@ public class MetaTileEntitykeQingNet extends RecipeMapMultiblockController imple
                 .aisle("PPP", "PSP", "PPP")
                 .where('S', this.selfPredicate())
                 .where('P', states(new IBlockState[]{getCasingState()}).or(abilities(MultiblockAbility.INPUT_ENERGY)
-                        .setMinGlobalLimited(1).setMaxGlobalLimited(2)).or(abilities(MultiblockAbility.MAINTENANCE_HATCH)
-                        .setExactLimit(1)).or(abilities(MultiblockAbility.IMPORT_ITEMS).setExactLimit(1))
+                                .setMinGlobalLimited(1).setMaxGlobalLimited(2)).or(abilities(MultiblockAbility.MAINTENANCE_HATCH)
+                                .setExactLimit(1)).or(abilities(MultiblockAbility.IMPORT_ITEMS).setExactLimit(1))
                         .or(abilities(MultiblockAbility.EXPORT_ITEMS).setExactLimit(1))
                         .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setMaxGlobalLimited(1))
                         .or(abilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION)

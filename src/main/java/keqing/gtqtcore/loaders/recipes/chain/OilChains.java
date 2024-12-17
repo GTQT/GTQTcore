@@ -663,7 +663,8 @@ public class OilChains {
                 .fluidOutputs(WoodGas.getFluid(1500))
                 .fluidOutputs(WoodVinegar.getFluid(3000))
                 .fluidOutputs(Creosote.getFluid(4000))
-                .duration(800).EUt(60)
+                .duration(800)
+                .Heat(500)
                 .buildAndRegister();
 
         PYROLYSIS_TOWER.recipeBuilder()
@@ -675,7 +676,8 @@ public class OilChains {
                 .fluidOutputs(WoodGas.getFluid(1500))
                 .fluidOutputs(WoodVinegar.getFluid(3000))
                 .fluidOutputs(Creosote.getFluid(4000))
-                .duration(800).EUt(60)
+                .duration(800)
+                .Heat(500)
                 .buildAndRegister();
     }
     private static void changjianya()
@@ -690,7 +692,8 @@ public class OilChains {
                 .fluidOutputs(SulfuricLightFuel.getFluid(150))
                 .fluidOutputs(SulfuricHeavyFuel.getFluid(150))
                 .fluidOutputs(AtmosphericResidue.getFluid(50))
-                .duration(800).EUt(60)
+                .duration(800)
+                .Heat(500)
                 .buildAndRegister();
 
         PYROLYSIS_TOWER.recipeBuilder()
@@ -701,7 +704,8 @@ public class OilChains {
                 .fluidOutputs(SulfuricLightFuel.getFluid(100))
                 .fluidOutputs(SulfuricHeavyFuel.getFluid(200))
                 .fluidOutputs(AtmosphericResidue.getFluid(150))
-                .duration(800).EUt(60)
+                .duration(800)
+                .Heat(500)
                 .buildAndRegister();
 
         PYROLYSIS_TOWER.recipeBuilder()
@@ -712,7 +716,8 @@ public class OilChains {
                 .fluidOutputs(SulfuricLightFuel.getFluid(200))
                 .fluidOutputs(SulfuricHeavyFuel.getFluid(100))
                 .fluidOutputs(AtmosphericResidue.getFluid(150))
-                .duration(200).EUt(60)
+                .duration(200)
+                .Heat(500)
                 .buildAndRegister();
 
         PYROLYSIS_TOWER.recipeBuilder()
@@ -723,7 +728,8 @@ public class OilChains {
                 .fluidOutputs(SulfuricLightFuel.getFluid(150))
                 .fluidOutputs(SulfuricHeavyFuel.getFluid(150))
                 .fluidOutputs(AtmosphericResidue.getFluid(150))
-                .duration(80).EUt(60)
+                .duration(80)
+                .Heat(500)
                 .buildAndRegister();
 
         //含杂预处理
@@ -735,7 +741,8 @@ public class OilChains {
                 .fluidOutputs(SulfuricLightFuel.getFluid(300))
                 .fluidOutputs(SulfuricHeavyFuel.getFluid(300))
                 .fluidOutputs(AtmosphericResidue.getFluid(300))
-                .duration(200).EUt(60)
+                .duration(200)
+                .Heat(500)
                 .buildAndRegister();
 
         DISTILLATION_RECIPES.recipeBuilder()
@@ -757,7 +764,8 @@ public class OilChains {
                 .fluidOutputs(SDieselLight.getFluid(300))
                 .fluidOutputs(SDieselHeavy.getFluid(300))
                 .fluidOutputs(AtmosphericResidue.getFluid(300))
-                .duration(200).EUt(60)
+                .duration(200)
+                .Heat(500)
                 .buildAndRegister();
 
         DISTILLATION_RECIPES.recipeBuilder()
@@ -786,7 +794,8 @@ public class OilChains {
                 .fluidOutputs(WaxOil.getFluid(600))
                 .fluidOutputs(VacuumResidue.getFluid(600))
                 .fluidOutputs(Lubricant.getFluid(400))
-                .duration(200).EUt(60)
+                .duration(200)
+                .Heat(500)
                 .buildAndRegister();
 
         DISTILLATION_RECIPES.recipeBuilder()

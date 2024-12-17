@@ -170,6 +170,11 @@ public class MetaTileEntityHeatHatch extends MetaTileEntityMultiblockPart implem
     }
 
     @Override
+    public int getTier() {
+        return tier;
+    }
+
+    @Override
     public void balanceHeat(int outsideTemp, int tick) {
         // 根据 tick 调整热交换系数
         double adjustedHeatingCoefficient = HEATING_COEFFICIENT * (tick / 10.0);

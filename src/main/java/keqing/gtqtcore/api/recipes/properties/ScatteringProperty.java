@@ -26,6 +26,6 @@ public class ScatteringProperty extends RecipeProperty<Integer> {
     }
 
     public void drawInfo(Minecraft minecraft, int x, int y, int color, Object value) {
-        minecraft.fontRenderer.drawString(I18n.format("散射截面：%s", new Object[]{TextFormattingUtil.formatLongToCompactString((Integer)this.castValue(value))}) , x, y, color);
+        minecraft.fontRenderer.drawString(I18n.format("散射截面：%s", TextFormattingUtil.formatLongToCompactString(this.castValue(value))) , x, y, color);
     }
 }

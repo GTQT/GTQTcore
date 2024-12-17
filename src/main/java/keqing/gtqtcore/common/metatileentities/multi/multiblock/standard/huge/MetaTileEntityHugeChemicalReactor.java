@@ -3,8 +3,7 @@ package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.huge;
 import gregtech.api.GTValues;
 import gregtech.api.GregTechAPI;
 import gregtech.api.block.IHeatingCoilBlockStats;
-import gregtech.api.capability.IEnergyContainer;
-import gregtech.api.capability.IHeatingCoil;
+import gregtech.api.capability.*;
 import gregtech.api.capability.impl.*;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
@@ -61,15 +60,20 @@ import java.util.Comparator;
 import java.util.List;
 
 import static gregtech.api.GTValues.VA;
+import static keqing.gtqtcore.api.utils.GTQTUtil.getAccelerateByCWU;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.HUGE_BLAST_FURANCE;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.HUGE_CHEMICAL_REACTOR;
 
-public class MetaTileEntityHugeChemicalReactor extends GTQTRecipeMapMultiblockControllerOverwrite implements IHeatingCoil {
+public class MetaTileEntityHugeChemicalReactor extends GTQTRecipeMapMultiblockControllerOverwrite implements IHeatingCoil, IOpticalComputationReceiver {
 
     private int blastFurnaceTemperature;
     protected int heatingCoilLevel;
     protected int coilTier;
     protected int glassTire;
+
+    int requestCWUt;
+    private IOpticalComputationProvider computationProvider;
+
     public MetaTileEntityHugeChemicalReactor(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[] {
                 RecipeMaps.CHEMICAL_RECIPES,
@@ -105,6 +109,11 @@ public class MetaTileEntityHugeChemicalReactor extends GTQTRecipeMapMultiblockCo
         tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.2",256));
         tooltip.add(I18n.format("本机器允许使用激光能源仓代替能源仓！"));
     }
+    @Override
+    public IOpticalComputationProvider getComputationProvider() {
+        return this.computationProvider;
+    }
+
     int ParallelNum=1;
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("modern", modern);
@@ -119,6 +128,10 @@ public class MetaTileEntityHugeChemicalReactor extends GTQTRecipeMapMultiblockCo
     @Override
     public void update() {
         super.update();
+        if(isStructureFormed()&&isActive())
+        {
+            requestCWUt=computationProvider.requestCWUt(1024, false);
+        }
         if (modern == 0)
         {
             ParallelNum=ParallelNumA;
@@ -140,6 +153,7 @@ public class MetaTileEntityHugeChemicalReactor extends GTQTRecipeMapMultiblockCo
         super.addDisplayText(textList);
         ITextComponent heatString = TextComponentUtil.stringWithColor(TextFormatting.RED, TextFormattingUtil.formatNumbers(this.blastFurnaceTemperature) + "K");
         textList.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY, "gregtech.multiblock.blast_furnace.max_temperature", heatString));
+        textList.add(new TextComponentTranslation("gtqtcore.kqcc_accelerate",requestCWUt,getAccelerateByCWU(requestCWUt)));
         if(modern==0) textList.add(new TextComponentTranslation("gtqtcore.tire1",coilTier));
         if(modern==1) textList.add(new TextComponentTranslation("gtqtcore.tire2",coilTier));
         textList.add(new TextComponentTranslation("gtqtcore.parr",ParallelNum,ParallelLim));
@@ -147,6 +161,12 @@ public class MetaTileEntityHugeChemicalReactor extends GTQTRecipeMapMultiblockCo
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
+
+        List<IOpticalComputationHatch> providers = this.getAbilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION);
+        if (providers != null && !providers.isEmpty()) {
+            this.computationProvider = providers.get(0);
+        }
+
         Object glassTire = context.get("GlassTieredStats");
         this.glassTire = GTQTUtil.getOrDefault(() -> glassTire instanceof WrappedIntTired,
                 () -> ((WrappedIntTired)glassTire).getIntTier(),
@@ -200,6 +220,7 @@ public class MetaTileEntityHugeChemicalReactor extends GTQTRecipeMapMultiblockCo
                                 .setMaxGlobalLimited(3))
                         .or(abilities(MultiblockAbility.INPUT_LASER)
                                 .setMaxGlobalLimited(1))
+                        .or(abilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION).setExactLimit(1))
                 )
                 .where('X', heatingCoils())
                 .where('M', abilities(MultiblockAbility.MUFFLER_HATCH))
@@ -219,7 +240,7 @@ public class MetaTileEntityHugeChemicalReactor extends GTQTRecipeMapMultiblockCo
                 .aisle("CBCBC", "BGGGB", "CGAGC", "BGGGB", "CBCBC")
                 .aisle("CBCBC", "BXXXB", "CXAXC", "BXXXB", "CBCBC")
                 .aisle("CBCBC", "BGGGB", "CGAGC", "BGGGB", "CBCBC")
-                .aisle("ENILJ", "CGGGC", "CGOGC", "CGGGC", "CCCCC")
+                .aisle("ENILJ", "CGGGC", "CGOGC", "CGGGC", "CCKCC")
                 .where('O', HUGE_CHEMICAL_REACTOR, EnumFacing.SOUTH)
                 .where('G', MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.FUSION_GLASS))
                 .where('C', getCasingState())
@@ -229,6 +250,7 @@ public class MetaTileEntityHugeChemicalReactor extends GTQTRecipeMapMultiblockCo
                 .where('N', MetaTileEntities.MAINTENANCE_HATCH, EnumFacing.SOUTH)
                 .where('I', MetaTileEntities.FLUID_IMPORT_HATCH[4], EnumFacing.SOUTH)
                 .where('L', MetaTileEntities.ITEM_IMPORT_BUS[4], EnumFacing.SOUTH)
+                .where('K', MetaTileEntities.COMPUTATION_HATCH_RECEIVER, EnumFacing.SOUTH)
                 .where('J', MetaTileEntities.FLUID_EXPORT_HATCH[4], EnumFacing.SOUTH)
                 .where('M', MetaTileEntities.MUFFLER_HATCH[1], EnumFacing.NORTH);
         GregTechAPI.HEATING_COILS.entrySet().stream()
@@ -279,7 +301,7 @@ public class MetaTileEntityHugeChemicalReactor extends GTQTRecipeMapMultiblockCo
         }
         @Override
         public void setMaxProgress(int maxProgress) {
-            int MaxProgress = (int) Math.floor(maxProgress * Math.pow(0.8, glassTire));
+            int MaxProgress = (int) Math.floor(maxProgress * Math.pow(0.8, glassTire)*getAccelerateByCWU(requestCWUt));
             super.setMaxProgress(MaxProgress);
         }
         @Override

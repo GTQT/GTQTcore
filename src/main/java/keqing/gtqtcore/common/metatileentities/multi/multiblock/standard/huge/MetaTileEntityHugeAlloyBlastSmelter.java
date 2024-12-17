@@ -8,8 +8,7 @@ import gregicality.multiblocks.common.block.blocks.BlockUniqueCasing;
 import gregtech.api.GTValues;
 import gregtech.api.GregTechAPI;
 import gregtech.api.block.IHeatingCoilBlockStats;
-import gregtech.api.capability.IEnergyContainer;
-import gregtech.api.capability.IHeatingCoil;
+import gregtech.api.capability.*;
 import gregtech.api.capability.impl.*;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
@@ -69,18 +68,24 @@ import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static gregtech.api.GTValues.VA;
+import static keqing.gtqtcore.api.utils.GTQTUtil.getAccelerateByCWU;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.HUGE_ALLOY_BLAST_FURANCE;
 
-public class MetaTileEntityHugeAlloyBlastSmelter extends GTQTRecipeMapMultiblockOverwrite implements IHeatingCoil {
+public class MetaTileEntityHugeAlloyBlastSmelter extends GTQTRecipeMapMultiblockOverwrite implements IHeatingCoil, IOpticalComputationReceiver {
 
     private int blastFurnaceTemperature;
     protected int heatingCoilLevel;
     protected int coilTier;
     protected int glassTire;
+
+    int requestCWUt;
+    private IOpticalComputationProvider computationProvider;
+
     public MetaTileEntityHugeAlloyBlastSmelter(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GCYMRecipeMaps.ALLOY_BLAST_RECIPES);
         this.recipeMapWorkable = new MetaTileEntityHugeAlloyBlastSmelterWorkable(this);
     }
+
     @Override
     protected void initializeAbilities() {
         this.inputInventory = new ItemHandlerList(this.getAbilities(MultiblockAbility.IMPORT_ITEMS));
@@ -109,6 +114,10 @@ public class MetaTileEntityHugeAlloyBlastSmelter extends GTQTRecipeMapMultiblock
     @Override
     public void update() {
         super.update();
+        if(isStructureFormed()&&isActive())
+        {
+            requestCWUt=computationProvider.requestCWUt(1024, false);
+        }
         if (modern == 0)
         {
             ParallelNum=ParallelNumA;
@@ -130,6 +139,7 @@ public class MetaTileEntityHugeAlloyBlastSmelter extends GTQTRecipeMapMultiblock
         super.addDisplayText(textList);
         ITextComponent heatString = TextComponentUtil.stringWithColor(TextFormatting.RED, TextFormattingUtil.formatNumbers(this.blastFurnaceTemperature) + "K");
         textList.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY, "gregtech.multiblock.blast_furnace.max_temperature", heatString));
+        textList.add(new TextComponentTranslation("gtqtcore.kqcc_accelerate",requestCWUt,getAccelerateByCWU(requestCWUt)));
         if(modern==0) textList.add(new TextComponentTranslation("gtqtcore.tire1",coilTier));
         if(modern==1) textList.add(new TextComponentTranslation("gtqtcore.tire2",coilTier));
         textList.add(new TextComponentTranslation("gtqtcore.parr",ParallelNum,ParallelLim));
@@ -148,10 +158,19 @@ public class MetaTileEntityHugeAlloyBlastSmelter extends GTQTRecipeMapMultiblock
         tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.2",256));
         tooltip.add(I18n.format("本机器允许使用激光能源仓代替能源仓！"));
     }
-
+    @Override
+    public IOpticalComputationProvider getComputationProvider() {
+        return this.computationProvider;
+    }
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
+
+        List<IOpticalComputationHatch> providers = this.getAbilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION);
+        if (providers != null && !providers.isEmpty()) {
+            this.computationProvider = providers.get(0);
+        }
+
         Object glassTire = context.get("GlassTieredStats");
         this.glassTire = GTQTUtil.getOrDefault(() -> glassTire instanceof WrappedIntTired,
                 () -> ((WrappedIntTired)glassTire).getIntTier(),
@@ -219,6 +238,8 @@ public class MetaTileEntityHugeAlloyBlastSmelter extends GTQTRecipeMapMultiblock
                         .or(abilities(MultiblockAbility.EXPORT_ITEMS).setMaxGlobalLimited(4).setPreviewCount(1))
                         .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setMaxGlobalLimited(8).setPreviewCount(1))
                         .or(abilities(MultiblockAbility.EXPORT_FLUIDS).setMaxGlobalLimited(8).setPreviewCount(1))
+                        .or(abilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION).setExactLimit(1))
+
                 )
                 .where('M', abilities(MultiblockAbility.MUFFLER_HATCH))
                 .where(' ', any())
@@ -251,7 +272,7 @@ public class MetaTileEntityHugeAlloyBlastSmelter extends GTQTRecipeMapMultiblock
                     .aisle("BDDDDDDDDDB", "C  VWWWV  C", "C  VBBBV  C", "C  VBBBV  C", "BDDDDDDDDDB", " DVVVVVVVD ", " GWW   WWG ", " GWW   WWG ", " GWW   WWG ", " GWW   WWG ", " GWW   WWG ", " GWW   WWG ", " GWW   WWG ", " GWW   WWG ", " GWW   WWG ", " GWW   WWG ", " GWW   WWG ", " DDDDDDDDD ", " DDDDDDDDD ", "  DDDDDDD  ")
                     .aisle(" BDDHHHDDB ", " G       G ", " G       G ", " G       G ", " BDDHHHDDB ", "  DVVVVVD  ", "  GWWWWWG  ", "  GWWWWWG  ", "  GWWWWWG  ", "  GWWWWWG  ", "  GWWWWWG  ", "  GWWWWWG  ", "  GWWWWWG  ", "  GWWWWWG  ", "  GWWWWWG  ", "  GWWWWWG  ", "  GWWWWWG  ", "  DDDDDDD  ", "  DDDDDDD  ", "   DDDDD   ")
                     .aisle("  BDDDDDB  ", "  G     G  ", "  G     G  ", "  G     G  ", "  BDDDDDB  ", "   DDDDD   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   DDDDD   ", "   DDDDD   ", "           ")
-                    .aisle("   BBBBB   ", "   ICXCJ   ", "   CCSCC   ", "   CCCCC   ", "   BBBBB   ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ")
+                    .aisle("   BBBBB   ", "   IUXCJ   ", "   CCSCC   ", "   CCCCC   ", "   BBBBB   ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ")
                     .where('S', HUGE_ALLOY_BLAST_FURANCE, EnumFacing.SOUTH)
                     .where('B', getUniqueCasingState())
                     .where('D', getCasingState())
@@ -262,6 +283,7 @@ public class MetaTileEntityHugeAlloyBlastSmelter extends GTQTRecipeMapMultiblock
                     .where('E', MetaTileEntities.ENERGY_INPUT_HATCH[5], EnumFacing.NORTH)
                     .where('N', () -> ConfigHolder.machines.enableMaintenance ? MetaTileEntities.MAINTENANCE_HATCH : getCasingState(), EnumFacing.NORTH)
                     .where('I', MetaTileEntities.FLUID_IMPORT_HATCH[4], EnumFacing.SOUTH)
+                    .where('I', MetaTileEntities.COMPUTATION_HATCH_RECEIVER, EnumFacing.SOUTH)
                     .where('X', MetaTileEntities.ITEM_IMPORT_BUS[4], EnumFacing.SOUTH)
                     .where('J', MetaTileEntities.FLUID_EXPORT_HATCH[4], EnumFacing.SOUTH)
                     .where('M', MetaTileEntities.MUFFLER_HATCH[1], EnumFacing.UP)
@@ -310,7 +332,7 @@ public class MetaTileEntityHugeAlloyBlastSmelter extends GTQTRecipeMapMultiblock
         }
         @Override
         public void setMaxProgress(int maxProgress) {
-            int MaxProgress = (int) Math.floor(maxProgress * Math.pow(0.8, glassTire));
+            int MaxProgress = (int) Math.floor(maxProgress * Math.pow(0.8, glassTire)*getAccelerateByCWU(requestCWUt));
             super.setMaxProgress(MaxProgress);
         }
 

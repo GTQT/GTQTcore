@@ -2874,6 +2874,7 @@ gtqtcore.multiblock.large_combustion_engine.no_water=水储量不足
 gtqtcore.multiblock.large_combustion_engine.obstructed=进气口被阻挡
 gtqtcore.equal=外壳等级：%s与管道等级：%s等级不一致！将默认使用最低等级！
 gtqtcore.tire=多方块等级：%s
+gtqtcore.kqcc_accelerate=提供算力：%s 算力耗时减免：%s
 gtqtcore.tire1=多方块等级：%s 模式：§c 手动
 gtqtcore.tire2=多方块等级：%s 模式：§a 自动
 gregtech.multiblock.hand.throttle_decrement=§c切换到手动并行

@@ -50,7 +50,18 @@ public class GTQTUtil {
         // EV+
         return 64000;
     };
-
+    public static double getAccelerateByCWU(int requestCWUt)
+    {
+        if(requestCWUt>=2048) return 0.6;
+        else if(requestCWUt>=1972) return 0.65;
+        else if(requestCWUt>=1536) return 0.7;
+        else if(requestCWUt>=1280) return 0.78;
+        else if(requestCWUt>=1024) return 0.8;
+        else if(requestCWUt>=768) return 0.85;
+        else if(requestCWUt>=512) return 0.9;
+        else if(requestCWUt>=256) return 0.95;
+        return 1.0;
+    }
     @Nonnull
     public static ResourceLocation gtqtId(@Nonnull String path) {
         return new ResourceLocation("gtqtcore", path);

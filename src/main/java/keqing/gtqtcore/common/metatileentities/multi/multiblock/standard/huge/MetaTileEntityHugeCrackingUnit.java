@@ -5,8 +5,7 @@ package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.huge;
 import gregtech.api.GTValues;
 import gregtech.api.GregTechAPI;
 import gregtech.api.block.IHeatingCoilBlockStats;
-import gregtech.api.capability.IEnergyContainer;
-import gregtech.api.capability.IHeatingCoil;
+import gregtech.api.capability.*;
 import gregtech.api.capability.impl.*;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
@@ -62,14 +61,19 @@ import java.util.stream.Collectors;
 import static gregtech.api.GTValues.VA;
 import static keqing.gtqtcore.api.utils.GTQTUniverUtil.consistentList;
 import static keqing.gtqtcore.api.utils.GTQTUniverUtil.maxLength;
+import static keqing.gtqtcore.api.utils.GTQTUtil.getAccelerateByCWU;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.HUGE_CRACKING_UNIT;
 
-public class MetaTileEntityHugeCrackingUnit extends GTQTRecipeMapMultiblockOverwrite implements IHeatingCoil {
+public class MetaTileEntityHugeCrackingUnit extends GTQTRecipeMapMultiblockOverwrite implements IHeatingCoil, IOpticalComputationReceiver {
 
     private int blastFurnaceTemperature;
     protected int heatingCoilLevel;
     protected int coilTier;
     protected int glassTire;
+
+    int requestCWUt;
+    private IOpticalComputationProvider computationProvider;
+
     public MetaTileEntityHugeCrackingUnit(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, RecipeMaps.CRACKING_RECIPES);
         this.recipeMapWorkable = new MegaOilCrackingUnitWorkableHandler(this);
@@ -106,6 +110,10 @@ public class MetaTileEntityHugeCrackingUnit extends GTQTRecipeMapMultiblockOverw
     @Override
     public void update() {
         super.update();
+        if(isStructureFormed()&&isActive())
+        {
+            requestCWUt=computationProvider.requestCWUt(1024, false);
+        }
         if (modern == 0)
         {
             ParallelNum=ParallelNumA;
@@ -127,6 +135,7 @@ public class MetaTileEntityHugeCrackingUnit extends GTQTRecipeMapMultiblockOverw
         super.addDisplayText(textList);
         ITextComponent heatString = TextComponentUtil.stringWithColor(TextFormatting.RED, TextFormattingUtil.formatNumbers(this.blastFurnaceTemperature) + "K");
         textList.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY, "gregtech.multiblock.blast_furnace.max_temperature", heatString));
+        textList.add(new TextComponentTranslation("gtqtcore.kqcc_accelerate",requestCWUt,getAccelerateByCWU(requestCWUt)));
         if(modern==0) textList.add(new TextComponentTranslation("gtqtcore.tire1",coilTier));
         if(modern==1) textList.add(new TextComponentTranslation("gtqtcore.tire2",coilTier));
         textList.add(new TextComponentTranslation("gtqtcore.parr",ParallelNum,ParallelLim));
@@ -134,6 +143,12 @@ public class MetaTileEntityHugeCrackingUnit extends GTQTRecipeMapMultiblockOverw
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
+
+        List<IOpticalComputationHatch> providers = this.getAbilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION);
+        if (providers != null && !providers.isEmpty()) {
+            this.computationProvider = providers.get(0);
+        }
+
         Object glassTire = context.get("GlassTieredStats");
         this.glassTire = GTQTUtil.getOrDefault(() -> glassTire instanceof WrappedIntTired,
                 () -> ((WrappedIntTired)glassTire).getIntTier(),
@@ -181,7 +196,9 @@ public class MetaTileEntityHugeCrackingUnit extends GTQTRecipeMapMultiblockOverw
                                 .setMaxGlobalLimited(3))
                         .or(abilities(MultiblockAbility.INPUT_LASER)
                                 .setMaxGlobalLimited(1))
-                        .or(abilities(MultiblockAbility.MAINTENANCE_HATCH)))
+                        .or(abilities(MultiblockAbility.MAINTENANCE_HATCH))
+                        .or(abilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION).setExactLimit(1))
+                )
                 .where('G', TiredTraceabilityPredicate.CP_GLASS.get())
                 .where('L', heatingCoils())
                 .where('D', states(getCasingState())
@@ -225,7 +242,10 @@ public class MetaTileEntityHugeCrackingUnit extends GTQTRecipeMapMultiblockOverw
         tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.2",256));
         tooltip.add(I18n.format("本机器允许使用激光能源仓代替能源仓！"));
     }
-
+    @Override
+    public IOpticalComputationProvider getComputationProvider() {
+        return this.computationProvider;
+    }
     @Override
     public List<MultiblockShapeInfo> getMatchingShapes() {
         ArrayList<MultiblockShapeInfo> shapeInfo = new ArrayList<>();
@@ -238,7 +258,7 @@ public class MetaTileEntityHugeCrackingUnit extends GTQTRecipeMapMultiblockOverw
                     .aisle("CCCCCCCCCCCCC", " GALALALALAG ", " CAAAAAAAAAC ", " CALALALALAC ", " CAAAAAAAAAC ", " GALALALALAG ", " CGGGCCCGGGC ")
                     .aisle("CCCCCCCCCCCCC", " GALALALALAG ", " GALALALALAG ", " GALALALALAG ", " GALALALALAG ", " GALALALALAG ", " CGGGGGGGGGC ")
                     .aisle("CCCCCCCCCCCCC", "CCGGGGGGGGGCC", "CCGGGGGGGGGCC", "CCGGGGGGGGGCC", "CCGGGGGGGGGCC", "CCGGGGGGGGGCC", "CCGGGGGGGGGCC")
-                    .aisle("CCCCCCSKCCCCC", " CAAAAAAAAAC ", " CAAAAAAAAAC ", " CAAAAAAAAAC ", " CAAAAAAAAAC ", " CAAAAAAAAAC ", " CAAAAAAAAAC ")
+                    .aisle("CCCCCISKCCCCC", " CAAAAAAAAAC ", " CAAAAAAAAAC ", " CAAAAAAAAAC ", " CAAAAAAAAAC ", " CAAAAAAAAAC ", " CAAAAAAAAAC ")
                     .where('S', HUGE_CRACKING_UNIT, EnumFacing.SOUTH)
                     .where('C', getCasingState())
                     .where('V', MetaTileEntities.FLUID_IMPORT_HATCH[4], EnumFacing.UP)
@@ -246,6 +266,7 @@ public class MetaTileEntityHugeCrackingUnit extends GTQTRecipeMapMultiblockOverw
                     .where('N', MetaTileEntities.FLUID_EXPORT_HATCH[4], EnumFacing.EAST)
                     .where('K', MetaTileEntities.ITEM_IMPORT_BUS[4], EnumFacing.SOUTH)
                     .where('H', MetaTileEntities.ENERGY_INPUT_HATCH[5], EnumFacing.NORTH)
+                    .where('I', MetaTileEntities.COMPUTATION_HATCH_RECEIVER, EnumFacing.SOUTH)
                     .where('G', MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.FUSION_GLASS))
                     .where('A', Blocks.AIR.getDefaultState())
                     .where('J', MetaTileEntities.MAINTENANCE_HATCH , EnumFacing.NORTH);
@@ -293,6 +314,11 @@ public class MetaTileEntityHugeCrackingUnit extends GTQTRecipeMapMultiblockOverw
 
             resultOverclock[0] *= (int) (1.0f - Tier * 0.1);
             resultOverclock[0] = Math.max(1, resultOverclock[0]);
+        }
+        @Override
+        public void setMaxProgress(int maxProgress) {
+            int MaxProgress = (int) Math.floor(maxProgress * Math.pow(0.8, glassTire)*getAccelerateByCWU(requestCWUt));
+            super.setMaxProgress(MaxProgress);
         }
         protected void modifyOverclockPre( int[] values, IRecipePropertyStorage storage) {
             super.modifyOverclockPre(values, storage);

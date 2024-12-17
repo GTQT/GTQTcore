@@ -291,7 +291,6 @@ public class GTQTMaterials {
     public static Material AuPdCCatalyst;
     public static Material Dibromomethylbenzene;
     public static Material Terephthalaldehyde;
-    public static Material Isochloropropane;
     public static Material SodiumOxide;
     public static Material Dinitrodipropanyloxybenzene;
     public static Material PreZylon;

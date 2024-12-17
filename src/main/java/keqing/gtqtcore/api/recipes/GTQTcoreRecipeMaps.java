@@ -227,7 +227,7 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<MDRecipeBuilder> MINING_DRILL_RECIPES;
     public static final RecipeMap<SimpleRecipeBuilder> DISTILLATION_KETTLE;
     public static final RecipeMap<SimpleRecipeBuilder> NANOHYBRID;
-    public static final RecipeMap<SimpleRecipeBuilder> PYROLYSIS_TOWER;
+    public static final RecipeMap<HeatRecipeBuilder> PYROLYSIS_TOWER;
     public static final RecipeMap<ComputationRecipeBuilder> LASER_ENGRAVING;
     public static final RecipeMap<ComputationRecipeBuilder> TD_PRINT_RECIPES;
     public static final RecipeMap<ComputationRecipeBuilder> PRECISION_SPRAYING;
@@ -487,7 +487,7 @@ public class GTQTcoreRecipeMaps {
                 1, false, 1,false,  1,false,  12,false,  new SimpleRecipeBuilder(), false).setSound(GTSoundEvents.CHEMICAL_REACTOR);
 
         PYROLYSIS_TOWER = new RecipeMap<>("pyrolysis_tower",
-                1, 1, 1, 8, new SimpleRecipeBuilder(), false);
+                1, 1, 1, 8, new HeatRecipeBuilder(), false);
 
         QUANTUM_FORCE_TRANSFORMER_RECIPES = new RecipeMap<>("quantum_force_transformer_recipes", 6,  6,  6,  6, new QFTCasingTierRecipeBuilder(), false)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL)

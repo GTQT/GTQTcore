@@ -21,8 +21,8 @@ public class NeutronActivatorPartProperty extends RecipeProperty<Integer> {
 
     @Override
     public void drawInfo(Minecraft minecraft, int x, int y, int color, Object value) {
-        minecraft.fontRenderer.drawString(I18n.format("中子动能：",
-                castValue(value).toString()) + getPart(castValue(value)), x, y, color);
+        minecraft.fontRenderer.drawString(I18n.format("中子动能：%s",
+                castValue(value)*200), x, y, color);
     }
 
     public static NeutronActivatorPartProperty getInstance() {
@@ -30,20 +30,5 @@ public class NeutronActivatorPartProperty extends RecipeProperty<Integer> {
             INSTANCE = new NeutronActivatorPartProperty();
         }
         return INSTANCE;
-    }
-
-    private static String getPart(Integer Part) {
-        Map.Entry<Integer, String> mapEntry = registeredPart.ceilingEntry(Part);
-
-        if (mapEntry == null) {
-            throw new IllegalArgumentException("Tier is above registered maximum Casing Tier.");
-        }
-
-        return String.format("%s", mapEntry.getValue());
-    }
-
-    public static void registeredPart(int tier, String shortName) {
-        Validate.notNull(shortName);
-        registeredPart.put(tier, shortName);
     }
 }

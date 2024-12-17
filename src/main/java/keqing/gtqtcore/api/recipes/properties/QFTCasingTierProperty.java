@@ -27,22 +27,7 @@ public class QFTCasingTierProperty extends RecipeProperty<Integer> {
 
     @Override
     public void drawInfo(Minecraft minecraft, int x, int y, int color, Object value) {
-        minecraft.fontRenderer.drawString(I18n.format("gtqtcore.machine.quantum_force_transformer.tier",
-                castValue(value).toString()) + getQFTCasingTier(castValue(value)), x, y, color);
-    }
-
-    private static String getQFTCasingTier(Integer casingTier) {
-        Map.Entry<Integer, String> mapEntry = registeredQFTCasingTiers.ceilingEntry(casingTier);
-
-        if (mapEntry == null) {
-            throw new IllegalArgumentException("Tier is above registered maximum Casing Tier.");
-        }
-
-        return String.format("%s", mapEntry.getValue());
-    }
-
-    public static void registerQFTCasingTier(int tier, String shortName) {
-        Validate.notNull(shortName);
-        registeredQFTCasingTiers.put(tier, shortName);
+        minecraft.fontRenderer.drawString(I18n.format("结构等级：%s",
+                castValue(value)), x, y, color);
     }
 }

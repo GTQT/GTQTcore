@@ -13,7 +13,6 @@ public class PAProperty extends RecipeProperty<Integer> {
 
     public static final String KEY = "tier";
 
-    private static final TreeMap<Integer, String> registeredTier = new TreeMap<>();
     private static PAProperty INSTANCE;
 
     private PAProperty() {
@@ -22,8 +21,8 @@ public class PAProperty extends RecipeProperty<Integer> {
 
     @Override
     public void drawInfo(Minecraft minecraft, int x, int y, int color, Object value) {
-        minecraft.fontRenderer.drawString(I18n.format("外壳等级：",
-                castValue(value).toString()) + getTier(castValue(value)), x, y, color);
+        minecraft.fontRenderer.drawString(I18n.format("设备等级：%s",
+                castValue(value)), x, y, color);
     }
 
     public static PAProperty getInstance() {
@@ -31,20 +30,5 @@ public class PAProperty extends RecipeProperty<Integer> {
             INSTANCE = new PAProperty();
         }
         return INSTANCE;
-    }
-
-    private static String getTier(Integer Part) {
-        Map.Entry<Integer, String> mapEntry = registeredTier.ceilingEntry(Part);
-
-        if (mapEntry == null) {
-            throw new IllegalArgumentException("NULL tier");
-        }
-
-        return String.format("%s", mapEntry.getValue());
-    }
-
-    public static void registeredTier(int tier, String shortName) {
-        Validate.notNull(shortName);
-        registeredTier.put(tier, shortName);
     }
 }

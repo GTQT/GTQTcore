@@ -7,6 +7,7 @@ import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.dust;
 import static gregtechfoodoption.GTFOMaterialHandler.AceticAnhydride;
+import static gregtechfoodoption.GTFOMaterialHandler.IsopropylChloride;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.CHEMICAL_PLANT;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.FLUIDIZED_BED;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
@@ -78,30 +79,11 @@ public class ZylonChain {
                 .duration(200)
                 .buildAndRegister();
 
-        //  Isochloropropane
-        FLUIDIZED_BED.recipeBuilder()
-                .fluidInputs(Propene.getFluid(1000))
-                .fluidInputs(HydrochloricAcid.getFluid(1000))
-                .fluidOutputs(Isochloropropane.getFluid(1000))
-                .EUt(VA[HV])
-                .duration(110)
-                .buildAndRegister();
-
-        LARGE_CHEMICAL_RECIPES.recipeBuilder()
-                .circuitMeta(1)
-                .notConsumable(dust,Gold)
-                .fluidInputs(Propene.getFluid(1000))
-                .fluidInputs(HydrochloricAcid.getFluid(1000))
-                .fluidOutputs(Isochloropropane.getFluid(1000))
-                .EUt(VA[HV])
-                .duration(110)
-                .buildAndRegister();
-
         //  Dinitrodipropanyloxybenzene
         LARGE_CHEMICAL_RECIPES.recipeBuilder()
                 .input(dust, SodiumOxide, 3)
                 .fluidInputs(Resorcinol.getFluid(1000))
-                .fluidInputs(Isochloropropane.getFluid(1000))
+                .fluidInputs(IsopropylChloride.getFluid(1000))
                 .fluidInputs(AceticAnhydride.getFluid(1000))
                 .fluidInputs(NitricAcid.getFluid(2000))
                 .fluidInputs(Propene.getFluid(1000))
@@ -117,7 +99,7 @@ public class ZylonChain {
         CHEMICAL_PLANT.recipeBuilder()
                 .input(dust, SodiumOxide, 3)
                 .fluidInputs(Resorcinol.getFluid(1000))
-                .fluidInputs(Isochloropropane.getFluid(1000))
+                .fluidInputs(IsopropylChloride.getFluid(1000))
                 .fluidInputs(AceticAnhydride.getFluid(1000))
                 .fluidInputs(NitricAcid.getFluid(2000))
                 .fluidInputs(Propene.getFluid(1000))

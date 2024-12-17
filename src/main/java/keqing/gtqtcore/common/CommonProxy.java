@@ -1,23 +1,19 @@
 package keqing.gtqtcore.common;
 
 import gregtech.api.GregTechAPI;
-import gregtech.api.block.IHeatingCoilBlockStats;
 import gregtech.api.block.VariantItemBlock;
 import gregtech.api.cover.CoverDefinition;
 import gregtech.api.recipes.recipeproperties.FusionEUToStartProperty;
-import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.Materials;
-import gregtech.api.unification.material.properties.PropertyKey;
 import gregtech.api.unification.stack.ItemMaterialInfo;
-import gregtech.common.blocks.BlockWireCoil;
 import gregtech.integration.crafttweaker.block.CTHeatingCoilBlockStats;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
-import keqing.gtqtcore.api.recipes.properties.*;
-import keqing.gtqtcore.api.unification.GTQTMaterials;
+import keqing.gtqtcore.api.recipes.properties.ERProperty;
+import keqing.gtqtcore.api.recipes.properties.NeutronActivatorIOPartProperty;
+import keqing.gtqtcore.api.recipes.properties.PCBFactoryBioUpgradeProperty;
+import keqing.gtqtcore.api.recipes.properties.SwarmTierProperty;
 import keqing.gtqtcore.api.unification.ore.GTQTStoneTypes;
-import keqing.gtqtcore.api.utils.GTQTKQnetHelper;
 import keqing.gtqtcore.api.utils.GTQTLog;
-import keqing.gtqtcore.api.utils.GTQTOreHelper;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTBlockWireCoil;
 import keqing.gtqtcore.common.block.blocks.GTQTCrops;
@@ -27,10 +23,8 @@ import keqing.gtqtcore.common.items.GTQTMetaItems;
 import keqing.gtqtcore.common.items.metaitems.GTQTMetaToolItems;
 import keqing.gtqtcore.loaders.OreDictionaryLoader;
 import keqing.gtqtcore.loaders.recipes.*;
-import keqing.gtqtcore.loaders.recipes.handlers.GCYSMaterialInfoLoader;
 import keqing.gtqtcore.loaders.recipes.handlers.*;
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -52,9 +46,6 @@ import java.util.Objects;
 import java.util.function.Function;
 
 import static gregtech.api.GregTechAPI.HEATING_COILS;
-import static gregtech.api.unification.material.info.MaterialFlags.*;
-import static keqing.gtqtcore.api.capability.chemical_plant.ChemicalPlantProperties.registerCasingTier;
-import static keqing.gtqtcore.api.unification.material.info.EPMaterialFlags.GENERATE_COIL;
 import static keqing.gtqtcore.api.utils.ChatCalculatorHelper.eval;
 import static keqing.gtqtcore.common.block.GTQTMetaBlocks.*;
 import static net.minecraft.init.Blocks.DIRT;
@@ -129,62 +120,15 @@ public class CommonProxy {
         }
     };
 
-    public void postInit() {
+    public CommonProxy() {
     }
-    public void construction() {
-    }
-    public void loadComplete() {
-    }
-    public void preInit() {
-        GTQTMetaToolItems.init();
-        GTQTRecipes.registerTool();
-    }
+
     @SubscribeEvent
     public static void registerRecipeHandlers(RegistryEvent.Register<IRecipe> event) {
         GTQTLog.logger.info("Registering recipe handlers...");
         MaterialRecipeHandler.register();
         PipeRecipeHandler.register();
         PartRecipeHandler.register();
-    }
-    public void preLoad(){
-        GTQTStoneTypes.init();
-        GTQTcoreRecipeMaps.init();
-        MinecraftForge.EVENT_BUS.register(new GTQTEventHandler.PlayerLoginEventHandler());
-    }
-    public void init() {
-        OreDictionaryLoader.init();
-        MiscMachineRecipes.init();
-        IntegratedMiningDivision.init();
-        HeatExchangeRecipes.init();
-        ELE.init();
-        OreDeal.init();
-        KeQingNET.init();
-        ISA.init();
-        QTF.init();
-        ComponentAssemblyLineRecipes.init();
-        ComponentAssemblerRecipes.init();
-        RocketEngineRecipes.init();
-        GTQTRecipesManager.init();
-        WrapCircuits.init();
-        MetaTileEntityLoader.init();
-        MetaTileEntityMachine.init();
-        CopyRecipesHandlers.init();
-        /*
-        for (Material material : GregTechAPI.materialManager.getRegisteredMaterials())
-        {
-             if(material.hasProperty(PropertyKey.WIRE))
-                GTQTLog.logger.info(new TextComponentTranslation("",material,material.getProperty(PropertyKey.WIRE).getAmperage(),material.getProperty(PropertyKey.WIRE).getVoltage(),material.getProperty(PropertyKey.WIRE).getLossPerBlock()));
-        }
-
-         */
-        for (GTQTBlockWireCoil.CoilType type : GTQTBlockWireCoil.CoilType.values()) {
-            HEATING_COILS.put(GTQTMetaBlocks.WIRE_COIL.getState(type), type);
-        }
-
-        HEATING_COILS.put(DIRT.getDefaultState(),new CTHeatingCoilBlockStats("dirt", 300, 1, 0,1, Materials.Iron));
-    }
-
-    public CommonProxy() {
     }
 
     @SubscribeEvent
@@ -197,9 +141,9 @@ public class CommonProxy {
     public static void initMaterialInfo(GregTechAPI.RegisterEvent<ItemMaterialInfo> event) {
         GCYSMaterialInfoLoader.init();
     }
+
     @SubscribeEvent
-    public static void registerBlocks(RegistryEvent.Register<Block> event)
-    {
+    public static void registerBlocks(RegistryEvent.Register<Block> event) {
         GTQTLog.logger.info("Registering blocks...");
         IForgeRegistry<Block> registry = event.getRegistry();
         /*
@@ -263,8 +207,7 @@ public class CommonProxy {
     }
 
     @SubscribeEvent
-    public static void registerItems(RegistryEvent.Register<Item> event)
-    {
+    public static void registerItems(RegistryEvent.Register<Item> event) {
         GTQTLog.logger.info("Registering Items...");
         IForgeRegistry<Item> registry = event.getRegistry();
         /*
@@ -307,7 +250,8 @@ public class CommonProxy {
         registry.register(createItemBlock(GTQTMetaBlocks.MULTIBLOCK_CASING_ACTIVE, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.TRANSPARENT_CASING, VariantItemBlock::new));
         registry.register(createItemBlock(STNT, ItemBlock::new));
-        for (GTQTStoneVariantBlock block : GTQTMetaBlocks.SUSY_STONE_BLOCKS.values()) registry.register(createItemBlock(block, VariantItemBlock::new));
+        for (GTQTStoneVariantBlock block : GTQTMetaBlocks.SUSY_STONE_BLOCKS.values())
+            registry.register(createItemBlock(block, VariantItemBlock::new));
         registry.register(createItemBlock(PINE_LOG, ItemBlock::new));
         registry.register(createItemBlock(PINE_SAPLING, ItemBlock::new));
         registry.register(createItemBlock(PINE_LEAVES, ItemBlock::new));
@@ -320,99 +264,45 @@ public class CommonProxy {
     }
 
     @SubscribeEvent
-    public static void registerRecipes(RegistryEvent.Register<IRecipe> event)
-    {
+    public static void registerRecipes(RegistryEvent.Register<IRecipe> event) {
         GTQTLog.logger.info("Registering recipes...");
 
 
-        NeutronActivatorIOPartProperty.registeredPart(1,"质子");
-        NeutronActivatorIOPartProperty.registeredPart(2,"氘核");
-        NeutronActivatorIOPartProperty.registeredPart(3,"氚核");
-        NeutronActivatorIOPartProperty.registeredPart(4,"氦核（α粒子）");
-        NeutronActivatorIOPartProperty.registeredPart(5,"电子");
-        registerCasingTier(1, "一级");
-        registerCasingTier(2, "二级");
-        registerCasingTier(3, "三级");
-        registerCasingTier(4, "四级");
-        registerCasingTier(5, "五级");
-        registerCasingTier(6, "六级");
-        registerCasingTier(7, "七级");
-        registerCasingTier(8, "八级");
-        registerCasingTier(9, "九级");
+        NeutronActivatorIOPartProperty.registeredPart(1, "质子");
+        NeutronActivatorIOPartProperty.registeredPart(2, "氘核");
+        NeutronActivatorIOPartProperty.registeredPart(3, "氚核");
+        NeutronActivatorIOPartProperty.registeredPart(4, "氦核（α粒子）");
+        NeutronActivatorIOPartProperty.registeredPart(5, "电子");
 
-        int[] array = {-3,-2,-1,0,1, 2, 3, 4,5,6,7,8,81,82,83,84};
-        for (int j : array) MDProperties.registeredTier(j, GTQTOreHelper.getInfo(j));
+        ERProperty.registeredRate(101, "1 0 1 0 0 酸性");
+        ERProperty.registeredRate(102, "1 0 1 1 0 酸性");
+        ERProperty.registeredRate(103, "1 1 0 1 0 酸性");
+        ERProperty.registeredRate(104, "1 1 0 1 1 酸性");
 
-        for(int i=0;i<=30;i++) KQKindProperty.registeredKI(i, GTQTKQnetHelper.getInfo(i));
+        ERProperty.registeredRate(201, "2 1 1 3 1 碱性");
+        ERProperty.registeredRate(202, "1 2 3 1 1 碱性");
+        ERProperty.registeredRate(203, "1 3 2 1 1 碱性");
+        ERProperty.registeredRate(204, "2 1 1 3 1 碱性");
 
-        ELEProperties.registeredTier(1,"一级");
-        ELEProperties.registeredTier(2,"二级");
-        ELEProperties.registeredTier(3,"三级");
-        ELEProperties.registeredTier(4,"四级");
-        ELEProperties.registeredTier(5,"五级");
+        ERProperty.registeredRate(301, "4 1 1 3 2 酸性");
+        ERProperty.registeredRate(302, "2 4 2 3 1 酸性");
+        ERProperty.registeredRate(303, "2 3 2 4 1 酸性");
 
-        ERProperty.registeredRate(101,"1 0 1 0 0 酸性");
-        ERProperty.registeredRate(102,"1 0 1 1 0 酸性");
-        ERProperty.registeredRate(103,"1 1 0 1 0 酸性");
-        ERProperty.registeredRate(104,"1 1 0 1 1 酸性");
-
-        ERProperty.registeredRate(201,"2 1 1 3 1 碱性");
-        ERProperty.registeredRate(202,"1 2 3 1 1 碱性");
-        ERProperty.registeredRate(203,"1 3 2 1 1 碱性");
-        ERProperty.registeredRate(204,"2 1 1 3 1 碱性");
-
-        ERProperty.registeredRate(301,"4 1 1 3 2 酸性");
-        ERProperty.registeredRate(302,"2 4 2 3 1 酸性");
-        ERProperty.registeredRate(303,"2 3 2 4 1 酸性");
-
-        ERProperty.registeredRate(401,"2 5 2 4 3 碱性");
+        ERProperty.registeredRate(401, "2 5 2 4 3 碱性");
 
         SwarmTierProperty.registerSwarmTier(1, "I");
         SwarmTierProperty.registerSwarmTier(2, "II");
         SwarmTierProperty.registerSwarmTier(3, "III");
 
-        for(int i=1;i<=5;i=i+1) LASERNetProperty.registeredLaser(i, String.valueOf(i));
-        for(int i=1;i<=100;i++) KQNetProperty.registeredNB(i, String.valueOf(i));
-        for(int i=1;i<=100;i++) BRProperty.registeredRate(i, String.valueOf(i));
-        for(int i=0;i<=10;i++) NeutronActivatorPartProperty.registeredPart(i*200, String.valueOf(i*200));
-        for(int i=1;i<=10;i++) NuclearProperties.registeredminTemp(i, String.valueOf(i));
-        for(int i=1;i<=10;i++) PAProperty.registeredTier(i, String.valueOf(i));
-
-        PACasingTierProperty.registerPACasingTier(1, "1");
-        PACasingTierProperty.registerPACasingTier(2, "2");
-        PACasingTierProperty.registerPACasingTier(3,"3");
-
-        PCBFactoryProperty.registerPCBFactoryTier(1, "1");
-        PCBFactoryProperty.registerPCBFactoryTier(2, "2");
-        PCBFactoryProperty.registerPCBFactoryTier(3, "3");
         PCBFactoryBioUpgradeProperty.registerPCBFactoryBioUpgradeTier(1, "");
 
         FusionEUToStartProperty.registerFusionTier(9, "(MK4)");
         FusionEUToStartProperty.registerFusionTier(10, "(MK5)");
         FusionEUToStartProperty.registerFusionTier(11, "(MK6)");
-        QFTCasingTierProperty.registerQFTCasingTier(1, "1");
-        QFTCasingTierProperty.registerQFTCasingTier(2, "2");
-        QFTCasingTierProperty.registerQFTCasingTier(3, "3");
-        QFTCasingTierProperty.registerQFTCasingTier(4, "4");
-
-        CACasingTierProperty.registerCACasingTier(1, "1");
-        CACasingTierProperty.registerCACasingTier(2, "2");
-        CACasingTierProperty.registerCACasingTier(3, "3");
-        CACasingTierProperty.registerCACasingTier(4, "4");
-        CACasingTierProperty.registerCACasingTier(5, "5");
-        CACasingTierProperty.registerCACasingTier(6, "6");
-        CACasingTierProperty.registerCACasingTier(7, "7");
-        CACasingTierProperty.registerCACasingTier(8, "8");
-        CACasingTierProperty.registerCACasingTier(9, "9");
-        CACasingTierProperty.registerCACasingTier(10, "10");
-        CACasingTierProperty.registerCACasingTier(11, "11");
-        CACasingTierProperty.registerCACasingTier(12, "12");
-        CACasingTierProperty.registerCACasingTier(13, "13");
-        CACasingTierProperty.registerCACasingTier(14, "14");
     }
 
     @SubscribeEvent
-    public static void registerServerChatEvents( ServerChatEvent event) {
+    public static void registerServerChatEvents(ServerChatEvent event) {
         String message = event.getMessage();
 
         if (!message.startsWith("="))
@@ -457,6 +347,59 @@ public class CommonProxy {
             // return output
             event.getPlayer().sendMessage(new TextComponentString(formatted).setStyle(new Style().setColor(TextFormatting.GRAY)));
         }
+    }
+
+    public void postInit() {
+    }
+
+    public void construction() {
+    }
+
+    public void loadComplete() {
+    }
+
+    public void preInit() {
+        GTQTMetaToolItems.init();
+        GTQTRecipes.registerTool();
+    }
+
+    public void preLoad() {
+        GTQTStoneTypes.init();
+        GTQTcoreRecipeMaps.init();
+        MinecraftForge.EVENT_BUS.register(new GTQTEventHandler.PlayerLoginEventHandler());
+    }
+
+    public void init() {
+        OreDictionaryLoader.init();
+        MiscMachineRecipes.init();
+        IntegratedMiningDivision.init();
+        HeatExchangeRecipes.init();
+        ELE.init();
+        OreDeal.init();
+        KeQingNET.init();
+        ISA.init();
+        QTF.init();
+        ComponentAssemblyLineRecipes.init();
+        ComponentAssemblerRecipes.init();
+        RocketEngineRecipes.init();
+        GTQTRecipesManager.init();
+        WrapCircuits.init();
+        MetaTileEntityLoader.init();
+        MetaTileEntityMachine.init();
+        CopyRecipesHandlers.init();
+        /*
+        for (Material material : GregTechAPI.materialManager.getRegisteredMaterials())
+        {
+             if(material.hasProperty(PropertyKey.WIRE))
+                GTQTLog.logger.info(new TextComponentTranslation("",material,material.getProperty(PropertyKey.WIRE).getAmperage(),material.getProperty(PropertyKey.WIRE).getVoltage(),material.getProperty(PropertyKey.WIRE).getLossPerBlock()));
+        }
+
+         */
+        for (GTQTBlockWireCoil.CoilType type : GTQTBlockWireCoil.CoilType.values()) {
+            HEATING_COILS.put(GTQTMetaBlocks.WIRE_COIL.getState(type), type);
+        }
+
+        HEATING_COILS.put(DIRT.getDefaultState(), new CTHeatingCoilBlockStats("dirt", 300, 1, 0, 1, Materials.Iron));
     }
 
 }

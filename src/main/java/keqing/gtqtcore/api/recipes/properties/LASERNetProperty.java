@@ -13,7 +13,6 @@ public class LASERNetProperty extends RecipeProperty<Integer> {
 
     public static final String KEY = "Laser";
 
-    private static final TreeMap<Integer, String> registeredLaser = new TreeMap<>();
     private static LASERNetProperty INSTANCE;
 
     private LASERNetProperty() {
@@ -22,8 +21,8 @@ public class LASERNetProperty extends RecipeProperty<Integer> {
 
     @Override
     public void drawInfo(Minecraft minecraft, int x, int y, int color, Object value) {
-        minecraft.fontRenderer.drawString(I18n.format("紫外波长：",
-                castValue(value).toString()) + getLaser(castValue(value)), x, y, color);
+        minecraft.fontRenderer.drawString(I18n.format("紫外发射器等级：%s",
+                castValue(value)), x, y, color);
     }
 
     public static LASERNetProperty getInstance() {
@@ -33,18 +32,4 @@ public class LASERNetProperty extends RecipeProperty<Integer> {
         return INSTANCE;
     }
 
-    private static String getLaser(Integer Part) {
-        Map.Entry<Integer, String> mapEntry = registeredLaser.ceilingEntry(Part);
-
-        if (mapEntry == null) {
-            throw new IllegalArgumentException("NULL Laser");
-        }
-
-        return String.format("%s", mapEntry.getValue());
-    }
-
-    public static void registeredLaser(int tier, String shortName) {
-        Validate.notNull(shortName);
-        registeredLaser.put(tier, shortName);
-    }
 }

@@ -2856,6 +2856,7 @@ gtqtcore.multiblock.large_combustion_engine.boost_disallowed=§bUse a higher vol
 gtqtcore.multiblock.large_combustion_engine.no_water=Insufficient Water Capacity
 gtqtcore.multiblock.large_combustion_engine.obstructed=Intake Blocked
 gtqtcore.equal=Shell Grade: %s and Pipe Grade: %s are inconsistent! Defaulting to the lowest grade!
+gtqtcore.kqcc_accelerate=Computing power: %s Computing power time reduction: %s /10
 gtqtcore.tire=Multiblock Level: %s
 gtqtcore.tire1=Multiblock Level: %s Mode: §cManual
 gtqtcore.tire2=Multiblock Level: %s Mode: §aAutomatic

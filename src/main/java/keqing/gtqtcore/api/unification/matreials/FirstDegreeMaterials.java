@@ -982,12 +982,7 @@ public class FirstDegreeMaterials {
                 .build();
 
         //  25107 Isochloropropane
-        GTQTMaterials.Isochloropropane = new Material.Builder(getMaterialsId(), gregtechId("isochloropropane"))
-                .fluid()
-                .color(0xC3AC65)
-                .components(Carbon, 3, Hydrogen, 7, Chlorine, 1)
-                .build()
-                .setFormula("CH3CHClCH3", true);
+        getMaterialsId();
 
         //  24205 Sodium Oxide
         GTQTMaterials.SodiumOxide = new Material.Builder(getMaterialsId(), gregtechId("sodium_oxide"))
