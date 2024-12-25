@@ -58,28 +58,36 @@ import java.util.List;
 
 import static gregtech.api.unification.material.Materials.DrillingFluid;
 
-public class MetaTileEntityFracturing extends MultiblockWithDisplayBase implements IMiner,ITieredMetaTileEntity, IWorkable {
+public class MetaTileEntityFracturing extends MultiblockWithDisplayBase implements IMiner, ITieredMetaTileEntity, IWorkable {
 
-    int thresholdPercentage = 1;
     private final FracturingLogic minerLogic;
     private final int tier;
     private final int drillingFluidConsumePerTick;
-    private boolean isInventoryFull = false;
     protected IMultipleTankHandler inputFluidInventory;
     protected IMultipleTankHandler outputFluidInventory;
     protected IEnergyContainer energyContainer;
+    int thresholdPercentage = 1;
+    private boolean isInventoryFull = false;
+
+    public MetaTileEntityFracturing(ResourceLocation metaTileEntityId, int tier) {
+        super(metaTileEntityId);
+        this.minerLogic = new FracturingLogic(this);
+        this.drillingFluidConsumePerTick = 10;
+        this.tier = tier;
+    }
+
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("thresholdPercentage", thresholdPercentage);
         this.minerLogic.writeToNBT(data);
         return super.writeToNBT(data);
     }
 
-   
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
-        thresholdPercentage= data.getInteger("thresholdPercentage");
+        thresholdPercentage = data.getInteger("thresholdPercentage");
         this.minerLogic.readFromNBT(data);
     }
+
     @Override
     public boolean isInventoryFull() {
         return this.isInventoryFull;
@@ -88,13 +96,6 @@ public class MetaTileEntityFracturing extends MultiblockWithDisplayBase implemen
     @Override
     public void setInventoryFull(boolean isFull) {
         this.isInventoryFull = isFull;
-    }
-
-    public MetaTileEntityFracturing(ResourceLocation metaTileEntityId, int tier) {
-        super(metaTileEntityId);
-        this.minerLogic = new FracturingLogic(this);
-        this.drillingFluidConsumePerTick = 10;
-        this.tier = tier;
     }
 
     @Override
@@ -123,8 +124,7 @@ public class MetaTileEntityFracturing extends MultiblockWithDisplayBase implemen
         this.thresholdPercentage = MathHelper.clamp(thresholdPercentage - 1, 1, 10);
     }
 
-    public int getThresholdPercentage()
-    {
+    public int getThresholdPercentage() {
         return thresholdPercentage;
     }
 
@@ -143,12 +143,13 @@ public class MetaTileEntityFracturing extends MultiblockWithDisplayBase implemen
         this.outputFluidInventory = new FluidTankList(true);
         this.energyContainer = new EnergyContainerList(Lists.newArrayList());
     }
-    public IMultipleTankHandler getInputFluidInventory()
-    {
+
+    public IMultipleTankHandler getInputFluidInventory() {
         return this.inputFluidInventory;
     }
+
     public boolean drainFluid(boolean simulate) {
-        FluidStack drillingFluid = DrillingFluid.getFluid(10*thresholdPercentage);
+        FluidStack drillingFluid = DrillingFluid.getFluid(10 * thresholdPercentage);
         FluidStack fluidStack = inputFluidInventory.getTankAt(0).getFluid();
         if (fluidStack != null && fluidStack.isFluidEqual(DrillingFluid.getFluid(1)) && fluidStack.amount >= drillingFluid.amount) {
             if (isWorkingEnabled()) {
@@ -186,9 +187,9 @@ public class MetaTileEntityFracturing extends MultiblockWithDisplayBase implemen
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
-                .aisle("FFFFFCC","XXXXXCC","XXXXXCC","XXXXXCC","  F    ","  F    ","       ","       ","       ")
-                .aisle("F F  CC","CCCCCCC","CCCCCCC","CCCCCCC"," FFF   "," FFF   ","  F    ","  F    ","  F    ")
-                .aisle("FFFFFCC","XXXXXCC","XXSXXCC","XXXXXCC","  F    ","  F    ","       ","       ","       ")
+                .aisle("FFFFFCC", "XXXXXCC", "XXXXXCC", "XXXXXCC", "  F    ", "  F    ", "       ", "       ", "       ")
+                .aisle("F F  CC", "CCCCCCC", "CCCCCCC", "CCCCCCC", " FFF   ", " FFF   ", "  F    ", "  F    ", "  F    ")
+                .aisle("FFFFFCC", "XXXXXCC", "XXSXXCC", "XXXXXCC", "  F    ", "  F    ", "       ", "       ", "       ")
                 .where('S', selfPredicate())
                 .where('X', states(getCasingState()).setMinGlobalLimited(3)
                         .or(abilities(MultiblockAbility.INPUT_ENERGY).setExactLimit(1))
@@ -237,7 +238,7 @@ public class MetaTileEntityFracturing extends MultiblockWithDisplayBase implemen
         super.addDisplayText(textList);
         if (!isStructureFormed())
             return;
-        textList.add(new TextComponentTranslation("gtqtcore.multiblock.fr2.amount",thresholdPercentage));
+        textList.add(new TextComponentTranslation("gtqtcore.multiblock.fr2.amount", thresholdPercentage));
         if (getInputFluidInventory() != null) {
             FluidStack DrillStack = getInputFluidInventory().drain(DrillingFluid.getFluid(Integer.MAX_VALUE), false);
             int Amount = DrillStack == null ? 0 : DrillStack.amount;
@@ -273,7 +274,7 @@ public class MetaTileEntityFracturing extends MultiblockWithDisplayBase implemen
             if (!drainFluid(true)) {
                 textList.add(new TextComponentTranslation("gregtech.machine.miner.multi.needsfluid").setStyle(new Style().setColor(TextFormatting.RED)));
             }
-            
+
             if (!drainEnergy(true)) {
                 textList.add(new TextComponentTranslation("gregtech.multiblock.not_enough_energy").setStyle(new Style().setColor(TextFormatting.RED)));
             }
@@ -353,13 +354,12 @@ public class MetaTileEntityFracturing extends MultiblockWithDisplayBase implemen
 
     public int getEnergyTier() {
         if (energyContainer == null) return this.tier;
-        return Math.min(this.tier + 1 , Math.max(this.tier, GTUtility.getFloorTierByVoltage(energyContainer.getInputVoltage())));
+        return Math.min(this.tier + 1, Math.max(this.tier, GTUtility.getFloorTierByVoltage(energyContainer.getInputVoltage())));
     }
 
     public long getEnergyInputPerSecond() {
         return energyContainer.getInputPerSec();
     }
-
 
 
     public boolean drainEnergy(boolean simulate) {

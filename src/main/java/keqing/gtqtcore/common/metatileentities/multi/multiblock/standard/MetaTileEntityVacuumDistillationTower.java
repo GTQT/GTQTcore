@@ -31,7 +31,6 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 import static gregtech.api.GTValues.V;
-import static gregtech.api.GTValues.VA;
 import static gregtech.api.util.RelativeDirection.*;
 
 public class MetaTileEntityVacuumDistillationTower extends RecipeMapMultiblockController {
@@ -39,28 +38,7 @@ public class MetaTileEntityVacuumDistillationTower extends RecipeMapMultiblockCo
         super(metaTileEntityId, RecipeMaps.DISTILLATION_RECIPES);
         this.recipeMapWorkable = new MFSWorkableHandler(this);
     }
-    private class MFSWorkableHandler extends MultiblockRecipeLogic {
-        private boolean isDistilleryMode() {
-            return this.getRecipeMap() == GTQTcoreRecipeMaps.DISTILLATION_KETTLE;
-        }
-        public MFSWorkableHandler(RecipeMapMultiblockController tileEntity) {
-            super(tileEntity);
-        }
-        @Override
-        public int getParallelLimit() {
-            return 32;
-        }
 
-        public long getMaxVoltage() {
-            return V[6];
-        }
-
-        @Override
-        public void setMaxProgress(int maxProgress)
-        {
-            this.maxProgressTime = (int) (maxProgress*0.8);
-        }
-    }
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityVacuumDistillationTower(this.metaTileEntityId);
     }
@@ -70,7 +48,7 @@ public class MetaTileEntityVacuumDistillationTower extends RecipeMapMultiblockCo
                 .aisle(" CSC  ", "CCCCCC", "CCCCCC", "CCCCCC", " CCC  ")
                 .aisle(" CGC  ", "C#F#CC", "IFFF#P", "C#F#CC", " CCC  ")
                 .aisle(" CGC  ", "C#F#CC", "CFFFCC", "C#F#CC", " CCC  ")
-                .aisle(" XGX  ", "X#F#D ", "XFFFD ", "X#F#D ", " XXX  ").setRepeatable(1,12)
+                .aisle(" XGX  ", "X#F#D ", "XFFFD ", "X#F#D ", " XXX  ").setRepeatable(1, 12)
                 .aisle(" DDD  ", "DDDDD ", "DDDDD ", "DDDDD ", " DDD  ")
                 .where('S', this.selfPredicate())
                 .where('G', states(this.getGlassState()))
@@ -84,25 +62,30 @@ public class MetaTileEntityVacuumDistillationTower extends RecipeMapMultiblockCo
                 .where('D', states(this.getCasingState()))
                 .where('X', states(getCasingState())
                         .or(metaTileEntities(MultiblockAbility.REGISTRY.get(MultiblockAbility.EXPORT_FLUIDS).stream()
-                                .filter(mte->(mte instanceof MetaTileEntityFluidHatch))
+                                .filter(mte -> (mte instanceof MetaTileEntityFluidHatch))
                                 .toArray(MetaTileEntity[]::new))
                                 .setMinLayerLimited(1).setMaxLayerLimited(1))
                         .or(autoAbilities(true, false)))
                 .where('#', air())
                 .build();
     }
+
     public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
         return GTQTTextures.IRIDIUM_CASING;
     }
+
     protected IBlockState getFrameState() {
         return MetaBlocks.FRAMES.get(Materials.Naquadah).getBlock(Materials.Naquadah);
     }
+
     protected IBlockState getGlassState() {
         return MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.TEMPERED_GLASS);
     }
+
     protected IBlockState getCasingState() {
         return GTQTMetaBlocks.TURBINE_CASING.getState(GTQTTurbineCasing.TurbineCasingType.IRIDIUM_CASING);
     }
+
     protected IBlockState getPipeCasingState() {
         return GTQTMetaBlocks.TURBINE_CASING.getState(GTQTTurbineCasing.TurbineCasingType.NQ_MACHINE_CASING);
     }
@@ -121,5 +104,29 @@ public class MetaTileEntityVacuumDistillationTower extends RecipeMapMultiblockCo
     @Override
     public boolean allowsExtendedFacing() {
         return false;
+    }
+
+    private class MFSWorkableHandler extends MultiblockRecipeLogic {
+        public MFSWorkableHandler(RecipeMapMultiblockController tileEntity) {
+            super(tileEntity);
+        }
+
+        private boolean isDistilleryMode() {
+            return this.getRecipeMap() == GTQTcoreRecipeMaps.DISTILLATION_KETTLE;
+        }
+
+        @Override
+        public int getParallelLimit() {
+            return 32;
+        }
+
+        public long getMaxVoltage() {
+            return V[6];
+        }
+
+        @Override
+        public void setMaxProgress(int maxProgress) {
+            this.maxProgressTime = (int) (maxProgress * 0.8);
+        }
     }
 }

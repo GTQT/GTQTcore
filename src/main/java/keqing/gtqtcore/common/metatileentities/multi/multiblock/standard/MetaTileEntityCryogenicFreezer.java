@@ -49,65 +49,6 @@ import static keqing.gtqtcore.api.unification.GTQTMaterials.GelidCryotheum;
 
 //冰箱
 public class MetaTileEntityCryogenicFreezer extends RecipeMapMultiblockController {
-    private int temperature;
-    public MetaTileEntityCryogenicFreezer(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, RecipeMaps.VACUUM_RECIPES);
-        this.recipeMapWorkable = new CryogenicFreezerRecipeLogic(this);
-    }
-    @Override
-    public boolean canBeDistinct() {return true;}
-    @Override
-    public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
-        return new MetaTileEntityCryogenicFreezer(metaTileEntityId);
-    }
-
-    @Override
-    protected BlockPattern createStructurePattern() {
-        return FactoryBlockPattern.start()
-                .aisle("XXX", "XXX", "CCC","CCC", "XXX")
-                .aisle("XXX", "X X", "C C","C C", "XXX")
-                .aisle("XXX", "XSX", "CCC","CCC", "XXX")
-                .where('S', this.selfPredicate())
-                .where('C', coolingCoils())
-                .where('X', states(getCasingState())
-                        .setMinGlobalLimited(14)
-                        .or(autoAbilities()))
-                .where(' ', air())
-                .build();
-    }
-    @Override
-    public List<MultiblockShapeInfo> getMatchingShapes() {
-        ArrayList<MultiblockShapeInfo> shapeInfo = new ArrayList<>();
-        MultiblockShapeInfo.Builder builder = MultiblockShapeInfo.builder()
-                .aisle("XXM", "XXX", "CCC","CCC", "XXX")
-                .aisle("XXD", "X#X", "C#C","C#C", "XXX")
-                .aisle("IEO", "XSX", "CCC","CCC", "XXX")
-                .where('X', GTQTMetaBlocks.TURBINE_CASING1.getState(GTQTTurbineCasing1.TurbineCasingType.ADVANCED_COLD_CASING))
-                .where('S', GTQTMetaTileEntities.CRYOGENIC_FREEZER, EnumFacing.SOUTH)
-                .where('#', Blocks.AIR.getDefaultState())
-                .where('E', MetaTileEntities.ENERGY_INPUT_HATCH[GTValues.MV], EnumFacing.SOUTH)
-                .where('I', MetaTileEntities.ITEM_IMPORT_BUS[GTValues.LV], EnumFacing.SOUTH)
-                .where('O', MetaTileEntities.ITEM_EXPORT_BUS[GTValues.LV], EnumFacing.SOUTH)
-                .where('D', MetaTileEntities.FLUID_EXPORT_HATCH[GTValues.LV], EnumFacing.EAST)
-                .where('M', () -> ConfigHolder.machines.enableMaintenance ? MetaTileEntities.MAINTENANCE_HATCH : MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.INVAR_HEATPROOF), EnumFacing.NORTH);
-        Arrays.stream(BlockCoolingCoil.CoolingCoilType.values())
-                .sorted(Comparator.comparingInt(entry -> -entry.coilTemperature))
-                .forEach(entry -> shapeInfo.add(builder.where('C', GTQTMetaBlocks.COOLING_COIL.getState(entry)).build()));
-        return shapeInfo;
-    }
-
-
-    @Override
-    public List<ITextComponent> getDataInfo() {
-        List<ITextComponent> list = super.getDataInfo();
-        list.add(new TextComponentTranslation("gregtech.multiblock.magnetic_refrigerator.min_temperature",
-                new TextComponentTranslation(TextFormattingUtil.formatNumbers(temperature) + "K")
-                        .setStyle(new Style().setColor(TextFormatting.BLUE))));
-        return list;
-    }
-    public static TraceabilityPredicate coolingCoils() {
-        return COOLING_COILS.get();
-    }
     private static final Supplier<TraceabilityPredicate> COOLING_COILS = () -> new TraceabilityPredicate(blockWorldState -> {
         IBlockState state = blockWorldState.getBlockState();
         if (state.getBlock() instanceof BlockCoolingCoil) {
@@ -125,8 +66,75 @@ public class MetaTileEntityCryogenicFreezer extends RecipeMapMultiblockControlle
             .map(type -> new BlockInfo(GTQTMetaBlocks.COOLING_COIL.getState(type)))
             .toArray(BlockInfo[]::new)
     );
+    private final FluidStack GELID_STACK = GelidCryotheum.getFluid(2);
+    private int temperature;
+
+    public MetaTileEntityCryogenicFreezer(ResourceLocation metaTileEntityId) {
+        super(metaTileEntityId, RecipeMaps.VACUUM_RECIPES);
+        this.recipeMapWorkable = new CryogenicFreezerRecipeLogic(this);
+    }
+
+    public static TraceabilityPredicate coolingCoils() {
+        return COOLING_COILS.get();
+    }
+
     private static IBlockState getCasingState() {
         return GTQTMetaBlocks.TURBINE_CASING1.getState(GTQTTurbineCasing1.TurbineCasingType.ADVANCED_COLD_CASING);
+    }
+
+    @Override
+    public boolean canBeDistinct() {
+        return true;
+    }
+
+    @Override
+    public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
+        return new MetaTileEntityCryogenicFreezer(metaTileEntityId);
+    }
+
+    @Override
+    protected BlockPattern createStructurePattern() {
+        return FactoryBlockPattern.start()
+                .aisle("XXX", "XXX", "CCC", "CCC", "XXX")
+                .aisle("XXX", "X X", "C C", "C C", "XXX")
+                .aisle("XXX", "XSX", "CCC", "CCC", "XXX")
+                .where('S', this.selfPredicate())
+                .where('C', coolingCoils())
+                .where('X', states(getCasingState())
+                        .setMinGlobalLimited(14)
+                        .or(autoAbilities()))
+                .where(' ', air())
+                .build();
+    }
+
+    @Override
+    public List<MultiblockShapeInfo> getMatchingShapes() {
+        ArrayList<MultiblockShapeInfo> shapeInfo = new ArrayList<>();
+        MultiblockShapeInfo.Builder builder = MultiblockShapeInfo.builder()
+                .aisle("XXM", "XXX", "CCC", "CCC", "XXX")
+                .aisle("XXD", "X#X", "C#C", "C#C", "XXX")
+                .aisle("IEO", "XSX", "CCC", "CCC", "XXX")
+                .where('X', GTQTMetaBlocks.TURBINE_CASING1.getState(GTQTTurbineCasing1.TurbineCasingType.ADVANCED_COLD_CASING))
+                .where('S', GTQTMetaTileEntities.CRYOGENIC_FREEZER, EnumFacing.SOUTH)
+                .where('#', Blocks.AIR.getDefaultState())
+                .where('E', MetaTileEntities.ENERGY_INPUT_HATCH[GTValues.MV], EnumFacing.SOUTH)
+                .where('I', MetaTileEntities.ITEM_IMPORT_BUS[GTValues.LV], EnumFacing.SOUTH)
+                .where('O', MetaTileEntities.ITEM_EXPORT_BUS[GTValues.LV], EnumFacing.SOUTH)
+                .where('D', MetaTileEntities.FLUID_EXPORT_HATCH[GTValues.LV], EnumFacing.EAST)
+                .where('M', () -> ConfigHolder.machines.enableMaintenance ? MetaTileEntities.MAINTENANCE_HATCH : MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.INVAR_HEATPROOF), EnumFacing.NORTH);
+        Arrays.stream(BlockCoolingCoil.CoolingCoilType.values())
+                .sorted(Comparator.comparingInt(entry -> -entry.coilTemperature))
+                .forEach(entry -> shapeInfo.add(builder.where('C', GTQTMetaBlocks.COOLING_COIL.getState(entry)).build()));
+        return shapeInfo;
+    }
+
+    @Override
+    public List<ITextComponent> getDataInfo() {
+        List<ITextComponent> list = super.getDataInfo();
+        list.add(new TextComponentTranslation("gregtech.multiblock.magnetic_refrigerator.min_temperature",
+                new TextComponentTranslation(TextFormattingUtil.formatNumbers(temperature) + "K")
+                        .setStyle(new Style().setColor(TextFormatting.BLUE))));
+        return list;
     }
 
     public SoundEvent getBreakdownSound() {
@@ -203,6 +211,7 @@ public class MetaTileEntityCryogenicFreezer extends RecipeMapMultiblockControlle
             }
         }
     }
+
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
@@ -213,14 +222,13 @@ public class MetaTileEntityCryogenicFreezer extends RecipeMapMultiblockControlle
             this.temperature = BlockCoolingCoil.CoolingCoilType.MANGANESE_IRON_ARSENIC_PHOSPHIDE.coilTemperature;
         }
     }
-    public int getCoilTier()
-    {
-        if(temperature==160)return 1;
-        if(temperature==50)return 2;
-        if(temperature==1)return 3;
+
+    public int getCoilTier() {
+        if (temperature == 160) return 1;
+        if (temperature == 50) return 2;
+        if (temperature == 1) return 3;
         return 0;
     }
-    private final FluidStack GELID_STACK = GelidCryotheum.getFluid(2);
 
     @Override
     public void invalidateStructure() {
@@ -232,8 +240,13 @@ public class MetaTileEntityCryogenicFreezer extends RecipeMapMultiblockControlle
 
         private final MetaTileEntityCryogenicFreezer freezer;
 
+        public CryogenicFreezerRecipeLogic(RecipeMapMultiblockController tileEntity) {
+            super(tileEntity);
+            this.freezer = (MetaTileEntityCryogenicFreezer) tileEntity;
+        }
+
         @Override
-        protected void modifyOverclockPost(int[] resultOverclock,  IRecipePropertyStorage storage) {
+        protected void modifyOverclockPost(int[] resultOverclock, IRecipePropertyStorage storage) {
             super.modifyOverclockPost(resultOverclock, storage);
 
             int coilTier = ((MetaTileEntityCryogenicFreezer) metaTileEntity).getCoilTier();
@@ -251,14 +264,8 @@ public class MetaTileEntityCryogenicFreezer extends RecipeMapMultiblockControlle
             resultOverclock[1] = Math.max(1, resultOverclock[1]);
         }
 
-        public CryogenicFreezerRecipeLogic(RecipeMapMultiblockController tileEntity) {
-            super(tileEntity);
-            this.freezer = (MetaTileEntityCryogenicFreezer) tileEntity;
-        }
-
-
         public void setMaxProgress(int maxProgress) {
-            this.maxProgressTime = maxProgressTime/8;
+            this.maxProgressTime = maxProgressTime / 8;
         }
 
         @Override
@@ -268,17 +275,16 @@ public class MetaTileEntityCryogenicFreezer extends RecipeMapMultiblockControlle
 
         @Override
         protected void updateRecipeProgress() {
-            if (canRecipeProgress && drawEnergy(recipeEUt/8, true)) {
-                drawEnergy(recipeEUt/8, false);
+            if (canRecipeProgress && drawEnergy(recipeEUt / 8, true)) {
+                drawEnergy(recipeEUt / 8, false);
                 IMultipleTankHandler inputTank = freezer.getInputFluidInventory();
                 if (GELID_STACK.isFluidStackIdentical(inputTank.drain(GELID_STACK, false))) {
                     inputTank.drain(GELID_STACK, true);
                     if (++progressTime > maxProgressTime) {
                         completeRecipe();
                     }
-                }
-                else return;
-                drawEnergy(recipeEUt/8, false);
+                } else return;
+                drawEnergy(recipeEUt / 8, false);
             }
         }
     }

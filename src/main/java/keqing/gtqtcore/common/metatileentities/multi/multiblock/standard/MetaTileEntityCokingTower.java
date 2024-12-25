@@ -43,16 +43,37 @@ import static keqing.gtqtcore.api.utils.GTQTUniverUtil.consistentList;
 import static keqing.gtqtcore.api.utils.GTQTUniverUtil.maxLength;
 
 public class MetaTileEntityCokingTower extends RecipeMapMultiblockController {
-    private byte auxiliaryBlastFurnaceNumber = 0;
-    protected int heatingCoilLevel;
-    protected int coilTier;
+    private static final TraceabilityPredicate IS_SNOW_LAYER = new TraceabilityPredicate(bws -> GTUtility.isBlockSnow(bws.getBlockState()));
     private static boolean init = false;
     private static List<IBlockState> finalListCoil;
-    private static final TraceabilityPredicate IS_SNOW_LAYER = new TraceabilityPredicate(bws -> GTUtility.isBlockSnow(bws.getBlockState()));
+    protected int heatingCoilLevel;
+    protected int coilTier;
+    private byte auxiliaryBlastFurnaceNumber = 0;
+
     public MetaTileEntityCokingTower(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, RecipeMaps.PYROLYSE_RECIPES);
         this.recipeMapWorkable = new CokingTowerRecipeLogic(this);
         initMap();
+    }
+
+    private static IBlockState getCasingState() {
+        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.TUNGSTENSTEEL_ROBUST);
+    }
+
+    private static IBlockState getFrameState() {
+        return MetaBlocks.FRAMES.get(Materials.Titanium).getBlock(Materials.Titanium);
+    }
+
+    private static IBlockState getBoilerState() {
+        return MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.TUNGSTENSTEEL_PIPE);
+    }
+
+    private static IBlockState getFireBoxState() {
+        return MetaBlocks.BOILER_FIREBOX_CASING.getState(BlockFireboxCasing.FireboxCasingType.TUNGSTENSTEEL_FIREBOX);
+    }
+
+    public static int getMaxParallel(int heatingCoilLevel) {
+        return heatingCoilLevel * 4;
     }
 
     @Override
@@ -138,23 +159,6 @@ public class MetaTileEntityCokingTower extends RecipeMapMultiblockController {
                 .build();
     }
 
-    private static IBlockState getCasingState() {
-        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.TUNGSTENSTEEL_ROBUST);
-    }
-
-    private static IBlockState getFrameState() {
-        return MetaBlocks.FRAMES.get(Materials.Titanium).getBlock(Materials.Titanium);
-    }
-
-    private static IBlockState getBoilerState() {
-        return MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.TUNGSTENSTEEL_PIPE);
-    }
-
-    private static IBlockState getFireBoxState() {
-        return MetaBlocks.BOILER_FIREBOX_CASING.getState(BlockFireboxCasing.FireboxCasingType.TUNGSTENSTEEL_FIREBOX);
-    }
-
-
     @SideOnly(Side.CLIENT)
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
@@ -178,15 +182,17 @@ public class MetaTileEntityCokingTower extends RecipeMapMultiblockController {
     }
 
     @Override
-    public void addInformation(ItemStack stack, World player, List<String> tooltip,boolean advanced) {
+    public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(I18n.format("gtqtcore.machine.coking_tower.tooltip.1"));
         tooltip.add(I18n.format("gtqtcore.machine.coking_tower.tooltip.2"));
         tooltip.add(I18n.format("gtqtcore.machine.coking_tower.tooltip.3"));
     }
+
     protected int getCoilTier() {
         return this.coilTier;
     }
+
     @Override
     public List<MultiblockShapeInfo> getMatchingShapes() {
         ArrayList<MultiblockShapeInfo> shapeInfo = new ArrayList<>();
@@ -233,10 +239,6 @@ public class MetaTileEntityCokingTower extends RecipeMapMultiblockController {
         return shapeInfo;
     }
 
-    public static int getMaxParallel(int heatingCoilLevel) {
-        return heatingCoilLevel * 4;
-    }
-
     protected class CokingTowerRecipeLogic extends MultiblockRecipeLogic {
 
         public CokingTowerRecipeLogic(RecipeMapMultiblockController tileEntity) {
@@ -249,7 +251,7 @@ public class MetaTileEntityCokingTower extends RecipeMapMultiblockController {
         }
 
         @Override
-        protected void modifyOverclockPost(int[] resultOverclock,  IRecipePropertyStorage storage) {
+        protected void modifyOverclockPost(int[] resultOverclock, IRecipePropertyStorage storage) {
             super.modifyOverclockPost(resultOverclock, storage);
 
             int coilTier = ((MetaTileEntityCokingTower) metaTileEntity).getCoilTier();

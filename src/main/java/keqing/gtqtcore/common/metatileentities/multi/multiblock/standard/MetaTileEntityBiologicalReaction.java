@@ -1,8 +1,5 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
-import codechicken.lib.render.CCRenderState;
-import codechicken.lib.render.pipeline.IVertexOperation;
-import codechicken.lib.vec.Matrix4;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.Widget;
@@ -12,10 +9,7 @@ import gregtech.api.gui.widgets.WidgetGroup;
 import gregtech.api.metatileentity.IFastRenderMetaTileEntity;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
-import gregtech.api.metatileentity.multiblock.IMultiblockPart;
-import gregtech.api.metatileentity.multiblock.IProgressBarMultiblock;
-import gregtech.api.metatileentity.multiblock.MultiblockAbility;
-import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
+import gregtech.api.metatileentity.multiblock.*;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
@@ -23,16 +17,14 @@ import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.util.TextComponentUtil;
-import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
+import gregtech.common.blocks.BlockBoilerCasing;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.GTQTCoreConfig;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.capability.IBio;
-import keqing.gtqtcore.api.capability.ICatalystHatch;
-import keqing.gtqtcore.api.metaileentity.GTQTRecipeMapMultiblockController;
 import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.properties.BRProperty;
@@ -46,12 +38,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -59,18 +49,16 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-import static gregtech.api.unification.material.Materials.Water;
 import static keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility.BIO_MULTIBLOCK_ABILITY;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.BIOLOGICAL_REACTION_RECIPES;
 
 //要实现大机器中的渲染需要重写IFastRenderMetaTileEntity 接口，并实现renderMetaTileEntity和getRenderBoundingBox方法
-public class MetaTileEntityBiologicalReaction extends GTQTRecipeMapMultiblockController implements IProgressBarMultiblock, IFastRenderMetaTileEntity {
+public class MetaTileEntityBiologicalReaction extends MultiMapMultiblockController implements IProgressBarMultiblock, IFastRenderMetaTileEntity {
     int liquid = 0;
     int bio = 0;
     double rate = 0;
     private int glass_tier;
     private int clean_tier;
-    private int tubeTier;
 
     public MetaTileEntityBiologicalReaction(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{BIOLOGICAL_REACTION_RECIPES, RecipeMaps.FERMENTING_RECIPES, RecipeMaps.BREWING_RECIPES});
@@ -79,6 +67,11 @@ public class MetaTileEntityBiologicalReaction extends GTQTRecipeMapMultiblockCon
 
     private static IBlockState getCasingState() {
         return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STAINLESS_CLEAN);
+
+    }
+
+    private static IBlockState getTubeState() {
+        return MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.STEEL_PIPE);
 
     }
 
@@ -153,27 +146,33 @@ public class MetaTileEntityBiologicalReaction extends GTQTRecipeMapMultiblockCon
         super.formStructure(context);
         Object glass_tier = context.get("LGLTieredStats");
         Object clean_tier = context.get("ZJTieredStats");
-        Object tubeTier = context.get("ChemicalPlantTubeTieredStats");
-        this.tubeTier = GTQTUtil.getOrDefault(() -> tubeTier instanceof WrappedIntTired, () -> ((WrappedIntTired) tubeTier).getIntTier(), 0);
         this.glass_tier = GTQTUtil.getOrDefault(() -> glass_tier instanceof WrappedIntTired, () -> ((WrappedIntTired) glass_tier).getIntTier(), 0);
         this.clean_tier = GTQTUtil.getOrDefault(() -> clean_tier instanceof WrappedIntTired, () -> ((WrappedIntTired) clean_tier).getIntTier(), 0);
-
     }
 
     @Nonnull
     @Override
     protected BlockPattern createStructurePattern() {
-        return FactoryBlockPattern.start().aisle("JCCCJ", "JCCCJ", "GGGGG", "GGGGG", "CCCCC").aisle("JCCCJ", "JPPPJ", "G   G", "G   G", "CCCCC").aisle("JCCCJ", "JPPPJ", "G   G", "G   G", "CCCCC").aisle("JCCCJ", "JPPPJ", "G   G", "G   G", "CCCCC").aisle("JCCCJ", "JCSCJ", "GGGGG", "GGGGG", "CCCCC").where('S', selfPredicate()).where('J', TiredTraceabilityPredicate.CP_ZJ_CASING.get()).where('G', TiredTraceabilityPredicate.CP_LGLASS.get()).where('C', states(getCasingState()).setMinGlobalLimited(38)
-                        .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setMaxGlobalLimited(2))
-                        .or(abilities(MultiblockAbility.EXPORT_FLUIDS).setMaxGlobalLimited(2))
-                        .or(abilities(MultiblockAbility.IMPORT_ITEMS).setMaxGlobalLimited(2))
-                        .or(abilities(MultiblockAbility.EXPORT_ITEMS).setMaxGlobalLimited(2))
-                        .or(abilities(MultiblockAbility.INPUT_ENERGY).setMaxGlobalLimited(1))
+        return FactoryBlockPattern.start()
+                .aisle("JCCCJ", "JCCCJ", "GGGGG", "GGGGG", "CCCCC")
+                .aisle("JCCCJ", "JPPPJ", "G   G", "G   G", "CCCCC")
+                .aisle("JCCCJ", "JPPPJ", "G   G", "G   G", "CCCCC")
+                .aisle("JCCCJ", "JPPPJ", "G   G", "G   G", "CCCCC")
+                .aisle("JCCCJ", "JCSCJ", "GGGGG", "GGGGG", "CCCCC")
+                .where('S', selfPredicate())
+                .where('J', TiredTraceabilityPredicate.CP_ZJ_CASING.get())
+                .where('G', TiredTraceabilityPredicate.CP_LGLASS.get())
+                .where('C', states(getCasingState()).setMinGlobalLimited(35)
+                        .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setMinGlobalLimited(1).setMaxGlobalLimited(2))
+                        .or(abilities(MultiblockAbility.EXPORT_FLUIDS).setMinGlobalLimited(1).setMaxGlobalLimited(2))
+                        .or(abilities(MultiblockAbility.IMPORT_ITEMS).setMinGlobalLimited(1).setMaxGlobalLimited(2))
+                        .or(abilities(MultiblockAbility.EXPORT_ITEMS).setMinGlobalLimited(1).setMaxGlobalLimited(2))
+                        .or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(2))
                         .or(abilities(MultiblockAbility.MAINTENANCE_HATCH).setExactLimit(1))
                         .or(abilities(MultiblockAbility.MUFFLER_HATCH).setExactLimit(1))
-                        .or(abilities(BIO_MULTIBLOCK_ABILITY).setExactLimit(1))
-                )
-                .where('P', TiredTraceabilityPredicate.CP_TUBE.get()).where(' ', any()).build();
+                        .or(abilities(BIO_MULTIBLOCK_ABILITY).setExactLimit(1)))
+                .where('P', states(getTubeState()))
+                .where(' ', any()).build();
     }
 
     @SideOnly(Side.CLIENT)
@@ -193,15 +192,7 @@ public class MetaTileEntityBiologicalReaction extends GTQTRecipeMapMultiblockCon
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
         textList.add(new TextComponentTranslation("gtqtcore.multiblock.br.1", liquid, bio, rate));
-        textList.add(new TextComponentTranslation("gtqtcore.multiblock.br.3", glass_tier, tubeTier));
-    }
-
-    @Override
-    public boolean checkRecipe(@Nonnull Recipe recipe, boolean consumeIfSuccess) {
-        if (this.getRecipeMap() != BIOLOGICAL_REACTION_RECIPES) return super.checkRecipe(recipe, consumeIfSuccess);
-        if (rate * 100 >= recipe.getProperty(BRProperty.getInstance(), 0))
-            return super.checkRecipe(recipe, consumeIfSuccess);
-        else return false;
+        textList.add(new TextComponentTranslation("gtqtcore.multiblock.br.3", glass_tier, clean_tier));
     }
 
     @Override
@@ -251,20 +242,20 @@ public class MetaTileEntityBiologicalReaction extends GTQTRecipeMapMultiblockCon
     @Override
     public void updateFormedValid() {
         if (!isStructureFormed()) return;
-        bio = this.getBiotHatch().getBioAmount();
-        liquid = this.getBiotHatch().getWaterAmount();
-
-
+        bio = Math.min(this.getBiotHatch().getBioAmount(), 4000);
+        liquid = Math.min(this.getBiotHatch().getWaterAmount(), 4000);
         if (liquid == 0) rate = 0;
         else rate = bio * 1.0 / 4000;
+        super.updateFormedValid();
     }
 
     public void consume() {
         if (this.getBiotHatch() != null) {
-            this.getBiotHatch().drainBioAmount(bio / 8);
-            this.getBiotHatch().drainWaterAmount(bio / 8);
+            this.getBiotHatch().drainBioAmount((int) (bio / 8.0));
+            this.getBiotHatch().drainWaterAmount((int) (liquid / 8.0));
         }
     }
+
     public IBio getBiotHatch() {
         List<IBio> abilities = getAbilities(GTQTMultiblockAbility.BIO_MULTIBLOCK_ABILITY);
         if (abilities.isEmpty())
@@ -272,45 +263,60 @@ public class MetaTileEntityBiologicalReaction extends GTQTRecipeMapMultiblockCon
         return abilities.get(0);
     }
 
-    protected int getRateRating() {
-        if (rate > 0.8) return 8;
-        if (rate > 0.6) return 4;
-        if (rate > 0.4) return 2;
-        return 1;
+    @Override
+    public boolean checkRecipe(@Nonnull Recipe recipe,
+                               boolean consumeIfSuccess) {
+        if (!super.checkRecipe(recipe, consumeIfSuccess)) return false;
+        if (this.getRecipeMap() != BIOLOGICAL_REACTION_RECIPES) return true;
+        else return recipe.getProperty(BRProperty.getInstance(), 0) <= rate * 100;
     }
 
     protected class BiologicalReactionLogic extends MultiblockRecipeLogic {
-
 
         public BiologicalReactionLogic(RecipeMapMultiblockController tileEntity) {
             super(tileEntity, true);
         }
 
-        @Override
-        public int getParallelLimit() {
-            return getRateRating() * clean_tier;
+        private boolean isBioRecipes() {
+            return this.getRecipeMap() == BIOLOGICAL_REACTION_RECIPES;
         }
 
+        /**
+         * @param maxProgress If machine in common assembler, then get half progress time.
+         */
         public void setMaxProgress(int maxProgress) {
-            this.maxProgressTime = (maxProgress * (100 - glass_tier * getRateRating()) / 100);
+            this.maxProgressTime = maxProgress / glass_tier;
+        }
+
+        /**
+         * @return If machine in PA, then no parallel, if machine in common assembler, then get 2^{CasingTier + 4} (Mk1:32, Mk2:64, Mk3:128) parallel.
+         */
+        @Override
+        public int getParallelLimit() {
+            if (isBioRecipes()) {
+                return (int) Math.pow(2, clean_tier);
+            } else {
+                return (int) Math.pow(2, Math.min(glass_tier, clean_tier) + 4);
+            }
         }
 
         protected void updateRecipeProgress() {
             if (this.canRecipeProgress && this.drawEnergy(this.recipeEUt, true)) {
-                if (liquid >= 4000) {
-                    this.drawEnergy(this.recipeEUt, false);
-                    if (++progressTime > maxProgressTime) {
-                        completeRecipe();
-                        consume();
-                    }
-                    if (this.hasNotEnoughEnergy && this.getEnergyInputPerSecond() > 19L * (long) this.recipeEUt) {
-                        this.hasNotEnoughEnergy = false;
-                    }
-                } else if (this.recipeEUt > 0) {
-                    this.hasNotEnoughEnergy = true;
-                    this.decreaseProgress();
+                this.drawEnergy(this.recipeEUt, false);
+                if (++this.progressTime > this.maxProgressTime) {
+                    this.completeRecipe();
+                    if (isBioRecipes()) consume();
+
                 }
+
+                if (this.hasNotEnoughEnergy && this.getEnergyInputPerSecond() > 19L * (long) this.recipeEUt) {
+                    this.hasNotEnoughEnergy = false;
+                }
+            } else if (this.recipeEUt > 0) {
+                this.hasNotEnoughEnergy = true;
+                this.decreaseProgress();
             }
+
         }
     }
 }

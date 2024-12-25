@@ -20,7 +20,6 @@ import gregtech.client.utils.TooltipHelper;
 import gregtech.common.blocks.BlockWireCoil;
 import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
-import keqing.gtqtcore.api.capability.IBall;
 import keqing.gtqtcore.api.capability.ICatalystHatch;
 import keqing.gtqtcore.api.capability.chemical_plant.ChemicalPlantProperties;
 import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
@@ -48,19 +47,22 @@ import static gregtech.api.GTValues.VA;
 
 public class MetaTileEntityChemicalPlant extends GTQTRecipeMapMultiblockOverwrite {
 
+    int ParallelNum = 1;
     private int coilLevel;
     private int casingTier;
     private int tubeTier;
     private int voltageTier;
     private int tier;
 
-    @Override
-    public boolean canBeDistinct() {return true;}
     public MetaTileEntityChemicalPlant(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.CHEMICAL_PLANT);
         this.recipeMapWorkable = new ChemicalPlantLogic(this);
     }
-     int ParallelNum=1;
+
+    @Override
+    public boolean canBeDistinct() {
+        return true;
+    }
 
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("modern", modern);
@@ -75,22 +77,21 @@ public class MetaTileEntityChemicalPlant extends GTQTRecipeMapMultiblockOverwrit
     @Override
     public void update() {
         super.update();
-        if (modern == 0)
-        {
-            ParallelNum=ParallelNumA;
+        if (modern == 0) {
+            ParallelNum = ParallelNumA;
         }
-        if (modern == 1)
-        {
-            P = (int) ((this.energyContainer.getEnergyStored() + energyContainer.getInputPerSec())/(getMinVa()==0?1:getMinVa()));
+        if (modern == 1) {
+            P = (int) ((this.energyContainer.getEnergyStored() + energyContainer.getInputPerSec()) / (getMinVa() == 0 ? 1 : getMinVa()));
             ParallelNum = Math.min(P, ParallelLim);
         }
     }
-    public int getMinVa()
-    {
-        if((Math.min(this.energyContainer.getEnergyCapacity()/32,VA[tier])*20)==0)return 1;
-        return (int)(Math.min(this.energyContainer.getEnergyCapacity()/32,VA[tier]));
+
+    public int getMinVa() {
+        if ((Math.min(this.energyContainer.getEnergyCapacity() / 32, VA[tier]) * 20) == 0) return 1;
+        return (int) (Math.min(this.energyContainer.getEnergyCapacity() / 32, VA[tier]));
 
     }
+
     @SuppressWarnings("SpellCheckingInspection")
     @Override
     protected BlockPattern createStructurePattern() {
@@ -111,7 +112,7 @@ public class MetaTileEntityChemicalPlant extends GTQTRecipeMapMultiblockOverwrit
                         .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setMinGlobalLimited(1).setPreviewCount(1))
                         .or(abilities(GTQTMultiblockAbility.CATALYST_MULTIBLOCK_ABILITY).setExactLimit(1))
                         .or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(2).setPreviewCount(1)))
-                .where('C',TiredTraceabilityPredicate.CP_CASING.get())
+                .where('C', TiredTraceabilityPredicate.CP_CASING.get())
                 .where('X', heatingCoils())
                 .where('M', TiredTraceabilityPredicate.MACHINE_CASINGS.get())
                 .where('T', TiredTraceabilityPredicate.CP_TUBE.get())
@@ -119,12 +120,14 @@ public class MetaTileEntityChemicalPlant extends GTQTRecipeMapMultiblockOverwrit
                 .where('A', air())
                 .build();
     }
+
     public ICatalystHatch getCatalystHatch() {
         List<ICatalystHatch> abilities = getAbilities(GTQTMultiblockAbility.CATALYST_MULTIBLOCK_ABILITY);
         if (abilities.isEmpty())
             return null;
         return abilities.get(0);
     }
+
     @Override
     protected boolean shouldShowVoidingModeButton() {
         return false;
@@ -144,17 +147,17 @@ public class MetaTileEntityChemicalPlant extends GTQTRecipeMapMultiblockOverwrit
     @Override
     public void receiveCustomData(int dataId, PacketBuffer buf) {
         super.receiveCustomData(dataId, buf);
-        if(dataId == GTQTValue.UPDATE_TIER4){
+        if (dataId == GTQTValue.UPDATE_TIER4) {
             this.casingTier = buf.readInt();
         }
-        if(dataId == GTQTValue.REQUIRE_DATA_UPDATE4){
-            this.writeCustomData(GTQTValue.UPDATE_TIER4,buf1 -> buf1.writeInt(this.casingTier));
+        if (dataId == GTQTValue.REQUIRE_DATA_UPDATE4) {
+            this.writeCustomData(GTQTValue.UPDATE_TIER4, buf1 -> buf1.writeInt(this.casingTier));
         }
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack stack,  World world,  List<String> tooltip, boolean advanced) {
+    public void addInformation(ItemStack stack, World world, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, world, tooltip, advanced);
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("gregtech.machine.perfect_oc"));
         tooltip.add(I18n.format("gtqtcore.machine.chemical-plant.tooltip.1"));
@@ -168,17 +171,18 @@ public class MetaTileEntityChemicalPlant extends GTQTRecipeMapMultiblockOverwrit
         textList.add(new TextComponentTranslation("gtqtcore.coilTire", coilLevel));
         textList.add(new TextComponentTranslation("gtqtcore.casingTire", casingTier));
         textList.add(new TextComponentTranslation("gtqtcore.tubeTire", tubeTier));
-        if(casingTier!=tubeTier)
-            textList.add(new TextComponentTranslation("gtqtcore.equal", casingTier,tubeTier));
-        if(modern==0) textList.add(new TextComponentTranslation("gtqtcore.tire1",tier));
-        if(modern==1) textList.add(new TextComponentTranslation("gtqtcore.tire2",tier));
-        textList.add(new TextComponentTranslation("gtqtcore.parr",ParallelNum,ParallelLim));
+        if (casingTier != tubeTier)
+            textList.add(new TextComponentTranslation("gtqtcore.equal", casingTier, tubeTier));
+        if (modern == 0) textList.add(new TextComponentTranslation("gtqtcore.tire1", tier));
+        if (modern == 1) textList.add(new TextComponentTranslation("gtqtcore.tire2", tier));
+        textList.add(new TextComponentTranslation("gtqtcore.parr", ParallelNum, ParallelLim));
     }
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {
         return new MetaTileEntityChemicalPlant(metaTileEntityId);
     }
+
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
         switch (this.casingTier) {
@@ -214,10 +218,12 @@ public class MetaTileEntityChemicalPlant extends GTQTRecipeMapMultiblockOverwrit
             }
         }
     }
+
     @Override
     public String[] getDescription() {
         return new String[]{I18n.format("gtqt.tooltip.update")};
     }
+
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
@@ -226,23 +232,23 @@ public class MetaTileEntityChemicalPlant extends GTQTRecipeMapMultiblockOverwrit
         Object tubeTier = context.get("ChemicalPlantTubeTieredStats");
         Object voltageTier = context.get("MachineCasingTypeTieredStats");
         this.coilLevel = GTQTUtil.getOrDefault(() -> coilType instanceof IHeatingCoilBlockStats,
-                () ->  ((IHeatingCoilBlockStats) coilType).getLevel(),
+                () -> ((IHeatingCoilBlockStats) coilType).getLevel(),
                 BlockWireCoil.CoilType.CUPRONICKEL.getLevel());
         this.casingTier = GTQTUtil.getOrDefault(() -> casingTier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)casingTier).getIntTier(),
+                () -> ((WrappedIntTired) casingTier).getIntTier(),
                 0);
         this.tubeTier = GTQTUtil.getOrDefault(() -> tubeTier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)tubeTier).getIntTier(),
+                () -> ((WrappedIntTired) tubeTier).getIntTier(),
                 0);
         this.voltageTier = GTQTUtil.getOrDefault(() -> voltageTier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)voltageTier).getIntTier(),
+                () -> ((WrappedIntTired) voltageTier).getIntTier(),
                 0);
 
-        this.tier = Math.min(this.casingTier,this.tubeTier);
+        this.tier = Math.min(this.casingTier, this.tubeTier);
 
-        this.writeCustomData(GTQTValue.UPDATE_TIER4,buf -> buf.writeInt(this.casingTier));
-        ParallelLim=(int)Math.pow(2, tier);
-        ParallelNum=ParallelLim;
+        this.writeCustomData(GTQTValue.UPDATE_TIER4, buf -> buf.writeInt(this.casingTier));
+        ParallelLim = (int) Math.pow(2, tier);
+        ParallelNum = ParallelLim;
     }
 
     @Override
@@ -261,10 +267,7 @@ public class MetaTileEntityChemicalPlant extends GTQTRecipeMapMultiblockOverwrit
 
 
         public ChemicalPlantLogic(RecipeMapMultiblockController tileEntity) {
-            super(tileEntity,true);
-        }
-
-        public void update() {
+            super(tileEntity, true);
         }
 
         public void setMaxProgress(int maxProgress) {

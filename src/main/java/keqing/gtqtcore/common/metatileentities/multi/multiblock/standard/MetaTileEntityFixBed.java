@@ -49,13 +49,36 @@ import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing1.TurbineCasi
 
 public class MetaTileEntityFixBed extends RecipeMapMultiblockController implements IProgressBarMultiblock {
 
+    int updatetime = 1;
+    boolean work = true;
+    int[] Hydrogen = new int[3];
+    FluidStack STEAM = Steam.getFluid(1000 * updatetime);
+
     public MetaTileEntityFixBed(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.FIX_BED);
         this.recipeMapWorkable = new FixBedLogic(this);
     }
 
-    int updatetime=1;
-    boolean work=true;
+    private static IBlockState getFrameState1() {
+        return MetaBlocks.FRAMES.get(Materials.StainlessSteel).getBlock(Materials.StainlessSteel);
+    }
+
+    private static IBlockState getFrameState2() {
+        return MetaBlocks.FRAMES.get(Materials.Aluminium).getBlock(Materials.Aluminium);
+    }
+
+    private static IBlockState getCasingState1() {
+        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STAINLESS_CLEAN);
+    }
+
+    private static IBlockState getTurbine1() {
+        return GTQTMetaBlocks.TURBINE_CASING1.getState(SA_TURBINE_CASING);
+    }
+
+    private static IBlockState getTurbine2() {
+        return GTQTMetaBlocks.TURBINE_CASING1.getState(AL_TURBINE_CASING);
+    }
+
     @Override
     @Nonnull
     protected Widget getFlexButton(int x, int y, int width, int height) {
@@ -70,48 +93,11 @@ public class MetaTileEntityFixBed extends RecipeMapMultiblockController implemen
     }
 
     private void incrementThreshold(Widget.ClickData clickData) {
-        this.updatetime = MathHelper.clamp(updatetime+1, 1, 20);
+        this.updatetime = MathHelper.clamp(updatetime + 1, 1, 20);
     }
 
     private void decrementThreshold(Widget.ClickData clickData) {
-        this.updatetime = MathHelper.clamp(updatetime-1, 1, 20);
-    }
-    private class FixBedLogic extends MultiblockRecipeLogic {
-
-        public FixBedLogic(RecipeMapMultiblockController tileEntity) {
-            super(tileEntity);
-        }
-        @Override
-        public int getParallelLimit() {
-            if(getStatue()) {
-                return 4;
-            }
-            return 1;
-        }
-        @Override
-        public void setMaxProgress(int maxProgress)
-        {
-            if(getStatue()) {
-                maxProgressTime = maxProgress/4;
-            }
-            else this.maxProgressTime = maxProgress;
-        }
-        public  boolean getStatue()
-        {
-            return Hydrogen[0] > 6000 && Hydrogen[1] > 6000 && Hydrogen[2] > 6000;
-        }
-        protected void updateRecipeProgress() {
-            if (canRecipeProgress && drawEnergy(recipeEUt, true)) {
-                this.drawEnergy(this.recipeEUt, false);
-                if (++progressTime > maxProgressTime)
-                {
-                    Hydrogen[0]=(int) (Hydrogen[0]*0.72);
-                    Hydrogen[1]=(int) (Hydrogen[1]*0.84);
-                    Hydrogen[2]=(int) (Hydrogen[2]*0.96);
-                    completeRecipe();
-                }
-            }
-        }
+        this.updatetime = MathHelper.clamp(updatetime - 1, 1, 20);
     }
 
     @Override
@@ -122,12 +108,11 @@ public class MetaTileEntityFixBed extends RecipeMapMultiblockController implemen
             int SteamAmount = SteamStack == null ? 0 : SteamStack.amount;
             textList.add(new TextComponentTranslation("gtqtcore.gc.count1", TextFormattingUtil.formatNumbers(SteamAmount)));
         }
-        textList.add(new TextComponentTranslation("gtqtcore.msf.count2", (double)Hydrogen[0]/1000,(double)Hydrogen[1]/1000,(double)Hydrogen[2]/1000));
-        if(getStatue())  textList.add(new TextComponentTranslation("gtqtcore.msf.good"));
+        textList.add(new TextComponentTranslation("gtqtcore.msf.count2", (double) Hydrogen[0] / 1000, (double) Hydrogen[1] / 1000, (double) Hydrogen[2] / 1000));
+        if (getStatue()) textList.add(new TextComponentTranslation("gtqtcore.msf.good"));
         else textList.add(new TextComponentTranslation("gtqtcore.msf.no"));
     }
-    int[] Hydrogen=new int[3];
-    FluidStack STEAM = Steam.getFluid(1000*updatetime);
+
     @Override
     public void update() {
         super.update();
@@ -135,12 +120,12 @@ public class MetaTileEntityFixBed extends RecipeMapMultiblockController implemen
             IMultipleTankHandler inputTank = getInputFluidInventory();
             if (STEAM.isFluidStackIdentical(inputTank.drain(STEAM, false))) {
                 inputTank.drain(STEAM, true);
-                Hydrogen[0] = Hydrogen[0] + 800*updatetime;
+                Hydrogen[0] = Hydrogen[0] + 800 * updatetime;
 
             }
         }
 
-        for(int i=0;i<3;i++) {
+        for (int i = 0; i < 3; i++) {
             if (Hydrogen[0] > Hydrogen[1]) {
                 Hydrogen[0] = Hydrogen[0] - 40;
                 Hydrogen[1] = Hydrogen[1] + 30;
@@ -163,15 +148,15 @@ public class MetaTileEntityFixBed extends RecipeMapMultiblockController implemen
         }
 
     }
+
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("fluid1", Hydrogen[0]);
         data.setInteger("fluid2", Hydrogen[1]);
         data.setInteger("fluid3", Hydrogen[2]);
-        data.setInteger("updatetime",updatetime);
+        data.setInteger("updatetime", updatetime);
         return super.writeToNBT(data);
     }
 
-   
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         Hydrogen[0] = data.getInteger("fluid1");
@@ -179,10 +164,11 @@ public class MetaTileEntityFixBed extends RecipeMapMultiblockController implemen
         Hydrogen[2] = data.getInteger("fluid3");
         updatetime = data.getInteger("updatetime");
     }
-    public  boolean getStatue()
-    {
+
+    public boolean getStatue() {
         return Hydrogen[0] > 6000 && Hydrogen[1] > 6000 && Hydrogen[2] > 6000;
     }
+
     @Override
     public int getNumProgressBars() {
         return 3;
@@ -192,24 +178,22 @@ public class MetaTileEntityFixBed extends RecipeMapMultiblockController implemen
     public void addBarHoverText(List<ITextComponent> hoverList, int index) {
         ITextComponent cwutInfo = TextComponentUtil.stringWithColor(
                 TextFormatting.AQUA,
-                (Hydrogen[index] + 1000)+ " / " + (10000) + " kPa");
+                (Hydrogen[index] + 1000) + " / " + (10000) + " kPa");
         hoverList.add(TextComponentUtil.translationWithColor(
                 TextFormatting.GRAY,
                 "gregtech.multiblock.msf.computation",
                 cwutInfo));
     }
+
     @Override
     public double getFillPercentage(int index) {
         return (double) (Hydrogen[index] + 1000) / (10000);
     }
 
-
-
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityFixBed(metaTileEntityId);
     }
-
 
     @Override
     protected BlockPattern createStructurePattern() {
@@ -241,32 +225,18 @@ public class MetaTileEntityFixBed extends RecipeMapMultiblockController implemen
                 .build();
     }
 
-    private static IBlockState getFrameState1() {
-        return MetaBlocks.FRAMES.get(Materials.StainlessSteel).getBlock(Materials.StainlessSteel);
-    }
-    private static IBlockState getFrameState2() {
-        return MetaBlocks.FRAMES.get(Materials.Aluminium).getBlock(Materials.Aluminium);
-    }
-    private static IBlockState getCasingState1() {
-        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STAINLESS_CLEAN);
-    }
-    private static IBlockState getTurbine1() {
-        return GTQTMetaBlocks.TURBINE_CASING1.getState(SA_TURBINE_CASING);
-    }
-    private static IBlockState getTurbine2() {
-        return GTQTMetaBlocks.TURBINE_CASING1.getState(AL_TURBINE_CASING);
-    }
-
     @SideOnly(Side.CLIENT)
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
-                return Textures.CLEAN_STAINLESS_STEEL_CASING;
+        return Textures.CLEAN_STAINLESS_STEEL_CASING;
     }
+
     @Override
     public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("不是大号固化机", new Object[0]));
         tooltip.add(I18n.format("gregtech.machine.fb.tooltip.4"));
     }
+
     @Override
     public boolean canBeDistinct() {
         return true;
@@ -280,6 +250,44 @@ public class MetaTileEntityFixBed extends RecipeMapMultiblockController implemen
     @Override
     public SoundEvent getBreakdownSound() {
         return GTSoundEvents.BREAKDOWN_ELECTRICAL;
+    }
+
+    private class FixBedLogic extends MultiblockRecipeLogic {
+
+        public FixBedLogic(RecipeMapMultiblockController tileEntity) {
+            super(tileEntity);
+        }
+
+        @Override
+        public int getParallelLimit() {
+            if (getStatue()) {
+                return 4;
+            }
+            return 1;
+        }
+
+        @Override
+        public void setMaxProgress(int maxProgress) {
+            if (getStatue()) {
+                maxProgressTime = maxProgress / 4;
+            } else this.maxProgressTime = maxProgress;
+        }
+
+        public boolean getStatue() {
+            return Hydrogen[0] > 6000 && Hydrogen[1] > 6000 && Hydrogen[2] > 6000;
+        }
+
+        protected void updateRecipeProgress() {
+            if (canRecipeProgress && drawEnergy(recipeEUt, true)) {
+                this.drawEnergy(this.recipeEUt, false);
+                if (++progressTime > maxProgressTime) {
+                    Hydrogen[0] = (int) (Hydrogen[0] * 0.72);
+                    Hydrogen[1] = (int) (Hydrogen[1] * 0.84);
+                    Hydrogen[2] = (int) (Hydrogen[2] * 0.96);
+                    completeRecipe();
+                }
+            }
+        }
     }
 
 }

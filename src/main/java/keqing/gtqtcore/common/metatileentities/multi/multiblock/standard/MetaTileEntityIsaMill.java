@@ -50,8 +50,12 @@ public class MetaTileEntityIsaMill extends RecipeMapMultiblockController {
         super(metaTileEntityId, GTQTcoreRecipeMaps.ISA_MILL_GRINDER);
         this.recipeMapWorkable = new MetaTileEntityIsaMill.IsaMillLogic(this);
     }
+
     @Override
-    public boolean canBeDistinct() {return true;}
+    public boolean canBeDistinct() {
+        return true;
+    }
+
     @Override
     public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
@@ -59,6 +63,7 @@ public class MetaTileEntityIsaMill extends RecipeMapMultiblockController {
         tooltip.add(I18n.format("gtqtcore.machine.dangote_distillery.tooltip.6"));
         tooltip.add(I18n.format("gtqtcore.machine.dangote_distillery.tooltip.7"));
     }
+
     protected IBlockState getCasingState() {
         return GTQTMetaBlocks.ISA_CASING.getState(GTQTIsaCasing.CasingType.ISA_MILL_CASING);
     }
@@ -120,8 +125,7 @@ public class MetaTileEntityIsaMill extends RecipeMapMultiblockController {
             player.attackEntityFrom(DamageSources.getTurbineDamage(), 7);
             AdvancementTriggers.ROTOR_HOLDER_DEATH.trigger((EntityPlayerMP) player);
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
@@ -169,6 +173,7 @@ public class MetaTileEntityIsaMill extends RecipeMapMultiblockController {
         private final MetaTileEntityIsaMill metaTileEntity;
 
         private int current_grind_ball_tier;
+
         public IsaMillLogic(MetaTileEntityIsaMill tileEntity) {
             super(tileEntity);
             this.metaTileEntity = tileEntity;
@@ -211,7 +216,7 @@ public class MetaTileEntityIsaMill extends RecipeMapMultiblockController {
         }
 
         protected boolean canProgressRecipe() {
-            return (super.canProgressRecipe() && !((IMultiblockController)this.metaTileEntity).isStructureObstructed() && this.checkGrindBallTier());
+            return (super.canProgressRecipe() && !((IMultiblockController) this.metaTileEntity).isStructureObstructed() && this.checkGrindBallTier());
         }
 
         private boolean checkGrindBallTier() {

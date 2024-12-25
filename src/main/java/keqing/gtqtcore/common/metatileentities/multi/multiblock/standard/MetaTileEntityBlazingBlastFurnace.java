@@ -55,13 +55,12 @@ import java.util.Comparator;
 import java.util.List;
 
 import static gregtech.api.GTValues.VA;
-import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.DRYER_RECIPES;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.Pyrotheum;
 
 public class MetaTileEntityBlazingBlastFurnace extends GTQTRecipeMapMultiblockControllerOverwrite implements IHeatingCoil {
     protected static int heatingCoilLevel;
-    private  FluidStack LUBRICANT_STACK;
     int ParallelNum = 1;
+    private FluidStack LUBRICANT_STACK;
     private int blastFurnaceTemperature;
 
     public MetaTileEntityBlazingBlastFurnace(ResourceLocation metaTileEntityId) {
@@ -124,7 +123,7 @@ public class MetaTileEntityBlazingBlastFurnace extends GTQTRecipeMapMultiblockCo
         ParallelLim = Math.min((int) Math.pow(2, heatingCoilLevel), 16);
         ParallelNum = ParallelLim;
         this.blastFurnaceTemperature += 100 * Math.max(0, GTUtility.getTierByVoltage(getEnergyContainer().getInputVoltage()) - GTValues.MV);
-        LUBRICANT_STACK = Pyrotheum.getFluid(heatingCoilLevel);
+        LUBRICANT_STACK = Pyrotheum.getFluid(1);
     }
 
     @Override
@@ -267,7 +266,7 @@ public class MetaTileEntityBlazingBlastFurnace extends GTQTRecipeMapMultiblockCo
                 if (this.hasNotEnoughEnergy && this.getEnergyInputPerSecond() > 19L * (long) this.recipeEUt) {
                     this.hasNotEnoughEnergy = false;
                 }
-            } else if (canRecipeProgress && !drawEnergy(recipeEUt, true)&&this.recipeEUt > 0) {
+            } else if (canRecipeProgress && !drawEnergy(recipeEUt, true) && this.recipeEUt > 0) {
                 this.hasNotEnoughEnergy = true;
                 this.decreaseProgress();
             }
@@ -276,7 +275,7 @@ public class MetaTileEntityBlazingBlastFurnace extends GTQTRecipeMapMultiblockCo
         @Override
         public void setMaxProgress(int maxProgress) {
             if (ParallelNum == 0) this.maxProgressTime = maxProgress;
-            else if (ParallelNum <= 16) this.maxProgressTime = (int) (maxProgress*1.0 / ParallelNum);
+            else if (ParallelNum <= 16) this.maxProgressTime = (int) (maxProgress * 1.0 / ParallelNum);
             else if (ParallelNum <= 64) this.maxProgressTime = (int) (maxProgress * 16.0 / ParallelNum);
             else if (ParallelNum <= 256) this.maxProgressTime = (int) (maxProgress * 128.0 / ParallelNum);
             else this.maxProgressTime = maxProgress;

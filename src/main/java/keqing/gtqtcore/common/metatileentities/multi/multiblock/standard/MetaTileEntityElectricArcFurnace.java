@@ -66,33 +66,10 @@ public class MetaTileEntityElectricArcFurnace extends GTQTRecipeMapMultiblockCon
     private int blastFurnaceTemperature;
 
     public MetaTileEntityElectricArcFurnace(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, new RecipeMap[] {
+        super(metaTileEntityId, new RecipeMap[]{
                 GTQTcoreRecipeMaps.BLAST_ARC_RECIPES,
         });
         this.recipeMapWorkable = new ElectricArcFurnaceLogic(this);
-    }
-
-    protected class ElectricArcFurnaceLogic extends MultiblockRecipeLogic {
-
-        public ElectricArcFurnaceLogic(RecipeMapMultiblockController metaTileEntity) {
-            super(metaTileEntity);
-        }
-        public void setMaxProgress(int maxProgress) {
-            this.maxProgressTime = maxProgress / eleTier;
-        }
-
-        @Override
-        public int getParallelLimit() {
-            return (int) Math.pow(2,tubeTier);
-        }
-        protected void modifyOverclockPre( int[] values,  IRecipePropertyStorage storage) {
-            super.modifyOverclockPre(values, storage);
-            values[0] = OverclockingLogic.applyCoilEUtDiscount(values[0], ((IHeatingCoil)this.metaTileEntity).getCurrentTemperature(), (Integer)storage.getRecipePropertyValue(TemperatureProperty.getInstance(), 0));
-        }
-
-        protected  int[] runOverclockingLogic( IRecipePropertyStorage propertyStorage, int recipeEUt, long maxVoltage, int duration, int amountOC) {
-            return OverclockingLogic.heatingCoilOverclockingLogic(Math.abs(recipeEUt), maxVoltage, duration, amountOC, ((IHeatingCoil)this.metaTileEntity).getCurrentTemperature(), (Integer)propertyStorage.getRecipePropertyValue(TemperatureProperty.getInstance(), 0));
-        }
     }
 
     @Override
@@ -122,7 +99,7 @@ public class MetaTileEntityElectricArcFurnace extends GTQTRecipeMapMultiblockCon
                 .addParallelsLine(recipeMapWorkable.getParallelLimit())
                 .addWorkingStatusLine()
                 .addProgressLine(recipeMapWorkable.getProgressPercent());
-        textList.add(new TextComponentTranslation("gtqtcore.machine.arc1", eleTier,tubeTier));
+        textList.add(new TextComponentTranslation("gtqtcore.machine.arc1", eleTier, tubeTier));
     }
 
     @Override
@@ -132,7 +109,7 @@ public class MetaTileEntityElectricArcFurnace extends GTQTRecipeMapMultiblockCon
     }
 
     @Override
-    public boolean checkRecipe( Recipe recipe, boolean consumeIfSuccess) {
+    public boolean checkRecipe(Recipe recipe, boolean consumeIfSuccess) {
         return this.blastFurnaceTemperature >= recipe.getProperty(TemperatureProperty.getInstance(), 0);
     }
 
@@ -157,6 +134,7 @@ public class MetaTileEntityElectricArcFurnace extends GTQTRecipeMapMultiblockCon
                 .where('#', air())
                 .build();
     }
+
     @Override
     public List<MultiblockShapeInfo> getMatchingShapes() {
         ArrayList<MultiblockShapeInfo> shapeInfo = new ArrayList<>();
@@ -174,12 +152,13 @@ public class MetaTileEntityElectricArcFurnace extends GTQTRecipeMapMultiblockCon
                 .where('F', MetaTileEntities.FLUID_IMPORT_HATCH[GTValues.LV], EnumFacing.WEST)
                 .where('X', MetaTileEntities.FLUID_EXPORT_HATCH[GTValues.LV], EnumFacing.EAST)
                 .where('H', MetaTileEntities.MUFFLER_HATCH[GTValues.LV], EnumFacing.UP)
-                .where('M', MetaTileEntities.MAINTENANCE_HATCH,EnumFacing.NORTH);
+                .where('M', MetaTileEntities.MAINTENANCE_HATCH, EnumFacing.NORTH);
         GregTechAPI.HEATING_COILS.entrySet().stream()
                 .sorted(Comparator.comparingInt(entry -> entry.getValue().getTier()))
                 .forEach(entry -> shapeInfo.add(builder.where('B', entry.getKey()).build()));
         return shapeInfo;
     }
+
     protected IBlockState getCasingState() {
         return GTQTMetaBlocks.ADV_BLOCK.getState(GTQTADVBlock.CasingType.Talonite);
     }
@@ -189,6 +168,7 @@ public class MetaTileEntityElectricArcFurnace extends GTQTRecipeMapMultiblockCon
     public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
         return GTQTTextures.TALONITE;
     }
+
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
@@ -205,21 +185,23 @@ public class MetaTileEntityElectricArcFurnace extends GTQTRecipeMapMultiblockCon
         Object eleTier = context.get("EleTieredStats");
         Object tubeTier = context.get("ChemicalPlantTubeTieredStats");
         this.eleTier = GTQTUtil.getOrDefault(() -> eleTier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)eleTier).getIntTier(),
+                () -> ((WrappedIntTired) eleTier).getIntTier(),
                 0);
 
         this.tubeTier = GTQTUtil.getOrDefault(() -> tubeTier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)tubeTier).getIntTier(),
+                () -> ((WrappedIntTired) tubeTier).getIntTier(),
                 0);
     }
+
     @Override
-    public void addInformation(ItemStack stack,  World world,  List<String> tooltip,
+    public void addInformation(ItemStack stack, World world, List<String> tooltip,
                                boolean advanced) {
         super.addInformation(stack, world, tooltip, advanced);
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.1"));
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.2"));
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.3"));
     }
+
     @Override
     public int getCurrentTemperature() {
         return this.blastFurnaceTemperature;
@@ -245,7 +227,7 @@ public class MetaTileEntityElectricArcFurnace extends GTQTRecipeMapMultiblockCon
     public SoundEvent getBreakdownSound() {
         return GTSoundEvents.BREAKDOWN_ELECTRICAL;
     }
-    
+
     @Override
     public List<ITextComponent> getDataInfo() {
         List<ITextComponent> list = super.getDataInfo();
@@ -253,5 +235,30 @@ public class MetaTileEntityElectricArcFurnace extends GTQTRecipeMapMultiblockCon
                 new TextComponentTranslation(TextFormattingUtil.formatNumbers(blastFurnaceTemperature) + "K")
                         .setStyle(new Style().setColor(TextFormatting.RED))));
         return list;
+    }
+
+    protected class ElectricArcFurnaceLogic extends MultiblockRecipeLogic {
+
+        public ElectricArcFurnaceLogic(RecipeMapMultiblockController metaTileEntity) {
+            super(metaTileEntity);
+        }
+
+        public void setMaxProgress(int maxProgress) {
+            this.maxProgressTime = maxProgress / eleTier;
+        }
+
+        @Override
+        public int getParallelLimit() {
+            return (int) Math.pow(2, tubeTier);
+        }
+
+        protected void modifyOverclockPre(int[] values, IRecipePropertyStorage storage) {
+            super.modifyOverclockPre(values, storage);
+            values[0] = OverclockingLogic.applyCoilEUtDiscount(values[0], ((IHeatingCoil) this.metaTileEntity).getCurrentTemperature(), storage.getRecipePropertyValue(TemperatureProperty.getInstance(), 0));
+        }
+
+        protected int[] runOverclockingLogic(IRecipePropertyStorage propertyStorage, int recipeEUt, long maxVoltage, int duration, int amountOC) {
+            return OverclockingLogic.heatingCoilOverclockingLogic(Math.abs(recipeEUt), maxVoltage, duration, amountOC, ((IHeatingCoil) this.metaTileEntity).getCurrentTemperature(), propertyStorage.getRecipePropertyValue(TemperatureProperty.getInstance(), 0));
+        }
     }
 }

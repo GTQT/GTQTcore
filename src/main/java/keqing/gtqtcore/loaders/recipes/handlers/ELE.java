@@ -63,7 +63,6 @@ public class ELE {
                 .blastFurnaceTemp(1800)
                 .input(IMPREGNATED_GRAPHITE_RODSA, 32)
                 .input(dust, Diamond, 16)
-                .fluidInputs(Nitrogen.getFluid(2000))
                 .output(ELECTRODE_GRAPHITE)
                 .buildAndRegister();
 

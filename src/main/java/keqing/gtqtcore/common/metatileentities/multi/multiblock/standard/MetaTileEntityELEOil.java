@@ -34,34 +34,14 @@ public class MetaTileEntityELEOil extends RecipeMapMultiblockController {
         super(metaTileEntityId, GTQTcoreRecipeMaps.ELEOIL);
         this.recipeMapWorkable = new ELEOilLogic(this);
     }
+
     @Override
-    public boolean canBeDistinct() {return true;}
-    protected static class ELEOilLogic extends MultiblockRecipeLogic {
-
-        public ELEOilLogic(RecipeMapMultiblockController tileEntity) {
-            super(tileEntity, true);
-        }
-
-        private int ParallelTier(int tier) {
-            if (tier - 3 <= 0) {
-                return 4;
-            } else {
-                return 4 * (tier - EV);
-            }
-        }
-
-        @Override
-        public int getParallelLimit() {
-            return 16;
-        }
-
-        @Override
-        public void setMaxProgress(int maxProgress) {
-            this.maxProgressTime = (int) (maxProgress *0.8);
-        }
+    public boolean canBeDistinct() {
+        return true;
     }
+
     @Override
-    public void addInformation( ItemStack stack, World player, List<String> tooltip, boolean advanced) {
+    public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("石油滋生者", new Object[0]));
         tooltip.add(I18n.format("根据输入电压获得并行，电压低于HV默认四并行，每超过HV一级并行数量加四"));
@@ -73,6 +53,7 @@ public class MetaTileEntityELEOil extends RecipeMapMultiblockController {
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {
         return new MetaTileEntityELEOil(metaTileEntityId);
     }
+
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
@@ -101,9 +82,35 @@ public class MetaTileEntityELEOil extends RecipeMapMultiblockController {
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
         return Textures.CLEAN_STAINLESS_STEEL_CASING;
     }
+
     @Nonnull
     @Override
     protected ICubeRenderer getFrontOverlay() {
         return GTQTTextures.FRACKER_OVERLAY;
+    }
+
+    protected static class ELEOilLogic extends MultiblockRecipeLogic {
+
+        public ELEOilLogic(RecipeMapMultiblockController tileEntity) {
+            super(tileEntity, true);
+        }
+
+        private int ParallelTier(int tier) {
+            if (tier - 3 <= 0) {
+                return 4;
+            } else {
+                return 4 * (tier - EV);
+            }
+        }
+
+        @Override
+        public int getParallelLimit() {
+            return 16;
+        }
+
+        @Override
+        public void setMaxProgress(int maxProgress) {
+            this.maxProgressTime = (int) (maxProgress * 0.8);
+        }
     }
 }

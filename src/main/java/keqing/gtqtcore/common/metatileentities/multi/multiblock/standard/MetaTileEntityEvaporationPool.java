@@ -72,26 +72,50 @@ public class MetaTileEntityEvaporationPool extends RecipeMapMultiblockController
     public static final int MAX_SQUARE_SIDE_LENGTH = 12; //two edge layers on either side, shouldn't exceed chunk boundary at max size
 
     public static final int structuralDimensionsID = 1051354;
-    int columnCount = 1; //number of columns in row of controller (1 -> EDGEself(controller)EDGE, 2 -> EsCOLUMNe)
-    int rowCount = 1; //number of rows where controller is placed on "edge" row
-    int controllerPosition = 0; //column placement from left to right, where 0 = one from edge [ESCCCCE]
-
     public static final int coilDataID = 10142156;
+    public static final int energyValuesID = 10868607;
+    public static final ArrayList<IBlockState> validContainerStates = new ArrayList<>();
+
+    static {
+        validContainerStates.add(GTQTMetaBlocks.EVAPORATION_BED.getState(BlockEvaporationBed.EvaporationBedType.DIRT));
+        validContainerStates.addAll(MetaBlocks.WIRE_COIL.getBlockState().getValidStates()); //add all coils as valid container blocks
+    }
+
     public boolean isHeated = false;
     public int[] rollingAverage = new int[20];
     public boolean areCoilsHeating = false;
     public int coilStateMeta = -1; //order is last in order dependent ops because I'm lazy
-
-    public static final int energyValuesID = 10868607;
+    public boolean isRecipeStalled = false;
+    //just initialized on formation
+    public IHeatingCoilBlockStats coilStats;
+    int columnCount = 1; //number of columns in row of controller (1 -> EDGEself(controller)EDGE, 2 -> EsCOLUMNe)
+    int rowCount = 1; //number of rows where controller is placed on "edge" row
+    int controllerPosition = 0; //column placement from left to right, where 0 = one from edge [ESCCCCE]
     int exposedBlocks = 0;
     byte[] wasExposed; //indexed with row*col + col with row = 0 being furthest and col 0 being leftmost when looking at controller
     int kiloJoules = 0; //about 1000J/s on a sunny day for 1/m^2 of area
     int joulesBuffer = 0;
     int tickTimer = 0;
-    public boolean isRecipeStalled = false;
 
-    //just initialized on formation
-    public IHeatingCoilBlockStats coilStats;
+    public MetaTileEntityEvaporationPool(ResourceLocation metaTileEntityId) {
+        super(metaTileEntityId, GTQTcoreRecipeMaps.EVAPORATION_POOL);
+        this.recipeMapWorkable = new EvapRecipeLogic(this);
+
+        columnCount = 1; //minimum of one column for controller to be placed on
+        controllerPosition = 0; //controller starts off furthest to left
+    }
+
+    public static String repeat(String s, int count) {
+        if (s.length() == 0 || count < 1) {
+            return "";
+        }
+        if (count == 1) {
+            return s;
+        }
+
+        //create empty char array, convert to string which places null terminators in all its positions, then replace all
+        return new String(new char[count * s.length()]).replace("\0", s);
+    }
 
     public int getColumnCount() {
         return columnCount;
@@ -103,21 +127,6 @@ public class MetaTileEntityEvaporationPool extends RecipeMapMultiblockController
 
     public int getControllerPosition() {
         return controllerPosition;
-    }
-
-    public static final ArrayList<IBlockState> validContainerStates = new ArrayList<>();
-
-    static {
-        validContainerStates.add(GTQTMetaBlocks.EVAPORATION_BED.getState(BlockEvaporationBed.EvaporationBedType.DIRT));
-        validContainerStates.addAll(MetaBlocks.WIRE_COIL.getBlockState().getValidStates()); //add all coils as valid container blocks
-    }
-
-    public MetaTileEntityEvaporationPool(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, GTQTcoreRecipeMaps.EVAPORATION_POOL);
-        this.recipeMapWorkable = new EvapRecipeLogic(this);
-
-        columnCount = 1; //minimum of one column for controller to be placed on
-        controllerPosition = 0; //controller starts off furthest to left
     }
 
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
@@ -201,18 +210,6 @@ public class MetaTileEntityEvaporationPool extends RecipeMapMultiblockController
 
     public boolean isContainerBlock(@Nonnull World world, @Nonnull BlockPos.MutableBlockPos pos, @Nonnull EnumFacing direction) {
         return validContainerStates.contains(world.getBlockState(pos.move(direction)));
-    }
-
-    public static String repeat(String s, int count) {
-        if (s.length() == 0 || count < 1) {
-            return "";
-        }
-        if (count == 1) {
-            return s;
-        }
-
-        //create empty char array, convert to string which places null terminators in all its positions, then replace all
-        return new String(new char[count * s.length()]).replace("\0", s);
     }
 
     //generates rows with earlier entries being closer and later entries being further from controller
@@ -504,7 +501,7 @@ public class MetaTileEntityEvaporationPool extends RecipeMapMultiblockController
     }
 
     @Override
-    public void addInformation(ItemStack stack, World player,  List<String> tooltip, boolean advanced) {
+    public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         tooltip.add(I18n.format("gregtech.machine.evaporation_pool.tooltip.info", MAX_SQUARE_SIDE_LENGTH, MAX_SQUARE_SIDE_LENGTH));
         if (TooltipHelper.isShiftDown()) {
             tooltip.add(I18n.format("gregtech.machine.evaporation_pool.tooltip.structure_info", MAX_SQUARE_SIDE_LENGTH, MAX_SQUARE_SIDE_LENGTH) + "\n");
@@ -774,7 +771,7 @@ public class MetaTileEntityEvaporationPool extends RecipeMapMultiblockController
         return data;
     }
 
-   
+
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         if (data.hasKey("columnCount")) {
@@ -925,11 +922,21 @@ public class MetaTileEntityEvaporationPool extends RecipeMapMultiblockController
         return kiloJoules;
     }
 
+    public void setKiloJoules(int kiloJoules) {
+        this.kiloJoules = kiloJoules;
+    }
+
     public int getJoulesBuffer() {
         return joulesBuffer;
     }
 
-    public int getTickTimer() { return tickTimer; }
+    public void setJoulesBuffer(int joulesBuffer) {
+        this.joulesBuffer = joulesBuffer;
+    }
+
+    public int getTickTimer() {
+        return tickTimer;
+    }
 
     public int getRollingAverageJt() {
         // sunlight => 1kJ/s/m^2 -> 50J/t/m^2
@@ -984,14 +991,6 @@ public class MetaTileEntityEvaporationPool extends RecipeMapMultiblockController
 
     public boolean isRunningHeated() {
         return isHeated && isActive() && areCoilsHeating;
-    }
-
-    public void setKiloJoules(int kiloJoules) {
-        this.kiloJoules = kiloJoules;
-    }
-
-    public void setJoulesBuffer(int joulesBuffer) {
-        this.joulesBuffer = joulesBuffer;
     }
 
     public void setIsHeated(boolean isHeated) {

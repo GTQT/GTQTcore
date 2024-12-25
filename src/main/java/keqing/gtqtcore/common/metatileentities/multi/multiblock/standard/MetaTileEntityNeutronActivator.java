@@ -12,7 +12,6 @@ import gregtech.api.recipes.Recipe;
 import gregtech.api.util.BlockInfo;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.common.blocks.BlockGlassCasing;
-import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
@@ -33,74 +32,59 @@ import java.util.LinkedList;
 import java.util.List;
 
 import static gregtech.api.util.RelativeDirection.*;
-import static keqing.gtqtcore.common.block.blocks.GTQTADVBlock.CasingType.Inconel792;
-import static keqing.gtqtcore.common.block.blocks.GTQTNuclearFusion.CasingType.*;
+import static keqing.gtqtcore.common.block.blocks.GTQTNuclearFusion.CasingType.NEUTRON_ACTIVATOR_CASING;
+import static keqing.gtqtcore.common.block.blocks.GTQTNuclearFusion.CasingType.NEUTRON_ACTIVATOR_FRAME;
 
-public class MetaTileEntityNeutronActivator  extends RecipeMapMultiblockController {
-    private int coilHeight;
+public class MetaTileEntityNeutronActivator extends RecipeMapMultiblockController {
     protected int heatingCoilLevel;
     double pa;
     double pamax;
     double pamin;
+    private int coilHeight;
+
     public MetaTileEntityNeutronActivator(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.NEUTRON_ACTIVATOR);
         this.recipeMapWorkable = new NeutronActivatorLogic(this);
     }
+
+    private static IBlockState getFrameState() {
+        return MetaBlocks.FRAMES.get(GTQTMaterials.MARM200Steel).getBlock(GTQTMaterials.MARM200Steel);
+    }
+
     @Override
-    public boolean canBeDistinct() {return true;}
+    public boolean canBeDistinct() {
+        return true;
+    }
+
     @Override
     public boolean checkRecipe(@Nonnull Recipe recipe, boolean consumeIfSuccess) {
-        if(recipe.getProperty(NeutronActivatorPartProperty.getInstance(), 0)>=pamin&&recipe.getProperty(NeutronActivatorPartProperty.getInstance(), 0)<=pamax)
-        {
+        if (recipe.getProperty(NeutronActivatorPartProperty.getInstance(), 0) >= pamin && recipe.getProperty(NeutronActivatorPartProperty.getInstance(), 0) <= pamax) {
             return super.checkRecipe(recipe, consumeIfSuccess);
         }
         return false;
     }
+
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
-        textList.add(new TextComponentTranslation("gtqtcore.multiblock.na.tooltips1",coilHeight,heatingCoilLevel));
-        textList.add(new TextComponentTranslation("gtqtcore.multiblock.na.tooltips2",(int)pamin,(int)pa,(int)pamax));
+        textList.add(new TextComponentTranslation("gtqtcore.multiblock.na.tooltips1", coilHeight, heatingCoilLevel));
+        textList.add(new TextComponentTranslation("gtqtcore.multiblock.na.tooltips2", (int) pamin, (int) pa, (int) pamax));
     }
-    protected class NeutronActivatorLogic extends MultiblockRecipeLogic {
-        public NeutronActivatorLogic(RecipeMapMultiblockController tileEntity) {
-            super(tileEntity,true);
-        }
 
-        int calculateEnergy()
-        {
-            if(energyContainer.getEnergyStored()>energyContainer.getEnergyCapacity()*0.75)return 4;
-            if(energyContainer.getEnergyStored()>energyContainer.getEnergyCapacity()*0.5)return 2;
-            return 1;
-        }
-
-        int calculatePa()
-        {
-            if(pa>Math.pow(2,heatingCoilLevel)*0.9*coilHeight&&pa<Math.pow(2,heatingCoilLevel)*1.1*coilHeight)return 4;
-            if(pa>Math.pow(2,heatingCoilLevel)*0.8*coilHeight&&pa<Math.pow(2,heatingCoilLevel)*1.2*coilHeight)return 2;
-            else return 1;
-        }
-
-        @Override
-        public int getParallelLimit() {
-            return heatingCoilLevel*calculateEnergy()*calculatePa();
-        }
-
-        public void update() {
-        }
-    }
     @Override
     public void update() {
         super.update();
-        pamax=(Math.pow(2,heatingCoilLevel))*1.3*coilHeight;
-        pamin=(Math.pow(2,heatingCoilLevel))*0.7*coilHeight;
-        pa=(((pamax-pamin)*energyContainer.getEnergyStored()/energyContainer.getEnergyCapacity())+pamin);
+        pamax = (Math.pow(2, heatingCoilLevel)) * 1.3 * coilHeight;
+        pamin = (Math.pow(2, heatingCoilLevel)) * 0.7 * coilHeight;
+        pa = (((pamax - pamin) * energyContainer.getEnergyStored() / energyContainer.getEnergyCapacity()) + pamin);
     }
+
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityNeutronActivator(metaTileEntityId);
 
     }
+
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
@@ -117,9 +101,9 @@ public class MetaTileEntityNeutronActivator  extends RecipeMapMultiblockControll
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start(RIGHT, FRONT, UP)
-                .aisle("YYSYY", "YXXXY","YXXXY","YXXXY", "YYYYY")
-                .aisle("F   F", " GGG "," GHG "," GGG ", "F   F").setRepeatable(5, 25)
-                .aisle("YYYYY", "YXXXY","YXXXY","YXXXY", "YYYYY")
+                .aisle("YYSYY", "YXXXY", "YXXXY", "YXXXY", "YYYYY")
+                .aisle("F   F", " GGG ", " GHG ", " GGG ", "F   F").setRepeatable(5, 25)
+                .aisle("YYYYY", "YXXXY", "YXXXY", "YXXXY", "YYYYY")
                 .where('S', selfPredicate())
                 .where('Y', states(getCasingState())
                         .or(abilities(MultiblockAbility.EXPORT_ITEMS).setMaxGlobalLimited(1))
@@ -134,11 +118,11 @@ public class MetaTileEntityNeutronActivator  extends RecipeMapMultiblockControll
                 .where('H', coilPredicate())
                 .build();
     }
+
     private TraceabilityPredicate coilPredicate() {
         return new TraceabilityPredicate((blockWorldState) -> {
             IBlockState blockState = blockWorldState.getBlockState();
-            if (blockState.getBlock() instanceof BlockWireCoil) {
-                BlockWireCoil blockWireCoil = (BlockWireCoil) blockState.getBlock();
+            if (blockState.getBlock() instanceof BlockWireCoil blockWireCoil) {
                 BlockWireCoil.CoilType coilType = blockWireCoil.getState(blockState);
                 Object currentCoilType = blockWorldState.getMatchContext().getOrPut("CoilType", coilType);
                 if (!currentCoilType.toString().equals(coilType.getName())) {
@@ -154,23 +138,25 @@ public class MetaTileEntityNeutronActivator  extends RecipeMapMultiblockControll
             }
         }, () -> Arrays.stream(BlockWireCoil.CoilType.values()).map((type) -> new BlockInfo(MetaBlocks.WIRE_COIL.getState(type), null)).toArray(BlockInfo[]::new)).addTooltips("gregtech.multiblock.pattern.error.coils");
     }
+
     private IBlockState getGlassState() {
         return MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.LAMINATED_GLASS);
     }
-    private static IBlockState getFrameState() {
-        return MetaBlocks.FRAMES.get(GTQTMaterials.MARM200Steel).getBlock(GTQTMaterials.MARM200Steel);
-    }
+
     private IBlockState getCasingState() {
         return GTQTMetaBlocks.NUCLEAR_FUSION.getState(NEUTRON_ACTIVATOR_CASING);
     }
+
     private IBlockState getCasingState1() {
         return GTQTMetaBlocks.NUCLEAR_FUSION.getState(NEUTRON_ACTIVATOR_FRAME);
     }
+
     @SideOnly(Side.CLIENT)
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
         return GTQTTextures.NEUTRON_ACTIVATOR_CASING;
     }
+
     @SideOnly(Side.CLIENT)
     @Nonnull
     @Override
@@ -180,5 +166,33 @@ public class MetaTileEntityNeutronActivator  extends RecipeMapMultiblockControll
 
     public boolean hasMufflerMechanics() {
         return false;
+    }
+
+    protected class NeutronActivatorLogic extends MultiblockRecipeLogic {
+        public NeutronActivatorLogic(RecipeMapMultiblockController tileEntity) {
+            super(tileEntity, true);
+        }
+
+        int calculateEnergy() {
+            if (energyContainer.getEnergyStored() > energyContainer.getEnergyCapacity() * 0.75) return 4;
+            if (energyContainer.getEnergyStored() > energyContainer.getEnergyCapacity() * 0.5) return 2;
+            return 1;
+        }
+
+        int calculatePa() {
+            if (pa > Math.pow(2, heatingCoilLevel) * 0.9 * coilHeight && pa < Math.pow(2, heatingCoilLevel) * 1.1 * coilHeight)
+                return 4;
+            if (pa > Math.pow(2, heatingCoilLevel) * 0.8 * coilHeight && pa < Math.pow(2, heatingCoilLevel) * 1.2 * coilHeight)
+                return 2;
+            else return 1;
+        }
+
+        @Override
+        public int getParallelLimit() {
+            return heatingCoilLevel * calculateEnergy() * calculatePa();
+        }
+
+        public void update() {
+        }
     }
 }

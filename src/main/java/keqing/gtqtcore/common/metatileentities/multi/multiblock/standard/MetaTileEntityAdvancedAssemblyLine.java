@@ -71,8 +71,64 @@ public class MetaTileEntityAdvancedAssemblyLine extends RecipeMapMultiblockContr
         super(metaTileEntityId, RecipeMaps.ASSEMBLY_LINE_RECIPES);
         this.recipeMapWorkable = new AdvancedAssemblyLineRecipeLogic(this);
     }
+
+    private static IBlockState getCasingState() {
+        return GTQTMetaBlocks.TURBINE_CASING.getState(IRIDIUM_CASING);
+    }
+
+    private static IBlockState getSecondCasingState() {
+        return GTQTMetaBlocks.ACTIVE_UNIQUE_CASING.getState(ADVANCED_ASSEMBLY_LINE_CASING);
+    }
+
+    private static IBlockState getUniqueCasingState() {
+        return GTQTMetaBlocks.ACTIVE_UNIQUE_CASING.getState(ADVANCED_ASSEMBLY_CONTROL_CASING);
+    }
+
+    private static IBlockState getGrateState() {
+        return GTQTMetaBlocks.TURBINE_CASING.getState(ADVANCED_FILTER_CASING);
+    }
+
+    private static IBlockState getGlassState() {
+        return MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.FUSION_GLASS);
+    }
+
+    @SuppressWarnings("unchecked")
+    protected static TraceabilityPredicate fluidInputPredicate() {
+        return ConfigHolder.machines.orderedFluidAssembly ? metaTileEntities((MetaTileEntity[]) ((List) MultiblockAbility.REGISTRY.get(MultiblockAbility.IMPORT_FLUIDS)).stream()
+                .filter((mte) -> !(mte instanceof MetaTileEntityMultiFluidHatch))
+                .toArray(MetaTileEntity[]::new))
+                .setMaxGlobalLimited(4) : abilities(MultiblockAbility.IMPORT_FLUIDS);
+    }
+
+    protected static TraceabilityPredicate dataHatchPredicate() {
+        return ConfigHolder.machines.enableResearch ? abilities(MultiblockAbility.DATA_ACCESS_HATCH, MultiblockAbility.OPTICAL_DATA_RECEPTION)
+                .setExactLimit(1)
+                .or(states(getGrateState())) : states(getGrateState());
+    }
+
+    private static boolean isRecipeAvailable(Iterable<? extends IDataAccessHatch> hatches, Recipe recipe) {
+        Iterator<? extends IDataAccessHatch> var2 = hatches.iterator();
+
+        IDataAccessHatch hatch;
+        do {
+            if (!var2.hasNext()) {
+                return false;
+            }
+
+            hatch = var2.next();
+            if (hatch.isCreative()) {
+                return true;
+            }
+        } while (!hatch.isRecipeAvailable(recipe));
+
+        return true;
+    }
+
     @Override
-    public boolean canBeDistinct() {return true;}
+    public boolean canBeDistinct() {
+        return true;
+    }
+
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityAdvancedAssemblyLine(metaTileEntityId);
     }
@@ -103,41 +159,8 @@ public class MetaTileEntityAdvancedAssemblyLine extends RecipeMapMultiblockContr
                 .build();
     }
 
-    private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.TURBINE_CASING.getState(IRIDIUM_CASING);
-    }
-
-    private static IBlockState getSecondCasingState() {
-        return GTQTMetaBlocks.ACTIVE_UNIQUE_CASING.getState(ADVANCED_ASSEMBLY_LINE_CASING);
-    }
-
-    private static IBlockState getUniqueCasingState() {
-        return GTQTMetaBlocks.ACTIVE_UNIQUE_CASING.getState(ADVANCED_ASSEMBLY_CONTROL_CASING);
-    }
-
-    private static IBlockState getGrateState() {
-        return GTQTMetaBlocks.TURBINE_CASING.getState(ADVANCED_FILTER_CASING);
-    }
-
-    private static IBlockState getGlassState() {
-        return MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.FUSION_GLASS);
-    }
-
     protected OrientedOverlayRenderer getFrontOverlay() {
         return Textures.FUSION_REACTOR_OVERLAY;
-    }
-    @SuppressWarnings("unchecked")
-    protected static TraceabilityPredicate fluidInputPredicate() {
-        return ConfigHolder.machines.orderedFluidAssembly ? metaTileEntities((MetaTileEntity[])((List) MultiblockAbility.REGISTRY.get(MultiblockAbility.IMPORT_FLUIDS)).stream()
-                .filter((mte) -> !(mte instanceof MetaTileEntityMultiFluidHatch))
-                .toArray(MetaTileEntity[]::new))
-                .setMaxGlobalLimited(4) : abilities(MultiblockAbility.IMPORT_FLUIDS);
-    }
-
-    protected static TraceabilityPredicate dataHatchPredicate() {
-        return ConfigHolder.machines.enableResearch ? abilities(MultiblockAbility.DATA_ACCESS_HATCH, MultiblockAbility.OPTICAL_DATA_RECEPTION)
-                .setExactLimit(1)
-                .or(states(getGrateState())) : states(getGrateState());
     }
 
     protected Function<BlockPos, Integer> multiblockPartSorter() {
@@ -223,12 +246,12 @@ public class MetaTileEntityAdvancedAssemblyLine extends RecipeMapMultiblockContr
 
     }
 
-    private void writeParticles( PacketBuffer buf) {
+    private void writeParticles(PacketBuffer buf) {
         buf.writeVarInt(this.beamCount);
     }
 
     @SideOnly(Side.CLIENT)
-    private void readParticles( PacketBuffer buf) {
+    private void readParticles(PacketBuffer buf) {
         this.beamCount = buf.readVarInt();
         if (this.beamParticles == null) {
             this.beamParticles = new GTLaserBeamParticle[17][2];
@@ -239,7 +262,7 @@ public class MetaTileEntityAdvancedAssemblyLine extends RecipeMapMultiblockContr
         EnumFacing relativeLeft = RelativeDirection.LEFT.getRelativeFacing(this.getFrontFacing(), this.getUpwardsFacing(), this.isFlipped());
         boolean negativeUp = relativeUp.getAxisDirection() == EnumFacing.AxisDirection.NEGATIVE;
 
-        for(int i = 0; i < this.beamParticles.length; ++i) {
+        for (int i = 0; i < this.beamParticles.length; ++i) {
             GTLaserBeamParticle particle = this.beamParticles[i][0];
             if (i < this.beamCount && particle == null) {
                 pos.setPos(this.getPos());
@@ -313,7 +336,7 @@ public class MetaTileEntityAdvancedAssemblyLine extends RecipeMapMultiblockContr
                         return false;
                     }
 
-                    for(int i = 0; i < inputs.size(); ++i) {
+                    for (int i = 0; i < inputs.size(); ++i) {
                         if (!(inputs.get(i)).acceptsFluid((fluidInputInventory.get(i)).getFluid())) {
                             return false;
                         }
@@ -329,26 +352,8 @@ public class MetaTileEntityAdvancedAssemblyLine extends RecipeMapMultiblockContr
         }
     }
 
-    private static boolean isRecipeAvailable( Iterable<? extends IDataAccessHatch> hatches,  Recipe recipe) {
-        Iterator<? extends IDataAccessHatch> var2 = hatches.iterator();
-
-        IDataAccessHatch hatch;
-        do {
-            if (!var2.hasNext()) {
-                return false;
-            }
-
-            hatch = var2.next();
-            if (hatch.isCreative()) {
-                return true;
-            }
-        } while(!hatch.isRecipeAvailable(recipe));
-
-        return true;
-    }
-
     @Override
-    public void addInformation(ItemStack stack, World world, List<String> tooltip,boolean advanced) {
+    public void addInformation(ItemStack stack, World world, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, world, tooltip, advanced);
         tooltip.add(I18n.format("gtqtcore.machine.advanced_assembly_line.tooltip.1"));
         tooltip.add(I18n.format("gtqtcore.machine.advanced_assembly_line.tooltip.2"));

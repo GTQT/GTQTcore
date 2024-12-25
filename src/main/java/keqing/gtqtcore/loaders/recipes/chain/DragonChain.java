@@ -70,7 +70,7 @@ public class DragonChain {
                 .input(DRAGON_CELL,32)
                 .input(dust,Meat,64)
                 .input(BONE,64)
-                .fluidInputs(DNAe.getFluid(1000))
+                .fluidInputs(DNAdeal.getFluid(1000))
                 .fluidInputs(Enzymesda.getFluid(1000))
                 .fluidOutputs(DragonBreath.getFluid(200))
                 .outputs(new ItemStack(DRAGON_EGG))

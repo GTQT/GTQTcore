@@ -31,7 +31,6 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 import static gregtech.api.unification.material.Materials.Naquadah;
-import static gregtech.api.unification.material.Materials.NaquadahAlloy;
 
 public class MetaTileEntityFuelRefineFactory extends RecipeMapMultiblockController {
 
@@ -40,12 +39,32 @@ public class MetaTileEntityFuelRefineFactory extends RecipeMapMultiblockControll
         this.recipeMapWorkable = new MultiblockRecipeLogic(this, true);
     }
 
+    private static IBlockState getCasingState() {
+        return GTQTMetaBlocks.TURBINE_CASING.getState(GTQTTurbineCasing.TurbineCasingType.TALONITE_CASING);
+    }
+
+    private static IBlockState getPipeCasingState() {
+        return MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.POLYTETRAFLUOROETHYLENE_PIPE);
+    }
+
+    private static IBlockState getUniqueCasingState() {
+        return GCYMMetaBlocks.UNIQUE_CASING.getState(BlockUniqueCasing.UniqueCasingType.HEAT_VENT);
+    }
+
+    private static IBlockState getFrameState() {
+        return MetaBlocks.FRAMES.get(Naquadah).getBlock(Naquadah);
+    }
+
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {
         return new MetaTileEntityFuelRefineFactory(metaTileEntityId);
     }
+
     @Override
-    public boolean canBeDistinct() {return true;}
+    public boolean canBeDistinct() {
+        return true;
+    }
+
     @Nonnull
     @Override
     protected BlockPattern createStructurePattern() {
@@ -78,22 +97,6 @@ public class MetaTileEntityFuelRefineFactory extends RecipeMapMultiblockControll
                                 .setPreviewCount(1)))
                 .where(' ', any())
                 .build();
-    }
-
-    private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.TURBINE_CASING.getState(GTQTTurbineCasing.TurbineCasingType.TALONITE_CASING);
-    }
-
-    private static IBlockState getPipeCasingState() {
-        return MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.POLYTETRAFLUOROETHYLENE_PIPE);
-    }
-
-    private static IBlockState getUniqueCasingState() {
-        return GCYMMetaBlocks.UNIQUE_CASING.getState(BlockUniqueCasing.UniqueCasingType.HEAT_VENT);
-    }
-
-    private static IBlockState getFrameState() {
-        return MetaBlocks.FRAMES.get(Naquadah).getBlock(Naquadah);
     }
 
     @SideOnly(Side.CLIENT)

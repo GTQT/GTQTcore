@@ -8,7 +8,6 @@ import gregtech.api.capability.GregtechCapabilities;
 import gregtech.api.capability.GregtechTileCapabilities;
 import gregtech.api.capability.IEnergyContainer;
 import gregtech.api.capability.impl.EnergyContainerList;
-import gregtech.api.capability.impl.FluidTankList;
 import gregtech.api.capability.impl.ItemHandlerList;
 import gregtech.api.cover.CoverableView;
 import gregtech.api.gui.GuiTextures;
@@ -85,7 +84,7 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
         this.outputInventory = new ItemHandlerList(this.getAbilities(MultiblockAbility.EXPORT_ITEMS));
         List<IEnergyContainer> energyContainer = new ArrayList<>(this.getAbilities(MultiblockAbility.INPUT_ENERGY));
         energyContainer.addAll(this.getAbilities(MultiblockAbility.INPUT_LASER));
-        this.energyContainer=new EnergyContainerList(energyContainer);
+        this.energyContainer = new EnergyContainerList(energyContainer);
     }
 
     @Override
@@ -366,7 +365,7 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
 
     @Override
     protected void updateFormedValid() {
-        if(euStore<0)euStore=0;
+        if (euStore < 0) euStore = 0;
 
         if (this.energyContainer != null && this.energyContainer.getEnergyStored() > 0 && euStore < maxStore()) {
             if (euStore + this.energyContainer.getEnergyStored() > maxStore()) {
@@ -433,7 +432,7 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
 
                 assert container != null;
                 long energyNeeded = container.getEnergyCapacity() - container.getEnergyStored();
-                if (energyNeeded < voltage * amperage && euStore>energyNeeded) {
+                if (energyNeeded < voltage * amperage && euStore > energyNeeded) {
                     container.addEnergy(energyNeeded);
                     euStore -= energyNeeded;
                     return;

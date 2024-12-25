@@ -46,12 +46,20 @@ import static gregtech.api.unification.material.Materials.Steam;
 
 public class MetaTileEntityGantryCrane extends RecipeMapMultiblockController implements IProgressBarMultiblock {
 
+    int updatetime = 1;
+    boolean work = true;
+    int[] steam = new int[3];
+    FluidStack STEAM = Steam.getFluid(1000 * updatetime);
+
     public MetaTileEntityGantryCrane(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.GANTRY_CRANE);
         this.recipeMapWorkable = new MFSWorkableHandler(this);
     }
-    int updatetime=1;
-    boolean work=true;
+
+    private static IBlockState getCasingAState() {
+        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STAINLESS_CLEAN);
+    }
+
     @Override
     @Nonnull
     protected Widget getFlexButton(int x, int y, int width, int height) {
@@ -66,68 +74,31 @@ public class MetaTileEntityGantryCrane extends RecipeMapMultiblockController imp
     }
 
     private void incrementThreshold(Widget.ClickData clickData) {
-        this.updatetime = MathHelper.clamp(updatetime+1, 1, 20);
+        this.updatetime = MathHelper.clamp(updatetime + 1, 1, 20);
     }
 
     private void decrementThreshold(Widget.ClickData clickData) {
-        this.updatetime = MathHelper.clamp(updatetime-1, 1, 20);
+        this.updatetime = MathHelper.clamp(updatetime - 1, 1, 20);
     }
-    @Override
-    public boolean canBeDistinct() {return true;}
-    private class MFSWorkableHandler extends MultiblockRecipeLogic {
 
-        public MFSWorkableHandler(RecipeMapMultiblockController tileEntity) {
-            super(tileEntity);
-        }
-        @Override
-        public int getParallelLimit() {
-            if(getStatue()) {
-                return 4;
-            }
-            return 1;
-        }
-        @Override
-        public void setMaxProgress(int maxProgress)
-        {
-            if(getStatue()) {
-                maxProgressTime = maxProgress/4;
-            }
-            else this.maxProgressTime = maxProgress;
-        }
-        public  boolean getStatue()
-        {
-            return steam[0] > 6000 && steam[1] > 6000 && steam[2] > 6000;
-        }
-        protected void updateRecipeProgress() {
-            if (canRecipeProgress && drawEnergy(recipeEUt, true)) {
-                this.drawEnergy(this.recipeEUt, false);
-                if (++progressTime > maxProgressTime)
-                {
-                    steam[0]=(int) (steam[0]*0.48);
-                    steam[1]=(int) (steam[1]*0.64);
-                    steam[2]=(int) (steam[2]*0.72);
-                    completeRecipe();
-                }
-            }
-        }
+    @Override
+    public boolean canBeDistinct() {
+        return true;
     }
+
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
         if (getInputFluidInventory() != null) {
             FluidStack SteamStack = getInputFluidInventory().drain(Steam.getFluid(Integer.MAX_VALUE), false);
             int SteamAmount = SteamStack == null ? 0 : SteamStack.amount;
-            textList.add(new TextComponentTranslation("gtqtcore.gc.count1",TextFormattingUtil.formatNumbers(SteamAmount)));
+            textList.add(new TextComponentTranslation("gtqtcore.gc.count1", TextFormattingUtil.formatNumbers(SteamAmount)));
         }
-        textList.add(new TextComponentTranslation("gtqtcore.msf.count2", (double)steam[0]/1000,(double)steam[1]/1000,(double)steam[2]/1000));
-        if(getStatue())  textList.add(new TextComponentTranslation("gtqtcore.msf.good"));
+        textList.add(new TextComponentTranslation("gtqtcore.msf.count2", (double) steam[0] / 1000, (double) steam[1] / 1000, (double) steam[2] / 1000));
+        if (getStatue()) textList.add(new TextComponentTranslation("gtqtcore.msf.good"));
         else textList.add(new TextComponentTranslation("gtqtcore.msf.no"));
     }
-    private static IBlockState getCasingAState() {
-        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STAINLESS_CLEAN);
-    }
-    int[] steam=new int[3];
-    FluidStack STEAM = Steam.getFluid(1000*updatetime);
+
     @Override
     public void update() {
         super.update();
@@ -135,12 +106,12 @@ public class MetaTileEntityGantryCrane extends RecipeMapMultiblockController imp
             IMultipleTankHandler inputTank = getInputFluidInventory();
             if (STEAM.isFluidStackIdentical(inputTank.drain(STEAM, false))) {
                 inputTank.drain(STEAM, true);
-                steam[0] = steam[0] + 800*updatetime;
+                steam[0] = steam[0] + 800 * updatetime;
 
             }
         }
 
-        for(int i=0;i<3;i++) {
+        for (int i = 0; i < 3; i++) {
             if (steam[0] > steam[1]) {
                 steam[0] = steam[0] - 40;
                 steam[1] = steam[1] + 30;
@@ -163,15 +134,15 @@ public class MetaTileEntityGantryCrane extends RecipeMapMultiblockController imp
         }
 
     }
+
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("fluid1", steam[0]);
         data.setInteger("fluid2", steam[1]);
         data.setInteger("fluid3", steam[2]);
-        data.setInteger("updatetime",updatetime);
+        data.setInteger("updatetime", updatetime);
         return super.writeToNBT(data);
     }
 
-   
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         steam[0] = data.getInteger("fluid1");
@@ -179,10 +150,11 @@ public class MetaTileEntityGantryCrane extends RecipeMapMultiblockController imp
         steam[2] = data.getInteger("fluid3");
         updatetime = data.getInteger("updatetime");
     }
-    public  boolean getStatue()
-    {
+
+    public boolean getStatue() {
         return steam[0] > 6000 && steam[1] > 6000 && steam[2] > 6000;
     }
+
     @Override
     public int getNumProgressBars() {
         return 3;
@@ -192,12 +164,13 @@ public class MetaTileEntityGantryCrane extends RecipeMapMultiblockController imp
     public void addBarHoverText(List<ITextComponent> hoverList, int index) {
         ITextComponent cwutInfo = TextComponentUtil.stringWithColor(
                 TextFormatting.AQUA,
-                (steam[index] + 1000)+ " / " + (10000) + " kPa");
+                (steam[index] + 1000) + " / " + (10000) + " kPa");
         hoverList.add(TextComponentUtil.translationWithColor(
                 TextFormatting.GRAY,
                 "gregtech.multiblock.msf.computation",
                 cwutInfo));
     }
+
     @Override
     public double getFillPercentage(int index) {
         return (double) (steam[index] + 1000) / (10000);
@@ -207,6 +180,7 @@ public class MetaTileEntityGantryCrane extends RecipeMapMultiblockController imp
     public TextureArea getProgressBarTexture(int index) {
         return GuiTextures.PROGRESS_BAR_HPCA_COMPUTATION;
     }
+
     @Nonnull
     @Override
     protected BlockPattern createStructurePattern() {
@@ -225,9 +199,10 @@ public class MetaTileEntityGantryCrane extends RecipeMapMultiblockController imp
                         .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setMinGlobalLimited(1).setPreviewCount(1))
                         .or(abilities(MultiblockAbility.EXPORT_FLUIDS).setMinGlobalLimited(1).setPreviewCount(1))
                         .or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(2).setPreviewCount(1)))
-                .where('A',  states(MetaBlocks.FRAMES.get(Materials.StainlessSteel).getBlock(Materials.StainlessSteel)))
+                .where('A', states(MetaBlocks.FRAMES.get(Materials.StainlessSteel).getBlock(Materials.StainlessSteel)))
                 .build();
     }
+
     @Override
     public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
@@ -235,6 +210,7 @@ public class MetaTileEntityGantryCrane extends RecipeMapMultiblockController imp
         tooltip.add(I18n.format("gregtech.machine.gc.tooltip.4"));
         tooltip.add(I18n.format("gregtech.machine.msf.tooltip.4"));
     }
+
     @SideOnly(Side.CLIENT)
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
@@ -251,6 +227,44 @@ public class MetaTileEntityGantryCrane extends RecipeMapMultiblockController imp
     @Override
     protected ICubeRenderer getFrontOverlay() {
         return GTQTTextures.ALGAE_FARM_OVERLAY;
+    }
+
+    private class MFSWorkableHandler extends MultiblockRecipeLogic {
+
+        public MFSWorkableHandler(RecipeMapMultiblockController tileEntity) {
+            super(tileEntity);
+        }
+
+        @Override
+        public int getParallelLimit() {
+            if (getStatue()) {
+                return 4;
+            }
+            return 1;
+        }
+
+        @Override
+        public void setMaxProgress(int maxProgress) {
+            if (getStatue()) {
+                maxProgressTime = maxProgress / 4;
+            } else this.maxProgressTime = maxProgress;
+        }
+
+        public boolean getStatue() {
+            return steam[0] > 6000 && steam[1] > 6000 && steam[2] > 6000;
+        }
+
+        protected void updateRecipeProgress() {
+            if (canRecipeProgress && drawEnergy(recipeEUt, true)) {
+                this.drawEnergy(this.recipeEUt, false);
+                if (++progressTime > maxProgressTime) {
+                    steam[0] = (int) (steam[0] * 0.48);
+                    steam[1] = (int) (steam[1] * 0.64);
+                    steam[2] = (int) (steam[2] * 0.72);
+                    completeRecipe();
+                }
+            }
+        }
     }
 
 }

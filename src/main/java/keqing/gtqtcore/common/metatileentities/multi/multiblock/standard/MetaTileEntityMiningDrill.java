@@ -1,10 +1,5 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
-import keqing.gtqtcore.api.capability.IDrillHead;
-import keqing.gtqtcore.api.capability.IElectrode;
-import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
-import keqing.gtqtcore.api.utils.GTQTDateHelper;
-import keqing.gtqtcore.api.utils.GTQTOreHelper;
 import gregtech.api.capability.IMultipleTankHandler;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.gui.GuiTextures;
@@ -19,31 +14,35 @@ import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
+import gregtech.api.unification.material.Materials;
 import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.TooltipHelper;
-import gregtech.common.blocks.*;
+import gregtech.common.blocks.BlockMultiblockCasing;
+import gregtech.common.blocks.BlockTurbineCasing;
+import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.blocks.StoneVariantBlock;
 import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
+import keqing.gtqtcore.api.capability.IDrillHead;
+import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
+import keqing.gtqtcore.api.utils.GTQTDateHelper;
+import keqing.gtqtcore.api.utils.GTQTOreHelper;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.items.GTQTMetaItems;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
-import gregtech.api.unification.material.Materials;
 import net.minecraftforge.fluids.FluidStack;
 
 import javax.annotation.Nonnull;
@@ -53,7 +52,7 @@ import static gregtech.api.unification.material.Materials.Lubricant;
 
 //大矿机
 public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
-    int tier=1;
+    int tier = 1;
     int casing;
     int tube;
     int drillBedTier;
@@ -63,20 +62,20 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
     int kind;
 
     public MetaTileEntityMiningDrill(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, GTQTcoreRecipeMaps.MINING_DRILL_RECIPES );
+        super(metaTileEntityId, GTQTcoreRecipeMaps.MINING_DRILL_RECIPES);
         this.recipeMapWorkable = new IndustrialDrillWorkableHandler(this);
     }
 
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
-        data.setBoolean("commonFix",commonFix);
-        data.setInteger("random",random);
+        data.setBoolean("commonFix", commonFix);
+        data.setInteger("random", random);
         return super.writeToNBT(data);
     }
 
-   
+
     public void readFromNBT(NBTTagCompound data) {
-        commonFix=data.getBoolean("commonFix");
-        random=data.getInteger("random");
+        commonFix = data.getBoolean("commonFix");
+        random = data.getInteger("random");
         super.readFromNBT(data);
     }
 
@@ -85,6 +84,7 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {
         return new MetaTileEntityMiningDrill(metaTileEntityId);
     }
+
     @Override
     @Nonnull
     protected Widget getFlexButton(int x, int y, int width, int height) {
@@ -97,8 +97,9 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
     }
 
     private void clear(Widget.ClickData clickData) {
-        commonFix=!commonFix;
+        commonFix = !commonFix;
     }
+
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
@@ -140,8 +141,8 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
-        if(casing!=tube)
-            textList.add(new TextComponentTranslation("gtqtcore.equal",casing,tube));
+        if (casing != tube)
+            textList.add(new TextComponentTranslation("gtqtcore.equal", casing, tube));
         if (getInputFluidInventory() != null) {
             FluidStack LubricantStack = getInputFluidInventory().drain(Lubricant.getFluid(Integer.MAX_VALUE), false);
             int liquidOxygenAmount = LubricantStack == null ? 0 : LubricantStack.amount;
@@ -150,17 +151,17 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
         if (getDrillHeadHatch().isAvailable()) {
             textList.add(new TextComponentTranslation("钻头仓等级：%s 钻头等级：%s", getDrillHeadHatch().getTier(), getDrillHeadHatch().getDrillHeadTier()));
             textList.add(new TextComponentString("距离损坏: " + GTQTDateHelper.getTimeFromTicks(getDrillHeadHatch().getTotalTick() - getDrillHeadHatch().getWorkTime())));
-            if(drillTier!=getDrillHeadHatch().getTier())textList.add(new TextComponentTranslation("开采等级：%s", drillTier));
+            if (drillTier != getDrillHeadHatch().getTier())
+                textList.add(new TextComponentTranslation("开采等级：%s", drillTier));
         } else textList.add(new TextComponentTranslation("钻头仓等级：%s", getDrillHeadHatch().getTier()));
-        if(checkCard())
-        {
+        if (checkCard()) {
             if (!commonFix) {
                 textList.add(new TextComponentTranslation(GTQTOreHelper.getInfo(kind)));
             } else {
                 textList.add(new TextComponentTranslation(GTQTOreHelper.getInfo(kind % 4)));
             }
         }
-        textList.add(new TextComponentTranslation("普适模式：%s",commonFix));
+        textList.add(new TextComponentTranslation("普适模式：%s", commonFix));
     }
 
     @Override
@@ -203,13 +204,14 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
     public void updateFormedValid() {
         if (!isStructureFormed()) return;
         if (!checkAvailable()) return;
-        drillTier = Math.min(drillBedTier,getDrillHatchTier());
+        drillTier = Math.min(drillBedTier, getDrillHatchTier());
     }
 
     @Override
     public String[] getDescription() {
         return new String[]{I18n.format("gtqt.tooltip.update")};
     }
+
     @Nonnull
     @Override
     protected ICubeRenderer getFrontOverlay() {
@@ -226,13 +228,14 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
     @Override
     public void receiveCustomData(int dataId, PacketBuffer buf) {
         super.receiveCustomData(dataId, buf);
-        if(dataId == GTQTValue.UPDATE_TIER22){
+        if (dataId == GTQTValue.UPDATE_TIER22) {
             this.casing = buf.readInt();
         }
-        if(dataId == GTQTValue.REQUIRE_DATA_UPDATE22){
-            this.writeCustomData(GTQTValue.UPDATE_TIER22,buf1 -> buf1.writeInt(this.casing));
+        if (dataId == GTQTValue.REQUIRE_DATA_UPDATE22) {
+            this.writeCustomData(GTQTValue.UPDATE_TIER22, buf1 -> buf1.writeInt(this.casing));
         }
     }
+
     @Override
     public void writeInitialSyncData(PacketBuffer buf) {
         super.writeInitialSyncData(buf);
@@ -244,6 +247,7 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
         super.receiveInitialSyncData(buf);
         this.casing = buf.readInt();
     }
+
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
@@ -251,34 +255,36 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
         Object casing = context.get("ChemicalPlantCasingTieredStats");
         Object tubeTier = context.get("ChemicalPlantTubeTieredStats");
         this.casing = GTQTUtil.getOrDefault(() -> casing instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)casing).getIntTier(),
+                () -> ((WrappedIntTired) casing).getIntTier(),
                 0);
 
         this.drillBedTier = GTQTUtil.getOrDefault(() -> drill instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)drill).getIntTier(),
+                () -> ((WrappedIntTired) drill).getIntTier(),
                 0);
 
         this.tube = GTQTUtil.getOrDefault(() -> tubeTier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)tubeTier).getIntTier(),
+                () -> ((WrappedIntTired) tubeTier).getIntTier(),
                 0);
 
 
-        this.tier = Math.min(this.casing,this.tube);
+        this.tier = Math.min(this.casing, this.tube);
 
-        random=0;
-        if((this.getPos().getX()/64)%2==0)random+=2;
-        if((this.getPos().getZ()/64)%2==0)random+=2;
-        else random+=1;
+        random = 0;
+        if ((this.getPos().getX() / 64) % 2 == 0) random += 2;
+        if ((this.getPos().getZ() / 64) % 2 == 0) random += 2;
+        else random += 1;
 
         this.writeCustomData(GTQTValue.UPDATE_TIER22, buf -> buf.writeInt(this.casing));
     }
+
     @Override
     public boolean isMultiblockPartWeatherResistant(@Nonnull IMultiblockPart part) {
         return true;
     }
+
     @Override
     public void invalidateStructure() {
-       super.invalidateStructure();
+        super.invalidateStructure();
     }
 
     @Override
@@ -302,8 +308,9 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
     @Override
     protected void addWarningText(List<ITextComponent> textList) {
         super.addWarningText(textList);
-        if(!checkCard()) textList.add(new TextComponentTranslation("缺少参数或者参数不符合！！"));
+        if (!checkCard()) textList.add(new TextComponentTranslation("缺少参数或者参数不符合！！"));
     }
+
     public boolean checkCard() {
         var slots = this.getInputInventory().getSlots();
         for (int i = 0; i < slots; i++) {
@@ -311,8 +318,7 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
             if (item.getItem() == GTQTMetaItems.GTQT_META_ITEM && item.getMetadata() == GTQTMetaItems.POS_ORE_CARD.getMetaValue()) {
                 NBTTagCompound compound = item.getTagCompound();
                 if (compound != null && compound.hasKey("Kind")) {
-                    if(commonFix)
-                    {
+                    if (commonFix) {
                         if (compound.getInteger("Kind") == random) {
                             kind = compound.getInteger("Kind");
                             this.getInputInventory().extractItem(i, 1, true);
@@ -329,37 +335,6 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
             }
         }
         return false;
-    }
-    protected class IndustrialDrillWorkableHandler extends MultiblockRecipeLogic {
-
-        private final MetaTileEntityMiningDrill combustionEngine;
-        public IndustrialDrillWorkableHandler(RecipeMapMultiblockController tileEntity) {
-            super(tileEntity);
-            this.combustionEngine = (MetaTileEntityMiningDrill) tileEntity;
-        }
-        @Override
-        public int getParallelLimit() {
-            return (int) Math.pow(2, Math.min(tier,drillTier));
-        }
-        @Override
-        public void setMaxProgress(int maxProgress) {
-            this.maxProgressTime = (int) (maxProgress * (100 - drillTier * 5) / 100.0);
-        }
-
-        private final FluidStack LUBRICANT_STACK = Lubricant.getFluid(1);
-
-        protected void updateRecipeProgress() {
-            IMultipleTankHandler inputTank = combustionEngine.getInputFluidInventory();
-            if (checkCard()&&this.canRecipeProgress && this.drawEnergy(this.recipeEUt, true)&&LUBRICANT_STACK.isFluidStackIdentical(inputTank.drain(LUBRICANT_STACK, false))) {
-                this.drawEnergy(this.recipeEUt, false);
-                LUBRICANT_STACK.isFluidStackIdentical(inputTank.drain(LUBRICANT_STACK, true));
-                setWork(true);
-                if (++this.progressTime > this.maxProgressTime) {
-                    this.completeRecipe();
-                    setWork(false);
-                }
-            }
-        }
     }
 
     public IDrillHead getDrillHeadHatch() {
@@ -379,6 +354,40 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
 
     public void setWork(boolean work) {
         getDrillHeadHatch().setWork(work);
+    }
+
+    protected class IndustrialDrillWorkableHandler extends MultiblockRecipeLogic {
+
+        private final MetaTileEntityMiningDrill combustionEngine;
+        private final FluidStack LUBRICANT_STACK = Lubricant.getFluid(1);
+
+        public IndustrialDrillWorkableHandler(RecipeMapMultiblockController tileEntity) {
+            super(tileEntity);
+            this.combustionEngine = (MetaTileEntityMiningDrill) tileEntity;
+        }
+
+        @Override
+        public int getParallelLimit() {
+            return (int) Math.pow(2, Math.min(tier, drillTier));
+        }
+
+        @Override
+        public void setMaxProgress(int maxProgress) {
+            this.maxProgressTime = (int) (maxProgress * (100 - drillTier * 5) / 100.0);
+        }
+
+        protected void updateRecipeProgress() {
+            IMultipleTankHandler inputTank = combustionEngine.getInputFluidInventory();
+            if (checkCard() && this.canRecipeProgress && this.drawEnergy(this.recipeEUt, true) && LUBRICANT_STACK.isFluidStackIdentical(inputTank.drain(LUBRICANT_STACK, false))) {
+                this.drawEnergy(this.recipeEUt, false);
+                LUBRICANT_STACK.isFluidStackIdentical(inputTank.drain(LUBRICANT_STACK, true));
+                setWork(true);
+                if (++this.progressTime > this.maxProgressTime) {
+                    this.completeRecipe();
+                    setWork(false);
+                }
+            }
+        }
     }
 
 }

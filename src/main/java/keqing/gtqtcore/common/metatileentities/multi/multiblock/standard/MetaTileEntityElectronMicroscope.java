@@ -48,10 +48,23 @@ public class MetaTileEntityElectronMicroscope extends RecipeMapMultiblockControl
         this.recipeMapWorkable = new ElectronMicroscopeRecipeLogic(this);
     }
 
+    private static IBlockState getCasingState() {
+        return GTQTMetaBlocks.ADV_BLOCK.getState(GTQTADVBlock.CasingType.MaragingSteel250);
+    }
+
+    private static IBlockState getUniqueCasingState() {
+        return GCYMMetaBlocks.UNIQUE_CASING.getState(BlockUniqueCasing.UniqueCasingType.HEAT_VENT);
+    }
+
+    private static IBlockState getFrameState() {
+        return MetaBlocks.FRAMES.get(GTQTMaterials.DarkSteel).getBlock(GTQTMaterials.DarkSteel);
+    }
+
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityElectronMicroscope(metaTileEntityId);
     }
+
     public boolean checkRecipe(@Nonnull Recipe recipe, boolean consumeIfSuccess) {
         return super.checkRecipe(recipe, consumeIfSuccess) && recipe.getProperty(PAProperty.getInstance(), 0) <= SOURSE;
     }
@@ -121,18 +134,6 @@ public class MetaTileEntityElectronMicroscope extends RecipeMapMultiblockControl
                 .build();
     }
 
-    private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.ADV_BLOCK.getState(GTQTADVBlock.CasingType.MaragingSteel250);
-    }
-
-    private static IBlockState getUniqueCasingState() {
-        return GCYMMetaBlocks.UNIQUE_CASING.getState(BlockUniqueCasing.UniqueCasingType.HEAT_VENT);
-    }
-
-    private static IBlockState getFrameState() {
-        return MetaBlocks.FRAMES.get(GTQTMaterials.DarkSteel).getBlock(GTQTMaterials.DarkSteel);
-    }
-
     @Override
     public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
@@ -182,7 +183,7 @@ public class MetaTileEntityElectronMicroscope extends RecipeMapMultiblockControl
 
         @Override
         public void setMaxProgress(int maxProgress) {
-            this.maxProgressTime = maxProgress*(10-LENS)/10;
+            this.maxProgressTime = maxProgress * (10 - LENS) / 10;
         }
     }
 }

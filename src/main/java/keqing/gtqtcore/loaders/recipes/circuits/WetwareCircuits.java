@@ -95,7 +95,7 @@ public class WetwareCircuits {
                 .EUt(480)
                 .duration(500)
                 .cleanroom(CleanroomType.STERILE_CLEANROOM)
-                .recipeLevel(7)
+                .recipeLevel(3)
                 .buildAndRegister();
     }
 

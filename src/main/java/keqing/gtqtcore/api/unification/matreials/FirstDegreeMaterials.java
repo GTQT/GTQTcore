@@ -2063,31 +2063,17 @@ public class FirstDegreeMaterials {
                 .setFormula("C5H10O", true);
 
         //dna
-        GTQTMaterials.DNAa = new Material.Builder(getMaterialsId(), gregtechId("dnaa"))
+        GTQTMaterials.DNAorigin = new Material.Builder(getMaterialsId(), gregtechId("dnaorigin"))
                 .fluid()
                 .color(0xB3EE3A)
                 .flags(DISABLE_DECOMPOSITION)
                 .build();
 
-        GTQTMaterials.DNAb = new Material.Builder(getMaterialsId(), gregtechId("dnab"))
-                .fluid()
-                .color(0x00008B)
-                .flags(DISABLE_DECOMPOSITION)
-                .build();
+        getMaterialsId();
+        getMaterialsId();
+        getMaterialsId();
 
-        GTQTMaterials.DNAc = new Material.Builder(getMaterialsId(), gregtechId("dnac"))
-                .fluid()
-                .color(0x4B0082)
-                .flags(DISABLE_DECOMPOSITION)
-                .build();
-
-        GTQTMaterials.DNAd = new Material.Builder(getMaterialsId(), gregtechId("dnad"))
-                .fluid()
-                .color(0x8B864E)
-                .flags(DISABLE_DECOMPOSITION)
-                .build();
-
-        GTQTMaterials.DNAe = new Material.Builder(getMaterialsId(), gregtechId("dnae"))
+        GTQTMaterials.DNAdeal = new Material.Builder(getMaterialsId(), gregtechId("dnadeal"))
                 .fluid()
                 .color(0xEE8262)
                 .flags(DISABLE_DECOMPOSITION)

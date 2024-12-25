@@ -55,21 +55,33 @@ import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.CZPULLER_RECIPES;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.Pyrotheum;
 
 public class MetaTileEntityBlazingCZPuller extends GTQTRecipeMapMultiblockOverwrite implements IHeatingCoil {
-    private int blastFurnaceTemperature;
     protected static int heatingCoilLevel;
     protected int heatingCoilDiscount;
-    private  FluidStack LUBRICANT_STACK;
+    int ParallelNum = 1;
+    private int blastFurnaceTemperature;
+    private FluidStack LUBRICANT_STACK;
+
     public MetaTileEntityBlazingCZPuller(ResourceLocation metaTileEntityId) {
-            super(metaTileEntityId, CZPULLER_RECIPES);
+        super(metaTileEntityId, CZPULLER_RECIPES);
         this.recipeMapWorkable = new BlazingBlastFurnaceWorkable(this);
+    }
+
+    private static IBlockState getCasingState() {
+        return GCYMMetaBlocks.LARGE_MULTIBLOCK_CASING.getState(BlockLargeMultiblockCasing.CasingType.HIGH_TEMPERATURE_CASING);
+    }
+
+    private static IBlockState getCasingState2() {
+        return GCYMMetaBlocks.UNIQUE_CASING.getState(BlockUniqueCasing.UniqueCasingType.HEAT_VENT);
+    }
+
+    public static int getMaxParallel(int heatingCoilLevel) {
+        return heatingCoilLevel;
     }
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity metaTileEntityHolder) {
         return new MetaTileEntityBlazingCZPuller(this.metaTileEntityId);
     }
-
-    int ParallelNum=1;
 
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("modern", modern);
@@ -84,22 +96,21 @@ public class MetaTileEntityBlazingCZPuller extends GTQTRecipeMapMultiblockOverwr
     @Override
     public void update() {
         super.update();
-        if (modern == 0)
-        {
-            ParallelNum=ParallelNumA;
+        if (modern == 0) {
+            ParallelNum = ParallelNumA;
         }
-        if (modern == 1)
-        {
-            P = (int) ((this.energyContainer.getEnergyStored() + energyContainer.getInputPerSec())/(getMinVa()==0?1:getMinVa()));
+        if (modern == 1) {
+            P = (int) ((this.energyContainer.getEnergyStored() + energyContainer.getInputPerSec()) / (getMinVa() == 0 ? 1 : getMinVa()));
             ParallelNum = Math.min(P, ParallelLim);
         }
     }
-    public int getMinVa()
-    {
-        if((Math.min(this.energyContainer.getEnergyCapacity()/32,VA[3])*20)==0)return 1;
-        return (int)(Math.min(this.energyContainer.getEnergyCapacity()/32,VA[3]));
+
+    public int getMinVa() {
+        if ((Math.min(this.energyContainer.getEnergyCapacity() / 32, VA[3]) * 20) == 0) return 1;
+        return (int) (Math.min(this.energyContainer.getEnergyCapacity() / 32, VA[3]));
 
     }
+
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
@@ -107,30 +118,28 @@ public class MetaTileEntityBlazingCZPuller extends GTQTRecipeMapMultiblockOverwr
         Object coilType = context.get("CoilType");
         if (type instanceof IHeatingCoilBlockStats) {
             this.blastFurnaceTemperature = ((IHeatingCoilBlockStats) type).getCoilTemperature();
-            this.heatingCoilLevel = ((IHeatingCoilBlockStats) coilType).getLevel();
+            heatingCoilLevel = ((IHeatingCoilBlockStats) coilType).getLevel();
         } else {
             this.blastFurnaceTemperature = BlockWireCoil.CoilType.CUPRONICKEL.getCoilTemperature();
-            this.heatingCoilLevel = BlockWireCoil.CoilType.CUPRONICKEL.getLevel();
+            heatingCoilLevel = BlockWireCoil.CoilType.CUPRONICKEL.getLevel();
         }
-        ParallelLim=Math.min((int)Math.pow(2, heatingCoilLevel),64);
-        ParallelNum=ParallelLim;
+        ParallelLim = Math.min((int) Math.pow(2, heatingCoilLevel), 64);
+        ParallelNum = ParallelLim;
         this.blastFurnaceTemperature += 100 * Math.max(0, GTUtility.getTierByVoltage(getEnergyContainer().getInputVoltage()) - GTValues.MV);
         LUBRICANT_STACK = Pyrotheum.getFluid(heatingCoilLevel);
     }
-
 
     @Override
     public boolean checkRecipe(@Nonnull Recipe recipe, boolean consumeIfSuccess) {
         return this.blastFurnaceTemperature >= recipe.getProperty(TemperatureProperty.getInstance(), 0);
     }
 
-
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
-                .aisle("XXX","PPP", "CCC", "CCC", "CCC", "XXX")
-                .aisle("XXX","PPP", "C#C", "C#C", "C#C", "XMX")
-                .aisle("XSX","PPP", "CCC", "CCC", "CCC", "XXX")
+                .aisle("XXX", "PPP", "CCC", "CCC", "CCC", "XXX")
+                .aisle("XXX", "PPP", "C#C", "C#C", "C#C", "XMX")
+                .aisle("XSX", "PPP", "CCC", "CCC", "CCC", "XXX")
                 .where('S', selfPredicate())
                 .where('X', states(getCasingState()).setMinGlobalLimited(9)
                         .or(abilities(MultiblockAbility.MAINTENANCE_HATCH))
@@ -149,9 +158,9 @@ public class MetaTileEntityBlazingCZPuller extends GTQTRecipeMapMultiblockOverwr
     public List<MultiblockShapeInfo> getMatchingShapes() {
         ArrayList<MultiblockShapeInfo> shapeInfo = new ArrayList<>();
         MultiblockShapeInfo.Builder builder = MultiblockShapeInfo.builder()
-                .aisle("EEM","PPP", "CCC","CCC", "CCC", "XXX")
-                .aisle("FXX","PPP", "C#C","C#C", "C#C", "XHX")
-                .aisle("ISO","PPP", "CCC","CCC", "CCC", "XXX")
+                .aisle("EEM", "PPP", "CCC", "CCC", "CCC", "XXX")
+                .aisle("FXX", "PPP", "C#C", "C#C", "C#C", "XHX")
+                .aisle("ISO", "PPP", "CCC", "CCC", "CCC", "XXX")
                 .where('X', getCasingState())
                 .where('P', getCasingState2())
                 .where('S', GTQTMetaTileEntities.BLAZING_CZ_PULLER, EnumFacing.SOUTH)
@@ -161,19 +170,13 @@ public class MetaTileEntityBlazingCZPuller extends GTQTRecipeMapMultiblockOverwr
                 .where('O', MetaTileEntities.ITEM_EXPORT_BUS[GTValues.LV], EnumFacing.SOUTH)
                 .where('F', MetaTileEntities.FLUID_IMPORT_HATCH[GTValues.LV], EnumFacing.WEST)
                 .where('H', MetaTileEntities.MUFFLER_HATCH[GTValues.LV], EnumFacing.UP)
-                .where('M',  MetaTileEntities.MAINTENANCE_HATCH,EnumFacing.NORTH);
+                .where('M', MetaTileEntities.MAINTENANCE_HATCH, EnumFacing.NORTH);
         GregTechAPI.HEATING_COILS.entrySet().stream()
                 .sorted(Comparator.comparingInt(entry -> entry.getValue().getTier()))
                 .forEach(entry -> shapeInfo.add(builder.where('C', entry.getKey()).build()));
         return shapeInfo;
     }
 
-    private static IBlockState getCasingState() {
-        return GCYMMetaBlocks.LARGE_MULTIBLOCK_CASING.getState(BlockLargeMultiblockCasing.CasingType.HIGH_TEMPERATURE_CASING);
-    }
-    private static IBlockState getCasingState2() {
-        return GCYMMetaBlocks.UNIQUE_CASING.getState(BlockUniqueCasing.UniqueCasingType.HEAT_VENT);
-    }
     @Override
     public void addInformation(ItemStack stack, @Nullable World player, @Nonnull List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
@@ -186,21 +189,23 @@ public class MetaTileEntityBlazingCZPuller extends GTQTRecipeMapMultiblockOverwr
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.2"));
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.3"));
     }
+
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         if (isStructureFormed()) {
             super.addDisplayText(textList);
             if (getInputFluidInventory() != null) {
                 FluidStack LubricantStack = getInputFluidInventory().drain(Pyrotheum.getFluid(Integer.MAX_VALUE), false);
-                 int liquidOxygenAmount = LubricantStack == null ? 0 : LubricantStack.amount;
-                 textList.add(new TextComponentTranslation("gtqtcore.multiblock.vc.amount", TextFormattingUtil.formatNumbers((liquidOxygenAmount))));
-                }
+                int liquidOxygenAmount = LubricantStack == null ? 0 : LubricantStack.amount;
+                textList.add(new TextComponentTranslation("gtqtcore.multiblock.vc.amount", TextFormattingUtil.formatNumbers((liquidOxygenAmount))));
+            }
             textList.add(new TextComponentTranslation("Temperature : %s", blastFurnaceTemperature));
-            if(modern==0) textList.add(new TextComponentTranslation("gtqtcore.tire1",heatingCoilLevel));
-            if(modern==1) textList.add(new TextComponentTranslation("gtqtcore.tire2",heatingCoilLevel));
-            textList.add(new TextComponentTranslation("gtqtcore.parr",ParallelNum,ParallelLim));
+            if (modern == 0) textList.add(new TextComponentTranslation("gtqtcore.tire1", heatingCoilLevel));
+            if (modern == 1) textList.add(new TextComponentTranslation("gtqtcore.tire2", heatingCoilLevel));
+            textList.add(new TextComponentTranslation("gtqtcore.parr", ParallelNum, ParallelLim));
         }
     }
+
     @Override
     protected void addWarningText(List<ITextComponent> textList) {
         super.addWarningText(textList);
@@ -211,6 +216,7 @@ public class MetaTileEntityBlazingCZPuller extends GTQTRecipeMapMultiblockOverwr
             }
         }
     }
+
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
         return GCYMTextures.BLAST_CASING;
     }
@@ -236,24 +242,18 @@ public class MetaTileEntityBlazingCZPuller extends GTQTRecipeMapMultiblockOverwr
         return this.blastFurnaceTemperature;
     }
 
-    public static int getMaxParallel(int heatingCoilLevel) {
-        return heatingCoilLevel;
-    }
-
-
-
-
-
     @Override
     public void invalidateStructure() {
         super.invalidateStructure();
         blastFurnaceTemperature = 0;
         heatingCoilLevel = 0;
-        LUBRICANT_STACK=null;
+        LUBRICANT_STACK = null;
     }
+
     protected class BlazingBlastFurnaceWorkable extends MultiblockRecipeLogic {
 
         private final MetaTileEntityBlazingCZPuller combustionEngine;
+
         public BlazingBlastFurnaceWorkable(RecipeMapMultiblockController tileEntity) {
             super(tileEntity);
             this.combustionEngine = (MetaTileEntityBlazingCZPuller) tileEntity;
@@ -270,23 +270,25 @@ public class MetaTileEntityBlazingCZPuller extends GTQTRecipeMapMultiblockOverwr
                 if (this.hasNotEnoughEnergy && this.getEnergyInputPerSecond() > 19L * (long) this.recipeEUt) {
                     this.hasNotEnoughEnergy = false;
                 }
-            } else if (canRecipeProgress && !drawEnergy(recipeEUt, true)&&this.recipeEUt > 0) {
+            } else if (canRecipeProgress && !drawEnergy(recipeEUt, true) && this.recipeEUt > 0) {
                 this.hasNotEnoughEnergy = true;
                 this.decreaseProgress();
             }
         }
-        protected void modifyOverclockPre( int[] values, IRecipePropertyStorage storage) {
+
+        protected void modifyOverclockPre(int[] values, IRecipePropertyStorage storage) {
             super.modifyOverclockPre(values, storage);
-            values[0] = OverclockingLogic.applyCoilEUtDiscount(values[0], ((IHeatingCoil)this.metaTileEntity).getCurrentTemperature(), (Integer)storage.getRecipePropertyValue(TemperatureProperty.getInstance(), 0));
+            values[0] = OverclockingLogic.applyCoilEUtDiscount(values[0], ((IHeatingCoil) this.metaTileEntity).getCurrentTemperature(), storage.getRecipePropertyValue(TemperatureProperty.getInstance(), 0));
         }
 
-        protected  int[] runOverclockingLogic( IRecipePropertyStorage propertyStorage, int recipeEUt, long maxVoltage, int duration, int amountOC) {
-            return OverclockingLogic.heatingCoilOverclockingLogic(Math.abs(recipeEUt), maxVoltage, duration, amountOC, ((IHeatingCoil)this.metaTileEntity).getCurrentTemperature(), (Integer)propertyStorage.getRecipePropertyValue(TemperatureProperty.getInstance(), 0));
+        protected int[] runOverclockingLogic(IRecipePropertyStorage propertyStorage, int recipeEUt, long maxVoltage, int duration, int amountOC) {
+            return OverclockingLogic.heatingCoilOverclockingLogic(Math.abs(recipeEUt), maxVoltage, duration, amountOC, ((IHeatingCoil) this.metaTileEntity).getCurrentTemperature(), propertyStorage.getRecipePropertyValue(TemperatureProperty.getInstance(), 0));
         }
+
         @Override
         public void setMaxProgress(int maxProgress) {
             if (ParallelNum == 0) this.maxProgressTime = maxProgress;
-            else if (ParallelNum <= 16) this.maxProgressTime = (int) (maxProgress*1.0 / ParallelNum);
+            else if (ParallelNum <= 16) this.maxProgressTime = (int) (maxProgress * 1.0 / ParallelNum);
             else if (ParallelNum <= 64) this.maxProgressTime = (int) (maxProgress * 16.0 / ParallelNum);
             else if (ParallelNum <= 256) this.maxProgressTime = (int) (maxProgress * 128.0 / ParallelNum);
             else this.maxProgressTime = maxProgress;

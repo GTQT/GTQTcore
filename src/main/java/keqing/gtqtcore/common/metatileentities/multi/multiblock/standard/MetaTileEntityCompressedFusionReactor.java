@@ -51,29 +51,24 @@ import java.util.function.DoubleSupplier;
 import static gregtech.api.GTValues.*;
 
 public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockController {
-    @Override
-    public boolean canBeDistinct() {return true;}
-    //  Tier of CFR (Compressed Fusion Reactor), used to add more CFRs by one class,
-    //  we use {@link #LuV} to {@link #UEV} for Mark 1 to Mark 5.
-    private final int tier;
-
     //  Block State for CFR, for Mark 4 and Mark 5,
     //  we do not need Cryostat, Divertor and Vacuum in CFR anymore.
     //  Parameter {@code CoilState} means Fusion Coils.
     public final IBlockState casingState;
     public final IBlockState coilState;
     public final IBlockState frameState;
-
+    //  Tier of CFR (Compressed Fusion Reactor), used to add more CFRs by one class,
+    //  we use {@link #LuV} to {@link #UEV} for Mark 1 to Mark 5.
+    private final int tier;
+    //  Used for Special Progress Bar in Modular UI.
+    //  TODO Add new Modular UI form of CFR (different with Fusion Reactor)?
+    private final FusionProgressSupplier progressBarSupplier;
     //  Internal Energy Container, just like common Fusion Reactors.
     private EnergyContainerList inputEnergyContainers;
 
     //  Heat, like common Fusion Reactors.
     //  TODO Delete Heat system of CFR?
     private long heat = 0;
-
-    //  Used for Special Progress Bar in Modular UI.
-    //  TODO Add new Modular UI form of CFR (different with Fusion Reactor)?
-    private final FusionProgressSupplier progressBarSupplier;
 
     public MetaTileEntityCompressedFusionReactor(ResourceLocation metaTileEntityId,
                                                  int tier,
@@ -93,6 +88,11 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
             }
         };
         this.progressBarSupplier = new FusionProgressSupplier();
+    }
+
+    @Override
+    public boolean canBeDistinct() {
+        return true;
     }
 
     @Override
@@ -205,17 +205,33 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
     public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
         if (this.recipeMapWorkable.isActive()) {
             switch (tier) {
-                case UHV -> { return GTQTTextures.ADVANCED_FUSION_TEXTURE; }
-                case UEV -> { return GTQTTextures.ULTIMATE_FUSION_TEXTURE; }
-                case UIV -> { return GTQTTextures.END_FUSION_TEXTURE; }
-                default -> { return Textures.ACTIVE_FUSION_TEXTURE; }
+                case UHV -> {
+                    return GTQTTextures.ADVANCED_FUSION_TEXTURE;
+                }
+                case UEV -> {
+                    return GTQTTextures.ULTIMATE_FUSION_TEXTURE;
+                }
+                case UIV -> {
+                    return GTQTTextures.END_FUSION_TEXTURE;
+                }
+                default -> {
+                    return Textures.ACTIVE_FUSION_TEXTURE;
+                }
             }
         } else {
             switch (tier) {
-                case UHV -> { return GTQTTextures.ADVANCED_FUSION_TEXTURE; }
-                case UEV -> { return GTQTTextures.ULTIMATE_FUSION_TEXTURE; }
-                case UIV -> { return GTQTTextures.END_FUSION_TEXTURE; }
-                default -> { return Textures.FUSION_TEXTURE; }
+                case UHV -> {
+                    return GTQTTextures.ADVANCED_FUSION_TEXTURE;
+                }
+                case UEV -> {
+                    return GTQTTextures.ULTIMATE_FUSION_TEXTURE;
+                }
+                case UIV -> {
+                    return GTQTTextures.END_FUSION_TEXTURE;
+                }
+                default -> {
+                    return Textures.FUSION_TEXTURE;
+                }
             }
         }
     }
@@ -257,7 +273,7 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
     }
 
     private long calculateEnergyStorageFactor(int energyInputAmount) {
-        long[] energyStored = { 5000000L, 10000000L, 20000000L, 80000000L, 320000000L, 1280000000L };
+        long[] energyStored = {5000000L, 10000000L, 20000000L, 80000000L, 320000000L, 1280000000L};
         return energyInputAmount * energyStored[tier - 6];
     }
 
@@ -368,7 +384,7 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
     }
 
     @Override
-    public void addInformation(ItemStack stack, World player, List<String> tooltip,boolean advanced) {
+    public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         long actuallyEnergyStored = calculateEnergyStorageFactor(32) / 1000000L;
         super.addInformation(stack, player, tooltip, advanced);
         switch (this.tier) {
@@ -590,11 +606,11 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
          * OC Duration Divisor Getter.
          *
          * <p>
-         *     Get {@code 2.0D} (Duration / 2) when {@code tier} less than 4.
-         *     Get {@code 4.0D} (Duration / 4) when {@code tier} bigger than or equal to 4.
+         * Get {@code 2.0D} (Duration / 2) when {@code tier} less than 4.
+         * Get {@code 4.0D} (Duration / 4) when {@code tier} bigger than or equal to 4.
          * </p>
          *
-         * @return  OC Duration Divisor.
+         * @return OC Duration Divisor.
          */
         @Override
         protected double getOverclockingDurationDivisor() {
@@ -609,8 +625,8 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
          * OC Voltage Multiplier Getter.
          *
          * <p>
-         *     Get {@code 2.0D} (Energy consumed ×2) when {@code tier} less than 4.
-         *     Get {@code 4.0D} (Energy consumed ×4) when {@code tier} bigger than or equal to 4.
+         * Get {@code 2.0D} (Energy consumed ×2) when {@code tier} less than 4.
+         * Get {@code 4.0D} (Energy consumed ×4) when {@code tier} bigger than or equal to 4.
          *
          *     <ul>
          *         <li>Mark 1-3: 2/2 Perfect OC.</li>
@@ -618,7 +634,7 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
          *     </ul>
          * </p>
          *
-         * @return  OC Voltage Multiplier.
+         * @return OC Voltage Multiplier.
          */
         @Override
         protected double getOverclockingVoltageMultiplier() {
@@ -639,7 +655,7 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
          * Used to allowed {@link #setParallelLimit(int)} in {@link #checkRecipe(Recipe)} use more energy,
          * whether some high energy required recipes cannot paralle.
          *
-         * @return  Max Parallel Voltage.
+         * @return Max Parallel Voltage.
          */
         @Override
         public long getMaxParallelVoltage() {
@@ -662,7 +678,7 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
         }
 
         @Override
-        public boolean checkRecipe( Recipe recipe) {
+        public boolean checkRecipe(Recipe recipe) {
             if (!super.checkRecipe(recipe))
                 return false;
 
@@ -674,7 +690,7 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
 
             //  An Extended check of CFR, check tier of CFR and {@code EUToStart} of recipes,
             //  CFR cannot run recipes higher than its {@link #tier}.
-            final long[] euToStart = { 160000000L, 320000000L, 640000000L, 1280000000L, 2560000000L,5120000000L };
+            final long[] euToStart = {160000000L, 320000000L, 640000000L, 1280000000L, 2560000000L, 5120000000L};
             if (startCost > euToStart[tier - 6])
                 return false;
 
@@ -770,7 +786,7 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
         }
 
         @Override
-        public void deserializeNBT( NBTTagCompound compound) {
+        public void deserializeNBT(NBTTagCompound compound) {
             super.deserializeNBT(compound);
             heat = compound.getLong("Heat");
         }

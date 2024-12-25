@@ -1,6 +1,5 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
-import gregtech.api.block.IHeatingCoilBlockStats;
 import gregtech.api.capability.GregtechDataCodes;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
@@ -9,8 +8,6 @@ import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
-import gregtech.api.pattern.TraceabilityPredicate;
-import gregtech.api.unification.material.Materials;
 import gregtech.api.util.GTUtility;
 import gregtech.client.particle.GTParticleManager;
 import gregtech.client.renderer.ICubeRenderer;
@@ -30,15 +27,11 @@ import keqing.gtqtcore.client.particle.LaserBeamParticle;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTHCasing;
-import keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing;
-import keqing.gtqtcore.common.metatileentities.multi.generators.MetaTileEntityHyperReactorMkII;
-import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.LaserSystem.MetaTileEntityLaserCutter;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.fml.relauncher.Side;
@@ -53,34 +46,7 @@ import static keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility
 public class MetaTileEntityParticleAggregator extends RecipeMapLaserMultiblockController {
     private int casingTier;
     private long LaserStore;
-    public NBTTagCompound writeToNBT(NBTTagCompound data) {
-        data.setInteger("casingTier", casingTier);
-        return super.writeToNBT(data);
-    }
 
-    public void readFromNBT(NBTTagCompound data) {
-        super.readFromNBT(data);
-        casingTier = data.getInteger("casingTier");
-    }
-
-    @Override
-    public void update() {
-        super.update();
-        if(!isStructureFormed())return;
-
-        writeCustomData(GregtechDataCodes.UPDATE_PARTICLE, this::writeParticles);
-
-        MultiblockLaserRecipeLogic recipeLogic = this.recipeMapWorkable;
-        if(!recipeLogic.isWorkingEnabled())
-        {
-            LaserStore+=LaserToEu();
-        }
-    }
-    @Override
-    protected void addDisplayText(List<ITextComponent> textList) {
-        super.addDisplayText(textList);
-        textList.add(new TextComponentTranslation("gtqtcore.casingTire", casingTier));
-    }
     //.aisle("             ", "             ", "             ", "             ", "      A      ", "      A      ", "    AABAA    ", "      A      ", "      A      ", "             ", "             ", "             ", "             ")
     //.aisle("             ", "             ", "      A      ", "      A      ", "    CCACC    ", "    C   C    ", "  AAA   AAA  ", "    C   C    ", "    CCACC    ", "      A      ", "      A      ", "             ", "             ")
     //.aisle("             ", "      A      ", "      A      ", "             ", "             ", "             ", " AA       AA ", "             ", "             ", "             ", "      A      ", "      A      ", "             ")
@@ -113,6 +79,35 @@ public class MetaTileEntityParticleAggregator extends RecipeMapLaserMultiblockCo
 
     private static IBlockState getSecondCasingState() {
         return MetaBlocks.FUSION_CASING.getState(FUSION_COIL);
+    }
+
+    public NBTTagCompound writeToNBT(NBTTagCompound data) {
+        data.setInteger("casingTier", casingTier);
+        return super.writeToNBT(data);
+    }
+
+    public void readFromNBT(NBTTagCompound data) {
+        super.readFromNBT(data);
+        casingTier = data.getInteger("casingTier");
+    }
+
+    @Override
+    public void update() {
+        super.update();
+        if (!isStructureFormed()) return;
+
+        writeCustomData(GregtechDataCodes.UPDATE_PARTICLE, this::writeParticles);
+
+        MultiblockLaserRecipeLogic recipeLogic = this.recipeMapWorkable;
+        if (!recipeLogic.isWorkingEnabled()) {
+            LaserStore += LaserToEu();
+        }
+    }
+
+    @Override
+    protected void addDisplayText(List<ITextComponent> textList) {
+        super.addDisplayText(textList);
+        textList.add(new TextComponentTranslation("gtqtcore.casingTire", casingTier));
     }
 
     @Override
@@ -165,14 +160,15 @@ public class MetaTileEntityParticleAggregator extends RecipeMapLaserMultiblockCo
             }
         }
     }
+
     @Override
     public void receiveCustomData(int dataId, PacketBuffer buf) {
         super.receiveCustomData(dataId, buf);
-        if(dataId == GTQTValue.UPDATE_TIER26){
+        if (dataId == GTQTValue.UPDATE_TIER26) {
             this.casingTier = buf.readInt();
         }
-        if(dataId == GTQTValue.REQUIRE_DATA_UPDATE26){
-            this.writeCustomData(GTQTValue.UPDATE_TIER26,buf1 -> buf1.writeInt(this.casingTier));
+        if (dataId == GTQTValue.REQUIRE_DATA_UPDATE26) {
+            this.writeCustomData(GTQTValue.UPDATE_TIER26, buf1 -> buf1.writeInt(this.casingTier));
         }
 
         if (dataId == GregtechDataCodes.UPDATE_PARTICLE) {
@@ -185,16 +181,17 @@ public class MetaTileEntityParticleAggregator extends RecipeMapLaserMultiblockCo
 
 
     }
+
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
         Object casingTier = context.get("FUTieredStats");
 
         this.casingTier = GTQTUtil.getOrDefault(() -> casingTier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)casingTier).getIntTier(),
+                () -> ((WrappedIntTired) casingTier).getIntTier(),
                 0);
 
-        this.writeCustomData(GTQTValue.UPDATE_TIER26,buf -> buf.writeInt(this.casingTier));
+        this.writeCustomData(GTQTValue.UPDATE_TIER26, buf -> buf.writeInt(this.casingTier));
     }
 
     @Override
@@ -232,10 +229,12 @@ public class MetaTileEntityParticleAggregator extends RecipeMapLaserMultiblockCo
     public boolean hasMufflerMechanics() {
         return false;
     }
+
     @Override
     public SoundEvent getBreakdownSound() {
         return GTSoundEvents.BREAKDOWN_ELECTRICAL;
     }
+
     //////////////////////////////////////////////////////////////////////////////////////
     public int getTier() {
         if (!isStructureFormed()) return 0;
@@ -270,9 +269,9 @@ public class MetaTileEntityParticleAggregator extends RecipeMapLaserMultiblockCo
 
     public long LaserToEu() {
         if (!isStructureFormed()) return 0;
-        long EU=0;
+        long EU = 0;
         for (int i = 0; i < 5; i++) {
-            EU+= GTUtility.getTierByVoltage(this.getAbilities(LASER_INPUT).get(i).Laser());
+            EU += GTUtility.getTierByVoltage(this.getAbilities(LASER_INPUT).get(i).Laser());
         }
         return EU;
     }
@@ -283,20 +282,22 @@ public class MetaTileEntityParticleAggregator extends RecipeMapLaserMultiblockCo
 
     private void writeParticles(PacketBuffer buf) {
     }
+
     @SideOnly(Side.CLIENT)
-    private void readParticles( PacketBuffer buf) throws IOException {
+    private void readParticles(PacketBuffer buf) throws IOException {
         operateClient();
     }
+
     @SideOnly(Side.CLIENT)
     public void operateClient() {
         final int xDir = this.getFrontFacing().getOpposite().getXOffset() * 6;
         final int zDir = this.getFrontFacing().getOpposite().getZOffset() * 6;
-        GTParticleManager.INSTANCE.addEffect(new LaserBeamParticle(this,this.getPos().add(xDir,0,zDir),this.getPos().add(xDir,6,zDir),20));
-        GTParticleManager.INSTANCE.addEffect(new LaserBeamParticle(this,this.getPos().add(xDir,0,zDir),this.getPos().add(xDir,-6,zDir),20));
-        GTParticleManager.INSTANCE.addEffect(new LaserBeamParticle(this,this.getPos().add(xDir,0,zDir),this.getPos().add(xDir+6,0,zDir),20));
-        GTParticleManager.INSTANCE.addEffect(new LaserBeamParticle(this,this.getPos().add(xDir,0,zDir),this.getPos().add(xDir-6,0,zDir),20));
-        GTParticleManager.INSTANCE.addEffect(new LaserBeamParticle(this,this.getPos().add(xDir,0,zDir),this.getPos().add(xDir,0,zDir+6),20));
-        GTParticleManager.INSTANCE.addEffect(new LaserBeamParticle(this,this.getPos().add(xDir,0,zDir),this.getPos().add(xDir,0,zDir-6),20));
+        GTParticleManager.INSTANCE.addEffect(new LaserBeamParticle(this, this.getPos().add(xDir, 0, zDir), this.getPos().add(xDir, 6, zDir), 20));
+        GTParticleManager.INSTANCE.addEffect(new LaserBeamParticle(this, this.getPos().add(xDir, 0, zDir), this.getPos().add(xDir, -6, zDir), 20));
+        GTParticleManager.INSTANCE.addEffect(new LaserBeamParticle(this, this.getPos().add(xDir, 0, zDir), this.getPos().add(xDir + 6, 0, zDir), 20));
+        GTParticleManager.INSTANCE.addEffect(new LaserBeamParticle(this, this.getPos().add(xDir, 0, zDir), this.getPos().add(xDir - 6, 0, zDir), 20));
+        GTParticleManager.INSTANCE.addEffect(new LaserBeamParticle(this, this.getPos().add(xDir, 0, zDir), this.getPos().add(xDir, 0, zDir + 6), 20));
+        GTParticleManager.INSTANCE.addEffect(new LaserBeamParticle(this, this.getPos().add(xDir, 0, zDir), this.getPos().add(xDir, 0, zDir - 6), 20));
     }
 
 

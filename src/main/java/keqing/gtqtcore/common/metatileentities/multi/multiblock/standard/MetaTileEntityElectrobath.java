@@ -167,7 +167,7 @@ public class MetaTileEntityElectrobath extends GTQTRecipeMapMultiblockOverwrite 
         super.addDisplayText(textList);
         if (casingTier != tubeTier)
             textList.add(new TextComponentTranslation("gtqtcore.equal", casingTier, tubeTier));
-        textList.add(new TextComponentTranslation("电极状态：%s 电极等级：%s", checkAvailable(),ElectrodeTier));
+        textList.add(new TextComponentTranslation("电极状态：%s 电极等级：%s", checkAvailable(), ElectrodeTier));
         if (modern == 0) textList.add(new TextComponentTranslation("gtqtcore.tire1", tier));
         if (modern == 1) textList.add(new TextComponentTranslation("gtqtcore.tire2", tier));
         textList.add(new TextComponentTranslation("gtqtcore.parr", ParallelNum, ParallelLim));
@@ -303,7 +303,7 @@ public class MetaTileEntityElectrobath extends GTQTRecipeMapMultiblockOverwrite 
         }
 
         protected void updateRecipeProgress() {
-            if (this.canRecipeProgress && this.drawEnergy(this.recipeEUt, true)&&checkAvailable()) {
+            if (this.canRecipeProgress && this.drawEnergy(this.recipeEUt, true) && checkAvailable()) {
                 setWork(true);
                 this.drawEnergy(this.recipeEUt, false);
 

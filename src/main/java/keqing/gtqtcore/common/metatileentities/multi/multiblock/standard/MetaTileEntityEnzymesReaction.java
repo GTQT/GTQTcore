@@ -1,35 +1,32 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
-import keqing.gtqtcore.api.utils.EnzymesUtils;
 import gregtech.api.capability.IMultipleTankHandler;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.Widget;
-import gregtech.api.gui.resources.TextureArea;
 import gregtech.api.gui.widgets.ClickButtonWidget;
 import gregtech.api.gui.widgets.WidgetGroup;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
-import gregtech.api.metatileentity.multiblock.IProgressBarMultiblock;
+import gregtech.api.metatileentity.multiblock.MultiMapMultiblockController;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
-import gregtech.api.util.TextComponentUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.capability.IPHValue;
-import keqing.gtqtcore.api.metaileentity.GTQTRecipeMapMultiblockController;
 import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.recipes.properties.ERProperty;
+import keqing.gtqtcore.api.utils.EnzymesUtils;
 import keqing.gtqtcore.api.utils.GTQTMathUtil;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
@@ -40,7 +37,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
@@ -49,32 +45,35 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-import static gregtech.api.unification.material.Materials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 
-public class MetaTileEntityEnzymesReaction extends GTQTRecipeMapMultiblockController implements IPHValue {
-    public MetaTileEntityEnzymesReaction(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, new RecipeMap[] {
-                GTQTcoreRecipeMaps.ENZYMES_REACTION_RECIPES
-        });
-        this.recipeMapWorkable = new BiologicalReactionLogic(this);
-    }
-    @Override
-    public boolean canBeDistinct() {return true;}
-    private int glass_tier;
-    private int clean_tier;
-    private int tubeTier;
-
-    private double PH = 7;
-
+public class MetaTileEntityEnzymesReaction extends MultiMapMultiblockController implements IPHValue {
     int p;
-
     int A;
     int B;
     int C;
     int D;
     int E;
     boolean start;
+    private int glass_tier;
+    private int clean_tier;
+    private int tubeTier;
+    private double PH = 7;
+    public MetaTileEntityEnzymesReaction(ResourceLocation metaTileEntityId) {
+        super(metaTileEntityId, new RecipeMap[]{
+                GTQTcoreRecipeMaps.ENZYMES_REACTION_RECIPES
+        });
+        this.recipeMapWorkable = new BiologicalReactionLogic(this);
+    }
+
+    private static IBlockState getCasingState() {
+        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STAINLESS_CLEAN);
+    }
+
+    @Override
+    public boolean canBeDistinct() {
+        return true;
+    }
 
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setBoolean("start", start);
@@ -87,7 +86,7 @@ public class MetaTileEntityEnzymesReaction extends GTQTRecipeMapMultiblockContro
         data.setInteger("E", E);
         return super.writeToNBT(data);
     }
-   
+
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         start = data.getBoolean("start");
@@ -119,12 +118,14 @@ public class MetaTileEntityEnzymesReaction extends GTQTRecipeMapMultiblockContro
     }
 
     private void clear(Widget.ClickData clickData) {
-        PH=7D;
-        A=B=C=D=E=0;
+        PH = 7D;
+        A = B = C = D = E = 0;
     }
+
     private void work(Widget.ClickData clickData) {
-        start=!start;
+        start = !start;
     }
+
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
@@ -132,24 +133,25 @@ public class MetaTileEntityEnzymesReaction extends GTQTRecipeMapMultiblockContro
         Object clean_tier = context.get("ZJTieredStats");
         Object tubeTier = context.get("ChemicalPlantTubeTieredStats");
         this.tubeTier = GTQTUtil.getOrDefault(() -> tubeTier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)tubeTier).getIntTier(),
+                () -> ((WrappedIntTired) tubeTier).getIntTier(),
                 0);
         this.glass_tier = GTQTUtil.getOrDefault(() -> glass_tier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)glass_tier).getIntTier(),
+                () -> ((WrappedIntTired) glass_tier).getIntTier(),
                 0);
         this.clean_tier = GTQTUtil.getOrDefault(() -> clean_tier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)clean_tier).getIntTier(),
+                () -> ((WrappedIntTired) clean_tier).getIntTier(),
                 0);
     }
+
     @Nonnull
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
-                .aisle("JCCCJ","JCCCJ", "GGGGG", "JCCCJ","JCCCJ")
-                .aisle("JCCCJ","JPPPJ", "G   G", "JPPPJ","JCCCJ")
-                .aisle("JCCCJ","JPPPJ", "G   G", "JPPPJ","JCCCJ")
-                .aisle("JCCCJ","JPPPJ", "G   G", "JPPPJ","JCCCJ")
-                .aisle("JCCCJ","JCSCJ", "GGGGG", "JCCCJ","JCCCJ")
+                .aisle("JCCCJ", "JCCCJ", "GGGGG", "JCCCJ", "JCCCJ")
+                .aisle("JCCCJ", "JPPPJ", "G   G", "JPPPJ", "JCCCJ")
+                .aisle("JCCCJ", "JPPPJ", "G   G", "JPPPJ", "JCCCJ")
+                .aisle("JCCCJ", "JPPPJ", "G   G", "JPPPJ", "JCCCJ")
+                .aisle("JCCCJ", "JCSCJ", "GGGGG", "JCCCJ", "JCCCJ")
                 .where('S', selfPredicate())
                 .where('J', TiredTraceabilityPredicate.CP_ZJ_CASING.get())
                 .where('G', TiredTraceabilityPredicate.CP_LGLASS.get())
@@ -162,99 +164,96 @@ public class MetaTileEntityEnzymesReaction extends GTQTRecipeMapMultiblockContro
                 .build();
     }
 
-    private static IBlockState getCasingState() {
-        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STAINLESS_CLEAN);
-    }
-
     @SideOnly(Side.CLIENT)
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
         return Textures.CLEAN_STAINLESS_STEEL_CASING;
     }
+
     @Nonnull
     @Override
     protected ICubeRenderer getFrontOverlay() {
         return GTQTTextures.ALGAE_FARM_OVERLAY;
     }
+
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
 
-        textList.add(new TextComponentTranslation("gtqtcore.multiblock.br.3",glass_tier,tubeTier));
-        if(PH>8)
-            textList.add(new TextComponentTranslation("Ph:%s 碱性 状态：%s",PH,start));
-        if(PH<8&&PH>6)
-            textList.add(new TextComponentTranslation("Ph:%s 中性 状态：%s",PH,start));
-        if(PH<6)
-            textList.add(new TextComponentTranslation("Ph:%s 酸性 状态：%s",PH,start));
+        textList.add(new TextComponentTranslation("gtqtcore.multiblock.br.3", glass_tier, tubeTier));
+        if (PH > 8)
+            textList.add(new TextComponentTranslation("Ph:%s 碱性 状态：%s", PH, start));
+        if (PH < 8 && PH > 6)
+            textList.add(new TextComponentTranslation("Ph:%s 中性 状态：%s", PH, start));
+        if (PH < 6)
+            textList.add(new TextComponentTranslation("Ph:%s 酸性 状态：%s", PH, start));
 
-        if(getEnzymes()>0&&getRare(getEnzymes()))
-        textList.add(new TextComponentTranslation("%s 组合因子：%s %s %s %s %s 找到配方: "+EnzymesUtils.getName(getEnzymes()),getEnzymes(),A,B,C,D,E));
-        else textList.add(new TextComponentTranslation("组合因子：%s %s %s %s %s 找不到可行配方！",A,B,C,D,E));
+        if (getEnzymes() > 0 && getRare(getEnzymes()))
+            textList.add(new TextComponentTranslation("%s 组合因子：%s %s %s %s %s 找到配方: " + EnzymesUtils.getName(getEnzymes()), getEnzymes(), A, B, C, D, E));
+        else textList.add(new TextComponentTranslation("组合因子：%s %s %s %s %s 找不到可行配方！", A, B, C, D, E));
     }
 
     //这里注册菌种
-    public int getEnzymes()
-    {
+    public int getEnzymes() {
         //普适矿处菌种 101
-        if(cE(1,0,1,0,0))return 101;
+        if (cE(1, 0, 1, 0, 0)) return 101;
         //定向铂系菌种 102
-        if(cE(1,0,1,1,0))return 102;
+        if (cE(1, 0, 1, 1, 0)) return 102;
         //普适魔性菌种 103
-        if(cE(1,1,0,1,0))return 103;
+        if (cE(1, 1, 0, 1, 0)) return 103;
         //普适副产菌种 104
-        if(cE(1,1,0,1,1))return 104;
+        if (cE(1, 1, 0, 1, 1)) return 104;
         //
         //工业合成菌种I 201
-        if(cE(2,1,1,3,1))return 201;
+        if (cE(2, 1, 1, 3, 1)) return 201;
         //工业还原菌种 202
-        if(cE(1,2,3,1,1))return 202;
+        if (cE(1, 2, 3, 1, 1)) return 202;
         //工业氧化菌种 203
-        if(cE(1,3,2,1,1))return 203;
+        if (cE(1, 3, 2, 1, 1)) return 203;
         //工业催化菌种 204
-        if(cE(2,1,1,3,1))return 204;
+        if (cE(2, 1, 1, 3, 1)) return 204;
         //
         //定向脂肪酶 301
-        if(cE(4,1,1,3,2))return 301;
+        if (cE(4, 1, 1, 3, 2)) return 301;
         //普适发酵酶 302
-        if(cE(2,4,2,3,1))return 302;
+        if (cE(2, 4, 2, 3, 1)) return 302;
         //定向发酵酶 303
-        if(cE(2,3,2,4,1))return 303;
+        if (cE(2, 3, 2, 4, 1)) return 303;
         //
         //活性诱变酶 401
-        if(cE(2,5,2,4,3))return 401;
+        if (cE(2, 5, 2, 4, 3)) return 401;
 
         return 0;
     }
-    public  boolean getRare(int n)
-    {
-        if(PH<4||PH>10)return false;
-        if(n<200)return PH<=6;
-        if(n<300)return PH>=8;
-        if(n<400)return PH<=6;
-        if(n<500)return PH>=8;
+
+    public boolean getRare(int n) {
+        if (PH < 4 || PH > 10) return false;
+        if (n < 200) return PH <= 6;
+        if (n < 300) return PH >= 8;
+        if (n < 400) return PH <= 6;
+        if (n < 500) return PH >= 8;
         return false;
     }
 
 
-    public boolean cE(int a,int b,int c,int d,int e)
-    {
+    public boolean cE(int a, int b, int c, int d, int e) {
         int k = A / a;
-        if (k > 0 && A % a == 0 && B == k * b && C == k * c && D == k * d && E == k * e)
-        {
-            p=k;
+        if (k > 0 && A % a == 0 && B == k * b && C == k * c && D == k * d && E == k * e) {
+            p = k;
             return true;
         }
         return false;
     }
+
     @Override
     public boolean checkRecipe(@Nonnull Recipe recipe, boolean consumeIfSuccess) {
-        int number=recipe.getProperty(ERProperty.getInstance(), 0);
-        if(getEnzymes()==number)
-            if(getRare(number))
+        int number = recipe.getProperty(ERProperty.getInstance(), 0);
+        if (getEnzymes() == number)
+            if (getRare(number))
                 return super.checkRecipe(recipe, consumeIfSuccess);
         return false;
     }
+
     @Override
     public void invalidateStructure() {
         super.invalidateStructure();
@@ -270,16 +269,40 @@ public class MetaTileEntityEnzymesReaction extends GTQTRecipeMapMultiblockContro
         tooltip.add(I18n.format("gregtech.machine.bioreb.gtqtupdate.3"));
         tooltip.add(I18n.format("gregtech.machine.bioreb.gtqtupdate.4"));
     }
+
+    @Override
+    public double getCurrentPHValue() {
+        return this.PH;
+    }
+
+    @Override
+    public void changeCurrentPHValue(double ph_change) {
+        this.PH = GTQTMathUtil.clamp(PH + ph_change, 0, 14);
+        this.markDirty();
+    }
+
+    @Override
+    public void changeCurrentPHValue(double ph_change, double ph_change_limit) {
+        if (ph_change > 0) {
+            double ph = this.PH + ph_change;
+            this.PH = Math.min(ph, ph_change_limit);
+        } else {
+            double ph = this.PH + ph_change;
+            this.PH = Math.max(ph, ph_change_limit);
+        }
+        this.markDirty();
+    }
+
     protected class BiologicalReactionLogic extends MultiblockRecipeLogic {
 
-        public BiologicalReactionLogic(RecipeMapMultiblockController tileEntity) {
-            super(tileEntity,true);
-        }
         FluidStack BIO1 = Enzymesa.getFluid(1000);
-        FluidStack BIO2 = Enzymesb .getFluid(1000);
+        FluidStack BIO2 = Enzymesb.getFluid(1000);
         FluidStack BIO3 = Enzymesc.getFluid(1000);
         FluidStack BIO4 = Enzymesd.getFluid(1000);
         FluidStack BIO5 = Enzymese.getFluid(1000);
+        public BiologicalReactionLogic(RecipeMapMultiblockController tileEntity) {
+            super(tileEntity, true);
+        }
 
         @Override
         public void update() {
@@ -312,44 +335,22 @@ public class MetaTileEntityEnzymesReaction extends GTQTRecipeMapMultiblockContro
 
         @Override
         public int getParallelLimit() {
-            return Math.max(clean_tier,p);
+            return Math.max(clean_tier, p);
         }
+
         public void setMaxProgress(int maxProgress) {
-            this.maxProgressTime = (int) (maxProgress*((10-clean_tier)/10.0));
+            this.maxProgressTime = (int) (maxProgress * ((10 - clean_tier) / 10.0));
         }
 
         protected void updateRecipeProgress() {
-            if (this.canRecipeProgress && this.drawEnergy(this.recipeEUt, true)&&start&&getEnzymes()!=0) {
+            if (this.canRecipeProgress && this.drawEnergy(this.recipeEUt, true) && start && getEnzymes() != 0) {
                 this.drawEnergy(this.recipeEUt, false);
                 if (++this.progressTime > this.maxProgressTime) {
                     this.completeRecipe();
-                    changeCurrentPHValue(Math.signum(7 - PH) * 0.125*p);
-                    A=B=C=D=E=0;
+                    changeCurrentPHValue(Math.signum(7 - PH) * 0.125 * p);
+                    A = B = C = D = E = 0;
                 }
             }
         }
-    }
-
-    @Override
-    public double getCurrentPHValue() {
-        return this.PH;
-    }
-
-    @Override
-    public void changeCurrentPHValue(double ph_change) {
-        this.PH = GTQTMathUtil.clamp(PH + ph_change, 0, 14);
-        this.markDirty();
-    }
-
-    @Override
-    public void changeCurrentPHValue(double ph_change, double ph_change_limit) {
-        if (ph_change > 0) {
-            double ph = this.PH + ph_change;
-            this.PH = Math.min(ph, ph_change_limit);
-        } else {
-            double ph = this.PH + ph_change;
-            this.PH = Math.max(ph, ph_change_limit);
-        }
-        this.markDirty();
     }
 }

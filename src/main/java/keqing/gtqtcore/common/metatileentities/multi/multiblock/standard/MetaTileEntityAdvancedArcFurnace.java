@@ -38,58 +38,44 @@ import java.util.List;
 import static gregtech.api.GTValues.VA;
 
 public class MetaTileEntityAdvancedArcFurnace extends GTQTRecipeMapMultiblockControllerOverwrite {
+    int ParallelNum = 1;
+    private int eleTier;
+
     public MetaTileEntityAdvancedArcFurnace(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, new RecipeMap[] {
+        super(metaTileEntityId, new RecipeMap[]{
                 RecipeMaps.ARC_FURNACE_RECIPES,
                 RecipeMaps.FURNACE_RECIPES
         });
         this.recipeMapWorkable = new AdvancedArcFurnaceWorkableHandler(this);
     }
+
     @Override
-    public boolean canBeDistinct() {return true;}
-    private class AdvancedArcFurnaceWorkableHandler extends MultiblockRecipeLogic {
-        @Override
-        public int getParallelLimit() {
-            return ParallelNum;
-        }
-        @Override
-        protected void modifyOverclockPost(int[] resultOverclock,  IRecipePropertyStorage storage) {
-            super.modifyOverclockPost(resultOverclock, storage);
-
-            int coilTier = eleTier;
-            if (coilTier <= 0)
-                return;
-
-            resultOverclock[0] *= 1.0f - coilTier * 0.1; // each coil above cupronickel (coilTier = 0) uses 10% less
-            // energy
-            resultOverclock[0] = Math.max(1, resultOverclock[0]);
-        }
-        public AdvancedArcFurnaceWorkableHandler(RecipeMapMultiblockController tileEntity) {
-            super(tileEntity);
-        }
+    public boolean canBeDistinct() {
+        return true;
     }
-    private int eleTier;
+
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityAdvancedArcFurnace(this.metaTileEntityId);
     }
+
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
         Object eleTier = context.get("EleTieredStats");
         this.eleTier = GTQTUtil.getOrDefault(() -> eleTier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)eleTier).getIntTier(),
+                () -> ((WrappedIntTired) eleTier).getIntTier(),
                 0);
-        ParallelLim=(int)Math.pow(2, 5);
-        ParallelNum=ParallelLim;
+        ParallelLim = (int) Math.pow(2, 5);
+        ParallelNum = ParallelLim;
     }
-    int ParallelNum=1;
+
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
-        textList.add(new TextComponentTranslation("电极:%s",eleTier));
-        if(modern==0) textList.add(new TextComponentTranslation("gtqtcore.tire1",5));
-        if(modern==1) textList.add(new TextComponentTranslation("gtqtcore.tire2",5));
-        textList.add(new TextComponentTranslation("gtqtcore.parr",ParallelNum,ParallelLim));
+        textList.add(new TextComponentTranslation("电极:%s", eleTier));
+        if (modern == 0) textList.add(new TextComponentTranslation("gtqtcore.tire1", 5));
+        if (modern == 1) textList.add(new TextComponentTranslation("gtqtcore.tire2", 5));
+        textList.add(new TextComponentTranslation("gtqtcore.parr", ParallelNum, ParallelLim));
     }
 
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
@@ -105,22 +91,21 @@ public class MetaTileEntityAdvancedArcFurnace extends GTQTRecipeMapMultiblockCon
     @Override
     public void update() {
         super.update();
-        if (modern == 0)
-        {
-            ParallelNum=ParallelNumA;
+        if (modern == 0) {
+            ParallelNum = ParallelNumA;
         }
-        if (modern == 1)
-        {
-            P = (int) ((this.energyContainer.getEnergyStored() + energyContainer.getInputPerSec())/(getMinVa()==0?1:getMinVa()));
+        if (modern == 1) {
+            P = (int) ((this.energyContainer.getEnergyStored() + energyContainer.getInputPerSec()) / (getMinVa() == 0 ? 1 : getMinVa()));
             ParallelNum = Math.min(P, ParallelLim);
         }
     }
-    public int getMinVa()
-    {
-        if((Math.min(this.energyContainer.getEnergyCapacity()/32,VA[5])*20)==0)return 1;
-        return (int)(Math.min(this.energyContainer.getEnergyCapacity()/32,VA[5]));
+
+    public int getMinVa() {
+        if ((Math.min(this.energyContainer.getEnergyCapacity() / 32, VA[5]) * 20) == 0) return 1;
+        return (int) (Math.min(this.energyContainer.getEnergyCapacity() / 32, VA[5]));
 
     }
+
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
                 .aisle(" AAA ", " AAA ", " EEE ", "     ")
@@ -138,6 +123,7 @@ public class MetaTileEntityAdvancedArcFurnace extends GTQTRecipeMapMultiblockCon
                 .where('#', air())
                 .build();
     }
+
     public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
         return Textures.ROBUST_TUNGSTENSTEEL_CASING;
     }
@@ -153,5 +139,29 @@ public class MetaTileEntityAdvancedArcFurnace extends GTQTRecipeMapMultiblockCon
     @Override
     protected ICubeRenderer getFrontOverlay() {
         return GTQTTextures.ALGAE_FARM_OVERLAY;
+    }
+
+    private class AdvancedArcFurnaceWorkableHandler extends MultiblockRecipeLogic {
+        public AdvancedArcFurnaceWorkableHandler(RecipeMapMultiblockController tileEntity) {
+            super(tileEntity);
+        }
+
+        @Override
+        public int getParallelLimit() {
+            return ParallelNum;
+        }
+
+        @Override
+        protected void modifyOverclockPost(int[] resultOverclock, IRecipePropertyStorage storage) {
+            super.modifyOverclockPost(resultOverclock, storage);
+
+            int coilTier = eleTier;
+            if (coilTier <= 0)
+                return;
+
+            resultOverclock[0] *= 1.0f - coilTier * 0.1; // each coil above cupronickel (coilTier = 0) uses 10% less
+            // energy
+            resultOverclock[0] = Math.max(1, resultOverclock[0]);
+        }
     }
 }

@@ -50,16 +50,27 @@ import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.GRAVITY_SEPARATOR_R
 import static keqing.gtqtcore.common.block.blocks.GTQTIsaCasing.CasingType.SEPARATOR_ROTOR;
 
 public class MetaTileEntityGravitySeparator extends GTQTRecipeMapMultiblockController implements IProgressBarMultiblock {
+    int updatetime = 1;
+    int[] steam = new int[3];
+    FluidStack STEAM = Steam.getFluid(1000 * updatetime);
+
     public MetaTileEntityGravitySeparator(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, new RecipeMap[] {
+        super(metaTileEntityId, new RecipeMap[]{
                 GRAVITY_SEPARATOR_RECIPES,
                 SIFTER_RECIPES
         });
         this.recipeMapWorkable = new GravitySeparatorLogic(this);
     }
+
+    protected static IBlockState getCasingState() {
+        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STEEL_SOLID);
+    }
+
     @Override
-    public boolean canBeDistinct() {return true;}
-    int updatetime=1;
+    public boolean canBeDistinct() {
+        return true;
+    }
+
     @Override
     @Nonnull
     protected Widget getFlexButton(int x, int y, int width, int height) {
@@ -77,50 +88,11 @@ public class MetaTileEntityGravitySeparator extends GTQTRecipeMapMultiblockContr
     }
 
     private void incrementThreshold(Widget.ClickData clickData) {
-        this.updatetime = MathHelper.clamp(updatetime+1, 1, 20);
+        this.updatetime = MathHelper.clamp(updatetime + 1, 1, 20);
     }
 
     private void decrementThreshold(Widget.ClickData clickData) {
-        this.updatetime = MathHelper.clamp(updatetime-1, 1, 20);
-    }
-    private class GravitySeparatorLogic extends MultiblockRecipeLogic {
-        private boolean isCommonMode() {
-            return this.getRecipeMap() == SIFTER_RECIPES;
-        }
-        public GravitySeparatorLogic(RecipeMapMultiblockController tileEntity) {
-            super(tileEntity);
-        }
-        @Override
-        public int getParallelLimit() {
-            if(getStatue()) {
-                return 4*(isCommonMode()?4:1);
-            }
-            return 1;
-        }
-        @Override
-        public void setMaxProgress(int maxProgress)
-        {
-            if(getStatue()) {
-                maxProgressTime = maxProgress/4;
-            }
-            else this.maxProgressTime = maxProgress;
-        }
-        public  boolean getStatue()
-        {
-            return steam[0] > 6000 && steam[1] > 6000 && steam[2] > 6000;
-        }
-        protected void updateRecipeProgress() {
-            if (canRecipeProgress && drawEnergy(recipeEUt, true)) {
-                this.drawEnergy(this.recipeEUt, false);
-                if (++progressTime > maxProgressTime)
-                {
-                    steam[0]=(int) (steam[0]*0.72);
-                    steam[1]=(int) (steam[1]*0.84);
-                    steam[2]=(int) (steam[2]*0.96);
-                    completeRecipe();
-                }
-            }
-        }
+        this.updatetime = MathHelper.clamp(updatetime - 1, 1, 20);
     }
 
     @Override
@@ -131,12 +103,11 @@ public class MetaTileEntityGravitySeparator extends GTQTRecipeMapMultiblockContr
             int SteamAmount = SteamStack == null ? 0 : SteamStack.amount;
             textList.add(new TextComponentTranslation("gtqtcore.gc.count1", TextFormattingUtil.formatNumbers(SteamAmount)));
         }
-        textList.add(new TextComponentTranslation("gtqtcore.msf.count2", (double)steam[0]/1000,(double)steam[1]/1000,(double)steam[2]/1000));
-        if(getStatue())  textList.add(new TextComponentTranslation("gtqtcore.msf.good"));
+        textList.add(new TextComponentTranslation("gtqtcore.msf.count2", (double) steam[0] / 1000, (double) steam[1] / 1000, (double) steam[2] / 1000));
+        if (getStatue()) textList.add(new TextComponentTranslation("gtqtcore.msf.good"));
         else textList.add(new TextComponentTranslation("gtqtcore.msf.no"));
     }
-    int[] steam=new int[3];
-    FluidStack STEAM = Steam.getFluid(1000*updatetime);
+
     @Override
     public void update() {
         super.update();
@@ -144,12 +115,12 @@ public class MetaTileEntityGravitySeparator extends GTQTRecipeMapMultiblockContr
             IMultipleTankHandler inputTank = getInputFluidInventory();
             if (STEAM.isFluidStackIdentical(inputTank.drain(STEAM, false))) {
                 inputTank.drain(STEAM, true);
-                steam[0] = steam[0] + 800*updatetime;
+                steam[0] = steam[0] + 800 * updatetime;
 
             }
         }
 
-        for(int i=0;i<3;i++) {
+        for (int i = 0; i < 3; i++) {
             if (steam[0] > steam[1]) {
                 steam[0] = steam[0] - 40;
                 steam[1] = steam[1] + 30;
@@ -172,15 +143,16 @@ public class MetaTileEntityGravitySeparator extends GTQTRecipeMapMultiblockContr
         }
 
     }
+
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("fluid1", steam[0]);
         data.setInteger("fluid2", steam[1]);
         data.setInteger("fluid3", steam[2]);
-        data.setInteger("updatetime",updatetime);
+        data.setInteger("updatetime", updatetime);
         return super.writeToNBT(data);
     }
 
-   
+
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         steam[0] = data.getInteger("fluid1");
@@ -188,10 +160,11 @@ public class MetaTileEntityGravitySeparator extends GTQTRecipeMapMultiblockContr
         steam[2] = data.getInteger("fluid3");
         updatetime = data.getInteger("updatetime");
     }
-    public  boolean getStatue()
-    {
+
+    public boolean getStatue() {
         return steam[0] > 6000 && steam[1] > 6000 && steam[2] > 6000;
     }
+
     @Override
     public int getNumProgressBars() {
         return 3;
@@ -201,12 +174,13 @@ public class MetaTileEntityGravitySeparator extends GTQTRecipeMapMultiblockContr
     public void addBarHoverText(List<ITextComponent> hoverList, int index) {
         ITextComponent cwutInfo = TextComponentUtil.stringWithColor(
                 TextFormatting.AQUA,
-                (steam[index] + 1000)+ " / " + (10000) + " kPa");
+                (steam[index] + 1000) + " / " + (10000) + " kPa");
         hoverList.add(TextComponentUtil.translationWithColor(
                 TextFormatting.GRAY,
                 "gregtech.multiblock.msf.computation",
                 cwutInfo));
     }
+
     @Override
     public double getFillPercentage(int index) {
         return (double) (steam[index] + 1000) / (10000);
@@ -220,6 +194,7 @@ public class MetaTileEntityGravitySeparator extends GTQTRecipeMapMultiblockContr
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityGravitySeparator(this.metaTileEntityId);
     }
+
     @Nonnull
     @Override
     protected BlockPattern createStructurePattern() {
@@ -239,18 +214,19 @@ public class MetaTileEntityGravitySeparator extends GTQTRecipeMapMultiblockContr
                 .where(' ', any())
                 .build();
     }
-    public  TraceabilityPredicate getFramePredicate() {
+
+    public TraceabilityPredicate getFramePredicate() {
         return frames(Materials.Steel);
     }
+
     public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
         return Textures.SOLID_STEEL_CASING;
     }
+
     protected IBlockState steelRotorState() {
         return GTQTMetaBlocks.ISA_CASING.getState(SEPARATOR_ROTOR);
     }
-    protected static IBlockState getCasingState() {
-        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STEEL_SOLID);
-    }
+
     @Override
     public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
@@ -258,16 +234,60 @@ public class MetaTileEntityGravitySeparator extends GTQTRecipeMapMultiblockContr
         tooltip.add(I18n.format("gregtech.machine.gc.tooltip.4"));
         tooltip.add(I18n.format("gregtech.machine.msf.tooltip.4"));
     }
+
     @Nonnull
     protected ICubeRenderer getFrontOverlay() {
         return GTQTTextures.LARGE_FLUID_PHASE_TRANSFORMER_OVERLAY;
     }
+
     @Override
     public boolean hasMufflerMechanics() {
         return false;
     }
+
     @Override
     public boolean allowsExtendedFacing() {
         return false;
+    }
+
+    private class GravitySeparatorLogic extends MultiblockRecipeLogic {
+        public GravitySeparatorLogic(RecipeMapMultiblockController tileEntity) {
+            super(tileEntity);
+        }
+
+        private boolean isCommonMode() {
+            return this.getRecipeMap() == SIFTER_RECIPES;
+        }
+
+        @Override
+        public int getParallelLimit() {
+            if (getStatue()) {
+                return 4 * (isCommonMode() ? 4 : 1);
+            }
+            return 1;
+        }
+
+        @Override
+        public void setMaxProgress(int maxProgress) {
+            if (getStatue()) {
+                maxProgressTime = maxProgress / 4;
+            } else this.maxProgressTime = maxProgress;
+        }
+
+        public boolean getStatue() {
+            return steam[0] > 6000 && steam[1] > 6000 && steam[2] > 6000;
+        }
+
+        protected void updateRecipeProgress() {
+            if (canRecipeProgress && drawEnergy(recipeEUt, true)) {
+                this.drawEnergy(this.recipeEUt, false);
+                if (++progressTime > maxProgressTime) {
+                    steam[0] = (int) (steam[0] * 0.72);
+                    steam[1] = (int) (steam[1] * 0.84);
+                    steam[2] = (int) (steam[2] * 0.96);
+                    completeRecipe();
+                }
+            }
+        }
     }
 }

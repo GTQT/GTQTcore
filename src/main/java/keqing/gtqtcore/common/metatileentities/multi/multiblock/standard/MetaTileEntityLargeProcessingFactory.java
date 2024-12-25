@@ -1,4 +1,5 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
+
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
@@ -41,6 +42,10 @@ public class MetaTileEntityLargeProcessingFactory extends MultiMapMultiblockCont
         this.recipeMapWorkable = new ProcessingFactoryRecipeLogic(this);
     }
 
+    private static IBlockState getCasingState() {
+        return GTQTMetaBlocks.ISA_CASING.getState(GTQTIsaCasing.CasingType.PROCESS);
+    }
+
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityLargeProcessingFactory(metaTileEntityId);
@@ -60,10 +65,6 @@ public class MetaTileEntityLargeProcessingFactory extends MultiMapMultiblockCont
                 .where('M', abilities(MultiblockAbility.MUFFLER_HATCH))
                 .where('#', air())
                 .build();
-    }
-
-    private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.ISA_CASING.getState(GTQTIsaCasing.CasingType.PROCESS);
     }
 
     @SideOnly(Side.CLIENT)

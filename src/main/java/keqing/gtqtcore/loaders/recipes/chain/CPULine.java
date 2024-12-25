@@ -506,10 +506,6 @@ public class CPULine {
         Stepper(1,2,RETICLE_ULTRA_LOW_POWER_INTEGRATED_CIRCUIT,ULTRA_LOW_POWER_INTEGRATED_CIRCUIT_WAFER,Color.Green);
         Stepper(1,2,RETICLE_LOW_POWER_INTEGRATED_CIRCUIT,LOW_POWER_INTEGRATED_CIRCUIT_WAFER,Color.LightBlue);
         Stepper(1,2,RETICLE_SIMPLE_SYSTEM_ON_CHIP,SIMPLE_SYSTEM_ON_CHIP_WAFER,Color.Lime);
-        PIC(2,2,RETICLE_NANO_CENTRAL_PROCESSING_UNIT,NANO_CENTRAL_PROCESSING_UNIT_WAFER);
-        PIC(2,2,RETICLE_QBIT_CENTRAL_PROCESSING_UNIT,QUBIT_CENTRAL_PROCESSING_UNIT_WAFER);
-        PIC(2,3,RETICLE_ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT,ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT_WAFER);
-        PIC(2,3,RETICLE_HIGH_POWER_INTEGRATED_CIRCUIT,HIGH_POWER_INTEGRATED_CIRCUIT_WAFER);
         Stepper(2,3,RETICLE_NOR_MEMORY_CHIP,NOR_MEMORY_CHIP_WAFER,Color.Gray);
         Stepper(2,3,RETICLE_POWER_INTEGRATED_CIRCUIT,POWER_INTEGRATED_CIRCUIT_WAFER,Color.Brown);
         Stepper(2,3,RETICLE_NAND_MEMORY_CHIP,NAND_MEMORY_CHIP_WAFER,Color.Cyan);
@@ -527,46 +523,42 @@ public class CPULine {
                 .input(CENTRAL_PROCESSING_UNIT_WAFER)
                 .input(CARBON_FIBERS, 16)
                 .fluidInputs(Glowstone.getFluid(L * 4))
-                .output(RETICLE_NANO_CENTRAL_PROCESSING_UNIT)
-
+                .output(NANO_CENTRAL_PROCESSING_UNIT_WAFER)
                 .CWUt(120)
-                .duration(400).EUt(VA[EV]).buildAndRegister();
+                .duration(200).EUt(VA[EV]).buildAndRegister();
 
         PRECISION_SPINNING.recipeBuilder()
                 .input(NANO_CENTRAL_PROCESSING_UNIT_WAFER)
                 .input(QUANTUM_EYE, 2)
                 .fluidInputs(GalliumArsenide.getFluid(L * 2))
-                .output(RETICLE_QBIT_CENTRAL_PROCESSING_UNIT)
-
+                .output(QUBIT_CENTRAL_PROCESSING_UNIT_WAFER)
                 .CWUt(120)
-                .duration(300).EUt(VA[EV]).buildAndRegister();
+                .duration(200).EUt(VA[EV]).buildAndRegister();
 
         PRECISION_SPINNING.recipeBuilder()
                 .input(NANO_CENTRAL_PROCESSING_UNIT_WAFER)
                 .input(dust, IndiumGalliumPhosphide)
                 .fluidInputs(Radon.getFluid(50))
-                .output(RETICLE_QBIT_CENTRAL_PROCESSING_UNIT)
-
+                .output(QUBIT_CENTRAL_PROCESSING_UNIT_WAFER)
                 .CWUt(120)
-                .duration(400).EUt(VA[EV]).buildAndRegister();
+                .duration(200).EUt(VA[EV]).buildAndRegister();
 
         //pic
         PRECISION_SPINNING.recipeBuilder()
                 .input(POWER_INTEGRATED_CIRCUIT_WAFER)
                 .input(dust, IndiumGalliumPhosphide, 2)
                 .fluidInputs(VanadiumGallium.getFluid(L * 2))
-                .output(RETICLE_HIGH_POWER_INTEGRATED_CIRCUIT)
-
+                .output(HIGH_POWER_INTEGRATED_CIRCUIT_WAFER)
                 .CWUt(240)
-                .duration(600).EUt(VA[IV]).buildAndRegister();
+                .duration(200).EUt(VA[IV]).buildAndRegister();
 
         PRECISION_SPINNING.recipeBuilder()
                 .input(HIGH_POWER_INTEGRATED_CIRCUIT_WAFER)
                 .input(dust, IndiumGalliumPhosphide, 8)
                 .fluidInputs(Naquadah.getFluid(L * 4))
-                .output(RETICLE_ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT)
+                .output(ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT_WAFER)
                 .CWUt(480)
-                .duration(600).EUt(VA[LuV]).buildAndRegister();
+                .duration(200).EUt(VA[LuV]).buildAndRegister();
         //TODO gcys pic
 
     }

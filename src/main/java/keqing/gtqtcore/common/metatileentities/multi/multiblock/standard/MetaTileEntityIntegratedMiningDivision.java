@@ -50,21 +50,27 @@ public class MetaTileEntityIntegratedMiningDivision extends GTQTRecipeMapMultibl
     protected int casingTier;
     protected int coilType;
     protected int tier;
+    int ParallelNum = 1;
+
     public MetaTileEntityIntegratedMiningDivision(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.INTEGRATED_MINING_DIVISION);
         this.recipeMapWorkable = new MetaTileEntityIntegratedMiningDivisionrWorkable(this);
     }
+
     @Override
-    public boolean canBeDistinct() {return true;}
+    public boolean canBeDistinct() {
+        return true;
+    }
+
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity metaTileEntityHolder) {
         return new MetaTileEntityIntegratedMiningDivision(this.metaTileEntityId);
     }
-    int ParallelNum=1;
+
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("modern", modern);
         return super.writeToNBT(data);
     }
-   
+
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         modern = data.getInteger("modern");
@@ -73,20 +79,18 @@ public class MetaTileEntityIntegratedMiningDivision extends GTQTRecipeMapMultibl
     @Override
     public void update() {
         super.update();
-        if (modern == 0)
-        {
-            ParallelNum=ParallelNumA;
+        if (modern == 0) {
+            ParallelNum = ParallelNumA;
         }
-        if (modern == 1)
-        {
-            P = (int) ((this.energyContainer.getEnergyStored() + energyContainer.getInputPerSec())/(getMinVa()==0?1:getMinVa()));
+        if (modern == 1) {
+            P = (int) ((this.energyContainer.getEnergyStored() + energyContainer.getInputPerSec()) / (getMinVa() == 0 ? 1 : getMinVa()));
             ParallelNum = Math.min(P, ParallelLim);
         }
     }
-    public int getMinVa()
-    {
-        if((Math.min(this.energyContainer.getEnergyCapacity()/32,VA[tier])*20)==0)return 1;
-        return (int)(Math.min(this.energyContainer.getEnergyCapacity()/32,VA[tier]));
+
+    public int getMinVa() {
+        if ((Math.min(this.energyContainer.getEnergyCapacity() / 32, VA[tier]) * 20) == 0) return 1;
+        return (int) (Math.min(this.energyContainer.getEnergyCapacity() / 32, VA[tier]));
 
     }
 
@@ -95,11 +99,11 @@ public class MetaTileEntityIntegratedMiningDivision extends GTQTRecipeMapMultibl
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
         if (isStructureFormed()) {
-            textList.add(new TextComponentTranslation("gtqtcore.multiblock.md.level1", coilType,glass_tier));
+            textList.add(new TextComponentTranslation("gtqtcore.multiblock.md.level1", coilType, glass_tier));
         }
-        if(modern==0) textList.add(new TextComponentTranslation("gtqtcore.tire1",tier));
-        if(modern==1) textList.add(new TextComponentTranslation("gtqtcore.tire2",tier));
-        textList.add(new TextComponentTranslation("gtqtcore.parr",ParallelNum,ParallelLim));
+        if (modern == 0) textList.add(new TextComponentTranslation("gtqtcore.tire1", tier));
+        if (modern == 1) textList.add(new TextComponentTranslation("gtqtcore.tire2", tier));
+        textList.add(new TextComponentTranslation("gtqtcore.parr", ParallelNum, ParallelLim));
     }
 
     @Override
@@ -140,10 +144,12 @@ public class MetaTileEntityIntegratedMiningDivision extends GTQTRecipeMapMultibl
                 .where('G', TiredTraceabilityPredicate.CP_LGLASS.get())
                 .build();
     }
+
     @Override
     public String[] getDescription() {
         return new String[]{I18n.format("gtqt.tooltip.update")};
     }
+
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
@@ -152,24 +158,25 @@ public class MetaTileEntityIntegratedMiningDivision extends GTQTRecipeMapMultibl
         Object tubeTier = context.get("ChemicalPlantTubeTieredStats");
         Object glass_tier = context.get("LGLTieredStats");
         this.coilType = GTQTUtil.getOrDefault(() -> coilType instanceof IHeatingCoilBlockStats,
-                () ->  ((IHeatingCoilBlockStats) coilType).getLevel(),
+                () -> ((IHeatingCoilBlockStats) coilType).getLevel(),
                 BlockWireCoil.CoilType.CUPRONICKEL.getLevel());
         this.casingTier = GTQTUtil.getOrDefault(() -> casingTier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)casingTier).getIntTier(),
+                () -> ((WrappedIntTired) casingTier).getIntTier(),
                 0);
         this.tubeTier = GTQTUtil.getOrDefault(() -> tubeTier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)tubeTier).getIntTier(),
+                () -> ((WrappedIntTired) tubeTier).getIntTier(),
                 0);
         this.glass_tier = GTQTUtil.getOrDefault(() -> glass_tier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)glass_tier).getIntTier(),
+                () -> ((WrappedIntTired) glass_tier).getIntTier(),
                 0);
 
-        this.tier = Math.min(this.casingTier,this.tubeTier);
+        this.tier = Math.min(this.casingTier, this.tubeTier);
 
         this.writeCustomData(GTQTValue.UPDATE_TIER7, buf -> buf.writeInt(this.casingTier));
-        ParallelLim=Math.min((int)Math.pow(2, this.tier),128);
-        ParallelNum=ParallelLim;
+        ParallelLim = Math.min((int) Math.pow(2, this.tier), 128);
+        ParallelNum = ParallelLim;
     }
+
     @Override
     public void writeInitialSyncData(PacketBuffer buf) {
         super.writeInitialSyncData(buf);
@@ -181,16 +188,18 @@ public class MetaTileEntityIntegratedMiningDivision extends GTQTRecipeMapMultibl
         super.receiveInitialSyncData(buf);
         this.casingTier = buf.readInt();
     }
+
     @Override
     public void receiveCustomData(int dataId, PacketBuffer buf) {
         super.receiveCustomData(dataId, buf);
-        if(dataId == GTQTValue.UPDATE_TIER7){
+        if (dataId == GTQTValue.UPDATE_TIER7) {
             this.casingTier = buf.readInt();
         }
-        if(dataId == GTQTValue.REQUIRE_DATA_UPDATE7){
-            this.writeCustomData(GTQTValue.UPDATE_TIER7,buf1 -> buf1.writeInt(this.casingTier));
+        if (dataId == GTQTValue.REQUIRE_DATA_UPDATE7) {
+            this.writeCustomData(GTQTValue.UPDATE_TIER7, buf1 -> buf1.writeInt(this.casingTier));
         }
     }
+
     @SideOnly(Side.CLIENT)
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
         switch (this.casingTier) {
@@ -226,10 +235,12 @@ public class MetaTileEntityIntegratedMiningDivision extends GTQTRecipeMapMultibl
             }
         }
     }
+
     @Override
     public SoundEvent getBreakdownSound() {
         return GTSoundEvents.BREAKDOWN_ELECTRICAL;
     }
+
     @SideOnly(Side.CLIENT)
     @Nonnull
     @Override
@@ -244,17 +255,19 @@ public class MetaTileEntityIntegratedMiningDivision extends GTQTRecipeMapMultibl
 
     protected class MetaTileEntityIntegratedMiningDivisionrWorkable extends MultiblockRecipeLogic {
         private final MetaTileEntityIntegratedMiningDivision A;
+
         public MetaTileEntityIntegratedMiningDivisionrWorkable(RecipeMapMultiblockController tileEntity) {
             super(tileEntity);
             this.A = (MetaTileEntityIntegratedMiningDivision) tileEntity;
         }
+
         @Override
         public int getParallelLimit() {
             return ParallelNum;
         }
 
         @Override
-        protected void modifyOverclockPost(int[] resultOverclock,  IRecipePropertyStorage storage) {
+        protected void modifyOverclockPost(int[] resultOverclock, IRecipePropertyStorage storage) {
             super.modifyOverclockPost(resultOverclock, storage);
             if (glass_tier <= 0)
                 return;

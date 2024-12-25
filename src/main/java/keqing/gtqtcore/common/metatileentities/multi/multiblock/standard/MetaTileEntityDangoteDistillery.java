@@ -27,7 +27,6 @@ import gregtech.client.utils.TooltipHelper;
 import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.BlockBoilerCasing;
 import gregtech.common.blocks.MetaBlocks;
-import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityFluidHatch;
 import gregtech.core.sound.GTSoundEvents;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
@@ -40,7 +39,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
@@ -59,6 +57,7 @@ import static gregtech.api.util.RelativeDirection.*;
 
 public class MetaTileEntityDangoteDistillery extends MultiMapMultiblockController implements IDistillationTower {
     protected final DistillationTowerLogicHandler handler;
+
     public MetaTileEntityDangoteDistillery(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{
                 RecipeMaps.DISTILLATION_RECIPES,
@@ -67,17 +66,24 @@ public class MetaTileEntityDangoteDistillery extends MultiMapMultiblockControlle
         this.recipeMapWorkable = new DangoteDistilleryRecipeLogic(this);
         this.handler = new DistillationTowerLogicHandler(this);
     }
+
+    private static IBlockState getCasingState2() {
+        return MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.TUNGSTENSTEEL_PIPE);
+    }
+
     @Override
-    public boolean canBeDistinct() {return true;}
+    public boolean canBeDistinct() {
+        return true;
+    }
 
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityDangoteDistillery(this.metaTileEntityId);
     }
+
     @Override
     protected Function<BlockPos, Integer> multiblockPartSorter() {
         return RelativeDirection.UP.getSorter(getFrontFacing(), getUpwardsFacing(), isFlipped());
     }
-
 
     @Override
     public boolean allowsExtendedFacing() {
@@ -118,14 +124,15 @@ public class MetaTileEntityDangoteDistillery extends MultiMapMultiblockControlle
         if (usesAdvHatchLogic())
             this.handler.invalidate();
     }
+
     @Override
     protected BlockPattern createStructurePattern() {
         // Different characters use common constraints
         TraceabilityPredicate casingPredicate = states(getCasingState()).setMinGlobalLimited(40);
         TraceabilityPredicate maintenancePredicate = this.hasMaintenanceMechanics() &&
                 ConfigHolder.machines.enableMaintenance ?
-                        abilities(MultiblockAbility.MAINTENANCE_HATCH).setMinGlobalLimited(1).setMaxGlobalLimited(1) :
-                        casingPredicate;
+                abilities(MultiblockAbility.MAINTENANCE_HATCH).setMinGlobalLimited(1).setMaxGlobalLimited(1) :
+                casingPredicate;
         return FactoryBlockPattern.start(RIGHT, FRONT, DOWN)
                 .aisle("#####", "#ZZZ#", "#ZCZ#", "#ZZZ#", "#####")
                 .aisle("##X##", "#XAX#", "XAPAX", "#XAX#", "##X##").setRepeatable(1, 12)
@@ -154,17 +161,17 @@ public class MetaTileEntityDangoteDistillery extends MultiMapMultiblockControlle
     public boolean allowSameFluidFillForOutputs() {
         return !usesAdvHatchLogic();
     }
+
     @Override
     public int getFluidOutputLimit() {
         if (usesAdvHatchLogic()) return this.handler.getLayerCount();
         else return super.getFluidOutputLimit();
     }
-    private static IBlockState getCasingState2() {
-        return MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.TUNGSTENSTEEL_PIPE);
-    }
+
     public boolean hasMufflerMechanics() {
         return false;
     }
+
     private IBlockState getCasingState() {
         return GTQTMetaBlocks.MULTI_CASING.getState(GTQTMultiblockCasing.CasingType.HC_ALLOY_CASING);
     }
@@ -177,6 +184,7 @@ public class MetaTileEntityDangoteDistillery extends MultiMapMultiblockControlle
     public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
         return GTQTTextures.HC_ALLOY_CASING;
     }
+
     @SideOnly(Side.CLIENT)
     @Nonnull
     @Override
@@ -253,7 +261,8 @@ public class MetaTileEntityDangoteDistillery extends MultiMapMultiblockControlle
                 return HigherParallelTier(getTier(getMaxVoltage()));
             }
         }
-    @Override
+
+        @Override
         protected void outputRecipeOutputs() {
             if (usesAdvHatchLogic()) {
                 GTTransferUtils.addItemsToItemHandler(getOutputInventory(), false, itemOutputs);
@@ -264,9 +273,9 @@ public class MetaTileEntityDangoteDistillery extends MultiMapMultiblockControlle
         }
 
         @Override
-        protected boolean setupAndConsumeRecipeInputs( Recipe recipe,
-                                                       IItemHandlerModifiable importInventory,
-                                                       IMultipleTankHandler importFluids) {
+        protected boolean setupAndConsumeRecipeInputs(Recipe recipe,
+                                                      IItemHandlerModifiable importInventory,
+                                                      IMultipleTankHandler importFluids) {
             if (!usesAdvHatchLogic()) {
                 return super.setupAndConsumeRecipeInputs(recipe, importInventory, importFluids);
             }

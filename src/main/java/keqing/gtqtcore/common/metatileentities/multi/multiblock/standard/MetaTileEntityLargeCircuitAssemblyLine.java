@@ -59,7 +59,6 @@ import static keqing.gtqtcore.common.block.blocks.BlockActiveUniqueCasing.Active
  * Large Circuit Assembly Line
  *
  * @author Magic_Sweepy
- *
  * @since 2.8.7-beta
  */
 public class MetaTileEntityLargeCircuitAssemblyLine extends MultiMapMultiblockController implements IOpticalComputationReceiver {
@@ -70,11 +69,28 @@ public class MetaTileEntityLargeCircuitAssemblyLine extends MultiMapMultiblockCo
     private GTLaserBeamParticle[][] beamParticles;
     private int beamCount;
     private IOpticalComputationProvider computationProvider;
+
     public MetaTileEntityLargeCircuitAssemblyLine(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{
                 RecipeMaps.CIRCUIT_ASSEMBLER_RECIPES,
                 GTQTcoreRecipeMaps.LARGE_CIRCUIT_ASSEMBLY_LINE_RECIPES});
         this.recipeMapWorkable = new LargeCircuitAssemblyLineRecipeLogic(this);
+    }
+
+    private static IBlockState getCasingState() {
+        return GTQTMetaBlocks.TURBINE_CASING.getState(GTQTTurbineCasing.TurbineCasingType.ADVANCED_FILTER_CASING);
+    }
+
+    private static IBlockState getSecondCasingState() {
+        return GTQTMetaBlocks.ACTIVE_UNIQUE_CASING.getState(CIRCUIT_ASSEMBLY_CONTROL_CASING);
+    }
+
+    private static IBlockState getThirdCasingState() {
+        return GTQTMetaBlocks.ACTIVE_UNIQUE_CASING.getState(CIRCUIT_ASSEMBLY_LINE_CASING);
+    }
+
+    private static IBlockState getGlassState() {
+        return MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.FUSION_GLASS);
     }
 
     @Override
@@ -110,6 +126,7 @@ public class MetaTileEntityLargeCircuitAssemblyLine extends MultiMapMultiblockCo
                 .where(' ', any())
                 .build();
     }
+
     public IOpticalComputationProvider getComputationProvider() {
         return this.computationProvider;
     }
@@ -119,9 +136,10 @@ public class MetaTileEntityLargeCircuitAssemblyLine extends MultiMapMultiblockCo
         super.formStructure(context);
         List<IOpticalComputationHatch> providers = this.getAbilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION);
         if (providers != null && providers.size() >= 1) {
-            this.computationProvider = (IOpticalComputationProvider) providers.get(0);
+            this.computationProvider = providers.get(0);
         }
     }
+
     @Override
     protected void initializeAbilities() {
         this.inputInventory = new ItemHandlerList(this.getAbilities(MultiblockAbility.IMPORT_ITEMS));
@@ -130,22 +148,7 @@ public class MetaTileEntityLargeCircuitAssemblyLine extends MultiMapMultiblockCo
         this.outputFluidInventory = new FluidTankList(this.allowSameFluidFillForOutputs(), this.getAbilities(MultiblockAbility.EXPORT_FLUIDS));
         List<IEnergyContainer> energyContainer = new ArrayList<>(this.getAbilities(MultiblockAbility.INPUT_ENERGY));
         energyContainer.addAll(this.getAbilities(MultiblockAbility.INPUT_LASER));
-        this.energyContainer=new EnergyContainerList(energyContainer);
-    }
-    private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.TURBINE_CASING.getState(GTQTTurbineCasing.TurbineCasingType.ADVANCED_FILTER_CASING);
-    }
-
-    private static IBlockState getSecondCasingState() {
-        return GTQTMetaBlocks.ACTIVE_UNIQUE_CASING.getState(CIRCUIT_ASSEMBLY_CONTROL_CASING);
-    }
-
-    private static IBlockState getThirdCasingState() {
-        return GTQTMetaBlocks.ACTIVE_UNIQUE_CASING.getState(CIRCUIT_ASSEMBLY_LINE_CASING);
-    }
-
-    private static IBlockState getGlassState() {
-        return MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.FUSION_GLASS);
+        this.energyContainer = new EnergyContainerList(energyContainer);
     }
 
     @Override
@@ -166,11 +169,13 @@ public class MetaTileEntityLargeCircuitAssemblyLine extends MultiMapMultiblockCo
         super.renderMetaTileEntity(renderState, translation, pipeline);
         this.getFrontOverlay().renderOrientedState(renderState, translation, pipeline, this.getFrontFacing(), this.recipeMapWorkable.isActive(), this.recipeMapWorkable.isWorkingEnabled());
     }
+
     @SideOnly(Side.CLIENT)
     @Override
     protected ICubeRenderer getFrontOverlay() {
         return Textures.FUSION_REACTOR_OVERLAY;
     }
+
     @Override
     public SoundEvent getBreakdownSound() {
         return GTSoundEvents.BREAKDOWN_MECHANICAL;
@@ -237,12 +242,12 @@ public class MetaTileEntityLargeCircuitAssemblyLine extends MultiMapMultiblockCo
 
     }
 
-    private void writeParticles( PacketBuffer buf) {
+    private void writeParticles(PacketBuffer buf) {
         buf.writeVarInt(this.beamCount);
     }
 
     @SideOnly(Side.CLIENT)
-    private void readParticles( PacketBuffer buf) {
+    private void readParticles(PacketBuffer buf) {
         this.beamCount = buf.readVarInt();
         if (this.beamParticles == null) {
             this.beamParticles = new GTLaserBeamParticle[17][2];
@@ -253,7 +258,7 @@ public class MetaTileEntityLargeCircuitAssemblyLine extends MultiMapMultiblockCo
         EnumFacing relativeLeft = RelativeDirection.LEFT.getRelativeFacing(this.getFrontFacing(), this.getUpwardsFacing(), this.isFlipped());
         boolean negativeUp = relativeUp.getAxisDirection() == EnumFacing.AxisDirection.NEGATIVE;
 
-        for(int i = 0; i < this.beamParticles.length; ++i) {
+        for (int i = 0; i < this.beamParticles.length; ++i) {
             GTLaserBeamParticle particle = this.beamParticles[i][0];
             if (i < this.beamCount && particle == null) {
                 pos.setPos(this.getPos());
@@ -284,14 +289,14 @@ public class MetaTileEntityLargeCircuitAssemblyLine extends MultiMapMultiblockCo
     }
 
     @SideOnly(Side.CLIENT)
-    private  GTLaserBeamParticle createALParticles(Vector3 startPos, Vector3 endPos) {
+    private GTLaserBeamParticle createALParticles(Vector3 startPos, Vector3 endPos) {
         return (new GTLaserBeamParticle(this, startPos, endPos)).setBody(LASER_LOCATION).setBeamHeight(0.125F).setDoubleVertical(true).setHead(LASER_HEAD_LOCATION).setHeadWidth(0.1F).setEmit(0.2F);
     }
 
     @Override
     public void addInformation(ItemStack stack,
-                                World world,
-                                List<String> tooltip,
+                               World world,
+                               List<String> tooltip,
                                boolean advanced) {
         super.addInformation(stack, world, tooltip, advanced);
         tooltip.add(I18n.format("gtqtcore.machine.large_circuit_assembly_line.tooltip.1"));
@@ -318,6 +323,7 @@ public class MetaTileEntityLargeCircuitAssemblyLine extends MultiMapMultiblockCo
 
     /**
      * This is an easy method to get layer of this machine, you do not need to catch current layer, just catch number of item import hatch.
+     *
      * @return Number (current) of item import bus in multiblock structure.
      */
     private int getInputInventorySize() {
@@ -328,8 +334,9 @@ public class MetaTileEntityLargeCircuitAssemblyLine extends MultiMapMultiblockCo
     private class LargeCircuitAssemblyLineRecipeLogic extends ComputationRecipeLogic {
 
         public LargeCircuitAssemblyLineRecipeLogic(RecipeMapMultiblockController tileEntity) {
-            super(tileEntity,ComputationType.SPORADIC);
+            super(tileEntity, ComputationType.SPORADIC);
         }
+
         /**
          * @return Check if machine in Circuit Assembler mode.
          */

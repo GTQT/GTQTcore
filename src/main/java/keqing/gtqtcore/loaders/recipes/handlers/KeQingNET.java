@@ -1184,7 +1184,8 @@ public class KeQingNET {
                 .duration(4000).EUt(1920).buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(BIOLOGICAL_REACTION, 4)
+                .input(CHEMICAL_REACTOR[3], 4)
+                .input(BIO_REACTOR[3], 4)
                 .input(circuit, Tier.HV, 4)
                 .input(ELECTRIC_PUMP_HV, 4)
                 .input(ROBOT_ARM_HV, 4)
@@ -1801,7 +1802,8 @@ public class KeQingNET {
 
         //BIOLOGICAL_REACTION
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .inputs(HULL[3].getStackForm(16))
+                .input(CHEMICAL_BATH[3], 4)
+                .input(BIO_REACTOR[3], 4)
                 .input(circuit, Tier.MV, 8)
                 .input(ELECTRIC_MOTOR_MV, 16)
                 .input(ELECTRIC_PUMP_MV, 16)

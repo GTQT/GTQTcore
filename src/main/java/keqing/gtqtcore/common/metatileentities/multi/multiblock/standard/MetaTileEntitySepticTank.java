@@ -7,10 +7,7 @@ import gregtech.api.capability.impl.EnergyContainerList;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
-import gregtech.api.metatileentity.multiblock.IMultiblockPart;
-import gregtech.api.metatileentity.multiblock.MultiblockAbility;
-import gregtech.api.metatileentity.multiblock.MultiblockDisplayText;
-import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
+import gregtech.api.metatileentity.multiblock.*;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
@@ -29,7 +26,6 @@ import gregtech.common.blocks.BlockWireCoil.CoilType;
 import gregtech.core.sound.GTSoundEvents;
 import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
-import keqing.gtqtcore.api.metaileentity.GTQTRecipeMapMultiblockController;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
@@ -52,62 +48,44 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.List;
 
 import static gregtech.api.GTValues.V;
-import static gregtech.api.GTValues.VA;
 
-public class MetaTileEntitySepticTank extends GTQTRecipeMapMultiblockController implements IHeatingCoil {
+public class MetaTileEntitySepticTank extends MultiMapMultiblockController implements IHeatingCoil {
     private int tier;
     private int blastFurnaceTemperature;
+
+    public MetaTileEntitySepticTank(ResourceLocation metaTileEntityId) {
+        super(metaTileEntityId, new RecipeMap[]{
+                RecipeMaps.FERMENTING_RECIPES,
+                RecipeMaps.BREWING_RECIPES
+        });
+        this.recipeMapWorkable = new SepticTankWorkableHandler(this);
+    }
 
     @Override
     public String[] getDescription() {
         return new String[]{I18n.format("gtqt.tooltip.update")};
     }
 
-    public MetaTileEntitySepticTank(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, new RecipeMap[] {
-                RecipeMaps.FERMENTING_RECIPES,
-                RecipeMaps.BREWING_RECIPES
-        });
-        this.recipeMapWorkable = new SepticTankWorkableHandler(this);
-    }
-    private class SepticTankWorkableHandler extends MultiblockRecipeLogic {
-
-        public SepticTankWorkableHandler(RecipeMapMultiblockController tileEntity) {
-            super(tileEntity);
-        }
-        protected void modifyOverclockPre( int[] values,  IRecipePropertyStorage storage) {
-            super.modifyOverclockPre(values, storage);
-            values[0] = OverclockingLogic.applyCoilEUtDiscount(values[0], ((IHeatingCoil)this.metaTileEntity).getCurrentTemperature(), (Integer)storage.getRecipePropertyValue(TemperatureProperty.getInstance(), 0));
-        }
-
-        protected  int[] runOverclockingLogic( IRecipePropertyStorage propertyStorage, int recipeEUt, long maxVoltage, int duration, int amountOC) {
-            return OverclockingLogic.heatingCoilOverclockingLogic(Math.abs(recipeEUt), maxVoltage, duration, amountOC, ((IHeatingCoil)this.metaTileEntity).getCurrentTemperature(), (Integer)propertyStorage.getRecipePropertyValue(TemperatureProperty.getInstance(), 0));
-        }
-        @Override
-        public int getParallelLimit() {
-            return tier;
-        }
-        public long getMaxVoltage() {
-            return Math.min(super.getMaxVoltage(), V[tier]);
-        }
-    }
     @Override
     public void receiveCustomData(int dataId, PacketBuffer buf) {
         super.receiveCustomData(dataId, buf);
-        if(dataId == GTQTValue.UPDATE_TIER10){
+        if (dataId == GTQTValue.UPDATE_TIER10) {
             this.tier = buf.readInt();
         }
-        if(dataId == GTQTValue.REQUIRE_DATA_UPDATE10){
-            this.writeCustomData(GTQTValue.UPDATE_TIER10,buf1 -> buf1.writeInt(this.tier));
+        if (dataId == GTQTValue.REQUIRE_DATA_UPDATE10) {
+            this.writeCustomData(GTQTValue.UPDATE_TIER10, buf1 -> buf1.writeInt(this.tier));
         }
     }
+
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntitySepticTank(metaTileEntityId);
     }
+
     public int getParallelLimit() {
         return (int) Math.pow(2, tier);
     }
+
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         MultiblockDisplayText.builder(textList, isStructureFormed())
@@ -148,10 +126,10 @@ public class MetaTileEntitySepticTank extends GTQTRecipeMapMultiblockController 
         this.energyContainer = new EnergyContainerList(getAbilities(MultiblockAbility.INPUT_ENERGY));
         Object tier = context.get("ChemicalPlantCasingTieredStats");
         this.tier = GTQTUtil.getOrDefault(() -> tier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)tier).getIntTier(),
+                () -> ((WrappedIntTired) tier).getIntTier(),
                 0);
 
-        this.writeCustomData(GTQTValue.UPDATE_TIER10,buf -> buf.writeInt(this.tier));
+        this.writeCustomData(GTQTValue.UPDATE_TIER10, buf -> buf.writeInt(this.tier));
     }
 
     @Override
@@ -159,6 +137,7 @@ public class MetaTileEntitySepticTank extends GTQTRecipeMapMultiblockController 
         super.invalidateStructure();
         this.blastFurnaceTemperature = 0;
     }
+
     @Override
     public void writeInitialSyncData(PacketBuffer buf) {
         super.writeInitialSyncData(buf);
@@ -170,6 +149,7 @@ public class MetaTileEntitySepticTank extends GTQTRecipeMapMultiblockController 
         super.receiveInitialSyncData(buf);
         this.tier = buf.readInt();
     }
+
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
@@ -188,7 +168,7 @@ public class MetaTileEntitySepticTank extends GTQTRecipeMapMultiblockController 
     }
 
     protected IBlockState getCasingState() {
-            return GTQTMetaBlocks.TURBINE_CASING.getState(GTQTTurbineCasing.TurbineCasingType.BRICK);
+        return GTQTMetaBlocks.TURBINE_CASING.getState(GTQTTurbineCasing.TurbineCasingType.BRICK);
     }
 
     @Override
@@ -226,8 +206,9 @@ public class MetaTileEntitySepticTank extends GTQTRecipeMapMultiblockController 
             }
         }
     }
+
     @Override
-    public void addInformation(ItemStack stack,  World world,  List<String> tooltip,
+    public void addInformation(ItemStack stack, World world, List<String> tooltip,
                                boolean advanced) {
         super.addInformation(stack, world, tooltip, advanced);
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("人生就是一场漂流,漂到哪算哪"));
@@ -271,5 +252,30 @@ public class MetaTileEntitySepticTank extends GTQTRecipeMapMultiblockController 
                 new TextComponentTranslation(TextFormattingUtil.formatNumbers(blastFurnaceTemperature) + "K")
                         .setStyle(new Style().setColor(TextFormatting.RED))));
         return list;
+    }
+
+    private class SepticTankWorkableHandler extends MultiblockRecipeLogic {
+
+        public SepticTankWorkableHandler(RecipeMapMultiblockController tileEntity) {
+            super(tileEntity);
+        }
+
+        protected void modifyOverclockPre(int[] values, IRecipePropertyStorage storage) {
+            super.modifyOverclockPre(values, storage);
+            values[0] = OverclockingLogic.applyCoilEUtDiscount(values[0], ((IHeatingCoil) this.metaTileEntity).getCurrentTemperature(), storage.getRecipePropertyValue(TemperatureProperty.getInstance(), 0));
+        }
+
+        protected int[] runOverclockingLogic(IRecipePropertyStorage propertyStorage, int recipeEUt, long maxVoltage, int duration, int amountOC) {
+            return OverclockingLogic.heatingCoilOverclockingLogic(Math.abs(recipeEUt), maxVoltage, duration, amountOC, ((IHeatingCoil) this.metaTileEntity).getCurrentTemperature(), propertyStorage.getRecipePropertyValue(TemperatureProperty.getInstance(), 0));
+        }
+
+        @Override
+        public int getParallelLimit() {
+            return tier;
+        }
+
+        public long getMaxVoltage() {
+            return Math.min(super.getMaxVoltage(), V[tier]);
+        }
     }
 }

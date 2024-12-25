@@ -162,7 +162,7 @@ public class GoowareCircuits {
                 .input(dust, Sugar)
                 .fluidInputs(Hydrogen.getFluid(1000))
                 .fluidInputs(Nitrogen.getFluid(1000))
-                .fluidOutputs(Biotin.getFluid(1000))
+                .fluidOutputs(Biotin.getFluid(2000))
                 .EUt(VH[IV])
                 .duration(2 * SECOND)
                 .buildAndRegister();
@@ -173,7 +173,7 @@ public class GoowareCircuits {
                 .input(dust, Sugar)
                 .fluidInputs(Hydrogen.getFluid(1000))
                 .fluidInputs(Nitrogen.getFluid(1000))
-                .fluidOutputs(Biotin.getFluid(1000))
+                .fluidOutputs(Biotin.getFluid(2000))
                 .EUt(VH[IV])
                 .duration(2 * SECOND)
                 .buildAndRegister();
@@ -184,7 +184,7 @@ public class GoowareCircuits {
                 .input(dust, Sugar)
                 .fluidInputs(Hydrogen.getFluid(1000))
                 .fluidInputs(Nitrogen.getFluid(1000))
-                .fluidOutputs(Biotin.getFluid(1000))
+                .fluidOutputs(Biotin.getFluid(2000))
                 .EUt(VH[IV])
                 .duration(2 * SECOND)
                 .buildAndRegister();
@@ -195,7 +195,7 @@ public class GoowareCircuits {
                 .input(dust, Sugar)
                 .fluidInputs(Hydrogen.getFluid(1000))
                 .fluidInputs(Nitrogen.getFluid(1000))
-                .fluidOutputs(Biotin.getFluid(1000))
+                .fluidOutputs(Biotin.getFluid(2000))
                 .EUt(VH[IV])
                 .duration(2 * SECOND)
                 .buildAndRegister();

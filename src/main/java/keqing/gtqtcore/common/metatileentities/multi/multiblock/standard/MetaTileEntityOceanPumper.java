@@ -58,7 +58,7 @@ public class MetaTileEntityOceanPumper extends MultiblockWithDisplayBase impleme
     private IMultipleTankHandler outputTankInventory;
 
     private int drainRate;
-    private int BASE_EU_CONSUMPTION_PER_PUMP = 128;
+    private final int BASE_EU_CONSUMPTION_PER_PUMP = 128;
 
     private boolean isWorking;
     private boolean isWorkingEnabled = true;
@@ -77,11 +77,13 @@ public class MetaTileEntityOceanPumper extends MultiblockWithDisplayBase impleme
         super.writeInitialSyncData(buf);
         buf.writeBoolean(isWorking);
     }
+
     @Override
     public void receiveInitialSyncData(PacketBuffer buf) {
         super.receiveInitialSyncData(buf);
         this.isWorking = buf.readBoolean();
     }
+
     @Override
     public void receiveCustomData(int dataId, PacketBuffer buf) {
         super.receiveCustomData(dataId, buf);
@@ -114,18 +116,11 @@ public class MetaTileEntityOceanPumper extends MultiblockWithDisplayBase impleme
         if (this.isActive())
             this.setActive(false);
     }
+
     private void initializeAbilities() {
         List<IEnergyContainer> energyInputs = getAbilities(MultiblockAbility.INPUT_ENERGY);
         this.energyContainers = new EnergyContainerList(energyInputs);
         this.outputTankInventory = new FluidTankList(false, getAbilities(MultiblockAbility.EXPORT_FLUIDS));
-    }
-
-    public void setActive(boolean Value) {
-        this.isWorking = Value;
-        if (!getWorld().isRemote) {
-            markDirty();
-            this.writeCustomData(WORKABLE_ACTIVE, b -> b.writeBoolean(this.isWorking));
-        }
     }
 
     protected int getEnergyConsumedPerPump() {
@@ -143,10 +138,12 @@ public class MetaTileEntityOceanPumper extends MultiblockWithDisplayBase impleme
         }
         return false;
     }
+
     @Override
     public boolean isMultiblockPartWeatherResistant(@Nonnull IMultiblockPart part) {
         return true;
     }
+
     public boolean isInValidLocation() {
         Biome biome = getWorld().getBiome(getPos());
         Set<BiomeDictionary.Type> biomeTypes = BiomeDictionary.getTypes(biome);
@@ -155,16 +152,12 @@ public class MetaTileEntityOceanPumper extends MultiblockWithDisplayBase impleme
             return false;
         }
 
-        if (biomeTypes.contains(BiomeDictionary.Type.WATER)) {
-            return true;
-        }
-
-        return false;
+        return biomeTypes.contains(BiomeDictionary.Type.WATER);
     }
 
     public boolean insertFluid(boolean simulate) {
         if (!isInValidLocation()) return false;
-        int fillamount = (int)Math.min(1L * Integer.MAX_VALUE, 500L * (1 << (GTUtility.getTierByVoltage(this.energyContainers.getInputVoltage()) - 1) * 2));
+        int fillamount = (int) Math.min((long) Integer.MAX_VALUE, 500L * (1L << (GTUtility.getTierByVoltage(this.energyContainers.getInputVoltage()) - 1) * 2));
         FluidStack Seawater = GTQTMaterials.SeaWater.getFluid(fillamount);
         int caninsertamount = outputTankInventory.fill(Seawater, false);
         if (!simulate) {
@@ -191,7 +184,6 @@ public class MetaTileEntityOceanPumper extends MultiblockWithDisplayBase impleme
         boolean isWorkingNow = energyContainers.getEnergyStored() >= getEnergyConsumedPerPump() && this.isWorkingEnabled();
 
 
-
         if (isWorkingNow != isWorking) {
             setActive(isWorkingNow);
         }
@@ -216,7 +208,6 @@ public class MetaTileEntityOceanPumper extends MultiblockWithDisplayBase impleme
         notifyBlockUpdate();
     }
 
-
     @Override
     public <T> T getCapability(Capability<T> capability, EnumFacing side) {
         if (capability == GregtechTileCapabilities.CAPABILITY_CONTROLLABLE) {
@@ -224,6 +215,7 @@ public class MetaTileEntityOceanPumper extends MultiblockWithDisplayBase impleme
         }
         return super.getCapability(capability, side);
     }
+
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
@@ -239,8 +231,7 @@ public class MetaTileEntityOceanPumper extends MultiblockWithDisplayBase impleme
             if (this.isActive() && drainEnergy(true)) {
                 textList.add(new TextComponentTranslation("gregtech.machine.miner.working").setStyle(new Style().setColor(TextFormatting.GOLD)));
                 textList.add(new TextComponentTranslation("当前抽取速率：%s", drainRate));
-            }
-            else if (!drainEnergy(true))
+            } else if (!drainEnergy(true))
                 textList.add(new TextComponentTranslation("gregtech.machine.miner.needspower").setStyle(new Style().setColor(TextFormatting.RED)));
             else if (!this.isWorkingEnabled())
                 textList.add(new TextComponentTranslation("gregtech.multiblock.work_paused"));
@@ -249,12 +240,11 @@ public class MetaTileEntityOceanPumper extends MultiblockWithDisplayBase impleme
         }
     }
 
-
     @Override
     protected BlockPattern createStructurePattern() {
         // BLYAAAAAAAAAAAAAAAT
         return FactoryBlockPattern.start()
-                .aisle("FF***********FF", "FF***********FF", "***************", "***************", "***************", "***************", "***************", "***************", "***************", "***************", "***************", "***************", "***************", "***************" ,"***************", "***************")
+                .aisle("FF***********FF", "FF***********FF", "***************", "***************", "***************", "***************", "***************", "***************", "***************", "***************", "***************", "***************", "***************", "***************", "***************", "***************")
                 .aisle("FF***********FF", "FF***********FF", "*FF*********FF*", "*FF*********FF*", "***************", "*****FFFFF*****", "***************", "***************", "***************", "***************", "***************", "***************", "***************", "***************", "***************", "***************")
                 .aisle("***************", "***************", "*FF*********FF*", "*FF*********FF*", "**FFFFFFFFFFF**", "**FFFFFFFFFFF**", "***************", "***************", "***************", "***************", "***************", "***************", "***************", "***************", "***************", "***************")
                 .aisle("***************", "***************", "***************", "***************", "**FFF*****FFF**", "**FFFFFFFFFFF**", "***FF*****FF***", "***FF*****FF***", "***************", "***************", "***************", "***************", "***************", "***************", "***************", "***************")
@@ -270,7 +260,7 @@ public class MetaTileEntityOceanPumper extends MultiblockWithDisplayBase impleme
                 .aisle("***************", "***************", "***************", "***************", "**FFF*****FFF**", "**FFFFFFFFFFF**", "***FF*****FF***", "***FF*****FF***", "***************", "***************", "***************", "***************", "***************", "***************", "***************", "***************")
                 .aisle("***************", "***************", "*FF*********FF*", "*FF*********FF*", "**FFFFFFFFFFF**", "**FFFFFFFFFFF**", "***************", "***************", "***************", "***************", "***************", "***************", "***************", "***************", "***************", "***************")
                 .aisle("FF***********FF", "FF***********FF", "*FF*********FF*", "*FF*********FF*", "***************", "*****FFFFF*****", "***************", "***************", "***************", "***************", "***************", "***************", "***************", "***************", "***************", "***************")
-                .aisle("FF***********FF", "FF***********FF", "***************", "***************", "***************", "***************", "***************", "***************", "***************", "***************", "***************", "***************", "***************", "***************" ,"***************", "***************")
+                .aisle("FF***********FF", "FF***********FF", "***************", "***************", "***************", "***************", "***************", "***************", "***************", "***************", "***************", "***************", "***************", "***************", "***************", "***************")
                 .where('S', selfPredicate())
                 .where('C', states(getCasingState()).or(abilities(MultiblockAbility.EXPORT_FLUIDS)).or(abilities(MultiblockAbility.INPUT_ENERGY)).or(abilities(MultiblockAbility.MAINTENANCE_HATCH)))
                 .where('P', states(getPipeCasingState()))
@@ -324,7 +314,13 @@ public class MetaTileEntityOceanPumper extends MultiblockWithDisplayBase impleme
         return isWorking;
     }
 
-
+    public void setActive(boolean Value) {
+        this.isWorking = Value;
+        if (!getWorld().isRemote) {
+            markDirty();
+            this.writeCustomData(WORKABLE_ACTIVE, b -> b.writeBoolean(this.isWorking));
+        }
+    }
 
 
 }

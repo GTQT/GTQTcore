@@ -11,10 +11,7 @@ import gregtech.api.gui.widgets.ImageCycleButtonWidget;
 import gregtech.api.gui.widgets.WidgetGroup;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
-import gregtech.api.metatileentity.multiblock.IMultiblockPart;
-import gregtech.api.metatileentity.multiblock.IProgressBarMultiblock;
-import gregtech.api.metatileentity.multiblock.MultiblockAbility;
-import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
+import gregtech.api.metatileentity.multiblock.*;
 import gregtech.api.pattern.*;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
@@ -30,7 +27,6 @@ import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityFluidHatch;
-import keqing.gtqtcore.api.metaileentity.GTQTRecipeMapMultiblockController;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
@@ -52,16 +48,38 @@ import java.util.LinkedList;
 import java.util.List;
 
 import static gregtech.api.GTValues.V;
-import static gregtech.api.GTValues.VA;
 import static gregtech.api.unification.material.Materials.Steam;
 import static gregtech.api.util.RelativeDirection.*;
+
 //闪蒸
-public class MetaTileEntityMSF extends GTQTRecipeMapMultiblockController implements  IProgressBarMultiblock {
+public class MetaTileEntityMSF extends MultiMapMultiblockController implements IProgressBarMultiblock {
+    int[] steam = new int[3];
+    int updatetime = 1;
+    FluidStack STEAM = Steam.getFluid(1000 * updatetime);
     private int coilLevel;
     private int number;
-    int[] steam=new int[3];
 
-    int updatetime=1;
+    public MetaTileEntityMSF(ResourceLocation metaTileEntityId) {
+        super(metaTileEntityId, new RecipeMap[]{
+                GTQTcoreRecipeMaps.SFM,
+                GTQTcoreRecipeMaps.DISTILLATION_KETTLE,
+                RecipeMaps.DISTILLATION_RECIPES
+        });
+        this.recipeMapWorkable = new MFSWorkableHandler(this);
+    }
+
+    private static IBlockState getCasingAState() {
+        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.ALUMINIUM_FROSTPROOF);
+    }
+
+    private static IBlockState getCasingBState() {
+        return MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.STEEL_PIPE);
+    }
+
+    private static IBlockState getFrameState() {
+        return MetaBlocks.FRAMES.get(Materials.Aluminium).getBlock(Materials.Aluminium);
+    }
+
     @Override
     @Nonnull
     protected Widget getFlexButton(int x, int y, int width, int height) {
@@ -79,14 +97,12 @@ public class MetaTileEntityMSF extends GTQTRecipeMapMultiblockController impleme
     }
 
     private void incrementThreshold(Widget.ClickData clickData) {
-        this.updatetime = MathHelper.clamp(updatetime+1, 1, 20);
+        this.updatetime = MathHelper.clamp(updatetime + 1, 1, 20);
     }
 
     private void decrementThreshold(Widget.ClickData clickData) {
-        this.updatetime = MathHelper.clamp(updatetime-1, 1, 20);
+        this.updatetime = MathHelper.clamp(updatetime - 1, 1, 20);
     }
-
-    FluidStack STEAM = Steam.getFluid(1000*updatetime);
 
     @Override
     public void update() {
@@ -94,13 +110,13 @@ public class MetaTileEntityMSF extends GTQTRecipeMapMultiblockController impleme
         if (steam[0] <= 9000) {
             IMultipleTankHandler inputTank = getInputFluidInventory();
             if (STEAM.isFluidStackIdentical(inputTank.drain(STEAM, false))) {
-                    inputTank.drain(STEAM, true);
-                    steam[0] = steam[0] + 80*coilLevel*updatetime;
+                inputTank.drain(STEAM, true);
+                steam[0] = steam[0] + 80 * coilLevel * updatetime;
 
             }
         }
 
-        for(int i=0;i<coilLevel;i++) {
+        for (int i = 0; i < coilLevel; i++) {
             if (steam[0] > steam[1]) {
                 steam[0] = steam[0] - 40;
                 steam[1] = steam[1] + 30;
@@ -128,11 +144,10 @@ public class MetaTileEntityMSF extends GTQTRecipeMapMultiblockController impleme
         data.setInteger("fluid1", steam[0]);
         data.setInteger("fluid2", steam[1]);
         data.setInteger("fluid3", steam[2]);
-        data.setInteger("updatetime",updatetime);
+        data.setInteger("updatetime", updatetime);
         return super.writeToNBT(data);
     }
 
-   
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         steam[0] = data.getInteger("fluid1");
@@ -141,14 +156,6 @@ public class MetaTileEntityMSF extends GTQTRecipeMapMultiblockController impleme
         updatetime = data.getInteger("updatetime");
     }
 
-    public MetaTileEntityMSF(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, new RecipeMap[] {
-                GTQTcoreRecipeMaps.SFM,
-                GTQTcoreRecipeMaps.DISTILLATION_KETTLE,
-                RecipeMaps.DISTILLATION_RECIPES
-        });
-        this.recipeMapWorkable = new MFSWorkableHandler(this);
-    }
     @Override
     public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
@@ -157,53 +164,7 @@ public class MetaTileEntityMSF extends GTQTRecipeMapMultiblockController impleme
         tooltip.add(I18n.format("gregtech.machine.msf.tooltip.3"));
         tooltip.add(I18n.format("gregtech.machine.msf.tooltip.4"));
     }
-    private class MFSWorkableHandler extends MultiblockRecipeLogic {
-        private boolean isDistilleryMode() {
-            return this.getRecipeMap() == GTQTcoreRecipeMaps.DISTILLATION_KETTLE;
-        }
-        public MFSWorkableHandler(RecipeMapMultiblockController tileEntity) {
-            super(tileEntity);
-        }
-        @Override
-        public int getParallelLimit() {
-            if(getStatue()) {
-                if (isDistilleryMode()) {
-                    return number*3;
-                }
-                return number*2;
-            }
-            return number;
-        }
 
-        public long getMaxVoltage() {
-            return V[4];
-        }
-
-        @Override
-        public void setMaxProgress(int maxProgress)
-        {
-            if(getStatue()) {
-                maxProgressTime = maxProgress /(number*2);
-            }
-            else this.maxProgressTime = maxProgress/number;
-        }
-        public  boolean getStatue()
-        {
-            return steam[0] > 6000 && steam[1] > 6000 && steam[2] > 6000;
-        }
-        protected void updateRecipeProgress() {
-            if (canRecipeProgress && drawEnergy(recipeEUt, true)){
-                this.drawEnergy(this.recipeEUt, false);
-                if (++progressTime > maxProgressTime)
-                {
-                    steam[0]=(int) (steam[0]*0.24);
-                    steam[1]=(int) (steam[1]*0.48);
-                    steam[2]=(int) (steam[2]*0.64);
-                    completeRecipe();
-                }
-            }
-        }
-    }
     @Override
     protected void addWarningText(List<ITextComponent> textList) {
         super.addWarningText(textList);
@@ -214,6 +175,7 @@ public class MetaTileEntityMSF extends GTQTRecipeMapMultiblockController impleme
             }
         }
     }
+
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
@@ -226,10 +188,11 @@ public class MetaTileEntityMSF extends GTQTRecipeMapMultiblockController impleme
             this.coilLevel = BlockWireCoil.CoilType.CUPRONICKEL.getLevel();
         }
     }
-    public  boolean getStatue()
-    {
+
+    public boolean getStatue() {
         return steam[0] > 6000 && steam[1] > 6000 && steam[2] > 6000;
     }
+
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
@@ -238,8 +201,8 @@ public class MetaTileEntityMSF extends GTQTRecipeMapMultiblockController impleme
             int SteamAmount = SteamStack == null ? 0 : SteamStack.amount;
             textList.add(new TextComponentTranslation("gtqtcore.msf.count1", number, coilLevel, TextFormattingUtil.formatNumbers(SteamAmount)));
         }
-        textList.add(new TextComponentTranslation("gtqtcore.msf.count2", (double)steam[0]/1000,(double)steam[1]/1000,(double)steam[2]/1000));
-        if(getStatue())  textList.add(new TextComponentTranslation("gtqtcore.msf.good"));
+        textList.add(new TextComponentTranslation("gtqtcore.msf.count2", (double) steam[0] / 1000, (double) steam[1] / 1000, (double) steam[2] / 1000));
+        if (getStatue()) textList.add(new TextComponentTranslation("gtqtcore.msf.good"));
         else textList.add(new TextComponentTranslation("gtqtcore.msf.no"));
     }
 
@@ -251,38 +214,38 @@ public class MetaTileEntityMSF extends GTQTRecipeMapMultiblockController impleme
     @Override
     protected BlockPattern createStructurePattern() {
         FactoryBlockPattern pattern = FactoryBlockPattern.start(RIGHT, BACK, UP)
-                .aisle("HHH","HHH", "HHH", "HHH", " H ")
-                .aisle("HHH","HHH", "HHH", "HHH", " S ")
-                .aisle("HHH","HHH", "HHH", "HHH", "FHF")
-                .aisle("F F","FUF", "FUF", "FUF", "F F")
-                .aisle("F F","FUF", "FUF", "FUF", "F F")
-                .aisle("F F","FUF", "FUF", "FUF", "F F")
-                .aisle("F F","FUF", "FUF", "FUF", "F F")
-                .aisle("F F","YYY", "YCO", "YYY", "FYF").setRepeatable(1, 12)
-                .aisle("F F","YYY", "YYB", "YYY", " Y ")
+                .aisle("HHH", "HHH", "HHH", "HHH", " H ")
+                .aisle("HHH", "HHH", "HHH", "HHH", " S ")
+                .aisle("HHH", "HHH", "HHH", "HHH", "FHF")
+                .aisle("F F", "FUF", "FUF", "FUF", "F F")
+                .aisle("F F", "FUF", "FUF", "FUF", "F F")
+                .aisle("F F", "FUF", "FUF", "FUF", "F F")
+                .aisle("F F", "FUF", "FUF", "FUF", "F F")
+                .aisle("F F", "YYY", "YCO", "YYY", "FYF").setRepeatable(1, 12)
+                .aisle("F F", "YYY", "YYB", "YYY", " Y ")
                 .where('S', selfPredicate())
-                .where('Y',states(getCasingAState()))
-                .where('U',states(getCasingBState()))
-                .where('H',states(getCasingAState())
+                .where('Y', states(getCasingAState()))
+                .where('U', states(getCasingBState()))
+                .where('H', states(getCasingAState())
                         .or(abilities(MultiblockAbility.MAINTENANCE_HATCH).setExactLimit(1).setPreviewCount(1))
                         .or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(2).setPreviewCount(2))
                         .or(abilities(MultiblockAbility.IMPORT_ITEMS).setExactLimit(1).setPreviewCount(1))
                         .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setMinGlobalLimited(1).setMaxGlobalLimited(4).setPreviewCount(2))
                 )
-                .where('B',(abilities(MultiblockAbility.EXPORT_ITEMS)))
-                .where('O',metaTileEntities(MultiblockAbility.REGISTRY.get(MultiblockAbility.EXPORT_FLUIDS).stream()
-                                .filter(mte->(mte instanceof MetaTileEntityFluidHatch))
-                                .toArray(MetaTileEntity[]::new)))
+                .where('B', (abilities(MultiblockAbility.EXPORT_ITEMS)))
+                .where('O', metaTileEntities(MultiblockAbility.REGISTRY.get(MultiblockAbility.EXPORT_FLUIDS).stream()
+                        .filter(mte -> (mte instanceof MetaTileEntityFluidHatch))
+                        .toArray(MetaTileEntity[]::new)))
                 .where('C', coilPredicate())
                 .where('F', states(getFrameState()))
                 .where(' ', any());
         return pattern.build();
     }
+
     private TraceabilityPredicate coilPredicate() {
         return new TraceabilityPredicate((blockWorldState) -> {
             IBlockState blockState = blockWorldState.getBlockState();
-            if (blockState.getBlock() instanceof BlockWireCoil) {
-                BlockWireCoil blockWireCoil = (BlockWireCoil) blockState.getBlock();
+            if (blockState.getBlock() instanceof BlockWireCoil blockWireCoil) {
                 BlockWireCoil.CoilType coilType = blockWireCoil.getState(blockState);
                 Object currentCoilType = blockWorldState.getMatchContext().getOrPut("CoilType", coilType);
                 if (!currentCoilType.toString().equals(coilType.getName())) {
@@ -298,6 +261,7 @@ public class MetaTileEntityMSF extends GTQTRecipeMapMultiblockController impleme
             }
         }, () -> Arrays.stream(BlockWireCoil.CoilType.values()).map((type) -> new BlockInfo(MetaBlocks.WIRE_COIL.getState(type), null)).toArray(BlockInfo[]::new)).addTooltips("gregtech.multiblock.pattern.error.coils");
     }
+
     public boolean hasMufflerMechanics() {
         return false;
     }
@@ -307,6 +271,7 @@ public class MetaTileEntityMSF extends GTQTRecipeMapMultiblockController impleme
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
         return Textures.FROST_PROOF_CASING;
     }
+
     @SideOnly(Side.CLIENT)
     @Nonnull
     @Override
@@ -323,12 +288,13 @@ public class MetaTileEntityMSF extends GTQTRecipeMapMultiblockController impleme
     public void addBarHoverText(List<ITextComponent> hoverList, int index) {
         ITextComponent cwutInfo = TextComponentUtil.stringWithColor(
                 TextFormatting.AQUA,
-                (steam[index] + 1000)+ " / " + (10000) + " kPa");
+                (steam[index] + 1000) + " / " + (10000) + " kPa");
         hoverList.add(TextComponentUtil.translationWithColor(
                 TextFormatting.GRAY,
                 "gregtech.multiblock.msf.computation",
                 cwutInfo));
     }
+
     @Override
     public double getFillPercentage(int index) {
         return (double) (steam[index] + 1000) / (10000);
@@ -339,13 +305,51 @@ public class MetaTileEntityMSF extends GTQTRecipeMapMultiblockController impleme
         return GuiTextures.PROGRESS_BAR_HPCA_COMPUTATION;
     }
 
-    private static IBlockState getCasingAState() {
-        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.ALUMINIUM_FROSTPROOF);
-    }
-    private static IBlockState getCasingBState() {
-        return MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.STEEL_PIPE);
-    }
-    private static IBlockState getFrameState() {
-        return MetaBlocks.FRAMES.get(Materials.Aluminium).getBlock(Materials.Aluminium);
+    private class MFSWorkableHandler extends MultiblockRecipeLogic {
+        public MFSWorkableHandler(RecipeMapMultiblockController tileEntity) {
+            super(tileEntity);
+        }
+
+        private boolean isDistilleryMode() {
+            return this.getRecipeMap() == GTQTcoreRecipeMaps.DISTILLATION_KETTLE;
+        }
+
+        @Override
+        public int getParallelLimit() {
+            if (getStatue()) {
+                if (isDistilleryMode()) {
+                    return number * 3;
+                }
+                return number * 2;
+            }
+            return number;
+        }
+
+        public long getMaxVoltage() {
+            return V[4];
+        }
+
+        @Override
+        public void setMaxProgress(int maxProgress) {
+            if (getStatue()) {
+                maxProgressTime = maxProgress / (number * 2);
+            } else this.maxProgressTime = maxProgress / number;
+        }
+
+        public boolean getStatue() {
+            return steam[0] > 6000 && steam[1] > 6000 && steam[2] > 6000;
+        }
+
+        protected void updateRecipeProgress() {
+            if (canRecipeProgress && drawEnergy(recipeEUt, true)) {
+                this.drawEnergy(this.recipeEUt, false);
+                if (++progressTime > maxProgressTime) {
+                    steam[0] = (int) (steam[0] * 0.24);
+                    steam[1] = (int) (steam[1] * 0.48);
+                    steam[2] = (int) (steam[2] * 0.64);
+                    completeRecipe();
+                }
+            }
+        }
     }
 }

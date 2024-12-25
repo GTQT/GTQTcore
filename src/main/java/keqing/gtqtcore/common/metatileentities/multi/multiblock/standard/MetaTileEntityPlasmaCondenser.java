@@ -24,6 +24,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
 import java.util.List;
 
 import static keqing.gtqtcore.common.block.blocks.GTQTADVBlock.CasingType.ZirconiumCarbide;
@@ -33,6 +34,18 @@ public class MetaTileEntityPlasmaCondenser extends RecipeMapMultiblockController
     public MetaTileEntityPlasmaCondenser(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.PLASMA_CONDENSER_RECIPES);
         this.recipeMapWorkable = new MultiblockRecipeLogic(this, true);
+    }
+
+    private static IBlockState getCasingState() {
+        return GTQTMetaBlocks.ADV_BLOCK.getState(ZirconiumCarbide);
+    }
+
+    private static IBlockState getSecondCasingState() {
+        return MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.STEEL_GEARBOX);
+    }
+
+    private static IBlockState getBoilerCasingState() {
+        return MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.TUNGSTENSTEEL_PIPE);
     }
 
     @Override
@@ -58,18 +71,6 @@ public class MetaTileEntityPlasmaCondenser extends RecipeMapMultiblockController
                 .build();
     }
 
-    private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.ADV_BLOCK.getState(ZirconiumCarbide);
-    }
-
-    private static IBlockState getSecondCasingState() {
-        return MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.STEEL_GEARBOX);
-    }
-
-    private static IBlockState getBoilerCasingState() {
-        return MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.TUNGSTENSTEEL_PIPE);
-    }
-
     @SideOnly(Side.CLIENT)
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
@@ -83,7 +84,7 @@ public class MetaTileEntityPlasmaCondenser extends RecipeMapMultiblockController
     }
 
     @Override
-    public void addInformation( ItemStack stack,
+    public void addInformation(ItemStack stack,
                                World player,
                                List<String> tooltip,
                                boolean advanced) {

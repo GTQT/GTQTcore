@@ -616,7 +616,7 @@ public class EnzymesRecipes {
 
         ENZYMES_REACTION_RECIPES.recipeBuilder()
                 .fluidInputs(material2.getFluid(1000*tier))
-                .fluidInputs(RawGrowthMedium.getFluid(25*tier))
+                .fluidInputs(Biotin.getFluid(100*tier))
                 .fluidOutputs(material1.getFluid(10))
                 .EUt(VA[MV+tier])
                 .duration(120*tier)

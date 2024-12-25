@@ -53,14 +53,31 @@ import java.util.List;
 import static gregtech.api.GTValues.VA;
 
 public class MetaTileEntityDigester extends GTQTRecipeMapMultiblockOverwrite {
-    private int coilTier;
     protected int heatingCoilLevel;
     protected int heatingCoilDiscount;
+    int ParallelNum = 1;
+    private int coilTier;
+
     public MetaTileEntityDigester(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.DIGESTER_RECIPES);
         this.recipeMapWorkable = new MetaTileEntityDigesterWorkable(this);
     }
-     int ParallelNum=1;
+
+    private static IBlockState getCasingAState() {
+        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.TUNGSTENSTEEL_ROBUST);
+    }
+
+    private static IBlockState getCasingBState() {
+        return MetaBlocks.BOILER_FIREBOX_CASING.getState(BlockFireboxCasing.FireboxCasingType.TUNGSTENSTEEL_FIREBOX);
+    }
+
+    private static IBlockState getHeatState() {
+        return MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.TUNGSTENSTEEL_PIPE);
+    }
+
+    public static int getMaxParallel(int heatingCoilLevel) {
+        return heatingCoilLevel;
+    }
 
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("modern", modern);
@@ -71,18 +88,20 @@ public class MetaTileEntityDigester extends GTQTRecipeMapMultiblockOverwrite {
         super.readFromNBT(data);
         modern = data.getInteger("modern");
     }
+
     @Override
-    public boolean canBeDistinct() {return true;}
+    public boolean canBeDistinct() {
+        return true;
+    }
+
     @Override
     public void update() {
         super.update();
-        if (modern == 0)
-        {
-            ParallelNum=ParallelNumA;
+        if (modern == 0) {
+            ParallelNum = ParallelNumA;
         }
-        if (modern == 1)
-        {
-            P = (int) ((this.energyContainer.getEnergyStored() + energyContainer.getInputPerSec())/(getMinVa()==0?1:getMinVa()));
+        if (modern == 1) {
+            P = (int) ((this.energyContainer.getEnergyStored() + energyContainer.getInputPerSec()) / (getMinVa() == 0 ? 1 : getMinVa()));
             ParallelNum = Math.min(P, ParallelLim);
         }
         if (this.isActive()) {
@@ -93,12 +112,13 @@ public class MetaTileEntityDigester extends GTQTRecipeMapMultiblockOverwrite {
             }
         }
     }
-    public int getMinVa()
-    {
-        if((Math.min(this.energyContainer.getEnergyCapacity()/32,VA[coilTier])*20)==0)return 1;
-        return (int)(Math.min(this.energyContainer.getEnergyCapacity()/32,VA[coilTier]));
+
+    public int getMinVa() {
+        if ((Math.min(this.energyContainer.getEnergyCapacity() / 32, VA[coilTier]) * 20) == 0) return 1;
+        return (int) (Math.min(this.energyContainer.getEnergyCapacity() / 32, VA[coilTier]));
 
     }
+
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {
         return new MetaTileEntityDigester(metaTileEntityId);
@@ -107,14 +127,13 @@ public class MetaTileEntityDigester extends GTQTRecipeMapMultiblockOverwrite {
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         if (isStructureFormed()) {
-            if(modern==0) textList.add(new TextComponentTranslation("gtqtcore.tire1",heatingCoilLevel));
-            if(modern==1) textList.add(new TextComponentTranslation("gtqtcore.tire2",heatingCoilLevel));
-            textList.add(new TextComponentTranslation("gtqtcore.parr",ParallelNum,ParallelLim));
+            if (modern == 0) textList.add(new TextComponentTranslation("gtqtcore.tire1", heatingCoilLevel));
+            if (modern == 1) textList.add(new TextComponentTranslation("gtqtcore.tire2", heatingCoilLevel));
+            textList.add(new TextComponentTranslation("gtqtcore.parr", ParallelNum, ParallelLim));
             textList.add(new TextComponentTranslation("gregtech.multiblock.cracking_unit.energy", 100 - this.coilTier));
         }
         super.addDisplayText(textList);
     }
-
 
     @Override
     public void addInformation(ItemStack stack, @Nullable World player, @Nonnull List<String> tooltip, boolean advanced) {
@@ -122,7 +141,7 @@ public class MetaTileEntityDigester extends GTQTRecipeMapMultiblockOverwrite {
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("这是什么，塞进去煮煮", new Object[0]));
         tooltip.add(I18n.format("gtqtcore.multiblock.hb.tooltip.3"));
         tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.1"));
-        tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.2",24));
+        tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.2", 24));
         tooltip.add(I18n.format("gregtech.machine.cracker.gtqtupdate.1"));
     }
 
@@ -146,6 +165,7 @@ public class MetaTileEntityDigester extends GTQTRecipeMapMultiblockOverwrite {
                 .where(' ', any())
                 .build();
     }
+
     @Override
     public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
         super.renderMetaTileEntity(renderState, translation, pipeline);
@@ -153,9 +173,9 @@ public class MetaTileEntityDigester extends GTQTRecipeMapMultiblockOverwrite {
                 recipeMapWorkable.isActive(), recipeMapWorkable.isWorkingEnabled());
         if (recipeMapWorkable.isActive() && isStructureFormed()) {
             EnumFacing back = getFrontFacing().getOpposite();
-            for(float i=-2;i<=2;i++) {
-                for (float j = -2; j <=2; j++) {
-                    Matrix4 offset = translation.copy().translate(back.getXOffset() * 3+i, 0.6, back.getZOffset() * 3+j);
+            for (float i = -2; i <= 2; i++) {
+                for (float j = -2; j <= 2; j++) {
+                    Matrix4 offset = translation.copy().translate(back.getXOffset() * 3 + i, 0.6, back.getZOffset() * 3 + j);
                     CubeRendererState op = Textures.RENDER_STATE.get();
                     Textures.RENDER_STATE.set(new CubeRendererState(op.layer, CubeRendererState.PASS_MASK, op.world));
                     Textures.renderFace(renderState, offset,
@@ -167,12 +187,13 @@ public class MetaTileEntityDigester extends GTQTRecipeMapMultiblockOverwrite {
             }
         }
     }
+
     private void pollutionParticles() {
         BlockPos pos = this.getPos();
         EnumFacing facing = this.getFrontFacing().getOpposite();
-        float xPos = facing.getXOffset() *3 + pos.getX() + 0.5F;
-        float yPos = facing.getYOffset()  + pos.getY() + 0.25F;
-        float zPos = facing.getZOffset() *3 + pos.getZ() + 0.5F;
+        float xPos = facing.getXOffset() * 3 + pos.getX() + 0.5F;
+        float yPos = facing.getYOffset() + pos.getY() + 0.25F;
+        float zPos = facing.getZOffset() * 3 + pos.getZ() + 0.5F;
 
         float ySpd = facing.getYOffset() * 0.7F + 0.7F + 0.8F * GTValues.RNG.nextFloat();
 
@@ -182,9 +203,11 @@ public class MetaTileEntityDigester extends GTQTRecipeMapMultiblockOverwrite {
         arunMufflerEffect(xPos, yPos, zPos, +1F, ySpd, -1F);
         arunMufflerEffect(xPos, yPos, zPos, -1F, ySpd, +1F);
     }
+
     public void arunMufflerEffect(float xPos, float yPos, float zPos, float xSpd, float ySpd, float zSpd) {
-        this.getWorld().spawnParticle(EnumParticleTypes.SMOKE_LARGE, (double)xPos, (double)yPos, (double)zPos, (double)xSpd, (double)ySpd, (double)zSpd, new int[0]);
+        this.getWorld().spawnParticle(EnumParticleTypes.SMOKE_LARGE, xPos, yPos, zPos, xSpd, ySpd, zSpd);
     }
+
     private void damageEntitiesAndBreakSnow() {
         BlockPos middlePos = this.getPos();
         middlePos = middlePos.offset(getFrontFacing().getOpposite());
@@ -203,7 +226,7 @@ public class MetaTileEntityDigester extends GTQTRecipeMapMultiblockOverwrite {
         Object type = context.get("CoilType");
         Object coilType = context.get("CoilType");
         if (coilType instanceof IHeatingCoilBlockStats) {
-            this.coilTier = ((IHeatingCoilBlockStats)type).getTier();
+            this.coilTier = ((IHeatingCoilBlockStats) type).getTier();
             this.heatingCoilLevel = ((IHeatingCoilBlockStats) coilType).getLevel();
             this.heatingCoilDiscount = ((IHeatingCoilBlockStats) coilType).getEnergyDiscount();
         } else {
@@ -212,22 +235,10 @@ public class MetaTileEntityDigester extends GTQTRecipeMapMultiblockOverwrite {
             this.heatingCoilDiscount = BlockWireCoil.CoilType.CUPRONICKEL.getEnergyDiscount();
         }
 
-        ParallelLim=(int)Math.pow(2, coilTier);
-        ParallelNum=ParallelLim;
-    }
-    private static IBlockState getCasingAState() {
-        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.TUNGSTENSTEEL_ROBUST);
-    }
-    private static IBlockState getCasingBState() {
-        return MetaBlocks.BOILER_FIREBOX_CASING.getState(BlockFireboxCasing.FireboxCasingType.TUNGSTENSTEEL_FIREBOX);
-    }
-    private static IBlockState getHeatState() {
-        return MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.TUNGSTENSTEEL_PIPE);
+        ParallelLim = (int) Math.pow(2, coilTier);
+        ParallelNum = ParallelLim;
     }
 
-    public static int getMaxParallel(int heatingCoilLevel) {
-        return   heatingCoilLevel;
-    }
     @Override
     public void invalidateStructure() {
         super.invalidateStructure();
@@ -241,11 +252,13 @@ public class MetaTileEntityDigester extends GTQTRecipeMapMultiblockOverwrite {
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
         return Textures.ROBUST_TUNGSTENSTEEL_CASING;
     }
+
     @Nonnull
     @Override
     protected ICubeRenderer getFrontOverlay() {
         return GTQTTextures.COKING_TOWER_OVERLAY;
     }
+
     protected int getCoilTier() {
         return this.coilTier;
     }
@@ -261,15 +274,16 @@ public class MetaTileEntityDigester extends GTQTRecipeMapMultiblockOverwrite {
         public int getParallelLimit() {
             return ParallelNum;
         }
+
         public void setMaxProgress(int maxProgress) {
-            this.maxProgressTime = maxProgress*(100-heatingCoilLevel)/100;
+            this.maxProgressTime = maxProgress * (100 - heatingCoilLevel) / 100;
         }
 
         protected void modifyOverclockPost(int[] resultOverclock, @Nonnull IRecipePropertyStorage storage) {
             super.modifyOverclockPost(resultOverclock, storage);
-            int coilTier = ((MetaTileEntityDigester)this.metaTileEntity).getCoilTier();
+            int coilTier = ((MetaTileEntityDigester) this.metaTileEntity).getCoilTier();
             if (coilTier > 0) {
-                resultOverclock[0] = (int)((double)resultOverclock[0] * (100.0 - (double)coilTier)/100);
+                resultOverclock[0] = (int) ((double) resultOverclock[0] * (100.0 - (double) coilTier) / 100);
                 resultOverclock[0] = Math.max(1, resultOverclock[0]);
             }
         }

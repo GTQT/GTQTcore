@@ -79,6 +79,30 @@ public class MetaTileEntityIntegratedOreProcessor extends MultiblockWithDisplayB
         this.logic = new OreProcessorRecipeLogic(this);
     }
 
+    private static IBlockState getCasingState() {
+        return GTQTMetaBlocks.TURBINE_CASING.getState(GTQTTurbineCasing.TurbineCasingType.IRIDIUM_CASING);
+    }
+
+    private static IBlockState getSecondCasingState() {
+        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STAINLESS_CLEAN);
+    }
+
+    private static IBlockState getBoilerCasingState() {
+        return MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.TUNGSTENSTEEL_PIPE);
+    }
+
+    private static IBlockState getGlassState() {
+        return MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.LAMINATED_GLASS);
+    }
+
+    private static IBlockState getFrameState() {
+        return MetaBlocks.FRAMES.get(Materials.TungstenSteel).getBlock(Materials.TungstenSteel);
+    }
+
+    private static IBlockState getThirdCasingState() {
+        return MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.STEEL_GEARBOX);
+    }
+
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityIntegratedOreProcessor(metaTileEntityId);
@@ -170,25 +194,6 @@ public class MetaTileEntityIntegratedOreProcessor extends MultiblockWithDisplayB
                 .build();
     }
 
-    private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.TURBINE_CASING.getState(GTQTTurbineCasing.TurbineCasingType.IRIDIUM_CASING);
-    }
-    private static IBlockState getSecondCasingState() {
-        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STAINLESS_CLEAN);
-    }
-    private static IBlockState getBoilerCasingState() {
-        return MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.TUNGSTENSTEEL_PIPE);
-    }
-    private static IBlockState getGlassState() {
-        return MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.LAMINATED_GLASS);
-    }
-    private static IBlockState getFrameState() {
-        return MetaBlocks.FRAMES.get(Materials.TungstenSteel).getBlock(Materials.TungstenSteel);
-    }
-    private static IBlockState getThirdCasingState() {
-        return MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.STEEL_GEARBOX);
-    }
-
     @SideOnly(Side.CLIENT)
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
@@ -241,17 +246,23 @@ public class MetaTileEntityIntegratedOreProcessor extends MultiblockWithDisplayB
                 textList.add(new TextComponentTranslation("gregtech.multiblock.idling"));
             }
             switch (logic.getMode()) {
-                case 0 -> textList.add(new TextComponentTranslation("gtqtcore.machine.integrated_ore_processor.mode.0"));
-                case 1 -> textList.add(new TextComponentTranslation("gtqtcore.machine.integrated_ore_processor.mode.1"));
-                case 2 -> textList.add(new TextComponentTranslation("gtqtcore.machine.integrated_ore_processor.mode.2"));
-                case 3 -> textList.add(new TextComponentTranslation("gtqtcore.machine.integrated_ore_processor.mode.3"));
-                case 4 -> textList.add(new TextComponentTranslation("gtqtcore.machine.integrated_ore_processor.mode.4"));
-                default -> textList.add(new TextComponentTranslation("gtqtcore.machine.integrated_ore_processor.mode.error"));
+                case 0 ->
+                        textList.add(new TextComponentTranslation("gtqtcore.machine.integrated_ore_processor.mode.0"));
+                case 1 ->
+                        textList.add(new TextComponentTranslation("gtqtcore.machine.integrated_ore_processor.mode.1"));
+                case 2 ->
+                        textList.add(new TextComponentTranslation("gtqtcore.machine.integrated_ore_processor.mode.2"));
+                case 3 ->
+                        textList.add(new TextComponentTranslation("gtqtcore.machine.integrated_ore_processor.mode.3"));
+                case 4 ->
+                        textList.add(new TextComponentTranslation("gtqtcore.machine.integrated_ore_processor.mode.4"));
+                default ->
+                        textList.add(new TextComponentTranslation("gtqtcore.machine.integrated_ore_processor.mode.error"));
             }
             if (!drainEnergy(true)) {
                 textList.add(new TextComponentTranslation("gregtech.multiblock.not_enough_energy").setStyle(new Style().setColor(TextFormatting.RED)));
             }
-            textList.add(new TextComponentTranslation("gregtech.integrated_ore_processor.statue",logic.furnace,logic.isVoidStone));
+            textList.add(new TextComponentTranslation("gregtech.integrated_ore_processor.statue", logic.furnace, logic.isVoidStone));
         }
     }
 
@@ -266,6 +277,7 @@ public class MetaTileEntityIntegratedOreProcessor extends MultiblockWithDisplayB
         tooltip.add(I18n.format("gtqtcore.machine.integrated_ore_processor.tooltip.2"));
         tooltip.add(I18n.format("gtqtcore.machine.integrated_ore_processor.tooltip.3"));
         tooltip.add(I18n.format("gtqtcore.machine.integrated_ore_processor.tooltip.4"));
+        tooltip.add(I18n.format("gtqtcore.machine.integrated_ore_processor.tooltip.5"));
         if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
             tooltip.add(I18n.format("gtqtcore.machine.integrated_ore_processor.tooltip_shift.1"));
             tooltip.add(I18n.format("gtqtcore.machine.integrated_ore_processor.tooltip_shift.2"));
@@ -273,19 +285,24 @@ public class MetaTileEntityIntegratedOreProcessor extends MultiblockWithDisplayB
             tooltip.add(I18n.format("gregtech.tooltip.hold_shift"));
         }
     }
+
     @Override
     @Nonnull
     protected Widget getFlexButton(int x, int y, int width, int height) {
         WidgetGroup group = new WidgetGroup(x, y, width, height);
-        group.addWidget(new ClickButtonWidget(0, 0, 18, 9, "", this::incrementThreshold)
+        group.addWidget(new ClickButtonWidget(0, 0, 9, 9, "", this::incrementThreshold)
                 .setButtonTexture(GuiTextures.BUTTON_THROTTLE_PLUS)
                 .setTooltipText("gtqtcore.multiblock.iop.threshold_increment"));
 
+        group.addWidget(new ClickButtonWidget(9, 0, 9, 9, "", this::decrementThreshold)
+                .setButtonTexture(GuiTextures.BUTTON_THROTTLE_MINUS)
+                .setTooltipText("gtqtcore.multiblock.iop.threshold_decrement"));
+
         group.addWidget(new ClickButtonWidget(0, 9, 9, 9, "", this::furnace)
-                .setButtonTexture(GuiTextures.BUTTON_FILTER_DAMAGE)
+                .setButtonTexture(GuiTextures.BUTTON_THROTTLE_PLUS)
                 .setTooltipText("gtqtcore.multiblock.iop.furnace"));
         group.addWidget(new ClickButtonWidget(9, 9, 9, 9, "", this::stone)
-                .setButtonTexture(GuiTextures.BUTTON_ALLOW_IMPORT_EXPORT)
+                .setButtonTexture(GuiTextures.BUTTON_THROTTLE_MINUS)
                 .setTooltipText("gtqtcore.multiblock.iop.stone"));
         return group;
     }
@@ -293,12 +310,19 @@ public class MetaTileEntityIntegratedOreProcessor extends MultiblockWithDisplayB
     private void incrementThreshold(Widget.ClickData clickData) {
         logic.setMode((logic.getMode() + 1) % 5);
     }
+
+    private void decrementThreshold(Widget.ClickData clickData) {
+        logic.setMode((logic.getMode() - 1) % 5);
+    }
+
     private void furnace(Widget.ClickData clickData) {
         logic.setFurnace(!logic.furnace);
     }
+
     private void stone(Widget.ClickData clickData) {
         logic.setVoidStone(!logic.isVoidStone);
     }
+
     @Override
     public final boolean onScrewdriverClick(EntityPlayer playerIn,
                                             EnumHand hand,
@@ -307,7 +331,7 @@ public class MetaTileEntityIntegratedOreProcessor extends MultiblockWithDisplayB
         if (playerIn.isSneaking()) {
             logic.setVoidStone(!logic.isVoidStone());
             if (playerIn.getEntityWorld().isRemote) {
-                playerIn.sendMessage( new TextComponentTranslation("gtqtcore.machine.integrated_ore_processor.void." + logic.isVoidStone()));
+                playerIn.sendMessage(new TextComponentTranslation("gtqtcore.machine.integrated_ore_processor.void." + logic.isVoidStone()));
             }
         } else {
             logic.setMode((logic.getMode() + 1) % 5);
@@ -343,7 +367,7 @@ public class MetaTileEntityIntegratedOreProcessor extends MultiblockWithDisplayB
         return this.logic.serializeNBT(data);
     }
 
-   
+
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         this.logic.deserializeNBT(data);

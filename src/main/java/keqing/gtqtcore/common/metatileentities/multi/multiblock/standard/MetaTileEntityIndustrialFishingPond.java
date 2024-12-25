@@ -61,9 +61,9 @@ import java.util.List;
 public class MetaTileEntityIndustrialFishingPond extends MultiblockWithDisplayBase implements IWorkable, IDataInfoProvider {
 
     private final FishPondLogic logic;
-    private IEnergyContainer energyContainer;
     protected IMultipleTankHandler inputFluidInventory;
     protected IItemHandler outputItemInventory;
+    private IEnergyContainer energyContainer;
 
     public MetaTileEntityIndustrialFishingPond(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId);
@@ -98,6 +98,7 @@ public class MetaTileEntityIndustrialFishingPond extends MultiblockWithDisplayBa
             this.logic.setMode(0);
         return true;
     }
+
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
@@ -202,13 +203,13 @@ public class MetaTileEntityIndustrialFishingPond extends MultiblockWithDisplayBa
     }
 
     @Override
-    public boolean getIsWeatherOrTerrainResistant(){
-        return true;
+    public void setWorkingEnabled(boolean b) {
+        logic.setWorkingEnabled(b);
     }
 
     @Override
-    public void setWorkingEnabled(boolean b) {
-        logic.setWorkingEnabled(b);
+    public boolean getIsWeatherOrTerrainResistant() {
+        return true;
     }
 
     public IMultipleTankHandler getImportFluid() {
@@ -243,7 +244,7 @@ public class MetaTileEntityIndustrialFishingPond extends MultiblockWithDisplayBa
         return this.logic.writeToNBT(data);
     }
 
-   
+
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         this.logic.readFromNBT(data);

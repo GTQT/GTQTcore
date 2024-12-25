@@ -45,7 +45,6 @@ import javax.annotation.Nonnull;
 import java.util.List;
 
 import static gregtech.api.GTValues.V;
-import static gregtech.api.GTValues.VA;
 
 public class MetaTileEntityNanoCoating extends MultiMapMultiblockController implements IOpticalComputationReceiver {
     private int glass_tier;
@@ -61,15 +60,8 @@ public class MetaTileEntityNanoCoating extends MultiMapMultiblockController impl
     // 配方：3D打印
     // 精密喷涂（用于加工透镜玻璃 或者其他需要覆膜的精密材料 算力配方）
     // 精密喷丝（编制滤网 催化剂框架 激光型算力配方）
-
-    @Override
-    public void addInformation(ItemStack stack, World world, List<String> tooltip, boolean advanced) {
-        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("织靳"));
-        tooltip.add(I18n.format("gtqt.machine.stepper.1"));
-        tooltip.add(I18n.format("gtqt.machine.stepper.2"));
-        tooltip.add(I18n.format("gtqt.machine.stepper.5"));
-    }
     private IOpticalComputationProvider computationProvider;
+
     public MetaTileEntityNanoCoating(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{
                 GTQTcoreRecipeMaps.TD_PRINT_RECIPES,
@@ -78,6 +70,14 @@ public class MetaTileEntityNanoCoating extends MultiMapMultiblockController impl
                 GTQTcoreRecipeMaps.PRECISION_SPINNING
         });
         this.recipeMapWorkable = new LaserEngravingWorkableHandler(this);
+    }
+
+    @Override
+    public void addInformation(ItemStack stack, World world, List<String> tooltip, boolean advanced) {
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("织靳"));
+        tooltip.add(I18n.format("gtqt.machine.stepper.1"));
+        tooltip.add(I18n.format("gtqt.machine.stepper.2"));
+        tooltip.add(I18n.format("gtqt.machine.stepper.5"));
     }
 
     @Override
@@ -94,11 +94,11 @@ public class MetaTileEntityNanoCoating extends MultiMapMultiblockController impl
     }
 
     private void incrementThreshold(Widget.ClickData clickData) {
-            this.visa = true;
+        this.visa = true;
     }
 
     private void decrementThreshold(Widget.ClickData clickData) {
-            this.visa = false;
+        this.visa = false;
     }
 
     @Override
@@ -109,24 +109,26 @@ public class MetaTileEntityNanoCoating extends MultiMapMultiblockController impl
     @Override
     public void receiveCustomData(int dataId, PacketBuffer buf) {
         super.receiveCustomData(dataId, buf);
-        if(dataId == GTQTValue.UPDATE_TIER8){
+        if (dataId == GTQTValue.UPDATE_TIER8) {
             this.tier = buf.readInt();
         }
-        if(dataId == GTQTValue.REQUIRE_DATA_UPDATE8){
-            this.writeCustomData(GTQTValue.UPDATE_TIER8,buf1 -> buf1.writeInt(this.tier));
+        if (dataId == GTQTValue.REQUIRE_DATA_UPDATE8) {
+            this.writeCustomData(GTQTValue.UPDATE_TIER8, buf1 -> buf1.writeInt(this.tier));
         }
     }
+
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("tier", tier);
         data.setBoolean("visa", visa);
         return super.writeToNBT(data);
     }
-   
+
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         tier = data.getInteger("tier");
         visa = data.getBoolean("visa");
     }
+
     @Override
     public void writeInitialSyncData(PacketBuffer buf) {
         super.writeInitialSyncData(buf);
@@ -138,21 +140,23 @@ public class MetaTileEntityNanoCoating extends MultiMapMultiblockController impl
         super.receiveInitialSyncData(buf);
         this.tier = buf.readInt();
     }
+
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
-        textList.add(new TextComponentTranslation("gtqtcore.eleTire2",tier, laser_tier, glass_tier));
-        textList.add(new TextComponentTranslation("gtqtcore.eleTire1",clean_tier, sheping_tier, minvisa));
-        textList.add(new TextComponentTranslation("效能模式 ：%s",visa));
+        textList.add(new TextComponentTranslation("gtqtcore.eleTire2", tier, laser_tier, glass_tier));
+        textList.add(new TextComponentTranslation("gtqtcore.eleTire1", clean_tier, sheping_tier, minvisa));
+        textList.add(new TextComponentTranslation("效能模式 ：%s", visa));
 
     }
+
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
-                .aisle("JXXXXXXXXJ", "JXXGGGGXXJ","JXXGGGGXXJ", "JXXGGGGXXJ")
-                .aisle("JXXXXXXXXJ", "JZZPPPPZZJ","JZZ####ZZJ", "JXXGGGGXXJ")
-                .aisle("JXXXXXXXXJ", "JZZPPPPZZJ","JZZ####ZZJ", "JXXGGGGXXJ")
-                .aisle("JXXXXXXXXJ", "JCSGGGGXXJ","JXXGGGGXXJ", "JXXGGGGXXJ")
+                .aisle("JXXXXXXXXJ", "JXXGGGGXXJ", "JXXGGGGXXJ", "JXXGGGGXXJ")
+                .aisle("JXXXXXXXXJ", "JZZPPPPZZJ", "JZZ####ZZJ", "JXXGGGGXXJ")
+                .aisle("JXXXXXXXXJ", "JZZPPPPZZJ", "JZZ####ZZJ", "JXXGGGGXXJ")
+                .aisle("JXXXXXXXXJ", "JCSGGGGXXJ", "JXXGGGGXXJ", "JXXGGGGXXJ")
                 .where('S', selfPredicate())
                 .where('C', abilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION))
                 .where('X', TiredTraceabilityPredicate.CP_CASING.get().setMinGlobalLimited(40).or(autoAbilities()))
@@ -163,6 +167,7 @@ public class MetaTileEntityNanoCoating extends MultiMapMultiblockController impl
                 .where('#', air())
                 .build();
     }
+
     @SideOnly(Side.CLIENT)
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
         switch (this.tier) {
@@ -198,13 +203,16 @@ public class MetaTileEntityNanoCoating extends MultiMapMultiblockController impl
             }
         }
     }
+
     @Override
     public String[] getDescription() {
         return new String[]{I18n.format("gtqt.tooltip.update")};
     }
+
     public IOpticalComputationProvider getComputationProvider() {
         return this.computationProvider;
     }
+
     @Override
     public SoundEvent getBreakdownSound() {
         return GTSoundEvents.BREAKDOWN_ELECTRICAL;
@@ -215,17 +223,19 @@ public class MetaTileEntityNanoCoating extends MultiMapMultiblockController impl
     protected ICubeRenderer getFrontOverlay() {
         return Textures.FUSION_REACTOR_OVERLAY;
     }
+
     @SideOnly(Side.CLIENT)
     @Override
     public SoundEvent getSound() {
         return GTSoundEvents.ELECTROLYZER;
     }
+
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
         List<IOpticalComputationHatch> providers = this.getAbilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION);
         if (providers != null && providers.size() >= 1) {
-            this.computationProvider = (IOpticalComputationProvider)providers.get(0);
+            this.computationProvider = providers.get(0);
         }
         Object laser_tier = context.get("ZWTieredStats");
         Object tier = context.get("ChemicalPlantCasingTieredStats");
@@ -234,21 +244,21 @@ public class MetaTileEntityNanoCoating extends MultiMapMultiblockController impl
         Object sheping_tier = context.get("TJTieredStats");
 
         this.laser_tier = GTQTUtil.getOrDefault(() -> laser_tier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)laser_tier).getIntTier(),
+                () -> ((WrappedIntTired) laser_tier).getIntTier(),
                 0);
         this.tier = GTQTUtil.getOrDefault(() -> tier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)tier).getIntTier(),
+                () -> ((WrappedIntTired) tier).getIntTier(),
                 0);
         this.glass_tier = GTQTUtil.getOrDefault(() -> glass_tier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)glass_tier).getIntTier(),
+                () -> ((WrappedIntTired) glass_tier).getIntTier(),
                 0);
         this.clean_tier = GTQTUtil.getOrDefault(() -> clean_tier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)clean_tier).getIntTier(),
+                () -> ((WrappedIntTired) clean_tier).getIntTier(),
                 0);
         this.sheping_tier = GTQTUtil.getOrDefault(() -> sheping_tier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)sheping_tier).getIntTier(),
+                () -> ((WrappedIntTired) sheping_tier).getIntTier(),
                 0);
-        this.writeCustomData(GTQTValue.UPDATE_TIER8,buf -> buf.writeInt(this.tier));
+        this.writeCustomData(GTQTValue.UPDATE_TIER8, buf -> buf.writeInt(this.tier));
     }
 
 
@@ -269,28 +279,29 @@ public class MetaTileEntityNanoCoating extends MultiMapMultiblockController impl
 
 
     protected class LaserEngravingWorkableHandler extends ComputationRecipeLogic {
+        int pre;
+
         public LaserEngravingWorkableHandler(RecipeMapMultiblockController tileEntity) {
-            super(tileEntity,ComputationType.SPORADIC);
+            super(tileEntity, ComputationType.SPORADIC);
         }
 
         public long getMaxVoltage() {
-            if(visa)return V[Math.min(Math.max((tier - 3), 1), Math.max(clean_tier * 2 - 3, 1))];
-            else return V[Math.min(tier,clean_tier*2)];
+            if (visa) return V[Math.min(Math.max((tier - 3), 1), Math.max(clean_tier * 2 - 3, 1))];
+            else return V[Math.min(tier, clean_tier * 2)];
         }
 
         private boolean isPrecise() {
             return sheping_tier == laser_tier;
         }
 
-        int pre;
         public void setMaxProgress(int maxProgress) {
-            if(visa)
-                this.pre = maxProgress/2;
+            if (visa)
+                this.pre = maxProgress / 2;
             else
                 this.pre = maxProgress;
 
             if (isPrecise()) {
-                this.maxProgressTime = pre*(100-glass_tier)/100;
+                this.maxProgressTime = pre * (100 - glass_tier) / 100;
             } else {
                 this.maxProgressTime = pre;
             }
@@ -298,12 +309,12 @@ public class MetaTileEntityNanoCoating extends MultiMapMultiblockController impl
 
         @Override
         public int getParallelLimit() {
-            if(visa)
-                return clean_tier*sheping_tier*4;
+            if (visa)
+                return clean_tier * sheping_tier * 4;
             if (isPrecise()) {
-                return clean_tier*sheping_tier;
+                return clean_tier * sheping_tier;
             } else {
-                return clean_tier+sheping_tier;
+                return clean_tier + sheping_tier;
             }
         }
     }

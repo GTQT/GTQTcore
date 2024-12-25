@@ -6,7 +6,6 @@ import gregtech.api.gui.Widget;
 import gregtech.api.gui.resources.TextureArea;
 import gregtech.api.gui.widgets.ClickButtonWidget;
 import gregtech.api.gui.widgets.WidgetGroup;
-import gregtech.api.metatileentity.IDataInfoProvider;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
@@ -39,7 +38,6 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.IFluidTank;
 
 import javax.annotation.Nonnull;
 import java.util.Collections;
@@ -49,12 +47,28 @@ import static gregtech.api.unification.material.Materials.Water;
 
 public class MetaTileEntityNuclearReactor extends RecipeMapMultiblockController implements IProgressBarMultiblock {
     double heat;
-    int rate=1;
-    double cold=1;
+    int rate = 1;
+    double cold = 1;
     boolean open;
     boolean care;
     double temp;
     double addtemp;
+    FluidStack WATER_STACK = Water.getFluid(1024 * 4 * rate);
+    FluidStack HOT_STACK1 = GTQTMaterials.SupercriticalSteam.getFluid(640 * 4 * rate);
+    FluidStack HOT_STACK2 = GTQTMaterials.SupercriticalSteam.getFluid(640 * 8 * rate);
+
+    public MetaTileEntityNuclearReactor(ResourceLocation metaTileEntityId) {
+        super(metaTileEntityId, GTQTcoreRecipeMaps.NUCLEAR_RECIPES);
+    }
+
+    private static IBlockState getCasingState1() {
+        return GTQTMetaBlocks.NUCLEAR_FUSION.getState(GTQTNuclearFusion.CasingType.NUCLEAR_FUSION_FRAME);
+    }
+
+    private static IBlockState getCasingState2() {
+        return GTQTMetaBlocks.NUCLEAR_FUSION.getState(GTQTNuclearFusion.CasingType.NUCLEAR_FUSION_CASING);
+    }
+
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setDouble("heat", heat);
         data.setInteger("rate", rate);
@@ -65,7 +79,7 @@ public class MetaTileEntityNuclearReactor extends RecipeMapMultiblockController 
         data.setBoolean("care", care);
         return super.writeToNBT(data);
     }
-   
+
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         heat = data.getDouble("heat");
@@ -76,21 +90,22 @@ public class MetaTileEntityNuclearReactor extends RecipeMapMultiblockController 
         open = data.getBoolean("open");
         care = data.getBoolean("care");
     }
+
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {
         return new MetaTileEntityNuclearReactor(this.metaTileEntityId);
     }
-    public MetaTileEntityNuclearReactor(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, GTQTcoreRecipeMaps.NUCLEAR_RECIPES);
-    }
+
     public boolean fillTanks(FluidStack stack, boolean simulate) {
         return GTTransferUtils.addFluidsToFluidHandler(getOutputFluidInventory(), simulate, Collections.singletonList(stack));
     }
+
     @Override
     public boolean checkRecipe(@Nonnull Recipe recipe, boolean consumeIfSuccess) {
-        temp=recipe.getProperty(NuclearProperties.getInstance(), 0);
+        temp = recipe.getProperty(NuclearProperties.getInstance(), 0);
         return super.checkRecipe(recipe, consumeIfSuccess);
     }
+
     @Override
     public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
@@ -103,72 +118,74 @@ public class MetaTileEntityNuclearReactor extends RecipeMapMultiblockController 
         tooltip.add(I18n.format("gtqtcore.nc.tooltip.7"));
         tooltip.add(I18n.format("gtqtcore.nc.tooltip.8"));
     }
+
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         textList.add(new TextComponentTranslation("=========核电控制台========="));
-        if(open&&care)textList.add(new TextComponentTranslation("超频：%s | 高温强制停机失效！！！"));
-        else textList.add(new TextComponentTranslation("超频：%s | 高温强制停机：%s", open,care));
+        if (open && care) textList.add(new TextComponentTranslation("超频：%s | 高温强制停机失效！！！"));
+        else textList.add(new TextComponentTranslation("超频：%s | 高温强制停机：%s", open, care));
         textList.add(new TextComponentTranslation("积热：%s", heat));
-        textList.add(new TextComponentTranslation("升温率：%s 降温率：%s ", temp,cold));
+        textList.add(new TextComponentTranslation("升温率：%s 降温率：%s ", temp, cold));
         textList.add(new TextComponentTranslation("积热升温倍率：%s", addtemp));
-        if(temp-cold>0) textList.add(new TextComponentTranslation("生产超频倍率（失效）：%s",1));
-        else textList.add(new TextComponentTranslation("生产超频倍率（工作）：%s",1+heat*((cold/temp)/100)));
+        if (temp - cold > 0) textList.add(new TextComponentTranslation("生产超频倍率（失效）：%s", 1));
+        else textList.add(new TextComponentTranslation("生产超频倍率（工作）：%s", 1 + heat * ((cold / temp) / 100)));
         textList.add(new TextComponentTranslation("============================="));
         textList.add(new TextComponentTranslation("安全生产 人民放心 安全工作 重于泰山"));
     }
-    FluidStack WATER_STACK = Water.getFluid(1024*4*rate);
-    FluidStack HOT_STACK1 = GTQTMaterials.SupercriticalSteam.getFluid(640*4*rate);
-    FluidStack HOT_STACK2 = GTQTMaterials.SupercriticalSteam.getFluid(640*8*rate);
+
     @Override
     public void update() {
         super.update();
         IMultipleTankHandler inputTank = getInputFluidInventory();
-        if(recipeMapWorkable.isWorking()) {
-            heat +=temp*addtemp;
-            addtemp+=0.001;
-            if(open)heat +=temp*addtemp*4;
-        }
-        else if(addtemp>0)addtemp-=0.005;
+        if (recipeMapWorkable.isWorking()) {
+            heat += temp * addtemp;
+            addtemp += 0.001;
+            if (open) heat += temp * addtemp * 4;
+        } else if (addtemp > 0) addtemp -= 0.005;
         //逻辑：反应升温 需要熔盐
-        if (WATER_STACK.isFluidStackIdentical(inputTank.drain(WATER_STACK, false))&&heat>500) {
+        if (WATER_STACK.isFluidStackIdentical(inputTank.drain(WATER_STACK, false)) && heat > 500) {
             inputTank.drain(WATER_STACK, true);
-            if(heat>1000)fillTanks(HOT_STACK1,false);
-            if(heat>3000)fillTanks(HOT_STACK1,false);
-            if(heat>5000)fillTanks(HOT_STACK1,false);
-            if(temp-cold<=0)fillTanks(HOT_STACK2,false);
-            cold=rate;
-            heat-=heat*((cold/temp)/100);
-            addtemp-=rate*0.0002;
+            if (heat > 1000) fillTanks(HOT_STACK1, false);
+            if (heat > 3000) fillTanks(HOT_STACK1, false);
+            if (heat > 5000) fillTanks(HOT_STACK1, false);
+            if (temp - cold <= 0) fillTanks(HOT_STACK2, false);
+            cold = rate;
+            heat -= heat * ((cold / temp) / 100);
+            addtemp -= rate * 0.0002;
         }
-        if(heat>6000)doExplosion1((float) (temp*3));
-        if(!open&&care&&heat>5500)doExplosion2(1);
+        if (heat > 6000) doExplosion1((float) (temp * 3));
+        if (!open && care && heat > 5500) doExplosion2(1);
     }
+
     public void doExplosion1(float explosionPower) {
         this.setExploded();
         this.getWorld().setBlockToAir(this.getPos());
-        for(int i=-3;i<3;i++)
-            for(int j=-3;j<3;j++)
-                for(int k=-3;k<3;k++)
-        this.getWorld().createExplosion((Entity)null, (double)this.getPos().getX() + 0.5+5*i, (double)this.getPos().getY() + 0.5+5*k, (double)this.getPos().getZ() + 0.5+5*j, explosionPower, true);
+        for (int i = -3; i < 3; i++)
+            for (int j = -3; j < 3; j++)
+                for (int k = -3; k < 3; k++)
+                    this.getWorld().createExplosion(null, (double) this.getPos().getX() + 0.5 + 5 * i, (double) this.getPos().getY() + 0.5 + 5 * k, (double) this.getPos().getZ() + 0.5 + 5 * j, explosionPower, true);
     }
+
     public void doExplosion2(float explosionPower) {
         this.setExploded();
         this.getWorld().setBlockToAir(this.getPos());
-        this.getWorld().createExplosion((Entity)null, (double)this.getPos().getX() + 4.5, (double)this.getPos().getY() + 0.5, (double)this.getPos().getZ() + 4.5, explosionPower, true);
+        this.getWorld().createExplosion(null, (double) this.getPos().getX() + 4.5, (double) this.getPos().getY() + 0.5, (double) this.getPos().getZ() + 4.5, explosionPower, true);
     }
+
     @Override
     protected void addWarningText(List<ITextComponent> textList) {
         super.addWarningText(textList);
-        if (heat>4000) {
+        if (heat > 4000) {
             textList.add(new TextComponentTranslation("高温提醒！"));
         }
-        if (heat>5000) {
+        if (heat > 5000) {
             textList.add(new TextComponentTranslation("高温警告！"));
         }
-        if(open&&care){
+        if (open && care) {
             textList.add(new TextComponentTranslation("保险模式失效！！！"));
         }
     }
+
     @Override
     @Nonnull
     protected Widget getFlexButton(int x, int y, int width, int height) {
@@ -187,23 +204,28 @@ public class MetaTileEntityNuclearReactor extends RecipeMapMultiblockController 
                 .setTooltipText("高温强制停机"));
         return group;
     }
+
     private void autocare(Widget.ClickData clickData) {
-        care=!care;
+        care = !care;
 
     }
+
     private void workfast(Widget.ClickData clickData) {
-        open=!open;
+        open = !open;
 
     }
+
     private void decrementThreshold(Widget.ClickData clickData) {
-        this.rate = MathHelper.clamp(rate-1, 1, 10);
+        this.rate = MathHelper.clamp(rate - 1, 1, 10);
 
     }
+
     private void incrementThreshold(Widget.ClickData clickData) {
 
-        this.rate = MathHelper.clamp(rate+1, 1, 10);
+        this.rate = MathHelper.clamp(rate + 1, 1, 10);
 
     }
+
     @Nonnull
     @Override
     protected BlockPattern createStructurePattern() {
@@ -226,14 +248,6 @@ public class MetaTileEntityNuclearReactor extends RecipeMapMultiblockController 
                 .where('O', states(getCasingState1()).or(abilities(MultiblockAbility.EXPORT_FLUIDS).setMaxLayerLimited(8).setMinGlobalLimited(1)))
                 .where(' ', any())
                 .build();
-    }
-
-    private static IBlockState getCasingState1() {
-        return GTQTMetaBlocks.NUCLEAR_FUSION.getState(GTQTNuclearFusion.CasingType.NUCLEAR_FUSION_FRAME);
-    }
-
-    private static IBlockState getCasingState2() {
-        return GTQTMetaBlocks.NUCLEAR_FUSION.getState(GTQTNuclearFusion.CasingType.NUCLEAR_FUSION_CASING);
     }
 
     @Override
@@ -259,7 +273,7 @@ public class MetaTileEntityNuclearReactor extends RecipeMapMultiblockController 
 
     @Override
     public double getFillPercentage(int index) {
-        return  (double) heat /6000;
+        return heat / 6000;
     }
 
     @Override
@@ -271,7 +285,7 @@ public class MetaTileEntityNuclearReactor extends RecipeMapMultiblockController 
     public void addBarHoverText(List<ITextComponent> hoverList, int index) {
         ITextComponent cwutInfo = TextComponentUtil.stringWithColor(
                 TextFormatting.AQUA,
-                heat+ " / " + 6000 + " K");
+                heat + " / " + 6000 + " K");
         hoverList.add(TextComponentUtil.translationWithColor(
                 TextFormatting.GRAY,
                 "临界温度 %s",

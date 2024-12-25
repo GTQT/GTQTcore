@@ -48,7 +48,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-public class MetaTileEntityAlgaeFarm  extends MultiblockWithDisplayBase implements IDataInfoProvider, IWorkable {
+public class MetaTileEntityAlgaeFarm extends MultiblockWithDisplayBase implements IDataInfoProvider, IWorkable {
     private final AlgaeFarmLogic logic;
     protected IMultipleTankHandler inputFluidInventory;
     protected ItemHandlerList itemImportInventory;
@@ -56,25 +56,30 @@ public class MetaTileEntityAlgaeFarm  extends MultiblockWithDisplayBase implemen
 
     public MetaTileEntityAlgaeFarm(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId);
-        this.logic = new AlgaeFarmLogic(this,GTValues.MV);
+        this.logic = new AlgaeFarmLogic(this, GTValues.MV);
     }
 
     @Override
     public String[] getDescription() {
         return new String[]{I18n.format("gtqtcore.multiblock.AlgaeFarm.description")};
     }
+
     public boolean hasMaintenanceMechanics() {
         return false;
     }
+
     public IMultipleTankHandler getImportFluid() {
         return this.inputFluidInventory;
     }
+
     public IItemHandlerModifiable getImportItem() {
         return itemImportInventory;
     }
+
     public boolean fillTanks(ItemStack stack, boolean simulate) {
         return GTTransferUtils.addItemsToItemHandler(outputItemInventory, simulate, Collections.singletonList(stack));
     }
+
     @Override
     public int getProgress() {
         return logic.getProgressTime();
@@ -109,13 +114,14 @@ public class MetaTileEntityAlgaeFarm  extends MultiblockWithDisplayBase implemen
             this.logic.setActive(false);
         }
     }
+
     protected IBlockState getCasingState() {
         return GTQTMetaBlocks.ISA_CASING.getState(GTQTIsaCasing.CasingType.ASEPTIC_FARM_CASING);
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack stack,  World world,  List<String> tooltip, boolean advanced) {
+    public void addInformation(ItemStack stack, World world, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, world, tooltip, advanced);
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("快乐海藻", new Object[0]));
         tooltip.add(I18n.format("gtqtcore.machine.af.tooltip.1"));
@@ -155,6 +161,7 @@ public class MetaTileEntityAlgaeFarm  extends MultiblockWithDisplayBase implemen
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {
         return new MetaTileEntityAlgaeFarm(metaTileEntityId);
     }
+
     protected void initializeAbilities() {
         this.inputFluidInventory = new FluidTankList(true, getAbilities(MultiblockAbility.IMPORT_FLUIDS));
         this.outputItemInventory = new ItemHandlerList(getAbilities(MultiblockAbility.EXPORT_ITEMS));
@@ -166,6 +173,7 @@ public class MetaTileEntityAlgaeFarm  extends MultiblockWithDisplayBase implemen
         this.outputItemInventory = new ItemHandlerList(Collections.emptyList());
         this.itemImportInventory = new ItemHandlerList(Collections.emptyList());
     }
+
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
@@ -194,7 +202,7 @@ public class MetaTileEntityAlgaeFarm  extends MultiblockWithDisplayBase implemen
         return this.logic.writeToNBT(data);
     }
 
-   
+
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         this.logic.readFromNBT(data);

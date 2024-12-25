@@ -32,33 +32,15 @@ public class CTABChain {
                 .fluidInputs(CTAB.getFluid(1000))
                 .fluidInputs(Isoamylalcohol.getFluid(1000))
                 .fluidInputs(Chloroform.getFluid(40))
-                .fluidOutputs(DNAa.getFluid(4000))
+                .fluidOutputs(DNAorigin.getFluid(16000))
                 .recipeLevel(3)
                 .duration(400).EUt(VA[HV]).buildAndRegister();
 
         BIOLOGICAL_REACTION_RECIPES.recipeBuilder()
-                .fluidInputs(DNAa.getFluid(400))
-                .fluidInputs(AmmoniumChloride.getFluid(144))
-                .fluidOutputs(DNAb.getFluid(400))
-                .duration(400).EUt(VA[HV]).buildAndRegister();
-
-        BIOLOGICAL_REACTION_RECIPES.recipeBuilder()
-                .fluidInputs(DNAb.getFluid(100))
-                .fluidInputs(Bacteria.getFluid(200))
-                .fluidOutputs(DNAc.getFluid(100))
-                .duration(400).EUt(VA[HV]).buildAndRegister();
-
-        BIOLOGICAL_REACTION_RECIPES.recipeBuilder()
-                .fluidInputs(DNAc.getFluid(100))
-                .fluidInputs(Biomass.getFluid(200))
-                .fluidOutputs(DNAd.getFluid(100))
-                .duration(400).EUt(VA[HV]).buildAndRegister();
-
-        BIOLOGICAL_REACTION_RECIPES.recipeBuilder()
-                .fluidInputs(DNAd.getFluid(100))
+                .fluidInputs(DNAorigin.getFluid(100))
                 .fluidInputs(Biomass.getFluid(200))
                 .input(OrePrefix.dust,Agar)
-                .fluidOutputs(DNAe.getFluid(100))
+                .fluidOutputs(DNAdeal.getFluid(100))
                 .duration(400).EUt(VA[HV]).buildAndRegister();
 
         COMPRESSOR_RECIPES.recipeBuilder()
@@ -67,7 +49,7 @@ public class CTABChain {
                 .duration(80).EUt(VA[LV]).buildAndRegister();
         //定向培养
         //这里得到干细胞 定向
-        CommmonOut(DNAe);
+        CommmonOut(DNAdeal);
         //特殊培养
         SpecialOut(DNAh,Gunpowder,HV,20);
         SpecialOut(DNAl,Blaze,HV,20);
@@ -79,7 +61,7 @@ public class CTABChain {
     private static void SpecialOut(Material material1,Material material2,int n,int rate) {
         //培养
         BIOLOGICAL_REACTION_RECIPES.recipeBuilder()
-                .fluidInputs(DNAe.getFluid(1000))
+                .fluidInputs(DNAdeal.getFluid(1000))
                 .fluidInputs(Mutagen.getFluid(1000))
                 .input(OrePrefix.dust,material2,64)
                 .fluidOutputs(material1.getFluid(200))
@@ -107,9 +89,9 @@ public class CTABChain {
     }
     private static void CommmonOut(Material material) {
         BIOLOGICAL_REACTION_RECIPES.recipeBuilder()
-                .fluidInputs(DNAe.getFluid(1000))
+                .fluidInputs(DNAdeal.getFluid(1000))
                 .fluidInputs(Mutagen.getFluid(1000))
-                .fluidOutputs(DNAe.getFluid(200))
+                .fluidOutputs(DNAdeal.getFluid(200))
                 .circuitMeta(2)
                 .duration(400).EUt(VA[HV]).buildAndRegister();
 
@@ -137,67 +119,66 @@ public class CTABChain {
 
     private static void TRIS() {
         //是用硝基甲烷和过量多聚甲醛为主要原料，在一定温度下缩合反应成三羟甲基硝基甲烷；再在一定温度、压力、溶剂和催化剂下，通过加氢还原反应，经结晶，重结晶制成三羟甲基氨基甲烷
-        LARGE_CHEMICAL_RECIPES.recipeBuilder()
+        CHEMICAL_RECIPES.recipeBuilder()
                 .fluidInputs(Tetranitromethane.getFluid(1000))
                 .fluidInputs(Formaldehyde.getFluid(1000))
                 .fluidInputs(Oxygen.getFluid(2000))
                 .fluidOutputs(TRISN.getFluid(1000))
-                .duration(400).EUt(VA[HV]).buildAndRegister();
+                .duration(200).EUt(VA[HV]).buildAndRegister();
 
-        LARGE_CHEMICAL_RECIPES.recipeBuilder()
+        CHEMICAL_RECIPES.recipeBuilder()
                 .fluidInputs(TRISN.getFluid(1000))
                 .fluidInputs(Hydrogen.getFluid(2000))
                 .fluidOutputs(TRISP.getFluid(1000))
-                .duration(400).EUt(VA[HV]).buildAndRegister();
+                .duration(200).EUt(VA[HV]).buildAndRegister();
 
         AUTOCLAVE_RECIPES.recipeBuilder()
                 .fluidInputs(TRISP.getFluid(100))
                 .fluidOutputs(TRIS.getFluid(100))
-                .duration(4000).EUt(VA[HV]).buildAndRegister();
+                .duration(200).EUt(VA[MV]).buildAndRegister();
 
-        LARGE_CHEMICAL_RECIPES.recipeBuilder()
+        CHEMICAL_RECIPES.recipeBuilder()
                 .fluidInputs(TRISN.getFluid(1000))
                 .fluidInputs(Hydrogen.getFluid(2000))
                 .fluidOutputs(TRIS.getFluid(1000))
-                .duration(400).EUt(VA[IV]).buildAndRegister();
+                .duration(200).EUt(VA[IV]).buildAndRegister();
 
 
     }
 
     private static void Hydroxyethanethiol() {
         //以二硫化钠和氯乙醇为主要原料，合成二硫代二甘醇，经电解还原可制得2-巯基乙醇
-        LARGE_CHEMICAL_RECIPES.recipeBuilder()
+        CHEMICAL_RECIPES.recipeBuilder()
                 .input(OrePrefix.dust,SodiumSulfide)
                 .fluidInputs(EthyleneChlorohydrin.getFluid(1000))
-                .fluidOutputs(Erliudaierganchun.getFluid(1000))
+                .fluidOutputs(Erliudaierganchun.getFluid(2000))
                 .duration(400).EUt(VA[HV]).buildAndRegister();
 
-        ELECTROLYZER_RECIPES.recipeBuilder()
+        AUTOCLAVE_RECIPES.recipeBuilder()
                 .fluidInputs(Erliudaierganchun.getFluid(1000))
-                .notConsumable(OrePrefix.plate,Palladium)
                 .fluidOutputs(Hydroxyethanethiol.getFluid(1000))
                 .duration(400).EUt(VA[HV]).buildAndRegister();
     }
 
     private static void CTAB() {
         //先由十六醇和溴素在红磷催化作用下反应下制得溴代十六烷，再和三甲胺季铵反应即可。
-        LARGE_CHEMICAL_RECIPES.recipeBuilder()
+        CHEMICAL_RECIPES.recipeBuilder()
                 .fluidInputs(Hexadecanol.getFluid(1000))
                 .fluidInputs(Bromine.getFluid(1000))
                 .notConsumable(OrePrefix.gem,RedPhosphorus)
-                .fluidOutputs(Xiudaishiliuwan.getFluid(1000))
+                .fluidOutputs(Xiudaishiliuwan.getFluid(4000))
                 .duration(400).EUt(VA[HV]).buildAndRegister();
 
-        LARGE_CHEMICAL_RECIPES.recipeBuilder()
+        CHEMICAL_RECIPES.recipeBuilder()
                 .fluidInputs(Xiudaishiliuwan.getFluid(1000))
                 .fluidInputs(Trimethylamine.getFluid(1000))
-                .fluidOutputs(CTAB.getFluid(1000))
-                .duration(400).EUt(VA[HV]).buildAndRegister();
+                .fluidOutputs(CTAB.getFluid(2000))
+                .duration(400).EUt(VA[MV]).buildAndRegister();
 
-        LARGE_CHEMICAL_RECIPES.recipeBuilder()
+        CHEMICAL_RECIPES.recipeBuilder()
                 .fluidInputs(Stearin.getFluid(1000))
                 .fluidInputs(Oxygen.getFluid(1000))
-                .fluidOutputs(Hexadecanol.getFluid(1000))
+                .fluidOutputs(Hexadecanol.getFluid(2000))
                 .duration(400).EUt(VA[HV]).buildAndRegister();
     }
 }

@@ -48,14 +48,28 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
+
 //大型流化床
 public class MetaTileEntityFluidizedBed extends RecipeMapMultiblockController implements IProgressBarMultiblock {
     boolean auxiliaryBlastFurnaceNumber;
     int temp;
     int tick;
+
     public MetaTileEntityFluidizedBed(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.FLUIDIZED_BED);
         this.recipeMapWorkable = new FluidizedBedWorkableHandler(this);
+    }
+
+    private static IBlockState getCasingState() {
+        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STEEL_SOLID);
+    }
+
+    private static IBlockState getFrameState() {
+        return MetaBlocks.FRAMES.get(Materials.Steel).getBlock(Materials.Steel);
+    }
+
+    private static IBlockState getCasingState2() {
+        return MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.STEEL_PIPE);
     }
 
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
@@ -63,25 +77,29 @@ public class MetaTileEntityFluidizedBed extends RecipeMapMultiblockController im
         data.setInteger("tick", tick);
         return super.writeToNBT(data);
     }
-   
+
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         temp = data.getInteger("temp");
         tick = data.getInteger("tick");
     }
+
     @Override
     public int getNumProgressBars() {
         return 2;
     }
+
     @Override
     public double getFillPercentage(int index) {
-        return index == 0 ?  temp / 100000.0 :
+        return index == 0 ? temp / 100000.0 :
                 tick / 10.0;
     }
+
     @Override
     public TextureArea getProgressBarTexture(int index) {
         return GuiTextures.PROGRESS_BAR_LCE_FUEL;
     }
+
     @Override
     public void addBarHoverText(List<ITextComponent> hoverList, int index) {
         ITextComponent cwutInfo;
@@ -100,55 +118,11 @@ public class MetaTileEntityFluidizedBed extends RecipeMapMultiblockController im
                 cwutInfo));
     }
 
-    protected class FluidizedBedWorkableHandler extends MultiblockRecipeLogic {
-        public FluidizedBedWorkableHandler(RecipeMapMultiblockController tileEntity) {
-            super(tileEntity);
-        }
-
-
-        public void setMaxProgress(int maxProgress) {
-            if(auxiliaryBlastFurnaceNumber) this.maxProgressTime = maxProgress/4;
-        }
-        @Override
-        public int getParallelLimit() {
-            if(temp>80000) return 1;
-            if(temp>60000) return 2;
-            if(temp>40000) return 4;
-            if(temp>30000) return 8;
-            return 1;
-        }
-
-        @Override
-        public void update() {
-            super.update();
-            if (temp<=100000) {
-                if(auxiliaryBlastFurnaceNumber)if(temp>30000)temp=temp-tick*10;
-            }
-
-            //自然降温
-            if(temp>80000){temp=temp-1;}
-            else if(temp>60000){temp=temp-1;}
-            else if(temp>40000){temp=temp-1;}
-            else if(temp>30000){temp=temp-1;}
-        }
-
-        protected void updateRecipeProgress() {
-            if (this.canRecipeProgress && this.drawEnergy(this.recipeEUt, true)) {
-                this.drawEnergy(this.recipeEUt, false);
-                if (temp < 100000) {
-                    temp+=50;
-                    if (++progressTime > maxProgressTime) {
-                        completeRecipe();
-                    }
-                }
-
-            }
-        }
-    }
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityFluidizedBed(metaTileEntityId);
     }
+
     @Override
     @Nonnull
     protected Widget getFlexButton(int x, int y, int width, int height) {
@@ -163,12 +137,12 @@ public class MetaTileEntityFluidizedBed extends RecipeMapMultiblockController im
     }
 
     private void incrementThreshold(Widget.ClickData clickData) {
-        if(auxiliaryBlastFurnaceNumber)this.tick = MathHelper.clamp(tick + 1, 0, 10);
+        if (auxiliaryBlastFurnaceNumber) this.tick = MathHelper.clamp(tick + 1, 0, 10);
         else this.tick = MathHelper.clamp(tick + 1, 0, 5);
     }
 
     private void decrementThreshold(Widget.ClickData clickData) {
-        if(auxiliaryBlastFurnaceNumber)this.tick = MathHelper.clamp(tick - 1, 0, 10);
+        if (auxiliaryBlastFurnaceNumber) this.tick = MathHelper.clamp(tick - 1, 0, 10);
         else this.tick = MathHelper.clamp(tick - 1, 0, 5);
     }
 
@@ -176,7 +150,7 @@ public class MetaTileEntityFluidizedBed extends RecipeMapMultiblockController im
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
         if (context.get("AuxiliaryBlastFurnace1") != null) {
-            auxiliaryBlastFurnaceNumber =true;
+            auxiliaryBlastFurnaceNumber = true;
         }
     }
 
@@ -185,7 +159,7 @@ public class MetaTileEntityFluidizedBed extends RecipeMapMultiblockController im
         super.addDisplayText(textList);
         if (isStructureFormed()) {
             textList.add(new TextComponentTranslation("gtqtcore.machine.fluidized", auxiliaryBlastFurnaceNumber));
-            textList.add(new TextComponentTranslation("gtqtcore.machine.fluidized1", temp,tick));
+            textList.add(new TextComponentTranslation("gtqtcore.machine.fluidized1", temp, tick));
         }
     }
 
@@ -211,12 +185,13 @@ public class MetaTileEntityFluidizedBed extends RecipeMapMultiblockController im
                 .where('O', states(getCasingState()).or(abilities(MultiblockAbility.EXPORT_FLUIDS).setMinGlobalLimited(1).setPreviewCount(2)))
                 .where('#', any())
                 //附属结构
-                .where('P', GTQTTraceabilityPredicate.optionalStates("AuxiliaryBlastFurnace1",getFrameState()))
+                .where('P', GTQTTraceabilityPredicate.optionalStates("AuxiliaryBlastFurnace1", getFrameState()))
                 .where('Q', GTQTTraceabilityPredicate.optionalStates("AuxiliaryBlastFurnace1", getCasingState()))
                 .where('R', GTQTTraceabilityPredicate.optionalStates("AuxiliaryBlastFurnace1", getCasingState2()))
                 .where('T', GTQTTraceabilityPredicate.optionalStates("AuxiliaryBlastFurnace1", getFrameState()))
                 .build();
     }
+
     @Override
     public List<MultiblockShapeInfo> getMatchingShapes() {
         ArrayList<MultiblockShapeInfo> shapeInfo = new ArrayList<>();
@@ -255,22 +230,11 @@ public class MetaTileEntityFluidizedBed extends RecipeMapMultiblockController im
         }
         return shapeInfo;
     }
-    private static IBlockState getCasingState() {
-        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STEEL_SOLID);
-    }
-    private static IBlockState getFrameState() {
-        return MetaBlocks.FRAMES.get(Materials.Steel).getBlock(Materials.Steel);
-    }
-
-    private static IBlockState getCasingState2() {
-        return MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.STEEL_PIPE);
-    }
 
     @SideOnly(Side.CLIENT)
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
-                return Textures.SOLID_STEEL_CASING;
+        return Textures.SOLID_STEEL_CASING;
     }
-
 
     @SideOnly(Side.CLIENT)
     @Override
@@ -299,6 +263,58 @@ public class MetaTileEntityFluidizedBed extends RecipeMapMultiblockController im
         tooltip.add(I18n.format("gregtech.machine.fb.tooltip.1"));
         tooltip.add(I18n.format("gregtech.machine.fb.tooltip.2"));
         tooltip.add(I18n.format("gregtech.machine.fb.tooltip.3"));
+    }
+
+    protected class FluidizedBedWorkableHandler extends MultiblockRecipeLogic {
+        public FluidizedBedWorkableHandler(RecipeMapMultiblockController tileEntity) {
+            super(tileEntity);
+        }
+
+
+        public void setMaxProgress(int maxProgress) {
+            if (auxiliaryBlastFurnaceNumber) this.maxProgressTime = maxProgress / 4;
+        }
+
+        @Override
+        public int getParallelLimit() {
+            if (temp > 80000) return 1;
+            if (temp > 60000) return 2;
+            if (temp > 40000) return 4;
+            if (temp > 30000) return 8;
+            return 1;
+        }
+
+        @Override
+        public void update() {
+            super.update();
+            if (temp <= 100000) {
+                if (auxiliaryBlastFurnaceNumber) if (temp > 30000) temp = temp - tick * 10;
+            }
+
+            //自然降温
+            if (temp > 80000) {
+                temp = temp - 1;
+            } else if (temp > 60000) {
+                temp = temp - 1;
+            } else if (temp > 40000) {
+                temp = temp - 1;
+            } else if (temp > 30000) {
+                temp = temp - 1;
+            }
+        }
+
+        protected void updateRecipeProgress() {
+            if (this.canRecipeProgress && this.drawEnergy(this.recipeEUt, true)) {
+                this.drawEnergy(this.recipeEUt, false);
+                if (temp < 100000) {
+                    temp += 50;
+                    if (++progressTime > maxProgressTime) {
+                        completeRecipe();
+                    }
+                }
+
+            }
+        }
     }
 
 }

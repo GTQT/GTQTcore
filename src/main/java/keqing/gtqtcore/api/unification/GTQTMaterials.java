@@ -451,11 +451,8 @@ public class GTQTMaterials {
     public static Material Erliudaierganchun;
     public static Material Isoamylalcohol;
     public static Material Isoamylalcohola;
-    public static Material DNAa;
-    public static Material DNAb;
-    public static Material DNAc;
-    public static Material DNAd;
-    public static Material DNAe;
+    public static Material DNAorigin;
+    public static Material DNAdeal;
     public static Material DNAh;
     public static Material DNAl;
     public static Material DNAp;

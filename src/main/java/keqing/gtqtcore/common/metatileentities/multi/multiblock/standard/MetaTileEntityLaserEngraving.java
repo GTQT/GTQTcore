@@ -40,13 +40,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.List;
 
 import static gregtech.api.GTValues.V;
-import static gregtech.api.GTValues.VA;
 
 public class MetaTileEntityLaserEngraving extends MultiMapMultiblockController implements IOpticalComputationReceiver {
     private int glass_tier;
     private int laser_tier;
     private int tier;
     private IOpticalComputationProvider computationProvider;
+
     public MetaTileEntityLaserEngraving(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{
                 RecipeMaps.LASER_ENGRAVER_RECIPES,
@@ -62,6 +62,7 @@ public class MetaTileEntityLaserEngraving extends MultiMapMultiblockController i
         tooltip.add(I18n.format("gtqt.machine.ls.2"));
         tooltip.add(I18n.format("gtqt.machine.ls.3"));
     }
+
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityLaserEngraving(metaTileEntityId);
@@ -70,28 +71,31 @@ public class MetaTileEntityLaserEngraving extends MultiMapMultiblockController i
     @Override
     public void receiveCustomData(int dataId, PacketBuffer buf) {
         super.receiveCustomData(dataId, buf);
-        if(dataId == GTQTValue.UPDATE_TIER1){
+        if (dataId == GTQTValue.UPDATE_TIER1) {
             this.tier = buf.readInt();
         }
-        if(dataId == GTQTValue.REQUIRE_DATA_UPDATE1){
-            this.writeCustomData(GTQTValue.UPDATE_TIER1,buf1 -> buf1.writeInt(this.tier));
+        if (dataId == GTQTValue.REQUIRE_DATA_UPDATE1) {
+            this.writeCustomData(GTQTValue.UPDATE_TIER1, buf1 -> buf1.writeInt(this.tier));
         }
     }
+
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
-        textList.add(new TextComponentTranslation("gtqtcore.eleTire2",tier, laser_tier, glass_tier));
+        textList.add(new TextComponentTranslation("gtqtcore.eleTire2", tier, laser_tier, glass_tier));
 
     }
+
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("tier", tier);
         return super.writeToNBT(data);
     }
-   
+
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         tier = data.getInteger("tier");
     }
+
     @Override
     public void writeInitialSyncData(PacketBuffer buf) {
         super.writeInitialSyncData(buf);
@@ -103,6 +107,7 @@ public class MetaTileEntityLaserEngraving extends MultiMapMultiblockController i
         super.receiveInitialSyncData(buf);
         this.tier = buf.readInt();
     }
+
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
@@ -117,6 +122,7 @@ public class MetaTileEntityLaserEngraving extends MultiMapMultiblockController i
                 .where('#', air())
                 .build();
     }
+
     @SideOnly(Side.CLIENT)
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
         switch (this.tier) {
@@ -152,13 +158,16 @@ public class MetaTileEntityLaserEngraving extends MultiMapMultiblockController i
             }
         }
     }
+
     @Override
     public String[] getDescription() {
         return new String[]{I18n.format("gtqt.tooltip.update")};
     }
+
     public IOpticalComputationProvider getComputationProvider() {
         return this.computationProvider;
     }
+
     @Override
     public SoundEvent getBreakdownSound() {
         return GTSoundEvents.BREAKDOWN_ELECTRICAL;
@@ -169,33 +178,35 @@ public class MetaTileEntityLaserEngraving extends MultiMapMultiblockController i
     protected ICubeRenderer getFrontOverlay() {
         return Textures.FUSION_REACTOR_OVERLAY;
     }
+
     @SideOnly(Side.CLIENT)
     @Override
     public SoundEvent getSound() {
         return GTSoundEvents.ELECTROLYZER;
     }
+
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
         List<IOpticalComputationHatch> providers = this.getAbilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION);
         if (providers != null && providers.size() >= 1) {
-            this.computationProvider = (IOpticalComputationProvider)providers.get(0);
+            this.computationProvider = providers.get(0);
         }
         Object laser_tier = context.get("ZWTieredStats");
         Object tier = context.get("ChemicalPlantCasingTieredStats");
         Object glass_tier = context.get("LGLTieredStats");
 
         this.laser_tier = GTQTUtil.getOrDefault(() -> laser_tier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)laser_tier).getIntTier(),
+                () -> ((WrappedIntTired) laser_tier).getIntTier(),
                 0);
         this.tier = GTQTUtil.getOrDefault(() -> tier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)tier).getIntTier(),
+                () -> ((WrappedIntTired) tier).getIntTier(),
                 0);
         this.glass_tier = GTQTUtil.getOrDefault(() -> glass_tier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)glass_tier).getIntTier(),
+                () -> ((WrappedIntTired) glass_tier).getIntTier(),
                 0);
 
-        this.writeCustomData(GTQTValue.UPDATE_TIER1,buf -> buf.writeInt(this.tier));
+        this.writeCustomData(GTQTValue.UPDATE_TIER1, buf -> buf.writeInt(this.tier));
     }
 
 
@@ -207,9 +218,11 @@ public class MetaTileEntityLaserEngraving extends MultiMapMultiblockController i
     protected int getLaserTier() {
         return this.laser_tier;
     }
+
     protected int getGlass_tier() {
         return this.glass_tier;
     }
+
     @Override
     public boolean hasMufflerMechanics() {
         return false;
@@ -223,7 +236,7 @@ public class MetaTileEntityLaserEngraving extends MultiMapMultiblockController i
 
     protected class LaserEngravingWorkableHandler extends ComputationRecipeLogic {
         public LaserEngravingWorkableHandler(RecipeMapMultiblockController tileEntity) {
-            super(tileEntity,ComputationType.SPORADIC);
+            super(tileEntity, ComputationType.SPORADIC);
         }
 
         private boolean isPrecise() {
@@ -232,14 +245,14 @@ public class MetaTileEntityLaserEngraving extends MultiMapMultiblockController i
 
         public void setMaxProgress(int maxProgress) {
             if (isPrecise()) {
-                this.maxProgressTime = maxProgress ;
+                this.maxProgressTime = maxProgress;
             } else {
                 this.maxProgressTime = maxProgress / 2;
             }
         }
 
         public long getMaxVoltage() {
-            return V[Math.min(tier,laser_tier*2)];
+            return V[Math.min(tier, laser_tier * 2)];
         }
 
         @Override

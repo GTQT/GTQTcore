@@ -48,8 +48,12 @@ public class MetaTileEntityFrothFlotationTank extends RecipeMapMultiblockControl
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityFrothFlotationTank(this.metaTileEntityId);
     }
+
     @Override
-    public boolean canBeDistinct() {return true;}
+    public boolean canBeDistinct() {
+        return true;
+    }
+
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
                 .aisle("   B   ", "   B   ", "   A   ", "       ", "       ")
@@ -76,9 +80,9 @@ public class MetaTileEntityFrothFlotationTank extends RecipeMapMultiblockControl
                 recipeMapWorkable.isActive(), recipeMapWorkable.isWorkingEnabled());
         if (recipeMapWorkable.isActive() && isStructureFormed()) {
             EnumFacing back = getFrontFacing().getOpposite();
-            for(float i=-1;i<=1;i++) {
-                for (float j = -1; j <=1; j++) {
-                    Matrix4 offset = translation.copy().translate(back.getXOffset() * 3+i, 1.5, back.getZOffset() * 3+j);
+            for (float i = -1; i <= 1; i++) {
+                for (float j = -1; j <= 1; j++) {
+                    Matrix4 offset = translation.copy().translate(back.getXOffset() * 3 + i, 1.5, back.getZOffset() * 3 + j);
                     CubeRendererState op = Textures.RENDER_STATE.get();
                     Textures.RENDER_STATE.set(new CubeRendererState(op.layer, CubeRendererState.PASS_MASK, op.world));
                     Textures.renderFace(renderState, offset,
@@ -90,6 +94,7 @@ public class MetaTileEntityFrothFlotationTank extends RecipeMapMultiblockControl
             }
         }
     }
+
     public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
         return Textures.CLEAN_STAINLESS_STEEL_CASING;
     }

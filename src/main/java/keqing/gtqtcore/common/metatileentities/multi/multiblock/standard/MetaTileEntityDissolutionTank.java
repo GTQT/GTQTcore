@@ -42,18 +42,31 @@ import static gregtech.api.GTValues.V;
 import static gregtech.api.GTValues.VA;
 
 public class MetaTileEntityDissolutionTank extends GTQTRecipeMapMultiblockOverwrite {
+    int ParallelNum = 1;
+    private int glass_tier;
+
     public MetaTileEntityDissolutionTank(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.DISSOLUTION_TANK_RECIPES);
         this.recipeMapWorkable = new DissolutionTankWorkableHandler(this);
     }
+
+    private static IBlockState getCasingAState() {
+        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STAINLESS_CLEAN);
+    }
+
+    private static IBlockState getCasingBState() {
+        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.INVAR_HEATPROOF);
+    }
+
     @Override
-    public boolean canBeDistinct() {return true;}
-    private int glass_tier;
+    public boolean canBeDistinct() {
+        return true;
+    }
+
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {
         return new MetaTileEntityDissolutionTank(metaTileEntityId);
     }
-     int ParallelNum=1;
 
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("modern", modern);
@@ -68,20 +81,18 @@ public class MetaTileEntityDissolutionTank extends GTQTRecipeMapMultiblockOverwr
     @Override
     public void update() {
         super.update();
-        if (modern == 0)
-        {
-            ParallelNum=ParallelNumA;
+        if (modern == 0) {
+            ParallelNum = ParallelNumA;
         }
-        if (modern == 1)
-        {
-            P = (int) ((this.energyContainer.getEnergyStored() + energyContainer.getInputPerSec())/(getMinVa()==0?1:getMinVa()));
+        if (modern == 1) {
+            P = (int) ((this.energyContainer.getEnergyStored() + energyContainer.getInputPerSec()) / (getMinVa() == 0 ? 1 : getMinVa()));
             ParallelNum = Math.min(P, ParallelLim);
         }
     }
-    public int getMinVa()
-    {
-        if((Math.min(this.energyContainer.getEnergyCapacity()/32,VA[glass_tier])*20)==0)return 1;
-        return (int)(Math.min(this.energyContainer.getEnergyCapacity()/32,VA[glass_tier]));
+
+    public int getMinVa() {
+        if ((Math.min(this.energyContainer.getEnergyCapacity() / 32, VA[glass_tier]) * 20) == 0) return 1;
+        return (int) (Math.min(this.energyContainer.getEnergyCapacity() / 32, VA[glass_tier]));
 
     }
 
@@ -135,7 +146,6 @@ public class MetaTileEntityDissolutionTank extends GTQTRecipeMapMultiblockOverwr
         }
     }
 
-
     @Nonnull
     @Override
     protected BlockPattern createStructurePattern() {
@@ -153,23 +163,17 @@ public class MetaTileEntityDissolutionTank extends GTQTRecipeMapMultiblockOverwr
                 .where(' ', any())
                 .build();
     }
+
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
         Object glass_tier = context.get("LGLTieredStats");
 
         this.glass_tier = GTQTUtil.getOrDefault(() -> glass_tier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)glass_tier).getIntTier(),
+                () -> ((WrappedIntTired) glass_tier).getIntTier(),
                 0);
-        ParallelLim=(int)Math.pow(2, this.glass_tier);
-        ParallelNum=ParallelLim;
-    }
-    private static IBlockState getCasingAState() {
-        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STAINLESS_CLEAN);
-    }
-
-    private static IBlockState getCasingBState() {
-        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.INVAR_HEATPROOF);
+        ParallelLim = (int) Math.pow(2, this.glass_tier);
+        ParallelNum = ParallelLim;
     }
 
     @SideOnly(Side.CLIENT)
@@ -192,12 +196,13 @@ public class MetaTileEntityDissolutionTank extends GTQTRecipeMapMultiblockOverwr
         tooltip.add(I18n.format("gtqtcore.machine.dissolution_tank.tooltip.1"));
         tooltip.add(I18n.format("gregtech.machine.cracker.gtqtupdate.1"));
     }
+
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         if (isStructureFormed()) {
-            if(modern==0) textList.add(new TextComponentTranslation("gtqtcore.tire1",glass_tier));
-            if(modern==1) textList.add(new TextComponentTranslation("gtqtcore.tire2",glass_tier));
-            textList.add(new TextComponentTranslation("gtqtcore.parr",ParallelNum,ParallelLim));
+            if (modern == 0) textList.add(new TextComponentTranslation("gtqtcore.tire1", glass_tier));
+            if (modern == 1) textList.add(new TextComponentTranslation("gtqtcore.tire2", glass_tier));
+            textList.add(new TextComponentTranslation("gtqtcore.parr", ParallelNum, ParallelLim));
         }
         super.addDisplayText(textList);
     }
@@ -209,8 +214,8 @@ public class MetaTileEntityDissolutionTank extends GTQTRecipeMapMultiblockOverwr
 
 
         public void setMaxProgress(int maxProgress) {
-                this.maxProgressTime = maxProgress*(100-glass_tier)/100;
-            }
+            this.maxProgressTime = maxProgress * (100 - glass_tier) / 100;
+        }
 
         public long getMaxVoltage() {
             return V[glass_tier];

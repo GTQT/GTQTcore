@@ -9,7 +9,6 @@ import gregtech.api.gui.ModularUI;
 import gregtech.api.gui.Widget;
 import gregtech.api.gui.widgets.AdvancedTextWidget;
 import gregtech.api.gui.widgets.ClickButtonWidget;
-import gregtech.api.gui.widgets.WidgetGroup;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
@@ -38,7 +37,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
@@ -58,28 +56,44 @@ import static keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate.CP_PAF_CA
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.TJMaterials.HydrogenSilsesquioxane;
 import static keqing.gtqtcore.api.unification.TJMaterials.SU8_Photoresist;
-import static keqing.gtqtcore.api.utils.GTQTCPUHelper.item;
 
-public class MetaTileEntityPhotolithographyFactory extends MetaTileEntityBaseWithControl{
+public class MetaTileEntityPhotolithographyFactory extends MetaTileEntityBaseWithControl {
 
+    public int[][] core = {{0, 0, 0, 0, 0}, {0, 0, 0, 0, 0}, {0, 0, 0, 0, 0}, {0, 0, 0, 0, 0}};
     int laserTier;
     int laserKind;
     int LaserAmount;
-    int []wafer={0,0,0,0,0,0,0};
+    int[] wafer = {0, 0, 0, 0, 0, 0, 0};
     boolean work;
     boolean balance;
     boolean check;
     boolean outputCheck;
     boolean speed;
-    boolean []coreWork= {false,false,false,false};
-    public int [][]core={{0,0,0,0,0},{0,0,0,0,0},{0,0,0,0,0},{0,0,0,0,0}};
-    int []speedMultiplier={0,0,0,0};
+    boolean[] coreWork = {false, false, false, false};
+    int[] speedMultiplier = {0, 0, 0, 0};
     //光刻胶等级
     FluidStack LASER1 = HydrogenSilsesquioxane.getFluid(1000);
-    FluidStack LASER2 = Vinylcinnamate .getFluid(1000);
+    FluidStack LASER2 = Vinylcinnamate.getFluid(1000);
     FluidStack LASER3 = SU8_Photoresist.getFluid(1000);
     FluidStack LASER4 = Xmt.getFluid(1000);
     FluidStack LASER5 = Zrbtmst.getFluid(1000);
+
+    //核心缓存： wafer等级0 wafer数量1 光刻胶等级2 耗时3
+    public MetaTileEntityPhotolithographyFactory(ResourceLocation metaTileEntityId) {
+        super(metaTileEntityId);
+    }
+
+    private static IBlockState getCasingState() {
+        return GTQTMetaBlocks.TURBINE_CASING.getState(GTQTTurbineCasing.TurbineCasingType.NQ_TURBINE_CASING);
+    }
+
+    private static IBlockState getFrameState() {
+        return MetaBlocks.FRAMES.get(Materials.Naquadria).getBlock(Materials.Naquadria);
+    }
+
+    private static IBlockState getGlassState() {
+        return MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.FUSION_GLASS);
+    }
 
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("laserTier", laserTier);
@@ -93,48 +107,44 @@ public class MetaTileEntityPhotolithographyFactory extends MetaTileEntityBaseWit
         data.setIntArray("core2", core[2]);
         data.setIntArray("core3", core[3]);
 
-        data.setBoolean("work",work);
-        data.setBoolean("balance",balance);
-        data.setBoolean("check",check);
-        data.setBoolean("outputCheck",outputCheck);
-        data.setBoolean("speed",speed);
+        data.setBoolean("work", work);
+        data.setBoolean("balance", balance);
+        data.setBoolean("check", check);
+        data.setBoolean("outputCheck", outputCheck);
+        data.setBoolean("speed", speed);
 
-        data.setBoolean("coreWork1",coreWork[0]);
-        data.setBoolean("coreWork2",coreWork[1]);
-        data.setBoolean("coreWork3",coreWork[2]);
-        data.setBoolean("coreWork4",coreWork[3]);
+        data.setBoolean("coreWork1", coreWork[0]);
+        data.setBoolean("coreWork2", coreWork[1]);
+        data.setBoolean("coreWork3", coreWork[2]);
+        data.setBoolean("coreWork4", coreWork[3]);
         return super.writeToNBT(data);
     }
-   
+
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         laserTier = data.getInteger("laserTier");
         laserKind = data.getInteger("laserKind");
         LaserAmount = data.getInteger("LaserAmount");
 
-        wafer=data.getIntArray("wafer");
+        wafer = data.getIntArray("wafer");
 
-        core[0]=data.getIntArray("core0");
-        core[1]=data.getIntArray("core1");
-        core[2]=data.getIntArray("core2");
-        core[3]=data.getIntArray("core3");
+        core[0] = data.getIntArray("core0");
+        core[1] = data.getIntArray("core1");
+        core[2] = data.getIntArray("core2");
+        core[3] = data.getIntArray("core3");
 
-        work=data.getBoolean("work");
-        balance=data.getBoolean("balance");
-        check=data.getBoolean("check");
-        outputCheck=data.getBoolean("outputCheck");
-        speed=data.getBoolean("speed");
+        work = data.getBoolean("work");
+        balance = data.getBoolean("balance");
+        check = data.getBoolean("check");
+        outputCheck = data.getBoolean("outputCheck");
+        speed = data.getBoolean("speed");
 
-        coreWork[0]=data.getBoolean("coreWork1");
-        coreWork[1]=data.getBoolean("coreWork2");
-        coreWork[2]=data.getBoolean("coreWork3");
-        coreWork[3]=data.getBoolean("coreWork4");
+        coreWork[0] = data.getBoolean("coreWork1");
+        coreWork[1] = data.getBoolean("coreWork2");
+        coreWork[2] = data.getBoolean("coreWork3");
+        coreWork[3] = data.getBoolean("coreWork4");
     }
 
-    //核心缓存： wafer等级0 wafer数量1 光刻胶等级2 耗时3
-    public MetaTileEntityPhotolithographyFactory(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId);
-    }
     @Override
     protected ModularUI.Builder createUITemplate(EntityPlayer entityPlayer) {
         ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND, 298, 240);
@@ -144,22 +154,22 @@ public class MetaTileEntityPhotolithographyFactory extends MetaTileEntityBaseWit
         //1号
         builder.image(3, 4 + j * 40, 128, 40, GuiTextures.DISPLAY);
         builder.widget((new AdvancedTextWidget(7, 8 + j * 40, this::addInfo1, 16777215)).setMaxWidthLimit(108).setClickHandler(this::handleDisplayClick));
-        builder.widget(new ClickButtonWidget(115, 4 + j * 40, 15, 40, "I/O", data -> coreWork[0]=!coreWork[0]));
+        builder.widget(new ClickButtonWidget(115, 4 + j * 40, 15, 40, "I/O", data -> coreWork[0] = !coreWork[0]));
         j++;
         //2号
         builder.image(3, 4 + j * 40, 128, 40, GuiTextures.DISPLAY);
         builder.widget((new AdvancedTextWidget(7, 8 + j * 40, this::addInfo2, 16777215)).setMaxWidthLimit(108).setClickHandler(this::handleDisplayClick));
-        builder.widget(new ClickButtonWidget(115, 4 + j * 40, 15, 40, "I/O", data -> coreWork[1]=!coreWork[1]));
+        builder.widget(new ClickButtonWidget(115, 4 + j * 40, 15, 40, "I/O", data -> coreWork[1] = !coreWork[1]));
         j++;
         //3号
         builder.image(3, 4 + j * 40, 128, 40, GuiTextures.DISPLAY);
         builder.widget((new AdvancedTextWidget(7, 8 + j * 40, this::addInfo3, 16777215)).setMaxWidthLimit(108).setClickHandler(this::handleDisplayClick));
-        builder.widget(new ClickButtonWidget(115, 4 + j * 40, 15, 40, "I/O", data -> coreWork[2]=!coreWork[2]));
+        builder.widget(new ClickButtonWidget(115, 4 + j * 40, 15, 40, "I/O", data -> coreWork[2] = !coreWork[2]));
         j++;
         //4号
         builder.image(3, 4 + j * 40, 128, 40, GuiTextures.DISPLAY);
         builder.widget((new AdvancedTextWidget(7, 8 + j * 40, this::addInfo4, 16777215)).setMaxWidthLimit(108).setClickHandler(this::handleDisplayClick));
-        builder.widget(new ClickButtonWidget(115, 4 + j * 40, 15, 40, "I/O", data -> coreWork[3]=!coreWork[3]));
+        builder.widget(new ClickButtonWidget(115, 4 + j * 40, 15, 40, "I/O", data -> coreWork[3] = !coreWork[3]));
 
         // Display
         builder.image(3, 164, 128, 82, GuiTextures.DISPLAY);
@@ -167,8 +177,8 @@ public class MetaTileEntityPhotolithographyFactory extends MetaTileEntityBaseWit
 
         // Display
         builder.image(130, 4, 162, 132, GuiTextures.DISPLAY);
-        builder.dynamicLabel(95+38, 8, () -> "大型光刻厂", 0xFFFFFF);
-        builder.widget((new AdvancedTextWidget(95+38, 20, this::addDisplayText, 16777215)).setMaxWidthLimit(162).setClickHandler(this::handleDisplayClick));
+        builder.dynamicLabel(95 + 38, 8, () -> "大型光刻厂", 0xFFFFFF);
+        builder.widget((new AdvancedTextWidget(95 + 38, 20, this::addDisplayText, 16777215)).setMaxWidthLimit(162).setClickHandler(this::handleDisplayClick));
 
         //按钮
         builder.widget(new ClickButtonWidget(214, 120, 36, 18, "溢出检测", this::outputCheck).setTooltipText("开启后忽视输出总线情况强制输出，这可能会导致你的产物不会被输出"));
@@ -183,6 +193,7 @@ public class MetaTileEntityPhotolithographyFactory extends MetaTileEntityBaseWit
         builder.bindPlayerInventory(entityPlayer.inventory, GuiTextures.SLOT, 130, 160);
         return builder;
     }
+
     protected void addTotal(List<ITextComponent> textList) {
         MultiblockDisplayText.builder(textList, isStructureFormed())
                 .setWorkingStatus(true, isActive() && isWorkingEnabled()) // transform into two-state system for display
@@ -192,56 +203,61 @@ public class MetaTileEntityPhotolithographyFactory extends MetaTileEntityBaseWit
                         tl.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY, "能量存储上限： %s", this.energyContainer.getEnergyCapacity()));
                         tl.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY, "能量缓存上限： %s", this.energyContainer.getEnergyStored()));
                         tl.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY, "能量输入速率： %s", this.energyContainer.getInputPerSec()));
-                        tl.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY, "超频倍率：%s 基础耗能： %s", speedMultiplier[0],((long) core[0][1] * VA[core[0][0] + core[0][2]]) / laserTier  ));
-                        tl.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY, "超频倍率：%s 基础耗能： %s", speedMultiplier[1],((long) core[1][1] * VA[core[1][0] + core[1][2]]) / laserTier  ));
-                        tl.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY, "超频倍率：%s 基础耗能： %s", speedMultiplier[2],((long) core[2][1] * VA[core[2][0] + core[2][2]]) / laserTier  ));
-                        tl.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY, "超频倍率：%s 基础耗能： %s", speedMultiplier[3],((long) core[3][1] * VA[core[3][0] + core[3][2]]) / laserTier  ));
+                        tl.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY, "超频倍率：%s 基础耗能： %s", speedMultiplier[0], ((long) core[0][1] * VA[core[0][0] + core[0][2]]) / laserTier));
+                        tl.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY, "超频倍率：%s 基础耗能： %s", speedMultiplier[1], ((long) core[1][1] * VA[core[1][0] + core[1][2]]) / laserTier));
+                        tl.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY, "超频倍率：%s 基础耗能： %s", speedMultiplier[2], ((long) core[2][1] * VA[core[2][0] + core[2][2]]) / laserTier));
+                        tl.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY, "超频倍率：%s 基础耗能： %s", speedMultiplier[3], ((long) core[3][1] * VA[core[3][0] + core[3][2]]) / laserTier));
                     }
                 });
     }
+
     protected void addInfo1(List<ITextComponent> textList) {
         MultiblockDisplayText.builder(textList, isStructureFormed())
                 .setWorkingStatus(true, isActive() && isWorkingEnabled()) // transform into two-state system for display
                 .addCustom(tl -> {
-                    tl.add(TextComponentUtil.translationWithColor(TextFormatting.GOLD, ">>线程 1 状态： %s",coreWork[0]));
-                    tl.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY, "工作进度： %s / %s",core[0][4],core[0][3]));
-                    tl.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY, "晶圆等级 %s/光刻胶等级 %s",core[0][0],core[0][2]));
+                    tl.add(TextComponentUtil.translationWithColor(TextFormatting.GOLD, ">>线程 1 状态： %s", coreWork[0]));
+                    tl.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY, "工作进度： %s / %s", core[0][4], core[0][3]));
+                    tl.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY, "晶圆等级 %s/光刻胶等级 %s", core[0][0], core[0][2]));
                 });
     }
+
     protected void addInfo2(List<ITextComponent> textList) {
         MultiblockDisplayText.builder(textList, isStructureFormed())
                 .setWorkingStatus(true, isActive() && isWorkingEnabled()) // transform into two-state system for display
                 .addCustom(tl -> {
-                    tl.add(TextComponentUtil.translationWithColor(TextFormatting.GOLD, ">>线程 2 状态： %s",coreWork[1]));
-                    tl.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY, "工作进度： %s / %s",core[1][4],core[1][3]));
-                    tl.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY, "晶圆等级 %s/光刻胶等级 %s",core[1][0],core[1][2]));
+                    tl.add(TextComponentUtil.translationWithColor(TextFormatting.GOLD, ">>线程 2 状态： %s", coreWork[1]));
+                    tl.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY, "工作进度： %s / %s", core[1][4], core[1][3]));
+                    tl.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY, "晶圆等级 %s/光刻胶等级 %s", core[1][0], core[1][2]));
                 });
     }
+
     protected void addInfo3(List<ITextComponent> textList) {
         MultiblockDisplayText.builder(textList, isStructureFormed())
                 .setWorkingStatus(true, isActive() && isWorkingEnabled()) // transform into two-state system for display
                 .addCustom(tl -> {
-                    tl.add(TextComponentUtil.translationWithColor(TextFormatting.GOLD, ">>线程 3 状态： %s",coreWork[2]));
-                    tl.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY, "工作进度： %s / %s",core[2][4],core[2][3]));
-                    tl.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY, "晶圆等级 %s/光刻胶等级 %s",core[2][0],core[2][2]));
+                    tl.add(TextComponentUtil.translationWithColor(TextFormatting.GOLD, ">>线程 3 状态： %s", coreWork[2]));
+                    tl.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY, "工作进度： %s / %s", core[2][4], core[2][3]));
+                    tl.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY, "晶圆等级 %s/光刻胶等级 %s", core[2][0], core[2][2]));
                 });
     }
+
     protected void addInfo4(List<ITextComponent> textList) {
         MultiblockDisplayText.builder(textList, isStructureFormed())
                 .setWorkingStatus(true, isActive() && isWorkingEnabled()) // transform into two-state system for display
                 .addCustom(tl -> {
-                    tl.add(TextComponentUtil.translationWithColor(TextFormatting.GOLD, ">>线程 4 状态： %s",coreWork[3]));
-                    tl.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY, "工作进度： %s / %s",core[3][4],core[3][3]));
-                    tl.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY, "晶圆等级 %s/光刻胶等级 %s",core[3][0],core[3][2]));
+                    tl.add(TextComponentUtil.translationWithColor(TextFormatting.GOLD, ">>线程 4 状态： %s", coreWork[3]));
+                    tl.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY, "工作进度： %s / %s", core[3][4], core[3][3]));
+                    tl.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY, "晶圆等级 %s/光刻胶等级 %s", core[3][0], core[3][2]));
                 });
     }
+
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         // 晶圆等级
-        String waferList = String.format(">>各级晶圆缓存: %s/%s/%s/%s/%s/%s/%s", wafer[0],wafer[1],wafer[2],wafer[3],wafer[4],wafer[5],wafer[6]);
-        String waferGrade = String.format("各线程配方数: %s %s %s %s", core[0][1],core[1][1],core[1][1],core[1][1]);
+        String waferList = String.format(">>各级晶圆缓存: %s/%s/%s/%s/%s/%s/%s", wafer[0], wafer[1], wafer[2], wafer[3], wafer[4], wafer[5], wafer[6]);
+        String waferGrade = String.format("各线程配方数: %s %s %s %s", core[0][1], core[1][1], core[1][1], core[1][1]);
         // 光刻胶等级
-        String laserKindDesc = String.format(">>光刻胶等级: %s 支持配方数: %s", laserKind,LaserAmount / 1000);
+        String laserKindDesc = String.format(">>光刻胶等级: %s 支持配方数: %s", laserKind, LaserAmount / 1000);
         // 开关状态
         String workStatus = String.format("//:开关状态: %s", work);
         // 均分状态
@@ -254,39 +270,44 @@ public class MetaTileEntityPhotolithographyFactory extends MetaTileEntityBaseWit
         String speedStatus = String.format("//:超频状态: %s", speed);
         // 组合所有信息
         String displayText = String.format("%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n",
-                waferList,waferGrade, laserKindDesc, workStatus, balanceStatus, checkStatus,outputCheckStatus,speedStatus);
+                waferList, waferGrade, laserKindDesc, workStatus, balanceStatus, checkStatus, outputCheckStatus, speedStatus);
         // 添加到文本列表
         textList.add(new TextComponentTranslation(displayText));
     }
 
-
     private void outputlaser(Widget.ClickData clickData) {
-        if(laserKind==1) this.getOutputFluidInventory().fill(HydrogenSilsesquioxane.getFluid(LaserAmount),true);
-        if(laserKind==2) this.getOutputFluidInventory().fill(Vinylcinnamate.getFluid(LaserAmount),true);
-        if(laserKind==3) this.getOutputFluidInventory().fill(SU8_Photoresist.getFluid(LaserAmount),true);
-        if(laserKind==4) this.getOutputFluidInventory().fill(Xmt.getFluid(LaserAmount),true);
-        if(laserKind==5) this.getOutputFluidInventory().fill(Zrbtmst.getFluid(LaserAmount),true);
-        LaserAmount=0;
-        for(int j=0;j<this.wafer.length;j++) {
+        if (laserKind == 1) this.getOutputFluidInventory().fill(HydrogenSilsesquioxane.getFluid(LaserAmount), true);
+        if (laserKind == 2) this.getOutputFluidInventory().fill(Vinylcinnamate.getFluid(LaserAmount), true);
+        if (laserKind == 3) this.getOutputFluidInventory().fill(SU8_Photoresist.getFluid(LaserAmount), true);
+        if (laserKind == 4) this.getOutputFluidInventory().fill(Xmt.getFluid(LaserAmount), true);
+        if (laserKind == 5) this.getOutputFluidInventory().fill(Zrbtmst.getFluid(LaserAmount), true);
+        LaserAmount = 0;
+        for (int j = 0; j < this.wafer.length; j++) {
             if (this.wafer[j] > 0)
                 GTTransferUtils.insertItem(this.outputInventory, new ItemStack(GTQTCPUHelper.wafer[j].getMetaItem(), wafer[j], GTQTCPUHelper.wafer[j].getMetaValue()), false);
         }
     }
+
     private void check(Widget.ClickData clickData) {
-        check=!check;
+        check = !check;
     }
+
     private void balance(Widget.ClickData clickData) {
-        balance=!balance;
+        balance = !balance;
     }
+
     private void work(Widget.ClickData clickData) {
-        work=!work;
+        work = !work;
     }
+
     private void speed(Widget.ClickData clickData) {
-        speed=!speed;
+        speed = !speed;
     }
+
     private void outputCheck(Widget.ClickData clickData) {
-        outputCheck=!outputCheck;
+        outputCheck = !outputCheck;
     }
+
     @Override
     protected void updateFormedValid() {
         InputWafer();
@@ -308,6 +329,7 @@ public class MetaTileEntityPhotolithographyFactory extends MetaTileEntityBaseWit
             }
         }
     }
+
     public void setCoreToZeroIfAnyZero(int[] core) {
         // 检查 core 数组中是否有任何一个元素为 0
         boolean hasZero = core[0] == 0 || core[1] == 0 || core[2] == 0;
@@ -317,6 +339,7 @@ public class MetaTileEntityPhotolithographyFactory extends MetaTileEntityBaseWit
             Arrays.fill(core, 0);
         }
     }
+
     /**
      * 更新核心工作状态的私有方法
      * 本方法根据当前的check状态和coreWork数组状态，更新work变量和check状态，并对core数组中的元素进行更新
@@ -325,7 +348,7 @@ public class MetaTileEntityPhotolithographyFactory extends MetaTileEntityBaseWit
     private void updateCoreWork() {
         // 根据check状态，更新work变量，work为true如果任一coreWork元素为true
         if (check) {
-            for(int i=0;i<4;i++) coreWork[i]=(core[i][1]!=0);
+            for (int i = 0; i < 4; i++) coreWork[i] = (core[i][1] != 0);
             work = coreWork[0] || coreWork[1] || coreWork[2] || coreWork[3];
 
         }
@@ -351,27 +374,26 @@ public class MetaTileEntityPhotolithographyFactory extends MetaTileEntityBaseWit
                         LaserAmount -= minLaserAmount * 1000;
                         wafer[j] -= minLaserAmount;
 
-                    }
-                    else {
+                    } else {
                         int deltaLaserAmount = 64 - core[i][1];
                         core[i][1] = 64;
                         LaserAmount -= deltaLaserAmount * 1000;
                         wafer[j] -= deltaLaserAmount;
                     }
                     core[i][2] = laserKind;
-                    coreWork[i]=true;
+                    coreWork[i] = true;
                 }
             }
             if (balance) {
                 // 如果balance为true，尝试平衡core数组中不同元素的第二列的值
                 for (int k = 0; k < 4; k++) {
-                    if (k != i &&       (core[i][1] == 0    || (core[i][0] == core[k][0] && Math.abs(core[i][1] - core[k][1]) >= 1) )      && core[k][1] > 2) {
+                    if (k != i && (core[i][1] == 0 || (core[i][0] == core[k][0] && Math.abs(core[i][1] - core[k][1]) >= 1)) && core[k][1] > 2) {
                         core[i][2] = core[k][2];
                         core[i][0] = core[k][0];
                         int sum = core[i][1] + core[k][1];
                         core[i][1] = sum / 2;
                         core[k][1] = sum - core[i][1];
-                        coreWork[k]=true;
+                        coreWork[k] = true;
                     }
                 }
             }
@@ -397,14 +419,13 @@ public class MetaTileEntityPhotolithographyFactory extends MetaTileEntityBaseWit
                 int finalI = i;
                 executor.submit(() -> {
 
-                    if(core[index][4]<core[index][3])
-                    {
+                    if (core[index][4] < core[index][3]) {
                         long currentCoreEnergyCost = ((long) core[index][1] * VA[core[index][0] + core[index][2]]) / laserTier;
 
                         if (coreWork[index] && energyContainer.getEnergyStored() - currentCoreEnergyCost > 0) {
                             long inputEnergy = energyContainer.getEnergyStored() / 80 + energyContainer.getInputVoltage() / 4;
 
-                            if(speed) {
+                            if (speed) {
                                 if (inputEnergy >= 1024 * currentCoreEnergyCost) {
                                     energyContainer.removeEnergy(1024 * currentCoreEnergyCost);
                                     speedMultiplier[finalI] = 32;
@@ -424,8 +445,7 @@ public class MetaTileEntityPhotolithographyFactory extends MetaTileEntityBaseWit
                                     energyContainer.removeEnergy(currentCoreEnergyCost);
                                     speedMultiplier[finalI] = 1;
                                 }
-                            }
-                            else {
+                            } else {
                                 energyContainer.removeEnergy(currentCoreEnergyCost);
                                 speedMultiplier[finalI] = 1;
                             }
@@ -433,9 +453,8 @@ public class MetaTileEntityPhotolithographyFactory extends MetaTileEntityBaseWit
                             // 增加当前核心的工作进度
                             core[index][4] += speedMultiplier[finalI];
 
-                        } else speedMultiplier[finalI]=0;
-                    }
-                    else {
+                        } else speedMultiplier[finalI] = 0;
+                    } else {
                         List<ItemStack> itemList = new ArrayList<>();
                         for (int number = 0; number < GTQTCPUHelper.item.length; number++) {
                             ItemStack stack = GTQTCPUHelper.getStack(number, core[index][1], core[index][0], core[index][2]);
@@ -507,6 +526,7 @@ public class MetaTileEntityPhotolithographyFactory extends MetaTileEntityBaseWit
             default -> null;
         };
     }
+
     @SideOnly(Side.CLIENT)
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
@@ -591,35 +611,27 @@ public class MetaTileEntityPhotolithographyFactory extends MetaTileEntityBaseWit
         this.getFrontOverlay().renderOrientedState(renderState, translation, pipeline, getFrontFacing(), true,
                 isStructureFormed());
     }
+
     @SideOnly(Side.CLIENT)
     @Override
     protected ICubeRenderer getFrontOverlay() {
         return Textures.DATA_BANK_OVERLAY;
     }
+
     @Override
     public boolean hasMufflerMechanics() {
         return false;
     }
+
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
         Object laserTier = context.get("PAFTieredStats");
         this.laserTier = GTQTUtil.getOrDefault(() -> laserTier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)laserTier).getIntTier(),
+                () -> ((WrappedIntTired) laserTier).getIntTier(),
                 0);
     }
 
-    private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.TURBINE_CASING.getState(GTQTTurbineCasing.TurbineCasingType.NQ_TURBINE_CASING);
-    }
-
-    private static IBlockState getFrameState() {
-        return MetaBlocks.FRAMES.get(Materials.Naquadria).getBlock(Materials.Naquadria);
-    }
-
-    private static IBlockState getGlassState() {
-        return MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.FUSION_GLASS);
-    }
     @Nonnull
     @Override
     public List<ITextComponent> getDataInfo() {
@@ -629,7 +641,7 @@ public class MetaTileEntityPhotolithographyFactory extends MetaTileEntityBaseWit
     public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("gtqtcore.pf.tooltip.1", new Object[0]));
-        tooltip.add(TooltipHelper.BLINKING_CYAN+I18n.format("gtqtcore.pf.tooltip.2", 4));
+        tooltip.add(TooltipHelper.BLINKING_CYAN + I18n.format("gtqtcore.pf.tooltip.2", 4));
         tooltip.add(I18n.format("gtqtcore.pf.tooltip.3"));
         tooltip.add(I18n.format("gtqtcore.pf.tooltip.4"));
         tooltip.add(I18n.format("gtqtcore.pf.tooltip.5"));

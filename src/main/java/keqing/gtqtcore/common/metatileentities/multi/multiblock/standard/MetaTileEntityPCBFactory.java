@@ -66,28 +66,87 @@ import static keqing.gtqtcore.common.block.blocks.BlockPCBFactoryCasing.PCBFacto
  * PCB Factory
  *
  * @author Magic_Sweepy
- *
  * @since 2.8.8-beta
  */
 public class MetaTileEntityPCBFactory extends RecipeMapMultiblockController {
 
+    //  Traceability Predicate Utility
+    //  Used to check snow layer on block (for Multiblock Structure).
+    private static final TraceabilityPredicate SNOW_LAYER = new TraceabilityPredicate(blockWorldState -> GTUtility.isBlockSnow(blockWorldState.getBlockState()));
+    private final int minTraceSize = 25;
+    private final int maxTraceSize = 200;
     //  Upgrade Number
     private byte mainUpgradeNumber = 0;
     private byte bioUpgradeNumber = 0;
     private byte coolingUpgradeNumber = 0;
-
     //  Special Parameters (Default: 100μm, Range: 25μm-200μm)
     private int traceSize = 100;
-    private final int minTraceSize = 25;
-    private final int maxTraceSize = 200;
-
-    //  Traceability Predicate Utility
-    //  Used to check snow layer on block (for Multiblock Structure).
-    private static final TraceabilityPredicate SNOW_LAYER = new TraceabilityPredicate(blockWorldState -> GTUtility.isBlockSnow(blockWorldState.getBlockState()));
 
     public MetaTileEntityPCBFactory(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.PCB_FACTORY_RECIPES);
         this.recipeMapWorkable = new PCBFactoryRecipeLogic(this);
+    }
+
+    private static IBlockState getCasingState(String type) {
+        return switch (type) {
+            case "T1StructureCasing" ->
+                    GTQTMetaBlocks.PCB_FACTORY_CASING.getState(BlockPCBFactoryCasing.PCBFactoryCasingType.BASIC_PHOTOLITHOGRAPHIC_FRAMEWORK_CASING);
+            case "T2StructureCasing" ->
+                    GTQTMetaBlocks.PCB_FACTORY_CASING.getState(BlockPCBFactoryCasing.PCBFactoryCasingType.MOLD_PRINTING_ASSEMBLY_FRAMEWORK_CASING);
+            case "T3StructureCasing" ->
+                    GTQTMetaBlocks.PCB_FACTORY_CASING.getState(BlockPCBFactoryCasing.PCBFactoryCasingType.RADIATION_PROOF_SCAN_FRAMEWORK_CASING);
+            case "NaquadahAlloyCasing" ->
+                    GTQTMetaBlocks.TURBINE_CASING.getState(GTQTTurbineCasing.TurbineCasingType.NQ_TURBINE_CASING);
+            case "BioChamberCasing" ->
+                    GTQTMetaBlocks.PCB_FACTORY_CASING.getState(BlockPCBFactoryCasing.PCBFactoryCasingType.BIOLOGICAL_STERILE_MACHINE_CASING);
+            case "ThermosinkCasing" ->
+                    GTQTMetaBlocks.PCB_FACTORY_CASING.getState(BlockPCBFactoryCasing.PCBFactoryCasingType.INFINITY_COOLED_MACHINE_CASING);
+            default -> null;
+        };
+    }
+
+    private static IBlockState getSecondCasingState() {
+        return MetaBlocks.CLEANROOM_CASING.getState(BlockCleanroomCasing.CasingType.PLASCRETE);
+    }
+
+    private static IBlockState getThirdCasingState(String type) {
+        return switch (type) {
+            case "T1Grate" ->
+                    MetaBlocks.MULTIBLOCK_CASING.getState(BlockMultiblockCasing.MultiblockCasingType.GRATE_CASING);
+            case "T1Substrate" -> GTQTMetaBlocks.PCB_FACTORY_CASING.getState(SUBSTRATE_CASING);
+            case "CoolingTowerIntake" ->
+                    MetaBlocks.MULTIBLOCK_CASING.getState(BlockMultiblockCasing.MultiblockCasingType.EXTREME_ENGINE_INTAKE_CASING);
+            default -> null;
+        };
+    }
+
+    private static IBlockState getBoilerCasingState() {
+        return MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.TUNGSTENSTEEL_PIPE);
+    }
+
+    private static IBlockState getCoilState() {
+        return MetaBlocks.FUSION_CASING.getState(BlockFusionCasing.CasingType.SUPERCONDUCTOR_COIL);
+    }
+
+    private static IBlockState getFrameState(String type) {
+        return switch (type) {
+            case "T1Frame" -> MetaBlocks.FRAMES.get(GCYMMaterials.HSLASteel).getBlock(GCYMMaterials.HSLASteel);
+            case "T2Frame" -> MetaBlocks.FRAMES.get(Materials.TungstenSteel).getBlock(Materials.TungstenSteel);
+            case "CoolingTowerFrame" -> MetaBlocks.FRAMES.get(Materials.BlackSteel).getBlock(Materials.BlackSteel);
+            case "BioChamberFrame" -> MetaBlocks.FRAMES.get(SiliconCarbide).getBlock(SiliconCarbide);
+            case "ThermosinkFrame" -> MetaBlocks.FRAMES.get(Materials.Naquadah).getBlock(Materials.Naquadah);
+            default -> null;
+        };
+    }
+
+    private static IBlockState getGlassState(String type) {
+        return switch (type) {
+            case "T1StructureGlass" ->
+                    MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.LAMINATED_GLASS);
+            case "BioChamberGlass" ->
+                    MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.CLEANROOM_GLASS);
+            default -> null;
+        };
     }
 
     @Override
@@ -99,7 +158,7 @@ public class MetaTileEntityPCBFactory extends RecipeMapMultiblockController {
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
         //  Main Structure T1
-        this.mainUpgradeNumber +=1;
+        this.mainUpgradeNumber += 1;
         //  Main Structure T2
         if (context.get("mainUpgradeT2") != null) {
             this.mainUpgradeNumber += 1;
@@ -202,74 +261,6 @@ public class MetaTileEntityPCBFactory extends RecipeMapMultiblockController {
                 .build();
     }
 
-    private static IBlockState getCasingState(String type) {
-        return switch (type) {
-            case "T1StructureCasing" ->
-                    GTQTMetaBlocks.PCB_FACTORY_CASING.getState(BlockPCBFactoryCasing.PCBFactoryCasingType.BASIC_PHOTOLITHOGRAPHIC_FRAMEWORK_CASING);
-            case "T2StructureCasing" ->
-                    GTQTMetaBlocks.PCB_FACTORY_CASING.getState(BlockPCBFactoryCasing.PCBFactoryCasingType.MOLD_PRINTING_ASSEMBLY_FRAMEWORK_CASING);
-            case "T3StructureCasing" ->
-                    GTQTMetaBlocks.PCB_FACTORY_CASING.getState(BlockPCBFactoryCasing.PCBFactoryCasingType.RADIATION_PROOF_SCAN_FRAMEWORK_CASING);
-            case "NaquadahAlloyCasing" ->
-                    GTQTMetaBlocks.TURBINE_CASING.getState(GTQTTurbineCasing.TurbineCasingType.NQ_TURBINE_CASING);
-            case "BioChamberCasing" ->
-                    GTQTMetaBlocks.PCB_FACTORY_CASING.getState(BlockPCBFactoryCasing.PCBFactoryCasingType.BIOLOGICAL_STERILE_MACHINE_CASING);
-            case "ThermosinkCasing" ->
-                    GTQTMetaBlocks.PCB_FACTORY_CASING.getState(BlockPCBFactoryCasing.PCBFactoryCasingType.INFINITY_COOLED_MACHINE_CASING);
-            default -> null;
-        };
-    }
-
-    private static IBlockState getSecondCasingState() {
-        return MetaBlocks.CLEANROOM_CASING.getState(BlockCleanroomCasing.CasingType.PLASCRETE);
-    }
-
-    private static IBlockState getThirdCasingState(String type) {
-        return switch (type) {
-            case "T1Grate" ->
-                    MetaBlocks.MULTIBLOCK_CASING.getState(BlockMultiblockCasing.MultiblockCasingType.GRATE_CASING);
-            case "T1Substrate" ->
-                    GTQTMetaBlocks.PCB_FACTORY_CASING.getState(SUBSTRATE_CASING);
-            case "CoolingTowerIntake" ->
-                    MetaBlocks.MULTIBLOCK_CASING.getState(BlockMultiblockCasing.MultiblockCasingType.EXTREME_ENGINE_INTAKE_CASING);
-            default -> null;
-        };
-    }
-
-    private static IBlockState getBoilerCasingState() {
-        return MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.TUNGSTENSTEEL_PIPE);
-    }
-
-    private static IBlockState getCoilState() {
-        return MetaBlocks.FUSION_CASING.getState(BlockFusionCasing.CasingType.SUPERCONDUCTOR_COIL);
-    }
-
-    private static IBlockState getFrameState(String type) {
-        return switch (type) {
-            case "T1Frame" ->
-                    MetaBlocks.FRAMES.get(GCYMMaterials.HSLASteel).getBlock(GCYMMaterials.HSLASteel);
-            case "T2Frame" ->
-                    MetaBlocks.FRAMES.get(Materials.TungstenSteel).getBlock(Materials.TungstenSteel);
-            case "CoolingTowerFrame" ->
-                    MetaBlocks.FRAMES.get(Materials.BlackSteel).getBlock(Materials.BlackSteel);
-            case "BioChamberFrame" ->
-                    MetaBlocks.FRAMES.get(SiliconCarbide).getBlock(SiliconCarbide);
-            case "ThermosinkFrame" ->
-                    MetaBlocks.FRAMES.get(Materials.Naquadah).getBlock(Materials.Naquadah);
-            default -> null;
-        };
-    }
-
-    private static IBlockState getGlassState(String type) {
-        return switch (type) {
-            case "T1StructureGlass"
-                    -> MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.LAMINATED_GLASS);
-            case "BioChamberGlass"
-                    -> MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.CLEANROOM_GLASS);
-            default -> null;
-        };
-    }
-
     @Nonnull
     @Override
     protected Widget getFlexButton(int x, int y, int width, int height) {
@@ -296,7 +287,7 @@ public class MetaTileEntityPCBFactory extends RecipeMapMultiblockController {
         return super.writeToNBT(data);
     }
 
-   
+
     public void readFromNBT(NBTTagCompound data) {
         traceSize = data.getInteger("TraceSize");
         super.readFromNBT(data);
@@ -332,73 +323,73 @@ public class MetaTileEntityPCBFactory extends RecipeMapMultiblockController {
         MultiblockShapeInfo.Builder builder = null;
         if (Blocks.AIR != null) {
             builder = MultiblockShapeInfo.builder()
-                .aisle("              gHHHg  nTTTn       ", "              gPPPg  nQQQn       ", "              g   g  n   n       ", "              g   g  n   n       ", "              gJJJg  nRRRn       ", "              g   g  n   n       ", "              g   g  n   n       ", "              g   g  n   n       ", "              g   g  n   n       ", "              gIIIg  nTTTn       ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ")
-                .aisle("              HHHHH  TTTTT       ", "              PIIIP  QOOOQ       ", "               III    OOO        ", "               III    OOO        ", "              JIIIJ  ROOOR       ", "               III    OOO        ", "               III    OOO        ", "               PPP    QQQ        ", "               III    TTT        ", "              I###I  T###T       ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ")
-                .aisle("              HHHHH  TTTTT       ", "              PI*IP  QOUOQ       ", "               I#I    OUO        ", "               I#I    OUO        ", "              JI#IJ  ROUOR       ", "               I#I    OUO        ", "               I#I    OUO        ", "               P#P    QUQ        ", "               I#I    TUT        ", "              I###I  T###T       ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ")
-                .aisle(" KKKKK        HHHHH  TTTTT       ", "              PIIIP  QOOOQ       ", "               III    OOO        ", "               III    OOO        ", "              JIIIJ  ROOOR       ", "               III    OOO        ", "               III    OOO        ", "               PPP    QQQ        ", "               III    TTT        ", "              I###I  T###T       ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ")
-                .aisle("KKKKKKK       gHHHg  nTTTn       ", "  KKK         gPPPg  nQQQn       ", "  KKK         g   g  n   n       ", "  KKK         g   g  n   n       ", "  KKK         gJJJg  nRRRn       ", "  KKK         g   g  n   n       ", "  KKK         g   g  n   n       ", "  KKK         g   g  n   n       ", "  KKK         g   g  n   n       ", "  KKK         gIIIg  nTTTn       ", "  KKK                            ", "  KKK                            ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ")
-                .aisle("KKKKKKK                          ", " K###K                           ", " K###K                           ", " K###K                           ", " K###K                           ", " K###K                           ", " K###K                           ", " K###K                           ", " K###K                           ", " K###K                           ", " K###K                           ", " K###K                           ", "  LLL                            ", "  LLL                            ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ")
-                .aisle("KKKKKKK                          ", " K###K                           ", " K###K                           ", " K###K                           ", " K###K                           ", " K###K                           ", " K###K                           ", " K###K                           ", " K###K                           ", " K###K                           ", "  L#L                            ", " K###K                           ", "  L#L                            ", "  L#L                            ", "  LKL                            ", "  LKL                            ", "   K                             ", "   K                             ", "   K                             ", "   K                             ", "   K                             ", "                                 ")
-                .aisle("KKKKKKK  fEEf                    ", " K###K   fEEf                    ", " K###K   fEEf                    ", " K###K                           ", " K###K                           ", " K###K                           ", " K###K                           ", " K###K                           ", " K###K                           ", " K###K                           ", "  L#L                            ", " K###K                           ", "  L#L                            ", "  L#L                            ", "  L#L                            ", "  L#L                            ", "  L#L                            ", "  L#L                            ", "  L#L                            ", "  L#L                            ", "   K                             ", "   K                             ")
-                .aisle("KKKKKKK  EEEE                    ", " K###K   E##E                    ", " K###K   E##E                    ", " K###K   fEEf                    ", " K###K   fEEf                    ", " K###K                           ", "  L#L                            ", "  L#L                            ", "  L#L                            ", " K###K                           ", "  L#L                            ", " K###K                           ", " K###K                           ", " K###K                           ", " K###K                           ", " K###K                           ", " K###K                           ", " K###K                           ", "  L#L                            ", "  L#L                            ", "   K                             ", "   K                             ")
-                .aisle("KKKKKKK  EEEEFCCCpeF             ", " K###K   E##EFCCCCCF             ", " K###K   E##EFCCCCCF             ", " K###K   E##EFCCCCCF             ", " K###K   E##EF     F             ", " K###K   fEEf                    ", "  L#L                            ", "  L#L                            ", "  L#L                            ", " K###K                           ", "  L#L                            ", " K###K                           ", " K###K                           ", " K###K                           ", " K###K                           ", " K###K                           ", " K###K                           ", " K###K                           ", "  L#L                            ", "  LKL                            ", "   K                             ", "                                 ")
-                .aisle("KKKKKKK  EEEECcccccC hMMMh  hMMMh", " K###K   E##EC#####C hNNNh  hNNNh", " K###K   E##EC#####C hNNNh  hNNNh", " K###K   E##EC#####C hNNNh  hNNNh", " K###K   E##ECCCCCCC h   h  h   h", " K###K   EEEEF     F             ", "  LLL    fEEf                    ", "  LLL                            ", "  LLL                            ", " K###K                           ", " K###K                           ", " K###K                           ", " K#L#K                           ", " K#L#K                           ", " K#L#K                           ", " K###K                           ", " K###K                           ", " K###K                           ", "  LLL                            ", "  LLL                            ", "                                 ", "                                 ")
-                .aisle("KKKKKKK  EEEECcccccC MMMMM  MMMMM", "  KKK    E##ED#XXX#D N###N  N###N", "  KKK    E##ED#####D N###N  N###N", "  KKK    E##EC#####C N###N  N###N", "  KKK    E##ECCCCCCC  MMM    MMM ", "  KKK    EEEEF     F             ", "         fEEf                    ", "                                 ", "                                 ", "  KKK                            ", "  KKK                            ", "  KKK                            ", "  K K                            ", "  K K                            ", "  K K                            ", "  KKK                            ", "  KKK                            ", "  KKK                            ", "                                 ", "                                 ", "                                 ", "                                 ")
-                .aisle(" KKKKK   EEEECcccccC MMMMM  MMMMM", "         E##ED#XXX#D N###N  N###N", "         E##ED#####D N###N  N###N", "         E##EC#####C N###N  N###N", "         E##ECCCCCCC  MMM    MMM ", "         EEEEFFFFFFF   M      M  ", "         fEEf           MMMMMM   ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ")
-                .aisle("         EEEECcccccC MMMMM  MMMMM", "         E##ED#XXX#D N###N  N###N", "         E##ED#####D N###N  N###N", "         E##EC#####C N###N  N###N", "         E##ECGGGGGC  MMM    MMM ", "         EEEEF     F             ", "         fEEf                    ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ")
-                .aisle("         EEEECcccccC hMMMh  hMMMh", "         E##EC#####C hNNNh  hNNNh", "         E##EC#####C hNNNh  hNNNh", "         E##EC#####C hNNNh  hNNNh", "         E##ECGGGGGC h   h  h   h", "         EEEEF     F             ", "         fEEf                    ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ")
-                .aisle("         EEEEFijSkkF             ", "         E##EFGGGGGF             ", "         E##EFGGGGGF             ", "         E##EFGGGGGF             ", "         E##EFFFFFFF             ", "         fEEf                    ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ")
-                .aisle("         EEEE                    ", "         E##E                    ", "         E##E                    ", "         fEEf                    ", "         fEEf                    ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ")
-                .aisle("         fEEf                    ", "         fEEf                    ", "         fEEf                    ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ")
-                .where('S', GTQTMetaTileEntities.PCB_FACTORY, EnumFacing.SOUTH)
-                .where('C', getCasingState("T1StructureCasing")) // Basic Photolithographic Framework casing
-                .where('c', getSecondCasingState()) // Plascrete
-                .where('D', getThirdCasingState("T1Grate"))  // Grate casing
-                .where('F', getFrameState("T1Frame")) // HSLA Steel frame
-                .where('G', getGlassState("T1StructureGlass")) // Laminated glass
-                .where('X', getThirdCasingState("T1Substrate")) // Substrate casing
-                .where('i', MetaTileEntities.ITEM_IMPORT_BUS[1], EnumFacing.SOUTH)
-                .where('j', MetaTileEntities.ITEM_EXPORT_BUS[1], EnumFacing.SOUTH)
-                .where('k', MetaTileEntities.FLUID_IMPORT_HATCH[1], EnumFacing.SOUTH)
-                .where('e', MetaTileEntities.ENERGY_INPUT_HATCH[LuV], EnumFacing.NORTH)
-                .where('p', MetaTileEntities.MAINTENANCE_HATCH, EnumFacing.NORTH)
-                .where('#', Blocks.AIR.getDefaultState())
-                .where('*', Blocks.AIR.getDefaultState())
-                .where(' ', Blocks.AIR.getDefaultState());
-        shapeInfo.add(builder.build());
-        //  Main Structure (T2)
-        shapeInfo.add(builder
-                .where('E', getCasingState("T2StructureCasing")) // Mold Printing Assembly Framework casing
-                .where('f', getFrameState("T2Frame")) // Tungsten Steel Frame
-                .build());
-        //  Liquid Cooling Tower (Cooling Upgrade T1)
-        shapeInfo.add(builder
-                .where('H', getCasingState("T2StructureCasing")) // Mold Printing Assembly Framework casing
-                .where('I', getCasingState("NaquadahAlloyCasing")) // Naquadah Alloy casing
-                .where('J', getThirdCasingState("CoolingTowerIntake")) // Extreme Intake casing
-                .where('P', getBoilerCasingState()) // Tungsten Steel Pipe casing
-                .where('g', getFrameState("CoolingTowerFrame")) // Black Steel Frame
-                .build());
-        //  Main Structure (T3)
-        shapeInfo.add(builder
-                .where('K', getCasingState("T3StructureCasing")) // Radiation Proof Scan Framework casing
-                .where('L', getCasingState("NaquadahAlloyCasing")) // Naquadah Alloy casing
-                .build());
-        //  Bio Chamber (Bio Upgrade)
-        shapeInfo.add(builder
-                .where('M', getCasingState("BioChamberCasing")) // Biological Sterile Machine casing
-                .where('h', getFrameState("BioChamberFrame")) // Silicon Carbide frame
-                .where('N', getGlassState("BioChamberGlass")) // Cleanroom glass
-                .build());
-        //  Thermosink (Cooling Upgrade T2)
-        shapeInfo.add(builder
-                .where('O', getCasingState("ThermosinkCasing")) // Infinity Cooled Machine casing
-                .where('Q', getBoilerCasingState()) // Tungsten Steel Pipe casing
-                .where('R', getThirdCasingState("CoolingTowerIntake")) // Extreme Intake casing
-                .where('T', getCasingState("T2StructureCasing")) // Mold Printing Assembly Framework casing
-                .where('U', getCoilState()) // Superconductor Coil block
-                .where('n', getFrameState("ThermosinkFrame")) // Naquadah frame
-                .build());
+                    .aisle("              gHHHg  nTTTn       ", "              gPPPg  nQQQn       ", "              g   g  n   n       ", "              g   g  n   n       ", "              gJJJg  nRRRn       ", "              g   g  n   n       ", "              g   g  n   n       ", "              g   g  n   n       ", "              g   g  n   n       ", "              gIIIg  nTTTn       ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ")
+                    .aisle("              HHHHH  TTTTT       ", "              PIIIP  QOOOQ       ", "               III    OOO        ", "               III    OOO        ", "              JIIIJ  ROOOR       ", "               III    OOO        ", "               III    OOO        ", "               PPP    QQQ        ", "               III    TTT        ", "              I###I  T###T       ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ")
+                    .aisle("              HHHHH  TTTTT       ", "              PI*IP  QOUOQ       ", "               I#I    OUO        ", "               I#I    OUO        ", "              JI#IJ  ROUOR       ", "               I#I    OUO        ", "               I#I    OUO        ", "               P#P    QUQ        ", "               I#I    TUT        ", "              I###I  T###T       ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ")
+                    .aisle(" KKKKK        HHHHH  TTTTT       ", "              PIIIP  QOOOQ       ", "               III    OOO        ", "               III    OOO        ", "              JIIIJ  ROOOR       ", "               III    OOO        ", "               III    OOO        ", "               PPP    QQQ        ", "               III    TTT        ", "              I###I  T###T       ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ")
+                    .aisle("KKKKKKK       gHHHg  nTTTn       ", "  KKK         gPPPg  nQQQn       ", "  KKK         g   g  n   n       ", "  KKK         g   g  n   n       ", "  KKK         gJJJg  nRRRn       ", "  KKK         g   g  n   n       ", "  KKK         g   g  n   n       ", "  KKK         g   g  n   n       ", "  KKK         g   g  n   n       ", "  KKK         gIIIg  nTTTn       ", "  KKK                            ", "  KKK                            ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ")
+                    .aisle("KKKKKKK                          ", " K###K                           ", " K###K                           ", " K###K                           ", " K###K                           ", " K###K                           ", " K###K                           ", " K###K                           ", " K###K                           ", " K###K                           ", " K###K                           ", " K###K                           ", "  LLL                            ", "  LLL                            ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ")
+                    .aisle("KKKKKKK                          ", " K###K                           ", " K###K                           ", " K###K                           ", " K###K                           ", " K###K                           ", " K###K                           ", " K###K                           ", " K###K                           ", " K###K                           ", "  L#L                            ", " K###K                           ", "  L#L                            ", "  L#L                            ", "  LKL                            ", "  LKL                            ", "   K                             ", "   K                             ", "   K                             ", "   K                             ", "   K                             ", "                                 ")
+                    .aisle("KKKKKKK  fEEf                    ", " K###K   fEEf                    ", " K###K   fEEf                    ", " K###K                           ", " K###K                           ", " K###K                           ", " K###K                           ", " K###K                           ", " K###K                           ", " K###K                           ", "  L#L                            ", " K###K                           ", "  L#L                            ", "  L#L                            ", "  L#L                            ", "  L#L                            ", "  L#L                            ", "  L#L                            ", "  L#L                            ", "  L#L                            ", "   K                             ", "   K                             ")
+                    .aisle("KKKKKKK  EEEE                    ", " K###K   E##E                    ", " K###K   E##E                    ", " K###K   fEEf                    ", " K###K   fEEf                    ", " K###K                           ", "  L#L                            ", "  L#L                            ", "  L#L                            ", " K###K                           ", "  L#L                            ", " K###K                           ", " K###K                           ", " K###K                           ", " K###K                           ", " K###K                           ", " K###K                           ", " K###K                           ", "  L#L                            ", "  L#L                            ", "   K                             ", "   K                             ")
+                    .aisle("KKKKKKK  EEEEFCCCpeF             ", " K###K   E##EFCCCCCF             ", " K###K   E##EFCCCCCF             ", " K###K   E##EFCCCCCF             ", " K###K   E##EF     F             ", " K###K   fEEf                    ", "  L#L                            ", "  L#L                            ", "  L#L                            ", " K###K                           ", "  L#L                            ", " K###K                           ", " K###K                           ", " K###K                           ", " K###K                           ", " K###K                           ", " K###K                           ", " K###K                           ", "  L#L                            ", "  LKL                            ", "   K                             ", "                                 ")
+                    .aisle("KKKKKKK  EEEECcccccC hMMMh  hMMMh", " K###K   E##EC#####C hNNNh  hNNNh", " K###K   E##EC#####C hNNNh  hNNNh", " K###K   E##EC#####C hNNNh  hNNNh", " K###K   E##ECCCCCCC h   h  h   h", " K###K   EEEEF     F             ", "  LLL    fEEf                    ", "  LLL                            ", "  LLL                            ", " K###K                           ", " K###K                           ", " K###K                           ", " K#L#K                           ", " K#L#K                           ", " K#L#K                           ", " K###K                           ", " K###K                           ", " K###K                           ", "  LLL                            ", "  LLL                            ", "                                 ", "                                 ")
+                    .aisle("KKKKKKK  EEEECcccccC MMMMM  MMMMM", "  KKK    E##ED#XXX#D N###N  N###N", "  KKK    E##ED#####D N###N  N###N", "  KKK    E##EC#####C N###N  N###N", "  KKK    E##ECCCCCCC  MMM    MMM ", "  KKK    EEEEF     F             ", "         fEEf                    ", "                                 ", "                                 ", "  KKK                            ", "  KKK                            ", "  KKK                            ", "  K K                            ", "  K K                            ", "  K K                            ", "  KKK                            ", "  KKK                            ", "  KKK                            ", "                                 ", "                                 ", "                                 ", "                                 ")
+                    .aisle(" KKKKK   EEEECcccccC MMMMM  MMMMM", "         E##ED#XXX#D N###N  N###N", "         E##ED#####D N###N  N###N", "         E##EC#####C N###N  N###N", "         E##ECCCCCCC  MMM    MMM ", "         EEEEFFFFFFF   M      M  ", "         fEEf           MMMMMM   ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ")
+                    .aisle("         EEEECcccccC MMMMM  MMMMM", "         E##ED#XXX#D N###N  N###N", "         E##ED#####D N###N  N###N", "         E##EC#####C N###N  N###N", "         E##ECGGGGGC  MMM    MMM ", "         EEEEF     F             ", "         fEEf                    ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ")
+                    .aisle("         EEEECcccccC hMMMh  hMMMh", "         E##EC#####C hNNNh  hNNNh", "         E##EC#####C hNNNh  hNNNh", "         E##EC#####C hNNNh  hNNNh", "         E##ECGGGGGC h   h  h   h", "         EEEEF     F             ", "         fEEf                    ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ")
+                    .aisle("         EEEEFijSkkF             ", "         E##EFGGGGGF             ", "         E##EFGGGGGF             ", "         E##EFGGGGGF             ", "         E##EFFFFFFF             ", "         fEEf                    ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ")
+                    .aisle("         EEEE                    ", "         E##E                    ", "         E##E                    ", "         fEEf                    ", "         fEEf                    ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ")
+                    .aisle("         fEEf                    ", "         fEEf                    ", "         fEEf                    ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ")
+                    .where('S', GTQTMetaTileEntities.PCB_FACTORY, EnumFacing.SOUTH)
+                    .where('C', getCasingState("T1StructureCasing")) // Basic Photolithographic Framework casing
+                    .where('c', getSecondCasingState()) // Plascrete
+                    .where('D', getThirdCasingState("T1Grate"))  // Grate casing
+                    .where('F', getFrameState("T1Frame")) // HSLA Steel frame
+                    .where('G', getGlassState("T1StructureGlass")) // Laminated glass
+                    .where('X', getThirdCasingState("T1Substrate")) // Substrate casing
+                    .where('i', MetaTileEntities.ITEM_IMPORT_BUS[1], EnumFacing.SOUTH)
+                    .where('j', MetaTileEntities.ITEM_EXPORT_BUS[1], EnumFacing.SOUTH)
+                    .where('k', MetaTileEntities.FLUID_IMPORT_HATCH[1], EnumFacing.SOUTH)
+                    .where('e', MetaTileEntities.ENERGY_INPUT_HATCH[LuV], EnumFacing.NORTH)
+                    .where('p', MetaTileEntities.MAINTENANCE_HATCH, EnumFacing.NORTH)
+                    .where('#', Blocks.AIR.getDefaultState())
+                    .where('*', Blocks.AIR.getDefaultState())
+                    .where(' ', Blocks.AIR.getDefaultState());
+            shapeInfo.add(builder.build());
+            //  Main Structure (T2)
+            shapeInfo.add(builder
+                    .where('E', getCasingState("T2StructureCasing")) // Mold Printing Assembly Framework casing
+                    .where('f', getFrameState("T2Frame")) // Tungsten Steel Frame
+                    .build());
+            //  Liquid Cooling Tower (Cooling Upgrade T1)
+            shapeInfo.add(builder
+                    .where('H', getCasingState("T2StructureCasing")) // Mold Printing Assembly Framework casing
+                    .where('I', getCasingState("NaquadahAlloyCasing")) // Naquadah Alloy casing
+                    .where('J', getThirdCasingState("CoolingTowerIntake")) // Extreme Intake casing
+                    .where('P', getBoilerCasingState()) // Tungsten Steel Pipe casing
+                    .where('g', getFrameState("CoolingTowerFrame")) // Black Steel Frame
+                    .build());
+            //  Main Structure (T3)
+            shapeInfo.add(builder
+                    .where('K', getCasingState("T3StructureCasing")) // Radiation Proof Scan Framework casing
+                    .where('L', getCasingState("NaquadahAlloyCasing")) // Naquadah Alloy casing
+                    .build());
+            //  Bio Chamber (Bio Upgrade)
+            shapeInfo.add(builder
+                    .where('M', getCasingState("BioChamberCasing")) // Biological Sterile Machine casing
+                    .where('h', getFrameState("BioChamberFrame")) // Silicon Carbide frame
+                    .where('N', getGlassState("BioChamberGlass")) // Cleanroom glass
+                    .build());
+            //  Thermosink (Cooling Upgrade T2)
+            shapeInfo.add(builder
+                    .where('O', getCasingState("ThermosinkCasing")) // Infinity Cooled Machine casing
+                    .where('Q', getBoilerCasingState()) // Tungsten Steel Pipe casing
+                    .where('R', getThirdCasingState("CoolingTowerIntake")) // Extreme Intake casing
+                    .where('T', getCasingState("T2StructureCasing")) // Mold Printing Assembly Framework casing
+                    .where('U', getCoilState()) // Superconductor Coil block
+                    .where('n', getFrameState("ThermosinkFrame")) // Naquadah frame
+                    .build());
         }
         return shapeInfo;
     }
@@ -444,7 +435,7 @@ public class MetaTileEntityPCBFactory extends RecipeMapMultiblockController {
                                 tl.add(TextComponentUtil.translationWithColor(TextFormatting.BLUE, "gtqtcore.machine.pcb_factory.structure.thermosink"));
                             }
                         }
-                        if (this.getBioUpgradeNumber() == 1)  {
+                        if (this.getBioUpgradeNumber() == 1) {
                             tl.add(TextComponentUtil.translationWithColor(TextFormatting.GREEN, "gtqtcore.machine.pcb_factory.structure.bio_chamber"));
                         }
                     }
@@ -498,7 +489,7 @@ public class MetaTileEntityPCBFactory extends RecipeMapMultiblockController {
          *     <li>{@link #coolingUpgradeNumber = 2} -> Perfect OC ({@code 4.0}.</li>
          * </ul>
          *
-         * @return  Duration Divisor of OC Duration.
+         * @return Duration Divisor of OC Duration.
          */
         @Override
         protected double getOverclockingDurationDivisor() {
@@ -547,6 +538,7 @@ public class MetaTileEntityPCBFactory extends RecipeMapMultiblockController {
                 default -> maxProgress;
             };
         }
+
         @Override
         protected void updateRecipeProgress() {
             int actuallyEnergyConsumed = (int) (this.recipeEUt * switch (traceSize) {

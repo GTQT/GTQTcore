@@ -9,6 +9,7 @@ import gregtech.api.gui.widgets.WidgetGroup;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
+import gregtech.api.metatileentity.multiblock.MultiMapMultiblockController;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
@@ -21,7 +22,6 @@ import gregtech.client.renderer.texture.Textures;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
-import keqing.gtqtcore.api.metaileentity.GTQTRecipeMapMultiblockController;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.utils.GTQTUtil;
@@ -39,63 +39,46 @@ import java.util.List;
 import static gregtech.api.GTValues.VA;
 
 
-public class MetaTileEntityBioCentrifuge extends GTQTRecipeMapMultiblockController {
-    private int glass_tier;
-    private int clean_tier;
-    private int tubeTier;
+public class MetaTileEntityBioCentrifuge extends MultiMapMultiblockController {
     public int ParallelLim;
     public int ParallelNumA;
     public int modern;
     public int P;
     int tier;
+    int ParallelNum = 1;
+    private int glass_tier;
+    private int clean_tier;
+    private int tubeTier;
+
     public MetaTileEntityBioCentrifuge(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, new RecipeMap[] {
+        super(metaTileEntityId, new RecipeMap[]{
                 RecipeMaps.CENTRIFUGE_RECIPES,
                 GTQTcoreRecipeMaps.GRAVITY_SEPARATOR_RECIPES,
                 GTQTcoreRecipeMaps.BIO_CENTRIFUGE
         });
         this.recipeMapWorkable = new BioCentrifugeWorkableHandler(this);
     }
+
     @Override
-    public boolean canBeDistinct() {return true;}
-    private class BioCentrifugeWorkableHandler extends MultiblockRecipeLogic {
-
-        public BioCentrifugeWorkableHandler(RecipeMapMultiblockController tileEntity) {
-            super(tileEntity);
-        }
-
-        @Override
-        public int getParallelLimit() {
-            return ParallelNum;
-        }
-
-        @Override
-        public void setMaxProgress(int maxProgress)
-        {
-                this.maxProgressTime = maxProgress/(10-clean_tier)/10;
-        }
+    public boolean canBeDistinct() {
+        return true;
     }
-
-    int ParallelNum=1;
-
 
     @Override
     public void update() {
         super.update();
-        if (modern == 0)
-        {
-            ParallelNum=ParallelNumA;
+        if (modern == 0) {
+            ParallelNum = ParallelNumA;
         }
-        if (modern == 1)
-        {
-            P = (int) ((this.energyContainer.getEnergyStored() + energyContainer.getInputPerSec())/(getMinVa()==0?1:getMinVa()));
+        if (modern == 1) {
+            P = (int) ((this.energyContainer.getEnergyStored() + energyContainer.getInputPerSec()) / (getMinVa() == 0 ? 1 : getMinVa()));
             ParallelNum = Math.min(P, ParallelLim);
         }
     }
-    public int getMinVa()
-    {
-        if((Math.min(this.energyContainer.getEnergyCapacity()/32,VA[tier])*20)==0)return 1;
-        return (int)(Math.min(this.energyContainer.getEnergyCapacity()/32,VA[tier]));
+
+    public int getMinVa() {
+        if ((Math.min(this.energyContainer.getEnergyCapacity() / 32, VA[tier]) * 20) == 0) return 1;
+        return (int) (Math.min(this.energyContainer.getEnergyCapacity() / 32, VA[tier]));
 
     }
 
@@ -116,14 +99,15 @@ public class MetaTileEntityBioCentrifuge extends GTQTRecipeMapMultiblockControll
                 .setTooltipText("gregtech.multiblock.hand.throttle_increment"));
         return group;
     }
+
     private void incrementThrottle(Widget.ClickData clickData) {
-        if(ParallelLim<16) this.ParallelNumA = MathHelper.clamp(ParallelNumA +1, 1, ParallelLim);
-        this.ParallelNumA = MathHelper.clamp(ParallelNumA + ParallelLim/16, 1, ParallelLim);
+        if (ParallelLim < 16) this.ParallelNumA = MathHelper.clamp(ParallelNumA + 1, 1, ParallelLim);
+        this.ParallelNumA = MathHelper.clamp(ParallelNumA + ParallelLim / 16, 1, ParallelLim);
     }
 
     private void decrementThrottle(Widget.ClickData clickData) {
-        if(ParallelLim<16) this.ParallelNumA = MathHelper.clamp(ParallelNumA -1, 1, ParallelLim);
-        this.ParallelNumA = MathHelper.clamp(ParallelNumA - ParallelLim/16, 1, ParallelLim);
+        if (ParallelLim < 16) this.ParallelNumA = MathHelper.clamp(ParallelNumA - 1, 1, ParallelLim);
+        this.ParallelNumA = MathHelper.clamp(ParallelNumA - ParallelLim / 16, 1, ParallelLim);
     }
 
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
@@ -137,6 +121,7 @@ public class MetaTileEntityBioCentrifuge extends GTQTRecipeMapMultiblockControll
         modern = data.getInteger("modern");
         ParallelNumA = data.getInteger("ParallelNumA");
     }
+
     private void incrementThrottle1(Widget.ClickData clickData) {
         this.modern = MathHelper.clamp(modern + 1, 0, 1);
     }
@@ -182,6 +167,7 @@ public class MetaTileEntityBioCentrifuge extends GTQTRecipeMapMultiblockControll
                         .or(abilities(MultiblockAbility.MUFFLER_HATCH).setExactLimit(1).setPreviewCount(1)))
                 .build();
     }
+
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
@@ -190,27 +176,29 @@ public class MetaTileEntityBioCentrifuge extends GTQTRecipeMapMultiblockControll
         Object clean_tier = context.get("ZJTieredStats");
         Object tubeTier = context.get("ChemicalPlantTubeTieredStats");
         this.tubeTier = GTQTUtil.getOrDefault(() -> tubeTier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)tubeTier).getIntTier(),
+                () -> ((WrappedIntTired) tubeTier).getIntTier(),
                 0);
         this.glass_tier = GTQTUtil.getOrDefault(() -> glass_tier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)glass_tier).getIntTier(),
+                () -> ((WrappedIntTired) glass_tier).getIntTier(),
                 0);
         this.clean_tier = GTQTUtil.getOrDefault(() -> clean_tier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)clean_tier).getIntTier(),
+                () -> ((WrappedIntTired) clean_tier).getIntTier(),
                 0);
 
-        ParallelLim=(int)Math.pow(2, Math.max(this.tubeTier-4,1));
-        ParallelNum=ParallelLim;
-        tier=Math.min(this.glass_tier, this.tubeTier*2);
+        ParallelLim = (int) Math.pow(2, Math.max(this.tubeTier - 4, 1));
+        ParallelNum = ParallelLim;
+        tier = Math.min(this.glass_tier, this.tubeTier * 2);
     }
+
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
-        textList.add(new TextComponentTranslation("Glass:%s Tube:%s Clean:%s",glass_tier,tubeTier,clean_tier));
-        if(modern==0) textList.add(new TextComponentTranslation("gtqtcore.tire1",tier));
-        if(modern==1) textList.add(new TextComponentTranslation("gtqtcore.tire2",tier));
-        textList.add(new TextComponentTranslation("gtqtcore.parr",ParallelNum,ParallelLim));
+        textList.add(new TextComponentTranslation("Glass:%s Tube:%s Clean:%s", glass_tier, tubeTier, clean_tier));
+        if (modern == 0) textList.add(new TextComponentTranslation("gtqtcore.tire1", tier));
+        if (modern == 1) textList.add(new TextComponentTranslation("gtqtcore.tire2", tier));
+        textList.add(new TextComponentTranslation("gtqtcore.parr", ParallelNum, ParallelLim));
     }
+
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
         return Textures.STABLE_TITANIUM_CASING;
@@ -220,5 +208,22 @@ public class MetaTileEntityBioCentrifuge extends GTQTRecipeMapMultiblockControll
     @Override
     protected ICubeRenderer getFrontOverlay() {
         return GTQTTextures.INDUSTRIAL_ROASTER_OVERLAY;
+    }
+
+    private class BioCentrifugeWorkableHandler extends MultiblockRecipeLogic {
+
+        public BioCentrifugeWorkableHandler(RecipeMapMultiblockController tileEntity) {
+            super(tileEntity);
+        }
+
+        @Override
+        public int getParallelLimit() {
+            return ParallelNum;
+        }
+
+        @Override
+        public void setMaxProgress(int maxProgress) {
+            this.maxProgressTime = maxProgress / (10 - clean_tier) / 10;
+        }
     }
 }

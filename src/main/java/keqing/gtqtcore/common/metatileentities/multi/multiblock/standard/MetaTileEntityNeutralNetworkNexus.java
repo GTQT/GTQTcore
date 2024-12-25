@@ -12,7 +12,6 @@ import gregtech.api.pattern.MultiblockShapeInfo;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
-import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.material.Materials;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.utils.TooltipHelper;
@@ -25,7 +24,6 @@ import keqing.gtqtcore.api.unification.GTQTMaterials;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
-import keqing.gtqtcore.loaders.recipes.GTQTRecipes;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.init.Blocks;
@@ -56,6 +54,30 @@ public class MetaTileEntityNeutralNetworkNexus extends MultiMapMultiblockControl
         this.recipeMapWorkable = new MultiblockRecipeLogic(this, true);
     }
 
+    private static IBlockState getCasingState() {
+        return GTQTMetaBlocks.MULTI_CASING.getState(NAQUADAH_ALLOY_CASING);
+    }
+
+    private static IBlockState getSecondCasingState() {
+        return GTQTMetaBlocks.MULTI_CASING.getState(NAQUADRIA_CASING);
+    }
+
+    private static IBlockState getThirdCasingState() {
+        return GTQTMetaBlocks.TURBINE_CASING.getState(HYPER_CASING);
+    }
+
+    private static IBlockState getFourthCasingState() {
+        return MetaBlocks.MULTIBLOCK_CASING.getState(BlockMultiblockCasing.MultiblockCasingType.ASSEMBLY_LINE_CASING);
+    }
+
+    private static IBlockState getFrameState() {
+        return MetaBlocks.FRAMES.get(GTQTMaterials.HastelloyC59).getBlock(GTQTMaterials.HastelloyC59);
+    }
+
+    private static IBlockState getSecondFrameState() {
+        return MetaBlocks.FRAMES.get(Materials.Neutronium).getBlock(Materials.Neutronium);
+    }
+
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityNeutralNetworkNexus(metaTileEntityId);
@@ -79,11 +101,10 @@ public class MetaTileEntityNeutralNetworkNexus extends MultiMapMultiblockControl
     }
 
     @Override
-    public boolean checkRecipe( Recipe recipe,
+    public boolean checkRecipe(Recipe recipe,
                                boolean consumeIfSuccess) {
         return super.checkRecipe(recipe, consumeIfSuccess) && recipe.getProperty(SwarmTierProperty.getInstance(), 0) <= auxiliaryUpgradeNumber;
     }
-
 
     @Override
     protected BlockPattern createStructurePattern() {
@@ -130,30 +151,6 @@ public class MetaTileEntityNeutralNetworkNexus extends MultiMapMultiblockControl
                 .build();
     }
 
-    private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.MULTI_CASING.getState(NAQUADAH_ALLOY_CASING);
-    }
-
-    private static IBlockState getSecondCasingState() {
-        return GTQTMetaBlocks.MULTI_CASING.getState(NAQUADRIA_CASING);
-    }
-
-    private static IBlockState getThirdCasingState() {
-        return GTQTMetaBlocks.TURBINE_CASING.getState(HYPER_CASING);
-    }
-
-    private static IBlockState getFourthCasingState() {
-        return MetaBlocks.MULTIBLOCK_CASING.getState(BlockMultiblockCasing.MultiblockCasingType.ASSEMBLY_LINE_CASING);
-    }
-
-    private static IBlockState getFrameState() {
-        return MetaBlocks.FRAMES.get(GTQTMaterials.HastelloyC59).getBlock(GTQTMaterials.HastelloyC59);
-    }
-
-    private static IBlockState getSecondFrameState() {
-        return MetaBlocks.FRAMES.get(Materials.Neutronium).getBlock(Materials.Neutronium);
-    }
-
     @SideOnly(Side.CLIENT)
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
@@ -167,7 +164,7 @@ public class MetaTileEntityNeutralNetworkNexus extends MultiMapMultiblockControl
     }
 
     @Override
-    public void addInformation(ItemStack stack, World player, List<String> tooltip,boolean advanced) {
+    public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("gregtech.machine.perfect_oc"));
         tooltip.add(I18n.format("gtqtcore.machine.neutral_network_nexus.tooltip.1"));

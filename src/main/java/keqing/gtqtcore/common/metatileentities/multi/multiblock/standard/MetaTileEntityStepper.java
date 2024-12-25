@@ -49,20 +49,28 @@ import javax.annotation.Nonnull;
 import java.util.List;
 
 import static gregtech.api.GTValues.V;
-import static gregtech.api.GTValues.VA;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.TJMaterials.HydrogenSilsesquioxane;
 import static keqing.gtqtcore.api.unification.TJMaterials.SU8_Photoresist;
 
 public class MetaTileEntityStepper extends MultiMapMultiblockController implements IOpticalComputationReceiver {
+    boolean rate;
+    int LaserKind;
+    int LaserAmount;
     private int glass_tier;
     private int clean_tier;
     private int sheping_tier;
     private int laser_tier;
     private int tier;
-    boolean rate;
-    int LaserKind;
-    int LaserAmount;
+    private IOpticalComputationProvider computationProvider;
+
+    public MetaTileEntityStepper(ResourceLocation metaTileEntityId) {
+        super(metaTileEntityId, new RecipeMap[]{
+                GTQTcoreRecipeMaps.STEPPER_RECIPES
+        });
+        this.recipeMapWorkable = new LaserEngravingWorkableHandler(this);
+    }
+
     @Override
     @Nonnull
     protected Widget getFlexButton(int x, int y, int width, int height) {
@@ -72,14 +80,17 @@ public class MetaTileEntityStepper extends MultiMapMultiblockController implemen
                 .setTooltipText("退回缓存(返回缓存光刻胶以及晶圆)"));
         return group;
     }
+
     private void outputlaser(Widget.ClickData clickData) {
-        if(LaserKind==1) this.getOutputFluidInventory().fill(HydrogenSilsesquioxane.getFluid(LaserAmount),true);
-        if(LaserKind==2) this.getOutputFluidInventory().fill(Vinylcinnamate.getFluid(LaserAmount),true);
-        if(LaserKind==3) this.getOutputFluidInventory().fill(SU8_Photoresist.getFluid(LaserAmount),true);
-        if(LaserKind==4) this.getOutputFluidInventory().fill(Xmt.getFluid(LaserAmount),true);
-        if(LaserKind==5) this.getOutputFluidInventory().fill(Zrbtmst.getFluid(LaserAmount),true);
-        LaserKind=0;LaserAmount=0;
+        if (LaserKind == 1) this.getOutputFluidInventory().fill(HydrogenSilsesquioxane.getFluid(LaserAmount), true);
+        if (LaserKind == 2) this.getOutputFluidInventory().fill(Vinylcinnamate.getFluid(LaserAmount), true);
+        if (LaserKind == 3) this.getOutputFluidInventory().fill(SU8_Photoresist.getFluid(LaserAmount), true);
+        if (LaserKind == 4) this.getOutputFluidInventory().fill(Xmt.getFluid(LaserAmount), true);
+        if (LaserKind == 5) this.getOutputFluidInventory().fill(Zrbtmst.getFluid(LaserAmount), true);
+        LaserKind = 0;
+        LaserAmount = 0;
     }
+
     @Override
     public void addInformation(ItemStack stack, World world, List<String> tooltip, boolean advanced) {
         tooltip.add(I18n.format("gtqt.machine.stepper.1"));
@@ -87,13 +98,6 @@ public class MetaTileEntityStepper extends MultiMapMultiblockController implemen
         tooltip.add(I18n.format("gtqt.machine.stepper.3"));
         tooltip.add(I18n.format("gtqt.machine.stepper.4"));
         tooltip.add(I18n.format("gtqt.machine.stepper.5"));
-    }
-    private IOpticalComputationProvider computationProvider;
-    public MetaTileEntityStepper(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, new RecipeMap[]{
-                GTQTcoreRecipeMaps.STEPPER_RECIPES
-        });
-        this.recipeMapWorkable = new LaserEngravingWorkableHandler(this);
     }
 
     @Override
@@ -104,26 +108,28 @@ public class MetaTileEntityStepper extends MultiMapMultiblockController implemen
     @Override
     public void receiveCustomData(int dataId, PacketBuffer buf) {
         super.receiveCustomData(dataId, buf);
-        if(dataId == GTQTValue.UPDATE_TIER11){
+        if (dataId == GTQTValue.UPDATE_TIER11) {
             this.tier = buf.readInt();
         }
-        if(dataId == GTQTValue.REQUIRE_DATA_UPDATE11){
-            this.writeCustomData(GTQTValue.UPDATE_TIER11,buf1 -> buf1.writeInt(this.tier));
+        if (dataId == GTQTValue.REQUIRE_DATA_UPDATE11) {
+            this.writeCustomData(GTQTValue.UPDATE_TIER11, buf1 -> buf1.writeInt(this.tier));
         }
     }
+
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("tier", tier);
         data.setInteger("LaserKind", LaserKind);
         data.setInteger("LaserAmount", LaserAmount);
         return super.writeToNBT(data);
     }
-   
+
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         tier = data.getInteger("tier");
         LaserKind = data.getInteger("LaserKind");
         LaserAmount = data.getInteger("LaserAmount");
     }
+
     @Override
     public void writeInitialSyncData(PacketBuffer buf) {
         super.writeInitialSyncData(buf);
@@ -135,23 +141,25 @@ public class MetaTileEntityStepper extends MultiMapMultiblockController implemen
         super.receiveInitialSyncData(buf);
         this.tier = buf.readInt();
     }
+
     @Override
     public boolean checkRecipe(@Nonnull Recipe recipe, boolean consumeIfSuccess) {
-        if(recipe.getProperty(LASERNetProperty.getInstance(), 0)<=laser_tier&&super.checkRecipe(recipe, consumeIfSuccess))
-        {
+        if (recipe.getProperty(LASERNetProperty.getInstance(), 0) <= laser_tier && super.checkRecipe(recipe, consumeIfSuccess)) {
             IOpticalComputationProvider provider = this.getComputationProvider();
             int recipeCWUt = recipe.getProperty(ComputationProperty.getInstance(), 0);
             return provider.requestCWUt(recipeCWUt, true) >= recipeCWUt;
         }
         return false;
     }
+
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
-        textList.add(new TextComponentTranslation("外壳等级：%s 紫外等级：%s 玻璃等级：%s",tier, laser_tier, glass_tier));
-        textList.add(new TextComponentTranslation("洁净等级：%s 射频调节器等级：%s",clean_tier, sheping_tier));
-        textList.add(new TextComponentTranslation("光刻胶等级：%s 光刻胶储量%s 同频模式：%s",LaserKind, LaserAmount,rate));
+        textList.add(new TextComponentTranslation("外壳等级：%s 紫外等级：%s 玻璃等级：%s", tier, laser_tier, glass_tier));
+        textList.add(new TextComponentTranslation("洁净等级：%s 射频调节器等级：%s", clean_tier, sheping_tier));
+        textList.add(new TextComponentTranslation("光刻胶等级：%s 光刻胶储量%s 同频模式：%s", LaserKind, LaserAmount, rate));
     }
+
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
@@ -168,6 +176,7 @@ public class MetaTileEntityStepper extends MultiMapMultiblockController implemen
                 .where('#', air())
                 .build();
     }
+
     @SideOnly(Side.CLIENT)
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
         switch (this.tier) {
@@ -203,13 +212,16 @@ public class MetaTileEntityStepper extends MultiMapMultiblockController implemen
             }
         }
     }
+
     @Override
     public String[] getDescription() {
         return new String[]{I18n.format("gtqt.tooltip.update")};
     }
+
     public IOpticalComputationProvider getComputationProvider() {
         return this.computationProvider;
     }
+
     @Override
     public SoundEvent getBreakdownSound() {
         return GTSoundEvents.BREAKDOWN_ELECTRICAL;
@@ -220,17 +232,19 @@ public class MetaTileEntityStepper extends MultiMapMultiblockController implemen
     protected ICubeRenderer getFrontOverlay() {
         return Textures.FUSION_REACTOR_OVERLAY;
     }
+
     @SideOnly(Side.CLIENT)
     @Override
     public SoundEvent getSound() {
         return GTSoundEvents.ELECTROLYZER;
     }
+
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
         List<IOpticalComputationHatch> providers = this.getAbilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION);
         if (providers != null && providers.size() >= 1) {
-            this.computationProvider = (IOpticalComputationProvider)providers.get(0);
+            this.computationProvider = providers.get(0);
         }
         Object laser_tier = context.get("ZWTieredStats");
         Object tier = context.get("ChemicalPlantCasingTieredStats");
@@ -239,22 +253,22 @@ public class MetaTileEntityStepper extends MultiMapMultiblockController implemen
         Object sheping_tier = context.get("TJTieredStats");
 
         this.laser_tier = GTQTUtil.getOrDefault(() -> laser_tier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)laser_tier).getIntTier(),
+                () -> ((WrappedIntTired) laser_tier).getIntTier(),
                 0);
         this.tier = GTQTUtil.getOrDefault(() -> tier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)tier).getIntTier(),
+                () -> ((WrappedIntTired) tier).getIntTier(),
                 0);
         this.glass_tier = GTQTUtil.getOrDefault(() -> glass_tier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)glass_tier).getIntTier(),
+                () -> ((WrappedIntTired) glass_tier).getIntTier(),
                 0);
         this.clean_tier = GTQTUtil.getOrDefault(() -> clean_tier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)clean_tier).getIntTier(),
+                () -> ((WrappedIntTired) clean_tier).getIntTier(),
                 0);
         this.sheping_tier = GTQTUtil.getOrDefault(() -> sheping_tier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)sheping_tier).getIntTier(),
+                () -> ((WrappedIntTired) sheping_tier).getIntTier(),
                 0);
-        rate=(this.laser_tier==this.sheping_tier);
-        this.writeCustomData(GTQTValue.UPDATE_TIER11,buf -> buf.writeInt(this.tier));
+        rate = (this.laser_tier == this.sheping_tier);
+        this.writeCustomData(GTQTValue.UPDATE_TIER11, buf -> buf.writeInt(this.tier));
     }
 
 
@@ -275,23 +289,24 @@ public class MetaTileEntityStepper extends MultiMapMultiblockController implemen
 
 
     protected class LaserEngravingWorkableHandler extends ComputationRecipeLogic {
-        public LaserEngravingWorkableHandler(RecipeMapMultiblockController tileEntity) {
-            super(tileEntity,ComputationType.SPORADIC);
-        }
         //光刻胶等级
         FluidStack LASER1 = HydrogenSilsesquioxane.getFluid(1000);
-        FluidStack LASER2 = Vinylcinnamate .getFluid(1000);
+        FluidStack LASER2 = Vinylcinnamate.getFluid(1000);
         FluidStack LASER3 = SU8_Photoresist.getFluid(1000);
         FluidStack LASER4 = Xmt.getFluid(1000);
         FluidStack LASER5 = Zrbtmst.getFluid(1000);
-        public void addLaserAmount(int n)
-        {
-            if(LaserKind==n)LaserAmount += 1000;
-            if(LaserKind==0||LaserAmount==0) {
-                LaserAmount= 1000;
-                LaserKind=n;
+        public LaserEngravingWorkableHandler(RecipeMapMultiblockController tileEntity) {
+            super(tileEntity, ComputationType.SPORADIC);
+        }
+
+        public void addLaserAmount(int n) {
+            if (LaserKind == n) LaserAmount += 1000;
+            if (LaserKind == 0 || LaserAmount == 0) {
+                LaserAmount = 1000;
+                LaserKind = n;
             }
         }
+
         @Override
         protected void updateRecipeProgress() {
             if (this.recipeCWUt == 0) {
@@ -299,8 +314,9 @@ public class MetaTileEntityStepper extends MultiMapMultiblockController implemen
             } else {
                 if (this.canRecipeProgress && this.drawEnergy(this.recipeEUt, true)) {
                     //并行
-                    if (LaserKind*2>=laser_tier) if (LaserAmount - clean_tier * (LaserKind*2 - laser_tier +1) * 1000 <= 0) return;
-                    else if (LaserAmount - 1000 <= 0) return;
+                    if (LaserKind * 2 >= laser_tier)
+                        if (LaserAmount - clean_tier * (LaserKind * 2 - laser_tier + 1) * 1000 <= 0) return;
+                        else if (LaserAmount - 1000 <= 0) return;
 
                     this.drawEnergy(this.recipeEUt, false);
                     IOpticalComputationProvider provider = this.getComputationProvider();
@@ -315,7 +331,8 @@ public class MetaTileEntityStepper extends MultiMapMultiblockController implemen
                             ++this.progressTime;
                         }
                         if (this.progressTime > this.maxProgressTime) {
-                            if (LaserKind*2>=laser_tier) LaserAmount -= clean_tier * (LaserKind * 2 - laser_tier + 1) * 1000;
+                            if (LaserKind * 2 >= laser_tier)
+                                LaserAmount -= clean_tier * (LaserKind * 2 - laser_tier + 1) * 1000;
                             else if (LaserAmount - 1000 > 0) LaserAmount -= 1000;
 
                             this.completeRecipe();
@@ -328,7 +345,7 @@ public class MetaTileEntityStepper extends MultiMapMultiblockController implemen
                         }
                     }
 
-                    if (this.hasNotEnoughEnergy && this.getEnergyInputPerSecond() > 19L * (long)this.recipeEUt) {
+                    if (this.hasNotEnoughEnergy && this.getEnergyInputPerSecond() > 19L * (long) this.recipeEUt) {
                         this.hasNotEnoughEnergy = false;
                     }
                 } else if (this.recipeEUt > 0) {
@@ -338,11 +355,12 @@ public class MetaTileEntityStepper extends MultiMapMultiblockController implemen
 
             }
         }
+
         @Override
         public void update() {
             super.update();
             IMultipleTankHandler inputTank = getInputFluidInventory();
-            if(LaserAmount<64000) {
+            if (LaserAmount < 64000) {
                 if (LASER1.isFluidStackIdentical(inputTank.drain(LASER1, false))) {
                     inputTank.drain(LASER1, true);
                     addLaserAmount(1);
@@ -367,21 +385,21 @@ public class MetaTileEntityStepper extends MultiMapMultiblockController implemen
         }
 
         public void setMaxProgress(int maxProgress) {
-            if (LaserKind>=laser_tier) {
-                if(rate)this.maxProgressTime = maxProgress*(100-LaserKind*20)/100;
-                else this.maxProgressTime = maxProgress*(100-LaserKind*10)/100;
+            if (LaserKind >= laser_tier) {
+                if (rate) this.maxProgressTime = maxProgress * (100 - LaserKind * 20) / 100;
+                else this.maxProgressTime = maxProgress * (100 - LaserKind * 10) / 100;
             } else {
-                this.maxProgressTime = maxProgress*(laser_tier-LaserKind);
+                this.maxProgressTime = maxProgress * (laser_tier - LaserKind);
             }
         }
 
         public long getMaxVoltage() {
-            return V[Math.min(tier,clean_tier*2)];
+            return V[Math.min(tier, clean_tier * 2)];
         }
 
         @Override
         public int getParallelLimit() {
-            if (LaserKind*2>=laser_tier) return clean_tier*(LaserKind*2-laser_tier+1);
+            if (LaserKind * 2 >= laser_tier) return clean_tier * (LaserKind * 2 - laser_tier + 1);
             return 1;
         }
     }

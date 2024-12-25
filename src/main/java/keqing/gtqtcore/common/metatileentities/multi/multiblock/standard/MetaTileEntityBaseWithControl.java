@@ -35,16 +35,16 @@ import java.util.List;
 
 //万物基类
 public abstract class MetaTileEntityBaseWithControl extends MultiblockWithDisplayBase implements IControllable, IDataInfoProvider, IWorkable {
-    private boolean isActive = false;
-    private boolean isWorkingEnabled = true;
-    private int process;
-    private int maxProcess;
     protected IItemHandlerModifiable inputInventory;
     protected IItemHandlerModifiable outputInventory;
     protected IMultipleTankHandler inputFluidInventory;
     protected IMultipleTankHandler outputFluidInventory;
     protected IEnergyContainer energyContainer;
     protected IEnergyContainer outEnergyContainer;
+    private boolean isActive = false;
+    private boolean isWorkingEnabled = true;
+    private int process;
+    private int maxProcess;
 
     public MetaTileEntityBaseWithControl(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId);
@@ -79,16 +79,6 @@ public abstract class MetaTileEntityBaseWithControl extends MultiblockWithDispla
         return this.isWorkingEnabled;
     }
 
-    public void setActive(boolean active) {
-        if (this.isActive != active) {
-            this.isActive = active;
-            World world = this.getWorld();
-            if (world != null && !world.isRemote) {
-                this.writeCustomData(GregtechDataCodes.WORKABLE_ACTIVE, buf -> buf.writeBoolean(active));
-            }
-        }
-    }
-
     @Override
     public void setWorkingEnabled(boolean b) {
         this.isWorkingEnabled = b;
@@ -111,6 +101,16 @@ public abstract class MetaTileEntityBaseWithControl extends MultiblockWithDispla
 
     public boolean isActive() {
         return this.isActive && isStructureFormed();
+    }
+
+    public void setActive(boolean active) {
+        if (this.isActive != active) {
+            this.isActive = active;
+            World world = this.getWorld();
+            if (world != null && !world.isRemote) {
+                this.writeCustomData(GregtechDataCodes.WORKABLE_ACTIVE, buf -> buf.writeBoolean(active));
+            }
+        }
     }
 
     @Override
@@ -149,9 +149,9 @@ public abstract class MetaTileEntityBaseWithControl extends MultiblockWithDispla
 
     private void resetTileAbilities() {
         this.inputInventory = new GTItemStackHandler(this, 0);
-        this.inputFluidInventory = new FluidTankList(true, new IFluidTank[0]);
+        this.inputFluidInventory = new FluidTankList(true);
         this.outputInventory = new GTItemStackHandler(this, 0);
-        this.outputFluidInventory = new FluidTankList(true, new IFluidTank[0]);
+        this.outputFluidInventory = new FluidTankList(true);
         this.energyContainer = new EnergyContainerList(Lists.newArrayList());
         this.outEnergyContainer = new EnergyContainerList(Lists.newArrayList());
     }

@@ -46,6 +46,7 @@ public class ElectrodeBehavior extends AbstractMaterialPartBehavior implements I
         int damage = getPartDamage(stack);
         lines.add(I18n.format("metaitem.tool.tooltip.durability", maxDurability - damage, maxDurability));
         lines.add(I18n.format("metaitem.tool.tooltip.primary_material", material.getLocalizedName()));
+        lines.add(I18n.format("电极等级: " + ElectrodeTier));
         lines.add(I18n.format("预计工作: " + GTQTDateHelper.getTimeFromTicks(MaxDurability)));
         lines.add(I18n.format("距离损坏: " + GTQTDateHelper.getTimeFromTicks(MaxDurability-getPartDamage(stack))));
     }

@@ -52,35 +52,72 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class MetaTileEntityQuantumForceTransformer extends RecipeMapMultiblockController implements IFastRenderMetaTileEntity {
+    static BloomEffectUtil.IBloomRenderFast RENDER_HANDLER = new BloomEffectUtil.IBloomRenderFast() {
+        float lastBrightnessX;
+        float lastBrightnessY;
+
+        @Override
+        public int customBloomStyle() {
+            return 2;
+        }
+
+        @Override
+        @SideOnly(Side.CLIENT)
+        public void preDraw(BufferBuilder buffer) {
+            BloomEffect.strength = 1.5F;
+            BloomEffect.baseBrightness = 0.0F;
+            BloomEffect.highBrightnessThreshold = 1.3F;
+            BloomEffect.lowBrightnessThreshold = 0.3F;
+            BloomEffect.step = 1;
+
+            lastBrightnessX = OpenGlHelper.lastBrightnessX;
+            lastBrightnessY = OpenGlHelper.lastBrightnessY;
+            GlStateManager.color(1, 1, 1, 1);
+            OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240.0F, 240.0F);
+        }
+
+        @Override
+        @SideOnly(Side.CLIENT)
+        public void postDraw(BufferBuilder buffer) {
+            OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, lastBrightnessX, lastBrightnessY);
+        }
+    };
+    private static final boolean init = false;
+    private static List<IBlockState> finalListManipulatorCasing;
+    private static List<IBlockState> finalListShieldingCoreCasing;
+    private static List<IBlockState> finalListGlass;
     private int ManipulatorCasingTier;
     private int manioulatorTier;
     private int coreTier;
     private int glassTier;
     private int tier;
-    private static boolean init = false;
-    private static List<IBlockState> finalListManipulatorCasing;
-    private static List<IBlockState> finalListShieldingCoreCasing;
-    private static List<IBlockState> finalListGlass;
 
     public MetaTileEntityQuantumForceTransformer(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.QUANTUM_FORCE_TRANSFORMER_RECIPES);
         this.recipeMapWorkable = new MetaTileEntityQuantumForceTransformerHandler(this);
     }
+
+    public static int getMaxParallel(int manioulatorTier) {
+        return manioulatorTier;
+    }
+
     @Override
-    public boolean canBeDistinct() {return true;}
+    public boolean canBeDistinct() {
+        return true;
+    }
+
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {
         return new MetaTileEntityQuantumForceTransformer(metaTileEntityId);
     }
-
-
 
     @Override
     public void update() {
         super.update();
 
         if (this.getWorld().isRemote && this.ManipulatorCasingTier == 0) {
-            this.writeCustomData(GTQTDataCode.GTQT_CHANNEL_9, buf -> {});
+            this.writeCustomData(GTQTDataCode.GTQT_CHANNEL_9, buf -> {
+            });
         }
     }
 
@@ -120,7 +157,6 @@ public class MetaTileEntityQuantumForceTransformer extends RecipeMapMultiblockCo
         return GTQTMetaBlocks.QUANTUM_CONSTRAINT_CASING.getState(GTQTQuantumForceTransformerCasing.CasingType.QUANTUM_CONSTRAINT_CASING);
     }
 
-
     private IBlockState getCoilState() {
         return GTQTMetaBlocks.QUANTUM_CONSTRAINT_CASING.getState(GTQTQuantumForceTransformerCasing.CasingType.QUANTUM_FORCE_TRANSFORMER_COIL);
     }
@@ -158,11 +194,10 @@ public class MetaTileEntityQuantumForceTransformer extends RecipeMapMultiblockCo
             textList.add(new TextComponentTranslation("gtqtcore.casingTire", manioulatorTier));
             textList.add(new TextComponentTranslation("gtqtcore.tire", ManipulatorCasingTier));
             textList.add(new TextComponentTranslation("gregtech.multiblock.cracking_unit.energy", 100 - 10 * this.glassTier));
-            textList.add(new TextComponentTranslation("gtqtcore.multiblock.fu.level", 10*coreTier));
+            textList.add(new TextComponentTranslation("gtqtcore.multiblock.fu.level", 10 * coreTier));
         }
 
     }
-
 
     @Override
     protected void formStructure(PatternMatchContext context) {
@@ -171,13 +206,13 @@ public class MetaTileEntityQuantumForceTransformer extends RecipeMapMultiblockCo
         Object coreTier = context.get("CoreTieredStats");
         Object glassTier = context.get("QFTGlassTieredStats");
         this.manioulatorTier = GTQTUtil.getOrDefault(() -> manioulatorTier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)manioulatorTier).getIntTier(),
+                () -> ((WrappedIntTired) manioulatorTier).getIntTier(),
                 0);
         this.coreTier = GTQTUtil.getOrDefault(() -> coreTier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)coreTier).getIntTier(),
+                () -> ((WrappedIntTired) coreTier).getIntTier(),
                 0);
         this.glassTier = GTQTUtil.getOrDefault(() -> glassTier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)glassTier).getIntTier(),
+                () -> ((WrappedIntTired) glassTier).getIntTier(),
                 0);
 
         this.tier = this.ManipulatorCasingTier = this.coreTier = this.glassTier;
@@ -293,7 +328,7 @@ public class MetaTileEntityQuantumForceTransformer extends RecipeMapMultiblockCo
                     //Corner 7:  3,  7        \           /
                     //Corner 8:  7,  3         4 ------- 5
                     buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
-                    GlStateManager.translate(x + xBaseOffset + 0.5, 0 , z + zBaseOffset + 0.5);
+                    GlStateManager.translate(x + xBaseOffset + 0.5, 0, z + zBaseOffset + 0.5);
                     if (zBaseOffset == 0) {
                         GlStateManager.rotate(90F, 0F, 1F, 0F);
                     }
@@ -313,7 +348,7 @@ public class MetaTileEntityQuantumForceTransformer extends RecipeMapMultiblockCo
     public AxisAlignedBB getRenderBoundingBox() {
         double xBaseOffset = 3 * getFrontFacing().getOpposite().getXOffset();
         double zBaseOffset = 3 * getFrontFacing().getOpposite().getZOffset();
-        BlockPos pos = new BlockPos(this.getPos().getX() + xBaseOffset + 0.5, this.getPos().getY() , this.getPos().getZ() + zBaseOffset + 0.5);
+        BlockPos pos = new BlockPos(this.getPos().getX() + xBaseOffset + 0.5, this.getPos().getY(), this.getPos().getZ() + zBaseOffset + 0.5);
         return new AxisAlignedBB(pos).grow(6, 6, 6);
     }
 
@@ -325,42 +360,10 @@ public class MetaTileEntityQuantumForceTransformer extends RecipeMapMultiblockCo
         return true;
     }
 
-    static BloomEffectUtil.IBloomRenderFast RENDER_HANDLER = new BloomEffectUtil.IBloomRenderFast() {
-        @Override
-        public int customBloomStyle() {
-            return 2;
-        }
-
-        float lastBrightnessX;
-        float lastBrightnessY;
-
-        @Override
-        @SideOnly(Side.CLIENT)
-        public void preDraw(BufferBuilder buffer) {
-            BloomEffect.strength = 1.5F;
-            BloomEffect.baseBrightness = 0.0F;
-            BloomEffect.highBrightnessThreshold = 1.3F;
-            BloomEffect.lowBrightnessThreshold = 0.3F;
-            BloomEffect.step = 1;
-
-            lastBrightnessX = OpenGlHelper.lastBrightnessX;
-            lastBrightnessY = OpenGlHelper.lastBrightnessY;
-            GlStateManager.color(1, 1, 1, 1);
-            OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240.0F, 240.0F);
-        }
-
-        @Override
-        @SideOnly(Side.CLIENT)
-        public void postDraw(BufferBuilder buffer) {
-            OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, lastBrightnessX, lastBrightnessY);
-        }
-    };
     protected int getGlassTire() {
         return this.glassTier;
     }
-    public static int getMaxParallel(int manioulatorTier) {
-        return manioulatorTier;
-    }
+
     private class MetaTileEntityQuantumForceTransformerHandler extends MultiblockRecipeLogic {
 
         public MetaTileEntityQuantumForceTransformerHandler(RecipeMapMultiblockController tileEntity) {
@@ -368,7 +371,7 @@ public class MetaTileEntityQuantumForceTransformer extends RecipeMapMultiblockCo
         }
 
         public void setMaxProgress(int maxProgress) {
-            this.maxProgressTime = maxProgress*(100-coreTier*5)/100;
+            this.maxProgressTime = maxProgress * (100 - coreTier * 5) / 100;
 
         }
 
@@ -379,9 +382,9 @@ public class MetaTileEntityQuantumForceTransformer extends RecipeMapMultiblockCo
 
         protected void modifyOverclockPost(int[] resultOverclock, @Nonnull IRecipePropertyStorage storage) {
             super.modifyOverclockPost(resultOverclock, storage);
-            int glassTier = ((MetaTileEntityQuantumForceTransformer)this.metaTileEntity).getGlassTire();
+            int glassTier = ((MetaTileEntityQuantumForceTransformer) this.metaTileEntity).getGlassTire();
             if (glassTier > 0) {
-                resultOverclock[0] = (int)((double)resultOverclock[0] * (100 - (double)glassTier*3)/100);
+                resultOverclock[0] = (int) ((double) resultOverclock[0] * (100 - (double) glassTier * 3) / 100);
                 resultOverclock[0] = Math.max(1, resultOverclock[0]);
             }
         }

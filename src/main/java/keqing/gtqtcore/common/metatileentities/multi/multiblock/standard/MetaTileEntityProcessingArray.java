@@ -186,7 +186,7 @@ public class MetaTileEntityProcessingArray extends RecipeMapMultiblockController
 
     @Override
     protected OrientedOverlayRenderer getFrontOverlay() {
-        return tier == 0 ? Textures.FUSION_REACTOR_OVERLAY : Textures.FUSION_REACTOR_OVERLAY;
+        return Textures.FUSION_REACTOR_OVERLAY;
     }
 
     @Override
@@ -234,7 +234,7 @@ public class MetaTileEntityProcessingArray extends RecipeMapMultiblockController
     }
 
     @Override
-    public void addInformation(ItemStack stack,  World player, List<String> tooltip, boolean advanced) {
+    public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(I18n.format("一个顶俩喵！"));
         tooltip.add(I18n.format("gregtech.universal.tooltip.parallel", getMachineLimit()));
@@ -291,7 +291,7 @@ public class MetaTileEntityProcessingArray extends RecipeMapMultiblockController
          * @return {@code true} if the provided recipeMap is valid for use
          */
         @Override
-        public boolean isRecipeMapValid( RecipeMap<?> recipeMap) {
+        public boolean isRecipeMapValid(RecipeMap<?> recipeMap) {
             if (ArrayUtils.contains(((IMachineHatchMultiblock) metaTileEntity).getBlacklist(),
                     recipeMap.getUnlocalizedName())) {
                 return false;
@@ -363,7 +363,7 @@ public class MetaTileEntityProcessingArray extends RecipeMapMultiblockController
         }
 
         @Override
-        public boolean checkRecipe( Recipe recipe) {
+        public boolean checkRecipe(Recipe recipe) {
             if (mte == null) return false;
 
             AbstractRecipeLogic arl = mte.getRecipeLogic();

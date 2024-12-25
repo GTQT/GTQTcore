@@ -18,7 +18,6 @@ import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.common.blocks.BlockWireCoil;
 import gregtech.core.sound.GTSoundEvents;
-import keqing.gtqtcore.api.metaileentity.GTQTRecipeMapMultiblockController;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
@@ -38,20 +37,35 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.List;
 
 import static keqing.gtqtcore.common.block.blocks.GTQTADVBlock.CasingType.HastelloyN;
-import static keqing.gtqtcore.common.block.blocks.GTQTADVBlock.CasingType.Inconel625;
 
-public class MetaTileEntityIndustrialInductionFurnace extends GTQTRecipeMapMultiblockController {
+public class MetaTileEntityIndustrialInductionFurnace extends MultiMapMultiblockController {
 
     protected int heatingCoilLevel;
     protected int heatingCoilDiscount;
 
     public MetaTileEntityIndustrialInductionFurnace(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, new RecipeMap[] {
+        super(metaTileEntityId, new RecipeMap[]{
                 GTQTcoreRecipeMaps.REACTION_FURNACE_RECIPES,
                 RecipeMaps.FURNACE_RECIPES,
                 RecipeMaps.ALLOY_SMELTER_RECIPES
         });
         this.recipeMapWorkable = new InductionFurnaceRecipeLogic(this);
+    }
+
+    private static IBlockState getCasingState() {
+        return GTQTMetaBlocks.ADV_BLOCK.getState(HastelloyN);
+    }
+
+    public static int getEUtForParallel(int parallel, int discount) {
+        return 4 * Math.max(1, parallel / 8 / discount);
+    }
+
+    public static int getMaxParallel(int heatingCoilLevel) {
+        return (int) Math.pow(2, Math.min(heatingCoilLevel, 8));
+    }
+
+    public static int getDurationForParallel(int parallel, int parallelLimit) {
+        return (int) Math.max(1.0, (double) (256 * parallel) / Math.max(1.0, parallelLimit));
     }
 
     @Override
@@ -64,8 +78,8 @@ public class MetaTileEntityIndustrialInductionFurnace extends GTQTRecipeMapMulti
         super.formStructure(context);
         Object coilType = context.get("CoilType");
         if (coilType instanceof IHeatingCoilBlockStats) {
-            this.heatingCoilLevel = ((IHeatingCoilBlockStats)coilType).getLevel();
-            this.heatingCoilDiscount = ((IHeatingCoilBlockStats)coilType).getEnergyDiscount();
+            this.heatingCoilLevel = ((IHeatingCoilBlockStats) coilType).getLevel();
+            this.heatingCoilDiscount = ((IHeatingCoilBlockStats) coilType).getEnergyDiscount();
         } else {
             this.heatingCoilLevel = BlockWireCoil.CoilType.CUPRONICKEL.getLevel();
             this.heatingCoilDiscount = BlockWireCoil.CoilType.CUPRONICKEL.getEnergyDiscount();
@@ -95,15 +109,13 @@ public class MetaTileEntityIndustrialInductionFurnace extends GTQTRecipeMapMulti
                 .where('#', air())
                 .build();
     }
+
     @Override
     public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(I18n.format("gregtech.machine.iif.1"));
         tooltip.add(I18n.format("gregtech.machine.iif.2"));
         tooltip.add(I18n.format("gregtech.machine.iif.3"));
-    }
-    private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.ADV_BLOCK.getState(HastelloyN);
     }
 
     @SideOnly(Side.CLIENT)
@@ -127,6 +139,7 @@ public class MetaTileEntityIndustrialInductionFurnace extends GTQTRecipeMapMulti
     public boolean hasMufflerMechanics() {
         return true;
     }
+
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         MultiblockDisplayText.builder(textList, this.isStructureFormed())
@@ -151,20 +164,9 @@ public class MetaTileEntityIndustrialInductionFurnace extends GTQTRecipeMapMulti
                             hoverText = TextComponentUtil.translationWithColor(TextFormatting.GRAY, "gregtech.multiblock.multi_furnace.parallel_hover");
                             tl.add(TextComponentUtil.setHover(bodyText, hoverText));
                         }
-                    }})
+                    }
+                })
                 .addWorkingStatusLine().addProgressLine(this.recipeMapWorkable.getProgressPercent());
-    }
-
-    public static int getEUtForParallel(int parallel, int discount) {
-        return 4 * Math.max(1, parallel / 8 / discount);
-    }
-
-    public static int getMaxParallel(int heatingCoilLevel) {
-        return (int) Math.pow(2,Math.min(heatingCoilLevel,8));
-    }
-
-    public static int getDurationForParallel(int parallel, int parallelLimit) {
-        return (int)Math.max(1.0, (double) (256 * parallel) / Math.max(1.0, parallelLimit));
     }
 
     protected class InductionFurnaceRecipeLogic extends MultiblockRecipeLogic {

@@ -48,6 +48,12 @@ import java.util.List;
 public class MetaTileEntityGasCollector extends RecipeMapMultiblockController {
 
     boolean gasModel;
+    private int clean_tier;
+
+    public MetaTileEntityGasCollector(ResourceLocation metaTileEntityId) {
+        super(metaTileEntityId, RecipeMaps.GAS_COLLECTOR_RECIPES);
+        this.recipeMapWorkable = new GasCollectorWorkableHandler(this);
+    }
 
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setBoolean("gasModel", gasModel);
@@ -55,33 +61,14 @@ public class MetaTileEntityGasCollector extends RecipeMapMultiblockController {
 
         return super.writeToNBT(data);
     }
-   
+
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         gasModel = data.getBoolean("gasModel");
     }
-    public MetaTileEntityGasCollector(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, RecipeMaps.GAS_COLLECTOR_RECIPES);
-        this.recipeMapWorkable = new GasCollectorWorkableHandler(this);
-    }
-    private class GasCollectorWorkableHandler extends MultiblockRecipeLogic {
 
-        public GasCollectorWorkableHandler(RecipeMapMultiblockController tileEntity) {
-            super(tileEntity);
-        }
-
-        @Override
-        public int getParallelLimit() {
-            return clean_tier;
-        }
-
-        @Override
-        public boolean checkRecipe( Recipe recipe) {
-            return ((MetaTileEntityGasCollector)this.metaTileEntity).checkRecipe(recipe) && super.checkRecipe(recipe);
-        }
-    }
-    protected boolean checkRecipe( Recipe recipe) {
-        IntListIterator var2 = ((IntList)recipe.getProperty(GasCollectorDimensionProperty.getInstance(), IntLists.EMPTY_LIST)).iterator();
+    protected boolean checkRecipe(Recipe recipe) {
+        IntListIterator var2 = recipe.getProperty(GasCollectorDimensionProperty.getInstance(), IntLists.EMPTY_LIST).iterator();
 
         int dimension;
         do {
@@ -89,13 +76,14 @@ public class MetaTileEntityGasCollector extends RecipeMapMultiblockController {
                 return false;
             }
 
-            dimension = (Integer)var2.next();
-            if(dimension==0&&gasModel)return true;
+            dimension = var2.next();
+            if (dimension == 0 && gasModel) return true;
         }
-        while(dimension != this.getWorld().provider.getDimension());
+        while (dimension != this.getWorld().provider.getDimension());
 
         return true;
     }
+
     @Override
     @Nonnull
     protected Widget getFlexButton(int x, int y, int width, int height) {
@@ -107,9 +95,9 @@ public class MetaTileEntityGasCollector extends RecipeMapMultiblockController {
     }
 
     private void gasModel(Widget.ClickData clickData) {
-        this.gasModel =!gasModel;
+        this.gasModel = !gasModel;
     }
-    private int clean_tier;
+
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityGasCollector(metaTileEntityId);
@@ -119,9 +107,9 @@ public class MetaTileEntityGasCollector extends RecipeMapMultiblockController {
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
-                .aisle("XXX", "XXX","XXX","XXX","XXX","XXX", "AAA", "AAA")
-                .aisle("XXX", "XJX","XJX","XJX","XJX","XJX", "AJA", "AAA")
-                .aisle("XXX", "XSX","XXX","XXX","XXX","XXX", "AAA", "AAA")
+                .aisle("XXX", "XXX", "XXX", "XXX", "XXX", "XXX", "AAA", "AAA")
+                .aisle("XXX", "XJX", "XJX", "XJX", "XJX", "XJX", "AJA", "AAA")
+                .aisle("XXX", "XSX", "XXX", "XXX", "XXX", "XXX", "AAA", "AAA")
                 .where('S', selfPredicate())
                 .where('A', states(getIntakeState()))
                 .where('X', states(getCasingAState()).setMinGlobalLimited(15)
@@ -140,7 +128,7 @@ public class MetaTileEntityGasCollector extends RecipeMapMultiblockController {
         super.formStructure(context);
         Object clean_tier = context.get("ZJTieredStats");
         this.clean_tier = GTQTUtil.getOrDefault(() -> clean_tier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)clean_tier).getIntTier(),
+                () -> ((WrappedIntTired) clean_tier).getIntTier(),
                 0);
     }
 
@@ -149,18 +137,19 @@ public class MetaTileEntityGasCollector extends RecipeMapMultiblockController {
         super.addDisplayText(textList);
         textList.add(new TextComponentTranslation("普适集气：%s", gasModel));
     }
+
     public IBlockState getIntakeState() {
         return MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.STEEL_PIPE);
     }
+
     private IBlockState getCasingAState() {
         return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STEEL_SOLID);
     }
 
     @SideOnly(Side.CLIENT)
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
-                return Textures.SOLID_STEEL_CASING;
+        return Textures.SOLID_STEEL_CASING;
     }
-
 
     @SideOnly(Side.CLIENT)
     @Override
@@ -189,11 +178,29 @@ public class MetaTileEntityGasCollector extends RecipeMapMultiblockController {
         list.add(I18n.format("可以在任何地方抽取空气！"));
         return list.toArray(new String[0]);
     }
+
     @Override
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World world, @Nonnull List<String> tooltip, boolean advanced) {
         super.addInformation(stack, world, tooltip, advanced);
         tooltip.add(I18n.format("启动普适集气后可以在任何地方抽取空气"));
         tooltip.add(I18n.format("升级过滤模块获取并行"));
+    }
+
+    private class GasCollectorWorkableHandler extends MultiblockRecipeLogic {
+
+        public GasCollectorWorkableHandler(RecipeMapMultiblockController tileEntity) {
+            super(tileEntity);
+        }
+
+        @Override
+        public int getParallelLimit() {
+            return clean_tier;
+        }
+
+        @Override
+        public boolean checkRecipe(Recipe recipe) {
+            return ((MetaTileEntityGasCollector) this.metaTileEntity).checkRecipe(recipe) && super.checkRecipe(recipe);
+        }
     }
 }

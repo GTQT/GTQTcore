@@ -48,8 +48,29 @@ public class MetaTileEntityFermentationTank extends RecipeMapMultiblockControlle
         super(metaTileEntityId, GTQTcoreRecipeMaps.FERMENTATION_TANK_RECIPES);
         this.recipeMapWorkable = new PHRecipeLogic(this);
     }
+
+    private static IBlockState getCasingState() {
+        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STAINLESS_CLEAN);
+    }
+
+    private static IBlockState getBoilerState() {
+        return MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.POLYTETRAFLUOROETHYLENE_PIPE);
+    }
+
+    @Nonnull
+    private static IBlockState getFrameState() {
+        return MetaBlocks.FRAMES.get(WatertightSteel).getBlock(WatertightSteel);
+    }
+
+    private static IBlockState getGlassState() {
+        return GTQTMetaBlocks.TRANSPARENT_CASING.getState(PMMA);
+    }
+
     @Override
-    public boolean canBeDistinct() {return true;}
+    public boolean canBeDistinct() {
+        return true;
+    }
+
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity metaTileEntityHolder) {
         return new MetaTileEntityFermentationTank(metaTileEntityId);
@@ -59,8 +80,12 @@ public class MetaTileEntityFermentationTank extends RecipeMapMultiblockControlle
     public boolean checkRecipe(@Nonnull Recipe recipe, boolean consumeIfSuccess) {
         double min = recipe.getProperty(PHProperty.getInstance(), 7D) - recipe.getProperty(PHErrorRangeProperty.getInstance(), 0D);
         double max = recipe.getProperty(PHProperty.getInstance(), 7D) + recipe.getProperty(PHErrorRangeProperty.getInstance(), 0D);
-        if (min < 0) {min = 0D;}
-        if (max > 14) {max = 14D;}
+        if (min < 0) {
+            min = 0D;
+        }
+        if (max > 14) {
+            max = 14D;
+        }
         return (this.pH >= min && this.pH <= max) && super.checkRecipe(recipe, consumeIfSuccess);
     }
 
@@ -93,23 +118,6 @@ public class MetaTileEntityFermentationTank extends RecipeMapMultiblockControlle
                 .where('A', any())
                 .where('E', air())
                 .build();
-    }
-
-    private static IBlockState getCasingState() {
-        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STAINLESS_CLEAN);
-    }
-
-    private static IBlockState getBoilerState() {
-        return MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.POLYTETRAFLUOROETHYLENE_PIPE);
-    }
-
-    @Nonnull
-    private static IBlockState getFrameState() {
-        return MetaBlocks.FRAMES.get(WatertightSteel).getBlock(WatertightSteel);
-    }
-
-    private static IBlockState getGlassState() {
-        return GTQTMetaBlocks.TRANSPARENT_CASING.getState(PMMA);
     }
 
     @Override
@@ -169,7 +177,7 @@ public class MetaTileEntityFermentationTank extends RecipeMapMultiblockControlle
         return super.writeToNBT(data);
     }
 
-   
+
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         this.pH = data.getDouble("ph");
@@ -177,6 +185,7 @@ public class MetaTileEntityFermentationTank extends RecipeMapMultiblockControlle
 
     protected class PHRecipeLogic extends MultiblockRecipeLogic {
         private double current_ph_change;
+
         public PHRecipeLogic(RecipeMapMultiblockController metaTileEntity) {
             super(metaTileEntity);
             if (!(metaTileEntity instanceof IPHValue)) {
@@ -207,7 +216,7 @@ public class MetaTileEntityFermentationTank extends RecipeMapMultiblockControlle
         @Override
         protected void completeRecipe() {
             super.completeRecipe();
-            ((IPHValue)this.metaTileEntity).changeCurrentPHValue(this.current_ph_change);
+            ((IPHValue) this.metaTileEntity).changeCurrentPHValue(this.current_ph_change);
         }
     }
 }
