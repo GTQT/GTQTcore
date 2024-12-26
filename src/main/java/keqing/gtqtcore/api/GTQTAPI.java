@@ -17,8 +17,6 @@ import static keqing.gtqtcore.common.block.blocks.GTQTCompressedFusionReactor.Ca
 import static keqing.gtqtcore.common.block.blocks.GTQTCompressedFusionReactor.CasingType.FUSION_COIL_MKIV;
 import static keqing.gtqtcore.common.block.blocks.GTQTElectronMicroscope.CasingType.*;
 import static keqing.gtqtcore.common.block.blocks.GTQTHCasing.CasingType.*;
-import static keqing.gtqtcore.common.block.blocks.GTQTPowerSupply.SupplyType.POWER_SUPPLY_BASIC;
-import static keqing.gtqtcore.common.block.blocks.GTQTPowerSupply.SupplyType.*;
 import static keqing.gtqtcore.common.block.blocks.GTQTQuantumCasing.CasingType.*;
 import static keqing.gtqtcore.common.block.blocks.GTQTQuantumCasing.CasingType.ULTIMATE_HIGH_ENERGY_CASING;
 
@@ -37,7 +35,6 @@ public class GTQTAPI {
     public static final Object2ObjectOpenHashMap<IBlockState,IBlockTier> MAP_CAL_CASING= new Object2ObjectOpenHashMap<>();
     public static final Object2ObjectOpenHashMap<IBlockState,IBlockTier> MAP_ELE_CASING= new Object2ObjectOpenHashMap<>();
     public static final Object2ObjectOpenHashMap<IBlockState,IBlockTier> MAP_PA_CASING= new Object2ObjectOpenHashMap<>();
-    public static final Object2ObjectOpenHashMap<IBlockState,IBlockTier> MAP_PS_CASING= new Object2ObjectOpenHashMap<>();
     public static final Object2ObjectOpenHashMap<IBlockState,IBlockTier> MAP_SP_CASING= new Object2ObjectOpenHashMap<>();
     public static final Object2ObjectOpenHashMap<IBlockState,IBlockTier> MAP_PA_INTERNAL_CASING= new Object2ObjectOpenHashMap<>();
     public static final Object2ObjectOpenHashMap<IBlockState,IBlockTier> MAP_DC_CASING= new Object2ObjectOpenHashMap<>();
@@ -132,39 +129,6 @@ public class GTQTAPI {
                 new WrappedIntTired(GTQTTurbineCasing1.TurbineCasingType.PRECISE_ASSEMBLER_CASING_MK5, 5));
         MAP_PA_CASING.put(GTQTMetaBlocks.TURBINE_CASING1.getState(GTQTTurbineCasing1.TurbineCasingType.PRECISE_ASSEMBLER_CASING_MK6),
                 new WrappedIntTired(GTQTTurbineCasing1.TurbineCasingType.PRECISE_ASSEMBLER_CASING_MK6, 6));
-
-
-        MAP_PS_CASING.put(GTQTMetaBlocks.POWER.getState(POWER_SUPPLY_I),
-                new WrappedIntTired(POWER_SUPPLY_I, 1));
-        MAP_PS_CASING.put(GTQTMetaBlocks.POWER.getState(POWER_SUPPLY_II),
-                new WrappedIntTired(POWER_SUPPLY_II, 2));
-        MAP_PS_CASING.put(GTQTMetaBlocks.POWER.getState(POWER_SUPPLY_III),
-                new WrappedIntTired(POWER_SUPPLY_III, 3));
-        MAP_PS_CASING.put(GTQTMetaBlocks.POWER.getState(POWER_SUPPLY_IV),
-                new WrappedIntTired(POWER_SUPPLY_IV, 4));
-        MAP_PS_CASING.put(GTQTMetaBlocks.POWER.getState(POWER_SUPPLY_V),
-                new WrappedIntTired(POWER_SUPPLY_V, 5));
-        MAP_PS_CASING.put(GTQTMetaBlocks.POWER.getState(POWER_SUPPLY_VI),
-                new WrappedIntTired(POWER_SUPPLY_VI, 6));
-        MAP_PS_CASING.put(GTQTMetaBlocks.POWER.getState(POWER_SUPPLY_VII),
-                new WrappedIntTired(POWER_SUPPLY_VII, 7));
-        MAP_PS_CASING.put(GTQTMetaBlocks.POWER.getState(POWER_SUPPLY_VIII),
-                new WrappedIntTired(POWER_SUPPLY_VIII, 8));
-        MAP_PS_CASING.put(GTQTMetaBlocks.POWER.getState(POWER_SUPPLY_IVV),
-                new WrappedIntTired(POWER_SUPPLY_IVV, 9));
-        MAP_PS_CASING.put(GTQTMetaBlocks.POWER.getState(POWER_SUPPLY_VV),
-                new WrappedIntTired(POWER_SUPPLY_VV, 10));
-        MAP_PS_CASING.put(GTQTMetaBlocks.POWER.getState(POWER_SUPPLY_BATTERY_I),
-                new WrappedIntTired(POWER_SUPPLY_BATTERY_I, 11));
-        MAP_PS_CASING.put(GTQTMetaBlocks.POWER.getState(POWER_SUPPLY_BATTERY_II),
-                new WrappedIntTired(POWER_SUPPLY_BATTERY_II, 12));
-        MAP_PS_CASING.put(GTQTMetaBlocks.POWER.getState(POWER_SUPPLY_BATTERY_III),
-                new WrappedIntTired(POWER_SUPPLY_BATTERY_III, 13));
-        MAP_PS_CASING.put(GTQTMetaBlocks.POWER.getState(POWER_SUPPLY_BATTERY_IV),
-                new WrappedIntTired(POWER_SUPPLY_BATTERY_IV, 14));
-        MAP_PS_CASING.put(GTQTMetaBlocks.POWER.getState(POWER_SUPPLY_BATTERY_V),
-                new WrappedIntTired(POWER_SUPPLY_BATTERY_V, 15));
-
 
         MAP_PA_INTERNAL_CASING.put(MetaBlocks.MACHINE_CASING.getState(BlockMachineCasing.MachineCasingType.LuV),
                 new WrappedIntTired(BlockMachineCasing.MachineCasingType.LuV, 1));

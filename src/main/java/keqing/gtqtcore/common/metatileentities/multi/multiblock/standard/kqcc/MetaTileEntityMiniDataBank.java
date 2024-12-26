@@ -33,7 +33,6 @@ import java.util.List;
 
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.common.block.blocks.GTQTPowerSupply;
 import keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
@@ -175,7 +174,7 @@ public class MetaTileEntityMiniDataBank extends MultiblockWithDisplayBase implem
     }
 
     private static  IBlockState getInnerState() {
-        return GTQTMetaBlocks.POWER.getState(GTQTPowerSupply.SupplyType.POWER_SUPPLY_BASIC);
+        return GTQTMetaBlocks.TURBINE_CASING.getState(GTQTTurbineCasing.TurbineCasingType.IRIDIUM_CASING);
     }
 
     private static IBlockState getFrontState() {

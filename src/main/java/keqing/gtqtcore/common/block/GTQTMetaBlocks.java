@@ -46,7 +46,6 @@ public class GTQTMetaBlocks {
     public static GTQTKQCC KQCC;
     public static BlockCoolingCoil COOLING_COIL;
     public static GCYLCleanroomCasing GCYL_CLEANROOM_CASING;
-    public static GTQTPowerSupply POWER;
     public static BlockPCBFactoryCasing PCB_FACTORY_CASING;
     public static GTQTBlockGlassCasing GLASS_CASING;
     public static GTQTStepper STEPPER;
@@ -108,8 +107,6 @@ public class GTQTMetaBlocks {
         KQCC.setRegistryName("computer_competent");
         COOLING_COIL = new BlockCoolingCoil();
         COOLING_COIL.setRegistryName("cooling_coil");
-        POWER = new GTQTPowerSupply();
-        POWER.setRegistryName("power_supply");
         GLASS_CASING = new GTQTBlockGlassCasing();
         GLASS_CASING.setRegistryName("glass_casing");
         STEPPER = new GTQTStepper();
@@ -164,7 +161,6 @@ public class GTQTMetaBlocks {
         registerItemModel(NUCLEAR_FUSION);
         registerItemModel(KQCC);
         registerItemModel(COOLING_COIL);
-        registerItemModel(POWER);
         registerItemModel(GLASS_CASING);
         registerItemModel(STEPPER);
         registerItemModel(PCB_FACTORY_CASING);

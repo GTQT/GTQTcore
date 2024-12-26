@@ -83,6 +83,25 @@ public class GTQTTextures {
     public static SimpleOverlayRenderer KQCC_CPU_3 = new SimpleOverlayRenderer("multiblock/computer/cpuiii");
     public static SimpleOverlayRenderer KQCC_GPU_3 = new SimpleOverlayRenderer("multiblock/computer/gpuiii");
 
+    public static SimpleOverlayRenderer POWER_SUPPLY_COMMON = new SimpleOverlayRenderer("multiblock/power_supply/power_supply_basic");
+
+    public static SimpleOverlayRenderer POWER_SUPPLY_B1 = new SimpleOverlayRenderer("multiblock/power_supply/power_supply_battery_i");
+    public static SimpleOverlayRenderer POWER_SUPPLY_B2 = new SimpleOverlayRenderer("multiblock/power_supply/power_supply_battery_ii");
+    public static SimpleOverlayRenderer POWER_SUPPLY_B3 = new SimpleOverlayRenderer("multiblock/power_supply/power_supply_battery_iii");
+    public static SimpleOverlayRenderer POWER_SUPPLY_B4 = new SimpleOverlayRenderer("multiblock/power_supply/power_supply_battery_iv");
+    public static SimpleOverlayRenderer POWER_SUPPLY_B5 = new SimpleOverlayRenderer("multiblock/power_supply/power_supply_battery_v");
+
+    public static SimpleOverlayRenderer POWER_SUPPLY_S1 = new SimpleOverlayRenderer("multiblock/power_supply/power_supply_i");
+    public static SimpleOverlayRenderer POWER_SUPPLY_S2 = new SimpleOverlayRenderer("multiblock/power_supply/power_supply_ii");
+    public static SimpleOverlayRenderer POWER_SUPPLY_S3 = new SimpleOverlayRenderer("multiblock/power_supply/power_supply_iii");
+    public static SimpleOverlayRenderer POWER_SUPPLY_S4 = new SimpleOverlayRenderer("multiblock/power_supply/power_supply_iv");
+    public static SimpleOverlayRenderer POWER_SUPPLY_S5 = new SimpleOverlayRenderer("multiblock/power_supply/power_supply_v");
+    public static SimpleOverlayRenderer POWER_SUPPLY_S6 = new SimpleOverlayRenderer("multiblock/power_supply/power_supply_vi");
+    public static SimpleOverlayRenderer POWER_SUPPLY_S7 = new SimpleOverlayRenderer("multiblock/power_supply/power_supply_vii");
+    public static SimpleOverlayRenderer POWER_SUPPLY_S8 = new SimpleOverlayRenderer("multiblock/power_supply/power_supply_viii");
+    public static SimpleOverlayRenderer POWER_SUPPLY_S9 = new SimpleOverlayRenderer("multiblock/power_supply/power_supply_iv");
+    public static SimpleOverlayRenderer POWER_SUPPLY_S10 = new SimpleOverlayRenderer("multiblock/power_supply/power_supply_vv");
+
     //怎么写？请看
     public static OrientedOverlayRenderer LIGHTNING_ROD_OVERLAY;
     public static OrientedOverlayRenderer CHEMICAL_PLANT;

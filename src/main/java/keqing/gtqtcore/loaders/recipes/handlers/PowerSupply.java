@@ -1,9 +1,9 @@
 package keqing.gtqtcore.loaders.recipes.handlers;
 
 import gregtech.api.items.metaitem.MetaItem;
+import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.unification.material.Material;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.common.block.blocks.GTQTPowerSupply;
 
 import static gregtech.api.GTValues.L;
 import static gregtech.api.GTValues.VA;
@@ -13,54 +13,49 @@ import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.common.items.MetaItems.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.MaterialHelper.Superconductor;
-import static keqing.gtqtcore.common.block.blocks.GTQTPowerSupply.SupplyType.POWER_SUPPLY_BASIC;
-import static keqing.gtqtcore.common.block.blocks.GTQTPowerSupply.SupplyType.*;
+import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.*;
 
 public class PowerSupply {
     public static void init() {
         //基础方块 框架+压电陶瓷
         ASSEMBLER_RECIPES.recipeBuilder()
                 .input(frameGt, NiobiumTitanium, 1)
-                .input(plate, NanometerBariumTitanate, 6)
-                .fluidInputs(Zylon.getFluid(L * 4))
-                .outputs(GTQTMetaBlocks.POWER.getItemVariant(POWER_SUPPLY_BASIC))
+                .input(plate,TungstenSteel,6)
+                .input(screw, NanometerBariumTitanate, 2)
+                .fluidInputs(Zylon.getFluid(L * 2))
+                .output(POWER_SUPPLY_HATCH_BASIC)
                 .circuitMeta(1)
                 .duration(400).EUt(480).buildAndRegister();
+
         //超导方块 基础方块+对应等级的超导+冷却液+铪
-        ChaoDao(Superconductor[0],POWER_SUPPLY_I,1);
-        ChaoDao(Superconductor[1],POWER_SUPPLY_II,2);
-        ChaoDao(Superconductor[2] ,POWER_SUPPLY_III,3);
-        ChaoDao(Superconductor[3],POWER_SUPPLY_IV,4);
-        ChaoDao(Superconductor[4],POWER_SUPPLY_V,5);
-        ChaoDao(Superconductor[5],POWER_SUPPLY_VI,6);
-        ChaoDao(Superconductor[6],POWER_SUPPLY_VII,7);
-        ChaoDao(Superconductor[7] ,POWER_SUPPLY_VIII,8);
-        ChaoDao(Superconductor[8],POWER_SUPPLY_IVV,9);
+        for(int i=0;i<8;i++)
+            ChaoDao(Superconductor[i],POWER_SUPPLY_HATCH_SUPPLY[i],i+1);
+
         //电池方块 基础方块+电池+线圈+锆
-        DianChi(ENERGY_LAPOTRONIC_ORB,POWER_SUPPLY_BATTERY_I,5);
-        DianChi(ENERGY_LAPOTRONIC_ORB_CLUSTER,POWER_SUPPLY_BATTERY_II,6);
-        DianChi(ENERGY_MODULE,POWER_SUPPLY_BATTERY_III,7);
-        DianChi(ENERGY_CLUSTER,POWER_SUPPLY_BATTERY_IV,8);
-        DianChi(ULTIMATE_BATTERY,POWER_SUPPLY_BATTERY_V,9);
+        DianChi(ENERGY_LAPOTRONIC_ORB,POWER_SUPPLY_HATCH_BATTLE[0],5);
+        DianChi(ENERGY_LAPOTRONIC_ORB_CLUSTER,POWER_SUPPLY_HATCH_BATTLE[1],6);
+        DianChi(ENERGY_MODULE,POWER_SUPPLY_HATCH_BATTLE[2],7);
+        DianChi(ENERGY_CLUSTER,POWER_SUPPLY_HATCH_BATTLE[3],8);
+        DianChi(ULTIMATE_BATTERY,POWER_SUPPLY_HATCH_BATTLE[4],9);
     }
 
-    private static void ChaoDao(Material material, GTQTPowerSupply.SupplyType BLOCK,int tier) {
+    private static void ChaoDao(Material material, MetaTileEntity mte, int tier) {
         ASSEMBLER_RECIPES.recipeBuilder()
-                .inputs(GTQTMetaBlocks.POWER.getItemVariant(POWER_SUPPLY_BASIC))
-                .input(plate, ZirconiumCarbide, 6)
+                .input(POWER_SUPPLY_HATCH_BASIC)
+                .input(plate, ZirconiumCarbide, 4)
                 .input(wireGtHex, material, 1)
                 .fluidInputs(PCBCoolant.getFluid(L * 8))
-                .outputs(GTQTMetaBlocks.POWER.getItemVariant(BLOCK))
+                .output(mte)
                 .circuitMeta(1)
                 .duration(400).EUt(VA[tier]).buildAndRegister();
     }
-    private static void DianChi(MetaItem<?>.MetaValueItem material, GTQTPowerSupply.SupplyType BLOCK, int tier) {
+    private static void DianChi(MetaItem<?>.MetaValueItem material,  MetaTileEntity mte, int tier) {
         ASSEMBLER_RECIPES.recipeBuilder()
-                .inputs(GTQTMetaBlocks.POWER.getItemVariant(POWER_SUPPLY_BASIC))
-                .input(plate, Hafnium, 6)
+                .input(POWER_SUPPLY_HATCH_BASIC)
+                .input(plate, Hafnium, 4)
                 .input(material)
                 .fluidInputs(SodiumPotassium.getFluid(L * 8))
-                .outputs(GTQTMetaBlocks.POWER.getItemVariant(BLOCK))
+                .output(mte)
                 .circuitMeta(1)
                 .duration(400).EUt(VA[tier]).buildAndRegister();
     }

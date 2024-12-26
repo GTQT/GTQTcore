@@ -4498,7 +4498,7 @@ metaitem.component.cosmic.closed_timelike_curve_guidance_unit.name=封闭类时�
 metaitem.component.cosmic.nuclear_clock.name=核时钟
 metaitem.component.cosmic.manifold_oscillatory_power_cell.name=流形振荡能量单元
 metaitem.pos_binding_card.name=坐标绑定卡
-metaitem.pos_binding_card.tooltip=适用于：微波无线仓绑定 科研计算机设备绑定
+metaitem.pos_binding_card.tooltip=适用于：微波无线仓绑定 科研计算机设备绑定 天基激光折射控制器
 metaitem.scintillator.name=闪烁体
 metaitem.scintillator_crystal.name=闪烁晶体
 

@@ -309,6 +309,11 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityMegaTurbine MEGA_HIGH_PRESSURE_STEAM_TURBINE;
     public static MetaTileEntityMegaTurbine MEGA_SUPERCRITICAL_STEAM_TURBINE;
 
+
+    public static MetaTileEntityPowerSupplyHatch POWER_SUPPLY_HATCH_BASIC;
+    public static MetaTileEntityPowerSupplyHatch[] POWER_SUPPLY_HATCH_BATTLE=new MetaTileEntityPowerSupplyHatch[5];
+    public static MetaTileEntityPowerSupplyHatch[] POWER_SUPPLY_HATCH_SUPPLY=new MetaTileEntityPowerSupplyHatch[10];
+
     public static MetaTileEntityLargeOreWasher LAGER_ORE_WASHER;
     public static MetaTileEntityLargeThermalCentrifuge LAGER_THERMAL_CENTRIFUGE;
     public static MetaTileEntityNanoscaleFabricator NANOSCALE_FABRICATOR;
@@ -775,6 +780,24 @@ public class GTQTMetaTileEntities {
             String name = String.format("electric_heater.%s", GTValues.VN[i + 1]);
             ELECTRIC_HEATER[i] = registerMetaTileEntity(id, new MetaTileEntityElectricHeater(gtqtcoreId(name), i + 1));
         }
+
+        POWER_SUPPLY_HATCH_BASIC = registerMetaTileEntity(15530, new MetaTileEntityPowerSupplyHatch(gtqtcoreId("power_supply.basic"), "frame", 1));
+        POWER_SUPPLY_HATCH_BATTLE[0] = registerMetaTileEntity(15531, new MetaTileEntityPowerSupplyHatch(gtqtcoreId("power_supply.battle.1"), "battle", 1));
+        POWER_SUPPLY_HATCH_BATTLE[1] = registerMetaTileEntity(15532, new MetaTileEntityPowerSupplyHatch(gtqtcoreId("power_supply.battle.2"), "battle", 2));
+        POWER_SUPPLY_HATCH_BATTLE[2] = registerMetaTileEntity(15533, new MetaTileEntityPowerSupplyHatch(gtqtcoreId("power_supply.battle.3"), "battle", 3));
+        POWER_SUPPLY_HATCH_BATTLE[3] = registerMetaTileEntity(15534, new MetaTileEntityPowerSupplyHatch(gtqtcoreId("power_supply.battle.4"), "battle", 4));
+        POWER_SUPPLY_HATCH_BATTLE[4] = registerMetaTileEntity(15535, new MetaTileEntityPowerSupplyHatch(gtqtcoreId("power_supply.battle.5"), "battle", 5));
+        POWER_SUPPLY_HATCH_SUPPLY[0] = registerMetaTileEntity(15536, new MetaTileEntityPowerSupplyHatch(gtqtcoreId("power_supply.supply.1"), "supply", 1));
+        POWER_SUPPLY_HATCH_SUPPLY[1] = registerMetaTileEntity(15537, new MetaTileEntityPowerSupplyHatch(gtqtcoreId("power_supply.supply.2"), "supply", 2));
+        POWER_SUPPLY_HATCH_SUPPLY[2] = registerMetaTileEntity(15538, new MetaTileEntityPowerSupplyHatch(gtqtcoreId("power_supply.supply.3"), "supply", 3));
+        POWER_SUPPLY_HATCH_SUPPLY[3] = registerMetaTileEntity(15539, new MetaTileEntityPowerSupplyHatch(gtqtcoreId("power_supply.supply.4"), "supply", 4));
+        POWER_SUPPLY_HATCH_SUPPLY[4] = registerMetaTileEntity(15540, new MetaTileEntityPowerSupplyHatch(gtqtcoreId("power_supply.supply.5"), "supply", 5));
+        POWER_SUPPLY_HATCH_SUPPLY[5] = registerMetaTileEntity(15541, new MetaTileEntityPowerSupplyHatch(gtqtcoreId("power_supply.supply.6"), "supply", 6));
+        POWER_SUPPLY_HATCH_SUPPLY[6] = registerMetaTileEntity(15542, new MetaTileEntityPowerSupplyHatch(gtqtcoreId("power_supply.supply.7"), "supply", 7));
+        POWER_SUPPLY_HATCH_SUPPLY[7] = registerMetaTileEntity(15543, new MetaTileEntityPowerSupplyHatch(gtqtcoreId("power_supply.supply.8"), "supply", 8));
+        POWER_SUPPLY_HATCH_SUPPLY[8] = registerMetaTileEntity(15544, new MetaTileEntityPowerSupplyHatch(gtqtcoreId("power_supply.supply.9"), "supply", 9));
+        POWER_SUPPLY_HATCH_SUPPLY[9] = registerMetaTileEntity(15545, new MetaTileEntityPowerSupplyHatch(gtqtcoreId("power_supply.supply.10"), "supply", 10));
+
         BIO_HATCH = registerMetaTileEntity(15546, new MetaTileEntityBioHatch(gtqtcoreId("bio_hatch")));
         INF_WATER_HATCH = registerMetaTileEntity(15547, new MetaTileInfWaterHatch(gtqtcoreId("infinite_water_hatch")));
         CATALYST_HATCH = registerMetaTileEntity(15548, new MetaTileEntityCatalystHatch(gtqtcoreId("catalyst_hatch")));

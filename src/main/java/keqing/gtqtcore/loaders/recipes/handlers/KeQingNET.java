@@ -20,6 +20,7 @@ import gregtech.common.items.MetaItems;
 import gregtech.common.metatileentities.MetaTileEntities;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
+import keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
@@ -46,11 +47,9 @@ import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.MaterialHelper.Superconductor;
 import static keqing.gtqtcore.api.unification.TJMaterials.Polyetheretherketone;
 import static keqing.gtqtcore.api.utils.GTQTUtil.CWT;
-import static keqing.gtqtcore.common.block.GTQTMetaBlocks.POWER;
 import static keqing.gtqtcore.common.block.blocks.GTQTIsaCasing.CasingType.FLOTATION_CASING_GEARBOX;
 import static keqing.gtqtcore.common.block.blocks.GTQTIsaCasing.CasingType.ISA_MILL_CASING_GEARBOX;
 import static keqing.gtqtcore.common.block.blocks.GTQTKQCC.CasingType.*;
-import static keqing.gtqtcore.common.block.blocks.GTQTPowerSupply.SupplyType.POWER_SUPPLY_BASIC;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.COMBUSTION_GENERATOR;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.CRACKER;
@@ -1729,7 +1728,7 @@ public class KeQingNET {
                 .buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .inputs(POWER.getItemVariant(POWER_SUPPLY_BASIC))
+                .inputs(GTQTMetaBlocks.TURBINE_CASING.getItemVariant(GTQTTurbineCasing.TurbineCasingType.IRIDIUM_CASING))
                 .input(circuit, Tier.IV, 8)
                 .inputNBT(TOOL_DATA_ORB, NBTMatcher.ANY, NBTCondition.ANY)
                 .input(frameGt, TungstenSteel, 32)
@@ -2089,7 +2088,7 @@ public class KeQingNET {
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(frameGt, TungstenSteel, 16)
-                .inputs(POWER.getItemVariant(POWER_SUPPLY_BASIC, 4))
+                .inputs(GTQTMetaBlocks.TURBINE_CASING.getItemVariant(GTQTTurbineCasing.TurbineCasingType.IRIDIUM_CASING,4))
                 .input(EMITTER_EV, 8)
                 .input(SENSOR_EV, 8)
                 .input(circuit, MarkerMaterials.Tier.EV, 16)
@@ -2116,7 +2115,7 @@ public class KeQingNET {
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(frameGt, TungstenSteel, 16)
-                .inputs(POWER.getItemVariant(POWER_SUPPLY_BASIC, 8))
+                .inputs(GTQTMetaBlocks.TURBINE_CASING.getItemVariant(GTQTTurbineCasing.TurbineCasingType.IRIDIUM_CASING,8))
                 .input(EMITTER_IV, 32)
                 .input(SENSOR_IV, 32)
                 .input(circuit, MarkerMaterials.Tier.IV, 32)

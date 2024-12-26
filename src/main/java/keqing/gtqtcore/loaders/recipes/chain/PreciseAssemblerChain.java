@@ -5,7 +5,7 @@ import gregtech.common.blocks.BlockMachineCasing;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTNuclearFusion;
-import keqing.gtqtcore.common.block.blocks.GTQTPowerSupply;
+import keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing;
 import keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing1;
 
 import static gregicality.multiblocks.api.unification.GCYMMaterials.Zeron100;
@@ -167,7 +167,7 @@ public class PreciseAssemblerChain {
         //  Precise Assembler Casing Mk I
         ASSEMBLER_RECIPES.recipeBuilder()
                 .inputs(MetaBlocks.MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.LuV))
-                .inputs(GTQTMetaBlocks.POWER.getItemVariant(GTQTPowerSupply.SupplyType.POWER_SUPPLY_BASIC))
+                .inputs(GTQTMetaBlocks.TURBINE_CASING.getItemVariant(GTQTTurbineCasing.TurbineCasingType.IRIDIUM_CASING))
                 .input(ROBOT_ARM_EV, 2)
                 .input(plateDouble, MARM200CeSteel, 2)
                 .input(circuit, MarkerMaterials.Tier.LuV)
