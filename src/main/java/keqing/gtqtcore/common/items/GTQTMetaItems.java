@@ -259,7 +259,7 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem SUNNARIUM_PLATE;
     public static MetaItem<?>.MetaValueItem SUNNARIUM_ENRICHED;
     public static MetaItem<?>.MetaValueItem SUNNARIUM_ENRICHED_PLATE;
-
+    public static MetaItem<?>.MetaValueItem SPINNER;
     public static MetaItem<?>.MetaValueItem ADV_ENERGY_STORAGE;
     public static MetaItem<?>.MetaValueItem ADV_CAPACITOR;
     public static MetaItem<?>.MetaValueItem ADV_COMPONENT_VENT;
@@ -486,6 +486,18 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem EXOTIC_SHAPE_EXTRUDER_GEAR_SMALL;
     public static MetaItem<?>.MetaValueItem EXOTIC_SHAPE_EXTRUDER_ROD_LONG;
     public static MetaItem<?>.MetaValueItem EXOTIC_SHAPE_EXTRUDER_ROTOR;
+
+    public static MetaItem<?>.MetaValueItem SHAPE_MOLD_ROD;
+    public static MetaItem<?>.MetaValueItem SHAPE_MOLD_BOLT;
+    public static MetaItem<?>.MetaValueItem SHAPE_MOLD_ROUND;
+    public static MetaItem<?>.MetaValueItem SHAPE_MOLD_SCREW;
+    public static MetaItem<?>.MetaValueItem SHAPE_MOLD_RING;
+    public static MetaItem<?>.MetaValueItem SHAPE_MOLD_ROD_LONG;
+    public static MetaItem<?>.MetaValueItem SHAPE_MOLD_TURBINE_BLADE;
+    public static MetaItem<?>.MetaValueItem SHAPE_MOLD_DRILL_HEAD;
+    public static MetaItem<?>.MetaValueItem SHAPE_EXTRUDER_TURBINE_BLADE;
+    public static MetaItem<?>.MetaValueItem SHAPE_EXTRUDER_DRILL_HEAD;
+
     // Gooware Circuit Components
     public static MetaItem<?>.MetaValueItem BZ_REACTION_CHAMBER;
     public static MetaItem<?>.MetaValueItem NONLINEAR_CHEMICAL_OSCILLATOR;

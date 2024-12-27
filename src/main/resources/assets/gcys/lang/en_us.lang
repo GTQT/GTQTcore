@@ -524,7 +524,7 @@ metaitem.crystal.system_on_chip.socket.tooltip=Bridging Crystal and Circuit
 
 # Wetware Stuff
 metaitem.magnetron.name=Magnetron
-
+metaitem.spinner.name=Spinner
 
 # Optical Stuff
 metaitem.plate.phase_change_memory.name=PRAM

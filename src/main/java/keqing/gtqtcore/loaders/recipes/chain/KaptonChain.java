@@ -9,6 +9,8 @@ import static gregtech.api.GTValues.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.dust;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
+import static keqing.gtqtcore.api.utils.GTQTUniverUtil.SECOND;
+import static keqing.gtqtcore.api.utils.GTQTUniverUtil.TICK;
 
 public class KaptonChain {
 
@@ -109,29 +111,24 @@ public class KaptonChain {
     }
 
     private static void kapton() {
-        // 2C6H2(C2O3)2 + C12H12N2O -> C22H10N2O5 + 10C + 6H + 2O (lossy)
-        CHEMICAL_RECIPES.recipeBuilder()
+        // 2C6H2(C2O3)2 + C12H12N2O -> C22H10N2O5 + 10C + 6H + 2O (loss)
+        POLYMERIZATION_RECIPES.recipeBuilder()
                 .input(dust, PyromelliticDianhydride, 2)
                 .input(dust, Oxydianiline, 3)
                 .fluidOutputs(KaptonK.getFluid(L))
-                .duration(30).EUt(VA[IV]).buildAndRegister();
+                .EUt(VA[IV])
+                .duration(SECOND + 10 * TICK)
+                .buildAndRegister();
 
-        // 2C6H2(C2O3)2 + C12H12N2O + C16H6O6 + H2NC6H4NH2 -> C24H18N2O5 + 30C + 12H + 14O + 2N (lossy)
-        CHEMICAL_RECIPES.recipeBuilder()
+        //  2C6H2(C2O3)2 + C12H12N2O + C16H6O6 + H2NC6H4NH2 -> C24H18N2O5 + 30C + 12H + 14O + 2N (loss)
+        POLYMERIZATION_RECIPES.recipeBuilder()
                 .input(dust, BiphenylTetracarboxylicAcidDianhydride, 2)
                 .input(dust, ParaPhenylenediamine)
                 .fluidInputs(KaptonK.getFluid(L))
                 .fluidOutputs(KaptonE.getFluid(L))
-                .duration(30).EUt(VA[ZPM]).buildAndRegister();
-
-
-
-
-
-
-
-
-
+                .EUt(VA[ZPM])
+                .duration(SECOND + 10 * TICK)
+                .buildAndRegister();
 
         //  Dimethylamine + Hydrochloric Acid -> Dimethylamine Hydrochloride
         MIXER_RECIPES.recipeBuilder()

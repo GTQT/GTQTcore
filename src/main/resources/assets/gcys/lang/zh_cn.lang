@@ -521,7 +521,7 @@ metaitem.crystal.system_on_chip.socket.tooltip=桥接晶体和电路
 
 # Wetware Stuff
 metaitem.magnetron.name=磁控管
-
+metaitem.spinner.name=纺线喷头
 
 # Optical Stuff
 metaitem.plate.phase_change_memory.name=PRAM

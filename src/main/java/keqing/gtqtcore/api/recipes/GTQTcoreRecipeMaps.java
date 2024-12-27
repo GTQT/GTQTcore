@@ -24,6 +24,33 @@ import static gregtech.api.recipes.RecipeMaps.REPLICATOR_RECIPES;
 //怎么写请看
 //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/api/recipe/GSRecipeMaps.java
 public class GTQTcoreRecipeMaps {
+    public static final RecipeMap<SimpleRecipeBuilder> SPINNER_RECIPES = new RecipeMap<>("spinner",
+            3, 1, 1, 0, new SimpleRecipeBuilder(), false)
+            .setSlotOverlay(false, false, false, GuiTextures.VIAL_OVERLAY_1)
+            .setSlotOverlay(false, false, true, GuiTextures.INT_CIRCUIT_OVERLAY)
+            .setSlotOverlay(false, true, GuiTextures.VIAL_OVERLAY_1)
+            .setSlotOverlay(true, false, GuiTextures.VIAL_OVERLAY_1)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_COMPRESS, ProgressWidget.MoveType.HORIZONTAL)
+            .setSound(GTSoundEvents.WIRECUTTER_TOOL);
+
+    public static final RecipeMap<SimpleRecipeBuilder> POLYMERIZATION_RECIPES = new RecipeMap<>("polymerization_tank",
+            2, 2, 2, 2, new SimpleRecipeBuilder(), false)
+            .setSlotOverlay(false, false, GuiTextures.VIAL_OVERLAY_1)
+            .setSlotOverlay(false, true, GuiTextures.VIAL_OVERLAY_2)
+            .setSlotOverlay(true, false, GuiTextures.VIAL_OVERLAY_1)
+            .setSlotOverlay(true, true, GuiTextures.VIAL_OVERLAY_2)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.CIRCULAR)
+            .setSound(GTSoundEvents.CHEMICAL_REACTOR);
+
+    public static final RecipeMap<SimpleRecipeBuilder> LOW_TEMP_ACTIVATOR_RECIPES = new RecipeMap<>("low_temperature_activator",
+            2, 4, 2, 1, new SimpleRecipeBuilder(), false)
+            .setSlotOverlay(false, false, GuiTextures.DUST_OVERLAY)
+            .setSlotOverlay(true, false, GuiTextures.DUST_OVERLAY)
+            .setSlotOverlay(false, true, GuiTextures.VIAL_OVERLAY_2)
+            .setSlotOverlay(true, true, GuiTextures.VIAL_OVERLAY_2)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL)
+            .setSound(GTSoundEvents.COOLING);
+
     public static final RecipeMap<SimpleRecipeBuilder> PLASMA_CONDENSER_RECIPES = new RecipeMap<>("plasma_condenser_recipes", 3, 3, 3, 3, new SimpleRecipeBuilder(), false)
             .setProgressBar(GuiTextures.PROGRESS_BAR_REPLICATOR, ProgressWidget.MoveType.HORIZONTAL)
             .setSound(GTSoundEvents.COOLING);
@@ -225,7 +252,7 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<PAComputationRecipeBuilder> PRECISE_ASSEMBLER_RECIPES;
     public static final RecipeMap<PAComputationRecipeBuilder> MOLECULAR_TRANSFORMER_RECIPES;
     public static final RecipeMap<MDRecipeBuilder> MINING_DRILL_RECIPES;
-    public static final RecipeMap<SimpleRecipeBuilder> DISTILLATION_KETTLE;
+    public static final RecipeMap<HeatRecipeBuilder> DISTILLATION_KETTLE;
     public static final RecipeMap<SimpleRecipeBuilder> NANOHYBRID;
     public static final RecipeMap<HeatRecipeBuilder> PYROLYSIS_TOWER;
     public static final RecipeMap<ComputationRecipeBuilder> LASER_ENGRAVING;
@@ -238,12 +265,9 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<PrimitiveRecipeBuilder> CLARIFIER;
     public static final RecipeMap<SimpleRecipeBuilder>  ELEOIL;
     public static final RecipeMap<SimpleRecipeBuilder>  REACTION_FURNACE_RECIPES;
-    public static final RecipeMap<BlastRecipeBuilder>  BLAST_ARC_RECIPES;
     public static final RecipeMap<NeutronActivatorRecipeBuilder> NEUTRON_ACTIVATOR ;
     public static final RecipeMap<SimpleRecipeBuilder> SFM;
     public static final RecipeMap<PrimitiveRecipeBuilder>  COAGULATION_RECIPES ;
-    public static final RecipeMap<SimpleRecipeBuilder> FLUIDIZED_BED;
-    public static final RecipeMap<SimpleRecipeBuilder> FIX_BED;
     public static final RecipeMap<TARGETRecipeBuilder> TARGET_CHAMBER;
     public static final RecipeMap<TARGETRecipeBuilder> NUCLEOSYNTHESIS;
     public static final RecipeMap<SimpleRecipeBuilder> BEAM_COLLECTION;
@@ -464,24 +488,11 @@ public class GTQTcoreRecipeMaps {
         REACTION_FURNACE_RECIPES = new RecipeMap<>("reaction_furnace",
                 3, 3, 3, 3, new SimpleRecipeBuilder(), false);
 
-        BLAST_ARC_RECIPES = new RecipeMap<>("blast_arc_furnace",
-                6, 1, 3, 1, new BlastRecipeBuilder(), false);
-
         SEPTIC_TANK = new RecipeMap<>("septic_tank",
                 2, 2, 2, 2, new SimpleRecipeBuilder(), false);
 
-        FLUIDIZED_BED = new RecipeMap<>("fluidized_bed",
-                3, 3, 3, 3, new SimpleRecipeBuilder(), false)
-                .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL)
-                .setSound(GTSoundEvents.SCIENCE);
-
-        FIX_BED = new RecipeMap<>("fix_bed",
-                0, 0, 3, 3, new SimpleRecipeBuilder(), false)
-                .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL)
-                .setSound(GTSoundEvents.SCIENCE);
-
         DISTILLATION_KETTLE = new RecipeMapGTQTDistillationTower<>("distillation_kettle",
-                1,false, 1,false, 1,false, 12,false, new SimpleRecipeBuilder(), false).setSound(GTSoundEvents.CHEMICAL_REACTOR);
+                1,false, 1,false, 1,false, 12,false, new HeatRecipeBuilder(), false).setSound(GTSoundEvents.CHEMICAL_REACTOR);
 
         SFM = new RecipeMapGTQTDistillationTower<>("sfm",
                 1, false, 1,false,  1,false,  12,false,  new SimpleRecipeBuilder(), false).setSound(GTSoundEvents.CHEMICAL_REACTOR);

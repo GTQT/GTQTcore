@@ -42,8 +42,7 @@ public class MetaTileEntityIndustrialMix extends GTQTMultiblockCore {
 
     public MetaTileEntityIndustrialMix(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{
-                RecipeMaps.MIXER_RECIPES,
-                GTQTcoreRecipeMaps.FLUIDIZED_BED
+                RecipeMaps.MIXER_RECIPES
         });
     }
     @Override

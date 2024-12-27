@@ -35,6 +35,7 @@ public class GTQTRecipesManager {
         ZirconChain.init();
         DeltamethrinChain.init();
         RubbersChain.init();
+        PlasticChain.init();
         CrystalRaw.init();
         BacteriaCulturesChain.init();
         FusionLoader.init();
@@ -145,7 +146,7 @@ public class GTQTRecipesManager {
         MetaTileEntityLoader.init();
         MetaTileEntityMachine.init();
         OilChains.init();
-        EFusionLoader.init();
+        DrumRecipes.init();
         PCBline.init();
         NanotubesChain.init();
         initCircuits();

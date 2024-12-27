@@ -55,8 +55,8 @@ import static gregtech.api.util.RelativeDirection.*;
 //闪蒸
 public class MetaTileEntitySMSF extends MultiMapMultiblockController implements IProgressBarMultiblock {
     int[] steam = new int[3];
-    int updatetime = 1;
-    FluidStack STEAM = Steam.getFluid(1000 * updatetime);
+
+    FluidStack STEAM = Steam.getFluid(1000);
     private int coilLevel;
     private int number;
 
@@ -81,37 +81,13 @@ public class MetaTileEntitySMSF extends MultiMapMultiblockController implements 
     }
 
     @Override
-    @Nonnull
-    protected Widget getFlexButton(int x, int y, int width, int height) {
-        WidgetGroup group = new WidgetGroup(x, y, width, height);
-        group.addWidget(new ClickButtonWidget(0, 0, 9, 9, "", this::decrementThreshold)
-                .setButtonTexture(GuiTextures.BUTTON_THROTTLE_MINUS)
-                .setTooltipText("increment"));
-        group.addWidget(new ClickButtonWidget(9, 0, 9, 9, "", this::incrementThreshold)
-                .setButtonTexture(GuiTextures.BUTTON_THROTTLE_PLUS)
-                .setTooltipText("decrement"));
-        group.addWidget(
-                (new ImageCycleButtonWidget(0, 9, 18, 9, GuiTextures.BUTTON_MULTI_MAP, this.getAvailableRecipeMaps().length, this::getRecipeMapIndex, this::setRecipeMapIndex)).shouldUseBaseBackground().singleTexture().setTooltipHoverString((i) -> LocalizationUtils.format("gregtech.multiblock.multiple_recipemaps.header") + " " + LocalizationUtils.format("recipemap." + this.getAvailableRecipeMaps()[i].getUnlocalizedName() + ".name"))
-        );
-        return group;
-    }
-
-    private void incrementThreshold(Widget.ClickData clickData) {
-        this.updatetime = MathHelper.clamp(updatetime + 1, 1, 20);
-    }
-
-    private void decrementThreshold(Widget.ClickData clickData) {
-        this.updatetime = MathHelper.clamp(updatetime - 1, 1, 20);
-    }
-
-    @Override
     public void update() {
         super.update();
         if (steam[0] <= 9000) {
             IMultipleTankHandler inputTank = getInputFluidInventory();
             if (STEAM.isFluidStackIdentical(inputTank.drain(STEAM, false))) {
                 inputTank.drain(STEAM, true);
-                steam[0] = steam[0] + 160 * coilLevel * updatetime;
+                steam[0] = steam[0] + 360 * coilLevel;
 
             }
         }

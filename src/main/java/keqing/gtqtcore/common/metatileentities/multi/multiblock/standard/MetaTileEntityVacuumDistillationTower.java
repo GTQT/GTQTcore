@@ -111,10 +111,6 @@ public class MetaTileEntityVacuumDistillationTower extends RecipeMapMultiblockCo
             super(tileEntity);
         }
 
-        private boolean isDistilleryMode() {
-            return this.getRecipeMap() == GTQTcoreRecipeMaps.DISTILLATION_KETTLE;
-        }
-
         @Override
         public int getParallelLimit() {
             return 32;

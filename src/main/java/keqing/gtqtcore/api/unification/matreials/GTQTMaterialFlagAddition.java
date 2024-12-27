@@ -3,10 +3,7 @@ package keqing.gtqtcore.api.unification.matreials;
 import gregtech.api.fluids.FluidBuilder;
 import gregtech.api.fluids.store.FluidStorageKeys;
 import gregtech.api.unification.material.Material;
-import gregtech.api.unification.material.properties.FluidProperty;
-import gregtech.api.unification.material.properties.IngotProperty;
-import gregtech.api.unification.material.properties.OreProperty;
-import gregtech.api.unification.material.properties.PropertyKey;
+import gregtech.api.unification.material.properties.*;
 
 import static gregicality.multiblocks.api.unification.GCYMMaterials.*;
 import static gregtech.api.unification.material.Materials.*;
@@ -348,5 +345,18 @@ public class GTQTMaterialFlagAddition {
         Nickel.addFlags(GENERATE_FOIL);
         Titanium.addFlags(GENERATE_FOIL);
         Germanium.addFlags(GENERATE_FOIL);
+
+        RhodiumPlatedPalladium.setProperty(PropertyKey.FLUID_PIPE,
+                new FluidPipeProperties(6200, 200,
+                        true, true, true, false));
+
+        NaquadahAlloy.setProperty(PropertyKey.FLUID_PIPE,
+                new FluidPipeProperties(8000, 250,
+                        true, true, true, true));
+
+        Darmstadtium.setProperty(PropertyKey.FLUID_PIPE,
+                new FluidPipeProperties(9600, 300,
+                        true, true, true, true));
+
     }
 }

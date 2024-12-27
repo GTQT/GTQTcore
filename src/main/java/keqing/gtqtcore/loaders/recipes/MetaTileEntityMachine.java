@@ -18,9 +18,11 @@ import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.MetaTileEntities;
 import gregtech.core.unification.material.internal.MaterialRegistryManager;
 import gregtech.loaders.recipe.CraftingComponent;
+import gregtech.loaders.recipe.MetaTileEntityLoader;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.*;
+import keqing.gtqtcore.common.items.GTQTMetaItems;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -729,6 +731,23 @@ public class MetaTileEntityMachine {
                 'G', "blockGlass",
                 'H', MetaBlocks.STEAM_CASING.getItemVariant(BlockSteamCasing.SteamCasingType.STEEL_HULL));
 
+        // Steam Spinner
+        ModHandler.addShapedRecipe(true, "steam_spinner.bronze", STEAM_SPINNER[0].getStackForm(),
+                " S ", "MHM", "WXW",
+                'H', MetaBlocks.STEAM_CASING.getItemVariant(BlockSteamCasing.SteamCasingType.BRONZE_HULL),
+                'M', Blocks.PISTON,
+                'S', GTQTMetaItems.SPINNER,
+                'W', new UnificationEntry(pipeTinyFluid, Bronze),
+                'X', new UnificationEntry(gem, Diamond));
+
+        ModHandler.addShapedRecipe(true, "steam_spinner.steel", STEAM_SPINNER[1].getStackForm(),
+                " S ", "MHM", "WXW",
+                'H', MetaBlocks.STEAM_CASING.getItemVariant(BlockSteamCasing.SteamCasingType.STEEL_HULL),
+                'M', Blocks.PISTON,
+                'S', GTQTMetaItems.SPINNER,
+                'W', new UnificationEntry(pipeTinyFluid, TinAlloy),
+                'X', new UnificationEntry(circuit, MarkerMaterials.Tier.ULV));
+
         //  Bio Reactor
         registerMachineRecipe(true, BIO_REACTOR,
                 "PXX", "pHp", "PMW",
@@ -738,6 +757,41 @@ public class MetaTileEntityMachine {
                 'X', CraftingComponent.CIRCUIT,
                 'W', CraftingComponent.CABLE,
                 'M', CraftingComponent.MOTOR);
+
+        // Burner Reactor
+        MetaTileEntityLoader.registerMachineRecipe(true, BURNER_REACTOR,
+                "KRK", "IHI", "CMC",
+                'K', CraftingComponent.CABLE_QUAD,
+                'R', CraftingComponent.ROTOR,
+                'I', CraftingComponent.PIPE_NORMAL,
+                'H', CraftingComponent.HULL,
+                'C', CraftingComponent.CIRCUIT,
+                'M', CraftingComponent.MOTOR);
+
+        MetaTileEntityLoader.registerMachineRecipe(true, LOW_TEMP_ACTIVATOR,
+                "EXE", "GHG", "WXW",
+                'E', CraftingComponent.EMITTER,
+                'X', CraftingComponent.BETTER_CIRCUIT,
+                'G', CraftingComponent.GLASS,
+                'W', CraftingComponent.CABLE,
+                'H', CraftingComponent.HULL);
+
+        MetaTileEntityLoader.registerMachineRecipe(true, POLYMERIZATION_TANK,
+                "GXG", "GMG", "PHP",
+                'H', CraftingComponent.HULL,
+                'P', CraftingComponent.PIPE_LARGE,
+                'G', CraftingComponent.GLASS,
+                'X', CraftingComponent.CIRCUIT,
+                'M', CraftingComponent.MOTOR);
+
+        // Spinner
+        MetaTileEntityLoader.registerMachineRecipe(true, GTQTMetaTileEntities.SPINNER,
+                " S ", "MHM", "WXW",
+                'S', GTQTMetaItems.SPINNER,
+                'H', CraftingComponent.HULL,
+                'M', CraftingComponent.MOTOR,
+                'W', CraftingComponent.CABLE,
+                'X', CraftingComponent.CIRCUIT);
 
 
         registerMachineRecipe(GTQTMetaTileEntities.FLUID_EXTRACTOR, "PGP", "EGE", "CMC", 'M', HULL, 'P', PUMP, 'E', PISTON, 'C',

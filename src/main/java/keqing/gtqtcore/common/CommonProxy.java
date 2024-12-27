@@ -129,6 +129,7 @@ public class CommonProxy {
         MaterialRecipeHandler.register();
         PipeRecipeHandler.register();
         PartRecipeHandler.register();
+        PartRecipeHandler1.register();
     }
 
     @SubscribeEvent

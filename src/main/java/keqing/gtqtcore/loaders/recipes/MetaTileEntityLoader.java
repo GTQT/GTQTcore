@@ -960,7 +960,7 @@ public class MetaTileEntityLoader {
                 'E', EMITTER_IV.getStackForm()
         );
 
-        ModHandler.addShapedRecipe(true, "burner_reactor", BURNER_REACTOR.getStackForm(),
+        ModHandler.addShapedRecipe(true, "lager_burner_reactor", LAGER_BURNER_REACTOR.getStackForm(),
                 "KRK", "IHI", "CMC",
                 'K', new UnificationEntry(cableGtSingle, Platinum),
                 'R', new UnificationEntry(frameGt, Polytetrafluoroethylene),

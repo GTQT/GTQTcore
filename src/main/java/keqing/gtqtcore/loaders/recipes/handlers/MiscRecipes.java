@@ -2,6 +2,7 @@ package keqing.gtqtcore.loaders.recipes.handlers;
 
 
 
+import gregtech.api.recipes.ModHandler;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.BlockTransparentCasing;
 
@@ -28,6 +29,7 @@ public class MiscRecipes {
     public static void init() {
         metaBlockRecipes();
         ExoticExtruders();
+        ShapeMold();
         //  Flux Electrum
         MIXER_RECIPES.recipeBuilder()
                 .input(dust, Electrum, 8)
@@ -100,6 +102,181 @@ public class MiscRecipes {
                 .output(toolHeadBuzzSaw, CubicBoronNitride)
                 .duration((int) (CubicBoronNitride.getMass() * 4)).EUt(240).buildAndRegister();
     }
+
+    private static void ShapeMold() {
+        // Re-modify all Shape Molds recipe.
+        ModHandler.removeRecipeByName("gregtech:shape_mold_plate");
+        ModHandler.addShapedRecipe(true, "shape_mold.plate", SHAPE_MOLD_PLATE.getStackForm(),
+                " hf", " M ", "   ",
+                'M', SHAPE_EMPTY);
+
+        ModHandler.removeRecipeByName("gregtech:shape_mold_gear");
+        ModHandler.addShapedRecipe(true,"shape_mold.gear", SHAPE_MOLD_GEAR.getStackForm(),
+                " h ", " M ", "  f",
+                'M', SHAPE_EMPTY);
+
+        ModHandler.removeRecipeByName("gregtech:shape_mold_credit");
+        ModHandler.addShapedRecipe(true, "shape_mold.credit", SHAPE_MOLD_CREDIT.getStackForm(),
+                "   ", " M ", "hf ",
+                'M', SHAPE_EMPTY);
+
+        ModHandler.removeRecipeByName("gregtech:shape_mold_bottle");
+        ModHandler.addShapedRecipe(true, "shape_mold.bottle", SHAPE_MOLD_BOTTLE.getStackForm(),
+                " h ", " M ", " f ",
+                'M', SHAPE_EMPTY);
+
+        ModHandler.removeRecipeByName("gregtech:shape_mold_ingot");
+        ModHandler.addShapedRecipe(true, "shape_mold.ingot", SHAPE_MOLD_INGOT.getStackForm(),
+                " h ", " M ", "f  ",
+                'M', SHAPE_EMPTY);
+
+        ModHandler.removeRecipeByName("gregtech:shape_mold_ball");
+        ModHandler.addShapedRecipe(true, "shape_mold.ball", SHAPE_MOLD_BALL.getStackForm(),
+                " h ", "fM ", "   ",
+                'M', SHAPE_EMPTY);
+
+        ModHandler.removeRecipeByName("gregtech:shape_mold_block");
+        ModHandler.addShapedRecipe(true, "shape_mold.block", SHAPE_MOLD_BLOCK.getStackForm(),
+                "fh ", " M ", "   ",
+                'M', SHAPE_EMPTY);
+
+        ModHandler.removeRecipeByName("gregtech:shape_mold_nugget");
+        ModHandler.addShapedRecipe(true, "shape_mold.nugget", SHAPE_MOLD_NUGGET.getStackForm(),
+                "  h", " Mf", "   ",
+                'M', SHAPE_EMPTY);
+
+        ModHandler.removeRecipeByName("gregtech:shape_mold_cylinder");
+        ModHandler.addShapedRecipe(true, "shape_mold.cylinder", SHAPE_MOLD_CYLINDER.getStackForm(),
+                "  h", "fM ", "   ",
+                'M', SHAPE_EMPTY);
+
+        ModHandler.removeRecipeByName("gregtech:shape_mold_anvil");
+        ModHandler.addShapedRecipe(true, "shape_mold.anvil", SHAPE_MOLD_ANVIL.getStackForm(),
+                "f h", " M ", "   ",
+                'M', SHAPE_EMPTY);
+
+        ModHandler.removeRecipeByName("gregtech:shape_mold_name");
+        ModHandler.addShapedRecipe(true, "shape_mold.name", SHAPE_MOLD_NAME.getStackForm(),
+                " fh", " M ", "   ",
+                'M', SHAPE_EMPTY);
+
+        ModHandler.removeRecipeByName("gregtech:shape_mold_gear_small");
+        ModHandler.addShapedRecipe(true, "shape_mold.gear_small", SHAPE_MOLD_GEAR_SMALL.getStackForm(),
+                "   ", " Mh", " f ",
+                'M', SHAPE_EMPTY);
+
+        ModHandler.removeRecipeByName("gregtech:shape_mold_rotor");
+        ModHandler.addShapedRecipe(true, "shape_mold.rotor", SHAPE_MOLD_ROTOR.getStackForm(),
+                "   ", " M ", "f h",
+                'M', SHAPE_EMPTY);
+
+        // Add recipes for gtlitecore addition Shape Molds.
+        ModHandler.addShapedRecipe(true, "shape_mold.rod", SHAPE_MOLD_ROD.getStackForm(),
+                "   ", " Mh", "f  ",
+                'M', SHAPE_EMPTY);
+
+        FORMING_PRESS_RECIPES.recipeBuilder()
+                .notConsumable(SHAPE_MOLD_ROD)
+                .input(SHAPE_EMPTY)
+                .output(SHAPE_MOLD_ROD)
+                .EUt(22) // LV
+                .duration(6 * SECOND)
+                .buildAndRegister();
+
+
+        ModHandler.addShapedRecipe(true, "shape_mold.bolt", SHAPE_MOLD_BOLT.getStackForm(),
+                "   ", "fMh", "   ",
+                'M', SHAPE_EMPTY);
+
+        FORMING_PRESS_RECIPES.recipeBuilder()
+                .notConsumable(SHAPE_MOLD_BOLT)
+                .input(SHAPE_EMPTY)
+                .output(SHAPE_MOLD_BOLT)
+                .EUt(22) // LV
+                .duration(6 * SECOND)
+                .buildAndRegister();
+
+        ModHandler.addShapedRecipe(true, "shape_mold.round", SHAPE_MOLD_ROUND.getStackForm(),
+                "f  ", " Mh", "   ",
+                'M', SHAPE_EMPTY);
+
+        FORMING_PRESS_RECIPES.recipeBuilder()
+                .notConsumable(SHAPE_MOLD_ROUND)
+                .input(SHAPE_EMPTY)
+                .output(SHAPE_MOLD_ROUND)
+                .EUt(22) // LV
+                .duration(6 * SECOND)
+                .buildAndRegister();
+
+        ModHandler.addShapedRecipe(true, "shape_mold.screw", SHAPE_MOLD_SCREW.getStackForm(),
+                " f ", " Mh", "   ",
+                'M', SHAPE_EMPTY);
+
+        FORMING_PRESS_RECIPES.recipeBuilder()
+                .notConsumable(SHAPE_MOLD_SCREW)
+                .input(SHAPE_EMPTY)
+                .output(SHAPE_MOLD_SCREW)
+                .EUt(22) // LV
+                .duration(6 * SECOND)
+                .buildAndRegister();
+
+        ModHandler.addShapedRecipe(true, "shape_mold.ring", SHAPE_MOLD_RING.getStackForm(),
+                "  f", " Mh", "   ",
+                'M', SHAPE_EMPTY);
+
+        FORMING_PRESS_RECIPES.recipeBuilder()
+                .notConsumable(SHAPE_MOLD_RING)
+                .input(SHAPE_EMPTY)
+                .output(SHAPE_MOLD_RING)
+                .EUt(22) // LV
+                .duration(6 * SECOND)
+                .buildAndRegister();
+
+        ModHandler.addShapedRecipe(true, "shape_mold.rod_long", SHAPE_MOLD_ROD_LONG.getStackForm(),
+                "   ", " M ", " fh",
+                'M', SHAPE_EMPTY);
+
+        FORMING_PRESS_RECIPES.recipeBuilder()
+                .notConsumable(SHAPE_MOLD_ROD_LONG)
+                .input(SHAPE_EMPTY)
+                .output(SHAPE_MOLD_ROD_LONG)
+                .EUt(22) // LV
+                .duration(6 * SECOND)
+                .buildAndRegister();
+
+        ModHandler.addShapedRecipe(true, "shape_mold.turbine_blade", SHAPE_MOLD_TURBINE_BLADE.getStackForm(),
+                "   ", "fM ", "  h",
+                'M', SHAPE_EMPTY);
+
+        FORMING_PRESS_RECIPES.recipeBuilder()
+                .notConsumable(SHAPE_MOLD_TURBINE_BLADE)
+                .input(SHAPE_EMPTY)
+                .output(SHAPE_MOLD_TURBINE_BLADE)
+                .EUt(22) // LV
+                .duration(6 * SECOND)
+                .buildAndRegister();
+
+        ModHandler.addShapedRecipe(true, "shape_mold.drill_head", SHAPE_MOLD_DRILL_HEAD.getStackForm(),
+                "   ", " M ", " hf",
+                'M', SHAPE_EMPTY);
+
+        FORMING_PRESS_RECIPES.recipeBuilder()
+                .notConsumable(SHAPE_MOLD_DRILL_HEAD)
+                .input(SHAPE_EMPTY)
+                .output(SHAPE_MOLD_DRILL_HEAD)
+                .EUt(22) // LV
+                .duration(6 * SECOND)
+                .buildAndRegister();
+
+        ModHandler.addShapedRecipe(true, "shape_extruder.turbine_blade", SHAPE_EXTRUDER_TURBINE_BLADE.getStackForm(),
+                "   ", " M ", "  x",
+                'M', SHAPE_EXTRUDER_PLATE);
+
+        ModHandler.addShapedRecipe(true, "shape_extruder.drill_head", SHAPE_EXTRUDER_DRILL_HEAD.getStackForm(),
+                "   ", " M ", " x ",
+                'M', SHAPE_EXTRUDER_INGOT);
+    }
+
     private static void ExoticExtruders() {
 
         //  Plate

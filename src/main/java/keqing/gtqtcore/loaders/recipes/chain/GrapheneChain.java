@@ -1,9 +1,11 @@
 package keqing.gtqtcore.loaders.recipes.chain;
 
 import gregtech.api.recipes.GTRecipeHandler;
+import gregtech.api.recipes.ModHandler;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.recipes.ingredients.IntCircuitIngredient;
 import gregtech.api.unification.OreDictUnifier;
+import gregtech.api.unification.stack.UnificationEntry;
 import gregtech.common.items.MetaItems;
 import keqing.gtqtcore.common.items.GTQTMetaItems;
 
@@ -14,6 +16,7 @@ import static gregtech.api.GTValues.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static keqing.gtqtcore.api.utils.GTQTUtil.CWT;
+import static keqing.gtqtcore.common.items.GTQTMetaItems.SPINNER;
 
 public class GrapheneChain {
 
@@ -83,6 +86,14 @@ public class GrapheneChain {
                 .fluidInputs(VanadiumGallium.getFluid(1440))
                 .outputs(GTQTMetaItems.MAGNETRON.getStackForm())
                 .duration(600).EUt(VA[ZPM]).buildAndRegister();
+
+        ModHandler.addShapedRecipe(true, "spinner", SPINNER.getStackForm(),
+                "SF ", "DPR", "SF ",
+                'R', new UnificationEntry(ring, WroughtIron),
+                'P', new UnificationEntry(pipeSmallItem, Cobalt),
+                'D', new UnificationEntry(plate, Brass),
+                'S', new UnificationEntry(screw, Bronze),
+                'F', new UnificationEntry(foil, Nickel));
 
         // TODO LIG Graphene
     }

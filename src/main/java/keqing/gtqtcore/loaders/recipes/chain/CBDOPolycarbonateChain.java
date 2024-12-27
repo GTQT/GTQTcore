@@ -5,9 +5,9 @@ import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtechfoodoption.GTFOMaterialHandler.*;
-import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.CHEMICAL_PLANT;
-import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.DISSOLUTION_TANK_RECIPES;
+import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
+import static keqing.gtqtcore.api.utils.GTQTUniverUtil.SECOND;
 
 public class CBDOPolycarbonateChain {
     public static void init() {
@@ -52,13 +52,13 @@ public class CBDOPolycarbonateChain {
                 .buildAndRegister();
 
         //  CBDO Polycarbonate
-        CHEMICAL_RECIPES.recipeBuilder()
+        POLYMERIZATION_RECIPES.recipeBuilder()
                 .fluidInputs(Tetramethylcyclobutanediol.getFluid(1000))
                 .fluidInputs(DiphenylCarbonate.getFluid(1000))
                 .fluidOutputs(CBDOPolycarbonate.getFluid(144))
                 .fluidOutputs(Phenol.getFluid(2000))
                 .EUt(VA[MV])
-                .duration(160)
+                .duration(8 * SECOND)
                 .buildAndRegister();
 
         //BPAPolycarbonateChain

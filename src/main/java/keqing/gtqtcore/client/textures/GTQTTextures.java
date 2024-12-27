@@ -65,6 +65,12 @@ public class GTQTTextures {
     public static SimpleOverlayRenderer ADV_COMPUTER_CASING = new SimpleOverlayRenderer("multiblock/computer/computer_casing/front");
     public static SimpleOverlayRenderer ULTRA_POWER_CASING = new SimpleOverlayRenderer("multiblock/computer/high_power_casing");
 
+    public static final OrientedOverlayRenderer POLYMERIZATION_TANK_OVERLAY
+            = new OrientedOverlayRenderer("overlay/polymerization_tank");
+
+    public static final OrientedOverlayRenderer LOW_TEMP_ACTIVATOR_OVERLAY
+            = new OrientedOverlayRenderer("overlay/low_temp_activator");
+
     public static SimpleOverlayRenderer FUSION_MKI = new SimpleOverlayRenderer("multiblock/casings/machine_casing_fusion");
     public static SimpleOverlayRenderer FUSION_MKII = new SimpleOverlayRenderer("multiblock/casings/machine_casing_fusion_2");
     public static SimpleOverlayRenderer FUSION_MKIII = new SimpleOverlayRenderer("multiblock/casings/machine_casing_fusion_3");

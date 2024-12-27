@@ -324,6 +324,12 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         SUNNARIUM_ENRICHED_PLATE = this.addItem(326, "sunnarium_enriched_plate").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_HP);
 
 
+        //
+        SPINNER = this.addItem(330, "spinner")
+                .addOreDict("toolSpinner")
+                .addOreDict("craftingToolSpinner")
+                .addComponents(new SpinnerBehavior());
+
         //升级
         ADV_ENERGY_STORAGE = this.addItem(350, "adv_energy_storage").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         ADV_CAPACITOR = this.addItem(351, "adv_capacitor").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
@@ -486,6 +492,37 @@ public class GTQTMetaItem1 extends StandardMetaItem {
 
         EXOTIC_SHAPE_EXTRUDERS[26] = EXOTIC_SHAPE_EXTRUDER_ROTOR = addItem(476, "shape.exotic_extruder.rotor")
                 .setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
+
+        //Shape Molds and Extruders addition.
+        SHAPE_MOLD_ROD = this.addItem(480, "shape.mold.rod")
+                .setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Steel, M *4)));
+
+        SHAPE_MOLD_BOLT = this.addItem(481, "shape.mold.bolt")
+                .setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Steel, M *4)));
+
+        SHAPE_MOLD_ROUND = this.addItem(482, "shape.mold.round")
+                .setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Steel, M *4)));
+
+        SHAPE_MOLD_SCREW = this.addItem(483, "shape.mold.screw")
+                .setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Steel, M *4)));
+
+        SHAPE_MOLD_RING = this.addItem(484, "shape.mold.ring")
+                .setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Steel, M *4)));
+
+        SHAPE_MOLD_ROD_LONG = this.addItem(485, "shape.mold.rod_long")
+                .setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Steel, M *4)));
+
+        SHAPE_MOLD_TURBINE_BLADE = this.addItem(486, "shape.mold.turbine_blade")
+                .setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Steel, M *4)));
+
+        SHAPE_MOLD_DRILL_HEAD = this.addItem(487, "shape.mold.drill_head")
+                .setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Steel, M *4)));
+
+        SHAPE_EXTRUDER_TURBINE_BLADE = this.addItem(488, "shape.extruder.turbine_blade")
+                .setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Steel, M *4)));
+
+        SHAPE_EXTRUDER_DRILL_HEAD = this.addItem(489, "shape.extruder.drill_head")
+                .setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Steel, M *4)));
 
 
         //  Magneto Resonatic Board

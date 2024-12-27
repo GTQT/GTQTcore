@@ -46,10 +46,8 @@ import static gregtech.api.unification.material.Materials.Steam;
 
 public class MetaTileEntityGantryCrane extends RecipeMapMultiblockController implements IProgressBarMultiblock {
 
-    int updatetime = 1;
-    boolean work = true;
     int[] steam = new int[3];
-    FluidStack STEAM = Steam.getFluid(1000 * updatetime);
+    FluidStack STEAM = Steam.getFluid(1000);
 
     public MetaTileEntityGantryCrane(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.GANTRY_CRANE);
@@ -58,27 +56,6 @@ public class MetaTileEntityGantryCrane extends RecipeMapMultiblockController imp
 
     private static IBlockState getCasingAState() {
         return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STAINLESS_CLEAN);
-    }
-
-    @Override
-    @Nonnull
-    protected Widget getFlexButton(int x, int y, int width, int height) {
-        WidgetGroup group = new WidgetGroup(x, y, width, height);
-        group.addWidget(new ClickButtonWidget(0, 0, 9, 9, "", this::decrementThreshold)
-                .setButtonTexture(GuiTextures.BUTTON_THROTTLE_MINUS)
-                .setTooltipText("increment"));
-        group.addWidget(new ClickButtonWidget(9, 0, 9, 9, "", this::incrementThreshold)
-                .setButtonTexture(GuiTextures.BUTTON_THROTTLE_PLUS)
-                .setTooltipText("decrement"));
-        return group;
-    }
-
-    private void incrementThreshold(Widget.ClickData clickData) {
-        this.updatetime = MathHelper.clamp(updatetime + 1, 1, 20);
-    }
-
-    private void decrementThreshold(Widget.ClickData clickData) {
-        this.updatetime = MathHelper.clamp(updatetime - 1, 1, 20);
     }
 
     @Override
@@ -106,7 +83,7 @@ public class MetaTileEntityGantryCrane extends RecipeMapMultiblockController imp
             IMultipleTankHandler inputTank = getInputFluidInventory();
             if (STEAM.isFluidStackIdentical(inputTank.drain(STEAM, false))) {
                 inputTank.drain(STEAM, true);
-                steam[0] = steam[0] + 800 * updatetime;
+                steam[0] = steam[0] + 360;
 
             }
         }
@@ -139,7 +116,6 @@ public class MetaTileEntityGantryCrane extends RecipeMapMultiblockController imp
         data.setInteger("fluid1", steam[0]);
         data.setInteger("fluid2", steam[1]);
         data.setInteger("fluid3", steam[2]);
-        data.setInteger("updatetime", updatetime);
         return super.writeToNBT(data);
     }
 
@@ -148,7 +124,6 @@ public class MetaTileEntityGantryCrane extends RecipeMapMultiblockController imp
         steam[0] = data.getInteger("fluid1");
         steam[1] = data.getInteger("fluid2");
         steam[2] = data.getInteger("fluid3");
-        updatetime = data.getInteger("updatetime");
     }
 
     public boolean getStatue() {

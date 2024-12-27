@@ -5,7 +5,6 @@ import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.common.metatileentities.multi.electric.MetaTileEntityElectricBlastFurnace;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.MetaTileEntityBlazingBlastFurnace;
-import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.MetaTileEntityElectricArcFurnace;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.MetaTileEntitySepticTank;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.MetaTileEntityVacuumDryingFurnace;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.gcys.MetaTileEntityIndustrialRoaster;
@@ -40,12 +39,6 @@ public class MultiblockTemperatureProvider implements  IProbeInfoProvider {
 
                 if (mte instanceof MetaTileEntityAlloyBlastSmelter) {
                     int Temperature = ((MetaTileEntityAlloyBlastSmelter) mte).getCurrentTemperature();
-                    horizontalPane.text(TextStyleClass.INFO + "{*gtqt.top.temperature*}");
-                    horizontalPane.text(TextStyleClass.INFO + " " +TextFormatting.RED+Temperature+" K");
-                }
-
-                if (mte instanceof MetaTileEntityElectricArcFurnace) {
-                    int Temperature = ((MetaTileEntityElectricArcFurnace) mte).getCurrentTemperature();
                     horizontalPane.text(TextStyleClass.INFO + "{*gtqt.top.temperature*}");
                     horizontalPane.text(TextStyleClass.INFO + " " +TextFormatting.RED+Temperature+" K");
                 }

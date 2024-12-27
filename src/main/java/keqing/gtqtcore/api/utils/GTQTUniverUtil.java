@@ -6,6 +6,7 @@ import gregtech.api.GTValues;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.MetaTileEntityHolder;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
+import gregtech.api.recipes.GTRecipeHandler;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockPart;
 import net.minecraft.item.Item;
@@ -13,6 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
+import net.minecraftforge.fluids.FluidStack;
 
 import java.util.ArrayList;
 import java.util.BitSet;
@@ -20,10 +22,14 @@ import java.util.List;
 import java.util.function.BooleanSupplier;
 import java.util.function.Supplier;
 
+import static gregtech.api.recipes.RecipeMaps.CHEMICAL_RECIPES;
+import static gregtech.api.recipes.RecipeMaps.LARGE_CHEMICAL_RECIPES;
 import static net.minecraft.util.EnumFacing.*;
 import static net.minecraft.util.EnumFacing.SOUTH;
 
 public class GTQTUniverUtil {
+
+    public static final int TICK = 1;
 
     public static final int SECOND = 20;
 
@@ -34,6 +40,20 @@ public class GTQTUniverUtil {
     public static final int HALF_HOUR = HOUR / 2;
 
     public static final int QUAT_HOUR = HOUR / 4;
+
+    public static void removeChemicalRecipe(ItemStack... itemInputs) {
+        GTRecipeHandler.removeRecipesByInputs(CHEMICAL_RECIPES, itemInputs);
+        GTRecipeHandler.removeRecipesByInputs(LARGE_CHEMICAL_RECIPES, itemInputs);
+    }
+    public static void removeChemicalRecipe(FluidStack... fluidInputs) {
+        GTRecipeHandler.removeRecipesByInputs(CHEMICAL_RECIPES, fluidInputs);
+        GTRecipeHandler.removeRecipesByInputs(LARGE_CHEMICAL_RECIPES, fluidInputs);
+    }
+    public static void removeChemicalRecipe(ItemStack[] itemInputs,
+                                            FluidStack[] fluidInputs) {
+        GTRecipeHandler.removeRecipesByInputs(CHEMICAL_RECIPES, itemInputs, fluidInputs);
+        GTRecipeHandler.removeRecipesByInputs(LARGE_CHEMICAL_RECIPES, itemInputs, fluidInputs);
+    }
     public static int getOrDefault(NBTTagCompound tag, String key, int defaultValue){
         if(tag.hasKey(key)){
             return tag.getInteger(key);

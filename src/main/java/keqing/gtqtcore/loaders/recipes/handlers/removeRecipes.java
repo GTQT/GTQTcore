@@ -124,10 +124,6 @@ public class removeRecipes {
         GTRecipeHandler.removeRecipesByInputs(LARGE_CHEMICAL_RECIPES, new ItemStack[]{MetaItems.NANO_CENTRAL_PROCESSING_UNIT_WAFER.getStackForm(1), MetaItems.QUANTUM_EYE.getStackForm(2)}, new FluidStack[]{GalliumArsenide.getFluid(288)});
         GTRecipeHandler.removeRecipesByInputs(LARGE_CHEMICAL_RECIPES, new ItemStack[]{MetaItems.NANO_CENTRAL_PROCESSING_UNIT_WAFER.getStackForm(1), OreDictUnifier.get(dust, IndiumGalliumPhosphide, 1)}, new FluidStack[]{Radon.getFluid(50)});
 
-        // 不锈钢粉 * 9
-        GTRecipeHandler.removeRecipesByInputs(MIXER_RECIPES, OreDictUnifier.get(dust, Iron, 4), OreDictUnifier.get(dust, Invar, 3), OreDictUnifier.get(dust, Manganese, 1), OreDictUnifier.get(dust, Chrome, 1), IntCircuitIngredient.getIntegratedCircuit(1));
-        GTRecipeHandler.removeRecipesByInputs(MIXER_RECIPES, OreDictUnifier.get(dust, Iron, 6), OreDictUnifier.get(dust, Nickel, 1), OreDictUnifier.get(dust, Manganese, 1), OreDictUnifier.get(dust, Chrome, 1), IntCircuitIngredient.getIntegratedCircuit(3));
-
         //晶体芯片原料
         GTRecipeHandler.removeRecipesByInputs(AUTOCLAVE_RECIPES, new ItemStack[]{OreDictUnifier.get(gemExquisite, Olivine, 1)}, new FluidStack[]{Europium.getFluid(16)});
         GTRecipeHandler.removeRecipesByInputs(AUTOCLAVE_RECIPES, new ItemStack[]{OreDictUnifier.get(gemExquisite, Emerald, 1)}, new FluidStack[]{Europium.getFluid(16)});

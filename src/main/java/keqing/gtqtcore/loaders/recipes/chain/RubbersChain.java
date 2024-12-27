@@ -1,7 +1,10 @@
 package keqing.gtqtcore.loaders.recipes.chain;
 
+import gregtech.api.unification.OreDictUnifier;
+
 import static gregtech.api.GTValues.*;
 import static gregtech.api.GTValues.VA;
+import static gregtech.api.recipes.RecipeMaps.CHEMICAL_RECIPES;
 import static gregtech.api.recipes.RecipeMaps.MIXER_RECIPES;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
@@ -9,20 +12,23 @@ import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.TJMaterials.*;
+import static keqing.gtqtcore.api.utils.GTQTUniverUtil.SECOND;
+import static keqing.gtqtcore.api.utils.GTQTUniverUtil.removeChemicalRecipe;
 
 public class RubbersChain {
     public static void init() {
+        VanillaRubberProcess();
+        PPFRubberProcess();
+    }
 
+    private static void PPFRubberProcess() {
         //  Acrylonitrile (EV): Acetylene + Hydrogen Cyanide -> Acrylonitrile
-        CHEMICAL_PLANT.recipeBuilder()
-                .notConsumable(dust, Salt)
-                .notConsumable(dust, CopperCl)
+        LOW_TEMP_ACTIVATOR_RECIPES.recipeBuilder()
                 .fluidInputs(Acetylene.getFluid(1000))
                 .fluidInputs(HydrogenCyanide.getFluid(1000))
                 .fluidOutputs(Acrylonitrile.getFluid(1000))
-                .EUt(VA[EV])
+                .EUt(VA[HV])
                 .duration(120)
-                .recipeLevel(5)
                 .buildAndRegister();
 
         //  Acrylonitrile (LuV): Propene + Ammonia + Air + Water -> Acrylonitrile + Hydrogen
@@ -96,19 +102,70 @@ public class RubbersChain {
                 .duration(340)
                 .buildAndRegister();
 
-        //  Sodium Trifluoroethanolate + Phosphonitrilic Chloride Trimer + Octafluoro Pentanol -> Poly Phosphonitrile Fluoro Rubber + Sodium Fluoride + Phosphoryl Chloride (Cycle)
-        CHEMICAL_PLANT.recipeBuilder()
-                .input(dust, SodiumTrifluoroethanolate, 9)
+        // NaC2H4OF3 + Cl6N3P3 + 4C5H4F8O -> (CH2CF3)6(CH2C3F7)2(C2F4)2(NPO)4O4 + NaF (cycle) + 3POCl3 (cycle)
+        POLYMERIZATION_RECIPES.recipeBuilder()
+                .input(dust, SodiumTrifluoroethanolate, 11)
                 .fluidInputs(PhosphonitrilicChlorideTrimer.getFluid(1000))
                 .fluidInputs(OctafluoroPentanol.getFluid(4000))
-                .output(dust, SodiumFluoride, 3)
+                .output(dust, SodiumFluoride, 2)
                 .fluidOutputs(PolyPhosphonitrileFluoroRubber.getFluid(1000))
                 .fluidOutputs(PhosphorylChloride.getFluid(3000))
                 .EUt(VA[UV])
-                .duration(400)
-                .recipeLevel(8)
+                .duration(20 * SECOND)
                 .buildAndRegister();
 
-
+        // Na + F -> NaF
+        CHEMICAL_RECIPES.recipeBuilder()
+                .circuitMeta(1)
+                .input(dust, Sodium, 1)
+                .fluidInputs(Fluorine.getFluid(1000))
+                .output(dust, SodiumFluoride, 2)
+                .EUt(VA[MV])
+                .duration(5 * SECOND)
+                .buildAndRegister();
     }
+
+    private static void VanillaRubberProcess() {
+        // Raw Rubber
+        removeChemicalRecipe(
+                OreDictUnifier.get(dust, RawRubber, 9),
+                OreDictUnifier.get(dust, Sulfur, 1)
+        );
+
+        POLYMERIZATION_RECIPES.recipeBuilder()
+                .input(dust, RawRubber, 9)
+                .fluidInputs(Sulfur.getFluid(250))
+                .fluidOutputs(Rubber.getFluid(L * 9))
+                .EUt(VA[LV])
+                .duration(10 * SECOND)
+                .buildAndRegister();
+
+        // Silicone Rubber
+        removeChemicalRecipe(
+                OreDictUnifier.get(dust, Polydimethylsiloxane, 9),
+                OreDictUnifier.get(dust, Sulfur, 1));
+
+        POLYMERIZATION_RECIPES.recipeBuilder()
+                .input(dust, Polydimethylsiloxane, 9)
+                .fluidInputs(Sulfur.getFluid(250))
+                .fluidOutputs(SiliconeRubber.getFluid(L * 9))
+                .EUt(VA[HV])
+                .duration(10 * SECOND)
+                .buildAndRegister();
+
+        // Styrene Butadiene Rubber
+        removeChemicalRecipe(
+                OreDictUnifier.get(dust, RawStyreneButadieneRubber, 9),
+                OreDictUnifier.get(dust, Sulfur, 1)
+        );
+
+        POLYMERIZATION_RECIPES.recipeBuilder()
+                .input(dust, RawStyreneButadieneRubber, 9)
+                .fluidInputs(Sulfur.getFluid(250))
+                .fluidOutputs(StyreneButadieneRubber.getFluid(L * 9))
+                .EUt(VA[HV])
+                .duration(10 * SECOND)
+                .buildAndRegister();
+    }
+
 }

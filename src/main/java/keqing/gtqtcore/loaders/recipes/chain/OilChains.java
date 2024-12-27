@@ -67,8 +67,7 @@ public class OilChains {
         */
         //VacuumResidue 减压渣油
 
-
-        FIX_BED.recipeBuilder()
+        CHEMICAL_RECIPES.recipeBuilder()
                 .duration(600)
                 .EUt(480)
                 .fluidInputs(AtmosphericResidue.getFluid(1000))
@@ -77,7 +76,7 @@ public class OilChains {
                 .fluidOutputs(OilGas.getFluid(1000))
                 .buildAndRegister();
 
-        FIX_BED.recipeBuilder()
+        CHEMICAL_RECIPES.recipeBuilder()
                 .duration(600)
                 .EUt(480)
                 .fluidInputs(VacuumResidue.getFluid(1000))
@@ -522,7 +521,7 @@ public class OilChains {
                 .fluidOutputs(WoodGas.getFluid(1000))
                 .fluidOutputs(WoodVinegar.getFluid(2000))
                 .fluidOutputs(Creosote.getFluid(3000))
-                .duration(600).EUt(60)
+                .duration(600).Heat(500)
                 .buildAndRegister();
 
         DISTILLATION_KETTLE.recipeBuilder()
@@ -534,7 +533,7 @@ public class OilChains {
                 .fluidOutputs(WoodGas.getFluid(1000))
                 .fluidOutputs(WoodVinegar.getFluid(2000))
                 .fluidOutputs(Creosote.getFluid(3000))
-                .duration(600).EUt(60)
+                .duration(600).Heat(500)
                 .buildAndRegister();
 
 
@@ -547,7 +546,8 @@ public class OilChains {
                 .fluidOutputs(Hydrogen.getFluid(1000))
                 .fluidOutputs(Nitrogen.getFluid(1000))
                 .fluidOutputs(CarbonDioxide.getFluid(2000))
-                .duration(400).EUt(30).buildAndRegister();
+                .duration(400).Heat(500)
+                .buildAndRegister();
 
         DISTILLATION_KETTLE.recipeBuilder()
                 .fluidInputs(FermentedBiomass.getFluid(2000))
@@ -558,42 +558,48 @@ public class OilChains {
                 .fluidOutputs(Ammonia.getFluid(50))
                 .fluidOutputs(CarbonDioxide.getFluid(300))
                 .fluidOutputs(Methane.getFluid(300))
-                .duration(200).EUt(60).buildAndRegister();
+                .duration(200).Heat(500)
+                .buildAndRegister();
 
         DISTILLATION_KETTLE.recipeBuilder()
                 .fluidInputs(Biomass.getFluid(1000))
                 .output(MetaItems.FERTILIZER)
                 .fluidOutputs(Water.getFluid(200))
                 .fluidOutputs(Ethanol.getFluid(100))
-                .duration(200).EUt(60).buildAndRegister();
+                .duration(200).Heat(500)
+                .buildAndRegister();
 
         DISTILLATION_KETTLE.recipeBuilder()
                 .fluidInputs(Oil.getFluid(1000))
                 .fluidOutputs(Distilledgasoline.getFluid(500))
                 .fluidOutputs(GasOil.getFluid(300))
                 .fluidOutputs(OilHeavy.getFluid(200))
-                .duration(200).EUt(60).buildAndRegister();
+                .duration(200).Heat(500)
+                .buildAndRegister();
 
         DISTILLATION_KETTLE.recipeBuilder()
                 .fluidInputs(OilLight.getFluid(1000))
                 .fluidOutputs(Distilledgasoline.getFluid(500))
                 .fluidOutputs(GasOil.getFluid(300))
                 .fluidOutputs(OilHeavy.getFluid(200))
-                .duration(200).EUt(60).buildAndRegister();
+                .duration(200).Heat(500)
+                .buildAndRegister();
 
         DISTILLATION_KETTLE.recipeBuilder()
                 .fluidInputs(OilHeavy.getFluid(1000))
                 .fluidOutputs(Distilledgasoline.getFluid(500))
                 .fluidOutputs(GasOil.getFluid(300))
                 .fluidOutputs(OilHeavy.getFluid(200))
-                .duration(200).EUt(60).buildAndRegister();
+                .duration(200).Heat(500)
+                .buildAndRegister();
 
         DISTILLATION_KETTLE.recipeBuilder()
                 .fluidInputs(RawOil.getFluid(1000))
                 .fluidOutputs(Distilledgasoline.getFluid(500))
                 .fluidOutputs(GasOil.getFluid(300))
                 .fluidOutputs(OilHeavy.getFluid(200))
-                .duration(200).EUt(60).buildAndRegister();
+                .duration(200).Heat(500)
+                .buildAndRegister();
 
         //粗柴油
         DISTILLATION_KETTLE.recipeBuilder()
@@ -602,7 +608,8 @@ public class OilChains {
                 .fluidOutputs(SDieselLight.getFluid(500))
                 .fluidOutputs(SDieselHeavy.getFluid(500))
                 .fluidOutputs(SulfuricGas.getFluid(200))
-                .duration(200).EUt(60).buildAndRegister();
+                .duration(200).Heat(500)
+                .buildAndRegister();
 
         DISTILLATION_RECIPES.recipeBuilder()
                 .fluidInputs(GasOil.getFluid(2000))
@@ -623,7 +630,8 @@ public class OilChains {
                 .fluidOutputs(Butane.getFluid(200))
                 .fluidOutputs(Propene.getFluid(200))
                 .fluidOutputs(Butene.getFluid(200))
-                .duration(400).EUt(60).buildAndRegister();
+                .duration(400).Heat(500)
+                .buildAndRegister();
 
         DISTILLATION_RECIPES.recipeBuilder()
                 .fluidInputs(Distilledgasoline.getFluid(3000))
@@ -642,7 +650,8 @@ public class OilChains {
                 .fluidOutputs(HighlyPurifiedCoalTar.getFluid(100))
                 .fluidOutputs(Creosote.getFluid(100))
                 .fluidOutputs(Phenol.getFluid(100))
-                .duration(400).EUt(60).buildAndRegister();
+                .duration(400).Heat(500)
+                .buildAndRegister();
 
         //煤油
         SFM.recipeBuilder()

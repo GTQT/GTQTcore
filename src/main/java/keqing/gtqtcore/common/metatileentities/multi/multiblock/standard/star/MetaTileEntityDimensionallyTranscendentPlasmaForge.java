@@ -58,8 +58,6 @@ import static keqing.gtqtcore.api.utils.GTQTUniverUtil.consistentList;
 import static keqing.gtqtcore.api.utils.GTQTUniverUtil.maxLength;
 import static keqing.gtqtcore.common.block.blocks.GTQTQuantumCasing.CasingType.DIMENSIONAL_BRIDGE_CASING;
 import static keqing.gtqtcore.common.block.blocks.GTQTQuantumCasing.CasingType.ULTIMATE_HIGH_ENERGY_CASING;
-import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.BURNER_REACTOR;
-import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.ELECTRIC_ARC_FURNACE;
 
 public class MetaTileEntityDimensionallyTranscendentPlasmaForge extends MultiMapMultiblockController implements IHeatingCoil {
     private int blastFurnaceTemperature;
