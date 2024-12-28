@@ -51,6 +51,14 @@ public class GTQTcoreRecipeMaps {
             .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL)
             .setSound(GTSoundEvents.COOLING);
 
+    public static final RecipeMap<SimpleRecipeBuilder> FLOTATION_RECIPES = new RecipeMap<>("flotation_cell",
+            6, 0, 1, 1, new SimpleRecipeBuilder(), false)
+            .setSlotOverlay(false, false, GuiTextures.DUST_OVERLAY)
+            .setSlotOverlay(false, true, GuiTextures.VIAL_OVERLAY_2)
+            .setSlotOverlay(true, true, GuiTextures.HEATING_OVERLAY_2)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_BATH, ProgressWidget.MoveType.HORIZONTAL)
+            .setSound(GTSoundEvents.BATH);
+
     public static final RecipeMap<SimpleRecipeBuilder> PLASMA_CONDENSER_RECIPES = new RecipeMap<>("plasma_condenser_recipes", 3, 3, 3, 3, new SimpleRecipeBuilder(), false)
             .setProgressBar(GuiTextures.PROGRESS_BAR_REPLICATOR, ProgressWidget.MoveType.HORIZONTAL)
             .setSound(GTSoundEvents.COOLING);
@@ -233,7 +241,7 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<FuelRecipeBuilder> STAR_BIOMIMETIC_FACTORY;
     public static final RecipeMap<NoCoilTemperatureRecipeBuilder> MOLECULAR_DISTILLATION_RECIPES;
     public static final RecipeMap<PrimitiveRecipeBuilder> PR_MIX;
-    public static final RecipeMap<PrimitiveRecipeBuilder> SALT_FLIED;
+    public static final RecipeMap<HeatRecipeBuilder> SALT_FLIED;
     public static final RecipeMap<KQComputationRecipeBuilder> KEQING_NET_RECIES;
     public static final RecipeMap<FuelRecipeBuilder> HYPER_REACTOR_MK1_RECIPES;
     public static final RecipeMap<FuelRecipeBuilder> HYPER_REACTOR_MK2_RECIPES;
@@ -401,7 +409,7 @@ public class GTQTcoreRecipeMaps {
                 .setProgressBar(GuiTextures.PROGRESS_BAR_MACERATE, ProgressWidget.MoveType.HORIZONTAL)
                 .setSound(GTSoundEvents.MACERATOR);
 
-        SALT_FLIED = new RecipeMap<>("salt_fish", 3, 3, 3, 3, new PrimitiveRecipeBuilder(), false)
+        SALT_FLIED = new RecipeMap<>("salt_fish", 3, 3, 3, 3, new HeatRecipeBuilder(), false)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_MACERATE, ProgressWidget.MoveType.HORIZONTAL)
                 .setSound(GTSoundEvents.MACERATOR);
 

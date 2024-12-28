@@ -44,6 +44,7 @@ import org.apache.commons.lang3.ArrayUtils;
 import java.util.List;
 
 public class MetaTileEntityPReactor extends NoEnergyMultiblockController {
+
     private static final TraceabilityPredicate SNOW_PREDICATE = new TraceabilityPredicate(
             bws -> GTUtility.isBlockSnow(bws.getBlockState()));
 
@@ -84,8 +85,7 @@ public class MetaTileEntityPReactor extends NoEnergyMultiblockController {
     public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("村里的大缸（远离司马光）", new Object[0]));
-}
-
+    }
 
 
     @Override

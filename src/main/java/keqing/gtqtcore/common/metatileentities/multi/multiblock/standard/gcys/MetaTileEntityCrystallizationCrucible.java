@@ -174,7 +174,7 @@ public class MetaTileEntityCrystallizationCrucible extends RecipeMapMultiblockCo
                 .aisle("XXXXX", "#C#C#", "#C#C#", "XXHXX")
                 .aisle("XXXXX", "#VCV#", "#VCV#", "XXXXX")
                 .aisle("IOSMF", "G###G", "G###G", "XXXXX")
-                .where('S', GTQTMetaTileEntities.CRYSTALLIZATION_CRUCIBLE, EnumFacing.SOUTH)
+                .where('S', GTQTMetaTileEntities.LARGE_CRYSTALLIZATION_CRUCIBLE, EnumFacing.SOUTH)
                 .where('X', MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.TUNGSTENSTEEL_ROBUST))
                 .where('G', MetaBlocks.FRAMES.get(Titanium).getBlock(Titanium))
                 .where('V', GCYMMetaBlocks.UNIQUE_CASING.getState(BlockUniqueCasing.UniqueCasingType.HEAT_VENT))

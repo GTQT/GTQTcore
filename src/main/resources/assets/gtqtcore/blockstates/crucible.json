@@ -1,35 +1,83 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "model": "gcys:crucible",
+    "model": "gtqtcore:crucible",
     "textures": {
-      "all": "gregtech:blocks/rendering_error"
+      "all": "gtqtcore:blocks/rendering_error"
     }
   },
   "variants": {
     "variant": {
-      "quartz": {
-        "model": "gcys:crucible",
+      "bronze": {
+        "model": "gtqtcore:crucible",
         "textures": {
-          "all": "gregtech:blocks/crucible/quartz_crucible"
+          "all": "gtqtcore:blocks/crucible/bronze_crucible"
+        }
+      },
+      "invar": {
+        "model": "gtqtcore:crucible",
+        "textures": {
+          "all": "gtqtcore:blocks/crucible/invar_crucible"
+        }
+      },
+      "quartz": {
+        "model": "gtqtcore:crucible",
+        "textures": {
+          "all": "gtqtcore:blocks/crucible/quartz_crucible"
+        }
+      },
+      "chrome": {
+        "model": "gtqtcore:crucible",
+        "textures": {
+          "all": "gtqtcore:blocks/crucible/chrome_crucible"
+        }
+      },
+      "vanadium": {
+        "model": "gtqtcore:crucible",
+        "textures": {
+          "all": "gtqtcore:blocks/crucible/vanadium_crucible"
+        }
+      },
+      "niobium_titanium": {
+        "model": "gtqtcore:crucible",
+        "textures": {
+          "all": "gtqtcore:blocks/crucible/niobium_titanium_crucible"
+        }
+      },
+      "iridium": {
+        "model": "gtqtcore:crucible",
+        "textures": {
+          "all": "gtqtcore:blocks/crucible/iridium_crucible"
+        }
+      },
+      "molybdenum": {
+        "model": "gtqtcore:crucible",
+        "textures": {
+          "all": "gtqtcore:blocks/crucible/molybdenum_crucible"
         }
       },
       "tungsten": {
-        "model": "gcys:crucible",
+        "model": "gtqtcore:crucible",
         "textures": {
-          "all": "gregtech:blocks/crucible/tungsten_crucible"
+          "all": "gtqtcore:blocks/crucible/tungsten_crucible"
+        }
+      },
+      "osmium": {
+        "model": "gtqtcore:crucible",
+        "textures": {
+          "all": "gtqtcore:blocks/crucible/osmium_crucible"
         }
       },
       "graphite": {
-        "model": "gcys:crucible",
+        "model": "gtqtcore:crucible",
         "textures": {
-          "all": "gregtech:blocks/crucible/graphite_crucible"
+          "all": "gtqtcore:blocks/crucible/graphite_crucible"
         }
       },
       "boron_nitride": {
-        "model": "gcys:crucible",
+        "model": "gtqtcore:crucible",
         "textures": {
-          "all": "gregtech:blocks/crucible/boron_nitride_crucible"
+          "all": "gtqtcore:blocks/crucible/boron_nitride_crucible"
         }
       }
     }

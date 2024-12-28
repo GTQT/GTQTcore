@@ -386,6 +386,7 @@ public class CommonProxy {
         MetaTileEntityLoader.init();
         MetaTileEntityMachine.init();
         CopyRecipesHandlers.init();
+        CrucibleRecipes.register();
         /*
         for (Material material : GregTechAPI.materialManager.getRegisteredMaterials())
         {

@@ -168,7 +168,7 @@ public class MetaTileEntityNanoscaleFabricator extends RecipeMapMultiblockContro
                 .aisle(" XXXXXXX ", " X     X ", " X     X ", " XXGGGXX ")
                 .aisle("  XXXXX  ", "  FX XO  ", "  LXXXX  ", "  XMSEX  ")
                 .aisle("   TTT   ", "   TIT   ", "   TCT   ", "         ")
-                .where('S', GTQTMetaTileEntities.NANOSCALE_FABRICATOR, EnumFacing.SOUTH)
+                .where('S', GTQTMetaTileEntities.LARGE_NANOSCALE_FABRICATOR, EnumFacing.SOUTH)
                 .where('X', GCYMMetaBlocks.LARGE_MULTIBLOCK_CASING.getState(BlockLargeMultiblockCasing.CasingType.ENGRAVER_CASING))
                 .where('T', GCYMMetaBlocks.LARGE_MULTIBLOCK_CASING.getState(BlockLargeMultiblockCasing.CasingType.NONCONDUCTING_CASING))
                 .where('G', MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.LAMINATED_GLASS))

@@ -80,16 +80,6 @@ public class BiochemChains {
                 .fluidOutputs(Concrete.getFluid(1000))
                 .duration(400).buildAndRegister();
 
-        PR_MIX.recipeBuilder()
-                .duration(4000)
-                .input(dust,Salt,40)
-                .fluidInputs(Ammonia.getFluid(40000))
-                .fluidInputs(CarbonDioxide.getFluid(40000))
-                .fluidInputs(Water.getFluid(40000))
-                .fluidOutputs(AmmoniumChloride.getFluid(40*144))
-                .output(dust,SodiumBicarbonate,40)
-                .buildAndRegister();
-
         LARGE_CHEMICAL_RECIPES.recipeBuilder()
                 .duration(1000)
                 .EUt(30)
@@ -118,18 +108,6 @@ public class BiochemChains {
                 .fluidOutputs(Latex.getFluid(2000))
                 .buildAndRegister();
 
-        PR_MIX.recipeBuilder()
-                .input(dust, Sulfur)
-                .fluidInputs(Hydrogen.getFluid(2000))
-                .fluidOutputs(HydrogenSulfide.getFluid(1000))
-                .duration(480).buildAndRegister();
-
-        PR_MIX.recipeBuilder()
-                .input(dust, Sodium)
-                .fluidInputs(Chlorine.getFluid(1000))
-                .output(dust, Salt, 2)
-                .duration(1200).buildAndRegister();
-
 
         CHEMICAL_RECIPES.recipeBuilder()
                 .fluidInputs(Mercury.getFluid(1000))
@@ -137,72 +115,6 @@ public class BiochemChains {
                 .fluidInputs(Chlorine.getFluid(10000))
                 .fluidOutputs(HypochlorousAcid.getFluid(10000))
                 .duration(4800).buildAndRegister();
-
-        PR_MIX.recipeBuilder()
-                .circuitMeta(2)
-                .input(dust, Sulfur)
-                .fluidInputs(Oxygen.getFluid(2000))
-                .fluidOutputs(SulfurDioxide.getFluid(1000))
-                .duration(300).buildAndRegister();
-
-        PR_MIX.recipeBuilder()
-                .fluidInputs(SulfurDioxide.getFluid(1000))
-                .fluidInputs(Oxygen.getFluid(1000))
-                .fluidOutputs(SulfurTrioxide.getFluid(1000))
-                .duration(400).buildAndRegister();
-
-        PR_MIX.recipeBuilder()
-                .fluidInputs(SulfurTrioxide.getFluid(1000))
-                .fluidInputs(Water.getFluid(1000))
-                .fluidOutputs(SulfuricAcid.getFluid(1000))
-                .duration(320).buildAndRegister();
-
-        PR_MIX.recipeBuilder()
-                .input(dust, Carbon)
-                .fluidInputs(Oxygen.getFluid(1000))
-                .fluidOutputs(CarbonMonoxide.getFluid(1000))
-                .duration(320).buildAndRegister();
-
-        PR_MIX.recipeBuilder()
-                .input(gem, Charcoal)
-                .fluidInputs(Oxygen.getFluid(1000))
-                .chancedOutput(dust, Ash, 1111, 0)
-                .fluidOutputs(CarbonMonoxide.getFluid(1000))
-                .duration(640).buildAndRegister();
-
-        PR_MIX.recipeBuilder()
-                .input(gem, Coal)
-                .fluidInputs(Oxygen.getFluid(1000))
-                .chancedOutput(dust, Ash, 1111, 0)
-                .fluidOutputs(CarbonMonoxide.getFluid(1000))
-                .duration(640).buildAndRegister();
-
-        PR_MIX.recipeBuilder()
-                .input(dust, Charcoal)
-                .fluidInputs(Oxygen.getFluid(1000))
-                .chancedOutput(dust, Ash, 1111, 0)
-                .fluidOutputs(CarbonMonoxide.getFluid(1000))
-                .duration(640).buildAndRegister();
-
-        PR_MIX.recipeBuilder()
-                .duration(640)
-                .input(dust, Coal)
-                .fluidInputs(Oxygen.getFluid(1000))
-                .chancedOutput(dust, Ash, 1111, 0)
-                .fluidOutputs(CarbonMonoxide.getFluid(1000))
-                .buildAndRegister();
-
-        PR_MIX.recipeBuilder()
-                .input(dust, Carbon)
-                .fluidInputs(CarbonDioxide.getFluid(1000))
-                .fluidOutputs(CarbonMonoxide.getFluid(2000))
-                .duration(800).buildAndRegister();
-
-        PR_MIX.recipeBuilder()
-                .fluidInputs(Chlorine.getFluid(1000))
-                .fluidInputs(Hydrogen.getFluid(1000))
-                .fluidOutputs(HydrochloricAcid.getFluid(1000))
-                .duration(480).buildAndRegister();
 
         CENTRIFUGE_RECIPES.recipeBuilder().duration(400).EUt(5)
                 .fluidInputs(Latex.getFluid(400))

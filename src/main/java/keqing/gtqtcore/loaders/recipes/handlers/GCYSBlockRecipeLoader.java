@@ -18,28 +18,6 @@ import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 public class GCYSBlockRecipeLoader {
 
     public static void init() {
-        // Crucibles
-        // TODO better recipes for crucibles
-        ModHandler.addShapedRecipe(true, "quartz_crucible", GTQTMetaBlocks.CRUCIBLE.getItemVariant(BlockCrucible.CrucibleType.QUARTZ_CRUCIBLE),
-                "P P", "PhP", "PPP",
-                'P', new UnificationEntry(plate, Quartzite)
-        );
-
-        ModHandler.addShapedRecipe(true, "tungsten_crucible", GTQTMetaBlocks.CRUCIBLE.getItemVariant(BlockCrucible.CrucibleType.TUNGSTEN_CRUCIBLE),
-                "P P", "PhP", "PPP",
-                'P', new UnificationEntry(plateDouble, Tungsten)
-        );
-
-        ModHandler.addShapedRecipe(true, "graphite_crucible", GTQTMetaBlocks.CRUCIBLE.getItemVariant(BlockCrucible.CrucibleType.GRAPHITE_CRUCIBLE),
-                "P P", "PhP", "PPP",
-                'P', new UnificationEntry(plate, Graphene)
-        );
-
-        ModHandler.addShapedRecipe(true, "hexagonal_boron_nitride_crucible", GTQTMetaBlocks.CRUCIBLE.getItemVariant(BlockCrucible.CrucibleType.BORON_NITRIDE_CRUCIBLE),
-                "P P", "PhP", "PPP",
-                'P', new UnificationEntry(plate, HexagonalBoronNitride)
-        );
-
         // Drill Head
         ModHandler.addShapedRecipe(true, "industrial_drill_head", GTQTMetaBlocks.MULTIBLOCK_CASING.getItemVariant(BlockGCYSMultiblockCasing.CasingType.DRILL_HEAD),
                 "PGP", "MHM", "SSS",

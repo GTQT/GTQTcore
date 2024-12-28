@@ -13,8 +13,6 @@ import static gregtech.api.unification.ore.OrePrefix.ingotHot;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
-import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.CRYOGENIC_REACTOR;
-import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.DISTILLATION_TOWER;
 
 public class NaquadahChain {
     public static void init() {
@@ -25,7 +23,6 @@ public class NaquadahChain {
 
         //硅岩前处理-----------------------------------------------------------------------------
 
-        //傻逼ep，不会写产线就不要写
         //硅岩换氧化硅岩，前处理得到硅岩后，衔接如下产线
         //需要移除硅岩矿
         //浓缩富集硅岩矿泥 氧化硅岩混合物粉 氧化精金粉

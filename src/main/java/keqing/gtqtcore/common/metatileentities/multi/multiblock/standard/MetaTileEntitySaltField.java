@@ -21,8 +21,12 @@ import gregtech.client.utils.BloomEffectUtil;
 import gregtech.client.utils.TooltipHelper;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
+import keqing.gtqtcore.api.capability.IHeat;
+import keqing.gtqtcore.api.capability.impl.HeatRecipeLogic;
 import keqing.gtqtcore.api.capability.impl.NoEnergyMultiblockRecipeLogic;
+import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
 import keqing.gtqtcore.api.metaileentity.multiblock.NoEnergyMultiblockController;
+import keqing.gtqtcore.api.metaileentity.multiblock.RecipeMapHeatMultiblockController;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
@@ -38,13 +42,11 @@ import org.apache.commons.lang3.ArrayUtils;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public class MetaTileEntitySaltField extends NoEnergyMultiblockController {
-
-    int heat;
+public class MetaTileEntitySaltField extends RecipeMapHeatMultiblockController {
 
     public MetaTileEntitySaltField(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.SALT_FLIED);
-        this.recipeMapWorkable = new MetaTileEntitySaltField.SaltFieldLogic(this);
+        this.recipeMapWorkable = new HeatRecipeLogic(this,GTQTcoreRecipeMaps.SALT_FLIED);
     }
 
     public boolean hasMaintenanceMechanics() {
@@ -57,6 +59,25 @@ public class MetaTileEntitySaltField extends NoEnergyMultiblockController {
 
     protected IBlockState getCasingState1() {
         return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STEEL_SOLID);
+    }
+    @Override
+    protected void formStructure(PatternMatchContext context) {
+        super.formStructure(context);
+        setTier(getHeatHatch().getTier());
+    }
+
+    @Override
+    public void updateFormedValid() {
+        super.updateFormedValid();
+        setHeat((int) getHeatHatch().getHeat());
+        setTier(getHeatHatch().getTier());
+    }
+
+    public IHeat getHeatHatch() {
+        List<IHeat> abilities = getAbilities(GTQTMultiblockAbility.HEAT_MULTIBLOCK_ABILITY);
+        if (abilities.isEmpty())
+            return null;
+        return abilities.get(0);
     }
 
     @Nonnull
@@ -75,6 +96,7 @@ public class MetaTileEntitySaltField extends NoEnergyMultiblockController {
                 .where('S', selfPredicate())
                 .where('X', states(getCasingState1()))
                 .where('E', states(getCasingState())
+                        .or(abilities(GTQTMultiblockAbility.HEAT_MULTIBLOCK_ABILITY).setExactLimit(1))
                         .or(abilities(MultiblockAbility.EXPORT_ITEMS).setExactLimit(1))
                         .or(abilities(MultiblockAbility.IMPORT_ITEMS).setExactLimit(1))
                         .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setMinGlobalLimited(1).setMaxGlobalLimited(5))
@@ -89,31 +111,14 @@ public class MetaTileEntitySaltField extends NoEnergyMultiblockController {
     }
 
     @Override
-    protected void addDisplayText(List<ITextComponent> textList) {
-        super.addDisplayText(textList);
-        if (isStructureFormed()) {
-            textList.add(new TextComponentTranslation("时间：%s 阳光直射：%s", getWorld().isDaytime(), this.getWorld().canSeeSky(getPos().up())));
-            textList.add(new TextComponentTranslation("积热：%s", heat));
-        }
-    }
-
-    @Override
     public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("古埃及掌管盐水的神", new Object[0]));
-        tooltip.add(I18n.format("如果处于白天，积热上升；如果阳光直射，积热上升"));
-        tooltip.add(I18n.format("消耗积热，配方耗时减半;运行完一轮配方后，积热下降四分之一"));
     }
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {
         return new MetaTileEntitySaltField(metaTileEntityId);
-    }
-
-    @Override
-    protected void formStructure(PatternMatchContext context) {
-        super.formStructure(context);
-        initializeAbilities();
     }
 
     @Nonnull
@@ -140,44 +145,6 @@ public class MetaTileEntitySaltField extends NoEnergyMultiblockController {
                             EnumFacing.UP, Cuboid6.full, TextureUtils.getBlockTexture("water_still"),
                             BloomEffectUtil.getEffectiveBloomLayer());
                     Textures.RENDER_STATE.set(op);
-                }
-            }
-        }
-    }
-
-    public NBTTagCompound writeToNBT(NBTTagCompound data) {
-        data.setInteger("heat", heat);
-        return super.writeToNBT(data);
-    }
-
-    public void readFromNBT(NBTTagCompound data) {
-        super.readFromNBT(data);
-        heat = data.getInteger("heat");
-    }
-
-    protected class SaltFieldLogic extends NoEnergyMultiblockRecipeLogic {
-
-        public SaltFieldLogic(NoEnergyMultiblockController tileEntity) {
-            super(tileEntity, tileEntity.recipeMap);
-        }
-
-        @Override
-        public void update() {
-            super.update();
-            if (getWorld().isDaytime() && heat < 10000) heat += 5;
-            if (getWorld().canSeeSky(getPos()) && heat < 10000) heat += 5;
-            else if (heat > 0) heat--;
-        }
-
-        protected void updateRecipeProgress() {
-            if (canRecipeProgress) {
-                if (heat > 2000) {
-                    maxProgressTime = maxProgressTime / 2;
-                    heat -= 2000;
-                }
-                if (++progressTime > maxProgressTime) {
-                    completeRecipe();
-                    heat = heat * 3 / 4;
                 }
             }
         }

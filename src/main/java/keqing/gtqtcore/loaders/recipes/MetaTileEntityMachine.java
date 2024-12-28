@@ -39,6 +39,7 @@ import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.common.blocks.MetaBlocks.MACHINE_CASING;
+import static gregtech.common.items.MetaItems.ORE_DICTIONARY_FILTER;
 import static gregtech.common.items.MetaItems.SHAPE_MOLD_BLOCK;
 import static gregtech.common.metatileentities.MetaTileEntities.ARC_FURNACE;
 import static gregtech.loaders.recipe.CraftingComponent.*;
@@ -748,6 +749,80 @@ public class MetaTileEntityMachine {
                 'W', new UnificationEntry(pipeTinyFluid, TinAlloy),
                 'X', new UnificationEntry(circuit, MarkerMaterials.Tier.ULV));
 
+        // Steam Roaster
+        ModHandler.addShapedRecipe(true, "steam_roaster.bronze", STEAM_ROASTER[0].getStackForm(),
+                "KSK", "CHC", "PPP",
+                'K', new UnificationEntry(pipeLargeFluid, Bronze),
+                'S', new UnificationEntry(spring, WroughtIron),
+                'C', new UnificationEntry(gem, Diamond),
+                'P', new UnificationEntry(plate, Brass),
+                'H', MetaBlocks.STEAM_CASING.getItemVariant(BlockSteamCasing.SteamCasingType.BRONZE_HULL));
+
+        ModHandler.addShapedRecipe(true, "steam_roaster.steel", STEAM_ROASTER[1].getStackForm(),
+                "KSK", "CHC", "PPP",
+                'K', new UnificationEntry(pipeLargeFluid, TinAlloy),
+                'S', new UnificationEntry(spring, Steel),
+                'C', new UnificationEntry(circuit, MarkerMaterials.Tier.ULV),
+                'P', new UnificationEntry(plate, Potin),
+                'H', MetaBlocks.STEAM_CASING.getItemVariant(BlockSteamCasing.SteamCasingType.STEEL_HULL));
+
+        // Roaster
+        MetaTileEntityLoader.registerMachineRecipe(true, ROASTER,
+                "KSK", "CHC", "PPP",
+                'K', CraftingComponent.CABLE_QUAD,
+                'S', CraftingComponent.SPRING,
+                'C', CraftingComponent.CIRCUIT,
+                'P', CraftingComponent.PLATE,
+                'H', CraftingComponent.HULL);
+
+
+        // Catalytic Reformer
+        MetaTileEntityLoader.registerMachineRecipe(true, CATALYTIC_REFORMER,
+                "MCM", "PHP", "MKM",
+                'M', CraftingComponent.PIPE_NORMAL,
+                'C', CraftingComponent.CIRCUIT,
+                'P', CraftingComponent.PUMP,
+                'H', CraftingComponent.HULL,
+                'K', CraftingComponent.DOUBLE_PLATE);
+
+        // Sonicator
+        MetaTileEntityLoader.registerMachineRecipe(true, SONICATOR,
+                "RXR", "GPG", "MHM",
+                'H', CraftingComponent.HULL,
+                'M', CraftingComponent.MOTOR,
+                'P', CraftingComponent.PIPE_REACTOR,
+                'G', CraftingComponent.GLASS,
+                'R', CraftingComponent.ROTOR,
+                'X', CraftingComponent.BETTER_CIRCUIT);
+
+        // CVD Unit
+        MetaTileEntityLoader.registerMachineRecipe(true, CVD_UNIT,
+                "PKP", "CHC", "ESE",
+                'P', new UnificationEntry(plate, Carbon),
+                'K', CraftingComponent.CABLE,
+                'C', CraftingComponent.CIRCUIT,
+                'H', CraftingComponent.HULL,
+                'S', CraftingComponent.SENSOR,
+                'E', CraftingComponent.EMITTER);
+
+        // Flotation Cell
+        MetaTileEntityLoader.registerMachineRecipe(true, FLOTATION_CELL,
+                "XOX", "PHP", "RRR",
+                'H', CraftingComponent.HULL,
+                'P', CraftingComponent.PUMP,
+                'R', CraftingComponent.PIPE_REACTOR,
+                'O', ORE_DICTIONARY_FILTER,
+                'X', CraftingComponent.CIRCUIT);
+
+        // Ion Implanter
+        MetaTileEntityLoader.registerMachineRecipe(true, ION_IMPLANTER,
+                "PXP", "EHE", "DXD",
+                'E', CraftingComponent.EMITTER,
+                'H', CraftingComponent.HULL,
+                'D', CraftingComponent.DOUBLE_PLATE,
+                'X', CraftingComponent.CIRCUIT,
+                'P', CraftingComponent.PIPE_NORMAL);
+
         //  Bio Reactor
         registerMachineRecipe(true, BIO_REACTOR,
                 "PXX", "pHp", "PMW",
@@ -757,6 +832,16 @@ public class MetaTileEntityMachine {
                 'X', CraftingComponent.CIRCUIT,
                 'W', CraftingComponent.CABLE,
                 'M', CraftingComponent.MOTOR);
+
+        // Cryogenic Reactor
+        MetaTileEntityLoader.registerMachineRecipe(true, CRYOGENIC_REACTOR,
+                "CMC", "IHI", "KRK",
+                'K', CraftingComponent.CABLE_QUAD,
+                'R', CraftingComponent.SPRING,
+                'I', CraftingComponent.PIPE_NORMAL,
+                'H', CraftingComponent.HULL,
+                'C', CraftingComponent.CIRCUIT,
+                'M', CraftingComponent.PUMP);
 
         // Burner Reactor
         MetaTileEntityLoader.registerMachineRecipe(true, BURNER_REACTOR,

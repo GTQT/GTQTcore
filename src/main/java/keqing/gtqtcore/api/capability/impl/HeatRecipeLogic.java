@@ -1,6 +1,5 @@
 package keqing.gtqtcore.api.capability.impl;
 
-import gregtech.api.GTValues;
 import gregtech.api.capability.IMultiblockController;
 import gregtech.api.capability.IMultipleRecipeMaps;
 import gregtech.api.capability.IMultipleTankHandler;
@@ -8,16 +7,12 @@ import gregtech.api.capability.impl.AbstractRecipeLogic;
 import gregtech.api.capability.impl.ItemHandlerList;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.MultiblockWithDisplayBase;
-import gregtech.api.metatileentity.multiblock.RecipeMapPrimitiveMultiblockController;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
-import gregtech.api.recipes.logic.OverclockingLogic;
 import gregtech.api.recipes.recipeproperties.IRecipePropertyStorage;
 import gregtech.common.ConfigHolder;
-import keqing.gtqtcore.api.metaileentity.multiblock.NoEnergyMultiblockController;
 import keqing.gtqtcore.api.metaileentity.multiblock.RecipeMapHeatMultiblockController;
-import keqing.gtqtcore.api.metaileentity.multiblock.RecipeMapHeatMultiblockController;
-import keqing.gtqtcore.api.utils.GTQTLog;
+import keqing.gtqtcore.api.recipes.properties.HeatProperty;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.World;
 import net.minecraftforge.items.IItemHandler;
@@ -42,6 +37,7 @@ public class HeatRecipeLogic extends AbstractRecipeLogic {
     public HeatRecipeLogic(RecipeMapHeatMultiblockController tileEntity, RecipeMap<?> recipeMap) {
         super(tileEntity, recipeMap);
     }
+
     @Override
     protected long getEnergyInputPerSecond() {
         return Integer.MAX_VALUE;
@@ -64,14 +60,14 @@ public class HeatRecipeLogic extends AbstractRecipeLogic {
 
     @Override
     public long getMaxVoltage() {
-        return GTValues.LV;
+        return tileEntity.getTier();
     }
 
     @Nonnull
     @Override
     protected int[] runOverclockingLogic(@Nonnull IRecipePropertyStorage propertyStorage, int recipeEUt, long maxVoltage, int recipeDuration, int amountOC) {
         return standardOverclockingLogic(
-                1,
+                propertyStorage.getRecipePropertyValue(HeatProperty.getInstance(), 0),
                 getMaxVoltage(),
                 recipeDuration,
                 amountOC,
@@ -83,7 +79,7 @@ public class HeatRecipeLogic extends AbstractRecipeLogic {
 
     @Override
     public long getMaximumOverclockVoltage() {
-        return GTValues.V[GTValues.LV];
+        return tileEntity.getHeat();
     }
 
     /**
@@ -106,6 +102,7 @@ public class HeatRecipeLogic extends AbstractRecipeLogic {
     @Override
     public void update() {
     }
+
     protected void updateRecipeProgress() {
         if (this.canRecipeProgress) {
             if (++this.progressTime > this.maxProgressTime) {
@@ -113,6 +110,7 @@ public class HeatRecipeLogic extends AbstractRecipeLogic {
             }
         }
     }
+
     public void updateWorkable() {
         World world = this.getMetaTileEntity().getWorld();
         if (world != null && !world.isRemote) {
@@ -136,6 +134,7 @@ public class HeatRecipeLogic extends AbstractRecipeLogic {
             }
         }
     }
+
     @Override
     protected boolean canProgressRecipe() {
         return super.canProgressRecipe() && !((IMultiblockController) metaTileEntity).isStructureObstructed();
@@ -339,7 +338,7 @@ public class HeatRecipeLogic extends AbstractRecipeLogic {
 
         recipe = Recipe.trimRecipeOutputs(recipe, getRecipeMap(), metaTileEntity.getItemOutputLimit(), metaTileEntity.getFluidOutputLimit());
 
-        recipe = findParallelRecipe (
+        recipe = findParallelRecipe(
                 recipe,
                 currentDistinctInputBus,
                 getInputTank(),
@@ -349,10 +348,6 @@ public class HeatRecipeLogic extends AbstractRecipeLogic {
                 getParallelLimit()
 
         );
-
-
-
-
 
 
         if (recipe != null && setupAndConsumeRecipeInputs(recipe, currentDistinctInputBus)) {

@@ -167,9 +167,7 @@ public class MetaTileEntityOilPool extends NoEnergyMultiblockController {
     public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("沉淀，那场大雨毁了我的大学梦", new Object[0]));
-        tooltip.add(I18n.format("gtqtcore.machine.opi.tooltip.1"));
-        tooltip.add(I18n.format("gtqtcore.machine.opi.tooltip.2"));
-        tooltip.add(I18n.format("gtqtcore.machine.opi.tooltip.3"));
+        tooltip.add(I18n.format("gtqtcore.machine.opi.tooltip"));
     }
 
     @SideOnly(Side.CLIENT)

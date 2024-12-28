@@ -86,6 +86,7 @@ public class MiscMachineRecipes {
                 .fluidInputs(SeaWater.getFluid(4000))
                 .fluidOutputs(SaltWater.getFluid(2000))
                 .duration(200)
+                .Heat(400)
                 .circuitMeta(1)
                 .buildAndRegister();
 
@@ -94,6 +95,7 @@ public class MiscMachineRecipes {
                 .fluidInputs(Water.getFluid(4000))
                 .fluidOutputs(SaltWater.getFluid(1000))
                 .duration(200)
+                .Heat(400)
                 .circuitMeta(1)
                 .buildAndRegister();
 
@@ -101,6 +103,7 @@ public class MiscMachineRecipes {
                 .fluidInputs(SaltWater.getFluid(4000))
                 .output(dust, Salt, 4)
                 .duration(100)
+                .Heat(400)
                 .circuitMeta(1)
                 .buildAndRegister();
 
@@ -108,6 +111,7 @@ public class MiscMachineRecipes {
                 .fluidInputs(Water.getFluid(4000))
                 .output(dust, Salt, 1)
                 .duration(100)
+                .Heat(400)
                 .circuitMeta(2)
                 .buildAndRegister();
 

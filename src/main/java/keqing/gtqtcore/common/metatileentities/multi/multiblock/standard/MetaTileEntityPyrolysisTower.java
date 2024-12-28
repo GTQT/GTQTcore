@@ -67,6 +67,7 @@ public class MetaTileEntityPyrolysisTower extends RecipeMapHeatMultiblockControl
     public void updateFormedValid() {
         super.updateFormedValid();
         setHeat((int) getHeatHatch().getHeat());
+        setTier(getHeatHatch().getTier());
     }
 
     public IHeat getHeatHatch() {

@@ -168,6 +168,12 @@ public class GTQTTextures {
     public static OrientedOverlayRenderer CVD_UNIT_OVERLAY = new OrientedOverlayRenderer("overlay/cvd_unit");
     public static OrientedOverlayRenderer NANOSCALE_FABRICATOR_OVERLAY = new OrientedOverlayRenderer("overlay/nanoscale_fabricator");
     public static OrientedOverlayRenderer SONICATOR_OVERLAY = new OrientedOverlayRenderer("overlay/sonicator");
+    public static final OrientedOverlayRenderer ION_IMPLANTER_OVERLAY
+            = new OrientedOverlayRenderer("overlay/ion_implanter");
+
+    public static final OrientedOverlayRenderer FLOTATION_CELL_OVERLAY
+            = new OrientedOverlayRenderer("overlay/flotation_cell");
+
     public static OrientedOverlayRenderer ISA_MILL_OVERLAY = new OrientedOverlayRenderer("overlay/isa_mill");
     public static OrientedOverlayRenderer BURNER_REACTOR_OVERLAY = new OrientedOverlayRenderer("overlay/burner_reactor");
     public static OrientedOverlayRenderer CRYOGENIC_REACTOR_OVERLAY = new OrientedOverlayRenderer("overlay/cryogenic_reactor");

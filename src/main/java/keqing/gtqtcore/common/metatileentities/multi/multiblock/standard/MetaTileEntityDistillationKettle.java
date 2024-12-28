@@ -113,6 +113,7 @@ public class MetaTileEntityDistillationKettle extends RecipeMapHeatMultiblockCon
     public void updateFormedValid() {
         super.updateFormedValid();
         setHeat((int) getHeatHatch().getHeat());
+        setTier(getHeatHatch().getTier());
     }
 
     public IHeat getHeatHatch() {

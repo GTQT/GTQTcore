@@ -35,8 +35,16 @@ public class BlockCrucible extends VariantBlock<BlockCrucible.CrucibleType> {
     }
 
     public enum CrucibleType implements IStringSerializable {
+        BRONZE_CRUCIBLE("bronze", 1696),
+        INVAR_CRUCIBLE("invar", 2395),
         QUARTZ_CRUCIBLE("quartz", 2482),
+        CHROME_CRUCIBLE("chrome", 2725),
+        VANADIUM_CRUCIBLE("vanadium", 2728),
+        NIOBIUM_TITANIUM_CRUCIBLE("niobium_titanium", 2931),
+        IRIDIUM_CRUCIBLE("iridium", 3398),
+        MOLYBDENUM_CRUCIBLE("molybdenum", 3620),
         TUNGSTEN_CRUCIBLE("tungsten", 3695),
+        OSMIUM_CRUCIBLE("osmium", 4132),
         GRAPHITE_CRUCIBLE("graphite", 4750),
         BORON_NITRIDE_CRUCIBLE("boron_nitride", 5328);
 

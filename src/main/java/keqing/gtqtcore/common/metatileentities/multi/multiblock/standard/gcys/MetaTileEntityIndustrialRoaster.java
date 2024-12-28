@@ -200,7 +200,7 @@ public class MetaTileEntityIndustrialRoaster extends RecipeMapMultiblockControll
                 .aisle("F   F", "FBBBF", "XPEPX", "XXXXX", " P P ")
                 .aisle("     ", "XBBBX", "XP PX", "XPHPX", " P P ")
                 .aisle("F   F", "FBBBF", "XISOX", "XLMDX", "     ")
-                .where('S', GTQTMetaTileEntities.ROASTER, EnumFacing.SOUTH)
+                .where('S', GTQTMetaTileEntities.LARGE_ROASTER, EnumFacing.SOUTH)
                 .where('X', getCasingState())
                 .where('P', getBoilerCasingState())
                 .where('F', getFrameState())

@@ -171,7 +171,7 @@ public class NuclearLine {
                 .fluidInputs(Polybenzimidazole.getFluid(2000))
                 .fluidInputs(Zylon.getFluid(2000))
                 .fluidInputs(ReinforcedEpoxyResin.getFluid(2000))
-                .outputs(LAGER_HEAT_EXCHANGER.getStackForm())
+                .outputs(LARGE_HEAT_EXCHANGER.getStackForm())
                 .scannerResearch(b -> b
                         .researchStack(SMALL_HEAT_EXCHANGER.getStackForm())
                         .duration(1200)

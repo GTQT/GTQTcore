@@ -121,10 +121,10 @@ public class MetaTileEntityPrimitiveRoaster extends RecipeMapPrimitiveMultiblock
         this.getFrontOverlay().renderOrientedState(renderState, translation, pipeline, this.getFrontFacing(), this.recipeMapWorkable.isActive(), this.recipeMapWorkable.isWorkingEnabled());
         if (this.recipeMapWorkable.isActive() && this.isStructureFormed()) {
             EnumFacing back = this.getFrontFacing().getOpposite();
-            Matrix4 offset = translation.copy().translate((double)back.getXOffset(), -0.3, (double)back.getZOffset());
-            CubeRendererState op = (CubeRendererState)Textures.RENDER_STATE.get();
+            Matrix4 offset = translation.copy().translate(back.getXOffset(), -0.3, back.getZOffset());
+            CubeRendererState op = Textures.RENDER_STATE.get();
             Textures.RENDER_STATE.set(new CubeRendererState(op.layer, CubeRendererState.PASS_MASK, op.world));
-            Textures.renderFace(renderState, offset, (IVertexOperation[]) ArrayUtils.addAll(pipeline, new IVertexOperation[]{new LightMapOperation(240, 240), new ColourOperation(-1)}), EnumFacing.UP, Cuboid6.full, TextureUtils.getBlockTexture("lava_still"), BloomEffectUtil.getEffectiveBloomLayer());
+            Textures.renderFace(renderState, offset, ArrayUtils.addAll(pipeline, new LightMapOperation(240, 240), new ColourOperation(-1)), EnumFacing.UP, Cuboid6.full, TextureUtils.getBlockTexture("lava_still"), BloomEffectUtil.getEffectiveBloomLayer());
             Textures.RENDER_STATE.set(op);
         }
 

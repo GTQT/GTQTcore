@@ -31,6 +31,7 @@ public class JustEnoughItemsModule extends IntegrationSubmodule implements IModP
 
         registry.addRecipeCategories(new PhotolithographyFactoryJeiCategory(registry.getJeiHelpers().getGuiHelper()));
         registry.addRecipeCategories(new CircuitJeiCategory(registry.getJeiHelpers().getGuiHelper()));
+        registry.addRecipeCategories(new AlgaeJeiCategory(registry.getJeiHelpers().getGuiHelper()));
     }
     @Override
     public void register(IModRegistry registry) {
@@ -73,6 +74,13 @@ public class JustEnoughItemsModule extends IntegrationSubmodule implements IModP
         CircuitInfo.add(new CircuitJei(tier11));
         CircuitInfo.add(new CircuitJei(tier12));
         registry.addRecipes(CircuitInfo, Circuit);
+
+        String Algae = MODID + ":" + "Algae";
+        List<AlgaeJei> AlgaeInfo = new ArrayList<>();
+        MetaItem.MetaValueItem [] algaeList={COMMON_ALGAE,GREEN_ALGAE,RED_ALGAE,BROWN_ALGAE,GOLD_ALGAE};
+        AlgaeInfo.add(new AlgaeJei(algaeList));
+        registry.addRecipes(AlgaeInfo, Algae);
+        registry.addRecipeCatalyst(GTQTMetaTileEntities.ALGAE_FARM.getStackForm(), Algae);
 
         String oreByProductId = "gregtech:ore_by_product";
         registry.addRecipeCatalyst(GTQTMetaTileEntities.INTEGRATED_ORE_PROCESSOR.getStackForm(), oreByProductId);

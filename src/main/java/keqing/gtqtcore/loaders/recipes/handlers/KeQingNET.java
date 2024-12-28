@@ -1778,7 +1778,7 @@ public class KeQingNET {
                 .input(gearSmall, PPB, 32)
                 .input(cableGtSingle, NiobiumTitanium, 64)
                 .input(cableGtSingle, NiobiumTitanium, 64)
-                .output(LAGER_PROCESSING_FACTORY)
+                .output(LARGE_PROCESSING_FACTORY)
                 .fluidInputs(Polybenzimidazole.getFluid(L * 32))
                 .fluidInputs(Zylon.getFluid(L * 64))
                 .fluidInputs(TitaniumTungstenCarbide.getFluid(L * 64))
