@@ -1,13 +1,9 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.gcys;
 
-import gregicality.multiblocks.api.unification.GCYMMaterials;
-import gregicality.multiblocks.common.block.GCYMMetaBlocks;
-import gregicality.multiblocks.common.block.blocks.BlockUniqueCasing;
 import gregtech.api.GTValues;
 import gregtech.api.block.IHeatingCoilBlockStats;
 import gregtech.api.capability.IHeatingCoil;
 import gregtech.api.capability.impl.HeatingCoilRecipeLogic;
-import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
@@ -47,6 +43,7 @@ import java.util.List;
 public class MetaTileEntityBurnerReactor extends RecipeMapMultiblockController implements IHeatingCoil {
 
     int blastFurnaceTemperature;
+
     public MetaTileEntityBurnerReactor(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.BURNER_REACTOR_RECIPES);
         this.recipeMapWorkable = new HeatingCoilRecipeLogic(this);
@@ -102,9 +99,10 @@ public class MetaTileEntityBurnerReactor extends RecipeMapMultiblockController i
     }
 
     @Override
-    public boolean checkRecipe( Recipe recipe, boolean consumeIfSuccess) {
+    public boolean checkRecipe(Recipe recipe, boolean consumeIfSuccess) {
         return this.blastFurnaceTemperature >= recipe.getProperty(TemperatureProperty.getInstance(), 0);
     }
+
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
@@ -137,7 +135,7 @@ public class MetaTileEntityBurnerReactor extends RecipeMapMultiblockController i
     }
 
     @Override
-    public void addInformation(ItemStack stack, @Nullable World world,List<String> tooltip,
+    public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip,
                                boolean advanced) {
         super.addInformation(stack, world, tooltip, advanced);
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.1"));
@@ -153,6 +151,7 @@ public class MetaTileEntityBurnerReactor extends RecipeMapMultiblockController i
                         .setStyle(new Style().setColor(TextFormatting.RED))));
         return list;
     }
+
     @Override
     public boolean hasMufflerMechanics() {
         return true;

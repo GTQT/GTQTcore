@@ -20,14 +20,11 @@ import gregtech.client.renderer.cclop.LightMapOperation;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.BloomEffectUtil;
 import gregtech.common.blocks.BlockBoilerCasing;
-import gregtech.common.blocks.BlockMetalCasing;
-import gregtech.common.blocks.BlockTurbineCasing;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockCore;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTADVBlock;
-import keqing.gtqtcore.common.block.blocks.GTQTIsaCasing;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
@@ -35,11 +32,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.commons.lang3.ArrayUtils;
 
-import static gregtech.api.GTValues.IV;
 import static gregtech.api.GTValues.VA;
 import static keqing.gtqtcore.api.GCYSValues.HV;
-import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.IRIDIUM_CASING;
-import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing1.TurbineCasingType.SA_TURBINE_CASING;
 
 public class MetaTileEntityCoreWasher extends GTQTMultiblockCore {
 
@@ -48,20 +42,33 @@ public class MetaTileEntityCoreWasher extends GTQTMultiblockCore {
                 RecipeMaps.ORE_WASHER_RECIPES
         });
     }
+
+    private static IBlockState getFrameState() {
+        return MetaBlocks.FRAMES.get(Materials.StainlessSteel).getBlock(Materials.StainlessSteel);
+    }
+
+    private static IBlockState getCasingState() {
+        return GTQTMetaBlocks.ADV_BLOCK.getState(GTQTADVBlock.CasingType.Stellite);
+    }
+
+    private static IBlockState getSecondCasingState() {
+        return MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.POLYTETRAFLUOROETHYLENE_PIPE);
+    }
+
     @Override
-    public int getMinVa()
-    {
+    public int getMinVa() {
         return VA[HV];
     }
+
     @Override
     public int getCoreNum() {
         return 8;
     }
+
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityCoreWasher(metaTileEntityId);
     }
-
 
     @Override
     protected BlockPattern createStructurePattern() {
@@ -81,25 +88,18 @@ public class MetaTileEntityCoreWasher extends GTQTMultiblockCore {
                 .where('#', any())
                 .build();
     }
-    private static IBlockState getFrameState() {
-        return MetaBlocks.FRAMES.get(Materials.StainlessSteel).getBlock(Materials.StainlessSteel);
-    }
-    private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.ADV_BLOCK.getState(GTQTADVBlock.CasingType.Stellite);
-    }
 
-    private static IBlockState getSecondCasingState() {
-        return MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.POLYTETRAFLUOROETHYLENE_PIPE);
-    }
     @SideOnly(Side.CLIENT)
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
         return GTQTTextures.Stellite;
     }
+
     @Override
     public void update() {
         super.update();
     }
+
     @Override
     protected ICubeRenderer getFrontOverlay() {
         return GTQTTextures.LARGE_ROCKET_ENGINE_OVERLAY;
@@ -117,9 +117,9 @@ public class MetaTileEntityCoreWasher extends GTQTMultiblockCore {
                 this.recipeMapWorkable.isWorkingEnabled(), isActive());
         if (isStructureFormed()) {
             EnumFacing back = getFrontFacing().getOpposite();
-            for(float i=-1;i<=1;i++) {
-                for (float j = -1; j <=1; j++) {
-                    Matrix4 offset = translation.copy().translate(back.getXOffset() * 2+i, 0.6, back.getZOffset() * 2+j);
+            for (float i = -1; i <= 1; i++) {
+                for (float j = -1; j <= 1; j++) {
+                    Matrix4 offset = translation.copy().translate(back.getXOffset() * 2 + i, 0.6, back.getZOffset() * 2 + j);
                     CubeRendererState op = Textures.RENDER_STATE.get();
                     Textures.RENDER_STATE.set(new CubeRendererState(op.layer, CubeRendererState.PASS_MASK, op.world));
                     Textures.renderFace(renderState, offset,

@@ -65,14 +65,14 @@ public class GTQTRecipes {
         soldering_iron_head.addProcessingHandler(PropertyKey.INGOT, GTQTRecipes::processSolderingIron);
         OrePrefix.ring.addProcessingHandler(PropertyKey.DUST, GTQTRecipes::processRing);
         OrePrefix.stick.addProcessingHandler(PropertyKey.DUST, GTQTRecipes::processStick);
-        OrePrefix.gear.addProcessingHandler(PropertyKey.DUST, GTQTRecipes::processGear);
-        OrePrefix.gearSmall.addProcessingHandler(PropertyKey.DUST, GTQTRecipes::processGear);
+        //OrePrefix.gear.addProcessingHandler(PropertyKey.DUST, GTQTRecipes::processGear);
+        //OrePrefix.gearSmall.addProcessingHandler(PropertyKey.DUST, GTQTRecipes::processGear);
         OrePrefix.plate.addProcessingHandler(PropertyKey.DUST, GTQTRecipes::processPlate);
-        OrePrefix.rotor.addProcessingHandler(PropertyKey.INGOT, GTQTRecipes::processRotor);
+        //OrePrefix.rotor.addProcessingHandler(PropertyKey.INGOT, GTQTRecipes::processRotor);
 
-        OrePrefix.block.addProcessingHandler(PropertyKey.DUST, GTQTRecipes::processBlock);
-        OrePrefix.ingot.addProcessingHandler(PropertyKey.INGOT, GTQTRecipes::processIngot);
-        OrePrefix.nugget.addProcessingHandler(PropertyKey.DUST, GTQTRecipes::processNugget);
+        //OrePrefix.block.addProcessingHandler(PropertyKey.DUST, GTQTRecipes::processBlock);
+        //OrePrefix.ingot.addProcessingHandler(PropertyKey.INGOT, GTQTRecipes::processIngot);
+        //OrePrefix.nugget.addProcessingHandler(PropertyKey.DUST, GTQTRecipes::processNugget);
 
         OrePrefix.plate.addProcessingHandler(TOOL, GTQTRecipes::processTool);
 
@@ -161,20 +161,20 @@ public class GTQTRecipes {
     private static void processPlateBig(OrePrefix orePrefix, Material material, IngotProperty ingotProperty) {
         if (material.hasFlag(GENERATE_PLATE)) {
             if (material.hasFluid()) {
-                RecipeMaps.VACUUM_RECIPES.recipeBuilder()
+                FLUID_SOLIDFICATION_RECIPES.recipeBuilder()
                         .notConsumable(GTQTMetaItems.MOLD_GAS)
                         .fluidInputs(material.getFluid(L * 10))
                         .output(cylinder, material)
                         .duration(400)
-                        .EUt(GTValues.VA[MV])
+                        .EUt(GTValues.VA[HV])
                         .buildAndRegister();
 
-                RecipeMaps.VACUUM_RECIPES.recipeBuilder()
+                FLUID_SOLIDFICATION_RECIPES.recipeBuilder()
                         .notConsumable(GTQTMetaItems.MOLD_MOTOR)
                         .fluidInputs(material.getFluid(L * 10))
                         .output(motor_stick, material)
                         .duration(400)
-                        .EUt(GTValues.VA[MV])
+                        .EUt(GTValues.VA[HV])
                         .buildAndRegister();
             }
 
@@ -597,64 +597,6 @@ public class GTQTRecipes {
                     .buildAndRegister();
         }
     }
-
-    public static void processIngot(OrePrefix ingotPrefix, Material material, IngotProperty property) {
-        OrePrefix[] wireSizes = {wireGtDouble, wireGtQuadruple, wireGtOctal, wireGtHex};
-        if (material.hasFluid()) {
-            RecipeMaps.VACUUM_RECIPES.recipeBuilder()
-                    .notConsumable(MetaItems.SHAPE_MOLD_INGOT)
-                    .fluidInputs(material.getFluid(L))
-                    .outputs(OreDictUnifier.get(ingotPrefix, material))
-                    .duration(20).EUt(VA[MV] * 4)
-                    .buildAndRegister();
-
-        }
-
-    }
-
-    public static void processNugget(OrePrefix orePrefix, Material material, DustProperty property) {
-        if (material.hasFluid()) {
-            RecipeMaps.VACUUM_RECIPES.recipeBuilder()
-                    .notConsumable(MetaItems.SHAPE_MOLD_NUGGET)
-                    .fluidInputs(material.getFluid(L))
-                    .outputs(OreDictUnifier.get(orePrefix, material, 9))
-                    .duration((int) material.getMass() * 4)
-                    .EUt(VA[MV])
-                    .buildAndRegister();
-        }
-
-    }
-
-    public static void processBlock(OrePrefix blockPrefix, Material material, DustProperty property) {
-        ItemStack blockStack = OreDictUnifier.get(blockPrefix, material);
-        long materialAmount = blockPrefix.getMaterialAmount(material);
-        if (material.hasFluid()) {
-            RecipeMaps.VACUUM_RECIPES.recipeBuilder()
-                    .notConsumable(MetaItems.SHAPE_MOLD_BLOCK)
-                    .fluidInputs(material.getFluid((int) (materialAmount * L / M)))
-                    .outputs(blockStack)
-                    .duration((int) material.getMass() * 4).EUt(VA[MV])
-                    .buildAndRegister();
-        }
-
-    }
-
-    public static void processGear(OrePrefix gearPrefix, Material material, DustProperty property) {
-        ItemStack stack = OreDictUnifier.get(gearPrefix, material);
-        boolean isSmall = gearPrefix == OrePrefix.gearSmall;
-        if (material.hasFluid()) {
-
-            RecipeMaps.VACUUM_RECIPES.recipeBuilder()
-                    .notConsumable(isSmall ? MetaItems.SHAPE_MOLD_GEAR_SMALL : MetaItems.SHAPE_MOLD_GEAR)
-                    .fluidInputs(material.getFluid(L * (isSmall ? 1 : 4)))
-                    .outputs(stack)
-                    .duration(isSmall ? 80 : 400)
-                    .EUt(GTValues.VA[HV])
-                    .buildAndRegister();
-        }
-
-    }
-
     public static void processPlate(OrePrefix platePrefix, Material material, DustProperty property) {
         if (material.hasFlag(GENERATE_CURVED_PLATE)) {
             CW_LASER_ENGRAVER_RECIPES.recipeBuilder()
@@ -666,30 +608,8 @@ public class GTQTRecipes {
                     .EUt(GTValues.VA[HV])
                     .buildAndRegister();
         }
-        if (material.hasFluid()) {
-            RecipeMaps.VACUUM_RECIPES.recipeBuilder()
-                    .notConsumable(MetaItems.SHAPE_MOLD_PLATE)
-                    .fluidInputs(material.getFluid(L))
-                    .outputs(OreDictUnifier.get(platePrefix, material))
-                    .duration(160)
-                    .EUt(GTValues.VA[HV])
-                    .buildAndRegister();
-        }
     }
 
-    public static void processRotor(OrePrefix rotorPrefix, Material material, IngotProperty property) {
-        ItemStack stack = OreDictUnifier.get(rotorPrefix, material);
-        if (material.hasFluid()) {
-            RecipeMaps.VACUUM_RECIPES.recipeBuilder()
-                    .notConsumable(MetaItems.SHAPE_MOLD_ROTOR)
-                    .fluidInputs(material.getFluid(L * 4))
-                    .outputs(GTUtility.copy(stack))
-                    .duration(480)
-                    .EUt(GTValues.VA[HV])
-                    .buildAndRegister();
-        }
-
-    }
 
     public static void processCrops(OrePrefix fcropPrefix, Material material, IngotProperty property) {
         GTFORecipeMaps.GREENHOUSE_RECIPES.recipeBuilder()

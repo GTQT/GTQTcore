@@ -18,10 +18,9 @@ import gregtech.common.blocks.BlockBoilerCasing.BoilerCasingType;
 import gregtech.common.blocks.BlockFireboxCasing;
 import gregtech.common.blocks.BlockMetalCasing.MetalCasingType;
 import gregtech.common.blocks.MetaBlocks;
-import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
+import keqing.gtqtcore.api.capability.IElectrode;
+import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
 import keqing.gtqtcore.api.metaileentity.multiblock.GTQTRecipeMapMultiblockControllerOverwrite;
-import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
-import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -39,7 +38,7 @@ import static gregtech.api.GTValues.VA;
 
 public class MetaTileEntityAdvancedArcFurnace extends GTQTRecipeMapMultiblockControllerOverwrite {
     int ParallelNum = 1;
-    private int eleTier;
+    private int ElectrodeTier;
 
     public MetaTileEntityAdvancedArcFurnace(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{
@@ -61,10 +60,6 @@ public class MetaTileEntityAdvancedArcFurnace extends GTQTRecipeMapMultiblockCon
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
-        Object eleTier = context.get("EleTieredStats");
-        this.eleTier = GTQTUtil.getOrDefault(() -> eleTier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired) eleTier).getIntTier(),
-                0);
         ParallelLim = (int) Math.pow(2, 5);
         ParallelNum = ParallelLim;
     }
@@ -72,7 +67,7 @@ public class MetaTileEntityAdvancedArcFurnace extends GTQTRecipeMapMultiblockCon
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
-        textList.add(new TextComponentTranslation("电极:%s", eleTier));
+        textList.add(new TextComponentTranslation("电极状态：%s 电极等级：%s", checkAvailable(), ElectrodeTier));
         if (modern == 0) textList.add(new TextComponentTranslation("gtqtcore.tire1", 5));
         if (modern == 1) textList.add(new TextComponentTranslation("gtqtcore.tire2", 5));
         textList.add(new TextComponentTranslation("gtqtcore.parr", ParallelNum, ParallelLim));
@@ -80,12 +75,14 @@ public class MetaTileEntityAdvancedArcFurnace extends GTQTRecipeMapMultiblockCon
 
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("modern", modern);
+        data.setInteger("ElectrodeTier", ElectrodeTier);
         return super.writeToNBT(data);
     }
 
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         modern = data.getInteger("modern");
+        ElectrodeTier = data.getInteger("ElectrodeTier");
     }
 
     @Override
@@ -100,6 +97,13 @@ public class MetaTileEntityAdvancedArcFurnace extends GTQTRecipeMapMultiblockCon
         }
     }
 
+    @Override
+    public void updateFormedValid() {
+        if (!isStructureFormed()) return;
+        if (!checkAvailable()) return;
+        ElectrodeTier = getElectrodeTier();
+    }
+
     public int getMinVa() {
         if ((Math.min(this.energyContainer.getEnergyCapacity() / 32, VA[5]) * 20) == 0) return 1;
         return (int) (Math.min(this.energyContainer.getEnergyCapacity() / 32, VA[5]));
@@ -111,12 +115,12 @@ public class MetaTileEntityAdvancedArcFurnace extends GTQTRecipeMapMultiblockCon
                 .aisle(" AAA ", " AAA ", " EEE ", "     ")
                 .aisle("AAAAA", "A#C#A", "E#C#E", " ACA ")
                 .aisle("CAAAC", "C###C", "C###C", "CAAAC")
-                .aisle("AAAAA", "A###A", "E###E", " AAA ")
+                .aisle("AAAAA", "A#C#A", "E#C#E", " ACA ")
                 .aisle(" AAA ", " ASA ", " EEE ", "     ")
                 .where('S', selfPredicate())
                 .where('A', states(MetaBlocks.METAL_CASING.getState(MetalCasingType.TUNGSTENSTEEL_ROBUST)).setMinGlobalLimited(28)
                         .or(autoAbilities()))
-                .where('C', TiredTraceabilityPredicate.CP_ELE_CASING.get())
+                .where('C', abilities(GTQTMultiblockAbility.ELECTRODE_MULTIBLOCK_ABILITY))
                 .where('D', states(MetaBlocks.BOILER_CASING.getState((BoilerCasingType.TUNGSTENSTEEL_PIPE))))
                 .where('E', states(MetaBlocks.BOILER_FIREBOX_CASING.getState(BlockFireboxCasing.FireboxCasingType.TUNGSTENSTEEL_FIREBOX)))
                 .where(' ', any())
@@ -133,6 +137,37 @@ public class MetaTileEntityAdvancedArcFurnace extends GTQTRecipeMapMultiblockCon
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("彼岸双生"));
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("gregtech.machine.perfect_oc", new Object[0]));
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("升级电极获得并行以及额外超频", new Object[0]));
+    }
+
+    public IElectrode getElectrodeHatch(int i) {
+        List<IElectrode> abilities = getAbilities(GTQTMultiblockAbility.ELECTRODE_MULTIBLOCK_ABILITY);
+        if (abilities.isEmpty())
+            return null;
+        return abilities.get(i);
+    }
+
+    public int getElectrodeTier() {
+        int minTier = 1;
+        for (int i = 0; i < 14; i++) {
+            if (minTier > getElectrodeHatch(i).getElectrodeTier())
+                minTier = getElectrodeHatch(i).getElectrodeTier();
+        }
+        return minTier;
+    }
+
+    public boolean checkAvailable() {
+        for (int i = 0; i < 14; i++) {
+            if (!getElectrodeHatch(i).isAvailable())
+                return false;
+        }
+        return true;
+    }
+
+    public void setWork(boolean work) {
+        if (checkAvailable()) {
+            for (int i = 0; i < 14; i++)
+                getElectrodeHatch(i).setWork(work);
+        }
     }
 
     @Nonnull
@@ -155,7 +190,7 @@ public class MetaTileEntityAdvancedArcFurnace extends GTQTRecipeMapMultiblockCon
         protected void modifyOverclockPost(int[] resultOverclock, IRecipePropertyStorage storage) {
             super.modifyOverclockPost(resultOverclock, storage);
 
-            int coilTier = eleTier;
+            int coilTier = ElectrodeTier;
             if (coilTier <= 0)
                 return;
 

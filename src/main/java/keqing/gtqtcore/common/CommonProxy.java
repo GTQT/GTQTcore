@@ -373,7 +373,6 @@ public class CommonProxy {
         MiscMachineRecipes.init();
         IntegratedMiningDivision.init();
         HeatExchangeRecipes.init();
-        ELE.init();
         OreDeal.init();
         KeQingNET.init();
         ISA.init();
@@ -385,8 +384,8 @@ public class CommonProxy {
         WrapCircuits.init();
         MetaTileEntityLoader.init();
         MetaTileEntityMachine.init();
-        CopyRecipesHandlers.init();
         CrucibleRecipes.register();
+        CopyRecipesHandlers.init();
         /*
         for (Material material : GregTechAPI.materialManager.getRegisteredMaterials())
         {

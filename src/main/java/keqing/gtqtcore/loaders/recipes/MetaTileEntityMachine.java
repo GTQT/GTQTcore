@@ -538,7 +538,7 @@ public class MetaTileEntityMachine {
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(50).EUt(120)
                 .inputs(MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.HV))
                 .input(plate, Talonite, 2)
-                .input(OrePrefix.cableGtSingle, Materials.Aluminium, 2)
+                .input(OrePrefix.cableGtSingle, Materials.Gold, 2)
                 .fluidInputs(Materials.Epoxy.getFluid(L * 2))
                 .outputs(MetaTileEntities.HULL[3].getStackForm()).buildAndRegister();
 
@@ -546,7 +546,7 @@ public class MetaTileEntityMachine {
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(50).EUt(480)
                 .inputs(MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.EV))
                 .input(plate, Palladium, 2)
-                .input(OrePrefix.cableGtSingle, Gold, 2)
+                .input(OrePrefix.cableGtSingle, Aluminium, 2)
                 .fluidInputs(Materials.Polytetrafluoroethylene.getFluid(L * 2)).outputs(MetaTileEntities.HULL[4].getStackForm())
                 .buildAndRegister();
 

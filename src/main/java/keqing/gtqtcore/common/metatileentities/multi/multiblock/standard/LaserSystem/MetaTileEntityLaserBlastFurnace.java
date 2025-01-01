@@ -6,13 +6,11 @@ import gregtech.api.GTValues;
 import gregtech.api.GregTechAPI;
 import gregtech.api.block.IHeatingCoilBlockStats;
 import gregtech.api.capability.IHeatingCoil;
-import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.MultiblockDisplayText;
-import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.MultiblockShapeInfo;
@@ -25,14 +23,11 @@ import gregtech.api.util.TextComponentUtil;
 import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
-import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.BlockGlassCasing;
-import gregtech.common.blocks.BlockMetalCasing.MetalCasingType;
 import gregtech.common.blocks.BlockWireCoil.CoilType;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.MetaTileEntities;
 import gregtech.core.sound.GTSoundEvents;
-import keqing.gtqtcore.api.capability.ILaser;
 import keqing.gtqtcore.api.capability.impl.MultiblockLaserRecipeLogic;
 import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
 import keqing.gtqtcore.api.metaileentity.multiblock.RecipeMapLaserMultiblockController;
@@ -67,17 +62,40 @@ import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.LASER
 
 public class MetaTileEntityLaserBlastFurnace extends RecipeMapLaserMultiblockController implements IHeatingCoil {
 
-    private int blastFurnaceTemperature=0;
+    private int blastFurnaceTemperature = 0;
     private int simBlastFurnaceTemperature;
+
     public MetaTileEntityLaserBlastFurnace(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, RecipeMaps.BLAST_RECIPES);
         this.recipeMapWorkable = new MultiblockLaserRecipeLogic(this);
+    }
+
+    @Nonnull
+    private static IBlockState getVentState() {
+        return GCYMMetaBlocks.UNIQUE_CASING.getState(BlockUniqueCasing.UniqueCasingType.HEAT_VENT);
+    }
+
+    private static IBlockState getFrameState() {
+        return MetaBlocks.FRAMES.get(GTQTMaterials.MaragingSteel250).getBlock(GTQTMaterials.MaragingSteel250);
+    }
+
+    private static IBlockState getGlassState() {
+        return MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.FUSION_GLASS);
+    }
+
+    private static IBlockState getCasingState() {
+        return GTQTMetaBlocks.TURBINE_CASING.getState(NQ_TURBINE_CASING);
+    }
+
+    private static IBlockState getSecondCasingState() {
+        return GTQTMetaBlocks.TURBINE_CASING.getState(NQ_MACHINE_CASING);
     }
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityLaserBlastFurnace(metaTileEntityId);
     }
+
     /////////////////////////*//////////////////////////////
     public void update() {
         super.update();
@@ -90,6 +108,7 @@ public class MetaTileEntityLaserBlastFurnace extends RecipeMapLaserMultiblockCon
             }
         }
     }
+
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         super.writeToNBT(data);
         data.setInteger("blastFurnaceTemperature", this.blastFurnaceTemperature);
@@ -100,6 +119,7 @@ public class MetaTileEntityLaserBlastFurnace extends RecipeMapLaserMultiblockCon
         super.readFromNBT(data);
         this.blastFurnaceTemperature = data.getInteger("blastFurnaceTemperature");
     }
+
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
@@ -122,7 +142,7 @@ public class MetaTileEntityLaserBlastFurnace extends RecipeMapLaserMultiblockCon
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
         Object type = context.get("CoilType");
-        blastFurnaceTemperature=0;
+        blastFurnaceTemperature = 0;
 
         if (type instanceof IHeatingCoilBlockStats) {
             this.simBlastFurnaceTemperature = ((IHeatingCoilBlockStats) type).getCoilTemperature();
@@ -145,6 +165,7 @@ public class MetaTileEntityLaserBlastFurnace extends RecipeMapLaserMultiblockCon
     public boolean checkRecipe(Recipe recipe, boolean consumeIfSuccess) {
         return this.blastFurnaceTemperature >= recipe.getProperty(TemperatureProperty.getInstance(), 0);
     }
+
     /////////////////////////*//////////////////////////////
     @Override
     protected BlockPattern createStructurePattern() {
@@ -172,23 +193,6 @@ public class MetaTileEntityLaserBlastFurnace extends RecipeMapLaserMultiblockCon
                 .where('Q', abilities(MultiblockAbility.MAINTENANCE_HATCH))
                 .where(' ', any())
                 .build();
-    }
-    @Nonnull
-    private static IBlockState getVentState() {
-        return GCYMMetaBlocks.UNIQUE_CASING.getState(BlockUniqueCasing.UniqueCasingType.HEAT_VENT);
-    }
-    private static IBlockState getFrameState() {
-        return MetaBlocks.FRAMES.get(GTQTMaterials.MaragingSteel250).getBlock(GTQTMaterials.MaragingSteel250);
-    }
-    private static IBlockState getGlassState() {
-        return MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.FUSION_GLASS);
-    }
-    private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.TURBINE_CASING.getState(NQ_TURBINE_CASING);
-    }
-
-    private static IBlockState getSecondCasingState() {
-        return GTQTMetaBlocks.TURBINE_CASING.getState(NQ_MACHINE_CASING);
     }
 
     @SideOnly(Side.CLIENT)

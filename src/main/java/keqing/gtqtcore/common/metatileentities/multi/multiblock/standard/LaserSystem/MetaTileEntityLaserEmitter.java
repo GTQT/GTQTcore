@@ -1,6 +1,5 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.LaserSystem;
 
-import gregtech.api.GTValues;
 import gregtech.api.capability.IEnergyContainer;
 import gregtech.api.capability.impl.EnergyContainerList;
 import gregtech.api.gui.GuiTextures;
@@ -21,13 +20,10 @@ import gregtech.client.renderer.texture.Textures;
 import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.common.block.blocks.GTQTMultiblockCasing;
-import keqing.gtqtcore.common.metatileentities.multi.generators.Tide.MetaTileEntityTideControl;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.MetaTileEntityBaseWithControl;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.fml.relauncher.Side;
@@ -38,53 +34,56 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static gregtech.api.GTValues.V;
 import static gregtech.api.GTValues.VN;
 import static gregtech.api.metatileentity.multiblock.MultiblockAbility.INPUT_ENERGY;
-import static keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility.LASER_OUTPUT;
 import static keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility.LASER_OUTPUT;
 import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.NQ_TURBINE_CASING;
 
 public class MetaTileEntityLaserEmitter extends MetaTileEntityBaseWithControl {
 
-    public MetaTileEntityLaserEmitter(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId);
-    }
     public int Amperage;
     public int Voltage;
     long Laser;//当前的激光
     long MaxLaser;
     long SetLaser;// 设定 的 最大激光强度
     int tier;
+    public MetaTileEntityLaserEmitter(ResourceLocation metaTileEntityId) {
+        super(metaTileEntityId);
+    }
+
+    private static IBlockState getCasingState() {
+        return GTQTMetaBlocks.TURBINE_CASING.getState(NQ_TURBINE_CASING);
+    }
 
     @Override
     protected void updateFormedValid() {
-        Amperage=this.getAbilities(LASER_OUTPUT).get(0).Amperage();
-        Voltage=this.getAbilities(LASER_OUTPUT).get(0).Voltage();
-        Laser=this.getAbilities(LASER_OUTPUT).get(0).Laser();
-        MaxLaser=this.getAbilities(LASER_OUTPUT).get(0).MaxLaser();
-        SetLaser=this.getAbilities(LASER_OUTPUT).get(0).SetLaser();
-        tier=this.getAbilities(LASER_OUTPUT).get(0).tier();
+        Amperage = this.getAbilities(LASER_OUTPUT).get(0).Amperage();
+        Voltage = this.getAbilities(LASER_OUTPUT).get(0).Voltage();
+        Laser = this.getAbilities(LASER_OUTPUT).get(0).Laser();
+        MaxLaser = this.getAbilities(LASER_OUTPUT).get(0).MaxLaser();
+        SetLaser = this.getAbilities(LASER_OUTPUT).get(0).SetLaser();
+        tier = this.getAbilities(LASER_OUTPUT).get(0).tier();
         this.getAbilities(LASER_OUTPUT).get(0).setMachinePos(this.getPos());
 
-        if(isWorkingEnabled()) {
+        if (isWorkingEnabled()) {
             if (this.energyContainer.getEnergyStored() >= 0) {
                 this.getAbilities(LASER_OUTPUT).get(0).setLaser(Math.min(this.getAbilities(LASER_OUTPUT).get(0).SetLaser(), this.energyContainer.getEnergyStored()));
                 this.energyContainer.removeEnergy(Math.min(this.getAbilities(LASER_OUTPUT).get(0).SetLaser(), this.energyContainer.getEnergyStored()));
             } else this.getAbilities(LASER_OUTPUT).get(0).setLaser(0);
-        }
-        else this.getAbilities(LASER_OUTPUT).get(0).setLaser(0);
+        } else this.getAbilities(LASER_OUTPUT).get(0).setLaser(0);
     }
+
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
 
         List<IEnergyContainer> energyContainer = new ArrayList<>(this.getAbilities(MultiblockAbility.INPUT_ENERGY));
         energyContainer.addAll(this.getAbilities(MultiblockAbility.INPUT_LASER));
-        this.energyContainer=new EnergyContainerList(energyContainer);
+        this.energyContainer = new EnergyContainerList(energyContainer);
 
         this.getAbilities(LASER_OUTPUT).get(0).setMachinePos(this.getPos());
     }
+
     @Override
     protected ModularUI.Builder createUITemplate(EntityPlayer entityPlayer) {
         ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND, 260, 240);
@@ -99,9 +98,10 @@ public class MetaTileEntityLaserEmitter extends MetaTileEntityBaseWithControl {
 
         builder.widget(new ClickButtonWidget(7, 130, 80, 20, "I/O", data -> setWorkingEnabled(!isWorkingEnabled())));
 
-        builder.bindPlayerInventory(entityPlayer.inventory, GuiTextures.SLOT, 92,160);
+        builder.bindPlayerInventory(entityPlayer.inventory, GuiTextures.SLOT, 92, 160);
         return builder;
     }
+
     private void incrementThresholdV(Widget.ClickData clickData) {
         this.getAbilities(LASER_OUTPUT).get(0).addVoltage(1);
     }
@@ -117,18 +117,20 @@ public class MetaTileEntityLaserEmitter extends MetaTileEntityBaseWithControl {
     private void decrementThresholdA(Widget.ClickData clickData) {
         this.getAbilities(LASER_OUTPUT).get(0).addAmperage(-1);
     }
-    protected void addDisplayText(List<ITextComponent> textList) {
-        textList.add(new TextComponentString( "激光传输器输出  端-等级: " + tier));
-        textList.add(new TextComponentString( "开关 是否传输: " + isWorkingEnabled()));
-        textList.add(new TextComponentString( "实际 传输电压: " + Voltage));
-        textList.add(new TextComponentString( "实际 传输电流: " + Amperage));
-        textList.add(new TextComponentString( "实际 传输激光: " + Laser+" "+VN[GTUtility.getTierByVoltage(Laser)]));
-        textList.add(new TextComponentString( "额定 传输激光: " + SetLaser+" "+VN[GTUtility.getTierByVoltage(SetLaser)]));
-        textList.add(new TextComponentString( "最大 传输激光: " + MaxLaser+" "+VN[GTUtility.getTierByVoltage(MaxLaser)]));
 
-        textList.add(new TextComponentString( "能量 缓存容量： " + energyContainer.getEnergyStored()));
-        textList.add(new TextComponentString( "能量 容量上限: " + energyContainer.getEnergyCapacity()));
+    protected void addDisplayText(List<ITextComponent> textList) {
+        textList.add(new TextComponentString("激光传输器输出  端-等级: " + tier));
+        textList.add(new TextComponentString("开关 是否传输: " + isWorkingEnabled()));
+        textList.add(new TextComponentString("实际 传输电压: " + Voltage));
+        textList.add(new TextComponentString("实际 传输电流: " + Amperage));
+        textList.add(new TextComponentString("实际 传输激光: " + Laser + " " + VN[GTUtility.getTierByVoltage(Laser)]));
+        textList.add(new TextComponentString("额定 传输激光: " + SetLaser + " " + VN[GTUtility.getTierByVoltage(SetLaser)]));
+        textList.add(new TextComponentString("最大 传输激光: " + MaxLaser + " " + VN[GTUtility.getTierByVoltage(MaxLaser)]));
+
+        textList.add(new TextComponentString("能量 缓存容量： " + energyContainer.getEnergyStored()));
+        textList.add(new TextComponentString("能量 容量上限: " + energyContainer.getEnergyCapacity()));
     }
+
     @Nonnull
     @Override
     protected BlockPattern createStructurePattern() {
@@ -151,10 +153,6 @@ public class MetaTileEntityLaserEmitter extends MetaTileEntityBaseWithControl {
 
     public boolean hasMufflerMechanics() {
         return false;
-    }
-
-    private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.TURBINE_CASING.getState(NQ_TURBINE_CASING);
     }
 
     @SideOnly(Side.CLIENT)

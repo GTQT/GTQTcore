@@ -4,7 +4,6 @@ import gregicality.multiblocks.api.render.GCYMTextures;
 import gregicality.multiblocks.common.block.GCYMMetaBlocks;
 import gregicality.multiblocks.common.block.blocks.BlockLargeMultiblockCasing;
 import gregicality.multiblocks.common.block.blocks.BlockUniqueCasing;
-
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
@@ -15,7 +14,6 @@ import gregtech.api.util.RelativeDirection;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.common.blocks.BlockGlassCasing;
-import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
@@ -29,7 +27,7 @@ import javax.annotation.Nonnull;
 
 public class MetaTileEntityIonImplanter extends RecipeMapMultiblockController {
 
-    public MetaTileEntityIonImplanter(ResourceLocation metaTileEntityId){
+    public MetaTileEntityIonImplanter(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.ION_IMPLANTATOR_RECIPES);
     }
 
@@ -41,7 +39,7 @@ public class MetaTileEntityIonImplanter extends RecipeMapMultiblockController {
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start(RelativeDirection.BACK, RelativeDirection.UP, RelativeDirection.RIGHT)
-                .aisle("AAAAAAAA ", "AAAAAAAA ", "AAAAAAAA ","AAAAAAAA ", "AAAAAAAA ", "         " )
+                .aisle("AAAAAAAA ", "AAAAAAAA ", "AAAAAAAA ", "AAAAAAAA ", "AAAAAAAA ", "         ")
                 .aisle("AAAAAAAAA", "A BBB AA ", "A B B AA ", "A BBB AA ", "A     A  ", "AAACAA   ")
                 .aisle("AAAAAAAAA", "A BBB   A", "A B B   A", "A BBB   A", "A     AA ", "AAACAA   ")
                 .aisle("AAAAAAAAA", "A BBB   C", "A B B   C", "A BBB   C", "A     AAA", "AAACAA   ")
@@ -55,9 +53,9 @@ public class MetaTileEntityIonImplanter extends RecipeMapMultiblockController {
                 .aisle("AAAAAAAAA", "A BBB   C", "A B B   C", "A BBB   C", "A     AAA", "AAACAA   ")
                 .aisle("AAAAAAAAA", "A BBB  AA", "A B B  AA", "A BBB  AA", "A     AA ", "AAACAA   ")
                 .aisle("AAAAAAAAA", "A BBB AA ", "A B B AA ", "A BBB AA ", "A     A  ", "AAACAA   ")
-                .aisle("AAAAAAAA ", "AAAAAAAA ", "AAAAAAAA ","AAAAAAAA ", "AAAAAAAA ", "         " )
+                .aisle("AAAAAAAA ", "AAAAAAAA ", "AAAAAAAA ", "AAAAAAAA ", "AAAAAAAA ", "         ")
                 .where('~', selfPredicate())
-                .where('A', states(getCasingState()) .or(autoAbilities(true, true, true, true, true, true, false)))
+                .where('A', states(getCasingState()).or(autoAbilities(true, true, true, true, true, true, false)))
                 .where('B', states(getElectrolicState()))
                 .where('D', states(getSuperHeavyCasingState()))
                 .where('C', states(MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.FUSION_GLASS)))
@@ -73,7 +71,7 @@ public class MetaTileEntityIonImplanter extends RecipeMapMultiblockController {
     }
 
     private IBlockState getSuperHeavyCasingState() {
-       return GTQTMetaBlocks.MULTIBLOCK_CASING.getState(BlockGCYSMultiblockCasing.CasingType.SUPERHEAVY_QUANTUM_CASING);
+        return GTQTMetaBlocks.MULTIBLOCK_CASING.getState(BlockGCYSMultiblockCasing.CasingType.SUPERHEAVY_QUANTUM_CASING);
     }
 
     @SideOnly(Side.CLIENT)
@@ -85,7 +83,7 @@ public class MetaTileEntityIonImplanter extends RecipeMapMultiblockController {
     @SideOnly(Side.CLIENT)
     @Nonnull
     @Override
-    protected ICubeRenderer getFrontOverlay(){
+    protected ICubeRenderer getFrontOverlay() {
         return Textures.FUSION_REACTOR_OVERLAY;
     }
 }

@@ -17,7 +17,6 @@ import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.MultiblockShapeInfo;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
-import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.recipes.recipeproperties.TemperatureProperty;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.TextComponentUtil;
@@ -58,21 +57,45 @@ import java.util.List;
 
 import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.NQ_MACHINE_CASING;
 import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.NQ_TURBINE_CASING;
-import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.*;
+import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.LASER_ALLOY_FURNACE;
+import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.LASER_INPUT;
 
 public class MetaTileEntityLaserAlloyFurnace extends RecipeMapLaserMultiblockController implements IHeatingCoil {
 
-    private int blastFurnaceTemperature=0;
+    private int blastFurnaceTemperature = 0;
     private int simBlastFurnaceTemperature;
+
     public MetaTileEntityLaserAlloyFurnace(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GCYMRecipeMaps.ALLOY_BLAST_RECIPES);
         this.recipeMapWorkable = new MultiblockLaserRecipeLogic(this);
+    }
+
+    @Nonnull
+    private static IBlockState getVentState() {
+        return GCYMMetaBlocks.UNIQUE_CASING.getState(BlockUniqueCasing.UniqueCasingType.HEAT_VENT);
+    }
+
+    private static IBlockState getFrameState() {
+        return MetaBlocks.FRAMES.get(GTQTMaterials.MaragingSteel250).getBlock(GTQTMaterials.MaragingSteel250);
+    }
+
+    private static IBlockState getGlassState() {
+        return MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.FUSION_GLASS);
+    }
+
+    private static IBlockState getCasingState() {
+        return GTQTMetaBlocks.TURBINE_CASING.getState(NQ_TURBINE_CASING);
+    }
+
+    private static IBlockState getSecondCasingState() {
+        return GTQTMetaBlocks.TURBINE_CASING.getState(NQ_MACHINE_CASING);
     }
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityLaserAlloyFurnace(metaTileEntityId);
     }
+
     /////////////////////////*//////////////////////////////
     public void update() {
         super.update();
@@ -85,6 +108,7 @@ public class MetaTileEntityLaserAlloyFurnace extends RecipeMapLaserMultiblockCon
             }
         }
     }
+
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         super.writeToNBT(data);
         data.setInteger("blastFurnaceTemperature", this.blastFurnaceTemperature);
@@ -95,6 +119,7 @@ public class MetaTileEntityLaserAlloyFurnace extends RecipeMapLaserMultiblockCon
         super.readFromNBT(data);
         this.blastFurnaceTemperature = data.getInteger("blastFurnaceTemperature");
     }
+
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
@@ -117,7 +142,7 @@ public class MetaTileEntityLaserAlloyFurnace extends RecipeMapLaserMultiblockCon
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
         Object type = context.get("CoilType");
-        blastFurnaceTemperature=0;
+        blastFurnaceTemperature = 0;
 
         if (type instanceof IHeatingCoilBlockStats) {
             this.simBlastFurnaceTemperature = ((IHeatingCoilBlockStats) type).getCoilTemperature();
@@ -140,6 +165,7 @@ public class MetaTileEntityLaserAlloyFurnace extends RecipeMapLaserMultiblockCon
     public boolean checkRecipe(Recipe recipe, boolean consumeIfSuccess) {
         return this.blastFurnaceTemperature >= recipe.getProperty(TemperatureProperty.getInstance(), 0);
     }
+
     /////////////////////////*//////////////////////////////
     @Override
     protected BlockPattern createStructurePattern() {
@@ -173,23 +199,6 @@ public class MetaTileEntityLaserAlloyFurnace extends RecipeMapLaserMultiblockCon
                 .where('Q', abilities(MultiblockAbility.MAINTENANCE_HATCH))
                 .where(' ', any())
                 .build();
-    }
-    @Nonnull
-    private static IBlockState getVentState() {
-        return GCYMMetaBlocks.UNIQUE_CASING.getState(BlockUniqueCasing.UniqueCasingType.HEAT_VENT);
-    }
-    private static IBlockState getFrameState() {
-        return MetaBlocks.FRAMES.get(GTQTMaterials.MaragingSteel250).getBlock(GTQTMaterials.MaragingSteel250);
-    }
-    private static IBlockState getGlassState() {
-        return MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.FUSION_GLASS);
-    }
-    private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.TURBINE_CASING.getState(NQ_TURBINE_CASING);
-    }
-
-    private static IBlockState getSecondCasingState() {
-        return GTQTMetaBlocks.TURBINE_CASING.getState(NQ_MACHINE_CASING);
     }
 
     @SideOnly(Side.CLIENT)

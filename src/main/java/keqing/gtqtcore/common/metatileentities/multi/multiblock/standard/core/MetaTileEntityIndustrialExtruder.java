@@ -34,15 +34,29 @@ public class MetaTileEntityIndustrialExtruder extends GTQTMultiblockCore {
     public MetaTileEntityIndustrialExtruder(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{RecipeMaps.EXTRUDER_RECIPES});
     }
+
+    private static IBlockState getFrameState() {
+        return MetaBlocks.FRAMES.get(GTQTMaterials.MaragingSteel250).getBlock(GTQTMaterials.MaragingSteel250);
+    }
+
+    private static IBlockState getCasingState() {
+        return GTQTMetaBlocks.TURBINE_CASING.getState(NQ_TURBINE_CASING);
+    }
+
+    private static IBlockState getSecondCasingState() {
+        return GTQTMetaBlocks.TURBINE_CASING.getState(NQ_MACHINE_CASING);
+    }
+
     @Override
-    public int getMinVa()
-    {
+    public int getMinVa() {
         return VA[IV];
     }
+
     @Override
     public int getCoreNum() {
         return 16;
     }
+
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityIndustrialExtruder(metaTileEntityId);
@@ -53,7 +67,7 @@ public class MetaTileEntityIndustrialExtruder extends GTQTMultiblockCore {
         FactoryBlockPattern pattern = FactoryBlockPattern.start(FRONT, UP, RIGHT)
                 .aisle("FFF", "CCC", "FFF")
                 .aisle("CCC", "SGC", "CFC")
-                .aisle("CCC", "IGC", "CFC").setRepeatable(3,10)
+                .aisle("CCC", "IGC", "CFC").setRepeatable(3, 10)
                 .aisle("FFF", "CCC", "FFF")
                 .where('P', states(getCasingState()))
                 .where('I', abilities(MultiblockAbility.IMPORT_ITEMS))
@@ -66,16 +80,6 @@ public class MetaTileEntityIndustrialExtruder extends GTQTMultiblockCore {
                 .where('G', states(getSecondCasingState()))
                 .where('F', states(getFrameState()));
         return pattern.build();
-    }
-    private static IBlockState getFrameState() {
-        return MetaBlocks.FRAMES.get(GTQTMaterials.MaragingSteel250).getBlock(GTQTMaterials.MaragingSteel250);
-    }
-    private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.TURBINE_CASING.getState(NQ_TURBINE_CASING);
-    }
-
-    private static IBlockState getSecondCasingState() {
-        return GTQTMetaBlocks.TURBINE_CASING.getState(NQ_MACHINE_CASING);
     }
 
     @SideOnly(Side.CLIENT)
@@ -96,6 +100,7 @@ public class MetaTileEntityIndustrialExtruder extends GTQTMultiblockCore {
         this.getFrontOverlay().renderOrientedState(renderState, translation, pipeline, getFrontFacing(), this.recipeMapWorkable.isWorkingEnabled(),
                 isActive());
     }
+
     @SideOnly(Side.CLIENT)
     @Override
     protected ICubeRenderer getFrontOverlay() {

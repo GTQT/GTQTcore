@@ -43,17 +43,20 @@ import net.minecraftforge.items.IItemHandlerModifiable;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public class MetaTileEntityPrimitiveTreeFarmer extends MultiblockWithDisplayBase  implements IFastRenderMetaTileEntity {
+public class MetaTileEntityPrimitiveTreeFarmer extends MultiblockWithDisplayBase implements IFastRenderMetaTileEntity {
 
+    int time;
+    boolean work;
+    int saplingsIn;
+    int numSaplingsInOutput;
     private IItemHandlerModifiable logOut;
     private IItemHandlerModifiable saplingOut;
     private IItemHandlerModifiable itemIn;
-
     public MetaTileEntityPrimitiveTreeFarmer(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId);
-        logOut = new NotifiableItemStackHandler(this, 1,this,true);
-        saplingOut = new NotifiableItemStackHandler(this,1, this, true);
-        itemIn = new NotifiableItemStackHandler(this,1, this, true);
+        logOut = new NotifiableItemStackHandler(this, 1, this, true);
+        saplingOut = new NotifiableItemStackHandler(this, 1, this, true);
+        itemIn = new NotifiableItemStackHandler(this, 1, this, true);
     }
 
     @Override
@@ -61,16 +64,11 @@ public class MetaTileEntityPrimitiveTreeFarmer extends MultiblockWithDisplayBase
         return new MetaTileEntityPrimitiveTreeFarmer(metaTileEntityId);
     }
 
-    int time;
-    boolean work;
-    int saplingsIn;
-    int numSaplingsInOutput;
-
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("time", time);
         data.setInteger("saplingsIn", saplingsIn);
         data.setInteger("numSaplingsInOutput", numSaplingsInOutput);
-        data.setBoolean("work",work);
+        data.setBoolean("work", work);
         return super.writeToNBT(data);
     }
 
@@ -79,34 +77,31 @@ public class MetaTileEntityPrimitiveTreeFarmer extends MultiblockWithDisplayBase
         time = data.getInteger("time");
         saplingsIn = data.getInteger("saplingsIn");
         numSaplingsInOutput = data.getInteger("numSaplingsInOutput");
-        work= data.getBoolean("work");
+        work = data.getBoolean("work");
     }
-
 
 
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
-        textList.add(new TextComponentTranslation("生成耗时：%s / %s", time,saplingsIn*200));
-        textList.add(new TextComponentTranslation("输出原木：%s / 树苗：%s", saplingsIn,saplingsIn * 2));
+        textList.add(new TextComponentTranslation("生成耗时：%s / %s", time, saplingsIn * 200));
+        textList.add(new TextComponentTranslation("输出原木：%s / 树苗：%s", saplingsIn, saplingsIn * 2));
     }
 
 
     @Override
     protected void updateFormedValid() {
-        if (!getWorld().isRemote && isStructureFormed())
-        {
+        if (!getWorld().isRemote && isStructureFormed()) {
 
-            if (!work&&itemIn.getStackInSlot(0).isItemEqual(new ItemStack(Blocks.SAPLING)) && logOut.getStackInSlot(0).isEmpty() && (saplingOut.getStackInSlot(0).isEmpty() || saplingOut.getStackInSlot(0).isItemEqual(new ItemStack(Blocks.SAPLING)))) {
+            if (!work && itemIn.getStackInSlot(0).isItemEqual(new ItemStack(Blocks.SAPLING)) && logOut.getStackInSlot(0).isEmpty() && (saplingOut.getStackInSlot(0).isEmpty() || saplingOut.getStackInSlot(0).isItemEqual(new ItemStack(Blocks.SAPLING)))) {
                 saplingsIn = itemIn.getStackInSlot(0).getCount();
                 numSaplingsInOutput = saplingOut.getStackInSlot(0).getCount();
                 itemIn.setStackInSlot(0, new ItemStack(Blocks.AIR));
 
                 work = true;
             }
-            if(work)
-            {
+            if (work) {
                 time++;
-                if(time==saplingsIn*200) {
+                if (time == saplingsIn * 200) {
                     logOut.setStackInSlot(0, new ItemStack(Blocks.LOG, saplingsIn));
                     if (numSaplingsInOutput + (saplingsIn * 2) <= 64) {
                         saplingOut.insertItem(0, new ItemStack(Blocks.SAPLING, saplingsIn * 2), false);
@@ -114,10 +109,10 @@ public class MetaTileEntityPrimitiveTreeFarmer extends MultiblockWithDisplayBase
                         saplingOut.setStackInSlot(0, new ItemStack(Blocks.SAPLING, 64));
                     }
 
-                    work=false;
-                    time=0;
-                    saplingsIn=0;
-                    numSaplingsInOutput=0;
+                    work = false;
+                    time = 0;
+                    saplingsIn = 0;
+                    numSaplingsInOutput = 0;
                 }
             }
 
@@ -146,25 +141,25 @@ public class MetaTileEntityPrimitiveTreeFarmer extends MultiblockWithDisplayBase
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start(RelativeDirection.RIGHT, RelativeDirection.BACK, RelativeDirection.UP)
 
-                .aisle( "BBBBBBBBBBBB",
+                .aisle("BBBBBBBBBBBB",
                         "BDDDDDDBBWBB",
                         "BDDDDDDBBWBB",
                         "BDDDDDDBBWBB",
                         "BBBSBBBBBBBB")
 
-                .aisle( "            ",
+                .aisle("            ",
                         "        IFO ",
                         "        I O ",
                         "        IFO ",
                         "            ")
 
-                .aisle( "            ",
+                .aisle("            ",
                         "        IFO ",
                         "        I O ",
                         "        IFO ",
                         "            ")
 
-                .aisle( "       WWWWW",
+                .aisle("       WWWWW",
                         "       WWWWW",
                         "       WWWWW",
                         "       WWWWW",
@@ -182,10 +177,12 @@ public class MetaTileEntityPrimitiveTreeFarmer extends MultiblockWithDisplayBase
                 .where(' ', any())
                 .build();
     }
+
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
         return GTQTTextures.BRICK;
     }
+
     public boolean hasMaintenanceMechanics() {
         return false;
     }
@@ -193,17 +190,19 @@ public class MetaTileEntityPrimitiveTreeFarmer extends MultiblockWithDisplayBase
     public boolean hasMufflerMechanics() {
         return false;
     }
+
     @Nonnull
     @Override
     protected ICubeRenderer getFrontOverlay() {
         return Textures.BLOWER_OVERLAY;
-    }    @Override
+    }
+
+    @Override
     @SideOnly(Side.CLIENT)
     public void renderMetaTileEntity(double x, double y, double z, float partialTicks) {
         IFastRenderMetaTileEntity.super.renderMetaTileEntity(x, y, z, partialTicks);
 
-        if(isStructureFormed()&& GTQTCoreConfig.OBJRenderSwitch.EnableObj && GTQTCoreConfig.OBJRenderSwitch.EnableObjPrimitiveTreeFarmer)
-        {
+        if (isStructureFormed() && GTQTCoreConfig.OBJRenderSwitch.EnableObj && GTQTCoreConfig.OBJRenderSwitch.EnableObjPrimitiveTreeFarmer) {
             final int xDir = this.getFrontFacing().getOpposite().getXOffset();
             final int zDir = this.getFrontFacing().getOpposite().getZOffset();
             //机器开启才会进行渲染
@@ -241,7 +240,7 @@ public class MetaTileEntityPrimitiveTreeFarmer extends MultiblockWithDisplayBase
     @Override
     public AxisAlignedBB getRenderBoundingBox() {
         //这个影响模型的可视范围，正常方块都是 1 1 1，长宽高各为1，当这个方块离线玩家视线后，obj模型渲染会停止，所以可以适当放大这个大小能让模型有更多角度的可视
-        return new AxisAlignedBB(getPos(),getPos().add(5,5,5));
+        return new AxisAlignedBB(getPos(), getPos().add(5, 5, 5));
     }
 
 

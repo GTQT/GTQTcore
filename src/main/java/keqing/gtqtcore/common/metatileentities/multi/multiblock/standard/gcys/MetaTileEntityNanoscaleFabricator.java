@@ -3,7 +3,6 @@ package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.gcys;
 import gregicality.multiblocks.api.render.GCYMTextures;
 import gregicality.multiblocks.common.block.GCYMMetaBlocks;
 import gregicality.multiblocks.common.block.blocks.BlockLargeMultiblockCasing;
-
 import gregtech.api.GTValues;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
@@ -11,10 +10,7 @@ import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.*;
-import gregtech.api.recipes.Recipe;
-import gregtech.api.recipes.recipeproperties.TemperatureProperty;
 import gregtech.api.util.BlockInfo;
-import gregtech.api.util.GTUtility;
 import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.common.ConfigHolder;
@@ -26,7 +22,6 @@ import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.BlockCrucible;
-import keqing.gtqtcore.common.block.blocks.BlockGCYSMultiblockCasing;
 import keqing.gtqtcore.common.block.blocks.BlockPCBFactoryCasing;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 import net.minecraft.block.Block;
@@ -203,10 +198,10 @@ public class MetaTileEntityNanoscaleFabricator extends RecipeMapMultiblockContro
             super(tileEntity);
         }
 
-       // @Override
-       // public boolean checkRecipe(@Nonnull Recipe recipe) {
-         //   int delta = temperature - recipe.getProperty(TemperatureProperty.getInstance(), 0);
-          //  return GTUtility.isBetweenInclusive(0, 250, delta);
-            //}
+        // @Override
+        // public boolean checkRecipe(@Nonnull Recipe recipe) {
+        //   int delta = temperature - recipe.getProperty(TemperatureProperty.getInstance(), 0);
+        //  return GTUtility.isBetweenInclusive(0, 250, delta);
+        //}
     }
 }

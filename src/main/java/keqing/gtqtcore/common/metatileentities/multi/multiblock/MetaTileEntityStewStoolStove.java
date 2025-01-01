@@ -40,17 +40,18 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class MetaTileEntityStewStoolStove extends MultiblockWithDisplayBase {
-    private long currentHeat = 0;
-    private long currentRecipeHeat = 0;
-    private boolean outputMode = false;
     protected IItemHandlerModifiable inputInventory;
     protected IItemHandlerModifiable outputInventory;
     protected IMultipleTankHandler inputFluidInventory;
     protected IMultipleTankHandler outputFluidInventory;
+    private long currentHeat = 0;
+    private long currentRecipeHeat = 0;
+    private boolean outputMode = false;
 
     public MetaTileEntityStewStoolStove(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId);
@@ -148,7 +149,7 @@ public class MetaTileEntityStewStoolStove extends MultiblockWithDisplayBase {
     }
 
     @Override
-    protected  BlockPattern createStructurePattern() {
+    protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
                 .aisle("XXXXX", "XYYYX", "XXXXX", "XXXXX")
                 .aisleRepeatable(3, 14, "XXXXX", "Y###Y", "X###X", "X###X")
@@ -169,16 +170,19 @@ public class MetaTileEntityStewStoolStove extends MultiblockWithDisplayBase {
     public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
         return Textures.PRIMITIVE_BRICKS;
     }
+
     @SideOnly(Side.CLIENT)
-    protected  ICubeRenderer getFrontOverlay() {
+    protected ICubeRenderer getFrontOverlay() {
         return Textures.PRIMITIVE_PUMP_OVERLAY;
     }
+
     @Override
     public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
         super.renderMetaTileEntity(renderState, translation, pipeline);
         getFrontOverlay().renderOrientedState(renderState, translation, pipeline, getFrontFacing(), true,
                 true);
     }
+
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityStewStoolStove(this.metaTileEntityId);

@@ -1,9 +1,8 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.LaserSystem;
-import net.minecraftforge.common.DimensionManager;
+
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
-import gregtech.api.capability.GregtechDataCodes;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.ModularUI;
 import gregtech.api.gui.Widget;
@@ -14,27 +13,18 @@ import gregtech.api.gui.widgets.SlotWidget;
 import gregtech.api.items.itemhandlers.GTItemStackHandler;
 import gregtech.api.metatileentity.IFastRenderMetaTileEntity;
 import gregtech.api.metatileentity.MetaTileEntity;
-import gregtech.api.metatileentity.MetaTileEntityHolder;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.MultiblockDisplayText;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
-import gregtech.api.pattern.PatternMatchContext;
-import gregtech.api.unification.material.Materials;
 import gregtech.api.util.GTTransferUtils;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.TextComponentUtil;
-import gregtech.client.particle.GTParticleManager;
 import gregtech.client.renderer.ICubeRenderer;
-import gregtech.client.renderer.texture.Textures;
-import gregtech.common.blocks.BlockMetalCasing;
-import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.GTQTCoreConfig;
-import keqing.gtqtcore.api.utils.GTQTLog;
 import keqing.gtqtcore.client.objmodels.ObjModels;
-import keqing.gtqtcore.client.particle.LaserBeamParticle;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.items.GTQTMetaItems;
@@ -45,7 +35,6 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -53,22 +42,22 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
-import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
-import static keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility.LASER_INPUT;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.MaragingSteel250;
 import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.NQ_TURBINE_CASING;
 import static net.minecraft.tileentity.TileEntity.INFINITE_EXTENT_AABB;
 
 public class MetaTileEntitySBPRC extends MetaTileEntityBaseWithControl implements IFastRenderMetaTileEntity {
+    private final ItemStackHandler containerInventory;
     int x;
     int y;
     int z;
@@ -83,29 +72,29 @@ public class MetaTileEntitySBPRC extends MetaTileEntityBaseWithControl implement
     int inputAmount;
     int outputAmount;
     int extraAmount;
-
     int timeInput;
     int timeOutput;
     int timeWeightTotal;
     int weightTotal;
-
     boolean LaserGroup;
     boolean ReflectGlass;
     boolean HighReflect;
-
-    private final ItemStackHandler containerInventory;
 
     public MetaTileEntitySBPRC(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId);
         this.containerInventory = new GTItemStackHandler(this, 3);
     }
 
+    private static IBlockState getCasingState() {
+        return GTQTMetaBlocks.TURBINE_CASING.getState(NQ_TURBINE_CASING);
+    }
+
     //第一位 1-》输入 2-》输出
     //第二位 等级
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
-        data.setBoolean("LaserGroup",LaserGroup);
-        data.setBoolean("ReflectGlass",ReflectGlass);
-        data.setBoolean("HighReflect",HighReflect);
+        data.setBoolean("LaserGroup", LaserGroup);
+        data.setBoolean("ReflectGlass", ReflectGlass);
+        data.setBoolean("HighReflect", HighReflect);
         data.setInteger("switchInput", switchInput);
         data.setInteger("switchOutput", switchOutput);
         data.setLong("inputAmount", inputAmount);
@@ -148,45 +137,36 @@ public class MetaTileEntitySBPRC extends MetaTileEntityBaseWithControl implement
 
 
         if (this.containerInventory.getStackInSlot(0).getItem() == GTQTMetaItems.GTQT_META_ITEM && this.containerInventory.getStackInSlot(0).getMetadata() == GTQTMetaItems.HIGH_REFLECT.getMetaValue()) {
-            if(!HighReflect){
+            if (!HighReflect) {
                 HighReflect = true;
-                maxLength*=2;
+                maxLength *= 2;
             }
-        }
-        else
-        {
-            if(HighReflect)
-            {
+        } else {
+            if (HighReflect) {
                 HighReflect = false;
-                maxLength/=2;
+                maxLength /= 2;
             }
         }
         if (this.containerInventory.getStackInSlot(1).getItem() == GTQTMetaItems.GTQT_META_ITEM && this.containerInventory.getStackInSlot(1).getMetadata() == GTQTMetaItems.REFLECT_GLASS.getMetaValue()) {
-            if(!ReflectGlass){
+            if (!ReflectGlass) {
                 ReflectGlass = true;
-                maxLength*=2;
+                maxLength *= 2;
             }
-        }
-        else
-        {
-            if(ReflectGlass)
-            {
+        } else {
+            if (ReflectGlass) {
                 ReflectGlass = false;
-                maxLength/=2;
+                maxLength /= 2;
             }
         }
         if (this.containerInventory.getStackInSlot(2).getItem() == GTQTMetaItems.GTQT_META_ITEM && this.containerInventory.getStackInSlot(2).getMetadata() == GTQTMetaItems.LASER_GROUP.getMetaValue()) {
-            if(!LaserGroup) {
+            if (!LaserGroup) {
                 LaserGroup = true;
-                maxLength*=2;
+                maxLength *= 2;
             }
-        }
-        else
-        {
-            if(LaserGroup)
-            {
+        } else {
+            if (LaserGroup) {
                 LaserGroup = false;
-                maxLength/=2;
+                maxLength /= 2;
             }
         }
         extraAmount = inputAmount - outputAmount;
@@ -203,7 +183,7 @@ public class MetaTileEntitySBPRC extends MetaTileEntityBaseWithControl implement
                 x = 0;
                 y = 0;
                 z = 0;
-                dim=0;
+                dim = 0;
                 return;
             }
         }
@@ -220,7 +200,7 @@ public class MetaTileEntitySBPRC extends MetaTileEntityBaseWithControl implement
                 x = 0;
                 y = 0;
                 z = 0;
-                dim=0;
+                dim = 0;
                 return;
             }
 
@@ -229,7 +209,6 @@ public class MetaTileEntitySBPRC extends MetaTileEntityBaseWithControl implement
         timeInput = 0;
         timeOutput = 0;
         timeWeightTotal = 0;
-
 
 
         //常规刷新
@@ -259,6 +238,7 @@ public class MetaTileEntitySBPRC extends MetaTileEntityBaseWithControl implement
             }
         }
     }
+
     public void setLaser(int point, long amount) {
         MetaTileEntity mte = GTUtility.getMetaTileEntity(DimensionManager.getWorld(output[point][5]), new BlockPos(output[point][1], output[point][2], output[point][3]));
         ((MetaTileEntitySBPRO) mte).setLaser(amount);
@@ -269,7 +249,7 @@ public class MetaTileEntitySBPRC extends MetaTileEntityBaseWithControl implement
         if (isOutput) {
             MetaTileEntity mte = GTUtility.getMetaTileEntity(DimensionManager.getWorld(output[point][5]), new BlockPos(output[point][1], output[point][2], output[point][3]));
             if (mte instanceof MetaTileEntitySBPRO) {
-                ((MetaTileEntitySBPRO) mte).setMachinePos(this.getPos(),this.getWorld().provider.getDimension());
+                ((MetaTileEntitySBPRO) mte).setMachinePos(this.getPos(), this.getWorld().provider.getDimension());
                 return ((MetaTileEntitySBPRO) mte).getLaser();
             } else {
                 output[point][0] = 0;
@@ -285,7 +265,7 @@ public class MetaTileEntitySBPRC extends MetaTileEntityBaseWithControl implement
         } else {
             MetaTileEntity mte = GTUtility.getMetaTileEntity(DimensionManager.getWorld(input[point][5]), new BlockPos(input[point][1], input[point][2], input[point][3]));
             if (mte instanceof MetaTileEntitySBPRI) {
-                ((MetaTileEntitySBPRI) mte).setMachinePos(this.getPos(),this.getWorld().provider.getDimension());
+                ((MetaTileEntitySBPRI) mte).setMachinePos(this.getPos(), this.getWorld().provider.getDimension());
                 return (int) ((MetaTileEntitySBPRI) mte).Laser;
             } else {
                 input[point][0] = 0;
@@ -320,10 +300,12 @@ public class MetaTileEntitySBPRC extends MetaTileEntityBaseWithControl implement
 
                     for (int j = 0; j < maxLength; j++) {
                         if (output[j][0] == 1) {
-                            if (x == output[j][1] && y == output[j][2] && z == output[j][3] &&dim==output[j][5]) return 0;
+                            if (x == output[j][1] && y == output[j][2] && z == output[j][3] && dim == output[j][5])
+                                return 0;
                         }
                         if (input[j][0] == 1) {
-                            if (x == input[j][1] && y == input[j][2] && z == input[j][3] &&dim==input[j][5]) return 0;
+                            if (x == input[j][1] && y == input[j][2] && z == input[j][3] && dim == input[j][5])
+                                return 0;
                         }
                     }
 
@@ -490,9 +472,9 @@ public class MetaTileEntitySBPRC extends MetaTileEntityBaseWithControl implement
     protected void addBody(List<ITextComponent> textList) {
         MultiblockDisplayText.builder(textList, isStructureFormed()).addCustom(tl -> {
             tl.add(new TextComponentTranslation("》》天基折射棱镜中央控制系统《《"));
-            tl.add(new TextComponentTranslation("》高敏反射层:%s",HighReflect));
-            tl.add(new TextComponentTranslation("》反射列镜面:%s",ReflectGlass));
-            tl.add(new TextComponentTranslation("》激光群优化:%s",LaserGroup));
+            tl.add(new TextComponentTranslation("》高敏反射层:%s", HighReflect));
+            tl.add(new TextComponentTranslation("》反射列镜面:%s", ReflectGlass));
+            tl.add(new TextComponentTranslation("》激光群优化:%s", LaserGroup));
             tl.add(new TextComponentTranslation(String.format("》对象上限:%s", maxLength)));
         });
     }
@@ -650,10 +632,6 @@ public class MetaTileEntitySBPRC extends MetaTileEntityBaseWithControl implement
         tooltip.add(I18n.format("最多同时管理128+128台设备"));
     }
 
-    private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.TURBINE_CASING.getState(NQ_TURBINE_CASING);
-    }
-
     @SideOnly(Side.CLIENT)
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
@@ -683,16 +661,17 @@ public class MetaTileEntitySBPRC extends MetaTileEntityBaseWithControl implement
     public boolean hasMufflerMechanics() {
         return false;
     }
+
     @Override
     public boolean shouldRenderInPass(int pass) {
         return pass == 0;
     }
+
     @SideOnly(Side.CLIENT)
     public void renderMetaTileEntity(double x, double y, double z, float partialTicks) {
         IFastRenderMetaTileEntity.super.renderMetaTileEntity(x, y, z, partialTicks);
 
-        if(isStructureFormed()&& GTQTCoreConfig.OBJRenderSwitch.EnableObj&& GTQTCoreConfig.OBJRenderSwitch.EnableObjSBPRC)
-        {
+        if (isStructureFormed() && GTQTCoreConfig.OBJRenderSwitch.EnableObj && GTQTCoreConfig.OBJRenderSwitch.EnableObjSBPRC) {
             final int xDir = this.getFrontFacing().getOpposite().getXOffset();
             final int zDir = this.getFrontFacing().getOpposite().getZOffset();
             //机器开启才会进行渲染
@@ -723,12 +702,13 @@ public class MetaTileEntitySBPRC extends MetaTileEntityBaseWithControl implement
         }
 
     }
+
     //渲染模型的位置
     @Override
-    public AxisAlignedBB getRenderBoundingBox()
-    {
+    public AxisAlignedBB getRenderBoundingBox() {
         return INFINITE_EXTENT_AABB;
     }
+
     /*
     @Override
     public double getMaxRenderDistanceSquared()

@@ -16,21 +16,16 @@ import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.MultiblockShapeInfo;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
-import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.recipes.recipeproperties.TemperatureProperty;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.TooltipHelper;
-import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.*;
 import gregtech.common.metatileentities.MetaTileEntities;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
-import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
-import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.MetaTileEntityBlazingBlastFurnace;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -81,7 +76,7 @@ public class MetaTileEntityCZPuller extends RecipeMapMultiblockController implem
         } else {
             this.czpullerTemperarure = BlockWireCoil.CoilType.CUPRONICKEL.getCoilTemperature();
         }
-            this.czpullerTemperarure += 100 * Math.max(0, GTUtility.getFloorTierByVoltage(getEnergyContainer().getInputVoltage()) - GTValues.MV);
+        this.czpullerTemperarure += 100 * Math.max(0, GTUtility.getFloorTierByVoltage(getEnergyContainer().getInputVoltage()) - GTValues.MV);
     }
 
     @Override
@@ -122,6 +117,7 @@ public class MetaTileEntityCZPuller extends RecipeMapMultiblockController implem
                 .where('C', heatingCoils())
                 .build();
     }
+
     @Override
     public List<MultiblockShapeInfo> getMatchingShapes() {
         ArrayList<MultiblockShapeInfo> shapeInfo = new ArrayList<>();
@@ -151,6 +147,7 @@ public class MetaTileEntityCZPuller extends RecipeMapMultiblockController implem
                 .forEach(entry -> shapeInfo.add(builder.where('C', entry.getKey()).build()));
         return shapeInfo;
     }
+
     @SideOnly(Side.CLIENT)
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
@@ -161,6 +158,7 @@ public class MetaTileEntityCZPuller extends RecipeMapMultiblockController implem
     public int getCurrentTemperature() {
         return this.czpullerTemperarure;
     }
+
     @Override
     public void addInformation(ItemStack stack, @Nullable World player, @Nonnull List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
@@ -169,10 +167,11 @@ public class MetaTileEntityCZPuller extends RecipeMapMultiblockController implem
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.2"));
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.3"));
     }
+
     @SideOnly(Side.CLIENT)
     @Nonnull
     @Override
-    protected ICubeRenderer getFrontOverlay(){
+    protected ICubeRenderer getFrontOverlay() {
         return Textures.POWER_SUBSTATION_OVERLAY;
     }
 }

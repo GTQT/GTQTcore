@@ -16,7 +16,6 @@ import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.common.block.blocks.BlockGCYSMultiblockCasing;
 import keqing.gtqtcore.common.block.blocks.BlockPCBFactoryCasing;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.ResourceLocation;
@@ -27,6 +26,18 @@ public class MetaTileEntityCVDUnit extends RecipeMapMultiblockController {
 
     public MetaTileEntityCVDUnit(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.CVD_RECIPES);
+    }
+
+    private static IBlockState getCasingState() {
+        return GCYMMetaBlocks.LARGE_MULTIBLOCK_CASING.getState(BlockLargeMultiblockCasing.CasingType.NONCONDUCTING_CASING);
+    }
+
+    private static IBlockState getSubstrateState() {
+        return GTQTMetaBlocks.PCB_FACTORY_CASING.getState(BlockPCBFactoryCasing.PCBFactoryCasingType.SUBSTRATE_CASING);
+    }
+
+    private static IBlockState getGlassState() {
+        return MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.TEMPERED_GLASS);
     }
 
     @Override
@@ -45,18 +56,6 @@ public class MetaTileEntityCVDUnit extends RecipeMapMultiblockController {
                 .where('G', states(getGlassState()))
                 .where('C', states(getSubstrateState()))
                 .build();
-    }
-
-    private static IBlockState getCasingState() {
-        return GCYMMetaBlocks.LARGE_MULTIBLOCK_CASING.getState(BlockLargeMultiblockCasing.CasingType.NONCONDUCTING_CASING);
-    }
-
-    private static IBlockState getSubstrateState() {
-        return GTQTMetaBlocks.PCB_FACTORY_CASING.getState(BlockPCBFactoryCasing.PCBFactoryCasingType.SUBSTRATE_CASING);
-    }
-
-    private static IBlockState getGlassState() {
-        return MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.TEMPERED_GLASS);
     }
 
     @Nonnull

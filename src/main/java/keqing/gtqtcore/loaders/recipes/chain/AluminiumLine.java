@@ -20,7 +20,7 @@ public class AluminiumLine {
                 .fluidOutputs(Aluminium.getFluid(576))
                 .fluidOutputs(Oxygen.getFluid(6000))
                 .tier(1)
-                .circuitMeta(4)
+                .circuitMeta(1)
                 .duration(1600).EUt(VA[MV]).buildAndRegister();
 
         RecipeMaps.BLAST_RECIPES.recipeBuilder()
@@ -76,7 +76,7 @@ public class AluminiumLine {
                 .fluidOutputs(Fluorine.getFluid(6000))
                 .output(dust,Alumina,5)
                 .fluidOutputs(Water.getFluid(3000))
-                .circuitMeta(4)
+                .circuitMeta(1)
                 .EUt(120)
                 .tier(1)
                 .duration(200)

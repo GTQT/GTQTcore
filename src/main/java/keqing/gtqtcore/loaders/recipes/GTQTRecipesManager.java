@@ -135,16 +135,13 @@ public class GTQTRecipesManager {
         MaterialOreChains.init();
         LubricantChains.init();
         PEEKChain.init();
-        ELE.init();
+        Electrolyzer.init();
         CPULine.init();
         GTComponents.init();
         PlatinumDeal.init();
-        DecompositionRecipeHandler.runRecipeGeneration();
         SwarmRecipeHandler.runRecipeGeneration();
         SwarmRecipeHandler.runRecipeBreeding();
         CircuitryMaterialChains.init();
-        MetaTileEntityLoader.init();
-        MetaTileEntityMachine.init();
         OilChains.init();
         DrumRecipes.init();
         PCBline.init();

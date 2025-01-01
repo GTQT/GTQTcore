@@ -11,27 +11,19 @@ import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.client.renderer.ICubeRenderer;
-import gregtech.client.renderer.texture.Textures;
 import gregtech.common.blocks.BlockBoilerCasing;
-import gregtech.common.blocks.BlockMetalCasing;
-import gregtech.common.blocks.BlockTurbineCasing;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockCore;
-import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTADVBlock;
-import keqing.gtqtcore.common.block.blocks.GTQTIsaCasing;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import static gregtech.api.GTValues.IV;
 import static gregtech.api.GTValues.VA;
 import static keqing.gtqtcore.api.GCYSValues.HV;
-import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.IRIDIUM_CASING;
-import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing1.TurbineCasingType.SA_TURBINE_CASING;
 
 public class MetaTileEntityCoreCentrifuge extends GTQTMultiblockCore {
 
@@ -42,20 +34,29 @@ public class MetaTileEntityCoreCentrifuge extends GTQTMultiblockCore {
                 RecipeMaps.THERMAL_CENTRIFUGE_RECIPES
         });
     }
+
+    private static IBlockState getCasingState() {
+        return GTQTMetaBlocks.ADV_BLOCK.getState(GTQTADVBlock.CasingType.Stellite);
+    }
+
+    private static IBlockState getSecondCasingState() {
+        return MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.POLYTETRAFLUOROETHYLENE_PIPE);
+    }
+
     @Override
-    public int getMinVa()
-    {
+    public int getMinVa() {
         return VA[HV];
     }
+
     @Override
     public int getCoreNum() {
         return 8;
     }
+
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityCoreCentrifuge(metaTileEntityId);
     }
-
 
     @Override
     protected BlockPattern createStructurePattern() {
@@ -71,14 +72,6 @@ public class MetaTileEntityCoreCentrifuge extends GTQTMultiblockCore {
                         .or(autoAbilities()))
                 .where('G', states(getSecondCasingState()))
                 .build();
-    }
-
-    private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.ADV_BLOCK.getState(GTQTADVBlock.CasingType.Stellite);
-    }
-
-    private static IBlockState getSecondCasingState() {
-        return MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.POLYTETRAFLUOROETHYLENE_PIPE);
     }
 
     @SideOnly(Side.CLIENT)

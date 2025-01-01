@@ -1,5 +1,8 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock;
 
+import codechicken.lib.render.CCRenderState;
+import codechicken.lib.render.pipeline.IVertexOperation;
+import codechicken.lib.vec.Matrix4;
 import gregtech.api.gui.ModularUI;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
@@ -16,10 +19,7 @@ import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.TooltipHelper;
 import gregtech.common.blocks.BlockMetalCasing;
-import gregtech.common.blocks.BlockSteamCasing;
 import gregtech.common.blocks.MetaBlocks;
-import gregtech.common.metatileentities.MetaTileEntities;
-
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
@@ -34,10 +34,6 @@ import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.IFluidTank;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import codechicken.lib.render.CCRenderState;
-import codechicken.lib.render.pipeline.IVertexOperation;
-import codechicken.lib.vec.Matrix4;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -63,16 +59,16 @@ public class MetaTileEntityIndustryWaterPump extends MultiblockControllerBase im
     @Override
     public void update() {
         super.update();
-        if(this.getWorld().provider.getDimension()==0&&!getWorld().isRemote && getOffsetTimer() % 20 == 0 && isStructureFormed()) {
+        if (this.getWorld().provider.getDimension() == 0 && !getWorld().isRemote && getOffsetTimer() % 20 == 0 && isStructureFormed()) {
             if (biomeModifier == 0) {
                 biomeModifier = getAmount();
             } else if (biomeModifier > 0) {
-                waterTank.fill(Materials.Water.getFluid(getFluidProduction()*4), true);
+                waterTank.fill(Materials.Water.getFluid(getFluidProduction() * 4), true);
             }
         }
-        if(this.getWorld().provider.getDimension()==-1)
+        if (this.getWorld().provider.getDimension() == -1)
             waterTank.fill(Materials.Lava.getFluid(20), true);
-        if(this.getWorld().provider.getDimension()>=2)
+        if (this.getWorld().provider.getDimension() >= 2)
             waterTank.fill(Materials.Water.getFluid(500), true);
     }
 
@@ -118,7 +114,8 @@ public class MetaTileEntityIndustryWaterPump extends MultiblockControllerBase im
     }
 
     @Override
-    protected void updateFormedValid() {}
+    protected void updateFormedValid() {
+    }
 
     @Override
     protected void formStructure(PatternMatchContext context) {
@@ -150,9 +147,9 @@ public class MetaTileEntityIndustryWaterPump extends MultiblockControllerBase im
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
-                .aisle("F*F","F*F", "FEF", "FEF", "FEF", "FEF")
-                .aisle("***","***", "EOE", "EEE", "EEE", "EEE")
-                .aisle("F*F","F*F", "FSF","FEF",  "FEF", "FEF")
+                .aisle("F*F", "F*F", "FEF", "FEF", "FEF", "FEF")
+                .aisle("***", "***", "EOE", "EEE", "EEE", "EEE")
+                .aisle("F*F", "F*F", "FSF", "FEF", "FEF", "FEF")
                 .where('S', selfPredicate())
                 .where('E', states(getCasingState()))
                 .where('F', frames(Materials.Steel))
@@ -166,6 +163,7 @@ public class MetaTileEntityIndustryWaterPump extends MultiblockControllerBase im
     public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
         return GTQTTextures.GALVANIZE_STEEL_CASING;
     }
+
     private IBlockState getCasingState() {
         return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STEEL_SOLID);
     }
@@ -192,12 +190,14 @@ public class MetaTileEntityIndustryWaterPump extends MultiblockControllerBase im
         Collections.addAll(list, LocalizationUtils.formatLines("gregtech.multiblock.primitive_water_pump.extra2"));
         return list.toArray(new String[0]);
     }
+
     @Override
     public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("原始水泵Plus（加强六倍）", new Object[0]));
         tooltip.add(I18n.format("在地狱会自己抽岩浆！"));
     }
+
     private boolean isRainingInBiome() {
         World world = getWorld();
         if (!world.isRaining()) {
@@ -208,7 +208,7 @@ public class MetaTileEntityIndustryWaterPump extends MultiblockControllerBase im
 
     @Override
     public int getFluidProduction() {
-        return (int) (biomeModifier * hatchModifier * (isRainingInBiome() ? 9 : 6));
+        return biomeModifier * hatchModifier * (isRainingInBiome() ? 9 : 6);
     }
 
     @Override

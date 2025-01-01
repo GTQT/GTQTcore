@@ -5,7 +5,6 @@ import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import keqing.gtqtcore.api.blocks.IBlockTier;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.metaileentity.multiblock.ICellData;
-import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.*;
 import net.minecraft.block.state.IBlockState;
@@ -25,7 +24,6 @@ public class GTQTAPI {
     public static final Object2ObjectOpenHashMap<IBlockState,IBlockTier> MAP_DRI_CASING= new Object2ObjectOpenHashMap<>();
     public static final Object2ObjectOpenHashMap<IBlockState,IBlockTier> MAP_QFT_SHIELDING_CORE= new Object2ObjectOpenHashMap<>();
     public static final Object2ObjectOpenHashMap<IBlockState,IBlockTier> MAP_QFT_MANIPULATOR= new Object2ObjectOpenHashMap<>();
-    public static final Object2ObjectOpenHashMap<IBlockState,IBlockTier> MAP_ESSENTIA_CELLS= new Object2ObjectOpenHashMap<>();
     public static final Object2ObjectOpenHashMap<IBlockState,IBlockTier> MAP_MACHINE_CASING= new Object2ObjectOpenHashMap<>();
     public static final Object2ObjectOpenHashMap<IBlockState,IBlockTier> MAP_GLASS= new Object2ObjectOpenHashMap<>();
     public static final Object2ObjectOpenHashMap<IBlockState,IBlockTier> MAP_LGLASS= new Object2ObjectOpenHashMap<>();
@@ -33,7 +31,6 @@ public class GTQTAPI {
     public static final Object2ObjectOpenHashMap<IBlockState,IBlockTier> MAP_CP_TUBE= new Object2ObjectOpenHashMap<>();
     public static final Object2ObjectOpenHashMap<IBlockState,IBlockTier> MAP_CP_BEAM= new Object2ObjectOpenHashMap<>();
     public static final Object2ObjectOpenHashMap<IBlockState,IBlockTier> MAP_CAL_CASING= new Object2ObjectOpenHashMap<>();
-    public static final Object2ObjectOpenHashMap<IBlockState,IBlockTier> MAP_ELE_CASING= new Object2ObjectOpenHashMap<>();
     public static final Object2ObjectOpenHashMap<IBlockState,IBlockTier> MAP_PA_CASING= new Object2ObjectOpenHashMap<>();
     public static final Object2ObjectOpenHashMap<IBlockState,IBlockTier> MAP_SP_CASING= new Object2ObjectOpenHashMap<>();
     public static final Object2ObjectOpenHashMap<IBlockState,IBlockTier> MAP_PA_INTERNAL_CASING= new Object2ObjectOpenHashMap<>();
@@ -305,18 +302,6 @@ public class GTQTAPI {
                 new WrappedIntTired(GTQTBlockComponentAssemblyLineCasing.CasingTier.OpV, 13));
         MAP_CAL_CASING.put(GTQTMetaBlocks.COMPONENT_ASSEMBLY_LINE.getState(GTQTBlockComponentAssemblyLineCasing.CasingTier.MAX),
                 new WrappedIntTired(GTQTBlockComponentAssemblyLineCasing.CasingTier.MAX, 14));
-
-
-        MAP_ELE_CASING.put(GTQTMetaBlocks.ELECTROBATH.getState(GTQTElectrobath.CasingType.I_ELECTROBATH),
-                new WrappedIntTired(GTQTElectrobath.CasingType.I_ELECTROBATH, 1));
-        MAP_ELE_CASING.put(GTQTMetaBlocks.ELECTROBATH.getState(GTQTElectrobath.CasingType.II_ELECTROBATH),
-                new WrappedIntTired(GTQTElectrobath.CasingType.II_ELECTROBATH, 2));
-        MAP_ELE_CASING.put(GTQTMetaBlocks.ELECTROBATH.getState(GTQTElectrobath.CasingType.III_ELECTROBATH),
-                new WrappedIntTired(GTQTElectrobath.CasingType.III_ELECTROBATH, 3));
-        MAP_ELE_CASING.put(GTQTMetaBlocks.ELECTROBATH.getState(GTQTElectrobath.CasingType.IV_ELECTROBATH),
-                new WrappedIntTired(GTQTElectrobath.CasingType.IV_ELECTROBATH, 4));
-        MAP_ELE_CASING.put(GTQTMetaBlocks.ELECTROBATH.getState(GTQTElectrobath.CasingType.V_ELECTROBATH),
-                new WrappedIntTired(GTQTElectrobath.CasingType.V_ELECTROBATH, 5));
 
         MAP_DRI_CASING.put(GTQTMetaBlocks.ELECTROBATH.getState(GTQTElectrobath.CasingType.DRILL_HEAD_LV),
                 new WrappedIntTired(GTQTElectrobath.CasingType.DRILL_HEAD_LV, 1));

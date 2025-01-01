@@ -34,15 +34,29 @@ public class MetaTileEntityIndustrialWireMill extends GTQTMultiblockCore {
     public MetaTileEntityIndustrialWireMill(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{RecipeMaps.WIREMILL_RECIPES});
     }
+
+    private static IBlockState getFrameState() {
+        return MetaBlocks.FRAMES.get(GTQTMaterials.MaragingSteel250).getBlock(GTQTMaterials.MaragingSteel250);
+    }
+
+    private static IBlockState getCasingState() {
+        return GTQTMetaBlocks.TURBINE_CASING.getState(NQ_TURBINE_CASING);
+    }
+
+    private static IBlockState getSecondCasingState() {
+        return GTQTMetaBlocks.TURBINE_CASING.getState(NQ_MACHINE_CASING);
+    }
+
     @Override
-    public int getMinVa()
-    {
+    public int getMinVa() {
         return VA[IV];
     }
+
     @Override
     public int getCoreNum() {
         return 16;
     }
+
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityIndustrialWireMill(metaTileEntityId);
@@ -51,10 +65,10 @@ public class MetaTileEntityIndustrialWireMill extends GTQTMultiblockCore {
     @Override
     protected BlockPattern createStructurePattern() {
         FactoryBlockPattern pattern = FactoryBlockPattern.start(FRONT, UP, RIGHT)
-                .aisle( "FFF","CCC", "CCC", "CCC")
-                .aisle( "F F","CCC", "SGC", "FFF")
-                .aisle( "F F","CCC", "IGC", "FFF").setRepeatable(3,10)
-                .aisle( "FFF","CCC", "CCC", "CCC")
+                .aisle("FFF", "CCC", "CCC", "CCC")
+                .aisle("F F", "CCC", "SGC", "FFF")
+                .aisle("F F", "CCC", "IGC", "FFF").setRepeatable(3, 10)
+                .aisle("FFF", "CCC", "CCC", "CCC")
                 .where('P', states(getCasingState()))
                 .where('I', abilities(MultiblockAbility.IMPORT_ITEMS))
                 .where('S', this.selfPredicate())
@@ -67,16 +81,6 @@ public class MetaTileEntityIndustrialWireMill extends GTQTMultiblockCore {
                 .where(' ', any())
                 .where('F', states(getFrameState()));
         return pattern.build();
-    }
-    private static IBlockState getFrameState() {
-        return MetaBlocks.FRAMES.get(GTQTMaterials.MaragingSteel250).getBlock(GTQTMaterials.MaragingSteel250);
-    }
-    private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.TURBINE_CASING.getState(NQ_TURBINE_CASING);
-    }
-
-    private static IBlockState getSecondCasingState() {
-        return GTQTMetaBlocks.TURBINE_CASING.getState(NQ_MACHINE_CASING);
     }
 
     @SideOnly(Side.CLIENT)
@@ -97,6 +101,7 @@ public class MetaTileEntityIndustrialWireMill extends GTQTMultiblockCore {
         this.getFrontOverlay().renderOrientedState(renderState, translation, pipeline, getFrontFacing(), this.recipeMapWorkable.isWorkingEnabled(),
                 isActive());
     }
+
     @SideOnly(Side.CLIENT)
     @Override
     protected ICubeRenderer getFrontOverlay() {

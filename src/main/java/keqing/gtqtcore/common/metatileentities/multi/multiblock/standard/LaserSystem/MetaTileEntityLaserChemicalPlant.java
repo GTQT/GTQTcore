@@ -8,14 +8,9 @@ import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.TraceabilityPredicate;
 import gregtech.api.recipes.Recipe;
-import gregtech.api.recipes.recipeproperties.TemperatureProperty;
 import gregtech.api.unification.material.Materials;
-import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
-import gregtech.client.utils.TooltipHelper;
-import gregtech.common.blocks.BlockGlassCasing;
-import gregtech.common.blocks.MetaBlocks;
 import gregtech.core.sound.GTSoundEvents;
 import keqing.gtqtcore.api.capability.chemical_plant.ChemicalPlantProperties;
 import keqing.gtqtcore.api.capability.impl.MultiblockLaserRecipeLogic;
@@ -33,15 +28,12 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
-import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
-
 import java.util.List;
 
-import static keqing.gtqtcore.api.unification.GTQTMaterials.Pyrotheum;
 import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.NQ_MACHINE_CASING;
 import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.NQ_TURBINE_CASING;
 
@@ -51,6 +43,7 @@ public class MetaTileEntityLaserChemicalPlant extends RecipeMapLaserMultiblockCo
         super(metaTileEntityId, GTQTcoreRecipeMaps.CHEMICAL_PLANT);
         this.recipeMapWorkable = new MultiblockLaserRecipeLogic(this);
     }
+
     private static IBlockState getUniqueCasingState() {
         return GTQTMetaBlocks.TURBINE_CASING.getState(NQ_TURBINE_CASING);
     }
@@ -66,6 +59,7 @@ public class MetaTileEntityLaserChemicalPlant extends RecipeMapLaserMultiblockCo
     private static IBlockState getSecondCasingState() {
         return GTQTMetaBlocks.TURBINE_CASING.getState(GTQTTurbineCasing.TurbineCasingType.ADVANCED_FILTER_CASING);
     }
+
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
@@ -129,18 +123,21 @@ public class MetaTileEntityLaserChemicalPlant extends RecipeMapLaserMultiblockCo
     public SoundEvent getBreakdownSound() {
         return GTSoundEvents.BREAKDOWN_ELECTRICAL;
     }
+
     @Override
     public boolean checkRecipe(@Nonnull Recipe recipe, boolean consumeIfSuccess) {
-        if(!super.checkRecipe(recipe, consumeIfSuccess))return false;
-        return (int)((long) this.getTemp() /1800) >= recipe.getProperty(ChemicalPlantProperties.getInstance(), 0);
+        if (!super.checkRecipe(recipe, consumeIfSuccess)) return false;
+        return (int) ((long) this.getTemp() / 1800) >= recipe.getProperty(ChemicalPlantProperties.getInstance(), 0);
     }
+
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         if (isStructureFormed()) {
             super.addDisplayText(textList);
-            textList.add(new TextComponentTranslation("激光转换化工厂等级：%s",(int)((long) this.getTemp() /1800) ));
+            textList.add(new TextComponentTranslation("激光转换化工厂等级：%s", (int) ((long) this.getTemp() / 1800)));
         }
     }
+
     @Override
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, World world, List<String> tooltip, boolean advanced) {

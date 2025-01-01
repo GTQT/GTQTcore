@@ -1,7 +1,5 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.LaserSystem;
 
-import gregtech.api.capability.IEnergyContainer;
-import gregtech.api.capability.impl.EnergyContainerList;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.ModularUI;
 import gregtech.api.gui.Widget;
@@ -10,7 +8,6 @@ import gregtech.api.gui.widgets.ClickButtonWidget;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
-import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.MultiblockDisplayText;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
@@ -23,7 +20,6 @@ import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
 import keqing.gtqtcore.api.capability.ILaser;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.common.block.blocks.GTQTMultiblockCasing;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.MetaTileEntityBaseWithControl;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
@@ -31,8 +27,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
@@ -41,13 +35,11 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
-
 import java.util.Collections;
 import java.util.List;
 
 import static gregtech.api.GTValues.V;
 import static gregtech.api.GTValues.VN;
-import static gregtech.api.metatileentity.multiblock.MultiblockAbility.OUTPUT_ENERGY;
 import static keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility.LASER_INPUT;
 import static keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility.LASER_OUTPUT;
 import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.NQ_TURBINE_CASING;
@@ -68,6 +60,12 @@ public class MetaTileEntitySwitch extends MetaTileEntityBaseWithControl {
         super(metaTileEntityId);
     }
 
+    private static IBlockState getCasingState() {
+        return GTQTMetaBlocks.TURBINE_CASING.getState(NQ_TURBINE_CASING);
+    }
+
+    //第一位 1-》输入 2-》输出
+    //第二位 等级
 
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("inputNum", inputNum);
@@ -83,9 +81,6 @@ public class MetaTileEntitySwitch extends MetaTileEntityBaseWithControl {
         }
         return super.writeToNBT(data);
     }
-
-    //第一位 1-》输入 2-》输出
-    //第二位 等级
 
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
@@ -126,7 +121,7 @@ public class MetaTileEntitySwitch extends MetaTileEntityBaseWithControl {
         if (Laser != l) Laser = l;
         if (Cost != c) Cost = c;
 
-        More=Laser-Cost;
+        More = Laser - Cost;
         for (int p = inputNum; p < inputNum + outputNum; p++) {
             if (Se[p] > La[p] && More > 0) {
                 if (More > Se[p] - La[p]) {
@@ -140,8 +135,8 @@ public class MetaTileEntitySwitch extends MetaTileEntityBaseWithControl {
         }
         if (More < 0) {
             for (int p = inputNum; p < inputNum + outputNum; p++) {
-                if(More>=0)return;
-                if (Math.abs(More)  <= La[p]) {
+                if (More >= 0) return;
+                if (Math.abs(More) <= La[p]) {
                     this.getAbilities(LASER_OUTPUT).get(p - inputNum).setLaser(La[p] + More);
                     More = 0;
                     return;
@@ -307,8 +302,7 @@ public class MetaTileEntitySwitch extends MetaTileEntityBaseWithControl {
     private void incrementThresholdV(Widget.ClickData clickData) {
         if (circuit < inputNum) this.getAbilities(LASER_INPUT).get(circuit).addVoltage(1);
         else if (circuit < inputNum + outputNum) {
-            if (More >= this.getAbilities(LASER_OUTPUT).get(circuit - inputNum).Voltage() * 4L)
-            {
+            if (More >= this.getAbilities(LASER_OUTPUT).get(circuit - inputNum).Voltage() * 4L) {
                 this.getAbilities(LASER_OUTPUT).get(circuit - inputNum).addVoltage(1);
                 this.getAbilities(LASER_OUTPUT).get(circuit - inputNum).setLaser(this.getAbilities(LASER_OUTPUT).get(circuit - inputNum).Amperage() * V[this.getAbilities(LASER_OUTPUT).get(circuit - inputNum).Voltage()]);
             }
@@ -323,8 +317,7 @@ public class MetaTileEntitySwitch extends MetaTileEntityBaseWithControl {
     private void incrementThresholdA(Widget.ClickData clickData) {
         if (circuit < inputNum) this.getAbilities(LASER_INPUT).get(circuit).addAmperage(1);
         else if (circuit < inputNum + outputNum) {
-            if (More >= this.getAbilities(LASER_OUTPUT).get(circuit - inputNum).Voltage())
-            {
+            if (More >= this.getAbilities(LASER_OUTPUT).get(circuit - inputNum).Voltage()) {
                 this.getAbilities(LASER_OUTPUT).get(circuit - inputNum).addAmperage(1);
                 this.getAbilities(LASER_OUTPUT).get(circuit - inputNum).setLaser(this.getAbilities(LASER_OUTPUT).get(circuit - inputNum).Amperage() * V[this.getAbilities(LASER_OUTPUT).get(circuit - inputNum).Voltage()]);
             }
@@ -342,7 +335,7 @@ public class MetaTileEntitySwitch extends MetaTileEntityBaseWithControl {
         textList.add(new TextComponentTranslation("输入激光能量:%s", Laser));
         textList.add(new TextComponentTranslation("输出激光能量:%s", Cost));
         textList.add(new TextComponentTranslation("盈余激光能量:%s", More));
-        textList.add(new TextComponentTranslation("激光输入：%s 激光输出：%s", inputNum,outputNum));
+        textList.add(new TextComponentTranslation("激光输入：%s 激光输出：%s", inputNum, outputNum));
     }
 
     @Override
@@ -361,6 +354,7 @@ public class MetaTileEntitySwitch extends MetaTileEntityBaseWithControl {
         textList.add(new TextComponentTranslation("阈值：%s %s", Se[circuit], VN[GTUtility.getTierByVoltage(Se[circuit])]));
         textList.add(new TextComponentTranslation("极值：%s %s", Ma[circuit], VN[GTUtility.getTierByVoltage(Ma[circuit])]));
     }
+
     @Override
     public void addInformation(ItemStack stack, World world, List<String> tooltip,
                                boolean advanced) {
@@ -390,10 +384,6 @@ public class MetaTileEntitySwitch extends MetaTileEntityBaseWithControl {
 
     public boolean hasMufflerMechanics() {
         return false;
-    }
-
-    private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.TURBINE_CASING.getState(NQ_TURBINE_CASING);
     }
 
     @SideOnly(Side.CLIENT)

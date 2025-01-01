@@ -18,7 +18,6 @@ import gregtech.common.blocks.BlockMetalCasing.MetalCasingType;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityFluidHatch;
 import keqing.gtqtcore.api.capability.IHeat;
-import keqing.gtqtcore.api.capability.impl.HeatRecipeLogic;
 import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
 import keqing.gtqtcore.api.metaileentity.multiblock.RecipeMapHeatMultiblockController;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
@@ -30,6 +29,7 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 
+import javax.annotation.Nonnull;
 import java.util.Collections;
 import java.util.List;
 
@@ -127,6 +127,7 @@ public class MetaTileEntityDistillationKettle extends RecipeMapHeatMultiblockCon
         return Textures.BLAST_FURNACE_OVERLAY;
     }
 
+    @Nonnull
     @Override
     public List<ITextComponent> getDataInfo() {
         return Collections.emptyList();

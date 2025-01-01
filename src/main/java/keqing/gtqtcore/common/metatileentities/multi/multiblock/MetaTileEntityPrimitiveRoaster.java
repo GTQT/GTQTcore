@@ -5,12 +5,9 @@ import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.texture.TextureUtils;
 import codechicken.lib.vec.Cuboid6;
 import codechicken.lib.vec.Matrix4;
-import gregicality.multiblocks.common.block.GCYMMetaBlocks;
-import gregicality.multiblocks.common.block.blocks.BlockUniqueCasing;
 import gregtech.api.GTValues;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.ModularUI;
-import gregtech.api.gui.resources.IGuiTexture;
 import gregtech.api.gui.widgets.*;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
@@ -19,9 +16,7 @@ import gregtech.api.metatileentity.multiblock.RecipeMapPrimitiveMultiblockContro
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.TraceabilityPredicate;
-import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.material.Materials;
-import gregtech.api.util.GTUtility;
 import gregtech.api.util.RelativeDirection;
 import gregtech.client.renderer.CubeRendererState;
 import gregtech.client.renderer.ICubeRenderer;
@@ -29,20 +24,16 @@ import gregtech.client.renderer.cclop.ColourOperation;
 import gregtech.client.renderer.cclop.LightMapOperation;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.BloomEffectUtil;
-import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.SoundEvents;
-import net.minecraft.util.*;
-import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import org.apache.commons.lang3.ArrayUtils;
-
 
 import javax.annotation.Nonnull;
 
@@ -77,7 +68,7 @@ public class MetaTileEntityPrimitiveRoaster extends RecipeMapPrimitiveMultiblock
                         "#C#")
                 .where('S', selfPredicate())
                 .where('#', TraceabilityPredicate.ANY)
-                .where(' ',TraceabilityPredicate.AIR)
+                .where(' ', TraceabilityPredicate.AIR)
                 .where('C', states(MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.PRIMITIVE_BRICKS)))
                 .where('H', states(MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.PRIMITIVE_BRICKS))
                         .or(autoAbilities()))
@@ -95,7 +86,7 @@ public class MetaTileEntityPrimitiveRoaster extends RecipeMapPrimitiveMultiblock
                         .setBackgroundTexture(GuiTextures.PRIMITIVE_LARGE_FLUID_TANK)
                         .setOverlayTexture(GuiTextures.PRIMITIVE_LARGE_FLUID_TANK_OVERLAY)
                         .setContainerClicking(true, true))
-                .widget(new LabelWidget(5, 5, this.getMetaFullName(), new Object[0]))
+                .widget(new LabelWidget(5, 5, this.getMetaFullName()))
                 .widget((new SlotWidget(this.importItems, 0, 52, 25, true, true))
                         .setBackgroundTexture(GuiTextures.PRIMITIVE_SLOT, GuiTextures.PRIMITIVE_FURNACE_OVERLAY))
                 .widget((new SlotWidget(this.importItems, 1, 52, 45, true, true))
@@ -158,15 +149,15 @@ public class MetaTileEntityPrimitiveRoaster extends RecipeMapPrimitiveMultiblock
     private void pollutionParticles() {
         BlockPos pos = this.getPos();
         EnumFacing facing = this.getFrontFacing().getOpposite();
-        float xPos = (float)facing.getXOffset() * 0.76F + (float)pos.getX() + 0.5F;
-        float yPos = (float)facing.getYOffset() * 0.76F + (float)pos.getY() + 0.25F;
-        float zPos = (float)facing.getZOffset() * 0.76F + (float)pos.getZ() + 0.5F;
-        float ySpd = (float)facing.getYOffset() * 0.1F + 0.2F + 0.1F * GTValues.RNG.nextFloat();
+        float xPos = (float) facing.getXOffset() * 0.76F + (float) pos.getX() + 0.5F;
+        float yPos = (float) facing.getYOffset() * 0.76F + (float) pos.getY() + 0.25F;
+        float zPos = (float) facing.getZOffset() * 0.76F + (float) pos.getZ() + 0.5F;
+        float ySpd = (float) facing.getYOffset() * 0.1F + 0.2F + 0.1F * GTValues.RNG.nextFloat();
         arunMufflerEffect(xPos, yPos, zPos, 0, ySpd, 0);
     }
 
     public void arunMufflerEffect(float xPos, float yPos, float zPos, float xSpd, float ySpd, float zSpd) {
-        this.getWorld().spawnParticle(EnumParticleTypes.SMOKE_LARGE, (double)xPos, (double)yPos, (double)zPos, (double)xSpd, (double)ySpd, (double)zSpd, new int[0]);
+        this.getWorld().spawnParticle(EnumParticleTypes.SMOKE_LARGE, xPos, yPos, zPos, xSpd, ySpd, zSpd);
     }
 
 }

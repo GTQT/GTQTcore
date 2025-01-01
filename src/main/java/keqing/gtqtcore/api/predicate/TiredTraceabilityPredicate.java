@@ -47,9 +47,6 @@ public class TiredTraceabilityPredicate {
 
      public static Supplier<TierTraceabilityPredicate> CP_SP_CASING = () -> new  TierTraceabilityPredicate(MAP_SP_CASING,
             Comparator.comparing((s) -> ((WrappedIntTired)MAP_SP_CASING.get(s)).getIntTier()), "SP", null);
-
-     public static Supplier<TierTraceabilityPredicate> CP_ELE_CASING= () -> new TierTraceabilityPredicate(MAP_ELE_CASING,
-            Comparator.comparing((s) -> ((WrappedIntTired)MAP_ELE_CASING.get(s)).getIntTier()),"Ele",null);
      public static Supplier<TierTraceabilityPredicate> CP_DRI_CASING= () -> new TierTraceabilityPredicate(MAP_DRI_CASING,
             Comparator.comparing((s) -> ((WrappedIntTired)MAP_DRI_CASING.get(s)).getIntTier()),"Dri",null);
      public static Supplier<TierTraceabilityPredicate> MACHINE_CASINGS= () -> new TierTraceabilityPredicate(MAP_MACHINE_CASING,"MachineCasingType",null);

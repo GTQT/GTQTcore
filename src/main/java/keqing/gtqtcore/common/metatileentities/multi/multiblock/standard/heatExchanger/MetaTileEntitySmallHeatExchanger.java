@@ -56,6 +56,7 @@ public class MetaTileEntitySmallHeatExchanger extends NoEnergyMultiblockControll
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {
         return new MetaTileEntitySmallHeatExchanger(metaTileEntityId);
     }
+
     @SideOnly(Side.CLIENT)
     @Nonnull
     @Override
@@ -98,7 +99,7 @@ public class MetaTileEntitySmallHeatExchanger extends NoEnergyMultiblockControll
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
         if (isStructureFormed()) {
-            HeatExchangerRecipeLogic logic = (HeatExchangerRecipeLogic)recipeMapWorkable;
+            HeatExchangerRecipeLogic logic = (HeatExchangerRecipeLogic) recipeMapWorkable;
             textList.add(new TextComponentTranslation("gtqtcore.machine.heat_exchanger.rate." + logic.isSuperheat(), logic.getRate()));
             int efficiency = (int) Math.ceil(logic.getHeatEfficiency() * (40 + 0.6 * thresholdPercentage));
             textList.add(new TextComponentTranslation("gtqtcore.machine.heat_exchanger.efficiency",
@@ -149,7 +150,7 @@ public class MetaTileEntitySmallHeatExchanger extends NoEnergyMultiblockControll
         return super.writeToNBT(data);
     }
 
-   
+
     public void readFromNBT(NBTTagCompound data) {
         thresholdPercentage = data.getInteger("ThresholdPercentage");
         super.readFromNBT(data);

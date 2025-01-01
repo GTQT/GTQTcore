@@ -18,7 +18,7 @@ import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.util.TextFormattingUtil;
 import gregtech.common.ConfigHolder;
-import keqing.gtqtcore.api.capability.impl.HeatRecipeLogic;
+import keqing.gtqtcore.api.capability.impl.BaseHeatRecipeLogic;
 import keqing.gtqtcore.api.recipes.properties.HeatProperty;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
@@ -35,6 +35,8 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
+
+import static gregtech.api.GTValues.V;
 
 public abstract class RecipeMapHeatMultiblockController extends MultiblockWithDisplayBase implements IDataInfoProvider, ICleanroomReceiver, IDistinctBusController {
 
@@ -92,7 +94,6 @@ public abstract class RecipeMapHeatMultiblockController extends MultiblockWithDi
         resetTileAbilities();
         this.recipeMapWorkable.invalidate();
     }
-
 
     public IItemHandlerModifiable getInputInventory() {
         return inputInventory;
@@ -290,4 +291,22 @@ public abstract class RecipeMapHeatMultiblockController extends MultiblockWithDi
     public void setCleanroom(ICleanroomProvider provider) {
         this.cleanroom = provider;
     }
+
+    protected class HeatRecipeLogic extends BaseHeatRecipeLogic {
+
+        public HeatRecipeLogic(RecipeMapHeatMultiblockController tileEntity, RecipeMap<?> recipeMap) {
+            super(tileEntity, recipeMap);
+        }
+
+        @Override
+        public long getMaxVoltage() {
+            return V[tier];
+        }
+
+        @Override
+        public long getMaximumOverclockVoltage() {
+            return heat;
+        }
+    }
+
 }

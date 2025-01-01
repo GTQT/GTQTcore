@@ -6,11 +6,6 @@ import codechicken.lib.texture.TextureUtils;
 import codechicken.lib.vec.Cuboid6;
 import codechicken.lib.vec.Matrix4;
 import gregtech.api.GTValues;
-import gregtech.api.capability.IMultipleTankHandler;
-import gregtech.api.gui.GuiTextures;
-import gregtech.api.gui.Widget;
-import gregtech.api.gui.widgets.ClickButtonWidget;
-import gregtech.api.gui.widgets.WidgetGroup;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
@@ -19,7 +14,6 @@ import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.TraceabilityPredicate;
 import gregtech.api.util.GTUtility;
-import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.particle.VanillaParticleEffects;
 import gregtech.client.renderer.CubeRendererState;
 import gregtech.client.renderer.ICubeRenderer;
@@ -29,9 +23,7 @@ import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.BloomEffectUtil;
 import gregtech.client.utils.TooltipHelper;
 import gregtech.common.ConfigHolder;
-import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
-import keqing.gtqtcore.api.capability.impl.NoEnergyMultiblockRecipeLogic;
 import keqing.gtqtcore.api.metaileentity.multiblock.NoEnergyMultiblockController;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
@@ -42,25 +34,30 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
-import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.commons.lang3.ArrayUtils;
 
-import javax.annotation.Nonnull;
 import java.util.List;
 
-import static gregtech.api.unification.material.Materials.*;
-import static keqing.gtqtcore.api.unification.GTQTMaterials.Demulsifier;
+import static gregtech.api.unification.material.Materials.Steel;
+
 public class MetaTileEntityOilPool extends NoEnergyMultiblockController {
+
+    private static final TraceabilityPredicate SNOW_PREDICATE = new TraceabilityPredicate(
+            bws -> GTUtility.isBlockSnow(bws.getBlockState()));
+
+    public MetaTileEntityOilPool(ResourceLocation metaTileEntityId) {
+        super(metaTileEntityId, GTQTcoreRecipeMaps.OIL_POOL);
+    }
+
+    private static IBlockState getFrameState() {
+        return MetaBlocks.FRAMES.get(Steel).getBlock(Steel);
+    }
 
     @Override
     public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
@@ -69,9 +66,9 @@ public class MetaTileEntityOilPool extends NoEnergyMultiblockController {
                 recipeMapWorkable.isActive(), recipeMapWorkable.isWorkingEnabled());
         if (recipeMapWorkable.isActive() && isStructureFormed()) {
             EnumFacing back = getFrontFacing().getOpposite();
-            for(float i=-1;i<=1;i++) {
-                for (float j = -1; j <=1; j++) {
-                    Matrix4 offset = translation.copy().translate(back.getXOffset() * 2+i, -0.3, back.getZOffset() * 2+j);
+            for (float i = -1; i <= 1; i++) {
+                for (float j = -1; j <= 1; j++) {
+                    Matrix4 offset = translation.copy().translate(back.getXOffset() * 2 + i, -0.3, back.getZOffset() * 2 + j);
                     CubeRendererState op = Textures.RENDER_STATE.get();
                     Textures.RENDER_STATE.set(new CubeRendererState(op.layer, CubeRendererState.PASS_MASK, op.world));
                     Textures.renderFace(renderState, offset,
@@ -84,14 +81,11 @@ public class MetaTileEntityOilPool extends NoEnergyMultiblockController {
         }
     }
 
-    public MetaTileEntityOilPool(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, GTQTcoreRecipeMaps.OIL_POOL);
-    }
-
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityOilPool(metaTileEntityId);
     }
+
     @Override
     public void update() {
         super.update();
@@ -104,6 +98,7 @@ public class MetaTileEntityOilPool extends NoEnergyMultiblockController {
             }
         }
     }
+
     private void damageEntitiesAndBreakSnow() {
         BlockPos middlePos = this.getPos();
         middlePos = middlePos.offset(getFrontFacing().getOpposite());
@@ -124,22 +119,20 @@ public class MetaTileEntityOilPool extends NoEnergyMultiblockController {
                     EnumParticleTypes.FLAME);
             if (ConfigHolder.machines.machineSounds && GTValues.RNG.nextDouble() < 0.1) {
                 BlockPos pos = getPos();
-                getWorld().playSound(pos.getX()*2 + 0.5F, pos.getY()*2 + 0.5F, pos.getZ() + 0.5F,
+                getWorld().playSound(pos.getX() * 2 + 0.5F, pos.getY() * 2 + 0.5F, pos.getZ() + 0.5F,
                         SoundEvents.BLOCK_FURNACE_FIRE_CRACKLE, SoundCategory.BLOCKS, 1.0F, 1.0F, false);
             }
         }
     }
 
-    private static final TraceabilityPredicate SNOW_PREDICATE = new TraceabilityPredicate(
-            bws -> GTUtility.isBlockSnow(bws.getBlockState()));
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
-                .aisle("F###F","XXXXX", "XXXXX")
-                .aisle("###XU","XXXXX", "I###X")
-                .aisle("#XXXU","XXXXX", "I#&#X")
-                .aisle("###XU","XXXXX", "I###X")
-                .aisle("F###F","XXXXX", "XXYXX")
+                .aisle("F###F", "XXXXX", "XXXXX")
+                .aisle("###XU", "XXXXX", "I###X")
+                .aisle("#XXXU", "XXXXX", "I#&#X")
+                .aisle("###XU", "XXXXX", "I###X")
+                .aisle("F###F", "XXXXX", "XXYXX")
                 .where('F', states(getFrameState()))
                 .where('X', states(GTQTMetaBlocks.TURBINE_CASING1.getState(GTQTTurbineCasing1.TurbineCasingType.GALVANIZE_STEEL_CASING))
                         .or(abilities(MultiblockAbility.IMPORT_ITEMS))
@@ -160,9 +153,7 @@ public class MetaTileEntityOilPool extends NoEnergyMultiblockController {
     public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
         return GTQTTextures.GALVANIZE_STEEL_CASING;
     }
-    private static IBlockState getFrameState() {
-        return MetaBlocks.FRAMES.get(Steel).getBlock(Steel);
-    }
+
     @Override
     public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);

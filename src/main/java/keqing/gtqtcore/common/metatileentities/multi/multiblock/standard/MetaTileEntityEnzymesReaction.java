@@ -59,6 +59,7 @@ public class MetaTileEntityEnzymesReaction extends MultiMapMultiblockController 
     private int clean_tier;
     private int tubeTier;
     private double PH = 7;
+
     public MetaTileEntityEnzymesReaction(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{
                 GTQTcoreRecipeMaps.ENZYMES_REACTION_RECIPES
@@ -300,6 +301,7 @@ public class MetaTileEntityEnzymesReaction extends MultiMapMultiblockController 
         FluidStack BIO3 = Enzymesc.getFluid(1000);
         FluidStack BIO4 = Enzymesd.getFluid(1000);
         FluidStack BIO5 = Enzymese.getFluid(1000);
+
         public BiologicalReactionLogic(RecipeMapMultiblockController tileEntity) {
             super(tileEntity, true);
         }

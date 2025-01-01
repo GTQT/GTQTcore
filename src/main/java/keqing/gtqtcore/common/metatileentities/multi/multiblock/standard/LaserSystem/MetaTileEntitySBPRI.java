@@ -14,20 +14,15 @@ import gregtech.api.metatileentity.multiblock.MultiblockDisplayText;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
-import gregtech.api.unification.material.Materials;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.TextComponentUtil;
 import gregtech.client.particle.GTParticleManager;
 import gregtech.client.renderer.ICubeRenderer;
-import gregtech.client.renderer.texture.Textures;
-import gregtech.common.blocks.BlockMetalCasing;
-import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.capability.ILaser;
 import keqing.gtqtcore.client.particle.LaserBeamParticle;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.MetaTileEntityBaseWithControl;
-import net.minecraft.block.BlockIce;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
@@ -67,28 +62,32 @@ public class MetaTileEntitySBPRI extends MetaTileEntityBaseWithControl {
 
     BlockPos TargetPos;
     boolean findTarget = false;
-    public void setMachinePos(BlockPos pos,int dim)
-    {
-        findTarget=true;
-        TargetPos=pos;
-        this.dim=dim;
-    }
 
     public MetaTileEntitySBPRI(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId);
+    }
+
+    private static IBlockState getCasingState() {
+        return GTQTMetaBlocks.TURBINE_CASING.getState(NQ_TURBINE_CASING);
+    }
+
+    public void setMachinePos(BlockPos pos, int dim) {
+        findTarget = true;
+        TargetPos = pos;
+        this.dim = dim;
     }
 
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("length", length);
         data.setLong("Laser", Laser);
         data.setInteger("circuit", circuit);
-        data.setInteger("dim",dim);
+        data.setInteger("dim", dim);
         for (int i = 0; i < 6; i++) {
             data.setLong("La" + i, La[i]);
             data.setLong("Se" + i, Se[i]);
             data.setLong("Ma" + i, Ma[i]);
         }
-        if(TargetPos!=null) {
+        if (TargetPos != null) {
             data.setInteger("X1", TargetPos.getX());
             data.setInteger("Y1", TargetPos.getY());
             data.setInteger("Z1", TargetPos.getZ());
@@ -101,27 +100,25 @@ public class MetaTileEntitySBPRI extends MetaTileEntityBaseWithControl {
         length = data.getInteger("length");
         Laser = data.getLong("Laser");
         circuit = data.getInteger("circuit");
-        dim=data.getInteger("dim");
+        dim = data.getInteger("dim");
         for (int i = 0; i < 6; i++) {
             La[i] = data.getLong("La" + i);
             Se[i] = data.getLong("Se" + i);
             Ma[i] = data.getLong("Ma" + i);
         }
-        TargetPos= new BlockPos(data.getInteger("X1"), data.getInteger("Y1"), data.getInteger("Z1"));
+        TargetPos = new BlockPos(data.getInteger("X1"), data.getInteger("Y1"), data.getInteger("Z1"));
     }
 
     @Override
     protected void updateFormedValid() {
         MetaTileEntity mte = GTUtility.getMetaTileEntity(DimensionManager.getWorld(dim), TargetPos);
         if (mte instanceof MetaTileEntitySBPRC && ((MetaTileEntitySBPRC) mte).isStructureFormed()) {
-            findTarget=true;
+            findTarget = true;
             writeCustomData(GregtechDataCodes.UPDATE_PARTICLE, this::writeParticles);
-        }
-        else
-        {
-            findTarget=false;
-            TargetPos=null;
-            dim=0;
+        } else {
+            findTarget = false;
+            TargetPos = null;
+            dim = 0;
         }
 
         l = 0;
@@ -143,7 +140,7 @@ public class MetaTileEntitySBPRI extends MetaTileEntityBaseWithControl {
         this.length = i.size();
 
         for (p = 0; p < length; p++) {
-           io[p][0] = 1;
+            io[p][0] = 1;
         }
     }
 
@@ -323,16 +320,12 @@ public class MetaTileEntitySBPRI extends MetaTileEntityBaseWithControl {
                 .build();
     }
 
-
-    private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.TURBINE_CASING.getState(NQ_TURBINE_CASING);
-    }
-
     @SideOnly(Side.CLIENT)
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
         return GTQTTextures.NQ_CASING;
     }
+
     @Nonnull
     @Override
     protected ICubeRenderer getFrontOverlay() {
@@ -348,6 +341,7 @@ public class MetaTileEntitySBPRI extends MetaTileEntityBaseWithControl {
     public List<ITextComponent> getDataInfo() {
         return Collections.emptyList();
     }
+
     @Override
     public void addInformation(ItemStack stack, World world, List<String> tooltip,
                                boolean advanced) {
@@ -355,6 +349,7 @@ public class MetaTileEntitySBPRI extends MetaTileEntityBaseWithControl {
         tooltip.add(I18n.format("使用 坐标绑定卡 绑定即可链接至棱镜网络"));
         tooltip.add(I18n.format("最多安装六个IO设备"));
     }
+
     @Override
     public void writeInitialSyncData(PacketBuffer buf) {
         super.writeInitialSyncData(buf);
@@ -370,6 +365,7 @@ public class MetaTileEntitySBPRI extends MetaTileEntityBaseWithControl {
             throw new RuntimeException(e);
         }
     }
+
     @Override
     public void receiveCustomData(int dataId, PacketBuffer buf) {
         super.receiveCustomData(dataId, buf);
@@ -382,33 +378,34 @@ public class MetaTileEntitySBPRI extends MetaTileEntityBaseWithControl {
         }
 
     }
+
     private void writeParticles(PacketBuffer buf) {
         NBTTagCompound tag = new NBTTagCompound();
-        if(findTarget)
-        {
-            tag.setInteger("Sx",this.getPos().getX());
-            tag.setInteger("Sy",this.getPos().getY());
-            tag.setInteger("Sz",this.getPos().getZ());
-            tag.setInteger("Ex",TargetPos.getX());
-            tag.setInteger("Ey",TargetPos.getY());
-            tag.setInteger("Ez",TargetPos.getZ());
+        if (findTarget) {
+            tag.setInteger("Sx", this.getPos().getX());
+            tag.setInteger("Sy", this.getPos().getY());
+            tag.setInteger("Sz", this.getPos().getZ());
+            tag.setInteger("Ex", TargetPos.getX());
+            tag.setInteger("Ey", TargetPos.getY());
+            tag.setInteger("Ez", TargetPos.getZ());
 
         }
         buf.writeCompoundTag(tag);
     }
+
     @SideOnly(Side.CLIENT)
-    private void readParticles( PacketBuffer buf) throws IOException {
+    private void readParticles(PacketBuffer buf) throws IOException {
         NBTTagCompound tag = buf.readCompoundTag();
-        if(tag.hasKey("Ex"))
-        {
-            BlockPos Spos = new BlockPos(tag.getInteger("Sx"),tag.getInteger("Sy"),tag.getInteger("Sz"));
-            BlockPos Epos = new BlockPos(tag.getInteger("Ex"),tag.getInteger("Ey"),tag.getInteger("Ez"));
-            operateClient(Spos,Epos,20);
+        if (tag.hasKey("Ex")) {
+            BlockPos Spos = new BlockPos(tag.getInteger("Sx"), tag.getInteger("Sy"), tag.getInteger("Sz"));
+            BlockPos Epos = new BlockPos(tag.getInteger("Ex"), tag.getInteger("Ey"), tag.getInteger("Ez"));
+            operateClient(Spos, Epos, 20);
         }
 
     }
+
     @SideOnly(Side.CLIENT)
-    public void operateClient(BlockPos Spos,BlockPos Epos,int age) {
-        GTParticleManager.INSTANCE.addEffect(new LaserBeamParticle(this,Spos,Epos.add(0,150,0),age));
+    public void operateClient(BlockPos Spos, BlockPos Epos, int age) {
+        GTParticleManager.INSTANCE.addEffect(new LaserBeamParticle(this, Spos, Epos.add(0, 150, 0), age));
     }
 }

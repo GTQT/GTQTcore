@@ -14,16 +14,11 @@ import gregtech.api.metatileentity.multiblock.MultiblockDisplayText;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
-import gregtech.api.unification.material.Materials;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.TextComponentUtil;
 import gregtech.client.particle.GTParticleManager;
 import gregtech.client.renderer.ICubeRenderer;
-import gregtech.client.renderer.texture.Textures;
-import gregtech.common.blocks.BlockMetalCasing;
-import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.capability.ILaser;
-import keqing.gtqtcore.api.utils.GTQTLog;
 import keqing.gtqtcore.client.particle.LaserBeamParticle;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
@@ -40,7 +35,6 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -52,34 +46,38 @@ import java.util.List;
 
 import static gregtech.api.GTValues.V;
 import static gregtech.api.GTValues.VN;
-import static keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility.LASER_INPUT;
 import static keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility.LASER_OUTPUT;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.MaragingSteel250;
 import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.NQ_TURBINE_CASING;
 
 public class MetaTileEntitySBPRO extends MetaTileEntityBaseWithControl {
 
-    private long Laser;//当前的激光
-    private long More;
-    private long Cost;
-    private int length;
-    private int circuit;
     int[][] io = new int[6][2];
     long[] La = new long[6];
     long[] Se = new long[6];
     long[] Ma = new long[6];
     int dim;
+    BlockPos TargetPos;
+    boolean findTarget = false;
+    private long Laser;//当前的激光
+    private long More;
+    private long Cost;
+    private int length;
+    private int circuit;
     public MetaTileEntitySBPRO(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId);
     }
-    BlockPos TargetPos;
-    boolean findTarget = false;
-    public void setMachinePos(BlockPos pos,int dim)
-    {
-        findTarget=true;
-        TargetPos=pos;
-        this.dim=dim;
+
+    private static IBlockState getCasingState() {
+        return GTQTMetaBlocks.TURBINE_CASING.getState(NQ_TURBINE_CASING);
     }
+
+    public void setMachinePos(BlockPos pos, int dim) {
+        findTarget = true;
+        TargetPos = pos;
+        this.dim = dim;
+    }
+
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("length", length);
         data.setLong("Laser", Laser);
@@ -92,7 +90,7 @@ public class MetaTileEntitySBPRO extends MetaTileEntityBaseWithControl {
             data.setLong("Se" + i, Se[i]);
             data.setLong("Ma" + i, Ma[i]);
         }
-        if(TargetPos!=null) {
+        if (TargetPos != null) {
             data.setInteger("X1", TargetPos.getX());
             data.setInteger("Y1", TargetPos.getY());
             data.setInteger("Z1", TargetPos.getZ());
@@ -113,21 +111,19 @@ public class MetaTileEntitySBPRO extends MetaTileEntityBaseWithControl {
             Se[i] = data.getLong("Se" + i);
             Ma[i] = data.getLong("Ma" + i);
         }
-        TargetPos= new BlockPos(data.getInteger("X1"), data.getInteger("Y1"), data.getInteger("Z1"));
+        TargetPos = new BlockPos(data.getInteger("X1"), data.getInteger("Y1"), data.getInteger("Z1"));
     }
 
     @Override
     protected void updateFormedValid() {
         MetaTileEntity mte = GTUtility.getMetaTileEntity(DimensionManager.getWorld(dim), TargetPos);
         if (mte instanceof MetaTileEntitySBPRC && ((MetaTileEntitySBPRC) mte).isStructureFormed()) {
-            findTarget=true;
+            findTarget = true;
             writeCustomData(GregtechDataCodes.UPDATE_PARTICLE, this::writeParticles);
-        }
-        else
-        {
-            findTarget=false;
-            TargetPos=null;
-            dim=0;
+        } else {
+            findTarget = false;
+            TargetPos = null;
+            dim = 0;
         }
 
         long c = 0;
@@ -157,8 +153,8 @@ public class MetaTileEntitySBPRO extends MetaTileEntityBaseWithControl {
         }
         if (More < 0) {
             for (int p = 0; p < length; p++) {
-                if(More>=0)return;
-                if (Math.abs(More)  <= La[p]) {
+                if (More >= 0) return;
+                if (Math.abs(More) <= La[p]) {
                     this.getAbilities(LASER_OUTPUT).get(p).setLaser(La[p] + More);
                     More = 0;
                     return;
@@ -370,11 +366,6 @@ public class MetaTileEntitySBPRO extends MetaTileEntityBaseWithControl {
                 .build();
     }
 
-
-    private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.TURBINE_CASING.getState(NQ_TURBINE_CASING);
-    }
-
     @SideOnly(Side.CLIENT)
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
@@ -397,12 +388,12 @@ public class MetaTileEntitySBPRO extends MetaTileEntityBaseWithControl {
         return Collections.emptyList();
     }
 
-    public void setLaser(long amount) {
-        this.Laser=amount;
-    }
-
     public int getLaser() {
         return (int) Laser;
+    }
+
+    public void setLaser(long amount) {
+        this.Laser = amount;
     }
 
     @Override
@@ -412,6 +403,7 @@ public class MetaTileEntitySBPRO extends MetaTileEntityBaseWithControl {
         tooltip.add(I18n.format("使用 坐标绑定卡 绑定即可链接至棱镜网络"));
         tooltip.add(I18n.format("最多安装六个IO设备"));
     }
+
     @Override
     public void writeInitialSyncData(PacketBuffer buf) {
         super.writeInitialSyncData(buf);
@@ -427,6 +419,7 @@ public class MetaTileEntitySBPRO extends MetaTileEntityBaseWithControl {
             throw new RuntimeException(e);
         }
     }
+
     @Override
     public void receiveCustomData(int dataId, PacketBuffer buf) {
         super.receiveCustomData(dataId, buf);
@@ -439,33 +432,34 @@ public class MetaTileEntitySBPRO extends MetaTileEntityBaseWithControl {
         }
 
     }
+
     private void writeParticles(PacketBuffer buf) {
         NBTTagCompound tag = new NBTTagCompound();
-        if(findTarget)
-        {
-            tag.setInteger("Sx",this.getPos().getX());
-            tag.setInteger("Sy",this.getPos().getY());
-            tag.setInteger("Sz",this.getPos().getZ());
-            tag.setInteger("Ex",TargetPos.getX());
-            tag.setInteger("Ey",TargetPos.getY());
-            tag.setInteger("Ez",TargetPos.getZ());
+        if (findTarget) {
+            tag.setInteger("Sx", this.getPos().getX());
+            tag.setInteger("Sy", this.getPos().getY());
+            tag.setInteger("Sz", this.getPos().getZ());
+            tag.setInteger("Ex", TargetPos.getX());
+            tag.setInteger("Ey", TargetPos.getY());
+            tag.setInteger("Ez", TargetPos.getZ());
 
         }
         buf.writeCompoundTag(tag);
     }
+
     @SideOnly(Side.CLIENT)
-    private void readParticles( PacketBuffer buf) throws IOException {
+    private void readParticles(PacketBuffer buf) throws IOException {
         NBTTagCompound tag = buf.readCompoundTag();
-        if(tag.hasKey("Ex"))
-        {
-            BlockPos Spos = new BlockPos(tag.getInteger("Sx"),tag.getInteger("Sy"),tag.getInteger("Sz"));
-            BlockPos Epos = new BlockPos(tag.getInteger("Ex"),tag.getInteger("Ey"),tag.getInteger("Ez"));
-            operateClient(Spos,Epos,20);
+        if (tag.hasKey("Ex")) {
+            BlockPos Spos = new BlockPos(tag.getInteger("Sx"), tag.getInteger("Sy"), tag.getInteger("Sz"));
+            BlockPos Epos = new BlockPos(tag.getInteger("Ex"), tag.getInteger("Ey"), tag.getInteger("Ez"));
+            operateClient(Spos, Epos, 20);
         }
 
     }
+
     @SideOnly(Side.CLIENT)
-    public void operateClient(BlockPos Spos,BlockPos Epos,int age) {
-        GTParticleManager.INSTANCE.addEffect(new LaserBeamParticle(this,Spos,Epos.add(0,150,0),age));
+    public void operateClient(BlockPos Spos, BlockPos Epos, int age) {
+        GTParticleManager.INSTANCE.addEffect(new LaserBeamParticle(this, Spos, Epos.add(0, 150, 0), age));
     }
 }

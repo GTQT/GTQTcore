@@ -1,12 +1,14 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.huge;
 
 
-
 import gregtech.api.GTValues;
 import gregtech.api.GregTechAPI;
 import gregtech.api.block.IHeatingCoilBlockStats;
 import gregtech.api.capability.*;
-import gregtech.api.capability.impl.*;
+import gregtech.api.capability.impl.EnergyContainerList;
+import gregtech.api.capability.impl.FluidTankList;
+import gregtech.api.capability.impl.ItemHandlerList;
+import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
@@ -25,8 +27,6 @@ import gregtech.api.util.TextComponentUtil;
 import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
-import gregtech.client.utils.TooltipHelper;
-import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.BlockGlassCasing;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.BlockWireCoil;
@@ -52,32 +52,34 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
 import static gregtech.api.GTValues.VA;
-import static keqing.gtqtcore.api.utils.GTQTUniverUtil.consistentList;
-import static keqing.gtqtcore.api.utils.GTQTUniverUtil.maxLength;
 import static keqing.gtqtcore.api.utils.GTQTUtil.getAccelerateByCWU;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.HUGE_CRACKING_UNIT;
 
 public class MetaTileEntityHugeCrackingUnit extends GTQTRecipeMapMultiblockOverwrite implements IHeatingCoil, IOpticalComputationReceiver {
 
-    private int blastFurnaceTemperature;
     protected int heatingCoilLevel;
     protected int coilTier;
     protected int glassTire;
-
     int requestCWUt;
+    int ParallelNum = 1;
+    private int blastFurnaceTemperature;
     private IOpticalComputationProvider computationProvider;
 
     public MetaTileEntityHugeCrackingUnit(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, RecipeMaps.CRACKING_RECIPES);
         this.recipeMapWorkable = new MegaOilCrackingUnitWorkableHandler(this);
     }
+
+    private static IBlockState getCasingState() {
+        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STAINLESS_CLEAN);
+    }
+
     @Override
     protected void initializeAbilities() {
         this.inputInventory = new ItemHandlerList(this.getAbilities(MultiblockAbility.IMPORT_ITEMS));
@@ -86,22 +88,23 @@ public class MetaTileEntityHugeCrackingUnit extends GTQTRecipeMapMultiblockOverw
         this.outputFluidInventory = new FluidTankList(this.allowSameFluidFillForOutputs(), this.getAbilities(MultiblockAbility.EXPORT_FLUIDS));
         List<IEnergyContainer> energyContainer = new ArrayList<>(this.getAbilities(MultiblockAbility.INPUT_ENERGY));
         energyContainer.addAll(this.getAbilities(MultiblockAbility.INPUT_LASER));
-        this.energyContainer=new EnergyContainerList(energyContainer);
+        this.energyContainer = new EnergyContainerList(energyContainer);
     }
 
     public int getCurrentTemperature() {
         return this.blastFurnaceTemperature;
     }
+
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityHugeCrackingUnit(metaTileEntityId);
     }
-    int ParallelNum=1;
+
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("modern", modern);
         return super.writeToNBT(data);
     }
-   
+
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         modern = data.getInteger("modern");
@@ -110,36 +113,35 @@ public class MetaTileEntityHugeCrackingUnit extends GTQTRecipeMapMultiblockOverw
     @Override
     public void update() {
         super.update();
-        if(isStructureFormed()&&isActive())
-        {
-            requestCWUt=computationProvider.requestCWUt(1024, false);
+        if (isStructureFormed() && isActive()) {
+            requestCWUt = computationProvider.requestCWUt(1024, false);
         }
-        if (modern == 0)
-        {
-            ParallelNum=ParallelNumA;
+        if (modern == 0) {
+            ParallelNum = ParallelNumA;
         }
-        if (modern == 1)
-        {
-            P = (int) ((this.energyContainer.getEnergyStored() + energyContainer.getInputPerSec())/(getMinVa()==0?1:getMinVa()));
+        if (modern == 1) {
+            P = (int) ((this.energyContainer.getEnergyStored() + energyContainer.getInputPerSec()) / (getMinVa() == 0 ? 1 : getMinVa()));
             ParallelNum = Math.min(P, ParallelLim);
         }
     }
-    public int getMinVa()
-    {
-        if((Math.min(this.energyContainer.getEnergyCapacity()/32,VA[Math.min(coilTier,9)])*20)==0)return 1;
-        return (int)(Math.min(this.energyContainer.getEnergyCapacity()/32,VA[Math.min(coilTier,9)]));
+
+    public int getMinVa() {
+        if ((Math.min(this.energyContainer.getEnergyCapacity() / 32, VA[Math.min(coilTier, 9)]) * 20) == 0) return 1;
+        return (int) (Math.min(this.energyContainer.getEnergyCapacity() / 32, VA[Math.min(coilTier, 9)]));
 
     }
+
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
         ITextComponent heatString = TextComponentUtil.stringWithColor(TextFormatting.RED, TextFormattingUtil.formatNumbers(this.blastFurnaceTemperature) + "K");
         textList.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY, "gregtech.multiblock.blast_furnace.max_temperature", heatString));
-        textList.add(new TextComponentTranslation("gtqtcore.kqcc_accelerate",requestCWUt,getAccelerateByCWU(requestCWUt)));
-        if(modern==0) textList.add(new TextComponentTranslation("gtqtcore.tire1",coilTier));
-        if(modern==1) textList.add(new TextComponentTranslation("gtqtcore.tire2",coilTier));
-        textList.add(new TextComponentTranslation("gtqtcore.parr",ParallelNum,ParallelLim));
+        textList.add(new TextComponentTranslation("gtqtcore.kqcc_accelerate", requestCWUt, getAccelerateByCWU(requestCWUt)));
+        if (modern == 0) textList.add(new TextComponentTranslation("gtqtcore.tire1", coilTier));
+        if (modern == 1) textList.add(new TextComponentTranslation("gtqtcore.tire2", coilTier));
+        textList.add(new TextComponentTranslation("gtqtcore.parr", ParallelNum, ParallelLim));
     }
+
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
@@ -151,7 +153,7 @@ public class MetaTileEntityHugeCrackingUnit extends GTQTRecipeMapMultiblockOverw
 
         Object glassTire = context.get("GlassTieredStats");
         this.glassTire = GTQTUtil.getOrDefault(() -> glassTire instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)glassTire).getIntTier(),
+                () -> ((WrappedIntTired) glassTire).getIntTier(),
                 0);
         Object coilType = context.get("CoilType");
         if (coilType instanceof IHeatingCoilBlockStats) {
@@ -163,8 +165,8 @@ public class MetaTileEntityHugeCrackingUnit extends GTQTRecipeMapMultiblockOverw
             this.heatingCoilLevel = BlockWireCoil.CoilType.CUPRONICKEL.getLevel();
             this.coilTier = BlockWireCoil.CoilType.CUPRONICKEL.getTier();
         }
-        ParallelLim=Math.min((int)Math.pow(2, coilTier),256);
-        ParallelNum=ParallelLim;
+        ParallelLim = Math.min((int) Math.pow(2, coilTier), 256);
+        ParallelNum = ParallelLim;
         this.blastFurnaceTemperature += 100 * Math.max(0, GTUtility.getTierByVoltage(getEnergyContainer().getInputVoltage()) - GTValues.MV);
     }
 
@@ -174,7 +176,6 @@ public class MetaTileEntityHugeCrackingUnit extends GTQTRecipeMapMultiblockOverw
         blastFurnaceTemperature = 0;
         heatingCoilLevel = 0;
     }
-
 
     @Override
     protected BlockPattern createStructurePattern() {
@@ -210,10 +211,6 @@ public class MetaTileEntityHugeCrackingUnit extends GTQTRecipeMapMultiblockOverw
                 .build();
     }
 
-    private static IBlockState getCasingState() {
-        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STAINLESS_CLEAN);
-    }
-
     @SideOnly(Side.CLIENT)
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
@@ -239,37 +236,39 @@ public class MetaTileEntityHugeCrackingUnit extends GTQTRecipeMapMultiblockOverw
         tooltip.add(I18n.format("gregtech.machine.cracker.gtqtupdate.2"));
         tooltip.add(I18n.format("gtqtcore.multiblock.hb.tooltip.2"));
         tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.1"));
-        tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.2",256));
+        tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.2", 256));
         tooltip.add(I18n.format("本机器允许使用激光能源仓代替能源仓！"));
     }
+
     @Override
     public IOpticalComputationProvider getComputationProvider() {
         return this.computationProvider;
     }
+
     @Override
     public List<MultiblockShapeInfo> getMatchingShapes() {
         ArrayList<MultiblockShapeInfo> shapeInfo = new ArrayList<>();
         MultiblockShapeInfo.Builder builder = MultiblockShapeInfo.builder()
-                    .aisle("CCCCCCJHCCCCC", " CAAAAAAAAAC ", " CAAAAAAAAAC ", " CAAAAAAAAAC ", " CAAAAAAAAAC ", " CAAAAAAAAAC ", " CAAAAAAAAAC ")
-                    .aisle("CCCCCCCCCCCCC", "CCGGGGGGGGGCC", "CCGGGGGGGGGCC", "CCGGGGGGGGGCC", "CCGGGGGGGGGCC", "CCGGGGGGGGGCC", "CCGGGGGGGGGCC")
-                    .aisle("CCCCCCCCCCCCC", " GALALALALAG ", " GALALALALAG ", " GALALALALAG ", " GALALALALAG ", " GALALALALAG ", " CGGGGGGGGGC ")
-                    .aisle("CCCCCCCCCCCCC", " GALALALALAG ", " CAAAAAAAAAC ", " CALALALALAC ", " CAAAAAAAAAC ", " GALALALALAG ", " CGGGCCCGGGC ")
-                    .aisle("CCCCCCCCCCCCC", " GALALALALAG ", " CALALALALAC ", " DALALALALAN ", " CALALALALAC ", " GALALALALAG ", " CGGGCVCGGGC ")
-                    .aisle("CCCCCCCCCCCCC", " GALALALALAG ", " CAAAAAAAAAC ", " CALALALALAC ", " CAAAAAAAAAC ", " GALALALALAG ", " CGGGCCCGGGC ")
-                    .aisle("CCCCCCCCCCCCC", " GALALALALAG ", " GALALALALAG ", " GALALALALAG ", " GALALALALAG ", " GALALALALAG ", " CGGGGGGGGGC ")
-                    .aisle("CCCCCCCCCCCCC", "CCGGGGGGGGGCC", "CCGGGGGGGGGCC", "CCGGGGGGGGGCC", "CCGGGGGGGGGCC", "CCGGGGGGGGGCC", "CCGGGGGGGGGCC")
-                    .aisle("CCCCCISKCCCCC", " CAAAAAAAAAC ", " CAAAAAAAAAC ", " CAAAAAAAAAC ", " CAAAAAAAAAC ", " CAAAAAAAAAC ", " CAAAAAAAAAC ")
-                    .where('S', HUGE_CRACKING_UNIT, EnumFacing.SOUTH)
-                    .where('C', getCasingState())
-                    .where('V', MetaTileEntities.FLUID_IMPORT_HATCH[4], EnumFacing.UP)
-                    .where('D', MetaTileEntities.FLUID_IMPORT_HATCH[4], EnumFacing.WEST)
-                    .where('N', MetaTileEntities.FLUID_EXPORT_HATCH[4], EnumFacing.EAST)
-                    .where('K', MetaTileEntities.ITEM_IMPORT_BUS[4], EnumFacing.SOUTH)
-                    .where('H', MetaTileEntities.ENERGY_INPUT_HATCH[5], EnumFacing.NORTH)
-                    .where('I', MetaTileEntities.COMPUTATION_HATCH_RECEIVER, EnumFacing.SOUTH)
-                    .where('G', MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.FUSION_GLASS))
-                    .where('A', Blocks.AIR.getDefaultState())
-                    .where('J', MetaTileEntities.MAINTENANCE_HATCH , EnumFacing.NORTH);
+                .aisle("CCCCCCJHCCCCC", " CAAAAAAAAAC ", " CAAAAAAAAAC ", " CAAAAAAAAAC ", " CAAAAAAAAAC ", " CAAAAAAAAAC ", " CAAAAAAAAAC ")
+                .aisle("CCCCCCCCCCCCC", "CCGGGGGGGGGCC", "CCGGGGGGGGGCC", "CCGGGGGGGGGCC", "CCGGGGGGGGGCC", "CCGGGGGGGGGCC", "CCGGGGGGGGGCC")
+                .aisle("CCCCCCCCCCCCC", " GALALALALAG ", " GALALALALAG ", " GALALALALAG ", " GALALALALAG ", " GALALALALAG ", " CGGGGGGGGGC ")
+                .aisle("CCCCCCCCCCCCC", " GALALALALAG ", " CAAAAAAAAAC ", " CALALALALAC ", " CAAAAAAAAAC ", " GALALALALAG ", " CGGGCCCGGGC ")
+                .aisle("CCCCCCCCCCCCC", " GALALALALAG ", " CALALALALAC ", " DALALALALAN ", " CALALALALAC ", " GALALALALAG ", " CGGGCVCGGGC ")
+                .aisle("CCCCCCCCCCCCC", " GALALALALAG ", " CAAAAAAAAAC ", " CALALALALAC ", " CAAAAAAAAAC ", " GALALALALAG ", " CGGGCCCGGGC ")
+                .aisle("CCCCCCCCCCCCC", " GALALALALAG ", " GALALALALAG ", " GALALALALAG ", " GALALALALAG ", " GALALALALAG ", " CGGGGGGGGGC ")
+                .aisle("CCCCCCCCCCCCC", "CCGGGGGGGGGCC", "CCGGGGGGGGGCC", "CCGGGGGGGGGCC", "CCGGGGGGGGGCC", "CCGGGGGGGGGCC", "CCGGGGGGGGGCC")
+                .aisle("CCCCCISKCCCCC", " CAAAAAAAAAC ", " CAAAAAAAAAC ", " CAAAAAAAAAC ", " CAAAAAAAAAC ", " CAAAAAAAAAC ", " CAAAAAAAAAC ")
+                .where('S', HUGE_CRACKING_UNIT, EnumFacing.SOUTH)
+                .where('C', getCasingState())
+                .where('V', MetaTileEntities.FLUID_IMPORT_HATCH[4], EnumFacing.UP)
+                .where('D', MetaTileEntities.FLUID_IMPORT_HATCH[4], EnumFacing.WEST)
+                .where('N', MetaTileEntities.FLUID_EXPORT_HATCH[4], EnumFacing.EAST)
+                .where('K', MetaTileEntities.ITEM_IMPORT_BUS[4], EnumFacing.SOUTH)
+                .where('H', MetaTileEntities.ENERGY_INPUT_HATCH[5], EnumFacing.NORTH)
+                .where('I', MetaTileEntities.COMPUTATION_HATCH_RECEIVER, EnumFacing.SOUTH)
+                .where('G', MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.FUSION_GLASS))
+                .where('A', Blocks.AIR.getDefaultState())
+                .where('J', MetaTileEntities.MAINTENANCE_HATCH, EnumFacing.NORTH);
         GregTechAPI.HEATING_COILS.entrySet().stream()
                 .sorted(Comparator.comparingInt(entry -> entry.getValue().getTier()))
                 .forEach(entry -> shapeInfo.add(builder.where('L', entry.getKey()).build()));
@@ -296,6 +295,7 @@ public class MetaTileEntityHugeCrackingUnit extends GTQTRecipeMapMultiblockOverw
         public int getParallelLimit() {
             return ParallelNum;
         }
+
         @Override
         protected long getMaxParallelVoltage() {
             return super.getMaxVoltage();
@@ -315,18 +315,20 @@ public class MetaTileEntityHugeCrackingUnit extends GTQTRecipeMapMultiblockOverw
             resultOverclock[0] *= (int) (1.0f - Tier * 0.1);
             resultOverclock[0] = Math.max(1, resultOverclock[0]);
         }
+
         @Override
         public void setMaxProgress(int maxProgress) {
-            int MaxProgress = (int) Math.floor(maxProgress * Math.pow(0.8, glassTire)*getAccelerateByCWU(requestCWUt));
+            int MaxProgress = (int) Math.floor(maxProgress * Math.pow(0.8, glassTire) * getAccelerateByCWU(requestCWUt));
             super.setMaxProgress(MaxProgress);
         }
-        protected void modifyOverclockPre( int[] values, IRecipePropertyStorage storage) {
+
+        protected void modifyOverclockPre(int[] values, IRecipePropertyStorage storage) {
             super.modifyOverclockPre(values, storage);
-            values[0] = OverclockingLogic.applyCoilEUtDiscount(values[0], ((IHeatingCoil)this.metaTileEntity).getCurrentTemperature(), (Integer)storage.getRecipePropertyValue(TemperatureProperty.getInstance(), 0));
+            values[0] = OverclockingLogic.applyCoilEUtDiscount(values[0], ((IHeatingCoil) this.metaTileEntity).getCurrentTemperature(), storage.getRecipePropertyValue(TemperatureProperty.getInstance(), 0));
         }
 
-        protected  int[] runOverclockingLogic( IRecipePropertyStorage propertyStorage, int recipeEUt, long maxVoltage, int duration, int amountOC) {
-            return OverclockingLogic.heatingCoilOverclockingLogic(Math.abs(recipeEUt), maxVoltage, duration, amountOC, ((IHeatingCoil)this.metaTileEntity).getCurrentTemperature(), (Integer)propertyStorage.getRecipePropertyValue(TemperatureProperty.getInstance(), 0));
+        protected int[] runOverclockingLogic(IRecipePropertyStorage propertyStorage, int recipeEUt, long maxVoltage, int duration, int amountOC) {
+            return OverclockingLogic.heatingCoilOverclockingLogic(Math.abs(recipeEUt), maxVoltage, duration, amountOC, ((IHeatingCoil) this.metaTileEntity).getCurrentTemperature(), propertyStorage.getRecipePropertyValue(TemperatureProperty.getInstance(), 0));
         }
     }
 }

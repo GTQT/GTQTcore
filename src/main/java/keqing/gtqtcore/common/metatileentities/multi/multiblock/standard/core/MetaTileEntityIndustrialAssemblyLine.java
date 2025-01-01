@@ -28,12 +28,8 @@ import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.TooltipHelper;
 import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.BlockGlassCasing;
-import gregtech.common.blocks.BlockMetalCasing;
-import gregtech.common.blocks.BlockMultiblockCasing;
 import gregtech.common.blocks.MetaBlocks;
-import gregtech.common.metatileentities.MetaTileEntities;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiFluidHatch;
-import gregtech.core.sound.GTSoundEvents;
 import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockCore;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
@@ -43,7 +39,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.IFluidTank;
@@ -51,13 +46,12 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.IItemHandlerModifiable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.Iterator;
 import java.util.List;
 import java.util.function.Function;
 
-import static gregtech.api.GTValues.*;
+import static gregtech.api.GTValues.UV;
+import static gregtech.api.GTValues.VA;
 import static keqing.gtqtcore.common.block.blocks.BlockActiveUniqueCasing.ActiveCasingType.ADVANCED_ASSEMBLY_CONTROL_CASING;
 import static keqing.gtqtcore.common.block.blocks.BlockActiveUniqueCasing.ActiveCasingType.ADVANCED_ASSEMBLY_LINE_CASING;
 import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.ADVANCED_FILTER_CASING;
@@ -78,11 +72,58 @@ public class MetaTileEntityIndustrialAssemblyLine extends GTQTMultiblockCore {
                 RecipeMaps.ASSEMBLER_RECIPES
         });
     }
+
+    private static IBlockState getCasingState() {
+        return GTQTMetaBlocks.TURBINE_CASING.getState(IRIDIUM_CASING);
+    }
+
+    private static IBlockState getSecondCasingState() {
+        return GTQTMetaBlocks.ACTIVE_UNIQUE_CASING.getState(ADVANCED_ASSEMBLY_LINE_CASING);
+    }
+
+    private static IBlockState getUniqueCasingState() {
+        return GTQTMetaBlocks.ACTIVE_UNIQUE_CASING.getState(ADVANCED_ASSEMBLY_CONTROL_CASING);
+    }
+
+    private static IBlockState getGrateState() {
+        return GTQTMetaBlocks.TURBINE_CASING.getState(ADVANCED_FILTER_CASING);
+    }
+
+    private static IBlockState getGlassState() {
+        return MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.FUSION_GLASS);
+    }
+
+    protected static TraceabilityPredicate fluidInputPredicate() {
+        return ConfigHolder.machines.orderedFluidAssembly ? metaTileEntities((MetaTileEntity[]) ((List) MultiblockAbility.REGISTRY.get(MultiblockAbility.IMPORT_FLUIDS)).stream().filter((mte) -> !(mte instanceof MetaTileEntityMultiFluidHatch)).toArray((x$0) -> new MetaTileEntity[x$0])).setMaxGlobalLimited(4) : abilities(MultiblockAbility.IMPORT_FLUIDS);
+    }
+
+    protected static TraceabilityPredicate dataHatchPredicate() {
+        return ConfigHolder.machines.enableResearch ? abilities(MultiblockAbility.DATA_ACCESS_HATCH, MultiblockAbility.OPTICAL_DATA_RECEPTION).setExactLimit(1).or(states(getGrateState())) : states(getGrateState());
+    }
+
+    private static boolean isRecipeAvailable(Iterable<? extends IDataAccessHatch> hatches, Recipe recipe) {
+        Iterator var2 = hatches.iterator();
+
+        IDataAccessHatch hatch;
+        do {
+            if (!var2.hasNext()) {
+                return false;
+            }
+
+            hatch = (IDataAccessHatch) var2.next();
+            if (hatch.isCreative()) {
+                return true;
+            }
+        } while (!hatch.isRecipeAvailable(recipe));
+
+        return true;
+    }
+
     @Override
-    public int getMinVa()
-    {
+    public int getMinVa() {
         return VA[UV];
     }
+
     @Override
     public int getCoreNum() {
         return 4;
@@ -117,34 +158,6 @@ public class MetaTileEntityIndustrialAssemblyLine extends GTQTMultiblockCore {
                 .build();
     }
 
-    private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.TURBINE_CASING.getState(IRIDIUM_CASING);
-    }
-
-    private static IBlockState getSecondCasingState() {
-        return GTQTMetaBlocks.ACTIVE_UNIQUE_CASING.getState(ADVANCED_ASSEMBLY_LINE_CASING);
-    }
-
-    private static IBlockState getUniqueCasingState() {
-        return GTQTMetaBlocks.ACTIVE_UNIQUE_CASING.getState(ADVANCED_ASSEMBLY_CONTROL_CASING);
-    }
-
-    private static IBlockState getGrateState() {
-        return GTQTMetaBlocks.TURBINE_CASING.getState(ADVANCED_FILTER_CASING);
-    }
-
-    private static IBlockState getGlassState() {
-        return MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.FUSION_GLASS);
-    }
-
-    protected static  TraceabilityPredicate fluidInputPredicate() {
-        return ConfigHolder.machines.orderedFluidAssembly ? metaTileEntities((MetaTileEntity[])((List)MultiblockAbility.REGISTRY.get(MultiblockAbility.IMPORT_FLUIDS)).stream().filter((mte) -> !(mte instanceof MetaTileEntityMultiFluidHatch)).toArray((x$0) -> new MetaTileEntity[x$0])).setMaxGlobalLimited(4) : abilities(MultiblockAbility.IMPORT_FLUIDS);
-    }
-
-    protected static  TraceabilityPredicate dataHatchPredicate() {
-        return ConfigHolder.machines.enableResearch ? abilities(MultiblockAbility.DATA_ACCESS_HATCH, MultiblockAbility.OPTICAL_DATA_RECEPTION).setExactLimit(1).or(states(new IBlockState[]{getGrateState()})) : states(new IBlockState[]{getGrateState()});
-    }
-
     protected Function<BlockPos, Integer> multiblockPartSorter() {
         return RelativeDirection.LEFT.getSorter(this.getFrontFacing(), this.getUpwardsFacing(), this.isFlipped());
     }
@@ -158,7 +171,6 @@ public class MetaTileEntityIndustrialAssemblyLine extends GTQTMultiblockCore {
         }
     }
 
-
     @SideOnly(Side.CLIENT)
     @Override
     public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
@@ -166,6 +178,7 @@ public class MetaTileEntityIndustrialAssemblyLine extends GTQTMultiblockCore {
         this.getFrontOverlay().renderOrientedState(renderState, translation, pipeline, getFrontFacing(), this.recipeMapWorkable.isWorkingEnabled(),
                 isActive());
     }
+
     @SideOnly(Side.CLIENT)
     @Override
     protected ICubeRenderer getFrontOverlay() {
@@ -229,7 +242,7 @@ public class MetaTileEntityIndustrialAssemblyLine extends GTQTMultiblockCore {
             GTLaserBeamParticle[][] var1 = this.beamParticles;
             int var2 = var1.length;
 
-            for(int var3 = 0; var3 < var2; ++var3) {
+            for (int var3 = 0; var3 < var2; ++var3) {
                 GTLaserBeamParticle[] particle = var1[var3];
                 if (particle[0] != null) {
                     particle[0].setExpired();
@@ -242,13 +255,13 @@ public class MetaTileEntityIndustrialAssemblyLine extends GTQTMultiblockCore {
 
     }
 
-    private void writeParticles( PacketBuffer buf) {
+    private void writeParticles(PacketBuffer buf) {
         buf.writeVarInt(this.beamCount);
         buf.writeVarInt(this.beamTime);
     }
 
     @SideOnly(Side.CLIENT)
-    private void readParticles( PacketBuffer buf) {
+    private void readParticles(PacketBuffer buf) {
         this.beamCount = buf.readVarInt();
         this.beamTime = buf.readVarInt();
         if (this.beamParticles == null) {
@@ -260,7 +273,7 @@ public class MetaTileEntityIndustrialAssemblyLine extends GTQTMultiblockCore {
         EnumFacing relativeLeft = RelativeDirection.LEFT.getRelativeFacing(this.getFrontFacing(), this.getUpwardsFacing(), this.isFlipped());
         boolean negativeUp = relativeUp.getAxisDirection() == EnumFacing.AxisDirection.NEGATIVE;
 
-        for(int i = 0; i < this.beamParticles.length; ++i) {
+        for (int i = 0; i < this.beamParticles.length; ++i) {
             GTLaserBeamParticle particle = this.beamParticles[i][0];
             if (i < this.beamCount && particle == null) {
                 pos.setPos(this.getPos());
@@ -269,7 +282,7 @@ public class MetaTileEntityIndustrialAssemblyLine extends GTQTMultiblockCore {
                 }
 
                 Vector3 startPos = (new Vector3()).add(pos.move(relativeLeft, i)).add(relativeUp.getAxis() == EnumFacing.Axis.X ? 0.0 : 0.5, relativeUp.getAxis() == EnumFacing.Axis.Y ? 0.0 : 0.5, relativeUp.getAxis() == EnumFacing.Axis.Z ? 0.0 : 0.5);
-                Vector3 endPos = startPos.copy().subtract((double)relativeUp.getXOffset(), (double)relativeUp.getYOffset(), (double)relativeUp.getZOffset());
+                Vector3 endPos = startPos.copy().subtract(relativeUp.getXOffset(), relativeUp.getYOffset(), relativeUp.getZOffset());
                 this.beamParticles[i][0] = this.createALParticles(startPos, endPos);
                 pos.setPos(this.getPos());
                 if (negativeUp) {
@@ -277,7 +290,7 @@ public class MetaTileEntityIndustrialAssemblyLine extends GTQTMultiblockCore {
                 }
 
                 startPos = (new Vector3()).add(pos.move(relativeLeft, i).move(this.getFrontFacing().getOpposite(), 2)).add(relativeUp.getAxis() == EnumFacing.Axis.X ? 0.0 : 0.5, relativeUp.getAxis() == EnumFacing.Axis.Y ? 0.0 : 0.5, relativeUp.getAxis() == EnumFacing.Axis.Z ? 0.0 : 0.5);
-                endPos = startPos.copy().subtract((double)relativeUp.getXOffset(), (double)relativeUp.getYOffset(), (double)relativeUp.getZOffset());
+                endPos = startPos.copy().subtract(relativeUp.getXOffset(), relativeUp.getYOffset(), relativeUp.getZOffset());
                 this.beamParticles[i][1] = this.createALParticles(startPos, endPos);
                 GTParticleManager.INSTANCE.addEffect(this.beamParticles[i][0]);
                 GTParticleManager.INSTANCE.addEffect(this.beamParticles[i][1]);
@@ -292,11 +305,11 @@ public class MetaTileEntityIndustrialAssemblyLine extends GTQTMultiblockCore {
     }
 
     @SideOnly(Side.CLIENT)
-    private  GTLaserBeamParticle createALParticles(Vector3 startPos, Vector3 endPos) {
+    private GTLaserBeamParticle createALParticles(Vector3 startPos, Vector3 endPos) {
         return (new GTLaserBeamParticle(this, startPos, endPos, this.beamTime)).setBody(LASER_LOCATION).setBeamHeight(0.125F).setDoubleVertical(true).setHead(LASER_HEAD_LOCATION).setHeadWidth(0.1F).setEmit(0.2F);
     }
 
-    public boolean checkRecipe( Recipe recipe, boolean consumeIfSuccess) {
+    public boolean checkRecipe(Recipe recipe, boolean consumeIfSuccess) {
         if (consumeIfSuccess) {
             return true;
         } else {
@@ -307,7 +320,7 @@ public class MetaTileEntityIndustrialAssemblyLine extends GTQTMultiblockCore {
                     return false;
                 }
 
-                for(int i = 0; i < inputs.size(); ++i) {
+                for (int i = 0; i < inputs.size(); ++i) {
                     if (!inputs.get(i).acceptsStack(itemInputInventory.get(i).getStackInSlot(0))) {
                         return false;
                     }
@@ -320,7 +333,7 @@ public class MetaTileEntityIndustrialAssemblyLine extends GTQTMultiblockCore {
                         return false;
                     }
 
-                    for(int i = 0; i < inputs.size(); ++i) {
+                    for (int i = 0; i < inputs.size(); ++i) {
                         if (!inputs.get(i).acceptsFluid(fluidInputInventory.get(i).getFluid())) {
                             return false;
                         }
@@ -336,25 +349,7 @@ public class MetaTileEntityIndustrialAssemblyLine extends GTQTMultiblockCore {
         }
     }
 
-    private static boolean isRecipeAvailable( Iterable<? extends IDataAccessHatch> hatches,  Recipe recipe) {
-        Iterator var2 = hatches.iterator();
-
-        IDataAccessHatch hatch;
-        do {
-            if (!var2.hasNext()) {
-                return false;
-            }
-
-            hatch = (IDataAccessHatch)var2.next();
-            if (hatch.isCreative()) {
-                return true;
-            }
-        } while(!hatch.isRecipeAvailable(recipe));
-
-        return true;
-    }
-
-    public void addInformation(ItemStack stack,  World player, List<String> tooltip, boolean advanced) {
+    public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("地铁猫猫看手机", new Object[0]));
         super.addInformation(stack, player, tooltip, advanced);
         if (ConfigHolder.machines.orderedAssembly && ConfigHolder.machines.orderedFluidAssembly) {
@@ -366,6 +361,7 @@ public class MetaTileEntityIndustrialAssemblyLine extends GTQTMultiblockCore {
         }
 
     }
+
     @Override
     public boolean hasMufflerMechanics() {
         return false;

@@ -15,7 +15,6 @@ import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.core.sound.GTSoundEvents;
 import keqing.gtqtcore.api.capability.IHeat;
-import keqing.gtqtcore.api.capability.impl.HeatRecipeLogic;
 import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
 import keqing.gtqtcore.api.metaileentity.multiblock.RecipeMapHeatMultiblockController;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
@@ -26,6 +25,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
 import java.util.Collections;
 import java.util.List;
 
@@ -120,6 +120,7 @@ public class MetaTileEntityPyrolysisTower extends RecipeMapHeatMultiblockControl
         return GTSoundEvents.BREAKDOWN_ELECTRICAL;
     }
 
+    @Nonnull
     @Override
     public List<ITextComponent> getDataInfo() {
         return Collections.emptyList();

@@ -24,9 +24,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import static gregtech.api.GTValues.LV;
+import static gregtech.api.GTValues.V;
 import static gregtech.api.recipes.logic.OverclockingLogic.standardOverclockingLogic;
 
-public class HeatRecipeLogic extends AbstractRecipeLogic {
+public class BaseHeatRecipeLogic extends AbstractRecipeLogic {
 
     // Used for distinct mode
     protected int lastRecipeIndex = 0;
@@ -34,7 +36,7 @@ public class HeatRecipeLogic extends AbstractRecipeLogic {
     protected List<IItemHandlerModifiable> invalidatedInputList = new ArrayList<>();
     RecipeMapHeatMultiblockController tileEntity;
 
-    public HeatRecipeLogic(RecipeMapHeatMultiblockController tileEntity, RecipeMap<?> recipeMap) {
+    public BaseHeatRecipeLogic(RecipeMapHeatMultiblockController tileEntity, RecipeMap<?> recipeMap) {
         super(tileEntity, recipeMap);
     }
 
@@ -60,7 +62,7 @@ public class HeatRecipeLogic extends AbstractRecipeLogic {
 
     @Override
     public long getMaxVoltage() {
-        return tileEntity.getTier();
+        return V[LV];
     }
 
     @Nonnull
@@ -79,7 +81,7 @@ public class HeatRecipeLogic extends AbstractRecipeLogic {
 
     @Override
     public long getMaximumOverclockVoltage() {
-        return tileEntity.getHeat();
+        return V[LV];
     }
 
     /**

@@ -54,12 +54,10 @@ import static gregtech.api.capability.GregtechDataCodes.WORKABLE_ACTIVE;
 public class MetaTileEntityOceanPumper extends MultiblockWithDisplayBase implements IControllable {
 
 
+    private final int BASE_EU_CONSUMPTION_PER_PUMP = 128;
     private IEnergyContainer energyContainers;
     private IMultipleTankHandler outputTankInventory;
-
     private int drainRate;
-    private final int BASE_EU_CONSUMPTION_PER_PUMP = 128;
-
     private boolean isWorking;
     private boolean isWorkingEnabled = true;
 
@@ -157,7 +155,7 @@ public class MetaTileEntityOceanPumper extends MultiblockWithDisplayBase impleme
 
     public boolean insertFluid(boolean simulate) {
         if (!isInValidLocation()) return false;
-        int fillamount = (int) Math.min((long) Integer.MAX_VALUE, 500L * (1L << (GTUtility.getTierByVoltage(this.energyContainers.getInputVoltage()) - 1) * 2));
+        int fillamount = (int) Math.min(Integer.MAX_VALUE, 500L * (1L << (GTUtility.getTierByVoltage(this.energyContainers.getInputVoltage()) - 1) * 2));
         FluidStack Seawater = GTQTMaterials.SeaWater.getFluid(fillamount);
         int caninsertamount = outputTankInventory.fill(Seawater, false);
         if (!simulate) {

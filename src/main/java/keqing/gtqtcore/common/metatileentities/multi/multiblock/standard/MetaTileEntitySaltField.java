@@ -22,20 +22,14 @@ import gregtech.client.utils.TooltipHelper;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.capability.IHeat;
-import keqing.gtqtcore.api.capability.impl.HeatRecipeLogic;
-import keqing.gtqtcore.api.capability.impl.NoEnergyMultiblockRecipeLogic;
 import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
-import keqing.gtqtcore.api.metaileentity.multiblock.NoEnergyMultiblockController;
 import keqing.gtqtcore.api.metaileentity.multiblock.RecipeMapHeatMultiblockController;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -46,7 +40,6 @@ public class MetaTileEntitySaltField extends RecipeMapHeatMultiblockController {
 
     public MetaTileEntitySaltField(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.SALT_FLIED);
-        this.recipeMapWorkable = new HeatRecipeLogic(this,GTQTcoreRecipeMaps.SALT_FLIED);
     }
 
     public boolean hasMaintenanceMechanics() {
@@ -60,6 +53,7 @@ public class MetaTileEntitySaltField extends RecipeMapHeatMultiblockController {
     protected IBlockState getCasingState1() {
         return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STEEL_SOLID);
     }
+
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);

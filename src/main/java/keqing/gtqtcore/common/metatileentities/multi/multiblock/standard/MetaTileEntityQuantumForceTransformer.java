@@ -52,6 +52,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class MetaTileEntityQuantumForceTransformer extends RecipeMapMultiblockController implements IFastRenderMetaTileEntity {
+    private static final boolean init = false;
     static BloomEffectUtil.IBloomRenderFast RENDER_HANDLER = new BloomEffectUtil.IBloomRenderFast() {
         float lastBrightnessX;
         float lastBrightnessY;
@@ -82,7 +83,6 @@ public class MetaTileEntityQuantumForceTransformer extends RecipeMapMultiblockCo
             OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, lastBrightnessX, lastBrightnessY);
         }
     };
-    private static final boolean init = false;
     private static List<IBlockState> finalListManipulatorCasing;
     private static List<IBlockState> finalListShieldingCoreCasing;
     private static List<IBlockState> finalListGlass;

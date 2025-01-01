@@ -36,7 +36,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
@@ -57,6 +56,21 @@ public class MetaTileEntityCrystallizationCrucible extends RecipeMapMultiblockCo
     public MetaTileEntityCrystallizationCrucible(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.CRYSTALLIZER_RECIPES);
         this.recipeMapWorkable = new HeatingCoilRecipeLogic(this);
+    }
+
+    @Nonnull
+    private static IBlockState getCasingState() {
+        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.TUNGSTENSTEEL_ROBUST);
+    }
+
+    @Nonnull
+    private static IBlockState getFrameState() {
+        return MetaBlocks.FRAMES.get(Titanium).getBlock(Titanium);
+    }
+
+    @Nonnull
+    private static IBlockState getVentState() {
+        return GCYMMetaBlocks.UNIQUE_CASING.getState(BlockUniqueCasing.UniqueCasingType.HEAT_VENT);
     }
 
     @Override
@@ -116,21 +130,6 @@ public class MetaTileEntityCrystallizationCrucible extends RecipeMapMultiblockCo
                 .build();
     }
 
-    @Nonnull
-    private static IBlockState getCasingState() {
-        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.TUNGSTENSTEEL_ROBUST);
-    }
-
-    @Nonnull
-    private static IBlockState getFrameState() {
-        return MetaBlocks.FRAMES.get(Titanium).getBlock(Titanium);
-    }
-
-    @Nonnull
-    private static IBlockState getVentState() {
-        return GCYMMetaBlocks.UNIQUE_CASING.getState(BlockUniqueCasing.UniqueCasingType.HEAT_VENT);
-    }
-
     @Override
     public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
@@ -147,7 +146,7 @@ public class MetaTileEntityCrystallizationCrucible extends RecipeMapMultiblockCo
     @Nonnull
     @Override
     protected OrientedOverlayRenderer getFrontOverlay() {
-            return GTQTTextures.CRYSTALLIZATION_CRUCIBLE_OVERLAY;
+        return GTQTTextures.CRYSTALLIZATION_CRUCIBLE_OVERLAY;
     }
 
     @Override

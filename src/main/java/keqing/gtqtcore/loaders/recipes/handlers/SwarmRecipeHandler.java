@@ -1,23 +1,18 @@
 package keqing.gtqtcore.loaders.recipes.handlers;
 
 import gregtech.api.GregTechAPI;
-import gregtech.api.items.metaitem.MetaItem;
 import gregtech.api.recipes.RecipeBuilder;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Material;
-import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.material.properties.PropertyKey;
-import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.MaterialStack;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.FluidStack;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static gregtech.api.GTValues.*;
 import static gregtech.api.unification.material.Materials.*;
-import static gregtech.api.unification.material.info.MaterialFlags.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.common.items.MetaItems.*;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
@@ -25,7 +20,6 @@ import static keqing.gtqtcore.api.unification.GCYSMaterials.CarbonNanotube;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.NdYAG;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.*;
-import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.nanosensor;
 
 public class SwarmRecipeHandler {
 
@@ -34,8 +28,8 @@ public class SwarmRecipeHandler {
         for (Material material : GregTechAPI.materialManager.getRegisteredMaterials()) {
             i++;
             if(i>30)i=1;
-            OrePrefix prefix = material.hasProperty(PropertyKey.INGOT)||material.hasProperty(PropertyKey.FLUID) ? swarm : null;
-            processDecomposition(prefix, material,i);
+            if(!material.hasProperty(PropertyKey.INGOT)||material.hasProperty(PropertyKey.FLUID))continue;
+            processDecomposition(material,i);
         }
     }
     public static void runRecipeBreeding() {
@@ -147,7 +141,7 @@ public class SwarmRecipeHandler {
         }
     }
 
-    private static void processDecomposition(OrePrefix decomposePrefix, Material material,int u) {
+    private static void processDecomposition(Material material, int u) {
         if (material.getMaterialComponents().isEmpty() || material.getMaterialComponents().size() > 15)
             return;
 
@@ -161,34 +155,32 @@ public class SwarmRecipeHandler {
         }
 
         // only reduce items
-        if (decomposePrefix != null) {
-            // calculate lowest common denominator
-            List<Integer> materialAmounts = new ArrayList<>();
-            materialAmounts.add(totalInputAmount);
-            inputs.forEach(itemStack -> materialAmounts.add(itemStack.getCount()));
+        // calculate lowest common denominator
+        List<Integer> materialAmounts = new ArrayList<>();
+        materialAmounts.add(totalInputAmount);
+        inputs.forEach(itemStack -> materialAmounts.add(itemStack.getCount()));
 
-            int highestDivisor = 1;
+        int highestDivisor = 1;
 
-            int smallestMaterialAmount = getSmallestMaterialAmount(materialAmounts);
-            for (int i = 2; i <= smallestMaterialAmount; i++) {
-                if (isEveryMaterialReducible(i, materialAmounts))
-                    highestDivisor = i;
+        int smallestMaterialAmount = getSmallestMaterialAmount(materialAmounts);
+        for (int i = 2; i <= smallestMaterialAmount; i++) {
+            if (isEveryMaterialReducible(i, materialAmounts))
+                highestDivisor = i;
+        }
+
+        // divide components
+        if (highestDivisor != 1) {
+            List<ItemStack> reducedInputs = new ArrayList<>();
+
+            for (ItemStack itemStack : inputs) {
+                ItemStack reducedStack = itemStack.copy();
+                reducedStack.setCount(reducedStack.getCount() / highestDivisor);
+                reducedInputs.add(reducedStack);
             }
 
-            // divide components
-            if (highestDivisor != 1) {
-                List<ItemStack> reducedInputs = new ArrayList<>();
+            inputs = reducedInputs;
 
-                for (ItemStack itemStack : inputs) {
-                    ItemStack reducedStack = itemStack.copy();
-                    reducedStack.setCount(reducedStack.getCount() / highestDivisor);
-                    reducedInputs.add(reducedStack);
-                }
-
-                inputs = reducedInputs;
-
-                totalInputAmount /= highestDivisor;
-            }
+            totalInputAmount /= highestDivisor;
         }
 
         // generate builder
@@ -203,9 +195,7 @@ public class SwarmRecipeHandler {
 
 
         // finish builder
-        if (decomposePrefix != null) {
-            builder.output(swarm, material, totalInputAmount);
-        }
+        builder.output(swarm, material, totalInputAmount);
 
         // register recipe
         builder.buildAndRegister();

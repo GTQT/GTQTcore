@@ -11,17 +11,13 @@ import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
-import gregtech.api.unification.material.Materials;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockCore;
-import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.unification.GTQTMaterials;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.common.block.blocks.GTQTIsaCasing;
-import keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
@@ -30,22 +26,37 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import static gregtech.api.GTValues.IV;
 import static gregtech.api.GTValues.VA;
 import static gregtech.api.util.RelativeDirection.*;
-import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.*;
+import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.NQ_MACHINE_CASING;
+import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.NQ_TURBINE_CASING;
 
 public class MetaTileEntityIndustrialBender extends GTQTMultiblockCore {
 
     public MetaTileEntityIndustrialBender(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{RecipeMaps.BENDER_RECIPES});
     }
+
+    private static IBlockState getFrameState() {
+        return MetaBlocks.FRAMES.get(GTQTMaterials.MaragingSteel250).getBlock(GTQTMaterials.MaragingSteel250);
+    }
+
+    private static IBlockState getCasingState() {
+        return GTQTMetaBlocks.TURBINE_CASING.getState(NQ_TURBINE_CASING);
+    }
+
+    private static IBlockState getSecondCasingState() {
+        return GTQTMetaBlocks.TURBINE_CASING.getState(NQ_MACHINE_CASING);
+    }
+
     @Override
-    public int getMinVa()
-    {
+    public int getMinVa() {
         return VA[IV];
     }
+
     @Override
     public int getCoreNum() {
         return 16;
     }
+
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityIndustrialBender(metaTileEntityId);
@@ -56,7 +67,7 @@ public class MetaTileEntityIndustrialBender extends GTQTMultiblockCore {
         FactoryBlockPattern pattern = FactoryBlockPattern.start(FRONT, UP, RIGHT)
                 .aisle("CCC", "CCC", "CCC")
                 .aisle("FCF", "SGC", "FCF")
-                .aisle("FCF", "IGC", "FCF").setRepeatable(3,10)
+                .aisle("FCF", "IGC", "FCF").setRepeatable(3, 10)
                 .aisle("CCC", "CCC", "CCC")
                 .where('P', states(getCasingState()))
                 .where('I', abilities(MultiblockAbility.IMPORT_ITEMS))
@@ -69,16 +80,6 @@ public class MetaTileEntityIndustrialBender extends GTQTMultiblockCore {
                 .where('G', states(getSecondCasingState()))
                 .where('F', states(getFrameState()));
         return pattern.build();
-    }
-    private static IBlockState getFrameState() {
-        return MetaBlocks.FRAMES.get(GTQTMaterials.MaragingSteel250).getBlock(GTQTMaterials.MaragingSteel250);
-    }
-    private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.TURBINE_CASING.getState(NQ_TURBINE_CASING);
-    }
-
-    private static IBlockState getSecondCasingState() {
-        return GTQTMetaBlocks.TURBINE_CASING.getState(NQ_MACHINE_CASING);
     }
 
     @SideOnly(Side.CLIENT)
@@ -99,6 +100,7 @@ public class MetaTileEntityIndustrialBender extends GTQTMultiblockCore {
         this.getFrontOverlay().renderOrientedState(renderState, translation, pipeline, getFrontFacing(), this.recipeMapWorkable.isWorkingEnabled(),
                 isActive());
     }
+
     @SideOnly(Side.CLIENT)
     @Override
     protected ICubeRenderer getFrontOverlay() {

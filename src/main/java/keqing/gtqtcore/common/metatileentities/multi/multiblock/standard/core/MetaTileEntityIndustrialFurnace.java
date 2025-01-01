@@ -1,15 +1,12 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.core;
 
-import codechicken.lib.raytracer.CuboidRayTraceResult;
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
 import gregtech.api.capability.IHeatingCoil;
-import gregtech.api.damagesources.DamageSources;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
-import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.recipes.Recipe;
@@ -17,27 +14,19 @@ import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.recipes.recipeproperties.TemperatureProperty;
 import gregtech.client.renderer.ICubeRenderer;
-import gregtech.client.renderer.texture.Textures;
-import gregtech.core.advancement.AdvancementTriggers;
 import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockCore;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTADVBlock;
 import keqing.gtqtcore.common.block.blocks.GTQTIsaCasing;
-import keqing.gtqtcore.loaders.recipes.GTQTRecipes;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import static gregtech.api.GTValues.IV;
 import static gregtech.api.GTValues.VA;
-import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.IRIDIUM_CASING;
 
 public class MetaTileEntityIndustrialFurnace extends GTQTMultiblockCore implements IHeatingCoil {
 
@@ -50,24 +39,34 @@ public class MetaTileEntityIndustrialFurnace extends GTQTMultiblockCore implemen
                 RecipeMaps.ALLOY_SMELTER_RECIPES
         });
     }
+
+    private static IBlockState getCasingState() {
+        return GTQTMetaBlocks.ADV_BLOCK.getState(GTQTADVBlock.CasingType.Hdcs);
+    }
+
+    private static IBlockState getSecondCasingState() {
+        return GTQTMetaBlocks.ISA_CASING.getState(GTQTIsaCasing.CasingType.IRIDIUM_TURBINE);
+    }
+
     @Override
     public boolean checkRecipe(Recipe recipe, boolean consumeIfSuccess) {
         return 6000 >= recipe.getProperty(TemperatureProperty.getInstance(), 0);
     }
+
     @Override
-    public int getMinVa()
-    {
+    public int getMinVa() {
         return VA[IV];
     }
+
     @Override
     public int getCoreNum() {
         return 64;
     }
+
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityIndustrialFurnace(metaTileEntityId);
     }
-
 
     @Override
     protected BlockPattern createStructurePattern() {
@@ -82,14 +81,6 @@ public class MetaTileEntityIndustrialFurnace extends GTQTMultiblockCore implemen
                         .or(autoAbilities()))
                 .where('G', states(getSecondCasingState()))
                 .build();
-    }
-
-    private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.ADV_BLOCK.getState(GTQTADVBlock.CasingType.Hdcs);
-    }
-
-    private static IBlockState getSecondCasingState() {
-        return GTQTMetaBlocks.ISA_CASING.getState(GTQTIsaCasing.CasingType.IRIDIUM_TURBINE);
     }
 
     @SideOnly(Side.CLIENT)
@@ -110,6 +101,7 @@ public class MetaTileEntityIndustrialFurnace extends GTQTMultiblockCore implemen
         this.getFrontOverlay().renderOrientedState(renderState, translation, pipeline, getFrontFacing(), this.recipeMapWorkable.isWorkingEnabled(),
                 isActive());
     }
+
     @SideOnly(Side.CLIENT)
     @Override
     protected ICubeRenderer getFrontOverlay() {

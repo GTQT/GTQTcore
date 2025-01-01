@@ -139,7 +139,7 @@ public class GTQTcoreRecipeMaps {
             .setSlotOverlay(true, false, true, GuiTextures.DUST_OVERLAY)
             .setSound(GTSoundEvents.FURNACE);
 
-    public static final RecipeMap<SimpleRecipeBuilder> CATALYTIC_REFORMER_RECIPES = new RecipeMap<>("catalytic_reformer_recipes", 3,1, 1, 4, new SimpleRecipeBuilder(), false)
+    public static final RecipeMap<SimpleRecipeBuilder> CATALYTIC_REFORMER_RECIPES = new RecipeMap<>("catalytic_reformer_recipes", 3,3, 3, 6, new SimpleRecipeBuilder(), false)
             .setProgressBar(GuiTextures.PROGRESS_BAR_CRACKING, ProgressWidget.MoveType.HORIZONTAL)
             .setSound(GTSoundEvents.FURNACE);
 
@@ -173,7 +173,7 @@ public class GTQTcoreRecipeMaps {
             .setProgressBar(GCYSGuiTextures.PROGRESS_BAR_NANOSCALE, ProgressWidget.MoveType.HORIZONTAL)
             .setSound(GTSoundEvents.ELECTROLYZER);
 
-    public static final RecipeMap<SimpleRecipeBuilder> SONICATION_RECIPES = new RecipeMap<>("sonication_recipes",    3, 2, 2, 1, new SimpleRecipeBuilder(), false)
+    public static final RecipeMap<SimpleRecipeBuilder> SONICATION_RECIPES = new RecipeMap<>("sonication_recipes",    3, 2, 2, 2, new SimpleRecipeBuilder(), false)
             .setSlotOverlay(false, true, false, GuiTextures.BREWER_OVERLAY)
             .setSlotOverlay(false, true, true, GuiTextures.MOLECULAR_OVERLAY_3)
             .setSlotOverlay(true, true, true, GuiTextures.MOLECULAR_OVERLAY_4)
@@ -405,7 +405,7 @@ public class GTQTcoreRecipeMaps {
                 .setProgressBar(GuiTextures.PROGRESS_BAR_MACERATE, ProgressWidget.MoveType.HORIZONTAL)
                 .setSound(GTSoundEvents.CHEMICAL_REACTOR);
 
-        OIL_POOL = new RecipeMap<>("oil_pool", 0, 0, 1, 2, new PrimitiveRecipeBuilder(), false)
+        OIL_POOL = new RecipeMap<>("oil_pool", 0, 0, 2, 2, new PrimitiveRecipeBuilder(), false)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_MACERATE, ProgressWidget.MoveType.HORIZONTAL)
                 .setSound(GTSoundEvents.MACERATOR);
 
@@ -491,7 +491,7 @@ public class GTQTcoreRecipeMaps {
                 3, 3, 3, 3, new PrimitiveRecipeBuilder(), false);
 
         ELEOIL = new RecipeMap<>("ele_oil",
-                0, 0, 2, 2, new SimpleRecipeBuilder(), false);
+                0, 0, 1, 2, new SimpleRecipeBuilder(), false);
 
         REACTION_FURNACE_RECIPES = new RecipeMap<>("reaction_furnace",
                 3, 3, 3, 3, new SimpleRecipeBuilder(), false);
@@ -499,14 +499,15 @@ public class GTQTcoreRecipeMaps {
         SEPTIC_TANK = new RecipeMap<>("septic_tank",
                 2, 2, 2, 2, new SimpleRecipeBuilder(), false);
 
-        DISTILLATION_KETTLE = new RecipeMapGTQTDistillationTower<>("distillation_kettle",
-                1,false, 1,false, 1,false, 12,false, new HeatRecipeBuilder(), false).setSound(GTSoundEvents.CHEMICAL_REACTOR);
-
         SFM = new RecipeMapGTQTDistillationTower<>("sfm",
-                1, false, 1,false,  1,false,  12,false,  new SimpleRecipeBuilder(), false).setSound(GTSoundEvents.CHEMICAL_REACTOR);
+                1, false, 1,false,  1,false,  9,false,  new SimpleRecipeBuilder(), false).setSound(GTSoundEvents.CHEMICAL_REACTOR);
 
-        PYROLYSIS_TOWER = new RecipeMap<>("pyrolysis_tower",
-                1, 1, 1, 8, new HeatRecipeBuilder(), false);
+        PYROLYSIS_TOWER = new RecipeMapGTQTDistillationTower<>("pyrolysis_tower",
+                1, false,1, false,1,false, 12,false, new HeatRecipeBuilder(), false);
+
+        DISTILLATION_KETTLE = new RecipeMap<>("distillation_kettle",
+                0,false, 1,false, 1,false, 9,false, new HeatRecipeBuilder(), false).setSound(GTSoundEvents.CHEMICAL_REACTOR);
+
 
         QUANTUM_FORCE_TRANSFORMER_RECIPES = new RecipeMap<>("quantum_force_transformer_recipes", 6,  6,  6,  6, new QFTCasingTierRecipeBuilder(), false)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL)

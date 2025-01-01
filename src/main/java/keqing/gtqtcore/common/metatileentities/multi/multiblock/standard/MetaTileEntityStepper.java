@@ -295,6 +295,7 @@ public class MetaTileEntityStepper extends MultiMapMultiblockController implemen
         FluidStack LASER3 = SU8_Photoresist.getFluid(1000);
         FluidStack LASER4 = Xmt.getFluid(1000);
         FluidStack LASER5 = Zrbtmst.getFluid(1000);
+
         public LaserEngravingWorkableHandler(RecipeMapMultiblockController tileEntity) {
             super(tileEntity, ComputationType.SPORADIC);
         }

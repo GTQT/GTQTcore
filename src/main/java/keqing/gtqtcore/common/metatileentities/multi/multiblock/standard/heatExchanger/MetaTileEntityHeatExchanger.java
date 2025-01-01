@@ -198,7 +198,7 @@ public class MetaTileEntityHeatExchanger extends NoEnergyMultiblockController im
                 () -> ((WrappedIntTired) glassTier).getIntTier(),
                 0);
 
-       this.tier = Math.min(Math.min(this.casingTier, this.tubeTier), this.glassTier);
+        this.tier = Math.min(Math.min(this.casingTier, this.tubeTier), this.glassTier);
 
         this.writeCustomData(GTQTValue.UPDATE_TIER6, buf -> buf.writeInt(this.casingTier));
     }
@@ -286,12 +286,12 @@ public class MetaTileEntityHeatExchanger extends NoEnergyMultiblockController im
 
     @Override
     public int getHeatTime() {
-        return (int) (heatTime*1.0/tier);
+        return (int) (heatTime * 1.0 / tier);
     }
 
     @Override
     public int getParallel() {
-        return number*coilLevel;
+        return number * coilLevel;
     }
 
     @Override

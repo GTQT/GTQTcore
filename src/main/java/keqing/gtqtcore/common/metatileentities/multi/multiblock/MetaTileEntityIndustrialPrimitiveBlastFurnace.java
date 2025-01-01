@@ -27,15 +27,12 @@ import keqing.gtqtcore.api.pattern.GTQTTraceabilityPredicate;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
@@ -50,10 +47,31 @@ import java.util.List;
 
 public class MetaTileEntityIndustrialPrimitiveBlastFurnace extends NoEnergyMultiblockController {
 
-    int thresholdPercentage=1;
-    private byte auxiliaryBlastFurnaceNumber = 0;
-    int Temp=3000;
     private static final TraceabilityPredicate IS_SNOW_LAYER = new TraceabilityPredicate(bws -> GTUtility.isBlockSnow(bws.getBlockState()));
+    int thresholdPercentage = 1;
+    int Temp = 3000;
+    private byte auxiliaryBlastFurnaceNumber = 0;
+
+    public MetaTileEntityIndustrialPrimitiveBlastFurnace(ResourceLocation metaTileEntityId) {
+        super(metaTileEntityId, RecipeMaps.PRIMITIVE_BLAST_FURNACE_RECIPES);
+        this.recipeMapWorkable = new IndustrialPrimitiveBlastFurnaceLogic(this);
+    }
+
+    private static IBlockState getCasingState() {
+        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.PRIMITIVE_BRICKS);
+    }
+
+    private static IBlockState getFrameState() {
+        return MetaBlocks.FRAMES.get(Materials.Steel).getBlock(Materials.Steel);
+    }
+
+    private static IBlockState getBoilerState() {
+        return MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.STEEL_PIPE);
+    }
+
+    private static IBlockState getFireBoxState() {
+        return MetaBlocks.BOILER_FIREBOX_CASING.getState(BlockFireboxCasing.FireboxCasingType.STEEL_FIREBOX);
+    }
 
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("Temp", Temp);
@@ -65,11 +83,6 @@ public class MetaTileEntityIndustrialPrimitiveBlastFurnace extends NoEnergyMulti
         super.readFromNBT(data);
         Temp = data.getInteger("Temp");
         thresholdPercentage = data.getInteger("thresholdPercentage");
-    }
-
-    public MetaTileEntityIndustrialPrimitiveBlastFurnace(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, RecipeMaps.PRIMITIVE_BLAST_FURNACE_RECIPES);
-        this.recipeMapWorkable = new IndustrialPrimitiveBlastFurnaceLogic(this);
     }
 
     @Override
@@ -91,21 +104,20 @@ public class MetaTileEntityIndustrialPrimitiveBlastFurnace extends NoEnergyMulti
     }
 
     private void incrementThreshold(Widget.ClickData clickData) {
-        if(auxiliaryBlastFurnaceNumber==0)
+        if (auxiliaryBlastFurnaceNumber == 0)
             this.thresholdPercentage = MathHelper.clamp(thresholdPercentage, 1, 1);
-        if(auxiliaryBlastFurnaceNumber==1)
+        if (auxiliaryBlastFurnaceNumber == 1)
             this.thresholdPercentage = MathHelper.clamp(thresholdPercentage + 1, 1, 3);
         else this.thresholdPercentage = MathHelper.clamp(thresholdPercentage + 1, 1, 4);
     }
 
     private void decrementThreshold(Widget.ClickData clickData) {
-        if(auxiliaryBlastFurnaceNumber==0)
+        if (auxiliaryBlastFurnaceNumber == 0)
             this.thresholdPercentage = MathHelper.clamp(thresholdPercentage, 1, 1);
-        if(auxiliaryBlastFurnaceNumber==1)
+        if (auxiliaryBlastFurnaceNumber == 1)
             this.thresholdPercentage = MathHelper.clamp(thresholdPercentage - 1, 1, 3);
         else this.thresholdPercentage = MathHelper.clamp(thresholdPercentage - 1, 1, 4);
     }
-
 
     @Override
     protected void formStructure(PatternMatchContext context) {
@@ -155,22 +167,6 @@ public class MetaTileEntityIndustrialPrimitiveBlastFurnace extends NoEnergyMulti
                 .build();
     }
 
-    private static IBlockState getCasingState() {
-        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.PRIMITIVE_BRICKS);
-    }
-
-    private static IBlockState getFrameState() {
-        return MetaBlocks.FRAMES.get(Materials.Steel).getBlock(Materials.Steel);
-    }
-
-    private static IBlockState getBoilerState() {
-        return MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.STEEL_PIPE);
-    }
-
-    private static IBlockState getFireBoxState() {
-        return MetaBlocks.BOILER_FIREBOX_CASING.getState(BlockFireboxCasing.FireboxCasingType.STEEL_FIREBOX);
-    }
-
     @SideOnly(Side.CLIENT)
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
@@ -184,11 +180,11 @@ public class MetaTileEntityIndustrialPrimitiveBlastFurnace extends NoEnergyMulti
     }
 
     public int cost() {
-        if(Temp<5000) return 1;
-        if(Temp<10000) return 2;
-        if(Temp<15000) return 4;
-        if(Temp<20000) return 6;
-        if(Temp<25000) return 8;
+        if (Temp < 5000) return 1;
+        if (Temp < 10000) return 2;
+        if (Temp < 15000) return 4;
+        if (Temp < 20000) return 6;
+        if (Temp < 25000) return 8;
         else return 10;
     }
 
@@ -196,15 +192,15 @@ public class MetaTileEntityIndustrialPrimitiveBlastFurnace extends NoEnergyMulti
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
         if (isStructureFormed()) {
-            textList.add(new TextComponentTranslation("gtqtcore.multiblock.ip1.amount",thresholdPercentage*10,40));
-            textList.add(new TextComponentTranslation("gtqtcore.multiblock.ip2.amount",Temp/10,2600));
-            textList.add(new TextComponentTranslation("gtqtcore.multiblock.ip3.amount",cost()));
+            textList.add(new TextComponentTranslation("gtqtcore.multiblock.ip1.amount", thresholdPercentage * 10, 40));
+            textList.add(new TextComponentTranslation("gtqtcore.multiblock.ip2.amount", Temp / 10, 2600));
+            textList.add(new TextComponentTranslation("gtqtcore.multiblock.ip3.amount", cost()));
             textList.add(new TextComponentTranslation("gtqtcore.machine.industrial_primitive_blast_furnace.auxiliary_blast_furnace", auxiliaryBlastFurnaceNumber));
         }
     }
 
     @Override
-    public void addInformation(ItemStack stack,  World player, List<String> tooltip, boolean advanced) {
+    public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("跨纬度等泥土子锻炉", new Object[0]));
         tooltip.add(I18n.format("gtqtcore.machine.industrial_primitive_blast_furnace.tooltip.1"));
@@ -253,46 +249,13 @@ public class MetaTileEntityIndustrialPrimitiveBlastFurnace extends NoEnergyMulti
         return false;
     }
 
-
-
-    protected class IndustrialPrimitiveBlastFurnaceLogic extends NoEnergyMultiblockRecipeLogic {
-
-        public IndustrialPrimitiveBlastFurnaceLogic(NoEnergyMultiblockController tileEntity) {
-            super(tileEntity, tileEntity.recipeMap);
-        }
-
-        @Override
-        public void setMaxProgress(int maxProgress)
-        {
-            this.maxProgressTime = maxProgress/cost();
-        }
-
-        protected void updateRecipeProgress() {
-            if (canRecipeProgress) {
-                if(Temp<28000) Temp=Temp+thresholdPercentage;
-                if (++progressTime > maxProgressTime) {
-                    completeRecipe();
-                }
-            }
-
-        }
-
-        public int cost() {
-            if(Temp<5000) return 1;
-            if(Temp<10000) return 2;
-            if(Temp<15000) return 4;
-            if(Temp<20000) return 6;
-            if(Temp<25000) return 8;
-            else return 10;
-        }
-    }
     @Override
     public void update() {
         super.update();
-        if(Temp>3000&&Temp<=12000)Temp--;
-        if(Temp>12000&&Temp<=19000)Temp=Temp-2;
-        if(Temp>19000&&Temp<=26000)Temp=Temp-3;
-        if(Temp>26000)Temp=Temp-4;
+        if (Temp > 3000 && Temp <= 12000) Temp--;
+        if (Temp > 12000 && Temp <= 19000) Temp = Temp - 2;
+        if (Temp > 19000 && Temp <= 26000) Temp = Temp - 3;
+        if (Temp > 26000) Temp = Temp - 4;
         if (this.isActive()) {
             if (getWorld().isRemote) {
                 pollutionParticles();
@@ -303,9 +266,9 @@ public class MetaTileEntityIndustrialPrimitiveBlastFurnace extends NoEnergyMulti
     private void pollutionParticles() {
         BlockPos pos = this.getPos();
         EnumFacing facing = this.getFrontFacing().getOpposite();
-        float xPos = facing.getXOffset() *2 + pos.getX() + 0.5F;
-        float yPos = facing.getYOffset() *2 + pos.getY() + 0.25F;
-        float zPos = facing.getZOffset() *2 + pos.getZ() + 0.5F;
+        float xPos = facing.getXOffset() * 2 + pos.getX() + 0.5F;
+        float yPos = facing.getYOffset() * 2 + pos.getY() + 0.25F;
+        float zPos = facing.getZOffset() * 2 + pos.getZ() + 0.5F;
 
         float ySpd = facing.getYOffset() * 0.7F + 0.7F + 0.8F * GTValues.RNG.nextFloat();
 
@@ -317,7 +280,38 @@ public class MetaTileEntityIndustrialPrimitiveBlastFurnace extends NoEnergyMulti
     }
 
     public void arunMufflerEffect(float xPos, float yPos, float zPos, float xSpd, float ySpd, float zSpd) {
-        this.getWorld().spawnParticle(EnumParticleTypes.SMOKE_LARGE, (double)xPos, (double)yPos, (double)zPos, (double)xSpd, (double)ySpd, (double)zSpd, new int[0]);
+        this.getWorld().spawnParticle(EnumParticleTypes.SMOKE_LARGE, xPos, yPos, zPos, xSpd, ySpd, zSpd);
+    }
+
+    protected class IndustrialPrimitiveBlastFurnaceLogic extends NoEnergyMultiblockRecipeLogic {
+
+        public IndustrialPrimitiveBlastFurnaceLogic(NoEnergyMultiblockController tileEntity) {
+            super(tileEntity, tileEntity.recipeMap);
+        }
+
+        @Override
+        public void setMaxProgress(int maxProgress) {
+            this.maxProgressTime = maxProgress / cost();
+        }
+
+        protected void updateRecipeProgress() {
+            if (canRecipeProgress) {
+                if (Temp < 28000) Temp = Temp + thresholdPercentage;
+                if (++progressTime > maxProgressTime) {
+                    completeRecipe();
+                }
+            }
+
+        }
+
+        public int cost() {
+            if (Temp < 5000) return 1;
+            if (Temp < 10000) return 2;
+            if (Temp < 15000) return 4;
+            if (Temp < 20000) return 6;
+            if (Temp < 25000) return 8;
+            else return 10;
+        }
     }
 
 }
