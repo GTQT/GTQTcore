@@ -24,6 +24,9 @@ import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityFluidHatch;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
+import keqing.gtqtcore.client.textures.GTQTTextures;
+import keqing.gtqtcore.common.block.GTQTMetaBlocks;
+import keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -63,15 +66,15 @@ public class MetaTileEntitySMSF extends MultiMapMultiblockController implements 
     }
 
     private static IBlockState getCasingAState() {
-        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.TUNGSTENSTEEL_ROBUST);
+        return GTQTMetaBlocks.TURBINE_CASING.getState(GTQTTurbineCasing.TurbineCasingType.IRIDIUM_CASING);
     }
 
     private static IBlockState getCasingBState() {
-        return MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.TITANIUM_PIPE);
+        return GTQTMetaBlocks.TURBINE_CASING.getState(GTQTTurbineCasing.TurbineCasingType.NQ_MACHINE_CASING);
     }
 
     private static IBlockState getFrameState() {
-        return MetaBlocks.FRAMES.get(Materials.TungstenSteel).getBlock(Materials.TungstenSteel);
+        return MetaBlocks.FRAMES.get(Materials.Naquadah).getBlock(Materials.Naquadah);
     }
 
     @Override
@@ -237,7 +240,7 @@ public class MetaTileEntitySMSF extends MultiMapMultiblockController implements 
     @SideOnly(Side.CLIENT)
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
-        return Textures.ROBUST_TUNGSTENSTEEL_CASING;
+        return GTQTTextures.IRIDIUM_CASING;
     }
 
     @SideOnly(Side.CLIENT)
@@ -294,7 +297,7 @@ public class MetaTileEntitySMSF extends MultiMapMultiblockController implements 
         }
 
         public long getMaxVoltage() {
-            return V[8];
+            return V[9];
         }
 
         @Override

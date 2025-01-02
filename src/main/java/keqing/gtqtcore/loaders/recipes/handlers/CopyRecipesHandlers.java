@@ -19,9 +19,29 @@ import static gregtech.api.GTValues.*;
 import static gregtech.api.unification.material.Materials.DistilledWater;
 import static gregtech.api.unification.material.Materials.Lubricant;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
+import static keqing.gtqtcore.api.utils.GTQTUtil.CWT;
 
 public class CopyRecipesHandlers {
     public static void init() {
+
+        //固化
+        Collection<Recipe> solidificationRecipes = RecipeMaps.FLUID_SOLIDFICATION_RECIPES.getRecipeList();
+        for (Recipe recipe : solidificationRecipes) {
+            List<GTRecipeInput> fluidInputs = recipe.getFluidInputs();
+            List<GTRecipeInput> itemInputs = recipe.getInputs();
+            List<ItemStack> itemOutputs = recipe.getOutputs();
+            int EUt = recipe.getEUt();
+            int baseDuration= (int) (recipe.getDuration()*0.8);
+
+            TD_PRINT_RECIPES.recipeBuilder()
+                    .duration(baseDuration)
+                    .EUt(EUt<=V[LV]?EUt:EUt/4)
+                    .fluidInputs(fluidInputs)
+                    .inputIngredients(itemInputs)
+                    .outputs(itemOutputs)
+                    .CWUt(CWT[(GTUtility.getTierByVoltage(recipe.getEUt())+2)])
+                    .buildAndRegister();
+        }
 
         //蒸馏塔
         Collection<Recipe> DistillationRecipes = RecipeMaps.DISTILLATION_RECIPES.getRecipeList();

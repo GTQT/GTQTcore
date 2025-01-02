@@ -513,7 +513,7 @@ public class OilChains {
         PYROLYSIS_TOWER.recipeBuilder()
                 .input(log, Wood, 64)
                 .fluidInputs(Steam.getFluid(6000))
-                .output(gem, Coal,48)
+                .output(gem, Coal,64)
                 .fluidOutputs(WoodTar.getFluid(1000))
                 .fluidOutputs(WoodGas.getFluid(1000))
                 .fluidOutputs(WoodVinegar.getFluid(2000))
@@ -522,9 +522,9 @@ public class OilChains {
                 .buildAndRegister();
 
         PYROLYSIS_TOWER.recipeBuilder()
-                .input(log, Wood, 80)
+                .input(log, Wood, 64)
                 .fluidInputs(Nitrogen.getFluid(6000))
-                .output(gem, Coke, 48)
+                .output(gem, Coke, 64)
                 .fluidOutputs(CharcoalByproducts.getFluid(3000))
                 .fluidOutputs(WoodTar.getFluid(1000))
                 .fluidOutputs(WoodGas.getFluid(1000))

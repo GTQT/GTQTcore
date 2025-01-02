@@ -65,17 +65,8 @@ public class GTQTRecipes {
         soldering_iron_head.addProcessingHandler(PropertyKey.INGOT, GTQTRecipes::processSolderingIron);
         OrePrefix.ring.addProcessingHandler(PropertyKey.DUST, GTQTRecipes::processRing);
         OrePrefix.stick.addProcessingHandler(PropertyKey.DUST, GTQTRecipes::processStick);
-        //OrePrefix.gear.addProcessingHandler(PropertyKey.DUST, GTQTRecipes::processGear);
-        //OrePrefix.gearSmall.addProcessingHandler(PropertyKey.DUST, GTQTRecipes::processGear);
         OrePrefix.plate.addProcessingHandler(PropertyKey.DUST, GTQTRecipes::processPlate);
-        //OrePrefix.rotor.addProcessingHandler(PropertyKey.INGOT, GTQTRecipes::processRotor);
-
-        //OrePrefix.block.addProcessingHandler(PropertyKey.DUST, GTQTRecipes::processBlock);
-        //OrePrefix.ingot.addProcessingHandler(PropertyKey.INGOT, GTQTRecipes::processIngot);
-        //OrePrefix.nugget.addProcessingHandler(PropertyKey.DUST, GTQTRecipes::processNugget);
-
         OrePrefix.plate.addProcessingHandler(TOOL, GTQTRecipes::processTool);
-
         OrePrefix.spring.addProcessingHandler(PropertyKey.INGOT, GTQTRecipes::processSpring);
         OrePrefix.springSmall.addProcessingHandler(PropertyKey.INGOT, GTQTRecipes::processSpringSmall);
         OrePrefix.foil.addProcessingHandler(PropertyKey.INGOT, GTQTRecipes::processFoil);
@@ -163,18 +154,26 @@ public class GTQTRecipes {
             if (material.hasFluid()) {
                 FLUID_SOLIDFICATION_RECIPES.recipeBuilder()
                         .notConsumable(GTQTMetaItems.MOLD_GAS)
-                        .fluidInputs(material.getFluid(L * 10))
+                        .fluidInputs(material.getFluid(1224))
                         .output(cylinder, material)
-                        .duration(400)
+                        .duration(1200)
                         .EUt(GTValues.VA[HV])
                         .buildAndRegister();
 
                 FLUID_SOLIDFICATION_RECIPES.recipeBuilder()
                         .notConsumable(GTQTMetaItems.MOLD_MOTOR)
-                        .fluidInputs(material.getFluid(L * 10))
+                        .fluidInputs(material.getFluid(1620))
                         .output(motor_stick, material)
-                        .duration(400)
+                        .duration(1200)
                         .EUt(GTValues.VA[HV])
+                        .buildAndRegister();
+
+                FLUID_SOLIDFICATION_RECIPES.recipeBuilder()
+                        .notConsumable(GTQTMetaItems.MOLD_VALUE)
+                        .fluidInputs(material.getFluid(1692))
+                        .output(valve, material)
+                        .duration(1200)
+                        .EUt(GTValues.VA[EV])
                         .buildAndRegister();
             }
 
@@ -260,6 +259,7 @@ public class GTQTRecipes {
                         'A', new UnificationEntry(spring, material),
                         'C', new UnificationEntry(round_cover, material),
                         'B', SOLDERING_IRON_LV);
+
                 ModHandler.addShapedRecipe(String.format("bcylinder_%s", material),
                         OreDictUnifier.get(cylinder, material),
                         "hCT", "SAS", "LCB",
@@ -269,6 +269,7 @@ public class GTQTRecipes {
                         'A', new UnificationEntry(spring, material),
                         'C', new UnificationEntry(round_cover, material),
                         'B', SOLDERING_IRON_HV);
+
                 ModHandler.addShapedRecipe(String.format("ccylinder_%s", material),
                         OreDictUnifier.get(cylinder, material),
                         "hCT", "SAS", "LCB",
@@ -290,27 +291,9 @@ public class GTQTRecipes {
                         .output(cylinder, material)
                         .buildAndRegister();
 
-                TD_PRINT_RECIPES.recipeBuilder()
-                        .EUt(120).duration(200)
-                        .circuitMeta(1)
-                        .fluidInputs(material.getFluid(1296))
-                        .fluidInputs(Polytetrafluoroethylene.getFluid(144))
-                        .output(cylinder, material)
-                        .CWUt(24)
-                        .buildAndRegister();
-
-                TD_PRINT_RECIPES.recipeBuilder()
-                        .EUt(120).duration(200)
-                        .circuitMeta(1)
-                        .fluidInputs(material.getFluid(1296))
-                        .fluidInputs(Polybenzimidazole.getFluid(36))
-                        .output(cylinder, material)
-                        .CWUt(24)
-                        .buildAndRegister();
-
                 FLUID_EXTRACTOR_RECIPES.recipeBuilder()
                         .EUt(32).duration(40)
-                        .fluidOutputs(material.getFluid(1000))
+                        .fluidOutputs(material.getFluid(1224))
                         .input(cylinder, material)
                         .buildAndRegister();
 
@@ -345,27 +328,9 @@ public class GTQTRecipes {
                         .output(motor_stick, material)
                         .buildAndRegister();
 
-                TD_PRINT_RECIPES.recipeBuilder()
-                        .EUt(120).duration(200)
-                        .circuitMeta(2)
-                        .fluidInputs(material.getFluid(2000))
-                        .output(motor_stick, material)
-                        .fluidInputs(Polytetrafluoroethylene.getFluid(144))
-                        .CWUt(24)
-                        .buildAndRegister();
-
-                TD_PRINT_RECIPES.recipeBuilder()
-                        .EUt(120).duration(200)
-                        .circuitMeta(2)
-                        .fluidInputs(material.getFluid(2000))
-                        .output(motor_stick, material)
-                        .fluidInputs(Polybenzimidazole.getFluid(36))
-                        .CWUt(24)
-                        .buildAndRegister();
-
                 FLUID_EXTRACTOR_RECIPES.recipeBuilder()
                         .EUt(32).duration(40)
-                        .fluidOutputs(material.getFluid(1000))
+                        .fluidOutputs(material.getFluid(1620))
                         .input(motor_stick, material)
                         .buildAndRegister();
 
@@ -408,27 +373,9 @@ public class GTQTRecipes {
                         .output(valve, material)
                         .buildAndRegister();
 
-                TD_PRINT_RECIPES.recipeBuilder()
-                        .EUt(120).duration(200)
-                        .circuitMeta(3)
-                        .fluidInputs(material.getFluid(2016))
-                        .output(valve, material)
-                        .fluidInputs(Polytetrafluoroethylene.getFluid(144))
-                        .CWUt(24)
-                        .buildAndRegister();
-
-                TD_PRINT_RECIPES.recipeBuilder()
-                        .EUt(120).duration(200)
-                        .circuitMeta(3)
-                        .fluidInputs(material.getFluid(2016))
-                        .output(valve, material)
-                        .fluidInputs(Polybenzimidazole.getFluid(36))
-                        .CWUt(24)
-                        .buildAndRegister();
-
                 FLUID_EXTRACTOR_RECIPES.recipeBuilder()
                         .EUt(32).duration(40)
-                        .fluidOutputs(material.getFluid(2016))
+                        .fluidOutputs(material.getFluid(1692))
                         .input(valve, material)
                         .buildAndRegister();
 
@@ -531,7 +478,6 @@ public class GTQTRecipes {
     }
 
     private static void processTool(OrePrefix prefix, Material material, ToolProperty property) {
-        UnificationEntry stick = new UnificationEntry(OrePrefix.stick, Materials.Wood);
         UnificationEntry rod = new UnificationEntry(OrePrefix.stick, material);
         UnificationEntry plate = new UnificationEntry(OrePrefix.plate, material);
         UnificationEntry ingot = new UnificationEntry(material.hasProperty(GEM) ? OrePrefix.gem : OrePrefix.ingot, material);
@@ -667,38 +613,6 @@ public class GTQTRecipes {
                 .circuitMeta(10)
                 .grindBallTier(2)
                 .buildAndRegister();
-
-        //磨球
-        BIO_CENTRIFUGE.recipeBuilder()
-                .fluidInputs(HydrochloricAcid.getFluid(100))
-                .notConsumable(gear, TungstenSteel)
-                .input(OrePrefix.crushed, material, 16)
-                .output(milledPrefix, material, 16)
-                .circuitMeta(1)
-                .duration(1200).EUt(1920).buildAndRegister();
-
-        //矿处
-        if (material.hasProperty((PropertyKey.ORE))) {
-            DIGESTER_RECIPES.recipeBuilder()
-                    .fluidInputs(HighlyPurifiedCoalTar.getFluid(100))
-                    .fluidInputs(NitricAcid.getFluid(100))
-                    .fluidInputs(Oxygen.getFluid(1000))
-                    .input(dust, Salt, 4)
-                    .input(ore, material, 32)
-                    .output(crushed, material, 48)
-                    .output(crushed, material, 48)
-                    .circuitMeta(1)
-                    .duration(600).EUt(480).buildAndRegister();
-
-            //矿处二
-            DISSOLUTION_TANK_RECIPES.recipeBuilder()
-                    .fluidInputs(NitricAcid.getFluid(100))
-                    .input(dust, Alunite, 1)
-                    .input(crushed, material, 32)
-                    .output(dust, material, 48)
-                    .circuitMeta(1)
-                    .duration(300).EUt(480).buildAndRegister();
-        }
     }
 
     private static void gcmTool(OrePrefix prefix, Material material, ToolProperty property) {

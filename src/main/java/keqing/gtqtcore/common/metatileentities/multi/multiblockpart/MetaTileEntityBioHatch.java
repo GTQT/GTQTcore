@@ -76,7 +76,7 @@ public class MetaTileEntityBioHatch extends MetaTileEntityMultiblockPart impleme
         FluidTank bio = new FluidTank(4000){
             @Override
             public boolean canFillFluidType(FluidStack fluid) {
-                return (fluid==null?false:fluid.getFluid()==Materials.Biomass.getFluid());
+                return (fluid != null && fluid.getFluid() == Materials.Biomass.getFluid());
             }
         };
         list[0] = water;

@@ -22,6 +22,7 @@ import keqing.gtqtcore.api.capability.IDrillHead;
 import keqing.gtqtcore.api.capability.IElectrode;
 import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
 import keqing.gtqtcore.api.utils.GTQTDateHelper;
+import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.items.behaviors.DrillHeadBehavior;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -82,7 +83,7 @@ public class MetaTileEntityDrillHeadHatch extends MetaTileEntityMultiblockPart i
     public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
         super.renderMetaTileEntity(renderState, translation, pipeline);
         if (this.shouldRenderOverlay()) {
-            Textures.ADV_PUMP_OVERLAY.renderSided(getFrontFacing(), renderState, translation, pipeline);
+            GTQTTextures.DRILL.renderSided(getFrontFacing(), renderState, translation, pipeline);
         }
     }
 

@@ -17,6 +17,7 @@ import gregtech.api.pattern.TraceabilityPredicate;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
+import gregtech.api.unification.material.Materials;
 import gregtech.api.util.GTTransferUtils;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.RelativeDirection;
@@ -26,12 +27,15 @@ import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
 import gregtech.client.utils.TooltipHelper;
 import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.BlockBoilerCasing;
+import gregtech.common.blocks.BlockGlassCasing;
 import gregtech.common.blocks.MetaBlocks;
+import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityFluidHatch;
 import gregtech.core.sound.GTSoundEvents;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.GTQTMultiblockCasing;
+import keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -125,35 +129,30 @@ public class MetaTileEntityDangoteDistillery extends MultiMapMultiblockControlle
             this.handler.invalidate();
     }
 
-    @Override
     protected BlockPattern createStructurePattern() {
-        // Different characters use common constraints
-        TraceabilityPredicate casingPredicate = states(getCasingState()).setMinGlobalLimited(40);
-        TraceabilityPredicate maintenancePredicate = this.hasMaintenanceMechanics() &&
-                ConfigHolder.machines.enableMaintenance ?
-                abilities(MultiblockAbility.MAINTENANCE_HATCH).setMinGlobalLimited(1).setMaxGlobalLimited(1) :
-                casingPredicate;
-        return FactoryBlockPattern.start(RIGHT, FRONT, DOWN)
-                .aisle("#####", "#ZZZ#", "#ZCZ#", "#ZZZ#", "#####")
-                .aisle("##X##", "#XAX#", "XAPAX", "#XAX#", "##X##").setRepeatable(1, 12)
-                .aisle("#YSY#", "YAAAY", "YATAY", "YAAAY", "#YYY#")
-                .aisle("#YYY#", "YYYYY", "YYYYY", "YYYYY", "#YYY#")
-                .where('S', selfPredicate())
-                .where('Y', casingPredicate.or(abilities(MultiblockAbility.IMPORT_ITEMS))
-                        .or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(2))
-                        .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setMinGlobalLimited(1))
-                        .or(abilities(MultiblockAbility.EXPORT_ITEMS))
-                        .or(maintenancePredicate))
-                .where('X', casingPredicate
-                        .or(abilities(MultiblockAbility.EXPORT_FLUIDS)
-                                .setMinLayerLimited(1) // TODO parallel logic doesn't support hatch omission without
-                                .setMaxLayerLimited(1, 1)))
-                .where('Z', casingPredicate)
-                .where('P', states(getCasingState2()))
-                .where('C', abilities(MultiblockAbility.MUFFLER_HATCH))
-                .where('T', tieredCasing().or(states(getCasingState2())))
-                .where('A', air())
-                .where('#', any())
+        return FactoryBlockPattern.start(RIGHT, FRONT, UP)
+                .aisle(" CSC  ", "CCCCCC", "CCCCCC", "CCCCCC", " CCC  ")
+                .aisle(" CGC  ", "C#F#CC", "IFFF#P", "C#F#CC", " CCC  ")
+                .aisle(" CGC  ", "C#F#CC", "CFFFCC", "C#F#CC", " CCC  ")
+                .aisle(" XGX  ", "X#F#D ", "XFFFD ", "X#F#D ", " XXX  ").setRepeatable(1, 12)
+                .aisle(" DDD  ", "DDDDD ", "DDDDD ", "DDDDD ", " DDD  ")
+                .where('S', this.selfPredicate())
+                .where('G', states(this.getGlassState()))
+                .where('P', states(this.getPipeCasingState()))
+                .where('F', states(this.getFrameState()))
+                .where('C', states(this.getCasingState())
+                        .or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(3))
+                        .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setMaxGlobalLimited(1))
+                        .or(abilities(MultiblockAbility.IMPORT_ITEMS).setMaxGlobalLimited(1)))
+                .where('I', abilities(MultiblockAbility.EXPORT_ITEMS).setMaxGlobalLimited(1))
+                .where('D', states(this.getCasingState()))
+                .where('X', states(getCasingState())
+                        .or(metaTileEntities(MultiblockAbility.REGISTRY.get(MultiblockAbility.EXPORT_FLUIDS).stream()
+                                .filter(mte -> (mte instanceof MetaTileEntityFluidHatch))
+                                .toArray(MetaTileEntity[]::new))
+                                .setMinLayerLimited(1).setMaxLayerLimited(1))
+                        .or(autoAbilities(true, false)))
+                .where('#', air())
                 .build();
     }
 
@@ -167,7 +166,17 @@ public class MetaTileEntityDangoteDistillery extends MultiMapMultiblockControlle
         if (usesAdvHatchLogic()) return this.handler.getLayerCount();
         else return super.getFluidOutputLimit();
     }
+    protected IBlockState getFrameState() {
+        return MetaBlocks.FRAMES.get(Materials.Naquadah).getBlock(Materials.Naquadah);
+    }
 
+    protected IBlockState getGlassState() {
+        return MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.TEMPERED_GLASS);
+    }
+    
+    protected IBlockState getPipeCasingState() {
+        return GTQTMetaBlocks.TURBINE_CASING.getState(GTQTTurbineCasing.TurbineCasingType.NQ_MACHINE_CASING);
+    }
     public boolean hasMufflerMechanics() {
         return false;
     }

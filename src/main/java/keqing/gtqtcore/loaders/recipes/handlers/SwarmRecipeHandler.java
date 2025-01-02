@@ -28,8 +28,10 @@ public class SwarmRecipeHandler {
         for (Material material : GregTechAPI.materialManager.getRegisteredMaterials()) {
             i++;
             if(i>30)i=1;
-            if(!material.hasProperty(PropertyKey.INGOT)||material.hasProperty(PropertyKey.FLUID))continue;
-            processDecomposition(material,i);
+
+            if (material.hasProperty(PropertyKey.INGOT) || material.hasProperty(PropertyKey.FLUID)) {
+                processDecomposition(material,i);
+            }
         }
     }
     public static void runRecipeBreeding() {

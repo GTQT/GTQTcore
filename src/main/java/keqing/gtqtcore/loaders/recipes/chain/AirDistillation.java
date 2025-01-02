@@ -24,7 +24,6 @@ import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 
 public class AirDistillation {
     public static void init() {
-        bath(Silicon,1);
         vaccum(LiquidCarbonDioxide,CarbonDioxide,1);
         vaccum(LiquidNitrogen,Nitrogen,2);
         vaccum(LiquidHydrogen,Hydrogen,2);
@@ -65,15 +64,6 @@ public class AirDistillation {
                 .fluidOutputs(Neon.getFluid(50))
                 .fluidOutputs(Radon.getFluid(50))
                 .duration(2000).EUt(VA[MV]).buildAndRegister();
-    }
-
-    private static void bath(Material material, int i) {
-        BATH_CONDENSER.recipeBuilder()
-                .output(ingotHot,material)
-                .output(ingot,material)
-                .duration(20+20*i)
-                .EUt(GTValues.VA[1+i])
-                .buildAndRegister();
     }
 
     private static void vaccum(Material material1, Material material2, int i) {

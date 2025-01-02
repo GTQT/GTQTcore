@@ -20,9 +20,6 @@ import keqing.gtqtcore.loaders.recipes.chain.PreciseAssemblerChain;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.recipes.RecipeMaps.REPLICATOR_RECIPES;
 
-
-//怎么写请看
-//https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/api/recipe/GSRecipeMaps.java
 public class GTQTcoreRecipeMaps {
     public static final RecipeMap<SimpleRecipeBuilder> SPINNER_RECIPES = new RecipeMap<>("spinner",
             3, 1, 1, 0, new SimpleRecipeBuilder(), false)
@@ -105,10 +102,6 @@ public class GTQTcoreRecipeMaps {
             .setSlotOverlay(false, false, true, GuiTextures.DATA_ORB_OVERLAY)
             .setProgressBar(GuiTextures.PROGRESS_BAR_CIRCUIT_ASSEMBLER, ProgressWidget.MoveType.HORIZONTAL)
             .setSound(GTSoundEvents.ASSEMBLER);
-
-    public static final RecipeMap<BathCondenserRecipeBuilder> BATH_CONDENSER = new RecipeMap<>("bath_condenser", 3, 3, 3, 3, new BathCondenserRecipeBuilder(), false)
-            .setProgressBar(GuiTextures.PROGRESS_BAR_SIFT, ProgressWidget.MoveType.VERTICAL)
-            .setSound(GTSoundEvents.BATH);
 
     public static final RecipeMap<FuelRecipeBuilder> BIOMASS_GENERATOR_RECIPES = new RecipeMap<>("biomass_generator", 0, 0, 1, 0, new FuelRecipeBuilder(), false)
             .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, ProgressWidget.MoveType.HORIZONTAL)
@@ -500,13 +493,13 @@ public class GTQTcoreRecipeMaps {
                 2, 2, 2, 2, new SimpleRecipeBuilder(), false);
 
         SFM = new RecipeMapGTQTDistillationTower<>("sfm",
-                1, false, 1,false,  1,false,  9,false,  new SimpleRecipeBuilder(), false).setSound(GTSoundEvents.CHEMICAL_REACTOR);
+                1, false, 1,false,  1,false,  12,false,  new SimpleRecipeBuilder(), false).setSound(GTSoundEvents.CHEMICAL_REACTOR);
 
         PYROLYSIS_TOWER = new RecipeMapGTQTDistillationTower<>("pyrolysis_tower",
                 1, false,1, false,1,false, 12,false, new HeatRecipeBuilder(), false);
 
         DISTILLATION_KETTLE = new RecipeMap<>("distillation_kettle",
-                0,false, 1,false, 1,false, 9,false, new HeatRecipeBuilder(), false).setSound(GTSoundEvents.CHEMICAL_REACTOR);
+                0,false, 1,false, 1,false, 12,false, new HeatRecipeBuilder(), false).setSound(GTSoundEvents.CHEMICAL_REACTOR);
 
 
         QUANTUM_FORCE_TRANSFORMER_RECIPES = new RecipeMap<>("quantum_force_transformer_recipes", 6,  6,  6,  6, new QFTCasingTierRecipeBuilder(), false)

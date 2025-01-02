@@ -311,6 +311,7 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         //快乐模具
         MOLD_GAS = this.addItem(300, "mold.gas").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         MOLD_MOTOR = this.addItem(301, "mold.motor").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        MOLD_VALUE = this.addItem(302, "mold.value").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
 
         //阳光化合物们
         SUN_MATTER = this.addItem(320, "sun_matter").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_HP);

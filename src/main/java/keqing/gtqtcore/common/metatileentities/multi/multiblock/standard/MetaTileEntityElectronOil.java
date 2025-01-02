@@ -28,9 +28,9 @@ import java.util.List;
 import static gregtech.api.GTValues.EV;
 
 //电催破乳
-public class MetaTileEntityELEOil extends RecipeMapMultiblockController {
+public class MetaTileEntityElectronOil extends RecipeMapMultiblockController {
 
-    public MetaTileEntityELEOil(ResourceLocation metaTileEntityId) {
+    public MetaTileEntityElectronOil(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.ELEOIL);
         this.recipeMapWorkable = new ELEOilLogic(this);
     }
@@ -51,7 +51,7 @@ public class MetaTileEntityELEOil extends RecipeMapMultiblockController {
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {
-        return new MetaTileEntityELEOil(metaTileEntityId);
+        return new MetaTileEntityElectronOil(metaTileEntityId);
     }
 
     @Override

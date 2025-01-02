@@ -242,9 +242,7 @@ public class MetaTileEntityThreeDim extends MultiMapMultiblockController impleme
 
         public void setMaxProgress(int maxProgress) {
             if (isPrecise()) {
-                this.maxProgressTime = maxProgress * (100 - glass_tier) / 100;
-            } else {
-                this.maxProgressTime = maxProgress;
+                this.maxProgressTime = (int) (maxProgress * (100.0 - glass_tier) / 100);
             }
         }
 

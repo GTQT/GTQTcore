@@ -287,7 +287,7 @@ public class MetaTileEntityMSF extends MultiMapMultiblockController implements I
         }
 
         public long getMaxVoltage() {
-            return V[4];
+            return V[5];
         }
 
         @Override

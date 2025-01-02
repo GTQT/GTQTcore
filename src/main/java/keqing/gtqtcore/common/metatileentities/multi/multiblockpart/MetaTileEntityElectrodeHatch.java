@@ -82,7 +82,7 @@ public class MetaTileEntityElectrodeHatch extends MetaTileEntityMultiblockPart i
     public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
         super.renderMetaTileEntity(renderState, translation, pipeline);
         if (this.shouldRenderOverlay()) {
-            Textures.ITEM_HATCH_INPUT_OVERLAY.renderSided(getFrontFacing(), renderState, translation, pipeline);
+            GTQTTextures.ELECTRODE_HATCH.renderSided(getFrontFacing(), renderState, translation, pipeline);
         }
     }
 

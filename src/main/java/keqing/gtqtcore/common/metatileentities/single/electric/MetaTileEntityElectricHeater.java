@@ -10,6 +10,7 @@ import gregtech.api.metatileentity.TieredMetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.util.GTUtility;
 import gregtech.client.renderer.texture.Textures;
+import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.metatileentities.multi.multiblockpart.MetaTileEntityHeatHatch;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
@@ -64,7 +65,7 @@ public class MetaTileEntityElectricHeater extends TieredMetaTileEntity {
     @Override
     public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
         super.renderMetaTileEntity(renderState, translation, pipeline);
-        Textures.HPCA_OVERLAY.renderSided(getFrontFacing(), renderState, translation, pipeline);
+        GTQTTextures.HEAT.renderSided(getFrontFacing(), renderState, translation, pipeline);
     }
     @Override
     protected boolean isEnergyEmitter() {

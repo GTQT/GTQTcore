@@ -17,7 +17,7 @@ public class GTQTMaterialFlagAddition {
 
     public static void init() {
         Material[] material = {
-                Polyethylene,
+                Polyethylene,Carbon,
                 Lanthanum,Praseodymium,Neodymium,Cerium,Scandium,Europium,Gadolinium,Yttrium,Terbium,Dysprosium,Holmium,Erbium,Thulium,Ytterbium,Lutetium,Niobium,Palladium,Ruthenium,Naquadria,Samarium,
                 Tritanium, Duranium, Technetium, Meitnerium, Roentgenium, Nobelium, Lawrencium, Moscovium, Lutetium,NaquadahEnriched,Trinium,
                 Stellite100, WatertightSteel, MaragingSteel300, HastelloyC276, HastelloyX, Trinaquadalloy, Zeron100, TitaniumCarbide,
@@ -222,6 +222,25 @@ public class GTQTMaterialFlagAddition {
         Cobalt.addFlags(GENERATE_CURVED_PLATE, GENERATE_SPRING, GENERATE_SPRING_SMALL, GENERATE_DENSE, GENERATE_SMALL_GEAR);
         // PolyvinylChloride.addFlags(GENERATE_CURVED_PLATE);
         RoseGold.addFlags(GENERATE_CURVED_PLATE, GENERATE_SPRING, GENERATE_SPRING_SMALL);
+        Copper.addFlags(GENERATE_RING);
+        Cobalt.addFlags(GENERATE_RING);
+        Tungsten.addFlags(GENERATE_RING,GENERATE_SMALL_GEAR);
+        Osmium.addFlags(GENERATE_RING);
+        Nickel.addFlags(GENERATE_RING);
+        Naquadah.addFlags(GENERATE_RING);
+        Brass.addFlags(GENERATE_RING);
+        Cupronickel.addFlags(GENERATE_RING);
+        Magnalium.addFlags(GENERATE_RING);
+        NiobiumTitanium.addFlags(GENERATE_RING);
+        SterlingSilver.addFlags(GENERATE_RING);
+        BlackBronze.addFlags(GENERATE_RING);
+        RoseGold.addFlags(GENERATE_SMALL_GEAR);
+        TinAlloy.addFlags(GENERATE_RING);
+        Ultimet.addFlags(GENERATE_RING);
+        Potin.addFlags(GENERATE_RING,GENERATE_SMALL_GEAR);
+        VanadiumSteel.addFlags(GENERATE_RING);
+        CobaltBrass.addFlags(GENERATE_RING);
+        TungstenCarbide.addFlags(GENERATE_RING);
 
         //  Disable Crystallization
         Monazite.addFlags(DISABLE_CRYSTALLIZATION);

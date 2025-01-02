@@ -38,6 +38,7 @@ public class GTQTRecipesManager {
         PlasticChain.init();
         CrystalRaw.init();
         BacteriaCulturesChain.init();
+        ChemicalBath.init();
         FusionLoader.init();
         NeutralNetworkNexus.init();
         FuckGCYM.init();
@@ -111,7 +112,7 @@ public class GTQTRecipesManager {
         BrineChain.init();
         MethylamineChain.init();
         KevlarChain.init();
-        BoronNitrideChain.init();
+        BoronNitrideChain.register();
         BZChain.init();
         PhosphorusChain.init();
         EthyleneGlycolChain.init();

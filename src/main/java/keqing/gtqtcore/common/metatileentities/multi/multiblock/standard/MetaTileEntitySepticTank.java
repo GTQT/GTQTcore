@@ -227,7 +227,7 @@ public class MetaTileEntitySepticTank extends MultiMapMultiblockController imple
     @SideOnly(Side.CLIENT)
     @Override
     protected ICubeRenderer getFrontOverlay() {
-        return Textures.POWER_SUBSTATION_OVERLAY;
+        return GTQTTextures.BIO_REACTOR_OVERLAY;
     }
 
     @Override

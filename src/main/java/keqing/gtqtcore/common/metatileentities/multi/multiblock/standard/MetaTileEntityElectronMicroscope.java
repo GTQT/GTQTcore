@@ -41,7 +41,7 @@ import static gregtech.api.GTValues.EV;
 public class MetaTileEntityElectronMicroscope extends RecipeMapMultiblockController {
 
     int LENS;
-    int SOURSE;
+    int SOURCE;
 
     public MetaTileEntityElectronMicroscope(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.MOLECULAR_TRANSFORMER_RECIPES);
@@ -66,7 +66,7 @@ public class MetaTileEntityElectronMicroscope extends RecipeMapMultiblockControl
     }
 
     public boolean checkRecipe(@Nonnull Recipe recipe, boolean consumeIfSuccess) {
-        return super.checkRecipe(recipe, consumeIfSuccess) && recipe.getProperty(PAProperty.getInstance(), 0) <= SOURSE;
+        return super.checkRecipe(recipe, consumeIfSuccess) && recipe.getProperty(PAProperty.getInstance(), 0) <= SOURCE;
     }
 
     @Override
@@ -78,7 +78,7 @@ public class MetaTileEntityElectronMicroscope extends RecipeMapMultiblockControl
                 () -> ((WrappedIntTired) LENS).getIntTier(),
                 0);
 
-        this.SOURSE = GTQTUtil.getOrDefault(() -> SOURSE instanceof WrappedIntTired,
+        this.SOURCE = GTQTUtil.getOrDefault(() -> SOURSE instanceof WrappedIntTired,
                 () -> ((WrappedIntTired) SOURSE).getIntTier(),
                 0);
     }
@@ -169,9 +169,9 @@ public class MetaTileEntityElectronMicroscope extends RecipeMapMultiblockControl
 
         private int ParallelTier(int tier) {
             if (tier - EV <= 0) {
-                return SOURSE;
+                return SOURCE;
             } else {
-                return SOURSE * (tier - EV);
+                return SOURCE * (tier - EV);
             }
         }
 

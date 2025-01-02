@@ -42,7 +42,7 @@ import static gregtech.api.GTValues.V;
 import static gregtech.api.GTValues.VA;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.EleAcid;
 
-public class MetaTileEntityElectrobath extends GTQTRecipeMapMultiblockOverwrite {
+public class MetaTileEntityElectronBath extends GTQTRecipeMapMultiblockOverwrite {
     int ParallelNum = 1;
     private int casingTier;
     private int tubeTier;
@@ -50,7 +50,7 @@ public class MetaTileEntityElectrobath extends GTQTRecipeMapMultiblockOverwrite 
 
     private int ElectrodeTier;
 
-    public MetaTileEntityElectrobath(ResourceLocation metaTileEntityId) {
+    public MetaTileEntityElectronBath(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.ELECTROBATH);
         this.recipeMapWorkable = new ELELogic(this);
     }
@@ -200,7 +200,7 @@ public class MetaTileEntityElectrobath extends GTQTRecipeMapMultiblockOverwrite 
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {
-        return new MetaTileEntityElectrobath(metaTileEntityId);
+        return new MetaTileEntityElectronBath(metaTileEntityId);
     }
 
     @Override

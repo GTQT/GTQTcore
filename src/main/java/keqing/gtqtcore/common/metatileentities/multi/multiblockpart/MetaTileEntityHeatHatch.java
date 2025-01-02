@@ -1,5 +1,8 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblockpart;
 
+import codechicken.lib.render.CCRenderState;
+import codechicken.lib.render.pipeline.IVertexOperation;
+import codechicken.lib.vec.Matrix4;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.ModularUI;
 import gregtech.api.gui.widgets.AdvancedTextWidget;
@@ -11,11 +14,14 @@ import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockPart;
 import keqing.gtqtcore.api.capability.IHeat;
 import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
+import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -23,28 +29,25 @@ import java.util.Queue;
 
 public class MetaTileEntityHeatHatch extends MetaTileEntityMultiblockPart implements IMultiblockAbilityPart<IHeat>, IHeat {
 
-    private double heat;
-    private double currentHeat;
-    private final Queue<Integer> heatHistory;
-    int tier;
     // 环境温度 300K
     final int ENVIRONMENT_TEMPERATURE = 300;
-
+    private final Queue<Integer> heatHistory;
+    int tier;
     // 冷却系数
     double COOLING_COEFFICIENT;
-
     // 热交换系数
     double HEATING_COEFFICIENT;
-
     int maxHeat;
+    private double heat;
+    private double currentHeat;
 
-    public MetaTileEntityHeatHatch(ResourceLocation metaTileEntityId,int tier) {
+    public MetaTileEntityHeatHatch(ResourceLocation metaTileEntityId, int tier) {
         super(metaTileEntityId, tier);
-        this.tier=tier;
+        this.tier = tier;
         heatHistory = new LinkedList<>();
-        COOLING_COEFFICIENT=0.001*(11-tier);
-        HEATING_COEFFICIENT=0.05*tier;
-        maxHeat=750*tier;
+        COOLING_COEFFICIENT = 0.001 * (11 - tier);
+        HEATING_COEFFICIENT = 0.05 * tier;
+        maxHeat = 750 * tier;
     }
 
     @Override
@@ -95,7 +98,7 @@ public class MetaTileEntityHeatHatch extends MetaTileEntityMultiblockPart implem
     }
 
     protected void addDisplayText(List<ITextComponent> textList) {
-        textList.add(new TextComponentString("热量： " +(int)heat));
+        textList.add(new TextComponentString("热量： " + (int) heat));
         textList.add(new TextComponentString("变化: " + currentHeat));
         textList.add(new TextComponentString("最大承载温度: " + maxHeat));
         textList.add(new TextComponentString("冷却系数: " + COOLING_COEFFICIENT));
@@ -110,7 +113,7 @@ public class MetaTileEntityHeatHatch extends MetaTileEntityMultiblockPart implem
         StringBuilder trend = new StringBuilder();
         int index = 1; // 用于标记时刻
         for (int temp : heatHistory) {
-            trend.append(String.format(">>上 %d 时刻 温度: %dk ", 6-index, temp));
+            trend.append(String.format(">>上 %d 时刻 温度: %dk ", 6 - index, temp));
             trend.append(generateTemperatureString(temp)).append("\n"); // 添加换行符
             index++;
         }
@@ -119,18 +122,19 @@ public class MetaTileEntityHeatHatch extends MetaTileEntityMultiblockPart implem
 
     private String generateTemperatureString(int heat) {
         StringBuilder temperatureString = new StringBuilder();
-        int count = (heat-300) / 50; // 每 50k 温度添加一个 ==
+        int count = (heat - 300) / 50; // 每 50k 温度添加一个 ==
         for (int i = 0; i < count; i++) {
             temperatureString.append("-");
         }
         return temperatureString.toString();
     }
+
     public void update() {
         //范围300-无上限
         // 计算冷却量
         // 更新温度
-        if(heat>300)heat -= Math.max(0.1, (heat - ENVIRONMENT_TEMPERATURE) * COOLING_COEFFICIENT);
-        else heat=300;
+        if (heat > 300) heat -= Math.max(0.1, (heat - ENVIRONMENT_TEMPERATURE) * COOLING_COEFFICIENT);
+        else heat = 300;
 
         // 如果队列已满，移除最旧的温度值
         if (heatHistory.size() >= 5) {
@@ -138,7 +142,7 @@ public class MetaTileEntityHeatHatch extends MetaTileEntityMultiblockPart implem
         }
 
         // 添加当前的 heat 值到队列
-        heatHistory.offer((int)heat);
+        heatHistory.offer((int) heat);
 
         // 计算 currentHeat 为当前 heat 减去上一个 heat 值
         if (heatHistory.size() > 1) {
@@ -174,6 +178,15 @@ public class MetaTileEntityHeatHatch extends MetaTileEntityMultiblockPart implem
         return tier;
     }
 
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
+        super.renderMetaTileEntity(renderState, translation, pipeline);
+        if (this.shouldRenderOverlay()) {
+            GTQTTextures.HEAT_HATCH.renderSided(getFrontFacing(), renderState, translation, pipeline);
+        }
+    }
+
     @Override
     public void balanceHeat(int outsideTemp, int tick) {
         // 根据 tick 调整热交换系数
@@ -181,6 +194,6 @@ public class MetaTileEntityHeatHatch extends MetaTileEntityMultiblockPart implem
         // 总温度变化量
         double totalChange = (adjustedHeatingCoefficient * (outsideTemp - heat));
         // 更新内部温度
-        if(heat+totalChange<maxHeat) heat += totalChange;
+        if (heat + totalChange < maxHeat) heat += totalChange;
     }
 }

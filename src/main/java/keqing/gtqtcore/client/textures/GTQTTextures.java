@@ -71,6 +71,12 @@ public class GTQTTextures {
     public static final OrientedOverlayRenderer LOW_TEMP_ACTIVATOR_OVERLAY
             = new OrientedOverlayRenderer("overlay/low_temp_activator");
 
+    public static SimpleOverlayRenderer HEAT = new SimpleOverlayRenderer("overlay/heat/overlay_front");
+    public static SimpleOverlayRenderer HEAT_HATCH = new SimpleOverlayRenderer("overlay/heat_hatch/overlay_front");
+
+    public static SimpleOverlayRenderer ELECTRODE_HATCH = new SimpleOverlayRenderer("overlay/electrode_hatch/overlay_front");
+    public static SimpleOverlayRenderer DRILL = new SimpleOverlayRenderer("casings/solid/drill_head_bottom");
+
     public static SimpleOverlayRenderer FUSION_MKI = new SimpleOverlayRenderer("multiblock/casings/machine_casing_fusion");
     public static SimpleOverlayRenderer FUSION_MKII = new SimpleOverlayRenderer("multiblock/casings/machine_casing_fusion_2");
     public static SimpleOverlayRenderer FUSION_MKIII = new SimpleOverlayRenderer("multiblock/casings/machine_casing_fusion_3");

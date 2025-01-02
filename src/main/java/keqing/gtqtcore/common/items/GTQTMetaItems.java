@@ -112,6 +112,7 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem SOLAR_PLATE_MKIII;
     public static MetaItem<?>.MetaValueItem MOLD_GAS;
     public static MetaItem<?>.MetaValueItem MOLD_MOTOR;
+    public static MetaItem<?>.MetaValueItem MOLD_VALUE;
     public static MetaItem<?>.MetaValueItem IMPREGNATED_PLASTIC_SUBSTRATE;
     public static MetaItem<?>.MetaValueItem IMPREGNATED_GRAPHITE_RODS;
     public static MetaItem<?>.MetaValueItem IMPREGNATED_GRAPHITE_RODSA;

@@ -1374,10 +1374,10 @@ public class KeQingNET {
 
         //  Mega Oil Cracking Unit
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .inputs(CRACKER.getStackForm(64))
-                .inputs(CRACKER.getStackForm(64))
-                .inputs(CRACKER.getStackForm(64))
-                .inputs(CRACKER.getStackForm(64))
+                .inputs(MetaTileEntities.CRACKER.getStackForm(64))
+                .inputs(MetaTileEntities.CRACKER.getStackForm(64))
+                .inputs(MetaTileEntities.CRACKER.getStackForm(64))
+                .inputs(MetaTileEntities.CRACKER.getStackForm(64))
                 .input(CIRCUIT_GOOD_III, 8)
                 .input(ELECTRIC_PUMP_UV, 32)
                 .input(frameGt, HMS1J22Alloy, 16)
@@ -1880,10 +1880,10 @@ public class KeQingNET {
                 .duration(2000).EUt(480).buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .inputs(HULL[4].getStackForm(16))
-                .input(circuit, Tier.EV, 8)
-                .input(ELECTRIC_PUMP_EV, 16)
-                .input(VOLTAGE_COIL_EV, 16)
+                .inputs(HULL[5].getStackForm(16))
+                .input(circuit, Tier.IV, 8)
+                .input(ELECTRIC_PUMP_IV, 16)
+                .input(VOLTAGE_COIL_IV, 16)
                 .input(gear, HSSG, 16)
                 .input(NANO_CENTRAL_PROCESSING_UNIT, 4)
                 .input(wireFine, TungstenSteel, 64)
@@ -1895,25 +1895,6 @@ public class KeQingNET {
                         .duration(1200)
                         .EUt(VA[EV]))
                 .output(SMSF)
-                .duration(2000).EUt(480).buildAndRegister();
-
-        ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .inputs(HULL[4].getStackForm(16))
-                .input(circuit, Tier.IV, 8)
-                .input(ELECTRIC_PUMP_EV, 16)
-                .input(VOLTAGE_COIL_EV, 16)
-                .input(gear, TungstenSteel, 8)
-                .input(NANO_CENTRAL_PROCESSING_UNIT, 4)
-                .input(pipeHugeFluid, TungstenSteel, 8)
-                .input(wireFine, Platinum, 64)
-                .input(wireFine, TungstenSteel, 64)
-                .input(foil, HSSE, 32)
-                .fluidInputs(Zylon.getFluid(5706))
-                .scannerResearch(b -> b
-                        .researchStack(DISK_21.getStackForm())
-                        .duration(1200)
-                        .EUt(VA[EV]))
-                .output(VACUUM_DISTILLATION_TOWER)
                 .duration(2000).EUt(480).buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
