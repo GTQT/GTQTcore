@@ -36,7 +36,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-import static keqing.gtqtcore.common.block.blocks.GTQTADVBlock.CasingType.HastelloyN;
+import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing1.CasingType.HastelloyN;
 
 public class MetaTileEntityIndustrialInductionFurnace extends MultiMapMultiblockController {
 
@@ -53,7 +53,7 @@ public class MetaTileEntityIndustrialInductionFurnace extends MultiMapMultiblock
     }
 
     private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.ADV_BLOCK.getState(HastelloyN);
+        return GTQTMetaBlocks.blockMultiblockCasing1.getState(HastelloyN);
     }
 
     public static int getEUtForParallel(int parallel, int discount) {

@@ -16,7 +16,7 @@ import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.common.block.blocks.GTQTADVBlock;
+import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing1;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
@@ -57,7 +57,7 @@ public class MetaTileEntityLargeSupercriticalSteamTurbine extends MetaTileEntity
     }
 
     private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.ADV_BLOCK.getState(GTQTADVBlock.CasingType.MaragingSteel250);
+        return GTQTMetaBlocks.blockMultiblockCasing1.getState(BlockMultiblockCasing1.CasingType.MaragingSteel250);
     }
 
     private static IBlockState getSecondCasingState() {

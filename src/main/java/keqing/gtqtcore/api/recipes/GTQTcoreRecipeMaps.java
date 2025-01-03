@@ -262,7 +262,7 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<ComputationRecipeBuilder> PRECISION_SPINNING;
     public static final RecipeMap<SimpleRecipeBuilder> CW_LASER_ENGRAVER_RECIPES;
     public static final RecipeMap<LASERComputationRecipeBuilder> STEPPER_RECIPES;
-    public static final RecipeMap<SimpleRecipeBuilder> GANTRY_CRANE;
+    public static final RecipeMap<SimpleRecipeBuilder> PRESSURIZED_REACTION;
     public static final RecipeMap<PrimitiveRecipeBuilder> CLARIFIER;
     public static final RecipeMap<SimpleRecipeBuilder>  ELEOIL;
     public static final RecipeMap<SimpleRecipeBuilder>  REACTION_FURNACE_RECIPES;
@@ -311,7 +311,7 @@ public class GTQTcoreRecipeMaps {
                 .setProgressBar(GuiTextures.PROGRESS_BAR_COMPRESS, ProgressWidget.MoveType.HORIZONTAL)
                 .setSound(GTSoundEvents.ASSEMBLER);
 
-        ULTRAVIOLET_LAMP_CHAMBER_RECIPES = new RecipeMap<>("ultraviolet_lamp_chamber_recipes",  2,  2,  3, 2, new SimpleRecipeBuilder(), false)
+        ULTRAVIOLET_LAMP_CHAMBER_RECIPES = new RecipeMap<>("ultraviolet_lamp_chamber_recipes",  3,  2,  3, 2, new SimpleRecipeBuilder(), false)
                 .setSlotOverlay(false, false, false, GuiTextures.LENS_OVERLAY)
                 .setSlotOverlay(false, false, true, GuiTextures.LENS_OVERLAY)
                 .setSlotOverlay(false, true, false, GuiTextures.MOLECULAR_OVERLAY_3)
@@ -345,7 +345,7 @@ public class GTQTcoreRecipeMaps {
                 .setProgressBar(GuiTextures.PROGRESS_BAR_COMPRESS, ProgressWidget.MoveType.HORIZONTAL)
                 .setSound(GTValues.FOOLS.get() ? GTSoundEvents.SCIENCE : GTSoundEvents.ARC);
 
-        LASER_ENGRAVING = new RecipeMap<>("laser_engraving", 2, 1, 1, 0, new ComputationRecipeBuilder(), false)
+        LASER_ENGRAVING = new RecipeMap<>("laser_engraving", 2, 1, 1, 1, new ComputationRecipeBuilder(), false)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL)
                 .setSlotOverlay(false, false, false, GuiTextures.CIRCUIT_OVERLAY)
                 .setSlotOverlay(false, false, true, GuiTextures.CIRCUIT_OVERLAY)
@@ -477,7 +477,7 @@ public class GTQTcoreRecipeMaps {
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL)
                 .setSound(GTSoundEvents.CHEMICAL_REACTOR);
 
-        GANTRY_CRANE = new RecipeMap<>("gantry_crane",
+        PRESSURIZED_REACTION = new RecipeMap<>("pressurized_reaction",
                 3, 3, 3, 3, new SimpleRecipeBuilder(), false);
 
         CLARIFIER = new RecipeMap<>("clarifire",

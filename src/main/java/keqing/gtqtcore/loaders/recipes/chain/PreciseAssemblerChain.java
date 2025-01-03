@@ -4,9 +4,9 @@ import gregtech.api.unification.material.MarkerMaterials;
 import gregtech.common.blocks.BlockMachineCasing;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.common.block.blocks.GTQTNuclearFusion;
-import keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing;
-import keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing1;
+import keqing.gtqtcore.common.block.blocks.BlockNuclearCasing;
+import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4;
+import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing5;
 
 import static gregicality.multiblocks.api.unification.GCYMMaterials.Zeron100;
 import static gregtech.api.GTValues.*;
@@ -50,7 +50,7 @@ public class PreciseAssemblerChain {
                 .input(frameGt, TungstenSteel, 4)
                 .input(stick, RhodiumPlatedPalladium, 4)
                 .fluidInputs(Zylon.getFluid(576))
-                .outputs(GTQTMetaBlocks.NUCLEAR_FUSION.getItemVariant(GTQTNuclearFusion.CasingType.NEUTRON_ACTIVATOR_FRAME, 2))
+                .outputs(GTQTMetaBlocks.blockNuclearCasing.getItemVariant(BlockNuclearCasing.CasingType.NEUTRON_ACTIVATOR_FRAME, 2))
                 .circuitMeta(10)
                 .duration(400).EUt(VA[IV]).buildAndRegister();
 
@@ -59,7 +59,7 @@ public class PreciseAssemblerChain {
                 .input(plate, Iridium, 4)
                 .input(stick, RhodiumPlatedPalladium, 4)
                 .fluidInputs(Zylon.getFluid(576))
-                .outputs(GTQTMetaBlocks.NUCLEAR_FUSION.getItemVariant(GTQTNuclearFusion.CasingType.NEUTRON_ACTIVATOR_CASING, 2))
+                .outputs(GTQTMetaBlocks.blockNuclearCasing.getItemVariant(BlockNuclearCasing.CasingType.NEUTRON_ACTIVATOR_CASING, 2))
                 .circuitMeta(10)
                 .duration(400).EUt(VA[IV]).buildAndRegister();
 
@@ -167,7 +167,7 @@ public class PreciseAssemblerChain {
         //  Precise Assembler Casing Mk I
         ASSEMBLER_RECIPES.recipeBuilder()
                 .inputs(MetaBlocks.MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.LuV))
-                .inputs(GTQTMetaBlocks.TURBINE_CASING.getItemVariant(GTQTTurbineCasing.TurbineCasingType.IRIDIUM_CASING))
+                .inputs(GTQTMetaBlocks.blockMultiblockCasing4.getItemVariant(BlockMultiblockCasing4.TurbineCasingType.IRIDIUM_CASING))
                 .input(ROBOT_ARM_EV, 2)
                 .input(plateDouble, MARM200CeSteel, 2)
                 .input(circuit, MarkerMaterials.Tier.LuV)
@@ -175,7 +175,7 @@ public class PreciseAssemblerChain {
                 .input(cableGtQuadruple, VanadiumGallium, 2)
                 .input(screw, HSSG, 32)
                 .fluidInputs(BlackSteel.getFluid(L * 4))
-                .outputs(GTQTMetaBlocks.TURBINE_CASING1.getItemVariant(GTQTTurbineCasing1.TurbineCasingType.PRECISE_ASSEMBLER_CASING_MK1, 4))
+                .outputs(GTQTMetaBlocks.blockMultiblockCasing5.getItemVariant(BlockMultiblockCasing5.TurbineCasingType.PRECISE_ASSEMBLER_CASING_MK1, 4))
                 .EUt(VA[IV])
                 .duration(400)
                 .buildAndRegister();
@@ -183,7 +183,7 @@ public class PreciseAssemblerChain {
         //  Precise Assembler Casing Mk II
         ASSEMBLER_RECIPES.recipeBuilder()
                 .inputs(MetaBlocks.MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.ZPM))
-                .inputs(GTQTMetaBlocks.TURBINE_CASING1.getItemVariant(GTQTTurbineCasing1.TurbineCasingType.PRECISE_ASSEMBLER_CASING_MK1))
+                .inputs(GTQTMetaBlocks.blockMultiblockCasing5.getItemVariant(BlockMultiblockCasing5.TurbineCasingType.PRECISE_ASSEMBLER_CASING_MK1))
                 .input(ROBOT_ARM_IV, 2)
                 .input(plateDouble, HastelloyC59, 2)
                 .input(CIRCUIT_GOOD_I)
@@ -191,7 +191,7 @@ public class PreciseAssemblerChain {
                 .input(cableGtQuadruple, NaquadahAlloy, 2)
                 .input(screw, HSSE, 32)
                 .fluidInputs(Zeron100.getFluid(576))
-                .outputs(GTQTMetaBlocks.TURBINE_CASING1.getItemVariant(GTQTTurbineCasing1.TurbineCasingType.PRECISE_ASSEMBLER_CASING_MK2, 4))
+                .outputs(GTQTMetaBlocks.blockMultiblockCasing5.getItemVariant(BlockMultiblockCasing5.TurbineCasingType.PRECISE_ASSEMBLER_CASING_MK2, 4))
                 .EUt(VA[LuV])
                 .duration(400)
                 .buildAndRegister();
@@ -199,7 +199,7 @@ public class PreciseAssemblerChain {
         //  Precise Assembler Casing Mk III
         ASSEMBLER_RECIPES.recipeBuilder()
                 .inputs(MetaBlocks.MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.UV))
-                .inputs(GTQTMetaBlocks.TURBINE_CASING1.getItemVariant(GTQTTurbineCasing1.TurbineCasingType.PRECISE_ASSEMBLER_CASING_MK2))
+                .inputs(GTQTMetaBlocks.blockMultiblockCasing5.getItemVariant(BlockMultiblockCasing5.TurbineCasingType.PRECISE_ASSEMBLER_CASING_MK2))
                 .input(ROBOT_ARM_LuV, 2)
                 .input(plateDouble, HMS1J79Alloy, 2)
                 .input(CIRCUIT_GOOD_II)
@@ -207,7 +207,7 @@ public class PreciseAssemblerChain {
                 .input(cableGtQuadruple, SiliconCarbide, 2)
                 .input(screw, HSSS, 32)
                 .fluidInputs(IncoloyMA813.getFluid(L * 4))
-                .outputs(GTQTMetaBlocks.TURBINE_CASING1.getItemVariant(GTQTTurbineCasing1.TurbineCasingType.PRECISE_ASSEMBLER_CASING_MK3, 4))
+                .outputs(GTQTMetaBlocks.blockMultiblockCasing5.getItemVariant(BlockMultiblockCasing5.TurbineCasingType.PRECISE_ASSEMBLER_CASING_MK3, 4))
                 .EUt(VA[ZPM])
                 .duration(400)
                 .buildAndRegister();
@@ -215,14 +215,14 @@ public class PreciseAssemblerChain {
         //  Precise Assembler Casing Mk IV
         ASSEMBLER_RECIPES.recipeBuilder()
                 .inputs(MetaBlocks.MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.UHV))
-                .inputs(GTQTMetaBlocks.TURBINE_CASING1.getItemVariant(GTQTTurbineCasing1.TurbineCasingType.PRECISE_ASSEMBLER_CASING_MK3))
+                .inputs(GTQTMetaBlocks.blockMultiblockCasing5.getItemVariant(BlockMultiblockCasing5.TurbineCasingType.PRECISE_ASSEMBLER_CASING_MK3))
                 .input(ROBOT_ARM_ZPM, 2)
                 .input(plateDouble, PlatinumGroupAlloy, 2)
                 .input(CIRCUIT_GOOD_III)
                 .input(gearSmall, Cinobite, 8)
                 .input(screw, Orichalcum, 32)
                 .fluidInputs(Neutronium.getFluid(L * 4))
-                .outputs(GTQTMetaBlocks.TURBINE_CASING1.getItemVariant(GTQTTurbineCasing1.TurbineCasingType.PRECISE_ASSEMBLER_CASING_MK4, 4))
+                .outputs(GTQTMetaBlocks.blockMultiblockCasing5.getItemVariant(BlockMultiblockCasing5.TurbineCasingType.PRECISE_ASSEMBLER_CASING_MK4, 4))
                 .EUt(VA[UV])
                 .duration(400)
                 .buildAndRegister();
@@ -230,14 +230,14 @@ public class PreciseAssemblerChain {
         //  Precise Assembler Casing Mk V
         ASSEMBLER_RECIPES.recipeBuilder()
                 .inputs(MetaBlocks.MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.UEV))
-                .inputs(GTQTMetaBlocks.TURBINE_CASING1.getItemVariant(GTQTTurbineCasing1.TurbineCasingType.PRECISE_ASSEMBLER_CASING_MK4))
+                .inputs(GTQTMetaBlocks.blockMultiblockCasing5.getItemVariant(BlockMultiblockCasing5.TurbineCasingType.PRECISE_ASSEMBLER_CASING_MK4))
                 .input(ROBOT_ARM_UV, 2)
                 .input(plateDouble, BlackTitanium, 2)
                 .input(CIRCUIT_GOOD_IV)
                 .input(gearSmall, TitanSteel, 8)
                 .input(screw, SuperheavyLAlloy, 32)
                 .fluidInputs(Adamantium.getFluid(L * 4))
-                .outputs(GTQTMetaBlocks.TURBINE_CASING1.getItemVariant(GTQTTurbineCasing1.TurbineCasingType.PRECISE_ASSEMBLER_CASING_MK5, 4))
+                .outputs(GTQTMetaBlocks.blockMultiblockCasing5.getItemVariant(BlockMultiblockCasing5.TurbineCasingType.PRECISE_ASSEMBLER_CASING_MK5, 4))
                 .EUt(VA[UHV])
                 .duration(400)
                 .buildAndRegister();
@@ -245,14 +245,14 @@ public class PreciseAssemblerChain {
         //  Precise Assembler Casing Mk VI
         ASSEMBLER_RECIPES.recipeBuilder()
                 .inputs(MetaBlocks.MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.UIV))
-                .inputs(GTQTMetaBlocks.TURBINE_CASING1.getItemVariant(GTQTTurbineCasing1.TurbineCasingType.PRECISE_ASSEMBLER_CASING_MK5))
+                .inputs(GTQTMetaBlocks.blockMultiblockCasing5.getItemVariant(BlockMultiblockCasing5.TurbineCasingType.PRECISE_ASSEMBLER_CASING_MK5))
                 .input(ROBOT_ARM_UHV, 2)
                 .input(plateDouble, BlackPlutonium, 2)
                 .input(CIRCUIT_GOOD_V)
                 .input(gearSmall, Infinity, 8)
                 .input(screw, LanthanumFullereneNanotube, 32)
                 .fluidInputs(RutheniumTriniumAmericiumNeutronate.getFluid(L * 4))
-                .outputs(GTQTMetaBlocks.TURBINE_CASING1.getItemVariant(GTQTTurbineCasing1.TurbineCasingType.PRECISE_ASSEMBLER_CASING_MK6, 4))
+                .outputs(GTQTMetaBlocks.blockMultiblockCasing5.getItemVariant(BlockMultiblockCasing5.TurbineCasingType.PRECISE_ASSEMBLER_CASING_MK6, 4))
                 .EUt(VA[UEV])
                 .duration(400)
                 .buildAndRegister();

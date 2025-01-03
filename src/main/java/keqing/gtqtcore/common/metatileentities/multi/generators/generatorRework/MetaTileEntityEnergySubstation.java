@@ -27,7 +27,7 @@ import keqing.gtqtcore.api.GTQTAPI;
 import keqing.gtqtcore.api.metaileentity.multiblock.ICellData;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.common.block.blocks.GTQTNuclearFusion;
+import keqing.gtqtcore.common.block.blocks.BlockNuclearCasing;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
@@ -268,7 +268,7 @@ public class MetaTileEntityEnergySubstation extends MultiblockWithDisplayBase im
     }
 
     protected IBlockState getCasingState() {
-        return GTQTMetaBlocks.NUCLEAR_FUSION.getState(GTQTNuclearFusion.CasingType.ENERGY_CELL);
+        return GTQTMetaBlocks.blockNuclearCasing.getState(BlockNuclearCasing.CasingType.ENERGY_CELL);
     }
 
     protected IBlockState getGlassState() {

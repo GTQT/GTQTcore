@@ -32,8 +32,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import static gregtech.api.util.RelativeDirection.*;
-import static keqing.gtqtcore.common.block.blocks.GTQTNuclearFusion.CasingType.NEUTRON_ACTIVATOR_CASING;
-import static keqing.gtqtcore.common.block.blocks.GTQTNuclearFusion.CasingType.NEUTRON_ACTIVATOR_FRAME;
+import static keqing.gtqtcore.common.block.blocks.BlockNuclearCasing.CasingType.NEUTRON_ACTIVATOR_CASING;
+import static keqing.gtqtcore.common.block.blocks.BlockNuclearCasing.CasingType.NEUTRON_ACTIVATOR_FRAME;
 
 public class MetaTileEntityNeutronActivator extends RecipeMapMultiblockController {
     protected int heatingCoilLevel;
@@ -144,11 +144,11 @@ public class MetaTileEntityNeutronActivator extends RecipeMapMultiblockControlle
     }
 
     private IBlockState getCasingState() {
-        return GTQTMetaBlocks.NUCLEAR_FUSION.getState(NEUTRON_ACTIVATOR_CASING);
+        return GTQTMetaBlocks.blockNuclearCasing.getState(NEUTRON_ACTIVATOR_CASING);
     }
 
     private IBlockState getCasingState1() {
-        return GTQTMetaBlocks.NUCLEAR_FUSION.getState(NEUTRON_ACTIVATOR_FRAME);
+        return GTQTMetaBlocks.blockNuclearCasing.getState(NEUTRON_ACTIVATOR_FRAME);
     }
 
     @SideOnly(Side.CLIENT)

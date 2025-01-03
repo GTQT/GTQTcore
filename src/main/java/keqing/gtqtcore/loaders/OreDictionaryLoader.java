@@ -16,8 +16,8 @@ public class OreDictionaryLoader {
     public static void loadStoneOredict(){
 
         for (GTQTStoneVariantBlock.StoneType type : GTQTStoneVariantBlock.StoneType.values()) {
-            ItemStack smooth = GTQTMetaBlocks.SUSY_STONE_BLOCKS.get(GTQTStoneVariantBlock.StoneVariant.SMOOTH).getItemVariant(type);
-            ItemStack cobble = GTQTMetaBlocks.SUSY_STONE_BLOCKS.get(GTQTStoneVariantBlock.StoneVariant.COBBLE).getItemVariant(type);
+            ItemStack smooth = GTQTMetaBlocks.GTQT_STONE_BLOCKS.get(GTQTStoneVariantBlock.StoneVariant.SMOOTH).getItemVariant(type);
+            ItemStack cobble = GTQTMetaBlocks.GTQT_STONE_BLOCKS.get(GTQTStoneVariantBlock.StoneVariant.COBBLE).getItemVariant(type);
             OreDictUnifier.registerOre(smooth, type.getOrePrefix(), type.getMaterial());
             OreDictionary.registerOre("stone", smooth);
             OreDictionary.registerOre("cobblestone", cobble);

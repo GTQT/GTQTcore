@@ -30,7 +30,7 @@ import java.util.List;
 
 import static gregtech.api.GTValues.LuV;
 import static gregtech.api.GTValues.V;
-import static keqing.gtqtcore.common.block.blocks.GTQTADVBlock.CasingType.Inconel625;
+import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing1.CasingType.Inconel625;
 
 public class MetaTileEntityLargeBiomassGenerator extends FuelMultiblockController {
 
@@ -73,7 +73,7 @@ public class MetaTileEntityLargeBiomassGenerator extends FuelMultiblockControlle
     }
 
     private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.ADV_BLOCK.getState(Inconel625);
+        return GTQTMetaBlocks.blockMultiblockCasing1.getState(Inconel625);
     }
 
     private static IBlockState getBoilerCasingState() {

@@ -20,7 +20,7 @@ import gregtech.common.items.MetaItems;
 import gregtech.common.metatileentities.MetaTileEntities;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing;
+import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
@@ -47,12 +47,11 @@ import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.MaterialHelper.Superconductor;
 import static keqing.gtqtcore.api.unification.TJMaterials.Polyetheretherketone;
 import static keqing.gtqtcore.api.utils.GTQTUtil.CWT;
-import static keqing.gtqtcore.common.block.blocks.GTQTIsaCasing.CasingType.FLOTATION_CASING_GEARBOX;
-import static keqing.gtqtcore.common.block.blocks.GTQTIsaCasing.CasingType.ISA_MILL_CASING_GEARBOX;
-import static keqing.gtqtcore.common.block.blocks.GTQTKQCC.CasingType.*;
+import static keqing.gtqtcore.common.block.blocks.BlockIsaCasing.CasingType.FLOTATION_CASING_GEARBOX;
+import static keqing.gtqtcore.common.block.blocks.BlockIsaCasing.CasingType.ISA_MILL_CASING_GEARBOX;
+import static keqing.gtqtcore.common.block.blocks.BlocksResearchSystem.CasingType.*;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.COMBUSTION_GENERATOR;
-import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.CRACKER;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.GAS_TURBINE;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.STEAM_TURBINE;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.*;
@@ -1114,14 +1113,14 @@ public class KeQingNET {
                 .input(OPTICAL_PIPES[0], 2)
                 .input(plateDense, Aluminium, 4)
                 .fluidInputs(Polyethylene.getFluid(L * 8))
-                .outputs(GTQTMetaBlocks.KQCC.getItemVariant(COMPUTER_VENT))
+                .outputs(GTQTMetaBlocks.blocksResearchSystem.getItemVariant(COMPUTER_VENT))
                 .duration(1000).EUt(120).buildAndRegister();
 
         ASSEMBLER_RECIPES.recipeBuilder()
                 .input(frameGt, Polyethylene, 1)
                 .input(plate, Polyethylene, 6)
                 .fluidInputs(Tin.getFluid(L * 4))
-                .outputs(GTQTMetaBlocks.KQCC.getItemVariant(KQCC_COMPUTER_CASING))
+                .outputs(GTQTMetaBlocks.blocksResearchSystem.getItemVariant(KQCC_COMPUTER_CASING))
                 .duration(1000).EUt(120).buildAndRegister();
 
         //数据仓
@@ -1512,7 +1511,7 @@ public class KeQingNET {
                 .input(wireFine, Tritanium, 64)
                 .input(wireGtSingle, UVSuperconductor, 16)
                 .input(wireGtSingle, UVSuperconductor, 16)
-                .outputs(GTQTMetaBlocks.KQCC.getItemVariant(ULTRA_POWER_CASING))
+                .outputs(GTQTMetaBlocks.blocksResearchSystem.getItemVariant(ULTRA_POWER_CASING))
                 .fluidInputs(Kevlar.getFluid(L * 8))
                 .fluidInputs(KaptonE.getFluid(L * 16))
                 .fluidInputs(Duranium.getFluid(L * 32))
@@ -1537,7 +1536,7 @@ public class KeQingNET {
                 .input(gearSmall, Duranium, 64)
                 .input(wireGtSingle, UVSuperconductor, 16)
                 .input(wireGtSingle, UVSuperconductor, 16)
-                .outputs(GTQTMetaBlocks.KQCC.getItemVariant(ADV_COMPUTER_CASING))
+                .outputs(GTQTMetaBlocks.blocksResearchSystem.getItemVariant(ADV_COMPUTER_CASING))
                 .fluidInputs(Kevlar.getFluid(L * 8))
                 .fluidInputs(KaptonE.getFluid(L * 16))
                 .fluidInputs(Duranium.getFluid(L * 32))
@@ -1552,7 +1551,7 @@ public class KeQingNET {
                 .buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .inputs(GTQTMetaBlocks.KQCC.getItemVariant(ADV_COMPUTER_CASING))
+                .inputs(GTQTMetaBlocks.blocksResearchSystem.getItemVariant(ADV_COMPUTER_CASING))
                 .input(circuit, MarkerMaterials.Tier.UHV, 4)
                 .input(circuit, MarkerMaterials.Tier.UV, 16)
                 .input(circuit, MarkerMaterials.Tier.ZPM, 32)
@@ -1561,7 +1560,7 @@ public class KeQingNET {
                 .input(ring, Tritanium, 64)
                 .input(wireGtSingle, UVSuperconductor, 16)
                 .input(wireGtSingle, UVSuperconductor, 16)
-                .outputs(GTQTMetaBlocks.KQCC.getItemVariant(ULTRA_COMPUTER_CASING))
+                .outputs(GTQTMetaBlocks.blocksResearchSystem.getItemVariant(ULTRA_COMPUTER_CASING))
                 .fluidInputs(Kevlar.getFluid(L * 8))
                 .fluidInputs(KaptonE.getFluid(L * 16))
                 .fluidInputs(Duranium.getFluid(L * 32))
@@ -1584,7 +1583,7 @@ public class KeQingNET {
                 .input(plate, Orichalcum, 32)
                 .input(wireGtSingle, UVSuperconductor, 16)
                 .input(wireGtSingle, UVSuperconductor, 16)
-                .outputs(GTQTMetaBlocks.KQCC.getItemVariant(ADV_COMPUTER_HEAT_VENT))
+                .outputs(GTQTMetaBlocks.blocksResearchSystem.getItemVariant(ADV_COMPUTER_HEAT_VENT))
                 .fluidInputs(Kevlar.getFluid(L * 8))
                 .fluidInputs(KaptonE.getFluid(L * 16))
                 .fluidInputs(Duranium.getFluid(L * 32))
@@ -1600,7 +1599,7 @@ public class KeQingNET {
 
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .inputs(GTQTMetaBlocks.KQCC.getItemVariant(ADV_COMPUTER_CASING))
+                .inputs(GTQTMetaBlocks.blocksResearchSystem.getItemVariant(ADV_COMPUTER_CASING))
                 .input(EMITTER_UV, 16)
                 .input(SENSOR_UV, 16)
                 .input(circuit, Tier.UHV, 4)
@@ -1627,7 +1626,7 @@ public class KeQingNET {
 
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .inputs(GTQTMetaBlocks.KQCC.getItemVariant(ADV_COMPUTER_CASING))
+                .inputs(GTQTMetaBlocks.blocksResearchSystem.getItemVariant(ADV_COMPUTER_CASING))
                 .input(GENERAL_CIRCUIT_UV, 16)
                 .input(circuit, Tier.UHV, 8)
                 .inputNBT(TOOL_DATA_MODULE, NBTMatcher.ANY, NBTCondition.ANY)
@@ -1728,14 +1727,14 @@ public class KeQingNET {
                 .buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .inputs(GTQTMetaBlocks.TURBINE_CASING.getItemVariant(GTQTTurbineCasing.TurbineCasingType.IRIDIUM_CASING))
+                .inputs(GTQTMetaBlocks.blockMultiblockCasing4.getItemVariant(BlockMultiblockCasing4.TurbineCasingType.IRIDIUM_CASING))
                 .input(circuit, Tier.IV, 8)
                 .inputNBT(TOOL_DATA_ORB, NBTMatcher.ANY, NBTCondition.ANY)
-                .input(frameGt, TungstenSteel, 32)
-                .input(plate, NanometerBariumTitanate, 32)
-                .input(wireFine, Ruridit, 64)
-                .input(wireFine, NiobiumTitanium, 64)
-                .input(OPTICAL_PIPES[0], 64)
+                .input(frameGt, TungstenSteel, 4)
+                .input(screw, NanometerBariumTitanate, 6)
+                .input(wireFine, Ruridit, 32)
+                .input(wireFine, NiobiumTitanium, 32)
+                .input(OPTICAL_PIPES[0], 16)
                 .input(wireGtDouble, IVSuperconductor, 16)
                 .fluidInputs(SolderingAlloy.getFluid(L * 2))
                 .fluidInputs(Lubricant.getFluid(500))
@@ -1751,11 +1750,11 @@ public class KeQingNET {
                 .input(MINI_DATE_BANK, 8)
                 .input(circuit, Tier.ZPM, 8)
                 .inputNBT(TOOL_DATA_ORB, NBTMatcher.ANY, NBTCondition.ANY)
-                .input(frameGt, HSSS, 32)
-                .input(plate, PPB, 32)
-                .input(wireFine, YttriumBariumCuprate, 64)
-                .input(wireFine, Europium, 64)
-                .input(OPTICAL_PIPES[0], 64)
+                .input(frameGt, HSSS, 4)
+                .input(screw, PPB, 6)
+                .input(wireFine, YttriumBariumCuprate, 32)
+                .input(wireFine, Europium, 32)
+                .input(OPTICAL_PIPES[0], 16)
                 .input(wireGtDouble, IVSuperconductor, 16)
                 .fluidInputs(SolderingAlloy.getFluid(L * 2))
                 .fluidInputs(Lubricant.getFluid(500))
@@ -1983,7 +1982,7 @@ public class KeQingNET {
         //  Isa Mill
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(frameGt, IncoloyMA956)
-                .inputs(GTQTMetaBlocks.ISA_CASING.getItemVariant(ISA_MILL_CASING_GEARBOX, 4))
+                .inputs(GTQTMetaBlocks.blockIsaCasing.getItemVariant(ISA_MILL_CASING_GEARBOX, 4))
                 .input(COMPONENT_GRINDER_TUNGSTEN, 16)
                 .input(circuit, MarkerMaterials.Tier.LuV, 8)
                 .input(gear, Inconel625, 8)
@@ -2043,7 +2042,7 @@ public class KeQingNET {
         //  Flotation Factory
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(frameGt, HastelloyX)
-                .inputs(GTQTMetaBlocks.ISA_CASING.getItemVariant(FLOTATION_CASING_GEARBOX, 4))
+                .inputs(GTQTMetaBlocks.blockIsaCasing.getItemVariant(FLOTATION_CASING_GEARBOX, 4))
                 .input(CONVEYOR_MODULE_LuV, 8)
                 .input(ELECTRIC_PUMP_LuV, 8)
                 .input(circuit, MarkerMaterials.Tier.LuV, 8)
@@ -2069,7 +2068,7 @@ public class KeQingNET {
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(frameGt, TungstenSteel, 16)
-                .inputs(GTQTMetaBlocks.TURBINE_CASING.getItemVariant(GTQTTurbineCasing.TurbineCasingType.IRIDIUM_CASING,4))
+                .inputs(GTQTMetaBlocks.blockMultiblockCasing4.getItemVariant(BlockMultiblockCasing4.TurbineCasingType.IRIDIUM_CASING,4))
                 .input(EMITTER_EV, 8)
                 .input(SENSOR_EV, 8)
                 .input(circuit, MarkerMaterials.Tier.EV, 16)
@@ -2078,8 +2077,7 @@ public class KeQingNET {
                 .input(plate, Palladium, 8)
                 .input(plate, HSSE, 8)
                 .input(screw, HSSG, 32)
-                .input(stickLong, NanometerBariumTitanate, 64)
-                .input(stickLong, NanometerBariumTitanate, 64)
+                .input(stickLong, NanometerBariumTitanate, 32)
                 .input(foil, NiobiumNitride, 32)
                 .fluidInputs(SolderingAlloy.getFluid(L * 8))
                 .fluidInputs(Polytetrafluoroethylene.getFluid(L * 8))
@@ -2096,16 +2094,15 @@ public class KeQingNET {
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(frameGt, TungstenSteel, 16)
-                .inputs(GTQTMetaBlocks.TURBINE_CASING.getItemVariant(GTQTTurbineCasing.TurbineCasingType.IRIDIUM_CASING,8))
+                .inputs(GTQTMetaBlocks.blockMultiblockCasing4.getItemVariant(BlockMultiblockCasing4.TurbineCasingType.IRIDIUM_CASING,8))
                 .input(EMITTER_IV, 32)
                 .input(SENSOR_IV, 32)
                 .input(circuit, MarkerMaterials.Tier.IV, 32)
                 .input(gear, TungstenSteel, 8)
-                .input(plate, RhodiumPlatedPalladium, 32)
-                .input(plate, Ruridit, 32)
+                .input(plate, RhodiumPlatedPalladium, 16)
+                .input(plate, Ruridit, 16)
                 .input(screw, HSSS, 32)
-                .input(stickLong, NanometerBariumTitanate, 64)
-                .input(stickLong, NanometerBariumTitanate, 64)
+                .input(stickLong, NanometerBariumTitanate, 32)
                 .input(foil, NiobiumNitride, 32)
                 .fluidInputs(SolderingAlloy.getFluid(L * 8))
                 .fluidInputs(Polytetrafluoroethylene.getFluid(L * 8))

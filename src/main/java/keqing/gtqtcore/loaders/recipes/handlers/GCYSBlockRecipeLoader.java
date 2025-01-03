@@ -3,9 +3,8 @@ package keqing.gtqtcore.loaders.recipes.handlers;
 import gregtech.api.recipes.ModHandler;
 import gregtech.api.unification.stack.UnificationEntry;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.common.block.blocks.BlockCrucible;
-import keqing.gtqtcore.common.block.blocks.BlockGCYSMultiblockCasing;
-import keqing.gtqtcore.common.block.blocks.BlockGCYSMultiblockCasingActive;
+import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing2;
+import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasingActive;
 
 import static gregicality.multiblocks.api.unification.GCYMMaterials.HSLASteel;
 import static gregtech.api.GTValues.UV;
@@ -19,7 +18,7 @@ public class GCYSBlockRecipeLoader {
 
     public static void init() {
         // Drill Head
-        ModHandler.addShapedRecipe(true, "industrial_drill_head", GTQTMetaBlocks.MULTIBLOCK_CASING.getItemVariant(BlockGCYSMultiblockCasing.CasingType.DRILL_HEAD),
+        ModHandler.addShapedRecipe(true, "industrial_drill_head", GTQTMetaBlocks.blockMultiblockCasing2.getItemVariant(BlockMultiblockCasing2.CasingType.DRILL_HEAD),
                 "PGP", "MHM", "SSS",
                 'P', ELECTRIC_PISTON_UV.getStackForm(),
                 'G', new UnificationEntry(gear, Orichalcum),
@@ -29,7 +28,7 @@ public class GCYSBlockRecipeLoader {
         );
 
         // Airfoil Chambers
-        ModHandler.addShapedRecipe(true, "airfoil_chamber", GTQTMetaBlocks.MULTIBLOCK_CASING_ACTIVE.getItemVariant(BlockGCYSMultiblockCasingActive.CasingType.AIRFOIL),
+        ModHandler.addShapedRecipe(true, "airfoil_chamber", GTQTMetaBlocks.blockMultiblockCasingActive.getItemVariant(BlockMultiblockCasingActive.CasingType.AIRFOIL),
                 " IR", "SOS", "RI ",
                 'I', new UnificationEntry(ring, StyreneButadieneRubber),
                 'R', new UnificationEntry(rotor, TungstenSteel),
@@ -37,7 +36,7 @@ public class GCYSBlockRecipeLoader {
                 'O', new UnificationEntry(stick, HSLASteel)
         );
 
-        ModHandler.addShapedRecipe(true, "advanced_airfoil_chamber", GTQTMetaBlocks.MULTIBLOCK_CASING_ACTIVE.getItemVariant(BlockGCYSMultiblockCasingActive.CasingType.ADVANCED_AIRFOIL),
+        ModHandler.addShapedRecipe(true, "advanced_airfoil_chamber", GTQTMetaBlocks.blockMultiblockCasingActive.getItemVariant(BlockMultiblockCasingActive.CasingType.ADVANCED_AIRFOIL),
                 " IR", "SOS", "RI ",
                 'I', new UnificationEntry(ring, SiliconeRubber),
                 'R', new UnificationEntry(rotor, RhodiumPlatedPalladium),

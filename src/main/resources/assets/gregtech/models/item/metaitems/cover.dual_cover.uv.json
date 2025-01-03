@@ -1,6 +1,7 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "gregtech:items/metaitems/cover.infinite_water"
+    "layer0": "gregtech:items/metaitems/cover.dual_cover",
+    "layer1": "gtqtcore:items/metaitems/voltages/uv"
   }
 }

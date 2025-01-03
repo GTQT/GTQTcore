@@ -39,7 +39,7 @@ import gregtech.common.metatileentities.multi.multiblockpart.appeng.MetaTileEnti
 import keqing.gtqtcore.api.capability.impl.OreProcessorRecipeLogic;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing;
+import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
@@ -80,7 +80,7 @@ public class MetaTileEntityIntegratedOreProcessor extends MultiblockWithDisplayB
     }
 
     private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.TURBINE_CASING.getState(GTQTTurbineCasing.TurbineCasingType.IRIDIUM_CASING);
+        return GTQTMetaBlocks.blockMultiblockCasing4.getState(BlockMultiblockCasing4.TurbineCasingType.IRIDIUM_CASING);
     }
 
     private static IBlockState getSecondCasingState() {

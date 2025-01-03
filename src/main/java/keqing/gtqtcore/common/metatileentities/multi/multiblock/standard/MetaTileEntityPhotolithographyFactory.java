@@ -30,7 +30,7 @@ import keqing.gtqtcore.api.utils.GTQTCPUHelper;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing;
+import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
@@ -84,7 +84,7 @@ public class MetaTileEntityPhotolithographyFactory extends MetaTileEntityBaseWit
     }
 
     private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.TURBINE_CASING.getState(GTQTTurbineCasing.TurbineCasingType.NQ_TURBINE_CASING);
+        return GTQTMetaBlocks.blockMultiblockCasing4.getState(BlockMultiblockCasing4.TurbineCasingType.NQ_TURBINE_CASING);
     }
 
     private static IBlockState getFrameState() {

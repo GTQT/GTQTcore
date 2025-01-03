@@ -103,11 +103,11 @@ public class GCYSCraftingComponent {
         }).collect(Collectors.toMap(data -> (Integer) data[0], data -> data[1])));
 
         GLASS.appendIngredients(Stream.of(new Object[][]{
-                {9, GTQTMetaBlocks.TRANSPARENT_CASING.getItemVariant(BlockTransparentCasing.CasingType.PMMA)},
-                {10, GTQTMetaBlocks.TRANSPARENT_CASING.getItemVariant(BlockTransparentCasing.CasingType.PMMA)},
-//                {11, GCYSMetaBlocks.TRANSPARENT_CASING.getItemVariant(BlockTransparentCasing.CasingType.)},
-//                {12, GCYSMetaBlocks.TRANSPARENT_CASING.getItemVariant(BlockTransparentCasing.CasingType.)},
-//                {13, GCYSMetaBlocks.TRANSPARENT_CASING.getItemVariant(BlockTransparentCasing.CasingType.)},
+                {9, GTQTMetaBlocks.blockTransparentCasing.getItemVariant(BlockTransparentCasing.CasingType.PMMA)},
+                {10, GTQTMetaBlocks.blockTransparentCasing.getItemVariant(BlockTransparentCasing.CasingType.PMMA)},
+//                {11, GCYSMetaBlocks.blockTransparentCasing.getItemVariant(BlockTransparentCasing.CasingType.)},
+//                {12, GCYSMetaBlocks.blockTransparentCasing.getItemVariant(BlockTransparentCasing.CasingType.)},
+//                {13, GCYSMetaBlocks.blockTransparentCasing.getItemVariant(BlockTransparentCasing.CasingType.)},
         }).collect(Collectors.toMap(data -> (Integer) data[0], data -> data[1])));
 
         PLATE.appendIngredients(Stream.of(new Object[][]{

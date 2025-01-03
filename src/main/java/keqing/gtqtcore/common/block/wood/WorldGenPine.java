@@ -48,8 +48,8 @@ public class WorldGenPine extends WorldGenerator {
         if (event.getResult() == Event.Result.DENY) {
             return false;
         }
-        IBlockState woodBlock = GTQTMetaBlocks.PINE_LOG.getDefaultState().withProperty(NATURAL, true);
-        IBlockState leaves = GTQTMetaBlocks.PINE_LEAVES.getDefaultState();
+        IBlockState woodBlock = GTQTMetaBlocks.BLOCK_PINE_LOG.getDefaultState().withProperty(NATURAL, true);
+        IBlockState leaves = GTQTMetaBlocks.BLOCK_PINE_LEAVES.getDefaultState();
         int height = getGrowHeight(world, pos);
         if (height < 2)
             return false;
@@ -90,8 +90,8 @@ public class WorldGenPine extends WorldGenerator {
         IBlockState baseState = world.getBlockState(below);
         Block baseBlock = baseState.getBlock();
         if (baseBlock.isAir(baseState, world, below) ||
-                !baseBlock.canSustainPlant(baseState, world, below, EnumFacing.UP, GTQTMetaBlocks.PINE_SAPLING) || (
-                !world.isAirBlock(pos.up()) && world.getBlockState(pos.up()).getBlock() != GTQTMetaBlocks.PINE_SAPLING))
+                !baseBlock.canSustainPlant(baseState, world, below, EnumFacing.UP, GTQTMetaBlocks.BLOCK_PINE_SAPLING) || (
+                !world.isAirBlock(pos.up()) && world.getBlockState(pos.up()).getBlock() != GTQTMetaBlocks.BLOCK_PINE_SAPLING))
             return 0;
         int height = 1;
         pos = pos.up();

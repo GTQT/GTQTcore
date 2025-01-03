@@ -454,7 +454,7 @@ public class MiscRecipes {
     private static void metaBlockRecipes() {
         COMPRESSOR_RECIPES.recipeBuilder()
                 .input(plate, PMMA, 4)
-                .outputs(GTQTMetaBlocks.TRANSPARENT_CASING.getItemVariant(BlockTransparentCasing.CasingType.PMMA))
+                .outputs(GTQTMetaBlocks.blockTransparentCasing.getItemVariant(BlockTransparentCasing.CasingType.PMMA))
                 .duration(400).EUt(2).buildAndRegister();
     }
 }

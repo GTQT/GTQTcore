@@ -47,7 +47,7 @@ import java.util.List;
 import static gregtech.api.recipes.RecipeMaps.SIFTER_RECIPES;
 import static gregtech.api.unification.material.Materials.Steam;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.GRAVITY_SEPARATOR_RECIPES;
-import static keqing.gtqtcore.common.block.blocks.GTQTIsaCasing.CasingType.SEPARATOR_ROTOR;
+import static keqing.gtqtcore.common.block.blocks.BlockIsaCasing.CasingType.SEPARATOR_ROTOR;
 
 public class MetaTileEntityGravitySeparator extends GTQTRecipeMapMultiblockController implements IProgressBarMultiblock {
     int updatetime = 1;
@@ -224,7 +224,7 @@ public class MetaTileEntityGravitySeparator extends GTQTRecipeMapMultiblockContr
     }
 
     protected IBlockState steelRotorState() {
-        return GTQTMetaBlocks.ISA_CASING.getState(SEPARATOR_ROTOR);
+        return GTQTMetaBlocks.blockIsaCasing.getState(SEPARATOR_ROTOR);
     }
 
     @Override

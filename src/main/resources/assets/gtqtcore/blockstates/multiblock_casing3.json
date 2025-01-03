@@ -1,0 +1,50 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "minecraft:cube_all",
+    "textures": {
+      "all": "gregtech:blocks/rendering_error"
+    }
+  },
+  "variants": {
+    "variant": {
+      "nitinol_machine_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casings/nitinol_machine_casing"
+        }
+      },
+      "hc_alloy_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casings/hc_alloy_casing"
+        }
+      },
+      "supercritical_fuel_trans_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casings/supercritical_fuel_trans_casing"
+        }
+      },
+      "supercritical_fuel_trans_score": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casings/supercritical_fuel_trans_score"
+        }
+      },
+      "naquadah_alloy_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casings/naquadah_alloy_casing"
+        }
+      },
+      "naquadria_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casings/naquadria_casing"
+        }
+      }
+    }
+  }
+}
+

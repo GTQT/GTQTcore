@@ -19,12 +19,11 @@ import gregtech.api.util.GTUtility;
 import gregtech.api.util.Mods;
 import gregtech.api.util.TextComponentUtil;
 import gregtech.client.utils.TooltipHelper;
-import gregtech.common.blocks.BlockCleanroomCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.multi.electric.MetaTileEntityCleanroom;
 import keqing.gtqtcore.api.metaileentity.multiblock.GCYLCleanroomType;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.common.block.blocks.GCYLCleanroomCasing;
+import keqing.gtqtcore.common.block.blocks.BlockCleanroomCasing;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
@@ -53,10 +52,10 @@ public class MetaTileEntityMegaCleanroom extends MetaTileEntityCleanroom impleme
             () -> new TraceabilityPredicate(blockWorldState -> {
                 IBlockState blockState = blockWorldState.getBlockState();
                 Block block = blockState.getBlock();
-                if (block instanceof BlockCleanroomCasing) {
-                    BlockCleanroomCasing.CasingType casingType = ((BlockCleanroomCasing) blockState.getBlock())
+                if (block instanceof gregtech.common.blocks.BlockCleanroomCasing) {
+                    gregtech.common.blocks.BlockCleanroomCasing.CasingType casingType = ((gregtech.common.blocks.BlockCleanroomCasing) blockState.getBlock())
                             .getState(blockState);
-                    if (casingType.equals(BlockCleanroomCasing.CasingType.PLASCRETE)) return false;
+                    if (casingType.equals(gregtech.common.blocks.BlockCleanroomCasing.CasingType.PLASCRETE)) return false;
 
                     Object currentFilter = blockWorldState.getMatchContext().getOrPut("FilterType", casingType);
                     if (!currentFilter.toString().equals(casingType.getName())) {
@@ -67,8 +66,8 @@ public class MetaTileEntityMegaCleanroom extends MetaTileEntityCleanroom impleme
                     return true;
                 }
 
-                if (block instanceof GCYLCleanroomCasing) {
-                    GCYLCleanroomCasing.CasingType casingType = ((GCYLCleanroomCasing) blockState.getBlock()).getState(blockState);
+                if (block instanceof BlockCleanroomCasing) {
+                    BlockCleanroomCasing.CasingType casingType = ((BlockCleanroomCasing) blockState.getBlock()).getState(blockState);
                     Object currentFilter = blockWorldState.getMatchContext().getOrPut("FilterType", casingType);
                     if (!currentFilter.toString().equals(casingType.getName())) {
                         blockWorldState.setError(new PatternStringError("gregtech.multiblock.pattern.error.filters"));
@@ -80,12 +79,12 @@ public class MetaTileEntityMegaCleanroom extends MetaTileEntityCleanroom impleme
                 }
                 return false;
             }, () -> ArrayUtils.addAll(
-                    Arrays.stream(BlockCleanroomCasing.CasingType.values())
-                            .filter(type -> !type.equals(BlockCleanroomCasing.CasingType.PLASCRETE))
+                    Arrays.stream(gregtech.common.blocks.BlockCleanroomCasing.CasingType.values())
+                            .filter(type -> !type.equals(gregtech.common.blocks.BlockCleanroomCasing.CasingType.PLASCRETE))
                             .map(type -> new BlockInfo(MetaBlocks.CLEANROOM_CASING.getState(type), null))
                             .toArray(BlockInfo[]::new),
-                    Arrays.stream(GCYLCleanroomCasing.CasingType.values())
-                            .map(type -> new BlockInfo(GTQTMetaBlocks.GCYL_CLEANROOM_CASING.getState(type), null))
+                    Arrays.stream(BlockCleanroomCasing.CasingType.values())
+                            .map(type -> new BlockInfo(GTQTMetaBlocks.blockCleanroomCasing.getState(type), null))
                             .toArray(BlockInfo[]::new)))
                     .addTooltips("gregtech.multiblock.pattern.error.filters");
     private final CleanroomLogic cleanroomLogic;
@@ -200,24 +199,24 @@ public class MetaTileEntityMegaCleanroom extends MetaTileEntityCleanroom impleme
         super.formStructure(context);
         initializeAbilities();
         Object type = context.get("FilterType");
-        if (type instanceof BlockCleanroomCasing.CasingType casingType) {
+        if (type instanceof gregtech.common.blocks.BlockCleanroomCasing.CasingType casingType) {
 
-            if (casingType.equals(BlockCleanroomCasing.CasingType.FILTER_CASING)) {
+            if (casingType.equals(gregtech.common.blocks.BlockCleanroomCasing.CasingType.FILTER_CASING)) {
                 this.cleanroomType = CleanroomType.CLEANROOM;
-            } else if (casingType.equals(BlockCleanroomCasing.CasingType.FILTER_CASING_STERILE)) {
+            } else if (casingType.equals(gregtech.common.blocks.BlockCleanroomCasing.CasingType.FILTER_CASING_STERILE)) {
                 this.cleanroomType = CleanroomType.STERILE_CLEANROOM;
             }
         }
 
-        if (type instanceof GCYLCleanroomCasing.CasingType casingType) {
+        if (type instanceof BlockCleanroomCasing.CasingType casingType) {
 
-            if (casingType.equals(GCYLCleanroomCasing.CasingType.FILTER_CASING_ISO3)) {
+            if (casingType.equals(BlockCleanroomCasing.CasingType.FILTER_CASING_ISO3)) {
                 this.cleanroomType = GCYLCleanroomType.ISO3;
-            } else if (casingType.equals(GCYLCleanroomCasing.CasingType.FILTER_CASING_ISO2)) {
+            } else if (casingType.equals(BlockCleanroomCasing.CasingType.FILTER_CASING_ISO2)) {
                 this.cleanroomType = GCYLCleanroomType.ISO2;
-            } else if (casingType.equals(GCYLCleanroomCasing.CasingType.FILTER_CASING_ISO1)) {
+            } else if (casingType.equals(BlockCleanroomCasing.CasingType.FILTER_CASING_ISO1)) {
                 this.cleanroomType = GCYLCleanroomType.ISO1;
-            } else if (casingType.equals(GCYLCleanroomCasing.CasingType.FILTER_CASING_ISO0)) {
+            } else if (casingType.equals(BlockCleanroomCasing.CasingType.FILTER_CASING_ISO0)) {
                 this.cleanroomType = GCYLCleanroomType.ISO0;
             }
 
@@ -408,7 +407,7 @@ public class MetaTileEntityMegaCleanroom extends MetaTileEntityCleanroom impleme
                 .aisle("XXXXXXXXXXXXXXXXXXXXX", "X                   X", "G                   G", "G                   G", "G                   G", "G                   G", "G                   G", "G                   G", "G                   G", "G                   G", "G                   G", "G                   G", "X                   X", "XFFFFFFFFFFFFFFFFFFFX")
                 .aisle("XXXXXXXXXMXEXXXXXXXXX", "XXXXXXXXXXOXXXXXXXXXX", "XXXXXXXXXXRXXXXXXXXXX", "XXXXXXXXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXXXXXXXX")
                 .where('X', MetaBlocks.CLEANROOM_CASING.getState(BlockCleanroomCasing.CasingType.PLASCRETE))
-                .where('G', MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.CLEANROOM_GLASS))
+                .where('G', MetaBlocks.blockTransparentCasing.getState(BlockMultiblockGlass1.CasingType.CLEANROOM_GLASS))
                 .where('S', GTQTMetaTileEntities.MEGA_CLEANROOM, EnumFacing.SOUTH)
                 .where(' ', Blocks.AIR.getDefaultState())
                 .where('E', MetaTileEntities.ENERGY_INPUT_HATCH[GTValues.ZPM], EnumFacing.SOUTH)
@@ -431,9 +430,9 @@ public class MetaTileEntityMegaCleanroom extends MetaTileEntityCleanroom impleme
                 .forEach(casingType -> shapeInfo
                         .add(builder.where('F', MetaBlocks.CLEANROOM_CASING.getState(casingType)).build()));
 
-        Arrays.stream(GCYLCleanroomCasing.CasingType.values())
+        Arrays.stream(BlockCleanroomCasing.CasingType.values())
                 .forEach(casingType -> shapeInfo
-                        .add(builder.where('F', GTQTMetaBlocks.GCYL_CLEANROOM_CASING.getState(casingType)).build()));
+                        .add(builder.where('F', GTQTMetaBlocks.blockCleanroomCasing.getState(casingType)).build()));
 
         return shapeInfo;
     }

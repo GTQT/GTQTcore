@@ -47,7 +47,7 @@ import java.util.Random;
 
 import static gregtech.api.unification.material.Materials.Lubricant;
 import static gregtech.api.util.RelativeDirection.*;
-import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.PD_TURBINE_CASING;
+import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4.TurbineCasingType.PD_TURBINE_CASING;
 
 //水电站
 public class MetaTileEntityWaterPowerStation extends MultiblockWithDisplayBase {
@@ -212,7 +212,7 @@ public class MetaTileEntityWaterPowerStation extends MultiblockWithDisplayBase {
     private IBlockState getCasingAState() {
         if (tier == 1) return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.ALUMINIUM_FROSTPROOF);
         if (tier == 2) return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.TITANIUM_STABLE);
-        return GTQTMetaBlocks.TURBINE_CASING.getState(PD_TURBINE_CASING);
+        return GTQTMetaBlocks.blockMultiblockCasing4.getState(PD_TURBINE_CASING);
     }
 
     private IBlockState getFrameState() {

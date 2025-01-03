@@ -17,7 +17,7 @@ import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing;
+import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -40,7 +40,7 @@ public class MetaTileEntityFuelRefineFactory extends RecipeMapMultiblockControll
     }
 
     private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.TURBINE_CASING.getState(GTQTTurbineCasing.TurbineCasingType.TALONITE_CASING);
+        return GTQTMetaBlocks.blockMultiblockCasing4.getState(BlockMultiblockCasing4.TurbineCasingType.TALONITE_CASING);
     }
 
     private static IBlockState getPipeCasingState() {

@@ -34,7 +34,7 @@ import keqing.gtqtcore.api.metaileentity.multiblock.GTQTRecipeMapMultiblockContr
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing;
+import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
@@ -72,7 +72,7 @@ public class MetaTileEntityBlazingBlastFurnace extends GTQTRecipeMapMultiblockCo
     }
 
     private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.TURBINE_CASING.getState(GTQTTurbineCasing.TurbineCasingType.ADVANCED_INVAR_CASING);
+        return GTQTMetaBlocks.blockMultiblockCasing4.getState(BlockMultiblockCasing4.TurbineCasingType.ADVANCED_INVAR_CASING);
     }
 
     @Override
@@ -144,7 +144,7 @@ public class MetaTileEntityBlazingBlastFurnace extends GTQTRecipeMapMultiblockCo
                 .aisle("EEM", "CCC", "CCC", "CCC", "XXX")
                 .aisle("FXD", "C#C", "C#C", "C#C", "XHX")
                 .aisle("ISO", "CCC", "CCC", "CCC", "XXX")
-                .where('X', GTQTMetaBlocks.TURBINE_CASING.getState(GTQTTurbineCasing.TurbineCasingType.ADVANCED_INVAR_CASING))
+                .where('X', GTQTMetaBlocks.blockMultiblockCasing4.getState(BlockMultiblockCasing4.TurbineCasingType.ADVANCED_INVAR_CASING))
                 .where('S', GTQTMetaTileEntities.BLAZING_BLAST_FURNACE, EnumFacing.SOUTH)
                 .where('#', Blocks.AIR.getDefaultState())
                 .where('E', MetaTileEntities.ENERGY_INPUT_HATCH[GTValues.LV], EnumFacing.NORTH)
@@ -153,7 +153,7 @@ public class MetaTileEntityBlazingBlastFurnace extends GTQTRecipeMapMultiblockCo
                 .where('F', MetaTileEntities.FLUID_IMPORT_HATCH[GTValues.LV], EnumFacing.WEST)
                 .where('D', MetaTileEntities.FLUID_EXPORT_HATCH[GTValues.LV], EnumFacing.EAST)
                 .where('H', MetaTileEntities.MUFFLER_HATCH[GTValues.LV], EnumFacing.UP)
-                .where('M', () -> ConfigHolder.machines.enableMaintenance ? MetaTileEntities.MAINTENANCE_HATCH : GTQTMetaBlocks.TURBINE_CASING.getState(GTQTTurbineCasing.TurbineCasingType.ADVANCED_INVAR_CASING), EnumFacing.NORTH);
+                .where('M', () -> ConfigHolder.machines.enableMaintenance ? MetaTileEntities.MAINTENANCE_HATCH : GTQTMetaBlocks.blockMultiblockCasing4.getState(BlockMultiblockCasing4.TurbineCasingType.ADVANCED_INVAR_CASING), EnumFacing.NORTH);
         GregTechAPI.HEATING_COILS.entrySet().stream().sorted(Comparator.comparingInt(entry -> entry.getValue().getTier())).forEach(entry -> shapeInfo.add(builder.where('C', entry.getKey()).build()));
         return shapeInfo;
     }

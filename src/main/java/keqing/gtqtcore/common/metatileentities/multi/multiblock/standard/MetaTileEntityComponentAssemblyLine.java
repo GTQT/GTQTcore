@@ -30,7 +30,7 @@ import keqing.gtqtcore.api.unification.GTQTMaterials;
 import keqing.gtqtcore.api.utils.GTQTUniverUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing;
+import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
@@ -59,7 +59,7 @@ public class MetaTileEntityComponentAssemblyLine extends RecipeMapMultiblockCont
     }
 
     private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.TURBINE_CASING.getState(GTQTTurbineCasing.TurbineCasingType.IRIDIUM_CASING);
+        return GTQTMetaBlocks.blockMultiblockCasing4.getState(BlockMultiblockCasing4.TurbineCasingType.IRIDIUM_CASING);
     }
 
     private static IBlockState getSecondCasingState() {
@@ -67,7 +67,7 @@ public class MetaTileEntityComponentAssemblyLine extends RecipeMapMultiblockCont
     }
 
     private static IBlockState getThirdCasingState() {
-        return GTQTMetaBlocks.TURBINE_CASING.getState(GTQTTurbineCasing.TurbineCasingType.ADVANCED_FILTER_CASING);
+        return GTQTMetaBlocks.blockMultiblockCasing4.getState(BlockMultiblockCasing4.TurbineCasingType.ADVANCED_FILTER_CASING);
     }
 
     private static IBlockState getGlassState() {
@@ -79,7 +79,7 @@ public class MetaTileEntityComponentAssemblyLine extends RecipeMapMultiblockCont
     }
 
     private static IBlockState getPipeCasingState() {
-        return GTQTMetaBlocks.TURBINE_CASING.getState(GTQTTurbineCasing.TurbineCasingType.POLYBENZIMIDAZOLE_PIPE);
+        return GTQTMetaBlocks.blockMultiblockCasing4.getState(BlockMultiblockCasing4.TurbineCasingType.POLYBENZIMIDAZOLE_PIPE);
     }
 
     @Override

@@ -29,7 +29,7 @@ import gregtech.client.renderer.ICubeRenderer;
 import keqing.gtqtcore.api.capability.impl.FishPondLogic;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing;
+import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
@@ -164,7 +164,7 @@ public class MetaTileEntityIndustrialFishingPond extends MultiblockWithDisplayBa
     }
 
     protected IBlockState getCasingState() {
-        return GTQTMetaBlocks.TURBINE_CASING.getState(GTQTTurbineCasing.TurbineCasingType.FISHING_CASING);
+        return GTQTMetaBlocks.blockMultiblockCasing4.getState(BlockMultiblockCasing4.TurbineCasingType.FISHING_CASING);
     }
 
     public long getEnergyInputPerSecond() {

@@ -40,7 +40,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 import static gregtech.api.gui.widgets.AdvancedTextWidget.withHoverTextTranslate;
-import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing1.TurbineCasingType.SA_TURBINE_CASING;
+import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing5.TurbineCasingType.SA_TURBINE_CASING;
 import static net.minecraft.util.text.TextFormatting.*;
 
 public class MetaTileEntitySmallHeatExchanger extends NoEnergyMultiblockController implements IHeatExchanger {
@@ -87,7 +87,7 @@ public class MetaTileEntitySmallHeatExchanger extends NoEnergyMultiblockControll
     }
 
     protected IBlockState getBoilerState() {
-        return GTQTMetaBlocks.TURBINE_CASING1.getState(SA_TURBINE_CASING);
+        return GTQTMetaBlocks.blockMultiblockCasing5.getState(SA_TURBINE_CASING);
     }
 
     @Override

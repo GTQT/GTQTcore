@@ -1,14 +1,11 @@
 package keqing.gtqtcore.loaders.recipes.chain;
 
 import com.google.common.collect.HashBiMap;
-import gregtech.api.recipes.ModHandler;
 import gregtech.api.unification.material.MarkerMaterials;
 import gregtech.api.unification.material.Material;
-import gregtech.api.unification.stack.UnificationEntry;
 import gregtech.common.ConfigHolder;
 import gregtech.common.metatileentities.MetaTileEntities;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.common.block.blocks.BlockGCYSMultiblockCasing;
 import keqing.gtqtcore.common.block.blocks.BlockPCBFactoryCasing;
 import net.minecraft.item.ItemStack;
 
@@ -18,7 +15,6 @@ import java.util.List;
 import static gregicality.multiblocks.api.unification.GCYMMaterials.Trinaquadalloy;
 import static gregicality.multiblocks.common.metatileentities.GCYMMetaTileEntities.MEGA_VACUUM_FREEZER;
 import static gregtech.api.GTValues.*;
-import static gregtech.api.recipes.RecipeMaps.ASSEMBLER_RECIPES;
 import static gregtech.api.recipes.RecipeMaps.ASSEMBLY_LINE_RECIPES;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.api.unification.material.Materials.*;
@@ -30,7 +26,6 @@ import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.TJMaterials.Polyetheretherketone;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.swarm;
 import static keqing.gtqtcore.api.utils.GTQTUtil.CWT;
-import static keqing.gtqtcore.common.block.blocks.GTQTParticleAccelerator.MachineType.ACCELERATOR_FIRM_MKI;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.*;
 
@@ -55,7 +50,7 @@ public class PCBline {
                 .input(gear,HSSS,4)
                 .input(stickLong,Samarium,2)
                 .input(wireGtSingle, IVSuperconductor, 8)
-                .outputs(GTQTMetaBlocks.PCB_FACTORY_CASING.getItemVariant(BlockPCBFactoryCasing.PCBFactoryCasingType.BASIC_PHOTOLITHOGRAPHIC_FRAMEWORK_CASING, ConfigHolder.recipes.casingsPerCraft))
+                .outputs(GTQTMetaBlocks.blockPCBFactoryCasing.getItemVariant(BlockPCBFactoryCasing.PCBFactoryCasingType.BASIC_PHOTOLITHOGRAPHIC_FRAMEWORK_CASING, ConfigHolder.recipes.casingsPerCraft))
                 .stationResearch(b -> b
                         .researchStack(NANO_COATING.getStackForm())
                         .CWUt(CWT[EV])
@@ -80,7 +75,7 @@ public class PCBline {
                 .input(gear,Pikyonium64B,4)
                 .input(stickLong,Naquadah,2)
                 .input(wireGtSingle, LuVSuperconductor, 8)
-                .outputs(GTQTMetaBlocks.PCB_FACTORY_CASING.getItemVariant(BlockPCBFactoryCasing.PCBFactoryCasingType.MOLD_PRINTING_ASSEMBLY_FRAMEWORK_CASING, ConfigHolder.recipes.casingsPerCraft))
+                .outputs(GTQTMetaBlocks.blockPCBFactoryCasing.getItemVariant(BlockPCBFactoryCasing.PCBFactoryCasingType.MOLD_PRINTING_ASSEMBLY_FRAMEWORK_CASING, ConfigHolder.recipes.casingsPerCraft))
                 .stationResearch(b -> b
                         .researchStack(PHOTOLITHOGRAPHY_FACTORY.getStackForm())
                         .CWUt(CWT[IV])
@@ -104,7 +99,7 @@ public class PCBline {
                 .input(gear,Tritanium,4)
                 .input(stickLong,Darmstadtium,2)
                 .input(wireGtSingle, ZPMSuperconductor, 8)
-                .outputs(GTQTMetaBlocks.PCB_FACTORY_CASING.getItemVariant(BlockPCBFactoryCasing.PCBFactoryCasingType.RADIATION_PROOF_SCAN_FRAMEWORK_CASING, ConfigHolder.recipes.casingsPerCraft))
+                .outputs(GTQTMetaBlocks.blockPCBFactoryCasing.getItemVariant(BlockPCBFactoryCasing.PCBFactoryCasingType.RADIATION_PROOF_SCAN_FRAMEWORK_CASING, ConfigHolder.recipes.casingsPerCraft))
                 .stationResearch(b -> b
                         .researchStack(LASER_ENV.getStackForm())
                         .CWUt(CWT[LuV])
@@ -130,7 +125,7 @@ public class PCBline {
                 .input(gear,Pikyonium64B,4)
                 .input(plate, KaptonK, 12)
                 .input(wireGtSingle, UVSuperconductor, 8)
-                .outputs(GTQTMetaBlocks.PCB_FACTORY_CASING.getItemVariant(BlockPCBFactoryCasing.PCBFactoryCasingType.BIOLOGICAL_STERILE_MACHINE_CASING, ConfigHolder.recipes.casingsPerCraft))
+                .outputs(GTQTMetaBlocks.blockPCBFactoryCasing.getItemVariant(BlockPCBFactoryCasing.PCBFactoryCasingType.BIOLOGICAL_STERILE_MACHINE_CASING, ConfigHolder.recipes.casingsPerCraft))
                 .stationResearch(b -> b
                         .researchStack(GENE_MUTAGENESIS.getStackForm())
                         .CWUt(CWT[ZPM])
@@ -156,7 +151,7 @@ public class PCBline {
                 .input(gear,Pikyonium64B,4)
                 .input(stickLong,Naquadah,2)
                 .input(wireGtSingle, UHVSuperconductor, 8)
-                .outputs(GTQTMetaBlocks.PCB_FACTORY_CASING.getItemVariant(BlockPCBFactoryCasing.PCBFactoryCasingType.INFINITY_COOLED_MACHINE_CASING, ConfigHolder.recipes.casingsPerCraft))
+                .outputs(GTQTMetaBlocks.blockPCBFactoryCasing.getItemVariant(BlockPCBFactoryCasing.PCBFactoryCasingType.INFINITY_COOLED_MACHINE_CASING, ConfigHolder.recipes.casingsPerCraft))
                 .stationResearch(b -> b
                         .researchStack(MEGA_VACUUM_FREEZER.getStackForm())
                         .CWUt(CWT[UV])
@@ -176,7 +171,7 @@ public class PCBline {
                 .input(circuit, MarkerMaterials.Tier.EV, 4)
                 .input(stick, RedSteel, 2)
                 .input(plate, BlueSteel, 12)
-                .outputs(GTQTMetaBlocks.PCB_FACTORY_CASING.getItemVariant(BlockPCBFactoryCasing.PCBFactoryCasingType.SUBSTRATE_CASING, ConfigHolder.recipes.casingsPerCraft))
+                .outputs(GTQTMetaBlocks.blockPCBFactoryCasing.getItemVariant(BlockPCBFactoryCasing.PCBFactoryCasingType.SUBSTRATE_CASING, ConfigHolder.recipes.casingsPerCraft))
                 .stationResearch(b -> b
                         .researchStack(CHEMICAL_PLANT.getStackForm())
                         .CWUt(CWT[IV])
@@ -195,7 +190,7 @@ public class PCBline {
                 .input(circuit, MarkerMaterials.Tier.IV, 4)
                 .input(stick, Duranium, 2)
                 .input(plate, Ruridit, 12)
-                .outputs(GTQTMetaBlocks.PCB_FACTORY_CASING.getItemVariant(BlockPCBFactoryCasing.PCBFactoryCasingType.ADVANCED_SUBSTRATE_CASING, ConfigHolder.recipes.casingsPerCraft))
+                .outputs(GTQTMetaBlocks.blockPCBFactoryCasing.getItemVariant(BlockPCBFactoryCasing.PCBFactoryCasingType.ADVANCED_SUBSTRATE_CASING, ConfigHolder.recipes.casingsPerCraft))
                 .stationResearch(b -> b
                         .researchStack(HUGE_CHEMICAL_REACTOR.getStackForm())
                         .CWUt(CWT[LuV])

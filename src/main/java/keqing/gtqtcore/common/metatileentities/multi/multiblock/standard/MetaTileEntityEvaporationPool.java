@@ -77,7 +77,7 @@ public class MetaTileEntityEvaporationPool extends RecipeMapMultiblockController
     public static final ArrayList<IBlockState> validContainerStates = new ArrayList<>();
 
     static {
-        validContainerStates.add(GTQTMetaBlocks.EVAPORATION_BED.getState(BlockEvaporationBed.EvaporationBedType.DIRT));
+        validContainerStates.add(GTQTMetaBlocks.blockEvaporationBed.getState(BlockEvaporationBed.EvaporationBedType.DIRT));
         validContainerStates.addAll(MetaBlocks.WIRE_COIL.getBlockState().getValidStates()); //add all coils as valid container blocks
     }
 
@@ -324,7 +324,7 @@ public class MetaTileEntityEvaporationPool extends RecipeMapMultiblockController
 
     protected TraceabilityPredicate isGround() {
         //supplies block info for display
-        Supplier<BlockInfo[]> supplier = () -> new BlockInfo[]{new BlockInfo(GTQTMetaBlocks.EVAPORATION_BED.getState(BlockEvaporationBed.EvaporationBedType.DIRT))};
+        Supplier<BlockInfo[]> supplier = () -> new BlockInfo[]{new BlockInfo(GTQTMetaBlocks.blockEvaporationBed.getState(BlockEvaporationBed.EvaporationBedType.DIRT))};
 
         //returns true if blockstate is "ground"
         return new TraceabilityPredicate(blockWorldState -> {
@@ -340,7 +340,7 @@ public class MetaTileEntityEvaporationPool extends RecipeMapMultiblockController
 
             //add evap bed types
             for (BlockEvaporationBed.EvaporationBedType type : BlockEvaporationBed.EvaporationBedType.values()) {
-                containerInfo.add(new BlockInfo(GTQTMetaBlocks.EVAPORATION_BED.getState(type)));
+                containerInfo.add(new BlockInfo(GTQTMetaBlocks.blockEvaporationBed.getState(type)));
             }
 
             //add coil types
@@ -376,7 +376,7 @@ public class MetaTileEntityEvaporationPool extends RecipeMapMultiblockController
                 .aisle("EEESEEEEEE", "          ")
                 .where('S', EVAPORATION_POOL, EnumFacing.SOUTH)
                 .where('E', MetaBlocks.STONE_BLOCKS.get(StoneVariantBlock.StoneVariant.SMOOTH).getState(StoneVariantBlock.StoneType.CONCRETE_LIGHT))
-                .where('G', GTQTMetaBlocks.EVAPORATION_BED.getState(BlockEvaporationBed.EvaporationBedType.DIRT)).where('#', Blocks.AIR.getDefaultState())
+                .where('G', GTQTMetaBlocks.blockEvaporationBed.getState(BlockEvaporationBed.EvaporationBedType.DIRT)).where('#', Blocks.AIR.getDefaultState())
                 .where(' ', Blocks.AIR.getDefaultState()) //supposed to be any
                 .where('e', MetaTileEntities.ENERGY_INPUT_HATCH[GTValues.LV], EnumFacing.NORTH).where('f', MetaTileEntities.FLUID_IMPORT_HATCH[GTValues.LV], EnumFacing.NORTH)
                 .where('F', MetaTileEntities.FLUID_EXPORT_HATCH[GTValues.LV], EnumFacing.NORTH).where('I', MetaTileEntities.ITEM_EXPORT_BUS[GTValues.LV], EnumFacing.NORTH);
@@ -409,7 +409,7 @@ public class MetaTileEntityEvaporationPool extends RecipeMapMultiblockController
                     if (!checkGround) continue; //skip non coil entries if checkGround is false
 
                     //do not error out if invalid
-                    if (getWorld().getBlockState(targetPos) == GTQTMetaBlocks.EVAPORATION_BED.getState(BlockEvaporationBed.EvaporationBedType.DIRT))
+                    if (getWorld().getBlockState(targetPos) == GTQTMetaBlocks.blockEvaporationBed.getState(BlockEvaporationBed.EvaporationBedType.DIRT))
                         continue;
                     return ((i * columnCount + j - 2) * -1) - 2; //ground check failed; return index number's negative shifted down two such that range => [0, INT_MAX] -> [-INT_MAX, -2]
                 }
@@ -472,7 +472,7 @@ public class MetaTileEntityEvaporationPool extends RecipeMapMultiblockController
     }
 
     public boolean isValidGround(IBlockState state) {
-        return state == GTQTMetaBlocks.EVAPORATION_BED.getState(BlockEvaporationBed.EvaporationBedType.DIRT);
+        return state == GTQTMetaBlocks.blockEvaporationBed.getState(BlockEvaporationBed.EvaporationBedType.DIRT);
     }
 
     /*
@@ -624,29 +624,6 @@ public class MetaTileEntityEvaporationPool extends RecipeMapMultiblockController
 
         renderState.reset();
     }
-
-    /* I give up
-    @Override
-    public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
-        if ((tickTimer +1) % 20 == 0) {
-            SusyLog.logger.atError().log("BEFORE RENDER CALL with world: " + (this.getWorld() == null ? "null" : this.getWorld()) + ", isStructureFormed: " + (this.isStructureFormed()) + ", isActive: " + (this.getRecipeMapWorkable() == null ? "null" : (this.getRecipeMapWorkable().isActive()) + ", previousRecipe: " + (this.getRecipeMapWorkable().getPreviousRecipe() == null ? "null" : this.getRecipeMapWorkable().isActive())));
-            SusyLog.logger.atError().log("BEFORE RENDER CALL; pos: " + getPos());
-        }
-
-        super.renderMetaTileEntity(renderState, translation, pipeline);
-        getFrontOverlay().renderOrientedState(renderState, translation, pipeline, getFrontFacing(), recipeMapWorkable.isActive(), recipeMapWorkable.isWorkingEnabled());
-        renderFluid(renderState, translation, pipeline, getWorld(), getFrontFacing(), getRecipeMapWorkable(), new BlockPos.MutableBlockPos(getPos()));
-
-            EnumFacing back = getFrontFacing().getOpposite();
-            Matrix4 offset = translation.copy().translate(back.getXOffset(), -0.3, back.getZOffset());
-            CubeRendererState op = Textures.RENDER_STATE.get();
-            Textures.RENDER_STATE.set(new CubeRendererState(op.layer, CubeRendererState.PASS_MASK, op.world));
-            Textures.renderFace(renderState, offset,
-                    ArrayUtils.addAll(pipeline, new LightMapOperation(240, 240), new ColourOperation(0xFFFFFFFF)),
-                    EnumFacing.UP, Cuboid6.full, TextureUtils.getBlockTexture("lava_still"), BloomEffectUtil.getRealBloomLayer());
-            Textures.RENDER_STATE.set(op);
-    }
-    */
 
     @Override
     public void update() {

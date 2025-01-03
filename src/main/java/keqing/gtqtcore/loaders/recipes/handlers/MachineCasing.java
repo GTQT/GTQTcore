@@ -10,9 +10,9 @@ import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.BlockActiveUniqueCasing;
-import keqing.gtqtcore.common.block.blocks.GTQTADVBlock;
-import keqing.gtqtcore.common.block.blocks.GTQTIsaCasing;
-import keqing.gtqtcore.common.block.blocks.GTQTMultiblockCasing;
+import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing1;
+import keqing.gtqtcore.common.block.blocks.BlockIsaCasing;
+import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing3;
 import net.minecraft.util.IStringSerializable;
 
 import static gregicality.multiblocks.api.recipes.GCYMRecipeMaps.ALLOY_BLAST_RECIPES;
@@ -27,10 +27,10 @@ import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.PRECISE_ASSEMBLER_R
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.utils.GTQTUtil.CWT;
-import static keqing.gtqtcore.common.block.blocks.GTQTIsaCasing.CasingType.*;
-import static keqing.gtqtcore.common.block.blocks.GTQTMultiblockCasing.CasingType.*;
-import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.*;
-import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing1.TurbineCasingType.*;
+import static keqing.gtqtcore.common.block.blocks.BlockIsaCasing.CasingType.*;
+import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing3.CasingType.*;
+import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4.TurbineCasingType.*;
+import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing5.TurbineCasingType.*;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.CIRCUIT_GOOD_III;
 
 public class MachineCasing {
@@ -50,7 +50,7 @@ public class MachineCasing {
                 .input(stickLong, HSSG, 2)
                 .input(bolt, HastelloyN, 16)
                 .fluidInputs(StainlessSteel.getFluid(L * 8))
-                .outputs(GTQTMetaBlocks.ISA_CASING.getItemVariant(FLOTATION_CASING, 2))
+                .outputs(GTQTMetaBlocks.blockIsaCasing.getItemVariant(FLOTATION_CASING, 2))
                 .EUt(VA[IV])
                 .duration(280)
                 .buildAndRegister();
@@ -62,37 +62,37 @@ public class MachineCasing {
                 .input(gearSmall, HSSG, 6)
                 .input(bolt, TungstenCarbide, 16)
                 .fluidInputs(HastelloyX.getFluid(L * 2))
-                .outputs(GTQTMetaBlocks.ISA_CASING.getItemVariant(FLOTATION_CASING_GEARBOX, 2))
+                .outputs(GTQTMetaBlocks.blockIsaCasing.getItemVariant(FLOTATION_CASING_GEARBOX, 2))
                 .EUt(VA[LuV])
                 .duration(140)
                 .buildAndRegister();
 
-        ModHandler.addShapedRecipe(true, "hc_alloy_casing",GTQTMetaBlocks.MULTI_CASING.getItemVariant(GTQTMultiblockCasing.CasingType.HC_ALLOY_CASING),
+        ModHandler.addShapedRecipe(true, "hc_alloy_casing",GTQTMetaBlocks.blockMultiblockCasing3.getItemVariant(BlockMultiblockCasing3.CasingType.HC_ALLOY_CASING),
                 "APA", "PFP", "APA",
                 'F', new UnificationEntry(frameGt, HG1223),
                 'P', new UnificationEntry(pipeNormalFluid, Iridium),
                 'A', new UnificationEntry(plate, HG1223));
 
-        ModHandler.addShapedRecipe(true, "hastelloy_n_pipe", GTQTMetaBlocks.ISA_CASING.getItemVariant(FLOTATION_CASING_PIPE, 1),
+        ModHandler.addShapedRecipe(true, "hastelloy_n_pipe", GTQTMetaBlocks.blockIsaCasing.getItemVariant(FLOTATION_CASING_PIPE, 1),
                 "APA", "PFP", "APA",
                 'F', new UnificationEntry(frameGt, WatertightSteel),
                 'P', new UnificationEntry(pipeNormalFluid, HastelloyN),
                 'A', new UnificationEntry(plate, VanadiumGallium));
 
-        ModHandler.addShapedRecipe(true, "iridium_turbine", GTQTMetaBlocks.ISA_CASING.getItemVariant(IRIDIUM_TURBINE, 1),
+        ModHandler.addShapedRecipe(true, "iridium_turbine", GTQTMetaBlocks.blockIsaCasing.getItemVariant(IRIDIUM_TURBINE, 1),
                 "APA", "PFP", "APA",
                 'F', new UnificationEntry(frameGt, Iridium),
                 'P', new UnificationEntry(pipeNormalFluid, Naquadah),
                 'A', new UnificationEntry(plate, Iridium));
 
-        ModHandler.addShapedRecipe(true, "intake_pipe", GTQTMetaBlocks.ISA_CASING.getItemVariant(FLOTATION_INTAKE_CASING, 1),
+        ModHandler.addShapedRecipe(true, "intake_pipe", GTQTMetaBlocks.blockIsaCasing.getItemVariant(FLOTATION_INTAKE_CASING, 1),
                 "APA", "PFP", "APA",
                 'F', new UnificationEntry(frameGt, NaquadahAlloy),
                 'P', new UnificationEntry(pipeNormalFluid, Naquadah),
                 'A', new UnificationEntry(plate, VanadiumGallium));
 
         //  Advanced Assembly Control Casing
-        ModHandler.addShapedRecipe(true, "casing_assembly_control.advanced", GTQTMetaBlocks.ACTIVE_UNIQUE_CASING.getItemVariant(BlockActiveUniqueCasing.ActiveCasingType.ADVANCED_ASSEMBLY_CONTROL_CASING, 1),
+        ModHandler.addShapedRecipe(true, "casing_assembly_control.advanced", GTQTMetaBlocks.blockActiveUniqueCasing.getItemVariant(BlockActiveUniqueCasing.ActiveCasingType.ADVANCED_ASSEMBLY_CONTROL_CASING, 1),
                 "OPO", "SFE", "OMO",
                 'O', new UnificationEntry(circuit, MarkerMaterials.Tier.UV),
                 'P', ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT,
@@ -102,7 +102,7 @@ public class MachineCasing {
                 'M', ELECTRIC_MOTOR_ZPM);
 
         //  Advanced Assembly Casing
-        ModHandler.addShapedRecipe(true, "casing_assembly_line.advanced", GTQTMetaBlocks.ACTIVE_UNIQUE_CASING.getItemVariant(BlockActiveUniqueCasing.ActiveCasingType.ADVANCED_ASSEMBLY_LINE_CASING, 1),
+        ModHandler.addShapedRecipe(true, "casing_assembly_line.advanced", GTQTMetaBlocks.blockActiveUniqueCasing.getItemVariant(BlockActiveUniqueCasing.ActiveCasingType.ADVANCED_ASSEMBLY_LINE_CASING, 1),
                 "PGP", "RFR", "PGP",
                 'P', new UnificationEntry(plate, Iridium),
                 'G', new UnificationEntry(gear, Osmiridium),
@@ -110,7 +110,7 @@ public class MachineCasing {
                 'F', new UnificationEntry(frameGt, NaquadahAlloy));
 
         //  Circuit Assembly Casing
-        ModHandler.addShapedRecipe(true, "circuit_assembly_casing", GTQTMetaBlocks.ACTIVE_UNIQUE_CASING.getItemVariant(BlockActiveUniqueCasing.ActiveCasingType.CIRCUIT_ASSEMBLY_LINE_CASING, 1),
+        ModHandler.addShapedRecipe(true, "circuit_assembly_casing", GTQTMetaBlocks.blockActiveUniqueCasing.getItemVariant(BlockActiveUniqueCasing.ActiveCasingType.CIRCUIT_ASSEMBLY_LINE_CASING, 1),
                 "PGP", "RFR", "PGP",
                 'P', new UnificationEntry(plate, Osmium),
                 'G', new UnificationEntry(gear, Rhodium),
@@ -118,7 +118,7 @@ public class MachineCasing {
                 'F', new UnificationEntry(frameGt, HSSE));
 
         //  Advanced Grate Casing
-        ModHandler.addShapedRecipe(true, "advanced_grate_casing", GTQTMetaBlocks.ACTIVE_UNIQUE_CASING.getItemVariant(BlockActiveUniqueCasing.ActiveCasingType.CIRCUIT_ASSEMBLY_CONTROL_CASING, 1),
+        ModHandler.addShapedRecipe(true, "advanced_grate_casing", GTQTMetaBlocks.blockActiveUniqueCasing.getItemVariant(BlockActiveUniqueCasing.ActiveCasingType.CIRCUIT_ASSEMBLY_CONTROL_CASING, 1),
                 "PRP", "PXP", "PMP",
                 'X', MetaBlocks.MULTIBLOCK_CASING.getItemVariant(gregtech.common.blocks.BlockMultiblockCasing.MultiblockCasingType.GRATE_CASING),
                 'R', new UnificationEntry(rotor, NaquadahAlloy),
@@ -133,7 +133,7 @@ public class MachineCasing {
                 .input(ring, Inconel625, 8)
                 .input(bolt, Inconel625, 16)
                 .fluidInputs(Titanium.getFluid(L * 8))
-                .outputs(GTQTMetaBlocks.ISA_CASING.getItemVariant(ISA_MILL_CASING, 1))
+                .outputs(GTQTMetaBlocks.blockIsaCasing.getItemVariant(ISA_MILL_CASING, 1))
                 .EUt(VA[EV])
                 .duration(240)
                 .buildAndRegister();
@@ -145,7 +145,7 @@ public class MachineCasing {
                 .input(bolt, HSSE, 16)
                 .input(COMPONENT_GRINDER_TUNGSTEN, 2)
                 .fluidInputs(Zeron100.getFluid(L * 2))
-                .outputs(GTQTMetaBlocks.ISA_CASING.getItemVariant(ISA_MILL_CASING_GEARBOX, 1))
+                .outputs(GTQTMetaBlocks.blockIsaCasing.getItemVariant(ISA_MILL_CASING_GEARBOX, 1))
                 .EUt(VA[LuV])
                 .duration(300)
                 .buildAndRegister();
@@ -156,12 +156,12 @@ public class MachineCasing {
                 .input(gearSmall, Steel, 6)
                 .input(bolt, Gold, 16)
                 .fluidInputs(Glue.getFluid(L * 2))
-                .outputs(GTQTMetaBlocks.ISA_CASING.getItemVariant(SEPARATOR_ROTOR, 1))
+                .outputs(GTQTMetaBlocks.blockIsaCasing.getItemVariant(SEPARATOR_ROTOR, 1))
                 .EUt(VA[LV])
                 .duration(300)
                 .buildAndRegister();
 
-        ModHandler.addShapedRecipe(true, "inconel_625_pipe", GTQTMetaBlocks.ISA_CASING.getItemVariant(ISA_MILL_CASING_PIPE, 1),
+        ModHandler.addShapedRecipe(true, "inconel_625_pipe", GTQTMetaBlocks.blockIsaCasing.getItemVariant(ISA_MILL_CASING_PIPE, 1),
                 "APA", "PFP", "APA",
                 'F', new UnificationEntry(frameGt, MaragingSteel300),
                 'P', new UnificationEntry(pipeNormalFluid, Inconel625),
@@ -173,7 +173,7 @@ public class MachineCasing {
                 .input(plate, Talonite, 4)
                 .input(bolt, Duranium, 8)
                 .fluidInputs(Kevlar.getFluid(L * 2))
-                .outputs(GTQTMetaBlocks.TURBINE_CASING.getItemVariant(TALONITE_CASING, 1))
+                .outputs(GTQTMetaBlocks.blockMultiblockCasing4.getItemVariant(TALONITE_CASING, 1))
                 .circuitMeta(10)
                 .EUt(VA[ZPM])
                 .duration(800)
@@ -189,7 +189,7 @@ public class MachineCasing {
                 .fluidInputs(Kevlar.getFluid(L * 8))
                 .fluidInputs(KaptonE.getFluid(L * 4))
                 .fluidInputs(Nitrogen.getPlasma(L * 2))
-                .outputs(GTQTMetaBlocks.MULTI_CASING.getItemVariant(SFTC, 2))
+                .outputs(GTQTMetaBlocks.blockMultiblockCasing3.getItemVariant(SFTC, 2))
                 .EUt(VA[UV])
                 .duration(1000)
                 .Tier(3)
@@ -205,7 +205,7 @@ public class MachineCasing {
                 .fluidInputs(Kevlar.getFluid(L * 8))
                 .fluidInputs(KaptonE.getFluid(L * 4))
                 .fluidInputs(Nitrogen.getPlasma(L * 2))
-                .outputs(GTQTMetaBlocks.MULTI_CASING.getItemVariant(SFTS, 1))
+                .outputs(GTQTMetaBlocks.blockMultiblockCasing3.getItemVariant(SFTS, 1))
                 .EUt(VA[UV])
                 .duration(1000)
                 .Tier(3)
@@ -222,7 +222,7 @@ public class MachineCasing {
                 .fluidInputs(Kevlar.getFluid(L * 8))
                 .fluidInputs(KaptonE.getFluid(L * 4))
                 .fluidInputs(NaquadahEnriched.getFluid(L * 2))
-                .outputs(GTQTMetaBlocks.MULTI_CASING.getItemVariant(NAQUADRIA_CASING, 2))
+                .outputs(GTQTMetaBlocks.blockMultiblockCasing3.getItemVariant(NAQUADRIA_CASING, 2))
                 .EUt(VA[UV])
                 .duration(1000)
                 .Tier(3)
@@ -239,7 +239,7 @@ public class MachineCasing {
                 .fluidInputs(Kevlar.getFluid(L * 4))
                 .fluidInputs(KaptonE.getFluid(L * 2))
                 .fluidInputs(NaquadahEnriched.getFluid(L))
-                .outputs(GTQTMetaBlocks.MULTI_CASING.getItemVariant(NAQUADAH_ALLOY_CASING, 2))
+                .outputs(GTQTMetaBlocks.blockMultiblockCasing3.getItemVariant(NAQUADAH_ALLOY_CASING, 2))
                 .EUt(VA[ZPM])
                 .duration(1000)
                 .Tier(2)
@@ -249,14 +249,14 @@ public class MachineCasing {
         //  Polybenzimidazole Pipe Casing
         PRECISE_ASSEMBLER_RECIPES.recipeBuilder()
                 .input(CIRCUIT_GOOD_III, 4)
-                .inputs(GTQTMetaBlocks.TURBINE_CASING.getItemVariant(NQ_MACHINE_CASING))
+                .inputs(GTQTMetaBlocks.blockMultiblockCasing4.getItemVariant(NQ_MACHINE_CASING))
                 .input(frameGt, Tritanium, 2)
                 .input(plate, BlackPlutonium, 8)
                 .fluidInputs(Polybenzimidazole.getFluid(L * 24))
                 .fluidInputs(Kevlar.getFluid(L * 16))
                 .fluidInputs(KaptonE.getFluid(L * 8))
                 .fluidInputs(NaquadahEnriched.getFluid(L * 4))
-                .outputs(GTQTMetaBlocks.TURBINE_CASING.getItemVariant(POLYBENZIMIDAZOLE_PIPE))
+                .outputs(GTQTMetaBlocks.blockMultiblockCasing4.getItemVariant(POLYBENZIMIDAZOLE_PIPE))
                 .EUt(VA[ZPM])
                 .duration(800)
                 .Tier(3)
@@ -266,14 +266,14 @@ public class MachineCasing {
         //  Hyper casings
         PRECISE_ASSEMBLER_RECIPES.recipeBuilder()
                 .input(CIRCUIT_GOOD_III, 1)
-                .inputs(GTQTMetaBlocks.TURBINE_CASING.getItemVariant(NQ_TURBINE_CASING))
+                .inputs(GTQTMetaBlocks.blockMultiblockCasing4.getItemVariant(NQ_TURBINE_CASING))
                 .input(frameGt, Neutronium, 2)
                 .input(plate, Adamantium, 8)
                 .fluidInputs(Polybenzimidazole.getFluid(L * 24))
                 .fluidInputs(Kevlar.getFluid(L * 16))
                 .fluidInputs(KaptonE.getFluid(L * 8))
                 .fluidInputs(BlackPlutonium.getFluid(L * 4))
-                .outputs(GTQTMetaBlocks.TURBINE_CASING.getItemVariant(HYPER_CASING, 2))
+                .outputs(GTQTMetaBlocks.blockMultiblockCasing4.getItemVariant(HYPER_CASING, 2))
                 .EUt(VA[UHV])
                 .duration(1000)
                 .Tier(3)
@@ -284,7 +284,7 @@ public class MachineCasing {
                 .inputs(MetaBlocks.METAL_CASING.getItemVariant(BlockMetalCasing.MetalCasingType.INVAR_HEATPROOF))
                 .circuitMeta(6)
                 .fluidInputs(AusteniticStainlessSteel904L.getFluid(L * 2))
-                .outputs(GTQTMetaBlocks.TURBINE_CASING.getItemVariant(ADVANCED_INVAR_CASING))
+                .outputs(GTQTMetaBlocks.blockMultiblockCasing4.getItemVariant(ADVANCED_INVAR_CASING))
                 .EUt(VA[LV])
                 .duration(50)
                 .buildAndRegister();
@@ -293,38 +293,38 @@ public class MachineCasing {
                 .inputs(MetaBlocks.METAL_CASING.getItemVariant(BlockMetalCasing.MetalCasingType.ALUMINIUM_FROSTPROOF))
                 .circuitMeta(6)
                 .fluidInputs(TanmolyiumBetaC.getFluid(L * 2))
-                .outputs(GTQTMetaBlocks.TURBINE_CASING1.getItemVariant(ADVANCED_COLD_CASING))
+                .outputs(GTQTMetaBlocks.blockMultiblockCasing5.getItemVariant(ADVANCED_COLD_CASING))
                 .EUt(VA[LV])
                 .duration(50)
                 .buildAndRegister();
 
         createCasingRecipe("red_steel_casing",
-                GTQTMetaBlocks.ISA_CASING,
-                GTQTIsaCasing.CasingType.VACUUM_CASING,
+                GTQTMetaBlocks.blockIsaCasing,
+                BlockIsaCasing.CasingType.VACUUM_CASING,
                 RedSteel);
 
         createCasingRecipe("red_steel_casing",
-                GTQTMetaBlocks.MULTI_CASING,
-                GTQTMultiblockCasing.CasingType.NITINOL_MACHINE_CASING,
+                GTQTMetaBlocks.blockMultiblockCasing3,
+                BlockMultiblockCasing3.CasingType.NITINOL_MACHINE_CASING,
                 Nitinol);
 
-        createCasingRecipe("inconel_625", GTQTMetaBlocks.ADV_BLOCK, GTQTADVBlock.CasingType.Inconel625, Inconel625);
-        createCasingRecipe("hastelloy_n", GTQTMetaBlocks.ADV_BLOCK, GTQTADVBlock.CasingType.HastelloyN, HastelloyN);
-        createCasingRecipe("stellite", GTQTMetaBlocks.ADV_BLOCK, GTQTADVBlock.CasingType.Stellite, Stellite);
-        createCasingRecipe("hdcs", GTQTMetaBlocks.ADV_BLOCK, GTQTADVBlock.CasingType.Hdcs, Hdcs);
-        createCasingRecipe("lafium", GTQTMetaBlocks.ADV_BLOCK, GTQTADVBlock.CasingType.Lafium, Lafium);
-        createCasingRecipe("black_titanium", GTQTMetaBlocks.ADV_BLOCK, GTQTADVBlock.CasingType.BlackTitanium, BlackTitanium);
-        createCasingRecipe("talonite", GTQTMetaBlocks.ADV_BLOCK, GTQTADVBlock.CasingType.Talonite, Talonite);
-        createCasingRecipe("black_plutonium", GTQTMetaBlocks.ADV_BLOCK, GTQTADVBlock.CasingType.BlackPlutonium, BlackPlutonium);
-        createCasingRecipe("maraging_steel_250", GTQTMetaBlocks.ADV_BLOCK, GTQTADVBlock.CasingType.MaragingSteel250, MaragingSteel250);
-        createCasingRecipe("staballoy", GTQTMetaBlocks.ADV_BLOCK, GTQTADVBlock.CasingType.Staballoy, Staballoy);
-        createCasingRecipe("babbitt_alloy", GTQTMetaBlocks.ADV_BLOCK, GTQTADVBlock.CasingType.BabbittAlloy, BabbittAlloy);
-        createCasingRecipe("zirconium_carbide", GTQTMetaBlocks.ADV_BLOCK, GTQTADVBlock.CasingType.ZirconiumCarbide, ZirconiumCarbide);
-        createCasingRecipe("inconel_792", GTQTMetaBlocks.ADV_BLOCK, GTQTADVBlock.CasingType.Inconel792, Inconel792);
-        createCasingRecipe("incoloy_ma_813", GTQTMetaBlocks.ADV_BLOCK, GTQTADVBlock.CasingType.IncoloyMA813, IncoloyMA813);
-        createCasingRecipe("hastelloy_x_78", GTQTMetaBlocks.ADV_BLOCK, GTQTADVBlock.CasingType.HastelloyX78, HastelloyX78);
-        createCasingRecipe("hastelloy_k_243", GTQTMetaBlocks.ADV_BLOCK, GTQTADVBlock.CasingType.HastelloyK243, HastelloyK243);
-        createCasingRecipe("iridium_casing", GTQTMetaBlocks.TURBINE_CASING, IRIDIUM_CASING, Osmiridium);
+        createCasingRecipe("inconel_625", GTQTMetaBlocks.blockMultiblockCasing1, BlockMultiblockCasing1.CasingType.Inconel625, Inconel625);
+        createCasingRecipe("hastelloy_n", GTQTMetaBlocks.blockMultiblockCasing1, BlockMultiblockCasing1.CasingType.HastelloyN, HastelloyN);
+        createCasingRecipe("stellite", GTQTMetaBlocks.blockMultiblockCasing1, BlockMultiblockCasing1.CasingType.Stellite, Stellite);
+        createCasingRecipe("hdcs", GTQTMetaBlocks.blockMultiblockCasing1, BlockMultiblockCasing1.CasingType.Hdcs, Hdcs);
+        createCasingRecipe("lafium", GTQTMetaBlocks.blockMultiblockCasing1, BlockMultiblockCasing1.CasingType.Lafium, Lafium);
+        createCasingRecipe("black_titanium", GTQTMetaBlocks.blockMultiblockCasing1, BlockMultiblockCasing1.CasingType.BlackTitanium, BlackTitanium);
+        createCasingRecipe("talonite", GTQTMetaBlocks.blockMultiblockCasing1, BlockMultiblockCasing1.CasingType.Talonite, Talonite);
+        createCasingRecipe("black_plutonium", GTQTMetaBlocks.blockMultiblockCasing1, BlockMultiblockCasing1.CasingType.BlackPlutonium, BlackPlutonium);
+        createCasingRecipe("maraging_steel_250", GTQTMetaBlocks.blockMultiblockCasing1, BlockMultiblockCasing1.CasingType.MaragingSteel250, MaragingSteel250);
+        createCasingRecipe("staballoy", GTQTMetaBlocks.blockMultiblockCasing1, BlockMultiblockCasing1.CasingType.Staballoy, Staballoy);
+        createCasingRecipe("babbitt_alloy", GTQTMetaBlocks.blockMultiblockCasing1, BlockMultiblockCasing1.CasingType.BabbittAlloy, BabbittAlloy);
+        createCasingRecipe("zirconium_carbide", GTQTMetaBlocks.blockMultiblockCasing1, BlockMultiblockCasing1.CasingType.ZirconiumCarbide, ZirconiumCarbide);
+        createCasingRecipe("inconel_792", GTQTMetaBlocks.blockMultiblockCasing1, BlockMultiblockCasing1.CasingType.Inconel792, Inconel792);
+        createCasingRecipe("incoloy_ma_813", GTQTMetaBlocks.blockMultiblockCasing1, BlockMultiblockCasing1.CasingType.IncoloyMA813, IncoloyMA813);
+        createCasingRecipe("hastelloy_x_78", GTQTMetaBlocks.blockMultiblockCasing1, BlockMultiblockCasing1.CasingType.HastelloyX78, HastelloyX78);
+        createCasingRecipe("hastelloy_k_243", GTQTMetaBlocks.blockMultiblockCasing1, BlockMultiblockCasing1.CasingType.HastelloyK243, HastelloyK243);
+        createCasingRecipe("iridium_casing", GTQTMetaBlocks.blockMultiblockCasing4, IRIDIUM_CASING, Osmiridium);
     }
 
 
@@ -542,21 +542,21 @@ public class MachineCasing {
                 .input(plate, Talonite, 6)
                 .input(frameGt, Talonite, 1)
                 .circuitMeta(6)
-                .outputs(GTQTMetaBlocks.ADV_BLOCK.getItemVariant(GTQTADVBlock.CasingType.Talonite))
+                .outputs(GTQTMetaBlocks.blockMultiblockCasing1.getItemVariant(BlockMultiblockCasing1.CasingType.Talonite))
                 .buildAndRegister();
 
         ASSEMBLER_RECIPES.recipeBuilder().duration(200).EUt(120)
                 .input(plate, RhodiumPlatedPalladium, 6)
                 .input(frameGt, RhodiumPlatedPalladium, 1)
                 .circuitMeta(6)
-                .outputs(GTQTMetaBlocks.TURBINE_CASING.getItemVariant(PD_TURBINE_CASING))
+                .outputs(GTQTMetaBlocks.blockMultiblockCasing4.getItemVariant(PD_TURBINE_CASING))
                 .buildAndRegister();
 
         ASSEMBLER_RECIPES.recipeBuilder().duration(200).EUt(120)
                 .input(plate, NaquadahAlloy, 6)
                 .input(frameGt, NaquadahAlloy, 1)
                 .circuitMeta(6)
-                .outputs(GTQTMetaBlocks.TURBINE_CASING.getItemVariant(NQ_TURBINE_CASING))
+                .outputs(GTQTMetaBlocks.blockMultiblockCasing4.getItemVariant(NQ_TURBINE_CASING))
                 .buildAndRegister();
 
         ASSEMBLER_RECIPES.recipeBuilder().duration(200).EUt(30)
@@ -565,30 +565,30 @@ public class MachineCasing {
                 .input(frameGt, Steel, 1)
                 .fluidInputs(Polyethylene.getFluid(576))
                 .circuitMeta(10)
-                .outputs(GTQTMetaBlocks.TURBINE_CASING1.getItemVariant(CLARIFIER_CASING, 4))
+                .outputs(GTQTMetaBlocks.blockMultiblockCasing5.getItemVariant(CLARIFIER_CASING, 4))
                 .buildAndRegister();
 
         ASSEMBLER_RECIPES.recipeBuilder().duration(200).EUt(1920)
-                .input(plate, TungstenSteel, 4)
-                .input(gear, TungstenSteel, 1)
-                .input(frameGt, NanometerBariumTitanate, 1)
+                .input(frameGt, TungstenSteel, 1)
+                .input(plate, StainlessSteel, 4)
+                .input(screw, NanometerBariumTitanate, 2)
                 .fluidInputs(Zylon.getFluid(576))
                 .circuitMeta(10)
-                .outputs(GTQTMetaBlocks.TURBINE_CASING1.getItemVariant(FLOATING_CASING, 4))
+                .outputs(GTQTMetaBlocks.blockMultiblockCasing5.getItemVariant(FLOATING_CASING, 4))
                 .buildAndRegister();
 
         ASSEMBLER_RECIPES.recipeBuilder().duration(200).EUt(120)
                 .input(plate, Orichalcum, 6)
                 .input(frameGt, Orichalcum, 1)
                 .circuitMeta(6)
-                .outputs(GTQTMetaBlocks.TURBINE_CASING1.getItemVariant(ST_TURBINE_CASING))
+                .outputs(GTQTMetaBlocks.blockMultiblockCasing5.getItemVariant(ST_TURBINE_CASING))
                 .buildAndRegister();
 
         ASSEMBLER_RECIPES.recipeBuilder().duration(200).EUt(120)
                 .input(plate, Adamantium, 6)
                 .input(frameGt, Adamantium, 1)
                 .circuitMeta(6)
-                .outputs(GTQTMetaBlocks.TURBINE_CASING1.getItemVariant(AD_TURBINE_CASING))
+                .outputs(GTQTMetaBlocks.blockMultiblockCasing5.getItemVariant(AD_TURBINE_CASING))
                 .buildAndRegister();
     }
 

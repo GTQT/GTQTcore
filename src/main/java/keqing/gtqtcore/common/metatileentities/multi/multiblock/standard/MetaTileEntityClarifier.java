@@ -19,7 +19,7 @@ import keqing.gtqtcore.api.metaileentity.multiblock.NoEnergyMultiblockController
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing1;
+import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing5;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -97,7 +97,7 @@ public class MetaTileEntityClarifier extends NoEnergyMultiblockController {
                 .where('A', states(MetaBlocks.STONE_BLOCKS.get(StoneVariantBlock.StoneVariant.SMOOTH).getState(StoneVariantBlock.StoneType.CONCRETE_LIGHT)).setMinGlobalLimited(250))
                 .where('B', states(MetaBlocks.METAL_CASING.getState(MetalCasingType.STEEL_SOLID)).or(autoAbilities()))
                 .where('C', states(MetaBlocks.BOILER_CASING.getState((BoilerCasingType.STEEL_PIPE))))
-                .where('D', states(GTQTMetaBlocks.TURBINE_CASING1.getState((GTQTTurbineCasing1.TurbineCasingType.CLARIFIER_CASING))))
+                .where('D', states(GTQTMetaBlocks.blockMultiblockCasing5.getState((BlockMultiblockCasing5.TurbineCasingType.CLARIFIER_CASING))))
                 .where('E', states(MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.STEEL_GEARBOX)))
                 .where('F', states(MetaBlocks.FRAMES.get(Materials.Steel).getBlock(Materials.Steel)))
                 .where(' ', any())

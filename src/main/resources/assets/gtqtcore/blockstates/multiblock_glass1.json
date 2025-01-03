@@ -1,0 +1,79 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "minecraft:cube_all",
+    "textures": {
+      "all": "gregtech:blocks/rendering_error"
+    }
+  },
+  "variants": {
+    "variant": {
+      "boron_silicate_glass": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/advglass/boron_silicate_glass"
+        }
+      },
+      "thy_boron_silicate_glass": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/advglass/thy_boron_silicate_glass"
+        }
+      },
+      "ti_boron_silicate_glass": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/advglass/ti_boron_silicate_glass"
+        }
+      },
+      "w_boron_silicate_glass": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/advglass/w_boron_silicate_glass"
+        }
+      },
+      "osmir_boron_silicate_glass": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/advglass/osmir_boron_silicate_glass"
+        }
+      },
+      "naq_boron_silicate_glass": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/advglass/naq_boron_silicate_glass"
+        }
+      },
+      "infinity_glass": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/advglass/infinity_glass"
+        }
+      },
+      "force_field_constrained_glass": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/advglass/force_field_constrained_glass"
+        }
+      },
+      "cosmic_microwave_background_radiation_absorption_glass": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/advglass/cosmic_microwave_background_radiation_absorption_glass"
+        }
+      },
+      "spacetime_supercondenser_glass": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/advglass/spacetime_supercondenser_glass"
+        }
+      },
+      "supracausal_light_cone_glass": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/advglass/supracausal_light_cone_glass"
+        }
+      }
+    }
+  }
+}

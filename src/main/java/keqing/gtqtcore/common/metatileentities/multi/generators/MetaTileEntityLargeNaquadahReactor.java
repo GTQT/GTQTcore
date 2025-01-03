@@ -26,7 +26,7 @@ import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing;
+import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -45,7 +45,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static gregtech.api.GTValues.*;
-import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.HYPER_CASING;
+import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4.TurbineCasingType.HYPER_CASING;
 
 public class MetaTileEntityLargeNaquadahReactor extends FuelMultiblockController implements IProgressBarMultiblock {
 
@@ -129,7 +129,7 @@ public class MetaTileEntityLargeNaquadahReactor extends FuelMultiblockController
     }
 
     private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.TURBINE_CASING.getState(HYPER_CASING);
+        return GTQTMetaBlocks.blockMultiblockCasing4.getState(HYPER_CASING);
     }
 
 
@@ -142,7 +142,7 @@ public class MetaTileEntityLargeNaquadahReactor extends FuelMultiblockController
     }
 
     private static IBlockState getBoilerCasingState() {
-        return GTQTMetaBlocks.TURBINE_CASING.getState(GTQTTurbineCasing.TurbineCasingType.POLYBENZIMIDAZOLE_PIPE);
+        return GTQTMetaBlocks.blockMultiblockCasing4.getState(BlockMultiblockCasing4.TurbineCasingType.POLYBENZIMIDAZOLE_PIPE);
     }
 
     private static IBlockState getFrameState() {

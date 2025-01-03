@@ -3,7 +3,6 @@ package keqing.gtqtcore.loaders.recipes.chain;
 import gregtech.api.unification.material.Materials;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.BlockEvaporationBed;
-import keqing.gtqtcore.common.items.GTQTMetaItems;
 
 import static gregtech.api.GTValues.*;
 import static gregtech.api.GTValues.VA;
@@ -52,7 +51,7 @@ public class BoronChain {
                 .input(dust,Stone,2)
                 .input(dust,SiliconDioxide,2)
                 .fluidInputs(Concrete.getFluid(200))
-                .output(GTQTMetaBlocks.EVAPORATION_BED.getState(BlockEvaporationBed.EvaporationBedType.DIRT).getBlock())
+                .output(GTQTMetaBlocks.blockEvaporationBed.getState(BlockEvaporationBed.EvaporationBedType.DIRT).getBlock())
                 .EUt(VA[LV])
                 .duration(200)
                 .buildAndRegister();

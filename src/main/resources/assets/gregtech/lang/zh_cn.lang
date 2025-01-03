@@ -178,7 +178,7 @@ material.nd_yag=掺钕钇铝石榴石（Nd:YAG）
 material.bismuth_ferrite=铁酸铋
 material.cgt_magnetic=磁化铬锗碲化物
 material.heavy_alkali_chloride_solution=重碱氯化物溶液
-tile.multiblock_casing1.superheavy_quantum_casing.name=超重量子外壳
+tile.multiblock_casing2.superheavy_quantum_casing.name=超重量子外壳
 
 # Third Degree Materials
 material.zinc_rich_sphalerite=富锌闪锌矿

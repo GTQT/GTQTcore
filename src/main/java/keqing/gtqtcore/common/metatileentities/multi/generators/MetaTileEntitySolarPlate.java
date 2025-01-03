@@ -28,7 +28,7 @@ import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.common.block.blocks.GTQTElectrobath;
+import keqing.gtqtcore.common.block.blocks.BlockElectrolyticBath;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -116,7 +116,7 @@ public class MetaTileEntitySolarPlate extends MultiblockWithDisplayBase implemen
                 .aisle("XCCCCC")
                 .where('X', selfPredicate())
                 .where('S', TiredTraceabilityPredicate.CP_SP_CASING.get())
-                .where('C', states(GTQTMetaBlocks.ELECTROBATH.getState(GTQTElectrobath.CasingType.SOLAR_PLATE_CASING))
+                .where('C', states(GTQTMetaBlocks.blockElectrolyticBath.getState(BlockElectrolyticBath.CasingType.SOLAR_PLATE_CASING))
                         .or(abilities(MultiblockAbility.OUTPUT_ENERGY).setMaxGlobalLimited(4)))
                 .build();
     }

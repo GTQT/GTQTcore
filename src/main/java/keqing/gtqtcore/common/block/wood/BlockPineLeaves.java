@@ -77,7 +77,7 @@ public class BlockPineLeaves extends BlockLeaves {
     @Nonnull
     @Override
     public Item getItemDropped(@Nonnull IBlockState state, @Nonnull Random rand, int fortune) {
-        return Item.getItemFromBlock(GTQTMetaBlocks.PINE_SAPLING);
+        return Item.getItemFromBlock(GTQTMetaBlocks.BLOCK_PINE_SAPLING);
     }
 
     @Nonnull

@@ -41,8 +41,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static gregtech.api.GTValues.*;
-import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.HYPER_CASING;
-import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.HYPER_CIRE_MK1;
+import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4.TurbineCasingType.HYPER_CASING;
+import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4.TurbineCasingType.HYPER_CIRE_MK1;
 
 public class MetaTileEntityHyperReactorMkI extends FuelMultiblockController implements IProgressBarMultiblock {
 
@@ -123,11 +123,11 @@ public class MetaTileEntityHyperReactorMkI extends FuelMultiblockController impl
     }
 
     private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.TURBINE_CASING.getState(HYPER_CASING);
+        return GTQTMetaBlocks.blockMultiblockCasing4.getState(HYPER_CASING);
     }
 
     private static IBlockState getUniqueCasingState() {
-        return GTQTMetaBlocks.TURBINE_CASING.getState(HYPER_CIRE_MK1);
+        return GTQTMetaBlocks.blockMultiblockCasing4.getState(HYPER_CIRE_MK1);
     }
 
     private static IBlockState getGlassState() {

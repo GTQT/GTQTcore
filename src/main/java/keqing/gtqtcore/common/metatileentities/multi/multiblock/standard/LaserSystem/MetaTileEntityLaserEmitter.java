@@ -37,7 +37,7 @@ import java.util.List;
 import static gregtech.api.GTValues.VN;
 import static gregtech.api.metatileentity.multiblock.MultiblockAbility.INPUT_ENERGY;
 import static keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility.LASER_OUTPUT;
-import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.NQ_TURBINE_CASING;
+import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4.TurbineCasingType.NQ_TURBINE_CASING;
 
 public class MetaTileEntityLaserEmitter extends MetaTileEntityBaseWithControl {
 
@@ -52,7 +52,7 @@ public class MetaTileEntityLaserEmitter extends MetaTileEntityBaseWithControl {
     }
 
     private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.TURBINE_CASING.getState(NQ_TURBINE_CASING);
+        return GTQTMetaBlocks.blockMultiblockCasing4.getState(NQ_TURBINE_CASING);
     }
 
     @Override

@@ -25,7 +25,7 @@ import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.recipes.properties.GrindBallTierProperty;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.common.block.blocks.GTQTIsaCasing;
+import keqing.gtqtcore.common.block.blocks.BlockIsaCasing;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
@@ -65,15 +65,15 @@ public class MetaTileEntityIsaMill extends RecipeMapMultiblockController {
     }
 
     protected IBlockState getCasingState() {
-        return GTQTMetaBlocks.ISA_CASING.getState(GTQTIsaCasing.CasingType.ISA_MILL_CASING);
+        return GTQTMetaBlocks.blockIsaCasing.getState(BlockIsaCasing.CasingType.ISA_MILL_CASING);
     }
 
     protected IBlockState getCasingState1() {
-        return GTQTMetaBlocks.ISA_CASING.getState(GTQTIsaCasing.CasingType.ISA_MILL_CASING_GEARBOX);
+        return GTQTMetaBlocks.blockIsaCasing.getState(BlockIsaCasing.CasingType.ISA_MILL_CASING_GEARBOX);
     }
 
     protected IBlockState getCasingState2() {
-        return GTQTMetaBlocks.ISA_CASING.getState(GTQTIsaCasing.CasingType.ISA_MILL_CASING_PIPE);
+        return GTQTMetaBlocks.blockIsaCasing.getState(BlockIsaCasing.CasingType.ISA_MILL_CASING_PIPE);
     }
 
     @Nonnull

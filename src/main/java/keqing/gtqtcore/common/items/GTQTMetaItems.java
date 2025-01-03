@@ -348,16 +348,16 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem RETICLE_INTEGRATED_LOGIC_CIRCUIT;
     public static MetaItem<?>.MetaValueItem RETICLE_LOW_POWER_INTEGRATED_CIRCUIT;
     public static MetaItem<?>.MetaValueItem RETICLE_NAND_MEMORY_CHIP;
-    public static MetaItem<?>.MetaValueItem RETICLE_NANO_CENTRAL_PROCESSING_UNIT;
+    //public static MetaItem<?>.MetaValueItem RETICLE_NANO_CENTRAL_PROCESSING_UNIT;
     public static MetaItem<?>.MetaValueItem RETICLE_NOR_MEMORY_CHIP;
     public static MetaItem<?>.MetaValueItem RETICLE_POWER_INTEGRATED_CIRCUIT;
-    public static MetaItem<?>.MetaValueItem RETICLE_QBIT_CENTRAL_PROCESSING_UNIT;
+    //public static MetaItem<?>.MetaValueItem RETICLE_QBIT_CENTRAL_PROCESSING_UNIT;
     public static MetaItem<?>.MetaValueItem RETICLE_RANDOM_ACCESS_MEMORY;
     public static MetaItem<?>.MetaValueItem RETICLE_SIMPLE_SYSTEM_ON_CHIP;
     public static MetaItem<?>.MetaValueItem RETICLE_SYSTEM_ON_CHIP;
-    public static MetaItem<?>.MetaValueItem RETICLE_ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT;
+    //public static MetaItem<?>.MetaValueItem RETICLE_ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT;
     public static MetaItem<?>.MetaValueItem RETICLE_ULTRA_LOW_POWER_INTEGRATED_CIRCUIT;
-    public static MetaItem<?>.MetaValueItem RETICLE_HIGH_POWER_INTEGRATED_CIRCUIT;
+    //public static MetaItem<?>.MetaValueItem RETICLE_HIGH_POWER_INTEGRATED_CIRCUIT;
     public static MetaItem<?>.MetaValueItem RETICLE_HIGHLY_ADVANCED_SYSTEM_ON_CHIP;
     public static MetaItem<?>.MetaValueItem RETICLE_SILICON;
     public static MetaItem<?>.MetaValueItem DEBUG_STRUCTURE_WRITER;
@@ -628,6 +628,34 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem CLOSED_TIMELIKE_CURVE_GUIDANCE_UNIT;
     public static MetaItem<?>.MetaValueItem NUCLEAR_CLOCK;
     public static MetaItem<?>.MetaValueItem MANIFOLD_OSCILLATORY_POWER_CELL;
+
+    public static MetaItem<?>.MetaValueItem RETICLE_GRID_MKI;
+    public static MetaItem<?>.MetaValueItem RETICLE_GRID_MKII;
+    public static MetaItem<?>.MetaValueItem RETICLE_GRID_MKIII;
+    public static MetaItem<?>.MetaValueItem RETICLE_GRID_MKIV;
+    public static MetaItem<?>.MetaValueItem RETICLE_BASE;
+    public static MetaItem<?>.MetaValueItem RETICLE_TIN;
+    public static MetaItem<?>.MetaValueItem RETICLE_BASE_TIN;
+    public static MetaItem<?>.MetaValueItem RETICLE_BASE_TIN_MKI;
+    public static MetaItem<?>.MetaValueItem RETICLE_BASE_TIN_MKII;
+    public static MetaItem<?>.MetaValueItem RETICLE_BASE_TIN_MKIII;
+    public static MetaItem<?>.MetaValueItem RETICLE_BASE_TIN_MKIV;
+    public static MetaItem<?>.MetaValueItem RETICLE_BASE_MKI;
+    public static MetaItem<?>.MetaValueItem RETICLE_BASE_MKII;
+    public static MetaItem<?>.MetaValueItem RETICLE_BASE_MKIII;
+    public static MetaItem<?>.MetaValueItem RETICLE_BASE_MKIV;
+    public static MetaItem<?>.MetaValueItem UV_LIGHT_MKI;
+    public static MetaItem<?>.MetaValueItem UV_LIGHT_MKII;
+    public static MetaItem<?>.MetaValueItem UV_LIGHT_MKIII;
+    public static MetaItem<?>.MetaValueItem UV_LIGHT_MKIV;
+    public static MetaItem<?>.MetaValueItem UV_LIGHT_EMPTY_MKI;
+    public static MetaItem<?>.MetaValueItem UV_LIGHT_EMPTY_MKII;
+    public static MetaItem<?>.MetaValueItem UV_LIGHT_EMPTY_MKIII;
+    public static MetaItem<?>.MetaValueItem RETICLE_GLASS_MKI;
+    public static MetaItem<?>.MetaValueItem RETICLE_GLASS_MKII;
+    public static MetaItem<?>.MetaValueItem RETICLE_GLASS_MKIII;
+    public static MetaItem<?>.MetaValueItem RETICLE_GLASS_MKIV;
+
 
     public static MetaItem<?>.MetaValueItem SCINTILLATOR;
     public static MetaItem<?>.MetaValueItem SCINTILLATOR_CRYSTAL;

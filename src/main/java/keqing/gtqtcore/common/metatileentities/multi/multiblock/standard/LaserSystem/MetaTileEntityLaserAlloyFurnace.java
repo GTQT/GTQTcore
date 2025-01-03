@@ -55,8 +55,8 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.NQ_MACHINE_CASING;
-import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.NQ_TURBINE_CASING;
+import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4.TurbineCasingType.NQ_MACHINE_CASING;
+import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4.TurbineCasingType.NQ_TURBINE_CASING;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.LASER_ALLOY_FURNACE;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.LASER_INPUT;
 
@@ -84,11 +84,11 @@ public class MetaTileEntityLaserAlloyFurnace extends RecipeMapLaserMultiblockCon
     }
 
     private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.TURBINE_CASING.getState(NQ_TURBINE_CASING);
+        return GTQTMetaBlocks.blockMultiblockCasing4.getState(NQ_TURBINE_CASING);
     }
 
     private static IBlockState getSecondCasingState() {
-        return GTQTMetaBlocks.TURBINE_CASING.getState(NQ_MACHINE_CASING);
+        return GTQTMetaBlocks.blockMultiblockCasing4.getState(NQ_MACHINE_CASING);
     }
 
     @Override

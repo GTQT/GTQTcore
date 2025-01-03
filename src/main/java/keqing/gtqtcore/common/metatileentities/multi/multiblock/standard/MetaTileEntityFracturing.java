@@ -33,8 +33,8 @@ import keqing.gtqtcore.api.capability.impl.FracturingLogic;
 import keqing.gtqtcore.api.unification.GCYSMaterials;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing;
-import keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing1;
+import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4;
+import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing5;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -203,12 +203,12 @@ public class MetaTileEntityFracturing extends MultiblockWithDisplayBase implemen
 
     private IBlockState getCasingState() {
         if (tier == GTValues.IV)
-            return GTQTMetaBlocks.TURBINE_CASING.getState(GTQTTurbineCasing.TurbineCasingType.PD_TURBINE_CASING);
+            return GTQTMetaBlocks.blockMultiblockCasing4.getState(BlockMultiblockCasing4.TurbineCasingType.PD_TURBINE_CASING);
         if (tier == GTValues.LuV)
-            return GTQTMetaBlocks.TURBINE_CASING.getState(GTQTTurbineCasing.TurbineCasingType.NQ_TURBINE_CASING);
+            return GTQTMetaBlocks.blockMultiblockCasing4.getState(BlockMultiblockCasing4.TurbineCasingType.NQ_TURBINE_CASING);
         if (tier == GTValues.ZPM)
-            return GTQTMetaBlocks.TURBINE_CASING1.getState(GTQTTurbineCasing1.TurbineCasingType.ST_TURBINE_CASING);
-        return GTQTMetaBlocks.TURBINE_CASING.getState(GTQTTurbineCasing.TurbineCasingType.PD_TURBINE_CASING);
+            return GTQTMetaBlocks.blockMultiblockCasing5.getState(BlockMultiblockCasing5.TurbineCasingType.ST_TURBINE_CASING);
+        return GTQTMetaBlocks.blockMultiblockCasing4.getState(BlockMultiblockCasing4.TurbineCasingType.PD_TURBINE_CASING);
     }
 
     @Nonnull

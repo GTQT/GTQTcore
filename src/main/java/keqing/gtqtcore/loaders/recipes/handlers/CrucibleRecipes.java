@@ -62,7 +62,7 @@ public class CrucibleRecipes {
                                          BlockCrucible.CrucibleType outputType,
                                          Material material,
                                          Material catalyst) {
-        ItemStack crucible = GTQTMetaBlocks.CRUCIBLE.getItemVariant(outputType);
+        ItemStack crucible = GTQTMetaBlocks.blockCrucible.getItemVariant(outputType);
 
         VACUUM_CHAMBER_RECIPES.recipeBuilder()
                 .circuitMeta(5)

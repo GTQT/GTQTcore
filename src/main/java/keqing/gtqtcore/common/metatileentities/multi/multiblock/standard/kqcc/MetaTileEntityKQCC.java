@@ -26,11 +26,8 @@ import gregtech.api.util.TextComponentUtil;
 import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
-import gregtech.common.blocks.BlockMetalCasing;
-import gregtech.common.blocks.MetaBlocks;
 import gregtech.core.sound.GTSoundEvents;
 import keqing.gtqtcore.api.capability.IKQCC;
-import keqing.gtqtcore.api.capability.ILaser;
 import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
@@ -40,7 +37,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
@@ -57,9 +53,8 @@ import java.util.Objects;
 import static gregtech.api.unification.material.Materials.PCBCoolant;
 import static gregtech.api.unification.material.Materials.Water;
 import static keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility.KQCC_MULTIBLOCK_ABILITY;
-import static keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility.LASER_INPUT;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.LiquidNitrogen;
-import static keqing.gtqtcore.common.block.blocks.GTQTKQCC.CasingType.*;
+import static keqing.gtqtcore.common.block.blocks.BlocksResearchSystem.CasingType.*;
 
 public class MetaTileEntityKQCC extends MultiblockWithDisplayBase implements IOpticalComputationProvider {
     private boolean isWorkingEnabled;
@@ -172,10 +167,10 @@ public class MetaTileEntityKQCC extends MultiblockWithDisplayBase implements IOp
     }
 
     protected IBlockState getCasingState() {
-        return GTQTMetaBlocks.KQCC.getState(KQCC_COMPUTER_CASING);
+        return GTQTMetaBlocks.blocksResearchSystem.getState(KQCC_COMPUTER_CASING);
     }
     protected IBlockState getVentState() {
-        return GTQTMetaBlocks.KQCC.getState(COMPUTER_VENT);
+        return GTQTMetaBlocks.blocksResearchSystem.getState(COMPUTER_VENT);
     }
     @Override
     public String[] getDescription() {

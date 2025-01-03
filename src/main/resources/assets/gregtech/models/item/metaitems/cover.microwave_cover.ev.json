@@ -1,6 +1,7 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "gtqtcore:items/metaitems/wireless_energy_receive"
+    "layer0": "gtqtcore:items/metaitems/wireless_energy_receive",
+    "layer1": "gtqtcore:items/metaitems/voltages/ev"
   }
 }

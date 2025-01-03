@@ -24,7 +24,7 @@ import gregtech.core.sound.GTSoundEvents;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.BlockCoolingCoil;
-import keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing1;
+import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing5;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
@@ -52,7 +52,7 @@ public class MetaTileEntityCryogenicFreezer extends RecipeMapMultiblockControlle
     private static final Supplier<TraceabilityPredicate> COOLING_COILS = () -> new TraceabilityPredicate(blockWorldState -> {
         IBlockState state = blockWorldState.getBlockState();
         if (state.getBlock() instanceof BlockCoolingCoil) {
-            BlockCoolingCoil.CoolingCoilType type = GTQTMetaBlocks.COOLING_COIL.getState(state);
+            BlockCoolingCoil.CoolingCoilType type = GTQTMetaBlocks.blockCoolingCoil.getState(state);
             Object currentCoil = blockWorldState.getMatchContext().getOrPut("CoolingCoilType", type);
             if (!currentCoil.equals(type)) {
                 blockWorldState.setError(new PatternStringError("gregtech.multiblock.pattern.error.coils"));
@@ -63,7 +63,7 @@ public class MetaTileEntityCryogenicFreezer extends RecipeMapMultiblockControlle
         }
         return false;
     }, () -> Arrays.stream(BlockCoolingCoil.CoolingCoilType.values())
-            .map(type -> new BlockInfo(GTQTMetaBlocks.COOLING_COIL.getState(type)))
+            .map(type -> new BlockInfo(GTQTMetaBlocks.blockCoolingCoil.getState(type)))
             .toArray(BlockInfo[]::new)
     );
     private final FluidStack GELID_STACK = GelidCryotheum.getFluid(2);
@@ -79,7 +79,7 @@ public class MetaTileEntityCryogenicFreezer extends RecipeMapMultiblockControlle
     }
 
     private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.TURBINE_CASING1.getState(GTQTTurbineCasing1.TurbineCasingType.ADVANCED_COLD_CASING);
+        return GTQTMetaBlocks.blockMultiblockCasing5.getState(BlockMultiblockCasing5.TurbineCasingType.ADVANCED_COLD_CASING);
     }
 
     @Override
@@ -114,7 +114,7 @@ public class MetaTileEntityCryogenicFreezer extends RecipeMapMultiblockControlle
                 .aisle("XXM", "XXX", "CCC", "CCC", "XXX")
                 .aisle("XXD", "X#X", "C#C", "C#C", "XXX")
                 .aisle("IEO", "XSX", "CCC", "CCC", "XXX")
-                .where('X', GTQTMetaBlocks.TURBINE_CASING1.getState(GTQTTurbineCasing1.TurbineCasingType.ADVANCED_COLD_CASING))
+                .where('X', GTQTMetaBlocks.blockMultiblockCasing5.getState(BlockMultiblockCasing5.TurbineCasingType.ADVANCED_COLD_CASING))
                 .where('S', GTQTMetaTileEntities.CRYOGENIC_FREEZER, EnumFacing.SOUTH)
                 .where('#', Blocks.AIR.getDefaultState())
                 .where('E', MetaTileEntities.ENERGY_INPUT_HATCH[GTValues.MV], EnumFacing.SOUTH)
@@ -124,7 +124,7 @@ public class MetaTileEntityCryogenicFreezer extends RecipeMapMultiblockControlle
                 .where('M', () -> ConfigHolder.machines.enableMaintenance ? MetaTileEntities.MAINTENANCE_HATCH : MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.INVAR_HEATPROOF), EnumFacing.NORTH);
         Arrays.stream(BlockCoolingCoil.CoolingCoilType.values())
                 .sorted(Comparator.comparingInt(entry -> -entry.coilTemperature))
-                .forEach(entry -> shapeInfo.add(builder.where('C', GTQTMetaBlocks.COOLING_COIL.getState(entry)).build()));
+                .forEach(entry -> shapeInfo.add(builder.where('C', GTQTMetaBlocks.blockCoolingCoil.getState(entry)).build()));
         return shapeInfo;
     }
 

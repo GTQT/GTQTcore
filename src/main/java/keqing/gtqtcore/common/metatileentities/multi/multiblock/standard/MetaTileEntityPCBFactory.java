@@ -31,7 +31,7 @@ import keqing.gtqtcore.api.recipes.properties.PCBFactoryProperty;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.BlockPCBFactoryCasing;
-import keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing;
+import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
@@ -90,17 +90,17 @@ public class MetaTileEntityPCBFactory extends RecipeMapMultiblockController {
     private static IBlockState getCasingState(String type) {
         return switch (type) {
             case "T1StructureCasing" ->
-                    GTQTMetaBlocks.PCB_FACTORY_CASING.getState(BlockPCBFactoryCasing.PCBFactoryCasingType.BASIC_PHOTOLITHOGRAPHIC_FRAMEWORK_CASING);
+                    GTQTMetaBlocks.blockPCBFactoryCasing.getState(BlockPCBFactoryCasing.PCBFactoryCasingType.BASIC_PHOTOLITHOGRAPHIC_FRAMEWORK_CASING);
             case "T2StructureCasing" ->
-                    GTQTMetaBlocks.PCB_FACTORY_CASING.getState(BlockPCBFactoryCasing.PCBFactoryCasingType.MOLD_PRINTING_ASSEMBLY_FRAMEWORK_CASING);
+                    GTQTMetaBlocks.blockPCBFactoryCasing.getState(BlockPCBFactoryCasing.PCBFactoryCasingType.MOLD_PRINTING_ASSEMBLY_FRAMEWORK_CASING);
             case "T3StructureCasing" ->
-                    GTQTMetaBlocks.PCB_FACTORY_CASING.getState(BlockPCBFactoryCasing.PCBFactoryCasingType.RADIATION_PROOF_SCAN_FRAMEWORK_CASING);
+                    GTQTMetaBlocks.blockPCBFactoryCasing.getState(BlockPCBFactoryCasing.PCBFactoryCasingType.RADIATION_PROOF_SCAN_FRAMEWORK_CASING);
             case "NaquadahAlloyCasing" ->
-                    GTQTMetaBlocks.TURBINE_CASING.getState(GTQTTurbineCasing.TurbineCasingType.NQ_TURBINE_CASING);
+                    GTQTMetaBlocks.blockMultiblockCasing4.getState(BlockMultiblockCasing4.TurbineCasingType.NQ_TURBINE_CASING);
             case "BioChamberCasing" ->
-                    GTQTMetaBlocks.PCB_FACTORY_CASING.getState(BlockPCBFactoryCasing.PCBFactoryCasingType.BIOLOGICAL_STERILE_MACHINE_CASING);
+                    GTQTMetaBlocks.blockPCBFactoryCasing.getState(BlockPCBFactoryCasing.PCBFactoryCasingType.BIOLOGICAL_STERILE_MACHINE_CASING);
             case "ThermosinkCasing" ->
-                    GTQTMetaBlocks.PCB_FACTORY_CASING.getState(BlockPCBFactoryCasing.PCBFactoryCasingType.INFINITY_COOLED_MACHINE_CASING);
+                    GTQTMetaBlocks.blockPCBFactoryCasing.getState(BlockPCBFactoryCasing.PCBFactoryCasingType.INFINITY_COOLED_MACHINE_CASING);
             default -> null;
         };
     }
@@ -113,7 +113,7 @@ public class MetaTileEntityPCBFactory extends RecipeMapMultiblockController {
         return switch (type) {
             case "T1Grate" ->
                     MetaBlocks.MULTIBLOCK_CASING.getState(BlockMultiblockCasing.MultiblockCasingType.GRATE_CASING);
-            case "T1Substrate" -> GTQTMetaBlocks.PCB_FACTORY_CASING.getState(SUBSTRATE_CASING);
+            case "T1Substrate" -> GTQTMetaBlocks.blockPCBFactoryCasing.getState(SUBSTRATE_CASING);
             case "CoolingTowerIntake" ->
                     MetaBlocks.MULTIBLOCK_CASING.getState(BlockMultiblockCasing.MultiblockCasingType.EXTREME_ENGINE_INTAKE_CASING);
             default -> null;

@@ -28,7 +28,7 @@ import gregtech.common.blocks.MetaBlocks;
 import gregtech.core.sound.GTSoundEvents;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.common.block.blocks.GTQTADVBlock;
+import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing1;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -95,7 +95,7 @@ public class MetaTileEntityProcessingArray extends RecipeMapMultiblockController
     public IBlockState getCasingState() {
         switch (this.tier) {
             case (2) -> {
-                return GTQTMetaBlocks.ADV_BLOCK.getState(GTQTADVBlock.CasingType.Talonite);
+                return GTQTMetaBlocks.blockMultiblockCasing1.getState(BlockMultiblockCasing1.CasingType.Talonite);
             }
             case (3) -> {
                 return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.TITANIUM_STABLE);

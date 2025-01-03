@@ -3,14 +3,11 @@ package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.kqcc;
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
-import com.google.common.collect.Lists;
 import gregtech.api.GTValues;
-import gregtech.api.block.IHeatingCoilBlockStats;
 import gregtech.api.capability.*;
 import gregtech.api.capability.impl.*;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.ModularUI;
-import gregtech.api.gui.Widget;
 import gregtech.api.gui.widgets.*;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
@@ -18,34 +15,23 @@ import gregtech.api.metatileentity.multiblock.*;
 import gregtech.api.pattern.*;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
-import gregtech.api.recipes.RecipeMaps;
-import gregtech.api.recipes.recipeproperties.FusionEUToStartProperty;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.util.GTTransferUtils;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.LocalizationUtils;
 import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
-import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.TooltipHelper;
 import gregtech.common.blocks.BlockGlassCasing;
-import gregtech.common.blocks.BlockMetalCasing;
-import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.MetaTileEntities;
-import keqing.gtqtcore.api.metaileentity.GTQTRecipeMapMultiblockController;
 import keqing.gtqtcore.api.pattern.GTQTTraceabilityPredicate;
-import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
-import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.recipes.properties.EUToStartProperty;
-import keqing.gtqtcore.api.recipes.properties.PAProperty;
 import keqing.gtqtcore.api.recipes.properties.ScatteringProperty;
-import keqing.gtqtcore.api.utils.GTQTLog;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.common.block.blocks.GTQTParticleAccelerator;
-import keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing;
-import keqing.gtqtcore.common.items.GTQTMetaItems;
+import keqing.gtqtcore.common.block.blocks.BlockParticleAcceleratorCasing;
+import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 import keqing.gtqtcore.common.metatileentities.single.electric.MetaTileEntityParticleAcceleratorIO;
 import net.minecraft.block.state.IBlockState;
@@ -54,7 +40,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
@@ -69,8 +54,6 @@ import javax.annotation.Nonnull;
 import java.util.*;
 
 import static gregtech.api.GTValues.EV;
-import static gregtech.api.recipes.RecipeMaps.ASSEMBLER_RECIPES;
-import static gregtech.api.unification.material.Materials.Lava;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.LiquidNitrogen;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
@@ -329,22 +312,22 @@ public class MetaTileEntityParticleAccelerator extends MultiMapMultiblockControl
         return shapeInfo;
     }
     private static IBlockState getCasingStateTest() {
-        return GTQTMetaBlocks.TURBINE_CASING.getState(GTQTTurbineCasing.TurbineCasingType.NQ_TURBINE_CASING);
+        return GTQTMetaBlocks.blockMultiblockCasing4.getState(BlockMultiblockCasing4.TurbineCasingType.NQ_TURBINE_CASING);
     }
     private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.PARTICLE_ACCELERATOR.getState(GTQTParticleAccelerator.MachineType.ACCELERATOR_CASING);
+        return GTQTMetaBlocks.blockParticleAcceleratorCasing.getState(BlockParticleAcceleratorCasing.MachineType.ACCELERATOR_CASING);
     }
 
     private static IBlockState getCasingState1() {
-        return GTQTMetaBlocks.PARTICLE_ACCELERATOR.getState(GTQTParticleAccelerator.MachineType.ACCELERATOR_ELECTROMAGNET_MKI);
+        return GTQTMetaBlocks.blockParticleAcceleratorCasing.getState(BlockParticleAcceleratorCasing.MachineType.ACCELERATOR_ELECTROMAGNET_MKI);
     }
 
     private static IBlockState getCasingState2() {
-        return GTQTMetaBlocks.PARTICLE_ACCELERATOR.getState(GTQTParticleAccelerator.MachineType.ACCELERATOR_ELECTROMAGNETV_MKI);
+        return GTQTMetaBlocks.blockParticleAcceleratorCasing.getState(BlockParticleAcceleratorCasing.MachineType.ACCELERATOR_ELECTROMAGNETV_MKI);
     }
 
     private static IBlockState getCasingState3() {
-        return GTQTMetaBlocks.PARTICLE_ACCELERATOR.getState(GTQTParticleAccelerator.MachineType.ACCELERATOR_FIRM_MKI);
+        return GTQTMetaBlocks.blockParticleAcceleratorCasing.getState(BlockParticleAcceleratorCasing.MachineType.ACCELERATOR_FIRM_MKI);
     }
 
     private static IBlockState getFrameState() {

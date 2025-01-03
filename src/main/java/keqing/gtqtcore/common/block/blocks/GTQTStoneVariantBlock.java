@@ -58,13 +58,13 @@ public class GTQTStoneVariantBlock extends VariantBlock<GTQTStoneVariantBlock.St
     }
 
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return Item.getItemFromBlock((Block)(this.stoneVariant == GTQTStoneVariantBlock.StoneVariant.SMOOTH ? (Block) GTQTMetaBlocks.SUSY_STONE_BLOCKS.get(GTQTStoneVariantBlock.StoneVariant.COBBLE) : this));
+        return Item.getItemFromBlock((Block)(this.stoneVariant == GTQTStoneVariantBlock.StoneVariant.SMOOTH ? (Block) GTQTMetaBlocks.GTQT_STONE_BLOCKS.get(GTQTStoneVariantBlock.StoneVariant.COBBLE) : this));
     }
 
     public static enum StoneVariant {
-        SMOOTH("susy_stone_smooth"),
-        COBBLE("susy_stone_cobble", 2.0F, 10.0F),
-        BRICKS("susy_stone_bricks");
+        SMOOTH("gtqt_stone_smooth"),
+        COBBLE("gtqt_stone_cobble", 2.0F, 10.0F),
+        BRICKS("gtqt_stone_bricks");
 //      TODO
 //        COBBLE_MOSSY("stone_cobble_mossy", 2.0F, 10.0F),
 //        POLISHED("stone_polished"),

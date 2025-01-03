@@ -17,7 +17,7 @@ import gregtech.common.blocks.BlockGlassCasing;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.common.block.blocks.BlockGCYSMultiblockCasing;
+import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing2;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
@@ -71,7 +71,7 @@ public class MetaTileEntityIonImplanter extends RecipeMapMultiblockController {
     }
 
     private IBlockState getSuperHeavyCasingState() {
-        return GTQTMetaBlocks.MULTIBLOCK_CASING.getState(BlockGCYSMultiblockCasing.CasingType.SUPERHEAVY_QUANTUM_CASING);
+        return GTQTMetaBlocks.blockMultiblockCasing2.getState(BlockMultiblockCasing2.CasingType.SUPERHEAVY_QUANTUM_CASING);
     }
 
     @SideOnly(Side.CLIENT)

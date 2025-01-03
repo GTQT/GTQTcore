@@ -28,7 +28,7 @@ public class BlockEnergyCell extends VariantBlock<BlockEnergyCell.CellTier> {
         this.setHardness(5.0F);
         this.setResistance(10.0F);
         this.setSoundType(SoundType.METAL);
-        this.setHarvestLevel("wrench", 3);
+        this.setHarvestLevel("wrench", 1);
         this.setDefaultState(this.getState(BlockEnergyCell.CellTier.HV));
     }
 

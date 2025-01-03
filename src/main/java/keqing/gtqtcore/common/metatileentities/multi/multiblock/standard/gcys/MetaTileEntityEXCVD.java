@@ -56,7 +56,7 @@ public class MetaTileEntityEXCVD extends RecipeMapMultiblockController {
                 .where('J', states(MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.POLYTETRAFLUOROETHYLENE_PIPE)))
                 .where('K', states(GCYMMetaBlocks.LARGE_MULTIBLOCK_CASING.getState(BlockLargeMultiblockCasing.CasingType.ENGRAVER_CASING))
                         .or(autoAbilities(true, true, true, true, true, true, false)))
-                .where('E', states(GTQTMetaBlocks.PCB_FACTORY_CASING.getState(BlockPCBFactoryCasing.PCBFactoryCasingType.ADVANCED_SUBSTRATE_CASING)))
+                .where('E', states(GTQTMetaBlocks.blockPCBFactoryCasing.getState(BlockPCBFactoryCasing.PCBFactoryCasingType.ADVANCED_SUBSTRATE_CASING)))
                 .build();
     }
 

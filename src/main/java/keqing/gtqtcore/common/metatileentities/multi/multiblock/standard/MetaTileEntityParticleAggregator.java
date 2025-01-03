@@ -26,7 +26,7 @@ import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.particle.LaserBeamParticle;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.common.block.blocks.GTQTHCasing;
+import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
@@ -74,7 +74,7 @@ public class MetaTileEntityParticleAggregator extends RecipeMapLaserMultiblockCo
     }
 
     private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.H_CASING.getState(GTQTHCasing.CasingType.MACHINE_CASING_FUSION);
+        return GTQTMetaBlocks.blockMultiblockCasing.getState(BlockMultiblockCasing.CasingType.MACHINE_CASING_FUSION);
     }
 
     private static IBlockState getSecondCasingState() {

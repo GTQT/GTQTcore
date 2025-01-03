@@ -25,7 +25,7 @@ import keqing.gtqtcore.api.recipes.properties.NuclearProperties;
 import keqing.gtqtcore.api.unification.GTQTMaterials;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.common.block.blocks.GTQTNuclearFusion;
+import keqing.gtqtcore.common.block.blocks.BlockNuclearCasing;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -61,11 +61,11 @@ public class MetaTileEntityNuclearReactor extends RecipeMapMultiblockController 
     }
 
     private static IBlockState getCasingState1() {
-        return GTQTMetaBlocks.NUCLEAR_FUSION.getState(GTQTNuclearFusion.CasingType.NUCLEAR_FUSION_FRAME);
+        return GTQTMetaBlocks.blockNuclearCasing.getState(BlockNuclearCasing.CasingType.NUCLEAR_FUSION_FRAME);
     }
 
     private static IBlockState getCasingState2() {
-        return GTQTMetaBlocks.NUCLEAR_FUSION.getState(GTQTNuclearFusion.CasingType.NUCLEAR_FUSION_CASING);
+        return GTQTMetaBlocks.blockNuclearCasing.getState(BlockNuclearCasing.CasingType.NUCLEAR_FUSION_CASING);
     }
 
     public NBTTagCompound writeToNBT(NBTTagCompound data) {

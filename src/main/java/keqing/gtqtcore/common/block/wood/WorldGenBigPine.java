@@ -1,6 +1,5 @@
 package keqing.gtqtcore.common.block.wood;
 
-import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.blocks.wood.BlockRubberLog;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import net.minecraft.block.state.IBlockState;
@@ -9,13 +8,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
-import javax.annotation.Nonnull;
 import java.util.Random;
 
 public class WorldGenBigPine extends WorldGenerator {
     public static final WorldGenBigPine TREE_GROW_INSTANCE = new WorldGenBigPine();
-    IBlockState TRUNK = GTQTMetaBlocks.PINE_LOG.getDefaultState().withProperty(BlockRubberLog.NATURAL, true);
-    IBlockState LEAF = GTQTMetaBlocks.PINE_LEAVES.getDefaultState();
+    IBlockState TRUNK = GTQTMetaBlocks.BLOCK_PINE_LOG.getDefaultState().withProperty(BlockRubberLog.NATURAL, true);
+    IBlockState LEAF = GTQTMetaBlocks.BLOCK_PINE_LEAVES.getDefaultState();
 
     public boolean generate( World world,  Random random,  BlockPos pos) {
         return this.generateImpl(world, random, new BlockPos.MutableBlockPos(pos));

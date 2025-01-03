@@ -27,7 +27,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-import static keqing.gtqtcore.common.block.blocks.GTQTADVBlock.CasingType.ZirconiumCarbide;
+import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing1.CasingType.ZirconiumCarbide;
 
 public class MetaTileEntityPlasmaCondenser extends RecipeMapMultiblockController {
 
@@ -37,7 +37,7 @@ public class MetaTileEntityPlasmaCondenser extends RecipeMapMultiblockController
     }
 
     private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.ADV_BLOCK.getState(ZirconiumCarbide);
+        return GTQTMetaBlocks.blockMultiblockCasing1.getState(ZirconiumCarbide);
     }
 
     private static IBlockState getSecondCasingState() {

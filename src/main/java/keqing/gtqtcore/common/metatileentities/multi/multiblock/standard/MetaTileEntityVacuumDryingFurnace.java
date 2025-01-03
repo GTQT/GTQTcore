@@ -30,7 +30,7 @@ import gregtech.common.metatileentities.MetaTileEntities;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.common.block.blocks.GTQTIsaCasing;
+import keqing.gtqtcore.common.block.blocks.BlockIsaCasing;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
@@ -68,7 +68,7 @@ public class MetaTileEntityVacuumDryingFurnace extends MultiMapMultiblockControl
 
     @Nonnull
     private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.ISA_CASING.getState(GTQTIsaCasing.CasingType.VACUUM_CASING);
+        return GTQTMetaBlocks.blockIsaCasing.getState(BlockIsaCasing.CasingType.VACUUM_CASING);
     }
 
     @Override
@@ -185,7 +185,7 @@ public class MetaTileEntityVacuumDryingFurnace extends MultiMapMultiblockControl
                     .where('D', MetaTileEntities.FLUID_EXPORT_HATCH[4], EnumFacing.EAST)
                     .where('H', MetaTileEntities.MUFFLER_HATCH[1], EnumFacing.UP)
                     .where('#', Blocks.AIR.getDefaultState())
-                    .where('M', () -> ConfigHolder.machines.enableMaintenance ? MetaTileEntities.MAINTENANCE_HATCH : GTQTMetaBlocks.ISA_CASING.getState(GTQTIsaCasing.CasingType.VACUUM_CASING), EnumFacing.NORTH);
+                    .where('M', () -> ConfigHolder.machines.enableMaintenance ? MetaTileEntities.MAINTENANCE_HATCH : GTQTMetaBlocks.blockIsaCasing.getState(BlockIsaCasing.CasingType.VACUUM_CASING), EnumFacing.NORTH);
         }
         MultiblockShapeInfo.Builder finalBuilder = builder;
         GregTechAPI.HEATING_COILS.entrySet().stream()

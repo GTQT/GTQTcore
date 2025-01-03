@@ -54,11 +54,11 @@ public class GTQTStoneTypes {
                 state -> gtStonePredicate(state, GTQTStoneVariantBlock.StoneType.KIMBERLITE), false);
     }
     private static IBlockState gtStoneState(GTQTStoneVariantBlock.StoneType stoneType) {
-        return GTQTMetaBlocks.SUSY_STONE_BLOCKS.get(GTQTStoneVariantBlock.StoneVariant.SMOOTH).getState(stoneType);
+        return GTQTMetaBlocks.GTQT_STONE_BLOCKS.get(GTQTStoneVariantBlock.StoneVariant.SMOOTH).getState(stoneType);
     }
 
     private static boolean gtStonePredicate(IBlockState state, GTQTStoneVariantBlock.StoneType stoneType) {
-        GTQTStoneVariantBlock block = GTQTMetaBlocks.SUSY_STONE_BLOCKS.get(GTQTStoneVariantBlock.StoneVariant.SMOOTH);
+        GTQTStoneVariantBlock block = GTQTMetaBlocks.GTQT_STONE_BLOCKS.get(GTQTStoneVariantBlock.StoneVariant.SMOOTH);
         return state.getBlock() == block && block.getState(state) == stoneType;
     }
 }

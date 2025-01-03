@@ -26,7 +26,7 @@ import gregtech.common.blocks.BlockWireCoil;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.common.block.blocks.GTQTMultiblockCasing;
+import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing3;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -156,11 +156,11 @@ public class MetaTileEntityNaquadahFuelFactory extends RecipeMapMultiblockContro
     }
 
     private IBlockState getCasingState1() {
-        return GTQTMetaBlocks.MULTI_CASING.getState(GTQTMultiblockCasing.CasingType.SFTC);
+        return GTQTMetaBlocks.blockMultiblockCasing3.getState(BlockMultiblockCasing3.CasingType.SFTC);
     }
 
     private IBlockState getCasingState2() {
-        return GTQTMetaBlocks.MULTI_CASING.getState(GTQTMultiblockCasing.CasingType.SFTS);
+        return GTQTMetaBlocks.blockMultiblockCasing3.getState(BlockMultiblockCasing3.CasingType.SFTS);
     }
 
     @Override

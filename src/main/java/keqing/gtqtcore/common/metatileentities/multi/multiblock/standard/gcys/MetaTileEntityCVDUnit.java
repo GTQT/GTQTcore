@@ -33,7 +33,7 @@ public class MetaTileEntityCVDUnit extends RecipeMapMultiblockController {
     }
 
     private static IBlockState getSubstrateState() {
-        return GTQTMetaBlocks.PCB_FACTORY_CASING.getState(BlockPCBFactoryCasing.PCBFactoryCasingType.SUBSTRATE_CASING);
+        return GTQTMetaBlocks.blockPCBFactoryCasing.getState(BlockPCBFactoryCasing.PCBFactoryCasingType.SUBSTRATE_CASING);
     }
 
     private static IBlockState getGlassState() {

@@ -28,29 +28,32 @@ import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.api.utils.SteamProgressIndicators;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.common.block.blocks.GTQTADVBlock;
-import keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing1;
+import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing1;
+import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing5;
 import keqing.gtqtcore.common.metatileentities.multi.generators.*;
 import keqing.gtqtcore.common.metatileentities.multi.generators.Tide.MetaTileEntityTideControl;
 import keqing.gtqtcore.common.metatileentities.multi.generators.Tide.MetaTileEntityTideUnit;
 import keqing.gtqtcore.common.metatileentities.multi.generators.Wind.MetaTileEntityWindGenerator;
 import keqing.gtqtcore.common.metatileentities.multi.generators.generatorRework.MetaTileEntityEnergySubstation;
 import keqing.gtqtcore.common.metatileentities.multi.generators.generatorRework.MetaTileEntityLargeBasicGenerator;
-import keqing.gtqtcore.common.metatileentities.multi.multiblock.*;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.primitive.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.LaserSystem.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.*;
-import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.core.*;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.heatSystem.MetaTileEntityDistillationKettle;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.heatSystem.MetaTileEntityPyrolysisTower;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.heatSystem.MetaTileEntitySaltField;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.multiThreading.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.gcys.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.heatExchanger.MetaTileEntityHeatExchanger;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.heatExchanger.MetaTileEntityLargeHeatExchanger;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.heatExchanger.MetaTileEntitySmallHeatExchanger;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.heatSystem.MetaTileEntityHeatHatchExchange;
-import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.huge.*;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.giantEquipment.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.kqcc.*;
-import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.overwrite.*;
-import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.resourse.MetaTileEntityAdvancedFluidDrill;
-import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.resourse.MetaTileEntityAdvancedLargeMiner;
-import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.star.*;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.overwriteMultiblocks.*;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.resourceCollection.MetaTileEntityAdvancedFluidDrill;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.resourceCollection.MetaTileEntityAdvancedLargeMiner;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.endGame.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.steam.MetaTileEntitySawMill;
 import keqing.gtqtcore.common.metatileentities.multi.multiblockpart.*;
 import keqing.gtqtcore.common.metatileentities.single.electric.*;
@@ -73,7 +76,7 @@ import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.utils.GTQTUtil.genericGeneratorTankSizeFunctionPlus;
 import static keqing.gtqtcore.api.utils.MultiblockRegistryHelper.registerSimpleSteamMetaTileEntity;
 import static keqing.gtqtcore.client.textures.GTQTTextures.*;
-import static keqing.gtqtcore.common.block.blocks.GTQTCompressedFusionReactor.CasingType.*;
+import static keqing.gtqtcore.common.block.blocks.BlockCompressedFusionReactor.CasingType.*;
 
 public class GTQTMetaTileEntities {
 
@@ -155,8 +158,8 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityRocket ROCKET;
     public static MetaTileEntityIndustryWaterPump INDUSTRY_WATER_PUMP;
     public static MetaTileEntityKQCC KQCC;
-    public static MetaTileEntityGantryCrane GANTRY_CRANE;
-    public static MetaTileEntityPReactor P_REACTOR;
+    public static MetaTileEntityPressurizedReactionTank PRESSURIZED_REACTION_TANK;
+    public static MetaTileEntityPrimitiveReactor PRIMITIVE_REACTOR;
     public static MetaTileEntityVacuumFreezer VACUUM_FREEZER;
     public static MetaTileEntityPyrolysisTower PYROLYSIS_TOWER;
     public static MetaTileEntityQuantumForceTransformer QUANTUM_FORCE_TRANSFORMER;
@@ -203,7 +206,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityIndustrialPrimitiveBlastFurnace INDUSTRIAL_PRIMITIVE_BLAST_FURNACE;
     public static MetaTileEntityPrimitiveTreeFarmer PRIMITIVE_TREE_FARMER;
     public static MetaTileEntitySawMill SAW_MILL;
-    public static MetaTileEntityADVKQCC ADV_KQCC;
+    public static MetaTileEntityAdvanceKQCC ADV_KQCC;
     public static MetaTileEntityGeneMutagenesis GENE_MUTAGENESIS;
     public static MetaTileEntityIndustrialInductionFurnace INDUSTRIAL_INDUCTION_FURNACE;
     public static MetaTileEntityParticleAggregator PARTICLE_AGGREGATOR;
@@ -223,9 +226,9 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityCokingTower COKING_TOWER;
     public static MetaTileEntityPowerSupply POWER_SUPPLY;
     public static MetaTileEntitySMSF SMSF;
-    public static MetaTileEntityADVNetworkSwitch ADV_NETWORK_SWITCH;
+    public static MetaTileEntityAdvanceNetworkSwitch ADV_NETWORK_SWITCH;
     public static MetaTileEntityMiniDataBank MINI_DATE_BANK;
-    public static MetaTileEntityADVDataBank ADV_DATE_BANK;
+    public static MetaTileEntityAdvanceDataBank ADV_DATE_BANK;
     public static MetaTileEntityRubbishBin RUBBISH_BIN;
     public static MetaTileEntityAirIntakeHatch AIR_INTAKE_HATCH;
     public static MetaTileEntityAirIntakeHatch EXTREME_AIR_INTAKE_HATCH;
@@ -276,7 +279,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityDimensionalMixer DIMENSIONAL_MIXER;
     public static MetaTileEntityDimensionallyPlasmFurnace DIMENSIONAL_PLASMA_FURNACE;
     public static SimpleMachineMetaTileEntity[] AUTO_CHISEL = new SimpleMachineMetaTileEntity[3];
-    public static MetaTileEntityThreeDim THREE_DIM_PRINT;
+    public static MetaTileEntityThreeDimPrinter THREE_DIM_PRINT;
     public static MetaTileEntityElectronOil ELE_OIL;
     public static MetaTileEntityAdvancedArcFurnace ADV_ARC_FURNACE;
     public static MetaTileEntityBioCentrifuge BIO_CENTRIFUGE;
@@ -350,7 +353,6 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityMicrowaveEnergyReceiverControl MICROWAVE_ENERGY_RECEIVER_CONTROL;
     public static MetaTileEntityEXCVD LARGE_EX_CVD;
     public static MetaTileEntitySuprachronalNeutroniumForge SUPRACHRONAL_NEUTRONIUM_FORGE;
-    public static MetaTileEntityStewStoolStove COAGULATION_TANK;
     public static MetaTileEntityBurnerReactor LARGE_BURNER_REACTOR;
     public static MetaTileEntityCryoReactor LARGE_CRYOGENIC_REACTOR;
     public static MetaTileEntityFracker LARGE_HYDRAULIC_FRACKER;
@@ -461,10 +463,10 @@ public class GTQTMetaTileEntities {
         //发电设备 多方块
         LBG[0] = registerMetaTileEntity(3050, new MetaTileEntityLargeBasicGenerator(gtqtcoreId("lbg.steam.1"), RecipeMaps.STEAM_TURBINE_FUELS, 1, MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STEEL_SOLID), MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.STEEL_PIPE), Steel));
         LBG[1] = registerMetaTileEntity(3051, new MetaTileEntityLargeBasicGenerator(gtqtcoreId("lbg.gas.1"), RecipeMaps.GAS_TURBINE_FUELS, 1, MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STEEL_SOLID), MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.STEEL_PIPE), Steel));
-        LBG[2] = registerMetaTileEntity(3052, new MetaTileEntityLargeBasicGenerator(gtqtcoreId("lbg.gas.2"), RecipeMaps.GAS_TURBINE_FUELS, 2, MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.ALUMINIUM_FROSTPROOF), GTQTMetaBlocks.TURBINE_CASING1.getState(GTQTTurbineCasing1.TurbineCasingType.AL_TURBINE_CASING), Aluminium));
+        LBG[2] = registerMetaTileEntity(3052, new MetaTileEntityLargeBasicGenerator(gtqtcoreId("lbg.gas.2"), RecipeMaps.GAS_TURBINE_FUELS, 2, MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.ALUMINIUM_FROSTPROOF), GTQTMetaBlocks.blockMultiblockCasing5.getState(BlockMultiblockCasing5.TurbineCasingType.AL_TURBINE_CASING), Aluminium));
         LBG[3] = registerMetaTileEntity(3053, new MetaTileEntityLargeBasicGenerator(gtqtcoreId("lbg.combustion.1"), RecipeMaps.COMBUSTION_GENERATOR_FUELS, 1, MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STEEL_SOLID), MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.STEEL_PIPE), Steel));
-        LBG[4] = registerMetaTileEntity(3054, new MetaTileEntityLargeBasicGenerator(gtqtcoreId("lbg.combustion.2"), RecipeMaps.COMBUSTION_GENERATOR_FUELS, 2, MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.ALUMINIUM_FROSTPROOF), GTQTMetaBlocks.TURBINE_CASING1.getState(GTQTTurbineCasing1.TurbineCasingType.AL_TURBINE_CASING), Aluminium));
-        LBG[5] = registerMetaTileEntity(3055, new MetaTileEntityLargeBasicGenerator(gtqtcoreId("lbg.combustion.3"), RecipeMaps.COMBUSTION_GENERATOR_FUELS, 3, MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STAINLESS_CLEAN), GTQTMetaBlocks.TURBINE_CASING1.getState(GTQTTurbineCasing1.TurbineCasingType.SA_TURBINE_CASING), StainlessSteel));
+        LBG[4] = registerMetaTileEntity(3054, new MetaTileEntityLargeBasicGenerator(gtqtcoreId("lbg.combustion.2"), RecipeMaps.COMBUSTION_GENERATOR_FUELS, 2, MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.ALUMINIUM_FROSTPROOF), GTQTMetaBlocks.blockMultiblockCasing5.getState(BlockMultiblockCasing5.TurbineCasingType.AL_TURBINE_CASING), Aluminium));
+        LBG[5] = registerMetaTileEntity(3055, new MetaTileEntityLargeBasicGenerator(gtqtcoreId("lbg.combustion.3"), RecipeMaps.COMBUSTION_GENERATOR_FUELS, 3, MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STAINLESS_CLEAN), GTQTMetaBlocks.blockMultiblockCasing5.getState(BlockMultiblockCasing5.TurbineCasingType.SA_TURBINE_CASING), StainlessSteel));
         HYPER_REACTOR_MKI = registerMetaTileEntity(3056, new MetaTileEntityHyperReactorMkI(gtqtcoreId("hyper_reactor_mk1")));
         HYPER_REACTOR_MKII = registerMetaTileEntity(3057, new MetaTileEntityHyperReactorMkII(gtqtcoreId("hyper_reactor_mk2")));
         HYPER_REACTOR_MKIII = registerMetaTileEntity(3058, new MetaTileEntityHyperReactorMkIII(gtqtcoreId("hyper_reactor_mk3")));
@@ -485,7 +487,7 @@ public class GTQTMetaTileEntities {
         HIGH_PRESSURE_STEAM_TURBINE = registerMetaTileEntity(3070, new MetaTileEntityLargeHighPressueSteamTurbine(gtqtcoreId("high_pressure_steam_turbine")));
         SUPERCRITICAL_STEAM_TURBINE = registerMetaTileEntity(3071, new MetaTileEntityLargeSupercriticalSteamTurbine(gtqtcoreId("supercritical_steam_turbine")));
         MEGA_HIGH_PRESSURE_STEAM_TURBINE = registerMetaTileEntity(3072, new MetaTileEntityMegaTurbine(gtqtcoreId("mega_high_pressure_steam_turbine"), GTQTcoreRecipeMaps.HIGH_PRESSURE_STEAM_TURBINE_RECIPES, EV, MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.TITANIUM_TURBINE_CASING), MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.TITANIUM_GEARBOX), Textures.STABLE_TITANIUM_CASING, false, GTQTTextures.MEGA_TURBINE_OVERLAY));
-        MEGA_SUPERCRITICAL_STEAM_TURBINE = registerMetaTileEntity(3073, new MetaTileEntityMegaTurbine(gtqtcoreId("mega_supercritical_steam_turbine"), GTQTcoreRecipeMaps.SUPERCRITICAL_STEAM_TURBINE_RECIPES, LuV, GTQTMetaBlocks.ADV_BLOCK.getState(GTQTADVBlock.CasingType.MaragingSteel250), MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.TUNGSTENSTEEL_GEARBOX), GTQTTextures.MaragingSteel250, false, GTQTTextures.MEGA_TURBINE_OVERLAY));
+        MEGA_SUPERCRITICAL_STEAM_TURBINE = registerMetaTileEntity(3073, new MetaTileEntityMegaTurbine(gtqtcoreId("mega_supercritical_steam_turbine"), GTQTcoreRecipeMaps.SUPERCRITICAL_STEAM_TURBINE_RECIPES, LuV, GTQTMetaBlocks.blockMultiblockCasing1.getState(BlockMultiblockCasing1.CasingType.MaragingSteel250), MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.TUNGSTENSTEEL_GEARBOX), GTQTTextures.MaragingSteel250, false, GTQTTextures.MEGA_TURBINE_OVERLAY));
 
 
         KINETIC_ENERGY_BATTERY = registerMetaTileEntity(3074, new MetaTileEntityKineticEnergyBattery(gtqtcoreId("kinetic_energy_battery")));
@@ -518,8 +520,8 @@ public class GTQTMetaTileEntities {
         PRIMITIVE_ROASTER = registerMetaTileEntity(3102, new MetaTileEntityPrimitiveRoaster(gtqtcoreId("primitive_roaster")));
 
         INDUSTRIAL_PRIMITIVE_BLAST_FURNACE = registerMetaTileEntity(3106, new MetaTileEntityIndustrialPrimitiveBlastFurnace(gtqtcoreId("industrial_primitive_blast_furnace")));
-        COAGULATION_TANK = registerMetaTileEntity(3107, new MetaTileEntityStewStoolStove(gtqtcoreId("coagulation_tank")));
-        P_REACTOR = registerMetaTileEntity(3108, new MetaTileEntityPReactor(gtqtcoreId("p_reactor")));
+
+        PRIMITIVE_REACTOR = registerMetaTileEntity(3108, new MetaTileEntityPrimitiveReactor(gtqtcoreId("primitive_reactor")));
 
         //多核心
         INDUSTRIAL_MACERATOR = registerMetaTileEntity(3120, new MetaTileEntityIndustrialMacerator(gtqtcoreId("industrial_crusher")));
@@ -572,11 +574,11 @@ public class GTQTMetaTileEntities {
         HEAT_CHANGER = registerMetaTileEntity(3178, new MetaTileEntityHeatExchanger(gtqtcoreId("heat_exchanger")));
         LASER_ENGRAVING = registerMetaTileEntity(3179, new MetaTileEntityLaserEngraving(gtqtcoreId("laser_engraving")));
         STEPPER = registerMetaTileEntity(3180, new MetaTileEntityStepper(gtqtcoreId("stepper")));
-        GANTRY_CRANE = registerMetaTileEntity(3181, new MetaTileEntityGantryCrane(gtqtcoreId("gantry_crane")));
+        PRESSURIZED_REACTION_TANK = registerMetaTileEntity(3181, new MetaTileEntityPressurizedReactionTank(gtqtcoreId("pressurized_reaction_tank")));
         CLARIFIER = registerMetaTileEntity(3182, new MetaTileEntityClarifier(gtqtcoreId("clarifier")));
         ELE_OIL = registerMetaTileEntity(3183, new MetaTileEntityElectronOil(gtqtcoreId("ele_oil")));
         REACTION_FURNACE = registerMetaTileEntity(3184, new MetaTileEntityReactionFurnace(gtqtcoreId("reactor_furnace")));
-        THREE_DIM_PRINT = registerMetaTileEntity(3186, new MetaTileEntityThreeDim(gtqtcoreId("three_dim_print")));
+        THREE_DIM_PRINT = registerMetaTileEntity(3186, new MetaTileEntityThreeDimPrinter(gtqtcoreId("three_dim_print")));
         NEUTRON_ACTIVATOR = registerMetaTileEntity(3187, new MetaTileEntityNeutronActivator(gtqtcoreId("neutron_activator")));
         MSF = registerMetaTileEntity(3188, new MetaTileEntityMSF(gtqtcoreId("msf")));
         INTEGRATED_ORE_PROCESSOR = registerMetaTileEntity(3189, new MetaTileEntityIntegratedOreProcessor(gtqtcoreId("integrated_ore_processor")));
@@ -634,11 +636,11 @@ public class GTQTMetaTileEntities {
         COMPRESSED_FUSION_REACTOR[1] = registerMetaTileEntity(3294, new MetaTileEntityCompressedFusionReactor(gtqtcoreId("compressed_fusion_reactor.zpm"), ZPM, MetaBlocks.FUSION_CASING.getState(gregtech.common.blocks.BlockFusionCasing.CasingType.FUSION_CASING_MK2), MetaBlocks.FUSION_CASING.getState(gregtech.common.blocks.BlockFusionCasing.CasingType.FUSION_COIL), MetaBlocks.FRAMES.get(Materials.Tritanium).getBlock(Materials.Tritanium)));
         COMPRESSED_FUSION_REACTOR[2] = registerMetaTileEntity(3295, new MetaTileEntityCompressedFusionReactor(gtqtcoreId("compressed_fusion_reactor.uv"), UV, MetaBlocks.FUSION_CASING.getState(gregtech.common.blocks.BlockFusionCasing.CasingType.FUSION_CASING_MK3), MetaBlocks.FUSION_CASING.getState(gregtech.common.blocks.BlockFusionCasing.CasingType.FUSION_COIL), MetaBlocks.FRAMES.get(Neutronium).getBlock(Neutronium)));
         if (GTQTCoreConfig.MachineSwitch.LastSwitch)
-            COMPRESSED_FUSION_REACTOR[3] = registerMetaTileEntity(3296, new MetaTileEntityCompressedFusionReactor(gtqtcoreId("compressed_fusion_reactor.uhv"), UHV, GTQTMetaBlocks.COMPRESSED_FUSION_REACTOR.getState(CASING_FUSION_MKIV), GTQTMetaBlocks.COMPRESSED_FUSION_REACTOR.getState(FUSION_COIL_MKII), MetaBlocks.FRAMES.get(Infinity).getBlock(Infinity)));
+            COMPRESSED_FUSION_REACTOR[3] = registerMetaTileEntity(3296, new MetaTileEntityCompressedFusionReactor(gtqtcoreId("compressed_fusion_reactor.uhv"), UHV, GTQTMetaBlocks.blockCompressedFusionReactor.getState(CASING_FUSION_MKIV), GTQTMetaBlocks.blockCompressedFusionReactor.getState(FUSION_COIL_MKII), MetaBlocks.FRAMES.get(Infinity).getBlock(Infinity)));
         if (GTQTCoreConfig.MachineSwitch.LastSwitch)
-            COMPRESSED_FUSION_REACTOR[4] = registerMetaTileEntity(3297, new MetaTileEntityCompressedFusionReactor(gtqtcoreId("compressed_fusion_reactor.uev"), UEV, GTQTMetaBlocks.COMPRESSED_FUSION_REACTOR.getState(CASING_FUSION_MKV), GTQTMetaBlocks.COMPRESSED_FUSION_REACTOR.getState(FUSION_COIL_MKIII), MetaBlocks.FRAMES.get(MagnetoHydrodynamicallyConstrainedStarMatter).getBlock(MagnetoHydrodynamicallyConstrainedStarMatter)));
+            COMPRESSED_FUSION_REACTOR[4] = registerMetaTileEntity(3297, new MetaTileEntityCompressedFusionReactor(gtqtcoreId("compressed_fusion_reactor.uev"), UEV, GTQTMetaBlocks.blockCompressedFusionReactor.getState(CASING_FUSION_MKV), GTQTMetaBlocks.blockCompressedFusionReactor.getState(FUSION_COIL_MKIII), MetaBlocks.FRAMES.get(MagnetoHydrodynamicallyConstrainedStarMatter).getBlock(MagnetoHydrodynamicallyConstrainedStarMatter)));
         if (GTQTCoreConfig.MachineSwitch.LastSwitch)
-            COMPRESSED_FUSION_REACTOR[5] = registerMetaTileEntity(3298, new MetaTileEntityCompressedFusionReactor(gtqtcoreId("compressed_fusion_reactor.uiv"), UIV, GTQTMetaBlocks.COMPRESSED_FUSION_REACTOR.getState(CASING_FUSION_MKVI), GTQTMetaBlocks.COMPRESSED_FUSION_REACTOR.getState(FUSION_COIL_MKIV), MetaBlocks.FRAMES.get(Eternity).getBlock(Eternity)));
+            COMPRESSED_FUSION_REACTOR[5] = registerMetaTileEntity(3298, new MetaTileEntityCompressedFusionReactor(gtqtcoreId("compressed_fusion_reactor.uiv"), UIV, GTQTMetaBlocks.blockCompressedFusionReactor.getState(CASING_FUSION_MKVI), GTQTMetaBlocks.blockCompressedFusionReactor.getState(FUSION_COIL_MKIV), MetaBlocks.FRAMES.get(Eternity).getBlock(Eternity)));
 
         ADVANCED_ASSEMBLY_LINE = registerMetaTileEntity(3305, new MetaTileEntityAdvancedAssemblyLine(gtqtcoreId("advanced_assembly_line")));
         COMPONENT_ASSEMBLY_LINE = registerMetaTileEntity(3306, new MetaTileEntityComponentAssemblyLine(gtqtcoreId("component_assembly_line")));
@@ -676,13 +678,13 @@ public class GTQTMetaTileEntities {
         EXTREME_FLUID_DRILL_RIG = registerMetaTileEntity(3424, new MetaTileEntityAdvancedFluidDrill(gtqtcoreId("fluid_drill_rig.luv"), 6));
         ULTIMATE_FLUID_DRILL_RIG = registerMetaTileEntity(3425, new MetaTileEntityAdvancedFluidDrill(gtqtcoreId("fluid_drill_rig.zpm"), 7));
         INFINITY_FLUID_DRILL_RIG = registerMetaTileEntity(3426, new MetaTileEntityAdvancedFluidDrill(gtqtcoreId("fluid_drill_rig.uv"), 8));
-        //KQCC
+        //blocksResearchSystem
         KQCC = registerMetaTileEntity(3450, new MetaTileEntityKQCC(gtqtcoreId("kqcc")));
         KQNS = registerMetaTileEntity(3451, new MetaTileEntityKQNetworkSwitch(gtqtcoreId("kqns")));
-        ADV_KQCC = registerMetaTileEntity(3452, new MetaTileEntityADVKQCC(gtqtcoreId("adv_kqcc")));
+        ADV_KQCC = registerMetaTileEntity(3452, new MetaTileEntityAdvanceKQCC(gtqtcoreId("adv_kqcc")));
         MINI_DATE_BANK = registerMetaTileEntity(3453, new MetaTileEntityMiniDataBank(gtqtcoreId("mini_date_bank")));
-        ADV_NETWORK_SWITCH = registerMetaTileEntity(3464, new MetaTileEntityADVNetworkSwitch(gtqtcoreId("adv_network_switch")));
-        ADV_DATE_BANK = registerMetaTileEntity(3455, new MetaTileEntityADVDataBank(gtqtcoreId("adv_date_bank")));
+        ADV_NETWORK_SWITCH = registerMetaTileEntity(3464, new MetaTileEntityAdvanceNetworkSwitch(gtqtcoreId("adv_network_switch")));
+        ADV_DATE_BANK = registerMetaTileEntity(3455, new MetaTileEntityAdvanceDataBank(gtqtcoreId("adv_date_bank")));
 
         HPCA_SUPER_COMPUTATION_COMPONENT = registerMetaTileEntity(3460, new MetaTileEntityHPCAAdvancedComputation(gtqtcoreId("hpca.super_computation_component"), false));
         HPCA_ULTIMATE_COMPUTATION_COMPONENT = registerMetaTileEntity(3461, new MetaTileEntityHPCAAdvancedComputation(gtqtcoreId("hpca.ultimate_computation_component"), true));

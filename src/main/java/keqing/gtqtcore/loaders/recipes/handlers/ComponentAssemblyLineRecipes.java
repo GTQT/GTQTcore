@@ -2,7 +2,7 @@ package keqing.gtqtcore.loaders.recipes.handlers;
 
 import gregtech.api.unification.material.MarkerMaterials;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.common.block.blocks.GTQTBlockComponentAssemblyLineCasing;
+import keqing.gtqtcore.common.block.blocks.BlockComponentAssemblyLineCasing;
 import net.minecraftforge.fluids.FluidStack;
 
 import static gregicality.multiblocks.api.unification.GCYMMaterials.Zeron100;
@@ -43,7 +43,7 @@ public class ComponentAssemblyLineRecipes {
                 .input(wireGtQuadruple, Tin, 6)
                 .input(circuit, MarkerMaterials.Tier.LV, 16)
                 .fluidInputs(SolderingAlloy.getFluid(576))
-                .outputs(GTQTMetaBlocks.COMPONENT_ASSEMBLY_LINE.getItemVariant(GTQTBlockComponentAssemblyLineCasing.CasingTier.LV, 4))
+                .outputs(GTQTMetaBlocks.blockComponentAssemblyLineCasing.getItemVariant(BlockComponentAssemblyLineCasing.CasingTier.LV, 4))
                 .EUt(VA[LV])
                 .duration(320)
                 .buildAndRegister();
@@ -59,7 +59,7 @@ public class ComponentAssemblyLineRecipes {
                 .input(circuit, MarkerMaterials.Tier.MV, 8)
                 .input(circuit, MarkerMaterials.Tier.LV, 16)
                 .fluidInputs(SolderingAlloy.getFluid(576))
-                .outputs(GTQTMetaBlocks.COMPONENT_ASSEMBLY_LINE.getItemVariant(GTQTBlockComponentAssemblyLineCasing.CasingTier.MV, 4))
+                .outputs(GTQTMetaBlocks.blockComponentAssemblyLineCasing.getItemVariant(BlockComponentAssemblyLineCasing.CasingTier.MV, 4))
                 .EUt(VA[MV])
                 .duration(320)
                 .buildAndRegister();
@@ -75,7 +75,7 @@ public class ComponentAssemblyLineRecipes {
                 .input(circuit, MarkerMaterials.Tier.HV, 8)
                 .input(circuit, MarkerMaterials.Tier.MV, 16)
                 .fluidInputs(SolderingAlloy.getFluid(576))
-                .outputs(GTQTMetaBlocks.COMPONENT_ASSEMBLY_LINE.getItemVariant(GTQTBlockComponentAssemblyLineCasing.CasingTier.HV, 4))
+                .outputs(GTQTMetaBlocks.blockComponentAssemblyLineCasing.getItemVariant(BlockComponentAssemblyLineCasing.CasingTier.HV, 4))
                 .EUt(VA[HV])
                 .duration(320)
                 .buildAndRegister();
@@ -91,7 +91,7 @@ public class ComponentAssemblyLineRecipes {
                 .input(circuit, MarkerMaterials.Tier.EV, 8)
                 .input(circuit, MarkerMaterials.Tier.HV, 16)
                 .fluidInputs(SolderingAlloy.getFluid(576))
-                .outputs(GTQTMetaBlocks.COMPONENT_ASSEMBLY_LINE.getItemVariant(GTQTBlockComponentAssemblyLineCasing.CasingTier.EV, 4))
+                .outputs(GTQTMetaBlocks.blockComponentAssemblyLineCasing.getItemVariant(BlockComponentAssemblyLineCasing.CasingTier.EV, 4))
                 .EUt(VA[EV])
                 .duration(320)
                 .buildAndRegister();
@@ -107,7 +107,7 @@ public class ComponentAssemblyLineRecipes {
                 .input(circuit, MarkerMaterials.Tier.IV, 8)
                 .input(circuit, MarkerMaterials.Tier.EV, 16)
                 .fluidInputs(SolderingAlloy.getFluid(576))
-                .outputs(GTQTMetaBlocks.COMPONENT_ASSEMBLY_LINE.getItemVariant(GTQTBlockComponentAssemblyLineCasing.CasingTier.IV, 4))
+                .outputs(GTQTMetaBlocks.blockComponentAssemblyLineCasing.getItemVariant(BlockComponentAssemblyLineCasing.CasingTier.IV, 4))
                 .EUt(VA[IV])
                 .duration(320)
                 .buildAndRegister();
@@ -127,11 +127,11 @@ public class ComponentAssemblyLineRecipes {
                 .fluidInputs(Zeron100.getFluid(1728))
                 .fluidInputs(TanmolyiumBetaC.getFluid(864))
                 .fluidInputs(Lubricant.getFluid(4000))
-                .outputs(GTQTMetaBlocks.COMPONENT_ASSEMBLY_LINE.getItemVariant(GTQTBlockComponentAssemblyLineCasing.CasingTier.LuV, 4))
+                .outputs(GTQTMetaBlocks.blockComponentAssemblyLineCasing.getItemVariant(BlockComponentAssemblyLineCasing.CasingTier.LuV, 4))
                 .EUt(VA[LuV])
                 .duration(600)
                 .scannerResearch(b -> b
-                        .researchStack(GTQTMetaBlocks.COMPONENT_ASSEMBLY_LINE.getItemVariant(GTQTBlockComponentAssemblyLineCasing.CasingTier.IV))
+                        .researchStack(GTQTMetaBlocks.blockComponentAssemblyLineCasing.getItemVariant(BlockComponentAssemblyLineCasing.CasingTier.IV))
                         .EUt(VA[IV])
                         .duration(1200))
                 .buildAndRegister();
@@ -151,11 +151,11 @@ public class ComponentAssemblyLineRecipes {
                 .fluidInputs(MARM200CeSteel.getFluid(1728))
                 .fluidInputs(HastelloyC59.getFluid(864))
                 .fluidInputs(Lubricant.getFluid(4000))
-                .outputs(GTQTMetaBlocks.COMPONENT_ASSEMBLY_LINE.getItemVariant(GTQTBlockComponentAssemblyLineCasing.CasingTier.ZPM, 4))
+                .outputs(GTQTMetaBlocks.blockComponentAssemblyLineCasing.getItemVariant(BlockComponentAssemblyLineCasing.CasingTier.ZPM, 4))
                 .EUt(VA[ZPM])
                 .duration(600)
                 .scannerResearch(b -> b
-                        .researchStack(GTQTMetaBlocks.COMPONENT_ASSEMBLY_LINE.getItemVariant(GTQTBlockComponentAssemblyLineCasing.CasingTier.LuV))
+                        .researchStack(GTQTMetaBlocks.blockComponentAssemblyLineCasing.getItemVariant(BlockComponentAssemblyLineCasing.CasingTier.LuV))
                         .EUt(VA[LuV])
                         .duration(1200))
                 .buildAndRegister();
@@ -175,11 +175,11 @@ public class ComponentAssemblyLineRecipes {
                 .fluidInputs(HMS1J79Alloy.getFluid(1728))
                 .fluidInputs(Pikyonium64B.getFluid(864))
                 .fluidInputs(Lubricant.getFluid(4000))
-                .outputs(GTQTMetaBlocks.COMPONENT_ASSEMBLY_LINE.getItemVariant(GTQTBlockComponentAssemblyLineCasing.CasingTier.UV, 4))
+                .outputs(GTQTMetaBlocks.blockComponentAssemblyLineCasing.getItemVariant(BlockComponentAssemblyLineCasing.CasingTier.UV, 4))
                 .EUt(VA[UV])
                 .duration(600)
                 .scannerResearch(b -> b
-                        .researchStack(GTQTMetaBlocks.COMPONENT_ASSEMBLY_LINE.getItemVariant(GTQTBlockComponentAssemblyLineCasing.CasingTier.ZPM))
+                        .researchStack(GTQTMetaBlocks.blockComponentAssemblyLineCasing.getItemVariant(BlockComponentAssemblyLineCasing.CasingTier.ZPM))
                         .EUt(VA[ZPM])
                         .duration(1200))
                 .buildAndRegister();
@@ -199,11 +199,11 @@ public class ComponentAssemblyLineRecipes {
                 .fluidInputs(TitanSteel.getFluid(1728))
                 .fluidInputs(Cinobite.getFluid(864))
                 .fluidInputs(Lubricant.getFluid(4000))
-                .outputs(GTQTMetaBlocks.COMPONENT_ASSEMBLY_LINE.getItemVariant(GTQTBlockComponentAssemblyLineCasing.CasingTier.UHV, 4))
+                .outputs(GTQTMetaBlocks.blockComponentAssemblyLineCasing.getItemVariant(BlockComponentAssemblyLineCasing.CasingTier.UHV, 4))
                 .EUt(VA[UHV])
                 .duration(600)
                 .stationResearch(b -> b
-                        .researchStack(GTQTMetaBlocks.COMPONENT_ASSEMBLY_LINE.getItemVariant(GTQTBlockComponentAssemblyLineCasing.CasingTier.UV))
+                        .researchStack(GTQTMetaBlocks.blockComponentAssemblyLineCasing.getItemVariant(BlockComponentAssemblyLineCasing.CasingTier.UV))
                         .EUt(VA[UV])
                         .CWUt(64))
                 .buildAndRegister();
@@ -223,11 +223,11 @@ public class ComponentAssemblyLineRecipes {
                 .fluidInputs(BlackTitanium.getFluid(1728))
                 .fluidInputs(Abyssalloy.getFluid(864))
                 .fluidInputs(Lubricant.getFluid(4000))
-                .outputs(GTQTMetaBlocks.COMPONENT_ASSEMBLY_LINE.getItemVariant(GTQTBlockComponentAssemblyLineCasing.CasingTier.UEV, 4))
+                .outputs(GTQTMetaBlocks.blockComponentAssemblyLineCasing.getItemVariant(BlockComponentAssemblyLineCasing.CasingTier.UEV, 4))
                 .EUt(VA[UEV])
                 .duration(600)
                 .stationResearch(b -> b
-                        .researchStack(GTQTMetaBlocks.COMPONENT_ASSEMBLY_LINE.getItemVariant(GTQTBlockComponentAssemblyLineCasing.CasingTier.UHV))
+                        .researchStack(GTQTMetaBlocks.blockComponentAssemblyLineCasing.getItemVariant(BlockComponentAssemblyLineCasing.CasingTier.UHV))
                         .EUt(VA[UHV])
                         .CWUt(128))
                 .buildAndRegister();
@@ -247,11 +247,11 @@ public class ComponentAssemblyLineRecipes {
                 .fluidInputs(BlackPlutonium.getFluid(1728))
                 .fluidInputs(SuperheavyHAlloy.getFluid(864))
                 .fluidInputs(Lubricant.getFluid(4000))
-                .outputs(GTQTMetaBlocks.COMPONENT_ASSEMBLY_LINE.getItemVariant(GTQTBlockComponentAssemblyLineCasing.CasingTier.UIV, 4))
+                .outputs(GTQTMetaBlocks.blockComponentAssemblyLineCasing.getItemVariant(BlockComponentAssemblyLineCasing.CasingTier.UIV, 4))
                 .EUt(VA[UIV])
                 .duration(600)
                 .stationResearch(b -> b
-                        .researchStack(GTQTMetaBlocks.COMPONENT_ASSEMBLY_LINE.getItemVariant(GTQTBlockComponentAssemblyLineCasing.CasingTier.UEV))
+                        .researchStack(GTQTMetaBlocks.blockComponentAssemblyLineCasing.getItemVariant(BlockComponentAssemblyLineCasing.CasingTier.UEV))
                         .EUt(VA[UEV])
                         .CWUt(256))
                 .buildAndRegister();
@@ -272,11 +272,11 @@ public class ComponentAssemblyLineRecipes {
                 .fluidInputs(QuantumchromodynamicallyConfinedMatter.getFluid(1728))
                 .fluidInputs(HeavyQuarkDegenerateMatter.getFluid(864))
                 .fluidInputs(Lubricant.getFluid(4000))
-                .outputs(GTQTMetaBlocks.COMPONENT_ASSEMBLY_LINE.getItemVariant(GTQTBlockComponentAssemblyLineCasing.CasingTier.UXV, 4))
+                .outputs(GTQTMetaBlocks.blockComponentAssemblyLineCasing.getItemVariant(BlockComponentAssemblyLineCasing.CasingTier.UXV, 4))
                 .EUt(VA[UXV])
                 .duration(600)
                 .stationResearch(b -> b
-                        .researchStack(GTQTMetaBlocks.COMPONENT_ASSEMBLY_LINE.getItemVariant(GTQTBlockComponentAssemblyLineCasing.CasingTier.UIV))
+                        .researchStack(GTQTMetaBlocks.blockComponentAssemblyLineCasing.getItemVariant(BlockComponentAssemblyLineCasing.CasingTier.UIV))
                         .EUt(VA[UIV])
                         .CWUt(512))
                 .buildAndRegister();
@@ -296,11 +296,11 @@ public class ComponentAssemblyLineRecipes {
                 .fluidInputs(WhiteDwarfMatter.getFluid(1728))
                 .fluidInputs(BlackDwarfMatter.getFluid(864))
                 .fluidInputs(Lubricant.getFluid(4000))
-                .outputs(GTQTMetaBlocks.COMPONENT_ASSEMBLY_LINE.getItemVariant(GTQTBlockComponentAssemblyLineCasing.CasingTier.OpV, 4))
+                .outputs(GTQTMetaBlocks.blockComponentAssemblyLineCasing.getItemVariant(BlockComponentAssemblyLineCasing.CasingTier.OpV, 4))
                 .EUt(VA[OpV])
                 .duration(600)
                 .stationResearch(b -> b
-                        .researchStack(GTQTMetaBlocks.COMPONENT_ASSEMBLY_LINE.getItemVariant(GTQTBlockComponentAssemblyLineCasing.CasingTier.UXV))
+                        .researchStack(GTQTMetaBlocks.blockComponentAssemblyLineCasing.getItemVariant(BlockComponentAssemblyLineCasing.CasingTier.UXV))
                         .EUt(VA[UXV])
                         .CWUt(1024))
                 .buildAndRegister();
@@ -320,11 +320,11 @@ public class ComponentAssemblyLineRecipes {
                 .fluidInputs(Arcanium.getFluid(1728))
                 .fluidInputs(Shirabon.getFluid(864))
                 .fluidInputs(Lubricant.getFluid(4000))
-                .outputs(GTQTMetaBlocks.COMPONENT_ASSEMBLY_LINE.getItemVariant(GTQTBlockComponentAssemblyLineCasing.CasingTier.MAX, 4))
+                .outputs(GTQTMetaBlocks.blockComponentAssemblyLineCasing.getItemVariant(BlockComponentAssemblyLineCasing.CasingTier.MAX, 4))
                 .EUt(VA[MAX])
                 .duration(600)
                 .stationResearch(b -> b
-                        .researchStack(GTQTMetaBlocks.COMPONENT_ASSEMBLY_LINE.getItemVariant(GTQTBlockComponentAssemblyLineCasing.CasingTier.OpV))
+                        .researchStack(GTQTMetaBlocks.blockComponentAssemblyLineCasing.getItemVariant(BlockComponentAssemblyLineCasing.CasingTier.OpV))
                         .EUt(VA[OpV])
                         .CWUt(2048))
                 .buildAndRegister();

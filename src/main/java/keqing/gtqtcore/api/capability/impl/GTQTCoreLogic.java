@@ -3,7 +3,6 @@ package keqing.gtqtcore.api.capability.impl;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.recipes.Recipe;
-import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.huge.MetaTileEntityHugeFusionReactor;
 
 public class GTQTCoreLogic extends MultiblockRecipeLogic {
 

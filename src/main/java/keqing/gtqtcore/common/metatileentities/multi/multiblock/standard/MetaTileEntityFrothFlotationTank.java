@@ -25,7 +25,7 @@ import gregtech.common.blocks.BlockTurbineCasing;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing1;
+import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing5;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
@@ -67,7 +67,7 @@ public class MetaTileEntityFrothFlotationTank extends RecipeMapMultiblockControl
                 .where('A', states(MetaBlocks.METAL_CASING.getState(MetalCasingType.STAINLESS_CLEAN)).setMinGlobalLimited(60)
                         .or(autoAbilities(true, true, true, true, true, true, true)))
                 .where('B', states(MetaBlocks.BOILER_CASING.getState((BoilerCasingType.STEEL_PIPE))))
-                .where('D', states(GTQTMetaBlocks.TURBINE_CASING1.getState((GTQTTurbineCasing1.TurbineCasingType.FLOATING_CASING))))
+                .where('D', states(GTQTMetaBlocks.blockMultiblockCasing5.getState((BlockMultiblockCasing5.TurbineCasingType.FLOATING_CASING))))
                 .where('E', states(MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.STEEL_GEARBOX)))
                 .where(' ', any())
                 .build();

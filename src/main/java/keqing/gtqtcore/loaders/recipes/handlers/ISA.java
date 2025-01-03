@@ -1,11 +1,8 @@
 package keqing.gtqtcore.loaders.recipes.handlers;
 
-import gregtech.api.GTValues;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.Materials;
-import gregtech.api.unification.material.properties.OreProperty;
-import gregtech.api.unification.material.properties.PropertyKey;
 import gregtech.api.unification.ore.OrePrefix;
 import keqing.gtqtcore.api.items.IntCircuitIngredientBiology;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
@@ -22,7 +19,6 @@ import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.dust;
 import static gregtech.api.unification.ore.OrePrefix.gem;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
-import static net.minecraft.init.Blocks.*;
 
 public class ISA {
 
@@ -102,7 +98,7 @@ public class ISA {
                 .notConsumable(getBiologyCircuitData(6))
                 .EUt(VA[HV])
                 .duration(2400)
-                .output(GTQTMetaBlocks.PINE_SAPLING, 16)
+                .output(GTQTMetaBlocks.BLOCK_PINE_SAPLING, 16)
                 .buildAndRegister();
 
         GTQTcoreRecipeMaps.CHEMICAL_PLANT.recipeBuilder()
@@ -187,7 +183,7 @@ public class ISA {
 
         GTQTcoreRecipeMaps.CHEMICAL_PLANT.recipeBuilder()
                 .recipeLevel(4)
-                .input(Item.getItemFromBlock(GTQTMetaBlocks.PINE_LEAVES))
+                .input(Item.getItemFromBlock(GTQTMetaBlocks.BLOCK_PINE_LEAVES))
                 .circuitMeta(14)
                 .EUt(VA[HV])
                 .duration(200)
@@ -199,7 +195,7 @@ public class ISA {
 
         GTQTcoreRecipeMaps.CHEMICAL_PLANT.recipeBuilder()
                 .recipeLevel(4)
-                .input(Item.getItemFromBlock(GTQTMetaBlocks.PINE_LEAVES))
+                .input(Item.getItemFromBlock(GTQTMetaBlocks.BLOCK_PINE_LEAVES))
                 .circuitMeta(14)
                 .EUt(VA[HV])
                 .duration(200)
@@ -211,7 +207,7 @@ public class ISA {
 
         GTQTcoreRecipeMaps.CHEMICAL_PLANT.recipeBuilder()
                 .recipeLevel(4)
-                .input(Item.getItemFromBlock(GTQTMetaBlocks.PINE_LOG))
+                .input(Item.getItemFromBlock(GTQTMetaBlocks.BLOCK_PINE_LOG))
                 .circuitMeta(14)
                 .EUt(VA[HV])
                 .duration(200)

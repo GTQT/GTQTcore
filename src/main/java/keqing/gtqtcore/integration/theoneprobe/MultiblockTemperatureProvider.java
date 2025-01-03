@@ -3,12 +3,11 @@ package keqing.gtqtcore.integration.theoneprobe;
 import gregicality.multiblocks.common.metatileentities.multiblock.standard.MetaTileEntityAlloyBlastSmelter;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
-import gregtech.common.metatileentities.multi.electric.MetaTileEntityElectricBlastFurnace;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.MetaTileEntityBlazingBlastFurnace;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.MetaTileEntitySepticTank;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.MetaTileEntityVacuumDryingFurnace;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.gcys.MetaTileEntityIndustrialRoaster;
-import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.huge.MetaTileEntityHugeBlastFurnace;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.giantEquipment.MetaTileEntityHugeBlastFurnace;
 
 import mcjty.theoneprobe.api.*;
 import net.minecraft.block.state.IBlockState;

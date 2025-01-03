@@ -22,7 +22,7 @@ import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.client.utils.BloomEffectUtil;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.common.block.blocks.GTQTQuantumForceTransformerCasing;
+import keqing.gtqtcore.common.block.blocks.BlockQuantumForceTransformerCasing;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -154,11 +154,11 @@ public class MetaTileEntityQuantumForceTransformer extends RecipeMapMultiblockCo
     }
 
     private IBlockState getCasingState() {
-        return GTQTMetaBlocks.QUANTUM_CONSTRAINT_CASING.getState(GTQTQuantumForceTransformerCasing.CasingType.QUANTUM_CONSTRAINT_CASING);
+        return GTQTMetaBlocks.blockQuantumForceTransformerCasing.getState(BlockQuantumForceTransformerCasing.CasingType.QUANTUM_CONSTRAINT_CASING);
     }
 
     private IBlockState getCoilState() {
-        return GTQTMetaBlocks.QUANTUM_CONSTRAINT_CASING.getState(GTQTQuantumForceTransformerCasing.CasingType.QUANTUM_FORCE_TRANSFORMER_COIL);
+        return GTQTMetaBlocks.blockQuantumForceTransformerCasing.getState(BlockQuantumForceTransformerCasing.CasingType.QUANTUM_FORCE_TRANSFORMER_COIL);
     }
 
     @SideOnly(Side.CLIENT)

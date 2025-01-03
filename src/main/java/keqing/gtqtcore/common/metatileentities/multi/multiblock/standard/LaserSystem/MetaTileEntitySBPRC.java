@@ -53,7 +53,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static keqing.gtqtcore.api.unification.GTQTMaterials.MaragingSteel250;
-import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.NQ_TURBINE_CASING;
+import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4.TurbineCasingType.NQ_TURBINE_CASING;
 import static net.minecraft.tileentity.TileEntity.INFINITE_EXTENT_AABB;
 
 public class MetaTileEntitySBPRC extends MetaTileEntityBaseWithControl implements IFastRenderMetaTileEntity {
@@ -86,7 +86,7 @@ public class MetaTileEntitySBPRC extends MetaTileEntityBaseWithControl implement
     }
 
     private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.TURBINE_CASING.getState(NQ_TURBINE_CASING);
+        return GTQTMetaBlocks.blockMultiblockCasing4.getState(NQ_TURBINE_CASING);
     }
 
     //第一位 1-》输入 2-》输出

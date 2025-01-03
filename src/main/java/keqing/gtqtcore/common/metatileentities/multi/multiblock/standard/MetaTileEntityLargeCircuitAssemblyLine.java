@@ -33,7 +33,7 @@ import gregtech.core.sound.GTSoundEvents;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing;
+import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -78,15 +78,15 @@ public class MetaTileEntityLargeCircuitAssemblyLine extends MultiMapMultiblockCo
     }
 
     private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.TURBINE_CASING.getState(GTQTTurbineCasing.TurbineCasingType.ADVANCED_FILTER_CASING);
+        return GTQTMetaBlocks.blockMultiblockCasing4.getState(BlockMultiblockCasing4.TurbineCasingType.ADVANCED_FILTER_CASING);
     }
 
     private static IBlockState getSecondCasingState() {
-        return GTQTMetaBlocks.ACTIVE_UNIQUE_CASING.getState(CIRCUIT_ASSEMBLY_CONTROL_CASING);
+        return GTQTMetaBlocks.blockActiveUniqueCasing.getState(CIRCUIT_ASSEMBLY_CONTROL_CASING);
     }
 
     private static IBlockState getThirdCasingState() {
-        return GTQTMetaBlocks.ACTIVE_UNIQUE_CASING.getState(CIRCUIT_ASSEMBLY_LINE_CASING);
+        return GTQTMetaBlocks.blockActiveUniqueCasing.getState(CIRCUIT_ASSEMBLY_LINE_CASING);
     }
 
     private static IBlockState getGlassState() {

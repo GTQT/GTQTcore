@@ -17,13 +17,12 @@ import gregtech.common.items.MetaItems;
 import gregtech.common.metatileentities.MetaTileEntities;
 import gregtech.loaders.recipe.CraftingComponent;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.common.block.blocks.GTQTElectrobath;
+import keqing.gtqtcore.common.block.blocks.BlockElectrolyticBath;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
-import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -55,8 +54,8 @@ import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.*;
 import static keqing.gtqtcore.api.utils.GTQTUtil.CWT;
 import static keqing.gtqtcore.common.block.blocks.BlockCrucible.CrucibleType.QUARTZ_CRUCIBLE;
-import static keqing.gtqtcore.common.block.blocks.GTQTIsaCasing.CasingType.ASEPTIC_FARM_CASING;
-import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.ADVANCED_FILTER_CASING;
+import static keqing.gtqtcore.common.block.blocks.BlockIsaCasing.CasingType.ASEPTIC_FARM_CASING;
+import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4.TurbineCasingType.ADVANCED_FILTER_CASING;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.DISTILLATION_TOWER;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.GAS_COLLECTOR;
@@ -397,11 +396,11 @@ public class MetaTileEntityLoader {
         //海藻方块
         ASSEMBLER_RECIPES.recipeBuilder()
                 .inputs(MetaTileEntities.HULL[GTValues.HV].getStackForm())
-                .input(plate, NanometerBariumTitanate, 6)
-                .input(frameGt, StainlessSteel, 1)
+                .input(screw, NanometerBariumTitanate, 1)
+                .input(plate, Nickel, 4)
                 .fluidInputs(Bps.getFluid(1440))
                 .circuitMeta(1)
-                .outputs(GTQTMetaBlocks.ISA_CASING.getItemVariant(ASEPTIC_FARM_CASING))
+                .outputs(GTQTMetaBlocks.blockIsaCasing.getItemVariant(ASEPTIC_FARM_CASING))
                 .duration(20).EUt(30).buildAndRegister();
         //太阳能
         ASSEMBLER_RECIPES.recipeBuilder()
@@ -409,7 +408,7 @@ public class MetaTileEntityLoader {
                 .input(EMITTER_MV, 8)
                 .input(plate, StainlessSteel, 16)
                 .fluidInputs(Polybenzimidazole.getFluid(L * 4))
-                .outputs(GTQTMetaBlocks.ELECTROBATH.getItemVariant(GTQTElectrobath.CasingType.SOLAR_PLATE_CASING))
+                .outputs(GTQTMetaBlocks.blockElectrolyticBath.getItemVariant(BlockElectrolyticBath.CasingType.SOLAR_PLATE_CASING))
                 .duration(2000).EUt(1920).buildAndRegister();
 
         ASSEMBLER_RECIPES.recipeBuilder()
@@ -446,30 +445,30 @@ public class MetaTileEntityLoader {
                 .duration(2000).EUt(7680).buildAndRegister();
 
         ASSEMBLER_RECIPES.recipeBuilder()
-                .inputs(GTQTMetaBlocks.ELECTROBATH.getItemVariant(GTQTElectrobath.CasingType.SOLAR_PLATE_CASING))
+                .inputs(GTQTMetaBlocks.blockElectrolyticBath.getItemVariant(BlockElectrolyticBath.CasingType.SOLAR_PLATE_CASING))
                 .input(EMITTER_HV, 1)
                 .input(circuit, MarkerMaterials.Tier.HV, 8)
                 .input(SOLAR_PLATE_MKI, 4)
                 .fluidInputs(Polybenzimidazole.getFluid(L * 4))
-                .outputs(GTQTMetaBlocks.ELECTROBATH.getItemVariant(GTQTElectrobath.CasingType.SOLAR_PLATE_LV))
+                .outputs(GTQTMetaBlocks.blockElectrolyticBath.getItemVariant(BlockElectrolyticBath.CasingType.SOLAR_PLATE_LV))
                 .duration(2000).EUt(1920).buildAndRegister();
 
         ASSEMBLER_RECIPES.recipeBuilder()
-                .inputs(GTQTMetaBlocks.ELECTROBATH.getItemVariant(GTQTElectrobath.CasingType.SOLAR_PLATE_CASING))
+                .inputs(GTQTMetaBlocks.blockElectrolyticBath.getItemVariant(BlockElectrolyticBath.CasingType.SOLAR_PLATE_CASING))
                 .input(EMITTER_EV, 1)
                 .input(circuit, MarkerMaterials.Tier.EV, 8)
                 .input(SOLAR_PLATE_MKII, 4)
                 .fluidInputs(Polybenzimidazole.getFluid(L * 4))
-                .outputs(GTQTMetaBlocks.ELECTROBATH.getItemVariant(GTQTElectrobath.CasingType.SOLAR_PLATE_MV))
+                .outputs(GTQTMetaBlocks.blockElectrolyticBath.getItemVariant(BlockElectrolyticBath.CasingType.SOLAR_PLATE_MV))
                 .duration(2000).EUt(1920).buildAndRegister();
 
         ASSEMBLER_RECIPES.recipeBuilder()
-                .inputs(GTQTMetaBlocks.ELECTROBATH.getItemVariant(GTQTElectrobath.CasingType.SOLAR_PLATE_CASING))
+                .inputs(GTQTMetaBlocks.blockElectrolyticBath.getItemVariant(BlockElectrolyticBath.CasingType.SOLAR_PLATE_CASING))
                 .input(EMITTER_IV, 1)
                 .input(circuit, MarkerMaterials.Tier.IV, 8)
                 .input(SOLAR_PLATE_MKIII, 4)
                 .fluidInputs(Polybenzimidazole.getFluid(L * 4))
-                .outputs(GTQTMetaBlocks.ELECTROBATH.getItemVariant(GTQTElectrobath.CasingType.SOLAR_PLATE_HV))
+                .outputs(GTQTMetaBlocks.blockElectrolyticBath.getItemVariant(BlockElectrolyticBath.CasingType.SOLAR_PLATE_HV))
                 .duration(2000).EUt(1920).buildAndRegister();
 
         //化工厂
@@ -645,7 +644,7 @@ public class MetaTileEntityLoader {
                 .input(FLUID_FILTER, 4)
                 .input(stickLong, Iridium, 8)
                 .fluidInputs(SolderingAlloy.getFluid(L * 2))
-                .outputs(GTQTMetaBlocks.TURBINE_CASING.getItemVariant(ADVANCED_FILTER_CASING))
+                .outputs(GTQTMetaBlocks.blockMultiblockCasing4.getItemVariant(ADVANCED_FILTER_CASING))
                 .EUt(VA[6])
                 .duration(200)
                 .cleanroom(CleanroomType.CLEANROOM)
@@ -688,7 +687,7 @@ public class MetaTileEntityLoader {
                 'S', new UnificationEntry(spring, RTMAlloy),
                 'A', FLUID_CELL_LARGE_TUNGSTEN_STEEL);
 
-        ModHandler.addShapedRecipe(true, "p_reactor", P_REACTOR.getStackForm(),
+        ModHandler.addShapedRecipe(true, "primitive_reactor", PRIMITIVE_REACTOR.getStackForm(),
                 "CGC", "ChC", "CGC",
                 'G', new UnificationEntry(OrePrefix.gear, Wood),
                 'C', MetaBlocks.STEAM_CASING.getItemVariant(BlockSteamCasing.SteamCasingType.WOOD_WALL));
@@ -748,7 +747,7 @@ public class MetaTileEntityLoader {
                 "FFF", "CHC", "WCW",
                 'F', MetaTileEntities.ELECTRIC_FURNACE[2].getStackForm(),
                 'C', new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.MV),
-                'H', GTQTMetaBlocks.CRUCIBLE.getItemVariant(QUARTZ_CRUCIBLE),
+                'H', GTQTMetaBlocks.blockCrucible.getItemVariant(QUARTZ_CRUCIBLE),
                 'W', new UnificationEntry(OrePrefix.cableGtSingle, Aluminium));
 
         ModHandler.addShapedRecipe(true, "distillation_tower", DISTILLATION_TOWER.getStackForm(),
@@ -846,7 +845,7 @@ public class MetaTileEntityLoader {
                 'C', new UnificationEntry(OrePrefix.circuit, MV),
                 'F', ELECTRIC_PUMP_MV);
 
-        ModHandler.addShapedRecipe(true, "gantry_crane", GTQTMetaTileEntities.GANTRY_CRANE.getStackForm(),
+        ModHandler.addShapedRecipe(true, "pressurized_reaction_tank", GTQTMetaTileEntities.PRESSURIZED_REACTION_TANK.getStackForm(),
                 "FFF", "BMB", "CCC", 'M', MetaTileEntities.HULL[GTValues.HV].getStackForm(), 'B',
                 new UnificationEntry(plateDouble, StainlessSteel), 'C',
                 new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.HV), 'F', ELECTRIC_MOTOR_HV);

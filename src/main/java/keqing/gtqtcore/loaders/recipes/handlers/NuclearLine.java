@@ -4,8 +4,8 @@ import gregtech.api.metatileentity.multiblock.CleanroomType;
 import gregtech.api.unification.material.MarkerMaterials;
 import gregtech.api.unification.material.Material;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.common.block.blocks.GTQTNuclearFusion;
-import keqing.gtqtcore.common.block.blocks.GTQTParticleAccelerator;
+import keqing.gtqtcore.common.block.blocks.BlockNuclearCasing;
+import keqing.gtqtcore.common.block.blocks.BlockParticleAcceleratorCasing;
 
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
@@ -19,7 +19,7 @@ import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.TJMaterials.Cobalt60;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.*;
-import static keqing.gtqtcore.common.block.blocks.GTQTNuclearFusion.CasingType.NUCLEAR_FUSION_CASING;
+import static keqing.gtqtcore.common.block.blocks.BlockNuclearCasing.CasingType.NUCLEAR_FUSION_CASING;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.*;
 
@@ -204,7 +204,7 @@ public class NuclearLine {
                 .input(circuit, MarkerMaterials.Tier.EV, 16)
                 .input(ROBOT_ARM_EV, 8)
                 .input(ELECTRIC_MOTOR_EV, 8)
-                .input(plate, NanometerBariumTitanate, 64)
+                .input(screw, NanometerBariumTitanate, 32)
                 .input(gear, HSSG, 12)
                 .input(stick, HSSE, 12)
                 .input(spring, RTMAlloy, 12)
@@ -232,7 +232,7 @@ public class NuclearLine {
                 .fluidInputs(Polytetrafluoroethylene.getFluid(8000))
                 .fluidInputs(ReinforcedEpoxyResin.getFluid(4000))
                 .fluidInputs(Polybenzimidazole.getFluid(1000))
-                .outputs(GTQTMetaBlocks.NUCLEAR_FUSION.getItemVariant(NUCLEAR_FUSION_CASING, 2))
+                .outputs(GTQTMetaBlocks.blockNuclearCasing.getItemVariant(NUCLEAR_FUSION_CASING, 2))
                 .duration(1200).EUt(VA[EV]).buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
@@ -246,14 +246,14 @@ public class NuclearLine {
                 .fluidInputs(Polytetrafluoroethylene.getFluid(8000))
                 .fluidInputs(ReinforcedEpoxyResin.getFluid(4000))
                 .fluidInputs(Polybenzimidazole.getFluid(1000))
-                .outputs(GTQTMetaBlocks.NUCLEAR_FUSION.getItemVariant(GTQTNuclearFusion.CasingType.NUCLEAR_FUSION_FRAME, 2))
+                .outputs(GTQTMetaBlocks.blockNuclearCasing.getItemVariant(BlockNuclearCasing.CasingType.NUCLEAR_FUSION_FRAME, 2))
                 .duration(400).EUt(VA[EV]).buildAndRegister();
 
         ASSEMBLER_RECIPES.recipeBuilder()
                 .input(plateDense, Aluminium, 1)
                 .input(frameGt, StainlessSteel, 1)
                 .input(stick, Steel, 4)
-                .outputs(GTQTMetaBlocks.NUCLEAR_FUSION.getItemVariant(GTQTNuclearFusion.CasingType.NUCLEAR_FUSION_COOLING, 2))
+                .outputs(GTQTMetaBlocks.blockNuclearCasing.getItemVariant(BlockNuclearCasing.CasingType.NUCLEAR_FUSION_COOLING, 2))
                 .circuitMeta(10)
                 .duration(400).EUt(VA[EV]).buildAndRegister();
     }
@@ -385,7 +385,7 @@ public class NuclearLine {
                 .input(plateDense, Lead, 64)
                 .input(plateDense, Lead, 64)
                 .fluidInputs(Argon.getFluid(16000))
-                .outputs(GTQTMetaBlocks.PARTICLE_ACCELERATOR.getItemVariant(GTQTParticleAccelerator.MachineType.GRANULAR_SOURCE_A))
+                .outputs(GTQTMetaBlocks.blockParticleAcceleratorCasing.getItemVariant(BlockParticleAcceleratorCasing.MachineType.GRANULAR_SOURCE_A))
                 .circuitMeta(1)
                 .cleanroom(CleanroomType.CLEANROOM)
                 .duration(400).EUt(1920).buildAndRegister();
@@ -398,7 +398,7 @@ public class NuclearLine {
                 .input(plateDense, Lead, 64)
                 .input(plateDense, Lead, 64)
                 .fluidInputs(Argon.getFluid(16000))
-                .outputs(GTQTMetaBlocks.PARTICLE_ACCELERATOR.getItemVariant(GTQTParticleAccelerator.MachineType.GRANULAR_SOURCE_B))
+                .outputs(GTQTMetaBlocks.blockParticleAcceleratorCasing.getItemVariant(BlockParticleAcceleratorCasing.MachineType.GRANULAR_SOURCE_B))
                 .circuitMeta(1)
                 .cleanroom(CleanroomType.CLEANROOM)
                 .duration(400).EUt(1920).buildAndRegister();
@@ -411,7 +411,7 @@ public class NuclearLine {
                 .input(plateDense, Lead, 64)
                 .input(plateDense, Lead, 64)
                 .fluidInputs(Argon.getFluid(16000))
-                .outputs(GTQTMetaBlocks.PARTICLE_ACCELERATOR.getItemVariant(GTQTParticleAccelerator.MachineType.GRANULAR_SOURCE_C))
+                .outputs(GTQTMetaBlocks.blockParticleAcceleratorCasing.getItemVariant(BlockParticleAcceleratorCasing.MachineType.GRANULAR_SOURCE_C))
                 .circuitMeta(1)
                 .cleanroom(CleanroomType.CLEANROOM)
                 .duration(400).EUt(1920).buildAndRegister();

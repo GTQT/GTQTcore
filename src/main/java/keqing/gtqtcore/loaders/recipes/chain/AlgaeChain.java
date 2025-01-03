@@ -285,7 +285,7 @@ public class AlgaeChain {
                 .chancedOutput(items, 4000, 500)
                 .duration(400).EUt(VA[HV]).buildAndRegister();
 
-        GANTRY_CRANE.recipeBuilder()
+        PRESSURIZED_REACTION.recipeBuilder()
                 .fluidInputs(Water.getFluid(1000))
                 .input(items, 1)
                 .fluidOutputs(Biooil.getFluid(2000))

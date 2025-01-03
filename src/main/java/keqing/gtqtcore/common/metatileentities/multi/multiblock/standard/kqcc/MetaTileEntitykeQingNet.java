@@ -69,7 +69,7 @@ import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
-import static keqing.gtqtcore.common.block.blocks.GTQTKQCC.CasingType.KQCC_COMPUTER_CASING;
+import static keqing.gtqtcore.common.block.blocks.BlocksResearchSystem.CasingType.KQCC_COMPUTER_CASING;
 
 
 public class MetaTileEntitykeQingNet extends RecipeMapMultiblockController implements IOpticalComputationReceiver, IFastRenderMetaTileEntity {
@@ -549,7 +549,7 @@ public class MetaTileEntitykeQingNet extends RecipeMapMultiblockController imple
     }
 
     protected IBlockState getCasingState() {
-        return GTQTMetaBlocks.KQCC.getState(KQCC_COMPUTER_CASING);
+        return GTQTMetaBlocks.blocksResearchSystem.getState(KQCC_COMPUTER_CASING);
     }
 
     @Override
@@ -628,8 +628,8 @@ public class MetaTileEntitykeQingNet extends RecipeMapMultiblockController imple
                     return true;
                 }
             }
-            if (mte instanceof MetaTileEntityADVKQCC) {
-                if (((MetaTileEntityADVKQCC) mte).isStructureFormed()) {
+            if (mte instanceof MetaTileEntityAdvanceKQCC) {
+                if (((MetaTileEntityAdvanceKQCC) mte).isStructureFormed()) {
                     io[i][4] = 31;
                     return true;
                 }
@@ -653,8 +653,8 @@ public class MetaTileEntitykeQingNet extends RecipeMapMultiblockController imple
                     return true;
                 }
             }
-            if (mte instanceof MetaTileEntityADVDataBank) {
-                if (((MetaTileEntityADVDataBank) mte).isStructureFormed()) {
+            if (mte instanceof MetaTileEntityAdvanceDataBank) {
+                if (((MetaTileEntityAdvanceDataBank) mte).isStructureFormed()) {
                     io[i][4] = 35;
                     return true;
                 }

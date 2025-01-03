@@ -29,7 +29,7 @@ import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.unification.GTQTMaterials;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.common.block.blocks.GTQTMultiblockCasing;
+import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing3;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -67,7 +67,7 @@ public class MetaTileEntityRocket extends FuelMultiblockController implements IT
     }
 
     private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.MULTI_CASING.getState(GTQTMultiblockCasing.CasingType.NITINOL_MACHINE_CASING);
+        return GTQTMetaBlocks.blockMultiblockCasing3.getState(BlockMultiblockCasing3.CasingType.NITINOL_MACHINE_CASING);
     }
 
     private static IBlockState getCasingState2() {

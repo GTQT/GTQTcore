@@ -32,7 +32,7 @@ import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.gui.GTQTGuiTextures;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.common.block.blocks.GTQTADVGlass;
+import keqing.gtqtcore.common.block.blocks.BlockMultiblockGlass;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
@@ -191,11 +191,11 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
 
     private IBlockState getGlassState() {
         if (tier == GTValues.UHV)
-            return GTQTMetaBlocks.ADV_GLASS.getState(GTQTADVGlass.CasingType.TECH_FUSION_GLASS_IV);
+            return GTQTMetaBlocks.blockMultiblockGlass.getState(BlockMultiblockGlass.CasingType.TECH_FUSION_GLASS_IV);
         if (tier == UEV)
-            return GTQTMetaBlocks.ADV_GLASS.getState(GTQTADVGlass.CasingType.TECH_FUSION_GLASS_V);
+            return GTQTMetaBlocks.blockMultiblockGlass.getState(BlockMultiblockGlass.CasingType.TECH_FUSION_GLASS_V);
         if (tier == UIV)
-            return GTQTMetaBlocks.ADV_GLASS.getState(GTQTADVGlass.CasingType.TECH_FUSION_GLASS_VI);
+            return GTQTMetaBlocks.blockMultiblockGlass.getState(BlockMultiblockGlass.CasingType.TECH_FUSION_GLASS_VI);
 
         return MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.FUSION_GLASS);
     }

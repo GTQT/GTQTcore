@@ -19,15 +19,15 @@ import keqing.gtqtcore.api.metaileentity.multiblock.RecipeMapLaserMultiblockCont
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing;
+import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.NQ_MACHINE_CASING;
-import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.NQ_TURBINE_CASING;
+import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4.TurbineCasingType.NQ_MACHINE_CASING;
+import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4.TurbineCasingType.NQ_TURBINE_CASING;
 
 public class MetaTileEntityLaserCutter extends RecipeMapLaserMultiblockController {
 
@@ -37,11 +37,11 @@ public class MetaTileEntityLaserCutter extends RecipeMapLaserMultiblockControlle
     }
 
     private static IBlockState getUniqueCasingState() {
-        return GTQTMetaBlocks.TURBINE_CASING.getState(NQ_TURBINE_CASING);
+        return GTQTMetaBlocks.blockMultiblockCasing4.getState(NQ_TURBINE_CASING);
     }
 
     private static IBlockState getThirdCasingState() {
-        return GTQTMetaBlocks.TURBINE_CASING.getState(NQ_MACHINE_CASING);
+        return GTQTMetaBlocks.blockMultiblockCasing4.getState(NQ_MACHINE_CASING);
     }
 
     private static IBlockState getGlassState() {
@@ -49,11 +49,11 @@ public class MetaTileEntityLaserCutter extends RecipeMapLaserMultiblockControlle
     }
 
     private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.TURBINE_CASING.getState(GTQTTurbineCasing.TurbineCasingType.IRIDIUM_CASING);
+        return GTQTMetaBlocks.blockMultiblockCasing4.getState(BlockMultiblockCasing4.TurbineCasingType.IRIDIUM_CASING);
     }
 
     private static IBlockState getSecondCasingState() {
-        return GTQTMetaBlocks.TURBINE_CASING.getState(GTQTTurbineCasing.TurbineCasingType.ADVANCED_FILTER_CASING);
+        return GTQTMetaBlocks.blockMultiblockCasing4.getState(BlockMultiblockCasing4.TurbineCasingType.ADVANCED_FILTER_CASING);
     }
 
     @Override

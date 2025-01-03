@@ -21,7 +21,7 @@ public class BlockGravitonCasing extends VariantBlock<BlockGravitonCasing.Gravit
         this.setHardness(5.0F);
         this.setResistance(10.0F);
         this.setSoundType(SoundType.METAL);
-        this.setHarvestLevel("wrench", 5);
+        this.setHarvestLevel("wrench", 1);
         this.setDefaultState(this.getState(GravitonCasingType.REMOTE_GRAVITON_FLOW_MODULATOR));
     }
 

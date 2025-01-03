@@ -23,7 +23,7 @@ import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.BlockTransparentCasing;
-import keqing.gtqtcore.common.block.blocks.GTQTIsaCasing;
+import keqing.gtqtcore.common.block.blocks.BlockIsaCasing;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -48,23 +48,23 @@ public class MetaTileEntityFlotationFactory extends RecipeMapMultiblockControlle
     }
 
     private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.ISA_CASING.getState(GTQTIsaCasing.CasingType.FLOTATION_CASING);
+        return GTQTMetaBlocks.blockIsaCasing.getState(BlockIsaCasing.CasingType.FLOTATION_CASING);
     }
 
     private static IBlockState getGlassState() {
-        return GTQTMetaBlocks.TRANSPARENT_CASING.getState(BlockTransparentCasing.CasingType.PMMA);
+        return GTQTMetaBlocks.blockTransparentCasing.getState(BlockTransparentCasing.CasingType.PMMA);
     }
 
     private static IBlockState getPipeState() {
-        return GTQTMetaBlocks.ISA_CASING.getState(GTQTIsaCasing.CasingType.FLOTATION_CASING_PIPE);
+        return GTQTMetaBlocks.blockIsaCasing.getState(BlockIsaCasing.CasingType.FLOTATION_CASING_PIPE);
     }
 
     private static IBlockState getIntakeState() {
-        return GTQTMetaBlocks.ISA_CASING.getState(GTQTIsaCasing.CasingType.FLOTATION_INTAKE_CASING);
+        return GTQTMetaBlocks.blockIsaCasing.getState(BlockIsaCasing.CasingType.FLOTATION_INTAKE_CASING);
     }
 
     private static IBlockState getGearBoxState() {
-        return GTQTMetaBlocks.ISA_CASING.getState(GTQTIsaCasing.CasingType.FLOTATION_CASING_GEARBOX);
+        return GTQTMetaBlocks.blockIsaCasing.getState(BlockIsaCasing.CasingType.FLOTATION_CASING_GEARBOX);
     }
 
     @Override

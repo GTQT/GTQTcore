@@ -17,7 +17,7 @@ import gregtech.client.utils.TooltipHelper;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.common.block.blocks.GTQTIsaCasing;
+import keqing.gtqtcore.common.block.blocks.BlockIsaCasing;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -43,7 +43,7 @@ public class MetaTileEntityLargeProcessingFactory extends MultiMapMultiblockCont
     }
 
     private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.ISA_CASING.getState(GTQTIsaCasing.CasingType.PROCESS);
+        return GTQTMetaBlocks.blockIsaCasing.getState(BlockIsaCasing.CasingType.PROCESS);
     }
 
     @Override

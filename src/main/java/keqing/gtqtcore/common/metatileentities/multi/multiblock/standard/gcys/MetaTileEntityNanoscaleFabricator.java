@@ -76,7 +76,7 @@ public class MetaTileEntityNanoscaleFabricator extends RecipeMapMultiblockContro
                 .where('G', states(MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.LAMINATED_GLASS)))
                 .where('I', metaTileEntities(MetaTileEntities.ITEM_IMPORT_BUS[GTValues.ULV]).or(states(GCYMMetaBlocks.LARGE_MULTIBLOCK_CASING.getState(BlockLargeMultiblockCasing.CasingType.NONCONDUCTING_CASING))))
                 .where('C', states(getNonconductingState()).or(cruciblePredicate()))
-                .where('A', states(GTQTMetaBlocks.PCB_FACTORY_CASING.getState(BlockPCBFactoryCasing.PCBFactoryCasingType.ADVANCED_SUBSTRATE_CASING)))
+                .where('A', states(GTQTMetaBlocks.blockPCBFactoryCasing.getState(BlockPCBFactoryCasing.PCBFactoryCasingType.ADVANCED_SUBSTRATE_CASING)))
                 .where('#', air())
                 .where(' ', any())
                 .build();
@@ -102,7 +102,7 @@ public class MetaTileEntityNanoscaleFabricator extends RecipeMapMultiblockContro
             return false;
         }, () -> Arrays.stream(BlockCrucible.CrucibleType.values())
                 .sorted(Comparator.comparingInt(BlockCrucible.CrucibleType::getTemperature))
-                .map(type -> new BlockInfo(GTQTMetaBlocks.CRUCIBLE.getState(type), null))
+                .map(type -> new BlockInfo(GTQTMetaBlocks.blockCrucible.getState(type), null))
                 .toArray(BlockInfo[]::new));
     }
 
@@ -167,7 +167,7 @@ public class MetaTileEntityNanoscaleFabricator extends RecipeMapMultiblockContro
                 .where('X', GCYMMetaBlocks.LARGE_MULTIBLOCK_CASING.getState(BlockLargeMultiblockCasing.CasingType.ENGRAVER_CASING))
                 .where('T', GCYMMetaBlocks.LARGE_MULTIBLOCK_CASING.getState(BlockLargeMultiblockCasing.CasingType.NONCONDUCTING_CASING))
                 .where('G', MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.LAMINATED_GLASS))
-                .where('J', GTQTMetaBlocks.PCB_FACTORY_CASING.getState(BlockPCBFactoryCasing.PCBFactoryCasingType.ADVANCED_SUBSTRATE_CASING))
+                .where('J', GTQTMetaBlocks.blockPCBFactoryCasing.getState(BlockPCBFactoryCasing.PCBFactoryCasingType.ADVANCED_SUBSTRATE_CASING))
                 .where('I', MetaTileEntities.ITEM_IMPORT_BUS[GTValues.ULV], EnumFacing.SOUTH)
                 .where('N', MetaTileEntities.ITEM_IMPORT_BUS[GTValues.ULV], EnumFacing.WEST)
                 .where('P', MetaTileEntities.ITEM_IMPORT_BUS[GTValues.ULV], EnumFacing.NORTH)
@@ -185,7 +185,7 @@ public class MetaTileEntityNanoscaleFabricator extends RecipeMapMultiblockContro
             builder.where('M', GCYMMetaBlocks.LARGE_MULTIBLOCK_CASING.getState(BlockLargeMultiblockCasing.CasingType.ENGRAVER_CASING));
 
         for (BlockCrucible.CrucibleType crucibleType : BlockCrucible.CrucibleType.values()) {
-            shapeInfos.add(builder.where('C', GTQTMetaBlocks.CRUCIBLE.getState(crucibleType)).build());
+            shapeInfos.add(builder.where('C', GTQTMetaBlocks.blockCrucible.getState(crucibleType)).build());
         }
 
         return shapeInfos;

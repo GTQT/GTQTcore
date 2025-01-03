@@ -6,7 +6,7 @@ import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.client.renderer.ICubeRenderer;
 import keqing.gtqtcore.api.capability.impl.PseudoMultiSteamRecipeLogic;
-import keqing.gtqtcore.common.metatileentities.single.steam.SuSySimpleSteamMetaTileEntity;
+import keqing.gtqtcore.common.metatileentities.single.steam.SimpleSteamMetaTileEntity;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumFacing;
@@ -14,13 +14,13 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 
 
-public class PseudoMultiSteamMachineMetaTileEntity extends SuSySimpleSteamMetaTileEntity {
+public class PseudoMultiSteamMachineMetaTileEntity extends SimpleSteamMetaTileEntity {
     private IBlockState targetBlockState;
 
     public IBlockState getTargetBlockState() {
         return targetBlockState;
     }
-    public PseudoMultiSteamMachineMetaTileEntity(ResourceLocation metaTileEntityId, RecipeMap<?> recipeMap, SuSySteamProgressIndicator progressIndicator, ICubeRenderer renderer, boolean isBrickedCasing, boolean isHighPressure) {
+    public PseudoMultiSteamMachineMetaTileEntity(ResourceLocation metaTileEntityId, RecipeMap<?> recipeMap, SteamProgressIndicator progressIndicator, ICubeRenderer renderer, boolean isBrickedCasing, boolean isHighPressure) {
         super(metaTileEntityId, recipeMap, progressIndicator, renderer, isBrickedCasing, isHighPressure);
         this.workableHandler = new PseudoMultiSteamRecipeLogic(this, recipeMap, isHighPressure, steamFluidTank, 1.0);
     }

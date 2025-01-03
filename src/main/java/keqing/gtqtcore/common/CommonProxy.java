@@ -15,8 +15,8 @@ import keqing.gtqtcore.api.recipes.properties.SwarmTierProperty;
 import keqing.gtqtcore.api.unification.ore.GTQTStoneTypes;
 import keqing.gtqtcore.api.utils.GTQTLog;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.common.block.blocks.GTQTBlockWireCoil;
-import keqing.gtqtcore.common.block.blocks.GTQTCrops;
+import keqing.gtqtcore.common.block.blocks.BlockWireCoil;
+import keqing.gtqtcore.common.block.GTQTCrops;
 import keqing.gtqtcore.common.block.blocks.GTQTStoneVariantBlock;
 import keqing.gtqtcore.common.covers.GTQTCoverBehavior;
 import keqing.gtqtcore.common.items.GTQTMetaItems;
@@ -153,33 +153,37 @@ public class CommonProxy {
         registry.register(方块实例);
         在注册MetaBlock时用到
         */
-        registry.register(GTQTMetaBlocks.MULTI_CASING);
-        registry.register(GTQTMetaBlocks.ADV_BLOCK);
-        registry.register(GTQTMetaBlocks.GLASS_CASING);
-        registry.register(GTQTMetaBlocks.ADV_GLASS);
-        registry.register(GTQTMetaBlocks.WIRE_COIL);
-        registry.register(GTQTMetaBlocks.QUANTUM_CASING);
-        registry.register(GTQTMetaBlocks.GRAVITON_CASING);
-        registry.register(GTQTMetaBlocks.TURBINE_CASING);
-        registry.register(GTQTMetaBlocks.TURBINE_CASING1);
-        registry.register(GTQTMetaBlocks.QUANTUM_CONSTRAINT_CASING);
-        registry.register(GTQTMetaBlocks.COMPONENT_ASSEMBLY_LINE);
-        registry.register(GTQTMetaBlocks.ELECTRON_MICROSCOPE);
-        registry.register(GTQTMetaBlocks.PARTICLE_ACCELERATOR);
-        registry.register(GCYL_CLEANROOM_CASING);
-        registry.register(EVAPORATION_BED);
-        registry.register(GTQTMetaBlocks.ISA_CASING);
-        registry.register(GTQTMetaBlocks.ACTIVE_UNIQUE_CASING);
-        registry.register(GTQTMetaBlocks.COMPRESSED_FUSION_REACTOR);
-        registry.register(GTQTMetaBlocks.ENERGY_CELL);
-        registry.register(GTQTMetaBlocks.ROAD);
-        registry.register(GTQTMetaBlocks.ELECTROBATH);
-        registry.register(GTQTMetaBlocks.H_CASING);
-        registry.register(GTQTMetaBlocks.NUCLEAR_FUSION);
-        registry.register(GTQTMetaBlocks.KQCC);
-        registry.register(GTQTMetaBlocks.COOLING_COIL);
-        registry.register(GTQTMetaBlocks.STEPPER);
-        registry.register(GTQTMetaBlocks.PCB_FACTORY_CASING);
+        registry.register(GTQTMetaBlocks.blockActiveUniqueCasing);
+        registry.register(GTQTMetaBlocks.blockCleanroomCasing);
+        registry.register(GTQTMetaBlocks.blockComponentAssemblyLineCasing);
+        registry.register(GTQTMetaBlocks.blockCompressedFusionReactor);
+        registry.register(GTQTMetaBlocks.blockCoolingCoil);
+        registry.register(GTQTMetaBlocks.blockCrucible);
+        registry.register(GTQTMetaBlocks.blockElectrolyticBath);
+        registry.register(GTQTMetaBlocks.blockElectrolyticMicroscope);
+        registry.register(GTQTMetaBlocks.blockEnergyCell);
+        registry.register(GTQTMetaBlocks.blockEvaporationBed);
+        registry.register(GTQTMetaBlocks.blockGravitonCasing);
+        registry.register(GTQTMetaBlocks.blockIsaCasing);
+        registry.register(GTQTMetaBlocks.blockMisc);
+        registry.register(GTQTMetaBlocks.blockMultiblockCasing);
+        registry.register(GTQTMetaBlocks.blockMultiblockCasing1);
+        registry.register(GTQTMetaBlocks.blockMultiblockCasing2);
+        registry.register(GTQTMetaBlocks.blockMultiblockCasing3);
+        registry.register(GTQTMetaBlocks.blockMultiblockCasing4);
+        registry.register(GTQTMetaBlocks.blockMultiblockCasing5);
+        registry.register(GTQTMetaBlocks.blockMultiblockCasingActive);
+        registry.register(GTQTMetaBlocks.blockMultiblockGlass);
+        registry.register(GTQTMetaBlocks.blockMultiblockGlass1);
+        registry.register(GTQTMetaBlocks.blockNuclearCasing);
+        registry.register(GTQTMetaBlocks.blockPCBFactoryCasing);
+        registry.register(GTQTMetaBlocks.blockParticleAcceleratorCasing);
+        registry.register(GTQTMetaBlocks.blockQuantumCasing);
+        registry.register(GTQTMetaBlocks.blockQuantumForceTransformerCasing);
+        registry.register(GTQTMetaBlocks.blockStepperCasing);
+        registry.register(GTQTMetaBlocks.blockTransparentCasing);
+        registry.register(GTQTMetaBlocks.blockWireCoil);
+        registry.register(GTQTMetaBlocks.blocksResearchSystem);
 
         registry.register(GTQTCrops.COPPER_CROP);
         registry.register(GTQTCrops.IRON_CROP);
@@ -188,20 +192,18 @@ public class CommonProxy {
         registry.register(GTQTCrops.BRONZE_CROP);
         registry.register(GTQTCrops.CARBON_CROP);
 
-        registry.register(GTQTMetaBlocks.CRUCIBLE);
-        registry.register(GTQTMetaBlocks.MULTIBLOCK_CASING);
-        registry.register(GTQTMetaBlocks.MULTIBLOCK_CASING_ACTIVE);
-        registry.register(GTQTMetaBlocks.TRANSPARENT_CASING);
         registry.register(STNT);
 
-        for (GTQTStoneVariantBlock block : GTQTMetaBlocks.SUSY_STONE_BLOCKS.values()) registry.register(block);
+        BLOCK_PINE_LOG.setCreativeTab(GTQTCore_TAB);
+        BLOCK_PINE_SAPLING.setCreativeTab(GTQTCore_TAB);
+        BLOCK_PINE_LEAVES.setCreativeTab(GTQTCore_TAB);
+        registry.register(BLOCK_PINE_LOG);
+        registry.register(BLOCK_PINE_SAPLING);
+        registry.register(BLOCK_PINE_LEAVES);
 
-        PINE_LOG.setCreativeTab(GTQTCore_TAB);
-        PINE_SAPLING.setCreativeTab(GTQTCore_TAB);
-        PINE_LEAVES.setCreativeTab(GTQTCore_TAB);
-        registry.register(PINE_LOG);
-        registry.register(PINE_SAPLING);
-        registry.register(PINE_LEAVES);
+        for (GTQTStoneVariantBlock block : GTQTMetaBlocks.GTQT_STONE_BLOCKS.values()) registry.register(block);
+
+
 
 
     }
@@ -217,43 +219,46 @@ public class CommonProxy {
         在注册MetaBlock时用到
         */
 
-        registry.register(createItemBlock(GTQTMetaBlocks.MULTI_CASING, VariantItemBlock::new));
-        registry.register(createItemBlock(GTQTMetaBlocks.ADV_BLOCK, VariantItemBlock::new));
-        registry.register(createItemBlock(GTQTMetaBlocks.GLASS_CASING, VariantItemBlock::new));
-        registry.register(createItemBlock(GTQTMetaBlocks.ADV_GLASS, VariantItemBlock::new));
-        registry.register(createItemBlock(GTQTMetaBlocks.WIRE_COIL, VariantItemBlock::new));
-        registry.register(createItemBlock(GTQTMetaBlocks.QUANTUM_CASING, VariantItemBlock::new));
-        registry.register(createItemBlock(GTQTMetaBlocks.GRAVITON_CASING, VariantItemBlock::new));
-        registry.register(createItemBlock(GTQTMetaBlocks.TURBINE_CASING, VariantItemBlock::new));
-        registry.register(createItemBlock(GTQTMetaBlocks.TURBINE_CASING1, VariantItemBlock::new));
-        registry.register(createItemBlock(GTQTMetaBlocks.QUANTUM_CONSTRAINT_CASING, VariantItemBlock::new));
-        registry.register(createItemBlock(GTQTMetaBlocks.COMPONENT_ASSEMBLY_LINE, VariantItemBlock::new));
-        registry.register(createItemBlock(GTQTMetaBlocks.ELECTRON_MICROSCOPE, VariantItemBlock::new));
-        registry.register(createItemBlock(GCYL_CLEANROOM_CASING, VariantItemBlock::new));
-        registry.register(createItemBlock(GTQTMetaBlocks.COOLING_COIL, VariantItemBlock::new));
-        registry.register(createItemBlock(GTQTMetaBlocks.EVAPORATION_BED, VariantItemBlock::new));
-        registry.register(createItemBlock(GTQTMetaBlocks.ISA_CASING, VariantItemBlock::new));
-        registry.register(createItemBlock(GTQTMetaBlocks.ACTIVE_UNIQUE_CASING, VariantItemBlock::new));
-        registry.register(createItemBlock(GTQTMetaBlocks.COMPRESSED_FUSION_REACTOR, VariantItemBlock::new));
-        registry.register(createItemBlock(GTQTMetaBlocks.ELECTROBATH, VariantItemBlock::new));
-        registry.register(createItemBlock(GTQTMetaBlocks.H_CASING, VariantItemBlock::new));
-        registry.register(createItemBlock(GTQTMetaBlocks.PARTICLE_ACCELERATOR, VariantItemBlock::new));
-        registry.register(createItemBlock(GTQTMetaBlocks.ENERGY_CELL, VariantItemBlock::new));
-        registry.register(createItemBlock(GTQTMetaBlocks.ROAD, VariantItemBlock::new));
-        registry.register(createItemBlock(GTQTMetaBlocks.STEPPER, VariantItemBlock::new));
-        registry.register(createItemBlock(GTQTMetaBlocks.KQCC, VariantItemBlock::new));
-        registry.register(createItemBlock(GTQTMetaBlocks.NUCLEAR_FUSION, VariantItemBlock::new));
-        registry.register(createItemBlock(GTQTMetaBlocks.PCB_FACTORY_CASING, VariantItemBlock::new));
-        registry.register(createItemBlock(GTQTMetaBlocks.CRUCIBLE, VariantItemBlock::new));
-        registry.register(createItemBlock(GTQTMetaBlocks.MULTIBLOCK_CASING, VariantItemBlock::new));
-        registry.register(createItemBlock(GTQTMetaBlocks.MULTIBLOCK_CASING_ACTIVE, VariantItemBlock::new));
-        registry.register(createItemBlock(GTQTMetaBlocks.TRANSPARENT_CASING, VariantItemBlock::new));
+        registry.register(createItemBlock(GTQTMetaBlocks.blockActiveUniqueCasing, VariantItemBlock::new));
+        registry.register(createItemBlock(GTQTMetaBlocks.blockComponentAssemblyLineCasing, VariantItemBlock::new));
+        registry.register(createItemBlock(GTQTMetaBlocks.blockCompressedFusionReactor, VariantItemBlock::new));
+        registry.register(createItemBlock(GTQTMetaBlocks.blockCoolingCoil, VariantItemBlock::new));
+        registry.register(createItemBlock(GTQTMetaBlocks.blockCrucible, VariantItemBlock::new));
+        registry.register(createItemBlock(GTQTMetaBlocks.blockElectrolyticBath, VariantItemBlock::new));
+        registry.register(createItemBlock(GTQTMetaBlocks.blockElectrolyticMicroscope, VariantItemBlock::new));
+        registry.register(createItemBlock(GTQTMetaBlocks.blockEnergyCell, VariantItemBlock::new));
+        registry.register(createItemBlock(GTQTMetaBlocks.blockEvaporationBed, VariantItemBlock::new));
+        registry.register(createItemBlock(GTQTMetaBlocks.blockGravitonCasing, VariantItemBlock::new));
+        registry.register(createItemBlock(GTQTMetaBlocks.blockIsaCasing, VariantItemBlock::new));
+        registry.register(createItemBlock(GTQTMetaBlocks.blockMisc, VariantItemBlock::new));
+        registry.register(createItemBlock(GTQTMetaBlocks.blockMultiblockCasing, VariantItemBlock::new));
+        registry.register(createItemBlock(GTQTMetaBlocks.blockMultiblockCasing1, VariantItemBlock::new));
+        registry.register(createItemBlock(GTQTMetaBlocks.blockMultiblockCasing2, VariantItemBlock::new));
+        registry.register(createItemBlock(GTQTMetaBlocks.blockMultiblockCasing3, VariantItemBlock::new));
+        registry.register(createItemBlock(GTQTMetaBlocks.blockMultiblockCasing4, VariantItemBlock::new));
+        registry.register(createItemBlock(GTQTMetaBlocks.blockMultiblockCasing5, VariantItemBlock::new));
+        registry.register(createItemBlock(GTQTMetaBlocks.blockMultiblockCasingActive, VariantItemBlock::new));
+        registry.register(createItemBlock(GTQTMetaBlocks.blockMultiblockGlass, VariantItemBlock::new));
+        registry.register(createItemBlock(GTQTMetaBlocks.blockMultiblockGlass1, VariantItemBlock::new));
+        registry.register(createItemBlock(GTQTMetaBlocks.blockNuclearCasing, VariantItemBlock::new));
+        registry.register(createItemBlock(GTQTMetaBlocks.blockPCBFactoryCasing, VariantItemBlock::new));
+        registry.register(createItemBlock(GTQTMetaBlocks.blockParticleAcceleratorCasing, VariantItemBlock::new));
+        registry.register(createItemBlock(GTQTMetaBlocks.blockQuantumCasing, VariantItemBlock::new));
+        registry.register(createItemBlock(GTQTMetaBlocks.blockQuantumForceTransformerCasing, VariantItemBlock::new));
+        registry.register(createItemBlock(GTQTMetaBlocks.blockStepperCasing, VariantItemBlock::new));
+        registry.register(createItemBlock(GTQTMetaBlocks.blockTransparentCasing, VariantItemBlock::new));
+        registry.register(createItemBlock(GTQTMetaBlocks.blockWireCoil, VariantItemBlock::new));
+        registry.register(createItemBlock(GTQTMetaBlocks.blocksResearchSystem, VariantItemBlock::new));
+        registry.register(createItemBlock(blockCleanroomCasing, VariantItemBlock::new));
+
         registry.register(createItemBlock(STNT, ItemBlock::new));
-        for (GTQTStoneVariantBlock block : GTQTMetaBlocks.SUSY_STONE_BLOCKS.values())
+
+        registry.register(createItemBlock(BLOCK_PINE_LOG, ItemBlock::new));
+        registry.register(createItemBlock(BLOCK_PINE_SAPLING, ItemBlock::new));
+        registry.register(createItemBlock(BLOCK_PINE_LEAVES, ItemBlock::new));
+
+        for (GTQTStoneVariantBlock block : GTQTMetaBlocks.GTQT_STONE_BLOCKS.values())
             registry.register(createItemBlock(block, VariantItemBlock::new));
-        registry.register(createItemBlock(PINE_LOG, ItemBlock::new));
-        registry.register(createItemBlock(PINE_SAPLING, ItemBlock::new));
-        registry.register(createItemBlock(PINE_LEAVES, ItemBlock::new));
     }
 
     private static <T extends Block> ItemBlock createItemBlock(T block, Function<T, ItemBlock> producer) {
@@ -394,8 +399,8 @@ public class CommonProxy {
         }
 
          */
-        for (GTQTBlockWireCoil.CoilType type : GTQTBlockWireCoil.CoilType.values()) {
-            HEATING_COILS.put(GTQTMetaBlocks.WIRE_COIL.getState(type), type);
+        for (BlockWireCoil.CoilType type : BlockWireCoil.CoilType.values()) {
+            HEATING_COILS.put(GTQTMetaBlocks.blockWireCoil.getState(type), type);
         }
 
         HEATING_COILS.put(DIRT.getDefaultState(), new CTHeatingCoilBlockStats("dirt", 300, 1, 0, 1, Materials.Iron));

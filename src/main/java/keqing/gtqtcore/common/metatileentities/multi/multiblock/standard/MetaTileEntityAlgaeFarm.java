@@ -25,7 +25,7 @@ import keqing.gtqtcore.api.capability.impl.AlgaeFarmLogic;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.common.block.blocks.GTQTIsaCasing;
+import keqing.gtqtcore.common.block.blocks.BlockIsaCasing;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -116,7 +116,7 @@ public class MetaTileEntityAlgaeFarm extends MultiblockWithDisplayBase implement
     }
 
     protected IBlockState getCasingState() {
-        return GTQTMetaBlocks.ISA_CASING.getState(GTQTIsaCasing.CasingType.ASEPTIC_FARM_CASING);
+        return GTQTMetaBlocks.blockIsaCasing.getState(BlockIsaCasing.CasingType.ASEPTIC_FARM_CASING);
     }
 
     @Override

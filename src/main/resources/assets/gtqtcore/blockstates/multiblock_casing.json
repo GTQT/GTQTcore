@@ -8,40 +8,52 @@
   },
   "variants": {
     "variant": {
-      "nitinol_machine_casing": {
+      "machine_casing_fusion": {
         "model": "minecraft:cube_all",
         "textures": {
-          "all": "gregtech:blocks/multiblock/casings/nitinol_machine_casing"
+          "all": "gregtech:blocks/multiblock/casings/machine_casing_fusion"
         }
       },
-      "hc_alloy_casing": {
+      "machine_casing_fusion_2": {
         "model": "minecraft:cube_all",
         "textures": {
-          "all": "gregtech:blocks/multiblock/casings/hc_alloy_casing"
+          "all": "gregtech:blocks/multiblock/casings/machine_casing_fusion_2"
         }
       },
-      "supercritical_fuel_trans_casing": {
+      "machine_casing_fusion_3": {
         "model": "minecraft:cube_all",
         "textures": {
-          "all": "gregtech:blocks/multiblock/casings/supercritical_fuel_trans_casing"
+          "all": "gregtech:blocks/multiblock/casings/machine_casing_fusion_3"
         }
       },
-      "supercritical_fuel_trans_score": {
+      "yellow_casing": {
         "model": "minecraft:cube_all",
         "textures": {
-          "all": "gregtech:blocks/multiblock/casings/supercritical_fuel_trans_score"
+          "all": "gregtech:blocks/multiblock/casings/yellow_casing"
         }
       },
-      "naquadah_alloy_casing": {
+      "dark_casing": {
         "model": "minecraft:cube_all",
         "textures": {
-          "all": "gregtech:blocks/multiblock/casings/naquadah_alloy_casing"
+          "all": "gregtech:blocks/multiblock/casings/dark_casing"
         }
       },
-      "naquadria_casing": {
+      "red_casing": {
         "model": "minecraft:cube_all",
         "textures": {
-          "all": "gregtech:blocks/multiblock/casings/naquadria_casing"
+          "all": "gregtech:blocks/multiblock/casings/red_casing"
+        }
+      },
+      "blue_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casings/blue_casing"
+        }
+      },
+      "green_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casings/green_casing"
         }
       }
     }

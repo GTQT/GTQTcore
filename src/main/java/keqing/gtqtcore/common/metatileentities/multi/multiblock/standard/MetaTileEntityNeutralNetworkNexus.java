@@ -40,9 +40,9 @@ import java.util.List;
 import static gregtech.api.GTValues.ZPM;
 import static keqing.gtqtcore.api.pattern.GTQTTraceabilityPredicate.optionalAbilities;
 import static keqing.gtqtcore.api.pattern.GTQTTraceabilityPredicate.optionalStates;
-import static keqing.gtqtcore.common.block.blocks.GTQTMultiblockCasing.CasingType.NAQUADAH_ALLOY_CASING;
-import static keqing.gtqtcore.common.block.blocks.GTQTMultiblockCasing.CasingType.NAQUADRIA_CASING;
-import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.HYPER_CASING;
+import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing3.CasingType.NAQUADAH_ALLOY_CASING;
+import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing3.CasingType.NAQUADRIA_CASING;
+import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4.TurbineCasingType.HYPER_CASING;
 
 public class MetaTileEntityNeutralNetworkNexus extends MultiMapMultiblockController {
 
@@ -55,15 +55,15 @@ public class MetaTileEntityNeutralNetworkNexus extends MultiMapMultiblockControl
     }
 
     private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.MULTI_CASING.getState(NAQUADAH_ALLOY_CASING);
+        return GTQTMetaBlocks.blockMultiblockCasing3.getState(NAQUADAH_ALLOY_CASING);
     }
 
     private static IBlockState getSecondCasingState() {
-        return GTQTMetaBlocks.MULTI_CASING.getState(NAQUADRIA_CASING);
+        return GTQTMetaBlocks.blockMultiblockCasing3.getState(NAQUADRIA_CASING);
     }
 
     private static IBlockState getThirdCasingState() {
-        return GTQTMetaBlocks.TURBINE_CASING.getState(HYPER_CASING);
+        return GTQTMetaBlocks.blockMultiblockCasing4.getState(HYPER_CASING);
     }
 
     private static IBlockState getFourthCasingState() {

@@ -47,7 +47,7 @@ import java.util.List;
 import static gregtech.api.GTValues.VN;
 import static keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility.LASER_INPUT;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.MaragingSteel250;
-import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.NQ_TURBINE_CASING;
+import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4.TurbineCasingType.NQ_TURBINE_CASING;
 
 public class MetaTileEntitySBPRI extends MetaTileEntityBaseWithControl {
     long Laser;
@@ -68,7 +68,7 @@ public class MetaTileEntitySBPRI extends MetaTileEntityBaseWithControl {
     }
 
     private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.TURBINE_CASING.getState(NQ_TURBINE_CASING);
+        return GTQTMetaBlocks.blockMultiblockCasing4.getState(NQ_TURBINE_CASING);
     }
 
     public void setMachinePos(BlockPos pos, int dim) {

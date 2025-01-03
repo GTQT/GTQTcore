@@ -63,7 +63,7 @@ public class MetaTileEntityFermentationTank extends RecipeMapMultiblockControlle
     }
 
     private static IBlockState getGlassState() {
-        return GTQTMetaBlocks.TRANSPARENT_CASING.getState(PMMA);
+        return GTQTMetaBlocks.blockTransparentCasing.getState(PMMA);
     }
 
     @Override

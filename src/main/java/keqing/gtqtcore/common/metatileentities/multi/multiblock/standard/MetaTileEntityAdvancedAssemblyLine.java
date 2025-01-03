@@ -56,8 +56,8 @@ import static gregtech.api.util.GTUtility.getTierByVoltage;
 import static gregtech.api.util.GTUtility.gregtechId;
 import static keqing.gtqtcore.common.block.blocks.BlockActiveUniqueCasing.ActiveCasingType.ADVANCED_ASSEMBLY_CONTROL_CASING;
 import static keqing.gtqtcore.common.block.blocks.BlockActiveUniqueCasing.ActiveCasingType.ADVANCED_ASSEMBLY_LINE_CASING;
-import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.ADVANCED_FILTER_CASING;
-import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.IRIDIUM_CASING;
+import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4.TurbineCasingType.ADVANCED_FILTER_CASING;
+import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4.TurbineCasingType.IRIDIUM_CASING;
 
 public class MetaTileEntityAdvancedAssemblyLine extends RecipeMapMultiblockController {
 
@@ -73,19 +73,19 @@ public class MetaTileEntityAdvancedAssemblyLine extends RecipeMapMultiblockContr
     }
 
     private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.TURBINE_CASING.getState(IRIDIUM_CASING);
+        return GTQTMetaBlocks.blockMultiblockCasing4.getState(IRIDIUM_CASING);
     }
 
     private static IBlockState getSecondCasingState() {
-        return GTQTMetaBlocks.ACTIVE_UNIQUE_CASING.getState(ADVANCED_ASSEMBLY_LINE_CASING);
+        return GTQTMetaBlocks.blockActiveUniqueCasing.getState(ADVANCED_ASSEMBLY_LINE_CASING);
     }
 
     private static IBlockState getUniqueCasingState() {
-        return GTQTMetaBlocks.ACTIVE_UNIQUE_CASING.getState(ADVANCED_ASSEMBLY_CONTROL_CASING);
+        return GTQTMetaBlocks.blockActiveUniqueCasing.getState(ADVANCED_ASSEMBLY_CONTROL_CASING);
     }
 
     private static IBlockState getGrateState() {
-        return GTQTMetaBlocks.TURBINE_CASING.getState(ADVANCED_FILTER_CASING);
+        return GTQTMetaBlocks.blockMultiblockCasing4.getState(ADVANCED_FILTER_CASING);
     }
 
     private static IBlockState getGlassState() {

@@ -1,11 +1,8 @@
 package keqing.gtqtcore.loaders.recipes.handlers;
 
-import gregtech.api.recipes.ModHandler;
 import gregtech.api.unification.material.MarkerMaterials;
-import gregtech.api.unification.stack.UnificationEntry;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 
 import static gregicality.multiblocks.api.unification.GCYMMaterials.TitaniumTungstenCarbide;
 import static gregtech.api.GTValues.*;
@@ -17,7 +14,7 @@ import static gregtech.common.metatileentities.MetaTileEntities.*;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.PRECISE_ASSEMBLER_RECIPES;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
-import static keqing.gtqtcore.common.block.blocks.GTQTParticleAccelerator.MachineType.*;
+import static keqing.gtqtcore.common.block.blocks.BlockParticleAcceleratorCasing.MachineType.*;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.PARTICLE_ACCELERATOR;
 
@@ -100,7 +97,7 @@ public class ParticleAccelerator {
         //控制器
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(CIRCUIT_GOOD_I,64)
-                .inputs(GTQTMetaBlocks.PARTICLE_ACCELERATOR.getItemVariant(ACCELERATOR_CASING,32))
+                .inputs(GTQTMetaBlocks.blockParticleAcceleratorCasing.getItemVariant(ACCELERATOR_CASING,32))
                 .input(EMITTER_IV, 64)
                 .input(SENSOR_IV, 64)
                 .input(frameGt, Naquadah, 64)
@@ -121,7 +118,7 @@ public class ParticleAccelerator {
                 .fluidInputs(TitaniumTungstenCarbide.getFluid(L * 64))
                 .fluidInputs(UltraGlue.getFluid(L * 64))
                 .scannerResearch(b -> b
-                        .researchStack(GTQTMetaBlocks.PARTICLE_ACCELERATOR.getItemVariant(ACCELERATOR_CASING))
+                        .researchStack(GTQTMetaBlocks.blockParticleAcceleratorCasing.getItemVariant(ACCELERATOR_CASING))
                         .EUt(VA[IV]))
                 .duration(2000).EUt(VA[IV]).buildAndRegister();
 
@@ -135,7 +132,7 @@ public class ParticleAccelerator {
                 .input(screw,NanometerBariumTitanate,12)
                 .input(foil,Ruridit,32)
                 .input(wireFine, Platinum, 64)
-                .outputs(GTQTMetaBlocks.PARTICLE_ACCELERATOR.getItemVariant(ACCELERATOR_CASING))
+                .outputs(GTQTMetaBlocks.blockParticleAcceleratorCasing.getItemVariant(ACCELERATOR_CASING))
                 .fluidInputs(Polybenzimidazole.getFluid(L*2))
                 .fluidInputs(Zylon.getFluid(L * 4))
                 .fluidInputs(NiobiumTitanium.getFluid(L * 4))
@@ -152,7 +149,7 @@ public class ParticleAccelerator {
                 .input(gearSmall,NanometerBariumTitanate,2)
                 .input(wireFine,Platinum,32)
                 .input(wireGtSingle, IVSuperconductor, 8)
-                .outputs(GTQTMetaBlocks.PARTICLE_ACCELERATOR.getItemVariant(ACCELERATOR_FIRM_MKI))
+                .outputs(GTQTMetaBlocks.blockParticleAcceleratorCasing.getItemVariant(ACCELERATOR_FIRM_MKI))
                 .fluidInputs(Polybenzimidazole.getFluid(L))
                 .fluidInputs(Zylon.getFluid(L * 2))
                 .fluidInputs(NiobiumTitanium.getFluid(L * 2))
@@ -168,7 +165,7 @@ public class ParticleAccelerator {
                 .input(gearSmall,NanometerBariumTitanate,2)
                 .input(wireFine,Platinum,32)
                 .input(wireGtSingle, IVSuperconductor, 8)
-                .outputs(GTQTMetaBlocks.PARTICLE_ACCELERATOR.getItemVariant(ACCELERATOR_ELECTROMAGNET_MKI))
+                .outputs(GTQTMetaBlocks.blockParticleAcceleratorCasing.getItemVariant(ACCELERATOR_ELECTROMAGNET_MKI))
                 .fluidInputs(Polybenzimidazole.getFluid(L))
                 .fluidInputs(Zylon.getFluid(L * 2))
                 .fluidInputs(NiobiumTitanium.getFluid(L * 2))
@@ -184,7 +181,7 @@ public class ParticleAccelerator {
                 .input(gearSmall,NanometerBariumTitanate,2)
                 .input(wireFine,Platinum,32)
                 .input(wireGtSingle, IVSuperconductor, 8)
-                .outputs(GTQTMetaBlocks.PARTICLE_ACCELERATOR.getItemVariant(ACCELERATOR_ELECTROMAGNETV_MKI))
+                .outputs(GTQTMetaBlocks.blockParticleAcceleratorCasing.getItemVariant(ACCELERATOR_ELECTROMAGNETV_MKI))
                 .fluidInputs(Polybenzimidazole.getFluid(L))
                 .fluidInputs(Zylon.getFluid(L * 2))
                 .fluidInputs(NiobiumTitanium.getFluid(L * 2))
@@ -201,9 +198,9 @@ public class ParticleAccelerator {
                 .input(gearSmall,PPB,2)
                 .input(wireFine,Platinum,32)
                 .input(wireGtSingle, LuVSuperconductor, 8)
-                .outputs(GTQTMetaBlocks.PARTICLE_ACCELERATOR.getItemVariant(ACCELERATOR_FIRM_MKII))
+                .outputs(GTQTMetaBlocks.blockParticleAcceleratorCasing.getItemVariant(ACCELERATOR_FIRM_MKII))
                 .stationResearch(b -> b
-                        .researchStack(GTQTMetaBlocks.PARTICLE_ACCELERATOR.getItemVariant(ACCELERATOR_FIRM_MKI))
+                        .researchStack(GTQTMetaBlocks.blockParticleAcceleratorCasing.getItemVariant(ACCELERATOR_FIRM_MKI))
                         .CWUt(4000,1000000)
                         .EUt(VA[LuV]))
                 .fluidInputs(Polybenzimidazole.getFluid(L))
@@ -221,9 +218,9 @@ public class ParticleAccelerator {
                 .input(gearSmall,PPB,2)
                 .input(wireFine,Platinum,32)
                 .input(wireGtSingle, LuVSuperconductor, 8)
-                .outputs(GTQTMetaBlocks.PARTICLE_ACCELERATOR.getItemVariant(ACCELERATOR_ELECTROMAGNET_MKII))
+                .outputs(GTQTMetaBlocks.blockParticleAcceleratorCasing.getItemVariant(ACCELERATOR_ELECTROMAGNET_MKII))
                 .stationResearch(b -> b
-                        .researchStack(GTQTMetaBlocks.PARTICLE_ACCELERATOR.getItemVariant(ACCELERATOR_ELECTROMAGNET_MKI))
+                        .researchStack(GTQTMetaBlocks.blockParticleAcceleratorCasing.getItemVariant(ACCELERATOR_ELECTROMAGNET_MKI))
                         .CWUt(4000,1000000)
                         .EUt(VA[LuV]))
                 .fluidInputs(Polybenzimidazole.getFluid(L))
@@ -241,9 +238,9 @@ public class ParticleAccelerator {
                 .input(gearSmall,PPB,2)
                 .input(wireFine,Platinum,32)
                 .input(wireGtSingle, LuVSuperconductor, 8)
-                .outputs(GTQTMetaBlocks.PARTICLE_ACCELERATOR.getItemVariant(ACCELERATOR_ELECTROMAGNETV_MKII))
+                .outputs(GTQTMetaBlocks.blockParticleAcceleratorCasing.getItemVariant(ACCELERATOR_ELECTROMAGNETV_MKII))
                 .stationResearch(b -> b
-                        .researchStack(GTQTMetaBlocks.PARTICLE_ACCELERATOR.getItemVariant(ACCELERATOR_ELECTROMAGNETV_MKI))
+                        .researchStack(GTQTMetaBlocks.blockParticleAcceleratorCasing.getItemVariant(ACCELERATOR_ELECTROMAGNETV_MKI))
                         .CWUt(4000,1000000)
                         .EUt(VA[LuV]))
                 .fluidInputs(Polybenzimidazole.getFluid(L))
@@ -262,9 +259,9 @@ public class ParticleAccelerator {
                 .input(gearSmall,NiobiumTitanium,2)
                 .input(wireFine,Platinum,32)
                 .input(wireGtSingle, ZPMSuperconductor, 8)
-                .outputs(GTQTMetaBlocks.PARTICLE_ACCELERATOR.getItemVariant(ACCELERATOR_FIRM_MKIII))
+                .outputs(GTQTMetaBlocks.blockParticleAcceleratorCasing.getItemVariant(ACCELERATOR_FIRM_MKIII))
                 .stationResearch(b -> b
-                        .researchStack(GTQTMetaBlocks.PARTICLE_ACCELERATOR.getItemVariant(ACCELERATOR_FIRM_MKII))
+                        .researchStack(GTQTMetaBlocks.blockParticleAcceleratorCasing.getItemVariant(ACCELERATOR_FIRM_MKII))
                         .CWUt(4000,1000000)
                         .EUt(VA[ZPM]))
                 .fluidInputs(Polybenzimidazole.getFluid(L))
@@ -281,9 +278,9 @@ public class ParticleAccelerator {
                 .input(gearSmall,NiobiumTitanium,2)
                 .input(wireFine,Platinum,32)
                 .input(wireGtSingle, ZPMSuperconductor, 8)
-                .outputs(GTQTMetaBlocks.PARTICLE_ACCELERATOR.getItemVariant(ACCELERATOR_ELECTROMAGNET_MKIII))
+                .outputs(GTQTMetaBlocks.blockParticleAcceleratorCasing.getItemVariant(ACCELERATOR_ELECTROMAGNET_MKIII))
                 .stationResearch(b -> b
-                        .researchStack(GTQTMetaBlocks.PARTICLE_ACCELERATOR.getItemVariant(ACCELERATOR_ELECTROMAGNET_MKII))
+                        .researchStack(GTQTMetaBlocks.blockParticleAcceleratorCasing.getItemVariant(ACCELERATOR_ELECTROMAGNET_MKII))
                         .CWUt(4000,1000000)
                         .EUt(VA[ZPM]))
                 .fluidInputs(Polybenzimidazole.getFluid(L))
@@ -300,9 +297,9 @@ public class ParticleAccelerator {
                 .input(gearSmall,NiobiumTitanium,2)
                 .input(wireFine,Platinum,32)
                 .input(wireGtSingle, ZPMSuperconductor, 8)
-                .outputs(GTQTMetaBlocks.PARTICLE_ACCELERATOR.getItemVariant(ACCELERATOR_ELECTROMAGNETV_MKIII))
+                .outputs(GTQTMetaBlocks.blockParticleAcceleratorCasing.getItemVariant(ACCELERATOR_ELECTROMAGNETV_MKIII))
                 .stationResearch(b -> b
-                        .researchStack(GTQTMetaBlocks.PARTICLE_ACCELERATOR.getItemVariant(ACCELERATOR_ELECTROMAGNETV_MKII))
+                        .researchStack(GTQTMetaBlocks.blockParticleAcceleratorCasing.getItemVariant(ACCELERATOR_ELECTROMAGNETV_MKII))
                         .CWUt(4000,1000000)
                         .EUt(VA[ZPM]))
                 .fluidInputs(Polybenzimidazole.getFluid(L))

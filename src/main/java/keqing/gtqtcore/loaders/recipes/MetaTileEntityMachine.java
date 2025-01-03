@@ -29,7 +29,6 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 import java.util.Collection;
-import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -49,8 +48,8 @@ import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.TJMaterials.Polyetheretherketone;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.plate_curved;
 import static keqing.gtqtcore.api.utils.GTQTUniverUtil.SECOND;
-import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing.TurbineCasingType.FISHING_CASING;
-import static keqing.gtqtcore.common.block.blocks.GTQTTurbineCasing1.TurbineCasingType.*;
+import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4.TurbineCasingType.FISHING_CASING;
+import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing5.TurbineCasingType.*;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.ELECTRODE_GRAPHITE;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.*;
 
@@ -153,7 +152,7 @@ public class MetaTileEntityMachine {
                 .input(frameGt, Steel, 2)
                 .input(stickLong, Steel, 2)
                 .input(block, Lapis)
-                .outputs(GTQTMetaBlocks.NUCLEAR_FUSION.getItemVariant(GTQTNuclearFusion.CasingType.ENERGY_CELL))
+                .outputs(GTQTMetaBlocks.blockNuclearCasing.getItemVariant(BlockNuclearCasing.CasingType.ENERGY_CELL))
                 .EUt(VA[LV])
                 .duration(100)
                 .buildAndRegister();
@@ -174,7 +173,7 @@ public class MetaTileEntityMachine {
                 .input(circuit, MarkerMaterials.Tier.ULV, 4)
                 .input(wireGtSingle, RedAlloy, 16)
                 .fluidInputs(Helium.getFluid(4000))
-                .outputs(GTQTMetaBlocks.ENERGY_CELL.getItemVariant(BlockEnergyCell.CellTier.ULV))
+                .outputs(GTQTMetaBlocks.blockEnergyCell.getItemVariant(BlockEnergyCell.CellTier.ULV))
                 .EUt(VA[ULV])
                 .duration(6 * SECOND)
                 .buildAndRegister();
@@ -187,7 +186,7 @@ public class MetaTileEntityMachine {
                 .input(circuit, MarkerMaterials.Tier.LV, 4)
                 .input(wireGtSingle, ManganesePhosphide, 16)
                 .fluidInputs(Helium.getFluid(4000))
-                .outputs(GTQTMetaBlocks.ENERGY_CELL.getItemVariant(BlockEnergyCell.CellTier.LV))
+                .outputs(GTQTMetaBlocks.blockEnergyCell.getItemVariant(BlockEnergyCell.CellTier.LV))
                 .EUt(VA[LV])
                 .duration(6 * SECOND)
                 .buildAndRegister();
@@ -201,7 +200,7 @@ public class MetaTileEntityMachine {
                 .input(circuit, MarkerMaterials.Tier.MV, 4)
                 .input(wireGtSingle, MagnesiumDiboride, 16)
                 .fluidInputs(Helium.getFluid(4000))
-                .outputs(GTQTMetaBlocks.ENERGY_CELL.getItemVariant(BlockEnergyCell.CellTier.MV))
+                .outputs(GTQTMetaBlocks.blockEnergyCell.getItemVariant(BlockEnergyCell.CellTier.MV))
                 .EUt(VA[MV])
                 .duration(6 * SECOND)
                 .buildAndRegister();
@@ -214,7 +213,7 @@ public class MetaTileEntityMachine {
                 .input(circuit, MarkerMaterials.Tier.HV, 4)
                 .input(wireGtSingle, MercuryBariumCalciumCuprate, 16)
                 .fluidInputs(Helium.getFluid(4000))
-                .outputs(GTQTMetaBlocks.ENERGY_CELL.getItemVariant(BlockEnergyCell.CellTier.HV))
+                .outputs(GTQTMetaBlocks.blockEnergyCell.getItemVariant(BlockEnergyCell.CellTier.HV))
                 .EUt(VA[HV])
                 .duration(6 * SECOND)
                 .buildAndRegister();
@@ -228,7 +227,7 @@ public class MetaTileEntityMachine {
                 .input(circuit, MarkerMaterials.Tier.EV, 4)
                 .input(wireGtSingle, UraniumTriplatinum, 16)
                 .fluidInputs(Neon.getFluid(4000))
-                .outputs(GTQTMetaBlocks.ENERGY_CELL.getItemVariant(BlockEnergyCell.CellTier.EV))
+                .outputs(GTQTMetaBlocks.blockEnergyCell.getItemVariant(BlockEnergyCell.CellTier.EV))
                 .EUt(VA[EV])
                 .duration((int) (3.2 * SECOND))
                 .buildAndRegister();
@@ -340,25 +339,25 @@ public class MetaTileEntityMachine {
 
     private static void turbine() {
         ModHandler.addShapedRecipe(true, "casing_aluminium_pipe",
-                GTQTMetaBlocks.TURBINE_CASING1.getItemVariant(AL_TURBINE_CASING, ConfigHolder.recipes.casingsPerCraft),
+                GTQTMetaBlocks.blockMultiblockCasing5.getItemVariant(AL_TURBINE_CASING, ConfigHolder.recipes.casingsPerCraft),
                 "PIP", "IFI", "PIP", 'P', new UnificationEntry(OrePrefix.plate, Aluminium), 'F',
                 new UnificationEntry(OrePrefix.frameGt, Materials.Aluminium), 'I',
                 new UnificationEntry(OrePrefix.pipeNormalFluid, Materials.Aluminium));
 
         ModHandler.addShapedRecipe(true, "casing_stainless_pipe",
-                GTQTMetaBlocks.TURBINE_CASING1.getItemVariant(SA_TURBINE_CASING, ConfigHolder.recipes.casingsPerCraft), "PIP", "IFI",
+                GTQTMetaBlocks.blockMultiblockCasing5.getItemVariant(SA_TURBINE_CASING, ConfigHolder.recipes.casingsPerCraft), "PIP", "IFI",
                 "PIP", 'P', new UnificationEntry(OrePrefix.plate, StainlessSteel), 'F',
                 new UnificationEntry(OrePrefix.frameGt, Materials.StainlessSteel), 'I',
                 new UnificationEntry(OrePrefix.pipeNormalFluid, Materials.StainlessSteel));
 
         ModHandler.addShapedRecipe(true, "casing_pd_pipe",
-                GTQTMetaBlocks.TURBINE_CASING.getItemVariant(GTQTTurbineCasing.TurbineCasingType.PD_MACHINE_CASING, ConfigHolder.recipes.casingsPerCraft), "PIP", "IFI",
+                GTQTMetaBlocks.blockMultiblockCasing4.getItemVariant(BlockMultiblockCasing4.TurbineCasingType.PD_MACHINE_CASING, ConfigHolder.recipes.casingsPerCraft), "PIP", "IFI",
                 "PIP", 'P', new UnificationEntry(OrePrefix.plate, RhodiumPlatedPalladium), 'F',
                 new UnificationEntry(OrePrefix.frameGt, Materials.RhodiumPlatedPalladium), 'I',
                 new UnificationEntry(OrePrefix.pipeNormalFluid, NiobiumTitanium));
 
         ModHandler.addShapedRecipe(true, "brick",
-                GTQTMetaBlocks.TURBINE_CASING.getItemVariant(GTQTTurbineCasing.TurbineCasingType.BRICK),
+                GTQTMetaBlocks.blockMultiblockCasing4.getItemVariant(BlockMultiblockCasing4.TurbineCasingType.BRICK),
                 "PIP", "IFI", "PIP",
                 'P', new UnificationEntry(OrePrefix.plate, Wood),
                 'F', new UnificationEntry(OrePrefix.frameGt, Materials.Wood),
@@ -366,25 +365,25 @@ public class MetaTileEntityMachine {
 
 
         ModHandler.addShapedRecipe(true, "casing_nq_pipe",
-                GTQTMetaBlocks.TURBINE_CASING.getItemVariant(GTQTTurbineCasing.TurbineCasingType.NQ_MACHINE_CASING, ConfigHolder.recipes.casingsPerCraft), "PIP", "IFI",
+                GTQTMetaBlocks.blockMultiblockCasing4.getItemVariant(BlockMultiblockCasing4.TurbineCasingType.NQ_MACHINE_CASING, ConfigHolder.recipes.casingsPerCraft), "PIP", "IFI",
                 "PIP", 'P', new UnificationEntry(OrePrefix.plate, NaquadahAlloy), 'F',
                 new UnificationEntry(OrePrefix.frameGt, Materials.NaquadahAlloy), 'I',
                 new UnificationEntry(OrePrefix.pipeNormalFluid, Naquadah));
 
         ModHandler.addShapedRecipe(true, "casing_st_pipe",
-                GTQTMetaBlocks.TURBINE_CASING1.getItemVariant(ST_MACHINE_CASING, ConfigHolder.recipes.casingsPerCraft), "PIP", "IFI",
+                GTQTMetaBlocks.blockMultiblockCasing5.getItemVariant(ST_MACHINE_CASING, ConfigHolder.recipes.casingsPerCraft), "PIP", "IFI",
                 "PIP", 'P', new UnificationEntry(OrePrefix.plate, Orichalcum), 'F',
                 new UnificationEntry(OrePrefix.frameGt, Orichalcum), 'I',
                 new UnificationEntry(OrePrefix.pipeNormalFluid, Orichalcum));
 
         ModHandler.addShapedRecipe(true, "casing_ad_pipe",
-                GTQTMetaBlocks.TURBINE_CASING1.getItemVariant(AD_MACHINE_CASING, ConfigHolder.recipes.casingsPerCraft), "PIP", "IFI",
+                GTQTMetaBlocks.blockMultiblockCasing5.getItemVariant(AD_MACHINE_CASING, ConfigHolder.recipes.casingsPerCraft), "PIP", "IFI",
                 "PIP", 'P', new UnificationEntry(OrePrefix.plate, Adamantium), 'F',
                 new UnificationEntry(OrePrefix.frameGt, Adamantium), 'I',
                 new UnificationEntry(OrePrefix.pipeNormalFluid, Adamantium));
 
         ModHandler.addShapedRecipe(true, "fishing_casing",
-                GTQTMetaBlocks.TURBINE_CASING.getItemVariant(FISHING_CASING, ConfigHolder.recipes.casingsPerCraft), "PIP", "IFI",
+                GTQTMetaBlocks.blockMultiblockCasing4.getItemVariant(FISHING_CASING, ConfigHolder.recipes.casingsPerCraft), "PIP", "IFI",
                 "PIP", 'P', new UnificationEntry(OrePrefix.plate, Inconel792), 'F',
                 new UnificationEntry(OrePrefix.frameGt, WatertightSteel), 'I',
                 new UnificationEntry(OrePrefix.pipeNormalFluid, StainlessSteel));
@@ -395,7 +394,7 @@ public class MetaTileEntityMachine {
                 .input(plate, GalvanizedSteel, 6)
                 .input(frameGt, GalvanizedSteel, 1)
                 .circuitMeta(6)
-                .outputs(GTQTMetaBlocks.TURBINE_CASING1.getItemVariant(GALVANIZE_STEEL_CASING))
+                .outputs(GTQTMetaBlocks.blockMultiblockCasing5.getItemVariant(GALVANIZE_STEEL_CASING))
                 .buildAndRegister();
     }
 
@@ -590,82 +589,82 @@ public class MetaTileEntityMachine {
         FLUID_SOLIDFICATION_RECIPES.recipeBuilder().duration(120).EUt(120)
                 .fluidInputs(BorosilicateGlass.getFluid(L * 4))
                 .notConsumable(SHAPE_MOLD_BLOCK)
-                .outputs(GTQTMetaBlocks.ADV_GLASS.getItemVariant(GTQTADVGlass.CasingType.SILICATE_GLASS))
+                .outputs(GTQTMetaBlocks.blockMultiblockGlass1.getItemVariant(BlockMultiblockGlass1.CasingType.SILICATE_GLASS))
                 .buildAndRegister();
 
         RecipeMaps.ALLOY_SMELTER_RECIPES.recipeBuilder().duration(480).EUt(120)
                 .input(dust, BorosilicateGlass, 4)
                 .notConsumable(SHAPE_MOLD_BLOCK.getStackForm())
-                .outputs(GTQTMetaBlocks.ADV_GLASS.getItemVariant(GTQTADVGlass.CasingType.SILICATE_GLASS))
+                .outputs(GTQTMetaBlocks.blockMultiblockGlass1.getItemVariant(BlockMultiblockGlass1.CasingType.SILICATE_GLASS))
                 .buildAndRegister();
 
         //  Boron Silicate Glass
-        OreDictUnifier.registerOre(GTQTMetaBlocks.ADV_GLASS.getItemVariant(GTQTADVGlass.CasingType.SILICATE_GLASS),
+        OreDictUnifier.registerOre(GTQTMetaBlocks.blockMultiblockGlass1.getItemVariant(BlockMultiblockGlass1.CasingType.SILICATE_GLASS),
                 new ItemMaterialInfo(new MaterialStack(BorosilicateGlass, M * 4)));
 
         //  Thorium-reinforced Glass
         GTQTcoreRecipeMaps.VACUUM_CHAMBER_RECIPES.recipeBuilder()
-                .inputs(GTQTMetaBlocks.ADV_GLASS.getItemVariant(GTQTADVGlass.CasingType.SILICATE_GLASS))
+                .inputs(GTQTMetaBlocks.blockMultiblockGlass1.getItemVariant(BlockMultiblockGlass1.CasingType.SILICATE_GLASS))
                 .input(plate, Thorium, 4)
-                .outputs(GTQTMetaBlocks.ADV_GLASS.getItemVariant(GTQTADVGlass.CasingType.THY_SILICATE_GLASS))
+                .outputs(GTQTMetaBlocks.blockMultiblockGlass1.getItemVariant(BlockMultiblockGlass1.CasingType.THY_SILICATE_GLASS))
                 .EUt(VA[HV])
                 .duration(500)
                 .buildAndRegister();
 
-        OreDictUnifier.registerOre(GTQTMetaBlocks.ADV_GLASS.getItemVariant(GTQTADVGlass.CasingType.THY_SILICATE_GLASS),
+        OreDictUnifier.registerOre(GTQTMetaBlocks.blockMultiblockGlass1.getItemVariant(BlockMultiblockGlass1.CasingType.THY_SILICATE_GLASS),
                 new ItemMaterialInfo(new MaterialStack(BorosilicateGlass, M * 4),
                         new MaterialStack(Thorium, M * 4)));
 
         //  Titanium-reinforced Glass
         GTQTcoreRecipeMaps.VACUUM_CHAMBER_RECIPES.recipeBuilder()
-                .inputs(GTQTMetaBlocks.ADV_GLASS.getItemVariant(GTQTADVGlass.CasingType.SILICATE_GLASS))
+                .inputs(GTQTMetaBlocks.blockMultiblockGlass1.getItemVariant(BlockMultiblockGlass1.CasingType.SILICATE_GLASS))
                 .input(plate, Titanium, 4)
-                .outputs(GTQTMetaBlocks.GLASS_CASING.getItemVariant(GTQTBlockGlassCasing.CasingType.TI_BORON_SILICATE_GLASS))
+                .outputs(GTQTMetaBlocks.blockMultiblockGlass1.getItemVariant(BlockMultiblockGlass1.CasingType.TI_BORON_SILICATE_GLASS))
                 .EUt(VA[HV])
                 .duration(500)
                 .buildAndRegister();
 
-        OreDictUnifier.registerOre(GTQTMetaBlocks.GLASS_CASING.getItemVariant(GTQTBlockGlassCasing.CasingType.TI_BORON_SILICATE_GLASS),
+        OreDictUnifier.registerOre(GTQTMetaBlocks.blockMultiblockGlass1.getItemVariant(BlockMultiblockGlass1.CasingType.TI_BORON_SILICATE_GLASS),
                 new ItemMaterialInfo(new MaterialStack(BorosilicateGlass, M * 4),
                         new MaterialStack(Titanium, M * 4)));
 
         //  Tungsten-reinforced Glass
         GTQTcoreRecipeMaps.VACUUM_CHAMBER_RECIPES.recipeBuilder()
-                .inputs(GTQTMetaBlocks.ADV_GLASS.getItemVariant(GTQTADVGlass.CasingType.SILICATE_GLASS))
+                .inputs(GTQTMetaBlocks.blockMultiblockGlass1.getItemVariant(BlockMultiblockGlass1.CasingType.SILICATE_GLASS))
                 .input(plate, Tungsten, 4)
-                .outputs(GTQTMetaBlocks.GLASS_CASING.getItemVariant(GTQTBlockGlassCasing.CasingType.W_BORON_SILICATE_GLASS))
+                .outputs(GTQTMetaBlocks.blockMultiblockGlass1.getItemVariant(BlockMultiblockGlass1.CasingType.W_BORON_SILICATE_GLASS))
                 .EUt(VA[EV])
                 .duration(500)
                 .buildAndRegister();
 
-        OreDictUnifier.registerOre(GTQTMetaBlocks.GLASS_CASING.getItemVariant(GTQTBlockGlassCasing.CasingType.W_BORON_SILICATE_GLASS),
+        OreDictUnifier.registerOre(GTQTMetaBlocks.blockMultiblockGlass1.getItemVariant(BlockMultiblockGlass1.CasingType.W_BORON_SILICATE_GLASS),
                 new ItemMaterialInfo(new MaterialStack(BorosilicateGlass, M * 4),
                         new MaterialStack(Tungsten, M * 4)));
 
 
         //  Osmiridium-reinforced Glass
         GTQTcoreRecipeMaps.VACUUM_CHAMBER_RECIPES.recipeBuilder()
-                .inputs(GTQTMetaBlocks.ADV_GLASS.getItemVariant(GTQTADVGlass.CasingType.SILICATE_GLASS))
+                .inputs(GTQTMetaBlocks.blockMultiblockGlass1.getItemVariant(BlockMultiblockGlass1.CasingType.SILICATE_GLASS))
                 .input(plate, Osmiridium, 4)
-                .outputs(GTQTMetaBlocks.GLASS_CASING.getItemVariant(GTQTBlockGlassCasing.CasingType.OSMIR_BORON_SILICATE_GLASS))
+                .outputs(GTQTMetaBlocks.blockMultiblockGlass1.getItemVariant(BlockMultiblockGlass1.CasingType.OSMIR_BORON_SILICATE_GLASS))
                 .EUt(VA[IV])
                 .duration(500)
                 .buildAndRegister();
 
-        OreDictUnifier.registerOre(GTQTMetaBlocks.GLASS_CASING.getItemVariant(GTQTBlockGlassCasing.CasingType.OSMIR_BORON_SILICATE_GLASS),
+        OreDictUnifier.registerOre(GTQTMetaBlocks.blockMultiblockGlass1.getItemVariant(BlockMultiblockGlass1.CasingType.OSMIR_BORON_SILICATE_GLASS),
                 new ItemMaterialInfo(new MaterialStack(BorosilicateGlass, M * 4),
                         new MaterialStack(Osmiridium, M * 4)));
 
         //  Naquadah-reinforced Glass
         GTQTcoreRecipeMaps.VACUUM_CHAMBER_RECIPES.recipeBuilder()
-                .inputs(GTQTMetaBlocks.ADV_GLASS.getItemVariant(GTQTADVGlass.CasingType.SILICATE_GLASS))
+                .inputs(GTQTMetaBlocks.blockMultiblockGlass1.getItemVariant(BlockMultiblockGlass1.CasingType.SILICATE_GLASS))
                 .input(plate, Naquadah, 4)
-                .outputs(GTQTMetaBlocks.GLASS_CASING.getItemVariant(GTQTBlockGlassCasing.CasingType.NAQ_BORON_SILICATE_GLASS))
+                .outputs(GTQTMetaBlocks.blockMultiblockGlass1.getItemVariant(BlockMultiblockGlass1.CasingType.NAQ_BORON_SILICATE_GLASS))
                 .EUt(VA[LuV])
                 .duration(500)
                 .buildAndRegister();
 
-        OreDictUnifier.registerOre(GTQTMetaBlocks.GLASS_CASING.getItemVariant(GTQTBlockGlassCasing.CasingType.NAQ_BORON_SILICATE_GLASS),
+        OreDictUnifier.registerOre(GTQTMetaBlocks.blockMultiblockGlass1.getItemVariant(BlockMultiblockGlass1.CasingType.NAQ_BORON_SILICATE_GLASS),
                 new ItemMaterialInfo(new MaterialStack(BorosilicateGlass, M * 4),
                         new MaterialStack(Naquadah, M * 4)));
     }

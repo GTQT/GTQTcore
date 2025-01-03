@@ -24,7 +24,7 @@ import keqing.gtqtcore.api.unification.GTQTMaterials;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.common.block.blocks.GTQTADVBlock;
+import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing1;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -49,7 +49,7 @@ public class MetaTileEntityElectronMicroscope extends RecipeMapMultiblockControl
     }
 
     private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.ADV_BLOCK.getState(GTQTADVBlock.CasingType.MaragingSteel250);
+        return GTQTMetaBlocks.blockMultiblockCasing1.getState(BlockMultiblockCasing1.CasingType.MaragingSteel250);
     }
 
     private static IBlockState getUniqueCasingState() {
