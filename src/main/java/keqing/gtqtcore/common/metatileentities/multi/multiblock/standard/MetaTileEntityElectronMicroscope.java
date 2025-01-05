@@ -19,7 +19,7 @@ import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
-import keqing.gtqtcore.api.recipes.properties.PAProperty;
+import keqing.gtqtcore.api.recipes.properties.ControllerProperty;
 import keqing.gtqtcore.api.unification.GTQTMaterials;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
@@ -66,7 +66,7 @@ public class MetaTileEntityElectronMicroscope extends RecipeMapMultiblockControl
     }
 
     public boolean checkRecipe(@Nonnull Recipe recipe, boolean consumeIfSuccess) {
-        return super.checkRecipe(recipe, consumeIfSuccess) && recipe.getProperty(PAProperty.getInstance(), 0) <= SOURCE;
+        return super.checkRecipe(recipe, consumeIfSuccess) && recipe.getProperty(ControllerProperty.getInstance(), 0) <= SOURCE;
     }
 
     @Override

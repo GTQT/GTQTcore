@@ -11,7 +11,6 @@ import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 public class OreDeal {
     public static void init() {
         GoldDeal();
-
     }
 
     public static void GoldDeal() {

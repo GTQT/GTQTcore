@@ -29,7 +29,7 @@ import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.capability.impl.ComputationRecipeLogic;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
-import keqing.gtqtcore.api.recipes.properties.LASERNetProperty;
+import keqing.gtqtcore.api.recipes.properties.LaserNetProperty;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.client.resources.I18n;
@@ -144,7 +144,7 @@ public class MetaTileEntityStepper extends MultiMapMultiblockController implemen
 
     @Override
     public boolean checkRecipe(@Nonnull Recipe recipe, boolean consumeIfSuccess) {
-        if (recipe.getProperty(LASERNetProperty.getInstance(), 0) <= laser_tier && super.checkRecipe(recipe, consumeIfSuccess)) {
+        if (recipe.getProperty(LaserNetProperty.getInstance(), 0) <= laser_tier && super.checkRecipe(recipe, consumeIfSuccess)) {
             IOpticalComputationProvider provider = this.getComputationProvider();
             int recipeCWUt = recipe.getProperty(ComputationProperty.getInstance(), 0);
             return provider.requestCWUt(recipeCWUt, true) >= recipeCWUt;

@@ -8,6 +8,7 @@ import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.info.MaterialFlags.*;
 import static gregtech.api.util.GTUtility.gregtechId;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.CeriumOxide;
 
 public class GCYSSecondDegreeMaterials {
 
@@ -19,7 +20,7 @@ public class GCYSSecondDegreeMaterials {
                 .fluid()
                 .color(0x9CE3DB)
                 .flags(DECOMPOSITION_BY_CENTRIFUGING)
-                .components(LanthanumOxide, 1, PraseodymiumOxide, 1, NeodymiumOxide, 1, CeriumOxide, 1)
+                .components(LanthanumOxide, 1, PraseodymiumOxide, 1, NeodymiumOxide, 1, Cerium, 2, Oxygen, 3)
                 .build();
 
         ScEuGdSmOxidesSolution = new Material.Builder(6001, gregtechId("sc_eu_gd_sm_oxides_solution"))

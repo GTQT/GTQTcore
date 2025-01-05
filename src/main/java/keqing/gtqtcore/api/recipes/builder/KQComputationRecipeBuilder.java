@@ -6,9 +6,9 @@ import gregtech.api.recipes.recipeproperties.ComputationProperty;
 import gregtech.api.recipes.recipeproperties.TotalComputationProperty;
 import gregtech.api.util.EnumValidationResult;
 import gregtech.api.util.GTLog;
-import keqing.gtqtcore.api.recipes.properties.ELEProperties;
-import keqing.gtqtcore.api.recipes.properties.KQKindProperty;
-import keqing.gtqtcore.api.recipes.properties.KQNetProperty;
+import keqing.gtqtcore.api.recipes.properties.ElectronBathProperties;
+import keqing.gtqtcore.api.recipes.properties.ResearchSystemMachineProperty;
+import keqing.gtqtcore.api.recipes.properties.ResearchSystemKindProperty;
 import keqing.gtqtcore.api.utils.GTQTLog;
 
 
@@ -39,15 +39,15 @@ public class KQComputationRecipeBuilder extends RecipeBuilder<KQComputationRecip
             this.totalCWU(((Number) value).intValue());
             return true;
         }
-        if (key.equals(KQNetProperty.KEY)) {
+        if (key.equals(ResearchSystemKindProperty.KEY)) {
             this.NB(((Number) value).intValue());
             return true;
         }
-        if (key.equals(ELEProperties.KEY)) {
+        if (key.equals(ElectronBathProperties.KEY)) {
             this.Tier(((Number) value).intValue());
             return true;
         }
-        if (key.equals(KQKindProperty.KEY)) {
+        if (key.equals(ResearchSystemMachineProperty.KEY)) {
             this.KI(((Number) value).intValue());
             return true;
         }
@@ -60,7 +60,7 @@ public class KQComputationRecipeBuilder extends RecipeBuilder<KQComputationRecip
             recipeStatus = EnumValidationResult.INVALID;
         }
 
-        this.applyProperty(KQKindProperty.getInstance(), KI);
+        this.applyProperty(ResearchSystemMachineProperty.getInstance(), KI);
         return this;
     }
 
@@ -70,7 +70,7 @@ public class KQComputationRecipeBuilder extends RecipeBuilder<KQComputationRecip
             recipeStatus = EnumValidationResult.INVALID;
         }
 
-        this.applyProperty(ELEProperties.getInstance(), Tier);
+        this.applyProperty(ElectronBathProperties.getInstance(), Tier);
         return this;
     }
 
@@ -80,7 +80,7 @@ public class KQComputationRecipeBuilder extends RecipeBuilder<KQComputationRecip
             recipeStatus = EnumValidationResult.INVALID;
         }
 
-        this.applyProperty(KQNetProperty.getInstance(), NB);
+        this.applyProperty(ResearchSystemKindProperty.getInstance(), NB);
         return this;
     }
 

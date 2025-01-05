@@ -27,7 +27,7 @@ import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.capability.IBio;
 import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
-import keqing.gtqtcore.api.recipes.properties.BRProperty;
+import keqing.gtqtcore.api.recipes.properties.BioReactorProperty;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.objmodels.ObjModels;
 import keqing.gtqtcore.client.textures.GTQTTextures;
@@ -268,7 +268,7 @@ public class MetaTileEntityBiologicalReaction extends MultiMapMultiblockControll
                                boolean consumeIfSuccess) {
         if (!super.checkRecipe(recipe, consumeIfSuccess)) return false;
         if (this.getRecipeMap() != BIOLOGICAL_REACTION_RECIPES) return true;
-        else return recipe.getProperty(BRProperty.getInstance(), 0) <= rate * 100;
+        else return recipe.getProperty(BioReactorProperty.getInstance(), 0) <= rate * 100;
     }
 
     protected class BiologicalReactionLogic extends MultiblockRecipeLogic {

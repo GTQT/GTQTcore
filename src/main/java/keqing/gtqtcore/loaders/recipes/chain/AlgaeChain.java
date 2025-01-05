@@ -3,7 +3,6 @@ package keqing.gtqtcore.loaders.recipes.chain;
 import gregtech.api.items.metaitem.MetaItem;
 import gregtech.api.metatileentity.multiblock.CleanroomType;
 import gregtech.api.unification.ore.OrePrefix;
-import gregtech.common.items.MetaItems;
 
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
@@ -27,7 +26,7 @@ public class AlgaeChain {
         SFM.recipeBuilder()
                 .duration(100)
                 .EUt(120)
-                .fluidInputs(Biooil.getFluid(6000))
+                .fluidInputs(BioOil.getFluid(6000))
                 .input(OrePrefix.dust, SodaAsh, 10)
                 .fluidOutputs(RawOil.getFluid(400))
                 .fluidOutputs(RawOil.getFluid(400))
@@ -288,13 +287,13 @@ public class AlgaeChain {
         PRESSURIZED_REACTION.recipeBuilder()
                 .fluidInputs(Water.getFluid(1000))
                 .input(items, 1)
-                .fluidOutputs(Biooil.getFluid(2000))
+                .fluidOutputs(BioOil.getFluid(2000))
                 .duration(1600).EUt(480).buildAndRegister();
 
         CHEMICAL_PLANT.recipeBuilder()
                 .notConsumable(CATALYST_FRAMEWORK_V)
                 .input(items, 1)
-                .fluidOutputs(Biooil.getFluid(2000))
+                .fluidOutputs(BioOil.getFluid(2000))
                 .recipeLevel(2)
                 .duration(1200)
                 .EUt(VA[EV])

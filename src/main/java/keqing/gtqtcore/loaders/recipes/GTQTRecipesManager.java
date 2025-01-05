@@ -22,7 +22,8 @@ import keqing.gtqtcore.loaders.recipes.chain.MagneticsChain;
 import keqing.gtqtcore.loaders.recipes.chain.MethylamineChain;
 import keqing.gtqtcore.loaders.recipes.chain.NanotubesChain;
 import keqing.gtqtcore.loaders.recipes.circuits.*;
-import keqing.gtqtcore.loaders.recipes.component.GCYSComponentRecipes;
+import keqing.gtqtcore.loaders.recipes.component.ComponentRecipes;
+import keqing.gtqtcore.loaders.recipes.component.GTComponentsRemove;
 import keqing.gtqtcore.loaders.recipes.handlers.*;
 
 public class GTQTRecipesManager {
@@ -41,7 +42,7 @@ public class GTQTRecipesManager {
         ChemicalBath.init();
         FusionLoader.init();
         NeutralNetworkNexus.init();
-        FuckGCYM.init();
+        GCYMMultiblockRecipesOverwrite.init();
         BoronChain.init();
         EnzymesRecipes.init();
         ArgChain.init();
@@ -51,7 +52,7 @@ public class GTQTRecipesManager {
         MolecularTransformer.init();
         StrontiumRadiumChain.init();
         AlgaeChain.init();
-        AcidReactor.init();
+        AcidReactorRecipes.init();
         PPBChain.init();
         BioReactor.init();
         AirDistillation.init();
@@ -138,7 +139,7 @@ public class GTQTRecipesManager {
         PEEKChain.init();
         Electrolyzer.init();
         CPULine.init();
-        GTComponents.init();
+        GTComponentsRemove.init();
         PlatinumDeal.init();
         SwarmRecipeHandler.runRecipeGeneration();
         SwarmRecipeHandler.runRecipeBreeding();
@@ -149,7 +150,7 @@ public class GTQTRecipesManager {
         NanotubesChain.init();
         initCircuits();
         initOreProcessing();
-        GCYSComponentRecipes.init();
+        ComponentRecipes.init();
         AutoChiselRecipeLoader.init();
         ChiselMachineRecipeLoader.init();
         PreciseAssemblerChain.init();

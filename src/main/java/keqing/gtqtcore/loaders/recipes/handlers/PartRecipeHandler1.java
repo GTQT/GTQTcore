@@ -9,7 +9,7 @@ import gregtech.api.unification.ore.OrePrefix;
 
 import static gregtech.api.GTValues.*;
 import static gregtech.api.GTValues.ULV;
-import static keqing.gtqtcore.api.utils.GTQTUniverUtil.*;
+import static keqing.gtqtcore.api.utils.GTQTUniversUtil.*;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 
 public class PartRecipeHandler1 {

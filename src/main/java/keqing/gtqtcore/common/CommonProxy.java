@@ -4,11 +4,14 @@ import gregtech.api.GregTechAPI;
 import gregtech.api.block.VariantItemBlock;
 import gregtech.api.cover.CoverDefinition;
 import gregtech.api.recipes.recipeproperties.FusionEUToStartProperty;
+import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.Materials;
+import gregtech.api.unification.material.properties.PropertyKey;
 import gregtech.api.unification.stack.ItemMaterialInfo;
 import gregtech.integration.crafttweaker.block.CTHeatingCoilBlockStats;
+import keqing.gtqtcore.GTQTCoreConfig;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
-import keqing.gtqtcore.api.recipes.properties.ERProperty;
+import keqing.gtqtcore.api.recipes.properties.EnzymesReactionProperty;
 import keqing.gtqtcore.api.recipes.properties.NeutronActivatorIOPartProperty;
 import keqing.gtqtcore.api.recipes.properties.PCBFactoryBioUpgradeProperty;
 import keqing.gtqtcore.api.recipes.properties.SwarmTierProperty;
@@ -278,21 +281,21 @@ public class CommonProxy {
         NeutronActivatorIOPartProperty.registeredPart(4, "氦核（α粒子）");
         NeutronActivatorIOPartProperty.registeredPart(5, "电子");
 
-        ERProperty.registeredRate(101, "1 0 1 0 0 酸性");
-        ERProperty.registeredRate(102, "1 0 1 1 0 酸性");
-        ERProperty.registeredRate(103, "1 1 0 1 0 酸性");
-        ERProperty.registeredRate(104, "1 1 0 1 1 酸性");
+        EnzymesReactionProperty.registeredRate(101, "1 0 1 0 0 酸性");
+        EnzymesReactionProperty.registeredRate(102, "1 0 1 1 0 酸性");
+        EnzymesReactionProperty.registeredRate(103, "1 1 0 1 0 酸性");
+        EnzymesReactionProperty.registeredRate(104, "1 1 0 1 1 酸性");
 
-        ERProperty.registeredRate(201, "2 1 1 3 1 碱性");
-        ERProperty.registeredRate(202, "1 2 3 1 1 碱性");
-        ERProperty.registeredRate(203, "1 3 2 1 1 碱性");
-        ERProperty.registeredRate(204, "2 1 1 3 1 碱性");
+        EnzymesReactionProperty.registeredRate(201, "2 1 1 3 1 碱性");
+        EnzymesReactionProperty.registeredRate(202, "1 2 3 1 1 碱性");
+        EnzymesReactionProperty.registeredRate(203, "1 3 2 1 1 碱性");
+        EnzymesReactionProperty.registeredRate(204, "2 1 1 3 1 碱性");
 
-        ERProperty.registeredRate(301, "4 1 1 3 2 酸性");
-        ERProperty.registeredRate(302, "2 4 2 3 1 酸性");
-        ERProperty.registeredRate(303, "2 3 2 4 1 酸性");
+        EnzymesReactionProperty.registeredRate(301, "4 1 1 3 2 酸性");
+        EnzymesReactionProperty.registeredRate(302, "2 4 2 3 1 酸性");
+        EnzymesReactionProperty.registeredRate(303, "2 3 2 4 1 酸性");
 
-        ERProperty.registeredRate(401, "2 5 2 4 3 碱性");
+        EnzymesReactionProperty.registeredRate(401, "2 5 2 4 3 碱性");
 
         SwarmTierProperty.registerSwarmTier(1, "I");
         SwarmTierProperty.registerSwarmTier(2, "II");
@@ -391,14 +394,27 @@ public class CommonProxy {
         MetaTileEntityMachine.init();
         CrucibleRecipes.register();
         CopyRecipesHandlers.init();
-        /*
-        for (Material material : GregTechAPI.materialManager.getRegisteredMaterials())
-        {
-             if(material.hasProperty(PropertyKey.WIRE))
-                GTQTLog.logger.info(new TextComponentTranslation("",material,material.getProperty(PropertyKey.WIRE).getAmperage(),material.getProperty(PropertyKey.WIRE).getVoltage(),material.getProperty(PropertyKey.WIRE).getLossPerBlock()));
+
+        if(GTQTCoreConfig.debugSwitch.debugSwitch) {
+            for (Material material : GregTechAPI.materialManager.getRegisteredMaterials()) {
+                if (GTQTCoreConfig.debugSwitch.cableDebug) {
+                    if (material.hasProperty(PropertyKey.WIRE))
+                        GTQTLog.logger.info(new TextComponentTranslation("Cable Info", material, material.getProperty(PropertyKey.WIRE).getAmperage(), material.getProperty(PropertyKey.WIRE).getVoltage(), material.getProperty(PropertyKey.WIRE).getLossPerBlock()));
+                }
+                if (GTQTCoreConfig.debugSwitch.pipeDebug) {
+                    if (material.hasProperty(PropertyKey.FLUID_PIPE))
+                        GTQTLog.logger.info(new TextComponentTranslation("Fluid Pipe Info", material,  material.getProperty(PropertyKey.FLUID_PIPE).getPriority(),material.getProperty(PropertyKey.FLUID_PIPE).getMaxFluidTemperature(), material.getProperty(PropertyKey.FLUID_PIPE).getThroughput(), material.getProperty(PropertyKey.FLUID_PIPE).getTanks()));
+
+                    if (material.hasProperty(PropertyKey.ITEM_PIPE))
+                        GTQTLog.logger.info(new TextComponentTranslation("Item Pipe Info", material, material.getProperty(PropertyKey.ITEM_PIPE).getPriority(), material.getProperty(PropertyKey.ITEM_PIPE).getTransferRate()));
+                }
+                if (GTQTCoreConfig.debugSwitch.rotorDebug) {
+                    if (material.hasProperty(PropertyKey.ROTOR))
+                        GTQTLog.logger.info(new TextComponentTranslation("Rotor Info", material, material.getProperty(PropertyKey.ROTOR).getDamage(), material.getProperty(PropertyKey.ROTOR).getDurability(), material.getProperty(PropertyKey.ROTOR).getDamage()));
+                }
+            }
         }
 
-         */
         for (BlockWireCoil.CoilType type : BlockWireCoil.CoilType.values()) {
             HEATING_COILS.put(GTQTMetaBlocks.blockWireCoil.getState(type), type);
         }

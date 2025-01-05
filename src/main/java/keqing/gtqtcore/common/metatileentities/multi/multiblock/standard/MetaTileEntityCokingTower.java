@@ -39,8 +39,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static keqing.gtqtcore.api.utils.GTQTUniverUtil.consistentList;
-import static keqing.gtqtcore.api.utils.GTQTUniverUtil.maxLength;
+import static keqing.gtqtcore.api.utils.GTQTUniversUtil.consistentList;
+import static keqing.gtqtcore.api.utils.GTQTUniversUtil.maxLength;
 
 public class MetaTileEntityCokingTower extends RecipeMapMultiblockController {
     private static final TraceabilityPredicate IS_SNOW_LAYER = new TraceabilityPredicate(bws -> GTUtility.isBlockSnow(bws.getBlockState()));

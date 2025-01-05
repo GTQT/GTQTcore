@@ -27,7 +27,7 @@ import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
-import keqing.gtqtcore.api.recipes.properties.PAProperty;
+import keqing.gtqtcore.api.recipes.properties.ControllerProperty;
 import keqing.gtqtcore.api.unification.GTQTMaterials;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
@@ -138,7 +138,7 @@ public class MetaTileEntityPreciseAssembler extends MultiMapMultiblockController
                                boolean consumeIfSuccess) {
         if (!super.checkRecipe(recipe, consumeIfSuccess)) return false;
         if (this.getRecipeMap() == ASSEMBLER_RECIPES) return true;
-        else return recipe.getProperty(PAProperty.getInstance(), 0) <= CasingTier;
+        else return recipe.getProperty(ControllerProperty.getInstance(), 0) <= CasingTier;
     }
 
     @Override

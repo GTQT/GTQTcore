@@ -1,6 +1,5 @@
 package keqing.gtqtcore.api.unification.matreials;
 import gregtech.api.GTValues;
-import gregtech.api.fluids.FluidBuilder;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.properties.BlastProperty;
 import gregtech.api.unification.material.properties.ToolProperty;
@@ -10,10 +9,8 @@ import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.info.MaterialFlags.*;
 import static gregtech.api.unification.material.info.MaterialIconSet.*;
 import static gregtech.api.util.GTUtility.gregtechId;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 
-import gregtech.api.unification.material.Material;
 import keqing.gtqtcore.api.unification.GTQTMaterials;
 
 public class HigherDegreeMaterials {
@@ -123,7 +120,7 @@ public class HigherDegreeMaterials {
                 .build();
 
         //氧化硅岩
-        GTQTMaterials.Yanghuaguiyan= new Material.Builder(getMaterialsId(), gregtechId("yanghuaguiyan"))
+        GTQTMaterials.NaquadahOxide = new Material.Builder(getMaterialsId(), gregtechId("naquadah_oxide"))
                 .ore(true).dust()
                 .flags(DISABLE_DECOMPOSITION)
                 .color(0x636363)

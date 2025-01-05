@@ -26,7 +26,7 @@ import gregtech.common.blocks.BlockGlassCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.MetaTileEntities;
 import keqing.gtqtcore.api.pattern.GTQTTraceabilityPredicate;
-import keqing.gtqtcore.api.recipes.properties.EUToStartProperty;
+import keqing.gtqtcore.api.recipes.properties.ParticleVelocityProperty;
 import keqing.gtqtcore.api.recipes.properties.ScatteringProperty;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
@@ -96,7 +96,7 @@ public class MetaTileEntityParticleAccelerator extends MultiMapMultiblockControl
     public boolean checkRecipe(@Nonnull Recipe recipe, boolean consumeIfSuccess) {
         if(this.getRecipeMap() == TARGET_CHAMBER||this.getRecipeMap() == NUCLEOSYNTHESIS) {
             if(recipe.getProperty(ScatteringProperty.getInstance(), 0) == angle)
-                if(recipe.getProperty(EUToStartProperty.getInstance(), 0) <=speed)
+                if(recipe.getProperty(ParticleVelocityProperty.getInstance(), 0) <=speed)
             return super.checkRecipe(recipe, consumeIfSuccess);
         }
 

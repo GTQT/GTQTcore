@@ -9,7 +9,6 @@ import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.common.items.MetaItems.*;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.COMPONENT_ASSEMBLER_RECIPES;
-import static keqing.gtqtcore.api.unification.GTQTMaterials.Yanghuaguiyanhunhe;
 import static keqing.gtqtcore.api.unification.TJMaterials.NitrileButadieneRubber;
 import static keqing.gtqtcore.api.unification.TJMaterials.PolyPhosphonitrileFluoroRubber;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.*;

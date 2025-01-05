@@ -11,11 +11,9 @@ import gregtech.api.unification.material.properties.ToolProperty;
 import gregtech.api.util.GTUtility;
 import keqing.gtqtcore.api.unification.GTQTElements;
 import keqing.gtqtcore.api.unification.GTQTMaterials;
-import net.minecraft.util.text.TextFormatting;
 
 import static gregicality.multiblocks.api.unification.GCYMMaterials.IncoloyMA956;
 import static gregtech.api.GTValues.*;
-import static gregtech.api.GTValues.UHV;
 import static gregtech.api.fluids.attribute.FluidAttributes.ACID;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.Materials.Tetranitromethane;
@@ -25,12 +23,9 @@ import static gregtech.api.unification.material.info.MaterialIconSet.*;
 import static gregtech.api.unification.material.properties.BlastProperty.GasTier.LOW;
 import static gregtech.api.unification.material.properties.BlastProperty.GasTier.MID;
 import static gregtech.api.util.GTUtility.gregtechId;
-import static gregtechfoodoption.GTFOMaterialHandler.AceticAnhydride;
 import static gregtechfoodoption.GTFOMaterialHandler.SodiumSulfate;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
-import static keqing.gtqtcore.api.unification.GTQTMaterials.DimethylCarbonate;
-import static keqing.gtqtcore.api.unification.TJMaterials.*;
 import static keqing.gtqtcore.api.unification.material.info.GTQTMaterialIconSet.CUSTOM_MHCSM;
 
 public class FirstDegreeMaterials {
@@ -653,13 +648,13 @@ public class FirstDegreeMaterials {
                 .build();
 
         //独居石稀土浊溶液
-        GTQTMaterials.Dujushixitu = new Material.Builder(getMaterialsId(), gregtechId("dujushixitu"))
+        GTQTMaterials.MonaziteRareEarthTurbid = new Material.Builder(getMaterialsId(), gregtechId("monazite_rare_earth_turbid"))
                 .fluid()
                 .color(0xd89045).iconSet(SHINY)
                 .build();
 
         //氧化铪-氧化锆混合物
-        GTQTMaterials.Yanghuahayanghuagao = new Material.Builder(getMaterialsId(), gregtechId("yanghuahayanghuagao"))
+        GTQTMaterials.HafniumOxideZirconiumOxideMixture = new Material.Builder(getMaterialsId(), gregtechId("hafnium_oxide_zirconium_oxid_mixture"))
                 .dust()
                 .color(0xFFB90F).iconSet(SHINY)
                 .components(Hafnium, 1, Zirconium, 1, Oxygen, 4)
@@ -667,20 +662,20 @@ public class FirstDegreeMaterials {
                 .build();
 
         //稀释独居石稀土泥浆
-        GTQTMaterials.Xishidujushixitu = new Material.Builder(getMaterialsId(), gregtechId("xishidujushixitu"))
+        GTQTMaterials.DiluteMonaziteRareEarthMud = new Material.Builder(getMaterialsId(), gregtechId("xishidujushixitu"))
                 .fluid()
                 .color(0xFFB6C1).iconSet(SHINY)
                 .build();
 
         //氧化铪
-        GTQTMaterials.Yanghuaha = new Material.Builder(getMaterialsId(), gregtechId("yanghuaha"))
+        GTQTMaterials.HafniumOxide = new Material.Builder(getMaterialsId(), gregtechId("hafnium_oxide"))
                 .dust()
                 .color(0xd89045).iconSet(SHINY)
                 .components(Hafnium, 1, Oxygen, 2)
                 .build();
 
         //四氯化铪_锆
-        GTQTMaterials.Silvhuaha = new Material.Builder(getMaterialsId(), gregtechId("silvhuaha"))
+        GTQTMaterials.HafniumZirconiumTetrachloride = new Material.Builder(getMaterialsId(), gregtechId("hafnium_zirconium_tetrachloride"))
                 .fluid()
                 .color(0xFFAEB9).iconSet(SHINY)
                 .components(Hafnium, 1, Zirconium, 1, Chlorine, 8)
@@ -688,7 +683,7 @@ public class FirstDegreeMaterials {
                 .build();
 
         //低纯
-        GTQTMaterials.Dilvhuaha = new Material.Builder(getMaterialsId(), gregtechId("dilvhuaha"))
+        GTQTMaterials.LowPurityHafniumZirconiumResidue = new Material.Builder(getMaterialsId(), gregtechId("low_purity_hafnium_zirconium_residue"))
                 .dust()
                 .color(0xFF8C00).iconSet(SHINY)
                 .components(Hafnium, 1, Zirconium, 1)
@@ -696,7 +691,7 @@ public class FirstDegreeMaterials {
                 .build();
 
         //低纯碘化
-        GTQTMaterials.Iilvhuaha = new Material.Builder(getMaterialsId(), gregtechId("iilvhuaha"))
+        GTQTMaterials.LowPurityHafniumZirconiumIodideMixture = new Material.Builder(getMaterialsId(), gregtechId("low_purity_hafnium_zirconium_iodide_mixture"))
                 .fluid()
                 .color(0xFF83FA).iconSet(SHINY)
                 .components(Hafnium, 1, Zirconium, 1, Iodine, 8)
@@ -704,79 +699,79 @@ public class FirstDegreeMaterials {
                 .build();
 
         //硫酸独居石
-        GTQTMaterials.Liusuandujushi = new Material.Builder(getMaterialsId(), gregtechId("liusuandujushi"))
+        GTQTMaterials.SulfuricAcidMonazite = new Material.Builder(getMaterialsId(), gregtechId("sulfuric_acid_monazite"))
                 .fluid()
                 .color(0xFF82AB).iconSet(SHINY)
                 .build();
 
         //独居石稀土滤渣粉
-        GTQTMaterials.Dujushixitulvzha = new Material.Builder(getMaterialsId(), gregtechId("dujushixitulvzha"))
+        GTQTMaterials.MonaziteRareEarthFilterResidue = new Material.Builder(getMaterialsId(), gregtechId("monazite_rare_earth_filter_residue"))
                 .dust()
                 .color(0xFF8247).iconSet(SHINY)
                 .build();
 
         //磷酸钍滤饼
-        GTQTMaterials.Dujushixitulvb = new Material.Builder(getMaterialsId(), gregtechId("dujushixitulvb"))
+        GTQTMaterials.ThoriumPhosphateFilterCake = new Material.Builder(getMaterialsId(), gregtechId("thorium_phosphate_filter_cake"))
                 .dust()
                 .color(0xFF6EB4).iconSet(SHINY)
                 .build();
 
         //磷酸钍精粉
-        GTQTMaterials.Dujushixitulvbf = new Material.Builder(getMaterialsId(), gregtechId("dujushixitulvbf"))
+        GTQTMaterials.ThoriumPhosphateConcentrate = new Material.Builder(getMaterialsId(), gregtechId("thorium_phosphate_concentrate"))
                 .dust()
                 .color(0xFF6A6A).iconSet(SHINY)
                 .build();
 
         //中和独居石稀土滤渣粉
-        GTQTMaterials.Zhonghedujushixitulvzha = new Material.Builder(getMaterialsId(), gregtechId("zhonghedujushixitulvzha"))
+        GTQTMaterials.NeutralizationMonaziteRareEarthFilterResidue = new Material.Builder(getMaterialsId(), gregtechId("zhonghedujushixitulvzha"))
                 .dust()
                 .color(0xFF69B4).iconSet(SHINY)
                 .build();
 
         //浓缩独居石稀土氢氧化物粉
-        GTQTMaterials.Nongsuodujushiqingyanghuawu = new Material.Builder(getMaterialsId(), gregtechId("nongsuodujushiqingyanghuawu"))
+        GTQTMaterials.ConcentratedMonaziteRareEarthHydroxide = new Material.Builder(getMaterialsId(), gregtechId("concentrated_monazite_rare_earth_hydroxide"))
                 .dust()
                 .color(0xFF6347).iconSet(SHINY)
                 .build();
 
         //铀滤渣粉
-        GTQTMaterials.Youlvzhafen = new Material.Builder(getMaterialsId(), gregtechId("youlvzhafen"))
+        GTQTMaterials.UraniumFilterResidue = new Material.Builder(getMaterialsId(), gregtechId("uranium_filter_residue"))
                 .dust()
                 .color(0xFF3030).iconSet(SHINY)
                 .build();
 
         //干燥浓缩硝酸独居石稀土
-        GTQTMaterials.Ganzaonongsuoxiaosuandujushixitu = new Material.Builder(getMaterialsId(), gregtechId("ganzaonongsuoxiaosuandujushixitu"))
+        GTQTMaterials.DryConcentratedNitrateMonaziteRareEarth = new Material.Builder(getMaterialsId(), gregtechId("dry_concentrated_nitrate_monazite_rare_earth"))
                 .dust()
                 .color(0xFF1493).iconSet(SHINY)
                 .build();
 
         //独居石罕土沉淀粉
-        GTQTMaterials.Dujushihantuchendian = new Material.Builder(getMaterialsId(), gregtechId("dujushihantuchendian"))
+        GTQTMaterials.SolitaryStoneRareSoilSedimentation = new Material.Builder(getMaterialsId(), gregtechId("solitary_stone_rare_soil_sedimentation"))
                 .dust()
                 .color(0xFF00FF).iconSet(SHINY)
                 .build();
 
         //异质卤化独居石稀土混合物
-        GTQTMaterials.Yizhiluhuadujushi = new Material.Builder(getMaterialsId(), gregtechId("yizhiluhuadujushi"))
+        GTQTMaterials.HeterogeneousHalogenatedMonaziteRareEarthMixture = new Material.Builder(getMaterialsId(), gregtechId("heterogeneous_halogenated_monazite_rare_earth_mixture"))
                 .dust()
                 .color(0xFF0000).iconSet(SHINY)
                 .build();
 
         //饱和独居石稀土
-        GTQTMaterials.Baohedujushixituhunhe = new Material.Builder(getMaterialsId(), gregtechId("baohedujushixituhunhe"))
+        GTQTMaterials.SaturatedMonaziteDopedWithRareEarth = new Material.Builder(getMaterialsId(), gregtechId("saturated_monazite_doped_with_rare_earth"))
                 .dust()
                 .color(0xd89045).iconSet(SHINY)
                 .build();
 
         //钐精
-        GTQTMaterials.Shanjing = new Material.Builder(getMaterialsId(), gregtechId("shanjing"))
+        GTQTMaterials.SamariumEssence = new Material.Builder(getMaterialsId(), gregtechId("samarium_essence"))
                 .dust()
                 .color(0xF5DEB3).iconSet(SHINY)
                 .build();
 
         //氯化铈
-        GTQTMaterials.Lvhuashi = new Material.Builder(getMaterialsId(), gregtechId("lvhuashi"))
+        GTQTMaterials.CeriumChloride = new Material.Builder(getMaterialsId(), gregtechId("cerium_chloride"))
                 .dust()
                 .color(0xF4F4F4).iconSet(SHINY)
                 .components(Cerium, 1, Chlorine, 2)
@@ -784,7 +779,7 @@ public class FirstDegreeMaterials {
                 .build();
 
         //草酸铈
-        GTQTMaterials.Cvhuashi = new Material.Builder(getMaterialsId(), gregtechId("cvhuashi"))
+        GTQTMaterials.CeriumOxalate = new Material.Builder(getMaterialsId(), gregtechId("cerium_oxalate"))
                 .dust()
                 .color(0xF4A460).iconSet(SHINY)
                 .components(Cerium, 1, Hydrogen, 2, Carbon, 2, Oxygen, 4)
@@ -792,7 +787,7 @@ public class FirstDegreeMaterials {
                 .build();
 
         //Cerium
-        GTQTMaterials.Tvhuashi = new Material.Builder(getMaterialsId(), gregtechId("tvhuashi"))
+        GTQTMaterials.CeriumOxide = new Material.Builder(getMaterialsId(), gregtechId("cerium_oxide"))
                 .dust()
                 .color(0xF2F2F2).iconSet(SHINY)
                 .components(Cerium, 2, Oxygen, 3)
@@ -800,79 +795,79 @@ public class FirstDegreeMaterials {
                 .build();
 
         //氟碳镧铈稀土浊
-        GTQTMaterials.Futanlanshixituzhuo = new Material.Builder(getMaterialsId(), gregtechId("futanlanshixituzhuo"))
+        GTQTMaterials.FluorocarbonLanthanumCeriumRareEarthTurbidity = new Material.Builder(getMaterialsId(), gregtechId("fluorocarbon_lanthanum_cerium_rare_earth_turbidity"))
                 .fluid()
                 .color(0x8B7500).iconSet(SHINY)
                 .build();
 
         //蒸汽裂化氟碳镧铈泥浆
-        GTQTMaterials.Zhengqiliehuafutanlanshinijiang = new Material.Builder(getMaterialsId(), gregtechId("zhengqiliehuafutanlanshinijiang"))
+        GTQTMaterials.SteamCrackingFluorocarbonLanthanumCeriumSlurry = new Material.Builder(getMaterialsId(), gregtechId("steam_cracking_fluorocarbon_lanthanum_cerium_slurry"))
                 .fluid()
                 .color(0x8B7355).iconSet(SHINY)
                 .build();
 
         //调制氟碳镧铈泥浆
-        GTQTMaterials.Tiaozhifutanlanshinijiang = new Material.Builder(getMaterialsId(), gregtechId("tiaozhifutanlanshinijiang"))
+        GTQTMaterials.ModulationFluorocarbonLanthanumCeriumSlurry = new Material.Builder(getMaterialsId(), gregtechId("modulation_fluorocarbon_lanthanum_cerium_slurry"))
                 .fluid()
                 .color(0x8B6969).iconSet(SHINY)
                 .build();
 
         //过滤氟碳镧铈泥浆
-        GTQTMaterials.Guolvfutanlanshinijiang = new Material.Builder(getMaterialsId(), gregtechId("guolvfutanlanshinijiang"))
+        GTQTMaterials.FilterFluorocarbonLanthanumCeriumSlurry = new Material.Builder(getMaterialsId(), gregtechId("filter_fluorocarbon_lanthanum_cerium_slurry"))
                 .dust()
                 .color(0x8B6914).iconSet(SHINY)
                 .build();
 
         //氟碳镧铈稀土氧化物粉
-        GTQTMaterials.Futanlanshixituyanghuawu = new Material.Builder(getMaterialsId(), gregtechId("futanlanshixituyanghuawu"))
+        GTQTMaterials.FluorocarbonLanthanumCeriumRareEarthOxide = new Material.Builder(getMaterialsId(), gregtechId("fluorocarbon_lanthanum_cerium_rare_earth_oxide"))
                 .dust()
                 .color(0x8B668B).iconSet(SHINY)
                 .build();
 
         //酸浸氟碳镧铈稀土氧化物粉
-        GTQTMaterials.Suanjinfutanlanshixituyanghuawu = new Material.Builder(getMaterialsId(), gregtechId("suanjinfutanlanshixituyanghuawu"))
+        GTQTMaterials.AcidFluorocarbonLanthanumCeriumRareEarthOxide = new Material.Builder(getMaterialsId(), gregtechId("acid_fluorocarbon_lanthanum_cerium_rare_earth_oxide"))
                 .fluid()
                 .color(0x8B6508).iconSet(SHINY)
                 .build();
 
         //焙烧稀土氧化物粉
-        GTQTMaterials.Bsxituyanghuawu = new Material.Builder(getMaterialsId(), gregtechId("bsxituyanghuawu"))
+        GTQTMaterials.RoastedRareEarthOxide = new Material.Builder(getMaterialsId(), gregtechId("roasted_rare_earth_oxide"))
                 .dust()
                 .color(0x8B636C).iconSet(SHINY)
                 .build();
 
         //氧化铈稀土氧化物粉
-        GTQTMaterials.Yanghuaxituyanghauwu = new Material.Builder(getMaterialsId(), gregtechId("yanghuaxituyanghauwu"))
+        GTQTMaterials.CeriumOxideRareEarthOxide = new Material.Builder(getMaterialsId(), gregtechId("cerium_oxide_rare_earth_oxide"))
                 .fluid()
                 .color(0x8B5F65).iconSet(SHINY)
                 .build();
 
         //氟碳镧铈罕土氧化物粉
-        GTQTMaterials.Futanlanshihantuyanghuawu = new Material.Builder(getMaterialsId(), gregtechId("futanlanshihantuyanghuawu"))
+        GTQTMaterials.FluorocarbonLanthanumCeriumRareSoilOxide = new Material.Builder(getMaterialsId(), gregtechId("fluorocarbon_lanthanum_cerium_rare_soil_oxide"))
                 .dust()
                 .color(0x8B5A2B).iconSet(SHINY)
                 .build();
 
         //氟碳镧铈罕土氧化物悬浊液
-        GTQTMaterials.Futanlanshihantuyanghuawuxuanzhuo = new Material.Builder(getMaterialsId(), gregtechId("futanlanshihantuyanghuawuxuanzhuo"))
+        GTQTMaterials.FluorocarbonLanthanumCeriumRareSoilOxideSuspension = new Material.Builder(getMaterialsId(), gregtechId("fluorocarbon_lanthanum_cerium_rare_soil_oxide_suspension"))
                 .fluid()
                 .color(0x8B5A00).iconSet(SHINY)
                 .build();
 
         //钐稀土精粉
-        GTQTMaterials.Shanxitujingfen = new Material.Builder(getMaterialsId(), gregtechId("shanxitujingfen"))
+        GTQTMaterials.SamariumRareEarth = new Material.Builder(getMaterialsId(), gregtechId("samarium_rare_earth"))
                 .dust()
                 .color(0x8B5742).iconSet(SHINY)
                 .build();
 
         //氟化钐稀土精粉
-        GTQTMaterials.Fhanxitujingfen = new Material.Builder(getMaterialsId(), gregtechId("fhanxitujingfen"))
+        GTQTMaterials.SamariumFluorideRareEarthRefined = new Material.Builder(getMaterialsId(), gregtechId("samarium_fluoride_rare_earth_refined"))
                 .fluid()
                 .color(0x8B4C39).iconSet(SHINY)
                 .build();
 
         //钐-铽混合物粉
-        GTQTMaterials.Shantui = new Material.Builder(getMaterialsId(), gregtechId("shantui"))
+        GTQTMaterials.SamariumTerbiumMixture = new Material.Builder(getMaterialsId(), gregtechId("shantui"))
                 .fluid()
                 .color(0x8B4789).iconSet(SHINY)
                 .build();
@@ -1479,7 +1474,7 @@ public class FirstDegreeMaterials {
                 .build();
 
         //低纯度硅岩乳液
-        GTQTMaterials.Dichunduguiyanruye = new Material.Builder(getMaterialsId(), gregtechId("dichunduguiyanruye"))
+        GTQTMaterials.LowPurityNaquadahLotion = new Material.Builder(getMaterialsId(), gregtechId("low_purity_naquadah_lotion"))
                 .fluid()
                 .flags(DISABLE_DECOMPOSITION)
                 .color(0x9AFF9A)
@@ -1487,7 +1482,7 @@ public class FirstDegreeMaterials {
                 .build();
 
         //低纯度硅岩溶液
-        GTQTMaterials.Dichunduguiyanrongye = new Material.Builder(getMaterialsId(), gregtechId("dichunduguiyanrongye"))
+        GTQTMaterials.LowPurityNaquadahSolution = new Material.Builder(getMaterialsId(), gregtechId("dichunduguiyanrongye"))
                 .fluid()
                 .flags(DISABLE_DECOMPOSITION)
                 .color(0xB4EEB4)
@@ -1501,14 +1496,14 @@ public class FirstDegreeMaterials {
                 .build();
 
         //氢氧化镓 material('gallium')
-        GTQTMaterials.Galliumoh = new Material.Builder(getMaterialsId(), gregtechId("galliumoh"))
+        GTQTMaterials.GalliumHydroxide = new Material.Builder(getMaterialsId(), gregtechId("gallium_hydroxide"))
                 .dust()
                 .color(0xDBDBDB)
                 .components(Gallium, 1, Oxygen, 1, Hydrogen, 1)
                 .build();
 
         //废氟
-        GTQTMaterials.Feifu = new Material.Builder(getMaterialsId(), gregtechId("feifu"))
+        GTQTMaterials.WasteFluorine = new Material.Builder(getMaterialsId(), gregtechId("waste_fluorine"))
                 .fluid()
                 .color(0x556B2F)
                 .flags(DISABLE_DECOMPOSITION)
@@ -1516,41 +1511,41 @@ public class FirstDegreeMaterials {
                 .build();
 
         //废液
-        GTQTMaterials.Feiye = new Material.Builder(getMaterialsId(), gregtechId("feiye"))
+        GTQTMaterials.WasteLiquid = new Material.Builder(getMaterialsId(), gregtechId("feiye"))
                 .fluid()
                 .color(0x548B54)
                 .build();
 
         //浓缩富集硅岩矿泥粉
-        GTQTMaterials.Nongsuofujiguiyankuangni = new Material.Builder(getMaterialsId(), gregtechId("nongsuofujiguiyankuangni"))
+        GTQTMaterials.ConcentrateEnrichNaquadahClay = new Material.Builder(getMaterialsId(), gregtechId("concentrate_enrich_naquadah_clay"))
                 .dust()
                 .color(0x48D1CC)
                 .build();
         //氧化硅岩混合物粉
-        GTQTMaterials.Yanghuaguiyanhunhe = new Material.Builder(getMaterialsId(), gregtechId("yanghuaguiyanhunhe"))
+        GTQTMaterials.NaquadahOxideRockMixture = new Material.Builder(getMaterialsId(), gregtechId("naquadah_oxide_rock_mixture"))
                 .dust()
                 .color(0x458B00)
                 .build();
         //高纯硅岩溶液
-        GTQTMaterials.Gaochunguiyanrongye = new Material.Builder(getMaterialsId(), gregtechId("gaochunguiyanrongye"))
+        GTQTMaterials.HighPurityNaquadahSolution = new Material.Builder(getMaterialsId(), gregtechId("high_purity_naquadah_solution"))
                 .fluid()
                 .color(0x3CB371)
                 .build();
 
         //低纯硫酸超能硅岩粉
-        GTQTMaterials.Dichunliusuanchaonengguiyan = new Material.Builder(getMaterialsId(), gregtechId("dichunliusuanchaonengguiyan"))
+        GTQTMaterials.LowPuritySulfuricAcidSuperEnergyNaquadah = new Material.Builder(getMaterialsId(), gregtechId("low_purity_sulfuric_acid_super_energy_naquadah"))
                 .dust()
                 .color(0x32CD32)
                 .build();
 
         //低纯硫酸超能硅岩溶液
-        GTQTMaterials.Dichunliusuanchaonengguiyanr = new Material.Builder(getMaterialsId(), gregtechId("dichunliusuanchaonengguiyanr"))
+        GTQTMaterials.LowPuritySulfuricAcidSuperEnergyNaquadahSolution = new Material.Builder(getMaterialsId(), gregtechId("low_purity_sulfuric_acid_super_energy_naquadah_solution"))
                 .fluid()
                 .color(0x2E8B57)
                 .build();
 
         //高纯超能硅岩溶液
-        GTQTMaterials.Gaochunchaonengguiyanrongye = new Material.Builder(getMaterialsId(), gregtechId("gaochunchaonengguiyanrongye"))
+        GTQTMaterials.HighPuritySulfuricAcidSuperEnergyNaquadah = new Material.Builder(getMaterialsId(), gregtechId("high_purity_sulfuric_acid_super_energy_naquadah_solution"))
                 .fluid()
                 .color(0x228B22)
                 .build();
@@ -1795,33 +1790,35 @@ public class FirstDegreeMaterials {
 
         //锗线
         //氧化闪锌混合物
-        GTQTMaterials.Yanghuashanxinhunhewu = new Material.Builder(getMaterialsId(), gregtechId("yanghuashanxinhunhewu"))
+        GTQTMaterials.ZincOxideFlashMixture = new Material.Builder(getMaterialsId(), gregtechId("zinc_oxide_flash_mixture"))
                 .dust()
                 .color(0xAEEEEE)
                 .build()
                 .setFormula("Ge?O?", true);
 
         //富集闪锌混合物
-        GTQTMaterials.Fujishanxinhunhewu = new Material.Builder(getMaterialsId(), gregtechId("fujishanxinhunhewu"))
+        GTQTMaterials.RichZincFlashMixture = new Material.Builder(getMaterialsId(), gregtechId("rich_zinc_flash_mixture"))
                 .dust()
                 .color(0xB0C4DE)
                 .build()
                 .setFormula("Ge?O?", true);
+
         //富集闪锌焙烧残留
-        GTQTMaterials.Fujishanxinbeishaocanliu = new Material.Builder(getMaterialsId(), gregtechId("fujishanxinbeishaocanliu"))
+        GTQTMaterials.EnrichmentResidualFlashZincRoasting = new Material.Builder(getMaterialsId(), gregtechId("enrichment_residual_flash_zinc_roasting"))
                 .dust()
                 .color(0xB0E0E6)
                 .build()
                 .setFormula("Ge?O?", true);
 
         //含闪锌溶液
-        GTQTMaterials.Hanxinrongye = new Material.Builder(getMaterialsId(), gregtechId("hanxinrongye"))
+        GTQTMaterials.ZincFlashSolution = new Material.Builder(getMaterialsId(), gregtechId("zinc _flash _solution"))
                 .fluid()
                 .color(0xa79e42)
                 .build()
                 .setFormula("Ge?SO4?", true);
+
         //氢氧化铁
-        GTQTMaterials.Qingyanghuatie = new Material.Builder(getMaterialsId(), gregtechId("qingyanghuatie"))
+        GTQTMaterials.FerricHydroxide = new Material.Builder(getMaterialsId(), gregtechId("ferric_hydroxide"))
                 .dust()
                 .color(0xCD3700)
                 .flags(DISABLE_DECOMPOSITION)
@@ -1829,47 +1826,47 @@ public class FirstDegreeMaterials {
                 .build();
 
         //混锗铁残渣
-        GTQTMaterials.Huntiezhecanzha = new Material.Builder(getMaterialsId(), gregtechId("huntiezhecanzha"))
+        GTQTMaterials.MixedGermaniumIronResidue = new Material.Builder(getMaterialsId(), gregtechId("mixed_germanium_iron_residue"))
                 .dust()
                 .color(0xB3EE3A)
                 .build()
                 .setFormula("Ge?Fe?Zn?", true);
 
         //混锗镉残渣
-        GTQTMaterials.Hungezhecanzha = new Material.Builder(getMaterialsId(), gregtechId("hungezhecanzha"))
+        GTQTMaterials.MixedGermaniumCadmiumResidue = new Material.Builder(getMaterialsId(), gregtechId("mixed_germanium_cadmium_residue"))
                 .dust()
                 .color(0xC67171)
                 .build()
                 .setFormula("Ge?Cd?Zn?", true);
 
         //残渣溶液
-        GTQTMaterials.Canzharongye = new Material.Builder(getMaterialsId(), gregtechId("canzharongye"))
+        GTQTMaterials.ResidueSolution = new Material.Builder(getMaterialsId(), gregtechId("residue_solution"))
                 .fluid()
                 .color(0xCD950C)
                 .build()
                 .setFormula("Ge?Cd?*", true);
 
         //一氧化锗
-        GTQTMaterials.Yiyanghauzhe = new Material.Builder(getMaterialsId(), gregtechId("yiyanghauzhe"))
+        GTQTMaterials.GermaniumMonoxide = new Material.Builder(getMaterialsId(), gregtechId("germanium_monoxide"))
                 .fluid()
                 .color(0x97FFFF)
                 .build()
                 .setFormula("GeO", true);
         //炉渣
-        GTQTMaterials.Zhezha = new Material.Builder(getMaterialsId(), gregtechId("zhezha"))
+        GTQTMaterials.BurningGermaniumSlag = new Material.Builder(getMaterialsId(), gregtechId("burning_germanium_slag"))
                 .dust()
                 .color(0xA0522D)
                 .build()
                 .setFormula("Fe?Zn?Pd?Cd?", true);
 
         //鞣酸
-        GTQTMaterials.Rousuan = new Material.Builder(getMaterialsId(), gregtechId("rousuan"))
+        GTQTMaterials.TannicAcid = new Material.Builder(getMaterialsId(), gregtechId("tannic_acid"))
                 .fluid()
                 .color(0x8B6914)
                 .build()
                 .setFormula("C76H52O46", true);
 
-        GTQTMaterials.Rzousuan = new Material.Builder(getMaterialsId(), gregtechId("rzousuan"))
+        GTQTMaterials.ImpureTannicAcid = new Material.Builder(getMaterialsId(), gregtechId("impure_tannic_acid"))
                 .fluid()
                 .color(0x8B7E66)
                 .build()
@@ -1885,28 +1882,28 @@ public class FirstDegreeMaterials {
 
 
         //四氯化锗
-        GTQTMaterials.Silvhuazhe = new Material.Builder(getMaterialsId(), gregtechId("silvhuazhe"))
+        GTQTMaterials.EnrichedGermaniumPrecipitation = new Material.Builder(getMaterialsId(), gregtechId("enriched_germanium_precipitation"))
                 .fluid()
                 .color(0x8A2BE2)
                 .build()
                 .setFormula("GeCl4*", true);
 
         //四氯化锗
-        GTQTMaterials.Ssilvhuazhe = new Material.Builder(getMaterialsId(), gregtechId("ssilvhuazhe"))
+        GTQTMaterials.EnrichedGermaniumPrecipitationAcid = new Material.Builder(getMaterialsId(), gregtechId("enriched_germanium_precipitation_acid"))
                 .fluid()
                 .color(0xa79e42)
                 .build()
                 .setFormula("GeCl4*HCl", true);
 
         //高淳四氯化锗
-        GTQTMaterials.Sgilvhuazhe = new Material.Builder(getMaterialsId(), gregtechId("sgilvhuazhe"))
+        GTQTMaterials.HighPurityGermaniumTetrachloride = new Material.Builder(getMaterialsId(), gregtechId("high_purity_germanium_tetrachloride"))
                 .fluid()
                 .color(0x7171C6)
                 .build()
                 .setFormula("GeCl4", true);
 
         //高纯二氧化锗
-        GTQTMaterials.Egryanghuazhe = new Material.Builder(getMaterialsId(), gregtechId("egryanghuazhe"))
+        GTQTMaterials.HighPurityGermaniumDioxide = new Material.Builder(getMaterialsId(), gregtechId("high_purity_germanium_dioxide"))
                 .dust()
                 .color(0x68228B)
                 .build()
@@ -1965,6 +1962,7 @@ public class FirstDegreeMaterials {
                 .flags(DISABLE_DECOMPOSITION)
                 .build()
                 .setFormula("C8H10Br2O2", true);
+
         //二溴菊酰氯
         GTQTMaterials.Dfeltamethrinf = new Material.Builder(getMaterialsId(), gregtechId("dfeltamethrinf"))
                 .fluid()
@@ -1972,6 +1970,7 @@ public class FirstDegreeMaterials {
                 .flags(DISABLE_DECOMPOSITION)
                 .build()
                 .setFormula("C8H10Br2O2*CN", true);
+
         //间苯氧基苯甲醛
         GTQTMaterials.Dfeltamethring = new Material.Builder(getMaterialsId(), gregtechId("dfeltamethring"))
                 .fluid()
@@ -1979,6 +1978,7 @@ public class FirstDegreeMaterials {
                 .flags(DISABLE_DECOMPOSITION)
                 .build()
                 .setFormula("C13H10O2", true);
+
         //α-氰基间苯氧基苯甲醇
         GTQTMaterials.Dfeltamethrinh = new Material.Builder(getMaterialsId(), gregtechId("dfeltamethrinh"))
                 .fluid()
@@ -1996,7 +1996,7 @@ public class FirstDegreeMaterials {
                 .build()
                 .setFormula("C19H42BrN", true);
         //溴代十六烷
-        GTQTMaterials.Xiudaishiliuwan = new Material.Builder(getMaterialsId(), gregtechId("xiudaishiliuwan"))
+        GTQTMaterials.BromoHexadecane = new Material.Builder(getMaterialsId(), gregtechId("bromo_hexadecane"))
                 .fluid()
                 .color(0xAB82FF)
                 .flags(DISABLE_DECOMPOSITION)
@@ -2039,6 +2039,7 @@ public class FirstDegreeMaterials {
                 .flags(DISABLE_DECOMPOSITION)
                 .build()
                 .setFormula("(HOCH2)3CNH2*", true);
+
         //三羟甲基硝基甲烷
         GTQTMaterials.TRISN = new Material.Builder(getMaterialsId(), gregtechId("trisn"))
                 .fluid()
@@ -2046,6 +2047,7 @@ public class FirstDegreeMaterials {
                 .flags(DISABLE_DECOMPOSITION)
                 .build()
                 .setFormula("CH2（NO3）3", true);
+
         //异戊醇
         GTQTMaterials.Isoamylalcohol = new Material.Builder(getMaterialsId(), gregtechId("isoamylalcohol"))
                 .fluid()
@@ -2055,7 +2057,7 @@ public class FirstDegreeMaterials {
                 .setFormula("C5H12O", true);
 
         //异戊醛
-        GTQTMaterials.Isoamylalcohola = new Material.Builder(getMaterialsId(), gregtechId("isoamylalcohola"))
+        GTQTMaterials.Isovaleraldehyde = new Material.Builder(getMaterialsId(), gregtechId("isovaleraldehyde"))
                 .fluid()
                 .color(0xEE8262)
                 .flags(DISABLE_DECOMPOSITION)
@@ -2116,21 +2118,21 @@ public class FirstDegreeMaterials {
                 .build();
 
         //氧化钛
-        GTQTMaterials.Yanghuatai = new Material.Builder(getMaterialsId(), gregtechId("yanghuatai"))
+        GTQTMaterials.TitaniumOxide = new Material.Builder(getMaterialsId(), gregtechId("titanium_oxide"))
                 .ingot().dust()
                 .color(0xFF6EB4)
                 .components(Titanium,1,Oxygen,2)
                 .flags(DISABLE_DECOMPOSITION)
                 .build();
         //酸性钛
-        GTQTMaterials.Suanxingtai = new Material.Builder(getMaterialsId(), gregtechId("suanxingtai"))
+        GTQTMaterials.AcidicTitanium = new Material.Builder(getMaterialsId(), gregtechId("acidic_titanium"))
                 .fluid()
                 .color(0xFF6A6A)
                 .components(Titanium,1,Sulfur,1,Oxygen,4)
                 .flags(DISABLE_DECOMPOSITION)
                 .build();
         //含杂酰化钛
-        GTQTMaterials.Hanzaxianhuatai = new Material.Builder(getMaterialsId(), gregtechId("hanzaxianhuatai"))
+        GTQTMaterials.ImpureTitaniumAcylate = new Material.Builder(getMaterialsId(), gregtechId("impure_titanium_acylate"))
                 .fluid()
                 .color(0xFF3E96)
                 .components(Titanium,1,Carbon,1,Oxygen,1)
@@ -2138,14 +2140,14 @@ public class FirstDegreeMaterials {
                 .build()
                 .setFormula("[Ti(O2)(OH)(H2O)4]*", true);
         //酰化钛沉淀
-        GTQTMaterials.Xianhuaitaicd = new Material.Builder(getMaterialsId(), gregtechId("xianhuaitaicd"))
+        GTQTMaterials.TitaniumAcylatePrecipitation = new Material.Builder(getMaterialsId(), gregtechId("titanium_acylate_precipitation"))
                 .dust()
                 .color(0xFF7F00)
                 .flags(DISABLE_DECOMPOSITION)
                 .build()
                 .setFormula("[Ti(O2)(OH)(H2O)4]*", true);
         //粗制酰化钛
-        GTQTMaterials.Cuzhixianhuatai = new Material.Builder(getMaterialsId(), gregtechId("cuzhixianhuatai"))
+        GTQTMaterials.CrudeTitaniumAcylate = new Material.Builder(getMaterialsId(), gregtechId("crude_titanium_acylate"))
                 .fluid()
                 .color(0xFF8C69)
                 .flags(DISABLE_DECOMPOSITION)
@@ -2153,14 +2155,14 @@ public class FirstDegreeMaterials {
                 .setFormula("[Ti(O2)(OH)(H2O)4]*", true);
 
         //酰化钛
-        GTQTMaterials.Xianhuatai = new Material.Builder(getMaterialsId(), gregtechId("xianhuatai"))
+        GTQTMaterials.TitaniumAcylate = new Material.Builder(getMaterialsId(), gregtechId("titanium_acylate"))
                 .fluid()
                 .color(0xFF00FF)
                 .flags(DISABLE_DECOMPOSITION)
                 .build()
                 .setFormula("[Ti(O2)(OH)(H2O)4]＋", true);
         //乙酸钡
-        GTQTMaterials.Yisuanbei = new Material.Builder(getMaterialsId(), gregtechId("yisuanbei"))
+        GTQTMaterials.BariumAcetate = new Material.Builder(getMaterialsId(), gregtechId("barium_acetate"))
                 .fluid()
                 .color(0xFA8072)
                 .components(Titanium,1,Carbon,1,Oxygen,1)
@@ -2169,7 +2171,7 @@ public class FirstDegreeMaterials {
                 .setFormula("(CH₃COO)₂Ba", true);
 
         //钛合金TC4
-        GTQTMaterials.Tcfour = new Material.Builder(getMaterialsId(), gregtechId("tcfour"))
+        GTQTMaterials.TitaniumAlloyTCF = new Material.Builder(getMaterialsId(), gregtechId("titanium_alloy_tcf"))
                 .fluid()
                 .color(0xFF7F00)
                 .blast(3600,MID)
@@ -2178,7 +2180,7 @@ public class FirstDegreeMaterials {
                 .build();
 
         //生物原油
-        GTQTMaterials.Biooil = new Material.Builder(getMaterialsId(), gregtechId("biooil"))
+        GTQTMaterials.BioOil = new Material.Builder(getMaterialsId(), gregtechId("biooil"))
                 .fluid()
                 .color(0xFA8072)
                 .flags(DISABLE_DECOMPOSITION)
@@ -3324,8 +3326,13 @@ public class FirstDegreeMaterials {
                 .build()
                 .setFormula("C6H10O5", true);
 
-        //TODO
-        getMaterialsId();//占位
+        TriniumTrioxide = new Material.Builder(getMaterialsId(), gregtechId("trinium_trioxide"))
+                .dust()
+                .color(0xC037C5)
+                .iconSet(METALLIC)
+                .components(Trinium, 2, Oxygen, 3)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
 
         GTQTMaterials.SodiumThiocyanate = new Material.Builder(getMaterialsId(), gregtechId("sodium_thiocyanate"))
                 .liquid()

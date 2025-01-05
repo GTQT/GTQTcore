@@ -25,9 +25,9 @@ import gregtech.common.metatileentities.MetaTileEntities;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
-import keqing.gtqtcore.api.recipes.properties.CACasingTierProperty;
+import keqing.gtqtcore.api.recipes.properties.ComponentAssemblyLineRecipesTierProperty;
 import keqing.gtqtcore.api.unification.GTQTMaterials;
-import keqing.gtqtcore.api.utils.GTQTUniverUtil;
+import keqing.gtqtcore.api.utils.GTQTUniversUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4;
@@ -96,7 +96,7 @@ public class MetaTileEntityComponentAssemblyLine extends RecipeMapMultiblockCont
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
         Object casingTier = context.get("CALCasingTieredStats");
-        this.casingTier = GTQTUniverUtil.getOrDefault(() -> casingTier instanceof WrappedIntTired,
+        this.casingTier = GTQTUniversUtil.getOrDefault(() -> casingTier instanceof WrappedIntTired,
                 () -> ((WrappedIntTired) casingTier).getIntTier(), 0);
     }
 
@@ -119,7 +119,7 @@ public class MetaTileEntityComponentAssemblyLine extends RecipeMapMultiblockCont
 
     @Override
     public boolean checkRecipe(@Nonnull Recipe recipe, boolean consumeIfSuccess) {
-        return super.checkRecipe(recipe, consumeIfSuccess) && recipe.getProperty(CACasingTierProperty.getInstance(), 0) <= casingTier;
+        return super.checkRecipe(recipe, consumeIfSuccess) && recipe.getProperty(ComponentAssemblyLineRecipesTierProperty.getInstance(), 0) <= casingTier;
     }
 
     @Nonnull

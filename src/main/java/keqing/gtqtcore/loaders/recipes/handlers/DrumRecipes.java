@@ -11,7 +11,7 @@ import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.Materials.Neutronium;
 import static gregtech.api.unification.ore.OrePrefix.plate;
 import static gregtech.api.unification.ore.OrePrefix.stickLong;
-import static keqing.gtqtcore.api.utils.GTQTUniverUtil.SECOND;
+import static keqing.gtqtcore.api.utils.GTQTUniversUtil.SECOND;
 
 public class DrumRecipes {
     public static void init() {

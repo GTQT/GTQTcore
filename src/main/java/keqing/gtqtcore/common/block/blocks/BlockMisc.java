@@ -18,7 +18,7 @@ public class BlockMisc extends VariantBlock<BlockMisc.RoadType> {
 
     public BlockMisc() {
         super(Material.IRON);
-        setTranslationKey("road");
+        setTranslationKey("misc");
         setHardness(2.0f);
         setResistance(10.0f);
         setSoundType(SoundType.METAL);
@@ -32,7 +32,8 @@ public class BlockMisc extends VariantBlock<BlockMisc.RoadType> {
 
     public enum RoadType implements IStringSerializable, IStateHarvestLevel {
 
-        ALUMINUM_ORE_SAND("aluminum_ore_sand",3);
+        ALUMINUM_ORE_SAND("aluminum_ore_sand",0),
+        GOLD_ORE_SAND("gold_ore_sand",0);
 
         private final String name;
         private final int harvestLevel;

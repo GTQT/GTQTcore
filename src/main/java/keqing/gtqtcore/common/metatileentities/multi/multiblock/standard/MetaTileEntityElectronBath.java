@@ -22,7 +22,7 @@ import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
 import keqing.gtqtcore.api.metaileentity.multiblock.GTQTRecipeMapMultiblockOverwrite;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
-import keqing.gtqtcore.api.recipes.properties.ELEProperties;
+import keqing.gtqtcore.api.recipes.properties.ElectronBathProperties;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.client.resources.I18n;
@@ -94,7 +94,7 @@ public class MetaTileEntityElectronBath extends GTQTRecipeMapMultiblockOverwrite
 
     @Override
     public boolean checkRecipe(@Nonnull Recipe recipe, boolean consumeIfSuccess) {
-        return super.checkRecipe(recipe, consumeIfSuccess) && recipe.getProperty(ELEProperties.getInstance(), 0) <= ElectrodeTier;
+        return super.checkRecipe(recipe, consumeIfSuccess) && recipe.getProperty(ElectronBathProperties.getInstance(), 0) <= ElectrodeTier;
     }
 
 

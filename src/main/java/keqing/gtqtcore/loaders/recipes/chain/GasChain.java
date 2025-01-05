@@ -13,6 +13,7 @@ public class GasChain {
 
     private static void CollectAir() {
         GAS_COLLECTOR_RECIPES.recipeBuilder()
+                .dimension(50)
                 .circuitMeta(30)
                 .fluidOutputs(Air.getFluid(10000))
                 .duration(200).EUt(16).buildAndRegister();

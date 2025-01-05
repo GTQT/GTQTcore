@@ -23,7 +23,7 @@ import java.util.*;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-import static keqing.gtqtcore.api.utils.GTQTUniverUtil.getTileEntity;
+import static keqing.gtqtcore.api.utils.GTQTUniversUtil.getTileEntity;
 
 public class GTQTTraceabilityPredicate {
     public static TraceabilityPredicate optionalStates(String mark, IBlockState... allowedStates) {

@@ -15,7 +15,6 @@ import gregtech.api.metatileentity.multiblock.IMultiblockAbilityPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.MultiblockControllerBase;
 import gregtech.api.unification.OreDictUnifier;
-import gregtech.api.unification.stack.UnificationEntry;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockPart;
@@ -23,7 +22,7 @@ import keqing.gtqtcore.api.capability.GTQTDataCode;
 import keqing.gtqtcore.api.capability.IBuffer;
 import keqing.gtqtcore.api.capability.IPHValue;
 import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
-import keqing.gtqtcore.api.utils.GTQTUniverUtil;
+import keqing.gtqtcore.api.utils.GTQTUniversUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
@@ -69,8 +68,8 @@ public class MetaTileEntityBufferHatch extends MetaTileEntityMultiblockPart impl
         this.fluidTank = new BufferFluidTank(8000, this);
         this.itemHandler = new BufferItemHandler();
 
-        BufferItemMap.put(GTQTUniverUtil.stackToInt(OreDictUnifier.get(dust, SodiumHydroxide)), new double[]{3.15, 13.55});
-        BufferItemMap.put(GTQTUniverUtil.stackToInt(OreDictUnifier.get(dust, SodiumBicarbonate)), new double[]{1.15, 5.55});
+        BufferItemMap.put(GTQTUniversUtil.stackToInt(OreDictUnifier.get(dust, SodiumHydroxide)), new double[]{3.15, 13.55});
+        BufferItemMap.put(GTQTUniversUtil.stackToInt(OreDictUnifier.get(dust, SodiumBicarbonate)), new double[]{1.15, 5.55});
 
         // 初始化 BufferFluidMap
         BufferFluidMap.put("sulfuric_acid", new double[]{-3.15, 1.55});
@@ -217,7 +216,7 @@ public class MetaTileEntityBufferHatch extends MetaTileEntityMultiblockPart impl
             needUpdate = false;
         } else {
             if (!bufferitem.isEmpty()){
-                double[] phchangeitem = BufferItemMap.get(GTQTUniverUtil.stackToInt(bufferitem));
+                double[] phchangeitem = BufferItemMap.get(GTQTUniversUtil.stackToInt(bufferitem));
                 MultiblockControllerBase current_controller = getController();
                 if (current_controller == null || !current_controller.isStructureFormed()) {
                     needUpdate = false;

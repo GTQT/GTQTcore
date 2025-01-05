@@ -12,8 +12,8 @@ import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.TJMaterials.*;
-import static keqing.gtqtcore.api.utils.GTQTUniverUtil.SECOND;
-import static keqing.gtqtcore.api.utils.GTQTUniverUtil.removeChemicalRecipe;
+import static keqing.gtqtcore.api.utils.GTQTUniversUtil.SECOND;
+import static keqing.gtqtcore.api.utils.GTQTUniversUtil.removeChemicalRecipe;
 
 public class RubbersChain {
     public static void init() {

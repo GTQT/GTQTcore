@@ -16,7 +16,7 @@ import static gregtech.api.unification.ore.OrePrefix.dust;
 import static gregtech.api.unification.ore.OrePrefix.ingot;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.BURNER_REACTOR_RECIPES;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.POLYMERIZATION_RECIPES;
-import static keqing.gtqtcore.api.utils.GTQTUniverUtil.*;
+import static keqing.gtqtcore.api.utils.GTQTUniversUtil.*;
 
 public class PlasticChain {
 

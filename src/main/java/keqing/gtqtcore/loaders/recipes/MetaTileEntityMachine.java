@@ -47,7 +47,7 @@ import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.TJMaterials.Polyetheretherketone;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.plate_curved;
-import static keqing.gtqtcore.api.utils.GTQTUniverUtil.SECOND;
+import static keqing.gtqtcore.api.utils.GTQTUniversUtil.SECOND;
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4.TurbineCasingType.FISHING_CASING;
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing5.TurbineCasingType.*;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.ELECTRODE_GRAPHITE;
@@ -239,7 +239,7 @@ public class MetaTileEntityMachine {
                 .input(dust, Aluminium, 4)
                 .input(dust, Vanadium)
                 .circuitMeta(11)
-                .output(dust, Tcfour, 11)
+                .output(dust, TitaniumAlloyTCF, 11)
                 .duration(800).EUt(VA[HV]).buildAndRegister();
 
         MIXER_RECIPES.recipeBuilder()

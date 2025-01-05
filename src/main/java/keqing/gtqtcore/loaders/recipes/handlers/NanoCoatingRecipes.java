@@ -276,10 +276,10 @@ public class NanoCoatingRecipes {
 
         CHEMICAL_PLANT.recipeBuilder()
                 .notConsumable(CATALYST_FRAMEWORK_V)
-                .fluidInputs(Rzousuan.getFluid(2000))
+                .fluidInputs(ImpureTannicAcid.getFluid(2000))
                 .input(OrePrefix.dust, Carbon, 80)
                 .fluidOutputs(HydrobromicAcid.getFluid(200))
-                .fluidOutputs(Rousuan.getFluid(800))
+                .fluidOutputs(TannicAcid.getFluid(800))
                 .recipeLevel(5)
                 .duration(800)
                 .EUt(VA[EV])
@@ -287,7 +287,7 @@ public class NanoCoatingRecipes {
 
         CHEMICAL_PLANT.recipeBuilder()
                 .notConsumable(CATALYST_FRAMEWORK_V)
-                .fluidInputs(Biooil.getFluid(6000))
+                .fluidInputs(BioOil.getFluid(6000))
                 .input(OrePrefix.dust, SodaAsh, 10)
                 .fluidOutputs(RawOil.getFluid(750))
                 .fluidOutputs(RawOil.getFluid(750))
@@ -300,7 +300,7 @@ public class NanoCoatingRecipes {
 
         CHEMICAL_PLANT.recipeBuilder()
                 .notConsumable(CATALYST_FRAMEWORK_V)
-                .fluidInputs(Biooil.getFluid(6000))
+                .fluidInputs(BioOil.getFluid(6000))
                 .input(OrePrefix.dust, Meat, 10)
                 .fluidOutputs(RawOil.getFluid(750))
                 .fluidOutputs(RawOil.getFluid(750))
@@ -313,7 +313,7 @@ public class NanoCoatingRecipes {
 
         CHEMICAL_PLANT.recipeBuilder()
                 .notConsumable(CATALYST_FRAMEWORK_V)
-                .fluidInputs(Biooil.getFluid(6000))
+                .fluidInputs(BioOil.getFluid(6000))
                 .input(OrePrefix.dust, Bone, 10)
                 .fluidOutputs(RawOil.getFluid(750))
                 .fluidOutputs(RawOil.getFluid(750))

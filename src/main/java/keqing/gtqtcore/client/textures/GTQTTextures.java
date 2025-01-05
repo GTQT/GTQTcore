@@ -279,7 +279,7 @@ public class GTQTTextures {
         NQ_CASING = new SimpleOverlayRenderer("multiblock/casing/nq_turbine_casing");
         IRIDIUM_CASING = new SimpleOverlayRenderer("multiblock/casing/iridium_casing");
         HC_ALLOY_CASING = new SimpleOverlayRenderer("multiblock/casings/hc_alloy_casing");
-        SOLAR_PLATE_CASING = new SimpleOverlayRenderer("multiblock/electrobath/solar_generator_bottom");
+        SOLAR_PLATE_CASING = new SimpleOverlayRenderer("multiblock/electrolytic_bath/solar_generator_bottom");
         SFTC = new SimpleOverlayRenderer("multiblock/casings/supercritical_fuel_trans_casing");
         SFTS = new SimpleOverlayRenderer("multiblock/casings/supercritical_fuel_trans_score");
         LIGHTNING_ROD_OVERLAY = new OrientedOverlayRenderer("generators/lightning_rod");

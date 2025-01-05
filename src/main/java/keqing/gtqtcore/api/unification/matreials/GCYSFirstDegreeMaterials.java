@@ -44,13 +44,6 @@ public class GCYSFirstDegreeMaterials {
                 .components(Neodymium, 2, Oxygen, 3)
                 .build();
 
-        CeriumOxide = new Material.Builder(3503, gregtechId("cerium_oxide"))
-                .dust()
-                .color(0x10937F)
-                .iconSet(MaterialIconSet.METALLIC)
-                .components(Cerium, 1, Oxygen, 2)
-                .build();
-
         ScandiumOxide = new Material.Builder(3504, gregtechId("scandium_oxide"))
                 .dust()
                 .color(0x43964F)

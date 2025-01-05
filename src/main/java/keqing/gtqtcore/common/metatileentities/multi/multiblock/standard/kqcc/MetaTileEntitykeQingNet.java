@@ -28,9 +28,9 @@ import gregtech.common.metatileentities.multi.electric.MetaTileEntityDataBank;
 import gregtech.common.metatileentities.multi.electric.MetaTileEntityHPCA;
 import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
-import keqing.gtqtcore.api.recipes.properties.ELEProperties;
-import keqing.gtqtcore.api.recipes.properties.KQKindProperty;
-import keqing.gtqtcore.api.recipes.properties.KQNetProperty;
+import keqing.gtqtcore.api.recipes.properties.ElectronBathProperties;
+import keqing.gtqtcore.api.recipes.properties.ResearchSystemMachineProperty;
+import keqing.gtqtcore.api.recipes.properties.ResearchSystemKindProperty;
 import keqing.gtqtcore.api.utils.GTQTKQnetHelper;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
@@ -335,7 +335,7 @@ public class MetaTileEntitykeQingNet extends RecipeMapMultiblockController imple
 
     @Override
     public boolean checkRecipe(@Nonnull Recipe recipe, boolean consumeIfSuccess) {
-        if (recipe.getProperty(KQNetProperty.getInstance(), 0) == thresholdPercentage && recipe.getProperty(ELEProperties.getInstance(), 0) <= tier && checkKind(recipe.getProperty(KQKindProperty.getInstance(), 0))) {
+        if (recipe.getProperty(ResearchSystemKindProperty.getInstance(), 0) == thresholdPercentage && recipe.getProperty(ElectronBathProperties.getInstance(), 0) <= tier && checkKind(recipe.getProperty(ResearchSystemMachineProperty.getInstance(), 0))) {
             return super.checkRecipe(recipe, consumeIfSuccess);
         }
         return false;

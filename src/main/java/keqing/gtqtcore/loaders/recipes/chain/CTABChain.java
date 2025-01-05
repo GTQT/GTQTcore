@@ -2,7 +2,6 @@ package keqing.gtqtcore.loaders.recipes.chain;
 
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.ore.OrePrefix;
-import net.minecraftforge.client.event.ColorHandlerEvent;
 
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
@@ -107,11 +106,11 @@ public class CTABChain {
                 .notConsumable(OrePrefix.dust,PotassiumDichromate)
                 .fluidInputs(SulfuricAcid.getFluid(1000))
                 .inputs(Vanillin.getItemStack())
-                .fluidOutputs(Isoamylalcohola.getFluid(1000))
+                .fluidOutputs(Isovaleraldehyde.getFluid(1000))
                 .duration(400).EUt(VA[HV]).buildAndRegister();
 
         ELECTROLYZER_RECIPES.recipeBuilder()
-                .fluidInputs(Isoamylalcohola.getFluid(1000))
+                .fluidInputs(Isovaleraldehyde.getFluid(1000))
                 .fluidOutputs(Hydrogen.getFluid(2000))
                 .fluidOutputs(Isoamylalcohol.getFluid(1000))
                 .duration(400).EUt(VA[HV]).buildAndRegister();
@@ -166,11 +165,11 @@ public class CTABChain {
                 .fluidInputs(Hexadecanol.getFluid(1000))
                 .fluidInputs(Bromine.getFluid(1000))
                 .notConsumable(OrePrefix.gem,RedPhosphorus)
-                .fluidOutputs(Xiudaishiliuwan.getFluid(4000))
+                .fluidOutputs(BromoHexadecane.getFluid(4000))
                 .duration(400).EUt(VA[HV]).buildAndRegister();
 
         CHEMICAL_RECIPES.recipeBuilder()
-                .fluidInputs(Xiudaishiliuwan.getFluid(1000))
+                .fluidInputs(BromoHexadecane.getFluid(1000))
                 .fluidInputs(Trimethylamine.getFluid(1000))
                 .fluidOutputs(CTAB.getFluid(2000))
                 .duration(400).EUt(VA[MV]).buildAndRegister();

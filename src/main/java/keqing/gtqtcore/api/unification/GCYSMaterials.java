@@ -33,7 +33,6 @@ public class GCYSMaterials {
     public static Material LanthanumOxide;
     public static Material PraseodymiumOxide;
     public static Material NeodymiumOxide;
-    public static Material CeriumOxide;
     public static Material ScandiumOxide;
     public static Material EuropiumOxide;
     public static Material GadoliniumOxide;

@@ -17,7 +17,7 @@ import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.capability.IRadiation;
 import keqing.gtqtcore.api.metaileentity.GTQTRecipeMapMultiblockController;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
-import keqing.gtqtcore.api.recipes.properties.BRProperty;
+import keqing.gtqtcore.api.recipes.properties.BioReactorProperty;
 import keqing.gtqtcore.api.unification.GTQTMaterials;
 import keqing.gtqtcore.api.utils.GTQTDateHelper;
 import keqing.gtqtcore.api.utils.GTQTUtil;
@@ -140,7 +140,7 @@ public class MetaTileEntityGeneMutagenesis extends GTQTRecipeMapMultiblockContro
     @Override
     public boolean checkRecipe(@Nonnull Recipe recipe, boolean consumeIfSuccess) {
         if (this.getRecipeMap() != GENE_MUTAGENESIS) return true;
-        int number = recipe.getProperty(BRProperty.getInstance(), 0);
+        int number = recipe.getProperty(BioReactorProperty.getInstance(), 0);
         if (getRadiationHatch().getRadiation() >= number)
             return super.checkRecipe(recipe, consumeIfSuccess);
         else return false;

@@ -186,6 +186,7 @@ public class MetaTileEntitySolarPlate extends MultiblockWithDisplayBase implemen
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
         return GTQTTextures.SOLAR_PLATE_CASING;
     }
+
     private boolean isWorkingEnabled() {
         return isWorkingEnabled;
     }

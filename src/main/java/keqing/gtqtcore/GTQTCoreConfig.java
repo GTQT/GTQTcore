@@ -14,6 +14,22 @@ public class GTQTCoreConfig {
     public static WorldGenSwitch WorldGenSwitch = new WorldGenSwitch();
     public static OBJRenderSwitch OBJRenderSwitch = new OBJRenderSwitch();
     public static DifficultySwitch difficultySwitch = new DifficultySwitch();
+    public static DebugSwitch debugSwitch = new DebugSwitch();
+
+    public static class DebugSwitch {
+        @Config.Comment({ "Debug Switch" })
+        public boolean debugSwitch = false;
+
+        @Config.Comment({ "Print Cable Info In Logs" })
+        public boolean cableDebug = false;
+
+        @Config.Comment({ "Print Pipe Info In Logs" })
+        public boolean pipeDebug = false;
+
+        @Config.Comment({ "Print Rotor Info In Logs" })
+        public boolean rotorDebug = false;
+    }
+
     public static class DifficultySwitch {
         @Config.Comment({ "Allows HotIngot to be cooled by throwing it into water.", "Default: true" })
         public boolean easyCooling = true;

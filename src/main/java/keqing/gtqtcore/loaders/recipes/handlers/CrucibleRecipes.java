@@ -14,7 +14,7 @@ import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.VACUUM_CHAMBER_RECI
 import static keqing.gtqtcore.api.unification.GCYSMaterials.HexagonalBoronNitride;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.IncoloyMA813;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.Inconel792;
-import static keqing.gtqtcore.api.utils.GTQTUniverUtil.MINUTE;
+import static keqing.gtqtcore.api.utils.GTQTUniversUtil.MINUTE;
 
 public class CrucibleRecipes {
 

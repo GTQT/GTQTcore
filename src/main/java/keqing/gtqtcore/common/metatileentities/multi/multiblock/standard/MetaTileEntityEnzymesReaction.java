@@ -25,7 +25,7 @@ import keqing.gtqtcore.api.capability.IPHValue;
 import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
-import keqing.gtqtcore.api.recipes.properties.ERProperty;
+import keqing.gtqtcore.api.recipes.properties.EnzymesReactionProperty;
 import keqing.gtqtcore.api.utils.EnzymesUtils;
 import keqing.gtqtcore.api.utils.GTQTMathUtil;
 import keqing.gtqtcore.api.utils.GTQTUtil;
@@ -248,7 +248,7 @@ public class MetaTileEntityEnzymesReaction extends MultiMapMultiblockController 
 
     @Override
     public boolean checkRecipe(@Nonnull Recipe recipe, boolean consumeIfSuccess) {
-        int number = recipe.getProperty(ERProperty.getInstance(), 0);
+        int number = recipe.getProperty(EnzymesReactionProperty.getInstance(), 0);
         if (getEnzymes() == number)
             if (getRare(number))
                 return super.checkRecipe(recipe, consumeIfSuccess);

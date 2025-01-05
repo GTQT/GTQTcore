@@ -1,12 +1,9 @@
 package keqing.gtqtcore.loaders.recipes.handlers;
 
-import com.cleanroommc.groovyscript.api.IIngredient;
 import gregtech.api.items.metaitem.MetaItem;
 import gregtech.api.metatileentity.multiblock.CleanroomType;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.ore.OrePrefix;
-import gregtech.api.unification.stack.UnificationEntry;
-import ibxm.Player;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 
 import static gregtech.api.GTValues.*;
@@ -323,7 +320,7 @@ public class EnzymesRecipes {
         BIOLOGICAL_REACTION_RECIPES.recipeBuilder()
                 .fluidInputs(Enzymescc.getFluid(10))
                 .fluidInputs(FermentedBiomass.getFluid(1000))
-                .fluidOutputs(Biooil.getFluid(2000))
+                .fluidOutputs(BioOil.getFluid(2000))
                 .rate(20)
                 .duration(200).EUt(VA[HV]).buildAndRegister();
 

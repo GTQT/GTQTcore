@@ -17,8 +17,7 @@ import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.util.GTTransferUtils;
 import gregtech.api.util.GTUtility;
 import gregtech.common.ConfigHolder;
-import keqing.gtqtcore.api.utils.GTQTUniverUtil;
-import keqing.gtqtcore.api.utils.GTQTUniverUtil;
+import keqing.gtqtcore.api.utils.GTQTUniversUtil;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.MetaTileEntityIntegratedOreProcessor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -132,27 +131,27 @@ public class OreProcessorRecipeLogic implements IWorkable {
                 continue;
             if (name.startsWith("crushedPurified")) { // crushed purified ore
                 for (ItemStack stack : OreDictionary.getOres(name)) {
-                    isCrushedPureOre.add(GTQTUniverUtil.stackToInt(stack));
+                    isCrushedPureOre.add(GTQTUniversUtil.stackToInt(stack));
                 }
             } else if (name.startsWith("crushedCentrifuged")) { // crushed centrifuged ore
                 for (ItemStack stack : OreDictionary.getOres(name)) {
-                    isThermalOre.add(GTQTUniverUtil.stackToInt(stack));
+                    isThermalOre.add(GTQTUniversUtil.stackToInt(stack));
                 }
             } else if (name.startsWith("crushed")) { // crushed ore
                 for (ItemStack stack : OreDictionary.getOres(name)) {
-                    isCrushedOre.add(GTQTUniverUtil.stackToInt(stack));
+                    isCrushedOre.add(GTQTUniversUtil.stackToInt(stack));
                 }
             } else if (name.startsWith("dustImpure")) { // impure dust
                 for (ItemStack stack : OreDictionary.getOres(name)) {
-                    isImpureOre.add(GTQTUniverUtil.stackToInt(stack));
+                    isImpureOre.add(GTQTUniversUtil.stackToInt(stack));
                 }
             } else if (name.startsWith("dustPure")) { // pure dust
                 for (ItemStack stack : OreDictionary.getOres(name)) {
-                    isPureOre.add(GTQTUniverUtil.stackToInt(stack));
+                    isPureOre.add(GTQTUniversUtil.stackToInt(stack));
                 }
             } else if (name.startsWith("ore")) { // ore
                 for (ItemStack stack : OreDictionary.getOres(name)) {
-                    isOre.add(GTQTUniverUtil.stackToInt(stack));
+                    isOre.add(GTQTUniversUtil.stackToInt(stack));
                 }
             }
         }
@@ -164,7 +163,7 @@ public class OreProcessorRecipeLogic implements IWorkable {
         List<ItemStack> t_product = new ArrayList<>();
         if (midProduct != null) {
             for (ItemStack stack : midProduct) {
-                int t_id = GTQTUniverUtil.stackToInt(stack);
+                int t_id = GTQTUniversUtil.stackToInt(stack);
                 if (checkTypes(t_id, tables)) {
                     Recipe recipe = RecipeMaps.MACERATOR_RECIPES.findRecipe(GTValues.V[GTValues.MAX], Collections.singletonList(stack), Collections.emptyList());
                     if (recipe != null) {
@@ -185,7 +184,7 @@ public class OreProcessorRecipeLogic implements IWorkable {
         List<ItemStack> t_product = new ArrayList<>();
         if (midProduct != null) {
             for (ItemStack stack : midProduct) {
-                int t_id = GTQTUniverUtil.stackToInt(stack);
+                int t_id = GTQTUniversUtil.stackToInt(stack);
                 if (checkTypes(t_id, tables)) {
                     Recipe recipe = RecipeMaps.ORE_WASHER_RECIPES.findRecipe(GTValues.V[GTValues.MAX], Collections.singletonList(stack), Collections.singletonList(Materials.DistilledWater.getFluid(Integer.MAX_VALUE)));
                     if (recipe != null) {
@@ -206,7 +205,7 @@ public class OreProcessorRecipeLogic implements IWorkable {
         List<ItemStack> t_product = new ArrayList<>();
         if (midProduct != null) {
             for (ItemStack stack : midProduct) {
-                int t_id = GTQTUniverUtil.stackToInt(stack);
+                int t_id = GTQTUniversUtil.stackToInt(stack);
                 if (checkTypes(t_id, tables)) {
                     Recipe recipe = RecipeMaps.THERMAL_CENTRIFUGE_RECIPES.findRecipe(GTValues.V[GTValues.MAX], Collections.singletonList(stack), Collections.emptyList());
                     if (recipe != null) {
@@ -227,7 +226,7 @@ public class OreProcessorRecipeLogic implements IWorkable {
         List<ItemStack> t_product = new ArrayList<>();
         if (midProduct != null) {
             for (ItemStack stack : midProduct) {
-                int t_id = GTQTUniverUtil.stackToInt(stack);
+                int t_id = GTQTUniversUtil.stackToInt(stack);
                 if (checkTypes(t_id, tables)) {
                     Recipe recipe = RecipeMaps.CENTRIFUGE_RECIPES.findRecipe(GTValues.V[GTValues.MAX], Collections.singletonList(stack), Collections.emptyList());
                     if (recipe != null) {
@@ -248,7 +247,7 @@ public class OreProcessorRecipeLogic implements IWorkable {
         List<ItemStack> t_product = new ArrayList<>();
         if (midProduct != null) {
             for (ItemStack stack : midProduct) {
-                int t_id = GTQTUniverUtil.stackToInt(stack);
+                int t_id = GTQTUniversUtil.stackToInt(stack);
                 if (checkTypes(t_id, tables)) {
                     Recipe recipe = RecipeMaps.SIFTER_RECIPES.findRecipe(GTValues.V[GTValues.MAX], Collections.singletonList(stack), Collections.emptyList());
                     if (recipe != null) {
@@ -269,7 +268,7 @@ public class OreProcessorRecipeLogic implements IWorkable {
         List<ItemStack> t_product = new ArrayList<>();
         if (midProduct != null) {
             for (ItemStack stack : midProduct) {
-                int t_id = GTQTUniverUtil.stackToInt(stack);
+                int t_id = GTQTUniversUtil.stackToInt(stack);
                 if (checkTypes(t_id, tables)) {
                     Recipe recipe = RecipeMaps.CHEMICAL_BATH_RECIPES.findRecipe(GTValues.V[GTValues.MAX], Collections.singletonList(stack), GTUtility.fluidHandlerToList(getInputTank()));
                     if (recipe != null && !recipe.getFluidInputs().isEmpty()) {
@@ -279,7 +278,7 @@ public class OreProcessorRecipeLogic implements IWorkable {
                         depleteInput(new FluidStack(t_input_fluid.getFluid(), t_washed * t_input_fluid.amount));
                         t_product.addAll(getOutputStack(recipe, t_washed));
                         if (t_washed < stack.getCount()) {
-                            t_product.add(GTQTUniverUtil.copyAmountUnsafe(stack.getCount() - t_washed, stack));
+                            t_product.add(GTQTUniversUtil.copyAmountUnsafe(stack.getCount() - t_washed, stack));
                         }
                     } else {
                         t_product.add(stack);
@@ -333,7 +332,7 @@ public class OreProcessorRecipeLogic implements IWorkable {
         for (ItemStack ore : tInput) {
             if (tCharged <= 0)
                 break;
-            int t_id = GTQTUniverUtil.stackToInt(ore);
+            int t_id = GTQTUniversUtil.stackToInt(ore);
             if (t_id == 0)
                 continue;
             if (isPureOre.contains(t_id)
@@ -349,7 +348,7 @@ public class OreProcessorRecipeLogic implements IWorkable {
                     ore.setCount(0);
                 } else {
                     tRealUsed = tCharged;
-                    tOres.add(GTQTUniverUtil.copyAmountUnsafe(tCharged, ore));
+                    tOres.add(GTQTUniversUtil.copyAmountUnsafe(tCharged, ore));
                     ore.setCount(ore.getCount() - tCharged);
                     break;
                 }
@@ -590,7 +589,7 @@ public class OreProcessorRecipeLogic implements IWorkable {
     private void doCompress(List<ItemStack> list) {
         HashMap<Integer, Integer> r_product = new HashMap<>();
         for (ItemStack stack : list) {
-            int t_id = GTQTUniverUtil.stackToInt(stack);
+            int t_id = GTQTUniversUtil.stackToInt(stack);
 
             //  if enable stone dust voiding mode, then void the stone dust.
             if (isVoidStone) {
@@ -613,8 +612,8 @@ public class OreProcessorRecipeLogic implements IWorkable {
         midProduct = new ItemStack[r_product.size()];
         int cnt = 0;
         for (Integer id : r_product.keySet()) {
-            ItemStack stack = GTQTUniverUtil.intToStack(id);
-            midProduct[cnt] = GTQTUniverUtil.copyAmountUnsafe(r_product.get(id), stack);
+            ItemStack stack = GTQTUniversUtil.intToStack(id);
+            midProduct[cnt] = GTQTUniversUtil.copyAmountUnsafe(r_product.get(id), stack);
             cnt++;
         }
     }

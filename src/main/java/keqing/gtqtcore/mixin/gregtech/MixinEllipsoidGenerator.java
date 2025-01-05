@@ -54,9 +54,6 @@ public abstract class MixinEllipsoidGenerator extends ShapeGenerator {
                 for (int y = p*h-yMax; y <= p*h+yMax; y++) {
                     generateBlock(x, y, z, blockAccess);
                 }
-                for (int y = p*h+22; y <= p*h+24; y++) {
-                    generateBlock(x, y, z, blockAccess);
-                }
             }
         }
     }
