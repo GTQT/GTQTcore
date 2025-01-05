@@ -9,12 +9,12 @@ import org.apache.commons.lang3.tuple.Pair;
 import java.util.TreeMap;
 
 public class ParticleVelocityProperty extends RecipeProperty<Integer> {
-    public static final String KEY = "eu_to_start";
+    public static final String KEY = "ParticleVelocity";
     private static final TreeMap<Long, Pair<Integer, String>> registeredFusionTiers = new TreeMap();
     private static ParticleVelocityProperty INSTANCE;
 
     protected ParticleVelocityProperty() {
-        super("eu_to_start", Integer.class);
+        super("ParticleVelocity", Integer.class);
     }
 
     public static ParticleVelocityProperty getInstance() {

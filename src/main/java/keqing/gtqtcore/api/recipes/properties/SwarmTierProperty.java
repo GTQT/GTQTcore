@@ -10,7 +10,7 @@ import java.util.TreeMap;
 
 public class SwarmTierProperty extends RecipeProperty<Integer> {
 
-    public static final String KEY = "machineLevel";
+    public static final String KEY = "SwarmTier";
     private static final TreeMap<Integer, String> registeredSwarmTiers = new TreeMap<>();
     private static SwarmTierProperty INSTANCE;
 

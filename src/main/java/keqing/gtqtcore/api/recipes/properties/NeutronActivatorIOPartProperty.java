@@ -10,7 +10,7 @@ import java.util.TreeMap;
 
 public class NeutronActivatorIOPartProperty extends RecipeProperty<Integer> {
 
-    public static final String KEY = "Part";
+    public static final String KEY = "NeutronActivatorIOPart";
 
     private static final TreeMap<Integer, String> registeredPart = new TreeMap<>();
     private static NeutronActivatorIOPartProperty INSTANCE;

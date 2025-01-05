@@ -6,7 +6,7 @@ import net.minecraft.client.resources.I18n;
 
 public class HeatProperty extends RecipeProperty<Integer> {
 
-    public static final String KEY = "Heat";
+    public static final String KEY = "heat";
 
     private static HeatProperty INSTANCE;
 

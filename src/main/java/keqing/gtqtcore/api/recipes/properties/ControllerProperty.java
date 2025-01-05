@@ -7,7 +7,7 @@ import net.minecraft.client.resources.I18n;
 
 public class ControllerProperty extends RecipeProperty<Integer> {
 
-    public static final String KEY = "tier";
+    public static final String KEY = "ControllerTier";
 
     private static ControllerProperty INSTANCE;
 

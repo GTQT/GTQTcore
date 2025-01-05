@@ -6,7 +6,7 @@ import net.minecraft.client.resources.I18n;
 
 public class ComponentAssemblyLineRecipesTierProperty extends RecipeProperty<Integer> {
 
-    public static final String KEY = "machineLevel";
+    public static final String KEY = "ComponentAssemblyLineRecipesTier";
     private static ComponentAssemblyLineRecipesTierProperty INSTANCE;
 
     private ComponentAssemblyLineRecipesTierProperty() {

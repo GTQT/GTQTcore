@@ -6,7 +6,7 @@ import net.minecraft.client.resources.I18n;
 
 public class BioReactorProperty extends RecipeProperty<Integer> {
 
-    public static final String KEY = "Rate";
+    public static final String KEY = "BioReactorRate";
 
     private static BioReactorProperty INSTANCE;
 

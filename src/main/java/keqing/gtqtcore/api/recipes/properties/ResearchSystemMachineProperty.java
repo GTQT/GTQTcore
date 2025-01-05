@@ -8,7 +8,7 @@ import net.minecraft.client.resources.I18n;
 
 public class ResearchSystemMachineProperty extends RecipeProperty<Integer> {
 
-    public static final String KEY = "KI";
+    public static final String KEY = "ResearchSystemMachine";
 
     private static ResearchSystemMachineProperty INSTANCE;
 

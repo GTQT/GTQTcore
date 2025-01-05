@@ -7,7 +7,7 @@ import net.minecraft.client.resources.I18n;
 
 public class ResearchSystemKindProperty extends RecipeProperty<Integer> {
 
-    public static final String KEY = "BN";
+    public static final String KEY = "ResearchSystemKind";
 
     private static ResearchSystemKindProperty INSTANCE;
 

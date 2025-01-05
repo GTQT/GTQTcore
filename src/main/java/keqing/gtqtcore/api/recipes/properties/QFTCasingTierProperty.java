@@ -10,7 +10,7 @@ import java.util.TreeMap;
 
 public class QFTCasingTierProperty extends RecipeProperty<Integer> {
 
-    public static final String KEY = "machineLevel";
+    public static final String KEY = "QFTCasingTier";
     private static final TreeMap<Integer, String> registeredQFTCasingTiers = new TreeMap<>();
     private static QFTCasingTierProperty INSTANCE;
 

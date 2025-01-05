@@ -7,7 +7,7 @@ import net.minecraft.client.resources.I18n;
 
 public class LaserNetProperty extends RecipeProperty<Integer> {
 
-    public static final String KEY = "Laser";
+    public static final String KEY = "LaserTier";
 
     private static LaserNetProperty INSTANCE;
 

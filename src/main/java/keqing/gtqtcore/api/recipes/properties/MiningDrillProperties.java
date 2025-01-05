@@ -7,7 +7,7 @@ import net.minecraft.client.resources.I18n;
 
 public class MiningDrillProperties extends RecipeProperty<Integer> {
 
-    public static final String KEY = "Tier";
+    public static final String KEY = "MiningDrillTier";
 
     private static MiningDrillProperties INSTANCE;
 

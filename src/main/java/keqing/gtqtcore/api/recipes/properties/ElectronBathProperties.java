@@ -6,7 +6,7 @@ import net.minecraft.client.resources.I18n;
 
 public class ElectronBathProperties extends RecipeProperty<Integer> {
 
-    public static final String KEY = "Tier";
+    public static final String KEY = "ElectronBathTier";
 
     private static ElectronBathProperties INSTANCE;
 
@@ -16,7 +16,7 @@ public class ElectronBathProperties extends RecipeProperty<Integer> {
 
     @Override
     public void drawInfo(Minecraft minecraft, int x, int y, int color, Object value) {
-        minecraft.fontRenderer.drawString(I18n.format("设备等级：%s",
+        minecraft.fontRenderer.drawString(I18n.format("电极等级：%s",
                 castValue(value)), x, y, color);
     }
     public static ElectronBathProperties getInstance() {
