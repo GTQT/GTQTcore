@@ -8,6 +8,7 @@ import gregtech.common.items.MetaItems;
 import gregtech.common.metatileentities.MetaTileEntities;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 
+import static gregicality.multiblocks.api.fluids.GCYMFluidStorageKeys.MOLTEN;
 import static gregicality.multiblocks.api.unification.GCYMMaterials.*;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.GTValues.LuV;

@@ -1,7 +1,9 @@
 package keqing.gtqtcore.common.items;
 
+import gregtech.api.items.armor.ArmorMetaItem;
 import gregtech.api.items.metaitem.MetaItem;
 import keqing.gtqtcore.common.CommonProxy;
+import keqing.gtqtcore.common.items.armors.GTQTMetaArmor;
 
 import java.util.List;
 
@@ -888,10 +890,13 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem MICROWAVE_ENERGY_RECEIVER_UIV;
     public static MetaItem<?>.MetaValueItem MICROWAVE_ENERGY_RECEIVER_UXV;
     public static MetaItem<?>.MetaValueItem MICROWAVE_ENERGY_RECEIVER_OpV;
+
+    public static ArmorMetaItem<?>.ArmorMetaValueItem PISTON_BOOTS;
     // Process-Specific Components
     public static MetaItem<?>.MetaValueItem MAGNETRON;
     public static GTQTMetaItem1 GTQT_META_ITEM;
     public static GTQTBattery GTQT_META_BATTERY;
+    public static GTQTMetaArmor GTQT_META_ARMOR;
     // Process Intermediary Items
     // Nanotubes
     public static MetaItem<?>.MetaValueItem CARBON_ALLOTROPE_MIXTURE;
@@ -899,11 +904,14 @@ public class GTQTMetaItems {
     public static void initialization() {
         GTQT_META_ITEM = new GTQTMetaItem1();
         GTQT_META_BATTERY = new GTQTBattery();
+        GTQT_META_ARMOR=new GTQTMetaArmor();
+
     }
     public static void initSubItems()
     {
         GTQTMetaItem1.registerItems();
         GTQTBattery.registerItems();
+        GTQTMetaArmor.registerItems();
     }
 
 
