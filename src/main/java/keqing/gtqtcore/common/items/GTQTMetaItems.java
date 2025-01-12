@@ -4,6 +4,7 @@ import gregtech.api.items.armor.ArmorMetaItem;
 import gregtech.api.items.metaitem.MetaItem;
 import keqing.gtqtcore.common.CommonProxy;
 import keqing.gtqtcore.common.items.armors.GTQTMetaArmor;
+import net.minecraft.item.EnumDyeColor;
 
 import java.util.List;
 
@@ -202,6 +203,13 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem GRINDBALL_ALUMINIUM;
     public static MetaItem<?>.MetaValueItem SODIUM_ETHYLXANTHATE;
     public static MetaItem<?>.MetaValueItem POTASSIUM_ETHYLXANTHATE;
+
+    public static MetaItem<?>.MetaValueItem FIND_ORE_STICK;
+
+    public static MetaItem<?>.MetaValueItem ENDLESS_SPRAY_SOLVENT;
+    public static MetaItem<?>.MetaValueItem ENDLESS_SPRAY_EMPTY;
+    public static final MetaItem<?>.MetaValueItem[] ENDLESS_SPRAY_CAN_DYES = new MetaItem.MetaValueItem[EnumDyeColor
+            .values().length];
 
     public static MetaItem<?>.MetaValueItem ACRYLIC_YARN;
     public static MetaItem<?>.MetaValueItem HEAVY_METAL_ABSORBING_YARN;

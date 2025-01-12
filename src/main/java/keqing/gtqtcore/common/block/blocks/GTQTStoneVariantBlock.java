@@ -65,18 +65,6 @@ public class GTQTStoneVariantBlock extends VariantBlock<GTQTStoneVariantBlock.St
         SMOOTH("gtqt_stone_smooth"),
         COBBLE("gtqt_stone_cobble", 2.0F, 10.0F),
         BRICKS("gtqt_stone_bricks");
-//      TODO
-//        COBBLE_MOSSY("stone_cobble_mossy", 2.0F, 10.0F),
-//        POLISHED("stone_polished"),
-//        BRICKS_CRACKED("stone_bricks_cracked"),
-//        BRICKS_MOSSY("stone_bricks_mossy"),
-//        CHISELED("stone_chiseled"),
-//        TILED("stone_tiled"),
-//        TILED_SMALL("stone_tiled_small"),
-//        BRICKS_SMALL("stone_bricks_small"),
-//        WINDMILL_A("stone_windmill_a", "stone_bricks_windmill_a"),
-//        WINDMILL_B("stone_windmill_b", "stone_bricks_windmill_b"),
-//        BRICKS_SQUARE("stone_bricks_square");
 
         public final String id;
         public final String translationKey;

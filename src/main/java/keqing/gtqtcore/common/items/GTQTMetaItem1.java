@@ -8,6 +8,7 @@ import gregtech.api.unification.material.MarkerMaterials;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.ItemMaterialInfo;
 import gregtech.api.unification.stack.MaterialStack;
+import gregtech.common.items.behaviors.ColorSprayBehaviour;
 import gregtech.common.items.behaviors.MultiblockBuilderBehavior;
 import gregtech.common.items.behaviors.ProspectorScannerBehavior;
 import gregtech.common.items.behaviors.TooltipBehavior;
@@ -19,6 +20,7 @@ import keqing.gtqtcore.common.block.GTQTCrops;
 import keqing.gtqtcore.common.items.behaviors.*;
 import keqing.gtqtcore.common.items.behaviors.render.HaloRenderItemBehavior;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.item.EnumDyeColor;
 
 import static gregtech.api.GTValues.*;
 import static gregtech.api.unification.material.Materials.*;
@@ -194,6 +196,23 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         LITHIUM_SIEVE = addItem(154, "lithium_sieve").setMaxStackSize(1).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         LITHIUM_SATURATED_LITHIUM_SIEVE = addItem(155, "lithium_saturated_lithium_sieve").setMaxStackSize(1).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         ACRYLIC_YARN = addItem(156, "acrylic_yarn").setMaxStackSize(1).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+
+        FIND_ORE_STICK = addItem(159, "find_ore_stick").addComponents(new FindOreStickBehavior()).setMaxStackSize(1).setCreativeTabs(CommonProxy.GTQTCore_TO);
+
+        // Spray Cans: ID 60-77
+        ENDLESS_SPRAY_EMPTY = addItem(161, "endless_spray.empty");
+
+        // out of registry order so it can reference the Empty Spray Can
+        ENDLESS_SPRAY_SOLVENT = addItem(160, "endless_spray.solvent").setMaxStackSize(1)
+                .addComponents(new EndlessColorSprayBehaviour(ENDLESS_SPRAY_EMPTY.getStackForm(), Integer.MAX_VALUE, -1))
+                .setCreativeTabs(CommonProxy.GTQTCore_TO);
+
+        for (int i = 0; i < EnumDyeColor.values().length; i++) {
+            ENDLESS_SPRAY_CAN_DYES[i] = addItem(162 + i, "endless_spray.can.dyes." + EnumDyeColor.values()[i].getName())
+                    .setMaxStackSize(1)
+                    .addComponents(new EndlessColorSprayBehaviour(ENDLESS_SPRAY_EMPTY.getStackForm(), Integer.MAX_VALUE, i))
+                    .setCreativeTabs(CommonProxy.GTQTCore_TO);
+        }
 
         //ROCK
         POS_ORE_CARD = this.addItem(180, "pos_ore_card").setMaxStackSize(1).addComponents(new OreCheckerBehavior()).setCreativeTabs(CommonProxy.GTQTCore_TAB);

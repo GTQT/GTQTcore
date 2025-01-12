@@ -65,6 +65,7 @@ public class GTQTOrePrefix {
             mat -> mat.hasFlag(GENERATE_CURVED_PLATE));
     public static final OrePrefix shell = new OrePrefix("shell", M, null, GTQTMaterialIconType.shell, ENABLE_UNIFICATION,
             mat -> mat.hasFlag(GENERATE_CURVED_PLATE));
+
     public static OrePrefix oreGabbro = new OrePrefix("oreGabbro", -1L, null, MaterialIconType.ore, 1L, OrePrefix.Conditions.hasOreProperty);
     public static OrePrefix oreGneiss = new OrePrefix("oreGneiss", -1L, null, MaterialIconType.ore, 1L, OrePrefix.Conditions.hasOreProperty);
     public static OrePrefix oreLimestone = new OrePrefix("oreLimestone", -1L, null, MaterialIconType.ore, 1L, OrePrefix.Conditions.hasOreProperty);

@@ -1,15 +1,18 @@
 package keqing.gtqtcore.loaders.recipes;
 
+import gregtech.api.GTValues;
 import gregtech.api.metatileentity.multiblock.CleanroomType;
 import gregtech.api.recipes.GTRecipeHandler;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.recipes.ingredients.IntCircuitIngredient;
 import gregtech.api.unification.OreDictUnifier;
+import gregtech.api.unification.material.Materials;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import net.minecraft.init.Blocks;
 
 import static gregtech.api.GTValues.*;
+import static gregtech.api.recipes.RecipeMaps.CANNER_RECIPES;
 import static gregtech.api.recipes.RecipeMaps.MIXER_RECIPES;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.dust;
@@ -17,6 +20,7 @@ import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.Adamantium;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.Vibranium;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
+import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 
 public class MiscMachineRecipes {
 
@@ -165,6 +169,22 @@ public class MiscMachineRecipes {
                 .blastFurnaceTemp(1700)
                 .EUt(120)
                 .duration(900)
+                .buildAndRegister();
+
+        for (int i = 0; i < Materials.CHEMICAL_DYES.length; i++) {
+            CANNER_RECIPES.recipeBuilder()
+                    .inputs(ENDLESS_SPRAY_EMPTY.getStackForm())
+                    .fluidInputs(Materials.CHEMICAL_DYES[i].getFluid(GTValues.L * 4))
+                    .outputs(ENDLESS_SPRAY_CAN_DYES[i].getStackForm())
+                    .EUt(VA[ULV]).duration(200)
+                    .buildAndRegister();
+
+        }
+        CANNER_RECIPES.recipeBuilder()
+                .input(ENDLESS_SPRAY_EMPTY)
+                .fluidInputs(Acetone.getFluid(1000))
+                .output(ENDLESS_SPRAY_SOLVENT)
+                .EUt(VA[ULV]).duration(200)
                 .buildAndRegister();
 
     }

@@ -11,22 +11,24 @@
     "architecturecraft.MixinEnumShape",
     "architecturecraft.MixinTileSawbench",
     "gregtech.MixinAssemblyLineManager",
+    "gregtech.MixinBlockMachine",
+    "gregtech.MixinBlockPipe",
     "gregtech.MixinEllipsoidGenerator",
+    "gregtech.MixinGlassCasingType",
     "gregtech.MixinMetaItem",
     "gregtech.MixinMetaPrefixItem",
+    "gregtech.MixinMetaTileEntityFluidHatch",
+    "gregtech.MixinMetaTileEntityItemBus",
     "gregtech.MixinMetaValueItem",
     "gregtech.MixinSolarBoilerServer",
     "gregtech.MixinSteamBoilerAccess",
-    "multiblocks.mixinGCYMMultiblockRecipeLogic",
-    "gregtech.MixinGlassCasingType",
-    "gregtech.MixinMetaTileEntityFluidHatch",
-    "gregtech.MixinMetaTileEntityItemBus"
+    "multiblocks.mixinGCYMMultiblockRecipeLogic"
   ],
   "server": [],
   "client": [
     "architecturecraft.MixinGuiSawbench",
     "architecturecraft.MixinRenderRoof",
-    "gregtech.MixinSolarBoilerClient",
-    "gregtech.MixinBlockGlassCasing"
+    "gregtech.MixinBlockGlassCasing",
+    "gregtech.MixinSolarBoilerClient"
   ]
 }

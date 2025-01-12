@@ -49,23 +49,6 @@ public class CatalystBehavior extends AbstractMaterialPartBehavior implements II
         return (CatalystBehavior) durabilityManager;
     }
 
-    /**
-     * Get Max Durability of Part.
-     *
-     * <p>
-     *     In {@code gtlitecore}, catalyst has two form: one is Common Catalyst,
-     *     max durability of each Common Catalyst is 50; another one is Catalyst
-     *     Bed, max durability of each Catalyst Bed is more higher than Common
-     *     Catalyst, and you can see it as below:
-     *     <ul>
-     *         <li>Smaller than or equal to UHV -> {@code 50 * (tier + 1)};</li>
-     *         <li>Bigger than UHV -> {@code 100 * (tier + 1)};</li>
-     *     </ul>
-     * </p>
-     *
-     * @param stack  Part.
-     * @return       Max Durability of {@code stack}.
-     */
     @Override
     public int getPartMaxDurability(ItemStack stack) {
         if (isCatalystBed) {
