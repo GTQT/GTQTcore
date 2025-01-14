@@ -30,13 +30,11 @@ import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
 import gregtech.client.utils.TooltipHelper;
 import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.metatileentities.MetaTileEntities;
-import keqing.gtqtcore.api.metaileentity.multiblock.GTQTRecipeMapMultiblockOverwrite;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
@@ -50,14 +48,11 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-import static gregtech.api.GTValues.VA;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.CZPULLER_RECIPES;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.Pyrotheum;
 
-public class MetaTileEntityBlazingCZPuller extends GTQTRecipeMapMultiblockOverwrite implements IHeatingCoil {
+public class MetaTileEntityBlazingCZPuller extends RecipeMapMultiblockController implements IHeatingCoil {
     protected static int heatingCoilLevel;
-    protected int heatingCoilDiscount;
-    int ParallelNum = 1;
     private int blastFurnaceTemperature;
     private FluidStack LUBRICANT_STACK;
 
@@ -74,42 +69,13 @@ public class MetaTileEntityBlazingCZPuller extends GTQTRecipeMapMultiblockOverwr
         return GCYMMetaBlocks.UNIQUE_CASING.getState(BlockUniqueCasing.UniqueCasingType.HEAT_VENT);
     }
 
-    public static int getMaxParallel(int heatingCoilLevel) {
-        return heatingCoilLevel;
-    }
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity metaTileEntityHolder) {
         return new MetaTileEntityBlazingCZPuller(this.metaTileEntityId);
     }
 
-    public NBTTagCompound writeToNBT(NBTTagCompound data) {
-        data.setInteger("modern", modern);
-        return super.writeToNBT(data);
-    }
 
-    public void readFromNBT(NBTTagCompound data) {
-        super.readFromNBT(data);
-        modern = data.getInteger("modern");
-    }
-
-    @Override
-    public void update() {
-        super.update();
-        if (modern == 0) {
-            ParallelNum = ParallelNumA;
-        }
-        if (modern == 1) {
-            P = (int) ((this.energyContainer.getEnergyStored() + energyContainer.getInputPerSec()) / (getMinVa() == 0 ? 1 : getMinVa()));
-            ParallelNum = Math.min(P, ParallelLim);
-        }
-    }
-
-    public int getMinVa() {
-        if ((Math.min(this.energyContainer.getEnergyCapacity() / 32, VA[3]) * 20) == 0) return 1;
-        return (int) (Math.min(this.energyContainer.getEnergyCapacity() / 32, VA[3]));
-
-    }
 
     @Override
     protected void formStructure(PatternMatchContext context) {
@@ -123,8 +89,6 @@ public class MetaTileEntityBlazingCZPuller extends GTQTRecipeMapMultiblockOverwr
             this.blastFurnaceTemperature = BlockWireCoil.CoilType.CUPRONICKEL.getCoilTemperature();
             heatingCoilLevel = BlockWireCoil.CoilType.CUPRONICKEL.getLevel();
         }
-        ParallelLim = Math.min((int) Math.pow(2, heatingCoilLevel), 64);
-        ParallelNum = ParallelLim;
         this.blastFurnaceTemperature += 100 * Math.max(0, GTUtility.getTierByVoltage(getEnergyContainer().getInputVoltage()) - GTValues.MV);
         LUBRICANT_STACK = Pyrotheum.getFluid(heatingCoilLevel);
     }
@@ -181,10 +145,8 @@ public class MetaTileEntityBlazingCZPuller extends GTQTRecipeMapMultiblockOverwr
     public void addInformation(ItemStack stack, @Nullable World player, @Nonnull List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("风韵犹存的硅", new Object[0]));
-        tooltip.add(I18n.format("gregtech.machine.cracker.gtqtupdate.1"));
-        tooltip.add(I18n.format("gtqtcore.multiblock.vc.tooltip.1"));
-        tooltip.add(I18n.format("gtqtcore.multiblock.vc.tooltip.2"));
-        tooltip.add(I18n.format("gtqtcore.multiblock.vc.tooltip.3"));
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("gregtech.machine.perfect_oc", new Object[0]));
+        tooltip.add(I18n.format("gtqtcore.machine.parallel.pow.custom",2,"Heating Coil Level",64));
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.1"));
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.2"));
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.3"));
@@ -200,9 +162,6 @@ public class MetaTileEntityBlazingCZPuller extends GTQTRecipeMapMultiblockOverwr
                 textList.add(new TextComponentTranslation("gtqtcore.multiblock.vc.amount", TextFormattingUtil.formatNumbers((liquidOxygenAmount))));
             }
             textList.add(new TextComponentTranslation("Temperature : %s", blastFurnaceTemperature));
-            if (modern == 0) textList.add(new TextComponentTranslation("gtqtcore.tire1", heatingCoilLevel));
-            if (modern == 1) textList.add(new TextComponentTranslation("gtqtcore.tire2", heatingCoilLevel));
-            textList.add(new TextComponentTranslation("gtqtcore.parr", ParallelNum, ParallelLim));
         }
     }
 
@@ -255,7 +214,7 @@ public class MetaTileEntityBlazingCZPuller extends GTQTRecipeMapMultiblockOverwr
         private final MetaTileEntityBlazingCZPuller combustionEngine;
 
         public BlazingBlastFurnaceWorkable(RecipeMapMultiblockController tileEntity) {
-            super(tileEntity);
+            super(tileEntity,true);
             this.combustionEngine = (MetaTileEntityBlazingCZPuller) tileEntity;
         }
 
@@ -284,15 +243,9 @@ public class MetaTileEntityBlazingCZPuller extends GTQTRecipeMapMultiblockOverwr
         protected int[] runOverclockingLogic(IRecipePropertyStorage propertyStorage, int recipeEUt, long maxVoltage, int duration, int amountOC) {
             return OverclockingLogic.heatingCoilOverclockingLogic(Math.abs(recipeEUt), maxVoltage, duration, amountOC, ((IHeatingCoil) this.metaTileEntity).getCurrentTemperature(), propertyStorage.getRecipePropertyValue(TemperatureProperty.getInstance(), 0));
         }
-
         @Override
-        public void setMaxProgress(int maxProgress) {
-            if (ParallelNum == 0) this.maxProgressTime = maxProgress;
-            else if (ParallelNum <= 16) this.maxProgressTime = (int) (maxProgress * 1.0 / ParallelNum);
-            else if (ParallelNum <= 64) this.maxProgressTime = (int) (maxProgress * 16.0 / ParallelNum);
-            else if (ParallelNum <= 256) this.maxProgressTime = (int) (maxProgress * 128.0 / ParallelNum);
-            else this.maxProgressTime = maxProgress;
-
+        public int getParallelLimit() {
+            return Math.min((int)Math.pow(2, heatingCoilLevel),64);
         }
     }
 }

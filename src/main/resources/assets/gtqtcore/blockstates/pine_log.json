@@ -12,17 +12,12 @@
     "axis": {
       "none": {
         "textures": {
-          "end": "#side"
+          "end": "#end"
         }
       },
-      "x": {
-        "x": 90,
-        "y": 90
-      },
+      "x": {},
       "y": {},
-      "z": {
-        "x": 90
-      }
+      "z": {}
     },
     "natural": {
       "true": {},

@@ -25,14 +25,12 @@ import gregtech.core.sound.GTSoundEvents;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
-import keqing.gtqtcore.api.metaileentity.multiblock.GTQTRecipeMapMultiblockOverwrite;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
@@ -54,12 +52,10 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static gregtech.api.GTValues.V;
-import static gregtech.api.GTValues.VA;
 import static gregtech.api.util.RelativeDirection.*;
 
-public class MetaTileEntityDistillationTower extends GTQTRecipeMapMultiblockOverwrite {
+public class MetaTileEntityDistillationTower extends RecipeMapMultiblockController {
 
-    private final boolean useAdvHatchLogic;
 
     protected int layerCount;
     protected List<IFluidHandler> orderedFluidOutputs;
@@ -69,13 +65,9 @@ public class MetaTileEntityDistillationTower extends GTQTRecipeMapMultiblockOver
     private int tier;
     private int casingTier;
     private int tubeTier;
-    public MetaTileEntityDistillationTower(ResourceLocation metaTileEntityId, boolean useAdvHatchLogic) {
+    public MetaTileEntityDistillationTower(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, RecipeMaps.DISTILLATION_RECIPES);
-        this.recipeMapWorkable = new DistillationTowerLogic(this);
-        this.useAdvHatchLogic = useAdvHatchLogic;
-        if (useAdvHatchLogic) {
-            this.recipeMapWorkable = new DistillationTowerRecipeLogic(this);
-        }
+        this.recipeMapWorkable = new DistillationTowerRecipeLogic(this);
     }
     @Override
     protected Function<BlockPos, Integer> multiblockPartSorter() {
@@ -99,59 +91,9 @@ public class MetaTileEntityDistillationTower extends GTQTRecipeMapMultiblockOver
     }
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
-        return new MetaTileEntityDistillationTower(metaTileEntityId, this.useAdvHatchLogic);
+        return new MetaTileEntityDistillationTower(metaTileEntityId);
 
     }
-    int ParallelNum=1;
-    public NBTTagCompound writeToNBT(NBTTagCompound data) {
-        data.setInteger("modern", modern);
-        data.setInteger("casingTier", casingTier);
-        return super.writeToNBT(data);
-    }
-   
-    public void readFromNBT(NBTTagCompound data) {
-        super.readFromNBT(data);
-        modern = data.getInteger("modern");
-        casingTier = data.getInteger("casingTier");
-    }
-
-    @Override
-    public void update() {
-        super.update();
-        if (modern == 0)
-        {
-            ParallelNum=ParallelNumA;
-        }
-        if (modern == 1)
-        {
-            P = (int) ((this.energyContainer.getEnergyStored() + energyContainer.getInputPerSec())/(getMinVa()==0?1:getMinVa()));
-            ParallelNum = Math.min(P, ParallelLim);
-        }
-    }
-    public int getMinVa()
-    {
-        if((Math.min(this.energyContainer.getEnergyCapacity()/32,VA[tier])*20)==0)return 1;
-        return (int)(Math.min(this.energyContainer.getEnergyCapacity()/32,VA[tier]));
-
-    }
-    public class DistillationTowerLogic extends MultiblockRecipeLogic {
-        public DistillationTowerLogic(RecipeMapMultiblockController tileEntity) {
-            super(tileEntity);
-        }
-        public void setMaxProgress(int maxProgress) {
-            this.maxProgressTime = maxProgress*(100-tier*2)/100;
-
-        }
-        public long getMaxVoltage() {
-            return Math.min(super.getMaxVoltage(), V[tier]);
-        }
-        @Override
-        public int getParallelLimit() {
-            return ParallelNum;
-        }
-    }
-
-
     @Override
     public void receiveCustomData(int dataId, PacketBuffer buf) {
         super.receiveCustomData(dataId, buf);
@@ -175,12 +117,8 @@ public class MetaTileEntityDistillationTower extends GTQTRecipeMapMultiblockOver
                         fluidName));
             }
         }
-        if(modern==0) textList.add(new TextComponentTranslation("gtqtcore.tire1",tier));
-        if(modern==1) textList.add(new TextComponentTranslation("gtqtcore.tire2",tier));
-        textList.add(new TextComponentTranslation("gtqtcore.parr",ParallelNum,ParallelLim));
         if(casingTier!=tubeTier)
             textList.add(new TextComponentTranslation("gtqtcore.equal", casingTier,tubeTier));
-        textList.add(new TextComponentTranslation("gtqtcore.multiblock.fu.level", 5 * tier));
         super.addDisplayText(textList);
 
     }
@@ -256,6 +194,8 @@ public class MetaTileEntityDistillationTower extends GTQTRecipeMapMultiblockOver
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(I18n.format("gregtech.machine.cracker.gtqtupdate.1"));
         tooltip.add(I18n.format("gregtech.machine.cracker.gtqtupdate.2"));
+        tooltip.add(I18n.format("gtqtcore.machine.parallel.pow.machineTier",2,32));
+        tooltip.add(I18n.format("gtqtcore.machine.max_voltage"));
     }
 
     protected int determineLayerCount( BlockPattern structurePattern) {
@@ -315,7 +255,7 @@ public class MetaTileEntityDistillationTower extends GTQTRecipeMapMultiblockOver
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
 
-        if (!useAdvHatchLogic || this.structurePattern == null) return;
+        if (this.structurePattern == null) return;
         this.layerCount = determineLayerCount(this.structurePattern);
         this.orderedFluidOutputs = determineOrderedFluidOutputs();
 
@@ -332,8 +272,6 @@ public class MetaTileEntityDistillationTower extends GTQTRecipeMapMultiblockOver
         this.tier = Math.min(this.casingTier,this.tubeTier);
 
         this.writeCustomData(GTQTValue.UPDATE_TIER16,buf -> buf.writeInt(this.tier));
-        ParallelLim=Math.min((int)Math.pow(2, this.tier),32);
-        ParallelNum=ParallelLim;
     }
 
     protected IBlockState getCasingState() {
@@ -368,7 +306,7 @@ public class MetaTileEntityDistillationTower extends GTQTRecipeMapMultiblockOver
 
         @Override
         public int getParallelLimit() {
-            return ParallelNum;
+            return Math.min((int)Math.pow(2, tier),32);
         }
 
         protected boolean applyFluidToOutputs(List<FluidStack> fluids, boolean doFill) {

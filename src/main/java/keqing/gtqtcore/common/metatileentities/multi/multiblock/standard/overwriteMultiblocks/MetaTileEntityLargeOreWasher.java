@@ -6,11 +6,13 @@ import codechicken.lib.texture.TextureUtils;
 import codechicken.lib.vec.Cuboid6;
 import codechicken.lib.vec.Matrix4;
 import com.llamalad7.mixinextras.lib.apache.commons.ArrayUtils;
+import gregicality.multiblocks.api.capability.IParallelMultiblock;
 import gregtech.api.block.IHeatingCoilBlockStats;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
+import gregtech.api.metatileentity.multiblock.MultiMapMultiblockController;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
@@ -28,13 +30,11 @@ import gregtech.common.blocks.BlockWireCoil;
 import gregtech.core.sound.GTSoundEvents;
 import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
-import keqing.gtqtcore.api.metaileentity.multiblock.GTQTRecipeMapMultiblockControllerOverwrite;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
@@ -48,21 +48,21 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.List;
 
 import static gregtech.api.GTValues.V;
-import static gregtech.api.GTValues.VA;
 
-public class MetaTileEntityLargeOreWasher extends GTQTRecipeMapMultiblockControllerOverwrite {
+public class MetaTileEntityLargeOreWasher extends MultiMapMultiblockController implements IParallelMultiblock {
     private int coilLevel;
     private int casingTier;
     private int tubeTier;
     private int tier;
 
     public MetaTileEntityLargeOreWasher(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, new RecipeMap[] {
+        super(metaTileEntityId, new RecipeMap[]{
                 RecipeMaps.ORE_WASHER_RECIPES,
                 RecipeMaps.CHEMICAL_BATH_RECIPES
         });
         this.recipeMapWorkable = new LargeChemicalReactorLogic(this);
     }
+
     @Override
     public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
         super.renderMetaTileEntity(renderState, translation, pipeline);
@@ -70,9 +70,9 @@ public class MetaTileEntityLargeOreWasher extends GTQTRecipeMapMultiblockControl
                 recipeMapWorkable.isActive(), recipeMapWorkable.isWorkingEnabled());
         if (recipeMapWorkable.isActive() && isStructureFormed()) {
             EnumFacing back = getFrontFacing().getOpposite();
-            for(float i=-2;i<=2;i++) {
-                for (float j = -2; j <=2; j++) {
-                    Matrix4 offset = translation.copy().translate(back.getXOffset() * 3+i, 0.6, back.getZOffset() * 3+j);
+            for (float i = -2; i <= 2; i++) {
+                for (float j = -2; j <= 2; j++) {
+                    Matrix4 offset = translation.copy().translate(back.getXOffset() * 3 + i, 0.6, back.getZOffset() * 3 + j);
                     CubeRendererState op = Textures.RENDER_STATE.get();
                     Textures.RENDER_STATE.set(new CubeRendererState(op.layer, CubeRendererState.PASS_MASK, op.world));
                     Textures.renderFace(renderState, offset,
@@ -84,47 +84,22 @@ public class MetaTileEntityLargeOreWasher extends GTQTRecipeMapMultiblockControl
             }
         }
     }
+
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityLargeOreWasher(metaTileEntityId);
     }
-     int ParallelNum=1;
-    public NBTTagCompound writeToNBT(NBTTagCompound data) {
-        data.setInteger("modern", modern);
-        data.setInteger("casingTier", casingTier);
-        return super.writeToNBT(data);
-    }
-   
-    public void readFromNBT(NBTTagCompound data) {
-        super.readFromNBT(data);
-        modern = data.getInteger("modern");
-        casingTier = data.getInteger("casingTier");
-    }
+
     @Override
     public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(I18n.format("gregtech.machine.cracker.gtqtupdate.1"));
         tooltip.add(I18n.format("gregtech.machine.cracker.gtqtupdate.2"));
+        tooltip.add(I18n.format("gtqtcore.machine.parallel.pow.machineTier", 2, 32));
+        tooltip.add(I18n.format("gtqtcore.machine.max_voltage"));
+        tooltip.add(I18n.format("gtqtcore.machine.progress_time","maxProgress /coilLevel"));
     }
-    @Override
-    public void update() {
-        super.update();
-        if (modern == 0)
-        {
-            ParallelNum=ParallelNumA;
-        }
-        if (modern == 1)
-        {
-            P = (int) ((this.energyContainer.getEnergyStored() + energyContainer.getInputPerSec())/(getMinVa()==0?1:getMinVa()));
-            ParallelNum = Math.min(P, ParallelLim);
-        }
-    }
-    public int getMinVa()
-    {
-        if((Math.min(this.energyContainer.getEnergyCapacity()/32,VA[tier])*20)==0)return 1;
-        return (int)(Math.min(this.energyContainer.getEnergyCapacity()/32,VA[tier]));
 
-    }
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
@@ -148,18 +123,17 @@ public class MetaTileEntityLargeOreWasher extends GTQTRecipeMapMultiblockControl
                 .where('#', any())
                 .build();
     }
+
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
         textList.add(new TextComponentTranslation("gtqtcore.coilTire", coilLevel));
         textList.add(new TextComponentTranslation("gtqtcore.casingTire", casingTier));
         textList.add(new TextComponentTranslation("gtqtcore.tubeTire", tubeTier));
-        if(casingTier!=tubeTier)
-            textList.add(new TextComponentTranslation("gtqtcore.equal", casingTier,tubeTier));
-        if(modern==0) textList.add(new TextComponentTranslation("gtqtcore.tire1",tier));
-        if(modern==1) textList.add(new TextComponentTranslation("gtqtcore.tire2",tier));
-        textList.add(new TextComponentTranslation("gtqtcore.parr",ParallelNum,ParallelLim));
+        if (casingTier != tubeTier)
+            textList.add(new TextComponentTranslation("gtqtcore.equal", casingTier, tubeTier));
     }
+
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
         switch (this.casingTier) {
@@ -195,6 +169,7 @@ public class MetaTileEntityLargeOreWasher extends GTQTRecipeMapMultiblockControl
             }
         }
     }
+
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
@@ -202,19 +177,17 @@ public class MetaTileEntityLargeOreWasher extends GTQTRecipeMapMultiblockControl
         Object casingTier = context.get("ChemicalPlantCasingTieredStats");
         Object tubeTier = context.get("ChemicalPlantTubeTieredStats");
         this.coilLevel = GTQTUtil.getOrDefault(() -> coilType instanceof IHeatingCoilBlockStats,
-                () ->  ((IHeatingCoilBlockStats) coilType).getLevel(),
+                () -> ((IHeatingCoilBlockStats) coilType).getLevel(),
                 BlockWireCoil.CoilType.CUPRONICKEL.getLevel());
         this.casingTier = GTQTUtil.getOrDefault(() -> casingTier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)casingTier).getIntTier(),
+                () -> ((WrappedIntTired) casingTier).getIntTier(),
                 0);
         this.tubeTier = GTQTUtil.getOrDefault(() -> tubeTier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)tubeTier).getIntTier(),
+                () -> ((WrappedIntTired) tubeTier).getIntTier(),
                 0);
-        this.tier = Math.min(this.casingTier,this.tubeTier);
+        this.tier = Math.min(this.casingTier, this.tubeTier);
 
-        this.writeCustomData(GTQTValue.UPDATE_TIER20,buf -> buf.writeInt(this.casingTier));
-        ParallelLim=Math.min((int)Math.pow(2, this.tier),32);
-        ParallelNum=ParallelLim;
+        this.writeCustomData(GTQTValue.UPDATE_TIER20, buf -> buf.writeInt(this.casingTier));
     }
 
     @Override
@@ -228,16 +201,20 @@ public class MetaTileEntityLargeOreWasher extends GTQTRecipeMapMultiblockControl
         super.receiveInitialSyncData(buf);
         this.casingTier = buf.readInt();
     }
+
     @Override
-    public boolean canBeDistinct() {return true;}
+    public boolean canBeDistinct() {
+        return true;
+    }
+
     @Override
     public void receiveCustomData(int dataId, PacketBuffer buf) {
         super.receiveCustomData(dataId, buf);
-        if(dataId == GTQTValue.UPDATE_TIER20){
+        if (dataId == GTQTValue.UPDATE_TIER20) {
             this.casingTier = buf.readInt();
         }
-        if(dataId == GTQTValue.REQUIRE_DATA_UPDATE20){
-            this.writeCustomData(GTQTValue.UPDATE_TIER20,buf1 -> buf1.writeInt(this.casingTier));
+        if (dataId == GTQTValue.REQUIRE_DATA_UPDATE20) {
+            this.writeCustomData(GTQTValue.UPDATE_TIER20, buf1 -> buf1.writeInt(this.casingTier));
         }
     }
 
@@ -262,26 +239,17 @@ public class MetaTileEntityLargeOreWasher extends GTQTRecipeMapMultiblockControl
 
 
         public LargeChemicalReactorLogic(RecipeMapMultiblockController tileEntity) {
-            super(tileEntity,true);
+            super(tileEntity, true);
         }
-
-        public void update() {
-
-        }
-
         public void setMaxProgress(int maxProgress) {
-            this.maxProgressTime = maxProgress / (2 * coilLevel);
-            this.metaTileEntity.markDirty();
+            this.maxProgressTime = maxProgress /coilLevel;
         }
-
         public long getMaxVoltage() {
             return Math.min(super.getMaxVoltage(), V[tier]);
         }
         @Override
         public int getParallelLimit() {
-            return ParallelNum;
+            return Math.min((int) Math.pow(2, tier), 32);
         }
-
-
     }
 }

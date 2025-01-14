@@ -111,9 +111,9 @@ public class MetaTileEntityLaserEngraving extends MultiMapMultiblockController i
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
-                .aisle("XXXXXX", "XXXXXX", "XXGGGX")
-                .aisle("XXXXXX", "XXZZZX", "XXGGGX")
-                .aisle("XXXXXX", "CSGGGX", "XXGGGX")
+                .aisle("XXXXXXX", "XXXXXXX", "XXXGGGX")
+                .aisle("XXXXXXX", "XXXZZZX", "XXXGGGX")
+                .aisle("XXXXXXX", "XCSGGGX", "XXXGGGX")
                 .where('S', selfPredicate())
                 .where('C', abilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION))
                 .where('X', TiredTraceabilityPredicate.CP_CASING.get().setMinGlobalLimited(24).or(autoAbilities()))

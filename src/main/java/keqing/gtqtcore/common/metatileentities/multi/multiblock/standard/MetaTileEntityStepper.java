@@ -157,14 +157,15 @@ public class MetaTileEntityStepper extends MultiMapMultiblockController implemen
         super.addDisplayText(textList);
         textList.add(new TextComponentTranslation("外壳等级：%s 紫外等级：%s 玻璃等级：%s", tier, laser_tier, glass_tier));
         textList.add(new TextComponentTranslation("洁净等级：%s 射频调节器等级：%s", clean_tier, sheping_tier));
-        textList.add(new TextComponentTranslation("光刻胶等级：%s 光刻胶储量%s 同频模式：%s", LaserKind, LaserAmount, rate));
+        textList.add(new TextComponentTranslation("光刻胶等级：%s 光刻胶储量：%s ", LaserKind, LaserAmount));
+        textList.add(new TextComponentTranslation("效能模式：%s", rate));
     }
 
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
                 .aisle("JXXXXXX", "JXXXXXX", "JXXGGGX")
-                .aisle("JXXXXXX", "JZZPPPX", "JXXGGGX")
+                .aisle("JXXXXXX", "JPPZZZX", "JXXGGGX")
                 .aisle("JXXXXXX", "JCSGGGX", "JXXGGGX")
                 .where('S', selfPredicate())
                 .where('C', abilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION))

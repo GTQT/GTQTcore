@@ -611,6 +611,7 @@ public class MetaTileEntityLoader {
                 .buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .inputs(THREE_DIM_PRINT.getStackForm())
                 .inputs(CHEMICAL_PLANT.getStackForm())
                 .input(frameGt, TungstenSteel, 4)
                 .input(circuit, MarkerMaterials.Tier.EV, 16)
@@ -620,8 +621,7 @@ public class MetaTileEntityLoader {
                 .input(screw, Titanium, 16)
                 .input(plate, Palladium, 16)
                 .input(gear, NanometerBariumTitanate, 16)
-                .input(wireFine, Platinum, 64)
-                .input(wireFine, Platinum, 64)
+                .input(wireFine, Platinum, 32)
                 .fluidInputs(SolderingAlloy.getFluid(L * 6))
                 .fluidInputs(Lubricant.getFluid(3000))
                 .fluidInputs(Zylon.getFluid(L * 2))

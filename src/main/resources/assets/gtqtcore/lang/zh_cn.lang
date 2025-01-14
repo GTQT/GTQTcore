@@ -15,7 +15,6 @@ item.gt.tool.universal_spade.name=%s万用铲
 item.gt.tool.combination_wrench.name=%s两用扳手
 item.gt.tool.soldering_iron_hv.tooltip=小心烫手！
 
-
 ##  Extruders
 metaitem.shape.exotic_extruder.plate.name= 无尽 模头（板）
 metaitem.shape.exotic_extruder.plate.tooltip=用来制作板的超强模头
@@ -687,6 +686,13 @@ gtqtcore.recipe.grind_ball_soapstone=研磨球材质：皂石
 gtqtcore.recipe.grind_ball_aluminium=研磨球材质：铝
 gtqtcore.recipe.altitude=最低高度:%s
 
+gtqtcore.machine.progress_time=工作耗时减免计算算子:%s
+gtqtcore.machine.parallel.pow.machineTier=并行：Math.min(Math.pow(%d, 设备外壳等级),%d)
+gtqtcore.machine.parallel.pow.custom=并行：Math.min(Math.pow(%d, %d),%d)
+gtqtcore.machine.parallel.num=并行：%s
+gtqtcore.machine.modify_overclock=设备超频计算算子:%s
+gtqtcore.machine.max_voltage=最大工作电压:设备外壳等级所对应的电压
+gtqtcore.machine.voltage.num=最大工作电压:%s EU
 #  Machines
 recipemap.dryer_recipes.name=脱水
 gtqtcore.machine.dryer.lv.name=基础化学脱水机
@@ -843,6 +849,34 @@ gtqtcore.machine.ultraviolet_lamp_chamber.uxv.name=史诗紫外灯箱 IV
 gtqtcore.machine.ultraviolet_lamp_chamber.uxv.tooltip=强光辐照
 gtqtcore.machine.ultraviolet_lamp_chamber.opv.name=传奇紫外灯箱
 gtqtcore.machine.ultraviolet_lamp_chamber.opv.tooltip=强光辐照
+
+recipemap.pressure_laminator_recipes.name=层压工艺
+gtqtcore.machine.pressure_laminator.lv.name=基础层压机
+gtqtcore.machine.pressure_laminator.lv.tooltip=高效层压工艺
+gtqtcore.machine.pressure_laminator.mv.name=进阶层压机
+gtqtcore.machine.pressure_laminator.mv.tooltip=高效层压工艺
+gtqtcore.machine.pressure_laminator.hv.name=进阶层压机 II
+gtqtcore.machine.pressure_laminator.hv.tooltip=高效层压工艺
+gtqtcore.machine.pressure_laminator.ev.name=进阶层压机 III
+gtqtcore.machine.pressure_laminator.ev.tooltip=高效层压工艺
+gtqtcore.machine.pressure_laminator.iv.name=精英层压机
+gtqtcore.machine.pressure_laminator.iv.tooltip=高级层压工艺
+gtqtcore.machine.pressure_laminator.luv.name=精英层压机 II
+gtqtcore.machine.pressure_laminator.luv.tooltip=高级层压工艺
+gtqtcore.machine.pressure_laminator.zpm.name=精英层压机 III
+gtqtcore.machine.pressure_laminator.zpm.tooltip=高级层压工艺
+gtqtcore.machine.pressure_laminator.uv.name=终极层压机
+gtqtcore.machine.pressure_laminator.uv.tooltip=超高效层压工艺
+gtqtcore.machine.pressure_laminator.uhv.name=史诗层压机
+gtqtcore.machine.pressure_laminator.uhv.tooltip=超高效层压工艺
+gtqtcore.machine.pressure_laminator.uev.name=史诗层压机 II
+gtqtcore.machine.pressure_laminator.uev.tooltip=超高效层压工艺
+gtqtcore.machine.pressure_laminator.uiv.name=史诗层压机 III
+gtqtcore.machine.pressure_laminator.uiv.tooltip=超高效层压工艺
+gtqtcore.machine.pressure_laminator.uxv.name=史诗层压机 IV
+gtqtcore.machine.pressure_laminator.uxv.tooltip=超高效层压工艺
+gtqtcore.machine.pressure_laminator.opv.name=传奇层压机
+gtqtcore.machine.pressure_laminator.opv.tooltip=超高效层压工艺
 
 gtqtcore.machine.naquadah_reactor.iv.name=精英硅岩反应堆
 gtqtcore.machine.naquadah_reactor.iv.tooltip=取之不尽，用之不竭
@@ -4184,7 +4218,7 @@ gregtech.machine.arc.2=升级部件：线圈 电极 管道 线圈影响炉温上
 gtqtcore.multiblock.arc.description=冶金系统介绍；冶金系统是一款模拟匠魂冶炼炉的合金模拟系统，加入16块钢锭开始基材融化，此时多方块温度会上升,在待机时炉温会自动下降。你可以随时添加不同的元素成分例如：锰，铬，钒等等，以流体的形式输入到多方块的输入仓内，每次添加都会使得炉温下降一小节，在运行完一轮后，会根据所缓存的元素以及当前炉温自动进行合金配比，从高到低依次输出直到不能再匹配任一合金配方，并且按照当前炉温决定输出比例。以下为支持的合金表：（钨钢*2|4500 钨*1 钢*1）（不锈钢*9|2000 铁*6 镍*1 锰*1 铬*1）（殷钢*3|1600 铁*2 镍*1）（钒钢*9|1400 铁*7 钒*1 铬*1）（钢*1|1000 铁*1），例如缓存不锈钢的材料：铁*100，镍*100，铬*10，锰*10，在输出时，显而易见的输出不锈钢*10*9后，铁还剩余40，镍剩余10，再次输出殷钢30,此时铁剩余20，再次全部输出为钢。
 gtqt.machine.stepper.1=本多方块拥有部件升级：紫外发射模块，自净过滤器模块，射频调节器模块。
 gtqt.machine.3d.1=本多方块拥有部件升级：自净过滤器模块，射频调节器模块。
-gtqt.machine.stepper.2=紫外发射器等级决定多方块的极限加工波长，当其与射频调节器等级相同时，多方块自动进入同频加工模式。
+gtqt.machine.stepper.2=紫外发射器等级决定多方块的极限加工波长，当其与射频调节器等级相同时，多方块自动进入效能加工模式。
 gtqt.machine.3d.2=当玻璃等级与射频调节器等级相同时，多方块自动进入同频加工模式。
 gtqt.machine.stepper.3=提供不同等级的光刻胶（HSQ Vinylcinnamate SU8_Photoresist Xmt Zrbtmst），光刻胶等级大于等于紫外发射器时等级，会拥有耗时减免以及并行(有洁净等级与光刻胶等级紫外发生器的差值的乘积决定) 提升，此时光刻胶消耗按照最大并行理论消耗计算。
 gtqt.machine.stepper.4=光刻胶等级小于紫外发射器时等级，则不拥有并行，且耗时翻倍
@@ -5026,6 +5060,9 @@ metaitem.catalyst_bed.max.name=反应催化床（§c§lMAX§r）
 metaitem.tool.tooltip.catalyst=§f类型：§d催化剂§r
 metaitem.tool.tooltip.catalyst_bed=§f类型：§e催化床§r
 
+metaitem.item.lamination_ca.name=强化碳纤维基板
+metaitem.item.lamination_fg.name=玻璃纤维基板
+metaitem.item.lamination_wd.name=防腐木基板
 metaitem.item.insulating_ir.name=钌基厚膜电阻浆料覆膜
 metaitem.item.lamination_ge.name=锗层压纤维基板
 metaitem.item.insulatingmica.name=绝缘云母复合片

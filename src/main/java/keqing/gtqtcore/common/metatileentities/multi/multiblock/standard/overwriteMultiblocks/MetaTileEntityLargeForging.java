@@ -17,14 +17,12 @@ import gregtech.common.blocks.MetaBlocks;
 import gregtech.core.sound.GTSoundEvents;
 import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
-import keqing.gtqtcore.api.metaileentity.multiblock.GTQTRecipeMapMultiblockOverwrite;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
@@ -36,16 +34,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-import static gregtech.api.GTValues.VA;
-
-public class MetaTileEntityLargeForging extends GTQTRecipeMapMultiblockOverwrite {
+public class MetaTileEntityLargeForging extends RecipeMapMultiblockController {
     private int casingTier;
     private int tubeTier;
     private int tier;
 
     public MetaTileEntityLargeForging(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, RecipeMaps.FORGE_HAMMER_RECIPES);
-        this.recipeMapWorkable = new LargeChemicalReactorLogic(this);
+        this.recipeMapWorkable = new LargeForgingReactorLogic(this);
     }
     @Override
     public boolean canBeDistinct() {return true;}
@@ -53,44 +49,16 @@ public class MetaTileEntityLargeForging extends GTQTRecipeMapMultiblockOverwrite
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityLargeForging(metaTileEntityId);
     }
-     int ParallelNum=1;
-    public NBTTagCompound writeToNBT(NBTTagCompound data) {
-        data.setInteger("modern", modern);
-        data.setInteger("casingTier", casingTier);
-        return super.writeToNBT(data);
-    }
-   
-    public void readFromNBT(NBTTagCompound data) {
-        super.readFromNBT(data);
-        modern = data.getInteger("modern");
-        casingTier = data.getInteger("casingTier");
-    }
+
     @Override
     public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(I18n.format("gregtech.machine.cracker.gtqtupdate.1"));
         tooltip.add(I18n.format("gregtech.machine.cracker.gtqtupdate.2"));
-        tooltip.add(I18n.format("本多方块最高限制配方电压：16 EU"));
+        tooltip.add(I18n.format("gtqtcore.machine.parallel.pow.machineTier",2,32));
+        tooltip.add(I18n.format("gtqtcore.machine.voltage.num",16));
     }
-    @Override
-    public void update() {
-        super.update();
-        if (modern == 0)
-        {
-            ParallelNum=ParallelNumA;
-        }
-        if (modern == 1)
-        {
-            P = (int) ((this.energyContainer.getEnergyStored() + energyContainer.getInputPerSec())/(getMinVa()==0?1:getMinVa()));
-            ParallelNum = Math.min(P, ParallelLim);
-        }
-    }
-    public int getMinVa()
-    {
-        if((Math.min(this.energyContainer.getEnergyCapacity()/32,VA[tier])*20)==0)return 1;
-        return (int)(Math.min(this.energyContainer.getEnergyCapacity()/32,VA[tier]));
 
-    }
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
@@ -118,9 +86,6 @@ public class MetaTileEntityLargeForging extends GTQTRecipeMapMultiblockOverwrite
         textList.add(new TextComponentTranslation("gtqtcore.tubeTire", tubeTier));
         if(casingTier!=tubeTier)
             textList.add(new TextComponentTranslation("gtqtcore.equal", casingTier,tubeTier));
-        if(modern==0) textList.add(new TextComponentTranslation("gtqtcore.tire1",tier));
-        if(modern==1) textList.add(new TextComponentTranslation("gtqtcore.tire2",tier));
-        textList.add(new TextComponentTranslation("gtqtcore.parr",ParallelNum,ParallelLim));
     }
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
@@ -171,8 +136,6 @@ public class MetaTileEntityLargeForging extends GTQTRecipeMapMultiblockOverwrite
         this.tier = Math.min(this.casingTier,this.tubeTier);
 
         this.writeCustomData(GTQTValue.UPDATE_TIER18,buf -> buf.writeInt(this.casingTier));
-        ParallelLim=Math.min((int)Math.pow(2, this.tier),32);
-        ParallelNum=ParallelLim;
     }
 
     @Override
@@ -215,22 +178,18 @@ public class MetaTileEntityLargeForging extends GTQTRecipeMapMultiblockOverwrite
         return GTQTTextures.ALGAE_FARM_OVERLAY;
     }
 
-    protected class LargeChemicalReactorLogic extends MultiblockRecipeLogic {
+    protected class LargeForgingReactorLogic extends MultiblockRecipeLogic {
 
-
-        public LargeChemicalReactorLogic(RecipeMapMultiblockController tileEntity) {
+        public LargeForgingReactorLogic(RecipeMapMultiblockController tileEntity) {
             super(tileEntity,true);
         }
-
 
         public long getMaxVoltage() {
             return 16;
         }
         @Override
         public int getParallelLimit() {
-            return ParallelNum;
+            return Math.min((int)Math.pow(2, tier),32);
         }
-
-
     }
 }

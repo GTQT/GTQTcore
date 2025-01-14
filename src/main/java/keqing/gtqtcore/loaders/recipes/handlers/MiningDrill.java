@@ -190,24 +190,22 @@ public class MiningDrill {
         }
     }
     private static void MiningDrill(MetaItem.MetaValueItem Item,int kind) {
-        for(int i=1;i<=10;i++) {
             MINING_DRILL_RECIPES.recipeBuilder()
                     .notConsumable(Item)
-                    .chancedOutput(Item, 5500-(500*i), 500*i)
-                    .chancedOutput(Item, 5500-(500*i), 500*i)
-                    .chancedOutput(Item, 5500-(500*i), 500*i)
-                    .chancedOutput(Item, 5500-(500*i), 500*i)
-                    .chancedOutput(Item, 5500-(500*i), 500*i)
-                    .chancedOutput(Item, 5500-(500*i), 500*i)
-                    .chancedOutput(Item, 5500-(500*i), 500*i)
-                    .chancedOutput(Item, 5500-(500*i), 500*i)
-                    .chancedOutput(Item, 5500-(500*i), 500*i)
+                    .chancedOutput(Item, 5000, 500)
+                    .chancedOutput(Item, 5000, 500)
+                    .chancedOutput(Item, 5000, 500)
+                    .chancedOutput(Item, 5000, 500)
+                    .chancedOutput(Item, 5000, 500)
+                    .chancedOutput(Item, 5000, 500)
+                    .chancedOutput(Item, 5000, 500)
+                    .chancedOutput(Item, 5000, 500)
+                    .chancedOutput(Item, 5000, 500)
                     .tier(kind)
                     .EUt(30)
-                    .duration((int) (200*Math.pow(2,i)))
-                    .circuitMeta(i)
+                    .duration(250)
                     .buildAndRegister();
-        }
+
     }
 
 }

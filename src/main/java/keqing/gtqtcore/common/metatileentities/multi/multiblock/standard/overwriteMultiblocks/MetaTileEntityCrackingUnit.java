@@ -22,19 +22,16 @@ import gregtech.core.sound.GTSoundEvents;
 
 import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
-import keqing.gtqtcore.api.metaileentity.multiblock.GTQTRecipeMapMultiblockOverwrite;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -44,9 +41,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.List;
 
 import static gregtech.api.GTValues.V;
-import static gregtech.api.GTValues.VA;
 
-public class MetaTileEntityCrackingUnit extends GTQTRecipeMapMultiblockOverwrite {
+public class MetaTileEntityCrackingUnit extends RecipeMapMultiblockController {
 
     private int coilTier;
     private int casingTier;
@@ -58,38 +54,7 @@ public class MetaTileEntityCrackingUnit extends GTQTRecipeMapMultiblockOverwrite
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityCrackingUnit(metaTileEntityId);
     }
-    int ParallelNum=1;
-    public NBTTagCompound writeToNBT(NBTTagCompound data) {
-        data.setInteger("modern", modern);
-        data.setInteger("casingTier", casingTier);
-        return super.writeToNBT(data);
-    }
-   
-    public void readFromNBT(NBTTagCompound data) {
-        super.readFromNBT(data);
-        modern = data.getInteger("modern");
-        casingTier = data.getInteger("casingTier");
-    }
 
-    @Override
-    public void update() {
-        super.update();
-        if (modern == 0)
-        {
-            ParallelNum=ParallelNumA;
-        }
-        if (modern == 1)
-        {
-            P = (int) ((this.energyContainer.getEnergyStored() + energyContainer.getInputPerSec())/(getMinVa()==0?1:getMinVa()));
-            ParallelNum = Math.min(P, ParallelLim);
-        }
-    }
-    public int getMinVa()
-    {
-        if((Math.min(this.energyContainer.getEnergyCapacity()/32,VA[casingTier])*20)==0)return 1;
-        return (int)(Math.min(this.energyContainer.getEnergyCapacity()/32,VA[casingTier]));
-
-    }
     @Override
     public boolean canBeDistinct() {return true;}
     @Override
@@ -171,8 +136,6 @@ public class MetaTileEntityCrackingUnit extends GTQTRecipeMapMultiblockOverwrite
                 0);
 
         this.writeCustomData(GTQTValue.UPDATE_TIER15,buf -> buf.writeInt(this.casingTier));
-        ParallelLim=Math.min((int)Math.pow(2, this.casingTier),32);
-        ParallelNum=ParallelLim;
     }
 
 
@@ -207,9 +170,6 @@ public class MetaTileEntityCrackingUnit extends GTQTRecipeMapMultiblockOverwrite
                                 "gregtech.multiblock.cracking_unit.energy_hover");
 
                         tl.add(TextComponentUtil.setHover(base, hover));
-                        if(modern==0) textList.add(new TextComponentTranslation("gtqtcore.tire1",casingTier));
-                        if(modern==1) textList.add(new TextComponentTranslation("gtqtcore.tire2",casingTier));
-                        textList.add(new TextComponentTranslation("gtqtcore.parr",ParallelNum,ParallelLim));
                     }
                 })
                 .addParallelsLine(recipeMapWorkable.getParallelLimit())
@@ -224,7 +184,11 @@ public class MetaTileEntityCrackingUnit extends GTQTRecipeMapMultiblockOverwrite
         tooltip.add(I18n.format("gregtech.machine.cracker.tooltip.1"));
         tooltip.add(I18n.format("gregtech.machine.cracker.gtqtupdate.1"));
         tooltip.add(I18n.format("gregtech.machine.cracker.gtqtupdate.2"));
+        tooltip.add(I18n.format("gtqtcore.machine.modify_overclock","Coil Tier"));
+        tooltip.add(I18n.format("gtqtcore.machine.parallel.pow.machineTier",2,32));
+        tooltip.add(I18n.format("gtqtcore.machine.max_voltage"));
     }
+
 
     @SideOnly(Side.CLIENT)
     @Override
@@ -262,11 +226,12 @@ public class MetaTileEntityCrackingUnit extends GTQTRecipeMapMultiblockOverwrite
 
         @Override
         public int getParallelLimit() {
-            return ParallelNum;
+            return Math.min((int)Math.pow(2, casingTier),32);
         }
         public long getMaxVoltage() {
             return Math.min(super.getMaxVoltage(), V[casingTier]);
         }
+
         @Override
         protected void modifyOverclockPost(int[] resultOverclock,  IRecipePropertyStorage storage) {
             super.modifyOverclockPost(resultOverclock, storage);

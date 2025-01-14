@@ -17,17 +17,14 @@ import gregtech.client.utils.TooltipHelper;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
-import keqing.gtqtcore.api.metaileentity.multiblock.GTQTRecipeMapMultiblockOverwrite;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.IFluidTank;
 import net.minecraftforge.fml.relauncher.Side;
@@ -39,10 +36,8 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 import static gregtech.api.GTValues.V;
-import static gregtech.api.GTValues.VA;
 
-public class MetaTileEntityDissolutionTank extends GTQTRecipeMapMultiblockOverwrite {
-    int ParallelNum = 1;
+public class MetaTileEntityDissolutionTank extends RecipeMapMultiblockController {
     private int glass_tier;
 
     public MetaTileEntityDissolutionTank(ResourceLocation metaTileEntityId) {
@@ -66,34 +61,6 @@ public class MetaTileEntityDissolutionTank extends GTQTRecipeMapMultiblockOverwr
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {
         return new MetaTileEntityDissolutionTank(metaTileEntityId);
-    }
-
-    public NBTTagCompound writeToNBT(NBTTagCompound data) {
-        data.setInteger("modern", modern);
-        return super.writeToNBT(data);
-    }
-
-    public void readFromNBT(NBTTagCompound data) {
-        super.readFromNBT(data);
-        modern = data.getInteger("modern");
-    }
-
-    @Override
-    public void update() {
-        super.update();
-        if (modern == 0) {
-            ParallelNum = ParallelNumA;
-        }
-        if (modern == 1) {
-            P = (int) ((this.energyContainer.getEnergyStored() + energyContainer.getInputPerSec()) / (getMinVa() == 0 ? 1 : getMinVa()));
-            ParallelNum = Math.min(P, ParallelLim);
-        }
-    }
-
-    public int getMinVa() {
-        if ((Math.min(this.energyContainer.getEnergyCapacity() / 32, VA[glass_tier]) * 20) == 0) return 1;
-        return (int) (Math.min(this.energyContainer.getEnergyCapacity() / 32, VA[glass_tier]));
-
     }
 
     @Override
@@ -172,8 +139,6 @@ public class MetaTileEntityDissolutionTank extends GTQTRecipeMapMultiblockOverwr
         this.glass_tier = GTQTUtil.getOrDefault(() -> glass_tier instanceof WrappedIntTired,
                 () -> ((WrappedIntTired) glass_tier).getIntTier(),
                 0);
-        ParallelLim = (int) Math.pow(2, this.glass_tier);
-        ParallelNum = ParallelLim;
     }
 
     @SideOnly(Side.CLIENT)
@@ -195,15 +160,15 @@ public class MetaTileEntityDissolutionTank extends GTQTRecipeMapMultiblockOverwr
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("自动化噩梦", new Object[0]));
         tooltip.add(I18n.format("gtqtcore.machine.dissolution_tank.tooltip.1"));
         tooltip.add(I18n.format("gregtech.machine.cracker.gtqtupdate.1"));
+        tooltip.add(I18n.format("gtqtcore.machine.progress_time","maxProgress * (100 - glass_tier) / 100"));
+        tooltip.add(I18n.format("gtqtcore.machine.modify_overclock","Coil Tier"));
+        tooltip.add(I18n.format("gtqtcore.machine.parallel.pow.custom",2,"Glass Tier",256));
+        tooltip.add(I18n.format("gtqtcore.machine.max_voltage"));
+
     }
 
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
-        if (isStructureFormed()) {
-            if (modern == 0) textList.add(new TextComponentTranslation("gtqtcore.tire1", glass_tier));
-            if (modern == 1) textList.add(new TextComponentTranslation("gtqtcore.tire2", glass_tier));
-            textList.add(new TextComponentTranslation("gtqtcore.parr", ParallelNum, ParallelLim));
-        }
         super.addDisplayText(textList);
     }
 
@@ -223,7 +188,7 @@ public class MetaTileEntityDissolutionTank extends GTQTRecipeMapMultiblockOverwr
 
         @Override
         public int getParallelLimit() {
-            return ParallelNum;
+            return Math.min((int) Math.pow(2, glass_tier), 256);
         }
     }
 }

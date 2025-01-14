@@ -39,7 +39,6 @@ import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.MetaTileEntities;
 import gregtech.core.sound.GTSoundEvents;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
-import keqing.gtqtcore.api.metaileentity.multiblock.GTQTRecipeMapMultiblockOverwrite;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
@@ -48,7 +47,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
@@ -69,13 +67,12 @@ import static gregtech.api.GTValues.VA;
 import static keqing.gtqtcore.api.utils.GTQTUtil.getAccelerateByCWU;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.HUGE_ALLOY_BLAST_FURANCE;
 
-public class MetaTileEntityHugeAlloyBlastSmelter extends GTQTRecipeMapMultiblockOverwrite implements IHeatingCoil, IOpticalComputationReceiver {
+public class MetaTileEntityHugeAlloyBlastSmelter extends RecipeMapMultiblockController implements IHeatingCoil, IOpticalComputationReceiver {
 
     protected int heatingCoilLevel;
     protected int coilTier;
     protected int glassTire;
     int requestCWUt;
-    int ParallelNum = 1;
     private int blastFurnaceTemperature;
     private IOpticalComputationProvider computationProvider;
 
@@ -111,28 +108,12 @@ public class MetaTileEntityHugeAlloyBlastSmelter extends GTQTRecipeMapMultiblock
         return new MetaTileEntityHugeAlloyBlastSmelter(this.metaTileEntityId);
     }
 
-    public NBTTagCompound writeToNBT(NBTTagCompound data) {
-        data.setInteger("modern", modern);
-        return super.writeToNBT(data);
-    }
-
-    public void readFromNBT(NBTTagCompound data) {
-        super.readFromNBT(data);
-        modern = data.getInteger("modern");
-    }
 
     @Override
     public void update() {
         super.update();
         if (isStructureFormed() && isActive()) {
             requestCWUt = computationProvider.requestCWUt(1024, false);
-        }
-        if (modern == 0) {
-            ParallelNum = ParallelNumA;
-        }
-        if (modern == 1) {
-            P = (int) ((this.energyContainer.getEnergyStored() + energyContainer.getInputPerSec()) / (getMinVa() == 0 ? 1 : getMinVa()));
-            ParallelNum = Math.min(P, ParallelLim);
         }
     }
 
@@ -148,9 +129,6 @@ public class MetaTileEntityHugeAlloyBlastSmelter extends GTQTRecipeMapMultiblock
         ITextComponent heatString = TextComponentUtil.stringWithColor(TextFormatting.RED, TextFormattingUtil.formatNumbers(this.blastFurnaceTemperature) + "K");
         textList.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY, "gregtech.multiblock.blast_furnace.max_temperature", heatString));
         textList.add(new TextComponentTranslation("gtqtcore.kqcc_accelerate", requestCWUt, getAccelerateByCWU(requestCWUt)));
-        if (modern == 0) textList.add(new TextComponentTranslation("gtqtcore.tire1", coilTier));
-        if (modern == 1) textList.add(new TextComponentTranslation("gtqtcore.tire2", coilTier));
-        textList.add(new TextComponentTranslation("gtqtcore.parr", ParallelNum, ParallelLim));
     }
 
     @Override
@@ -197,9 +175,6 @@ public class MetaTileEntityHugeAlloyBlastSmelter extends GTQTRecipeMapMultiblock
             this.heatingCoilLevel = BlockWireCoil.CoilType.CUPRONICKEL.getLevel();
             this.coilTier = BlockWireCoil.CoilType.CUPRONICKEL.getTier();
         }
-        ParallelLim = Math.min((int) Math.pow(2, coilTier), 256);
-        ParallelNum = ParallelLim;
-
         this.blastFurnaceTemperature += 100 * Math.max(0, GTUtility.getTierByVoltage(getEnergyContainer().getInputVoltage()) - GTValues.MV);
     }
 
@@ -330,7 +305,7 @@ public class MetaTileEntityHugeAlloyBlastSmelter extends GTQTRecipeMapMultiblock
 
         @Override
         public int getParallelLimit() {
-            return ParallelNum;
+            return Math.min((int) Math.pow(2, coilTier), 256);
         }
 
         @Override
@@ -339,16 +314,10 @@ public class MetaTileEntityHugeAlloyBlastSmelter extends GTQTRecipeMapMultiblock
             super.setMaxProgress(MaxProgress);
         }
 
-        @Override
-        protected long getMaxParallelVoltage() {
-            return super.getMaxVoltage();
-        }
-
         protected void modifyOverclockPre(int[] values, IRecipePropertyStorage storage) {
             super.modifyOverclockPre(values, storage);
             values[0] = OverclockingLogic.applyCoilEUtDiscount(values[0], ((IHeatingCoil) this.metaTileEntity).getCurrentTemperature(), storage.getRecipePropertyValue(TemperatureProperty.getInstance(), 0));
         }
-
         protected int[] runOverclockingLogic(IRecipePropertyStorage propertyStorage, int recipeEUt, long maxVoltage, int duration, int amountOC) {
             return OverclockingLogic.heatingCoilOverclockingLogic(Math.abs(recipeEUt), maxVoltage, duration, amountOC, ((IHeatingCoil) this.metaTileEntity).getCurrentTemperature(), propertyStorage.getRecipePropertyValue(TemperatureProperty.getInstance(), 0));
         }

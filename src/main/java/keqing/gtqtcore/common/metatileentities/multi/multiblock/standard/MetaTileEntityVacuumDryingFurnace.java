@@ -136,7 +136,7 @@ public class MetaTileEntityVacuumDryingFurnace extends MultiMapMultiblockControl
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.1"));
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.2"));
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.3"));
-        tooltip.add(I18n.format("gtqtcore.machine.vac.tooltip.1"));
+        tooltip.add(I18n.format("gtqtcore.machine.parallel.pow.machineTier", 2, 32));
     }
 
     @SideOnly(Side.CLIENT)

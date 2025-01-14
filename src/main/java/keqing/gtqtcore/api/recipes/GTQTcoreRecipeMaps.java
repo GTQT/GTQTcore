@@ -200,6 +200,7 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<SimpleRecipeBuilder> COMPONENT_ASSEMBLER_RECIPES;
     public static final RecipeMap<SimpleRecipeBuilder> SEPTIC_TANK;
     public static final RecipeMap<SimpleRecipeBuilder> ULTRAVIOLET_LAMP_CHAMBER_RECIPES;
+    public static final RecipeMap<SimpleRecipeBuilder> PRESSURE_LAMINATOR_RECIPES;
     public static final RecipeMap<SimpleRecipeBuilder> VACUUM_CHAMBER_RECIPES;
     public static final RecipeMap<SimpleRecipeBuilder> DECAY_CHAMBER_RECIPES;
     public static final RecipeMap<ComponentAssemblyLineRecipesTierRecipeBuilder> COMPONENT_ASSEMBLY_LINE_RECIPES;
@@ -291,7 +292,7 @@ public class GTQTcoreRecipeMaps {
                 .setProgressBar(GuiTextures.PROGRESS_BAR_COMPRESS, ProgressWidget.MoveType.HORIZONTAL)
                 .setSound(GTSoundEvents.ARC);
 
-        MINING_DRILL_RECIPES= new RecipeMap<>("mining_drill", 2, 9, 0, 0, new MiningDrillRecipeBuilder(), false)
+        MINING_DRILL_RECIPES= new RecipeMap<>("mining_drill", 1, 9, 0, 0, new MiningDrillRecipeBuilder(), false)
                 .setSlotOverlay(false, false, true, GuiTextures.CRUSHED_ORE_OVERLAY)
                 .setSlotOverlay(true, false, true, GuiTextures.DUST_OVERLAY)
                 .setSound(GTSoundEvents.MACERATOR);
@@ -315,6 +316,9 @@ public class GTQTcoreRecipeMaps {
                 .setSlotOverlay(true, false, GuiTextures.VIAL_OVERLAY_1)
                 .setSlotOverlay(true, true, GuiTextures.VIAL_OVERLAY_2)
                 .setSound(GTSoundEvents.CHEMICAL_REACTOR);
+
+        PRESSURE_LAMINATOR_RECIPES = new RecipeMap<>("pressure_laminator_recipes",  3,  1,  3, 0, new SimpleRecipeBuilder(), false)
+                .setSound(GTSoundEvents.COMPRESSOR);
 
         DECAY_CHAMBER_RECIPES = new RecipeMap<>("decay_chamber_recipes",  1,  1,  1,  1, new SimpleRecipeBuilder(), false)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_HAMMER, ProgressWidget.MoveType.VERTICAL_DOWNWARDS)
@@ -354,7 +358,7 @@ public class GTQTcoreRecipeMaps {
                 .setSound(GTSoundEvents.ASSEMBLER);
 
 
-        TD_PRINT_RECIPES = new RecipeMap<>("threed_print", 2, 1, 2, 0, new ComputationRecipeBuilder(), false)
+        TD_PRINT_RECIPES = new RecipeMap<>("threed_print", 1, 1, 1, 0, new ComputationRecipeBuilder(), false)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL)
                 .setSlotOverlay(false, false, false, GuiTextures.CIRCUIT_OVERLAY)
                 .setSlotOverlay(false, false, true, GuiTextures.CIRCUIT_OVERLAY)

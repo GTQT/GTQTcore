@@ -56,7 +56,7 @@ import static keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility
 import static keqing.gtqtcore.api.unification.GTQTMaterials.LiquidNitrogen;
 import static keqing.gtqtcore.common.block.blocks.BlocksResearchSystem.CasingType.*;
 
-public class MetaTileEntityKQCC extends MultiblockWithDisplayBase implements IOpticalComputationProvider {
+public class MetaTileEntityResearchSystemControlCenter extends MultiblockWithDisplayBase implements IOpticalComputationProvider {
     private boolean isWorkingEnabled;
 
     private IFluidHandler coolantHandler;
@@ -71,7 +71,7 @@ public class MetaTileEntityKQCC extends MultiblockWithDisplayBase implements IOp
     int thresholdPercentage=0;
     private IEnergyContainer energyContainer;
 
-    public MetaTileEntityKQCC(ResourceLocation metaTileEntityId) {
+    public MetaTileEntityResearchSystemControlCenter(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId);
         this.energyContainer = new EnergyContainerList(new ArrayList<>());
     }
@@ -364,7 +364,7 @@ public class MetaTileEntityKQCC extends MultiblockWithDisplayBase implements IOp
     }
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {
-        return new MetaTileEntityKQCC(metaTileEntityId);
+        return new MetaTileEntityResearchSystemControlCenter(metaTileEntityId);
     }
     @SideOnly(Side.CLIENT)
     @Override

@@ -183,7 +183,7 @@ public class MetaTileEntityGasCollector extends RecipeMapMultiblockController {
     public void addInformation(ItemStack stack, @Nullable World world, @Nonnull List<String> tooltip, boolean advanced) {
         super.addInformation(stack, world, tooltip, advanced);
         tooltip.add(I18n.format("启动普适集气后可以在任何地方抽取空气"));
-        tooltip.add(I18n.format("升级过滤模块获取并行"));
+        tooltip.add(I18n.format("gtqtcore.machine.parallel.num", "过滤模块"));
     }
 
     private class GasCollectorWorkableHandler extends MultiblockRecipeLogic {

@@ -59,6 +59,9 @@ public class MetaTileEntityThreeDimPrinter extends MultiMapMultiblockController 
     public void addInformation(ItemStack stack, World world, List<String> tooltip, boolean advanced) {
         tooltip.add(I18n.format("gtqt.machine.3d.1"));
         tooltip.add(I18n.format("gtqt.machine.3d.2"));
+        tooltip.add(I18n.format("gtqtcore.machine.progress_time","maxProgress * (100.0 - glass_tier) / 100"));
+        tooltip.add(I18n.format("gtqtcore.machine.parallel.num","clean_tier ? sheping_tier,精密模式下做乘法计算，否则为加法"));
+        tooltip.add(I18n.format("gtqtcore.machine.voltage.num","V[Math.min(tier, clean_tier * 2)]"));
     }
 
     @Override
@@ -71,16 +74,6 @@ public class MetaTileEntityThreeDimPrinter extends MultiMapMultiblockController 
     public void receiveInitialSyncData(PacketBuffer buf) {
         super.receiveInitialSyncData(buf);
         this.tier = buf.readInt();
-    }
-
-    public NBTTagCompound writeToNBT(NBTTagCompound data) {
-        data.setInteger("tier", tier);
-        return super.writeToNBT(data);
-    }
-
-    public void readFromNBT(NBTTagCompound data) {
-        super.readFromNBT(data);
-        tier = data.getInteger("tier");
     }
 
     @Override

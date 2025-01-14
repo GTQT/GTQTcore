@@ -145,15 +145,14 @@ public class CrystalRaw {
                 .duration(1200).EUt(VA[LuV]).buildAndRegister();
 
         // Crystal Circuit Components
-        STEPPER_RECIPES.recipeBuilder()
+        LASER_ENGRAVING.recipeBuilder()
                 .input(ENGRAVED_CRYSTAL_CHIP)
                 .notConsumable(lens, MagnetoResonatic)
-                .fluidInputs(Naquadria.getFluid(16))
+                .fluidInputs(Naquadah.getFluid(144))
                 .output(CRYSTAL_CENTRAL_PROCESSING_UNIT)
                 .cleanroom(STERILE_CLEANROOM)
-                .Laser(5)
-                .CWUt(CWT[LuV])
-                .duration(100).EUt(10000).buildAndRegister();
+                .CWUt(CWT[IV])
+                .duration(600).EUt(VA[IV]).buildAndRegister();
 
 
     }

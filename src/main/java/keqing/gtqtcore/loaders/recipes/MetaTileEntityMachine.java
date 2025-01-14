@@ -855,8 +855,15 @@ public class MetaTileEntityMachine {
         MetaTileEntityLoader.registerMachineRecipe(true, LOW_TEMP_ACTIVATOR,
                 "EXE", "GHG", "WXW",
                 'E', CraftingComponent.EMITTER,
-                'X', CraftingComponent.BETTER_CIRCUIT,
+                'X', CraftingComponent.CIRCUIT,
                 'G', CraftingComponent.GLASS,
+                'W', CraftingComponent.CABLE,
+                'H', CraftingComponent.HULL);
+
+        MetaTileEntityLoader.registerMachineRecipe(true, PRESSURE_LAMINATOR,
+                "EEE", "XHX", "WXW",
+                'E', CraftingComponent.PISTON,
+                'X', CraftingComponent.CIRCUIT,
                 'W', CraftingComponent.CABLE,
                 'H', CraftingComponent.HULL);
 

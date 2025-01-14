@@ -1,5 +1,6 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.giantEquipment;
 
+import gregicality.multiblocks.api.capability.IParallelMultiblock;
 import gregtech.api.GTValues;
 import gregtech.api.GregTechAPI;
 import gregtech.api.block.IHeatingCoilBlockStats;
@@ -11,6 +12,7 @@ import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
+import gregtech.api.metatileentity.multiblock.MultiMapMultiblockController;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
@@ -35,17 +37,15 @@ import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.MetaTileEntities;
 import gregtech.core.sound.GTSoundEvents;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
-import keqing.gtqtcore.api.metaileentity.multiblock.GTQTRecipeMapMultiblockControllerOverwrite;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.common.block.blocks.BlockPCBFactoryCasing;
 import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4;
+import keqing.gtqtcore.common.block.blocks.BlockPCBFactoryCasing;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
@@ -62,17 +62,15 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-import static gregtech.api.GTValues.VA;
 import static keqing.gtqtcore.api.utils.GTQTUtil.getAccelerateByCWU;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.HUGE_CHEMICAL_REACTOR;
 
-public class MetaTileEntityHugeChemicalReactor extends GTQTRecipeMapMultiblockControllerOverwrite implements IHeatingCoil, IOpticalComputationReceiver {
+public class MetaTileEntityHugeChemicalReactor extends MultiMapMultiblockController implements IParallelMultiblock, IHeatingCoil, IOpticalComputationReceiver {
 
     protected int heatingCoilLevel;
     protected int coilTier;
     protected int glassTire;
     int requestCWUt;
-    int ParallelNum = 1;
     private int blastFurnaceTemperature;
     private IOpticalComputationProvider computationProvider;
 
@@ -119,15 +117,6 @@ public class MetaTileEntityHugeChemicalReactor extends GTQTRecipeMapMultiblockCo
         return this.computationProvider;
     }
 
-    public NBTTagCompound writeToNBT(NBTTagCompound data) {
-        data.setInteger("modern", modern);
-        return super.writeToNBT(data);
-    }
-
-    public void readFromNBT(NBTTagCompound data) {
-        super.readFromNBT(data);
-        modern = data.getInteger("modern");
-    }
 
     @Override
     public void update() {
@@ -135,20 +124,8 @@ public class MetaTileEntityHugeChemicalReactor extends GTQTRecipeMapMultiblockCo
         if (isStructureFormed() && isActive()) {
             requestCWUt = computationProvider.requestCWUt(1024, false);
         }
-        if (modern == 0) {
-            ParallelNum = ParallelNumA;
-        }
-        if (modern == 1) {
-            P = (int) ((this.energyContainer.getEnergyStored() + energyContainer.getInputPerSec()) / (getMinVa() == 0 ? 1 : getMinVa()));
-            ParallelNum = Math.min(P, ParallelLim);
-        }
     }
 
-    public int getMinVa() {
-        if ((Math.min(this.energyContainer.getEnergyCapacity() / 32, VA[Math.min(coilTier, 9)]) * 20) == 0) return 1;
-        return (int) (Math.min(this.energyContainer.getEnergyCapacity() / 32, VA[Math.min(coilTier, 9)]));
-
-    }
 
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
@@ -156,9 +133,6 @@ public class MetaTileEntityHugeChemicalReactor extends GTQTRecipeMapMultiblockCo
         ITextComponent heatString = TextComponentUtil.stringWithColor(TextFormatting.RED, TextFormattingUtil.formatNumbers(this.blastFurnaceTemperature) + "K");
         textList.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY, "gregtech.multiblock.blast_furnace.max_temperature", heatString));
         textList.add(new TextComponentTranslation("gtqtcore.kqcc_accelerate", requestCWUt, getAccelerateByCWU(requestCWUt)));
-        if (modern == 0) textList.add(new TextComponentTranslation("gtqtcore.tire1", coilTier));
-        if (modern == 1) textList.add(new TextComponentTranslation("gtqtcore.tire2", coilTier));
-        textList.add(new TextComponentTranslation("gtqtcore.parr", ParallelNum, ParallelLim));
     }
 
     @Override
@@ -185,8 +159,6 @@ public class MetaTileEntityHugeChemicalReactor extends GTQTRecipeMapMultiblockCo
             this.heatingCoilLevel = BlockWireCoil.CoilType.CUPRONICKEL.getLevel();
             this.coilTier = BlockWireCoil.CoilType.CUPRONICKEL.getTier();
         }
-        ParallelLim = Math.min((int) Math.pow(2, coilTier), 256);
-        ParallelNum = ParallelLim;
         this.blastFurnaceTemperature += 100 * Math.max(0, GTUtility.getTierByVoltage(getEnergyContainer().getInputVoltage()) - GTValues.MV);
     }
 
@@ -321,7 +293,7 @@ public class MetaTileEntityHugeChemicalReactor extends GTQTRecipeMapMultiblockCo
 
         @Override
         public int getParallelLimit() {
-            return ParallelNum;
+            return Math.min((int) Math.pow(2, coilTier), 256);
         }
 
         protected void modifyOverclockPre(int[] values, IRecipePropertyStorage storage) {

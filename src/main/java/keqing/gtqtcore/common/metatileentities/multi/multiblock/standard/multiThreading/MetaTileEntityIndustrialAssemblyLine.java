@@ -350,7 +350,7 @@ public class MetaTileEntityIndustrialAssemblyLine extends GTQTMultiblockCore {
     }
 
     public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
-        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("地铁猫猫看手机", new Object[0]));
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("谁把我的组装机拆走了", new Object[0]));
         super.addInformation(stack, player, tooltip, advanced);
         if (ConfigHolder.machines.orderedAssembly && ConfigHolder.machines.orderedFluidAssembly) {
             tooltip.add(I18n.format("gregtech.machine.assembly_line.tooltip_ordered_both"));

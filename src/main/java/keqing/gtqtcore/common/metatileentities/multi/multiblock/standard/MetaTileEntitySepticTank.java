@@ -217,6 +217,8 @@ public class MetaTileEntitySepticTank extends MultiMapMultiblockController imple
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.3"));
         tooltip.add(I18n.format("gregtech.machine.cracker.gtqtupdate.1"));
         tooltip.add(I18n.format("gregtech.machine.cracker.gtqtupdate.2"));
+        tooltip.add(I18n.format("gtqtcore.machine.parallel.num","设备等级"));
+        tooltip.add(I18n.format("gtqtcore.machine.max_voltage"));
     }
 
     @Override

@@ -43,12 +43,20 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         //基础材料
         IMPREGNATED_GRAPHITE_RODSA = this.addItem(1, "item.impregnated_graphite_rodsa").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
         IMPREGNATED_GRAPHITE_RODS = this.addItem(2, "item.impregnated_graphite_rods").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
+
         IMPREGNATED_SUBSTRATE = this.addItem(3, "item.impregnated_substrate").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
         IMPREGNATED_PLASTIC_SUBSTRATE = this.addItem(4, "item.impregnated_plastic_substrate").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
         IMPREGNATED_EPOXY = this.addItem(5, "item.impregnated_epoxy").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
         IMPREGNATED_FIBER = this.addItem(6, "item.impregnated_fiber").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
         IMPREGNATED_MULTILAYER_FIBER = this.addItem(7, "item.impregnated_multilayer_fiber").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
-        INSULATINGMICA = this.addItem(15, "item.insulatingmica").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
+
+        //绝缘云母
+        INSULATINGMICA = this.addItem(9, "item.insulatingmica").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
+
+        //13 14 15
+        LAMINATION_WD = this.addItem(13, "item.lamination_wd").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
+        LAMINATION_FG = this.addItem(14, "item.lamination_fg").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
+        LAMINATION_CA = this.addItem(15, "item.lamination_ca").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
         LAMINATION_GE = this.addItem(16, "item.lamination_ge").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
         LAMINATION_IR = this.addItem(17, "item.insulating_ir").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
 

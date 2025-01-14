@@ -46,7 +46,7 @@ public class MetaTileEntityElectronOil extends RecipeMapMultiblockController {
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("石油滋生者", new Object[0]));
         tooltip.add(I18n.format("根据输入电压获得并行，电压低于HV默认四并行，每超过HV一级并行数量加四"));
         tooltip.add(I18n.format("默认耗时减免20%%"));
-        tooltip.add(I18n.format("最大并行：%s", 16));
+        tooltip.add(I18n.format("gtqtcore.machine.parallel.num", 16));
     }
 
     @Override
@@ -93,14 +93,6 @@ public class MetaTileEntityElectronOil extends RecipeMapMultiblockController {
 
         public ELEOilLogic(RecipeMapMultiblockController tileEntity) {
             super(tileEntity, true);
-        }
-
-        private int ParallelTier(int tier) {
-            if (tier - 3 <= 0) {
-                return 4;
-            } else {
-                return 4 * (tier - EV);
-            }
         }
 
         @Override

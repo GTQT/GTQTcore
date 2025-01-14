@@ -72,7 +72,7 @@ import java.util.List;
 import static keqing.gtqtcore.common.block.blocks.BlocksResearchSystem.CasingType.KQCC_COMPUTER_CASING;
 
 
-public class MetaTileEntitykeQingNet extends RecipeMapMultiblockController implements IOpticalComputationReceiver, IFastRenderMetaTileEntity {
+public class MetaTileEntityResearchSystemNetWork extends RecipeMapMultiblockController implements IOpticalComputationReceiver, IFastRenderMetaTileEntity {
     double tier;
     int page = 0;
     int x;
@@ -84,7 +84,7 @@ public class MetaTileEntitykeQingNet extends RecipeMapMultiblockController imple
     int thresholdPercentage = 0;
     private IOpticalComputationProvider computationProvider;
 
-    public MetaTileEntitykeQingNet(ResourceLocation metaTileEntityId) {
+    public MetaTileEntityResearchSystemNetWork(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.KEQING_NET_RECIES);
         this.recipeMapWorkable = new ResearchStationRecipeLogic(this);
     }
@@ -106,7 +106,7 @@ public class MetaTileEntitykeQingNet extends RecipeMapMultiblockController imple
     }
 
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
-        return new MetaTileEntitykeQingNet(this.metaTileEntityId);
+        return new MetaTileEntityResearchSystemNetWork(this.metaTileEntityId);
     }
 
     @Override
@@ -622,8 +622,8 @@ public class MetaTileEntitykeQingNet extends RecipeMapMultiblockController imple
                     return true;
                 }
             }
-            if (mte instanceof MetaTileEntityKQCC) {
-                if (((MetaTileEntityKQCC) mte).isStructureFormed()) {
+            if (mte instanceof MetaTileEntityResearchSystemControlCenter) {
+                if (((MetaTileEntityResearchSystemControlCenter) mte).isStructureFormed()) {
                     io[i][4] = 30;
                     return true;
                 }
@@ -709,13 +709,13 @@ public class MetaTileEntitykeQingNet extends RecipeMapMultiblockController imple
     }
 
     private static class ResearchStationRecipeLogic extends ComputationRecipeLogic {
-        public ResearchStationRecipeLogic(MetaTileEntitykeQingNet metaTileEntity) {
+        public ResearchStationRecipeLogic(MetaTileEntityResearchSystemNetWork metaTileEntity) {
             super(metaTileEntity, ComputationType.SPORADIC);
         }
 
         @Nonnull
-        public MetaTileEntitykeQingNet getMetaTileEntity() {
-            return (MetaTileEntitykeQingNet) super.getMetaTileEntity();
+        public MetaTileEntityResearchSystemNetWork getMetaTileEntity() {
+            return (MetaTileEntityResearchSystemNetWork) super.getMetaTileEntity();
         }
     }
 }

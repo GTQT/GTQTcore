@@ -24,6 +24,9 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem IMPREGNATED_EPOXY;
     public static MetaItem<?>.MetaValueItem IMPREGNATED_FIBER;
     public static MetaItem<?>.MetaValueItem IMPREGNATED_MULTILAYER_FIBER;
+    public static MetaItem<?>.MetaValueItem LAMINATION_CA;
+    public static MetaItem<?>.MetaValueItem LAMINATION_FG;
+    public static MetaItem<?>.MetaValueItem LAMINATION_WD;
     public static MetaItem<?>.MetaValueItem LAMINATION_GE;
     public static MetaItem<?>.MetaValueItem LAMINATION_IR;
     public static MetaItem<?>.MetaValueItem TIME_BOTTLE;

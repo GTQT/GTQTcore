@@ -25,14 +25,12 @@ import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.BloomEffectUtil;
 import gregtech.client.utils.TooltipHelper;
 import gregtech.common.blocks.*;
-import keqing.gtqtcore.api.metaileentity.multiblock.GTQTRecipeMapMultiblockOverwrite;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
@@ -52,10 +50,9 @@ import java.util.List;
 
 import static gregtech.api.GTValues.VA;
 
-public class MetaTileEntityDigester extends GTQTRecipeMapMultiblockOverwrite {
+public class MetaTileEntityDigester extends RecipeMapMultiblockController {
     protected int heatingCoilLevel;
     protected int heatingCoilDiscount;
-    int ParallelNum = 1;
     private int coilTier;
 
     public MetaTileEntityDigester(ResourceLocation metaTileEntityId) {
@@ -75,19 +72,6 @@ public class MetaTileEntityDigester extends GTQTRecipeMapMultiblockOverwrite {
         return MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.TUNGSTENSTEEL_PIPE);
     }
 
-    public static int getMaxParallel(int heatingCoilLevel) {
-        return heatingCoilLevel;
-    }
-
-    public NBTTagCompound writeToNBT(NBTTagCompound data) {
-        data.setInteger("modern", modern);
-        return super.writeToNBT(data);
-    }
-
-    public void readFromNBT(NBTTagCompound data) {
-        super.readFromNBT(data);
-        modern = data.getInteger("modern");
-    }
 
     @Override
     public boolean canBeDistinct() {
@@ -97,13 +81,6 @@ public class MetaTileEntityDigester extends GTQTRecipeMapMultiblockOverwrite {
     @Override
     public void update() {
         super.update();
-        if (modern == 0) {
-            ParallelNum = ParallelNumA;
-        }
-        if (modern == 1) {
-            P = (int) ((this.energyContainer.getEnergyStored() + energyContainer.getInputPerSec()) / (getMinVa() == 0 ? 1 : getMinVa()));
-            ParallelNum = Math.min(P, ParallelLim);
-        }
         if (this.isActive()) {
             if (getWorld().isRemote) {
                 pollutionParticles();
@@ -127,9 +104,6 @@ public class MetaTileEntityDigester extends GTQTRecipeMapMultiblockOverwrite {
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         if (isStructureFormed()) {
-            if (modern == 0) textList.add(new TextComponentTranslation("gtqtcore.tire1", heatingCoilLevel));
-            if (modern == 1) textList.add(new TextComponentTranslation("gtqtcore.tire2", heatingCoilLevel));
-            textList.add(new TextComponentTranslation("gtqtcore.parr", ParallelNum, ParallelLim));
             textList.add(new TextComponentTranslation("gregtech.multiblock.cracking_unit.energy", 100 - this.coilTier));
         }
         super.addDisplayText(textList);
@@ -139,10 +113,10 @@ public class MetaTileEntityDigester extends GTQTRecipeMapMultiblockOverwrite {
     public void addInformation(ItemStack stack, @Nullable World player, @Nonnull List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("这是什么，塞进去煮煮", new Object[0]));
-        tooltip.add(I18n.format("gtqtcore.multiblock.hb.tooltip.3"));
-        tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.1"));
-        tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.2", 24));
         tooltip.add(I18n.format("gregtech.machine.cracker.gtqtupdate.1"));
+        tooltip.add(I18n.format("gtqtcore.machine.progress_time","maxProgress * (100 - heatingCoilLevel) / 100"));
+        tooltip.add(I18n.format("gtqtcore.machine.modify_overclock","Coil Tier"));
+        tooltip.add(I18n.format("gtqtcore.machine.parallel.pow.custom",2,"Coil Tier",32));
     }
 
     @Nonnull
@@ -234,9 +208,6 @@ public class MetaTileEntityDigester extends GTQTRecipeMapMultiblockOverwrite {
             this.heatingCoilLevel = BlockWireCoil.CoilType.CUPRONICKEL.getLevel();
             this.heatingCoilDiscount = BlockWireCoil.CoilType.CUPRONICKEL.getEnergyDiscount();
         }
-
-        ParallelLim = (int) Math.pow(2, coilTier);
-        ParallelNum = ParallelLim;
     }
 
     @Override
@@ -272,13 +243,12 @@ public class MetaTileEntityDigester extends GTQTRecipeMapMultiblockOverwrite {
 
         @Override
         public int getParallelLimit() {
-            return ParallelNum;
+            return  Math.min((int) Math.pow(2, coilTier), 32);
         }
 
         public void setMaxProgress(int maxProgress) {
             this.maxProgressTime = maxProgress * (100 - heatingCoilLevel) / 100;
         }
-
         protected void modifyOverclockPost(int[] resultOverclock, @Nonnull IRecipePropertyStorage storage) {
             super.modifyOverclockPost(resultOverclock, storage);
             int coilTier = ((MetaTileEntityDigester) this.metaTileEntity).getCoilTier();

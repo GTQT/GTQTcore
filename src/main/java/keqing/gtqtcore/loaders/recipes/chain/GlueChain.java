@@ -29,22 +29,20 @@ public class GlueChain {
                 .EUt(1920)
                 .buildAndRegister();
 
-        CHEMICAL_PLANT.recipeBuilder()
+        CHEMICAL_RECIPES.recipeBuilder()
                 .fluidInputs(Ethanol.getFluid(1000))
                 .fluidOutputs(Ethylcyanoacetate.getFluid(1000))
                 .input(dust,CyanoaceticAcid,9)
                 .duration(200)
-                .recipeLevel(4)
                 .EUt(1920)
                 .buildAndRegister();
 
-        CHEMICAL_PLANT.recipeBuilder()
+        CHEMICAL_RECIPES.recipeBuilder()
                 .fluidInputs(Ethylcyanoacetate.getFluid(100))
                 .fluidInputs(Formaldehyde.getFluid(100))
                 .fluidOutputs(Cyanoacrylate.getFluid(100))
                 .fluidOutputs(Water.getFluid(1000))
                 .duration(200)
-                .recipeLevel(4)
                 .EUt(1920)
                 .buildAndRegister();
 

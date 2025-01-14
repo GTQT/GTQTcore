@@ -21,19 +21,16 @@ import gregtech.core.sound.GTSoundEvents;
 
 import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
-import keqing.gtqtcore.api.metaileentity.multiblock.GTQTRecipeMapMultiblockOverwrite;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -42,46 +39,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.List;
 
 import static gregtech.api.GTValues.V;
-import static gregtech.api.GTValues.VA;
 
 //冰箱
-public class MetaTileEntityVacuumFreezer extends GTQTRecipeMapMultiblockOverwrite {
+public class MetaTileEntityVacuumFreezer extends RecipeMapMultiblockController {
     private int tier;
     public MetaTileEntityVacuumFreezer(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, RecipeMaps.VACUUM_RECIPES);
         this.recipeMapWorkable = new VacuumFreezerWorkableHandler(this);
-    }
-     int ParallelNum=1;
-    public NBTTagCompound writeToNBT(NBTTagCompound data) {
-        data.setInteger("modern", modern);
-        data.setInteger("tier", tier);
-        return super.writeToNBT(data);
-    }
-   
-    public void readFromNBT(NBTTagCompound data) {
-        super.readFromNBT(data);
-        modern = data.getInteger("modern");
-        tier = data.getInteger("tier");
-    }
-
-    @Override
-    public void update() {
-        super.update();
-        if (modern == 0)
-        {
-            ParallelNum=ParallelNumA;
-        }
-        if (modern == 1)
-        {
-            P = (int) ((this.energyContainer.getEnergyStored() + energyContainer.getInputPerSec())/(getMinVa()==0?1:getMinVa()));
-            ParallelNum = Math.min(P, ParallelLim);
-        }
-    }
-    public int getMinVa()
-    {
-        if((Math.min(this.energyContainer.getEnergyCapacity()/32,VA[tier])*20)==0)return 1;
-        return (int)(Math.min(this.energyContainer.getEnergyCapacity()/32,VA[tier]));
-
     }
     @Override
     public void writeInitialSyncData(PacketBuffer buf) {
@@ -104,7 +68,7 @@ public class MetaTileEntityVacuumFreezer extends GTQTRecipeMapMultiblockOverwrit
         }
         @Override
         public int getParallelLimit() {
-            return ParallelNum;
+            return Math.min((int)Math.pow(2, tier),32);
         }
         @Override
         protected void modifyOverclockPost(int[] resultOverclock,  IRecipePropertyStorage storage) {
@@ -120,8 +84,6 @@ public class MetaTileEntityVacuumFreezer extends GTQTRecipeMapMultiblockOverwrit
                 // each coil above kanthal (coilTier = 1) is 50% faster
                 resultOverclock[1] = resultOverclock[1] * 2 / (tier + 1);
             }
-
-
             resultOverclock[1] = Math.max(1, resultOverclock[1]);
         }
     }
@@ -176,9 +138,6 @@ public class MetaTileEntityVacuumFreezer extends GTQTRecipeMapMultiblockOverwrit
                                 "gregtech.multiblock.pyrolyse_oven.speed_hover");
 
                         tl.add(TextComponentUtil.setHover(base, hover));
-                        if(modern==0) textList.add(new TextComponentTranslation("gtqtcore.tire1",tier));
-                        if(modern==1) textList.add(new TextComponentTranslation("gtqtcore.tire2",tier));
-                        textList.add(new TextComponentTranslation("gtqtcore.parr",ParallelNum,ParallelLim));
                     }
                 })
                 .addParallelsLine(recipeMapWorkable.getParallelLimit())
@@ -245,8 +204,6 @@ public class MetaTileEntityVacuumFreezer extends GTQTRecipeMapMultiblockOverwrit
                 0);
 
         this.writeCustomData(GTQTValue.UPDATE_TIER24,buf -> buf.writeInt(this.tier));
-        ParallelLim=Math.min((int)Math.pow(2, this.tier),32);
-        ParallelNum=ParallelLim;
     }
     protected IBlockState getCasingState() {
         return MetaBlocks.METAL_CASING.getState(MetalCasingType.ALUMINIUM_FROSTPROOF);
@@ -256,6 +213,9 @@ public class MetaTileEntityVacuumFreezer extends GTQTRecipeMapMultiblockOverwrit
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(I18n.format("gregtech.machine.cracker.gtqtupdate.1"));
         tooltip.add(I18n.format("gregtech.machine.cracker.gtqtupdate.2"));
+        tooltip.add(I18n.format("gtqtcore.machine.modify_overclock","Tier"));
+        tooltip.add(I18n.format("gtqtcore.machine.parallel.pow.machineTier",2,32));
+        tooltip.add(I18n.format("gtqtcore.machine.max_voltage"));
     }
     @Override
     public SoundEvent getBreakdownSound() {

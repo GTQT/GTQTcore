@@ -187,6 +187,7 @@ public class MetaTileEntityCokingTower extends RecipeMapMultiblockController {
         tooltip.add(I18n.format("gtqtcore.machine.coking_tower.tooltip.1"));
         tooltip.add(I18n.format("gtqtcore.machine.coking_tower.tooltip.2"));
         tooltip.add(I18n.format("gtqtcore.machine.coking_tower.tooltip.3"));
+        tooltip.add(I18n.format("gtqtcore.machine.modify_overclock","Coil Tier"));
     }
 
     protected int getCoilTier() {

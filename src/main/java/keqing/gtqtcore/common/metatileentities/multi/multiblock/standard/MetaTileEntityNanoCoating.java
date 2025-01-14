@@ -52,7 +52,6 @@ public class MetaTileEntityNanoCoating extends MultiMapMultiblockController impl
     private int sheping_tier;
     private int laser_tier;
     private int tier;
-    private int minvisa;
     private boolean visa;
 
 
@@ -145,7 +144,7 @@ public class MetaTileEntityNanoCoating extends MultiMapMultiblockController impl
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
         textList.add(new TextComponentTranslation("gtqtcore.eleTire2", tier, laser_tier, glass_tier));
-        textList.add(new TextComponentTranslation("gtqtcore.eleTire1", clean_tier, sheping_tier, minvisa));
+        textList.add(new TextComponentTranslation("gtqtcore.eleTire4", clean_tier, sheping_tier));
         textList.add(new TextComponentTranslation("效能模式 ：%s", visa));
 
     }
@@ -153,10 +152,10 @@ public class MetaTileEntityNanoCoating extends MultiMapMultiblockController impl
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
-                .aisle("JXXXXXXXXJ", "JXXGGGGXXJ", "JXXGGGGXXJ", "JXXGGGGXXJ")
-                .aisle("JXXXXXXXXJ", "JZZPPPPZZJ", "JZZ####ZZJ", "JXXGGGGXXJ")
-                .aisle("JXXXXXXXXJ", "JZZPPPPZZJ", "JZZ####ZZJ", "JXXGGGGXXJ")
-                .aisle("JXXXXXXXXJ", "JCSGGGGXXJ", "JXXGGGGXXJ", "JXXGGGGXXJ")
+                .aisle("XJXXXXXXX", "XJXGGGGXX",  "XJXGGGGXX")
+                .aisle("XJXXXXXXX", "XJPZZZZPX",  "XJXGGGGXX")
+                .aisle("XJXXXXXXX", "XJPZZZZPX",  "XJXGGGGXX")
+                .aisle("CJXXXXXXX", "SJXGGGGXX",  "XJXGGGGXX")
                 .where('S', selfPredicate())
                 .where('C', abilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION))
                 .where('X', TiredTraceabilityPredicate.CP_CASING.get().setMinGlobalLimited(40).or(autoAbilities()))

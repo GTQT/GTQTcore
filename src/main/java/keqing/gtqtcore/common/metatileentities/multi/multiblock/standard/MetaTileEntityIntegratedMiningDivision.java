@@ -20,14 +20,12 @@ import gregtech.common.blocks.BlockWireCoil;
 import gregtech.core.sound.GTSoundEvents;
 import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
-import keqing.gtqtcore.api.metaileentity.multiblock.GTQTRecipeMapMultiblockOverwrite;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
@@ -41,16 +39,13 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-import static gregtech.api.GTValues.VA;
-
-public class MetaTileEntityIntegratedMiningDivision extends GTQTRecipeMapMultiblockOverwrite {
+public class MetaTileEntityIntegratedMiningDivision extends RecipeMapMultiblockController {
 
     protected int glass_tier;
     protected int tubeTier;
     protected int casingTier;
     protected int coilType;
     protected int tier;
-    int ParallelNum = 1;
 
     public MetaTileEntityIntegratedMiningDivision(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.INTEGRATED_MINING_DIVISION);
@@ -66,33 +61,6 @@ public class MetaTileEntityIntegratedMiningDivision extends GTQTRecipeMapMultibl
         return new MetaTileEntityIntegratedMiningDivision(this.metaTileEntityId);
     }
 
-    public NBTTagCompound writeToNBT(NBTTagCompound data) {
-        data.setInteger("modern", modern);
-        return super.writeToNBT(data);
-    }
-
-    public void readFromNBT(NBTTagCompound data) {
-        super.readFromNBT(data);
-        modern = data.getInteger("modern");
-    }
-
-    @Override
-    public void update() {
-        super.update();
-        if (modern == 0) {
-            ParallelNum = ParallelNumA;
-        }
-        if (modern == 1) {
-            P = (int) ((this.energyContainer.getEnergyStored() + energyContainer.getInputPerSec()) / (getMinVa() == 0 ? 1 : getMinVa()));
-            ParallelNum = Math.min(P, ParallelLim);
-        }
-    }
-
-    public int getMinVa() {
-        if ((Math.min(this.energyContainer.getEnergyCapacity() / 32, VA[tier]) * 20) == 0) return 1;
-        return (int) (Math.min(this.energyContainer.getEnergyCapacity() / 32, VA[tier]));
-
-    }
 
 
     @Override
@@ -101,9 +69,6 @@ public class MetaTileEntityIntegratedMiningDivision extends GTQTRecipeMapMultibl
         if (isStructureFormed()) {
             textList.add(new TextComponentTranslation("gtqtcore.multiblock.md.level1", coilType, glass_tier));
         }
-        if (modern == 0) textList.add(new TextComponentTranslation("gtqtcore.tire1", tier));
-        if (modern == 1) textList.add(new TextComponentTranslation("gtqtcore.tire2", tier));
-        textList.add(new TextComponentTranslation("gtqtcore.parr", ParallelNum, ParallelLim));
     }
 
     @Override
@@ -173,8 +138,6 @@ public class MetaTileEntityIntegratedMiningDivision extends GTQTRecipeMapMultibl
         this.tier = Math.min(this.casingTier, this.tubeTier);
 
         this.writeCustomData(GTQTValue.UPDATE_TIER7, buf -> buf.writeInt(this.casingTier));
-        ParallelLim = Math.min((int) Math.pow(2, this.tier), 128);
-        ParallelNum = ParallelLim;
     }
 
     @Override
@@ -263,7 +226,7 @@ public class MetaTileEntityIntegratedMiningDivision extends GTQTRecipeMapMultibl
 
         @Override
         public int getParallelLimit() {
-            return ParallelNum;
+            return (int) Math.pow(2, casingTier);
         }
 
         @Override

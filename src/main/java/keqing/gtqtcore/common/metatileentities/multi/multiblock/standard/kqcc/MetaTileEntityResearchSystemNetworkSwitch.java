@@ -19,19 +19,15 @@ import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.common.ConfigHolder;
-import gregtech.common.blocks.BlockComputerCasing;
-import gregtech.common.blocks.MetaBlocks;
-
 import gregtech.common.metatileentities.multi.electric.MetaTileEntityDataBank;
+import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
@@ -41,33 +37,29 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
 import static gregtech.api.GTValues.VA;
-import static gregtech.api.GTValues.ZPM;
-import static keqing.gtqtcore.api.utils.GTQTUtil.CWT;
 
-public class MetaTileEntityKQNetworkSwitch extends MetaTileEntityDataBank implements IOpticalComputationProvider {
-    private int laser_tier;
-    private int casing_tier;
-    int tire;
-    private static final int EUT_PER_HATCH = VA[GTValues.IV];
-    private IEnergyContainer energyContainer;
+public class MetaTileEntityResearchSystemNetworkSwitch extends MetaTileEntityDataBank implements IOpticalComputationProvider {
+    private static final int EUT_PER_HATCH = VA[GTValues.LV];
     private final MultipleComputationHandler computationHandler = new MultipleComputationHandler();
+    int tire;
+    private int casing_tier;
+    private IEnergyContainer energyContainer;
+    private boolean hasNotEnoughEnergy;
 
-    public MetaTileEntityKQNetworkSwitch(ResourceLocation metaTileEntityId) {
+    public MetaTileEntityResearchSystemNetworkSwitch(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId);
         this.energyContainer = new EnergyContainerList(new ArrayList<>());
     }
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
-        return new MetaTileEntityKQNetworkSwitch(metaTileEntityId);
+        return new MetaTileEntityResearchSystemNetworkSwitch(metaTileEntityId);
 
     }
 
@@ -77,16 +69,18 @@ public class MetaTileEntityKQNetworkSwitch extends MetaTileEntityDataBank implem
         int transmitters = getAbilities(MultiblockAbility.COMPUTATION_DATA_TRANSMISSION).size();
         return VA[GTValues.LV] * (receivers + transmitters);
     }
+
     @Override
     public void receiveCustomData(int dataId, PacketBuffer buf) {
         super.receiveCustomData(dataId, buf);
-        if(dataId == GTQTValue.UPDATE_TIER13){
+        if (dataId == GTQTValue.UPDATE_TIER13) {
             this.casing_tier = buf.readInt();
         }
-        if(dataId == GTQTValue.REQUIRE_DATA_UPDATE13){
-            this.writeCustomData(GTQTValue.UPDATE_TIER13,buf1 -> buf1.writeInt(this.casing_tier));
+        if (dataId == GTQTValue.REQUIRE_DATA_UPDATE13) {
+            this.writeCustomData(GTQTValue.UPDATE_TIER13, buf1 -> buf1.writeInt(this.casing_tier));
         }
     }
+
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
@@ -97,14 +91,14 @@ public class MetaTileEntityKQNetworkSwitch extends MetaTileEntityDataBank implem
         Object casing_tier = context.get("ChemicalPlantCasingTieredStats");
         Object laser_tier = context.get("ZWTieredStats");
         this.casing_tier = GTQTUtil.getOrDefault(() -> casing_tier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)casing_tier).getIntTier(),
+                () -> ((WrappedIntTired) casing_tier).getIntTier(),
                 0);
-        this.laser_tier = GTQTUtil.getOrDefault(() -> laser_tier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)laser_tier).getIntTier(),
+        int laser_tier1 = GTQTUtil.getOrDefault(() -> laser_tier instanceof WrappedIntTired,
+                () -> ((WrappedIntTired) laser_tier).getIntTier(),
                 0);
 
-        this.writeCustomData(GTQTValue.UPDATE_TIER13,buf -> buf.writeInt(this.casing_tier));
-        this.tire=Math.min(this.casing_tier,this.laser_tier*2);
+        this.writeCustomData(GTQTValue.UPDATE_TIER13, buf -> buf.writeInt(this.casing_tier));
+        this.tire = Math.min(this.casing_tier, laser_tier1 * 2);
     }
 
     @Override
@@ -118,15 +112,14 @@ public class MetaTileEntityKQNetworkSwitch extends MetaTileEntityDataBank implem
         super.update();
         consumeEnergy();
     }
+
     @Override
     protected int getEnergyUsage() {
-        return isStructureFormed() ? computationHandler.getEUt()/128 : 0;
+        return isStructureFormed() ? computationHandler.getEUt() : 0;
     }
 
-    private boolean hasNotEnoughEnergy;
-    private boolean isWorkingEnabled;
     private void consumeEnergy() {
-        int energyToConsume =  getEnergyUsage();
+        int energyToConsume = getEnergyUsage();
         boolean hasMaintenance = ConfigHolder.machines.enableMaintenance && hasMaintenanceMechanics();
         if (hasMaintenance) {
             // 10% more energy per maintenance problem
@@ -140,47 +133,43 @@ public class MetaTileEntityKQNetworkSwitch extends MetaTileEntityDataBank implem
         if (this.energyContainer.getEnergyStored() >= energyToConsume) {
             if (!hasNotEnoughEnergy) {
                 long consumed = this.energyContainer.removeEnergy(energyToConsume);
-                if (consumed == -energyToConsume) {
-                    isWorkingEnabled=true;
-                } else {
+                if (consumed != -energyToConsume) {
                     this.hasNotEnoughEnergy = true;
-                    isWorkingEnabled=false;
                 }
             }
         } else {
             this.hasNotEnoughEnergy = true;
-            isWorkingEnabled=false;
         }
     }
 
-    public int vacwu()
-    {
-        if(tire<=2)return 0;
-        return VA[this.tire]*2;
+    public int vacwu() {
+        if (tire <= 2) return 0;
+        return VA[this.tire] * 2;
     }
+
     @Override
-    public int requestCWUt(int cwut, boolean simulate,  Collection<IOpticalComputationProvider> seen) {
+    public int requestCWUt(int cwut, boolean simulate, Collection<IOpticalComputationProvider> seen) {
         seen.add(this);
         return isActive() ? computationHandler.requestCWUt(cwut, simulate, seen) : 0;
     }
 
     @Override
-    public int getMaxCWUt( Collection<IOpticalComputationProvider> seen) {
+    public int getMaxCWUt(Collection<IOpticalComputationProvider> seen) {
         seen.add(this);
-        if(computationHandler.getMaxCWUt(seen)>vacwu())
-        return Math.min(1024, isWorkingEnabled() ? computationHandler.getMaxCWUt(seen) : 0);
+        if (computationHandler.getMaxCWUt(seen) > vacwu())
+            return Math.min(1024, isWorkingEnabled() ? computationHandler.getMaxCWUt(seen) : 0);
         else return 0;
     }
 
     // allows chaining Network Switches together
     @Override
-    public boolean canBridge( Collection<IOpticalComputationProvider> seen) {
+    public boolean canBridge(Collection<IOpticalComputationProvider> seen) {
         seen.add(this);
         return true;
     }
 
     @Override
-    protected  BlockPattern createStructurePattern() {
+    protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
                 .aisle("XXX", "XXX", "XXX")
                 .aisle("XXX", "XAX", "XXX")
@@ -194,15 +183,7 @@ public class MetaTileEntityKQNetworkSwitch extends MetaTileEntityDataBank implem
                         .or(abilities(MultiblockAbility.COMPUTATION_DATA_TRANSMISSION).setMinGlobalLimited(1, 1)))
                 .build();
     }
-    public NBTTagCompound writeToNBT(NBTTagCompound data) {
-        data.setInteger("casing_tier", casing_tier);
-        return super.writeToNBT(data);
-    }
-   
-    public void readFromNBT(NBTTagCompound data) {
-        super.readFromNBT(data);
-        casing_tier = data.getInteger("casing_tier");
-    }
+
     @Override
     public void writeInitialSyncData(PacketBuffer buf) {
         super.writeInitialSyncData(buf);
@@ -214,6 +195,7 @@ public class MetaTileEntityKQNetworkSwitch extends MetaTileEntityDataBank implem
         super.receiveInitialSyncData(buf);
         this.casing_tier = buf.readInt();
     }
+
     @SideOnly(Side.CLIENT)
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
         switch (this.casing_tier) {
@@ -249,18 +231,20 @@ public class MetaTileEntityKQNetworkSwitch extends MetaTileEntityDataBank implem
             }
         }
     }
+
     @Override
     public String[] getDescription() {
         return new String[]{I18n.format("gtqt.tooltip.update")};
     }
+
     @SideOnly(Side.CLIENT)
     @Override
-    protected  ICubeRenderer getFrontOverlay() {
+    protected ICubeRenderer getFrontOverlay() {
         return Textures.NETWORK_SWITCH_OVERLAY;
     }
 
     @Override
-    public void addInformation(ItemStack stack, World world,  List<String> tooltip,
+    public void addInformation(ItemStack stack, World world, List<String> tooltip,
                                boolean advanced) {
         tooltip.add(I18n.format("gregtech.machine.network_switch.tooltip.1"));
         tooltip.add(I18n.format("gregtech.machine.network_switch.tooltip.2"));
@@ -268,7 +252,7 @@ public class MetaTileEntityKQNetworkSwitch extends MetaTileEntityDataBank implem
         tooltip.add(I18n.format("gregtech.machine.network_switch.tooltip.5"));
         tooltip.add(I18n.format("gtqtcore.machine.network_switch.tooltip.1"));
         tooltip.add(I18n.format("gregtech.machine.network_switch.tooltip.4",
-                TextFormattingUtil.formatNumbers(EUT_PER_HATCH/128)));
+                TextFormattingUtil.formatNumbers(EUT_PER_HATCH)));
     }
 
     @Override
@@ -283,7 +267,7 @@ public class MetaTileEntityKQNetworkSwitch extends MetaTileEntityDataBank implem
                 .addComputationUsageLine(computationHandler.getMaxCWUtForDisplay())
                 .addWorkingStatusLine();
         textList.add(new TextComponentTranslation("gregtech.multiblock.kqns.tier", tire));
-        textList.add(new TextComponentTranslation("gregtech.multiblock.kqns.max", computationHandler.getMaxCWUtForDisplay(),vacwu()));
+        textList.add(new TextComponentTranslation("gregtech.multiblock.kqns.max", computationHandler.getMaxCWUtForDisplay(), vacwu()));
     }
 
     @Override
@@ -296,7 +280,9 @@ public class MetaTileEntityKQNetworkSwitch extends MetaTileEntityDataBank implem
         }
     }
 
-    /** Handles computation load across multiple receivers and to multiple transmitters. */
+    /**
+     * Handles computation load across multiple receivers and to multiple transmitters.
+     */
     private static class MultipleComputationHandler implements IOpticalComputationProvider,
             IOpticalComputationReceiver {
 
@@ -312,7 +298,7 @@ public class MetaTileEntityKQNetworkSwitch extends MetaTileEntityDataBank implem
             reset();
             this.providers.addAll(providers);
             this.transmitters.addAll(transmitters);
-            this.EUt = (providers.size() + transmitters.size()) * EUT_PER_HATCH/128;
+            this.EUt = (providers.size() + transmitters.size()) * EUT_PER_HATCH ;
         }
 
         private void reset() {
@@ -322,7 +308,7 @@ public class MetaTileEntityKQNetworkSwitch extends MetaTileEntityDataBank implem
         }
 
         @Override
-        public int requestCWUt(int cwut, boolean simulate,  Collection<IOpticalComputationProvider> seen) {
+        public int requestCWUt(int cwut, boolean simulate, Collection<IOpticalComputationProvider> seen) {
             if (seen.contains(this)) return 0;
             // The max CWU/t that this Network Switch can provide, combining all its inputs.
             seen.add(this);
@@ -351,7 +337,7 @@ public class MetaTileEntityKQNetworkSwitch extends MetaTileEntityDataBank implem
             return maximumCWUt;
         }
 
-        public int getMaxCWUt( Collection<IOpticalComputationProvider> seen) {
+        public int getMaxCWUt(Collection<IOpticalComputationProvider> seen) {
             if (seen.contains(this)) return 0;
             // The max CWU/t that this Network Switch can provide, combining all its inputs.
             seen.add(this);
@@ -365,7 +351,7 @@ public class MetaTileEntityKQNetworkSwitch extends MetaTileEntityDataBank implem
         }
 
         @Override
-        public boolean canBridge( Collection<IOpticalComputationProvider> seen) {
+        public boolean canBridge(Collection<IOpticalComputationProvider> seen) {
             if (seen.contains(this)) return false;
             seen.add(this);
             for (var provider : providers) {
@@ -376,12 +362,16 @@ public class MetaTileEntityKQNetworkSwitch extends MetaTileEntityDataBank implem
             return false;
         }
 
-        /** The EU/t cost of this Network Switch given the attached providers and transmitters. */
+        /**
+         * The EU/t cost of this Network Switch given the attached providers and transmitters.
+         */
         private int getEUt() {
             return EUt;
         }
 
-        /** Test if any of the provider hatches do not allow bridging */
+        /**
+         * Test if any of the provider hatches do not allow bridging
+         */
         private boolean hasNonBridgingConnections() {
             Collection<IOpticalComputationProvider> seen = new ArrayList<>();
             for (var provider : providers) {

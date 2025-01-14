@@ -10,8 +10,6 @@ import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
-import gregtech.api.recipes.recipeproperties.IRecipePropertyStorage;
-import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.TooltipHelper;
@@ -19,7 +17,6 @@ import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.capability.IElectrode;
 import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
-import keqing.gtqtcore.api.metaileentity.multiblock.GTQTRecipeMapMultiblockOverwrite;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.recipes.properties.ElectronBathProperties;
@@ -27,23 +24,18 @@ import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
-import net.minecraftforge.fluids.FluidStack;
 
 import javax.annotation.Nonnull;
 import java.util.List;
 
 import static gregtech.api.GTValues.V;
-import static gregtech.api.GTValues.VA;
-import static keqing.gtqtcore.api.unification.GTQTMaterials.EleAcid;
 
-public class MetaTileEntityElectronBath extends GTQTRecipeMapMultiblockOverwrite {
-    int ParallelNum = 1;
+public class MetaTileEntityElectronBath extends RecipeMapMultiblockController {
     private int casingTier;
     private int tubeTier;
     private int tier;
@@ -58,38 +50,6 @@ public class MetaTileEntityElectronBath extends GTQTRecipeMapMultiblockOverwrite
     @Override
     public boolean canBeDistinct() {
         return true;
-    }
-
-    public NBTTagCompound writeToNBT(NBTTagCompound data) {
-        data.setInteger("modern", modern);
-        data.setInteger("casingTier", casingTier);
-        data.setInteger("ElectrodeTier", ElectrodeTier);
-        return super.writeToNBT(data);
-    }
-
-    public void readFromNBT(NBTTagCompound data) {
-        super.readFromNBT(data);
-        modern = data.getInteger("modern");
-        casingTier = data.getInteger("casingTier");
-        ElectrodeTier = data.getInteger("ElectrodeTier");
-    }
-
-    @Override
-    public void update() {
-        super.update();
-        if (modern == 0) {
-            ParallelNum = ParallelNumA;
-        }
-        if (modern == 1) {
-            P = (int) ((this.energyContainer.getEnergyStored() + energyContainer.getInputPerSec()) / (getMinVa() == 0 ? 1 : getMinVa()));
-            ParallelNum = Math.min(P, ParallelLim);
-        }
-    }
-
-    public int getMinVa() {
-        if ((Math.min(this.energyContainer.getEnergyCapacity() / 32, VA[tier]) * 20) == 0) return 1;
-        return (int) (Math.min(this.energyContainer.getEnergyCapacity() / 32, VA[tier]));
-
     }
 
     @Override
@@ -168,27 +128,20 @@ public class MetaTileEntityElectronBath extends GTQTRecipeMapMultiblockOverwrite
         if (casingTier != tubeTier)
             textList.add(new TextComponentTranslation("gtqtcore.equal", casingTier, tubeTier));
         textList.add(new TextComponentTranslation("电极状态：%s 电极等级：%s", checkAvailable(), ElectrodeTier));
-        if (modern == 0) textList.add(new TextComponentTranslation("gtqtcore.tire1", tier));
-        if (modern == 1) textList.add(new TextComponentTranslation("gtqtcore.tire2", tier));
-        textList.add(new TextComponentTranslation("gtqtcore.parr", ParallelNum, ParallelLim));
-        if (getInputFluidInventory() != null) {
-            FluidStack STACK = getInputFluidInventory().drain(EleAcid.getFluid(Integer.MAX_VALUE), false);
-            int liquidOxygenAmount = STACK == null ? 0 : STACK.amount;
-            textList.add(new TextComponentTranslation("gtqtcore.multiblock.ele.amount", TextFormattingUtil.formatNumbers((liquidOxygenAmount))));
-        }
     }
 
     @Override
     public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("谁还需要电解机", new Object[0]));
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("gregtech.machine.perfect_oc", new Object[0]));
         tooltip.add(I18n.format("gtqtcore.machine.ele.tooltip.1"));
         tooltip.add(I18n.format("gtqtcore.machine.ele.tooltip.2"));
-        tooltip.add(I18n.format("gtqtcore.machine.ele.tooltip.3"));
-        tooltip.add(I18n.format("gtqtcore.machine.ele.tooltip.4"));
-        tooltip.add(I18n.format("gtqtcore.machine.ele.tooltip.5"));
         tooltip.add(I18n.format("gregtech.machine.cracker.gtqtupdate.1"));
         tooltip.add(I18n.format("gregtech.machine.cracker.gtqtupdate.2"));
+        tooltip.add(I18n.format("gtqtcore.machine.progress_time","maxProgress * (100 - tier * 5) / 100.0"));
+        tooltip.add(I18n.format("gtqtcore.machine.parallel.pow.machineTier",2,256));
+        tooltip.add(I18n.format("gtqtcore.machine.max_voltage"));
     }
 
     @Override
@@ -260,8 +213,6 @@ public class MetaTileEntityElectronBath extends GTQTRecipeMapMultiblockOverwrite
         this.tier = Math.min(this.casingTier, this.tubeTier);
 
         this.writeCustomData(GTQTValue.UPDATE_TIER5, buf -> buf.writeInt(this.tier));
-        ParallelLim = (int) Math.pow(2, this.casingTier);
-        ParallelNum = ParallelLim;
     }
 
     public IElectrode getElectrodeHatch(int i) {
@@ -326,20 +277,11 @@ public class MetaTileEntityElectronBath extends GTQTRecipeMapMultiblockOverwrite
 
         @Override
         public int getParallelLimit() {
-            return ParallelNum;
+            return (int) Math.pow(2,casingTier);
         }
 
         public void setMaxProgress(int maxProgress) {
             this.maxProgressTime = (int) (maxProgress * (100 - tier * 5) / 100.0);
         }
-
-        protected void modifyOverclockPost(int[] resultOverclock, @Nonnull IRecipePropertyStorage storage) {
-            super.modifyOverclockPost(resultOverclock, storage);
-            if (ElectrodeTier > 0) {
-                resultOverclock[0] = (int) ((double) resultOverclock[0] * (20 - ElectrodeTier) / 20.0);
-                resultOverclock[0] = Math.max(1, resultOverclock[0]);
-            }
-        }
-
     }
 }

@@ -30,7 +30,7 @@ public class WorldGenAbandonedBase implements IWorldGenerator {
         BlockPos randomPos = new BlockPos(chunkX * 16 + 8, 0, chunkZ * 16 + 8);
 
         if (random.nextInt(WorldGenSwitch.abandonedBaseRarity*100) == 0) {
-            int variantNumber = random.nextInt(7);
+            int variantNumber = random.nextInt(6);
 
 
             Rotation rotation = Rotation.values()[random.nextInt(Rotation.values().length)];
@@ -38,7 +38,7 @@ public class WorldGenAbandonedBase implements IWorldGenerator {
             Template template = TemplateManager.getBuiltinTemplate(world, templateId);
             BlockPos originPos = template.getZeroPositionWithTransform(randomPos, Mirror.NONE, rotation);
             originPos = TemplateManager.calculateAverageGroundLevel(world, originPos, template.getSize());
-            if (variantNumber == 6)
+            if (variantNumber == 5)
                 template.addBlocksToWorld(world, originPos.add(0, -26, 0), new PlacementSettings().setRotation(rotation));
             else template.addBlocksToWorld(world, originPos, new PlacementSettings().setRotation(rotation));
 
