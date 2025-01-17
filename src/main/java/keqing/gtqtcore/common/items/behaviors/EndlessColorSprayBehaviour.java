@@ -167,7 +167,6 @@ public class EndlessColorSprayBehaviour extends AbstractUsableBehaviour implemen
     }
 
     public void addInformation(ItemStack itemStack, List<String> lines) {
-        int remainingUses = this.getUsesLeft(itemStack);
         if (this.color != null) {
             lines.add(I18n.format("behaviour.paintspray." + this.color.getTranslationKey() + ".tooltip"));
         } else {

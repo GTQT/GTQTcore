@@ -67,6 +67,18 @@
         "textures": {
           "all": "gregtech:blocks/multiblock/advglass/tech_fusion_glass_6"
         }
+      },
+      "uu_glass_block": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/advglass/uu_glass_block"
+        }
+      },
+      "copy_glass_block": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/advglass/copy_glass_block"
+        }
       }
     }
   }

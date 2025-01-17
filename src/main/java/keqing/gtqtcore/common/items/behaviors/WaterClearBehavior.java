@@ -17,7 +17,7 @@ public class WaterClearBehavior  implements IItemBehaviour {
     boolean work=true;
     @Override
     public EnumActionResult onItemUseFirst(EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ, EnumHand hand) {
-        if (world.isRemote) return EnumActionResult.SUCCESS;
+        if (!world.isRemote) return EnumActionResult.SUCCESS;
         if (player.isSneaking()) {
             work=!work;
             if(work) {

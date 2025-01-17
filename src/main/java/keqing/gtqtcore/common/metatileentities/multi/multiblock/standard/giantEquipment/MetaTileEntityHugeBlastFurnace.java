@@ -105,12 +105,6 @@ public class MetaTileEntityHugeBlastFurnace extends RecipeMapMultiblockControlle
         }
     }
 
-    public int getMinVa() {
-        if ((Math.min(this.energyContainer.getEnergyCapacity() / 32, VA[Math.min(coilTier, 9)]) * 20) == 0) return 1;
-        return (int) (Math.min(this.energyContainer.getEnergyCapacity() / 32, VA[Math.min(coilTier, 9)]));
-
-    }
-
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);

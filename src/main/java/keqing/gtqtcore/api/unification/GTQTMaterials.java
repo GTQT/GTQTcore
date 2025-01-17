@@ -852,6 +852,8 @@ public class GTQTMaterials {
     public static Material DimethylTerephthalate;
     public static Material Spacetime;
     public static Material Enzymesea;
+    public static Material NeutronFlux;
+    public static Material ProtonFlux;
 
     //https://github.com/Darknight123MC/Gregica-Sharp/blob/master/src/main/java/me/oganesson/gregicas/api/unification/GSMaterials.java
 

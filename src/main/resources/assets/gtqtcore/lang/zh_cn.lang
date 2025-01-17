@@ -850,6 +850,61 @@ gtqtcore.machine.ultraviolet_lamp_chamber.uxv.tooltip=强光辐照
 gtqtcore.machine.ultraviolet_lamp_chamber.opv.name=传奇紫外灯箱
 gtqtcore.machine.ultraviolet_lamp_chamber.opv.tooltip=强光辐照
 
+gtqtcore.machine.duplicator.lv.name=基础复制机
+gtqtcore.machine.duplicator.lv.tooltip=增值反应
+gtqtcore.machine.duplicator.mv.name=进阶复制机
+gtqtcore.machine.duplicator.mv.tooltip=增值反应
+gtqtcore.machine.duplicator.hv.name=进阶复制机 II
+gtqtcore.machine.duplicator.hv.tooltip=增值反应
+gtqtcore.machine.duplicator.ev.name=进阶复制机 III
+gtqtcore.machine.duplicator.ev.tooltip=增值反应
+gtqtcore.machine.duplicator.iv.name=精英复制机
+gtqtcore.machine.duplicator.iv.tooltip=不再烦恼
+gtqtcore.machine.duplicator.luv.name=精英复制机 II
+gtqtcore.machine.duplicator.luv.tooltip=不再烦恼
+gtqtcore.machine.duplicator.zpm.name=精英复制机 III
+gtqtcore.machine.duplicator.zpm.tooltip=不再烦恼
+gtqtcore.machine.duplicator.uv.name=终极复制机
+gtqtcore.machine.duplicator.uv.tooltip=不再烦恼
+gtqtcore.machine.duplicator.uhv.name=史诗复制机
+gtqtcore.machine.duplicator.uhv.tooltip=唾手可得
+gtqtcore.machine.duplicator.uev.name=史诗复制机 II
+gtqtcore.machine.duplicator.uev.tooltip=唾手可得
+gtqtcore.machine.duplicator.uiv.name=史诗复制机 III
+gtqtcore.machine.duplicator.uiv.tooltip=唾手可得
+gtqtcore.machine.duplicator.uxv.name=史诗复制机 IV
+gtqtcore.machine.duplicator.uxv.tooltip=唾手可得
+gtqtcore.machine.duplicator.opv.name=传奇复制机
+gtqtcore.machine.duplicator.opv.tooltip=唾手可得
+
+gtqtcore.machine.uu_producter.lv.name=基础UU生产机
+gtqtcore.machine.uu_producter.lv.tooltip=稀有物质！
+gtqtcore.machine.uu_producter.mv.name=进阶UU生产机
+gtqtcore.machine.uu_producter.mv.tooltip=稀有物质！
+gtqtcore.machine.uu_producter.hv.name=进阶UU生产机 II
+gtqtcore.machine.uu_producter.hv.tooltip=稀有物质！
+gtqtcore.machine.uu_producter.ev.name=进阶UU生产机 III
+gtqtcore.machine.uu_producter.ev.tooltip=稀有物质！
+gtqtcore.machine.uu_producter.iv.name=精英UU生产机
+gtqtcore.machine.uu_producter.iv.tooltip=高效生产！
+gtqtcore.machine.uu_producter.luv.name=精英UU生产机 II
+gtqtcore.machine.uu_producter.luv.tooltip=高效生产！
+gtqtcore.machine.uu_producter.zpm.name=精英UU生产机 III
+gtqtcore.machine.uu_producter.zpm.tooltip=高效生产！
+gtqtcore.machine.uu_producter.uv.name=终极UU生产机
+gtqtcore.machine.uu_producter.uv.tooltip=高效生产！
+gtqtcore.machine.uu_producter.uhv.name=史诗UU生产机
+gtqtcore.machine.uu_producter.uhv.tooltip=如潮水般涌入！
+gtqtcore.machine.uu_producter.uev.name=史诗UU生产机 II
+gtqtcore.machine.uu_producter.uev.tooltip=如潮水般涌入！
+gtqtcore.machine.uu_producter.uiv.name=史诗UU生产机 III
+gtqtcore.machine.uu_producter.uiv.tooltip=如潮水般涌入！
+gtqtcore.machine.uu_producter.uxv.name=史诗UU生产机 IV
+gtqtcore.machine.uu_producter.uxv.tooltip=如潮水般涌入！
+gtqtcore.machine.uu_producter.opv.name=传奇UU生产机
+gtqtcore.machine.uu_producter.opv.tooltip=如潮水般涌入！
+
+
 recipemap.pressure_laminator_recipes.name=层压工艺
 gtqtcore.machine.pressure_laminator.lv.name=基础层压机
 gtqtcore.machine.pressure_laminator.lv.tooltip=高效层压工艺
@@ -877,6 +932,8 @@ gtqtcore.machine.pressure_laminator.uxv.name=史诗层压机 IV
 gtqtcore.machine.pressure_laminator.uxv.tooltip=超高效层压工艺
 gtqtcore.machine.pressure_laminator.opv.name=传奇层压机
 gtqtcore.machine.pressure_laminator.opv.tooltip=超高效层压工艺
+
+
 
 gtqtcore.machine.naquadah_reactor.iv.name=精英硅岩反应堆
 gtqtcore.machine.naquadah_reactor.iv.tooltip=取之不尽，用之不竭
@@ -1488,6 +1545,12 @@ gtqtcore.machine.large_vacuum_chamber.name=大型真空反应室
 
 gtqtcore.machine.plasma_condenser.name=等离子冷凝器
 recipemap.plasma_condenser_recipes.name=等离子冷凝
+
+gtqtcore.machine.large_uu_producter.name=大型质量发生仪
+gtqtcore.machine.large_element_duplicator.name=大型元素复制机
+recipemap.uu_producter.name=UU物质生产
+recipemap.uu_copy.name=复制机
+
 recipemap.low_temperature_activator.name=低温活化器
 recipemap.polymerization_tank.name=聚合缸
 recipemap.spinner.name=纺线器
@@ -3248,6 +3311,7 @@ gtqtcore.multiblock.hb.tooltip.3=多方块结构内所有线圈每提升一级�
 gtqtcore.multiblock.ab.tooltip.1=多方块结构内所有线圈每提升一级，多方块配方并行数量 * 2。
 gtqtcore.multiblock.ab.tooltip.3=多方块结构每升级（例如结构拓展）一次，并行升级倍率提高%s，最高提高%s
 gtqtcore.multiblock.ab.tooltip.2=多方块线圈全部升级完毕后，一次至多可处理 %s 个配方。
+gtqtcore.multiblock.kq.acc.tooltip=本多方块支持算力加速，每提供256算力耗时减免5%%(如果有其他耗时减免那么他们是相乘计算)
 gtqtcore.multiblock.ab.amount=润滑油储量：%sL
 gtqtcore.multiblock.ab.heat=润滑油持续润滑中
 gtqtcore.multiblock.ab.no=需要提供润滑油！
@@ -3678,9 +3742,14 @@ metaitem.fuel.nongsuoxianrenzhang.name=浓缩焦仙人掌
 metaitem.fuel.tangjiao.name=糖焦
 metaitem.fuel.tangtan.name=糖碳
 metaitem.fuel.zhutan.name=竹炭
-
+metaitem.scrap.name=废料
+metaitem.cd_rom.name=记忆光盘
+metaitem.uu_mater.name=固态UU物质
 tile.misc.aluminum_ore_sand.name=铝矿矿砂
 tile.misc.gold_ore_sand.name=金矿矿砂
+
+behavior.data_item.cd_rom.title=§n光盘存储数据：
+behavior.data_item.cd_rom.data=- §a%s
 #  通用电路板s
 metaitem.general_circuit.ulv.name=通用电路板 (§8ULV§r)
 metaitem.general_circuit.lv.name=通用电路板 (§7LV§r)
@@ -4293,8 +4362,6 @@ gtqtcore.machine.mdi.tooltip.1=还在手动挖矿？你居然还在手动挖矿�
 gtqtcore.machine.mdi.tooltip.2=工作时消耗钻头耐久度，耐久度全部消耗后结构将会删除钻头，需要手动安装。
 gtqtcore.machine.mdi.tooltip.3=多方块持续工作时会获得缓慢的效率提升，并行数量由结构等级，钻头等级共同决定
 gtqtcore.machine.mdi.tooltip.4=多方块会根据所处区块的岩层种类决定运行的配方，在输入总线放置地质存储模块提供启动参数
-gtqtcore.machine.mdi.tooltip.5=多方块拥有十种挖掘策略，每种均对应不同的开采基础倍率以及额外倍率，
-gtqtcore.machine.mdi.tooltip.6=开启普适模式后多方块可以在任何维度运行对应岩种编号的主世界维度配方
 
 gtqtcore.machine.greenhouse.tooltip.4=升级结构，提供农药，生物质提升机器效率。
 gregtech.machine.fb.tooltip.1=可拓展结构：散热模块,装配后可调节更大范围的冷却效率
@@ -4561,6 +4628,11 @@ gtqtcore.multiblock.kqn.nb29=天基折射棱镜
 gtqtcore.multiblock.kqn.nx29=我们已经熟练的将超高能激光器运用到生产中，并且取代几大部分原始线网结构，然而，在超长距离电力投射与超高能束能发射下仍然有着较大的问题，如果能直接利用天空就行激光反射传输就好了.....
 metaitem.disk.29.name=数据存储器
 metaitem.disk.29.tooltip=§a天基折射棱镜
+
+gtqtcore.multiblock.kqn.nb30=元素复制
+gtqtcore.multiblock.kqn.nx30=众所周知，物质是由质子中子与电子组合而成的，在加速器数以万计的质子中子进行加速，我们曾经创造过诸多稀有同位素，而现在，我们即将想着创造物质的目标进发！
+metaitem.disk.30.name=数据存储器
+metaitem.disk.30.tooltip=§a元素复制
 
 gtqtcore.multiblock.kqn.bio0=欢迎使用KQCC科研计算机集成系统！
 metaitem.bio.0.name=基因存储器

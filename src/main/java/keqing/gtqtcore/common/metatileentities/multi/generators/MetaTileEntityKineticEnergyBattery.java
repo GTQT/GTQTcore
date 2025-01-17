@@ -89,11 +89,11 @@ public class MetaTileEntityKineticEnergyBattery extends MultiblockWithDisplayBas
     @Override
     public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("把电存起来", new Object[0]));
         tooltip.add(I18n.format("gtqtcore.multiblock.eke.tooltip.1"));
         tooltip.add(I18n.format("gtqtcore.multiblock.eke.tooltip.2"));
         tooltip.add(I18n.format("gtqtcore.multiblock.eke.tooltip.3"));
         tooltip.add(I18n.format("gtqtcore.multiblock.eke.tooltip.4"));
-        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("把电存起来", new Object[0]));
     }
 
 

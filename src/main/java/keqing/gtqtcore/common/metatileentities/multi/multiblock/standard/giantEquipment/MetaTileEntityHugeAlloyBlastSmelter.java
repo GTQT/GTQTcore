@@ -117,12 +117,6 @@ public class MetaTileEntityHugeAlloyBlastSmelter extends RecipeMapMultiblockCont
         }
     }
 
-    public int getMinVa() {
-        if ((Math.min(this.energyContainer.getEnergyCapacity() / 32, VA[Math.min(coilTier, 9)]) * 20) == 0) return 1;
-        return (int) (Math.min(this.energyContainer.getEnergyCapacity() / 32, VA[Math.min(coilTier, 9)]));
-
-    }
-
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
@@ -143,6 +137,7 @@ public class MetaTileEntityHugeAlloyBlastSmelter extends RecipeMapMultiblockCont
         tooltip.add(I18n.format("gtqtcore.multiblock.hb.tooltip.2"));
         tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.1"));
         tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.2", 256));
+        tooltip.add(I18n.format("gtqtcore.multiblock.kq.acc.tooltip！"));
         tooltip.add(I18n.format("本机器允许使用激光能源仓代替能源仓！"));
     }
 

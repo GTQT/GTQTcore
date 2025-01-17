@@ -7,7 +7,6 @@ import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
 import gregtech.client.renderer.texture.cube.SimpleOrientedCubeRenderer;
 import gregtech.client.renderer.texture.cube.SimpleOverlayRenderer;
 import keqing.gtqtcore.GTQTCore;
-import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.renderer.textures.OverlayRenderer;
 import keqing.gtqtcore.client.textures.custom.IsaMillRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -20,17 +19,6 @@ import static keqing.gtqtcore.api.utils.GTQTUtil.gtqtId;
 public class GTQTTextures {
     public static final SteamTexture FLUID_SLOT_STEAM = SteamTexture.fullImage("textures/gui/base/fluid_slot_%s.png");
     public static final SteamTexture INT_CIRCUIT_OVERLAY_STEAM = SteamTexture.fullImage("textures/gui/overlay/int_circuit_overlay_%s.png");
-
-    public static OrientedOverlayRenderer RTG_OVERLAY= new OrientedOverlayRenderer("overlay/rtg");
-    public static OrientedOverlayRenderer PARTICLE_ACCELERATOR= new OrientedOverlayRenderer("overlay/particle_accelerator");
-    public static TextureAtlasSprite PRESSURE_PIPE_SIDE;
-    public static TextureAtlasSprite PRESSURE_PIPE_OPEN;
-    public static SimpleOverlayRenderer WIRELESS_HATCH_HATCH;
-    public static SimpleOverlayRenderer FISHING_CASING;
-    public static SimpleOverlayRenderer BASIC_PHOTOLITHOGRAPHIC_FRAMEWORK_CASING = new SimpleOverlayRenderer("multiblock/casing/basic_photolithographic_framework_casing");
-    public static OverlayRenderer MULTIPART_BUFFER_HATCH = new OverlayRenderer("multipart/overlay_buffer_hatch");
-    public static OrientedOverlayRenderer ROCKET_ENGINE_OVERLAY = new OrientedOverlayRenderer("machines/rocket_engine");
-    public static OrientedOverlayRenderer NAQUADAH_REACTOR_OVERLAY = new OrientedOverlayRenderer("machines/naquadah_reactor");
     public static final SimpleOverlayRenderer ADVANCED_FUSION_TEXTURE = new SimpleOverlayRenderer("casings/fusion/machine_casing_advanced_fusion_hatch");
     public static final SimpleOverlayRenderer ULTIMATE_FUSION_TEXTURE = new SimpleOverlayRenderer("casings/fusion/machine_casing_ultimate_fusion_hatch");
     public static final SimpleOverlayRenderer END_FUSION_TEXTURE = new SimpleOverlayRenderer("casings/fusion/machine_casing_end_fusion_hatch");
@@ -38,6 +26,29 @@ public class GTQTTextures {
     public static final SimpleOverlayRenderer ULTIMATE_ACTIVE_FUSION_TEXTURE = new SimpleOverlayRenderer("casings/fusion/machine_casing_ultimate_fusion_hatch_blue");
     public static final SimpleOverlayRenderer END_ACTIVE_FUSION_TEXTURE = new SimpleOverlayRenderer("casings/fusion/machine_casing_end_fusion_hatch_blue");
     public static final SimpleOrientedCubeRenderer ADVANCED_FILTER_IRIDIUM_FRONT = new SimpleOrientedCubeRenderer("casings/advanced_filter_iridium_front");
+    public static final OrientedOverlayRenderer POLYMERIZATION_TANK_OVERLAY
+            = new OrientedOverlayRenderer("overlay/polymerization_tank");
+    public static final OrientedOverlayRenderer LOW_TEMP_ACTIVATOR_OVERLAY
+            = new OrientedOverlayRenderer("overlay/low_temp_activator");
+    public static final OrientedOverlayRenderer ION_IMPLANTER_OVERLAY
+            = new OrientedOverlayRenderer("overlay/ion_implanter");
+    public static final OrientedOverlayRenderer FLOTATION_CELL_OVERLAY
+            = new OrientedOverlayRenderer("overlay/flotation_cell");
+    public static SimpleOverlayRenderer ELEMENT_CONSTRAINS_MACHINE_CASING = new SimpleOverlayRenderer("multiblock/casings/element_constrains_machine_casing");
+    public static OrientedOverlayRenderer RTG_OVERLAY = new OrientedOverlayRenderer("overlay/rtg");
+    public static OrientedOverlayRenderer PARTICLE_ACCELERATOR = new OrientedOverlayRenderer("overlay/particle_accelerator");
+    public static TextureAtlasSprite PRESSURE_PIPE_SIDE;
+    public static TextureAtlasSprite PRESSURE_PIPE_OPEN;
+    public static SimpleOverlayRenderer WIRELESS_HATCH_HATCH;
+    public static SimpleOverlayRenderer FISHING_CASING;
+    public static OrientedOverlayRenderer DUPLICATOR = new OrientedOverlayRenderer("machines/duplicator");
+    public static OrientedOverlayRenderer UUPRODUCTER_OVERLAY = new OrientedOverlayRenderer("machines/uu_producter");
+    public static OrientedOverlayRenderer LARGE_UU_PRODUCTER = new OrientedOverlayRenderer("multiblock/large_uu_producter");
+    public static SimpleOverlayRenderer MASS_GENERATION_CASING = new SimpleOverlayRenderer("multiblock/casings/mass_generation_casing");
+    public static SimpleOverlayRenderer BASIC_PHOTOLITHOGRAPHIC_FRAMEWORK_CASING = new SimpleOverlayRenderer("multiblock/casing/basic_photolithographic_framework_casing");
+    public static OverlayRenderer MULTIPART_BUFFER_HATCH = new OverlayRenderer("multipart/overlay_buffer_hatch");
+    public static OrientedOverlayRenderer ROCKET_ENGINE_OVERLAY = new OrientedOverlayRenderer("machines/rocket_engine");
+    public static OrientedOverlayRenderer NAQUADAH_REACTOR_OVERLAY = new OrientedOverlayRenderer("machines/naquadah_reactor");
     public static SimpleOverlayRenderer CIRCUIT_ASSEMBLY_CONTROL_CASING = new SimpleOverlayRenderer("multiblock/advblock/osmiridium_casing");
     public static SimpleOverlayRenderer Inconel625 = new SimpleOverlayRenderer("multiblock/advblock/inconel_625");
     public static SimpleOverlayRenderer HastelloyN = new SimpleOverlayRenderer("multiblock/advblock/hastelloy_n");
@@ -60,49 +71,33 @@ public class GTQTTextures {
     public static SimpleOverlayRenderer TRANSCENDENTALLY_AMPLIFIED_MAGNETIC_CONFINEMENT_CASING = new SimpleOverlayRenderer("casings/transcendentally_amplified_magnetic_confinement_casing");
     public static SimpleOverlayRenderer SINGULARITY_REINFORCED_STELLAR_SHIELDING_CASING = new SimpleOverlayRenderer("casings/singularity_reinforced_stellar_shielding_casing");
     public static SimpleOverlayRenderer DIRT = new SimpleOverlayRenderer("stones/concrete_light/concrete_light_smooth");
-
     public static SimpleOverlayRenderer ADV_COMPUTER_HEAT_VENT_CASING = new SimpleOverlayRenderer("multiblock/computer/computer_heat_vent_side");
     public static SimpleOverlayRenderer ADV_COMPUTER_CASING = new SimpleOverlayRenderer("multiblock/computer/computer_casing/front");
     public static SimpleOverlayRenderer ULTRA_POWER_CASING = new SimpleOverlayRenderer("multiblock/computer/high_power_casing");
-
-    public static final OrientedOverlayRenderer POLYMERIZATION_TANK_OVERLAY
-            = new OrientedOverlayRenderer("overlay/polymerization_tank");
-
-    public static final OrientedOverlayRenderer LOW_TEMP_ACTIVATOR_OVERLAY
-            = new OrientedOverlayRenderer("overlay/low_temp_activator");
-
     public static SimpleOverlayRenderer HEAT = new SimpleOverlayRenderer("overlay/heat/overlay_front");
     public static SimpleOverlayRenderer HEAT_HATCH = new SimpleOverlayRenderer("overlay/heat_hatch/overlay_front");
-
     public static SimpleOverlayRenderer ELECTRODE_HATCH = new SimpleOverlayRenderer("overlay/electrode_hatch/overlay_front");
     public static SimpleOverlayRenderer DRILL = new SimpleOverlayRenderer("casings/solid/drill_head_bottom");
-
     public static SimpleOverlayRenderer FUSION_MKI = new SimpleOverlayRenderer("multiblock/casings/machine_casing_fusion");
     public static SimpleOverlayRenderer FUSION_MKII = new SimpleOverlayRenderer("multiblock/casings/machine_casing_fusion_2");
     public static SimpleOverlayRenderer FUSION_MKIII = new SimpleOverlayRenderer("multiblock/casings/machine_casing_fusion_3");
     public static SimpleOverlayRenderer ENERGY_CELL = new SimpleOverlayRenderer("casings/energy_cell_side");
-
     public static SimpleOverlayRenderer KQCC_COMMON = new SimpleOverlayRenderer("multiblock/computer/computer_top");
     public static SimpleOverlayRenderer KQCC_RAM_1 = new SimpleOverlayRenderer("multiblock/computer/rami");
     public static SimpleOverlayRenderer KQCC_CPU_1 = new SimpleOverlayRenderer("multiblock/computer/cpui");
     public static SimpleOverlayRenderer KQCC_GPU_1 = new SimpleOverlayRenderer("multiblock/computer/gpui");
-
     public static SimpleOverlayRenderer KQCC_RAM_2 = new SimpleOverlayRenderer("multiblock/computer/ramii");
     public static SimpleOverlayRenderer KQCC_CPU_2 = new SimpleOverlayRenderer("multiblock/computer/cpuii");
     public static SimpleOverlayRenderer KQCC_GPU_2 = new SimpleOverlayRenderer("multiblock/computer/gpuii");
-
     public static SimpleOverlayRenderer KQCC_RAM_3 = new SimpleOverlayRenderer("multiblock/computer/ramiii");
     public static SimpleOverlayRenderer KQCC_CPU_3 = new SimpleOverlayRenderer("multiblock/computer/cpuiii");
     public static SimpleOverlayRenderer KQCC_GPU_3 = new SimpleOverlayRenderer("multiblock/computer/gpuiii");
-
     public static SimpleOverlayRenderer POWER_SUPPLY_COMMON = new SimpleOverlayRenderer("multiblock/power_supply/power_supply_basic");
-
     public static SimpleOverlayRenderer POWER_SUPPLY_B1 = new SimpleOverlayRenderer("multiblock/power_supply/power_supply_battery_i");
     public static SimpleOverlayRenderer POWER_SUPPLY_B2 = new SimpleOverlayRenderer("multiblock/power_supply/power_supply_battery_ii");
     public static SimpleOverlayRenderer POWER_SUPPLY_B3 = new SimpleOverlayRenderer("multiblock/power_supply/power_supply_battery_iii");
     public static SimpleOverlayRenderer POWER_SUPPLY_B4 = new SimpleOverlayRenderer("multiblock/power_supply/power_supply_battery_iv");
     public static SimpleOverlayRenderer POWER_SUPPLY_B5 = new SimpleOverlayRenderer("multiblock/power_supply/power_supply_battery_v");
-
     public static SimpleOverlayRenderer POWER_SUPPLY_S1 = new SimpleOverlayRenderer("multiblock/power_supply/power_supply_i");
     public static SimpleOverlayRenderer POWER_SUPPLY_S2 = new SimpleOverlayRenderer("multiblock/power_supply/power_supply_ii");
     public static SimpleOverlayRenderer POWER_SUPPLY_S3 = new SimpleOverlayRenderer("multiblock/power_supply/power_supply_iii");
@@ -113,7 +108,6 @@ public class GTQTTextures {
     public static SimpleOverlayRenderer POWER_SUPPLY_S8 = new SimpleOverlayRenderer("multiblock/power_supply/power_supply_viii");
     public static SimpleOverlayRenderer POWER_SUPPLY_S9 = new SimpleOverlayRenderer("multiblock/power_supply/power_supply_iv");
     public static SimpleOverlayRenderer POWER_SUPPLY_S10 = new SimpleOverlayRenderer("multiblock/power_supply/power_supply_vv");
-
     //怎么写？请看
     public static OrientedOverlayRenderer LIGHTNING_ROD_OVERLAY;
     public static OrientedOverlayRenderer CHEMICAL_PLANT;
@@ -168,18 +162,11 @@ public class GTQTTextures {
     public static TextureAtlasSprite FORCE_FIELD;
     public static TextureArea ITEM_FLUID_OVERLAY;
     public static IsaMillRenderer ISA_MILL = new IsaMillRenderer();
-
     public static OrientedOverlayRenderer CATALYTIC_REFORMER_OVERLAY = new OrientedOverlayRenderer("overlay/catalytic_reformer");
     public static OrientedOverlayRenderer CRYSTALLIZATION_CRUCIBLE_OVERLAY = new OrientedOverlayRenderer("overlay/crystallization_crucible");
     public static OrientedOverlayRenderer CVD_UNIT_OVERLAY = new OrientedOverlayRenderer("overlay/cvd_unit");
     public static OrientedOverlayRenderer NANOSCALE_FABRICATOR_OVERLAY = new OrientedOverlayRenderer("overlay/nanoscale_fabricator");
     public static OrientedOverlayRenderer SONICATOR_OVERLAY = new OrientedOverlayRenderer("overlay/sonicator");
-    public static final OrientedOverlayRenderer ION_IMPLANTER_OVERLAY
-            = new OrientedOverlayRenderer("overlay/ion_implanter");
-
-    public static final OrientedOverlayRenderer FLOTATION_CELL_OVERLAY
-            = new OrientedOverlayRenderer("overlay/flotation_cell");
-
     public static OrientedOverlayRenderer ISA_MILL_OVERLAY = new OrientedOverlayRenderer("overlay/isa_mill");
     public static OrientedOverlayRenderer BURNER_REACTOR_OVERLAY = new OrientedOverlayRenderer("overlay/burner_reactor");
     public static OrientedOverlayRenderer CRYOGENIC_REACTOR_OVERLAY = new OrientedOverlayRenderer("overlay/cryogenic_reactor");
@@ -238,6 +225,21 @@ public class GTQTTextures {
     public static SimpleOverlayRenderer MAINTENANCE_OVERLAY_ISO2_CLEANING;
     public static SimpleOverlayRenderer MAINTENANCE_OVERLAY_ISO1_CLEANING;
     public static TextureArea AUTO_PULL;
+    //  Multi Renderer
+    public static TextureAtlasSprite HALO_NOISE;
+    public static TextureAtlasSprite HALO;
+    public static TextureAtlasSprite[] COSMIC;
+    public static TextureAtlasSprite COSMIC_0;
+    public static TextureAtlasSprite COSMIC_1;
+    public static TextureAtlasSprite COSMIC_2;
+    public static TextureAtlasSprite COSMIC_3;
+    public static TextureAtlasSprite COSMIC_4;
+    public static TextureAtlasSprite COSMIC_5;
+    public static TextureAtlasSprite COSMIC_6;
+    public static TextureAtlasSprite COSMIC_7;
+    public static TextureAtlasSprite COSMIC_8;
+    public static TextureAtlasSprite COSMIC_9;
+
     public static void init() {
         AUTO_PULL = TextureArea.fullImage("textures/gui/widget/auto_pull.png");
         ITEM_FLUID_OVERLAY = TextureArea.fullImage("textures/gui/widget/item_fluid.png");
@@ -258,8 +260,8 @@ public class GTQTTextures {
         NUCLEAR_FUSION_COOLING = new SimpleOverlayRenderer("multiblock/casings/nuclear_fusion_cooling");
         NEUTRON_ACTIVATOR_CASING = new SimpleOverlayRenderer("multiblock/casings/neutron_activator_casing");
         NUCLEAR_FUSION_FRAME = new SimpleOverlayRenderer("multiblock/casings/nuclear_fusion_frame");
-        PRECISE_ASSEMBLER_CASING_MK1= new SimpleOverlayRenderer("multiblock/casing/precise_assembler_casing_mk1");
-        PRECISE_ASSEMBLER_CASING_MK2= new SimpleOverlayRenderer("multiblock/casing/precise_assembler_casing_mk2");
+        PRECISE_ASSEMBLER_CASING_MK1 = new SimpleOverlayRenderer("multiblock/casing/precise_assembler_casing_mk1");
+        PRECISE_ASSEMBLER_CASING_MK2 = new SimpleOverlayRenderer("multiblock/casing/precise_assembler_casing_mk2");
         PRECISE_ASSEMBLER_CASING_MK3 = new SimpleOverlayRenderer("multiblock/casing/precise_assembler_casing_mk3");
         PRECISE_ASSEMBLER_CASING_MK4 = new SimpleOverlayRenderer("multiblock/casing/precise_assembler_casing_mk4");
         PRECISE_ASSEMBLER_CASING_MK5 = new SimpleOverlayRenderer("multiblock/casing/precise_assembler_casing_mk5");
@@ -299,22 +301,7 @@ public class GTQTTextures {
         ADV_MACHINE_TUBBINE = new SimpleOverlayRenderer("multiblock/advblock/adv_machine_tubbine");
         QUANTUM_CASING = new SimpleOverlayRenderer("multiblock/quantumcasing/quantumcasing");
 
-        }
-
-    //  Multi Renderer
-    public static TextureAtlasSprite HALO_NOISE;
-    public static TextureAtlasSprite HALO;
-    public static TextureAtlasSprite[] COSMIC;
-    public static TextureAtlasSprite COSMIC_0;
-    public static TextureAtlasSprite COSMIC_1;
-    public static TextureAtlasSprite COSMIC_2;
-    public static TextureAtlasSprite COSMIC_3;
-    public static TextureAtlasSprite COSMIC_4;
-    public static TextureAtlasSprite COSMIC_5;
-    public static TextureAtlasSprite COSMIC_6;
-    public static TextureAtlasSprite COSMIC_7;
-    public static TextureAtlasSprite COSMIC_8;
-    public static TextureAtlasSprite COSMIC_9;
+    }
 
     public static void register(TextureMap textureMap) {
         FORCE_FIELD = textureMap.registerSprite(gtqtId("blocks/force_field"));
@@ -332,7 +319,7 @@ public class GTQTTextures {
         COSMIC_7 = textureMap.registerSprite(gtqtId("shader/cosmic_7"));
         COSMIC_8 = textureMap.registerSprite(gtqtId("shader/cosmic_8"));
         COSMIC_9 = textureMap.registerSprite(gtqtId("shader/cosmic_9"));
-        COSMIC = new TextureAtlasSprite[] {
+        COSMIC = new TextureAtlasSprite[]{
                 COSMIC_0,
                 COSMIC_1,
                 COSMIC_2,

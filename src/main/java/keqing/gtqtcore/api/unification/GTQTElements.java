@@ -61,4 +61,7 @@ public class GTQTElements {
     public static final Element So = Elements.add(159, 278, -1, null, "Solarium", "So", false);
     public static final Element En = Elements.add(100000, 100000, -1, null, "Eternity", "En⦼", false);
     public static final Element St = Elements.add(10000, 10000, -1, null, "Spacetime", "-*St*-", false);
+    public static final Element p = Elements.add(1, 0, -1, null, "protons", "-*p*-", false);
+    public static final Element n = Elements.add(0, 1, -1, null, "neutrons", "-*n*-", false);
+
 }

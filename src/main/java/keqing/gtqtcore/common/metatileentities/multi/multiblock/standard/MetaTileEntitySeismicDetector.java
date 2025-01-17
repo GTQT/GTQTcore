@@ -51,6 +51,7 @@ public class MetaTileEntitySeismicDetector extends MetaTileEntityBaseWithControl
     public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(I18n.format("在输入总线内放置两个炸药（鞭炮样子的）以及一块地质存储模块即可获取当前维度当前区块的矿床信息"));
+        tooltip.add(I18n.format("支持维度：-1 0 1 20"));
     }
 
     @Override
@@ -80,7 +81,6 @@ public class MetaTileEntitySeismicDetector extends MetaTileEntityBaseWithControl
         var slots = this.getInputInventory().getSlots();
         for (int i = 0; i < slots; i++) {
             ItemStack item = this.getInputInventory().getStackInSlot(i);
-
             if (item.getItem() == GTQTMetaItems.GTQT_META_ITEM && item.getMetadata() == GTQTMetaItems.POS_ORE_CARD.getMetaValue()) {
                 this.getInputInventory().extractItem(i, 1, sim);
                 return true;
@@ -132,7 +132,6 @@ public class MetaTileEntitySeismicDetector extends MetaTileEntityBaseWithControl
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {
         return new MetaTileEntitySeismicDetector(metaTileEntityId);
     }
-
     @Override
     public List<ITextComponent> getDataInfo() {
         return Collections.emptyList();

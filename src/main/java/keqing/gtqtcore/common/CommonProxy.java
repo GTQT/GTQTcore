@@ -394,6 +394,7 @@ public class CommonProxy {
         MetaTileEntityMachine.init();
         CrucibleRecipes.register();
         CopyRecipesHandlers.init();
+        UUHelper.init();
 
         if(GTQTCoreConfig.debugSwitch.debugSwitch) {
             for (Material material : GregTechAPI.materialManager.getRegisteredMaterials()) {

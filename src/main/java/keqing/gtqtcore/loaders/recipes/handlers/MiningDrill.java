@@ -128,10 +128,15 @@ public class MiningDrill {
         MiningDrill(BET3,83);
         MiningDrill(BET4,84);
 
-        GRAVITY_SEPARATOR(BLANK,Copper,Tin,Iron,Coal,Lead,Oilsands);
-        GRAVITY_SEPARATOR(HYDROTHERMAL,Apatite,Realgar,Trona,Nickel,Graphite,Calcite);
-        GRAVITY_SEPARATOR(MAGMATIC_HYDROTHERMAL,Mica,RockSalt,Ruby,Lapis,Sapphire,Amethyst);
-        GRAVITY_SEPARATOR(ALLUVIAL,Opal,Redstone,Cinnabar,GarnetSand,Bauxite,Magnetite);
+        GRAVITY_SEPARATOR(BLANK,Amblygonite,Crocoite,Coal,Lignite,Diamond,Chalcopyrite);
+        GRAVITY_SEPARATOR(HYDROTHERMAL,Copper,Iron,Lead,Nickel,Cryolite,Bauxite);
+        GRAVITY_SEPARATOR(MAGMATIC_HYDROTHERMAL,Ulexite,Salt,RockSalt,Almandine,Sapphire,Redstone);
+        GRAVITY_SEPARATOR(ALLUVIAL,Ruby,Silver,Bentonite,Olivine,Spessartine,Soapstone);
+
+        GRAVITY_SEPARATOR(BET1,Copper,Tin,Iron,Coal,Lead,Oilsands);
+        GRAVITY_SEPARATOR(BET2,Apatite,Realgar,Trona,Nickel,Graphite,Calcite);
+        GRAVITY_SEPARATOR(BET3,Mica,RockSalt,Ruby,Lapis,Sapphire,Amethyst);
+        GRAVITY_SEPARATOR(BET4,Opal,Redstone,Cinnabar,GarnetSand,Bauxite,Magnetite);
 
         GRAVITY_SEPARATOR(DIAPHRAGMATIC,Pyrolusite,Lepidolite,VanadiumMagnetite,Cryolite,Electrotine,Emerald);
         GRAVITY_SEPARATOR(ORTHOSTATIC,CertusQuartz,NetherQuartz,Beryllium,Molybdenum,Barite,Chalcocite);
@@ -142,10 +147,6 @@ public class MiningDrill {
         GRAVITY_SEPARATOR(END3,BandedIron,Grossular,Pyrolusite,Pyrochlore,Tantalite,Wulfenite);
         GRAVITY_SEPARATOR(END4,Molybdenite,Molybdenum,Powellite,Diamond,Sphalerite,Tin);
 
-        GRAVITY_SEPARATOR(BET1,Amblygonite,Crocoite,Coal,Lignite,Diamond,Chalcopyrite);
-        GRAVITY_SEPARATOR(BET2,Copper,Iron,Lead,Nickel,Cryolite,Bauxite);
-        GRAVITY_SEPARATOR(BET3,Ulexite,Salt,RockSalt,Almandine,Sapphire,Redstone);
-        GRAVITY_SEPARATOR(BET4,Ruby,Silver,Bentonite,Olivine,Spessartine,Soapstone);
 
         ASSEMBLER_RECIPES.recipeBuilder()
                 .input(plate, Steel,16)

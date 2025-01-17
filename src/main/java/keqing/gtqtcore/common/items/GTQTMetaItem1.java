@@ -8,16 +8,14 @@ import gregtech.api.unification.material.MarkerMaterials;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.ItemMaterialInfo;
 import gregtech.api.unification.stack.MaterialStack;
-import gregtech.common.items.behaviors.ColorSprayBehaviour;
-import gregtech.common.items.behaviors.MultiblockBuilderBehavior;
-import gregtech.common.items.behaviors.ProspectorScannerBehavior;
-import gregtech.common.items.behaviors.TooltipBehavior;
+import gregtech.common.items.behaviors.*;
 import keqing.gtqtcore.api.unification.GCYSMaterials;
 import keqing.gtqtcore.api.unification.GTQTMaterials;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.CommonProxy;
 import keqing.gtqtcore.common.block.GTQTCrops;
 import keqing.gtqtcore.common.items.behaviors.*;
+import keqing.gtqtcore.common.items.behaviors.DataItemBehavior;
 import keqing.gtqtcore.common.items.behaviors.render.HaloRenderItemBehavior;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.EnumDyeColor;
@@ -67,6 +65,10 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         NONG_SUO_TANG_JIAO = this.addItem(23, "fuel.tangtan").setBurnValue(16000).setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO);
         ZHU_TAN = this.addItem(24, "fuel.zhutan").setBurnValue(12800).setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO);
 
+        //
+        SCRAP = this.addItem(27,"scrap").setCreativeTabs(CommonProxy.GTQTCore_HP).setMaxStackSize(64);
+        CD_ROM = this.addItem(28,"cd_rom").setCreativeTabs(CommonProxy.GTQTCore_HP).setMaxStackSize(16).addComponents(new DataItemBehavior(true));
+        UU_MATER = this.addItem(29,"uu_mater").setCreativeTabs(CommonProxy.GTQTCore_HP).setMaxStackSize(64);
         //快乐海藻
         COMMON_ALGAE = this.addItem(30, "algae.common").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO).addOreDict("algaeOrdinary");
         GREEN_ALGAE = this.addItem(31, "algae.green").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO).addOreDict("algaeGreen");
@@ -1000,7 +1002,7 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         PROXIMA_B_SPIROGYRA = this.addItem(1058, "algae.proxima_b.spirogyra").addOreDict("dyeGray").setCreativeTabs(CommonProxy.GTQTCore_BIO);
 
         //换热片1100
-        HEAT_SHIELD_MKI = this.addItem(1100, "heat_shield").setCreativeTabs(CommonProxy.GTQTCore_NC);
+        HEAT_SHIELD_MKI = this.addItem(1100, "heat_shield_mki").setCreativeTabs(CommonProxy.GTQTCore_NC);
         HEAT_SHIELD_MKII = this.addItem(1101, "heat_shield_mkii").setCreativeTabs(CommonProxy.GTQTCore_NC);
         HEAT_SHIELD_MKIII = this.addItem(1102, "heat_shield_mkiii").setCreativeTabs(CommonProxy.GTQTCore_NC);
         HEAT_SHIELD_MKIV = this.addItem(1103, "heat_shield_mkiv").setCreativeTabs(CommonProxy.GTQTCore_NC);

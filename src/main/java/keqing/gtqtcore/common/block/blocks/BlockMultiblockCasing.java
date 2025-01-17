@@ -29,7 +29,12 @@ public class BlockMultiblockCasing extends VariantBlock<BlockMultiblockCasing.Ca
 
     public static enum CasingType implements IStringSerializable {
 
-
+        MASS_GENERATION_CASING("mass_generation_casing"),
+        MASS_GENERATION_COIL_CASING("mass_generation_coil_casing"),
+        BUNCHER_CASING("buncher_casing"),
+        RESONATOR_CASING("resonator_casing"),
+        HIGH_VOLTAGE_CAPACITOR_BLOCK_CASING("high_voltage_capacitor_block_casing"),
+        ELEMENT_CONSTRAINS_MACHINE_CASING("element_constrains_machine_casing"),
         MACHINE_CASING_FUSION("machine_casing_fusion"),
         MACHINE_CASING_FUSION_2("machine_casing_fusion_2"),
         MACHINE_CASING_FUSION_3("machine_casing_fusion_3"),

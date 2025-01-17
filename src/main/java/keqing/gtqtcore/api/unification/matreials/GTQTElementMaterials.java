@@ -349,7 +349,19 @@ public class GTQTElementMaterials {
                 .build()
                 .setFormula(addObfuscatedFormula(), false);
 
+        //质子洪流
+        GTQTMaterials.ProtonFlux = new Material.Builder(getMaterialsId(), gregtechId("proton_flux"))
+                .fluid()
+                .color(0xFF3030)
+                .element(p)
+                .build();
 
+        //中子洪流
+        GTQTMaterials.NeutronFlux = new Material.Builder(getMaterialsId(), gregtechId("neutron_flux"))
+                .fluid()
+                .color(0x303030)
+                .element(n)
+                .build();
     }
     public static String addObfuscatedFormula() {
         return TextFormatting.OBFUSCATED + "aaaaaa";

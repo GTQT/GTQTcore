@@ -8,16 +8,18 @@ import net.minecraft.util.text.TextComponentTranslation;
 public class GTQTOreHelper {
     public static String getInfo(int kind)
     {
-        //末地
+        //交错
         if (kind == 81) return"岩石种类：沼泽 变质岩";
         if (kind == 82) return"岩石种类：沼泽 沉积岩";
         if (kind == 83) return"岩石种类：沼泽 冲击岩";
         if (kind == 84) return"岩石种类：沼泽 热液岩";
+
         //末地
         if (kind == 5) return"岩石种类：末地 变质岩";
         if (kind == 6) return"岩石种类：末地 沉积岩";
         if (kind == 7) return"岩石种类：末地 冲击岩";
         if (kind == 8) return"岩石种类：末地 热液岩";
+
         //主世界
         if (kind == 1) return"岩石种类：主世界 变质岩";
         if (kind == 2) return"岩石种类：主世界 沉积岩";

@@ -199,6 +199,7 @@ public class GTQTcoreRecipeMaps {
 
     public static final RecipeMap<SimpleRecipeBuilder> COMPONENT_ASSEMBLER_RECIPES;
     public static final RecipeMap<SimpleRecipeBuilder> SEPTIC_TANK;
+    public static final RecipeMap<SimpleRecipeBuilder> COPY_RECIPES ;
     public static final RecipeMap<SimpleRecipeBuilder> ULTRAVIOLET_LAMP_CHAMBER_RECIPES;
     public static final RecipeMap<SimpleRecipeBuilder> PRESSURE_LAMINATOR_RECIPES;
     public static final RecipeMap<SimpleRecipeBuilder> VACUUM_CHAMBER_RECIPES;
@@ -220,7 +221,7 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<FuelRecipeBuilder> I_MODULAR_FISSION_REACTOR;
     public static final RecipeMap<ChemicalPlantBuilder> CHEMICAL_PLANT;
     public static final RecipeMap<SimpleRecipeBuilder> INTEGRATED_MINING_DIVISION;
-
+    public static final RecipeMap<SimpleRecipeBuilder> UU_RECIPES ;
     public static final RecipeMap<QFTCasingTierRecipeBuilder> QUANTUM_FORCE_TRANSFORMER_RECIPES;
     public static final RecipeMap<FlowRateRecipeBuilder> HEAT_EXCHANGE_RECIPES;
     public static final RecipeMap<FuelRecipeBuilder> STAR_MIXER;
@@ -273,7 +274,9 @@ public class GTQTcoreRecipeMaps {
 
     private GTQTcoreRecipeMaps() {}
     static {
+        COPY_RECIPES = new RecipeMap<>("uu_copy",2,1,3,1,(new SimpleRecipeBuilder()),false);
 
+        UU_RECIPES = new RecipeMap<>("uu_producter",2,0,1,1,(new SimpleRecipeBuilder()),false);
 
         PROCESSING_MODE_A = new RecipeMapPseudoGroup<>("processing_mode_a", 1, 2, 1, 1, new SimpleRecipeBuilder(), RecipeMaps.COMPRESSOR_RECIPES, RecipeMaps.LATHE_RECIPES, RecipeMaps.POLARIZER_RECIPES, false);
         PROCESSING_MODE_B = new RecipeMapPseudoGroup<>("processing_mode_b", 2, 2, 1, 1, new SimpleRecipeBuilder(), RecipeMaps.FERMENTING_RECIPES, RecipeMaps.EXTRACTOR_RECIPES, RecipeMaps.CANNER_RECIPES, false);

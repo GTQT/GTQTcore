@@ -5,9 +5,12 @@ import gregtech.api.capability.INotifiableHandler;
 import gregtech.api.capability.impl.GhostCircuitItemStackHandler;
 import gregtech.api.capability.impl.ItemHandlerList;
 import gregtech.api.gui.widgets.SlotWidget;
+import gregtech.api.items.metaitem.MetaItem;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.MetaTileEntityHolder;
 import gregtech.api.metatileentity.multiblock.MultiblockControllerBase;
+import gregtech.api.unification.material.Material;
+import gregtech.api.unification.material.Materials;
 import gregtech.api.util.BlockInfo;
 import gregtech.api.util.TextFormattingUtil;
 import gregtech.common.blocks.MetaBlocks;
@@ -25,13 +28,12 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.items.IItemHandler;
 
 import javax.annotation.Nonnull;
-import java.util.Arrays;
-import java.util.BitSet;
-import java.util.Objects;
+import java.util.*;
 import java.util.function.BooleanSupplier;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+import static gregtech.api.GregTechAPI.materialManager;
 import static net.minecraft.util.EnumFacing.*;
 import static net.minecraftforge.common.DimensionManager.getWorlds;
 
@@ -65,6 +67,24 @@ public class GTQTUtil {
     @Nonnull
     public static ResourceLocation gtqtId(@Nonnull String path) {
         return new ResourceLocation("gtqtcore", path);
+    }
+    public static  Integer baseTime = 100;
+    public static List<Material> listMater = new ArrayList<>();
+    public static void initList()
+    {
+        var ms = materialManager.getRegisteredMaterials();
+        for (var s:ms)
+        {
+            if(s != Materials.UUMatter)
+                listMater.add(s);
+        }
+    }
+    public static String getName(MetaItem.MetaValueItem is) {
+        return is.getStackForm().getDisplayName();
+    }
+    public static String getName(Material mater)
+    {
+        return mater.getLocalizedName();
     }
 
     public static int intValueOfBitSet(BitSet set) {

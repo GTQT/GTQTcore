@@ -126,7 +126,6 @@ public class MetaTileEntityHugeChemicalReactor extends MultiMapMultiblockControl
         }
     }
 
-
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);

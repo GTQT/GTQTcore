@@ -134,6 +134,8 @@ public class KeQingNET {
         KQ_NET(4, 4, 28, DISK_28, POWER_SUBSTATION.getStackForm());
         //29 天基折射棱镜
         KQ_NET(4, 4, 29, DISK_29, LASER_SWITCH.getStackForm());
+        //元素复制
+        KQ_NET(2, 4, 30, DISK_30, NEUTRON);
     }
 
 

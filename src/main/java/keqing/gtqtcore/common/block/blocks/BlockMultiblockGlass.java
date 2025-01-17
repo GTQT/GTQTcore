@@ -84,7 +84,9 @@ public class BlockMultiblockGlass extends VariantBlock<BlockMultiblockGlass.Casi
         DV_MACHINE_GLASS_PR("adv_machine_glass_pr"),
         TECH_FUSION_GLASS_IV("tech_fusion_glass_4"),
         TECH_FUSION_GLASS_V("tech_fusion_glass_5"),
-        TECH_FUSION_GLASS_VI("tech_fusion_glass_6");
+        TECH_FUSION_GLASS_VI("tech_fusion_glass_6"),
+        UU_GALSS("uu_glass_block"),
+        COPY_GALSS("copy_glass_block");
         private final String name;
 
         CasingType(String name) {
@@ -102,6 +104,7 @@ public class BlockMultiblockGlass extends VariantBlock<BlockMultiblockGlass.Casi
         }
         public int getGlassTier() {
             return switch (getName()) {
+                case ("uu_glass_block"), ("copy_glass_block") -> GTValues.ZPM;
                 case ("boron_silicate_glass") -> GTValues.MV;
                 case ("adv_machine_glass"), ("adv_machine_glass_r"), ("adv_machine_glass_b"), ("adv_machine_glass_g"), ("adv_machine_glass_p") , ("adv_machine_glass_o"), ("adv_machine_glass_pr")-> GTValues.UV;
                 case ("tech_fusion_glass_4") -> GTValues.UHV;

@@ -246,6 +246,10 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem COSMIC_TRANSISTOR;
     public static MetaItem<?>.MetaValueItem COSMIC_INDUCTOR;
 
+    public static MetaItem<?>.MetaValueItem SCRAP;
+    public static MetaItem<?>.MetaValueItem CD_ROM;
+    public static MetaItem<?>.MetaValueItem UU_MATER;
+
     public static MetaItem<?>.MetaValueItem HIGH_REFLECT;
     public static MetaItem<?>.MetaValueItem REFLECT_GLASS;
     public static MetaItem<?>.MetaValueItem LASER_GROUP;
