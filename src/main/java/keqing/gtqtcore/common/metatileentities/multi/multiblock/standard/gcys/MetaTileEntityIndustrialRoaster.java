@@ -1,5 +1,7 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.gcys;
 
+import gregicality.multiblocks.api.capability.impl.GCYMMultiblockRecipeLogic;
+import gregicality.multiblocks.api.metatileentity.GCYMRecipeMapMultiblockController;
 import gregtech.api.capability.IHeatingCoil;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
@@ -11,6 +13,9 @@ import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.MultiblockShapeInfo;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
+import gregtech.api.recipes.logic.OverclockingLogic;
+import gregtech.api.recipes.recipeproperties.IRecipePropertyStorage;
+import gregtech.api.recipes.recipeproperties.TemperatureProperty;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
@@ -21,10 +26,13 @@ import gregtech.common.blocks.BlockFireboxCasing;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.MetaTileEntities;
+import groovyjarjarantlr4.v4.runtime.misc.NotNull;
 import keqing.gtqtcore.api.pattern.GTQTTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.recipes.properties.NoCoilTemperatureProperty;
+import keqing.gtqtcore.api.unification.GTQTMaterials;
 import keqing.gtqtcore.client.textures.GTQTTextures;
+import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
@@ -49,26 +57,41 @@ import java.util.stream.Collectors;
 
 import static gregtech.api.GTValues.EV;
 import static gregtech.api.GTValues.LV;
+import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing1.CasingType.MaragingSteel250;
+import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing3.CasingType.grisium;
 
-public class MetaTileEntityIndustrialRoaster extends RecipeMapMultiblockController implements IHeatingCoil {
+public class MetaTileEntityIndustrialRoaster extends GCYMRecipeMapMultiblockController implements IHeatingCoil {
 
 
     private int temperature;
 
     public MetaTileEntityIndustrialRoaster(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.ROASTER_RECIPES);
+        this.recipeMapWorkable = new IndustrialRoasterRecipeLogic(this);
     }
+    public static class IndustrialRoasterRecipeLogic extends GCYMMultiblockRecipeLogic {
 
-    private static IBlockState getCasingState() {
-        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.TITANIUM_STABLE);
+        public IndustrialRoasterRecipeLogic(RecipeMapMultiblockController tileEntity) {
+            super(tileEntity);
+        }
+
+        protected void modifyOverclockPre(@NotNull int[] values, @NotNull IRecipePropertyStorage storage) {
+            super.modifyOverclockPre(values, storage);
+            values[0] = OverclockingLogic.applyCoilEUtDiscount(values[0], ((IHeatingCoil) this.metaTileEntity).getCurrentTemperature(), storage.getRecipePropertyValue(TemperatureProperty.getInstance(), 0));
+        }
+
+        protected @NotNull int[] runOverclockingLogic(@NotNull IRecipePropertyStorage propertyStorage, int recipeEUt, long maxVoltage, int duration, int amountOC) {
+            return OverclockingLogic.heatingCoilOverclockingLogic(Math.abs(recipeEUt), maxVoltage, duration, amountOC, ((IHeatingCoil) this.metaTileEntity).getCurrentTemperature(), propertyStorage.getRecipePropertyValue(TemperatureProperty.getInstance(), 0));
+        }
+
     }
 
     private static IBlockState getBoilerCasingState() {
-        return MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.TITANIUM_PIPE);
+        return MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.STEEL_PIPE);
     }
 
     private static IBlockState getFrameState() {
-        return MetaBlocks.FRAMES.get(Materials.StainlessSteel).getBlock(Materials.StainlessSteel);
+        return MetaBlocks.FRAMES.get(GTQTMaterials.Talonite).getBlock(GTQTMaterials.Talonite);
     }
 
     @Override
@@ -140,11 +163,13 @@ public class MetaTileEntityIndustrialRoaster extends RecipeMapMultiblockControll
                 .where(' ', any())
                 .build();
     }
-
+    protected IBlockState getCasingState() {
+        return GTQTMetaBlocks.blockMultiblockCasing1.getState(MaragingSteel250);
+    }
     @SideOnly(Side.CLIENT)
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
-        return Textures.STABLE_TITANIUM_CASING;
+        return GTQTTextures.MaragingSteel250;
     }
 
     @SideOnly(Side.CLIENT)

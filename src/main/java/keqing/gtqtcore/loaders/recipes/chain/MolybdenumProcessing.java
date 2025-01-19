@@ -48,9 +48,9 @@ public class MolybdenumProcessing {
                 .output(dust, MolybdenumTrioxide, 4)
                 .fluidOutputs(SulfurDioxide.getFluid(2000))
                 .fluidOutputs(MolybdenumFlue.getFluid(1000))
-                .temperature(1400)
                 .duration(200)
                 .EUt(VA[MV])
+                .temperature(2700)
                 .buildAndRegister();
 
         // MoO3 + 6H -> Mo + 3H2O

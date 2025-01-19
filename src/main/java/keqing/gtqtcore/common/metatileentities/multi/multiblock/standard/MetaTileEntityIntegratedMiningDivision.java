@@ -74,12 +74,12 @@ public class MetaTileEntityIntegratedMiningDivision extends RecipeMapMultiblockC
     @Override
     public void addInformation(ItemStack stack, @Nullable World player, @Nonnull List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("矿石所需要的唯一", new Object[0]));
         tooltip.add(I18n.format("gtqtcore.multiblock.md.tooltip.1"));
         tooltip.add(I18n.format("gtqtcore.multiblock.md.tooltip.2"));
         tooltip.add(I18n.format("gtqtcore.multiblock.md.tooltip.3"));
         tooltip.add(I18n.format("gtqtcore.multiblock.md.tooltip.4"));
         tooltip.add(I18n.format("gtqtcore.multiblock.md.tooltip.5"));
-        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("矿石所需要的唯一", new Object[0]));
     }
 
     @Nonnull

@@ -45,7 +45,6 @@ public class MetaTileEntityIndustrialInductionFurnace extends MultiMapMultiblock
 
     public MetaTileEntityIndustrialInductionFurnace(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{
-                GTQTcoreRecipeMaps.REACTION_FURNACE_RECIPES,
                 RecipeMaps.FURNACE_RECIPES,
                 RecipeMaps.ALLOY_SMELTER_RECIPES
         });

@@ -13,7 +13,7 @@ import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.MaterialStack;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
-import keqing.gtqtcore.api.unification.material.info.EPMaterialFlags;
+import keqing.gtqtcore.api.unification.material.info.GTQTMaterialFlags;
 import keqing.gtqtcore.api.unification.ore.GTQTOrePrefix;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
@@ -28,7 +28,7 @@ public class BouleRecipeHandler {
 
     public static void processCrystallizer(OrePrefix gem, @Nonnull Material material, GemProperty property) {
         // Not crystallizable materials cannot be made into boules
-        if (!material.hasFlag(MaterialFlags.CRYSTALLIZABLE) || material.hasFlag(EPMaterialFlags.DISABLE_CRYSTALLIZATION))
+        if (!material.hasFlag(MaterialFlags.CRYSTALLIZABLE) || material.hasFlag(GTQTMaterialFlags.DISABLE_CRYSTALLIZATION))
             return;
 
         // if there are too many components to fit in the crystallizer, do not make a recipe

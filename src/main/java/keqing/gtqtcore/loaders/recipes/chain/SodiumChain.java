@@ -19,7 +19,7 @@ public class SodiumChain {
                 .fluidOutputs(SodiumTungstate.getFluid(1000))
                 .EUt(VA[HV])
                 .duration(110)
-                .temperature(1134)
+                .temperature(2700)
                 .buildAndRegister();
 
         //  Sodium Molybdate
@@ -30,7 +30,7 @@ public class SodiumChain {
                 .fluidOutputs(Steam.getFluid(1000))
                 .EUt(VA[HV])
                 .duration(110)
-                .temperature(1128)
+                .temperature(2700)
                 .buildAndRegister();
 
         //  Sodium Tungstate + Phosphoric Acid -> Sodium Phosphotungstate + Sodium Hydroxide + Sodium Oxide

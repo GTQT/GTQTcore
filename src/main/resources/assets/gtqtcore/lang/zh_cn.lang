@@ -1545,7 +1545,7 @@ gtqtcore.machine.large_vacuum_chamber.name=大型真空反应室
 
 gtqtcore.machine.plasma_condenser.name=等离子冷凝器
 recipemap.plasma_condenser_recipes.name=等离子冷凝
-
+gtqtcore.machine.heat_hatch_exchange.name=流体热交换器
 gtqtcore.machine.large_uu_producter.name=大型质量发生仪
 gtqtcore.machine.large_element_duplicator.name=大型元素复制机
 recipemap.uu_producter.name=UU物质生产
@@ -2443,6 +2443,8 @@ gregtech.material.incoloy_020=耐热铬铁合金-020
 gregtech.material.hg_1223=HG-1223
 gregtech.material.hms_1_j_22_alloy=高饱和磁感应软磁合金-1J22
 gregtech.material.fullerene_superconductor=富勒烯超导体
+gregtech.material.grisium=灰钛合金
+gregtech.material.tumbaga=可塑性铜金合金
 gregtech.material.legendarium=传奇金属
 gregtech.material.superheavy_h_alloy=超重元素-重合金
 gregtech.material.superheavy_l_alloy=超重元素-轻合金
@@ -2961,6 +2963,20 @@ gtqtcore.machine.laser_booster.8.name=高能激光点火器（§3UV§r）
 gtqtcore.machine.laser_booster.9.name=高能激光点火器（§4UHV§r）
 gtqtcore.machine.laser_booster.10.name=高能激光点火器（§aUEV§r）
 gtqtcore.machine.laser_booster.11.name=高能激光点火器（§2UIV§r）
+
+# HEAT_HATCH lang entries
+gtqtcore.machine.heat_hatch.lv.name=热源仓（§7LV§r）
+gtqtcore.machine.heat_hatch.mv.name=热源仓（§fMV§r）
+gtqtcore.machine.heat_hatch.hv.name=热源仓（§cHV§r）
+gtqtcore.machine.heat_hatch.ev.name=热源仓（§bEV§r）
+gtqtcore.machine.heat_hatch.iv.name=热源仓（§dIV§r）
+
+# ELECTRIC_HEATER lang entries
+gtqtcore.machine.electric_heater.lv.name=电加热器（§7LV§r）
+gtqtcore.machine.electric_heater.mv.name=电加热器（§fMV§r）
+gtqtcore.machine.electric_heater.hv.name=电加热器（§cHV§r）
+gtqtcore.machine.electric_heater.ev.name=电加热器（§bEV§r）
+gtqtcore.machine.electric_heater.iv.name=电加热器（§dIV§r）
 
 gtqtcore.machine.laser_switch.name=高能激光分配单元
 gtqtcore.machine.laser_translation.name=高能激光接收仓
@@ -4079,6 +4095,8 @@ metaitem.rock.bet4.name=沼泽页岩碎片
 gregtech.material.solarium=阳光合金
 gregtech.material.eternity=永恒
 gregtech.material.spacetime=时空
+gregtech.material.neutron_flux=中子洪流
+gregtech.material.proton_flux=质子洪流
 metaitem.sun_matter.name=阳光化合物
 metaitem.sunlinse.name=日光透镜
 metaitem.sunnariumpart.name=日光金属偏振片
@@ -4129,6 +4147,12 @@ metaitem.algae.tau_ceti_f.spirulina.name=天苍五螺旋蓝藻
 metaitem.algae.proxima_b.conchospore.name=比邻星B壳班藻
 metaitem.algae.proxima_b.polysiphonia_senticulosa.name=比邻星B多管藻
 metaitem.algae.proxima_b.spirogyra.name=比邻星B水绵藻
+
+metaitem.heat_shield_mki.name=散热鳍片I
+metaitem.heat_shield_mkii.name=散热鳍片II
+metaitem.heat_shield_mkiii.name=散热鳍片III
+metaitem.heat_shield_mkiv.name=散热鳍片IV
+metaitem.heat_shield_mkv.name=散热鳍片V
 
 metaitem.sterilized.petri.dish.name=无菌培养皿
 metaitem.contaminated.petri.dish.name=被污染的培养皿
@@ -4719,6 +4743,13 @@ recipemap.alloy_klin.name=合金窑
 tile.multiblock_casing3.naquadah_alloy_casing.name=超稳定硅岩合金机器外壳
 tile.multiblock_casing3.naquadria_casing.name=抗辐射超能硅岩机器外壳
 tile.multiblock_casing3.nitinol_machine_casing.name=镍钛诺机械外壳
+tile.multiblock_casing3.eglin_steel.name=高强度埃格林钢机器外壳
+tile.multiblock_casing3.grisium.name=防水灰钛合金机器外壳外壳
+tile.multiblock_casing3.potin.name=抗震粗青铜合金机器外壳外壳
+tile.multiblock_casing3.black_steel.name=坚实黑钢机器外壳
+tile.multiblock_casing3.blue_steel.name=耐压蓝钢机器外壳
+tile.multiblock_casing3.red_steel.name=绝缘红钢机器外壳
+tile.multiblock_casing3.tumbaga.name=可塑性铜金合金机器外壳
 tile.multiblock_casing3.hc_alloy_casing.name=化学惰性HG-1223耐热机器外壳
 tile.multiblock_casing3.supercritical_fuel_trans_score.name=超临界燃料精炼外壳
 tile.multiblock_casing3.supercritical_fuel_trans_casing.name=超临界燃料精炼核心
@@ -5407,7 +5438,12 @@ tile.nuclear_fusion.nuclear_fusion_frame.name=核裂变压力框架
 tile.nuclear_fusion.nuclear_fusion_cooling.name=冷却塔外壳
 tile.nuclear_fusion.neutron_activator_casing.name=中子活化仪外壳
 tile.nuclear_fusion.neutron_activator_frame.name=中子活化仪框架
-
+tile.multiblock_casing.mass_generation_casing.name=质量发生机械方块
+tile.multiblock_casing.mass_generation_coil_casing.name=质量发生线圈方块
+tile.multiblock_casing.buncher_casing.name=调制腔
+tile.multiblock_casing.resonator_casing.name=谐振腔
+tile.multiblock_casing.high_voltage_capacitor_block_casing.name=高压流电容方块
+tile.multiblock_casing.element_constrains_machine_casing.name=元素约束机械方块
 tile.multiblock_casing.machine_casing_fusion.name=一阶粒子聚合仪外壳
 tile.multiblock_casing.machine_casing_fusion_2.name=二阶粒子聚合仪外壳
 tile.multiblock_casing.machine_casing_fusion_3.name=三阶粒子聚合仪外壳
@@ -5457,6 +5493,8 @@ tile.multiblock_glass.adv_machine_glass_pr.name=智能玻璃（PR型）
 tile.multiblock_glass.tech_fusion_glass_4.name=强化低阶聚变玻璃
 tile.multiblock_glass.tech_fusion_glass_5.name=强化中阶聚变玻璃
 tile.multiblock_glass.tech_fusion_glass_6.name=强化高阶聚变玻璃
+tile.multiblock_glass.uu_glass_block.name=抑制玻璃方块
+tile.multiblock_glass.copy_glass_block.name=粒子抑制玻璃方块
 gregtech.material.polysilicon=太阳能级多晶硅
 gregtech.material.copper_cl=氯化铜
 gregtech.material.fluix=福鲁伊克斯
@@ -5848,6 +5886,8 @@ metaitem.pellets.tooltip=迷你核电站
 item.material.oreprefix.pellets=%s燃料靶丸
 metaitem.kujieranliaowan.tooltip=小心辐射
 item.material.oreprefix.kujieranliaowan=枯竭低浓度%s燃料颗粒
+metaitem.wrap.tooltip=谁家渔网袜
+item.material.oreprefix.wrap=致密%s织网
 metaitem.ranliaowan.tooltip=真正的核电站
 item.material.oreprefix.ranliaowan=低浓度%s燃料颗粒
 metaitem.upellets.tooltip=移动污染源

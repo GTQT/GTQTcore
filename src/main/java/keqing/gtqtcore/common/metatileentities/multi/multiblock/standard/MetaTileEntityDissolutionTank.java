@@ -20,6 +20,9 @@ import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.utils.GTQTUtil;
+import keqing.gtqtcore.client.textures.GTQTTextures;
+import keqing.gtqtcore.common.block.GTQTMetaBlocks;
+import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing1;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -45,10 +48,14 @@ public class MetaTileEntityDissolutionTank extends RecipeMapMultiblockController
         this.recipeMapWorkable = new DissolutionTankWorkableHandler(this);
     }
 
-    private static IBlockState getCasingAState() {
-        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STAINLESS_CLEAN);
+    protected IBlockState getCasingState() {
+        return GTQTMetaBlocks.blockMultiblockCasing1.getState(BlockMultiblockCasing1.CasingType.Talonite);
     }
-
+    @SideOnly(Side.CLIENT)
+    @Override
+    public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
+        return GTQTTextures.Talonite;
+    }
     private static IBlockState getCasingBState() {
         return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.INVAR_HEATPROOF);
     }
@@ -123,7 +130,7 @@ public class MetaTileEntityDissolutionTank extends RecipeMapMultiblockController
                 .aisle("     ", "MNNNM", "G###G", "G###G", "MMMMM")
                 .aisle("M   M", "MMSMM", "MGGGM", "MGGGM", " MMM ")
                 .where('S', selfPredicate())
-                .where('M', states(getCasingAState()).or(autoAbilities()))
+                .where('M', states(getCasingState()).or(autoAbilities()))
                 .where('G', TiredTraceabilityPredicate.CP_LGLASS.get())
                 .where('N', states(getCasingBState()))
                 .where('#', air())
@@ -139,12 +146,6 @@ public class MetaTileEntityDissolutionTank extends RecipeMapMultiblockController
         this.glass_tier = GTQTUtil.getOrDefault(() -> glass_tier instanceof WrappedIntTired,
                 () -> ((WrappedIntTired) glass_tier).getIntTier(),
                 0);
-    }
-
-    @SideOnly(Side.CLIENT)
-    @Override
-    public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
-        return Textures.CLEAN_STAINLESS_STEEL_CASING;
     }
 
     @SideOnly(Side.CLIENT)

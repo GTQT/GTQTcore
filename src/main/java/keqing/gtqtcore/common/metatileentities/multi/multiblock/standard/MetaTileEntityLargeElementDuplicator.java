@@ -142,7 +142,7 @@ public class MetaTileEntityLargeElementDuplicator extends RecipeMapMultiblockCon
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("gregtech.machine.perfect_oc"));
         tooltip.add(I18n.format("gtqtcore.machine.parallel.pow.machineTier", 2, 256));
         tooltip.add(I18n.format("gtqtcore.machine.progress_time","maxProgress *0.8"));
-        tooltip.add(I18n.format("gtqtcore.multiblock.kq.acc.tooltip！"));
+        tooltip.add(I18n.format("gtqtcore.multiblock.kq.acc.tooltip"));
         tooltip.add(I18n.format("本机器允许使用激光能源仓代替能源仓！"));
     }
     @Override

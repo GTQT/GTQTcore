@@ -19,6 +19,7 @@ import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
+import gregtech.client.utils.TooltipHelper;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
@@ -26,26 +27,26 @@ import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
+import keqing.gtqtcore.common.block.GTQTMetaBlocks;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 import java.util.List;
 
 import static gregtech.api.GTValues.VA;
+import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing3.CasingType.tumbaga;
 
 
 public class MetaTileEntityBioCentrifuge extends MultiMapMultiblockController {
-    public int ParallelLim;
-    public int ParallelNumA;
-    public int modern;
-    public int P;
     int tier;
-    int ParallelNum = 1;
     private int glass_tier;
     private int clean_tier;
     private int tubeTier;
@@ -62,72 +63,6 @@ public class MetaTileEntityBioCentrifuge extends MultiMapMultiblockController {
     @Override
     public boolean canBeDistinct() {
         return true;
-    }
-
-    @Override
-    public void update() {
-        super.update();
-        if (modern == 0) {
-            ParallelNum = ParallelNumA;
-        }
-        if (modern == 1) {
-            P = (int) ((this.energyContainer.getEnergyStored() + energyContainer.getInputPerSec()) / (getMinVa() == 0 ? 1 : getMinVa()));
-            ParallelNum = Math.min(P, ParallelLim);
-        }
-    }
-
-    public int getMinVa() {
-        if ((Math.min(this.energyContainer.getEnergyCapacity() / 32, VA[tier]) * 20) == 0) return 1;
-        return (int) (Math.min(this.energyContainer.getEnergyCapacity() / 32, VA[tier]));
-
-    }
-
-    protected Widget getFlexButton(int x, int y, int width, int height) {
-        WidgetGroup group = new WidgetGroup(x, y, width, height);
-        group.addWidget(new ClickButtonWidget(0, 0, 9, 9, "", this::decrementThrottle)
-                .setButtonTexture(GuiTextures.BUTTON_THROTTLE_MINUS)
-                .setTooltipText("gregtech.multiblock.parr.throttle_decrement"));
-        group.addWidget(new ClickButtonWidget(9, 0, 9, 9, "", this::incrementThrottle)
-                .setButtonTexture(GuiTextures.BUTTON_THROTTLE_PLUS)
-                .setTooltipText("gregtech.multiblock.parr.throttle_increment"));
-
-        group.addWidget(new ClickButtonWidget(0, 9, 9, 9, "", this::decrementThrottle1)
-                .setButtonTexture(GuiTextures.BUTTON_THROTTLE_MINUS)
-                .setTooltipText("gregtech.multiblock.hand.throttle_decrement"));
-        group.addWidget(new ClickButtonWidget(9, 9, 9, 9, "", this::incrementThrottle1)
-                .setButtonTexture(GuiTextures.BUTTON_THROTTLE_PLUS)
-                .setTooltipText("gregtech.multiblock.hand.throttle_increment"));
-        return group;
-    }
-
-    private void incrementThrottle(Widget.ClickData clickData) {
-        if (ParallelLim < 16) this.ParallelNumA = MathHelper.clamp(ParallelNumA + 1, 1, ParallelLim);
-        this.ParallelNumA = MathHelper.clamp(ParallelNumA + ParallelLim / 16, 1, ParallelLim);
-    }
-
-    private void decrementThrottle(Widget.ClickData clickData) {
-        if (ParallelLim < 16) this.ParallelNumA = MathHelper.clamp(ParallelNumA - 1, 1, ParallelLim);
-        this.ParallelNumA = MathHelper.clamp(ParallelNumA - ParallelLim / 16, 1, ParallelLim);
-    }
-
-    public NBTTagCompound writeToNBT(NBTTagCompound data) {
-        data.setInteger("modern", modern);
-        data.setInteger("ParallelNumA", ParallelNumA);
-        return super.writeToNBT(data);
-    }
-
-    public void readFromNBT(NBTTagCompound data) {
-        super.readFromNBT(data);
-        modern = data.getInteger("modern");
-        ParallelNumA = data.getInteger("ParallelNumA");
-    }
-
-    private void incrementThrottle1(Widget.ClickData clickData) {
-        this.modern = MathHelper.clamp(modern + 1, 0, 1);
-    }
-
-    private void decrementThrottle1(Widget.ClickData clickData) {
-        this.modern = MathHelper.clamp(modern - 1, 0, 1);
     }
 
     @Override
@@ -153,11 +88,11 @@ public class MetaTileEntityBioCentrifuge extends MultiMapMultiblockController {
                 .aisle("XXXXX", " P P ", " PSP ", " P P ", "XXXXX")
                 .where('S', selfPredicate())
 
-                .where('P', states(MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.TITANIUM_STABLE)))
+                .where('P', states(getCasingState()))
                 .where('F', TiredTraceabilityPredicate.CP_LGLASS.get())
                 .where('G', TiredTraceabilityPredicate.CP_ZJ_CASING.get())
                 .where('c', TiredTraceabilityPredicate.CP_TUBE.get())
-                .where('X', states(MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.TITANIUM_STABLE))
+                .where('X', states(getCasingState())
                         .or(abilities(MultiblockAbility.EXPORT_FLUIDS).setMinGlobalLimited(1).setMaxGlobalLimited(3))
                         .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setMinGlobalLimited(1).setMaxGlobalLimited(3))
                         .or(abilities(MultiblockAbility.EXPORT_ITEMS).setMinGlobalLimited(1).setMaxGlobalLimited(3))
@@ -167,7 +102,9 @@ public class MetaTileEntityBioCentrifuge extends MultiMapMultiblockController {
                         .or(abilities(MultiblockAbility.MUFFLER_HATCH).setExactLimit(1).setPreviewCount(1)))
                 .build();
     }
-
+    protected IBlockState getCasingState() {
+        return GTQTMetaBlocks.blockMultiblockCasing3.getState(tumbaga);
+    }
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
@@ -185,8 +122,6 @@ public class MetaTileEntityBioCentrifuge extends MultiMapMultiblockController {
                 () -> ((WrappedIntTired) clean_tier).getIntTier(),
                 0);
 
-        ParallelLim = (int) Math.pow(2, Math.max(this.tubeTier - 4, 1));
-        ParallelNum = ParallelLim;
         tier = Math.min(this.glass_tier, this.tubeTier * 2);
     }
 
@@ -194,16 +129,19 @@ public class MetaTileEntityBioCentrifuge extends MultiMapMultiblockController {
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
         textList.add(new TextComponentTranslation("Glass:%s Tube:%s Clean:%s", glass_tier, tubeTier, clean_tier));
-        if (modern == 0) textList.add(new TextComponentTranslation("gtqtcore.tire1", tier));
-        if (modern == 1) textList.add(new TextComponentTranslation("gtqtcore.tire2", tier));
-        textList.add(new TextComponentTranslation("gtqtcore.parr", ParallelNum, ParallelLim));
     }
 
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
-        return Textures.STABLE_TITANIUM_CASING;
+        return GTQTTextures.tumbaga;
     }
-
+    @Override
+    public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
+        super.addInformation(stack, player, tooltip, advanced);
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("爱的魔力转圈圈", new Object[0]));
+        tooltip.add(I18n.format("gtqtcore.machine.parallel.pow.machineTier", 2, 64));
+        tooltip.add(I18n.format("gtqtcore.machine.progress_time","maxProgress /coilLevel"));
+    }
     @Nonnull
     @Override
     protected ICubeRenderer getFrontOverlay() {
@@ -218,9 +156,8 @@ public class MetaTileEntityBioCentrifuge extends MultiMapMultiblockController {
 
         @Override
         public int getParallelLimit() {
-            return ParallelNum;
+            return Math.min((int) Math.pow(2, tier), 64);
         }
-
         @Override
         public void setMaxProgress(int maxProgress) {
             this.maxProgressTime = maxProgress / (10 - clean_tier) / 10;

@@ -10,6 +10,7 @@ import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.unification.material.Materials;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
+import gregtech.client.utils.TooltipHelper;
 import gregtech.common.blocks.BlockBoilerCasing;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
@@ -19,9 +20,12 @@ import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
 import keqing.gtqtcore.api.metaileentity.multiblock.RecipeMapHeatMultiblockController;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -35,7 +39,15 @@ public class MetaTileEntityPyrolysisTower extends RecipeMapHeatMultiblockControl
         super(metaTileEntityId, GTQTcoreRecipeMaps.PYROLYSIS_TOWER);
         this.recipeMapWorkable = new HeatRecipeLogic(this, GTQTcoreRecipeMaps.PYROLYSIS_TOWER);
     }
-
+    @Override
+    public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
+        super.addInformation(stack, player, tooltip, advanced);
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("谁家LV做石化", new Object[0]));
+        tooltip.add(I18n.format("gtqt.machine.distillation_kettle.1"));
+        tooltip.add(I18n.format("本设备为 热学 设备，在使用时需要 热源仓 而非 能源仓"));
+        tooltip.add(I18n.format("关于 热源仓 使用详情查询 热源仓 本身的Tooltips"));
+        tooltip.add(I18n.format("热学能源Heat如同电学能源EU一样拥有超频逻辑，更高的温度会带来更快的加工速度"));
+    }
     private static IBlockState getCasingState() {
         return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STEEL_SOLID);
     }

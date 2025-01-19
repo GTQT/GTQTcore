@@ -62,6 +62,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.POLYMERIZATION_RECIPES;
 import static keqing.gtqtcore.api.utils.GTQTUtil.getAccelerateByCWU;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.HUGE_CHEMICAL_REACTOR;
 
@@ -77,7 +78,8 @@ public class MetaTileEntityHugeChemicalReactor extends MultiMapMultiblockControl
     public MetaTileEntityHugeChemicalReactor(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{
                 RecipeMaps.CHEMICAL_RECIPES,
-                RecipeMaps.LARGE_CHEMICAL_RECIPES
+                RecipeMaps.LARGE_CHEMICAL_RECIPES,
+                POLYMERIZATION_RECIPES
         });
         this.recipeMapWorkable = new HugeChemicalReactorWorkable(this);
     }
@@ -109,6 +111,7 @@ public class MetaTileEntityHugeChemicalReactor extends MultiMapMultiblockControl
         tooltip.add(I18n.format("gtqtcore.multiblock.hb.tooltip.2"));
         tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.1"));
         tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.2", 256));
+        tooltip.add(I18n.format("gtqtcore.multiblock.kq.acc.tooltip"));
         tooltip.add(I18n.format("本机器允许使用激光能源仓代替能源仓！"));
     }
 

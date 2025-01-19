@@ -19,6 +19,7 @@ import static gregtech.api.unification.material.info.MaterialIconSet.*;
 import static gregtech.api.util.GTUtility.gregtechId;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.CadmiumSelenide;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
+import static keqing.gtqtcore.api.utils.GTQTUniversUtil.SECOND;
 
 public class GTQTMachineCasingMaterials {
     //  Range 24501-25000
@@ -634,6 +635,34 @@ public class GTQTMachineCasingMaterials {
                 .cableProperties(V[UIV], 256, 0, true)
                 .flags(GENERATE_PLATE, GENERATE_FOIL, GENERATE_FINE_WIRE)
                 .build();
+
+        // 10008 Tumbaga
+        Tumbaga = new Material.Builder(getMaterialsId(), gregtechId("tumbaga"))
+                .ingot()
+                .fluid()
+                .color(0xFFB20F)
+                .iconSet(SHINY)
+                .components(Gold, 7, Bronze, 3,Titanium, 2)
+                .flags(EXT_METAL, DECOMPOSITION_BY_CENTRIFUGING, GENERATE_FRAME, GENERATE_DOUBLE_PLATE, GENERATE_DENSE)
+                .blast(b -> b
+                        .temp(3600, GasTier.MID)
+                        .blastStats(VA[EV], 48 * SECOND))
+                .build();
+
+        // 10011 Grisium
+        Grisium = new Material.Builder(getMaterialsId(), gregtechId("grisium"))
+                .ingot()
+                .fluid()
+                .color(0x355D6A)
+                .iconSet(METALLIC)
+                .components(Titanium, 9, Carbon, 9, Potassium, 9, Lithium, 9, Sulfur, 9, Hydrogen, 5)
+                .flags(EXT_METAL, DECOMPOSITION_BY_CENTRIFUGING, GENERATE_FRAME, GENERATE_GEAR)
+                .blast(b -> b
+                        .temp(3550, BlastProperty.GasTier.MID)
+                        .blastStats(VA[EV], 26 * SECOND)
+                        .vacuumStats(VA[HV], 13 * SECOND))
+                .build();
+
 
     }
 

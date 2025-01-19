@@ -21,6 +21,9 @@ import gregtech.common.metatileentities.MetaTileEntities;
 import gregtechfoodoption.block.GTFOGlassCasing;
 import gregtechfoodoption.block.GTFOMetaBlocks;
 import gregtechfoodoption.recipe.GTFORecipeMaps;
+import keqing.gtqtcore.client.textures.GTQTTextures;
+import keqing.gtqtcore.common.block.GTQTMetaBlocks;
+import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing1;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
@@ -46,9 +49,6 @@ public class MetaTileEntityExtremeIndustrialGreenhouse extends RecipeMapMultiblo
         this.recipeMapWorkable = new ExtremeIndustrialGreenhouseRecipeLogic(this);
     }
 
-    private static IBlockState getCasingState() {
-        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STAINLESS_CLEAN);
-    }
 
     private static IBlockState getSecondCasingState() {
         return Blocks.DIRT.getDefaultState();
@@ -95,11 +95,13 @@ public class MetaTileEntityExtremeIndustrialGreenhouse extends RecipeMapMultiblo
                 .where('#', air())
                 .build();
     }
-
+    protected IBlockState getCasingState() {
+        return GTQTMetaBlocks.blockMultiblockCasing1.getState(BlockMultiblockCasing1.CasingType.Talonite);
+    }
     @SideOnly(Side.CLIENT)
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
-        return Textures.CLEAN_STAINLESS_STEEL_CASING;
+        return GTQTTextures.Talonite;
     }
 
     @Override

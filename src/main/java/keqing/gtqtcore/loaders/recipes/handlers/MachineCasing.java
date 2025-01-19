@@ -325,6 +325,14 @@ public class MachineCasing {
         createCasingRecipe("hastelloy_x_78", GTQTMetaBlocks.blockMultiblockCasing1, BlockMultiblockCasing1.CasingType.HastelloyX78, HastelloyX78);
         createCasingRecipe("hastelloy_k_243", GTQTMetaBlocks.blockMultiblockCasing1, BlockMultiblockCasing1.CasingType.HastelloyK243, HastelloyK243);
         createCasingRecipe("iridium_casing", GTQTMetaBlocks.blockMultiblockCasing4, IRIDIUM_CASING, Osmiridium);
+        createCasingRecipe("eglin_steel", GTQTMetaBlocks.blockMultiblockCasing3, eglin_steel, EglinSteel);
+        createCasingRecipe("grisium", GTQTMetaBlocks.blockMultiblockCasing3, grisium, Grisium);
+        createCasingRecipe("potin", GTQTMetaBlocks.blockMultiblockCasing3, potin, Potin);
+        createCasingRecipe("black_steel", GTQTMetaBlocks.blockMultiblockCasing3, black_steel, BlackSteel);
+        createCasingRecipe("blue_steel", GTQTMetaBlocks.blockMultiblockCasing3, blue_steel, BlueSteel);
+        createCasingRecipe("red_steel", GTQTMetaBlocks.blockMultiblockCasing3, red_steel, RedSteel);
+        createCasingRecipe("tumbaga", GTQTMetaBlocks.blockMultiblockCasing3, tumbaga, Tumbaga);
+
     }
 
 
@@ -405,6 +413,17 @@ public class MachineCasing {
                 .output(dust, EglinSteel, 13)
                 .EUt(VA[MV])
                 .duration(120)
+                .buildAndRegister();
+
+        // Tumbaga
+        MIXER_RECIPES.recipeBuilder()
+                .circuitMeta(2)
+                .input(dust, Gold, 7)
+                .input(dust, Bronze, 3)
+                .input(dust, Titanium, 2)
+                .output(dust, Tumbaga, 12)
+                .EUt(VA[HV])
+                .duration(280)
                 .buildAndRegister();
 
         //  Silicon Carbide

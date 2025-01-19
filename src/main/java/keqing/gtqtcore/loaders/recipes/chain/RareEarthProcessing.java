@@ -82,7 +82,7 @@ public class RareEarthProcessing {
                 .output(dust, Sodium, 4)
                 .fluidOutputs(LowPurityRareEarthChloridesSolution.getFluid(1000))
                 .fluidOutputs(CarbonDioxide.getFluid(2000))
-                .temperature(980)
+                .temperature(4500)
                 .EUt(VA[EV])
                 .duration(1200)
                 .buildAndRegister();
@@ -95,7 +95,7 @@ public class RareEarthProcessing {
                 .output(dust, Barium, 2)
                 .fluidOutputs(LowPurityRareEarthChloridesSolution.getFluid(2000))
                 .fluidOutputs(CarbonDioxide.getFluid(1000))
-                .temperature(980)
+                .temperature(4500)
                 .EUt(VA[EV])
                 .duration(600)
                 .buildAndRegister();

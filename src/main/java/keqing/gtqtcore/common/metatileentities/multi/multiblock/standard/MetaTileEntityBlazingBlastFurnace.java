@@ -65,6 +65,7 @@ public class MetaTileEntityBlazingBlastFurnace extends MultiMapMultiblockControl
     public MetaTileEntityBlazingBlastFurnace(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{
                 RecipeMaps.BLAST_RECIPES,
+                GTQTcoreRecipeMaps.ROASTER_RECIPES,
                 GTQTcoreRecipeMaps.BURNER_REACTOR_RECIPES
         });
         this.recipeMapWorkable = new BlazingBlastFurnaceWorkable(this);

@@ -23,6 +23,7 @@ import gregtech.api.util.GTTransferUtils;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.TextComponentUtil;
 import gregtech.client.renderer.ICubeRenderer;
+import gregtech.client.renderer.texture.Textures;
 import keqing.gtqtcore.GTQTCoreConfig;
 import keqing.gtqtcore.client.objmodels.ObjModels;
 import keqing.gtqtcore.client.textures.GTQTTextures;
@@ -641,7 +642,7 @@ public class MetaTileEntitySBPRC extends MetaTileEntityBaseWithControl implement
     @Nonnull
     @Override
     protected ICubeRenderer getFrontOverlay() {
-        return GTQTTextures.CVD_UNIT_OVERLAY;
+        return Textures.HPCA_OVERLAY;
     }
 
     @Override

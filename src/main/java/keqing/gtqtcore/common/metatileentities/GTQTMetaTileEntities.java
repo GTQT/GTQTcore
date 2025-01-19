@@ -77,6 +77,7 @@ import static keqing.gtqtcore.api.utils.GTQTUtil.genericGeneratorTankSizeFunctio
 import static keqing.gtqtcore.api.utils.MultiblockRegistryHelper.registerSimpleSteamMetaTileEntity;
 import static keqing.gtqtcore.client.textures.GTQTTextures.*;
 import static keqing.gtqtcore.common.block.blocks.BlockCompressedFusionReactor.CasingType.*;
+import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing1.CasingType.HastelloyX78;
 
 public class GTQTMetaTileEntities {
 
@@ -158,7 +159,6 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityRocket ROCKET;
     public static MetaTileEntityIndustryWaterPump INDUSTRY_WATER_PUMP;
     public static MetaTileEntityResearchSystemControlCenter KQCC;
-    public static MetaTileEntityPressurizedReactionTank PRESSURIZED_REACTION_TANK;
     public static MetaTileEntityPrimitiveReactor PRIMITIVE_REACTOR;
     public static MetaTileEntityVacuumFreezer VACUUM_FREEZER;
     public static MetaTileEntityPyrolysisTower PYROLYSIS_TOWER;
@@ -290,7 +290,6 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityBioCentrifuge BIO_CENTRIFUGE;
     public static MetaTileEntityEnzymesReaction ENZYMES_REACTOR;
     public static MetaTileEntityNeutronActivator NEUTRON_ACTIVATOR;
-    public static MetaTileEntityReactionFurnace REACTION_FURNACE;
     public static MetaTileEntityChemicalPlant CHEMICAL_PLANT;
     public static MetaTileEntityLaserEngraving LASER_ENGRAVING;
     public static MetaTileEntityWaterPowerStation[] WATER_POWER_STATION = new MetaTileEntityWaterPowerStation[3];
@@ -356,7 +355,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityCVDUnit LARGE_CVD_UNIT;
     public static MetaTileEntityPhotolithographyFactory PHOTOLITHOGRAPHY_FACTORY;
     public static MetaTileEntityMicrowaveEnergyReceiverControl MICROWAVE_ENERGY_RECEIVER_CONTROL;
-    public static MetaTileEntityEXCVD LARGE_EX_CVD;
+    public static MetaTileEntityExtremesCVD LARGE_EX_CVD;
     public static MetaTileEntitySuprachronalNeutroniumForge SUPRACHRONAL_NEUTRONIUM_FORGE;
     public static MetaTileEntityBurnerReactor LARGE_BURNER_REACTOR;
     public static MetaTileEntityCryoReactor LARGE_CRYOGENIC_REACTOR;
@@ -497,7 +496,7 @@ public class GTQTMetaTileEntities {
 
         KINETIC_ENERGY_BATTERY = registerMetaTileEntity(3074, new MetaTileEntityKineticEnergyBattery(gtqtcoreId("kinetic_energy_battery")));
         //GRAY_ELECTRIC_POWER_BANK = registerMetaTileEntity(3071, new MetaTileEntityGrayElectricPowerBank(gtqtcoreId("gray_electric_power_bank")));
-        LARGE_FUEL_TURBINE = registerMetaTileEntity(3075, new MetaTileEntityLargeTurbine(gtqtcoreId("large_turbine.fuel_cell"), GTQTcoreRecipeMaps.FUEL_CELL, 5, MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.TUNGSTENSTEEL_TURBINE_CASING), MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.TUNGSTENSTEEL_GEARBOX), Textures.ROBUST_TUNGSTENSTEEL_CASING, true, Textures.LARGE_GAS_TURBINE_OVERLAY));
+        LARGE_FUEL_TURBINE = registerMetaTileEntity(3075, new MetaTileEntityLargeTurbine(gtqtcoreId("large_turbine.fuel_cell"), GTQTcoreRecipeMaps.FUEL_CELL, 5, GTQTMetaBlocks.blockMultiblockCasing1.getState(HastelloyX78), MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.TUNGSTENSTEEL_GEARBOX), GTQTTextures.HastelloyX78, true, Textures.LARGE_GAS_TURBINE_OVERLAY));
 
         LARGE_BIOMASS_GENERATOR = registerMetaTileEntity(3076, new MetaTileEntityLargeBiomassGenerator(gtqtcoreId("large_biomass_generator")));
 
@@ -579,10 +578,10 @@ public class GTQTMetaTileEntities {
         HEAT_CHANGER = registerMetaTileEntity(3178, new MetaTileEntityHeatExchanger(gtqtcoreId("heat_exchanger")));
         LASER_ENGRAVING = registerMetaTileEntity(3179, new MetaTileEntityLaserEngraving(gtqtcoreId("laser_engraving")));
         STEPPER = registerMetaTileEntity(3180, new MetaTileEntityStepper(gtqtcoreId("stepper")));
-        PRESSURIZED_REACTION_TANK = registerMetaTileEntity(3181, new MetaTileEntityPressurizedReactionTank(gtqtcoreId("pressurized_reaction_tank")));
+        //
         CLARIFIER = registerMetaTileEntity(3182, new MetaTileEntityClarifier(gtqtcoreId("clarifier")));
         ELE_OIL = registerMetaTileEntity(3183, new MetaTileEntityElectronOil(gtqtcoreId("ele_oil")));
-        REACTION_FURNACE = registerMetaTileEntity(3184, new MetaTileEntityReactionFurnace(gtqtcoreId("reactor_furnace")));
+        //
         THREE_DIM_PRINT = registerMetaTileEntity(3186, new MetaTileEntityThreeDimPrinter(gtqtcoreId("three_dim_print")));
         NEUTRON_ACTIVATOR = registerMetaTileEntity(3187, new MetaTileEntityNeutronActivator(gtqtcoreId("neutron_activator")));
         MSF = registerMetaTileEntity(3188, new MetaTileEntityMSF(gtqtcoreId("msf")));
@@ -711,10 +710,9 @@ public class GTQTMetaTileEntities {
         LARGE_CRYOGENIC_REACTOR = registerMetaTileEntity(3509, new MetaTileEntityCryoReactor(gtqtcoreId("cryogenic_reactor")));
         LARGE_ION_IMPLANTATOR = registerMetaTileEntity(3510, new MetaTileEntityIonImplanter(gtqtcoreId("ion_implantator")));
         LARGE_CZ_PULLER = registerMetaTileEntity(3511, new MetaTileEntityCZPuller(gtqtcoreId("cz_puller")));
-        LARGE_EX_CVD = registerMetaTileEntity(3512, new MetaTileEntityEXCVD(gtqtcoreId("ex_cvd")));
+        LARGE_EX_CVD = registerMetaTileEntity(3512, new MetaTileEntityExtremesCVD(gtqtcoreId("ex_cvd")));
 
         //Appeng 4000
-
 
         // ID 14001-14010: Drums
         RHODIUM_PLATED_PALLADIUM_DRUM = MetaTileEntities.registerMetaTileEntity(14001, new MetaTileEntityDrum(gtqtcoreId("drum.rhodium_plated_palladium"), Materials.RhodiumPlatedPalladium, 2_048_000));

@@ -1,9 +1,10 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.gcys;
 
+import gregicality.multiblocks.api.capability.impl.GCYMMultiblockRecipeLogic;
+import gregicality.multiblocks.api.metatileentity.GCYMRecipeMapMultiblockController;
 import gregtech.api.GTValues;
 import gregtech.api.block.IHeatingCoilBlockStats;
 import gregtech.api.capability.IHeatingCoil;
-import gregtech.api.capability.impl.HeatingCoilRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
@@ -14,6 +15,8 @@ import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
+import gregtech.api.recipes.logic.OverclockingLogic;
+import gregtech.api.recipes.recipeproperties.IRecipePropertyStorage;
 import gregtech.api.recipes.recipeproperties.TemperatureProperty;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.util.GTUtility;
@@ -21,12 +24,14 @@ import gregtech.api.util.TextComponentUtil;
 import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
-import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.BlockTurbineCasing;
 import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.blocks.MetaBlocks;
+import groovyjarjarantlr4.v4.runtime.misc.NotNull;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
+import keqing.gtqtcore.common.block.GTQTMetaBlocks;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -40,13 +45,15 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class MetaTileEntityBurnerReactor extends RecipeMapMultiblockController implements IHeatingCoil {
+import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing3.CasingType.eglin_steel;
+
+public class MetaTileEntityBurnerReactor extends GCYMRecipeMapMultiblockController implements IHeatingCoil {
 
     int blastFurnaceTemperature;
 
     public MetaTileEntityBurnerReactor(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.BURNER_REACTOR_RECIPES);
-        this.recipeMapWorkable = new HeatingCoilRecipeLogic(this);
+        this.recipeMapWorkable = new BurnerReactorRecipeLogic(this);
     }
 
     @Override
@@ -112,10 +119,10 @@ public class MetaTileEntityBurnerReactor extends RecipeMapMultiblockController i
                 .aisle("  X  ", " XCX ", "XCKCX", " XKX ", "  X  ", "  X  ")
                 .aisle("F   F", "F X F", "FXSXF", "F X F", "F   F", "     ")
                 .where('S', selfPredicate())
-                .where('X', states(MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.TITANIUM_STABLE)).setMinGlobalLimited(25)
+                .where('X', states(getCasingState1()).setMinGlobalLimited(25)
                         .or(autoAbilities(true, true, true, true, true, true, false)))
-                .where('F', states(MetaBlocks.FRAMES.get(Materials.Titanium).getBlock(Materials.Titanium)))
-                .where('C', states(MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.STAINLESS_STEEL_GEARBOX)))
+                .where('F', states(MetaBlocks.FRAMES.get(Materials.RedSteel).getBlock(Materials.RedSteel)))
+                .where('C', states(getCasingState2()))
                 .where('K', heatingCoils())
                 .where('M', abilities(MultiblockAbility.MUFFLER_HATCH))
                 .where(' ', any())
@@ -123,9 +130,17 @@ public class MetaTileEntityBurnerReactor extends RecipeMapMultiblockController i
                 .build();
     }
 
+    protected IBlockState getCasingState1() {
+        return GTQTMetaBlocks.blockMultiblockCasing3.getState(eglin_steel);
+    }
+
+    protected IBlockState getCasingState2() {
+        return MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.STAINLESS_STEEL_GEARBOX);
+    }
+
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
-        return Textures.STABLE_TITANIUM_CASING;
+        return GTQTTextures.eglin_steel;
     }
 
     @Nonnull
@@ -160,5 +175,22 @@ public class MetaTileEntityBurnerReactor extends RecipeMapMultiblockController i
     @Override
     public int getCurrentTemperature() {
         return this.blastFurnaceTemperature;
+    }
+
+    public static class BurnerReactorRecipeLogic extends GCYMMultiblockRecipeLogic {
+
+        public BurnerReactorRecipeLogic(RecipeMapMultiblockController tileEntity) {
+            super(tileEntity);
+        }
+
+        protected void modifyOverclockPre(@NotNull int[] values, @NotNull IRecipePropertyStorage storage) {
+            super.modifyOverclockPre(values, storage);
+            values[0] = OverclockingLogic.applyCoilEUtDiscount(values[0], ((IHeatingCoil) this.metaTileEntity).getCurrentTemperature(), storage.getRecipePropertyValue(TemperatureProperty.getInstance(), 0));
+        }
+
+        protected @NotNull int[] runOverclockingLogic(@NotNull IRecipePropertyStorage propertyStorage, int recipeEUt, long maxVoltage, int duration, int amountOC) {
+            return OverclockingLogic.heatingCoilOverclockingLogic(Math.abs(recipeEUt), maxVoltage, duration, amountOC, ((IHeatingCoil) this.metaTileEntity).getCurrentTemperature(), propertyStorage.getRecipePropertyValue(TemperatureProperty.getInstance(), 0));
+        }
+
     }
 }

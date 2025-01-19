@@ -33,7 +33,6 @@ public class MetaTileEntityIndustrialFurnace extends GTQTMultiblockCore implemen
     public MetaTileEntityIndustrialFurnace(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{
                 RecipeMaps.FURNACE_RECIPES,
-                GTQTcoreRecipeMaps.REACTION_FURNACE_RECIPES,
                 GTQTcoreRecipeMaps.BURNER_REACTOR_RECIPES,
                 GTQTcoreRecipeMaps.DRYER_RECIPES,
                 RecipeMaps.ALLOY_SMELTER_RECIPES

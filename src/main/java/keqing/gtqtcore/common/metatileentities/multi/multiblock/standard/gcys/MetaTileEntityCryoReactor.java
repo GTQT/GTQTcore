@@ -1,5 +1,6 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.gcys;
 
+import gregicality.multiblocks.api.metatileentity.GCYMRecipeMapMultiblockController;
 import gregicality.multiblocks.common.block.GCYMMetaBlocks;
 import gregicality.multiblocks.common.block.blocks.BlockUniqueCasing;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
@@ -9,6 +10,7 @@ import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
+import gregtech.api.recipes.RecipeMap;
 import gregtech.api.unification.material.Materials;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
@@ -17,6 +19,8 @@ import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
+import keqing.gtqtcore.common.block.GTQTMetaBlocks;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -26,11 +30,13 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class MetaTileEntityCryoReactor extends RecipeMapMultiblockController {
+import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing3.CasingType.black_steel;
+import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing3.CasingType.blue_steel;
+
+public class MetaTileEntityCryoReactor extends GCYMRecipeMapMultiblockController {
 
     public MetaTileEntityCryoReactor(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, GTQTcoreRecipeMaps.CRYOGENIC_REACTOR_RECIPES);
-        this.recipeMapWorkable = new MultiblockRecipeLogic(this, true);
+        super(metaTileEntityId, new RecipeMap[]{GTQTcoreRecipeMaps.CRYOGENIC_REACTOR_RECIPES, GTQTcoreRecipeMaps.LOW_TEMP_ACTIVATOR_RECIPES});
     }
 
     @Override
@@ -49,9 +55,9 @@ public class MetaTileEntityCryoReactor extends RecipeMapMultiblockController {
                 .aisle("  X   ", " XCX  ", "XCCCX ", " XCX  ", "  X   ")
                 .aisle("F   F ", "F X F ", "FXSXF ", "F X F ", "F   F ")
                 .where('S', selfPredicate())
-                .where('X', states(MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.ALUMINIUM_FROSTPROOF)).setMinGlobalLimited(20)
+                .where('X', states(getCasingState1()).setMinGlobalLimited(20)
                         .or(autoAbilities()))
-                .where('F', states(MetaBlocks.FRAMES.get(Materials.Aluminium).getBlock(Materials.Aluminium)))
+                .where('F', states(MetaBlocks.FRAMES.get(Materials.BlackSteel).getBlock(Materials.BlackSteel)))
                 .where('R', states(MetaBlocks.FRAMES.get(Materials.Steel).getBlock(Materials.Steel)))
                 .where('C', states(MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.PTFE_INERT_CASING)))
                 .where('K', states(MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.POLYTETRAFLUOROETHYLENE_PIPE)))
@@ -62,21 +68,18 @@ public class MetaTileEntityCryoReactor extends RecipeMapMultiblockController {
                 .where('#', air())
                 .build();
     }
+    protected IBlockState getCasingState1() {
+        return GTQTMetaBlocks.blockMultiblockCasing3.getState(black_steel);
+    }
 
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
-        return Textures.FROST_PROOF_CASING;
+        return GTQTTextures.black_steel;
     }
 
     @Nonnull
     @Override
     protected ICubeRenderer getFrontOverlay() {
         return GTQTTextures.CRYOGENIC_REACTOR_OVERLAY;
-    }
-
-    @Override
-    public void addInformation(@Nonnull ItemStack stack, @Nullable World player, @Nonnull List<String> tooltip, boolean advanced) {
-        super.addInformation(stack, player, tooltip, advanced);
-        tooltip.add(I18n.format("gregtech.machine.perfect_oc"));
     }
 }

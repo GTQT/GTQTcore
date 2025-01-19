@@ -29,6 +29,7 @@ public class ChipHelper {
     }
 
     private static void wafer() {
+        cutter(16,AE_SILICON,AE_WAFER, 3,CleanroomType.CLEANROOM);
         cutter(96,EUROPIUM_BOULE,EUROPIUM_WAFER,5,CleanroomType.CLEANROOM);
         cutter(128,AMERICIUM_BOULE,AMERICIUM_WAFER,6,CleanroomType.CLEANROOM);
         cutter(160,DUBNIUM_BOULE,DUBNIUM_WAFER,7,CleanroomType.CLEANROOM);

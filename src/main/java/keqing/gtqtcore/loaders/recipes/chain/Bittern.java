@@ -31,25 +31,28 @@ public class Bittern {
                 .fluidOutputs(SaltWater.getFluid(100))
                 .duration(20).EUt(120).buildAndRegister();
 
-        REACTION_FURNACE_RECIPES.recipeBuilder()
+        BURNER_REACTOR_RECIPES.recipeBuilder()
                 .fluidInputs(Bitterncl.getFluid(4000))
                 .output(dust, LithiumChloride, 4)
                 .output(dust, CalciumChloride, 4)
                 .output(dust, MagnesiumChloride, 4)
                 .fluidOutputs(AmmoniumChloride.getFluid(576))
+                .blastFurnaceTemp(2700)
                 .duration(200).EUt(120).buildAndRegister();
 
-        REACTION_FURNACE_RECIPES.recipeBuilder()
+        BURNER_REACTOR_RECIPES.recipeBuilder()
                 .fluidInputs(Bitternso.getFluid(4000))
                 .output(dust, PotassiumSulfate, 4)
                 .fluidOutputs(SodiumBisulfate.getFluid(576))
                 .fluidOutputs(AmmoniumSulfate.getFluid(3000))
+                .blastFurnaceTemp(2700)
                 .duration(200).EUt(120).buildAndRegister();
 
-        REACTION_FURNACE_RECIPES.recipeBuilder()
+        BURNER_REACTOR_RECIPES.recipeBuilder()
                 .fluidInputs(Bitternco.getFluid(4000))
                 .output(dust, SodiumBicarbonate, 4)
                 .output(dust, BariumCarbonate, 4)
+                .blastFurnaceTemp(2700)
                 .duration(200).EUt(120).buildAndRegister();
 
         SFM.recipeBuilder()
@@ -86,12 +89,13 @@ public class Bittern {
                 .fluidOutputs(Water.getFluid(100))
                 .duration(20).EUt(120).buildAndRegister();
 
-        REACTION_FURNACE_RECIPES.recipeBuilder()
+        BURNER_REACTOR_RECIPES.recipeBuilder()
                 .fluidInputs(Ulexite.getFluid(144*11))
                 .output(dust, SodiumHydroxide, 1)
                 .output(dust, CalciumHydroxide, 1)
                 .output(dust, Borax, 1)
                 .fluidOutputs(Water.getFluid(6000))
+                .blastFurnaceTemp(2700)
                 .duration(200).EUt(120).buildAndRegister();
 
     }

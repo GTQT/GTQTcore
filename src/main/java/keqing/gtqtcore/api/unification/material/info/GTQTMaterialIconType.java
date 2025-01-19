@@ -19,6 +19,7 @@ public class GTQTMaterialIconType {
     public static final MaterialIconType ranliaowan = new MaterialIconType("ranliaowan");
     public static final MaterialIconType kujieranliaowan = new MaterialIconType("kujieranliaowan");
     public static final MaterialIconType soldering_iron_head = new MaterialIconType("soldering_iron_head");
+    public static final MaterialIconType wrap = new MaterialIconType("wrap");
 
     public static final MaterialIconType shell = new MaterialIconType("shell");
     public static final MaterialIconType valve = new MaterialIconType("valve");

@@ -4,15 +4,13 @@ import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.properties.BlastProperty;
 import gregtech.api.unification.material.properties.ToolProperty;
 import keqing.gtqtcore.api.unification.GTQTElements;
-import net.minecraftforge.fml.common.asm.transformers.deobf.FMLRemappingAdapter;
 
-import static gregtech.api.unification.Elements.Hf;
 import static gregtech.api.unification.material.Materials.NaquadahEnriched;
 import static gregtech.api.unification.material.info.MaterialIconSet.*;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static gregtech.api.unification.material.info.MaterialFlags.*;
 import static gregtech.api.util.GTUtility.gregtechId;
-import static keqing.gtqtcore.api.unification.material.info.EPMaterialFlags.GENERATE_PELLETS;
+import static keqing.gtqtcore.api.unification.material.info.GTQTMaterialFlags.GENERATE_PELLETS;
 
 public class GCYSElementMaterials {
 

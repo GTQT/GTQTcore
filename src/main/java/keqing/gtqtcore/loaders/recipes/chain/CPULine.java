@@ -5,6 +5,7 @@ import gregtech.api.unification.material.MarkerMaterials;
 import gregtech.api.unification.material.MarkerMaterials.Color;
 import gregtech.api.unification.material.Material;
 import gregtech.common.items.MetaItems;
+import keqing.gtqtcore.api.unification.TJMaterials;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 
@@ -20,6 +21,7 @@ import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.TJMaterials.*;
+import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.wrap;
 import static keqing.gtqtcore.api.utils.GTQTUtil.CWT;
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockGlass1.CasingType.*;
 import static keqing.gtqtcore.common.block.blocks.BlockStepperCasing.CasingType.*;
@@ -32,9 +34,138 @@ public class CPULine {
         LaserStepper();  //光刻
         Pre();          //基板
         Silicon();      //晶圆
+        AE();
+    }
+
+    private static void AE() {
+        BLAST_RECIPES.recipeBuilder()
+                .input(AE_WAFER)
+                .input(dust, Gold, 4)
+                .output(AE_WAFERA)
+                .duration(1600)
+                .blastFurnaceTemp(3600)
+                .EUt(120)
+                .buildAndRegister();
+
+        BLAST_RECIPES.recipeBuilder()
+                .input(AE_WAFER)
+                .input(dust, Fluix, 4)
+                .output(AE_WAFERB)
+                .duration(1600)
+                .blastFurnaceTemp(3600)
+                .EUt(120)
+                .buildAndRegister();
+
+        BLAST_RECIPES.recipeBuilder()
+                .input(AE_WAFER)
+                .input(dust, Diamond, 4)
+                .output(AE_WAFERC)
+                .duration(1600)
+                .blastFurnaceTemp(3600)
+                .EUt(120)
+                .buildAndRegister();
     }
 
     private static void ReticleChain() {
+        SPINNER_RECIPES.recipeBuilder()
+                .input(wrap, PolyvinylChloride,16)
+                .input(circuit, MarkerMaterials.Tier.MV)
+                .inputs(GTQTMetaBlocks.blockMultiblockGlass1.getItemVariant(SILICATE_GLASS))
+                .output(RETICLE_GRID_MKI)
+                .duration(1200)
+                .EUt(VA[MV])
+                .buildAndRegister();
+
+        SPINNER_RECIPES.recipeBuilder()
+                .input(wrap, ReinforcedEpoxyResin,16)
+                .input(circuit, MarkerMaterials.Tier.HV)
+                .inputs(GTQTMetaBlocks.blockMultiblockGlass1.getItemVariant(THY_SILICATE_GLASS))
+                .output(RETICLE_GRID_MKII)
+                .duration(1200)
+                .EUt(VA[HV])
+                .buildAndRegister();
+
+        SPINNER_RECIPES.recipeBuilder()
+                .input(wrap, Zylon,16)
+                .input(circuit, MarkerMaterials.Tier.IV)
+                .inputs(GTQTMetaBlocks.blockMultiblockGlass1.getItemVariant(W_BORON_SILICATE_GLASS))
+                .output(RETICLE_GRID_MKIII)
+                .duration(1200)
+                .EUt(VA[IV])
+                .buildAndRegister();
+
+        SPINNER_RECIPES.recipeBuilder()
+                .input(wrap, Polyetheretherketone,16)
+                .input(circuit, MarkerMaterials.Tier.LuV)
+                .inputs(GTQTMetaBlocks.blockMultiblockGlass1.getItemVariant(OSMIR_BORON_SILICATE_GLASS))
+                .output(RETICLE_GRID_MKIV)
+                .duration(1200)
+                .EUt(VA[LuV])
+                .buildAndRegister();
+
+        //////////////////////////////////////
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(GLASS_TUBE)
+                .input(ring,Rubber)
+                .input(screw,Gold,2)
+                .input(foil, Aluminium, 2)
+                .output(UV_LIGHT_EMPTY_MKI)
+                .duration(200)
+                .EUt(120)
+                .buildAndRegister();
+
+        FLUID_CANNER_RECIPES.recipeBuilder()
+                .input(UV_LIGHT_EMPTY_MKI)
+                .fluidInputs(Helium.getFluid(1000))
+                .output(UV_LIGHT_MKI)
+                .duration(200)
+                .EUt(120)
+                .buildAndRegister();
+
+        FLUID_CANNER_RECIPES.recipeBuilder()
+                .input(UV_LIGHT_EMPTY_MKI)
+                .fluidInputs(Neon.getFluid(1000))
+                .output(UV_LIGHT_MKII)
+                .duration(200)
+                .EUt(120)
+                .buildAndRegister();
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(GLASS_TUBE)
+                .input(ring,Zylon)
+                .input(screw,NanometerBariumTitanate,2)
+                .input(foil, TungstenSteel, 2)
+                .output(UV_LIGHT_EMPTY_MKII)
+                .duration(200)
+                .EUt(VA[EV])
+                .buildAndRegister();
+
+        FLUID_CANNER_RECIPES.recipeBuilder()
+                .input(UV_LIGHT_EMPTY_MKII)
+                .fluidInputs(Argon.getFluid(1000))
+                .output(UV_LIGHT_MKIII)
+                .duration(200)
+                .EUt(120)
+                .buildAndRegister();
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(GLASS_TUBE)
+                .input(ring, Kevlar)
+                .input(screw,Naquadah,2)
+                .input(foil, RhodiumPlatedPalladium, 2)
+                .output(UV_LIGHT_EMPTY_MKIII)
+                .duration(200)
+                .EUt(VA[EV])
+                .buildAndRegister();
+
+        FLUID_CANNER_RECIPES.recipeBuilder()
+                .input(UV_LIGHT_EMPTY_MKIII)
+                .fluidInputs(Krypton.getFluid(1000))
+                .output(UV_LIGHT_MKIV)
+                .duration(200)
+                .EUt(120)
+                .buildAndRegister();
+        //////////////////////////////////////
         BLAST_RECIPES.recipeBuilder()
                 .notConsumable(SHAPE_MOLD_BALL)
                 .inputs(GTQTMetaBlocks.blockMultiblockGlass1.getItemVariant(SILICATE_GLASS))
@@ -50,7 +181,7 @@ public class CPULine {
                 .input(RETICLE_GRID_MKII)
                 .output(RETICLE_GLASS_MKII)
                 .duration(1000)
-                .EUt(120)
+                .EUt(480)
                 .buildAndRegister();
 
         BLAST_RECIPES.recipeBuilder()
@@ -59,7 +190,7 @@ public class CPULine {
                 .input(RETICLE_GRID_MKIII)
                 .output(RETICLE_GLASS_MKIII)
                 .duration(1000)
-                .EUt(120)
+                .EUt(1920)
                 .buildAndRegister();
 
         BLAST_RECIPES.recipeBuilder()
@@ -68,7 +199,7 @@ public class CPULine {
                 .input(RETICLE_GRID_MKIV)
                 .output(RETICLE_GLASS_MKIV)
                 .duration(1000)
-                .EUt(120)
+                .EUt(7680)
                 .buildAndRegister();
 
         //////////////////////////////////
@@ -138,11 +269,12 @@ public class CPULine {
                 .buildAndRegister();
 
         //////////////////////////////////
-        WaferBath(RETICLE_BASE_MKI,RETICLE_GLASS_MKI);
-        WaferBath(RETICLE_BASE_MKII,RETICLE_GLASS_MKII);
-        WaferBath(RETICLE_BASE_MKIII,RETICLE_GLASS_MKIII);
-        WaferBath(RETICLE_BASE_MKIV,RETICLE_GLASS_MKIV);
+        WaferBath(RETICLE_BASE_MKI, RETICLE_GLASS_MKI);
+        WaferBath(RETICLE_BASE_MKII, RETICLE_GLASS_MKII);
+        WaferBath(RETICLE_BASE_MKIII, RETICLE_GLASS_MKIII);
+        WaferBath(RETICLE_BASE_MKIV, RETICLE_GLASS_MKIV);
     }
+
     public static void WaferBath(MetaItem<?>.MetaValueItem item1, MetaItem<?>.MetaValueItem item2) {
         CHEMICAL_BATH_RECIPES.recipeBuilder()
                 .input(item1)
@@ -154,6 +286,7 @@ public class CPULine {
                 .EUt(120)
                 .buildAndRegister();
     }
+
     private static void Assembler() {
         //
         ASSEMBLER_RECIPES.recipeBuilder()
@@ -335,6 +468,7 @@ public class CPULine {
                 .outputs(GTQTMetaBlocks.blockStepperCasing.getItemVariant(CLEAN_MKV))
                 .duration(200).EUt(7680).buildAndRegister();
     }
+
     public static MetaItem<?>.MetaValueItem getReticleByTier(int tier) {
         if (tier == 1) return RETICLE_BASE_MKI;
         if (tier == 2) return RETICLE_BASE_MKII;
@@ -386,7 +520,32 @@ public class CPULine {
                     .Laser(tier)
                     .input(getWaferByTier(i))
                     .input(item1)
-                    .output(item2, (int)Math.pow(2, i - tier))
+                    .output(item2, (int) Math.pow(2, i - tier))
+                    .output(getReticleByTier(tier))
+                    .CWUt(CWT[i])
+                    .buildAndRegister();
+        }
+    }
+
+    public static void StepperAE(int tier, int EU, MetaItem<?>.MetaValueItem item1, MetaItem<?>.MetaValueItem item2, MetaItem<?>.MetaValueItem item3) {
+        //透镜+晶圆+光掩模基板 锡附着=掩模
+
+        LASER_ENGRAVING.recipeBuilder().duration(9000).EUt(VA[EU])
+                .input(item3)
+                .input(getReticleBasicByTier(tier))
+                .output(item1)
+                .CWUt(CWT[tier])
+                .duration(250 * tier * EU)
+                .buildAndRegister();
+
+
+        for (int i = tier; i <= 7; i++) {
+            //掩模-》产品+光掩模基板 无锡附着+液态锡
+            STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[EU])
+                    .Laser(tier)
+                    .input(getWaferByTier(i))
+                    .input(item1)
+                    .output(item2, (int) Math.pow(2, i - tier))
                     .output(getReticleByTier(tier))
                     .CWUt(CWT[i])
                     .buildAndRegister();
@@ -394,6 +553,10 @@ public class CPULine {
     }
 
     private static void LaserStepper() {
+        StepperAE(1, 2, AE_RETICLEA, AE_A, AE_WAFERA);
+        StepperAE(1, 2, AE_RETICLEB, AE_B, AE_WAFERB);
+        StepperAE(1, 2, AE_RETICLEC, AE_C, AE_WAFERC);
+
         Stepper(1, 2, RETICLE_INTEGRATED_LOGIC_CIRCUIT, INTEGRATED_LOGIC_CIRCUIT_WAFER, Color.Blue);
         Stepper(1, 2, RETICLE_RANDOM_ACCESS_MEMORY, RANDOM_ACCESS_MEMORY_WAFER, Color.Red);
         Stepper(1, 2, RETICLE_CENTRAL_PROCESSING_UNIT, CENTRAL_PROCESSING_UNIT_WAFER, Color.LightGray);
@@ -624,7 +787,7 @@ public class CPULine {
         FLUID_SOLIDFICATION_RECIPES.recipeBuilder()
                 .duration(100)
                 .EUt(1920)
-                .input(plate,TreatedWood, 4)
+                .input(plate, TreatedWood, 4)
                 .fluidInputs(Rubber.getFluid(288))
                 .output(LAMINATION_WD, 4)
                 .buildAndRegister();
@@ -663,7 +826,7 @@ public class CPULine {
         FLUID_SOLIDFICATION_RECIPES.recipeBuilder()
                 .duration(100)
                 .EUt(1920)
-                .input(plate,Fiberglass, 4)
+                .input(plate, Fiberglass, 4)
                 .fluidInputs(Glue.getFluid(288))
                 .output(LAMINATION_FG, 4)
                 .buildAndRegister();
@@ -675,7 +838,7 @@ public class CPULine {
                 .input(foil, Gold, 8)
                 .fluidInputs(Polystyrene.getFluid(576))
                 .fluidInputs(Polyethylene.getFluid(576))
-                .output(IMPREGNATED_PLASTIC_SUBSTRATE,2)
+                .output(IMPREGNATED_PLASTIC_SUBSTRATE, 2)
                 .buildAndRegister();
 
         FLUID_SOLIDFICATION_RECIPES.recipeBuilder()
@@ -710,7 +873,7 @@ public class CPULine {
                 .input(foil, Platinum, 8)
                 .fluidInputs(Bps.getFluid(576))
                 .fluidInputs(StyreneButadieneRubber.getFluid(576))
-                .output(IMPREGNATED_EPOXY,2)
+                .output(IMPREGNATED_EPOXY, 2)
                 .buildAndRegister();
 
         //这里是EV阶段的纤维强化电路板
@@ -745,7 +908,7 @@ public class CPULine {
                 .input(foil, NanometerBariumTitanate, 8)
                 .fluidInputs(StyreneButadieneRubber.getFluid(576))
                 .fluidInputs(Zylon.getFluid(576))
-                .output(IMPREGNATED_FIBER,2)
+                .output(IMPREGNATED_FIBER, 2)
                 .buildAndRegister();
 
         //这里是IV的纤维强化
@@ -774,7 +937,7 @@ public class CPULine {
                 .input(wireFine, Platinum)
                 .fluidInputs(GlassGlaze.getFluid(500))
                 .fluidInputs(UltraGlue.getFluid(500))
-                .output(LAMINATION_IR,4)
+                .output(LAMINATION_IR, 4)
                 .buildAndRegister();
 
         PRESSURE_LAMINATOR_RECIPES.recipeBuilder()
@@ -785,7 +948,7 @@ public class CPULine {
                 .input(foil, RhodiumPlatedPalladium, 8)
                 .fluidInputs(Polyetheretherketone.getFluid(576))
                 .fluidInputs(Polybenzimidazole.getFluid(576))
-                .output(IMPREGNATED_MULTILAYER_FIBER,2)
+                .output(IMPREGNATED_MULTILAYER_FIBER, 2)
                 .buildAndRegister();
     }
 }

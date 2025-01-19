@@ -39,7 +39,7 @@ public class GCYMMultiblockRecipesOverwrite {
         /////////////////////////Common Machine
         ModHandler.removeRecipeByName("gcym:large_circuit_assembler");
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(CIRCUIT_GOOD_III, 8)
+                .input(CIRCUIT_GOOD_II, 8)
                 .input(WIREMILL[IV], 16)
                 .input(ROBOT_ARM_LuV, 16)
                 .input(EMITTER_LuV, 16)
@@ -60,12 +60,12 @@ public class GCYMMultiblockRecipesOverwrite {
                         .researchStack(DISK_22.getStackForm())
                         .EUt(VA[LuV])
                         .CWUt(CWT[LuV]))
-                .EUt(VA[UV])
+                .EUt(VA[IV])
                 .buildAndRegister();
 
         ModHandler.removeRecipeByName("gcym:electric_implosion_compressor");
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(CIRCUIT_GOOD_II, 8)
+                .input(CIRCUIT_GOOD_I, 8)
                 .input(IMPLOSION_COMPRESSOR, 4)
                 .input(ELECTRIC_PISTON_IV, 8)
                 .input(FIELD_GENERATOR_IV, 8)

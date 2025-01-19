@@ -148,7 +148,7 @@ public class KaptonChain {
                 .fluidOutputs(Hydrogen.getFluid(1000))
                 .EUt(VA[EV])
                 .duration(120)
-                .temperature(1488)
+                .temperature(4500)
                 .buildAndRegister();
 
         //  Rock Salt + Methanol -> Potassium Formate + Chlorine
@@ -159,7 +159,7 @@ public class KaptonChain {
                 .fluidOutputs(DilutedHydrochloricAcid.getFluid(1000))
                 .EUt(VA[HV])
                 .duration(240)
-                .temperature(980)
+                .temperature(4500)
                 .buildAndRegister();
     }
 }

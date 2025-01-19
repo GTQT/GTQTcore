@@ -223,7 +223,7 @@ public class MetaTileEntityTideUnit extends MetaTileEntityBaseWithControl {
     @Nonnull
     @Override
     protected ICubeRenderer getFrontOverlay() {
-        return GTQTTextures.CVD_UNIT_OVERLAY;
+        return GTQTTextures.LARGE_ROCKET_ENGINE_OVERLAY;
     }
 
     @Override

@@ -18,11 +18,12 @@ import static keqing.gtqtcore.api.unification.TJMaterials.ZirconiumTetrachloride
 public class ZirconChain {
     public static void init() {
         //锆石-》烧结  熟制精炼锆石粉
-        REACTION_FURNACE_RECIPES.recipeBuilder()
+        BURNER_REACTOR_RECIPES.recipeBuilder()
                 .input(dust, Zircon, 16)
                 .input(dust, Carbon, 4)
                 .output(dust, Zirconf, 16)
                 .fluidOutputs(CarbonDioxide.getFluid(4000))
+                .blastFurnaceTemp(4500)
                 .duration(400).EUt(VA[EV]).buildAndRegister();
         //-》酸浸     酸性锆石溶液
         CHEMICAL_BATH_RECIPES.recipeBuilder()

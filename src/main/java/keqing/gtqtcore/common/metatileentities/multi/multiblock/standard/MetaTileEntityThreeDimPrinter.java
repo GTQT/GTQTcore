@@ -17,6 +17,7 @@ import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
+import gregtech.client.utils.TooltipHelper;
 import gregtech.core.sound.GTSoundEvents;
 import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
@@ -39,6 +40,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.List;
 
 import static gregtech.api.GTValues.V;
+import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.SPINNER_RECIPES;
 
 public class MetaTileEntityThreeDimPrinter extends MultiMapMultiblockController implements IOpticalComputationReceiver {
     private int glass_tier;
@@ -50,13 +52,16 @@ public class MetaTileEntityThreeDimPrinter extends MultiMapMultiblockController 
     public MetaTileEntityThreeDimPrinter(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{
                 GTQTcoreRecipeMaps.TD_PRINT_RECIPES,
-                GTQTcoreRecipeMaps.AUTO_CHISEL_RECIPES
+                GTQTcoreRecipeMaps.AUTO_CHISEL_RECIPES,
+                SPINNER_RECIPES
         });
         this.recipeMapWorkable = new LaserEngravingWorkableHandler(this);
     }
 
     @Override
     public void addInformation(ItemStack stack, World world, List<String> tooltip, boolean advanced) {
+        super.addInformation(stack, world, tooltip, advanced);
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("手搓只是弱者的借口"));
         tooltip.add(I18n.format("gtqt.machine.3d.1"));
         tooltip.add(I18n.format("gtqt.machine.3d.2"));
         tooltip.add(I18n.format("gtqtcore.machine.progress_time","maxProgress * (100.0 - glass_tier) / 100"));

@@ -17,6 +17,7 @@ public class OrePrefixAdditions {
         MetaItems.addOrePrefix(GTQTOrePrefix.singularity);
         MetaItems.addOrePrefix(GTQTOrePrefix.leaf);
         MetaItems.addOrePrefix(GTQTOrePrefix.fcrop);
+        MetaItems.addOrePrefix(GTQTOrePrefix.wrap);
 
         MetaItems.addOrePrefix(GTQTOrePrefix.pellets);
         MetaItems.addOrePrefix(GTQTOrePrefix.upellets);

@@ -6,6 +6,7 @@ import gregtech.api.unification.material.MarkerMaterials;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.material.properties.PropertyKey;
+import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.MaterialStack;
 import gregtech.common.blocks.BlockFusionCasing;
 import gregtech.common.blocks.BlockGlassCasing;
@@ -20,8 +21,7 @@ import java.util.List;
 
 import static gregicality.multiblocks.api.unification.GCYMMaterials.Zeron100;
 import static gregtech.api.GTValues.*;
-import static gregtech.api.recipes.RecipeMaps.ASSEMBLY_LINE_RECIPES;
-import static gregtech.api.recipes.RecipeMaps.SCANNER_RECIPES;
+import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.api.unification.ore.OrePrefix.cableGtQuadruple;
@@ -51,6 +51,15 @@ public class UUHelper {
     }
 
     private static void UUUtils() {
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(OrePrefix.plate, Zylon)
+                .input(dust, Silver)
+                .fluidInputs(UltraGlue.getFluid(144))
+                .output(GTQTMetaItems.CD_ROM)
+                .EUt(VA[IV])
+                .duration(200)
+                .buildAndRegister();
+
         UU_RECIPES.recipeBuilder()
                 .circuitMeta(1)
                 .fluidOutputs(Materials.UUMatter.getFluid(1))

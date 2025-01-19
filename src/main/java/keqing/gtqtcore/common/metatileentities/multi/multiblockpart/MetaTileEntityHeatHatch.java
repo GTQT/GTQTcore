@@ -11,15 +11,19 @@ import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockAbilityPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
+import gregtech.client.utils.TooltipHelper;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockPart;
 import keqing.gtqtcore.api.capability.IHeat;
 import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
 import keqing.gtqtcore.client.textures.GTQTTextures;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -108,7 +112,15 @@ public class MetaTileEntityHeatHatch extends MetaTileEntityMultiblockPart implem
         String temperatureTrend = generateTemperatureTrend();
         textList.add(new TextComponentString(temperatureTrend));
     }
-
+    @Override
+    public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
+        super.addInformation(stack, player, tooltip, advanced);
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("烫！烫！烫！", new Object[0]));
+        tooltip.add(I18n.format("配合需要 流体热交换器（Fluid Heat Exchange）的设备使用"));
+        tooltip.add(I18n.format("配合需要 电加热器（Fluid Heat Exchange）的设备使用"));
+        tooltip.add(I18n.format("需要将流体热交换器控制器背面紧贴热源仓，可热源仓进行加热，降温等操作"));
+        tooltip.add(I18n.format("注意，热源仓拥有独立的自然冷却系统"));
+    }
     private String generateTemperatureTrend() {
         StringBuilder trend = new StringBuilder();
         int index = 1; // 用于标记时刻

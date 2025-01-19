@@ -33,20 +33,22 @@ public class NiobiumTantalumChain {
 
     private static void NewProcess() {
         //
-        REACTION_FURNACE_RECIPES.recipeBuilder()
+        BURNER_REACTOR_RECIPES.recipeBuilder()
                 .input(dust, Pyrochlore, 11)
                 .input(dust,Carbon)
                 .fluidInputs(Oxygen.getFluid(2000))
                 .fluidOutputs(CarbonDioxide.getFluid(1000))
                 .output(dust,NiobiumTantalumFe,8)
+                .blastFurnaceTemp(3600)
                 .duration(400).EUt(VA[EV]).buildAndRegister();
 
-        REACTION_FURNACE_RECIPES.recipeBuilder()
+        BURNER_REACTOR_RECIPES.recipeBuilder()
                 .input(dust, Tantalite, 7)
                 .input(dust,Carbon)
                 .fluidInputs(Oxygen.getFluid(2000))
                 .fluidOutputs(CarbonDioxide.getFluid(1000))
                 .output(dust,NiobiumTantalumFe,8)
+                .blastFurnaceTemp(3600)
                 .duration(400).EUt(VA[EV]).buildAndRegister();
 
         CHEMICAL_RECIPES.recipeBuilder()

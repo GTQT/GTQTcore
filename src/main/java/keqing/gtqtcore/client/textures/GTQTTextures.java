@@ -66,6 +66,15 @@ public class GTQTTextures {
     public static SimpleOverlayRenderer IncoloyMA813 = new SimpleOverlayRenderer("multiblock/advblock/incoloy_ma_813");
     public static SimpleOverlayRenderer HastelloyX78 = new SimpleOverlayRenderer("multiblock/advblock/hastelloy_x_78");
     public static SimpleOverlayRenderer HastelloyK243 = new SimpleOverlayRenderer("multiblock/advblock/hastelloy_k_243");
+
+    public static SimpleOverlayRenderer eglin_steel = new SimpleOverlayRenderer("multiblock/advblock/eglin_steel");
+    public static SimpleOverlayRenderer grisium = new SimpleOverlayRenderer("multiblock/advblock/grisium");
+    public static SimpleOverlayRenderer potin = new SimpleOverlayRenderer("multiblock/advblock/potin");
+    public static SimpleOverlayRenderer black_steel = new SimpleOverlayRenderer("multiblock/advblock/black_steel");
+    public static SimpleOverlayRenderer blue_steel = new SimpleOverlayRenderer("multiblock/advblock/blue_steel");
+    public static SimpleOverlayRenderer red_steel = new SimpleOverlayRenderer("multiblock/advblock/red_steel");
+    public static SimpleOverlayRenderer tumbaga = new SimpleOverlayRenderer("multiblock/advblock/tumbaga");
+
     public static SimpleOverlayRenderer DIMENSIONAL_BRIDGE_CASING = new SimpleOverlayRenderer("multiblock/quantumcasing/dimensional_bridge_casing");
     public static SimpleOverlayRenderer ULTIMATE_HIGH_ENERGY_CASING = new SimpleOverlayRenderer("multiblock/quantumcasing/ultimate_high_energy_casing");
     public static SimpleOverlayRenderer TRANSCENDENTALLY_AMPLIFIED_MAGNETIC_CONFINEMENT_CASING = new SimpleOverlayRenderer("casings/transcendentally_amplified_magnetic_confinement_casing");

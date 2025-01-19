@@ -1,27 +1,25 @@
 package keqing.gtqtcore.api.unification.ore;
 
-import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.info.MaterialFlags;
 import gregtech.api.unification.material.info.MaterialIconType;
 import gregtech.api.unification.material.properties.PropertyKey;
 import gregtech.api.unification.ore.OrePrefix;
-import keqing.gtqtcore.api.unification.material.info.EPMaterialFlags;
+import keqing.gtqtcore.api.unification.material.info.GTQTMaterialFlags;
 import keqing.gtqtcore.api.unification.material.info.GTQTMaterialIconType;
 import net.minecraft.client.resources.I18n;
 
 import java.util.Collections;
-import java.util.function.Predicate;
 
 import static gregtech.api.GTValues.M;
 import static gregtech.api.unification.ore.OrePrefix.Conditions.hasGemProperty;
 import static gregtech.api.unification.ore.OrePrefix.Flags.ENABLE_UNIFICATION;
-import static keqing.gtqtcore.api.unification.material.info.EPMaterialFlags.*;
+import static keqing.gtqtcore.api.unification.material.info.GTQTMaterialFlags.*;
 
 public class GTQTOrePrefix {
     public static final OrePrefix seedCrystal = new OrePrefix("seedCrystal", M / 9, null, GTQTMaterialIconType.seedCrystal, ENABLE_UNIFICATION,
-            hasGemProperty.and(mat -> mat.hasFlag(GENERATE_BOULE) || (mat.hasFlag(MaterialFlags.CRYSTALLIZABLE) && !mat.hasFlag(EPMaterialFlags.DISABLE_CRYSTALLIZATION))));
+            hasGemProperty.and(mat -> mat.hasFlag(GENERATE_BOULE) || (mat.hasFlag(MaterialFlags.CRYSTALLIZABLE) && !mat.hasFlag(GTQTMaterialFlags.DISABLE_CRYSTALLIZATION))));
     public static final OrePrefix boule = new OrePrefix("boule", M * 4, null, GTQTMaterialIconType.boule, ENABLE_UNIFICATION,
-            hasGemProperty.and(mat -> mat.hasFlag(GENERATE_BOULE) || (mat.hasFlag(MaterialFlags.CRYSTALLIZABLE) && !mat.hasFlag(EPMaterialFlags.DISABLE_CRYSTALLIZATION))));
+            hasGemProperty.and(mat -> mat.hasFlag(GENERATE_BOULE) || (mat.hasFlag(MaterialFlags.CRYSTALLIZABLE) && !mat.hasFlag(GTQTMaterialFlags.DISABLE_CRYSTALLIZATION))));
     public static final OrePrefix milled = new OrePrefix("milled", -1, null, GTQTMaterialIconType.milled, ENABLE_UNIFICATION,
             OrePrefix.Conditions.hasOreProperty, mat -> Collections.singletonList(I18n.format("metaitem.milled.tooltip.flotation")));
     public static final OrePrefix pellets = new OrePrefix("pellets", -1, null, GTQTMaterialIconType.pellets, ENABLE_UNIFICATION,
@@ -32,6 +30,8 @@ public class GTQTOrePrefix {
             mat -> mat.hasFlag(GENERATE_PELLETS));
     public static final OrePrefix kujieranliaowan = new OrePrefix("kujieranliaowan", -1, null, GTQTMaterialIconType.kujieranliaowan, ENABLE_UNIFICATION,
             mat -> mat.hasFlag(GENERATE_PELLETS));
+    public static final OrePrefix wrap = new OrePrefix("wrap", -1, null, GTQTMaterialIconType.wrap, ENABLE_UNIFICATION,
+            mat -> mat.hasFlag(GENERATE_WRAP));
 
 
     public static final OrePrefix swarm = new OrePrefix("swarm", M, null, GTQTMaterialIconType.swarm, ENABLE_UNIFICATION,

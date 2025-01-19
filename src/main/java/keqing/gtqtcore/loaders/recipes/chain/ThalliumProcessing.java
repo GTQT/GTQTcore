@@ -31,7 +31,7 @@ public class ThalliumProcessing {
                 .output(ingot, Iron)
                 .output(dust, ThalliumSulfate, 7)
                 .fluidOutputs(SulfurDioxide.getFluid(1000))
-                .temperature(1704)
+                .temperature(2700)
                 .duration(100).EUt(VA[HV]).buildAndRegister();
 
         // 2PbS + 6O -> 2Pb + Tl2SO4 + SO2
@@ -41,7 +41,7 @@ public class ThalliumProcessing {
                 .output(ingot, Lead, 2)
                 .output(dust, ThalliumSulfate, 7)
                 .fluidOutputs(SulfurDioxide.getFluid(1000))
-                .temperature(1802)
+                .temperature(2700)
                 .duration(100).EUt(VA[HV]).buildAndRegister();
 
         // Tl2SO4 + H2O -> 2Th + H2SO4 + O

@@ -87,6 +87,7 @@ public class GTQTRecipesManager {
         MagicChain.init();
         RecipeConflicts.init();
         removeRecipes.init();
+        SpinnerHelper.init();
         AluminiumLine.init();
         CoilWire.init();
         GCYSMetaTileEntityLoader.init();
@@ -146,6 +147,7 @@ public class GTQTRecipesManager {
         CircuitryMaterialChains.init();
         OilChains.init();
         DrumRecipes.init();
+        CrateRecipes.init();
         PCBline.init();
         NanotubesChain.init();
         initCircuits();

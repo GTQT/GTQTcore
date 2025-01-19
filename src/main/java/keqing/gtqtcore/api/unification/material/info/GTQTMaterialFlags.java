@@ -4,9 +4,7 @@ import gregtech.api.unification.material.info.MaterialFlag;
 import gregtech.api.unification.material.info.MaterialFlags;
 import gregtech.api.unification.material.properties.PropertyKey;
 
-import static gregtech.api.unification.material.info.MaterialFlags.GENERATE_ROD;
-
-public class EPMaterialFlags {
+public class GTQTMaterialFlags {
 
     public static final MaterialFlag GENERATE_COIL = new MaterialFlag.Builder("generate_coil")
             .requireFlags(MaterialFlags.GENERATE_FINE_WIRE)
@@ -32,6 +30,9 @@ public class EPMaterialFlags {
             .build();
 
     public static final MaterialFlag GENERATE_SWARM = new MaterialFlag.Builder("generate_swarm")
+            .build();
+
+    public static final MaterialFlag GENERATE_WRAP = new MaterialFlag.Builder("generate_wrap")
             .build();
 
 }

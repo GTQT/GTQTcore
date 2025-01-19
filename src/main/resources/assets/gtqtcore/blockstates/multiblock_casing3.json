@@ -8,6 +8,48 @@
   },
   "variants": {
     "variant": {
+      "eglin_steel": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/advblock/eglin_steel"
+        }
+      },
+      "grisium": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/advblock/grisium"
+        }
+      },
+      "potin": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/advblock/potin"
+        }
+      },
+      "black_steel": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/advblock/black_steel"
+        }
+      },
+      "blue_steel": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/advblock/blue_steel"
+        }
+      },
+      "red_steel": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/advblock/red_steel"
+        }
+      },
+      "tumbaga": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/advblock/tumbaga"
+        }
+      },
       "nitinol_machine_casing": {
         "model": "minecraft:cube_all",
         "textures": {

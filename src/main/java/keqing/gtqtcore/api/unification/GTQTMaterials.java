@@ -52,6 +52,8 @@ public class GTQTMaterials {
     public static Material HG1223;
     public static Material HMS1J22Alloy;
     public static Material FullereneSuperconductor;
+    public static Material Grisium;
+    public static Material Tumbaga;
     public static Material Legendarium;
     public static Material SuperheavyHAlloy;
     public static Material SuperheavyLAlloy;

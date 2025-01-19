@@ -260,10 +260,8 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<ComputationRecipeBuilder> PRECISION_SPINNING;
     public static final RecipeMap<SimpleRecipeBuilder> CW_LASER_ENGRAVER_RECIPES;
     public static final RecipeMap<LaserComputationRecipeBuilder> STEPPER_RECIPES;
-    public static final RecipeMap<SimpleRecipeBuilder> PRESSURIZED_REACTION;
     public static final RecipeMap<PrimitiveRecipeBuilder> CLARIFIER;
     public static final RecipeMap<SimpleRecipeBuilder>  ELEOIL;
-    public static final RecipeMap<SimpleRecipeBuilder>  REACTION_FURNACE_RECIPES;
     public static final RecipeMap<NeutronActivatorRecipeBuilder> NEUTRON_ACTIVATOR ;
     public static final RecipeMap<SimpleRecipeBuilder> SFM;
     public static final RecipeMap<PrimitiveRecipeBuilder>  COAGULATION_RECIPES ;
@@ -480,17 +478,11 @@ public class GTQTcoreRecipeMaps {
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL)
                 .setSound(GTSoundEvents.CHEMICAL_REACTOR);
 
-        PRESSURIZED_REACTION = new RecipeMap<>("pressurized_reaction",
-                3, 3, 3, 3, new SimpleRecipeBuilder(), false);
-
         CLARIFIER = new RecipeMap<>("clarifire",
                 3, 3, 3, 3, new PrimitiveRecipeBuilder(), false);
 
         ELEOIL = new RecipeMap<>("ele_oil",
                 0, 0, 1, 2, new SimpleRecipeBuilder(), false);
-
-        REACTION_FURNACE_RECIPES = new RecipeMap<>("reaction_furnace",
-                3, 3, 3, 3, new SimpleRecipeBuilder(), false);
 
         SEPTIC_TANK = new RecipeMap<>("septic_tank",
                 2, 2, 2, 2, new SimpleRecipeBuilder(), false);

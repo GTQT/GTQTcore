@@ -47,6 +47,7 @@ public class NaquadahChain {
                 .output(dust, TriniumSulfide, 4)
                 .fluidOutputs(Steam.getFluid(2000))
                 .EUt(VA[HV])
+                .temperature(3600)
                 .duration(2 * SECOND + 16 * TICK)
                 .buildAndRegister();
     }

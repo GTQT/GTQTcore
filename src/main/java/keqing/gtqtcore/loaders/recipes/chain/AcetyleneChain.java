@@ -17,7 +17,7 @@ public class AcetyleneChain {
                 .input(dust, Carbon, 3)
                 .output(dust, CalciumCarbide, 3)
                 .fluidOutputs(CarbonMonoxide.getFluid(1000))
-                .temperature(2473)
+                .temperature(2700)
                 .duration(500).EUt(VA[MV]).buildAndRegister();
 
         ROASTER_RECIPES.recipeBuilder()
@@ -25,7 +25,7 @@ public class AcetyleneChain {
                 .input(gem, Coke)
                 .output(dust, CalciumCarbide, 3)
                 .fluidOutputs(CarbonMonoxide.getFluid(1000))
-                .temperature(2473)
+                .temperature(2700)
                 .duration(200).EUt(VA[MV]).buildAndRegister();
 
         // CaC2 + 2H2O -> Ca(OH)2 + C2H2

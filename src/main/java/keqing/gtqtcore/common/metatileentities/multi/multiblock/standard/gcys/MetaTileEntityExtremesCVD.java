@@ -1,6 +1,7 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.gcys;
 
 
+import gregicality.multiblocks.api.metatileentity.GCYMRecipeMapMultiblockController;
 import gregicality.multiblocks.api.render.GCYMTextures;
 import gregicality.multiblocks.common.block.GCYMMetaBlocks;
 import gregicality.multiblocks.common.block.blocks.BlockLargeMultiblockCasing;
@@ -12,6 +13,8 @@ import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.TraceabilityPredicate;
+import gregtech.api.recipes.RecipeMap;
+import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.material.Materials;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.common.blocks.BlockBoilerCasing;
@@ -26,15 +29,15 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 
-public class MetaTileEntityEXCVD extends RecipeMapMultiblockController {
+public class MetaTileEntityExtremesCVD extends GCYMRecipeMapMultiblockController {
 
-    public MetaTileEntityEXCVD(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, GTQTcoreRecipeMaps.PLASMA_CVD_RECIPES);
+    public MetaTileEntityExtremesCVD(ResourceLocation metaTileEntityId) {
+        super(metaTileEntityId, new RecipeMap[]{GTQTcoreRecipeMaps.PLASMA_CVD_RECIPES, GTQTcoreRecipeMaps.CVD_RECIPES});
     }
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
-        return new MetaTileEntityEXCVD(metaTileEntityId);
+        return new MetaTileEntityExtremesCVD(metaTileEntityId);
     }
 
     @Override

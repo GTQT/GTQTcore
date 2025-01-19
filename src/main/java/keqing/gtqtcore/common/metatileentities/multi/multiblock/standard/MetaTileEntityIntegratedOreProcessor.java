@@ -66,6 +66,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4.TurbineCasingType.NQ_TURBINE_CASING;
+
 public class MetaTileEntityIntegratedOreProcessor extends MultiblockWithDisplayBase implements IDataInfoProvider {
 
     protected OreProcessorRecipeLogic logic;
@@ -84,7 +86,7 @@ public class MetaTileEntityIntegratedOreProcessor extends MultiblockWithDisplayB
     }
 
     private static IBlockState getSecondCasingState() {
-        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STAINLESS_CLEAN);
+        return GTQTMetaBlocks.blockMultiblockCasing4.getState(NQ_TURBINE_CASING);
     }
 
     private static IBlockState getBoilerCasingState() {
@@ -92,7 +94,7 @@ public class MetaTileEntityIntegratedOreProcessor extends MultiblockWithDisplayB
     }
 
     private static IBlockState getGlassState() {
-        return MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.LAMINATED_GLASS);
+        return MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.FUSION_GLASS);
     }
 
     private static IBlockState getFrameState() {
@@ -100,7 +102,7 @@ public class MetaTileEntityIntegratedOreProcessor extends MultiblockWithDisplayB
     }
 
     private static IBlockState getThirdCasingState() {
-        return MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.STEEL_GEARBOX);
+        return MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.TUNGSTENSTEEL_GEARBOX);
     }
 
     @Override
@@ -203,7 +205,7 @@ public class MetaTileEntityIntegratedOreProcessor extends MultiblockWithDisplayB
                 || iMultiblockPart instanceof IMaintenanceHatch) {
             return GTQTTextures.IRIDIUM_CASING;
         } else {
-            return Textures.CLEAN_STAINLESS_STEEL_CASING;
+            return GTQTTextures.NQ_CASING;
         }
     }
 
@@ -211,7 +213,7 @@ public class MetaTileEntityIntegratedOreProcessor extends MultiblockWithDisplayB
     @Nonnull
     @Override
     protected ICubeRenderer getFrontOverlay() {
-        return GTQTTextures.HYDRAULIC_FRACKER_OVERLAY;
+        return Textures.FUSION_REACTOR_OVERLAY;
     }
 
     @SideOnly(Side.CLIENT)

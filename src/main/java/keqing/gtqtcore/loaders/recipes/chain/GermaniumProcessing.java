@@ -28,7 +28,7 @@ public class GermaniumProcessing {
                 .output(dust, RoastedSphalerite, 3)
                 .output(dust, ZincOxide, 2)
                 .fluidOutputs(SulfurDioxide.getFluid(1000))
-                .temperature(1773)
+                .temperature(3600)
                 .duration(200).EUt(VA[HV]).buildAndRegister();
 
         // GeO2 + 2Zn -> Zn2(GeO2)

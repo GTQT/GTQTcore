@@ -137,7 +137,7 @@ public class MetaTileEntityHugeAlloyBlastSmelter extends RecipeMapMultiblockCont
         tooltip.add(I18n.format("gtqtcore.multiblock.hb.tooltip.2"));
         tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.1"));
         tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.2", 256));
-        tooltip.add(I18n.format("gtqtcore.multiblock.kq.acc.tooltip！"));
+        tooltip.add(I18n.format("gtqtcore.multiblock.kq.acc.tooltip"));
         tooltip.add(I18n.format("本机器允许使用激光能源仓代替能源仓！"));
     }
 

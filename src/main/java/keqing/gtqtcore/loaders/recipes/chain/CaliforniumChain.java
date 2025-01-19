@@ -38,7 +38,7 @@ public class CaliforniumChain {
                 .fluidOutputs(Oxygen.getFluid(2000))
                 .EUt(VA[MV])
                 .duration(960)
-                .temperature(1443)
+                .temperature(2700)
                 .buildAndRegister();
 
         //  Californium Hexachloride -> Californium Hexafluoride

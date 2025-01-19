@@ -45,7 +45,6 @@ import static keqing.gtqtcore.api.utils.GTQTUniversUtil.maxLength;
 public class MetaTileEntityCokingTower extends RecipeMapMultiblockController {
     private static final TraceabilityPredicate IS_SNOW_LAYER = new TraceabilityPredicate(bws -> GTUtility.isBlockSnow(bws.getBlockState()));
     private static boolean init = false;
-    private static List<IBlockState> finalListCoil;
     protected int heatingCoilLevel;
     protected int coilTier;
     private byte auxiliaryBlastFurnaceNumber = 0;
@@ -61,7 +60,7 @@ public class MetaTileEntityCokingTower extends RecipeMapMultiblockController {
     }
 
     private static IBlockState getFrameState() {
-        return MetaBlocks.FRAMES.get(Materials.Titanium).getBlock(Materials.Titanium);
+        return MetaBlocks.FRAMES.get(Materials.BlueSteel).getBlock(Materials.BlueSteel);
     }
 
     private static IBlockState getBoilerState() {
@@ -70,10 +69,6 @@ public class MetaTileEntityCokingTower extends RecipeMapMultiblockController {
 
     private static IBlockState getFireBoxState() {
         return MetaBlocks.BOILER_FIREBOX_CASING.getState(BlockFireboxCasing.FireboxCasingType.TUNGSTENSTEEL_FIREBOX);
-    }
-
-    public static int getMaxParallel(int heatingCoilLevel) {
-        return heatingCoilLevel * 4;
     }
 
     @Override
@@ -92,7 +87,7 @@ public class MetaTileEntityCokingTower extends RecipeMapMultiblockController {
         int maxLeng = maxLength(new ArrayList<List<IBlockState>>() {{
             add(listCoil);
         }});
-        finalListCoil = consistentList(listCoil, maxLeng);
+        consistentList(listCoil, maxLeng);
 
         init = true;
     }
@@ -184,10 +179,9 @@ public class MetaTileEntityCokingTower extends RecipeMapMultiblockController {
     @Override
     public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
-        tooltip.add(I18n.format("gtqtcore.machine.coking_tower.tooltip.1"));
         tooltip.add(I18n.format("gtqtcore.machine.coking_tower.tooltip.2"));
-        tooltip.add(I18n.format("gtqtcore.machine.coking_tower.tooltip.3"));
         tooltip.add(I18n.format("gtqtcore.machine.modify_overclock","Coil Tier"));
+        tooltip.add(I18n.format("gtqtcore.machine.parallel.pow.machineTier",2,32));
     }
 
     protected int getCoilTier() {
@@ -248,7 +242,7 @@ public class MetaTileEntityCokingTower extends RecipeMapMultiblockController {
 
         @Override
         public int getParallelLimit() {
-            return getMaxParallel(heatingCoilLevel);
+            return Math.min((int)Math.pow(2, coilTier),128);
         }
 
         @Override

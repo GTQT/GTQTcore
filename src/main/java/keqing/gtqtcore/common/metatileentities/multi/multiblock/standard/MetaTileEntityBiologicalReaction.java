@@ -31,6 +31,7 @@ import keqing.gtqtcore.api.recipes.properties.BioReactorProperty;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.objmodels.ObjModels;
 import keqing.gtqtcore.client.textures.GTQTTextures;
+import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
@@ -51,6 +52,8 @@ import java.util.List;
 
 import static keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility.BIO_MULTIBLOCK_ABILITY;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.BIOLOGICAL_REACTION_RECIPES;
+import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing3.CasingType.grisium;
+import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing3.CasingType.tumbaga;
 
 //要实现大机器中的渲染需要重写IFastRenderMetaTileEntity 接口，并实现renderMetaTileEntity和getRenderBoundingBox方法
 public class MetaTileEntityBiologicalReaction extends MultiMapMultiblockController implements IProgressBarMultiblock, IFastRenderMetaTileEntity {
@@ -63,11 +66,6 @@ public class MetaTileEntityBiologicalReaction extends MultiMapMultiblockControll
     public MetaTileEntityBiologicalReaction(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{BIOLOGICAL_REACTION_RECIPES, RecipeMaps.FERMENTING_RECIPES, RecipeMaps.BREWING_RECIPES});
         this.recipeMapWorkable = new BiologicalReactionLogic(this);
-    }
-
-    private static IBlockState getCasingState() {
-        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STAINLESS_CLEAN);
-
     }
 
     private static IBlockState getTubeState() {
@@ -174,11 +172,13 @@ public class MetaTileEntityBiologicalReaction extends MultiMapMultiblockControll
                 .where('P', states(getTubeState()))
                 .where(' ', any()).build();
     }
-
+    protected IBlockState getCasingState() {
+        return GTQTMetaBlocks.blockMultiblockCasing3.getState(tumbaga);
+    }
     @SideOnly(Side.CLIENT)
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
-        return Textures.CLEAN_STAINLESS_STEEL_CASING;
+        return GTQTTextures.tumbaga;
 
     }
 

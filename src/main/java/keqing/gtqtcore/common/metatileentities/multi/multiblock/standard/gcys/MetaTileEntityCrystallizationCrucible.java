@@ -1,10 +1,11 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.gcys;
 
+import gregicality.multiblocks.api.capability.impl.GCYMMultiblockRecipeLogic;
+import gregicality.multiblocks.api.metatileentity.GCYMRecipeMapMultiblockController;
 import gregicality.multiblocks.common.block.GCYMMetaBlocks;
 import gregicality.multiblocks.common.block.blocks.BlockUniqueCasing;
 import gregtech.api.GTValues;
 import gregtech.api.capability.IHeatingCoil;
-import gregtech.api.capability.impl.HeatingCoilRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
@@ -15,6 +16,8 @@ import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.MultiblockShapeInfo;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
+import gregtech.api.recipes.logic.OverclockingLogic;
+import gregtech.api.recipes.recipeproperties.IRecipePropertyStorage;
 import gregtech.api.recipes.recipeproperties.TemperatureProperty;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.TextFormattingUtil;
@@ -26,8 +29,10 @@ import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.BlockWireCoil.CoilType;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.MetaTileEntities;
+import groovyjarjarantlr4.v4.runtime.misc.NotNull;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
+import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
@@ -48,24 +53,23 @@ import java.util.Comparator;
 import java.util.List;
 
 import static gregtech.api.unification.material.Materials.Titanium;
+import static gregtech.api.unification.material.Materials.TungstenSteel;
+import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing3.CasingType.eglin_steel;
+import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing3.CasingType.grisium;
 
-public class MetaTileEntityCrystallizationCrucible extends RecipeMapMultiblockController implements IHeatingCoil {
+public class MetaTileEntityCrystallizationCrucible extends GCYMRecipeMapMultiblockController implements IHeatingCoil {
 
     private int temperature;
 
     public MetaTileEntityCrystallizationCrucible(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.CRYSTALLIZER_RECIPES);
-        this.recipeMapWorkable = new HeatingCoilRecipeLogic(this);
+        this.recipeMapWorkable = new CrystallizationCrucibleRecipeLogic(this);
     }
 
-    @Nonnull
-    private static IBlockState getCasingState() {
-        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.TUNGSTENSTEEL_ROBUST);
-    }
 
     @Nonnull
     private static IBlockState getFrameState() {
-        return MetaBlocks.FRAMES.get(Titanium).getBlock(Titanium);
+        return MetaBlocks.FRAMES.get(TungstenSteel).getBlock(TungstenSteel);
     }
 
     @Nonnull
@@ -119,7 +123,7 @@ public class MetaTileEntityCrystallizationCrucible extends RecipeMapMultiblockCo
                 .aisle("XXXXX", "#VCV#", "#VCV#", "XXXXX")
                 .aisle("XXSXX", "G###G", "G###G", "XXXXX")
                 .where('S', selfPredicate())
-                .where('X', states(getCasingState()).setMinGlobalLimited(32)
+                .where('X', states(getCasingState1()).setMinGlobalLimited(32)
                         .or(autoAbilities(true, true, true, true, true, false, false)))
                 .where('C', heatingCoils())
                 .where('M', abilities(MultiblockAbility.MUFFLER_HATCH))
@@ -129,7 +133,9 @@ public class MetaTileEntityCrystallizationCrucible extends RecipeMapMultiblockCo
                 .where('#', any())
                 .build();
     }
-
+    protected IBlockState getCasingState1() {
+        return GTQTMetaBlocks.blockMultiblockCasing3.getState(grisium);
+    }
     @Override
     public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
@@ -140,7 +146,7 @@ public class MetaTileEntityCrystallizationCrucible extends RecipeMapMultiblockCo
 
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
-        return Textures.ROBUST_TUNGSTENSTEEL_CASING;
+        return GTQTTextures.grisium;
     }
 
     @Nonnull
@@ -174,7 +180,7 @@ public class MetaTileEntityCrystallizationCrucible extends RecipeMapMultiblockCo
                 .aisle("XXXXX", "#VCV#", "#VCV#", "XXXXX")
                 .aisle("IOSMF", "G###G", "G###G", "XXXXX")
                 .where('S', GTQTMetaTileEntities.LARGE_CRYSTALLIZATION_CRUCIBLE, EnumFacing.SOUTH)
-                .where('X', MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.TUNGSTENSTEEL_ROBUST))
+                .where('X', getCasingState1())
                 .where('G', MetaBlocks.FRAMES.get(Titanium).getBlock(Titanium))
                 .where('V', GCYMMetaBlocks.UNIQUE_CASING.getState(BlockUniqueCasing.UniqueCasingType.HEAT_VENT))
                 .where('#', Blocks.AIR.getDefaultState())
@@ -188,5 +194,22 @@ public class MetaTileEntityCrystallizationCrucible extends RecipeMapMultiblockCo
                 .sorted(Comparator.comparingInt(CoilType::getLevel))
                 .forEach(coilType -> shapeInfo.add(builder.where('C', MetaBlocks.WIRE_COIL.getState(coilType)).build()));
         return shapeInfo;
+    }
+
+    public static class CrystallizationCrucibleRecipeLogic extends GCYMMultiblockRecipeLogic {
+
+        public CrystallizationCrucibleRecipeLogic(RecipeMapMultiblockController tileEntity) {
+            super(tileEntity);
+        }
+
+        protected void modifyOverclockPre(@NotNull int[] values, @NotNull IRecipePropertyStorage storage) {
+            super.modifyOverclockPre(values, storage);
+            values[0] = OverclockingLogic.applyCoilEUtDiscount(values[0], ((IHeatingCoil) this.metaTileEntity).getCurrentTemperature(), storage.getRecipePropertyValue(TemperatureProperty.getInstance(), 0));
+        }
+
+        protected @NotNull int[] runOverclockingLogic(@NotNull IRecipePropertyStorage propertyStorage, int recipeEUt, long maxVoltage, int duration, int amountOC) {
+            return OverclockingLogic.heatingCoilOverclockingLogic(Math.abs(recipeEUt), maxVoltage, duration, amountOC, ((IHeatingCoil) this.metaTileEntity).getCurrentTemperature(), propertyStorage.getRecipePropertyValue(TemperatureProperty.getInstance(), 0));
+        }
+
     }
 }

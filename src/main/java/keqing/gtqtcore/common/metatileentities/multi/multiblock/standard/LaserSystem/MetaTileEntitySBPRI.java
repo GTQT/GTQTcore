@@ -18,6 +18,7 @@ import gregtech.api.util.GTUtility;
 import gregtech.api.util.TextComponentUtil;
 import gregtech.client.particle.GTParticleManager;
 import gregtech.client.renderer.ICubeRenderer;
+import gregtech.client.renderer.texture.Textures;
 import keqing.gtqtcore.api.capability.ILaser;
 import keqing.gtqtcore.client.particle.LaserBeamParticle;
 import keqing.gtqtcore.client.textures.GTQTTextures;
@@ -329,7 +330,7 @@ public class MetaTileEntitySBPRI extends MetaTileEntityBaseWithControl {
     @Nonnull
     @Override
     protected ICubeRenderer getFrontOverlay() {
-        return GTQTTextures.CVD_UNIT_OVERLAY;
+        return Textures.HPCA_OVERLAY;
     }
 
     @Override

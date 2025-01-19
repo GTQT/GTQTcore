@@ -28,7 +28,13 @@ public class BlockMultiblockCasing3 extends VariantBlock<BlockMultiblockCasing3.
     }
 
     public static enum CasingType implements IStringSerializable {
-
+        eglin_steel("eglin_steel"),
+        grisium("grisium"),
+        potin("potin"),
+        black_steel("black_steel"),
+        blue_steel("blue_steel"),
+        red_steel("red_steel"),
+        tumbaga("tumbaga"),
         NITINOL_MACHINE_CASING("nitinol_machine_casing"),
         HC_ALLOY_CASING("hc_alloy_casing"),
         SFTC("supercritical_fuel_trans_casing"),

@@ -284,10 +284,11 @@ public class AlgaeChain {
                 .chancedOutput(items, 4000, 500)
                 .duration(400).EUt(VA[HV]).buildAndRegister();
 
-        PRESSURIZED_REACTION.recipeBuilder()
-                .fluidInputs(Water.getFluid(1000))
+        FERMENTATION_TANK_RECIPES.recipeBuilder()
+                .fluidInputs(Biomass.getFluid(1000))
                 .input(items, 1)
                 .fluidOutputs(BioOil.getFluid(2000))
+                .pH(8.6)
                 .duration(1600).EUt(480).buildAndRegister();
 
         CHEMICAL_PLANT.recipeBuilder()

@@ -224,6 +224,7 @@ public class StrontiumRadiumChain {
                 .output(dust, Quicklime, 2)
                 .fluidOutputs(Chlorine.getFluid(2000))
                 .EUt(VA[HV])
+                .temperature(2700)
                 .duration(150)
                 .temperature(1000)
                 .buildAndRegister();
@@ -236,7 +237,7 @@ public class StrontiumRadiumChain {
                 .output(dust, StrontiumCarbonate, 5)
                 .output(dust, SodiumSulfide, 3)
                 .fluidOutputs(CarbonDioxide.getFluid(2000))
-                .temperature(1145)
+                .temperature(2700)
                 .EUt(VA[HV])
                 .duration(360)
                 .buildAndRegister();

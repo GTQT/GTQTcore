@@ -27,7 +27,7 @@ public class HexanitrohexaaxaisowurtzitaneChain {
                 .output(dust, AmmoniumCarbonate, 14)
                 .EUt(VA[MV])
                 .duration(270)
-                .temperature(598)
+                .temperature(2700)
                 .buildAndRegister();
 
         //  Ammonium Acetate
@@ -142,7 +142,7 @@ public class HexanitrohexaaxaisowurtzitaneChain {
                 .output(dust, PotassiumNitrite, 4)
                 .output(dust, Lead)
                 .EUt(VA[HV])
-                .duration(450)
+                .duration(3600)
                 .temperature(1300)
                 .buildAndRegister();
 

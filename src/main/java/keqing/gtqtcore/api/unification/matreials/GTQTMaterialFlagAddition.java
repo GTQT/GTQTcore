@@ -8,10 +8,10 @@ import gregtech.api.unification.material.properties.*;
 import static gregicality.multiblocks.api.unification.GCYMMaterials.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.info.MaterialFlags.*;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.Alumina;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.Orichalcum;
+import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
-import static keqing.gtqtcore.api.unification.material.info.EPMaterialFlags.*;
+import static keqing.gtqtcore.api.unification.TJMaterials.Polyetheretherketone;
+import static keqing.gtqtcore.api.unification.material.info.GTQTMaterialFlags.*;
 
 public class GTQTMaterialFlagAddition {
 
@@ -237,10 +237,26 @@ public class GTQTMaterialFlagAddition {
         RoseGold.addFlags(GENERATE_SMALL_GEAR);
         TinAlloy.addFlags(GENERATE_RING);
         Ultimet.addFlags(GENERATE_RING);
-        Potin.addFlags(GENERATE_RING,GENERATE_SMALL_GEAR);
+        Potin.addFlags(GENERATE_RING,GENERATE_SMALL_GEAR,GENERATE_FRAME);
         VanadiumSteel.addFlags(GENERATE_RING);
         CobaltBrass.addFlags(GENERATE_RING);
         TungstenCarbide.addFlags(GENERATE_RING);
+        //塑料
+        CarbonNanotube.addFlags(GENERATE_WRAP);
+        Asbestos.addFlags(GENERATE_WRAP);
+        Wool.addFlags(GENERATE_WRAP);
+        Polyethylene.addFlags(GENERATE_WRAP,GENERATE_RING);
+        PolyvinylChloride.addFlags(GENERATE_WRAP,GENERATE_RING);
+        Epoxy.addFlags(GENERATE_WRAP,GENERATE_RING);
+        ReinforcedEpoxyResin.addFlags(GENERATE_WRAP,GENERATE_RING);
+        Polytetrafluoroethylene.addFlags(GENERATE_WRAP,GENERATE_RING);
+        Zylon.addFlags(GENERATE_WRAP,GENERATE_RING);
+        Polybenzimidazole.addFlags(GENERATE_WRAP,GENERATE_RING);
+        Polyetheretherketone.addFlags(GENERATE_WRAP,GENERATE_RING);
+        Kevlar.addFlags(GENERATE_WRAP,GENERATE_RING);
+        KaptonK.addFlags(GENERATE_WRAP,GENERATE_RING);
+        KaptonE.addFlags(GENERATE_WRAP,GENERATE_RING);
+        FullerenePolymerMatrix.addFlags(GENERATE_WRAP,GENERATE_RING);
 
         //  Disable Crystallization
         Monazite.addFlags(DISABLE_CRYSTALLIZATION);

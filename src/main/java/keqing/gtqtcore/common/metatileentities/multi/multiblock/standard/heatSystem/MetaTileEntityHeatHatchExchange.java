@@ -1,5 +1,8 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.heatSystem;
 
+import codechicken.lib.render.CCRenderState;
+import codechicken.lib.render.pipeline.IVertexOperation;
+import codechicken.lib.vec.Matrix4;
 import gregtech.api.capability.IMultipleTankHandler;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.ModularUI;
@@ -18,9 +21,12 @@ import gregtech.api.util.GTTransferUtils;
 import gregtech.api.util.GTUtility;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
+import gregtech.client.utils.TooltipHelper;
+import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.items.GTQTMetaItems;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.MetaTileEntityBaseWithControl;
 import keqing.gtqtcore.common.metatileentities.multi.multiblockpart.MetaTileEntityHeatHatch;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -30,7 +36,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemStackHandler;
 
 import java.util.Arrays;
@@ -55,12 +64,35 @@ public class MetaTileEntityHeatHatchExchange extends MetaTileEntityBaseWithContr
     boolean modelHeat;
     MetaTileEntityHeatHatch targetMte = null;
 
+    @SideOnly(Side.CLIENT)
+    @Override
+    protected ICubeRenderer getFrontOverlay() {
+        return GTQTTextures.LARGE_ROCKET_ENGINE_OVERLAY;
+    }
 
     public MetaTileEntityHeatHatchExchange(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId);
         this.containerInventory = new GTItemStackHandler(this, 8);
     }
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
+        super.renderMetaTileEntity(renderState, translation, pipeline);
+        this.getFrontOverlay().renderOrientedState(renderState, translation, pipeline, getFrontFacing(), true,
+                isStructureFormed());
+    }
 
+    @Override
+    public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
+        super.addInformation(stack, player, tooltip, advanced);
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("烫！烫！烫！", new Object[0]));
+        tooltip.add(I18n.format("配合需要 热源仓（Heat Hatch）的设备使用"));
+        tooltip.add(I18n.format("需要将控制器背面紧贴热源仓，可热源仓进行加热，降温等操作"));
+        tooltip.add(I18n.format("输入水时，为热源仓降温，输出蒸汽"));
+        tooltip.add(I18n.format("输入蒸汽时，为热源仓升温，输出水"));
+        tooltip.add(I18n.format("插入散热鳍片可调节不同槽位的升温，降温率"));
+        tooltip.add(I18n.format("调节挡位可选择不同的热源仓接触面温度"));
+    }
     @Override
     protected void updateFormedValid() {
         for (int i = 0; i < containerInventory.getSlots(); i++) {
@@ -170,10 +202,11 @@ public class MetaTileEntityHeatHatchExchange extends MetaTileEntityBaseWithContr
 
     protected void addInputDisplay(List<ITextComponent> textList) {
         MultiblockDisplayText.builder(textList, isStructureFormed()).addCustom(tl -> {
-            tl.add(new TextComponentTranslation("%s", select));
+            tl.add(new TextComponentTranslation("所选散热鳍片接触序号：%s", select));
 
+            tl.add(new TextComponentString("散热鳍片温度监控: "));
             // 添加 tempList 信息
-            StringBuilder tempListStr = new StringBuilder("Temp List: ");
+            StringBuilder tempListStr = new StringBuilder();
             for (int temp : tempList) {
                 tempListStr.append(temp).append(", ");
             }
@@ -183,7 +216,7 @@ public class MetaTileEntityHeatHatchExchange extends MetaTileEntityBaseWithContr
             tl.add(new TextComponentString(tempListStr.toString()));
 
             // 添加 exchangeRate 信息
-            StringBuilder exchangeRateStr = new StringBuilder("Exchange Rate: ");
+            StringBuilder exchangeRateStr = new StringBuilder("热交换率: ");
             for (int rate : exchangeRate) {
                 exchangeRateStr.append(rate).append(", ");
             }
@@ -193,59 +226,61 @@ public class MetaTileEntityHeatHatchExchange extends MetaTileEntityBaseWithContr
             tl.add(new TextComponentString(exchangeRateStr.toString()));
 
             // 添加 modelHeat 信息
-            tl.add(new TextComponentString("Model Heat: " + modelHeat));
+            tl.add(new TextComponentString("加热模式: " + modelHeat));
+
         });
     }
     @Override
     protected ModularUI.Builder createUITemplate(EntityPlayer entityPlayer) {
-        ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND, 380, 240);
+        ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND, 200, 200);
+        builder.dynamicLabel(4, 4, () -> "热交换器", 0xFFFFFF);
+        builder.image(4, 14, 192, 82, GuiTextures.DISPLAY);
+        builder.widget((new AdvancedTextWidget(8, 18, this::addInputDisplay, 16777215)).setMaxWidthLimit(380).setClickHandler(this::handleDisplayClick));
 
-        builder.widget((new AdvancedTextWidget(4, 4, this::addInputDisplay, 16777215)).setMaxWidthLimit(380).setClickHandler(this::handleDisplayClick));
-
-        builder.widget(new ClickButtonWidget(175, 160, 20, 20, "+1", data ->
+        builder.widget(new ClickButtonWidget(4, 119, 20, 20, "+1", data ->
         {
             if (select + 1 < 8)
                 select += 1;
         }));
-        builder.widget(new ClickButtonWidget(175, 180, 20, 20, "-1", data ->
+        builder.widget(new ClickButtonWidget(4, 139, 20, 20, "-1", data ->
         {
             if (select > 0)
                 select -= 1;
         }));
 
-        builder.widget(new SlotWidget(containerInventory, 0, 140, 140, true, true)
+        builder.widget(new SlotWidget(containerInventory, 0, 25, 100, true, true)
                 .setBackgroundTexture(GuiTextures.SLOT)
                 .setTooltipText("换热原件插槽"));
 
-        builder.widget(new SlotWidget(containerInventory, 1, 170, 140, true, true)
+        builder.widget(new SlotWidget(containerInventory, 1, 43, 100, true, true)
                 .setBackgroundTexture(GuiTextures.SLOT)
                 .setTooltipText("换热原件插槽"));
 
-        builder.widget(new SlotWidget(containerInventory, 2, 200, 140, true, true)
+        builder.widget(new SlotWidget(containerInventory, 2, 61, 100, true, true)
                 .setBackgroundTexture(GuiTextures.SLOT)
                 .setTooltipText("换热原件插槽"));
 
-        builder.widget(new SlotWidget(containerInventory, 3, 230, 140, true, true)
+        builder.widget(new SlotWidget(containerInventory, 3, 79, 100, true, true)
                 .setBackgroundTexture(GuiTextures.SLOT)
                 .setTooltipText("换热原件插槽"));
 
-        builder.widget(new SlotWidget(containerInventory, 4, 260, 140, true, true)
+        builder.widget(new SlotWidget(containerInventory, 4, 97, 100, true, true)
                 .setBackgroundTexture(GuiTextures.SLOT)
                 .setTooltipText("换热原件插槽"));
 
-        builder.widget(new SlotWidget(containerInventory, 5, 290, 140, true, true)
+        builder.widget(new SlotWidget(containerInventory, 5, 115, 100, true, true)
                 .setBackgroundTexture(GuiTextures.SLOT)
                 .setTooltipText("换热原件插槽"));
 
-        builder.widget(new SlotWidget(containerInventory, 6, 320, 140, true, true)
+        builder.widget(new SlotWidget(containerInventory, 6, 133, 100, true, true)
                 .setBackgroundTexture(GuiTextures.SLOT)
                 .setTooltipText("换热原件插槽"));
 
-        builder.widget(new SlotWidget(containerInventory, 7, 350, 140, true, true)
+        builder.widget(new SlotWidget(containerInventory, 7, 151, 100, true, true)
                 .setBackgroundTexture(GuiTextures.SLOT)
                 .setTooltipText("换热原件插槽"));
 
-        builder.bindPlayerInventory(entityPlayer.inventory, GuiTextures.SLOT, 205, 160);
+        builder.bindPlayerInventory(entityPlayer.inventory, GuiTextures.SLOT, 25, 120);
         return builder;
     }
 

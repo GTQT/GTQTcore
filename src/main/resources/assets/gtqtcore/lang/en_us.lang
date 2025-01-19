@@ -1304,7 +1304,7 @@ gtqtcore.machine.large_vacuum_chamber.name=Large Vacuum Reaction Chamber
 
 gtqtcore.machine.plasma_condenser.name=Plasma Condenser
 recipemap.plasma_condenser_recipes.name=Plasma Condensation
-
+gtqtcore.machine.heat_hatch_exchange.name=Fluid Heat Exchange
 gtqtcore.machine.large_heat_exchanger.name=Large Heat Exchanger
 gtqtcore.machine.heat_exchanger.rate.true=Flow Rate: %s L/s (§4Overheated§r)
 gtqtcore.machine.heat_exchanger.rate.false=Flow Rate: %s L/s
@@ -2188,6 +2188,8 @@ gregtech.material.incoloy_020=Incoloy 020
 gregtech.material.hg_1223=HG-1223
 gregtech.material.hms_1_j_22_alloy=High-Saturation Soft Magnetic Alloy 1J22
 gregtech.material.fullerene_superconductor=Fullerene Superconductor
+gregtech.material.grisium=Grisium
+gregtech.material.tumbaga=Tumbaga
 gregtech.material.legendarium=Legendarium
 gregtech.material.superheavy_h_alloy=Superheavy Element Heavy Alloy
 gregtech.material.superheavy_l_alloy=Superheavy Element Light Alloy
@@ -2704,6 +2706,20 @@ gtqtcore.machine.laser_booster.8.name=High-Energy Laser Igniter (§3UV§r)
 gtqtcore.machine.laser_booster.9.name=High-Energy Laser Igniter (§4UHV§r)
 gtqtcore.machine.laser_booster.10.name=High-Energy Laser Igniter (§aUEV§r)
 gtqtcore.machine.laser_booster.11.name=High-Energy Laser Igniter (§2UIV§r)
+
+# HEAT_HATCH lang entries
+gtqtcore.machine.heat_hatch.lv.name=热源仓（§7LV§r）
+gtqtcore.machine.heat_hatch.mv.name=热源仓（§fMV§r）
+gtqtcore.machine.heat_hatch.hv.name=热源仓（§cHV§r）
+gtqtcore.machine.heat_hatch.ev.name=热源仓（§bEV§r）
+gtqtcore.machine.heat_hatch.iv.name=热源仓（§dIV§r）
+
+# ELECTRIC_HEATER lang entries
+gtqtcore.machine.electric_heater.lv.name=电加热器（§7LV§r）
+gtqtcore.machine.electric_heater.mv.name=电加热器（§fMV§r）
+gtqtcore.machine.electric_heater.hv.name=电加热器（§cHV§r）
+gtqtcore.machine.electric_heater.ev.name=电加热器（§bEV§r）
+gtqtcore.machine.electric_heater.iv.name=电加热器（§dIV§r）
 
 gtqtcore.machine.laser_switch.name=High-Energy Laser Distribution Unit
 gtqtcore.machine.laser_translation.name=High-Energy Laser Reception Chamber
@@ -3815,6 +3831,8 @@ metaitem.rock.bet4.name=Swamp Shale Fragment
 gregtech.material.solarium=Solarium
 gregtech.material.eternity=Eternity
 gregtech.material.spacetime=Space Time
+gregtech.material.neutron_flux=中子洪流
+gregtech.material.proton_flux=质子洪流
 metaitem.sun_matter.name=Sun Compound
 metaitem.sunlinse.name=Sun Lens
 metaitem.sunnariumpart.name=Sun Metal Polarizing Sheet
@@ -3865,6 +3883,13 @@ metaitem.algae.tau_ceti_f.spirulina.name=Spirulina of Tau Ceti F
 metaitem.algae.proxima_b.conchospore.name=Conchospore of Proxima B
 metaitem.algae.proxima_b.polysiphonia_senticulosa.name=Polysiphonia Senticulosa of Proxima B
 metaitem.algae.proxima_b.spirogyra.name=Spirogyra of Proxima B
+
+metaitem.heat_shield_mki.name=散热鳍片I
+metaitem.heat_shield_mkii.name=散热鳍片II
+metaitem.heat_shield_mkiii.name=散热鳍片III
+metaitem.heat_shield_mkiv.name=散热鳍片IV
+metaitem.heat_shield_mkv.name=散热鳍片V
+
 
 metaitem.sterilized.petri.dish.name=Sterilized Petri Dish
 metaitem.contaminated.petri.dish.name=Contaminated Petri Dish
@@ -4458,6 +4483,13 @@ recipemap.alloy_klin.name=Alloy Kiln
 tile.multiblock_casing3.naquadah_alloy_casing.name=Superstable Naquadah Alloy Machine Casing
 tile.multiblock_casing3.naquadria_casing.name=Anti-Radiation Superenergy Naquadria Machine Casing
 tile.multiblock_casing3.nitinol_machine_casing.name=Nitinol Machine Casing
+tile.multiblock_casing3.eglin_steel.name=High-strength Eglin steel machine housing
+tile.multiblock_casing3.grisium.name=Waterproof grey titanium alloy machine housing housing
+tile.multiblock_casing3.potin.name=Shock-resistant coarse bronze alloy machine housing housing
+tile.multiblock_casing3.black_steel.name=Solid black steel machine housing
+tile.multiblock_casing3.blue_steel.name=Pressure-resistant blue steel machine housing
+tile.multiblock_casing3.red_steel.name=Insulated red steel machine housing
+tile.multiblock_casing3.tumbaga.name=Moldable copper-gold alloy machine housing
 tile.multiblock_casing3.hc_alloy_casing.name=Hc Alloy Casing
 tile.multiblock_casing3.supercritical_fuel_trans_score.name=Supercritical Fuel Trans Casing
 tile.multiblock_casing3.supercritical_fuel_trans_casing.name=Supercritical Fuel Trans Score
@@ -5142,7 +5174,12 @@ tile.nuclear_fusion.nuclear_fusion_frame.name=Nuclear Fission Pressure Frame
 tile.nuclear_fusion.nuclear_fusion_cooling.name=Cooling Tower Casing
 tile.nuclear_fusion.neutron_activator_casing.name=Neutron Activator Casing
 tile.nuclear_fusion.neutron_activator_frame.name=Neutron Activator Frame
-
+tile.multiblock_casing.mass_generation_casing.name=质量发生机械方块
+tile.multiblock_casing.mass_generation_coil_casing.name=质量发生线圈方块
+tile.multiblock_casing.buncher_casing.name=调制腔
+tile.multiblock_casing.resonator_casing.name=谐振腔
+tile.multiblock_casing.high_voltage_capacitor_block_casing.name=高压流电容方块
+tile.multiblock_casing.element_constrains_machine_casing.name=元素约束机械方块
 tile.multiblock_casing.machine_casing_fusion.name=First-order Particle Fusion Casing
 tile.multiblock_casing.machine_casing_fusion_2.name=Second-order Particle Fusion Casing
 tile.multiblock_casing.machine_casing_fusion_3.name=Third-order Particle Fusion Casing
@@ -5192,6 +5229,8 @@ tile.multiblock_glass.adv_machine_glass_pr.name=Intelligent Glass (Type PR)
 tile.multiblock_glass.tech_fusion_glass_4.name=Reinforced Low-Grade Fusion Glass
 tile.multiblock_glass.tech_fusion_glass_5.name=Reinforced Mid-Grade Fusion Glass
 tile.multiblock_glass.tech_fusion_glass_6.name=Reinforced High-Grade Fusion Glass
+tile.multiblock_glass.uu_glass_block.name=抑制玻璃方块
+tile.multiblock_glass.copy_glass_block.name=粒子抑制玻璃方块
 gregtech.material.polysilicon=Solar Grade Polycrystalline Silicon
 gregtech.material.copper_cl=Copper Chloride
 gregtech.material.fluix=福鲁伊克斯
@@ -5578,6 +5617,8 @@ metaitem.pellets.tooltip=Mini Nuclear Plant
 item.material.oreprefix.pellets=%s Fuel Pellet
 metaitem.kujieranliaowan.tooltip=Beware of radiation
 item.material.oreprefix.kujieranliaowan=Depleted Low Concentration %s Fuel Pellet
+metaitem.wrap.tooltip=谁家渔网袜
+item.material.oreprefix.wrap=致密%s织网
 metaitem.ranliaowan.tooltip=Real Nuclear Plant
 item.material.oreprefix.ranliaowan=Low Concentration %s Fuel Pellet
 metaitem.upellets.tooltip=Mobile Pollution Source

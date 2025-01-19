@@ -1,6 +1,7 @@
 package keqing.gtqtcore.loaders.recipes;
 
 import gregtech.api.GTValues;
+import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.multiblock.CleanroomType;
 import gregtech.api.recipes.ModHandler;
 import gregtech.api.recipes.RecipeMaps;
@@ -179,6 +180,17 @@ public class MetaTileEntityLoader {
                 .fluidInputs(Zylon.getFluid(L * 12))
                 .outputs(WATER_POWER_STATION[2].getStackForm()).buildAndRegister();
 
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(500).EUt(480)
+                .inputs(HULL[3].getStackForm(4))
+                .input(circuit, MarkerMaterials.Tier.EV, 8)
+                .input(ELECTRIC_MOTOR_HV, 4)
+                .input(ROBOT_ARM_HV, 8)
+                .input(gear, StainlessSteel, 8)
+                .input(stick, Talonite, 8)
+                .input(OrePrefix.cableGtSingle, Aluminium, 32)
+                .circuitMeta(10)
+                .fluidInputs(Epoxy.getFluid(L * 12))
+                .outputs(WIND_GENERATOR.getStackForm()).buildAndRegister();
 
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(500).EUt(480)
                 .inputs(HULL[3].getStackForm(4))
@@ -429,7 +441,7 @@ public class MetaTileEntityLoader {
                 .duration(2000).EUt(480).buildAndRegister();
 
         BLAST_RECIPES.recipeBuilder()
-                .input(dust, Germanium, 16)
+                .input(dust, IndiumGalliumPhosphide, 16)
                 .input(plate, Polysilicon, 16)
                 .fluidInputs(Nitrogen.getFluid(4000))
                 .output(SOLAR_PLATE_MKII, 1)
@@ -437,7 +449,7 @@ public class MetaTileEntityLoader {
                 .duration(2000).EUt(1920).buildAndRegister();
 
         BLAST_RECIPES.recipeBuilder()
-                .input(dust, IndiumGalliumPhosphide, 16)
+                .input(dust, NaquadriaGalliumIndium, 16)
                 .input(plate, Polysilicon, 16)
                 .fluidInputs(Nitrogen.getFluid(4000))
                 .output(SOLAR_PLATE_MKIII, 1)
@@ -832,6 +844,13 @@ public class MetaTileEntityLoader {
                 'C', new UnificationEntry(OrePrefix.circuit, HV),
                 'F', EMITTER_HV);
 
+        ModHandler.addShapedRecipe(true, "fluid_heat_exchange", GTQTMetaTileEntities.HEAT_HATCH_EXCHANGE.getStackForm(),
+                "BCB", "FMF", "BCB",
+                'M', MetaTileEntities.HULL[GTValues.LV].getStackForm(),
+                'B', VOLTAGE_COIL_LV,
+                'C', new UnificationEntry(OrePrefix.circuit, LV),
+                'F', ELECTRIC_PUMP_LV);
+
         ModHandler.addShapedRecipe(true, "clarifier", GTQTMetaTileEntities.CLARIFIER.getStackForm(),
                 "FFF", "BMB", "CCC",
                 'M', MetaTileEntities.HULL[GTValues.LV].getStackForm(),
@@ -844,11 +863,6 @@ public class MetaTileEntityLoader {
                 'M', MetaTileEntities.HULL[GTValues.MV].getStackForm(),
                 'C', new UnificationEntry(OrePrefix.circuit, MV),
                 'F', ELECTRIC_PUMP_MV);
-
-        ModHandler.addShapedRecipe(true, "pressurized_reaction_tank", GTQTMetaTileEntities.PRESSURIZED_REACTION_TANK.getStackForm(),
-                "FFF", "BMB", "CCC", 'M', MetaTileEntities.HULL[GTValues.HV].getStackForm(), 'B',
-                new UnificationEntry(plateDouble, StainlessSteel), 'C',
-                new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.HV), 'F', ELECTRIC_MOTOR_HV);
 
         ModHandler.addShapedRecipe(true, "cracking_unit", GTQTMetaTileEntities.CRACKER.getStackForm(),
                 "CEC", "PHP", "CEC",
@@ -917,15 +931,6 @@ public class MetaTileEntityLoader {
                 'P', OreDictUnifier.get(OrePrefix.pipeLargeFluid, Materials.Polyethylene),
                 'M', MetaItems.ELECTRIC_MOTOR_HV.getStackForm(),
                 'H', MetaTileEntities.HULL[GTValues.HV].getStackForm());
-
-        ModHandler.addShapedRecipe(true, "reaction_furnace", REACTION_FURNACE.getStackForm(),
-                "KSK", "CHC", "PPP",
-                'K', new UnificationEntry(cableGtQuadruple, Aluminium),
-                'S', new UnificationEntry(spring, Steel),
-                'C', new UnificationEntry(circuit, MarkerMaterials.Tier.MV),
-                'H', MetaTileEntities.HULL[2].getStackForm(),
-                'P', new UnificationEntry(plate, Invar)
-        );
 
         ModHandler.addShapedRecipe(true, "blazing_cz_puller", BLAZING_CZ_PULLER.getStackForm(),
                 "GXG", "RHR", "PWP",
@@ -1500,5 +1505,46 @@ public class MetaTileEntityLoader {
                 'P', CraftingComponent.CIRCUIT,
                 'S', CraftingComponent.CABLE_HEX,
                 'T', CraftingComponent.STICK_DISTILLATION);
+
+        //热源仓
+        gregtech.loaders.recipe.MetaTileEntityLoader.registerMachineRecipe(true, HEAT_HATCH,
+                "TPT", "PHP", "TPT",
+                'H', CraftingComponent.HULL,
+                'P', CraftingComponent.VOLTAGE_COIL,
+                'T', CraftingComponent.SPRING);
+
+        //电加热器
+        gregtech.loaders.recipe.MetaTileEntityLoader.registerMachineRecipe(true, ELECTRIC_HEATER,
+                "TPT", "PHP", "TPT",
+                'H', CraftingComponent.HULL,
+                'P', CraftingComponent.VOLTAGE_COIL,
+                'T', CraftingComponent.CABLE_HEX);
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(ENERGY_INPUT_HATCH_16A[LuV-5],4)
+                .input(LASER_INPUT_HATCH_256[LuV-5], 1)
+                .input(circuit, MarkerMaterials.Tier.LuV,8)
+                .outputs(LASER_BOOSTER[0].getStackForm())
+                .EUt(VA[GTValues.LuV])
+                .duration(300)
+                .buildAndRegister();
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(ENERGY_INPUT_HATCH_16A[GTValues.ZPM-5],4)
+                .input(LASER_INPUT_HATCH_1024[GTValues.ZPM-5], 1)
+                .input(circuit, MarkerMaterials.Tier.ZPM,8)
+                .outputs(LASER_BOOSTER[1].getStackForm())
+                .EUt(VA[GTValues.ZPM])
+                .duration(300)
+                .buildAndRegister();
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(ENERGY_INPUT_HATCH_16A[GTValues.UV-5],4)
+                .input(LASER_INPUT_HATCH_1024[GTValues.UV-5], 1)
+                .input(circuit, MarkerMaterials.Tier.UV,8)
+                .outputs(LASER_BOOSTER[2].getStackForm())
+                .EUt(VA[UV])
+                .duration(300)
+                .buildAndRegister();
     }
 }

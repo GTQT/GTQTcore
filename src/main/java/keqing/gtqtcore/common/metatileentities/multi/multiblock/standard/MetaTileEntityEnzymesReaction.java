@@ -17,9 +17,6 @@ import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.client.renderer.ICubeRenderer;
-import gregtech.client.renderer.texture.Textures;
-import gregtech.common.blocks.BlockMetalCasing;
-import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.capability.IPHValue;
 import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
@@ -30,6 +27,8 @@ import keqing.gtqtcore.api.utils.EnzymesUtils;
 import keqing.gtqtcore.api.utils.GTQTMathUtil;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
+import keqing.gtqtcore.common.block.GTQTMetaBlocks;
+import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing1;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -67,9 +66,6 @@ public class MetaTileEntityEnzymesReaction extends MultiMapMultiblockController 
         this.recipeMapWorkable = new BiologicalReactionLogic(this);
     }
 
-    private static IBlockState getCasingState() {
-        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STAINLESS_CLEAN);
-    }
 
     @Override
     public boolean canBeDistinct() {
@@ -165,11 +161,16 @@ public class MetaTileEntityEnzymesReaction extends MultiMapMultiblockController 
                 .build();
     }
 
+    protected IBlockState getCasingState() {
+        return GTQTMetaBlocks.blockMultiblockCasing1.getState(BlockMultiblockCasing1.CasingType.Talonite);
+    }
+
     @SideOnly(Side.CLIENT)
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
-        return Textures.CLEAN_STAINLESS_STEEL_CASING;
+        return GTQTTextures.Talonite;
     }
+
 
     @Nonnull
     @Override

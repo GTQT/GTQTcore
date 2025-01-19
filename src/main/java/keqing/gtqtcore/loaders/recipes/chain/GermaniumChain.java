@@ -112,7 +112,7 @@ public class GermaniumChain {
                 .EUt(120)
                 .buildAndRegister();
 
-        REACTION_FURNACE_RECIPES.recipeBuilder()
+        BURNER_REACTOR_RECIPES.recipeBuilder()
                 .input(dust, HighPurityGermaniumDioxide,4)
                 .output(dust,Germanium,4)
                 .chancedOutput(dust, MixedGermaniumCadmiumResidue,1,1000,500)
@@ -120,25 +120,28 @@ public class GermaniumChain {
                 .fluidOutputs(Oxygen.getFluid(8000))
                 .duration(1000)
                 .EUt(480)
+                .blastFurnaceTemp(3600)
                 .buildAndRegister();
     }
 
     private static void Beishao() {
         //闪锌矿+氧气 回转炉=氧化闪锌混合物
-        REACTION_FURNACE_RECIPES.recipeBuilder()
+        BURNER_REACTOR_RECIPES.recipeBuilder()
                 .input(crushed,Sphalerite,16)
                 .fluidInputs(Oxygen.getFluid(16000))
                 .output(dust, ZincOxideFlashMixture,8)
                 .duration(1000)
                 .EUt(480)
+                .blastFurnaceTemp(3600)
                 .buildAndRegister();
 
-        REACTION_FURNACE_RECIPES.recipeBuilder()
+        BURNER_REACTOR_RECIPES.recipeBuilder()
                 .input(dust,Sphalerite,32)
                 .fluidInputs(Oxygen.getFluid(16000))
                 .output(dust, ZincOxideFlashMixture,8)
                 .duration(1000)
                 .EUt(480)
+                .blastFurnaceTemp(3600)
                 .buildAndRegister();
 
         //氧化闪锌混合物+过氧化氢=富集闪锌混合物
@@ -151,13 +154,14 @@ public class GermaniumChain {
                 .buildAndRegister();
 
         //富集闪锌混合物+盐 焙烧=富集闪锌焙烧残留
-        REACTION_FURNACE_RECIPES.recipeBuilder()
+        BURNER_REACTOR_RECIPES.recipeBuilder()
                 .input(dust, RichZincFlashMixture,16)
                 .input(dust,Salt,16)
                 .output(dust, EnrichmentResidualFlashZincRoasting,16)
                 .output(dust,Sodium,8)
                 .duration(1000)
                 .EUt(480)
+                .blastFurnaceTemp(3600)
                 .buildAndRegister();
     }
 
@@ -198,20 +202,22 @@ public class GermaniumChain {
                 .buildAndRegister();
 
         //渣处理
-        REACTION_FURNACE_RECIPES.recipeBuilder()
+        BURNER_REACTOR_RECIPES.recipeBuilder()
                 .input(dust, MixedGermaniumIronResidue,16)
                 .fluidOutputs(GermaniumMonoxide.getFluid(16000))
                 .output(dust, BurningGermaniumSlag,16)
                 .duration(1000)
                 .EUt(480)
+                .blastFurnaceTemp(3600)
                 .buildAndRegister();
 
-        REACTION_FURNACE_RECIPES.recipeBuilder()
+        BURNER_REACTOR_RECIPES.recipeBuilder()
                 .input(dust, MixedGermaniumCadmiumResidue,16)
                 .fluidOutputs(GermaniumMonoxide.getFluid(16000))
                 .output(dust, BurningGermaniumSlag,16)
                 .duration(1000)
                 .EUt(480)
+                .blastFurnaceTemp(3600)
                 .buildAndRegister();
 
         //锗渣处理
