@@ -1,5 +1,6 @@
 package keqing.gtqtcore.common.metatileentities.multi.generators;
 
+import gregtech.api.GTValues;
 import gregtech.api.capability.GregtechCapabilities;
 import gregtech.api.capability.IEnergyContainer;
 import gregtech.api.metatileentity.MetaTileEntity;
@@ -102,7 +103,7 @@ public class MetaTileEntityLargeRocketEngine extends FuelMultiblockController {
                                @Nonnull List<String> tooltip,
                                boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
-        tooltip.add(I18n.format("gregtech.unLuVersal.tooltip.base_production_eut", V[LuV]));
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("并不会飞上天空！！", new Object[0]));
+        tooltip.add(I18n.format("gregtech.universal.tooltip.base_production_eut", GTValues.V[LuV]));
     }
 }
