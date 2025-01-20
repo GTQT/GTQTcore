@@ -1113,5 +1113,21 @@ public class SecondDegreeMaterials {
                 .build()
                 .setFormula("C5H10N2O3", true);
 
+        GTQTMaterials.TinFront = new Material.Builder(getMaterialsId(), gregtechId("tin_front")).fluid().color(0xFFFFFF).build();
+        GTQTMaterials.CassiteriteFront = new Material.Builder(getMaterialsId(), gregtechId("cassiterite_front")).fluid().color(0xFFFFFF).build();
+        GTQTMaterials.GoldFront = new Material.Builder(getMaterialsId(), gregtechId("gold_front")).fluid().color(0xEEEE00).build();
+        GTQTMaterials.PreciousFront = new Material.Builder(getMaterialsId(), gregtechId("precious_front")).fluid().color(0xCDAD00).build();
+        GTQTMaterials.LeanGoldFront = new Material.Builder(getMaterialsId(), gregtechId("lean_gold_front")).fluid().color(0xDAA520).build();
+        GTQTMaterials.RichGoldFront = new Material.Builder(getMaterialsId(), gregtechId("rich_gold_front")).fluid().color(0xD2691E).build();
+        GTQTMaterials.LeadFront = new Material.Builder(getMaterialsId(), gregtechId("lead_front")).fluid().color(0x9A32CD).build();
+        GTQTMaterials.GalenaFront = new Material.Builder(getMaterialsId(), gregtechId("galena_front")).fluid().color(0x9B30FF).build();
+        GTQTMaterials.WulfeniteFront = new Material.Builder(getMaterialsId(), gregtechId("wulfenite_front")).fluid().color(0x8B8B00).build();
+        GTQTMaterials.CrocoiteFront = new Material.Builder(getMaterialsId(), gregtechId("crocoite_front")).fluid().color(0x8B8B7A).build();
+        GTQTMaterials.StibniteFront = new Material.Builder(getMaterialsId(), gregtechId("stibnite_front")).fluid().color(0x303030).build();
+        GTQTMaterials.ScheeliteFront = new Material.Builder(getMaterialsId(), gregtechId("scheelite_front")).fluid().color(0xB8860B).build();
+        GTQTMaterials.TungstateFront = new Material.Builder(getMaterialsId(), gregtechId("tungstate_front")).fluid().color(0x303030).build();
+        GTQTMaterials.UraniniteFront = new Material.Builder(getMaterialsId(), gregtechId("uraninite_front")).fluid().color(0x303030).build();
+        GTQTMaterials.PitchblendeFront = new Material.Builder(getMaterialsId(), gregtechId("pitchblende_front")).fluid().color(0xBCEE68).build();
+
     }
 }

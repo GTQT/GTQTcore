@@ -10,10 +10,12 @@ import gregtech.api.unification.material.Materials;
 import gregtech.api.util.GTUtility;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraftforge.fluids.FluidStack;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import static gregtech.api.GTValues.*;
 import static gregtech.api.unification.material.Materials.DistilledWater;
@@ -23,7 +25,6 @@ import static keqing.gtqtcore.api.utils.GTQTUtil.CWT;
 
 public class CopyRecipesHandlers {
     public static void init() {
-
         //固化
         Collection<Recipe> solidificationRecipes = RecipeMaps.FLUID_SOLIDFICATION_RECIPES.getRecipeList();
         for (Recipe recipe : solidificationRecipes) {

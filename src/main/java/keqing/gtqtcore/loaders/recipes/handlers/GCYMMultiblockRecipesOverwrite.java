@@ -4,6 +4,7 @@ import gregicality.multiblocks.common.metatileentities.GCYMMetaTileEntities;
 import gregtech.api.metatileentity.multiblock.CleanroomType;
 import gregtech.api.recipes.ModHandler;
 import gregtech.api.unification.material.MarkerMaterials;
+import gregtech.api.unification.stack.UnificationEntry;
 import gregtech.common.items.MetaItems;
 import gregtech.common.metatileentities.MetaTileEntities;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
@@ -17,17 +18,21 @@ import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.circuit;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.common.items.MetaItems.*;
+import static gregtech.common.items.MetaItems.ELECTRIC_PUMP_IV;
 import static gregtech.common.metatileentities.MetaTileEntities.*;
 import static gregtech.common.metatileentities.MetaTileEntities.DISTILLATION_TOWER;
 import static gregtech.loaders.recipe.CraftingComponent.*;
 import static gregtech.loaders.recipe.CraftingComponent.HULL;
 import static gregtech.loaders.recipe.MetaTileEntityLoader.registerMachineRecipe;
+import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.POLYMERIZATION_RECIPES;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.TJMaterials.Polyetheretherketone;
 import static keqing.gtqtcore.api.utils.GTQTUtil.CWT;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.DISK_22;
+import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.*;
+import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.SONICATOR;
 
 public class GCYMMultiblockRecipesOverwrite {
     public static void init() {
@@ -36,6 +41,245 @@ public class GCYMMultiblockRecipesOverwrite {
     private static void multiblocks() {
         /////////////////////////Fuck Machine
         ModHandler.removeRecipeByName("gcym:steam_engine");
+        /////////////////////////GCYS Machine Overwrite
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(CIRCUIT_GOOD_I, 8)
+                .input(CATALYTIC_REFORMER[IV], 4)
+                .input(ELECTRIC_PUMP_IV, 8)
+                .input(VOLTAGE_COIL_IV, 8)
+                .input(pipeNormalFluid, StainlessSteel, 4)
+                .input(spring, HSLASteel, 32)
+                .input(plate, HSLASteel, 16)
+                .input(plate, Rhodium, 16)
+                .input(wireFine, Osmium, 32)
+                .input(cableGtDouble, Aluminium, 64)
+                .fluidInputs(Polybenzimidazole.getFluid(L * 32))
+                .fluidInputs(Zylon.getFluid(L * 64))
+                .fluidInputs(TitaniumTungstenCarbide.getFluid(L * 64))
+                .fluidInputs(UltraGlue.getFluid(L * 64))
+                .output(GTQTMetaTileEntities.LARGE_CATALYTIC_REFORMER)
+                .EUt(VA[EV])
+                .duration(1200)
+                .scannerResearch(b -> b
+                        .researchStack(DISK_21.getStackForm())
+                        .duration(1200)
+                        .EUt(VA[EV]))
+                .buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(CIRCUIT_GOOD_I, 8)
+                .input(SONICATOR[IV], 4)
+                .input(ELECTRIC_PUMP_IV, 8)
+                .input(ELECTRIC_MOTOR_IV, 8)
+                .input(pipeNormalFluid, StainlessSteel, 4)
+                .input(spring, RTMAlloy, 32)
+                .input(plate, HSLASteel, 16)
+                .input(plate, Rhodium, 16)
+                .input(wireFine, Osmium, 32)
+                .input(cableGtSingle, Platinum, 64)
+                .fluidInputs(Polybenzimidazole.getFluid(L * 32))
+                .fluidInputs(Zylon.getFluid(L * 64))
+                .fluidInputs(TitaniumTungstenCarbide.getFluid(L * 64))
+                .fluidInputs(UltraGlue.getFluid(L * 64))
+                .output(GTQTMetaTileEntities.LARGE_SONICATOR)
+                .EUt(VA[EV])
+                .duration(1200)
+                .scannerResearch(b -> b
+                        .researchStack(DISK_21.getStackForm())
+                        .duration(1200)
+                        .EUt(VA[EV]))
+                .buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(CIRCUIT_GOOD_I, 8)
+                .input(ROASTER[IV], 4)
+                .input(VOLTAGE_COIL_IV, 8)
+                .input(ELECTRIC_MOTOR_IV, 8)
+                .input(pipeNormalFluid, StainlessSteel, 4)
+                .input(spring, Titanium, 32)
+                .input(plate, TitaniumCarbide, 16)
+                .input(plate, Rhodium, 16)
+                .input(wireFine, Osmium, 32)
+                .input(cableGtSingle, Platinum, 64)
+                .fluidInputs(Polybenzimidazole.getFluid(L * 32))
+                .fluidInputs(Zylon.getFluid(L * 64))
+                .fluidInputs(TitaniumTungstenCarbide.getFluid(L * 64))
+                .fluidInputs(UltraGlue.getFluid(L * 64))
+                .output(GTQTMetaTileEntities.LARGE_ROASTER)
+                .EUt(VA[EV])
+                .duration(1200)
+                .scannerResearch(b -> b
+                        .researchStack(DISK_21.getStackForm())
+                        .duration(1200)
+                        .EUt(VA[EV]))
+                .buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(CIRCUIT_GOOD_I, 8)
+                .input(MetaTileEntities.HULL[IV], 4)
+                .input(SENSOR_IV, 8)
+                .input(EMITTER_IV, 8)
+                .input(FIELD_GENERATOR_IV, 8)
+                .input(spring, Titanium, 32)
+                .input(plate, TitaniumCarbide, 16)
+                .input(plate, Rhodium, 16)
+                .input(wireFine, Osmium, 32)
+                .input(cableGtSingle, Platinum, 64)
+                .fluidInputs(Polybenzimidazole.getFluid(L * 32))
+                .fluidInputs(Zylon.getFluid(L * 64))
+                .fluidInputs(TitaniumTungstenCarbide.getFluid(L * 64))
+                .fluidInputs(UltraGlue.getFluid(L * 64))
+                .output(GTQTMetaTileEntities.LARGE_NANOSCALE_FABRICATOR)
+                .EUt(VA[EV])
+                .duration(1200)
+                .scannerResearch(b -> b
+                        .researchStack(DISK_21.getStackForm())
+                        .duration(1200)
+                        .EUt(VA[EV]))
+                .buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(CIRCUIT_GOOD_I, 8)
+                .input(CVD_UNIT[IV], 4)
+                .input(VOLTAGE_COIL_IV, 8)
+                .input(SENSOR_EV, 8)
+                .input(pipeNormalFluid, StainlessSteel, 4)
+                .input(gear, Stellite, 4)
+                .input(plate, TitaniumCarbide, 16)
+                .input(plate, Rhodium, 16)
+                .input(wireFine, Osmium, 32)
+                .input(cableGtSingle, Platinum, 64)
+                .fluidInputs(Polybenzimidazole.getFluid(L * 32))
+                .fluidInputs(Zylon.getFluid(L * 64))
+                .fluidInputs(TitaniumTungstenCarbide.getFluid(L * 64))
+                .fluidInputs(UltraGlue.getFluid(L * 64))
+                .output(GTQTMetaTileEntities.LARGE_CVD_UNIT)
+                .EUt(VA[EV])
+                .duration(1200)
+                .scannerResearch(b -> b
+                        .researchStack(DISK_21.getStackForm())
+                        .duration(1200)
+                        .EUt(VA[EV]))
+                .buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(CIRCUIT_GOOD_I, 8)
+                .input(MetaTileEntities.LARGE_CHEMICAL_REACTOR, 4)
+                .input(POLYMERIZATION_TANK[IV], 8)
+                .input(ROBOT_ARM_IV, 8)
+                .input(ELECTRIC_PUMP_IV, 8)
+                .input(plateDense, EglinSteel, 4)
+                .input(gear, Stellite, 4)
+                .input(plate, TitaniumCarbide, 16)
+                .input(wireFine, Osmium, 32)
+                .input(cableGtSingle, Platinum, 64)
+                .fluidInputs(Polybenzimidazole.getFluid(L * 32))
+                .fluidInputs(Zylon.getFluid(L * 64))
+                .fluidInputs(TitaniumTungstenCarbide.getFluid(L * 64))
+                .fluidInputs(UltraGlue.getFluid(L * 64))
+                .output(GTQTMetaTileEntities.LARGE_CHEMICAL_FACTORY)
+                .EUt(VA[EV])
+                .duration(1200)
+                .scannerResearch(b -> b
+                        .researchStack(DISK_21.getStackForm())
+                        .duration(1200)
+                        .EUt(VA[EV]))
+                .buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(CIRCUIT_GOOD_I, 8)
+                .input(BURNER_REACTOR[IV], 4)
+                .input(ROASTER[IV], 8)
+                .input(ELECTRIC_PISTON_IV, 8)
+                .input(ELECTRIC_PUMP_IV, 8)
+                .input(plateDense, EglinSteel, 4)
+                .input(gear, Stellite, 4)
+                .input(plate, TitaniumCarbide, 16)
+                .input(wireFine, Osmium, 32)
+                .input(cableGtSingle, Platinum, 64)
+                .fluidInputs(Polybenzimidazole.getFluid(L * 32))
+                .fluidInputs(Zylon.getFluid(L * 64))
+                .fluidInputs(TitaniumTungstenCarbide.getFluid(L * 64))
+                .fluidInputs(UltraGlue.getFluid(L * 64))
+                .output(GTQTMetaTileEntities.LARGE_BURNER_REACTOR)
+                .EUt(VA[EV])
+                .duration(1200)
+                .scannerResearch(b -> b
+                        .researchStack(DISK_21.getStackForm())
+                        .duration(1200)
+                        .EUt(VA[EV]))
+                .buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(CIRCUIT_GOOD_I, 8)
+                .input(CRYOGENIC_REACTOR[IV], 4)
+                .input(LOW_TEMP_ACTIVATOR[IV], 8)
+                .input(ELECTRIC_PISTON_IV, 8)
+                .input(ELECTRIC_PUMP_IV, 8)
+                .input(plateDense, StainlessSteel, 4)
+                .input(gear, Stellite, 4)
+                .input(plate, TitaniumCarbide, 16)
+                .input(wireFine, Osmium, 32)
+                .input(cableGtSingle, Platinum, 64)
+                .fluidInputs(Polybenzimidazole.getFluid(L * 32))
+                .fluidInputs(Zylon.getFluid(L * 64))
+                .fluidInputs(TitaniumTungstenCarbide.getFluid(L * 64))
+                .fluidInputs(UltraGlue.getFluid(L * 64))
+                .output(GTQTMetaTileEntities.LARGE_CRYOGENIC_REACTOR)
+                .EUt(VA[EV])
+                .duration(1200)
+                .scannerResearch(b -> b
+                        .researchStack(DISK_21.getStackForm())
+                        .duration(1200)
+                        .EUt(VA[EV]))
+                .buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(CIRCUIT_GOOD_II, 8)
+                .input(circuit, MarkerMaterials.Tier.UV, 4)
+                .input(circuit, MarkerMaterials.Tier.ZPM, 16)
+                .input(MetaTileEntities.HULL[UV])
+                .input(ELECTRIC_MOTOR_UV, 4)
+                .input(ELECTRIC_PUMP_UV, 4)
+                .input(gear, NaquadahAlloy, 4)
+                .input(pipeLargeFluid, Naquadah, 32)
+                .input(gear, Stellite, 4)
+                .input(plate, TitaniumCarbide, 16)
+                .fluidInputs(KaptonK.getFluid(L * 32))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 16))
+                .fluidInputs(Polyetheretherketone.getFluid(L * 16))
+                .fluidInputs(NaquadahAlloy.getFluid(L * 4))
+                .output(LARGE_HYDRAULIC_FRACKER)
+                .EUt(VA[UV])
+                .stationResearch(b -> b
+                        .researchStack(DISK_9.getStackForm())
+                        .EUt(VA[ZPM])
+                        .CWUt(CWT[ZPM]))
+                .duration(400)
+                .buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(CIRCUIT_GOOD_II, 8)
+                .input(CHEMICAL_REACTOR[IV], 4)
+                .input(ELECTRIC_PISTON_IV, 8)
+                .input(ELECTRIC_PUMP_IV, 8)
+                .input(pipeNormalFluid, TungstenSteel, 4)
+                .input(plateDouble, MolybdenumDisilicide, 4)
+                .input(plate, TungstenSteel, 16)
+                .input(wireFine, Osmium, 32)
+                .input(cableGtSingle, Platinum, 64)
+                .fluidInputs(Polybenzimidazole.getFluid(L * 32))
+                .fluidInputs(Zylon.getFluid(L * 64))
+                .fluidInputs(TitaniumTungstenCarbide.getFluid(L * 64))
+                .fluidInputs(UltraGlue.getFluid(L * 64))
+                .output(GTQTMetaTileEntities.LARGE_CRYSTALLIZATION_CRUCIBLE)
+                .EUt(VA[EV])
+                .duration(1200)
+                .scannerResearch(b -> b
+                        .researchStack(DISK_21.getStackForm())
+                        .duration(1200)
+                        .EUt(VA[EV]))
+                .buildAndRegister();
         /////////////////////////Common Machine
         ModHandler.removeRecipeByName("gcym:large_circuit_assembler");
         ASSEMBLY_LINE_RECIPES.recipeBuilder()

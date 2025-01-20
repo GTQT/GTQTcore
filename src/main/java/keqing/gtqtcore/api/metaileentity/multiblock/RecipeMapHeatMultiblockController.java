@@ -116,6 +116,7 @@ public abstract class RecipeMapHeatMultiblockController extends MultiblockWithDi
     }
 
     public boolean checkRecipe(@Nonnull Recipe recipe, boolean consumeIfSuccess) {
+        if(heat<300)return false;
         return heat >= recipe.getProperty(HeatProperty.getInstance(), 0);
     }
 

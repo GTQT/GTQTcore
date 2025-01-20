@@ -76,7 +76,7 @@ public class MetaTileEntityElectricHeater extends TieredMetaTileEntity {
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("烫！烫！烫！", new Object[0]));
         tooltip.add(I18n.format("配合需要 热源仓（Heat Hatch）的设备使用"));
         tooltip.add(I18n.format("需要将仓背面紧贴热源仓，可热源仓进行加热操作"));
-        tooltip.add(I18n.format("加热器提供的热量为：5000k*加热器等级"));
+        tooltip.add(I18n.format("加热器提供的热量为：500k*加热器等级"));
     }
     @Override
     public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {

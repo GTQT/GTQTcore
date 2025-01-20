@@ -122,7 +122,22 @@ public class GTQTMaterials {
     public static Material RedstoneFront;
     public static Material SpessartineFront;
     public static Material SphaleriteFront;
+    public static Material TinFront;
+    public static Material CassiteriteFront;
+    public static Material GoldFront;
+    public static Material PreciousFront;
+    public static Material LeanGoldFront;
+    public static Material RichGoldFront;
+    public static Material LeadFront;
+    public static Material GalenaFront;
+    public static Material WulfeniteFront;
+    public static Material CrocoiteFront;
 
+    public static Material StibniteFront;
+    public static Material ScheeliteFront;
+    public static Material TungstateFront;
+    public static Material UraniniteFront;
+    public static Material PitchblendeFront;
 
     public static Material Thaumium;
     public static Material MetallicHydrogen;

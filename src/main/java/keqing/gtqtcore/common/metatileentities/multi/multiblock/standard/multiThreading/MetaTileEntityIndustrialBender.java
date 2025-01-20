@@ -15,6 +15,7 @@ import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockCore;
+import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.unification.GTQTMaterials;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
@@ -32,7 +33,13 @@ import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4.Turbine
 public class MetaTileEntityIndustrialBender extends GTQTMultiblockCore {
 
     public MetaTileEntityIndustrialBender(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, new RecipeMap[]{RecipeMaps.BENDER_RECIPES});
+        super(metaTileEntityId, new RecipeMap[]{
+                RecipeMaps.BENDER_RECIPES,
+                RecipeMaps.FORGE_HAMMER_RECIPES,
+                RecipeMaps.FORMING_PRESS_RECIPES,
+                RecipeMaps.COMPRESSOR_RECIPES,
+                GTQTcoreRecipeMaps.PRESSURE_LAMINATOR_RECIPES
+        });
     }
 
     private static IBlockState getFrameState() {

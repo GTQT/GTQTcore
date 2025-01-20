@@ -943,12 +943,12 @@ gtqtcore.machine.naquadah_reactor.zpm.name=精英硅岩反应堆 III
 gtqtcore.machine.naquadah_reactor.zpm.tooltip=取之不尽，用之不竭
 
 recipemap.rocket_engine_recipes.name=火箭引擎
-gtqtcore.machine.rocket_engine.ev.name=进阶火箭引擎 III
+gtqtcore.machine.rocket_engine.hv.name=进阶火箭引擎 III
+gtqtcore.machine.rocket_engine.hv.tooltip=嗡嗡作响
+gtqtcore.machine.rocket_engine.ev.name=精英火箭引擎
 gtqtcore.machine.rocket_engine.ev.tooltip=嗡嗡作响
-gtqtcore.machine.rocket_engine.iv.name=精英火箭引擎
+gtqtcore.machine.rocket_engine.iv.name=精英火箭引擎 II
 gtqtcore.machine.rocket_engine.iv.tooltip=嗡嗡作响
-gtqtcore.machine.rocket_engine.luv.name=精英火箭引擎 II
-gtqtcore.machine.rocket_engine.luv.tooltip=嗡嗡作响
 
 gtqtcore.machine.particle_accelerator_io.lv.name=基本粒子源I
 gtqtcore.machine.particle_accelerator_io.mv.name=基本粒子源II
@@ -1633,7 +1633,7 @@ gtqtcore.machine.compact_cyclotron.tooltip.3=能够以§c590MeV§7的能量产�
 recipemap.dragon_fusion_unit_recipes.name=魔力聚合
 gtqtcore.machine.dragon_fusion_unit.name=魔力聚合装置
 gtqtcore.machine.dragon_fusion_unit.tooltip.1=龙之力量由此苏醒
-
+gtqtcore.machine.heat_furnace.name=热力熔炉
 gtqtcore.machine.industrial_primitive_blast_furnace.name=工业级土高炉
 gtqtcore.machine.industrial_primitive_blast_furnace.auxiliary_blast_furnace=附属高炉： %s 座
 
@@ -3299,6 +3299,7 @@ gregtech.multiblock.hv_processing_array.description=处理阵列可将最多8个
 gtqtcore.machine.hv_machine_hatch.name=机器访问接口
 gtqtcore.machine.coagulation_tank.name=混凝反应池
 gtqtcore.machine.ex_cvd.name=极限粒子CVD
+gtqtcore.machine.chemical_factory.name=大型化学复合工厂
 gtqtcore.multiblock.wps.tooltip.1=可拓展多方块结构长度，升级线圈等级，每片结构都需要安装能源仓
 gtqtcore.multiblock.wps.tooltip.2=基础电量基于多方块结构长度为半径，高度四格以主方块为中心范围内的水
 gtqtcore.multiblock.wps.tooltip.3=发电倍率：水电站等级*线圈等级*波动发电倍率（最高0.6）
@@ -3957,6 +3958,21 @@ gregtech.material.pyrope_front=镁铝榴石泡沫
 gregtech.material.redstone_front=红石泡沫
 gregtech.material.spessartine_front=锰铝榴石泡沫
 gregtech.material.sphalerite_front=闪锌矿泡沫
+gregtech.material.tin_front=锡泡沫
+gregtech.material.cassiterite_front=锡石泡沫
+gregtech.material.gold_front=金泡沫
+gregtech.material.precious_front=贵金属泡沫
+gregtech.material.lean_gold_front=贫金泡沫
+gregtech.material.rich_gold_front=富金泡沫
+gregtech.material.lead_front=铅泡沫
+gregtech.material.galena_front=方铅矿泡沫
+gregtech.material.wulfenite_front=钨锰矿泡沫
+gregtech.material.crocoite_front=铬铁矿泡沫
+gregtech.material.stibnite_front=锑矿泡沫
+gregtech.material.scheelite_front=钨矿泡沫
+gregtech.material.tungstate_front=钒酸盐泡沫
+gregtech.material.uraninite_front=铀矿泡沫
+gregtech.material.pitchblende_front=沥青铀矿泡沫
 
 gregtech.material.iron_front=铁矿泡沫
 gregtech.material.banded_iron_front=带状矿泡沫

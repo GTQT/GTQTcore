@@ -28,18 +28,33 @@ public class ISA {
         return stack;
     }
 
-    public static void isaLine(Material materials1,Material materials2,Material materials3,Material materials4,Material materials5,Material materials6)
+    public static void isaLine(boolean kind,Material materials1,Material materials2,Material materials3,Material materials4,Material materials5,Material materials6)
     {
-        GTQTcoreRecipeMaps.FLOTATION_FACTORY_RECIPES.recipeBuilder()
-                .inputs(GTQTMetaItems.POTASSIUM_ETHYLXANTHATE.getStackForm(32))
-                .input(GTQTOrePrefix.milled, materials1, 64)
-                .input(GTQTOrePrefix.milled, materials1, 64)
-                .input(GTQTOrePrefix.milled, materials1, 64)
-                .input(GTQTOrePrefix.milled, materials1, 64)
-                .EUt(1920).duration(9600)
-                .fluidInputs(GTQTMaterials.PineOil.getFluid(12000))
-                .fluidOutputs(materials2.getFluid(1000))
-                .buildAndRegister();
+        if(kind) {
+            GTQTcoreRecipeMaps.FLOTATION_FACTORY_RECIPES.recipeBuilder()
+                    .inputs(GTQTMetaItems.POTASSIUM_ETHYLXANTHATE.getStackForm(32))
+                    .input(GTQTOrePrefix.milled, materials1, 64)
+                    .input(GTQTOrePrefix.milled, materials1, 64)
+                    .input(GTQTOrePrefix.milled, materials1, 64)
+                    .input(GTQTOrePrefix.milled, materials1, 64)
+                    .EUt(1920).duration(9600)
+                    .fluidInputs(GTQTMaterials.PineOil.getFluid(12000))
+                    .fluidOutputs(materials2.getFluid(1000))
+                    .buildAndRegister();
+        }
+        else
+        {
+            GTQTcoreRecipeMaps.FLOTATION_FACTORY_RECIPES.recipeBuilder()
+                    .inputs(GTQTMetaItems.SODIUM_ETHYLXANTHATE.getStackForm(32))
+                    .input(GTQTOrePrefix.milled, materials1, 64)
+                    .input(GTQTOrePrefix.milled, materials1, 64)
+                    .input(GTQTOrePrefix.milled, materials1, 64)
+                    .input(GTQTOrePrefix.milled, materials1, 64)
+                    .EUt(1920).duration(9600)
+                    .fluidInputs(GTQTMaterials.PineOil.getFluid(12000))
+                    .fluidOutputs(materials2.getFluid(1000))
+                    .buildAndRegister();
+        }
 
         GTQTcoreRecipeMaps.VACUUM_DRYING_FURNACE_RECIPES.recipeBuilder()
                 .fluidInputs(materials2.getFluid(4000))
@@ -61,22 +76,45 @@ public class ISA {
         //32*乙基荒原酸钠+4*研磨矿+8000松油=1000泡沫
         //4000泡沫=2000红色泥浆+2000水+3*主产*64+2*副产1*64+副产2*50+副产3*10
         //铁系
-        isaLine(Iron,IronFront,Iron,Iron,Nickel,Copper);
-        isaLine(BandedIron,BandedIronFront,Iron,Iron,Nickel,Tin);
-        isaLine(BrownLimonite,BrownLimoniteFront,Iron,Iron,Copper,Copper);
-        isaLine(YellowLimonite,YellowLimoniteFront,Iron,Iron,Copper,Tin);
-        isaLine(Chromite,ChromiteFront,Iron,Iron,Chrome,Magnesium);
-        isaLine(Ilmenite,IlmeniteFront,Iron,Rutile,Titanium,Tungsten);
-        isaLine(Magnetite,MagnetiteFront,Iron,Iron,Gold,Gold);
-        isaLine(Pyrite,PyriteFront,Iron,Iron,Sulfur,TricalciumPhosphate);
-        isaLine(Tantalite,TantaliteFront,Iron,Manganese,Tantalum,Niobium);
+        isaLine(true,Iron,IronFront,Iron,Iron,Nickel,Copper);
+        isaLine(true,BandedIron,BandedIronFront,Iron,Iron,Nickel,Tin);
+        isaLine(true,BrownLimonite,BrownLimoniteFront,Iron,Iron,Copper,Copper);
+        isaLine(true,YellowLimonite,YellowLimoniteFront,Iron,Iron,Copper,Tin);
+        isaLine(true,Chromite,ChromiteFront,Iron,Iron,Chrome,Magnesium);
+        isaLine(true,Ilmenite,IlmeniteFront,Iron,Rutile,Titanium,Tungsten);
+        isaLine(true,Magnetite,MagnetiteFront,Iron,Iron,Gold,Gold);
+        isaLine(true,Pyrite,PyriteFront,Iron,Iron,Sulfur,TricalciumPhosphate);
+        isaLine(true,Tantalite,TantaliteFront,Iron,Manganese,Tantalum,Niobium);
         //铜系
-        isaLine(Copper,CopperFront,Copper,Nickel,Cobalt,Gold);
-        isaLine(Tetrahedrite,TetrahedriteFront,Tetrahedrite,Antimony,Cadmium,Sulfur);
-        isaLine(Chalcocite,ChalcociteFront,Copper,Copper,Sulfur,Silver);
+        isaLine(false,Copper,CopperFront,Copper,Nickel,Cobalt,Gold);
+        isaLine(false,Tetrahedrite,TetrahedriteFront,Tetrahedrite,Antimony,Cadmium,Sulfur);
+        isaLine(false,Chalcocite,ChalcociteFront,Copper,Copper,Sulfur,Silver);
         //铝系
-        isaLine(Aluminium,AluminiumFront,Aluminium,Aluminium,Ilmenite,Rutile);
-        isaLine(Bauxite,BauxiteFront,Aluminium,Aluminium,Gallium,Rutile);
+        isaLine(false,Aluminium,AluminiumFront,Aluminium,Aluminium,Ilmenite,Rutile);
+        isaLine(false,Bauxite,BauxiteFront,Aluminium,Aluminium,Gallium,Rutile);
+        //锡
+        isaLine(true,Tin,TinFront,Tin,Tin,Zinc,Iron);
+        isaLine(true,Cassiterite,CassiteriteFront,Cassiterite,Cassiterite,Iron,Bismuth);
+        //金
+        isaLine(true,Gold,GoldFront,Gold,Gold,Copper,Silver);
+        isaLine(true,PreciousMetal,PreciousFront,Gold,Gold,Nickel,Tin);
+        isaLine(true,LeanGoldSulphide,LeanGoldFront,Gold,Gold,Nickel,Iron);
+        isaLine(true,RichGoldSulphide,RichGoldFront,Gold,Gold,Copper,Tin);
+        //铅
+        isaLine(false,Lead,LeadFront,Lead,Lead,Sulfur,Silver);
+        isaLine(false,Galena,GalenaFront,Lead,Lead,Sulfur,Silver);
+        isaLine(false,Wulfenite,WulfeniteFront,Lead,Lead,Iron,Manganese);
+        isaLine(false,Crocoite,CrocoiteFront,Lead,Lead,Iron,Chromite);
+        //锑辉
+        isaLine(false,Stibnite,StibniteFront,Antimony,Antimony,Cinnabar,Sulfur);
+        //白钨
+        isaLine(false,Scheelite,ScheeliteFront,Tungsten,Calcium,Molybdenum,Manganese);
+        //钨酸锂
+        isaLine(true,Tungstate,TungstateFront,Tungsten,Manganese,Lithium,Silver);
+        //铀
+        isaLine(true,Uraninite,UraniniteFront,Uraninite,Uraninite,Thorium,Silver);
+        isaLine(true,Pitchblende,PitchblendeFront,Pitchblende,Pitchblende,Thorium,Lead);
+
         GTQTcoreRecipeMaps.CHEMICAL_PLANT.recipeBuilder()
                 .recipeLevel(3)
                 .input(dust, Materials.Potash, 3)

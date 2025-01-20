@@ -275,6 +275,11 @@ public class AlgaeChain {
                 .duration(90)
                 .buildAndRegister();
 
+        GAS_TURBINE_FUELS.recipeBuilder()
+                .fluidInputs(Hydrogen.getFluid(12))
+                .EUt(32)
+                .duration(1)
+                .buildAndRegister();
     }
 
     private static void AlgaeGroth(MetaItem.MetaValueItem items, int rate) {

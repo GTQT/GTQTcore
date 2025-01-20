@@ -934,12 +934,12 @@ gtqtcore.machine.naquadah_reactor.zpm.name=Elite Naquadah Reactor III
 gtqtcore.machine.naquadah_reactor.zpm.tooltip=Inexhaustible and Limitless
 
 recipemap.rocket_engine_recipes.name=Rocket Engine
-gtqtcore.machine.rocket_engine.ev.name=Advanced Rocket Engine III
+gtqtcore.machine.rocket_engine.hv.name=Advanced Rocket Engine III
+gtqtcore.machine.rocket_engine.hv.tooltip=Buzzing
+gtqtcore.machine.rocket_engine.ev.name=Elite Rocket Engine
 gtqtcore.machine.rocket_engine.ev.tooltip=Buzzing
-gtqtcore.machine.rocket_engine.iv.name=Elite Rocket Engine
+gtqtcore.machine.rocket_engine.iv.name=Elite Rocket Engine II
 gtqtcore.machine.rocket_engine.iv.tooltip=Buzzing
-gtqtcore.machine.rocket_engine.luv.name=Elite Rocket Engine II
-gtqtcore.machine.rocket_engine.luv.tooltip=Buzzing
 
 gtqtcore.machine.particle_accelerator_io.lv.name=Basic Particle Source I
 gtqtcore.machine.particle_accelerator_io.mv.name=Basic Particle Source II
@@ -1384,7 +1384,7 @@ gtqtcore.machine.compact_cyclotron.tooltip.3=Can produce a particle beam with §
 recipemap.dragon_fusion_unit_recipes.name=Dragon Fusion
 gtqtcore.machine.dragon_fusion_unit.name=Dragon Fusion Device
 gtqtcore.machine.dragon_fusion_unit.tooltip.1=Awakening the power of the dragon
-
+gtqtcore.machine.heat_furnace.name=Heat Furnace
 gtqtcore.machine.industrial_primitive_blast_furnace.name=Industrial Primitive Blast Furnace
 gtqtcore.machine.industrial_primitive_blast_furnace.auxiliary_blast_furnace=Auxiliary Blast Furnace: %s Units
 
@@ -3036,6 +3036,7 @@ gregtech.multiblock.hv_processing_array.description=The processing array can int
 gtqtcore.machine.hv_machine_hatch.name=Machine Access Hatch
 gtqtcore.machine.coagulation_tank.name=Coagulation Reaction Tank
 gtqtcore.machine.ex_cvd.name=Extreme Particle CVD
+gtqtcore.machine.chemical_factory.name=Large Chemical Factory
 gtqtcore.multiblock.wps.tooltip.1=Extendable multiblock structure length, upgrade coil levels, each structure piece requires an energy tank.
 gtqtcore.multiblock.wps.tooltip.2=Base energy is calculated based on the radius of the multiblock structure length and the height of four blocks centered on the main block within the water range.
 gtqtcore.multiblock.wps.tooltip.3=Power generation multiplier: Hydropower station level * Coil level * Fluctuation power generation multiplier (max 0.6)
@@ -3693,6 +3694,21 @@ gregtech.material.pyrope_front=Pyrope Foam
 gregtech.material.redstone_front=Redstone Foam
 gregtech.material.spessartine_front=Spessartine Foam
 gregtech.material.sphalerite_front=Sphalerite Foam
+gregtech.material.tin_front=Tin Foam
+gregtech.material.cassiterite_front=Cassiterite Foam
+gregtech.material.gold_front=Gold Foam
+gregtech.material.precious_front=Precious Metal Foam
+gregtech.material.lean_gold_front=Lean Gold Foam
+gregtech.material.rich_gold_front=Rich Gold Foam
+gregtech.material.lead_front=Lead Foam
+gregtech.material.galena_front=Galena Foam
+gregtech.material.wulfenite_front=Wulfenite Foam
+gregtech.material.crocoite_front=Crocoite Foam
+gregtech.material.stibnite_front=Stibnite Foam
+gregtech.material.scheelite_front=Scheelite Foam
+gregtech.material.tungstate_front=Tungstate Foam
+gregtech.material.uraninite_front=Uraninite Foam
+gregtech.material.pitchblende_front=Pitchblende Foam
 
 gregtech.material.iron_front=Iron Ore Foam
 gregtech.material.banded_iron_front=Banded Iron Ore Foam

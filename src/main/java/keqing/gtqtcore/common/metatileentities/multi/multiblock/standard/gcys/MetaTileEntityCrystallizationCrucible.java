@@ -181,7 +181,7 @@ public class MetaTileEntityCrystallizationCrucible extends GCYMRecipeMapMultiblo
                 .aisle("IOSMF", "G###G", "G###G", "XXXXX")
                 .where('S', GTQTMetaTileEntities.LARGE_CRYSTALLIZATION_CRUCIBLE, EnumFacing.SOUTH)
                 .where('X', getCasingState1())
-                .where('G', MetaBlocks.FRAMES.get(Titanium).getBlock(Titanium))
+                .where('G', MetaBlocks.FRAMES.get(TungstenSteel).getBlock(TungstenSteel))
                 .where('V', GCYMMetaBlocks.UNIQUE_CASING.getState(BlockUniqueCasing.UniqueCasingType.HEAT_VENT))
                 .where('#', Blocks.AIR.getDefaultState())
                 .where('E', MetaTileEntities.ENERGY_INPUT_HATCH[GTValues.HV], EnumFacing.NORTH)

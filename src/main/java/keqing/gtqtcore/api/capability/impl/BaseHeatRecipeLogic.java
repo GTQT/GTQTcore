@@ -69,7 +69,7 @@ public class BaseHeatRecipeLogic extends AbstractRecipeLogic {
     @Override
     protected int[] runOverclockingLogic(@Nonnull IRecipePropertyStorage propertyStorage, int recipeEUt, long maxVoltage, int recipeDuration, int amountOC) {
         return standardOverclockingLogic(
-                propertyStorage.getRecipePropertyValue(HeatProperty.getInstance(), 0),
+                Math.max(propertyStorage.getRecipePropertyValue(HeatProperty.getInstance(), 0),500),
                 getMaxVoltage(),
                 recipeDuration,
                 amountOC,

@@ -15,6 +15,8 @@ import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
+import gregtech.api.recipes.RecipeMap;
+import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.recipes.logic.OverclockingLogic;
 import gregtech.api.recipes.recipeproperties.IRecipePropertyStorage;
 import gregtech.api.recipes.recipeproperties.TemperatureProperty;
@@ -52,7 +54,9 @@ public class MetaTileEntityBurnerReactor extends GCYMRecipeMapMultiblockControll
     int blastFurnaceTemperature;
 
     public MetaTileEntityBurnerReactor(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, GTQTcoreRecipeMaps.BURNER_REACTOR_RECIPES);
+        super(metaTileEntityId, new RecipeMap[]{
+                GTQTcoreRecipeMaps.BURNER_REACTOR_RECIPES,
+                GTQTcoreRecipeMaps.ROASTER_RECIPES});
         this.recipeMapWorkable = new BurnerReactorRecipeLogic(this);
     }
 

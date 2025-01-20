@@ -73,6 +73,7 @@ public class MetaTileEntityLargeBasicGenerator extends FuelMultiblockController 
                 .aisle("F F", "CCC", "COC", "CCC")
                 .aisle("FFF", "CCC", "CPC", "CCC")
                 .aisle("F F", "CCC", "CPI", "CCC")
+                .aisle("F F", "CCC", "CPI", "CCC")
                 .aisle("FFF", "CCC", "CPI", "CCC")
                 .aisle("F F", "CCC", "CSC", "CCC")
                 .where('S', this.selfPredicate())

@@ -62,6 +62,7 @@ import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.DISTI
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.GAS_COLLECTOR;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.PYROLYSE_OVEN;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.*;
+import static net.minecraft.init.Blocks.FURNACE;
 import static net.minecraft.init.Blocks.IRON_BARS;
 
 
@@ -711,6 +712,13 @@ public class MetaTileEntityLoader {
                 'P', new UnificationEntry(OrePrefix.plateDouble, Steel),
                 'B', PRIMITIVE_BLAST_FURNACE.getStackForm());
 
+        ModHandler.addShapedRecipe(true, "heat_furnace",
+                GTQTMetaTileEntities.HEAT_FURNACE.getStackForm(),
+                "BPB", "PCP", "BPB",
+                'C', new UnificationEntry(circuit, LV),
+                'P', new UnificationEntry(OrePrefix.plateDouble, Steel),
+                'B', FURNACE);
+
         ModHandler.addShapedRecipe("primitive_roaster", PRIMITIVE_ROASTER.getStackForm(),
                 "BhB", "BIB", "BPB",
                 'I', new ItemStack(IRON_BARS),
@@ -744,15 +752,6 @@ public class MetaTileEntityLoader {
                 'C', new UnificationEntry(circuit, MV),
                 'P', new UnificationEntry(OrePrefix.plateDouble, Aluminium),
                 'B', SENSOR_MV);
-
-        ModHandler.addShapedRecipe(true, "crystallization_crucible", LARGE_CRYSTALLIZATION_CRUCIBLE.getStackForm(),
-                "CMC", "LHL", "PCP",
-                'C', new UnificationEntry(circuit, MarkerMaterials.Tier.LuV),
-                'M', new UnificationEntry(plateDouble, MolybdenumDisilicide),
-                'L', new UnificationEntry(pipeNormalFluid, Titanium),
-                'H', MetaTileEntities.HULL[5].getStackForm(),
-                'P', new UnificationEntry(plate, TungstenSteel)
-        );
 
         ModHandler.addShapedRecipe(true, "cz_puller",
                 GTQTMetaTileEntities.LARGE_CZ_PULLER.getStackForm(),
@@ -970,84 +969,6 @@ public class MetaTileEntityLoader {
                 .output(POS_BINDING_CARD)
                 .circuitMeta(2)
                 .duration(600).EUt(VA[3]).buildAndRegister();
-
-
-        ModHandler.addShapedRecipe(true, "large_roaster", LARGE_ROASTER.getStackForm(),
-                "KSK", "CHC", "PPP",
-                'K', new UnificationEntry(cableGtQuadruple, Platinum),
-                'S', new UnificationEntry(spring, Titanium),
-                'C', new UnificationEntry(circuit, MarkerMaterials.Tier.EV),
-                'H', ROASTER[3].getStackForm(),
-                'P', new UnificationEntry(plate, TitaniumCarbide)
-        );
-
-        // Nanoscale Fabricator
-        ModHandler.addShapedRecipe(true, "nanoscale_fabricator", LARGE_NANOSCALE_FABRICATOR.getStackForm(),
-                "KSK", "EHE", "CFC",
-                'K', new UnificationEntry(cableGtSingle, Platinum),
-                'S', SENSOR_IV.getStackForm(),
-                'E', EMITTER_IV.getStackForm(),
-                'H', MetaTileEntities.HULL[IV].getStackForm(),
-                'C', new UnificationEntry(circuit, MarkerMaterials.Tier.IV),
-                'F', FIELD_GENERATOR_IV.getStackForm());
-
-        // Large CVD Chamber
-        ModHandler.addShapedRecipe(true, "large_cvd_chamber", LARGE_CVD_UNIT.getStackForm(),
-                "GXG", "CHC", "SXS",
-                'C', CVD_UNIT[EV].getStackForm(),
-                'H', MetaTileEntities.HULL[EV].getStackForm(),
-                'G', new UnificationEntry(gear, Stellite),
-                'X', new UnificationEntry(circuit, MarkerMaterials.Tier.EV),
-                'S', SENSOR_EV);
-
-        // Large Burner Reactor
-        ModHandler.addShapedRecipe(true, "large_burner_reactor", GTQTMetaTileEntities.LARGE_BURNER_REACTOR.getStackForm(),
-                "PUP", "BXR", "WDW",
-                'B', GTQTMetaTileEntities.BURNER_REACTOR[IV].getStackForm(),
-                'R', GTQTMetaTileEntities.ROASTER[IV].getStackForm(),
-                'D', new UnificationEntry(plateDense, EglinSteel),
-                'P', ELECTRIC_PISTON_IV,
-                'U', ELECTRIC_PUMP_IV,
-                'X', new UnificationEntry(circuit, MarkerMaterials.Tier.IV),
-                'W', new UnificationEntry(cableGtSingle, Platinum));
-
-        // Large Cryogenic Reactor
-        ModHandler.addShapedRecipe(true, "large_cryogenic_reactor", GTQTMetaTileEntities.LARGE_CRYOGENIC_REACTOR.getStackForm(),
-                "UPU", "CXA", "WDW",
-                'C', GTQTMetaTileEntities.CRYOGENIC_REACTOR[IV].getStackForm(),
-                'A', GTQTMetaTileEntities.LOW_TEMP_ACTIVATOR[IV].getStackForm(),
-                'D', new UnificationEntry(plateDense, StainlessSteel),
-                'P', ELECTRIC_PISTON_IV,
-                'U', ELECTRIC_PUMP_IV,
-                'X', new UnificationEntry(circuit, MarkerMaterials.Tier.IV),
-                'W', new UnificationEntry(cableGtSingle, Platinum));
-
-        ModHandler.addShapedRecipe(true, "fracker", LARGE_HYDRAULIC_FRACKER.getStackForm(),
-                "CLC", "GHG", "PPP",
-                'C', new UnificationEntry(circuit, MarkerMaterials.Tier.UV),
-                'L', new UnificationEntry(pipeLargeFluid, Naquadah),
-                'G', new UnificationEntry(gear, NaquadahAlloy),
-                'H', MetaTileEntities.HULL[6].getStackForm(),
-                'P', ELECTRIC_PUMP_ZPM.getStackForm()
-        );
-
-        // Large Sonicator
-        ModHandler.addShapedRecipe(true, "large_sonicator", LARGE_SONICATOR.getStackForm(),
-                "RXR", "PSP", "WXW",
-                'S', SONICATOR[IV].getStackForm(),
-                'P', ELECTRIC_PUMP_IV,
-                'R', new UnificationEntry(spring, RTMAlloy),
-                'X', new UnificationEntry(circuit, MarkerMaterials.Tier.IV),
-                'W', new UnificationEntry(cableGtSingle, Platinum));
-
-        ModHandler.addShapedRecipe(true, "catalytic_reformer", LARGE_CATALYTIC_REFORMER.getStackForm(),
-                "MCM", "PHP", "MKM",
-                'M', new UnificationEntry(pipeNormalFluid, StainlessSteel),
-                'C', new UnificationEntry(circuit, MarkerMaterials.Tier.IV),
-                'P', ELECTRIC_PUMP_EV.getStackForm(),
-                'H', MetaTileEntities.HULL[3].getStackForm(),
-                'K', new UnificationEntry(cableGtDouble, Aluminium)
-        );
 
         ModHandler.addShapedRecipe(true, "industrial_drill", INDUSTRIAL_DRILL.getStackForm(),
                 "PKP", "CHC", "MMM",

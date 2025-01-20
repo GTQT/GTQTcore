@@ -40,9 +40,9 @@ public class MetaTileEntityCatalyticReformer extends GCYMRecipeMapMultiblockCont
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
-                .aisle("F   F", "XXXPX", "XXXPX", "XXXPX")
-                .aisle("     ", "XXXPX", "X###M", "XXXPX")
-                .aisle("F   F", "XXXPX", "XSXPX", "XXXPX")
+                .aisle("F   F", "XXXXX", "XXXXX", "XXXXX")
+                .aisle("     ", "XXXXX", "XPPPM", "XXXXX")
+                .aisle("F   F", "XXXXX", "XSXPX", "XXXXX")
                 .where('S', selfPredicate())
                 .where('X', states(getCasingState1())
                         .setMinGlobalLimited(24)

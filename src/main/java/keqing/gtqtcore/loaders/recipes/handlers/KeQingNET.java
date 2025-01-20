@@ -2263,6 +2263,22 @@ public class KeQingNET {
 
         //火箭
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .EUt(VA[HV])
+                .input(ELECTRIC_PISTON_HV, 8)
+                .input(ELECTRIC_MOTOR_HV, 8)
+                .input(circuit, Tier.HV, 4)
+                .input(HULL[HV])
+                .input(wireGtDouble, MercuryBariumCalciumCuprate, 8)
+                .input(OrePrefix.foil, StainlessSteel, 32)
+                .fluidInputs(Materials.Polytetrafluoroethylene.getFluid(GTValues.L * 24))
+                .outputs(ROCKET_ENGINE[0].getStackForm())
+                .scannerResearch(b -> b
+                        .researchStack(DISK_2.getStackForm())
+                        .duration(1200)
+                        .EUt(VA[EV]))
+                .duration(100).buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .EUt(VA[EV])
                 .input(ELECTRIC_PISTON_EV, 8)
                 .input(ELECTRIC_MOTOR_EV, 8)
@@ -2271,11 +2287,11 @@ public class KeQingNET {
                 .input(wireGtDouble, UraniumTriplatinum, 8)
                 .input(OrePrefix.foil, Titanium, 32)
                 .fluidInputs(Materials.Polytetrafluoroethylene.getFluid(GTValues.L * 24))
-                .outputs(ROCKET_ENGINE[0].getStackForm())
+                .outputs(ROCKET_ENGINE[1].getStackForm())
                 .scannerResearch(b -> b
                         .researchStack(DISK_2.getStackForm())
                         .duration(1200)
-                        .EUt(VA[IV]))
+                        .EUt(VA[EV]))
                 .duration(100).buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
@@ -2287,27 +2303,11 @@ public class KeQingNET {
                 .input(wireGtDouble, SamariumIronArsenicOxide, 8)
                 .input(OrePrefix.foil, TungstenSteel, 32)
                 .fluidInputs(Materials.Polybenzimidazole.getFluid(GTValues.L * 24))
-                .outputs(ROCKET_ENGINE[1].getStackForm())
-                .scannerResearch(b -> b
-                        .researchStack(DISK_2.getStackForm())
-                        .duration(1200)
-                        .EUt(VA[IV]))
-                .duration(100).buildAndRegister();
-
-        ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .EUt(VA[LuV])
-                .input(ELECTRIC_PISTON_LUV, 8)
-                .input(ELECTRIC_MOTOR_LuV, 8)
-                .input(circuit, Tier.LuV, 4)
-                .input(HULL[LuV])
-                .input(wireGtDouble, IndiumTinBariumTitaniumCuprate, 8)
-                .input(OrePrefix.foil, Materials.NiobiumTitanium, 32)
-                .fluidInputs(Materials.Trinium.getFluid(GTValues.L * 24))
                 .outputs(ROCKET_ENGINE[2].getStackForm())
                 .scannerResearch(b -> b
                         .researchStack(DISK_2.getStackForm())
                         .duration(1200)
-                        .EUt(VA[IV]))
+                        .EUt(VA[EV]))
                 .duration(100).buildAndRegister();
 
         //大柴
@@ -2344,7 +2344,7 @@ public class KeQingNET {
                 .scannerResearch(b -> b
                         .researchStack(DISK_2.getStackForm())
                         .duration(1200)
-                        .EUt(VA[IV]))
+                        .EUt(VA[EV]))
                 .duration(100).buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
@@ -2504,7 +2504,7 @@ public class KeQingNET {
                 .input(wireGtDouble, SamariumIronArsenicOxide, 8)
                 .input(plate, TungstenSteel, 32)
                 .fluidInputs(Materials.Polybenzimidazole.getFluid(GTValues.L * 24))
-                .outputs(HUGE_TURBINE_COMBUSTION_CHAMBER.getStackForm())
+                .outputs(LARGE_FUEL_TURBINE.getStackForm())
                 .scannerResearch(b -> b
                         .researchStack(DISK_4.getStackForm())
                         .duration(1200)
@@ -2529,14 +2529,17 @@ public class KeQingNET {
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .EUt(VA[LuV])
+                .input(ROCKET_ENGINE[2], 4)
+                .input(frameGt, Materials.TungstenCarbide, 8)
                 .input(ELECTRIC_PISTON_LUV, 16)
                 .input(ELECTRIC_MOTOR_LuV, 16)
                 .input(circuit, Tier.LuV, 4)
-                .input(HULL[LuV], 4)
                 .input(wireGtDouble, IndiumTinBariumTitaniumCuprate, 8)
-                .input(plate, Materials.NiobiumTitanium, 32)
+                .input(plate, Inconel792, 8)
+                .input(plate, Materials.NiobiumTitanium, 16)
+                .input(cableGtQuadruple, Materials.Platinum, 32)
                 .fluidInputs(Materials.Trinium.getFluid(GTValues.L * 24))
-                .outputs(ROCKET.getStackForm())
+                .outputs(LARGE_ROCKET_ENGIN.getStackForm())
                 .scannerResearch(b -> b
                         .researchStack(DISK_4.getStackForm())
                         .duration(1200)
