@@ -11,10 +11,13 @@ import gregtech.api.unification.stack.MaterialStack;
 import gregtech.common.blocks.BlockFusionCasing;
 import gregtech.common.blocks.BlockGlassCasing;
 import gregtech.common.blocks.MetaBlocks;
+import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.common.items.GTQTMetaItems;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,9 +51,33 @@ public class UUHelper {
     public static void init() {
         casingRecipes();
         UUUtils();
+        initRecycleRecipe();
     }
-
+    public static void initRecycleRecipe(){
+        for (Item item : ForgeRegistries.ITEMS) {
+            GTQTcoreRecipeMaps.RECYCLE_RECIPE.recipeBuilder()
+                    .input(item,1)
+                    .chancedOutput(GTQTMetaItems.SCRAP,2500,500)
+                    .EUt(30)
+                    .duration(100)
+                    .buildAndRegister();
+        }
+    }
     private static void UUUtils() {
+        FLUID_SOLIDFICATION_RECIPES.recipeBuilder()
+                .fluidInputs(UUMatter.getFluid(1000))
+                .output(GTQTMetaItems.UU_MATER)
+                .EUt(16)
+                .duration(10)
+                .buildAndRegister();
+
+        EXTRACTOR_RECIPES.recipeBuilder()
+                .fluidOutputs(UUMatter.getFluid(1000))
+                .input(GTQTMetaItems.UU_MATER)
+                .EUt(16)
+                .duration(10)
+                .buildAndRegister();
+
         ASSEMBLER_RECIPES.recipeBuilder()
                 .input(OrePrefix.plate, Zylon)
                 .input(dust, Silver)
@@ -365,5 +392,11 @@ public class UUHelper {
                 'F', CABLE_HEX,
                 'C', CIRCUIT,
                 'G', PROTON);
+
+        registerMachineRecipe(RECYCLE, "CGC", "FMF", "CGC",
+                'M', HULL,
+                'F', CABLE_HEX,
+                'C', CIRCUIT,
+                'G', MOTOR);
     }
 }

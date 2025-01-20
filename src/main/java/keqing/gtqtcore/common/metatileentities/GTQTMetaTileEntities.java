@@ -255,6 +255,7 @@ public class GTQTMetaTileEntities {
 
     public static SimpleMachineMetaTileEntity[] DUPLICATOR = new SimpleMachineMetaTileEntity[GTValues.V.length - 1];
     public static SimpleMachineMetaTileEntity[] UU_PRODUCTER = new SimpleMachineMetaTileEntity[GTValues.V.length - 1];
+    public static SimpleMachineMetaTileEntity[] RECYCLE = new SimpleMachineMetaTileEntity[GTValues.V.length - 1];
     public static MetaTileEntityLargeElementDuplicator LARGE_ELEMENT_DUPLICATOR;
     public static MetaTileEntityLargeUUProducter LARGE_UU_PRODUCTER;
 
@@ -753,6 +754,8 @@ public class GTQTMetaTileEntities {
         registerSimpleMetaTileEntity(PRESSURE_LAMINATOR, 14885, "pressure_laminator", GTQTcoreRecipeMaps.PRESSURE_LAMINATOR_RECIPES, Textures.BENDER_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
         registerSimpleMetaTileEntity(UU_PRODUCTER, 14900, "uu_producter", GTQTcoreRecipeMaps.UU_RECIPES, GTQTTextures.UUPRODUCTER_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
         registerSimpleMetaTileEntity(DUPLICATOR, 14915, "duplicator", GTQTcoreRecipeMaps.COPY_RECIPES, GTQTTextures.DUPLICATOR, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
+        registerSimpleMetaTileEntity(RECYCLE, 17240, "recycle", GTQTcoreRecipeMaps.RECYCLE_RECIPE, Textures.MACERATOR_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.defaultTankSizeFunction);
+
 
         STEAM_LATEX_COLLECTOR[0] = registerMetaTileEntity(15090, new MetaTileEntitySteamLatexCollector(gtqtcoreId("latex_collector.bronze"), false));
         STEAM_LATEX_COLLECTOR[1] = registerMetaTileEntity(15091, new MetaTileEntitySteamLatexCollector(gtqtcoreId("latex_collector.steel"), true));

@@ -225,6 +225,7 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<QFTCasingTierRecipeBuilder> QUANTUM_FORCE_TRANSFORMER_RECIPES;
     public static final RecipeMap<FlowRateRecipeBuilder> HEAT_EXCHANGE_RECIPES;
     public static final RecipeMap<FuelRecipeBuilder> STAR_MIXER;
+    public static final RecipeMap<SimpleRecipeBuilder> RECYCLE_RECIPE ;
     public static final RecipeMap<FuelRecipeBuilder> RTG_RECIPES;
     public static final RecipeMap<NuclearRecipeBuilder> NUCLEAR_RECIPES;
     public static final RecipeMap<NeutronActivatorIORecipeBuilder> PAC_RECIPES;
@@ -272,6 +273,8 @@ public class GTQTcoreRecipeMaps {
 
     private GTQTcoreRecipeMaps() {}
     static {
+        RECYCLE_RECIPE = new RecipeMap<>("recycle_items",1,1,0,0,(new SimpleRecipeBuilder()),false);
+
         COPY_RECIPES = new RecipeMap<>("uu_copy",2,1,3,1,(new SimpleRecipeBuilder()),false);
 
         UU_RECIPES = new RecipeMap<>("uu_producter",2,0,1,1,(new SimpleRecipeBuilder()),false);
