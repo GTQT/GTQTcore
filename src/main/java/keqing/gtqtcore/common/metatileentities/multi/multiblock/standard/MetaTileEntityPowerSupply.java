@@ -223,7 +223,6 @@ public class MetaTileEntityPowerSupply extends MultiblockWithDisplayBase {
         tooltip.add(I18n.format("gtqtcore.machine.powersupply.tooltip.4"));
         tooltip.add(I18n.format("gtqtcore.machine.powersupply.tooltip.5"));
         tooltip.add(I18n.format("gtqtcore.machine.powersupply.tooltip.6"));
-        tooltip.add(I18n.format("gtqtcore.machine.powersupply.tooltip.7"));
     }
 
     @Override

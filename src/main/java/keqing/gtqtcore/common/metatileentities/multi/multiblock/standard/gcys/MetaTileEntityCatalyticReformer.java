@@ -42,7 +42,7 @@ public class MetaTileEntityCatalyticReformer extends GCYMRecipeMapMultiblockCont
         return FactoryBlockPattern.start()
                 .aisle("F   F", "XXXXX", "XXXXX", "XXXXX")
                 .aisle("     ", "XXXXX", "XPPPM", "XXXXX")
-                .aisle("F   F", "XXXXX", "XSXPX", "XXXXX")
+                .aisle("F   F", "XXXXX", "XSXXX", "XXXXX")
                 .where('S', selfPredicate())
                 .where('X', states(getCasingState1())
                         .setMinGlobalLimited(24)

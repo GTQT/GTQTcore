@@ -17,6 +17,7 @@ import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.items.MetaItems;
 import gregtech.common.metatileentities.MetaTileEntities;
 import gregtech.loaders.recipe.CraftingComponent;
+import keqing.gtqtcore.api.unification.MaterialHelper;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.BlockElectrolyticBath;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
@@ -1465,6 +1466,56 @@ public class MetaTileEntityLoader {
                 .input(circuit, MarkerMaterials.Tier.UV,8)
                 .outputs(LASER_BOOSTER[2].getStackForm())
                 .EUt(VA[UV])
+                .duration(300)
+                .buildAndRegister();
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(plate,MaterialHelper.Plate[1],4)
+                .input(pipeNormalFluid,MaterialHelper.Pipe[1],1)
+                .input(stick, MaterialHelper.Wire[1],2)
+                .output(HEAT_SHIELD_MKI)
+                .circuitMeta(6)
+                .EUt(VA[GTValues.LV])
+                .duration(300)
+                .buildAndRegister();
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(plate,MaterialHelper.Plate[2],4)
+                .input(pipeNormalFluid,MaterialHelper.Pipe[2],1)
+                .input(stick, MaterialHelper.Wire[2],2)
+                .output(HEAT_SHIELD_MKII)
+                .circuitMeta(6)
+                .EUt(VA[GTValues.MV])
+                .duration(300)
+                .buildAndRegister();
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(plate,MaterialHelper.Plate[3],4)
+                .input(pipeNormalFluid,MaterialHelper.Pipe[3],1)
+                .input(stick, MaterialHelper.Wire[3],2)
+                .output(HEAT_SHIELD_MKIII)
+                .circuitMeta(6)
+                .EUt(VA[GTValues.HV])
+                .duration(300)
+                .buildAndRegister();
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(plate,MaterialHelper.Plate[4],4)
+                .input(pipeNormalFluid,MaterialHelper.Pipe[4],1)
+                .input(stick, MaterialHelper.Wire[4],2)
+                .output(HEAT_SHIELD_MKIV)
+                .circuitMeta(6)
+                .EUt(VA[GTValues.EV])
+                .duration(300)
+                .buildAndRegister();
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(plate,MaterialHelper.Plate[5],4)
+                .input(pipeNormalFluid,MaterialHelper.Pipe[5],1)
+                .input(stick, MaterialHelper.Wire[5],2)
+                .output(HEAT_SHIELD_MKV)
+                .circuitMeta(6)
+                .EUt(VA[GTValues.IV])
                 .duration(300)
                 .buildAndRegister();
     }

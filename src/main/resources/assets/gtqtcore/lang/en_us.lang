@@ -440,51 +440,66 @@ metaitem.wind_rotor.tungstensteel.description=Maximum Durability: 3840000, Tier:
 # rhodium-plated palladium wind rotor
 metaitem.wind_rotor.rhodiumplatedpalladium.name=Rhodium-Plated Palladium Wind Rotor
 metaitem.wind_rotor.rhodiumplatedpalladium.description=Maximum Durability: 7680000, Tier: 6
-# 石墨电极
-metaitem.electrode_graphite.name=石墨电极
-metaitem.electrode_graphite.description=最大耐久度: 2400000, 层级: 1
-# 银电极
-metaitem.electrode_silver.name=银电极
-metaitem.electrode_silver.description=最大耐久度: 3600000, 层级: 2
-# 钼电极
-metaitem.electrode_molybdenum.name=钼电极
-metaitem.electrode_molybdenum.description=最大耐久度: 4800000, 层级: 3
-# 金电极
-metaitem.electrode_gold.name=金电极
-metaitem.electrode_gold.description=最大耐久度: 6400000, 层级: 4
-# 铂电极
-metaitem.electrode_platinum.name=铂电极
-metaitem.electrode_platinum.description=最大耐久度: 7200000, 层级: 5
-# 钢钻头
-metaitem.drill_head.steel.name=钢钻头
-metaitem.drill_head.steel.description=最大耐久度: 2400000, 层级: 1
-# 铝钻头
-metaitem.drill_head.aluminium.name=铝钻头
-metaitem.drill_head.aluminium.description=最大耐久度: 3600000, 层级: 2
-# 不锈钢钻头
-metaitem.drill_head.stainlesssteel.name=不锈钢钻头
-metaitem.drill_head.stainlesssteel.description=最大耐久度: 4800000, 层级: 3
-# 钛钻头
-metaitem.drill_head.titanium.name=钛钻头
-metaitem.drill_head.titanium.description=最大耐久度: 6400000, 层级: 4
-# 钨钢钻头
-metaitem.drill_head.tungstensteel.name=钨钢钻头
-metaitem.drill_head.tungstensteel.description=最大耐久度: 7200000, 层级: 5
-# 铀-235 放射源
-metaitem.radiation.U235.name=铀-235 放射源
-metaitem.radiation.U235.description=最大辐射量: 120000, 辐射等级: 10
-# 铀-238 放射源
-metaitem.radiation.U238.name=铀-238 放射源
-metaitem.radiation.U238.description=最大辐射量: 180000, 辐射等级: 15
-# 钚-241 放射源
-metaitem.radiation.P241.name=钚-241 放射源
-metaitem.radiation.P241.description=最大辐射量: 240000, 辐射等级: 25
-# 钚-244 放射源
-metaitem.radiation.P244.name=钚-244 放射源
-metaitem.radiation.P244.description=最大辐射量: 320000, 辐射等级: 50
-# 锆-241 放射源
-metaitem.radiation.Am241.name=镅-241 放射源
-metaitem.radiation.Am241.description=最大辐射量: 640000, 辐射等级: 75
+# Graphite Electrode
+metaitem.electrode_graphite.name=Graphite Electrode
+metaitem.electrode_graphite.description=Max Durability: 2,400,000, Tier: 1
+
+# Silver Electrode
+metaitem.electrode_silver.name=Silver Electrode
+metaitem.electrode_silver.description=Max Durability: 3,600,000, Tier: 2
+
+# Molybdenum Electrode
+metaitem.electrode_molybdenum.name=Molybdenum Electrode
+metaitem.electrode_molybdenum.description=Max Durability: 4,800,000, Tier: 3
+
+# Gold Electrode
+metaitem.electrode_gold.name=Gold Electrode
+metaitem.electrode_gold.description=Max Durability: 6,400,000, Tier: 4
+
+# Platinum Electrode
+metaitem.electrode_platinum.name=Platinum Electrode
+metaitem.electrode_platinum.description=Max Durability: 7,200,000, Tier: 5
+
+# Steel Drill Head
+metaitem.drill_head.steel.name=Steel Drill Head
+metaitem.drill_head.steel.description=Max Durability: 2,400,000, Tier: 1
+
+# Aluminium Drill Head
+metaitem.drill_head.aluminium.name=Aluminium Drill Head
+metaitem.drill_head.aluminium.description=Max Durability: 3,600,000, Tier: 2
+
+# Stainless Steel Drill Head
+metaitem.drill_head.stainlesssteel.name=Stainless Steel Drill Head
+metaitem.drill_head.stainlesssteel.description=Max Durability: 4,800,000, Tier: 3
+
+# Titanium Drill Head
+metaitem.drill_head.titanium.name=Titanium Drill Head
+metaitem.drill_head.titanium.description=Max Durability: 6,400,000, Tier: 4
+
+# Tungsten Steel Drill Head
+metaitem.drill_head.tungstensteel.name=Tungsten Steel Drill Head
+metaitem.drill_head.tungstensteel.description=Max Durability: 7,200,000, Tier: 5
+
+# Uranium-235 Radiation Source
+metaitem.radiation.U235.name=Uranium-235 Radiation Source
+metaitem.radiation.U235.description=Max Radiation: 120,000, Radiation Level: 10
+
+# Uranium-238 Radiation Source
+metaitem.radiation.U238.name=Uranium-238 Radiation Source
+metaitem.radiation.U238.description=Max Radiation: 180,000, Radiation Level: 15
+
+# Plutonium-241 Radiation Source
+metaitem.radiation.P241.name=Plutonium-241 Radiation Source
+metaitem.radiation.P241.description=Max Radiation: 240,000, Radiation Level: 25
+
+# Plutonium-244 Radiation Source
+metaitem.radiation.P244.name=Plutonium-244 Radiation Source
+metaitem.radiation.P244.description=Max Radiation: 320,000, Radiation Level: 50
+
+# Americium-241 Radiation Source
+metaitem.radiation.Am241.name=Americium-241 Radiation Source
+metaitem.radiation.Am241.description=Max Radiation: 640,000, Radiation Level: 75
+
 # Debug
 tile.component_assembly_line_casing.lv.name=Component Assembly Line Casing (LV)
 tile.component_assembly_line_casing.lv.tooltip=Simple Assembly Unit
@@ -515,12 +530,14 @@ tile.component_assembly_line_casing.opv.tooltip=Cosmic Assembly Unit
 tile.component_assembly_line_casing.max.name=Component Assembly Line Casing (MAX)
 tile.component_assembly_line_casing.max.tooltip=Spacetime Assembly Unit
 
-tile.nuclear_fusion.energy_cell.name=蓄能塔外壳
-tile.energy_cell.ulv.name=粗制能量单元
-tile.energy_cell.lv.name=原始能量单元
-tile.energy_cell.mv.name=稳定能量单元
-tile.energy_cell.hv.name=致密能量单元
-tile.energy_cell.ev.name=先进能量单元
+# Energy Cell Names
+tile.nuclear_fusion.energy_cell.name=Energy Cell Enclosure
+tile.energy_cell.ulv.name=Crude Energy Cell
+tile.energy_cell.lv.name=Basic Energy Cell
+tile.energy_cell.mv.name=Stable Energy Cell
+tile.energy_cell.hv.name=Dense Energy Cell
+tile.energy_cell.ev.name=Advanced Energy Cell
+
 # Others
 metaitem.magnetron.name=Magnetron
 metaitem.carbon_allotrope.name=Carbon Allotrope Mixture
@@ -1100,121 +1117,127 @@ gtqtcore.machine.bio_reactor.uxv.tooltip=Gene Editor
 gtqtcore.machine.bio_reactor.opv.name=Legendary Bio Reactor
 gtqtcore.machine.bio_reactor.opv.tooltip=Gene Editor
 
-gtqtcore.machine.spinner.bronze.name=蒸汽纺线器
-gtqtcore.machine.spinner.bronze.tooltip=比手摇式更快！
-gtqtcore.machine.spinner.steel.name=高压蒸汽纺线器
-gtqtcore.machine.spinner.steel.tooltip=自然纤维的高效利用
-gtqtcore.machine.spinner.lv.name=基础纺线器
-gtqtcore.machine.spinner.lv.tooltip=电动织机
-gtqtcore.machine.spinner.mv.name=进阶纺线器
-gtqtcore.machine.spinner.mv.tooltip=电动织机
-gtqtcore.machine.spinner.hv.name=进阶纺线器 II
-gtqtcore.machine.spinner.hv.tooltip=电动织机
-gtqtcore.machine.spinner.ev.name=进阶纺线器 III
-gtqtcore.machine.spinner.ev.tooltip=电动织机
-gtqtcore.machine.spinner.iv.name=精英纺线器
-gtqtcore.machine.spinner.iv.tooltip=丝线之歌
-gtqtcore.machine.spinner.luv.name=精英纺线器 II
-gtqtcore.machine.spinner.luv.tooltip=丝线之歌
-gtqtcore.machine.spinner.zpm.name=精英纺线器 III
-gtqtcore.machine.spinner.zpm.tooltip=丝线之歌
-gtqtcore.machine.spinner.uv.name=终极纺线器
-gtqtcore.machine.spinner.uv.tooltip=宇宙编织者
-gtqtcore.machine.spinner.uhv.name=史诗纺线器
-gtqtcore.machine.spinner.uhv.tooltip=宇宙编织者
-gtqtcore.machine.spinner.uev.name=史诗纺线器 II
-gtqtcore.machine.spinner.uev.tooltip=宇宙编织者
-gtqtcore.machine.spinner.uiv.name=史诗纺线器 III
-gtqtcore.machine.spinner.uiv.tooltip=宇宙编织者
-gtqtcore.machine.spinner.uxv.name=史诗纺线器 IV
-gtqtcore.machine.spinner.uxv.tooltip=宇宙编织者
-gtqtcore.machine.spinner.opv.name=传奇纺线器
-gtqtcore.machine.spinner.opv.tooltip=宇宙编织者
+# Spinner Machines
+gtqtcore.machine.spinner.bronze.name=Steam Spinning Machine
+gtqtcore.machine.spinner.bronze.tooltip=Faster than hand-operated!
+gtqtcore.machine.spinner.steel.name=High-Pressure Steam Spinning Machine
+gtqtcore.machine.spinner.steel.tooltip=Efficient use of natural fibers
+gtqtcore.machine.spinner.lv.name=Basic Spinning Machine
+gtqtcore.machine.spinner.lv.tooltip=Electric Loom
+gtqtcore.machine.spinner.mv.name=Advanced Spinning Machine
+gtqtcore.machine.spinner.mv.tooltip=Electric Loom
+gtqtcore.machine.spinner.hv.name=Advanced Spinning Machine II
+gtqtcore.machine.spinner.hv.tooltip=Electric Loom
+gtqtcore.machine.spinner.ev.name=Advanced Spinning Machine III
+gtqtcore.machine.spinner.ev.tooltip=Electric Loom
+gtqtcore.machine.spinner.iv.name=Elite Spinning Machine
+gtqtcore.machine.spinner.iv.tooltip=Song of Threads
+gtqtcore.machine.spinner.luv.name=Elite Spinning Machine II
+gtqtcore.machine.spinner.luv.tooltip=Song of Threads
+gtqtcore.machine.spinner.zpm.name=Elite Spinning Machine III
+gtqtcore.machine.spinner.zpm.tooltip=Song of Threads
+gtqtcore.machine.spinner.uv.name=Ultimate Spinning Machine
+gtqtcore.machine.spinner.uv.tooltip=Weaver of the Cosmos
+gtqtcore.machine.spinner.uhv.name=Epic Spinning Machine
+gtqtcore.machine.spinner.uhv.tooltip=Weaver of the Cosmos
+gtqtcore.machine.spinner.uev.name=Epic Spinning Machine II
+gtqtcore.machine.spinner.uev.tooltip=Weaver of the Cosmos
+gtqtcore.machine.spinner.uiv.name=Epic Spinning Machine III
+gtqtcore.machine.spinner.uiv.tooltip=Weaver of the Cosmos
+gtqtcore.machine.spinner.uxv.name=Epic Spinning Machine IV
+gtqtcore.machine.spinner.uxv.tooltip=Weaver of the Cosmos
+gtqtcore.machine.spinner.opv.name=Legendary Spinning Machine
+gtqtcore.machine.spinner.opv.tooltip=Weaver of the Cosmos
 
-gtqtcore.machine.burner_reactor.lv.name=基础燃烧反应室
-gtqtcore.machine.burner_reactor.lv.tooltip=高温反应釜
-gtqtcore.machine.burner_reactor.mv.name=进阶燃烧反应室
-gtqtcore.machine.burner_reactor.mv.tooltip=高温反应釜
-gtqtcore.machine.burner_reactor.hv.name=进阶燃烧反应室 II
-gtqtcore.machine.burner_reactor.hv.tooltip=高温反应釜
-gtqtcore.machine.burner_reactor.ev.name=进阶燃烧反应室 III
-gtqtcore.machine.burner_reactor.ev.tooltip=高温反应釜
-gtqtcore.machine.burner_reactor.iv.name=精英燃烧反应室
-gtqtcore.machine.burner_reactor.iv.tooltip=热能转化床
-gtqtcore.machine.burner_reactor.luv.name=精英燃烧反应室 II
-gtqtcore.machine.burner_reactor.luv.tooltip=热能转化床
-gtqtcore.machine.burner_reactor.zpm.name=精英燃烧反应室 III
-gtqtcore.machine.burner_reactor.zpm.tooltip=热能转化床
-gtqtcore.machine.burner_reactor.uv.name=终极燃烧反应室
-gtqtcore.machine.burner_reactor.uv.tooltip=火神之舌
-gtqtcore.machine.burner_reactor.uhv.name=史诗燃烧反应室
-gtqtcore.machine.burner_reactor.uhv.tooltip=火神之舌
-gtqtcore.machine.burner_reactor.uev.name=史诗燃烧反应室 II
-gtqtcore.machine.burner_reactor.uev.tooltip=火神之舌
-gtqtcore.machine.burner_reactor.uiv.name=史诗燃烧反应室 III
-gtqtcore.machine.burner_reactor.uiv.tooltip=火神之舌
-gtqtcore.machine.burner_reactor.uxv.name=史诗燃烧反应室 IV
-gtqtcore.machine.burner_reactor.uxv.tooltip=火神之舌
-gtqtcore.machine.burner_reactor.opv.name=传奇燃烧反应室
-gtqtcore.machine.burner_reactor.opv.tooltip=火神之舌
+# Burner Reactor Machines
+gtqtcore.machine.burner_reactor.lv.name=Basic Burner Reactor
+gtqtcore.machine.burner_reactor.lv.tooltip=High-Temperature Reactor
+gtqtcore.machine.burner_reactor.mv.name=Advanced Burner Reactor
+gtqtcore.machine.burner_reactor.mv.tooltip=High-Temperature Reactor
+gtqtcore.machine.burner_reactor.hv.name=Advanced Burner Reactor II
+gtqtcore.machine.burner_reactor.hv.tooltip=High-Temperature Reactor
+gtqtcore.machine.burner_reactor.ev.name=Advanced Burner Reactor III
+gtqtcore.machine.burner_reactor.ev.tooltip=High-Temperature Reactor
+gtqtcore.machine.burner_reactor.iv.name=Elite Burner Reactor
+gtqtcore.machine.burner_reactor.iv.tooltip=Heat Conversion Bed
+gtqtcore.machine.burner_reactor.luv.name=Elite Burner Reactor II
+gtqtcore.machine.burner_reactor.luv.tooltip=Heat Conversion Bed
+gtqtcore.machine.burner_reactor.zpm.name=Elite Burner Reactor III
+gtqtcore.machine.burner_reactor.zpm.tooltip=Heat Conversion Bed
+gtqtcore.machine.burner_reactor.uv.name=Ultimate Burner Reactor
+gtqtcore.machine.burner_reactor.uv.tooltip=Tongue of Vulcan
+gtqtcore.machine.burner_reactor.uhv.name=Epic Burner Reactor
+gtqtcore.machine.burner_reactor.uhv.tooltip=Tongue of Vulcan
+gtqtcore.machine.burner_reactor.uev.name=Epic Burner Reactor II
+gtqtcore.machine.burner_reactor.uev.tooltip=Tongue of Vulcan
+gtqtcore.machine.burner_reactor.uiv.name=Epic Burner Reactor III
+gtqtcore.machine.burner_reactor.uiv.tooltip=Tongue of Vulcan
+gtqtcore.machine.burner_reactor.uxv.name=Epic Burner Reactor IV
+gtqtcore.machine.burner_reactor.uxv.tooltip=Tongue of Vulcan
+gtqtcore.machine.burner_reactor.opv.name=Legendary Burner Reactor
+gtqtcore.machine.burner_reactor.opv.tooltip=Tongue of Vulcan
 
-gtqtcore.machine.polymerization_tank.lv.name=基础聚合缸
-gtqtcore.machine.polymerization_tank.lv.tooltip=橡胶合成器
-gtqtcore.machine.polymerization_tank.mv.name=进阶聚合缸
-gtqtcore.machine.polymerization_tank.mv.tooltip=橡胶合成器
-gtqtcore.machine.polymerization_tank.hv.name=进阶聚合缸 II
-gtqtcore.machine.polymerization_tank.hv.tooltip=橡胶合成器
-gtqtcore.machine.polymerization_tank.ev.name=进阶聚合缸 III
-gtqtcore.machine.polymerization_tank.ev.tooltip=橡胶合成器
-gtqtcore.machine.polymerization_tank.iv.name=精英聚合缸
-gtqtcore.machine.polymerization_tank.iv.tooltip=塑料聚合者
-gtqtcore.machine.polymerization_tank.luv.name=精英聚合缸 II
-gtqtcore.machine.polymerization_tank.luv.tooltip=塑料聚合者
-gtqtcore.machine.polymerization_tank.zpm.name=精英聚合缸 III
-gtqtcore.machine.polymerization_tank.zpm.tooltip=塑料聚合者
-gtqtcore.machine.polymerization_tank.uv.name=终极聚合缸
-gtqtcore.machine.polymerization_tank.uv.tooltip=重力牵引装置
-gtqtcore.machine.polymerization_tank.uhv.name=史诗聚合缸
-gtqtcore.machine.polymerization_tank.uhv.tooltip=重力牵引装置
-gtqtcore.machine.polymerization_tank.uev.name=史诗聚合缸 II
-gtqtcore.machine.polymerization_tank.uev.tooltip=重力牵引装置
-gtqtcore.machine.polymerization_tank.uiv.name=史诗聚合缸 III
-gtqtcore.machine.polymerization_tank.uiv.tooltip=重力牵引装置
-gtqtcore.machine.polymerization_tank.uxv.name=史诗聚合缸 IV
-gtqtcore.machine.polymerization_tank.uxv.tooltip=重力牵引装置
-gtqtcore.machine.polymerization_tank.opv.name=传奇聚合缸
-gtqtcore.machine.polymerization_tank.opv.tooltip=重力牵引装置
+# Polymerization Tank Machines
+gtqtcore.machine.polymerization_tank.lv.name=Basic Polymerization Tank
+gtqtcore.machine.polymerization_tank.lv.tooltip=Rubber Synthesizer
+gtqtcore.machine.polymerization_tank.mv.name=Advanced Polymerization Tank
+gtqtcore.machine.polymerization_tank.mv.tooltip=Rubber Synthesizer
+gtqtcore.machine.polymerization_tank.hv.name=Advanced Polymerization Tank II
+gtqtcore.machine.polymerization_tank.hv.tooltip=Rubber Synthesizer
+gtqtcore.machine.polymerization_tank.ev.name=Advanced Polymerization Tank III
+gtqtcore.machine.polymerization_tank.ev.tooltip=Rubber Synthesizer
+gtqtcore.machine.polymerization_tank.iv.name=Elite Polymerization Tank
+gtqtcore.machine.polymerization_tank.iv.tooltip=Plastic Polymerizer
+gtqtcore.machine.polymerization_tank.luv.name=Elite Polymerization Tank II
+gtqtcore.machine.polymerization_tank.luv.tooltip=Plastic Polymerizer
+gtqtcore.machine.polymerization_tank.zpm.name=Elite Polymerization Tank III
+gtqtcore.machine.polymerization_tank.zpm.tooltip=Plastic Polymerizer
+gtqtcore.machine.polymerization_tank.uv.name=Ultimate Polymerization Tank
+gtqtcore.machine.polymerization_tank.uv.tooltip=Gravity Traction Device
+gtqtcore.machine.polymerization_tank.uhv.name=Epic Polymerization Tank
+gtqtcore.machine.polymerization_tank.uhv.tooltip=Gravity Traction Device
+gtqtcore.machine.polymerization_tank.uev.name=Epic Polymerization Tank II
+gtqtcore.machine.polymerization_tank.uev.tooltip=Gravity Traction Device
+gtqtcore.machine.polymerization_tank.uiv.name=Epic Polymerization Tank III
+gtqtcore.machine.polymerization_tank.uiv.tooltip=Gravity Traction Device
+gtqtcore.machine.polymerization_tank.uxv.name=Epic Polymerization Tank IV
+gtqtcore.machine.polymerization_tank.uxv.tooltip=Gravity Traction Device
+gtqtcore.machine.polymerization_tank.opv.name=Legendary Polymerization Tank
+gtqtcore.machine.polymerization_tank.opv.tooltip=Gravity Traction Device
 
-gtqtcore.machine.low_temperature_activator.lv.name=基础低温活化器
-gtqtcore.machine.low_temperature_activator.lv.tooltip=分子软化者
-gtqtcore.machine.low_temperature_activator.mv.name=进阶低温活化器
-gtqtcore.machine.low_temperature_activator.mv.tooltip=分子软化者
-gtqtcore.machine.low_temperature_activator.hv.name=进阶低温活化器 II
-gtqtcore.machine.low_temperature_activator.hv.tooltip=分子软化者
-gtqtcore.machine.low_temperature_activator.ev.name=进阶低温活化器 III
-gtqtcore.machine.low_temperature_activator.ev.tooltip=分子软化者
-gtqtcore.machine.low_temperature_activator.iv.name=精英低温活化器
-gtqtcore.machine.low_temperature_activator.iv.tooltip=中子激发反应
-gtqtcore.machine.low_temperature_activator.luv.name=精英低温活化器 II
-gtqtcore.machine.low_temperature_activator.luv.tooltip=中子激发反应
-gtqtcore.machine.low_temperature_activator.zpm.name=精英低温活化器 III
-gtqtcore.machine.low_temperature_activator.zpm.tooltip=中子激发反应
-gtqtcore.machine.low_temperature_activator.uv.name=终极低温活化器
-gtqtcore.machine.low_temperature_activator.uv.tooltip=粒子振荡仪
-gtqtcore.machine.low_temperature_activator.uhv.name=史诗低温活化器
-gtqtcore.machine.low_temperature_activator.uhv.tooltip=粒子振荡仪
-gtqtcore.machine.low_temperature_activator.uev.name=史诗低温活化器 II
-gtqtcore.machine.low_temperature_activator.uev.tooltip=粒子振荡仪
-gtqtcore.machine.low_temperature_activator.uiv.name=史诗低温活化器 III
-gtqtcore.machine.low_temperature_activator.uiv.tooltip=粒子振荡仪
-gtqtcore.machine.low_temperature_activator.uxv.name=史诗低温活化器 IV
-gtqtcore.machine.low_temperature_activator.uxv.tooltip=粒子振荡仪
-gtqtcore.machine.low_temperature_activator.opv.name=传奇低温活化器
-gtqtcore.machine.low_temperature_activator.opv.tooltip=粒子振荡仪
+# Low Temperature Activator Machines
+gtqtcore.machine.low_temperature_activator.lv.name=Basic Low-Temperature Activator
+gtqtcore.machine.low_temperature_activator.lv.tooltip=Molecular Softener
+gtqtcore.machine.low_temperature_activator.mv.name=Advanced Low-Temperature Activator
+gtqtcore.machine.low_temperature_activator.mv.tooltip=Molecular Softener
+gtqtcore.machine.low_temperature_activator.hv.name=Advanced Low-Temperature Activator II
+gtqtcore.machine.low_temperature_activator.hv.tooltip=Molecular Softener
+gtqtcore.machine.low_temperature_activator.ev.name=Advanced Low-Temperature Activator III
+gtqtcore.machine.low_temperature_activator.ev.tooltip=Molecular Softener
+gtqtcore.machine.low_temperature_activator.iv.name=Elite Low-Temperature Activator
+gtqtcore.machine.low_temperature_activator.iv.tooltip=Neutron Excitation Reaction
+gtqtcore.machine.low_temperature_activator.luv.name=Elite Low-Temperature Activator II
+gtqtcore.machine.low_temperature_activator.luv.tooltip=Neutron Excitation Reaction
+gtqtcore.machine.low_temperature_activator.zpm.name=Elite Low-Temperature Activator III
+gtqtcore.machine.low_temperature_activator.zpm.tooltip=Neutron Excitation Reaction
+gtqtcore.machine.low_temperature_activator.uv.name=Ultimate Low-Temperature Activator
+gtqtcore.machine.low_temperature_activator.uv.tooltip=Particle Oscillator
+gtqtcore.machine.low_temperature_activator.uhv.name=Epic Low-Temperature Activator
+gtqtcore.machine.low_temperature_activator.uhv.tooltip=Particle Oscillator
+gtqtcore.machine.low_temperature_activator.uev.name=Epic Low-Temperature Activator II
+gtqtcore.machine.low_temperature_activator.uev.tooltip=Particle Oscillator
+gtqtcore.machine.low_temperature_activator.uiv.name=Epic Low-Temperature Activator III
+gtqtcore.machine.low_temperature_activator.uiv.tooltip=Particle Oscillator
+gtqtcore.machine.low_temperature_activator.uxv.name=Epic Low-Temperature Activator IV
+gtqtcore.machine.low_temperature_activator.uxv.tooltip=Particle Oscillator
+gtqtcore.machine.low_temperature_activator.opv.name=Legendary Low-Temperature Activator
+gtqtcore.machine.low_temperature_activator.opv.tooltip=Particle Oscillator
 
-recipemap.low_temperature_activator.name=低温活化器
-recipemap.polymerization_tank.name=聚合缸
-recipemap.spinner.name=纺线器
+# Recipe Map Names
+recipemap.low_temperature_activator.name=Low-Temperature Activator
+recipemap.polymerization_tank.name=Polymerization Tank
+recipemap.spinner.name=Spinning Machine
+
 
 gtqtcore.machine.mega_alloy_blast_smelter.name=Mega Alloy Blast Smelter
 gtqtcore.machine.mega_alloy_blast_smelter.tooltip.1=Glass tier determines maximum voltage.
@@ -2708,18 +2731,36 @@ gtqtcore.machine.laser_booster.10.name=High-Energy Laser Igniter (§aUEV§r)
 gtqtcore.machine.laser_booster.11.name=High-Energy Laser Igniter (§2UIV§r)
 
 # HEAT_HATCH lang entries
-gtqtcore.machine.heat_hatch.lv.name=热源仓（§7LV§r）
-gtqtcore.machine.heat_hatch.mv.name=热源仓（§fMV§r）
-gtqtcore.machine.heat_hatch.hv.name=热源仓（§cHV§r）
-gtqtcore.machine.heat_hatch.ev.name=热源仓（§bEV§r）
-gtqtcore.machine.heat_hatch.iv.name=热源仓（§dIV§r）
+gtqtcore.machine.heat_hatch.lv.name=Heat Hatch (§7LV§r)
+gtqtcore.machine.heat_hatch.mv.name=Heat Hatch (§fMV§r)
+gtqtcore.machine.heat_hatch.hv.name=Heat Hatch (§cHV§r)
+gtqtcore.machine.heat_hatch.ev.name=Heat Hatch (§bEV§r)
+gtqtcore.machine.heat_hatch.iv.name=Heat Hatch (§dIV§r)
 
 # ELECTRIC_HEATER lang entries
-gtqtcore.machine.electric_heater.lv.name=电加热器（§7LV§r）
-gtqtcore.machine.electric_heater.mv.name=电加热器（§fMV§r）
-gtqtcore.machine.electric_heater.hv.name=电加热器（§cHV§r）
-gtqtcore.machine.electric_heater.ev.name=电加热器（§bEV§r）
-gtqtcore.machine.electric_heater.iv.name=电加热器（§dIV§r）
+gtqtcore.machine.electric_heater.lv.name=Electric Heater (§7LV§r)
+gtqtcore.machine.electric_heater.mv.name=Electric Heater (§fMV§r)
+gtqtcore.machine.electric_heater.hv.name=Electric Heater (§cHV§r)
+gtqtcore.machine.electric_heater.ev.name=Electric Heater (§bEV§r)
+gtqtcore.machine.electric_heater.iv.name=Electric Heater (§dIV§r)
+
+gtqtcore.machine.power_supply.basic.name=Superconducting Matrix Filling Module
+gtqtcore.machine.power_supply.battle.1.name=Superconducting Matrix Energy Storage Module (§7I§r)
+gtqtcore.machine.power_supply.battle.2.name=Superconducting Matrix Energy Storage Module (§fII§r)
+gtqtcore.machine.power_supply.battle.3.name=Superconducting Matrix Energy Storage Module (§bIII§r)
+gtqtcore.machine.power_supply.battle.4.name=Superconducting Matrix Energy Storage Module (§dIV§r)
+gtqtcore.machine.power_supply.battle.5.name=Superconducting Matrix Energy Storage Module (§cV§r)
+gtqtcore.machine.power_supply.supply.1.name=Superconducting Matrix Power Supply Module (§7I§r)
+gtqtcore.machine.power_supply.supply.2.name=Superconducting Matrix Power Supply Module (§fII§r)
+gtqtcore.machine.power_supply.supply.3.name=Superconducting Matrix Power Supply Module (§bIII§r)
+gtqtcore.machine.power_supply.supply.4.name=Superconducting Matrix Power Supply Module (§dIV§r)
+gtqtcore.machine.power_supply.supply.5.name=Superconducting Matrix Power Supply Module (§cV§r)
+gtqtcore.machine.power_supply.supply.6.name=Superconducting Matrix Power Supply Module (§eVI§r)
+gtqtcore.machine.power_supply.supply.7.name=Superconducting Matrix Power Supply Module (§aVII§r)
+gtqtcore.machine.power_supply.supply.8.name=Superconducting Matrix Power Supply Module (§eVIII§r)
+gtqtcore.machine.power_supply.supply.9.name=Superconducting Matrix Power Supply Module (§aVVI§r)
+gtqtcore.machine.power_supply.supply.10.name=Superconducting Matrix Power Supply Module (§aX§r)
+
 
 gtqtcore.machine.laser_switch.name=High-Energy Laser Distribution Unit
 gtqtcore.machine.laser_translation.name=High-Energy Laser Reception Chamber
@@ -4114,13 +4155,13 @@ recipemap.bio_centrifuge.name=High-Speed Wall Breaking
 
 gtqtcore.machine.msf.name=Large Flash Evaporator
 
-gtqtcore.machine.extreme_industrial_greenhouse.name=极限工业温室
-gtqtcore.machine.extreme_industrial_greenhouse.tooltip.1=超级作物培养仓
-gtqtcore.machine.extreme_industrial_greenhouse.tooltip.2=结构上方没有日光照射不会降低配方运行速度。
-gtqtcore.machine.extreme_industrial_greenhouse.tooltip.3=根据输入电压获得并行与配方时间减免。
-gtqtcore.machine.extreme_industrial_greenhouse.tooltip.4=输入小于§1IV§7级的电压时，始终获得§e64§7次并行。
-gtqtcore.machine.extreme_industrial_greenhouse.tooltip.5=输入大于§1IV§7级的电压时，始终获得§e256§7次并行。
-gtqtcore.machine.extreme_industrial_greenhouse.tooltip.6=输入大于§1IV§7级的电压时，配方运行时间减半。
+gtqtcore.machine.extreme_industrial_greenhouse.name=Extreme Industrial Greenhouse
+gtqtcore.machine.extreme_industrial_greenhouse.tooltip.1=Super Crop Cultivation Chamber
+gtqtcore.machine.extreme_industrial_greenhouse.tooltip.2=Lack of sunlight above the structure does not reduce recipe processing speed.
+gtqtcore.machine.extreme_industrial_greenhouse.tooltip.3=Parallel processing and recipe time reduction are determined by input voltage.
+gtqtcore.machine.extreme_industrial_greenhouse.tooltip.4=When input voltage is less than §1IV§7 tier, it always gets §e64§7 parallel processes.
+gtqtcore.machine.extreme_industrial_greenhouse.tooltip.5=When input voltage is greater than §1IV§7 tier, it always gets §e256§7 parallel processes.
+gtqtcore.machine.extreme_industrial_greenhouse.tooltip.6=When input voltage is greater than §1IV§7 tier, recipe processing time is halved.
 
 recipemap.sfm.name=Flash Evaporation
 gtqtcore.machine.electric_arc_furnace.name=Large Electrode Arc Furnace
@@ -5562,8 +5603,7 @@ gtqtcore.machine.powersupply.tooltip.2=Has independent floor module upgrades tha
 gtqtcore.machine.powersupply.tooltip.3=If all the gaps in the multi-block are not filled, the multi-block will only have energy storage functionality. Multi-block can place up to four energy warehouse power warehouses each. The multi-block ignores the voltage and current of the warehouse port and instantly teleports energy to the specified IO. The multi-block defaults to instant charging of machines with lower than floor level corresponding machines, and charges machines with higher levels according to the floor module voltage.
 gtqtcore.machine.powersupply.tooltip.4=Multi-block has three functional options with different electrical operation functions
 gtqtcore.machine.powersupply.tooltip.5=Flash Charge Mode: Instantly complete machine charging, ignoring floor level and machine level
-gtqtcore.machine.powersupply.tooltip.6=Interconnection Mode: Interconnects with adjacent superconducting matrices in the 3x3 grid, sharing energy buffers, and automatically balances energy. When the buffer capacity difference of adjacent matrices is not large, the same maximum voltage is used to superimpose the difference buffer ratio to transfer energy, otherwise, energy is directly transferred instantly to balance.
-gtqtcore.machine.powersupply.tooltip.7=Supply Mode: Multi-block charge and discharge function mode switch (extract power from generator/send power to machine)
+gtqtcore.machine.powersupply.tooltip.6=Supply Mode: Multi-block charge and discharge function mode switch (extract power from generator/send power to machine)
 gtqtcore.machine.power_supply.name=Superconducting Matrix
 gtqtcore.machine.adv_kqcc.name=Super Computing Server
 gtqtcore.machine.mini_date_bank.name=Mini Database

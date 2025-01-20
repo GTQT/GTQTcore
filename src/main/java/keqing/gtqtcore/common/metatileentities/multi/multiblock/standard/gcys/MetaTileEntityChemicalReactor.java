@@ -44,8 +44,8 @@ public class MetaTileEntityChemicalReactor extends GCYMRecipeMapMultiblockContro
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
-                .aisle("   FF", "   UM", "   UU", "   DD", "   DD")
-                .aisle("F  FF", "CCCDU", "CCCCU", "CCCDD", "   DD")
+                .aisle("   FF", "   UU", "   UU", "   DD", "   DD")
+                .aisle("F  FF", "CMCDU", "CCCCU", "CCCDD", "   DD")
                 .aisle("     ", "CCCC ", "CQQC ", "CCCC ", "     ")
                 .aisle("F  F ", "CCCC ", "CSCC ", "CCCC ", "     ")
                 .where('S', this.selfPredicate())

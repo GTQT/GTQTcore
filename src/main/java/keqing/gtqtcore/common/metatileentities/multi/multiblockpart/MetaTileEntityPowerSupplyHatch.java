@@ -16,16 +16,20 @@ import gregtech.api.metatileentity.multiblock.IMultiblockAbilityPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.util.GTUtility;
 import gregtech.client.renderer.ICubeRenderer;
+import gregtech.client.utils.TooltipHelper;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockPart;
 import keqing.gtqtcore.api.capability.IPowerSupply;
 import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.MetaTileEntityPowerSupply;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.commons.lang3.ArrayUtils;
@@ -164,7 +168,20 @@ public class MetaTileEntityPowerSupplyHatch extends MetaTileEntityMultiblockPart
         textList.add(new TextComponentString("快速充电: " + fastCharge));
         textList.add(new TextComponentString("充电高度: " + chargeHeight));
     }
+    @Override
+    public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
+        super.addInformation(stack, player, tooltip, advanced);
+        if (Objects.equals(type, "frame"))tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("奢侈的地板", new Object[0]));
+        if (Objects.equals(type, "supply"))tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("内置御坂美琴", new Object[0]));
+        if (Objects.equals(type, "battle"))tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("并不是新能源汽车电池", new Object[0]));
+        tooltip.add(I18n.format("可填充在超导矩阵多方块内的任意位置，不同模块拥有不同功能，详情请见 超导矩阵 多方块的tooltips"));
+        tooltip.add(I18n.format("模块类型："+type));
+        tooltip.add(I18n.format("模块等级："+level));
+        if (Objects.equals(type, "frame")) tooltip.add(I18n.format("超导矩阵的框架模块，用于填充空缺部分，只拥有少量电力缓存功能，除此以外没有其他实质性功能，"));
+        if (Objects.equals(type, "supply")) tooltip.add(I18n.format("超导矩阵的供能模块，用于填充需要链接用电器的位置，可对用电器进行供能或者用电操作，电学参数取决于多方块的供能模式，注意，本模块供电无视电压限制，"));
+        if (Objects.equals(type, "battle")) tooltip.add(I18n.format("超导矩阵的蓄能模块，用于提供大量能量缓存，除此以外没有其他实质性功能"));
 
+    }
     @SideOnly(Side.CLIENT)
     @Override
     public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
