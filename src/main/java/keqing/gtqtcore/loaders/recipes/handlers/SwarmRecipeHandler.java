@@ -2,11 +2,17 @@ package keqing.gtqtcore.loaders.recipes.handlers;
 
 import gregtech.api.GregTechAPI;
 import gregtech.api.recipes.RecipeBuilder;
+import gregtech.api.recipes.ingredients.GTRecipeInput;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Material;
+import gregtech.api.unification.material.properties.IngotProperty;
 import gregtech.api.unification.material.properties.PropertyKey;
 import gregtech.api.unification.stack.MaterialStack;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fml.common.FMLLog;
+import scala.xml.dtd.EMPTY;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -105,7 +111,7 @@ public class SwarmRecipeHandler {
                         .notConsumable(lens, lenListElite[eliteIndex % lenListElite.length])
                         .input(HIGHLY_ADVANCED_SOC, 8)
                         .input(stickLong, CarbonNanotube, 32)
-                        .fluidInputs(material.getFluid(64*9*144))
+                        .fluidInputs(material.getFluid(64*9*1000))
                         .fluidInputs(UUMatter.getFluid(16000))
                         .output(swarm, material)
                         .EUt(VA[UV])
@@ -118,7 +124,7 @@ public class SwarmRecipeHandler {
                         .notConsumable(lens, lenListAdvance[advanceIndex % lenListAdvance.length])
                         .input(ADVANCED_SYSTEM_ON_CHIP, 8)
                         .input(stickLong, CarbonNanotube, 16)
-                        .fluidInputs(material.getFluid(64*9*144))
+                        .fluidInputs(material.getFluid(64*9*1000))
                         .fluidInputs(UUMatter.getFluid(8000))
                         .output(swarm, material)
                         .EUt(VA[ZPM])
@@ -131,7 +137,7 @@ public class SwarmRecipeHandler {
                         .notConsumable(lens, lenListCommon[commonIndex % lenListCommon.length])
                         .input(SYSTEM_ON_CHIP, 8)
                         .input(stickLong, CarbonNanotube, 4)
-                        .fluidInputs(material.getFluid(64*9*144))
+                        .fluidInputs(material.getFluid(64*9*1000))
                         .fluidInputs(UUMatter.getFluid(4000))
                         .output(swarm, material)
                         .EUt(VA[LuV])
@@ -148,6 +154,7 @@ public class SwarmRecipeHandler {
             return;
 
         List<ItemStack> inputs = new ArrayList<>();
+
         int totalInputAmount = 0;
 
         // compute outputs
@@ -156,42 +163,14 @@ public class SwarmRecipeHandler {
             inputs.add(OreDictUnifier.get(swarm, component.material, (int) component.amount));
         }
 
-        // only reduce items
-        // calculate lowest common denominator
-        List<Integer> materialAmounts = new ArrayList<>();
-        materialAmounts.add(totalInputAmount);
-        inputs.forEach(itemStack -> materialAmounts.add(itemStack.getCount()));
-
-        int highestDivisor = 1;
-
-        int smallestMaterialAmount = getSmallestMaterialAmount(materialAmounts);
-        for (int i = 2; i <= smallestMaterialAmount; i++) {
-            if (isEveryMaterialReducible(i, materialAmounts))
-                highestDivisor = i;
-        }
-
-        // divide components
-        if (highestDivisor != 1) {
-            List<ItemStack> reducedInputs = new ArrayList<>();
-
-            for (ItemStack itemStack : inputs) {
-                ItemStack reducedStack = itemStack.copy();
-                reducedStack.setCount(reducedStack.getCount() / highestDivisor);
-                reducedInputs.add(reducedStack);
-            }
-
-            inputs = reducedInputs;
-
-            totalInputAmount /= highestDivisor;
-        }
-
         // generate builder
         RecipeBuilder<?> builder;
 
         builder = SWARM_GROWTH.recipeBuilder()
-                .duration((int) Math.ceil(material.getMass() * totalInputAmount * 1.5))
+                .duration((int) Math.ceil(material.getMass() * totalInputAmount * 20))
                 .circuitMeta(u)
-                .EUt(VA[LV]);
+                .tier(getTIerByAmount(totalInputAmount))
+                .EUt(VA[LuV+getTIerByAmount(totalInputAmount)]);
 
         builder.inputStacks(inputs);
 
@@ -201,6 +180,43 @@ public class SwarmRecipeHandler {
 
         // register recipe
         builder.buildAndRegister();
+
+        // generate builder
+        RecipeBuilder<?> builder2;
+
+        /////////////////////////////////////////////////////////////////////////////
+        builder2 = SWARM_ASSEMBLER.recipeBuilder()
+                .duration((int) Math.ceil(material.getMass() * totalInputAmount * 40))
+                .input(swarm, material)
+                .tier(getTIerByAmount(totalInputAmount))
+                .EUt(VA[LuV+getTIerByAmount(totalInputAmount)]);
+
+        for (MaterialStack component : material.getMaterialComponents()) {
+            totalInputAmount += (int) component.amount;
+            inputs.add(OreDictUnifier.get(swarm, component.material,1));
+            if(component.material.hasProperty(PropertyKey.INGOT)||component.material.hasProperty(PropertyKey.DUST)) {
+                if(component.material.hasProperty(PropertyKey.FLUID))builder2.fluidInputs(component.material.getFluid((int) (144 * component.amount)));
+                else builder2.input(ingot,component.material, (int) component.amount);
+            }
+            else if(component.material.hasProperty(PropertyKey.FLUID)) {
+                Fluid fluid = component.material.getFluid();
+                if (fluid == null) {
+                    return; // 或者抛出异常，根据需求决定如何处理
+                }
+                builder2.fluidInputs(component.material.getFluid((int) (1000 * component.amount)));
+            }
+        }
+        // finish builder
+        if(material.hasProperty(PropertyKey.FLUID))builder2.fluidOutputs(material.getFluid(totalInputAmount*144));
+        else builder2.output(ingot, material, totalInputAmount);
+        // register recipe
+        builder2.buildAndRegister();
+    }
+
+    private static int getTIerByAmount(int totalInputAmount) {
+        if(totalInputAmount<=10)return 1;
+        if(totalInputAmount<=20)return 2;
+        return 3;
     }
 
     private static boolean isEveryMaterialReducible(int divisor, List<Integer> materialAmounts) {

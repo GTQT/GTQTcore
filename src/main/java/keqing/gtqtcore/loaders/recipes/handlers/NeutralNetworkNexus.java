@@ -47,9 +47,9 @@ public class NeutralNetworkNexus {
                 .fluidInputs(NaquadahAlloy.getFluid(L * 4))
                 .fluidInputs(UUMatter.getFluid(400))
                 .stationResearch(b -> b
-                        .researchStack(DISK_19.getStackForm())
-                        .CWUt(CWT[LuV])
-                        .EUt(VA[ZPM]))
+                        .researchStack(DISK_18.getStackForm())
+                        .CWUt(CWT[IV])
+                        .EUt(VA[LuV]))
                 .EUt(VA[ZPM])
                 .duration(1200)
                 .buildAndRegister();
@@ -74,9 +74,9 @@ public class NeutralNetworkNexus {
                 .fluidInputs(SolderingAlloy.getFluid(L * 32))
                 .output(NEUTRAL_NETWORK_NEXUS)
                 .stationResearch(b -> b
-                        .researchStack(DISK_19.getStackForm())
-                        .CWUt(CWT[LuV])
-                        .EUt(VA[ZPM]))
+                        .researchStack(DISK_18.getStackForm())
+                        .CWUt(CWT[IV])
+                        .EUt(VA[LuV]))
                 .EUt(VA[ZPM])
                 .duration(1200)
                 .buildAndRegister();

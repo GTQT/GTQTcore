@@ -125,7 +125,7 @@ public class MetaTileEntityHugeChemicalReactor extends MultiMapMultiblockControl
     public void update() {
         super.update();
         if (isStructureFormed() && isActive()) {
-            requestCWUt = computationProvider.requestCWUt(1024, false);
+            requestCWUt = computationProvider.requestCWUt(2048, false);
         }
     }
 

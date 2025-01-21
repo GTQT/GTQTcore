@@ -1674,6 +1674,8 @@ gtqtcore.machine.primitive_roaster.name=原始焙烧炉
 recipemap.primitive_roaster.name=焙烧炉
 
 recipemap.neutral_network_nexus_breeding_mode.name=纳米煅烧
+recipemap.swarm_growth.name=蜂群杂交
+recipemap.swarm_assembler.name=蜂群组装
 #  Materials
 
 ##  Element Materials
@@ -3372,7 +3374,7 @@ gtqtcore.multiblock.hb.tooltip.3=多方块结构内所有线圈每提升一级�
 gtqtcore.multiblock.ab.tooltip.1=多方块结构内所有线圈每提升一级，多方块配方并行数量 * 2。
 gtqtcore.multiblock.ab.tooltip.3=多方块结构每升级（例如结构拓展）一次，并行升级倍率提高%s，最高提高%s
 gtqtcore.multiblock.ab.tooltip.2=多方块线圈全部升级完毕后，一次至多可处理 %s 个配方。
-gtqtcore.multiblock.kq.acc.tooltip=本多方块支持算力加速，每提供256算力耗时减免5%%(如果有其他耗时减免那么他们是相乘计算)
+gtqtcore.multiblock.kq.acc.tooltip=本多方块支持算力加速，每提供256算力耗时减免5%%(如果有其他耗时减免那么他们是相乘计算),最大2048算力减免40%%。
 gtqtcore.multiblock.ab.amount=润滑油储量：%sL
 gtqtcore.multiblock.ab.heat=润滑油持续润滑中
 gtqtcore.multiblock.ab.no=需要提供润滑油！

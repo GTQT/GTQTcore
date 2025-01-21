@@ -516,7 +516,7 @@ public class CPULine {
 
         for (int i = tier; i <= 7; i++) {
             //掩模-》产品+光掩模基板 无锡附着+液态锡
-            STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[EU])
+            STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[EU+i-1])
                     .Laser(tier)
                     .input(getWaferByTier(i))
                     .input(item1)
@@ -541,7 +541,7 @@ public class CPULine {
 
         for (int i = tier; i <= 7; i++) {
             //掩模-》产品+光掩模基板 无锡附着+液态锡
-            STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[EU])
+            STEPPER_RECIPES.recipeBuilder().duration(9000).EUt(VA[EU+tier-1])
                     .Laser(tier)
                     .input(getWaferByTier(i))
                     .input(item1)

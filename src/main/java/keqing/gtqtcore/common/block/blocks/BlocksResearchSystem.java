@@ -32,7 +32,6 @@ public class BlocksResearchSystem extends VariantBlock<BlocksResearchSystem.Casi
 
         COMPUTER_VENT("computer_vent"),
         KQCC_COMPUTER_CASING("computer_casing"),
-
         ADV_COMPUTER_CASING("adv_computer_casing"),
         ADV_COMPUTER_HEAT_VENT("adv_computer_heat_vent"),
         ULTRA_POWER_CASING("ultra_power_casing"),

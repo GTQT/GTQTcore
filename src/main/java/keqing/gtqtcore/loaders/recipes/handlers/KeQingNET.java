@@ -46,6 +46,7 @@ import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.MaterialHelper.Superconductor;
 import static keqing.gtqtcore.api.unification.TJMaterials.Polyetheretherketone;
+import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.swarm;
 import static keqing.gtqtcore.api.utils.GTQTUtil.CWT;
 import static keqing.gtqtcore.common.block.blocks.BlockIsaCasing.CasingType.FLOTATION_CASING_GEARBOX;
 import static keqing.gtqtcore.common.block.blocks.BlockIsaCasing.CasingType.ISA_MILL_CASING_GEARBOX;
@@ -1058,8 +1059,10 @@ public class KeQingNET {
                 .output(BIO_0)
                 .EUt(VA[LuV])
                 .duration(600)
-                .scannerResearch(b -> b
-                        .researchStack(DISK_18.getStackForm()))
+                .stationResearch(b -> b
+                        .researchStack(DISK_18.getStackForm())
+                        .CWUt(CWT[IV])
+                        .EUt(VA[LuV]))
                 .buildAndRegister();
     }
 
@@ -2673,7 +2676,7 @@ public class KeQingNET {
                 .input(CIRCUIT_GOOD_I, 16)
                 .input(HULL[LuV], 16)
                 .input(FUSION_REACTOR[0], 48)
-                .input(plate, Europium, 32)
+                .input(swarm, Europium, 32)
                 .input(circuit, MarkerMaterials.Tier.ZPM, 64)
                 .input(ELECTRIC_PUMP_LuV, 32)
                 .input(FIELD_GENERATOR_LuV, 32)
@@ -2698,7 +2701,7 @@ public class KeQingNET {
                 .input(CIRCUIT_GOOD_II, 16)
                 .input(HULL[ZPM], 16)
                 .input(FUSION_REACTOR[1], 48)
-                .input(plate, Americium, 32)
+                .input(swarm, Americium, 32)
                 .input(circuit, MarkerMaterials.Tier.UV, 64)
                 .input(ELECTRIC_PUMP_ZPM, 32)
                 .input(FIELD_GENERATOR_ZPM, 32)
@@ -2723,7 +2726,7 @@ public class KeQingNET {
                 .input(CIRCUIT_GOOD_III, 16)
                 .input(HULL[UV], 16)
                 .input(FUSION_REACTOR[2], 48)
-                .input(plate, Darmstadtium, 32)
+                .input(swarm, Darmstadtium, 32)
                 .input(circuit, MarkerMaterials.Tier.UHV, 64)
                 .input(ELECTRIC_PUMP_UV, 32)
                 .input(FIELD_GENERATOR_UV, 32)

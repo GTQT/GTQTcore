@@ -206,7 +206,8 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<SimpleRecipeBuilder> DECAY_CHAMBER_RECIPES;
     public static final RecipeMap<ComponentAssemblyLineRecipesTierRecipeBuilder> COMPONENT_ASSEMBLY_LINE_RECIPES;
     public static final RecipeMap<ElectronRecipeBuilder> ELECTROBATH;
-    public static final RecipeMap<SimpleRecipeBuilder> SWARM_GROWTH;
+    public static final RecipeMap<SwarmTierRecipeBuilder> SWARM_GROWTH;
+    public static final RecipeMap<SwarmTierRecipeBuilder> SWARM_ASSEMBLER;
     public static final RecipeMap<ComputationRecipeBuilder> PARTICLE_ACCELERATOR_RECIPES;
     public static final RecipeMap<SimpleRecipeBuilder> DIGESTER_RECIPES;
     public static final RecipeMap<BioRecipeRecipeBuilder> BIOLOGICAL_REACTION_RECIPES;
@@ -328,7 +329,11 @@ public class GTQTcoreRecipeMaps {
                 .setProgressBar(GuiTextures.PROGRESS_BAR_HAMMER, ProgressWidget.MoveType.VERTICAL_DOWNWARDS)
                 .setSound(GTSoundEvents.SCIENCE);
 
-        SWARM_GROWTH = new RecipeMap<>("swarm_growth",  16,  1,  0,  0, new SimpleRecipeBuilder(), false)
+        SWARM_GROWTH = new RecipeMap<>("swarm_growth", 16, 1, 0, 0, new SwarmTierRecipeBuilder(), false)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_HAMMER, ProgressWidget.MoveType.VERTICAL_DOWNWARDS)
+                .setSound(GTSoundEvents.SCIENCE);
+
+        SWARM_ASSEMBLER = new RecipeMap<>("swarm_assembler", 3, 1, 9, 1, new SwarmTierRecipeBuilder(), false)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_HAMMER, ProgressWidget.MoveType.VERTICAL_DOWNWARDS)
                 .setSound(GTSoundEvents.SCIENCE);
 

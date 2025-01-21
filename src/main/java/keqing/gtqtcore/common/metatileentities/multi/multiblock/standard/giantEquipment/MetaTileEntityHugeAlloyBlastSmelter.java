@@ -16,6 +16,7 @@ import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
+import gregtech.api.metatileentity.multiblock.MultiMapMultiblockController;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
@@ -23,6 +24,8 @@ import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.MultiblockShapeInfo;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
+import gregtech.api.recipes.RecipeMap;
+import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.recipes.logic.OverclockingLogic;
 import gregtech.api.recipes.recipeproperties.IRecipePropertyStorage;
 import gregtech.api.recipes.recipeproperties.TemperatureProperty;
@@ -40,6 +43,7 @@ import gregtech.common.metatileentities.MetaTileEntities;
 import gregtech.core.sound.GTSoundEvents;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
+import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4;
@@ -67,7 +71,7 @@ import static gregtech.api.GTValues.VA;
 import static keqing.gtqtcore.api.utils.GTQTUtil.getAccelerateByCWU;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.HUGE_ALLOY_BLAST_FURANCE;
 
-public class MetaTileEntityHugeAlloyBlastSmelter extends RecipeMapMultiblockController implements IHeatingCoil, IOpticalComputationReceiver {
+public class MetaTileEntityHugeAlloyBlastSmelter extends MultiMapMultiblockController implements IHeatingCoil, IOpticalComputationReceiver {
 
     protected int heatingCoilLevel;
     protected int coilTier;
@@ -77,7 +81,11 @@ public class MetaTileEntityHugeAlloyBlastSmelter extends RecipeMapMultiblockCont
     private IOpticalComputationProvider computationProvider;
 
     public MetaTileEntityHugeAlloyBlastSmelter(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, GCYMRecipeMaps.ALLOY_BLAST_RECIPES);
+        super(metaTileEntityId, new RecipeMap[]{
+                GCYMRecipeMaps.ALLOY_BLAST_RECIPES,
+                GTQTcoreRecipeMaps.VACUUM_DRYING_FURNACE_RECIPES,
+                GTQTcoreRecipeMaps.BURNER_REACTOR_RECIPES
+        });
         this.recipeMapWorkable = new MetaTileEntityHugeAlloyBlastSmelterWorkable(this);
     }
 
@@ -113,7 +121,7 @@ public class MetaTileEntityHugeAlloyBlastSmelter extends RecipeMapMultiblockCont
     public void update() {
         super.update();
         if (isStructureFormed() && isActive()) {
-            requestCWUt = computationProvider.requestCWUt(1024, false);
+            requestCWUt = computationProvider.requestCWUt(2048, false);
         }
     }
 

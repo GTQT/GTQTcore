@@ -24,5 +24,10 @@ public class ObjModels {
     public static final IModelCustom WindRotor = AdvancedModelLoader.loadModel(new ResourceLocation("gtqtcore", "models/obj/windrotor.obj"));
     public static final ResourceLocation WindRotor_pic = new ResourceLocation("gtqtcore", "models/obj/windrotor.png");
 
+    public static final IModelCustom Ship = AdvancedModelLoader.loadModel(new ResourceLocation("gtqtcore", "models/obj/ship.obj"));
+    public static final ResourceLocation Ship_pic = new ResourceLocation("gtqtcore", "models/obj/ship_pic.png");
+
+    public static final IModelCustom climber = AdvancedModelLoader.loadModel(new ResourceLocation("gtqtcore", "models/obj/climber.obj"));
+    public static final ResourceLocation climber_pic = new ResourceLocation("gtqtcore", "models/obj/climber.png");
 
 }

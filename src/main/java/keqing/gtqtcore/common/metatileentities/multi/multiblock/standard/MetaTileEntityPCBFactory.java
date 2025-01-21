@@ -2,6 +2,12 @@ package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
 
 import gregicality.multiblocks.api.unification.GCYMMaterials;
+import gregtech.api.capability.IEnergyContainer;
+import gregtech.api.capability.IOpticalComputationHatch;
+import gregtech.api.capability.IOpticalComputationProvider;
+import gregtech.api.capability.IOpticalComputationReceiver;
+import gregtech.api.capability.impl.EnergyContainerList;
+import gregtech.api.capability.impl.FluidTankList;
 import gregtech.api.capability.impl.ItemHandlerList;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.gui.GuiTextures;
@@ -30,8 +36,8 @@ import keqing.gtqtcore.api.recipes.properties.PCBFactoryBioUpgradeProperty;
 import keqing.gtqtcore.api.recipes.properties.PCBFactoryProperty;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.common.block.blocks.BlockPCBFactoryCasing;
 import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4;
+import keqing.gtqtcore.common.block.blocks.BlockPCBFactoryCasing;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
@@ -42,6 +48,7 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -60,21 +67,18 @@ import static keqing.gtqtcore.api.pattern.GTQTTraceabilityPredicate.optionalStat
 import static keqing.gtqtcore.api.unification.GCYSMaterials.SiliconCarbide;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.swarm;
 import static keqing.gtqtcore.api.utils.GTQTMathUtil.clamp;
+import static keqing.gtqtcore.api.utils.GTQTUtil.getAccelerateByCWU;
 import static keqing.gtqtcore.common.block.blocks.BlockPCBFactoryCasing.PCBFactoryCasingType.SUBSTRATE_CASING;
 
-/**
- * PCB Factory
- *
- * @author Magic_Sweepy
- * @since 2.8.8-beta
- */
-public class MetaTileEntityPCBFactory extends RecipeMapMultiblockController {
+public class MetaTileEntityPCBFactory extends RecipeMapMultiblockController implements IOpticalComputationReceiver {
 
     //  Traceability Predicate Utility
     //  Used to check snow layer on block (for Multiblock Structure).
     private static final TraceabilityPredicate SNOW_LAYER = new TraceabilityPredicate(blockWorldState -> GTUtility.isBlockSnow(blockWorldState.getBlockState()));
     private final int minTraceSize = 25;
     private final int maxTraceSize = 200;
+    int requestCWUt;
+    private IOpticalComputationProvider computationProvider;
     //  Upgrade Number
     private byte mainUpgradeNumber = 0;
     private byte bioUpgradeNumber = 0;
@@ -150,13 +154,42 @@ public class MetaTileEntityPCBFactory extends RecipeMapMultiblockController {
     }
 
     @Override
+    protected void initializeAbilities() {
+        this.inputInventory = new ItemHandlerList(this.getAbilities(MultiblockAbility.IMPORT_ITEMS));
+        this.inputFluidInventory = new FluidTankList(this.allowSameFluidFillForOutputs(), this.getAbilities(MultiblockAbility.IMPORT_FLUIDS));
+        this.outputInventory = new ItemHandlerList(this.getAbilities(MultiblockAbility.EXPORT_ITEMS));
+        this.outputFluidInventory = new FluidTankList(this.allowSameFluidFillForOutputs(), this.getAbilities(MultiblockAbility.EXPORT_FLUIDS));
+        List<IEnergyContainer> energyContainer = new ArrayList<>(this.getAbilities(MultiblockAbility.INPUT_ENERGY));
+        energyContainer.addAll(this.getAbilities(MultiblockAbility.INPUT_LASER));
+        this.energyContainer = new EnergyContainerList(energyContainer);
+    }
+
+    @Override
+    public IOpticalComputationProvider getComputationProvider() {
+        return this.computationProvider;
+    }
+
+    @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityPCBFactory(metaTileEntityId);
     }
 
     @Override
+    public void update() {
+        super.update();
+        if (isStructureFormed() && isActive()) {
+            requestCWUt = computationProvider.requestCWUt(2048, false);
+        }
+    }
+
+    @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
+
+        List<IOpticalComputationHatch> providers = this.getAbilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION);
+        if (providers != null && !providers.isEmpty()) {
+            this.computationProvider = providers.get(0);
+        }
         //  Main Structure T1
         this.mainUpgradeNumber += 1;
         //  Main Structure T2
@@ -224,6 +257,8 @@ public class MetaTileEntityPCBFactory extends RecipeMapMultiblockController {
                 //  Main Structure (T1)
                 .where('C', states(getCasingState("T1StructureCasing")) // Basic Photolithographic Framework casing
                         .setMinGlobalLimited(40)
+                        .or(abilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION).setExactLimit(1))
+                        .or(abilities(MultiblockAbility.INPUT_LASER).setMaxGlobalLimited(1))
                         .or(this.autoAbilities())) // Energy hatch (1-3), Maintenance hatch, Item import/export hatch, Fluid import hatch
                 .where('c', states(getSecondCasingState())) // Plascrete
                 .where('D', states(getThirdCasingState("T1Grate")))  // Grate casing
@@ -337,7 +372,7 @@ public class MetaTileEntityPCBFactory extends RecipeMapMultiblockController {
                     .aisle("KKKKKKK  EEEECcccccC MMMMM  MMMMM", "  KKK    E##ED#XXX#D N###N  N###N", "  KKK    E##ED#####D N###N  N###N", "  KKK    E##EC#####C N###N  N###N", "  KKK    E##ECCCCCCC  MMM    MMM ", "  KKK    EEEEF     F             ", "         fEEf                    ", "                                 ", "                                 ", "  KKK                            ", "  KKK                            ", "  KKK                            ", "  K K                            ", "  K K                            ", "  K K                            ", "  KKK                            ", "  KKK                            ", "  KKK                            ", "                                 ", "                                 ", "                                 ", "                                 ")
                     .aisle(" KKKKK   EEEECcccccC MMMMM  MMMMM", "         E##ED#XXX#D N###N  N###N", "         E##ED#####D N###N  N###N", "         E##EC#####C N###N  N###N", "         E##ECCCCCCC  MMM    MMM ", "         EEEEFFFFFFF   M      M  ", "         fEEf           MMMMMM   ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ")
                     .aisle("         EEEECcccccC MMMMM  MMMMM", "         E##ED#XXX#D N###N  N###N", "         E##ED#####D N###N  N###N", "         E##EC#####C N###N  N###N", "         E##ECGGGGGC  MMM    MMM ", "         EEEEF     F             ", "         fEEf                    ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ")
-                    .aisle("         EEEECcccccC hMMMh  hMMMh", "         E##EC#####C hNNNh  hNNNh", "         E##EC#####C hNNNh  hNNNh", "         E##EC#####C hNNNh  hNNNh", "         E##ECGGGGGC h   h  h   h", "         EEEEF     F             ", "         fEEf                    ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ")
+                    .aisle("         EEEECcccccw hMMMh  hMMMh", "         E##EC#####C hNNNh  hNNNh", "         E##EC#####C hNNNh  hNNNh", "         E##EC#####C hNNNh  hNNNh", "         E##ECGGGGGC h   h  h   h", "         EEEEF     F             ", "         fEEf                    ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ")
                     .aisle("         EEEEFijSkkF             ", "         E##EFGGGGGF             ", "         E##EFGGGGGF             ", "         E##EFGGGGGF             ", "         E##EFFFFFFF             ", "         fEEf                    ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ")
                     .aisle("         EEEE                    ", "         E##E                    ", "         E##E                    ", "         fEEf                    ", "         fEEf                    ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ")
                     .aisle("         fEEf                    ", "         fEEf                    ", "         fEEf                    ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ", "                                 ")
@@ -348,6 +383,7 @@ public class MetaTileEntityPCBFactory extends RecipeMapMultiblockController {
                     .where('F', getFrameState("T1Frame")) // HSLA Steel frame
                     .where('G', getGlassState("T1StructureGlass")) // Laminated glass
                     .where('X', getThirdCasingState("T1Substrate")) // Substrate casing
+                    .where('w', MetaTileEntities.COMPUTATION_HATCH_RECEIVER, EnumFacing.EAST)
                     .where('i', MetaTileEntities.ITEM_IMPORT_BUS[1], EnumFacing.SOUTH)
                     .where('j', MetaTileEntities.ITEM_EXPORT_BUS[1], EnumFacing.SOUTH)
                     .where('k', MetaTileEntities.FLUID_IMPORT_HATCH[1], EnumFacing.SOUTH)
@@ -416,6 +452,8 @@ public class MetaTileEntityPCBFactory extends RecipeMapMultiblockController {
         tooltip.add(I18n.format("gtqtcore.machine.pcb_factory.tooltip.12"));
         tooltip.add(I18n.format("gtqtcore.machine.pcb_factory.tooltip.13"));
         tooltip.add(I18n.format("gtqtcore.machine.pcb_factory.tooltip.14"));
+        tooltip.add(I18n.format("gtqtcore.multiblock.kq.acc.tooltip"));
+        tooltip.add(I18n.format("本机器允许使用激光能源仓代替能源仓！"));
     }
 
     @Override
@@ -428,6 +466,7 @@ public class MetaTileEntityPCBFactory extends RecipeMapMultiblockController {
         MultiblockDisplayText.builder(textList, this.isStructureFormed())
                 .addCustom((tl) -> {
                     if (this.isStructureFormed()) {
+                        tl.add(new TextComponentTranslation("gtqtcore.kqcc_accelerate", requestCWUt, getAccelerateByCWU(requestCWUt)));
                         tl.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY, "gtqtcore.machine.pcb_factory.structure.info", this.getMainUpgradeNumber(), this.getTraceSize()));
                         if (this.getCoolingUpgradeNumber() > 0) {
                             tl.add(TextComponentUtil.translationWithColor(TextFormatting.AQUA, "gtqtcore.machine.pcb_factory.structure.cooling_tower"));
@@ -527,6 +566,7 @@ public class MetaTileEntityPCBFactory extends RecipeMapMultiblockController {
 
         @Override
         public void setMaxProgress(int maxProgress) {
+            maxProgress = (int) Math.floor(maxProgress * getAccelerateByCWU(requestCWUt));
             this.maxProgressTime = switch (traceSize) {
                 case 25 -> (int) Math.floor(0.4 * maxProgress);
                 case 50 -> (int) Math.floor(0.6 * maxProgress);

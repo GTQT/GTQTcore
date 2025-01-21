@@ -1449,6 +1449,8 @@ gtqtcore.machine.primitive_roaster.name=Primitive Roaster
 recipemap.primitive_roaster.name=Primitive Roaster
 
 recipemap.neutral_network_nexus_breeding_mode.name=Neutral Network Nexus Breeding Mode
+recipemap.swarm_growth.name=Swarm Growth
+recipemap.swarm_assembler.name=Swarm Assembler
 # Materials
 
 ## Element Materials
@@ -3134,7 +3136,7 @@ gtqtcore.multiblock.hb.tooltip.3=Each upgrade of all coils in the multiblock str
 gtqtcore.multiblock.ab.tooltip.1=Each upgrade of all coils in the multiblock structure doubles the parallelism of multiblock recipes.
 gtqtcore.multiblock.ab.tooltip.3=Each upgrade of the multiblock structure (e.g., structure extension) increases the parallelism upgrade multiplier by %s, up to a maximum increase of %s.
 gtqtcore.multiblock.ab.tooltip.2=After all coil upgrades are completed, up to %s recipes can be processed at once.
-gtqtcore.multiblock.kq.acc.tooltip=This multi-party block supports computing power acceleration, and the time spent on every 256 computing power provided is reduced by 5%% (if there are other time reductions, then they are multiplied calculations)
+gtqtcore.multiblock.kq.acc.tooltip=This multi-party block supports computing power acceleration, and the time spent on every 256 computing power provided is reduced by 5%% (if there are other time reductions, then they are multiplied calculations), and the maximum computing power of 2048 is reduced by 40%%.
 gtqtcore.multiblock.ab.amount=Lubricant Capacity: %sL
 gtqtcore.multiblock.ab.heat=Lubricant Continuously Lubricating
 gtqtcore.multiblock.ab.no=Lubricant Required!
