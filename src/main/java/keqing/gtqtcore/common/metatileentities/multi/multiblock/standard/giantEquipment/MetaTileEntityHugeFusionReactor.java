@@ -131,7 +131,6 @@ public class MetaTileEntityHugeFusionReactor extends RecipeMapMultiblockControll
                 .where('G', states(this.getCasingState(), this.getGlassState()))
                 .where('E', states(this.getCasingState(), this.getGlassState())
                         .or(metaTileEntities(Arrays.stream(MetaTileEntities.ENERGY_INPUT_HATCH)
-                                //.filter(mte -> mte != null && tier <= mte.getTier() && mte.getTier() <= UIV)
                                 .filter(mte -> mte != null && mte.getTier() <= UIV)
                                 .toArray(MetaTileEntity[]::new))
                                 .setMinGlobalLimited(1)

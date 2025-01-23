@@ -16,6 +16,7 @@ import gregtech.api.unification.material.Material;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.TooltipHelper;
+import gregtech.common.metatileentities.MetaTileEntities;
 import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.block.state.IBlockState;
@@ -27,10 +28,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.util.Arrays;
 import java.util.List;
 
-import static gregtech.api.GTValues.LuV;
-import static gregtech.api.GTValues.V;
+import static gregtech.api.GTValues.*;
 import static gregtech.common.blocks.MetaBlocks.FRAMES;
 
 public class MetaTileEntityLargeBasicGenerator extends FuelMultiblockController {
@@ -87,14 +88,11 @@ public class MetaTileEntityLargeBasicGenerator extends FuelMultiblockController 
                                 .setMinGlobalLimited(1)))
                 .where('F', states(getFrameState()))
                 .where('P', states(getBoilerCasingState()))
-                .where('O', metaTileEntities(MultiblockAbility.REGISTRY.get(MultiblockAbility.OUTPUT_ENERGY).stream()
-                        .filter(mte -> {
-                            IEnergyContainer container = mte.getCapability(GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER, null);
-                            return container != null && container.getOutputVoltage() <= GTValues.V[tier];
-                        })
+                .where('O', metaTileEntities(Arrays.stream(MetaTileEntities.ENERGY_OUTPUT_HATCH)
+                        .filter(mte -> mte != null && mte.getTier() <= V[tier])
                         .toArray(MetaTileEntity[]::new))
-                        .setExactLimit(1)
-                        .setPreviewCount(1))
+                        .setMinGlobalLimited(1)
+                        .setPreviewCount(16))
                 .build();
     }
     @SideOnly(Side.CLIENT)
