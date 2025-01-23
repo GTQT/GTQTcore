@@ -1482,7 +1482,7 @@ public class FirstDegreeMaterials {
                 .build();
 
         //低纯度硅岩溶液
-        GTQTMaterials.LowPurityNaquadahSolution = new Material.Builder(getMaterialsId(), gregtechId("dichunduguiyanrongye"))
+        GTQTMaterials.LowPurityNaquadahSolution = new Material.Builder(getMaterialsId(), gregtechId("low_purity_naquadah_solution"))
                 .fluid()
                 .flags(DISABLE_DECOMPOSITION)
                 .color(0xB4EEB4)
@@ -1511,7 +1511,7 @@ public class FirstDegreeMaterials {
                 .build();
 
         //废液
-        GTQTMaterials.WasteLiquid = new Material.Builder(getMaterialsId(), gregtechId("feiye"))
+        GTQTMaterials.WasteLiquid = new Material.Builder(getMaterialsId(), gregtechId("waste_liquid"))
                 .fluid()
                 .color(0x548B54)
                 .build();
