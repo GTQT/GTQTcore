@@ -25,6 +25,13 @@ public class GasChain {
                 .dimension(20)
                 .duration(200).EUt(16).buildAndRegister();
 
+        //交错
+        GAS_COLLECTOR_RECIPES.recipeBuilder()
+                .circuitMeta(5)
+                .fluidOutputs(BetAir.getFluid(10000))
+                .dimension(41)
+                .duration(200).EUt(16).buildAndRegister();
+
         DISTILLATION_RECIPES.recipeBuilder()
                 .fluidInputs(BetAir.getFluid(100000))
                 .fluidOutputs(Methane.getFluid(72000))
@@ -38,9 +45,9 @@ public class GasChain {
 
         //火星
         GAS_COLLECTOR_RECIPES.recipeBuilder()
-                .circuitMeta(5)
+                .circuitMeta(6)
                 .fluidOutputs(MarsAir.getFluid(10000))
-                .dimension(-29)
+                .dimension(52)
                 .duration(200).EUt(16).buildAndRegister();
 
         DISTILLATION_RECIPES.recipeBuilder()
