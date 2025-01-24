@@ -6,7 +6,7 @@ import net.minecraft.client.resources.I18n;
 
 public class CasingTierProperty extends RecipeProperty<Integer> {
 
-    public static final String KEY = "CasingTier";
+    public static final String KEY = "casing_tier";
     private static CasingTierProperty INSTANCE;
 
     private CasingTierProperty() {

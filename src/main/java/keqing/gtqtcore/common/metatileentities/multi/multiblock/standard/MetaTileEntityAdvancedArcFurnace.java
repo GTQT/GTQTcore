@@ -65,6 +65,7 @@ public class MetaTileEntityAdvancedArcFurnace extends MultiMapMultiblockControll
     }
     @Override
     public void updateFormedValid() {
+        super.updateFormedValid();
         if (!isStructureFormed()) return;
         if (!checkAvailable()) return;
         ElectrodeTier = getElectrodeTier();
@@ -109,7 +110,7 @@ public class MetaTileEntityAdvancedArcFurnace extends MultiMapMultiblockControll
     }
 
     public int getElectrodeTier() {
-        int minTier = 1;
+        int minTier = 5;
         for (int i = 0; i < 14; i++) {
             if (minTier > getElectrodeHatch(i).getElectrodeTier())
                 minTier = getElectrodeHatch(i).getElectrodeTier();

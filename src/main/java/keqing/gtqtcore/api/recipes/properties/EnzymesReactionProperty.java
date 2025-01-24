@@ -10,7 +10,7 @@ import java.util.TreeMap;
 
 public class EnzymesReactionProperty extends RecipeProperty<Integer> {
 
-    public static final String KEY = "EnzymesReaction";
+    public static final String KEY = "enzymes_reaction";
 
     private static final TreeMap<Integer, String> registeredTire = new TreeMap<>();
     private static EnzymesReactionProperty INSTANCE;

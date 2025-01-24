@@ -49,7 +49,7 @@ public class GTQTOrePrefix {
     public static final OrePrefix nanosensor = new OrePrefix("nanosensor", M, null, GTQTMaterialIconType.nanosensor, ENABLE_UNIFICATION,
             mat -> mat.hasFlag(GENERATE_NANOSENSOR));
     public static final OrePrefix soldering_iron_head = new OrePrefix("soldering_iron_head", M, null, GTQTMaterialIconType.soldering_iron_head, ENABLE_UNIFICATION,
-            OrePrefix.Conditions.hasIngotProperty, mat -> Collections.singletonList(I18n.format("metaitem.soldering_iron_head.tooltip")));
+            mat -> mat.hasFlag(GENERATE_CURVED_PLATE));
     //这里注册新的加工部件（大焊接板，弯曲板，圆盖，传动轴，气缸，阀门，外壳）
     public static final OrePrefix plate_curved = new OrePrefix("plate_curved", M, null, GTQTMaterialIconType.plate_curved, ENABLE_UNIFICATION,
             mat -> mat.hasFlag(GENERATE_CURVED_PLATE));

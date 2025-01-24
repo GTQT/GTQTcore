@@ -3794,7 +3794,8 @@ gregtech.material.bet_air=沼泽空气
 gregtech.material.liquid_bet_air=液态沼泽空气
 gregtech.material.mars_air=火星大气
 gregtech.material.liquid_mars_air=液态火星大气
-
+gregtech.material.beneath_air=深渊空气
+gregtech.material.liquid_beneath_air=液态深渊空气
 gregtech.material.bitterns=硫酸酸化卤水
 gregtech.material.bitterno=氧化卤水
 gregtech.material.bitternbr=离散态氧化溴

@@ -10,9 +10,11 @@ import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
+import gregtech.api.recipes.RecipeMaps;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.TooltipHelper;
+import groovyjarjarantlr4.v4.runtime.misc.NotNull;
 import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.capability.IElectrode;
@@ -20,6 +22,7 @@ import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.recipes.properties.ElectronBathProperties;
+import keqing.gtqtcore.api.utils.GTQTLog;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.client.resources.I18n;
@@ -51,12 +54,6 @@ public class MetaTileEntityElectronBath extends RecipeMapMultiblockController {
     public boolean canBeDistinct() {
         return true;
     }
-
-    @Override
-    public boolean checkRecipe(@Nonnull Recipe recipe, boolean consumeIfSuccess) {
-        return super.checkRecipe(recipe, consumeIfSuccess) && recipe.getProperty(ElectronBathProperties.getInstance(), 0) <= ElectrodeTier;
-    }
-
 
     @SuppressWarnings("SpellCheckingInspection")
     @Override
@@ -125,6 +122,7 @@ public class MetaTileEntityElectronBath extends RecipeMapMultiblockController {
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
+        if(!isStructureFormed())return;
         if (casingTier != tubeTier)
             textList.add(new TextComponentTranslation("gtqtcore.equal", casingTier, tubeTier));
         textList.add(new TextComponentTranslation("电极状态：%s 电极等级：%s", checkAvailable(), ElectrodeTier));
@@ -139,13 +137,17 @@ public class MetaTileEntityElectronBath extends RecipeMapMultiblockController {
         tooltip.add(I18n.format("gtqtcore.machine.ele.tooltip.2"));
         tooltip.add(I18n.format("gregtech.machine.cracker.gtqtupdate.1"));
         tooltip.add(I18n.format("gregtech.machine.cracker.gtqtupdate.2"));
-        tooltip.add(I18n.format("gtqtcore.machine.progress_time","maxProgress * (100 - tier * 5) / 100.0"));
-        tooltip.add(I18n.format("gtqtcore.machine.parallel.pow.machineTier",2,256));
+        tooltip.add(I18n.format("gtqtcore.machine.progress_time", "maxProgress * (100 - tier * 5) / 100.0"));
+        tooltip.add(I18n.format("gtqtcore.machine.parallel.pow.machineTier", 2, 256));
         tooltip.add(I18n.format("gtqtcore.machine.max_voltage"));
     }
-
+    @Override
+    public void update() {
+        super.update();
+    }
     @Override
     public void updateFormedValid() {
+        super.updateFormedValid();
         if (!isStructureFormed()) return;
         if (!checkAvailable()) return;
         ElectrodeTier = getElectrodeTier();
@@ -223,7 +225,7 @@ public class MetaTileEntityElectronBath extends RecipeMapMultiblockController {
     }
 
     public int getElectrodeTier() {
-        int minTier = 1;
+        int minTier = 5;
         for (int i = 0; i < 9; i++) {
             if (minTier > getElectrodeHatch(i).getElectrodeTier())
                 minTier = getElectrodeHatch(i).getElectrodeTier();
@@ -248,6 +250,7 @@ public class MetaTileEntityElectronBath extends RecipeMapMultiblockController {
 
     protected class ELELogic extends MultiblockRecipeLogic {
 
+        boolean work = false;
 
         public ELELogic(RecipeMapMultiblockController tileEntity) {
             super(tileEntity, true);
@@ -255,12 +258,16 @@ public class MetaTileEntityElectronBath extends RecipeMapMultiblockController {
 
         protected void updateRecipeProgress() {
             if (this.canRecipeProgress && this.drawEnergy(this.recipeEUt, true) && checkAvailable()) {
-                setWork(true);
+                if (!work) {
+                    setWork(true);
+                    work = true;
+                }
                 this.drawEnergy(this.recipeEUt, false);
 
                 if (++progressTime > maxProgressTime) {
                     completeRecipe();
                     setWork(false);
+                    work = false;
                     if (this.hasNotEnoughEnergy && this.getEnergyInputPerSecond() > 19L * (long) this.recipeEUt) {
                         this.hasNotEnoughEnergy = false;
                     }
@@ -277,7 +284,12 @@ public class MetaTileEntityElectronBath extends RecipeMapMultiblockController {
 
         @Override
         public int getParallelLimit() {
-            return (int) Math.pow(2,casingTier);
+            return (int) Math.pow(2, casingTier);
+        }
+
+        @Override
+        public boolean checkRecipe(@NotNull Recipe recipe) {
+            return recipe.getProperty(ElectronBathProperties.getInstance(), 0) <= ElectrodeTier;
         }
 
         public void setMaxProgress(int maxProgress) {

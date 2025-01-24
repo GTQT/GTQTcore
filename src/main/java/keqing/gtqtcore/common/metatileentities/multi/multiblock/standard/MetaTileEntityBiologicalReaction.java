@@ -241,12 +241,12 @@ public class MetaTileEntityBiologicalReaction extends MultiMapMultiblockControll
 
     @Override
     public void updateFormedValid() {
+        super.updateFormedValid();
         if (!isStructureFormed()) return;
         bio = Math.min(this.getBiotHatch().getBioAmount(), 4000);
         liquid = Math.min(this.getBiotHatch().getWaterAmount(), 4000);
         if (liquid == 0) rate = 0;
         else rate = bio * 1.0 / 4000;
-        super.updateFormedValid();
     }
 
     public void consume() {

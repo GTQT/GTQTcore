@@ -214,13 +214,13 @@ public class GTQTMetaItem1 extends StandardMetaItem {
 
         // out of registry order so it can reference the Empty Spray Can
         ENDLESS_SPRAY_SOLVENT = addItem(160, "endless_spray.solvent").setMaxStackSize(1)
-                .addComponents(new EndlessColorSprayBehaviour(ENDLESS_SPRAY_EMPTY.getStackForm(), Integer.MAX_VALUE, -1))
+                .addComponents(new ColorSprayBehaviour(ENDLESS_SPRAY_EMPTY.getStackForm(), Integer.MAX_VALUE, -1))
                 .setCreativeTabs(CommonProxy.GTQTCore_TO);
 
         for (int i = 0; i < EnumDyeColor.values().length; i++) {
             ENDLESS_SPRAY_CAN_DYES[i] = addItem(162 + i, "endless_spray.can.dyes." + EnumDyeColor.values()[i].getName())
                     .setMaxStackSize(1)
-                    .addComponents(new EndlessColorSprayBehaviour(ENDLESS_SPRAY_EMPTY.getStackForm(), Integer.MAX_VALUE, i))
+                    .addComponents(new ColorSprayBehaviour(ENDLESS_SPRAY_EMPTY.getStackForm(), Integer.MAX_VALUE, i))
                     .setCreativeTabs(CommonProxy.GTQTCore_TO);
         }
 

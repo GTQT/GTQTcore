@@ -202,6 +202,7 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
 
     @Override
     public void updateFormedValid() {
+        super.updateFormedValid();
         if (!isStructureFormed()) return;
         if (!checkAvailable()) return;
         drillTier = Math.min(drillBedTier, getDrillHatchTier());
@@ -352,16 +353,20 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
         public void setMaxProgress(int maxProgress) {
             this.maxProgressTime = (int) (maxProgress * (100 - drillTier * 5) / 100.0);
         }
-
+        boolean work = false;
         protected void updateRecipeProgress() {
             IMultipleTankHandler inputTank = metaTileEntityMiningDrill.getInputFluidInventory();
             if (checkCard() && this.canRecipeProgress && this.drawEnergy(this.recipeEUt, true) && LUBRICANT_STACK.isFluidStackIdentical(inputTank.drain(LUBRICANT_STACK, false))) {
                 this.drawEnergy(this.recipeEUt, false);
                 LUBRICANT_STACK.isFluidStackIdentical(inputTank.drain(LUBRICANT_STACK, true));
-                setWork(true);
+                if(!work) {
+                    setWork(true);
+                    work=true;
+                }
                 if (++this.progressTime > this.maxProgressTime) {
                     this.completeRecipe();
                     setWork(false);
+                    work=false;
                 }
             }
         }

@@ -4,9 +4,12 @@ import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeBuilder;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.util.EnumValidationResult;
+import keqing.gtqtcore.api.recipes.properties.BioReactorProperty;
 import keqing.gtqtcore.api.recipes.properties.EnzymesReactionProperty;
 import keqing.gtqtcore.api.utils.GTQTLog;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+
+import javax.annotation.Nonnull;
 
 public class EnzymesReactionRecipeBuilder extends RecipeBuilder<EnzymesReactionRecipeBuilder> {
 
@@ -19,7 +22,14 @@ public class EnzymesReactionRecipeBuilder extends RecipeBuilder<EnzymesReactionR
     public EnzymesReactionRecipeBuilder(RecipeBuilder<EnzymesReactionRecipeBuilder> recipeBuilder) {
         super(recipeBuilder);
     }
-
+    @Override
+    public boolean applyProperty(@Nonnull String key, Object value) {
+        if (key.equals(EnzymesReactionProperty.KEY)) {
+            this.rate(((Number) value).intValue());
+            return true;
+        }
+        return super.applyProperty(key, value);
+    }
     @Override
     public EnzymesReactionRecipeBuilder copy() {
         return new EnzymesReactionRecipeBuilder(this);

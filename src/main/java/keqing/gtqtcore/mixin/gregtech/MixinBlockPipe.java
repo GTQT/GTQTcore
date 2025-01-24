@@ -27,7 +27,6 @@ public class MixinBlockPipe {
         IPipeTile<?, ?> pipeTile = ((BlockPipe<?, ?, ?>) (Object) this).getPipeTileEntity(worldIn, pos);
         if (pipeTile != null && placer instanceof EntityPlayer) {
             ItemStack offhand = placer.getHeldItemOffhand();
-
             for (int i = 0; i < EnumDyeColor.values().length; ++i) {
                 if (offhand.isItemEqual(GTQTMetaItems.ENDLESS_SPRAY_CAN_DYES[i].getStackForm())) {
                     ((IItemBehaviour) GTQTMetaItems.ENDLESS_SPRAY_CAN_DYES[i].getBehaviours().get(0)).onItemUse((EntityPlayer) placer, worldIn, pos, EnumHand.OFF_HAND, EnumFacing.UP, 0.0F, 0.0F, 0.0F);

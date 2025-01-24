@@ -63,6 +63,7 @@ public class SeleniumTelluriumChain {
         //  Na2TeO3 + H2O -> TeO2 + 2NaOH
         ELECTROLYZER_RECIPES.recipeBuilder()
                 .input(dust, SodiumTellurite, 6)
+                .circuitMeta(2)
                 .fluidInputs(Water.getFluid(1000))
                 .output(dust, TelluriumDioxide, 3)
                 .output(dust, SodiumHydroxide, 6)

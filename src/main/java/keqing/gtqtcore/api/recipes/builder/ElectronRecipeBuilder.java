@@ -5,10 +5,13 @@ import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeBuilder;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.util.EnumValidationResult;
+import keqing.gtqtcore.api.capability.chemical_plant.ChemicalPlantProperties;
 import keqing.gtqtcore.api.recipes.properties.ElectronBathProperties;
 
 import keqing.gtqtcore.api.utils.GTQTLog;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+
+import javax.annotation.Nonnull;
 
 public class ElectronRecipeBuilder extends RecipeBuilder<ElectronRecipeBuilder> {
 
@@ -23,12 +26,21 @@ public class ElectronRecipeBuilder extends RecipeBuilder<ElectronRecipeBuilder> 
     }
 
     @Override
+    public boolean applyProperty(@Nonnull String key, Object value) {
+        if (key.equals(ElectronBathProperties.KEY)) {
+            this.tier(((Number) value).intValue());
+            return true;
+        }
+        return super.applyProperty(key, value);
+    }
+
+    @Override
     public ElectronRecipeBuilder copy() {
         return new ElectronRecipeBuilder(this);
     }
 
     public int getTire() {
-        return this.recipePropertyStorage == null ? 0 :
+        return (this.recipePropertyStorage == null) ? 0 :
                 this.recipePropertyStorage.getRecipePropertyValue(ElectronBathProperties.getInstance(), 0);
     }
 
@@ -37,7 +49,6 @@ public class ElectronRecipeBuilder extends RecipeBuilder<ElectronRecipeBuilder> 
             GTQTLog.logger.error("Casing Tier cannot be less than or equal to 0", new IllegalArgumentException());
             recipeStatus = EnumValidationResult.INVALID;
         }
-
         this.applyProperty(ElectronBathProperties.getInstance(), Tire);
         return this;
     }

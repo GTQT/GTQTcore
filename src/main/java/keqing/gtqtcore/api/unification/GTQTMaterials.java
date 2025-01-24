@@ -604,6 +604,8 @@ public class GTQTMaterials {
     public static Material SodiumTungstate;
     public static Material SodiumPhosphotungstate;
     public static Material SodiumMolybdate;
+    public static Material LiquidBeneathAir;
+    public static Material BeneathAir;
     public static Material FluxedElectrum;
     public static Material CleanWater_1;
     public static Material CleanWater_2;

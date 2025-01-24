@@ -196,6 +196,7 @@ public class GCYSFirstDegreeMaterials {
                 .dust().fluid()
                 .color(0xAB8D85)
                 .iconSet(MaterialIconSet.METALLIC)
+                .flags(DISABLE_DECOMPOSITION)
                 .components(Sodium, 1, Chlorine, 1, Oxygen, 3)
                 .build();
 

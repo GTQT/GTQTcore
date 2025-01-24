@@ -17,7 +17,7 @@ public class GTQTMaterialFlagAddition {
 
     public static void init() {
         Material[] material = {
-                Polyethylene,Carbon,
+                Polyethylene,Carbon,Graphite,Invar,
                 Lanthanum,Praseodymium,Neodymium,Cerium,Scandium,Europium,Gadolinium,Yttrium,Terbium,Dysprosium,Holmium,Erbium,Thulium,Ytterbium,Lutetium,Niobium,Palladium,Ruthenium,Naquadria,Samarium,
                 Tritanium, Duranium, Technetium, Meitnerium, Roentgenium, Nobelium, Lawrencium, Moscovium, Lutetium,NaquadahEnriched,Trinium,
                 Stellite100, WatertightSteel, MaragingSteel300, HastelloyC276, HastelloyX, Trinaquadalloy, Zeron100, TitaniumCarbide,
@@ -289,7 +289,6 @@ public class GTQTMaterialFlagAddition {
         RedAlloy.addFlags(GENERATE_RING, GENERATE_GEAR);
         Carbon.addFlags(GENERATE_ROD);
         Graphite.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
-        Graphite.setProperty(PropertyKey.INGOT, new IngotProperty());
         Magnesium.addFlags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_DENSE, GENERATE_ROTOR, GENERATE_ROD, GENERATE_SPRING, GENERATE_GEAR, GENERATE_FRAME);
 
         NetherStar.addFlags(CRYSTALLIZABLE);

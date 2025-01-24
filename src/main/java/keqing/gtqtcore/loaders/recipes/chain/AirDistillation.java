@@ -64,6 +64,23 @@ public class AirDistillation {
                 .fluidOutputs(Neon.getFluid(50))
                 .fluidOutputs(Radon.getFluid(50))
                 .duration(2000).EUt(VA[MV]).buildAndRegister();
+
+        ///
+        VACUUM_RECIPES.recipeBuilder()
+                .fluidInputs(BeneathAir.getFluid(4000))
+                .fluidOutputs(LiquidBeneathAir.getFluid(4000))
+                .duration(80).EUt(VA[MV]).buildAndRegister();
+
+        DISTILLATION_RECIPES.recipeBuilder()
+                .fluidInputs(LiquidBeneathAir.getFluid(10000))
+                .fluidOutputs(Oxygen.getFluid(7200))
+                .fluidOutputs(CoalGas.getFluid(1000))
+                .fluidOutputs(HydrogenSulfide.getFluid(750))
+                .fluidOutputs(SulfurDioxide.getFluid(750))
+                .fluidOutputs(Helium3.getFluid(250))
+                .fluidOutputs(Neon.getFluid(50))
+                .fluidOutputs(Radon.getFluid(50))
+                .duration(2000).EUt(VA[MV]).buildAndRegister();
     }
 
     private static void vaccum(Material material1, Material material2, int i) {

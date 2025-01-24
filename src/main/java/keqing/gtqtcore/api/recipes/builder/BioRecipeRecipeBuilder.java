@@ -5,8 +5,11 @@ import gregtech.api.recipes.RecipeBuilder;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.util.EnumValidationResult;
 import keqing.gtqtcore.api.recipes.properties.BioReactorProperty;
+import keqing.gtqtcore.api.recipes.properties.ElectronBathProperties;
 import keqing.gtqtcore.api.utils.GTQTLog;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+
+import javax.annotation.Nonnull;
 
 public class BioRecipeRecipeBuilder extends RecipeBuilder<BioRecipeRecipeBuilder> {
 
@@ -29,7 +32,14 @@ public class BioRecipeRecipeBuilder extends RecipeBuilder<BioRecipeRecipeBuilder
         return this.recipePropertyStorage == null ? 0 :
                 this.recipePropertyStorage.getRecipePropertyValue(BioReactorProperty.getInstance(), 0);
     }
-
+    @Override
+    public boolean applyProperty(@Nonnull String key, Object value) {
+        if (key.equals(BioReactorProperty.KEY)) {
+            this.rate(((Number) value).intValue());
+            return true;
+        }
+        return super.applyProperty(key, value);
+    }
     public BioRecipeRecipeBuilder rate(int Tire) {
         if (Tire <= 0) {
             GTQTLog.logger.error("Casing Tier cannot be less than or equal to 0", new IllegalArgumentException());

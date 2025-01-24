@@ -27,7 +27,6 @@ public class TargetRecipeBuilder extends RecipeBuilder<TargetRecipeBuilder> {
 
     @Override
     public boolean applyProperty(String key, Object value) {
-
         if (key.equals(ParticleVelocityProperty.KEY)) {
             this.EUToStart(((Number)value).intValue());
             return true;

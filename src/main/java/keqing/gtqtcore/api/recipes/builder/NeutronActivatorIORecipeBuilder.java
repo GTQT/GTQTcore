@@ -4,10 +4,13 @@ import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeBuilder;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.util.EnumValidationResult;
+import keqing.gtqtcore.api.recipes.properties.MiningDrillProperties;
 import keqing.gtqtcore.api.recipes.properties.NeutronActivatorIOPartProperty;
 import keqing.gtqtcore.api.recipes.properties.NeutronActivatorPartProperty;
 import keqing.gtqtcore.api.utils.GTQTLog;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+
+import javax.annotation.Nonnull;
 
 public class NeutronActivatorIORecipeBuilder extends RecipeBuilder<NeutronActivatorIORecipeBuilder> {
 
@@ -40,7 +43,14 @@ public class NeutronActivatorIORecipeBuilder extends RecipeBuilder<NeutronActiva
         this.applyProperty(NeutronActivatorIOPartProperty.getInstance(), Tier);
         return this;
     }
-
+    @Override
+    public boolean applyProperty(@Nonnull String key, Object value) {
+        if (key.equals(NeutronActivatorIOPartProperty.KEY)) {
+            this.part(((Number) value).intValue());
+            return true;
+        }
+        return super.applyProperty(key, value);
+    }
 
     @Override
     public String toString() {

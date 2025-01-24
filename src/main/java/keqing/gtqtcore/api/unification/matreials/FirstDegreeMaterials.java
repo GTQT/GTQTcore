@@ -11,6 +11,7 @@ import gregtech.api.unification.material.properties.ToolProperty;
 import gregtech.api.util.GTUtility;
 import keqing.gtqtcore.api.unification.GTQTElements;
 import keqing.gtqtcore.api.unification.GTQTMaterials;
+import org.codehaus.plexus.util.cli.Arg;
 
 import static gregicality.multiblocks.api.unification.GCYMMaterials.IncoloyMA956;
 import static gregtech.api.GTValues.*;
@@ -3581,8 +3582,23 @@ public class FirstDegreeMaterials {
                 .iconSet(ROUGH)
                 .build()
                 .setFormula("Na2MoO4", true);
-        //TODO
-        getMaterialsId();//占位
+
+        //交错次元空气
+        GTQTMaterials.BeneathAir = new Material.Builder(getMaterialsId(), gregtechId("beneath_air"))
+                .gas()
+                .color(0x4A4A4A)
+                .flags(DISABLE_DECOMPOSITION)
+                .components(Oxygen, 80, CarbonDioxide, 20, Argon, 10, Radon, 10, Hydrogen, 10, Nitrogen, 10, MagicGas, 10)
+                .build();
+
+        GTQTMaterials.LiquidBeneathAir = new Material.Builder(getMaterialsId(), gregtechId("liquid_beneath_air"))
+                .liquid(new FluidBuilder().temperature(58))
+                .color(0x0F0F0F)
+                .flags(DISABLE_DECOMPOSITION)
+                .components(CarbonDioxide, 160, Argon, 15, Oxygen, 15, Helium3, 10, Radon,
+                        10, Hydrogen, 10, Nitrogen, 10, MagicGas, 5)
+                .build();
+
 
         SodiumTungstate = new Material.Builder(getMaterialsId(), gregtechId("sodium_tungstate"))
                 .liquid()
@@ -3591,9 +3607,6 @@ public class FirstDegreeMaterials {
                 .iconSet(FLUID)
                 .components(Sodium, 2, Tungsten, 1, Oxygen, 4)
                 .build();
-
-        //TODO
-        getMaterialsId();//占位
         
         IridiumCyclooctadienylChlorideDimer = new Material.Builder(getMaterialsId(), gregtechId("iridium_cyclooctadienyl_chloride_dimer"))
                 .dust()

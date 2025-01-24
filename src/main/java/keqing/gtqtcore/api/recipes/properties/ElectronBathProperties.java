@@ -6,7 +6,7 @@ import net.minecraft.client.resources.I18n;
 
 public class ElectronBathProperties extends RecipeProperty<Integer> {
 
-    public static final String KEY = "ElectronBathTier";
+    public static final String KEY = "electron_bath_tier";
 
     private static ElectronBathProperties INSTANCE;
 

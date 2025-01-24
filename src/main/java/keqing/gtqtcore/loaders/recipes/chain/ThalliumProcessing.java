@@ -48,7 +48,7 @@ public class ThalliumProcessing {
         ELECTROLYZER_RECIPES.recipeBuilder()
                 .input(dust, ThalliumSulfate, 7)
                 .fluidInputs(Water.getFluid(1000))
-                .notConsumable(plate, Platinum)
+                .circuitMeta(2)
                 .output(dust, Thallium, 2)
                 .fluidOutputs(SulfuricAcid.getFluid(1000))
                 .fluidOutputs(Oxygen.getFluid(1000))

@@ -29,6 +29,7 @@ import gregtech.common.metatileentities.multi.electric.MetaTileEntityHPCA;
 import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.recipes.properties.ElectronBathProperties;
+import keqing.gtqtcore.api.recipes.properties.MachineTierProperty;
 import keqing.gtqtcore.api.recipes.properties.ResearchSystemMachineProperty;
 import keqing.gtqtcore.api.recipes.properties.ResearchSystemKindProperty;
 import keqing.gtqtcore.api.utils.GTQTKQnetHelper;
@@ -335,7 +336,9 @@ public class MetaTileEntityResearchSystemNetWork extends RecipeMapMultiblockCont
 
     @Override
     public boolean checkRecipe(@Nonnull Recipe recipe, boolean consumeIfSuccess) {
-        if (recipe.getProperty(ResearchSystemKindProperty.getInstance(), 0) == thresholdPercentage && recipe.getProperty(ElectronBathProperties.getInstance(), 0) <= tier && checkKind(recipe.getProperty(ResearchSystemMachineProperty.getInstance(), 0))) {
+        if (recipe.getProperty(ResearchSystemKindProperty.getInstance(), 0) == thresholdPercentage
+                && recipe.getProperty(MachineTierProperty.getInstance(), 0) <= tier
+                && checkKind(recipe.getProperty(ResearchSystemMachineProperty.getInstance(), 0))) {
             return super.checkRecipe(recipe, consumeIfSuccess);
         }
         return false;

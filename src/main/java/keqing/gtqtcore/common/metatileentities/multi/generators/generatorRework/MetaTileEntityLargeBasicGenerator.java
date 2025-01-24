@@ -88,11 +88,14 @@ public class MetaTileEntityLargeBasicGenerator extends FuelMultiblockController 
                                 .setMinGlobalLimited(1)))
                 .where('F', states(getFrameState()))
                 .where('P', states(getBoilerCasingState()))
-                .where('O', metaTileEntities(Arrays.stream(MetaTileEntities.ENERGY_OUTPUT_HATCH)
-                        .filter(mte -> mte != null && mte.getTier() <= V[tier])
+                .where('O', metaTileEntities(MultiblockAbility.REGISTRY.get(MultiblockAbility.OUTPUT_ENERGY).stream()
+                        .filter(mte -> {
+                            IEnergyContainer container = mte.getCapability(GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER, null);
+                            return container != null && container.getOutputVoltage() <= GTValues.V[tier];
+                        })
                         .toArray(MetaTileEntity[]::new))
-                        .setMinGlobalLimited(1)
-                        .setPreviewCount(16))
+                        .setExactLimit(1)
+                        .setPreviewCount(1))
                 .build();
     }
     @SideOnly(Side.CLIENT)

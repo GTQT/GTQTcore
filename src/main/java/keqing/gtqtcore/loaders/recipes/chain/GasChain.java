@@ -21,7 +21,7 @@ public class GasChain {
         //交错
         GAS_COLLECTOR_RECIPES.recipeBuilder()
                 .circuitMeta(4)
-                .fluidOutputs(BetAir.getFluid(10000))
+                .fluidOutputs(Air.getFluid(10000))
                 .dimension(20)
                 .duration(200).EUt(16).buildAndRegister();
 
@@ -62,10 +62,26 @@ public class GasChain {
                 .fluidOutputs(MagicGas.getFluid(500))
                 .duration(2000).EUt(120).buildAndRegister();
 
+        //火星
+        GAS_COLLECTOR_RECIPES.recipeBuilder()
+                .circuitMeta(7)
+                .fluidOutputs(BeneathAir.getFluid(10000))
+                .dimension(10)
+                .duration(200).EUt(16).buildAndRegister();
 
+        DISTILLATION_RECIPES.recipeBuilder()
+                .fluidInputs(BeneathAir.getFluid(100000))
+                .fluidOutputs(Oxygen.getFluid(72000))
+                .fluidOutputs(Carbon.getFluid(10000))
+                .fluidOutputs(Argon.getFluid(7500))
+                .fluidOutputs(Helium3.getFluid(7500))
+                .fluidOutputs(Radon.getFluid(2500))
+                .fluidOutputs(Hydrogen.getFluid(500))
+                .fluidOutputs(Nitrogen.getFluid(500))
+                .fluidOutputs(MagicGas.getFluid(500))
+                .duration(2000).EUt(120).buildAndRegister();
     }
 
     private static void AirProgress() {
-
     }
 }

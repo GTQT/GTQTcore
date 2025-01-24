@@ -9,6 +9,8 @@ import keqing.gtqtcore.api.recipes.properties.NuclearProperties;
 import keqing.gtqtcore.api.utils.GTQTLog;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import javax.annotation.Nonnull;
+
 public class NuclearRecipeBuilder extends RecipeBuilder<NuclearRecipeBuilder> {
 
     public NuclearRecipeBuilder() {}
@@ -40,7 +42,14 @@ public class NuclearRecipeBuilder extends RecipeBuilder<NuclearRecipeBuilder> {
         this.applyProperty(NuclearProperties.getInstance(), minTemp);
         return this;
     }
-
+    @Override
+    public boolean applyProperty(@Nonnull String key, Object value) {
+        if (key.equals(NuclearProperties.KEY)) {
+            this.minTemp(((Number) value).intValue());
+            return true;
+        }
+        return super.applyProperty(key, value);
+    }
 
     @Override
     public String toString() {

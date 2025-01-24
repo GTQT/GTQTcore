@@ -1,18 +1,23 @@
 package keqing.gtqtcore.api.recipes.properties;
 
-
 import gregtech.api.recipes.recipeproperties.RecipeProperty;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 
-public class ControllerProperty extends RecipeProperty<Integer> {
+public class MachineTierProperty extends RecipeProperty<Integer> {
 
-    public static final String KEY = "controller_tier";
+    public static final String KEY = "MachineTier";
+    private static MachineTierProperty INSTANCE;
 
-    private static ControllerProperty INSTANCE;
-
-    private ControllerProperty() {
+    private MachineTierProperty() {
         super(KEY, Integer.class);
+    }
+
+    public static MachineTierProperty getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new MachineTierProperty();
+        }
+        return INSTANCE;
     }
 
     @Override
@@ -21,10 +26,5 @@ public class ControllerProperty extends RecipeProperty<Integer> {
                 castValue(value)), x, y, color);
     }
 
-    public static ControllerProperty getInstance() {
-        if (INSTANCE == null) {
-            INSTANCE = new ControllerProperty();
-        }
-        return INSTANCE;
-    }
+
 }

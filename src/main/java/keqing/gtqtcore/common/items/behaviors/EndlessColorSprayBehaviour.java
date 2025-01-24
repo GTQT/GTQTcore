@@ -10,6 +10,7 @@ import gregtech.api.pipenet.tile.IPipeTile;
 import gregtech.api.util.GradientUtil;
 import gregtech.api.util.Mods;
 import gregtech.common.items.behaviors.AbstractUsableBehaviour;
+import gregtech.common.items.behaviors.ColorSprayBehaviour;
 import gregtech.core.sound.GTSoundEvents;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockColored;
@@ -32,13 +33,13 @@ import javax.annotation.Nullable;
 import java.awt.*;
 import java.util.List;
 
-public class EndlessColorSprayBehaviour extends AbstractUsableBehaviour implements IItemDurabilityManager {
+public class EndlessColorSprayBehaviour extends ColorSprayBehaviour {
     private final ItemStack empty;
     private final EnumDyeColor color;
     private final Pair<Color, Color> durabilityBarColors;
 
     public EndlessColorSprayBehaviour(ItemStack empty, int totalUses, int color) {
-        super(totalUses);
+        super(empty, totalUses, color);
         this.empty = empty;
         EnumDyeColor[] colors = EnumDyeColor.values();
         this.color = color < colors.length && color >= 0 ? colors[color] : null;
@@ -89,7 +90,7 @@ public class EndlessColorSprayBehaviour extends AbstractUsableBehaviour implemen
                 if (te instanceof TileCableBus) {
                     TileCableBus cable = (TileCableBus)te;
                     if (cable.getColor().ordinal() != this.color.ordinal()) {
-                        cable.recolourBlock((EnumFacing)null, AEColor.values()[this.color.ordinal()], player);
+                        cable.recolourBlock(null, AEColor.values()[this.color.ordinal()], player);
                         return true;
                     }
                 }

@@ -6,10 +6,9 @@ import gregtech.api.recipes.recipeproperties.ComputationProperty;
 import gregtech.api.recipes.recipeproperties.TotalComputationProperty;
 import gregtech.api.util.EnumValidationResult;
 import gregtech.api.util.GTLog;
-import keqing.gtqtcore.api.recipes.properties.ElectronBathProperties;
-import keqing.gtqtcore.api.recipes.properties.ResearchSystemMachineProperty;
-import keqing.gtqtcore.api.recipes.properties.ResearchSystemKindProperty;
+import keqing.gtqtcore.api.recipes.properties.*;
 import keqing.gtqtcore.api.utils.GTQTLog;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 
 public class KQComputationRecipeBuilder extends RecipeBuilder<KQComputationRecipeBuilder> {
@@ -43,7 +42,7 @@ public class KQComputationRecipeBuilder extends RecipeBuilder<KQComputationRecip
             this.NB(((Number) value).intValue());
             return true;
         }
-        if (key.equals(ElectronBathProperties.KEY)) {
+        if (key.equals(MachineTierProperty.KEY)) {
             this.Tier(((Number) value).intValue());
             return true;
         }
@@ -70,7 +69,7 @@ public class KQComputationRecipeBuilder extends RecipeBuilder<KQComputationRecip
             recipeStatus = EnumValidationResult.INVALID;
         }
 
-        this.applyProperty(ElectronBathProperties.getInstance(), Tier);
+        this.applyProperty(MachineTierProperty.getInstance(), Tier);
         return this;
     }
 
@@ -100,5 +99,32 @@ public class KQComputationRecipeBuilder extends RecipeBuilder<KQComputationRecip
         }
         this.applyProperty(TotalComputationProperty.getInstance(), totalCWU);
         return duration(totalCWU);
+    }
+
+    public int getKI() {
+        return this.recipePropertyStorage == null ? 0 : this.recipePropertyStorage
+                .getRecipePropertyValue(ResearchSystemMachineProperty.getInstance(), 0);
+    }
+
+    public int getTier() {
+        return this.recipePropertyStorage == null ? 0 : this.recipePropertyStorage
+                .getRecipePropertyValue(MachineTierProperty.getInstance(), 0);
+    }
+    public int getCWUt() {
+        return this.recipePropertyStorage == null ? 0 : this.recipePropertyStorage
+                .getRecipePropertyValue(ComputationProperty.getInstance(), 0);
+    }
+    public int gettotalCWU() {
+        return this.recipePropertyStorage == null ? 0 : this.recipePropertyStorage
+                .getRecipePropertyValue(TotalComputationProperty.getInstance(), 0);
+    }
+    public String toString() {
+        return (new ToStringBuilder(this))
+                .appendSuper(super.toString())
+                .append(ResearchSystemMachineProperty.getInstance().getKey(), getKI())
+                .append(MachineTierProperty.getInstance().getKey(), getTier())
+                .append(ComputationProperty.getInstance().getKey(), getCWUt())
+                .append(TotalComputationProperty.getInstance().getKey(), gettotalCWU())
+                .toString();
     }
 }

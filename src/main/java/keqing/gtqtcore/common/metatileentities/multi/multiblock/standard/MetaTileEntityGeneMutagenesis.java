@@ -4,6 +4,7 @@ import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
+import gregtech.api.metatileentity.multiblock.MultiMapMultiblockController;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
@@ -15,7 +16,6 @@ import gregtech.client.renderer.ICubeRenderer;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.capability.IRadiation;
-import keqing.gtqtcore.api.metaileentity.GTQTRecipeMapMultiblockController;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.properties.BioReactorProperty;
 import keqing.gtqtcore.api.unification.GTQTMaterials;
@@ -43,7 +43,7 @@ import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.GENE_MUTAGENESIS;
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4.TurbineCasingType.NQ_TURBINE_CASING;
 
 
-public class MetaTileEntityGeneMutagenesis extends GTQTRecipeMapMultiblockController {
+public class MetaTileEntityGeneMutagenesis extends MultiMapMultiblockController {
     private int glass_tier;
 
     public MetaTileEntityGeneMutagenesis(ResourceLocation metaTileEntityId) {
@@ -170,13 +170,18 @@ public class MetaTileEntityGeneMutagenesis extends GTQTRecipeMapMultiblockContro
         public void setMaxProgress(int maxProgress) {
             this.maxProgressTime = (int) (maxProgress * (10 - glass_tier) / 10.0);
         }
-
+        boolean work=false;
         protected void updateRecipeProgress() {
-            if (this.canRecipeProgress && this.drawEnergy(this.recipeEUt, false)) {
-                getRadiationHatch().setWork(true);
+            if (this.canRecipeProgress && this.drawEnergy(this.recipeEUt, true)) {
+                this.drawEnergy(this.recipeEUt, false);
+                if(!work) {
+                    getRadiationHatch().setWork(true);
+                    work=true;
+                }
                 if (++progressTime > maxProgressTime) {
                     completeRecipe();
                     getRadiationHatch().setWork(false);
+                    work=false;
                 }
             }
         }

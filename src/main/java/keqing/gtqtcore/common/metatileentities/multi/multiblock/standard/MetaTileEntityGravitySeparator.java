@@ -12,6 +12,7 @@ import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.IProgressBarMultiblock;
+import gregtech.api.metatileentity.multiblock.MultiMapMultiblockController;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
@@ -26,7 +27,6 @@ import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.TooltipHelper;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
-import keqing.gtqtcore.api.metaileentity.GTQTRecipeMapMultiblockController;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import net.minecraft.block.state.IBlockState;
@@ -49,7 +49,7 @@ import static gregtech.api.unification.material.Materials.Steam;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.GRAVITY_SEPARATOR_RECIPES;
 import static keqing.gtqtcore.common.block.blocks.BlockIsaCasing.CasingType.SEPARATOR_ROTOR;
 
-public class MetaTileEntityGravitySeparator extends GTQTRecipeMapMultiblockController implements IProgressBarMultiblock {
+public class MetaTileEntityGravitySeparator extends MultiMapMultiblockController implements IProgressBarMultiblock {
     int updatetime = 1;
     int[] steam = new int[3];
     FluidStack STEAM = Steam.getFluid(1000 * updatetime);

@@ -18,6 +18,7 @@ public class ElectrodeBehavior extends AbstractMaterialPartBehavior implements I
     int MaxDurability;
     int ElectrodeTier;
     Material material;
+
     public ElectrodeBehavior(int Durability, int ElectrodeTier, Material material) {
         this.MaxDurability=Durability;
         this.material=material;

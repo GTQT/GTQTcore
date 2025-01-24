@@ -3556,7 +3556,8 @@ gregtech.material.bet_air=Marsh Air
 gregtech.material.liquid_bet_air=Liquid Marsh Air
 gregtech.material.mars_air=Mars Atmosphere
 gregtech.material.liquid_mars_air=Liquid Mars Atmosphere
-
+gregtech.material.beneath_air=Beneath Atmosphere
+gregtech.material.liquid_beneath_air=Liquid Beneath Atmosphere
 gregtech.material.bitterns=Sulfuric Acidified Brine
 gregtech.material.bitterno=Oxidized Brine
 gregtech.material.bitternbr=Dispersed Bromine Oxide
