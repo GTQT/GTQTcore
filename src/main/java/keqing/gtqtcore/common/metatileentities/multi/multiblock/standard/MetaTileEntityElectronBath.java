@@ -138,7 +138,7 @@ public class MetaTileEntityElectronBath extends RecipeMapMultiblockController {
         tooltip.add(I18n.format("gregtech.machine.cracker.gtqtupdate.1"));
         tooltip.add(I18n.format("gregtech.machine.cracker.gtqtupdate.2"));
         tooltip.add(I18n.format("gtqtcore.machine.progress_time", "maxProgress * (100 - tier * 5) / 100.0"));
-        tooltip.add(I18n.format("gtqtcore.machine.parallel.pow.machineTier", 2, 256));
+        tooltip.add(I18n.format("gtqtcore.machine.parallel.pow.machineTier", 2, 128));
         tooltip.add(I18n.format("gtqtcore.machine.max_voltage"));
     }
     @Override
@@ -268,12 +268,6 @@ public class MetaTileEntityElectronBath extends RecipeMapMultiblockController {
                     completeRecipe();
                     setWork(false);
                     work = false;
-                    if (this.hasNotEnoughEnergy && this.getEnergyInputPerSecond() > 19L * (long) this.recipeEUt) {
-                        this.hasNotEnoughEnergy = false;
-                    }
-                } else if (this.recipeEUt > 0) {
-                    this.hasNotEnoughEnergy = true;
-                    this.decreaseProgress();
                 }
             }
         }
@@ -284,7 +278,7 @@ public class MetaTileEntityElectronBath extends RecipeMapMultiblockController {
 
         @Override
         public int getParallelLimit() {
-            return (int) Math.pow(2, casingTier);
+            return Math.min((int) Math.pow(2, tier-1), 128);
         }
 
         @Override
@@ -294,6 +288,10 @@ public class MetaTileEntityElectronBath extends RecipeMapMultiblockController {
 
         public void setMaxProgress(int maxProgress) {
             this.maxProgressTime = (int) (maxProgress * (100 - tier * 5) / 100.0);
+        }
+        @Override
+        protected long getMaxParallelVoltage() {
+            return super.getMaxVoltage();
         }
     }
 }

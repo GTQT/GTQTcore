@@ -348,7 +348,10 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
         public int getParallelLimit() {
             return Math.min((int) Math.pow(2, Math.min(tier, drillTier)), 128);
         }
-
+        @Override
+        protected long getMaxParallelVoltage() {
+            return super.getMaxVoltage();
+        }
         @Override
         public void setMaxProgress(int maxProgress) {
             this.maxProgressTime = (int) (maxProgress * (100 - drillTier * 5) / 100.0);

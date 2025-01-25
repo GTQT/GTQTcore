@@ -308,7 +308,10 @@ public class MetaTileEntityNanoCoating extends MultiMapMultiblockController impl
                 this.maxProgressTime = pre;
             }
         }
-
+        @Override
+        protected long getMaxParallelVoltage() {
+            return super.getMaxVoltage();
+        }
         @Override
         public int getParallelLimit() {
             if (visa)

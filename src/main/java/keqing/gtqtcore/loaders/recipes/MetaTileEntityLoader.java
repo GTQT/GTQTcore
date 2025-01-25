@@ -290,7 +290,7 @@ public class MetaTileEntityLoader {
                 'M', new UnificationEntry(block, Steel),
                 'C', new UnificationEntry(motor_stick, Steel));
 
-        ModHandler.addShapedRecipe(true, "mold_motor", MOLD_VALUE.getStackForm(),
+        ModHandler.addShapedRecipe(true, "mold_value", MOLD_VALUE.getStackForm(),
                 "MC", "ch",
                 'M', new UnificationEntry(block, Steel),
                 'C', new UnificationEntry(valve, Steel));

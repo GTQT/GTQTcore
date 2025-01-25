@@ -132,7 +132,7 @@ public class MetaTileEntityChemicalPlant extends RecipeMapMultiblockController {
         tooltip.add(I18n.format("gregtech.machine.cracker.gtqtupdate.1"));
         tooltip.add(I18n.format("gregtech.machine.cracker.gtqtupdate.2"));
         tooltip.add(I18n.format("gtqtcore.machine.progress_time","maxProgress /coilLevel"));
-        tooltip.add(I18n.format("gtqtcore.machine.parallel.pow.machineTier",2,32));
+        tooltip.add(I18n.format("gtqtcore.machine.parallel.pow.machineTier",2,128));
         tooltip.add(I18n.format("gtqtcore.machine.max_voltage"));
     }
 
@@ -254,7 +254,11 @@ public class MetaTileEntityChemicalPlant extends RecipeMapMultiblockController {
 
         @Override
         public int getParallelLimit() {
-            return Math.min((int) Math.pow(2, tier), 32);
+            return Math.min((int) Math.pow(2, tier-1), 128);
+        }
+        @Override
+        protected long getMaxParallelVoltage() {
+            return super.getMaxVoltage();
         }
     }
 }

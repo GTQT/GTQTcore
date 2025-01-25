@@ -206,9 +206,12 @@ public class MetaTileEntityLargeChemicalReactor extends RecipeMapMultiblockContr
         }
         @Override
         public int getParallelLimit() {
-            return Math.min((int)Math.pow(2, tier),32);
+            return Math.min((int)Math.pow(2, tier-1),32);
         }
-
+        @Override
+        protected long getMaxParallelVoltage() {
+            return super.getMaxVoltage();
+        }
 
     }
 }

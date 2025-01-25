@@ -263,5 +263,9 @@ public class MetaTileEntityLaserEngraving extends MultiMapMultiblockController i
                 return glass_tier;
             }
         }
+        @Override
+        protected long getMaxParallelVoltage() {
+            return super.getMaxVoltage();
+        }
     }
 }

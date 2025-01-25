@@ -40,7 +40,7 @@ public class CopyRecipesHandlers {
                     .fluidInputs(fluidInputs)
                     .inputIngredients(itemInputs)
                     .outputs(itemOutputs)
-                    .CWUt(CWT[(GTUtility.getTierByVoltage(recipe.getEUt())+2)])
+                    .CWUt(CWT[(GTUtility.getTierByVoltage(recipe.getEUt()))])
                     .buildAndRegister();
         }
 

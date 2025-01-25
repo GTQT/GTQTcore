@@ -233,7 +233,6 @@ public class MetaTileEntityThreeDimPrinter extends MultiMapMultiblockController 
             super(tileEntity, ComputationType.SPORADIC);
         }
 
-
         private boolean isPrecise() {
             return sheping_tier == glass_tier;
         }
@@ -243,11 +242,13 @@ public class MetaTileEntityThreeDimPrinter extends MultiMapMultiblockController 
                 this.maxProgressTime = (int) (maxProgress * (100.0 - glass_tier) / 100);
             }
         }
-
         public long getMaxVoltage() {
             return V[Math.min(tier, clean_tier * 2)];
         }
-
+        @Override
+        protected long getMaxParallelVoltage() {
+            return super.getMaxVoltage();
+        }
         @Override
         public int getParallelLimit() {
             if (isPrecise()) {

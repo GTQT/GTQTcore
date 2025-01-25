@@ -2905,6 +2905,7 @@ gtqtcore.machine.drill_head_hatch.iv.name=钻头舱口（§1IV§r）
 
 metaitem.mold.gas.name=气缸铸模
 metaitem.mold.motor.name=传动轴铸模
+metaitem.mold.value.name=阀门铸模
 
 #HPCA
 gtqtcore.machine.hpca.super_computation_component.name=HPCA超级计算组件
@@ -5493,7 +5494,7 @@ tile.multiblock_casing4.talonite_casing.name=钴合金外壳
 tile.multiblock_casing4.pd_machine_casing.name=镀铑钯管道外壳
 tile.multiblock_casing4.pd_turbine_casing.name=镀铑钯机械外壳
 tile.multiblock_casing4.nq_machine_casing.name=硅岩合金管道外壳
-tile.multiblock_casing4.nq_multiblock_casing4.name=硅岩合金机械外壳
+tile.multiblock_casing4.nq_multiblock_casing.name=硅岩合金机械外壳
 tile.multiblock_casing4.fishing_casing.name=渔场外壳
 
 tile.nuclear_fusion.nuclear_fusion_casing.name=核裂变压力容器

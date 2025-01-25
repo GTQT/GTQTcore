@@ -226,7 +226,7 @@ public class MetaTileEntityCrackingUnit extends RecipeMapMultiblockController {
 
         @Override
         public int getParallelLimit() {
-            return Math.min((int)Math.pow(2, casingTier),32);
+            return Math.min((int)Math.pow(2, casingTier-1),32);
         }
         public long getMaxVoltage() {
             return Math.min(super.getMaxVoltage(), V[casingTier]);
@@ -243,6 +243,10 @@ public class MetaTileEntityCrackingUnit extends RecipeMapMultiblockController {
             resultOverclock[0] *= 1.0f - coilTier * 0.1; // each coil above cupronickel (coilTier = 0) uses 10% less
             // energy
             resultOverclock[0] = Math.max(1, resultOverclock[0]);
+        }
+        @Override
+        protected long getMaxParallelVoltage() {
+            return super.getMaxVoltage();
         }
     }
 }

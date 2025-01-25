@@ -2671,7 +2671,7 @@ gtqtcore.machine.drill_head_hatch.iv.name=钻头舱口（§1IV§r）
 
 metaitem.mold.gas.name=Gas Cylinder Mold
 metaitem.mold.motor.name=Drive Shaft Mold
-
+metaitem.mold.value.name=Value Shaft Mold
 #HPCA
 gtqtcore.machine.hpca.super_computation_component.name=HPCA Super Computation Component
 gtqtcore.machine.hpca.super_computation_component.tooltip=Yanhuicun Miracle

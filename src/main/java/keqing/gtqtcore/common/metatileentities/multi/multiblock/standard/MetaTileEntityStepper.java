@@ -398,7 +398,10 @@ public class MetaTileEntityStepper extends MultiMapMultiblockController implemen
         public long getMaxVoltage() {
             return V[Math.min(tier, clean_tier * 2)];
         }
-
+        @Override
+        protected long getMaxParallelVoltage() {
+            return super.getMaxVoltage();
+        }
         @Override
         public int getParallelLimit() {
             if (LaserKind * 2 >= laser_tier) return clean_tier * (LaserKind * 2 - laser_tier + 1);

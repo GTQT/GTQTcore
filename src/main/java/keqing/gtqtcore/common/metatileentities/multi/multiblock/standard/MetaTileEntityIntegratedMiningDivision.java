@@ -39,6 +39,8 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
+import static gregtech.api.GTValues.V;
+
 public class MetaTileEntityIntegratedMiningDivision extends RecipeMapMultiblockController {
 
     protected int glass_tier;
@@ -75,11 +77,11 @@ public class MetaTileEntityIntegratedMiningDivision extends RecipeMapMultiblockC
     public void addInformation(ItemStack stack, @Nullable World player, @Nonnull List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("矿石所需要的唯一", new Object[0]));
-        tooltip.add(I18n.format("gtqtcore.multiblock.md.tooltip.1"));
-        tooltip.add(I18n.format("gtqtcore.multiblock.md.tooltip.2"));
-        tooltip.add(I18n.format("gtqtcore.multiblock.md.tooltip.3"));
-        tooltip.add(I18n.format("gtqtcore.multiblock.md.tooltip.4"));
-        tooltip.add(I18n.format("gtqtcore.multiblock.md.tooltip.5"));
+        tooltip.add(I18n.format("gregtech.machine.cracker.gtqtupdate.1"));
+        tooltip.add(I18n.format("gregtech.machine.cracker.gtqtupdate.2"));
+        tooltip.add(I18n.format("gtqtcore.machine.modify_overclock","Glass Tier"));
+        tooltip.add(I18n.format("gtqtcore.machine.parallel.pow.machineTier", 2, 128));
+        tooltip.add(I18n.format("gtqtcore.machine.max_voltage"));
     }
 
     @Nonnull
@@ -217,16 +219,15 @@ public class MetaTileEntityIntegratedMiningDivision extends RecipeMapMultiblockC
     }
 
     protected class MetaTileEntityIntegratedMiningDivisionrWorkable extends MultiblockRecipeLogic {
-        private final MetaTileEntityIntegratedMiningDivision A;
 
         public MetaTileEntityIntegratedMiningDivisionrWorkable(RecipeMapMultiblockController tileEntity) {
             super(tileEntity);
-            this.A = (MetaTileEntityIntegratedMiningDivision) tileEntity;
+            MetaTileEntityIntegratedMiningDivision a = (MetaTileEntityIntegratedMiningDivision) tileEntity;
         }
 
         @Override
         public int getParallelLimit() {
-            return (int) Math.pow(2, casingTier);
+            return Math.min((int) Math.pow(2, casingTier-1), 128);
         }
 
         @Override
@@ -238,6 +239,14 @@ public class MetaTileEntityIntegratedMiningDivision extends RecipeMapMultiblockC
             resultOverclock[0] *= 1.0f - glass_tier * 0.05; // each coil above cupronickel (coilTier = 0) uses 10% less
             // energy
             resultOverclock[0] = Math.max(1, resultOverclock[0]);
+        }
+        @Override
+        public long getMaxVoltage() {
+            return Math.min(super.getMaxVoltage(), V[tier]);
+        }
+        @Override
+        protected long getMaxParallelVoltage() {
+            return super.getMaxVoltage();
         }
     }
 }

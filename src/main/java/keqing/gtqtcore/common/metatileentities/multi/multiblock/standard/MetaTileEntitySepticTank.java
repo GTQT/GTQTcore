@@ -271,9 +271,12 @@ public class MetaTileEntitySepticTank extends MultiMapMultiblockController imple
 
         @Override
         public int getParallelLimit() {
-            return Math.min((int)Math.pow(2, tier),128);
+            return Math.min((int)Math.pow(2, tier-1),128);
         }
-
+        @Override
+        protected long getMaxParallelVoltage() {
+            return super.getMaxVoltage();
+        }
         public long getMaxVoltage() {
             return Math.min(super.getMaxVoltage(), V[tier]);
         }

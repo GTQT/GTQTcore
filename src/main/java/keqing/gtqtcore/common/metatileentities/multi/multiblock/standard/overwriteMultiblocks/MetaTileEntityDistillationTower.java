@@ -306,7 +306,7 @@ public class MetaTileEntityDistillationTower extends RecipeMapMultiblockControll
 
         @Override
         public int getParallelLimit() {
-            return Math.min((int)Math.pow(2, tier),32);
+            return Math.min((int)Math.pow(2, tier-1),32);
         }
 
         protected boolean applyFluidToOutputs(List<FluidStack> fluids, boolean doFill) {
@@ -364,6 +364,10 @@ public class MetaTileEntityDistillationTower extends RecipeMapMultiblockControll
                 return true;
             }
             return false;
+        }
+        @Override
+        protected long getMaxParallelVoltage() {
+            return super.getMaxVoltage();
         }
 
     }
