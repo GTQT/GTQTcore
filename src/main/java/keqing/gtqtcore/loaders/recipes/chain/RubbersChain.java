@@ -12,13 +12,13 @@ import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.TJMaterials.*;
-import static keqing.gtqtcore.api.utils.GTQTUniversUtil.SECOND;
-import static keqing.gtqtcore.api.utils.GTQTUniversUtil.removeChemicalRecipe;
+import static keqing.gtqtcore.api.utils.GTQTUniversUtil.*;
 
 public class RubbersChain {
     public static void init() {
         VanillaRubberProcess();
         PPFRubberProcess();
+        PTMEGRubberProcess();
     }
 
     private static void PPFRubberProcess() {
@@ -167,5 +167,63 @@ public class RubbersChain {
                 .duration(10 * SECOND)
                 .buildAndRegister();
     }
+    private static void PTMEGRubberProcess() {
+        // C7H8 + 2HNO3 -> C7H6N2O4
+        CHEMICAL_RECIPES.recipeBuilder()
+                .fluidInputs(Toluene.getFluid(1000))
+                .fluidInputs(NitricAcid.getFluid(2000))
+                .fluidOutputs(Dinitrotoluene.getFluid(1000))
+                .EUt(VA[HV])
+                .duration(25 * SECOND)
+                .buildAndRegister();
 
+        // C7H6N2O4 + 4H -> C6H3(NH2)2CH3
+        MIXER_RECIPES.recipeBuilder()
+                .fluidInputs(Dinitrotoluene.getFluid(1000))
+                .fluidInputs(Hydrogen.getFluid(4000))
+                .fluidOutputs(Diaminotoluene.getFluid(1000))
+                .EUt(VA[EV])
+                .duration(5 * SECOND)
+                .buildAndRegister();
+
+        // C6H3(NH2)2CH3 + 2COCl2 -> CH3C6H3(NCO)2
+        BURNER_REACTOR_RECIPES.recipeBuilder()
+                .fluidInputs(Diaminotoluene.getFluid(1000))
+                .fluidInputs(Phosgene.getFluid(2000))
+                .fluidOutputs(TolueneDiisocyanate.getFluid(1000))
+                .fluidOutputs(HydrochloricAcid.getFluid(4000))
+                .EUt(VA[HV])
+                .duration(45 * SECOND)
+                .buildAndRegister();
+
+        // (CH2)4O + H2O -> (C4H8O)OH2
+        POLYMERIZATION_RECIPES.recipeBuilder()
+                .notConsumable(dust, SodiumBisulfate, 1) // as Initiator.
+                .fluidInputs(Tetrahydrofuran.getFluid(L))
+                .fluidInputs(DistilledWater.getFluid(1000))
+                .fluidOutputs(Polytetrahydrofuran.getFluid(L + L / 2))
+                .EUt(VA[MV])
+                .duration(50 * SECOND)
+                .buildAndRegister();
+
+        // (C4H8O)OH2 + 3CH3C6H3(NCO)2 + 2H -> (CONH)2(C6H4)2CH2(C4O)
+        CHEMICAL_RECIPES.recipeBuilder()
+                .fluidInputs(Polytetrahydrofuran.getFluid(1000))
+                .fluidInputs(TolueneDiisocyanate.getFluid(3000))
+                .fluidInputs(Hydrogen.getFluid(2000))
+                .fluidOutputs(TolueneTetramethylDiisocyanate.getFluid(2000))
+                .EUt(VA[IV])
+                .duration(MINUTE)
+                .buildAndRegister();
+
+        // (CONH)2(C6H4)2CH2(C4O) + C4H8(OH)2 -> (CONH)2(C6H4)2CH2(C4O)HO(CH2)4OH
+        POLYMERIZATION_RECIPES.recipeBuilder()
+                .fluidInputs(TolueneTetramethylDiisocyanate.getFluid(4000))
+                .fluidInputs(Butanediol.getFluid(1000))
+                .fluidOutputs(PolytetramethyleneGlycolRubber.getFluid(4000))
+                .EUt(VA[UV])
+                .duration(30 * SECOND)
+                .buildAndRegister();
+
+    }
 }

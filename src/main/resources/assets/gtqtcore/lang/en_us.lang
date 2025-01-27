@@ -3782,6 +3782,14 @@ gregtech.material.tungstate_front=Tungstate Foam
 gregtech.material.uraninite_front=Uraninite Foam
 gregtech.material.pitchblende_front=Pitchblende Foam
 
+gregtech.material.diaminotoluene=Diaminotoluene
+gregtech.material.dinitrotoluene=Dinitrotoluene
+gregtech.material.phosgene=Phosgene
+gregtech.material.toluene_diisocyanate=TolueneDiisocyanate
+gregtech.material.polytetrahydrofuran=Polytetrahydrofuran
+gregtech.material.toluene_tetramethyl_diisocyanate=Toluene Tetramethyl Diisocyanate
+gregtech.material.polytetramethylene_glycol_rubber=PolytetrahydrofurandiolRubber（PTMEG）
+
 gregtech.material.iron_front=Iron Ore Foam
 gregtech.material.banded_iron_front=Banded Iron Ore Foam
 gregtech.material.brown_limonite_front=Brown Limonite Foam
@@ -4890,6 +4898,7 @@ metaitem.pos_binding_card.name=Position Binding Card
 metaitem.pos_binding_card.tooltip=Applicable to: Microwave Wireless Storage Binding
 metaitem.scintillator.name=Scintillator
 metaitem.scintillator_crystal.name=Scintillator Crystal
+metaitem.mte_copy_card.name=MTE Copy Card
 
 gtqtcore.tbcc.tooltip.1=I'm the Detonation, who are you?
 gtqtcore.tbcc.tooltip.2=The power generation level is determined by the structural coil level (power generation is the voltage corresponding to the power generation level multiplied by 1.25). Using oxygen to boost combustion can increase power generation by 1.2 times.

@@ -786,9 +786,9 @@ public class CPULine {
 
         FLUID_SOLIDFICATION_RECIPES.recipeBuilder()
                 .duration(100)
-                .EUt(1920)
+                .EUt(30)
                 .input(plate, TreatedWood, 4)
-                .fluidInputs(Rubber.getFluid(288))
+                .fluidInputs(Glue.getFluid(200))
                 .output(LAMINATION_WD, 4)
                 .buildAndRegister();
 
@@ -825,7 +825,7 @@ public class CPULine {
 
         FLUID_SOLIDFICATION_RECIPES.recipeBuilder()
                 .duration(100)
-                .EUt(1920)
+                .EUt(120)
                 .input(plate, Fiberglass, 4)
                 .fluidInputs(Glue.getFluid(288))
                 .output(LAMINATION_FG, 4)
@@ -852,7 +852,7 @@ public class CPULine {
         //这里是HV阶段的环氧树脂基板
         FLUID_SOLIDFICATION_RECIPES.recipeBuilder()
                 .duration(100)
-                .EUt(1920)
+                .EUt(480)
                 .input(CARBON_FIBER_PLATE, 4)
                 .fluidInputs(ReinforcedEpoxyResin.getFluid(288))
                 .output(LAMINATION_CA, 4)
@@ -922,7 +922,7 @@ public class CPULine {
 
         CHEMICAL_RECIPES.recipeBuilder()
                 .duration(100)
-                .EUt(1920)
+                .EUt(7680)
                 .input(dust, SiliconDioxide, 1)
                 .input(dust, Alumina, 1)
                 .input(dust, BoronTrioxide, 1)

@@ -29,6 +29,7 @@ import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.TooltipHelper;
 import gregtech.common.blocks.BlockGlassCasing;
 import gregtech.common.blocks.MetaBlocks;
+import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityLaserHatch;
 import keqing.gtqtcore.api.gui.GTQTGuiTextures;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
@@ -45,6 +46,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.DoubleSupplier;
 
@@ -171,7 +174,31 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
                                 })
                                 .toArray(MetaTileEntity[]::new))
                                 .setMaxGlobalLimited(32)
-                                .setPreviewCount(32)))
+                                .setPreviewCount(32)
+                        )
+                        .or(metaTileEntities(MultiblockAbility.REGISTRY.get(MultiblockAbility.INPUT_LASER)
+                                .stream()
+                                .filter(mte -> {
+                                    if(mte instanceof MetaTileEntityLaserHatch laserHatch ) {
+
+                                        // 使用反射获取 tier 字段的值
+                                        Field tierField = null;
+                                        try {
+                                            tierField = MetaTileEntityLaserHatch.class.getDeclaredField("tier");
+                                        } catch (NoSuchFieldException ignored) {}
+                                        tierField.setAccessible(true); // 设置字段可访问
+                                        try {
+                                            int level = (int) tierField.get(laserHatch);
+                                            return level==tier;
+                                        } catch (IllegalAccessException ignored) {}
+                                    }
+                                    return false;
+                                })
+                                .toArray(MetaTileEntity[]::new))
+                                .setMaxGlobalLimited(32)
+                                .setPreviewCount(0)
+                        )
+                )
                 .where('#', air())
                 .where(' ', any())
                 .build();
@@ -259,8 +286,9 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
         this.outputFluidInventory = new FluidTankList(true, getAbilities(MultiblockAbility.EXPORT_FLUIDS));
 
         //  Energy Input ability
-        List<IEnergyContainer> energyInputs = getAbilities(MultiblockAbility.INPUT_ENERGY);
-        this.inputEnergyContainers = new EnergyContainerList(energyInputs);
+        List<IEnergyContainer> energyInputs = new ArrayList<>(this.getAbilities(MultiblockAbility.INPUT_ENERGY));
+        energyInputs.addAll(this.getAbilities(MultiblockAbility.INPUT_LASER));
+        this.energyContainer = new EnergyContainerList(energyInputs);
 
         //  EU Capacity = Energy Hatch amount * Energy Stored (half of original Fusion Reactor).
         long euCapacity = calculateEnergyStorageFactor(energyInputs.size());

@@ -10,36 +10,31 @@ import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
-import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.unification.material.Material;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.TooltipHelper;
-import gregtech.common.metatileentities.MetaTileEntities;
-import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.Arrays;
 import java.util.List;
 
-import static gregtech.api.GTValues.*;
+import static gregtech.api.GTValues.V;
 import static gregtech.common.blocks.MetaBlocks.FRAMES;
 
 public class MetaTileEntityLargeBasicGenerator extends FuelMultiblockController {
     public final IBlockState casing;
     public final IBlockState boiler;
     public final Material frame;
-    RecipeMap<?> recipeMap;
     public final int tier;
+    RecipeMap<?> recipeMap;
 
     public MetaTileEntityLargeBasicGenerator(ResourceLocation metaTileEntityId, RecipeMap<?> recipeMap, int tier, IBlockState casing, IBlockState boiler, Material frame) {
         super(metaTileEntityId, recipeMap, tier);
@@ -98,6 +93,7 @@ public class MetaTileEntityLargeBasicGenerator extends FuelMultiblockController 
                         .setPreviewCount(1))
                 .build();
     }
+
     @SideOnly(Side.CLIENT)
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {

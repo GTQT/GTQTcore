@@ -187,7 +187,8 @@ public class PlasticChain {
                 .output(dust, Salt, 4)
                 .fluidOutputs(PolyphenyleneSulfide.getFluid(1000))
                 .EUt(VA[HV])
-                .duration(12 * SECOND);
+                .duration(12 * SECOND)
+                .buildAndRegister();
 
         POLYMERIZATION_RECIPES.recipeBuilder()
                 .input(dust, SodiumSulfide, 3)
@@ -196,7 +197,8 @@ public class PlasticChain {
                 .output(dust, Salt, 4)
                 .fluidOutputs(PolyphenyleneSulfide.getFluid(1000))
                 .EUt(VA[HV])
-                .duration(12 * SECOND);
+                .duration(12 * SECOND)
+                .buildAndRegister();
 
         // Polybenzimidazole (PBI)
         removeChemicalRecipe(

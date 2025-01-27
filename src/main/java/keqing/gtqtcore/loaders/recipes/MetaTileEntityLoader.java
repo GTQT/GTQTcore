@@ -295,6 +295,13 @@ public class MetaTileEntityLoader {
                 'M', new UnificationEntry(block, Steel),
                 'C', new UnificationEntry(valve, Steel));
 
+        ModHandler.addShapedRecipe(true, "mte_copy_card", MTE_COPY_CARD.getStackForm(),
+                "SF ", "DPR", "SF ",
+                'R', new UnificationEntry(circuit, MarkerMaterials.Tier.LV),
+                'P', MetaItems.VOLTAGE_COIL_LV,
+                'D', new UnificationEntry(plate, Steel),
+                'S', new UnificationEntry(screw, Bronze),
+                'F', new UnificationEntry(foil, Nickel));
         //3d
         ModHandler.addShapedRecipe(true, "three_d", THREE_DIM_PRINT.getStackForm(),
                 "MCM", "HHH", "PPP",
@@ -499,6 +506,20 @@ public class MetaTileEntityLoader {
                 "MhM", "PHP", "McM",
                 'M', new UnificationEntry(pipeNormalFluid, Aluminium),
                 'P', ROBOT_ARM_HV.getStackForm(),
+                'H', MetaTileEntities.HULL[3].getStackForm()
+        );
+
+        ModHandler.addShapedRecipe(true, "bio_hatch", BIO_HATCH.getStackForm(),
+                "MhM", "PHP", "McM",
+                'M', new UnificationEntry(pipeNormalFluid, StainlessSteel),
+                'P', ELECTRIC_PUMP_HV.getStackForm(),
+                'H', MetaTileEntities.HULL[3].getStackForm()
+        );
+
+        ModHandler.addShapedRecipe(true, "multipart_buffer_hatch", MULTIPART_BUFFER_HATCH.getStackForm(),
+                "MhM", "PHP", "McM",
+                'M', new UnificationEntry(pipeNormalFluid, StainlessSteel),
+                'P', ELECTRIC_MOTOR_HV.getStackForm(),
                 'H', MetaTileEntities.HULL[3].getStackForm()
         );
         //  Cryogenic Freezer

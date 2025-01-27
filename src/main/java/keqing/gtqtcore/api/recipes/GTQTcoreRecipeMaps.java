@@ -502,7 +502,7 @@ public class GTQTcoreRecipeMaps {
                 1, false,1, false,1,false, 12,false, new HeatRecipeBuilder(), false);
 
         DISTILLATION_KETTLE = new RecipeMap<>("distillation_kettle",
-                0,false, 1,false, 1,false, 12,false, new HeatRecipeBuilder(), false).setSound(GTSoundEvents.CHEMICAL_REACTOR);
+                0,false, 0,false, 1,false, 9,false, new HeatRecipeBuilder(), false).setSound(GTSoundEvents.CHEMICAL_REACTOR);
 
 
         QUANTUM_FORCE_TRANSFORMER_RECIPES = new RecipeMap<>("quantum_force_transformer_recipes", 6,  6,  6,  6, new QFTCasingTierRecipeBuilder(), false)

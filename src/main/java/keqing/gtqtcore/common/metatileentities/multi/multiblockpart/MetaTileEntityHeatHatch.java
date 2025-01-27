@@ -50,7 +50,7 @@ public class MetaTileEntityHeatHatch extends MetaTileEntityMultiblockPart implem
         this.tier = tier;
         heatHistory = new LinkedList<>();
         COOLING_COEFFICIENT = 0.001 * (11 - tier);
-        HEATING_COEFFICIENT = 0.05 * tier;
+        HEATING_COEFFICIENT = 0.1 * tier;
         maxHeat = 750 * tier;
     }
 

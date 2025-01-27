@@ -283,7 +283,16 @@ public class ChipHelper {
                     .cleanroom(a)
                     .buildAndRegister();
         }
-
+        else
+        {
+            CUTTER_RECIPES.recipeBuilder()
+                    .input(wafer)
+                    .output(chip, amount)
+                    .EUt(VA[tier])
+                    .duration(90 * 20)
+                    .cleanroom(a)
+                    .buildAndRegister();
+        }
     }
 
     public static void cutter(MetaItem<?>.MetaValueItem wafer, MetaItem<?>.MetaValueItem chip, int tier,CleanroomType a)

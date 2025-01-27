@@ -48,12 +48,10 @@ public class CopyRecipesHandlers {
         Collection<Recipe> DistillationRecipes = RecipeMaps.DISTILLATION_RECIPES.getRecipeList();
         for (Recipe recipe : DistillationRecipes) {
             int EUt = recipe.getEUt();
-            if(EUt>240)continue;
+            if(EUt>=512)continue;
 
             List<GTRecipeInput> fluidInputs = recipe.getFluidInputs();
             List<FluidStack> fluidOutputs = recipe.getFluidOutputs();
-            List<GTRecipeInput> itemInputs = recipe.getInputs();
-            List<ItemStack> itemOutputs = recipe.getOutputs();
 
             int baseDuration= recipe.getDuration()*4;
 
@@ -65,10 +63,10 @@ public class CopyRecipesHandlers {
                     .Heat(300+EUt);
 
             if(fluidInputs!=null)builder.fluidInputs(fluidInputs);
-            if(fluidOutputs!=null)builder.fluidOutputs(fluidOutputs);
-            if(itemInputs!=null)builder.inputIngredients(itemInputs);
-            if(itemOutputs!=null)builder.outputs(itemOutputs);
-
+            if(fluidOutputs!=null) {
+                if (fluidOutputs.size() > 9) continue;
+                builder.fluidOutputs(fluidOutputs);
+            }
 
             builder.buildAndRegister();
         }
@@ -87,7 +85,6 @@ public class CopyRecipesHandlers {
 
             builder = ELECTROBATH.recipeBuilder()
                     .duration(baseDuration)
-                    .circuitMeta(2)
                     .tier(tier)
                     .EUt(EUt);
 

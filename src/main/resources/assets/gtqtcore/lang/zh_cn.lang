@@ -2313,7 +2313,7 @@ gregtech.material.dimethylketene=二甲基乙烯酮
 gregtech.material.tetramethylcyclobutanediol=2,2,4,4-四甲基-1,3-环丁二醇（CBDO）
 gregtech.material.cbdo_polycarbonate=CBDO聚碳酸酯
 gregtech.material.nitrile_butadiene_rubber=丁腈橡胶
-gregtech.material.poly_phosphonitrile_fluoro_rubber=聚膦腈氟橡胶
+gregtech.material.poly_phosphonitrile_fluoro_rubber=聚膦腈氟橡胶(PPF)
 gregtech.material.acrylonitrile=丙烯腈
 gregtech.material.phosphonitrilic_chloride_trimer=六氯环三磷腈
 gregtech.material.sodium_trifluoroethanolate=三氟乙醇钠
@@ -4022,6 +4022,14 @@ gregtech.material.tungstate_front=钒酸盐泡沫
 gregtech.material.uraninite_front=铀矿泡沫
 gregtech.material.pitchblende_front=沥青铀矿泡沫
 
+gregtech.material.diaminotoluene=二氨基甲苯
+gregtech.material.dinitrotoluene=二硝基甲苯
+gregtech.material.phosgene=碳酰氯
+gregtech.material.toluene_diisocyanate=甲苯二异氰酸酯
+gregtech.material.polytetrahydrofuran=聚四氢呋喃
+gregtech.material.toluene_tetramethyl_diisocyanate=甲苯四甲基二异氰酸酯
+gregtech.material.polytetramethylene_glycol_rubber=聚四氢呋喃二醇橡胶（PTMEG）
+
 gregtech.material.iron_front=铁矿泡沫
 gregtech.material.banded_iron_front=带状矿泡沫
 gregtech.material.brown_limonite_front=棕褐铁矿泡沫
@@ -5098,9 +5106,9 @@ metaitem.reticle_base.tin.ii.name=光掩模基板 锡附着 II
 metaitem.reticle_base.tin.iii.name=光掩模基板 锡附着 III
 metaitem.reticle_base.tin.iv.name=光掩模基板 锡附着 IV
 metaitem.reticle_base.i.name=光掩模基板 蚀刻残留I
-metaitem.reticle_base.ii.name=光掩模基板 蚀刻残留III
-metaitem.reticle_base.iii.name=光掩模基板 蚀刻残留IIII
-metaitem.reticle_base.iv.name=光掩模基板 蚀刻残留IIV
+metaitem.reticle_base.ii.name=光掩模基板 蚀刻残留II
+metaitem.reticle_base.iii.name=光掩模基板 蚀刻残留III
+metaitem.reticle_base.iv.name=光掩模基板 蚀刻残留IV
 #紫外线灯
 metaitem.uv_light.i.name=紫外线固化灯 I
 metaitem.uv_light.ii.name=紫外线固化灯 II
@@ -5128,6 +5136,7 @@ metaitem.pos_binding_card.name=坐标绑定卡
 metaitem.pos_binding_card.tooltip=适用于：微波无线仓绑定 科研计算机设备绑定 天基激光折射控制器
 metaitem.scintillator.name=闪烁体
 metaitem.scintillator_crystal.name=闪烁晶体
+metaitem.mte_copy_card.name=设备信息复制卡
 
 gtqtcore.tbcc.tooltip.1=我是爆燃那你是谁
 gtqtcore.tbcc.tooltip.2=发电等级由结构线圈等级决定（发电量为发电等级对应的电压乘1.25），使用氧促燃可使发电提高1.2倍

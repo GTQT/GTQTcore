@@ -1129,5 +1129,59 @@ public class SecondDegreeMaterials {
         GTQTMaterials.UraniniteFront = new Material.Builder(getMaterialsId(), gregtechId("uraninite_front")).fluid().color(0x303030).build();
         GTQTMaterials.PitchblendeFront = new Material.Builder(getMaterialsId(), gregtechId("pitchblende_front")).fluid().color(0xBCEE68).build();
 
+        Diaminotoluene = new Material.Builder(getMaterialsId(), gregtechId("diaminotoluene"))
+                .liquid()
+                .color(0xEA8204)
+                .components(Carbon, 7, Hydrogen, 7, Nitrogen, 2)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("C6H3(NH2)2CH3", true);
+
+        Dinitrotoluene = new Material.Builder(getMaterialsId(), gregtechId("dinitrotoluene"))
+                .liquid()
+                .color(0xEAEFC9)
+                .components(Carbon, 7, Hydrogen, 6, Nitrogen, 2, Oxygen, 4)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        Phosgene = new Material.Builder(getMaterialsId(), gregtechId("phosgene"))
+                .gas()
+                .color(0x48927C)
+                .components(Carbon, 1, Oxygen, 1, Chlorine, 2)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        TolueneDiisocyanate = new Material.Builder(getMaterialsId(), gregtechId("toluene_diisocyanate"))
+                .liquid()
+                .color(0xCCCC66)
+                .components(Carbon, 9, Hydrogen, 8, Nitrogen, 2)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("CH3C6H3(NCO)2", true);
+
+        Polytetrahydrofuran = new Material.Builder(getMaterialsId(), gregtechId("polytetrahydrofuran"))
+                .liquid()
+                .color(0x089B3E)
+                .components(Carbon, 4, Hydrogen, 10, Oxygen, 2)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("(C4H8O)OH2", true);
+
+        TolueneTetramethylDiisocyanate = new Material.Builder(getMaterialsId(), gregtechId("toluene_tetramethyl_diisocyanate"))
+                .liquid()
+                .color(0xBFBFBF)
+                .components(Carbon, 19, Hydrogen, 12, Oxygen, 3, Nitrogen, 2)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("(CONH)2(C6H4)2CH2(C4O)", true);
+
+        PolytetramethyleneGlycolRubber = new Material.Builder(getMaterialsId(), gregtechId("polytetramethylene_glycol_rubber"))
+                .polymer()
+                .liquid()
+                .color(0xFFFFFF)
+                .flags(DISABLE_DECOMPOSITION, GENERATE_PLATE, GENERATE_RING, GENERATE_FOIL)
+                .components(Carbon, 23, Hydrogen, 23, Oxygen, 5, Nitrogen, 2)
+                .build()
+                .setFormula("(CONH)2(C6H4)2CH2(C4O)HO(CH2)4OH", true);
     }
 }

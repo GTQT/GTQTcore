@@ -82,6 +82,12 @@ public class GTQTMaterialPropertyAddition {
         Lawrencium.setProperty(PropertyKey.INGOT, new IngotProperty());
         Lawrencium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
         Graphene.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
+        Barium.setProperty(PropertyKey.INGOT, new IngotProperty());
+        Barium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
+        Phosphorus.setProperty(PropertyKey.INGOT, new IngotProperty());
+        Phosphorus.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
+        SiliconDioxide.setProperty(PropertyKey.INGOT, new IngotProperty());
+        SiliconDioxide.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
         //  Isa Mill Ore Process
         Strontium.setProperty(PropertyKey.DUST, new DustProperty());
         Strontium.setProperty(PropertyKey.INGOT, new IngotProperty());

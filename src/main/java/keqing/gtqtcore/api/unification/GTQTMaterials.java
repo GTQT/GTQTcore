@@ -139,6 +139,13 @@ public class GTQTMaterials {
     public static Material UraniniteFront;
     public static Material PitchblendeFront;
 
+    public static Material Diaminotoluene;
+    public static Material Dinitrotoluene;
+    public static Material Phosgene;
+    public static Material TolueneDiisocyanate;
+    public static Material Polytetrahydrofuran;
+    public static Material TolueneTetramethylDiisocyanate;
+    public static Material PolytetramethyleneGlycolRubber;
     public static Material Thaumium;
     public static Material MetallicHydrogen;
     public static Material Ethylenimine;

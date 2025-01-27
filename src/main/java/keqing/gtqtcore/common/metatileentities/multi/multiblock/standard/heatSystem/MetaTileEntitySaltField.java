@@ -40,12 +40,16 @@ public class MetaTileEntitySaltField extends RecipeMapHeatMultiblockController {
 
     public MetaTileEntitySaltField(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.SALT_FLIED);
+        this.recipeMapWorkable = new HeatRecipeLogic(this, GTQTcoreRecipeMaps.SALT_FLIED);
     }
-
+    @Override
     public boolean hasMaintenanceMechanics() {
-        return false;
+        return true;
     }
-
+    @Override
+    public boolean hasMufflerMechanics() {
+        return true;
+    }
     protected IBlockState getCasingState() {
         return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STEEL_SOLID);
     }
@@ -78,7 +82,7 @@ public class MetaTileEntitySaltField extends RecipeMapHeatMultiblockController {
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
-                .aisle("EEEEEEEEE", "EEEEEEEEE")
+                .aisle("EEEEMEEEE", "EEEEEEEEE")
                 .aisle("EXXXXXXXE", "E#######E")
                 .aisle("EXXXXXXXE", "E#######E")
                 .aisle("EXXXXXXXE", "E#######E")
@@ -88,9 +92,11 @@ public class MetaTileEntitySaltField extends RecipeMapHeatMultiblockController {
                 .aisle("EXXXXXXXE", "E#######E")
                 .aisle("EEEESEEEE", "EEEEEEEEE")
                 .where('S', selfPredicate())
+                .where('M', abilities(MultiblockAbility.MAINTENANCE_HATCH))
                 .where('X', states(getCasingState1()))
                 .where('E', states(getCasingState())
                         .or(abilities(GTQTMultiblockAbility.HEAT_MULTIBLOCK_ABILITY).setExactLimit(1))
+                        .or(abilities(MultiblockAbility.MUFFLER_HATCH).setExactLimit(1))
                         .or(abilities(MultiblockAbility.EXPORT_ITEMS).setExactLimit(1))
                         .or(abilities(MultiblockAbility.IMPORT_ITEMS).setExactLimit(1))
                         .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setMinGlobalLimited(1).setMaxGlobalLimited(5))

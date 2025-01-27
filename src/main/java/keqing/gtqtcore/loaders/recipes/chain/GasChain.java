@@ -41,7 +41,7 @@ public class GasChain {
                 .fluidOutputs(Helium3.getFluid(2500))
                 .fluidOutputs(Neon.getFluid(500))
                 .fluidOutputs(Radon.getFluid(500))
-                .duration(20000).EUt(120).buildAndRegister();
+                .duration(2000).EUt(120).buildAndRegister();
 
         //火星
         GAS_COLLECTOR_RECIPES.recipeBuilder()
@@ -62,7 +62,7 @@ public class GasChain {
                 .fluidOutputs(MagicGas.getFluid(500))
                 .duration(2000).EUt(120).buildAndRegister();
 
-        //火星
+        //深渊
         GAS_COLLECTOR_RECIPES.recipeBuilder()
                 .circuitMeta(7)
                 .fluidOutputs(BeneathAir.getFluid(10000))

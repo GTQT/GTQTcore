@@ -100,7 +100,7 @@ public class VAJRABehavior implements IToolBehavior {
     }
 
     public void addInformation( ItemStack stack,  World world,  List<String> tooltip,  ITooltipFlag flag) {
-        tooltip.add(I18n.format("item.gt.tool.behavior.vajra", new Object[0]));
+        tooltip.add(I18n.format("item.gt.tool.behavior.vajra"));
         tooltip.add(I18n.format("精准：%s", model));
         tooltip.add(I18n.format("爆炸：%s", explosive));
     }

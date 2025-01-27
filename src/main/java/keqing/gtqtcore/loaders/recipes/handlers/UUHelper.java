@@ -142,13 +142,16 @@ public class UUHelper {
                     .outputs(is)
                     .duration(GTQTUtil.baseTime * mass)
                     .EUt(30);
+
             var copybuild = COPY_RECIPES.recipeBuilder()
                     .notConsumable(is)
-                    .fluidInputs(NeutronFlux.getFluid(Neutrons))
-                    .fluidInputs(ProtonFlux.getFluid(Protons))
                     .fluidInputs(Materials.UUMatter.getFluid(mass))
                     .duration(GTQTUtil.baseTime * mass)
                     .EUt(30);
+
+            if(Neutrons!=0)copybuild.fluidInputs(NeutronFlux.getFluid(Neutrons));
+            if(Protons!=0)copybuild .fluidInputs(ProtonFlux.getFluid(Protons));
+
             if (GTQTUtil.listMater.get(i).hasProperty(PropertyKey.DUST)) {
                 buid.input(dust, GTQTUtil.listMater.get(i), 1);
                 copybuild.output(dust, GTQTUtil.listMater.get(i), 1);

@@ -106,7 +106,7 @@ public class Electrolyzer {
                 .input(wireFine, Copper, 16)
                 .input(stick, Steel, 32)
                 .input(rotor, Invar, 8)
-                .input(plateDense, Steel, 4)
+                .input(spring, Steel, 4)
                 .fluidInputs(Tin.getFluid(L * 8))
                 .outputs(GTQTMetaTileEntities.ELECTROBATH.getStackForm())
                 .duration(200).EUt(30).buildAndRegister();
