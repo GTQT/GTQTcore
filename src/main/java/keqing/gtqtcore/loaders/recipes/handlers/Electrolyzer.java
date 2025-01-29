@@ -54,7 +54,7 @@ public class Electrolyzer {
                 .duration(1000)
                 .EUt(120)
                 .blastFurnaceTemp(1800)
-                .input(IMPREGNATED_GRAPHITE_RODSA, 32)
+                .input(IMPREGNATED_GRAPHITE_RODSA, 4)
                 .input(dust, Diamond, 16)
                 .output(ELECTRODE_GRAPHITE)
                 .buildAndRegister();

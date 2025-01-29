@@ -52,6 +52,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import static gregtech.api.GTValues.VA;
+import static keqing.gtqtcore.GTQTCoreConfig.MachineSwitch;
 import static keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate.CP_PAF_CASING;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.TJMaterials.HydrogenSilsesquioxane;
@@ -144,7 +145,15 @@ public class MetaTileEntityPhotolithographyFactory extends MetaTileEntityBaseWit
         coreWork[2] = data.getBoolean("coreWork3");
         coreWork[3] = data.getBoolean("coreWork4");
     }
-
+    @Override
+    public void checkStructurePattern() {
+        if(MachineSwitch.DelayStructureCheckSwitch) {
+            if (this.getOffsetTimer() % 100 == 0 || this.isFirstTick()) {
+                super.checkStructurePattern();
+            }
+        }
+        else super.checkStructurePattern();
+    }
     @Override
     protected ModularUI.Builder createUITemplate(EntityPlayer entityPlayer) {
         ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND, 298, 240);

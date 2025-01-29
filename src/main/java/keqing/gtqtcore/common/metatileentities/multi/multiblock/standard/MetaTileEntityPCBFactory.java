@@ -63,6 +63,7 @@ import java.util.List;
 import static gregtech.api.GTValues.LuV;
 import static gregtech.api.unification.material.Materials.Gold;
 import static gregtech.api.unification.material.Materials.Silver;
+import static keqing.gtqtcore.GTQTCoreConfig.MachineSwitch;
 import static keqing.gtqtcore.api.pattern.GTQTTraceabilityPredicate.optionalStates;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.SiliconCarbide;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.swarm;
@@ -221,7 +222,15 @@ public class MetaTileEntityPCBFactory extends RecipeMapMultiblockController impl
         this.bioUpgradeNumber = 0;
         this.coolingUpgradeNumber = 0;
     }
-
+    @Override
+    public void checkStructurePattern() {
+        if(MachineSwitch.DelayStructureCheckSwitch) {
+            if (this.getOffsetTimer() % 100 == 0 || this.isFirstTick()) {
+                super.checkStructurePattern();
+            }
+        }
+        else super.checkStructurePattern();
+    }
     @Override
     public boolean checkRecipe(@Nonnull Recipe recipe,
                                boolean consumeIfSuccess) {

@@ -3,7 +3,6 @@ package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.heatSy
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
-import gregtech.api.capability.IMultipleTankHandler;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.ModularUI;
 import gregtech.api.gui.widgets.AdvancedTextWidget;
@@ -57,12 +56,34 @@ public class MetaTileEntityHeatHatchExchange extends MetaTileEntityBaseWithContr
     private final FluidStack STEAM = Steam.getFluid(500);
 
 
-
     int select;
     int[] tempList = new int[]{300, 300, 300, 300, 300, 300, 300, 300};
     int[] exchangeRate = new int[]{1, 1, 1, 1, 1, 1, 1, 1};
     boolean modelHeat;
     MetaTileEntityHeatHatch targetMte = null;
+
+    public MetaTileEntityHeatHatchExchange(ResourceLocation metaTileEntityId) {
+        super(metaTileEntityId);
+        this.containerInventory = new GTItemStackHandler(this, 8);
+    }
+
+    public NBTTagCompound writeToNBT(NBTTagCompound data) {
+        data.setTag("ContainerInventory", this.containerInventory.serializeNBT());
+        data.setInteger("select", this.select);
+        data.setIntArray("tempList", this.tempList);
+        data.setIntArray("exchangeRate", this.exchangeRate);
+        data.setBoolean("modelHeat", this.modelHeat);
+        return super.writeToNBT(data);
+    }
+
+    public void readFromNBT(NBTTagCompound data) {
+        super.readFromNBT(data);
+        this.containerInventory.deserializeNBT(data.getCompoundTag("ContainerInventory"));
+        this.select = data.getInteger("select");
+        this.tempList = data.getIntArray("tempList");
+        this.exchangeRate = data.getIntArray("exchangeRate");
+        this.modelHeat = data.getBoolean("modelHeat");
+    }
 
     @SideOnly(Side.CLIENT)
     @Override
@@ -70,10 +91,6 @@ public class MetaTileEntityHeatHatchExchange extends MetaTileEntityBaseWithContr
         return GTQTTextures.LARGE_ROCKET_ENGINE_OVERLAY;
     }
 
-    public MetaTileEntityHeatHatchExchange(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId);
-        this.containerInventory = new GTItemStackHandler(this, 8);
-    }
     @SideOnly(Side.CLIENT)
     @Override
     public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
@@ -93,6 +110,7 @@ public class MetaTileEntityHeatHatchExchange extends MetaTileEntityBaseWithContr
         tooltip.add(I18n.format("插入散热鳍片可调节不同槽位的升温，降温率"));
         tooltip.add(I18n.format("调节挡位可选择不同的热源仓接触面温度"));
     }
+
     @Override
     protected void updateFormedValid() {
         for (int i = 0; i < containerInventory.getSlots(); i++) {
@@ -142,9 +160,9 @@ public class MetaTileEntityHeatHatchExchange extends MetaTileEntityBaseWithContr
                         tempList[i] = (int) (tempList[0] + (targetMte.getHeat() - tempList[0]) * (i / 6.0) * weight);
                     }
                 }
-                tempList[7] = (int)targetMte.getHeat();
+                tempList[7] = (int) targetMte.getHeat();
 
-                targetMte.balanceHeat(tempList[select], select+1);
+                targetMte.balanceHeat(tempList[select], select + 1);
                 fillTanks(WATER, false);
             }
 
@@ -173,32 +191,25 @@ public class MetaTileEntityHeatHatchExchange extends MetaTileEntityBaseWithContr
                 }
 
                 // 设置最终温度为目标温度
-                tempList[7] = (int)targetMte.getHeat();
+                tempList[7] = (int) targetMte.getHeat();
 
-                targetMte.balanceHeat(tempList[select], select+1);
-                if(tempList[7]>400)fillTanks(STEAM, false);
+                targetMte.balanceHeat(tempList[select], select + 1);
+                if (tempList[7] > 400) fillTanks(STEAM, false);
             }
         } else {
             targetMte = null;
             Arrays.fill(tempList, 300);
         }
     }
+
     private BlockPos getBackPos(BlockPos pos, EnumFacing facing) {
         return pos.offset(facing.getOpposite());
     }
+
     public void fillTanks(FluidStack stack, boolean simulate) {
         GTTransferUtils.addFluidsToFluidHandler(outputFluidInventory, simulate, Collections.singletonList(stack));
     }
 
-    public NBTTagCompound writeToNBT(NBTTagCompound data) {
-        data.setTag("ContainerInventory", this.containerInventory.serializeNBT());
-        return super.writeToNBT(data);
-    }
-
-    public void readFromNBT(NBTTagCompound data) {
-        super.readFromNBT(data);
-        this.containerInventory.deserializeNBT(data.getCompoundTag("ContainerInventory"));
-    }
 
     protected void addInputDisplay(List<ITextComponent> textList) {
         MultiblockDisplayText.builder(textList, isStructureFormed()).addCustom(tl -> {
@@ -230,6 +241,7 @@ public class MetaTileEntityHeatHatchExchange extends MetaTileEntityBaseWithContr
 
         });
     }
+
     @Override
     protected ModularUI.Builder createUITemplate(EntityPlayer entityPlayer) {
         ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND, 200, 200);

@@ -54,6 +54,7 @@ import javax.annotation.Nonnull;
 import java.util.*;
 
 import static gregtech.api.GTValues.EV;
+import static keqing.gtqtcore.GTQTCoreConfig.MachineSwitch;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.LiquidNitrogen;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
@@ -73,7 +74,15 @@ public class MetaTileEntityParticleAccelerator extends MultiMapMultiblockControl
     boolean bashi;
     boolean hehecheng;
 
-
+    @Override
+    public void checkStructurePattern() {
+        if(MachineSwitch.DelayStructureCheckSwitch) {
+            if (this.getOffsetTimer() % 100 == 0 || this.isFirstTick()) {
+                super.checkStructurePattern();
+            }
+        }
+        else super.checkStructurePattern();
+    }
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("angle", angle);
         data.setInteger("Mode", Mode);

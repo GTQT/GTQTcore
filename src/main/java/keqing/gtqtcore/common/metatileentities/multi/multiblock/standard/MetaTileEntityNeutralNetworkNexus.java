@@ -48,6 +48,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static gregtech.api.GTValues.ZPM;
+import static keqing.gtqtcore.GTQTCoreConfig.MachineSwitch;
 import static keqing.gtqtcore.api.pattern.GTQTTraceabilityPredicate.optionalAbilities;
 import static keqing.gtqtcore.api.pattern.GTQTTraceabilityPredicate.optionalStates;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.SWARM_ASSEMBLER;
@@ -71,7 +72,15 @@ public class MetaTileEntityNeutralNetworkNexus extends MultiMapMultiblockControl
         });
         this.recipeMapWorkable = new MetaTileEntityNeutralNetworkNexusWorkable(this);
     }
-
+    @Override
+    public void checkStructurePattern() {
+        if(MachineSwitch.DelayStructureCheckSwitch) {
+            if (this.getOffsetTimer() % 100 == 0 || this.isFirstTick()) {
+                super.checkStructurePattern();
+            }
+        }
+        else super.checkStructurePattern();
+    }
     private static IBlockState getCasingState() {
         return GTQTMetaBlocks.blockMultiblockCasing3.getState(NAQUADAH_ALLOY_CASING);
     }

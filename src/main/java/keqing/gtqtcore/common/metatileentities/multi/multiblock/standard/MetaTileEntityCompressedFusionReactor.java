@@ -52,6 +52,7 @@ import java.util.List;
 import java.util.function.DoubleSupplier;
 
 import static gregtech.api.GTValues.*;
+import static keqing.gtqtcore.GTQTCoreConfig.MachineSwitch;
 
 public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockController {
     //  Block State for CFR, for Mark 4 and Mark 5,
@@ -72,6 +73,16 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
     //  Heat, like common Fusion Reactors.
     //  TODO Delete Heat system of CFR?
     private long heat = 0;
+
+    @Override
+    public void checkStructurePattern() {
+        if(MachineSwitch.DelayStructureCheckSwitch) {
+            if (this.getOffsetTimer() % 100 == 0 || this.isFirstTick()) {
+                super.checkStructurePattern();
+            }
+        }
+        else super.checkStructurePattern();
+    }
 
     public MetaTileEntityCompressedFusionReactor(ResourceLocation metaTileEntityId,
                                                  int tier,
@@ -285,10 +296,9 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
         this.outputInventory = new ItemHandlerList(getAbilities(MultiblockAbility.EXPORT_ITEMS));
         this.outputFluidInventory = new FluidTankList(true, getAbilities(MultiblockAbility.EXPORT_FLUIDS));
 
-        //  Energy Input ability
         List<IEnergyContainer> energyInputs = new ArrayList<>(this.getAbilities(MultiblockAbility.INPUT_ENERGY));
         energyInputs.addAll(this.getAbilities(MultiblockAbility.INPUT_LASER));
-        this.energyContainer = new EnergyContainerList(energyInputs);
+        this.inputEnergyContainers = new EnergyContainerList(energyInputs);
 
         //  EU Capacity = Energy Hatch amount * Energy Stored (half of original Fusion Reactor).
         long euCapacity = calculateEnergyStorageFactor(energyInputs.size());
@@ -307,12 +317,13 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
 
     @Override
     protected void updateFormedValid() {
+        super.updateFormedValid();
+        if(!isStructureFormed())return;
         if (this.inputEnergyContainers.getEnergyStored() > 0) {
             long energyAdded = this.energyContainer.addEnergy(this.inputEnergyContainers.getEnergyStored());
             if (energyAdded > 0)
                 this.inputEnergyContainers.removeEnergy(energyAdded);
         }
-        super.updateFormedValid();
     }
 
     @Override

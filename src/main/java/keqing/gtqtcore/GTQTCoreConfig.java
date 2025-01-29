@@ -1,8 +1,6 @@
 package keqing.gtqtcore;
 
 import net.minecraftforge.common.config.Config;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import static keqing.gtqtcore.GTQTCore.MODID;
 
@@ -75,6 +73,11 @@ public class GTQTCoreConfig {
         public boolean EnableObjSWind = true;
     }
     public static class MachineSwitch {
+        @Config.Comment("延迟巨构设备检测频率，可改善TPS性能(目前只在压缩聚变 光刻厂 加速器 PCB 锻炉测试实装，可能会造成未知后果！)")
+        @Config.RequiresMcRestart
+        @Config.Name("Delay Structure Check switch")
+        public boolean DelayStructureCheckSwitch = true;
+
         @Config.Comment("终局设备开关，包括尼戴，神锻。注意，严重影响加载时间！！！")
         @Config.RequiresMcRestart
         @Config.Name("End game machine switch")
