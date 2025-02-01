@@ -113,7 +113,7 @@ public class MetaTileEntityDigester extends RecipeMapMultiblockController {
     public void addInformation(ItemStack stack, @Nullable World player, @Nonnull List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("这是什么，塞进去煮煮", new Object[0]));
-        tooltip.add(I18n.format("gregtech.machine.cracker.gtqtupdate.1"));
+        tooltip.add(I18n.format("gregtech.machine.gtqt.update.1"));
         tooltip.add(I18n.format("gtqtcore.machine.progress_time","maxProgress * (100 - heatingCoilLevel) / 100"));
         tooltip.add(I18n.format("gtqtcore.machine.modify_overclock","Coil Tier"));
         tooltip.add(I18n.format("gtqtcore.machine.parallel.pow.custom",2,"Coil Tier",32));

@@ -26,6 +26,7 @@ import static keqing.gtqtcore.api.utils.GTQTUtil.CWT;
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockGlass1.CasingType.*;
 import static keqing.gtqtcore.common.block.blocks.BlockStepperCasing.CasingType.*;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
+import static supercritical.api.unification.material.SCMaterials.BoronTrioxide;
 
 public class CPULine {
     public static void init() {

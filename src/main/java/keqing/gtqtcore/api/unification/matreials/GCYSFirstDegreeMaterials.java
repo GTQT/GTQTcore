@@ -379,13 +379,7 @@ public class GCYSFirstDegreeMaterials {
                 .build();
 
         // FREE ID: 3550
-
-        BoronTrioxide = new Material.Builder(3551, gregtechId("boron_trioxide"))
-                .dust()
-                .color(0xE9FAC0)
-                .iconSet(MaterialIconSet.METALLIC)
-                .components(Boron, 2, Oxygen, 3)
-                .build();
+        // FREE ID: 3551
 
         BoronTrifluoride = new Material.Builder(3552, gregtechId("boron_trifluoride"))
                 .gas()

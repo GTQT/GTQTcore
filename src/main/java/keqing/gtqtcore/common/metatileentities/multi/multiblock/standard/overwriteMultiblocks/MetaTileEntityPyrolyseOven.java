@@ -1,17 +1,15 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.overwriteMultiblocks;
 
 import gregtech.api.block.IHeatingCoilBlockStats;
-import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockDisplayText;
-import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
+import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
-import gregtech.api.recipes.recipeproperties.IRecipePropertyStorage;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.TextComponentUtil;
 import gregtech.client.renderer.ICubeRenderer;
@@ -19,52 +17,59 @@ import gregtech.client.renderer.texture.Textures;
 import gregtech.common.blocks.BlockMachineCasing.MachineCasingType;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.core.sound.GTSoundEvents;
-
 import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
+import keqing.gtqtcore.api.metaileentity.GTQTRecipeMapMultiblockController;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import java.util.List;
 
-import static gregtech.api.GTValues.V;
-
-public class MetaTileEntityPyrolyseOven extends RecipeMapMultiblockController {
+public class MetaTileEntityPyrolyseOven extends GTQTRecipeMapMultiblockController {
 
     private int coilTier;
     private int tier;
+
     public MetaTileEntityPyrolyseOven(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, RecipeMaps.PYROLYSE_RECIPES);
-        this.recipeMapWorkable = new PyrolyseOvenWorkableHandler(this);
+        super(metaTileEntityId, new RecipeMap[]{
+                RecipeMaps.PYROLYSE_RECIPES
+        });
+        setTierFlag(true);
+        //setTier(auto);
+        setMaxParallel(64);
+        setMaxParallelFlag(true);
+        //setMaxVoltage(auto);
+        setMaxVoltageFlag(true);
+        //setTimeReduce(coilLevel);
+        setTimeReduceFlag(true);
     }
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityPyrolyseOven(metaTileEntityId);
     }
+
     @Override
     public void receiveCustomData(int dataId, PacketBuffer buf) {
         super.receiveCustomData(dataId, buf);
-        if(dataId == GTQTValue.UPDATE_TIER23){
+        if (dataId == GTQTValue.UPDATE_TIER23) {
             this.tier = buf.readInt();
         }
-        if(dataId == GTQTValue.REQUIRE_DATA_UPDATE23){
-            this.writeCustomData(GTQTValue.UPDATE_TIER23,buf1 -> buf1.writeInt(this.tier));
+        if (dataId == GTQTValue.REQUIRE_DATA_UPDATE23) {
+            this.writeCustomData(GTQTValue.UPDATE_TIER23, buf1 -> buf1.writeInt(this.tier));
         }
     }
+
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
@@ -74,11 +79,12 @@ public class MetaTileEntityPyrolyseOven extends RecipeMapMultiblockController {
                 .aisle("CCCCC", "C#C#C", "CCCCC", "C#C#C", "CCCCC")
                 .aisle("XXXXX", "XXXXX", "XXSXX", "XXXXX", "XXXXX")
                 .where('S', selfPredicate())
-                .where('X',  TiredTraceabilityPredicate.CP_CASING.get().setMinGlobalLimited(40).or(autoAbilities()))
+                .where('X', TiredTraceabilityPredicate.CP_CASING.get().setMinGlobalLimited(40).or(autoAbilities()))
                 .where('C', heatingCoils())
                 .where('#', air())
                 .build();
     }
+
     @SideOnly(Side.CLIENT)
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
         switch (this.tier) {
@@ -114,10 +120,12 @@ public class MetaTileEntityPyrolyseOven extends RecipeMapMultiblockController {
             }
         }
     }
+
     @Override
     public String[] getDescription() {
         return new String[]{I18n.format("gtqt.tooltip.update")};
     }
+
     protected IBlockState getCasingState() {
         return MetaBlocks.MACHINE_CASING.getState(MachineCasingType.ULV);
     }
@@ -143,10 +151,14 @@ public class MetaTileEntityPyrolyseOven extends RecipeMapMultiblockController {
         else
             this.coilTier = 0;
         this.tier = GTQTUtil.getOrDefault(() -> tier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)tier).getIntTier(),
+                () -> ((WrappedIntTired) tier).getIntTier(),
                 0);
 
-        this.writeCustomData(GTQTValue.UPDATE_TIER23,buf -> buf.writeInt(this.tier));
+        setTier(this.tier);
+        setMaxVoltage(this.tier);
+        setTimeReduce(coilTier);
+
+        this.writeCustomData(GTQTValue.UPDATE_TIER23, buf -> buf.writeInt(this.tier));
     }
 
     @Override
@@ -192,15 +204,6 @@ public class MetaTileEntityPyrolyseOven extends RecipeMapMultiblockController {
     }
 
     @Override
-    public void addInformation(ItemStack stack,  World player, List<String> tooltip, boolean advanced) {
-        super.addInformation(stack, player, tooltip, advanced);
-        tooltip.add(I18n.format("gregtech.machine.cracker.gtqtupdate.1"));
-        tooltip.add(I18n.format("gregtech.machine.cracker.gtqtupdate.2"));
-        tooltip.add(I18n.format("gtqtcore.machine.modify_overclock","Coil Tier"));
-        tooltip.add(I18n.format("gtqtcore.machine.parallel.pow.machineTier",2,32));
-        tooltip.add(I18n.format("gtqtcore.machine.max_voltage"));
-    }
-    @Override
     public void writeInitialSyncData(PacketBuffer buf) {
         super.writeInitialSyncData(buf);
         buf.writeInt(this.tier);
@@ -211,14 +214,11 @@ public class MetaTileEntityPyrolyseOven extends RecipeMapMultiblockController {
         super.receiveInitialSyncData(buf);
         this.tier = buf.readInt();
     }
+
     @Override
     public void invalidateStructure() {
         super.invalidateStructure();
         this.coilTier = 0;
-    }
-
-    protected int getCoilTier() {
-        return this.coilTier;
     }
 
     @Override
@@ -229,42 +229,5 @@ public class MetaTileEntityPyrolyseOven extends RecipeMapMultiblockController {
     @Override
     public boolean canBeDistinct() {
         return true;
-    }
-
-    @SuppressWarnings("InnerClassMayBeStatic")
-    private class PyrolyseOvenWorkableHandler extends MultiblockRecipeLogic {
-
-        public PyrolyseOvenWorkableHandler(RecipeMapMultiblockController tileEntity) {
-            super(tileEntity);
-        }
-        public long getMaxVoltage() {
-            return Math.min(super.getMaxVoltage(), V[tier]);
-        }
-        @Override
-        public int getParallelLimit() {
-            return Math.min((int)Math.pow(2, tier-1),32);
-        }
-        @Override
-        protected void modifyOverclockPost(int[] resultOverclock,  IRecipePropertyStorage storage) {
-            super.modifyOverclockPost(resultOverclock, storage);
-
-            int coilTier = ((MetaTileEntityPyrolyseOven) metaTileEntity).getCoilTier();
-            if (coilTier == -1)
-                return;
-
-            if (coilTier == 0) {
-                // 75% speed with cupronickel (coilTier = 0)
-                resultOverclock[1] = 4 * resultOverclock[1] / 3;
-            } else {
-                // each coil above kanthal (coilTier = 1) is 50% faster
-                resultOverclock[1] = resultOverclock[1] * 2 / (coilTier + 1);
-            }
-
-            resultOverclock[1] = Math.max(1, resultOverclock[1]);
-        }
-        @Override
-        protected long getMaxParallelVoltage() {
-            return super.getMaxVoltage();
-        }
     }
 }

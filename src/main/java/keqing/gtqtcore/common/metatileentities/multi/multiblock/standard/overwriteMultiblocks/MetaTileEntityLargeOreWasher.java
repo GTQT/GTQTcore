@@ -6,15 +6,11 @@ import codechicken.lib.texture.TextureUtils;
 import codechicken.lib.vec.Cuboid6;
 import codechicken.lib.vec.Matrix4;
 import com.llamalad7.mixinextras.lib.apache.commons.ArrayUtils;
-import gregicality.multiblocks.api.capability.IParallelMultiblock;
 import gregtech.api.block.IHeatingCoilBlockStats;
-import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
-import gregtech.api.metatileentity.multiblock.MultiMapMultiblockController;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
-import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
@@ -30,37 +26,40 @@ import gregtech.common.blocks.BlockWireCoil;
 import gregtech.core.sound.GTSoundEvents;
 import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
+import keqing.gtqtcore.api.metaileentity.GTQTRecipeMapMultiblockController;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-import static gregtech.api.GTValues.V;
-
-public class MetaTileEntityLargeOreWasher extends MultiMapMultiblockController implements IParallelMultiblock {
+public class MetaTileEntityLargeOreWasher extends GTQTRecipeMapMultiblockController {
     private int coilLevel;
     private int casingTier;
     private int tubeTier;
-    private int tier;
 
     public MetaTileEntityLargeOreWasher(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{
                 RecipeMaps.ORE_WASHER_RECIPES,
                 RecipeMaps.CHEMICAL_BATH_RECIPES
         });
-        this.recipeMapWorkable = new LargeChemicalReactorLogic(this);
+
+        setTierFlag(true);
+        //setTier(auto);
+        setMaxParallel(64);
+        setMaxParallelFlag(true);
+        //setMaxVoltage(auto);
+        setMaxVoltageFlag(true);
+        //setTimeReduce(coilLevel);
+        setTimeReduceFlag(true);
     }
 
     @Override
@@ -88,16 +87,6 @@ public class MetaTileEntityLargeOreWasher extends MultiMapMultiblockController i
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityLargeOreWasher(metaTileEntityId);
-    }
-
-    @Override
-    public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
-        super.addInformation(stack, player, tooltip, advanced);
-        tooltip.add(I18n.format("gregtech.machine.cracker.gtqtupdate.1"));
-        tooltip.add(I18n.format("gregtech.machine.cracker.gtqtupdate.2"));
-        tooltip.add(I18n.format("gtqtcore.machine.parallel.pow.machineTier", 2, 32));
-        tooltip.add(I18n.format("gtqtcore.machine.max_voltage"));
-        tooltip.add(I18n.format("gtqtcore.machine.progress_time","maxProgress /coilLevel"));
     }
 
     @Override
@@ -185,7 +174,10 @@ public class MetaTileEntityLargeOreWasher extends MultiMapMultiblockController i
         this.tubeTier = GTQTUtil.getOrDefault(() -> tubeTier instanceof WrappedIntTired,
                 () -> ((WrappedIntTired) tubeTier).getIntTier(),
                 0);
-        this.tier = Math.min(this.casingTier, this.tubeTier);
+
+        setTier(Math.min(this.casingTier, this.tubeTier));
+        setMaxVoltage(Math.min(this.casingTier, this.tubeTier));
+        setTimeReduce(coilLevel);
 
         this.writeCustomData(GTQTValue.UPDATE_TIER20, buf -> buf.writeInt(this.casingTier));
     }
@@ -223,38 +215,9 @@ public class MetaTileEntityLargeOreWasher extends MultiMapMultiblockController i
         return GTSoundEvents.BREAKDOWN_ELECTRICAL;
     }
 
-
-    @Override
-    public String[] getDescription() {
-        return new String[]{I18n.format("gtqt.tooltip.update")};
-    }
-
     @SideOnly(Side.CLIENT)
     @Override
     protected ICubeRenderer getFrontOverlay() {
         return GTQTTextures.ALGAE_FARM_OVERLAY;
-    }
-
-    protected class LargeChemicalReactorLogic extends MultiblockRecipeLogic {
-
-
-        public LargeChemicalReactorLogic(RecipeMapMultiblockController tileEntity) {
-            super(tileEntity, true);
-        }
-        public void setMaxProgress(int maxProgress) {
-            this.maxProgressTime = maxProgress /coilLevel;
-        }
-        public long getMaxVoltage() {
-            return Math.min(super.getMaxVoltage(), V[tier]);
-        }
-
-        @Override
-        public int getParallelLimit() {
-            return Math.min((int) Math.pow(2, tier-1), 32);
-        }
-        @Override
-        protected long getMaxParallelVoltage() {
-            return super.getMaxVoltage();
-        }
     }
 }

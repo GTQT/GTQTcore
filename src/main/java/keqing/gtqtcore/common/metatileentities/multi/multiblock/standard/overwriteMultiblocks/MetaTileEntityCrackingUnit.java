@@ -10,6 +10,7 @@ import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
+import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.recipes.recipeproperties.IRecipePropertyStorage;
 import gregtech.api.util.GTUtility;
@@ -22,6 +23,7 @@ import gregtech.core.sound.GTSoundEvents;
 
 import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
+import keqing.gtqtcore.api.metaileentity.GTQTRecipeMapMultiblockController;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
@@ -42,13 +44,22 @@ import java.util.List;
 
 import static gregtech.api.GTValues.V;
 
-public class MetaTileEntityCrackingUnit extends RecipeMapMultiblockController {
+public class MetaTileEntityCrackingUnit extends GTQTRecipeMapMultiblockController {
 
     private int coilTier;
     private int casingTier;
     public MetaTileEntityCrackingUnit(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, RecipeMaps.CRACKING_RECIPES);
-        this.recipeMapWorkable = new CrackingUnitWorkableHandler(this);
+        super(metaTileEntityId, new RecipeMap[]{
+                RecipeMaps.CRACKING_RECIPES
+        });
+        setTierFlag(true);
+        //setTier(auto);
+        setMaxParallel(64);
+        setMaxParallelFlag(true);
+        //setMaxVoltage(auto);
+        setMaxVoltageFlag(true);
+        //setTimeReduce(coilLevel);
+        setTimeReduceFlag(true);
     }
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
@@ -135,6 +146,10 @@ public class MetaTileEntityCrackingUnit extends RecipeMapMultiblockController {
                 () -> ((WrappedIntTired)casingTier).getIntTier(),
                 0);
 
+        setTier(this.casingTier);
+        setMaxVoltage(this.casingTier);
+        setTimeReduce(coilTier);
+
         this.writeCustomData(GTQTValue.UPDATE_TIER15,buf -> buf.writeInt(this.casingTier));
     }
 
@@ -178,18 +193,6 @@ public class MetaTileEntityCrackingUnit extends RecipeMapMultiblockController {
 
     }
 
-    @Override
-    public void addInformation(ItemStack stack,  World player, List<String> tooltip, boolean advanced) {
-        super.addInformation(stack, player, tooltip, advanced);
-        tooltip.add(I18n.format("gregtech.machine.cracker.tooltip.1"));
-        tooltip.add(I18n.format("gregtech.machine.cracker.gtqtupdate.1"));
-        tooltip.add(I18n.format("gregtech.machine.cracker.gtqtupdate.2"));
-        tooltip.add(I18n.format("gtqtcore.machine.modify_overclock","Coil Tier"));
-        tooltip.add(I18n.format("gtqtcore.machine.parallel.pow.machineTier",2,32));
-        tooltip.add(I18n.format("gtqtcore.machine.max_voltage"));
-    }
-
-
     @SideOnly(Side.CLIENT)
     @Override
     protected ICubeRenderer getFrontOverlay() {
@@ -212,41 +215,5 @@ public class MetaTileEntityCrackingUnit extends RecipeMapMultiblockController {
     public void receiveInitialSyncData(PacketBuffer buf) {
         super.receiveInitialSyncData(buf);
         this.casingTier = buf.readInt();
-    }
-    protected int getCoilTier() {
-        return this.coilTier;
-    }
-
-    @SuppressWarnings("InnerClassMayBeStatic")
-    private class CrackingUnitWorkableHandler extends MultiblockRecipeLogic {
-
-        public CrackingUnitWorkableHandler(RecipeMapMultiblockController tileEntity) {
-            super(tileEntity);
-        }
-
-        @Override
-        public int getParallelLimit() {
-            return Math.min((int)Math.pow(2, casingTier-1),32);
-        }
-        public long getMaxVoltage() {
-            return Math.min(super.getMaxVoltage(), V[casingTier]);
-        }
-
-        @Override
-        protected void modifyOverclockPost(int[] resultOverclock,  IRecipePropertyStorage storage) {
-            super.modifyOverclockPost(resultOverclock, storage);
-
-            int coilTier = ((MetaTileEntityCrackingUnit) metaTileEntity).getCoilTier();
-            if (coilTier <= 0)
-                return;
-
-            resultOverclock[0] *= 1.0f - coilTier * 0.1; // each coil above cupronickel (coilTier = 0) uses 10% less
-            // energy
-            resultOverclock[0] = Math.max(1, resultOverclock[0]);
-        }
-        @Override
-        protected long getMaxParallelVoltage() {
-            return super.getMaxVoltage();
-        }
     }
 }

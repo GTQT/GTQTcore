@@ -22,6 +22,7 @@ import gregtech.common.blocks.MetaBlocks;
 import gregtech.core.sound.GTSoundEvents;
 import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
+import keqing.gtqtcore.api.metaileentity.GTQTRecipeMapMultiblockController;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
@@ -43,18 +44,24 @@ import java.util.List;
 import static gregtech.api.GTValues.V;
 import static gregtech.api.GTValues.VA;
 
-public class MetaTileEntityLargeThermalCentrifuge extends MultiMapMultiblockController implements IParallelMultiblock {
+public class MetaTileEntityLargeThermalCentrifuge extends GTQTRecipeMapMultiblockController {
     private int coilLevel;
     private int casingTier;
     private int tubeTier;
-    private int tier;
 
     public MetaTileEntityLargeThermalCentrifuge(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[] {
                 RecipeMaps.THERMAL_CENTRIFUGE_RECIPES,
                 RecipeMaps.CENTRIFUGE_RECIPES
         });
-        this.recipeMapWorkable = new LargeChemicalReactorLogic(this);
+        setTierFlag(true);
+        //setTier(auto);
+        setMaxParallel(64);
+        setMaxParallelFlag(true);
+        //setMaxVoltage(auto);
+        setMaxVoltageFlag(true);
+        //setTimeReduce(coilLevel);
+        setTimeReduceFlag(true);
     }
     @Override
     public boolean canBeDistinct() {return true;}
@@ -66,8 +73,8 @@ public class MetaTileEntityLargeThermalCentrifuge extends MultiMapMultiblockCont
     @Override
     public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
-        tooltip.add(I18n.format("gregtech.machine.cracker.gtqtupdate.1"));
-        tooltip.add(I18n.format("gregtech.machine.cracker.gtqtupdate.2"));
+        tooltip.add(I18n.format("gregtech.machine.gtqt.update.1"));
+        tooltip.add(I18n.format("gregtech.machine.gtqt.update.2"));
         tooltip.add(I18n.format("gtqtcore.machine.parallel.pow.machineTier",2,32));
         tooltip.add(I18n.format("gtqtcore.machine.max_voltage"));
     }
@@ -156,7 +163,10 @@ public class MetaTileEntityLargeThermalCentrifuge extends MultiMapMultiblockCont
         this.tubeTier = GTQTUtil.getOrDefault(() -> tubeTier instanceof WrappedIntTired,
                 () -> ((WrappedIntTired)tubeTier).getIntTier(),
                 0);
-        this.tier = Math.min(this.casingTier,this.tubeTier);
+
+        setTier(Math.min(this.casingTier, this.tubeTier));
+        setMaxVoltage(Math.min(this.casingTier, this.tubeTier));
+        setTimeReduce(coilLevel);
 
         this.writeCustomData(GTQTValue.UPDATE_TIER21,buf -> buf.writeInt(this.casingTier));
     }
@@ -189,45 +199,9 @@ public class MetaTileEntityLargeThermalCentrifuge extends MultiMapMultiblockCont
         return GTSoundEvents.BREAKDOWN_ELECTRICAL;
     }
 
-
-    @Override
-    public String[] getDescription() {
-        return new String[]{I18n.format("gtqt.tooltip.update")};
-    }
-
     @SideOnly(Side.CLIENT)
     @Override
     protected ICubeRenderer getFrontOverlay() {
         return GTQTTextures.ALGAE_FARM_OVERLAY;
-    }
-
-    protected class LargeChemicalReactorLogic extends MultiblockRecipeLogic {
-
-
-        public LargeChemicalReactorLogic(RecipeMapMultiblockController tileEntity) {
-            super(tileEntity,true);
-        }
-
-        public void update() {
-
-        }
-
-        public void setMaxProgress(int maxProgress) {
-            this.maxProgressTime = maxProgress / (2 * coilLevel);
-            this.metaTileEntity.markDirty();
-        }
-
-        public long getMaxVoltage() {
-            return Math.min(super.getMaxVoltage(), V[tier]);
-        }
-        @Override
-        public int getParallelLimit() {
-            return Math.min((int)Math.pow(2, tier-1),32);
-        }
-        @Override
-        protected long getMaxParallelVoltage() {
-            return super.getMaxVoltage();
-        }
-
     }
 }

@@ -10,6 +10,7 @@ import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static keqing.gtqtcore.api.utils.GTQTUniversUtil.SECOND;
 import static keqing.gtqtcore.api.utils.GTQTUniversUtil.TICK;
+import static supercritical.api.unification.material.SCMaterials.BoronTrioxide;
 
 public class BoronNitrideChain {
 

@@ -129,8 +129,8 @@ public class MetaTileEntityChemicalPlant extends RecipeMapMultiblockController {
         super.addInformation(stack, world, tooltip, advanced);
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("gregtech.machine.perfect_oc"));
         tooltip.add(I18n.format("gtqtcore.machine.chemical-plant.tooltip.1"));
-        tooltip.add(I18n.format("gregtech.machine.cracker.gtqtupdate.1"));
-        tooltip.add(I18n.format("gregtech.machine.cracker.gtqtupdate.2"));
+        tooltip.add(I18n.format("gregtech.machine.gtqt.update.1"));
+        tooltip.add(I18n.format("gregtech.machine.gtqt.update.2"));
         tooltip.add(I18n.format("gtqtcore.machine.progress_time","maxProgress /coilLevel"));
         tooltip.add(I18n.format("gtqtcore.machine.parallel.pow.machineTier",2,128));
         tooltip.add(I18n.format("gtqtcore.machine.max_voltage"));

@@ -9,6 +9,7 @@ import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
+import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.recipes.recipeproperties.IRecipePropertyStorage;
 import gregtech.api.util.GTUtility;
@@ -21,6 +22,7 @@ import gregtech.core.sound.GTSoundEvents;
 
 import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
+import keqing.gtqtcore.api.metaileentity.GTQTRecipeMapMultiblockController;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
@@ -41,13 +43,25 @@ import java.util.List;
 import static gregtech.api.GTValues.V;
 
 //冰箱
-public class MetaTileEntityVacuumFreezer extends RecipeMapMultiblockController {
+public class MetaTileEntityVacuumFreezer extends GTQTRecipeMapMultiblockController {
     private int tier;
+
     public MetaTileEntityVacuumFreezer(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, RecipeMaps.VACUUM_RECIPES);
-        this.recipeMapWorkable = new VacuumFreezerWorkableHandler(this);
+        super(metaTileEntityId, new RecipeMap[]{
+                RecipeMaps.VACUUM_RECIPES
+        });
+
+        setTierFlag(true);
+        //setTier(auto);
+        setMaxParallel(64);
+        setMaxParallelFlag(true);
+        //setMaxVoltage(auto);
+        setMaxVoltageFlag(true);
+        //setTimeReduce(none);
+        setTimeReduceFlag(false);
     }
-    @Override
+
+@Override
     public void writeInitialSyncData(PacketBuffer buf) {
         super.writeInitialSyncData(buf);
         buf.writeInt(this.tier);
@@ -57,39 +71,6 @@ public class MetaTileEntityVacuumFreezer extends RecipeMapMultiblockController {
     public void receiveInitialSyncData(PacketBuffer buf) {
         super.receiveInitialSyncData(buf);
         this.tier = buf.readInt();
-    }
-    private class VacuumFreezerWorkableHandler extends MultiblockRecipeLogic {
-
-        public VacuumFreezerWorkableHandler(RecipeMapMultiblockController tileEntity) {
-            super(tileEntity);
-        }
-        public long getMaxVoltage() {
-            return Math.min(super.getMaxVoltage(), V[tier]);
-        }
-        @Override
-        public int getParallelLimit() {
-            return Math.min((int)Math.pow(2, tier-1),32);
-        }
-        @Override
-        protected void modifyOverclockPost(int[] resultOverclock,  IRecipePropertyStorage storage) {
-            super.modifyOverclockPost(resultOverclock, storage);
-
-            if (tier == -1)
-                return;
-
-            if (tier == 0) {
-                // 75% speed with cupronickel (coilTier = 0)
-                resultOverclock[1] = 4 * resultOverclock[1] / 3;
-            } else {
-                // each coil above kanthal (coilTier = 1) is 50% faster
-                resultOverclock[1] = resultOverclock[1] * 2 / (tier + 1);
-            }
-            resultOverclock[1] = Math.max(1, resultOverclock[1]);
-        }
-        @Override
-        protected long getMaxParallelVoltage() {
-            return super.getMaxVoltage();
-        }
     }
 
     @Override
@@ -196,10 +177,6 @@ public class MetaTileEntityVacuumFreezer extends RecipeMapMultiblockController {
         }
     }
     @Override
-    public String[] getDescription() {
-        return new String[]{I18n.format("gtqt.tooltip.update")};
-    }
-    @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
         Object tier = context.get("ChemicalPlantCasingTieredStats");
@@ -207,19 +184,13 @@ public class MetaTileEntityVacuumFreezer extends RecipeMapMultiblockController {
                 () -> ((WrappedIntTired)tier).getIntTier(),
                 0);
 
+        setTier(this.tier);
+        setMaxVoltage(this.tier);
+
         this.writeCustomData(GTQTValue.UPDATE_TIER24,buf -> buf.writeInt(this.tier));
     }
     protected IBlockState getCasingState() {
         return MetaBlocks.METAL_CASING.getState(MetalCasingType.ALUMINIUM_FROSTPROOF);
-    }
-    @Override
-    public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
-        super.addInformation(stack, player, tooltip, advanced);
-        tooltip.add(I18n.format("gregtech.machine.cracker.gtqtupdate.1"));
-        tooltip.add(I18n.format("gregtech.machine.cracker.gtqtupdate.2"));
-        tooltip.add(I18n.format("gtqtcore.machine.modify_overclock","Tier"));
-        tooltip.add(I18n.format("gtqtcore.machine.parallel.pow.machineTier",2,32));
-        tooltip.add(I18n.format("gtqtcore.machine.max_voltage"));
     }
     @Override
     public SoundEvent getBreakdownSound() {

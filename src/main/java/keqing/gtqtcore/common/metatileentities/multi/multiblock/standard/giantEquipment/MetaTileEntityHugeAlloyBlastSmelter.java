@@ -140,8 +140,8 @@ public class MetaTileEntityHugeAlloyBlastSmelter extends MultiMapMultiblockContr
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.1"));
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.2"));
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.3"));
-        tooltip.add(I18n.format("gregtech.machine.cracker.gtqtupdate.1"));
-        tooltip.add(I18n.format("gregtech.machine.cracker.gtqtupdate.2"));
+        tooltip.add(I18n.format("gregtech.machine.gtqt.update.1"));
+        tooltip.add(I18n.format("gregtech.machine.gtqt.update.2"));
         tooltip.add(I18n.format("gtqtcore.multiblock.hb.tooltip.2"));
         tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.1"));
         tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.2", 256));

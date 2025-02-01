@@ -135,8 +135,8 @@ public class MetaTileEntityElectronBath extends RecipeMapMultiblockController {
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("gregtech.machine.perfect_oc", new Object[0]));
         tooltip.add(I18n.format("gtqtcore.machine.ele.tooltip.1"));
         tooltip.add(I18n.format("gtqtcore.machine.ele.tooltip.2"));
-        tooltip.add(I18n.format("gregtech.machine.cracker.gtqtupdate.1"));
-        tooltip.add(I18n.format("gregtech.machine.cracker.gtqtupdate.2"));
+        tooltip.add(I18n.format("gregtech.machine.gtqt.update.1"));
+        tooltip.add(I18n.format("gregtech.machine.gtqt.update.2"));
         tooltip.add(I18n.format("gtqtcore.machine.progress_time", "maxProgress * (100 - tier * 5) / 100.0"));
         tooltip.add(I18n.format("gtqtcore.machine.parallel.pow.machineTier", 2, 128));
         tooltip.add(I18n.format("gtqtcore.machine.max_voltage"));

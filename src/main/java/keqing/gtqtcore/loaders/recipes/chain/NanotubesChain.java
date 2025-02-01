@@ -13,6 +13,7 @@ import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.seedCrystal;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.CARBON_ALLOTROPE_MIXTURE;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.GRAPHENE_ALIGNED_CNT;
+import static supercritical.api.unification.material.SCMaterials.BoronTrioxide;
 
 
 public class NanotubesChain {

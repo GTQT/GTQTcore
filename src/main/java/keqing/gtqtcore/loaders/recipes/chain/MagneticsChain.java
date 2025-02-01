@@ -10,6 +10,7 @@ import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.seedCrystal;
+import static supercritical.api.unification.material.SCMaterials.BoronTrioxide;
 
 public class MagneticsChain {
 

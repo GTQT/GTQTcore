@@ -33,7 +33,6 @@ public class GTQTRecipesManager {
     public static void load() {
     }
     public static void init() {
-        ZirconChain.init();
         DeltamethrinChain.init();
         RubbersChain.init();
         PlasticChain.init();

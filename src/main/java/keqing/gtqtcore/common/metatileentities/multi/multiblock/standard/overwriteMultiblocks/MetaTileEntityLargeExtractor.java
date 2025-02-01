@@ -9,6 +9,7 @@ import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
+import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.material.Materials;
 import gregtech.client.renderer.ICubeRenderer;
@@ -17,6 +18,7 @@ import gregtech.common.blocks.MetaBlocks;
 import gregtech.core.sound.GTSoundEvents;
 import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
+import keqing.gtqtcore.api.metaileentity.GTQTRecipeMapMultiblockController;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
@@ -36,14 +38,22 @@ import java.util.List;
 
 import static gregtech.api.GTValues.V;
 
-public class MetaTileEntityLargeExtractor extends RecipeMapMultiblockController {
+public class MetaTileEntityLargeExtractor extends GTQTRecipeMapMultiblockController {
     private int casingTier;
     private int tubeTier;
-    private int tier;
 
     public MetaTileEntityLargeExtractor(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, RecipeMaps.EXTRACTOR_RECIPES);
-        this.recipeMapWorkable = new LargeExtractorReactorLogic(this);
+        super(metaTileEntityId, new RecipeMap[]{
+                RecipeMaps.EXTRACTOR_RECIPES
+        });
+        setTierFlag(true);
+        //setTier(auto);
+        setMaxParallel(64);
+        setMaxParallelFlag(true);
+        setMaxVoltage(1);//LV
+        setMaxVoltageFlag(true);
+        //setTimeReduce(none);
+        setTimeReduceFlag(false);
     }
 
     @Override
@@ -53,8 +63,8 @@ public class MetaTileEntityLargeExtractor extends RecipeMapMultiblockController 
     @Override
     public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
-        tooltip.add(I18n.format("gregtech.machine.cracker.gtqtupdate.1"));
-        tooltip.add(I18n.format("gregtech.machine.cracker.gtqtupdate.2"));
+        tooltip.add(I18n.format("gregtech.machine.gtqt.update.1"));
+        tooltip.add(I18n.format("gregtech.machine.gtqt.update.2"));
         tooltip.add(I18n.format("gtqtcore.machine.parallel.pow.machineTier",2,32));
         tooltip.add(I18n.format("gtqtcore.machine.voltage.num",30));
     }
@@ -135,7 +145,7 @@ public class MetaTileEntityLargeExtractor extends RecipeMapMultiblockController 
         this.tubeTier = GTQTUtil.getOrDefault(() -> tubeTier instanceof WrappedIntTired,
                 () -> ((WrappedIntTired)tubeTier).getIntTier(),
                 0);
-        this.tier = Math.min(this.casingTier,this.tubeTier);
+        setTier(Math.min(this.casingTier, this.tubeTier));
 
         this.writeCustomData(GTQTValue.UPDATE_TIER25,buf -> buf.writeInt(this.casingTier));
     }
@@ -168,36 +178,4 @@ public class MetaTileEntityLargeExtractor extends RecipeMapMultiblockController 
         return GTSoundEvents.BREAKDOWN_ELECTRICAL;
     }
 
-
-    @Override
-    public String[] getDescription() {
-        return new String[]{I18n.format("gtqt.tooltip.update")};
-    }
-
-    @SideOnly(Side.CLIENT)
-    @Override
-    protected ICubeRenderer getFrontOverlay() {
-        return GTQTTextures.ALGAE_FARM_OVERLAY;
-    }
-
-    protected class LargeExtractorReactorLogic extends MultiblockRecipeLogic {
-
-
-        public LargeExtractorReactorLogic(RecipeMapMultiblockController tileEntity) {
-            super(tileEntity,true);
-        }
-
-        public long getMaxVoltage() {
-            return 30;
-        }
-        @Override
-        public int getParallelLimit() {
-            return Math.min((int)Math.pow(2, tier-1),32);
-        }
-        @Override
-        protected long getMaxParallelVoltage() {
-            return super.getMaxVoltage();
-        }
-
-    }
 }

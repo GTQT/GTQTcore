@@ -160,7 +160,7 @@ public class MetaTileEntityDissolutionTank extends RecipeMapMultiblockController
         super.addInformation(stack, world, tooltip, advanced);
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("自动化噩梦", new Object[0]));
         tooltip.add(I18n.format("gtqtcore.machine.dissolution_tank.tooltip.1"));
-        tooltip.add(I18n.format("gregtech.machine.cracker.gtqtupdate.1"));
+        tooltip.add(I18n.format("gregtech.machine.gtqt.update.1"));
         tooltip.add(I18n.format("gtqtcore.machine.progress_time","maxProgress * (100 - glass_tier) / 100"));
         tooltip.add(I18n.format("gtqtcore.machine.modify_overclock","Coil Tier"));
         tooltip.add(I18n.format("gtqtcore.machine.parallel.pow.custom",2,"Glass Tier",256));
