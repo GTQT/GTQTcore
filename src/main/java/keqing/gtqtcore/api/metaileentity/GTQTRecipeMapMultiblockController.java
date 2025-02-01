@@ -9,29 +9,27 @@ import gregtech.api.gui.ModularUI;
 import gregtech.api.gui.resources.TextureArea;
 import gregtech.api.gui.widgets.*;
 import gregtech.api.metatileentity.multiblock.MultiMapMultiblockController;
+import gregtech.api.metatileentity.multiblock.MultiblockDisplayText;
 import gregtech.api.metatileentity.multiblock.MultiblockWithDisplayBase;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
-import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.RecipeMap;
-import gregtech.api.unification.material.Material;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.function.BooleanSupplier;
-import java.util.function.Function;
-import java.util.function.IntSupplier;
 
 import static gregtech.api.GTValues.V;
 
 public abstract class GTQTRecipeMapMultiblockController extends MultiMapMultiblockController {
-    private int actualMaxParallel;
 
     protected boolean setTier;
     protected int tier;
@@ -49,33 +47,7 @@ public abstract class GTQTRecipeMapMultiblockController extends MultiMapMultiblo
     public GTQTRecipeMapMultiblockController(ResourceLocation metaTileEntityId, RecipeMap<?>[] recipeMaps) {
         super(metaTileEntityId, recipeMaps);
         this.recipeMapWorkable = new GTQTMultiblockLogic(this);
-
     }
-    @Override
-    protected void formStructure(PatternMatchContext context) {
-        super.formStructure(context);
-        if (setMaxParallel) actualMaxParallel= (int) Math.min(maxParallel, Math.pow(2, tier));
-        else actualMaxParallel= (int) Math.pow(2, tier);
-    }
-    public static Function<String, String> getTextFieldValidator(IntSupplier maxSupplier) {
-        return val -> {
-            if (val.isEmpty())
-                return String.valueOf(1);
-            int max = maxSupplier.getAsInt();
-            int num;
-            try {
-                num = Integer.parseInt(val);
-            } catch (NumberFormatException ignored) {
-                return String.valueOf(max);
-            }
-            if (num < 1)
-                return String.valueOf(1);
-            if (num > max)
-                return String.valueOf(max);
-            return val;
-        };
-    }
-
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setBoolean("autoParallelModel", autoParallelModel);
         data.setInteger("customParallel", customParallel);
@@ -93,10 +65,6 @@ public abstract class GTQTRecipeMapMultiblockController extends MultiMapMultiblo
 
     protected void setTier(int tier) {
         this.tier = tier;
-    }
-
-    protected void setMaxParallel(int maxParallel) {
-        this.maxParallel = maxParallel;
     }
 
     protected void setMaxVoltage(int maxVoltage) {
@@ -123,7 +91,6 @@ public abstract class GTQTRecipeMapMultiblockController extends MultiMapMultiblo
         this.setTimeReduce = setTimeReduce;
     }
 
-
     @Override
     public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
@@ -136,16 +103,21 @@ public abstract class GTQTRecipeMapMultiblockController extends MultiMapMultiblo
 
     @Override
     public String[] getDescription() {
-        if(setTier)return new String[]{I18n.format("gtqt.tooltip.update")};
+        if (setTier) return new String[]{I18n.format("gtqt.tooltip.update")};
         return super.getDescription();
     }
-    
-    public void setCurrentParallel(int parallelAmount) {
-        this.customParallel = MathHelper.clamp(this.customParallel + parallelAmount, 1, actualMaxParallel);
+
+    public int getMaxParallel() {
+        if (setMaxParallel) return (int) Math.min(maxParallel, Math.pow(2, tier));
+        else return (int) Math.pow(2, tier);
     }
 
-    public String getParallelAmountToString() {
-        return Integer.toString(this.customParallel);
+    protected void setMaxParallel(int maxParallel) {
+        this.maxParallel = maxParallel;
+    }
+
+    public void setCurrentParallel(int parallelAmount) {
+        this.customParallel = MathHelper.clamp(this.customParallel + parallelAmount, 1, getMaxParallel());
     }
 
     protected ModularUI.Builder createUITemplate(EntityPlayer entityPlayer) {
@@ -157,31 +129,21 @@ public abstract class GTQTRecipeMapMultiblockController extends MultiMapMultiblo
         builder.widget((new IndicatorImageWidget(174, 101, 17, 17, this.getLogo())).setWarningStatus(this.getWarningLogo(), this::addWarningText).setErrorStatus(this.getErrorLogo(), this::addErrorText));
 
         ///////////////////////////智能并行组件
-        builder.image(200, 4, 80, 20, GuiTextures.DISPLAY)
-                .dynamicLabel(202, 8, () -> I18n.format("模式：%s", autoParallelModel ? "自动模式" : "手动模式")
-                        , 0xFAF9F6);
+        builder.image(200, 4, 80, 20, GuiTextures.DISPLAY);
+        builder.widget((new AdvancedTextWidget(204, 10, this::addModel, 16777215)).setMaxWidthLimit(110).setClickHandler(this::handleDisplayClick));
 
         builder.widget(new ClickButtonWidget(200, 28, 80, 20, I18n.format("模式切换"),
                 clickData -> autoParallelModel = !autoParallelModel));
 
-        builder.image(200, 52, 80, 20, GuiTextures.DISPLAY)
-                .widget(new TextFieldWidget2(200, 52, 40, 20, this::getParallelAmountToString, val -> {
-                    if (val != null && !val.isEmpty()) {
-                        setCurrentParallel(Integer.parseInt(val));
-                    }
-                })
-                        .setCentered(true)
-                        .setNumbersOnly(1, actualMaxParallel)
-                        .setMaxLength(6)
-                        .setValidator(getTextFieldValidator(this::getMaxParallel)));
+        builder.image(200, 52, 80, 20, GuiTextures.DISPLAY);
 
-        builder.dynamicLabel(240, 52, () -> "/" + actualMaxParallel, 0xFFFFFF);
+        builder.widget((new AdvancedTextWidget(204, 56, this::addInfo, 16777215)).setMaxWidthLimit(110).setClickHandler(this::handleDisplayClick));
 
-        builder.widget(new IncrementButtonWidget(200, 76, 40, 20, actualMaxParallel >= 64 ? actualMaxParallel / 64 : 1, actualMaxParallel >= 32 ? actualMaxParallel / 32 : 1, actualMaxParallel >= 16 ? actualMaxParallel / 16 : 1, actualMaxParallel / 4, this::setCurrentParallel)
+        builder.widget(new IncrementButtonWidget(200, 76, 40, 20, 1, 4, 16, 64, this::setCurrentParallel)
                 .setDefaultTooltip()
                 .setShouldClientCallback(false));
 
-        builder.widget(new IncrementButtonWidget(240, 76, 40, 20, actualMaxParallel >= 64 ? -actualMaxParallel / 64 : -1, actualMaxParallel >= 32 ? -actualMaxParallel / 32 : -1, actualMaxParallel >= 16 ? -actualMaxParallel / 16 : -1, -actualMaxParallel / 4, this::setCurrentParallel)
+        builder.widget(new IncrementButtonWidget(240, 76, 40, 20, -1, -4, -14, -64, this::setCurrentParallel)
                 .setDefaultTooltip()
                 .setShouldClientCallback(false));
         ///////////////////////////Main GUI
@@ -226,10 +188,14 @@ public abstract class GTQTRecipeMapMultiblockController extends MultiMapMultiblo
         return builder;
     }
 
-    private int getMaxParallel() {
-        return actualMaxParallel;
+    protected void addInfo(List<ITextComponent> textList) {
+        MultiblockDisplayText.builder(textList, isStructureFormed())
+                .addCustom(tl -> textList.add(new TextComponentTranslation("%s / %s",autoParallelModel? autoParallel:customParallel,getMaxParallel())));
     }
-
+    protected void addModel(List<ITextComponent> textList) {
+        MultiblockDisplayText.builder(textList, isStructureFormed())
+                .addCustom(tl -> textList.add(new TextComponentTranslation("模式：%s",autoParallelModel ? "自动模式" : "手动模式")));
+    }
     protected class GTQTMultiblockLogic extends MultiblockRecipeLogic {
         public GTQTMultiblockLogic(RecipeMapMultiblockController tileEntity) {
             super(tileEntity, true);
@@ -245,7 +211,7 @@ public abstract class GTQTRecipeMapMultiblockController extends MultiMapMultiblo
             super.update();
             if (autoParallelModel) {
                 autoParallel = (int) ((this.getEnergyStored() + energyContainer.getInputPerSec()) / (getMinVoltage() == 0 ? 1 : getMinVoltage()));
-                autoParallel = Math.min(autoParallel, actualMaxParallel);
+                autoParallel = Math.min(autoParallel, getMaxParallel());
             }
         }
 
@@ -257,25 +223,17 @@ public abstract class GTQTRecipeMapMultiblockController extends MultiMapMultiblo
 
         @Override
         public int getParallelLimit() {
-            int actualMaxParallel;
-
-            if (setMaxParallel) actualMaxParallel = (int) Math.min(maxParallel, Math.pow(2, tier));
-            else actualMaxParallel = (int) Math.pow(2, tier);
-
-            if (autoParallelModel) {
-                return Math.min(autoParallel, actualMaxParallel);
-            } else {
-                return Math.min(customParallel, actualMaxParallel);
-            }
+            return autoParallelModel? autoParallel:customParallel;
         }
 
         @Override
         protected long getMaxParallelVoltage() {
             return super.getMaxVoltage();
         }
+
         @Override
         public void setMaxProgress(int maxProgress) {
-            if(setTimeReduce)this.maxProgressTime = maxProgress/timeReduce;
+            if (setTimeReduce) this.maxProgressTime = maxProgress / timeReduce;
             else super.setMaxProgress(maxProgress);
         }
     }

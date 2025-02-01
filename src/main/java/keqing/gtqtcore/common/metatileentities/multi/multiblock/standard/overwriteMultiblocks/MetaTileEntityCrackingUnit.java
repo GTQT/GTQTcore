@@ -116,10 +116,6 @@ public class MetaTileEntityCrackingUnit extends GTQTRecipeMapMultiblockControlle
         }
     }
     @Override
-    public String[] getDescription() {
-        return new String[]{I18n.format("gtqt.tooltip.update")};
-    }
-    @Override
     public void receiveCustomData(int dataId, PacketBuffer buf) {
         super.receiveCustomData(dataId, buf);
         if(dataId == GTQTValue.UPDATE_TIER15){
