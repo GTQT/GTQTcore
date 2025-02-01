@@ -203,7 +203,6 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<SimpleRecipeBuilder> ULTRAVIOLET_LAMP_CHAMBER_RECIPES;
     public static final RecipeMap<SimpleRecipeBuilder> PRESSURE_LAMINATOR_RECIPES;
     public static final RecipeMap<SimpleRecipeBuilder> VACUUM_CHAMBER_RECIPES;
-    public static final RecipeMap<SimpleRecipeBuilder> DECAY_CHAMBER_RECIPES;
     public static final RecipeMap<ComponentAssemblyLineRecipesTierRecipeBuilder> COMPONENT_ASSEMBLY_LINE_RECIPES;
     public static final RecipeMap<ElectronRecipeBuilder> ELECTROBATH;
     public static final RecipeMap<SwarmTierRecipeBuilder> SWARM_GROWTH;
@@ -227,8 +226,6 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<FlowRateRecipeBuilder> HEAT_EXCHANGE_RECIPES;
     public static final RecipeMap<FuelRecipeBuilder> STAR_MIXER;
     public static final RecipeMap<SimpleRecipeBuilder> RECYCLE_RECIPE ;
-    public static final RecipeMap<FuelRecipeBuilder> RTG_RECIPES;
-    public static final RecipeMap<NuclearRecipeBuilder> NUCLEAR_RECIPES;
     public static final RecipeMap<NeutronActivatorIORecipeBuilder> PAC_RECIPES;
     public static final RecipeMap<FuelRecipeBuilder> PLASMA_FORGE;
     public static final RecipeMap<FuelRecipeBuilder> STAR_BIOMIMETIC_FACTORY;
@@ -324,10 +321,6 @@ public class GTQTcoreRecipeMaps {
 
         PRESSURE_LAMINATOR_RECIPES = new RecipeMap<>("pressure_laminator_recipes",  3,  1,  3, 0, new SimpleRecipeBuilder(), false)
                 .setSound(GTSoundEvents.COMPRESSOR);
-
-        DECAY_CHAMBER_RECIPES = new RecipeMap<>("decay_chamber_recipes",  1,  1,  1,  1, new SimpleRecipeBuilder(), false)
-                .setProgressBar(GuiTextures.PROGRESS_BAR_HAMMER, ProgressWidget.MoveType.VERTICAL_DOWNWARDS)
-                .setSound(GTSoundEvents.SCIENCE);
 
         SWARM_GROWTH = new RecipeMap<>("swarm_growth", 16, 1, 0, 0, new SwarmTierRecipeBuilder(), false)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_HAMMER, ProgressWidget.MoveType.VERTICAL_DOWNWARDS)
@@ -532,14 +525,6 @@ public class GTQTcoreRecipeMaps {
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, ProgressWidget.MoveType.HORIZONTAL)
                 .setSound(GTSoundEvents.COMBUSTION)
                 .allowEmptyOutput();
-
-        RTG_RECIPES = new RecipeMap<>("rtg_recipes", 1,  1,  1, 0, new FuelRecipeBuilder(), false)
-                .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL)
-                .setSound(GTSoundEvents.ARC);
-
-        NUCLEAR_RECIPES = new RecipeMap<>("nuclear_recipes", 1,  1,  1, 1, new NuclearRecipeBuilder(), false)
-                .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL)
-                .setSound(GTSoundEvents.ARC);
 
         PAC_RECIPES = new RecipeMap<>("pac_recipes", 3,  3,  3, 3, new NeutronActivatorIORecipeBuilder(), false)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL)

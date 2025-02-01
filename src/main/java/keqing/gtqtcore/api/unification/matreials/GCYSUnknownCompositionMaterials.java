@@ -54,7 +54,9 @@ public class GCYSUnknownCompositionMaterials {
 
         SodioIndene = new Material.Builder(18021, gregtechId("sodio_indene")).fluid().color(0x1D1C24).build();
 
-        SteamCrackedSodioIndene = new Material.Builder(18022, gregtechId("steam_cracked_sodio_indene")).fluid().fluidPipeProperties(1105,1000,false).color(0x1C1A29).build();
+        SteamCrackedSodioIndene = new Material.Builder(18022, gregtechId("steam_cracked_sodio_indene"))
+                .fluid()
+                .color(0x1C1A29).build();
 
         MolybdenumFlue = new Material.Builder(18023, gregtechId("molybdenum_flue")).gas().color(0x39194A).build();
 

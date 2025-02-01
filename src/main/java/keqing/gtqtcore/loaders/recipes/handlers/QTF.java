@@ -9,6 +9,7 @@ import static gregtech.common.items.MetaItems.*;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.QUANTUM_FORCE_TRANSFORMER_RECIPES;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.TJMaterials.*;
+import static supercritical.api.unification.material.SCMaterials.Plutonium244;
 
 public class QTF {
     public static void init() {

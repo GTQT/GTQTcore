@@ -222,7 +222,6 @@ public class MetaTileEntityIntegratedMiningDivision extends RecipeMapMultiblockC
 
         public MetaTileEntityIntegratedMiningDivisionrWorkable(RecipeMapMultiblockController tileEntity) {
             super(tileEntity);
-            MetaTileEntityIntegratedMiningDivision a = (MetaTileEntityIntegratedMiningDivision) tileEntity;
         }
 
         @Override

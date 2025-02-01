@@ -24,6 +24,7 @@ import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import supercritical.common.metatileentities.SCMetaTileEntities;
 
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -65,6 +66,7 @@ import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.PYROL
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.*;
 import static net.minecraft.init.Blocks.FURNACE;
 import static net.minecraft.init.Blocks.IRON_BARS;
+import static supercritical.common.metatileentities.SCMetaTileEntities.DECAY_CHAMBER;
 
 
 public class MetaTileEntityLoader {
@@ -1354,7 +1356,15 @@ public class MetaTileEntityLoader {
                 'C', new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.IV));
 
 
-        ModHandler.addShapedRecipe(true, "rtg.ev", GTQTMetaTileEntities.RTG[0].getStackForm(),
+        ModHandler.addShapedRecipe(true, "rtg.hv", SCMetaTileEntities.RTG[0].getStackForm(),
+                "PCP", "AMA", "ECE",
+                'M', HULL[GTValues.HV].getStackForm(),
+                'A', new UnificationEntry(OrePrefix.spring, Gold),
+                'P', ELECTRIC_MOTOR_HV,
+                'E', SENSOR_HV,
+                'C', new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.HV));
+
+        ModHandler.addShapedRecipe(true, "rtg.ev", SCMetaTileEntities.RTG[1].getStackForm(),
                 "PCP", "AMA", "ECE",
                 'M', HULL[GTValues.EV].getStackForm(),
                 'A', new UnificationEntry(OrePrefix.spring, TungstenSteel),
@@ -1362,7 +1372,7 @@ public class MetaTileEntityLoader {
                 'E', SENSOR_EV,
                 'C', new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.EV));
 
-        ModHandler.addShapedRecipe(true, "rtg.iv", GTQTMetaTileEntities.RTG[1].getStackForm(),
+        ModHandler.addShapedRecipe(true, "rtg.iv", SCMetaTileEntities.RTG[2].getStackForm(),
                 "PCP", "AMA", "ECE",
                 'M', HULL[GTValues.IV].getStackForm(),
                 'A', new UnificationEntry(OrePrefix.spring, RhodiumPlatedPalladium),
@@ -1370,7 +1380,7 @@ public class MetaTileEntityLoader {
                 'E', SENSOR_IV,
                 'C', new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.IV));
 
-        ModHandler.addShapedRecipe(true, "rtg.luv", GTQTMetaTileEntities.RTG[2].getStackForm(),
+        ModHandler.addShapedRecipe(true, "rtg.luv", SCMetaTileEntities.RTG[3].getStackForm(),
                 "PCP", "AMA", "ECE",
                 'M', HULL[GTValues.LuV].getStackForm(),
                 'A', new UnificationEntry(OrePrefix.spring, NaquadahAlloy),
@@ -1378,6 +1388,13 @@ public class MetaTileEntityLoader {
                 'E', SENSOR_LuV,
                 'C', new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.LuV));
 
+        ModHandler.addShapedRecipe(true, "rtg.zpm", SCMetaTileEntities.RTG[4].getStackForm(),
+                "PCP", "AMA", "ECE",
+                'M', HULL[GTValues.ZPM].getStackForm(),
+                'A', new UnificationEntry(OrePrefix.spring, Iridium),
+                'P', ELECTRIC_MOTOR_ZPM,
+                'E', SENSOR_ZPM,
+                'C',new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.ZPM));
 
         ModHandler.addShapedRecipe(true, "lightning_rod.iv", GTQTMetaTileEntities.LIGHTNING_ROD[0].getStackForm(),
                 "AMA", "MCM", "AMA",

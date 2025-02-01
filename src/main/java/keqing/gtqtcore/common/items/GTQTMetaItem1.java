@@ -22,9 +22,10 @@ import net.minecraft.item.EnumDyeColor;
 
 import static gregtech.api.GTValues.*;
 import static gregtech.api.unification.material.Materials.*;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
+import static supercritical.api.unification.material.SCMaterials.Americium241;
+import static supercritical.api.unification.material.SCMaterials.Plutonium244;
 
 
 public class GTQTMetaItem1 extends StandardMetaItem {

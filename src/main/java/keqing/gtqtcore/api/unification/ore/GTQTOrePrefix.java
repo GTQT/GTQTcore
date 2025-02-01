@@ -22,18 +22,9 @@ public class GTQTOrePrefix {
             hasGemProperty.and(mat -> mat.hasFlag(GENERATE_BOULE) || (mat.hasFlag(MaterialFlags.CRYSTALLIZABLE) && !mat.hasFlag(GTQTMaterialFlags.DISABLE_CRYSTALLIZATION))));
     public static final OrePrefix milled = new OrePrefix("milled", -1, null, GTQTMaterialIconType.milled, ENABLE_UNIFICATION,
             OrePrefix.Conditions.hasOreProperty, mat -> Collections.singletonList(I18n.format("metaitem.milled.tooltip.flotation")));
-    public static final OrePrefix pellets = new OrePrefix("pellets", -1, null, GTQTMaterialIconType.pellets, ENABLE_UNIFICATION,
-            mat -> mat.hasFlag(GENERATE_PELLETS));
-    public static final OrePrefix upellets = new OrePrefix("upellets", -1, null, GTQTMaterialIconType.upellets, ENABLE_UNIFICATION,
-            mat -> mat.hasFlag(GENERATE_PELLETS));
-    public static final OrePrefix ranliaowan = new OrePrefix("ranliaowan", -1, null, GTQTMaterialIconType.ranliaowan, ENABLE_UNIFICATION,
-            mat -> mat.hasFlag(GENERATE_PELLETS));
-    public static final OrePrefix kujieranliaowan = new OrePrefix("kujieranliaowan", -1, null, GTQTMaterialIconType.kujieranliaowan, ENABLE_UNIFICATION,
-            mat -> mat.hasFlag(GENERATE_PELLETS));
+
     public static final OrePrefix wrap = new OrePrefix("wrap", -1, null, GTQTMaterialIconType.wrap, ENABLE_UNIFICATION,
             mat -> mat.hasFlag(GENERATE_WRAP));
-
-
     public static final OrePrefix swarm = new OrePrefix("swarm", M, null, GTQTMaterialIconType.swarm, ENABLE_UNIFICATION,
             (mat) -> (!mat.getMaterialComponents().isEmpty()||mat.isElement()) && (mat.hasProperty(PropertyKey.INGOT)||(mat.hasProperty(PropertyKey.FLUID))), mat -> Collections.singletonList(I18n.format("metaitem.swarm.tooltip")));
     public static final OrePrefix singularity = new OrePrefix("singularity", M, null, GTQTMaterialIconType.singularity, ENABLE_UNIFICATION,

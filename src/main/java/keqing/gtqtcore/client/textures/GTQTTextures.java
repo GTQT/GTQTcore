@@ -35,7 +35,6 @@ public class GTQTTextures {
     public static final OrientedOverlayRenderer FLOTATION_CELL_OVERLAY
             = new OrientedOverlayRenderer("overlay/flotation_cell");
     public static SimpleOverlayRenderer ELEMENT_CONSTRAINS_MACHINE_CASING = new SimpleOverlayRenderer("multiblock/casings/element_constrains_machine_casing");
-    public static OrientedOverlayRenderer RTG_OVERLAY = new OrientedOverlayRenderer("overlay/rtg");
     public static OrientedOverlayRenderer PARTICLE_ACCELERATOR = new OrientedOverlayRenderer("overlay/particle_accelerator");
     public static TextureAtlasSprite PRESSURE_PIPE_SIDE;
     public static TextureAtlasSprite PRESSURE_PIPE_OPEN;

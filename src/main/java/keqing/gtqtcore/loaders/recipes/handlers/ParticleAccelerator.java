@@ -17,6 +17,7 @@ import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.common.block.blocks.BlockParticleAcceleratorCasing.MachineType.*;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.PARTICLE_ACCELERATOR;
+import static supercritical.api.unification.material.SCMaterials.*;
 
 
 public class ParticleAccelerator {

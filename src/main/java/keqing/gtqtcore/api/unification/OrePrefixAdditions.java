@@ -19,10 +19,6 @@ public class OrePrefixAdditions {
         MetaItems.addOrePrefix(GTQTOrePrefix.fcrop);
         MetaItems.addOrePrefix(GTQTOrePrefix.wrap);
 
-        MetaItems.addOrePrefix(GTQTOrePrefix.pellets);
-        MetaItems.addOrePrefix(GTQTOrePrefix.upellets);
-        MetaItems.addOrePrefix(GTQTOrePrefix.ranliaowan);
-        MetaItems.addOrePrefix(GTQTOrePrefix.kujieranliaowan);
         MetaItems.addOrePrefix(GTQTOrePrefix.plate_big);
         MetaItems.addOrePrefix(GTQTOrePrefix.round_cover);
         MetaItems.addOrePrefix(GTQTOrePrefix.motor_stick);

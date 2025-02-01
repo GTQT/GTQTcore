@@ -46,7 +46,7 @@ public class Electrolyzer {
                 .EUt(30)
                 .input(IMPREGNATED_GRAPHITE_RODS)
                 .input(dust, Carbon, 8)
-                .fluidInputs(Asphalt.getFluid(1440))
+                .fluidInputs(Asphalt.getFluid(400))
                 .output(IMPREGNATED_GRAPHITE_RODSA)
                 .buildAndRegister();
 

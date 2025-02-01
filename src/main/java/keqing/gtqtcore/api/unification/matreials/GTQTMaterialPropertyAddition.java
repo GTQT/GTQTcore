@@ -9,7 +9,6 @@ import static gregtech.api.GTValues.UEV;
 import static gregtech.api.GTValues.VA;
 import static gregtech.api.unification.material.Materials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.TitanSteel;
-import static keqing.gtqtcore.api.unification.GTQTMaterials.Zircon;
 
 public class GTQTMaterialPropertyAddition {
     public static void init() {
@@ -22,7 +21,6 @@ public class GTQTMaterialPropertyAddition {
         //  Elements
         Thulium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
         Tellurium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
-        Zircon.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
         Erbium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
         Ytterbium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
         Hafnium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
@@ -48,9 +46,7 @@ public class GTQTMaterialPropertyAddition {
         Californium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
         Curium.setProperty(PropertyKey.INGOT, new IngotProperty());
         Curium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
-        Radium.setProperty(PropertyKey.DUST, new DustProperty());
         Radium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
-        Neptunium.setProperty(PropertyKey.INGOT, new IngotProperty());
         Bohrium.setProperty(PropertyKey.INGOT, new IngotProperty());
         Bohrium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
         Meitnerium.setProperty(PropertyKey.INGOT, new IngotProperty());
@@ -68,7 +64,6 @@ public class GTQTMaterialPropertyAddition {
         Francium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
         Technetium.setProperty(PropertyKey.INGOT, new IngotProperty());
         Technetium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
-        Protactinium.setProperty(PropertyKey.INGOT, new IngotProperty());
         Protactinium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
         Berkelium.setProperty(PropertyKey.INGOT, new IngotProperty());
         Berkelium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
@@ -88,12 +83,6 @@ public class GTQTMaterialPropertyAddition {
         Phosphorus.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
         SiliconDioxide.setProperty(PropertyKey.INGOT, new IngotProperty());
         SiliconDioxide.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
-        //  Isa Mill Ore Process
-        Strontium.setProperty(PropertyKey.DUST, new DustProperty());
-        Strontium.setProperty(PropertyKey.INGOT, new IngotProperty());
-        Strontium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
-        Promethium.setProperty(PropertyKey.INGOT, new IngotProperty());
-        Zirconium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
         // Dusts
         Praseodymium.setProperty(PropertyKey.DUST, new DustProperty());
         Scandium.setProperty(PropertyKey.DUST, new DustProperty());
@@ -104,7 +93,6 @@ public class GTQTMaterialPropertyAddition {
         Erbium.setProperty(PropertyKey.DUST, new DustProperty());
         Thulium.setProperty(PropertyKey.DUST, new DustProperty());
         Ytterbium.setProperty(PropertyKey.DUST, new DustProperty());
-        Zirconium.setProperty(PropertyKey.DUST, new DustProperty());
         Tellurium.setProperty(PropertyKey.DUST, new DustProperty());
         Selenium.setProperty(PropertyKey.DUST, new DustProperty());
         Rubidium.setProperty(PropertyKey.DUST, new DustProperty());
@@ -121,7 +109,6 @@ public class GTQTMaterialPropertyAddition {
         Erbium.setProperty(PropertyKey.ORE, new OreProperty(1, 1, false));
         Thulium.setProperty(PropertyKey.ORE, new OreProperty(1, 1, false));
         Ytterbium.setProperty(PropertyKey.ORE, new OreProperty(1, 1, false));
-        Zirconium.setProperty(PropertyKey.ORE, new OreProperty(1, 1, false));
         Tellurium.setProperty(PropertyKey.ORE, new OreProperty(1, 1, false));
         Selenium.setProperty(PropertyKey.ORE, new OreProperty(1, 1, false));
         Rubidium.setProperty(PropertyKey.ORE, new OreProperty(1, 1, false));

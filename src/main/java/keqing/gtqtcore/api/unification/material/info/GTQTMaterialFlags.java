@@ -21,9 +21,6 @@ public class GTQTMaterialFlags {
             .requireProps(PropertyKey.GEM)
             .build();
 
-    public static final MaterialFlag GENERATE_PELLETS = new MaterialFlag.Builder("pellets")
-            .build();
-
     public static final MaterialFlag GENERATE_NANOTUBE = new MaterialFlag.Builder("generate_nanotube")
             .build();
     public static final MaterialFlag GENERATE_NANOSENSOR = new MaterialFlag.Builder("generate_nanosensor")

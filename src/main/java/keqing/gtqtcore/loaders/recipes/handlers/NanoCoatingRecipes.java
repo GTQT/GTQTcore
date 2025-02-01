@@ -248,22 +248,10 @@ public class NanoCoatingRecipes {
     private static void Catalyst_v() {
         CHEMICAL_PLANT.recipeBuilder()
                 .notConsumable(CATALYST_FRAMEWORK_V)
-                .fluidInputs(Zircons.getFluid(6000))
-                .input(OrePrefix.dust, Sodium, 10)
-                .fluidOutputs(Zrso.getFluid(800))
-                .fluidOutputs(Hfso.getFluid(800))
-                .fluidOutputs(SulfuricNickelSolution.getFluid(800))
-                .recipeLevel(5)
-                .duration(800)
-                .EUt(VA[EV])
-                .buildAndRegister();
-
-        CHEMICAL_PLANT.recipeBuilder()
-                .notConsumable(CATALYST_FRAMEWORK_V)
                 .fluidInputs(HydrochloricAcid.getFluid(10000))
                 .input(dust, SodiumTungstateDihydrate, 10)
                 .chancedOutput(dust, Powellite, 10, 5000, 0)
-                .fluidOutputs(ItungsticAcid.getFluid(800))
+                .fluidOutputs(ItungsticAcid.getFluid(4800))
                 .fluidOutputs(ItungsticAcid.getFluid(800))
                 .fluidOutputs(ItungsticAcid.getFluid(800))
                 .fluidOutputs(ItungsticAcid.getFluid(800))

@@ -63,7 +63,6 @@ public class GTQTMaterials {
     public static Material Draconium;
     public static Material AwakenedDraconium;
     public static Material ChaoticDraconium;
-    public static Material Plutonium244;
     public static Material MetastableOganesson;
     public static Material MetastableHassium;
     public static Material MetastableFlerovium;
@@ -533,11 +532,6 @@ public class GTQTMaterials {
     public static Material CammoniumTungstate;
     public static Material SodiumTungstateDihydrate;
     public static Material ItungsticAcid;
-    public static Material Zircon;
-    public static Material Zirconf;
-    public static Material Zircons;
-    public static Material Zrso;
-    public static Material Hfso;
     public static Material NiobiumTantalumFe;
     public static Material NiobiumTantalumFec;
     public static Material Nbcl;

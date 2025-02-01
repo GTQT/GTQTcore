@@ -76,14 +76,6 @@ public class GTQTElementMaterials {
                 .cableProperties(V[UEV], 32, 16)
                 .build();
 
-        //  26008 Plutonium-244
-        GTQTMaterials.Plutonium244 = new Material.Builder(getMaterialsId(), gregtechId("plutonium_244"))
-                .ingot()
-                .fluid()
-                .color(0xF03232)
-                .iconSet(SHINY)
-                .element(GTQTElements.Plutonium244)
-                .build();
         //  26009 Metastable Oganesson
         MetastableOganesson = new Material.Builder(getMaterialsId(), gregtechId("metastable_oganesson"))
                 .ingot()

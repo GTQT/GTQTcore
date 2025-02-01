@@ -2,7 +2,7 @@ package keqing.gtqtcore.loaders.recipes.chain;
 
 import gregtech.api.recipes.RecipeMaps;
 import keqing.gtqtcore.api.unification.GTQTMaterials;
-
+import static supercritical.api.unification.material.SCMaterials.*;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;

@@ -2493,43 +2493,14 @@ public class FirstDegreeMaterials {
                 .build()
                 .setFormula("H2WO4*", true);
 
-        //锆石
-        GTQTMaterials.Zircon = new Material.Builder(getMaterialsId(), gregtechId("zircon"))
-                .ore().dust()
-                .color(0x8B8B00)
-                .iconSet(SHINY)
-                .build()
-                .setFormula("ZrSiO₄*", true);
+        getMaterialsId();
+        getMaterialsId();
 
-        //熟制锆石
-        GTQTMaterials.Zirconf = new Material.Builder(getMaterialsId(), gregtechId("zirconf"))
-                .dust()
-                .color(0xA52A2A)
-                .iconSet(SHINY)
-                .build();
+        getMaterialsId();
 
-        //酸性锆石溶液
-        GTQTMaterials.Zircons = new Material.Builder(getMaterialsId(), gregtechId("zircons"))
-                .fluid()
-                .color(0x9AFF9A)
-                .iconSet(SHINY)
-                .build();
+        getMaterialsId();
 
-        //硫酸锆
-        GTQTMaterials.Zrso = new Material.Builder(getMaterialsId(), gregtechId("zrso"))
-                .fluid()
-                .color(0xC6E2FF)
-                .iconSet(SHINY)
-                .build()
-                .setFormula("ZrSO₄", true);
-
-        //硫酸铪
-        GTQTMaterials.Hfso = new Material.Builder(getMaterialsId(), gregtechId("hfso"))
-                .fluid()
-                .color(0x9F79EE)
-                .iconSet(SHINY)
-                .build()
-                .setFormula("HfSO₄", true);
+        getMaterialsId();
 
         //钽铌铁粉
         GTQTMaterials.NiobiumTantalumFe = new Material.Builder(getMaterialsId(), gregtechId("niobium_tantalum_fe"))
