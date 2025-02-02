@@ -6057,11 +6057,14 @@ gtqtcore.universal.multiblock.energy_per_tick=产能功率：%s EUt （%s）
 
 gtqtcore.machine.air_intake_universal.rate=每 %,d 个刻收集 %,d mB 的空气
 
-gtqtcore.machine.air_intake_hatch.name=空气吸入舱
-gtqtcore.machine.air_intake_hatch.tooltip=为多块结构从世界中收集空气
+gtlitecore.machine.air_intake_hatch.name=进气仓
+gtlitecore.machine.extreme_air_intake_hatch.name=进阶进气仓
+gtlitecore.machine.ultimate_air_intake_hatch.name=无限进气仓
 
-gtqtcore.machine.extreme_air_intake_hatch.name=极限空气吸入舱
-gtqtcore.machine.extreme_air_intake_hatch.tooltip=为多块结构从世界中收集空气
+gtlitecore.machine.air_intake_hatch.tooltip.1=在不同维度的环境中吸收空气。
+gtlitecore.machine.air_intake_hatch.tooltip.2=正前方必须是空气方块不可被阻挡。
+gtlitecore.machine.air_intake_hatch.tooltip.3=§b空气产出：§f%s/次§7
+gtlitecore.machine.air_intake_hatch.tooltip.4=§9最大容量：§f%s L§7
 
 gtqtcore.machine.single_item_input_bus.name=单物品输入总线
 gtqtcore.machine.single_item_input_bus.stack_size=§6最大堆叠数量: §f%,d

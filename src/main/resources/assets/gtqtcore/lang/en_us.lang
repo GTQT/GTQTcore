@@ -5871,11 +5871,14 @@ gtqtcore.universal.multiblock.energy_per_tick=Energy Production: %s EUt (%s)
 
 gtqtcore.machine.air_intake_universal.rate=Collects %,d mB of air every %,d ticks
 
-gtqtcore.machine.air_intake_hatch.name=Air Intake Hatch
-gtqtcore.machine.air_intake_hatch.tooltip=Collects air from the world for multiblocks
+gtqtcore.machine.air_intake_hatch.name=进气仓
+gtqtcore.machine.extreme_air_intake_hatch.name=进阶进气仓
+gtqtcore.machine.ultimate_air_intake_hatch.name=无限进气仓
 
-gtqtcore.machine.extreme_air_intake_hatch.name=Extreme Air Intake Hatch
-gtqtcore.machine.extreme_air_intake_hatch.tooltip=Collects air from the world for multiblocks
+gtqtcore.machine.air_intake_hatch.tooltip.1=在不同维度的环境中吸收空气。
+gtqtcore.machine.air_intake_hatch.tooltip.2=正前方必须是空气方块不可被阻挡。
+gtqtcore.machine.air_intake_hatch.tooltip.3=§b空气产出：§f%s/次§7
+gtqtcore.machine.air_intake_hatch.tooltip.4=§9最大容量：§f%s L§7
 
 gtqtcore.machine.single_item_input_bus.name=Single Item Input Bus
 gtqtcore.machine.single_item_input_bus.stack_size=§6Max stack size: §f%,d

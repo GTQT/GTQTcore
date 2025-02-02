@@ -232,6 +232,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityRubbishBin RUBBISH_BIN;
     public static MetaTileEntityAirIntakeHatch AIR_INTAKE_HATCH;
     public static MetaTileEntityAirIntakeHatch EXTREME_AIR_INTAKE_HATCH;
+    public static MetaTileEntityAirIntakeHatch ULTIMATE_AIR_INTAKE_HATCH;
     public static MetaTileEntitySingleItemInputBus SINGLE_ITEM_INPUT_BUS;
     public static MetaTileEntitySuperInputBus SUPER_INPUT_BUS;
     public static MetaTileEntitySingleInputBus SINGLE_INPUT_BUS;
@@ -882,11 +883,22 @@ public class GTQTMetaTileEntities {
         ISO2_CLEANING_MAINTENANCE_HATCH = registerMetaTileEntity(15564, new MetaTileEntityISO2CleaningMaintenanceHatch(gtqtcoreId("maintenance_hatch_iso_2_cleanroom_auto")));
         ISO1_CLEANING_MAINTENANCE_HATCH = registerMetaTileEntity(15565, new MetaTileEntityISO1CleaningMaintenanceHatch(gtqtcoreId("maintenance_hatch_iso_1_cleanroom_auto")));
 
-        AIR_INTAKE_HATCH = registerMetaTileEntity(15566, new MetaTileEntityAirIntakeHatch(gtqtcoreId("air_intake_hatch"), GTValues.IV, 128_000, 1000));
-        EXTREME_AIR_INTAKE_HATCH = registerMetaTileEntity(15567, new MetaTileEntityAirIntakeHatch(gtqtcoreId("extreme_air_intake_hatch"), GTValues.LuV, 256_000, 8000));
-        SINGLE_ITEM_INPUT_BUS = registerMetaTileEntity(15568, new MetaTileEntitySingleItemInputBus(gtqtcoreId("single_item_input_bus")));
-        SUPER_INPUT_BUS = registerMetaTileEntity(15569, new MetaTileEntitySuperInputBus(gtqtcoreId("super_input_bus")));
-        SINGLE_INPUT_BUS = registerMetaTileEntity(15570, new MetaTileEntitySingleInputBus(gtqtcoreId("single_input_bus")));
+        // ID 14501-14999: Several Misc Hatches
+        AIR_INTAKE_HATCH = registerMetaTileEntity(15566,
+                new MetaTileEntityAirIntakeHatch(
+                        gtqtcoreId("air_intake_hatch"), IV)
+        );
+        EXTREME_AIR_INTAKE_HATCH = registerMetaTileEntity(15567,
+                new MetaTileEntityAirIntakeHatch(
+                        gtqtcoreId("extreme_air_intake_hatch"), ZPM)
+        );
+        ULTIMATE_AIR_INTAKE_HATCH = registerMetaTileEntity(15568,
+                new MetaTileEntityAirIntakeHatch(
+                        gtqtcoreId("ultimate_air_intake_hatch"), UHV));
+
+        SINGLE_ITEM_INPUT_BUS = registerMetaTileEntity(15569, new MetaTileEntitySingleItemInputBus(gtqtcoreId("single_item_input_bus")));
+        SUPER_INPUT_BUS = registerMetaTileEntity(15570, new MetaTileEntitySuperInputBus(gtqtcoreId("super_input_bus")));
+        SINGLE_INPUT_BUS = registerMetaTileEntity(15571, new MetaTileEntitySingleInputBus(gtqtcoreId("single_input_bus")));
 
         ROTOR_HOLDER[6] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityRotorHolder(gtqtcoreId("rotor_holder.uhv"), GTValues.UHV));
         ROTOR_HOLDER[7] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityRotorHolder(gtqtcoreId("rotor_holder.uev"), GTValues.UEV));

@@ -1,34 +1,5 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblockpart;
 
-import static gregtech.api.GTValues.RNG;
-
-import java.util.Collection;
-import java.util.List;
-import java.util.function.Consumer;
-
-import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.world.World;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidTank;
-import net.minecraftforge.fluids.IFluidTank;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraftforge.items.IItemHandlerModifiable;
-import net.minecraftforge.items.ItemStackHandler;
-
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
@@ -49,159 +20,239 @@ import gregtech.api.recipes.recipeproperties.GasCollectorDimensionProperty;
 import gregtech.api.unification.material.Materials;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockNotifiablePart;
-import it.unimi.dsi.fastutil.ints.IntList;
 import it.unimi.dsi.fastutil.ints.IntLists;
+import keqing.gtqtcore.client.textures.GTQTTextures;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.network.PacketBuffer;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.world.World;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidTank;
+import net.minecraftforge.fluids.IFluidTank;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.items.IItemHandlerModifiable;
+import net.minecraftforge.items.ItemStackHandler;
+import org.apache.commons.lang3.tuple.Pair;
 
-public class MetaTileEntityAirIntakeHatch extends MetaTileEntityMultiblockNotifiablePart
-        implements IMultiblockAbilityPart<IFluidTank> {
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
+import java.util.function.Consumer;
 
-    private final FluidTank fluidTank;
+import static gregtech.api.GTValues.*;
+import static keqing.gtqtcore.api.utils.GTQTUniversUtil.TICK;
+
+public class MetaTileEntityAirIntakeHatch extends MetaTileEntityMultiblockNotifiablePart implements IMultiblockAbilityPart<IFluidTank> {
+
+    private final FluidTank fluidTank; // Initialized at constructor.
     private boolean isWorkingEnabled;
-    private final int tankCapacity;
-    private final int fillAmount;
-    private Fluid fillFluid;
+    private Fluid airType; // Air type of Air Intake Hatch, checking at update().
 
-    private final int tickRate = 5;
-
-    public MetaTileEntityAirIntakeHatch(ResourceLocation metaTileEntityId, int tier, int tankCapacity, int fillAmount) {
+    public MetaTileEntityAirIntakeHatch(ResourceLocation metaTileEntityId, int tier) {
         super(metaTileEntityId, tier, false);
-        this.fluidTank = new NotifiableFluidTank(tankCapacity, this, false);
-
-        this.tankCapacity = tankCapacity;
-        this.fillAmount = fillAmount;
-
-        initializeInventory();
+        this.fluidTank = new NotifiableFluidTank(
+                tier == 5 ? 256_000 // IV: 256000L cap, 1000L/t fill.
+                        : (tier == 7 ? 512_000 // ZPM: 512000L cap, 8000L/t fill.
+                        : (tier == 9 ? 1_024_000 : 10)), // UHV: 1024000L cap, 64000L/t fill.
+                this, false);
+        this.initializeInventory();
     }
 
     @Override
-    public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {
-        return new MetaTileEntityAirIntakeHatch(metaTileEntityId, getTier(), tankCapacity, fillAmount);
+    public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
+        return new MetaTileEntityAirIntakeHatch(metaTileEntityId, this.getTier());
     }
 
     @Override
     public void update() {
         super.update();
+        // Predicate air type of Air Intake Hatch from Gas Collector recipes.
+        if (this.isFirstTick() && !this.getWorld().isRemote) {
+            // 获取气体收集器的配方列表
+            Collection<Recipe> recipeCollection = RecipeMaps.GAS_COLLECTOR_RECIPES.getRecipeList();
+            List<Recipe> recipes = new ArrayList<>(recipeCollection);
 
-        if (isFirstTick() && !getWorld().isRemote) {
-            Collection<Recipe> collectorRecipes = RecipeMaps.GAS_COLLECTOR_RECIPES.getRecipeList();
+            // 过滤出具有GasCollectorDimensionProperty属性的配方
+            List<Recipe> filteredRecipes = recipes.stream()
+                    .filter(recipe -> recipe.hasProperty(GasCollectorDimensionProperty.getInstance()))
+                    .toList();
 
-            for (Recipe recipe : collectorRecipes) {
-                if (!recipe.hasProperty(GasCollectorDimensionProperty.getInstance())) continue;
+            // 将配方映射为Pair<Recipe, DimensionID>
+            List<Pair<Recipe, Integer>> recipeDimensionPairs = filteredRecipes.stream()
+                    .map(recipe -> Pair.of(recipe,
+                            recipe.getProperty(GasCollectorDimensionProperty.getInstance(), IntLists.EMPTY_LIST).get(0)))
+                    .toList();
 
-                IntList dimensionProperty = recipe.getProperty(GasCollectorDimensionProperty.getInstance(),
-                        IntLists.EMPTY_LIST);
+            // 过滤出维度ID与当前世界维度ID匹配的配方
+            // 过滤出维度ID与当前世界维度ID匹配的配方
+            Optional<Pair<Recipe, Integer>> matchingRecipe = recipeDimensionPairs.stream()
+                    .filter(pair -> pair.getRight().equals(this.getWorld().provider.getDimension())) // 使用 getRight() 方法
+                    .findFirst();
 
-                if (dimensionProperty.get(0) == getWorld().provider.getDimension()) {
-                    this.fillFluid = recipe.getFluidOutputs().get(0).getFluid();
-                    break;
+            // 获取匹配的配方的流体输出，如果没有匹配的配方则返回默认的空气流体
+            this.airType = matchingRecipe.map(pair -> pair.getKey().getFluidOutputs().get(0).getFluid())
+                    .orElse(Materials.Air.getFluid());
+        }
+        // Workable predicate.
+        final EnumFacing facing = this.getFrontFacing();
+        final BlockPos blockPos = new BlockPos(
+                this.getPos().getX() + facing.getXOffset(),
+                this.getPos().getY() + facing.getYOffset(),
+                this.getPos().getZ() + facing.getZOffset());
+        if (this.getOffsetTimer() % (5 * TICK) == 0 && this.getWorld().isAirBlock(blockPos)) {
+            if (!this.getWorld().isRemote) {
+                int fillAmount = this.fluidTank.fill(new FluidStack(this.airType,
+                        this.getTier() == 5 ? 1000 : ( // IV
+                                this.getTier() == 7 ? 8000 : ( // ZPM
+                                        this.getTier() == 9 ? 64000 : 10 // UHV
+                                ))), true);
+                if (fillAmount == 0 && this.isWorkingEnabled) {
+                    this.isWorkingEnabled = false;
+                    this.writeCustomData(GregtechDataCodes.WORKING_ENABLED,
+                            buf -> buf.writeBoolean(this.isWorkingEnabled));
+                } else if (fillAmount > 0 && !this.isWorkingEnabled) {
+                    this.isWorkingEnabled = true;
+                    this.writeCustomData(GregtechDataCodes.WORKING_ENABLED,
+                            buf -> buf.writeBoolean(this.isWorkingEnabled));
                 }
             }
+            // Renderer.
+            if (this.getWorld().isRemote && this.isWorkingEnabled) {
+                // Port from GregTech++ (miscutils), thanks for Alkalus for these renderer codes.
+                final EnumParticleTypes particleType = EnumParticleTypes.CLOUD;
+                final float rand1 = RNG.nextFloat();
+                float rand2 = RNG.nextFloat();
+                float rand3 = RNG.nextFloat();
 
-            if (this.fillFluid == null) {
-                this.fillFluid = Materials.Air.getFluid();
-            }
-        }
+                final BlockPos pos = this.getPos();
+                final EnumFacing dir = this.getFrontFacing();
 
-        final EnumFacing facing = getFrontFacing();
-        final BlockPos blockFacingPos = new BlockPos(getPos().getX() + facing.getXOffset(),
-                getPos().getY() + facing.getYOffset(), getPos().getZ() + facing.getZOffset());
+                final float posX = pos.getX() + 0.25f + dir.getXOffset() * 0.76f;
+                float posY = pos.getY() + 0.65f + dir.getYOffset() * 0.76f;
+                final float posZ = pos.getZ() + 0.25f + dir.getZOffset() * 0.76f;
 
-        if (getOffsetTimer() % tickRate == 0 && getWorld().isAirBlock(blockFacingPos)) {
-            if (!getWorld().isRemote) {
-                int fillAmount = fluidTank.fill(new FluidStack(fillFluid, this.fillAmount), true);
+                float spdX;
+                float spdY = dir.getYOffset() * 0.1f + 0.2f + 0.1f * RNG.nextFloat();
+                float spdZ;
 
-                if (fillAmount == 0 && isWorkingEnabled) {
-                    isWorkingEnabled = false;
-                    writeCustomData(GregtechDataCodes.WORKING_ENABLED, buf -> buf.writeBoolean(isWorkingEnabled));
-                } else if (fillAmount > 0 && !isWorkingEnabled) {
-                    isWorkingEnabled = true;
-                    writeCustomData(GregtechDataCodes.WORKING_ENABLED, buf -> buf.writeBoolean(isWorkingEnabled));
+                if (dir.getYOffset() == -1) {
+                    final float temp = (float) (RNG.nextFloat() * 2.0f * Math.PI);
+                    spdX = (float) Math.sin(temp) * 0.1f;
+                    spdZ = (float) Math.cos(temp) * 0.1f;
+                    spdY = -spdY;
+                    posY = posY - 0.8f;
+                } else {
+                    spdX = -(dir.getXOffset() * (0.1f + 0.2f * RNG.nextFloat()));
+                    spdZ = -(dir.getZOffset() * (0.1f + 0.2f * RNG.nextFloat()));
                 }
-            }
 
-            if (getWorld().isRemote && isWorkingEnabled) {
-                generateParticles();
+                this.getWorld().spawnParticle(particleType,
+                        posX + rand1 * 0.5f,
+                        posY + RNG.nextFloat() * 0.5f,
+                        posZ + RNG.nextFloat() * 0.5f,
+                        spdX, -spdY, spdZ);
+                this.getWorld().spawnParticle(particleType,
+                        posX + rand2 * 0.5f,
+                        posY + RNG.nextFloat() * 0.5f,
+                        posZ + RNG.nextFloat() * 0.5f,
+                        spdX, -spdY, spdZ);
+                this.getWorld().spawnParticle(particleType,
+                        posX + rand3 * 0.5f,
+                        posY + RNG.nextFloat() * 0.5f,
+                        posZ + RNG.nextFloat() * 0.5f,
+                        spdX, -spdY, spdZ);
             }
         }
+        this.fillContainerFromInternalTank(this.fluidTank);
+    }
 
-        fillContainerFromInternalTank(fluidTank);
+    @Override
+    public void writeInitialSyncData(PacketBuffer buf) {
+        super.writeInitialSyncData(buf);
+        buf.writeBoolean(this.isWorkingEnabled);
+    }
+
+    @Override
+    public void receiveInitialSyncData(PacketBuffer buf) {
+        super.receiveInitialSyncData(buf);
+        this.isWorkingEnabled = buf.readBoolean();
     }
 
     @Override
     public void receiveCustomData(int dataId, PacketBuffer buf) {
         super.receiveCustomData(dataId, buf);
-
         if (dataId == GregtechDataCodes.WORKING_ENABLED) {
             this.isWorkingEnabled = buf.readBoolean();
         }
     }
 
     @Override
-    public void writeInitialSyncData(PacketBuffer buf) {
-        super.writeInitialSyncData(buf);
-
-        buf.writeBoolean(isWorkingEnabled);
+    protected ModularUI createUI(EntityPlayer player) {
+        return this.createTankUI(this.fluidTank, this.getMetaFullName(), player)
+                .build(this.getHolder(), player);
     }
 
-    @Override
-    public void receiveInitialSyncData(PacketBuffer buf) {
-        super.receiveInitialSyncData(buf);
-
-        this.isWorkingEnabled = buf.readBoolean();
-    }
-
-    @Override
-    protected ModularUI createUI(EntityPlayer entityPlayer) {
-        return createTankUI(fluidTank, getMetaFullName(), entityPlayer).build(getHolder(), entityPlayer);
-    }
-
-    public ModularUI.Builder createTankUI(IFluidTank fluidTank, String title, EntityPlayer entityPlayer) {
-        // Create base builder/widget references
-        ModularUI.Builder builder = ModularUI.defaultBuilder();
-        TankWidget tankWidget;
-
-        // Add input/output-specific widgets
-        tankWidget = new TankWidget(fluidTank, 69, 52, 18, 18)
-                .setAlwaysShowFull(true).setDrawHoveringText(false).setContainerClicking(true, false);
-
-        builder.image(7, 16, 81, 55, GuiTextures.DISPLAY)
+    private ModularUI.Builder createTankUI(IFluidTank fluidTank, String title, EntityPlayer player) {
+        TankWidget tankWidget = new TankWidget(fluidTank, 69, 52, 18, 18)
+                .setAlwaysShowFull(true)
+                .setDrawHoveringText(false)
+                .setContainerClicking(true, false);
+        return ModularUI.defaultBuilder()
+                .image(7, 16, 81, 55, GuiTextures.DISPLAY)
                 .widget(new ImageWidget(91, 36, 14, 15, GuiTextures.TANK_ICON))
-                .widget(new SlotWidget(exportItems, 0, 90, 53, true, false)
-                        .setBackgroundTexture(GuiTextures.SLOT, GuiTextures.OUT_SLOT_OVERLAY));
-
-        // Add general widgets
-        return builder.label(6, 6, title)
+                .widget(new SlotWidget(this.exportItems, 0, 90, 53, true, false)
+                        .setBackgroundTexture(GuiTextures.SLOT, GuiTextures.OUT_SLOT_OVERLAY))
+                .label(6, 6, title)
                 .label(11, 20, "gregtech.gui.fluid_amount", 0xFFFFFF)
-                .widget(new AdvancedTextWidget(11, 30, getFluidAmountText(tankWidget), 0xFFFFFF))
-                .widget(new AdvancedTextWidget(11, 40, getFluidNameText(tankWidget), 0xFFFFFF))
+                .widget(new AdvancedTextWidget(11, 30, this.getFluidAmountText(tankWidget), 0xFFFFFF))
+                .widget(new AdvancedTextWidget(11, 40, this.getFluidNameText(tankWidget), 0xFFFFFF))
                 .widget(tankWidget)
-                .widget(new FluidContainerSlotWidget(importItems, 0, 90, 16, false)
+                .widget(new FluidContainerSlotWidget(this.importItems, 0, 90, 16, false)
                         .setBackgroundTexture(GuiTextures.SLOT, GuiTextures.IN_SLOT_OVERLAY))
-                .bindPlayerInventory(entityPlayer.inventory);
+                .bindPlayerInventory(player.inventory);
     }
 
     private Consumer<List<ITextComponent>> getFluidNameText(TankWidget tankWidget) {
-        return (list) -> {
-            TextComponentTranslation translation = tankWidget.getFluidTextComponent();
-            if (translation != null) {
-                list.add(translation);
+        return (t) -> {
+            if (tankWidget.getFluidTextComponent() != null) {
+                t.add(tankWidget.getFluidTextComponent());
             }
         };
     }
 
     private Consumer<List<ITextComponent>> getFluidAmountText(TankWidget tankWidget) {
-        return (list) -> {
-            String fluidAmount = tankWidget.getFormattedFluidAmount();
-            if (!fluidAmount.isEmpty()) {
-                list.add(new TextComponentString(fluidAmount));
+        return (t) -> {
+            if (!tankWidget.getFormattedFluidAmount().isEmpty()) {
+                t.add(new TextComponentString(tankWidget.getFormattedFluidAmount()));
             }
         };
     }
 
-    @SideOnly(Side.CLIENT)
     @Override
-    public void addInformation(ItemStack stack,  World world, List<String> tooltip, boolean advanced) {
-        tooltip.add(I18n.format("gtqtcore.machine.air_intake_universal.rate", this.fillAmount, this.tickRate));
+    public void addInformation(ItemStack stack,
+                               World world,
+                               List<String> tooltip,
+                               boolean advanced) {
+        tooltip.add(I18n.format("gtqtcore.machine.air_intake_hatch.tooltip.1"));
+        tooltip.add(I18n.format("gtqtcore.machine.air_intake_hatch.tooltip.2"));
+        tooltip.add(I18n.format("gtqtcore.machine.air_intake_hatch.tooltip.3",
+                this.getTier() == IV ? 1000
+                        : (this.getTier() == ZPM ? 8000
+                        : (this.getTier() == UHV ? 64000 : 10))));
+        tooltip.add(I18n.format("gtqtcore.machine.air_intake_hatch.tooltip.4",
+                this.getTier() == IV ? 256000
+                        : (this.getTier() == ZPM ? 512000
+                        : (this.getTier() == UHV ? 1024000 : 10))));
     }
 
     @Override
@@ -210,35 +261,45 @@ public class MetaTileEntityAirIntakeHatch extends MetaTileEntityMultiblockNotifi
     }
 
     @Override
-    public void registerAbilities(List<IFluidTank> abilityList) {
-        abilityList.add(fluidTank);
+    public void registerAbilities(List<IFluidTank> list) {
+        list.add(this.fluidTank);
     }
 
-    @SideOnly(Side.CLIENT)
-    public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
+    @Override
+    public void renderMetaTileEntity(CCRenderState renderState,
+                                     Matrix4 translation,
+                                     IVertexOperation[] pipeline) {
         super.renderMetaTileEntity(renderState, translation, pipeline);
-
-        Textures.PIPE_IN_OVERLAY.renderSided(this.getFrontFacing(), renderState, translation, pipeline);
+        if (this.getTier() == 5) { // IV
+            Textures.MUFFLER_OVERLAY.renderSided(this.getFrontFacing(),
+                    renderState, translation, pipeline);
+        } else if (this.getTier() == 7) { // ZPM
+            GTQTTextures.ADVANCED_MUFFELR_OVERLAY.renderSided(this.getFrontFacing(),
+                    renderState, translation, pipeline);
+        } else { // UHV
+            GTQTTextures.ULTIMATE_MUFFLER_OVERLAY.renderSided(this.getFrontFacing(),
+                    renderState, translation, pipeline);
+        }
     }
 
     @Override
     public <T> T getCapability(Capability<T> capability, EnumFacing side) {
         if (capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
-            // allow both importing and exporting from the tank
-            return CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY.cast(fluidTank);
+            return CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY.cast(this.fluidTank);
         }
         return super.getCapability(capability, side);
     }
 
     @Override
     protected FluidTankList createImportFluidHandler() {
-        return new FluidTankList(false, fluidTank);
+        return new FluidTankList(false, this.fluidTank);
     }
 
     @Override
     protected IItemHandlerModifiable createImportItemHandler() {
-        return new FilteredItemHandler(this).setFillPredicate(
-                FilteredItemHandler.getCapabilityFilter(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY));
+        return new FilteredItemHandler(this)
+                .setFillPredicate(FilteredItemHandler.getCapabilityFilter(
+                        CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY));
     }
 
     @Override
@@ -246,58 +307,4 @@ public class MetaTileEntityAirIntakeHatch extends MetaTileEntityMultiblockNotifi
         return new ItemStackHandler(1);
     }
 
-    // Black magic from GT++
-    private void generateParticles() {
-        final EnumParticleTypes particle = EnumParticleTypes.CLOUD;
-
-        final float ran1 = RNG.nextFloat();
-        float ran2 = RNG.nextFloat();
-        float ran3 = RNG.nextFloat();
-
-        final BlockPos position = this.getPos();
-        final EnumFacing direction = getFrontFacing();
-
-        final float xPos = position.getX() + 0.25f + direction.getXOffset() * 0.76f;
-        float yPos = position.getY() + 0.65f + direction.getYOffset() * 0.76f;
-        final float zPos = position.getZ() + 0.25f + direction.getZOffset() * 0.76f;
-        float ySpd = direction.getYOffset() * 0.1f + 0.2f + 0.1f * RNG.nextFloat();
-        float xSpd;
-        float zSpd;
-
-        if (direction.getYOffset() == -1) {
-            final float temp = (float) (RNG.nextFloat() * 2.0f * Math.PI);
-            xSpd = (float) Math.sin(temp) * 0.1f;
-            zSpd = (float) Math.cos(temp) * 0.1f;
-            ySpd = -ySpd;
-            yPos = yPos - 0.8f;
-        } else {
-            xSpd = -(direction.getXOffset() * (0.1f + 0.2f * RNG.nextFloat()));
-            zSpd = -(direction.getZOffset() * (0.1f + 0.2f * RNG.nextFloat()));
-        }
-
-        getWorld().spawnParticle(
-                particle,
-                xPos + ran1 * 0.5f,
-                yPos + RNG.nextFloat() * 0.5f,
-                zPos + RNG.nextFloat() * 0.5f,
-                xSpd,
-                -ySpd,
-                zSpd);
-        getWorld().spawnParticle(
-                particle,
-                (xPos + ran2 * 0.5f),
-                (yPos + RNG.nextFloat() * 0.5f),
-                (zPos + RNG.nextFloat() * 0.5f),
-                xSpd,
-                -ySpd,
-                zSpd);
-        getWorld().spawnParticle(
-                particle,
-                (xPos + ran3 * 0.5f),
-                (yPos + RNG.nextFloat() * 0.5f),
-                (zPos + RNG.nextFloat() * 0.5f),
-                xSpd,
-                -ySpd,
-                zSpd);
-    }
 }

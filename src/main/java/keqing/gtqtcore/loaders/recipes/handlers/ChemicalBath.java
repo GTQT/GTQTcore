@@ -18,6 +18,7 @@ public class ChemicalBath {
         ChemicalBathRecipes(Polysilicon);
         ChemicalBathRecipes(VibrantAlloy);
         ChemicalBathRecipes(Talonite);
+        ChemicalBathRecipes(MagnesiumDiboride);
     }
     public static void ChemicalBathRecipes(Material material)
     {

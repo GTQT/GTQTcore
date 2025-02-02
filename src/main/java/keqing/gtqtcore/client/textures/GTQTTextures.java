@@ -34,6 +34,16 @@ public class GTQTTextures {
             = new OrientedOverlayRenderer("overlay/ion_implanter");
     public static final OrientedOverlayRenderer FLOTATION_CELL_OVERLAY
             = new OrientedOverlayRenderer("overlay/flotation_cell");
+    public static final OrientedOverlayRenderer ADVANCED_MUFFELR_OVERLAY
+            = new OrientedOverlayRenderer("overlay/overlay_advanced_muffler");
+    public static final OrientedOverlayRenderer ULTIMATE_MUFFLER_OVERLAY
+            = new OrientedOverlayRenderer("overlay/overlay_ultimate_muffler");
+    public static final SimpleOverlayRenderer RHODIUM_PLATED_PALLADIUM_CASING
+            = new SimpleOverlayRenderer("multiblock/casing/rhodium_plated_palladium");
+    public static final SimpleOverlayRenderer OSMIRIDIUM_CASING
+            = new SimpleOverlayRenderer("multiblock/casing/osmiridium");
+    public static final SimpleOverlayRenderer NEUTRONIUM_CASING
+            = new SimpleOverlayRenderer("multiblock/casing/neutronium");
     public static SimpleOverlayRenderer ELEMENT_CONSTRAINS_MACHINE_CASING = new SimpleOverlayRenderer("multiblock/casings/element_constrains_machine_casing");
     public static OrientedOverlayRenderer PARTICLE_ACCELERATOR = new OrientedOverlayRenderer("overlay/particle_accelerator");
     public static TextureAtlasSprite PRESSURE_PIPE_SIDE;
@@ -44,16 +54,6 @@ public class GTQTTextures {
     public static OrientedOverlayRenderer UUPRODUCTER_OVERLAY = new OrientedOverlayRenderer("machines/uu_producter");
     public static OrientedOverlayRenderer LARGE_UU_PRODUCTER = new OrientedOverlayRenderer("multiblock/large_uu_producter");
     public static SimpleOverlayRenderer MASS_GENERATION_CASING = new SimpleOverlayRenderer("multiblock/casings/mass_generation_casing");
-
-    public static final SimpleOverlayRenderer RHODIUM_PLATED_PALLADIUM_CASING
-            = new SimpleOverlayRenderer("multiblock/casing/rhodium_plated_palladium");
-
-    public static final SimpleOverlayRenderer OSMIRIDIUM_CASING
-            = new SimpleOverlayRenderer("multiblock/casing/osmiridium");
-
-    public static final SimpleOverlayRenderer NEUTRONIUM_CASING
-            = new SimpleOverlayRenderer("multiblock/casing/neutronium");
-
     public static SimpleOverlayRenderer BASIC_PHOTOLITHOGRAPHIC_FRAMEWORK_CASING = new SimpleOverlayRenderer("multiblock/casing/basic_photolithographic_framework_casing");
     public static OverlayRenderer MULTIPART_BUFFER_HATCH = new OverlayRenderer("multipart/overlay_buffer_hatch");
     public static OrientedOverlayRenderer ROCKET_ENGINE_OVERLAY = new OrientedOverlayRenderer("machines/rocket_engine");
