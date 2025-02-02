@@ -14,16 +14,11 @@ GTQT Core 不仅是拓展了所有终局游戏阶段，而是彻底修改了整�
 
 #### 联动
 
-- __Applied Energistics 2 Integration__: 量子存储元件，数字奇点存储元件，无限存储元件；256x/1024x/4096x 并行处理器；适配于所有常见附属的GT风格配方（将会根据安装情况生成）。
-- __Architecture Craft Integration__: 来自 [Architecture Craft-GTNH](https://github.com/GTNewHorizons/ArchitectureCraft) 的全新模型；问题与兼容性修复。
-- __Chisel Integration__: 自动凿子机器，多方块；GT风格配方。。
-- __Gregicality Multiblocks Integration__: 内容再平衡。
-- __GregTech Food Option Integration__: 许多新的食物（例如基岩巧克力），新的化工线路与原配方重做。
-- __Just Enough Items Integration__: 许多模组的JEI接口。
+你猜
 
 ### 项目目标
 
-优化 GregTech CEu 的难度与平衡性，基于 GregTech 6，Gregicality Legacy 与许多类似作品。
+干翻GTNH
 
 ### 协议
 
