@@ -35,8 +35,8 @@ GTQT Core 不仅是拓展了所有终局游戏阶段，而是彻底修改了整�
     - Copyright (c) KeQingSoCute520
     - [![License](https://img.shields.io/badge/License-GPLv3-blue.svg?style=flat-square)](https://github.com/GTQT/GTQTcore/blob/main/LICENSE)
 
-* GregTech Lite 整合包本体
-    - Copyright (c) Magic_Sweepy
+* GTQT 整合包本体
+    - Copyright (c) KeQingSoCute520
     - [![License](https://img.shields.io/badge/License-AGPLv3-blue.svg?style=flat-square)](https://github.com/GTQT/GT-QuantumTransition/blob/main/LICENSE)
 
 * 文本，翻译与任务书文本
