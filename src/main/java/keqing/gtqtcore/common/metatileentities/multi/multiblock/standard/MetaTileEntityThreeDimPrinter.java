@@ -21,13 +21,13 @@ import gregtech.client.utils.TooltipHelper;
 import gregtech.core.sound.GTSoundEvents;
 import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
+import keqing.gtqtcore.api.metaileentity.GTQTOCMultiblockController;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
@@ -42,11 +42,11 @@ import java.util.List;
 import static gregtech.api.GTValues.V;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.SPINNER_RECIPES;
 
-public class MetaTileEntityThreeDimPrinter extends MultiMapMultiblockController implements IOpticalComputationReceiver {
+public class MetaTileEntityThreeDimPrinter extends GTQTOCMultiblockController implements IOpticalComputationReceiver {
     private int glass_tier;
     private int clean_tier;
-    private int sheping_tier;
-    private int tier;
+    private int radio_tier;
+    private int casing_tier;
     private IOpticalComputationProvider computationProvider;
 
     public MetaTileEntityThreeDimPrinter(ResourceLocation metaTileEntityId) {
@@ -56,29 +56,33 @@ public class MetaTileEntityThreeDimPrinter extends MultiMapMultiblockController 
                 SPINNER_RECIPES
         });
         this.recipeMapWorkable = new LaserEngravingWorkableHandler(this);
+
+        setTierFlag(true);
+        //setTier(auto);
+        setMaxParallel(1);//初始化
+        setMaxParallelFlag(true);
+        //setMaxVoltage(auto);
+        setMaxVoltageFlag(true);
+        setTimeReduce(1);//初始化
+        setTimeReduceFlag(true);
     }
 
     @Override
     public void addInformation(ItemStack stack, World world, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, world, tooltip, advanced);
-        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("手搓只是弱者的借口"));
-        tooltip.add(I18n.format("gtqt.machine.3d.1"));
-        tooltip.add(I18n.format("gtqt.machine.3d.2"));
-        tooltip.add(I18n.format("gtqtcore.machine.progress_time","maxProgress * (100.0 - glass_tier) / 100"));
-        tooltip.add(I18n.format("gtqtcore.machine.parallel.num","clean_tier ? sheping_tier,精密模式下做乘法计算，否则为加法"));
-        tooltip.add(I18n.format("gtqtcore.machine.voltage.num","V[Math.min(tier, clean_tier * 2)]"));
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("摆脱公差"));
     }
 
     @Override
     public void writeInitialSyncData(PacketBuffer buf) {
         super.writeInitialSyncData(buf);
-        buf.writeInt(this.tier);
+        buf.writeInt(this.casing_tier);
     }
 
     @Override
     public void receiveInitialSyncData(PacketBuffer buf) {
         super.receiveInitialSyncData(buf);
-        this.tier = buf.readInt();
+        this.casing_tier = buf.readInt();
     }
 
     @Override
@@ -90,18 +94,18 @@ public class MetaTileEntityThreeDimPrinter extends MultiMapMultiblockController 
     public void receiveCustomData(int dataId, PacketBuffer buf) {
         super.receiveCustomData(dataId, buf);
         if (dataId == GTQTValue.UPDATE_TIER12) {
-            this.tier = buf.readInt();
+            this.casing_tier = buf.readInt();
         }
         if (dataId == GTQTValue.REQUIRE_DATA_UPDATE12) {
-            this.writeCustomData(GTQTValue.UPDATE_TIER12, buf1 -> buf1.writeInt(this.tier));
+            this.writeCustomData(GTQTValue.UPDATE_TIER12, buf1 -> buf1.writeInt(this.casing_tier));
         }
     }
 
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
-        textList.add(new TextComponentTranslation("结构等级：%s 玻璃等级：%s", tier, glass_tier));
-        textList.add(new TextComponentTranslation("gtqtcore.eleTire4", clean_tier, sheping_tier));
+        textList.add(new TextComponentTranslation("结构等级：%s 玻璃等级：%s", casing_tier, glass_tier));
+        textList.add(new TextComponentTranslation("gtqtcore.eleTire4", clean_tier, radio_tier));
 
     }
 
@@ -123,7 +127,7 @@ public class MetaTileEntityThreeDimPrinter extends MultiMapMultiblockController 
 
     @SideOnly(Side.CLIENT)
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
-        switch (this.tier) {
+        switch (this.casing_tier) {
             case (2) -> {
                 return Textures.SOLID_STEEL_CASING;
             }
@@ -195,7 +199,7 @@ public class MetaTileEntityThreeDimPrinter extends MultiMapMultiblockController 
         Object clean_tier = context.get("ZJTieredStats");
         Object sheping_tier = context.get("TJTieredStats");
 
-        this.tier = GTQTUtil.getOrDefault(() -> tier instanceof WrappedIntTired,
+        this.casing_tier = GTQTUtil.getOrDefault(() -> tier instanceof WrappedIntTired,
                 () -> ((WrappedIntTired) tier).getIntTier(),
                 0);
         this.glass_tier = GTQTUtil.getOrDefault(() -> glass_tier instanceof WrappedIntTired,
@@ -204,10 +208,14 @@ public class MetaTileEntityThreeDimPrinter extends MultiMapMultiblockController 
         this.clean_tier = GTQTUtil.getOrDefault(() -> clean_tier instanceof WrappedIntTired,
                 () -> ((WrappedIntTired) clean_tier).getIntTier(),
                 0);
-        this.sheping_tier = GTQTUtil.getOrDefault(() -> sheping_tier instanceof WrappedIntTired,
+        this.radio_tier = GTQTUtil.getOrDefault(() -> sheping_tier instanceof WrappedIntTired,
                 () -> ((WrappedIntTired) sheping_tier).getIntTier(),
                 0);
-        this.writeCustomData(GTQTValue.UPDATE_TIER12, buf -> buf.writeInt(this.tier));
+
+        setTier(Math.min(this.casing_tier, this.glass_tier));
+        setMaxVoltage(Math.min(this.casing_tier, this.clean_tier * 2));
+
+        this.writeCustomData(GTQTValue.UPDATE_TIER12, buf -> buf.writeInt(this.casing_tier));
     }
 
 
@@ -228,33 +236,20 @@ public class MetaTileEntityThreeDimPrinter extends MultiMapMultiblockController 
     }
 
 
-    protected class LaserEngravingWorkableHandler extends ComputationRecipeLogic {
+    protected class LaserEngravingWorkableHandler extends GTQTOCMultiblockLogic {
         public LaserEngravingWorkableHandler(RecipeMapMultiblockController tileEntity) {
-            super(tileEntity, ComputationType.SPORADIC);
+            super(tileEntity);
         }
 
-        private boolean isPrecise() {
-            return sheping_tier == glass_tier;
-        }
-
-        public void setMaxProgress(int maxProgress) {
-            if (isPrecise()) {
-                this.maxProgressTime = (int) (maxProgress * (100.0 - glass_tier) / 100);
-            }
-        }
-        public long getMaxVoltage() {
-            return V[Math.min(tier, clean_tier * 2)];
-        }
         @Override
-        protected long getMaxParallelVoltage() {
-            return super.getMaxVoltage();
-        }
-        @Override
-        public int getParallelLimit() {
-            if (isPrecise()) {
-                return clean_tier * sheping_tier;
+        public void update() {
+            super.update();
+            if (radio_tier == glass_tier) {
+                setTimeReduce((100 - glass_tier*10) / 100.0);
+                setMaxParallel(4*clean_tier * radio_tier);
             } else {
-                return clean_tier + sheping_tier;
+                setTimeReduce((100 - glass_tier*5) / 100.0);
+                setMaxParallel(clean_tier * radio_tier);
             }
         }
     }

@@ -738,6 +738,15 @@ public class GTQTMaterials {
     public static Material Purpur;
     public static Material DrillingMud;
     public static Material UsedDrillingMud;
+    public static Material CalciteBariteSlurry;
+    public static Material Methoxycreosol;
+    public static Material CreosolMixture;
+    public static Material Xylenol;
+    public static Material Creosol;
+    public static Material TricresylPhosphate;
+    public static Material PolyethyleneGlycol;
+    public static Material ChromiumDopedMolybdenite;
+    public static Material AdvancedLubricant;
     public static Material SuperGlue;
     public static Material UltraGlue;
     public static Material CyanoaceticAcid;

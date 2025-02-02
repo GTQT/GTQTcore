@@ -1,14 +1,10 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.overwriteMultiblocks;
 
-import gregicality.multiblocks.api.capability.IParallelMultiblock;
 import gregtech.api.block.IHeatingCoilBlockStats;
-import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
-import gregtech.api.metatileentity.multiblock.MultiMapMultiblockController;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
-import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
@@ -29,7 +25,6 @@ import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
@@ -41,16 +36,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-import static gregtech.api.GTValues.V;
-import static gregtech.api.GTValues.VA;
-
 public class MetaTileEntityLargeThermalCentrifuge extends GTQTRecipeMapMultiblockController {
     private int coilLevel;
     private int casingTier;
     private int tubeTier;
 
     public MetaTileEntityLargeThermalCentrifuge(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, new RecipeMap[] {
+        super(metaTileEntityId, new RecipeMap[]{
                 RecipeMaps.THERMAL_CENTRIFUGE_RECIPES,
                 RecipeMaps.CENTRIFUGE_RECIPES
         });
@@ -63,8 +55,12 @@ public class MetaTileEntityLargeThermalCentrifuge extends GTQTRecipeMapMultibloc
         //setTimeReduce(coilLevel);
         setTimeReduceFlag(true);
     }
+
     @Override
-    public boolean canBeDistinct() {return true;}
+    public boolean canBeDistinct() {
+        return true;
+    }
+
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityLargeThermalCentrifuge(metaTileEntityId);
@@ -75,9 +71,10 @@ public class MetaTileEntityLargeThermalCentrifuge extends GTQTRecipeMapMultibloc
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(I18n.format("gregtech.machine.gtqt.update.1"));
         tooltip.add(I18n.format("gregtech.machine.gtqt.update.2"));
-        tooltip.add(I18n.format("gtqtcore.machine.parallel.pow.machineTier",2,32));
+        tooltip.add(I18n.format("gtqtcore.machine.parallel.pow.machineTier", 2, 32));
         tooltip.add(I18n.format("gtqtcore.machine.max_voltage"));
     }
+
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
@@ -101,18 +98,21 @@ public class MetaTileEntityLargeThermalCentrifuge extends GTQTRecipeMapMultibloc
                 .where('#', any())
                 .build();
     }
+
     private IBlockState getFrameState() {
         return MetaBlocks.FRAMES.get(Materials.Aluminium).getBlock(Materials.Aluminium);
     }
+
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
         textList.add(new TextComponentTranslation("gtqtcore.coilTire", coilLevel));
         textList.add(new TextComponentTranslation("gtqtcore.casingTire", casingTier));
         textList.add(new TextComponentTranslation("gtqtcore.tubeTire", tubeTier));
-        if(casingTier!=tubeTier)
-            textList.add(new TextComponentTranslation("gtqtcore.equal", casingTier,tubeTier));
+        if (casingTier != tubeTier)
+            textList.add(new TextComponentTranslation("gtqtcore.equal", casingTier, tubeTier));
     }
+
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
         switch (this.casingTier) {
@@ -148,6 +148,7 @@ public class MetaTileEntityLargeThermalCentrifuge extends GTQTRecipeMapMultibloc
             }
         }
     }
+
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
@@ -155,20 +156,20 @@ public class MetaTileEntityLargeThermalCentrifuge extends GTQTRecipeMapMultibloc
         Object casingTier = context.get("ChemicalPlantCasingTieredStats");
         Object tubeTier = context.get("ChemicalPlantTubeTieredStats");
         this.coilLevel = GTQTUtil.getOrDefault(() -> coilType instanceof IHeatingCoilBlockStats,
-                () ->  ((IHeatingCoilBlockStats) coilType).getLevel(),
+                () -> ((IHeatingCoilBlockStats) coilType).getLevel(),
                 BlockWireCoil.CoilType.CUPRONICKEL.getLevel());
         this.casingTier = GTQTUtil.getOrDefault(() -> casingTier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)casingTier).getIntTier(),
+                () -> ((WrappedIntTired) casingTier).getIntTier(),
                 0);
         this.tubeTier = GTQTUtil.getOrDefault(() -> tubeTier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)tubeTier).getIntTier(),
+                () -> ((WrappedIntTired) tubeTier).getIntTier(),
                 0);
 
         setTier(Math.min(this.casingTier, this.tubeTier));
         setMaxVoltage(Math.min(this.casingTier, this.tubeTier));
-        setTimeReduce((100-Math.min(coilLevel,10)*5.0)/100);
+        setTimeReduce((100 - Math.min(coilLevel, 10) * 5.0) / 100);
 
-        this.writeCustomData(GTQTValue.UPDATE_TIER21,buf -> buf.writeInt(this.casingTier));
+        this.writeCustomData(GTQTValue.UPDATE_TIER21, buf -> buf.writeInt(this.casingTier));
     }
 
     @Override
@@ -186,11 +187,11 @@ public class MetaTileEntityLargeThermalCentrifuge extends GTQTRecipeMapMultibloc
     @Override
     public void receiveCustomData(int dataId, PacketBuffer buf) {
         super.receiveCustomData(dataId, buf);
-        if(dataId == GTQTValue.UPDATE_TIER21){
+        if (dataId == GTQTValue.UPDATE_TIER21) {
             this.casingTier = buf.readInt();
         }
-        if(dataId == GTQTValue.REQUIRE_DATA_UPDATE21){
-            this.writeCustomData(GTQTValue.UPDATE_TIER21,buf1 -> buf1.writeInt(this.casingTier));
+        if (dataId == GTQTValue.REQUIRE_DATA_UPDATE21) {
+            this.writeCustomData(GTQTValue.UPDATE_TIER21, buf1 -> buf1.writeInt(this.casingTier));
         }
     }
 

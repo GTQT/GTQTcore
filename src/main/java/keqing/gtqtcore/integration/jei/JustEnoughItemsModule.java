@@ -33,7 +33,7 @@ public class JustEnoughItemsModule extends IntegrationSubmodule implements IModP
         registry.addRecipeCategories(new PhotolithographyFactoryJeiCategory(registry.getJeiHelpers().getGuiHelper()));
         registry.addRecipeCategories(new CircuitJeiCategory(registry.getJeiHelpers().getGuiHelper()));
         registry.addRecipeCategories(new AlgaeJeiCategory(registry.getJeiHelpers().getGuiHelper()));
-        registry.addRecipeCategories(new VoidMinerRecipeCategory(guiHelper));
+        registry.addRecipeCategories(new VoidMinerRecipeCategory(registry.getJeiHelpers().getGuiHelper()));
     }
     @Override
     public void register(IModRegistry registry) {

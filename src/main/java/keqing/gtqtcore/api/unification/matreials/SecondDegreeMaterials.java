@@ -14,6 +14,7 @@ import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.info.MaterialFlags.*;
 import static gregtech.api.unification.material.info.MaterialIconSet.*;
 import static gregtech.api.util.GTUtility.gregtechId;
+import static gregtechfoodoption.utils.GTFOUtils.averageRGB;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 
@@ -1183,5 +1184,95 @@ public class SecondDegreeMaterials {
                 .components(Carbon, 23, Hydrogen, 23, Oxygen, 5, Nitrogen, 2)
                 .build()
                 .setFormula("(CONH)2(C6H4)2CH2(C4O)HO(CH2)4OH", true);
+
+        // 25073 Drilling Mud
+        DrillingMud = new Material.Builder(getMaterialsId(), gregtechId("drilling_mud"))
+                .liquid()
+                .color(0x996600)
+                .iconSet(DULL)
+                .build();
+
+        // 25074 Used Drilling Mud
+        UsedDrillingMud = new Material.Builder(getMaterialsId(), gregtechId("used_drilling_mud"))
+                .liquid()
+                .color(0x998833)
+                .iconSet(DULL)
+                .build();
+
+        // 5171 Calcite-Barite Slurry
+        CalciteBariteSlurry = new Material.Builder(getMaterialsId(), gregtechId("calcite_barite_slurry"))
+                .liquid()
+                .color(averageRGB(2,
+                        Calcite.getMaterialRGB(),
+                        Barite.getMaterialRGB()))
+                .iconSet(DULL)
+                .components(Calcite, 1, Barite, 1, Water, 2)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("(CaCO3)(BaSO4)(H2O)2", true);
+
+        // 25022 Advanced Lubricant
+        AdvancedLubricant = new Material.Builder(getMaterialsId(), gregtechId("advanced_lubricant"))
+                .liquid()
+                .color(0xAD968F)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        // 20045 Methoxycresol
+        Methoxycreosol = new Material.Builder(getMaterialsId(), gregtechId("methoxycreosol"))
+                .liquid()
+                .color(0xAF4617)
+                .components(Carbon, 8, Hydrogen, 10, Oxygen, 2)
+                .build();
+
+        // 20046 Creosol Mixture
+        CreosolMixture = new Material.Builder(getMaterialsId(), gregtechId("creosol_mixture"))
+                .liquid()
+                .color(0x71191C)
+                .components(Carbon, 21, Hydrogen, 24, Oxygen, 3)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("(C8H10O)(C7H8O)(C6H6O)", true);
+
+        // 20047 Xylenol
+        Xylenol = new Material.Builder(getMaterialsId(), gregtechId("xylenol"))
+                .liquid()
+                .color(0xCF7D10)
+                .components(Carbon, 8, Hydrogen, 10, Oxygen, 1)
+                .build();
+
+        // 20048 Creosol
+        Creosol = new Material.Builder(getMaterialsId(), gregtechId("creosol"))
+                .liquid()
+                .color(0x704E46)
+                .components(Carbon, 7, Hydrogen, 8, Oxygen, 1)
+                .build();
+
+
+        // 20050 Tricresyl Phosphate
+        TricresylPhosphate = new Material.Builder(getMaterialsId(), gregtechId("tricresyl_phosphate"))
+                .liquid()
+                .color(0x704E46)
+                .components(Carbon, 21, Hydrogen, 21, Oxygen, 4, Phosphorus, 1)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        // 20043 Polyethylene Glycol
+        PolyethyleneGlycol = new Material.Builder(getMaterialsId(), gregtechId("polyethylene_glycol"))
+                .liquid()
+                .color(0x5CD813)
+                .components(Carbon, 2, Hydrogen, 4, Oxygen, 1)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        // 5047 Chromium Doped Molybdenite
+        ChromiumDopedMolybdenite = new Material.Builder(getMaterialsId(), gregtechId("chromium_doped_molybdenite"))
+                .dust()
+                .color(0x9C5fB5)
+                .iconSet(ROUGH)
+                .flags(DISABLE_DECOMPOSITION)
+                .components(Chrome, 1, Molybdenite, 1)
+                .build()
+                .setFormula("Cr:MoS2", true);
     }
 }

@@ -538,7 +538,7 @@ public class MetaTileEntityLoader {
                 .input(stickLong, SamariumMagnetic, 64)
                 .input(stickLong, SamariumMagnetic, 64)
                 .fluidInputs(SolderingAlloy.getFluid(L * 6))
-                .fluidInputs(Lubricant.getFluid(3000))
+                .fluidInputs(AdvancedLubricant.getFluid(3000))
                 .fluidInputs(HastelloyN.getFluid(L * 16))
                 .fluidInputs(Zylon.getFluid(L * 16))
                 .outputs(CRYOGENIC_FREEZER.getStackForm())
@@ -564,7 +564,7 @@ public class MetaTileEntityLoader {
                 .input(stickLong, SamariumMagnetic, 32)
                 .input(wireFine, Palladium, 64)
                 .fluidInputs(SolderingAlloy.getFluid(L * 6))
-                .fluidInputs(Lubricant.getFluid(3000))
+                .fluidInputs(AdvancedLubricant.getFluid(3000))
                 .fluidInputs(HastelloyN.getFluid(L * 16))
                 .fluidInputs(Zylon.getFluid(L * 16))
                 .outputs(BLAZING_BLAST_FURNACE.getStackForm())
@@ -611,7 +611,7 @@ public class MetaTileEntityLoader {
                 .input(wireFine, Palladium, 64)
                 .input(stickLong, SamariumMagnetic, 64)
                 .fluidInputs(SolderingAlloy.getFluid(L * 6))
-                .fluidInputs(Lubricant.getFluid(3000))
+                .fluidInputs(AdvancedLubricant.getFluid(3000))
                 .fluidInputs(HastelloyN.getFluid(L * 16))
                 .fluidInputs(Zylon.getFluid(L * 16))
                 .outputs(INDUSTRIAL_INDUCTION_FURNACE.getStackForm())
@@ -635,7 +635,7 @@ public class MetaTileEntityLoader {
                 .input(stickLong, SamariumMagnetic, 64)
                 .input(stickLong, SamariumMagnetic, 64)
                 .fluidInputs(SolderingAlloy.getFluid(L * 6))
-                .fluidInputs(Lubricant.getFluid(3000))
+                .fluidInputs(AdvancedLubricant.getFluid(3000))
                 .fluidInputs(HastelloyN.getFluid(L * 16))
                 .fluidInputs(Zylon.getFluid(L * 16))
                 .outputs(PRECISE_ASSEMBLER.getStackForm())
@@ -939,6 +939,12 @@ public class MetaTileEntityLoader {
                 "WPW",
                 'M', EXTRACTOR[2].getStackForm(),
                 'P', MetaItems.ELECTRIC_PUMP_MV, 'C', new UnificationEntry(OrePrefix.circuit, MV),
+                'W', ELECTRIC_MOTOR_MV);
+
+        ModHandler.addShapedRecipe(true, "large_mixer", LARGE_MIXER.getStackForm(), "WPW", "CMC",
+                "WPW",
+                'M', MIXER[2].getStackForm(),
+                'P', ELECTRIC_PISTON_MV, 'C', new UnificationEntry(OrePrefix.circuit, MV),
                 'W', ELECTRIC_MOTOR_MV);
 
         ModHandler.addShapedRecipe(true, "assembler_line", GTQTMetaTileEntities.ASSEMBLY_LINE.getStackForm(), "PPP", "CMC",

@@ -84,6 +84,15 @@ public class PrimitiveCircuits {
                 'W', new UnificationEntry(wireGtSingle, Lead),
                 'G', GLASS_TUBE.getStackForm());
 
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(GLASS_TUBE)
+                .input(wireFine, Lead, 2)
+                .input(foil, Tin)
+                .output(VACUUM_TUBE_COMPONENTS, 2)
+                .EUt(VA[ULV])
+                .duration(3 * SECOND)
+                .buildAndRegister();
+
         //  Vacuum Tube
         VACUUM_CHAMBER_RECIPES.recipeBuilder()
                 .input(VACUUM_TUBE_COMPONENTS)

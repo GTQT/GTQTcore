@@ -1,19 +1,22 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.overwriteMultiblocks;
 
+import codechicken.lib.render.CCRenderState;
+import codechicken.lib.render.pipeline.IVertexOperation;
+import codechicken.lib.vec.Matrix4;
+import codechicken.lib.vec.Vector3;
 import gregtech.api.GTValues;
 import gregtech.api.capability.GregtechDataCodes;
 import gregtech.api.capability.IDataAccessHatch;
-import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
-import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.pattern.TraceabilityPredicate;
 import gregtech.api.recipes.Recipe;
+import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.recipes.ingredients.GTRecipeInput;
 import gregtech.api.recipes.recipeproperties.ResearchProperty;
@@ -27,9 +30,9 @@ import gregtech.common.ConfigHolder;
 import gregtech.common.metatileentities.MetaTileEntities;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiFluidHatch;
 import gregtech.core.sound.GTSoundEvents;
-
 import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
+import keqing.gtqtcore.api.metaileentity.GTQTRecipeMapMultiblockController;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
@@ -49,55 +52,75 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.IItemHandlerModifiable;
 
-import codechicken.lib.render.CCRenderState;
-import codechicken.lib.render.pipeline.IVertexOperation;
-import codechicken.lib.vec.Matrix4;
-import codechicken.lib.vec.Vector3;
-
 import java.util.List;
 import java.util.function.Function;
 
-import static gregtech.api.GTValues.*;
 import static gregtech.api.util.RelativeDirection.*;
 
-public class MetaTileEntityAssemblyLine extends RecipeMapMultiblockController {
-    private int glass_tier;
-    private int laser_tier;
-    private int casing_tier;
-    int tier;
+public class MetaTileEntityAssemblyLine extends GTQTRecipeMapMultiblockController {
     private static final ResourceLocation LASER_LOCATION = GTUtility.gregtechId("textures/fx/laser/laser.png");
     private static final ResourceLocation LASER_HEAD_LOCATION = GTUtility
             .gregtechId("textures/fx/laser/laser_start.png");
-
+    int tier;
+    private int glass_tier;
+    private int laser_tier;
+    private int casing_tier;
     @SideOnly(Side.CLIENT)
     private GTLaserBeamParticle[][] beamParticles;
     private int beamCount;
 
     public MetaTileEntityAssemblyLine(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, RecipeMaps.ASSEMBLY_LINE_RECIPES);
-        this.recipeMapWorkable = new AssemblyLineHandler(this);
+        super(metaTileEntityId, new RecipeMap[]{
+                RecipeMaps.ASSEMBLY_LINE_RECIPES
+        });
+        setTierFlag(true);
+        //setTier(auto);
+        setMaxParallel(64);
+        setMaxParallelFlag(true);
+        //setMaxVoltage(auto);
+        setMaxVoltageFlag(true);
+        //setTimeReduce(none);
+        setTimeReduceFlag(false);
     }
-    protected class AssemblyLineHandler extends MultiblockRecipeLogic {
-        public AssemblyLineHandler(RecipeMapMultiblockController tileEntity) {
-            super(tileEntity);
+
+    protected static TraceabilityPredicate fluidInputPredicate() {
+        // block multi-fluid hatches if ordered fluids is enabled
+        if (ConfigHolder.machines.orderedFluidAssembly) {
+            return metaTileEntities(MultiblockAbility.REGISTRY.get(MultiblockAbility.IMPORT_FLUIDS).stream()
+                    .filter(mte -> !(mte instanceof MetaTileEntityMultiFluidHatch))
+                    .toArray(MetaTileEntity[]::new))
+                    .setMaxGlobalLimited(4);
         }
-
-        public void setMaxProgress(int maxProgress) {
-                this.maxProgressTime = maxProgress*(100-glass_tier*5)/100;
-        }
-
-        public long getMaxVoltage() {return Math.min(V[tier+1],V[LuV]);}
-
+        return abilities(MultiblockAbility.IMPORT_FLUIDS);
     }
+
+    protected static TraceabilityPredicate dataHatchPredicate() {
+        // if research is enabled, require the data hatch, otherwise use a grate instead
+        if (ConfigHolder.machines.enableResearch) {
+            return abilities(MultiblockAbility.DATA_ACCESS_HATCH, MultiblockAbility.OPTICAL_DATA_RECEPTION)
+                    .setExactLimit(1)
+                    .or(TiredTraceabilityPredicate.CP_CASING.get());
+        }
+        return TiredTraceabilityPredicate.CP_CASING.get();
+    }
+
+    private static boolean isRecipeAvailable(Iterable<? extends IDataAccessHatch> hatches,
+                                             Recipe recipe) {
+        for (IDataAccessHatch hatch : hatches) {
+            // creative hatches do not need to check, they always have the recipe
+            if (hatch.isCreative()) return true;
+
+            // hatches need to have the recipe available
+            if (hatch.isRecipeAvailable(recipe)) return true;
+        }
+        return false;
+    }
+
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityAssemblyLine(metaTileEntityId);
     }
 
-    @Override
-    public String[] getDescription() {
-        return new String[]{I18n.format("gtqt.tooltip.update")};
-    }
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
@@ -106,18 +129,19 @@ public class MetaTileEntityAssemblyLine extends RecipeMapMultiblockController {
         Object glass_tier = context.get("LGLTieredStats");
 
         this.laser_tier = GTQTUtil.getOrDefault(() -> laser_tier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)laser_tier).getIntTier(),
+                () -> ((WrappedIntTired) laser_tier).getIntTier(),
                 0);
         this.casing_tier = GTQTUtil.getOrDefault(() -> casing_tier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)casing_tier).getIntTier(),
+                () -> ((WrappedIntTired) casing_tier).getIntTier(),
                 0);
         this.glass_tier = GTQTUtil.getOrDefault(() -> glass_tier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)glass_tier).getIntTier(),
+                () -> ((WrappedIntTired) glass_tier).getIntTier(),
                 0);
 
-        this.tier = Math.min(this.casing_tier,this.laser_tier);
-
-        this.writeCustomData(GTQTValue.UPDATE_TIER14,buf -> buf.writeInt(this.casing_tier));
+        setTier(Math.min(this.casing_tier, this.laser_tier));
+        setMaxVoltage(Math.min(Math.min(this.casing_tier, this.laser_tier), 6));
+        setTimeReduce((100 - Math.min(this.glass_tier, 10) * 5.0) / 100);
+        this.writeCustomData(GTQTValue.UPDATE_TIER14, buf -> buf.writeInt(this.casing_tier));
     }
 
     @Override
@@ -132,7 +156,7 @@ public class MetaTileEntityAssemblyLine extends RecipeMapMultiblockController {
                         .or(fluidInputPredicate()))
                 .where('O', abilities(MultiblockAbility.EXPORT_ITEMS)
                         .addTooltips("gregtech.multiblock.pattern.location_end"))
-                .where('Y',TiredTraceabilityPredicate.CP_CASING.get()
+                .where('Y', TiredTraceabilityPredicate.CP_CASING.get()
                         .or(abilities(MultiblockAbility.INPUT_ENERGY)
                                 .setMinGlobalLimited(1)
                                 .setMaxGlobalLimited(3)))
@@ -145,37 +169,18 @@ public class MetaTileEntityAssemblyLine extends RecipeMapMultiblockController {
                 .where(' ', any());
         return pattern.build();
     }
+
     @SideOnly(Side.CLIENT)
     @Override
     protected ICubeRenderer getFrontOverlay() {
         return GTQTTextures.ALGAE_FARM_OVERLAY;
     }
+
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
-        textList.add(new TextComponentTranslation("gtqtcore.atier",tier,glass_tier, laser_tier, casing_tier));
+        textList.add(new TextComponentTranslation("gtqtcore.atier", tier, glass_tier, laser_tier, casing_tier));
 
-    }
-    protected static TraceabilityPredicate fluidInputPredicate() {
-        // block multi-fluid hatches if ordered fluids is enabled
-        if (ConfigHolder.machines.orderedFluidAssembly) {
-            return metaTileEntities(MultiblockAbility.REGISTRY.get(MultiblockAbility.IMPORT_FLUIDS).stream()
-                    .filter(mte -> !(mte instanceof MetaTileEntityMultiFluidHatch))
-                    .toArray(MetaTileEntity[]::new))
-                    .setMaxGlobalLimited(4);
-        }
-        return abilities(MultiblockAbility.IMPORT_FLUIDS);
-    }
-
-    
-    protected static TraceabilityPredicate dataHatchPredicate() {
-        // if research is enabled, require the data hatch, otherwise use a grate instead
-        if (ConfigHolder.machines.enableResearch) {
-            return abilities(MultiblockAbility.DATA_ACCESS_HATCH, MultiblockAbility.OPTICAL_DATA_RECEPTION)
-                    .setExactLimit(1)
-                    .or(TiredTraceabilityPredicate.CP_CASING.get());
-        }
-        return TiredTraceabilityPredicate.CP_CASING.get();
     }
 
     @Override
@@ -183,50 +188,52 @@ public class MetaTileEntityAssemblyLine extends RecipeMapMultiblockController {
         // player's right when looking at the controller, but the controller's left
         return RelativeDirection.LEFT.getSorter(getFrontFacing(), getUpwardsFacing(), isFlipped());
     }
+
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("casingTier", casing_tier);
         return super.writeToNBT(data);
     }
-   
+
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         casing_tier = data.getInteger("casingTier");
     }
+
     @SideOnly(Side.CLIENT)
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
-                switch (this.casing_tier) {
-                    case (2) -> {
-                        return Textures.SOLID_STEEL_CASING;
-                    }
-                    case (3) -> {
-                        return Textures.FROST_PROOF_CASING;
-                    }
-                    case (4) -> {
-                        return Textures.CLEAN_STAINLESS_STEEL_CASING;
-                    }
-                    case (5) -> {
-                        return Textures.STABLE_TITANIUM_CASING;
-                    }
-                    case (6) -> {
-                        return Textures.ROBUST_TUNGSTENSTEEL_CASING;
-                    }
-                    case (7) -> {
-                        return GTQTTextures.PD_CASING;
-                    }
-                    case (8) -> {
-                        return GTQTTextures.NQ_CASING;
-                    }
-                    case (9) -> {
-                        return GTQTTextures.ST_CASING;
-                    }
-                    case (10) -> {
-                        return GTQTTextures.AD_CASING;
-                    }
-                    default -> {
-                        return Textures.BRONZE_PLATED_BRICKS;
-                    }
-                }
+        switch (this.casing_tier) {
+            case (2) -> {
+                return Textures.SOLID_STEEL_CASING;
+            }
+            case (3) -> {
+                return Textures.FROST_PROOF_CASING;
+            }
+            case (4) -> {
+                return Textures.CLEAN_STAINLESS_STEEL_CASING;
+            }
+            case (5) -> {
+                return Textures.STABLE_TITANIUM_CASING;
+            }
+            case (6) -> {
+                return Textures.ROBUST_TUNGSTENSTEEL_CASING;
+            }
+            case (7) -> {
+                return GTQTTextures.PD_CASING;
+            }
+            case (8) -> {
+                return GTQTTextures.NQ_CASING;
+            }
+            case (9) -> {
+                return GTQTTextures.ST_CASING;
+            }
+            case (10) -> {
+                return GTQTTextures.AD_CASING;
+            }
+            default -> {
+                return Textures.BRONZE_PLATED_BRICKS;
+            }
+        }
     }
 
     @Override
@@ -240,8 +247,12 @@ public class MetaTileEntityAssemblyLine extends RecipeMapMultiblockController {
     public SoundEvent getBreakdownSound() {
         return GTSoundEvents.BREAKDOWN_MECHANICAL;
     }
+
     @Override
-    public boolean canBeDistinct() {return true;}
+    public boolean canBeDistinct() {
+        return true;
+    }
+
     @Override
     public void update() {
         super.update();
@@ -287,11 +298,11 @@ public class MetaTileEntityAssemblyLine extends RecipeMapMultiblockController {
             super.receiveCustomData(dataId, buf);
         }
 
-        if(dataId == GTQTValue.UPDATE_TIER14){
+        if (dataId == GTQTValue.UPDATE_TIER14) {
             this.casing_tier = buf.readInt();
         }
-        if(dataId == GTQTValue.REQUIRE_DATA_UPDATE14){
-            this.writeCustomData(GTQTValue.UPDATE_TIER14,buf1 -> buf1.writeInt(this.casing_tier));
+        if (dataId == GTQTValue.REQUIRE_DATA_UPDATE14) {
+            this.writeCustomData(GTQTValue.UPDATE_TIER14, buf1 -> buf1.writeInt(this.casing_tier));
         }
     }
 
@@ -309,12 +320,12 @@ public class MetaTileEntityAssemblyLine extends RecipeMapMultiblockController {
         }
     }
 
-    private void writeParticles( PacketBuffer buf) {
+    private void writeParticles(PacketBuffer buf) {
         buf.writeVarInt(beamCount);
     }
 
     @SideOnly(Side.CLIENT)
-    private void readParticles( PacketBuffer buf) {
+    private void readParticles(PacketBuffer buf) {
         beamCount = buf.readVarInt();
         if (beamParticles == null) {
             beamParticles = new GTLaserBeamParticle[17][2];
@@ -375,7 +386,6 @@ public class MetaTileEntityAssemblyLine extends RecipeMapMultiblockController {
         }
     }
 
-    
     @SideOnly(Side.CLIENT)
     private GTLaserBeamParticle createALParticles(Vector3 startPos, Vector3 endPos) {
         return new GTLaserBeamParticle(this, startPos, endPos)
@@ -389,7 +399,7 @@ public class MetaTileEntityAssemblyLine extends RecipeMapMultiblockController {
     }
 
     @Override
-    public boolean checkRecipe( Recipe recipe, boolean consumeIfSuccess) {
+    public boolean checkRecipe(Recipe recipe, boolean consumeIfSuccess) {
         if (consumeIfSuccess) return true; // don't check twice
         // check ordered items
         if (ConfigHolder.machines.orderedAssembly) {
@@ -429,25 +439,14 @@ public class MetaTileEntityAssemblyLine extends RecipeMapMultiblockController {
                 isRecipeAvailable(getAbilities(MultiblockAbility.OPTICAL_DATA_RECEPTION), recipe);
     }
 
-    private static boolean isRecipeAvailable( Iterable<? extends IDataAccessHatch> hatches,
-                                              Recipe recipe) {
-        for (IDataAccessHatch hatch : hatches) {
-            // creative hatches do not need to check, they always have the recipe
-            if (hatch.isCreative()) return true;
-
-            // hatches need to have the recipe available
-            if (hatch.isRecipeAvailable(recipe)) return true;
-        }
-        return false;
-    }
-
     @Override
-    public void addInformation(ItemStack stack, World world,  List<String> tooltip, boolean advanced) {
-            tooltip.add(I18n.format("gregtech.machine.assembly_line.tooltip_ordered_both"));
-            tooltip.add(I18n.format("gregtech.machine.assembly_line.tooltip_ordered_items"));
-            tooltip.add(I18n.format("gregtech.machine.assembly_line.tooltip_ordered_fluids"));
-            tooltip.add(I18n.format("gtqt.machine.assembly_line.1"));
-            tooltip.add(I18n.format("gtqt.machine.assembly_line.2"));
-            tooltip.add(I18n.format("友情提醒，我只能使用ULV级的总线仓口"));
+    public void addInformation(ItemStack stack, World world, List<String> tooltip, boolean advanced) {
+        tooltip.add(I18n.format("gregtech.machine.assembly_line.tooltip_ordered_both"));
+        tooltip.add(I18n.format("gregtech.machine.assembly_line.tooltip_ordered_items"));
+        tooltip.add(I18n.format("gregtech.machine.assembly_line.tooltip_ordered_fluids"));
+        super.addInformation(stack, world, tooltip, advanced);
+        tooltip.add(I18n.format("gtqt.machine.assembly_line.1"));
+        tooltip.add(I18n.format("gtqt.machine.assembly_line.2"));
+        tooltip.add(I18n.format("友情提醒，我只能使用ULV级的总线仓口"));
     }
 }

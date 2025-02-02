@@ -170,7 +170,6 @@ public class MiscRecipes {
                 "   ", " M ", "f h",
                 'M', SHAPE_EMPTY);
 
-        // Add recipes for gtlitecore addition Shape Molds.
         ModHandler.addShapedRecipe(true, "shape_mold.rod", SHAPE_MOLD_ROD.getStackForm(),
                 "   ", " Mh", "f  ",
                 'M', SHAPE_EMPTY);

@@ -31,6 +31,7 @@ import static keqing.gtqtcore.common.block.blocks.BlockIsaCasing.CasingType.*;
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing3.CasingType.*;
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4.TurbineCasingType.*;
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing5.TurbineCasingType.*;
+import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing6.CasingType.*;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.CIRCUIT_GOOD_III;
 
 public class MachineCasing {
@@ -332,6 +333,9 @@ public class MachineCasing {
         createCasingRecipe("blue_steel", GTQTMetaBlocks.blockMultiblockCasing3, blue_steel, BlueSteel);
         createCasingRecipe("red_steel", GTQTMetaBlocks.blockMultiblockCasing3, red_steel, RedSteel);
         createCasingRecipe("tumbaga", GTQTMetaBlocks.blockMultiblockCasing3, tumbaga, Tumbaga);
+        createCasingRecipe("rhodium_plated_palladium", GTQTMetaBlocks.blockMultiblockCasing6, RHODIUM_PLATED_PALLADIUM, RhodiumPlatedPalladium);
+        createCasingRecipe("osmiridium", GTQTMetaBlocks.blockMultiblockCasing6, OSMIRIDIUM, Osmiridium);
+        createCasingRecipe("neutronium", GTQTMetaBlocks.blockMultiblockCasing6, NEUTRONIUM, Neutronium);
 
     }
 

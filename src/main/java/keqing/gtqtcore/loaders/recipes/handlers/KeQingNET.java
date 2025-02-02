@@ -47,6 +47,7 @@ import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.MaterialHelper.Superconductor;
 import static keqing.gtqtcore.api.unification.TJMaterials.Polyetheretherketone;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.swarm;
+import static keqing.gtqtcore.api.utils.GTQTUniversUtil.MINUTE;
 import static keqing.gtqtcore.api.utils.GTQTUtil.CWT;
 import static keqing.gtqtcore.common.block.blocks.BlockIsaCasing.CasingType.FLOTATION_CASING_GEARBOX;
 import static keqing.gtqtcore.common.block.blocks.BlockIsaCasing.CasingType.ISA_MILL_CASING_GEARBOX;
@@ -1359,7 +1360,7 @@ public class KeQingNET {
                 .input(cableGtQuadruple, VanadiumGallium, 16)
                 .input(wireGtSingle, LuVSuperconductor, 64)
                 .output(PHOTOLITHOGRAPHY_FACTORY)
-                .fluidInputs(KaptonK.getFluid(L * 32))
+                .fluidInputs(AdvancedLubricant.getFluid(4000))
                 .fluidInputs(Polybenzimidazole.getFluid(L * 16))
                 .fluidInputs(Polyetheretherketone.getFluid(L * 16))
                 .fluidInputs(NaquadahAlloy.getFluid(L * 4))
@@ -1386,7 +1387,7 @@ public class KeQingNET {
                 .input(gear, MaragingSteel250, 4)
                 .input(gearSmall, Stellite, 16)
                 .input(cableGtQuadruple, VanadiumGallium, 64)
-                .fluidInputs(KaptonK.getFluid(L * 32))
+                .fluidInputs(AdvancedLubricant.getFluid(4000))
                 .fluidInputs(Polybenzimidazole.getFluid(L * 16))
                 .fluidInputs(Polyetheretherketone.getFluid(L * 16))
                 .fluidInputs(NaquadahAlloy.getFluid(L * 4))
@@ -1414,7 +1415,7 @@ public class KeQingNET {
                 .input(gear, Inconel625, 4)
                 .input(gearSmall, Tantalloy61, 16)
                 .input(cableGtQuadruple, VanadiumGallium, 64)
-                .fluidInputs(KaptonK.getFluid(L * 32))
+                .fluidInputs(AdvancedLubricant.getFluid(4000))
                 .fluidInputs(Polybenzimidazole.getFluid(L * 16))
                 .fluidInputs(Polyetheretherketone.getFluid(L * 16))
                 .fluidInputs(NaquadahAlloy.getFluid(L * 4))
@@ -1442,7 +1443,7 @@ public class KeQingNET {
                 .input(gear, HY1301, 4)
                 .input(gearSmall, TanmolyiumBetaC, 16)
                 .input(cableGtQuadruple, VanadiumGallium, 64)
-                .fluidInputs(KaptonK.getFluid(L * 32))
+                .fluidInputs(AdvancedLubricant.getFluid(4000))
                 .fluidInputs(Polybenzimidazole.getFluid(L * 16))
                 .fluidInputs(Polyetheretherketone.getFluid(L * 16))
                 .fluidInputs(NaquadahAlloy.getFluid(L * 4))
@@ -1470,7 +1471,7 @@ public class KeQingNET {
                 .input(gear, HY1301, 4)
                 .input(gearSmall, TanmolyiumBetaC, 16)
                 .input(cableGtQuadruple, VanadiumGallium, 64)
-                .fluidInputs(KaptonK.getFluid(L * 32))
+                .fluidInputs(AdvancedLubricant.getFluid(4000))
                 .fluidInputs(Polybenzimidazole.getFluid(L * 16))
                 .fluidInputs(Polyetheretherketone.getFluid(L * 16))
                 .fluidInputs(NaquadahAlloy.getFluid(L * 4))
@@ -2994,6 +2995,92 @@ public class KeQingNET {
                         .CWUt(CWT[UHV]))
                 .buildAndRegister();
 
+        // Void Miner I
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(MetaTileEntities.ADVANCED_LARGE_MINER)
+                .input(CIRCUIT_GOOD_II,8)
+                .input(circuit, MarkerMaterials.Tier.LuV, 16)
+                .input(circuit, MarkerMaterials.Tier.IV, 32)
+                .input(frameGt, Duranium, 4)
+                .input(plate, Europium, 16)
+                .input(ELECTRIC_MOTOR_LuV, 16)
+                .input(SENSOR_LuV, 16)
+                .input(FIELD_GENERATOR_LuV, 16)
+                .input(plateDouble, HG1223, 4)
+                .input(plateDouble, Staballoy, 4)
+                .input(gear, MaragingSteel250, 4)
+                .input(gearSmall, Stellite, 16)
+                .input(screw, Europium, 36)
+                .fluidInputs(AdvancedLubricant.getFluid(4000))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 16))
+                .fluidInputs(NaquadahAlloy.getFluid(L * 16))
+                .fluidInputs(Neon.getFluid(20000))
+                .output(GTQTMetaTileEntities.VOID_MINER[0])
+                .EUt(VA[LuV])
+                .duration(5 * MINUTE)
+                .stationResearch(b -> b
+                        .researchStack(DISK_9.getStackForm())
+                        .EUt(VA[ZPM])
+                        .CWUt(CWT[ZPM]))
+                .buildAndRegister();
+
+        // Void Miner II
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(GTQTMetaTileEntities.VOID_MINER[0])
+                .input(CIRCUIT_GOOD_III,8)
+                .input(circuit, MarkerMaterials.Tier.ZPM, 16)
+                .input(circuit, MarkerMaterials.Tier.LuV, 32)
+                .input(frameGt, Tritanium, 4)
+                .input(plate, Rutherfordium, 16)
+                .input(ELECTRIC_MOTOR_ZPM, 16)
+                .input(SENSOR_ZPM, 16)
+                .input(FIELD_GENERATOR_ZPM, 16)
+                .input(plateDouble, HG1223, 4)
+                .input(plateDouble, Staballoy, 4)
+                .input(gear, MaragingSteel250, 4)
+                .input(gearSmall, Stellite, 16)
+                .input(screw, Rutherfordium, 36)
+                .fluidInputs(AdvancedLubricant.getFluid(4000))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 16))
+                .fluidInputs(NaquadahAlloy.getFluid(L * 16))
+                .fluidInputs(Krypton.getFluid(40000))
+                .output(GTQTMetaTileEntities.VOID_MINER[1])
+                .EUt(VA[ZPM])
+                .duration(5 * MINUTE)
+                .stationResearch(b -> b
+                        .researchStack(DISK_9.getStackForm())
+                        .EUt(VA[ZPM])
+                        .CWUt(CWT[ZPM]))
+                .buildAndRegister();
+
+        // Void Miner III
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(GTQTMetaTileEntities.VOID_MINER[1])
+                .input(CIRCUIT_GOOD_IV,8)
+                .input(circuit, MarkerMaterials.Tier.UV, 16)
+                .input(circuit, MarkerMaterials.Tier.ZPM, 32)
+                .input(frameGt, Neutronium, 4)
+                .input(plate, Dubnium, 16)
+                .input(ELECTRIC_MOTOR_UV, 16)
+                .input(SENSOR_UV, 16)
+                .input(FIELD_GENERATOR_UV, 16)
+                .input(plateDouble, HG1223, 4)
+                .input(plateDouble, Staballoy, 4)
+                .input(gear, MaragingSteel250, 4)
+                .input(gearSmall, Stellite, 16)
+                .input(screw, Dubnium, 36)
+                .fluidInputs(AdvancedLubricant.getFluid(4000))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 16))
+                .fluidInputs(NaquadahAlloy.getFluid(L * 16))
+                .fluidInputs(MetastableOganesson.getFluid(80000))
+                .output(GTQTMetaTileEntities.VOID_MINER[2])
+                .EUt(VA[UV])
+                .duration(5 * MINUTE)
+                .stationResearch(b -> b
+                        .researchStack(DISK_9.getStackForm())
+                        .EUt(VA[ZPM])
+                        .CWUt(CWT[ZPM]))
+                .buildAndRegister();
     }
 
     public static void KQ_NET(int kind, int tier, int number, MetaItem<?>.MetaValueItem item, OrePrefix prefix, Material material) {

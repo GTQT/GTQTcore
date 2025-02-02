@@ -2,6 +2,8 @@ package keqing.gtqtcore;
 
 import gregtech.common.ConfigHolder;
 import keqing.gtqtcore.api.GTQTAPI;
+import keqing.gtqtcore.api.io.advancement.IAdvancementManager;
+import keqing.gtqtcore.api.module.IModuleManager;
 import keqing.gtqtcore.api.utils.GTQTLog;
 import keqing.gtqtcore.client.ClientProxy;
 import keqing.gtqtcore.common.CommonProxy;
@@ -10,6 +12,8 @@ import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.items.GTQTMetaItems;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 import keqing.gtqtcore.common.worldgen.WorldGenAbandonedBase;
+import keqing.gtqtcore.core.advancement.AdvancementManager;
+import keqing.gtqtcore.core.advancement.AdvancementTriggers;
 import keqing.gtqtcore.integration.GTQTIntegration;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.fml.common.Mod;
@@ -42,9 +46,18 @@ public class GTQTCore {
     )
     public static CommonProxy proxy;
     public static ClientProxy cproxy;
+
+    // Will be available at the Construction stage.
+    public static IModuleManager moduleManager;
+    // Will be available at the Pre-Initialization stage.
+    public static IAdvancementManager advancementManager;
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
+        // Loading Advancement Manager and Advancement Triggers.
+        advancementManager = AdvancementManager.getInstance();
+        AdvancementTriggers.register();
+
         ConfigHolder.machines.highTierContent = true;
         ConfigHolder.machines.enableHighTierSolars = true;
         GTQTLog.init(event.getModLog());

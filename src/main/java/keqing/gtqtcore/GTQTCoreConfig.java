@@ -98,40 +98,6 @@ public class GTQTCoreConfig {
         @Config.Name("Core Machine NBT Store Switch")
         public boolean CoreMachineNBTStoreSwitch = false;
 
-        @Config.Comment({"Enabled Void Miner 1-3 which is the Multiblock Structure machine for LuV-UV.",
-                "Void Miner (VM) can produce huge ores but only needs Drilling Mud and some liquids,",
-                "Related option \"maxTemperatureVM1\" to \"maxTemperatureVM3\" controlled max temperature of VMs,",
-                "\"hasOreVariants\" allowed to add several ore has same Ore Dictionary to produces like Certus Quartz,",
-                "\"oreBlacklistVM\" is the universal blacklist of VM produces,",
-                "and \"oreBlacklistVM1\" to \"oreBlacklistVM3\" is the blacklist for VM1-3 produces.",
-                "Hint: DO NOT modify these produce list if you not understant how to use it!",
-                "Default: true"})
-        @Config.Name("Void Miner")
-        @Config.RequiresMcRestart
-        public boolean enableVoidMiner = true;
-
-        @Config.Name("Void Miner I Max Temperature")
-        @Config.RangeInt(min = 1000)
-        @Config.RequiresWorldRestart
-        public int maxTemperatureVM1 = 9000;
-
-        @Config.Name("Void Miner II Max Temperature")
-        @Config.RangeInt(min = 1000)
-        @Config.RequiresWorldRestart
-        public int maxTemperatureVM2 = 16000;
-
-        @Config.Name("Void Miner III Max Temperature")
-        @Config.RangeInt(min = 1000)
-        @Config.RequiresWorldRestart
-        public int maxTemperatureVM3 = 40000;
-
-        @Config.Comment({"将所有矿石的矿石变种启用到 VM 的产品中（例如，Certus Quartz）。",
-                "如果禁用此选项，则只会添加每种材料的第一个矿石。",
-                "Default: true"})
-        @Config.Name("Void Miner Ore Variants")
-        @Config.RequiresWorldRestart
-        public boolean hasOreVariantsVM = true;
-
         @Config.Name("Void Miner Universal Ore Blacklist")
         @Config.RequiresMcRestart
         public String[] oreBlacklistVM = new String[] {

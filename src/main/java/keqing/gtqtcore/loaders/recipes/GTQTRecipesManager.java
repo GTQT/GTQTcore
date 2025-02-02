@@ -112,6 +112,8 @@ public class GTQTRecipesManager {
         KaptonChain.init();
         PowerSupply.init();
         AmmoniaChain.init();
+        AdvancedLubricantChain.register();
+        DrillingMudChain.register();
         BrineChain.init();
         MethylamineChain.init();
         KevlarChain.init();

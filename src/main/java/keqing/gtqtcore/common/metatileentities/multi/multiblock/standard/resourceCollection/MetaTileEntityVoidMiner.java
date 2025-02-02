@@ -202,7 +202,7 @@ public class MetaTileEntityVoidMiner extends MultiblockWithDisplayBase implement
                         );
                         tl.add(TextComponentUtil.translationWithColor(
                                 TextFormatting.GRAY,
-                                "gtlitecore.machine.void_miner.max_energy_per_tick",
+                                "gtqtcore.machine.void_miner.max_energy_per_tick",
                                 energyUsedInfo,
                                 GTValues.VNF[GTUtility.getFloorTierByVoltage(this.energyConsumed)]
                         ));
@@ -216,7 +216,7 @@ public class MetaTileEntityVoidMiner extends MultiblockWithDisplayBase implement
                         );
                         tl.add(TextComponentUtil.translationWithColor(
                                 TextFormatting.GRAY,
-                                "gtlitecore.machine.void_miner.temperature",
+                                "gtqtcore.machine.void_miner.temperature",
                                 temperatureInfo,
                                 maxTemperatureInfo
                         ));
@@ -226,7 +226,7 @@ public class MetaTileEntityVoidMiner extends MultiblockWithDisplayBase implement
                         );
                         tl.add(TextComponentUtil.translationWithColor(
                                 TextFormatting.GRAY,
-                                "gtlitecore.machine.void_miner.drilling_mud_amount",
+                                "gtqtcore.machine.void_miner.drilling_mud_amount",
                                 drillingMudInfo
                         ));
                     }
@@ -248,13 +248,13 @@ public class MetaTileEntityVoidMiner extends MultiblockWithDisplayBase implement
                         if (this.logic.isFluidOutputInventoryFull()) {
                             tl.add(TextComponentUtil.translationWithColor(
                                     TextFormatting.YELLOW,
-                                    "gtlitecore.machine.void_miner.fluid_output_full"
+                                    "gtqtcore.machine.void_miner.fluid_output_full"
                             ));
                         }
                         if (this.logic.isOverheatStatus()) {
                             tl.add(TextComponentUtil.translationWithColor(
                                     TextFormatting.RED,
-                                    "gtlitecore.machine.void_miner.overheat_status"
+                                    "gtqtcore.machine.void_miner.overheat_status"
                             ));
                         }
                     }
@@ -299,18 +299,18 @@ public class MetaTileEntityVoidMiner extends MultiblockWithDisplayBase implement
         // int d = (int) (this.logic.getConsumeMultiplier());
         // int s = (int) (d - Math.floor(this.logic.getConsumeMultiplier())) * 100;
         // int f = (int) (100 * (1.0 - 1.0 / d));
-        tooltip.add(I18n.format("gtlitecore.machine.void_miner.tooltip.1"));
-        tooltip.add(I18n.format("gtlitecore.machine.void_miner.tooltip.2", GTValues.V[this.tier], GTValues.VNF[this.tier]));
-        tooltip.add(I18n.format("gtlitecore.machine.void_miner.tooltip.3", this.maxTemperature));
-        tooltip.add(I18n.format("gtlitecore.machine.void_miner.tooltip.4"));
-        tooltip.add(I18n.format("gtlitecore.machine.void_miner.tooltip.5"));
-        // tooltip.add(I18n.format("gtlitecore.machine.void_miner.tooltip.6", s, d, f));
-        tooltip.add(I18n.format("gtlitecore.machine.void_miner.tooltip.6"));
-        tooltip.add(I18n.format("gtlitecore.machine.void_miner.tooltip.7"));
-        tooltip.add(I18n.format("gtlitecore.machine.void_miner.tooltip.8"));
-        tooltip.add(I18n.format("gtlitecore.machine.void_miner.tooltip.9"));
-        tooltip.add(I18n.format("gtlitecore.machine.void_miner.tooltip.10"));
-        tooltip.add(I18n.format("gtlitecore.machine.void_miner.tooltip.11"));
+        tooltip.add(I18n.format("gtqtcore.machine.void_miner.tooltip.1"));
+        tooltip.add(I18n.format("gtqtcore.machine.void_miner.tooltip.2", GTValues.V[this.tier], GTValues.VNF[this.tier]));
+        tooltip.add(I18n.format("gtqtcore.machine.void_miner.tooltip.3", this.maxTemperature));
+        tooltip.add(I18n.format("gtqtcore.machine.void_miner.tooltip.4"));
+        tooltip.add(I18n.format("gtqtcore.machine.void_miner.tooltip.5"));
+        // tooltip.add(I18n.format("gtqtcore.machine.void_miner.tooltip.6", s, d, f));
+        tooltip.add(I18n.format("gtqtcore.machine.void_miner.tooltip.6"));
+        tooltip.add(I18n.format("gtqtcore.machine.void_miner.tooltip.7"));
+        tooltip.add(I18n.format("gtqtcore.machine.void_miner.tooltip.8"));
+        tooltip.add(I18n.format("gtqtcore.machine.void_miner.tooltip.9"));
+        tooltip.add(I18n.format("gtqtcore.machine.void_miner.tooltip.10"));
+        tooltip.add(I18n.format("gtqtcore.machine.void_miner.tooltip.11"));
     }
 
     @Override

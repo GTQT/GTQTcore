@@ -15,8 +15,14 @@ public class VoidMinerRecipeWrapper implements IRecipeWrapper {
     private final int tier;
 
     public VoidMinerRecipeWrapper(List<ItemStack> ores, int tier) {
-        this.groupedInputItemStacks.add(ores);
-        this.groupedOutputItemStacks.add(ores);
+        for (var item : ores)
+        {
+            List<ItemStack> list = new ArrayList<>();
+            list.add(item);
+            this.groupedInputItemStacks.add(list);
+            this.groupedOutputItemStacks.add(list);
+
+        }
         this.tier = tier;
     }
 

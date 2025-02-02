@@ -177,7 +177,7 @@ public class MetaTileEntityLargeOreWasher extends GTQTRecipeMapMultiblockControl
 
         setTier(Math.min(this.casingTier, this.tubeTier));
         setMaxVoltage(Math.min(this.casingTier, this.tubeTier));
-        setTimeReduce((100-Math.min(coilLevel,10)*5.0)/100);
+        setTimeReduce((100 - Math.min(coilLevel, 10) * 5.0) / 100);
 
         this.writeCustomData(GTQTValue.UPDATE_TIER20, buf -> buf.writeInt(this.casingTier));
     }

@@ -14,6 +14,7 @@ import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.BlockTurbineCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.MetaTileEntities;
+import gregtech.common.metatileentities.multi.electric.MetaTileEntityLargeMiner;
 import gregtech.common.metatileentities.multi.electric.generator.MetaTileEntityLargeTurbine;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMachineHatch;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityRotorHolder;
@@ -38,22 +39,25 @@ import keqing.gtqtcore.common.metatileentities.multi.generators.generatorRework.
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.primitive.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.LaserSystem.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.*;
-import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.heatSystem.*;
-import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.multiThreading.*;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.endGame.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.gcys.*;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.giantEquipment.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.heatExchanger.MetaTileEntityHeatExchanger;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.heatExchanger.MetaTileEntityLargeHeatExchanger;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.heatExchanger.MetaTileEntitySmallHeatExchanger;
-import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.giantEquipment.*;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.heatSystem.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.kqcc.*;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.multiThreading.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.overwriteMultiblocks.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.resourceCollection.MetaTileEntityAdvancedFluidDrill;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.resourceCollection.MetaTileEntityAdvancedLargeMiner;
-import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.endGame.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.resourceCollection.MetaTileEntityVoidMiner;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.steam.MetaTileEntitySawMill;
 import keqing.gtqtcore.common.metatileentities.multi.multiblockpart.*;
-import keqing.gtqtcore.common.metatileentities.single.electric.*;
+import keqing.gtqtcore.common.metatileentities.single.electric.MetaTileEntityElectricHeater;
+import keqing.gtqtcore.common.metatileentities.single.electric.MetaTileEntityLatexCollector;
+import keqing.gtqtcore.common.metatileentities.single.electric.MetaTileEntityParticleAcceleratorIO;
+import keqing.gtqtcore.common.metatileentities.single.electric.MetaTileLaserBooster;
 import keqing.gtqtcore.common.metatileentities.single.steam.MetaTileEntitySteamLatexCollector;
 import keqing.gtqtcore.common.metatileentities.storage.MetaTileEntityCommonRubbishBin;
 import keqing.gtqtcore.common.metatileentities.storage.MetaTileEntityFluidRubbishBin;
@@ -312,6 +316,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityLargeForging LARGE_FORGING;
     public static MetaTileEntityPrimitiveRoaster PRIMITIVE_ROASTER;
     public static MetaTileEntityLargeExtractor LARGE_EXTRACTOR;
+    public static MetaTileEntityLargeMixer LARGE_MIXER;
     public static MetaTileEntityNanoCoating NANO_COATING;
     public static MetaTileEntityCryogenicFreezer CRYOGENIC_FREEZER;
     public static MetaTileEntityHeatExchanger HEAT_CHANGER;
@@ -608,8 +613,8 @@ public class GTQTMetaTileEntities {
         NAQUADAH_FUEL_FACTORY = registerMetaTileEntity(3221, new MetaTileEntityNaquadahFuelFactory(gtqtcoreId("naquadah_fuel_factory")));
         PLASMA_CONDENSER = registerMetaTileEntity(3222, new MetaTileEntityPlasmaCondenser(gtqtcoreId("plasma_condenser")));
         HEAT_HATCH_EXCHANGE = registerMetaTileEntity(3223, new MetaTileEntityHeatHatchExchange(gtqtcoreId("heat_hatch_exchange")));
-        LARGE_ELEMENT_DUPLICATOR = registerMetaTileEntity(3224,new MetaTileEntityLargeElementDuplicator(gtqtcoreId("large_element_duplicator")));
-        LARGE_UU_PRODUCTER = registerMetaTileEntity(3225,new MetaTileEntityLargeUUProducter(gtqtcoreId("large_uu_producter")));
+        LARGE_ELEMENT_DUPLICATOR = registerMetaTileEntity(3224, new MetaTileEntityLargeElementDuplicator(gtqtcoreId("large_element_duplicator")));
+        LARGE_UU_PRODUCTER = registerMetaTileEntity(3225, new MetaTileEntityLargeUUProducter(gtqtcoreId("large_uu_producter")));
         //重写设备
         DISTILLATION_TOWER = registerMetaTileEntity(3250, new MetaTileEntityDistillationTower(gtqtcoreId("distillation_tower")));
         CRACKER = registerMetaTileEntity(3251, new MetaTileEntityCrackingUnit(gtqtcoreId("cracker")));
@@ -622,6 +627,7 @@ public class GTQTMetaTileEntities {
         LARGE_GRIND = registerMetaTileEntity(3257, new MetaTileEntityLargeGrind(gtqtcoreId("large_grind")));
         LARGE_FORGING = registerMetaTileEntity(3258, new MetaTileEntityLargeForging(gtqtcoreId("large_forging")));
         LARGE_EXTRACTOR = registerMetaTileEntity(3259, new MetaTileEntityLargeExtractor(gtqtcoreId("large_extractor")));
+        LARGE_MIXER = registerMetaTileEntity(3260, new MetaTileEntityLargeMixer(gtqtcoreId("large_mixer")));
 
         LV_PROCESSING_ARRAY = registerMetaTileEntity(3287, new MetaTileEntityProcessingArray(gtqtcoreId("lv_processing_array"), 1));
         MV_PROCESSING_ARRAY = registerMetaTileEntity(3288, new MetaTileEntityProcessingArray(gtqtcoreId("mv_processing_array"), 2));
@@ -678,12 +684,11 @@ public class GTQTMetaTileEntities {
         ULTIMATE_FLUID_DRILL_RIG = registerMetaTileEntity(3425, new MetaTileEntityAdvancedFluidDrill(gtqtcoreId("fluid_drill_rig.zpm"), 7));
         INFINITY_FLUID_DRILL_RIG = registerMetaTileEntity(3426, new MetaTileEntityAdvancedFluidDrill(gtqtcoreId("fluid_drill_rig.uv"), 8));
 
-        // ID 97-99: Void Miner 1-3
-        if (GTQTCoreConfig.MachineSwitch.enableVoidMiner) {
-            VOID_MINER[0]            = registerMetaTileEntity(16097, new MetaTileEntityVoidMiner(gtqtcoreId("void_miner.luv"), LuV, GTQTCoreConfig.MachineSwitch.maxTemperatureVM1));
-            VOID_MINER[1]            = registerMetaTileEntity(16098, new MetaTileEntityVoidMiner(gtqtcoreId("void_miner.zpm"), ZPM, GTQTCoreConfig.MachineSwitch.maxTemperatureVM2));
-            VOID_MINER[2]            = registerMetaTileEntity(16099, new MetaTileEntityVoidMiner(gtqtcoreId("void_miner.uv"), UV, GTQTCoreConfig.MachineSwitch.maxTemperatureVM3));
-        }
+
+        VOID_MINER[0] = registerMetaTileEntity(16097, new MetaTileEntityVoidMiner(gtqtcoreId("void_miner.luv"), LuV, 9000));
+        VOID_MINER[1] = registerMetaTileEntity(16098, new MetaTileEntityVoidMiner(gtqtcoreId("void_miner.zpm"), ZPM, 16000));
+        VOID_MINER[2] = registerMetaTileEntity(16099, new MetaTileEntityVoidMiner(gtqtcoreId("void_miner.uv"), UV, 40000));
+
         //blocksResearchSystem
         KQCC = registerMetaTileEntity(3450, new MetaTileEntityResearchSystemControlCenter(gtqtcoreId("kqcc")));
         KQNS = registerMetaTileEntity(3451, new MetaTileEntityResearchSystemNetworkSwitch(gtqtcoreId("kqns")));

@@ -9,6 +9,7 @@ import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.info.MaterialFlags.*;
 import static gregtech.api.unification.material.info.MaterialIconSet.*;
 import static gregtech.api.util.GTUtility.gregtechId;
+import static gregtechfoodoption.utils.GTFOUtils.averageRGB;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 
 import keqing.gtqtcore.api.unification.GTQTMaterials;
@@ -337,20 +338,6 @@ public class HigherDegreeMaterials {
                 .dust(1)
                 .color(0xCC94CC)
                 .iconSet(FINE)
-                .build();
-
-        // 25073 Drilling Mud
-        DrillingMud = new Material.Builder(getMaterialsId(), gregtechId("drilling_mud"))
-                .liquid()
-                .color(0x996600)
-                .iconSet(DULL)
-                .build();
-
-        // 25074 Used Drilling Mud
-        UsedDrillingMud = new Material.Builder(getMaterialsId(), gregtechId("used_drilling_mud"))
-                .liquid()
-                .color(0x998833)
-                .iconSet(DULL)
                 .build();
     }
 }

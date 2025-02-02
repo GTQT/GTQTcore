@@ -54,7 +54,7 @@ import static keqing.gtqtcore.api.unification.GTQTMaterials.Pyrotheum;
 public class MetaTileEntityBlazingCZPuller extends RecipeMapMultiblockController implements IHeatingCoil {
     protected static int heatingCoilLevel;
     private int blastFurnaceTemperature;
-    private FluidStack LUBRICANT_STACK;
+    private FluidStack pyrotheumFluid = Pyrotheum.getFluid(heatingCoilLevel);
 
     public MetaTileEntityBlazingCZPuller(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, CZPULLER_RECIPES);
@@ -90,7 +90,6 @@ public class MetaTileEntityBlazingCZPuller extends RecipeMapMultiblockController
             heatingCoilLevel = BlockWireCoil.CoilType.CUPRONICKEL.getLevel();
         }
         this.blastFurnaceTemperature += 100 * Math.max(0, GTUtility.getTierByVoltage(getEnergyContainer().getInputVoltage()) - GTValues.MV);
-        LUBRICANT_STACK = Pyrotheum.getFluid(heatingCoilLevel);
     }
 
     @Override
@@ -157,8 +156,8 @@ public class MetaTileEntityBlazingCZPuller extends RecipeMapMultiblockController
         if (isStructureFormed()) {
             super.addDisplayText(textList);
             if (getInputFluidInventory() != null) {
-                FluidStack LubricantStack = getInputFluidInventory().drain(Pyrotheum.getFluid(Integer.MAX_VALUE), false);
-                int liquidOxygenAmount = LubricantStack == null ? 0 : LubricantStack.amount;
+                FluidStack fluidStack = getInputFluidInventory().drain(Pyrotheum.getFluid(Integer.MAX_VALUE), false);
+                int liquidOxygenAmount = fluidStack == null ? 0 : fluidStack.amount;
                 textList.add(new TextComponentTranslation("gtqtcore.multiblock.vc.amount", TextFormattingUtil.formatNumbers((liquidOxygenAmount))));
             }
             textList.add(new TextComponentTranslation("Temperature : %s", blastFurnaceTemperature));
@@ -206,7 +205,7 @@ public class MetaTileEntityBlazingCZPuller extends RecipeMapMultiblockController
         super.invalidateStructure();
         blastFurnaceTemperature = 0;
         heatingCoilLevel = 0;
-        LUBRICANT_STACK = null;
+        pyrotheumFluid = null;
     }
 
     protected class BlazingBlastFurnaceWorkable extends MultiblockRecipeLogic {
@@ -220,9 +219,9 @@ public class MetaTileEntityBlazingCZPuller extends RecipeMapMultiblockController
 
         protected void updateRecipeProgress() {
             IMultipleTankHandler inputTank = combustionEngine.getInputFluidInventory();
-            if (canRecipeProgress && drawEnergy(recipeEUt, true) && LUBRICANT_STACK.isFluidStackIdentical(inputTank.drain(LUBRICANT_STACK, false))) {
+            if (canRecipeProgress && drawEnergy(recipeEUt, true) && pyrotheumFluid.isFluidStackIdentical(inputTank.drain(pyrotheumFluid, false))) {
                 drawEnergy(recipeEUt, false);
-                LUBRICANT_STACK.isFluidStackIdentical(inputTank.drain(LUBRICANT_STACK, true));
+                pyrotheumFluid.isFluidStackIdentical(inputTank.drain(pyrotheumFluid, true));
                 if (++progressTime > maxProgressTime) {
                     completeRecipe();
                 }

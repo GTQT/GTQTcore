@@ -6,6 +6,8 @@ import keqing.gtqtcore.api.unification.GCYSMaterials;
 import keqing.gtqtcore.api.unification.GTQTMaterials;
 import keqing.gtqtcore.api.unification.OrePrefixAdditions;
 import keqing.gtqtcore.api.unification.TJMaterials;
+import keqing.gtqtcore.api.utils.GTQTLog;
+import keqing.gtqtcore.loaders.recipes.handlers.OreRecipeHandler;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -14,12 +16,14 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.MobEffects;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.common.ISpecialArmor;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
@@ -115,6 +119,10 @@ public class GTQTEventHandler {
             }
         }
     }
-
+    @SubscribeEvent
+    public static void registerRecipeHandlers(RegistryEvent.Register<IRecipe> event) {
+        GTQTLog.logger.info("Registering recipe handlers...");
+        OreRecipeHandler.register();
+    }
 
 }

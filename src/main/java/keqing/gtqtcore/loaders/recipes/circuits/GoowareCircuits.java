@@ -343,7 +343,7 @@ public class GoowareCircuits {
                 .input(BIO_CELL, 2)
                 .input(wireFine, Vibranium, 4)
                 .fluidInputs(SolderingAlloy.getFluid(L * 4))
-                .fluidInputs(Lubricant.getFluid(2000))
+                .fluidInputs(AdvancedLubricant.getFluid(2000))
                 .outputs(INTRAVITAL_SOC.getStackForm(2))
                 .EUt(VA[UHV])
                 .CWUt(CWT[UHV])

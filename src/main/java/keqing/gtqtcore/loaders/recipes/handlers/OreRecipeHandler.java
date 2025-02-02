@@ -25,36 +25,23 @@ public class OreRecipeHandler {
 
 
     public static void generateVMRecipes(OrePrefix prefix, Material material) {
-        if (GTQTCoreConfig.MachineSwitch.enableVoidMiner) {
-            List<String> blacklistUniversal = Arrays.asList(GTQTCoreConfig.MachineSwitch.oreBlacklistVM);
-            List<String> blacklistBasic = Arrays.asList(GTQTCoreConfig.MachineSwitch.oreBlacklistVM1);
-            List<String> blacklistAdvanced = Arrays.asList(GTQTCoreConfig.MachineSwitch.oreBlacklistVM2);
-            List<String> blacklistUltimate = Arrays.asList(GTQTCoreConfig.MachineSwitch.oreBlacklistVM3);
-            if (GTQTCoreConfig.MachineSwitch.hasOreVariantsVM) {
-                if (!blacklistUniversal.contains(material.getName())) {
-                    if (!blacklistBasic.contains(material.getName())) {
-                        oreBasic.addAll(OreDictUnifier.getAll(new UnificationEntry(OrePrefix.ore, material)));
-                    }
-                    if (!blacklistAdvanced.contains(material.getName())) {
-                        oreAdvanced.addAll(OreDictUnifier.getAll(new UnificationEntry(OrePrefix.ore, material)));
-                    }
-                    if (!blacklistUltimate.contains(material.getName())) {
-                        oreUltimate.addAll(OreDictUnifier.getAll(new UnificationEntry(OrePrefix.ore, material)));
-                    }
-                }
-            } else {
-                if (!blacklistUniversal.contains(material.getName())) {
-                    if (!blacklistBasic.contains(material.getName())) {
-                        oreBasic.add(OreDictUnifier.get(new UnificationEntry(OrePrefix.ore, material)));
-                    }
-                    if (!blacklistAdvanced.contains(material.getName())) {
-                        oreAdvanced.add(OreDictUnifier.get(new UnificationEntry(OrePrefix.ore, material)));
-                    }
-                    if (!blacklistUltimate.contains(material.getName())) {
-                        oreUltimate.add(OreDictUnifier.get(new UnificationEntry(OrePrefix.ore, material)));
-                    }
-                }
+
+        List<String> blacklistUniversal = Arrays.asList(GTQTCoreConfig.MachineSwitch.oreBlacklistVM);
+        List<String> blacklistBasic = Arrays.asList(GTQTCoreConfig.MachineSwitch.oreBlacklistVM1);
+        List<String> blacklistAdvanced = Arrays.asList(GTQTCoreConfig.MachineSwitch.oreBlacklistVM2);
+        List<String> blacklistUltimate = Arrays.asList(GTQTCoreConfig.MachineSwitch.oreBlacklistVM3);
+
+        if (!blacklistUniversal.contains(material.getName())) {
+            if (!blacklistBasic.contains(material.getName())) {
+                oreBasic.add(OreDictUnifier.get(new UnificationEntry(OrePrefix.ore, material)));
+            }
+            if (!blacklistAdvanced.contains(material.getName())) {
+                oreAdvanced.add(OreDictUnifier.get(new UnificationEntry(OrePrefix.ore, material)));
+            }
+            if (!blacklistUltimate.contains(material.getName())) {
+                oreUltimate.add(OreDictUnifier.get(new UnificationEntry(OrePrefix.ore, material)));
             }
         }
+
     }
 }

@@ -41,7 +41,7 @@ public class MetaTileEntityLargeForging extends GTQTRecipeMapMultiblockControlle
         //setTier(auto);
         setMaxParallel(64);
         setMaxParallelFlag(true);
-        setMaxVoltage(1);//LV
+        //setMaxVoltage(auto);
         setMaxVoltageFlag(true);
         //setTimeReduce(none);
         setTimeReduceFlag(false);
@@ -136,6 +136,7 @@ public class MetaTileEntityLargeForging extends GTQTRecipeMapMultiblockControlle
                 () -> ((WrappedIntTired) tubeTier).getIntTier(),
                 0);
         setTier(Math.min(this.casingTier, this.tubeTier));
+        setMaxVoltage(Math.min(this.casingTier, this.tubeTier));
 
         this.writeCustomData(GTQTValue.UPDATE_TIER18, buf -> buf.writeInt(this.casingTier));
     }

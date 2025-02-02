@@ -34,11 +34,11 @@ public class FracturingLogic  {
 
     public void performDrilling() {
         IMultipleTankHandler inputTank = metaTileEntity.getInputFluidInventory();
-        FluidStack LUBRICANT_STACK = DrillingFluid.getFluid(metaTileEntity.getThresholdPercentage());
-        if (LUBRICANT_STACK.isFluidStackIdentical(inputTank.drain(LUBRICANT_STACK, false))) {
+        FluidStack drillingFluidFluid = DrillingFluid.getFluid(metaTileEntity.getThresholdPercentage());
+        if (drillingFluidFluid.isFluidStackIdentical(inputTank.drain(drillingFluidFluid, false))) {
             if (!this.metaTileEntity.getWorld().isRemote) {
                 if (this.veinFluid != null || this.acquireNewFluid()) {
-                    inputTank.drain(LUBRICANT_STACK, true);
+                    inputTank.drain(drillingFluidFluid, true);
                     if (this.isWorkingEnabled) {
                         if (this.checkCanDrain()) {
                             if (!this.isInventoryFull) {

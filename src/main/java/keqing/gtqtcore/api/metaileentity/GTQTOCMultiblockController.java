@@ -3,6 +3,7 @@ package keqing.gtqtcore.api.metaileentity;
 import gregtech.api.capability.GregtechTileCapabilities;
 import gregtech.api.capability.IControllable;
 import gregtech.api.capability.IDistinctBusController;
+import gregtech.api.capability.IOpticalComputationReceiver;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.ModularUI;
@@ -14,6 +15,7 @@ import gregtech.api.metatileentity.multiblock.MultiblockWithDisplayBase;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.client.utils.TooltipHelper;
+import keqing.gtqtcore.api.capability.impl.ComputationRecipeLogic;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -32,7 +34,7 @@ import java.util.function.BooleanSupplier;
 import static gregtech.api.GTValues.V;
 import static gregtech.api.GTValues.VA;
 
-public abstract class GTQTRecipeMapMultiblockController extends MultiMapMultiblockController {
+public abstract class GTQTOCMultiblockController extends MultiMapMultiblockController implements IOpticalComputationReceiver {
 
     protected boolean setTier;
     protected int tier;
@@ -50,9 +52,9 @@ public abstract class GTQTRecipeMapMultiblockController extends MultiMapMultiblo
     protected int limitAutoParallel;
     protected int energyHatchMaxWork = 32;
 
-    public GTQTRecipeMapMultiblockController(ResourceLocation metaTileEntityId, RecipeMap<?>[] recipeMaps) {
+    public GTQTOCMultiblockController(ResourceLocation metaTileEntityId, RecipeMap<?>[] recipeMaps) {
         super(metaTileEntityId, recipeMaps);
-        this.recipeMapWorkable = new GTQTMultiblockLogic(this);
+        this.recipeMapWorkable = new GTQTOCMultiblockLogic(this);
     }
 
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
@@ -166,7 +168,7 @@ public abstract class GTQTRecipeMapMultiblockController extends MultiMapMultiblo
                 .setShouldClientCallback(false));
 
         builder.widget(
-                new SliderWidget("自动并行上限: %d", 200, 100, 80, 20, 1, maxParallel, limitAutoParallel,
+                new SliderWidget("自动并行上限", 200, 100, 80, 20, 1, maxParallel, limitAutoParallel,
                         this::setLimitAutoParallel).setBackground(SCGuiTextures.DARK_SLIDER_BACKGROUND)
                         .setSliderIcon(SCGuiTextures.DARK_SLIDER_ICON));
 
@@ -255,9 +257,10 @@ public abstract class GTQTRecipeMapMultiblockController extends MultiMapMultiblo
                 .addCustom(tl -> textList.add(new TextComponentTranslation("%s", OCFirst ? "超频优先模式" : "并行优先模式")));
     }
 
-    protected class GTQTMultiblockLogic extends MultiblockRecipeLogic {
-        public GTQTMultiblockLogic(RecipeMapMultiblockController tileEntity) {
-            super(tileEntity, true);
+    protected class GTQTOCMultiblockLogic extends ComputationRecipeLogic {
+        public GTQTOCMultiblockLogic(RecipeMapMultiblockController tileEntity) {
+            super(tileEntity, ComputationType.SPORADIC);
+            this.hasPerfectOC=true;
         }
 
         @Override

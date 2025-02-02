@@ -5,6 +5,7 @@ import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import keqing.gtqtcore.api.blocks.IBlockTier;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.metaileentity.multiblock.ICellData;
+import keqing.gtqtcore.api.module.IModuleManager;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.*;
 import keqing.gtqtcore.common.block.blocks.BlockMultiblockGlass1;

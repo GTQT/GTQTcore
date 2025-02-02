@@ -32,13 +32,13 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-public class MetaTileEntityLargeExtractor extends GTQTRecipeMapMultiblockController {
+public class MetaTileEntityLargeMixer extends GTQTRecipeMapMultiblockController {
     private int casingTier;
     private int tubeTier;
 
-    public MetaTileEntityLargeExtractor(ResourceLocation metaTileEntityId) {
+    public MetaTileEntityLargeMixer(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{
-                RecipeMaps.EXTRACTOR_RECIPES
+                RecipeMaps.MIXER_RECIPES
         });
         setTierFlag(true);
         //setTier(auto);
@@ -52,7 +52,7 @@ public class MetaTileEntityLargeExtractor extends GTQTRecipeMapMultiblockControl
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
-        return new MetaTileEntityLargeExtractor(metaTileEntityId);
+        return new MetaTileEntityLargeMixer(metaTileEntityId);
     }
 
     @Override
@@ -67,10 +67,11 @@ public class MetaTileEntityLargeExtractor extends GTQTRecipeMapMultiblockControl
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
-                .aisle("FXF", "XXX", "FXF")
-                .aisle("XXX", "XPX", "XXX")
-                .aisle("XXX", "XPX", "XXX")
-                .aisle("FXF", "XSX", "FXF")
+                .aisle(" XXX ", "FXXXF", " XXX ")
+                .aisle("XXPXX", "XXFXX", "XXPXX")
+                .aisle("XPPPX", "XFFFX", "XPPPX")
+                .aisle("XXPXX", "XXFXX", "XXPXX")
+                .aisle(" XXX ", "FXSXF", " XXX ")
                 .where('S', selfPredicate())
                 .where('X', TiredTraceabilityPredicate.CP_CASING.get().setMinGlobalLimited(18)
                         .or(abilities(MultiblockAbility.MAINTENANCE_HATCH).setExactLimit(1))
@@ -148,7 +149,7 @@ public class MetaTileEntityLargeExtractor extends GTQTRecipeMapMultiblockControl
         setTier(Math.min(this.casingTier, this.tubeTier));
         setMaxVoltage(Math.min(this.casingTier, this.tubeTier));
 
-        this.writeCustomData(GTQTValue.UPDATE_TIER28, buf -> buf.writeInt(this.casingTier));
+        this.writeCustomData(GTQTValue.UPDATE_TIER25, buf -> buf.writeInt(this.casingTier));
     }
 
     @Override
@@ -166,11 +167,11 @@ public class MetaTileEntityLargeExtractor extends GTQTRecipeMapMultiblockControl
     @Override
     public void receiveCustomData(int dataId, PacketBuffer buf) {
         super.receiveCustomData(dataId, buf);
-        if (dataId == GTQTValue.UPDATE_TIER28) {
+        if (dataId == GTQTValue.UPDATE_TIER25) {
             this.casingTier = buf.readInt();
         }
-        if (dataId == GTQTValue.REQUIRE_DATA_UPDATE28) {
-            this.writeCustomData(GTQTValue.UPDATE_TIER28, buf1 -> buf1.writeInt(this.casingTier));
+        if (dataId == GTQTValue.REQUIRE_DATA_UPDATE25) {
+            this.writeCustomData(GTQTValue.UPDATE_TIER25, buf1 -> buf1.writeInt(this.casingTier));
         }
     }
 

@@ -17,18 +17,16 @@ import static keqing.gtqtcore.GTQTCore.MODID;
 
 public class VoidMinerRecipeCategory extends BasicRecipeCategory<VoidMinerRecipeWrapper, VoidMinerRecipeWrapper> {
 
-    protected final IDrawable slot;
-    private static final int SLOT_CENTER = 79;
-    private static final int NUM_OF_SLOTS = 20;
     private static final int SLOT_WIDTH = 18;
     private static final int SLOT_HEIGHT = 18;
+    protected final IDrawable slot;
     protected int outputCount;
     protected int tier;
 
     public VoidMinerRecipeCategory(IGuiHelper guiHelper) {
         super("void_miner",
                 "recipemap.void_miner.name",
-                guiHelper.createBlankDrawable(176,166),
+                guiHelper.createBlankDrawable(176+18*6+4, 166+18*3+9),
                 guiHelper);
 
         this.slot = guiHelper.drawableBuilder(GuiTextures.SLOT.imageLocation,
@@ -42,13 +40,17 @@ public class VoidMinerRecipeCategory extends BasicRecipeCategory<VoidMinerRecipe
                           VoidMinerRecipeWrapper recipeWrapper,
                           IIngredients ingredients) {
         IGuiItemStackGroup itemStackGroup = recipeLayout.getItemStacks();
-        int baseYPos = 19;
-        itemStackGroup.init(0, true, SLOT_CENTER, baseYPos);
+        for (int i = 0; i < recipeWrapper.getOutputCount(); ++i) {
+            int xPos = 18 * (i % 16);
+            itemStackGroup.init(i, true, xPos, 10 + i / 16 * 18);
+        }
+
         itemStackGroup.set(ingredients);
         this.outputCount = recipeWrapper.getOutputCount();
         this.tier = recipeWrapper.getTier();
 
     }
+
     @Override
     public IRecipeWrapper getRecipeWrapper(VoidMinerRecipeWrapper recipeWrapper) {
         return recipeWrapper;
@@ -57,10 +59,8 @@ public class VoidMinerRecipeCategory extends BasicRecipeCategory<VoidMinerRecipe
     @Override
     public void drawExtras(Minecraft minecraft) {
         GTStringUtils.drawCenteredStringWithCutoff(getNameByTier(this.tier), minecraft.fontRenderer, 176);
-        int baseYPos = 19;
-        this.slot.draw(minecraft, SLOT_CENTER, baseYPos);
-
     }
+
 
     @Override
     public String getModName() {
@@ -69,11 +69,11 @@ public class VoidMinerRecipeCategory extends BasicRecipeCategory<VoidMinerRecipe
 
     private String getNameByTier(int tier) {
         if (tier == 0) {
-            return I18n.format("gtlitecore.universal.recipe_vm_tier.1");
+            return I18n.format("gtqtcore.universal.recipe_vm_tier.1");
         } else if (tier == 1) {
-            return I18n.format("gtlitecore.universal.recipe_vm_tier.2");
+            return I18n.format("gtqtcore.universal.recipe_vm_tier.2");
         } else if (tier == 2) {
-            return I18n.format("gtlitecore.universal.recipe_vm_tier.3");
+            return I18n.format("gtqtcore.universal.recipe_vm_tier.3");
         } else {
             return null;
         }

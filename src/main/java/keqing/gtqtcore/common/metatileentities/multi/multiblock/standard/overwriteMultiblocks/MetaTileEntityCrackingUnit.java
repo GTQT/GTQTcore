@@ -1,18 +1,15 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.overwriteMultiblocks;
 
 import gregtech.api.block.IHeatingCoilBlockStats;
-import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockDisplayText;
-import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
-import gregtech.api.recipes.recipeproperties.IRecipePropertyStorage;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.TextComponentUtil;
 import gregtech.client.renderer.ICubeRenderer;
@@ -20,7 +17,6 @@ import gregtech.client.renderer.texture.Textures;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.core.sound.GTSoundEvents;
-
 import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.metaileentity.GTQTRecipeMapMultiblockController;
@@ -28,26 +24,21 @@ import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 import java.util.List;
-
-import static gregtech.api.GTValues.V;
 
 public class MetaTileEntityCrackingUnit extends GTQTRecipeMapMultiblockController {
 
     private int coilTier;
     private int casingTier;
+
     public MetaTileEntityCrackingUnit(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{
                 RecipeMaps.CRACKING_RECIPES
@@ -61,13 +52,17 @@ public class MetaTileEntityCrackingUnit extends GTQTRecipeMapMultiblockControlle
         //setTimeReduce(coilLevel);
         setTimeReduceFlag(true);
     }
+
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityCrackingUnit(metaTileEntityId);
     }
 
     @Override
-    public boolean canBeDistinct() {return true;}
+    public boolean canBeDistinct() {
+        return true;
+    }
+
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
@@ -80,6 +75,7 @@ public class MetaTileEntityCrackingUnit extends GTQTRecipeMapMultiblockControlle
                 .where('C', heatingCoils())
                 .build();
     }
+
     @SideOnly(Side.CLIENT)
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
         switch (this.casingTier) {
@@ -115,19 +111,22 @@ public class MetaTileEntityCrackingUnit extends GTQTRecipeMapMultiblockControlle
             }
         }
     }
+
     @Override
     public void receiveCustomData(int dataId, PacketBuffer buf) {
         super.receiveCustomData(dataId, buf);
-        if(dataId == GTQTValue.UPDATE_TIER15){
+        if (dataId == GTQTValue.UPDATE_TIER15) {
             this.casingTier = buf.readInt();
         }
-        if(dataId == GTQTValue.REQUIRE_DATA_UPDATE15){
-            this.writeCustomData(GTQTValue.UPDATE_TIER15,buf1 -> buf1.writeInt(this.casingTier));
+        if (dataId == GTQTValue.REQUIRE_DATA_UPDATE15) {
+            this.writeCustomData(GTQTValue.UPDATE_TIER15, buf1 -> buf1.writeInt(this.casingTier));
         }
     }
+
     public boolean hasMufflerMechanics() {
         return false;
     }
+
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
@@ -139,14 +138,14 @@ public class MetaTileEntityCrackingUnit extends GTQTRecipeMapMultiblockControlle
             this.coilTier = 0;
         }
         this.casingTier = GTQTUtil.getOrDefault(() -> casingTier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)casingTier).getIntTier(),
+                () -> ((WrappedIntTired) casingTier).getIntTier(),
                 0);
 
         setTier(this.casingTier);
         setMaxVoltage(this.casingTier);
-        setTimeReduce((100-Math.min(coilTier,10)*5.0)/100);
+        setTimeReduce((100 - Math.min(coilTier, 10) * 5.0) / 100);
 
-        this.writeCustomData(GTQTValue.UPDATE_TIER15,buf -> buf.writeInt(this.casingTier));
+        this.writeCustomData(GTQTValue.UPDATE_TIER15, buf -> buf.writeInt(this.casingTier));
     }
 
 
@@ -201,6 +200,7 @@ public class MetaTileEntityCrackingUnit extends GTQTRecipeMapMultiblockControlle
         super.invalidateStructure();
         this.coilTier = 0;
     }
+
     @Override
     public void writeInitialSyncData(PacketBuffer buf) {
         super.writeInitialSyncData(buf);
