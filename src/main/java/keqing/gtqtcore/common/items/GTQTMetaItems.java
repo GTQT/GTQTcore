@@ -246,6 +246,12 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem COSMIC_TRANSISTOR;
     public static MetaItem<?>.MetaValueItem COSMIC_INDUCTOR;
 
+    public static MetaItem<?>.MetaValueItem WOODEN_BUCKET;
+    public static MetaItem<?>.MetaValueItem FLUID_CELL_CHROME;
+    public static MetaItem<?>.MetaValueItem FLUID_CELL_IRIDIUM;
+    public static MetaItem<?>.MetaValueItem FLUID_CELL_NAQUADAH_ALLOY;
+    public static MetaItem<?>.MetaValueItem FLUID_CELL_NEUTRONIUM;
+
     public static MetaItem<?>.MetaValueItem SCRAP;
     public static MetaItem<?>.MetaValueItem CD_ROM;
     public static MetaItem<?>.MetaValueItem UU_MATER;

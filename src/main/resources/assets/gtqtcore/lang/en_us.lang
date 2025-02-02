@@ -3140,12 +3140,14 @@ gregtech.multiblock.hand.throttle_increment=§aSwitch to Automatic Parallelism
 gtqtcore.parr=Actual Parallelism: %s/%s
 gtqtcore.vtire=Supported Recipe Maximum Voltage: %s V
 gtqtcore.tubeTire=Pipe Grade: %s
+gtqtcore.voltageTier=机器方块等级：%s
 gtqtcore.casingTire=Shell Grade: %s
 gtqtcore.coilTire=Coil Grade: %s
 gtqtcore.machine.network_switch.tooltip.1=Computational load limit depends on multiblock level (if it doesn't work, upgrading is the right thing to do)
 gtqtcore.eleTire=Shell Grade: %s Electrolyzer Grade: %s Maximum Recipe Voltage: %s
 gtqtcore.eleTire1=Self-Cleaning Grade: %s RF Grade: %s Wavelength: %s
 gtqtcore.eleTire2=Multiblock Level: %s RF Grade: %s Glass Grade: %s
+gtqtcore.eleTire4=自净等级：%s 射频等级：%s
 gregtech.multiblock.ele.1=Energy Consumption Reduction: %s Current Efficiency: %s Electrode Cleanliness: %s
 gregtech.machine.kqcc.export.tooltip=§cComputing power output, sends computing power to optical cables
 gregtech.machine.kqcc.import.tooltip=§aComputing power input, requests computing power from optical cables
@@ -3953,6 +3955,11 @@ metaitem.heat_shield_mkiii.name=散热鳍片III
 metaitem.heat_shield_mkiv.name=散热鳍片IV
 metaitem.heat_shield_mkv.name=散热鳍片V
 
+metaitem.wooden_bucket.name=木桶
+metaitem.large_fluid_cell.chrome.name=%s铬单元
+metaitem.large_fluid_cell.iridium.name=%s铱单元
+metaitem.large_fluid_cell.naquadah_alloy.name=%s硅岩合金单元
+metaitem.large_fluid_cell.neutronium.name=%s中子素单元
 
 metaitem.sterilized.petri.dish.name=Sterilized Petri Dish
 metaitem.contaminated.petri.dish.name=Contaminated Petri Dish
@@ -4009,6 +4016,8 @@ gregtech.material.uev_superconductor=UEV Superconductor
 gregtech.material.uiv_superconductor=UIV Superconductor
 gregtech.material.uxv_superconductor=UXV Superconductor
 gregtech.material.opv_superconductor=OpV Superconductor
+gregtech.material.purpur=紫珀
+gregtech.material.prismarine=海晶石
 
 gregtech.machine.network_switch.tooltip.5=Maximum computational flux: 1024 CWU/t
 metaitem.pos_ore_card.name=Geological Storage Module

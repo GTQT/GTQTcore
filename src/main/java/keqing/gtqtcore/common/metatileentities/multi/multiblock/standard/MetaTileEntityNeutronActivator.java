@@ -161,7 +161,7 @@ public class MetaTileEntityNeutronActivator extends RecipeMapMultiblockControlle
     @Nonnull
     @Override
     protected ICubeRenderer getFrontOverlay() {
-        return GTQTTextures.BURNER_REACTOR_OVERLAY;
+        return GTQTTextures.LARGE_BURNER_REACTOR_OVERLAY;
     }
 
     public boolean hasMufflerMechanics() {

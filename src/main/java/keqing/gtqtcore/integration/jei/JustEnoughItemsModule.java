@@ -6,6 +6,7 @@ import gregtech.common.metatileentities.MetaTileEntities;
 import gregtech.integration.IntegrationSubmodule;
 import keqing.gtqtcore.api.utils.GTQTCPUHelper;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
+import keqing.gtqtcore.loaders.recipes.handlers.OreRecipeHandler;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
@@ -32,6 +33,7 @@ public class JustEnoughItemsModule extends IntegrationSubmodule implements IModP
         registry.addRecipeCategories(new PhotolithographyFactoryJeiCategory(registry.getJeiHelpers().getGuiHelper()));
         registry.addRecipeCategories(new CircuitJeiCategory(registry.getJeiHelpers().getGuiHelper()));
         registry.addRecipeCategories(new AlgaeJeiCategory(registry.getJeiHelpers().getGuiHelper()));
+        registry.addRecipeCategories(new VoidMinerRecipeCategory(guiHelper));
     }
     @Override
     public void register(IModRegistry registry) {
@@ -85,6 +87,22 @@ public class JustEnoughItemsModule extends IntegrationSubmodule implements IModP
         String oreByProductId = "gregtech:ore_by_product";
         registry.addRecipeCatalyst(GTQTMetaTileEntities.INTEGRATED_ORE_PROCESSOR.getStackForm(), oreByProductId);
         registry.addRecipeCatalyst(GTQTMetaTileEntities.INTEGRATED_MINING_DIVISION.getStackForm(), oreByProductId);
+
+        /* ----------------------------- Void Miners ----------------------------- */
+        String voidMinerID = MODID + ":" + "void_miner";
+        List<VoidMinerRecipeWrapper> voidMinerRecipeWrapper1 = new ArrayList<>();
+        List<VoidMinerRecipeWrapper> voidMinerRecipeWrapper2 = new ArrayList<>();
+        List<VoidMinerRecipeWrapper> voidMinerRecipeWrapper3 = new ArrayList<>();
+
+        voidMinerRecipeWrapper1.add(new VoidMinerRecipeWrapper(OreRecipeHandler.oreBasic, 0));
+        voidMinerRecipeWrapper2.add(new VoidMinerRecipeWrapper(OreRecipeHandler.oreAdvanced, 1));
+        voidMinerRecipeWrapper3.add(new VoidMinerRecipeWrapper(OreRecipeHandler.oreUltimate, 2));
+        registry.addRecipes(voidMinerRecipeWrapper1, voidMinerID);
+        registry.addRecipes(voidMinerRecipeWrapper2, voidMinerID);
+        registry.addRecipes(voidMinerRecipeWrapper3, voidMinerID);
+        registry.addRecipeCatalyst(GTQTMetaTileEntities.VOID_MINER[0].getStackForm(), voidMinerID);
+        registry.addRecipeCatalyst(GTQTMetaTileEntities.VOID_MINER[1].getStackForm(), voidMinerID);
+        registry.addRecipeCatalyst(GTQTMetaTileEntities.VOID_MINER[2].getStackForm(), voidMinerID);
 
         registry.addIngredientInfo( ALPHA.getStackForm(), VanillaTypes.ITEM, "metaitem.alpha.jei_description");
         registry.addIngredientInfo( ANTIALPHA.getStackForm(), VanillaTypes.ITEM, "metaitem.antialpha.jei_description");

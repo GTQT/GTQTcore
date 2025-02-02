@@ -33,6 +33,8 @@ public class GTQTRecipesManager {
     public static void load() {
     }
     public static void init() {
+        FakeToolRecipes.register();
+        VanillaRecipes.register();
         DeltamethrinChain.init();
         RubbersChain.init();
         PlasticChain.init();

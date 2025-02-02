@@ -44,6 +44,16 @@ public class GTQTTextures {
     public static OrientedOverlayRenderer UUPRODUCTER_OVERLAY = new OrientedOverlayRenderer("machines/uu_producter");
     public static OrientedOverlayRenderer LARGE_UU_PRODUCTER = new OrientedOverlayRenderer("multiblock/large_uu_producter");
     public static SimpleOverlayRenderer MASS_GENERATION_CASING = new SimpleOverlayRenderer("multiblock/casings/mass_generation_casing");
+
+    public static final SimpleOverlayRenderer RHODIUM_PLATED_PALLADIUM_CASING
+            = new SimpleOverlayRenderer("multiblock/casing/rhodium_plated_palladium");
+
+    public static final SimpleOverlayRenderer OSMIRIDIUM_CASING
+            = new SimpleOverlayRenderer("multiblock/casing/osmiridium");
+
+    public static final SimpleOverlayRenderer NEUTRONIUM_CASING
+            = new SimpleOverlayRenderer("multiblock/casing/neutronium");
+
     public static SimpleOverlayRenderer BASIC_PHOTOLITHOGRAPHIC_FRAMEWORK_CASING = new SimpleOverlayRenderer("multiblock/casing/basic_photolithographic_framework_casing");
     public static OverlayRenderer MULTIPART_BUFFER_HATCH = new OverlayRenderer("multipart/overlay_buffer_hatch");
     public static OrientedOverlayRenderer ROCKET_ENGINE_OVERLAY = new OrientedOverlayRenderer("machines/rocket_engine");
@@ -177,6 +187,7 @@ public class GTQTTextures {
     public static OrientedOverlayRenderer SONICATOR_OVERLAY = new OrientedOverlayRenderer("overlay/sonicator");
     public static OrientedOverlayRenderer ISA_MILL_OVERLAY = new OrientedOverlayRenderer("overlay/isa_mill");
     public static OrientedOverlayRenderer BURNER_REACTOR_OVERLAY = new OrientedOverlayRenderer("overlay/burner_reactor");
+    public static OrientedOverlayRenderer LARGE_BURNER_REACTOR_OVERLAY = new OrientedOverlayRenderer("overlay/large_burner_reactor");
     public static OrientedOverlayRenderer CRYOGENIC_REACTOR_OVERLAY = new OrientedOverlayRenderer("overlay/cryogenic_reactor");
     public static OrientedOverlayRenderer VACUUM_DRYING_FURNACE_OVERLAY = new OrientedOverlayRenderer("overlay/vacuum_drying_furnace");
     public static OrientedOverlayRenderer CHEMICAL_PLANT_OVERLAY = new OrientedOverlayRenderer("overlay/ep_chemical_plant");

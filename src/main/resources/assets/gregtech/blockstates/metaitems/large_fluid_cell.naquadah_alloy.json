@@ -1,0 +1,13 @@
+{
+  "forge_marker": 1,
+  "variants": {
+    "inventory": {
+      "model": "forge:forgebucket",
+      "textures": {
+        "base": "gtqtcore:items/metaitems/large_fluid_cell.naquadah_alloy/base",
+        "fluid": "gtqtcore:items/metaitems/large_fluid_cell.naquadah_alloy/overlay"
+      },
+      "transform": "forge:default-item"
+    }
+  }
+}

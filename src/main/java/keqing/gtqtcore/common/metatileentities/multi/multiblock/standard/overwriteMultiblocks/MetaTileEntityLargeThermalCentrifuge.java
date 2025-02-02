@@ -166,7 +166,7 @@ public class MetaTileEntityLargeThermalCentrifuge extends GTQTRecipeMapMultibloc
 
         setTier(Math.min(this.casingTier, this.tubeTier));
         setMaxVoltage(Math.min(this.casingTier, this.tubeTier));
-        setTimeReduce(coilLevel);
+        setTimeReduce((100-Math.min(coilLevel,10)*5.0)/100);
 
         this.writeCustomData(GTQTValue.UPDATE_TIER21,buf -> buf.writeInt(this.casingTier));
     }

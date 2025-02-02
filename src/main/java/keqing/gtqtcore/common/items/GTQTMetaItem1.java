@@ -3,8 +3,11 @@ package keqing.gtqtcore.common.items;
 import gregtech.api.GTValues;
 import gregtech.api.GregTechAPI;
 import gregtech.api.items.metaitem.ElectricStats;
+import gregtech.api.items.metaitem.FilteredFluidStats;
 import gregtech.api.items.metaitem.StandardMetaItem;
+import gregtech.api.items.metaitem.stats.ItemFluidContainer;
 import gregtech.api.unification.material.MarkerMaterials;
+import gregtech.api.unification.material.properties.PropertyKey;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.ItemMaterialInfo;
 import gregtech.api.unification.stack.MaterialStack;
@@ -1009,6 +1012,40 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         HEAT_SHIELD_MKIV = this.addItem(1103, "heat_shield_mkiv").setCreativeTabs(CommonProxy.GTQTCore_NC);
         HEAT_SHIELD_MKV = this.addItem(1104, "heat_shield_mkv").setCreativeTabs(CommonProxy.GTQTCore_NC);
 
+        //流体单元1150
+        WOODEN_BUCKET = this.addItem(1150, "wooden_bucket")
+                .addComponents(new FilteredFluidStats(1000,
+                        Wood.getProperty(PropertyKey.FLUID_PIPE).getMaxFluidTemperature(),
+                        true, false, false,
+                        false, true), new ItemFluidContainer());
+
+        FLUID_CELL_CHROME = this.addItem(1151, "large_fluid_cell.chrome")
+                .addComponents(new FilteredFluidStats(2_048_000,
+                        Chrome.getProperty(PropertyKey.FLUID_PIPE).getMaxFluidTemperature(),
+                        true, true, false,
+                        false, true), new ItemFluidContainer())
+                .setMaxStackSize(8);
+
+        FLUID_CELL_IRIDIUM = this.addItem(1152, "large_fluid_cell.iridium")
+                .addComponents(new FilteredFluidStats(8_192_000,
+                        Iridium.getProperty(PropertyKey.FLUID_PIPE).getMaxFluidTemperature(),
+                        true, true, true,
+                        false, true), new ItemFluidContainer())
+                .setMaxStackSize(4);
+
+        FLUID_CELL_NAQUADAH_ALLOY = this.addItem(1153, "large_fluid_cell.naquadah_alloy")
+                .addComponents(new FilteredFluidStats(32_768_000,
+                        NaquadahAlloy.getProperty(PropertyKey.FLUID_PIPE).getMaxFluidTemperature(),
+                        true, true, true,
+                        true, true), new ItemFluidContainer())
+                .setMaxStackSize(2);
+
+        FLUID_CELL_NEUTRONIUM = this.addItem(1154, "large_fluid_cell.neutronium")
+                .addComponents(new FilteredFluidStats(131_072_000,
+                        Neutronium.getProperty(PropertyKey.FLUID_PIPE).getMaxFluidTemperature(),
+                        true, true, true,
+                        true, true), new ItemFluidContainer())
+                .setMaxStackSize(1);
         //生物基因模板
         BIO_0 = this.addItem(1500, "bio.0").setCreativeTabs(CommonProxy.GTQTCore_DISK);
         BIO_1 = this.addItem(1501, "bio.1").setCreativeTabs(CommonProxy.GTQTCore_DISK);

@@ -94,7 +94,7 @@ public class MetaTileEntityCoreFurnace extends GTQTMultiblockCore {
     @SideOnly(Side.CLIENT)
     @Override
     protected ICubeRenderer getFrontOverlay() {
-        return GTQTTextures.BURNER_REACTOR_OVERLAY;
+        return GTQTTextures.LARGE_BURNER_REACTOR_OVERLAY;
     }
 
     @Override

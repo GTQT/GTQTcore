@@ -734,7 +734,10 @@ public class GTQTMaterials {
     public static Material ZPMSuperconductor;
     public static Material UVSuperconductor;
     public static Material UHVSuperconductor;
-
+    public static Material Prismarine;
+    public static Material Purpur;
+    public static Material DrillingMud;
+    public static Material UsedDrillingMud;
     public static Material SuperGlue;
     public static Material UltraGlue;
     public static Material CyanoaceticAcid;

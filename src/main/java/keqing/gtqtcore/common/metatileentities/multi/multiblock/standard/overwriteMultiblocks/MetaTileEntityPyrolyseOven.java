@@ -156,8 +156,7 @@ public class MetaTileEntityPyrolyseOven extends GTQTRecipeMapMultiblockControlle
 
         setTier(this.tier);
         setMaxVoltage(this.tier);
-        setTimeReduce(coilTier);
-
+        setTimeReduce((100-Math.min(coilTier,10)*5.0)/100);
         this.writeCustomData(GTQTValue.UPDATE_TIER23, buf -> buf.writeInt(this.tier));
     }
 

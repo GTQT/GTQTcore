@@ -1,6 +1,5 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
-import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
@@ -10,7 +9,7 @@ import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
-import gregtech.api.recipes.RecipeMaps;
+import gregtech.api.recipes.RecipeMap;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.TooltipHelper;
@@ -18,11 +17,11 @@ import groovyjarjarantlr4.v4.runtime.misc.NotNull;
 import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.capability.IElectrode;
+import keqing.gtqtcore.api.metaileentity.GTQTRecipeMapMultiblockController;
 import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.recipes.properties.ElectronBathProperties;
-import keqing.gtqtcore.api.utils.GTQTLog;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.client.resources.I18n;
@@ -36,18 +35,24 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-import static gregtech.api.GTValues.V;
-
-public class MetaTileEntityElectronBath extends RecipeMapMultiblockController {
+public class MetaTileEntityElectronBath extends GTQTRecipeMapMultiblockController {
     private int casingTier;
     private int tubeTier;
-    private int tier;
-
     private int ElectrodeTier;
 
     public MetaTileEntityElectronBath(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, GTQTcoreRecipeMaps.ELECTROBATH);
-        this.recipeMapWorkable = new ELELogic(this);
+        super(metaTileEntityId, new RecipeMap[]{
+                GTQTcoreRecipeMaps.ELECTROBATH
+        });
+        this.recipeMapWorkable = new ElectronBathLogic(this);
+        setTierFlag(true);
+        //setTier(auto);
+        setMaxParallel(128);
+        setMaxParallelFlag(true);
+        //setMaxVoltage(auto);
+        setMaxVoltageFlag(true);
+        //setTimeReduce(coilLevel);
+        setTimeReduceFlag(true);
     }
 
     @Override
@@ -130,21 +135,12 @@ public class MetaTileEntityElectronBath extends RecipeMapMultiblockController {
 
     @Override
     public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
-        super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("谁还需要电解机", new Object[0]));
-        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("gregtech.machine.perfect_oc", new Object[0]));
         tooltip.add(I18n.format("gtqtcore.machine.ele.tooltip.1"));
         tooltip.add(I18n.format("gtqtcore.machine.ele.tooltip.2"));
-        tooltip.add(I18n.format("gregtech.machine.gtqt.update.1"));
-        tooltip.add(I18n.format("gregtech.machine.gtqt.update.2"));
-        tooltip.add(I18n.format("gtqtcore.machine.progress_time", "maxProgress * (100 - tier * 5) / 100.0"));
-        tooltip.add(I18n.format("gtqtcore.machine.parallel.pow.machineTier", 2, 128));
-        tooltip.add(I18n.format("gtqtcore.machine.max_voltage"));
+        super.addInformation(stack, player, tooltip, advanced);
     }
-    @Override
-    public void update() {
-        super.update();
-    }
+
     @Override
     public void updateFormedValid() {
         super.updateFormedValid();
@@ -193,12 +189,6 @@ public class MetaTileEntityElectronBath extends RecipeMapMultiblockController {
             }
         }
     }
-
-    @Override
-    public String[] getDescription() {
-        return new String[]{I18n.format("gtqt.tooltip.update")};
-    }
-
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
@@ -212,8 +202,9 @@ public class MetaTileEntityElectronBath extends RecipeMapMultiblockController {
                 () -> ((WrappedIntTired) tubeTier).getIntTier(),
                 0);
 
-        this.tier = Math.min(this.casingTier, this.tubeTier);
-
+        setTier(Math.min(this.casingTier, this.tubeTier));
+        setMaxVoltage(Math.min(this.casingTier, this.tubeTier));
+        setTimeReduce((100-Math.min(Math.min(this.casingTier, this.tubeTier),10)*5.0)/100);
         this.writeCustomData(GTQTValue.UPDATE_TIER5, buf -> buf.writeInt(this.tier));
     }
 
@@ -248,14 +239,14 @@ public class MetaTileEntityElectronBath extends RecipeMapMultiblockController {
         }
     }
 
-    protected class ELELogic extends MultiblockRecipeLogic {
+    protected class ElectronBathLogic extends GTQTMultiblockLogic {
 
         boolean work = false;
 
-        public ELELogic(RecipeMapMultiblockController tileEntity) {
-            super(tileEntity, true);
+        public ElectronBathLogic(RecipeMapMultiblockController tileEntity) {
+            super(tileEntity);
         }
-
+        @Override
         protected void updateRecipeProgress() {
             if (this.canRecipeProgress && this.drawEnergy(this.recipeEUt, true) && checkAvailable()) {
                 if (!work) {
@@ -271,27 +262,9 @@ public class MetaTileEntityElectronBath extends RecipeMapMultiblockController {
                 }
             }
         }
-
-        public long getMaxVoltage() {
-            return Math.min(super.getMaxVoltage(), V[tier]);
-        }
-
-        @Override
-        public int getParallelLimit() {
-            return Math.min((int) Math.pow(2, tier-1), 128);
-        }
-
         @Override
         public boolean checkRecipe(@NotNull Recipe recipe) {
             return recipe.getProperty(ElectronBathProperties.getInstance(), 0) <= ElectrodeTier;
-        }
-
-        public void setMaxProgress(int maxProgress) {
-            this.maxProgressTime = (int) (maxProgress * (100 - tier * 5) / 100.0);
-        }
-        @Override
-        protected long getMaxParallelVoltage() {
-            return super.getMaxVoltage();
         }
     }
 }

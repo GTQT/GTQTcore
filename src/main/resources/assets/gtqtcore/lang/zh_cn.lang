@@ -3379,6 +3379,7 @@ gregtech.multiblock.hand.throttle_increment=§a切换到自动并行
 gtqtcore.parr=实际并行：%s/%s
 gtqtcore.vtire=支持的配方最高电压：%s V
 gtqtcore.tubeTire=管道等级：%s
+gtqtcore.voltageTier=机器方块等级：%s
 gtqtcore.casingTire=外壳等级：%s
 gtqtcore.coilTire=线圈等级：%s
 gtqtcore.machine.network_switch.tooltip.1=算力负荷上限取决于多方块等级（如果用不了升级就对了）
@@ -4193,6 +4194,12 @@ metaitem.heat_shield_mkiii.name=散热鳍片III
 metaitem.heat_shield_mkiv.name=散热鳍片IV
 metaitem.heat_shield_mkv.name=散热鳍片V
 
+metaitem.wooden_bucket.name=木桶
+metaitem.large_fluid_cell.chrome.name=%s铬单元
+metaitem.large_fluid_cell.iridium.name=%s铱单元
+metaitem.large_fluid_cell.naquadah_alloy.name=%s硅岩合金单元
+metaitem.large_fluid_cell.neutronium.name=%s中子素单元
+
 metaitem.sterilized.petri.dish.name=无菌培养皿
 metaitem.contaminated.petri.dish.name=被污染的培养皿
 metaitem.electrically.wired.petri.dish.name=电子接线培养皿
@@ -4248,6 +4255,8 @@ gregtech.material.uev_superconductor=UEV超导体
 gregtech.material.uiv_superconductor=UIV超导体
 gregtech.material.uxv_superconductor=UXV超导体
 gregtech.material.opv_superconductor=OpV超导体
+gregtech.material.purpur=紫珀
+gregtech.material.prismarine=海晶石
 
 gregtech.machine.network_switch.tooltip.5=最大算力通量 1024 CWU/t
 metaitem.pos_ore_card.name=地质存储模块

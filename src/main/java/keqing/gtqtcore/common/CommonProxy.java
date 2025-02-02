@@ -175,6 +175,7 @@ public class CommonProxy {
         registry.register(GTQTMetaBlocks.blockMultiblockCasing3);
         registry.register(GTQTMetaBlocks.blockMultiblockCasing4);
         registry.register(GTQTMetaBlocks.blockMultiblockCasing5);
+        registry.register(GTQTMetaBlocks.blockMultiblockCasing6);
         registry.register(GTQTMetaBlocks.blockMultiblockCasingActive);
         registry.register(GTQTMetaBlocks.blockMultiblockGlass);
         registry.register(GTQTMetaBlocks.blockMultiblockGlass1);
@@ -240,6 +241,7 @@ public class CommonProxy {
         registry.register(createItemBlock(GTQTMetaBlocks.blockMultiblockCasing3, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.blockMultiblockCasing4, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.blockMultiblockCasing5, VariantItemBlock::new));
+        registry.register(createItemBlock(GTQTMetaBlocks.blockMultiblockCasing6, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.blockMultiblockCasingActive, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.blockMultiblockGlass, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.blockMultiblockGlass1, VariantItemBlock::new));

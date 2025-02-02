@@ -1,4 +1,4 @@
-package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
+package keqing.gtqtcore.api.metaileentity;
 
 
 import codechicken.lib.render.CCRenderState;

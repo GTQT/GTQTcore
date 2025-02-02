@@ -14,6 +14,8 @@ import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
+import gregtech.api.recipes.RecipeMap;
+import gregtech.api.recipes.RecipeMaps;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.TooltipHelper;
@@ -22,6 +24,7 @@ import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.capability.ICatalystHatch;
 import keqing.gtqtcore.api.capability.chemical_plant.ChemicalPlantProperties;
+import keqing.gtqtcore.api.metaileentity.GTQTRecipeMapMultiblockController;
 import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
@@ -42,17 +45,26 @@ import java.util.List;
 
 import static gregtech.api.GTValues.V;
 
-public class MetaTileEntityChemicalPlant extends RecipeMapMultiblockController {
+public class MetaTileEntityChemicalPlant extends GTQTRecipeMapMultiblockController {
 
     private int coilLevel;
     private int casingTier;
     private int tubeTier;
     private int voltageTier;
-    private int tier;
 
     public MetaTileEntityChemicalPlant(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, GTQTcoreRecipeMaps.CHEMICAL_PLANT);
+        super(metaTileEntityId, new RecipeMap[]{
+                GTQTcoreRecipeMaps.CHEMICAL_PLANT
+        });
         this.recipeMapWorkable = new ChemicalPlantLogic(this);
+        setTierFlag(true);
+        //setTier(auto);
+        setMaxParallel(128);
+        setMaxParallelFlag(true);
+        //setMaxVoltage(auto);
+        setMaxVoltageFlag(true);
+        //setTimeReduce(coilLevel);
+        setTimeReduceFlag(true);
     }
 
     @Override
@@ -124,24 +136,12 @@ public class MetaTileEntityChemicalPlant extends RecipeMapMultiblockController {
     }
 
     @Override
-    @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack stack, World world, List<String> tooltip, boolean advanced) {
-        super.addInformation(stack, world, tooltip, advanced);
-        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("gregtech.machine.perfect_oc"));
-        tooltip.add(I18n.format("gtqtcore.machine.chemical-plant.tooltip.1"));
-        tooltip.add(I18n.format("gregtech.machine.gtqt.update.1"));
-        tooltip.add(I18n.format("gregtech.machine.gtqt.update.2"));
-        tooltip.add(I18n.format("gtqtcore.machine.progress_time","maxProgress /coilLevel"));
-        tooltip.add(I18n.format("gtqtcore.machine.parallel.pow.machineTier",2,128));
-        tooltip.add(I18n.format("gtqtcore.machine.max_voltage"));
-    }
-
-    @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
         textList.add(new TextComponentTranslation("gtqtcore.coilTire", coilLevel));
         textList.add(new TextComponentTranslation("gtqtcore.casingTire", casingTier));
         textList.add(new TextComponentTranslation("gtqtcore.tubeTire", tubeTier));
+        textList.add(new TextComponentTranslation("gtqtcore.voltageTier", voltageTier));
         if (casingTier != tubeTier)
             textList.add(new TextComponentTranslation("gtqtcore.equal", casingTier, tubeTier));
     }
@@ -186,12 +186,6 @@ public class MetaTileEntityChemicalPlant extends RecipeMapMultiblockController {
             }
         }
     }
-
-    @Override
-    public String[] getDescription() {
-        return new String[]{I18n.format("gtqt.tooltip.update")};
-    }
-
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
@@ -212,8 +206,9 @@ public class MetaTileEntityChemicalPlant extends RecipeMapMultiblockController {
                 () -> ((WrappedIntTired) voltageTier).getIntTier(),
                 0);
 
-        this.tier = Math.min(this.casingTier, this.tubeTier);
-
+        setTier(Math.min(this.casingTier, this.voltageTier));
+        setMaxVoltage(Math.min(this.casingTier, this.voltageTier));
+        setTimeReduce((100-Math.min(coilLevel,10)*5.0)/100);
         this.writeCustomData(GTQTValue.UPDATE_TIER4, buf -> buf.writeInt(this.casingTier));
     }
 
@@ -229,36 +224,15 @@ public class MetaTileEntityChemicalPlant extends RecipeMapMultiblockController {
         this.casingTier = buf.readInt();
     }
 
-    protected class ChemicalPlantLogic extends MultiblockRecipeLogic {
-
-
+    protected class ChemicalPlantLogic extends GTQTMultiblockLogic {
         public ChemicalPlantLogic(RecipeMapMultiblockController tileEntity) {
-            super(tileEntity, true);
+            super(tileEntity);
         }
-
-        public void setMaxProgress(int maxProgress) {
-            this.maxProgressTime = maxProgress / coilLevel;
-            this.metaTileEntity.markDirty();
-        }
-
-        public long getMaxVoltage() {
-            return Math.min(super.getMaxVoltage(), V[voltageTier]);
-        }
-
         @Override
         public boolean checkRecipe(@Nonnull Recipe recipe) {
             if (!super.checkRecipe(recipe))
                 return false;
             return recipe.getProperty(ChemicalPlantProperties.getInstance(), 0) <= tier;
-        }
-
-        @Override
-        public int getParallelLimit() {
-            return Math.min((int) Math.pow(2, tier-1), 128);
-        }
-        @Override
-        protected long getMaxParallelVoltage() {
-            return super.getMaxVoltage();
         }
     }
 }

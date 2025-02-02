@@ -50,6 +50,7 @@ import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.overwri
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.resourceCollection.MetaTileEntityAdvancedFluidDrill;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.resourceCollection.MetaTileEntityAdvancedLargeMiner;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.endGame.*;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.resourceCollection.MetaTileEntityVoidMiner;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.steam.MetaTileEntitySawMill;
 import keqing.gtqtcore.common.metatileentities.multi.multiblockpart.*;
 import keqing.gtqtcore.common.metatileentities.single.electric.*;
@@ -276,7 +277,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityAdvancedFluidDrill EXTREME_FLUID_DRILL_RIG;
     public static MetaTileEntityAdvancedFluidDrill ULTIMATE_FLUID_DRILL_RIG;
     public static MetaTileEntityAdvancedFluidDrill INFINITY_FLUID_DRILL_RIG;
-
+    public static MetaTileEntityVoidMiner[] VOID_MINER = new MetaTileEntityVoidMiner[3];
     public static MetaTileEntityDimensionalMixer DIMENSIONAL_MIXER;
     public static MetaTileEntityDimensionallyPlasmFurnace DIMENSIONAL_PLASMA_FURNACE;
     public static SimpleMachineMetaTileEntity[] AUTO_CHISEL = new SimpleMachineMetaTileEntity[3];
@@ -471,7 +472,7 @@ public class GTQTMetaTileEntities {
         LARGE_ROCKET_ENGIN = registerMetaTileEntity(3060, new MetaTileEntityLargeRocketEngine(gtqtcoreId("rocket")));
         //
         SOLAR_PLATE = registerMetaTileEntity(3062, new MetaTileEntitySolarPlate(gtqtcoreId("solar_plate")));
-       //
+        //
         WATER_POWER_STATION[0] = registerMetaTileEntity(3064, new MetaTileEntityWaterPowerStation(gtqtcoreId("water_power_station_mk1"), 1));
         WATER_POWER_STATION[1] = registerMetaTileEntity(3065, new MetaTileEntityWaterPowerStation(gtqtcoreId("water_power_station_mk2"), 2));
         WATER_POWER_STATION[2] = registerMetaTileEntity(3066, new MetaTileEntityWaterPowerStation(gtqtcoreId("water_power_station_mk3"), 3));
@@ -676,6 +677,13 @@ public class GTQTMetaTileEntities {
         EXTREME_FLUID_DRILL_RIG = registerMetaTileEntity(3424, new MetaTileEntityAdvancedFluidDrill(gtqtcoreId("fluid_drill_rig.luv"), 6));
         ULTIMATE_FLUID_DRILL_RIG = registerMetaTileEntity(3425, new MetaTileEntityAdvancedFluidDrill(gtqtcoreId("fluid_drill_rig.zpm"), 7));
         INFINITY_FLUID_DRILL_RIG = registerMetaTileEntity(3426, new MetaTileEntityAdvancedFluidDrill(gtqtcoreId("fluid_drill_rig.uv"), 8));
+
+        // ID 97-99: Void Miner 1-3
+        if (GTQTCoreConfig.MachineSwitch.enableVoidMiner) {
+            VOID_MINER[0]            = registerMetaTileEntity(16097, new MetaTileEntityVoidMiner(gtqtcoreId("void_miner.luv"), LuV, GTQTCoreConfig.MachineSwitch.maxTemperatureVM1));
+            VOID_MINER[1]            = registerMetaTileEntity(16098, new MetaTileEntityVoidMiner(gtqtcoreId("void_miner.zpm"), ZPM, GTQTCoreConfig.MachineSwitch.maxTemperatureVM2));
+            VOID_MINER[2]            = registerMetaTileEntity(16099, new MetaTileEntityVoidMiner(gtqtcoreId("void_miner.uv"), UV, GTQTCoreConfig.MachineSwitch.maxTemperatureVM3));
+        }
         //blocksResearchSystem
         KQCC = registerMetaTileEntity(3450, new MetaTileEntityResearchSystemControlCenter(gtqtcoreId("kqcc")));
         KQNS = registerMetaTileEntity(3451, new MetaTileEntityResearchSystemNetworkSwitch(gtqtcoreId("kqns")));

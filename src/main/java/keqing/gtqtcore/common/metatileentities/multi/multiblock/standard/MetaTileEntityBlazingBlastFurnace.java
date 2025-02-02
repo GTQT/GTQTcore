@@ -59,7 +59,7 @@ import static keqing.gtqtcore.api.unification.GTQTMaterials.Pyrotheum;
 
 public class MetaTileEntityBlazingBlastFurnace extends MultiMapMultiblockController implements IParallelMultiblock ,IHeatingCoil {
     protected static int heatingCoilLevel;
-    private FluidStack LUBRICANT_STACK;
+    private FluidStack pyrotheumFluid = Pyrotheum.getFluid(1);
     private int blastFurnaceTemperature;
 
     public MetaTileEntityBlazingBlastFurnace(ResourceLocation metaTileEntityId) {
@@ -101,7 +101,7 @@ public class MetaTileEntityBlazingBlastFurnace extends MultiMapMultiblockControl
             heatingCoilLevel = BlockWireCoil.CoilType.CUPRONICKEL.getLevel();
         }
         this.blastFurnaceTemperature += 100 * Math.max(0, GTUtility.getTierByVoltage(getEnergyContainer().getInputVoltage()) - GTValues.MV);
-        LUBRICANT_STACK = Pyrotheum.getFluid(1);
+
     }
 
     @Override
@@ -203,7 +203,7 @@ public class MetaTileEntityBlazingBlastFurnace extends MultiMapMultiblockControl
         super.invalidateStructure();
         blastFurnaceTemperature = 0;
         heatingCoilLevel = 0;
-        LUBRICANT_STACK = null;
+        pyrotheumFluid = null;
     }
 
     protected class BlazingBlastFurnaceWorkable extends MultiblockRecipeLogic {
@@ -231,9 +231,9 @@ public class MetaTileEntityBlazingBlastFurnace extends MultiMapMultiblockControl
 
         protected void updateRecipeProgress() {
             IMultipleTankHandler inputTank = metaTileEntityBlazingBlastFurnace.getInputFluidInventory();
-            if (canRecipeProgress && drawEnergy(recipeEUt, true) && LUBRICANT_STACK.isFluidStackIdentical(inputTank.drain(LUBRICANT_STACK.copy(), false))) {
+            if (canRecipeProgress && drawEnergy(recipeEUt, true) && pyrotheumFluid.isFluidStackIdentical(inputTank.drain(pyrotheumFluid.copy(), false))) {
                 drawEnergy(recipeEUt, false);
-                LUBRICANT_STACK.isFluidStackIdentical(inputTank.drain(LUBRICANT_STACK.copy(), true));
+                pyrotheumFluid.isFluidStackIdentical(inputTank.drain(pyrotheumFluid.copy(), true));
                 if (++progressTime > maxProgressTime) {
                     completeRecipe();
                 }

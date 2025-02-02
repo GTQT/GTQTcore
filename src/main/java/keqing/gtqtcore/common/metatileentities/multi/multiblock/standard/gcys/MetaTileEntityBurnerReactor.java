@@ -150,7 +150,7 @@ public class MetaTileEntityBurnerReactor extends GCYMRecipeMapMultiblockControll
     @Nonnull
     @Override
     protected ICubeRenderer getFrontOverlay() {
-        return GTQTTextures.BURNER_REACTOR_OVERLAY;
+        return GTQTTextures.LARGE_BURNER_REACTOR_OVERLAY;
     }
 
     @Override

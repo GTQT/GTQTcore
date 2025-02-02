@@ -323,6 +323,34 @@ public class HigherDegreeMaterials {
         getMaterialsId();
         getMaterialsId();
         //高级矿物
+        Prismarine = new Material.Builder(getMaterialsId(), gregtechId("prismarine"))
+                .gem(1)
+                .color(0x73B5AA)
+                .iconSet(FINE)
+                .flags(CRYSTALLIZABLE, EXCLUDE_BLOCK_CRAFTING_BY_HAND_RECIPES,
+                        DISABLE_DECOMPOSITION, NO_WORKING)
+                .components(Pyrolusite, 1, BrownLimonite, 1, Water, 1)
+                .build()
+                .setFormula("(Fe,Mn)HO2(H2O)2", true);
 
+        Purpur = new Material.Builder(getMaterialsId(), gregtechId("purpur"))
+                .dust(1)
+                .color(0xCC94CC)
+                .iconSet(FINE)
+                .build();
+
+        // 25073 Drilling Mud
+        DrillingMud = new Material.Builder(getMaterialsId(), gregtechId("drilling_mud"))
+                .liquid()
+                .color(0x996600)
+                .iconSet(DULL)
+                .build();
+
+        // 25074 Used Drilling Mud
+        UsedDrillingMud = new Material.Builder(getMaterialsId(), gregtechId("used_drilling_mud"))
+                .liquid()
+                .color(0x998833)
+                .iconSet(DULL)
+                .build();
     }
 }

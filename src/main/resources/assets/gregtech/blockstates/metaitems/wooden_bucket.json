@@ -1,0 +1,13 @@
+{
+  "forge_marker": 1,
+  "variants": {
+    "inventory": {
+      "model": "forge:forgebucket",
+      "textures": {
+        "base": "gtqtcore:items/metaitems/wooden_bucket/base",
+        "fluid": "gtqtcore:items/metaitems/wooden_bucket/overlay"
+      },
+      "transform": "forge:default-item"
+    }
+  }
+}

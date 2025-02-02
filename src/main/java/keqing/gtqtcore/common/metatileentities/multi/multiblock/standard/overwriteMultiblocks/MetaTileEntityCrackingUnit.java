@@ -144,7 +144,7 @@ public class MetaTileEntityCrackingUnit extends GTQTRecipeMapMultiblockControlle
 
         setTier(this.casingTier);
         setMaxVoltage(this.casingTier);
-        setTimeReduce(coilTier);
+        setTimeReduce((100-Math.min(coilTier,10)*5.0)/100);
 
         this.writeCustomData(GTQTValue.UPDATE_TIER15,buf -> buf.writeInt(this.casingTier));
     }
