@@ -97,6 +97,7 @@ public class GTQTRecipesManager {
         BoulesRecipes.init();
         FEPChain.init();
         NdYAGChain.init();
+        FireboxCasingRecipes.register();
         GrapheneChain.init();
         NanoCoatingRecipes.init();
         PreciousMetalChain.init();

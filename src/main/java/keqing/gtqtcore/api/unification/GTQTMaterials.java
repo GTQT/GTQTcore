@@ -746,6 +746,16 @@ public class GTQTMaterials {
     public static Material TricresylPhosphate;
     public static Material PolyethyleneGlycol;
     public static Material ChromiumDopedMolybdenite;
+    public static Material PolyurethaneResin;
+    public static Material NickelTetracarbonyl;
+    public static Material PolyurethaneCatalystA;
+    public static Material DiaminodiphenylmethaneMixture;
+    public static Material DiphenylmethaneDiisocyanateMixture;
+    public static Material SiliconOil;
+    public static Material DiphenylmethaneDiisocyanate;
+    public static Material MercuryDibromide;
+    public static Material Pentaerythritol;
+    public static Material CrystalKevlar;
     public static Material AdvancedLubricant;
     public static Material SuperGlue;
     public static Material UltraGlue;

@@ -1,12 +1,10 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
-import gregtech.api.GTValues;
-import gregtech.api.block.IHeatingCoilBlockStats;
 import gregtech.api.capability.IEnergyContainer;
-import gregtech.api.capability.IHeatingCoil;
 import gregtech.api.capability.impl.EnergyContainerList;
 import gregtech.api.capability.impl.FluidTankList;
 import gregtech.api.capability.impl.ItemHandlerList;
+import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
@@ -14,22 +12,28 @@ import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
+import gregtech.api.pattern.MultiblockShapeInfo;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
-import gregtech.api.recipes.recipeproperties.TemperatureProperty;
 import gregtech.api.util.GTUtility;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
 import gregtech.client.utils.TooltipHelper;
-import gregtech.common.blocks.BlockWireCoil;
+import gregtech.common.metatileentities.MetaTileEntities;
+import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
+import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
+import keqing.gtqtcore.api.recipes.properties.ForceFieldCoilTierProperty;
+import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing3;
+import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -37,23 +41,24 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
-import static gregtech.api.util.RelativeDirection.*;
+import static keqing.gtqtcore.api.GTQTAPI.MAP_FORCE_FIELD_COIL;
 
-public class MetaTileEntityNaquadahFuelFactory extends RecipeMapMultiblockController implements IHeatingCoil {
-    protected static int heatingCoilLevel;
-    private int blastFurnaceTemperature;
+public class MetaTileEntityNaquadahFuelFactory extends RecipeMapMultiblockController {
+    protected int CoilLevel;
 
     public MetaTileEntityNaquadahFuelFactory(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.NAQUADAH_REFINE_FACTORY_RECIPES);
+        this.recipeMapWorkable = new NaquadahFuelRefineFactoryRecipeLogic(this);
     }
 
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         if (isStructureFormed()) {
             super.addDisplayText(textList);
-            textList.add(new TextComponentTranslation("Temperature : %s", blastFurnaceTemperature));
+            textList.add(new TextComponentTranslation("线圈等级 %s", CoilLevel));
         }
     }
 
@@ -70,39 +75,16 @@ public class MetaTileEntityNaquadahFuelFactory extends RecipeMapMultiblockContro
 
     @Override
     protected void formStructure(PatternMatchContext context) {
-        super.formStructure(context);
-        Object type = context.get("CoilType");
-        Object coilType = context.get("CoilType");
-        if (type instanceof IHeatingCoilBlockStats) {
-            this.blastFurnaceTemperature = ((IHeatingCoilBlockStats) type).getCoilTemperature();
-            heatingCoilLevel = ((IHeatingCoilBlockStats) coilType).getLevel();
-        } else {
-            this.blastFurnaceTemperature = BlockWireCoil.CoilType.CUPRONICKEL.getCoilTemperature();
-            heatingCoilLevel = BlockWireCoil.CoilType.CUPRONICKEL.getLevel();
-        }
-        this.blastFurnaceTemperature += 100 * Math.max(0, GTUtility.getTierByVoltage(getEnergyContainer().getInputVoltage()) - GTValues.MV);
-    }
-
-    @Override
-    public boolean canBeDistinct() {
-        return true;
-    }
-
-    @Override
-    public int getCurrentTemperature() {
-        return this.blastFurnaceTemperature;
+        Object CoilLevel = context.get("ForceFieldCoilTieredStats");
+        this.CoilLevel = GTQTUtil.getOrDefault(() -> CoilLevel instanceof WrappedIntTired,
+                () -> ((WrappedIntTired) CoilLevel).getIntTier(),
+                0);
     }
 
     @Override
     public void invalidateStructure() {
         super.invalidateStructure();
-        blastFurnaceTemperature = 0;
-        heatingCoilLevel = 0;
-    }
-
-    @Override
-    public boolean checkRecipe(@Nonnull Recipe recipe, boolean consumeIfSuccess) {
-        return this.blastFurnaceTemperature >= recipe.getProperty(TemperatureProperty.getInstance(), 0);
+        this.CoilLevel = 0;
     }
 
     @Override
@@ -115,43 +97,31 @@ public class MetaTileEntityNaquadahFuelFactory extends RecipeMapMultiblockContro
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("硅岩快乐之家", new Object[0]));
         tooltip.add(I18n.format("本机器允许使用激光能源仓代替能源仓！"));
+        tooltip.add(I18n.format("gtqtcore.machine.naquadah_fuel_refine_factory.tooltip.1"));
+        tooltip.add(I18n.format("gtqtcore.machine.naquadah_fuel_refine_factory.tooltip.2"));
+        tooltip.add(I18n.format("gtqtcore.machine.naquadah_fuel_refine_factory.tooltip.3"));
+        tooltip.add(I18n.format("gtqtcore.machine.naquadah_fuel_refine_factory.tooltip.4"));
+        tooltip.add(I18n.format("gtqtcore.machine.naquadah_fuel_refine_factory.tooltip.5"));
+        tooltip.add(I18n.format("gtqtcore.machine.naquadah_fuel_refine_factory.tooltip.6"));
     }
 
     @Override
     protected BlockPattern createStructurePattern() {
-        return FactoryBlockPattern.start(RIGHT, FRONT, UP)
-                .aisle("###############", "######OGO######", "###############")
-                .aisle("######ISI######", "####GGAAAGG####", "######ICI######")
-                .aisle("####CC###CC####", "###EAAOGOAAE###", "####CC###CC####")
-                .aisle("###C#######C###", "##EKEG###GEKE##", "###C#######C###")
-                .aisle("##C#########C##", "#GAE#######EAG#", "##C#########C##")
-                .aisle("##C#########C##", "#GAG#######GAG#", "##C#########C##")
-                .aisle("#I###########I#", "OAO#########OAO", "#I###########I#")
-                .aisle("#C###########C#", "GAG#########GAG", "#C###########C#")
-                .aisle("#I###########I#", "OAO#########OAO", "#I###########I#")
-                .aisle("##C#########C##", "#GAG#######GAG#", "##C#########C##")
-                .aisle("##C#########C##", "#GAE#######EAG#", "##C#########C##")
-                .aisle("###C#######C###", "##EKEG###GEKE##", "###C#######C###")
-                .aisle("####CC###CC####", "###EAAOGOAAE###", "####CC###CC####")
-                .aisle("######ICI######", "####GGAAAGG####", "######ICI######")
-                .aisle("###############", "######OGO######", "###############")
-                .where('S', selfPredicate())
-                .where('G', states(this.getCasingState1()))
-                .where('E', states(this.getCasingState1())
-                        .or(abilities(MultiblockAbility.INPUT_ENERGY)
-                                .setMaxGlobalLimited(3))
-                        .or(abilities(MultiblockAbility.INPUT_LASER)
-                                .setMaxGlobalLimited(1))
-                )
-                .where('C', states(getCasingState1()))
-                .where('A', heatingCoils())
-                .where('O', states(getCasingState1())
-                        .or(abilities(MultiblockAbility.EXPORT_FLUIDS).setMinGlobalLimited(2).setMaxGlobalLimited(4))
-                        .or(abilities(MultiblockAbility.MAINTENANCE_HATCH).setExactLimit(1)))
-                .where('K', states(getCasingState2()))
-                .where('I',
-                        states(getCasingState1()).or(abilities(MultiblockAbility.IMPORT_FLUIDS).setMinGlobalLimited(2).setMaxGlobalLimited(4)))
-                .where('#', any())
+        return FactoryBlockPattern.start()
+                .aisle("               ", "      CGC      ", "    CC   CC    ", "   C       C   ", "  C         C  ", "  C         C  ", " C           C ", " G           G ", " C           C ", "  C         C  ", "  C         C  ", "   C       C   ", "    CC   CC    ", "      CGC      ", "               ")
+                .aisle("      CCC      ", "    CCLLLCC    ", "   CLLCSCLLC   ", "  CLCC   CCLC  ", " CLC       CLC ", " CLC       CLC ", "CLC         CLC", "CLC         CLC", "CLC         CLC", " CLC       CLC ", " CLC       CLC ", "  CLCC   CCLC  ", "   CLLCCCLLC   ", "    CCLLLCC    ", "      CCC      ")
+                .aisle("               ", "      CGC      ", "    CC   CC    ", "   C       C   ", "  C         C  ", "  C         C  ", " C           C ", " G           G ", " C           C ", "  C         C  ", "  C         C  ", "   C       C   ", "    CC   CC    ", "      CGC      ", "               ")
+                .where('S', this.selfPredicate())
+                .where('C', states(this.getCasingState1())
+                        .setMinGlobalLimited(100)
+                        .or(abilities(MultiblockAbility.INPUT_ENERGY, MultiblockAbility.INPUT_LASER)
+                                .setMinGlobalLimited(1)
+                                .setPreviewCount(1))
+                        .or(abilities(MultiblockAbility.IMPORT_ITEMS, MultiblockAbility.IMPORT_FLUIDS,
+                                MultiblockAbility.EXPORT_ITEMS, MultiblockAbility.EXPORT_FLUIDS)))
+                .where('G', states(this.getCasingState2()))
+                .where('L', TiredTraceabilityPredicate.FORCE_FIELD_COIL.get())
+                .where(' ', any())
                 .build();
     }
 
@@ -179,4 +149,70 @@ public class MetaTileEntityNaquadahFuelFactory extends RecipeMapMultiblockContro
         return new MetaTileEntityNaquadahFuelFactory(metaTileEntityId);
     }
 
+    @Override
+    public List<MultiblockShapeInfo> getMatchingShapes() {
+        ArrayList<MultiblockShapeInfo> shapeInfo = new ArrayList<>();
+        MultiblockShapeInfo.Builder builder;
+        builder = MultiblockShapeInfo.builder()
+                .aisle("               ", "      CGC      ", "    CC   CC    ", "   C       C   ", "  C         C  ", "  C         C  ", " C           C ", " G           G ", " C           C ", "  C         C  ", "  C         C  ", "   C       C   ", "    CC   CC    ", "      CGC      ", "               ")
+                .aisle("      CEC      ", "    CCLLLCC    ", "   CLLISJLLC   ", "  CLCK   MCLC  ", " CLC       CLC ", " CLC       CLC ", "CLC         CLC", "CLC         CLC", "CLC         CLC", " CLC       CLC ", " CLC       CLC ", "  CLCC   CCLC  ", "   CLLCCCLLC   ", "    CCLLLCC    ", "      CCC      ")
+                .aisle("               ", "      CGC      ", "    CC   CC    ", "   C       C   ", "  C         C  ", "  C         C  ", " C           C ", " G           G ", " C           C ", "  C         C  ", "  C         C  ", "   C       C   ", "    CC   CC    ", "      CGC      ", "               ")
+                .where('S', GTQTMetaTileEntities.NAQUADAH_FUEL_FACTORY, EnumFacing.SOUTH)
+                .where('C', this.getCasingState1())
+                .where('G', this.getCasingState2())
+                .where('E', MetaTileEntities.ENERGY_INPUT_HATCH[0], EnumFacing.NORTH)
+                .where('I', MetaTileEntities.ITEM_IMPORT_BUS[0], EnumFacing.SOUTH)
+                .where('J', MetaTileEntities.ITEM_EXPORT_BUS[0], EnumFacing.SOUTH)
+                .where('K', MetaTileEntities.FLUID_IMPORT_HATCH[0], EnumFacing.SOUTH)
+                .where('M', MetaTileEntities.FLUID_EXPORT_HATCH[0], EnumFacing.SOUTH);
+        MultiblockShapeInfo.Builder finalBuilder = builder;
+        MAP_FORCE_FIELD_COIL.entrySet().stream()
+                .sorted(Comparator.comparingInt(entry -> ((WrappedIntTired) entry.getValue()).getIntTier()))
+                .forEach(entry -> shapeInfo.add(finalBuilder.where('L', entry.getKey()).build()));
+        return shapeInfo;
+    }
+
+    @Override
+    public boolean canBeDistinct() {
+        return true;
+    }
+
+    @Override
+    public boolean hasMaintenanceMechanics() {
+        return false;
+    }
+
+    @Override
+    public boolean checkRecipe(Recipe recipe, boolean consumeIfSuccess) {
+        return super.checkRecipe(recipe, consumeIfSuccess)
+                && this.CoilLevel >= recipe.getProperty(ForceFieldCoilTierProperty.getInstance(), 0);
+    }
+
+    protected class NaquadahFuelRefineFactoryRecipeLogic extends MultiblockRecipeLogic {
+
+        public NaquadahFuelRefineFactoryRecipeLogic(RecipeMapMultiblockController tileEntity) {
+            super(tileEntity);
+        }
+
+        @Override
+        protected double getOverclockingDurationDivisor() {
+            Integer currentCoilTier = this.getPreviousRecipe().getProperty(ForceFieldCoilTierProperty.getInstance(), 0);
+            if (currentCoilTier < CoilLevel) {
+                return 4.0;
+            } else {
+                return 2.0;
+            }
+        }
+
+        @Override
+        public void setMaxProgress(int maxProgress) {
+            super.setMaxProgress((int) (Math.floor(maxProgress * Math.pow(0.8, GTUtility.getTierByVoltage(this.getMaxVoltage())))));
+        }
+
+        @Override
+        public int getParallelLimit() {
+            return 16 * CoilLevel;
+        }
+
+    }
 }

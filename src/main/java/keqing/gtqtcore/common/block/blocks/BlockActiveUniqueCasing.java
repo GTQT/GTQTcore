@@ -33,7 +33,11 @@ public class BlockActiveUniqueCasing extends VariantActiveBlock<BlockActiveUniqu
         ADVANCED_ASSEMBLY_CONTROL_CASING("advanced_assembly_control_casing"),
         ADVANCED_ASSEMBLY_LINE_CASING("advanced_assembly_line_casing"),
         CIRCUIT_ASSEMBLY_CONTROL_CASING("circuit_assembly_control_casing"),
-        CIRCUIT_ASSEMBLY_LINE_CASING("circuit_assembly_line_casing");
+        CIRCUIT_ASSEMBLY_LINE_CASING("circuit_assembly_line_casing"),
+        FORCE_FIELD_CONSTRAINT_COIL("force_field_constraint_coil"),
+        ADVANCED_FORCE_FIELD_CONSTRAINT_COIL("advanced_force_field_constraint_coil"),
+        ELITE_FORCE_FIELD_CONSTRAINT_COIL("elite_force_field_constraint_coil"),
+        ULTIMATE_FORCE_FIELD_CONSTRAINT_COIL("ultimate_force_field_constraint_coil");
 
         private final String name;
 

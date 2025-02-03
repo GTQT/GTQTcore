@@ -3072,6 +3072,13 @@ gregtech.machine.bioreb.gtqtupdate.2=Use five basic microbial strains for linear
 gregtech.machine.bioreb.gtqtupdate.3=Provide enriched microbial culture medium to increase the number of parallel processes (parallel does not consume additional original strains).
 gregtech.machine.bioreb.gtqtupdate.4=Provide water with a default pH of 7, hydrochloric acid with pH 4, and sodium hydroxide with pH 10. Other materials are currently not supported.
 
+gtqtcore.machine.naquadah_fuel_refine_factory.tooltip.1=用于生产特殊高能燃料
+gtqtcore.machine.naquadah_fuel_refine_factory.tooltip.2=需要不同等级的§6力场约束线圈方块§7以遏制巨量致命辐射外泄
+gtqtcore.machine.naquadah_fuel_refine_factory.tooltip.3=线圈等级限制了最大可执行配方等级，当配方要求等级小于线圈等级时将无法运行。
+gtqtcore.machine.naquadah_fuel_refine_factory.tooltip.4=当线圈等级大于配方要求等级时，获得§b无损超频§7。
+gtqtcore.machine.naquadah_fuel_refine_factory.tooltip.5=每提高1个§e电压等级§7，配方所需时间就变为原本的§l80%%§r§7。
+gtqtcore.machine.naquadah_fuel_refine_factory.tooltip.6=每提高1个§a线圈等级§7，每次运行可以多处理§l16§r§7个物品。
+
 gtqtcore.hc.count1=Heat Exchange Area: %s Heat Exchange Efficiency: %s
 gtqtcore.hc.count2=Shell Level: %s Glass Level: %s
 gtqtcore.hc.count3=High-Temperature Heat Source Buffer: %s Low-Temperature Heat Buffer: %s
@@ -3856,6 +3863,16 @@ gregtech.material.tricresyl_phosphate=Tricresyl Phosphate
 gregtech.material.polyethylene_glycol=Polyethylene Glycol
 gregtech.material.guaiacol=Guaiacol
 gregtech.material.chromium_doped_molybdenite=Chromium Doped Molybdenite
+gregtech.material.polyurethane_resin=Polyurethane Resin
+gregtech.material.polyurethane_catalyst_a=Polyurethane Catalyst A
+gregtech.material.nickel_tetracarbonyl=Nickel Tetracarbonyl
+gregtech.material.diaminodiphenylmethane_mixture=Mixture of Diaminodiphenylmethane
+gregtech.material.diphenylmethane_diisocyanate_mixture=Mixture of Diphenylmethane Diisocyanate
+gregtech.material.silicon_oil=Silicone Oil
+gregtech.material.diphenylmethane_diisocyanate=Diphenylmethane Diisocyanate
+gregtech.material.mercury_dibromide=Mercury Dibromide
+gregtech.material.pentaerythritol=Pentaerythritol
+gregtech.material.crystal_kevlar=Crystal Kevlar
 
 gregtech.material.iron_front=Iron Ore Foam
 gregtech.material.banded_iron_front=Banded Iron Ore Foam
@@ -4695,6 +4712,16 @@ tile.active_unique_casing.advanced_assembly_line_casing.name=Advanced Assembly L
 tile.active_unique_casing.advanced_assembly_control_casing.name=Advanced Assembly Control Casing
 tile.active_unique_casing.circuit_assembly_line_casing.name=Circuit Assembly Machine Block
 tile.active_unique_casing.circuit_assembly_control_casing.name=Circuit Assembly Control Casing
+tile.active_unique_casing.force_field_constraint_coil.name=力场约束线圈方块
+tile.active_unique_casing.advanced_force_field_constraint_coil.name=进阶力场约束线圈方块
+tile.active_unique_casing.elite_force_field_constraint_coil.name=精英力场约束线圈方块
+tile.active_unique_casing.ultimate_force_field_constraint_coil.name=终极力场约束线圈方块
+
+tile.firebox_casing.stainless_steel_firebox.name=不锈钢燃烧室
+tile.firebox_casing.rhodium_plated_palladium_firebox.name=镀铑钯燃烧室
+tile.firebox_casing.naquadah_alloy_firebox.name=硅岩合金燃烧室
+tile.firebox_casing.darmstadtium_firebox.name=钅达燃烧室
+tile.firebox_casing.neutronium_firebox.name=中子素燃烧室
 
 gtqtcore.machine.electrobath.name=Industrial Electrolyzer
 

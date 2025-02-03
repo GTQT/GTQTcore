@@ -49,6 +49,8 @@ import static keqing.gtqtcore.api.unification.TJMaterials.Polyetheretherketone;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.swarm;
 import static keqing.gtqtcore.api.utils.GTQTUniversUtil.MINUTE;
 import static keqing.gtqtcore.api.utils.GTQTUtil.CWT;
+import static keqing.gtqtcore.common.block.blocks.BlockActiveUniqueCasing.ActiveCasingType.ADVANCED_FORCE_FIELD_CONSTRAINT_COIL;
+import static keqing.gtqtcore.common.block.blocks.BlockActiveUniqueCasing.ActiveCasingType.FORCE_FIELD_CONSTRAINT_COIL;
 import static keqing.gtqtcore.common.block.blocks.BlockIsaCasing.CasingType.FLOTATION_CASING_GEARBOX;
 import static keqing.gtqtcore.common.block.blocks.BlockIsaCasing.CasingType.ISA_MILL_CASING_GEARBOX;
 import static keqing.gtqtcore.common.block.blocks.BlocksResearchSystem.CasingType.*;
@@ -57,6 +59,7 @@ import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.COMBU
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.GAS_TURBINE;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.STEAM_TURBINE;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.*;
+import static keqing.gtqtcore.loaders.recipes.handlers.ChipHelper.SECOND;
 
 public class KeQingNET {
 
@@ -531,6 +534,51 @@ public class KeQingNET {
                         .EUt(VA[UV]))
                 .EUt(VA[UV])
                 .duration(600)
+                .buildAndRegister();
+
+        // Force Field Constraint Coil
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(frameGt, Osmium, 1)
+                .input(FIELD_GENERATOR_UV, 2)
+                .input(ELECTRIC_PUMP_UV, 4)
+                .input(plateDense, Americium, 8)
+                .input(plateDense, Naquadah, 8)
+                .input(foil, Trinium, 16)
+                .input(cableGtQuadruple, YttriumBariumCuprate, 2)
+                .fluidInputs(VanadiumGallium.getFluid(L * 16))
+                .fluidInputs(KaptonK.getFluid(L * 16))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 16))
+                .fluidInputs(NaquadahEnriched.getFluid(L * 8))
+                .outputs(GTQTMetaBlocks.blockActiveUniqueCasing.getItemVariant(FORCE_FIELD_CONSTRAINT_COIL, 2))
+                .EUt(VA[UV])
+                .duration(50 * SECOND)
+                .stationResearch(b -> b
+                        .researchStack(DISK_26.getStackForm())
+                        .CWUt(CWT[ZPM])
+                        .EUt(VA[UV]))
+                .EUt(VA[UV])
+                .buildAndRegister();
+
+        // Advanced Force Field Constraint Coil
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(frameGt, Tritium, 1)
+                .input(FIELD_GENERATOR_UHV, 2)
+                .input(ELECTRIC_PUMP_UHV, 4)
+                .input(plateDense, Neutronium, 8)
+                .input(plateDense, NaquadahEnriched, 8)
+                .input(foil, Dubnium, 16)
+                .input(cableGtQuadruple, Europium, 2)
+                .fluidInputs(VanadiumGallium.getFluid(L * 16))
+                .fluidInputs(KaptonK.getFluid(L * 16))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 16))
+                .fluidInputs(NaquadahEnriched.getFluid(L * 8))
+                .outputs(GTQTMetaBlocks.blockActiveUniqueCasing.getItemVariant(ADVANCED_FORCE_FIELD_CONSTRAINT_COIL, 2))
+                .EUt(VA[UHV])
+                .duration(50 * SECOND)
+                .stationResearch(b -> b
+                        .researchStack(DISK_26.getStackForm())
+                        .CWUt(CWT[ZPM])
+                        .EUt(VA[UV]))
                 .buildAndRegister();
 
         //  Hyper Reactor Mk I

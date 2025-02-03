@@ -37,6 +37,7 @@ public class GTQTMetaBlocks {
     public static BlockMultiblockCasing4 blockMultiblockCasing4;
     public static BlockMultiblockCasing5 blockMultiblockCasing5;
     public static BlockMultiblockCasing6 blockMultiblockCasing6;
+    public static BlockFireboxCasing FIREBOX_CASING;
     public static BlockMultiblockCasingActive blockMultiblockCasingActive;
     public static BlockMultiblockGlass blockMultiblockGlass;
     public static BlockMultiblockGlass1 blockMultiblockGlass1;
@@ -121,6 +122,9 @@ public class GTQTMetaBlocks {
         blockMultiblockCasing6 = new BlockMultiblockCasing6();
         blockMultiblockCasing6.setRegistryName("multiblock_casing6");
 
+        FIREBOX_CASING = new BlockFireboxCasing();
+        FIREBOX_CASING.setRegistryName("firebox_casing");
+
         blockMultiblockCasingActive = new BlockMultiblockCasingActive();
         blockMultiblockCasingActive.setRegistryName("multiblock_casing_active");
 
@@ -187,6 +191,7 @@ public class GTQTMetaBlocks {
         registerItemModel(blockMultiblockCasing4);
         registerItemModel(blockMultiblockCasing5);
         registerItemModel(blockMultiblockCasing6);
+        registerItemModel(FIREBOX_CASING);
         registerItemModel(blockMultiblockCasingActive);
         registerItemModel(blockMultiblockGlass);
         registerItemModel(blockMultiblockGlass1);

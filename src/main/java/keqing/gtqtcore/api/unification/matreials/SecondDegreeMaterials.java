@@ -1274,5 +1274,94 @@ public class SecondDegreeMaterials {
                 .components(Chrome, 1, Molybdenite, 1)
                 .build()
                 .setFormula("Cr:MoS2", true);
+
+        // 20018 Polyurethane Resin
+        PolyurethaneResin = new Material.Builder(getMaterialsId(), gregtechId("polyurethane_resin"))
+                .liquid()
+                .color(0xE6E678)
+                .iconSet(DULL)
+                .components(Carbon, 17, Hydrogen, 16, Nitrogen, 2, Oxygen, 4)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        // 20026 Polyurethane Catalyst A
+        PolyurethaneCatalystA = new Material.Builder(getMaterialsId(), gregtechId("polyurethane_catalyst_a"))
+                .dust()
+                .color(0x323232)
+                .iconSet(DULL)
+                .components(Butanol, 2, PropionicAcid, 1, Tin, 1)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        // 20027 Nickel Tetracarbonyl
+        NickelTetracarbonyl = new Material.Builder(getMaterialsId(), gregtechId("nickel_tetracarbonyl"))
+                .liquid()
+                .color(0x6158BB)
+                .components(Carbon, 4, Nickel, 1, Oxygen, 4)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        // 20030 Diaminodiphenylmethane Mixture
+        DiaminodiphenylmethaneMixture = new Material.Builder(getMaterialsId(), gregtechId("diaminodiphenylmethane_mixture"))
+                .liquid()
+                .color(0xFFF37A)
+                .iconSet(DULL)
+                .components(Carbon, 13, Hydrogen, 14, Nitrogen, 2)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        // 20028 Diphenylmethane Diisocyanate Mixture
+        DiphenylmethaneDiisocyanateMixture = new Material.Builder(getMaterialsId(), gregtechId("diphenylmethane_diisocyanate_mixture"))
+                .liquid()
+                .color(0xFFE632)
+                .iconSet(DULL)
+                .components(Carbon, 15, Hydrogen, 10, Nitrogen, 2, Oxygen, 2, RareEarth, 1)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        // 20021 Silicon Oil
+        SiliconOil = new Material.Builder(getMaterialsId(), gregtechId("silicon_oil"))
+                .liquid()
+                .color(0x9EA744)
+                .iconSet(DULL)
+                .flags(DISABLE_DECOMPOSITION)
+                .components(EthyleneOxide, 1, Dimethyldichlorosilane, 4, Water, 5)
+                .build();
+
+        // 20022 Diphenylmethane Diisocyanate
+        DiphenylmethaneDiisocyanate = new Material.Builder(getMaterialsId(), gregtechId("diphenylmethane_diisocyanate"))
+                .dust()
+                .color(0xFFE632)
+                .iconSet(DULL)
+                .components(Carbon, 15, Hydrogen, 10, Nitrogen, 2, Oxygen, 2)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        // 5184 Mercury Dibromide
+        MercuryDibromide = new Material.Builder(getMaterialsId(), gregtechId("mercury_dibromide"))
+                .dust()
+                .color(0xD6E6F4)
+                .components(Mercury, 1, Bromine, 2)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        // 20023 Pentaerythritol
+        Pentaerythritol = new Material.Builder(getMaterialsId(), gregtechId("pentaerythritol"))
+                .dust()
+                .color(0x1A6FAF)
+                .iconSet(ROUGH)
+                .components(Carbon, 5, Hydrogen, 12, Oxygen, 4)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        // 20016 Crystal Kevlar
+        CrystalKevlar = new Material.Builder(getMaterialsId(), gregtechId("crystal_kevlar"))
+                .liquid()
+                .color(0xF0F078)
+                .components(Carbon, 14, Hydrogen, 10, Nitrogen, 2, Oxygen, 2)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("[-CO-C6H4-CO-NH-C6H4-NH-]n", true);
+
     }
 }

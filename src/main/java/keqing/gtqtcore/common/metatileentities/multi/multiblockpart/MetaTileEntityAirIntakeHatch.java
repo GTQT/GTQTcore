@@ -43,11 +43,9 @@ import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
 import org.apache.commons.lang3.tuple.Pair;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 import static gregtech.api.GTValues.*;
 import static keqing.gtqtcore.api.utils.GTQTUniversUtil.TICK;
@@ -85,15 +83,20 @@ public class MetaTileEntityAirIntakeHatch extends MetaTileEntityMultiblockNotifi
             // 过滤出具有GasCollectorDimensionProperty属性的配方
             List<Recipe> filteredRecipes = recipes.stream()
                     .filter(recipe -> recipe.hasProperty(GasCollectorDimensionProperty.getInstance()))
-                    .toList();
+                    .collect(Collectors.toList()); // 先收集为普通列表
 
-            // 将配方映射为Pair<Recipe, DimensionID>
+            // 将普通列表转换为不可修改列表
+            filteredRecipes = Collections.unmodifiableList(filteredRecipes);
+
+             // 将配方映射为Pair<Recipe, DimensionID>
             List<Pair<Recipe, Integer>> recipeDimensionPairs = filteredRecipes.stream()
                     .map(recipe -> Pair.of(recipe,
                             recipe.getProperty(GasCollectorDimensionProperty.getInstance(), IntLists.EMPTY_LIST).get(0)))
-                    .toList();
+                    .collect(Collectors.toList()); // 同样先收集为普通列表
 
-            // 过滤出维度ID与当前世界维度ID匹配的配方
+             // 将普通列表转换为不可修改列表
+            recipeDimensionPairs = Collections.unmodifiableList(recipeDimensionPairs);
+
             // 过滤出维度ID与当前世界维度ID匹配的配方
             Optional<Pair<Recipe, Integer>> matchingRecipe = recipeDimensionPairs.stream()
                     .filter(pair -> pair.getRight().equals(this.getWorld().provider.getDimension())) // 使用 getRight() 方法

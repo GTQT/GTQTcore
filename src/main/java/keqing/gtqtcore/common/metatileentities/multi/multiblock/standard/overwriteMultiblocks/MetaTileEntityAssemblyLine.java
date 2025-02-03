@@ -61,7 +61,6 @@ public class MetaTileEntityAssemblyLine extends GTQTRecipeMapMultiblockControlle
     private static final ResourceLocation LASER_LOCATION = GTUtility.gregtechId("textures/fx/laser/laser.png");
     private static final ResourceLocation LASER_HEAD_LOCATION = GTUtility
             .gregtechId("textures/fx/laser/laser_start.png");
-    int tier;
     private int glass_tier;
     private int laser_tier;
     private int casing_tier;
@@ -138,9 +137,10 @@ public class MetaTileEntityAssemblyLine extends GTQTRecipeMapMultiblockControlle
                 () -> ((WrappedIntTired) glass_tier).getIntTier(),
                 0);
 
-        setTier(Math.min(this.casing_tier, this.laser_tier));
-        setMaxVoltage(Math.min(Math.min(this.casing_tier, this.laser_tier), 6));
+        setTier(Math.min(this.casing_tier, this.laser_tier*2));
+        setMaxVoltage(Math.min(Math.min(this.casing_tier, this.laser_tier*2), 6));
         setTimeReduce((100 - Math.min(this.glass_tier, 10) * 5.0) / 100);
+
         this.writeCustomData(GTQTValue.UPDATE_TIER14, buf -> buf.writeInt(this.casing_tier));
     }
 

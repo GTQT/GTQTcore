@@ -16,7 +16,7 @@ import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 public class NaquadahFuelChain {
     public static void init() {
         NaquadahFuel();
-        //FuelRefineChain();
+        FuelRefineChain();
         HyperReactorFuel();
         CommonFuel();
         ThoriumBasedLiquidFuelChain();
@@ -389,7 +389,7 @@ private static void ThoriumBasedLiquidFuelChain() {
                 .fluidOutputs(NaquadahFuelMKII.getFluid(500))
                 .EUt(525000)
                 .duration(25 * SECOND)
-                .blastFurnaceTemp(8000)
+                .tier(1)
                 .buildAndRegister();
 
         NAQUADAH_REFINE_FACTORY_RECIPES.recipeBuilder()
@@ -402,7 +402,7 @@ private static void ThoriumBasedLiquidFuelChain() {
                 .fluidOutputs(NaquadahFuelMKIII.getFluid(500))
                 .EUt(1100000)
                 .duration(5 * SECOND)
-                .blastFurnaceTemp(8000)
+                .tier(1)
                 .buildAndRegister();
 
         NAQUADAH_REFINE_FACTORY_RECIPES.recipeBuilder()
@@ -415,7 +415,7 @@ private static void ThoriumBasedLiquidFuelChain() {
                 .fluidOutputs(NaquadahFuelMKIII.getFluid(100))
                 .EUt(1100000)
                 .duration(5 * SECOND)
-                .blastFurnaceTemp(8000)
+                .tier(1)
                 .buildAndRegister();
 
         NAQUADAH_REFINE_FACTORY_RECIPES.recipeBuilder()
@@ -428,7 +428,7 @@ private static void ThoriumBasedLiquidFuelChain() {
                 .fluidOutputs(NaquadahFuelMKIV.getFluid(500))
                 .EUt(46000000)
                 .duration(8 * SECOND)
-                .blastFurnaceTemp(9200)
+                .tier(2)
                 .buildAndRegister();
 
         /////////////////////////////////////偷鸡简化/////////////////////////////////////
@@ -451,7 +451,7 @@ private static void ThoriumBasedLiquidFuelChain() {
                 .circuitMeta(11)
                 .fluidOutputs(LightNaquadahFuel.getFluid(2000))
                 .duration(300)
-                .blastFurnaceTemp(6000)
+                .tier(1)
                 .EUt(VA[UV])
                 .buildAndRegister();
 
@@ -474,7 +474,7 @@ private static void ThoriumBasedLiquidFuelChain() {
                 .circuitMeta(12)
                 .fluidOutputs(MediumNaquadahFuel.getFluid(2000))
                 .duration(300)
-                .blastFurnaceTemp(6000)
+                .tier(1)
                 .EUt(VA[UV])
                 .buildAndRegister();
 
@@ -497,7 +497,7 @@ private static void ThoriumBasedLiquidFuelChain() {
                 .circuitMeta(13)
                 .fluidOutputs(HeavyNaquadahFuel.getFluid(2000))
                 .duration(300)
-                .blastFurnaceTemp(6000)
+                .tier(1)
                 .EUt(VA[UV])
                 .buildAndRegister();
     }
@@ -598,79 +598,112 @@ private static void ThoriumBasedLiquidFuelChain() {
     }
 
     private static void FuelRefineChain() {
-        //  Light Taranium Fuel
+        // Light Taranium Fuel
         FUEL_REFINE_FACTORY_RECIPES.recipeBuilder()
-                .input(dust, Taranium)
-                .input(dust, Gallium)
-                .fluidInputs(DragonBlood.getFluid(1000))
+                .circuitMeta(4)
+                .input(dust, Taranium, 1)
+                .input(dust, Gallium, 1)
                 .fluidInputs(LightNaquadahFuel.getFluid(12000))
                 .fluidInputs(Krypton.getFluid(6000))
-                .circuitMeta(4)
                 .fluidOutputs(LightTaraniumFuel.getFluid(12000))
-                .duration(300)
                 .EUt(VA[UV])
+                .duration(20 * SECOND)
                 .buildAndRegister();
 
-        //  Medium Taranium Fuel
+        NAQUADAH_REFINE_FACTORY_RECIPES.recipeBuilder()
+                .circuitMeta(14)
+                .input(dust, Adamantium, 1)
+                .input(dust, IndiumGalliumPhosphide, 1)
+                .fluidInputs(LightNaquadahFuel.getFluid(24000))
+                .fluidInputs(Krypton.getPlasma(8000))
+                .fluidOutputs(LightTaraniumFuel.getFluid(24000))
+                .EUt(VA[UHV])
+                .tier(2)
+                .duration(10 * SECOND)
+                .buildAndRegister();
+
+        // Medium Taranium Fuel
         FUEL_REFINE_FACTORY_RECIPES.recipeBuilder()
-                .input(dust, Taranium)
-                .input(dust, Duranium)
-                .fluidInputs(DragonBlood.getFluid(2000))
+                .circuitMeta(5)
+                .input(dust, Taranium, 1)
+                .input(dust, Duranium, 1)
                 .fluidInputs(MediumNaquadahFuel.getFluid(12000))
                 .fluidInputs(Xenon.getFluid(6000))
-                .circuitMeta(5)
                 .fluidOutputs(MediumTaraniumFuel.getFluid(12000))
-                .duration(300)
                 .EUt(VA[UV])
+                .duration(20 * SECOND)
                 .buildAndRegister();
 
-        //  Heavy Taranium Fuel
+        NAQUADAH_REFINE_FACTORY_RECIPES.recipeBuilder()
+                .circuitMeta(15)
+                .input(dust, Adamantium, 1)
+                .input(dust, Europium, 1)
+                .fluidInputs(MediumNaquadahFuel.getFluid(24000))
+                .fluidInputs(Xenon.getPlasma(8000))
+                .fluidOutputs(MediumTaraniumFuel.getFluid(24000))
+                .EUt(VA[UHV])
+                .tier(2)
+                .duration(10 * SECOND)
+                .buildAndRegister();
+
+        // Heavy Taranium Fuel
         FUEL_REFINE_FACTORY_RECIPES.recipeBuilder()
-                .input(dust, Taranium)
-                .input(dust, Tritanium)
-                .fluidInputs(DragonBlood.getFluid(4000))
+                .circuitMeta(6)
+                .input(dust, Taranium, 1)
+                .input(dust, Tritanium, 1)
                 .fluidInputs(HeavyNaquadahFuel.getFluid(12000))
                 .fluidInputs(Radon.getFluid(6000))
-                .circuitMeta(6)
                 .fluidOutputs(HeavyTaraniumFuel.getFluid(12000))
-                .duration(300)
                 .EUt(VA[UV])
+                .duration(20 * SECOND)
                 .buildAndRegister();
 
-        //  Light Enriched Taranium Fuel
-        FUEL_REFINE_FACTORY_RECIPES.recipeBuilder()
-                .input(dust, Americium)
-                .fluidInputs(DragonBlood.getFluid(1000))
+        NAQUADAH_REFINE_FACTORY_RECIPES.recipeBuilder()
+                .circuitMeta(16)
+                .input(dust, Adamantium, 1)
+                .input(dust, Neutronium, 1)
+                .fluidInputs(HeavyNaquadahFuel.getFluid(24000))
+                .fluidInputs(Radon.getPlasma(8000))
+                .fluidOutputs(HeavyTaraniumFuel.getFluid(24000))
+                .EUt(VA[UHV])
+                .tier(2)
+                .duration(10 * SECOND)
+                .buildAndRegister();
+
+        // Light Enriched Taranium Fuel
+        NAQUADAH_REFINE_FACTORY_RECIPES.recipeBuilder()
+                .circuitMeta(7)
+                .input(dust, Americium, 1)
                 .fluidInputs(LightTaraniumFuel.getFluid(6000))
                 .fluidInputs(EnergeticNaquadria.getFluid(1000))
-                .circuitMeta(14)
                 .fluidOutputs(LightEnrichedTaraniumFuel.getFluid(6000))
-                .duration(300)
                 .EUt(VA[UHV])
+                .tier(2)
+                .duration(5 * SECOND)
                 .buildAndRegister();
 
-        //  Medium Enriched Taranium Fuel
-        FUEL_REFINE_FACTORY_RECIPES.recipeBuilder()
-                .input(dust, Dubnium)
-                .fluidInputs(DragonBlood.getFluid(2000))
+        // Medium Enriched Taranium Fuel
+        NAQUADAH_REFINE_FACTORY_RECIPES.recipeBuilder()
+                .circuitMeta(8)
+                .input(dust, Dubnium, 1)
                 .fluidInputs(MediumTaraniumFuel.getFluid(6000))
                 .fluidInputs(EnergeticNaquadria.getFluid(1000))
-                .circuitMeta(15)
                 .fluidOutputs(MediumEnrichedTaraniumFuel.getFluid(6000))
-                .duration(300)
                 .EUt(VA[UHV])
+                .tier(2)
+                .duration(5 * SECOND)
                 .buildAndRegister();
 
-        //  Heavy Enriched Taranium Fuel
-        FUEL_REFINE_FACTORY_RECIPES.recipeBuilder()
-                .input(dust, Livermorium)
-                .fluidInputs(DragonBlood.getFluid(4000))
+        // Heavy Enriched Taranium Fuel
+        NAQUADAH_REFINE_FACTORY_RECIPES.recipeBuilder()
+                .circuitMeta(9)
+                .input(dust, Livermorium, 1)
                 .fluidInputs(HeavyTaraniumFuel.getFluid(6000))
                 .fluidInputs(EnergeticNaquadria.getFluid(1000))
-                .circuitMeta(16)
                 .fluidOutputs(HeavyEnrichedTaraniumFuel.getFluid(6000))
-                .duration(300)
                 .EUt(VA[UHV])
+                .tier(2)
+                .duration(5 * SECOND)
                 .buildAndRegister();
 
         //  Energetic Naquadria
@@ -688,46 +721,49 @@ private static void ThoriumBasedLiquidFuelChain() {
                 .EUt(65536)
                 .buildAndRegister();
 
-        //  Light Hyper Fuel
-        FUEL_REFINE_FACTORY_RECIPES.recipeBuilder()
-                .input(dust, Europium)
+        // Light Hyper Fuel
+        NAQUADAH_REFINE_FACTORY_RECIPES.recipeBuilder()
+                .circuitMeta(17)
+                .input(dust, Europium, 1)
                 .fluidInputs(LightTaraniumFuel.getFluid(500))
                 .fluidInputs(LightEnrichedTaraniumFuel.getFluid(300))
                 .fluidInputs(EnergeticNaquadria.getFluid(200))
                 .fluidInputs(Uranium238.getFluid(L))
-                .circuitMeta(7)
-                .output(dust, Naquadah)
+                .output(dust, Naquadah, 1)
                 .fluidOutputs(LightHyperFuel.getFluid(2000))
-                .duration(460)
                 .EUt(VA[UHV])
+                .tier(3)
+                .duration(23 * SECOND)
                 .buildAndRegister();
 
-        //  Medium Hyper Fuel
-        FUEL_REFINE_FACTORY_RECIPES.recipeBuilder()
-                .input(dust, Americium)
+        // Medium Hyper Fuel
+        NAQUADAH_REFINE_FACTORY_RECIPES.recipeBuilder()
+                .circuitMeta(18)
+                .input(dust, Americium, 1)
                 .fluidInputs(MediumTaraniumFuel.getFluid(400))
                 .fluidInputs(MediumEnrichedTaraniumFuel.getFluid(350))
                 .fluidInputs(EnergeticNaquadria.getFluid(250))
                 .fluidInputs(Uranium235.getFluid(L))
-                .circuitMeta(8)
-                .output(dust, NaquadahEnriched)
+                .output(dust, NaquadahEnriched, 1)
                 .fluidOutputs(MediumHyperFuel.getFluid(2000))
-                .duration(520)
                 .EUt(VA[UHV])
+                .tier(3)
+                .duration(26 * SECOND)
                 .buildAndRegister();
 
-        //  Heavy Hyper Fuel
-        FUEL_REFINE_FACTORY_RECIPES.recipeBuilder()
-                .input(dust, Orichalcum)
+        // Heavy Hyper Fuel
+        NAQUADAH_REFINE_FACTORY_RECIPES.recipeBuilder()
+                .circuitMeta(19)
+                .input(dust, Neutronium, 1)
                 .fluidInputs(HeavyTaraniumFuel.getFluid(300))
                 .fluidInputs(HeavyEnrichedTaraniumFuel.getFluid(400))
                 .fluidInputs(EnergeticNaquadria.getFluid(300))
                 .fluidInputs(Plutonium239.getFluid(L))
-                .circuitMeta(9)
-                .output(dust, NaquadahEnriched)
+                .output(dust, Naquadria, 1)
                 .fluidOutputs(HeavyHyperFuel.getFluid(2000))
-                .duration(580)
                 .EUt(VA[UHV])
+                .tier(3)
+                .duration(29 * SECOND)
                 .buildAndRegister();
 
         //  Adamantium + Bedrock Gas + Sulfuric Acid -> Adamantium Enriched + Deep Iron + Naquadah + Osmium + Diluted Sulfuric Acid

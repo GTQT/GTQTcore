@@ -54,12 +54,15 @@ public class MetaTileEntityChemicalPlant extends GTQTRecipeMapMultiblockControll
 
     public MetaTileEntityChemicalPlant(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{
+                RecipeMaps.CHEMICAL_RECIPES,
+                GTQTcoreRecipeMaps.POLYMERIZATION_RECIPES,
+                RecipeMaps.LARGE_CHEMICAL_RECIPES,
                 GTQTcoreRecipeMaps.CHEMICAL_PLANT
         });
         this.recipeMapWorkable = new ChemicalPlantLogic(this);
         setTierFlag(true);
         //setTier(auto);
-        setMaxParallel(128);
+        setMaxParallel(256);
         setMaxParallelFlag(true);
         //setMaxVoltage(auto);
         setMaxVoltageFlag(true);

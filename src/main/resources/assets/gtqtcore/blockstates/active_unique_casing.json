@@ -50,6 +50,58 @@
         "bot_all": "gtqtcore:blocks/casings/circuit_assembly_line_casing",
         "top_all": "gregtech:blocks/casings/mechanic/machine_casing_assembly_line_bloom"
       }
+    },
+    "active=false,variant=force_field_constraint_coil": {
+      "model": "minecraft:cube_all",
+      "textures": {
+        "all": "gregtech:blocks/casings/specials/force_field_constraint_coil"
+      }
+    },
+    "active=true,variant=force_field_constraint_coil": {
+      "model": "gregtech:cube_2_layer_all",
+      "textures": {
+        "bot_all": "gregtech:blocks/casings/specials/force_field_constraint_coil",
+        "top_all": "gregtech:blocks/casings/specials/force_field_constraint_coil_bloom"
+      }
+    },
+    "active=false,variant=advanced_force_field_constraint_coil": {
+      "model": "minecraft:cube_all",
+      "textures": {
+        "all": "gregtech:blocks/casings/specials/advanced_force_field_constraint_coil"
+      }
+    },
+    "active=true,variant=advanced_force_field_constraint_coil": {
+      "model": "gregtech:cube_2_layer_all",
+      "textures": {
+        "bot_all": "gregtech:blocks/casings/specials/advanced_force_field_constraint_coil",
+        "top_all": "gregtech:blocks/casings/specials/advanced_force_field_constraint_coil_bloom"
+      }
+    },
+    "active=false,variant=elite_force_field_constraint_coil": {
+      "model": "minecraft:cube_all",
+      "textures": {
+        "all": "gregtech:blocks/casings/specials/elite_force_field_constraint_coil"
+      }
+    },
+    "active=true,variant=elite_force_field_constraint_coil": {
+      "model": "gregtech:cube_2_layer_all",
+      "textures": {
+        "bot_all": "gregtech:blocks/casings/specials/elite_force_field_constraint_coil",
+        "top_all": "gregtech:blocks/casings/specials/elite_force_field_constraint_coil_bloom"
+      }
+    },
+    "active=false,variant=ultimate_force_field_constraint_coil": {
+      "model": "minecraft:cube_all",
+      "textures": {
+        "all": "gregtech:blocks/casings/specials/ultimate_force_field_constraint_coil"
+      }
+    },
+    "active=true,variant=ultimate_force_field_constraint_coil": {
+      "model": "gregtech:cube_2_layer_all",
+      "textures": {
+        "bot_all": "gregtech:blocks/casings/specials/ultimate_force_field_constraint_coil",
+        "top_all": "gregtech:blocks/casings/specials/ultimate_force_field_constraint_coil_bloom"
+      }
     }
   }
 }

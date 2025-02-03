@@ -23,6 +23,10 @@ public class TiredTraceabilityPredicate {
     public static Supplier<TierTraceabilityPredicate> CP_PAF_CASING = () -> new TierTraceabilityPredicate(MAP_PAF_CASING,
             Comparator.comparing((s) -> ((WrappedIntTired) MAP_PAF_CASING.get(s)).getIntTier()), "PAF", null);
 
+    public static Supplier<TierTraceabilityPredicate> FORCE_FIELD_COIL = () -> new TierTraceabilityPredicate(MAP_FORCE_FIELD_COIL,
+            Comparator.comparing((s) -> ((WrappedIntTired) MAP_FORCE_FIELD_COIL.get(s)).getIntTier()), "ForceFieldCoil", null);
+
+
     public static Supplier<TierTraceabilityPredicate> CP_ZW_CASING = () -> new TierTraceabilityPredicate(MAP_ZW_CASING,
             Comparator.comparing((s) -> ((WrappedIntTired) MAP_ZW_CASING.get(s)).getIntTier()), "ZW", null);
     public static Supplier<TierTraceabilityPredicate> CP_TJ_CASING = () -> new TierTraceabilityPredicate(MAP_TJ_CASING,
@@ -67,4 +71,6 @@ public class TiredTraceabilityPredicate {
      public static Supplier<TierTraceabilityPredicate> CAL_CASING= () -> new TierTraceabilityPredicate(MAP_CAL_CASING,
             Comparator.comparing((s) -> ((WrappedIntTired)MAP_CAL_CASING.get(s)).getIntTier()),"CALCasing",null);
 
+    public static Supplier<TierTraceabilityPredicate> FIREBOX_CASING= () -> new TierTraceabilityPredicate(MAP_FIREBOX_CASING,
+            Comparator.comparing((s) -> ((WrappedIntTired)MAP_FIREBOX_CASING.get(s)).getIntTier()),"FireboxCasing",null);
 }

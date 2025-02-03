@@ -54,23 +54,6 @@ public class GTQTTraceabilityPredicate {
         }, GTQTUtil.getCandidates(Arrays.stream(allowedAbilities).flatMap(ability -> MultiblockAbility.REGISTRY.get(ability).stream()).toArray(MetaTileEntity[]::new)));
     }
 
-    public static Supplier<TraceabilityPredicate> FIRE_BOX = () -> new TraceabilityPredicate(blockWorldState -> {
-        IBlockState blockState = blockWorldState.getBlockState();
-        if ((blockState.getBlock() instanceof BlockFireboxCasing BlockFireboxCasing)) {
-            BlockFireboxCasing.FireboxCasingType casingType = BlockFireboxCasing.getState(blockState);
-            Object currentCasingType = blockWorldState.getMatchContext().getOrPut("CasingType", casingType);
-            if (!currentCasingType.toString().equals(casingType.toString())) {
-                blockWorldState.setError(new PatternStringError("gtqtcore.machine.pattern.firebox"));
-                return false;
-            }
-            blockWorldState.getMatchContext().getOrPut("VABlock", new LinkedList<>()).add(blockWorldState.getPos());
-            return true;
-        }
-        return false;
-    }, () -> ArrayUtils.addAll(Arrays.stream(BlockFireboxCasing.FireboxCasingType.values())
-            .map(type -> new BlockInfo(MetaBlocks.BOILER_FIREBOX_CASING.getState(type), null))
-            .toArray(BlockInfo[]::new)))
-            .addTooltips("gtqtcore.machine.pattern.firebox");
     public static Supplier<TraceabilityPredicate> ROTOR_HOLDER = () -> new TraceabilityPredicate(blockWorldState -> {
         TileEntity tileEntity = blockWorldState.getTileEntity();
         if (tileEntity instanceof IGregTechTileEntity) {

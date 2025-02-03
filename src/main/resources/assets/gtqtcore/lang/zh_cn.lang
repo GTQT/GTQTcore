@@ -3253,6 +3253,13 @@ gregtech.machine.bioreb.gtqtupdate.2=使用五种基本菌群进行线性组合�
 gregtech.machine.bioreb.gtqtupdate.3=提供富集生物培养基提升多方块并行数量（并行不额外消耗原始菌群）
 gregtech.machine.bioreb.gtqtupdate.4=提供水默认PH7 盐酸PH4 氢氧化钠PH10，暂不支持其他材料。
 
+gtqtcore.machine.naquadah_fuel_refine_factory.tooltip.1=用于生产特殊高能燃料
+gtqtcore.machine.naquadah_fuel_refine_factory.tooltip.2=需要不同等级的§6力场约束线圈方块§7以遏制巨量致命辐射外泄
+gtqtcore.machine.naquadah_fuel_refine_factory.tooltip.3=线圈等级限制了最大可执行配方等级，当配方要求等级小于线圈等级时将无法运行。
+gtqtcore.machine.naquadah_fuel_refine_factory.tooltip.4=当线圈等级大于配方要求等级时，获得§b无损超频§7。
+gtqtcore.machine.naquadah_fuel_refine_factory.tooltip.5=每提高1个§e电压等级§7，配方所需时间就变为原本的§l80%%§r§7。
+gtqtcore.machine.naquadah_fuel_refine_factory.tooltip.6=每提高1个§a线圈等级§7，每次运行可以多处理§l16§r§7个物品。
+
 gtqtcore.hc.count1=换热面积：%s 换热效率：%s
 gtqtcore.hc.count2=外壳等级：%s 玻璃等级：%s
 gtqtcore.hc.count3=高温热源缓存：%s 低温热量缓存：%s
@@ -4036,6 +4043,16 @@ gregtech.material.creosol_mixture=杂酚混合物
 gregtech.material.xylenol=二甲酚
 gregtech.material.creosol=甲酚
 gregtech.material.tricresyl_phosphate=磷酸三甲苯酯
+gregtech.material.polyurethane_resin=聚氨酯树脂
+gregtech.material.polyurethane_catalyst_a=聚氨酯催化剂A
+gregtech.material.nickel_tetracarbonyl=镍羰基四羰基
+gregtech.material.diaminodiphenylmethane_mixture=二氨基二苯甲烷混合物
+gregtech.material.diphenylmethane_diisocyanate_mixture=二苯基甲烷二异氰酸酯混合物
+gregtech.material.silicon_oil=硅油
+gregtech.material.diphenylmethane_diisocyanate=二苯基甲烷二异氰酸酯
+gregtech.material.mercury_dibromide=汞溴化物
+gregtech.material.pentaerythritol=戊四醇
+gregtech.material.crystal_kevlar=晶体凯夫拉
 
 
 gregtech.material.iron_front=铁矿泡沫
@@ -4873,6 +4890,16 @@ tile.active_unique_casing.advanced_assembly_line_casing.name=进阶装配机械�
 tile.active_unique_casing.advanced_assembly_control_casing.name=进阶装配控制外壳
 tile.active_unique_casing.circuit_assembly_line_casing.name=电路装配机械方块
 tile.active_unique_casing.circuit_assembly_control_casing.name=电路装配控制外壳
+tile.active_unique_casing.force_field_constraint_coil.name=力场约束线圈方块
+tile.active_unique_casing.advanced_force_field_constraint_coil.name=进阶力场约束线圈方块
+tile.active_unique_casing.elite_force_field_constraint_coil.name=精英力场约束线圈方块
+tile.active_unique_casing.ultimate_force_field_constraint_coil.name=终极力场约束线圈方块
+
+tile.firebox_casing.stainless_steel_firebox.name=不锈钢燃烧室
+tile.firebox_casing.rhodium_plated_palladium_firebox.name=镀铑钯燃烧室
+tile.firebox_casing.naquadah_alloy_firebox.name=硅岩合金燃烧室
+tile.firebox_casing.darmstadtium_firebox.name=钅达燃烧室
+tile.firebox_casing.neutronium_firebox.name=中子素燃烧室
 
 gtqtcore.machine.electrobath.name=工业电解槽
 

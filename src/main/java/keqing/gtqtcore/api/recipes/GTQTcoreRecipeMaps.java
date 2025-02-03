@@ -215,7 +215,7 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<PHRecipeBuilder> FERMENTATION_TANK_RECIPES;
     public static final RecipeMap<FuelRecipeBuilder> NAQUADAH_REACTOR_RECIPES;
     public static final RecipeMap<SimpleRecipeBuilder> FUEL_REFINE_FACTORY_RECIPES;
-    public static final RecipeMap<BlastRecipeBuilder> NAQUADAH_REFINE_FACTORY_RECIPES;
+    public static final RecipeMap<ForceFieldCoilRecipeBuilder> NAQUADAH_REFINE_FACTORY_RECIPES;
     public static final RecipeMap<FuelRecipeBuilder> ROCKET;
     public static final RecipeMap<FuelRecipeBuilder> NAQUADAH_REACTOR;
     public static final RecipeMap<FuelRecipeBuilder> I_MODULAR_FISSION_REACTOR;
@@ -559,7 +559,7 @@ public class GTQTcoreRecipeMaps {
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL)
                 .setSound(GTValues.FOOLS.get() ? GTSoundEvents.SCIENCE : GTSoundEvents.CHEMICAL_REACTOR);
 
-        NAQUADAH_REFINE_FACTORY_RECIPES = new RecipeMap<>("naquadah_refine_factory_recipes", 3,  6,  6, 3, new BlastRecipeBuilder(), false)
+        NAQUADAH_REFINE_FACTORY_RECIPES = new RecipeMap<>("naquadah_refine_factory_recipes", 3,  6,  6, 3, new ForceFieldCoilRecipeBuilder(), false)
                 .setSlotOverlay(false, false, false, GuiTextures.MOLECULAR_OVERLAY_1)
                 .setSlotOverlay(false, false, true, GuiTextures.MOLECULAR_OVERLAY_2)
                 .setSlotOverlay(false, true, false, GuiTextures.MOLECULAR_OVERLAY_3)

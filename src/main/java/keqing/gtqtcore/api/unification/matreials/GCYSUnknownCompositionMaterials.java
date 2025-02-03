@@ -2,22 +2,17 @@ package keqing.gtqtcore.api.unification.matreials;
 
 import gregtech.api.unification.material.Material;
 
+import static gregtech.api.unification.material.info.MaterialIconSet.*;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.info.MaterialFlags.DISABLE_DECOMPOSITION;
-import static gregtech.api.unification.material.info.MaterialIconSet.FINE;
-import static gregtech.api.unification.material.info.MaterialIconSet.ROUGH;
 import static gregtech.api.util.GTUtility.gregtechId;
 
 public class GCYSUnknownCompositionMaterials {
-
     /**
      * 18000-19999
      */
     public static void init() {
-
-
-
         RareEarthChloridesSolution = new Material.Builder(18001, gregtechId("rare_earth_chlorides_solution"))
                 .fluid()
                 .color(0x838367)
@@ -35,6 +30,14 @@ public class GCYSUnknownCompositionMaterials {
         SteamCrackedTurpentine = new Material.Builder(18003, gregtechId("steamcracked_turpentine")).fluid().color(0x634D56).build();
 
         BZMedium = new Material.Builder(18004, gregtechId("bz_medium")).fluid().color(0xA2FD35).build(); //TODO "The Belousov-Zhabotinsky Reaction" tooltip
+
+        // 25066 Mutated Living Solder
+        MutatedLivingSolder = new Material.Builder(18005, gregtechId("mutated_living_solder"))
+                .fluid()
+                .color(0x936D9B)
+                .iconSet(DULL)
+                .build()
+                .setFormula("?Sn?Bi?", true);
 
         RichNitrogenMixture = new Material.Builder(18013, gregtechId("rich_nitrogen_mixture")).gas().color(0x6891D8).build();
 
@@ -125,5 +128,7 @@ public class GCYSUnknownCompositionMaterials {
         MediumHyperFuel = new Material.Builder(18055, gregtechId("medium_hyper_fuel")).fluid().color(0xDC0A0A).build();
 
         HeavyHyperFuel = new Material.Builder(18056, gregtechId("heavy_hyper_fuel")).fluid().color(0x1E5064).build();
+
+
     }
 }

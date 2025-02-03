@@ -17,7 +17,7 @@ public class GTQTMaterialFlagAddition {
 
     public static void init() {
         Material[] material = {
-                Polyethylene,Carbon,Graphite,Invar,
+                Polyethylene,Carbon,Graphite,Invar,Osmium,Naquadah,Dubnium,Tritium,
                 Lanthanum,Praseodymium,Neodymium,Cerium,Scandium,Europium,Gadolinium,Yttrium,Terbium,Dysprosium,Holmium,Erbium,Thulium,Ytterbium,Lutetium,Niobium,Palladium,Ruthenium,Naquadria,Samarium,
                 Tritanium, Duranium, Technetium, Meitnerium, Roentgenium, Nobelium, Lawrencium, Moscovium, Lutetium,NaquadahEnriched,Trinium,
                 Stellite100, WatertightSteel, MaragingSteel300, HastelloyC276, HastelloyX, Trinaquadalloy, Zeron100, TitaniumCarbide,

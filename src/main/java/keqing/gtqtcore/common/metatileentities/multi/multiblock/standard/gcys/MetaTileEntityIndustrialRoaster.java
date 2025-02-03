@@ -27,10 +27,13 @@ import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.MetaTileEntities;
 import groovyjarjarantlr4.v4.runtime.misc.NotNull;
+import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.pattern.GTQTTraceabilityPredicate;
+import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.recipes.properties.NoCoilTemperatureProperty;
 import keqing.gtqtcore.api.unification.GTQTMaterials;
+import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
@@ -51,18 +54,22 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static gregtech.api.GTValues.EV;
 import static gregtech.api.GTValues.LV;
+import static keqing.gtqtcore.api.GTQTAPI.MAP_FIREBOX_CASING;
+import static keqing.gtqtcore.api.GTQTAPI.MAP_PA_CASING;
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing1.CasingType.MaragingSteel250;
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing3.CasingType.grisium;
 
 public class MetaTileEntityIndustrialRoaster extends GCYMRecipeMapMultiblockController implements IHeatingCoil {
 
-
+    int FireBoxTier;
     private int temperature;
 
     public MetaTileEntityIndustrialRoaster(ResourceLocation metaTileEntityId) {
@@ -85,7 +92,6 @@ public class MetaTileEntityIndustrialRoaster extends GCYMRecipeMapMultiblockCont
         }
 
     }
-
     private static IBlockState getBoilerCasingState() {
         return MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.STEEL_PIPE);
     }
@@ -102,39 +108,12 @@ public class MetaTileEntityIndustrialRoaster extends GCYMRecipeMapMultiblockCont
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
-        Object type = context.get("CasingType");
-        if (type instanceof BlockFireboxCasing.FireboxCasingType)
-            this.temperature = ((BlockFireboxCasing.FireboxCasingType) type).ordinal() * 1000 + 1000;
-        else this.temperature = 0;
-    }
+        Object FireBoxTier = context.get("FireboxCasingTieredStats");
+        this.FireBoxTier = GTQTUtil.getOrDefault(() -> FireBoxTier instanceof WrappedIntTired,
+                () -> ((WrappedIntTired) FireBoxTier).getIntTier(),
+                0);
 
-    @Override
-    public void invalidateStructure() {
-        super.invalidateStructure();
-        this.temperature = 0;
-        replaceFireboxAsActive(false);
-    }
-
-    @Override
-    public void onRemoval() {
-        super.onRemoval();
-        if (!getWorld().isRemote && isStructureFormed()) {
-            replaceFireboxAsActive(false);
-        }
-    }
-
-    public void replaceFireboxAsActive(boolean isActive) {
-        BlockPos centerPos = getPos().offset(getFrontFacing().getOpposite()).down();
-        for (int x = -1; x <= 1; x++) {
-            for (int z = -1; z <= 1; z++) {
-                BlockPos blockPos = centerPos.add(x, 0, z);
-                IBlockState blockState = getWorld().getBlockState(blockPos);
-                if (blockState.getBlock() instanceof BlockFireboxCasing) {
-                    blockState = ((IExtendedBlockState) blockState).withProperty(BlockFireboxCasing.ACTIVE, isActive);
-                    getWorld().setBlockState(blockPos, blockState);
-                }
-            }
-        }
+        this.temperature = this.FireBoxTier * 900 + 900;
     }
 
     @Override
@@ -158,7 +137,7 @@ public class MetaTileEntityIndustrialRoaster extends GCYMRecipeMapMultiblockCont
                 .where('P', states(getBoilerCasingState()))
                 .where('F', states(getFrameState()))
                 .where('M', abilities(MultiblockAbility.MUFFLER_HATCH))
-                .where('B', GTQTTraceabilityPredicate.FIRE_BOX.get())
+                .where('B', TiredTraceabilityPredicate.FIREBOX_CASING.get())
                 .where('#', air())
                 .where(' ', any())
                 .build();
@@ -224,7 +203,9 @@ public class MetaTileEntityIndustrialRoaster extends GCYMRecipeMapMultiblockCont
 
     @Override
     public List<MultiblockShapeInfo> getMatchingShapes() {
-        MultiblockShapeInfo.Builder builder = MultiblockShapeInfo.builder()
+        ArrayList<MultiblockShapeInfo> shapeInfo = new ArrayList<>();
+        MultiblockShapeInfo.Builder builder;
+        builder = MultiblockShapeInfo.builder()
                 .aisle("     ", "     ", " P P ", " P P ", " P P ")
                 .aisle("F   F", "FBBBF", "XPEPX", "XXXXX", " P P ")
                 .aisle("     ", "XBBBX", "XP PX", "XPHPX", " P P ")
@@ -241,8 +222,10 @@ public class MetaTileEntityIndustrialRoaster extends GCYMRecipeMapMultiblockCont
                 .where('H', MetaTileEntities.MUFFLER_HATCH[LV], EnumFacing.UP)
                 .where(' ', Blocks.AIR.getDefaultState())
                 .where('M', () -> ConfigHolder.machines.enableMaintenance ? MetaTileEntities.MAINTENANCE_HATCH : getCasingState(), EnumFacing.NORTH);
-        return Arrays.stream(BlockFireboxCasing.FireboxCasingType.values())
-                .map(casingType -> builder.where('B', MetaBlocks.BOILER_FIREBOX_CASING.getState(casingType)).build())
-                .collect(Collectors.toList());
+        MultiblockShapeInfo.Builder finalBuilder = builder;
+        MAP_FIREBOX_CASING.entrySet().stream()
+                .sorted(Comparator.comparingInt(entry -> ((WrappedIntTired) entry.getValue()).getIntTier()))
+                .forEach(entry -> shapeInfo.add(finalBuilder.where('B', entry.getKey()).build()));
+        return shapeInfo;
     }
 }

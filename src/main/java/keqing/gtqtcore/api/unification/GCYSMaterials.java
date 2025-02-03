@@ -245,6 +245,7 @@ public class GCYSMaterials {
     public static Material LeachedTurpentine;
     public static Material SteamCrackedTurpentine;
     public static Material BZMedium;
+    public static Material MutatedLivingSolder;
     public static Material RichNitrogenMixture;
     public static Material RichAmmoniaMixture;
     public static Material Brine;
