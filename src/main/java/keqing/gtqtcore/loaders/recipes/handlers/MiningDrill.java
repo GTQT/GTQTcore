@@ -173,22 +173,21 @@ public class MiningDrill {
                 .duration(400)
                 .buildAndRegister();
 
-        for(int i=-4;i<6;i++) {
+
             GRAVITY_SEPARATOR_RECIPES.recipeBuilder()
                     .input(Item)
                     .fluidInputs(Water.getFluid(1000))
                     .fluidInputs(Lubricant.getFluid(10))
-                    .chancedOutput(crushed, material1, 3000+500*Math.abs(5-i), 2000+200*Math.abs(-i))
-                    .chancedOutput(crushed, material2, 3000+500*Math.abs(4-i), 2000+200*Math.abs(1-i))
-                    .chancedOutput(crushed, material3, 3000+500*Math.abs(3-i), 2000+200*Math.abs(2-i))
-                    .chancedOutput(crushed, material4, 3000+500*Math.abs(2-i), 2000+200*Math.abs(3-i))
-                    .chancedOutput(crushed, material5, 3000+500*Math.abs(1-i), 2000+200*Math.abs(4-i))
-                    .chancedOutput(crushed, material6, 3000+500*Math.abs(-i), 2000+200*Math.abs(5-i))
+                    .chancedOutput(crushed, material1, 5000, 500)
+                    .chancedOutput(crushed, material2, 5000, 500)
+                    .chancedOutput(crushed, material3, 5000, 500)
+                    .chancedOutput(crushed, material4, 5000, 500)
+                    .chancedOutput(crushed, material5, 5000, 500)
+                    .chancedOutput(crushed, material6, 5000, 500)
                     .EUt(120)
                     .duration(200)
-                    .circuitMeta(i+5)
                     .buildAndRegister();
-        }
+
     }
     private static void MiningDrill(MetaItem.MetaValueItem Item,int kind) {
             MINING_DRILL_RECIPES.recipeBuilder()

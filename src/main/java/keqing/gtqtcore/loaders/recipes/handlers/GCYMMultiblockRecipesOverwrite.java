@@ -8,6 +8,7 @@ import gregtech.api.unification.stack.UnificationEntry;
 import gregtech.common.items.MetaItems;
 import gregtech.common.metatileentities.MetaTileEntities;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
+import supercritical.common.metatileentities.SCMetaTileEntities;
 
 import static gregicality.multiblocks.api.fluids.GCYMFluidStorageKeys.MOLTEN;
 import static gregicality.multiblocks.api.unification.GCYMMaterials.*;
@@ -178,6 +179,53 @@ public class GCYMMultiblockRecipesOverwrite {
                 .fluidInputs(TitaniumTungstenCarbide.getFluid(L * 64))
                 .fluidInputs(UltraGlue.getFluid(L * 64))
                 .output(GTQTMetaTileEntities.LARGE_CHEMICAL_FACTORY)
+                .EUt(VA[EV])
+                .duration(1200)
+                .scannerResearch(b -> b
+                        .researchStack(DISK_21.getStackForm())
+                        .duration(1200)
+                        .EUt(VA[EV]))
+                .buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(CIRCUIT_GOOD_I, 8)
+                .input(SCMetaTileEntities.DECAY_CHAMBER[IV], 8)
+                .input(ULTRAVIOLET_LAMP_CHAMBER[IV], 8)
+                .input(ROBOT_ARM_IV, 8)
+                .input(ELECTRIC_PUMP_IV, 8)
+                .input(plateDense, EglinSteel, 4)
+                .input(gear, Stellite, 4)
+                .input(plate, TitaniumCarbide, 16)
+                .input(wireFine, Osmium, 32)
+                .input(cableGtSingle, Platinum, 64)
+                .fluidInputs(Polybenzimidazole.getFluid(L * 32))
+                .fluidInputs(Zylon.getFluid(L * 64))
+                .fluidInputs(TitaniumTungstenCarbide.getFluid(L * 64))
+                .fluidInputs(UltraGlue.getFluid(L * 64))
+                .output(GTQTMetaTileEntities.LARGE_ULTRAVIOLET_LAMP)
+                .EUt(VA[EV])
+                .duration(1200)
+                .scannerResearch(b -> b
+                        .researchStack(DISK_21.getStackForm())
+                        .duration(1200)
+                        .EUt(VA[EV]))
+                .buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(CIRCUIT_GOOD_I, 8)
+                .input(MIXER[IV], 8)
+                .input(ROBOT_ARM_IV, 8)
+                .input(ELECTRIC_PUMP_IV, 8)
+                .input(plateDense, EglinSteel, 4)
+                .input(gear, Stellite, 4)
+                .input(plate, TitaniumCarbide, 16)
+                .input(wireFine, Osmium, 32)
+                .input(cableGtSingle, Platinum, 64)
+                .fluidInputs(Polybenzimidazole.getFluid(L * 32))
+                .fluidInputs(Zylon.getFluid(L * 64))
+                .fluidInputs(TitaniumTungstenCarbide.getFluid(L * 64))
+                .fluidInputs(UltraGlue.getFluid(L * 64))
+                .output(GTQTMetaTileEntities.LARGE_MIX)
                 .EUt(VA[EV])
                 .duration(1200)
                 .scannerResearch(b -> b

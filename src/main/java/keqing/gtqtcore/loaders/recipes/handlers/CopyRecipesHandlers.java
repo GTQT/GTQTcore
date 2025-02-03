@@ -25,6 +25,25 @@ import static keqing.gtqtcore.api.utils.GTQTUtil.CWT;
 
 public class CopyRecipesHandlers {
     public static void init() {
+        //搅拌
+        Collection<Recipe> mixerRecipes = RecipeMaps.MIXER_RECIPES.getRecipeList();
+        for (Recipe recipe : mixerRecipes) {
+            List<GTRecipeInput> fluidInputs = recipe.getFluidInputs();
+            List<FluidStack> fluidOutputs = recipe.getFluidOutputs();
+            List<GTRecipeInput> itemInputs = recipe.getInputs();
+            List<ItemStack> itemOutputs = recipe.getOutputs();
+            int EUt = (int) (recipe.getEUt()*1.5);
+            int baseDuration = recipe.getDuration()/2;
+
+            LARGE_MIXER_RECIPES.recipeBuilder()
+                    .duration(baseDuration)
+                    .EUt(EUt)
+                    .fluidInputs(fluidInputs)
+                    .inputIngredients(itemInputs)
+                    .outputs(itemOutputs)
+                    .fluidOutputs(fluidOutputs)
+                    .buildAndRegister();
+        }
         //固化
         Collection<Recipe> solidificationRecipes = RecipeMaps.FLUID_SOLIDFICATION_RECIPES.getRecipeList();
         for (Recipe recipe : solidificationRecipes) {

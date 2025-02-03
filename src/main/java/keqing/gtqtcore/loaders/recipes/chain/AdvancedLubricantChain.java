@@ -13,8 +13,7 @@ import static gregtech.api.unification.material.Materials.Lubricant;
 import static gregtech.api.unification.ore.OrePrefix.dust;
 import static gregtech.api.unification.ore.OrePrefix.dustTiny;
 import static gregtechfoodoption.GTFOMaterialHandler.Guaiacol;
-import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.CHEMICAL_PLANT;
-import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.POLYMERIZATION_RECIPES;
+import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.utils.GTQTUniversUtil.SECOND;
@@ -103,7 +102,7 @@ public class AdvancedLubricantChain {
                 .buildAndRegister();
 
         // Cr:MoS2 + C + C2H6OSi + C21H21O4P + C2H4O (and Lubricant) -> Advanced Lubricant
-        CHEMICAL_PLANT.recipeBuilder()
+        LARGE_MIXER_RECIPES.recipeBuilder()
                 .circuitMeta(6)
                 .input(dust, ChromiumDopedMolybdenite, 1)
                 .input(dust, Graphite, 1)

@@ -360,6 +360,8 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityMicrowaveEnergyReceiverControl MICROWAVE_ENERGY_RECEIVER_CONTROL;
     public static MetaTileEntityExtremesCVD LARGE_EX_CVD;
     public static MetaTileEntityChemicalReactor LARGE_CHEMICAL_FACTORY;
+    public static MetaTileEntityUltravioletLamp LARGE_ULTRAVIOLET_LAMP;
+    public static MetaTileEntityMixer LARGE_MIX;
     public static MetaTileEntitySuprachronalNeutroniumForge SUPRACHRONAL_NEUTRONIUM_FORGE;
     public static MetaTileEntityBurnerReactor LARGE_BURNER_REACTOR;
     public static MetaTileEntityCryoReactor LARGE_CRYOGENIC_REACTOR;
@@ -719,6 +721,8 @@ public class GTQTMetaTileEntities {
         LARGE_CZ_PULLER = registerMetaTileEntity(3511, new MetaTileEntityCZPuller(gtqtcoreId("cz_puller")));
         LARGE_EX_CVD = registerMetaTileEntity(3512, new MetaTileEntityExtremesCVD(gtqtcoreId("ex_cvd")));
         LARGE_CHEMICAL_FACTORY = registerMetaTileEntity(3513, new MetaTileEntityChemicalReactor(gtqtcoreId("chemical_factory")));
+        LARGE_ULTRAVIOLET_LAMP = registerMetaTileEntity(3514, new MetaTileEntityUltravioletLamp(gtqtcoreId("ultraviolet_lamp")));
+        LARGE_MIX = registerMetaTileEntity(3516, new MetaTileEntityMixer(gtqtcoreId("large_mix")));
 
         //Appeng 4000
 

@@ -23,9 +23,11 @@ import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.common.items.MetaItems.*;
 import static gregtech.common.metatileentities.MetaTileEntities.HULL;
+import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.LARGE_MIXER_RECIPES;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.PRECISE_ASSEMBLER_RECIPES;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
+import static keqing.gtqtcore.api.utils.GTQTUniversUtil.SECOND;
 import static keqing.gtqtcore.api.utils.GTQTUtil.CWT;
 import static keqing.gtqtcore.common.block.blocks.BlockIsaCasing.CasingType.*;
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing3.CasingType.*;
@@ -558,6 +560,33 @@ public class MachineCasing {
                 .buildAndRegister();
 
 
+        // Zeron-100
+        LARGE_MIXER_RECIPES.recipeBuilder()
+                .circuitMeta(6)
+                .input(dust, Chrome, 13)
+                .input(dust, Nickel, 3)
+                .input(dust, Molybdenum, 2)
+                .input(dust, Copper, 10)
+                .input(dust, Tungsten, 2)
+                .input(dust, Steel, 20)
+                .output(dust, Zeron100, 60)
+                .EUt(VA[IV])
+                .duration(48 * SECOND)
+                .buildAndRegister();
+
+        // One-Step recipe of Eglin Steel
+        LARGE_MIXER_RECIPES.recipeBuilder()
+                .circuitMeta(6)
+                .input(dust, Iron, 4)
+                .input(dust, Kanthal, 1)
+                .input(dust, Invar, 5)
+                .input(dust, Sulfur, 1)
+                .input(dust, Silicon, 1)
+                .input(dust, Carbon, 1)
+                .output(dust, EglinSteel, 13)
+                .EUt(VA[MV])
+                .duration(15 * SECOND)
+                .buildAndRegister();
     }
 
     private static void CasingAssembler() {

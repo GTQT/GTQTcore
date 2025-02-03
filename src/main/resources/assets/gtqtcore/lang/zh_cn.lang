@@ -1552,6 +1552,7 @@ recipemap.uu_copy.name=复制机
 
 recipemap.low_temperature_activator.name=低温活化器
 recipemap.polymerization_tank.name=聚合缸
+recipemap.large_mixer.name=大型搅拌
 recipemap.spinner.name=纺线器
 gtqtcore.machine.large_heat_exchanger.name=大型热交换机
 gtqtcore.machine.heat_exchanger.rate.true=流量：%s L/s（§4过热§r）
@@ -3347,6 +3348,8 @@ gtqtcore.machine.hv_machine_hatch.name=机器访问接口
 gtqtcore.machine.coagulation_tank.name=混凝反应池
 gtqtcore.machine.ex_cvd.name=极限粒子CVD
 gtqtcore.machine.chemical_factory.name=大型化学复合工厂
+gtqtcore.machine.ultraviolet_lamp.name=大型紫外辐射加速工厂
+gtqtcore.machine.large_mix.name=大型搅拌机
 gtqtcore.multiblock.wps.tooltip.1=可拓展多方块结构长度，升级线圈等级，每片结构都需要安装能源仓
 gtqtcore.multiblock.wps.tooltip.2=基础电量基于多方块结构长度为半径，高度四格以主方块为中心范围内的水
 gtqtcore.multiblock.wps.tooltip.3=发电倍率：水电站等级*线圈等级*波动发电倍率（最高0.6）

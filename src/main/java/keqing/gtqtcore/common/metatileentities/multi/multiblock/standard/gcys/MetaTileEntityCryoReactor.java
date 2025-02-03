@@ -36,7 +36,8 @@ import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing3.CasingT
 public class MetaTileEntityCryoReactor extends GCYMRecipeMapMultiblockController {
 
     public MetaTileEntityCryoReactor(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, new RecipeMap[]{GTQTcoreRecipeMaps.CRYOGENIC_REACTOR_RECIPES, GTQTcoreRecipeMaps.LOW_TEMP_ACTIVATOR_RECIPES});
+        super(metaTileEntityId, new RecipeMap[]{GTQTcoreRecipeMaps.CRYOGENIC_REACTOR_RECIPES,
+                GTQTcoreRecipeMaps.LOW_TEMP_ACTIVATOR_RECIPES});
     }
 
     @Override

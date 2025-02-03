@@ -7,6 +7,7 @@ import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.Materials.Stone;
 import static gregtech.api.unification.ore.OrePrefix.dust;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.CHEMICAL_PLANT;
+import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.LARGE_MIXER_RECIPES;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.utils.GTQTUniversUtil.SECOND;
 import static keqing.gtqtcore.api.utils.GTQTUniversUtil.TICK;
@@ -49,7 +50,7 @@ public class DrillingMudChain {
                 .duration(2 * SECOND + 10 * TICK)
                 .buildAndRegister();
 
-        CHEMICAL_PLANT.recipeBuilder()
+        LARGE_MIXER_RECIPES.recipeBuilder()
                 .circuitMeta(6)
                 .input(dust, Calcite, 5)
                 .input(dust, Barite, 6)
@@ -62,7 +63,7 @@ public class DrillingMudChain {
                 .duration(5 * TICK)
                 .buildAndRegister();
 
-        CHEMICAL_PLANT.recipeBuilder()
+        LARGE_MIXER_RECIPES.recipeBuilder()
                 .circuitMeta(6)
                 .input(dust, Calcite, 5)
                 .input(dust, Barite, 6)

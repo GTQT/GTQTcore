@@ -1294,6 +1294,7 @@ gtqtcore.machine.low_temperature_activator.opv.tooltip=Particle Oscillator
 # Recipe Map Names
 recipemap.low_temperature_activator.name=Low-Temperature Activator
 recipemap.polymerization_tank.name=Polymerization Tank
+recipemap.large_mixer.name=大型搅拌
 recipemap.spinner.name=Spinning Machine
 
 
@@ -3168,6 +3169,8 @@ gtqtcore.machine.hv_machine_hatch.name=Machine Access Hatch
 gtqtcore.machine.coagulation_tank.name=Coagulation Reaction Tank
 gtqtcore.machine.ex_cvd.name=Extreme Particle CVD
 gtqtcore.machine.chemical_factory.name=Large Chemical Factory
+gtqtcore.machine.ultraviolet_lamp.name=Large-scale UV decay plant
+gtqtcore.machine.large_mix.name=Large Mixer
 gtqtcore.multiblock.wps.tooltip.1=Extendable multiblock structure length, upgrade coil levels, each structure piece requires an energy tank.
 gtqtcore.multiblock.wps.tooltip.2=Base energy is calculated based on the radius of the multiblock structure length and the height of four blocks centered on the main block within the water range.
 gtqtcore.multiblock.wps.tooltip.3=Power generation multiplier: Hydropower station level * Coil level * Fluctuation power generation multiplier (max 0.6)

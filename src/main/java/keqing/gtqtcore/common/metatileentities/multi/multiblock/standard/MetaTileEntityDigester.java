@@ -72,7 +72,6 @@ public class MetaTileEntityDigester extends RecipeMapMultiblockController {
         return MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.TUNGSTENSTEEL_PIPE);
     }
 
-
     @Override
     public boolean canBeDistinct() {
         return true;
@@ -88,12 +87,6 @@ public class MetaTileEntityDigester extends RecipeMapMultiblockController {
                 damageEntitiesAndBreakSnow();
             }
         }
-    }
-
-    public int getMinVa() {
-        if ((Math.min(this.energyContainer.getEnergyCapacity() / 32, VA[coilTier]) * 20) == 0) return 1;
-        return (int) (Math.min(this.energyContainer.getEnergyCapacity() / 32, VA[coilTier]));
-
     }
 
     @Override

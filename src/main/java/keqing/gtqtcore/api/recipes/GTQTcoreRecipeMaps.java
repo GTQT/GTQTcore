@@ -26,6 +26,13 @@ public class GTQTcoreRecipeMaps {
             .setProgressBar(GuiTextures.PROGRESS_BAR_COMPRESS, ProgressWidget.MoveType.HORIZONTAL)
             .setSound(GTSoundEvents.WIRECUTTER_TOOL);
 
+    public static final RecipeMap<SimpleRecipeBuilder> LARGE_MIXER_RECIPES = new RecipeMapLargeMixer<>("large_mixer",
+            9, 1, 6, 1, new SimpleRecipeBuilder(), false)
+            .setSlotOverlay(false, false, GuiTextures.DUST_OVERLAY)
+            .setSlotOverlay(true, false, GuiTextures.DUST_OVERLAY)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_MIXER, ProgressWidget.MoveType.CIRCULAR)
+            .setSound(GTSoundEvents.MIXER);
+
     public static final RecipeMap<SimpleRecipeBuilder> POLYMERIZATION_RECIPES = new RecipeMap<>("polymerization_tank",
             2, 2, 2, 2, new SimpleRecipeBuilder(), false)
             .setSlotOverlay(false, false, GuiTextures.VIAL_OVERLAY_1)

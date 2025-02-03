@@ -8,6 +8,7 @@ import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtechfoodoption.GTFOMaterialHandler.Acetaldehyde;
+import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.LARGE_MIXER_RECIPES;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.SPINNER_RECIPES;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static gregtech.api.GTValues.*;
@@ -121,17 +122,69 @@ public class KevlarChain {
                 .duration(20 * SECOND)
                 .buildAndRegister();
 
+        // Deleted original Kevlar fiber related recipes.
+        ModHandler.removeRecipeByName("gregtech:fine_wire_kevlar");
+        GTRecipeHandler.removeRecipesByInputs(WIREMILL_RECIPES,
+                OreDictUnifier.get(ingot, Kevlar),
+                IntCircuitIngredient.getIntegratedCircuit(3));
+        GTRecipeHandler.removeRecipesByInputs(MACERATOR_RECIPES,
+                OreDictUnifier.get(wireFine, Kevlar));
+        GTRecipeHandler.removeRecipesByInputs(EXTRACTOR_RECIPES,
+                OreDictUnifier.get(wireFine, Kevlar));
+
+        // 250L Crystal Kevlar -> 8x Kevlar fiber (equal to 1x Kevlar plate).
         SPINNER_RECIPES.recipeBuilder()
+                .circuitMeta(1)
+                .input(stick, BlackSteel, 1)
+                .input(dustSmall, Talc, 1)
+                .fluidInputs(CrystalKevlar.getFluid(125))
+                .output(wireFine, Kevlar, 4)
+                .EUt(VA[IV])
+                .duration(5 * SECOND)
+                .buildAndRegister();
+
+        SPINNER_RECIPES.recipeBuilder()
+                .circuitMeta(1)
+                .input(stick, BlackSteel, 1)
+                .input(dustSmall, Soapstone, 1)
+                .fluidInputs(CrystalKevlar.getFluid(125))
+                .output(wireFine, Kevlar, 4)
+                .EUt(VA[IV])
+                .duration(5 * SECOND)
+                .buildAndRegister();
+
+        SPINNER_RECIPES.recipeBuilder()
+                .circuitMeta(2)
+                .input(stick, BlackSteel, 1)
+                .input(dust, Talc, 1)
                 .fluidInputs(CrystalKevlar.getFluid(500))
-                .output(wrap,Kevlar, 1)
+                .output(wireFine, Kevlar, 16)
                 .EUt(VA[IV])
                 .duration(SECOND + 5 * TICK)
+                .buildAndRegister();
+
+        SPINNER_RECIPES.recipeBuilder()
+                .circuitMeta(2)
+                .input(stick, BlackSteel, 1)
+                .input(dust, Soapstone, 1)
+                .fluidInputs(CrystalKevlar.getFluid(500))
+                .output(wireFine, Kevlar, 16)
+                .EUt(VA[IV])
+                .duration(SECOND + 5 * TICK)
+                .buildAndRegister();
+
+        // 8x Kevlar fiber -> 1x Spinned Kevlar plate
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(wireFine, Kevlar, 8)
+                .output(wrap,Kevlar, 1)
+                .EUt(VA[LV])
+                .duration(4 * SECOND + 10 * TICK)
                 .buildAndRegister();
 
         // Spinned Kevlar plate + Polyurethane Resin -> Kevlar plate
         CHEMICAL_BATH_RECIPES.recipeBuilder()
                 .input(wrap,Kevlar, 1)
-                .fluidInputs(PolyurethaneResin.getFluid(25))
+                .fluidInputs(PolyurethaneResin.getFluid(250))
                 .output(plate, Kevlar, 1)
                 .EUt(VA[LV])
                 .duration(MINUTE)
@@ -228,7 +281,7 @@ public class KevlarChain {
         // Processing Polyurethane.
 
         // C2H4O + 4C2H6Cl2Si + 5H2O -> (C2H4O)(C2H6Cl2Si)4(H2O)5
-        LARGE_CHEMICAL_RECIPES.recipeBuilder()
+        LARGE_MIXER_RECIPES.recipeBuilder()
                 .circuitMeta(3)
                 .fluidInputs(EthyleneOxide.getFluid(1000))
                 .fluidInputs(Dimethyldichlorosilane.getFluid(4000))
@@ -238,7 +291,7 @@ public class KevlarChain {
                 .duration(15 * TICK)
                 .buildAndRegister();
 
-        LARGE_CHEMICAL_RECIPES.recipeBuilder()
+        LARGE_MIXER_RECIPES.recipeBuilder()
                 .circuitMeta(3)
                 .fluidInputs(EthyleneOxide.getFluid(1000))
                 .fluidInputs(Dimethyldichlorosilane.getFluid(4000))
