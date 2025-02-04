@@ -6135,11 +6135,28 @@ gtqt.top.v=电流:
 gtqt.top.i=电压:
 gtqt.top.corenumber=线程数:
 gtqt.top.speed=超频:
-
+#ui
+gui.time_reduction=耗时减免: %s
+gui.mode_switch=模式切换
+gui.auto_parallel_limit=自动并行上限: %d
+gui.reset=重置
+gui.recommend=推荐
+gui.oc_parallel_mode=超频/并行模式
+gui.reset_tooltip=重置到默认的最大自持(自动并行可用)
+gui.recommend_tooltip=根据能源仓实际情况推荐最大自持(自动并行可用)
+gui.oc_parallel_mode_tooltip=设置并行/无损超频算法优先度
+gui.multiblock_voiding_not_supported=gregtech.gui.multiblock_voiding_not_supported
+gui.multiblock_distinct_not_supported=gregtech.multiblock.universal.distinct_not_supported
+gui.multiblock_distinct_enabled=gregtech.multiblock.universal.distinct_enabled
+gui.multiblock_distinct_disabled=gregtech.multiblock.universal.distinct_disabled
+gui.auto_parallel_mode=自动并行模式
+gui.manual_parallel_mode=手动并行模式
+gui.max_sustain=最大自持: %s（tick）
+gui.overclock_first_mode=超频优先模式
+gui.parallel_first_mode=并行优先模式
 # Advancements
 gtqtcore.advancement.lv.1_electrobath.name=工业电解槽
 gtqtcore.advancement.lv.1_electrobath.desc=谁还需要电解机。
-
 ##  Chat Calculator Descriptions
 gtqtcore.chat_calculator.help.1=§a在聊天栏中使用数学表达式！§7使用§b=§7作为起始符号以使用该功能
 gtqtcore.chat_calculator.help.2=§7  §b+§7 与 §b-§7：加与减，亦或者单纯改变其符号。

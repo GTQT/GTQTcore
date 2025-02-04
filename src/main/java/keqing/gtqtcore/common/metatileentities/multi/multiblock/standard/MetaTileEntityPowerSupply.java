@@ -123,7 +123,6 @@ public class MetaTileEntityPowerSupply extends MultiblockWithDisplayBase {
         textList.add(new TextComponentTranslation("供能/发电模式：%s 闪充模式：%s", charge, fastCharge));
         textList.add(new TextComponentTranslation("状态：%s 检测频率：%s 供能范围：%s", work, updateTime, chargeHeight));
         textList.add(new TextComponentTranslation("蓄能：%s / %s EU", EuStore, maxEuStore));
-
     }
 
     protected void ventInfo(List<ITextComponent> textList) {

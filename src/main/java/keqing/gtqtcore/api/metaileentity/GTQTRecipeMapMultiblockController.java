@@ -195,7 +195,7 @@ public abstract class GTQTRecipeMapMultiblockController extends MultiMapMultiblo
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
-        if (setTimeReduce) textList.add(new TextComponentTranslation("耗时减免:%s", timeReduce));
+        if (setTimeReduce) textList.add(new TextComponentTranslation("gui.time_reduction", timeReduce));
     }
 
     protected ModularUI.Builder createUITemplate(EntityPlayer entityPlayer) {
@@ -210,7 +210,7 @@ public abstract class GTQTRecipeMapMultiblockController extends MultiMapMultiblo
         builder.image(200, 4, 80, 20, GuiTextures.DISPLAY);
         builder.widget((new AdvancedTextWidget(204, 10, this::addModel, 16777215)).setMaxWidthLimit(110).setClickHandler(this::handleDisplayClick));
 
-        builder.widget(new ClickButtonWidget(200, 28, 80, 20, I18n.format("模式切换"),
+        builder.widget(new ClickButtonWidget(200, 28, 80, 20, "gui.mode_switch",
                 clickData -> autoParallelModel = !autoParallelModel));
 
         builder.image(200, 52, 80, 20, GuiTextures.DISPLAY);
@@ -226,7 +226,7 @@ public abstract class GTQTRecipeMapMultiblockController extends MultiMapMultiblo
                 .setShouldClientCallback(false));
 
         builder.widget(
-                new SliderWidget("自动并行上限: %d", 200, 100, 80, 20, 1, maxParallel, limitAutoParallel,
+                new SliderWidget("gui.auto_parallel_limit", 200, 100, 80, 20, 1, maxParallel, limitAutoParallel,
                         this::setLimitAutoParallel).setBackground(SCGuiTextures.DARK_SLIDER_BACKGROUND)
                         .setSliderIcon(SCGuiTextures.DARK_SLIDER_ICON));
 
@@ -236,18 +236,19 @@ public abstract class GTQTRecipeMapMultiblockController extends MultiMapMultiblo
         builder.image(200, 142, 80, 18, GuiTextures.DISPLAY);
         builder.widget((new AdvancedTextWidget(204, 146, this::addOC, 16777215)).setMaxWidthLimit(110).setClickHandler(this::handleDisplayClick));
 
-        builder.widget(new ClickButtonWidget(200, 160, 40, 20, "重置", data ->
-                energyHatchMaxWork = 32).setTooltipText("重置到默认的最大自持(自动并行可用)"));
-        builder.widget(new ClickButtonWidget(240, 160, 40, 20, "推荐", data ->
+        builder.widget(new ClickButtonWidget(200, 160, 40, 20, "gui.reset", data ->
+                energyHatchMaxWork = 32).setTooltipText("gui.reset_tooltip"));
+
+        builder.widget(new ClickButtonWidget(240, 160, 40, 20, "gui.recommend", data ->
         {
             energyHatchMaxWork = (int) (this.energyContainer.getEnergyStored() / VA[maxVoltage]);
             energyHatchMaxWork = Math.max(1, energyHatchMaxWork);
             energyHatchMaxWork = Math.min(energyHatchMaxWork, 128);
 
-        }).setTooltipText("根据能源仓实际情况推荐最大自持(自动并行可用)"));
+        }).setTooltipText("gui.recommend_tooltip"));
 
-        builder.widget(new ClickButtonWidget(200, 182, 80, 20, I18n.format("超频/并行模式"),
-                clickData -> OCFirst = !OCFirst).setTooltipText("设置并行/无损超频算法优先度"));
+        builder.widget(new ClickButtonWidget(200, 182, 80, 20, "gui.oc_parallel_mode",
+                clickData -> OCFirst = !OCFirst).setTooltipText("gui.oc_parallel_mode_tooltip"));
 
         ///////////////////////////Main GUI
 
@@ -268,11 +269,10 @@ public abstract class GTQTRecipeMapMultiblockController extends MultiMapMultiblo
         if (this.shouldShowVoidingModeButton()) {
             builder.widget((new ImageCycleButtonWidget(173, 161, 18, 18, GuiTextures.BUTTON_VOID_MULTIBLOCK, 4, this::getVoidingMode, this::setVoidingMode)).setTooltipHoverString(MultiblockWithDisplayBase::getVoidingModeTooltip));
         } else {
-            builder.widget((new ImageWidget(173, 161, 18, 18, GuiTextures.BUTTON_VOID_NONE)).setTooltip("gregtech.gui.multiblock_voiding_not_supported"));
+            builder.widget((new ImageWidget(173, 161, 18, 18, GuiTextures.BUTTON_VOID_NONE)).setTooltip("gui.multiblock_voiding_not_supported"));
         }
 
-        label30:
-        {
+        label30: {
             IDistinctBusController distinct = this;
             if (distinct.canBeDistinct()) {
                 var10007 = GuiTextures.BUTTON_DISTINCT_BUSES;
@@ -303,18 +303,35 @@ public abstract class GTQTRecipeMapMultiblockController extends MultiMapMultiblo
 
     protected void addModel(List<ITextComponent> textList) {
         MultiblockDisplayText.builder(textList, isStructureFormed())
-                .addCustom(tl -> textList.add(new TextComponentTranslation("%s", autoParallelModel ? "自动并行模式" : "手动并行模式")));
+                .addCustom(tl -> {
+                    String modeText;
+                    if (autoParallelModel) {
+                        modeText = "gui.auto_parallel_mode";
+                    } else {
+                        modeText = "gui.manual_parallel_mode";
+                    }
+                    textList.add(new TextComponentTranslation(modeText));
+                });
     }
 
     protected void addEnergyHatch(List<ITextComponent> textList) {
         MultiblockDisplayText.builder(textList, isStructureFormed())
-                .addCustom(tl -> textList.add(new TextComponentTranslation("最大自持：%s（tick）", energyHatchMaxWork)));
+                .addCustom(tl -> textList.add(new TextComponentTranslation("gui.max_sustain", energyHatchMaxWork)));
     }
 
     protected void addOC(List<ITextComponent> textList) {
         MultiblockDisplayText.builder(textList, isStructureFormed())
-                .addCustom(tl -> textList.add(new TextComponentTranslation("%s", OCFirst ? "超频优先模式" : "并行优先模式")));
+                .addCustom(tl -> {
+                    String ocText;
+                    if (OCFirst) {
+                        ocText = "gui.overclock_first_mode";
+                    } else {
+                        ocText = "gui.parallel_first_mode";
+                    }
+                    textList.add(new TextComponentTranslation(ocText));
+                });
     }
+
 
     protected class GTQTMultiblockLogic extends MultiblockRecipeLogic {
         public GTQTMultiblockLogic(RecipeMapMultiblockController tileEntity) {

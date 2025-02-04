@@ -2,7 +2,10 @@ package keqing.gtqtcore.api.metaileentity.multiblock;
 
 import codechicken.lib.raytracer.CuboidRayTraceResult;
 import gregtech.api.capability.IMultipleTankHandler;
-import gregtech.api.capability.impl.*;
+import gregtech.api.capability.impl.FluidTankList;
+import gregtech.api.capability.impl.ItemHandlerList;
+import gregtech.api.capability.impl.NotifiableFluidTank;
+import gregtech.api.capability.impl.NotifiableItemStackHandler;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.Widget;
 import gregtech.api.gui.widgets.ClickButtonWidget;
@@ -39,29 +42,40 @@ import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
-import static gregtech.api.GTValues.*;
+import static gregtech.api.GTValues.IV;
 import static keqing.gtqtcore.GTQTCoreConfig.MachineSwitch;
 
-public abstract class GTQTMultiblockCore extends MultiMapMultiblockController implements IDataInfoProvider{
+public abstract class GTQTMultiblockCore extends MultiMapMultiblockController implements IDataInfoProvider {
+    //暴露
+    private final RecipeMap<?>[] recipeMaps;
+    public int[][] timeHelper = new int[getCoreNum()][3];
+    public boolean speed;
     protected IItemHandlerModifiable inputInventory;
     protected IItemHandlerModifiable outputInventory;
     protected IMultipleTankHandler inputFluidInventory;
     protected IMultipleTankHandler outputFluidInventory;
     int target = 0;
-    //暴露
-    private final RecipeMap<?>[] recipeMaps;
+    //配方
+    //(todo)
+    //没加NBT的 dr看我
+    List<List<ItemStack>> importItemsList = new ArrayList<>();
+    List<List<FluidStack>> importFluidList = new ArrayList<>();
+    boolean[] ListWork = new boolean[getCoreNum()];
+    int maxEU;
+    int circuit;
+    int p;
+    boolean stop;
     public GTQTMultiblockCore(ResourceLocation metaTileEntityId, RecipeMap<?>[] recipeMaps) {
-        super(metaTileEntityId,recipeMaps);
+        super(metaTileEntityId, recipeMaps);
         this.recipeMapWorkable = new GTQTCoreLogic(this);
         this.recipeMaps = recipeMaps;
 
 
-
-            for (int i = 0; i < getCoreNum(); i++) {
-                importItemsList.add(new ArrayList<>());
-                importFluidList.add(new ArrayList<>());
-            }
-        if(MachineSwitch.CoreMachineNBTStoreSwitch) {
+        for (int i = 0; i < getCoreNum(); i++) {
+            importItemsList.add(new ArrayList<>());
+            importFluidList.add(new ArrayList<>());
+        }
+        if (MachineSwitch.CoreMachineNBTStoreSwitch) {
             this.fluidInventory = new FluidTankList(false, makeFluidTanks(25));
             this.itemInventory = new NotifiableItemStackHandler(this, 25, this, false);
             this.exportFluids = (FluidTankList) fluidInventory;
@@ -70,39 +84,23 @@ public abstract class GTQTMultiblockCore extends MultiMapMultiblockController im
             this.importItems = (IItemHandlerModifiable) itemInventory;
         }
     }
+
     //线程数量
     public int getCoreNum() {
         return 2;
     }
-    //配方
 
     //最大工作电压 默认能源仓等级
-    public int getMinVa()
-    {
-        return (int) (this.energyContainer.getEnergyCapacity()/16+this.energyContainer.getInputVoltage());
+    public int getMinVa() {
+        return (int) (this.energyContainer.getEnergyCapacity() / 16 + this.energyContainer.getInputVoltage());
     }
 
-
-    //(todo)
-    //没加NBT的 dr看我
-    List<List<ItemStack>> importItemsList = new ArrayList<>();
-    List<List<FluidStack>> importFluidList = new ArrayList<>();
-    boolean []ListWork=new boolean[getCoreNum()];
-    public int [][]timeHelper=new int[getCoreNum()][3];
-
-
-    int maxEU;
-    int circuit;
-    int p;
-    public boolean speed;
-    boolean stop;
-
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
-            data.setInteger("circuit", circuit);
-            data.setBoolean("speed", speed);
-            data.setBoolean("stop", stop);
-            data.setInteger("target", target);
-        if(MachineSwitch.CoreMachineNBTStoreSwitch) {
+        data.setInteger("circuit", circuit);
+        data.setBoolean("speed", speed);
+        data.setBoolean("stop", stop);
+        data.setInteger("target", target);
+        if (MachineSwitch.CoreMachineNBTStoreSwitch) {
             for (int i = 0; i < getCoreNum(); i++) data.setIntArray("timeHelper" + i, timeHelper[i]);
             for (int i = 0; i < getCoreNum(); i++) {
                 data.setBoolean("ListWork" + i, ListWork[i]);
@@ -157,7 +155,7 @@ public abstract class GTQTMultiblockCore extends MultiMapMultiblockController im
         speed = data.getBoolean("speed");
         stop = data.getBoolean("stop");
         target = data.getInteger("target");
-        if(MachineSwitch.CoreMachineNBTStoreSwitch) {
+        if (MachineSwitch.CoreMachineNBTStoreSwitch) {
             for (int i = 0; i < getCoreNum(); i++) timeHelper[i] = data.getIntArray("timeHelper" + i);
             for (int i = 0; i < getCoreNum(); i++) {
                 ListWork[i] = data.getBoolean("ListWork" + i);
@@ -201,24 +199,23 @@ public abstract class GTQTMultiblockCore extends MultiMapMultiblockController im
 
     @Override
     protected void updateFormedValid() {
-        if(!this.recipeMapWorkable.isWorkingEnabled())return;
+        if (!this.recipeMapWorkable.isWorkingEnabled()) return;
 
-        for (int i = 0; i < getCoreNum(); i++)
-        {
+        for (int i = 0; i < getCoreNum(); i++) {
 
-            if(!ListWork[i]) {
-                if (inputInventory != null||inputFluidInventory != null) {
+            if (!ListWork[i]) {
+                if (inputInventory != null || inputFluidInventory != null) {
                     Recipe coreRecipe = recipeMaps[target].findRecipe(getMinVa(), inputInventory, inputFluidInventory);
                     if (coreRecipe != null && coreRecipe.matches(false, inputInventory, inputFluidInventory)) {
                         coreRecipe.matches(true, inputInventory, inputFluidInventory);
 
                         int recipeTier = GTUtility.getTierByVoltage(coreRecipe.getEUt());
-                        int machineTier =IV;
+                        int machineTier = IV;
 
-                        this.importFluidList.set(i,GTUtility
+                        this.importFluidList.set(i, GTUtility
                                 .copyFluidList(coreRecipe.getResultFluidOutputs(recipeTier, machineTier, recipeMaps[target])));
 
-                        this.importItemsList.set(i,GTUtility
+                        this.importItemsList.set(i, GTUtility
                                 .copyStackList(coreRecipe.getResultItemOutputs(recipeTier, machineTier, recipeMaps[target])));
 
 
@@ -232,53 +229,54 @@ public abstract class GTQTMultiblockCore extends MultiMapMultiblockController im
                 }
 
             }
-            if(ListWork[i]) if(stop||(GTTransferUtils.addFluidsToFluidHandler(outputFluidInventory, true, importFluidList.get(i))&&GTTransferUtils.addItemsToItemHandler(outputInventory, true, importItemsList.get(i))))
-            {
-                p =Math.min( (int) ((this.energyContainer.getEnergyStored() + energyContainer.getInputPerSec()) / (getMinVa() == 0 ? 1 : getMinVa()))   ,20);
+            if (ListWork[i])
+                if (stop || (GTTransferUtils.addFluidsToFluidHandler(outputFluidInventory, true, importFluidList.get(i)) && GTTransferUtils.addItemsToItemHandler(outputInventory, true, importItemsList.get(i)))) {
+                    p = Math.min((int) ((this.energyContainer.getEnergyStored() + energyContainer.getInputPerSec()) / (getMinVa() == 0 ? 1 : getMinVa())), 20);
 
-                if (speed && (energyContainer.getEnergyStored() - (long) timeHelper[i][2] * p > 0)) {
-                    energyContainer.removeEnergy((long) timeHelper[i][2] * p*p);
-                    timeHelper[i][0] += p;
-                } else {
-                    if (energyContainer.getEnergyStored() - timeHelper[i][2] > 0) {
-                        energyContainer.removeEnergy(timeHelper[i][2]);
-                        timeHelper[i][0]++;
+                    if (speed && (energyContainer.getEnergyStored() - (long) timeHelper[i][2] * p > 0)) {
+                        energyContainer.removeEnergy((long) timeHelper[i][2] * p * p);
+                        timeHelper[i][0] += p;
+                    } else {
+                        if (energyContainer.getEnergyStored() - timeHelper[i][2] > 0) {
+                            energyContainer.removeEnergy(timeHelper[i][2]);
+                            timeHelper[i][0]++;
+                        }
+                    }
+
+                    if (timeHelper[i][0] >= timeHelper[i][1]) {
+
+                        GTTransferUtils.addFluidsToFluidHandler(outputFluidInventory, false, importFluidList.get(i));
+                        GTTransferUtils.addItemsToItemHandler(outputInventory, false, importItemsList.get(i));
+
+                        this.importFluidList.set(i, null);
+                        this.importItemsList.set(i, null);
+
+                        timeHelper[i][0] = 0;
+                        timeHelper[i][1] = 0;
+                        timeHelper[i][2] = 0;
+                        ListWork[i] = false;
                     }
                 }
-
-                if (timeHelper[i][0] >= timeHelper[i][1]) {
-
-                    GTTransferUtils.addFluidsToFluidHandler(outputFluidInventory, false, importFluidList.get(i));
-                    GTTransferUtils.addItemsToItemHandler(outputInventory, false, importItemsList.get(i));
-
-                    this.importFluidList.set(i, null);
-                    this.importItemsList.set(i, null);
-
-                    timeHelper[i][0] = 0;
-                    timeHelper[i][1] = 0;
-                    timeHelper[i][2] = 0;
-                    ListWork[i] = false;
-                }
-            }
         }
     }
 
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
-        textList.add(new TextComponentTranslation("线程:%s/超频:%s/配方:%s/销毁:%s",getCoreNum(),speed,recipeMaps[target].getLocalizedName(),stop));
-        if(speed) textList.add(new TextComponentTranslation("超频倍数:%s 超频单元耗能:%s EU/t",p,getMinVa()));
+        textList.add(new TextComponentTranslation("线程:%s/超频:%s/配方:%s/销毁:%s", getCoreNum(), speed, recipeMaps[target].getLocalizedName(), stop));
+        if (speed) textList.add(new TextComponentTranslation("超频倍数:%s 超频单元耗能:%s EU/t", p, getMinVa()));
         textList.add(new TextComponentTranslation("=================="));
-        for (int i = -2-(speed?0:1); i <= 3; i++) {
+        for (int i = -2 - (speed ? 0 : 1); i <= 3; i++) {
 
             if (i == 0) {
-                textList.add(TextComponentUtil.translationWithColor(TextFormatting.GOLD,">>线程:%s 状态：%s 耗能：%s 耗时 %s/%s",circuit+1,ListWork[circuit],timeHelper[circuit][2],timeHelper[circuit][0],timeHelper[circuit][1]));
+                textList.add(TextComponentUtil.translationWithColor(TextFormatting.GOLD, ">>线程:%s 状态：%s 耗能：%s 耗时 %s/%s", circuit + 1, ListWork[circuit], timeHelper[circuit][2], timeHelper[circuit][0], timeHelper[circuit][1]));
             } else if (circuit + i >= 0 && circuit + i < getCoreNum()) {
-                textList.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY,">>线程:%s 状态：%s 耗能：%s 耗时 %s/%s",circuit+i+1,ListWork[circuit+i],timeHelper[circuit+i][2],timeHelper[circuit+i][0],timeHelper[circuit+i][1]));
+                textList.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY, ">>线程:%s 状态：%s 耗能：%s 耗时 %s/%s", circuit + i + 1, ListWork[circuit + i], timeHelper[circuit + i][2], timeHelper[circuit + i][0], timeHelper[circuit + i][1]));
             }
         }
 
 
     }
+
     @Override
     @Nonnull
     protected Widget getFlexButton(int x, int y, int width, int height) {
@@ -299,29 +297,30 @@ public abstract class GTQTMultiblockCore extends MultiMapMultiblockController im
     }
 
     private void incrementThreshold(Widget.ClickData clickData) {
-        this.circuit = MathHelper.clamp(circuit + 1, 0, getCoreNum()-1);
+        this.circuit = MathHelper.clamp(circuit + 1, 0, getCoreNum() - 1);
     }
 
     private void decrementThreshold(Widget.ClickData clickData) {
-        this.circuit = MathHelper.clamp(circuit - 1, 0, getCoreNum()-1);
+        this.circuit = MathHelper.clamp(circuit - 1, 0, getCoreNum() - 1);
     }
 
     private void speed(Widget.ClickData clickData) {
-        speed=!speed;
+        speed = !speed;
     }
 
     private void stop(Widget.ClickData clickData) {
-        stop=!stop;
+        stop = !stop;
     }
 
-    public void addInformation(ItemStack stack,  World player, List<String> tooltip, boolean advanced) {
+    public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("gtqtcore.core.tooltip.1", new Object[0]));
-        tooltip.add(TooltipHelper.BLINKING_CYAN+I18n.format("gtqtcore.core.tooltip.2", getCoreNum()));
+        tooltip.add(TooltipHelper.BLINKING_CYAN + I18n.format("gtqtcore.core.tooltip.2", getCoreNum()));
         tooltip.add(I18n.format("gtqtcore.core.tooltip.3"));
-        tooltip.add(I18n.format("gtqtcore.core.tooltip.4",getMinVa()));
+        tooltip.add(I18n.format("gtqtcore.core.tooltip.4", getMinVa()));
         tooltip.add(I18n.format("gtqtcore.core.tooltip.5"));
-        if(MachineSwitch.CoreMachineNBTStoreSwitch)tooltip.add(I18n.format("config中已开启NBT转存，会导致你的控制器在存档重载后消失！"));
+        if (MachineSwitch.CoreMachineNBTStoreSwitch)
+            tooltip.add(I18n.format("config中已开启NBT转存，会导致你的控制器在存档重载后消失！"));
         else tooltip.add(I18n.format("config中未开启NBT转存，会清空离线时的运行配方，存档重载后回归初始状态！"));
     }
 
@@ -358,24 +357,30 @@ public abstract class GTQTMultiblockCore extends MultiMapMultiblockController im
 
     @Override
     public boolean onScrewdriverClick(EntityPlayer playerIn, EnumHand hand, EnumFacing facing, CuboidRayTraceResult hitResult) {
-        if(target+1>=recipeMaps.length) target = 0;
+        if (target + 1 >= recipeMaps.length) target = 0;
         else target++;
         return super.onScrewdriverClick(playerIn, hand, facing, hitResult);
     }
+
     public boolean isActive() {
-        if(!isStructureFormed())return false;
+        if (!isStructureFormed()) return false;
         for (int i = 0; i < getCoreNum(); i++)
-            if(ListWork[i])return true;
+            if (ListWork[i]) return true;
         return false;
     }
+
     @Override
     public boolean hasMufflerMechanics() {
         return true;
     }
+
     @Override
     public boolean hasMaintenanceMechanics() {
         return true;
     }
+
     @Override
-    public boolean canBeDistinct() {return true;}
+    public boolean canBeDistinct() {
+        return true;
+    }
 }

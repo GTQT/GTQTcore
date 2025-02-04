@@ -5949,6 +5949,25 @@ gtqt.top.v=Current:
 gtqt.top.i=Voltage:
 gtqt.top.corenumber=Thread Count:
 gtqt.top.speed=Overclocking:
+#ui
+gui.time_reduction=Time Reduction: %s
+gui.mode_switch=Mode Switch
+gui.auto_parallel_limit=Auto Parallel Limit: %d
+gui.reset=Reset
+gui.recommend=Recommend
+gui.oc_parallel_mode=Overclock/Parallel Mode
+gui.reset_tooltip=Reset to default max sustain (auto parallel enabled)
+gui.recommend_tooltip=Recommend max sustain based on energy container (auto parallel enabled)
+gui.oc_parallel_mode_tooltip=Set overclock/lossless parallel algorithm priority
+gui.multiblock_voiding_not_supported=Multiblock voiding not supported
+gui.multiblock_distinct_not_supported=Distinct buses not supported
+gui.multiblock_distinct_enabled=Distinct enabled
+gui.multiblock_distinct_disabled=Distinct disabled
+gui.auto_parallel_mode=Auto Parallel Mode
+gui.manual_parallel_mode=Manual Parallel Mode
+gui.max_sustain=Max Sustain: %s (ticks)
+gui.overclock_first_mode=Overclock First Mode
+gui.parallel_first_mode=Parallel First Mode
 # Advancements
 gtqtcore.advancement.lv.1_electrobath.name=工业电解槽
 gtqtcore.advancement.lv.1_electrobath.desc=谁还需要电解机。
