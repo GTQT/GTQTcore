@@ -245,10 +245,10 @@ public class MetaTileEntityThreeDimPrinter extends GTQTOCMultiblockController im
         public void update() {
             super.update();
             if (radio_tier == glass_tier) {
-                setTimeReduce((100 - glass_tier*10) / 100.0);
+                setTimeReduce((100 - glass_tier*8) / 100.0);
                 setMaxParallel(4*clean_tier * radio_tier);
             } else {
-                setTimeReduce((100 - glass_tier*5) / 100.0);
+                setTimeReduce((100 - glass_tier*4) / 100.0);
                 setMaxParallel(clean_tier * radio_tier);
             }
         }

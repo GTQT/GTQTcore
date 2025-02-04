@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "gtqtcore:items/appeng/portable_cell_2048"
+  }
+}

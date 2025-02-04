@@ -117,16 +117,16 @@ public class PlasticChain {
         POLYMERIZATION_RECIPES.recipeBuilder()
                 .fluidInputs(Tetrafluoroethylene.getFluid(L))
                 .fluidInputs(Air.getFluid(1000))
-                .fluidOutputs(Polytetrafluoroethylene.getFluid(L))
-                .EUt(VA[LV])
+                .fluidOutputs(Polytetrafluoroethylene.getFluid(144))
+                .EUt(VA[HV])
                 .duration(8 * SECOND)
                 .buildAndRegister();
 
         POLYMERIZATION_RECIPES.recipeBuilder()
                 .fluidInputs(Tetrafluoroethylene.getFluid(L))
                 .fluidInputs(Oxygen.getFluid(1000))
-                .fluidOutputs(Polytetrafluoroethylene.getFluid(L))
-                .EUt(VA[LV])
+                .fluidOutputs(Polytetrafluoroethylene.getFluid(216))
+                .EUt(VA[HV])
                 .duration(8 * SECOND)
                 .buildAndRegister();
 
@@ -195,7 +195,7 @@ public class PlasticChain {
                 .fluidInputs(Dichlorobenzene.getFluid(1000))
                 .fluidInputs(Oxygen.getFluid(1000))
                 .output(dust, Salt, 4)
-                .fluidOutputs(PolyphenyleneSulfide.getFluid(1000))
+                .fluidOutputs(PolyphenyleneSulfide.getFluid(1500))
                 .EUt(VA[HV])
                 .duration(12 * SECOND)
                 .buildAndRegister();

@@ -15,7 +15,6 @@ import keqing.gtqtcore.common.worldgen.WorldGenAbandonedBase;
 import keqing.gtqtcore.core.advancement.AdvancementManager;
 import keqing.gtqtcore.core.advancement.AdvancementTriggers;
 import keqing.gtqtcore.integration.GTQTIntegration;
-import net.minecraft.client.Minecraft;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.*;
@@ -23,12 +22,12 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 @Mod(
         modid = "gtqtcore",
-        name="GTQTcore",
+        name = "GTQTcore",
         acceptedMinecraftVersions = "[1.12.2,1.13)",
-        version = "0.0.1-beta" ,
+        version = "0.0.1-beta",
         dependencies = "required-after:gregtech@[2.8.7-beta,);" +
-        "after:gcym@[1.2.7,);" +
-        "after:gregtechfoodoption@[1.11.0,);"
+                "after:gcym@[1.2.7,);" +
+                "after:gregtechfoodoption@[1.11.0,);"
 )
 public class GTQTCore {
     public static final String PACK = "1.7.1";
@@ -51,9 +50,9 @@ public class GTQTCore {
     public static IModuleManager moduleManager;
     // Will be available at the Pre-Initialization stage.
     public static IAdvancementManager advancementManager;
+
     @Mod.EventHandler
-    public void preInit(FMLPreInitializationEvent event)
-    {
+    public void preInit(FMLPreInitializationEvent event) {
         // Loading Advancement Manager and Advancement Triggers.
         advancementManager = AdvancementManager.getInstance();
         AdvancementTriggers.register();
@@ -70,25 +69,28 @@ public class GTQTCore {
         MetaEntities.init();
 
     }
+
     @Mod.EventHandler
     public void onInit(FMLInitializationEvent event) {
         GTQTIntegration.init();
         GameRegistry.registerWorldGenerator(new WorldGenAbandonedBase(), 20000);
     }
+
     @Mod.EventHandler
-    public void init(FMLInitializationEvent event)
-    {
+    public void init(FMLInitializationEvent event) {
         proxy.init();
     }
+
     @Mod.EventHandler
     public void construction(FMLConstructionEvent event) {
         proxy.construction();
     }
+
     @Mod.EventHandler
-    public void postInit(FMLPostInitializationEvent event)
-    {
+    public void postInit(FMLPostInitializationEvent event) {
         proxy.postInit();
     }
+
     @Mod.EventHandler
     public void loadComplete(FMLLoadCompleteEvent event) {
         proxy.loadComplete();

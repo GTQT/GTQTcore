@@ -293,24 +293,24 @@ public class MachineCasing {
                 .buildAndRegister();
 
         ASSEMBLER_RECIPES.recipeBuilder()
-                .inputs(MetaBlocks.METAL_CASING.getItemVariant(BlockMetalCasing.MetalCasingType.ALUMINIUM_FROSTPROOF))
+                .inputs(GTQTMetaBlocks.blockMultiblockCasing3.getItemVariant(blue_steel))
                 .circuitMeta(6)
-                .fluidInputs(TanmolyiumBetaC.getFluid(L * 2))
+                .fluidInputs(BlackSteel.getFluid(L * 2))
                 .outputs(GTQTMetaBlocks.blockMultiblockCasing5.getItemVariant(ADVANCED_COLD_CASING))
                 .EUt(VA[LV])
                 .duration(50)
                 .buildAndRegister();
 
-        createCasingRecipe("red_steel_casing",
-                GTQTMetaBlocks.blockIsaCasing,
-                BlockIsaCasing.CasingType.VACUUM_CASING,
-                RedSteel);
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .inputs(GTQTMetaBlocks.blockMultiblockCasing3.getItemVariant(red_steel))
+                .circuitMeta(6)
+                .fluidInputs(BlackSteel.getFluid(L * 2))
+                .outputs(GTQTMetaBlocks.blockIsaCasing.getItemVariant(VACUUM_CASING))
+                .EUt(VA[LV])
+                .duration(50)
+                .buildAndRegister();
 
-        createCasingRecipe("red_steel_casing",
-                GTQTMetaBlocks.blockMultiblockCasing3,
-                BlockMultiblockCasing3.CasingType.NITINOL_MACHINE_CASING,
-                Nitinol);
-
+        createCasingRecipe("nitinol_machine_casing", GTQTMetaBlocks.blockMultiblockCasing3, BlockMultiblockCasing3.CasingType.NITINOL_MACHINE_CASING, Nitinol);
         createCasingRecipe("inconel_625", GTQTMetaBlocks.blockMultiblockCasing1, BlockMultiblockCasing1.CasingType.Inconel625, Inconel625);
         createCasingRecipe("hastelloy_n", GTQTMetaBlocks.blockMultiblockCasing1, BlockMultiblockCasing1.CasingType.HastelloyN, HastelloyN);
         createCasingRecipe("stellite", GTQTMetaBlocks.blockMultiblockCasing1, BlockMultiblockCasing1.CasingType.Stellite, Stellite);
@@ -327,7 +327,7 @@ public class MachineCasing {
         createCasingRecipe("incoloy_ma_813", GTQTMetaBlocks.blockMultiblockCasing1, BlockMultiblockCasing1.CasingType.IncoloyMA813, IncoloyMA813);
         createCasingRecipe("hastelloy_x_78", GTQTMetaBlocks.blockMultiblockCasing1, BlockMultiblockCasing1.CasingType.HastelloyX78, HastelloyX78);
         createCasingRecipe("hastelloy_k_243", GTQTMetaBlocks.blockMultiblockCasing1, BlockMultiblockCasing1.CasingType.HastelloyK243, HastelloyK243);
-        createCasingRecipe("iridium_casing", GTQTMetaBlocks.blockMultiblockCasing4, IRIDIUM_CASING, Osmiridium);
+        createCasingRecipe("iridium_casing", GTQTMetaBlocks.blockMultiblockCasing4, IRIDIUM_CASING, Iridium);
         createCasingRecipe("eglin_steel", GTQTMetaBlocks.blockMultiblockCasing3, eglin_steel, EglinSteel);
         createCasingRecipe("grisium", GTQTMetaBlocks.blockMultiblockCasing3, grisium, Grisium);
         createCasingRecipe("potin", GTQTMetaBlocks.blockMultiblockCasing3, potin, Potin);

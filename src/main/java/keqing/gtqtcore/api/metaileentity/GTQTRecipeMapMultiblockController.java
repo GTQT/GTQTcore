@@ -18,6 +18,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
@@ -56,25 +57,82 @@ public abstract class GTQTRecipeMapMultiblockController extends MultiMapMultiblo
     }
 
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
-        data.setBoolean("autoParallelModel", autoParallelModel);
-        data.setBoolean("OCFirst", OCFirst);
-        data.setInteger("customParallel", customParallel);
-        data.setInteger("autoParallel", autoParallel);
-        data.setInteger("limitAutoParallel", limitAutoParallel);
-        data.setInteger("energyHatchMaxWork", energyHatchMaxWork);
+        data.setBoolean("setTier", this.setTier);
+        data.setInteger("tier", this.tier);
+        data.setBoolean("setMaxParallel", this.setMaxParallel);
+        data.setInteger("maxParallel", this.maxParallel);
+        data.setBoolean("setMaxVoltage", this.setMaxVoltage);
+        data.setInteger("maxVoltage", this.maxVoltage);
+        data.setBoolean("setTimeReduce", this.setTimeReduce);
+        data.setDouble("timeReduce", this.timeReduce);
+
+        data.setInteger("autoParallel", this.autoParallel);
+        data.setInteger("customParallel", this.customParallel);
+        data.setBoolean("autoParallelModel", this.autoParallelModel);
+        data.setBoolean("OCFirst", this.OCFirst);
+        data.setInteger("limitAutoParallel", this.limitAutoParallel);
+        data.setInteger("energyHatchMaxWork", this.energyHatchMaxWork);
+
         return super.writeToNBT(data);
     }
 
     public void readFromNBT(NBTTagCompound data) {
+        this.setTier = data.getBoolean("setTier");
+        this.tier = data.getInteger("tier");
+        this.setMaxParallel = data.getBoolean("setMaxParallel");
+        this.maxParallel = data.getInteger("maxParallel");
+        this.setMaxVoltage = data.getBoolean("setMaxVoltage");
+        this.maxVoltage = data.getInteger("maxVoltage");
+        this.setTimeReduce = data.getBoolean("setTimeReduce");
+        this.timeReduce = data.getDouble("timeReduce");
+
+        this.autoParallel = data.getInteger("autoParallel");
+        this.customParallel = data.getInteger("customParallel");
+        this.autoParallelModel = data.getBoolean("autoParallelModel");
+        this.OCFirst = data.getBoolean("OCFirst");
+        this.limitAutoParallel = data.getInteger("limitAutoParallel");
+        this.energyHatchMaxWork = data.getInteger("energyHatchMaxWork");
+
         super.readFromNBT(data);
-        autoParallelModel = data.getBoolean("autoParallelModel");
-        OCFirst = data.getBoolean("OCFirst");
-        customParallel = data.getInteger("customParallel");
-        autoParallel = data.getInteger("autoParallel");
-        limitAutoParallel = data.getInteger("limitAutoParallel");
-        energyHatchMaxWork = data.getInteger("energyHatchMaxWork");
     }
 
+    public void writeInitialSyncData(PacketBuffer buf) {
+        super.writeInitialSyncData(buf);
+        buf.writeBoolean(this.setTier);
+        buf.writeInt(this.tier);
+        buf.writeBoolean(this.setMaxParallel);
+        buf.writeInt(this.maxParallel);
+        buf.writeBoolean(this.setMaxVoltage);
+        buf.writeInt(this.maxVoltage);
+        buf.writeBoolean(this.setTimeReduce);
+        buf.writeDouble(this.timeReduce);
+
+        buf.writeInt(this.autoParallel);
+        buf.writeInt(this.customParallel);
+        buf.writeBoolean(this.autoParallelModel);
+        buf.writeBoolean(this.OCFirst);
+        buf.writeInt(this.limitAutoParallel);
+        buf.writeInt(this.energyHatchMaxWork);
+    }
+
+    public void receiveInitialSyncData(PacketBuffer buf) {
+        super.receiveInitialSyncData(buf);
+        this.setTier = buf.readBoolean();
+        this.tier = buf.readInt();
+        this.setMaxParallel = buf.readBoolean();
+        this.maxParallel = buf.readInt();
+        this.setMaxVoltage = buf.readBoolean();
+        this.maxVoltage = buf.readInt();
+        this.setTimeReduce = buf.readBoolean();
+        this.timeReduce = buf.readDouble();
+
+        this.autoParallel = buf.readInt();
+        this.customParallel = buf.readInt();
+        this.autoParallelModel = buf.readBoolean();
+        this.OCFirst = buf.readBoolean();
+        this.limitAutoParallel = buf.readInt();
+        this.energyHatchMaxWork = buf.readInt();
+    }
 
     protected void setTier(int tier) {
         this.tier = tier;
@@ -133,11 +191,13 @@ public abstract class GTQTRecipeMapMultiblockController extends MultiMapMultiblo
     public void setCurrentParallel(int parallelAmount) {
         this.customParallel = MathHelper.clamp(this.customParallel + parallelAmount, 1, getMaxParallel());
     }
+
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
-        if(setTimeReduce)textList.add(new TextComponentTranslation("耗时减免:%s", timeReduce));
+        if (setTimeReduce) textList.add(new TextComponentTranslation("耗时减免:%s", timeReduce));
     }
+
     protected ModularUI.Builder createUITemplate(EntityPlayer entityPlayer) {
         ModularUI.Builder builder;
 
@@ -186,7 +246,7 @@ public abstract class GTQTRecipeMapMultiblockController extends MultiMapMultiblo
 
         }).setTooltipText("根据能源仓实际情况推荐最大自持(自动并行可用)"));
 
-        builder.widget(new ClickButtonWidget(200, 184, 80, 20, I18n.format("超频/并行模式"),
+        builder.widget(new ClickButtonWidget(200, 182, 80, 20, I18n.format("超频/并行模式"),
                 clickData -> OCFirst = !OCFirst).setTooltipText("设置并行/无损超频算法优先度"));
 
         ///////////////////////////Main GUI
@@ -236,7 +296,8 @@ public abstract class GTQTRecipeMapMultiblockController extends MultiMapMultiblo
     }
 
     protected void addInfo(List<ITextComponent> textList) {
-        if(autoParallelModel)textList.add(new TextComponentTranslation("%s / %s / %s", autoParallel, limitAutoParallel, getMaxParallel()));
+        if (autoParallelModel)
+            textList.add(new TextComponentTranslation("%s / %s / %s", autoParallel, limitAutoParallel, getMaxParallel()));
         else textList.add(new TextComponentTranslation("%s / %s", customParallel, getMaxParallel()));
     }
 
@@ -264,6 +325,7 @@ public abstract class GTQTRecipeMapMultiblockController extends MultiMapMultiblo
         protected double getOverclockingDurationDivisor() {
             return OCFirst ? 4.0 : 2.0;
         }
+
         @Override
         public long getMaxVoltage() {
             if (setMaxVoltage) return V[maxVoltage];

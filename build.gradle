@@ -151,6 +151,7 @@ dependencies {
     implementation rfg.deobf(files("libs/Supercritical-0.0.2.jar"))
     implementation rfg.deobf(files("libs/ae2-uel-v0.56.6.jar"))
     implementation rfg.deobf(files("libs/gregtechfoodoption-1.12.2-1.11.0.jar"))
+    implementation rfg.deobf(files("libs/Fluid Craft for AE2-2.6.6-r.jar"))
     implementation rfg.deobf(files("libs/jei_1.12.2-4.16.1.1003.jar"))
     implementation rfg.deobf(files("libs/theoneprobe-1.12-1.4.28.jar"))
     implementation rfg.deobf(files("libs/groovyscript-1.1.1.jar"))

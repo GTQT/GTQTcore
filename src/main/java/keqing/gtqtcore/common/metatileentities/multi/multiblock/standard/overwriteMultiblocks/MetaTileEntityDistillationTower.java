@@ -66,7 +66,7 @@ public class MetaTileEntityDistillationTower extends GTQTRecipeMapMultiblockCont
         //setTier(auto);
         setMaxParallel(64);
         setMaxParallelFlag(true);
-        setMaxVoltage(0);
+        //setMaxVoltage(auto);
         setMaxVoltageFlag(true);
         //setTimeReduce(none);
         setTimeReduceFlag(false);
@@ -118,6 +118,7 @@ public class MetaTileEntityDistillationTower extends GTQTRecipeMapMultiblockCont
 
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
+        super.addDisplayText(textList);
         if (isStructureFormed()) {
             FluidStack stackInTank = importFluids.drain(Integer.MAX_VALUE, false);
             if (stackInTank != null && stackInTank.amount > 0) {
@@ -129,10 +130,10 @@ public class MetaTileEntityDistillationTower extends GTQTRecipeMapMultiblockCont
                         fluidName));
             }
         }
+        textList.add(new TextComponentTranslation("gtqtcore.casingTire", casingTier));
+        textList.add(new TextComponentTranslation("gtqtcore.tubeTire", tubeTier));
         if (casingTier != tubeTier)
             textList.add(new TextComponentTranslation("gtqtcore.equal", casingTier, tubeTier));
-        super.addDisplayText(textList);
-
     }
 
 
@@ -270,6 +271,7 @@ public class MetaTileEntityDistillationTower extends GTQTRecipeMapMultiblockCont
                 0);
 
         setTier(Math.min(this.casingTier, this.tubeTier));
+        setMaxVoltage(Math.min(this.casingTier, this.tubeTier));
 
         this.writeCustomData(GTQTValue.UPDATE_TIER16, buf -> buf.writeInt(this.tier));
     }

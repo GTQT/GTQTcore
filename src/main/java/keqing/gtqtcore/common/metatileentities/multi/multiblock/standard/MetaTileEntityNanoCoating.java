@@ -218,10 +218,7 @@ public class MetaTileEntityNanoCoating extends GTQTOCMultiblockController implem
         Object tier = context.get("ChemicalPlantCasingTieredStats");
         Object glass_tier = context.get("LGLTieredStats");
         Object clean_tier = context.get("ZJTieredStats");
-        Object sheping_tier = context.get("TJTieredStats");
-
-        setTier(Math.min(this.casing_tier, this.glass_tier));
-        setMaxVoltage(Math.min(this.casing_tier, this.clean_tier * 2));
+        Object radio_tier = context.get("TJTieredStats");
 
         this.laser_tier = GTQTUtil.getOrDefault(() -> laser_tier instanceof WrappedIntTired,
                 () -> ((WrappedIntTired) laser_tier).getIntTier(),
@@ -235,9 +232,13 @@ public class MetaTileEntityNanoCoating extends GTQTOCMultiblockController implem
         this.clean_tier = GTQTUtil.getOrDefault(() -> clean_tier instanceof WrappedIntTired,
                 () -> ((WrappedIntTired) clean_tier).getIntTier(),
                 0);
-        this.radio_tier = GTQTUtil.getOrDefault(() -> sheping_tier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired) sheping_tier).getIntTier(),
+        this.radio_tier = GTQTUtil.getOrDefault(() -> radio_tier instanceof WrappedIntTired,
+                () -> ((WrappedIntTired) radio_tier).getIntTier(),
                 0);
+
+        setTier(Math.min(this.casing_tier, this.glass_tier));
+        setMaxVoltage(Math.min(this.casing_tier, this.clean_tier * 2));
+
         this.writeCustomData(GTQTValue.UPDATE_TIER8, buf -> buf.writeInt(this.casing_tier));
     }
 
@@ -266,10 +267,10 @@ public class MetaTileEntityNanoCoating extends GTQTOCMultiblockController implem
         public void update() {
             super.update();
             if (radio_tier == laser_tier) {
-                setTimeReduce((100 - glass_tier*10) / 100.0);
+                setTimeReduce((100 - glass_tier*8) / 100.0);
                 setMaxParallel(4*clean_tier * radio_tier);
             } else {
-                setTimeReduce((100 - glass_tier*5) / 100.0);
+                setTimeReduce((100 - glass_tier*4) / 100.0);
                 setMaxParallel(clean_tier * radio_tier);
             }
         }

@@ -80,14 +80,6 @@ public class MetaTileEntityBlazingBlastFurnace extends MultiMapMultiblockControl
         return new MetaTileEntityBlazingBlastFurnace(this.metaTileEntityId);
     }
 
-
-
-    public int getMinVa() {
-        if ((Math.min(this.energyContainer.getEnergyCapacity() / 32, VA[3]) * 20) == 0) return 1;
-        return (int) (Math.min(this.energyContainer.getEnergyCapacity() / 32, VA[3]));
-
-    }
-
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);

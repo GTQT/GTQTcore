@@ -1,13 +1,8 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
-import codechicken.lib.render.CCRenderState;
-import codechicken.lib.render.pipeline.IVertexOperation;
-import codechicken.lib.vec.Cuboid6;
-import codechicken.lib.vec.Matrix4;
 import gregtech.api.GTValues;
 import gregtech.api.GregTechAPI;
 import gregtech.api.block.IHeatingCoilBlockStats;
-import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
@@ -15,7 +10,6 @@ import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.MultiblockDisplayText;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.*;
-import gregtech.api.unification.material.Materials;
 import gregtech.api.util.BlockInfo;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.TextComponentUtil;
@@ -34,24 +28,18 @@ import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.BlockEvaporationBed;
 import keqing.gtqtcore.integration.theoneprobe.EvaporationPoolInfoProvider;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -162,89 +150,111 @@ public class MetaTileEntityEvaporationPool extends RecipeMapMultiblockController
     }
 
     public boolean updateStructureDimensions() {
+        try {
+            World world = getWorld();
+            if (world == null) {
+                throw new IllegalStateException("World is null");
+            }
 
-        World world = getWorld();
-        EnumFacing front = this.getFrontFacing();
-        EnumFacing back = front.getOpposite();
-        EnumFacing right = front.rotateYCCW();
-        EnumFacing left = right.getOpposite(); //left as if you were looking at it, not controller's left
+            BlockPos controllerPos = getPos();
+            if (controllerPos == null) {
+                throw new IllegalStateException("Controller position is null");
+            }
 
-        //distance to use when located edges of structure, moved inwards to container block portion for detection purposes
-        BlockPos.MutableBlockPos lPos = new BlockPos.MutableBlockPos(getPos().offset(back, 2)); //start in container section
-        BlockPos.MutableBlockPos rPos = new BlockPos.MutableBlockPos(getPos().offset(back, 2)); //start in container section
-        BlockPos.MutableBlockPos bPos = new BlockPos.MutableBlockPos(getPos().offset(back)); //start one before container section
+            EnumFacing front = this.getFrontFacing();
+            EnumFacing back = front.getOpposite();
+            EnumFacing right = front.rotateYCCW();
+            EnumFacing left = right.getOpposite(); //left as if you were looking at it, not controller's left
 
-        //zero on both lDist and rDist indicates 1 column
-        int lDist = -1;
-        int rDist = -1;
-        int bDist = -1;
+            //distance to use when located edges of structure, moved inwards to container block portion for detection purposes
+            BlockPos.MutableBlockPos leftPosition = new BlockPos.MutableBlockPos(controllerPos.offset(back, 2)); //start in container section
+            BlockPos.MutableBlockPos rightPosition = new BlockPos.MutableBlockPos(controllerPos.offset(back, 2)); //start in container section
+            BlockPos.MutableBlockPos backPosition = new BlockPos.MutableBlockPos(controllerPos.offset(back)); //start one before container section
 
-        //find when container block section is exited left, right, and back
-        for (int i = 1; i < MAX_SQUARE_SIDE_LENGTH + 1; i++) {
-            if (lDist == -1 && !isContainerBlock(world, lPos, left)) lDist += i; //0 -> immediate left is !container
-            if (rDist == -1 && !isContainerBlock(world, rPos, right)) rDist += i; //0 -> immediate left is !container
-            if (bDist == -1 && !isContainerBlock(world, bPos, back)) bDist += i; //0 -> no container block section
-            if (lDist != -1 && rDist != -1 && bDist != -1) break;
-        }
+            //zero on both lDist and rDist indicates 1 column
+            int leftDistance = -1;
+            int rightDistance = -1;
+            int backDistance = -1;
 
-        //if l or r dist exceed max, or if bdist exceeds max/ is 0, or if l and r dist individually don't exceed max, but produce a columnCount > max
-        if (lDist < 0 || rDist < 0 || bDist < 1 || lDist + rDist + 1 > MAX_SQUARE_SIDE_LENGTH) {
+            //find when container block section is exited left, right, and back
+            for (int i = 1; i <= MAX_SQUARE_SIDE_LENGTH; i++) {
+                if (leftDistance == -1 && !isContainerBlock(world, leftPosition, left)) leftDistance = i;
+                if (rightDistance == -1 && !isContainerBlock(world, rightPosition, right)) rightDistance = i;
+                if (backDistance == -1 && !isContainerBlock(world, backPosition, back)) backDistance = i;
+                if (leftDistance != -1 && rightDistance != -1 && backDistance != -1) break;
+
+                leftPosition.move(left);
+                rightPosition.move(right);
+                backPosition.move(back);
+            }
+
+            // Validate distances
+            if (leftDistance < 0 || rightDistance < 0 || backDistance < 1 || leftDistance + rightDistance + 1 > MAX_SQUARE_SIDE_LENGTH) {
+                invalidateStructure();
+                return false;
+            }
+
+            // Calculate dimensions
+            columnCount = leftDistance + rightDistance + 1;
+            rowCount = backDistance; //"Depth" of container blocks
+            controllerPosition = leftDistance; //if there are no blocks to the left controller is left most spot
+
+            //store the known dimensions for structure check
+            this.writeCustomData(structuralDimensionsID, (buf) -> {
+                buf.writeInt(columnCount);
+                buf.writeInt(rowCount);
+                buf.writeInt(controllerPosition);
+            });
+
+            return true; //successful formation
+        } catch (Exception e) {
+            e.printStackTrace();
             invalidateStructure();
             return false;
         }
-
-        //r,l dist = #container blocks in respective dir. +1 for controller block
-        columnCount = rDist + lDist + 1;
-        rowCount = bDist; //"Depth" of container blocks
-        controllerPosition = lDist; //if there are no blocks to the left controller is left most spot
-
-        //store the known dimensions for structure check
-        this.writeCustomData(structuralDimensionsID, (buf) -> {
-            buf.writeInt(columnCount);
-            buf.writeInt(rowCount);
-            buf.writeInt(controllerPosition);
-        });
-
-        return true; //successful formation
     }
+
 
     public boolean isContainerBlock(@Nonnull World world, @Nonnull BlockPos.MutableBlockPos pos, @Nonnull EnumFacing direction) {
         return validContainerStates.contains(world.getBlockState(pos.move(direction)));
     }
 
-    //generates rows with earlier entries being closer and later entries being further from controller
     public String[] centerRowsPattern() {
-        //rows are done with custom logic due to coil placement; only bottom layer
+        if (rowCount <= 0 || columnCount < 0) {
+            throw new IllegalArgumentException("rowCount must be positive and columnCount must be non-negative");
+        }
+
         String[] containerRows = new String[rowCount];
         final String[] flooring = {"G", "C"};
 
-        //i = row number, j = col number goes from closer rows to further rows
         for (int i = 0; i < rowCount; ++i) {
-            //construct row builder for i'th row, setting first two entries to edge blocks
-            StringBuilder containerRowBuilder = new StringBuilder(columnCount + 4);
-            containerRowBuilder.replace(0, 2, "EE");
+            StringBuilder containerRowBuilder = new StringBuilder();
+
+            // Add edge blocks at the start
+            containerRowBuilder.append("EE");
 
             for (int j = 2; j < columnCount + 2; ++j) {
-                //if even (least sig bit [2^0] is 0) then do coil column
-                if ((j & 1) == 0) {
-                    //coil columns always have coils at their position
-                    containerRowBuilder.replace(j, j + 1, "C");
-                } else if ((j - 2 & 3) == 1) { //if j % 4 == 1, then do further crossover column
-                    //if on last row (++i = rowCount) use "C" [1], otherwise use "G" [0]
-                    containerRowBuilder.replace(j, j + 1, flooring[(i + 1) / rowCount]);
-                } else { //if j % 4 == 3, then do closer crossover column
-                    //if on first row then use "C" [1], otherwise use "G" [0] (0 is only number which is non neg after * -1. this means bit flip keeps most sig as 1)
-                    containerRowBuilder.replace(j, j + 1, flooring[(~(i * -1)) >>> 31]);
+                if (j % 2 == 0) {
+                    // Coil columns always have coils at their position
+                    containerRowBuilder.append("C");
+                } else if (j % 4 == 1) {
+                    // Further crossover column
+                    containerRowBuilder.append(i == rowCount - 1 ? "C" : "G");
+                } else if (j % 4 == 3) {
+                    // Closer crossover column
+                    containerRowBuilder.append(i == 0 ? "C" : "G");
                 }
             }
 
-            //place edge blocks in last two positions, then store current row
-            containerRowBuilder.replace(columnCount + 2, columnCount + 4, "EE");
+            // Add edge blocks at the end
+            containerRowBuilder.append("EE");
+
             containerRows[i] = containerRowBuilder.toString();
         }
 
         return containerRows;
     }
+
 
     @Override
     protected void formStructure(PatternMatchContext context) {
@@ -255,67 +265,84 @@ public class MetaTileEntityEvaporationPool extends RecipeMapMultiblockController
 
     @Override
     protected BlockPattern createStructurePattern() {
-        /*
-            'E' for "edge" block, that is to say essentially the blocks that contain the water.
-            '#' for air block where hypothetical water would be.
-            'S' for self, or controller.
-            'C' for "container blocks" that can be coils, with coils required for powered heating.
-            'G' for ground blocks which must be some non coil block
-         */
+    /*
+        'E' for "edge" block, that is to say essentially the blocks that contain the water.
+        '#' for air block where hypothetical water would be.
+        'S' for self, or controller.
+        'C' for "container blocks" that can be coils, with coils required for powered heating.
+        'G' for ground blocks which must be some non coil block
+     */
 
         int currColCount = columnCount;
         int currRowCount = rowCount;
         int currContPos = controllerPosition;
 
-        // return the default structure, even if there is no valid size found
-        // this means auto-build will still work, and prevents terminal crashes.
-        if (getWorld() != null) updateStructureDimensions();
+        // Ensure structure dimensions are updated if world is not null
+        if (getWorld() != null) {
+            updateStructureDimensions();
+        }
 
         initializeCoilStats();
 
-        // these can sometimes get set to 0 when loading the game, breaking JEI (Apparently; text from cleanroom impl)
-        if (columnCount < 1) columnCount = 1;
-        if (rowCount < 1) rowCount = 1;
+        // Ensure minimum values for columnCount and rowCount
+        ensureMinimumSize();
 
-        //if wasExposed has not been created, or is the wrong length, handle appropriately
+        // Initialize wasExposed array if necessary
         if (wasExposed == null || wasExposed.length != columnCount * rowCount) {
             wasExposed = new byte[columnCount * rowCount]; // all set to 0
-            this.exposedBlocks = 0; //ensure exposedBlocks dont go higher than expected
+            this.exposedBlocks = 0; // ensure exposedBlocks don't go higher than expected
         }
 
-        if (rollingAverage == null) rollingAverage = new int[20];
+        // Initialize rollingAverage if necessary
+        if (rollingAverage == null) {
+            rollingAverage = new int[20];
+        }
         isRecipeStalled = false;
 
-        if (structurePattern != null && currColCount == columnCount && currRowCount == rowCount && currContPos == controllerPosition)
+        // Return existing pattern if dimensions haven't changed
+        if (structurePattern != null && currColCount == columnCount && currRowCount == rowCount && currContPos == controllerPosition) {
             return structurePattern;
+        }
 
-        //abstracted away construction of center rows for later use
+        // Abstracted away construction of center rows for later use
         String[] containerRows = centerRowsPattern();
 
-        FactoryBlockPattern pattern;
+        FactoryBlockPattern pattern = FactoryBlockPattern.start()
+                .aisle(repeat("E", columnCount + 4), repeat(" ", columnCount + 4))
+                .aisle(repeat("E", columnCount + 4), " ".concat(repeat("E", columnCount + 2)).concat(" "));
 
-        //do first two rows including controller row and row behind controller
-        pattern = FactoryBlockPattern.start().aisle(repeat("E", columnCount + 4), repeat(" ", columnCount + 4)).aisle(repeat("E", columnCount + 4), " ".concat(repeat("E", columnCount + 2)).concat(" "));
-
-        //place all generated aisles (rows stored closer to further, this wants them further to closer) and save to pattern explicitly (unsure if the explicit assignment is necessary; probably no harm in being safe)
+        // Place all generated aisles (rows stored closer to further, this wants them further to closer)
         for (int i = 0; i < rowCount; ++i) {
             pattern = pattern.aisle(containerRows[rowCount - 1 - i], " E".concat(repeat("#", columnCount).concat("E ")));
         }
 
-        //place last two aisles
-        pattern = pattern.aisle(repeat("E", columnCount + 4), " ".concat(repeat("E", columnCount + 2)).concat(" ")).aisle(repeat("E", controllerPosition + 2).concat("S").concat(repeat("E", columnCount + 1 - controllerPosition)), repeat(" ", columnCount + 4))
+        // Place last two aisles
+        pattern = pattern.aisle(repeat("E", columnCount + 4), " ".concat(repeat("E", columnCount + 2)).concat(" "))
+                .aisle(repeat("E", controllerPosition + 2).concat("S").concat(repeat("E", columnCount + 1 - controllerPosition)), repeat(" ", columnCount + 4))
 
-                //begin predicates
-                .where('S', selfPredicate()).where('E', isEdge().or(autoAbilities(false, false, true, true, true, true, false).setMaxGlobalLimited(8)).or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(0).setMaxGlobalLimited(2).setPreviewCount(0))).where('G', isGround()).where('C', isContainer()).where('#', air()).where(' ', any());
+                // Begin predicates
+                .where('S', selfPredicate())
+                .where('E', isEdge().or(autoAbilities(false, false, true, true, true, true, false).setMaxGlobalLimited(8))
+                        .or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(0).setMaxGlobalLimited(2).setPreviewCount(0)))
+                .where('G', isGround())
+                .where('C', isContainer())
+                .where('#', air())
+                .where(' ', any());
 
         return pattern.build();
     }
 
-    protected TraceabilityPredicate isEdge() {
-        //supplies block info for display
-        Supplier<BlockInfo[]> supplier = () -> new BlockInfo[]{new BlockInfo(MetaBlocks.STONE_BLOCKS.get(StoneVariantBlock.StoneVariant.SMOOTH).getState(StoneVariantBlock.StoneType.CONCRETE_LIGHT))};
+    private void ensureMinimumSize() {
+        if (columnCount < 1) {
+            columnCount = 1;
+        }
+        if (rowCount < 1) {
+            rowCount = 1;
+        }
+    }
 
-        //returns true if blockstate is concrete
+    protected TraceabilityPredicate isEdge() {
+        Supplier<BlockInfo[]> supplier = () -> new BlockInfo[]{new BlockInfo(MetaBlocks.STONE_BLOCKS.get(StoneVariantBlock.StoneVariant.SMOOTH).getState(StoneVariantBlock.StoneType.CONCRETE_LIGHT))};
         return new TraceabilityPredicate(blockWorldState -> {
             IBlockState state = blockWorldState.getBlockState();
             return state == MetaBlocks.STONE_BLOCKS.get(StoneVariantBlock.StoneVariant.SMOOTH).getState(StoneVariantBlock.StoneType.CONCRETE_LIGHT);
@@ -323,46 +350,48 @@ public class MetaTileEntityEvaporationPool extends RecipeMapMultiblockController
     }
 
     protected TraceabilityPredicate isGround() {
-        //supplies block info for display
         Supplier<BlockInfo[]> supplier = () -> new BlockInfo[]{new BlockInfo(GTQTMetaBlocks.blockEvaporationBed.getState(BlockEvaporationBed.EvaporationBedType.DIRT))};
-
-        //returns true if blockstate is "ground"
         return new TraceabilityPredicate(blockWorldState -> {
             IBlockState state = blockWorldState.getBlockState();
             return isValidGround(state);
         }, supplier);
     }
 
-    //ensures coil pattern is either entirely there or completely absent for structure to be valid. Sets isHeated accordingly
     protected TraceabilityPredicate isContainer() {
         Supplier<BlockInfo[]> supplier = () -> {
-            ArrayList<BlockInfo> containerInfo = new ArrayList<>();
+            List<BlockInfo> containerInfo = Collections.synchronizedList(new ArrayList<>());
 
-            //add evap bed types
-            for (BlockEvaporationBed.EvaporationBedType type : BlockEvaporationBed.EvaporationBedType.values()) {
-                containerInfo.add(new BlockInfo(GTQTMetaBlocks.blockEvaporationBed.getState(type)));
+            try {
+                // Add evap bed types
+                for (BlockEvaporationBed.EvaporationBedType type : BlockEvaporationBed.EvaporationBedType.values()) {
+                    containerInfo.add(new BlockInfo(GTQTMetaBlocks.blockEvaporationBed.getState(type)));
+                }
+
+                // Add coil types
+                GregTechAPI.HEATING_COILS.entrySet().stream()
+                        .sorted(Comparator.comparingInt(entry -> entry.getValue().getTier()))
+                        .forEach(entry -> containerInfo.add(new BlockInfo(entry.getKey())));
+            } catch (Exception e) {
+                e.printStackTrace();
             }
 
-            //add coil types
-            GregTechAPI.HEATING_COILS.entrySet().stream().sorted(Comparator.comparingInt(entry -> entry.getValue().getTier())).forEach(entry -> containerInfo.add(new BlockInfo(entry.getKey())));
-
-            //create array of correct size to "move" entries to
-            BlockInfo[] containerInfoArray = new BlockInfo[containerInfo.size()];
-            return containerInfo.toArray(containerInfoArray);
+            return containerInfo.toArray(new BlockInfo[0]);
         };
 
         return new TraceabilityPredicate(blockWorldState -> {
             IBlockState state = blockWorldState.getBlockState();
 
             int containerStateResult = isValidCoil(state);
-            if (containerStateResult == -1) return false;
-            if (containerStateResult == 1) {
+            if (containerStateResult == -1) {
+                return false;
+            } else if (containerStateResult == 1) {
                 blockWorldState.getMatchContext().getOrPut("VABlock", new LinkedList<>()).add(blockWorldState.getPos());
             }
 
             return true;
         }, supplier);
     }
+
 
     @Override
     public List<MultiblockShapeInfo> getMatchingShapes() {
@@ -386,65 +415,63 @@ public class MetaTileEntityEvaporationPool extends RecipeMapMultiblockController
         return shapeInfo;
     }
 
-    //returns -1 for no errors, -2 for groundcheck error, else it returns position of failure, counting from left to right then closer to further
     public int coilPatternCheck(boolean checkGround) {
-        //first coil block has been found; ensure full coil pattern is present so that future validation checks may be skipped
         String[] centerPattern = centerRowsPattern();
-        IBlockState targetState = (coilStateMeta == -1) ? null : MetaBlocks.WIRE_COIL.getStateFromMeta(coilStateMeta); //if stored coilstate exists
+        IBlockState targetState = (coilStateMeta == -1) ? null : MetaBlocks.WIRE_COIL.getStateFromMeta(coilStateMeta);
+        EnumFacing right = getFrontFacing().rotateYCCW();
+        EnumFacing back = getFrontFacing().getOpposite();
 
-        EnumFacing right = getFrontFacing().rotateYCCW(); //right if you are looking at controller
-        EnumFacing back = getFrontFacing().getOpposite(); //further from front of controller
+        BlockPos.MutableBlockPos targetPos = new BlockPos.MutableBlockPos(getPos().offset(back, 2));
+        targetPos.move(right.getOpposite(), controllerPosition + 1);
 
-        //get blockpos of first row, leftmost center block
-        BlockPos.MutableBlockPos targetPos = new BlockPos.MutableBlockPos(getPos().offset(back, 2)); //place on first row
-        targetPos.move(right.getOpposite(), controllerPosition + 1); //move to the furthest left center block +1 (looking at controller) to account for immediate right deviation in j loop
-
-        //traverse center pattern rows (closer to further)
         for (int i = 0; i < rowCount; ++i) {
-            //traverse center pattern columns in 'i'th row, skipping edges
             for (int j = 2; j < columnCount + 2; ++j) {
-                targetPos.move(right); //go right one first to allow for continue to be used later
+                targetPos.move(right);
 
-                if (centerPattern[i].charAt(j) != 'C') {
-                    if (!checkGround) continue; //skip non coil entries if checkGround is false
-
-                    //do not error out if invalid
-                    if (getWorld().getBlockState(targetPos) == GTQTMetaBlocks.blockEvaporationBed.getState(BlockEvaporationBed.EvaporationBedType.DIRT))
-                        continue;
-                    return ((i * columnCount + j - 2) * -1) - 2; //ground check failed; return index number's negative shifted down two such that range => [0, INT_MAX] -> [-INT_MAX, -2]
+                if (j >= centerPattern[i].length()) {
+                    return ((i * columnCount + j - 2) * -1) - 2;
                 }
 
-                //store state of first coil. Might do weird stuff if meta of coilState > 7, as jei error-ed when trying to display them even though they are same material type
-                if (targetState == null) {
-                    targetState = getWorld().getBlockState(targetPos); //establish coil type from first coil
-                    if (MetaBlocks.WIRE_COIL.getBlockState().getValidStates().contains(targetState))
-                        continue; //if first coil position found ensure it is valid coil and continue if it is
-                } else if (getWorld().getBlockState(targetPos).toString().equals(targetState.toString()))
-                    continue; //proceed only if current coil is exact same as previous coil(s). equals seems to fail, so a string comparison works best)
+                char patternChar = centerPattern[i].charAt(j);
+                if (patternChar != 'C') {
+                    if (!checkGround) continue;
 
-                //current coilpos block is either not a coil (first coil position), or it is not identical to previous coil(s)
-                return i * columnCount + j - 2; //indicate failure of solid coil structure through >0 value. Stores relative position of failure in int (kind of pointless now; was for old code that got pos from this)
+                    if (getWorld().getBlockState(targetPos) == GTQTMetaBlocks.blockEvaporationBed.getState(BlockEvaporationBed.EvaporationBedType.DIRT))
+                        continue;
+
+                    return ((i * columnCount + j - 2) * -1) - 2;
+                }
+
+                IBlockState currentState = getWorld().getBlockState(targetPos);
+                if (targetState == null) {
+                    targetState = currentState;
+                    if (MetaBlocks.WIRE_COIL.getBlockState().getValidStates().contains(targetState))
+                        continue;
+                } else if (currentState.equals(targetState)) {
+                    continue;
+                }
+
+                return i * columnCount + j - 2;
             }
 
-            targetPos.move(back); //go back one row
-            targetPos.move(right.getOpposite(), columnCount); //reset to leftmost center position +1 unit left due to order of traversal inside nested loop
+            targetPos.move(back);
+            targetPos.move(right.getOpposite(), columnCount);
         }
 
-        if (!checkGround)
-            coilStateMeta = targetState.getBlock().getMetaFromState(targetState); //store correct coilstate (necessary as passing coilState would pass the reference by value, meaning reassignment would not carry to caller)
-        return -1; //no checks failed
+        if (!checkGround && targetState != null) {
+            coilStateMeta = targetState.getBlock().getMetaFromState(targetState);
+        }
+        return -1;
     }
 
-    //takes result int from coilPatternCheck, outputting boolean related to whether or not structure was found to be valid
+
     public boolean handleCoilCheckResult(int result) {
         if (result != -1) {
             coilStateMeta = -1;
             isHeated = false;
             initializeCoilStats();
             return false;
-        } //block is a coil at this point, so if coil pattern fails exit with false (invalidates structure)
-
-        //if check is passed structure is valid heatable evap pool
+        }
         isHeated = true;
         initializeCoilStats();
 
@@ -461,12 +488,9 @@ public class MetaTileEntityEvaporationPool extends RecipeMapMultiblockController
         coilStats = coilStateMeta > -1 ? HEATING_COILS.get(MetaBlocks.WIRE_COIL.getStateFromMeta(coilStateMeta)) : null;
     }
 
-    // returns -1 for not a valid container, 0 for valid container, invalid coil, and 1 for valid coil
     public int isValidCoil(IBlockState state) {
         if (!MetaBlocks.WIRE_COIL.getBlockState().getValidStates().contains(state))
             return this.isValidGround(state) ? 0 : -1;
-
-        //if not contained in valid coil states this part of method wouldn't have run
         if (coilStateMeta == -1) return 1;
         return state.toString().equals(MetaBlocks.WIRE_COIL.getStateFromMeta(coilStateMeta).toString()) ? 1 : 0;
     }
@@ -475,29 +499,16 @@ public class MetaTileEntityEvaporationPool extends RecipeMapMultiblockController
         return state == GTQTMetaBlocks.blockEvaporationBed.getState(BlockEvaporationBed.EvaporationBedType.DIRT);
     }
 
-    /*
-        apparently the structurepattern's worldstate is being set to error at the furthest and leftmost coil block whenever
-        multiple coils are destroyed, which causes weird behavior when attempting to reform the structure. The only way to get around
-        this without more thoroughly understanding how the structure checks work is to manually change the error to any invalid center block,
-        though I suspect even if I did know what the issue was more specifically this would still be the only solution.
-        Incomprehensibly bugged kila code lets fucking go
-     */
     @Override
     public void checkStructurePattern() {
-        // This is here so that it automatically updates the dimensions once a second if it isn't formed [this method is called once a second]
-        // hope this doesn't put too much of a toll on TPS - It really should not
         if (!isStructureFormed() || structurePattern == null) {
             structurePattern = null; // should erase any faulty errors picked up from reloading world
             reinitializeStructurePattern(); // creates new structure pattern again
         }
-
         super.checkStructurePattern();
-
-        //only do check every 2 seconds while structure is formed
         if (((tickTimer / 20) & 1) == 0 && structurePattern != null && structurePattern.getError() == null) {
             handleCoilCheckResult(coilPatternCheck(false));
         }
-
     }
 
     @Override
@@ -508,205 +519,82 @@ public class MetaTileEntityEvaporationPool extends RecipeMapMultiblockController
         }
     }
 
-    public BlockPos.MutableBlockPos getCorner(boolean isClose, boolean isLeft) {
-        BlockPos.MutableBlockPos corner = new BlockPos.MutableBlockPos(getPos());
-        EnumFacing back = getFrontFacing().getOpposite();
-        EnumFacing left = getFrontFacing().rotateY(); //left if you're looking at controller
-
-        corner.move(EnumFacing.UP); //place on level of fluid in pool
-
-        //Puts on leftmost or rightmost column
-        if (isLeft) {
-            corner.move(left, controllerPosition); //line up with leftmost column of interior
-        } else {
-            corner.move(left.getOpposite(), columnCount - controllerPosition - 1); //line up w/ furthest right interior column
-        }
-
-        //Puts on closest or furthest row
-        if (isClose) {
-            corner.move(back, 2); //place in interior
-        } else {
-            corner.move(back, rowCount + 1); //move onto last row
-        }
-
-        return corner;
-    }
-
-    /*
-    public static void renderTankFluid(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline, FluidTank tank, IBlockAccess world, BlockPos pos, EnumFacing frontFacing) {
-        float lastBrightnessX = OpenGlHelper.lastBrightnessX;
-        float lastBrightnessY = OpenGlHelper.lastBrightnessY;
-        if (world != null) {
-            renderState.setBrightness(world, pos);
-        }
-        FluidStack stack = tank.getFluid();
-        if (stack == null || stack.amount == 0)
-            return;
-
-        Cuboid6 partialFluidBox = new Cuboid6(1.0625 / 16.0, 2.0625 / 16.0, 1.0625 / 16.0, 14.9375 / 16.0, 14.9375 / 16.0, 14.9375 / 16.0);
-
-        double fillFraction = (double) stack.amount / tank.getCapacity();
-        if (tank.getFluid().getFluid().isGaseous()) {
-            partialFluidBox.min.y = Math.max(13.9375 - (11.875 * fillFraction), 2.0) / 16.0;
-        } else {
-            partialFluidBox.max.y = Math.min((11.875 * fillFraction) + 2.0625, 14.0) / 16.0;
-        }
-
-        renderState.setFluidColour(stack);
-        ResourceLocation fluidStill = stack.getFluid().getStill(stack);
-        TextureAtlasSprite fluidStillSprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(fluidStill.toString());
-        for (EnumFacing facing : EnumFacing.VALUES) {
-            Textures.renderFace(renderState, translation, pipeline, facing, partialFluidBox, fluidStillSprite, BlockRenderLayer.CUTOUT_MIPPED);
-        }
-        GlStateManager.resetColor();
-
-        renderState.reset();
-    }
-     */
-
-    public <T extends MultiblockRecipeLogic> void renderFluid(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline, IBlockAccess world, EnumFacing frontFacing, T recipeMapWorkable, BlockPos.MutableBlockPos controllerPos) {
-
-        if ((this.tickTimer + 1) % 20 == 0) {
-        } else {
-            return;
-        }
-
-        if (world != null) {
-            renderState.setBrightness(world, controllerPos);
-        }
-
-        if (controllerPos == null || !this.isStructureFormed() || !recipeMapWorkable.isActive() || recipeMapWorkable.getPreviousRecipe() == null) {
-            return;
-        }
-
-        //Create a box with slight margins since going from exactly 0 to exactly 1 causes some faces to not render properly
-        Cuboid6 partialFluidBox = new Cuboid6(0.001, 0.001, 0.001, 0.999, 0.875, 0.999);
-
-        //Set our box to the percentage of the tank that is full
-        //partialFluidBox.max.y = 0.875f; //should be 15 pixels out of 16 full
-
-        //when looking at controller facing south leftmost col is West, and when facing West leftmost is North
-        boolean isLeftMostColumn = frontFacing == EnumFacing.SOUTH || frontFacing == EnumFacing.WEST;
-        boolean isFurthestRow = frontFacing == EnumFacing.SOUTH || frontFacing == EnumFacing.WEST;
-
-        //scale only works into positive direction, so we want block in most negative corner for both coords [W, N]
-        BlockPos.MutableBlockPos corner = getCorner(isFurthestRow, isLeftMostColumn);
-
-        int EWFacing = frontFacing.getHorizontalIndex() & 1; //odd horizontal index
-        int NSFacing = (frontFacing.getHorizontalIndex() + 1) & 1; //even horizontal index
-
-        //apply translations to scale properly; "back distance and length are switched in the case of WEST and EAST as a form of "rotation" since translation.rotate is broken..."
-        translation.translate((corner.getX() - controllerPos.getX()), 1, corner.getZ() - controllerPos.getZ());
-        translation.scale(EWFacing * rowCount + NSFacing * columnCount, 1, EWFacing * columnCount + NSFacing * rowCount);
-
-        FluidStack fluidStack = Materials.Water.getFluid(1000); //default is water
-
-        //previous recipe is actually previously found recipe which is now being run, or attempting to be run
-        if (recipeMapWorkable.getPreviousRecipe().getFluidInputs() != null) {
-            fluidStack = recipeMapWorkable.getPreviousRecipe().getFluidInputs().get(0).getInputFluidStack();
-        }
-
-        //store previous renderer state
-        //CubeRendererState op = Textures.RENDER_STATE.get();
-        renderState.setBrightness(getWorld(), controllerPos);
-
-        //modify render state for own uses and then render top
-        //Textures.RENDER_STATE.set(new CubeRendererState(op.layer, CubeRendererState.PASS_MASK, op.world));
-        renderState.setFluidColour(fluidStack);
-        TextureAtlasSprite fluidStillSprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(fluidStack.getFluid().getStill(fluidStack).toString());
-
-        for (EnumFacing facing : EnumFacing.VALUES) {
-            Textures.renderFace(renderState, translation, pipeline, facing, partialFluidBox, fluidStillSprite, BlockRenderLayer.CUTOUT_MIPPED);
-        }
-
-        //Go back to normal for the next rendering call
-        GlStateManager.resetColor();
-
-        renderState.reset();
-    }
-
     @Override
     public void update() {
-        super.update(); //means recipe logic happens before heating is added
+        super.update(); // Recipe logic happens before heating is added
 
         if (this.getWorld().isRemote) {
             if (this.isActive() && !isRecipeStalled) {
-                //if world is clientside (remote from server) do custom rendering
-                evaporationParticles();
+                evaporationParticles(); // Custom rendering on client side
             }
-
-            return; //dont do logic on client
+            return; // Don't do logic on client
         }
 
-        setCoilActivity(false); // solves world issue reload where coils would be active even if multi was not running
-        if (structurePattern.getError() != null) return; //dont do processing for unformed multis
+        setCoilActivity(false); // Solve world reload issue
+        if (structurePattern.getError() != null) return; // Skip processing for unformed multis
 
-        //ensure timer is non-negative by anding sign bit with 0
-        tickTimer = tickTimer & 0b01111111111111111111111111111111;
-        checkCoilActivity(); // make coils active if they should be
-        rollingAverage[tickTimer % 20] = 0; // reset rolling average for this tick index
+        // Ensure tickTimer is non-negative
+        tickTimer = Math.max(0, tickTimer);
 
-        //should skip/cost an extra tick the first time and then anywhere from 1-9 extra when rolling over. Determines exposedblocks
+        checkCoilActivity(); // Make coils active if they should be
+        rollingAverage[tickTimer % 20] = 0; // Reset rolling average for this tick index
+
+        // Perform checks every 10 ticks, except the first tick
         if (tickTimer % 10 == 0 && tickTimer != 0) {
-            //no sunlight heat generated when raining or during night. May be incongruent with partial exposure to sun, but oh well
             if (getWorld().isRainingAt(getPos().offset(getFrontFacing().getOpposite(), 2)) || !getWorld().isDaytime()) {
                 exposedBlocks = 0;
-            }
-            //checks for ow and skylight access to prevent beneath portal issues (-1 = the Nether, 0 = normal world)
-            else if (getWorld().provider.getDimension() == 0) {
-                //tickTimer is always multiple of 20 at this point, so division by 20 yields proper counter. You can treat (tickTimer/20) as 'i'
-                int row = ((tickTimer / 20) / columnCount) % rowCount; //going left to right, further to closer checking skylight access.
+            } else if (getWorld().provider.getDimension() == 0) {
+                int row = ((tickTimer / 20) / columnCount) % rowCount;
                 int col = ((tickTimer / 20) % columnCount);
-                //places blockpos for skycheck into correct position. Row counts from furthest to closest (kinda inconsistent but oh well)
                 BlockPos.MutableBlockPos skyCheckPos = new BlockPos.MutableBlockPos(getPos().offset(EnumFacing.UP, 2));
                 skyCheckPos.move(getFrontFacing().getOpposite(), rowCount - row + 1);
-                skyCheckPos.move(getFrontFacing().rotateY(), controllerPosition); //move to the furthest left
-                skyCheckPos.move(getFrontFacing().rotateYCCW(), col); //traverse down row
+                skyCheckPos.move(getFrontFacing().rotateY(), controllerPosition);
+                skyCheckPos.move(getFrontFacing().rotateYCCW(), col);
 
                 if (wasExposed == null || wasExposed.length != rowCount * columnCount) {
                     wasExposed = new byte[rowCount * columnCount];
                     exposedBlocks = 0;
                 }
 
-                //Perform skylight check
                 if (!getWorld().canBlockSeeSky(skyCheckPos)) {
-                    //only decrement exposedBlocks if previously exposed block is found to no longer be exposed and one full pass has occurred
                     if (wasExposed[(row * columnCount) + col] != 0 && tickTimer / 20 > rowCount * columnCount) {
                         exposedBlocks = Math.max(0, exposedBlocks - 1);
                         wasExposed[(row * columnCount) + col] = 0;
                     }
                 } else {
-                    //only increment if block was not previously exposed
                     if (wasExposed[(row * columnCount) + col] == 0) {
                         if (exposedBlocks < rowCount * columnCount) ++exposedBlocks;
                         wasExposed[(row * columnCount) + col] = 1;
                     }
                 }
             }
+        }
 
-        } //finish once a ~second check
+        inputEnergy(exposedBlocks * 50); // 1kJ/s/m^2 -> 50J/t
 
-        inputEnergy(exposedBlocks * 50); //1kJ/s /m^2 -> 50J/t
-
-        //convert joules in buffer to kJ
+        // Convert joules in buffer to kJ
         if (joulesBuffer >= 1000) {
             int tempBuffer = joulesBuffer;
             joulesBuffer = 0;
-            //if energy was not stored into kiloJoules, place everything back into buffer manually
             if (!inputEnergy(tempBuffer)) joulesBuffer = tempBuffer;
         }
 
-        ++tickTimer;
+        tickTimer++;
 
-        //store relevant values
-        this.writeCustomData(energyValuesID, buf -> {
-            buf.writeInt(exposedBlocks);
-            buf.writeByteArray(wasExposed);
-            buf.writeInt(kiloJoules);
-            buf.writeInt(tickTimer);
-            buf.writeBoolean(isRecipeStalled);
-        });
+        try {
+            this.writeCustomData(energyValuesID, buf -> {
+                buf.writeInt(exposedBlocks);
+                buf.writeByteArray(wasExposed);
+                buf.writeInt(kiloJoules);
+                buf.writeInt(tickTimer);
+                buf.writeBoolean(isRecipeStalled);
+            });
+        } catch (Exception e) {
+            // Log the exception or handle it appropriately
+            e.printStackTrace();
+        }
     }
+
 
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {

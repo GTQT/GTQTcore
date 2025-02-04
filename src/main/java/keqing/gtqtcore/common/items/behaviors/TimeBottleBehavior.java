@@ -32,6 +32,7 @@ import static keqing.gtqtcore.common.items.GTQTMetaItems.TIME_BOTTLE;
 public class TimeBottleBehavior implements IItemBehaviour {
     private final int maxTime = 20 * 3600 * GTQTCoreConfig.DifficultySwitch.TimeBottleStoreMaxHour;
     private int time;
+
     public TimeBottleBehavior() {
     }
 
