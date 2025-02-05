@@ -1,18 +1,14 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
 import com.google.common.util.concurrent.AtomicDouble;
+import gregicality.multiblocks.api.recipes.GCYMRecipeMaps;
 import gregtech.api.GTValues;
-import gregtech.api.capability.GregtechCapabilities;
-import gregtech.api.capability.GregtechDataCodes;
-import gregtech.api.capability.IEnergyContainer;
+import gregtech.api.capability.*;
 import gregtech.api.capability.impl.*;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.ModularUI;
 import gregtech.api.gui.resources.TextureArea;
-import gregtech.api.gui.widgets.ImageCycleButtonWidget;
-import gregtech.api.gui.widgets.ImageWidget;
-import gregtech.api.gui.widgets.IndicatorImageWidget;
-import gregtech.api.gui.widgets.ProgressWidget;
+import gregtech.api.gui.widgets.*;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.*;
@@ -20,8 +16,10 @@ import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
+import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.recipes.recipeproperties.FusionEUToStartProperty;
+import gregtech.api.util.GTUtility;
 import gregtech.api.util.TextComponentUtil;
 import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
@@ -31,6 +29,8 @@ import gregtech.common.blocks.BlockGlassCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityLaserHatch;
 import keqing.gtqtcore.api.gui.GTQTGuiTextures;
+import keqing.gtqtcore.api.metaileentity.GTQTNoTierMultiblockController;
+import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.BlockMultiblockGlass;
@@ -41,10 +41,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import supercritical.api.gui.SCGuiTextures;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -53,8 +56,9 @@ import java.util.function.DoubleSupplier;
 
 import static gregtech.api.GTValues.*;
 import static keqing.gtqtcore.GTQTCoreConfig.MachineSwitch;
+import static keqing.gtqtcore.api.utils.GTQTUtil.getAccelerateByCWU;
 
-public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockController {
+public class MetaTileEntityCompressedFusionReactor extends GTQTNoTierMultiblockController implements IOpticalComputationReceiver {
     //  Block State for CFR, for Mark 4 and Mark 5,
     //  we do not need Cryostat, Divertor and Vacuum in CFR anymore.
     //  Parameter {@code CoilState} means Fusion Coils.
@@ -74,6 +78,8 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
     //  TODO Delete Heat system of CFR?
     private long heat = 0;
 
+    int requestCWUt;
+    private IOpticalComputationProvider computationProvider;
     @Override
     public void checkStructurePattern() {
         if(MachineSwitch.DelayStructureCheckSwitch) {
@@ -89,7 +95,10 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
                                                  IBlockState casingState,
                                                  IBlockState coilState,
                                                  IBlockState frameState) {
-        super(metaTileEntityId, RecipeMaps.FUSION_RECIPES);
+        super(metaTileEntityId, new RecipeMap[]{
+                RecipeMaps.FUSION_RECIPES
+        });
+
         this.recipeMapWorkable = new CompressedFusionReactorRecipeLogic(this);
         this.tier = tier;
         this.casingState = casingState;
@@ -102,8 +111,12 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
             }
         };
         this.progressBarSupplier = new FusionProgressSupplier();
-    }
 
+        //setMaxParallel(auto);
+        setMaxParallelFlag(true);
+        //setTimeReduce(none);
+        setTimeReduceFlag(false);
+    }
     @Override
     public boolean canBeDistinct() {
         return true;
@@ -168,6 +181,7 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
                 .where('B', states(getGlassState()))
                 .where('C', states(getCasingState()))
                 .where('I', states(getCasingState())
+                        .or(abilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION).setExactLimit(1))
                         .or(abilities(MultiblockAbility.IMPORT_FLUIDS)
                                 .setMinGlobalLimited(2)
                                 .setPreviewCount(16))
@@ -284,6 +298,12 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
     protected void formStructure(PatternMatchContext context) {
         long energyStored = this.energyContainer.getEnergyStored();
         super.formStructure(context);
+
+        List<IOpticalComputationHatch> providers = this.getAbilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION);
+        if (providers != null && !providers.isEmpty()) {
+            this.computationProvider = providers.get(0);
+        }
+
         this.initializeAbilities();
         ((EnergyContainerHandler) this.energyContainer).setEnergyStored(energyStored);
     }
@@ -302,7 +322,7 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
 
         //  EU Capacity = Energy Hatch amount * Energy Stored (half of original Fusion Reactor).
         long euCapacity = calculateEnergyStorageFactor(energyInputs.size());
-        this.energyContainer = new EnergyContainerHandler(this, euCapacity, V[tier], 0, 0, 0) {
+        this.energyContainer = new EnergyContainerHandler(this, euCapacity, V[tier], 2L *energyInputs.size(), 0, 0) {
             @Override
             public String getName() {
                 return GregtechDataCodes.FUSION_REACTOR_ENERGY_CONTAINER_TRAIT;
@@ -324,12 +344,16 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
             if (energyAdded > 0)
                 this.inputEnergyContainers.removeEnergy(energyAdded);
         }
+        if (isActive()) {
+            requestCWUt = computationProvider.requestCWUt(2048, false);
+        }
     }
 
     @Override
     protected ModularUI.Builder createUITemplate(EntityPlayer entityPlayer) {
+        ///////////////////////////Main GUI
         //  Background
-        ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND, 198, 236);
+        ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND, 368, 236);
 
         //  Display
         builder.image(4, 4, 190, 138, GuiTextures.DISPLAY);
@@ -393,11 +417,85 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
         //  Flex Unavailable Image
         builder.widget(this.getFlexButton(173, 153, 18, 18));
 
+        ///////////////////////////智能并行组件
+        builder.image(200, 4, 160, 20, GuiTextures.DISPLAY);
+        builder.widget((new AdvancedTextWidget(204, 10, this::addModel, 16777215)).setMaxWidthLimit(110).setClickHandler(this::handleDisplayClick));
+
+        builder.widget(new ClickButtonWidget(200, 28, 80, 20, "gui.mode_switch",
+                clickData -> autoParallelModel = !autoParallelModel));
+
+        //builder.image(280, 4, 80, 20, GuiTextures.DISPLAY);
+        builder.widget((new AdvancedTextWidget(284, 10, this::addInfo, 16777215)).setMaxWidthLimit(110).setClickHandler(this::handleDisplayClick));
+
+        builder.widget(new IncrementButtonWidget(280, 28, 40, 20, 1, 4, 16, 64, this::setCurrentParallel)
+                .setDefaultTooltip()
+                .setShouldClientCallback(false));
+
+        builder.widget(new IncrementButtonWidget(320, 28, 40, 20, -1, -4, -16, -64, this::setCurrentParallel)
+                .setDefaultTooltip()
+                .setShouldClientCallback(false));
+
+        builder.widget(
+                new SliderWidget("gui.auto_parallel_limit", 200, 52, 160, 20, 1, maxParallel, limitAutoParallel,
+                        this::setLimitAutoParallel).setBackground(SCGuiTextures.DARK_SLIDER_BACKGROUND)
+                        .setSliderIcon(SCGuiTextures.DARK_SLIDER_ICON));
+
+        builder.image(200, 76, 160, 20, GuiTextures.DISPLAY);
+        builder.widget((new AdvancedTextWidget(204, 82, this::addEnergyHatch, 16777215)).setMaxWidthLimit(110).setClickHandler(this::handleDisplayClick));
+
+        //builder.image(280, 76, 80, 20, GuiTextures.DISPLAY);
+        builder.widget((new AdvancedTextWidget(284, 82, this::addOC, 16777215)).setMaxWidthLimit(110).setClickHandler(this::handleDisplayClick));
+
+        builder.widget(new ClickButtonWidget(200, 100, 40, 20, "gui.reset", data ->
+                energyHatchMaxWork = 32).setTooltipText("gui.reset_tooltip"));
+
+        builder.widget(new ClickButtonWidget(240, 100, 40, 20, "gui.recommend", data ->
+        {
+            energyHatchMaxWork = (int) (this.energyContainer.getEnergyStored() / V[tier]);
+            energyHatchMaxWork = Math.max(1, energyHatchMaxWork);
+            energyHatchMaxWork = Math.min(energyHatchMaxWork, 128);
+
+        }).setTooltipText("gui.recommend_tooltip"));
+
+        builder.widget(new ClickButtonWidget(280, 100, 80, 20, "gui.oc_parallel_mode",
+                clickData -> OCFirst = !OCFirst).setTooltipText("gui.oc_parallel_mode_tooltip"));
+
+        builder.image(200, 124, 160, 106, GuiTextures.DISPLAY);
+        builder.widget((new AdvancedTextWidget(204, 128, this::addDisplayText, 16777215)).setMaxWidthLimit(160).setClickHandler(this::handleDisplayClick));
+
+
         //  Player Inventory
         builder.bindPlayerInventory(entityPlayer.inventory, 153);
         return builder;
     }
+    @Override
+    public IOpticalComputationProvider getComputationProvider() {
+        return this.computationProvider;
+    }
 
+    @Override
+    protected void addDisplayText(List<ITextComponent> textList) {
+        String energyFormatted = TextFormattingUtil.formatNumbers(this.recipeMapWorkable.getMaximumOverclockVoltage());
+        ITextComponent voltageName1 = new TextComponentString(GTValues.VNF[GTUtility.getFloorTierByVoltage(this.recipeMapWorkable.getMaximumOverclockVoltage())]);
+        ITextComponent bodyText1 = TextComponentUtil.translationWithColor(TextFormatting.GRAY, "gregtech.multiblock.max_energy_per_tick", energyFormatted, voltageName1);
+        ITextComponent hoverText1 = TextComponentUtil.translationWithColor(TextFormatting.GRAY, "gregtech.multiblock.max_energy_per_tick_hover");
+        textList.add(TextComponentUtil.setHover(bodyText1, hoverText1));
+
+        ITextComponent voltageName2 = new TextComponentString(GTValues.VNF[tier]);
+        ITextComponent bodyText2 = TextComponentUtil.translationWithColor(TextFormatting.GRAY, "gregtech.multiblock.max_recipe_tier", voltageName2);
+        ITextComponent hoverText2 = TextComponentUtil.translationWithColor(TextFormatting.GRAY, "gregtech.multiblock.max_recipe_tier_hover");
+        textList.add(TextComponentUtil.setHover(bodyText2, hoverText2));
+
+        ITextComponent parallels = TextComponentUtil.stringWithColor(TextFormatting.DARK_PURPLE, TextFormattingUtil.formatNumbers(this.recipeMapWorkable.getParallelLimit()));
+        textList.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY, "gregtech.multiblock.parallel", parallels));
+
+        textList.add(new TextComponentTranslation("gtqtcore.kqcc_accelerate", requestCWUt, getAccelerateByCWU(requestCWUt)));
+        textList.add(new TextComponentTranslation("能量存储上限： %s", this.energyContainer.getEnergyCapacity()));
+        textList.add(new TextComponentTranslation("能量缓存上限： %s", this.energyContainer.getEnergyStored()));
+
+
+
+    }
     private void addEnergyBarHoverText(List<ITextComponent> hoverList) {
         ITextComponent energyInfo = TextComponentUtil.stringWithColor(
                 TextFormatting.AQUA,
@@ -426,6 +524,8 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
     public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         long actuallyEnergyStored = calculateEnergyStorageFactor(32) / 1000000L;
         super.addInformation(stack, player, tooltip, advanced);
+        tooltip.add(I18n.format("gtqtcore.multiblock.kq.acc.tooltip"));
+        tooltip.add(I18n.format("本机器允许使用激光能源仓代替能源仓！"));
         switch (this.tier) {
             case LuV -> {
                 tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("gtqtcore.machine.compressed_fusion_reactor.luv.tooltip.1"));
@@ -436,6 +536,7 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
                 tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.luv.tooltip.6"));
                 tooltip.add(I18n.format("gregtech.machine.fusion_reactor.capacity", actuallyEnergyStored));
                 tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.common_oc"));
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.perfect_oc"));
             }
             case ZPM -> {
                 tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("gtqtcore.machine.compressed_fusion_reactor.zpm.tooltip.1"));
@@ -447,6 +548,7 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
                 tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.zpm.tooltip.7"));
                 tooltip.add(I18n.format("gregtech.machine.fusion_reactor.capacity", actuallyEnergyStored));
                 tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.common_oc"));
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.perfect_oc"));
             }
             case UV -> {
                 tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("gtqtcore.machine.compressed_fusion_reactor.uv.tooltip.1"));
@@ -459,6 +561,7 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
                 tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.uv.tooltip.8"));
                 tooltip.add(I18n.format("gregtech.machine.fusion_reactor.capacity", actuallyEnergyStored));
                 tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.common_oc"));
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.perfect_oc"));
             }
             case UHV -> {
                 tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("gtqtcore.machine.compressed_fusion_reactor.uhv.tooltip.1"));
@@ -471,6 +574,7 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
                 tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.uhv.tooltip.8"));
                 tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.uhv.tooltip.9"));
                 tooltip.add(I18n.format("gregtech.machine.fusion_reactor.capacity", actuallyEnergyStored));
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.common_oc"));
                 tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.perfect_oc"));
             }
             case UEV -> {
@@ -485,6 +589,7 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
                 tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.uev.tooltip.9"));
                 tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.uev.tooltip.10"));
                 tooltip.add(I18n.format("gregtech.machine.fusion_reactor.capacity", actuallyEnergyStored));
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.common_oc"));
                 tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.perfect_oc"));
             }
             case UIV -> {
@@ -500,6 +605,7 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
                 tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.uiv.tooltip.10"));
                 tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.uiv.tooltip.11"));
                 tooltip.add(I18n.format("gregtech.machine.fusion_reactor.capacity", actuallyEnergyStored));
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.common_oc"));
                 tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.perfect_oc"));
             }
         }
@@ -640,48 +746,9 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
         public CompressedFusionReactorRecipeLogic(MetaTileEntityCompressedFusionReactor tileEntity) {
             super(tileEntity);
         }
-
-        /**
-         * OC Duration Divisor Getter.
-         *
-         * <p>
-         * Get {@code 2.0D} (Duration / 2) when {@code tier} less than 4.
-         * Get {@code 4.0D} (Duration / 4) when {@code tier} bigger than or equal to 4.
-         * </p>
-         *
-         * @return OC Duration Divisor.
-         */
         @Override
         protected double getOverclockingDurationDivisor() {
-            if (tier >= 4) {
-                return 4.0D;
-            } else {
-                return 2.0D;
-            }
-        }
-
-        /**
-         * OC Voltage Multiplier Getter.
-         *
-         * <p>
-         * Get {@code 2.0D} (Energy consumed ×2) when {@code tier} less than 4.
-         * Get {@code 4.0D} (Energy consumed ×4) when {@code tier} bigger than or equal to 4.
-         *
-         *     <ul>
-         *         <li>Mark 1-3: 2/2 Perfect OC.</li>
-         *         <li>Mark 4 and Mark 5: 4/4 Perfect OC.</li>
-         *     </ul>
-         * </p>
-         *
-         * @return OC Voltage Multiplier.
-         */
-        @Override
-        protected double getOverclockingVoltageMultiplier() {
-            if (tier >= 4) {
-                return 4.0D;
-            } else {
-                return 2.0D;
-            }
+            return OCFirst ? 4.0 : 2.0;
         }
 
         @Override
@@ -689,19 +756,22 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
             return Math.min(V[tier], super.getMaxVoltage());
         }
 
-        /**
-         * Allowed CFR get higher Maximum Parallel Voltage to parallel recipe.
-         * Used to allowed {@link #setParallelLimit(int)} in {@link #checkRecipe(Recipe)} use more energy,
-         * whether some high energy required recipes cannot paralle.
-         *
-         * @return Max Parallel Voltage.
-         */
         @Override
         public long getMaxParallelVoltage() {
-            IEnergyContainer container = ((MetaTileEntityCompressedFusionReactor) this.metaTileEntity).inputEnergyContainers;
-            return Math.min(GTValues.V[tier] * getParallelLimit(), container.getInputVoltage());
+            if (OCFirst) return super.getMaxParallelVoltage();
+            return super.getMaxVoltage()* getParallelLimit();
         }
 
+        @Override
+        public long getMaximumOverclockVoltage() {
+            if (OCFirst)return inputEnergyContainers.getInputVoltage();
+            return super.getMaximumOverclockVoltage();
+        }
+
+        @Override
+        public int getParallelLimit() {
+            return Math.min(autoParallelModel ? autoParallel : customParallel ,super.getParallelLimit());
+        }
 
         @Override
         public void updateWorkable() {
@@ -714,6 +784,12 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
                     heat = heat <= 10000 ? 0 : (heat - 10000);
                 }
             }
+        }
+
+        @Override
+        public void setParallelLimit(int amount) {
+            setMaxParallel(amount);
+            super.setParallelLimit(amount);
         }
 
         @Override
@@ -828,6 +904,11 @@ public class MetaTileEntityCompressedFusionReactor extends RecipeMapMultiblockCo
         public void deserializeNBT(NBTTagCompound compound) {
             super.deserializeNBT(compound);
             heat = compound.getLong("Heat");
+        }
+
+        @Override
+        public void setMaxProgress(int maxProgress) {
+            super.setMaxProgress((int) (maxProgress*getAccelerateByCWU(requestCWUt)));
         }
     }
 }

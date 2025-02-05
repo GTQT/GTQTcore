@@ -150,13 +150,12 @@ public class MetaTileEntityNeutralNetworkNexus extends MultiMapMultiblockControl
     }
 
     @Override
-    public void update() {
-        super.update();
+    public void updateFormedValid() {
+        super.updateFormedValid();
         if (isStructureFormed() && isActive()) {
             requestCWUt = computationProvider.requestCWUt(2048, false);
         }
     }
-
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
@@ -300,8 +299,7 @@ public class MetaTileEntityNeutralNetworkNexus extends MultiMapMultiblockControl
 
         @Override
         public void setMaxProgress(int maxProgress) {
-            int MaxProgress = (int) Math.floor(maxProgress * getAccelerateByCWU(requestCWUt));
-            super.setMaxProgress(MaxProgress);
+            super.setMaxProgress((int) (maxProgress*getAccelerateByCWU(requestCWUt)));
         }
     }
 }

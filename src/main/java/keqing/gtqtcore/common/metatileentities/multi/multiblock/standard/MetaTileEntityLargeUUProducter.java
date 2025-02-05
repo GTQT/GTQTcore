@@ -55,8 +55,8 @@ public class MetaTileEntityLargeUUProducter extends RecipeMapMultiblockControlle
         return new MetaTileEntityLargeUUProducter(metaTileEntityId);
     }
     @Override
-    public void update() {
-        super.update();
+    public void updateFormedValid() {
+        super.updateFormedValid();
         if (isStructureFormed() && isActive()) {
             requestCWUt = computationProvider.requestCWUt(2048, false);
         }
@@ -154,7 +154,7 @@ public class MetaTileEntityLargeUUProducter extends RecipeMapMultiblockControlle
         }
         @Override
         public void setMaxProgress(int maxProgress) {
-            this.maxProgressTime = (int) (maxProgress *0.8* getAccelerateByCWU(requestCWUt));
+            super.setMaxProgress((int) (maxProgress*getAccelerateByCWU(requestCWUt)));
         }
 
         @Override

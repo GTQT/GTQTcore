@@ -7,9 +7,12 @@ import net.minecraft.item.ItemStack;
 public class ToolPortableCellLarge extends ToolPortableCell {
 
     int Bytes;
-    public ToolPortableCellLarge(int bytes) {
+    int Types;
+
+    public ToolPortableCellLarge(int bytes, int types) {
         super();
         Bytes = bytes;
+        Types = types;
     }
 
     @Override
@@ -17,7 +20,11 @@ public class ToolPortableCellLarge extends ToolPortableCell {
         return Bytes;
     }
 
+    public int getTotalTypes(ItemStack cellItem) {
+        return Types;
+    }
+
     public double getAEMaxPower(ItemStack is) {
-        return (double)AEConfig.instance().getPortableCellBattery()*((double) Bytes /512);
+        return (double) AEConfig.instance().getPortableCellBattery() * ((double) Bytes / 512);
     }
 }

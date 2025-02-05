@@ -12,11 +12,9 @@ import gregtech.api.capability.*;
 import gregtech.api.capability.impl.EnergyContainerList;
 import gregtech.api.capability.impl.FluidTankList;
 import gregtech.api.capability.impl.ItemHandlerList;
-import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
-import gregtech.api.metatileentity.multiblock.MultiMapMultiblockController;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
@@ -25,7 +23,6 @@ import gregtech.api.pattern.MultiblockShapeInfo;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
-import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.recipes.logic.OverclockingLogic;
 import gregtech.api.recipes.recipeproperties.IRecipePropertyStorage;
 import gregtech.api.recipes.recipeproperties.TemperatureProperty;
@@ -42,6 +39,7 @@ import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.MetaTileEntities;
 import gregtech.core.sound.GTSoundEvents;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
+import keqing.gtqtcore.api.metaileentity.GTQTNoTierMultiblockController;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.utils.GTQTUtil;
@@ -67,11 +65,10 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-import static gregtech.api.GTValues.VA;
 import static keqing.gtqtcore.api.utils.GTQTUtil.getAccelerateByCWU;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.HUGE_ALLOY_BLAST_FURANCE;
 
-public class MetaTileEntityHugeAlloyBlastSmelter extends MultiMapMultiblockController implements IHeatingCoil, IOpticalComputationReceiver {
+public class MetaTileEntityHugeAlloyBlastSmelter extends GTQTNoTierMultiblockController implements IHeatingCoil, IOpticalComputationReceiver {
 
     protected int heatingCoilLevel;
     protected int coilTier;
@@ -87,6 +84,12 @@ public class MetaTileEntityHugeAlloyBlastSmelter extends MultiMapMultiblockContr
                 GTQTcoreRecipeMaps.BURNER_REACTOR_RECIPES
         });
         this.recipeMapWorkable = new MetaTileEntityHugeAlloyBlastSmelterWorkable(this);
+
+        setMaxParallel(256);
+        setMaxParallelFlag(true);
+
+        //setTimeReduce(glassTire);
+        setTimeReduceFlag(true);
     }
 
     private static IBlockState getCasingState() {
@@ -118,8 +121,8 @@ public class MetaTileEntityHugeAlloyBlastSmelter extends MultiMapMultiblockContr
 
 
     @Override
-    public void update() {
-        super.update();
+    public void updateFormedValid() {
+        super.updateFormedValid();
         if (isStructureFormed() && isActive()) {
             requestCWUt = computationProvider.requestCWUt(2048, false);
         }
@@ -131,20 +134,16 @@ public class MetaTileEntityHugeAlloyBlastSmelter extends MultiMapMultiblockContr
         ITextComponent heatString = TextComponentUtil.stringWithColor(TextFormatting.RED, TextFormattingUtil.formatNumbers(this.blastFurnaceTemperature) + "K");
         textList.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY, "gregtech.multiblock.blast_furnace.max_temperature", heatString));
         textList.add(new TextComponentTranslation("gtqtcore.kqcc_accelerate", requestCWUt, getAccelerateByCWU(requestCWUt)));
+        textList.add(new TextComponentTranslation("玻璃等级：%s 线圈等级:%s", glassTire,coilTier));
     }
 
     @Override
     public void addInformation(ItemStack stack, @Nullable World player, @Nonnull List<String> tooltip, boolean advanced) {
-        super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("最强合金王", new Object[0]));
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.1"));
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.2"));
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.3"));
-        tooltip.add(I18n.format("gregtech.machine.gtqt.update.1"));
-        tooltip.add(I18n.format("gregtech.machine.gtqt.update.2"));
-        tooltip.add(I18n.format("gtqtcore.multiblock.hb.tooltip.2"));
-        tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.1"));
-        tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.2", 256));
+        super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(I18n.format("gtqtcore.multiblock.kq.acc.tooltip"));
         tooltip.add(I18n.format("本机器允许使用激光能源仓代替能源仓！"));
     }
@@ -178,6 +177,9 @@ public class MetaTileEntityHugeAlloyBlastSmelter extends MultiMapMultiblockContr
             this.heatingCoilLevel = BlockWireCoil.CoilType.CUPRONICKEL.getLevel();
             this.coilTier = BlockWireCoil.CoilType.CUPRONICKEL.getTier();
         }
+
+        setTimeReduce((100 - Math.min(this.glassTire, 10) * 5.0) / 100);
+
         this.blastFurnaceTemperature += 100 * Math.max(0, GTUtility.getTierByVoltage(getEnergyContainer().getInputVoltage()) - GTValues.MV);
     }
 
@@ -300,27 +302,23 @@ public class MetaTileEntityHugeAlloyBlastSmelter extends MultiMapMultiblockContr
         return true;
     }
 
-    protected class MetaTileEntityHugeAlloyBlastSmelterWorkable extends MultiblockRecipeLogic {
+    protected class MetaTileEntityHugeAlloyBlastSmelterWorkable extends GTQTMultiblockLogic {
 
         public MetaTileEntityHugeAlloyBlastSmelterWorkable(RecipeMapMultiblockController tileEntity) {
             super(tileEntity);
         }
 
-        @Override
-        public int getParallelLimit() {
-            return Math.min((int) Math.pow(2, coilTier), 256);
-        }
 
         @Override
         public void setMaxProgress(int maxProgress) {
-            int MaxProgress = (int) Math.floor(maxProgress * Math.pow(0.8, glassTire) * getAccelerateByCWU(requestCWUt));
-            super.setMaxProgress(MaxProgress);
+            super.setMaxProgress((int) (maxProgress*getAccelerateByCWU(requestCWUt)));
         }
 
         protected void modifyOverclockPre(int[] values, IRecipePropertyStorage storage) {
             super.modifyOverclockPre(values, storage);
             values[0] = OverclockingLogic.applyCoilEUtDiscount(values[0], ((IHeatingCoil) this.metaTileEntity).getCurrentTemperature(), storage.getRecipePropertyValue(TemperatureProperty.getInstance(), 0));
         }
+
         protected int[] runOverclockingLogic(IRecipePropertyStorage propertyStorage, int recipeEUt, long maxVoltage, int duration, int amountOC) {
             return OverclockingLogic.heatingCoilOverclockingLogic(Math.abs(recipeEUt), maxVoltage, duration, amountOC, ((IHeatingCoil) this.metaTileEntity).getCurrentTemperature(), propertyStorage.getRecipePropertyValue(TemperatureProperty.getInstance(), 0));
         }

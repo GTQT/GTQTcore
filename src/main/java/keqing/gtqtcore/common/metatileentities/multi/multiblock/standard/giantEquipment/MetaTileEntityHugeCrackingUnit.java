@@ -1,6 +1,7 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.giantEquipment;
 
 
+import gregicality.multiblocks.api.recipes.GCYMRecipeMaps;
 import gregtech.api.GTValues;
 import gregtech.api.GregTechAPI;
 import gregtech.api.block.IHeatingCoilBlockStats;
@@ -18,6 +19,7 @@ import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.MultiblockShapeInfo;
 import gregtech.api.pattern.PatternMatchContext;
+import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.recipes.logic.OverclockingLogic;
 import gregtech.api.recipes.recipeproperties.IRecipePropertyStorage;
@@ -34,7 +36,9 @@ import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.MetaTileEntities;
 import gregtech.core.sound.GTSoundEvents;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
+import keqing.gtqtcore.api.metaileentity.GTQTNoTierMultiblockController;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
+import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
@@ -58,7 +62,7 @@ import java.util.List;
 import static keqing.gtqtcore.api.utils.GTQTUtil.getAccelerateByCWU;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.HUGE_CRACKING_UNIT;
 
-public class MetaTileEntityHugeCrackingUnit extends RecipeMapMultiblockController implements IHeatingCoil, IOpticalComputationReceiver {
+public class MetaTileEntityHugeCrackingUnit extends GTQTNoTierMultiblockController implements IHeatingCoil, IOpticalComputationReceiver {
 
     protected int heatingCoilLevel;
     protected int coilTier;
@@ -68,8 +72,16 @@ public class MetaTileEntityHugeCrackingUnit extends RecipeMapMultiblockControlle
     private IOpticalComputationProvider computationProvider;
 
     public MetaTileEntityHugeCrackingUnit(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, RecipeMaps.CRACKING_RECIPES);
+        super(metaTileEntityId, new RecipeMap[]{
+                RecipeMaps.CRACKING_RECIPES
+        });
         this.recipeMapWorkable = new MegaOilCrackingUnitWorkableHandler(this);
+
+        setMaxParallel(256);
+        setMaxParallelFlag(true);
+
+        //setTimeReduce(glassTire);
+        setTimeReduceFlag(true);
     }
 
     private static IBlockState getCasingState() {
@@ -98,8 +110,8 @@ public class MetaTileEntityHugeCrackingUnit extends RecipeMapMultiblockControlle
 
 
     @Override
-    public void update() {
-        super.update();
+    public void updateFormedValid() {
+        super.updateFormedValid();
         if (isStructureFormed() && isActive()) {
             requestCWUt = computationProvider.requestCWUt(2048, false);
         }
@@ -112,6 +124,7 @@ public class MetaTileEntityHugeCrackingUnit extends RecipeMapMultiblockControlle
         ITextComponent heatString = TextComponentUtil.stringWithColor(TextFormatting.RED, TextFormattingUtil.formatNumbers(this.blastFurnaceTemperature) + "K");
         textList.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY, "gregtech.multiblock.blast_furnace.max_temperature", heatString));
         textList.add(new TextComponentTranslation("gtqtcore.kqcc_accelerate", requestCWUt, getAccelerateByCWU(requestCWUt)));
+        textList.add(new TextComponentTranslation("玻璃等级：%s 线圈等级:%s", glassTire,coilTier));
     }
 
     @Override
@@ -137,6 +150,9 @@ public class MetaTileEntityHugeCrackingUnit extends RecipeMapMultiblockControlle
             this.heatingCoilLevel = BlockWireCoil.CoilType.CUPRONICKEL.getLevel();
             this.coilTier = BlockWireCoil.CoilType.CUPRONICKEL.getTier();
         }
+
+        setTimeReduce((100 - Math.min(this.glassTire, 10) * 5.0) / 100);
+
         this.blastFurnaceTemperature += 100 * Math.max(0, GTUtility.getTierByVoltage(getEnergyContainer().getInputVoltage()) - GTValues.MV);
     }
 
@@ -194,19 +210,12 @@ public class MetaTileEntityHugeCrackingUnit extends RecipeMapMultiblockControlle
     }
 
     @Override
-    public void addInformation(ItemStack stack,
-                               @Nullable World player,
-                               List<String> tooltip,
-                               boolean advanced) {
+    public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.1"));
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.2"));
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.3"));
-        tooltip.add(I18n.format("gregtech.machine.gtqt.update.1"));
-        tooltip.add(I18n.format("gregtech.machine.gtqt.update.2"));
-        tooltip.add(I18n.format("gtqtcore.multiblock.hb.tooltip.2"));
-        tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.1"));
-        tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.2", 256));
+        super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(I18n.format("gtqtcore.multiblock.kq.acc.tooltip"));
         tooltip.add(I18n.format("本机器允许使用激光能源仓代替能源仓！"));
     }
@@ -256,43 +265,16 @@ public class MetaTileEntityHugeCrackingUnit extends RecipeMapMultiblockControlle
         return true;
     }
 
-    private class MegaOilCrackingUnitWorkableHandler extends MultiblockRecipeLogic {
+    private class MegaOilCrackingUnitWorkableHandler extends GTQTMultiblockLogic {
 
         public MegaOilCrackingUnitWorkableHandler(RecipeMapMultiblockController tileEntity) {
             super(tileEntity);
         }
 
         @Override
-        public int getParallelLimit() {
-            return Math.min((int) Math.pow(2, coilTier), 256);
-        }
-
-        @Override
-        protected long getMaxParallelVoltage() {
-            return super.getMaxVoltage();
-        }
-
-        /**
-         * @param resultOverclock Each coil above cupronickel (coilTier = 0) uses 10% less energy.
-         */
-        @Override
-        protected void modifyOverclockPost(int[] resultOverclock, IRecipePropertyStorage storage) {
-            super.modifyOverclockPost(resultOverclock, storage);
-
-            int Tier = ((MetaTileEntityHugeCrackingUnit) metaTileEntity).glassTire;
-            if (Tier <= 0)
-                return;
-
-            resultOverclock[0] *= (int) (1.0f - Tier * 0.1);
-            resultOverclock[0] = Math.max(1, resultOverclock[0]);
-        }
-
-        @Override
         public void setMaxProgress(int maxProgress) {
-            int MaxProgress = (int) Math.floor(maxProgress * Math.pow(0.8, glassTire) * getAccelerateByCWU(requestCWUt));
-            super.setMaxProgress(MaxProgress);
+            super.setMaxProgress((int) (maxProgress*getAccelerateByCWU(requestCWUt)));
         }
-
         protected void modifyOverclockPre(int[] values, IRecipePropertyStorage storage) {
             super.modifyOverclockPre(values, storage);
             values[0] = OverclockingLogic.applyCoilEUtDiscount(values[0], ((IHeatingCoil) this.metaTileEntity).getCurrentTemperature(), storage.getRecipePropertyValue(TemperatureProperty.getInstance(), 0));

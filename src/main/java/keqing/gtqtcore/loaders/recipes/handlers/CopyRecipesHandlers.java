@@ -172,24 +172,25 @@ public class CopyRecipesHandlers {
 
             GTQTcoreRecipeMaps.FUEL_CELL.recipeBuilder()
                     .fluidInputs(fluidInputs)
-                    .fluidInputs(Materials.Air.getFluid(baseDuration * 4))
+                    .fluidInputs(Materials.Air.getFluid(baseDuration))
                     .duration(baseDuration)
                     .EUt(EUt)
                     .buildAndRegister();
 
             GTQTcoreRecipeMaps.FUEL_CELL.recipeBuilder()
                     .fluidInputs(fluidInputs)
-                    .fluidInputs(Materials.Oxygen.getFluid(FluidStorageKeys.GAS, baseDuration * 2))
-                    .duration(baseDuration * 2)
+                    .fluidInputs(Materials.Oxygen.getFluid(FluidStorageKeys.GAS, baseDuration))
+                    .duration((int) Math.floor(baseDuration * 1.5))
                     .EUt(EUt)
                     .buildAndRegister();
 
             GTQTcoreRecipeMaps.FUEL_CELL.recipeBuilder()
                     .fluidInputs(fluidInputs)
                     .fluidInputs(Materials.Oxygen.getFluid(FluidStorageKeys.LIQUID, baseDuration))
-                    .duration(baseDuration * 4)
+                    .duration(baseDuration * 2)
                     .EUt(EUt)
                     .buildAndRegister();
+
 
         }
         Collection<Recipe> gasRecipes = RecipeMaps.GAS_TURBINE_FUELS.getRecipeList();
@@ -212,14 +213,14 @@ public class CopyRecipesHandlers {
 
             GTQTcoreRecipeMaps.FUEL_CELL.recipeBuilder()
                     .fluidInputs(fluidInputs)
-                    .fluidInputs(Materials.Oxygen.getFluid(FluidStorageKeys.GAS, (int) Math.ceil(baseDuration * 1.5)))
+                    .fluidInputs(Materials.Oxygen.getFluid(FluidStorageKeys.GAS,baseDuration))
                     .duration((int) Math.floor(baseDuration * 1.5))
                     .EUt(EUt)
                     .buildAndRegister();
 
             GTQTcoreRecipeMaps.FUEL_CELL.recipeBuilder()
                     .fluidInputs(fluidInputs)
-                    .fluidInputs(Materials.Oxygen.getFluid(FluidStorageKeys.LIQUID, baseDuration * 8))
+                    .fluidInputs(Materials.Oxygen.getFluid(FluidStorageKeys.LIQUID, baseDuration))
                     .duration(baseDuration * 2)
                     .EUt(EUt)
                     .buildAndRegister();

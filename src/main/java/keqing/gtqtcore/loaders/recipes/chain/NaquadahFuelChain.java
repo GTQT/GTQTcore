@@ -789,42 +789,42 @@ private static void ThoriumBasedLiquidFuelChain() {
                 .input(screw, NaquadahEnriched)
                 .output(screw, Lead)
                 .EUt(8192)
-                .duration(2000)
+                .duration(3000)
                 .buildAndRegister();
 
         NAQUADAH_REACTOR.recipeBuilder()
                 .input(screw, Naquadria)
                 .output(screw, Lead)
                 .EUt(8192)
-                .duration(4000)
+                .duration(6000)
                 .buildAndRegister();
 
         NAQUADAH_REACTOR.recipeBuilder()
                 .input(stick, NaquadahEnriched)
                 .output(stick, Lead)
                 .EUt(8192)
-                .duration(4000)
+                .duration(6000)
                 .buildAndRegister();
 
         NAQUADAH_REACTOR.recipeBuilder()
                 .input(stick, Naquadria)
                 .output(stick, Lead)
                 .EUt(8192)
-                .duration(8000)
+                .duration(12000)
                 .buildAndRegister();
 
         NAQUADAH_REACTOR.recipeBuilder()
                 .input(stickLong, NaquadahEnriched)
                 .output(stickLong, Lead)
                 .EUt(8192)
-                .duration(8000)
+                .duration(12000)
                 .buildAndRegister();
 
         NAQUADAH_REACTOR.recipeBuilder()
                 .input(stickLong, Naquadria)
                 .output(stickLong, Lead)
                 .EUt(8192)
-                .duration(16000)
+                .duration(24000)
                 .buildAndRegister();
         //大硅岩
         //  Light Naquadah Fuel

@@ -19,14 +19,14 @@ public class ItemRegistry {
     public static ToolPortableCellLarge LARGE_PORTABLE_CELL_8192;
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event) {
-        LARGE_PORTABLE_CELL_2048 = new ToolPortableCellLarge(2048);
+        LARGE_PORTABLE_CELL_2048 = new ToolPortableCellLarge(2048,63);
         LARGE_PORTABLE_CELL_2048
                 .setRegistryName(MODID, "large_portable_cell_2048")
                 .setTranslationKey("large_portable_cell_2048")
                 .setCreativeTab(GTQTCore_TO);
         event.getRegistry().register(LARGE_PORTABLE_CELL_2048);
 
-        LARGE_PORTABLE_CELL_8192 = new ToolPortableCellLarge(8192);
+        LARGE_PORTABLE_CELL_8192 = new ToolPortableCellLarge(8192,127);
         LARGE_PORTABLE_CELL_8192
                 .setRegistryName(MODID, "large_portable_cell_8192")
                 .setTranslationKey("large_portable_cell_8192")

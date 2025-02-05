@@ -37,6 +37,7 @@ import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.MetaTileEntities;
 import gregtech.core.sound.GTSoundEvents;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
+import keqing.gtqtcore.api.metaileentity.GTQTNoTierMultiblockController;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
@@ -66,7 +67,7 @@ import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.POLYMERIZATION_RECI
 import static keqing.gtqtcore.api.utils.GTQTUtil.getAccelerateByCWU;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.HUGE_CHEMICAL_REACTOR;
 
-public class MetaTileEntityHugeChemicalReactor extends MultiMapMultiblockController implements IParallelMultiblock, IHeatingCoil, IOpticalComputationReceiver {
+public class MetaTileEntityHugeChemicalReactor extends GTQTNoTierMultiblockController implements IHeatingCoil, IOpticalComputationReceiver {
 
     protected int heatingCoilLevel;
     protected int coilTier;
@@ -82,6 +83,12 @@ public class MetaTileEntityHugeChemicalReactor extends MultiMapMultiblockControl
                 POLYMERIZATION_RECIPES
         });
         this.recipeMapWorkable = new HugeChemicalReactorWorkable(this);
+
+        setMaxParallel(256);
+        setMaxParallelFlag(true);
+
+        //setTimeReduce(glassTire);
+        setTimeReduceFlag(true);
     }
 
     @Override
@@ -106,11 +113,7 @@ public class MetaTileEntityHugeChemicalReactor extends MultiMapMultiblockControl
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.1"));
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.2"));
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.3"));
-        tooltip.add(I18n.format("gregtech.machine.gtqt.update.1"));
-        tooltip.add(I18n.format("gregtech.machine.gtqt.update.2"));
-        tooltip.add(I18n.format("gtqtcore.multiblock.hb.tooltip.2"));
-        tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.1"));
-        tooltip.add(I18n.format("gtqtcore.multiblock.ab.tooltip.2", 256));
+        super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(I18n.format("gtqtcore.multiblock.kq.acc.tooltip"));
         tooltip.add(I18n.format("本机器允许使用激光能源仓代替能源仓！"));
     }
@@ -122,8 +125,8 @@ public class MetaTileEntityHugeChemicalReactor extends MultiMapMultiblockControl
 
 
     @Override
-    public void update() {
-        super.update();
+    public void updateFormedValid() {
+        super.updateFormedValid();
         if (isStructureFormed() && isActive()) {
             requestCWUt = computationProvider.requestCWUt(2048, false);
         }
@@ -135,6 +138,7 @@ public class MetaTileEntityHugeChemicalReactor extends MultiMapMultiblockControl
         ITextComponent heatString = TextComponentUtil.stringWithColor(TextFormatting.RED, TextFormattingUtil.formatNumbers(this.blastFurnaceTemperature) + "K");
         textList.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY, "gregtech.multiblock.blast_furnace.max_temperature", heatString));
         textList.add(new TextComponentTranslation("gtqtcore.kqcc_accelerate", requestCWUt, getAccelerateByCWU(requestCWUt)));
+        textList.add(new TextComponentTranslation("玻璃等级：%s 线圈等级:%s", glassTire,coilTier));
     }
 
     @Override
@@ -161,6 +165,9 @@ public class MetaTileEntityHugeChemicalReactor extends MultiMapMultiblockControl
             this.heatingCoilLevel = BlockWireCoil.CoilType.CUPRONICKEL.getLevel();
             this.coilTier = BlockWireCoil.CoilType.CUPRONICKEL.getTier();
         }
+
+        setTimeReduce((100 - Math.min(this.glassTire, 10) * 5.0) / 100);
+
         this.blastFurnaceTemperature += 100 * Math.max(0, GTUtility.getTierByVoltage(getEnergyContainer().getInputVoltage()) - GTValues.MV);
     }
 
@@ -276,7 +283,7 @@ public class MetaTileEntityHugeChemicalReactor extends MultiMapMultiblockControl
         return true;
     }
 
-    protected class HugeChemicalReactorWorkable extends MultiblockRecipeLogic {
+    protected class HugeChemicalReactorWorkable extends GTQTMultiblockLogic {
 
         public HugeChemicalReactorWorkable(RecipeMapMultiblockController tileEntity) {
             super(tileEntity);
@@ -284,18 +291,7 @@ public class MetaTileEntityHugeChemicalReactor extends MultiMapMultiblockControl
 
         @Override
         public void setMaxProgress(int maxProgress) {
-            int MaxProgress = (int) Math.floor(maxProgress * Math.pow(0.8, glassTire) * getAccelerateByCWU(requestCWUt));
-            super.setMaxProgress(MaxProgress);
-        }
-
-        @Override
-        protected long getMaxParallelVoltage() {
-            return super.getMaxVoltage();
-        }
-
-        @Override
-        public int getParallelLimit() {
-            return Math.min((int) Math.pow(2, coilTier), 256);
+            super.setMaxProgress((int) (maxProgress*getAccelerateByCWU(requestCWUt)));
         }
 
         protected void modifyOverclockPre(int[] values, IRecipePropertyStorage storage) {

@@ -303,34 +303,17 @@ public abstract class GTQTOCMultiblockController extends MultiMapMultiblockContr
     }
 
     protected void addModel(List<ITextComponent> textList) {
-        MultiblockDisplayText.builder(textList, isStructureFormed())
-                .addCustom(tl -> {
-                    String modeText;
-                    if (autoParallelModel) {
-                        modeText = "gui.auto_parallel_mode";
-                    } else {
-                        modeText = "gui.manual_parallel_mode";
-                    }
-                    textList.add(new TextComponentTranslation(modeText));
-                });
+        if (autoParallelModel)textList.add(new TextComponentTranslation("gui.auto_parallel_mode"));
+        else textList.add(new TextComponentTranslation("gui.manual_parallel_mode"));
     }
 
     protected void addEnergyHatch(List<ITextComponent> textList) {
-        MultiblockDisplayText.builder(textList, isStructureFormed())
-                .addCustom(tl -> textList.add(new TextComponentTranslation("gui.max_sustain", energyHatchMaxWork)));
+        textList.add(new TextComponentTranslation("gui.max_sustain", energyHatchMaxWork));
     }
 
     protected void addOC(List<ITextComponent> textList) {
-        MultiblockDisplayText.builder(textList, isStructureFormed())
-                .addCustom(tl -> {
-                    String ocText;
-                    if (OCFirst) {
-                        ocText = "gui.overclock_first_mode";
-                    } else {
-                        ocText = "gui.parallel_first_mode";
-                    }
-                    textList.add(new TextComponentTranslation(ocText));
-                });
+        if (OCFirst)textList.add(new TextComponentTranslation("gui.overclock_first_mode"));
+        else textList.add(new TextComponentTranslation("gui.parallel_first_mode"));
     }
 
     protected class GTQTOCMultiblockLogic extends ComputationRecipeLogic {
@@ -354,7 +337,7 @@ public abstract class GTQTOCMultiblockController extends MultiMapMultiblockContr
         public void update() {
             super.update();
             if (autoParallelModel) {
-                autoParallel = (int) ((this.getEnergyStored() + energyContainer.getInputPerSec() * 19L) / (getMinVoltage() == 0 ? 1 : getMinVoltage()));
+                autoParallel = (int) ((this.getEnergyStored() + energyContainer.getInputPerSec() / 19L) / (getMinVoltage() == 0 ? 1 : getMinVoltage()));
                 autoParallel = Math.min(autoParallel, limitAutoParallel);
                 autoParallel = Math.min(autoParallel, getMaxParallel());
             }
@@ -372,16 +355,18 @@ public abstract class GTQTOCMultiblockController extends MultiMapMultiblockContr
         }
 
         @Override
-        protected long getMaxParallelVoltage() {
-            if (OCFirst) return super.getMaxVoltage();
-            return super.getMaxParallelVoltage();
+        public long getMaxParallelVoltage() {
+            if (OCFirst) return super.getMaxParallelVoltage();
+            return super.getMaxVoltage()* getParallelLimit();
         }
-
+        @Override
+        public long getMaximumOverclockVoltage() {
+            if (OCFirst)return energyContainer.getInputVoltage();
+            return super.getMaximumOverclockVoltage();
+        }
         @Override
         public void setMaxProgress(int maxProgress) {
-            if (setTimeReduce) this.maxProgressTime = (int) (maxProgress * timeReduce);
-            else super.setMaxProgress(maxProgress);
+            super.setMaxProgress((int) (maxProgress*timeReduce));
         }
-
     }
 }

@@ -5227,9 +5227,8 @@ gtqtcore.machine.compressed_fusion_reactor.uiv.tooltip.9=- Startup Energy < 1,28
 gtqtcore.machine.compressed_fusion_reactor.uiv.tooltip.10=- Startup Energy < 2,560,000,000 EU: §e128§7
 gtqtcore.machine.compressed_fusion_reactor.uiv.tooltip.11=- Startup Energy < 5,120,000,000 EU: §e64§7
 
-gtqtcore.machine.compressed_fusion_reactor.common_oc=Overclocking will double energy consumption §r2§7 times, processing time reduced to §r1/2§7 (2/2 lossless overclocking).
-gtqtcore.machine.compressed_fusion_reactor.perfect_oc=Overclocking will quadruple energy consumption §r4§7 times, processing time reduced to §r1/4§7 (4/4 lossless overclocking).
-
+gtqtcore.machine.compressed_fusion_reactor.common_oc=Parallel Priority Mode: Overclocking will increase energy consumption by a factor of §r2§7 and reduce processing time to §r1/2§7 (2/2 lossless overclocking).
+gtqtcore.machine.compressed_fusion_reactor.perfect_oc=Overclocking priority mode: Overclocking will increase the energy consumption by §r4§7 and reduce the processing time to §r1/4§7 (4/4 lossless overclocking).
 tile.compressed_fusion_reactor.machine_casing_fusion_4.name=Fusion Machine Casing Mk IV
 tile.compressed_fusion_reactor.machine_casing_fusion_5.name=Fusion Machine Casing Mk V
 tile.compressed_fusion_reactor.machine_casing_fusion_6.name=Fusion Machine Casing Mk VI

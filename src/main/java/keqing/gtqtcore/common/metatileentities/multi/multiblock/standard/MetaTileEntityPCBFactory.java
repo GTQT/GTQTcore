@@ -176,8 +176,8 @@ public class MetaTileEntityPCBFactory extends RecipeMapMultiblockController impl
     }
 
     @Override
-    public void update() {
-        super.update();
+    public void updateFormedValid() {
+        super.updateFormedValid();
         if (isStructureFormed() && isActive()) {
             requestCWUt = computationProvider.requestCWUt(2048, false);
         }

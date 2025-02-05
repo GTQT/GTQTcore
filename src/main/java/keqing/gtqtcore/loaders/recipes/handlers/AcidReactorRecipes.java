@@ -27,7 +27,7 @@ public class AcidReactorRecipes {
         ACID_GENERATOR_RECIPES.recipeBuilder()
                 .fluidInputs(material.getFluid(200))
                 .EUt(VA[tier])
-                .duration((int) (10*Math.pow(2,tier)))
+                .duration((int) (20*Math.pow(2,tier)))
                 .buildAndRegister();
     }
 

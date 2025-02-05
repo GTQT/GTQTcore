@@ -5408,8 +5408,8 @@ gtqtcore.machine.compressed_fusion_reactor.uiv.tooltip.9=- 启动能量 < 1,280,
 gtqtcore.machine.compressed_fusion_reactor.uiv.tooltip.10=- 启动能量 < 2,560,000,000 EU: §e128§7
 gtqtcore.machine.compressed_fusion_reactor.uiv.tooltip.11=- 启动能量 < 5,120,000,000 EU: §e64§7
 
-gtqtcore.machine.compressed_fusion_reactor.common_oc=超频将使能耗翻§r2§7倍，处理时间减少至§r1/2§7（2/2无损超频）。
-gtqtcore.machine.compressed_fusion_reactor.perfect_oc=超频将使能耗翻§r4§7倍，处理时间减少至§r1/4§7（4/4无损超频）。
+gtqtcore.machine.compressed_fusion_reactor.common_oc=并行优先模式下：超频将使能耗翻§r2§7倍，处理时间减少至§r1/2§7（2/2无损超频）。
+gtqtcore.machine.compressed_fusion_reactor.perfect_oc=超频优先模式下：超频将使能耗翻§r4§7倍，处理时间减少至§r1/4§7（4/4无损超频）。
 
 tile.compressed_fusion_reactor.machine_casing_fusion_4.name=聚变机器外壳 Mk IV
 tile.compressed_fusion_reactor.machine_casing_fusion_5.name=聚变机器外壳 Mk V
