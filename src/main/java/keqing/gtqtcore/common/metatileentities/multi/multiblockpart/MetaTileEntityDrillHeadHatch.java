@@ -110,10 +110,10 @@ public class MetaTileEntityDrillHeadHatch extends MetaTileEntityMultiblockPart i
 
         if (isItemValid(stack)) {
             if(work)
-                if(getOffsetTimer()%tier==0)behavior.applyDamage(containerInventory.getStackInSlot(0), 1);
+                behavior.applyDamage(containerInventory.getStackInSlot(0), 1);
 
-            workTime = (long) AbstractMaterialPartBehavior.getPartDamage(containerInventory.getStackInSlot(0)) * (tier);
-            TotalTick = (long) behavior.getPartMaxDurability(containerInventory.getStackInSlot(0)) * (tier);
+            workTime = AbstractMaterialPartBehavior.getPartDamage(containerInventory.getStackInSlot(0));
+            TotalTick = behavior.getPartMaxDurability(containerInventory.getStackInSlot(0));
         } else {
             workTime = 0;
             TotalTick = 0;

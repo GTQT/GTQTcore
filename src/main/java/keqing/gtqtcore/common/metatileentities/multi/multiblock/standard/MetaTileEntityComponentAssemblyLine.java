@@ -49,6 +49,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+import static keqing.gtqtcore.GTQTCoreConfig.MachineSwitch;
 import static keqing.gtqtcore.api.GTQTAPI.MAP_CAL_CASING;
 
 public class MetaTileEntityComponentAssemblyLine extends RecipeMapMultiblockController {
@@ -57,7 +58,15 @@ public class MetaTileEntityComponentAssemblyLine extends RecipeMapMultiblockCont
     public MetaTileEntityComponentAssemblyLine(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.COMPONENT_ASSEMBLY_LINE_RECIPES);
     }
-
+    @Override
+    public void checkStructurePattern() {
+        if(MachineSwitch.DelayStructureCheckSwitch) {
+            if (this.getOffsetTimer() % 100 == 0 || this.isFirstTick()) {
+                super.checkStructurePattern();
+            }
+        }
+        else super.checkStructurePattern();
+    }
     private static IBlockState getCasingState() {
         return GTQTMetaBlocks.blockMultiblockCasing4.getState(BlockMultiblockCasing4.TurbineCasingType.IRIDIUM_CASING);
     }

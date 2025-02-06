@@ -1,6 +1,5 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.LaserSystem;
 
-import gregicality.multiblocks.api.recipes.GCYMRecipeMaps;
 import gregicality.multiblocks.common.block.GCYMMetaBlocks;
 import gregicality.multiblocks.common.block.blocks.BlockUniqueCasing;
 import gregtech.api.GTValues;
@@ -23,6 +22,7 @@ import gregtech.api.util.TextComponentUtil;
 import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
+import gregtech.client.utils.TooltipHelper;
 import gregtech.common.blocks.BlockGlassCasing;
 import gregtech.common.blocks.BlockWireCoil.CoilType;
 import gregtech.common.blocks.MetaBlocks;
@@ -31,6 +31,7 @@ import gregtech.core.sound.GTSoundEvents;
 import keqing.gtqtcore.api.capability.impl.MultiblockLaserRecipeLogic;
 import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
 import keqing.gtqtcore.api.metaileentity.multiblock.RecipeMapLaserMultiblockController;
+import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.unification.GTQTMaterials;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
@@ -66,7 +67,7 @@ public class MetaTileEntityLaserAlloyFurnace extends RecipeMapLaserMultiblockCon
     private int simBlastFurnaceTemperature;
 
     public MetaTileEntityLaserAlloyFurnace(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, GCYMRecipeMaps.ALLOY_BLAST_RECIPES);
+        super(metaTileEntityId, GTQTcoreRecipeMaps.CW_LASER_ALLOY_RECIPES);
         this.recipeMapWorkable = new MultiblockLaserRecipeLogic(this);
     }
 
@@ -211,6 +212,10 @@ public class MetaTileEntityLaserAlloyFurnace extends RecipeMapLaserMultiblockCon
     public void addInformation(ItemStack stack, World world, List<String> tooltip,
                                boolean advanced) {
         super.addInformation(stack, world, tooltip, advanced);
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("合金学奇迹", new Object[0]));
+        tooltip.add(I18n.format("使用高能激光直接轰击高精粉，将其迅速熔炼为合金液滴。"));
+        tooltip.add(I18n.format("相比传统线圈加热方式，此方法无需漫长的等待时间。"));
+        tooltip.add(I18n.format("激光熔炼可以在较短时间内冷却至加工需求，大大减少耗时和成本。"));
         tooltip.add(I18n.format("实际线圈温度为 激光最大换热温度温度 与 线圈理论 温度的最大值，初次工作由0开始增长至最大值"));
     }
 

@@ -320,13 +320,11 @@ public class MetaTileEntityStepper extends GTQTOCMultiblockController implements
             if (this.recipeCWUt == 0) {
                 super.updateRecipeProgress();
             } else {
-                if (this.canRecipeProgress && this.drawEnergy(this.recipeEUt, true)) {
-                    //并行
-                    if (LaserKind * 2 >= laser_tier)
-                        if (LaserAmount - clean_tier * (LaserKind * 2 - laser_tier + 1) * 1000 <= 0) return;
-                        else if (LaserAmount - 1000 <= 0) return;
+                if (LaserAmount < 1000) return;
 
+                if (this.canRecipeProgress && this.drawEnergy(this.recipeEUt, true)) {
                     this.drawEnergy(this.recipeEUt, false);
+
                     IOpticalComputationProvider provider = this.getComputationProvider();
                     int availableCWUt = provider.requestCWUt(Integer.MAX_VALUE, true);
                     if (availableCWUt >= this.recipeCWUt) {
@@ -339,9 +337,8 @@ public class MetaTileEntityStepper extends GTQTOCMultiblockController implements
                             ++this.progressTime;
                         }
                         if (this.progressTime > this.maxProgressTime) {
-                            if (LaserKind * 2 >= laser_tier)
-                                LaserAmount -= clean_tier * (LaserKind * 2 - laser_tier + 1) * 1000;
-                            else if (LaserAmount - 1000 > 0) LaserAmount -= 1000;
+
+                            if (LaserAmount - 1000 > 0) LaserAmount -= 1000;
 
                             this.completeRecipe();
                         }
@@ -391,11 +388,11 @@ public class MetaTileEntityStepper extends GTQTOCMultiblockController implements
                 }
             }
             if (LaserKind >= laser_tier) {
-                setTimeReduce((100 - (LaserKind+radio_tier) * 4.0) / 100);
-                setMaxParallel(4*clean_tier*laser_tier);
+                setTimeReduce((100 - (LaserKind + radio_tier) * 4.0) / 100);
+                setMaxParallel(4 * clean_tier * laser_tier);
             } else {
                 setTimeReduce((100 - LaserKind * 4.0) / 100);
-                setMaxParallel(clean_tier*laser_tier);
+                setMaxParallel(clean_tier * laser_tier);
             }
         }
     }

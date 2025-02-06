@@ -1,30 +1,76 @@
 package keqing.gtqtcore.loaders.recipes.handlers;
 
+import gregicality.multiblocks.api.recipes.GCYMRecipeMaps;
 import gregtech.api.GTValues;
 import gregtech.api.fluids.store.FluidStorageKeys;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeBuilder;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.recipes.ingredients.GTRecipeInput;
+import gregtech.api.recipes.ingredients.GTRecipeOreInput;
+import gregtech.api.recipes.recipeproperties.TemperatureProperty;
 import gregtech.api.unification.material.Materials;
+import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.util.GTUtility;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraftforge.fluids.FluidStack;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
 import static gregtech.api.GTValues.*;
-import static gregtech.api.unification.material.Materials.DistilledWater;
-import static gregtech.api.unification.material.Materials.Lubricant;
+import static gregtech.api.unification.material.Materials.*;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
-import static keqing.gtqtcore.api.utils.GTQTUtil.CWT;
+import static keqing.gtqtcore.api.utils.GTQTUtil.*;
 
 public class CopyRecipesHandlers {
     public static void init() {
+        //合金
+        /*
+        Collection<Recipe> alloyRecipes = GCYMRecipeMaps.ALLOY_BLAST_RECIPES.getRecipeList();
+        for (Recipe recipe : alloyRecipes) {
+            List<GTRecipeInput> fluidInputs = recipe.getFluidInputs();
+            List<FluidStack> fluidOutputs = recipe.getFluidOutputs();
+            List<GTRecipeInput> itemInputs = recipe.getFluidInputs();
+            int EUt = (int) (recipe.getEUt()*1.5);
+            int baseDuration = recipe.getDuration()/10;
+            int temp=recipe.getProperty(TemperatureProperty.getInstance(), 0);
+
+            // generate builder
+            RecipeBuilder<?> builder;
+
+            builder = CW_LASER_ALLOY_RECIPES.recipeBuilder()
+                    .blastFurnaceTemp(temp)
+                    .duration(baseDuration)
+                    .EUt(EUt)
+                    .fluidOutputs(fluidOutputs)
+                    .fluidInputs(fluidInputs);
+
+            for (GTRecipeInput itemInput : itemInputs) {
+                ItemStack[] inputStacks = itemInput.getInputStacks();
+                if (inputStacks == null || inputStacks.length == 0) {
+                    continue; // 跳过无效的输入
+                }
+
+                String oreName = getOreNameByStack(Arrays.asList(inputStacks).get(0));
+                if (oreName.contains("null")) {
+                    continue;
+                }
+
+                if (oreName.contains("dust")) {
+                    ItemStack production = getItemStacksFromOreNames(oreName.replace("dust", "power"));
+                    builder.inputs(setStack(production, itemInput.getAmount()));
+                }
+            }
+
+            builder.buildAndRegister();
+        }
+
+         */
         //搅拌
         Collection<Recipe> mixerRecipes = RecipeMaps.MIXER_RECIPES.getRecipeList();
         for (Recipe recipe : mixerRecipes) {

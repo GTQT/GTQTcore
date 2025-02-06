@@ -65,6 +65,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+import static keqing.gtqtcore.GTQTCoreConfig.MachineSwitch;
 import static keqing.gtqtcore.api.utils.GTQTUtil.getAccelerateByCWU;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.HUGE_ALLOY_BLAST_FURANCE;
 
@@ -76,7 +77,15 @@ public class MetaTileEntityHugeAlloyBlastSmelter extends GTQTNoTierMultiblockCon
     int requestCWUt;
     private int blastFurnaceTemperature;
     private IOpticalComputationProvider computationProvider;
-
+    @Override
+    public void checkStructurePattern() {
+        if(MachineSwitch.DelayStructureCheckSwitch) {
+            if (this.getOffsetTimer() % 100 == 0 || this.isFirstTick()) {
+                super.checkStructurePattern();
+            }
+        }
+        else super.checkStructurePattern();
+    }
     public MetaTileEntityHugeAlloyBlastSmelter(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{
                 GCYMRecipeMaps.ALLOY_BLAST_RECIPES,

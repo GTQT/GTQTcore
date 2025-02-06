@@ -28,4 +28,7 @@ public class GTQTMaterialIconType {
     public static final MaterialIconType round_cover = new MaterialIconType("round_cover");
     public static final MaterialIconType plate_big = new MaterialIconType("plate_big");
 
+    //粉
+    public static final MaterialIconType power = new MaterialIconType("power");
+
 }

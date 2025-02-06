@@ -657,10 +657,9 @@ public class MetaTileEntityPhotolithographyFactory extends MetaTileEntityBaseWit
         tooltip.add(I18n.format("gtqtcore.pf.tooltip.5"));
         tooltip.add(I18n.format("gtqtcore.pf.tooltip.6"));
         tooltip.add(I18n.format("gtqtcore.pf.tooltip.7"));
-        //tooltip.add(I18n.format("=================================="));
-        //tooltip.add(I18n.format("如宇宙间最精密的织梦者，以光年丈量着世界的边界，悄然模糊科技与艺术的边界。"));
-        //tooltip.add(I18n.format("如星辰运转于浩瀚银河之中，光线织工在超高速微电路上起舞绘制出纳米级的电路蓝图。"));
-        //tooltip.add(I18n.format("如同晨曦中露珠滑过蜘蛛网的细腻，每一滴都承载着光的意志，编织着电子世界的经纬。"));
-        //tooltip.add(I18n.format("如乐团中的每一位乐手，虽各自独立却又完美同步，演奏出超越物理极限的乐章。"));
+        tooltip.add(I18n.format("如宇宙间最精密的织梦者，以光年丈量着世界的边界，悄然模糊科技与艺术的边界。"));
+        tooltip.add(I18n.format("如星辰运转于浩瀚银河之中，光线织工在超高速微电路上起舞绘制出纳米级的电路蓝图。"));
+        tooltip.add(I18n.format("如同晨曦中露珠滑过蜘蛛网的细腻，每一滴都承载着光的意志，编织着电子世界的经纬。"));
+        tooltip.add(I18n.format("如乐团中的每一位乐手，虽各自独立却又完美同步，演奏出超越物理极限的乐章。"));
     }
 }

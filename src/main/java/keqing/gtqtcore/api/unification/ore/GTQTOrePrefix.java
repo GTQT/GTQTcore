@@ -34,6 +34,9 @@ public class GTQTOrePrefix {
     public static final OrePrefix fcrop = new OrePrefix("fcrop", M, null, GTQTMaterialIconType.fcrop, ENABLE_UNIFICATION,
             (mat) -> (!mat.getMaterialComponents().isEmpty()||mat.isElement())  && (mat.hasProperty(PropertyKey.INGOT)||(mat.hasProperty(PropertyKey.FLUID))), mat -> Collections.singletonList(I18n.format("metaitem.fcrop.tooltip")));
 
+    public static final OrePrefix power = new OrePrefix("power", M, null, GTQTMaterialIconType.power, ENABLE_UNIFICATION,
+            (mat) -> (mat.hasProperty(PropertyKey.DUST)), mat -> Collections.singletonList(I18n.format("metaitem.power.tooltip")));
+
 
     public static final OrePrefix nanotube = new OrePrefix("nanotube", M, null, GTQTMaterialIconType.nanotube, ENABLE_UNIFICATION,
             mat -> mat.hasFlag(GENERATE_NANOTUBE));

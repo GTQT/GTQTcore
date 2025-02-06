@@ -21,6 +21,7 @@ import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.unification.ore.GTQTOrePrefix;
 import keqing.gtqtcore.common.items.GTQTMetaItems;
 import keqing.gtqtcore.common.items.metaitems.GTQTMetaToolItems;
+import keqing.gtqtcore.loaders.recipes.chain.AdvancedLubricantChain;
 import keqing.gtqtcore.loaders.recipes.handlers.BouleRecipeHandler;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
@@ -35,6 +36,7 @@ import static gregtech.api.unification.material.properties.PropertyKey.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.common.items.MetaItems.*;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.AdvancedLubricant;
 import static keqing.gtqtcore.api.unification.material.info.GTQTMaterialFlags.GENERATE_CURVED_PLATE;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.*;
 import static keqing.gtqtcore.common.items.metaitems.GTQTMetaToolItems.*;
@@ -50,6 +52,7 @@ public class GTQTRecipes {
         milled.addProcessingHandler(PropertyKey.ORE, GTQTRecipes::processMilled);
         fcrop.addProcessingHandler(PropertyKey.INGOT, GTQTRecipes::processCrops);
         leaf.addProcessingHandler(PropertyKey.INGOT, GTQTRecipes::processLeaf);
+        power.addProcessingHandler(DUST, GTQTRecipes::processPower);
         plate_curved.addProcessingHandler(PropertyKey.INGOT, GTQTRecipes::processPlateCurved);
         plate_big.addProcessingHandler(PropertyKey.INGOT, GTQTRecipes::processPlateBig);
         round_cover.addProcessingHandler(PropertyKey.INGOT, GTQTRecipes::processRoundCover);
@@ -64,6 +67,24 @@ public class GTQTRecipes {
         OrePrefix.foil.addProcessingHandler(PropertyKey.INGOT, GTQTRecipes::processFoil);
         OrePrefix.rotor.addProcessingHandler(PropertyKey.INGOT, GTQTRecipes::processRotorA);
         wireGtSingle.addProcessingHandler(PropertyKey.WIRE, GTQTRecipes::processWireSingle);
+    }
+
+    private static void processPower(OrePrefix orePrefix, Material material, DustProperty dustProperty) {
+        REFINER_MACERATOR_RECIPES.recipeBuilder()
+                .input(dust, material,1)
+                .output(power, material, 1)
+                .fluidInputs(Lubricant.getFluid(72))
+                .duration(300)
+                .EUt(VA[IV])
+                .buildAndRegister();
+
+        REFINER_MACERATOR_RECIPES.recipeBuilder()
+                .input(dust, material,1)
+                .output(power, material, 1)
+                .fluidInputs(AdvancedLubricant.getFluid(36))
+                .duration(200)
+                .EUt(VA[IV])
+                .buildAndRegister();
     }
 
     public static void processWireSingle(OrePrefix wirePrefix, Material material, WireProperties property) {

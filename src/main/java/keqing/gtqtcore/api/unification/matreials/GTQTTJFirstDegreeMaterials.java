@@ -2,8 +2,10 @@ package keqing.gtqtcore.api.unification.matreials;
 
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.info.MaterialIconSet;
+import gregtech.api.unification.material.properties.BlastProperty;
 
 
+import static gregtech.api.GTValues.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.info.MaterialFlags.*;
 import static gregtech.api.unification.material.info.MaterialIconSet.DULL;
@@ -554,6 +556,9 @@ public class GTQTTJFirstDegreeMaterials {
                 .ingot()
                 .iconSet(MaterialIconSet.SHINY)
                 .color(0x3770bf)
+                .blast(b -> b
+                        .temp(6000, BlastProperty.GasTier.HIGHEST)
+                        .blastStats(VA[IV]))
                 .flags(GENERATE_PLATE,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_ROD,GENERATE_BOLT_SCREW,GENERATE_FRAME,GENERATE_GEAR,GENERATE_LONG_ROD,GENERATE_FOIL,GENERATE_RING,GENERATE_SPRING,GENERATE_SPRING_SMALL,GENERATE_SMALL_GEAR,GENERATE_FINE_WIRE,GENERATE_ROTOR,GENERATE_ROUND)
                 .components(HSSE, 12, Seaborgium, 7, Lead, 5, Molybdenum, 5, Beryllium, 3, Gallium, 3, Mercury, 2)
                 .build();

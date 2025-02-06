@@ -14,7 +14,6 @@ import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.BlockTurbineCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.MetaTileEntities;
-import gregtech.common.metatileentities.multi.electric.MetaTileEntityLargeMiner;
 import gregtech.common.metatileentities.multi.electric.generator.MetaTileEntityLargeTurbine;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMachineHatch;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityRotorHolder;
@@ -167,6 +166,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityFermentationTank FERMENTATION_TANK;
     public static MetaTileEntityDigester DIGESTER;
     public static MetaTileEntityStepper STEPPER;
+    public static MetaTileEntityIndustrialRefiner INDUSTRIAL_REFINER;
     public static MetaTileEntitySeismicDetector SEISMIC_DETECTOR;
     public static MetaTileEntityTideControl TIDE_CONTROL;
     public static MetaTileEntityTideUnit TIDE_UNIT;
@@ -580,7 +580,7 @@ public class GTQTMetaTileEntities {
         HEAT_CHANGER = registerMetaTileEntity(3178, new MetaTileEntityHeatExchanger(gtqtcoreId("heat_exchanger")));
         LASER_ENGRAVING = registerMetaTileEntity(3179, new MetaTileEntityLaserEngraving(gtqtcoreId("laser_engraving")));
         STEPPER = registerMetaTileEntity(3180, new MetaTileEntityStepper(gtqtcoreId("stepper")));
-        //
+        INDUSTRIAL_REFINER = registerMetaTileEntity(3181, new MetaTileEntityIndustrialRefiner(gtqtcoreId("industrial_refiner")));
         CLARIFIER = registerMetaTileEntity(3182, new MetaTileEntityClarifier(gtqtcoreId("clarifier")));
         ELE_OIL = registerMetaTileEntity(3183, new MetaTileEntityElectronOil(gtqtcoreId("ele_oil")));
         //

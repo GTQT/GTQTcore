@@ -518,7 +518,6 @@ public class GTQTMachineCasingMaterials {
                 .color(0xE84B36)
                 .iconSet(SHINY)
                 .components(Copernicium, 1, Nihonium, 1, MetastableFlerovium, 1, Moscovium, 1, Livermorium, 1, Tennessine, 1, MetastableOganesson, 1)
-                //  TODO UEV stage coil?
                 .blast(12960, GasTier.HIGHER)
                 .flags(GENERATE_PLATE, GENERATE_ROD, GENERATE_RING, GENERATE_BOLT_SCREW, GENERATE_GEAR, GENERATE_ROTOR,
                         GENERATE_FRAME,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROUND,GENERATE_SMALL_GEAR
@@ -535,7 +534,9 @@ public class GTQTMachineCasingMaterials {
                 .color(0x4D8BE9)
                 .iconSet(SHINY)
                 .components(Rutherfordium, 1, Dubnium, 1, Seaborgium, 1, Bohrium, 1, MetastableHassium, 1, Meitnerium, 1, Darmstadtium, 1, Roentgenium, 1)
-                .blast(10000, GasTier.HIGHER)
+                .blast(b -> b
+                        .temp(1000, BlastProperty.GasTier.HIGHEST)
+                        .blastStats(VA[UV]))
                 .flags(GENERATE_PLATE, GENERATE_ROD, GENERATE_RING, GENERATE_BOLT_SCREW, GENERATE_GEAR, GENERATE_ROTOR,
                         GENERATE_FRAME,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROUND,GENERATE_SMALL_GEAR
                         ,GENERATE_SPRING,GENERATE_SPRING_SMALL)
