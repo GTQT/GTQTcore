@@ -26,6 +26,7 @@ import gregtech.client.particle.GTLaserBeamParticle;
 import gregtech.client.particle.GTParticleManager;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
+import gregtech.client.utils.TooltipHelper;
 import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.BlockGlassCasing;
 import gregtech.common.blocks.MetaBlocks;
@@ -299,6 +300,7 @@ public class MetaTileEntityLargeCircuitAssemblyLine extends MultiMapMultiblockCo
                                List<String> tooltip,
                                boolean advanced) {
         super.addInformation(stack, world, tooltip, advanced);
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("先进的电子加工系统", new Object[0]));
         tooltip.add(I18n.format("gtqtcore.machine.large_circuit_assembly_line.tooltip.1"));
         tooltip.add(I18n.format("gtqtcore.machine.large_circuit_assembly_line.tooltip.2"));
         tooltip.add(I18n.format("gtqtcore.machine.large_circuit_assembly_line.tooltip.3"));

@@ -8,6 +8,7 @@ import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
+import gregtech.api.recipes.RecipeMap;
 import gregtech.api.unification.material.Materials;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
@@ -15,6 +16,7 @@ import gregtech.client.utils.TooltipHelper;
 import gregtech.common.blocks.BlockBoilerCasing.BoilerCasingType;
 import gregtech.common.blocks.BlockMetalCasing.MetalCasingType;
 import gregtech.common.blocks.MetaBlocks;
+import keqing.gtqtcore.api.metaileentity.GTQTNoOCMultiblockController;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.client.resources.I18n;
@@ -28,11 +30,16 @@ import java.util.List;
 import static gregtech.api.GTValues.EV;
 
 //电催破乳
-public class MetaTileEntityElectronOil extends RecipeMapMultiblockController {
+public class MetaTileEntityElectronOil extends GTQTNoOCMultiblockController {
 
     public MetaTileEntityElectronOil(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, GTQTcoreRecipeMaps.ELEOIL);
-        this.recipeMapWorkable = new ELEOilLogic(this);
+        super(metaTileEntityId, new RecipeMap[]{
+                GTQTcoreRecipeMaps.ELEOIL
+        });
+        setMaxParallel(16);
+        setMaxParallelFlag(true);
+        setTimeReduce(0.8);
+        setTimeReduceFlag(true);
     }
 
     @Override
@@ -44,7 +51,7 @@ public class MetaTileEntityElectronOil extends RecipeMapMultiblockController {
     public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("石油滋生者", new Object[0]));
-        tooltip.add(I18n.format("根据输入电压获得并行，电压低于HV默认四并行，每超过HV一级并行数量加四"));
+
         tooltip.add(I18n.format("默认耗时减免20%%"));
         tooltip.add(I18n.format("gtqtcore.machine.parallel.num", 16));
     }
@@ -81,28 +88,5 @@ public class MetaTileEntityElectronOil extends RecipeMapMultiblockController {
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
         return Textures.CLEAN_STAINLESS_STEEL_CASING;
-    }
-
-    @Nonnull
-    @Override
-    protected ICubeRenderer getFrontOverlay() {
-        return GTQTTextures.FRACKER_OVERLAY;
-    }
-
-    protected static class ELEOilLogic extends MultiblockRecipeLogic {
-
-        public ELEOilLogic(RecipeMapMultiblockController tileEntity) {
-            super(tileEntity, true);
-        }
-
-        @Override
-        public int getParallelLimit() {
-            return 16;
-        }
-
-        @Override
-        public void setMaxProgress(int maxProgress) {
-            this.maxProgressTime = (int) (maxProgress * 0.8);
-        }
     }
 }

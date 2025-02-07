@@ -16,6 +16,7 @@ import gregtech.api.util.TextComponentUtil;
 import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
+import gregtech.client.utils.TooltipHelper;
 import gregtech.common.blocks.BlockWireCoil;
 import gregtech.core.sound.GTSoundEvents;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
@@ -112,6 +113,7 @@ public class MetaTileEntityIndustrialInductionFurnace extends MultiMapMultiblock
     @Override
     public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("超级熔炼", new Object[0]));
         tooltip.add(I18n.format("gregtech.machine.iif.1"));
         tooltip.add(I18n.format("gregtech.machine.iif.2"));
         tooltip.add(I18n.format("gregtech.machine.iif.3"));

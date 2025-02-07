@@ -18,6 +18,7 @@ import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
+import gregtech.client.utils.TooltipHelper;
 import gregtech.core.sound.GTSoundEvents;
 import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
@@ -58,6 +59,8 @@ public class MetaTileEntityLaserEngraving extends MultiMapMultiblockController i
 
     @Override
     public void addInformation(ItemStack stack, World world, List<String> tooltip, boolean advanced) {
+        super.addInformation(stack, world, tooltip, advanced);
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("不要直视他", new Object[0]));
         tooltip.add(I18n.format("gtqt.machine.ls.1"));
         tooltip.add(I18n.format("gtqt.machine.ls.2"));
         tooltip.add(I18n.format("gtqt.machine.ls.3"));

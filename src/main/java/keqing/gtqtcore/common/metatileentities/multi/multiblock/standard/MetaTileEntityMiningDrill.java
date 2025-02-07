@@ -366,7 +366,7 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
                     setWork(true);
                     work=true;
                 }
-                if (++this.progressTime > this.maxProgressTime) {
+                if (checkAvailable() && ++this.progressTime > this.maxProgressTime) {
                     this.completeRecipe();
                     setWork(false);
                     work=false;

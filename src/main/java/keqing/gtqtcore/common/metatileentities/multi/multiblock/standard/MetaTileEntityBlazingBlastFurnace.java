@@ -32,6 +32,7 @@ import gregtech.client.utils.TooltipHelper;
 import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.metatileentities.MetaTileEntities;
+import keqing.gtqtcore.api.metaileentity.GTQTNoOCMultiblockController;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
@@ -57,7 +58,7 @@ import java.util.List;
 import static gregtech.api.GTValues.VA;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.Pyrotheum;
 
-public class MetaTileEntityBlazingBlastFurnace extends MultiMapMultiblockController implements IParallelMultiblock ,IHeatingCoil {
+public class MetaTileEntityBlazingBlastFurnace extends GTQTNoOCMultiblockController implements IHeatingCoil {
     protected static int heatingCoilLevel;
     private FluidStack pyrotheumFluid = Pyrotheum.getFluid(1);
     private int blastFurnaceTemperature;
@@ -69,6 +70,11 @@ public class MetaTileEntityBlazingBlastFurnace extends MultiMapMultiblockControl
                 GTQTcoreRecipeMaps.BURNER_REACTOR_RECIPES
         });
         this.recipeMapWorkable = new BlazingBlastFurnaceWorkable(this);
+
+        //setMaxParallel(auto);
+        setMaxParallelFlag(true);
+        //setTimeReduce(auto);
+        setTimeReduceFlag(true);
     }
 
     private static IBlockState getCasingState() {
@@ -93,7 +99,8 @@ public class MetaTileEntityBlazingBlastFurnace extends MultiMapMultiblockControl
             heatingCoilLevel = BlockWireCoil.CoilType.CUPRONICKEL.getLevel();
         }
         this.blastFurnaceTemperature += 100 * Math.max(0, GTUtility.getTierByVoltage(getEnergyContainer().getInputVoltage()) - GTValues.MV);
-
+        setMaxParallel(Math.min((int) Math.pow(2, heatingCoilLevel),16));
+        setTimeReduce( (100 - (Math.min(heatingCoilLevel,15) * 5.0)) /100);
     }
 
     @Override
@@ -130,14 +137,8 @@ public class MetaTileEntityBlazingBlastFurnace extends MultiMapMultiblockControl
 
     @Override
     public void addInformation(ItemStack stack, @Nullable World player, @Nonnull List<String> tooltip, boolean advanced) {
-        super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("什么东西烧起来了", new Object[0]));
-        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("gregtech.machine.perfect_oc", new Object[0]));
-        tooltip.add(I18n.format("gtqtcore.machine.parallel.pow.custom",2,"Heating Coil Level",64));
-        tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.1"));
-        tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.2"));
-        tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.3"));
-
+        super.addInformation(stack, player, tooltip, advanced);
     }
 
     @Override
@@ -198,27 +199,13 @@ public class MetaTileEntityBlazingBlastFurnace extends MultiMapMultiblockControl
         pyrotheumFluid = null;
     }
 
-    protected class BlazingBlastFurnaceWorkable extends MultiblockRecipeLogic {
+    protected class BlazingBlastFurnaceWorkable extends GTQTMultiblockLogic {
 
         private final MetaTileEntityBlazingBlastFurnace metaTileEntityBlazingBlastFurnace;
 
         public BlazingBlastFurnaceWorkable(RecipeMapMultiblockController tileEntity) {
-            super(tileEntity, true);
+            super(tileEntity);
             this.metaTileEntityBlazingBlastFurnace = (MetaTileEntityBlazingBlastFurnace) tileEntity;
-        }
-
-        @Override
-        public int getParallelLimit() {
-            return  Math.min((int) Math.pow(2, heatingCoilLevel), 16);
-        }
-
-        protected void modifyOverclockPre(int[] values, IRecipePropertyStorage storage) {
-            super.modifyOverclockPre(values, storage);
-            values[0] = OverclockingLogic.applyCoilEUtDiscount(values[0], ((IHeatingCoil) this.metaTileEntity).getCurrentTemperature(), storage.getRecipePropertyValue(TemperatureProperty.getInstance(), 0));
-        }
-
-        protected int[] runOverclockingLogic(IRecipePropertyStorage propertyStorage, int recipeEUt, long maxVoltage, int duration, int amountOC) {
-            return OverclockingLogic.heatingCoilOverclockingLogic(Math.abs(recipeEUt), maxVoltage, duration, amountOC, ((IHeatingCoil) this.metaTileEntity).getCurrentTemperature(), propertyStorage.getRecipePropertyValue(TemperatureProperty.getInstance(), 0));
         }
 
         protected void updateRecipeProgress() {

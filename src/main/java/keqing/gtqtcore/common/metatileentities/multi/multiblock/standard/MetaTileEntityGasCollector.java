@@ -18,6 +18,7 @@ import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.recipes.recipeproperties.GasCollectorDimensionProperty;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
+import gregtech.client.utils.TooltipHelper;
 import gregtech.common.blocks.BlockBoilerCasing;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
@@ -182,6 +183,7 @@ public class MetaTileEntityGasCollector extends RecipeMapMultiblockController {
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World world, @Nonnull List<String> tooltip, boolean advanced) {
         super.addInformation(stack, world, tooltip, advanced);
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("美妙的空气", new Object[0]));
         tooltip.add(I18n.format("启动普适集气后可以在任何地方抽取空气"));
         tooltip.add(I18n.format("gtqtcore.machine.parallel.num", "过滤模块"));
     }

@@ -13,6 +13,7 @@ import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.client.renderer.ICubeRenderer;
+import gregtech.client.utils.TooltipHelper;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.capability.IRadiation;
@@ -149,6 +150,7 @@ public class MetaTileEntityGeneMutagenesis extends MultiMapMultiblockController 
     @Override
     public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("轰击基因与DNA", new Object[0]));
         tooltip.add(I18n.format("gregtech.machine.biorea.gtqtupdate.1"));
         tooltip.add(I18n.format("gregtech.machine.biorea.gtqtupdate.2"));
         tooltip.add(I18n.format("gregtech.machine.biorea.gtqtupdate.3"));

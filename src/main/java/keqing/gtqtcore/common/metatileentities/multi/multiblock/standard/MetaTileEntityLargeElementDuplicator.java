@@ -140,6 +140,7 @@ public class MetaTileEntityLargeElementDuplicator extends RecipeMapMultiblockCon
     public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("gregtech.machine.perfect_oc"));
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("复制元素", new Object[0]));
         tooltip.add(I18n.format("gtqtcore.machine.parallel.pow.machineTier", 2, 256));
         tooltip.add(I18n.format("gtqtcore.machine.progress_time","maxProgress *0.8"));
         tooltip.add(I18n.format("gtqtcore.multiblock.kq.acc.tooltip"));

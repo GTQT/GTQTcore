@@ -13,6 +13,7 @@ import gregtech.api.util.LocalizationUtils;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
+import gregtech.client.utils.TooltipHelper;
 import gregtech.common.blocks.BlockBoilerCasing;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
@@ -26,10 +27,12 @@ import keqing.gtqtcore.api.utils.GTQTMathUtil;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -181,6 +184,14 @@ public class MetaTileEntityFermentationTank extends RecipeMapMultiblockControlle
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         this.pH = data.getDouble("ph");
+    }
+    @Override
+    public void addInformation(ItemStack stack,
+                               World player,
+                               List<String> tooltip,
+                               boolean advanced) {
+        super.addInformation(stack, player, tooltip, advanced);
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("工业化生产沼气", new Object[0]));
     }
 
     protected class PHRecipeLogic extends MultiblockRecipeLogic {

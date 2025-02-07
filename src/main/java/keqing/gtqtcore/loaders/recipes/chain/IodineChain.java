@@ -36,7 +36,7 @@ public class IodineChain {
         // [NaNO3·KNO3·KCl·NaOH + H2O + I] +  Kerosene ->  [NaNO3·KNO3·KCl·NaOH + H2O] + [Kerosene + I]
         CHEMICAL_RECIPES.recipeBuilder().duration(90).EUt(480)
                 .fluidInputs(CalicheIodineBrine.getFluid(1000))
-                .fluidInputs(Kerosene.getFluid(1000))
+                .fluidInputs(CoalTar.getFluid(1000))
                 .fluidOutputs(CalicheNitrateSolution.getFluid(1000))
                 .fluidOutputs(KeroseneIodineSolution.getFluid(1000))
                 .buildAndRegister();
@@ -44,7 +44,7 @@ public class IodineChain {
         // [Kerosene + I] = Kerosene + I
         CENTRIFUGE_RECIPES.recipeBuilder().duration(140).EUt(120)
                 .fluidInputs(KeroseneIodineSolution.getFluid(1000))
-                .fluidOutputs(Kerosene.getFluid(1000))
+                .fluidOutputs(CoalTar.getFluid(1000))
                 .output(dust, Iodine)
                 .buildAndRegister();
 
@@ -52,7 +52,6 @@ public class IodineChain {
         DRYER_RECIPES.recipeBuilder().duration(120).EUt(30)
                 .fluidInputs(CalicheNitrateSolution.getFluid(1000))
                 .output(dust, SodiumNitrate, 5)
-                .output(dust, Niter, 5)
                 .output(dust, RockSalt, 2)
                 .output(dust, SodiumHydroxide, 3)
                 .buildAndRegister();

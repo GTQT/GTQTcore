@@ -15,6 +15,8 @@ import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.MultiblockShapeInfo;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
+import gregtech.api.recipes.RecipeMap;
+import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.util.GTUtility;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
@@ -22,6 +24,7 @@ import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
 import gregtech.client.utils.TooltipHelper;
 import gregtech.common.metatileentities.MetaTileEntities;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
+import keqing.gtqtcore.api.metaileentity.GTQTNoTierMultiblockController;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.recipes.properties.ForceFieldCoilTierProperty;
@@ -30,6 +33,7 @@ import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing3;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.giantEquipment.MetaTileEntityHugeCrackingUnit;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -46,12 +50,19 @@ import java.util.List;
 
 import static keqing.gtqtcore.api.GTQTAPI.MAP_FORCE_FIELD_COIL;
 
-public class MetaTileEntityNaquadahFuelFactory extends RecipeMapMultiblockController {
+public class MetaTileEntityNaquadahFuelFactory extends GTQTNoTierMultiblockController {
     protected int CoilLevel;
 
     public MetaTileEntityNaquadahFuelFactory(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, GTQTcoreRecipeMaps.NAQUADAH_REFINE_FACTORY_RECIPES);
-        this.recipeMapWorkable = new NaquadahFuelRefineFactoryRecipeLogic(this);
+        super(metaTileEntityId, new RecipeMap[]{
+                GTQTcoreRecipeMaps.NAQUADAH_REFINE_FACTORY_RECIPES
+        });
+
+        //setMaxParallel(auto);
+        setMaxParallelFlag(true);
+
+        //setTimeReduce(glassTire);
+        setTimeReduceFlag(true);
     }
 
     @Override
@@ -79,6 +90,9 @@ public class MetaTileEntityNaquadahFuelFactory extends RecipeMapMultiblockContro
         this.CoilLevel = GTQTUtil.getOrDefault(() -> CoilLevel instanceof WrappedIntTired,
                 () -> ((WrappedIntTired) CoilLevel).getIntTier(),
                 0);
+
+        setMaxParallel((int) Math.pow(2,Math.min(10,this.CoilLevel)));
+        setTimeReduce((double) (100 - (Math.min(10, this.CoilLevel)) * 5) /100);
     }
 
     @Override
@@ -186,33 +200,5 @@ public class MetaTileEntityNaquadahFuelFactory extends RecipeMapMultiblockContro
     public boolean checkRecipe(Recipe recipe, boolean consumeIfSuccess) {
         return super.checkRecipe(recipe, consumeIfSuccess)
                 && this.CoilLevel >= recipe.getProperty(ForceFieldCoilTierProperty.getInstance(), 0);
-    }
-
-    protected class NaquadahFuelRefineFactoryRecipeLogic extends MultiblockRecipeLogic {
-
-        public NaquadahFuelRefineFactoryRecipeLogic(RecipeMapMultiblockController tileEntity) {
-            super(tileEntity);
-        }
-
-        @Override
-        protected double getOverclockingDurationDivisor() {
-            Integer currentCoilTier = this.getPreviousRecipe().getProperty(ForceFieldCoilTierProperty.getInstance(), 0);
-            if (currentCoilTier < CoilLevel) {
-                return 4.0;
-            } else {
-                return 2.0;
-            }
-        }
-
-        @Override
-        public void setMaxProgress(int maxProgress) {
-            super.setMaxProgress((int) (Math.floor(maxProgress * Math.pow(0.8, GTUtility.getTierByVoltage(this.getMaxVoltage())))));
-        }
-
-        @Override
-        public int getParallelLimit() {
-            return 16 * CoilLevel;
-        }
-
     }
 }

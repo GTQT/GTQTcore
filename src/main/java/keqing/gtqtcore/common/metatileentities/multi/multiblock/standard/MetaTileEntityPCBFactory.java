@@ -445,6 +445,7 @@ public class MetaTileEntityPCBFactory extends RecipeMapMultiblockController impl
                                @Nonnull List<String> tooltip,
                                boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("先进的电子厂", new Object[0]));
         tooltip.add(I18n.format("gtqtcore.machine.pcb_factory.tooltip.1"));
         tooltip.add(I18n.format("gtqtcore.machine.pcb_factory.tooltip.2"));
         tooltip.add(I18n.format("gtqtcore.machine.pcb_factory.tooltip.3"));

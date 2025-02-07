@@ -223,7 +223,6 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityOceanPumper OCEAN_PUMPER;
     public static MetaTileEntityClarifier CLARIFIER;
     public static MetaTileEntitySolarPlate SOLAR_PLATE;
-    public static MetaTileEntityCokingTower COKING_TOWER;
     public static MetaTileEntityPowerSupply POWER_SUPPLY;
     public static MetaTileEntitySMSF SMSF;
     public static MetaTileEntityAdvanceNetworkSwitch ADV_NETWORK_SWITCH;
@@ -599,7 +598,7 @@ public class GTQTMetaTileEntities {
         //MEGA_CLEANROOM = registerMetaTileEntity(3203, new MetaTileEntityMegaCleanroom(gtqtcoreId("mega_cleanroom")));
         SEISMIC_DETECTOR = registerMetaTileEntity(3204, new MetaTileEntitySeismicDetector(gtqtcoreId("seismic_detector")));
         GRAVITY_SEPARATOR = registerMetaTileEntity(3205, new MetaTileEntityGravitySeparator(gtqtcoreId("gravity_separator")));
-        COKING_TOWER = registerMetaTileEntity(3206, new MetaTileEntityCokingTower(gtqtcoreId("coking_tower")));
+       // COKING_TOWER = registerMetaTileEntity(3206, new MetaTileEntityCokingTower(gtqtcoreId("coking_tower")));
         SMSF = registerMetaTileEntity(3207, new MetaTileEntitySMSF(gtqtcoreId("smsf")));
         ADV_ARC_FURNACE = registerMetaTileEntity(3209, new MetaTileEntityAdvancedArcFurnace(gtqtcoreId("adv_arc_furnace")));
         NEUTRAL_NETWORK_NEXUS = registerMetaTileEntity(3210, new MetaTileEntityNeutralNetworkNexus(gtqtcoreId("neutral_network_nexus")));
@@ -687,10 +686,9 @@ public class GTQTMetaTileEntities {
         ULTIMATE_FLUID_DRILL_RIG = registerMetaTileEntity(3425, new MetaTileEntityAdvancedFluidDrill(gtqtcoreId("fluid_drill_rig.zpm"), 7));
         INFINITY_FLUID_DRILL_RIG = registerMetaTileEntity(3426, new MetaTileEntityAdvancedFluidDrill(gtqtcoreId("fluid_drill_rig.uv"), 8));
 
-
-        VOID_MINER[0] = registerMetaTileEntity(16097, new MetaTileEntityVoidMiner(gtqtcoreId("void_miner.luv"), LuV, 9000));
-        VOID_MINER[1] = registerMetaTileEntity(16098, new MetaTileEntityVoidMiner(gtqtcoreId("void_miner.zpm"), ZPM, 16000));
-        VOID_MINER[2] = registerMetaTileEntity(16099, new MetaTileEntityVoidMiner(gtqtcoreId("void_miner.uv"), UV, 40000));
+        VOID_MINER[0] = registerMetaTileEntity(3427, new MetaTileEntityVoidMiner(gtqtcoreId("void_miner.luv"), LuV, 9000));
+        VOID_MINER[1] = registerMetaTileEntity(3428, new MetaTileEntityVoidMiner(gtqtcoreId("void_miner.zpm"), ZPM, 16000));
+        VOID_MINER[2] = registerMetaTileEntity(3429, new MetaTileEntityVoidMiner(gtqtcoreId("void_miner.uv"), UV, 40000));
 
         //blocksResearchSystem
         KQCC = registerMetaTileEntity(3450, new MetaTileEntityResearchSystemControlCenter(gtqtcoreId("kqcc")));

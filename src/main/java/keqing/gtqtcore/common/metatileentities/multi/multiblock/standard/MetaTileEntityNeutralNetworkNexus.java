@@ -225,6 +225,7 @@ public class MetaTileEntityNeutralNetworkNexus extends MultiMapMultiblockControl
     @Override
     public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("马蜂窝", new Object[0]));
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("gregtech.machine.perfect_oc"));
         tooltip.add(I18n.format("gtqtcore.machine.neutral_network_nexus.tooltip.1"));
         tooltip.add(I18n.format("gtqtcore.machine.neutral_network_nexus.tooltip.2"));

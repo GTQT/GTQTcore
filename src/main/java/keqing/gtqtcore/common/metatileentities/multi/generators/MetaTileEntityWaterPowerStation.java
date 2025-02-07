@@ -92,7 +92,7 @@ public class MetaTileEntityWaterPowerStation extends MultiblockWithDisplayBase {
         textList.add(new TextComponentTranslation("gtqtcore.wps.count", number, coilLevel));
         textList.add(new TextComponentTranslation("gtqtcore.wps.checkwater", water, (number * 2 + 1) * (number * 2 + 1) * 4));
         textList.add(new TextComponentTranslation("gtqtcore.wps.output1", outputEu));
-        textList.add(new TextComponentTranslation("gtqtcore.wps.output2", geteu()));
+        textList.add(new TextComponentTranslation("gtqtcore.wps.output2", getEuOutput()));
         if (getInputFluidInventory() != null) {
             FluidStack LubricantStack = getInputFluidInventory().drain(Lubricant.getFluid(Integer.MAX_VALUE), false);
             int liquidOxygenAmount = LubricantStack == null ? 0 : LubricantStack.amount;
@@ -114,15 +114,14 @@ public class MetaTileEntityWaterPowerStation extends MultiblockWithDisplayBase {
 
     @Override
     protected void updateFormedValid() {
-        this.logic.update();
         generator();
         this.outputEu = (long) water * coilLevel * tier;
     }
 
-    private long geteu() {
+    private long getEuOutput() {
         Random rand = new Random();
         int randomNum = rand.nextInt(40);
-        return outputEu * (randomNum + 80) / 160;
+        return (outputEu/4) * (randomNum + 80) / 160;
     }
 
     private final FluidStack LUBRICANT_STACK = Lubricant.getFluid(1);
@@ -132,7 +131,7 @@ public class MetaTileEntityWaterPowerStation extends MultiblockWithDisplayBase {
         isWorkingEnabled = this.energyContainer.getEnergyStored() < this.energyContainer.getEnergyCapacity() && water > 0;
         if (isWorkingEnabled && LUBRICANT_STACK.isFluidStackIdentical(inputTank.drain(LUBRICANT_STACK, false))) {
             inputTank.drain(LUBRICANT_STACK, true);
-            this.energyContainer.addEnergy(geteu());
+            this.energyContainer.addEnergy(getEuOutput());
         }
     }
 
@@ -197,10 +196,10 @@ public class MetaTileEntityWaterPowerStation extends MultiblockWithDisplayBase {
 
     public void addInformation(ItemStack stack, @Nullable World player, @Nonnull List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("无中生有！现在！！", new Object[0]));
         tooltip.add(I18n.format("gtqtcore.multiblock.wps.tooltip.1"));
         tooltip.add(I18n.format("gtqtcore.multiblock.wps.tooltip.2"));
         tooltip.add(I18n.format("gtqtcore.multiblock.wps.tooltip.3"));
-        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("无中生有！现在！！", new Object[0]));
     }
 
 
@@ -255,7 +254,5 @@ public class MetaTileEntityWaterPowerStation extends MultiblockWithDisplayBase {
             return waterpos;
         }
 
-        public void update() {
-        }
     }
 }

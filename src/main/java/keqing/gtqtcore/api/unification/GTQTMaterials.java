@@ -654,8 +654,6 @@ public class GTQTMaterials {
     public static Material IodizedBrine;
     public static Material IodineBrineMix;
     public static Material IodineSlurry;
-    public static Material Kerosene;
-    public static Material Niter;
     public static Material BrominatedBrine;
 
     public static Material PolyacrylonitrileSolution;

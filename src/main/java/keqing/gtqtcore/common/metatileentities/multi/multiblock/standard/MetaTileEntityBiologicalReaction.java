@@ -9,7 +9,10 @@ import gregtech.api.gui.widgets.WidgetGroup;
 import gregtech.api.metatileentity.IFastRenderMetaTileEntity;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
-import gregtech.api.metatileentity.multiblock.*;
+import gregtech.api.metatileentity.multiblock.IMultiblockPart;
+import gregtech.api.metatileentity.multiblock.IProgressBarMultiblock;
+import gregtech.api.metatileentity.multiblock.MultiblockAbility;
+import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
@@ -18,13 +21,13 @@ import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.util.TextComponentUtil;
 import gregtech.client.renderer.ICubeRenderer;
-import gregtech.client.renderer.texture.Textures;
+import gregtech.client.utils.TooltipHelper;
 import gregtech.common.blocks.BlockBoilerCasing;
-import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.GTQTCoreConfig;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.capability.IBio;
+import keqing.gtqtcore.api.metaileentity.GTQTNoOCMultiblockController;
 import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.properties.BioReactorProperty;
@@ -52,11 +55,10 @@ import java.util.List;
 
 import static keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility.BIO_MULTIBLOCK_ABILITY;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.BIOLOGICAL_REACTION_RECIPES;
-import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing3.CasingType.grisium;
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing3.CasingType.tumbaga;
 
 //要实现大机器中的渲染需要重写IFastRenderMetaTileEntity 接口，并实现renderMetaTileEntity和getRenderBoundingBox方法
-public class MetaTileEntityBiologicalReaction extends MultiMapMultiblockController implements IProgressBarMultiblock, IFastRenderMetaTileEntity {
+public class MetaTileEntityBiologicalReaction extends GTQTNoOCMultiblockController implements IProgressBarMultiblock, IFastRenderMetaTileEntity {
     int liquid = 0;
     int bio = 0;
     double rate = 0;
@@ -66,6 +68,11 @@ public class MetaTileEntityBiologicalReaction extends MultiMapMultiblockControll
     public MetaTileEntityBiologicalReaction(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{BIOLOGICAL_REACTION_RECIPES, RecipeMaps.FERMENTING_RECIPES, RecipeMaps.BREWING_RECIPES});
         this.recipeMapWorkable = new BiologicalReactionLogic(this);
+
+        //setMaxParallel(auto);
+        setMaxParallelFlag(true);
+        //setTimeReduce(auto);
+        setTimeReduceFlag(true);
     }
 
     private static IBlockState getTubeState() {
@@ -146,6 +153,9 @@ public class MetaTileEntityBiologicalReaction extends MultiMapMultiblockControll
         Object clean_tier = context.get("ZJTieredStats");
         this.glass_tier = GTQTUtil.getOrDefault(() -> glass_tier instanceof WrappedIntTired, () -> ((WrappedIntTired) glass_tier).getIntTier(), 0);
         this.clean_tier = GTQTUtil.getOrDefault(() -> clean_tier instanceof WrappedIntTired, () -> ((WrappedIntTired) clean_tier).getIntTier(), 0);
+
+        setMaxParallel((int) Math.min(Math.pow(2, this.clean_tier + this.glass_tier), 64));
+        setTimeReduce((100 - this.glass_tier * 5.0) / 100);
     }
 
     @Nonnull
@@ -172,9 +182,11 @@ public class MetaTileEntityBiologicalReaction extends MultiMapMultiblockControll
                 .where('P', states(getTubeState()))
                 .where(' ', any()).build();
     }
+
     protected IBlockState getCasingState() {
         return GTQTMetaBlocks.blockMultiblockCasing3.getState(tumbaga);
     }
+
     @SideOnly(Side.CLIENT)
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
@@ -198,6 +210,7 @@ public class MetaTileEntityBiologicalReaction extends MultiMapMultiblockControll
     @Override
     public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("微生物动物园", new Object[0]));
         tooltip.add(I18n.format("gregtech.machine.biorea.gtqtupdate.1"));
         tooltip.add(I18n.format("gregtech.machine.biorea.gtqtupdate.2"));
         tooltip.add(I18n.format("gregtech.machine.biorea.gtqtupdate.3"));
@@ -281,24 +294,6 @@ public class MetaTileEntityBiologicalReaction extends MultiMapMultiblockControll
             return this.getRecipeMap() == BIOLOGICAL_REACTION_RECIPES;
         }
 
-        /**
-         * @param maxProgress If machine in common assembler, then get half progress time.
-         */
-        public void setMaxProgress(int maxProgress) {
-            this.maxProgressTime = maxProgress / glass_tier;
-        }
-
-        /**
-         * @return If machine in PA, then no parallel, if machine in common assembler, then get 2^{CasingTier + 4} (Mk1:32, Mk2:64, Mk3:128) parallel.
-         */
-        @Override
-        public int getParallelLimit() {
-            if (isBioRecipes()) {
-                return (int) Math.pow(2, clean_tier);
-            } else {
-                return (int) Math.pow(2, Math.min(glass_tier, clean_tier) + 4);
-            }
-        }
 
         protected void updateRecipeProgress() {
             if (this.canRecipeProgress && this.drawEnergy(this.recipeEUt, true)) {

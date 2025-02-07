@@ -19,6 +19,7 @@ import gregtech.api.recipes.RecipeMap;
 import gregtech.client.renderer.ICubeRenderer;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.capability.IPHValue;
+import keqing.gtqtcore.api.metaileentity.GTQTNoOCMultiblockController;
 import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
@@ -46,7 +47,7 @@ import java.util.List;
 
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 
-public class MetaTileEntityEnzymesReaction extends MultiMapMultiblockController implements IPHValue {
+public class MetaTileEntityEnzymesReaction extends GTQTNoOCMultiblockController implements IPHValue {
     int p;
     int A;
     int B;
@@ -64,6 +65,11 @@ public class MetaTileEntityEnzymesReaction extends MultiMapMultiblockController 
                 GTQTcoreRecipeMaps.ENZYMES_REACTION_RECIPES
         });
         this.recipeMapWorkable = new BiologicalReactionLogic(this);
+
+        //setMaxParallel(auto);
+        setMaxParallelFlag(true);
+        //setTimeReduce(auto);
+        setTimeReduceFlag(true);
     }
 
 
@@ -138,6 +144,9 @@ public class MetaTileEntityEnzymesReaction extends MultiMapMultiblockController 
         this.clean_tier = GTQTUtil.getOrDefault(() -> clean_tier instanceof WrappedIntTired,
                 () -> ((WrappedIntTired) clean_tier).getIntTier(),
                 0);
+
+        setMaxParallel(1);
+        setTimeReduce(( (10 - this.clean_tier) / 10.0));
     }
 
     @Nonnull
@@ -295,7 +304,7 @@ public class MetaTileEntityEnzymesReaction extends MultiMapMultiblockController 
         this.markDirty();
     }
 
-    protected class BiologicalReactionLogic extends MultiblockRecipeLogic {
+    protected class BiologicalReactionLogic extends GTQTMultiblockLogic {
 
         FluidStack BIO1 = Enzymesa.getFluid(1000);
         FluidStack BIO2 = Enzymesb.getFluid(1000);
@@ -304,7 +313,7 @@ public class MetaTileEntityEnzymesReaction extends MultiMapMultiblockController 
         FluidStack BIO5 = Enzymese.getFluid(1000);
 
         public BiologicalReactionLogic(RecipeMapMultiblockController tileEntity) {
-            super(tileEntity, true);
+            super(tileEntity);
         }
 
         @Override
@@ -333,16 +342,7 @@ public class MetaTileEntityEnzymesReaction extends MultiMapMultiblockController 
                 inputTank.drain(BIO5, true);
                 E = E + 1;
             }
-
-        }
-
-        @Override
-        public int getParallelLimit() {
-            return Math.max(clean_tier, p);
-        }
-
-        public void setMaxProgress(int maxProgress) {
-            this.maxProgressTime = (int) (maxProgress * ((10 - clean_tier) / 10.0));
+            setMaxParallel(Math.max(clean_tier, p));
         }
 
         protected void updateRecipeProgress() {

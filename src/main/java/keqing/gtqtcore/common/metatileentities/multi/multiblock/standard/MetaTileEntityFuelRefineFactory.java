@@ -10,10 +10,14 @@ import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
+import gregtech.api.recipes.RecipeMap;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.common.blocks.BlockBoilerCasing;
 import gregtech.common.blocks.MetaBlocks;
+import keqing.gtqtcore.api.metaileentity.GTQTNoOCMultiblockController;
+import keqing.gtqtcore.api.metaileentity.GTQTNoTierMultiblockController;
+import keqing.gtqtcore.api.metaileentity.GTQTRecipeMapMultiblockController;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
@@ -32,11 +36,16 @@ import java.util.List;
 
 import static gregtech.api.unification.material.Materials.Naquadah;
 
-public class MetaTileEntityFuelRefineFactory extends RecipeMapMultiblockController {
+public class MetaTileEntityFuelRefineFactory extends GTQTNoTierMultiblockController {
 
     public MetaTileEntityFuelRefineFactory(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, GTQTcoreRecipeMaps.FUEL_REFINE_FACTORY_RECIPES);
-        this.recipeMapWorkable = new MultiblockRecipeLogic(this, true);
+        super(metaTileEntityId, new RecipeMap[]{
+                GTQTcoreRecipeMaps.FUEL_REFINE_FACTORY_RECIPES
+        });
+        setMaxParallel(64);
+        setMaxParallelFlag(true);
+        //setTimeReduce(glassTire);
+        setTimeReduceFlag(false);
     }
 
     private static IBlockState getCasingState() {
@@ -110,12 +119,6 @@ public class MetaTileEntityFuelRefineFactory extends RecipeMapMultiblockControll
     @Override
     protected ICubeRenderer getFrontOverlay() {
         return Textures.POWER_SUBSTATION_OVERLAY;
-    }
-
-    @Override
-    public void addInformation(@Nonnull ItemStack stack, @Nullable World player, @Nonnull List<String> tooltip, boolean advanced) {
-        super.addInformation(stack, player, tooltip, advanced);
-        tooltip.add(I18n.format("gregtech.machine.perfect_oc"));
     }
 
     @Override

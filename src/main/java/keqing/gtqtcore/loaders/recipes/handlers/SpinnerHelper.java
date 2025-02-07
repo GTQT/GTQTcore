@@ -37,13 +37,13 @@ public class SpinnerHelper {
         registerWrap(Epoxy,3);
         registerWrap(ReinforcedEpoxyResin,4);
         registerWrap(Polytetrafluoroethylene,5);
-        //registerWrap(Zylon,6);
-        //registerWrap(Polybenzimidazole,7);
-        //registerWrap(Polyetheretherketone,8);
+        registerWrap(Zylon,6);
+        registerWrap(Polybenzimidazole,7);
+        registerWrap(Polyetheretherketone,8);
         //registerWrap(Kevlar,9);
-        //registerWrap(KaptonK,10);
-        //registerWrap(KaptonE,11);
-        //registerWrap(FullerenePolymerMatrix,12);
+        registerWrap(KaptonK,10);
+        registerWrap(KaptonE,11);
+        registerWrap(FullerenePolymerMatrix,12);
     }
     public static void registerWrap(Material material,int euTier) {
         SPINNER_RECIPES.recipeBuilder()

@@ -1893,25 +1893,6 @@ public class KeQingNET {
                 .output(ALGAE_FARM)
                 .duration(2000).EUt(480).buildAndRegister();
 
-
-        ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .inputs(HULL[4].getStackForm(16))
-                .input(circuit, Tier.EV, 8)
-                .input(ELECTRIC_PUMP_EV, 16)
-                .input(VOLTAGE_COIL_EV, 16)
-                .input(gear, HSSE, 16)
-                .input(NANO_CENTRAL_PROCESSING_UNIT, 4)
-                .input(wireFine, Platinum, 64)
-                .input(wireFine, TungstenSteel, 64)
-                .input(foil, Palladium, 32)
-                .fluidInputs(Zylon.getFluid(5706))
-                .scannerResearch(b -> b
-                        .researchStack(DISK_20.getStackForm())
-                        .duration(1200)
-                        .EUt(VA[EV]))
-                .output(COKING_TOWER)
-                .duration(2000).EUt(480).buildAndRegister();
-
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .inputs(HULL[5].getStackForm(16))
                 .input(circuit, Tier.IV, 8)

@@ -168,7 +168,7 @@ public class SwarmRecipeHandler {
 
         builder = SWARM_GROWTH.recipeBuilder()
                 .duration((int) Math.ceil(material.getMass() * totalInputAmount * 20))
-                .inputs(stackForm)
+                .notConsumable(stackForm)
                 .tier(getTIerByAmount(totalInputAmount))
                 .EUt(VA[LuV + getTIerByAmount(totalInputAmount)]);
 
@@ -230,7 +230,7 @@ public class SwarmRecipeHandler {
         builder3 = CW_LASER_ALLOY_RECIPES.recipeBuilder()
                 .blastFurnaceTemp(material.getBlastTemperature())
                 .duration(duration)
-                .inputs(stackForm)
+                .notConsumable(stackForm)
                 .EUt(EUt);
 
         switch (gasTier)

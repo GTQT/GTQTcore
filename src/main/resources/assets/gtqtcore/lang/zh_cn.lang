@@ -2592,6 +2592,7 @@ recipemap.steam_blast_furnace.name=蒸汽高炉
 recipemap.chemical_plant.name=高阶化学反应
 recipemap.i_modular_fission_reactor.name=模块化裂变
 recipemap.naquadah_reactor.name=硅岩反应
+recipemap.naquadah_reactor_rod.name=硅岩反应
 recipemap.rocket.name=火箭燃烧
 recipemap.turbine_combustion_chamber.name=爆燃空气发电
 gtqtcore.machine.steam_extractor.name=大型蒸汽提取机
@@ -4928,7 +4929,7 @@ gtqtcore.machine.large_naquadah_reactor.plasma_oxygen_boosted=等离子体催化
 gtqtcore.machine.large_naquadah_reactor.tooltip.boost=提供§f50 L/s§7的氧等离子体，并消耗§f双倍§7燃料以产生高达§f%s§7 EU/t的功率。
 gtqtcore.machine.large_naquadah_reactor.plasma_amount=等离子体存量：%s
 gtqtcore.machine.large_naquadah_reactor.boost_disallowed=升级你的动力仓以激活等离子体催化
-
+gtqtcore.universal.base_production_eut.oc=最大超频功率：§f%s§7 EU/t
 gtqtcore.machine.hyper_reactor_mk1.name=超能反应堆 Mk I
 gtqtcore.machine.hyper_reactor_mk1.tooltip=磁约束超能聚变
 gtqtcore.machine.hyper_reactor_mk1.tooltip.boost=提供§f100 L/s§7的铁等离子体，并消耗§f双倍§7燃料以产生高达§f%s§7 EU/t的功率。

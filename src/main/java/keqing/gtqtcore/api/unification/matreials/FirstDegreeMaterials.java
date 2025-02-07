@@ -3276,20 +3276,9 @@ public class FirstDegreeMaterials {
                 .build()
                 .setFormula("I?", true);
 
-        GTQTMaterials.Kerosene = new Material.Builder(getMaterialsId(), gregtechId("kerosene"))
-                .liquid()
-                .color(0xD570D5)
-                .iconSet(FLUID)
-                .build()
-                .setFormula("?", true);
+        getMaterialsId();
 
-        GTQTMaterials.Niter = new Material.Builder(getMaterialsId(), gregtechId("niter"))
-                .dust(1)
-                .color(16763080)
-                .flags(NO_SMASHING, NO_SMELTING)
-                .iconSet(FLINT)
-                .components(Saltpeter, 1)
-                .build();
+        getMaterialsId();
 
         Cellulose = new Material.Builder(getMaterialsId(), gregtechId("cellulose"))
                 .dust()

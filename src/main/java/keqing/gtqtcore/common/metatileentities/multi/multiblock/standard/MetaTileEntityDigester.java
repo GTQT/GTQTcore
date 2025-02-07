@@ -7,15 +7,13 @@ import codechicken.lib.vec.Cuboid6;
 import codechicken.lib.vec.Matrix4;
 import gregtech.api.GTValues;
 import gregtech.api.block.IHeatingCoilBlockStats;
-import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
-import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
-import gregtech.api.recipes.recipeproperties.IRecipePropertyStorage;
+import gregtech.api.recipes.RecipeMap;
 import gregtech.api.util.GTUtility;
 import gregtech.client.renderer.CubeRendererState;
 import gregtech.client.renderer.ICubeRenderer;
@@ -25,6 +23,7 @@ import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.BloomEffectUtil;
 import gregtech.client.utils.TooltipHelper;
 import gregtech.common.blocks.*;
+import keqing.gtqtcore.api.metaileentity.GTQTNoOCMultiblockController;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.block.state.IBlockState;
@@ -48,16 +47,19 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-import static gregtech.api.GTValues.VA;
-
-public class MetaTileEntityDigester extends RecipeMapMultiblockController {
+public class MetaTileEntityDigester extends GTQTNoOCMultiblockController {
     protected int heatingCoilLevel;
     protected int heatingCoilDiscount;
     private int coilTier;
 
     public MetaTileEntityDigester(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, GTQTcoreRecipeMaps.DIGESTER_RECIPES);
-        this.recipeMapWorkable = new MetaTileEntityDigesterWorkable(this);
+        super(metaTileEntityId, new RecipeMap[]{
+                GTQTcoreRecipeMaps.DIGESTER_RECIPES
+        });
+        //setMaxParallel(auto);
+        setMaxParallelFlag(true);
+        //setTimeReduce(auto);
+        setTimeReduceFlag(true);
     }
 
     private static IBlockState getCasingAState() {
@@ -104,12 +106,8 @@ public class MetaTileEntityDigester extends RecipeMapMultiblockController {
 
     @Override
     public void addInformation(ItemStack stack, @Nullable World player, @Nonnull List<String> tooltip, boolean advanced) {
-        super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("这是什么，塞进去煮煮", new Object[0]));
-        tooltip.add(I18n.format("gregtech.machine.gtqt.update.1"));
-        tooltip.add(I18n.format("gtqtcore.machine.progress_time","maxProgress * (100 - heatingCoilLevel) / 100"));
-        tooltip.add(I18n.format("gtqtcore.machine.modify_overclock","Coil Tier"));
-        tooltip.add(I18n.format("gtqtcore.machine.parallel.pow.custom",2,"Coil Tier",32));
+        super.addInformation(stack, player, tooltip, advanced);
     }
 
     @Nonnull
@@ -201,6 +199,8 @@ public class MetaTileEntityDigester extends RecipeMapMultiblockController {
             this.heatingCoilLevel = BlockWireCoil.CoilType.CUPRONICKEL.getLevel();
             this.heatingCoilDiscount = BlockWireCoil.CoilType.CUPRONICKEL.getEnergyDiscount();
         }
+        setMaxParallel(Math.min((int) Math.pow(2, heatingCoilLevel), 32));
+        setTimeReduce((100 - (Math.min(heatingCoilLevel, 15) * 5.0)) / 100);
     }
 
     @Override
@@ -221,34 +221,5 @@ public class MetaTileEntityDigester extends RecipeMapMultiblockController {
     @Override
     protected ICubeRenderer getFrontOverlay() {
         return GTQTTextures.COKING_TOWER_OVERLAY;
-    }
-
-    protected int getCoilTier() {
-        return this.coilTier;
-    }
-
-    protected class MetaTileEntityDigesterWorkable extends MultiblockRecipeLogic {
-
-
-        public MetaTileEntityDigesterWorkable(RecipeMapMultiblockController tileEntity) {
-            super(tileEntity);
-        }
-
-        @Override
-        public int getParallelLimit() {
-            return  Math.min((int) Math.pow(2, coilTier), 32);
-        }
-
-        public void setMaxProgress(int maxProgress) {
-            this.maxProgressTime = maxProgress * (100 - heatingCoilLevel) / 100;
-        }
-        protected void modifyOverclockPost(int[] resultOverclock, @Nonnull IRecipePropertyStorage storage) {
-            super.modifyOverclockPost(resultOverclock, storage);
-            int coilTier = ((MetaTileEntityDigester) this.metaTileEntity).getCoilTier();
-            if (coilTier > 0) {
-                resultOverclock[0] = (int) ((double) resultOverclock[0] * (100.0 - (double) coilTier) / 100);
-                resultOverclock[0] = Math.max(1, resultOverclock[0]);
-            }
-        }
     }
 }

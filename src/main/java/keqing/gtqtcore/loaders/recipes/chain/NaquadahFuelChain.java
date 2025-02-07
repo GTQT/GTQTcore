@@ -196,8 +196,8 @@ private static void ThoriumBasedLiquidFuelChain() {
     private static void FuelRefineChainOT() {
         NAQUADAH_REACTOR_RECIPES.recipeBuilder()
                 .fluidInputs(ThoriumFluidFuelExcited.getFluid(1))
-                .fluidOutputs(GTQTMaterials.ThoriumFluidFuelDepleted.getFluid(1))
-                .EUt(131072)
+                //.fluidOutputs(GTQTMaterials.ThoriumFluidFuelDepleted.getFluid(1))
+                .EUt((int) V[ZPM])
                 .duration(8)
                 .buildAndRegister();
 
@@ -215,8 +215,8 @@ private static void ThoriumBasedLiquidFuelChain() {
 
         NAQUADAH_REACTOR_RECIPES.recipeBuilder()
                 .fluidInputs(UraniumFluidFuelExcited.getFluid(1))
-                .fluidOutputs(GTQTMaterials.UraniumFluidFuelDepleted.getFluid(1))
-                .EUt(131072)
+                //.fluidOutputs(GTQTMaterials.UraniumFluidFuelDepleted.getFluid(1))
+                .EUt((int) V[ZPM])
                 .duration(10)
                 .buildAndRegister();
 
@@ -234,8 +234,8 @@ private static void ThoriumBasedLiquidFuelChain() {
 
         NAQUADAH_REACTOR_RECIPES.recipeBuilder()
                 .fluidInputs(PlutoniumFluidFuelExcited.getFluid(1))
-                .fluidOutputs(GTQTMaterials.PlutoniumFluidFuelDepleted.getFluid(1))
-                .EUt(131072)
+                //.fluidOutputs(GTQTMaterials.PlutoniumFluidFuelDepleted.getFluid(1))
+                .EUt((int) V[ZPM])
                 .duration(36)
                 .buildAndRegister();
 
@@ -788,63 +788,63 @@ private static void ThoriumBasedLiquidFuelChain() {
         NAQUADAH_REACTOR.recipeBuilder()
                 .input(screw, NaquadahEnriched)
                 .output(screw, Lead)
-                .EUt(8192)
+                .EUt((int) V[IV])
                 .duration(3000)
                 .buildAndRegister();
 
         NAQUADAH_REACTOR.recipeBuilder()
                 .input(screw, Naquadria)
                 .output(screw, Lead)
-                .EUt(8192)
+                .EUt((int) V[IV])
                 .duration(6000)
                 .buildAndRegister();
 
         NAQUADAH_REACTOR.recipeBuilder()
                 .input(stick, NaquadahEnriched)
                 .output(stick, Lead)
-                .EUt(8192)
+                .EUt((int) V[IV])
                 .duration(6000)
                 .buildAndRegister();
 
         NAQUADAH_REACTOR.recipeBuilder()
                 .input(stick, Naquadria)
                 .output(stick, Lead)
-                .EUt(8192)
+                .EUt((int) V[IV])
                 .duration(12000)
                 .buildAndRegister();
 
         NAQUADAH_REACTOR.recipeBuilder()
                 .input(stickLong, NaquadahEnriched)
                 .output(stickLong, Lead)
-                .EUt(8192)
+                .EUt((int) V[IV])
                 .duration(12000)
                 .buildAndRegister();
 
         NAQUADAH_REACTOR.recipeBuilder()
                 .input(stickLong, Naquadria)
                 .output(stickLong, Lead)
-                .EUt(8192)
+                .EUt((int) V[IV])
                 .duration(24000)
                 .buildAndRegister();
         //大硅岩
         //  Light Naquadah Fuel
         COMBUSTION_GENERATOR_FUELS.recipeBuilder()
                 .fluidInputs(LightNaquadahFuel.getFluid(1))
-                .EUt(8192)
+                .EUt((int) V[IV])
                 .duration(15)
                 .buildAndRegister();
 
         //  Medium Naquadah Fuel
         COMBUSTION_GENERATOR_FUELS.recipeBuilder()
                 .fluidInputs(MediumNaquadahFuel.getFluid(1))
-                .EUt(8192)
+                .EUt((int) V[IV])
                 .duration(30)
                 .buildAndRegister();
 
         //  Heavy Naquadah Fuel
         COMBUSTION_GENERATOR_FUELS.recipeBuilder()
                 .fluidInputs(HeavyNaquadahFuel.getFluid(1))
-                .EUt(8192)
+                .EUt((int) V[IV])
                 .duration(45)
                 .buildAndRegister();
 
@@ -852,28 +852,28 @@ private static void ThoriumBasedLiquidFuelChain() {
         NAQUADAH_REACTOR_RECIPES.recipeBuilder()
                 .fluidInputs(NaquadahFuelMKI.getFluid(1))
                 .fluidOutputs(GTQTMaterials.NaquadahResidueMKI.getFluid(1))
-                .EUt(131072)
+                .EUt((int) V[ZPM])
                 .duration(400)
                 .buildAndRegister();
 
         NAQUADAH_REACTOR_RECIPES.recipeBuilder()
                 .fluidInputs(NaquadahFuelMKII.getFluid(1))
-                .fluidOutputs(GTQTMaterials.NaquadahResidueMKII.getFluid(1))
-                .EUt(131072)
+                //.fluidOutputs(GTQTMaterials.NaquadahResidueMKII.getFluid(1))
+                .EUt((int) V[ZPM])
                 .duration(2000)
                 .buildAndRegister();
 
         NAQUADAH_REACTOR_RECIPES.recipeBuilder()
                 .fluidInputs(NaquadahFuelMKIII.getFluid(1))
-                .fluidOutputs(GTQTMaterials.NaquadahResidueMKIII.getFluid(1))
-                .EUt(131072)
+                //.fluidOutputs(GTQTMaterials.NaquadahResidueMKIII.getFluid(1))
+                .EUt((int) V[ZPM])
                 .duration(3600)
                 .buildAndRegister();
 
         NAQUADAH_REACTOR_RECIPES.recipeBuilder()
                 .fluidInputs(NaquadahFuelMKIV.getFluid(1))
-                .fluidOutputs(GTQTMaterials.NaquadahResidueMKIV.getFluid(1))
-                .EUt(131072)
+                //.fluidOutputs(GTQTMaterials.NaquadahResidueMKIV.getFluid(1))
+                .EUt((int) V[ZPM])
                 .duration(5200)
                 .buildAndRegister();
 

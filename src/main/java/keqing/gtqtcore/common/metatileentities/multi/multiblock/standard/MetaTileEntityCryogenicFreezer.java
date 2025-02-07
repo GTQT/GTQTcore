@@ -2,25 +2,26 @@ package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
 import gregtech.api.GTValues;
 import gregtech.api.capability.IMultipleTankHandler;
-import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockDisplayText;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.*;
+import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
-import gregtech.api.recipes.recipeproperties.IRecipePropertyStorage;
 import gregtech.api.util.BlockInfo;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.TextComponentUtil;
 import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
+import gregtech.client.utils.TooltipHelper;
 import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.MetaTileEntities;
 import gregtech.core.sound.GTSoundEvents;
+import keqing.gtqtcore.api.metaileentity.GTQTNoOCMultiblockController;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.BlockCoolingCoil;
@@ -42,13 +43,15 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.*;
 import java.util.function.Supplier;
 
 import static keqing.gtqtcore.api.unification.GTQTMaterials.GelidCryotheum;
 
 //冰箱
-public class MetaTileEntityCryogenicFreezer extends RecipeMapMultiblockController {
+public class MetaTileEntityCryogenicFreezer extends GTQTNoOCMultiblockController {
     private static final Supplier<TraceabilityPredicate> COOLING_COILS = () -> new TraceabilityPredicate(blockWorldState -> {
         IBlockState state = blockWorldState.getBlockState();
         if (state.getBlock() instanceof BlockCoolingCoil) {
@@ -66,12 +69,20 @@ public class MetaTileEntityCryogenicFreezer extends RecipeMapMultiblockControlle
             .map(type -> new BlockInfo(GTQTMetaBlocks.blockCoolingCoil.getState(type)))
             .toArray(BlockInfo[]::new)
     );
-    private final FluidStack GELID_STACK = GelidCryotheum.getFluid(2);
+    private final FluidStack GELID_STACK = GelidCryotheum.getFluid(1);
     private int temperature;
 
     public MetaTileEntityCryogenicFreezer(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, RecipeMaps.VACUUM_RECIPES);
+        super(metaTileEntityId, new RecipeMap[]{
+                RecipeMaps.VACUUM_RECIPES
+        });
+
         this.recipeMapWorkable = new CryogenicFreezerRecipeLogic(this);
+
+        //setMaxParallel(auto);
+        setMaxParallelFlag(true);
+        //setTimeReduce(auto);
+        setTimeReduceFlag(true);
     }
 
     public static TraceabilityPredicate coolingCoils() {
@@ -154,14 +165,9 @@ public class MetaTileEntityCryogenicFreezer extends RecipeMapMultiblockControlle
     }
 
     @Override
-    public void addInformation(ItemStack stack,
-                               World player,
-                               List<String> tooltip,
-                               boolean advanced) {
+    public void addInformation(ItemStack stack, @Nullable World player, @Nonnull List<String> tooltip, boolean advanced) {
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("大厂冻，小厂烧", new Object[0]));
         super.addInformation(stack, player, tooltip, advanced);
-        tooltip.add(I18n.format("gtqtcore.machine.cryogenic_freezer.tooltip.1"));
-        tooltip.add(I18n.format("gtqtcore.machine.cryogenic_freezer.tooltip.2"));
-        tooltip.add(I18n.format("gtqtcore.machine.cryogenic_freezer.tooltip.3"));
     }
 
     @Override
@@ -221,6 +227,8 @@ public class MetaTileEntityCryogenicFreezer extends RecipeMapMultiblockControlle
         } else {
             this.temperature = BlockCoolingCoil.CoolingCoilType.MANGANESE_IRON_ARSENIC_PHOSPHIDE.coilTemperature;
         }
+        setMaxParallel((int) Math.pow(4, getCoilTier()));
+        setTimeReduce((100 - getCoilTier() * 10.0) / 100);
     }
 
     public int getCoilTier() {
@@ -236,41 +244,13 @@ public class MetaTileEntityCryogenicFreezer extends RecipeMapMultiblockControlle
         this.temperature = Integer.MAX_VALUE;
     }
 
-    protected class CryogenicFreezerRecipeLogic extends MultiblockRecipeLogic {
+    protected class CryogenicFreezerRecipeLogic extends GTQTMultiblockLogic {
 
         private final MetaTileEntityCryogenicFreezer freezer;
 
         public CryogenicFreezerRecipeLogic(RecipeMapMultiblockController tileEntity) {
             super(tileEntity);
             this.freezer = (MetaTileEntityCryogenicFreezer) tileEntity;
-        }
-
-        @Override
-        protected void modifyOverclockPost(int[] resultOverclock, IRecipePropertyStorage storage) {
-            super.modifyOverclockPost(resultOverclock, storage);
-
-            int coilTier = ((MetaTileEntityCryogenicFreezer) metaTileEntity).getCoilTier();
-            if (coilTier == -1)
-                return;
-
-            if (coilTier == 0) {
-                // 75% speed with cupronickel (coilTier = 0)
-                resultOverclock[1] = 4 * resultOverclock[1] / 3;
-            } else {
-                // each coil above kanthal (coilTier = 1) is 50% faster
-                resultOverclock[1] = resultOverclock[1] * 2 / coilTier;
-            }
-
-            resultOverclock[1] = Math.max(1, resultOverclock[1]);
-        }
-
-        public void setMaxProgress(int maxProgress) {
-            this.maxProgressTime = maxProgressTime / 8;
-        }
-
-        @Override
-        public int getParallelLimit() {
-            return 64;
         }
 
         @Override

@@ -16,6 +16,7 @@ import gregtech.api.pattern.MultiblockShapeInfo;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
+import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.recipes.logic.OverclockingLogic;
 import gregtech.api.recipes.recipeproperties.IRecipePropertyStorage;
 import gregtech.api.recipes.recipeproperties.TemperatureProperty;
@@ -27,6 +28,7 @@ import gregtech.client.utils.TooltipHelper;
 import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.metatileentities.MetaTileEntities;
+import keqing.gtqtcore.api.metaileentity.GTQTNoOCMultiblockController;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
@@ -53,17 +55,21 @@ import java.util.List;
 
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.DRYER_RECIPES;
 
-public class MetaTileEntityVacuumDryingFurnace extends MultiMapMultiblockController implements IHeatingCoil {
+public class MetaTileEntityVacuumDryingFurnace extends GTQTNoOCMultiblockController implements IHeatingCoil {
 
     int tier;
     private int temperature;
 
     public MetaTileEntityVacuumDryingFurnace(ResourceLocation metaTileEntityId) {
+
         super(metaTileEntityId, new RecipeMap[]{
-                GTQTcoreRecipeMaps.VACUUM_DRYING_FURNACE_RECIPES,
-                DRYER_RECIPES
+                GTQTcoreRecipeMaps.DRYER_RECIPES,
+                GTQTcoreRecipeMaps.VACUUM_DRYING_FURNACE_RECIPES
         });
-        this.recipeMapWorkable = new VacuumDryingFurnaceWorkableHandler(this);
+        //setMaxParallel(auto);
+        setMaxParallelFlag(true);
+        //setTimeReduce(auto);
+        setTimeReduceFlag(true);
     }
 
     @Nonnull
@@ -96,6 +102,9 @@ public class MetaTileEntityVacuumDryingFurnace extends MultiMapMultiblockControl
             this.temperature = BlockWireCoil.CoilType.CUPRONICKEL.getCoilTemperature();
 
         this.temperature += 100 * Math.max(0, GTUtility.getTierByVoltage(getEnergyContainer().getInputVoltage()) - GTValues.MV);
+
+        setMaxParallel(Math.min((int) Math.pow(2, tier),64));
+        setTimeReduce( (100 - (Math.min(tier,15) * 5.0)) /100);
     }
 
     @Override
@@ -131,12 +140,8 @@ public class MetaTileEntityVacuumDryingFurnace extends MultiMapMultiblockControl
 
     @Override
     public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, boolean advanced) {
-        super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("顶级桑拿", new Object[0]));
-        tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.1"));
-        tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.2"));
-        tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.3"));
-        tooltip.add(I18n.format("gtqtcore.machine.parallel.pow.machineTier", 2, 32));
+        super.addInformation(stack, player, tooltip, advanced);
     }
 
     @SideOnly(Side.CLIENT)
@@ -196,25 +201,5 @@ public class MetaTileEntityVacuumDryingFurnace extends MultiMapMultiblockControl
                     }
                 });
         return shapeInfo;
-    }
-
-    private class VacuumDryingFurnaceWorkableHandler extends MultiblockRecipeLogic {
-        public VacuumDryingFurnaceWorkableHandler(RecipeMapMultiblockController tileEntity) {
-            super(tileEntity);
-        }
-
-        @Override
-        public int getParallelLimit() {
-            return (int) Math.pow(2, tier);
-        }
-
-        protected void modifyOverclockPre(int[] values, IRecipePropertyStorage storage) {
-            super.modifyOverclockPre(values, storage);
-            values[0] = OverclockingLogic.applyCoilEUtDiscount(values[0], ((IHeatingCoil) this.metaTileEntity).getCurrentTemperature(), storage.getRecipePropertyValue(TemperatureProperty.getInstance(), 0));
-        }
-
-        protected int[] runOverclockingLogic(IRecipePropertyStorage propertyStorage, int recipeEUt, long maxVoltage, int duration, int amountOC) {
-            return OverclockingLogic.heatingCoilOverclockingLogic(Math.abs(recipeEUt), maxVoltage, duration, amountOC, ((IHeatingCoil) this.metaTileEntity).getCurrentTemperature(), propertyStorage.getRecipePropertyValue(TemperatureProperty.getInstance(), 0));
-        }
     }
 }

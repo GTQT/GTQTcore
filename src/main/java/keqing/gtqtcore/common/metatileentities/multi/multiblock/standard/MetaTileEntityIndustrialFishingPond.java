@@ -26,6 +26,7 @@ import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.util.GTTransferUtils;
 import gregtech.api.util.GTUtility;
 import gregtech.client.renderer.ICubeRenderer;
+import gregtech.client.utils.TooltipHelper;
 import keqing.gtqtcore.api.capability.impl.FishPondLogic;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
@@ -336,6 +337,7 @@ public class MetaTileEntityIndustrialFishingPond extends MultiblockWithDisplayBa
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("深海鱼油", new Object[0]));
         tooltip.add(net.minecraft.client.resources.I18n.format("gtqtcore.tooltip.warning"));
 
     }

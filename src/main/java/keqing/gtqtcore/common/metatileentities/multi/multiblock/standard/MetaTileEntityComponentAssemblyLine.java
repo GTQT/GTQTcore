@@ -17,6 +17,7 @@ import gregtech.api.recipes.Recipe;
 import gregtech.api.unification.material.Materials;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
+import gregtech.client.utils.TooltipHelper;
 import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.BlockGlassCasing;
 import gregtech.common.blocks.BlockMultiblockCasing;
@@ -294,6 +295,7 @@ public class MetaTileEntityComponentAssemblyLine extends RecipeMapMultiblockCont
     @Override
     public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("不是什么组装机", new Object[0]));
         tooltip.add(I18n.format("gtqtcore.machine.component_assembly_line.tooltip.1"));
         tooltip.add(I18n.format("gtqtcore.machine.component_assembly_line.tooltip.2"));
         tooltip.add(I18n.format("gtqtcore.machine.component_assembly_line.tooltip.3"));

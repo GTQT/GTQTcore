@@ -11,6 +11,8 @@ import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
+import gregtech.api.recipes.RecipeMap;
+import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.recipes.recipeproperties.IRecipePropertyStorage;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
@@ -20,6 +22,7 @@ import gregtech.common.blocks.BlockWireCoil;
 import gregtech.core.sound.GTSoundEvents;
 import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
+import keqing.gtqtcore.api.metaileentity.GTQTRecipeMapMultiblockController;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.utils.GTQTUtil;
@@ -41,7 +44,7 @@ import java.util.List;
 
 import static gregtech.api.GTValues.V;
 
-public class MetaTileEntityIntegratedMiningDivision extends RecipeMapMultiblockController {
+public class MetaTileEntityIntegratedMiningDivision extends GTQTRecipeMapMultiblockController {
 
     protected int glass_tier;
     protected int tubeTier;
@@ -50,8 +53,17 @@ public class MetaTileEntityIntegratedMiningDivision extends RecipeMapMultiblockC
     protected int tier;
 
     public MetaTileEntityIntegratedMiningDivision(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, GTQTcoreRecipeMaps.INTEGRATED_MINING_DIVISION);
-        this.recipeMapWorkable = new MetaTileEntityIntegratedMiningDivisionrWorkable(this);
+        super(metaTileEntityId, new RecipeMap[]{
+                GTQTcoreRecipeMaps.INTEGRATED_MINING_DIVISION
+        });
+        setTierFlag(true);
+        //setTier(auto);
+        setMaxParallel(64);
+        setMaxParallelFlag(true);
+        //setMaxVoltage(auto);
+        setMaxVoltageFlag(true);
+        //setTimeReduce(none);
+        setTimeReduceFlag(false);
     }
 
     @Override
@@ -75,13 +87,8 @@ public class MetaTileEntityIntegratedMiningDivision extends RecipeMapMultiblockC
 
     @Override
     public void addInformation(ItemStack stack, @Nullable World player, @Nonnull List<String> tooltip, boolean advanced) {
-        super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("矿石所需要的唯一", new Object[0]));
-        tooltip.add(I18n.format("gregtech.machine.gtqt.update.1"));
-        tooltip.add(I18n.format("gregtech.machine.gtqt.update.2"));
-        tooltip.add(I18n.format("gtqtcore.machine.modify_overclock","Glass Tier"));
-        tooltip.add(I18n.format("gtqtcore.machine.parallel.pow.machineTier", 2, 128));
-        tooltip.add(I18n.format("gtqtcore.machine.max_voltage"));
+        super.addInformation(stack, player, tooltip, advanced);
     }
 
     @Nonnull
@@ -111,12 +118,6 @@ public class MetaTileEntityIntegratedMiningDivision extends RecipeMapMultiblockC
                 .where('G', TiredTraceabilityPredicate.CP_LGLASS.get())
                 .build();
     }
-
-    @Override
-    public String[] getDescription() {
-        return new String[]{I18n.format("gtqt.tooltip.update")};
-    }
-
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
@@ -138,6 +139,9 @@ public class MetaTileEntityIntegratedMiningDivision extends RecipeMapMultiblockC
                 0);
 
         this.tier = Math.min(this.casingTier, this.tubeTier);
+
+        setTier(Math.min(this.casingTier, this.tubeTier));
+        setMaxVoltage(Math.min(this.casingTier, this.tubeTier));
 
         this.writeCustomData(GTQTValue.UPDATE_TIER7, buf -> buf.writeInt(this.casingTier));
     }
@@ -200,7 +204,6 @@ public class MetaTileEntityIntegratedMiningDivision extends RecipeMapMultiblockC
             }
         }
     }
-
     @Override
     public SoundEvent getBreakdownSound() {
         return GTSoundEvents.BREAKDOWN_ELECTRICAL;
@@ -218,34 +221,4 @@ public class MetaTileEntityIntegratedMiningDivision extends RecipeMapMultiblockC
         return true;
     }
 
-    protected class MetaTileEntityIntegratedMiningDivisionrWorkable extends MultiblockRecipeLogic {
-
-        public MetaTileEntityIntegratedMiningDivisionrWorkable(RecipeMapMultiblockController tileEntity) {
-            super(tileEntity);
-        }
-
-        @Override
-        public int getParallelLimit() {
-            return Math.min((int) Math.pow(2, casingTier-1), 128);
-        }
-
-        @Override
-        protected void modifyOverclockPost(int[] resultOverclock, IRecipePropertyStorage storage) {
-            super.modifyOverclockPost(resultOverclock, storage);
-            if (glass_tier <= 0)
-                return;
-
-            resultOverclock[0] *= 1.0f - glass_tier * 0.05; // each coil above cupronickel (coilTier = 0) uses 10% less
-            // energy
-            resultOverclock[0] = Math.max(1, resultOverclock[0]);
-        }
-        @Override
-        public long getMaxVoltage() {
-            return Math.min(super.getMaxVoltage(), V[tier]);
-        }
-        @Override
-        protected long getMaxParallelVoltage() {
-            return super.getMaxVoltage();
-        }
-    }
 }
