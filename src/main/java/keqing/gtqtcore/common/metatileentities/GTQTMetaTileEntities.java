@@ -382,6 +382,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityIndustrialHammer INDUSTRIAL_HAMMER;
     public static MetaTileEntityIndustrialFurnace INDUSTRIAL_FURNACE;
     public static MetaTileEntityIndustrialAssemblyLine INDUSTRIAL_ASSEMBLY_LINE;
+    public static MetaTileEntityIndustrialChemicalReactor INDUSTRIAL_CHEMICAL_REACTOR;
     public static MetaTileEntityCoreMacerator CORE_MACERATOR;
     public static MetaTileEntityCoreCentrifuge CORE_CENTRIFUGE;
     public static MetaTileEntityCoreMix CORE_MIX;
@@ -547,6 +548,7 @@ public class GTQTMetaTileEntities {
         INDUSTRIAL_WIREMILL = registerMetaTileEntity(3133, new MetaTileEntityIndustrialWireMill(gtqtcoreId("industrial_wiremill")));
         INDUSTRIAL_EXTRUDER = registerMetaTileEntity(3134, new MetaTileEntityIndustrialExtruder(gtqtcoreId("industrial_extruder")));
         INDUSTRIAL_ASSEMBLY_LINE = registerMetaTileEntity(3135, new MetaTileEntityIndustrialAssemblyLine(gtqtcoreId("industrial_assembly_line")));
+        INDUSTRIAL_CHEMICAL_REACTOR = registerMetaTileEntity(3136, new MetaTileEntityIndustrialChemicalReactor(gtqtcoreId("industrial_chemical_reactor")));
         //正常设备
         DISSOLUTION_TANK = registerMetaTileEntity(3150, new MetaTileEntityDissolutionTank(gtqtcoreId("dissolution_tank")));
         BLAZING_BLAST_FURNACE = registerMetaTileEntity(3151, new MetaTileEntityBlazingBlastFurnace(gtqtcoreId("blazing_blast_furnace")));

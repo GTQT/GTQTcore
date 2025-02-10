@@ -75,6 +75,7 @@ public class GTQTTextures {
     public static SimpleOverlayRenderer IncoloyMA813 = new SimpleOverlayRenderer("multiblock/advblock/incoloy_ma_813");
     public static SimpleOverlayRenderer HastelloyX78 = new SimpleOverlayRenderer("multiblock/advblock/hastelloy_x_78");
     public static SimpleOverlayRenderer HastelloyK243 = new SimpleOverlayRenderer("multiblock/advblock/hastelloy_k_243");
+    public static SimpleOverlayRenderer alloy_melting = new SimpleOverlayRenderer("multiblock/casings/alloy_melting");
 
     public static SimpleOverlayRenderer eglin_steel = new SimpleOverlayRenderer("multiblock/advblock/eglin_steel");
     public static SimpleOverlayRenderer grisium = new SimpleOverlayRenderer("multiblock/advblock/grisium");

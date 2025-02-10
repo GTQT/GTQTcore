@@ -68,10 +68,6 @@ public class MetaTileEntityDangoteDistillery extends MultiMapMultiblockControlle
         this.handler = new DistillationTowerLogicHandler(this);
     }
 
-    private static IBlockState getCasingState2() {
-        return MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.TUNGSTENSTEEL_PIPE);
-    }
-
     @Override
     public boolean canBeDistinct() {
         return true;

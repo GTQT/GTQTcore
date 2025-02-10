@@ -4,8 +4,10 @@ import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
 import codechicken.lib.vec.Vector3;
-import gregtech.api.capability.GregtechDataCodes;
-import gregtech.api.capability.IDataAccessHatch;
+import gregtech.api.capability.*;
+import gregtech.api.capability.impl.EnergyContainerList;
+import gregtech.api.capability.impl.FluidTankList;
+import gregtech.api.capability.impl.ItemHandlerList;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.IDataInfoProvider;
 import gregtech.api.metatileentity.MetaTileEntity;
@@ -15,8 +17,10 @@ import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
+import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.pattern.TraceabilityPredicate;
 import gregtech.api.recipes.Recipe;
+import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.recipes.ingredients.GTRecipeInput;
 import gregtech.api.recipes.recipeproperties.ResearchProperty;
@@ -31,6 +35,10 @@ import gregtech.common.blocks.BlockGlassCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiFluidHatch;
 import gregtech.core.sound.GTSoundEvents;
+import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
+import keqing.gtqtcore.api.metaileentity.GTQTNoTierMultiblockController;
+import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
+import keqing.gtqtcore.api.utils.GTQTUniversUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import net.minecraft.block.state.IBlockState;
@@ -47,6 +55,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.IItemHandlerModifiable;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.function.Function;
@@ -54,13 +63,15 @@ import java.util.function.Function;
 import static gregtech.api.GTValues.UV;
 import static gregtech.api.util.GTUtility.getTierByVoltage;
 import static gregtech.api.util.GTUtility.gregtechId;
+import static keqing.gtqtcore.api.utils.GTQTUtil.getAccelerateByCWU;
 import static keqing.gtqtcore.common.block.blocks.BlockActiveUniqueCasing.ActiveCasingType.ADVANCED_ASSEMBLY_CONTROL_CASING;
 import static keqing.gtqtcore.common.block.blocks.BlockActiveUniqueCasing.ActiveCasingType.ADVANCED_ASSEMBLY_LINE_CASING;
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4.TurbineCasingType.ADVANCED_FILTER_CASING;
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4.TurbineCasingType.IRIDIUM_CASING;
 
-public class MetaTileEntityAdvancedAssemblyLine extends RecipeMapMultiblockController {
-
+public class MetaTileEntityAdvancedAssemblyLine extends GTQTNoTierMultiblockController implements IOpticalComputationReceiver {
+    int requestCWUt;
+    private IOpticalComputationProvider computationProvider;
     private static final ResourceLocation LASER_LOCATION = gregtechId("textures/fx/laser/laser.png");
     private static final ResourceLocation LASER_HEAD_LOCATION = gregtechId("textures/fx/laser/laser_start.png");
     @SideOnly(Side.CLIENT)
@@ -68,8 +79,25 @@ public class MetaTileEntityAdvancedAssemblyLine extends RecipeMapMultiblockContr
     private int beamCount;
 
     public MetaTileEntityAdvancedAssemblyLine(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, RecipeMaps.ASSEMBLY_LINE_RECIPES);
+        super(metaTileEntityId, new RecipeMap[]{RecipeMaps.ASSEMBLY_LINE_RECIPES});
         this.recipeMapWorkable = new AdvancedAssemblyLineRecipeLogic(this);
+
+        //setMaxParallel(auto);
+        setMaxParallelFlag(true);
+
+        //setTimeReduce(auto);
+        setTimeReduceFlag(true);
+    }
+    @Override
+    public void updateFormedValid() {
+        super.updateFormedValid();
+        if (isStructureFormed() && isActive()) {
+            requestCWUt = computationProvider.requestCWUt(2048, false);
+        }
+    }
+    @Override
+    public IOpticalComputationProvider getComputationProvider() {
+        return this.computationProvider;
     }
 
     private static IBlockState getCasingState() {
@@ -148,7 +176,11 @@ public class MetaTileEntityAdvancedAssemblyLine extends RecipeMapMultiblockContr
                 .where('Y', states(getCasingState())
                         .or(abilities(MultiblockAbility.INPUT_ENERGY)
                                 .setMinGlobalLimited(1)
-                                .setMaxGlobalLimited(3)))
+                                .setMaxGlobalLimited(3))
+                        .or(abilities(MultiblockAbility.INPUT_LASER)
+                                .setMaxGlobalLimited(1))
+                        .or(abilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION).setExactLimit(1))
+                )
                 .where('I', abilities(MultiblockAbility.IMPORT_ITEMS))
                 .where('G', states(getGrateState()))
                 .where('A', states(getUniqueCasingState()))
@@ -158,7 +190,18 @@ public class MetaTileEntityAdvancedAssemblyLine extends RecipeMapMultiblockContr
                 .where(' ', any())
                 .build();
     }
+    @Override
+    protected void formStructure(PatternMatchContext context) {
+        super.formStructure(context);
 
+        List<IOpticalComputationHatch> providers = this.getAbilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION);
+        if (providers != null && !providers.isEmpty()) {
+            this.computationProvider = providers.get(0);
+        }
+
+        setMaxParallel(4*getTierByVoltage(recipeMapWorkable.getMaxVoltage()));
+        setTimeReduce(0.8);
+    }
     protected OrientedOverlayRenderer getFrontOverlay() {
         return Textures.FUSION_REACTOR_OVERLAY;
     }
@@ -166,7 +209,16 @@ public class MetaTileEntityAdvancedAssemblyLine extends RecipeMapMultiblockContr
     protected Function<BlockPos, Integer> multiblockPartSorter() {
         return RelativeDirection.LEFT.getSorter(this.getFrontFacing(), this.getUpwardsFacing(), this.isFlipped());
     }
-
+    @Override
+    protected void initializeAbilities() {
+        this.inputInventory = new ItemHandlerList(this.getAbilities(MultiblockAbility.IMPORT_ITEMS));
+        this.inputFluidInventory = new FluidTankList(this.allowSameFluidFillForOutputs(), this.getAbilities(MultiblockAbility.IMPORT_FLUIDS));
+        this.outputInventory = new ItemHandlerList(this.getAbilities(MultiblockAbility.EXPORT_ITEMS));
+        this.outputFluidInventory = new FluidTankList(this.allowSameFluidFillForOutputs(), this.getAbilities(MultiblockAbility.EXPORT_FLUIDS));
+        List<IEnergyContainer> energyContainer = new ArrayList<>(this.getAbilities(MultiblockAbility.INPUT_ENERGY));
+        energyContainer.addAll(this.getAbilities(MultiblockAbility.INPUT_LASER));
+        this.energyContainer = new EnergyContainerList(energyContainer);
+    }
     @SideOnly(Side.CLIENT)
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
         if (iMultiblockPart != null) {
@@ -359,11 +411,8 @@ public class MetaTileEntityAdvancedAssemblyLine extends RecipeMapMultiblockContr
         tooltip.add(I18n.format("gtqtcore.machine.advanced_assembly_line.tooltip.2"));
         tooltip.add(I18n.format("gtqtcore.machine.advanced_assembly_line.tooltip.3"));
         tooltip.add(I18n.format("gtqtcore.machine.advanced_assembly_line.tooltip.4"));
-        tooltip.add(I18n.format("gtqtcore.machine.advanced_assembly_line.tooltip.5"));
-        tooltip.add(I18n.format("gtqtcore.universal.tooltip.get_parallel_by_voltage"));
-        tooltip.add(I18n.format("gtqtcore.machine.advanced_assembly_line.tooltip.6"));
-        tooltip.add(I18n.format("gtqtcore.machine.advanced_assembly_line.tooltip.7"));
-
+        tooltip.add(I18n.format("gtqtcore.multiblock.kq.acc.tooltip"));
+        tooltip.add(I18n.format("本机器允许使用激光能源仓代替能源仓！"));
         if (ConfigHolder.machines.orderedAssembly && ConfigHolder.machines.orderedFluidAssembly) {
             tooltip.add(I18n.format("gregtech.machine.assembly_line.tooltip_ordered_both"));
         } else if (ConfigHolder.machines.orderedAssembly) {
@@ -382,17 +431,7 @@ public class MetaTileEntityAdvancedAssemblyLine extends RecipeMapMultiblockContr
 
         @Override
         public void setMaxProgress(int maxProgress) {
-            this.maxProgressTime = (int) (0.8 * maxProgress);
-        }
-
-        @Override
-        public int getParallelLimit() {
-            int tier = getTierByVoltage(getMaxVoltage());
-            if (tier <= UV) {
-                return 4;
-            } else {
-                return (int) (Math.pow(2, tier - 8) + 4);
-            }
+            super.setMaxProgress((int) (maxProgress * getAccelerateByCWU(requestCWUt)));
         }
     }
 }

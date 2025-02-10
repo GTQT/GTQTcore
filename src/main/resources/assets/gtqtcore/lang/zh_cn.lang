@@ -1054,6 +1054,7 @@ gtqtcore.machine.industrial_bender.name=工业卷板机
 gtqtcore.machine.industrial_wiremill.name=工业轧线机
 gtqtcore.machine.industrial_extruder.name=工业压模机
 gtqtcore.machine.industrial_assembly_line.name=工业装配线
+gtqtcore.machine.industrial_chemical_reactor.name=工业化学反应釜
 
 gtqtcore.machine.core_crusher.name=工业破壁机
 gtqtcore.machine.core_centrifuge.name=工业离心机
@@ -4861,6 +4862,7 @@ gtqtcore.machine.energy_substation.average_out_hover=储能塔内部的平均功
 gtqtcore.multiblock.ak.temp=温度过低，请加岩浆
 recipemap.alloy_klin.name=合金窑
 tile.multiblock_casing3.naquadah_alloy_casing.name=超稳定硅岩合金机器外壳
+tile.multiblock_casing3.alloy_melting.name=高温抗辐射熔炼外壳
 tile.multiblock_casing3.naquadria_casing.name=抗辐射超能硅岩机器外壳
 tile.multiblock_casing3.nitinol_machine_casing.name=镍钛诺机械外壳
 tile.multiblock_casing3.eglin_steel.name=高强度埃格林钢机器外壳
@@ -4919,9 +4921,6 @@ gtqtcore.machine.advanced_assembly_line.tooltip.1=超高精度装配线
 gtqtcore.machine.advanced_assembly_line.tooltip.2=效率碾压同等级装配线！
 gtqtcore.machine.advanced_assembly_line.tooltip.3=允许使用§r任意等级§7的输入总线
 gtqtcore.machine.advanced_assembly_line.tooltip.4=每一片中的输入总线§c只能§7输入同一种物品，否则会导致停机
-gtqtcore.machine.advanced_assembly_line.tooltip.5=运行配方时，运行时间减少至原本配方时间的0.8倍
-gtqtcore.machine.advanced_assembly_line.tooltip.6=输入小于等于§3UV§7级的电压时，始终获得§e4§7次并行。
-gtqtcore.machine.advanced_assembly_line.tooltip.7=输入大于等于§4UHV§7级的电压时，始终获得§e(2^(电压等级 - 8) + 4)§7次并行。
 
 gtqtcore.machine.large_naquadah_reactor.name=大型硅岩反应堆
 gtqtcore.machine.large_naquadah_reactor.tooltip=取之不尽，用之不竭

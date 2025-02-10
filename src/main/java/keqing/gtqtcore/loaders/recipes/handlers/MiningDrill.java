@@ -203,7 +203,7 @@ public class MiningDrill {
                     .chancedOutput(Item, 5000, 500)
                     .tier(kind)
                     .EUt(30)
-                    .duration(250)
+                    .duration(500)
                     .buildAndRegister();
 
     }

@@ -26,7 +26,7 @@ public class ItemRegistry {
                 .setCreativeTab(GTQTCore_TO);
         event.getRegistry().register(LARGE_PORTABLE_CELL_2048);
 
-        LARGE_PORTABLE_CELL_8192 = new ToolPortableCellLarge(8192,127);
+        LARGE_PORTABLE_CELL_8192 = new ToolPortableCellLarge(8192,63);
         LARGE_PORTABLE_CELL_8192
                 .setRegistryName(MODID, "large_portable_cell_8192")
                 .setTranslationKey("large_portable_cell_8192")

@@ -85,6 +85,12 @@
         "textures": {
           "all": "gregtech:blocks/multiblock/casings/naquadria_casing"
         }
+      },
+      "alloy_melting": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casings/alloy_melting"
+        }
       }
     }
   }

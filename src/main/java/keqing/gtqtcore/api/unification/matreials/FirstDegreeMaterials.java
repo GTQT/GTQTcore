@@ -3208,10 +3208,10 @@ public class FirstDegreeMaterials {
 
         GTQTMaterials.Caliche = new Material.Builder(getMaterialsId(), gregtechId("caliche"))
                 .dust(3)
-                .color(0xeb9e3f).ore()
-                .flags(DISABLE_DECOMPOSITION)
+                .color(0xeb9e3f)
+                .ore()
                 .iconSet(DULL)
-                .components(SodiumNitrate, 1, Potassium, 1, Nitrogen, 1, Oxygen, 3, RockSalt, 1, Sodium, 1, Iodine, 1, Oxygen, 3)
+                .components(SodiumNitrate, 1, Potassium, 1, RockSalt, 1, Sodium, 1, Iodine, 1)
                 .build();
 
         GTQTMaterials.CalicheIodateBrine = new Material.Builder(getMaterialsId(), gregtechId("caliche_iodate_brine"))

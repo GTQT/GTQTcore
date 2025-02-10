@@ -253,7 +253,7 @@ public class GTQTMachineCasingMaterials {
                 .fluid()
                 .color(0x6BA3E3)
                 .iconSet(SHINY)
-                .blast(12280, GasTier.HIGHER)
+                .blast(8280, GasTier.HIGHER)
                 .components(NaquadahAlloy, 10, Rhenium, 5, Naquadria, 4, Gadolinium, 3, Strontium, 2, Polonium, 3, Rutherfordium, 2, Fermium, 1)
                 .flags(GENERATE_PLATE, GENERATE_ROD, GENERATE_RING, GENERATE_BOLT_SCREW, GENERATE_GEAR, GENERATE_ROTOR,
                         GENERATE_FRAME,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROUND,GENERATE_SMALL_GEAR
@@ -268,7 +268,7 @@ public class GTQTMachineCasingMaterials {
                 .fluid()
                 .color(0xa4ff70)
                 .iconSet(BRIGHT)
-                .blast(12400, GasTier.HIGHER)
+                .blast(8400, GasTier.HIGHER)
                 .components(HastelloyX78, 5, NiobiumNitride, 2, Tritanium, 4, TungstenCarbide, 4, Promethium, 4, Mendelevium, 1)
                 .flags(GENERATE_PLATE, GENERATE_ROD, GENERATE_RING, GENERATE_BOLT_SCREW, GENERATE_GEAR, GENERATE_ROTOR,
                         GENERATE_FRAME,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROUND,GENERATE_SMALL_GEAR

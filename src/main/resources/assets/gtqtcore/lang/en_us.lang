@@ -1062,6 +1062,7 @@ gtqtcore.machine.industrial_bender.name=Industrial Plate Bending Machine
 gtqtcore.machine.industrial_wiremill.name=Industrial Wire Drawing Machine
 gtqtcore.machine.industrial_extruder.name=Industrial Extrusion Machine
 gtqtcore.machine.industrial_assembly_line.name=Industrial Assembly Line
+gtqtcore.machine.industrial_chemical_reactor.name=Industrial Chemical Reactors
 
 gtqtcore.machine.core_crusher.name=Industrial Crusher
 gtqtcore.machine.core_centrifuge.name=Industrial Centrifuge
@@ -4681,6 +4682,7 @@ gtqtcore.machine.energy_substation.average_out_hover=Average Power Output (inclu
 gtqtcore.multiblock.ak.temp=Temperature too low, please add lava
 recipemap.alloy_klin.name=Alloy Kiln
 tile.multiblock_casing3.naquadah_alloy_casing.name=Superstable Naquadah Alloy Machine Casing
+tile.multiblock_casing3.alloy_melting.name=High-temperature radiation-resistant smelting shell
 tile.multiblock_casing3.naquadria_casing.name=Anti-Radiation Superenergy Naquadria Machine Casing
 tile.multiblock_casing3.nitinol_machine_casing.name=Nitinol Machine Casing
 tile.multiblock_casing3.eglin_steel.name=High-strength Eglin steel machine housing

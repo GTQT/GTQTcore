@@ -10,6 +10,7 @@ import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.MarkerMaterials;
 import gregtech.api.unification.material.Material;
+import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.material.info.MaterialFlags;
 import gregtech.api.unification.material.properties.*;
 import gregtech.api.unification.ore.OrePrefix;
@@ -19,13 +20,14 @@ import gregtech.common.items.MetaItems;
 import gregtechfoodoption.recipe.GTFORecipeMaps;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.unification.ore.GTQTOrePrefix;
+import keqing.gtqtcore.api.utils.GTQTLog;
 import keqing.gtqtcore.common.items.GTQTMetaItems;
 import keqing.gtqtcore.common.items.metaitems.GTQTMetaToolItems;
 import keqing.gtqtcore.loaders.recipes.chain.AdvancedLubricantChain;
 import keqing.gtqtcore.loaders.recipes.handlers.BouleRecipeHandler;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
-
+import gregtech.common.items.ToolItems;
 import javax.annotation.Nonnull;
 
 import static gregtech.api.GTValues.*;
@@ -36,7 +38,7 @@ import static gregtech.api.unification.material.properties.PropertyKey.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.common.items.MetaItems.*;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
-import static keqing.gtqtcore.api.unification.GTQTMaterials.AdvancedLubricant;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.material.info.GTQTMaterialFlags.GENERATE_CURVED_PLATE;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.*;
 import static keqing.gtqtcore.common.items.metaitems.GTQTMetaToolItems.*;
@@ -67,8 +69,20 @@ public class GTQTRecipes {
         OrePrefix.foil.addProcessingHandler(PropertyKey.INGOT, GTQTRecipes::processFoil);
         OrePrefix.rotor.addProcessingHandler(PropertyKey.INGOT, GTQTRecipes::processRotorA);
         wireGtSingle.addProcessingHandler(PropertyKey.WIRE, GTQTRecipes::processWireSingle);
+        registerMortarRecipes();
     }
+    private static void registerMortarRecipes() {
+        for (Material material : new Material[] {
+                TungstenSteel, NaquadahAlloy, Neutronium, Inconel625,StainlessSteel,VanadiumSteel,RedSteel,BlueSteel,
+                HSSE, HastelloyN, Hdcs, BlackTitanium,MaragingSteel250,BabbittAlloy,EglinSteel,Pikyonium64B,HG1223,
+                Draconium,AwakenedDraconium,Infinity,Rhugnor,Hypogen}) {
 
+            addToolRecipe(material, ToolItems.MORTAR, false,
+                    " I ", "SIS", "SSS",
+                    'I', new UnificationEntry(material.hasProperty(GEM) ? OrePrefix.gem : OrePrefix.ingot, material),
+                    'S', OrePrefix.stone);
+        }
+    }
     private static void processPower(OrePrefix orePrefix, Material material, DustProperty dustProperty) {
         REFINER_MACERATOR_RECIPES.recipeBuilder()
                 .input(dust, material,1)

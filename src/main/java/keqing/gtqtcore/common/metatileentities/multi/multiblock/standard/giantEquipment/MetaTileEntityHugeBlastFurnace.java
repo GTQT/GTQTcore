@@ -42,6 +42,9 @@ import keqing.gtqtcore.api.metaileentity.GTQTNoTierMultiblockController;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.utils.GTQTUtil;
+import keqing.gtqtcore.client.textures.GTQTTextures;
+import keqing.gtqtcore.common.block.GTQTMetaBlocks;
+import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing3;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.init.Blocks;
@@ -99,7 +102,7 @@ public class MetaTileEntityHugeBlastFurnace extends GTQTNoTierMultiblockControll
         else super.checkStructurePattern();
     }
     private static IBlockState getCasingState() {
-        return GCYMMetaBlocks.LARGE_MULTIBLOCK_CASING.getState(BlockLargeMultiblockCasing.CasingType.HIGH_TEMPERATURE_CASING);
+        return GTQTMetaBlocks.blockMultiblockCasing3.getState(BlockMultiblockCasing3.CasingType.ALLOY_MELTING);
     }
 
     @Override
@@ -280,7 +283,7 @@ public class MetaTileEntityHugeBlastFurnace extends GTQTNoTierMultiblockControll
     @Nonnull
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
-        return GCYMTextures.BLAST_CASING;
+        return GTQTTextures.alloy_melting;
     }
 
     @Nonnull

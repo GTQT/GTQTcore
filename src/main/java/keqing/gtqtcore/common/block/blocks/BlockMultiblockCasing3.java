@@ -40,7 +40,8 @@ public class BlockMultiblockCasing3 extends VariantBlock<BlockMultiblockCasing3.
         SFTC("supercritical_fuel_trans_casing"),
         SFTS("supercritical_fuel_trans_score"),
         NAQUADRIA_CASING("naquadria_casing"),
-        NAQUADAH_ALLOY_CASING("naquadah_alloy_casing");
+        NAQUADAH_ALLOY_CASING("naquadah_alloy_casing"),
+        ALLOY_MELTING("alloy_melting");
 
         private final String name;
 

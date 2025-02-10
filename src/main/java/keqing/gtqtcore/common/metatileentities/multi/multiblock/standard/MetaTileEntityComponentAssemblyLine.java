@@ -1,6 +1,7 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
-import gregtech.api.capability.IEnergyContainer;
+import gregicality.multiblocks.api.recipes.GCYMRecipeMaps;
+import gregtech.api.capability.*;
 import gregtech.api.capability.impl.EnergyContainerList;
 import gregtech.api.capability.impl.FluidTankList;
 import gregtech.api.capability.impl.ItemHandlerList;
@@ -14,6 +15,10 @@ import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.MultiblockShapeInfo;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
+import gregtech.api.recipes.RecipeMap;
+import gregtech.api.recipes.logic.OverclockingLogic;
+import gregtech.api.recipes.recipeproperties.IRecipePropertyStorage;
+import gregtech.api.recipes.recipeproperties.TemperatureProperty;
 import gregtech.api.unification.material.Materials;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
@@ -24,6 +29,7 @@ import gregtech.common.blocks.BlockMultiblockCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.MetaTileEntities;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
+import keqing.gtqtcore.api.metaileentity.GTQTNoTierMultiblockController;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.recipes.properties.ComponentAssemblyLineRecipesTierProperty;
@@ -33,6 +39,7 @@ import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.giantEquipment.MetaTileEntityHugeAlloyBlastSmelter;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -52,13 +59,36 @@ import java.util.List;
 
 import static keqing.gtqtcore.GTQTCoreConfig.MachineSwitch;
 import static keqing.gtqtcore.api.GTQTAPI.MAP_CAL_CASING;
+import static keqing.gtqtcore.api.utils.GTQTUtil.getAccelerateByCWU;
 
-public class MetaTileEntityComponentAssemblyLine extends RecipeMapMultiblockController {
+public class MetaTileEntityComponentAssemblyLine extends GTQTNoTierMultiblockController implements IOpticalComputationReceiver {
     private int casingTier;
 
+    int requestCWUt;
+    private IOpticalComputationProvider computationProvider;
+
     public MetaTileEntityComponentAssemblyLine(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, GTQTcoreRecipeMaps.COMPONENT_ASSEMBLY_LINE_RECIPES);
+        super(metaTileEntityId, new RecipeMap[]{GTQTcoreRecipeMaps.COMPONENT_ASSEMBLY_LINE_RECIPES});
+        this.recipeMapWorkable = new MetaTileEntityComponentAssemblyLineWorkable(this);
+
+        //setMaxParallel(auto);
+        setMaxParallelFlag(true);
+
+        //setTimeReduce(auto);
+        setTimeReduceFlag(true);
     }
+    @Override
+    public void updateFormedValid() {
+        super.updateFormedValid();
+        if (isStructureFormed() && isActive()) {
+            requestCWUt = computationProvider.requestCWUt(2048, false);
+        }
+    }
+    @Override
+    public IOpticalComputationProvider getComputationProvider() {
+        return this.computationProvider;
+    }
+
     @Override
     public void checkStructurePattern() {
         if(MachineSwitch.DelayStructureCheckSwitch) {
@@ -105,9 +135,18 @@ public class MetaTileEntityComponentAssemblyLine extends RecipeMapMultiblockCont
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
+
+        List<IOpticalComputationHatch> providers = this.getAbilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION);
+        if (providers != null && !providers.isEmpty()) {
+            this.computationProvider = providers.get(0);
+        }
+
         Object casingTier = context.get("CALCasingTieredStats");
         this.casingTier = GTQTUniversUtil.getOrDefault(() -> casingTier instanceof WrappedIntTired,
                 () -> ((WrappedIntTired) casingTier).getIntTier(), 0);
+
+        setMaxParallel((int) Math.pow(2, this.casingTier));
+        setTimeReduce((100 - this.casingTier * 5.0) / 100);
     }
 
     @Override
@@ -178,6 +217,7 @@ public class MetaTileEntityComponentAssemblyLine extends RecipeMapMultiblockCont
                 .where('E', states(getThirdCasingState()))
                 .where('B', TiredTraceabilityPredicate.CAL_CASING.get())
                 .where('J', states(getCasingState())
+                        .or(abilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION).setExactLimit(1))
                         .or(abilities(MultiblockAbility.IMPORT_ITEMS)
                                 .setMaxGlobalLimited(6)
                                 .setPreviewCount(3))
@@ -198,7 +238,9 @@ public class MetaTileEntityComponentAssemblyLine extends RecipeMapMultiblockCont
                 .where('L', states(getCasingState())
                         .or(abilities(MultiblockAbility.INPUT_ENERGY)
                                 .setMaxGlobalLimited(2)
-                                .setPreviewCount(1)))
+                                .setPreviewCount(1))
+                        .or(abilities(MultiblockAbility.INPUT_LASER)
+                                .setMaxGlobalLimited(1)))
                 .where('I', states(getCasingState())
                         .or(abilities(MultiblockAbility.MAINTENANCE_HATCH)
                                 .setExactLimit(1)
@@ -262,7 +304,7 @@ public class MetaTileEntityComponentAssemblyLine extends RecipeMapMultiblockCont
                 .aisle("HHHHHHHHH", "A       A", "A  HHH  A", "A       A", "A       A", "A       A", "H       H", "E       E", " EH   HE ", "   HBH   ")
                 .aisle("HHHHHHHHH", "A       A", "A  HHH  A", "A D   D A", "AC     CA", "AC     CA", "HC     CH", "E       E", " EH   HE ", "   HBH   ")
                 .aisle("HHHHHHHHH", "A       A", "A  HHH  A", "A       A", "A       A", "A       A", "H       H", "E       E", " ELHHHLE ", "         ")
-                .aisle("HHHHHHHHH", "H  N N  H", "H  XXX  H", "H  JJJ  H", "H       H", "H       H", "HH HIH HH", " HHH~HHH ", "   HHH   ", "         ")
+                .aisle("HHHHHHHHH", "H  N N  H", "H  XOX  H", "H  JJJ  H", "H       H", "H       H", "HH HIH HH", " HHH~HHH ", "   HHH   ", "         ")
                 .where('~', GTQTMetaTileEntities.COMPONENT_ASSEMBLY_LINE, EnumFacing.SOUTH)
                 .where('A', getGlassState())
                 .where('H', getCasingState())
@@ -270,6 +312,7 @@ public class MetaTileEntityComponentAssemblyLine extends RecipeMapMultiblockCont
                 .where('D', getFrameState())
                 .where('G', getPipeCasingState())
                 .where('E', getThirdCasingState())
+                .where('O', MetaTileEntities.COMPUTATION_HATCH_RECEIVER, EnumFacing.SOUTH)
                 .where('J', MetaTileEntities.ITEM_IMPORT_BUS[4], EnumFacing.SOUTH)
                 .where('X', MetaTileEntities.FLUID_IMPORT_HATCH[4], EnumFacing.SOUTH)
                 .where('N', MetaBlocks.FRAMES.get(Materials.TungstenSteel).getBlock(Materials.TungstenSteel))
@@ -300,5 +343,18 @@ public class MetaTileEntityComponentAssemblyLine extends RecipeMapMultiblockCont
         tooltip.add(I18n.format("gtqtcore.machine.component_assembly_line.tooltip.2"));
         tooltip.add(I18n.format("gtqtcore.machine.component_assembly_line.tooltip.3"));
         tooltip.add(I18n.format("gtqtcore.machine.component_assembly_line.tooltip.4"));
+        tooltip.add(I18n.format("gtqtcore.multiblock.kq.acc.tooltip"));
+        tooltip.add(I18n.format("本机器允许使用激光能源仓代替能源仓！"));
+    }
+    protected class MetaTileEntityComponentAssemblyLineWorkable extends GTQTMultiblockLogic {
+
+        public MetaTileEntityComponentAssemblyLineWorkable(RecipeMapMultiblockController tileEntity) {
+            super(tileEntity);
+        }
+
+        @Override
+        public void setMaxProgress(int maxProgress) {
+            super.setMaxProgress((int) (maxProgress * getAccelerateByCWU(requestCWUt)));
+        }
     }
 }

@@ -43,7 +43,9 @@ import keqing.gtqtcore.api.metaileentity.GTQTNoTierMultiblockController;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.utils.GTQTUtil;
+import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
+import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing3;
 import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
@@ -102,7 +104,7 @@ public class MetaTileEntityHugeAlloyBlastSmelter extends GTQTNoTierMultiblockCon
     }
 
     private static IBlockState getCasingState() {
-        return GCYMMetaBlocks.LARGE_MULTIBLOCK_CASING.getState(BlockLargeMultiblockCasing.CasingType.HIGH_TEMPERATURE_CASING);
+        return GTQTMetaBlocks.blockMultiblockCasing3.getState(BlockMultiblockCasing3.CasingType.ALLOY_MELTING);
     }
 
     private static IBlockState getBoilerCasingState() {
@@ -274,6 +276,7 @@ public class MetaTileEntityHugeAlloyBlastSmelter extends GTQTNoTierMultiblockCon
                 .where('I', MetaTileEntities.FLUID_IMPORT_HATCH[4], EnumFacing.SOUTH)
                 .where('I', MetaTileEntities.COMPUTATION_HATCH_RECEIVER, EnumFacing.SOUTH)
                 .where('X', MetaTileEntities.ITEM_IMPORT_BUS[4], EnumFacing.SOUTH)
+                .where('U', MetaTileEntities.LASER_INPUT_HATCH_256[0], EnumFacing.SOUTH)
                 .where('J', MetaTileEntities.FLUID_EXPORT_HATCH[4], EnumFacing.SOUTH)
                 .where('M', MetaTileEntities.MUFFLER_HATCH[1], EnumFacing.UP)
                 .where(' ', Blocks.AIR.getDefaultState());
@@ -292,7 +295,7 @@ public class MetaTileEntityHugeAlloyBlastSmelter extends GTQTNoTierMultiblockCon
     @Nonnull
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
-        return GCYMTextures.BLAST_CASING;
+        return GTQTTextures.alloy_melting;
     }
 
     @Nonnull

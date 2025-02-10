@@ -1014,6 +1014,26 @@ public class KeQingNET {
                 .buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(CIRCUIT_GOOD_I, 2)
+                .input(VOLTAGE_COIL_IV, 8)
+                .input(HULL[IV], 8)
+                .input(CHEMICAL_REACTOR[5], 4)
+                .input(frameGt, TungstenSteel, 8)
+                .input(plate, PPB, 32)
+                .input(wireGtSingle, IVSuperconductor, 64)
+                .input(wireGtSingle, IVSuperconductor, 64)
+                .fluidInputs(SolderingAlloy.getFluid(L * 8))
+                .fluidInputs(Tin.getFluid(L * 8))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 8))
+                .fluidInputs(Zylon.getFluid(L * 4))
+                .output(INDUSTRIAL_CHEMICAL_REACTOR)
+                .EUt(VA[IV])
+                .duration(600)
+                .scannerResearch(b -> b
+                        .researchStack(DISK_15.getStackForm()))
+                .buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(CIRCUIT_GOOD_II, 2)
                 .input(ELECTRIC_PISTON_LUV, 8)
                 .input(HULL[LuV], 8)

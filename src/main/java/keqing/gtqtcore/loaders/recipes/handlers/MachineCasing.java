@@ -249,6 +249,22 @@ public class MachineCasing {
                 .CWUt(CWT[LuV])
                 .buildAndRegister();
 
+        PRECISE_ASSEMBLER_RECIPES.recipeBuilder()
+                .input(frameGt, Tritanium)
+                .input(gear, HastelloyX78, 2)
+                .input(stick, HastelloyK243, 4)
+                .input(bolt, Duranium, 8)
+                .fluidInputs(Polybenzimidazole.getFluid(L * 6))
+                .fluidInputs(Kevlar.getFluid(L * 4))
+                .fluidInputs(KaptonE.getFluid(L * 2))
+                .fluidInputs(NaquadahEnriched.getFluid(L))
+                .outputs(GTQTMetaBlocks.blockMultiblockCasing3.getItemVariant(ALLOY_MELTING, 2))
+                .EUt(VA[ZPM])
+                .duration(1000)
+                .Tier(2)
+                .CWUt(CWT[LuV])
+                .buildAndRegister();
+
         //  Polybenzimidazole Pipe Casing
         PRECISE_ASSEMBLER_RECIPES.recipeBuilder()
                 .input(CIRCUIT_GOOD_III, 4)
