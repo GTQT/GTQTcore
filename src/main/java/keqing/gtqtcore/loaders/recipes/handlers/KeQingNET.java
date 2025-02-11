@@ -122,7 +122,7 @@ public class KeQingNET {
         //20 标准化作业
         KQ_NET(0, 1, 20, DISK_20, ASSEMBLER[2].getStackForm());
         //21 高精加工
-        KQ_NET(0, 2, 21, DISK_21, ASSEMBLY_LINE.getStackForm());
+        KQ_NET(0, 2, 21, DISK_21, ASSEMBLER[4].getStackForm());
         //22 自动化管理
         KQ_NET(0, 3, 22, DISK_22, PRECISE_ASSEMBLER.getStackForm());
         //23 物联网集成控制
