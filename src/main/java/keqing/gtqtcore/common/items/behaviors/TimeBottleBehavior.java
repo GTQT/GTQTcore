@@ -30,7 +30,7 @@ import java.util.List;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.TIME_BOTTLE;
 
 public class TimeBottleBehavior implements IItemBehaviour {
-    private final int maxTime = 20 * 3600 * GTQTCoreConfig.DifficultySwitch.TimeBottleStoreMaxHour;
+    private final int maxTime = 20 * 3600 * GTQTCoreConfig.difficultySwitch.TimeBottleStoreMaxHour;
     private int time;
 
     public TimeBottleBehavior() {
@@ -38,9 +38,8 @@ public class TimeBottleBehavior implements IItemBehaviour {
 
     public void onUpdate(ItemStack itemStack, Entity entity) {
         if (entity instanceof EntityPlayer player) {
-            for (int i = 0; i < player.inventory.getSizeInventory(); i++) {
+            for (int i = 0; i < player.inventory.getSizeInventory()&&i<48; i++) {
                 ItemStack invStack = player.inventory.getStackInSlot(i);
-
                 if (invStack.getItem() == TIME_BOTTLE.getMetaItem()) {
                     if (itemStack.hasTagCompound()) {
                         NBTTagCompound compound = itemStack.getTagCompound();

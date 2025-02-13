@@ -480,7 +480,7 @@ public class MetaTileEntityMachine {
         for (OrePrefix prefix : galvanizedSteelPrefix) {
             tinyQuantity = (int) ((prefix.getMaterialAmount(Steel)) / M) + 1;
             ALLOY_SMELTER_RECIPES.recipeBuilder()
-                    .duration(tinyQuantity * 16)
+                    .duration(tinyQuantity * 320)
                     .EUt(8)
                     .input(prefix, Steel, 1)
                     .input(dustTiny, Zinc, tinyQuantity)
@@ -488,7 +488,7 @@ public class MetaTileEntityMachine {
                     .buildAndRegister();
 
             CHEMICAL_BATH_RECIPES.recipeBuilder()
-                    .duration(tinyQuantity * 8)
+                    .duration(tinyQuantity * 80)
                     .EUt(32)
                     .input(prefix, Steel)
                     .fluidInputs(Zinc.getFluid(16))

@@ -218,21 +218,21 @@ public class CopyRecipesHandlers {
 
             GTQTcoreRecipeMaps.FUEL_CELL.recipeBuilder()
                     .fluidInputs(fluidInputs)
-                    .fluidInputs(Materials.Air.getFluid(baseDuration))
+                    .fluidInputs(Materials.Air.getFluid(recipe.getDuration()*8))
                     .duration(baseDuration)
                     .EUt(EUt)
                     .buildAndRegister();
 
             GTQTcoreRecipeMaps.FUEL_CELL.recipeBuilder()
                     .fluidInputs(fluidInputs)
-                    .fluidInputs(Materials.Oxygen.getFluid(FluidStorageKeys.GAS, baseDuration))
+                    .fluidInputs(Materials.Oxygen.getFluid(FluidStorageKeys.GAS, recipe.getDuration()*4))
                     .duration((int) Math.floor(baseDuration * 1.5))
                     .EUt(EUt)
                     .buildAndRegister();
 
             GTQTcoreRecipeMaps.FUEL_CELL.recipeBuilder()
                     .fluidInputs(fluidInputs)
-                    .fluidInputs(Materials.Oxygen.getFluid(FluidStorageKeys.LIQUID, baseDuration))
+                    .fluidInputs(Materials.Oxygen.getFluid(FluidStorageKeys.LIQUID, recipe.getDuration()))
                     .duration(baseDuration * 2)
                     .EUt(EUt)
                     .buildAndRegister();
@@ -252,21 +252,21 @@ public class CopyRecipesHandlers {
 
             GTQTcoreRecipeMaps.FUEL_CELL.recipeBuilder()
                     .fluidInputs(fluidInputs)
-                    .fluidInputs(Materials.Air.getFluid(baseDuration))
+                    .fluidInputs(Materials.Air.getFluid(recipe.getDuration()*8))
                     .duration(baseDuration)
                     .EUt(EUt)
                     .buildAndRegister();
 
             GTQTcoreRecipeMaps.FUEL_CELL.recipeBuilder()
                     .fluidInputs(fluidInputs)
-                    .fluidInputs(Materials.Oxygen.getFluid(FluidStorageKeys.GAS,baseDuration))
+                    .fluidInputs(Materials.Oxygen.getFluid(FluidStorageKeys.GAS,recipe.getDuration()*4))
                     .duration((int) Math.floor(baseDuration * 1.5))
                     .EUt(EUt)
                     .buildAndRegister();
 
             GTQTcoreRecipeMaps.FUEL_CELL.recipeBuilder()
                     .fluidInputs(fluidInputs)
-                    .fluidInputs(Materials.Oxygen.getFluid(FluidStorageKeys.LIQUID, baseDuration))
+                    .fluidInputs(Materials.Oxygen.getFluid(FluidStorageKeys.LIQUID, recipe.getDuration()))
                     .duration(baseDuration * 2)
                     .EUt(EUt)
                     .buildAndRegister();

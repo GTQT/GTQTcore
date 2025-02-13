@@ -106,16 +106,20 @@ public class PrimitiveCircuits {
 
         ASSEMBLER_RECIPES.recipeBuilder()
                 .input(VACUUM_TUBE_COMPONENTS)
+                .input(ring, Steel, 2)
                 .input(wireFine, Copper, 4)
-                .output(VACUUM_TUBE, 2)
+                .output(VACUUM_TUBE, 4)
+                .fluidInputs(Glue.getFluid(100))
                 .EUt(VA[LV])
                 .duration(6 * SECOND)
                 .buildAndRegister();
 
         ASSEMBLER_RECIPES.recipeBuilder()
                 .input(VACUUM_TUBE_COMPONENTS)
+                .input(ring, Steel, 2)
                 .input(wireFine, AnnealedCopper, 4)
-                .output(VACUUM_TUBE, 2)
+                .output(VACUUM_TUBE, 4)
+                .fluidInputs(Glue.getFluid(100))
                 .EUt(VA[LV])
                 .duration(6 * SECOND)
                 .buildAndRegister();

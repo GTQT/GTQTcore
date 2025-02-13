@@ -8,6 +8,8 @@ import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
+import gregtech.api.recipes.RecipeMap;
+import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.material.Materials;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
@@ -29,7 +31,9 @@ import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing3.CasingT
 public class MetaTileEntityCatalyticReformer extends GCYMRecipeMapMultiblockController {
 
     public MetaTileEntityCatalyticReformer(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, GTQTcoreRecipeMaps.CATALYTIC_REFORMER_RECIPES);
+        super(metaTileEntityId, new RecipeMap[]{
+                GTQTcoreRecipeMaps.PRESSURE_LAMINATOR_RECIPES,
+                GTQTcoreRecipeMaps.CATALYTIC_REFORMER_RECIPES});
     }
 
     @Override

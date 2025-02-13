@@ -13,7 +13,6 @@ public class GTQTCoreConfig {
     public static OBJRenderSwitch OBJRenderSwitch = new OBJRenderSwitch();
     public static DifficultySwitch difficultySwitch = new DifficultySwitch();
     public static DebugSwitch debugSwitch = new DebugSwitch();
-
     public static class DebugSwitch {
         @Config.Comment({ "Debug Switch" })
         public boolean debugSwitch = false;
@@ -27,7 +26,6 @@ public class GTQTCoreConfig {
         @Config.Comment({ "Print Rotor Info In Logs" })
         public boolean rotorDebug = false;
     }
-
     public static class DifficultySwitch {
         @Config.Comment({ "Allows HotIngot to be cooled by throwing it into water.", "Default: true" })
         public boolean easyCooling = true;
@@ -39,7 +37,7 @@ public class GTQTCoreConfig {
         public boolean easyCleaning = true;
 
         @Config.Comment({ "时间之瓶最大时间储量（单位: 小时）", "Default: 8" })
-        public static int TimeBottleStoreMaxHour = 8;
+        public int TimeBottleStoreMaxHour = 8;
     }
     public static class WorldGenSwitch {
         @Config.Comment("Chance of generating abandoned base in chunk = 1 / 100 * THIS_VALUE. 0 disables abandoned base generation. Default: 5 ,0 to close"  )

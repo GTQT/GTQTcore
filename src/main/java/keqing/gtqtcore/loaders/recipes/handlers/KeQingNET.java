@@ -12,6 +12,7 @@ import gregtech.api.unification.material.MarkerMaterials;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.ore.OrePrefix;
+import gregtech.api.unification.stack.UnificationEntry;
 import gregtech.common.blocks.BlockCleanroomCasing;
 import gregtech.common.blocks.BlockComputerCasing;
 import gregtech.common.blocks.BlockFusionCasing;
@@ -2530,11 +2531,14 @@ public class KeQingNET {
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .EUt(VA[IV])
-                .input(ELECTRIC_PISTON_IV, 16)
-                .input(ELECTRIC_MOTOR_IV, 16)
-                .input(circuit, Tier.IV, 8)
-                .input(HULL[IV], 4)
+                .input(ELECTRIC_PISTON_LUV, 16)
+                .input(ELECTRIC_MOTOR_LuV, 16)
+                .input(circuit, Tier.LuV, 8)
+                .input(FUEL_CELL_TURBINE[4], 4)
+                .input(plate, Plutonium239, 8)
                 .input(wireGtDouble, SamariumIronArsenicOxide, 8)
+                .input(wireGtDouble, NiobiumTitanium, 8)
+                .input(spring, RTMAlloy, 4)
                 .input(plate, TungstenSteel, 32)
                 .fluidInputs(Materials.Polybenzimidazole.getFluid(GTValues.L * 24))
                 .outputs(LARGE_FUEL_TURBINE.getStackForm())

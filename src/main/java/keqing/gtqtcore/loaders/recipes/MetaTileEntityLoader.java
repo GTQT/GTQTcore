@@ -285,17 +285,17 @@ public class MetaTileEntityLoader {
         ModHandler.addShapedRecipe(true, "mold_gas", MOLD_GAS.getStackForm(),
                 "MC", "ch",
                 'M', new UnificationEntry(block, Steel),
-                'C', new UnificationEntry(cylinder, Steel));
+                'C', new UnificationEntry(cylinder, Aluminium));
 
         ModHandler.addShapedRecipe(true, "mold_motor", MOLD_MOTOR.getStackForm(),
                 "MC", "ch",
                 'M', new UnificationEntry(block, Steel),
-                'C', new UnificationEntry(motor_stick, Steel));
+                'C', new UnificationEntry(motor_stick, Aluminium));
 
         ModHandler.addShapedRecipe(true, "mold_value", MOLD_VALUE.getStackForm(),
                 "MC", "ch",
                 'M', new UnificationEntry(block, Steel),
-                'C', new UnificationEntry(valve, Steel));
+                'C', new UnificationEntry(valve, Aluminium));
 
         ModHandler.addShapedRecipe(true, "mte_copy_card", MTE_COPY_CARD.getStackForm(),
                 "SF ", "DPR", "SF ",
@@ -712,15 +712,6 @@ public class MetaTileEntityLoader {
                 'P', new UnificationEntry(plateDouble, Plutonium239),
                 'W', new UnificationEntry(cableGtDouble, NiobiumTitanium),
                 'F', FIELD_GENERATOR_LuV,
-                'S', new UnificationEntry(spring, RTMAlloy),
-                'A', FLUID_CELL_LARGE_TUNGSTEN_STEEL);
-
-        ModHandler.addShapedRecipe(true, "large_fuel_generator", LARGE_FUEL_TURBINE.getStackForm(),
-                "SAS", "PBP", "WFW",
-                'B', FUEL_CELL_TURBINE[4].getStackForm(),
-                'P', new UnificationEntry(plateDouble, Plutonium239),
-                'W', new UnificationEntry(cableGtDouble, NiobiumTitanium),
-                'F', ELECTRIC_PISTON_LUV,
                 'S', new UnificationEntry(spring, RTMAlloy),
                 'A', FLUID_CELL_LARGE_TUNGSTEN_STEEL);
 
@@ -1321,8 +1312,8 @@ public class MetaTileEntityLoader {
                 'M', HULL[GTValues.LV].getStackForm(),
                 'A', MetaTileEntities.COMBUSTION_GENERATOR[0].getStackForm(),
                 'B', MetaTileEntities.GAS_TURBINE[0].getStackForm(),
-                'P', EMITTER_LV,
-                'E', SENSOR_LV,
+                'P', ELECTRIC_MOTOR_LV,
+                'E', ELECTRIC_PISTON_LV,
                 'C', new UnificationEntry(OrePrefix.circuit, LV));
 
         ModHandler.addShapedRecipe(true, "fuel_cell.mv", GTQTMetaTileEntities.FUEL_CELL_TURBINE[1].getStackForm(),
@@ -1330,8 +1321,8 @@ public class MetaTileEntityLoader {
                 'M', HULL[GTValues.MV].getStackForm(),
                 'A', MetaTileEntities.COMBUSTION_GENERATOR[1].getStackForm(),
                 'B', MetaTileEntities.GAS_TURBINE[1].getStackForm(),
-                'P', EMITTER_MV,
-                'E', SENSOR_MV,
+                'P', ELECTRIC_MOTOR_MV,
+                'E', ELECTRIC_PISTON_MV,
                 'C', new UnificationEntry(OrePrefix.circuit, MV));
 
         ModHandler.addShapedRecipe(true, "fuel_cell.hv", GTQTMetaTileEntities.FUEL_CELL_TURBINE[2].getStackForm(),
@@ -1339,8 +1330,8 @@ public class MetaTileEntityLoader {
                 'M', HULL[GTValues.HV].getStackForm(),
                 'A', MetaTileEntities.COMBUSTION_GENERATOR[2].getStackForm(),
                 'B', MetaTileEntities.GAS_TURBINE[2].getStackForm(),
-                'P', EMITTER_HV,
-                'E', SENSOR_HV,
+                'P', ELECTRIC_MOTOR_HV,
+                'E', ELECTRIC_PISTON_HV,
                 'C', new UnificationEntry(OrePrefix.circuit, HV));
 
         ModHandler.addShapedRecipe(true, "fuel_cell.ev", GTQTMetaTileEntities.FUEL_CELL_TURBINE[3].getStackForm(),
@@ -1348,8 +1339,8 @@ public class MetaTileEntityLoader {
                 'M', HULL[GTValues.EV].getStackForm(),
                 'A', GTQTMetaTileEntities.COMBUSTION_GENERATOR[0].getStackForm(),
                 'B', GTQTMetaTileEntities.GAS_TURBINE[0].getStackForm(),
-                'P', EMITTER_EV,
-                'E', SENSOR_EV,
+                'P', ELECTRIC_MOTOR_EV,
+                'E', ELECTRIC_PISTON_EV,
                 'C', new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.EV));
 
         ModHandler.addShapedRecipe(true, "fuel_cell.iv", GTQTMetaTileEntities.FUEL_CELL_TURBINE[4].getStackForm(),
@@ -1357,8 +1348,8 @@ public class MetaTileEntityLoader {
                 'M', HULL[GTValues.IV].getStackForm(),
                 'A', GTQTMetaTileEntities.COMBUSTION_GENERATOR[1].getStackForm(),
                 'B', GTQTMetaTileEntities.GAS_TURBINE[1].getStackForm(),
-                'P', EMITTER_IV,
-                'E', SENSOR_IV,
+                'P', ELECTRIC_MOTOR_IV,
+                'E', ELECTRIC_PISTON_IV,
                 'C', new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.IV));
 
 

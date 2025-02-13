@@ -497,7 +497,7 @@ public class GTQTMetaTileEntities {
 
         KINETIC_ENERGY_BATTERY = registerMetaTileEntity(3074, new MetaTileEntityKineticEnergyBattery(gtqtcoreId("kinetic_energy_battery")));
         //GRAY_ELECTRIC_POWER_BANK = registerMetaTileEntity(3071, new MetaTileEntityGrayElectricPowerBank(gtqtcoreId("gray_electric_power_bank")));
-        LARGE_FUEL_TURBINE = registerMetaTileEntity(3075, new MetaTileEntityLargeTurbine(gtqtcoreId("large_turbine.fuel_cell"), GTQTcoreRecipeMaps.FUEL_CELL, 5, GTQTMetaBlocks.blockMultiblockCasing1.getState(HastelloyX78), MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.TUNGSTENSTEEL_GEARBOX), GTQTTextures.HastelloyX78, true, Textures.LARGE_GAS_TURBINE_OVERLAY));
+        LARGE_FUEL_TURBINE = registerMetaTileEntity(3075, new MetaTileEntityLargeTurbine(gtqtcoreId("large_turbine.fuel_cell"), GTQTcoreRecipeMaps.FUEL_CELL, 6, GTQTMetaBlocks.blockMultiblockCasing1.getState(HastelloyX78), MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.TUNGSTENSTEEL_GEARBOX), GTQTTextures.HastelloyX78, true, Textures.LARGE_GAS_TURBINE_OVERLAY));
 
         LARGE_BIOMASS_GENERATOR = registerMetaTileEntity(3076, new MetaTileEntityLargeBiomassGenerator(gtqtcoreId("large_biomass_generator")));
 
