@@ -27,4 +27,7 @@ public class ToolPortableCellLarge extends ToolPortableCell {
     public double getAEMaxPower(ItemStack is) {
         return (double) AEConfig.instance().getPortableCellBattery() * ((double) Bytes / 512);
     }
+    public ToolPortableCell getItem() {
+        return this;
+    }
 }

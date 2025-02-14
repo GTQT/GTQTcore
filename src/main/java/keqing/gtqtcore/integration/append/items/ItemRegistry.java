@@ -11,12 +11,15 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import static keqing.gtqtcore.GTQTCore.MODID;
+import static keqing.gtqtcore.common.CommonProxy.GTQTCore_NE;
 import static keqing.gtqtcore.common.CommonProxy.GTQTCore_TO;
 
 @Mod.EventBusSubscriber(modid = MODID)
 public class ItemRegistry {
     public static ToolPortableCellLarge LARGE_PORTABLE_CELL_2048;
     public static ToolPortableCellLarge LARGE_PORTABLE_CELL_8192;
+    public static ItemStorageCell TEST_STORAGE_CELL;
+    public static Item TEST_STORAGE_CELL_PART;
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event) {
         LARGE_PORTABLE_CELL_2048 = new ToolPortableCellLarge(2048,63);
@@ -33,6 +36,26 @@ public class ItemRegistry {
                 .setCreativeTab(GTQTCore_TO);
 
         event.getRegistry().register(LARGE_PORTABLE_CELL_8192);
+
+        TEST_STORAGE_CELL = new ItemStorageCell(1,64, TEST_STORAGE_CELL_PART);
+        TEST_STORAGE_CELL
+                .setTranslationKey("storage_cell")
+                .setRegistryName(MODID, "storage_cell")
+                .setCreativeTab(GTQTCore_NE);
+
+        event.getRegistry().register(TEST_STORAGE_CELL);
+
+        TEST_STORAGE_CELL_PART = new Item().setRegistryName(MODID, "storage_cell_part")
+                .setTranslationKey("storage_cell_part")
+                 .setCreativeTab(GTQTCore_NE);
+
+        event.getRegistry().register(TEST_STORAGE_CELL_PART);
+
+//        event.getRegistry().register(new ItemBlock(new BlockCraftScheduler())
+//                .setRegistryName(MODID, "craft_scheduler")
+//                .setTranslationKey("craft_scheduler")
+//                .setCreativeTab(GTQTCore_TO)
+//    );
     }
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
