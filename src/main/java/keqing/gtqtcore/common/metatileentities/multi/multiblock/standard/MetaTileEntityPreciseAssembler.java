@@ -25,6 +25,7 @@ import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.MetaTileEntities;
 import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
+import keqing.gtqtcore.api.metaileentity.GTQTOCMultiblockController;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.recipes.properties.ControllerProperty;
@@ -56,7 +57,7 @@ import static gregtech.api.recipes.RecipeMaps.ASSEMBLER_RECIPES;
 import static keqing.gtqtcore.api.GTQTAPI.MAP_PA_CASING;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.PRECISE_ASSEMBLER;
 
-public class MetaTileEntityPreciseAssembler extends MultiMapMultiblockController implements IOpticalComputationReceiver {
+public class MetaTileEntityPreciseAssembler extends GTQTOCMultiblockController {
     private IOpticalComputationProvider computationProvider;
     private int CasingTier;
     private int InternalCasingTier;
@@ -67,6 +68,15 @@ public class MetaTileEntityPreciseAssembler extends MultiMapMultiblockController
                 GTQTcoreRecipeMaps.PRECISE_ASSEMBLER_RECIPES
         });
         this.recipeMapWorkable = new PreciseAssemblerRecipeLogic(this);
+
+        setTierFlag(true);
+        //setTier(auto);
+        setMaxParallel(1);//初始化
+        setMaxParallelFlag(true);
+        //setMaxVoltage(auto);
+        setMaxVoltageFlag(true);
+        setTimeReduce(1);//初始化
+        setTimeReduceFlag(true);
     }
 
     private static IBlockState getFrameState() {
@@ -80,9 +90,7 @@ public class MetaTileEntityPreciseAssembler extends MultiMapMultiblockController
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
-
         textList.add(new TextComponentTranslation("外壳等级：%s 机器方块等级:%s", CasingTier, InternalCasingTier));
-        textList.add(new TextComponentTranslation("配方运行等级:%s", Math.min(InternalCasingTier, CasingTier)));
     }
 
     @Override
@@ -116,6 +124,9 @@ public class MetaTileEntityPreciseAssembler extends MultiMapMultiblockController
                 0);
 
         this.writeCustomData(GTQTValue.UPDATE_TIER9, buf -> buf.writeInt(this.CasingTier));
+
+        setTier(this.InternalCasingTier);
+        setMaxVoltage(this.InternalCasingTier);
     }
 
     @Override
@@ -129,10 +140,6 @@ public class MetaTileEntityPreciseAssembler extends MultiMapMultiblockController
         }
     }
 
-    @Override
-    public void update() {
-        super.update();
-    }
 
     public boolean checkRecipe(@Nonnull Recipe recipe,
                                boolean consumeIfSuccess) {
@@ -261,35 +268,19 @@ public class MetaTileEntityPreciseAssembler extends MultiMapMultiblockController
         public PreciseAssemblerRecipeLogic(RecipeMapMultiblockController tileEntity) {
             super(tileEntity, ComputationType.SPORADIC);
         }
-
-        /**
-         * @return Check if machine in PA
-         */
+        @Override
+        public void update() {
+            super.update();
+            if (isPrecise()) {
+                setTimeReduce(1);
+                setMaxParallel(1);
+            } else {
+                setTimeReduce(1.0 /Math.min(InternalCasingTier, CasingTier));
+                setMaxParallel((int) Math.pow(2, Math.min(InternalCasingTier, CasingTier) + 4));
+            }
+        }
         private boolean isPrecise() {
             return this.getRecipeMap() == GTQTcoreRecipeMaps.PRECISE_ASSEMBLER_RECIPES;
-        }
-
-        /**
-         * @param maxProgress If machine in common assembler, then get half progress time.
-         */
-        public void setMaxProgress(int maxProgress) {
-            if (isPrecise()) {
-                this.maxProgressTime = maxProgress;
-            } else {
-                this.maxProgressTime = maxProgress / Math.min(InternalCasingTier, CasingTier);
-            }
-        }
-
-        /**
-         * @return If machine in PA, then no parallel, if machine in common assembler, then get 2^{CasingTier + 4} (Mk1:32, Mk2:64, Mk3:128) parallel.
-         */
-        @Override
-        public int getParallelLimit() {
-            if (isPrecise()) {
-                return 1;
-            } else {
-                return (int) Math.pow(2, Math.min(InternalCasingTier, CasingTier) + 4);
-            }
         }
     }
 }

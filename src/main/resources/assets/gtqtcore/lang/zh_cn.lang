@@ -6085,6 +6085,12 @@ metaitem.cover.microwave_cover.uev.name=UEV 微波无线接收覆盖板
 metaitem.cover.microwave_cover.uiv.name=UIV 微波无线接收覆盖板
 metaitem.cover.microwave_cover.uxv.name=UXV 微波无线接收覆盖板
 metaitem.cover.microwave_cover.opv.name=OpV 微波无线接收覆盖板
+
+metaitem.cover.me_machine_controller.name=ME 机器控制器
+metaitem.cover.me_machine_controller.tooltip=将机器 §fON/OFF§7 变为 §fCover§7./n通过来自 §fME 网络§7 的物品或液体量控制机器。
+cover.me_machine_controller.title=ME 机器控制器
+cover.me_machine_controller.mode.more_than=超过
+cover.me_machine_controller.mode.less_than=少于
 ##  Universal Texts
 gtqtcore.universal.tooltip.max_parallel=最大并行数：§e%s§7
 gtqtcore.universal.tooltip.get_parallel_by_voltage=根据输入电压获得并行。

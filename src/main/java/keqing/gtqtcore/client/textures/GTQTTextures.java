@@ -259,7 +259,8 @@ public class GTQTTextures {
     public static TextureAtlasSprite COSMIC_7;
     public static TextureAtlasSprite COSMIC_8;
     public static TextureAtlasSprite COSMIC_9;
-
+    public static SimpleOverlayRenderer ME_MACHINE_CONTROLLER_ON;
+    public static SimpleOverlayRenderer ME_MACHINE_CONTROLLER_OFF;
     public static void init() {
         AUTO_PULL = TextureArea.fullImage("textures/gui/widget/auto_pull.png");
         ITEM_FLUID_OVERLAY = TextureArea.fullImage("textures/gui/widget/item_fluid.png");
@@ -267,6 +268,9 @@ public class GTQTTextures {
         MAINTENANCE_OVERLAY_ISO3_CLEANING = new SimpleOverlayRenderer("overlay/machine/overlay_maintenance_iso_3_cleaning");
         MAINTENANCE_OVERLAY_ISO2_CLEANING = new SimpleOverlayRenderer("overlay/machine/overlay_maintenance_iso_2_cleaning");
         MAINTENANCE_OVERLAY_ISO1_CLEANING = new SimpleOverlayRenderer("overlay/machine/overlay_maintenance_iso_1_cleaning");
+
+        ME_MACHINE_CONTROLLER_ON = new SimpleOverlayRenderer("overlay/cover/overlay_me_controller_on");
+        ME_MACHINE_CONTROLLER_OFF = new SimpleOverlayRenderer("overlay/cover/overlay_me_controller_off");
 
         WIRELESS_HATCH_HATCH = new SimpleOverlayRenderer("overlay/wireless_hatch/overlay_front");
         FLOTATION_CASING = new SimpleOverlayRenderer("multiblock/isa_casing/flotation_casing");

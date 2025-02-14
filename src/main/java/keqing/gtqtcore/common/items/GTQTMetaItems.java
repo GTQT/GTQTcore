@@ -911,7 +911,7 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem MICROWAVE_ENERGY_RECEIVER_UIV;
     public static MetaItem<?>.MetaValueItem MICROWAVE_ENERGY_RECEIVER_UXV;
     public static MetaItem<?>.MetaValueItem MICROWAVE_ENERGY_RECEIVER_OpV;
-
+    public static MetaItem<?>.MetaValueItem COVER_ITEM_MACHINE_CONTROLLER;
     public static ArmorMetaItem<?>.ArmorMetaValueItem PISTON_BOOTS;
     // Process-Specific Components
     public static MetaItem<?>.MetaValueItem MAGNETRON;

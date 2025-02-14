@@ -23,6 +23,7 @@ import gregtech.common.blocks.BlockWireCoil;
 import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.capability.ICatalystHatch;
+import keqing.gtqtcore.api.capability.chemical_plant.CatalystProperties;
 import keqing.gtqtcore.api.capability.chemical_plant.ChemicalPlantProperties;
 import keqing.gtqtcore.api.metaileentity.GTQTRecipeMapMultiblockController;
 import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
@@ -31,6 +32,7 @@ import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
@@ -42,6 +44,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import java.util.List;
+import java.util.Objects;
 
 import static gregtech.api.GTValues.V;
 
@@ -225,14 +228,44 @@ public class MetaTileEntityChemicalPlant extends GTQTRecipeMapMultiblockControll
     }
 
     protected class ChemicalPlantLogic extends GTQTMultiblockLogic {
+
         public ChemicalPlantLogic(RecipeMapMultiblockController tileEntity) {
             super(tileEntity);
         }
         @Override
         public boolean checkRecipe(@Nonnull Recipe recipe) {
-            if (!super.checkRecipe(recipe))
+            if (!super.checkRecipe(recipe)) {
                 return false;
-            return recipe.getProperty(ChemicalPlantProperties.getInstance(), 0) <= tier;
+            }
+
+            ChemicalPlantProperties chemicalProps = ChemicalPlantProperties.getInstance();
+            CatalystProperties catalystProps = CatalystProperties.getInstance();
+
+            // Check chemical plant properties
+            if (recipe.hasProperty(chemicalProps)) {
+                Integer tierValue = recipe.getProperty(chemicalProps, 0);
+                if (tierValue == null || tierValue > tier) {
+                    return false;
+                }
+            }
+
+            // Check catalyst properties
+            if (recipe.hasProperty(catalystProps)) {
+                ItemStack catalystStack = recipe.getProperty(catalystProps, ItemStack.EMPTY);
+                if (catalystStack != null && !catalystStack.isEmpty()) {
+                    try {
+                        if (getCatalystHatch().hasCatalyst(catalystStack)) {
+                            getCatalystHatch().consumeCatalyst(catalystStack, 1);
+                            return true;
+                        }
+                    } catch (Exception e) {
+                        return false;
+                    }
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }

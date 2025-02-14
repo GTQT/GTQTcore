@@ -89,6 +89,10 @@ public class GTQTCoverBehavior {
                 (def, tile, side) -> new CoverMicrowaveEnergyReceiver(def, tile, side, GTValues.UXV));
         registerBehavior(new ResourceLocation(GTQTCore.MODID, "microwave_cover.opv"), GTQTMetaItems.MICROWAVE_ENERGY_RECEIVER_OpV,
                 (def, tile, side) -> new CoverMicrowaveEnergyReceiver(def, tile, side, OpV));
+
+        registerBehavior(new ResourceLocation(GTQTCore.MODID, "me_machine_controller"), GTQTMetaItems.COVER_ITEM_MACHINE_CONTROLLER,
+                MEMachineController::new);
+        
     }
 
     /**

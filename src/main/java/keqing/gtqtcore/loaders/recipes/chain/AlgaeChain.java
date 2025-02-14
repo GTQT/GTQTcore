@@ -297,7 +297,7 @@ public class AlgaeChain {
                 .duration(1600).EUt(480).buildAndRegister();
 
         CHEMICAL_PLANT.recipeBuilder()
-                .notConsumable(CATALYST_FRAMEWORK_V)
+                .Catalyst(CATALYST_FRAMEWORK_V.getStackForm())
                 .input(items, 1)
                 .fluidOutputs(BioOil.getFluid(2000))
                 .recipeLevel(2)

@@ -52,7 +52,7 @@ import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.TJMaterials.HydrogenSilsesquioxane;
 import static keqing.gtqtcore.api.unification.TJMaterials.SU8_Photoresist;
 
-public class MetaTileEntityStepper extends GTQTOCMultiblockController implements IOpticalComputationReceiver {
+public class MetaTileEntityStepper extends GTQTOCMultiblockController{
     int LaserKind;
     int LaserAmount;
     private int glass_tier;

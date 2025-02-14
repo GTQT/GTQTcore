@@ -5,6 +5,7 @@ import gregtech.api.recipes.RecipeBuilder;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.util.EnumValidationResult;
 import gregtech.api.util.GTLog;
+import net.minecraft.item.ItemStack;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.annotation.Nonnull;
@@ -36,6 +37,10 @@ public class ChemicalPlantBuilder extends RecipeBuilder<ChemicalPlantBuilder> {
             this.recipeLevel(((Number) value).intValue());
             return true;
         }
+        if (key.equals(CatalystProperties.KEY)) {
+            this.Catalyst((ItemStack) value);
+            return true;
+        }
         return super.applyProperty(key, value);
     }
 
@@ -45,6 +50,16 @@ public class ChemicalPlantBuilder extends RecipeBuilder<ChemicalPlantBuilder> {
             recipeStatus = EnumValidationResult.INVALID;
         }
         this.applyProperty(ChemicalPlantProperties.getInstance(), level);
+        return this;
+    }
+
+    public ChemicalPlantBuilder Catalyst(ItemStack catalyst)
+    {
+        if (catalyst==ItemStack.EMPTY) {
+            GTLog.logger.error("Blast Furnace Temperature cannot be less than or equal to 0", new IllegalArgumentException());
+            recipeStatus = EnumValidationResult.INVALID;
+        }
+        this.applyProperty(CatalystProperties.getInstance(), catalyst);
         return this;
     }
 

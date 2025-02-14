@@ -504,12 +504,31 @@ public class MetaTileEntityLoader {
                 'K', new UnificationEntry(cableGtDouble, Aluminium)
         );
 
-        ModHandler.addShapedRecipe(true, "catalyst_hatch", CATALYST_HATCH.getStackForm(),
+        ModHandler.addShapedRecipe(true, "catalyst_hatch.0", CATALYST_HATCH[0].getStackForm(),
                 "MhM", "PHP", "McM",
                 'M', new UnificationEntry(pipeNormalFluid, Aluminium),
                 'P', ROBOT_ARM_HV.getStackForm(),
                 'H', MetaTileEntities.HULL[3].getStackForm()
         );
+        ModHandler.addShapedRecipe(true, "catalyst_hatch.1", CATALYST_HATCH[1].getStackForm(),
+                "MhM", "PHP", "McM",
+                'M', new UnificationEntry(pipeNormalFluid, StainlessSteel),
+                'P', ROBOT_ARM_EV.getStackForm(),
+                'H', MetaTileEntities.HULL[4].getStackForm()
+        );
+        ModHandler.addShapedRecipe(true, "catalyst_hatch.2", CATALYST_HATCH[2].getStackForm(),
+                "MhM", "PHP", "McM",
+                'M', new UnificationEntry(pipeNormalFluid, TungstenSteel),
+                'P', ROBOT_ARM_IV.getStackForm(),
+                'H', MetaTileEntities.HULL[5].getStackForm()
+        );
+        ModHandler.addShapedRecipe(true, "catalyst_hatch.3", CATALYST_HATCH[3].getStackForm(),
+                "MhM", "PHP", "McM",
+                'M', new UnificationEntry(pipeNormalFluid, TungstenSteel),
+                'P', ROBOT_ARM_LuV.getStackForm(),
+                'H', MetaTileEntities.HULL[6].getStackForm()
+        );
+
 
         ModHandler.addShapedRecipe(true, "bio_hatch", BIO_HATCH.getStackForm(),
                 "MhM", "PHP", "McM",

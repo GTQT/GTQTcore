@@ -1319,6 +1319,7 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         MICROWAVE_ENERGY_RECEIVER_UIV = addItem(4036, "cover.microwave_cover.uiv");
         MICROWAVE_ENERGY_RECEIVER_UXV = addItem(4037, "cover.microwave_cover.uxv");
         MICROWAVE_ENERGY_RECEIVER_OpV = addItem(4038, "cover.microwave_cover.opv");
+        COVER_ITEM_MACHINE_CONTROLLER = addItem(4039, "cover.me_machine_controller");
 
     }
 

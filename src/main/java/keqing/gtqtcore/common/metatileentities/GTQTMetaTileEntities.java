@@ -263,7 +263,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityLargeUUProducter LARGE_UU_PRODUCTER;
 
     public static MetaTileEntityMillBallHatch MULTIPART_BALL_HATCH;
-    public static MetaTileEntityCatalystHatch CATALYST_HATCH;
+    public static MetaTileEntityCatalystHatch[] CATALYST_HATCH=new MetaTileEntityCatalystHatch[4];
     public static MetaTileEntityResearchSystemNetworkSwitch KQNS;
     public static MetaTileEntityLaserBlastFurnace LASER_BLAST_FURNACE;
     public static MetaTileEntityLaserAlloyFurnace LASER_ALLOY_FURNACE;
@@ -867,7 +867,7 @@ public class GTQTMetaTileEntities {
 
         BIO_HATCH = registerMetaTileEntity(15546, new MetaTileEntityBioHatch(gtqtcoreId("bio_hatch")));
         INF_WATER_HATCH = registerMetaTileEntity(15547, new MetaTileInfWaterHatch(gtqtcoreId("infinite_water_hatch")));
-        CATALYST_HATCH = registerMetaTileEntity(15548, new MetaTileEntityCatalystHatch(gtqtcoreId("catalyst_hatch")));
+        CATALYST_HATCH[0] = registerMetaTileEntity(15548, new MetaTileEntityCatalystHatch(gtqtcoreId("catalyst_hatch"),1));
         MULTIPART_BUFFER_HATCH = registerMetaTileEntity(15549, new MetaTileEntityBufferHatch(gtqtcoreId("buffer_hatch")));
         MULTIPART_BALL_HATCH = registerMetaTileEntity(15550, new MetaTileEntityMillBallHatch(gtqtcoreId("mill_ball_hatch")));
         EDATA_ACCESS_HATCH = registerMetaTileEntity(15551, new MetaTileEntityDataAccessHatch(gtqtcoreId("edata_access_hatch"), GTValues.MV, false));
@@ -903,6 +903,9 @@ public class GTQTMetaTileEntities {
         SINGLE_ITEM_INPUT_BUS = registerMetaTileEntity(15569, new MetaTileEntitySingleItemInputBus(gtqtcoreId("single_item_input_bus")));
         SUPER_INPUT_BUS = registerMetaTileEntity(15570, new MetaTileEntitySuperInputBus(gtqtcoreId("super_input_bus")));
         SINGLE_INPUT_BUS = registerMetaTileEntity(15571, new MetaTileEntitySingleInputBus(gtqtcoreId("single_input_bus")));
+        CATALYST_HATCH[1] = registerMetaTileEntity(15572, new MetaTileEntityCatalystHatch(gtqtcoreId("catalyst_hatch.2"),2));
+        CATALYST_HATCH[2] = registerMetaTileEntity(15573, new MetaTileEntityCatalystHatch(gtqtcoreId("catalyst_hatch.3"),3));
+        CATALYST_HATCH[3] = registerMetaTileEntity(15574, new MetaTileEntityCatalystHatch(gtqtcoreId("catalyst_hatch.4"),4));
 
         ROTOR_HOLDER[6] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityRotorHolder(gtqtcoreId("rotor_holder.uhv"), GTValues.UHV));
         ROTOR_HOLDER[7] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityRotorHolder(gtqtcoreId("rotor_holder.uev"), GTValues.UEV));

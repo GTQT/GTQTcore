@@ -3,6 +3,7 @@ package keqing.gtqtcore.common.metatileentities.multi.multiblockpart;
 import java.util.Arrays;
 import java.util.List;
 
+import gregtech.api.capability.IGhostSlotConfigurable;
 import keqing.gtqtcore.api.capability.impl.LargeSlotItemStackHandler;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.client.widgets.ItemSlotTinyAmountTextWidget;
@@ -47,7 +48,8 @@ import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMulti
 import static keqing.gtqtcore.api.utils.GTQTUtil.*;
 
 public class MetaTileEntitySuperInputBus extends MetaTileEntityMultiblockNotifiablePart
-        implements IMultiblockAbilityPart<IItemHandlerModifiable>, IControllable {
+        implements IMultiblockAbilityPart<IItemHandlerModifiable>, IControllable,
+        IGhostSlotConfigurable {
 
     private boolean workingEnabled = false;
     private boolean shouldReturnItems = false;
@@ -59,7 +61,23 @@ public class MetaTileEntitySuperInputBus extends MetaTileEntityMultiblockNotifia
     public MetaTileEntitySuperInputBus(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTValues.HV, false);
     }
+    @Override
+    public boolean hasGhostCircuitInventory() {
+        return true;
+    }
 
+    @Override
+    public void setGhostCircuitConfig(int config) {
+        if (this.ghostCircuitItemStackHandler.getCircuitValue() == config) {
+            return;
+        }
+
+        this.ghostCircuitItemStackHandler.setCircuitValue(config);
+
+        if (!getWorld().isRemote) {
+            markDirty();
+        }
+    }
     @Override
     protected void initializeInventory() {
         this.largeSlotItemStackHandler = new LargeSlotItemStackHandler(this, 16, null, false, () -> this.slotLimit);

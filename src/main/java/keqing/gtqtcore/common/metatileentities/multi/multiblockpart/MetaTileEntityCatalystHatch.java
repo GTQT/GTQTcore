@@ -5,6 +5,8 @@ import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.ModularUI;
+import gregtech.api.gui.resources.IGuiTexture;
+import gregtech.api.gui.widgets.GhostCircuitSlotWidget;
 import gregtech.api.gui.widgets.LabelWidget;
 import gregtech.api.gui.widgets.SlotWidget;
 import gregtech.api.metatileentity.MetaTileEntity;
@@ -32,6 +34,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -39,15 +42,19 @@ public class MetaTileEntityCatalystHatch extends MetaTileEntityMultiblockPart im
 
     private final CatalystHolder catalystHolder;
     private boolean needUpdate;
+    private final int slotCount;
+    private final int tier;
 
-    public MetaTileEntityCatalystHatch(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, 2);
-        this.catalystHolder = new CatalystHolder();
+    public MetaTileEntityCatalystHatch(ResourceLocation metaTileEntityId, int tier) {
+        super(metaTileEntityId, tier);
+        this.slotCount = tier * tier;
+        this.catalystHolder = new CatalystHolder(slotCount); // 传递 slotCount 给 CatalystHolder
+        this.tier = tier;
     }
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
-        return new MetaTileEntityCatalystHatch(metaTileEntityId);
+        return new MetaTileEntityCatalystHatch(metaTileEntityId, tier);
     }
 
     @SideOnly(Side.CLIENT)
@@ -59,11 +66,27 @@ public class MetaTileEntityCatalystHatch extends MetaTileEntityMultiblockPart im
         }
     }
 
-    @Override
     protected ModularUI createUI(EntityPlayer entityPlayer) {
-        ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND, 176, 209).bindPlayerInventory(entityPlayer.inventory, 126).widget(new SlotWidget(this.catalystHolder, 0, 88 - 9, 50, true, true, true).setBackgroundTexture(GuiTextures.SLOT).setChangeListener(this::markDirty)).widget(new LabelWidget(88, 20, "只能使用催化剂喵！").setXCentered(true));
+        int rowSize = (int) Math.sqrt(this.slotCount);
+        return this.createUITemplate(entityPlayer, rowSize).build(this.getHolder(), entityPlayer);
+    }
 
-        return builder.build(this.getHolder(), entityPlayer);
+    private ModularUI.Builder createUITemplate(EntityPlayer player, int gridSize) {
+        int backgroundWidth = gridSize > 6 ? 176 + (gridSize - 6) * 18 : 176;
+        int center = backgroundWidth / 2;
+        int gridStartX = center - gridSize * 9;
+        int inventoryStartX = center - 9 - 72;
+        int inventoryStartY = 18 + 18 * gridSize + 12;
+        ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND, backgroundWidth, 18 + 18 * gridSize + 94).label(10, 5, this.getMetaFullName());
+
+        for (int circuitX = 0; circuitX < gridSize; ++circuitX) {
+            for (int circuitY = 0; circuitY < gridSize; ++circuitY) {
+                int index = circuitX * gridSize + circuitY;
+                builder.widget(new SlotWidget(this.catalystHolder, index, gridStartX + circuitY * 18, 18 + circuitX * 18, true, true)
+                        .setBackgroundTexture(GuiTextures.SLOT));
+            }
+        }
+        return builder.bindPlayerInventory(player.inventory, GuiTextures.SLOT, inventoryStartX, inventoryStartY);
     }
 
     @SideOnly(Side.CLIENT)
@@ -135,14 +158,29 @@ public class MetaTileEntityCatalystHatch extends MetaTileEntityMultiblockPart im
     }
 
     @Override
-    public boolean hasCatalyst() {
-        return this.catalystHolder.hasCatalyst();
+    public List<ItemStack> getCatalystList() {
+        return this.catalystHolder.getCatalystList();
     }
 
     @Override
-    public void catalystConsumed(int amount) {
-        this.catalystHolder.damageCatalyst(amount);
+    public void consumeCatalyst(ItemStack catalyst, int amount) {
+        for (int i = 0; i < this.catalystHolder.getSlots(); i++) {
+            if (this.catalystHolder.getCatalystStack(i) == catalyst) {
+                this.catalystHolder.damageCatalyst(i, amount);
+            }
+        }
     }
+
+    @Override
+    public boolean hasCatalyst(ItemStack catalyst) {
+        for (int i = 0; i < this.catalystHolder.getSlots(); i++) {
+            if (this.catalystHolder.getCatalystStack(i) == catalyst) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     @Override
     public MultiblockAbility<ICatalystHatch> getAbility() {
@@ -164,18 +202,15 @@ public class MetaTileEntityCatalystHatch extends MetaTileEntityMultiblockPart im
         return this.catalystHolder.getSlots();
     }
 
-
     @Override
     public ItemStack getStackInSlot(int slot) {
         return this.catalystHolder.getStackInSlot(slot);
     }
 
-
     @Override
     public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
         return this.catalystHolder.insertItem(slot, stack, simulate);
     }
-
 
     @Override
     public ItemStack extractItem(int slot, int amount, boolean simulate) {
@@ -186,12 +221,20 @@ public class MetaTileEntityCatalystHatch extends MetaTileEntityMultiblockPart im
     public int getSlotLimit(int slot) {
         return this.catalystHolder.getSlotLimit(slot);
     }
-
     private class CatalystHolder extends ItemStackHandler {
+        private final List<CatalystBehavior> catalystBehaviors;
 
+        // 修改构造函数，接受 slotCount 参数
+        public CatalystHolder(int slotCount) {
+            super(slotCount);
+            this.catalystBehaviors = new ArrayList<>(slotCount);
+            for (int i = 0; i < slotCount; i++) {
+                catalystBehaviors.add(null);
+            }
+        }
 
-        private CatalystBehavior getCatalystBehavior() {
-            ItemStack stack = this.getStackInSlot(0);
+        private CatalystBehavior getCatalystBehavior(int slot) {
+            ItemStack stack = this.getStackInSlot(slot);
             if (stack.isEmpty()) return null;
             return CatalystBehavior.getInstanceFor(stack);
         }
@@ -201,15 +244,17 @@ public class MetaTileEntityCatalystHatch extends MetaTileEntityMultiblockPart im
             return 1;
         }
 
-        private void damageCatalyst(int damageAmount) {
-            if (!this.hasCatalyst()) return;
-            Objects.requireNonNull(this.getCatalystBehavior()).applyCatalystDamage(this.getStackInSlot(0), damageAmount);
+        private void damageCatalyst(int slot, int damageAmount) {
+            CatalystBehavior behavior = getCatalystBehavior(slot);
+            if (behavior != null) {
+                behavior.applyCatalystDamage(this.getStackInSlot(slot), damageAmount);
+            }
         }
 
-
-        private ItemStack getCatalystStack() {
-            if (!this.hasCatalyst()) return null;
-            return this.getStackInSlot(0);
+        private ItemStack getCatalystStack(int slot) {
+            CatalystBehavior behavior = getCatalystBehavior(slot);
+            if (behavior == null) return null;
+            return this.getStackInSlot(slot);
         }
 
         @Override
@@ -219,17 +264,31 @@ public class MetaTileEntityCatalystHatch extends MetaTileEntityMultiblockPart im
 
         @Override
         protected void onLoad() {
-            this.onContentsChanged(0);
+            for (int i = 0; i < getSlots(); i++) {
+                this.onContentsChanged(i);
+            }
         }
 
         @Override
         protected void onContentsChanged(int slot) {
+            catalystBehaviors.set(slot, getCatalystBehavior(slot));
             needUpdate = true;
         }
 
-        private boolean hasCatalyst() {
-            return this.getCatalystBehavior() != null;
+        private boolean hasCatalyst(int slot) {
+            return getCatalystBehavior(slot) != null;
         }
 
+        public List<ItemStack> getCatalystList() {
+            List<ItemStack> catalysts = new ArrayList<>();
+            for (int i = 0; i < getSlots(); i++) {
+                ItemStack stack = getCatalystStack(i);
+                if (stack != null) {
+                    catalysts.add(stack);
+                }
+            }
+            return catalysts;
+        }
     }
+
 }
