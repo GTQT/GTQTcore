@@ -45,41 +45,42 @@ public class NanoCoatingRecipes {
         //氧化
         //醇-》醛
         //醛-》酸
-        CHEMICAL_RECIPES.recipeBuilder()
-                .notConsumable(CATALYST_FRAMEWORK_I)
+        CHEMICAL_PLANT.recipeBuilder()
+                .Catalyst(CATALYST_FRAMEWORK_I.getStackForm())
+                .recipeLevel(3)
                 .circuitMeta(5)
                 .fluidInputs(Methanol.getFluid(1000))
                 .fluidOutputs(Formaldehyde.getFluid(1000))
                 .duration(400).EUt(VA[GTValues.HV]).buildAndRegister();
 
-        CHEMICAL_RECIPES.recipeBuilder()
-                .notConsumable(CATALYST_FRAMEWORK_I)
+        CHEMICAL_PLANT.recipeBuilder()
+                .Catalyst(CATALYST_FRAMEWORK_I.getStackForm())
+                .recipeLevel(3)
                 .circuitMeta(5)
-
                 .fluidInputs(Formaldehyde.getFluid(1000))
                 .fluidOutputs(FormicAcid.getFluid(1000))
                 .duration(400).EUt(VA[GTValues.HV]).buildAndRegister();
 
-        CHEMICAL_RECIPES.recipeBuilder()
-                .notConsumable(CATALYST_FRAMEWORK_I)
+        CHEMICAL_PLANT.recipeBuilder()
+                .Catalyst(CATALYST_FRAMEWORK_I.getStackForm())
+                .recipeLevel(3)
                 .circuitMeta(5)
-
                 .fluidInputs(Ethanol.getFluid(1000))
                 .fluidOutputs(Acetaldehyde.getFluid(1000))
                 .duration(400).EUt(VA[GTValues.HV]).buildAndRegister();
 
-        CHEMICAL_RECIPES.recipeBuilder()
-                .notConsumable(CATALYST_FRAMEWORK_I)
+        CHEMICAL_PLANT.recipeBuilder()
+                .Catalyst(CATALYST_FRAMEWORK_I.getStackForm())
+                .recipeLevel(3)
                 .circuitMeta(5)
-
                 .fluidInputs(Ethylene.getFluid(1000))
                 .fluidOutputs(Acetaldehyde.getFluid(1000))
                 .duration(400).EUt(VA[GTValues.HV]).buildAndRegister();
 
-        CHEMICAL_RECIPES.recipeBuilder()
-                .notConsumable(CATALYST_FRAMEWORK_I)
+        CHEMICAL_PLANT.recipeBuilder()
+                .Catalyst(CATALYST_FRAMEWORK_I.getStackForm())
+                .recipeLevel(3)
                 .circuitMeta(5)
-
                 .fluidInputs(Acetaldehyde.getFluid(1000))
                 .fluidOutputs(AceticAcid.getFluid(1000))
                 .duration(400).EUt(VA[GTValues.HV]).buildAndRegister();
@@ -129,7 +130,7 @@ public class NanoCoatingRecipes {
 
     private static void Catalyst_iii() {
         CHEMICAL_PLANT.recipeBuilder()
-                .notConsumable(CATALYST_FRAMEWORK_III)
+                .Catalyst(CATALYST_FRAMEWORK_III.getStackForm())
                 .input(dustTiny, Gold)
                 .circuitMeta(5)
                 .input(dust, Carbon, 2)
@@ -139,7 +140,7 @@ public class NanoCoatingRecipes {
                 .duration(1000).EUt(VA[HV]).buildAndRegister();
 
         CHEMICAL_PLANT.recipeBuilder()
-                .notConsumable(CATALYST_FRAMEWORK_III)
+                .Catalyst(CATALYST_FRAMEWORK_III.getStackForm())
                 .input(dustTiny, Gold)
                 .circuitMeta(5)
                 .input(dust, Carbon, 2)
@@ -149,7 +150,7 @@ public class NanoCoatingRecipes {
                 .duration(1000).EUt(VA[IV]).buildAndRegister();
 
         CHEMICAL_PLANT.recipeBuilder()
-                .notConsumable(CATALYST_FRAMEWORK_III)
+                .Catalyst(CATALYST_FRAMEWORK_III.getStackForm())
                 .input(dustTiny, Gold)
                 .circuitMeta(6)
                 .input(dust, Carbon, 2)
@@ -160,7 +161,7 @@ public class NanoCoatingRecipes {
                 .duration(1000).EUt(VA[HV]).buildAndRegister();
 
         CHEMICAL_PLANT.recipeBuilder()
-                .notConsumable(CATALYST_FRAMEWORK_III)
+                .Catalyst(CATALYST_FRAMEWORK_III.getStackForm())
                 .input(dustTiny, Platinum)
                 .circuitMeta(5)
                 .input(dust, Carbon, 6)
@@ -171,7 +172,7 @@ public class NanoCoatingRecipes {
                 .duration(1000).EUt(VA[EV]).buildAndRegister();
 
         CHEMICAL_PLANT.recipeBuilder()
-                .notConsumable(CATALYST_FRAMEWORK_III)
+                .Catalyst(CATALYST_FRAMEWORK_III.getStackForm())
                 .input(dustTiny, Samarium)
                 .circuitMeta(6)
                 .input(dust, Carbon, 14)
@@ -183,7 +184,7 @@ public class NanoCoatingRecipes {
                 .duration(1000).EUt(VA[IV]).buildAndRegister();
 
         CHEMICAL_PLANT.recipeBuilder()
-                .notConsumable(CATALYST_FRAMEWORK_III)
+                .Catalyst(CATALYST_FRAMEWORK_III.getStackForm())
                 .input(dustTiny, Naquadah)
                 .circuitMeta(6)
                 .input(dust, Carbon, 20)
@@ -194,7 +195,7 @@ public class NanoCoatingRecipes {
                 .duration(1000).EUt(VA[LuV]).buildAndRegister();
 
         CHEMICAL_PLANT.recipeBuilder()
-                .notConsumable(CATALYST_FRAMEWORK_III)
+                .Catalyst(CATALYST_FRAMEWORK_III.getStackForm())
                 .input(dustTiny, Naquadria)
                 .circuitMeta(6)
                 .input(dust, Carbon, 20)
@@ -247,7 +248,7 @@ public class NanoCoatingRecipes {
     //嬗变
     private static void Catalyst_v() {
         CHEMICAL_PLANT.recipeBuilder()
-                .notConsumable(CATALYST_FRAMEWORK_V)
+                .Catalyst(CATALYST_FRAMEWORK_V.getStackForm())
                 .fluidInputs(HydrochloricAcid.getFluid(10000))
                 .input(dust, SodiumTungstateDihydrate, 10)
                 .chancedOutput(dust, Powellite, 10, 5000, 0)
@@ -263,7 +264,7 @@ public class NanoCoatingRecipes {
                 .buildAndRegister();
 
         CHEMICAL_PLANT.recipeBuilder()
-                .notConsumable(CATALYST_FRAMEWORK_V)
+                .Catalyst(CATALYST_FRAMEWORK_V.getStackForm())
                 .fluidInputs(ImpureTannicAcid.getFluid(2000))
                 .input(OrePrefix.dust, Carbon, 80)
                 .fluidOutputs(HydrobromicAcid.getFluid(200))
@@ -274,7 +275,7 @@ public class NanoCoatingRecipes {
                 .buildAndRegister();
 
         CHEMICAL_PLANT.recipeBuilder()
-                .notConsumable(CATALYST_FRAMEWORK_V)
+                .Catalyst(CATALYST_FRAMEWORK_V.getStackForm())
                 .fluidInputs(BioOil.getFluid(6000))
                 .input(OrePrefix.dust, SodaAsh, 10)
                 .fluidOutputs(RawOil.getFluid(750))
@@ -287,7 +288,7 @@ public class NanoCoatingRecipes {
                 .buildAndRegister();
 
         CHEMICAL_PLANT.recipeBuilder()
-                .notConsumable(CATALYST_FRAMEWORK_V)
+                .Catalyst(CATALYST_FRAMEWORK_V.getStackForm())
                 .fluidInputs(BioOil.getFluid(6000))
                 .input(OrePrefix.dust, Meat, 10)
                 .fluidOutputs(RawOil.getFluid(750))
@@ -300,7 +301,7 @@ public class NanoCoatingRecipes {
                 .buildAndRegister();
 
         CHEMICAL_PLANT.recipeBuilder()
-                .notConsumable(CATALYST_FRAMEWORK_V)
+                .Catalyst(CATALYST_FRAMEWORK_V.getStackForm())
                 .fluidInputs(BioOil.getFluid(6000))
                 .input(OrePrefix.dust, Bone, 10)
                 .fluidOutputs(RawOil.getFluid(750))
@@ -317,7 +318,7 @@ public class NanoCoatingRecipes {
     private static void Catalyst_vi() {
         //木头线
         CHEMICAL_PLANT.recipeBuilder()
-                .notConsumable(CATALYST_FRAMEWORK_VI)
+                .Catalyst(CATALYST_FRAMEWORK_VI.getStackForm())
                 .input(log, Wood, 64)
                 .circuitMeta(1)
                 .outputs(new ItemStack(Items.COAL, 64, 1))
@@ -332,7 +333,7 @@ public class NanoCoatingRecipes {
                 .buildAndRegister();
 
         CHEMICAL_PLANT.recipeBuilder()
-                .notConsumable(CATALYST_FRAMEWORK_VI)
+                .Catalyst(CATALYST_FRAMEWORK_VI.getStackForm())
                 .input(log, Wood, 64)
                 .circuitMeta(2)
                 .outputs(new ItemStack(Items.COAL, 64, 1))
@@ -348,7 +349,7 @@ public class NanoCoatingRecipes {
                 .buildAndRegister();
 
         CHEMICAL_PLANT.recipeBuilder()
-                .notConsumable(CATALYST_FRAMEWORK_VI)
+                .Catalyst(CATALYST_FRAMEWORK_VI.getStackForm())
                 .input(log, Wood, 64)
                 .circuitMeta(3)
                 .outputs(new ItemStack(Items.COAL, 64, 1))
@@ -365,7 +366,7 @@ public class NanoCoatingRecipes {
         List<Material> oilTypes = Arrays.asList(Oil, OilLight, OilHeavy, RawOil);
         for (Material oil : oilTypes) {
             CHEMICAL_PLANT.recipeBuilder()
-                    .notConsumable(CATALYST_FRAMEWORK_VI)
+                    .Catalyst(CATALYST_FRAMEWORK_VI.getStackForm())
                     .fluidInputs(oil.getFluid(1000))
                     .fluidInputs(Hydrogen.getFluid(2000))
                     .circuitMeta(2)
@@ -382,7 +383,7 @@ public class NanoCoatingRecipes {
                     .buildAndRegister();
 
             CHEMICAL_PLANT.recipeBuilder()
-                    .notConsumable(CATALYST_FRAMEWORK_VI)
+                    .Catalyst(CATALYST_FRAMEWORK_VI.getStackForm())
                     .fluidInputs(oil.getFluid(1000))
                     .fluidInputs(Steam.getFluid(2000))
                     .circuitMeta(2)
@@ -400,7 +401,7 @@ public class NanoCoatingRecipes {
         }
         ////////////////////////////////////////////////////
         CHEMICAL_PLANT.recipeBuilder()
-                .notConsumable(CATALYST_FRAMEWORK_VI)
+                .Catalyst(CATALYST_FRAMEWORK_VI.getStackForm())
                 .fluidInputs(Oil.getFluid(1000))
                 .circuitMeta(1)
                 .chancedOutput(dust, Sulfur, 1000, 0)
@@ -414,7 +415,7 @@ public class NanoCoatingRecipes {
                 .buildAndRegister();
 
         CHEMICAL_PLANT.recipeBuilder()
-                .notConsumable(CATALYST_FRAMEWORK_VI)
+                .Catalyst(CATALYST_FRAMEWORK_VI.getStackForm())
                 .fluidInputs(OilLight.getFluid(1500))
                 .circuitMeta(1)
                 .chancedOutput(dust, Sulfur, 1000, 0)
@@ -428,7 +429,7 @@ public class NanoCoatingRecipes {
                 .buildAndRegister();
 
         CHEMICAL_PLANT.recipeBuilder()
-                .notConsumable(CATALYST_FRAMEWORK_VI)
+                .Catalyst(CATALYST_FRAMEWORK_VI.getStackForm())
                 .fluidInputs(OilHeavy.getFluid(1000))
                 .circuitMeta(1)
                 .chancedOutput(dust, Sulfur, 1000, 0)
@@ -442,7 +443,7 @@ public class NanoCoatingRecipes {
                 .buildAndRegister();
 
         CHEMICAL_PLANT.recipeBuilder()
-                .notConsumable(CATALYST_FRAMEWORK_VI)
+                .Catalyst(CATALYST_FRAMEWORK_VI.getStackForm())
                 .fluidInputs(RawOil.getFluid(1000))
                 .circuitMeta(1)
                 .chancedOutput(dust, Sulfur, 1000, 0)

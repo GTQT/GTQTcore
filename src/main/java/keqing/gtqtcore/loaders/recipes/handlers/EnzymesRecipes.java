@@ -23,17 +23,17 @@ import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 public class EnzymesRecipes {
     public static void SpecialLanthanum()
     {
-        GENE_MUTAGENESIS.recipeBuilder()
+        CHEMICAL_PLANT.recipeBuilder()
+                .Catalyst(CATALYST_FRAMEWORK_III.getStackForm())
+                .recipeLevel(5)
                 .input(dustTiny,Naquadria)
                 .input(dustTiny,Platinum)
-                .notConsumable(CATALYST_FRAMEWORK_III)
                 .fluidInputs(Europium.getFluid(10))
                 .fluidInputs(Enzymesab.getFluid(10))
                 .fluidOutputs(Enzymesea.getFluid(20))
                 .EUt(VA[ZPM])
                 .duration(1200)
                 .circuitMeta(1)
-                .rate(60)
                 .cleanroom(CleanroomType.STERILE_CLEANROOM)
                 .buildAndRegister();
 

@@ -62,7 +62,8 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
     int drillBedTier;
     int drillTier;
     int random;
-    int kind;
+    int type;
+    int dimension;
 
     public MetaTileEntityMiningDrill(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.MINING_DRILL_RECIPES);
@@ -73,6 +74,7 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setTag("ContainerInventory", this.containerInventory.serializeNBT());
         data.setInteger("random", random);
+        data.setInteger("type", type);
         return super.writeToNBT(data);
     }
 
@@ -80,6 +82,7 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
     public void readFromNBT(NBTTagCompound data) {
         this.containerInventory.deserializeNBT(data.getCompoundTag("ContainerInventory"));
         random = data.getInteger("random");
+        type = data.getInteger("type");
         super.readFromNBT(data);
     }
 
@@ -160,7 +163,7 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
                 textList.add(new TextComponentTranslation("开采等级：%s", drillTier));
         } else textList.add(new TextComponentTranslation("钻头仓等级：%s", getDrillHeadHatch().getTier()));
         if (checkCard()) {
-            textList.add(new TextComponentTranslation(GTQTOreHelper.getInfo(kind % 4)));
+            textList.add(new TextComponentTranslation(GTQTOreHelper.getInfo(dimension,type)));
         }
     }
 
@@ -269,6 +272,7 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
         if ((this.getPos().getZ() / 64) % 2 == 0) random += 2;
         else random += 1;
 
+        dimension = this.getWorld().provider.getDimension();
         this.writeCustomData(GTQTValue.UPDATE_TIER22, buf -> buf.writeInt(this.casing));
     }
 
@@ -305,9 +309,9 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
         ItemStack item = containerInventory.getStackInSlot(0);
         if (item.getItem() == GTQTMetaItems.GTQT_META_ITEM && item.getMetadata() == GTQTMetaItems.POS_ORE_CARD.getMetaValue()) {
             NBTTagCompound compound = item.getTagCompound();
-            if (compound != null && compound.hasKey("Kind")) {
-                if (compound.getInteger("Kind") == random + this.getWorld().provider.getDimension() * 4) {
-                    kind = compound.getInteger("Kind");
+            if (compound != null && compound.hasKey("dimension")&& compound.hasKey("type")) {
+                if (compound.getInteger("type") == random && compound.getInteger("dimension") ==this.getWorld().provider.getDimension()) {
+                    type = compound.getInteger("type");
                     return true;
                 }
             }

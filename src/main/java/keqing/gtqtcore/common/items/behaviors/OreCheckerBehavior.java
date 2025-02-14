@@ -14,11 +14,10 @@ public class OreCheckerBehavior implements IItemBehaviour {
         lines.add(I18n.format("使用地震探测器获取当前区块地质"));
         if (stack.hasTagCompound()) {
             NBTTagCompound compound = stack.getTagCompound();
-            int kind = compound.getInteger("Kind");
-            lines.add(I18n.format(GTQTOreHelper.getInfo(kind)));
+            int type = compound.getInteger("type");
+            int dimension = compound.getInteger("dimension");
+            lines.add(I18n.format(GTQTOreHelper.getInfo(dimension, type)));
         }
     }
-
-
 }
 

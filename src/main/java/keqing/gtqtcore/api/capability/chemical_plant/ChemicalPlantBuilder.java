@@ -5,6 +5,7 @@ import gregtech.api.recipes.RecipeBuilder;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.util.EnumValidationResult;
 import gregtech.api.util.GTLog;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
@@ -30,7 +31,10 @@ public class ChemicalPlantBuilder extends RecipeBuilder<ChemicalPlantBuilder> {
         return this.recipePropertyStorage == null ? 0 :
                 this.recipePropertyStorage.getRecipePropertyValue(ChemicalPlantProperties.getInstance(), 0);
     }
-
+    public ItemStack getCatalyst() {
+        return this.recipePropertyStorage == null ? ItemStack.EMPTY :
+                this.recipePropertyStorage.getRecipePropertyValue(CatalystProperties.getInstance(), ItemStack.EMPTY);
+    }
     @Override
     public boolean applyProperty(@Nonnull String key, Object value) {
         if (key.equals(ChemicalPlantProperties.KEY)) {
@@ -68,6 +72,7 @@ public class ChemicalPlantBuilder extends RecipeBuilder<ChemicalPlantBuilder> {
         return new ToStringBuilder(this)
                 .appendSuper(super.toString())
                 .append(ChemicalPlantProperties.getInstance().getKey(), getLevel())
+                .append(CatalystProperties.getInstance().getKey(), getCatalyst())
                 .toString();
     }
 }

@@ -261,9 +261,21 @@ public class GTQTTextures {
     public static TextureAtlasSprite COSMIC_9;
     public static SimpleOverlayRenderer ME_MACHINE_CONTROLLER_ON;
     public static SimpleOverlayRenderer ME_MACHINE_CONTROLLER_OFF;
+
+    public static SimpleOverlayRenderer CRIB_ACTIVE;
+    public static SimpleOverlayRenderer CRIB_INACTIVE;
+    public static SimpleOverlayRenderer CRIB_PROXY;
+    public static TextureArea ME_PATTERN_OVERLAY;
+    public static TextureArea EXPORT;
     public static void init() {
+        ME_PATTERN_OVERLAY = TextureArea.fullImage("textures/gui/widget/pattern_me.png");
+        EXPORT = TextureArea.fullImage("textures/gui/widget/export.png");
         AUTO_PULL = TextureArea.fullImage("textures/gui/widget/auto_pull.png");
         ITEM_FLUID_OVERLAY = TextureArea.fullImage("textures/gui/widget/item_fluid.png");
+
+        CRIB_ACTIVE = new SimpleOverlayRenderer("overlay/machine/overlay_me_crafting_input_buffer");
+        CRIB_INACTIVE = new SimpleOverlayRenderer("overlay/machine/overlay_me_crafting_input_bus");
+        CRIB_PROXY = new SimpleOverlayRenderer("overlay/machine/overlay_me_crafting_input_slave");
         MAINTENANCE_OVERLAY_STERILE_CLEANING = new SimpleOverlayRenderer("overlay/machine/overlay_maintenance_sterile_cleaning");
         MAINTENANCE_OVERLAY_ISO3_CLEANING = new SimpleOverlayRenderer("overlay/machine/overlay_maintenance_iso_3_cleaning");
         MAINTENANCE_OVERLAY_ISO2_CLEANING = new SimpleOverlayRenderer("overlay/machine/overlay_maintenance_iso_2_cleaning");

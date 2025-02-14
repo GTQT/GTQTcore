@@ -170,24 +170,25 @@ public class BacteriaCulturesChain {
 
         MIXER_RECIPES.recipeBuilder()
                 .fluidInputs(Blood.getFluid(1000))
-                .notConsumable(CATALYST_FRAMEWORK_IV)
                 .fluidInputs(DistilledWater.getFluid(1000))
                 .fluidOutputs(BacterialGrowthMedium.getFluid(2000))
                 .EUt(7680)
                 .duration(400).cleanroom(CleanroomType.CLEANROOM)
                 .buildAndRegister();
 
-        BIOLOGICAL_REACTION_RECIPES.recipeBuilder().EUt(7680).duration(400)
+        CHEMICAL_PLANT.recipeBuilder().EUt(7680).duration(400)
+                .Catalyst(CATALYST_FRAMEWORK_IV.getStackForm())
+                .recipeLevel(4)
                 .fluidInputs(BacterialGrowthMedium.getFluid(10))
                 .fluidOutputs(DepletedGrowthMedium.getFluid(10))
                 .fluidInputs(Blood.getFluid(50))
                 .fluidOutputs(Blood.getFluid(500))
-                .notConsumable(CATALYST_FRAMEWORK_IV)
                 .buildAndRegister();
 
-        BIOLOGICAL_REACTION_RECIPES.recipeBuilder()
+        CHEMICAL_PLANT.recipeBuilder()
+                .Catalyst(CATALYST_FRAMEWORK_IV.getStackForm())
+                .recipeLevel(4)
                 .fluidInputs(DragonBlood.getFluid(10))
-                .notConsumable(CATALYST_FRAMEWORK_IV)
                 .fluidInputs(DistilledWater.getFluid(5000))
                 .fluidOutputs(BacterialGrowthMedium.getFluid(10000))
                 .EUt(VA[5])

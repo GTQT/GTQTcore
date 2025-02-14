@@ -261,7 +261,13 @@ public class GTQTMetaTileEntities {
     public static SimpleMachineMetaTileEntity[] RECYCLE = new SimpleMachineMetaTileEntity[GTValues.V.length - 1];
     public static MetaTileEntityLargeElementDuplicator LARGE_ELEMENT_DUPLICATOR;
     public static MetaTileEntityLargeUUProducter LARGE_UU_PRODUCTER;
-
+    public static MetaTileEntityBudgetCRIB BUDGET_CRIB;
+    public static MetaTileEntityBudgetCRIBProxy BUDGET_CRIB_PROXY;
+    public static MetaTileEntityBudgetCRIBA4 BUDGET_CRIB_4;
+    public static MetaTileEntityBudgetCRIBA8 BUDGET_CRIB_8;
+    public static MetaTileEntityBudgetCRIBA12 BUDGET_CRIB_12;
+    public static MetaTileEntityBudgetCRIBA16 BUDGET_CRIB_16;
+    public static MetaTileEntityBudgetCRIBA20 BUDGET_CRIB_20;
     public static MetaTileEntityMillBallHatch MULTIPART_BALL_HATCH;
     public static MetaTileEntityCatalystHatch[] CATALYST_HATCH=new MetaTileEntityCatalystHatch[4];
     public static MetaTileEntityResearchSystemNetworkSwitch KQNS;
@@ -867,7 +873,7 @@ public class GTQTMetaTileEntities {
 
         BIO_HATCH = registerMetaTileEntity(15546, new MetaTileEntityBioHatch(gtqtcoreId("bio_hatch")));
         INF_WATER_HATCH = registerMetaTileEntity(15547, new MetaTileInfWaterHatch(gtqtcoreId("infinite_water_hatch")));
-        CATALYST_HATCH[0] = registerMetaTileEntity(15548, new MetaTileEntityCatalystHatch(gtqtcoreId("catalyst_hatch"),1));
+        CATALYST_HATCH[0] = registerMetaTileEntity(15548, new MetaTileEntityCatalystHatch(gtqtcoreId("catalyst_hatch.0"),1));
         MULTIPART_BUFFER_HATCH = registerMetaTileEntity(15549, new MetaTileEntityBufferHatch(gtqtcoreId("buffer_hatch")));
         MULTIPART_BALL_HATCH = registerMetaTileEntity(15550, new MetaTileEntityMillBallHatch(gtqtcoreId("mill_ball_hatch")));
         EDATA_ACCESS_HATCH = registerMetaTileEntity(15551, new MetaTileEntityDataAccessHatch(gtqtcoreId("edata_access_hatch"), GTValues.MV, false));
@@ -903,9 +909,16 @@ public class GTQTMetaTileEntities {
         SINGLE_ITEM_INPUT_BUS = registerMetaTileEntity(15569, new MetaTileEntitySingleItemInputBus(gtqtcoreId("single_item_input_bus")));
         SUPER_INPUT_BUS = registerMetaTileEntity(15570, new MetaTileEntitySuperInputBus(gtqtcoreId("super_input_bus")));
         SINGLE_INPUT_BUS = registerMetaTileEntity(15571, new MetaTileEntitySingleInputBus(gtqtcoreId("single_input_bus")));
-        CATALYST_HATCH[1] = registerMetaTileEntity(15572, new MetaTileEntityCatalystHatch(gtqtcoreId("catalyst_hatch.2"),2));
-        CATALYST_HATCH[2] = registerMetaTileEntity(15573, new MetaTileEntityCatalystHatch(gtqtcoreId("catalyst_hatch.3"),3));
-        CATALYST_HATCH[3] = registerMetaTileEntity(15574, new MetaTileEntityCatalystHatch(gtqtcoreId("catalyst_hatch.4"),4));
+        CATALYST_HATCH[1] = registerMetaTileEntity(15572, new MetaTileEntityCatalystHatch(gtqtcoreId("catalyst_hatch.1"),2));
+        CATALYST_HATCH[2] = registerMetaTileEntity(15573, new MetaTileEntityCatalystHatch(gtqtcoreId("catalyst_hatch.2"),3));
+        CATALYST_HATCH[3] = registerMetaTileEntity(15574, new MetaTileEntityCatalystHatch(gtqtcoreId("catalyst_hatch.3"),4));
+        BUDGET_CRIB = registerMetaTileEntity(15575, new MetaTileEntityBudgetCRIB(gtqtcoreId("budget_crib")));
+        BUDGET_CRIB_PROXY = registerMetaTileEntity(15576, new MetaTileEntityBudgetCRIBProxy(gtqtcoreId("budget_crib_proxy")));
+        BUDGET_CRIB_4 = registerMetaTileEntity(15577, new MetaTileEntityBudgetCRIBA4(gtqtcoreId("budget_crib_4")));
+        BUDGET_CRIB_8 = registerMetaTileEntity(15578, new MetaTileEntityBudgetCRIBA8(gtqtcoreId("budget_crib_8")));
+        BUDGET_CRIB_12 = registerMetaTileEntity(15579, new MetaTileEntityBudgetCRIBA12(gtqtcoreId("budget_crib_12")));
+        BUDGET_CRIB_16 = registerMetaTileEntity(15580, new MetaTileEntityBudgetCRIBA16(gtqtcoreId("budget_crib_16")));
+        BUDGET_CRIB_20 = registerMetaTileEntity(15581, new MetaTileEntityBudgetCRIBA20(gtqtcoreId("budget_crib_20")));
 
         ROTOR_HOLDER[6] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityRotorHolder(gtqtcoreId("rotor_holder.uhv"), GTValues.UHV));
         ROTOR_HOLDER[7] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityRotorHolder(gtqtcoreId("rotor_holder.uev"), GTValues.UEV));

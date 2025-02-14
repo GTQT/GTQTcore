@@ -82,7 +82,7 @@ public class BiologyRecipe {
                 .circuitMeta(4)
                 .buildAndRegister();
 
-//Common Algae Usage
+        //Common Algae Usage
         GTQTcoreRecipeMaps.CHEMICAL_PLANT.recipeBuilder()
                 .recipeLevel(1)
                 .input(GTQTMetaItems.COMMON_ALGAE, 10)
@@ -92,7 +92,7 @@ public class BiologyRecipe {
                 .duration(100)
                 .fluidOutputs(Materials.Methane.getFluid(500))
                 .buildAndRegister();
-//Green Algae Usage
+        //Green Algae Usage
         GTQTcoreRecipeMaps.CHEMICAL_PLANT.recipeBuilder()
                 .recipeLevel(1)
                 .input(GTQTMetaItems.GREEN_ALGAE, 5)
