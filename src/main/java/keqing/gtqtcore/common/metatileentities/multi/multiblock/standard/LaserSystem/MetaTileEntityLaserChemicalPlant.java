@@ -4,6 +4,7 @@ import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
+import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.TraceabilityPredicate;
@@ -12,8 +13,11 @@ import gregtech.api.unification.material.Materials;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.core.sound.GTSoundEvents;
+import keqing.gtqtcore.api.capability.ICatalystHatch;
+import keqing.gtqtcore.api.capability.chemical_plant.CatalystProperties;
 import keqing.gtqtcore.api.capability.chemical_plant.ChemicalPlantProperties;
 import keqing.gtqtcore.api.capability.impl.MultiblockLaserRecipeLogic;
+import keqing.gtqtcore.api.metaileentity.GTQTRecipeMapMultiblockController;
 import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
 import keqing.gtqtcore.api.metaileentity.multiblock.RecipeMapLaserMultiblockController;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
@@ -41,7 +45,7 @@ public class MetaTileEntityLaserChemicalPlant extends RecipeMapLaserMultiblockCo
 
     public MetaTileEntityLaserChemicalPlant(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.CHEMICAL_PLANT);
-        this.recipeMapWorkable = new MultiblockLaserRecipeLogic(this);
+        this.recipeMapWorkable = new ChemicalPlantLogic(this);
     }
 
     private static IBlockState getUniqueCasingState() {
@@ -143,5 +147,45 @@ public class MetaTileEntityLaserChemicalPlant extends RecipeMapLaserMultiblockCo
     public void addInformation(ItemStack stack, World world, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, world, tooltip, advanced);
         tooltip.add(I18n.format("激光转换化工厂等级：温度 /1800"));
+    }
+
+    public ICatalystHatch getCatalystHatch() {
+        List<ICatalystHatch> abilities = getAbilities(GTQTMultiblockAbility.CATALYST_MULTIBLOCK_ABILITY);
+        if (abilities.isEmpty())
+            return null;
+        return abilities.get(0);
+    }
+    protected class ChemicalPlantLogic extends MultiblockLaserRecipeLogic {
+
+        public ChemicalPlantLogic(RecipeMapLaserMultiblockController tileEntity) {
+            super(tileEntity);
+
+        }
+        @Override
+        public boolean checkRecipe(@Nonnull Recipe recipe) {
+            if (!super.checkRecipe(recipe)) {
+                return false;
+            }
+
+            CatalystProperties catalystProps = CatalystProperties.getInstance();
+
+            // Check catalyst properties
+            if (recipe.hasProperty(catalystProps)) {
+                ItemStack catalystStack = recipe.getProperty(catalystProps, ItemStack.EMPTY);
+                if (catalystStack != null && !catalystStack.isEmpty()) {
+                    try {
+                        if (getCatalystHatch().hasCatalyst(catalystStack)) {
+                            getCatalystHatch().consumeCatalyst(catalystStack, 1);
+                            return true;
+                        }
+                    } catch (Exception e) {
+                        return false;
+                    }
+                    return false;
+                }
+            }
+
+            return true;
+        }
     }
 }

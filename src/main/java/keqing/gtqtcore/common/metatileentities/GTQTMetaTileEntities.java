@@ -38,6 +38,7 @@ import keqing.gtqtcore.common.metatileentities.multi.generators.generatorRework.
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.primitive.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.LaserSystem.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.*;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.decoration.MetaTileEntityHolographicDisplay;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.endGame.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.gcys.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.giantEquipment.*;
@@ -150,6 +151,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityLightningRod[] LIGHTNING_ROD = new MetaTileEntityLightningRod[3];
     public static MetaTileEntityDangoteDistillery DANGOTE_DISTILLERY;
     public static MetaTileEntityResearchSystemNetWork KeQing_NET;
+    public static MetaTileEntityHolographicDisplay HOLOGRAPHIC_DISPLAY;
     public static MetaTileEntityProcessingArray LV_PROCESSING_ARRAY;
     public static MetaTileEntityProcessingArray MV_PROCESSING_ARRAY;
     public static MetaTileEntityProcessingArray HV_PROCESSING_ARRAY;
@@ -712,6 +714,7 @@ public class GTQTMetaTileEntities {
         HPCA_ULTIMATE_COOLER_COMPONENT = registerMetaTileEntity(3463, new MetaTileEntityHPCAAdvancedCooler(gtqtcoreId("hpca.ultimate_cooler_component"), false, true));
 
         KeQing_NET = registerMetaTileEntity(3470, new MetaTileEntityResearchSystemNetWork(gtqtcoreId("keqing_net")));
+        HOLOGRAPHIC_DISPLAY = registerMetaTileEntity(3471, new MetaTileEntityHolographicDisplay(gtqtcoreId("holographic_display")));
         //GCYS
         INDUSTRIAL_DRILL = registerMetaTileEntity(3500, new MetaTileEntityIndustrialDrill(gtqtcoreId("industrial_drill")));
         LARGE_CATALYTIC_REFORMER = registerMetaTileEntity(3501, new MetaTileEntityCatalyticReformer(gtqtcoreId("catalytic_reformer")));

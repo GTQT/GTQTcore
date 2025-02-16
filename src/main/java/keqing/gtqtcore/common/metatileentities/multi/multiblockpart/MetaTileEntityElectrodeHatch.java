@@ -47,7 +47,14 @@ public class MetaTileEntityElectrodeHatch extends MetaTileEntityMultiblockPart i
     public MetaTileEntityElectrodeHatch(ResourceLocation metaTileEntityId, int tier) {
         super(metaTileEntityId, tier);
         this.tier = tier;
-        this.containerInventory = new GTItemStackHandler(this, 1);
+        this.containerInventory = new ItemStackHandler(1)
+        {
+            @Override
+            public int getSlotLimit(int slot) {
+                return 1;
+            }
+
+        };
     }
 
 

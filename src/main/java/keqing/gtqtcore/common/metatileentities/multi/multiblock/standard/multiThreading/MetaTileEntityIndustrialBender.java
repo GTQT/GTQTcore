@@ -37,8 +37,7 @@ public class MetaTileEntityIndustrialBender extends GTQTMultiblockCore {
                 RecipeMaps.BENDER_RECIPES,
                 RecipeMaps.FORGE_HAMMER_RECIPES,
                 RecipeMaps.FORMING_PRESS_RECIPES,
-                RecipeMaps.COMPRESSOR_RECIPES,
-                GTQTcoreRecipeMaps.PRESSURE_LAMINATOR_RECIPES
+                RecipeMaps.COMPRESSOR_RECIPES
         });
     }
 

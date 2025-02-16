@@ -20,6 +20,7 @@ import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.items.behaviors.CatalystBehavior;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
@@ -161,11 +162,14 @@ public class MetaTileEntityCatalystHatch extends MetaTileEntityMultiblockPart im
     public List<ItemStack> getCatalystList() {
         return this.catalystHolder.getCatalystList();
     }
-
+    public boolean ItemStackEqual(ItemStack a, ItemStack b)
+    {
+        return a.getItem()==b.getItem();
+    }
     @Override
     public void consumeCatalyst(ItemStack catalyst, int amount) {
         for (int i = 0; i < this.catalystHolder.getSlots(); i++) {
-            if (this.catalystHolder.getCatalystStack(i) == catalyst) {
+            if (ItemStackEqual(this.catalystHolder.getCatalystStack(i),catalyst)) {
                 this.catalystHolder.damageCatalyst(i, amount);
             }
         }
@@ -174,14 +178,13 @@ public class MetaTileEntityCatalystHatch extends MetaTileEntityMultiblockPart im
     @Override
     public boolean hasCatalyst(ItemStack catalyst) {
         for (int i = 0; i < this.catalystHolder.getSlots(); i++) {
-            if (this.catalystHolder.getCatalystStack(i) == catalyst) {
+            if (ItemStackEqual(this.catalystHolder.getCatalystStack(i),catalyst)) {
                 return true;
             }
         }
         return false;
     }
-
-
+    
     @Override
     public MultiblockAbility<ICatalystHatch> getAbility() {
         return GTQTMultiblockAbility.CATALYST_MULTIBLOCK_ABILITY;
