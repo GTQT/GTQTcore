@@ -207,23 +207,20 @@ public class MetaTileEntityBlazingBlastFurnace extends GTQTNoOCMultiblockControl
             super(tileEntity);
             this.metaTileEntityBlazingBlastFurnace = (MetaTileEntityBlazingBlastFurnace) tileEntity;
         }
-
+        @Override
         protected void updateRecipeProgress() {
-            IMultipleTankHandler inputTank = metaTileEntityBlazingBlastFurnace.getInputFluidInventory();
-            if (canRecipeProgress && drawEnergy(recipeEUt, true) && pyrotheumFluid.isFluidStackIdentical(inputTank.drain(pyrotheumFluid.copy(), false))) {
-                drawEnergy(recipeEUt, false);
-                pyrotheumFluid.isFluidStackIdentical(inputTank.drain(pyrotheumFluid.copy(), true));
-                if (++progressTime > maxProgressTime) {
-                    completeRecipe();
+            if (this.canRecipeProgress && this.drawEnergy(this.recipeEUt, true)) {
+                IMultipleTankHandler inputTank = metaTileEntityBlazingBlastFurnace.getInputFluidInventory();
+                if (pyrotheumFluid.isFluidStackIdentical(inputTank.drain(pyrotheumFluid, false))) {
+                    inputTank.drain(pyrotheumFluid, true);
+                    if (++this.progressTime > this.maxProgressTime) {
+                        this.completeRecipe();
+                    }
+                } else {
+                    return;
                 }
-                if (this.hasNotEnoughEnergy && this.getEnergyInputPerSecond() > 19L * (long) this.recipeEUt) {
-                    this.hasNotEnoughEnergy = false;
-                }
-            } else if (canRecipeProgress && !drawEnergy(recipeEUt, true) && this.recipeEUt > 0) {
-                this.hasNotEnoughEnergy = true;
-                this.decreaseProgress();
+                this.drawEnergy(this.recipeEUt, false);
             }
         }
-
     }
 }

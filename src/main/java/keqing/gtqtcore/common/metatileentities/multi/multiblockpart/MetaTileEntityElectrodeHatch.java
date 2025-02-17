@@ -3,6 +3,7 @@ package keqing.gtqtcore.common.metatileentities.multi.multiblockpart;
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
+import gregtech.api.capability.impl.NotifiableItemStackHandler;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.ModularUI;
 import gregtech.api.gui.widgets.AdvancedTextWidget;
@@ -31,6 +32,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
@@ -47,7 +49,7 @@ public class MetaTileEntityElectrodeHatch extends MetaTileEntityMultiblockPart i
     public MetaTileEntityElectrodeHatch(ResourceLocation metaTileEntityId, int tier) {
         super(metaTileEntityId, tier);
         this.tier = tier;
-        this.containerInventory = new ItemStackHandler(1)
+        this.containerInventory = new NotifiableItemStackHandler(this, 1, null, false)
         {
             @Override
             public int getSlotLimit(int slot) {
@@ -56,7 +58,10 @@ public class MetaTileEntityElectrodeHatch extends MetaTileEntityMultiblockPart i
 
         };
     }
-
+    @Override
+    public IItemHandlerModifiable getImportItems() {
+        return this.containerInventory;
+    }
 
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setTag("ContainerInventory", this.containerInventory.serializeNBT());

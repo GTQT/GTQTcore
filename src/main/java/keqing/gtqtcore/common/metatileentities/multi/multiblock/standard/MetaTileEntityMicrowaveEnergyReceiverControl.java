@@ -9,13 +9,12 @@ import gregtech.api.capability.GregtechTileCapabilities;
 import gregtech.api.capability.IEnergyContainer;
 import gregtech.api.capability.impl.EnergyContainerList;
 import gregtech.api.capability.impl.ItemHandlerList;
+import gregtech.api.capability.impl.NotifiableItemStackHandler;
 import gregtech.api.cover.CoverableView;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.ModularUI;
 import gregtech.api.gui.Widget;
-import gregtech.api.gui.widgets.AdvancedTextWidget;
-import gregtech.api.gui.widgets.ClickButtonWidget;
-import gregtech.api.gui.widgets.ProgressWidget;
+import gregtech.api.gui.widgets.*;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
@@ -30,7 +29,9 @@ import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.blocks.MetaBlocks;
+import gregtech.common.metatileentities.multi.electric.MetaTileEntityPowerSubstation;
 import keqing.gtqtcore.api.metaileentity.MetaTileEntityBaseWithControl;
+import keqing.gtqtcore.api.utils.ReflectionHelper;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4;
@@ -47,19 +48,29 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.*;
 
 import static gregtech.api.GTValues.V;
+import static gregtech.api.gui.GuiTextures.BUTTON_POWER;
 import static gregtech.api.util.RelativeDirection.*;
+import static keqing.gtqtcore.client.textures.GTQTTextures.PSS_POWER;
 
 public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntityBaseWithControl {
+    private final ItemStackHandler inputCardInventory;
+    private final ItemStackHandler outputCardInventory;
+    private final ItemStackHandler pssInventory;
+    MetaTileEntityPowerSubstation PSSmte;
+    int[] pssPos=new int[3];
+    boolean pssModel;
     int coilHeight;
     int heatingCoilLevel;
     int x;
@@ -77,12 +88,13 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
     //分别为 启动？ 坐标（三位） 等级
     public MetaTileEntityMicrowaveEnergyReceiverControl(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId);
+        this.inputCardInventory = new NotifiableItemStackHandler(this, 1, null, false);
+        this.outputCardInventory = new NotifiableItemStackHandler(this, 1, null, false);
+        this.pssInventory = new NotifiableItemStackHandler(this, 1, null, false);
     }
 
     @Override
     protected void initializeAbilities() {
-        this.inputInventory = new ItemHandlerList(this.getAbilities(MultiblockAbility.IMPORT_ITEMS));
-        this.outputInventory = new ItemHandlerList(this.getAbilities(MultiblockAbility.EXPORT_ITEMS));
         List<IEnergyContainer> energyContainer = new ArrayList<>(this.getAbilities(MultiblockAbility.INPUT_ENERGY));
         energyContainer.addAll(this.getAbilities(MultiblockAbility.INPUT_LASER));
         this.energyContainer = new EnergyContainerList(energyContainer);
@@ -92,7 +104,8 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World world, @Nonnull List<String> tooltip, boolean advanced) {
         super.addInformation(stack, world, tooltip, advanced);
-        tooltip.add(I18n.format("本多方块允许使用能源仓，激光仓；最多可放置4个能源仓。"));
+        tooltip.add(I18n.format("本多方块允许使用能源仓，激光仓；最多可放置4个能源仓与一个激光仓。"));
+        tooltip.add(I18n.format("本多方块允许使用坐标绑定卡绑定蓄能变电站（PSS）"));
         tooltip.add(I18n.format("在输入总线放置绑定微波仓（覆盖板）的数据卡来将其存入系统对其供能，绑定的微波仓需要在多方块的供能范围内，否则不会存入系统"));
         tooltip.add(I18n.format("升级结构来获得更大的供能范围与缓存电量,最大容量为 V[Math.min(heatingCoilLevel,9)]*16*coilHeight EU"));
         tooltip.add(I18n.format("最多管理：%s 个设备,升级线圈获得更多的管理容量", 64));
@@ -100,10 +113,14 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
     }
 
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
+        data.setTag("inputCardInventory", this.inputCardInventory.serializeNBT());
+        data.setTag("outputCardInventory", this.outputCardInventory.serializeNBT());
+        data.setTag("pssInventory", this.pssInventory.serializeNBT());
         data.setLong("euStore", euStore);
         data.setInteger("op", op);
         data.setInteger("circuit", circuit);
         data.setInteger("range", range);
+        data.setBoolean("pssModel", pssModel);
         for (int i = 0; i < 64; i++) data.setIntArray("io" + i, io[i]);
 
         return super.writeToNBT(data);
@@ -111,10 +128,14 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
 
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
+        this.inputCardInventory.deserializeNBT(data.getCompoundTag("inputCardInventory"));
+        this.outputCardInventory.deserializeNBT(data.getCompoundTag("outputCardInventory"));
+        this.pssInventory.deserializeNBT(data.getCompoundTag("pssInventory"));
         euStore = data.getLong("euStore");
         op = data.getInteger("op");
         circuit = data.getInteger("circuit");
         range = data.getInteger("range");
+        pssModel = data.getBoolean("pssModel");
         for (int i = 0; i < 64; i++) io[i] = data.getIntArray("io" + i);
     }
 
@@ -124,15 +145,22 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
                 .setWorkingStatus(true, isActive() && isWorkingEnabled()) // transform into two-state system for display
                 .addCustom(tl -> {
                     if (isStructureFormed()) {
-                        tl.add(TextComponentUtil.translationWithColor(TextFormatting.GREEN, "存储电量：%s/%s", euStore, maxStore()));
-                        tl.add(TextComponentUtil.translationWithColor(TextFormatting.GREEN, "设备链接上限：%s", maxLength));
+                        if(pssModel)
+                        {
+                            tl.add(TextComponentUtil.translationWithColor(TextFormatting.GREEN, "缓存电量：%s", PSSmte.getStoredLong()));
+                            tl.add(TextComponentUtil.translationWithColor(TextFormatting.GREEN, "存储上限：%s", PSSmte.getCapacityLong()));
+                            tl.add(TextComponentUtil.translationWithColor(TextFormatting.GREEN, "设备链接上限：%s 范围半径：%s", maxLength,range));
+                        }else {
+                            tl.add(TextComponentUtil.translationWithColor(TextFormatting.GREEN, "存储电量：%s/%s", euStore, maxStore()));
+                            tl.add(TextComponentUtil.translationWithColor(TextFormatting.GREEN, "高度 %s/等级 %s/范围半径 %s", coilHeight, heatingCoilLevel, range));
+                            tl.add(TextComponentUtil.translationWithColor(TextFormatting.GREEN, "设备链接上限：%s", maxLength));
+                        }
                         if (op == 0) tl.add(TextComponentUtil.translationWithColor(TextFormatting.GREEN, "序号操作"));
                         if (op == 1) tl.add(TextComponentUtil.translationWithColor(TextFormatting.GREEN, "电压操作"));
                         if (op == 2) tl.add(TextComponentUtil.translationWithColor(TextFormatting.GREEN, "电流操作"));
                         if (op == 3) tl.add(TextComponentUtil.translationWithColor(TextFormatting.GREEN, "供电操作"));
                         if (op == 4) tl.add(TextComponentUtil.translationWithColor(TextFormatting.GREEN, "终端开关"));
                         if (op == 5) tl.add(TextComponentUtil.translationWithColor(TextFormatting.GREEN, "全清操作"));
-                        tl.add(TextComponentUtil.translationWithColor(TextFormatting.GREEN, "高度 %s/等级 %s/范围半径 %s", coilHeight, heatingCoilLevel, range));
                     }
                 });
     }
@@ -151,26 +179,23 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
                     }
                 });
     }
-
     protected void addTotal(List<ITextComponent> textList) {
-        MultiblockDisplayText.builder(textList, isStructureFormed())
-                .setWorkingStatus(true, isActive() && isWorkingEnabled()) // transform into two-state system for display
-                .addCustom(tl -> {
-                    if (isStructureFormed()) {
-                        for (int i = -3; i <= 3; i++) {
-                            if (i == 0) {
-                                {
-                                    tl.add(TextComponentUtil.translationWithColor(TextFormatting.GOLD, "N：%s | E：%s/O：%s", circuit + 1, this.io[circuit][0] == 1, getStatue(circuit)));
-                                }
-                            } else if (circuit + i >= 0 && circuit + i < maxLength) {
-                                {
-                                    tl.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY, "N：%s | E：%s/O：%s", circuit + i + 1, this.io[circuit + i][0] == 1, getStatue(circuit + i)));
-                                }
-                            }
-                        }
-                    }
-                });
+        if(!isStructureFormed())return;
+        if(pssModel&&PSSmte!=null)
+        {
+            textList.add(new TextComponentTranslation(">>蓄能塔"));
+            textList.add(new TextComponentTranslation("坐标：%s,%s,%s", pssPos[0],pssPos[1],pssPos[2]));
+            textList.add(new TextComponentTranslation("平均输入：%s", PSSmte.getAverageInLastSec()));
+            textList.add(new TextComponentTranslation("平均输出：%s", PSSmte.getAverageOutLastSec()));
+        }
+        else
+        {
+            textList.add(new TextComponentTranslation(">>能源仓"));
+            textList.add(new TextComponentTranslation("平均输入：%s", this.energyContainer.getInputVoltage()));
+            textList.add(new TextComponentTranslation("平均输出：%s", this.energyContainer.getOutputVoltage()));
+        }
     }
+
 
     protected void addInfo1(List<ITextComponent> textList) {
         MultiblockDisplayText.builder(textList, isStructureFormed())
@@ -239,6 +264,10 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
     }
 
     public void addBarHoverText(List<ITextComponent> hoverList, long a, long b) {
+        if(pssModel&&PSSmte!=null) {
+            a = PSSmte.getStoredLong();
+            b = PSSmte.getCapacityLong();
+        }
         ITextComponent cwutInfo = TextComponentUtil.stringWithColor(
                 TextFormatting.AQUA,
                 a + " / " + b + " EU");
@@ -250,90 +279,114 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
 
     @Override
     protected ModularUI.Builder createUITemplate(EntityPlayer entityPlayer) {
-        ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND, 260, 240);
+        ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND, 300, 240);
 
         // Display
-        builder.image(92, 4, 162, 62, GuiTextures.DISPLAY);
-        builder.dynamicLabel(95, 8, () -> "微波无线能量控制塔", 0xFFFFFF);
-        builder.widget((new AdvancedTextWidget(95, 20, this::addDisplayText, 16777215)).setMaxWidthLimit(162).setClickHandler(this::handleDisplayClick));
+        builder.image(112, 4, 182, 62, GuiTextures.DISPLAY);
+        builder.dynamicLabel(115, 8, () -> "微波无线能量控制塔", 0xFFFFFF);
+        builder.widget((new AdvancedTextWidget(115, 20, this::addDisplayText, 16777215)).setMaxWidthLimit(202).setClickHandler(this::handleDisplayClick));
 
         // Display
-        builder.image(92, 66, 162, 52, GuiTextures.DISPLAY);
-        builder.widget((new AdvancedTextWidget(95, 70, this::addDisplayText1, 16777215)).setMaxWidthLimit(162).setClickHandler(this::handleDisplayClick));
+        builder.image(112, 66, 182, 52, GuiTextures.DISPLAY);
+        builder.widget((new AdvancedTextWidget(115, 70, this::addDisplayText1, 16777215)).setMaxWidthLimit(202).setClickHandler(this::handleDisplayClick));
 
         // Display
 
         int j = 0;
         //1号
-        builder.image(3, 4 + j * 30, 90, 30, GuiTextures.DISPLAY);
+        builder.image(3, 4 + j * 30, 108, 30, GuiTextures.DISPLAY);
         builder.widget((new AdvancedTextWidget(7, 8 + j * 30, this::addInfo1, 16777215)).setMaxWidthLimit(70).setClickHandler(this::handleDisplayClick));
-        builder.widget(new ClickButtonWidget(77, 4 + j * 30, 15, 30, "-2", data -> this.circuit = MathHelper.clamp(circuit - 2, 0, maxLength - 1)));
+        builder.widget(new ClickButtonWidget(95, 4 + j * 30, 15, 30, "-2", data -> this.circuit = MathHelper.clamp(circuit - 2, 0, maxLength - 1)));
         j++;
         //2号
-        builder.image(3, 4 + j * 30, 90, 30, GuiTextures.DISPLAY);
+        builder.image(3, 4 + j * 30, 108, 30, GuiTextures.DISPLAY);
         builder.widget((new AdvancedTextWidget(7, 8 + j * 30, this::addInfo2, 16777215)).setMaxWidthLimit(70).setClickHandler(this::handleDisplayClick));
-        builder.widget(new ClickButtonWidget(77, 4 + j * 30, 15, 30, "-1", data -> this.circuit = MathHelper.clamp(circuit - 1, 0, maxLength - 1)));
+        builder.widget(new ClickButtonWidget(95, 4 + j * 30, 15, 30, "-1", data -> this.circuit = MathHelper.clamp(circuit - 1, 0, maxLength - 1)));
         j++;
         //3号
-        builder.image(3, 4 + j * 30, 90, 30, GuiTextures.DISPLAY);
+        builder.image(3, 4 + j * 30, 108, 30, GuiTextures.DISPLAY);
         builder.widget((new AdvancedTextWidget(7, 8 + j * 30, this::addInfo3, 16777215)).setMaxWidthLimit(70).setClickHandler(this::handleDisplayClick));
-        builder.widget(new ClickButtonWidget(77, 4 + j * 30, 15, 30, "->", data -> setStatue(!getStatue(circuit), circuit)));
+        builder.widget(new ClickButtonWidget(95, 4 + j * 30, 15, 30, "->", data -> setStatue(!getStatue(circuit), circuit)));
         j++;
         //4号
-        builder.image(3, 4 + j * 30, 90, 30, GuiTextures.DISPLAY);
+        builder.image(3, 4 + j * 30, 108, 30, GuiTextures.DISPLAY);
         builder.widget((new AdvancedTextWidget(7, 8 + j * 30, this::addInfo4, 16777215)).setMaxWidthLimit(70).setClickHandler(this::handleDisplayClick));
-        builder.widget(new ClickButtonWidget(77, 4 + j * 30, 15, 30, "+1", data -> this.circuit = MathHelper.clamp(circuit + 1, 0, maxLength - 1)));
+        builder.widget(new ClickButtonWidget(95, 4 + j * 30, 15, 30, "+1", data -> this.circuit = MathHelper.clamp(circuit + 1, 0, maxLength - 1)));
         j++;
         //5号
-        builder.image(3, 4 + j * 30, 90, 30, GuiTextures.DISPLAY);
+        builder.image(3, 4 + j * 30, 108, 30, GuiTextures.DISPLAY);
         builder.widget((new AdvancedTextWidget(7, 8 + j * 30, this::addInfo5, 16777215)).setMaxWidthLimit(70).setClickHandler(this::handleDisplayClick));
-        builder.widget(new ClickButtonWidget(77, 4 + j * 30, 15, 30, "+2", data -> this.circuit = MathHelper.clamp(circuit + 2, 0, maxLength - 1)));
+        builder.widget(new ClickButtonWidget(95, 4 + j * 30, 15, 30, "+2", data -> this.circuit = MathHelper.clamp(circuit + 2, 0, maxLength - 1)));
 
 
         // Display
-        builder.image(3, 154, 90, 82, GuiTextures.DISPLAY);
-        builder.widget((new AdvancedTextWidget(7, 156, this::addTotal, 16777215)).setMaxWidthLimit(76).setClickHandler(this::handleDisplayClick));
+        builder.image(3, 154, 108, 82, GuiTextures.DISPLAY);
+        builder.widget((new AdvancedTextWidget(7, 158, this::addTotal, 16777215)).setMaxWidthLimit(76).setClickHandler(this::handleDisplayClick));
 
 
         //
-        builder.widget(new ClickButtonWidget(92, 120, 48, 18, "操作 -1", this::decrementThreshold));
-        builder.widget(new ClickButtonWidget(140, 120, 48, 18, "操作 +1", this::incrementThreshold));
-        builder.widget(new ClickButtonWidget(188, 120, 48, 18, "清空单位", this::stop));
+        builder.widget(new ClickButtonWidget(110, 120, 60, 18, "操作 -1", this::decrementThreshold));
+        builder.widget(new ClickButtonWidget(170, 120, 60, 18, "操作 +1", this::incrementThreshold));
+        builder.widget(new ClickButtonWidget(230, 120, 60, 18, "清空单位", this::stop));
 
         //op
-        builder.widget(new ClickButtonWidget(92, 140, 24, 18, "序号", data -> op = 0));
-        builder.widget(new ClickButtonWidget(116, 140, 24, 18, "电压", data -> op = 1));
-        builder.widget(new ClickButtonWidget(140, 140, 24, 18, "电流", data -> op = 2));
-        builder.widget(new ClickButtonWidget(164, 140, 24, 18, "供电", data -> {
+        builder.widget(new ClickButtonWidget(110, 140, 30, 18, "序号", data -> op = 0));
+        builder.widget(new ClickButtonWidget(140, 140, 30, 18, "电压", data -> op = 1));
+        builder.widget(new ClickButtonWidget(170, 140, 30, 18, "电流", data -> op = 2));
+        builder.widget(new ClickButtonWidget(200, 140, 30, 18, "供电", data -> {
             op = 3;
             if (io[circuit][0] == 1) io[circuit][0] = 0;
             else io[circuit][0] = 1;
         }
         ));
-        builder.widget(new ClickButtonWidget(188, 140, 24, 18, "终端", data ->
+        builder.widget(new ClickButtonWidget(230, 140, 30, 18, "终端", data ->
         {
             op = 4;
             setStatue(!getStatue(circuit), circuit);
         }
         ));
-        builder.widget(new ClickButtonWidget(212, 140, 24, 18, "全清", data -> op = 5).setTooltipText("请点击 清空单位 按钮确认你的操作"));
+        builder.widget(new ClickButtonWidget(260, 140, 30, 18, "全清", data -> op = 5).setTooltipText("请点击 清空单位 按钮确认你的操作"));
 
 
-        builder.widget((new ProgressWidget(() -> (double) euStore / maxStore(), 92, 65, 162, 4, GuiTextures.PROGRESS_BAR_MULTI_ENERGY_YELLOW, ProgressWidget.MoveType.HORIZONTAL)).setHoverTextConsumer((list) -> addBarHoverText(list, euStore, maxStore())));
+        builder.widget((new ProgressWidget(this::getEnergy, 112, 65, 182, 4, GuiTextures.PROGRESS_BAR_MULTI_ENERGY_YELLOW, ProgressWidget.MoveType.HORIZONTAL)).setHoverTextConsumer((list) -> addBarHoverText(list, euStore, maxStore())));
 
-        builder.widget((new ProgressWidget(() -> getRate(0), 92, 115, 162, 4, GuiTextures.PROGRESS_BAR_MULTI_ENERGY_YELLOW, ProgressWidget.MoveType.HORIZONTAL)).setHoverTextConsumer((list) -> addBarHoverText(list, 0)));
+        builder.widget((new ProgressWidget(() -> getRate(0), 112, 115, 182, 4, GuiTextures.PROGRESS_BAR_MULTI_ENERGY_YELLOW, ProgressWidget.MoveType.HORIZONTAL)).setHoverTextConsumer((list) -> addBarHoverText(list, 0)));
 
-        builder.widget((new ProgressWidget(() -> getRate(-2), 3, 30, 88, 3, GuiTextures.PROGRESS_BAR_MULTI_ENERGY_YELLOW, ProgressWidget.MoveType.HORIZONTAL)).setHoverTextConsumer((list) -> addBarHoverText(list, -2)));
-        builder.widget((new ProgressWidget(() -> getRate(-1), 3, 60, 88, 3, GuiTextures.PROGRESS_BAR_MULTI_ENERGY_YELLOW, ProgressWidget.MoveType.HORIZONTAL)).setHoverTextConsumer((list) -> addBarHoverText(list, -1)));
-        builder.widget((new ProgressWidget(() -> getRate(0), 3, 90, 88, 3, GuiTextures.PROGRESS_BAR_MULTI_ENERGY_YELLOW, ProgressWidget.MoveType.HORIZONTAL)).setHoverTextConsumer((list) -> addBarHoverText(list, 0)));
-        builder.widget((new ProgressWidget(() -> getRate(1), 3, 120, 88, 3, GuiTextures.PROGRESS_BAR_MULTI_ENERGY_YELLOW, ProgressWidget.MoveType.HORIZONTAL)).setHoverTextConsumer((list) -> addBarHoverText(list, 1)));
-        builder.widget((new ProgressWidget(() -> getRate(2), 3, 150, 88, 3, GuiTextures.PROGRESS_BAR_MULTI_ENERGY_YELLOW, ProgressWidget.MoveType.HORIZONTAL)).setHoverTextConsumer((list) -> addBarHoverText(list, 2)));
+        builder.widget((new ProgressWidget(() -> getRate(-2), 3, 30, 106, 3, GuiTextures.PROGRESS_BAR_MULTI_ENERGY_YELLOW, ProgressWidget.MoveType.HORIZONTAL)).setHoverTextConsumer((list) -> addBarHoverText(list, -2)));
+        builder.widget((new ProgressWidget(() -> getRate(-1), 3, 60, 106, 3, GuiTextures.PROGRESS_BAR_MULTI_ENERGY_YELLOW, ProgressWidget.MoveType.HORIZONTAL)).setHoverTextConsumer((list) -> addBarHoverText(list, -1)));
+        builder.widget((new ProgressWidget(() -> getRate(0), 3, 90, 106, 3, GuiTextures.PROGRESS_BAR_MULTI_ENERGY_YELLOW, ProgressWidget.MoveType.HORIZONTAL)).setHoverTextConsumer((list) -> addBarHoverText(list, 0)));
+        builder.widget((new ProgressWidget(() -> getRate(1), 3, 120, 106, 3, GuiTextures.PROGRESS_BAR_MULTI_ENERGY_YELLOW, ProgressWidget.MoveType.HORIZONTAL)).setHoverTextConsumer((list) -> addBarHoverText(list, 1)));
+        builder.widget((new ProgressWidget(() -> getRate(2), 3, 150, 106, 3, GuiTextures.PROGRESS_BAR_MULTI_ENERGY_YELLOW, ProgressWidget.MoveType.HORIZONTAL)).setHoverTextConsumer((list) -> addBarHoverText(list, 2)));
 
+        builder.widget(new SlotWidget(this.inputCardInventory, 0, 274, 160, true, true, true)
+                .setBackgroundTexture(GuiTextures.SLOT)
+                .setChangeListener(this::markDirty)
+                .setTooltipText("请放入坐标卡(MTE)"));
 
-        builder.bindPlayerInventory(entityPlayer.inventory, GuiTextures.SLOT, 92, 160);
+        builder.widget(new SlotWidget(this.outputCardInventory, 0, 274, 178, true, true, true)
+                .setBackgroundTexture(GuiTextures.SLOT)
+                .setChangeListener(this::markDirty));
+
+        builder.widget(new SlotWidget(this.pssInventory, 0, 274, 196, true, true, true)
+                .setBackgroundTexture(GuiTextures.SLOT)
+                .setChangeListener(this::markDirty)
+                .setTooltipText("请放入坐标卡(PSS)"));
+
+        builder.widget(new ImageCycleButtonWidget(274, 218, 18, 18, PSS_POWER, () -> pssModel, data->
+        {
+            pssModel = !pssModel;
+            euStore=0;
+        }).setTooltipHoverString((i) -> "gtqtcore.multiblock.universal.pss_" + (i == 0 ? "disabled" : "enabled")));
+        builder.widget(new ImageWidget(274, 236, 18, 6, GuiTextures.BUTTON_POWER_DETAIL));
+
+        builder.bindPlayerInventory(entityPlayer.inventory, GuiTextures.SLOT, 112, 160);
         return builder;
     }
 
+    public double getEnergy() {
+        if(pssModel&&PSSmte!=null)return PSSmte.getFillPercentage(0);
+        else return (double) euStore / maxStore();
+    }
     public double getRate(int x) {
         if (getMaxEU(circuit + x) == 0) return 0;
         return (double) getEU(circuit + x) / getMaxEU(circuit + x);
@@ -363,18 +416,65 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
     public long maxStore() {
         return V[Math.min(heatingCoilLevel, 9)] * 20 * coilHeight;
     }
+    public void checkPSS()
+    {
+        if(PSSmte==null) {
+            ItemStack item = pssInventory.getStackInSlot(0);
+            if (item.getItem() == GTQTMetaItems.GTQT_META_ITEM && item.getMetadata() == GTQTMetaItems.POS_BINDING_CARD.getMetaValue()) {
+                NBTTagCompound compound = item.getTagCompound();
+                if (compound != null && compound.hasKey("x") && compound.hasKey("y") && compound.hasKey("z")) {
+                    x = compound.getInteger("x");
+                    y = compound.getInteger("y");
+                    z = compound.getInteger("z");
 
+                    if(((x-this.getPos().getX())*(x-this.getPos().getX())
+                            +(y-this.getPos().getY())*(y-this.getPos().getY())
+                            +(z-this.getPos().getZ())*(z-this.getPos().getZ()))<=100)
+                    {
+                        MetaTileEntity mte = GTUtility.getMetaTileEntity(this.getWorld(), new BlockPos(x, y, z));
+                        if (mte instanceof MetaTileEntityPowerSubstation) {
+                            PSSmte=(MetaTileEntityPowerSubstation) mte;
+                            pssPos[0] = x;
+                            pssPos[1] = y;
+                            pssPos[2] = z;
+                        }
+                    }
+                }
+            }
+        }
+        else
+        {
+            MetaTileEntity mte = GTUtility.getMetaTileEntity(this.getWorld(), new BlockPos(pssPos[0], pssPos[1], pssPos[2]));
+            if (mte instanceof MetaTileEntityPowerSubstation) {
+                PSSmte=(MetaTileEntityPowerSubstation) mte;
+            }
+            else
+            {
+                PSSmte=null;
+                pssPos=new int[3];
+                pssModel=false;
+            }
+        }
+    }
     @Override
     protected void updateFormedValid() {
+        if(pssInventory.getStackInSlot(0)!=ItemStack.EMPTY) checkPSS();
+        else pssModel=false;
         if (euStore < 0) euStore = 0;
+        if(PSSmte==null) pssModel=false;
 
-        if (this.energyContainer != null && this.energyContainer.getEnergyStored() > 0 && euStore < maxStore()) {
-            if (euStore + this.energyContainer.getEnergyStored() > maxStore()) {
-                this.energyContainer.removeEnergy(maxStore() - euStore);
-                euStore = maxStore();
-            } else {
-                euStore = euStore + Math.max((int) this.energyContainer.getEnergyStored(), 0);
-                this.energyContainer.removeEnergy(this.energyContainer.getEnergyStored());
+        if(pssModel) euStore=PSSmte.getStoredLong();
+
+        else {
+            euStore=Math.min(euStore, maxStore());
+            if (this.energyContainer != null && this.energyContainer.getEnergyStored() > 0 && euStore < maxStore()) {
+                if (euStore + this.energyContainer.getEnergyStored() > maxStore()) {
+                    this.energyContainer.removeEnergy(maxStore() - euStore);
+                    euStore = maxStore();
+                } else {
+                    euStore = euStore + Math.max((int) this.energyContainer.getEnergyStored(), 0);
+                    this.energyContainer.removeEnergy(this.energyContainer.getEnergyStored());
+                }
             }
         }
 
@@ -387,7 +487,7 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
                 io[i][3] = z;
                 io[i][4] = getTier(i);
                 checkLoacl(false);
-                GTTransferUtils.insertItem(this.outputInventory, setCard(), false);
+                GTTransferUtils.insertItem(outputCardInventory, setCard(), false);
                 x = 0;
                 y = 0;
                 z = 0;
@@ -435,21 +535,26 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
                 long energyNeeded = container.getEnergyCapacity() - container.getEnergyStored();
                 if (energyNeeded < voltage * amperage && euStore > energyNeeded) {
                     container.addEnergy(energyNeeded);
-                    euStore -= energyNeeded;
+                    if(pssModel) getEnergyBankFromPowerSubstation(PSSmte).drain(energyNeeded);
+                    else euStore -= energyNeeded;
                     return;
                 } else if (euStore > voltage * amperage) {
                     container.addEnergy(voltage * amperage);
-                    euStore -= voltage * amperage;
+                    if(pssModel) getEnergyBankFromPowerSubstation(PSSmte).drain(voltage * amperage);
+                    else euStore -= voltage * amperage;
                     return;
                 } else {
                     container.addEnergy(euStore);
-                    euStore = 0;
+                    if(pssModel) getEnergyBankFromPowerSubstation(PSSmte).drain(euStore);
+                    else euStore = 0;
                     return;
                 }
             }
         }
     }
-
+    private MetaTileEntityPowerSubstation.PowerStationEnergyBank getEnergyBankFromPowerSubstation(MetaTileEntityPowerSubstation powerSubstation) {
+        return ReflectionHelper.getPrivateFieldValue(powerSubstation, "energyBank", MetaTileEntityPowerSubstation.PowerStationEnergyBank.class);
+    }
     //1为+1 -1为-1
     public void setAmperageVoltage(int v, int a, int point) {
         if (point < 0 || point > maxLength) return;
@@ -636,35 +741,33 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
 
     //通过物品获取坐标
     public boolean checkLoacl(boolean sim) {
-        var slots = this.getInputInventory().getSlots();
-        for (int i = 0; i < slots; i++) {
-            ItemStack item = this.getInputInventory().getStackInSlot(i);
-            if (item.getItem() == GTQTMetaItems.GTQT_META_ITEM && item.getMetadata() == GTQTMetaItems.POS_BINDING_CARD.getMetaValue()) {
-                NBTTagCompound compound = item.getTagCompound();
-                if (compound != null && compound.hasKey("x") && compound.hasKey("y") && compound.hasKey("z")) {
-                    x = compound.getInteger("x");
-                    y = compound.getInteger("y");
-                    z = compound.getInteger("z");
+        ItemStack item = inputCardInventory.getStackInSlot(0);
+        if (item.getItem() == GTQTMetaItems.GTQT_META_ITEM && item.getMetadata() == GTQTMetaItems.POS_BINDING_CARD.getMetaValue()) {
+            NBTTagCompound compound = item.getTagCompound();
+            if (compound != null && compound.hasKey("x") && compound.hasKey("y") && compound.hasKey("z")) {
+                x = compound.getInteger("x");
+                y = compound.getInteger("y");
+                z = compound.getInteger("z");
 
-                    if (sim) for (int j = 0; j < maxLength; j++) {
-                        if (io[i][0] == 1) {
-                            if (x == io[i][1] && y == io[i][2] && z == io[i][3]) return false;
-                        }
-                    }
-
-                    MetaTileEntity mte = GTUtility.getMetaTileEntity(this.getWorld(), new BlockPos(x, y, z));
-                    if (mte instanceof MetaTileEntityMicrowaveEnergyReceiver) {
-                        this.getInputInventory().extractItem(i, 1, sim);
-                        return true;
-                    }
-                    if (hasCover(mte)) {
-                        this.getInputInventory().extractItem(i, 1, sim);
-                        return true;
+                if (sim) for (int j = 0; j < maxLength; j++) {
+                    if (io[j][0] == 1) {
+                        if (x == io[j][1] && y == io[j][2] && z == io[j][3]) return false;
                     }
                 }
 
+                MetaTileEntity mte = GTUtility.getMetaTileEntity(this.getWorld(), new BlockPos(x, y, z));
+                if (mte instanceof MetaTileEntityMicrowaveEnergyReceiver) {
+                    inputCardInventory.extractItem(0, 1, sim);
+                    return true;
+                }
+                if (hasCover(mte)) {
+                    inputCardInventory.extractItem(0, 1, sim);
+                    return true;
+                }
             }
+
         }
+
         return false;
     }
 
@@ -691,15 +794,15 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start(RIGHT, FRONT, UP)
+                .aisle("CCCCC", "CCCCC", "CCCCC", "CCCCC", "CCCCC")
                 .aisle("CCSCC", "CCCCC", "CCCCC", "CCCCC", "CCCCC")
+                .aisle("CCCCC", "CCCCC", "CCCCC", "CCCCC", "CCCCC")
                 .aisle("C   C", "  H  ", " HHH ", "  H  ", "C   C").setRepeatable(5, 25)
                 .aisle("CCCCC", "CCCCC", "CCCCC", "CCCCC", "CCCCC")
                 .where('S', selfPredicate())
                 .where('C', states(getCasingAState())
-                        .or(abilities(MultiblockAbility.IMPORT_ITEMS).setMaxGlobalLimited(1))
-                        .or(abilities(MultiblockAbility.EXPORT_ITEMS).setMaxGlobalLimited(1))
                         .or(abilities(MultiblockAbility.INPUT_ENERGY)
-                                .setMaxGlobalLimited(3))
+                                .setMaxGlobalLimited(4))
                         .or(abilities(MultiblockAbility.INPUT_LASER)
                                 .setMaxGlobalLimited(1))
                 )

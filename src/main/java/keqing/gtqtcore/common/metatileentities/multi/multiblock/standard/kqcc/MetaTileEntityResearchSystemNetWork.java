@@ -40,6 +40,7 @@ import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.MetaTil
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.MetaTileEntityEnzymesReaction;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.MetaTileEntityGeneMutagenesis;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.MetaTileEntityPhotolithographyFactory;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.decoration.MetaTileEntityHolographicDisplay;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -68,6 +69,7 @@ import org.lwjgl.opengl.GL11;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static keqing.gtqtcore.common.block.blocks.BlocksResearchSystem.CasingType.KQCC_COMPUTER_CASING;
@@ -109,123 +111,6 @@ public class MetaTileEntityResearchSystemNetWork extends RecipeMapMultiblockCont
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityResearchSystemNetWork(this.metaTileEntityId);
     }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void renderMetaTileEntity(double x, double y, double z, float partialTicks) {
-        IFastRenderMetaTileEntity.super.renderMetaTileEntity(x, y, z, partialTicks);
-        //请以 this.getFrontFacing() 为正面方向渲染如下内容
-        // 机器开启才会进行渲染
-        if (isStructureFormed()) {
-            GlStateManager.pushMatrix();
-            try {
-                // 设置渲染位置
-                GlStateManager.translate(x + 0.5, y + 4.5, z + 0.5);
-                GlStateManager.scale(1.0, 1.0, 1.0);
-
-                // 根据正面方向进行旋转
-                EnumFacing frontFacing = this.getFrontFacing();
-                switch (frontFacing) {
-                    case NORTH:
-                        GlStateManager.rotate(0, 0.0f, 1.0f, 0.0f);
-                        break;
-                    case SOUTH:
-                        GlStateManager.rotate(180.0f, 0.0f, 1.0f, 0.0f);
-                        break;
-                    case WEST:
-                        GlStateManager.rotate(90.0f, 0.0f, 1.0f, 0.0f);
-                        break;
-                    case EAST:
-                        GlStateManager.rotate(-90.0f, 0.0f, 1.0f, 0.0f);
-                        break;
-                    case UP:
-                        break;
-                    case DOWN:
-                        break;
-                }
-
-                // 绘制蓝色半透矩形背景
-                GlStateManager.disableTexture2D();
-                GlStateManager.enableBlend();
-                GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-                GlStateManager.color(0.0f, 0.0f, 1.0f, 0.5f); // 蓝色，半透明
-                Tessellator tessellator = Tessellator.getInstance();
-                BufferBuilder buffer = tessellator.getBuffer();
-                buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION);
-                buffer.pos(-2.0, -1.5, 0.1).endVertex(); // 调整z值为0.1
-                buffer.pos(-2.0, 1.5, 0.1).endVertex();
-                buffer.pos(2.0, 1.5, 0.1).endVertex();
-                buffer.pos(2.0, -1.5, 0.1).endVertex();
-                tessellator.draw();
-                GlStateManager.disableBlend();
-                GlStateManager.enableTexture2D();
-
-                // 计算背景中心
-                double centerX = 0.0;
-                double centerY = 0.0;
-
-                // 创建文本列表
-                List<ITextComponent> textList = new ArrayList<>();
-                textList.add(new TextComponentTranslation(String.format("gtqtcore.multiblock.kqn.nb%s", thresholdPercentage)));
-                textList.add(new TextComponentTranslation(String.format("gtqtcore.multiblock.kqn.nx%s", thresholdPercentage)));
-
-                // 渲染文本
-                GlStateManager.translate(centerX, centerY, 0.1); // 移动到背景中心
-                GlStateManager.scale(0.02, 0.02, 0.02); // 调整文本大小
-                GlStateManager.disableLighting();
-                GlStateManager.disableDepth();
-                GlStateManager.enableBlend();
-                GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-
-                FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
-
-                // 第一行文本居中
-                String firstLine = textList.get(0).getFormattedText();
-                int firstLineWidth = fontRenderer.getStringWidth(firstLine);
-                GlStateManager.pushMatrix();
-                try {
-                    GlStateManager.translate(-firstLineWidth / 2.0, 0.0, 0.0); // 居中文本
-                    GlStateManager.rotate(180.0f, 0.0f, 1.0f, 0.0f); // 水平翻转180度
-                    GlStateManager.rotate(180.0f, 1.0f, 0.0f, 0.0f); // 垂直翻转180度
-                    fontRenderer.drawString(firstLine, -firstLineWidth, -70, 0xFFFFFFFF); // 顶格居中
-                } finally {
-                    GlStateManager.popMatrix();
-                }
-
-                // 第二行文本左对齐并换行
-                String secondLine = textList.get(1).getFormattedText();
-                List<String> wrappedSecondLine = splitTextIntoChunks(secondLine, 21); // 每行最多16个汉字
-                for (int i = 0; i < wrappedSecondLine.size(); i++) {
-                    String line = wrappedSecondLine.get(i);
-                    GlStateManager.pushMatrix();
-                    try {
-                        GlStateManager.translate(95, - i * 15, 0.0); // 居中文本
-                        GlStateManager.rotate(180.0f, 0.0f, 1.0f, 0.0f); // 水平翻转180度
-                        GlStateManager.rotate(180.0f, 1.0f, 0.0f, 0.0f); // 垂直翻转180度
-                        fontRenderer.drawString(line, 0, -55, 0xFFFFFFFF); // 左对齐，每行间隔10个像素
-                    } finally {
-                        GlStateManager.popMatrix();
-                    }
-                }
-
-                GlStateManager.enableDepth();
-                GlStateManager.enableLighting();
-                GlStateManager.disableBlend();
-            } finally {
-                GlStateManager.popMatrix();
-            }
-        }
-    }
-
-    public List<String> splitTextIntoChunks(String text, int chunkSize) {
-        List<String> chunks = new ArrayList<>();
-        for (int i = 0; i < text.length(); i += chunkSize) {
-            int end = Math.min(i + chunkSize, text.length());
-            chunks.add(text.substring(i, end));
-        }
-        return chunks;
-    }
-
     @Override
     public void writeInitialSyncData(PacketBuffer buf) {
         super.writeInitialSyncData(buf);
@@ -236,18 +121,6 @@ public class MetaTileEntityResearchSystemNetWork extends RecipeMapMultiblockCont
     public void receiveInitialSyncData(PacketBuffer buf) {
         super.receiveInitialSyncData(buf);
         this.thresholdPercentage = buf.readInt();
-    }
-
-    // 假设这个方法返回当前的 thresholdPercentage 值
-    private int getThresholdPercentage() {
-        // 这里返回实际的 thresholdPercentage 值
-        return this.thresholdPercentage; // 假设 thresholdPercentage 是类的成员变量
-    }
-
-    @Override
-    public AxisAlignedBB getRenderBoundingBox() {
-        //这个影响模型的可视范围，正常方块都是 1 1 1，长宽高各为1，当这个方块离线玩家视线后，obj模型渲染会停止，所以可以适当放大这个大小能让模型有更多角度的可视
-        return new AxisAlignedBB(getPos(), getPos().add(5, 5, 5));
     }
 
     @Override
@@ -720,5 +593,193 @@ public class MetaTileEntityResearchSystemNetWork extends RecipeMapMultiblockCont
         public MetaTileEntityResearchSystemNetWork getMetaTileEntity() {
             return (MetaTileEntityResearchSystemNetWork) super.getMetaTileEntity();
         }
+    }
+
+    public static class HologramConfig {
+        // 位置偏移（以方块中心为原点）
+        public float posX = 0.0f;
+        public float posY = 4.5f;
+        public float posZ = 0.0f;
+
+        // 缩放比例
+        public float scale = 1.0f;
+
+        // 旋转参数（角度制）
+        public float rotationYaw = 0.0f;   // Y轴旋转
+        public float rotationPitch = 0.0f; // X轴旋转
+        public float rotationRoll = 0.0f;   // Z轴旋转
+
+        // 背景尺寸
+        public float width = 4.0f;
+        public float height = 3.0f;
+
+        // 背景颜色
+        public float bgRed = 0.0f;
+        public float bgGreen = 0.0f;
+        public float bgBlue = 1.0f;
+        public float bgAlpha = 0.5f;
+
+        // 文本配置
+        public float textScale = 0.02f;
+        public int maxLineWidth = 200; // 像素单位
+    }
+
+    private final HologramConfig hologramConfig = new HologramConfig();
+
+    // 渲染方法实现
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void renderMetaTileEntity(double x, double y, double z, float partialTicks) {
+        IFastRenderMetaTileEntity.super.renderMetaTileEntity(x, y, z, partialTicks);
+
+        if (!isStructureFormed()) return;
+
+        GlStateManager.pushMatrix();
+        try {
+            prepareTransform(x + 0.5, y, z + 0.5);
+            renderBackground();
+            renderText();
+        } finally {
+            GlStateManager.popMatrix();
+        }
+    }
+
+    private void prepareTransform(double baseX, double baseY, double baseZ) {
+        // 应用基础位移
+        GlStateManager.translate(
+                baseX + hologramConfig.posX,
+                baseY + hologramConfig.posY,
+                baseZ + hologramConfig.posZ
+        );
+
+        // 应用面向方向旋转
+        applyFrontFacingRotation();
+
+        // 应用自定义旋转（顺序：Yaw -> Pitch -> Roll）
+        GlStateManager.rotate(hologramConfig.rotationYaw, 0, 1, 0);
+        GlStateManager.rotate(hologramConfig.rotationPitch, 1, 0, 0);
+        GlStateManager.rotate(hologramConfig.rotationRoll, 0, 0, 1);
+
+        // 应用缩放
+        GlStateManager.scale(hologramConfig.scale, hologramConfig.scale, hologramConfig.scale);
+    }
+
+    private void applyFrontFacingRotation() {
+        EnumFacing frontFacing = getFrontFacing();
+        switch (frontFacing) {
+            case SOUTH:
+                GlStateManager.rotate(180, 0, 1, 0);
+                break;
+            case WEST:
+                GlStateManager.rotate(90, 0, 1, 0);
+                break;
+            case EAST:
+                GlStateManager.rotate(-90, 0, 1, 0);
+                break;
+            case NORTH:
+            default:
+                break;
+        }
+    }
+
+    private void renderBackground() {
+        GlStateManager.disableTexture2D();
+        GlStateManager.enableBlend();
+        GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+        GlStateManager.color(
+                hologramConfig.bgRed,
+                hologramConfig.bgGreen,
+                hologramConfig.bgBlue,
+                hologramConfig.bgAlpha
+        );
+
+        float halfWidth = hologramConfig.width / 2;
+        float halfHeight = hologramConfig.height / 2;
+
+        Tessellator tessellator = Tessellator.getInstance();
+        BufferBuilder buffer = tessellator.getBuffer();
+        buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION);
+        buffer.pos(-halfWidth, -halfHeight, 0.1).endVertex();
+        buffer.pos(-halfWidth, halfHeight, 0.1).endVertex();
+        buffer.pos(halfWidth, halfHeight, 0.1).endVertex();
+        buffer.pos(halfWidth, -halfHeight, 0.1).endVertex();
+        tessellator.draw();
+
+        GlStateManager.disableBlend();
+        GlStateManager.enableTexture2D();
+    }
+
+
+    private void renderText() {
+        GlStateManager.translate(0, 0, 0.1);
+        GlStateManager.scale(hologramConfig.textScale, hologramConfig.textScale, hologramConfig.textScale);
+
+        GlStateManager.disableLighting();
+        GlStateManager.disableDepth();
+        GlStateManager.enableBlend();
+
+        FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
+        float scaleFactor = 1/hologramConfig.textScale; // 计算实际缩放系数
+
+        int x=0;
+        // 渲染标题
+        List<String> titleLines = wrapText(fontRenderer,(String.format("gtqtcore.multiblock.kqn.nb%s", thresholdPercentage)),
+                (int)(hologramConfig.maxLineWidth * scaleFactor));
+        for (int i = 0; i < titleLines.size(); i++) {
+            renderTextLine(fontRenderer, titleLines.get(i),  hologramConfig.width*25-5, hologramConfig.height*25-5 -i*15, 0xFFFFFF, false);
+            x++;
+        }
+
+        // 渲染正文
+        List<String> wrappedLines = wrapText(fontRenderer, (String.format("gtqtcore.multiblock.kqn.nx%s", thresholdPercentage)),
+                (int)(hologramConfig.maxLineWidth * scaleFactor));
+        for (int i = 0; i < wrappedLines.size(); i++) {
+            renderTextLine(fontRenderer, wrappedLines.get(i), hologramConfig.width*25-5, hologramConfig.height*25-5 -(i+x)*15, 0xFFFFFF, false);
+        }
+
+        GlStateManager.enableDepth();
+        GlStateManager.enableLighting();
+        GlStateManager.disableBlend();
+    }
+
+    private List<String> wrapText(FontRenderer fr, String text, int maxWidth) {
+        List<String> lines = new ArrayList<>();
+        for (String s : text.split(" ")) {
+            if (lines.isEmpty()) {
+                lines.add(s);
+                continue;
+            }
+
+            String last = lines.get(lines.size()-1);
+            if (fr.getStringWidth(last + " " + s) <= maxWidth) {
+                lines.set(lines.size()-1, last + " " + s);
+            } else {
+                lines.add(s);
+            }
+        }
+        return lines;
+    }
+
+    private void renderTextLine(FontRenderer fr, String text, float x, float y, int color, boolean center) {
+        GlStateManager.pushMatrix();
+        try {
+            if (center) {
+                int textWidth = fr.getStringWidth(text);
+                GlStateManager.translate(-textWidth/2.0, 0, 0);
+            }
+
+            GlStateManager.translate(x, y, 0);
+            GlStateManager.rotate(180, 0, 1, 0);
+            GlStateManager.rotate(180, 1, 0, 0);
+
+            fr.drawString(text, 0, 0, color);
+        } finally {
+            GlStateManager.popMatrix();
+        }
+    }
+    @Override
+    public AxisAlignedBB getRenderBoundingBox() {
+        //这个影响模型的可视范围，正常方块都是 1 1 1，长宽高各为1，当这个方块离线玩家视线后，obj模型渲染会停止，所以可以适当放大这个大小能让模型有更多角度的可视
+        return new AxisAlignedBB(getPos(), getPos().add(5, 5, 5));
     }
 }

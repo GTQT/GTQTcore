@@ -31,8 +31,6 @@ import java.util.List;
 
 public class MetaTileEntitySeismicDetector extends MetaTileEntityBaseWithControl {
 
-    int type;
-    int dimension;
 
     public MetaTileEntitySeismicDetector(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId);
@@ -44,7 +42,7 @@ public class MetaTileEntitySeismicDetector extends MetaTileEntityBaseWithControl
             checkTNT(false);
             checkCard(false);
             GTTransferUtils.insertItem(this.outputInventory, setCard(), false);
-            GTTransferUtils.insertItem(this.outputInventory, GTQTOreHelper.setOre(dimension,type), false);
+            GTTransferUtils.insertItem(this.outputInventory, GTQTOreHelper.setOre(getWorld().provider.getDimension(),getKind()), false);
         }
     }
 
@@ -58,7 +56,7 @@ public class MetaTileEntitySeismicDetector extends MetaTileEntityBaseWithControl
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
-        textList.add(new TextComponentTranslation(GTQTOreHelper.getInfo(dimension,type)));
+        textList.add(new TextComponentTranslation(GTQTOreHelper.getInfo(getWorld().provider.getDimension(),getKind())));
     }
 
     public int getKind() {
@@ -73,8 +71,8 @@ public class MetaTileEntitySeismicDetector extends MetaTileEntityBaseWithControl
     public ItemStack setCard() {
         ItemStack card = new ItemStack(GTQTMetaItems.POS_ORE_CARD.getMetaItem(), 1, 180);
         NBTTagCompound nodeTagCompound = new NBTTagCompound();
-        nodeTagCompound.setInteger("type", type);
-        nodeTagCompound.setInteger("dimension", dimension);
+        nodeTagCompound.setInteger("type", getKind());
+        nodeTagCompound.setInteger("dimension", getWorld().provider.getDimension());
         card.setTagCompound(nodeTagCompound);
         return card;
     }

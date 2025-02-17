@@ -252,19 +252,19 @@ public class MetaTileEntityCryogenicFreezer extends GTQTNoOCMultiblockController
             super(tileEntity);
             this.freezer = (MetaTileEntityCryogenicFreezer) tileEntity;
         }
-
         @Override
         protected void updateRecipeProgress() {
-            if (canRecipeProgress && drawEnergy(recipeEUt / 8, true)) {
-                drawEnergy(recipeEUt / 8, false);
+            if (this.canRecipeProgress && this.drawEnergy(this.recipeEUt, true)) {
                 IMultipleTankHandler inputTank = freezer.getInputFluidInventory();
                 if (GELID_STACK.isFluidStackIdentical(inputTank.drain(GELID_STACK, false))) {
                     inputTank.drain(GELID_STACK, true);
-                    if (++progressTime > maxProgressTime) {
-                        completeRecipe();
+                    if (++this.progressTime > this.maxProgressTime) {
+                        this.completeRecipe();
                     }
-                } else return;
-                drawEnergy(recipeEUt / 8, false);
+                } else {
+                    return;
+                }
+                this.drawEnergy(this.recipeEUt, false);
             }
         }
     }

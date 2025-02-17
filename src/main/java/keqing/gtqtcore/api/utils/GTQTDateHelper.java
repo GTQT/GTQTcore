@@ -13,4 +13,13 @@ public class GTQTDateHelper {
         // 构造时间字符串
         return String.format("%d小时 %d分钟 %d秒", hours, minutes, remainingSeconds);
     }
+    public static String getTimeFromSecond(int seconds) {
+        // 计算分钟和小时
+        int hours = seconds / 3600;
+        int minutes = (seconds % 3600) / 60;
+        int remainingSeconds = seconds % 60;
+
+        // 构造时间字符串
+        return String.format("%d小时 %d分钟 %d秒", hours, minutes, remainingSeconds);
+    }
 }

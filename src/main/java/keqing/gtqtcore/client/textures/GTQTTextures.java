@@ -261,13 +261,14 @@ public class GTQTTextures {
     public static TextureAtlasSprite COSMIC_9;
     public static SimpleOverlayRenderer ME_MACHINE_CONTROLLER_ON;
     public static SimpleOverlayRenderer ME_MACHINE_CONTROLLER_OFF;
-
     public static SimpleOverlayRenderer CRIB_ACTIVE;
     public static SimpleOverlayRenderer CRIB_INACTIVE;
     public static SimpleOverlayRenderer CRIB_PROXY;
     public static TextureArea ME_PATTERN_OVERLAY;
     public static TextureArea EXPORT;
+    public static TextureArea PSS_POWER;
     public static void init() {
+        PSS_POWER = TextureArea.fullImage("textures/gui/widget/pss_power.png");
         ME_PATTERN_OVERLAY = TextureArea.fullImage("textures/gui/widget/pattern_me.png");
         EXPORT = TextureArea.fullImage("textures/gui/widget/export.png");
         AUTO_PULL = TextureArea.fullImage("textures/gui/widget/auto_pull.png");
