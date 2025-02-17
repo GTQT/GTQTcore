@@ -61,6 +61,7 @@ import keqing.gtqtcore.common.metatileentities.single.electric.MetaTileLaserBoos
 import keqing.gtqtcore.common.metatileentities.single.steam.MetaTileEntitySteamLatexCollector;
 import keqing.gtqtcore.common.metatileentities.storage.MetaTileEntityCommonRubbishBin;
 import keqing.gtqtcore.common.metatileentities.storage.MetaTileEntityFluidRubbishBin;
+import keqing.gtqtcore.common.metatileentities.storage.MetaTileEntityMultiQuantumTank;
 import keqing.gtqtcore.common.metatileentities.storage.MetaTileEntityRubbishBin;
 
 import java.util.function.IntFunction;
@@ -71,6 +72,7 @@ import static gregtech.api.GTValues.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.client.renderer.texture.Textures.WIREMILL_OVERLAY;
 import static gregtech.common.metatileentities.MetaTileEntities.*;
+import static gregtech.common.metatileentities.MetaTileEntities.registerMetaTileEntity;
 import static keqing.gtqtcore.api.GTQTValue.gtqtcoreId;
 import static keqing.gtqtcore.api.metaileentity.SteamProgressIndicators.COMPRESS;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
@@ -123,7 +125,7 @@ public class GTQTMetaTileEntities {
     public static final SimpleGeneratorMetaTileEntity[] BIOMASS_GENERATOR = new SimpleGeneratorMetaTileEntity[3];
     public static final SimpleGeneratorMetaTileEntity[] ACID_GENERATOR = new SimpleGeneratorMetaTileEntity[3];
     public static final SimpleGeneratorMetaTileEntity[] PLASMA_GENERATOR = new SimpleGeneratorMetaTileEntity[5];
-
+    public static MetaTileEntity[] MULTI_QUANTUM_TANK = new MetaTileEntity[10];
     public static final MetaTileEntityLargeBasicGenerator[] LBG = new MetaTileEntityLargeBasicGenerator[6];
 
     public static final MetaTileEntityReinforcedRotorHolder[] MULTIPART_REINFORCED_ROTOR_HOLDER = new MetaTileEntityReinforcedRotorHolder[8];
@@ -922,6 +924,12 @@ public class GTQTMetaTileEntities {
         BUDGET_CRIB_12 = registerMetaTileEntity(15579, new MetaTileEntityBudgetCRIBA12(gtqtcoreId("budget_crib_12")));
         BUDGET_CRIB_16 = registerMetaTileEntity(15580, new MetaTileEntityBudgetCRIBA16(gtqtcoreId("budget_crib_16")));
         BUDGET_CRIB_20 = registerMetaTileEntity(15581, new MetaTileEntityBudgetCRIBA20(gtqtcoreId("budget_crib_20")));
+
+        for (int i = 0; i < 10; i++) {
+            int id = 15590 + i;
+            MULTI_QUANTUM_TANK[i] =registerMetaTileEntity(id, new MetaTileEntityMultiQuantumTank(gtqtcoreId("multi_quantum_tank." + GTValues.VN[i].toLowerCase()), i, 1000000 * (int) Math.pow(2, i)
+            ));
+        }
 
         ROTOR_HOLDER[6] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityRotorHolder(gtqtcoreId("rotor_holder.uhv"), GTValues.UHV));
         ROTOR_HOLDER[7] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityRotorHolder(gtqtcoreId("rotor_holder.uev"), GTValues.UEV));
