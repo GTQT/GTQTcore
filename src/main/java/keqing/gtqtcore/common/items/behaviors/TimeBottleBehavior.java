@@ -16,6 +16,7 @@ import gregtech.api.unification.material.Materials;
 import gregtech.api.util.GTUtility;
 import keqing.gtqtcore.GTQTCoreConfig;
 import keqing.gtqtcore.api.utils.GTQTDateHelper;
+import keqing.gtqtcore.common.items.GTQTMetaItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
@@ -30,6 +31,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -41,29 +43,34 @@ public class TimeBottleBehavior implements IItemBehaviour, ItemUIFactory {
     private int time;
     private int accelerateTime;
     private boolean model;
+    private boolean auto;
 
     public TimeBottleBehavior() {
     }
 
     public void writeToNBT(NBTTagCompound compound) {
         compound.setBoolean("model", model);
-        compound.setInteger("time", time);
+        compound.setBoolean("auto", auto);
+        compound.setInteger("storedTime", time);
         compound.setInteger("accelerateTime", accelerateTime);
     }
 
     public void readFromNBT(NBTTagCompound compound) {
         model = compound.getBoolean("model");
-        time = compound.getInteger("time");
+        auto= compound.getBoolean("auto");
+        time = compound.getInteger("storedTime");
         accelerateTime = compound.getInteger("accelerateTime");
     }
 
     public void onUpdate(ItemStack itemStack, Entity entity) {
         if (!entity.world.isRemote) {
+            if(auto)accelerateTime = countRapid(time);
             if (entity instanceof EntityPlayer player) {
                 for (int i = 0; i < player.inventory.getSizeInventory() && i < 48; i++) {
                     ItemStack invStack = player.inventory.getStackInSlot(i);
-                    if (invStack.getItem() == TIME_BOTTLE.getMetaItem()) {
+                    if (invStack.getItem() == GTQTMetaItems.GTQT_META_ITEM && invStack.getMetadata() == TIME_BOTTLE.getMetaValue()) {
                         if (time < maxTime) time++;
+                        return;
                     }
                 }
                 if (!itemStack.hasTagCompound()) {
@@ -87,7 +94,7 @@ public class TimeBottleBehavior implements IItemBehaviour, ItemUIFactory {
     }
 
     public int getRapid() {
-        return 1200*accelerateTime;
+        return 20*accelerateTime;
     }
     public int countRapid(int time) {
         if (time < 1200) return 0;
@@ -113,6 +120,7 @@ public class TimeBottleBehavior implements IItemBehaviour, ItemUIFactory {
 
     @Override
     public EnumActionResult onItemUseFirst(EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ, EnumHand hand) {
+        if (world.isRemote) return EnumActionResult.SUCCESS;
         ItemStack stack = player.getHeldItem(hand);
         if (!stack.hasTagCompound()) {
             NBTTagCompound compound = new NBTTagCompound();
@@ -126,7 +134,7 @@ public class TimeBottleBehavior implements IItemBehaviour, ItemUIFactory {
                     handleRandomTickMode(world, pos);
                 }
                 //设备模式////////////////////////////////////////////////////
-                else {
+                else if(time>getRapid()){
                     //GT模式////////////////////////////////////////////////////
                     if (GTUtility.getMetaTileEntity(world, pos) instanceof MetaTileEntity) {
                         long cache = 0;
@@ -204,6 +212,7 @@ public class TimeBottleBehavior implements IItemBehaviour, ItemUIFactory {
                         }
                     }
                 }
+                else  player.sendStatusMessage(new TextComponentTranslation("时长不足，清调整加速时长!"), true);
             } else {
                 if (!world.isRemote) {
                     PlayerInventoryHolder holder = new PlayerInventoryHolder(player, hand);
@@ -220,11 +229,12 @@ public class TimeBottleBehavior implements IItemBehaviour, ItemUIFactory {
                 .image(10, 8, 156, 50, GuiTextures.DISPLAY)
                 .dynamicLabel(15, 13, () -> "存储时长" + GTQTDateHelper.getTimeFromTicks(time), 0xFAF9F6)
                 .dynamicLabel(15, 23, () -> "加速时长" + GTQTDateHelper.getTimeFromSecond(accelerateTime), 0xFAF9F6)
-                .dynamicLabel(15, 33, () -> "模式"+ (model ? "设备模式" : "随机刻模式"), 0xFAF9F6)
+                .dynamicLabel(15, 33, () -> "模式:"+ (model ? "设备模式" : "随机刻模式"), 0xFAF9F6)
+                .dynamicLabel(15, 43, () -> "自动:"+ auto, 0xFAF9F6)
                 .widget(new ClickButtonWidget(10, 68, 77, 20, "模式切换", clickData -> model = !model))
-                .widget(new ClickButtonWidget(90, 68, 77, 20, I18n.format("推荐加速时长"), clickData -> accelerateTime = countRapid(time)))
-                .widget(new ClickButtonWidget(10, 91, 77, 20, I18n.format("加速时长++"), clickData -> accelerateTime = MathHelper.clamp(accelerateTime + 1, 0, time/1200)))
-                .widget(new ClickButtonWidget(90, 91, 77, 20, I18n.format("加速时长--"), clickData -> accelerateTime = MathHelper.clamp(accelerateTime - 1, 0, time/1200)))
+                .widget(new ClickButtonWidget(90, 68, 77, 20, I18n.format("推荐加速时长"), clickData -> auto=!auto))
+                .widget(new ClickButtonWidget(10, 91, 77, 20, I18n.format("加速时长++"), clickData -> accelerateTime = MathHelper.clamp(accelerateTime + 60, 0, time/20)))
+                .widget(new ClickButtonWidget(90, 91, 77, 20, I18n.format("加速时长--"), clickData -> accelerateTime = MathHelper.clamp(accelerateTime - 60, 0, time/20)))
                 .build(playerInventoryHolder, entityPlayer);
     }
 
