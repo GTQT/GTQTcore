@@ -1,5 +1,6 @@
 package keqing.gtqtcore.loaders.recipes.handlers;
 
+import gregtech.api.fluids.store.FluidStorageKeys;
 import gregtech.api.unification.material.MarkerMaterials;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
@@ -36,7 +37,7 @@ public class ParticleAccelerator {
                 .input(pipeHugeFluid,TungstenSteel,1)
                 .input(wireGtSingle,IVSuperconductor,4)
                 .input(rotor,RhodiumPlatedPalladium,2)
-                .fluidInputs(LiquidHelium.getFluid(L * 8))
+                .fluidInputs(Helium.getFluid(FluidStorageKeys.LIQUID, 8*L))
                 .fluidInputs(UltraGlue.getFluid(L * 8))
                 .fluidInputs(Polybenzimidazole.getFluid(L * 4))
                 .fluidInputs(Zylon.getFluid(L * 2))
@@ -52,7 +53,7 @@ public class ParticleAccelerator {
                 .input(ENERGY_LAPOTRONIC_ORB,1)
                 .input(wireGtSingle,IVSuperconductor,4)
                 .input(rotor,RhodiumPlatedPalladium,2)
-                .fluidInputs(LiquidHelium.getFluid(L * 8))
+                .fluidInputs(Helium.getFluid(FluidStorageKeys.LIQUID, 8*L))
                 .fluidInputs(UltraGlue.getFluid(L * 8))
                 .fluidInputs(Polybenzimidazole.getFluid(L * 4))
                 .fluidInputs(Zylon.getFluid(L * 2))
@@ -68,7 +69,7 @@ public class ParticleAccelerator {
                 .input(ELECTRIC_PUMP_IV,1)
                 .input(wireGtSingle,IVSuperconductor,4)
                 .input(VOLTAGE_COIL_IV,4)
-                .fluidInputs(LiquidHelium.getFluid(L * 8))
+                .fluidInputs(Helium.getFluid(FluidStorageKeys.LIQUID, 8*L))
                 .fluidInputs(UltraGlue.getFluid(L * 8))
                 .fluidInputs(Polybenzimidazole.getFluid(L * 4))
                 .fluidInputs(Zylon.getFluid(L * 2))
@@ -84,7 +85,7 @@ public class ParticleAccelerator {
                 .input(circuit, MarkerMaterials.Tier.LuV,1)
                 .input(wireGtSingle,IVSuperconductor,4)
                 .input(rotor,RhodiumPlatedPalladium,2)
-                .fluidInputs(LiquidHelium.getFluid(L * 8))
+                .fluidInputs(Helium.getFluid(FluidStorageKeys.LIQUID, 8*L))
                 .fluidInputs(UltraGlue.getFluid(L * 8))
                 .fluidInputs(Polybenzimidazole.getFluid(L * 4))
                 .fluidInputs(Zylon.getFluid(L * 2))

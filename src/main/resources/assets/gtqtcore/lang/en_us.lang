@@ -3885,6 +3885,8 @@ gregtech.material.scheelite_front=Scheelite Foam
 gregtech.material.tungstate_front=Tungstate Foam
 gregtech.material.uraninite_front=Uraninite Foam
 gregtech.material.pitchblende_front=Pitchblende Foam
+gregtech.material.naquadahoxide_front=NaquadahOxide Foam
+gregtech.material.bornite_front=Bornite Front
 
 gregtech.material.diaminotoluene=Diaminotoluene
 gregtech.material.dinitrotoluene=Dinitrotoluene
@@ -5965,7 +5967,7 @@ gtqtcore.machine.air_intake_hatch.tooltip.4=§9最大容量：§f%s L§7
 
 gtqtcore.machine.single_item_input_bus.name=Single Item Input Bus
 gtqtcore.machine.single_item_input_bus.stack_size=§6Max stack size: §f%,d
-
+gtqtcore.machine.single_input_bus.name=Super Single Input Bus
 gtqtcore.machine.super_input_bus.name=Super Input Bus
 gtqtcore.machine.super_input_bus.tooltip=Has 16 slots but can hold up to MAX_INT items per slot!
 gtqtcore.machine.super_input_bus.return_items.button.enabled=Stop returning items

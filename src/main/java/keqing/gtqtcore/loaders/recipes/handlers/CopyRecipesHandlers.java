@@ -29,48 +29,6 @@ import static keqing.gtqtcore.api.utils.GTQTUtil.*;
 
 public class CopyRecipesHandlers {
     public static void init() {
-        //合金
-        /*
-        Collection<Recipe> alloyRecipes = GCYMRecipeMaps.ALLOY_BLAST_RECIPES.getRecipeList();
-        for (Recipe recipe : alloyRecipes) {
-            List<GTRecipeInput> fluidInputs = recipe.getFluidInputs();
-            List<FluidStack> fluidOutputs = recipe.getFluidOutputs();
-            List<GTRecipeInput> itemInputs = recipe.getFluidInputs();
-            int EUt = (int) (recipe.getEUt()*1.5);
-            int baseDuration = recipe.getDuration()/10;
-            int temp=recipe.getProperty(TemperatureProperty.getInstance(), 0);
-
-            // generate builder
-            RecipeBuilder<?> builder;
-
-            builder = CW_LASER_ALLOY_RECIPES.recipeBuilder()
-                    .blastFurnaceTemp(temp)
-                    .duration(baseDuration)
-                    .EUt(EUt)
-                    .fluidOutputs(fluidOutputs)
-                    .fluidInputs(fluidInputs);
-
-            for (GTRecipeInput itemInput : itemInputs) {
-                ItemStack[] inputStacks = itemInput.getInputStacks();
-                if (inputStacks == null || inputStacks.length == 0) {
-                    continue; // 跳过无效的输入
-                }
-
-                String oreName = getOreNameByStack(Arrays.asList(inputStacks).get(0));
-                if (oreName.contains("null")) {
-                    continue;
-                }
-
-                if (oreName.contains("dust")) {
-                    ItemStack production = getItemStacksFromOreNames(oreName.replace("dust", "power"));
-                    builder.inputs(setStack(production, itemInput.getAmount()));
-                }
-            }
-
-            builder.buildAndRegister();
-        }
-
-         */
         //搅拌
         Collection<Recipe> mixerRecipes = RecipeMaps.MIXER_RECIPES.getRecipeList();
         for (Recipe recipe : mixerRecipes) {

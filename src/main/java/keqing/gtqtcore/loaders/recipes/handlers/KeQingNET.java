@@ -2709,7 +2709,7 @@ public class KeQingNET {
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(CIRCUIT_GOOD_II, 16)
                 .input(FUSION_REACTOR[0], 48)
-                .input(swarm, Europium, 32)
+                .input(swarm, Osmium, 32)
                 .input(circuit, MarkerMaterials.Tier.ZPM, 64)
                 .input(ELECTRIC_PUMP_LuV, 32)
                 .input(FIELD_GENERATOR_LuV, 32)

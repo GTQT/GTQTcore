@@ -4066,6 +4066,8 @@ gregtech.material.scheelite_front=钨矿泡沫
 gregtech.material.tungstate_front=钒酸盐泡沫
 gregtech.material.uraninite_front=铀矿泡沫
 gregtech.material.pitchblende_front=沥青铀矿泡沫
+gregtech.material.naquadahoxide_front=氧化硅岩矿泡沫
+gregtech.material.bornite_front=斑铜矿矿泡沫
 
 gregtech.material.diaminotoluene=二氨基甲苯
 gregtech.material.dinitrotoluene=二硝基甲苯
@@ -6151,7 +6153,7 @@ gtlitecore.machine.air_intake_hatch.tooltip.4=§9最大容量：§f%s L§7
 
 gtqtcore.machine.single_item_input_bus.name=单物品输入总线
 gtqtcore.machine.single_item_input_bus.stack_size=§6最大堆叠数量: §f%,d
-
+gtqtcore.machine.single_input_bus.name=超级单槽输入总线
 gtqtcore.machine.super_input_bus.name=超级输入总线
 gtqtcore.machine.super_input_bus.tooltip=有 16 个槽位，但每个槽位可以容纳多达 MAX_INT 个物品！
 gtqtcore.machine.super_input_bus.return_items.button.enabled=停止返回物品

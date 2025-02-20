@@ -12,6 +12,10 @@ import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
+import gregtech.api.pattern.PatternMatchContext;
+import gregtech.api.recipes.RecipeMap;
+import gregtech.api.recipes.RecipeMaps;
+import gregtech.api.util.GTUtility;
 import gregtech.client.renderer.CubeRendererState;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.cclop.ColourOperation;
@@ -19,6 +23,7 @@ import gregtech.client.renderer.cclop.LightMapOperation;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.BloomEffectUtil;
 import gregtech.client.utils.TooltipHelper;
+import keqing.gtqtcore.api.metaileentity.GTQTRecipeMapMultiblockController;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
@@ -40,11 +45,20 @@ import java.util.List;
 
 import static gregtech.api.GTValues.*;
 
-public class MetaTileEntityFlotationFactory extends RecipeMapMultiblockController {
+public class MetaTileEntityFlotationFactory extends GTQTRecipeMapMultiblockController {
 
     public MetaTileEntityFlotationFactory(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, GTQTcoreRecipeMaps.FLOTATION_FACTORY_RECIPES);
-        this.recipeMapWorkable = new MetaTileEntityFlotationFactoryrWorkable(this);
+        super(metaTileEntityId, new RecipeMap[]{
+                GTQTcoreRecipeMaps.FLOTATION_FACTORY_RECIPES
+        });
+        setTierFlag(true);
+        //setTier(auto);
+        setMaxParallel(128);
+        setMaxParallelFlag(true);
+        //setMaxVoltage(auto);
+        setMaxVoltageFlag(true);
+        //setTimeReduce(auto);
+        setTimeReduceFlag(true);
     }
 
     private static IBlockState getCasingState() {
@@ -77,6 +91,13 @@ public class MetaTileEntityFlotationFactory extends RecipeMapMultiblockControlle
         return new MetaTileEntityFlotationFactory(metaTileEntityId);
     }
 
+    @Override
+    protected void formStructure(PatternMatchContext context) {
+        super.formStructure(context);
+        setTier((int) recipeMapWorkable.getMaxVoltage());
+        setMaxParallel((int) Math.pow(2, GTUtility.getTierByVoltage(recipeMapWorkable.getMaxVoltage())));
+        setTimeReduce(Math.pow(0.95, GTUtility.getTierByVoltage(recipeMapWorkable.getMaxVoltage())));
+    }
     @Nonnull
     @Override
     protected BlockPattern createStructurePattern() {
@@ -121,14 +142,6 @@ public class MetaTileEntityFlotationFactory extends RecipeMapMultiblockControlle
         }
     }
 
-    @Override
-    public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, boolean advanced) {
-        super.addInformation(stack, player, tooltip, advanced);
-        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("我爱洗澡", new Object[0]));
-        tooltip.add(I18n.format("gtqtcore.machine.dangote_distillery.tooltip.6"));
-        tooltip.add(I18n.format("gtqtcore.machine.dangote_distillery.tooltip.7"));
-    }
-
     @SideOnly(Side.CLIENT)
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
@@ -140,51 +153,4 @@ public class MetaTileEntityFlotationFactory extends RecipeMapMultiblockControlle
     protected ICubeRenderer getFrontOverlay() {
         return GTQTTextures.ALGAE_FARM_OVERLAY;
     }
-
-    protected static class MetaTileEntityFlotationFactoryrWorkable extends MultiblockRecipeLogic {
-
-        public MetaTileEntityFlotationFactoryrWorkable(RecipeMapMultiblockController tileEntity) {
-            super(tileEntity);
-        }
-
-        @Override
-        public void setMaxProgress(int maxProgress) {
-            int MaxProgress = (int) Math.floor(maxProgress * Math.pow(0.95, getTier(getMaxVoltage())));
-            super.setMaxProgress(MaxProgress);
-        }
-
-        private int ParallelTier(int tier) {
-            return 4 * (tier * 4);
-        }
-
-        private int HigherParallelTier(int tier) {
-            return 12 * (tier * 4);
-        }
-
-        private int getTier(long vol) {
-            for (int i = 0; i < V.length; i++) {
-                if (V[i] == vol) {
-                    return i;
-                }
-            }
-            return 0;
-        }
-
-        @Override
-        public int getParallelLimit() {
-            if (this.getMaxVoltage() > V[MAX]) {    //  For MAX+, get 4 * 15 * 4
-                return HigherParallelTier(15);
-            }
-            int tier = getTier(getMaxVoltage());
-            if (tier == 0) {
-                return 1;
-            }
-            if (tier <= UV) {
-                return ParallelTier(getTier(getMaxVoltage()));
-            } else {
-                return HigherParallelTier(getTier(getMaxVoltage()));
-            }
-        }
-    }
-
 }

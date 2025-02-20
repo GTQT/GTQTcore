@@ -18,6 +18,7 @@ import static gregtech.api.GTValues.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.dust;
 import static gregtech.api.unification.ore.OrePrefix.gem;
+import static keqing.gtqtcore.api.unification.GCYSMaterials.Adamantium;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 
 public class ISA {
@@ -89,6 +90,8 @@ public class ISA {
         isaLine(false,Copper,CopperFront,Copper,Nickel,Cobalt,Gold);
         isaLine(false,Tetrahedrite,TetrahedriteFront,Tetrahedrite,Antimony,Cadmium,Sulfur);
         isaLine(false,Chalcocite,ChalcociteFront,Copper,Copper,Sulfur,Silver);
+        isaLine(false,Bornite,BorniteFront,Copper,Gold,Cobalt,Cadmium);
+
         //铝系
         isaLine(false,Aluminium,AluminiumFront,Aluminium,Aluminium,Ilmenite,Rutile);
         isaLine(false,Bauxite,BauxiteFront,Aluminium,Aluminium,Gallium,Rutile);
@@ -114,6 +117,8 @@ public class ISA {
         //铀
         isaLine(true,Uraninite,UraniniteFront,Uraninite,Uraninite,Thorium,Silver);
         isaLine(true,Pitchblende,PitchblendeFront,Pitchblende,Pitchblende,Thorium,Lead);
+        //氧化硅岩
+        isaLine(true,NaquadahOxide,NaquadahOxideFront,Naquadah,Titanium,Antimony,Adamantium);
 
         GTQTcoreRecipeMaps.CHEMICAL_PLANT.recipeBuilder()
                 .recipeLevel(3)

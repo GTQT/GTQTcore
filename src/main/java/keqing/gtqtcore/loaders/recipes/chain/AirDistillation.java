@@ -24,74 +24,64 @@ import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 
 public class AirDistillation {
     public static void init() {
-        vaccum(LiquidCarbonDioxide,CarbonDioxide,1);
-        vaccum(LiquidNitrogen,Nitrogen,2);
-        vaccum(LiquidHydrogen,Hydrogen,2);
-        vaccum(LiquidArgon,Argon,3);
-        vaccum(LiquidRadon,Radon,3);
-        vaccum(LiquidHelium,Helium,4);
-
-        ///
-        VACUUM_RECIPES.recipeBuilder()
-                .fluidInputs(MarsAir.getFluid(4000))
-                .fluidOutputs(LiquidMarsAir.getFluid(4000))
-                .duration(80).EUt(VA[MV]).buildAndRegister();
+        vaccum(CarbonDioxide, 1);
+        vaccum(Radon, 2);
+        vaccum(Krypton, 2);
+        vaccum(Nitrogen, 3);
+        vaccum(Argon, 3);
+        vaccum(Xenon, 3);
+        vaccum(Hydrogen, 4);
+        vaccum(Neon, 4);
+        vaccum(MarsAir, 5);
+        vaccum(BeneathAir, 5);
+        vaccum(BetAir, 5);
+        vaccum(Helium, 6);
 
         DISTILLATION_RECIPES.recipeBuilder()
-                .fluidInputs(LiquidMarsAir.getFluid(10000))
-                .fluidOutputs(LiquidCarbonDioxide.getFluid(7200))
-                .fluidOutputs(LiquidArgon.getFluid(1000))
+                .fluidInputs(MarsAir.getFluid(FluidStorageKeys.LIQUID, 10000))
+                .fluidOutputs(CarbonDioxide.getFluid(FluidStorageKeys.LIQUID, 2500))
+                .fluidOutputs(Argon.getFluid(FluidStorageKeys.LIQUID, 1000))
                 .fluidOutputs(Materials.Oxygen.getFluid(FluidStorageKeys.LIQUID, 750))
                 .fluidOutputs(Helium.getFluid(FluidStorageKeys.LIQUID, 750))
-                .fluidOutputs(LiquidRadon.getFluid(250))
-                .fluidOutputs(LiquidHydrogen.getFluid(50))
-                .fluidOutputs(LiquidNitrogen.getFluid(50))
+                .fluidOutputs(Radon.getFluid(FluidStorageKeys.LIQUID, 250))
+                .fluidOutputs(Hydrogen.getFluid(FluidStorageKeys.LIQUID, 50))
+                .fluidOutputs(Nitrogen.getFluid(FluidStorageKeys.LIQUID, 50))
                 .fluidOutputs(MagicGas.getFluid(50))
                 .duration(2000).EUt(VA[MV]).buildAndRegister();
 
-        VACUUM_RECIPES.recipeBuilder()
-                .fluidInputs(BetAir.getFluid(4000))
-                .fluidOutputs(LiquidBetAir.getFluid(4000))
-                .duration(80).EUt(VA[MV]).buildAndRegister();
 
         DISTILLATION_RECIPES.recipeBuilder()
-                .fluidInputs(LiquidBetAir.getFluid(10000))
+                .fluidInputs(BetAir.getFluid(FluidStorageKeys.LIQUID, 10000))
                 .fluidOutputs(Methane.getFluid(7200))
                 .fluidOutputs(CoalGas.getFluid(1000))
                 .fluidOutputs(HydrogenSulfide.getFluid(750))
                 .fluidOutputs(SulfurDioxide.getFluid(750))
-                .fluidOutputs(Helium3.getFluid(250))
+                .fluidOutputs(Helium.getFluid(FluidStorageKeys.LIQUID, 250))
                 .fluidOutputs(Neon.getFluid(50))
-                .fluidOutputs(Radon.getFluid(50))
+                .fluidOutputs(Radon.getFluid(FluidStorageKeys.LIQUID, 50))
                 .duration(2000).EUt(VA[MV]).buildAndRegister();
 
-        ///
-        VACUUM_RECIPES.recipeBuilder()
-                .fluidInputs(BeneathAir.getFluid(4000))
-                .fluidOutputs(LiquidBeneathAir.getFluid(4000))
-                .duration(80).EUt(VA[MV]).buildAndRegister();
-
         DISTILLATION_RECIPES.recipeBuilder()
-                .fluidInputs(LiquidBeneathAir.getFluid(10000))
-                .fluidOutputs(Oxygen.getFluid(7200))
+                .fluidInputs(BeneathAir.getFluid(FluidStorageKeys.LIQUID, 10000))
+                .fluidOutputs(Oxygen.getFluid(FluidStorageKeys.LIQUID, 7200))
                 .fluidOutputs(CoalGas.getFluid(1000))
                 .fluidOutputs(HydrogenSulfide.getFluid(750))
                 .fluidOutputs(SulfurDioxide.getFluid(750))
-                .fluidOutputs(Helium3.getFluid(250))
+                .fluidOutputs(Helium.getFluid(FluidStorageKeys.LIQUID, 250))
                 .fluidOutputs(Neon.getFluid(50))
-                .fluidOutputs(Radon.getFluid(50))
+                .fluidOutputs(Radon.getFluid(FluidStorageKeys.LIQUID, 50))
                 .duration(2000).EUt(VA[MV]).buildAndRegister();
     }
 
-    private static void vaccum(Material material1, Material material2, int i) {
+    private static void vaccum(Material material, int i) {
         VACUUM_RECIPES.recipeBuilder()
-                .fluidInputs(material2.getFluid(1000))
-                .fluidOutputs(material1.getFluid(1000))
-                .duration((int) (200*Math.pow(2,i+1))).EUt(VA[3+i]).buildAndRegister();
+                .fluidInputs(material.getFluid(FluidStorageKeys.GAS, 1000))
+                .fluidOutputs(material.getFluid(FluidStorageKeys.LIQUID, 1000))
+                .duration((int) (100*Math.pow(2,i+1))).EUt(VA[i]).buildAndRegister();
 
         FLUID_HEATER_RECIPES.recipeBuilder()
-                .fluidInputs(material1.getFluid(1000))
-                .fluidOutputs(material2.getFluid(1000))
+                .fluidInputs(material.getFluid(FluidStorageKeys.LIQUID, 4000))
+                .fluidOutputs(material.getFluid(FluidStorageKeys.GAS, 4000))
                 .duration((int) (20*Math.pow(2,i))).EUt(VA[i]).buildAndRegister();
     }
 }

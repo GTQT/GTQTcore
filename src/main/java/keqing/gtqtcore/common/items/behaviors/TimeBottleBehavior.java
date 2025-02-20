@@ -63,20 +63,22 @@ public class TimeBottleBehavior implements IItemBehaviour, ItemUIFactory {
     }
 
     public void onUpdate(ItemStack itemStack, Entity entity) {
-        if (!entity.world.isRemote) {
-            if(auto)accelerateTime = countRapid(time);
-            if (entity instanceof EntityPlayer player) {
-                for (int i = 0; i < player.inventory.getSizeInventory() && i < 48; i++) {
-                    ItemStack invStack = player.inventory.getStackInSlot(i);
-                    if (invStack.getItem() == GTQTMetaItems.GTQT_META_ITEM && invStack.getMetadata() == TIME_BOTTLE.getMetaValue()) {
-                        if (time < maxTime) time++;
-                        return;
+        if (entity instanceof EntityPlayer player)
+        {
+            for (int i = 0; i < player.inventory.getSizeInventory()&&i<48; i++) {
+                ItemStack invStack = player.inventory.getStackInSlot(i);
+                if (invStack.getItem() == GTQTMetaItems.GTQT_META_ITEM && invStack.getMetadata() == TIME_BOTTLE.getMetaValue()) {
+                    if (itemStack.hasTagCompound()) {
+                        NBTTagCompound compound = itemStack.getTagCompound();
+                        time = compound.getInteger("storedTime");
+                        if(time<maxTime
+                        )time++;
+                        compound.setInteger("storedTime", time);
+                    } else {
+                        NBTTagCompound compound = new NBTTagCompound();
+                        compound.setInteger("storedTime", time);
+                        itemStack.setTagCompound(compound);
                     }
-                }
-                if (!itemStack.hasTagCompound()) {
-                    NBTTagCompound compound = new NBTTagCompound();
-                    compound.setInteger("storedTime", time);
-                    itemStack.setTagCompound(compound);
                 }
             }
         }

@@ -1554,18 +1554,13 @@ public class FirstDegreeMaterials {
         //交错次元空气
         GTQTMaterials.BetAir = new Material.Builder(getMaterialsId(), gregtechId("bet_air"))
                 .gas()
+                .liquid(new FluidBuilder().temperature(58))
                 .color(0x2E8B57)
                 .flags(DISABLE_DECOMPOSITION)
                 .components(Methane, 78, HydrogenSulfide, 21, Neon, 7, Radon, 2)
                 .build();
 
-        GTQTMaterials.LiquidBetAir = new Material.Builder(getMaterialsId(), gregtechId("liquid_bet_air"))
-                .liquid(new FluidBuilder().temperature(58))
-                .color(0x228B22)
-                .flags(DISABLE_DECOMPOSITION)
-                .components(Methane, 144, CoalGas, 20, HydrogenSulfide, 15, SulfurDioxide, 15, Helium3, 5, Neon,
-                        1, Radon, 1)
-                .build();
+        getMaterialsId();
 
         //离散态素魔力
         GTQTMaterials.MagicGas = new Material.Builder(getMaterialsId(), gregtechId("magic_gas"))
@@ -1576,19 +1571,14 @@ public class FirstDegreeMaterials {
 
         //交错次元空气
         GTQTMaterials.MarsAir = new Material.Builder(getMaterialsId(), gregtechId("mars_air"))
+                .liquid(new FluidBuilder().temperature(58))
                 .gas()
                 .color(0x8B3E2F)
                 .flags(DISABLE_DECOMPOSITION)
                 .components(CarbonDioxide, 80, Argon, 20, Oxygen, 10, Radon, 10, Hydrogen, 10, Nitrogen, 10, MagicGas, 10)
                 .build();
 
-        GTQTMaterials.LiquidMarsAir = new Material.Builder(getMaterialsId(), gregtechId("liquid_mars_air"))
-                .liquid(new FluidBuilder().temperature(58))
-                .color(0x8B4500)
-                .flags(DISABLE_DECOMPOSITION)
-                .components(CarbonDioxide, 160, Argon, 15, Oxygen, 15, Helium3, 10, Radon,
-                        10, Hydrogen, 10, Nitrogen, 10, MagicGas, 5)
-                .build();
+        getMaterialsId();
 
         //离散态微薄魔力
         GTQTMaterials.MagicGas = new Material.Builder(getMaterialsId(), gregtechId("magic_gas"))
@@ -2869,47 +2859,12 @@ public class FirstDegreeMaterials {
                 .components(Carbon, 1, Hydrogen, 3, Oxygen, 1, Potassium, 1)
                 .build();
 
-        GTQTMaterials.LiquidNitrogen = new Material.Builder(getMaterialsId(), gregtechId("liquid_nitrogen"))
-                .liquid(new FluidBuilder().temperature(77))
-                .color(0x00BFC1)
-                .flags(DISABLE_DECOMPOSITION)
-                .components(Nitrogen,2)
-                .build();
-
-        GTQTMaterials.LiquidHelium = new Material.Builder(getMaterialsId(), gregtechId("liquid_helium"))
-                .liquid(new FluidBuilder().temperature(2))
-                .color(0x00BFC1)
-                .flags(DISABLE_DECOMPOSITION)
-                .components(Helium,1)
-                .build();
-
-        GTQTMaterials.LiquidHydrogen = new Material.Builder(getMaterialsId(), gregtechId("liquid_hydrogen"))
-                .liquid(new FluidBuilder().temperature(20))
-                .color(0x0000B5)
-                .flags(DISABLE_DECOMPOSITION)
-                .components(Hydrogen,2)
-                .build();
-
-        GTQTMaterials.LiquidArgon = new Material.Builder(getMaterialsId(), gregtechId("liquid_argon"))
-                .liquid(new FluidBuilder().temperature(84))
-                .color(0x00FF00)
-                .flags(DISABLE_DECOMPOSITION)
-                .components(Argon,1)
-                .build();
-
-        GTQTMaterials.LiquidRadon = new Material.Builder(getMaterialsId(), gregtechId("liquid_radon"))
-                .liquid(new FluidBuilder().temperature(211))
-                .color(0xFF39FF)
-                .flags(DISABLE_DECOMPOSITION)
-                .components(Radon,1)
-                .build();
-
-        GTQTMaterials.LiquidCarbonDioxide = new Material.Builder(getMaterialsId(), gregtechId("liquid_carbon_dioxide"))
-                .liquid(new FluidBuilder().temperature(211))
-                .color(0xFFA9FF)
-                .flags(DISABLE_DECOMPOSITION)
-                .components(Carbon,1,Oxygen,2)
-                .build();
+        getMaterialsId();
+        getMaterialsId();
+        getMaterialsId();
+        getMaterialsId();
+        getMaterialsId();
+        getMaterialsId();
 
         GTQTMaterials.SodiumTungstate = new Material.Builder(getMaterialsId(), gregtechId("sodium_tungstate"))
                 .fluid()
@@ -3546,19 +3501,13 @@ public class FirstDegreeMaterials {
         //交错次元空气
         GTQTMaterials.BeneathAir = new Material.Builder(getMaterialsId(), gregtechId("beneath_air"))
                 .gas()
+                .liquid(new FluidBuilder().temperature(58))
                 .color(0x4A4A4A)
                 .flags(DISABLE_DECOMPOSITION)
                 .components(Oxygen, 80, CarbonDioxide, 20, Argon, 10, Radon, 10, Hydrogen, 10, Nitrogen, 10, MagicGas, 10)
                 .build();
 
-        GTQTMaterials.LiquidBeneathAir = new Material.Builder(getMaterialsId(), gregtechId("liquid_beneath_air"))
-                .liquid(new FluidBuilder().temperature(58))
-                .color(0x0F0F0F)
-                .flags(DISABLE_DECOMPOSITION)
-                .components(CarbonDioxide, 160, Argon, 15, Oxygen, 15, Helium3, 10, Radon,
-                        10, Hydrogen, 10, Nitrogen, 10, MagicGas, 5)
-                .build();
-
+        getMaterialsId();
 
         SodiumTungstate = new Material.Builder(getMaterialsId(), gregtechId("sodium_tungstate"))
                 .liquid()

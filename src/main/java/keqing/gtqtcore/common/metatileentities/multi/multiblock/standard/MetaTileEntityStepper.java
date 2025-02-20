@@ -388,11 +388,11 @@ public class MetaTileEntityStepper extends GTQTOCMultiblockController{
                 }
             }
             if (LaserKind >= laser_tier) {
-                setTimeReduce((100 - (LaserKind + radio_tier) * 4.0) / 100);
+                setTimeReduce((100 - (LaserKind + radio_tier) * 5.0) / 100);
                 setMaxParallel(4 * clean_tier * laser_tier);
             } else {
-                setTimeReduce((100 - LaserKind * 4.0) / 100);
-                setMaxParallel(clean_tier * laser_tier);
+                setTimeReduce(1);
+                setMaxParallel(clean_tier + laser_tier);
             }
         }
     }

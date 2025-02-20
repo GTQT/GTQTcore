@@ -19,6 +19,63 @@ public class GTQTMaterialPropertyAddition {
         PalladiumRaw.setFormula("PdCl2?");
         NetherStar.setFormula("PtDc?KQ", true);
         //  Elements
+        Nitrogen.getProperty(PropertyKey.FLUID).enqueueRegistration(FluidStorageKeys.LIQUID,
+                new FluidBuilder()
+                        .temperature(77)
+                        .color(0x008D8F)
+                        .name("liquid_nitrogen")
+                        .translation("gregtech.fluid.liquid_generic"));
+
+        Hydrogen.getProperty(PropertyKey.FLUID).enqueueRegistration(FluidStorageKeys.LIQUID,
+                new FluidBuilder()
+                        .temperature(20) // 氢气液化温度约为20K
+                        .color(0xE0FFFF) // 氢气液态颜色
+                        .name("liquid_hydrogen")
+                        .translation("gregtech.fluid.liquid_generic"));
+
+        Argon.getProperty(PropertyKey.FLUID).enqueueRegistration(FluidStorageKeys.LIQUID,
+                new FluidBuilder()
+                        .temperature(87) // 氪气液化温度约为87K
+                        .color(0x8080FF) // 氪气液态颜色
+                        .name("liquid_argon")
+                        .translation("gregtech.fluid.liquid_generic"));
+
+        Radon.getProperty(PropertyKey.FLUID).enqueueRegistration(FluidStorageKeys.LIQUID,
+                new FluidBuilder()
+                        .temperature(211) // 氡气液化温度约为211K
+                        .color(0x9400D3) // 氡气液态颜色
+                        .name("liquid_radon")
+                        .translation("gregtech.fluid.liquid_generic"));
+
+        Neon.getProperty(PropertyKey.FLUID).enqueueRegistration(FluidStorageKeys.LIQUID,
+                new FluidBuilder()
+                        .temperature(27) // 氖气液化温度约为27K
+                        .color(0xFF4500) // 氖气液态颜色
+                        .name("liquid_neon")
+                        .translation("gregtech.fluid.liquid_generic"));
+
+        Krypton.getProperty(PropertyKey.FLUID).enqueueRegistration(FluidStorageKeys.LIQUID,
+                new FluidBuilder()
+                        .temperature(119) // 氪气液化温度约为119K
+                        .color(0x8080FF) // 氪气液态颜色
+                        .name("liquid_krypton")
+                        .translation("gregtech.fluid.liquid_generic"));
+
+        Xenon.getProperty(PropertyKey.FLUID).enqueueRegistration(FluidStorageKeys.LIQUID,
+                new FluidBuilder()
+                        .temperature(165) // 氙气液化温度约为165K
+                        .color(0x00FFFF) // 氙气液态颜色
+                        .name("liquid_xenon")
+                        .translation("gregtech.fluid.liquid_generic"));
+
+        CarbonDioxide.getProperty(PropertyKey.FLUID).enqueueRegistration(FluidStorageKeys.LIQUID,
+                new FluidBuilder()
+                        .temperature(195) // 二氧化碳液化温度约为195K
+                        .color(0x9B9B9B) // 二氧化碳液态颜色
+                        .name("liquid_carbon_dioxide")
+                        .translation("gregtech.fluid.liquid_generic"));
+
+
         Zirconium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
         Thulium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
         Tellurium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));

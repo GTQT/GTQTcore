@@ -6,6 +6,7 @@ import codechicken.lib.vec.Matrix4;
 import gregtech.api.GTValues;
 import gregtech.api.capability.*;
 import gregtech.api.capability.impl.*;
+import gregtech.api.fluids.store.FluidStorageKeys;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.ModularUI;
 import gregtech.api.gui.widgets.*;
@@ -54,9 +55,9 @@ import javax.annotation.Nonnull;
 import java.util.*;
 
 import static gregtech.api.GTValues.EV;
+import static gregtech.api.unification.material.Materials.Nitrogen;
 import static keqing.gtqtcore.GTQTCoreConfig.MachineSwitch;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
-import static keqing.gtqtcore.api.unification.GTQTMaterials.LiquidNitrogen;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 
 public class MetaTileEntityParticleAccelerator extends MultiMapMultiblockController implements IOpticalComputationReceiver {
@@ -420,7 +421,7 @@ public class MetaTileEntityParticleAccelerator extends MultiMapMultiblockControl
         }
         if((this.getRecipeMap() == NUCLEOSYNTHESIS&&bashi)||(this.getRecipeMap() == TARGET_CHAMBER&&hehecheng))
         {
-            FluidStack HEAT_STACK = LiquidNitrogen.getFluid(d);
+            FluidStack HEAT_STACK = Nitrogen.getFluid(FluidStorageKeys.LIQUID, d);
             //待机默认减速
             if (speed >= 0) {
                 speed = speed - 1;
@@ -595,7 +596,7 @@ public class MetaTileEntityParticleAccelerator extends MultiMapMultiblockControl
             textList.add(new TextComponentTranslation("在本模式下加速粒子需要消耗液氮！"));
 
             if (getInputFluidInventory() != null) {
-                FluidStack STACK = getInputFluidInventory().drain(LiquidNitrogen.getFluid(Integer.MAX_VALUE), false);
+                FluidStack STACK = getInputFluidInventory().drain(Nitrogen.getFluid(FluidStorageKeys.LIQUID, Integer.MAX_VALUE), false);
                 int liquidOxygenAmount = STACK == null ? 0 : STACK.amount;
                 textList.add(new TextComponentTranslation("gtqtcore.multiblock.pa.amount", TextFormattingUtil.formatNumbers((liquidOxygenAmount))));
             }

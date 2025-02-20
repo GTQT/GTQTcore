@@ -137,6 +137,8 @@ public class GTQTMaterials {
     public static Material TungstateFront;
     public static Material UraniniteFront;
     public static Material PitchblendeFront;
+    public static Material NaquadahOxideFront;
+    public static Material BorniteFront;
 
     public static Material Diaminotoluene;
     public static Material Dinitrotoluene;
@@ -392,10 +394,8 @@ public class GTQTMaterials {
     public static Material LowPuritySulfuricAcidSuperEnergyNaquadah;
     public static Material LowPuritySulfuricAcidSuperEnergyNaquadahSolution;
     public static Material HighPuritySulfuricAcidSuperEnergyNaquadah;
-    public static Material LiquidBetAir;
     public static Material BetAir;
     public static Material MarsAir;
-    public static Material LiquidMarsAir;
     public static Material MagicGas;
     public static Material Ulexite;
     public static Material Bittern;
@@ -596,16 +596,9 @@ public class GTQTMaterials {
     public static Material TBPMIBKSolution;
     public static Material DimethylamineHydrochloride;
     public static Material PotassiumFormate;
-    public static Material LiquidNitrogen;
-    public static Material LiquidHelium;
-    public static Material LiquidHydrogen;
-    public static Material LiquidArgon;
-    public static Material LiquidRadon;
-    public static Material LiquidCarbonDioxide;
     public static Material SodiumTungstate;
     public static Material SodiumPhosphotungstate;
     public static Material SodiumMolybdate;
-    public static Material LiquidBeneathAir;
     public static Material BeneathAir;
     public static Material FluxedElectrum;
     public static Material CleanWater_1;

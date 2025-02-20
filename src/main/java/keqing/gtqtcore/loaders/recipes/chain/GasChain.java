@@ -1,8 +1,9 @@
 package keqing.gtqtcore.loaders.recipes.chain;
 
+import gregtech.api.fluids.store.FluidStorageKeys;
+
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
-import static keqing.gtqtcore.api.unification.GTQTMaterials.BetAir;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 
 public class GasChain {
@@ -28,12 +29,12 @@ public class GasChain {
         //交错
         GAS_COLLECTOR_RECIPES.recipeBuilder()
                 .circuitMeta(5)
-                .fluidOutputs(BetAir.getFluid(10000))
+                .fluidOutputs(BetAir.getFluid(FluidStorageKeys.GAS, 10000))
                 .dimension(41)
                 .duration(200).EUt(16).buildAndRegister();
 
         DISTILLATION_RECIPES.recipeBuilder()
-                .fluidInputs(BetAir.getFluid(100000))
+                .fluidInputs(BetAir.getFluid(FluidStorageKeys.GAS, 10000))
                 .fluidOutputs(Methane.getFluid(72000))
                 .fluidOutputs(CoalGas.getFluid(10000))
                 .fluidOutputs(HydrogenSulfide.getFluid(7500))
@@ -46,12 +47,12 @@ public class GasChain {
         //火星
         GAS_COLLECTOR_RECIPES.recipeBuilder()
                 .circuitMeta(6)
-                .fluidOutputs(MarsAir.getFluid(10000))
+                .fluidOutputs(MarsAir.getFluid(FluidStorageKeys.GAS, 10000))
                 .dimension(52)
                 .duration(200).EUt(16).buildAndRegister();
 
         DISTILLATION_RECIPES.recipeBuilder()
-                .fluidInputs(MarsAir.getFluid(100000))
+                .fluidInputs(MarsAir.getFluid(FluidStorageKeys.GAS, 10000))
                 .fluidOutputs(CarbonDioxide.getFluid(72000))
                 .fluidOutputs(Argon.getFluid(10000))
                 .fluidOutputs(Oxygen.getFluid(7500))
@@ -65,12 +66,12 @@ public class GasChain {
         //深渊
         GAS_COLLECTOR_RECIPES.recipeBuilder()
                 .circuitMeta(7)
-                .fluidOutputs(BeneathAir.getFluid(10000))
+                .fluidOutputs(BeneathAir.getFluid(FluidStorageKeys.GAS, 10000))
                 .dimension(10)
                 .duration(200).EUt(16).buildAndRegister();
 
         DISTILLATION_RECIPES.recipeBuilder()
-                .fluidInputs(BeneathAir.getFluid(100000))
+                .fluidInputs(BeneathAir.getFluid(FluidStorageKeys.GAS, 10000))
                 .fluidOutputs(Oxygen.getFluid(72000))
                 .fluidOutputs(Carbon.getFluid(10000))
                 .fluidOutputs(Argon.getFluid(7500))

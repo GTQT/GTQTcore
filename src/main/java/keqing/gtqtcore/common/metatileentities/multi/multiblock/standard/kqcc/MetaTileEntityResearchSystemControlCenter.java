@@ -8,6 +8,7 @@ import gregtech.api.capability.IEnergyContainer;
 import gregtech.api.capability.IOpticalComputationProvider;
 import gregtech.api.capability.impl.EnergyContainerList;
 import gregtech.api.capability.impl.FluidTankList;
+import gregtech.api.fluids.store.FluidStorageKeys;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.ModularUI;
 import gregtech.api.gui.widgets.AdvancedTextWidget;
@@ -50,10 +51,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
-import static gregtech.api.unification.material.Materials.PCBCoolant;
-import static gregtech.api.unification.material.Materials.Water;
+import static gregtech.api.unification.material.Materials.*;
 import static keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility.KQCC_MULTIBLOCK_ABILITY;
-import static keqing.gtqtcore.api.unification.GTQTMaterials.LiquidNitrogen;
 import static keqing.gtqtcore.common.block.blocks.BlocksResearchSystem.CasingType.*;
 
 public class MetaTileEntityResearchSystemControlCenter extends MultiblockWithDisplayBase implements IOpticalComputationProvider {
@@ -77,11 +76,11 @@ public class MetaTileEntityResearchSystemControlCenter extends MultiblockWithDis
     }
     FluidStack COLD_STACK = Water.getFluid(10);
     FluidStack COLD_STACKA = PCBCoolant.getFluid(5);
-    FluidStack COLD_STACKB = LiquidNitrogen.getFluid(1);
+    FluidStack COLD_STACKB = Nitrogen.getFluid(FluidStorageKeys.LIQUID, 1);
 
     FluidStack COLD_STACK1 = Water.getFluid(40);
     FluidStack COLD_STACKA1 = PCBCoolant.getFluid(20);
-    FluidStack COLD_STACKB1 = LiquidNitrogen.getFluid(4);
+    FluidStack COLD_STACKB1 = Nitrogen.getFluid(FluidStorageKeys.LIQUID, 4);
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setFloat("HOT", HOT);
         data.setInteger("thresholdPercentage", thresholdPercentage);
@@ -264,7 +263,7 @@ public class MetaTileEntityResearchSystemControlCenter extends MultiblockWithDis
                 .addCustom(tl -> {
                     if (coolantHandler != null) {
 
-                        FluidStack STACKC = coolantHandler.drain(LiquidNitrogen.getFluid(Integer.MAX_VALUE), false);
+                        FluidStack STACKC = coolantHandler.drain(Nitrogen.getFluid(FluidStorageKeys.LIQUID, Integer.MAX_VALUE), false);
                         int liquidNITAmount = STACKC == null ? 0 : STACKC.amount;
                         textList.add(new TextComponentTranslation("冷却液种类-液氮："));
                         textList.add(new TextComponentTranslation("流体缓存：%s mb", TextFormattingUtil.formatNumbers((liquidNITAmount))));

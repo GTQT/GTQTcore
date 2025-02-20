@@ -1363,5 +1363,8 @@ public class SecondDegreeMaterials {
                 .build()
                 .setFormula("[-CO-C6H4-CO-NH-C6H4-NH-]n", true);
 
+        GTQTMaterials.NaquadahOxideFront = new Material.Builder(getMaterialsId(), gregtechId("naquadahoxide_front")).fluid().color(0xCD853F).build();
+        GTQTMaterials.BorniteFront = new Material.Builder(getMaterialsId(), gregtechId("bornite_front")).fluid().color(0xCD853F).build();
+
     }
 }

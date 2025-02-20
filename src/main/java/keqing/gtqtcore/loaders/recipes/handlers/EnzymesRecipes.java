@@ -1,5 +1,6 @@
 package keqing.gtqtcore.loaders.recipes.handlers;
 
+import gregtech.api.fluids.store.FluidStorageKeys;
 import gregtech.api.items.metaitem.MetaItem;
 import gregtech.api.metatileentity.multiblock.CleanroomType;
 import gregtech.api.unification.material.Material;
@@ -207,7 +208,7 @@ public class EnzymesRecipes {
                 .duration(4000).EUt(VA[HV]).buildAndRegister();
 
         BIO_CENTRIFUGE.recipeBuilder()
-                .fluidInputs(LiquidBetAir.getFluid(10000))
+                .fluidInputs(BetAir.getFluid(FluidStorageKeys.LIQUID, 10000))
                 .fluidInputs(DistilledWater.getFluid(1000))
                 .fluidInputs(Ethanesulphonate.getFluid(1000))
                 .fluidOutputs(Enzymesbz.getFluid(100))
@@ -221,7 +222,7 @@ public class EnzymesRecipes {
                 .duration(4000).EUt(VA[HV]).buildAndRegister();
 
         BIO_CENTRIFUGE.recipeBuilder()
-                .fluidInputs(LiquidMarsAir.getFluid(10000))
+                .fluidInputs(MarsAir.getFluid(FluidStorageKeys.LIQUID, 10000))
                 .fluidInputs(DistilledWater.getFluid(1000))
                 .fluidInputs(Ethanesulphonate.getFluid(1000))
                 .fluidOutputs(Enzymesdz.getFluid(100))
