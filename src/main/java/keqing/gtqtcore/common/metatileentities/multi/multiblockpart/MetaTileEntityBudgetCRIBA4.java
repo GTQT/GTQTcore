@@ -62,7 +62,10 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemHandlerHelper;
@@ -658,5 +661,12 @@ public class MetaTileEntityBudgetCRIBA4 extends MetaTileEntityMultiblockNotifiab
 
     public NotifiableItemStackHandler getPatternItems() {
         return this.patternItems;
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void addToolUsages(ItemStack stack, World world, List<String> tooltip, boolean advanced) {
+        tooltip.add(I18n.format("gtqtcore.machine.budget_crib.tooltip"));
+        super.addToolUsages(stack, world, tooltip, advanced);
     }
 }

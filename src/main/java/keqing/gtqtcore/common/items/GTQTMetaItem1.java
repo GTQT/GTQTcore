@@ -1005,6 +1005,12 @@ public class GTQTMetaItem1 extends StandardMetaItem {
 
         PROXIMA_B_SPIROGYRA = this.addItem(1058, "algae.proxima_b.spirogyra").addOreDict("dyeGray").setCreativeTabs(CommonProxy.GTQTCore_BIO);
 
+        //本地模型
+        MODEL_LOCATION_MKI = this.addItem(1090, "model_location_mki").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        MODEL_LOCATION_MKII = this.addItem(1091, "model_location_mkii").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        MODEL_LOCATION_MKIII = this.addItem(1092, "model_location_mkiii").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        MODEL_LOCATION_MKIV = this.addItem(1093, "model_location_mkiv").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        MODEL_LOCATION_MKV = this.addItem(1094, "model_location_mkv").setCreativeTabs(CommonProxy.GTQTCore_DISK);
         //换热片1100
         HEAT_SHIELD_MKI = this.addItem(1100, "heat_shield_mki").setCreativeTabs(CommonProxy.GTQTCore_NC);
         HEAT_SHIELD_MKII = this.addItem(1101, "heat_shield_mkii").setCreativeTabs(CommonProxy.GTQTCore_NC);

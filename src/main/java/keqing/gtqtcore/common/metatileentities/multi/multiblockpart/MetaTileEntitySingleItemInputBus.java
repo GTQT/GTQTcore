@@ -34,7 +34,6 @@ public class MetaTileEntitySingleItemInputBus extends MetaTileEntityItemBus {
     protected IItemHandlerModifiable createImportItemHandler() {
         return new NotifiableItemStackHandler(this, slotSize, getController(), false) {
 
-            // only allow a single item, no stack size
             @Override
             public int getSlotLimit(int slot) {
                 return stackSizeLimit;

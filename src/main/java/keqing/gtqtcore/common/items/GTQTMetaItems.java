@@ -720,6 +720,12 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem PROXIMA_B_POLYSIPHONIA_SENTICULOSA;
     public static MetaItem<?>.MetaValueItem PROXIMA_B_SPIROGYRA;
 
+    public static MetaItem<?>.MetaValueItem MODEL_LOCATION_MKI;
+    public static MetaItem<?>.MetaValueItem MODEL_LOCATION_MKII;
+    public static MetaItem<?>.MetaValueItem MODEL_LOCATION_MKIII;
+    public static MetaItem<?>.MetaValueItem MODEL_LOCATION_MKIV;
+    public static MetaItem<?>.MetaValueItem MODEL_LOCATION_MKV;
+
     public static MetaItem<?>.MetaValueItem DISK_0;
     public static MetaItem<?>.MetaValueItem DISK_1;
     public static MetaItem<?>.MetaValueItem DISK_2;

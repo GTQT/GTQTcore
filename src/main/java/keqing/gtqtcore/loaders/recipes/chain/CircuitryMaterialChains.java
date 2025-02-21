@@ -1,7 +1,6 @@
 package keqing.gtqtcore.loaders.recipes.chain;
 
 import static gregtech.common.items.MetaItems.SHAPE_MOLD_CYLINDER;
-import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.CHEMICAL_PLANT;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.ROASTER_RECIPES;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static gregtech.api.GTValues.*;
@@ -34,14 +33,14 @@ public class CircuitryMaterialChains {
                 .notConsumable(plate,Palladium)
                 .fluidInputs(Trichlorosilane.getFluid(2000))
                 .fluidOutputs(SiliconTetrachloride.getFluid(1000))
-                .fluidOutputs(SilaneB.getFluid(1000))
+                .fluidOutputs(DichIorosilane.getFluid(1000))
                 .buildAndRegister();
 
         CHEMICAL_RECIPES.recipeBuilder()
                 .duration(200)
                 .EUt(VA[IV])
                 .notConsumable(plate,Platinum)
-                .fluidInputs(SilaneB.getFluid(3000))
+                .fluidInputs(DichIorosilane.getFluid(3000))
                 .fluidOutputs(Trichlorosilane.getFluid(2000))
                 .fluidOutputs(Silane.getFluid(1000))
                 .buildAndRegister();

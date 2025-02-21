@@ -242,7 +242,7 @@ public class GTQTTJFirstDegreeMaterials {
                 .components(Carbon, 24, Hydrogen, 16, Oxygen, 8, Nitrogen, 4, Phosphorus, 4, Fluorine, 40)
                 .build();
 
-        SilaneB = new Material.Builder(25043, gregtechId("silaneb"))
+        DichIorosilane = new Material.Builder(25043, gregtechId("dich_iorosilane"))
                 .fluid()
                 .colorAverage()
                 .flags(DISABLE_DECOMPOSITION)
