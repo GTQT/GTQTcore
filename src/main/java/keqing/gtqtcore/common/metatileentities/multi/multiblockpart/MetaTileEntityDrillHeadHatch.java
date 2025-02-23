@@ -24,6 +24,7 @@ import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
 import keqing.gtqtcore.api.utils.GTQTDateHelper;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.items.behaviors.DrillHeadBehavior;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -44,6 +45,20 @@ public class MetaTileEntityDrillHeadHatch extends MetaTileEntityMultiblockPart i
     long workTime;
     int tier;
     boolean work=false;
+
+    @Override
+    public void onRemoval() {
+        super.onRemoval();
+        for (int i = 0; i < containerInventory.getSlots(); i++) {
+            var pos = getPos();
+            if(!containerInventory.getStackInSlot(i).isEmpty())
+            {
+                getWorld().spawnEntity(new EntityItem(getWorld(),pos.getX()+0.5,pos.getY()+0.5,pos.getZ()+0.5,containerInventory.getStackInSlot(i)));
+                containerInventory.extractItem(i,1,false);
+            }
+
+        }
+    }
 
     public MetaTileEntityDrillHeadHatch(ResourceLocation metaTileEntityId, int tier) {
         super(metaTileEntityId, tier);

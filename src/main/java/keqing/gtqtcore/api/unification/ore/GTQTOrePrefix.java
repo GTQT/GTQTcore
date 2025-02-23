@@ -1,5 +1,6 @@
 package keqing.gtqtcore.api.unification.ore;
 
+import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.info.MaterialFlags;
 import gregtech.api.unification.material.info.MaterialIconType;
 import gregtech.api.unification.material.properties.PropertyKey;
@@ -28,11 +29,11 @@ public class GTQTOrePrefix {
     public static final OrePrefix swarm = new OrePrefix("swarm", M, null, GTQTMaterialIconType.swarm, ENABLE_UNIFICATION,
             (mat) -> (!mat.getMaterialComponents().isEmpty()||mat.isElement()) && (mat.hasProperty(PropertyKey.INGOT)||(mat.hasProperty(PropertyKey.FLUID))), mat -> Collections.singletonList(I18n.format("metaitem.swarm.tooltip")));
     public static final OrePrefix singularity = new OrePrefix("singularity", M, null, GTQTMaterialIconType.singularity, ENABLE_UNIFICATION,
-            (mat) -> (!mat.getMaterialComponents().isEmpty()||mat.isElement())  && (mat.hasProperty(PropertyKey.INGOT)||(mat.hasProperty(PropertyKey.FLUID))), mat -> Collections.singletonList(I18n.format("metaitem.singularity.tooltip")));
+            Material::isElement, mat -> Collections.singletonList(I18n.format("metaitem.singularity.tooltip")));
     public static final OrePrefix leaf = new OrePrefix("leaf", M, null, GTQTMaterialIconType.leaf, ENABLE_UNIFICATION,
-            (mat) -> (!mat.getMaterialComponents().isEmpty()||mat.isElement())  && (mat.hasProperty(PropertyKey.INGOT)||(mat.hasProperty(PropertyKey.FLUID))), mat -> Collections.singletonList(I18n.format("metaitem.leaf.tooltip")));
+            Material::isElement, mat -> Collections.singletonList(I18n.format("metaitem.leaf.tooltip")));
     public static final OrePrefix fcrop = new OrePrefix("fcrop", M, null, GTQTMaterialIconType.fcrop, ENABLE_UNIFICATION,
-            (mat) -> (!mat.getMaterialComponents().isEmpty()||mat.isElement())  && (mat.hasProperty(PropertyKey.INGOT)||(mat.hasProperty(PropertyKey.FLUID))), mat -> Collections.singletonList(I18n.format("metaitem.fcrop.tooltip")));
+            Material::isElement, mat -> Collections.singletonList(I18n.format("metaitem.fcrop.tooltip")));
 
     public static final OrePrefix power = new OrePrefix("power", M, null, GTQTMaterialIconType.power, ENABLE_UNIFICATION,
             (mat) -> (mat.hasProperty(PropertyKey.DUST)), mat -> Collections.singletonList(I18n.format("metaitem.power.tooltip")));

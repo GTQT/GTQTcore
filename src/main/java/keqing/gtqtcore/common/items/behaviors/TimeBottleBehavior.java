@@ -133,7 +133,7 @@ public class TimeBottleBehavior implements IItemBehaviour, ItemUIFactory {
             if (!player.isSneaking()) {
                 //随机刻模式////////////////////////////////////////////////////
                 if (!model) {
-                    handleRandomTickMode(world, pos);
+                    handleRandomTickMode(stack,world, pos);
                 }
                 //设备模式////////////////////////////////////////////////////
                 else if(time>getRapid()){
@@ -159,7 +159,9 @@ public class TimeBottleBehavior implements IItemBehaviour, ItemUIFactory {
                                             }
                                         }
                                         time -= getRapid();
-
+                                        NBTTagCompound compound = new NBTTagCompound();
+                                        compound.setInteger("storedTime", time);
+                                        stack.setTagCompound(compound);
                                     }
                                 } else if (mte instanceof RecipeMapSteamMultiblockController smte) {
                                     final var fin = smte.getSteamFluidTank();
@@ -178,12 +180,18 @@ public class TimeBottleBehavior implements IItemBehaviour, ItemUIFactory {
                                             }
                                         }
                                         time -= getRapid();
+                                        NBTTagCompound compound = new NBTTagCompound();
+                                        compound.setInteger("storedTime", time);
+                                        stack.setTagCompound(compound);
                                     }
                                 } else {
                                     for (int i = 0; i < getRapid(); i++) {
                                         ((ITickable) te).update();
                                     }
                                     time -= getRapid();
+                                    NBTTagCompound compound = new NBTTagCompound();
+                                    compound.setInteger("storedTime", time);
+                                    stack.setTagCompound(compound);
                                     ((ITickable) te).update();
                                 }
                             }
@@ -200,6 +208,9 @@ public class TimeBottleBehavior implements IItemBehaviour, ItemUIFactory {
                                     addEnergy(world, pos, cache);
                                 }
                                 time -= getRapid();
+                                NBTTagCompound compound = new NBTTagCompound();
+                                compound.setInteger("storedTime", time);
+                                stack.setTagCompound(compound);
                             }
                         }
                     }
@@ -211,6 +222,9 @@ public class TimeBottleBehavior implements IItemBehaviour, ItemUIFactory {
                                 tickable.update();
                             }
                             time -= getRapid();
+                            NBTTagCompound compound = new NBTTagCompound();
+                            compound.setInteger("storedTime", time);
+                            stack.setTagCompound(compound);
                         }
                     }
                 }
@@ -240,7 +254,7 @@ public class TimeBottleBehavior implements IItemBehaviour, ItemUIFactory {
                 .build(playerInventoryHolder, entityPlayer);
     }
 
-    private void handleRandomTickMode(World world, BlockPos pos) {
+    private void handleRandomTickMode(ItemStack stack,World world, BlockPos pos) {
         if (time < 1200) return;
         IBlockState state = world.getBlockState(pos);
         Block block = state.getBlock();
@@ -248,5 +262,8 @@ public class TimeBottleBehavior implements IItemBehaviour, ItemUIFactory {
             for (int i = 0; i < 600; i++) block.randomTick(world, pos.toImmutable(), state, world.rand);
         }
         time-=1200;
+        NBTTagCompound compound = new NBTTagCompound();
+        compound.setInteger("storedTime", time);
+        stack.setTagCompound(compound);
     }
 }

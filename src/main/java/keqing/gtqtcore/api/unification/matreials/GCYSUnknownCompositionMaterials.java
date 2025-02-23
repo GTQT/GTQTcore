@@ -2,6 +2,7 @@ package keqing.gtqtcore.api.unification.matreials;
 
 import gregtech.api.unification.material.Material;
 
+import static gregtech.api.unification.material.info.MaterialFlags.GENERATE_PLATE;
 import static gregtech.api.unification.material.info.MaterialIconSet.*;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static gregtech.api.unification.material.Materials.*;
@@ -71,7 +72,13 @@ public class GCYSUnknownCompositionMaterials {
 
         // FREE ID 18027
 
-        Bedrock = new Material.Builder(18028, gregtechId("bedrock")).dust().color(0x404040).iconSet(ROUGH).build();
+        Bedrock = new Material.Builder(18028, gregtechId("bedrock"))
+                .dust()
+                .liquid()
+                .color(0x404040)
+                .iconSet(ROUGH)
+                .flags(GENERATE_PLATE)
+                .build();
 
         BedrockSootSolution = new Material.Builder(18029, gregtechId("bedrock_soot_solution")).fluid().color(0x1E2430).build();
 

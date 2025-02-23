@@ -720,11 +720,13 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem PROXIMA_B_POLYSIPHONIA_SENTICULOSA;
     public static MetaItem<?>.MetaValueItem PROXIMA_B_SPIROGYRA;
 
+    public static MetaItem<?>.MetaValueItem PHOTONIC_LATTICE_MEMORY;
     public static MetaItem<?>.MetaValueItem MODEL_LOCATION_MKI;
     public static MetaItem<?>.MetaValueItem MODEL_LOCATION_MKII;
     public static MetaItem<?>.MetaValueItem MODEL_LOCATION_MKIII;
     public static MetaItem<?>.MetaValueItem MODEL_LOCATION_MKIV;
     public static MetaItem<?>.MetaValueItem MODEL_LOCATION_MKV;
+    public static MetaItem<?>.MetaValueItem MODEL_LOCATION_MKVI;
 
     public static MetaItem<?>.MetaValueItem DISK_0;
     public static MetaItem<?>.MetaValueItem DISK_1;
@@ -758,6 +760,16 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem DISK_28;
     public static MetaItem<?>.MetaValueItem DISK_29;
     public static MetaItem<?>.MetaValueItem DISK_30;
+    public static MetaItem<?>.MetaValueItem DISK_31;
+    public static MetaItem<?>.MetaValueItem DISK_32;
+    public static MetaItem<?>.MetaValueItem DISK_33;
+    public static MetaItem<?>.MetaValueItem DISK_34;
+    public static MetaItem<?>.MetaValueItem DISK_35;
+    public static MetaItem<?>.MetaValueItem DISK_36;
+    public static MetaItem<?>.MetaValueItem DISK_37;
+    public static MetaItem<?>.MetaValueItem DISK_38;
+    public static MetaItem<?>.MetaValueItem DISK_39;
+    public static MetaItem<?>.MetaValueItem DISK_40;
 
     public static MetaItem<?>.MetaValueItem BIO_0;
     public static MetaItem<?>.MetaValueItem BIO_1;

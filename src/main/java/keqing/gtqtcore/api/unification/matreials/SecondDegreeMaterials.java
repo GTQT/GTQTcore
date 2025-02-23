@@ -701,7 +701,7 @@ public class SecondDegreeMaterials {
                 .blast(b -> b
                         .temp(14960, BlastProperty.GasTier.HIGHEST)
                         .blastStats(VA[UIV]))
-                .flags(DISABLE_DECOMPOSITION, GENERATE_PLATE, GENERATE_FOIL, GENERATE_FINE_WIRE, GENERATE_ROD, GENERATE_FRAME, GENERATE_DOUBLE_PLATE,GENERATE_BOLT_SCREW)
+                .flags(DISABLE_DECOMPOSITION, GENERATE_PLATE, GENERATE_FOIL, GENERATE_FINE_WIRE, GENERATE_ROD, GENERATE_FRAME, GENERATE_DOUBLE_PLATE, GENERATE_BOLT_SCREW)
                 .cableProperties(V[UXV], 576, 1024, false)
                 .build()
                 .setFormula(TextFormatting.OBFUSCATED + "aaaaaa", false);
@@ -1025,7 +1025,7 @@ public class SecondDegreeMaterials {
                 .iconSet(FLUID)
                 .build()
                 .setFormula("?", true);
-        
+
         RapidlyReplicatingAnimalCells = new Material.Builder(getMaterialsId(), gregtechId("rapidly_replicating_animal_cells"))
                 .liquid()
                 .color(0x7a335e)
@@ -1081,7 +1081,7 @@ public class SecondDegreeMaterials {
                 .iconSet(FLUID)
                 .build()
                 .setFormula("?", true);
-        
+
         Catalase = new Material.Builder(getMaterialsId(), gregtechId("catalase"))
                 .liquid()
                 .color(0xdb6596)
@@ -1365,6 +1365,497 @@ public class SecondDegreeMaterials {
 
         GTQTMaterials.NaquadahOxideFront = new Material.Builder(getMaterialsId(), gregtechId("naquadahoxide_front")).fluid().color(0xCD853F).build();
         GTQTMaterials.BorniteFront = new Material.Builder(getMaterialsId(), gregtechId("bornite_front")).fluid().color(0xCD853F).build();
+
+        //  11266 Dirty Hexafluorosilicic Acid
+        DirtyHexafluorosilicicAcid = new Material.Builder(getMaterialsId(), gregtechId("dirty_hexafluorosilicic_acid"))
+                .liquid(new FluidBuilder().attribute(FluidAttributes.ACID))
+                .color(Stone.getMaterialRGB() + HydrofluoricAcid.getMaterialRGB())
+                .iconSet(DULL)
+                .components(Hydrogen, 2, Silicon, 1, Fluorine, 6)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("H2SiF6?", true);
+
+        //  11267 Diluted Hexafluorosilicic Acid
+        DilutedHexafluorosilicicAcid = new Material.Builder(getMaterialsId(), gregtechId("diluted_hexafluorosilicic_acid"))
+                .liquid(new FluidBuilder().attribute(FluidAttributes.ACID))
+                .color(Stone.getMaterialRGB() + HydrofluoricAcid.getMaterialRGB())
+                .components(Hydrogen, 6, Oxygen, 2, Silicon, 1, Fluorine, 6)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("(H2SiF6)(H2O)2", true);
+
+        //  11268 Dioxygen Difluoride
+        DioxygenDifluoride = new Material.Builder(getMaterialsId(), gregtechId("dioxygen_difluoride"))
+                .gas()
+                .color(Oxygen.getMaterialRGB() + Fluorine.getMaterialRGB())
+                .components(Fluorine, 2, Oxygen, 2)
+                .flags(DECOMPOSITION_BY_CENTRIFUGING)
+                .build();
+
+        //  11269 Diluted Hydrofluoric Acid
+        DilutedHydrofluoricAcid = new Material.Builder(getMaterialsId(), gregtechId("diluted_hydrofluoric_acid"))
+                .liquid(new FluidBuilder().attribute(FluidAttributes.ACID))
+                .color((HydrofluoricAcid.getMaterialRGB() + Water.getMaterialRGB()) / 3)
+                .components(HydrofluoricAcid, 1, Water, 1)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //  11270 Tritium Hydride
+        TritiumHydride = new Material.Builder(getMaterialsId(), gregtechId("tritium_hydride"))
+                .gas()
+                .color(Tritium.getMaterialRGB() + Hydrogen.getMaterialRGB())
+                .components(Tritium, 1, Hydrogen, 1)
+                .build();
+
+        //  11271 Helium-3 Hydride
+        Helium3Hydride = new Material.Builder(getMaterialsId(), gregtechId("helium_3_hydride"))
+                .gas()
+                .color(Helium3.getMaterialRGB() + Hydrogen.getMaterialRGB())
+                .components(Helium3, 1, Hydrogen, 1)
+                .build();
+
+        //  11272 Xenic Acid
+        XenicAcid = new Material.Builder(getMaterialsId(), gregtechId("xenic_acid"))
+                .liquid(new FluidBuilder().attribute(FluidAttributes.ACID))
+                .color(Xenon.getMaterialRGB() + Hydrogen.getMaterialRGB() + Oxygen.getMaterialRGB())
+                .components(Hydrogen, 2, Xenon, 1, Oxygen, 4)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //  24133 Stone Residue
+        StoneResidue = new Material.Builder(getMaterialsId(), gregtechId("stone_residue"))
+                .dust()
+                .color(Stone.getMaterialRGB() + RedMud.getMaterialRGB())
+                .iconSet(ROUGH)
+                .build();
+
+        //  24134 Selected Stone Residue
+        SelectedStoneResidue = new Material.Builder(getMaterialsId(), gregtechId("selected_stone_residue"))
+                .dust()
+                .color(Stone.getMaterialRGB() + Naquadah.getMaterialRGB())
+                .iconSet(FINE)
+                .build();
+
+        //  24135 Partially Oxidized Stone Residue
+        PartiallyOxidizedStoneResidue = new Material.Builder(getMaterialsId(), gregtechId("partially_oxidized_stone_residue"))
+                .dust()
+                .color(Stone.getMaterialRGB() + Oxygen.getMaterialRGB())
+                .iconSet(DULL)
+                .build();
+
+        //  24136 Oxidized Residual Stone Slurry
+        OxidizedResidualStoneSlurry = new Material.Builder(getMaterialsId(), gregtechId("oxidized_residual_stone_slurry"))
+                .liquid()
+                .color(0x23ad7f)
+                .iconSet(DULL)
+                .build();
+
+        //  24137 Inert Stone Residue
+        InertStoneResidue = new Material.Builder(getMaterialsId(), gregtechId("inert_stone_residue"))
+                .dust()
+                .iconSet(ROUGH)
+                .build();
+
+        //  24138 Oxidized Stone Residue
+        OxidizedStoneResidue = new Material.Builder(getMaterialsId(), gregtechId("oxidized_stone_residue"))
+                .dust()
+                .color(0x9F0000)
+                .iconSet(DULL)
+                .build();
+
+        //  24139 Heavy Oxidized Stone Residue
+        HeavyOxidizedStoneResidue = new Material.Builder(getMaterialsId(), gregtechId("heavy_oxidized_stone_residue"))
+                .dust()
+                .color(0x770000)
+                .iconSet(DULL)
+                .build();
+
+        //  24140 Metallic Stone Residue
+        MetallicStoneResidue = new Material.Builder(getMaterialsId(), gregtechId("metallic_stone_residue"))
+                .dust()
+                .color(0x904A59)
+                .iconSet(SHINY)
+                .build();
+
+        //  24141 Heavy Metallic Stone Residue
+        HeavyMetallicStoneResidue = new Material.Builder(getMaterialsId(), gregtechId("heavy_metallic_stone_residue"))
+                .dust()
+                .color(0x6C2635)
+                .iconSet(METALLIC)
+                .build();
+
+        //  24142 Diamagnetic Residue
+        DiamagneticResidue = new Material.Builder(getMaterialsId(), gregtechId("diamagnetic_residue"))
+                .dust()
+                .color((Calcium.getMaterialRGB() + Zinc.getMaterialRGB() + Copper.getMaterialRGB() + Gallium.getMaterialRGB() + Beryllium.getMaterialRGB() + Tin.getMaterialRGB()) / 15)
+                .iconSet(DULL)
+                .build()
+                .setFormula("CaZnCuGaBeSn?", true);
+
+        //  24143 Paramagnetic Residue
+        ParamagneticResidue = new Material.Builder(getMaterialsId(), gregtechId("paramagnetic_residue"))
+                .dust()
+                .color((Sodium.getMaterialRGB() + Potassium.getMaterialRGB() + Magnesium.getMaterialRGB() + Titanium.getMaterialRGB() + Vanadium.getMaterialRGB() + Manganese.getMaterialRGB()) / 15)
+                .iconSet(DULL)
+                .build()
+                .setFormula("NaKMgTiVMn?", true);
+
+        //  24144 Ferromagnetic Residue
+        FerromagneticResidue = new Material.Builder(getMaterialsId(), gregtechId("ferromagnetic_residue"))
+                .dust()
+                .color(Iron.getMaterialRGB() + Nickel.getMaterialRGB() + Cobalt.getMaterialRGB())
+                .iconSet(DULL)
+                .build()
+                .setFormula("FeNiCo?", true);
+
+        //  24145 Heavy Diamagnetic Residue
+        HeavyDiamagneticResidue = new Material.Builder(getMaterialsId(), gregtechId("heavy_diamagnetic_residue"))
+                .dust()
+                .color((Lead.getMaterialRGB() + Mercury.getMaterialRGB() + Cadmium.getMaterialRGB() + Indium.getMaterialRGB() + Gold.getMaterialRGB() + Bismuth.getMaterialRGB()) / 15)
+                .iconSet(DULL)
+                .build()
+                .setFormula("PbCdInAuBi?", true);
+
+        //  24146 Heavy Paramagnetic Residue
+        HeavyParamagneticResidue = new Material.Builder(getMaterialsId(), gregtechId("heavy_paramagnetic_residue"))
+                .dust()
+                .color((Thorium.getMaterialRGB() + Thallium.getMaterialRGB() + Uranium235.getMaterialRGB() + Tungsten.getMaterialRGB() + Hafnium.getMaterialRGB() + Tantalum.getMaterialRGB()) / 15)
+                .iconSet(DULL)
+                .build()
+                .setFormula("ThUWHfTaTl", true);
+
+        //  24147 Heavy Ferromagnetic Residue
+        HeavyFerromagneticResidue = new Material.Builder(getMaterialsId(), gregtechId("heavy_ferromagnetic_residue"))
+                .dust()
+                .color(DysprosiumOxide.getMaterialRGB() * 3 / 11)
+                .iconSet(DULL)
+                .build()
+                .setFormula("Dy2O3?", true);
+
+        //  24148 Superheavy Stone Residue
+        SuperheavyStoneResidue = new Material.Builder(getMaterialsId(), gregtechId("superheavy_stone_residue"))
+                .dust()
+                .color(0x59FF7E)
+                .iconSet(SHINY)
+                .build();
+
+        //  24149 Clean Inert Stone Residue
+        CleanInertStoneResidue = new Material.Builder(getMaterialsId(), gregtechId("clean_inert_stone_residue"))
+                .dust()
+                .color(InertStoneResidue.getMaterialRGB() + FluoroantimonicAcid.getMaterialRGB())
+                .iconSet(SHINY)
+                .build();
+
+        //  24150 Ultra-acidic Stone Residue Solution
+        UltraacidicStoneResidueSolution = new Material.Builder(getMaterialsId(), gregtechId("ultraacidic_stone_residue_solution"))
+                .liquid(new FluidBuilder().attribute(FluidAttributes.ACID))
+                .color(FluoroantimonicAcid.getMaterialRGB() + Helium3Hydride.getMaterialRGB())
+                .iconSet(DULL)
+                .build();
+
+        //  24151 Dusty Helium-3
+        DustyHelium3 = new Material.Builder(getMaterialsId(), gregtechId("dusty_helium_3"))
+                .liquid()
+                .color(Helium3.getMaterialRGB() + Stone.getMaterialRGB())
+                .iconSet(DULL)
+                .build()
+                .setFormula("He-3?", true);
+
+        //  24152 Taranium-enriched Helium-3
+        TaraniumEnrichedHelium3 = new Material.Builder(getMaterialsId(), gregtechId("taranium_enriched_helium_3"))
+                .liquid()
+                .color(Taranium.getMaterialRGB() + Helium3.getMaterialRGB())
+                .iconSet(DULL)
+                .build()
+                .setFormula("TnHe-3?", true);
+
+        //  24153 Taranium-semidepleted Helium-3
+        TaraniumSemidepletedHelium3 = new Material.Builder(getMaterialsId(), gregtechId("taranium_semidepleted_helium_3"))
+                .liquid()
+                .color(Taranium.getMaterialRGB() + Helium3.getMaterialRGB() - 10)
+                .iconSet(DULL)
+                .build()
+                .setFormula("TnHe-3?", true);
+
+        //  24154 Taranium-depleted Helium-3
+        TaraniumDepletedHelium3 = new Material.Builder(getMaterialsId(), gregtechId("taranium_depleted_helium_3"))
+                .liquid()
+                .plasma()
+                .color(Taranium.getMaterialRGB() + Helium3.getMaterialRGB() - 50)
+                .iconSet(DULL)
+                .build()
+                .setFormula("TnHe-3?", true);
+
+        //  24155 Taranium Rich Dusty Helium-3
+        TaraniumRichDustyHelium3 = new Material.Builder(getMaterialsId(), gregtechId("taranium_rich_dusty_helium_3"))
+                .plasma()
+                .color(Taranium.getMaterialRGB() + Helium3.getMaterialRGB())
+                .build()
+                .setFormula("TnHe-3?", true);
+
+        //  24156 Taranium Rich Helium4
+        TaraniumRichHelium4 = new Material.Builder(getMaterialsId(), gregtechId("taranium_rich_helium_4"))
+                .liquid()
+                .plasma()
+                .color(Taranium.getMaterialRGB() + Krypton.getMaterialRGB())
+                .build()
+                .setFormula("TnHe-4?", true);
+
+        //  24157 Taranium Poor Helium
+        TaraniumPoorHelium = new Material.Builder(getMaterialsId(), gregtechId("taranium_poor_helium"))
+                .liquid()
+                .color(Taranium.getMaterialRGB() + Helium.getMaterialRGB() - 80)
+                .build()
+                .setFormula("He?", true);
+
+        //  24158 Taranium Poor Helium Mixture
+        TaraniumPoorHeliumMixture = new Material.Builder(getMaterialsId(), gregtechId("taranium_poor_helium_mixture"))
+                .liquid()
+                .color(Taranium.getMaterialRGB() + Helium3.getMaterialRGB() + Helium.getMaterialRGB())
+                .build();
+
+        //  24159 Heavy Fluorinated Trinium Solution
+        HeavyFluorinatedTriniumSolution = new Material.Builder(getMaterialsId(), gregtechId("heavy_fluorinated_trinium_solution"))
+                .liquid()
+                .color(0x8C117D)
+                .build();
+
+        //  11284 Fluorocarborane
+        Fluorocarborane = new Material.Builder(getMaterialsId(), gregtechId("fluorocarborane"))
+                .dust()
+                .color(0x59B35C)
+                .iconSet(BRIGHT)
+                .components(Carbon, 1, Hydrogen, 2, Boron, 11, Fluorine, 11)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("HCHB11F11", true);
+
+        //  13201 Perfluorobenzene
+        Perfluorobenzene = new Material.Builder(getMaterialsId(), gregtechId("perfluorobenzene"))
+                .liquid()
+                .color(0x39733B)
+                .components(Carbon, 6, Fluorine, 6)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //  11273 Krypton Difluoride
+        KryptonDifluoride = new Material.Builder(getMaterialsId(), gregtechId("krypton_difluoride"))
+                .gas()
+                .color(Krypton.getMaterialRGB() + Fluorine.getMaterialRGB())
+                .components(Krypton, 1, Fluorine, 2)
+                .build();
+
+        //  11274 Trinium Tetrafluoride
+        TriniumTetrafluoride = new Material.Builder(getMaterialsId(), gregtechId("trinium_tetrafluoride"))
+                .dust()
+                .color(0xBA16A6)
+                .iconSet(DULL)
+                .components(Trinium, 1, Fluorine, 4)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //  11275 Potassium Fluoride
+        PotassiumFluoride = new Material.Builder(getMaterialsId(), gregtechId("potassium_fluoride"))
+                .dust()
+                .color(Potassium.getMaterialRGB() + Fluorine.getMaterialRGB())
+                .iconSet(ROUGH)
+                .components(Potassium, 1, Fluorine, 1)
+                .build();
+
+        //  11276 Caesium Carborane
+        CaesiumCarborane = new Material.Builder(getMaterialsId(), gregtechId("caesium_carborane"))
+                .dust()
+                .color(Caesium.getMaterialRGB() + Carbon.getMaterialRGB())
+                .iconSet(DULL)
+                .components(Caesium, 1, Carbon, 1, Boron, 11, Hydrogen, 12)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //  11277 Silver Nitrate
+        SilverNitrate = new Material.Builder(getMaterialsId(), gregtechId("silver_nitrate"))
+                .dust()
+                .color(Silver.getMaterialRGB() + NitricAcid.getMaterialRGB())
+                .iconSet(SHINY)
+                .components(Silver, 1, Nitrogen, 1, Oxygen, 3)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //  11278 Caesium Nitrate
+        CaesiumNitrate = new Material.Builder(getMaterialsId(), gregtechId("caesium_nitrate"))
+                .dust()
+                .color(Caesium.getMaterialRGB() + NitricAcid.getMaterialRGB())
+                .iconSet(ROUGH)
+                .components(Caesium, 1, Nitrogen, 1, Oxygen, 3)
+                .flags(DECOMPOSITION_BY_ELECTROLYZING)
+                .build();
+
+        //  11279 Silver Iodide
+        SilverIodide = new Material.Builder(getMaterialsId(), gregtechId("silver_iodide"))
+                .dust()
+                .iconSet(SHINY)
+                .color(Silver.getMaterialRGB() + Iodine.getMaterialRGB())
+                .components(Silver, 1, Iodine, 1)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //  11280 Caesium Carborane Precursor
+        CaesiumCarboranePrecursor = new Material.Builder(getMaterialsId(), gregtechId("caesium_carborane_precursor"))
+                .dust()
+                .color(CaesiumCarborane.getMaterialRGB())
+                .iconSet(SAND)
+                .components(Caesium, 1, Boron, 10, Hydrogen, 21, Carbon, 4, Nitrogen, 1, Chlorine, 1)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("CsB10H12CN(CH3)3Cl", true);
+
+        //  11281 Caesium Hydroxide
+        CaesiumHydroxide = new Material.Builder(getMaterialsId(), gregtechId("caesium_hydroxide"))
+                .dust()
+                .color(Caesium.getMaterialRGB() + Hydrogen.getMaterialRGB() + Oxygen.getMaterialRGB())
+                .components(Caesium, 1, Oxygen, 1, Hydrogen, 1)
+                .flags(DECOMPOSITION_BY_ELECTROLYZING)
+                .build();
+
+        //  11282 Sodium Borohydride
+        SodiumBorohydride = new Material.Builder(getMaterialsId(), gregtechId("sodium_borohydride"))
+                .dust()
+                .color(Sodium.getMaterialRGB() + Boron.getMaterialRGB())
+                .iconSet(ROUGH)
+                .components(Sodium, 1, Boron, 1, Hydrogen, 4)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //  11283 Sodium Tetrafluoroborate
+        SodiumTetrafluoroborate = new Material.Builder(getMaterialsId(), gregtechId("sodium_tetrafluoroborate"))
+                .dust()
+                .color(Sodium.getMaterialRGB() + BoronTrifluoride.getMaterialRGB())
+                .iconSet(SAND)
+                .components(Sodium, 1, Boron, 1, Fluorine, 4)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //  13182 Trimethylchlorosilane
+        Trimethylchlorosilane = new Material.Builder(getMaterialsId(), gregtechId("trimethylchlorosilane"))
+                .liquid()
+                .color(0x702169)
+                .components(Carbon, 3, Hydrogen, 9, Silicon, 1, Chlorine, 1)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("(CH3)3SiCl", true);
+
+        //  13202 Borane Dimethylsulfide
+        BoraneDimethylsulfide = new Material.Builder(getMaterialsId(), gregtechId("borane_dimethylsulfide"))
+                .liquid()
+                .color(Lead.getMaterialRGB() + Boron.getMaterialRGB())
+                .components(Carbon, 2, Hydrogen, 9, Boron, 1, Sulfur, 1)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //  13203 Decaborane
+        Decaborane = new Material.Builder(getMaterialsId(), gregtechId("decaborane"))
+                .dust()
+                .color(0x4C994F)
+                .iconSet(ROUGH)
+                .components(Boron, 10, Hydrogen, 14)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //  13204 Boron Trifluoride Etherate
+        BoronTrifluorideEtherate = new Material.Builder(getMaterialsId(), gregtechId("boron_trifluoride_etherate"))
+                .liquid()
+                .color(0xBF6E6E)
+                .components(Boron, 1, Fluorine, 3, Carbon, 4, Hydrogen, 7, Oxygen, 1)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("(BF3)(C2H5)2O", true);
+
+        //  13205 Diethyl Ether
+        DiethylEther = new Material.Builder(getMaterialsId(), gregtechId("diethyl_ether"))
+                .liquid()
+                .color(0xFFA4A3)
+                .components(Carbon, 4, Hydrogen, 10, Oxygen, 1)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("(C2H5)2O", true);
+
+        //  13145 Dimethyl Sulfide
+        DimethylSulfide = new Material.Builder(getMaterialsId(), gregtechId("dimethyl_sulfide"))
+                .liquid()
+                .color(0xFFC66B)
+                .components(Carbon, 2, Hydrogen, 6, Sulfur, 1)
+                .build()
+                .setFormula("(CH3)2S", true);
+
+        //  11218 Sodium Ethoxide
+        SodiumEthoxide = new Material.Builder(getMaterialsId(), gregtechId("sodium_ethoxide"))
+                .dust()
+                .color(Sodium.getMaterialRGB() + Ethanol.getMaterialRGB())
+                .iconSet(DULL)
+                .components(Carbon, 2, Hydrogen, 5, Oxygen, 1, Sodium, 1)
+                .build();
+
+        //  13142 Palladium-Fullerene Matrix
+        PalladiumFullereneMatrix = new Material.Builder(getMaterialsId(), gregtechId("palladium_fullerene_matrix"))
+                .dust()
+                .color(0x40AEE0)
+                .iconSet(SHINY)
+                .components(Palladium, 1, Carbon, 73, Hydrogen, 15, Nitrogen, 1, Iron, 1)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //  13143 PCBS
+        PCBS = new Material.Builder(getMaterialsId(), gregtechId("pcbs"))
+                .liquid()
+                .color(0x11B557)
+                .components(Carbon, 80, Hydrogen, 21, Oxygen, 2)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //  13144 Phenylpentanoic Acid
+        PhenylpentanoicAcid = new Material.Builder(getMaterialsId(), gregtechId("phenylpentanoic_acid"))
+                .liquid()
+                .color(0x6F4303)
+                .components(Carbon, 11, Hydrogen, 14, Oxygen, 2)
+                .build();
+
+        //  13146 Ferrocenylfulleropyrddolidine
+        Ferrocenylfulleropyrddolidine = new Material.Builder(getMaterialsId(), gregtechId("ferrocenylfulleropyrddolidine"))
+                .liquid()
+                .color(0x67AE4C)
+                .components(Carbon, 74, Hydrogen, 19, Iron, 1, Nitrogen, 1)
+                .build();
+
+        //  13147 Sarcosine
+        Sarcosine = new Material.Builder(getMaterialsId(), gregtechId("sarcosine"))
+                .dust()
+                .color(0x328534)
+                .iconSet(SHINY)
+                .components(Carbon, 3, Hydrogen, 7, Nitrogen, 1, Oxygen, 2)
+                .build();
+
+        //  13148 Glycine
+        Glycine = new Material.Builder(getMaterialsId(), gregtechId("glycine"))
+                .liquid()
+                .color(0x95BA83)
+                .components(Carbon, 2, Hydrogen, 5, Nitrogen, 1, Oxygen, 2)
+                .build()
+                .setFormula("NH2CH2COOH", true);
+
+        //  13149 Ferrocene
+        Ferrocene = new Material.Builder(getMaterialsId(), gregtechId("ferrocene"))
+                .liquid()
+                .color(0x4D3B61)
+                .components(Carbon, 10, Hydrogen, 10, Iron, 1)
+                .build();
+
+        //  11217 Lithium Iodide
+        LithiumIodide = new Material.Builder(getMaterialsId(), gregtechId("lithium_iodide"))
+                .dust()
+                .color(Lithium.getMaterialRGB() + Iodine.getMaterialRGB())
+                .iconSet(DULL)
+                .components(Lithium, 1, Iodine, 1)
+                .build();
 
     }
 }

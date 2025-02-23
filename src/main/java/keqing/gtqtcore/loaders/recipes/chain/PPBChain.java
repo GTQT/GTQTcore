@@ -13,8 +13,6 @@ import static keqing.gtqtcore.common.items.GTQTMetaItems.CATALYST_FRAMEWORK_IV;
 public class PPBChain {
     //乙酸铋ok、十六烷基三甲基溴化铵ok、坏血酸酸ok，得到混合溶液
     //加入乙酰丙酮铂和乙酰丙酮钯
-
-
     public static void init() {
         //混合溶液
         LARGE_CHEMICAL_RECIPES.recipeBuilder()
@@ -63,7 +61,7 @@ public class PPBChain {
                 .fluidInputs(PPBFront.getFluid(3000))
                 .fluidInputs(PalladiumBis.getFluid(1000))
                 .fluidInputs(PlatinumBis.getFluid(1000))
-                .output(dust,PPB,5)
+                .output(dust,PPB,20)
                 .fluidOutputs(AceticAnhydride.getFluid(1000))
                 .fluidOutputs(AceticAcid.getFluid(1000))
                 .duration(400).EUt(VA[IV]).buildAndRegister();

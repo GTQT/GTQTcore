@@ -166,6 +166,28 @@ public class BiologyRecipe {
                 .fluidOutputs(Materials.SulfuricAcid.getFluid(5000))
                 .buildAndRegister();
 
+        GTQTcoreRecipeMaps.CHEMICAL_PLANT.recipeBuilder()
+                .recipeLevel(1)
+                .input(GTQTMetaItems.RED_ALGAE, 10)
+                .input(GTQTMetaItems.BROWN_ALGAE, 6)
+                .fluidInputs(Materials.DistilledWater.getFluid(5000))
+                .notConsumable(getBiologyCircuitData(7))
+                .EUt(60)
+                .duration(1000)
+                .fluidOutputs(Materials.SulfuricAcid.getFluid(5000))
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.CHEMICAL_PLANT.recipeBuilder()
+                .recipeLevel(3)
+                .input(GTQTMetaItems.CELLULOSE_FIBER_RED, 2)
+                .input(GTQTMetaItems.BROWN_ALGAE, 10)
+                .fluidInputs(Materials.DistilledWater.getFluid(5000))
+                .notConsumable(getBiologyCircuitData(7))
+                .EUt(180)
+                .duration(120)
+                .fluidOutputs(Materials.NitricAcid.getFluid(5000))
+                .buildAndRegister();
+
         EXTRACTOR_RECIPES.recipeBuilder()
                 .input(GTQTMetaItems.BROWN_ALGAE, 10)
                 .output(GTQTMetaItems.ALGAE_ACID, 2)

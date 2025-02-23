@@ -7,8 +7,7 @@ import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.common.items.MetaItems.ELECTRIC_MOTOR_IV;
-import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.BIO_CENTRIFUGE;
-import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.DRYER_RECIPES;
+import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.TJMaterials.*;
@@ -355,8 +354,12 @@ public class BrineChain {
                 .output(dust, Fructose, 24)
                 .buildAndRegister();
 
+        //纤维素酶
         // C6H10O5 + bacteria -> C6H12O6
-        BIO_CENTRIFUGE.recipeBuilder().duration(150).EUt(120)
+        CHEMICAL_PLANT.recipeBuilder()
+                .Catalyst(CATALYST_FRAMEWORK_IV.getStackForm())
+                .recipeLevel(3)
+                .duration(150).EUt(480)
                 .input(dust, Cellulose, 21)
                 .fluidInputs(Bacteria.getFluid(1000))
                 .output(dust, Glucose, 24)

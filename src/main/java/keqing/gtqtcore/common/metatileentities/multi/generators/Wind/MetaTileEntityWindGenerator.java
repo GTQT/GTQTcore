@@ -32,6 +32,7 @@ import keqing.gtqtcore.common.items.behaviors.WindRotorBehavior;
 import keqing.gtqtcore.api.metaileentity.MetaTileEntityBaseWithControl;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -65,6 +66,20 @@ public class MetaTileEntityWindGenerator extends MetaTileEntityBaseWithControl  
         super(metaTileEntityId);
         this.containerInventory = new GTItemStackHandler(this, 1);
     }
+    @Override
+    public void onRemoval() {
+        super.onRemoval();
+        for (int i = 0; i < containerInventory.getSlots(); i++) {
+            var pos = getPos();
+            if(!containerInventory.getStackInSlot(i).isEmpty())
+            {
+                getWorld().spawnEntity(new EntityItem(getWorld(),pos.getX()+0.5,pos.getY()+0.5,pos.getZ()+0.5,containerInventory.getStackInSlot(i)));
+                containerInventory.extractItem(i,1,false);
+            }
+
+        }
+    }
+
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setTag("ContainerInventory", this.containerInventory.serializeNBT());
         return super.writeToNBT(data);

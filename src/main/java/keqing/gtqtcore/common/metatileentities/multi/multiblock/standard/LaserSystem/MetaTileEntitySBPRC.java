@@ -33,6 +33,7 @@ import keqing.gtqtcore.api.metaileentity.MetaTileEntityBaseWithControl;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -129,6 +130,20 @@ public class MetaTileEntitySBPRC extends MetaTileEntityBaseWithControl implement
         for (int i = 0; i < maxLength; i++) {
             input[i] = data.getIntArray("input" + i);
             output[i] = data.getIntArray("output" + i);
+        }
+    }
+
+    @Override
+    public void onRemoval() {
+        super.onRemoval();
+        for (int i = 0; i < containerInventory.getSlots(); i++) {
+            var pos = getPos();
+            if(!containerInventory.getStackInSlot(i).isEmpty())
+            {
+                getWorld().spawnEntity(new EntityItem(getWorld(),pos.getX()+0.5,pos.getY()+0.5,pos.getZ()+0.5,containerInventory.getStackInSlot(i)));
+                containerInventory.extractItem(i,1,false);
+            }
+
         }
     }
 

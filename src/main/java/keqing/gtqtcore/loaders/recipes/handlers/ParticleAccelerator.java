@@ -15,6 +15,7 @@ import static gregtech.common.metatileentities.MetaTileEntities.*;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.PRECISE_ASSEMBLER_RECIPES;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
+import static keqing.gtqtcore.api.utils.GTQTUtil.CWT;
 import static keqing.gtqtcore.common.block.blocks.BlockParticleAcceleratorCasing.MachineType.*;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.PARTICLE_ACCELERATOR;
@@ -203,7 +204,7 @@ public class ParticleAccelerator {
                 .outputs(GTQTMetaBlocks.blockParticleAcceleratorCasing.getItemVariant(ACCELERATOR_FIRM_MKII,4))
                 .stationResearch(b -> b
                         .researchStack(GTQTMetaBlocks.blockParticleAcceleratorCasing.getItemVariant(ACCELERATOR_FIRM_MKI))
-                        .CWUt(4000,1000000)
+                        .CWUt(CWT[LuV])
                         .EUt(VA[LuV]))
                 .fluidInputs(Polybenzimidazole.getFluid(L))
                 .fluidInputs(Zylon.getFluid(L * 2))
@@ -223,7 +224,7 @@ public class ParticleAccelerator {
                 .outputs(GTQTMetaBlocks.blockParticleAcceleratorCasing.getItemVariant(ACCELERATOR_ELECTROMAGNET_MKII,4))
                 .stationResearch(b -> b
                         .researchStack(GTQTMetaBlocks.blockParticleAcceleratorCasing.getItemVariant(ACCELERATOR_ELECTROMAGNET_MKI))
-                        .CWUt(4000,1000000)
+                        .CWUt(CWT[LuV])
                         .EUt(VA[LuV]))
                 .fluidInputs(Polybenzimidazole.getFluid(L))
                 .fluidInputs(Zylon.getFluid(L * 2))
@@ -243,7 +244,7 @@ public class ParticleAccelerator {
                 .outputs(GTQTMetaBlocks.blockParticleAcceleratorCasing.getItemVariant(ACCELERATOR_ELECTROMAGNETV_MKII,4))
                 .stationResearch(b -> b
                         .researchStack(GTQTMetaBlocks.blockParticleAcceleratorCasing.getItemVariant(ACCELERATOR_ELECTROMAGNETV_MKI))
-                        .CWUt(4000,1000000)
+                        .CWUt(CWT[LuV])
                         .EUt(VA[LuV]))
                 .fluidInputs(Polybenzimidazole.getFluid(L))
                 .fluidInputs(Zylon.getFluid(L * 2))
@@ -264,7 +265,7 @@ public class ParticleAccelerator {
                 .outputs(GTQTMetaBlocks.blockParticleAcceleratorCasing.getItemVariant(ACCELERATOR_FIRM_MKIII,4))
                 .stationResearch(b -> b
                         .researchStack(GTQTMetaBlocks.blockParticleAcceleratorCasing.getItemVariant(ACCELERATOR_FIRM_MKII))
-                        .CWUt(4000,1000000)
+                        .CWUt(CWT[ZPM])
                         .EUt(VA[ZPM]))
                 .fluidInputs(Polybenzimidazole.getFluid(L))
                 .fluidInputs(Zylon.getFluid(L * 2))
@@ -283,7 +284,7 @@ public class ParticleAccelerator {
                 .outputs(GTQTMetaBlocks.blockParticleAcceleratorCasing.getItemVariant(ACCELERATOR_ELECTROMAGNET_MKIII,4))
                 .stationResearch(b -> b
                         .researchStack(GTQTMetaBlocks.blockParticleAcceleratorCasing.getItemVariant(ACCELERATOR_ELECTROMAGNET_MKII))
-                        .CWUt(4000,1000000)
+                        .CWUt(CWT[ZPM])
                         .EUt(VA[ZPM]))
                 .fluidInputs(Polybenzimidazole.getFluid(L))
                 .fluidInputs(Zylon.getFluid(L * 2))
@@ -302,7 +303,7 @@ public class ParticleAccelerator {
                 .outputs(GTQTMetaBlocks.blockParticleAcceleratorCasing.getItemVariant(ACCELERATOR_ELECTROMAGNETV_MKIII,4))
                 .stationResearch(b -> b
                         .researchStack(GTQTMetaBlocks.blockParticleAcceleratorCasing.getItemVariant(ACCELERATOR_ELECTROMAGNETV_MKII))
-                        .CWUt(4000,1000000)
+                        .CWUt(CWT[ZPM])
                         .EUt(VA[ZPM]))
                 .fluidInputs(Polybenzimidazole.getFluid(L))
                 .fluidInputs(Zylon.getFluid(L * 2))

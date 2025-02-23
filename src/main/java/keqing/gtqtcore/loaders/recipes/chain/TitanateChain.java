@@ -10,9 +10,12 @@ import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
+import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.CHEMICAL_PLANT;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.TJMaterials.BariumOxide;
 import static keqing.gtqtcore.api.unification.TJMaterials.SodiumAcetate;
+import static keqing.gtqtcore.common.items.GTQTMetaItems.CATALYST_FRAMEWORK_I;
+import static keqing.gtqtcore.common.items.GTQTMetaItems.CATALYST_FRAMEWORK_II;
 
 public class TitanateChain {
     public static void init() {
@@ -51,8 +54,9 @@ public class TitanateChain {
                 .buildAndRegister();
 
         //硫酸钡浊液
-        CHEMICAL_RECIPES.recipeBuilder().duration(400).EUt(VA[IV])
-                .notConsumable(GTQTMetaItems.CATALYST_FRAMEWORK_I)
+        CHEMICAL_PLANT.recipeBuilder()
+                .Catalyst(CATALYST_FRAMEWORK_I.getStackForm())
+                .duration(400).EUt(VA[IV])
                 .fluidInputs(SulfuricAcid.getFluid(1000))
                 .input(dust, BariumOxide)
                 .fluidOutputs(BariumSulfateSuspension.getFluid(1000))

@@ -86,7 +86,7 @@ public class ChipHelper {
                 .fluidInputs(HydrogenPeroxide.getFluid(2000))
                 .output(ingotHot, LithiumNiobate, 6)
                 .fluidOutputs(HydrochloricAcid.getFluid(5000))
-                .EUt(VA[HV])
+                .EUt(VA[IV])
                 .duration(16 * SECOND)
                 .blastFurnaceTemp(4500)
                 .buildAndRegister();
@@ -96,7 +96,7 @@ public class ChipHelper {
                 .input(plate, LithiumNiobate)
                 .output(lens, LithiumNiobate)
                 .output(dustSmall, LithiumNiobate)
-                .EUt(VA[MV])
+                .EUt(VA[IV])
                 .duration(MINUTE)
                 .buildAndRegister();
 

@@ -5,6 +5,7 @@ import gregtech.api.GregTechAPI;
 import gregtech.api.items.metaitem.ElectricStats;
 import gregtech.api.items.metaitem.FilteredFluidStats;
 import gregtech.api.items.metaitem.StandardMetaItem;
+import gregtech.api.items.metaitem.stats.IItemComponent;
 import gregtech.api.items.metaitem.stats.ItemFluidContainer;
 import gregtech.api.unification.material.MarkerMaterials;
 import gregtech.api.unification.material.properties.PropertyKey;
@@ -1005,12 +1006,15 @@ public class GTQTMetaItem1 extends StandardMetaItem {
 
         PROXIMA_B_SPIROGYRA = this.addItem(1058, "algae.proxima_b.spirogyra").addOreDict("dyeGray").setCreativeTabs(CommonProxy.GTQTCore_BIO);
 
+        //光子晶格
+        PHOTONIC_LATTICE_MEMORY = this.addItem(1080, "photonic_lattice_memory").setCreativeTabs(CommonProxy.GTQTCore_GD).addComponents(new DataItemBehavior(true));
         //本地模型
         MODEL_LOCATION_MKI = this.addItem(1090, "model_location_mki").setCreativeTabs(CommonProxy.GTQTCore_DISK);
         MODEL_LOCATION_MKII = this.addItem(1091, "model_location_mkii").setCreativeTabs(CommonProxy.GTQTCore_DISK);
         MODEL_LOCATION_MKIII = this.addItem(1092, "model_location_mkiii").setCreativeTabs(CommonProxy.GTQTCore_DISK);
         MODEL_LOCATION_MKIV = this.addItem(1093, "model_location_mkiv").setCreativeTabs(CommonProxy.GTQTCore_DISK);
         MODEL_LOCATION_MKV = this.addItem(1094, "model_location_mkv").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        MODEL_LOCATION_MKVI = this.addItem(1095, "model_location_mkvi").setCreativeTabs(CommonProxy.GTQTCore_DISK);
         //换热片1100
         HEAT_SHIELD_MKI = this.addItem(1100, "heat_shield_mki").setCreativeTabs(CommonProxy.GTQTCore_NC);
         HEAT_SHIELD_MKII = this.addItem(1101, "heat_shield_mkii").setCreativeTabs(CommonProxy.GTQTCore_NC);
@@ -1102,6 +1106,16 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         DISK_28 = this.addItem(2028, "disk.28").setCreativeTabs(CommonProxy.GTQTCore_DISK);
         DISK_29 = this.addItem(2029, "disk.29").setCreativeTabs(CommonProxy.GTQTCore_DISK);
         DISK_30 = this.addItem(2030, "disk.30").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        DISK_31 = this.addItem(2031, "disk.31").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        DISK_32 = this.addItem(2032, "disk.32").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        DISK_33 = this.addItem(2033, "disk.33").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        DISK_34 = this.addItem(2034, "disk.34").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        DISK_35 = this.addItem(2035, "disk.35").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        DISK_36 = this.addItem(2036, "disk.36").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        DISK_37 = this.addItem(2037, "disk.37").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        DISK_38 = this.addItem(2038, "disk.38").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        DISK_39 = this.addItem(2039, "disk.39").setCreativeTabs(CommonProxy.GTQTCore_DISK);
+        DISK_40 = this.addItem(2040, "disk.40").setCreativeTabs(CommonProxy.GTQTCore_DISK);
 
 
         ALPHA = this.addItem(2500, "alpha").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);

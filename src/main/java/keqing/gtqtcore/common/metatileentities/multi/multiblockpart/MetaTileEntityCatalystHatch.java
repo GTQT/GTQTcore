@@ -19,6 +19,7 @@ import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.items.behaviors.CatalystBehavior;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -291,6 +292,20 @@ public class MetaTileEntityCatalystHatch extends MetaTileEntityMultiblockPart im
                 }
             }
             return catalysts;
+        }
+    }
+
+    @Override
+    public void onRemoval() {
+        super.onRemoval();
+        for (int i = 0; i < catalystHolder.getSlots(); i++) {
+            var pos = getPos();
+            if(!catalystHolder.getStackInSlot(i).isEmpty())
+            {
+                getWorld().spawnEntity(new EntityItem(getWorld(),pos.getX()+0.5,pos.getY()+0.5,pos.getZ()+0.5,catalystHolder.getStackInSlot(i)));
+                catalystHolder.extractItem(i,1,false);
+            }
+
         }
     }
 

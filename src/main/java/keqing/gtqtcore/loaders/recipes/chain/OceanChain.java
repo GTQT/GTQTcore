@@ -1,26 +1,8 @@
 package keqing.gtqtcore.loaders.recipes.chain;
 
-import gregtech.api.GTValues;
-import gregtech.api.fluids.store.FluidStorageKeys;
-import gregtech.api.items.metaitem.MetaItem;
-import gregtech.api.recipes.Recipe;
-import gregtech.api.recipes.RecipeMaps;
-import gregtech.api.recipes.ingredients.GTRecipeInput;
-import gregtech.api.unification.material.Materials;
-import gregtech.api.unification.ore.OrePrefix;
-import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.FluidStack;
-
-import java.util.Collection;
-import java.util.List;
-
-import static gregtech.api.GTValues.EV;
-import static gregtech.api.GTValues.VA;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.dust;
-import static gregtechfoodoption.GTFOMaterialHandler.Stearin;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
@@ -106,41 +88,41 @@ public class OceanChain {
                 .buildAndRegister();
 
         
-        BLAST_RECIPES.recipeBuilder()
+        BURNER_REACTOR_RECIPES.recipeBuilder()
                 .input(COMMON_ALGAE)
-                .output(dust,Haidaihui,1)
+                .output(dust, KelpAsh,1)
                 .duration(100)
                 .EUt(30)
                 .blastFurnaceTemp(1000)
                 .buildAndRegister();
 
-        BLAST_RECIPES.recipeBuilder()
+        BURNER_REACTOR_RECIPES.recipeBuilder()
                 .input(GREEN_ALGAE)
-                .output(dust,Haidaihui,1)
+                .output(dust, KelpAsh,1)
                 .duration(100)
                 .EUt(30)
                 .blastFurnaceTemp(1000)
                 .buildAndRegister();
 
-        BLAST_RECIPES.recipeBuilder()
+        BURNER_REACTOR_RECIPES.recipeBuilder()
                 .input(RED_ALGAE)
-                .output(dust,Haidaihui,1)
+                .output(dust, KelpAsh,1)
                 .duration(100)
                 .EUt(30)
                 .blastFurnaceTemp(1000)
                 .buildAndRegister();
 
-        BLAST_RECIPES.recipeBuilder()
+        BURNER_REACTOR_RECIPES.recipeBuilder()
                 .input(BROWN_ALGAE)
-                .output(dust,Haidaihui,1)
+                .output(dust, KelpAsh,1)
                 .duration(100)
                 .EUt(30)
                 .blastFurnaceTemp(1000)
                 .buildAndRegister();
 
-        BLAST_RECIPES.recipeBuilder()
+        BURNER_REACTOR_RECIPES.recipeBuilder()
                 .input(GOLD_ALGAE)
-                .output(dust,Haidaihui,1)
+                .output(dust, KelpAsh,1)
                 .duration(100)
                 .EUt(30)
                 .blastFurnaceTemp(1000)
@@ -149,16 +131,16 @@ public class OceanChain {
         CHEMICAL_RECIPES.recipeBuilder()
                 .duration(100)
                 .EUt(30)
-                .input(dust,Haidaihui)
+                .input(dust, KelpAsh)
                 .fluidInputs(CarbonTetrachloride.getFluid(1000))
-                .fluidOutputs(Cuiquhaidaihui.getFluid(2000))
+                .fluidOutputs(ExtractKelpAsh.getFluid(2000))
                 .buildAndRegister();
 
         //
         DISTILLATION_RECIPES.recipeBuilder()
                 .duration(100)
                 .EUt(30)
-                .fluidInputs(Cuiquhaidaihui.getFluid(2000))
+                .fluidInputs(ExtractKelpAsh.getFluid(2000))
                 .fluidOutputs(CarbonTetrachloride.getFluid(1000))
                 .fluidOutputs(PotassiumIodide.getFluid(1000))
                 .buildAndRegister();

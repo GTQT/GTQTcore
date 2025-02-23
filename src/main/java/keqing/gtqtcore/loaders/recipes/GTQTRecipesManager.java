@@ -77,6 +77,7 @@ public class GTQTRecipesManager {
         OceanChain.init();
         MagnetoResonaticCircuits.init();
         VinylcinnamateChain.init();
+        YeastLine.init();
         GermaniumChain.init();
         NaquadahChain.init();
         MachineCasing.init();
@@ -171,6 +172,7 @@ public class GTQTRecipesManager {
         MolybdenumProcessing.init();
         ThalliumProcessing.init();
         TaraniumProcessing.init();
+        FullerenePolymerMatrixChain.init();
         RubidiumProcessing.init();
     }
     private static void initCircuits() {

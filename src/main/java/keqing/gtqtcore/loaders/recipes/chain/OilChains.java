@@ -3,23 +3,23 @@ package keqing.gtqtcore.loaders.recipes.chain;
 import gregtech.api.recipes.GTRecipeHandler;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.recipes.ingredients.IntCircuitIngredient;
-import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Material;
 import gregtech.common.blocks.BlockAsphalt;
 import gregtech.common.blocks.MetaBlocks;
-import gregtech.common.items.MetaItems;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
-import static gregtech.api.GTValues.*;
+import static gregtech.api.GTValues.LV;
+import static gregtech.api.GTValues.V;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
-import static gregtechfoodoption.GTFOMaterialHandler.*;
+import static gregtechfoodoption.GTFOMaterialHandler.SodiumSulfate;
+import static gregtechfoodoption.GTFOMaterialHandler.Stearin;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
-import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 
 public class OilChains {
     public static void init() {
@@ -47,7 +47,7 @@ public class OilChains {
                 .fluidInputs(SodiumFormate.getFluid(2000))
                 .fluidInputs(Oxygen.getFluid(2000))
                 .fluidOutputs(FormicAcid.getFluid(2000))
-                .output(dust,SodiumSulfate,7)
+                .output(dust, SodiumSulfate, 7)
                 .circuitMeta(1)
                 .duration(120).EUt(30).buildAndRegister();
 
@@ -144,11 +144,11 @@ public class OilChains {
 
     private static void NewOil() {
 
-        GTRecipeHandler.removeRecipesByInputs(MIXER_RECIPES,  new FluidStack[]{Tetranitromethane.getFluid(20),Diesel.getFluid(1000)});
-        GTRecipeHandler.removeRecipesByInputs(MIXER_RECIPES,  new FluidStack[]{Tetranitromethane.getFluid(40),BioDiesel.getFluid(1000)});
+        GTRecipeHandler.removeRecipesByInputs(MIXER_RECIPES, Tetranitromethane.getFluid(20), Diesel.getFluid(1000));
+        GTRecipeHandler.removeRecipesByInputs(MIXER_RECIPES, Tetranitromethane.getFluid(40), BioDiesel.getFluid(1000));
 
-        GTRecipeHandler.removeRecipesByInputs(LARGE_CHEMICAL_RECIPES, new ItemStack[]{IntCircuitIngredient.getIntegratedCircuit(24)}, new FluidStack[]{Tetranitromethane.getFluid(200),Diesel.getFluid(10000)});
-        GTRecipeHandler.removeRecipesByInputs(LARGE_CHEMICAL_RECIPES, new ItemStack[]{IntCircuitIngredient.getIntegratedCircuit(24)},new FluidStack[]{Tetranitromethane.getFluid(400),BioDiesel.getFluid(10000)});
+        GTRecipeHandler.removeRecipesByInputs(LARGE_CHEMICAL_RECIPES, new ItemStack[]{IntCircuitIngredient.getIntegratedCircuit(24)}, new FluidStack[]{Tetranitromethane.getFluid(200), Diesel.getFluid(10000)});
+        GTRecipeHandler.removeRecipesByInputs(LARGE_CHEMICAL_RECIPES, new ItemStack[]{IntCircuitIngredient.getIntegratedCircuit(24)}, new FluidStack[]{Tetranitromethane.getFluid(400), BioDiesel.getFluid(10000)});
 
         CHEMICAL_PLANT.recipeBuilder()
                 .fluidInputs(Diesel.getFluid(7500))
@@ -281,14 +281,13 @@ public class OilChains {
 
     }
 
-    private static void Pre()
-    {
+    private static void Pre() {
         //破乳剂
         CHEMICAL_RECIPES.recipeBuilder()
                 .duration(100)
                 .EUt(30)
                 .circuitMeta(1)
-                .input(dust,Sodium,10)
+                .input(dust, Sodium, 10)
                 .fluidInputs(Stearin.getFluid(1000))
                 .fluidInputs(EthyleneOxide.getFluid(1000))
                 .fluidInputs(PropyleneOxide.getFluid(1000))
@@ -299,7 +298,7 @@ public class OilChains {
                 .duration(100)
                 .EUt(120)
                 .circuitMeta(2)
-                .input(dust,Potassium,10)
+                .input(dust, Potassium, 10)
                 .fluidInputs(Stearin.getFluid(1000))
                 .fluidInputs(EthyleneOxide.getFluid(1000))
                 .fluidInputs(PropyleneOxide.getFluid(1000))
@@ -320,22 +319,22 @@ public class OilChains {
                 .duration(100)
                 .EUt(30)
                 .circuitMeta(1)
-                .input(dust,Quicklime,2)
+                .input(dust, Quicklime, 2)
                 .fluidInputs(EthyleneChlorohydrin.getFluid(1000))
                 .fluidOutputs(EthyleneOxide.getFluid(1000))
                 .fluidOutputs(DilutedHydrochloricAcid.getFluid(1000))
-                .output(dust,Calcium)
+                .output(dust, Calcium)
                 .buildAndRegister();
         //环氧丙烷
         CHEMICAL_RECIPES.recipeBuilder()
                 .duration(100)
                 .EUt(30)
                 .circuitMeta(1)
-                .input(dust,Quicklime)
+                .input(dust, Quicklime)
                 .fluidInputs(Propene.getFluid(1000))
                 .fluidInputs(HydrogenPeroxide.getFluid(1000))
                 .fluidOutputs(PropyleneOxide.getFluid(1000))
-                .output(dust,Calcium)
+                .output(dust, Calcium)
                 .buildAndRegister();
         //硫酸氨
         CHEMICAL_RECIPES.recipeBuilder()
@@ -357,17 +356,37 @@ public class OilChains {
                 .fluidInputs(Water.getFluid(2000))
                 .fluidOutputs(Hydrogen.getFluid(1000))
                 .fluidOutputs(HydrogenPeroxide.getFluid(1000))
-                .fluidOutputs(AmmoniumSulfate.getFluid(2000))
+                .fluidOutputs(AmmoniaBisulfate.getFluid(2000))
+                .buildAndRegister();
+
+        CHEMICAL_RECIPES.recipeBuilder()
+                .duration(100)
+                .EUt(60)
+                .circuitMeta(1)
+                .fluidInputs(AmmoniaBisulfate.getFluid(1000))
+                .fluidInputs(Ammonia.getFluid(1000))
+                .fluidOutputs(AmmoniumSulfate.getFluid(1000))
+                .buildAndRegister();
+
+
+        CHEMICAL_RECIPES.recipeBuilder()
+                .duration(100)
+                .EUt(30)
+                .circuitMeta(1)
+                .fluidInputs(Ethanol.getFluid(1000))
+                .fluidInputs(Hydrogen.getFluid(1000))
+                .fluidOutputs(Water.getFluid(1000))
+                .fluidOutputs(HydrogenPeroxide.getFluid(1000))
                 .buildAndRegister();
 
         CHEMICAL_RECIPES.recipeBuilder()
                 .duration(100)
                 .EUt(30)
-                .notConsumable(plate,Steel,1)
+                .notConsumable(plate, Steel, 1)
                 .circuitMeta(1)
                 .fluidInputs(Ethanol.getFluid(1000))
                 .fluidInputs(Air.getFluid(1000))
-                .output(dust,Ash,2)
+                .output(dust, Ash, 2)
                 .fluidOutputs(Hydrogen.getFluid(4000))
                 .fluidOutputs(HydrogenPeroxide.getFluid(500))
                 .buildAndRegister();
@@ -507,8 +526,8 @@ public class OilChains {
                 .duration(3200)
                 .buildAndRegister();
     }
-    private static void Kettle()
-    {
+
+    private static void Kettle() {
         //煤焦线
         PYROLYSIS_TOWER.recipeBuilder()
                 .input(log, Wood, 64)
@@ -535,9 +554,9 @@ public class OilChains {
 
 
         PYROLYSIS_TOWER.recipeBuilder()
-                .input(gem, Coal,10)
+                .input(gem, Coal, 10)
                 .fluidInputs(Steam.getFluid(10000))
-                .output(gem, Coke,10)
+                .output(gem, Coke, 10)
                 .fluidOutputs(Ethylene.getFluid(1000))
                 .fluidOutputs(Methanol.getFluid(1000))
                 .fluidOutputs(Hydrogen.getFluid(1000))
@@ -547,9 +566,9 @@ public class OilChains {
                 .buildAndRegister();
 
         PYROLYSIS_TOWER.recipeBuilder()
-                .input(gem, Coal,10)
+                .input(gem, Coal, 10)
                 .fluidInputs(Nitrogen.getFluid(12000))
-                .output(gem, Coke,10)
+                .output(gem, Coke, 10)
                 .fluidOutputs(CharcoalByproducts.getFluid(3000))
                 .fluidOutputs(Ethylene.getFluid(1000))
                 .fluidOutputs(Methanol.getFluid(1000))
@@ -636,8 +655,8 @@ public class OilChains {
                 .buildAndRegister();
 
     }
-    private static void changjianya()
-    {
+
+    private static void changjianya() {
         //含杂预处理
         DISTILLATION_RECIPES.recipeBuilder()
                 .fluidInputs(PreTreatedCrudeOilContainingImpurities.getFluid(4000))
@@ -723,7 +742,7 @@ public class OilChains {
 
         //沥青
         CHEMICAL_RECIPES.recipeBuilder()
-                .input(dust,Coal)
+                .input(dust, Coal)
                 .fluidInputs(Concrete.getFluid(144))
                 .fluidInputs(Asphalt.getFluid(144))
                 .outputs(MetaBlocks.ASPHALT.getItemVariant(BlockAsphalt.BlockType.ASPHALT))
@@ -739,8 +758,8 @@ public class OilChains {
                 .duration(200)
                 .buildAndRegister();
     }
-    private static void cuihualiehua()
-    {
+
+    private static void cuihualiehua() {
         lightlyCrack(DieselLight, LightlyHydroCrackedDieselLight, LightlySteamCrackedDieselLight);
         severelyCrack(DieselLight, SeverelyHydroCrackedDieselLight, SeverelySteamCrackedDieselLight);
 
@@ -817,7 +836,6 @@ public class OilChains {
                 .duration(120).EUt(120).buildAndRegister();
 
 
-
         //氢气
         DISTILLATION_RECIPES.recipeBuilder()
                 .fluidInputs(LightlyHydroCrackedDieselLight.getFluid(800))
@@ -874,6 +892,7 @@ public class OilChains {
                 .circuitMeta(1)
                 .duration(120).EUt(30).buildAndRegister();
     }
+
     private static void lightlyCrack(Material raw, Material hydroCracked, Material steamCracked) {
         CRACKING_RECIPES.recipeBuilder()
                 .circuitMeta(1)
@@ -891,6 +910,7 @@ public class OilChains {
                 .duration(80).EUt(240).buildAndRegister();
 
     }
+
     private static void severelyCrack(Material raw, Material hydroCracked, Material steamCracked) {
         CRACKING_RECIPES.recipeBuilder()
                 .circuitMeta(2)

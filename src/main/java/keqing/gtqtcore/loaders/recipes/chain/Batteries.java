@@ -76,19 +76,6 @@ public class Batteries {
                 .output(dust,LithiumTriflate,18)
                 .buildAndRegister();
 
-        // Algae + 6Na2CO3(H2O) -> 4C6H10O5 + 2C5H10O5 + 6NaC6H7O6(H2O) + 6CO2 + 6H2O
-        LARGE_CHEMICAL_RECIPES.recipeBuilder().duration(600).EUt(1920)
-                .input(BROWN_ALGAE,10)
-                .notConsumable(dust, Diatomite)
-                .fluidInputs(SodiumCarbonateSolution.getFluid(6000))
-                .output(dust, Cellulose,84)
-                .output(dust, Xylose,20)
-                .fluidOutputs(Biomass.getFluid(540))
-                .fluidOutputs(SodiumAlginateSolution.getFluid(6000))
-                .fluidOutputs(CarbonDioxide.getFluid(6000))
-                .fluidOutputs(Water.getFluid(6000))
-                .buildAndRegister();
-
         // 2NaC6H7O6(H2O) + CaCl2 -> CaC12H14O12 + 2NaCl(H2O)
         MIXER_RECIPES.recipeBuilder().duration(290).EUt(30)
                 .fluidInputs(SodiumAlginateSolution.getFluid(2000))

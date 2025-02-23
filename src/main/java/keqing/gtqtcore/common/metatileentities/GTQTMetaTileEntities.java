@@ -222,6 +222,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityElectrodeHatch[] ELECTRODE_HATCH = new MetaTileEntityElectrodeHatch[5];
     public static MetaTileEntityDrillHeadHatch[] DRILL_HEAD_HATCH = new MetaTileEntityDrillHeadHatch[5];
     public static MetaTileEntityKQCCPartHatch[] KQCC_HATCH = new MetaTileEntityKQCCPartHatch[9];
+    public static MetaTileEntityLocalModelComputationHatch LOCAL_COMPUTER_HATCH;
     public static MetaTileEntityGravitySeparator GRAVITY_SEPARATOR;
     public static MetaTileEntityFrothFlotationTank FROTH_FLOTATION_TANK;
     public static MetaTileEntityOceanPumper OCEAN_PUMPER;
@@ -847,6 +848,8 @@ public class GTQTMetaTileEntities {
         KQCC_HATCH[6] = registerMetaTileEntity(15516, new MetaTileEntityKQCCPartHatch(gtqtcoreId("kqcc_hatch.gpu.1"), "gpu", 1));
         KQCC_HATCH[7] = registerMetaTileEntity(15517, new MetaTileEntityKQCCPartHatch(gtqtcoreId("kqcc_hatch.gpu.2"), "gpu", 2));
         KQCC_HATCH[8] = registerMetaTileEntity(15518, new MetaTileEntityKQCCPartHatch(gtqtcoreId("kqcc_hatch.gpu.3"), "gpu", 3));
+
+        LOCAL_COMPUTER_HATCH = registerMetaTileEntity(15519, new MetaTileEntityLocalModelComputationHatch(gtqtcoreId("local_computer_hatch")));
 
         for (int i = 0; i < 5; i++) {
             int id = 15520 + i;

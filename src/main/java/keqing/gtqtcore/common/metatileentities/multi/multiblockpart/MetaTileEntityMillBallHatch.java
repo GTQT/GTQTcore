@@ -18,6 +18,7 @@ import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.items.GTQTMetaItems;
 import keqing.gtqtcore.common.items.behaviors.MillBallBehavior;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -47,6 +48,19 @@ public class MetaTileEntityMillBallHatch extends MetaTileEntityMultiblockPart im
         this.ballHolder = new ItemBallHolder();
     }
 
+    @Override
+    public void onRemoval() {
+        super.onRemoval();
+        for (int i = 0; i < ballHolder.getSlots(); i++) {
+            var pos = getPos();
+            if(!ballHolder.getStackInSlot(i).isEmpty())
+            {
+                getWorld().spawnEntity(new EntityItem(getWorld(),pos.getX()+0.5,pos.getY()+0.5,pos.getZ()+0.5,ballHolder.getStackInSlot(i)));
+                ballHolder.extractItem(i,1,false);
+            }
+
+        }
+    }
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {
         return new MetaTileEntityMillBallHatch(this.metaTileEntityId);

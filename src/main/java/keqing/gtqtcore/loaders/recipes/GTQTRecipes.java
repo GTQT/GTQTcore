@@ -585,6 +585,7 @@ public class GTQTRecipes {
 
 
     public static void processCrops(OrePrefix fcropPrefix, Material material, IngotProperty property) {
+        if(!material.isElement())return;
         GTFORecipeMaps.GREENHOUSE_RECIPES.recipeBuilder()
                 .EUt(GTValues.VA[ZPM])
                 .duration(4500)
@@ -611,6 +612,7 @@ public class GTQTRecipes {
     }
 
     public static void processLeaf(OrePrefix leafPrefix, Material material, IngotProperty property) {
+        if(!material.isElement())return;
         MACERATOR_RECIPES.recipeBuilder()
                 .EUt(GTValues.VA[ZPM])
                 .duration(1500)

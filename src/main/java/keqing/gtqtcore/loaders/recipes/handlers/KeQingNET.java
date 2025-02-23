@@ -140,12 +140,109 @@ public class KeQingNET {
         KQ_NET(4, 4, 28, DISK_28, POWER_SUBSTATION.getStackForm());
         //29 天基折射棱镜
         KQ_NET(4, 4, 29, DISK_29, LASER_SWITCH.getStackForm());
-        //元素复制
+        //30 元素复制
         KQ_NET(2, 4, 30, DISK_30, NEUTRON);
+        //31 AI大模型
+        KQ_NET(3, 4, 31, DISK_31, HIGH_PERFORMANCE_COMPUTING_ARRAY.getStackForm());
+        //32 光子晶格存储
+        KQ_NET(3, 4, 32, DISK_32, DATA_BANK.getStackForm());
     }
 
 
     private static void VVI_VVVV() {
+        //31 AI大模型
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(frameGt, Duranium, 1)
+                .input(HULL[8])
+                .input(EMITTER_UV, 2)
+                .input(plate, Lutetium, 8)
+                .input(gear, HG1223, 1)
+                .input(screw, Staballoy, 4)
+                .input(circuit, MarkerMaterials.Tier.UV, 2)
+                .input(HIGH_POWER_INTEGRATED_CIRCUIT, 16)
+                .fluidInputs(Polybenzimidazole.getFluid(L * 4))
+                .fluidInputs(NaquadahAlloy.getFluid(L * 2))
+                .stationResearch(b -> b
+                        .researchStack(DISK_31.getStackForm())
+                        .CWUt(CWT[ZPM])
+                        .EUt(VA[UV]))
+                .output(LOCAL_COMPUTER_HATCH)
+                .EUt(VA[UV])
+                .duration(1000)
+                .buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(TOOL_DATA_MODULE)
+                .circuitMeta(1)
+                .stationResearch(b -> b
+                        .researchStack(DISK_31.getStackForm())
+                        .CWUt(CWT[ZPM])
+                        .EUt(VA[UV]))
+                .output(MODEL_LOCATION_MKI)
+                .EUt(VA[UV])
+                .duration(5*MINUTE)
+                .buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(TOOL_DATA_MODULE)
+                .circuitMeta(2)
+                .stationResearch(b -> b
+                        .researchStack(DISK_31.getStackForm())
+                        .CWUt(CWT[ZPM])
+                        .EUt(VA[UV]))
+                .output(MODEL_LOCATION_MKII)
+                .EUt(VA[UV])
+                .duration(10*MINUTE)
+                .buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(TOOL_DATA_MODULE)
+                .circuitMeta(3)
+                .stationResearch(b -> b
+                        .researchStack(DISK_31.getStackForm())
+                        .CWUt(CWT[ZPM])
+                        .EUt(VA[UV]))
+                .output(MODEL_LOCATION_MKIII)
+                .EUt(VA[UV])
+                .duration(20*MINUTE)
+                .buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(TOOL_DATA_MODULE)
+                .circuitMeta(4)
+                .stationResearch(b -> b
+                        .researchStack(DISK_31.getStackForm())
+                        .CWUt(CWT[ZPM])
+                        .EUt(VA[UV]))
+                .output(MODEL_LOCATION_MKIV)
+                .EUt(VA[UHV])
+                .duration(40*MINUTE)
+                .buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(TOOL_DATA_MODULE)
+                .circuitMeta(5)
+                .stationResearch(b -> b
+                        .researchStack(DISK_31.getStackForm())
+                        .CWUt(CWT[ZPM])
+                        .EUt(VA[UV]))
+                .output(MODEL_LOCATION_MKV)
+                .EUt(VA[UHV])
+                .duration(80*MINUTE)
+                .buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(TOOL_DATA_MODULE)
+                .circuitMeta(6)
+                .stationResearch(b -> b
+                        .researchStack(DISK_31.getStackForm())
+                        .CWUt(CWT[ZPM])
+                        .EUt(VA[UV]))
+                .output(MODEL_LOCATION_MKVI)
+                .EUt(VA[UHV])
+                .duration(160*MINUTE)
+                .buildAndRegister();
+
         //29 天基棱镜
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(frameGt, Duranium, 16)
@@ -1554,6 +1651,25 @@ public class KeQingNET {
                 .cleanroom(CleanroomType.CLEANROOM)
                 .buildAndRegister();
 
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(frameGt, Adamantium, 1)
+                .input(lens, LithiumNiobate, 4)
+                .input(circuit, MarkerMaterials.Tier.UV, 1)
+                .input(circuit, MarkerMaterials.Tier.ZPM, 2)
+                .input(NANO_POWER_IC, 32)
+                .input(screw, Orichalcum, 32)
+                .input(wireFine, Tritanium, 64)
+                .output(PHOTONIC_LATTICE_MEMORY)
+                .fluidInputs(Kevlar.getFluid(L))
+                .fluidInputs(KaptonE.getFluid(L * 2))
+                .stationResearch(b -> b
+                        .researchStack(DISK_32.getStackForm())
+                        .CWUt(CWT[ZPM])
+                        .EUt(VA[UV]))
+                .EUt(VA[ZPM])
+                .duration(2000)
+                .cleanroom(CleanroomType.CLEANROOM)
+                .buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(frameGt, Adamantium, 8)
@@ -1572,7 +1688,7 @@ public class KeQingNET {
                 .fluidInputs(Duranium.getFluid(L * 32))
                 .fluidInputs(Tritanium.getFluid(L * 32))
                 .stationResearch(b -> b
-                        .researchStack(COMPUTER_CASING.getItemVariant(BlockComputerCasing.CasingType.HIGH_POWER_CASING))
+                        .researchStack(DISK_32.getStackForm())
                         .CWUt(CWT[ZPM])
                         .EUt(VA[UV]))
                 .EUt(VA[UV])
@@ -1589,15 +1705,14 @@ public class KeQingNET {
                 .input(CIRCUIT_GOOD_IV, 8)
                 .input(stick, Orichalcum, 32)
                 .input(gearSmall, Duranium, 64)
-                .input(wireGtSingle, UVSuperconductor, 16)
-                .input(wireGtSingle, UVSuperconductor, 16)
+                .input(wireGtSingle, UVSuperconductor, 32)
                 .outputs(GTQTMetaBlocks.blocksResearchSystem.getItemVariant(ADV_COMPUTER_CASING))
                 .fluidInputs(Kevlar.getFluid(L * 8))
                 .fluidInputs(KaptonE.getFluid(L * 16))
                 .fluidInputs(Duranium.getFluid(L * 32))
                 .fluidInputs(Tritanium.getFluid(L * 32))
                 .stationResearch(b -> b
-                        .researchStack(COMPUTER_CASING.getItemVariant(BlockComputerCasing.CasingType.COMPUTER_CASING))
+                        .researchStack(DISK_32.getStackForm())
                         .CWUt(CWT[ZPM])
                         .EUt(VA[UV]))
                 .EUt(VA[UV])
@@ -1613,15 +1728,14 @@ public class KeQingNET {
                 .input(CIRCUIT_GOOD_IV, 8)
                 .input(stick, Orichalcum, 32)
                 .input(ring, Tritanium, 64)
-                .input(wireGtSingle, UVSuperconductor, 16)
-                .input(wireGtSingle, UVSuperconductor, 16)
+                .input(wireGtSingle, UVSuperconductor, 32)
                 .outputs(GTQTMetaBlocks.blocksResearchSystem.getItemVariant(ULTRA_COMPUTER_CASING))
                 .fluidInputs(Kevlar.getFluid(L * 8))
                 .fluidInputs(KaptonE.getFluid(L * 16))
                 .fluidInputs(Duranium.getFluid(L * 32))
                 .fluidInputs(Tritanium.getFluid(L * 32))
                 .stationResearch(b -> b
-                        .researchStack(COMPUTER_CASING.getItemVariant(BlockComputerCasing.CasingType.ADVANCED_COMPUTER_CASING))
+                        .researchStack(DISK_32.getStackForm())
                         .CWUt(CWT[ZPM])
                         .EUt(VA[UV]))
                 .EUt(VA[UV])
@@ -1636,15 +1750,14 @@ public class KeQingNET {
                 .input(rotor, Adamantium, 64)
                 .input(pipeTinyFluid, Neutronium, 16)
                 .input(plate, Orichalcum, 32)
-                .input(wireGtSingle, UVSuperconductor, 16)
-                .input(wireGtSingle, UVSuperconductor, 16)
+                .input(wireGtSingle, UVSuperconductor, 32)
                 .outputs(GTQTMetaBlocks.blocksResearchSystem.getItemVariant(ADV_COMPUTER_HEAT_VENT))
                 .fluidInputs(Kevlar.getFluid(L * 8))
                 .fluidInputs(KaptonE.getFluid(L * 16))
                 .fluidInputs(Duranium.getFluid(L * 32))
                 .fluidInputs(Tritanium.getFluid(L * 32))
                 .stationResearch(b -> b
-                        .researchStack(COMPUTER_CASING.getItemVariant(BlockComputerCasing.CasingType.COMPUTER_HEAT_VENT))
+                        .researchStack(DISK_32.getStackForm())
                         .CWUt(CWT[ZPM])
                         .EUt(VA[UV]))
                 .EUt(VA[UV])
@@ -1657,13 +1770,10 @@ public class KeQingNET {
                 .inputs(GTQTMetaBlocks.blocksResearchSystem.getItemVariant(ADV_COMPUTER_CASING))
                 .input(EMITTER_UV, 16)
                 .input(SENSOR_UV, 16)
+                .inputNBT(PHOTONIC_LATTICE_MEMORY, NBTMatcher.ANY, NBTCondition.ANY)
                 .input(circuit, Tier.UHV, 4)
-                .input(wireGtDouble, RutheniumTriniumAmericiumNeutronate, 32)
-                .input(foil, Vibranium, 64)
                 .input(foil, Vibranium, 64)
                 .input(OPTICAL_PIPES[0], 64)
-                .input(OPTICAL_PIPES[0], 64)
-                .input(wireGtSingle, UVSuperconductor, 64)
                 .input(wireGtSingle, UVSuperconductor, 64)
                 .output(ADV_NETWORK_SWITCH)
                 .fluidInputs(Kevlar.getFluid(L * 16))
@@ -1671,7 +1781,7 @@ public class KeQingNET {
                 .fluidInputs(Polyetheretherketone.getFluid(L * 64))
                 .fluidInputs(RutheniumTriniumAmericiumNeutronate.getFluid(L * 16))
                 .stationResearch(b -> b
-                        .researchStack(NETWORK_SWITCH.getStackForm())
+                        .researchStack(DISK_32.getStackForm())
                         .CWUt(CWT[ZPM])
                         .EUt(VA[UV]))
                 .EUt(VA[UV])
@@ -1684,12 +1794,10 @@ public class KeQingNET {
                 .inputs(GTQTMetaBlocks.blocksResearchSystem.getItemVariant(ADV_COMPUTER_CASING))
                 .input(GENERAL_CIRCUIT_UV, 16)
                 .input(circuit, Tier.UHV, 8)
-                .inputNBT(TOOL_DATA_MODULE, NBTMatcher.ANY, NBTCondition.ANY)
+                .inputNBT(PHOTONIC_LATTICE_MEMORY, NBTMatcher.ANY, NBTCondition.ANY)
                 .input(frameGt, Tritanium, 16)
                 .input(wireFine, Orichalcum, 64)
                 .input(OPTICAL_PIPES[0], 64)
-                .input(wireGtDouble, RutheniumTriniumAmericiumNeutronate, 32)
-                .input(wireGtSingle, UVSuperconductor, 64)
                 .input(wireGtSingle, UVSuperconductor, 64)
                 .fluidInputs(Kevlar.getFluid(L * 16))
                 .fluidInputs(KaptonE.getFluid(L * 32))
@@ -1697,7 +1805,7 @@ public class KeQingNET {
                 .fluidInputs(RutheniumTriniumAmericiumNeutronate.getFluid(L * 16))
                 .output(ADV_DATE_BANK)
                 .stationResearch(b -> b
-                        .researchStack(DATA_BANK.getStackForm())
+                        .researchStack(DISK_32.getStackForm())
                         .CWUt(CWT[ZPM])
                         .EUt(VA[UV]))
                 .EUt(VA[UV])
@@ -1718,8 +1826,6 @@ public class KeQingNET {
                 .input(plateDouble, HY1301, 6)
                 .input(plateDouble, Naquadria, 6)
                 .input(wireFine, Ruridit, 64)
-                .input(wireFine, Ruridit, 64)
-                .input(wireGtSingle, LuVSuperconductor, 64)
                 .input(wireGtSingle, LuVSuperconductor, 64)
                 .fluidInputs(Polybenzimidazole.getFluid(L * 32))
                 .fluidInputs(Zylon.getFluid(L * 64))
@@ -1765,8 +1871,6 @@ public class KeQingNET {
                 .input(gear, HSSE, 6)
                 .input(gearSmall, Osmiridium, 3)
                 .input(wireFine, Ruridit, 64)
-                .input(wireFine, Ruridit, 64)
-                .input(wireGtSingle, LuVSuperconductor, 64)
                 .input(wireGtSingle, LuVSuperconductor, 64)
                 .fluidInputs(Polybenzimidazole.getFluid(L * 32))
                 .fluidInputs(Zylon.getFluid(L * 64))
