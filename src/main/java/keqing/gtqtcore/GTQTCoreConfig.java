@@ -25,6 +25,9 @@ public class GTQTCoreConfig {
 
         @Config.Comment({ "Print Rotor Info In Logs" })
         public boolean rotorDebug = false;
+
+        @Config.Comment({ "Print Ore Info In Logs" })
+        public boolean oreDebug = false;
     }
     public static class DifficultySwitch {
         @Config.Comment({ "Allows HotIngot to be cooled by throwing it into water.", "Default: true" })
@@ -95,42 +98,5 @@ public class GTQTCoreConfig {
         @Config.RequiresMcRestart
         @Config.Name("Core Machine NBT Store Switch")
         public boolean CoreMachineNBTStoreSwitch = false;
-
-        @Config.Name("Void Miner Universal Ore Blacklist")
-        @Config.RequiresMcRestart
-        public String[] oreBlacklistVM = new String[] {
-                "nether_star", "mana", "blazing_pyrotheum", "gelid_cryotheum",
-                "tectonic_petrotheum", "zephyrean_aerotheum"
-        };
-
-        @Config.Name("Void Miner I Ore Blacklist")
-        @Config.RequiresMcRestart
-        public String[] oreBlacklistVM1 = new String[] {
-                "tungsten", "titanium", "iridium", "osmium", "trinium",
-                "scandium", "yttrium", "ytterbium", "tellurium", "thulium",
-                "lutetium", "naquadah_enriched", "naquadria", "indium",
-                "lanthanum", "cerium", "gadolinium", "dysprosium",
-                "holmium", "neutronium", "ruthenium", "rhodium", "praseodymium",
-                "americium", "terbium", "electrum_fluxed", "bedrockium",
-                "black_plutonium", "magneto_resonatic", "europium", "promethium",
-                "infinity_catalyst"
-        };
-
-        @Config.Name("Void Miner II Ore Blacklist")
-        @Config.RequiresMcRestart
-        public String[] oreBlacklistVM2 = new String[] {
-                "iridium", "osmium", "trinium", "scandium", "yttrium",
-                "ytterbium", "tellurium", "thulium", "lutetium", "naquadria",
-                "lanthanum", "cerium", "gadolinium", "dysprosium", "holmium",
-                "praseodymium", "americium", "terbium", "electrum_fluxed",
-                "bedrockium", "black_plutonium", "promethium",
-                "infinity_catalyst"
-        };
-
-        @Config.Name("Void Miner III Ore Blacklist")
-        @Config.RequiresMcRestart
-        public String[] oreBlacklistVM3 = new String[] {
-                "bedrockium"
-        };
     }
 }

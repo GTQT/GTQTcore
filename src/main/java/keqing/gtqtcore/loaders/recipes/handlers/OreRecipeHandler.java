@@ -4,44 +4,49 @@ import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.UnificationEntry;
-import keqing.gtqtcore.GTQTCoreConfig;
 import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
-import static gregtech.api.unification.ore.OrePrefix.ore;
+import static gregtech.api.unification.material.Materials.*;
+import static keqing.gtqtcore.api.unification.GCYSMaterials.Hematite;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
+import static supercritical.api.unification.material.SCMaterials.*;
 
 public class OreRecipeHandler {
-    // Void Miner ore lists, can tweak via config settings.
     public static List<ItemStack> oreBasic = new ArrayList<>();
     public static List<ItemStack> oreAdvanced = new ArrayList<>();
     public static List<ItemStack> oreUltimate = new ArrayList<>();
 
     public static void register() {
-        ore.addProcessingHandler(OreRecipeHandler::generateVMRecipes);
-    }
+        List<Material> Basic = new ArrayList<>();
 
+        Collections.addAll(Basic,
+                Aluminium, Beryllium, Chrome, Cobalt, Copper, Gallium, Gold, Iron, Lead,Lithium,Manganese,Molybdenum,
+                Nickel,Selenium,Silver,Sulfur, Tellurium,Thorium,Tin, Almandine,Asbestos,BandedIron,BlueTopaz,BrownLimonite,
+                Calcite,Cassiterite,CassiteriteSand,Chalcopyrite,Chromite, Cinnabar,Coal,Cobaltite,Cooperite,Diamond,Emerald,Galena,
+                Garnierite,GreenSapphire,Grossular,Ilmenite,Rutile, Bauxite,Lazurite,Magnesite,Molybdenite,Powellite,Pyrite,Pyrolusite,
+                Pyrope,RockSalt,Ruby,Salt,Saltpeter, Sapphire,Sodalite,Tantalite,Spessartine,Sphalerite,Stibnite,Tetrahedrite,Topaz,
+                Tungstate,Uraninite, Wulfenite,YellowLimonite,NetherQuartz,CertusQuartz,Graphite,Bornite,Chalcocite,Realgar,
+                Bastnasite, Pentlandite,Spodumene,Lepidolite,GlauconiteSand,Malachite,Mica,Barite,Alunite,Talc,Kyanite,Pyrochlore,
+                Oilsands,Olivine,Opal,Amethyst,Lapis,Apatite,TricalciumPhosphate,GarnetRed,GarnetYellow,VanadiumMagnetite,Pollucite,
+                Bentonite,FullersEarth,Monazite,Trona,Gypsum,Zeolite,Redstone,Electrotine,Diatomite,GraniticMineralSand,GarnetSand,
+                BasalticMineralSand,Hematite,Fluix,PreciousMetal,Fluorite,Caliche,LeanGoldSulphide,RichGoldSulphide,Lignite,
+                Pyrargyrite,Zincantimonygalvanite,Crocoite,Cryolite,Amblygonite,Amber,Ulexite,Gashydrate,Zircon
+        );
+        List<Material> Advanced = new ArrayList<>(Basic);
 
-    public static void generateVMRecipes(OrePrefix prefix, Material material) {
+        Collections.addAll(Advanced,
+                Iridium, Lanthanum,Neodymium,Niobium,Osmium,Palladium,Platinum,Rhodium,Ruthenium,Samarium,Scandium,Yttrium,
+                Titanium,NaquadahOxide,Scheelite,NetherStar,Pitchblende,Thorianite, Plutonium239,Lutetium);
+        List<Material> Ultimate = new ArrayList<>(Advanced);
+        Collections.addAll(Ultimate,
+                Americium,Californium,Europium,Gadolinium,Holmium,Lawrencium,Nobelium,Praseodymium,Technetium,Terbium);
 
-        List<String> blacklistUniversal = Arrays.asList(GTQTCoreConfig.MachineSwitch.oreBlacklistVM);
-        List<String> blacklistBasic = Arrays.asList(GTQTCoreConfig.MachineSwitch.oreBlacklistVM1);
-        List<String> blacklistAdvanced = Arrays.asList(GTQTCoreConfig.MachineSwitch.oreBlacklistVM2);
-        List<String> blacklistUltimate = Arrays.asList(GTQTCoreConfig.MachineSwitch.oreBlacklistVM3);
-
-        if (!blacklistUniversal.contains(material.getName())) {
-            if (!blacklistBasic.contains(material.getName())) {
-                oreBasic.add(OreDictUnifier.get(new UnificationEntry(OrePrefix.ore, material)));
-            }
-            if (!blacklistAdvanced.contains(material.getName())) {
-                oreAdvanced.add(OreDictUnifier.get(new UnificationEntry(OrePrefix.ore, material)));
-            }
-            if (!blacklistUltimate.contains(material.getName())) {
-                oreUltimate.add(OreDictUnifier.get(new UnificationEntry(OrePrefix.ore, material)));
-            }
-        }
-
+        for(Material material: Basic) oreBasic.add(OreDictUnifier.get(new UnificationEntry(OrePrefix.ore, material)));
+        for(Material material: Advanced) oreAdvanced.add(OreDictUnifier.get(new UnificationEntry(OrePrefix.ore, material)));
+        for(Material material: Ultimate) oreUltimate.add(OreDictUnifier.get(new UnificationEntry(OrePrefix.ore, material)));
     }
 }

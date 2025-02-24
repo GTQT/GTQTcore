@@ -165,7 +165,9 @@ public class MetaTileEntityRadiationHatch extends MetaTileEntityMultiblockPart i
 
     @Override
     public int getRadiation() {
-        return getRadiationBehavior().getRadiation() * (tier-3);
+
+        if(isAvailable())return getRadiationBehavior().getRadiation() * (tier-3);
+        return 0;
     }
 
     @Override

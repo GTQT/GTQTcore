@@ -282,7 +282,7 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<PrimitiveRecipeBuilder>  COAGULATION_RECIPES ;
     public static final RecipeMap<TargetRecipeBuilder> TARGET_CHAMBER;
     public static final RecipeMap<TargetRecipeBuilder> NUCLEOSYNTHESIS;
-    public static final RecipeMap<SimpleRecipeBuilder> BEAM_COLLECTION;
+    public static final RecipeMap<NeutronActivatorIORecipeBuilder> BEAM_COLLECTION;
     //靶室（启动耗能+散射截面）
 
     private GTQTcoreRecipeMaps() {}
@@ -298,7 +298,7 @@ public class GTQTcoreRecipeMaps {
         PROCESSING_MODE_C = new RecipeMapPseudoGroup<>("processing_mode_c", 2, 2, 1, 1, new SimpleRecipeBuilder(), RecipeMaps.LASER_ENGRAVER_RECIPES, RecipeMaps.AUTOCLAVE_RECIPES, RecipeMaps.FLUID_SOLIDFICATION_RECIPES, false);
         COAGULATION_RECIPES = new RecipeMap<>("coagulation_tank", 2, 1, 2, 0, new PrimitiveRecipeBuilder(), false);
 
-        BEAM_COLLECTION = new RecipeMap<>("beam_collection",1,1,0,0,new SimpleRecipeBuilder(),false)
+        BEAM_COLLECTION = new RecipeMap<>("beam_collection",3,3,3,3,new NeutronActivatorIORecipeBuilder(),false)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_COMPRESS, ProgressWidget.MoveType.HORIZONTAL)
                 .setSound(GTSoundEvents.ARC);
 
@@ -315,7 +315,7 @@ public class GTQTcoreRecipeMaps {
                 .setSlotOverlay(true, false, true, GuiTextures.DUST_OVERLAY)
                 .setSound(GTSoundEvents.MACERATOR);
 
-        PARTICLE_ACCELERATOR_RECIPES=new RecipeMap<>("particle_accelerator", 3, 3, 3, 3, new ComputationRecipeBuilder(), false)
+        PARTICLE_ACCELERATOR_RECIPES=new RecipeMap<>("particle_accelerator", 1, 3, 0, 0, new ComputationRecipeBuilder(), false)
                 .setSound(GTSoundEvents.CHEMICAL_REACTOR);
 
         NEUTRON_ACTIVATOR=new RecipeMap<>("neutron_activator", 6, 6, 3, 3, new NeutronActivatorRecipeBuilder(), false)

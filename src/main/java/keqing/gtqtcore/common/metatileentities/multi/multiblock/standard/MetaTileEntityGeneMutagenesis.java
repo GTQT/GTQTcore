@@ -89,13 +89,12 @@ public class MetaTileEntityGeneMutagenesis extends MultiMapMultiblockController 
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
-                .aisle("JCCCJ", "JCCCJ", "GGGGG", "GGGGG", "CCCCC")
-                .aisle("JCCCJ", "JPPPJ", "G   G", "G   G", "CCCCC")
-                .aisle("JCCCJ", "JPPPJ", "G   G", "G   G", "CCCCC")
-                .aisle("JCCCJ", "JPPPJ", "G   G", "G   G", "CCCCC")
-                .aisle("JCCCJ", "JCSCJ", "GGGGG", "GGGGG", "CCCCC")
+                .aisle("CCCCC", "CCCCC", "GGGGG", "GGGGG", "CCCCC")
+                .aisle("CCCCC", "CPPPC", "G   G", "G   G", "CCCCC")
+                .aisle("CCCCC", "CPPPC", "G   G", "G   G", "CCCCC")
+                .aisle("CCCCC", "CPPPC", "G   G", "G   G", "CCCCC")
+                .aisle("CCCCC", "CCSCC", "GGGGG", "GGGGG", "CCCCC")
                 .where('S', selfPredicate())
-                .where('J', states(getCasingState()))
                 .where('G', TiredTraceabilityPredicate.CP_GLASS.get())
                 .where('C', states(getCasingState()).setMinGlobalLimited(38)
                         .or(autoAbilities())

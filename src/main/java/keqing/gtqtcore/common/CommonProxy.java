@@ -284,6 +284,9 @@ public class CommonProxy {
         NeutronActivatorIOPartProperty.registeredPart(3, "氚核");
         NeutronActivatorIOPartProperty.registeredPart(4, "氦核（α粒子）");
         NeutronActivatorIOPartProperty.registeredPart(5, "电子");
+        NeutronActivatorIOPartProperty.registeredPart(6, "正电子");
+        NeutronActivatorIOPartProperty.registeredPart(7, "钙离子");
+        NeutronActivatorIOPartProperty.registeredPart(8, "硼离子");
 
         EnzymesReactionProperty.registeredRate(101, "1 0 1 0 0 酸性");
         EnzymesReactionProperty.registeredRate(102, "1 0 1 1 0 酸性");
@@ -367,6 +370,31 @@ public class CommonProxy {
     }
 
     public void loadComplete() {
+        if(GTQTCoreConfig.debugSwitch.debugSwitch) {
+            for (Material material : GregTechAPI.materialManager.getRegisteredMaterials()) {
+                if (GTQTCoreConfig.debugSwitch.cableDebug) {
+                    if (material.hasProperty(PropertyKey.WIRE))
+                        GTQTLog.logger.info("Cable Info/Material:"+material+" Amperage:"+material.getProperty(PropertyKey.WIRE).getAmperage()+" Voltage:"+material.getProperty(PropertyKey.WIRE).getVoltage()+" LossPerBlock:"+material.getProperty(PropertyKey.WIRE).getLossPerBlock());
+                }
+                if (GTQTCoreConfig.debugSwitch.pipeDebug) {
+                    if (material.hasProperty(PropertyKey.FLUID_PIPE))
+                        GTQTLog.logger.info("Fluid Pipe Info/Material:"+material+" Priority:"+material.getProperty(PropertyKey.FLUID_PIPE).getPriority()+" MaxFluidTemperature:"+material.getProperty(PropertyKey.FLUID_PIPE).getMaxFluidTemperature()+" Throughput:"+material.getProperty(PropertyKey.FLUID_PIPE).getThroughput()+" Tanks:"+material.getProperty(PropertyKey.FLUID_PIPE).getTanks());
+
+                    if (material.hasProperty(PropertyKey.ITEM_PIPE))
+                        GTQTLog.logger.info("Item Pipe Info/Material:"+material+" Priority:"+material.getProperty(PropertyKey.ITEM_PIPE).getPriority()+" TransferRate:"+material.getProperty(PropertyKey.ITEM_PIPE).getTransferRate());
+                }
+                if (GTQTCoreConfig.debugSwitch.rotorDebug) {
+                    if (material.hasProperty(PropertyKey.ROTOR))
+                        GTQTLog.logger.info("Rotor Info/Material:"+material+" Damage:"+material.getProperty(PropertyKey.ROTOR).getDamage()+" Durability:"+material.getProperty(PropertyKey.ROTOR).getDurability()+" Speed:"+material.getProperty(PropertyKey.ROTOR).getSpeed());
+                }
+                if (GTQTCoreConfig.debugSwitch.oreDebug) {
+                    if (material.hasProperty(PropertyKey.ORE))
+                    {
+                        GTQTLog.logger.info("Ore Info/Material:"+ material+" Name:"+material.getLocalizedName()+" Products:"+material.getProperty(PropertyKey.ORE).getOreByProducts());
+                    }
+                }
+            }
+        }
     }
 
     public void preInit() {
@@ -399,26 +427,6 @@ public class CommonProxy {
         CrucibleRecipes.register();
         CopyRecipesHandlers.init();
         UUHelper.init();
-
-        if(GTQTCoreConfig.debugSwitch.debugSwitch) {
-            for (Material material : GregTechAPI.materialManager.getRegisteredMaterials()) {
-                if (GTQTCoreConfig.debugSwitch.cableDebug) {
-                    if (material.hasProperty(PropertyKey.WIRE))
-                        GTQTLog.logger.info(new TextComponentTranslation("Cable Info", material, material.getProperty(PropertyKey.WIRE).getAmperage(), material.getProperty(PropertyKey.WIRE).getVoltage(), material.getProperty(PropertyKey.WIRE).getLossPerBlock()));
-                }
-                if (GTQTCoreConfig.debugSwitch.pipeDebug) {
-                    if (material.hasProperty(PropertyKey.FLUID_PIPE))
-                        GTQTLog.logger.info(new TextComponentTranslation("Fluid Pipe Info", material,  material.getProperty(PropertyKey.FLUID_PIPE).getPriority(),material.getProperty(PropertyKey.FLUID_PIPE).getMaxFluidTemperature(), material.getProperty(PropertyKey.FLUID_PIPE).getThroughput(), material.getProperty(PropertyKey.FLUID_PIPE).getTanks()));
-
-                    if (material.hasProperty(PropertyKey.ITEM_PIPE))
-                        GTQTLog.logger.info(new TextComponentTranslation("Item Pipe Info", material, material.getProperty(PropertyKey.ITEM_PIPE).getPriority(), material.getProperty(PropertyKey.ITEM_PIPE).getTransferRate()));
-                }
-                if (GTQTCoreConfig.debugSwitch.rotorDebug) {
-                    if (material.hasProperty(PropertyKey.ROTOR))
-                        GTQTLog.logger.info(new TextComponentTranslation("Rotor Info", material, material.getProperty(PropertyKey.ROTOR).getDamage(), material.getProperty(PropertyKey.ROTOR).getDurability(), material.getProperty(PropertyKey.ROTOR).getDamage()));
-                }
-            }
-        }
 
         for (BlockWireCoil.CoilType type : BlockWireCoil.CoilType.values()) {
             HEATING_COILS.put(GTQTMetaBlocks.blockWireCoil.getState(type), type);

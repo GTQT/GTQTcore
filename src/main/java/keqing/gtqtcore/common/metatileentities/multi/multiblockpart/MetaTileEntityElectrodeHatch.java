@@ -182,7 +182,8 @@ public class MetaTileEntityElectrodeHatch extends MetaTileEntityMultiblockPart i
 
     @Override
     public int getElectrodeTier() {
-        return getElectrodeBehavior().getElectrodeTier();
+        if(isAvailable()) return getElectrodeBehavior().getElectrodeTier();
+        return 0;
     }
 
     @Override

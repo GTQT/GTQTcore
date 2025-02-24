@@ -1,6 +1,7 @@
 package keqing.gtqtcore.loaders.recipes.handlers;
 
 import com.google.common.collect.ImmutableList;
+import gregtech.api.GregTechAPI;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.MarkerMaterials;
 import gregtech.api.unification.material.Material;
@@ -117,16 +118,15 @@ public class UUHelper {
 
 
         //扫描和复制配方
-        GTQTUtil.initList();
-        for (int i = 0; i < GTQTUtil.listMater.size(); i++) {
+        for (Material material : GregTechAPI.materialManager.getRegisteredMaterials()) {
             ItemStack is = GTQTMetaItems.CD_ROM.getStackForm();
             NBTTagCompound compound = new NBTTagCompound();
-            compound.setString("Name", GTQTUtil.getName(GTQTUtil.listMater.get(i)));
+            compound.setString("Name", GTQTUtil.getName(material));
             is.setTagCompound(compound);
             int mass =0;
             int Neutrons =0;
             int Protons =0;
-            Material material= GTQTUtil.listMater.get(i);
+
             if (material.getMaterialComponents().isEmpty() || material.getMaterialComponents().size() > 15)
                 continue;
 
@@ -152,12 +152,12 @@ public class UUHelper {
             if(Neutrons!=0)copybuild.fluidInputs(NeutronFlux.getFluid(Neutrons));
             if(Protons!=0)copybuild .fluidInputs(ProtonFlux.getFluid(Protons));
 
-            if (GTQTUtil.listMater.get(i).hasProperty(PropertyKey.DUST)) {
-                buid.input(dust, GTQTUtil.listMater.get(i), 1);
-                copybuild.output(dust, GTQTUtil.listMater.get(i), 1);
-            } else if (GTQTUtil.listMater.get(i).hasFluid()) {
-                buid.fluidInputs(GTQTUtil.listMater.get(i).getFluid(144));
-                copybuild.fluidOutputs(GTQTUtil.listMater.get(i).getFluid(144));
+            if (material.hasProperty(PropertyKey.DUST)) {
+                buid.input(dust, material, 1);
+                copybuild.output(dust, material, 1);
+            } else if (material.hasFluid()) {
+                buid.fluidInputs(material.getFluid(144));
+                copybuild.fluidOutputs(material.getFluid(144));
             } else
                 continue;
             buid.buildAndRegister();

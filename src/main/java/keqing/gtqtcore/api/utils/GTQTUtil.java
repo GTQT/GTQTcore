@@ -74,16 +74,7 @@ public class GTQTUtil {
         return new ResourceLocation("gtqtcore", path);
     }
     public static  Integer baseTime = 100;
-    public static List<Material> listMater = new ArrayList<>();
-    public static void initList()
-    {
-        var ms = materialManager.getRegisteredMaterials();
-        for (var s:ms)
-        {
-            if(s != Materials.UUMatter)
-                listMater.add(s);
-        }
-    }
+
     public static String getName(MetaItem.MetaValueItem is) {
         return is.getStackForm().getDisplayName();
     }

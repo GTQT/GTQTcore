@@ -3051,6 +3051,14 @@ metaitem.arrow_down_mkiii.name=Concrete Thought Node III
 metaitem.arrow_left_mkiii.name=Divergent Thought Node III
 metaitem.arrow_right_mkiii.name=Implicit Thought Node III
 
+gtqtcore.hpi.tooltip=I'm a lovely high-energy particle
+gtqtcore.hpi.tooltip.mass=Rest Mass：%s
+gtqtcore.hpi.tooltip.charge=The Amount Of Charge：%s
+gtqtcore.hpi.tooltip.spin=Spin Quantum Number：%s
+gtqtcore.hpi.tooltip.strong=Strong Interactions：%s
+gtqtcore.hpi.tooltip.weak=Weak Interaction：%s
+gtqtcore.hpi.tooltip.antiparticle=Antiparticle：%s
+
 metaitem.none.name=None
 metaitem.up_quark.name=Up Quark
 metaitem.antiup_quark.name=Anti-Up Quark
@@ -5279,7 +5287,7 @@ gtqtcore.nc.tooltip.8=High-temperature Shutdown Mode: When reaching the warning 
 gtqtcore.pa.tooltip.1=Cradle of High-Energy Physics
 gtqtcore.pa.tooltip.2=The gateway to the limits of physics, exploring the ultimate composition of matter!
 gtqtcore.pa.tooltip.3=Equipped with three independent upgrade modules, each unlocking a different category of recipes. See JEI for details.(Note that the placement location has been marked with an naquadah shell)
-gtqtcore.pa.tooltip.4=Beam Collection: Place independent particle source external interfaces on multi-block particle sources and input materials to activate them. The multi-block automatically collects the produced particles and encapsulates them as items for output.
+gtqtcore.pa.tooltip.4=Beam Collision: Excites a specific atom to encapsulate it into a beam of elementary particles
 gtqtcore.pa.tooltip.5=Particle Collision: Accelerates selected particles to collide with specific materials, disintegrating them into other particles and substances. The best method for obtaining large quantities of fundamental particles.
 gtqtcore.pa.tooltip.6=Nuclear Synthesis Chamber: Accelerates selected particles to collide with specific materials, causing them to synthesize into new substances. Many rare substances can be obtained through this method.
 gtqtcore.pa.tooltip.7=Particle Acceleration: Obtains random thought paths. See the Research System for details.

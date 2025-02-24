@@ -1,5 +1,6 @@
 package keqing.gtqtcore.common.items.behaviors;
 
+import gregtech.api.items.metaitem.MetaItem;
 import gregtech.api.items.metaitem.stats.IItemBehaviour;
 import gregtech.common.entities.DynamiteEntity;
 import net.minecraft.client.resources.I18n;
@@ -7,38 +8,71 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.List;
 
+import static keqing.gtqtcore.common.items.GTQTMetaItems.TIME_BOTTLE;
+
 public class ParticleBehavior implements IItemBehaviour {
+
+    protected final double mass; 	//in MeV/c^2
+    protected final double charge;	// in e
+    protected final double spin;	// in h bar
+    protected final boolean strongInteract;
+    protected final boolean weakInteract;
+    MetaItem<?>.MetaValueItem antiparticle;
+
+    // Getter 方法（所有字段均为 final，不生成 setter）
+    public double getMass() {
+        return mass;
+    }
+
+    public double getCharge() {
+        return charge;
+    }
+
+    public double getSpin() {
+        return spin;
+    }
+
+    public boolean isStrongInteract() {  // boolean 类型推荐用 is 前缀
+        return strongInteract;
+    }
+
+    public boolean isWeakInteract() {
+        return weakInteract;
+    }
+    
     public void addInformation(ItemStack stack, List<String> lines) {
-        lines.add(I18n.format("我是可爱的高能粒子"));
+        lines.add(I18n.format("gtqtcore.hpi.tooltip"));
+        lines.add(I18n.format("gtqtcore.hpi.tooltip.mass",
+                String.format("%.3e", mass/1000) + " GeV/c²"));  // 转换为GeV单位
+
+        lines.add(I18n.format("gtqtcore.hpi.tooltip.charge",
+                (charge == (int) charge) ?
+                        String.format("%d e", (int) charge) :  // 整数电荷显示
+                        String.format("%.2f e", charge)));     // 小数电荷显示
+
+        lines.add(I18n.format("gtqtcore.hpi.tooltip.spin",
+                (spin % 1 == 0) ?
+                        String.format("%.0f ħ", spin) :        // 整数自旋
+                        String.format("%.1f ħ", spin)));       // 半整数自旋
+
+        lines.add(I18n.format("gtqtcore.hpi.tooltip.strong",
+                strongInteract ? "✔" : "✘"));              // 强相互作用状态
+
+        lines.add(I18n.format("gtqtcore.hpi.tooltip.weak",
+                weakInteract ? "✔" : "✘"));                // 弱相互作用状态
     }
-    public ParticleBehavior() {}
-    @Override
-    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
-        ItemStack itemstack = player.getHeldItem(hand);
-
-        if (!player.capabilities.isCreativeMode) {
-            itemstack.shrink(1);
-        }
-
-        if (world.isRemote) {
-            return new ActionResult<>(EnumActionResult.SUCCESS, itemstack);
-        }
-
-        DynamiteEntity entity = new DynamiteEntity(world, player);
-        entity.shoot(player, player.rotationPitch, player.rotationYaw, 0.0F, 0.7F, 1.0F);
-
-        world.spawnEntity(entity);
-
-        return new ActionResult<>(EnumActionResult.SUCCESS, itemstack);
+    public ParticleBehavior(double mass, double charge, double spin, boolean weakInteract, boolean strongInteract,MetaItem<?>.MetaValueItem antiparticle) {
+        this.mass = mass;
+        this.charge = charge;
+        this.spin = spin;
+        this.weakInteract = weakInteract;
+        this.strongInteract = strongInteract;
+        this.antiparticle = antiparticle;
     }
-
 }

@@ -1,10 +1,12 @@
 package keqing.gtqtcore.integration.jei;
 
 import gregtech.api.items.metaitem.MetaItem;
+import gregtech.api.items.metaitem.stats.IItemBehaviour;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.common.metatileentities.MetaTileEntities;
 import gregtech.integration.IntegrationSubmodule;
 import keqing.gtqtcore.api.utils.GTQTCPUHelper;
+import keqing.gtqtcore.common.items.behaviors.ParticleBehavior;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 import keqing.gtqtcore.loaders.recipes.handlers.OreRecipeHandler;
 import mezz.jei.api.IGuiHelper;

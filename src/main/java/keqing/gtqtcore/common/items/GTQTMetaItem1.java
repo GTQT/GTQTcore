@@ -5,21 +5,22 @@ import gregtech.api.GregTechAPI;
 import gregtech.api.items.metaitem.ElectricStats;
 import gregtech.api.items.metaitem.FilteredFluidStats;
 import gregtech.api.items.metaitem.StandardMetaItem;
-import gregtech.api.items.metaitem.stats.IItemComponent;
 import gregtech.api.items.metaitem.stats.ItemFluidContainer;
 import gregtech.api.unification.material.MarkerMaterials;
 import gregtech.api.unification.material.properties.PropertyKey;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.ItemMaterialInfo;
 import gregtech.api.unification.stack.MaterialStack;
-import gregtech.common.items.behaviors.*;
+import gregtech.common.items.behaviors.ColorSprayBehaviour;
+import gregtech.common.items.behaviors.MultiblockBuilderBehavior;
+import gregtech.common.items.behaviors.ProspectorScannerBehavior;
+import gregtech.common.items.behaviors.TooltipBehavior;
 import keqing.gtqtcore.api.unification.GCYSMaterials;
 import keqing.gtqtcore.api.unification.GTQTMaterials;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.CommonProxy;
 import keqing.gtqtcore.common.block.GTQTCrops;
 import keqing.gtqtcore.common.items.behaviors.*;
-import keqing.gtqtcore.common.items.behaviors.DataItemBehavior;
 import keqing.gtqtcore.common.items.behaviors.render.HaloRenderItemBehavior;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.EnumDyeColor;
@@ -71,9 +72,9 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         ZHU_TAN = this.addItem(24, "fuel.zhutan").setBurnValue(12800).setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO);
 
         //
-        SCRAP = this.addItem(27,"scrap").setCreativeTabs(CommonProxy.GTQTCore_HP).setMaxStackSize(64);
-        CD_ROM = this.addItem(28,"cd_rom").setCreativeTabs(CommonProxy.GTQTCore_HP).setMaxStackSize(16).addComponents(new DataItemBehavior(true));
-        UU_MATER = this.addItem(29,"uu_mater").setCreativeTabs(CommonProxy.GTQTCore_HP).setMaxStackSize(64);
+        SCRAP = this.addItem(27, "scrap").setCreativeTabs(CommonProxy.GTQTCore_HP).setMaxStackSize(64);
+        CD_ROM = this.addItem(28, "cd_rom").setCreativeTabs(CommonProxy.GTQTCore_HP).setMaxStackSize(16).addComponents(new DataItemBehavior(true));
+        UU_MATER = this.addItem(29, "uu_mater").setCreativeTabs(CommonProxy.GTQTCore_HP).setMaxStackSize(64);
         //快乐海藻
         COMMON_ALGAE = this.addItem(30, "algae.common").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO).addOreDict("algaeOrdinary");
         GREEN_ALGAE = this.addItem(31, "algae.green").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO).addOreDict("algaeGreen");
@@ -201,7 +202,6 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         RETICLE_GLASS_MKII = addItem(143, "reticle_glass.ii").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         RETICLE_GLASS_MKIII = addItem(144, "reticle_glass.iii").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         RETICLE_GLASS_MKIV = addItem(145, "reticle_glass.iv").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
-
 
 
         HEAVY_METAL_ABSORBING_YARN = addItem(150, "heavy_metal_absorbing_yarn").setMaxStackSize(1).setCreativeTabs(CommonProxy.GTQTCore_TAB);
@@ -573,34 +573,34 @@ public class GTQTMetaItem1 extends StandardMetaItem {
 
         //Shape Molds and Extruders addition.
         SHAPE_MOLD_ROD = this.addItem(480, "shape.mold.rod")
-                .setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Steel, M *4)));
+                .setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Steel, M * 4)));
 
         SHAPE_MOLD_BOLT = this.addItem(481, "shape.mold.bolt")
-                .setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Steel, M *4)));
+                .setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Steel, M * 4)));
 
         SHAPE_MOLD_ROUND = this.addItem(482, "shape.mold.round")
-                .setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Steel, M *4)));
+                .setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Steel, M * 4)));
 
         SHAPE_MOLD_SCREW = this.addItem(483, "shape.mold.screw")
-                .setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Steel, M *4)));
+                .setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Steel, M * 4)));
 
         SHAPE_MOLD_RING = this.addItem(484, "shape.mold.ring")
-                .setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Steel, M *4)));
+                .setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Steel, M * 4)));
 
         SHAPE_MOLD_ROD_LONG = this.addItem(485, "shape.mold.rod_long")
-                .setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Steel, M *4)));
+                .setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Steel, M * 4)));
 
         SHAPE_MOLD_TURBINE_BLADE = this.addItem(486, "shape.mold.turbine_blade")
-                .setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Steel, M *4)));
+                .setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Steel, M * 4)));
 
         SHAPE_MOLD_DRILL_HEAD = this.addItem(487, "shape.mold.drill_head")
-                .setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Steel, M *4)));
+                .setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Steel, M * 4)));
 
         SHAPE_EXTRUDER_TURBINE_BLADE = this.addItem(488, "shape.extruder.turbine_blade")
-                .setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Steel, M *4)));
+                .setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Steel, M * 4)));
 
         SHAPE_EXTRUDER_DRILL_HEAD = this.addItem(489, "shape.extruder.drill_head")
-                .setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Steel, M *4)));
+                .setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Steel, M * 4)));
 
 
         //  Magneto Resonatic Board
@@ -1118,72 +1118,493 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         DISK_40 = this.addItem(2040, "disk.40").setCreativeTabs(CommonProxy.GTQTCore_DISK);
 
 
-        ALPHA = this.addItem(2500, "alpha").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
-        ANTIALPHA = this.addItem(2501, "antialpha").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
-        ANTIBOTTOM_QUARK = this.addItem(2502, "antibottom_quark").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
-        ANTICHARM_QUARK = this.addItem(2503, "anticharm_quark").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
-        ANTIDELTA_MINUS = this.addItem(2504, "antidelta_minus").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
-        ANTIDELTA_PLUS_PLUS = this.addItem(2505, "antidelta_plus_plus").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
-        ANTIDEUTERON = this.addItem(2506, "antideuteron").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
-        ANTIDOWN_QUARK = this.addItem(2507, "antidown_quark").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
-        ANTIHELION = this.addItem(2508, "antihelion").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
-        ANTIKAON_NAUGHT = this.addItem(2509, "antikaon_naught").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
-        ANTIMUON = this.addItem(2510, "antimuon").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
-        ANTINEUTRON = this.addItem(2511, "antineutron").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
-        ANTIPROTON = this.addItem(2512, "antiproton").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
-        ANTISIGMA_MINUS = this.addItem(2513, "antisigma_minus").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
-        ANTISIGMA_NAUGHT = this.addItem(2514, "antisigma_naught").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
-        ANTISIGMA_PLUS = this.addItem(2515, "antisigma_plus").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
-        ANTISTRANGE_QUARK = this.addItem(2516, "antistrange_quark").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
-        ANTITAU = this.addItem(2517, "antitau").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
-        ANTITOP_QUARK = this.addItem(2518, "antitop_quark").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
-        ANTITRITON = this.addItem(2519, "antitriton").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
-        ANTIUP_QUARK = this.addItem(2520, "antiup_quark").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
-        BORON_ION = this.addItem(2521, "boron_ion").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
-        BOTTOM_ETA = this.addItem(2522, "bottom_eta").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
-        BOTTOM_QUARK = this.addItem(2523, "bottom_quark").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
-        CALCIUM_48_ION = this.addItem(2524, "calcium_48_ion").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
-        CHARM_QUARK = this.addItem(2525, "charm_quark").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
-        CHARMED_ETA = this.addItem(2526, "charmed_eta").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
-        DELTA_MINUS = this.addItem(2527, "delta_minus").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
-        DELTA_PLUS_PLUS = this.addItem(2528, "delta_plus_plus").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
-        DEUTERON = this.addItem(2529, "deuteron").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
-        DOWN_QUARK = this.addItem(2530, "down_quark").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
-        ELECTRON = this.addItem(2531, "electron").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
-        ELECTRON_ANTINEUTRINO = this.addItem(2532, "electron_antineutrino").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
-        ELECTRON_NEUTRINO = this.addItem(2533, "electron_neutrino").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
-        ETA = this.addItem(2534, "eta").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
-        ETA_PRIME = this.addItem(2535, "eta_prime").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
-        GLUEBALL = this.addItem(2536, "glueball").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
-        GLUON = this.addItem(2537, "gluon").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
-        HELION = this.addItem(2538, "helion").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
-        HIGGS_BOSON = this.addItem(2539, "higgs_boson").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
-        KAON_MINUS = this.addItem(2540, "kaon_minus").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
-        KAON_NAUGHT = this.addItem(2541, "kaon_naught").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
-        KAON_PLUS = this.addItem(2542, "kaon_plus").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
-        MUON = this.addItem(2543, "muon").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
-        MUON_ANTINEUTRINO = this.addItem(2544, "muon_antineutrino").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
-        MUON_NEUTRINO = this.addItem(2545, "muon_neutrino").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
-        NEUTRON = this.addItem(2546, "neutron").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
-        PHOTON = this.addItem(2547, "photon").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
-        PION_MINUS = this.addItem(2548, "pion_minus").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
-        PION_NAUGHT = this.addItem(2549, "pion_naught").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
-        PION_PLUS = this.addItem(2550, "pion_plus").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
-        POSITRON = this.addItem(2551, "positron").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
-        PROTON = this.addItem(2552, "proton").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
-        SIGMA_MINUS = this.addItem(2553, "sigma_minus").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
-        SIGMA_NAUGHT = this.addItem(2554, "sigma_naught").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
-        SIGMA_PLUS = this.addItem(2555, "sigma_plus").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
-        STRANGE_QUARK = this.addItem(2556, "strange_quark").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
-        TAU = this.addItem(2557, "tau").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
-        TAU_ANTINEUTRINO = this.addItem(2558, "tau_antineutrino").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
-        TAU_NEUTRINO = this.addItem(2559, "tau_neutrino").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
-        TOP_QUARK = this.addItem(2560, "top_quark").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
-        TRITON = this.addItem(2561, "triton").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
-        UP_QUARK = this.addItem(2562, "up_quark").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
-        W_MINUS_BOSON = this.addItem(2563, "w_minus_boson").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
-        W_PLUS_BOSON = this.addItem(2564, "w_plus_boson").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
-        Z_BOSON = this.addItem(2565, "z_boson").addComponents(new ParticleBehavior()).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        ALPHA = this.addItem(2500, "alpha")
+                .addComponents(new ParticleBehavior(
+                        3727.379,    // 质量 (MeV/c^2)
+                        2,            // 电荷 (e)
+                        1,            // 自旋 (h bar)
+                        true,         // 弱相互作用
+                        true,         // 强相互作用
+                        ANTIALPHA     // 反粒子
+                ))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        ANTIALPHA = this.addItem(2501, "antialpha")
+                .addComponents(new ParticleBehavior(
+                        3727.379,    // 质量 (MeV/c^2)
+                        -2,           // 电荷 (e)
+                        1,            // 自旋 (h bar)
+                        true,         // 弱相互作用
+                        true,         // 强相互作用
+                        ALPHA         // 反粒子
+                ))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        ANTIBOTTOM_QUARK = this.addItem(2502, "antibottom_quark")
+                .addComponents(new ParticleBehavior(
+                        4180,         // 质量 (MeV/c^2)
+                        -1 / 3.0,       // 电荷 (e)
+                        1 / 2.0,        // 自旋 (h bar)
+                        true,         // 弱相互作用
+                        true,         // 强相互作用
+                        BOTTOM_QUARK  // 反粒子
+                ))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        ANTICHARM_QUARK = this.addItem(2503, "anticharm_quark")
+                .addComponents(new ParticleBehavior(
+                        1275,         // 质量 (MeV/c^2)
+                        -2 / 3.0,       // 电荷 (e)
+                        1 / 2.0,        // 自旋 (h bar)
+                        true,         // 弱相互作用
+                        true,         // 强相互作用
+                        CHARM_QUARK   // 反粒子
+                ))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        ANTIDELTA_MINUS = this.addItem(2504, "antidelta_minus")
+                .addComponents(new ParticleBehavior(
+                        1232,         // 质量 (MeV/c^2)
+                        -1,           // 电荷 (e)
+                        3 / 2.0,        // 自旋 (h bar)
+                        true,         // 弱相互作用
+                        true,         // 强相互作用
+                        DELTA_MINUS   // 反粒子
+                ))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        ANTIDELTA_PLUS_PLUS = this.addItem(2505, "antidelta_plus_plus")
+                .addComponents(new ParticleBehavior(
+                        1232,         // 质量 (MeV/c^2)
+                        2,            // 电荷 (e)
+                        3 / 2.0,        // 自旋 (h bar)
+                        true,         // 弱相互作用
+                        true,         // 强相互作用
+                        DELTA_PLUS_PLUS // 反粒子
+                ))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        ANTIDEUTERON = this.addItem(2506, "antideuteron")
+                .addComponents(new ParticleBehavior(
+                        1875.613,    // 质量 (MeV/c^2)
+                        -1,           // 电荷 (e)
+                        1,            // 自旋 (h bar)
+                        true,         // 弱相互作用
+                        true,         // 强相互作用
+                        DEUTERON      // 反粒子
+                ))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        ANTIDOWN_QUARK = this.addItem(2507, "antidown_quark")
+                .addComponents(new ParticleBehavior(
+                        4.8,          // 质量 (MeV/c^2)
+                        1 / 3.0,        // 电荷 (e)
+                        1 / 2.0,        // 自旋 (h bar)
+                        true,         // 弱相互作用
+                        true,         // 强相互作用
+                        DOWN_QUARK    // 反粒子
+                ))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        ANTIHELION = this.addItem(2508, "antihelion")
+                .addComponents(new ParticleBehavior(
+                        2808.391,    // 质量 (MeV/c^2)
+                        -2,           // 电荷 (e)
+                        1,            // 自旋 (h bar)
+                        true,         // 弱相互作用
+                        true,         // 强相互作用
+                        HELION        // 反粒子
+                ))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        ANTIKAON_NAUGHT = this.addItem(2509, "antikaon_naught")
+                .addComponents(new ParticleBehavior(
+                        497.614,    // 质量 (MeV/c^2)
+                        0,            // 电荷 (e)
+                        1,            // 自旋 (h bar)
+                        true,         // 弱相互作用
+                        true,         // 强相互作用
+                        KAON_NAUGHT   // 反粒子
+                ))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        ANTIMUON = this.addItem(2510, "antimuon")
+                .addComponents(new ParticleBehavior(
+                        105.658,    // 质量 (MeV/c^2)
+                        -1,           // 电荷 (e)
+                        1 / 2.0,        // 自旋 (h bar)
+                        true,         // 弱相互作用
+                        false,        // 强相互作用
+                        MUON          // 反粒子
+                ))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        ANTINEUTRON = this.addItem(2511, "antineutron")
+                .addComponents(new ParticleBehavior(
+                        939.565,    // 质量 (MeV/c^2)
+                        0,            // 电荷 (e)
+                        1 / 2.0,        // 自旋 (h bar)
+                        true,         // 弱相互作用
+                        true,         // 强相互作用
+                        NEUTRON       // 反粒子
+                ))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        ANTIPROTON = this.addItem(2512, "antiproton")
+                .addComponents(new ParticleBehavior(
+                        938.272,    // 质量 (MeV/c^2)
+                        -1,           // 电荷 (e)
+                        1 / 2.0,        // 自旋 (h bar)
+                        true,         // 弱相互作用
+                        true,         // 强相互作用
+                        PROTON        // 反粒子
+                ))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        ANTISIGMA_MINUS = this.addItem(2513, "antisigma_minus")
+                .addComponents(new ParticleBehavior(
+                        1189.37,    // 质量 (MeV/c^2)
+                        -1,           // 电荷 (e)
+                        3 / 2.0,        // 自旋 (h bar)
+                        true,         // 弱相互作用
+                        true,         // 强相互作用
+                        SIGMA_MINUS   // 反粒子
+                ))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        ANTISIGMA_NAUGHT = this.addItem(2514, "antisigma_naught")
+                .addComponents(new ParticleBehavior(
+                        1192.64,    // 质量 (MeV/c^2)
+                        0,            // 电荷 (e)
+                        3 / 2.0,        // 自旋 (h bar)
+                        true,         // 弱相互作用
+                        true,         // 强相互作用
+                        SIGMA_NAUGHT  // 反粒子
+                ))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        ANTISIGMA_PLUS = this.addItem(2515, "antisigma_plus")
+                .addComponents(new ParticleBehavior(
+                        1197.45,    // 质量 (MeV/c^2)
+                        1,            // 电荷 (e)
+                        3 / 2.0,        // 自旋 (h bar)
+                        true,         // 弱相互作用
+                        true,         // 强相互作用
+                        SIGMA_PLUS    // 反粒子
+                ))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        ANTISTRANGE_QUARK = this.addItem(2516, "antistrange_quark")
+                .addComponents(new ParticleBehavior(
+                        95,           // 质量 (MeV/c^2)
+                        1 / 3.0,        // 电荷 (e)
+                        1 / 2.0,        // 自旋 (h bar)
+                        true,         // 弱相互作用
+                        true,         // 强相互作用
+                        STRANGE_QUARK // 反粒子
+                ))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        ANTITAU = this.addItem(2517, "antitau")
+                .addComponents(new ParticleBehavior(
+                        1776.82,    // 质量 (MeV/c^2)
+                        -1,           // 电荷 (e)
+                        1 / 2.0,        // 自旋 (h bar)
+                        true,         // 弱相互作用
+                        false,        // 强相互作用
+                        TAU           // 反粒子
+                ))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        ANTITOP_QUARK = this.addItem(2518, "antitop_quark")
+                .addComponents(new ParticleBehavior(
+                        172000,       // 质量 (MeV/c^2)
+                        -2 / 3.0,       // 电荷 (e)
+                        1 / 2.0,        // 自旋 (h bar)
+                        true,         // 弱相互作用
+                        true,         // 强相互作用
+                        TOP_QUARK     // 反粒子
+                ))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        ANTITRITON = this.addItem(2519, "antitriton")
+                .addComponents(new ParticleBehavior(
+                        2808.391,    // 质量 (MeV/c^2)
+                        -1,           // 电荷 (e)
+                        1,            // 自旋 (h bar)
+                        true,         // 弱相互作用
+                        true,         // 强相互作用
+                        TRITON        // 反粒子
+                ))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        ANTIUP_QUARK = this.addItem(2520, "antiup_quark")
+                .addComponents(new ParticleBehavior(
+                        2.3,          // 质量 (MeV/c^2)
+                        -2 / 3.0,       // 电荷 (e)
+                        1 / 2.0,        // 自旋 (h bar)
+                        true,         // 弱相互作用
+                        true,         // 强相互作用
+                        UP_QUARK      // 反粒子
+                ))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        BORON_ION = this.addItem(2521, "boron_ion")
+                .addComponents(new ParticleBehavior(
+                        11174.436,    // 质量 (MeV/c^2)
+                        5,            // 电荷 (e)
+                        1,            // 自旋 (h bar)
+                        true,         // 弱相互作用
+                        true,         // 强相互作用
+                        BORON_ION     // 反粒子
+                ))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        BOTTOM_ETA = this.addItem(2522, "bottom_eta")
+                .addComponents(new ParticleBehavior(
+                        5475,         // 质量 (MeV/c^2)
+                        0,            // 电荷 (e)
+                        1,            // 自旋 (h bar)
+                        true,         // 弱相互作用
+                        true,         // 强相互作用
+                        BOTTOM_ETA    // 反粒子
+                ))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        BOTTOM_QUARK = this.addItem(2523, "bottom_quark")
+                .addComponents(new ParticleBehavior(
+                        4180,         // 质量 (MeV/c^2)
+                        1 / 3.0,        // 电荷 (e)
+                        1 / 2.0,        // 自旋 (h bar)
+                        true,         // 弱相互作用
+                        true,         // 强相互作用
+                        ANTIBOTTOM_QUARK // 反粒子
+                ))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        CALCIUM_48_ION = this.addItem(2524, "calcium_48_ion")
+                .addComponents(new ParticleBehavior(
+                        47320.808,    // 质量 (MeV/c^2)
+                        20,           // 电荷 (e)
+                        0,            // 自旋 (h bar)
+                        true,         // 弱相互作用
+                        true,         // 强相互作用
+                        CALCIUM_48_ION // 反粒子
+                ))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        CHARM_QUARK = this.addItem(2525, "charm_quark")
+                .addComponents(new ParticleBehavior(
+                        1275,         // 质量 (MeV/c^2)
+                        2 / 3.0,        // 电荷 (e)
+                        1 / 2.0,        // 自旋 (h bar)
+                        true,         // 弱相互作用
+                        true,         // 强相互作用
+                        ANTICHARM_QUARK // 反粒子
+                ))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        CHARMED_ETA = this.addItem(2526, "charmed_eta")
+                .addComponents(new ParticleBehavior(
+                        957.78,       // 质量 (MeV/c^2)
+                        0,            // 电荷 (e)
+                        1,            // 自旋 (h bar)
+                        true,         // 弱相互作用
+                        true,         // 强相互作用
+                        CHARMED_ETA   // 反粒子
+                ))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        DELTA_MINUS = this.addItem(2527, "delta_minus")
+                .addComponents(new ParticleBehavior(
+                        1232,         // 质量 (MeV/c^2)
+                        -1,           // 电荷 (e)
+                        3 / 2.0,        // 自旋 (h bar)
+                        true,         // 弱相互作用
+                        true,         // 强相互作用
+                        ANTIDELTA_MINUS // 反粒子
+                ))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        DELTA_PLUS_PLUS = this.addItem(2528, "delta_plus_plus")
+                .addComponents(new ParticleBehavior(
+                        1232,         // 质量 (MeV/c^2)
+                        2,            // 电荷 (e)
+                        3 / 2.0,        // 自旋 (h bar)
+                        true,         // 弱相互作用
+                        true,         // 强相互作用
+                        ANTIDELTA_PLUS_PLUS // 反粒子
+                ))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        DEUTERON = this.addItem(2529, "deuteron")
+                .addComponents(new ParticleBehavior(
+                        1875.613,    // 质量 (MeV/c^2)
+                        1,            // 电荷 (e)
+                        1,            // 自旋 (h bar)
+                        true,         // 弱相互作用
+                        true,         // 强相互作用
+                        ANTIDEUTERON  // 反粒子
+                ))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        DOWN_QUARK = this.addItem(2530, "down_quark")
+                .addComponents(new ParticleBehavior(
+                        4.8,          // 质量 (MeV/c^2)
+                        -1 / 3.0,       // 电荷 (e)
+                        1 / 2.0,        // 自旋 (h bar)
+                        true,         // 弱相互作用
+                        true,         // 强相互作用
+                        ANTIDOWN_QUARK // 反粒子
+                ))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        ELECTRON = this.addItem(2531, "electron")
+                .addComponents(new ParticleBehavior(
+                        0.511,        // 质量 (MeV/c^2)
+                        -1,           // 电荷 (e)
+                        1 / 2.0,        // 自旋 (h bar)
+                        true,         // 弱相互作用
+                        false,        // 强相互作用
+                        POSITRON      // 反粒子
+                ))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        ELECTRON_ANTINEUTRINO = this.addItem(2532, "electron_antineutrino")
+                .addComponents(new ParticleBehavior(0.0, 0.0, 0.5, true, false, ELECTRON_NEUTRINO))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        ELECTRON_NEUTRINO = this.addItem(2533, "electron_neutrino")
+                .addComponents(new ParticleBehavior(0.0, 0.0, 0.5, true, false, ELECTRON_ANTINEUTRINO))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        ETA = this.addItem(2534, "eta")
+                .addComponents(new ParticleBehavior(0.547862, 0.0, 0.0, true, false, ETA))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        ETA_PRIME = this.addItem(2535, "eta_prime")
+                .addComponents(new ParticleBehavior(0.95778, 0.0, 0.0, true, false, ETA_PRIME))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        GLUEBALL = this.addItem(2536, "glueball")
+                .addComponents(new ParticleBehavior(0.0, 0.0, 0.0, false, true, GLUEBALL))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        GLUON = this.addItem(2537, "gluon")
+                .addComponents(new ParticleBehavior(0.0, 0.0, 1.0, false, true, GLUON))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        HELION = this.addItem(2538, "helion")
+                .addComponents(new ParticleBehavior(2.808921, 1.0, 1.0, true, true, ANTIHELION))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        HIGGS_BOSON = this.addItem(2539, "higgs_boson")
+                .addComponents(new ParticleBehavior(125.0, 0.0, 0.0, true, false, HIGGS_BOSON))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        KAON_MINUS = this.addItem(2540, "kaon_minus")
+                .addComponents(new ParticleBehavior(0.493677, -1.0, 0.5, true, true, KAON_MINUS))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        KAON_NAUGHT = this.addItem(2541, "kaon_naught")
+                .addComponents(new ParticleBehavior(0.497614, 0.0, 0.5, true, true, KAON_NAUGHT))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        KAON_PLUS = this.addItem(2542, "kaon_plus")
+                .addComponents(new ParticleBehavior(0.493677, 1.0, 0.5, true, true, KAON_PLUS))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        MUON = this.addItem(2543, "muon")
+                .addComponents(new ParticleBehavior(0.105658, -1.0, 0.5, true, false, POSITRON))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        MUON_ANTINEUTRINO = this.addItem(2544, "muon_antineutrino")
+                .addComponents(new ParticleBehavior(0.0, 0.0, 0.5, true, false, MUON_NEUTRINO))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        MUON_NEUTRINO = this.addItem(2545, "muon_neutrino")
+                .addComponents(new ParticleBehavior(0.0, 0.0, 0.5, true, false, MUON_ANTINEUTRINO))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        NEUTRON = this.addItem(2546, "neutron")
+                .addComponents(new ParticleBehavior(0.939565, 0.0, 0.5, true, true, ANTINEUTRON))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        PHOTON = this.addItem(2547, "photon")
+                .addComponents(new ParticleBehavior(0.0, 0.0, 1.0, false, false, PHOTON))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        PION_MINUS = this.addItem(2548, "pion_minus")
+                .addComponents(new ParticleBehavior(0.139570, -1.0, 0.0, true, true, PION_PLUS))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        PION_NAUGHT = this.addItem(2549, "pion_naught")
+                .addComponents(new ParticleBehavior(0.134977, 0.0, 0.0, true, true, PION_NAUGHT))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        PION_PLUS = this.addItem(2550, "pion_plus")
+                .addComponents(new ParticleBehavior(0.139570, 1.0, 0.0, true, true, PION_MINUS))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        POSITRON = this.addItem(2551, "positron")
+                .addComponents(new ParticleBehavior(0.000511, 1.0, 0.5, true, false, MUON))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        PROTON = this.addItem(2552, "proton")
+                .addComponents(new ParticleBehavior(0.938272, 1.0, 0.5, true, true, ANTIPROTON))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        SIGMA_MINUS = this.addItem(2553, "sigma_minus")
+                .addComponents(new ParticleBehavior(1.192642, -1.0, 0.5, true, true, ANTISIGMA_MINUS))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        SIGMA_NAUGHT = this.addItem(2554, "sigma_naught")
+                .addComponents(new ParticleBehavior(1.197449, 0.0, 0.5, true, true, ANTISIGMA_NAUGHT))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        SIGMA_PLUS = this.addItem(2555, "sigma_plus")
+                .addComponents(new ParticleBehavior(1.189370, 1.0, 0.5, true, true, ANTISIGMA_PLUS))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        STRANGE_QUARK = this.addItem(2556, "strange_quark")
+                .addComponents(new ParticleBehavior(0.095, -0.333333, 0.5, true, true, STRANGE_QUARK))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        TAU = this.addItem(2557, "tau")
+                .addComponents(new ParticleBehavior(1.77686, -1.0, 0.5, true, false, ANTITAU))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        TAU_ANTINEUTRINO = this.addItem(2558, "tau_antineutrino")
+                .addComponents(new ParticleBehavior(0.0, 0.0, 0.5, true, false, TAU_NEUTRINO))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        TAU_NEUTRINO = this.addItem(2559, "tau_neutrino")
+                .addComponents(new ParticleBehavior(0.0, 0.0, 0.5, true, false, TAU_ANTINEUTRINO))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        TOP_QUARK = this.addItem(2560, "top_quark")
+                .addComponents(new ParticleBehavior(173.07, 2.0 / 3.0, 0.5, true, true, TOP_QUARK))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        TRITON = this.addItem(2561, "triton")
+                .addComponents(new ParticleBehavior(2.808921, 1.0, 1.0, true, true, ANTITRITON))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        UP_QUARK = this.addItem(2562, "up_quark")
+                .addComponents(new ParticleBehavior(0.0023, 2.0 / 3.0, 0.5, true, true, ANTIUP_QUARK))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        W_MINUS_BOSON = this.addItem(2563, "w_minus_boson")
+                .addComponents(new ParticleBehavior(80.385, -1.0, 1.0, true, false, W_PLUS_BOSON))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        W_PLUS_BOSON = this.addItem(2564, "w_plus_boson")
+                .addComponents(new ParticleBehavior(80.385, 1.0, 1.0, true, false, W_MINUS_BOSON))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+
+        Z_BOSON = this.addItem(2565, "z_boson")
+                .addComponents(new ParticleBehavior(91.1876, 0.0, 1.0, true, false, Z_BOSON))
+                .setCreativeTabs(CommonProxy.GTQTCore_PA);
 
         //  High Energy Physics items
         QUANTUM_ANOMALY = this.addItem(2600, "quantum_anomaly").setCreativeTabs(CommonProxy.GTQTCore_HP);

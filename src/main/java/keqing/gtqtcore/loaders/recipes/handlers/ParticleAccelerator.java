@@ -18,6 +18,7 @@ import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.utils.GTQTUtil.CWT;
 import static keqing.gtqtcore.common.block.blocks.BlockParticleAcceleratorCasing.MachineType.*;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
+import static keqing.gtqtcore.common.items.GTQTMetaItems.ANTIPROTON;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.PARTICLE_ACCELERATOR;
 import static supercritical.api.unification.material.SCMaterials.*;
 
@@ -988,44 +989,317 @@ public class ParticleAccelerator {
     }
     public static void PARTICLE_ACCELERATOR_RECIPES()
     {
-        //0-100000
         GTQTcoreRecipeMaps.PARTICLE_ACCELERATOR_RECIPES.recipeBuilder()
-                .chancedOutput(ARROW_UP_MKI,100,100)
-                .chancedOutput(ARROW_UP_MKII,10,10)
-                .chancedOutput(ARROW_UP_MKIII,1,1)
+                .input(NEUTRON)
+                .output(PROTON)
+                .output(ELECTRON_ANTINEUTRINO)
+                .output(ELECTRON)
+                .CWUt(512)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.PARTICLE_ACCELERATOR_RECIPES.recipeBuilder()
+                .input(ANTINEUTRON)
+                .output(POSITRON)
+                .output(ELECTRON_ANTINEUTRINO)
+                .output(ANTIPROTON)
+                .CWUt(512)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.PARTICLE_ACCELERATOR_RECIPES.recipeBuilder()
+                .input(PION_NAUGHT)
+                .output(PHOTON)
+                .CWUt(512)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.PARTICLE_ACCELERATOR_RECIPES.recipeBuilder()
+                .input(PION_PLUS)
+                .output(ANTIMUON)
+                .output(MUON_NEUTRINO)
+                .CWUt(512)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.PARTICLE_ACCELERATOR_RECIPES.recipeBuilder()
+                .input(PION_MINUS)
+                .output(MUON_ANTINEUTRINO)
+                .output(MUON)
+                .CWUt(512)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.PARTICLE_ACCELERATOR_RECIPES.recipeBuilder()
+                .input(MUON)
+                .output(ELECTRON_ANTINEUTRINO)
+                .output(MUON_NEUTRINO)
+                .output(ELECTRON)
+                .CWUt(512)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.PARTICLE_ACCELERATOR_RECIPES.recipeBuilder()
+                .input(ANTIMUON)
+                .output(POSITRON)
+                .output(MUON_ANTINEUTRINO)
+                .output(ELECTRON_NEUTRINO)
+                .CWUt(512)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.PARTICLE_ACCELERATOR_RECIPES.recipeBuilder()
+                .input(TAU)
+                .output(PION_NAUGHT)
+                .output(TAU_NEUTRINO)
+                .output(PION_MINUS)
+                .CWUt(512)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.PARTICLE_ACCELERATOR_RECIPES.recipeBuilder()
+                .input(ANTITAU)
+                .output(PION_PLUS)
+                .output(TAU_ANTINEUTRINO)
+                .output(PION_NAUGHT)
+                .CWUt(512)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.PARTICLE_ACCELERATOR_RECIPES.recipeBuilder()
+                .input(KAON_PLUS)
+                .output(ANTIMUON)
+                .output(MUON_NEUTRINO)
+                .CWUt(512)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.PARTICLE_ACCELERATOR_RECIPES.recipeBuilder()
+                .input(KAON_MINUS)
+                .output(MUON_ANTINEUTRINO)
+                .output(MUON)
+                .CWUt(512)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.PARTICLE_ACCELERATOR_RECIPES.recipeBuilder()
+                .input(KAON_NAUGHT)
+                .output(PION_PLUS)
+                .output(PION_MINUS)
+                .CWUt(512)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.PARTICLE_ACCELERATOR_RECIPES.recipeBuilder()
+                .input(ANTIKAON_NAUGHT)
+                .output(PION_PLUS)
+                .output(PION_MINUS)
+                .CWUt(512)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.PARTICLE_ACCELERATOR_RECIPES.recipeBuilder()
+                .input(W_MINUS_BOSON)
+                .output(PION_MINUS)
+                .CWUt(512)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.PARTICLE_ACCELERATOR_RECIPES.recipeBuilder()
+                .input(W_PLUS_BOSON)
+                .output(PION_PLUS)
+                .CWUt(512)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.PARTICLE_ACCELERATOR_RECIPES.recipeBuilder()
+                .input(Z_BOSON)
+                .output(ELECTRON_NEUTRINO)
+                .output(ELECTRON_ANTINEUTRINO)
+                .CWUt(512)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.PARTICLE_ACCELERATOR_RECIPES.recipeBuilder()
+                .input(HIGGS_BOSON)
+                .output(BOTTOM_ETA)
+                .CWUt(512)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.PARTICLE_ACCELERATOR_RECIPES.recipeBuilder()
+                .input(ETA)
+                .output(PION_PLUS)
+                .output(PION_NAUGHT)
+                .output(PION_MINUS)
+                .CWUt(512)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.PARTICLE_ACCELERATOR_RECIPES.recipeBuilder()
+                .input(ETA_PRIME)
+                .output(PION_PLUS)
+                .output(ETA)
+                .output(PION_MINUS)
+                .CWUt(512)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.PARTICLE_ACCELERATOR_RECIPES.recipeBuilder()
+                .input(CHARMED_ETA)
+                .output(KAON_NAUGHT)
+                .output(ANTIKAON_NAUGHT)
+                .CWUt(512)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.PARTICLE_ACCELERATOR_RECIPES.recipeBuilder()
+                .input(BOTTOM_ETA)
+                .output(ANTITAU)
+                .output(TAU)
+                .CWUt(512)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.PARTICLE_ACCELERATOR_RECIPES.recipeBuilder()
+                .input(TRITON)
+                .output(HELION)
+                .output(ELECTRON_ANTINEUTRINO)
+                .output(ELECTRON)
+                .CWUt(512)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.PARTICLE_ACCELERATOR_RECIPES.recipeBuilder()
+                .input(ANTITRITON)
+                .output(POSITRON)
+                .output(ELECTRON_NEUTRINO)
+                .output(ANTIHELION)
+                .CWUt(512)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.PARTICLE_ACCELERATOR_RECIPES.recipeBuilder()
+                .input(GLUEBALL)
+                .output(KAON_PLUS)
+                .output(KAON_MINUS)
+                .CWUt(512)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.PARTICLE_ACCELERATOR_RECIPES.recipeBuilder()
+                .input(SIGMA_PLUS)
+                .output(PROTON)
+                .output(PION_NAUGHT)
+                .CWUt(512)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.PARTICLE_ACCELERATOR_RECIPES.recipeBuilder()
+                .input(ANTISIGMA_PLUS)
+                .output(PION_NAUGHT)
+                .output(ANTIPROTON)
+                .CWUt(512)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.PARTICLE_ACCELERATOR_RECIPES.recipeBuilder()
+                .input(SIGMA_MINUS)
+                .output(NEUTRON)
+                .output(PION_MINUS)
+                .CWUt(512)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.PARTICLE_ACCELERATOR_RECIPES.recipeBuilder()
+                .input(ANTISIGMA_MINUS)
+                .output(PION_PLUS)
+                .output(ANTINEUTRON)
+                .CWUt(512)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.PARTICLE_ACCELERATOR_RECIPES.recipeBuilder()
+                .input(DELTA_PLUS_PLUS)
+                .output(PROTON)
+                .output(PION_PLUS)
+                .CWUt(512)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.PARTICLE_ACCELERATOR_RECIPES.recipeBuilder()
+                .input(ANTIDELTA_PLUS_PLUS)
+                .output(ANTIPROTON)
+                .output(PION_MINUS)
+                .CWUt(512)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.PARTICLE_ACCELERATOR_RECIPES.recipeBuilder()
+                .input(DELTA_MINUS)
+                .output(NEUTRON)
+                .output(PION_MINUS)
+                .CWUt(512)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.PARTICLE_ACCELERATOR_RECIPES.recipeBuilder()
+                .input(ANTIDELTA_MINUS)
+                .output(ANTINEUTRON)
+                .output(PION_PLUS)
+                .CWUt(512)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.PARTICLE_ACCELERATOR_RECIPES.recipeBuilder()
+                .input(PHOTON)
                 .circuitMeta(1)
-                .CWUt(1000)
-                .duration(1200)
+                .output(ELECTRON)
+                .output(POSITRON)
+                .CWUt(512)
+                .duration(100)
                 .EUt(7680)
                 .buildAndRegister();
 
         GTQTcoreRecipeMaps.PARTICLE_ACCELERATOR_RECIPES.recipeBuilder()
-                .chancedOutput(ARROW_DOWN_MKI,100,100)
-                .chancedOutput(ARROW_DOWN_MKII,10,10)
-                .chancedOutput(ARROW_DOWN_MKIII,1,1)
+                .input(PHOTON)
                 .circuitMeta(2)
-                .CWUt(1000)
-                .duration(1200)
-                .EUt(7680)
-                .buildAndRegister();
-
-        GTQTcoreRecipeMaps.PARTICLE_ACCELERATOR_RECIPES.recipeBuilder()
-                .chancedOutput(ARROW_LEFT_MKI,100,100)
-                .chancedOutput(ARROW_LEFT_MKII,10,10)
-                .chancedOutput(ARROW_LEFT_MKIII,1,1)
-                .circuitMeta(3)
-                .CWUt(1000)
-                .duration(1200)
-                .EUt(7680)
-                .buildAndRegister();
-
-        GTQTcoreRecipeMaps.PARTICLE_ACCELERATOR_RECIPES.recipeBuilder()
-                .chancedOutput(ARROW_RIGHT_MKI,100,100)
-                .chancedOutput(ARROW_RIGHT_MKII,10,10)
-                .chancedOutput(ARROW_RIGHT_MKIII,1,1)
-                .circuitMeta(4)
-                .CWUt(1000)
-                .duration(1200)
+                .output(MUON)
+                .output(ANTIMUON)
+                .CWUt(512)
+                .duration(100)
                 .EUt(7680)
                 .buildAndRegister();
     }
@@ -1725,6 +1999,440 @@ public class ParticleAccelerator {
                 .output(NEUTRON)
                 .EUToStart(19900)
                 .Scattering(2)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        //////////////////////////////////////////////////////////////////
+        //补
+        GTQTcoreRecipeMaps.TARGET_CHAMBER.recipeBuilder()
+                .input(DEUTERON)
+                .input(PROTON)
+                .output(PHOTON)
+                .output(NEUTRON)
+                .EUToStart(12000)
+                .Scattering(1)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.TARGET_CHAMBER.recipeBuilder()
+                .input(ANTIDEUTERON)
+                .input(ANTIPROTON)
+                .output(PHOTON)
+                .output(ANTINEUTRON)
+                .EUToStart(12000)
+                .Scattering(1)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.TARGET_CHAMBER.recipeBuilder()
+                .input(TRITON)
+                .input(DEUTERON)
+                .output(PHOTON)
+                .output(NEUTRON)
+                .EUToStart(12000)
+                .Scattering(2)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.TARGET_CHAMBER.recipeBuilder()
+                .input(ANTITRITON)
+                .input(ANTIDEUTERON)
+                .output(PHOTON)
+                .output(ANTINEUTRON)
+                .EUToStart(12000)
+                .Scattering(2)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.TARGET_CHAMBER.recipeBuilder()
+                .input(ALPHA)
+                .input(HELION)
+                .output(PHOTON)
+                .output(NEUTRON)
+                .EUToStart(12000)
+                .Scattering(3)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.TARGET_CHAMBER.recipeBuilder()
+                .input(ANTIALPHA)
+                .input(ANTIHELION)
+                .output(PHOTON)
+                .output(ANTINEUTRON)
+                .EUToStart(12000)
+                .Scattering(3)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.TARGET_CHAMBER.recipeBuilder()
+                .input(DEUTERON)
+                .input(PROTON)
+                .input(ELECTRON_NEUTRINO)
+                .output(POSITRON)
+                .output(PROTON)
+                .EUToStart(12000)
+                .Scattering(4)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.TARGET_CHAMBER.recipeBuilder()
+                .input(ANTIDEUTERON)
+                .input(ANTIPROTON)
+                .input(ELECTRON_ANTINEUTRINO)
+                .output(POSITRON)
+                .output(ANTIPROTON)
+                .EUToStart(12000)
+                .Scattering(4)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.TARGET_CHAMBER.recipeBuilder()
+                .input(HELION)
+                .input(PROTON)
+                .output(PHOTON)
+                .output(DEUTERON)
+                .EUToStart(12000)
+                .Scattering(5)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.TARGET_CHAMBER.recipeBuilder()
+                .input(ANTIHELION)
+                .input(ANTIPROTON)
+                .output(PHOTON)
+                .output(ANTIDEUTERON)
+                .EUToStart(12000)
+                .Scattering(5)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.TARGET_CHAMBER.recipeBuilder()
+                .input(ALPHA)
+                .input(HELION)
+                .output(PROTON)
+                .output(HELION)
+                .EUToStart(12000)
+                .Scattering(6)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.TARGET_CHAMBER.recipeBuilder()
+                .input(ANTIALPHA)
+                .input(ANTIHELION)
+                .output(ANTIPROTON)
+                .output(ANTIHELION)
+                .EUToStart(12000)
+                .Scattering(6)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.TARGET_CHAMBER.recipeBuilder()
+                .input(ALPHA)
+                .input(DEUTERON)
+                .output(NEUTRON)
+                .output(TRITON)
+                .EUToStart(12000)
+                .Scattering(7)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.TARGET_CHAMBER.recipeBuilder()
+                .input(ANTIALPHA)
+                .input(ANTIDEUTERON)
+                .output(ANTINEUTRON)
+                .output(ANTITRITON)
+                .EUToStart(12000)
+                .Scattering(7)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.TARGET_CHAMBER.recipeBuilder()
+                .input(ALPHA)
+                .input(TRITON)
+                .output(NEUTRON)
+                .output(TRITON)
+                .EUToStart(12000)
+                .Scattering(8)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.TARGET_CHAMBER.recipeBuilder()
+                .input(ANTIALPHA)
+                .input(ANTITRITON)
+                .output(ANTINEUTRON)
+                .output(ANTITRITON)
+                .EUToStart(12000)
+                .Scattering(8)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.TARGET_CHAMBER.recipeBuilder()
+                .input(ALPHA)
+                .input(DEUTERON)
+                .output(PROTON)
+                .output(HELION)
+                .EUToStart(12000)
+                .Scattering(1)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.TARGET_CHAMBER.recipeBuilder()
+                .input(ANTIALPHA)
+                .input(ANTIDEUTERON)
+                .output(ANTIPROTON)
+                .output(ANTIHELION)
+                .EUToStart(12000)
+                .Scattering(1)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.TARGET_CHAMBER.recipeBuilder()
+                .input(ALPHA)
+                .input(HELION)
+                .output(NEUTRON)
+                .output(PROTON)
+                .output(TRITON)
+                .EUToStart(12000)
+                .Scattering(2)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.TARGET_CHAMBER.recipeBuilder()
+                .input(ANTIALPHA)
+                .input(ANTIHELION)
+                .output(ANTINEUTRON)
+                .output(ANTIPROTON)
+                .output(ANTITRITON)
+                .EUToStart(12000)
+                .Scattering(2)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.TARGET_CHAMBER.recipeBuilder()
+                .input(TRITON)
+                .input(DEUTERON)
+                .output(PROTON)
+                .output(DEUTERON)
+                .EUToStart(12000)
+                .Scattering(3)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.TARGET_CHAMBER.recipeBuilder()
+                .input(ANTITRITON)
+                .input(ANTIDEUTERON)
+                .output(ANTIPROTON)
+                .output(ANTIDEUTERON)
+                .EUToStart(12000)
+                .Scattering(3)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.TARGET_CHAMBER.recipeBuilder()
+                .input(PION_PLUS)
+                .input(PROTON)
+                .input(PION_MINUS)
+                .output(PION_NAUGHT)
+                .output(ANTIPROTON)
+                .EUToStart(12000)
+                .Scattering(4)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.TARGET_CHAMBER.recipeBuilder()
+                .input(PION_PLUS)
+                .input(NEUTRON)
+                .input(PION_MINUS)
+                .output(PION_NAUGHT)
+                .output(ANTINEUTRON)
+                .EUToStart(12000)
+                .Scattering(4)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.TARGET_CHAMBER.recipeBuilder()
+                .input(PION_PLUS)
+                .input(ANTIPROTON)
+                .input(PION_MINUS)
+                .output(PION_NAUGHT)
+                .output(PROTON)
+                .EUToStart(12000)
+                .Scattering(5)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.TARGET_CHAMBER.recipeBuilder()
+                .input(PION_PLUS)
+                .input(ANTINEUTRON)
+                .input(PION_MINUS)
+                .output(PION_NAUGHT)
+                .output(NEUTRON)
+                .EUToStart(12000)
+                .Scattering(5)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.TARGET_CHAMBER.recipeBuilder()
+                .input(ELECTRON_NEUTRINO)
+                .input(ELECTRON)
+                .input(MUON_ANTINEUTRINO)
+                .output(MUON)
+                .output(ELECTRON)
+                .EUToStart(12000)
+                .Scattering(6)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.TARGET_CHAMBER.recipeBuilder()
+                .input(ELECTRON_ANTINEUTRINO)
+                .input(POSITRON)
+                .input(MUON_ANTINEUTRINO)
+                .output(MUON)
+                .output(POSITRON)
+                .EUToStart(12000)
+                .Scattering(6)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.TARGET_CHAMBER.recipeBuilder()
+                .input(MUON)
+                .input(ELECTRON)
+                .output(ANTIMUON)
+                .output(POSITRON)
+                .EUToStart(12000)
+                .Scattering(7)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.TARGET_CHAMBER.recipeBuilder()
+                .input(PROTON)
+                .input(PROTON)
+                .input(PION_MINUS)
+                .output(PION_PLUS)
+                .output(PROTON)
+                .output(PION_NAUGHT)
+                .EUToStart(12000)
+                .Scattering(7)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.TARGET_CHAMBER.recipeBuilder()
+                .input(ANTIPROTON)
+                .input(ANTIPROTON)
+                .input(PION_PLUS)
+                .output(PION_MINUS)
+                .output(ANTIPROTON)
+                .output(PION_NAUGHT)
+                .EUToStart(12000)
+                .Scattering(8)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.TARGET_CHAMBER.recipeBuilder()
+                .input(DELTA_MINUS)
+                .input(PROTON)
+                .input(KAON_PLUS)
+                .output(SIGMA_PLUS)
+                .output(PROTON)
+                .output(PION_PLUS)
+                .EUToStart(12000)
+                .Scattering(8)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.TARGET_CHAMBER.recipeBuilder()
+                .input(ANTIDELTA_MINUS)
+                .input(ANTIPROTON)
+                .input(KAON_MINUS)
+                .output(ANTISIGMA_PLUS)
+                .output(ANTIPROTON)
+                .output(PION_MINUS)
+                .EUToStart(14000)
+                .Scattering(1)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.TARGET_CHAMBER.recipeBuilder()
+                .input(TAU)
+                .input(ELECTRON)
+                .input(Z_BOSON)
+                .output(ANTITAU)
+                .output(POSITRON)
+                .EUToStart(14000)
+                .Scattering(2)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.TARGET_CHAMBER.recipeBuilder()
+                .input(GLUEBALL)
+                .input(PROTON)
+                .input(W_MINUS_BOSON)
+                .output(W_PLUS_BOSON)
+                .output(ANTIPROTON)
+                .output(CHARMED_ETA)
+                .EUToStart(14000)
+                .Scattering(3)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.TARGET_CHAMBER.recipeBuilder()
+                .input(HIGGS_BOSON)
+                .input(PROTON)
+                .input(KAON_PLUS)
+                .output(DELTA_PLUS_PLUS)
+                .output(PROTON)
+                .output(SIGMA_MINUS)
+                .EUToStart(14000)
+                .Scattering(4)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.TARGET_CHAMBER.recipeBuilder()
+                .input(HIGGS_BOSON)
+                .input(ANTIPROTON)
+                .input(KAON_MINUS)
+                .output(ANTIDELTA_MINUS)
+                .output(ANTIPROTON)
+                .output(ANTISIGMA_MINUS)
+                .EUToStart(14000)
+                .Scattering(5)
                 .duration(100)
                 .EUt(7680)
                 .buildAndRegister();

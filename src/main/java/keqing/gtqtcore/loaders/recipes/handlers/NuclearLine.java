@@ -1,15 +1,19 @@
 package keqing.gtqtcore.loaders.recipes.handlers;
 
+import gregtech.api.items.metaitem.MetaItem;
 import gregtech.api.metatileentity.multiblock.CleanroomType;
 import gregtech.api.unification.material.Material;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.BlockParticleAcceleratorCasing;
 
+import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
+import static gregtech.common.items.MetaItems.EMITTER_IV;
 import static gregtech.common.items.MetaItems.FLUID_CELL_LARGE_TUNGSTEN_STEEL;
 import static gregtech.common.metatileentities.MetaTileEntities.HULL;
+import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.BEAM_COLLECTION;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.PAC_RECIPES;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.Carbon16;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.Radium226;
@@ -21,15 +25,34 @@ public class NuclearLine {
     public static void init() {
         GRANULAR_SOURCE();
         //核素——》衰变后 + 种类 + 等级
-        PAc(Hydrogen, 1, 1);
-        PAc(Deuterium, 2, 1);
-        PAc(Tritium, 3, 1);
-        PAc(Helium, 4, 1);
+        PAc(Hydrogen,PROTON, 1, 1);
+        PAc(Deuterium,DEUTERON, 2, 1);
+        PAc(Tritium,TRITON, 3, 1);
+        PAc(Helium,ALPHA, 4, 1);
+        PAc(Sodium,POSITRON, 6, 1);
+        PAc(Calcium,CALCIUM_48_ION, 7, 1);
+        PAc(Boron,BORON_ION, 8, 1);
 
-        PA(Uranium238, Thorium, 4, 3);
-        PA(Plutonium238, Uranium236, 4, 4);
-        PA(Americium, Neptunium, 4, 5);
-        PA(Curium246, Plutonium244, 4, 6);
+        PA(Uranium238,ALPHA, Thorium, 4, 3);
+        PA(Plutonium238,ALPHA, Uranium236, 4, 4);
+        PA(Americium,ALPHA, Neptunium, 4, 5);
+        PA(Curium246,ALPHA, Plutonium244, 4, 6);
+
+        PAC_RECIPES.recipeBuilder()
+                .notConsumable(EMITTER_IV)
+                .duration(1000)
+                .output(ELECTRON)
+                .part(5)
+                .EUt(VA[EV])
+                .buildAndRegister();
+
+        BEAM_COLLECTION.recipeBuilder()
+                .notConsumable(EMITTER_IV)
+                .duration(200)
+                .output(ELECTRON,10)
+                .part(5)
+                .EUt(VA[EV])
+                .buildAndRegister();
 
         Radiation();
     }
@@ -77,25 +100,42 @@ public class NuclearLine {
 
     }
 
-    private static void PAc(Material material1, int kind, int tier) {
+    private static void PAc(Material material1, MetaItem<?>.MetaValueItem particle, int kind, int tier) {
         PAC_RECIPES.recipeBuilder()
                 .fluidInputs(material1.getFluid(1000))
-                .duration(1000 + tier * 1000)
-                .circuitMeta(kind)
+                .duration(1000)
+                .output(particle)
                 .part(kind)
-                .EUt(32)
+                .EUt(VA[EV+tier])
+                .buildAndRegister();
+
+        BEAM_COLLECTION.recipeBuilder()
+                .fluidInputs(material1.getFluid(1000))
+                .duration(200)
+                .output(particle,10)
+                .part(kind)
+                .EUt(VA[EV+tier])
                 .buildAndRegister();
     }
 
 
-    private static void PA(Material material1, Material material2, int kind, int tier) {
+    private static void PA(Material material1, MetaItem<?>.MetaValueItem particle, Material material2, int kind, int tier) {
         PAC_RECIPES.recipeBuilder()
-                .input(dust, material1)
-                .output(dust, material2)
-                .duration(1000 + tier * 1000)
-                .circuitMeta(kind)
+                .input(dustTiny, material1)
+                .output(dustTiny, material2)
+                .duration(1000)
+                .output(particle)
                 .part(kind)
-                .EUt(32)
+                .EUt(VA[EV+tier])
+                .buildAndRegister();
+
+        BEAM_COLLECTION.recipeBuilder()
+                .input(dustTiny, material1)
+                .output(dustTiny, material2)
+                .duration(200)
+                .output(particle,10)
+                .part(kind)
+                .EUt(VA[EV+tier])
                 .buildAndRegister();
     }
 
