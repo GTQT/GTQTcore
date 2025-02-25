@@ -65,7 +65,12 @@ public class CommonProxy {
             return GTQTMetaItems.SUPRACAUSAL_MAINFRAME.getStackForm();
         }
     };
-
+    public static final CreativeTabs GTQTCore_PC = new CreativeTabs("gtqtpc") {
+        @Override
+        public ItemStack createIcon() {
+            return GTQTMetaItems.PROGRAMMABLE_CIRCUIT_0.getStackForm();
+        }
+    };
     public static final CreativeTabs GTQTCore_BIO = new CreativeTabs("gtqtbio") {
         @Override
         public ItemStack createIcon() {

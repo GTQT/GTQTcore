@@ -114,6 +114,7 @@ public class GTQTRecipesManager {
         CleanWaterChain.init();
         KaptonChain.init();
         PowerSupply.init();
+        ProgrammableCircuit.init();
         AmmoniaChain.init();
         AdvancedLubricantChain.register();
         DrillingMudChain.register();

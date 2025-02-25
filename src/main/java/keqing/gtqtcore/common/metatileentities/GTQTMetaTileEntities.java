@@ -328,6 +328,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityPrimitiveRoaster PRIMITIVE_ROASTER;
     public static MetaTileEntityLargeExtractor LARGE_EXTRACTOR;
     public static MetaTileEntityLargeMixer LARGE_MIXER;
+    public static MetaTileEntityLargeDesulphurization LARGE_DESULPHURIZATION;
     public static MetaTileEntityNanoCoating NANO_COATING;
     public static MetaTileEntityCryogenicFreezer CRYOGENIC_FREEZER;
     public static MetaTileEntityHeatExchanger HEAT_CHANGER;
@@ -643,6 +644,7 @@ public class GTQTMetaTileEntities {
         LARGE_FORGING = registerMetaTileEntity(3258, new MetaTileEntityLargeForging(gtqtcoreId("large_forging")));
         LARGE_EXTRACTOR = registerMetaTileEntity(3259, new MetaTileEntityLargeExtractor(gtqtcoreId("large_extractor")));
         LARGE_MIXER = registerMetaTileEntity(3260, new MetaTileEntityLargeMixer(gtqtcoreId("large_mixer")));
+        LARGE_DESULPHURIZATION = registerMetaTileEntity(3261, new MetaTileEntityLargeDesulphurization(gtqtcoreId("large_desulphurization")));
 
         LV_PROCESSING_ARRAY = registerMetaTileEntity(3287, new MetaTileEntityProcessingArray(gtqtcoreId("lv_processing_array"), 1));
         MV_PROCESSING_ARRAY = registerMetaTileEntity(3288, new MetaTileEntityProcessingArray(gtqtcoreId("mv_processing_array"), 2));

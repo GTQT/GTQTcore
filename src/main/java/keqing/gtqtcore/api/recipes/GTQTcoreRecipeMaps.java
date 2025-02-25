@@ -266,7 +266,7 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<CasingComputationRecipeBuilder> MOLECULAR_TRANSFORMER_RECIPES;
     public static final RecipeMap<MiningDrillRecipeBuilder> MINING_DRILL_RECIPES;
     public static final RecipeMap<HeatRecipeBuilder> DISTILLATION_KETTLE;
-    public static final RecipeMap<SimpleRecipeBuilder> NANOHYBRID;
+    public static final RecipeMap<SimpleRecipeBuilder> DESULPHURIZATION_RECIPES;
     public static final RecipeMap<HeatRecipeBuilder> PYROLYSIS_TOWER;
     public static final RecipeMap<ComputationRecipeBuilder> LASER_ENGRAVING;
     public static final RecipeMap<ComputationRecipeBuilder> TD_PRINT_RECIPES;
@@ -442,6 +442,9 @@ public class GTQTcoreRecipeMaps {
                 .setProgressBar(GuiTextures.PROGRESS_BAR_COMPRESS, ProgressWidget.MoveType.HORIZONTAL)
                 .setSound(GTSoundEvents.ASSEMBLER);
 
+        DESULPHURIZATION_RECIPES = new RecipeMap<>("desulphurization_recipes", 0,0,2,2, new SimpleRecipeBuilder(), false)
+                .setSound(GTSoundEvents.CHEMICAL_REACTOR);
+
         COMPONENT_ASSEMBLY_LINE_RECIPES = new RecipeMapComponentAssemblyLine<>("component_assembly_line_recipes", 12, 1,  12, 0, new ComponentAssemblyLineRecipesTierRecipeBuilder(), false)
                 .setSound(GTSoundEvents.ASSEMBLER);
 
@@ -532,9 +535,6 @@ public class GTQTcoreRecipeMaps {
 
         PLASMA_FORGE = new RecipeMap<>("plasma_forge",
                 9, 9, 9, 9, new SimpleRecipeBuilder(), false);
-
-        NANOHYBRID = new RecipeMap<>("nanohybrid",
-                9, 1, 3, 0, new SimpleRecipeBuilder(), false);
 
         KEQING_NET_RECIES = new RecipeMap<>("keqing_net_recipes", 2, 1, 1, 0, new KQComputationRecipeBuilder(), false)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, ProgressWidget.MoveType.HORIZONTAL)

@@ -2,7 +2,6 @@ package keqing.gtqtcore.common.items;
 
 import gregtech.api.items.armor.ArmorMetaItem;
 import gregtech.api.items.metaitem.MetaItem;
-import keqing.gtqtcore.common.CommonProxy;
 import keqing.gtqtcore.common.items.armors.GTQTMetaArmor;
 import net.minecraft.item.EnumDyeColor;
 
@@ -15,6 +14,10 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem 你物品的名字，记得全大写;
      */
     public static final List<MetaItem<?>> ITEMS = GTQTMetaItem1.getMetaItems();
+    public static final MetaItem<?>.MetaValueItem[] ENDLESS_SPRAY_CAN_DYES = new MetaItem.MetaValueItem[EnumDyeColor
+            .values().length];
+    //  Extruders
+    public static final MetaItem<?>.MetaValueItem[] EXOTIC_SHAPE_EXTRUDERS = new MetaItem.MetaValueItem[27];
     public static MetaItem<?>.MetaValueItem JIAO_XIAN_REN_ZHANG;
     public static MetaItem<?>.MetaValueItem NONG_SUO_XIAN_REN_ZHANG;
     public static MetaItem<?>.MetaValueItem NONG_SUO_TANG_JIAO;
@@ -83,7 +86,6 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem CATALYST_PHOTOELECTRONIC;
     public static MetaItem<?>.MetaValueItem CATALYST_PARTICLE_ACCELERATION;
     public static MetaItem<?>.MetaValueItem CATALYST_SYNCHROTRON_CAPABLE;
-
     public static MetaItem<?>.MetaValueItem CATALYST_BED_BASE;
     public static MetaItem<?>.MetaValueItem CATALYST_BED_ULV;
     public static MetaItem<?>.MetaValueItem CATALYST_BED_LV;
@@ -100,7 +102,6 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem CATALYST_BED_UXV;
     public static MetaItem<?>.MetaValueItem CATALYST_BED_OpV;
     public static MetaItem<?>.MetaValueItem CATALYST_BED_MAX;
-
     public static MetaItem<?>.MetaValueItem SHEWANELLA_CULTURE;
     public static MetaItem<?>.MetaValueItem STREPTOCOCCUS_CULTURE;
     public static MetaItem<?>.MetaValueItem ESCHERICHIA_CULTURE;
@@ -188,32 +189,24 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem WRAP_SUPRACAUSAL_SMD_CAPACITOR;
     public static MetaItem<?>.MetaValueItem WRAP_SUPRACAUSAL_SMD_DIODE;
     public static MetaItem<?>.MetaValueItem WRAP_SUPRACAUSAL_SMD_INDUCTOR;
-
     public static MetaItem<?>.MetaValueItem WIND_ROTOR_STEEL;
     public static MetaItem<?>.MetaValueItem WIND_ROTOR_ALUMINIUM;
     public static MetaItem<?>.MetaValueItem WIND_ROTOR_STAINLESSSTEEL;
     public static MetaItem<?>.MetaValueItem WIND_ROTOR_TITANIUM;
     public static MetaItem<?>.MetaValueItem WIND_ROTOR_TUNGSTENSTEEL;
     public static MetaItem<?>.MetaValueItem WIND_ROTOR_RHODIUMPLATEDPALLADIUM;
-
     public static MetaItem<?>.MetaValueItem RADIATION_U235;
     public static MetaItem<?>.MetaValueItem RADIATION_U238;
     public static MetaItem<?>.MetaValueItem RADIATION_U241;
     public static MetaItem<?>.MetaValueItem RADIATION_U244;
     public static MetaItem<?>.MetaValueItem RADIATION_Am241;
-
     public static MetaItem<?>.MetaValueItem GRINDBALL_SOAPSTONE;
     public static MetaItem<?>.MetaValueItem GRINDBALL_ALUMINIUM;
     public static MetaItem<?>.MetaValueItem SODIUM_ETHYLXANTHATE;
     public static MetaItem<?>.MetaValueItem POTASSIUM_ETHYLXANTHATE;
-
     public static MetaItem<?>.MetaValueItem FIND_ORE_STICK;
-
     public static MetaItem<?>.MetaValueItem ENDLESS_SPRAY_SOLVENT;
     public static MetaItem<?>.MetaValueItem ENDLESS_SPRAY_EMPTY;
-    public static final MetaItem<?>.MetaValueItem[] ENDLESS_SPRAY_CAN_DYES = new MetaItem.MetaValueItem[EnumDyeColor
-            .values().length];
-
     public static MetaItem<?>.MetaValueItem ACRYLIC_YARN;
     public static MetaItem<?>.MetaValueItem HEAVY_METAL_ABSORBING_YARN;
     public static MetaItem<?>.MetaValueItem URANIUM_SATURATED_YARN;
@@ -221,7 +214,6 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem BORON_SATURATED_YARN;
     public static MetaItem<?>.MetaValueItem LITHIUM_SIEVE;
     public static MetaItem<?>.MetaValueItem LITHIUM_SATURATED_LITHIUM_SIEVE;
-
     public static MetaItem<?>.MetaValueItem ROUGH_BIOLOGY_RESIN;
     public static MetaItem<?>.MetaValueItem PURIFIED_ALUMINIUM_MIXTURE;
     public static MetaItem<?>.MetaValueItem CELLULOSE_PULP;
@@ -245,17 +237,14 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem COSMIC_RESISTOR;
     public static MetaItem<?>.MetaValueItem COSMIC_TRANSISTOR;
     public static MetaItem<?>.MetaValueItem COSMIC_INDUCTOR;
-
     public static MetaItem<?>.MetaValueItem WOODEN_BUCKET;
     public static MetaItem<?>.MetaValueItem FLUID_CELL_CHROME;
     public static MetaItem<?>.MetaValueItem FLUID_CELL_IRIDIUM;
     public static MetaItem<?>.MetaValueItem FLUID_CELL_NAQUADAH_ALLOY;
     public static MetaItem<?>.MetaValueItem FLUID_CELL_NEUTRONIUM;
-
     public static MetaItem<?>.MetaValueItem SCRAP;
     public static MetaItem<?>.MetaValueItem CD_ROM;
     public static MetaItem<?>.MetaValueItem UU_MATER;
-
     public static MetaItem<?>.MetaValueItem HIGH_REFLECT;
     public static MetaItem<?>.MetaValueItem REFLECT_GLASS;
     public static MetaItem<?>.MetaValueItem LASER_GROUP;
@@ -275,7 +264,6 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem CONTAINED_KERR_SINGULARITY;
     public static MetaItem<?>.MetaValueItem CONTAINED_HIGH_DENSITY_PROTONIC_MATTER;
     public static MetaItem<?>.MetaValueItem CONTAINED_EXOTIC_MATTER;
-
     public static MetaItem<?>.MetaValueItem SUN_MATTER;
     public static MetaItem<?>.MetaValueItem SUNLINSE;
     public static MetaItem<?>.MetaValueItem SUNNARIUMPART;
@@ -288,19 +276,16 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem ADV_CAPACITOR;
     public static MetaItem<?>.MetaValueItem ADV_COMPONENT_VENT;
     public static MetaItem<?>.MetaValueItem ADV_HEAT_EXCHANGE;
-
     public static MetaItem<?>.MetaValueItem ELECTRODE_GRAPHITE;
     public static MetaItem<?>.MetaValueItem ELECTRODE_SILVER;
     public static MetaItem<?>.MetaValueItem ELECTRODE_MOLOYBDENUM;
     public static MetaItem<?>.MetaValueItem ELECTRODE_GOLD;
     public static MetaItem<?>.MetaValueItem ELECTRODE_PLATINUM;
-
     public static MetaItem<?>.MetaValueItem DRILL_HEAD_STEEL;
     public static MetaItem<?>.MetaValueItem DRILL_HEAD_ALUMINIUM;
     public static MetaItem<?>.MetaValueItem DRILL_HEAD_STAINLESSSTEEL;
     public static MetaItem<?>.MetaValueItem DRILL_HEAD_TITANIUM;
     public static MetaItem<?>.MetaValueItem DRILL_HEAD_TUNGSTENSTEEL;
-
     public static MetaItem<?>.MetaValueItem SUPRACAUSAL_CAPACITOR;
     public static MetaItem<?>.MetaValueItem SUPRACAUSAL_DIODE;
     public static MetaItem<?>.MetaValueItem SUPRACAUSAL_RESISTOR;
@@ -326,7 +311,6 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem DUBNIUM_WAFER;
     public static MetaItem<?>.MetaValueItem CRYSTAL_INTERFACE_WAFER;
     public static MetaItem<?>.MetaValueItem CRYSTAL_INTERFACE_CHIP;
-
     public static MetaItem<?>.MetaValueItem RETICLE_UHASOC_WAFER;
     public static MetaItem<?>.MetaValueItem RETICLE_ZEPTO_PIC_WAFER;
     public static MetaItem<?>.MetaValueItem RETICLE_ATTO_PIC_WAFER;
@@ -346,7 +330,6 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem RICH_BACTERIA_SOC;
     public static MetaItem<?>.MetaValueItem ULTRASONIC_HOMOGENIZER;
     public static MetaItem<?>.MetaValueItem PIEZOELECTRIC_CRYSTAL;
-
     public static MetaItem<?>.MetaValueItem RYDBERG_SPINORIAL_ASSEMBLY;
     public static MetaItem<?>.MetaValueItem CRYOGENIC_INTERFACE;
     public static MetaItem<?>.MetaValueItem EXCITATION_MAINTAINER;
@@ -356,11 +339,9 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem X_RAY_MIRROR;
     public static MetaItem<?>.MetaValueItem MICROFOCUS_X_RAY_TUBE;
     public static MetaItem<?>.MetaValueItem EXOTIC_SOC;
-
     public static MetaItem<?>.MetaValueItem COSMIC_FABRIC;
     public static MetaItem<?>.MetaValueItem MEMORY_FOAM_PLATE;
     public static MetaItem<?>.MetaValueItem FULLERENE_FIBER;
-
     public static MetaItem<?>.MetaValueItem HELIUM_LASER;
     public static MetaItem<?>.MetaValueItem NEON_LASER;
     public static MetaItem<?>.MetaValueItem ARGON_LASER;
@@ -398,7 +379,6 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem AE_A;
     public static MetaItem<?>.MetaValueItem AE_B;
     public static MetaItem<?>.MetaValueItem AE_C;
-
     public static MetaItem<?>.MetaValueItem HEAT_SHIELD_MKI;
     public static MetaItem<?>.MetaValueItem HEAT_SHIELD_MKII;
     public static MetaItem<?>.MetaValueItem HEAT_SHIELD_MKIII;
@@ -413,38 +393,32 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem VOLTAGE_COIL_UXV;
     public static MetaItem<?>.MetaValueItem VOLTAGE_COIL_OpV;
     public static MetaItem<?>.MetaValueItem VOLTAGE_COIL_MAX;
-
     // Circuits
     // Gooware
     public static MetaItem<?>.MetaValueItem GOOWARE_PROCESSOR;
     public static MetaItem<?>.MetaValueItem GOOWARE_ASSEMBLY;
     public static MetaItem<?>.MetaValueItem GOOWARE_COMPUTER;
     public static MetaItem<?>.MetaValueItem GOOWARE_MAINFRAME;
-
     // Optical
     public static MetaItem<?>.MetaValueItem OPTICAL_PROCESSOR;
     public static MetaItem<?>.MetaValueItem OPTICAL_ASSEMBLY;
     public static MetaItem<?>.MetaValueItem OPTICAL_COMPUTER;
     public static MetaItem<?>.MetaValueItem OPTICAL_MAINFRAME;
-
     // Spintronic
     public static MetaItem<?>.MetaValueItem SPINTRONIC_PROCESSOR;
     public static MetaItem<?>.MetaValueItem SPINTRONIC_ASSEMBLY;
     public static MetaItem<?>.MetaValueItem SPINTRONIC_COMPUTER;
     public static MetaItem<?>.MetaValueItem SPINTRONIC_MAINFRAME;
-
     // Cosmic, name TBD
     public static MetaItem<?>.MetaValueItem COSMIC_PROCESSOR;
     public static MetaItem<?>.MetaValueItem COSMIC_ASSEMBLY;
     public static MetaItem<?>.MetaValueItem COSMIC_COMPUTER;
     public static MetaItem<?>.MetaValueItem COSMIC_MAINFRAME;
-
     // Supra-causal
     public static MetaItem<?>.MetaValueItem SUPRACAUSAL_PROCESSOR;
     public static MetaItem<?>.MetaValueItem SUPRACAUSAL_ASSEMBLY;
     public static MetaItem<?>.MetaValueItem SUPRACAUSAL_COMPUTER;
     public static MetaItem<?>.MetaValueItem SUPRACAUSAL_MAINFRAME;
-
     // Supra-chronal
     public static MetaItem<?>.MetaValueItem SUPRACHRONAL_ULV;
     public static MetaItem<?>.MetaValueItem SUPRACHRONAL_LV;
@@ -461,8 +435,6 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem SUPRACHRONAL_UXV;
     public static MetaItem<?>.MetaValueItem SUPRACHRONAL_OpV;
     public static MetaItem<?>.MetaValueItem SUPRACHRONAL_MAX;
-
-
     public static MetaItem<?>.MetaValueItem ASUPRACHRONAL_ULV;
     public static MetaItem<?>.MetaValueItem ASUPRACHRONAL_LV;
     public static MetaItem<?>.MetaValueItem ASUPRACHRONAL_MV;
@@ -488,9 +460,6 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem CRYSTAL_MODULATOR_DIAMOND;
     public static MetaItem<?>.MetaValueItem CRYSTAL_MODULATOR_SAPPHIRE;
     public static MetaItem<?>.MetaValueItem CRYSTAL_SYSTEM_ON_CHIP_SOCKET;
-
-    //  Extruders
-    public static final MetaItem<?>.MetaValueItem[] EXOTIC_SHAPE_EXTRUDERS = new MetaItem.MetaValueItem[27];
     public static MetaItem<?>.MetaValueItem EXOTIC_SHAPE_EXTRUDER_PLATE;
     public static MetaItem<?>.MetaValueItem EXOTIC_SHAPE_EXTRUDER_ROD;
     public static MetaItem<?>.MetaValueItem EXOTIC_SHAPE_EXTRUDER_BOLT;
@@ -771,6 +740,41 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem DISK_39;
     public static MetaItem<?>.MetaValueItem DISK_40;
 
+    public static MetaItem<?>.MetaValueItem PROGRAMMABLE_CIRCUIT_0;
+    public static MetaItem<?>.MetaValueItem PROGRAMMABLE_CIRCUIT_1;
+    public static MetaItem<?>.MetaValueItem PROGRAMMABLE_CIRCUIT_2;
+    public static MetaItem<?>.MetaValueItem PROGRAMMABLE_CIRCUIT_3;
+    public static MetaItem<?>.MetaValueItem PROGRAMMABLE_CIRCUIT_4;
+    public static MetaItem<?>.MetaValueItem PROGRAMMABLE_CIRCUIT_5;
+    public static MetaItem<?>.MetaValueItem PROGRAMMABLE_CIRCUIT_6;
+    public static MetaItem<?>.MetaValueItem PROGRAMMABLE_CIRCUIT_7;
+    public static MetaItem<?>.MetaValueItem PROGRAMMABLE_CIRCUIT_8;
+    public static MetaItem<?>.MetaValueItem PROGRAMMABLE_CIRCUIT_9;
+    public static MetaItem<?>.MetaValueItem PROGRAMMABLE_CIRCUIT_10;
+    public static MetaItem<?>.MetaValueItem PROGRAMMABLE_CIRCUIT_11;
+    public static MetaItem<?>.MetaValueItem PROGRAMMABLE_CIRCUIT_12;
+    public static MetaItem<?>.MetaValueItem PROGRAMMABLE_CIRCUIT_13;
+    public static MetaItem<?>.MetaValueItem PROGRAMMABLE_CIRCUIT_14;
+    public static MetaItem<?>.MetaValueItem PROGRAMMABLE_CIRCUIT_15;
+    public static MetaItem<?>.MetaValueItem PROGRAMMABLE_CIRCUIT_16;
+    public static MetaItem<?>.MetaValueItem PROGRAMMABLE_CIRCUIT_17;
+    public static MetaItem<?>.MetaValueItem PROGRAMMABLE_CIRCUIT_18;
+    public static MetaItem<?>.MetaValueItem PROGRAMMABLE_CIRCUIT_19;
+    public static MetaItem<?>.MetaValueItem PROGRAMMABLE_CIRCUIT_20;
+    public static MetaItem<?>.MetaValueItem PROGRAMMABLE_CIRCUIT_21;
+    public static MetaItem<?>.MetaValueItem PROGRAMMABLE_CIRCUIT_22;
+    public static MetaItem<?>.MetaValueItem PROGRAMMABLE_CIRCUIT_23;
+    public static MetaItem<?>.MetaValueItem PROGRAMMABLE_CIRCUIT_24;
+    public static MetaItem<?>.MetaValueItem PROGRAMMABLE_CIRCUIT_25;
+    public static MetaItem<?>.MetaValueItem PROGRAMMABLE_CIRCUIT_26;
+    public static MetaItem<?>.MetaValueItem PROGRAMMABLE_CIRCUIT_27;
+    public static MetaItem<?>.MetaValueItem PROGRAMMABLE_CIRCUIT_28;
+    public static MetaItem<?>.MetaValueItem PROGRAMMABLE_CIRCUIT_29;
+    public static MetaItem<?>.MetaValueItem PROGRAMMABLE_CIRCUIT_30;
+    public static MetaItem<?>.MetaValueItem PROGRAMMABLE_CIRCUIT_31;
+    public static MetaItem<?>.MetaValueItem PROGRAMMABLE_CIRCUIT_32;
+
+
     public static MetaItem<?>.MetaValueItem BIO_0;
     public static MetaItem<?>.MetaValueItem BIO_1;
     public static MetaItem<?>.MetaValueItem BIO_2;
@@ -866,7 +870,7 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem POS_ORE_CARD;
     public static MetaItem<?>.MetaValueItem ARROW_UP_MKI;
     public static MetaItem<?>.MetaValueItem ARROW_DOWN_MKI;
-    public static MetaItem<?>.MetaValueItem ARROW_LEFT_MKI ;
+    public static MetaItem<?>.MetaValueItem ARROW_LEFT_MKI;
     public static MetaItem<?>.MetaValueItem ARROW_RIGHT_MKI;
     public static MetaItem<?>.MetaValueItem END1;
     public static MetaItem<?>.MetaValueItem END2;
@@ -879,14 +883,14 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem BET4;
 
     public static MetaItem<?>.MetaValueItem ARROW_UP_MKII;
-    public static MetaItem<?>.MetaValueItem ARROW_DOWN_MKII ;
+    public static MetaItem<?>.MetaValueItem ARROW_DOWN_MKII;
     public static MetaItem<?>.MetaValueItem ARROW_LEFT_MKII;
-    public static MetaItem<?>.MetaValueItem ARROW_RIGHT_MKII ;
+    public static MetaItem<?>.MetaValueItem ARROW_RIGHT_MKII;
 
-    public static MetaItem<?>.MetaValueItem ARROW_UP_MKIII ;
+    public static MetaItem<?>.MetaValueItem ARROW_UP_MKIII;
     public static MetaItem<?>.MetaValueItem ARROW_DOWN_MKIII;
     public static MetaItem<?>.MetaValueItem ARROW_LEFT_MKIII;
-    public static MetaItem<?>.MetaValueItem ARROW_RIGHT_MKIII ;
+    public static MetaItem<?>.MetaValueItem ARROW_RIGHT_MKIII;
 
     public static MetaItem<?>.MetaValueItem DUAL_COVER_LV;
     public static MetaItem<?>.MetaValueItem DUAL_COVER_MV;
@@ -930,6 +934,7 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem MICROWAVE_ENERGY_RECEIVER_UXV;
     public static MetaItem<?>.MetaValueItem MICROWAVE_ENERGY_RECEIVER_OpV;
     public static MetaItem<?>.MetaValueItem COVER_ITEM_MACHINE_CONTROLLER;
+    public static MetaItem<?>.MetaValueItem COVER_PROGRAMMABLE_CIRCUIT;
     public static ArmorMetaItem<?>.ArmorMetaValueItem PISTON_BOOTS;
     // Process-Specific Components
     public static MetaItem<?>.MetaValueItem MAGNETRON;
@@ -940,19 +945,19 @@ public class GTQTMetaItems {
     // Nanotubes
     public static MetaItem<?>.MetaValueItem CARBON_ALLOTROPE_MIXTURE;
     public static MetaItem<?>.MetaValueItem GRAPHENE_ALIGNED_CNT;
+
     public static void initialization() {
         GTQT_META_ITEM = new GTQTMetaItem1();
         GTQT_META_BATTERY = new GTQTBattery();
-        GTQT_META_ARMOR=new GTQTMetaArmor();
+        GTQT_META_ARMOR = new GTQTMetaArmor();
 
     }
-    public static void initSubItems()
-    {
+
+    public static void initSubItems() {
         GTQTMetaItem1.registerItems();
         GTQTBattery.registerItems();
         GTQTMetaArmor.registerItems();
     }
-
 
 
 }

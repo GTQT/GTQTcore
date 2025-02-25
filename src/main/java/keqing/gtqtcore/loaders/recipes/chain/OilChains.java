@@ -10,8 +10,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
-import static gregtech.api.GTValues.LV;
-import static gregtech.api.GTValues.V;
+import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
@@ -27,9 +26,61 @@ public class OilChains {
         NewOil();       //新油电
         Pre();          //预处理
         Kettle();       //原始蒸馏
-        changjianya();  //常减压
-        jingzhihuishou();  //精致回收
-        cuihualiehua(); //催化裂化
+        atmosphericAndVacuumPressure();  //atmosphericAndVacuumPressure
+        exquisiteRecycling();  //exquisiteRecycling
+        catalyticCracking(); //catalyticCracking
+        Desulphurization();
+    }
+
+    private static void Desulphurization() {
+        DESULPHURIZATION_RECIPES.recipeBuilder()
+                .fluidInputs(SulfuricHeavyFuel.getFluid(800))
+                .fluidInputs(Hydrogen.getFluid(200))
+                .fluidOutputs(HydrogenSulfide.getFluid(100))
+                .fluidOutputs(HeavyFuel.getFluid(800))
+                .duration(20).EUt(VA[LV]).buildAndRegister();
+
+        DESULPHURIZATION_RECIPES.recipeBuilder()
+                .fluidInputs(SulfuricLightFuel.getFluid(1200))
+                .fluidInputs(Hydrogen.getFluid(200))
+                .fluidOutputs(HydrogenSulfide.getFluid(100))
+                .fluidOutputs(LightFuel.getFluid(1200))
+                .duration(20).EUt(VA[LV]).buildAndRegister();
+
+        DESULPHURIZATION_RECIPES.recipeBuilder()
+                .fluidInputs(SulfuricNaphtha.getFluid(1200))
+                .fluidInputs(Hydrogen.getFluid(200))
+                .fluidOutputs(HydrogenSulfide.getFluid(100))
+                .fluidOutputs(Naphtha.getFluid(1200))
+                .duration(20).EUt(VA[LV]).buildAndRegister();
+
+        DESULPHURIZATION_RECIPES.recipeBuilder()
+                .fluidInputs(SulfuricGas.getFluid(1600))
+                .fluidInputs(Hydrogen.getFluid(200))
+                .fluidOutputs(HydrogenSulfide.getFluid(100))
+                .fluidOutputs(RefineryGas.getFluid(1600))
+                .duration(20).EUt(VA[LV]).buildAndRegister();
+
+        DESULPHURIZATION_RECIPES.recipeBuilder()
+                .fluidInputs(NaturalGas.getFluid(1600))
+                .fluidInputs(Hydrogen.getFluid(200))
+                .fluidOutputs(HydrogenSulfide.getFluid(100))
+                .fluidOutputs(RefineryGas.getFluid(1600))
+                .duration(20).EUt(VA[LV]).buildAndRegister();
+
+        DESULPHURIZATION_RECIPES.recipeBuilder()
+                .fluidInputs(SDieselLight.getFluid(1600))
+                .fluidInputs(Hydrogen.getFluid(200))
+                .fluidOutputs(HydrogenSulfide.getFluid(100))
+                .fluidOutputs(DieselLight.getFluid(1600))
+                .duration(20).EUt(VA[LV]).buildAndRegister();
+
+        DESULPHURIZATION_RECIPES.recipeBuilder()
+                .fluidInputs(SDieselHeavy.getFluid(1600))
+                .fluidInputs(Hydrogen.getFluid(200))
+                .fluidOutputs(HydrogenSulfide.getFluid(100))
+                .fluidOutputs(DieselHeavy.getFluid(1600))
+                .duration(20).EUt(VA[LV]).buildAndRegister();
     }
 
     private static void Chemical() {
@@ -53,7 +104,7 @@ public class OilChains {
 
     }
 
-    private static void jingzhihuishou() {
+    private static void exquisiteRecycling() {
         //常压渣油 减压渣油产线
         /*
         CHEMICAL_RECIPES.recipeBuilder()
@@ -656,7 +707,7 @@ public class OilChains {
 
     }
 
-    private static void changjianya() {
+    private static void atmosphericAndVacuumPressure() {
         //含杂预处理
         DISTILLATION_RECIPES.recipeBuilder()
                 .fluidInputs(PreTreatedCrudeOilContainingImpurities.getFluid(4000))
@@ -759,7 +810,7 @@ public class OilChains {
                 .buildAndRegister();
     }
 
-    private static void cuihualiehua() {
+    private static void catalyticCracking() {
         lightlyCrack(DieselLight, LightlyHydroCrackedDieselLight, LightlySteamCrackedDieselLight);
         severelyCrack(DieselLight, SeverelyHydroCrackedDieselLight, SeverelySteamCrackedDieselLight);
 
