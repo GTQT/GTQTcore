@@ -150,7 +150,7 @@ public class MetaTileEntityVoidMiner extends MultiblockWithDisplayBase implement
 
     private IBlockState getCasingState() {
         if (this.tier == GTValues.LuV) {
-            return GTQTMetaBlocks.blockMultiblockCasing6.getState(RHODIUM_PLATED_PALLADIUM);
+            return GTQTMetaBlocks.blockMultiblockCasing6.getState(RHODIUM);
         } else if (this.tier == GTValues.ZPM) {
             return GTQTMetaBlocks.blockMultiblockCasing6.getState(OSMIRIDIUM);
         } else if (this.tier == GTValues.UV) {

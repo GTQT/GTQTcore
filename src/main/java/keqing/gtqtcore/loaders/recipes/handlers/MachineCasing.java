@@ -11,7 +11,6 @@ import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.BlockActiveUniqueCasing;
 import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing1;
-import keqing.gtqtcore.common.block.blocks.BlockIsaCasing;
 import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing3;
 import net.minecraft.util.IStringSerializable;
 
@@ -351,7 +350,7 @@ public class MachineCasing {
         createCasingRecipe("blue_steel", GTQTMetaBlocks.blockMultiblockCasing3, blue_steel, BlueSteel);
         createCasingRecipe("red_steel", GTQTMetaBlocks.blockMultiblockCasing3, red_steel, RedSteel);
         createCasingRecipe("tumbaga", GTQTMetaBlocks.blockMultiblockCasing3, tumbaga, Tumbaga);
-        createCasingRecipe("rhodium_plated_palladium", GTQTMetaBlocks.blockMultiblockCasing6, RHODIUM_PLATED_PALLADIUM, RhodiumPlatedPalladium);
+        createCasingRecipe("rhodium", GTQTMetaBlocks.blockMultiblockCasing6, RHODIUM, Rhodium);
         createCasingRecipe("osmiridium", GTQTMetaBlocks.blockMultiblockCasing6, OSMIRIDIUM, Osmiridium);
         createCasingRecipe("neutronium", GTQTMetaBlocks.blockMultiblockCasing6, NEUTRONIUM, Neutronium);
 

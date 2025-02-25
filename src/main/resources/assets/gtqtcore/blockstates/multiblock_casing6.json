@@ -8,7 +8,7 @@
   },
   "variants": {
     "variant": {
-      "rhodium_plated_palladium": {
+      "rhodium": {
         "model": "minecraft:cube_all",
         "textures": {
           "all": "gregtech:blocks/multiblock/casing/rhodium_plated_palladium"

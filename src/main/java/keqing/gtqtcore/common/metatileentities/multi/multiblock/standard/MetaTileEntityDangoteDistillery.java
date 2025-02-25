@@ -1,15 +1,12 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
-import gregtech.api.capability.IDistillationTower;
+import com.cleanroommc.modularui.utils.FluidTankHandler;
 import gregtech.api.capability.IMultipleTankHandler;
-import gregtech.api.capability.impl.DistillationTowerLogicHandler;
+import gregtech.api.capability.impl.FluidTankList;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
-import gregtech.api.metatileentity.multiblock.IMultiblockPart;
-import gregtech.api.metatileentity.multiblock.MultiMapMultiblockController;
-import gregtech.api.metatileentity.multiblock.MultiblockAbility;
-import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
+import gregtech.api.metatileentity.multiblock.*;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
@@ -17,19 +14,19 @@ import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.material.Materials;
-import gregtech.api.util.GTTransferUtils;
-import gregtech.api.util.GTUtility;
-import gregtech.api.util.RelativeDirection;
-import gregtech.api.util.TextComponentUtil;
+import gregtech.api.util.*;
 import gregtech.client.renderer.ICubeRenderer;
+import gregtech.client.renderer.texture.Textures;
 import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
 import gregtech.client.utils.TooltipHelper;
-import gregtech.common.blocks.BlockBoilerCasing;
 import gregtech.common.blocks.BlockGlassCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityFluidHatch;
+import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockPart;
 import gregtech.core.sound.GTSoundEvents;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
+import keqing.gtqtcore.api.utils.GTQTLog;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing3;
@@ -44,6 +41,8 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.IFluidTank;
+import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.IItemHandlerModifiable;
@@ -52,29 +51,30 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import static gregtech.api.GTValues.*;
 import static gregtech.api.util.RelativeDirection.*;
 
-public class MetaTileEntityDangoteDistillery extends MultiMapMultiblockController implements IDistillationTower {
-    protected final DistillationTowerLogicHandler handler;
-
+public class MetaTileEntityDangoteDistillery extends MultiMapMultiblockController {
     public MetaTileEntityDangoteDistillery(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{
+                RecipeMaps.DISTILLERY_RECIPES,
                 RecipeMaps.DISTILLATION_RECIPES,
                 GTQTcoreRecipeMaps.MOLECULAR_DISTILLATION_RECIPES
         });
         this.recipeMapWorkable = new DangoteDistilleryRecipeLogic(this);
-        this.handler = new DistillationTowerLogicHandler(this);
+
+    }
+
+    @Override
+    public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
+        return new MetaTileEntityDangoteDistillery(metaTileEntityId);
     }
 
     @Override
     public boolean canBeDistinct() {
         return true;
-    }
-
-    public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
-        return new MetaTileEntityDangoteDistillery(this.metaTileEntityId);
     }
 
     @Override
@@ -83,45 +83,6 @@ public class MetaTileEntityDangoteDistillery extends MultiMapMultiblockControlle
     }
 
     @Override
-    public boolean allowsExtendedFacing() {
-        return false;
-    }
-
-    @Override
-    protected void addDisplayText(List<ITextComponent> textList) {
-        if (isStructureFormed()) {
-            FluidStack stackInTank = importFluids.drain(Integer.MAX_VALUE, false);
-            if (stackInTank != null && stackInTank.amount > 0) {
-                ITextComponent fluidName = TextComponentUtil.setColor(GTUtility.getFluidTranslation(stackInTank),
-                        TextFormatting.AQUA);
-                textList.add(TextComponentUtil.translationWithColor(
-                        TextFormatting.GRAY,
-                        "gregtech.multiblock.distillation_tower.distilling_fluid",
-                        fluidName));
-            }
-        }
-        super.addDisplayText(textList);
-    }
-
-    @Override
-    protected void formStructure(PatternMatchContext context) {
-        super.formStructure(context);
-        if (!usesAdvHatchLogic() || this.structurePattern == null) return;
-        handler.determineLayerCount(this.structurePattern);
-        handler.determineOrderedFluidOutputs();
-    }
-
-    protected boolean usesAdvHatchLogic() {
-        return getCurrentRecipeMap() == RecipeMaps.DISTILLATION_RECIPES;
-    }
-
-    @Override
-    public void invalidateStructure() {
-        super.invalidateStructure();
-        if (usesAdvHatchLogic())
-            this.handler.invalidate();
-    }
-
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start(RIGHT, FRONT, UP)
                 .aisle(" CSC  ", "CCCCCC", "CCCCCC", "CCCCCC", " CCC  ")
@@ -149,16 +110,7 @@ public class MetaTileEntityDangoteDistillery extends MultiMapMultiblockControlle
                 .build();
     }
 
-    @Override
-    public boolean allowSameFluidFillForOutputs() {
-        return !usesAdvHatchLogic();
-    }
 
-    @Override
-    public int getFluidOutputLimit() {
-        if (usesAdvHatchLogic()) return this.handler.getLayerCount();
-        else return super.getFluidOutputLimit();
-    }
     protected IBlockState getFrameState() {
         return MetaBlocks.FRAMES.get(Materials.Naquadah).getBlock(Materials.Naquadah);
     }
@@ -166,45 +118,57 @@ public class MetaTileEntityDangoteDistillery extends MultiMapMultiblockControlle
     protected IBlockState getGlassState() {
         return MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.TEMPERED_GLASS);
     }
-    
+
     protected IBlockState getPipeCasingState() {
         return GTQTMetaBlocks.blockMultiblockCasing4.getState(BlockMultiblockCasing4.TurbineCasingType.NQ_MACHINE_CASING);
-    }
-    public boolean hasMufflerMechanics() {
-        return false;
     }
 
     private IBlockState getCasingState() {
         return GTQTMetaBlocks.blockMultiblockCasing3.getState(BlockMultiblockCasing3.CasingType.HC_ALLOY_CASING);
     }
 
-    public SoundEvent getBreakdownSound() {
-        return GTSoundEvents.BREAKDOWN_ELECTRICAL;
+    @Override
+    protected void addDisplayText(List<ITextComponent> textList) {
+        if (isStructureFormed()) {
+            FluidStack stackInTank = importFluids.drain(Integer.MAX_VALUE, false);
+            if (stackInTank != null && stackInTank.amount > 0) {
+                ITextComponent fluidName = TextComponentUtil.setColor(GTUtility.getFluidTranslation(stackInTank),
+                        TextFormatting.AQUA);
+                textList.add(TextComponentUtil.translationWithColor(
+                        TextFormatting.GRAY,
+                        "gregtech.multiblock.distillation_tower.distilling_fluid",
+                        fluidName));
+            }
+        }
+        super.addDisplayText(textList);
     }
 
+
     @SideOnly(Side.CLIENT)
+    @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
         return GTQTTextures.HC_ALLOY_CASING;
     }
 
     @SideOnly(Side.CLIENT)
-    @Nonnull
     @Override
-    protected OrientedOverlayRenderer getFrontOverlay() {
-        return GTQTTextures.CHEMICAL_DRYER_OVERLAY;
+    protected ICubeRenderer getFrontOverlay() {
+        return Textures.DISTILLATION_TOWER_OVERLAY;
     }
 
     @Override
-    public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, boolean advanced) {
+    public void addInformation(ItemStack stack,
+                               World player,
+                               List<String> tooltip,
+                               boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
-        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("超级蒸馏塔", new Object[0]));
-        tooltip.add(I18n.format("gtqtcore.machine.dangote_distillery.tooltip.1"));
-        tooltip.add(I18n.format("gtqtcore.machine.dangote_distillery.tooltip.2"));
-        tooltip.add(I18n.format("gtqtcore.machine.dangote_distillery.tooltip.3"));
-        tooltip.add(I18n.format("gtqtcore.machine.dangote_distillery.tooltip.4"));
-        tooltip.add(I18n.format("gtqtcore.machine.dangote_distillery.tooltip.5"));
-        tooltip.add(I18n.format("gtqtcore.machine.dangote_distillery.tooltip.6"));
-        tooltip.add(I18n.format("gtqtcore.machine.dangote_distillery.tooltip.7"));
+        tooltip.add(I18n.format("gtlitecore.machine.dangote_distillery.tooltip.1"));
+        tooltip.add(I18n.format("gtlitecore.machine.dangote_distillery.tooltip.2"));
+        tooltip.add(I18n.format("gtlitecore.machine.dangote_distillery.tooltip.3"));
+        tooltip.add(I18n.format("gtlitecore.machine.dangote_distillery.tooltip.4"));
+        tooltip.add(I18n.format("gtlitecore.machine.dangote_distillery.tooltip.5"));
+        tooltip.add(I18n.format("gtlitecore.machine.dangote_distillery.tooltip.6"));
+        tooltip.add(I18n.format("gtlitecore.machine.dangote_distillery.tooltip.7"));
     }
 
     protected class DangoteDistilleryRecipeLogic extends MultiblockRecipeLogic {
@@ -221,6 +185,7 @@ public class MetaTileEntityDangoteDistillery extends MultiMapMultiblockControlle
             return this.getRecipeMap() == RecipeMaps.DISTILLATION_RECIPES;
         }
 
+        @Override
         public void setMaxProgress(int maxProgress) {
             if (isDistilleryMode()) {
                 this.maxProgressTime = maxProgress / 4;
@@ -231,95 +196,20 @@ public class MetaTileEntityDangoteDistillery extends MultiMapMultiblockControlle
             }
         }
 
-        private int ParallelTier(int tier) {
-            return 4 * (tier * 4);
-        }
-
-        private int HigherParallelTier(int tier) {
-            return 12 * (tier * 4);
-        }
-
-        private int getTier(long vol) {
-            for (int i = 0; i < V.length; i++) {
-                if (V[i] == vol) {
-                    return i;
-                }
-            }
-            return 0;
-        }
-
         @Override
         public int getParallelLimit() {
-            if (this.getMaxVoltage() > V[MAX]) {    //  For MAX+, get 4 * 15 * 4
-                return HigherParallelTier(15);
+            if (this.getMaxVoltage() > V[MAX]) { //  For MAX+, get (12 * 15 * 4) = 720.
+                return 720;
             }
-            int tier = getTier(getMaxVoltage());
+            int tier = GTUtility.getTierByVoltage(getMaxVoltage());
             if (tier == 0) {
                 return 1;
             }
             if (tier <= UV) {
-                return ParallelTier(getTier(getMaxVoltage()));
+                return 4 * (tier * 4);
             } else {
-                return HigherParallelTier(getTier(getMaxVoltage()));
+                return 12 * (tier * 4);
             }
-        }
-
-        @Override
-        protected void outputRecipeOutputs() {
-            if (usesAdvHatchLogic()) {
-                GTTransferUtils.addItemsToItemHandler(getOutputInventory(), false, itemOutputs);
-                handler.applyFluidToOutputs(fluidOutputs, true);
-            } else {
-                super.outputRecipeOutputs();
-            }
-        }
-
-        @Override
-        protected boolean setupAndConsumeRecipeInputs(Recipe recipe,
-                                                      IItemHandlerModifiable importInventory,
-                                                      IMultipleTankHandler importFluids) {
-            if (!usesAdvHatchLogic()) {
-                return super.setupAndConsumeRecipeInputs(recipe, importInventory, importFluids);
-            }
-
-            this.overclockResults = calculateOverclock(recipe);
-
-            modifyOverclockPost(overclockResults, recipe.getRecipePropertyStorage());
-
-            if (!hasEnoughPower(overclockResults)) {
-                return false;
-            }
-
-            IItemHandlerModifiable exportInventory = getOutputInventory();
-
-            // We have already trimmed outputs and chanced outputs at this time
-            // Attempt to merge all outputs + chanced outputs into the output bus, to prevent voiding chanced outputs
-            if (!metaTileEntity.canVoidRecipeItemOutputs() &&
-                    !GTTransferUtils.addItemsToItemHandler(exportInventory, true, recipe.getAllItemOutputs())) {
-                this.isOutputsFull = true;
-                return false;
-            }
-
-            // Perform layerwise fluid checks
-            if (!metaTileEntity.canVoidRecipeFluidOutputs() &&
-                    !handler.applyFluidToOutputs(recipe.getAllFluidOutputs(), false)) {
-                this.isOutputsFull = true;
-                return false;
-            }
-
-            this.isOutputsFull = false;
-            if (recipe.matches(true, importInventory, importFluids)) {
-                this.metaTileEntity.addNotifiedInput(importInventory);
-                return true;
-            }
-            return false;
-        }
-
-        @Override
-        protected IMultipleTankHandler getOutputTank() {
-            if (usesAdvHatchLogic())
-                return handler.getFluidTanks();
-            return super.getOutputTank();
         }
     }
 }

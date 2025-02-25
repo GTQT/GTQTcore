@@ -332,12 +332,12 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         CATALYST_SYNCHROTRON_CAPABLE = this.addItem(247, "catalyst.synchrotron_capable").addOreDict("catalystSynchrotronCapable").addComponents(new CatalystBehavior()).setCreativeTabs(CommonProxy.GTQTCore_CH);
 
         //催化剂框架 6种绰绰有余
-        CATALYST_FRAMEWORK_I = this.addItem(250, "catalyst_framework_i").addComponents(new CatalystBehavior()).setCreativeTabs(CommonProxy.GTQTCore_CH);
-        CATALYST_FRAMEWORK_II = this.addItem(251, "catalyst_framework_ii").addComponents(new CatalystBehavior()).setCreativeTabs(CommonProxy.GTQTCore_CH);
-        CATALYST_FRAMEWORK_III = this.addItem(252, "catalyst_framework_iii").addComponents(new CatalystBehavior()).setCreativeTabs(CommonProxy.GTQTCore_CH);
-        CATALYST_FRAMEWORK_IV = this.addItem(253, "catalyst_framework_iv").addComponents(new CatalystBehavior()).setCreativeTabs(CommonProxy.GTQTCore_CH);
-        CATALYST_FRAMEWORK_V = this.addItem(254, "catalyst_framework_v").addComponents(new CatalystBehavior()).setCreativeTabs(CommonProxy.GTQTCore_CH);
-        CATALYST_FRAMEWORK_VI = this.addItem(255, "catalyst_framework_vi").addComponents(new CatalystBehavior()).setCreativeTabs(CommonProxy.GTQTCore_CH);
+        CATALYST_FRAMEWORK_I = this.addItem(250, "catalyst_framework_i").addComponents(new CatalystBehavior(false,4)).setCreativeTabs(CommonProxy.GTQTCore_CH);
+        CATALYST_FRAMEWORK_II = this.addItem(251, "catalyst_framework_ii").addComponents(new CatalystBehavior(false,4)).setCreativeTabs(CommonProxy.GTQTCore_CH);
+        CATALYST_FRAMEWORK_III = this.addItem(252, "catalyst_framework_iii").addComponents(new CatalystBehavior(false,4)).setCreativeTabs(CommonProxy.GTQTCore_CH);
+        CATALYST_FRAMEWORK_IV = this.addItem(253, "catalyst_framework_iv").addComponents(new CatalystBehavior(false,4)).setCreativeTabs(CommonProxy.GTQTCore_CH);
+        CATALYST_FRAMEWORK_V = this.addItem(254, "catalyst_framework_v").addComponents(new CatalystBehavior(false,4)).setCreativeTabs(CommonProxy.GTQTCore_CH);
+        CATALYST_FRAMEWORK_VI = this.addItem(255, "catalyst_framework_vi").addComponents(new CatalystBehavior(false,4)).setCreativeTabs(CommonProxy.GTQTCore_CH);
         CATALYST_FRAMEWORK_BLANK = this.addItem(256, "catalyst_framework_blank").setCreativeTabs(CommonProxy.GTQTCore_CH);
 
         CATALYST_BED_BASE = this.addItem(260, "catalyst_bed.base").addOreDict("catalystBedEmpty").setCreativeTabs(CommonProxy.GTQTCore_CH);

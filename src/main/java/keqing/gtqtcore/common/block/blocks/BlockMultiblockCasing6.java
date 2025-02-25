@@ -23,7 +23,7 @@ public class BlockMultiblockCasing6 extends VariantBlock<BlockMultiblockCasing6.
         setResistance(10.0f);
         setSoundType(SoundType.METAL);
         this.setHarvestLevel("wrench", 1);
-        setDefaultState(getState(CasingType.RHODIUM_PLATED_PALLADIUM));
+        setDefaultState(getState(CasingType.RHODIUM));
     }
 
     @Override
@@ -32,7 +32,7 @@ public class BlockMultiblockCasing6 extends VariantBlock<BlockMultiblockCasing6.
     }
 
     public enum CasingType implements IStringSerializable, IStateHarvestLevel {
-        RHODIUM_PLATED_PALLADIUM("rhodium_plated_palladium",4),
+        RHODIUM("rhodium",4),
         OSMIRIDIUM("osmiridium",4),
         NEUTRONIUM("neutronium",4);
 
