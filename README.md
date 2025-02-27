@@ -45,7 +45,7 @@ GTQT Core 不仅是拓展了所有终局游戏阶段，而是彻底修改了整�
 
 * 物品，方块与多方块结构的基本思路来自 [Gregicality Science](https://github.com/GregTechCEu/gregicality-science).
 * 一些代码来自 [Nomi Labs](https://github.com/Nomi-CEu/Nomi-Labs)，采用 [GNU LGPL-3.0](https://github.com/Nomi-CEu/Nomi-Labs/blob/main/LICENSE) 协议.
-* 一些代码来自 [GTLite Core](https://github.com/Nomi-CEu/Nomi-Labs)，采用 [MIT](https://gitlab.com/gregtech-lite/gregtech-lite-core/-/blob/test-magic-sweepy/LICENSE) 协议.
+* 一些代码来自 [GTLite Core](https://gitlab.com/gregtech-lite/gregtech-lite-core)，采用 [MIT](https://gitlab.com/gregtech-lite/gregtech-lite-core/-/blob/test-magic-sweepy/LICENSE) 协议.
 * 一些材质，多方块结构与处理线路来自 [Gregicality Legacy](https://github.com/GregTechCEu/gregicality-legacy)，采用 [GNU GPL-3.0](https://github.com/GregTechCEu/gregicality-legacy/blob/master/LICENSE) 协议.
 * 一些材质，多方块结构与处理线路来自 [GregTech++](https://github.com/GTNewHorizons/GTplusplus)，采用 [GNU GPL-3.0](https://github.com/GTNewHorizons/GTplusplus/blob/master/LICENSE) 协议.
 * 一些材质，多方块结构与处理线路来自 [GregTech 5 Unofficial](https://github.com/GTNewHorizons/GT5-Unofficial) on [GNU LGPL-3.0](https://github.com/GTNewHorizons/GT5-Unofficial/blob/master/LICENSE.txt) 协议.
