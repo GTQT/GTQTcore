@@ -5,4 +5,5 @@ public interface IHeat {
     double getHeat();
     double setHeat(int temp);
     void balanceHeat(int outsideTemp,int tick);
+    void addHeat(int outsidePower,int tick);
 }

@@ -208,4 +208,14 @@ public class MetaTileEntityHeatHatch extends MetaTileEntityMultiblockPart implem
         // 更新内部温度
         if (heat + totalChange < maxHeat) heat += totalChange;
     }
+
+    @Override
+    public void addHeat(int outsidePower, int tick) {
+        // 根据 tick 调整热交换系数
+        double adjustedHeatingCoefficient = HEATING_COEFFICIENT * (tick / 10.0);
+        // 总温度变化量
+        double totalChange = adjustedHeatingCoefficient * outsidePower;
+        // 更新内部温度
+        if (heat + totalChange < maxHeat) heat += totalChange;
+    }
 }
