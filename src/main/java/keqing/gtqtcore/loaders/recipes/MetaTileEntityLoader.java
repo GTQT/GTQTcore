@@ -1550,14 +1550,14 @@ public class MetaTileEntityLoader {
 
         ModHandler.addShapedRecipe(true, "latex_collector.bronze",
                 STEAM_LATEX_COLLECTOR[0].getStackForm(), "XCX", "PMP", "XCX",
-                'M', MetaBlocks.STEAM_CASING.getItemVariant(BRONZE_HULL),
+                'M', STEAM_EXTRACTOR_BRONZE.getStackForm(),
                 'C', new UnificationEntry(OrePrefix.pipeSmallFluid, Bronze),
                 'X', new UnificationEntry(OrePrefix.plate, Rubber),
                 'P', new UnificationEntry(gear, Bronze));
 
         ModHandler.addShapedRecipe(true, "latex_collector.steel",
                 STEAM_LATEX_COLLECTOR[1].getStackForm(), "XCX", "PMP", "XCX",
-                'M', MetaTileEntities.STEAM_COMPRESSOR_BRONZE.getStackForm(),
+                'M', STEAM_EXTRACTOR_STEEL.getStackForm(),
                 'C', new UnificationEntry(OrePrefix.pipeSmallFluid, Steel),
                 'X', new UnificationEntry(OrePrefix.plate, Rubber),
                 'P', new UnificationEntry(gear, Steel));
