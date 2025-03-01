@@ -1,6 +1,7 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
 
+import gregtech.api.capability.IMultipleTankHandler;
 import gregtech.api.capability.IOpticalComputationHatch;
 import gregtech.api.capability.IOpticalComputationProvider;
 import gregtech.api.capability.IOpticalComputationReceiver;
@@ -22,6 +23,7 @@ import gregtech.client.utils.TooltipHelper;
 import gregtech.core.sound.GTSoundEvents;
 import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
+import keqing.gtqtcore.api.metaileentity.GTQTOCMultiblockController;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.utils.GTQTUtil;
@@ -42,7 +44,7 @@ import java.util.List;
 
 import static gregtech.api.GTValues.V;
 
-public class MetaTileEntityLaserEngraving extends MultiMapMultiblockController implements IOpticalComputationReceiver {
+public class MetaTileEntityLaserEngraving extends GTQTOCMultiblockController{
     private int glass_tier;
     private int laser_tier;
     private int tier;
@@ -55,6 +57,15 @@ public class MetaTileEntityLaserEngraving extends MultiMapMultiblockController i
                 GTQTcoreRecipeMaps.CW_LASER_ENGRAVER_RECIPES
         });
         this.recipeMapWorkable = new LaserEngravingWorkableHandler(this);
+
+        setTierFlag(true);
+        //setTier(auto);
+        setMaxParallel(1);//初始化
+        setMaxParallelFlag(true);
+        //setMaxVoltage(auto);
+        setMaxVoltageFlag(true);
+        setTimeReduce(1);//初始化
+        setTimeReduceFlag(true);
     }
 
     @Override
@@ -162,11 +173,6 @@ public class MetaTileEntityLaserEngraving extends MultiMapMultiblockController i
         }
     }
 
-    @Override
-    public String[] getDescription() {
-        return new String[]{I18n.format("gtqt.tooltip.update")};
-    }
-
     public IOpticalComputationProvider getComputationProvider() {
         return this.computationProvider;
     }
@@ -209,6 +215,9 @@ public class MetaTileEntityLaserEngraving extends MultiMapMultiblockController i
                 () -> ((WrappedIntTired) glass_tier).getIntTier(),
                 0);
 
+        setTier(Math.min(this.tier, this.glass_tier));
+        setMaxVoltage(Math.min(this.tier, this.laser_tier * 2));
+
         this.writeCustomData(GTQTValue.UPDATE_TIER1, buf -> buf.writeInt(this.tier));
     }
 
@@ -216,14 +225,6 @@ public class MetaTileEntityLaserEngraving extends MultiMapMultiblockController i
     @Override
     public void invalidateStructure() {
         super.invalidateStructure();
-    }
-
-    protected int getLaserTier() {
-        return this.laser_tier;
-    }
-
-    protected int getGlass_tier() {
-        return this.glass_tier;
     }
 
     @Override
@@ -236,39 +237,21 @@ public class MetaTileEntityLaserEngraving extends MultiMapMultiblockController i
         return true;
     }
 
-
-    protected class LaserEngravingWorkableHandler extends ComputationRecipeLogic {
+    protected class LaserEngravingWorkableHandler extends GTQTOCMultiblockLogic {
         public LaserEngravingWorkableHandler(RecipeMapMultiblockController tileEntity) {
-            super(tileEntity, ComputationType.SPORADIC);
-        }
-
-        private boolean isPrecise() {
-            return this.getRecipeMap() == GTQTcoreRecipeMaps.LASER_ENGRAVING;
-        }
-
-        public void setMaxProgress(int maxProgress) {
-            if (isPrecise()) {
-                this.maxProgressTime = maxProgress;
-            } else {
-                this.maxProgressTime = maxProgress / 2;
-            }
-        }
-
-        public long getMaxVoltage() {
-            return V[Math.min(tier, laser_tier * 2)];
+            super(tileEntity);
         }
 
         @Override
-        public int getParallelLimit() {
-            if (isPrecise()) {
-                return 1;
+        public void update() {
+            super.update();
+            if (this.getRecipeMap() == GTQTcoreRecipeMaps.LASER_ENGRAVING) {
+                setTimeReduce(1);
+                setMaxParallel(glass_tier + laser_tier);
             } else {
-                return glass_tier;
+                setTimeReduce(0.5);
+                setMaxParallel(glass_tier * laser_tier);
             }
-        }
-        @Override
-        protected long getMaxParallelVoltage() {
-            return super.getMaxVoltage();
         }
     }
 }

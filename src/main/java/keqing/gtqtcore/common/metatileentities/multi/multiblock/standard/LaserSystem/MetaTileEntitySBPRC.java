@@ -86,7 +86,6 @@ public class MetaTileEntitySBPRC extends MetaTileEntityBaseWithControl implement
         super(metaTileEntityId);
         this.containerInventory = new GTItemStackHandler(this, 3);
     }
-
     private static IBlockState getCasingState() {
         return GTQTMetaBlocks.blockMultiblockCasing4.getState(NQ_TURBINE_CASING);
     }

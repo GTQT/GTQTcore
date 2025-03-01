@@ -14,9 +14,7 @@ gt.tool.class.soldering_iron=电烙铁
 item.gt.tool.universal_spade.name=%s万用铲
 item.gt.tool.combination_wrench.name=%s两用扳手
 item.gt.tool.soldering_iron_hv.tooltip=小心烫手！
-# AE
-item.large_portable_cell_2048.name=大型便携元件（2048）
-item.large_portable_cell_8192.name=大型便携元件（8192）
+
 ##  Extruders
 metaitem.shape.exotic_extruder.plate.name= 无尽 模头（板）
 metaitem.shape.exotic_extruder.plate.tooltip=用来制作板的超强模头
@@ -2035,7 +2033,7 @@ gregtech.material.potassium_bisulfite=亚硫酸氢钾
 gregtech.material.potassium_carbonate=碳酸钾
 gregtech.material.nitrous_acid=亚硝酸
 gregtech.material.potassium_nitrite=亚硝酸钾
-gregtech.material.barium_dichloride=三氯化钡
+gregtech.material.barium_dichloride=二氯化钡
 gregtech.material.hydroxylamine_hydrochloride=盐酸羟胺
 gregtech.material.barium_sulfate_suspension=硫酸钡悬浊液
 gregtech.material.ammonium_acetate=乙酸铵

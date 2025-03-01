@@ -234,16 +234,7 @@ public class MaterialOreChains {
                 .blastFurnaceTemp(5600)
                 .buildAndRegister();
 
-        BLAST_RECIPES.recipeBuilder()
-                .duration(140)
-                .EUt(VA[HV])
-                .input(dust, Sphalerite, 2)
-                .fluidInputs(Oxygen.getFluid(5000))
-                .output(dust, RoastedSphalerite, 3)
-                .output(dust, ZincOxide, 2)
-                .fluidOutputs(SulfurDioxide.getFluid(1000))
-                .blastFurnaceTemp(3600)
-                .buildAndRegister();
+
 
         BLAST_RECIPES.recipeBuilder()
                 .duration(120)

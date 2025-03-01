@@ -1323,7 +1323,7 @@ public class FirstDegreeMaterials {
                 .dust()
                 .color(0xBF6700)
                 .iconSet(BRIGHT)
-                .components(Barium, 1, Chlorine, 2)
+                .components(Barium, 1, Chlorine, 3)
                 .build();
 
         //  24238 Barium Sulfate Suspension

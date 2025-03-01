@@ -40,6 +40,7 @@ import keqing.gtqtcore.common.items.GTQTMetaItems;
 import keqing.gtqtcore.common.metatileentities.multi.multiblockpart.MetaTileEntityMicrowaveEnergyReceiver;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -68,6 +69,27 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
     private final ItemStackHandler inputCardInventory;
     private final ItemStackHandler outputCardInventory;
     private final ItemStackHandler pssInventory;
+
+    @Override
+    public void onRemoval() {
+        super.onRemoval();
+
+        var pos = getPos();
+        if (!inputCardInventory.getStackInSlot(0).isEmpty()) {
+            getWorld().spawnEntity(new EntityItem(getWorld(), pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, inputCardInventory.getStackInSlot(0)));
+            inputCardInventory.extractItem(0, 1, false);
+        }
+        if (!outputCardInventory.getStackInSlot(0).isEmpty()) {
+            getWorld().spawnEntity(new EntityItem(getWorld(), pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, outputCardInventory.getStackInSlot(0)));
+            outputCardInventory.extractItem(0, 1, false);
+        }
+        if (!pssInventory.getStackInSlot(0).isEmpty()) {
+            getWorld().spawnEntity(new EntityItem(getWorld(), pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, pssInventory.getStackInSlot(0)));
+            pssInventory.extractItem(0, 1, false);
+        }
+    }
+
+
     MetaTileEntityPowerSubstation PSSmte;
     int[] pssPos=new int[3];
     boolean pssModel;

@@ -14,9 +14,6 @@ gt.tool.class.soldering_iron=Soldering Iron
 item.gt.tool.universal_spade.name=%s Universal Spade
 item.gt.tool.combination_wrench.name=%s Combination Wrench
 item.gt.tool.soldering_iron_hv.tooltip=Be careful of burns!
-# AE
-item.large_portable_cell_2048.name=Large portable components（2048）
-item.large_portable_cell_8192.name=Large portable components（8192）
 ## Extruders
 metaitem.shape.exotic_extruder.plate.name= Endless Extruder (Plate)
 metaitem.shape.exotic_extruder.plate.tooltip=Superior extruder for crafting plates

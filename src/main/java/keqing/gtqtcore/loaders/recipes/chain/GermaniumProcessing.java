@@ -21,15 +21,16 @@ import static gregtech.api.unification.ore.OrePrefix.dust;
 public class GermaniumProcessing {
 
     public static void init() {
-        // ZnS + 5O -> GeO2 + ZnO + SO2
-        ROASTER_RECIPES.recipeBuilder()
+        BLAST_RECIPES.recipeBuilder()
+                .duration(140)
+                .EUt(VA[HV])
                 .input(dust, Sphalerite, 2)
                 .fluidInputs(Oxygen.getFluid(5000))
                 .output(dust, RoastedSphalerite, 3)
                 .output(dust, ZincOxide, 2)
                 .fluidOutputs(SulfurDioxide.getFluid(1000))
-                .temperature(3600)
-                .duration(200).EUt(VA[HV]).buildAndRegister();
+                .blastFurnaceTemp(3600)
+                .buildAndRegister();
 
         // GeO2 + 2Zn -> Zn2(GeO2)
         MIXER_RECIPES.recipeBuilder()

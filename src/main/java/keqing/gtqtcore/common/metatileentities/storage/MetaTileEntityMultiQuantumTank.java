@@ -933,6 +933,7 @@ public class MetaTileEntityMultiQuantumTank extends MetaTileEntity implements IT
         public int lockId;
         public boolean isLocked;
         public FluidStack lockedFluid;
+
         public MuitlQuantumFluidTank(int capacity, int lockId) {
             super(capacity);
             this.lockId = lockId;
