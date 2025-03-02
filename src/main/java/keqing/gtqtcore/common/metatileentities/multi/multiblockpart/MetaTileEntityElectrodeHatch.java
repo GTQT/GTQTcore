@@ -28,11 +28,14 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
 
@@ -47,6 +50,12 @@ public class MetaTileEntityElectrodeHatch extends MetaTileEntityMultiblockPart i
     int tier;
     boolean work=false;
 
+    @Override
+    public <T> T getCapability(Capability<T> capability, EnumFacing side) {
+        return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY ?
+                CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(this.containerInventory) :
+                super.getCapability(capability, side);
+    }
     @Override
     public void onRemoval() {
         super.onRemoval();

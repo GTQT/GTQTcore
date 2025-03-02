@@ -46,6 +46,43 @@ public class YeastLine {
                     .fluidOutputs(Water.getFluid(6000))
                     .buildAndRegister();
         }
+        // Algae + 6Na2CO3(H2O) -> 4C6H10O5 + 2C5H10O5 + 6NaC6H7O6(H2O) + 6CO2 + 6H2O
+        CHEMICAL_PLANT.recipeBuilder().duration(600).EUt(1920)
+                .input(CELLULOSE_FIBER_YELLOW,2)
+                .input(dust, Diatomite)
+                .fluidInputs(SodiumCarbonateSolution.getFluid(6000))
+                .output(dust, Cellulose,64)
+                .output(dust, Xylose,20)
+                .fluidOutputs(Biomass.getFluid(540))
+                .fluidOutputs(SodiumAlginateSolution.getFluid(6000))
+                .fluidOutputs(CarbonDioxide.getFluid(6000))
+                .fluidOutputs(Water.getFluid(6000))
+                .buildAndRegister();
+
+        CHEMICAL_PLANT.recipeBuilder().duration(600).EUt(1920)
+                .input(CELLULOSE_FIBER_RED,2)
+                .input(dust, Diatomite)
+                .fluidInputs(SodiumCarbonateSolution.getFluid(6000))
+                .output(dust, Cellulose,64)
+                .output(dust, Xylose,20)
+                .fluidOutputs(Biomass.getFluid(540))
+                .fluidOutputs(SodiumAlginateSolution.getFluid(6000))
+                .fluidOutputs(CarbonDioxide.getFluid(6000))
+                .fluidOutputs(Water.getFluid(6000))
+                .buildAndRegister();
+
+        CHEMICAL_PLANT.recipeBuilder().duration(600).EUt(1920)
+                .input(CELLULOSE_FIBER_GREEN,2)
+                .input(dust, Diatomite)
+                .fluidInputs(SodiumCarbonateSolution.getFluid(6000))
+                .output(dust, Cellulose,64)
+                .output(dust, Xylose,20)
+                .fluidOutputs(Biomass.getFluid(540))
+                .fluidOutputs(SodiumAlginateSolution.getFluid(6000))
+                .fluidOutputs(CarbonDioxide.getFluid(6000))
+                .fluidOutputs(Water.getFluid(6000))
+                .buildAndRegister();
+
         CRACKING_RECIPES.recipeBuilder()
                 .duration(400)
                 .EUt(VA[EV])

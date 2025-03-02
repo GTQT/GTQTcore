@@ -58,7 +58,7 @@ public class CatalystBehavior extends AbstractMaterialPartBehavior implements II
                 return 100 * (tier + 1);
             }
         } else {
-            return 50;
+            return 200;
         }
     }
 

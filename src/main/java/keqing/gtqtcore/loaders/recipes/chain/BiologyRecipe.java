@@ -134,7 +134,7 @@ public class BiologyRecipe {
         ASSEMBLER_RECIPES.recipeBuilder()
                 .notConsumable(getBiologyCircuitData(4))
                 .input(GTQTMetaItems.GREEN_ALGAE, 2)
-                .output(GTQTMetaItems.CELLULOSE_FIBER)
+                .output(GTQTMetaItems.CELLULOSE_FIBER_GREEN)
                 .EUt(16).duration(30)
                 .buildAndRegister();
 
@@ -241,14 +241,14 @@ public class BiologyRecipe {
         //Algae Acid
         LARGE_CHEMICAL_RECIPES.recipeBuilder()
                 .input(GTQTMetaItems.ALGAE_ACID, 2)
-                .input(GTQTMetaItems.CELLULOSE_FIBER, 8)
+                .input(GTQTMetaItems.CELLULOSE_FIBER_GREEN, 8)
                 .output(GTQTMetaItems.CELLULOSE_PULP, 10)
                 .EUt(16).duration(200)
                 .buildAndRegister();
 
         CHEMICAL_RECIPES.recipeBuilder()
                 .input(GTQTMetaItems.ALGAE_ACID, 1)
-                .input(GTQTMetaItems.CELLULOSE_FIBER, 4)
+                .input(GTQTMetaItems.CELLULOSE_FIBER_GREEN, 4)
                 .output(GTQTMetaItems.CELLULOSE_PULP, 5)
                 .EUt(16).duration(100)
                 .buildAndRegister();
@@ -256,7 +256,7 @@ public class BiologyRecipe {
         //Cellulose Fiber
         GTQTcoreRecipeMaps.CHEMICAL_PLANT.recipeBuilder()
                 .recipeLevel(1)
-                .input(GTQTMetaItems.CELLULOSE_FIBER, 8)
+                .input(GTQTMetaItems.CELLULOSE_FIBER_GREEN, 8)
                 .input(GTQTMetaItems.CELLULOSE_FIBER_YELLOW, 6)
                 .input(GTQTMetaItems.CELLULOSE_FIBER_RED, 4)
                 .fluidInputs(Materials.Methane.getFluid(2000))
@@ -267,27 +267,27 @@ public class BiologyRecipe {
                 .buildAndRegister();
 
         MACERATOR_RECIPES.recipeBuilder()
-                .input(GTQTMetaItems.CELLULOSE_FIBER, 3)
+                .input(GTQTMetaItems.CELLULOSE_FIBER_GREEN, 3)
                 .output(GTQTMetaItems.COMPOST)
                 .EUt(2).duration(400)
                 .buildAndRegister();
 
         EXTRACTOR_RECIPES.recipeBuilder()
-                .input(GTQTMetaItems.CELLULOSE_FIBER, 3)
+                .input(GTQTMetaItems.CELLULOSE_FIBER_GREEN, 3)
                 .fluidOutputs(Materials.Methanol.getFluid(250))
                 .EUt(30).duration(37)
                 .buildAndRegister();
 
         ASSEMBLER_RECIPES.recipeBuilder()
                 .notConsumable(getBiologyCircuitData(2))
-                .input(GTQTMetaItems.CELLULOSE_FIBER, 4)
+                .input(GTQTMetaItems.CELLULOSE_FIBER_GREEN, 4)
                 .output(GTQTMetaItems.WOOD_PELLETS, 8)
                 .EUt(7).duration(16)
                 .buildAndRegister();
 
         EXTRUDER_RECIPES.recipeBuilder()
                 .notConsumable(GTQTMetaItems.PELLETS_MOULD)
-                .input(GTQTMetaItems.CELLULOSE_FIBER, 4)
+                .input(GTQTMetaItems.CELLULOSE_FIBER_GREEN, 4)
                 .output(GTQTMetaItems.WOOD_PELLETS)
                 .EUt(16).duration(66)
                 .buildAndRegister();
@@ -308,7 +308,7 @@ public class BiologyRecipe {
 
         GTQTcoreRecipeMaps.CHEMICAL_PLANT.recipeBuilder()
                 .recipeLevel(1)
-                .input(GTQTMetaItems.CELLULOSE_FIBER, 8)
+                .input(GTQTMetaItems.CELLULOSE_FIBER_GREEN, 8)
                 .input(GTQTMetaItems.CELLULOSE_FIBER_YELLOW, 6)
                 .input(GTQTMetaItems.CELLULOSE_FIBER_RED, 4)
                 .fluidInputs(Materials.Methane.getFluid(2000))

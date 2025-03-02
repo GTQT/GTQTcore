@@ -30,6 +30,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -156,7 +157,9 @@ public class MetaTileEntityCatalystHatch extends MetaTileEntityMultiblockPart im
 
     @Override
     public <T> T getCapability(Capability<T> capability, EnumFacing side) {
-        return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY ? CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(this.catalystHolder) : super.getCapability(capability, side);
+        return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY ?
+                CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(this.catalystHolder) :
+                super.getCapability(capability, side);
     }
 
     @Override

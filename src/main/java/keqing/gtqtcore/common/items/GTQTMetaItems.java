@@ -217,7 +217,7 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem ROUGH_BIOLOGY_RESIN;
     public static MetaItem<?>.MetaValueItem PURIFIED_ALUMINIUM_MIXTURE;
     public static MetaItem<?>.MetaValueItem CELLULOSE_PULP;
-    public static MetaItem<?>.MetaValueItem CELLULOSE_FIBER;
+    public static MetaItem<?>.MetaValueItem CELLULOSE_FIBER_GREEN;
     public static MetaItem<?>.MetaValueItem CELLULOSE_FIBER_RED;
     public static MetaItem<?>.MetaValueItem CELLULOSE_FIBER_YELLOW;
     public static MetaItem<?>.MetaValueItem COMPOST;

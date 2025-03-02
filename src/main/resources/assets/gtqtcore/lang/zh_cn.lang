@@ -3036,7 +3036,7 @@ gtqtcore.machine.power_supply.supply.5.name=超导矩阵供能模块（§cV§r�
 gtqtcore.machine.power_supply.supply.6.name=超导矩阵供能模块（§eVI§r）
 gtqtcore.machine.power_supply.supply.7.name=超导矩阵供能模块（§aVII§r）
 gtqtcore.machine.power_supply.supply.8.name=超导矩阵供能模块（§eVIII§r）
-gtqtcore.machine.power_supply.supply.9.name=超导矩阵供能模块（§aVVI§r）
+gtqtcore.machine.power_supply.supply.9.name=超导矩阵供能模块（§aIX§r）
 gtqtcore.machine.power_supply.supply.10.name=超导矩阵供能模块（§aX§r）
 
 gtqtcore.machine.laser_switch.name=高能激光分配单元
