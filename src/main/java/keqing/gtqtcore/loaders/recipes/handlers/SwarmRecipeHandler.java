@@ -193,11 +193,14 @@ public class SwarmRecipeHandler {
                 .EUt(VA[LuV + getTIerByAmount(totalInputAmount)]);
 
         for (MaterialStack component : material.getMaterialComponents()) {
-            totalInputAmount += (int) component.amount;
-            if (component.material.hasProperty(PropertyKey.INGOT) || component.material.hasProperty(PropertyKey.DUST)) {
-                if (component.material.hasProperty(PropertyKey.FLUID))
-                    builder2.fluidInputs(component.material.getFluid((int) (144 * component.amount)));
-                else builder2.input(ingot, component.material, (int) component.amount);
+            if (component.material.hasProperty(PropertyKey.DUST)) {
+
+                if (component.material.hasProperty(PropertyKey.FLUID)) builder2.fluidInputs(component.material.getFluid((int) (144 * component.amount)));
+
+                else if (component.material.hasProperty(PropertyKey.INGOT))builder2.input(ingot, component.material, (int) component.amount);
+
+                else builder2.input(dust, component.material, (int) component.amount);
+
             } else if (component.material.hasProperty(PropertyKey.FLUID)) {
                 Fluid fluid = component.material.getFluid();
                 if (fluid == null) {
@@ -207,8 +210,13 @@ public class SwarmRecipeHandler {
             }
         }
         // finish builder
-        if (material.hasProperty(PropertyKey.FLUID)) builder2.fluidOutputs(material.getFluid(totalInputAmount * 144));
-        else builder2.output(ingot, material, totalInputAmount);
+        if (material.hasProperty(PropertyKey.FLUID)&&!material.hasProperty(PropertyKey.DUST))
+            builder2.fluidOutputs(material.getFluid(totalInputAmount * 1000));
+        else if (material.hasProperty(PropertyKey.FLUID)&&material.hasProperty(PropertyKey.DUST))
+            builder2.fluidOutputs(material.getFluid(totalInputAmount * 144));
+        else if (material.hasProperty(PropertyKey.INGOT))
+            builder2.output(ingot, material, totalInputAmount);
+        else builder2.output(dust, material, totalInputAmount);
         // register recipe
         builder2.buildAndRegister();
         /////////////////////////////////////////////////////////////////////////////

@@ -1560,7 +1560,12 @@ public class FirstDegreeMaterials {
                 .components(Methane, 78, HydrogenSulfide, 21, Neon, 7, Radon, 2)
                 .build();
 
-        getMaterialsId();
+        OganessonBreedingBase = new Material.Builder(getMaterialsId(), gregtechId("oganesson_breeding_base"))
+                .liquid()
+                .color(0xA65A7F)
+                .components(Oganesson, 1)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
 
         //离散态素魔力
         GTQTMaterials.MagicGas = new Material.Builder(getMaterialsId(), gregtechId("magic_gas"))

@@ -84,7 +84,10 @@ public class GCYSElementMaterials {
                 .build();
 
         Taranium = new Material.Builder(getMaterialsId(), gregtechId("taranium"))
-                .dust()
+                .ingot()
+                .fluid()
+                .plasma()
+                .itemPipeProperties(1920, 128)
                 .color(0x4F404F).iconSet(METALLIC)
                 .flags(GENERATE_FOIL,GENERATE_DENSE,GENERATE_FINE_WIRE,GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_RING, GENERATE_ROUND, GENERATE_BOLT_SCREW, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR,GENERATE_ROTOR)
                 .element(GTQTElements.Tn)

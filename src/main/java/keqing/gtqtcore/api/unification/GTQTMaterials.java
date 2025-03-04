@@ -71,6 +71,7 @@ public class GTQTMaterials {
     public static Material Infinity;
     public static Material Rhugnor;
     public static Material Hypogen;
+    public static Material OganessonBreedingBase;
     public static Material Californium252;
     public static Material AstralTitanium;
     public static Material CelestialTungsten;

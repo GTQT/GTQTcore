@@ -80,6 +80,7 @@ public class GTQTElementMaterials {
         MetastableOganesson = new Material.Builder(getMaterialsId(), gregtechId("metastable_oganesson"))
                 .ingot()
                 .gas()
+                .plasma()
                 .color(0xE61C24)
                 .iconSet(SHINY)
                 .element(Elements.Og)
@@ -278,7 +279,7 @@ public class GTQTElementMaterials {
                 .build();
         //  26025 Mithril
         GTQTMaterials.Mithril = new Material.Builder(getMaterialsId(), gregtechId("mithril"))
-                .ingot()
+                .ingot().plasma()
                 .liquid(new FluidBuilder().temperature(4450))
                 .color(0x428fdb)
                 .iconSet(DULL)
@@ -288,6 +289,7 @@ public class GTQTElementMaterials {
                         GENERATE_FRAME,GENERATE_DOUBLE_PLATE,GENERATE_DENSE,GENERATE_LONG_ROD,GENERATE_ROUND,GENERATE_SMALL_GEAR
                         ,GENERATE_SPRING,GENERATE_SPRING_SMALL)
                 .build();
+
         //  26026 Bismuth-209
         GTQTMaterials.Bismuth209 = new Material.Builder(getMaterialsId(), gregtechId("bismuth_209"))
                 .fluid()

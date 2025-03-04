@@ -256,8 +256,8 @@ public class MetaTileEntityPowerSupply extends MultiblockWithDisplayBase {
                 .aisle("SCCCCCCCCCCCCCCC")
                 .where('S', selfPredicate())
                 .where('C', abilities(POWER_SUPPLY_ABILITY)
-                        .or(abilities(MultiblockAbility.OUTPUT_ENERGY).setMaxLayerLimited(4).setMinGlobalLimited(0))
-                        .or(abilities(MultiblockAbility.INPUT_ENERGY).setMaxLayerLimited(4).setMinGlobalLimited(0)))
+                        .or(abilities(MultiblockAbility.OUTPUT_ENERGY).setMaxLayerLimited(8).setMinGlobalLimited(0))
+                        .or(abilities(MultiblockAbility.INPUT_ENERGY).setMaxLayerLimited(8).setMinGlobalLimited(0)))
                 .build();
     }
 

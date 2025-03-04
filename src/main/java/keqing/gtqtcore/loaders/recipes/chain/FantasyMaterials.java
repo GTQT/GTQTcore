@@ -1,5 +1,6 @@
 package keqing.gtqtcore.loaders.recipes.chain;
 
+import gregtech.api.fluids.store.FluidStorageKeys;
 import gregtech.api.recipes.GTRecipeHandler;
 import gregtech.api.recipes.ingredients.IntCircuitIngredient;
 import gregtech.api.unification.OreDictUnifier;
@@ -7,6 +8,8 @@ import gregtech.common.items.MetaItems;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
+import static gregtech.common.items.MetaItems.*;
+import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.TD_PRINT_RECIPES;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
@@ -14,6 +17,7 @@ import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.dust;
 import static gregtech.api.unification.ore.OrePrefix.ingotHot;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
+import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 import static supercritical.api.unification.material.SCMaterials.Zircon;
 
 public class FantasyMaterials {
@@ -22,6 +26,100 @@ public class FantasyMaterials {
         adamantium();
         orichalcum();
         vibranium();
+        MetastableOganessonChain();
+    }
+    private static void MetastableOganessonChain() {
+        GTRecipeHandler.removeRecipesByInputs(TD_PRINT_RECIPES,
+                new ItemStack[]{SHAPE_MOLD_INGOT.getStackForm()},
+                new FluidStack[]{MetastableOganesson.getFluid(144)});
+
+        GTRecipeHandler.removeRecipesByInputs(TD_PRINT_RECIPES,
+                new ItemStack[]{SHAPE_MOLD_BLOCK.getStackForm()},
+                new FluidStack[]{MetastableOganesson.getFluid(1296)});
+
+        GTRecipeHandler.removeRecipesByInputs(TD_PRINT_RECIPES,
+                new ItemStack[]{SHAPE_MOLD_NUGGET.getStackForm()},
+                new FluidStack[]{MetastableOganesson.getFluid(144)});
+
+        GTRecipeHandler.removeRecipesByInputs(TD_PRINT_RECIPES,
+                new ItemStack[]{SHAPE_MOLD_PLATE.getStackForm()},
+                new FluidStack[]{MetastableOganesson.getFluid(144)});
+
+        GTRecipeHandler.removeRecipesByInputs(TD_PRINT_RECIPES,
+                new ItemStack[]{SHAPE_MOLD_ROD_LONG.getStackForm()},
+                new FluidStack[]{MetastableOganesson.getFluid(144)});
+
+        GTRecipeHandler.removeRecipesByInputs(TD_PRINT_RECIPES,
+                new ItemStack[]{SHAPE_MOLD_RING.getStackForm()},
+                new FluidStack[]{MetastableOganesson.getFluid(36)});
+
+        GTRecipeHandler.removeRecipesByInputs(TD_PRINT_RECIPES,
+                new ItemStack[]{SHAPE_MOLD_ROD.getStackForm()},
+                new FluidStack[]{MetastableOganesson.getFluid(72)});
+
+        GTRecipeHandler.removeRecipesByInputs(TD_PRINT_RECIPES,
+                new ItemStack[]{SHAPE_MOLD_BOLT.getStackForm()},
+                new FluidStack[]{MetastableOganesson.getFluid(18)});
+
+        GTRecipeHandler.removeRecipesByInputs(TD_PRINT_RECIPES,
+                new ItemStack[]{SHAPE_MOLD_SCREW.getStackForm()},
+                new FluidStack[]{MetastableOganesson.getFluid(18)});
+
+        GTRecipeHandler.removeRecipesByInputs(TD_PRINT_RECIPES,
+                new ItemStack[]{SHAPE_MOLD_ROUND.getStackForm()},
+                new FluidStack[]{MetastableOganesson.getFluid(18)});
+        /////////////////////////////////////////////////////////////////////
+
+        GTRecipeHandler.removeRecipesByInputs(FLUID_SOLIDFICATION_RECIPES,
+                new ItemStack[]{SHAPE_MOLD_INGOT.getStackForm()},
+                new FluidStack[]{MetastableOganesson.getFluid(144)});
+
+        GTRecipeHandler.removeRecipesByInputs(FLUID_SOLIDFICATION_RECIPES,
+                new ItemStack[]{SHAPE_MOLD_BLOCK.getStackForm()},
+                new FluidStack[]{MetastableOganesson.getFluid(1296)});
+
+        GTRecipeHandler.removeRecipesByInputs(FLUID_SOLIDFICATION_RECIPES,
+                new ItemStack[]{SHAPE_MOLD_NUGGET.getStackForm()},
+                new FluidStack[]{MetastableOganesson.getFluid(144)});
+
+        GTRecipeHandler.removeRecipesByInputs(FLUID_SOLIDFICATION_RECIPES,
+                new ItemStack[]{SHAPE_MOLD_PLATE.getStackForm()},
+                new FluidStack[]{MetastableOganesson.getFluid(144)});
+
+        GTRecipeHandler.removeRecipesByInputs(FLUID_SOLIDFICATION_RECIPES,
+                new ItemStack[]{SHAPE_MOLD_ROD_LONG.getStackForm()},
+                new FluidStack[]{MetastableOganesson.getFluid(144)});
+
+        GTRecipeHandler.removeRecipesByInputs(FLUID_SOLIDFICATION_RECIPES,
+                new ItemStack[]{SHAPE_MOLD_RING.getStackForm()},
+                new FluidStack[]{MetastableOganesson.getFluid(36)});
+
+        GTRecipeHandler.removeRecipesByInputs(FLUID_SOLIDFICATION_RECIPES,
+                new ItemStack[]{SHAPE_MOLD_ROD.getStackForm()},
+                new FluidStack[]{MetastableOganesson.getFluid(72)});
+
+        GTRecipeHandler.removeRecipesByInputs(FLUID_SOLIDFICATION_RECIPES,
+                new ItemStack[]{SHAPE_MOLD_BOLT.getStackForm()},
+                new FluidStack[]{MetastableOganesson.getFluid(18)});
+
+        GTRecipeHandler.removeRecipesByInputs(FLUID_SOLIDFICATION_RECIPES,
+                new ItemStack[]{SHAPE_MOLD_SCREW.getStackForm()},
+                new FluidStack[]{MetastableOganesson.getFluid(18)});
+
+        GTRecipeHandler.removeRecipesByInputs(FLUID_SOLIDFICATION_RECIPES,
+                new ItemStack[]{SHAPE_MOLD_ROUND.getStackForm()},
+                new FluidStack[]{MetastableOganesson.getFluid(18)});
+
+        //  Metastable Oganesson liquid -> Metastable Oganesson hot ingot
+        VACUUM_RECIPES.recipeBuilder()
+                .notConsumable(SHAPE_MOLD_INGOT)
+                .fluidInputs(MetastableOganesson.getFluid(L))
+                .fluidInputs(Helium.getFluid(FluidStorageKeys.LIQUID, 500))
+                .output(ingotHot, MetastableOganesson)
+                .fluidOutputs(Helium.getFluid(FluidStorageKeys.GAS, 500))
+                .EUt(VA[UV])
+                .duration(100)
+                .buildAndRegister();
     }
 
     private static void adamantium() {

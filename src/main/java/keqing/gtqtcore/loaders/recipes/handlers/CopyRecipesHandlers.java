@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 import static gregtech.api.GTValues.*;
+import static gregtech.api.recipes.RecipeMaps.VACUUM_RECIPES;
 import static gregtech.api.unification.material.Materials.*;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
 import static keqing.gtqtcore.api.utils.GTQTUtil.*;
@@ -134,6 +135,13 @@ public class CopyRecipesHandlers {
                     .fluidInputs(fluidInputs.get(0).copyWithAmount(1000))
                     .fluidOutputs(new FluidStack(fluidOutputs.get(0).getFluid(),1000))
                     .duration(baseDuration)
+                    .EUt(VA[LuV])
+                    .buildAndRegister();
+
+            VACUUM_RECIPES.recipeBuilder()
+                    .fluidInputs(fluidInputs.get(0).copyWithAmount(1000))
+                    .fluidOutputs(new FluidStack(fluidOutputs.get(0).getFluid(),1000))
+                    .duration(baseDuration*5)
                     .EUt(VA[ZPM])
                     .buildAndRegister();
         }

@@ -1,13 +1,16 @@
 package keqing.gtqtcore.loaders.recipes.chain;
 
 
+import gregtech.api.metatileentity.multiblock.CleanroomType;
+
 import static gregtech.api.GTValues.*;
 import static gregtech.api.GTValues.UEV;
-import static gregtech.api.recipes.RecipeMaps.FUSION_RECIPES;
-import static gregtech.api.recipes.RecipeMaps.PLASMA_GENERATOR_FUELS;
+import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.Materials.Titanium;
 import static gregtechfoodoption.GTFOMaterialHandler.Blood;
+import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 
 public class FusionLoader {
 
@@ -396,7 +399,34 @@ public class FusionLoader {
                 .duration(10 * SECOND)
                 .EUToStart(420000000L) // MK3
                 .buildAndRegister();
-/*
+
+        //  Titanium + Californium -> Oganesson Breeding Base
+        FUSION_RECIPES.recipeBuilder()
+                .fluidInputs(Titanium.getFluid(L * 2))
+                .fluidInputs(Californium.getFluid(L * 2))
+                .fluidOutputs(OganessonBreedingBase.getFluid(L * 4))
+                .EUt(VA[UV])
+                .duration(5 * SECOND)
+                .EUToStart(420000000L) // MK4
+                .buildAndRegister();
+
+        //  Oganesson Breeding Base + Curium -> Hot Oganesson
+        FUSION_RECIPES.recipeBuilder()
+                .fluidInputs(OganessonBreedingBase.getFluid(L))
+                .fluidInputs(Curium.getFluid(36))
+                .fluidOutputs(MetastableOganesson.getPlasma(L))
+                .EUt(VA[UV])
+                .duration(5 * SECOND)
+                .EUToStart(420000000L) // MK4
+                .buildAndRegister();
+
+        PLASMA_GENERATOR_FUELS.recipeBuilder()
+                .fluidInputs(MetastableOganesson.getPlasma(1))
+                .fluidOutputs(MetastableOganesson.getFluid(1))
+                .EUt((int) V[EV])
+                .duration((int) (20.8 * SECOND))
+                .buildAndRegister();
+
         //  Orichalcum + Zirconium -> Mithril
         FUSION_RECIPES.recipeBuilder()
                 .fluidInputs(Orichalcum.getFluid(16))
@@ -405,6 +435,13 @@ public class FusionLoader {
                 .EUt(VA[UV])
                 .duration(3 * SECOND)
                 .EUToStart(450000000L) // MK3
+                .buildAndRegister();
+
+        PLASMA_GENERATOR_FUELS.recipeBuilder()
+                .fluidInputs(Mithril.getPlasma(1))
+                .fluidOutputs(Mithril.getFluid(1))
+                .EUt((int) V[EV])
+                .duration((int) (16.2 * SECOND))
                 .buildAndRegister();
 
         //  Neon + Bedrock -> Taranium (plasma)
@@ -416,7 +453,14 @@ public class FusionLoader {
                 .duration((int) (3.2 * SECOND))
                 .EUToStart(360000000L) // MK3
                 .buildAndRegister();
-*/
+
+        PLASMA_GENERATOR_FUELS.recipeBuilder()
+                .fluidInputs(Taranium.getPlasma(1))
+                .fluidOutputs(Taranium.getFluid(1))
+                .EUt((int) V[EV])
+                .duration((int) (13.8 * SECOND))
+                .buildAndRegister();
+
         /* -------------------------------- MK4 -------------------------------- */
 
         //  Radon (plasma) + Nitrogen (plasma) -> Neptunium (plasma)
@@ -490,16 +534,6 @@ public class FusionLoader {
                 .EUToStart(650000000L) // MK4
                 .buildAndRegister();
 /*
-        //  Oganesson Breeding Base + Curium -> Hot Oganesson
-        FUSION_RECIPES.recipeBuilder()
-                .fluidInputs(OganessonBreedingBase.getFluid(L))
-                .fluidInputs(Curium.getFluid(36))
-                .fluidOutputs(MetastableOganesson.getFluid(L))
-                .EUt(VA[UHV])
-                .duration(5 * SECOND)
-                .EUToStart(700000000L) // MK4
-                .buildAndRegister();
-
         //  Uranium-238 + Uranium-238 -> Quasi-fissioning Plasma
         FUSION_RECIPES.recipeBuilder()
                 .fluidInputs(Uranium238.getFluid(125))

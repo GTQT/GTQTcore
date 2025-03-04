@@ -55,7 +55,7 @@ public class MetaTileEntityHeatHatchExchange extends MetaTileEntityBaseWithContr
     // 定义流体栈
     private final FluidStack WATER = Water.getFluid(1);
     private final FluidStack STEAM = Steam.getFluid(500);
-
+    
     @Override
     public void onRemoval() {
         super.onRemoval();
