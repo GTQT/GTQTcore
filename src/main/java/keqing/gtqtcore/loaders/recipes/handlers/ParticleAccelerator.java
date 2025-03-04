@@ -968,7 +968,7 @@ public class ParticleAccelerator {
         GTQTcoreRecipeMaps.NUCLEOSYNTHESIS.recipeBuilder()
                 .input(NEUTRON)
                 .fluidInputs(Plutonium242.getFluid(1000))
-                .fluidOutputs(Curium243.getFluid(1000))
+                .fluidOutputs(Curium.getFluid(1000))
                 .EUToStart(62000)
                 .Scattering(2)
                 .duration(100)
@@ -977,7 +977,7 @@ public class ParticleAccelerator {
 
         GTQTcoreRecipeMaps.NUCLEOSYNTHESIS.recipeBuilder()
                 .input(NEUTRON)
-                .fluidInputs(Curium243.getFluid(1000))
+                .fluidInputs(Curium.getFluid(1000))
                 .fluidOutputs(Californium.getFluid(1000))
                 .EUToStart(63000)
                 .Scattering(1)
