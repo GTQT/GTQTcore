@@ -540,12 +540,12 @@ public class GTQTMaterials {
     public static Material ItungsticAcid;
     public static Material NiobiumTantalumFe;
     public static Material NiobiumTantalumFec;
-    public static Material Nbcl;
-    public static Material Tacl;
-    public static Material Nbcla;
-    public static Material Tacla;
-    public static Material Nbclb;
-    public static Material Taclb;
+    public static Material NiobiumChloride;
+    public static Material TantalumChloride;
+    public static Material NiobiumFluoride;
+    public static Material TantalumFluoride;
+    public static Material PotassiumHeptafluorooniobate;
+    public static Material PotassiumHeptafluorotanate;
     public static Material IronFront;
     public static Material BandedIronFront;
     public static Material BrownLimoniteFront;

@@ -16,7 +16,7 @@ public class RocketEngineRecipes {
         //  Remove rocket fuel Combustion generator recipe
         GTRecipeHandler.removeRecipesByInputs(COMBUSTION_GENERATOR_FUELS, RocketFuel.getFluid(16));
         //  Rocket Fuel
-        ROCKET.recipeBuilder()
+        ROCKET_RECIPES.recipeBuilder()
                 .fluidInputs(RocketFuel.getFluid(16))
                 .EUt(2048)
                 .duration(40)
@@ -39,7 +39,7 @@ public class RocketEngineRecipes {
                 .duration(16)
                 .buildAndRegister();
 
-        ROCKET.recipeBuilder()
+        ROCKET_RECIPES.recipeBuilder()
                 .fluidInputs(RP1RocketFuel.getFluid(12))
                 .EUt(2048)
                 .duration(120)
@@ -54,7 +54,7 @@ public class RocketEngineRecipes {
                 .duration(120)
                 .buildAndRegister();
 
-        ROCKET.recipeBuilder()
+        ROCKET_RECIPES.recipeBuilder()
                 .fluidInputs(DenseHydrazineMixtureFuel.getFluid(9))
                 .EUt(2048)
                 .duration(160)
@@ -78,7 +78,7 @@ public class RocketEngineRecipes {
                 .duration(200)
                 .buildAndRegister();
 
-        ROCKET.recipeBuilder()
+        ROCKET_RECIPES.recipeBuilder()
                 .fluidInputs(MethylhydrazineNitrateRocketFuel.getFluid(6))
                 .EUt(2048)
                 .duration(240)

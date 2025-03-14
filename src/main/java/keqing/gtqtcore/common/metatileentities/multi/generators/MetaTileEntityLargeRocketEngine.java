@@ -34,7 +34,7 @@ import static gregtech.api.GTValues.V;
 public class MetaTileEntityLargeRocketEngine extends FuelMultiblockController {
 
     public MetaTileEntityLargeRocketEngine(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, GTQTcoreRecipeMaps.ROCKET, LuV);
+        super(metaTileEntityId, GTQTcoreRecipeMaps.ROCKET_RECIPES, LuV);
         this.recipeMapWorkable.setMaximumOverclockVoltage(V[LuV]);
     }
 

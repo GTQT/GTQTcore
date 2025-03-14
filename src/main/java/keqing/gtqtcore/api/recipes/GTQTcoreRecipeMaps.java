@@ -232,7 +232,7 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<PHRecipeBuilder> FERMENTATION_TANK_RECIPES;
     public static final RecipeMap<SimpleRecipeBuilder> FUEL_REFINE_FACTORY_RECIPES;
     public static final RecipeMap<ForceFieldCoilRecipeBuilder> NAQUADAH_REFINE_FACTORY_RECIPES;
-    public static final RecipeMap<FuelRecipeBuilder> ROCKET;
+    public static final RecipeMap<FuelRecipeBuilder> ROCKET_RECIPES;
     public static final RecipeMap<FuelRecipeBuilder> NAQUADAH_REACTOR;
     public static final RecipeMap<ChemicalPlantBuilder> CHEMICAL_PLANT;
     public static final RecipeMap<SimpleRecipeBuilder> INTEGRATED_MINING_DIVISION;
@@ -470,7 +470,7 @@ public class GTQTcoreRecipeMaps {
                 .setProgressBar(GTQTGuiTextures.PROGRESS_BAR_HEAT_EXCHANGE, ProgressWidget.MoveType.HORIZONTAL)
                 .setSound(GTSoundEvents.BATH);
 
-        ROCKET = new RecipeMap<>("rocket",
+        ROCKET_RECIPES = new RecipeMap<>("rocket",
                 0, 0, 1, 0, new FuelRecipeBuilder(), false)
                 .setSlotOverlay(false, true, true, GuiTextures.CENTRIFUGE_OVERLAY)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_GAS_COLLECTOR, ProgressWidget.MoveType.HORIZONTAL)

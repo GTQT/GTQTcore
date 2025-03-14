@@ -2533,14 +2533,14 @@ public class FirstDegreeMaterials {
                 .build();
 
         //氯化铌
-        GTQTMaterials.Nbcl = new Material.Builder(getMaterialsId(), gregtechId("nbcl"))
+        GTQTMaterials.NiobiumChloride = new Material.Builder(getMaterialsId(), gregtechId("niobium_chloride"))
                 .fluid()
                 .color(0x6B8E23)
                 .iconSet(SHINY)
                 .build()
                 .setFormula("NbCl₄", true);
         //氯化钽
-        GTQTMaterials.Tacl = new Material.Builder(getMaterialsId(), gregtechId("tacl"))
+        GTQTMaterials.TantalumChloride = new Material.Builder(getMaterialsId(), gregtechId("tantalum_chloride"))
                 .fluid()
                 .color(0x698B22)
                 .iconSet(SHINY)
@@ -2548,14 +2548,14 @@ public class FirstDegreeMaterials {
                 .setFormula("TaCl₄", true);
 
         //氟化铌
-        GTQTMaterials.Nbcla = new Material.Builder(getMaterialsId(), gregtechId("nbcla"))
+        GTQTMaterials.NiobiumFluoride = new Material.Builder(getMaterialsId(), gregtechId("niobium_fluoride"))
                 .fluid()
                 .color(0x5D478B)
                 .iconSet(SHINY)
                 .build()
                 .setFormula("NbCl₄", true);
         //氟化钽
-        GTQTMaterials.Tacla = new Material.Builder(getMaterialsId(), gregtechId("tacla"))
+        GTQTMaterials.TantalumFluoride = new Material.Builder(getMaterialsId(), gregtechId("tantalum_fluoride"))
                 .fluid()
                 .color(0x473C8B)
                 .iconSet(SHINY)
@@ -2563,14 +2563,14 @@ public class FirstDegreeMaterials {
                 .setFormula("TaCl₄", true);
 
         //七氟铌酸钾
-        GTQTMaterials.Nbclb = new Material.Builder(getMaterialsId(), gregtechId("nbclb"))
+        GTQTMaterials.PotassiumHeptafluorooniobate = new Material.Builder(getMaterialsId(), gregtechId("potassium_heptafluorooniobate"))
                 .fluid()
                 .color(0x218868)
                 .iconSet(SHINY)
                 .build()
                 .setFormula("F7NbCl4", true);
-        //七氟铌酸钾
-        GTQTMaterials.Taclb = new Material.Builder(getMaterialsId(), gregtechId("taclb"))
+        //七氟钽酸钾
+        GTQTMaterials.PotassiumHeptafluorotanate = new Material.Builder(getMaterialsId(), gregtechId("potassium_heptafluorotanate"))
                 .fluid()
                 .color(0x2E8B57)
                 .iconSet(SHINY)

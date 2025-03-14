@@ -30,11 +30,9 @@ import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.BlockElectrolyticBath;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
@@ -49,61 +47,34 @@ import java.util.Random;
 import static gregtech.api.GTValues.V;
 import static gregtech.api.GTValues.VA;
 
-public class MetaTileEntitySolarPlate extends MultiblockWithDisplayBase implements  IProgressBarMultiblock {
+public class MetaTileEntitySolarPlate extends MultiblockWithDisplayBase {
 
+    int tier;
     private IEnergyContainer energyContainer;
+    private boolean isWorkingEnabled;
+
     public MetaTileEntitySolarPlate(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId);
     }
 
     @Override
     protected void updateFormedValid() {
-        isWorkingEnabled=checkNaturalLighting()&&clear();
-        if(isWorkingEnabled) this.energyContainer.addEnergy(geteu());
+        isWorkingEnabled = checkNaturalLighting() && getWorld().canSeeSky(getPos().up());
+        if (isWorkingEnabled) this.energyContainer.addEnergy(geteu());
     }
-    private long geteu()
-    {
+
+    private long geteu() {
         Random rand = new Random();
         int randomNum = rand.nextInt(40);
-        return (long) (V[2] *Math.pow(2,tier) * 2 *(randomNum+80)/100);
+        return (long) (V[2] * Math.pow(2, tier) * 2 * (randomNum + 80) / 100);
     }
+
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntitySolarPlate(metaTileEntityId);
     }
 
 
-    @Override
-    public int getNumProgressBars() {
-        return 1;
-    }
-
-
-    @Override
-    public double getFillPercentage(int index) {
-        return  (double)geteu()/(V[2] *Math.pow(2,tier) * 2.4);
-    }
-
-    @Override
-    public TextureArea getProgressBarTexture(int index) {
-        return GuiTextures.PROGRESS_BAR_HPCA_COMPUTATION;
-    }
-
-    @Override
-    public void addBarHoverText(List<ITextComponent> hoverList, int index) {
-        ITextComponent cwutInfo = TextComponentUtil.stringWithColor(
-                TextFormatting.AQUA,
-                geteu()+ " / " + VA[tier + 3] * 2.4 + " EU/t");
-        hoverList.add(TextComponentUtil.translationWithColor(
-                TextFormatting.GRAY,
-                "gregtech.multiblock.wps.computation",
-                cwutInfo));
-    }
-
-
-
-    int tier;
-    private boolean isWorkingEnabled;
     @Nonnull
     @Override
     protected BlockPattern createStructurePattern() {
@@ -120,6 +91,7 @@ public class MetaTileEntitySolarPlate extends MultiblockWithDisplayBase implemen
                         .or(abilities(MultiblockAbility.OUTPUT_ENERGY).setMaxGlobalLimited(4)))
                 .build();
     }
+
     @Override
     public boolean hasMaintenanceMechanics() {
         return false;
@@ -131,7 +103,7 @@ public class MetaTileEntitySolarPlate extends MultiblockWithDisplayBase implemen
         if (!checkNaturalLighting()) {
             textList.add(new TextComponentTranslation("现在是晚上！"));
         }
-        if (!clear()) {
+        if (!getWorld().canSeeSky(getPos().up())) {
             textList.add(new TextComponentTranslation("被阻挡！"));
         }
     }
@@ -144,21 +116,24 @@ public class MetaTileEntitySolarPlate extends MultiblockWithDisplayBase implemen
         tooltip.add(I18n.format("gtqtcore.machine.spa.tooltip.1"));
         tooltip.add(I18n.format("gtqtcore.machine.spa.tooltip.2"));
     }
+
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
-        textList.add(new TextComponentTranslation("gtqtcore.tire", tier-3));
+        textList.add(new TextComponentTranslation("gtqtcore.tire", tier - 3));
     }
+
     @Override
     public boolean hasMufflerMechanics() {
         return false;
     }
+
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
         this.energyContainer = new EnergyContainerList(getAbilities(MultiblockAbility.OUTPUT_ENERGY));
         Object tier = context.get("SPTieredStats");
         this.tier = GTQTUtil.getOrDefault(() -> tier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)tier).getIntTier(),
+                () -> ((WrappedIntTired) tier).getIntTier(),
                 0);
         this.writeCustomData(GTQTValue.UPDATE_TIER3, buf -> buf.writeInt(this.tier));
     }
@@ -166,11 +141,11 @@ public class MetaTileEntitySolarPlate extends MultiblockWithDisplayBase implemen
     @Override
     public void receiveCustomData(int dataId, PacketBuffer buf) {
         super.receiveCustomData(dataId, buf);
-        if(dataId == GTQTValue.UPDATE_TIER3){
+        if (dataId == GTQTValue.UPDATE_TIER3) {
             this.tier = buf.readInt();
         }
-        if(dataId == GTQTValue.REQUIRE_DATA_UPDATE3){
-            this.writeCustomData(GTQTValue.UPDATE_TIER3,buf1 -> buf1.writeInt(this.tier));
+        if (dataId == GTQTValue.REQUIRE_DATA_UPDATE3) {
+            this.writeCustomData(GTQTValue.UPDATE_TIER3, buf1 -> buf1.writeInt(this.tier));
         }
     }
 
@@ -190,35 +165,15 @@ public class MetaTileEntitySolarPlate extends MultiblockWithDisplayBase implemen
     private boolean isWorkingEnabled() {
         return isWorkingEnabled;
     }
+
     @Override
     public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
         super.renderMetaTileEntity(renderState, translation, pipeline);
         getFrontOverlay().renderOrientedState(renderState, translation, pipeline, getFrontFacing(), this.isActive(),
                 this.isWorkingEnabled());
     }
+
     public boolean checkNaturalLighting() {
-
-        if (!this.getWorld().isDaytime())
-            return false;
-        for (BlockPos pos : BlockPos.getAllInBox(this.getPos().up(8).offset(this.frontFacing.rotateY(), 3),
-                this.getPos().up(8).offset(this.getFrontFacing().rotateYCCW(), 3).offset(this.getFrontFacing().getOpposite(), 6))) {
-            if (!this.getWorld().canSeeSky(pos.up())) {
-                return false;
-            }
-        }
-        return true;
+        return this.getWorld().isDaytime();
     }
-    public boolean clear()
-    {
-
-        int aX = this.getPos().getX();
-        int aY = this.getPos().getY();
-        int aZ = this.getPos().getZ();
-        for(int i=1;i<5;i++)
-            for(int x=-2;x<=2;x++)
-                for(int y=-2;y<=2;y++)
-            if (this.getWorld().getBlockState(new BlockPos(aX+x, aY+i, aZ+y)).getBlock() != Blocks.AIR) return false;
-        return true;
-    }
-
 }
