@@ -3,10 +3,14 @@ package keqing.gtqtcore.api.unification.matreials;
 import gregtech.api.GTValues;
 import gregtech.api.fluids.FluidBuilder;
 import gregtech.api.fluids.attribute.FluidAttributes;
+import gregtech.api.fluids.store.FluidStorageKeys;
 import gregtech.api.unification.Elements;
 import gregtech.api.unification.material.Material;
+import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.material.info.MaterialIconSet;
 import gregtech.api.unification.material.properties.BlastProperty;
+import gregtech.api.unification.material.properties.FluidProperty;
+import gregtech.api.unification.material.properties.PropertyKey;
 import gregtech.api.unification.material.properties.ToolProperty;
 import gregtech.api.util.GTUtility;
 import keqing.gtqtcore.api.unification.GTQTElements;
@@ -106,6 +110,7 @@ public class FirstDegreeMaterials {
                 .color(0x321452)
                 .components(Carbon, 1, Hydrogen, 6, Nitrogen, 2)
                 .build();
+
         //  24327 Methylhydrazine Nitrate Rocket Fuel
         GTQTMaterials.MethylhydrazineNitrateRocketFuel = new Material.Builder(getMaterialsId(), gregtechId("methylhydrazine_nitrate_rocket_fuel"))
                 .fluid()
@@ -113,12 +118,14 @@ public class FirstDegreeMaterials {
                 .components(Methylhydrazine, 1, Tetranitromethane, 1)
                 .flags(DISABLE_DECOMPOSITION)
                 .build();
+
         GTQTMaterials.Alumite = new Material.Builder(getMaterialsId(), gregtechId("alumite"))
                 .fluid()
                 .ingot()
                 .color(0x607186)
                 .flags(DISABLE_DECOMPOSITION)
                 .build();
+
         GTQTMaterials.Alubrass = new Material.Builder(getMaterialsId(), gregtechId("alubrass"))
                 .fluid()
                 .ingot()
@@ -1784,126 +1791,29 @@ public class FirstDegreeMaterials {
                 .build()
                 .setFormula("Mg3Si2O5(OH)4", true);
 
-        //锗线
-        //氧化闪锌混合物
-        GTQTMaterials.ZincOxideFlashMixture = new Material.Builder(getMaterialsId(), gregtechId("zinc_oxide_flash_mixture"))
-                .dust()
-                .color(0xAEEEEE)
-                .build()
-                .setFormula("Ge?O?", true);
-
-        //富集闪锌混合物
-        GTQTMaterials.RichZincFlashMixture = new Material.Builder(getMaterialsId(), gregtechId("rich_zinc_flash_mixture"))
-                .dust()
-                .color(0xB0C4DE)
-                .build()
-                .setFormula("Ge?O?", true);
-
-        //富集闪锌焙烧残留
-        GTQTMaterials.EnrichmentResidualFlashZincRoasting = new Material.Builder(getMaterialsId(), gregtechId("enrichment_residual_flash_zinc_roasting"))
-                .dust()
-                .color(0xB0E0E6)
-                .build()
-                .setFormula("Ge?O?", true);
-
-        //含闪锌溶液
-        GTQTMaterials.ZincFlashSolution = new Material.Builder(getMaterialsId(), gregtechId("zinc _flash _solution"))
+        //单推三肼燃料
+        GTQTMaterials.TrihydraziniumGel = new Material.Builder(getMaterialsId(), gregtechId("trihydrazinium_gel"))
                 .fluid()
-                .color(0xa79e42)
-                .build()
-                .setFormula("Ge?SO4?", true);
-
-        //氢氧化铁
-        GTQTMaterials.FerricHydroxide = new Material.Builder(getMaterialsId(), gregtechId("ferric_hydroxide"))
-                .dust()
-                .color(0xCD3700)
+                .color(0x0000EE)
                 .flags(DISABLE_DECOMPOSITION)
-                .components(Iron, 1, Oxygen, 3, Hydrogen, 3)
                 .build();
 
-        //混锗铁残渣
-        GTQTMaterials.MixedGermaniumIronResidue = new Material.Builder(getMaterialsId(), gregtechId("mixed_germanium_iron_residue"))
-                .dust()
-                .color(0xB3EE3A)
-                .build()
-                .setFormula("Ge?Fe?Zn?", true);
-
-        //混锗镉残渣
-        GTQTMaterials.MixedGermaniumCadmiumResidue = new Material.Builder(getMaterialsId(), gregtechId("mixed_germanium_cadmium_residue"))
-                .dust()
-                .color(0xC67171)
-                .build()
-                .setFormula("Ge?Cd?Zn?", true);
-
-        //残渣溶液
-        GTQTMaterials.ResidueSolution = new Material.Builder(getMaterialsId(), gregtechId("residue_solution"))
-                .fluid()
-                .color(0xCD950C)
-                .build()
-                .setFormula("Ge?Cd?*", true);
-
-        //一氧化锗
-        GTQTMaterials.GermaniumMonoxide = new Material.Builder(getMaterialsId(), gregtechId("germanium_monoxide"))
-                .fluid()
-                .color(0x97FFFF)
-                .build()
-                .setFormula("GeO", true);
-        //炉渣
-        GTQTMaterials.BurningGermaniumSlag = new Material.Builder(getMaterialsId(), gregtechId("burning_germanium_slag"))
-                .dust()
-                .color(0xA0522D)
-                .build()
-                .setFormula("Fe?Zn?Pd?Cd?", true);
-
-        //鞣酸
-        GTQTMaterials.TannicAcid = new Material.Builder(getMaterialsId(), gregtechId("tannic_acid"))
-                .fluid()
-                .color(0x8B6914)
-                .build()
-                .setFormula("C76H52O46", true);
-
-        GTQTMaterials.ImpureTannicAcid = new Material.Builder(getMaterialsId(), gregtechId("impure_tannic_acid"))
-                .fluid()
-                .color(0x8B7E66)
-                .build()
-                .setFormula("C76H52O46*", true);
-
-
-        //富集锗沉淀
-        GTQTMaterials.Fujizhechendian = new Material.Builder(getMaterialsId(), gregtechId("fujizhechendian"))
-                .dust()
-                .color(0x7EC0EE)
-                .build()
-                .setFormula("Ge?", true);
-
-
-        //四氯化锗
-        GTQTMaterials.EnrichedGermaniumPrecipitation = new Material.Builder(getMaterialsId(), gregtechId("enriched_germanium_precipitation"))
-                .fluid()
-                .color(0x8A2BE2)
-                .build()
-                .setFormula("GeCl4*", true);
-
-        //四氯化锗
-        GTQTMaterials.EnrichedGermaniumPrecipitationAcid = new Material.Builder(getMaterialsId(), gregtechId("enriched_germanium_precipitation_acid"))
-                .fluid()
-                .color(0xa79e42)
-                .build()
-                .setFormula("GeCl4*HCl", true);
-
-        //高淳四氯化锗
-        GTQTMaterials.HighPurityGermaniumTetrachloride = new Material.Builder(getMaterialsId(), gregtechId("high_purity_germanium_tetrachloride"))
-                .fluid()
-                .color(0x7171C6)
-                .build()
-                .setFormula("GeCl4", true);
-
-        //高纯二氧化锗
-        GTQTMaterials.HighPurityGermaniumDioxide = new Material.Builder(getMaterialsId(), gregtechId("high_purity_germanium_dioxide"))
-                .dust()
-                .color(0x68228B)
-                .build()
-                .setFormula("Ge02", true);
+        getMaterialsId();
+        getMaterialsId();
+        getMaterialsId();
+        getMaterialsId();
+        getMaterialsId();
+        getMaterialsId();
+        getMaterialsId();
+        getMaterialsId();
+        getMaterialsId();
+        getMaterialsId();
+        getMaterialsId();
+        getMaterialsId();
+        getMaterialsId();
+        getMaterialsId();
+        getMaterialsId();
+        getMaterialsId();
 
         //杀虫剂
         GTQTMaterials.Dfeltamethrin = new Material.Builder(getMaterialsId(), gregtechId("dfeltamethrin"))
@@ -2886,12 +2796,54 @@ public class FirstDegreeMaterials {
                 .components(Carbon, 1, Hydrogen, 3, Oxygen, 1, Potassium, 1)
                 .build();
 
-        getMaterialsId();
-        getMaterialsId();
-        getMaterialsId();
-        getMaterialsId();
-        getMaterialsId();
-        getMaterialsId();
+        //不稳定的氟化肼
+        GTQTMaterials.UnstableHydrazineFluoride = new Material.Builder(getMaterialsId(), gregtechId("unstable_hydrazine_fluoride"))
+                .fluid()
+                .color(0x33A1C9) // 浅蓝色
+                .components(Methylhydrazine, 1, HydrofluoricAcid, 1)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //氟化肼燃料
+        GTQTMaterials.HydrazineFluorideFuel = new Material.Builder(getMaterialsId(), gregtechId("hydrazine_fluoride_fuel"))
+                .fluid()
+                .color(0x66B2FF) // 浅天蓝色
+                .components(Methylhydrazine, 1, HydrofluoricAcid, 1)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //肼氯（Hydrazinium Chloride）
+        GTQTMaterials.HydraziniumChloride = new Material.Builder(getMaterialsId(), gregtechId("hydrazinium_chloride"))
+                .fluid()
+                .color(0x99C6E3) // 浅青色
+                .components(Methylhydrazine, 1, HydrochloricAcid, 1)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //发烟硝酸
+        GTQTMaterials.SodiumNitrateSulfuricAcid = new Material.Builder(getMaterialsId(), gregtechId("sodium_nitrate_sulfuric_acid"))
+                .fluid()
+                .color(0xFF6347) // 橙红色
+                .components(SodiumNitrate, 1, SulfuricAcid, 1)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //DinitrogenPentoxide 五氧化二氮
+        GTQTMaterials.DinitrogenPentoxide = new Material.Builder(getMaterialsId(), gregtechId("dinitrogen_pentoxide"))
+                .fluid()
+                .color(0xFFA07A) // 浅珊瑚色
+                .components(Nitrogen, 5, Oxygen, 10)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //HydraziniumDinitramide 肼二硝酰胺
+        GTQTMaterials.HydraziniumDinitramide = new Material.Builder(getMaterialsId(), gregtechId("hydrazinium_dinitramide"))
+                .dust()
+                .color(0xFF4500) // 橙红色
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("N₂H₅N(NO₂)₂", true);
+
 
         GTQTMaterials.SodiumTungstate = new Material.Builder(getMaterialsId(), gregtechId("sodium_tungstate"))
                 .fluid()
@@ -3702,10 +3654,16 @@ public class FirstDegreeMaterials {
 
         GTQTMaterials.Ozone = new Material.Builder(getMaterialsId(), gregtechId("ozone"))
                 .gas()
-                .color(0x0099FF)
+                .liquid((new FluidBuilder())
+                        .temperature(90)
+                        .color(6719709)
+                        .name("liquid_ozone")
+                        .translation("gregtech.fluid.liquid_generic"))
+                .color(0x9370DB)
                 .iconSet(FLUID)
                 .build()
                 .setFormula("O3", true);
+        Ozone.getProperty(PropertyKey.FLUID).setPrimaryKey(FluidStorageKeys.GAS);
 
         GTQTMaterials.NitrogenPentoxide = new Material.Builder(getMaterialsId(), gregtechId("nitrogen_pentoxide"))
                 .liquid()

@@ -217,7 +217,7 @@ public class AlgaeChain {
                 .fluidOutputs(NaquadicExoticGas.getFluid(4000))
                 .fluidOutputs(NaquadriaCaesiumfluoride.getFluid(1000))
                 .EUt(VA[UHV])
-                .blastFurnaceTemp(40976)
+                .blastFurnaceTemp(8000)
                 .duration(200)
                 .buildAndRegister();
 
@@ -296,11 +296,14 @@ public class AlgaeChain {
                 .pH(8.6)
                 .duration(1600).EUt(480).buildAndRegister();
 
-        CHEMICAL_RECIPES.recipeBuilder()
-                .input(items, 1)
-                .fluidOutputs(BioOil.getFluid(2000))
-                .duration(1200)
-                .EUt(VA[EV])
+        FLUIDIZED_BED.recipeBuilder()
+                .input(items, 16)
+                .fluidInputs(Steam.getFluid(2000))
+                .fluidOutputs(BioOil.getFluid(4000))
+                .recipeLevel(3)
+                .Catalyst(CATALYST_ZR.getStackForm())
+                .EUt(180)
+                .duration(120)
                 .buildAndRegister();
     }
 }

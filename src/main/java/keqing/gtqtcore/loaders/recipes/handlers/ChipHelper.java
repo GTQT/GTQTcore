@@ -75,7 +75,7 @@ public class ChipHelper {
                 .fluidOutputs(Steam.getFluid(3000))
                 .EUt(VA[EV])
                 .duration(20 * SECOND)
-                .blastFurnaceTemp(9000)
+                .blastFurnaceTemp(4500)
                 .buildAndRegister();
 
         //  NbCl5 + LiH + 2H2O2 -> LiNbO4 + 5HCl

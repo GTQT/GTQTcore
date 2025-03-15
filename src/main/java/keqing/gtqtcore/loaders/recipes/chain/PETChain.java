@@ -41,6 +41,7 @@ public class PETChain {
                 .fluidInputs(Methylparatoluate.getFluid(1000))
                 .fluidInputs(CarbonDioxide.getFluid(1000))
                 .fluidOutputs(DimethylTerephthalate.getFluid(1000))
+                .blastFurnaceTemp(4500)
                 .EUt(VA[EV])
                 .duration((int) (7.5 * SECOND))
                 .buildAndRegister();

@@ -4,6 +4,8 @@ import gregtech.api.block.VariantBlock;
 import gregtech.api.recipes.ModHandler;
 import gregtech.api.unification.material.MarkerMaterials;
 import gregtech.api.unification.material.Material;
+import gregtech.api.unification.material.Materials;
+import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.UnificationEntry;
 import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.BlockMetalCasing;
@@ -28,6 +30,8 @@ import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.utils.GTQTUniversUtil.SECOND;
 import static keqing.gtqtcore.api.utils.GTQTUtil.CWT;
+import static keqing.gtqtcore.common.block.blocks.BlockActiveUniqueCasing1.ActiveCasingType.HG1223_INTAKE_CASING;
+import static keqing.gtqtcore.common.block.blocks.BlockActiveUniqueCasing1.ActiveCasingType.NITINOL_INTAKE_CASING;
 import static keqing.gtqtcore.common.block.blocks.BlockIsaCasing.CasingType.*;
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing3.CasingType.*;
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4.TurbineCasingType.*;
@@ -324,6 +328,32 @@ public class MachineCasing {
                 .EUt(VA[LV])
                 .duration(50)
                 .buildAndRegister();
+
+        ModHandler.addShapedRecipe(true, "nitinol_gearbox",
+                GTQTMetaBlocks.blockMultiblockCasing3.getItemVariant(NITINOL_GEARBOX, ConfigHolder.recipes.casingsPerCraft), "PhP",
+                "GFG", "PwP", 'P', new UnificationEntry(OrePrefix.plate, Nitinol), 'F',
+                new UnificationEntry(OrePrefix.frameGt, Nitinol), 'G',
+                new UnificationEntry(OrePrefix.gear, Nitinol));
+
+        ModHandler.addShapedRecipe(true, "hg1223_gearbox",
+                GTQTMetaBlocks.blockMultiblockCasing3.getItemVariant(HG1223_GEARBOX, ConfigHolder.recipes.casingsPerCraft),
+                "PhP", "GFG", "PwP", 'P', new UnificationEntry(OrePrefix.plate, HG1223), 'F',
+                new UnificationEntry(OrePrefix.frameGt, HG1223), 'G',
+                new UnificationEntry(OrePrefix.gear, HG1223));
+
+        ModHandler.addShapedRecipe(true, "nitinol_intake_casing",
+                GTQTMetaBlocks.blockActiveUniqueCasing1.getItemVariant(NITINOL_INTAKE_CASING,
+                        ConfigHolder.recipes.casingsPerCraft),
+                "PhP", "RFR", "PwP", 'R', new UnificationEntry(OrePrefix.rotor, Nitinol), 'F',
+                GTQTMetaBlocks.blockMultiblockCasing3.getItemVariant(NITINOL_MACHINE_CASING), 'P',
+                new UnificationEntry(OrePrefix.pipeNormalFluid, Nitinol));
+
+        ModHandler.addShapedRecipe(true, "hg1223_intake_casing",
+                GTQTMetaBlocks.blockActiveUniqueCasing1.getItemVariant(HG1223_INTAKE_CASING,
+                        ConfigHolder.recipes.casingsPerCraft),
+                "PhP", "RFR", "PwP", 'R', new UnificationEntry(OrePrefix.rotor, HG1223), 'F',
+                GTQTMetaBlocks.blockMultiblockCasing3.getItemVariant(HC_ALLOY_CASING), 'P',
+                new UnificationEntry(OrePrefix.pipeNormalFluid, HG1223));
 
         createCasingRecipe("nitinol_machine_casing", GTQTMetaBlocks.blockMultiblockCasing3, BlockMultiblockCasing3.CasingType.NITINOL_MACHINE_CASING, Nitinol);
         createCasingRecipe("inconel_625", GTQTMetaBlocks.blockMultiblockCasing1, BlockMultiblockCasing1.CasingType.Inconel625, Inconel625);

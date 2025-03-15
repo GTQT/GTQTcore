@@ -75,7 +75,7 @@ public class SodiumChain {
                 .output(dust, SodiumOxide, 30)
                 .EUt(VA[EV])
                 .duration(480)
-                .blastFurnaceTemp(1394)
+                .blastFurnaceTemp(3600)
                 .buildAndRegister();
     }
 }

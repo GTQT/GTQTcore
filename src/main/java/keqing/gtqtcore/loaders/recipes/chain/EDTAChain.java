@@ -36,7 +36,7 @@ public class EDTAChain {
                 .notConsumable(new IntCircuitIngredient(1))
                 .fluidOutputs(VinylChloride.getFluid(1000))
                 .fluidOutputs(HydrochloricAcid.getFluid(1000))
-                .blastFurnaceTemp(773)
+                .blastFurnaceTemp(2700)
                 .duration(40).EUt(VA[MV]).buildAndRegister();
 
         // C2H4Cl2 + 2NH3 -> C2H4(NH2)2 + 2HCl
@@ -55,7 +55,7 @@ public class EDTAChain {
                 .notConsumable(dust, Platinum)
                 .fluidOutputs(HydrogenCyanide.getFluid(1000))
                 .fluidOutputs(Steam.getFluid(3000))
-                .blastFurnaceTemp(1473)
+                .blastFurnaceTemp(2700)
                 .duration(120).EUt(VA[MV]).buildAndRegister();
 
         // NaOH + HCN -> NaCN + H2O
@@ -72,7 +72,7 @@ public class EDTAChain {
                 .fluidInputs(Methanol.getFluid(1000))
                 .fluidOutputs(Formaldehyde.getFluid(1000))
                 .fluidOutputs(Hydrogen.getFluid(2000))
-                .blastFurnaceTemp(923)
+                .blastFurnaceTemp(3600)
                 .duration(180).EUt(VA[HV]).buildAndRegister();
 
         // C2H4(NH2)2 + 4CH2O + 4NaCN + 6H2O -> C10H12Na4N2O8 + 4NH3 + 2O

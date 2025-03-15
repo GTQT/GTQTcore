@@ -267,6 +267,7 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<MiningDrillRecipeBuilder> MINING_DRILL_RECIPES;
     public static final RecipeMap<HeatRecipeBuilder> DISTILLATION_KETTLE;
     public static final RecipeMap<SimpleRecipeBuilder> DESULPHURIZATION_RECIPES;
+    public static final RecipeMap<ChemicalPlantBuilder>  FLUIDIZED_BED;
     public static final RecipeMap<HeatRecipeBuilder> PYROLYSIS_TOWER;
     public static final RecipeMap<ComputationRecipeBuilder> LASER_ENGRAVING;
     public static final RecipeMap<ComputationRecipeBuilder> TD_PRINT_RECIPES;
@@ -470,7 +471,7 @@ public class GTQTcoreRecipeMaps {
                 .setProgressBar(GTQTGuiTextures.PROGRESS_BAR_HEAT_EXCHANGE, ProgressWidget.MoveType.HORIZONTAL)
                 .setSound(GTSoundEvents.BATH);
 
-        ROCKET_RECIPES = new RecipeMap<>("rocket",
+        ROCKET_RECIPES = new RecipeMap<>("rocket_engine_recipes",
                 0, 0, 1, 0, new FuelRecipeBuilder(), false)
                 .setSlotOverlay(false, true, true, GuiTextures.CENTRIFUGE_OVERLAY)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_GAS_COLLECTOR, ProgressWidget.MoveType.HORIZONTAL)
@@ -492,12 +493,15 @@ public class GTQTcoreRecipeMaps {
                 .setSlotOverlay(true, true, true, GuiTextures.FURNACE_OVERLAY_2)
                 .setSound(GTSoundEvents.FURNACE);
 
-        NAQUADAH_REACTOR = new RecipeMap<>("naquadah_reactor_rod",
+        NAQUADAH_REACTOR = new RecipeMap<>("naquadah_reactor",
                 1, 1, 0, 0, new FuelRecipeBuilder(), false)
                 .allowEmptyOutput();
 
         CHEMICAL_PLANT = new RecipeMap<>("chemical_plant",
                 6, 6, 6, 6, new ChemicalPlantBuilder(), false);
+
+        FLUIDIZED_BED = new RecipeMap<>("fluidized_bed_recipes",
+                3, 3, 3, 3, new ChemicalPlantBuilder(), false);
 
         INTEGRATED_MINING_DIVISION = new RecipeMap<>("integrated_mining_division",
                 3, 3, 3, 3, new SimpleRecipeBuilder(), false)

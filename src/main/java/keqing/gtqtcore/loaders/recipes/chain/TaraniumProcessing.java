@@ -621,6 +621,7 @@ public class TaraniumProcessing {
                 .fluidInputs(Xenon.getFluid(1000))
                 .fluidOutputs(DustyHelium3.getFluid(2000))
                 .fluidOutputs(XenicAcid.getFluid(1000))
+                .blastFurnaceTemp(6000)
                 .EUt(VA[LuV])
                 .duration(6 * SECOND)
                 .buildAndRegister();
@@ -791,6 +792,7 @@ public class TaraniumProcessing {
                 .input(dust, Sodium, 4)
                 .output(dust, Trinium)
                 .output(dust, SodiumFluoride, 8)
+                .blastFurnaceTemp(4500)
                 .EUt(VA[EV])
                 .duration(6 * SECOND)
                 .buildAndRegister();
@@ -912,6 +914,7 @@ public class TaraniumProcessing {
                 .fluidOutputs(DiethylEther.getFluid(10000))
                 .EUt(VA[IV])
                 .duration(14 * SECOND)
+                .blastFurnaceTemp(6000)
                 .buildAndRegister();
 
         //  8Na + 4LiH -> NaBF4 + H3BO3 + 3C2H6O -> 3C2H5ONa + 4Li + 3H2O

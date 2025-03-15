@@ -160,6 +160,8 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityMachineHatch HV_MACHINE_HATCH;
     public static MetaTileEntityDistillationTower DISTILLATION_TOWER;
     public static MetaTileEntityLargeRocketEngine LARGE_ROCKET_ENGIN;
+    public static MetaTileEntityLargeRocketEngine EXTREME_LARGE_ROCKET_ENGIN;
+
     public static MetaTileEntityIndustryWaterPump INDUSTRY_WATER_PUMP;
     public static MetaTileEntityResearchSystemControlCenter KQCC;
     public static MetaTileEntityPrimitiveReactor PRIMITIVE_REACTOR;
@@ -329,6 +331,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityLargeExtractor LARGE_EXTRACTOR;
     public static MetaTileEntityLargeMixer LARGE_MIXER;
     public static MetaTileEntityLargeDesulphurization LARGE_DESULPHURIZATION;
+    public static MetaTileEntityLargeFluidizedBed LARGE_FLUIDIZED_BED;
     public static MetaTileEntityNanoCoating NANO_COATING;
     public static MetaTileEntityCryogenicFreezer CRYOGENIC_FREEZER;
     public static MetaTileEntityHeatExchanger HEAT_CHANGER;
@@ -489,8 +492,10 @@ public class GTQTMetaTileEntities {
         HYPER_REACTOR_MKIII = registerMetaTileEntity(3058, new MetaTileEntityHyperReactorMkIII(gtqtcoreId("hyper_reactor_mk3")));
 
         LARGE_NAQUADAH_REACTOR = registerMetaTileEntity(3059, new MetaTileEntityLargeNaquadahReactor(gtqtcoreId("large_naquadah_reactor")));
-        LARGE_ROCKET_ENGIN = registerMetaTileEntity(3060, new MetaTileEntityLargeRocketEngine(gtqtcoreId("rocket")));
-        //
+        //LARGE_ROCKET_ENGIN = registerMetaTileEntity(3060, new MetaTileEntityLargeRocketEngine(gtqtcoreId("rocket")));
+        LARGE_ROCKET_ENGIN = registerMetaTileEntity(3060, new MetaTileEntityLargeRocketEngine(gtqtcoreId("large_rocket_engin"), LuV));
+        EXTREME_LARGE_ROCKET_ENGIN = registerMetaTileEntity(3061, new MetaTileEntityLargeRocketEngine(gtqtcoreId("extreme_large_rocket_engin"), ZPM));
+
         SOLAR_PLATE = registerMetaTileEntity(3062, new MetaTileEntitySolarPlate(gtqtcoreId("solar_plate")));
         //
         WATER_POWER_STATION[0] = registerMetaTileEntity(3064, new MetaTileEntityWaterPowerStation(gtqtcoreId("water_power_station_mk1"), 1));
@@ -645,6 +650,7 @@ public class GTQTMetaTileEntities {
         LARGE_EXTRACTOR = registerMetaTileEntity(3259, new MetaTileEntityLargeExtractor(gtqtcoreId("large_extractor")));
         LARGE_MIXER = registerMetaTileEntity(3260, new MetaTileEntityLargeMixer(gtqtcoreId("large_mixer")));
         LARGE_DESULPHURIZATION = registerMetaTileEntity(3261, new MetaTileEntityLargeDesulphurization(gtqtcoreId("large_desulphurization")));
+        LARGE_FLUIDIZED_BED = registerMetaTileEntity(3262, new MetaTileEntityLargeFluidizedBed(gtqtcoreId("large_fluidized_bed")));
 
         LV_PROCESSING_ARRAY = registerMetaTileEntity(3287, new MetaTileEntityProcessingArray(gtqtcoreId("lv_processing_array"), 1));
         MV_PROCESSING_ARRAY = registerMetaTileEntity(3288, new MetaTileEntityProcessingArray(gtqtcoreId("mv_processing_array"), 2));

@@ -62,6 +62,18 @@
           "all": "gregtech:blocks/multiblock/casings/hc_alloy_casing"
         }
       },
+      "nitinol_gearbox": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casing/nitinol_gearbox"
+        }
+      },
+      "hg1223_gearbox": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casing/hg1223_gearbox"
+        }
+      },
       "supercritical_fuel_trans_casing": {
         "model": "minecraft:cube_all",
         "textures": {

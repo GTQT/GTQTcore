@@ -1,5 +1,6 @@
 package keqing.gtqtcore.loaders.recipes.chain;
 
+import gregtech.api.unification.material.Material;
 import keqing.gtqtcore.api.unification.GTQTMaterials;
 
 import static gregtech.api.unification.material.Materials.Hafnium;
@@ -12,13 +13,13 @@ import static gregtech.api.unification.material.Materials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.TJMaterials.SodiumFluoride;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.swarm;
+import static keqing.gtqtcore.api.utils.GTQTUniversUtil.SECOND;
 
 
 public class RareEarthProcessing {
 
     public static void init() {
         EP();
-        lite();
         bastnasite();
         monazite();
         HF();
@@ -30,6 +31,169 @@ public class RareEarthProcessing {
     }
 
     private static void NanoSwarm() {
+        //  Nano Resin Processing is an Advanced Rare Earth Processing for player which beyond ZPM tier,
+        //  required Mysterious Crystal lens and Nanoscale Mask Aligner (Mega Laser Engraver) to start.
+        BLAST_RECIPES.recipeBuilder()
+                .input(dust, RareEarth, 8)
+                .fluidInputs(Chlorine.getFluid(6000))
+                .output(dust, SiliconDioxide)
+                .fluidOutputs(RareEarthChloridesConcentrate.getFluid(1000))
+                .EUt(VA[ZPM])
+                .duration(2 * SECOND)
+                .blastFurnaceTemp(1600) // Cupronickel
+                .buildAndRegister();
+
+        //  Lanthanum (La)-Praseodymium (Pr)-Neodymium (Nd)-Cerium (Ce)
+        addNanoExtractingRecipe(
+                Lanthanum,
+                LanthanumExtractingNanoResin,
+                FilledLanthanumExtractingNanoResin);
+
+        addNanoExtractingRecipe(
+                Praseodymium,
+                PraseodymiumExtractingNanoResin,
+                FilledPraseodymiumExtractingNanoResin);
+
+        addNanoExtractingRecipe(
+                Neodymium,
+                NeodymiumExtractingNanoResin,
+                FilledNeodymiumExtractingNanoResin);
+
+        addNanoExtractingRecipe(
+                Cerium,
+                CeriumExtractingNanoResin,
+                FilledCeriumExtractingNanoResin);
+
+        //  Scandium (Sc)-Europium (Eu)-Gadolinium (Gd)-Samarium(Sm)
+        addNanoExtractingRecipe(
+                Scandium,
+                ScandiumExtractingNanoResin,
+                FilledScandiumExtractingNanoResin);
+
+        addNanoExtractingRecipe(
+                Europium,
+                EuropiumExtractingNanoResin,
+                FilledEuropiumExtractingNanoResin);
+
+        addNanoExtractingRecipe(
+                Gadolinium,
+                GadoliniumExtractingNanoResin,
+                FilledGadoliniumExtractingNanoResin);
+
+        addNanoExtractingRecipe(
+                Samarium,
+                SamariumExtractingNanoResin,
+                FilledSamariumExtractingNanoResin);
+
+        //  Yttrium (Y)-Terbium (Tb)-Dysprosium (Dy)-Holmium (Ho)
+        addNanoExtractingRecipe(
+                Yttrium,
+                YttriumExtractingNanoResin,
+                FilledYttriumExtractingNanoResin);
+
+        addNanoExtractingRecipe(
+                Terbium,
+                TerbiumExtractingNanoResin,
+                FilledTerbiumExtractingNanoResin);
+
+        addNanoExtractingRecipe(
+                Dysprosium,
+                DysprosiumExtractingNanoResin,
+                FilledDysprosiumExtractingNanoResin);
+
+        addNanoExtractingRecipe(
+                Holmium,
+                HolmiumExtractingNanoResin,
+                FilledHolmiumExtractingNanoResin);
+
+        //  Erbium (Er)-Thulium (Tm)-Ytterbium (Yb)-Lutetium (Lu)
+        addNanoExtractingRecipe(
+                Erbium,
+                ErbiumExtractingNanoResin,
+                FilledErbiumExtractingNanoResin);
+
+        addNanoExtractingRecipe(
+                Thulium,
+                ThuliumExtractingNanoResin,
+                FilledThuliumExtractingNanoResin);
+
+        addNanoExtractingRecipe(
+                Ytterbium,
+                YtterbiumExtractingNanoResin,
+                FilledYtterbiumExtractingNanoResin);
+
+        addNanoExtractingRecipe(
+                Lutetium,
+                LutetiumExtractingNanoResin,
+                FilledLutetiumExtractingNanoResin);
+    }
+
+    private static void addNanoExtractingRecipe(Material material,
+                                                Material resinMaterial,
+                                                Material filledResinMaterial) {
+        //  Step 1: {@code material} -> {@code resinMaterial}
+        //  For example: Lanthanum -> Lanthanum Extracting Nano Resin
+        LARGE_CHEMICAL_RECIPES.recipeBuilder()
+                .notConsumable(lens, MysteriousCrystal)
+                .input(dust, material)
+                .input(swarm, Carbon)
+                .fluidInputs(DiethylhexylPhosphoricAcid.getFluid(4000))
+                .fluidOutputs(resinMaterial.getFluid(1000))
+                .EUt(VA[UV])
+                .duration(10 * SECOND)
+                .buildAndRegister();
+
+        //  Step 2: {@code resinMaterial} -> {@code filledResinMaterial}.
+        //  Catalyst Liquid Decay Chain: Concentrate -> Enriched Solution -> Diluted Solution -> Waste Fluid.
+        //  For example: Lanthanum Extracting Nano Resin -> Filled Lanthanum Extracting Nano Resin
+        CHEMICAL_RECIPES.recipeBuilder()
+                .fluidInputs(resinMaterial.getFluid(1000))
+                .fluidInputs(RareEarthChloridesConcentrate.getFluid(1000))
+                .fluidOutputs(filledResinMaterial.getFluid(1000))
+                .fluidOutputs(RareEarthChloridesEnrichedSolution.getFluid(1000))
+                .EUt(VA[UV])
+                .duration(SECOND)
+                .buildAndRegister();
+
+        CHEMICAL_RECIPES.recipeBuilder()
+                .fluidInputs(resinMaterial.getFluid(1000))
+                .fluidInputs(RareEarthChloridesEnrichedSolution.getFluid(1000))
+                .fluidOutputs(filledResinMaterial.getFluid(1000))
+                .fluidOutputs(RareEarthChloridesDilutedSolution.getFluid(1000))
+                .EUt(VA[UV])
+                .duration(SECOND)
+                .buildAndRegister();
+
+        CHEMICAL_RECIPES.recipeBuilder()
+                .fluidInputs(resinMaterial.getFluid(1000))
+                .fluidInputs(RareEarthChloridesDilutedSolution.getFluid(1000))
+                .fluidOutputs(filledResinMaterial.getFluid(1000))
+                .fluidOutputs(ChlorinatedRareEarthWasteFluid.getFluid(1000))
+                .EUt(VA[UV])
+                .duration(SECOND)
+                .buildAndRegister();
+
+        //  Step 3: {@code filledResinMaterial} -> {@code material} + {@code resinMaterial}.
+        //  For example: Filled Lanthanum Extracting Nano Resin -> Lanthanum + Lanthanum Extracting Nano Resin
+        ELECTROLYZER_RECIPES.recipeBuilder()
+                .fluidInputs(filledResinMaterial.getFluid(1000))
+                .fluidOutputs(material.getFluid(L))
+                .fluidOutputs(resinMaterial.getFluid(1000))
+                .fluidOutputs(Chlorine.getFluid(3000))
+                .EUt(VA[UV])
+                .duration(5 * SECOND)
+                .buildAndRegister();
+
+        //  Chlorinated Rare Earth Waste Fluid recycling
+        DISTILLATION_RECIPES.recipeBuilder()
+                .fluidInputs(ChlorinatedRareEarthWasteFluid.getFluid(10000))
+                .output(dust, Chrome, 3)
+                .fluidOutputs(SaltWater.getFluid(3000))
+                .fluidOutputs(Phenol.getFluid(2000))
+                .fluidOutputs(HydrochloricAcid.getFluid(5000))
+                .EUt(VA[HV])
+                .duration(15 * SECOND)
+                .buildAndRegister();
 
     }
 
@@ -69,7 +233,7 @@ public class RareEarthProcessing {
                 .fluidInputs(HydrochloricAcid.getFluid(1000))
                 .output(dust, RareEarthChloridesSlurry, 4)
                 .fluidOutputs(Steam.getFluid(600))
-                .blastFurnaceTemp(1125)
+                .blastFurnaceTemp(4500)
                 .duration(120)
                 .EUt(VA[EV])
                 .buildAndRegister();
@@ -179,27 +343,9 @@ public class RareEarthProcessing {
                 .output(dust, LanthanumOxide)
                 .fluidOutputs(Oxygen.getFluid(3000))
                 .duration(600)
-                .EUt(15360)
-                .blastFurnaceTemp(450)
+                .EUt(VA[LuV])
+                .blastFurnaceTemp(4500)
                 .buildAndRegister();
-    }
-
-    private static void lite() {
-        CHEMICAL_RECIPES.recipeBuilder()
-                .fluidInputs(RareEarthHydroxidesSolution.getFluid(1000))
-                .notConsumable(swarm,Carbon)
-                .fluidOutputs(RareEarthChloridesSolution.getFluid(1000))
-                .duration(1200).EUt(VA[UV]).buildAndRegister();
-
-        MOLECULAR_DISTILLATION_RECIPES.recipeBuilder()
-                .fluidInputs(RareEarthChloridesSolution.getFluid(1000))
-                .output(dustSmall, Thorium)
-                .fluidOutputs(LaPrNdCeOxidesSolution.getFluid(250))
-                .fluidOutputs(ScEuGdSmOxidesSolution.getFluid(250))
-                .fluidOutputs(YTbDyHoOxidesSolution.getFluid(250))
-                .fluidOutputs(ErTmYbLuOxidesSolution.getFluid(250))
-                .fluidOutputs(HydrochloricAcid.getFluid(1000))
-                .duration(600).EUt(VA[UV]).buildAndRegister();
     }
 
     private static void bastnasite() {

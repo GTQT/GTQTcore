@@ -38,7 +38,7 @@ public class RubidiumProcessing {
                 .input(dust, Tin)
                 .fluidInputs(Chlorine.getFluid(4000))
                 .fluidOutputs(StannicChloride.getFluid(1000))
-                .blastFurnaceTemp(388)
+                .blastFurnaceTemp(3600)
                 .duration(100).EUt(VA[HV]).buildAndRegister();
 
         // 2RbCl(CsCl)2(H2O)2 + 3SnCl4 -> Rb2SnCl6 + 2Cs2SnCl6 + 4H2O

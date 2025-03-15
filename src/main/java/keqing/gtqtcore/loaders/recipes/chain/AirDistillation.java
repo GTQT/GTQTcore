@@ -30,6 +30,7 @@ public class AirDistillation {
         vaccum(Nitrogen, 3);
         vaccum(Argon, 3);
         vaccum(Xenon, 3);
+        vaccum(Ozone, 3);
         vaccum(Hydrogen, 4);
         vaccum(Neon, 4);
         vaccum(MarsAir, 5);

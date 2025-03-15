@@ -1082,6 +1082,15 @@ public class MetaTileEntityLoader {
                 'M', CHEMICAL_REACTOR[2].getStackForm(),
                 'H', MetaTileEntities.HULL[GTValues.MV].getStackForm());
 
+        ModHandler.addShapedRecipe(true, "fluidized_bed_recipes",
+                GTQTMetaTileEntities.LARGE_DESULPHURIZATION.getStackForm(),
+                "CRC", "PMP", "CHC",
+                'C', new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.HV),
+                'R', OreDictUnifier.get(OrePrefix.rotor, StainlessSteel),
+                'P', OreDictUnifier.get(OrePrefix.pipeLargeFluid, Aluminium),
+                'M', CHEMICAL_REACTOR[3].getStackForm(),
+                'H', MetaTileEntities.HULL[GTValues.HV].getStackForm());
+
         ModHandler.addShapedRecipe(true, "blazing_cz_puller", BLAZING_CZ_PULLER.getStackForm(),
                 "GXG", "RHR", "PWP",
                 'G', new UnificationEntry(gear, HSSS),

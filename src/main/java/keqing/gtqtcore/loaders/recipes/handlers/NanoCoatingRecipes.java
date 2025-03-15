@@ -266,17 +266,6 @@ public class NanoCoatingRecipes {
 
         CHEMICAL_PLANT.recipeBuilder()
                 .Catalyst(CATALYST_FRAMEWORK_V.getStackForm())
-                .fluidInputs(ImpureTannicAcid.getFluid(2000))
-                .input(OrePrefix.dust, Carbon, 80)
-                .fluidOutputs(HydrobromicAcid.getFluid(200))
-                .fluidOutputs(TannicAcid.getFluid(800))
-                .recipeLevel(5)
-                .duration(800)
-                .EUt(VA[EV])
-                .buildAndRegister();
-
-        CHEMICAL_PLANT.recipeBuilder()
-                .Catalyst(CATALYST_FRAMEWORK_V.getStackForm())
                 .fluidInputs(BioOil.getFluid(6000))
                 .input(OrePrefix.dust, SodaAsh, 10)
                 .fluidOutputs(RawOil.getFluid(750))

@@ -102,6 +102,30 @@
         "bot_all": "gregtech:blocks/casings/specials/ultimate_force_field_constraint_coil",
         "top_all": "gregtech:blocks/casings/specials/ultimate_force_field_constraint_coil_bloom"
       }
+    },
+    "active=false,variant=nitinol_intake_casing": {
+      "model": "minecraft:cube_all",
+      "textures": {
+        "all": "gregtech:blocks/casings/pipe/nitinol_intake_casing"
+      }
+    },
+    "active=true,variant=nitinol_intake_casing": {
+      "model": "minecraft:cube_all",
+      "textures": {
+        "all": "gregtech:blocks/casings/pipe/nitinol_intake_casing_active"
+      }
+    },
+    "active=false,variant=hg1223_intake_casing": {
+      "model": "minecraft:cube_all",
+      "textures": {
+        "all": "gregtech:blocks/casings/pipe/hg1223_intake_casing"
+      }
+    },
+    "active=true,variant=hg1223_intake_casing": {
+      "model": "minecraft:cube_all",
+      "textures": {
+        "all": "gregtech:blocks/casings/pipe/hg1223_intake_casing_active"
+      }
     }
   }
 }

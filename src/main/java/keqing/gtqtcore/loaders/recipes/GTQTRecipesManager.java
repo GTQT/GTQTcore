@@ -54,6 +54,7 @@ public class GTQTRecipesManager {
         MolecularTransformer.init();
         StrontiumRadiumChain.init();
         AlgaeChain.init();
+        FluidizedBedChain.init();
         AcidReactorRecipes.init();
         PPBChain.init();
         BioReactor.init();
@@ -78,7 +79,6 @@ public class GTQTRecipesManager {
         MagnetoResonaticCircuits.init();
         VinylcinnamateChain.init();
         YeastLine.init();
-        GermaniumChain.init();
         NaquadahChain.init();
         MachineCasing.init();
         Bittern.init();

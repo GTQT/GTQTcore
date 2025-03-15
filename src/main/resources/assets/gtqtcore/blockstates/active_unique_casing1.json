@@ -1,0 +1,29 @@
+{
+  "forge_marker": 1,
+  "variants": {
+    "active=false,variant=nitinol_intake_casing": {
+      "model": "minecraft:cube_all",
+      "textures": {
+        "all": "gregtech:blocks/casings/pipe/nitinol_intake_casing"
+      }
+    },
+    "active=true,variant=nitinol_intake_casing": {
+      "model": "minecraft:cube_all",
+      "textures": {
+        "all": "gregtech:blocks/casings/pipe/nitinol_intake_casing_active"
+      }
+    },
+    "active=false,variant=hg1223_intake_casing": {
+      "model": "minecraft:cube_all",
+      "textures": {
+        "all": "gregtech:blocks/casings/pipe/hg1223_intake_casing"
+      }
+    },
+    "active=true,variant=hg1223_intake_casing": {
+      "model": "minecraft:cube_all",
+      "textures": {
+        "all": "gregtech:blocks/casings/pipe/hg1223_intake_casing_active"
+      }
+    }
+  }
+}

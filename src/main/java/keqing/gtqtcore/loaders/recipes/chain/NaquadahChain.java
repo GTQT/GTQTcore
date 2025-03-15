@@ -303,7 +303,7 @@ public class NaquadahChain {
                 .fluidOutputs(NaquadriaSolution.getFluid(1000))
                 .EUt(VA[IV])
                 .duration(1200)
-                .blastFurnaceTemp(880)
+                .blastFurnaceTemp(3600)
                 .buildAndRegister();
 
         //  Naquadria Solution -> Sulfur + Naquadria Waste + Sulfur dust
@@ -401,7 +401,7 @@ public class NaquadahChain {
                 .fluidOutputs(ImpureEnrichedNaquadahSolution.getFluid(1000))
                 .EUt(VA[ZPM])
                 .duration(1000)
-                .blastFurnaceTemp(1280)
+                .blastFurnaceTemp(6000)
                 .buildAndRegister();
 
     }

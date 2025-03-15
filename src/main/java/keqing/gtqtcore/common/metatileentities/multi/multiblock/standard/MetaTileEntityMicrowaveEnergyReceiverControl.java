@@ -396,8 +396,10 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
 
         builder.widget(new ImageCycleButtonWidget(274, 218, 18, 18, PSS_POWER, () -> pssModel, data->
         {
-            pssModel = !pssModel;
-            euStore=0;
+            if(pssPos!=null) {
+                pssModel = !pssModel;
+                euStore = 0;
+            }
         }).setTooltipHoverString((i) -> "gtqtcore.multiblock.universal.pss_" + (i == 0 ? "disabled" : "enabled")));
         builder.widget(new ImageWidget(274, 236, 18, 6, GuiTextures.BUTTON_POWER_DETAIL));
 

@@ -93,7 +93,7 @@ public class OceanChain {
                 .output(dust, KelpAsh,1)
                 .duration(100)
                 .EUt(30)
-                .blastFurnaceTemp(1000)
+                .blastFurnaceTemp(1800)
                 .buildAndRegister();
 
         BURNER_REACTOR_RECIPES.recipeBuilder()

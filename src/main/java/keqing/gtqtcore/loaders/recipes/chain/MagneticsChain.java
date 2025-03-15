@@ -36,6 +36,7 @@ public class MagneticsChain {
                 .fluidInputs(Phosphine.getFluid(1000))
                 .output(ingot, PlutoniumPhosphide, 2)
                 .fluidOutputs(Hydrogen.getFluid(6000))
+                .blastFurnaceTemp(4500)
                 .duration(60).EUt(VA[IV]).buildAndRegister();
     }
 
@@ -61,8 +62,9 @@ public class MagneticsChain {
                 .input(dust, Iron, 2)
                 .fluidInputs(Oxygen.getFluid(3000))
                 .output(dust, FerricOxide, 5)
-                .blastFurnaceTemp(473)
-                .duration(50).EUt(120).buildAndRegister();
+                .blastFurnaceTemp(1800)
+                .duration(50)
+                .EUt(120).buildAndRegister();
 
         CENTRIFUGE_RECIPES.recipeBuilder()
                 .input(dust, Hematite)

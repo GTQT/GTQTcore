@@ -60,6 +60,7 @@ public class BoronNitrideChain {
                 .output(ingot, LithiumHydride, 1)
                 .EUt(VA[HV])
                 .duration(15 * SECOND)
+                .blastFurnaceTemp(2700)
                 .buildAndRegister();
 
         // 8BF3 + 6LiH -> B2H6 + 6LiBF4
@@ -99,6 +100,7 @@ public class BoronNitrideChain {
                 .fluidOutputs(BoronTrichloride.getFluid(2000))
                 .fluidOutputs(CarbonMonoxide.getFluid(3000))
                 .EUt(VA[HV])
+                .blastFurnaceTemp(2700)
                 .duration(4 * SECOND + 10 * TICK)
                 .buildAndRegister();
 

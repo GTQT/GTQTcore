@@ -21,7 +21,7 @@ import static gregtech.api.unification.ore.OrePrefix.dust;
 public class GermaniumProcessing {
 
     public static void init() {
-        BLAST_RECIPES.recipeBuilder()
+        BURNER_REACTOR_RECIPES.recipeBuilder()
                 .duration(140)
                 .EUt(VA[HV])
                 .input(dust, Sphalerite, 2)

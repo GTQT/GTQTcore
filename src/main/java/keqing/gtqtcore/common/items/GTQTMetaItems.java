@@ -102,6 +102,16 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem CATALYST_BED_UXV;
     public static MetaItem<?>.MetaValueItem CATALYST_BED_OpV;
     public static MetaItem<?>.MetaValueItem CATALYST_BED_MAX;
+
+    public static MetaItem<?>.MetaValueItem CATALYST_GAS;
+    public static MetaItem<?>.MetaValueItem CATALYST_CO;
+    public static MetaItem<?>.MetaValueItem CATALYST_CU;
+    public static MetaItem<?>.MetaValueItem CATALYST_ZN;
+    public static MetaItem<?>.MetaValueItem CATALYST_CR;
+    public static MetaItem<?>.MetaValueItem CATALYST_NB;
+    public static MetaItem<?>.MetaValueItem CATALYST_ZR;
+    public static MetaItem<?>.MetaValueItem CATALYST_RH;
+
     public static MetaItem<?>.MetaValueItem SHEWANELLA_CULTURE;
     public static MetaItem<?>.MetaValueItem STREPTOCOCCUS_CULTURE;
     public static MetaItem<?>.MetaValueItem ESCHERICHIA_CULTURE;
@@ -620,6 +630,10 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem CLOSED_TIMELIKE_CURVE_GUIDANCE_UNIT;
     public static MetaItem<?>.MetaValueItem NUCLEAR_CLOCK;
     public static MetaItem<?>.MetaValueItem MANIFOLD_OSCILLATORY_POWER_CELL;
+    public static MetaItem<?>.MetaValueItem ULTIMATE_BATTERY_MK2;
+    public static MetaItem<?>.MetaValueItem ULTIMATE_BATTERY_MK3;
+    public static MetaItem<?>.MetaValueItem ULTIMATE_BATTERY_MK4;
+    public static MetaItem<?>.MetaValueItem ULTIMATE_BATTERY_MK5;
 
     public static MetaItem<?>.MetaValueItem RETICLE_GRID_MKI;
     public static MetaItem<?>.MetaValueItem RETICLE_GRID_MKII;

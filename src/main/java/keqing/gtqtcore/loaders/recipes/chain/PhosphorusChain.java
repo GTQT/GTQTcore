@@ -19,13 +19,13 @@ public class PhosphorusChain {
     private static void phosphorus() {
         // 2Ca3(PO4)2 + 6SiO2 + 5C -> 6CaSiO3 + 5CO2 + P4
         BURNER_REACTOR_RECIPES.recipeBuilder()
-                .input(dust, TricalciumPhosphate, 10) //TODO cursed decomp
+                .input(dust, TricalciumPhosphate, 10)
                 .input(dust, SiliconDioxide, 18)
                 .input(dust, Carbon, 5)
                 .output(dust, Wollastonite, 30)
                 .output(gem, WhitePhosphorus)
                 .fluidOutputs(CarbonDioxide.getFluid(5000))
-                .blastFurnaceTemp(1073)
+                .blastFurnaceTemp(1800)
                 .duration(200).EUt(VA[MV]).buildAndRegister();
 
         //TODO find better recipe

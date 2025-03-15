@@ -10,6 +10,7 @@ import static gregtech.api.unification.material.info.MaterialFlags.*;
 import static gregtech.api.unification.material.info.MaterialIconSet.*;
 import static gregtech.api.util.GTUtility.gregtechId;
 import static gregtechfoodoption.utils.GTFOUtils.averageRGB;
+import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 
 import keqing.gtqtcore.api.unification.GTQTMaterials;
@@ -339,5 +340,250 @@ public class HigherDegreeMaterials {
                 .color(0xCC94CC)
                 .iconSet(FINE)
                 .build();
+
+        //  24093 Lanthanum Extracting Nano Resin
+        LanthanumExtractingNanoResin = new Material.Builder(getMaterialsId(), gregtechId("lanthanum_extracting_nano_resin"))
+                .liquid()
+                .color(LanthanumOxide.getMaterialRGB())
+                .iconSet(DULL)
+                .build();
+
+        //  24094 Praseodymium Extracting Nano Resin
+        PraseodymiumExtractingNanoResin = new Material.Builder(getMaterialsId(), gregtechId("praseodymium_extracting_nano_resin"))
+                .liquid()
+                .color(PraseodymiumOxide.getMaterialRGB())
+                .iconSet(DULL)
+                .build();
+
+        //  24095 Neodymium Extracting Nano Resin
+        NeodymiumExtractingNanoResin = new Material.Builder(getMaterialsId(), gregtechId("neodymium_extracting_nano_resin"))
+                .liquid()
+                .color(NeodymiumOxide.getMaterialRGB())
+                .iconSet(DULL)
+                .build();
+
+        //  24096 Cerium Extracting Nano Resin
+        CeriumExtractingNanoResin = new Material.Builder(getMaterialsId(), gregtechId("cerium_extracting_nano_resin"))
+                .liquid()
+                .color(CeriumOxide.getMaterialRGB())
+                .iconSet(DULL)
+                .build();
+
+        //  24097 Scandium Extracting Nano Resin
+        ScandiumExtractingNanoResin = new Material.Builder(getMaterialsId(), gregtechId("scandium_extracting_nano_resin"))
+                .liquid()
+                .color(ScandiumOxide.getMaterialRGB())
+                .iconSet(DULL)
+                .build();
+
+        //  24098 Europium Extracting Nano Resin
+        EuropiumExtractingNanoResin = new Material.Builder(getMaterialsId(), gregtechId("europium_extracting_nano_resin"))
+                .liquid()
+                .color(EuropiumOxide.getMaterialRGB())
+                .iconSet(DULL)
+                .build();
+
+        //  24099 Gadolinium Extracting Nano Resin
+        GadoliniumExtractingNanoResin = new Material.Builder(getMaterialsId(), gregtechId("gadolinium_extracting_nano_resin"))
+                .liquid()
+                .color(GadoliniumOxide.getMaterialRGB())
+                .iconSet(DULL)
+                .build();
+
+        //  24100 Samarium Extracting Nano Resin
+        SamariumExtractingNanoResin = new Material.Builder(getMaterialsId(), gregtechId("samarium_extracting_nano_resin"))
+                .liquid()
+                .color(SamariumOxide.getMaterialRGB())
+                .iconSet(DULL)
+                .build();
+
+        //  24101 Yttrium Extracting Nano Resin
+        YttriumExtractingNanoResin = new Material.Builder(getMaterialsId(), gregtechId("yttrium_extracting_nano_resin"))
+                .liquid()
+                .color(YttriumOxide.getMaterialRGB())
+                .iconSet(DULL)
+                .build();
+
+        //  24102 Terbium Extracting Nano Resin
+        TerbiumExtractingNanoResin = new Material.Builder(getMaterialsId(), gregtechId("terbium_extracting_nano_resin"))
+                .liquid()
+                .color(TerbiumOxide.getMaterialRGB())
+                .iconSet(DULL)
+                .build();
+
+        //  24103 Dysprosium Extracting Nano Resin
+        DysprosiumExtractingNanoResin = new Material.Builder(getMaterialsId(), gregtechId("dysprosium_extracting_nano_resin"))
+                .liquid()
+                .color(DysprosiumOxide.getMaterialRGB())
+                .iconSet(DULL)
+                .build();
+
+        //  24104 Holmium Extracting Nano Resin
+        HolmiumExtractingNanoResin = new Material.Builder(getMaterialsId(), gregtechId("holmium_extracting_nano_resin"))
+                .liquid()
+                .color(HolmiumOxide.getMaterialRGB())
+                .iconSet(DULL)
+                .build();
+
+        //  24105 Erbium Extracting Nano Resin
+        ErbiumExtractingNanoResin = new Material.Builder(getMaterialsId(), gregtechId("erbium_extracting_nano_resin"))
+                .liquid()
+                .color(ErbiumOxide.getMaterialRGB())
+                .iconSet(DULL)
+                .build();
+
+        //  24106 Thulium Extracting Nano Resin
+        ThuliumExtractingNanoResin = new Material.Builder(getMaterialsId(), gregtechId("thulium_extracting_nano_resin"))
+                .liquid()
+                .color(ThuliumOxide.getMaterialRGB())
+                .iconSet(DULL)
+                .build();
+
+        //  24107 Ytterbium Extracting Nano Resin
+        YtterbiumExtractingNanoResin = new Material.Builder(getMaterialsId(), gregtechId("ytterbium_extracting_nano_resin"))
+                .liquid()
+                .color(YtterbiumOxide.getMaterialRGB())
+                .iconSet(DULL)
+                .build();
+
+        //  24108 Lutetium Extracting Nano Resin
+        LutetiumExtractingNanoResin = new Material.Builder(getMaterialsId(), gregtechId("lutetium_extracting_nano_resin"))
+                .liquid()
+                .color(LutetiumOxide.getMaterialRGB())
+                .iconSet(DULL)
+                .build();
+
+        //  24109 Filled Lanthanum Extracting Nano Resin
+        FilledLanthanumExtractingNanoResin = new Material.Builder(getMaterialsId(), gregtechId("filled_lanthanum_extracting_nano_resin"))
+                .liquid()
+                .color(LanthanumOxide.getMaterialRGB())
+                .build();
+
+        //  24110 Filled Praseodymium Extracting Nano Resin
+        FilledPraseodymiumExtractingNanoResin = new Material.Builder(getMaterialsId(), gregtechId("filled_praseodymium_extracting_nano_resin"))
+                .liquid()
+                .color(PraseodymiumOxide.getMaterialRGB())
+                .build();
+
+        //  24111 Filled Neodymium Extracting Nano Resin
+        FilledNeodymiumExtractingNanoResin = new Material.Builder(getMaterialsId(), gregtechId("filled_neodymium_extracting_nano_resin"))
+                .liquid()
+                .color(NeodymiumOxide.getMaterialRGB())
+                .build();
+
+        //  24112 Filled Cerium Extracting Nano Resin
+        FilledCeriumExtractingNanoResin = new Material.Builder(getMaterialsId(), gregtechId("filled_cerium_extracting_nano_resin"))
+                .liquid()
+                .color(CeriumOxide.getMaterialRGB())
+                .build();
+
+        //  24113 Filled Scandium Extracting Nano Resin
+        FilledScandiumExtractingNanoResin = new Material.Builder(getMaterialsId(), gregtechId("filled_scandium_extracting_nano_resin"))
+                .liquid()
+                .color(ScandiumOxide.getMaterialRGB())
+                .build();
+
+        //  24114 Filled Europium Extracting Nano Resin
+        FilledEuropiumExtractingNanoResin = new Material.Builder(getMaterialsId(), gregtechId("filled_europium_extracting_nano_resin"))
+                .liquid()
+                .color(EuropiumOxide.getMaterialRGB())
+                .build();
+
+        //  24115 Filled Gadolinium Extracting Nano Resin
+        FilledGadoliniumExtractingNanoResin = new Material.Builder(getMaterialsId(), gregtechId("filled_gadolinium_extracting_nano_resin"))
+                .liquid()
+                .color(GadoliniumOxide.getMaterialRGB())
+                .build();
+
+        //  24116 Filled Samarium Extracting Nano Resin
+        FilledSamariumExtractingNanoResin = new Material.Builder(getMaterialsId(), gregtechId("filled_samarium_extracting_nano_resin"))
+                .liquid()
+                .color(SamariumOxide.getMaterialRGB())
+                .build();
+
+        //  24117 Filled Yttrium Extracting Nano Resin
+        FilledYttriumExtractingNanoResin = new Material.Builder(getMaterialsId(), gregtechId("filled_yttrium_extracting_nano_resin"))
+                .liquid()
+                .color(YttriumOxide.getMaterialRGB())
+                .build();
+
+        //  24118 Filled Terbium Extracting Nano Resin
+        FilledTerbiumExtractingNanoResin = new Material.Builder(getMaterialsId(), gregtechId("filled_terbium_extracting_nano_resin"))
+                .liquid()
+                .color(TerbiumOxide.getMaterialRGB())
+                .build();
+
+        //  24119 Filled Dysprosium Extracting Nano Resin
+        FilledDysprosiumExtractingNanoResin = new Material.Builder(getMaterialsId(), gregtechId("filled_dysprosium_extracting_nano_resin"))
+                .liquid()
+                .color(DysprosiumOxide.getMaterialRGB())
+                .build();
+
+        //  24120 Filled Holmium Extracting Nano Resin
+        FilledHolmiumExtractingNanoResin = new Material.Builder(getMaterialsId(), gregtechId("filled_holmium_extracting_nano_resin"))
+                .liquid()
+                .color(HolmiumOxide.getMaterialRGB())
+                .build();
+
+        //  24121 Filled Erbium Extracting Nano Resin
+        FilledErbiumExtractingNanoResin = new Material.Builder(getMaterialsId(), gregtechId("filled_erbium_extracting_nano_resin"))
+                .liquid()
+                .color(ErbiumOxide.getMaterialRGB())
+                .build();
+
+        //  24122 Filled Thulium Extracting Nano Resin
+        FilledThuliumExtractingNanoResin = new Material.Builder(getMaterialsId(), gregtechId("filled_thulium_extracting_nano_resin"))
+                .liquid()
+                .color(ThuliumOxide.getMaterialRGB())
+                .build();
+
+        //  24123 Filled Ytterbium Extracting Nano Resin
+        FilledYtterbiumExtractingNanoResin = new Material.Builder(getMaterialsId(), gregtechId("filled_ytterbium_extracting_nano_resin"))
+                .liquid()
+                .color(YtterbiumOxide.getMaterialRGB())
+                .build();
+
+        //  24124 Filled Lutetium Extracting Nano Resin
+        FilledLutetiumExtractingNanoResin = new Material.Builder(getMaterialsId(), gregtechId("filled_lutetium_extracting_nano_resin"))
+                .liquid()
+                .color(LutetiumOxide.getMaterialRGB())
+                .build();
+
+        //  24163 Rare Earth Chlorides Concentrate
+        RareEarthChloridesConcentrate = new Material.Builder(getMaterialsId(), gregtechId("rare_earth_chlorides_concentrate"))
+                .liquid()
+                .color(RareEarthChloridesSolution.getMaterialRGB() - 10)
+                .iconSet(DULL)
+                .build();
+
+        //  24164 Rare Earth Chlorides Enriched Solution
+        RareEarthChloridesEnrichedSolution = new Material.Builder(getMaterialsId(), gregtechId("rare_earth_chlorides_enriched_solution"))
+                .liquid()
+                .color(RareEarthChloridesSolution.getMaterialRGB() - 20)
+                .iconSet(DULL)
+                .build();
+
+        //  24165 Rare Earth Chlorides Diluted Solution
+        RareEarthChloridesDilutedSolution = new Material.Builder(getMaterialsId(), gregtechId("rare_earth_chlorides_diluted_solution"))
+                .liquid()
+                .color(RareEarthChloridesSolution.getMaterialRGB() - 40)
+                .iconSet(DULL)
+                .build();
+
+        //  24166 Chlorinated Rare Earth Waste Fluid
+        ChlorinatedRareEarthWasteFluid = new Material.Builder(getMaterialsId(), gregtechId("chlorinated_rare_earth_waste_fluid"))
+                .liquid()
+                .color(RareEarthChloridesSolution.getMaterialRGB() - 80)
+                .iconSet(DULL)
+                .build();
+
+        MysteriousCrystal = new Material.Builder(getMaterialsId(), gregtechId("mysterious_crystal"))
+                .gem()
+                .ore(2, 2)
+                .color(0x16856C)
+                .iconSet(DIAMOND)
+                .flags(GENERATE_PLATE, GENERATE_LENS)
+                .build()
+                .setFormula("My", false);
     }
 }

@@ -8,6 +8,7 @@ import gregtech.api.unification.material.properties.*;
 import static gregtech.api.GTValues.UEV;
 import static gregtech.api.GTValues.VA;
 import static gregtech.api.unification.material.Materials.*;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.Ozone;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.TitanSteel;
 
 public class GTQTMaterialPropertyAddition {
@@ -74,7 +75,6 @@ public class GTQTMaterialPropertyAddition {
                         .color(0x9B9B9B) // 二氧化碳液态颜色
                         .name("liquid_carbon_dioxide")
                         .translation("gregtech.fluid.liquid_generic"));
-
 
         Zirconium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
         Thulium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
@@ -202,6 +202,10 @@ public class GTQTMaterialPropertyAddition {
         // Fluids
         SodiumHydroxide.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
         SodiumBisulfate.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
+        Scandium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
+        Dysprosium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
+        Holmium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
+
 
         AmmoniumChloride.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
         Hafnium.setProperty(PropertyKey.DUST, new DustProperty());

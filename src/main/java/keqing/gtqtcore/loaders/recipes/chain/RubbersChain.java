@@ -75,7 +75,7 @@ public class RubbersChain {
                 .fluidOutputs(DilutedHydrochloricAcid.getFluid(6000))
                 .EUt(VA[HV])
                 .duration(140)
-                .blastFurnaceTemp(796)
+                .blastFurnaceTemp(2700)
                 .buildAndRegister();
 
         //  Sodium Fluoride + Ethanol + Fluorine -> Sodium Trifluoroethanolate + Hydrogen
@@ -192,6 +192,7 @@ public class RubbersChain {
                 .fluidInputs(Phosgene.getFluid(2000))
                 .fluidOutputs(TolueneDiisocyanate.getFluid(1000))
                 .fluidOutputs(HydrochloricAcid.getFluid(4000))
+                .blastFurnaceTemp(3600)
                 .EUt(VA[HV])
                 .duration(45 * SECOND)
                 .buildAndRegister();

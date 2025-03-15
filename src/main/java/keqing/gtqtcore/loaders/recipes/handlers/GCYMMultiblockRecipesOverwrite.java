@@ -332,7 +332,7 @@ public class GCYMMultiblockRecipesOverwrite {
         ModHandler.removeRecipeByName("gcym:large_circuit_assembler");
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(CIRCUIT_GOOD_II, 8)
-                .input(WIREMILL[IV], 16)
+                .input(CIRCUIT_ASSEMBLER[IV], 16)
                 .input(ROBOT_ARM_LuV, 16)
                 .input(EMITTER_LuV, 16)
                 .input(CONVEYOR_MODULE_LuV, 16)

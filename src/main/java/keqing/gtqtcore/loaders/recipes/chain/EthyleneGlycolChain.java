@@ -20,7 +20,7 @@ public class EthyleneGlycolChain {
                 .fluidOutputs(EthyleneOxide.getFluid(6000))
                 .fluidOutputs(CarbonDioxide.getFluid(2000))
                 .fluidOutputs(Water.getFluid(2000))
-                .blastFurnaceTemp(450)
+                .blastFurnaceTemp(3600)
                 .duration(150).EUt(VA[HV]).buildAndRegister();
 
         // The OMEGA Process (simplified)

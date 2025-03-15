@@ -18,6 +18,7 @@ import java.util.EnumMap;
 
 public class GTQTMetaBlocks {
     public static BlockActiveUniqueCasing blockActiveUniqueCasing;
+    public static BlockActiveUniqueCasing1 blockActiveUniqueCasing1;
     public static BlockCleanroomCasing blockCleanroomCasing;
     public static BlockComponentAssemblyLineCasing blockComponentAssemblyLineCasing;
     public static BlockCompressedFusionReactor blockCompressedFusionReactor;
@@ -64,6 +65,9 @@ public class GTQTMetaBlocks {
 
         blockActiveUniqueCasing = new BlockActiveUniqueCasing();
         blockActiveUniqueCasing.setRegistryName("active_unique_casing");
+
+        blockActiveUniqueCasing1 = new BlockActiveUniqueCasing1();
+        blockActiveUniqueCasing1.setRegistryName("active_unique_casing1");
 
         blockCleanroomCasing = new BlockCleanroomCasing();
         blockCleanroomCasing.setRegistryName("gtqtcore_cleanroom_casing");
@@ -171,7 +175,8 @@ public class GTQTMetaBlocks {
 
     @SideOnly(Side.CLIENT)
     public static void registerItemModels() {
-        registerItemModel(blockActiveUniqueCasing);
+        blockActiveUniqueCasing.onModelRegister();
+        blockActiveUniqueCasing1.onModelRegister();
         registerItemModel(blockCleanroomCasing);
         registerItemModel(blockComponentAssemblyLineCasing);
         registerItemModel(blockCompressedFusionReactor);

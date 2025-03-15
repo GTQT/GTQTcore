@@ -71,6 +71,12 @@ public class CommonProxy {
             return GTQTMetaItems.PROGRAMMABLE_CIRCUIT_0.getStackForm();
         }
     };
+    public static final CreativeTabs GTQTCore_CO = new CreativeTabs("gtqtco") {
+        @Override
+        public ItemStack createIcon() {
+            return GTQTMetaItems.RETICLE_GRID_MKI.getStackForm();
+        }
+    };
     public static final CreativeTabs GTQTCore_BIO = new CreativeTabs("gtqtbio") {
         @Override
         public ItemStack createIcon() {
@@ -162,6 +168,7 @@ public class CommonProxy {
         在注册MetaBlock时用到
         */
         registry.register(GTQTMetaBlocks.blockActiveUniqueCasing);
+        registry.register(GTQTMetaBlocks.blockActiveUniqueCasing1);
         registry.register(GTQTMetaBlocks.blockCleanroomCasing);
         registry.register(GTQTMetaBlocks.blockComponentAssemblyLineCasing);
         registry.register(GTQTMetaBlocks.blockCompressedFusionReactor);
@@ -230,6 +237,7 @@ public class CommonProxy {
         */
 
         registry.register(createItemBlock(GTQTMetaBlocks.blockActiveUniqueCasing, VariantItemBlock::new));
+        registry.register(createItemBlock(GTQTMetaBlocks.blockActiveUniqueCasing1, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.blockComponentAssemblyLineCasing, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.blockCompressedFusionReactor, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.blockCoolingCoil, VariantItemBlock::new));

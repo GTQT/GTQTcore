@@ -144,6 +144,7 @@ public class PlasticChain {
                 .fluidInputs(Nitrogen.getFluid(100))
                 .output(ingot, Polycaprolactam, 1)
                 .EUt(VA[MV])
+                .blastFurnaceTemp(2700)
                 .duration(7 * SECOND + 10 * TICK)
                 .buildAndRegister();
 

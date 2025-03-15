@@ -37,6 +37,8 @@ public class BlockMultiblockCasing3 extends VariantBlock<BlockMultiblockCasing3.
         tumbaga("tumbaga"),
         NITINOL_MACHINE_CASING("nitinol_machine_casing"),
         HC_ALLOY_CASING("hc_alloy_casing"),
+        NITINOL_GEARBOX("nitinol_gearbox"),
+        HG1223_GEARBOX("hg1223_gearbox"),
         SFTC("supercritical_fuel_trans_casing"),
         SFTS("supercritical_fuel_trans_score"),
         NAQUADRIA_CASING("naquadria_casing"),
