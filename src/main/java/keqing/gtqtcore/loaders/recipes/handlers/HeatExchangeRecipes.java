@@ -5,10 +5,11 @@ import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.material.Material;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 
-import static gregtech.api.GTValues.EV;
-import static gregtech.api.GTValues.V;
+import static gregtech.api.GTValues.*;
+import static gregtech.api.recipes.RecipeMaps.DISTILLATION_RECIPES;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.Materials.Oxygen;
+import static gregtech.api.unification.ore.OrePrefix.dust;
 import static keqing.gtqtcore.api.GCYSValues.MV;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
@@ -27,7 +28,31 @@ public class HeatExchangeRecipes {
                 .duration(20)
                 .buildAndRegister();
 
-        //  Lava
+        //  尾气
+        HEAT_EXCHANGE_RECIPES.recipeBuilder()
+                .fluidInputs(DistilledWater.getFluid(5))
+                .fluidInputs(OverheatedGas.getFluid(4000))
+                .fluidOutputs(Steam.getFluid(160 * 5))
+                .fluidOutputs(SuperheatedSteam.getFluid(80 * 5))
+                .fluidOutputs(NormalGas.getFluid(4000))
+                .maxRate(1600)
+                .flowRate(500)
+                .duration(20)
+                .buildAndRegister();
+
+        //尾气回收
+        DISTILLATION_RECIPES.recipeBuilder()
+                .fluidInputs(NormalGas.getFluid(16000))
+                .output(dust, Ash, 16)
+                .fluidOutputs(CarbonMonoxide.getFluid(2000)) // 假设分离出500mB的一氧化碳
+                .fluidOutputs(CarbonDioxide.getFluid(4000)) // 假设分离出1000mB的二氧化碳
+                .fluidOutputs(Nitrogen.getFluid(6000)) // 假设分离出1500mB的氮气
+                .fluidOutputs(Oxygen.getFluid(4000)) // 假设分离出1000mB的氧气
+                .EUt(VA[MV])
+                .duration(200)
+                .buildAndRegister();
+
+
         HEAT_EXCHANGE_RECIPES.recipeBuilder()
                 .fluidInputs(DistilledWater.getFluid(5))
                 .fluidInputs(Lava.getFluid(1))

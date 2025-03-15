@@ -63,8 +63,9 @@ private static void ThoriumBasedLiquidFuelChain() {
         //  Th64Li4Ba2Hg Combustion Generator Recipe
         COMBUSTION_GENERATOR_FUELS.recipeBuilder()
                 .fluidInputs(ThoriumBasedLiquidFuel.getFluid(10))
-                .EUt(VA[IV])
+                .EUt(8192)
                 .duration((int) (2.5 * SECOND))
+                .fluidOutputs(OverheatedGas.getFluid(2500))
                 .buildAndRegister();
 
         //  Th64Li4Ba2Hg -> *Th64Li4Ba2Hg*
@@ -118,8 +119,9 @@ private static void ThoriumBasedLiquidFuelChain() {
         //  U36K8Nq4Rn Combustion Generator Recipe
         COMBUSTION_GENERATOR_FUELS.recipeBuilder()
                 .fluidInputs(UraniumBasedLiquidFuel.getFluid(10))
-                .EUt(VA[IV])
+                .EUt(8192)
                 .duration(5 * SECOND)
+                .fluidOutputs(OverheatedGas.getFluid(5000))
                 .buildAndRegister();
 
         //  U36K8Nq4Rn -> *U36K8Nq4Rn*
@@ -175,8 +177,9 @@ private static void ThoriumBasedLiquidFuelChain() {
         //  Pu64Rb8Cs16Nq+2 Combustion Generator Recipe
         COMBUSTION_GENERATOR_FUELS.recipeBuilder()
                 .fluidInputs(PlutoniumBasedLiquidFuel.getFluid(10))
-                .EUt(VA[IV])
+                .EUt(8192)
                 .duration((int) (7.5 * SECOND))
+                .fluidOutputs(OverheatedGas.getFluid(7500))
                 .buildAndRegister();
 
         //  Pu64Rb8Cs16Nq+2 -> *Pu64Rb8Cs16Nq+2*
@@ -830,22 +833,25 @@ private static void ThoriumBasedLiquidFuelChain() {
         //  Light Naquadah Fuel
         COMBUSTION_GENERATOR_FUELS.recipeBuilder()
                 .fluidInputs(LightNaquadahFuel.getFluid(1))
-                .EUt((int) V[IV])
+                .EUt(8192)
                 .duration(15)
+                .fluidOutputs(OverheatedGas.getFluid(750))
                 .buildAndRegister();
 
         //  Medium Naquadah Fuel
         COMBUSTION_GENERATOR_FUELS.recipeBuilder()
                 .fluidInputs(MediumNaquadahFuel.getFluid(1))
-                .EUt((int) V[IV])
+                .EUt(8192)
                 .duration(30)
+                .fluidOutputs(OverheatedGas.getFluid(1500))
                 .buildAndRegister();
 
         //  Heavy Naquadah Fuel
         COMBUSTION_GENERATOR_FUELS.recipeBuilder()
                 .fluidInputs(HeavyNaquadahFuel.getFluid(1))
-                .EUt((int) V[IV])
+                .EUt(8192)
                 .duration(45)
+                .fluidOutputs(OverheatedGas.getFluid(2250))
                 .buildAndRegister();
 
         //硅岩基

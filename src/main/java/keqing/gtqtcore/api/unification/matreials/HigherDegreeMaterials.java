@@ -1,5 +1,6 @@
 package keqing.gtqtcore.api.unification.matreials;
 import gregtech.api.GTValues;
+import gregtech.api.fluids.FluidBuilder;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.properties.BlastProperty;
 import gregtech.api.unification.material.properties.ToolProperty;
@@ -585,5 +586,19 @@ public class HigherDegreeMaterials {
                 .flags(GENERATE_PLATE, GENERATE_LENS)
                 .build()
                 .setFormula("My", false);
+
+        //过热尾气
+        OverheatedGas = new Material.Builder(getMaterialsId(), gregtechId("overheated_gas"))
+                .gas(new FluidBuilder().temperature(1800).color(0x8A8A8A))
+                .color(0x8A8A8A)
+                .iconSet(DULL)
+                .build();
+
+        //常温尾气
+        NormalGas = new Material.Builder(getMaterialsId(), gregtechId("normal_gas"))
+                .gas(new FluidBuilder().temperature(300).color(0x8A8A8A))
+                .color(0x8A8A8A)
+                .iconSet(DULL)
+                .build();
     }
 }

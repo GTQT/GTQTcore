@@ -4041,7 +4041,8 @@ gregtech.material.rare_earth_chlorides_enriched_solution=Enriched Solution of Ra
 gregtech.material.rare_earth_chlorides_diluted_solution=Diluted Solution of Rare Earth Chlorides
 gregtech.material.chlorinated_rare_earth_waste_fluid=Chlorinated Waste Fluid of Rare Earths
 gregtech.material.mysterious_crystal=Mysterious Crystal
-
+gregtech.material.overheated_gas=Overheated Gas
+gregtech.material.normal_gas=Normal Gas
 gregtech.material.niobium_tantalum_fe=Niobium-Tantalum Iron
 gregtech.material.niobium_tantalum_fec=Roasted Niobium-Tantalum Iron
 gregtech.material.niobium_chloride=Niobium Tetrachloride

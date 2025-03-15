@@ -4026,7 +4026,8 @@ gregtech.material.rare_earth_chlorides_enriched_solution=稀土氯化物富集�
 gregtech.material.rare_earth_chlorides_diluted_solution=稀土氯化物稀释液
 gregtech.material.chlorinated_rare_earth_waste_fluid=含氯稀土废液
 gregtech.material.mysterious_crystal=神秘水晶
-
+gregtech.material.overheated_gas=过热尾气
+gregtech.material.normal_gas=常温尾气
 gregtech.material.niobium_tantalum_fe=钽铌铁
 gregtech.material.niobium_tantalum_fec=焙烧钽铌铁
 gregtech.material.niobium_chloride=四氯化铌

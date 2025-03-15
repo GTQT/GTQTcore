@@ -131,7 +131,7 @@ public class GTQTcoreRecipeMaps {
             .setProgressBar(GuiTextures.PROGRESS_BAR_CRACKING, ProgressWidget.MoveType.HORIZONTAL)
             .setSound(GTSoundEvents.FILE_TOOL);
 
-    public static RecipeMap<FuelRecipeBuilder> FUEL_CELL = new RecipeMap<>("fuel_cell", 0, 0, 2, 0, new FuelRecipeBuilder(), false)
+    public static RecipeMap<FuelRecipeBuilder> FUEL_CELL = new RecipeMap<>("fuel_cell", 0, 0, 2, 1, new FuelRecipeBuilder(), false)
             .allowEmptyOutput();
 
     public static final RecipeMap<PseudoMultiRecipeBuilder> LATEX_COLLECTOR_RECIPES = new RecipeMap<>("latex_collector", 0, 2, 1, 2, new PseudoMultiRecipeBuilder(), false)
@@ -472,7 +472,7 @@ public class GTQTcoreRecipeMaps {
                 .setSound(GTSoundEvents.BATH);
 
         ROCKET_RECIPES = new RecipeMap<>("rocket_engine_recipes",
-                0, 0, 1, 0, new FuelRecipeBuilder(), false)
+                0, 0, 1, 1, new FuelRecipeBuilder(), false)
                 .setSlotOverlay(false, true, true, GuiTextures.CENTRIFUGE_OVERLAY)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_GAS_COLLECTOR, ProgressWidget.MoveType.HORIZONTAL)
                 .setSound(GTSoundEvents.TURBINE)
@@ -600,6 +600,7 @@ public class GTQTcoreRecipeMaps {
         REPLICATOR_RECIPES.setMaxFluidInputs(3);
         REPLICATOR_RECIPES.setSlotOverlay(false, false, GuiTextures.DUST_OVERLAY);
         REPLICATOR_RECIPES.setSlotOverlay(true, false, GuiTextures.DUST_OVERLAY);
+        COMBUSTION_GENERATOR_FUELS.setMaxFluidOutputs(1);
     }
 
 }
