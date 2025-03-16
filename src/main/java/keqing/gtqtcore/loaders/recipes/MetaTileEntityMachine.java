@@ -892,6 +892,17 @@ public class MetaTileEntityMachine {
         registerMachineRecipe(GTQTMetaTileEntities.DEHYDRATOR, "WCW", "MHM", "GAG", 'C', CIRCUIT, 'M', CABLE_QUAD, 'H', HULL,
                 'G', MOTOR, 'A', ROBOT_ARM, 'W', COIL_HEATING_DOUBLE);
 
+        // Laminator
+        MetaTileEntityLoader.registerMachineRecipe(true, LAMINATOR,
+                "XGW", "PCS", "WHX",
+                'H', CraftingComponent.HULL,
+                'X', CraftingComponent.CIRCUIT,
+                'W', CraftingComponent.CABLE,
+                'P', CraftingComponent.PUMP,
+                'C', CraftingComponent.CONVEYOR,
+                'S', PISTON,
+                'G', OreDictUnifier.get(gear, Steel));
+
         registerMachineRecipe(GTQTMetaTileEntities.RADIATION_HATCH,
                 "SCS", "EHE", "SCS",
                 'C', CIRCUIT,

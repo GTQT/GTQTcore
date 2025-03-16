@@ -31,9 +31,31 @@ public class HeatExchangeRecipes {
         //  尾气
         HEAT_EXCHANGE_RECIPES.recipeBuilder()
                 .fluidInputs(DistilledWater.getFluid(5))
+                .fluidInputs(SuperCriticalGas.getFluid(4000))
+                .fluidOutputs(Steam.getFluid(1600))
+                .fluidOutputs(SuperheatedSteam.getFluid(800))
+                .fluidOutputs(NormalGas.getFluid(4000))
+                .maxRate(25600)
+                .flowRate(500)
+                .duration(20)
+                .buildAndRegister();
+
+        HEAT_EXCHANGE_RECIPES.recipeBuilder()
+                .fluidInputs(DistilledWater.getFluid(5))
                 .fluidInputs(OverheatedGas.getFluid(4000))
-                .fluidOutputs(Steam.getFluid(160 * 5))
-                .fluidOutputs(SuperheatedSteam.getFluid(80 * 5))
+                .fluidOutputs(Steam.getFluid(800))
+                .fluidOutputs(SuperheatedSteam.getFluid(400))
+                .fluidOutputs(NormalGas.getFluid(4000))
+                .maxRate(6400)
+                .flowRate(500)
+                .duration(20)
+                .buildAndRegister();
+
+        HEAT_EXCHANGE_RECIPES.recipeBuilder()
+                .fluidInputs(DistilledWater.getFluid(5))
+                .fluidInputs(HighTemperatureGas.getFluid(4000))
+                .fluidOutputs(Steam.getFluid(400))
+                .fluidOutputs(SuperheatedSteam.getFluid(200))
                 .fluidOutputs(NormalGas.getFluid(4000))
                 .maxRate(1600)
                 .flowRate(500)
@@ -44,14 +66,15 @@ public class HeatExchangeRecipes {
         DISTILLATION_RECIPES.recipeBuilder()
                 .fluidInputs(NormalGas.getFluid(16000))
                 .output(dust, Ash, 16)
-                .fluidOutputs(CarbonMonoxide.getFluid(2000)) // 假设分离出500mB的一氧化碳
-                .fluidOutputs(CarbonDioxide.getFluid(4000)) // 假设分离出1000mB的二氧化碳
-                .fluidOutputs(Nitrogen.getFluid(6000)) // 假设分离出1500mB的氮气
-                .fluidOutputs(Oxygen.getFluid(4000)) // 假设分离出1000mB的氧气
+                .fluidOutputs(Nitrogen.getFluid(6000)) // 氮气（馏分最高）
+                .fluidOutputs(Oxygen.getFluid(4000)) // 氧气
+                .fluidOutputs(CarbonDioxide.getFluid(3000)) // 二氧化碳
+                .fluidOutputs(NitrogenDioxide.getFluid(1000)) // 二氧化氮
+                .fluidOutputs(CarbonMonoxide.getFluid(1000)) // 一氧化碳
+                .fluidOutputs(NitricOxide.getFluid(1000)) // 一氧化氮
                 .EUt(VA[MV])
                 .duration(200)
                 .buildAndRegister();
-
 
         HEAT_EXCHANGE_RECIPES.recipeBuilder()
                 .fluidInputs(DistilledWater.getFluid(5))

@@ -225,14 +225,14 @@ public class OilChains {
         COMBUSTION_GENERATOR_FUELS.recipeBuilder()
                 .fluidInputs(DieselLight.getFluid(1))
                 .duration(27)
-                .fluidOutputs(OverheatedGas.getFluid(1350))
+                .fluidOutputs(HighTemperatureGas.getFluid(1350))
                 .EUt(32)
                 .buildAndRegister();
 
         COMBUSTION_GENERATOR_FUELS.recipeBuilder()
                 .fluidInputs(DieselHeavy.getFluid(1))
                 .duration(27)
-                .fluidOutputs(OverheatedGas.getFluid(1350))
+                .fluidOutputs(HighTemperatureGas.getFluid(1350))
                 .EUt(32)
                 .buildAndRegister();
 
@@ -240,7 +240,7 @@ public class OilChains {
         RecipeMaps.COMBUSTION_GENERATOR_FUELS.recipeBuilder()
                 .fluidInputs(Naphtha.getFluid(1))
                 .duration(45)
-                .fluidOutputs(OverheatedGas.getFluid(2250))
+                .fluidOutputs(HighTemperatureGas.getFluid(2250))
                 .EUt(32)
                 .buildAndRegister();
 
@@ -248,7 +248,7 @@ public class OilChains {
         RecipeMaps.COMBUSTION_GENERATOR_FUELS.recipeBuilder()
                 .fluidInputs(SulfuricLightFuel.getFluid(4))
                 .duration(15)
-                .fluidOutputs(OverheatedGas.getFluid(750))
+                .fluidOutputs(HighTemperatureGas.getFluid(750))
                 .EUt(32)
                 .buildAndRegister();
 
@@ -256,7 +256,7 @@ public class OilChains {
         RecipeMaps.COMBUSTION_GENERATOR_FUELS.recipeBuilder()
                 .fluidInputs(Methanol.getFluid(4))
                 .duration(36)
-                .fluidOutputs(OverheatedGas.getFluid(1800))
+                .fluidOutputs(HighTemperatureGas.getFluid(1800))
                 .EUt(32)
                 .buildAndRegister();
 
@@ -264,7 +264,7 @@ public class OilChains {
         RecipeMaps.COMBUSTION_GENERATOR_FUELS.recipeBuilder()
                 .fluidInputs(Ethanol.getFluid(1))
                 .duration(18)
-                .fluidOutputs(OverheatedGas.getFluid(1900))
+                .fluidOutputs(HighTemperatureGas.getFluid(1900))
                 .EUt(32)
                 .buildAndRegister();
 
@@ -272,7 +272,7 @@ public class OilChains {
         RecipeMaps.COMBUSTION_GENERATOR_FUELS.recipeBuilder()
                 .fluidInputs(Octane.getFluid(2))
                 .duration(15)
-                .fluidOutputs(OverheatedGas.getFluid(750))
+                .fluidOutputs(HighTemperatureGas.getFluid(750))
                 .EUt(32)
                 .buildAndRegister();
 
@@ -280,7 +280,7 @@ public class OilChains {
         RecipeMaps.COMBUSTION_GENERATOR_FUELS.recipeBuilder()
                 .fluidInputs(BioDiesel.getFluid(1))
                 .duration(18)
-                .fluidOutputs(OverheatedGas.getFluid(900))
+                .fluidOutputs(HighTemperatureGas.getFluid(900))
                 .EUt(32)
                 .buildAndRegister();
 
@@ -288,7 +288,7 @@ public class OilChains {
         RecipeMaps.COMBUSTION_GENERATOR_FUELS.recipeBuilder()
                 .fluidInputs(LightFuel.getFluid(1))
                 .duration(30)
-                .fluidOutputs(OverheatedGas.getFluid(1500))
+                .fluidOutputs(HighTemperatureGas.getFluid(1500))
                 .EUt(32)
                 .buildAndRegister();
 
@@ -296,7 +296,7 @@ public class OilChains {
         RecipeMaps.COMBUSTION_GENERATOR_FUELS.recipeBuilder()
                 .fluidInputs(Diesel.getFluid(1))
                 .duration(45)
-                .fluidOutputs(OverheatedGas.getFluid(2250))
+                .fluidOutputs(HighTemperatureGas.getFluid(2250))
                 .EUt(32)
                 .buildAndRegister();
 
@@ -304,7 +304,7 @@ public class OilChains {
         RecipeMaps.COMBUSTION_GENERATOR_FUELS.recipeBuilder()
                 .fluidInputs(CetaneBoostedDiesel.getFluid(2))
                 .duration(135)
-                .fluidOutputs(OverheatedGas.getFluid(6750))
+                .fluidOutputs(HighTemperatureGas.getFluid(6750))
                 .EUt(32)
                 .buildAndRegister();
 
@@ -312,7 +312,7 @@ public class OilChains {
         RecipeMaps.COMBUSTION_GENERATOR_FUELS.recipeBuilder()
                 .fluidInputs(Gasoline.getFluid(1))
                 .duration(150)
-                .fluidOutputs(OverheatedGas.getFluid(7500))
+                .fluidOutputs(HighTemperatureGas.getFluid(7500))
                 .EUt(32)
                 .buildAndRegister();
 
@@ -320,7 +320,7 @@ public class OilChains {
         RecipeMaps.COMBUSTION_GENERATOR_FUELS.recipeBuilder()
                 .fluidInputs(HighOctaneGasoline.getFluid(1))
                 .duration(300)
-                .fluidOutputs(OverheatedGas.getFluid(15000))
+                .fluidOutputs(HighTemperatureGas.getFluid(15000))
                 .EUt(32)
                 .buildAndRegister();
 
@@ -328,7 +328,7 @@ public class OilChains {
         RecipeMaps.COMBUSTION_GENERATOR_FUELS.recipeBuilder()
                 .fluidInputs(Toluene.getFluid(1))
                 .duration(90)
-                .fluidOutputs(OverheatedGas.getFluid(4500))
+                .fluidOutputs(HighTemperatureGas.getFluid(4500))
                 .EUt(32)
                 .buildAndRegister();
 
@@ -336,7 +336,7 @@ public class OilChains {
         RecipeMaps.COMBUSTION_GENERATOR_FUELS.recipeBuilder()
                 .fluidInputs(OilLight.getFluid(32))
                 .duration(15)
-                .fluidOutputs(OverheatedGas.getFluid(750))
+                .fluidOutputs(HighTemperatureGas.getFluid(750))
                 .EUt(32)
                 .buildAndRegister();
 
@@ -344,7 +344,7 @@ public class OilChains {
         RecipeMaps.COMBUSTION_GENERATOR_FUELS.recipeBuilder()
                 .fluidInputs(RawOil.getFluid(64))
                 .duration(45)
-                .fluidOutputs(OverheatedGas.getFluid(2250))
+                .fluidOutputs(HighTemperatureGas.getFluid(2250))
                 .EUt(32)
                 .buildAndRegister();
 
@@ -799,14 +799,14 @@ public class OilChains {
         //燃油燃烧
         COMBUSTION_GENERATOR_FUELS.recipeBuilder()
                 .fluidInputs(LightFuel.getFluid(1))
-                .fluidOutputs(OverheatedGas.getFluid(400))
+                .fluidOutputs(HighTemperatureGas.getFluid(400))
                 .duration(8)
                 .EUt(32)
                 .buildAndRegister();
 
         COMBUSTION_GENERATOR_FUELS.recipeBuilder()
                 .fluidInputs(HeavyFuel.getFluid(1))
-                .fluidOutputs(OverheatedGas.getFluid(400))
+                .fluidOutputs(HighTemperatureGas.getFluid(400))
                 .duration(8)
                 .EUt(32)
                 .buildAndRegister();

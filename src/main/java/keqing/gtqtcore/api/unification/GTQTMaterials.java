@@ -825,7 +825,9 @@ public class GTQTMaterials {
     public static Material RareEarthChloridesDilutedSolution;
     public static Material ChlorinatedRareEarthWasteFluid;
     public static Material MysteriousCrystal;
+    public static Material SuperCriticalGas;
     public static Material OverheatedGas;
+    public static Material HighTemperatureGas;
     public static Material NormalGas;
 
     public static Material DrillingMud;

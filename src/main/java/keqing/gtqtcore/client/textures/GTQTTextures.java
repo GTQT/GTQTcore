@@ -3,6 +3,7 @@ package keqing.gtqtcore.client.textures;
 import codechicken.lib.texture.TextureUtils;
 import gregtech.api.gui.resources.SteamTexture;
 import gregtech.api.gui.resources.TextureArea;
+import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
 import gregtech.client.renderer.texture.cube.SimpleOrientedCubeRenderer;
 import gregtech.client.renderer.texture.cube.SimpleOverlayRenderer;
@@ -44,6 +45,7 @@ public class GTQTTextures {
             = new SimpleOverlayRenderer("multiblock/casing/osmiridium");
     public static final SimpleOverlayRenderer NEUTRONIUM_CASING
             = new SimpleOverlayRenderer("multiblock/casing/neutronium");
+    public static SimpleOverlayRenderer REINFORCED_TREATED_WOOD_WALL = new SimpleOverlayRenderer("multiblock/casing/reinforced_treated_wood_wall");
     public static SimpleOverlayRenderer ELEMENT_CONSTRAINS_MACHINE_CASING = new SimpleOverlayRenderer("multiblock/casings/element_constrains_machine_casing");
     public static OrientedOverlayRenderer PARTICLE_ACCELERATOR = new OrientedOverlayRenderer("overlay/particle_accelerator");
     public static TextureAtlasSprite PRESSURE_PIPE_SIDE;
@@ -204,6 +206,8 @@ public class GTQTTextures {
     public static OrientedOverlayRenderer MULTIPART_BALL_HATCH = new OrientedOverlayRenderer("multiparts/overlay_ball_hatch");
     public static OrientedOverlayRenderer CHEMICAL_DRYER_OVERLAY = new OrientedOverlayRenderer("overlay/chemical_dryer");
     public static OrientedOverlayRenderer BIO_REACTOR_OVERLAY = new OrientedOverlayRenderer("overlay/bio_reactor");
+    public static OrientedOverlayRenderer LAMINATOR_OVERLAY = new OrientedOverlayRenderer("overlay/laminator");
+    public static OrientedOverlayRenderer SPINNER_OVERL = new OrientedOverlayRenderer("overlay/spinner");
     public static OrientedOverlayRenderer CONDENSER_OVERLAY = new OrientedOverlayRenderer("overlay/condenser");
     public static OrientedOverlayRenderer SIMULATOR_OVERLAY = new OrientedOverlayRenderer("overlay/simulator");
     public static OrientedOverlayRenderer BIOMASS_GENERATOR_OVERLAY = new OrientedOverlayRenderer("overlay/biomass_generator");

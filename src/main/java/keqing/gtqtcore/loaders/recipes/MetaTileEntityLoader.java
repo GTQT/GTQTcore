@@ -21,6 +21,7 @@ import gregtech.loaders.recipe.CraftingComponent;
 import keqing.gtqtcore.api.unification.MaterialHelper;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.BlockElectrolyticBath;
+import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing6;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -62,6 +63,7 @@ import static keqing.gtqtcore.common.block.blocks.BlockCrucible.CrucibleType.QUA
 import static keqing.gtqtcore.common.block.blocks.BlockIsaCasing.CasingType.ASEPTIC_FARM_CASING;
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4.TurbineCasingType.ADVANCED_FILTER_CASING;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
+import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.BUFFER;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.DISTILLATION_TOWER;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.GAS_COLLECTOR;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.PYROLYSE_OVEN;
@@ -417,6 +419,22 @@ public class MetaTileEntityLoader {
                 .circuitMeta(11)
                 .output(COMMON_RUBBISH_BIN)
                 .duration(20).EUt(30).buildAndRegister();
+
+        // EV Buffer
+        ModHandler.addShapedRecipe(true, "buffer_ev", BUFFER[0].getStackForm(),
+                "HP ", "XC ", "   ",
+                'H', HULL[EV].getStackForm(),
+                'P', ELECTRIC_PUMP_EV,
+                'C', CONVEYOR_MODULE_EV,
+                'X', new UnificationEntry(circuit, MarkerMaterials.Tier.LV));
+
+        // IV Buffer
+        ModHandler.addShapedRecipe(true, "buffer_iv", BUFFER[1].getStackForm(),
+                "HP ", "XC ", "   ",
+                'H', HULL[IV].getStackForm(),
+                'P', ELECTRIC_PUMP_IV,
+                'C', CONVEYOR_MODULE_IV,
+                'X', new UnificationEntry(circuit, MarkerMaterials.Tier.LV));
 
         //海藻方块
         ASSEMBLER_RECIPES.recipeBuilder()
@@ -834,9 +852,23 @@ public class MetaTileEntityLoader {
                 'A', FLUID_CELL_LARGE_TUNGSTEN_STEEL);
 
         ModHandler.addShapedRecipe(true, "primitive_reactor", PRIMITIVE_REACTOR.getStackForm(),
-                "CGC", "ChC", "CGC",
-                'G', new UnificationEntry(OrePrefix.gear, Wood),
-                'C', MetaBlocks.STEAM_CASING.getItemVariant(BlockSteamCasing.SteamCasingType.WOOD_WALL));
+        "PRP", "sQh", "PSP",
+                'P', new UnificationEntry(plate, TreatedWood),
+                'Q', new UnificationEntry(pipeLargeFluid, TreatedWood),
+                'R', new UnificationEntry(rotor, Steel),
+                'S', new UnificationEntry(screw, Steel));
+
+        ModHandler.addShapedRecipe(true, "reinforced_treated_wood_wall", GTQTMetaBlocks.blockMultiblockCasing6.getItemVariant(BlockMultiblockCasing6.CasingType.REINFORCED_TREATED_WOOD_WALL),
+                "PhP", "QFQ", "PwP",
+                'P', new UnificationEntry(plate, TreatedWood),
+                'Q', new UnificationEntry(plate, Steel),
+                'F', new UnificationEntry(frameGt, TreatedWood));
+
+        ModHandler.addShapedRecipe(true, "reinforced_treated_wood_bottom", GTQTMetaBlocks.blockMultiblockCasing6.getItemVariant(BlockMultiblockCasing6.CasingType.REINFORCED_TREATED_WOOD_BOTTOM),
+                "PhP", "QFQ", "PwP",
+                'P', new UnificationEntry(plate, TreatedWood),
+                'Q', new UnificationEntry(stick, Iron),
+                'F', new UnificationEntry(frameGt, Steel));
 
         ModHandler.addShapedRecipe(true, "bronze_industrial_blast_furnace",
                 GTQTMetaTileEntities.INDUSTRIAL_PRIMITIVE_BLAST_FURNACE.getStackForm(),

@@ -31,11 +31,17 @@ public class FlowRateRecipeBuilder extends RecipeBuilder<FlowRateRecipeBuilder> 
 
     public boolean applyProperty(@Nonnull String key, Object value) {
         if (key.equals("max_rate")) {
-            flowRate(((Number)value).intValue());
+            // 检查 max_rate 是否已经赋值
+            if (getMaxRate() == 0) { // 如果 max_rate 未赋值
+                flowRate(((Number)value).intValue());
+            }
             return true;
         }
         if (key.equals("flow_rate")) {
-            flowRate(((Number)value).intValue());
+            // 检查 flow_rate 是否已经赋值
+            if (getFlowRate() == 0) { // 如果 flow_rate 未赋值
+                flowRate(((Number)value).intValue());
+            }
             return true;
         }
         return super.applyProperty(key, value);

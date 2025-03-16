@@ -34,7 +34,9 @@ public class BlockMultiblockCasing6 extends VariantBlock<BlockMultiblockCasing6.
     public enum CasingType implements IStringSerializable, IStateHarvestLevel {
         RHODIUM("rhodium",4),
         OSMIRIDIUM("osmiridium",4),
-        NEUTRONIUM("neutronium",4);
+        NEUTRONIUM("neutronium",4),
+        REINFORCED_TREATED_WOOD_WALL("reinforced_treated_wood_wall",1),
+        REINFORCED_TREATED_WOOD_BOTTOM("reinforced_treated_wood_bottom",1),;
 
         private final String name;
         private final int harvestLevel;

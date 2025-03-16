@@ -587,9 +587,23 @@ public class HigherDegreeMaterials {
                 .build()
                 .setFormula("My", false);
 
+        //超临界尾气
+        SuperCriticalGas = new Material.Builder(getMaterialsId(), gregtechId("supercritical_gas"))
+                .gas(new FluidBuilder().temperature(6000).color(0x8A8A8A))
+                .color(0x8A8A8A)
+                .iconSet(DULL)
+                .build();
+
         //过热尾气
         OverheatedGas = new Material.Builder(getMaterialsId(), gregtechId("overheated_gas"))
                 .gas(new FluidBuilder().temperature(1800).color(0x8A8A8A))
+                .color(0x8A8A8A)
+                .iconSet(DULL)
+                .build();
+
+        //高温尾气
+        HighTemperatureGas = new Material.Builder(getMaterialsId(), gregtechId("hightemperature_gas"))
+                .gas(new FluidBuilder().temperature(900).color(0x8A8A8A))
                 .color(0x8A8A8A)
                 .iconSet(DULL)
                 .build();

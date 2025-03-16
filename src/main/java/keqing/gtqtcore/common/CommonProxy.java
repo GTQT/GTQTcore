@@ -144,6 +144,8 @@ public class CommonProxy {
         PipeRecipeHandler.register();
         PartRecipeHandler.register();
         PartRecipeHandler1.register();
+        WireCombinationHandler.init();
+        WireRecipeHandler.init();
     }
 
     @SubscribeEvent

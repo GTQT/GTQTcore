@@ -25,6 +25,20 @@
         "textures": {
           "all": "gregtech:blocks/multiblock/casing/neutronium"
         }
+      },
+      "reinforced_treated_wood_wall": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casing/reinforced_treated_wood_wall"
+        }
+      },
+      "reinforced_treated_wood_bottom": {
+        "model": "minecraft:cube_bottom_top",
+        "textures": {
+          "top": "gregtech:blocks/multiblock/casing/reinforced_treated_wood_wall",
+          "side": "gregtech:blocks/multiblock/casing/reinforced_treated_wood_bottom",
+          "bottom": "#top"
+        }
       }
     }
   }
