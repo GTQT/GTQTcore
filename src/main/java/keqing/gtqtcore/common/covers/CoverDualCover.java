@@ -31,6 +31,7 @@ import it.unimi.dsi.fastutil.ints.IntList;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenCustomHashMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectOpenCustomHashSet;
+import keqing.gtqtcore.api.gui.GTQTGuiTextures;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.client.widgets.HideableFluidFilterContainer;
 import keqing.gtqtcore.client.widgets.HideableItemFilterContainer;
@@ -122,7 +123,7 @@ public class CoverDualCover extends CoverBase implements CoverWithUI, ITickable,
         primaryGroup.addWidget(new LabelWidget(10, 5, getUITitle(), GTValues.VN[tier]));
 
         primaryGroup
-                .addWidget(new ImageCycleButtonWidget(176 - 16 - 4, 166, 16, 16, GTQTTextures.ITEM_FLUID_OVERLAY, 2,
+                .addWidget(new ImageCycleButtonWidget(176 - 16 - 4, 166, 16, 16, GTQTGuiTextures.ITEM_FLUID_OVERLAY, 2,
                         () -> dualMode.ordinal(), val -> dualMode = DualMode.values()[val])
                         .setTooltipHoverString("cover.dual_cover.mode_changer"));
 

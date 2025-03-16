@@ -146,6 +146,7 @@ public class CommonProxy {
         PartRecipeHandler1.register();
         WireCombinationHandler.init();
         WireRecipeHandler.init();
+        GemHandler.init();
     }
 
     @SubscribeEvent
@@ -429,8 +430,8 @@ public class CommonProxy {
         IntegratedMiningDivision.init();
         HeatExchangeRecipes.init();
         OreDeal.init();
-        KeQingNET.init();
-        ISA.init();
+        TechReSearchNET.init();
+        ISALine.init();
         QTF.init();
         ComponentAssemblyLineRecipes.init();
         ComponentAssemblerRecipes.init();

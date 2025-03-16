@@ -48,6 +48,7 @@ import gregtech.api.util.TextFormattingUtil;
 import gregtech.common.ConfigHolder;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockNotifiablePart;
 import groovyjarjarantlr4.v4.runtime.misc.NotNull;
+import keqing.gtqtcore.api.gui.GTQTGuiTextures;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.client.widgets.ItemSlotTinyAmountTextWidget;
@@ -215,7 +216,7 @@ public class MetaTileEntityBudgetCRIBA12 extends MetaTileEntityMultiblockNotifia
         WidgetGroup pattern = new WidgetGroup(new Position(25, 20));
         for(int i=0;i<12;i++) {
             pattern.addWidget(new SlotWidget(patternSlot, i, (i%3)*18, (i/3)*18)
-                    .setBackgroundTexture(GuiTextures.SLOT, GTQTTextures.ME_PATTERN_OVERLAY));
+                    .setBackgroundTexture(GuiTextures.SLOT, GTQTGuiTextures.ME_PATTERN_OVERLAY));
         }
 
         // Item slots
@@ -267,7 +268,7 @@ public class MetaTileEntityBudgetCRIBA12 extends MetaTileEntityMultiblockNotifia
 
         // Return items
         buttons.addWidget(new ClickButtonWidget(18 * 6, 0, 18, 18, "", (clickData) -> returnItems())
-                .setButtonTexture(GTQTTextures.EXPORT).setTooltipText("gtqtcore.machine.budget_crib.return_button"));
+                .setButtonTexture(GTQTGuiTextures.EXPORT).setTooltipText("gtqtcore.machine.budget_crib.return_button"));
 
         builder.bindPlayerInventory(entityPlayer.inventory, GuiTextures.SLOT, 7, 18 + 18 * 5 + 12);
         return builder.widget(pattern).widget(slots).widget(buttons).build(getHolder(), entityPlayer);

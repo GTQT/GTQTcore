@@ -12,7 +12,6 @@ import gregtech.api.unification.material.MarkerMaterials;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.ore.OrePrefix;
-import gregtech.api.unification.stack.UnificationEntry;
 import gregtech.common.blocks.BlockCleanroomCasing;
 import gregtech.common.blocks.BlockComputerCasing;
 import gregtech.common.blocks.BlockFusionCasing;
@@ -62,7 +61,7 @@ import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.STEAM
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.*;
 import static keqing.gtqtcore.loaders.recipes.handlers.ChipHelper.SECOND;
 
-public class KeQingNET {
+public class TechReSearchNET {
 
     public static void init() {
         Pre();
@@ -180,7 +179,7 @@ public class KeQingNET {
                         .EUt(VA[UV]))
                 .output(MODEL_LOCATION_MKI)
                 .EUt(VA[UV])
-                .duration(5*MINUTE)
+                .duration(5 * MINUTE)
                 .buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
@@ -192,7 +191,7 @@ public class KeQingNET {
                         .EUt(VA[UV]))
                 .output(MODEL_LOCATION_MKII)
                 .EUt(VA[UV])
-                .duration(10*MINUTE)
+                .duration(10 * MINUTE)
                 .buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
@@ -204,7 +203,7 @@ public class KeQingNET {
                         .EUt(VA[UV]))
                 .output(MODEL_LOCATION_MKIII)
                 .EUt(VA[UV])
-                .duration(20*MINUTE)
+                .duration(20 * MINUTE)
                 .buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
@@ -216,7 +215,7 @@ public class KeQingNET {
                         .EUt(VA[UV]))
                 .output(MODEL_LOCATION_MKIV)
                 .EUt(VA[UHV])
-                .duration(40*MINUTE)
+                .duration(40 * MINUTE)
                 .buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
@@ -228,7 +227,7 @@ public class KeQingNET {
                         .EUt(VA[UV]))
                 .output(MODEL_LOCATION_MKV)
                 .EUt(VA[UHV])
-                .duration(80*MINUTE)
+                .duration(80 * MINUTE)
                 .buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
@@ -240,7 +239,7 @@ public class KeQingNET {
                         .EUt(VA[UV]))
                 .output(MODEL_LOCATION_MKVI)
                 .EUt(VA[UHV])
-                .duration(160*MINUTE)
+                .duration(160 * MINUTE)
                 .buildAndRegister();
 
         //29 天基棱镜
@@ -1473,7 +1472,6 @@ public class KeQingNET {
                 .duration(2000).EUt(480).buildAndRegister();
 
 
-
         //  Component Assembly Line
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(CIRCUIT_GOOD_III, 8)
@@ -2203,7 +2201,7 @@ public class KeQingNET {
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(frameGt, TungstenSteel, 16)
-                .inputs(GTQTMetaBlocks.blockMultiblockCasing4.getItemVariant(BlockMultiblockCasing4.TurbineCasingType.IRIDIUM_CASING,4))
+                .inputs(GTQTMetaBlocks.blockMultiblockCasing4.getItemVariant(BlockMultiblockCasing4.TurbineCasingType.IRIDIUM_CASING, 4))
                 .input(EMITTER_EV, 8)
                 .input(SENSOR_EV, 8)
                 .input(circuit, MarkerMaterials.Tier.EV, 16)
@@ -2229,7 +2227,7 @@ public class KeQingNET {
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(frameGt, TungstenSteel, 16)
-                .inputs(GTQTMetaBlocks.blockMultiblockCasing4.getItemVariant(BlockMultiblockCasing4.TurbineCasingType.IRIDIUM_CASING,8))
+                .inputs(GTQTMetaBlocks.blockMultiblockCasing4.getItemVariant(BlockMultiblockCasing4.TurbineCasingType.IRIDIUM_CASING, 8))
                 .input(EMITTER_IV, 32)
                 .input(SENSOR_IV, 32)
                 .input(circuit, MarkerMaterials.Tier.IV, 32)
@@ -2627,6 +2625,45 @@ public class KeQingNET {
                         .CWUt(CWT[IV])
                         .EUt(VA[ZPM]))
                 .buildAndRegister();
+
+        //  Heat Exchanger
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .EUt(VA[EV])
+                .input(HULL[EV], 1)
+                .input(circuit, Tier.EV, 8)
+                .input(rotor, Staballoy, 4)
+                .input(ELECTRIC_PUMP_EV, 8)
+                .input(cableGtQuadruple, Aluminium, 16)
+                .input(plate, TungstenSteel, 4)
+                .input(spring, HSLASteel, 8)
+                .fluidInputs(Polyethylene.getFluid(L * 8))
+                .outputs(LARGE_HEAT_EXCHANGER.getStackForm())
+                .scannerResearch(b -> b
+                        .researchStack(DISK_4.getStackForm())
+                        .duration(1200)
+                        .EUt(VA[IV]))
+                .duration(600)
+                .buildAndRegister();
+
+        //  Extreme Heat Exchanger
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .EUt(VA[IV])
+                .input(HULL[IV], 1)
+                .input(circuit, Tier.IV, 8)
+                .input(rotor, Inconel792, 4)
+                .input(ELECTRIC_PUMP_IV, 8)
+                .input(cableGtQuadruple, Platinum, 16)
+                .input(plate, HSSE, 4)
+                .input(spring, HSSG, 8)
+                .fluidInputs(Polyethylene.getFluid(L * 8))
+                .outputs(HEAT_CHANGER.getStackForm())
+                .scannerResearch(b -> b
+                        .researchStack(DISK_4.getStackForm())
+                        .duration(1200)
+                        .EUt(VA[IV]))
+                .duration(1200)
+                .buildAndRegister();
+
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .EUt(VA[IV])
@@ -3169,7 +3206,7 @@ public class KeQingNET {
         // Void Miner I
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(MetaTileEntities.ADVANCED_LARGE_MINER)
-                .input(CIRCUIT_GOOD_II,8)
+                .input(CIRCUIT_GOOD_II, 8)
                 .input(circuit, MarkerMaterials.Tier.LuV, 16)
                 .input(circuit, MarkerMaterials.Tier.IV, 32)
                 .input(frameGt, Duranium, 4)
@@ -3198,7 +3235,7 @@ public class KeQingNET {
         // Void Miner II
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(GTQTMetaTileEntities.VOID_MINER[0])
-                .input(CIRCUIT_GOOD_III,8)
+                .input(CIRCUIT_GOOD_III, 8)
                 .input(circuit, MarkerMaterials.Tier.ZPM, 16)
                 .input(circuit, MarkerMaterials.Tier.LuV, 32)
                 .input(frameGt, Tritanium, 4)
@@ -3227,7 +3264,7 @@ public class KeQingNET {
         // Void Miner III
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(GTQTMetaTileEntities.VOID_MINER[1])
-                .input(CIRCUIT_GOOD_IV,8)
+                .input(CIRCUIT_GOOD_IV, 8)
                 .input(circuit, MarkerMaterials.Tier.UV, 16)
                 .input(circuit, MarkerMaterials.Tier.ZPM, 32)
                 .input(frameGt, Neutronium, 4)

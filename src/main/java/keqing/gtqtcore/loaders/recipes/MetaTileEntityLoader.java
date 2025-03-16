@@ -1,7 +1,6 @@
 package keqing.gtqtcore.loaders.recipes;
 
 import gregtech.api.GTValues;
-import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.multiblock.CleanroomType;
 import gregtech.api.recipes.ModHandler;
 import gregtech.api.recipes.RecipeMaps;
@@ -13,7 +12,6 @@ import gregtech.api.unification.stack.UnificationEntry;
 import gregtech.api.util.Mods;
 import gregtech.common.blocks.BlockMachineCasing;
 import gregtech.common.blocks.BlockMetalCasing;
-import gregtech.common.blocks.BlockSteamCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.items.MetaItems;
 import gregtech.common.metatileentities.MetaTileEntities;
@@ -31,12 +29,14 @@ import supercritical.common.metatileentities.SCMetaTileEntities;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static gregicality.multiblocks.api.unification.GCYMMaterials.*;
+import static gregicality.multiblocks.api.unification.GCYMMaterials.MolybdenumDisilicide;
+import static gregicality.multiblocks.api.unification.GCYMMaterials.Stellite100;
 import static gregicality.multiblocks.common.metatileentities.GCYMMetaTileEntities.LARGE_ASSEMBLER;
 import static gregicality.multiblocks.common.metatileentities.GCYMMetaTileEntities.LARGE_DISTILLERY;
 import static gregtech.api.GTValues.EV;
 import static gregtech.api.GTValues.IV;
 import static gregtech.api.GTValues.LuV;
+import static gregtech.api.GTValues.UV;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.MarkerMaterials.Tier.HV;
@@ -47,7 +47,6 @@ import static gregtech.api.unification.material.MarkerMaterials.Tier.ZPM;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.common.blocks.BlockMetalCasing.MetalCasingType.PRIMITIVE_BRICKS;
-import static gregtech.common.blocks.BlockSteamCasing.SteamCasingType.BRONZE_HULL;
 import static gregtech.common.blocks.BlockWireCoil.CoilType.NICHROME;
 import static gregtech.common.blocks.MetaBlocks.MACHINE_CASING;
 import static gregtech.common.items.MetaItems.*;
@@ -591,8 +590,8 @@ public class MetaTileEntityLoader {
                 .circuitMeta(2)
                 .input(ITEM_IMPORT_BUS[IV])
                 .inputs(Mods.AppliedEnergistics2.getItem("interface"))
-                .input(ROBOT_ARM_IV,8)
-                .input(FIELD_GENERATOR_IV,8)
+                .input(ROBOT_ARM_IV, 8)
+                .input(FIELD_GENERATOR_IV, 8)
                 .inputs(Mods.AppliedEnergistics2.getItem("material", 30, 4))
                 .output(BUDGET_CRIB_4)
                 .EUt(VA[IV])
@@ -603,8 +602,8 @@ public class MetaTileEntityLoader {
                 .circuitMeta(2)
                 .input(ITEM_IMPORT_BUS[LuV])
                 .inputs(Mods.AppliedEnergistics2.getItem("interface"))
-                .input(ROBOT_ARM_LuV,8)
-                .input(FIELD_GENERATOR_LuV,8)
+                .input(ROBOT_ARM_LuV, 8)
+                .input(FIELD_GENERATOR_LuV, 8)
                 .inputs(Mods.AppliedEnergistics2.getItem("material", 30, 4))
                 .output(BUDGET_CRIB_8)
                 .EUt(VA[LuV])
@@ -615,8 +614,8 @@ public class MetaTileEntityLoader {
                 .circuitMeta(2)
                 .input(ITEM_IMPORT_BUS[GTValues.ZPM])
                 .inputs(Mods.AppliedEnergistics2.getItem("interface"))
-                .input(ROBOT_ARM_ZPM,8)
-                .input(FIELD_GENERATOR_ZPM,8)
+                .input(ROBOT_ARM_ZPM, 8)
+                .input(FIELD_GENERATOR_ZPM, 8)
                 .inputs(Mods.AppliedEnergistics2.getItem("material", 30, 4))
                 .output(BUDGET_CRIB_12)
                 .EUt(VA[GTValues.ZPM])
@@ -627,8 +626,8 @@ public class MetaTileEntityLoader {
                 .circuitMeta(2)
                 .input(ITEM_IMPORT_BUS[GTValues.UV])
                 .inputs(Mods.AppliedEnergistics2.getItem("interface"))
-                .input(ROBOT_ARM_UV,8)
-                .input(FIELD_GENERATOR_UV,8)
+                .input(ROBOT_ARM_UV, 8)
+                .input(FIELD_GENERATOR_UV, 8)
                 .inputs(Mods.AppliedEnergistics2.getItem("material", 30, 4))
                 .output(BUDGET_CRIB_16)
                 .EUt(VA[GTValues.UV])
@@ -639,8 +638,8 @@ public class MetaTileEntityLoader {
                 .circuitMeta(2)
                 .input(ITEM_IMPORT_BUS[GTValues.UHV])
                 .inputs(Mods.AppliedEnergistics2.getItem("interface"))
-                .input(ROBOT_ARM_UHV,8)
-                .input(FIELD_GENERATOR_UHV,8)
+                .input(ROBOT_ARM_UHV, 8)
+                .input(FIELD_GENERATOR_UHV, 8)
                 .inputs(Mods.AppliedEnergistics2.getItem("material", 30, 4))
                 .output(BUDGET_CRIB_20)
                 .EUt(VA[GTValues.UHV])
@@ -852,7 +851,7 @@ public class MetaTileEntityLoader {
                 'A', FLUID_CELL_LARGE_TUNGSTEN_STEEL);
 
         ModHandler.addShapedRecipe(true, "primitive_reactor", PRIMITIVE_REACTOR.getStackForm(),
-        "PRP", "sQh", "PSP",
+                "PRP", "sQh", "PSP",
                 'P', new UnificationEntry(plate, TreatedWood),
                 'Q', new UnificationEntry(pipeLargeFluid, TreatedWood),
                 'R', new UnificationEntry(rotor, Steel),
@@ -961,6 +960,15 @@ public class MetaTileEntityLoader {
                 'C', new UnificationEntry(OrePrefix.circuit, LV),
                 'F', MetaItems.ELECTRIC_PUMP_LV);
 
+        //  Heat Exchanger
+        ModHandler.addShapedRecipe(true, "heat_exchanger", SMALL_HEAT_EXCHANGER.getStackForm(),
+                "XRX", "PHP", "pSp",
+                'H', HULL[GTValues.HV].getStackForm(),
+                'R', new UnificationEntry(rotor, Aluminium),
+                'P', ELECTRIC_PUMP_EV,
+                'X', new UnificationEntry(cableGtQuadruple, Gold),
+                'p', new UnificationEntry(plate, StainlessSteel),
+                'S', new UnificationEntry(spring, Invar));
 
         ModHandler.addShapedRecipe(true, "septic_tank", GTQTMetaTileEntities.SEPTIC_TANK.getStackForm(),
                 "BFB", "CMC", "BFB",
@@ -1562,7 +1570,7 @@ public class MetaTileEntityLoader {
                 'A', new UnificationEntry(OrePrefix.spring, Iridium),
                 'P', ELECTRIC_MOTOR_ZPM,
                 'E', SENSOR_ZPM,
-                'C',new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.ZPM));
+                'C', new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.ZPM));
 
         ModHandler.addShapedRecipe(true, "lightning_rod.iv", GTQTMetaTileEntities.LIGHTNING_ROD[0].getStackForm(),
                 "AMA", "MCM", "AMA",
@@ -1649,36 +1657,36 @@ public class MetaTileEntityLoader {
                 'T', CraftingComponent.CABLE_HEX);
 
         ASSEMBLER_RECIPES.recipeBuilder()
-                .input(ENERGY_INPUT_HATCH_16A[LuV-5],4)
-                .input(LASER_INPUT_HATCH_256[LuV-5], 1)
-                .input(circuit, MarkerMaterials.Tier.LuV,8)
+                .input(ENERGY_INPUT_HATCH_16A[LuV - 5], 4)
+                .input(LASER_INPUT_HATCH_256[LuV - 5], 1)
+                .input(circuit, MarkerMaterials.Tier.LuV, 8)
                 .outputs(LASER_BOOSTER[0].getStackForm())
                 .EUt(VA[GTValues.LuV])
                 .duration(300)
                 .buildAndRegister();
 
         ASSEMBLER_RECIPES.recipeBuilder()
-                .input(ENERGY_INPUT_HATCH_16A[GTValues.ZPM-5],4)
-                .input(LASER_INPUT_HATCH_1024[GTValues.ZPM-5], 1)
-                .input(circuit, MarkerMaterials.Tier.ZPM,8)
+                .input(ENERGY_INPUT_HATCH_16A[GTValues.ZPM - 5], 4)
+                .input(LASER_INPUT_HATCH_1024[GTValues.ZPM - 5], 1)
+                .input(circuit, MarkerMaterials.Tier.ZPM, 8)
                 .outputs(LASER_BOOSTER[1].getStackForm())
                 .EUt(VA[GTValues.ZPM])
                 .duration(300)
                 .buildAndRegister();
 
         ASSEMBLER_RECIPES.recipeBuilder()
-                .input(ENERGY_INPUT_HATCH_16A[GTValues.UV-5],4)
-                .input(LASER_INPUT_HATCH_1024[GTValues.UV-5], 1)
-                .input(circuit, MarkerMaterials.Tier.UV,8)
+                .input(ENERGY_INPUT_HATCH_16A[GTValues.UV - 5], 4)
+                .input(LASER_INPUT_HATCH_1024[GTValues.UV - 5], 1)
+                .input(circuit, MarkerMaterials.Tier.UV, 8)
                 .outputs(LASER_BOOSTER[2].getStackForm())
                 .EUt(VA[UV])
                 .duration(300)
                 .buildAndRegister();
 
         ASSEMBLER_RECIPES.recipeBuilder()
-                .input(plate,MaterialHelper.Plate[1],4)
-                .input(pipeNormalFluid,MaterialHelper.Pipe[1],1)
-                .input(stick, MaterialHelper.Wire[1],2)
+                .input(plate, MaterialHelper.Plate[1], 4)
+                .input(pipeNormalFluid, MaterialHelper.Pipe[1], 1)
+                .input(stick, MaterialHelper.Wire[1], 2)
                 .output(HEAT_SHIELD_MKI)
                 .circuitMeta(6)
                 .EUt(VA[GTValues.LV])
@@ -1686,9 +1694,9 @@ public class MetaTileEntityLoader {
                 .buildAndRegister();
 
         ASSEMBLER_RECIPES.recipeBuilder()
-                .input(plate,MaterialHelper.Plate[2],4)
-                .input(pipeNormalFluid,MaterialHelper.Pipe[2],1)
-                .input(stick, MaterialHelper.Wire[2],2)
+                .input(plate, MaterialHelper.Plate[2], 4)
+                .input(pipeNormalFluid, MaterialHelper.Pipe[2], 1)
+                .input(stick, MaterialHelper.Wire[2], 2)
                 .output(HEAT_SHIELD_MKII)
                 .circuitMeta(6)
                 .EUt(VA[GTValues.MV])
@@ -1696,9 +1704,9 @@ public class MetaTileEntityLoader {
                 .buildAndRegister();
 
         ASSEMBLER_RECIPES.recipeBuilder()
-                .input(plate,MaterialHelper.Plate[3],4)
-                .input(pipeNormalFluid,MaterialHelper.Pipe[3],1)
-                .input(stick, MaterialHelper.Wire[3],2)
+                .input(plate, MaterialHelper.Plate[3], 4)
+                .input(pipeNormalFluid, MaterialHelper.Pipe[3], 1)
+                .input(stick, MaterialHelper.Wire[3], 2)
                 .output(HEAT_SHIELD_MKIII)
                 .circuitMeta(6)
                 .EUt(VA[GTValues.HV])
@@ -1706,9 +1714,9 @@ public class MetaTileEntityLoader {
                 .buildAndRegister();
 
         ASSEMBLER_RECIPES.recipeBuilder()
-                .input(plate,MaterialHelper.Plate[4],4)
-                .input(pipeNormalFluid,MaterialHelper.Pipe[4],1)
-                .input(stick, MaterialHelper.Wire[4],2)
+                .input(plate, MaterialHelper.Plate[4], 4)
+                .input(pipeNormalFluid, MaterialHelper.Pipe[4], 1)
+                .input(stick, MaterialHelper.Wire[4], 2)
                 .output(HEAT_SHIELD_MKIV)
                 .circuitMeta(6)
                 .EUt(VA[GTValues.EV])
@@ -1716,9 +1724,9 @@ public class MetaTileEntityLoader {
                 .buildAndRegister();
 
         ASSEMBLER_RECIPES.recipeBuilder()
-                .input(plate,MaterialHelper.Plate[5],4)
-                .input(pipeNormalFluid,MaterialHelper.Pipe[5],1)
-                .input(stick, MaterialHelper.Wire[5],2)
+                .input(plate, MaterialHelper.Plate[5], 4)
+                .input(pipeNormalFluid, MaterialHelper.Pipe[5], 1)
+                .input(stick, MaterialHelper.Wire[5], 2)
                 .output(HEAT_SHIELD_MKV)
                 .circuitMeta(6)
                 .EUt(VA[GTValues.IV])

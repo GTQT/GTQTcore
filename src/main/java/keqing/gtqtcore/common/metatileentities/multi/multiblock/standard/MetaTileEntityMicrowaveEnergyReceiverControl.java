@@ -8,7 +8,6 @@ import gregtech.api.capability.GregtechCapabilities;
 import gregtech.api.capability.GregtechTileCapabilities;
 import gregtech.api.capability.IEnergyContainer;
 import gregtech.api.capability.impl.EnergyContainerList;
-import gregtech.api.capability.impl.ItemHandlerList;
 import gregtech.api.capability.impl.NotifiableItemStackHandler;
 import gregtech.api.cover.CoverableView;
 import gregtech.api.gui.GuiTextures;
@@ -61,14 +60,34 @@ import javax.annotation.Nullable;
 import java.util.*;
 
 import static gregtech.api.GTValues.V;
-import static gregtech.api.gui.GuiTextures.BUTTON_POWER;
 import static gregtech.api.util.RelativeDirection.*;
-import static keqing.gtqtcore.client.textures.GTQTTextures.PSS_POWER;
+import static keqing.gtqtcore.api.gui.GTQTGuiTextures.PSS_POWER;
 
 public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntityBaseWithControl {
     private final ItemStackHandler inputCardInventory;
     private final ItemStackHandler outputCardInventory;
     private final ItemStackHandler pssInventory;
+    MetaTileEntityPowerSubstation PSSmte;
+    int[] pssPos = new int[3];
+    boolean pssModel;
+    int coilHeight;
+    int heatingCoilLevel;
+    int x;
+    int y;
+    int z;
+    long euStore;
+    int op = 0;
+    int range;
+    int maxLength = 10;
+    int[][] io = new int[64][5];
+    int circuit;
+    //分别为 启动？ 坐标（三位） 等级
+    public MetaTileEntityMicrowaveEnergyReceiverControl(ResourceLocation metaTileEntityId) {
+        super(metaTileEntityId);
+        this.inputCardInventory = new NotifiableItemStackHandler(this, 1, null, false);
+        this.outputCardInventory = new NotifiableItemStackHandler(this, 1, null, false);
+        this.pssInventory = new NotifiableItemStackHandler(this, 1, null, false);
+    }
 
     @Override
     public void onRemoval() {
@@ -87,32 +106,6 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
             getWorld().spawnEntity(new EntityItem(getWorld(), pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, pssInventory.getStackInSlot(0)));
             pssInventory.extractItem(0, 1, false);
         }
-    }
-
-
-    MetaTileEntityPowerSubstation PSSmte;
-    int[] pssPos=new int[3];
-    boolean pssModel;
-    int coilHeight;
-    int heatingCoilLevel;
-    int x;
-    int y;
-    int z;
-    long euStore;
-    int op = 0;
-    int range;
-
-    int maxLength = 10;
-
-    int[][] io = new int[64][5];
-    int circuit;
-
-    //分别为 启动？ 坐标（三位） 等级
-    public MetaTileEntityMicrowaveEnergyReceiverControl(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId);
-        this.inputCardInventory = new NotifiableItemStackHandler(this, 1, null, false);
-        this.outputCardInventory = new NotifiableItemStackHandler(this, 1, null, false);
-        this.pssInventory = new NotifiableItemStackHandler(this, 1, null, false);
     }
 
     @Override
@@ -167,12 +160,11 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
                 .setWorkingStatus(true, isActive() && isWorkingEnabled()) // transform into two-state system for display
                 .addCustom(tl -> {
                     if (isStructureFormed()) {
-                        if(pssModel)
-                        {
+                        if (pssModel) {
                             tl.add(TextComponentUtil.translationWithColor(TextFormatting.GREEN, "缓存电量：%s", PSSmte.getStoredLong()));
                             tl.add(TextComponentUtil.translationWithColor(TextFormatting.GREEN, "存储上限：%s", PSSmte.getCapacityLong()));
-                            tl.add(TextComponentUtil.translationWithColor(TextFormatting.GREEN, "设备链接上限：%s 范围半径：%s", maxLength,range));
-                        }else {
+                            tl.add(TextComponentUtil.translationWithColor(TextFormatting.GREEN, "设备链接上限：%s 范围半径：%s", maxLength, range));
+                        } else {
                             tl.add(TextComponentUtil.translationWithColor(TextFormatting.GREEN, "存储电量：%s/%s", euStore, maxStore()));
                             tl.add(TextComponentUtil.translationWithColor(TextFormatting.GREEN, "高度 %s/等级 %s/范围半径 %s", coilHeight, heatingCoilLevel, range));
                             tl.add(TextComponentUtil.translationWithColor(TextFormatting.GREEN, "设备链接上限：%s", maxLength));
@@ -201,17 +193,15 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
                     }
                 });
     }
+
     protected void addTotal(List<ITextComponent> textList) {
-        if(!isStructureFormed())return;
-        if(pssModel&&PSSmte!=null)
-        {
+        if (!isStructureFormed()) return;
+        if (pssModel && PSSmte != null) {
             textList.add(new TextComponentTranslation(">>蓄能塔"));
-            textList.add(new TextComponentTranslation("坐标：%s,%s,%s", pssPos[0],pssPos[1],pssPos[2]));
+            textList.add(new TextComponentTranslation("坐标：%s,%s,%s", pssPos[0], pssPos[1], pssPos[2]));
             textList.add(new TextComponentTranslation("平均输入：%s", PSSmte.getAverageInLastSec()));
             textList.add(new TextComponentTranslation("平均输出：%s", PSSmte.getAverageOutLastSec()));
-        }
-        else
-        {
+        } else {
             textList.add(new TextComponentTranslation(">>能源仓"));
             textList.add(new TextComponentTranslation("平均输入：%s", this.energyContainer.getInputVoltage()));
             textList.add(new TextComponentTranslation("平均输出：%s", this.energyContainer.getOutputVoltage()));
@@ -286,7 +276,7 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
     }
 
     public void addBarHoverText(List<ITextComponent> hoverList, long a, long b) {
-        if(pssModel&&PSSmte!=null) {
+        if (pssModel && PSSmte != null) {
             a = PSSmte.getStoredLong();
             b = PSSmte.getCapacityLong();
         }
@@ -394,9 +384,9 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
                 .setChangeListener(this::markDirty)
                 .setTooltipText("请放入坐标卡(PSS)"));
 
-        builder.widget(new ImageCycleButtonWidget(274, 218, 18, 18, PSS_POWER, () -> pssModel, data->
+        builder.widget(new ImageCycleButtonWidget(274, 218, 18, 18, PSS_POWER, () -> pssModel, data ->
         {
-            if(pssPos!=null) {
+            if (pssPos != null) {
                 pssModel = !pssModel;
                 euStore = 0;
             }
@@ -408,9 +398,10 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
     }
 
     public double getEnergy() {
-        if(pssModel&&PSSmte!=null)return PSSmte.getFillPercentage(0);
+        if (pssModel && PSSmte != null) return PSSmte.getFillPercentage(0);
         else return (double) euStore / maxStore();
     }
+
     public double getRate(int x) {
         if (getMaxEU(circuit + x) == 0) return 0;
         return (double) getEU(circuit + x) / getMaxEU(circuit + x);
@@ -440,9 +431,9 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
     public long maxStore() {
         return V[Math.min(heatingCoilLevel, 9)] * 20 * coilHeight;
     }
-    public void checkPSS()
-    {
-        if(PSSmte==null) {
+
+    public void checkPSS() {
+        if (PSSmte == null) {
             ItemStack item = pssInventory.getStackInSlot(0);
             if (item.getItem() == GTQTMetaItems.GTQT_META_ITEM && item.getMetadata() == GTQTMetaItems.POS_BINDING_CARD.getMetaValue()) {
                 NBTTagCompound compound = item.getTagCompound();
@@ -451,13 +442,12 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
                     y = compound.getInteger("y");
                     z = compound.getInteger("z");
 
-                    if(((x-this.getPos().getX())*(x-this.getPos().getX())
-                            +(y-this.getPos().getY())*(y-this.getPos().getY())
-                            +(z-this.getPos().getZ())*(z-this.getPos().getZ()))<=100)
-                    {
+                    if (((x - this.getPos().getX()) * (x - this.getPos().getX())
+                            + (y - this.getPos().getY()) * (y - this.getPos().getY())
+                            + (z - this.getPos().getZ()) * (z - this.getPos().getZ())) <= 100) {
                         MetaTileEntity mte = GTUtility.getMetaTileEntity(this.getWorld(), new BlockPos(x, y, z));
                         if (mte instanceof MetaTileEntityPowerSubstation) {
-                            PSSmte=(MetaTileEntityPowerSubstation) mte;
+                            PSSmte = (MetaTileEntityPowerSubstation) mte;
                             pssPos[0] = x;
                             pssPos[1] = y;
                             pssPos[2] = z;
@@ -465,32 +455,29 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
                     }
                 }
             }
-        }
-        else
-        {
+        } else {
             MetaTileEntity mte = GTUtility.getMetaTileEntity(this.getWorld(), new BlockPos(pssPos[0], pssPos[1], pssPos[2]));
             if (mte instanceof MetaTileEntityPowerSubstation) {
-                PSSmte=(MetaTileEntityPowerSubstation) mte;
-            }
-            else
-            {
-                PSSmte=null;
-                pssPos=new int[3];
-                pssModel=false;
+                PSSmte = (MetaTileEntityPowerSubstation) mte;
+            } else {
+                PSSmte = null;
+                pssPos = new int[3];
+                pssModel = false;
             }
         }
     }
+
     @Override
     protected void updateFormedValid() {
-        if(pssInventory.getStackInSlot(0)!=ItemStack.EMPTY) checkPSS();
-        else pssModel=false;
+        if (pssInventory.getStackInSlot(0) != ItemStack.EMPTY) checkPSS();
+        else pssModel = false;
         if (euStore < 0) euStore = 0;
-        if(PSSmte==null) pssModel=false;
+        if (PSSmte == null) pssModel = false;
 
-        if(pssModel) euStore=PSSmte.getStoredLong();
+        if (pssModel) euStore = PSSmte.getStoredLong();
 
         else {
-            euStore=Math.min(euStore, maxStore());
+            euStore = Math.min(euStore, maxStore());
             if (this.energyContainer != null && this.energyContainer.getEnergyStored() > 0 && euStore < maxStore()) {
                 if (euStore + this.energyContainer.getEnergyStored() > maxStore()) {
                     this.energyContainer.removeEnergy(maxStore() - euStore);
@@ -559,26 +546,28 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
                 long energyNeeded = container.getEnergyCapacity() - container.getEnergyStored();
                 if (energyNeeded < voltage * amperage && euStore > energyNeeded) {
                     container.addEnergy(energyNeeded);
-                    if(pssModel) getEnergyBankFromPowerSubstation(PSSmte).drain(energyNeeded);
+                    if (pssModel) getEnergyBankFromPowerSubstation(PSSmte).drain(energyNeeded);
                     else euStore -= energyNeeded;
                     return;
                 } else if (euStore > voltage * amperage) {
                     container.addEnergy(voltage * amperage);
-                    if(pssModel) getEnergyBankFromPowerSubstation(PSSmte).drain(voltage * amperage);
+                    if (pssModel) getEnergyBankFromPowerSubstation(PSSmte).drain(voltage * amperage);
                     else euStore -= voltage * amperage;
                     return;
                 } else {
                     container.addEnergy(euStore);
-                    if(pssModel) getEnergyBankFromPowerSubstation(PSSmte).drain(euStore);
+                    if (pssModel) getEnergyBankFromPowerSubstation(PSSmte).drain(euStore);
                     else euStore = 0;
                     return;
                 }
             }
         }
     }
+
     private MetaTileEntityPowerSubstation.PowerStationEnergyBank getEnergyBankFromPowerSubstation(MetaTileEntityPowerSubstation powerSubstation) {
         return ReflectionHelper.getPrivateFieldValue(powerSubstation, "energyBank", MetaTileEntityPowerSubstation.PowerStationEnergyBank.class);
     }
+
     //1为+1 -1为-1
     public void setAmperageVoltage(int v, int a, int point) {
         if (point < 0 || point > maxLength) return;

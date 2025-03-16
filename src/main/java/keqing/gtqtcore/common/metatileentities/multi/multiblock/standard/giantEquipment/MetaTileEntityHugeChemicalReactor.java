@@ -1,6 +1,5 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.giantEquipment;
 
-import gregicality.multiblocks.api.capability.IParallelMultiblock;
 import gregtech.api.GTValues;
 import gregtech.api.GregTechAPI;
 import gregtech.api.block.IHeatingCoilBlockStats;
@@ -8,11 +7,9 @@ import gregtech.api.capability.*;
 import gregtech.api.capability.impl.EnergyContainerList;
 import gregtech.api.capability.impl.FluidTankList;
 import gregtech.api.capability.impl.ItemHandlerList;
-import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
-import gregtech.api.metatileentity.multiblock.MultiMapMultiblockController;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
@@ -39,6 +36,7 @@ import gregtech.core.sound.GTSoundEvents;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.metaileentity.GTQTNoTierMultiblockController;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
+import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
@@ -63,7 +61,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.POLYMERIZATION_RECIPES;
 import static keqing.gtqtcore.api.utils.GTQTUtil.getAccelerateByCWU;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.HUGE_CHEMICAL_REACTOR;
 
@@ -80,7 +77,10 @@ public class MetaTileEntityHugeChemicalReactor extends GTQTNoTierMultiblockContr
         super(metaTileEntityId, new RecipeMap[]{
                 RecipeMaps.CHEMICAL_RECIPES,
                 RecipeMaps.LARGE_CHEMICAL_RECIPES,
-                POLYMERIZATION_RECIPES
+                GTQTcoreRecipeMaps.POLYMERIZATION_RECIPES,
+                GTQTcoreRecipeMaps.DESULPHURIZATION_RECIPES,
+                GTQTcoreRecipeMaps.FLUIDIZED_BED,
+                GTQTcoreRecipeMaps.CATALYTIC_REFORMER_RECIPES
         });
         this.recipeMapWorkable = new HugeChemicalReactorWorkable(this);
 
@@ -138,7 +138,7 @@ public class MetaTileEntityHugeChemicalReactor extends GTQTNoTierMultiblockContr
         ITextComponent heatString = TextComponentUtil.stringWithColor(TextFormatting.RED, TextFormattingUtil.formatNumbers(this.blastFurnaceTemperature) + "K");
         textList.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY, "gregtech.multiblock.blast_furnace.max_temperature", heatString));
         textList.add(new TextComponentTranslation("gtqtcore.kqcc_accelerate", requestCWUt, getAccelerateByCWU(requestCWUt)));
-        textList.add(new TextComponentTranslation("玻璃等级：%s 线圈等级:%s", glassTire,coilTier));
+        textList.add(new TextComponentTranslation("玻璃等级：%s 线圈等级:%s", glassTire, coilTier));
     }
 
     @Override
@@ -291,7 +291,7 @@ public class MetaTileEntityHugeChemicalReactor extends GTQTNoTierMultiblockContr
 
         @Override
         public void setMaxProgress(int maxProgress) {
-            super.setMaxProgress((int) (maxProgress*getAccelerateByCWU(requestCWUt)));
+            super.setMaxProgress((int) (maxProgress * getAccelerateByCWU(requestCWUt)));
         }
 
         protected void modifyOverclockPre(int[] values, IRecipePropertyStorage storage) {

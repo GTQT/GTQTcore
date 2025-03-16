@@ -8,6 +8,12 @@ public class GTQTGuiTextures {
     //  Steam Texture
     //  Button
     /* ----------------------- Overlay ---------------------- */
+    public static final TextureArea AUTO_PULL = TextureArea.fullImage("textures/gui/widget/auto_pull.png");
+    public static final TextureArea ITEM_FLUID_OVERLAY = TextureArea.fullImage("textures/gui/widget/item_fluid.png");
+    public static final TextureArea ME_PATTERN_OVERLAY = TextureArea.fullImage("textures/gui/widget/pattern_me.png");
+    public static final TextureArea EXPORT = TextureArea.fullImage("textures/gui/widget/export.png");
+    public static final TextureArea PSS_POWER = TextureArea.fullImage("textures/gui/widget/pss_power.png");
+
     public static final SteamTexture INT_CIRCUIT_OVERLAY_STEAM = SteamTexture.fullImage("textures/gui/overlay/int_circuit_overlay_%s.png");
 
     public static final TextureArea FOIL_OVERLAY = TextureArea.fullImage("textures/gui/overlay/foil_overlay.png");

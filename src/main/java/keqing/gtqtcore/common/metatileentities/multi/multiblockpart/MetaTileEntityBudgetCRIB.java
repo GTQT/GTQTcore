@@ -9,6 +9,7 @@ import java.util.EnumSet;
 import java.util.List;
 
 import groovyjarjarantlr4.v4.runtime.misc.NotNull;
+import keqing.gtqtcore.api.gui.GTQTGuiTextures;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.client.widgets.ItemSlotTinyAmountTextWidget;
@@ -233,7 +234,7 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
 
         // Pattern slot
         buttons.addWidget(new SlotWidget(patternSlot, 0, 18 * 2, 0)
-                .setBackgroundTexture(GuiTextures.SLOT, GTQTTextures.ME_PATTERN_OVERLAY));
+                .setBackgroundTexture(GuiTextures.SLOT, GTQTGuiTextures.ME_PATTERN_OVERLAY));
 
         // Blocking toggle
         buttons.addWidget(new ImageCycleButtonWidget(18 * 3, 0, 18, 18, GuiTextures.BUTTON_POWER,
@@ -242,7 +243,7 @@ public class MetaTileEntityBudgetCRIB extends MetaTileEntityMultiblockNotifiable
 
         // Return items
         buttons.addWidget(new ClickButtonWidget(18 * 4, 0, 18, 18, "", (clickData) -> returnItems())
-                .setButtonTexture(GTQTTextures.EXPORT).setTooltipText("gtqtcore.machine.budget_crib.return_button"));
+                .setButtonTexture(GTQTGuiTextures.EXPORT).setTooltipText("gtqtcore.machine.budget_crib.return_button"));
 
         builder.bindPlayerInventory(entityPlayer.inventory, GuiTextures.SLOT, 7, 18 + 18 * 5 + 12);
         return builder.widget(slots).widget(buttons).build(getHolder(), entityPlayer);

@@ -21,7 +21,7 @@ import static gregtech.api.unification.ore.OrePrefix.gem;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.Adamantium;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 
-public class ISA {
+public class ISALine {
 
     public static ItemStack getBiologyCircuitData(int configuration) {
         ItemStack stack = GTQTMetaItems.BIOLOGY_INTEGRATED_CIRCUIT.getStackForm();

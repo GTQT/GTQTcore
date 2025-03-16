@@ -22,6 +22,7 @@ import gregtech.api.util.Position;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockNotifiablePart;
 import keqing.gtqtcore.api.capability.impl.LargeSlotItemStackHandler;
+import keqing.gtqtcore.api.gui.GTQTGuiTextures;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.client.widgets.ItemSlotTinyAmountTextWidget;
 import net.minecraft.client.resources.I18n;
@@ -111,7 +112,7 @@ public class MetaTileEntitySingleInputBus extends MetaTileEntityMultiblockNotifi
                         slotWidget -> getCircuitSlotTooltip(slotWidget, ghostCircuitItemStackHandler)));
 
         // Auto pull
-        extraWidgets.addWidget(new ToggleButtonWidget(18 * 7, 0, 18, 18, GTQTTextures.AUTO_PULL,
+        extraWidgets.addWidget(new ToggleButtonWidget(18 * 7, 0, 18, 18, GTQTGuiTextures.AUTO_PULL,
                 this::isWorkingEnabled, this::setWorkingEnabled)
                 .shouldUseBaseBackground()
                 .setTooltipText("gtqtcore.machine.super_input_bus.auto_pull"));

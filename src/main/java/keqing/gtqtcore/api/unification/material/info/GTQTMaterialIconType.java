@@ -5,7 +5,7 @@ import gregtech.api.unification.material.info.MaterialIconType;
 public class GTQTMaterialIconType {
     public static final MaterialIconType seedCrystal = new MaterialIconType("seedCrystal");
     public static final MaterialIconType boule = new MaterialIconType("boule");
-
+    public static final MaterialIconType gemSolitary = new MaterialIconType("gemSolitary");
     public static final MaterialIconType milled = new MaterialIconType("milled");
     public static final MaterialIconType nanotube = new MaterialIconType("nanotube");
     public static final MaterialIconType nanosensor = new MaterialIconType("nanosensor");

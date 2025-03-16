@@ -2,8 +2,6 @@ package keqing.gtqtcore.client.textures;
 
 import codechicken.lib.texture.TextureUtils;
 import gregtech.api.gui.resources.SteamTexture;
-import gregtech.api.gui.resources.TextureArea;
-import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
 import gregtech.client.renderer.texture.cube.SimpleOrientedCubeRenderer;
 import gregtech.client.renderer.texture.cube.SimpleOverlayRenderer;
@@ -181,7 +179,6 @@ public class GTQTTextures {
     public static SimpleOverlayRenderer SFTC;
     public static SimpleOverlayRenderer SFTS;
     public static TextureAtlasSprite FORCE_FIELD;
-    public static TextureArea ITEM_FLUID_OVERLAY;
     public static IsaMillRenderer ISA_MILL = new IsaMillRenderer();
     public static OrientedOverlayRenderer CATALYTIC_REFORMER_OVERLAY = new OrientedOverlayRenderer("overlay/catalytic_reformer");
     public static OrientedOverlayRenderer CRYSTALLIZATION_CRUCIBLE_OVERLAY = new OrientedOverlayRenderer("overlay/crystallization_crucible");
@@ -200,6 +197,7 @@ public class GTQTTextures {
     public static OrientedOverlayRenderer ALGAE_FARM_OVERLAY = new OrientedOverlayRenderer("overlay/algae_farm");
     public static OrientedOverlayRenderer MEGA_TURBINE_OVERLAY = new OrientedOverlayRenderer("overlay/mega_turbine");
     public static OrientedOverlayRenderer DRYER_OVERLAY = new OrientedOverlayRenderer("machines/dryer");
+    public static OrientedOverlayRenderer POLISHER_OVERLAY = new OrientedOverlayRenderer("overlay/polisher");
     public static OrientedOverlayRenderer STELLAR_FURNACE_OVERLAY = new OrientedOverlayRenderer("overlay/stellar_furnace");
     public static OrientedOverlayRenderer CYCLOTRON_OVERLAY = new OrientedOverlayRenderer("overlay/cyclotron");
     public static OrientedOverlayRenderer DRAGON_FUSION_OVERLAY = new OrientedOverlayRenderer("overlay/dragon_fusion");
@@ -248,7 +246,7 @@ public class GTQTTextures {
     public static SimpleOverlayRenderer MAINTENANCE_OVERLAY_ISO3_CLEANING;
     public static SimpleOverlayRenderer MAINTENANCE_OVERLAY_ISO2_CLEANING;
     public static SimpleOverlayRenderer MAINTENANCE_OVERLAY_ISO1_CLEANING;
-    public static TextureArea AUTO_PULL;
+
     //  Multi Renderer
     public static TextureAtlasSprite HALO_NOISE;
     public static TextureAtlasSprite HALO;
@@ -268,16 +266,8 @@ public class GTQTTextures {
     public static SimpleOverlayRenderer CRIB_ACTIVE;
     public static SimpleOverlayRenderer CRIB_INACTIVE;
     public static SimpleOverlayRenderer CRIB_PROXY;
-    public static TextureArea ME_PATTERN_OVERLAY;
-    public static TextureArea EXPORT;
-    public static TextureArea PSS_POWER;
-    public static void init() {
-        PSS_POWER = TextureArea.fullImage("textures/gui/widget/pss_power.png");
-        ME_PATTERN_OVERLAY = TextureArea.fullImage("textures/gui/widget/pattern_me.png");
-        EXPORT = TextureArea.fullImage("textures/gui/widget/export.png");
-        AUTO_PULL = TextureArea.fullImage("textures/gui/widget/auto_pull.png");
-        ITEM_FLUID_OVERLAY = TextureArea.fullImage("textures/gui/widget/item_fluid.png");
 
+    public static void init() {
         CRIB_ACTIVE = new SimpleOverlayRenderer("overlay/machine/overlay_me_crafting_input_buffer");
         CRIB_INACTIVE = new SimpleOverlayRenderer("overlay/machine/overlay_me_crafting_input_bus");
         CRIB_PROXY = new SimpleOverlayRenderer("overlay/machine/overlay_me_crafting_input_slave");
