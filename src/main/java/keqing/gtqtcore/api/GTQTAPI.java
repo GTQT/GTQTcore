@@ -128,11 +128,17 @@ public class GTQTAPI {
                 new WrappedIntTired(BlockMultiblockCasing5.TurbineCasingType.PRECISE_ASSEMBLER_CASING_MK6, 6));
 
         MAP_PA_INTERNAL_CASING.put(MetaBlocks.MACHINE_CASING.getState(BlockMachineCasing.MachineCasingType.LuV),
-                new WrappedIntTired(BlockMachineCasing.MachineCasingType.LuV, 1));
+                new WrappedIntTired(BlockMachineCasing.MachineCasingType.IV, 1));
+        MAP_PA_INTERNAL_CASING.put(MetaBlocks.MACHINE_CASING.getState(BlockMachineCasing.MachineCasingType.LuV),
+                new WrappedIntTired(BlockMachineCasing.MachineCasingType.LuV, 2));
         MAP_PA_INTERNAL_CASING.put(MetaBlocks.MACHINE_CASING.getState(BlockMachineCasing.MachineCasingType.ZPM),
-                new WrappedIntTired(BlockMachineCasing.MachineCasingType.ZPM, 2));
+                new WrappedIntTired(BlockMachineCasing.MachineCasingType.ZPM, 3));
         MAP_PA_INTERNAL_CASING.put(MetaBlocks.MACHINE_CASING.getState(BlockMachineCasing.MachineCasingType.UV),
-                new WrappedIntTired(BlockMachineCasing.MachineCasingType.UV, 3));
+                new WrappedIntTired(BlockMachineCasing.MachineCasingType.UV, 4));
+        MAP_PA_INTERNAL_CASING.put(MetaBlocks.MACHINE_CASING.getState(BlockMachineCasing.MachineCasingType.UHV),
+                new WrappedIntTired(BlockMachineCasing.MachineCasingType.UHV, 5));
+        MAP_PA_INTERNAL_CASING.put(MetaBlocks.MACHINE_CASING.getState(BlockMachineCasing.MachineCasingType.UEV),
+                new WrappedIntTired(BlockMachineCasing.MachineCasingType.UEV, 6));
 
         MAP_MACHINE_CASING.put(MetaBlocks.MACHINE_CASING.getState(BlockMachineCasing.MachineCasingType.LV),
                 new WrappedIntTired(BlockMachineCasing.MachineCasingType.LV, 1));

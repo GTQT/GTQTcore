@@ -126,7 +126,7 @@ public class GTQTMetaTileEntities {
     public static final SimpleGeneratorMetaTileEntity[] ACID_GENERATOR = new SimpleGeneratorMetaTileEntity[3];
     public static final SimpleGeneratorMetaTileEntity[] PLASMA_GENERATOR = new SimpleGeneratorMetaTileEntity[5];
     public static final MetaTileEntityLargeBasicGenerator[] LBG = new MetaTileEntityLargeBasicGenerator[6];
-    public static final MetaTileEntityReinforcedRotorHolder[] MULTIPART_REINFORCED_ROTOR_HOLDER = new MetaTileEntityReinforcedRotorHolder[8];
+    public static final MetaTileEntityReinforcedRotorHolder[] REINFORCED_ROTOR_HOLDER = new MetaTileEntityReinforcedRotorHolder[14];
     public static final MetaTileEntityCompressedFusionReactor[] COMPRESSED_FUSION_REACTOR = new MetaTileEntityCompressedFusionReactor[6];
     public static MetaTileEntity[] MULTI_QUANTUM_TANK = new MetaTileEntity[10];
     public static int currentMultiPartID = 16120;
@@ -784,7 +784,7 @@ public class GTQTMetaTileEntities {
         registerSimpleMetaTileEntity(LAMINATOR, 14840, "laminator", GTQTcoreRecipeMaps.LAMINATOR_RECIPES, GTQTTextures.LAMINATOR_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.largeTankSizeFunction);
         registerSimpleMetaTileEntity(VACUUM_CHAMBER, 14855, "vacuum_chamber", GTQTcoreRecipeMaps.VACUUM_CHAMBER_RECIPES, Textures.GAS_COLLECTOR_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
         registerSimpleMetaTileEntity(ULTRAVIOLET_LAMP_CHAMBER, 14870, "ultraviolet_lamp_chamber", GTQTcoreRecipeMaps.ULTRAVIOLET_LAMP_CHAMBER_RECIPES, Textures.LASER_ENGRAVER_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
-        registerSimpleMetaTileEntity(PRESSURE_LAMINATOR, 14885, "pressure_laminator", GTQTcoreRecipeMaps.PRESSURE_LAMINATOR_RECIPES, Textures.BENDER_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
+        registerSimpleMetaTileEntity(PRESSURE_LAMINATOR, 14885, "pressure_laminator", GTQTcoreRecipeMaps.PRESSURE_LAMINATOR_RECIPES, GTQTTextures.LAMINATOR_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
         registerSimpleMetaTileEntity(UU_PRODUCTER, 14900, "uu_producter", GTQTcoreRecipeMaps.UU_RECIPES, GTQTTextures.UUPRODUCTER_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
         registerSimpleMetaTileEntity(DUPLICATOR, 14915, "duplicator", GTQTcoreRecipeMaps.COPY_RECIPES, GTQTTextures.DUPLICATOR, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
         registerSimpleMetaTileEntity(RECYCLE, 14930, "recycle", GTQTcoreRecipeMaps.RECYCLE_RECIPE, Textures.MACERATOR_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.defaultTankSizeFunction);
@@ -902,19 +902,11 @@ public class GTQTMetaTileEntities {
         EDATA_ACCESS_HATCH = registerMetaTileEntity(15551, new MetaTileEntityDataAccessHatch(gtqtcoreId("edata_access_hatch"), GTValues.MV, false));
         FDATA_ACCESS_HATCH = registerMetaTileEntity(15552, new MetaTileEntityDataAccessHatch(gtqtcoreId("fdata_access_hatch"), GTValues.UV, false));
 
-        MULTIPART_REINFORCED_ROTOR_HOLDER[0] = registerMetaTileEntity(15553, new MetaTileEntityReinforcedRotorHolder(gtqtcoreId("reinforced_rotor_holder.luv"), 6));
-        MULTIPART_REINFORCED_ROTOR_HOLDER[1] = registerMetaTileEntity(15554, new MetaTileEntityReinforcedRotorHolder(gtqtcoreId("reinforced_rotor_holder.zpm"), 7));
-        MULTIPART_REINFORCED_ROTOR_HOLDER[2] = registerMetaTileEntity(15555, new MetaTileEntityReinforcedRotorHolder(gtqtcoreId("reinforced_rotor_holder.uv"), 8));
-        MULTIPART_REINFORCED_ROTOR_HOLDER[3] = registerMetaTileEntity(15556, new MetaTileEntityReinforcedRotorHolder(gtqtcoreId("reinforced_rotor_holder.uhv"), 9));
-        MULTIPART_REINFORCED_ROTOR_HOLDER[4] = registerMetaTileEntity(15557, new MetaTileEntityReinforcedRotorHolder(gtqtcoreId("reinforced_rotor_holder.uev"), 10));
-        MULTIPART_REINFORCED_ROTOR_HOLDER[5] = registerMetaTileEntity(15558, new MetaTileEntityReinforcedRotorHolder(gtqtcoreId("reinforced_rotor_holder.uiv"), 11));
-        MULTIPART_REINFORCED_ROTOR_HOLDER[6] = registerMetaTileEntity(15559, new MetaTileEntityReinforcedRotorHolder(gtqtcoreId("reinforced_rotor_holder.uxv"), 12));
-        MULTIPART_REINFORCED_ROTOR_HOLDER[7] = registerMetaTileEntity(15560, new MetaTileEntityReinforcedRotorHolder(gtqtcoreId("reinforced_rotor_holder.opv"), 13));
-        HV_MACHINE_HATCH = registerMetaTileEntity(15561, new MetaTileEntityMachineHatch(gtqtcoreId("hv_machine_hatch"), 3));
-        STERILE_CLEANING_MAINTENANCE_HATCH = registerMetaTileEntity(15562, new MetaTileEntitySterileCleaningMaintenanceHatch(gtqtcoreId("maintenance_hatch_sterile_cleanroom_auto")));
-        ISO3_CLEANING_MAINTENANCE_HATCH = registerMetaTileEntity(15563, new MetaTileEntityISO3CleaningMaintenanceHatch(gtqtcoreId("maintenance_hatch_iso_3_cleanroom_auto")));
-        ISO2_CLEANING_MAINTENANCE_HATCH = registerMetaTileEntity(15564, new MetaTileEntityISO2CleaningMaintenanceHatch(gtqtcoreId("maintenance_hatch_iso_2_cleanroom_auto")));
-        ISO1_CLEANING_MAINTENANCE_HATCH = registerMetaTileEntity(15565, new MetaTileEntityISO1CleaningMaintenanceHatch(gtqtcoreId("maintenance_hatch_iso_1_cleanroom_auto")));
+        //LV-OpV Reinforced Rotor Holders.
+        for (int i = 0; i < 13; i++) {
+            String voltageName = VN[i + 1].toLowerCase();
+            REINFORCED_ROTOR_HOLDER[i] = registerMetaTileEntity(15553 + i, new MetaTileEntityReinforcedRotorHolder(gtqtcoreId("reinforced_rotor_holder." + voltageName), i + 1));
+        }
 
         // ID 14501-14999: Several Misc Hatches
         AIR_INTAKE_HATCH = registerMetaTileEntity(15566,
@@ -942,6 +934,12 @@ public class GTQTMetaTileEntities {
         BUDGET_CRIB_12 = registerMetaTileEntity(15579, new MetaTileEntityBudgetCRIBA12(gtqtcoreId("budget_crib_12")));
         BUDGET_CRIB_16 = registerMetaTileEntity(15580, new MetaTileEntityBudgetCRIBA16(gtqtcoreId("budget_crib_16")));
         BUDGET_CRIB_20 = registerMetaTileEntity(15581, new MetaTileEntityBudgetCRIBA20(gtqtcoreId("budget_crib_20")));
+
+        HV_MACHINE_HATCH = registerMetaTileEntity(15585, new MetaTileEntityMachineHatch(gtqtcoreId("hv_machine_hatch"), 3));
+        STERILE_CLEANING_MAINTENANCE_HATCH = registerMetaTileEntity(15586, new MetaTileEntitySterileCleaningMaintenanceHatch(gtqtcoreId("maintenance_hatch_sterile_cleanroom_auto")));
+        ISO3_CLEANING_MAINTENANCE_HATCH = registerMetaTileEntity(15587, new MetaTileEntityISO3CleaningMaintenanceHatch(gtqtcoreId("maintenance_hatch_iso_3_cleanroom_auto")));
+        ISO2_CLEANING_MAINTENANCE_HATCH = registerMetaTileEntity(15588, new MetaTileEntityISO2CleaningMaintenanceHatch(gtqtcoreId("maintenance_hatch_iso_2_cleanroom_auto")));
+        ISO1_CLEANING_MAINTENANCE_HATCH = registerMetaTileEntity(15589, new MetaTileEntityISO1CleaningMaintenanceHatch(gtqtcoreId("maintenance_hatch_iso_1_cleanroom_auto")));
 
         for (int i = 0; i < 10; i++) {
             int id = 15590 + i;

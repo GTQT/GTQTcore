@@ -73,7 +73,7 @@ public class HeatExchangeRecipes {
                 .fluidOutputs(CarbonMonoxide.getFluid(1000)) // 一氧化碳
                 .fluidOutputs(NitricOxide.getFluid(1000)) // 一氧化氮
                 .EUt(VA[MV])
-                .duration(200)
+                .duration(20)
                 .buildAndRegister();
 
         HEAT_EXCHANGE_RECIPES.recipeBuilder()

@@ -2571,61 +2571,6 @@ public class TechReSearchNET {
                 .duration(1200)
                 .buildAndRegister();
 
-        //  ZPM
-        ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(frameGt, NaquadahAlloy)
-                .input(ROTOR_HOLDER[5])
-                .input(ELECTRIC_MOTOR_ZPM, 2)
-                .input(rotor, Inconel792, 4)
-                .input(stickLong, TungstenSteel, 2)
-                .input(wireFine, NiobiumTitanium, 16)
-                .fluidInputs(SolderingAlloy.getFluid(L * 2))
-                .output(MULTIPART_REINFORCED_ROTOR_HOLDER[1])
-                .stationResearch(b -> b
-                        .researchStack(DISK_3.getStackForm())
-                        .CWUt(CWT[IV])
-                        .EUt(VA[ZPM]))
-                .EUt(VA[ZPM])
-                .duration(1200)
-                .buildAndRegister();
-
-        //  UV
-        ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(frameGt, Darmstadtium)
-                .input(MULTIPART_REINFORCED_ROTOR_HOLDER[1])
-                .input(ELECTRIC_MOTOR_UV, 2)
-                .input(rotor, Inconel625, 4)
-                .input(stickLong, RhodiumPlatedPalladium, 2)
-                .input(wireFine, VanadiumGallium, 16)
-                .fluidInputs(SolderingAlloy.getFluid(L * 2))
-                .output(MULTIPART_REINFORCED_ROTOR_HOLDER[2])
-                .stationResearch(b -> b
-                        .researchStack(DISK_3.getStackForm())
-                        .CWUt(CWT[IV])
-                        .EUt(VA[ZPM]))
-                .EUt(VA[UV])
-                .duration(1200)
-                .buildAndRegister();
-
-        //  UHV
-        ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(frameGt, Orichalcum)
-                .input(MULTIPART_REINFORCED_ROTOR_HOLDER[2])
-                .input(ELECTRIC_MOTOR_UHV, 2)
-                .input(CONVEYOR_MODULE_UHV, 2)
-                .input(rotor, Adamantium, 4)
-                .input(stickLong, HSSS, 2)
-                .input(wireFine, YttriumBariumCuprate, 32)
-                .fluidInputs(SolderingAlloy.getFluid(L * 10))
-                .output(MULTIPART_REINFORCED_ROTOR_HOLDER[3])
-                .EUt(VA[UHV])
-                .duration(1200)
-                .stationResearch(b -> b
-                        .researchStack(DISK_3.getStackForm())
-                        .CWUt(CWT[IV])
-                        .EUt(VA[ZPM]))
-                .buildAndRegister();
-
         //  Heat Exchanger
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .EUt(VA[EV])

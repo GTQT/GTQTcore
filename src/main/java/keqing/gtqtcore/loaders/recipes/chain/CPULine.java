@@ -837,8 +837,8 @@ public class CPULine {
                 .EUt(120)
                 .input(LAMINATION_FG)
                 .input(foil, Gold, 8)
-                .fluidInputs(Polystyrene.getFluid(576))
                 .fluidInputs(Polyethylene.getFluid(576))
+                .fluidInputs(Polystyrene.getFluid(576))
                 .output(IMPREGNATED_PLASTIC_SUBSTRATE, 2)
                 .buildAndRegister();
 
@@ -872,8 +872,8 @@ public class CPULine {
                 .EUt(480)
                 .input(LAMINATION_CA)
                 .input(foil, Platinum, 8)
+                .fluidInputs(Polytetrafluoroethylene.getFluid(576))
                 .fluidInputs(Bps.getFluid(576))
-                .fluidInputs(StyreneButadieneRubber.getFluid(576))
                 .output(IMPREGNATED_EPOXY, 2)
                 .buildAndRegister();
 
@@ -907,8 +907,8 @@ public class CPULine {
                 .EUt(1920)
                 .input(LAMINATION_GE)
                 .input(foil, NanometerBariumTitanate, 8)
-                .fluidInputs(StyreneButadieneRubber.getFluid(576))
                 .fluidInputs(Zylon.getFluid(576))
+                .fluidInputs(PolyphenyleneSulfide.getFluid(576))
                 .output(IMPREGNATED_FIBER, 2)
                 .buildAndRegister();
 
@@ -947,8 +947,8 @@ public class CPULine {
                 .input(LAMINATION_IR)
                 .input(FIBER_BOARD, 2)
                 .input(foil, RhodiumPlatedPalladium, 8)
-                .fluidInputs(Polyetheretherketone.getFluid(576))
                 .fluidInputs(Polybenzimidazole.getFluid(576))
+                .fluidInputs(PolyvinylButyral.getFluid(576))
                 .output(IMPREGNATED_MULTILAYER_FIBER, 2)
                 .buildAndRegister();
     }

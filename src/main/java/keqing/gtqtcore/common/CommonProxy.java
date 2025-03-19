@@ -431,6 +431,7 @@ public class CommonProxy {
         HeatExchangeRecipes.init();
         OreDeal.init();
         TechReSearchNET.init();
+        ReinforcedRotorHolder.init();
         ISALine.init();
         QTF.init();
         ComponentAssemblyLineRecipes.init();
