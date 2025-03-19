@@ -62,6 +62,7 @@ public class MetaTileEntityLargeFluidizedBed extends GTQTRecipeMapMultiblockCont
         setMaxVoltageFlag(true);
         //setTimeReduce(coilLevel);
         setTimeReduceFlag(true);
+        setOverclocking(4.0);
     }
 
     @Override
@@ -72,15 +73,6 @@ public class MetaTileEntityLargeFluidizedBed extends GTQTRecipeMapMultiblockCont
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityLargeFluidizedBed(metaTileEntityId);
-    }
-
-    @Override
-    public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
-        super.addInformation(stack, player, tooltip, advanced);
-        tooltip.add(I18n.format("gregtech.machine.gtqt.update.1"));
-        tooltip.add(I18n.format("gregtech.machine.gtqt.update.2"));
-        tooltip.add(I18n.format("gtqtcore.machine.parallel.pow.machineTier", 2, 32));
-        tooltip.add(I18n.format("gtqtcore.machine.max_voltage"));
     }
 
     @Override

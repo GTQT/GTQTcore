@@ -27,7 +27,7 @@ import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.GTQTCoreConfig;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.capability.IBio;
-import keqing.gtqtcore.api.metaileentity.GTQTNoOCMultiblockController;
+import keqing.gtqtcore.api.metaileentity.GTQTNoTierMultiblockController;
 import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.properties.BioReactorProperty;
@@ -58,7 +58,7 @@ import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.BIOLOGICAL_REACTION
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing3.CasingType.tumbaga;
 
 //要实现大机器中的渲染需要重写IFastRenderMetaTileEntity 接口，并实现renderMetaTileEntity和getRenderBoundingBox方法
-public class MetaTileEntityBiologicalReaction extends GTQTNoOCMultiblockController implements IProgressBarMultiblock, IFastRenderMetaTileEntity {
+public class MetaTileEntityBiologicalReaction extends GTQTNoTierMultiblockController implements IProgressBarMultiblock, IFastRenderMetaTileEntity {
     int liquid = 0;
     int bio = 0;
     double rate = 0;
@@ -73,6 +73,7 @@ public class MetaTileEntityBiologicalReaction extends GTQTNoOCMultiblockControll
         setMaxParallelFlag(true);
         //setTimeReduce(auto);
         setTimeReduceFlag(true);
+        setOverclocking(3.0);
     }
 
     private static IBlockState getTubeState() {

@@ -191,6 +191,7 @@ public class GTQTMaterialPropertyAddition {
         Rutile.setProperty(PropertyKey.ORE, new OreProperty(1, 1, false));
         NetherStar.setProperty(PropertyKey.ORE, new OreProperty(1, 1, false));
         Gallium.setProperty(PropertyKey.ORE, new OreProperty(1, 1, false));
+        Bismuth.setProperty(PropertyKey.ORE, new OreProperty(1, 1, false));
         // Ingots
         Germanium.setProperty(PropertyKey.INGOT, new IngotProperty());
         Rhenium.setProperty(PropertyKey.INGOT, new IngotProperty());

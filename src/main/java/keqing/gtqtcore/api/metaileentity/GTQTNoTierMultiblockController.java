@@ -47,6 +47,7 @@ public abstract class GTQTNoTierMultiblockController extends MultiMapMultiblockC
     protected boolean OCFirst;
     protected int limitAutoParallel;
     protected int energyHatchMaxWork = 32;
+    protected double Overclocking;
 
     public GTQTNoTierMultiblockController(ResourceLocation metaTileEntityId, RecipeMap<?>[] recipeMaps) {
         super(metaTileEntityId, recipeMaps);
@@ -65,6 +66,7 @@ public abstract class GTQTNoTierMultiblockController extends MultiMapMultiblockC
         data.setBoolean("OCFirst", this.OCFirst);
         data.setInteger("limitAutoParallel", this.limitAutoParallel);
         data.setInteger("energyHatchMaxWork", this.energyHatchMaxWork);
+        data.setDouble("Overclocking", this.Overclocking);
 
         return super.writeToNBT(data);
     }
@@ -81,6 +83,7 @@ public abstract class GTQTNoTierMultiblockController extends MultiMapMultiblockC
         this.OCFirst = data.getBoolean("OCFirst");
         this.limitAutoParallel = data.getInteger("limitAutoParallel");
         this.energyHatchMaxWork = data.getInteger("energyHatchMaxWork");
+        this.Overclocking = data.getDouble("Overclocking");
 
         super.readFromNBT(data);
     }
@@ -98,6 +101,7 @@ public abstract class GTQTNoTierMultiblockController extends MultiMapMultiblockC
         buf.writeBoolean(this.OCFirst);
         buf.writeInt(this.limitAutoParallel);
         buf.writeInt(this.energyHatchMaxWork);
+        buf.writeDouble(this.Overclocking);
     }
 
     public void receiveInitialSyncData(PacketBuffer buf) {
@@ -113,6 +117,11 @@ public abstract class GTQTNoTierMultiblockController extends MultiMapMultiblockC
         this.OCFirst = buf.readBoolean();
         this.limitAutoParallel = buf.readInt();
         this.energyHatchMaxWork = buf.readInt();
+        this.Overclocking = buf.readDouble();
+    }
+
+    protected void setOverclocking(double Overclocking) {
+        this.Overclocking = Overclocking;
     }
 
     protected void setTimeReduce(double timeReduce) {
@@ -128,8 +137,10 @@ public abstract class GTQTNoTierMultiblockController extends MultiMapMultiblockC
     @Override
     public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
-        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("gregtech.machine.perfect_oc"));
+        if(Overclocking==4.0)tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("gregtech.machine.perfect_oc"));
+        tooltip.add(I18n.format("gregtech.machine.gtqt.oc",Overclocking));
         tooltip.add(I18n.format("gregtech.machine.gtqt.update.1"));
+        if (setTimeReduce) tooltip.add(I18n.format("gregtech.machine.time.reduce","详见机器内部UI"));
         if (setMaxParallel) tooltip.add(I18n.format("gtqtcore.machine.parallel.pow.machineTier", 2, "详见机器内部UI"));
     }
 
@@ -263,7 +274,7 @@ public abstract class GTQTNoTierMultiblockController extends MultiMapMultiblockC
     }
 
     protected void addOC(List<ITextComponent> textList) {
-        if (OCFirst)textList.add(new TextComponentTranslation("gui.overclock_first_mode"));
+        if (OCFirst)textList.add(new TextComponentTranslation("gui.overclock_first_mode"+" "+Overclocking));
         else textList.add(new TextComponentTranslation("gui.parallel_first_mode"));
     }
 
@@ -275,8 +286,14 @@ public abstract class GTQTNoTierMultiblockController extends MultiMapMultiblockC
 
         @Override
         protected double getOverclockingDurationDivisor() {
-            return OCFirst ? 4.0 : 2.0;
+            return OCFirst ? Overclocking : 2.0;
         }
+
+        @Override
+        protected double getOverclockingVoltageMultiplier() {
+            return OCFirst ? Overclocking : 2.0;
+        }
+
 
         @Override
         public void update() {

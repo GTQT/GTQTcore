@@ -63,7 +63,7 @@ public class MetaTileEntityMSF extends MultiMapMultiblockController implements I
     }
 
     private static IBlockState getCasingAState() {
-        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.ALUMINIUM_FROSTPROOF);
+        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STAINLESS_CLEAN);
     }
 
     private static IBlockState getCasingBState() {
@@ -71,7 +71,7 @@ public class MetaTileEntityMSF extends MultiMapMultiblockController implements I
     }
 
     private static IBlockState getFrameState() {
-        return MetaBlocks.FRAMES.get(Materials.Aluminium).getBlock(Materials.Aluminium);
+        return MetaBlocks.FRAMES.get(Materials.StainlessSteel).getBlock(Materials.StainlessSteel);
     }
 
     @Override
@@ -237,7 +237,7 @@ public class MetaTileEntityMSF extends MultiMapMultiblockController implements I
     @SideOnly(Side.CLIENT)
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
-        return Textures.FROST_PROOF_CASING;
+        return Textures.CLEAN_STAINLESS_STEEL_CASING;
     }
 
     @SideOnly(Side.CLIENT)
@@ -293,8 +293,8 @@ public class MetaTileEntityMSF extends MultiMapMultiblockController implements I
         @Override
         public void setMaxProgress(int maxProgress) {
             if (getStatue()) {
-                maxProgressTime = maxProgress / (number * 2);
-            } else this.maxProgressTime = maxProgress / number;
+                maxProgressTime = (int) (maxProgress *0.6);
+            } else this.maxProgressTime = (int) (maxProgress *0.8);
         }
 
         public boolean getStatue() {

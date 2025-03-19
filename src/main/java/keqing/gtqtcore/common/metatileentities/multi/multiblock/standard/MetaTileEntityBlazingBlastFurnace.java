@@ -32,7 +32,7 @@ import gregtech.client.utils.TooltipHelper;
 import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.metatileentities.MetaTileEntities;
-import keqing.gtqtcore.api.metaileentity.GTQTNoOCMultiblockController;
+import keqing.gtqtcore.api.metaileentity.GTQTNoTierMultiblockController;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
@@ -58,7 +58,7 @@ import java.util.List;
 import static gregtech.api.GTValues.VA;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.Pyrotheum;
 
-public class MetaTileEntityBlazingBlastFurnace extends GTQTNoOCMultiblockController implements IHeatingCoil {
+public class MetaTileEntityBlazingBlastFurnace extends GTQTNoTierMultiblockController implements IHeatingCoil {
     protected static int heatingCoilLevel;
     private FluidStack pyrotheumFluid = Pyrotheum.getFluid(1);
     private int blastFurnaceTemperature;
@@ -75,6 +75,7 @@ public class MetaTileEntityBlazingBlastFurnace extends GTQTNoOCMultiblockControl
         setMaxParallelFlag(true);
         //setTimeReduce(auto);
         setTimeReduceFlag(true);
+        setOverclocking(3.0);
     }
 
     private static IBlockState getCasingState() {
@@ -100,7 +101,7 @@ public class MetaTileEntityBlazingBlastFurnace extends GTQTNoOCMultiblockControl
         }
         this.blastFurnaceTemperature += 100 * Math.max(0, GTUtility.getTierByVoltage(getEnergyContainer().getInputVoltage()) - GTValues.MV);
         setMaxParallel(Math.min((int) Math.pow(2, heatingCoilLevel),16));
-        setTimeReduce( (100 - (Math.min(heatingCoilLevel,15) * 5.0)) /100);
+        setTimeReduce( (100 - (Math.min(heatingCoilLevel,10) * 5.0)) /100);
     }
 
     @Override

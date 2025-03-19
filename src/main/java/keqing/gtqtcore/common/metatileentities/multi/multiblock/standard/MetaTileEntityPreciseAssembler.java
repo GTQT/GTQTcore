@@ -2,12 +2,10 @@ package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
 import gregtech.api.capability.IOpticalComputationHatch;
 import gregtech.api.capability.IOpticalComputationProvider;
-import gregtech.api.capability.IOpticalComputationReceiver;
 import gregtech.api.capability.impl.ComputationRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
-import gregtech.api.metatileentity.multiblock.MultiMapMultiblockController;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
@@ -63,10 +61,7 @@ public class MetaTileEntityPreciseAssembler extends GTQTOCMultiblockController {
     private int InternalCasingTier;
 
     public MetaTileEntityPreciseAssembler(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, new RecipeMap[]{
-                ASSEMBLER_RECIPES,
-                GTQTcoreRecipeMaps.PRECISE_ASSEMBLER_RECIPES
-        });
+        super(metaTileEntityId, new RecipeMap[]{ASSEMBLER_RECIPES, GTQTcoreRecipeMaps.PRECISE_ASSEMBLER_RECIPES});
         this.recipeMapWorkable = new PreciseAssemblerRecipeLogic(this);
 
         setTierFlag(true);
@@ -77,6 +72,7 @@ public class MetaTileEntityPreciseAssembler extends GTQTOCMultiblockController {
         setMaxVoltageFlag(true);
         setTimeReduce(1);//初始化
         setTimeReduceFlag(true);
+        setOverclocking(3.0);
     }
 
     private static IBlockState getFrameState() {
@@ -116,12 +112,8 @@ public class MetaTileEntityPreciseAssembler extends GTQTOCMultiblockController {
         }
         Object CasingTier = context.get("PACTieredStats");
         Object InternalCasingTier = context.get("PAITieredStats");
-        this.CasingTier = GTQTUtil.getOrDefault(() -> CasingTier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired) CasingTier).getIntTier(),
-                0);
-        this.InternalCasingTier = GTQTUtil.getOrDefault(() -> InternalCasingTier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired) InternalCasingTier).getIntTier(),
-                0);
+        this.CasingTier = GTQTUtil.getOrDefault(() -> CasingTier instanceof WrappedIntTired, () -> ((WrappedIntTired) CasingTier).getIntTier(), 0);
+        this.InternalCasingTier = GTQTUtil.getOrDefault(() -> InternalCasingTier instanceof WrappedIntTired, () -> ((WrappedIntTired) InternalCasingTier).getIntTier(), 0);
 
         this.writeCustomData(GTQTValue.UPDATE_TIER9, buf -> buf.writeInt(this.CasingTier));
 
@@ -141,8 +133,7 @@ public class MetaTileEntityPreciseAssembler extends GTQTOCMultiblockController {
     }
 
 
-    public boolean checkRecipe(@Nonnull Recipe recipe,
-                               boolean consumeIfSuccess) {
+    public boolean checkRecipe(@Nonnull Recipe recipe, boolean consumeIfSuccess) {
         if (!super.checkRecipe(recipe, consumeIfSuccess)) return false;
         if (this.getRecipeMap() == ASSEMBLER_RECIPES) return true;
         else return recipe.getProperty(ControllerProperty.getInstance(), 0) <= CasingTier;
@@ -152,51 +143,16 @@ public class MetaTileEntityPreciseAssembler extends GTQTOCMultiblockController {
     public List<MultiblockShapeInfo> getMatchingShapes() {
         ArrayList<MultiblockShapeInfo> shapeInfo = new ArrayList<>();
         MultiblockShapeInfo.Builder builder;
-        builder = MultiblockShapeInfo.builder()
-                .aisle("ETCCCCCCC", "F       F", "F       F", "F       F", "XYZCCCCCC")
-                .aisle("CMMMMMMMC", "CGGGGGGGC", "CGGGGGGGC", "CGGGGGGGC", "CCCCCCCCC")
-                .aisle("CMMMMMMMC", "C       C", "C       C", "C       C", "CCCCOCCCC")
-                .aisle("CMMMMMMMC", "CGGGGGGGC", "CGGGGGGGC", "CGGGGGGGC", "CCCCCCCCC")
-                .aisle("CCCISCCCC", "F       F", "F       F", "F       F", "CCCCCCCCC")
-                .where('S', PRECISE_ASSEMBLER, EnumFacing.SOUTH)
-                .where('I', MetaTileEntities.COMPUTATION_HATCH_RECEIVER, EnumFacing.SOUTH)
-                .where('X', MetaTileEntities.ITEM_IMPORT_BUS[IV], EnumFacing.NORTH)
-                .where('Y', MetaTileEntities.ITEM_EXPORT_BUS[IV], EnumFacing.NORTH)
-                .where('Z', MetaTileEntities.FLUID_IMPORT_HATCH[IV], EnumFacing.NORTH)
-                .where('E', MetaTileEntities.ENERGY_INPUT_HATCH[IV], EnumFacing.NORTH)
-                .where('T', () -> ConfigHolder.machines.enableMaintenance ? MetaTileEntities.MAINTENANCE_HATCH : MetaTileEntities.ENERGY_INPUT_HATCH[LuV], EnumFacing.NORTH)
-                .where('O', MetaTileEntities.MUFFLER_HATCH[LV], EnumFacing.UP)
-                .where('G', getGlassState())
-                .where('M', MetaBlocks.MACHINE_CASING.getState(BlockMachineCasing.MachineCasingType.LuV))
-                .where('F', getFrameState())
-                .where(' ', Blocks.AIR.getDefaultState());
+        builder = MultiblockShapeInfo.builder().aisle("ETCCCCCCC", "F       F", "F       F", "F       F", "XYZCCCCCC").aisle("CMMMMMMMC", "CGGGGGGGC", "CGGGGGGGC", "CGGGGGGGC", "CCCCCCCCC").aisle("CMMMMMMMC", "C       C", "C       C", "C       C", "CCCCOCCCC").aisle("CMMMMMMMC", "CGGGGGGGC", "CGGGGGGGC", "CGGGGGGGC", "CCCCCCCCC").aisle("CCCISCCCC", "F       F", "F       F", "F       F", "CCCCCCCCC").where('S', PRECISE_ASSEMBLER, EnumFacing.SOUTH).where('I', MetaTileEntities.COMPUTATION_HATCH_RECEIVER, EnumFacing.SOUTH).where('X', MetaTileEntities.ITEM_IMPORT_BUS[IV], EnumFacing.NORTH).where('Y', MetaTileEntities.ITEM_EXPORT_BUS[IV], EnumFacing.NORTH).where('Z', MetaTileEntities.FLUID_IMPORT_HATCH[IV], EnumFacing.NORTH).where('E', MetaTileEntities.ENERGY_INPUT_HATCH[IV], EnumFacing.NORTH).where('T', () -> ConfigHolder.machines.enableMaintenance ? MetaTileEntities.MAINTENANCE_HATCH : MetaTileEntities.ENERGY_INPUT_HATCH[LuV], EnumFacing.NORTH).where('O', MetaTileEntities.MUFFLER_HATCH[LV], EnumFacing.UP).where('G', getGlassState()).where('M', MetaBlocks.MACHINE_CASING.getState(BlockMachineCasing.MachineCasingType.LuV)).where('F', getFrameState()).where(' ', Blocks.AIR.getDefaultState());
         MultiblockShapeInfo.Builder finalBuilder = builder;
-        MAP_PA_CASING.entrySet().stream()
-                .sorted(Comparator.comparingInt(entry -> ((WrappedIntTired) entry.getValue()).getIntTier()))
-                .forEach(entry -> shapeInfo.add(finalBuilder.where('C', entry.getKey()).build()));
+        MAP_PA_CASING.entrySet().stream().sorted(Comparator.comparingInt(entry -> ((WrappedIntTired) entry.getValue()).getIntTier())).forEach(entry -> shapeInfo.add(finalBuilder.where('C', entry.getKey()).build()));
         return shapeInfo;
     }
 
     @Nonnull
     @Override
     protected BlockPattern createStructurePattern() {
-        return FactoryBlockPattern.start()
-                .aisle("DDDDDDDDD", "F       F", "F       F", "F       F", "DDDDDDDDD")
-                .aisle("CMMMMMMMC", "CGGGGGGGC", "CGGGGGGGC", "CGGGGGGGC", "DDDDDDDDD")
-                .aisle("CMMMMMMMC", "C       C", "C       C", "C       C", "DDDDODDDD")
-                .aisle("CMMMMMMMC", "CGGGGGGGC", "CGGGGGGGC", "CGGGGGGGC", "DDDDDDDDD")
-                .aisle("DDDXSDDDD", "F       F", "F       F", "F       F", "DDDDDDDDD")
-                .where('S', selfPredicate())
-                .where('C', TiredTraceabilityPredicate.CP_PA_CASING.get())
-                .where('D', TiredTraceabilityPredicate.CP_PA_CASING.get()
-                        .setMinGlobalLimited(42)
-                        .or(autoAbilities(true, true, true, true, true, true, false)))
-                .where('X', abilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION))
-                .where('O', abilities(MultiblockAbility.MUFFLER_HATCH))
-                .where('F', states(getFrameState()))
-                .where('G', states(getGlassState()))
-                .where('M', TiredTraceabilityPredicate.CP_PA_INTERNAL_CASING.get())
-                .build();
+        return FactoryBlockPattern.start().aisle("DDDDDDDDD", "F       F", "F       F", "F       F", "DDDDDDDDD").aisle("CMMMMMMMC", "CGGGGGGGC", "CGGGGGGGC", "CGGGGGGGC", "DDDDDDDDD").aisle("CMMMMMMMC", "C       C", "C       C", "C       C", "DDDDODDDD").aisle("CMMMMMMMC", "CGGGGGGGC", "CGGGGGGGC", "CGGGGGGGC", "DDDDDDDDD").aisle("DDDXSDDDD", "F       F", "F       F", "F       F", "DDDDDDDDD").where('S', selfPredicate()).where('C', TiredTraceabilityPredicate.CP_PA_CASING.get()).where('D', TiredTraceabilityPredicate.CP_PA_CASING.get().setMinGlobalLimited(42).or(autoAbilities(true, true, true, true, true, true, false))).where('X', abilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION)).where('O', abilities(MultiblockAbility.MUFFLER_HATCH)).where('F', states(getFrameState())).where('G', states(getGlassState())).where('M', TiredTraceabilityPredicate.CP_PA_INTERNAL_CASING.get()).build();
     }
 
     @SideOnly(Side.CLIENT)
@@ -268,6 +224,7 @@ public class MetaTileEntityPreciseAssembler extends GTQTOCMultiblockController {
         public PreciseAssemblerRecipeLogic(RecipeMapMultiblockController tileEntity) {
             super(tileEntity, ComputationType.SPORADIC);
         }
+
         @Override
         public void update() {
             super.update();
@@ -275,10 +232,11 @@ public class MetaTileEntityPreciseAssembler extends GTQTOCMultiblockController {
                 setTimeReduce(1);
                 setMaxParallel(1);
             } else {
-                setTimeReduce(1.0 /Math.min(InternalCasingTier, CasingTier));
+                setTimeReduce(1.0 / Math.min(InternalCasingTier, CasingTier));
                 setMaxParallel((int) Math.pow(2, Math.min(InternalCasingTier, CasingTier) + 4));
             }
         }
+
         private boolean isPrecise() {
             return this.getRecipeMap() == GTQTcoreRecipeMaps.PRECISE_ASSEMBLER_RECIPES;
         }

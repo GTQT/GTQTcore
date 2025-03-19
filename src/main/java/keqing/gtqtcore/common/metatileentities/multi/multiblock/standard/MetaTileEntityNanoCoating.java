@@ -4,15 +4,9 @@ package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 import gregtech.api.capability.IOpticalComputationHatch;
 import gregtech.api.capability.IOpticalComputationProvider;
 import gregtech.api.capability.IOpticalComputationReceiver;
-import gregtech.api.capability.impl.ComputationRecipeLogic;
-import gregtech.api.gui.GuiTextures;
-import gregtech.api.gui.Widget;
-import gregtech.api.gui.widgets.ClickButtonWidget;
-import gregtech.api.gui.widgets.WidgetGroup;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
-import gregtech.api.metatileentity.multiblock.MultiMapMultiblockController;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
@@ -42,10 +36,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nonnull;
 import java.util.List;
 
-import static gregtech.api.GTValues.V;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.SPINNER_RECIPES;
 
 public class MetaTileEntityNanoCoating extends GTQTOCMultiblockController implements IOpticalComputationReceiver {
@@ -62,13 +54,7 @@ public class MetaTileEntityNanoCoating extends GTQTOCMultiblockController implem
     private IOpticalComputationProvider computationProvider;
 
     public MetaTileEntityNanoCoating(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, new RecipeMap[]{
-                GTQTcoreRecipeMaps.TD_PRINT_RECIPES,
-                GTQTcoreRecipeMaps.AUTO_CHISEL_RECIPES,
-                GTQTcoreRecipeMaps.PRECISION_SPRAYING,
-                GTQTcoreRecipeMaps.PRECISION_SPINNING,
-                SPINNER_RECIPES
-        });
+        super(metaTileEntityId, new RecipeMap[]{GTQTcoreRecipeMaps.TD_PRINT_RECIPES, GTQTcoreRecipeMaps.AUTO_CHISEL_RECIPES, GTQTcoreRecipeMaps.PRECISION_SPRAYING, GTQTcoreRecipeMaps.PRECISION_SPINNING, SPINNER_RECIPES});
         this.recipeMapWorkable = new LaserEngravingWorkableHandler(this);
 
         setTierFlag(true);
@@ -79,6 +65,7 @@ public class MetaTileEntityNanoCoating extends GTQTOCMultiblockController implem
         setMaxVoltageFlag(true);
         setTimeReduce(1);//初始化
         setTimeReduceFlag(true);
+        setOverclocking(3.0);
     }
 
     @Override
@@ -134,20 +121,7 @@ public class MetaTileEntityNanoCoating extends GTQTOCMultiblockController implem
 
     @Override
     protected BlockPattern createStructurePattern() {
-        return FactoryBlockPattern.start()
-                .aisle("XJXXXXXXX", "XJXGGGGXX",  "XJXGGGGXX")
-                .aisle("XJXXXXXXX", "XJPZZZZPX",  "XJXGGGGXX")
-                .aisle("XJXXXXXXX", "XJPZZZZPX",  "XJXGGGGXX")
-                .aisle("CJXXXXXXX", "SJXGGGGXX",  "XJXGGGGXX")
-                .where('S', selfPredicate())
-                .where('C', abilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION))
-                .where('X', TiredTraceabilityPredicate.CP_CASING.get().setMinGlobalLimited(40).or(autoAbilities()))
-                .where('Z', TiredTraceabilityPredicate.CP_ZW_CASING.get())
-                .where('G', TiredTraceabilityPredicate.CP_LGLASS.get())
-                .where('J', TiredTraceabilityPredicate.CP_ZJ_CASING.get())
-                .where('P', TiredTraceabilityPredicate.CP_TJ_CASING.get())
-                .where('#', air())
-                .build();
+        return FactoryBlockPattern.start().aisle("XJXXXXXXX", "XJXGGGGXX", "XJXGGGGXX").aisle("XJXXXXXXX", "XJPZZZZPX", "XJXGGGGXX").aisle("XJXXXXXXX", "XJPZZZZPX", "XJXGGGGXX").aisle("CJXXXXXXX", "SJXGGGGXX", "XJXGGGGXX").where('S', selfPredicate()).where('C', abilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION)).where('X', TiredTraceabilityPredicate.CP_CASING.get().setMinGlobalLimited(40).or(autoAbilities())).where('Z', TiredTraceabilityPredicate.CP_ZW_CASING.get()).where('G', TiredTraceabilityPredicate.CP_LGLASS.get()).where('J', TiredTraceabilityPredicate.CP_ZJ_CASING.get()).where('P', TiredTraceabilityPredicate.CP_TJ_CASING.get()).where('#', air()).build();
     }
 
     @SideOnly(Side.CLIENT)
@@ -220,21 +194,11 @@ public class MetaTileEntityNanoCoating extends GTQTOCMultiblockController implem
         Object clean_tier = context.get("ZJTieredStats");
         Object radio_tier = context.get("TJTieredStats");
 
-        this.laser_tier = GTQTUtil.getOrDefault(() -> laser_tier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired) laser_tier).getIntTier(),
-                0);
-        this.casing_tier = GTQTUtil.getOrDefault(() -> tier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired) tier).getIntTier(),
-                0);
-        this.glass_tier = GTQTUtil.getOrDefault(() -> glass_tier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired) glass_tier).getIntTier(),
-                0);
-        this.clean_tier = GTQTUtil.getOrDefault(() -> clean_tier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired) clean_tier).getIntTier(),
-                0);
-        this.radio_tier = GTQTUtil.getOrDefault(() -> radio_tier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired) radio_tier).getIntTier(),
-                0);
+        this.laser_tier = GTQTUtil.getOrDefault(() -> laser_tier instanceof WrappedIntTired, () -> ((WrappedIntTired) laser_tier).getIntTier(), 0);
+        this.casing_tier = GTQTUtil.getOrDefault(() -> tier instanceof WrappedIntTired, () -> ((WrappedIntTired) tier).getIntTier(), 0);
+        this.glass_tier = GTQTUtil.getOrDefault(() -> glass_tier instanceof WrappedIntTired, () -> ((WrappedIntTired) glass_tier).getIntTier(), 0);
+        this.clean_tier = GTQTUtil.getOrDefault(() -> clean_tier instanceof WrappedIntTired, () -> ((WrappedIntTired) clean_tier).getIntTier(), 0);
+        this.radio_tier = GTQTUtil.getOrDefault(() -> radio_tier instanceof WrappedIntTired, () -> ((WrappedIntTired) radio_tier).getIntTier(), 0);
 
         setTier(Math.min(this.casing_tier, this.glass_tier));
         setMaxVoltage(Math.min(this.casing_tier, this.clean_tier * 2));
@@ -263,14 +227,15 @@ public class MetaTileEntityNanoCoating extends GTQTOCMultiblockController implem
         public LaserEngravingWorkableHandler(RecipeMapMultiblockController tileEntity) {
             super(tileEntity);
         }
+
         @Override
         public void update() {
             super.update();
             if (radio_tier == laser_tier) {
-                setTimeReduce((100 - glass_tier*8) / 100.0);
-                setMaxParallel(4*clean_tier * radio_tier);
+                setTimeReduce((100 - glass_tier * 8) / 100.0);
+                setMaxParallel(4 * clean_tier * radio_tier);
             } else {
-                setTimeReduce((100 - glass_tier*4) / 100.0);
+                setTimeReduce((100 - glass_tier * 4) / 100.0);
                 setMaxParallel(clean_tier * radio_tier);
             }
         }

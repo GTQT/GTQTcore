@@ -50,6 +50,7 @@ public class MetaTileEntityVacuumFreezer extends GTQTRecipeMapMultiblockControll
         setMaxVoltageFlag(true);
         //setTimeReduce(none);
         setTimeReduceFlag(false);
+        setOverclocking(4.0);
     }
 
     @Override

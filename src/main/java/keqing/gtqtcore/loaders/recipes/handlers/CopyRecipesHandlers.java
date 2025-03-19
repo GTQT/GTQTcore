@@ -57,7 +57,7 @@ public class CopyRecipesHandlers {
             List<GTRecipeInput> itemInputs = recipe.getInputs();
             List<ItemStack> itemOutputs = recipe.getOutputs();
             int EUt = recipe.getEUt();
-            int baseDuration= (int) (recipe.getDuration()*0.8);
+            int baseDuration= Math.max((int) (recipe.getDuration()*0.8),1);
 
             TD_PRINT_RECIPES.recipeBuilder()
                     .duration(baseDuration)

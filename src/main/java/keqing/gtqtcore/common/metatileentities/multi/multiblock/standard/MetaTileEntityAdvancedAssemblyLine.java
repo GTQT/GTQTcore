@@ -35,10 +35,7 @@ import gregtech.common.blocks.BlockGlassCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiFluidHatch;
 import gregtech.core.sound.GTSoundEvents;
-import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.metaileentity.GTQTNoTierMultiblockController;
-import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
-import keqing.gtqtcore.api.utils.GTQTUniversUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import net.minecraft.block.state.IBlockState;
@@ -60,7 +57,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.function.Function;
 
-import static gregtech.api.GTValues.UV;
 import static gregtech.api.util.GTUtility.getTierByVoltage;
 import static gregtech.api.util.GTUtility.gregtechId;
 import static keqing.gtqtcore.api.utils.GTQTUtil.getAccelerateByCWU;
@@ -70,10 +66,10 @@ import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4.Turbine
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4.TurbineCasingType.IRIDIUM_CASING;
 
 public class MetaTileEntityAdvancedAssemblyLine extends GTQTNoTierMultiblockController implements IOpticalComputationReceiver {
-    int requestCWUt;
-    private IOpticalComputationProvider computationProvider;
     private static final ResourceLocation LASER_LOCATION = gregtechId("textures/fx/laser/laser.png");
     private static final ResourceLocation LASER_HEAD_LOCATION = gregtechId("textures/fx/laser/laser_start.png");
+    int requestCWUt;
+    private IOpticalComputationProvider computationProvider;
     @SideOnly(Side.CLIENT)
     private GTLaserBeamParticle[][] beamParticles;
     private int beamCount;
@@ -87,17 +83,8 @@ public class MetaTileEntityAdvancedAssemblyLine extends GTQTNoTierMultiblockCont
 
         //setTimeReduce(auto);
         setTimeReduceFlag(true);
-    }
-    @Override
-    public void updateFormedValid() {
-        super.updateFormedValid();
-        if (isStructureFormed() && isActive()) {
-            requestCWUt = computationProvider.requestCWUt(2048, false);
-        }
-    }
-    @Override
-    public IOpticalComputationProvider getComputationProvider() {
-        return this.computationProvider;
+
+        setOverclocking(3.0);
     }
 
     private static IBlockState getCasingState() {
@@ -153,6 +140,19 @@ public class MetaTileEntityAdvancedAssemblyLine extends GTQTNoTierMultiblockCont
     }
 
     @Override
+    public void updateFormedValid() {
+        super.updateFormedValid();
+        if (isStructureFormed() && isActive()) {
+            requestCWUt = computationProvider.requestCWUt(2048, false);
+        }
+    }
+
+    @Override
+    public IOpticalComputationProvider getComputationProvider() {
+        return this.computationProvider;
+    }
+
+    @Override
     public boolean canBeDistinct() {
         return true;
     }
@@ -190,6 +190,7 @@ public class MetaTileEntityAdvancedAssemblyLine extends GTQTNoTierMultiblockCont
                 .where(' ', any())
                 .build();
     }
+
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
@@ -199,9 +200,10 @@ public class MetaTileEntityAdvancedAssemblyLine extends GTQTNoTierMultiblockCont
             this.computationProvider = providers.get(0);
         }
 
-        setMaxParallel(4*getTierByVoltage(recipeMapWorkable.getMaxVoltage()));
+        setMaxParallel(4 * getTierByVoltage(recipeMapWorkable.getMaxVoltage()));
         setTimeReduce(0.8);
     }
+
     protected OrientedOverlayRenderer getFrontOverlay() {
         return Textures.FUSION_REACTOR_OVERLAY;
     }
@@ -209,6 +211,7 @@ public class MetaTileEntityAdvancedAssemblyLine extends GTQTNoTierMultiblockCont
     protected Function<BlockPos, Integer> multiblockPartSorter() {
         return RelativeDirection.LEFT.getSorter(this.getFrontFacing(), this.getUpwardsFacing(), this.isFlipped());
     }
+
     @Override
     protected void initializeAbilities() {
         this.inputInventory = new ItemHandlerList(this.getAbilities(MultiblockAbility.IMPORT_ITEMS));
@@ -219,6 +222,7 @@ public class MetaTileEntityAdvancedAssemblyLine extends GTQTNoTierMultiblockCont
         energyContainer.addAll(this.getAbilities(MultiblockAbility.INPUT_LASER));
         this.energyContainer = new EnergyContainerList(energyContainer);
     }
+
     @SideOnly(Side.CLIENT)
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
         if (iMultiblockPart != null) {
@@ -412,7 +416,7 @@ public class MetaTileEntityAdvancedAssemblyLine extends GTQTNoTierMultiblockCont
         tooltip.add(I18n.format("gtqtcore.machine.advanced_assembly_line.tooltip.3"));
         tooltip.add(I18n.format("gtqtcore.machine.advanced_assembly_line.tooltip.4"));
         tooltip.add(I18n.format("gtqtcore.multiblock.kq.acc.tooltip"));
-        tooltip.add(I18n.format("本机器允许使用激光能源仓代替能源仓！"));
+        tooltip.add(I18n.format("gtqtcore.multiblock.kq.acc.tooltip"));
         if (ConfigHolder.machines.orderedAssembly && ConfigHolder.machines.orderedFluidAssembly) {
             tooltip.add(I18n.format("gregtech.machine.assembly_line.tooltip_ordered_both"));
         } else if (ConfigHolder.machines.orderedAssembly) {

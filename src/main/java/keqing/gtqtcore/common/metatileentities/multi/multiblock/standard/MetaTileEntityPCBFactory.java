@@ -463,7 +463,7 @@ public class MetaTileEntityPCBFactory extends RecipeMapMultiblockController impl
         tooltip.add(I18n.format("gtqtcore.machine.pcb_factory.tooltip.13"));
         tooltip.add(I18n.format("gtqtcore.machine.pcb_factory.tooltip.14"));
         tooltip.add(I18n.format("gtqtcore.multiblock.kq.acc.tooltip"));
-        tooltip.add(I18n.format("本机器允许使用激光能源仓代替能源仓！"));
+        tooltip.add(I18n.format("gtqtcore.multiblock.kq.acc.tooltip"));
     }
 
     @Override

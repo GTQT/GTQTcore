@@ -2,18 +2,14 @@ package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
 
 import gregtech.api.block.IHeatingCoilBlockStats;
-import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
-import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.RecipeMap;
-import gregtech.api.recipes.RecipeMaps;
-import gregtech.api.recipes.recipeproperties.IRecipePropertyStorage;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
@@ -42,8 +38,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-import static gregtech.api.GTValues.V;
-
 public class MetaTileEntityIntegratedMiningDivision extends GTQTRecipeMapMultiblockController {
 
     protected int glass_tier;
@@ -64,6 +58,7 @@ public class MetaTileEntityIntegratedMiningDivision extends GTQTRecipeMapMultibl
         setMaxVoltageFlag(true);
         //setTimeReduce(none);
         setTimeReduceFlag(false);
+        setOverclocking(3.0);
     }
 
     @Override
@@ -74,7 +69,6 @@ public class MetaTileEntityIntegratedMiningDivision extends GTQTRecipeMapMultibl
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity metaTileEntityHolder) {
         return new MetaTileEntityIntegratedMiningDivision(this.metaTileEntityId);
     }
-
 
 
     @Override
@@ -118,6 +112,7 @@ public class MetaTileEntityIntegratedMiningDivision extends GTQTRecipeMapMultibl
                 .where('G', TiredTraceabilityPredicate.CP_LGLASS.get())
                 .build();
     }
+
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
@@ -204,6 +199,7 @@ public class MetaTileEntityIntegratedMiningDivision extends GTQTRecipeMapMultibl
             }
         }
     }
+
     @Override
     public SoundEvent getBreakdownSound() {
         return GTSoundEvents.BREAKDOWN_ELECTRICAL;

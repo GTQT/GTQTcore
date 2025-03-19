@@ -896,6 +896,11 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem BET3;
     public static MetaItem<?>.MetaValueItem BET4;
 
+    public static MetaItem<?>.MetaValueItem BNT1;
+    public static MetaItem<?>.MetaValueItem BNT2;
+    public static MetaItem<?>.MetaValueItem BNT3;
+    public static MetaItem<?>.MetaValueItem BNT4;
+
     public static MetaItem<?>.MetaValueItem ARROW_UP_MKII;
     public static MetaItem<?>.MetaValueItem ARROW_DOWN_MKII;
     public static MetaItem<?>.MetaValueItem ARROW_LEFT_MKII;

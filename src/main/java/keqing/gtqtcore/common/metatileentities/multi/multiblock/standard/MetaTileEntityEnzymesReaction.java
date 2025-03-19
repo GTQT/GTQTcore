@@ -1,7 +1,6 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
 import gregtech.api.capability.IMultipleTankHandler;
-import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.Widget;
 import gregtech.api.gui.widgets.ClickButtonWidget;
@@ -9,7 +8,6 @@ import gregtech.api.gui.widgets.WidgetGroup;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
-import gregtech.api.metatileentity.multiblock.MultiMapMultiblockController;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
@@ -19,7 +17,7 @@ import gregtech.api.recipes.RecipeMap;
 import gregtech.client.renderer.ICubeRenderer;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.capability.IPHValue;
-import keqing.gtqtcore.api.metaileentity.GTQTNoOCMultiblockController;
+import keqing.gtqtcore.api.metaileentity.GTQTNoTierMultiblockController;
 import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
@@ -47,7 +45,7 @@ import java.util.List;
 
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 
-public class MetaTileEntityEnzymesReaction extends GTQTNoOCMultiblockController implements IPHValue {
+public class MetaTileEntityEnzymesReaction extends GTQTNoTierMultiblockController implements IPHValue {
     int p;
     int A;
     int B;
@@ -70,6 +68,7 @@ public class MetaTileEntityEnzymesReaction extends GTQTNoOCMultiblockController 
         setMaxParallelFlag(true);
         //setTimeReduce(auto);
         setTimeReduceFlag(true);
+        setOverclocking(3.0);
     }
 
 
@@ -146,7 +145,7 @@ public class MetaTileEntityEnzymesReaction extends GTQTNoOCMultiblockController 
                 0);
 
         setMaxParallel(1);
-        setTimeReduce(( (10 - this.clean_tier) / 10.0));
+        setTimeReduce(((10 - this.clean_tier) / 10.0));
     }
 
     @Nonnull

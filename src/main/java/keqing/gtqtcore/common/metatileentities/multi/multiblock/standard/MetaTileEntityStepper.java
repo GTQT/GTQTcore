@@ -4,7 +4,6 @@ package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 import gregtech.api.capability.IMultipleTankHandler;
 import gregtech.api.capability.IOpticalComputationHatch;
 import gregtech.api.capability.IOpticalComputationProvider;
-import gregtech.api.capability.IOpticalComputationReceiver;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.Widget;
 import gregtech.api.gui.widgets.ClickButtonWidget;
@@ -52,8 +51,7 @@ import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.TJMaterials.HydrogenSilsesquioxane;
 import static keqing.gtqtcore.api.unification.TJMaterials.SU8_Photoresist;
 
-public class
-MetaTileEntityStepper extends GTQTOCMultiblockController{
+public class MetaTileEntityStepper extends GTQTOCMultiblockController {
     int LaserKind;
     int LaserAmount;
     private int glass_tier;
@@ -64,9 +62,7 @@ MetaTileEntityStepper extends GTQTOCMultiblockController{
     private IOpticalComputationProvider computationProvider;
 
     public MetaTileEntityStepper(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, new RecipeMap[]{
-                GTQTcoreRecipeMaps.STEPPER_RECIPES
-        });
+        super(metaTileEntityId, new RecipeMap[]{GTQTcoreRecipeMaps.STEPPER_RECIPES});
         this.recipeMapWorkable = new LaserEngravingWorkableHandler(this);
 
         setTierFlag(true);
@@ -77,15 +73,14 @@ MetaTileEntityStepper extends GTQTOCMultiblockController{
         setMaxVoltageFlag(true);
         setTimeReduce(1);//初始化
         setTimeReduceFlag(true);
+        setOverclocking(3.0);
     }
 
     @Override
     @Nonnull
     protected Widget getFlexButton(int x, int y, int width, int height) {
         WidgetGroup group = new WidgetGroup(x, y, width, height);
-        group.addWidget(new ClickButtonWidget(0, 0, 18, 18, "", this::outputlaser)
-                .setButtonTexture(GuiTextures.BUTTON_THROTTLE_MINUS)
-                .setTooltipText("退回缓存(返回缓存光刻胶以及晶圆)"));
+        group.addWidget(new ClickButtonWidget(0, 0, 18, 18, "", this::outputlaser).setButtonTexture(GuiTextures.BUTTON_THROTTLE_MINUS).setTooltipText("退回缓存(返回缓存光刻胶以及晶圆)"));
         return group;
     }
 
@@ -172,19 +167,7 @@ MetaTileEntityStepper extends GTQTOCMultiblockController{
 
     @Override
     protected BlockPattern createStructurePattern() {
-        return FactoryBlockPattern.start()
-                .aisle("JXXXXXX", "JXXXXXX", "JXXGGGX")
-                .aisle("JXXXXXX", "JPPZZZX", "JXXGGGX")
-                .aisle("JXXXXXX", "JCSGGGX", "JXXGGGX")
-                .where('S', selfPredicate())
-                .where('C', abilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION))
-                .where('X', TiredTraceabilityPredicate.CP_CASING.get().setMinGlobalLimited(24).or(autoAbilities()))
-                .where('Z', TiredTraceabilityPredicate.CP_ZW_CASING.get())
-                .where('G', TiredTraceabilityPredicate.CP_LGLASS.get())
-                .where('J', TiredTraceabilityPredicate.CP_ZJ_CASING.get())
-                .where('P', TiredTraceabilityPredicate.CP_TJ_CASING.get())
-                .where('#', air())
-                .build();
+        return FactoryBlockPattern.start().aisle("JXXXXXX", "JXXXXXX", "JXXGGGX").aisle("JXXXXXX", "JPPZZZX", "JXXGGGX").aisle("JXXXXXX", "JCSGGGX", "JXXGGGX").where('S', selfPredicate()).where('C', abilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION)).where('X', TiredTraceabilityPredicate.CP_CASING.get().setMinGlobalLimited(24).or(autoAbilities())).where('Z', TiredTraceabilityPredicate.CP_ZW_CASING.get()).where('G', TiredTraceabilityPredicate.CP_LGLASS.get()).where('J', TiredTraceabilityPredicate.CP_ZJ_CASING.get()).where('P', TiredTraceabilityPredicate.CP_TJ_CASING.get()).where('#', air()).build();
     }
 
     @SideOnly(Side.CLIENT)
@@ -257,21 +240,11 @@ MetaTileEntityStepper extends GTQTOCMultiblockController{
         Object clean_tier = context.get("ZJTieredStats");
         Object sheping_tier = context.get("TJTieredStats");
 
-        this.laser_tier = GTQTUtil.getOrDefault(() -> laser_tier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired) laser_tier).getIntTier(),
-                0);
-        this.casing_tier = GTQTUtil.getOrDefault(() -> tier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired) tier).getIntTier(),
-                0);
-        this.glass_tier = GTQTUtil.getOrDefault(() -> glass_tier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired) glass_tier).getIntTier(),
-                0);
-        this.clean_tier = GTQTUtil.getOrDefault(() -> clean_tier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired) clean_tier).getIntTier(),
-                0);
-        this.radio_tier = GTQTUtil.getOrDefault(() -> sheping_tier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired) sheping_tier).getIntTier(),
-                0);
+        this.laser_tier = GTQTUtil.getOrDefault(() -> laser_tier instanceof WrappedIntTired, () -> ((WrappedIntTired) laser_tier).getIntTier(), 0);
+        this.casing_tier = GTQTUtil.getOrDefault(() -> tier instanceof WrappedIntTired, () -> ((WrappedIntTired) tier).getIntTier(), 0);
+        this.glass_tier = GTQTUtil.getOrDefault(() -> glass_tier instanceof WrappedIntTired, () -> ((WrappedIntTired) glass_tier).getIntTier(), 0);
+        this.clean_tier = GTQTUtil.getOrDefault(() -> clean_tier instanceof WrappedIntTired, () -> ((WrappedIntTired) clean_tier).getIntTier(), 0);
+        this.radio_tier = GTQTUtil.getOrDefault(() -> sheping_tier instanceof WrappedIntTired, () -> ((WrappedIntTired) sheping_tier).getIntTier(), 0);
 
         setTier(Math.min(this.casing_tier, this.glass_tier));
         setMaxVoltage(Math.min(this.casing_tier, this.clean_tier * 2));

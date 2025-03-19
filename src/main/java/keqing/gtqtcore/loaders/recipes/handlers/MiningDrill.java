@@ -7,6 +7,7 @@ import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.BlockElectrolyticBath;
 
 import static gregtech.api.GTValues.L;
+import static gregtech.api.GTValues.VA;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.Materials.Coal;
@@ -17,7 +18,6 @@ import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.GRAVITY_SEPARATOR_R
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.MINING_DRILL_RECIPES;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
-import static keqing.gtqtcore.common.items.GTQTMetaItems.BET4;
 
 public class MiningDrill {
     public static void init() {
@@ -109,24 +109,30 @@ public class MiningDrill {
                 .duration(200).EUt(7680).buildAndRegister();
 
         //MiningDrillR();
-        MiningDrill(BLANK,1);
-        MiningDrill(HYDROTHERMAL,2);
-        MiningDrill(MAGMATIC_HYDROTHERMAL,3);
-        MiningDrill(ALLUVIAL,4);
+        MiningDrill(1,BLANK,1);
+        MiningDrill(1,HYDROTHERMAL,2);
+        MiningDrill(1,MAGMATIC_HYDROTHERMAL,3);
+        MiningDrill(1,ALLUVIAL,4);
 
-        MiningDrill(DIAPHRAGMATIC,-3);
-        MiningDrill(ORTHOSTATIC,-2);
-        MiningDrill(METAMORPHIC,-1);
+        MiningDrill(2,DIAPHRAGMATIC,-3);
+        MiningDrill(2,ORTHOSTATIC,-2);
+        MiningDrill(2,METAMORPHIC,-1);
+        MiningDrill(2,METAMORPHIC,0);
 
-        MiningDrill(END1,5);
-        MiningDrill(END2,6);
-        MiningDrill(END3,7);
-        MiningDrill(END4,8);
+        MiningDrill(3,END1,5);
+        MiningDrill(3,END2,6);
+        MiningDrill(3,END3,7);
+        MiningDrill(3,END4,8);
 
-        MiningDrill(BET1,81);
-        MiningDrill(BET2,82);
-        MiningDrill(BET3,83);
-        MiningDrill(BET4,84);
+        MiningDrill(1,BET1,81);
+        MiningDrill(1,BET2,82);
+        MiningDrill(1,BET3,83);
+        MiningDrill(1,BET4,84);
+
+        MiningDrill(4,BNT1,11);
+        MiningDrill(4,BNT2,12);
+        MiningDrill(4,BNT3,13);
+        MiningDrill(4,BNT4,14);
 
         GRAVITY_SEPARATOR(BLANK,Amblygonite,Crocoite,Coal,Lignite,Diamond,Chalcopyrite);
         GRAVITY_SEPARATOR(HYDROTHERMAL,Copper,Iron,Lead,Nickel,Cryolite,Bauxite);
@@ -147,6 +153,10 @@ public class MiningDrill {
         GRAVITY_SEPARATOR(END3,BandedIron,Grossular,Pyrolusite,Pyrochlore,Tantalite,Wulfenite);
         GRAVITY_SEPARATOR(END4,Molybdenite,Molybdenum,Powellite,Diamond,Sphalerite,Tin);
 
+        GRAVITY_SEPARATOR(BNT1,Lead,Neodymium,Ilmenite,Bastnasite,Monazite,Neodymium);
+        GRAVITY_SEPARATOR(BNT2,Pitchblende,Uraninite,Cooperite,Gold,Aluminium,Bauxite);
+        GRAVITY_SEPARATOR(BNT3,Scheelite,Tungstate,Iron,Lithium,Rutile,Stibnite);
+        GRAVITY_SEPARATOR(BNT4,NaquadahOxide,Plutonium239,Powellite,Tin,Bismuth,Thorium);
 
         ASSEMBLER_RECIPES.recipeBuilder()
                 .input(plate, Steel,16)
@@ -189,7 +199,7 @@ public class MiningDrill {
                     .buildAndRegister();
 
     }
-    private static void MiningDrill(MetaItem.MetaValueItem Item,int kind) {
+    private static void MiningDrill(int tier,MetaItem.MetaValueItem Item,int kind) {
             MINING_DRILL_RECIPES.recipeBuilder()
                     .notConsumable(Item)
                     .chancedOutput(Item, 5000, 500)
@@ -202,7 +212,7 @@ public class MiningDrill {
                     .chancedOutput(Item, 5000, 500)
                     .chancedOutput(Item, 5000, 500)
                     .tier(kind)
-                    .EUt(30)
+                    .EUt(VA[tier])
                     .duration(500)
                     .buildAndRegister();
 

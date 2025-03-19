@@ -22,10 +22,10 @@ public class RareEarthProcessing {
         EP();
         bastnasite();
         monazite();
-        HF();
-        CE();
-        caosuan();
-        fuguisuanna();
+        HafniumZirconium();
+        Cerium();
+        Oxalate();
+        SodiumFluorosilicate();
         p507();
         NanoSwarm();
     }
@@ -366,24 +366,6 @@ public class RareEarthProcessing {
                 .circuitMeta(2)
                 .duration(600).EUt(VA[EV]).buildAndRegister();
 
-        DIGESTER_RECIPES.recipeBuilder()
-                .fluidInputs(NitricAcid.getFluid(700))
-                .input(crushed,Bastnasite,1)
-                .input(dust,RareEarth,1)
-                .fluidOutputs(FluorocarbonLanthanumCeriumRareEarthTurbidity.getFluid(1200))
-                .output(dust,SiliconDioxide)
-                .circuitMeta(1)
-                .duration(600).EUt(VA[EV]).buildAndRegister();
-
-        DIGESTER_RECIPES.recipeBuilder()
-                .fluidInputs(NitricAcid.getFluid(700))
-                .input(dust,Bastnasite,2)
-                .input(dust,RareEarth,1)
-                .fluidOutputs(FluorocarbonLanthanumCeriumRareEarthTurbidity.getFluid(1200))
-                .output(dust,SiliconDioxide)
-                .circuitMeta(2)
-                .duration(600).EUt(VA[EV]).buildAndRegister();
-
         CRACKING_RECIPES.recipeBuilder()
                 .fluidInputs(FluorocarbonLanthanumCeriumRareEarthTurbidity.getFluid(1000))
                 .fluidInputs(Steam.getFluid(1000))
@@ -477,11 +459,6 @@ public class RareEarthProcessing {
                 .output(dust, SamariumEssence)
                 .duration(600).EUt(VA[EV]).buildAndRegister();
     }
-
-
-
-
-
     private static void monazite() {
         //快乐独居石处理
         DIGESTER_RECIPES.recipeBuilder()
@@ -498,24 +475,6 @@ public class RareEarthProcessing {
                 .fluidOutputs(MonaziteRareEarthTurbid.getFluid(400))
                 .output(dust,SiliconDioxide)
                 .circuitMeta(2)
-                .duration(600).EUt(VA[EV]).buildAndRegister();
-
-        DIGESTER_RECIPES.recipeBuilder()
-                .fluidInputs(NitricAcid.getFluid(700))
-                .input(crushed,Monazite,1)
-                .input(dust,RareEarth,1)
-                .fluidOutputs(MonaziteRareEarthTurbid.getFluid(1200))
-                .output(dust,SiliconDioxide)
-                .circuitMeta(3)
-                .duration(600).EUt(VA[EV]).buildAndRegister();
-
-        DIGESTER_RECIPES.recipeBuilder()
-                .fluidInputs(NitricAcid.getFluid(700))
-                .input(dust,Monazite,2)
-                .input(dust,RareEarth,1)
-                .fluidOutputs(MonaziteRareEarthTurbid.getFluid(1200))
-                .output(dust,SiliconDioxide)
-                .circuitMeta(4)
                 .duration(600).EUt(VA[EV]).buildAndRegister();
 
         DISSOLUTION_TANK_RECIPES.recipeBuilder()
@@ -620,7 +579,7 @@ public class RareEarthProcessing {
                 .output(dust,GadoliniumOxide)
                 .duration(600).EUt(VA[EV]).buildAndRegister();
     }
-    private static void HF() {
+    private static void HafniumZirconium() {
         CENTRIFUGE_RECIPES.recipeBuilder()
                 .input(dust, HafniumOxideZirconiumOxideMixture,1)
                 .output(dust, HafniumOxide,3)
@@ -655,38 +614,7 @@ public class RareEarthProcessing {
                 .blastFurnaceTemp(3500)
                 .duration(600).EUt(VA[EV]).buildAndRegister();
     }
-    private static void fuguisuanna() {
-        CHEMICAL_RECIPES.recipeBuilder()
-                .fluidInputs(HydrofluoricAcid.getFluid(6000))
-                .input(dust,Polysilicon,1)
-                .fluidOutputs(Hydrogen.getFluid(4000))
-                .fluidOutputs(HexafluorosilicicAcid.getFluid(1000))
-                .duration(600).EUt(VA[EV]).buildAndRegister();
-
-        CHEMICAL_RECIPES.recipeBuilder()
-                .fluidInputs(HexafluorosilicicAcid.getFluid(1000))
-                .input(dust,Salt,4)
-                .fluidOutputs(HydrochloricAcid.getFluid(2000))
-                .fluidOutputs(SodiumSilicofluoride.getFluid(1000))
-                .duration(600).EUt(VA[EV]).buildAndRegister();
-    }
-
-    private static void caosuan() {
-        CHEMICAL_RECIPES.recipeBuilder()
-                .fluidInputs(Oxygen.getFluid(5000))
-                .input(dust,Vanadium,2)
-                .output(dust,VanadiumOxide)
-                .duration(600).EUt(VA[EV]).buildAndRegister();
-
-        CHEMICAL_RECIPES.recipeBuilder()
-                .fluidInputs(NitricAcid.getFluid(1000))
-                .input(dust,Sugar,24)
-                .fluidOutputs(EthanedioicAcid.getFluid(3000))
-                .fluidOutputs(NitricOxide.getFluid(6000))
-                .notConsumable(dust,VanadiumOxide)
-                .duration(600).EUt(VA[EV]).buildAndRegister();
-    }
-    private static void CE() {
+    private static void Cerium() {
         CHEMICAL_RECIPES.recipeBuilder()
                 .input(dust,AmmoniumChloride,3)
                 .fluidInputs(Hydrogen.getFluid(1000))
@@ -715,6 +643,37 @@ public class RareEarthProcessing {
                 .input(dust, GTQTMaterials.CeriumOxide,5)
                 .output(dust,Cerium,2)
                 .fluidOutputs(Oxygen.getFluid(3000))
+                .duration(600).EUt(VA[EV]).buildAndRegister();
+    }
+    private static void SodiumFluorosilicate() {
+        CHEMICAL_RECIPES.recipeBuilder()
+                .fluidInputs(HydrofluoricAcid.getFluid(6000))
+                .input(dust,Polysilicon,1)
+                .fluidOutputs(Hydrogen.getFluid(4000))
+                .fluidOutputs(HexafluorosilicicAcid.getFluid(1000))
+                .duration(600).EUt(VA[EV]).buildAndRegister();
+
+        CHEMICAL_RECIPES.recipeBuilder()
+                .fluidInputs(HexafluorosilicicAcid.getFluid(1000))
+                .input(dust,Salt,4)
+                .fluidOutputs(HydrochloricAcid.getFluid(2000))
+                .fluidOutputs(SodiumSilicofluoride.getFluid(1000))
+                .duration(600).EUt(VA[EV]).buildAndRegister();
+    }
+
+    private static void Oxalate() {
+        CHEMICAL_RECIPES.recipeBuilder()
+                .fluidInputs(Oxygen.getFluid(5000))
+                .input(dust,Vanadium,2)
+                .output(dust,VanadiumOxide)
+                .duration(600).EUt(VA[EV]).buildAndRegister();
+
+        CHEMICAL_RECIPES.recipeBuilder()
+                .fluidInputs(NitricAcid.getFluid(1000))
+                .input(dust,Sugar,24)
+                .fluidOutputs(EthanedioicAcid.getFluid(3000))
+                .fluidOutputs(NitricOxide.getFluid(6000))
+                .notConsumable(dust,VanadiumOxide)
                 .duration(600).EUt(VA[EV]).buildAndRegister();
     }
     private static void p507() {

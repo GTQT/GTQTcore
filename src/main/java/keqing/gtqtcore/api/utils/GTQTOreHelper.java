@@ -10,6 +10,11 @@ public class GTQTOreHelper {
         if (dimension == 20 && type == 2) return "岩石种类：沼泽 沉积岩";
         if (dimension == 20 && type == 3) return "岩石种类：沼泽 冲击岩";
         if (dimension == 20 && type == 4) return "岩石种类：沼泽 热液岩";
+        // 交错
+        if (dimension == 10 && type == 1) return "岩石种类：深渊 变质岩";
+        if (dimension == 10 && type == 2) return "岩石种类：深渊 沉积岩";
+        if (dimension == 10 && type == 3) return "岩石种类：深渊 冲击岩";
+        if (dimension == 10 && type == 4) return "岩石种类：深渊 热液岩";
 
         // 末地
         if (dimension == 1 && type == 1) return "岩石种类：末地 变质岩";
@@ -28,6 +33,7 @@ public class GTQTOreHelper {
             if (type == 1) return "岩石种类：地狱 岩浆冲击岩";
             if (type == 2) return "岩石种类：地狱 岩浆沉积岩";
             if (type == 3) return "岩石种类：地狱 岩浆侵入岩";
+            if (type == 4) return "岩石种类：地狱 岩浆侵入岩";
         }
 
         return "null";
@@ -52,6 +58,12 @@ public class GTQTOreHelper {
             if (type == 2) return new ItemStack(GTQTMetaItems.END2.getMetaItem(), 1, 189);
             if (type == 3) return new ItemStack(GTQTMetaItems.END3.getMetaItem(), 1, 190);
             if (type == 4) return new ItemStack(GTQTMetaItems.END4.getMetaItem(), 1, 191);
+        }
+        if (dimension == 10) {
+            if (type == 1) return new ItemStack(GTQTMetaItems.BNT1.getMetaItem(), 1, 196);
+            if (type == 2) return new ItemStack(GTQTMetaItems.BNT2.getMetaItem(), 1, 197);
+            if (type == 3) return new ItemStack(GTQTMetaItems.BNT3.getMetaItem(), 1, 198);
+            if (type == 4) return new ItemStack(GTQTMetaItems.BNT4.getMetaItem(), 1, 199);
         }
         if (dimension == 20) {
             if (type == 1) return new ItemStack(GTQTMetaItems.BET1.getMetaItem(), 1, 192);

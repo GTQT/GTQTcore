@@ -63,6 +63,8 @@ public class MetaTileEntityNaquadahFuelFactory extends GTQTNoTierMultiblockContr
 
         //setTimeReduce(glassTire);
         setTimeReduceFlag(true);
+
+        setOverclocking(3.0);
     }
 
     @Override
@@ -110,7 +112,7 @@ public class MetaTileEntityNaquadahFuelFactory extends GTQTNoTierMultiblockContr
     public void addInformation(ItemStack stack, World player, @Nonnull List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("硅岩快乐之家", new Object[0]));
-        tooltip.add(I18n.format("本机器允许使用激光能源仓代替能源仓！"));
+        tooltip.add(I18n.format("gtqtcore.multiblock.kq.acc.tooltip"));
         tooltip.add(I18n.format("gtqtcore.machine.naquadah_fuel_refine_factory.tooltip.1"));
         tooltip.add(I18n.format("gtqtcore.machine.naquadah_fuel_refine_factory.tooltip.2"));
         tooltip.add(I18n.format("gtqtcore.machine.naquadah_fuel_refine_factory.tooltip.3"));

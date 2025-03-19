@@ -41,10 +41,11 @@ public class MetaTileEntityLargeGrind extends GTQTRecipeMapMultiblockController 
         //setTier(auto);
         setMaxParallel(64);
         setMaxParallelFlag(true);
-        setMaxVoltage(0);//ULV
+        //setMaxVoltage(auto);
         setMaxVoltageFlag(true);
         //setTimeReduce(none);
         setTimeReduceFlag(false);
+        setOverclocking(4.0);
     }
 
     @Override
@@ -131,6 +132,7 @@ public class MetaTileEntityLargeGrind extends GTQTRecipeMapMultiblockController 
                 () -> ((WrappedIntTired) tubeTier).getIntTier(),
                 0);
         setTier(Math.min(this.casingTier, this.tubeTier));
+        setMaxVoltage(Math.min(this.casingTier, this.tubeTier));
         this.writeCustomData(GTQTValue.UPDATE_TIER19, buf -> buf.writeInt(this.casingTier));
     }
 

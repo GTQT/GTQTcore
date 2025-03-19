@@ -247,31 +247,33 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         BET2 = addItem(193, "rock.bet2").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         BET3 = addItem(194, "rock.bet3").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         BET4 = addItem(195, "rock.bet4").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
-
-        NANOSILICON_CATHODE = addItem(199, "nanosilicon.cathode").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        BNT1 = addItem(196, "rock.bnt1").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        BNT2 = addItem(197, "rock.bnt2").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        BNT3 = addItem(198, "rock.bnt3").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        BNT4 = addItem(199, "rock.bnt4").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         //神秘农业
-        COPPER_CROP = addItem(200, "copper_crop");
+        COPPER_CROP = addItem(210, "copper_crop");
         COPPER_CROP.addComponents(new GTQTCropSeedBehaviour(GTQTCrops.COPPER_CROP, COPPER_CROP.getStackForm(), COPPER_CROP.getStackForm())).setCreativeTabs(CommonProxy.GTQTCore_BIO);
 
-        IRON_CROP = addItem(201, "iron_crop");
+        IRON_CROP = addItem(211, "iron_crop");
         IRON_CROP.addComponents(new GTQTCropSeedBehaviour(GTQTCrops.IRON_CROP, IRON_CROP.getStackForm(), IRON_CROP.getStackForm())).setCreativeTabs(CommonProxy.GTQTCore_BIO);
 
-        TIN_CROP = addItem(202, "tin_crop");
+        TIN_CROP = addItem(212, "tin_crop");
         TIN_CROP.addComponents(new GTQTCropSeedBehaviour(GTQTCrops.TIN_CROP, TIN_CROP.getStackForm(), TIN_CROP.getStackForm())).setCreativeTabs(CommonProxy.GTQTCore_BIO);
 
-        BRONZE_CROP = addItem(203, "bronze_crop");
+        BRONZE_CROP = addItem(213, "bronze_crop");
         BRONZE_CROP.addComponents(new GTQTCropSeedBehaviour(GTQTCrops.BRONZE_CROP, BRONZE_CROP.getStackForm(), BRONZE_CROP.getStackForm())).setCreativeTabs(CommonProxy.GTQTCore_BIO);
 
-        CARBON_CROP = addItem(204, "carbon_crop");
+        CARBON_CROP = addItem(214, "carbon_crop");
         CARBON_CROP.addComponents(new GTQTCropSeedBehaviour(GTQTCrops.CARBON_CROP, CARBON_CROP.getStackForm(), CARBON_CROP.getStackForm())).setCreativeTabs(CommonProxy.GTQTCore_BIO);
 
-        GOLD_CROP = addItem(205, "gold_crop");
+        GOLD_CROP = addItem(215, "gold_crop");
         GOLD_CROP.addComponents(new GTQTCropSeedBehaviour(GTQTCrops.GOLD_CROP, GOLD_CROP.getStackForm(), GOLD_CROP.getStackForm())).setCreativeTabs(CommonProxy.GTQTCore_BIO);
 
         //240天基折射升级
-        HIGH_REFLECT = this.addItem(210, "high_reflect").setMaxStackSize(1).setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        REFLECT_GLASS = this.addItem(211, "reflect_glass").setMaxStackSize(1).setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        LASER_GROUP = this.addItem(212, "laser_group").setMaxStackSize(1).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        HIGH_REFLECT = this.addItem(216, "high_reflect").setMaxStackSize(1).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        REFLECT_GLASS = this.addItem(217, "reflect_glass").setMaxStackSize(1).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        LASER_GROUP = this.addItem(218, "laser_group").setMaxStackSize(1).setCreativeTabs(CommonProxy.GTQTCore_TAB);
 
         CATALYST_BASE = this.addItem(220, "catalyst.base").addOreDict("catalystEmpty").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Steel, M * 8), // 8 * Steel plate
                 new MaterialStack(Copper, (M / 8) * 4), // 4 * Copper fine wire
@@ -372,6 +374,7 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         BIO_CELL = this.addItem(286, "component.gooware.bio_cell").setCreativeTabs(CommonProxy.GTQTCore_BIO);
         BIO_DISH = this.addItem(287, "component.gooware.bio_dish").setCreativeTabs(CommonProxy.GTQTCore_BIO);
 
+        NANOSILICON_CATHODE = addItem(289, "nanosilicon.cathode").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         //催化剂
         //沸石催化剂
         CATALYST_GAS = this.addItem(290, "catalyst.gas").addComponents(new CatalystBehavior(true,4)).setCreativeTabs(CommonProxy.GTQTCore_CH);

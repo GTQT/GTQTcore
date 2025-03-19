@@ -34,7 +34,7 @@ public class OreRecipeHandler {
                 Oilsands,Olivine,Opal,Amethyst,Lapis,Apatite,TricalciumPhosphate,GarnetRed,GarnetYellow,VanadiumMagnetite,Pollucite,
                 Bentonite,FullersEarth,Monazite,Trona,Gypsum,Zeolite,Redstone,Electrotine,Diatomite,GraniticMineralSand,GarnetSand,
                 BasalticMineralSand,Hematite,Fluix,PreciousMetal,Fluorite,Caliche,LeanGoldSulphide,RichGoldSulphide,Lignite,
-                Pyrargyrite,Zincantimonygalvanite,Crocoite,Cryolite,Amblygonite,Amber,Ulexite,Gashydrate,Zircon
+                Pyrargyrite,Zincantimonygalvanite,Crocoite,Cryolite,Amblygonite,Amber,Ulexite,Gashydrate,Zircon,Bismuth
         );
         List<Material> Advanced = new ArrayList<>(Basic);
 

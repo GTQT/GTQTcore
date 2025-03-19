@@ -4,11 +4,9 @@ package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 import gregtech.api.capability.IOpticalComputationHatch;
 import gregtech.api.capability.IOpticalComputationProvider;
 import gregtech.api.capability.IOpticalComputationReceiver;
-import gregtech.api.capability.impl.ComputationRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
-import gregtech.api.metatileentity.multiblock.MultiMapMultiblockController;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
@@ -39,7 +37,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-import static gregtech.api.GTValues.V;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.SPINNER_RECIPES;
 
 public class MetaTileEntityThreeDimPrinter extends GTQTOCMultiblockController implements IOpticalComputationReceiver {
@@ -50,11 +47,7 @@ public class MetaTileEntityThreeDimPrinter extends GTQTOCMultiblockController im
     private IOpticalComputationProvider computationProvider;
 
     public MetaTileEntityThreeDimPrinter(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, new RecipeMap[]{
-                GTQTcoreRecipeMaps.TD_PRINT_RECIPES,
-                GTQTcoreRecipeMaps.AUTO_CHISEL_RECIPES,
-                SPINNER_RECIPES
-        });
+        super(metaTileEntityId, new RecipeMap[]{GTQTcoreRecipeMaps.TD_PRINT_RECIPES, GTQTcoreRecipeMaps.AUTO_CHISEL_RECIPES, SPINNER_RECIPES});
         this.recipeMapWorkable = new LaserEngravingWorkableHandler(this);
 
         setTierFlag(true);
@@ -65,6 +58,7 @@ public class MetaTileEntityThreeDimPrinter extends GTQTOCMultiblockController im
         setMaxVoltageFlag(true);
         setTimeReduce(1);//初始化
         setTimeReduceFlag(true);
+        setOverclocking(3.0);
     }
 
     @Override
@@ -111,18 +105,7 @@ public class MetaTileEntityThreeDimPrinter extends GTQTOCMultiblockController im
 
     @Override
     protected BlockPattern createStructurePattern() {
-        return FactoryBlockPattern.start()
-                .aisle("JXXXXXX", "JXXXXXX", "JXXGGGX")
-                .aisle("JXXXXXX", "JXXPPPX", "JXXGGGX")
-                .aisle("JXXXXXX", "JCSGGGX", "JXXGGGX")
-                .where('S', selfPredicate())
-                .where('C', abilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION))
-                .where('X', TiredTraceabilityPredicate.CP_CASING.get().setMinGlobalLimited(24).or(autoAbilities()))
-                .where('G', TiredTraceabilityPredicate.CP_LGLASS.get())
-                .where('J', TiredTraceabilityPredicate.CP_ZJ_CASING.get())
-                .where('P', TiredTraceabilityPredicate.CP_TJ_CASING.get())
-                .where('#', air())
-                .build();
+        return FactoryBlockPattern.start().aisle("JXXXXXX", "JXXXXXX", "JXXGGGX").aisle("JXXXXXX", "JXXPPPX", "JXXGGGX").aisle("JXXXXXX", "JCSGGGX", "JXXGGGX").where('S', selfPredicate()).where('C', abilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION)).where('X', TiredTraceabilityPredicate.CP_CASING.get().setMinGlobalLimited(24).or(autoAbilities())).where('G', TiredTraceabilityPredicate.CP_LGLASS.get()).where('J', TiredTraceabilityPredicate.CP_ZJ_CASING.get()).where('P', TiredTraceabilityPredicate.CP_TJ_CASING.get()).where('#', air()).build();
     }
 
     @SideOnly(Side.CLIENT)
@@ -199,18 +182,10 @@ public class MetaTileEntityThreeDimPrinter extends GTQTOCMultiblockController im
         Object clean_tier = context.get("ZJTieredStats");
         Object sheping_tier = context.get("TJTieredStats");
 
-        this.casing_tier = GTQTUtil.getOrDefault(() -> tier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired) tier).getIntTier(),
-                0);
-        this.glass_tier = GTQTUtil.getOrDefault(() -> glass_tier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired) glass_tier).getIntTier(),
-                0);
-        this.clean_tier = GTQTUtil.getOrDefault(() -> clean_tier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired) clean_tier).getIntTier(),
-                0);
-        this.radio_tier = GTQTUtil.getOrDefault(() -> sheping_tier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired) sheping_tier).getIntTier(),
-                0);
+        this.casing_tier = GTQTUtil.getOrDefault(() -> tier instanceof WrappedIntTired, () -> ((WrappedIntTired) tier).getIntTier(), 0);
+        this.glass_tier = GTQTUtil.getOrDefault(() -> glass_tier instanceof WrappedIntTired, () -> ((WrappedIntTired) glass_tier).getIntTier(), 0);
+        this.clean_tier = GTQTUtil.getOrDefault(() -> clean_tier instanceof WrappedIntTired, () -> ((WrappedIntTired) clean_tier).getIntTier(), 0);
+        this.radio_tier = GTQTUtil.getOrDefault(() -> sheping_tier instanceof WrappedIntTired, () -> ((WrappedIntTired) sheping_tier).getIntTier(), 0);
 
         setTier(Math.min(this.casing_tier, this.glass_tier));
         setMaxVoltage(Math.min(this.casing_tier, this.clean_tier * 2));
@@ -245,10 +220,10 @@ public class MetaTileEntityThreeDimPrinter extends GTQTOCMultiblockController im
         public void update() {
             super.update();
             if (radio_tier == glass_tier) {
-                setTimeReduce((100 - glass_tier*8) / 100.0);
-                setMaxParallel(4*clean_tier * radio_tier);
+                setTimeReduce((100 - glass_tier * 8) / 100.0);
+                setMaxParallel(4 * clean_tier * radio_tier);
             } else {
-                setTimeReduce((100 - glass_tier*4) / 100.0);
+                setTimeReduce((100 - glass_tier * 4) / 100.0);
                 setMaxParallel(clean_tier * radio_tier);
             }
         }

@@ -17,16 +17,17 @@ public class GTQTMaterialFlagAddition {
 
     public static void init() {
         Material[] material = {
-                Polyethylene,Carbon,Graphite,Invar,Osmium,Naquadah,Dubnium,Tritium,Rutherfordium,
-                Lanthanum,Praseodymium,Neodymium,Cerium,Scandium,Europium,Gadolinium,Yttrium,Terbium,Dysprosium,Holmium,Erbium,Thulium,Ytterbium,Lutetium,Niobium,Palladium,Ruthenium,Naquadria,Samarium,
-                Tritanium, Duranium, Technetium, Meitnerium, Roentgenium, Nobelium, Lawrencium, Moscovium, Lutetium,NaquadahEnriched,Trinium,
+                Polyethylene, Carbon, Graphite, Invar, Osmium, Naquadah, Dubnium, Tritium, Rutherfordium,
+                Lanthanum, Praseodymium, Neodymium, Cerium, Scandium, Europium, Gadolinium, Yttrium, Terbium, Dysprosium, Holmium, Erbium, Thulium, Ytterbium, Lutetium, Niobium, Palladium, Ruthenium, Naquadria, Samarium,
+                Tritanium, Duranium, Technetium, Meitnerium, Roentgenium, Nobelium, Lawrencium, Moscovium, Lutetium, NaquadahEnriched, Trinium,
                 Stellite100, WatertightSteel, MaragingSteel300, HastelloyC276, HastelloyX, Trinaquadalloy, Zeron100, TitaniumCarbide,
-                Americium,TantalumCarbide, MolybdenumDisilicide, HSLASteel, TitaniumTungstenCarbide, IncoloyMA956
+                Americium, TantalumCarbide, MolybdenumDisilicide, HSLASteel, TitaniumTungstenCarbide, IncoloyMA956
         };
         for (Material materials : material) {
-            if(!materials.hasProperty(PropertyKey.INGOT))materials.setProperty(PropertyKey.INGOT, new IngotProperty());
-            if(!materials.hasProperty(PropertyKey.ORE))materials.setProperty(PropertyKey.ORE, new OreProperty());
-            materials.addFlags(GENERATE_SPRING,GENERATE_SPRING_SMALL,GENERATE_FOIL, GENERATE_DENSE, GENERATE_FINE_WIRE, GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_RING, GENERATE_ROUND, GENERATE_BOLT_SCREW, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_ROTOR);
+            if (!materials.hasProperty(PropertyKey.INGOT))
+                materials.setProperty(PropertyKey.INGOT, new IngotProperty());
+            if (!materials.hasProperty(PropertyKey.ORE)) materials.setProperty(PropertyKey.ORE, new OreProperty());
+            materials.addFlags(GENERATE_SPRING, GENERATE_SPRING_SMALL, GENERATE_FOIL, GENERATE_DENSE, GENERATE_FINE_WIRE, GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_RING, GENERATE_ROUND, GENERATE_BOLT_SCREW, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_ROTOR);
         }
 
         OreProperty oreProp = Molybdenite.getProperty(PropertyKey.ORE);
@@ -36,6 +37,11 @@ public class GTQTMaterialFlagAddition {
         oreProp.setOreByProducts(Copper, Iron, Sulfur);
         oreProp.setWashedIn(Mercury);
         oreProp.setDirectSmeltResult(Gold);
+
+        oreProp = Thorium.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Rutile, Zirconium, Uraninite);
+        oreProp.setWashedIn(HydrofluoricAcid);
+        oreProp.setDirectSmeltResult(Thorium);
 
         oreProp = RichGoldSulphide.getProperty(PropertyKey.ORE);
         oreProp.setOreByProducts(Copper, Iron, Sulfur);
@@ -71,6 +77,164 @@ public class GTQTMaterialFlagAddition {
         oreProp.setOreByProducts(LeanGoldSulphide, RichGoldSulphide);
         oreProp.setWashedIn(SodiumPersulfate);
         oreProp.setDirectSmeltResult(PreciousMetal);
+
+
+        oreProp = Americium.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Lead, Uraninite, Plutonium239);
+        oreProp.setWashedIn(HydrofluoricAcid);
+        oreProp.setDirectSmeltResult(Americium);
+
+        oreProp = Chrome.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Iron, Nickel, Sulfur);
+        oreProp.setWashedIn(Water);
+        oreProp.setDirectSmeltResult(Chrome);
+
+        oreProp = Iridium.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Platinum, Osmium, Sulfur);
+        oreProp.setWashedIn(HydrofluoricAcid);
+        oreProp.setDirectSmeltResult(Iridium);
+
+        oreProp = Lutetium.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Yttrium, Erbium, Sulfur);
+        oreProp.setWashedIn(Water);
+        oreProp.setDirectSmeltResult(Lutetium);
+//
+        oreProp = Manganese.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Iron, Silicon, Sulfur);
+        oreProp.setWashedIn(Water);
+        oreProp.setDirectSmeltResult(Manganese);
+
+        oreProp = Niobium.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Tantalum, Iron, Sulfur);
+        oreProp.setWashedIn(HydrofluoricAcid);
+        oreProp.setDirectSmeltResult(Niobium);
+
+        oreProp = Osmium.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Iridium, Platinum, Sulfur);
+        oreProp.setWashedIn(HydrofluoricAcid);
+        oreProp.setDirectSmeltResult(Osmium);
+
+        oreProp = Titanium.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Iron, Aluminium, Sulfur);
+        oreProp.setWashedIn(Water);
+        oreProp.setDirectSmeltResult(Titanium);
+
+        oreProp = Tungsten.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Molybdenum, Iron, Sulfur);
+        oreProp.setWashedIn(HydrofluoricAcid);
+        oreProp.setDirectSmeltResult(Tungsten);
+//
+        oreProp = Uranium235.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Lead, Thorium, Sulfur);
+        oreProp.setWashedIn(HydrofluoricAcid);
+        oreProp.setDirectSmeltResult(Uranium235);
+
+        oreProp = Neutronium.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Neutronium, Trinium, Sulfur);
+        oreProp.setWashedIn(HydrofluoricAcid);
+        oreProp.setDirectSmeltResult(Neutronium);
+
+        oreProp = Trinium.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Naquadah, Neutronium, Sulfur);
+        oreProp.setWashedIn(HydrofluoricAcid);
+        oreProp.setDirectSmeltResult(Trinium);
+
+        oreProp = Electrum.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Gold, Silver, Sulfur);
+        oreProp.setWashedIn(Water);
+        oreProp.setDirectSmeltResult(Electrum);
+
+        oreProp = Gallium.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Aluminium, Zinc, Sulfur);
+        oreProp.setWashedIn(Water);
+        oreProp.setDirectSmeltResult(Gallium);
+
+        oreProp = Bismuth.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Lead, Antimony, Sulfur);
+        oreProp.setWashedIn(Water);
+        oreProp.setDirectSmeltResult(Bismuth);
+
+        oreProp = Rhodium.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Platinum, Palladium, Sulfur);
+        oreProp.setWashedIn(HydrofluoricAcid);
+        oreProp.setDirectSmeltResult(Rhodium);
+
+        oreProp = Ruthenium.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Platinum, Osmium, Sulfur);
+        oreProp.setWashedIn(HydrofluoricAcid);
+        oreProp.setDirectSmeltResult(Ruthenium);
+//
+        oreProp = Praseodymium.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Neodymium, Lanthanum, Sulfur);
+        oreProp.setWashedIn(Water);
+        oreProp.setDirectSmeltResult(Praseodymium);
+
+        oreProp = Scandium.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Yttrium, Lanthanum, Sulfur);
+        oreProp.setWashedIn(Water);
+        oreProp.setDirectSmeltResult(Scandium);
+
+        oreProp = Gadolinium.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Yttrium, Terbium, Sulfur);
+        oreProp.setWashedIn(Water);
+        oreProp.setDirectSmeltResult(Gadolinium);
+
+        oreProp = Terbium.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Yttrium, Dysprosium, Sulfur);
+        oreProp.setWashedIn(Water);
+        oreProp.setDirectSmeltResult(Terbium);
+
+        oreProp = Dysprosium.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Yttrium, Holmium, Sulfur);
+        oreProp.setWashedIn(Water);
+        oreProp.setDirectSmeltResult(Dysprosium);
+
+        oreProp = Holmium.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Yttrium, Erbium, Sulfur);
+        oreProp.setWashedIn(Water);
+        oreProp.setDirectSmeltResult(Holmium);
+
+        oreProp = Erbium.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Yttrium, Thulium, Sulfur);
+        oreProp.setWashedIn(Water);
+        oreProp.setDirectSmeltResult(Erbium);
+
+        oreProp = Thulium.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Yttrium, Ytterbium, Sulfur);
+        oreProp.setWashedIn(Water);
+        oreProp.setDirectSmeltResult(Thulium);
+
+        oreProp = Ytterbium.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Yttrium, Lutetium, Sulfur);
+        oreProp.setWashedIn(Water);
+        oreProp.setDirectSmeltResult(Ytterbium);
+
+        oreProp = Tellurium.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Selenium, Sulfur, Copper);
+        oreProp.setWashedIn(Water);
+        oreProp.setDirectSmeltResult(Tellurium);
+
+        oreProp = Selenium.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Tellurium, Sulfur, Copper);
+        oreProp.setWashedIn(Water);
+        oreProp.setDirectSmeltResult(Selenium);
+
+        oreProp = Rubidium.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Potassium, Caesium, Sulfur);
+        oreProp.setWashedIn(Water);
+        oreProp.setDirectSmeltResult(Rubidium);
+
+        oreProp = Thallium.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Lead, Bismuth, Sulfur);
+        oreProp.setWashedIn(Water);
+        oreProp.setDirectSmeltResult(Thallium);
+
+        oreProp = Californium.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Uraninite, Plutonium239, Sulfur);
+        oreProp.setWashedIn(HydrofluoricAcid);
+        oreProp.setDirectSmeltResult(Californium);
+/*
+         */
         //  Coils
         //  Motor coils
         //  Copper (LV), Cupronickel (MV), Electrum (HV), Kanthal (EV),
@@ -205,26 +369,26 @@ public class GTQTMaterialFlagAddition {
          *  Polyvinyl Chloride (x)
          *  Rose Gold
          */
-        Americium.addFlags(GENERATE_CURVED_PLATE, GENERATE_SPRING, GENERATE_SPRING_SMALL, GENERATE_SMALL_GEAR,GENERATE_GEAR);
-        Magnalium.addFlags(GENERATE_CURVED_PLATE, GENERATE_SPRING, GENERATE_SPRING_SMALL, GENERATE_SMALL_GEAR,GENERATE_GEAR);
-        SterlingSilver.addFlags(GENERATE_CURVED_PLATE, GENERATE_SPRING, GENERATE_SPRING_SMALL, GENERATE_SMALL_GEAR,GENERATE_GEAR);
-        Tin.addFlags(GENERATE_CURVED_PLATE, GENERATE_DENSE, GENERATE_SMALL_GEAR,GENERATE_GEAR);
-        Cupronickel.addFlags(GENERATE_CURVED_PLATE, GENERATE_SPRING, GENERATE_SPRING_SMALL, GENERATE_SMALL_GEAR,GENERATE_GEAR);
-        BlackBronze.addFlags(GENERATE_CURVED_PLATE, GENERATE_SPRING, GENERATE_SPRING_SMALL, GENERATE_SMALL_GEAR,GENERATE_GEAR);
-        CobaltBrass.addFlags(GENERATE_CURVED_PLATE, GENERATE_SPRING, GENERATE_SPRING_SMALL, GENERATE_SMALL_GEAR,GENERATE_GEAR);
-        Electrum.addFlags(GENERATE_CURVED_PLATE, GENERATE_SPRING, GENERATE_SPRING_SMALL, GENERATE_SMALL_GEAR,GENERATE_GEAR);
-        Platinum.addFlags(GENERATE_CURVED_PLATE, GENERATE_SPRING, GENERATE_SPRING_SMALL, GENERATE_SMALL_GEAR,GENERATE_GEAR);
-        Brass.addFlags(GENERATE_CURVED_PLATE, GENERATE_SPRING, GENERATE_SPRING_SMALL, GENERATE_SMALL_GEAR,GENERATE_GEAR);
-        Osmium.addFlags(GENERATE_CURVED_PLATE, GENERATE_SPRING, GENERATE_SPRING_SMALL, GENERATE_SMALL_GEAR,GENERATE_GEAR, GENERATE_FINE_WIRE);
-        Ultimet.addFlags(GENERATE_CURVED_PLATE, GENERATE_SPRING, GENERATE_SPRING_SMALL, GENERATE_SMALL_GEAR,GENERATE_GEAR);
-        Osmiridium.addFlags(GENERATE_CURVED_PLATE, GENERATE_SPRING, GENERATE_SPRING_SMALL, GENERATE_SMALL_GEAR,GENERATE_GEAR);
-        Nickel.addFlags(GENERATE_CURVED_PLATE, GENERATE_SPRING, GENERATE_SPRING_SMALL, GENERATE_DENSE, GENERATE_SMALL_GEAR,GENERATE_GEAR);
-        Cobalt.addFlags(GENERATE_CURVED_PLATE, GENERATE_SPRING, GENERATE_SPRING_SMALL, GENERATE_DENSE, GENERATE_SMALL_GEAR,GENERATE_GEAR);
+        Americium.addFlags(GENERATE_CURVED_PLATE, GENERATE_SPRING, GENERATE_SPRING_SMALL, GENERATE_SMALL_GEAR, GENERATE_GEAR);
+        Magnalium.addFlags(GENERATE_CURVED_PLATE, GENERATE_SPRING, GENERATE_SPRING_SMALL, GENERATE_SMALL_GEAR, GENERATE_GEAR);
+        SterlingSilver.addFlags(GENERATE_CURVED_PLATE, GENERATE_SPRING, GENERATE_SPRING_SMALL, GENERATE_SMALL_GEAR, GENERATE_GEAR);
+        Tin.addFlags(GENERATE_CURVED_PLATE, GENERATE_DENSE, GENERATE_SMALL_GEAR, GENERATE_GEAR);
+        Cupronickel.addFlags(GENERATE_CURVED_PLATE, GENERATE_SPRING, GENERATE_SPRING_SMALL, GENERATE_SMALL_GEAR, GENERATE_GEAR);
+        BlackBronze.addFlags(GENERATE_CURVED_PLATE, GENERATE_SPRING, GENERATE_SPRING_SMALL, GENERATE_SMALL_GEAR, GENERATE_GEAR);
+        CobaltBrass.addFlags(GENERATE_CURVED_PLATE, GENERATE_SPRING, GENERATE_SPRING_SMALL, GENERATE_SMALL_GEAR, GENERATE_GEAR);
+        Electrum.addFlags(GENERATE_CURVED_PLATE, GENERATE_SPRING, GENERATE_SPRING_SMALL, GENERATE_SMALL_GEAR, GENERATE_GEAR);
+        Platinum.addFlags(GENERATE_CURVED_PLATE, GENERATE_SPRING, GENERATE_SPRING_SMALL, GENERATE_SMALL_GEAR, GENERATE_GEAR);
+        Brass.addFlags(GENERATE_CURVED_PLATE, GENERATE_SPRING, GENERATE_SPRING_SMALL, GENERATE_SMALL_GEAR, GENERATE_GEAR);
+        Osmium.addFlags(GENERATE_CURVED_PLATE, GENERATE_SPRING, GENERATE_SPRING_SMALL, GENERATE_SMALL_GEAR, GENERATE_GEAR, GENERATE_FINE_WIRE);
+        Ultimet.addFlags(GENERATE_CURVED_PLATE, GENERATE_SPRING, GENERATE_SPRING_SMALL, GENERATE_SMALL_GEAR, GENERATE_GEAR);
+        Osmiridium.addFlags(GENERATE_CURVED_PLATE, GENERATE_SPRING, GENERATE_SPRING_SMALL, GENERATE_SMALL_GEAR, GENERATE_GEAR);
+        Nickel.addFlags(GENERATE_CURVED_PLATE, GENERATE_SPRING, GENERATE_SPRING_SMALL, GENERATE_DENSE, GENERATE_SMALL_GEAR, GENERATE_GEAR);
+        Cobalt.addFlags(GENERATE_CURVED_PLATE, GENERATE_SPRING, GENERATE_SPRING_SMALL, GENERATE_DENSE, GENERATE_SMALL_GEAR, GENERATE_GEAR);
         // PolyvinylChloride.addFlags(GENERATE_CURVED_PLATE);
         RoseGold.addFlags(GENERATE_CURVED_PLATE, GENERATE_SPRING, GENERATE_SPRING_SMALL);
         Copper.addFlags(GENERATE_RING);
         Cobalt.addFlags(GENERATE_RING);
-        Tungsten.addFlags(GENERATE_RING,GENERATE_SMALL_GEAR,GENERATE_GEAR);
+        Tungsten.addFlags(GENERATE_RING, GENERATE_SMALL_GEAR, GENERATE_GEAR);
         Osmium.addFlags(GENERATE_RING);
         Nickel.addFlags(GENERATE_RING);
         Naquadah.addFlags(GENERATE_RING);
@@ -237,7 +401,7 @@ public class GTQTMaterialFlagAddition {
         RoseGold.addFlags(GENERATE_SMALL_GEAR);
         TinAlloy.addFlags(GENERATE_RING);
         Ultimet.addFlags(GENERATE_RING);
-        Potin.addFlags(GENERATE_RING,GENERATE_SMALL_GEAR,GENERATE_GEAR,GENERATE_FRAME);
+        Potin.addFlags(GENERATE_RING, GENERATE_SMALL_GEAR, GENERATE_GEAR, GENERATE_FRAME);
         VanadiumSteel.addFlags(GENERATE_RING);
         CobaltBrass.addFlags(GENERATE_RING);
         TungstenCarbide.addFlags(GENERATE_RING);
@@ -245,18 +409,18 @@ public class GTQTMaterialFlagAddition {
         CarbonNanotube.addFlags(GENERATE_WRAP);
         Asbestos.addFlags(GENERATE_WRAP);
         Wool.addFlags(GENERATE_WRAP);
-        Polyethylene.addFlags(GENERATE_WRAP,GENERATE_RING);
-        PolyvinylChloride.addFlags(GENERATE_WRAP,GENERATE_RING);
-        Epoxy.addFlags(GENERATE_WRAP,GENERATE_RING);
-        ReinforcedEpoxyResin.addFlags(GENERATE_WRAP,GENERATE_RING);
-        Polytetrafluoroethylene.addFlags(GENERATE_WRAP,GENERATE_RING);
-        Zylon.addFlags(GENERATE_WRAP,GENERATE_RING);
-        Polybenzimidazole.addFlags(GENERATE_WRAP,GENERATE_RING);
-        Polyetheretherketone.addFlags(GENERATE_WRAP,GENERATE_RING);
-        Kevlar.addFlags(GENERATE_WRAP,GENERATE_RING);
-        KaptonK.addFlags(GENERATE_WRAP,GENERATE_RING);
-        KaptonE.addFlags(GENERATE_WRAP,GENERATE_RING);
-        FullerenePolymerMatrix.addFlags(GENERATE_WRAP,GENERATE_RING);
+        Polyethylene.addFlags(GENERATE_WRAP, GENERATE_RING);
+        PolyvinylChloride.addFlags(GENERATE_WRAP, GENERATE_RING);
+        Epoxy.addFlags(GENERATE_WRAP, GENERATE_RING);
+        ReinforcedEpoxyResin.addFlags(GENERATE_WRAP, GENERATE_RING);
+        Polytetrafluoroethylene.addFlags(GENERATE_WRAP, GENERATE_RING);
+        Zylon.addFlags(GENERATE_WRAP, GENERATE_RING);
+        Polybenzimidazole.addFlags(GENERATE_WRAP, GENERATE_RING);
+        Polyetheretherketone.addFlags(GENERATE_WRAP, GENERATE_RING);
+        Kevlar.addFlags(GENERATE_WRAP, GENERATE_RING);
+        KaptonK.addFlags(GENERATE_WRAP, GENERATE_RING);
+        KaptonE.addFlags(GENERATE_WRAP, GENERATE_RING);
+        FullerenePolymerMatrix.addFlags(GENERATE_WRAP, GENERATE_RING);
 
         //  Disable Crystallization
         Monazite.addFlags(DISABLE_CRYSTALLIZATION);
@@ -268,23 +432,6 @@ public class GTQTMaterialFlagAddition {
         Olivine.addFlags(CRYSTALLIZABLE);
         Amethyst.addFlags(CRYSTALLIZABLE);
         Opal.addFlags(CRYSTALLIZABLE);
-
-        Carbon.addFlags(GENERATE_NANOTUBE, GENERATE_NANOSENSOR); // W.I.P
-        Graphene.addFlags(GENERATE_NANOTUBE, GENERATE_NANOSENSOR); // W.I.P
-
-        Iron.addFlags(GENERATE_NANOTUBE, GENERATE_NANOSENSOR); // W.I.P
-        IronMagnetic.addFlags(GENERATE_NANOTUBE, GENERATE_NANOSENSOR); // W.I.P
-        Copper.addFlags(GENERATE_NANOTUBE, GENERATE_NANOSENSOR); // W.I.P
-        Tin.addFlags(GENERATE_NANOTUBE, GENERATE_NANOSENSOR); // W.I.P
-        Nickel.addFlags(GENERATE_NANOTUBE, GENERATE_NANOSENSOR); // W.I.P
-        Cobalt.addFlags(GENERATE_NANOTUBE, GENERATE_NANOSENSOR); // W.I.P
-        Lead.addFlags(GENERATE_NANOTUBE, GENERATE_NANOSENSOR); // W.I.P
-        Redstone.addFlags(GENERATE_NANOTUBE, GENERATE_NANOSENSOR); // W.I.P
-
-        RedAlloy.addFlags(GENERATE_NANOTUBE, GENERATE_NANOSENSOR); // W.I.P
-
-        Silver.addFlags(GENERATE_NANOTUBE, GENERATE_NANOSENSOR); // For PCB factory Etching
-        Gold.addFlags(GENERATE_NANOTUBE, GENERATE_NANOSENSOR); // For PCB factory Etching
         Silicon.addFlags(GENERATE_DENSE);
         RedAlloy.addFlags(GENERATE_RING, GENERATE_GEAR);
         Carbon.addFlags(GENERATE_ROD);
@@ -293,7 +440,7 @@ public class GTQTMaterialFlagAddition {
 
         NetherStar.addFlags(CRYSTALLIZABLE);
         Copper.addFlags(GENERATE_BOLT_SCREW);
-        WroughtIron.addFlags(GENERATE_ROTOR, GENERATE_SMALL_GEAR,GENERATE_GEAR);
+        WroughtIron.addFlags(GENERATE_ROTOR, GENERATE_SMALL_GEAR, GENERATE_GEAR);
         Rhenium.addFlags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_DENSE);
         Nickel.addFlags(GENERATE_FOIL);
         Titanium.addFlags(GENERATE_FOIL);

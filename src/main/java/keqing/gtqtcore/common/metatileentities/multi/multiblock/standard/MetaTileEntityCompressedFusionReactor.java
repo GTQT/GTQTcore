@@ -523,9 +523,6 @@ public class MetaTileEntityCompressedFusionReactor extends GTQTNoTierMultiblockC
     @Override
     public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         long actuallyEnergyStored = calculateEnergyStorageFactor(32) / 1000000L;
-        super.addInformation(stack, player, tooltip, advanced);
-        tooltip.add(I18n.format("gtqtcore.multiblock.kq.acc.tooltip"));
-        tooltip.add(I18n.format("本机器允许使用激光能源仓代替能源仓！"));
         switch (this.tier) {
             case LuV -> {
                 tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("gtqtcore.machine.compressed_fusion_reactor.luv.tooltip.1"));
@@ -536,7 +533,7 @@ public class MetaTileEntityCompressedFusionReactor extends GTQTNoTierMultiblockC
                 tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.luv.tooltip.6"));
                 tooltip.add(I18n.format("gregtech.machine.fusion_reactor.capacity", actuallyEnergyStored));
                 tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.common_oc"));
-                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.perfect_oc"));
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.perfect_oc1"));
             }
             case ZPM -> {
                 tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("gtqtcore.machine.compressed_fusion_reactor.zpm.tooltip.1"));
@@ -548,7 +545,7 @@ public class MetaTileEntityCompressedFusionReactor extends GTQTNoTierMultiblockC
                 tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.zpm.tooltip.7"));
                 tooltip.add(I18n.format("gregtech.machine.fusion_reactor.capacity", actuallyEnergyStored));
                 tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.common_oc"));
-                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.perfect_oc"));
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.perfect_oc1"));
             }
             case UV -> {
                 tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("gtqtcore.machine.compressed_fusion_reactor.uv.tooltip.1"));
@@ -561,7 +558,7 @@ public class MetaTileEntityCompressedFusionReactor extends GTQTNoTierMultiblockC
                 tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.uv.tooltip.8"));
                 tooltip.add(I18n.format("gregtech.machine.fusion_reactor.capacity", actuallyEnergyStored));
                 tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.common_oc"));
-                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.perfect_oc"));
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.perfect_oc1"));
             }
             case UHV -> {
                 tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("gtqtcore.machine.compressed_fusion_reactor.uhv.tooltip.1"));
@@ -575,7 +572,7 @@ public class MetaTileEntityCompressedFusionReactor extends GTQTNoTierMultiblockC
                 tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.uhv.tooltip.9"));
                 tooltip.add(I18n.format("gregtech.machine.fusion_reactor.capacity", actuallyEnergyStored));
                 tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.common_oc"));
-                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.perfect_oc"));
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.perfect_oc2"));
             }
             case UEV -> {
                 tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("gtqtcore.machine.compressed_fusion_reactor.uev.tooltip.1"));
@@ -590,7 +587,7 @@ public class MetaTileEntityCompressedFusionReactor extends GTQTNoTierMultiblockC
                 tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.uev.tooltip.10"));
                 tooltip.add(I18n.format("gregtech.machine.fusion_reactor.capacity", actuallyEnergyStored));
                 tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.common_oc"));
-                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.perfect_oc"));
+                tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.perfect_oc2"));
             }
             case UIV -> {
                 tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("gtqtcore.machine.compressed_fusion_reactor.uiv.tooltip.1"));
@@ -609,7 +606,8 @@ public class MetaTileEntityCompressedFusionReactor extends GTQTNoTierMultiblockC
                 tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.perfect_oc"));
             }
         }
-
+        tooltip.add(I18n.format("gtqtcore.multiblock.kq.acc.tooltip"));
+        tooltip.add(I18n.format("gtqtcore.multiblock.kq.acc.tooltip"));
     }
 
     @Override
@@ -746,8 +744,16 @@ public class MetaTileEntityCompressedFusionReactor extends GTQTNoTierMultiblockC
         public CompressedFusionReactorRecipeLogic(MetaTileEntityCompressedFusionReactor tileEntity) {
             super(tileEntity);
         }
+
         @Override
         protected double getOverclockingDurationDivisor() {
+            if(tier<=9)return OCFirst ? 3.0 : 2.0;
+            return OCFirst ? 4.0 : 2.0;
+        }
+
+        @Override
+        protected double getOverclockingVoltageMultiplier() {
+            if(tier<=9)return OCFirst ? 3.0 : 2.0;
             return OCFirst ? 4.0 : 2.0;
         }
 

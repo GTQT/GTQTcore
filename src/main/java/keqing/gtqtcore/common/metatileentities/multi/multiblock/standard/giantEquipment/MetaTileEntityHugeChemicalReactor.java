@@ -89,6 +89,8 @@ public class MetaTileEntityHugeChemicalReactor extends GTQTNoTierMultiblockContr
 
         //setTimeReduce(glassTire);
         setTimeReduceFlag(true);
+
+        setOverclocking(4.0);
     }
 
     @Override
@@ -115,7 +117,7 @@ public class MetaTileEntityHugeChemicalReactor extends GTQTNoTierMultiblockContr
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.3"));
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(I18n.format("gtqtcore.multiblock.kq.acc.tooltip"));
-        tooltip.add(I18n.format("本机器允许使用激光能源仓代替能源仓！"));
+        tooltip.add(I18n.format("gtqtcore.multiblock.kq.acc.tooltip"));
     }
 
     @Override

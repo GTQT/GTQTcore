@@ -7,17 +7,9 @@ public class GTQTMaterialIconType {
     public static final MaterialIconType boule = new MaterialIconType("boule");
     public static final MaterialIconType gemSolitary = new MaterialIconType("gemSolitary");
     public static final MaterialIconType milled = new MaterialIconType("milled");
-    public static final MaterialIconType nanotube = new MaterialIconType("nanotube");
-    public static final MaterialIconType nanosensor = new MaterialIconType("nanosensor");
     public static final MaterialIconType swarm = new MaterialIconType("swarm");
     public static final MaterialIconType singularity = new MaterialIconType("singularity");
-    public static final MaterialIconType fcrop = new MaterialIconType("fcrop");
-    public static final MaterialIconType leaf = new MaterialIconType("leaf");
     public static final MaterialIconType plate_curved = new MaterialIconType("plate_curved");
-    public static final MaterialIconType pellets = new MaterialIconType("pellets");
-    public static final MaterialIconType upellets = new MaterialIconType("upellets");
-    public static final MaterialIconType ranliaowan = new MaterialIconType("ranliaowan");
-    public static final MaterialIconType kujieranliaowan = new MaterialIconType("kujieranliaowan");
     public static final MaterialIconType soldering_iron_head = new MaterialIconType("soldering_iron_head");
     public static final MaterialIconType wrap = new MaterialIconType("wrap");
 

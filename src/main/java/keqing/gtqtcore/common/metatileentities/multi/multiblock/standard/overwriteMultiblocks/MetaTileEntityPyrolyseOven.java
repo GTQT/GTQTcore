@@ -52,6 +52,7 @@ public class MetaTileEntityPyrolyseOven extends GTQTRecipeMapMultiblockControlle
         setMaxVoltageFlag(true);
         //setTimeReduce(coilLevel);
         setTimeReduceFlag(true);
+        setOverclocking(4.0);
     }
 
     @Override

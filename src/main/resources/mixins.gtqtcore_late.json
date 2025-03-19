@@ -6,8 +6,6 @@
   "minVersion": "0.8.3",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "gregtech.WireRecipeHandlerMixin",
-    "gregtech.WireCombiningHandlerMixin",
     "gregtech.MixinMetaTileEntityHolder",
     "architecturecraft.MixinBlockSawbench",
     "architecturecraft.MixinBlockShape",

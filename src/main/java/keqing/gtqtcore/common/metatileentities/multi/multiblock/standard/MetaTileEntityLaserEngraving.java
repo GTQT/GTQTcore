@@ -66,6 +66,7 @@ public class MetaTileEntityLaserEngraving extends GTQTOCMultiblockController{
         setMaxVoltageFlag(true);
         setTimeReduce(1);//初始化
         setTimeReduceFlag(true);
+        setOverclocking(3.0);
     }
 
     @Override

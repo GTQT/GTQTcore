@@ -80,6 +80,7 @@ public class MetaTileEntityAssemblyLine extends GTQTRecipeMapMultiblockControlle
         setMaxVoltageFlag(true);
         //setTimeReduce(none);
         setTimeReduceFlag(false);
+        setOverclocking(3.0);
     }
 
     protected static TraceabilityPredicate fluidInputPredicate() {

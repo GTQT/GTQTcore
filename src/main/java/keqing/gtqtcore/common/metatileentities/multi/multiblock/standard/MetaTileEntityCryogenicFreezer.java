@@ -21,7 +21,7 @@ import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.MetaTileEntities;
 import gregtech.core.sound.GTSoundEvents;
-import keqing.gtqtcore.api.metaileentity.GTQTNoOCMultiblockController;
+import keqing.gtqtcore.api.metaileentity.GTQTNoTierMultiblockController;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.BlockCoolingCoil;
@@ -51,7 +51,7 @@ import java.util.function.Supplier;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.GelidCryotheum;
 
 //冰箱
-public class MetaTileEntityCryogenicFreezer extends GTQTNoOCMultiblockController {
+public class MetaTileEntityCryogenicFreezer extends GTQTNoTierMultiblockController {
     private static final Supplier<TraceabilityPredicate> COOLING_COILS = () -> new TraceabilityPredicate(blockWorldState -> {
         IBlockState state = blockWorldState.getBlockState();
         if (state.getBlock() instanceof BlockCoolingCoil) {
@@ -83,6 +83,7 @@ public class MetaTileEntityCryogenicFreezer extends GTQTNoOCMultiblockController
         setMaxParallelFlag(true);
         //setTimeReduce(auto);
         setTimeReduceFlag(true);
+        setOverclocking(3.0);
     }
 
     public static TraceabilityPredicate coolingCoils() {
@@ -252,6 +253,7 @@ public class MetaTileEntityCryogenicFreezer extends GTQTNoOCMultiblockController
             super(tileEntity);
             this.freezer = (MetaTileEntityCryogenicFreezer) tileEntity;
         }
+
         @Override
         protected void updateRecipeProgress() {
             if (this.canRecipeProgress && this.drawEnergy(this.recipeEUt, true)) {

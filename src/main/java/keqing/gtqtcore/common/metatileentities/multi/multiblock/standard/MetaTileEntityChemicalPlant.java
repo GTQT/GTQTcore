@@ -4,7 +4,6 @@ import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
 import gregtech.api.block.IHeatingCoilBlockStats;
-import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
@@ -15,10 +14,8 @@ import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
-import gregtech.api.recipes.RecipeMaps;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
-import gregtech.client.utils.TooltipHelper;
 import gregtech.common.blocks.BlockWireCoil;
 import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
@@ -31,22 +28,14 @@ import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import java.util.List;
-import java.util.Objects;
-
-import static gregtech.api.GTValues.V;
 
 public class MetaTileEntityChemicalPlant extends GTQTRecipeMapMultiblockController {
 
@@ -68,6 +57,7 @@ public class MetaTileEntityChemicalPlant extends GTQTRecipeMapMultiblockControll
         setMaxVoltageFlag(true);
         //setTimeReduce(coilLevel);
         setTimeReduceFlag(true);
+        setOverclocking(3.0);
     }
 
     @Override
@@ -189,6 +179,7 @@ public class MetaTileEntityChemicalPlant extends GTQTRecipeMapMultiblockControll
             }
         }
     }
+
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
@@ -211,7 +202,7 @@ public class MetaTileEntityChemicalPlant extends GTQTRecipeMapMultiblockControll
 
         setTier(Math.min(this.casingTier, this.voltageTier));
         setMaxVoltage(Math.min(this.casingTier, this.voltageTier));
-        setTimeReduce((100-Math.min(coilLevel,10)*5.0)/100);
+        setTimeReduce((100 - Math.min(coilLevel, 10) * 5.0) / 100);
         this.writeCustomData(GTQTValue.UPDATE_TIER4, buf -> buf.writeInt(this.casingTier));
     }
 
@@ -232,6 +223,7 @@ public class MetaTileEntityChemicalPlant extends GTQTRecipeMapMultiblockControll
         public ChemicalPlantLogic(RecipeMapMultiblockController tileEntity) {
             super(tileEntity);
         }
+
         @Override
         public boolean checkRecipe(@Nonnull Recipe recipe) {
             if (!super.checkRecipe(recipe)) {

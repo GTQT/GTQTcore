@@ -101,6 +101,8 @@ public class MetaTileEntityHugeAlloyBlastSmelter extends GTQTNoTierMultiblockCon
 
         //setTimeReduce(glassTire);
         setTimeReduceFlag(true);
+
+        setOverclocking(3.0);
     }
 
     private static IBlockState getCasingState() {
@@ -156,7 +158,7 @@ public class MetaTileEntityHugeAlloyBlastSmelter extends GTQTNoTierMultiblockCon
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.3"));
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(I18n.format("gtqtcore.multiblock.kq.acc.tooltip"));
-        tooltip.add(I18n.format("本机器允许使用激光能源仓代替能源仓！"));
+        tooltip.add(I18n.format("gtqtcore.multiblock.kq.acc.tooltip"));
     }
 
     @Override

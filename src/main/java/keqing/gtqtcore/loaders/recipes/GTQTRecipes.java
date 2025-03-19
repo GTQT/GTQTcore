@@ -28,6 +28,7 @@ import keqing.gtqtcore.loaders.recipes.handlers.BouleRecipeHandler;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import gregtech.common.items.ToolItems;
+
 import javax.annotation.Nonnull;
 
 import static gregtech.api.GTValues.*;
@@ -52,8 +53,6 @@ public class GTQTRecipes {
         OrePrefix.gem.addProcessingHandler(PropertyKey.GEM, BouleRecipeHandler::processCrystallizer);
         plate.addProcessingHandler(PropertyKey.TOOL, GTQTRecipes::gcmTool);
         milled.addProcessingHandler(PropertyKey.ORE, GTQTRecipes::processMilled);
-        fcrop.addProcessingHandler(PropertyKey.INGOT, GTQTRecipes::processCrops);
-        leaf.addProcessingHandler(PropertyKey.INGOT, GTQTRecipes::processLeaf);
         power.addProcessingHandler(DUST, GTQTRecipes::processPower);
         plate_curved.addProcessingHandler(PropertyKey.INGOT, GTQTRecipes::processPlateCurved);
         plate_big.addProcessingHandler(PropertyKey.INGOT, GTQTRecipes::processPlateBig);
@@ -71,11 +70,12 @@ public class GTQTRecipes {
         wireGtSingle.addProcessingHandler(PropertyKey.WIRE, GTQTRecipes::processWireSingle);
         registerMortarRecipes();
     }
+
     private static void registerMortarRecipes() {
-        for (Material material : new Material[] {
-                TungstenSteel, NaquadahAlloy, Neutronium, Inconel625,StainlessSteel,VanadiumSteel,RedSteel,BlueSteel,
-                HSSE, HastelloyN, Hdcs, BlackTitanium,MaragingSteel250,BabbittAlloy,EglinSteel,Pikyonium64B,HG1223,
-                Draconium,AwakenedDraconium,Infinity,Rhugnor,Hypogen}) {
+        for (Material material : new Material[]{
+                TungstenSteel, NaquadahAlloy, Neutronium, Inconel625, StainlessSteel, VanadiumSteel, RedSteel, BlueSteel,
+                HSSE, HastelloyN, Hdcs, BlackTitanium, MaragingSteel250, BabbittAlloy, EglinSteel, Pikyonium64B, HG1223,
+                Draconium, AwakenedDraconium, Infinity, Rhugnor, Hypogen}) {
 
             addToolRecipe(material, ToolItems.MORTAR, false,
                     " I ", "SIS", "SSS",
@@ -83,19 +83,20 @@ public class GTQTRecipes {
                     'S', OrePrefix.stone);
         }
     }
+
     private static void processPower(OrePrefix orePrefix, Material material, DustProperty dustProperty) {
         REFINER_MACERATOR_RECIPES.recipeBuilder()
-                .input(dust, material,1)
+                .input(dust, material, 1)
                 .output(power, material, 1)
-                .fluidInputs(Lubricant.getFluid(72))
+                .fluidInputs(Lubricant.getFluid(20))
                 .duration(300)
                 .EUt(VA[IV])
                 .buildAndRegister();
 
         REFINER_MACERATOR_RECIPES.recipeBuilder()
-                .input(dust, material,1)
+                .input(dust, material, 1)
                 .output(power, material, 1)
-                .fluidInputs(AdvancedLubricant.getFluid(36))
+                .fluidInputs(AdvancedLubricant.getFluid(5))
                 .duration(200)
                 .EUt(VA[IV])
                 .buildAndRegister();
@@ -570,6 +571,7 @@ public class GTQTRecipes {
                     .buildAndRegister();
         }
     }
+
     public static void processPlate(OrePrefix platePrefix, Material material, DustProperty property) {
         if (material.hasFlag(GENERATE_CURVED_PLATE)) {
             CW_LASER_ENGRAVER_RECIPES.recipeBuilder()
@@ -581,47 +583,6 @@ public class GTQTRecipes {
                     .EUt(GTValues.VA[HV])
                     .buildAndRegister();
         }
-    }
-
-
-    public static void processCrops(OrePrefix fcropPrefix, Material material, IngotProperty property) {
-        if(!material.isElement())return;
-        GTFORecipeMaps.GREENHOUSE_RECIPES.recipeBuilder()
-                .EUt(GTValues.VA[ZPM])
-                .duration(4500)
-                .input(MetaItems.FERTILIZER, 12)
-                .fluidInputs(RawGrowthMedium.getFluid(12000))
-                .notConsumable(fcropPrefix, material, 1)
-                .chancedOutput(fcropPrefix, material, 100, 100)
-                .circuitMeta(1)
-                .buildAndRegister();
-
-        GTFORecipeMaps.GREENHOUSE_RECIPES.recipeBuilder()
-                .EUt(GTValues.VA[ZPM])
-                .duration(1500)
-                .fluidInputs(RawGrowthMedium.getFluid(4000))
-                .input(MetaItems.FERTILIZER, 4)
-                .notConsumable(fcropPrefix, material, 1)
-                .chancedOutput(GTQTOrePrefix.leaf, material, 2000, 1000)
-                .chancedOutput(GTQTOrePrefix.leaf, material, 2000, 1000)
-                .chancedOutput(GTQTOrePrefix.leaf, material, 2000, 1000)
-                .chancedOutput(GTQTOrePrefix.leaf, material, 2000, 1000)
-                .circuitMeta(2)
-                .buildAndRegister();
-
-    }
-
-    public static void processLeaf(OrePrefix leafPrefix, Material material, IngotProperty property) {
-        if(!material.isElement())return;
-        MACERATOR_RECIPES.recipeBuilder()
-                .EUt(GTValues.VA[ZPM])
-                .duration(1500)
-                .input(leafPrefix, material, 1)
-                .chancedOutput(OrePrefix.dust, material, 500, 125)
-                .chancedOutput(OrePrefix.dust, material, 500, 125)
-                .chancedOutput(OrePrefix.dust, material, 500, 125)
-                .chancedOutput(OrePrefix.dust, material, 500, 125)
-                .buildAndRegister();
     }
 
     public static void processMilled(OrePrefix milledPrefix, Material material, OreProperty property) {

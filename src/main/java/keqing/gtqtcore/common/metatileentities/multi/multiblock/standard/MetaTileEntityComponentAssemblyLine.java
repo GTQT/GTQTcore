@@ -1,7 +1,9 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
-import gregicality.multiblocks.api.recipes.GCYMRecipeMaps;
-import gregtech.api.capability.*;
+import gregtech.api.capability.IEnergyContainer;
+import gregtech.api.capability.IOpticalComputationHatch;
+import gregtech.api.capability.IOpticalComputationProvider;
+import gregtech.api.capability.IOpticalComputationReceiver;
 import gregtech.api.capability.impl.EnergyContainerList;
 import gregtech.api.capability.impl.FluidTankList;
 import gregtech.api.capability.impl.ItemHandlerList;
@@ -16,9 +18,6 @@ import gregtech.api.pattern.MultiblockShapeInfo;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
-import gregtech.api.recipes.logic.OverclockingLogic;
-import gregtech.api.recipes.recipeproperties.IRecipePropertyStorage;
-import gregtech.api.recipes.recipeproperties.TemperatureProperty;
 import gregtech.api.unification.material.Materials;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
@@ -39,7 +38,6 @@ import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
-import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.giantEquipment.MetaTileEntityHugeAlloyBlastSmelter;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -62,9 +60,8 @@ import static keqing.gtqtcore.api.GTQTAPI.MAP_CAL_CASING;
 import static keqing.gtqtcore.api.utils.GTQTUtil.getAccelerateByCWU;
 
 public class MetaTileEntityComponentAssemblyLine extends GTQTNoTierMultiblockController implements IOpticalComputationReceiver {
-    private int casingTier;
-
     int requestCWUt;
+    private int casingTier;
     private IOpticalComputationProvider computationProvider;
 
     public MetaTileEntityComponentAssemblyLine(ResourceLocation metaTileEntityId) {
@@ -76,28 +73,10 @@ public class MetaTileEntityComponentAssemblyLine extends GTQTNoTierMultiblockCon
 
         //setTimeReduce(auto);
         setTimeReduceFlag(true);
-    }
-    @Override
-    public void updateFormedValid() {
-        super.updateFormedValid();
-        if (isStructureFormed() && isActive()) {
-            requestCWUt = computationProvider.requestCWUt(2048, false);
-        }
-    }
-    @Override
-    public IOpticalComputationProvider getComputationProvider() {
-        return this.computationProvider;
+
+        setOverclocking(3.0);
     }
 
-    @Override
-    public void checkStructurePattern() {
-        if(MachineSwitch.DelayStructureCheckSwitch) {
-            if (this.getOffsetTimer() % 100 == 0 || this.isFirstTick()) {
-                super.checkStructurePattern();
-            }
-        }
-        else super.checkStructurePattern();
-    }
     private static IBlockState getCasingState() {
         return GTQTMetaBlocks.blockMultiblockCasing4.getState(BlockMultiblockCasing4.TurbineCasingType.IRIDIUM_CASING);
     }
@@ -120,6 +99,28 @@ public class MetaTileEntityComponentAssemblyLine extends GTQTNoTierMultiblockCon
 
     private static IBlockState getPipeCasingState() {
         return GTQTMetaBlocks.blockMultiblockCasing4.getState(BlockMultiblockCasing4.TurbineCasingType.POLYBENZIMIDAZOLE_PIPE);
+    }
+
+    @Override
+    public void updateFormedValid() {
+        super.updateFormedValid();
+        if (isStructureFormed() && isActive()) {
+            requestCWUt = computationProvider.requestCWUt(2048, false);
+        }
+    }
+
+    @Override
+    public IOpticalComputationProvider getComputationProvider() {
+        return this.computationProvider;
+    }
+
+    @Override
+    public void checkStructurePattern() {
+        if (MachineSwitch.DelayStructureCheckSwitch) {
+            if (this.getOffsetTimer() % 100 == 0 || this.isFirstTick()) {
+                super.checkStructurePattern();
+            }
+        } else super.checkStructurePattern();
     }
 
     @Override
@@ -344,8 +345,9 @@ public class MetaTileEntityComponentAssemblyLine extends GTQTNoTierMultiblockCon
         tooltip.add(I18n.format("gtqtcore.machine.component_assembly_line.tooltip.3"));
         tooltip.add(I18n.format("gtqtcore.machine.component_assembly_line.tooltip.4"));
         tooltip.add(I18n.format("gtqtcore.multiblock.kq.acc.tooltip"));
-        tooltip.add(I18n.format("本机器允许使用激光能源仓代替能源仓！"));
+        tooltip.add(I18n.format("gtqtcore.multiblock.kq.acc.tooltip"));
     }
+
     protected class MetaTileEntityComponentAssemblyLineWorkable extends GTQTMultiblockLogic {
 
         public MetaTileEntityComponentAssemblyLineWorkable(RecipeMapMultiblockController tileEntity) {

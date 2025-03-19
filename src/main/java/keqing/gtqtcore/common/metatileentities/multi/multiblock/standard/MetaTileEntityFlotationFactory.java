@@ -5,16 +5,13 @@ import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.texture.TextureUtils;
 import codechicken.lib.vec.Cuboid6;
 import codechicken.lib.vec.Matrix4;
-import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
-import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.RecipeMap;
-import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.util.GTUtility;
 import gregtech.client.renderer.CubeRendererState;
 import gregtech.client.renderer.ICubeRenderer;
@@ -22,28 +19,20 @@ import gregtech.client.renderer.cclop.ColourOperation;
 import gregtech.client.renderer.cclop.LightMapOperation;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.BloomEffectUtil;
-import gregtech.client.utils.TooltipHelper;
 import keqing.gtqtcore.api.metaileentity.GTQTRecipeMapMultiblockController;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.common.block.blocks.BlockTransparentCasing;
 import keqing.gtqtcore.common.block.blocks.BlockIsaCasing;
+import keqing.gtqtcore.common.block.blocks.BlockTransparentCasing;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.commons.lang3.ArrayUtils;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import java.util.List;
-
-import static gregtech.api.GTValues.*;
 
 public class MetaTileEntityFlotationFactory extends GTQTRecipeMapMultiblockController {
 
@@ -59,6 +48,7 @@ public class MetaTileEntityFlotationFactory extends GTQTRecipeMapMultiblockContr
         setMaxVoltageFlag(true);
         //setTimeReduce(auto);
         setTimeReduceFlag(true);
+        setOverclocking(4.0);
     }
 
     private static IBlockState getCasingState() {
@@ -98,6 +88,7 @@ public class MetaTileEntityFlotationFactory extends GTQTRecipeMapMultiblockContr
         setMaxParallel((int) Math.pow(2, GTUtility.getTierByVoltage(recipeMapWorkable.getMaxVoltage())));
         setTimeReduce(Math.pow(0.95, GTUtility.getTierByVoltage(recipeMapWorkable.getMaxVoltage())));
     }
+
     @Nonnull
     @Override
     protected BlockPattern createStructurePattern() {

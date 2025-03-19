@@ -53,6 +53,7 @@ public class MetaTileEntityElectronBath extends GTQTRecipeMapMultiblockControlle
         setMaxVoltageFlag(true);
         //setTimeReduce(coilLevel);
         setTimeReduceFlag(true);
+        setOverclocking(3.0);
     }
 
     @Override

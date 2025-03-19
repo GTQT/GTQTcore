@@ -3,22 +3,16 @@ package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 import gregtech.api.GTValues;
 import gregtech.api.GregTechAPI;
 import gregtech.api.capability.IHeatingCoil;
-import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
-import gregtech.api.metatileentity.multiblock.MultiMapMultiblockController;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
-import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.MultiblockShapeInfo;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
-import gregtech.api.recipes.RecipeMaps;
-import gregtech.api.recipes.logic.OverclockingLogic;
-import gregtech.api.recipes.recipeproperties.IRecipePropertyStorage;
 import gregtech.api.recipes.recipeproperties.TemperatureProperty;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.TextFormattingUtil;
@@ -28,7 +22,7 @@ import gregtech.client.utils.TooltipHelper;
 import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.metatileentities.MetaTileEntities;
-import keqing.gtqtcore.api.metaileentity.GTQTNoOCMultiblockController;
+import keqing.gtqtcore.api.metaileentity.GTQTNoTierMultiblockController;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
@@ -53,9 +47,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.DRYER_RECIPES;
-
-public class MetaTileEntityVacuumDryingFurnace extends GTQTNoOCMultiblockController implements IHeatingCoil {
+public class MetaTileEntityVacuumDryingFurnace extends GTQTNoTierMultiblockController implements IHeatingCoil {
 
     int tier;
     private int temperature;
@@ -70,6 +62,7 @@ public class MetaTileEntityVacuumDryingFurnace extends GTQTNoOCMultiblockControl
         setMaxParallelFlag(true);
         //setTimeReduce(auto);
         setTimeReduceFlag(true);
+        setOverclocking(3.0);
     }
 
     @Nonnull
@@ -103,8 +96,8 @@ public class MetaTileEntityVacuumDryingFurnace extends GTQTNoOCMultiblockControl
 
         this.temperature += 100 * Math.max(0, GTUtility.getTierByVoltage(getEnergyContainer().getInputVoltage()) - GTValues.MV);
 
-        setMaxParallel(Math.min((int) Math.pow(2, tier),64));
-        setTimeReduce( (100 - (Math.min(tier,15) * 5.0)) /100);
+        setMaxParallel(Math.min((int) Math.pow(2, tier), 64));
+        setTimeReduce((100 - (Math.min(tier, 15) * 5.0)) / 100);
     }
 
     @Override

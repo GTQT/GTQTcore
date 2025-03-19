@@ -69,6 +69,7 @@ import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.PYROL
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.*;
 import static net.minecraft.init.Blocks.FURNACE;
 import static net.minecraft.init.Blocks.IRON_BARS;
+import static supercritical.api.unification.material.SCMaterials.Plutonium;
 import static supercritical.common.metatileentities.SCMetaTileEntities.DECAY_CHAMBER;
 
 
@@ -844,7 +845,7 @@ public class MetaTileEntityLoader {
         ModHandler.addShapedRecipe(true, "large_biomass_generator", LARGE_BIOMASS_GENERATOR.getStackForm(),
                 "SAS", "PBP", "WFW",
                 'B', BIOMASS_GENERATOR[2].getStackForm(),
-                'P', new UnificationEntry(plateDouble, Plutonium239),
+                'P', new UnificationEntry(plateDouble, Plutonium),
                 'W', new UnificationEntry(cableGtDouble, NiobiumTitanium),
                 'F', FIELD_GENERATOR_LuV,
                 'S', new UnificationEntry(spring, RTMAlloy),

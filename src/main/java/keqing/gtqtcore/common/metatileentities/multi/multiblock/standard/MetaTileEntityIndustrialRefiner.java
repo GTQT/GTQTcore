@@ -18,7 +18,7 @@ import gregtech.client.utils.TooltipHelper;
 import gregtech.common.blocks.BlockTurbineCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.core.advancement.AdvancementTriggers;
-import keqing.gtqtcore.api.metaileentity.GTQTNoOCMultiblockController;
+import keqing.gtqtcore.api.metaileentity.GTQTNoTierMultiblockController;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
@@ -38,7 +38,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public class MetaTileEntityIndustrialRefiner extends GTQTNoOCMultiblockController {
+public class MetaTileEntityIndustrialRefiner extends GTQTNoTierMultiblockController {
 
     public MetaTileEntityIndustrialRefiner(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{
@@ -51,6 +51,7 @@ public class MetaTileEntityIndustrialRefiner extends GTQTNoOCMultiblockControlle
 
         setTimeReduce(1);
         setTimeReduceFlag(false);
+        setOverclocking(4.0);
     }
 
     private static IBlockState getCasingState() {

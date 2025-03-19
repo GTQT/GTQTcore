@@ -11,7 +11,6 @@ import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.Hydrazine;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.utils.GTQTUniversUtil.SECOND;
-import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.CRYOGENIC_REACTOR;
 
 public class RocketEngineRecipes {
     public static void init() {
@@ -22,9 +21,9 @@ public class RocketEngineRecipes {
         //  Rocket Fuel
         ROCKET_RECIPES.recipeBuilder()
                 .fluidInputs(RocketFuel.getFluid(16))
-                .fluidOutputs(SuperCriticalGas.getFluid(2*1000))
+                .fluidOutputs(SuperCriticalGas.getFluid(2 * 1000))
                 .EUt(512)
-                .duration(2 * SECOND)
+                .duration(8 * SECOND)
                 .buildAndRegister();
 
         //  RP-1 Rocket Fuel
@@ -40,7 +39,7 @@ public class RocketEngineRecipes {
                 .fluidInputs(RP1RocketFuel.getFluid(12))
                 .fluidOutputs(SuperCriticalGas.getFluid(1000))
                 .EUt(512)
-                .duration(SECOND)
+                .duration(6 * SECOND)
                 .buildAndRegister();
 
         //  Dense Hydrazine Mixture Fuel
@@ -54,7 +53,7 @@ public class RocketEngineRecipes {
 
         ROCKET_RECIPES.recipeBuilder()
                 .fluidInputs(DenseHydrazineMixtureFuel.getFluid(9))
-                .fluidOutputs(SuperCriticalGas.getFluid(4*1000))
+                .fluidOutputs(SuperCriticalGas.getFluid(4 * 1000))
                 .EUt(2048)
                 .duration(4 * SECOND)
                 .buildAndRegister();
@@ -80,9 +79,9 @@ public class RocketEngineRecipes {
 
         ROCKET_RECIPES.recipeBuilder()
                 .fluidInputs(MethylhydrazineNitrateRocketFuel.getFluid(6))
-                .fluidOutputs(SuperCriticalGas.getFluid(6*1000))
+                .fluidOutputs(SuperCriticalGas.getFluid(6 * 1000))
                 .EUt(2048)
-                .duration(6 * SECOND)
+                .duration(8 * SECOND)
                 .buildAndRegister();
 
         // HydrazineFluorideFuel
@@ -104,9 +103,9 @@ public class RocketEngineRecipes {
 
         ROCKET_RECIPES.recipeBuilder()
                 .fluidInputs(HydrazineFluorideFuel.getFluid(8))
-                .fluidOutputs(SuperCriticalGas.getFluid(3*1000))
+                .fluidOutputs(SuperCriticalGas.getFluid(3 * 1000))
                 .EUt(8192)
-                .duration(3 * SECOND)
+                .duration(4 * SECOND)
                 .buildAndRegister();
 
         //HydraziniumChloride
@@ -158,9 +157,9 @@ public class RocketEngineRecipes {
 
         ROCKET_RECIPES.recipeBuilder()
                 .fluidInputs(TrihydraziniumGel.getFluid(8))
-                .fluidOutputs(SuperCriticalGas.getFluid(5*1000))
+                .fluidOutputs(SuperCriticalGas.getFluid(5 * 1000))
                 .EUt(8192)
-                .duration(5 * SECOND)
+                .duration(6 * SECOND)
                 .buildAndRegister();
     }
 }

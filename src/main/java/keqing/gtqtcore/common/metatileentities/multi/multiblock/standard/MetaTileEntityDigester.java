@@ -23,7 +23,7 @@ import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.BloomEffectUtil;
 import gregtech.client.utils.TooltipHelper;
 import gregtech.common.blocks.*;
-import keqing.gtqtcore.api.metaileentity.GTQTNoOCMultiblockController;
+import keqing.gtqtcore.api.metaileentity.GTQTNoTierMultiblockController;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.block.state.IBlockState;
@@ -47,7 +47,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class MetaTileEntityDigester extends GTQTNoOCMultiblockController {
+public class MetaTileEntityDigester extends GTQTNoTierMultiblockController {
     protected int heatingCoilLevel;
     protected int heatingCoilDiscount;
     private int coilTier;
@@ -60,6 +60,7 @@ public class MetaTileEntityDigester extends GTQTNoOCMultiblockController {
         setMaxParallelFlag(true);
         //setTimeReduce(auto);
         setTimeReduceFlag(true);
+        setOverclocking(3.0);
     }
 
     private static IBlockState getCasingAState() {
