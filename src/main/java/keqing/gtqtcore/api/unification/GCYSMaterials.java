@@ -291,7 +291,6 @@ public class GCYSMaterials {
     public static Material HeavyHyperFuel;
     public static Material Alumina;
     public static Material Hematite;
-    public static Material ChloroplatinicAcid;
     public static Material ZincRichSphalerite;
 
 

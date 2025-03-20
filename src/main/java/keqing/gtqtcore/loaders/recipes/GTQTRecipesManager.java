@@ -148,7 +148,6 @@ public class GTQTRecipesManager {
         Electrolyzer.init();
         CPULine.init();
         GTComponentsRemove.init();
-        PlatinumDeal.init();
         SwarmRecipeHandler.runRecipeGeneration();
         SwarmRecipeHandler.runRecipeBreeding();
         CircuitryMaterialChains.init();

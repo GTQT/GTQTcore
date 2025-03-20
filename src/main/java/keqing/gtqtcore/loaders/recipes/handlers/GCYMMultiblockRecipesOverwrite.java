@@ -4,41 +4,34 @@ import gregicality.multiblocks.common.metatileentities.GCYMMetaTileEntities;
 import gregtech.api.metatileentity.multiblock.CleanroomType;
 import gregtech.api.recipes.ModHandler;
 import gregtech.api.unification.material.MarkerMaterials;
-import gregtech.api.unification.stack.UnificationEntry;
 import gregtech.common.items.MetaItems;
 import gregtech.common.metatileentities.MetaTileEntities;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 import supercritical.common.metatileentities.SCMetaTileEntities;
 
-import static gregicality.multiblocks.api.fluids.GCYMFluidStorageKeys.MOLTEN;
 import static gregicality.multiblocks.api.unification.GCYMMaterials.*;
 import static gregtech.api.GTValues.*;
-import static gregtech.api.GTValues.LuV;
 import static gregtech.api.recipes.RecipeMaps.ASSEMBLY_LINE_RECIPES;
 import static gregtech.api.unification.material.Materials.*;
-import static gregtech.api.unification.ore.OrePrefix.circuit;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.common.items.MetaItems.*;
-import static gregtech.common.items.MetaItems.ELECTRIC_PUMP_IV;
-import static gregtech.common.metatileentities.MetaTileEntities.*;
 import static gregtech.common.metatileentities.MetaTileEntities.DISTILLATION_TOWER;
-import static gregtech.loaders.recipe.CraftingComponent.*;
+import static gregtech.common.metatileentities.MetaTileEntities.*;
 import static gregtech.loaders.recipe.CraftingComponent.HULL;
+import static gregtech.loaders.recipe.CraftingComponent.*;
 import static gregtech.loaders.recipe.MetaTileEntityLoader.registerMachineRecipe;
-import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.POLYMERIZATION_RECIPES;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.TJMaterials.Polyetheretherketone;
 import static keqing.gtqtcore.api.utils.GTQTUtil.CWT;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
-import static keqing.gtqtcore.common.items.GTQTMetaItems.DISK_22;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.*;
-import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.SONICATOR;
 
 public class GCYMMultiblockRecipesOverwrite {
     public static void init() {
         multiblocks();
     }
+
     private static void multiblocks() {
         /////////////////////////Fuck Machine
         ModHandler.removeRecipeByName("gcym:steam_engine");
@@ -656,7 +649,7 @@ public class GCYMMultiblockRecipesOverwrite {
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(CIRCUIT_GOOD_I, 8)
                 .input(CUTTER[IV], 4)
-                .input(LATHE[IV],4)
+                .input(LATHE[IV], 4)
                 .input(CONVEYOR_MODULE_IV, 8)
                 .input(ELECTRIC_MOTOR_IV, 8)
                 .input(toolHeadBuzzSaw, TungstenCarbide, 4)
@@ -682,7 +675,7 @@ public class GCYMMultiblockRecipesOverwrite {
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(CIRCUIT_GOOD_I, 8)
                 .input(EXTRACTOR[IV], 4)
-                .input(CANNER[IV],4)
+                .input(CANNER[IV], 4)
                 .input(ELECTRIC_PUMP_IV, 8)
                 .input(ELECTRIC_PISTON_IV, 8)
                 .input(spring, Iridium, 8)
@@ -708,7 +701,7 @@ public class GCYMMultiblockRecipesOverwrite {
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(CIRCUIT_GOOD_I, 8)
                 .input(CHEMICAL_BATH[IV], 4)
-                .input(ORE_WASHER[IV],4)
+                .input(ORE_WASHER[IV], 4)
                 .input(ELECTRIC_PUMP_IV, 8)
                 .input(CONVEYOR_MODULE_IV, 8)
                 .input(spring, MolybdenumDisilicide, 8)
@@ -734,7 +727,7 @@ public class GCYMMultiblockRecipesOverwrite {
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(CIRCUIT_GOOD_I, 8)
                 .input(CENTRIFUGE[IV], 4)
-                .input(THERMAL_CENTRIFUGE[IV],4)
+                .input(THERMAL_CENTRIFUGE[IV], 4)
                 .input(ELECTRIC_MOTOR_IV, 8)
                 .input(spring, MolybdenumDisilicide, 8)
                 .input(pipeHugeFluid, StainlessSteel, 8)
@@ -761,7 +754,7 @@ public class GCYMMultiblockRecipesOverwrite {
                 .input(BREWERY[IV], 2)
                 .input(FERMENTER[IV], 2)
                 .input(FLUID_HEATER[IV], 2)
-                .input(ELECTRIC_PUMP_IV,8)
+                .input(ELECTRIC_PUMP_IV, 8)
                 .input(CONVEYOR_MODULE_IV, 8)
                 .input(spring, Iridium, 8)
                 .input(screw, TungstenSteel, 8)
@@ -789,7 +782,7 @@ public class GCYMMultiblockRecipesOverwrite {
                 .input(FORMING_PRESS[IV], 2)
                 .input(FORGE_HAMMER[IV], 2)
                 .input(CIRCUIT_GOOD_I, 8)
-                .input(ELECTRIC_PISTON_IV,4)
+                .input(ELECTRIC_PISTON_IV, 4)
                 .input(CONVEYOR_MODULE_IV, 4)
                 .input(spring, Iridium, 8)
                 .input(screw, TungstenSteel, 8)
@@ -814,7 +807,7 @@ public class GCYMMultiblockRecipesOverwrite {
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(CIRCUIT_GOOD_I, 8)
                 .input(AUTOCLAVE[IV], 8)
-                .input(ELECTRIC_PUMP_IV,4)
+                .input(ELECTRIC_PUMP_IV, 4)
                 .input(CONVEYOR_MODULE_IV, 4)
                 .input(spring, Iridium, 8)
                 .input(screw, TungstenSteel, 8)
@@ -839,7 +832,7 @@ public class GCYMMultiblockRecipesOverwrite {
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(CIRCUIT_GOOD_I, 8)
                 .input(ASSEMBLER[IV], 8)
-                .input(ROBOT_ARM_IV,16)
+                .input(ROBOT_ARM_IV, 16)
                 .input(CONVEYOR_MODULE_IV, 8)
                 .input(spring, Iridium, 8)
                 .input(screw, TungstenSteel, 8)
@@ -864,9 +857,9 @@ public class GCYMMultiblockRecipesOverwrite {
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(CIRCUIT_GOOD_I, 8)
                 .input(ALLOY_SMELTER[EV], 8)
-                .input(VOLTAGE_COIL_EV,16)
+                .input(VOLTAGE_COIL_EV, 16)
                 .input(CONVEYOR_MODULE_EV, 4)
-                .input(ELECTRODE_GRAPHITE, 8)
+                .input(ELECTRODE_PLATINUM, 1)
                 .input(plate, TantalumCarbide, 16)
                 .input(plate, Rhodium, 16)
                 .input(wireFine, Ruridit, 32)
@@ -886,10 +879,10 @@ public class GCYMMultiblockRecipesOverwrite {
 
         ModHandler.removeRecipeByName("gcym:alloy_blast_smelter");
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(circuit, MarkerMaterials.Tier.IV,8)
+                .input(circuit, MarkerMaterials.Tier.IV, 8)
                 .input(ALLOY_SMELTER[EV], 8)
                 .input(ELECTRIC_FURNACE[EV], 8)
-                .input(VOLTAGE_COIL_EV,4)
+                .input(VOLTAGE_COIL_EV, 4)
                 .input(plate, TantalumCarbide, 6)
                 .input(plateDouble, TungstenSteel, 6)
                 .input(wireFine, Ruridit, 32)
@@ -911,7 +904,7 @@ public class GCYMMultiblockRecipesOverwrite {
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(CIRCUIT_GOOD_I, 8)
                 .input(MACERATOR[IV], 8)
-                .input(MetaItems.ELECTRIC_PISTON_IV,8)
+                .input(MetaItems.ELECTRIC_PISTON_IV, 8)
                 .input(MetaItems.ELECTRIC_MOTOR_IV, 8)
                 .input(plate, TantalumCarbide, 6)
                 .input(plateDouble, TungstenSteel, 6)

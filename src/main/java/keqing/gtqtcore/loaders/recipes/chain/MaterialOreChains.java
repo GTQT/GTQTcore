@@ -234,21 +234,6 @@ public class MaterialOreChains {
                 .blastFurnaceTemp(5600)
                 .buildAndRegister();
 
-
-
-        BLAST_RECIPES.recipeBuilder()
-                .duration(120)
-                .EUt(VA[IV])
-                .input(dust, RarestMetalMixture, 12)
-                .input(dust, SodiumChlorate, 10)
-                .fluidInputs(Oxygen.getFluid(1000))
-                .output(dust, IridiumMetalResidue, 5)
-                .output(dust, OsmiumTetroxide, 5)
-                .output(dust, Salt, 4)
-                .blastFurnaceTemp(5400)
-                .circuitMeta(1)
-                .buildAndRegister();
-
         BLAST_RECIPES.recipeBuilder()
                 .duration(100)
                 .EUt(VA[HV])

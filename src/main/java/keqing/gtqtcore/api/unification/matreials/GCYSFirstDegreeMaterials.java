@@ -981,11 +981,5 @@ public class GCYSFirstDegreeMaterials {
                 .color(0xa52222)
                 .components(Iron, 2, Oxygen, 3)
                 .build();
-
-        ChloroplatinicAcid = new Material.Builder(3632, gregtechId("chloroplatinicacid"))
-                .fluid()
-                .color(0xe04800)
-                .components(Hydrogen, 6, Chlorine, 6, Oxygen, 2, Platinum, 1)
-                .build();
     }
 }

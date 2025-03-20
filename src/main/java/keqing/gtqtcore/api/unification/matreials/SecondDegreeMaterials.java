@@ -176,51 +176,14 @@ public class SecondDegreeMaterials {
                 .color(0x4682B4)
                 .build();
 
-        //粗制铑金属粉
-        GTQTMaterials.RhodiumRaw = new Material.Builder(getMaterialsId(), gregtechId("rhodium_raw"))
-                .dust()
-                .color(0x40E0D0)
-                .build();
-
-        //铑盐粉
-        GTQTMaterials.RhodiumSalt = new Material.Builder(getMaterialsId(), gregtechId("rhodium_salt"))
-                .dust()
-                .color(0x8DB6CD)
-                .build();
-        //硝酸铑粉
-        GTQTMaterials.RhodiumNitrateSolution = new Material.Builder(getMaterialsId(), gregtechId("rhodium_nitrate_solution"))
-                .dust()
-                .color(0x8470FF)
-                .build();
-        //再沉淀铑粉
-        GTQTMaterials.RhodiumDo = new Material.Builder(getMaterialsId(), gregtechId("rhodium_do"))
-                .dust()
-                .color(0x8B7765)
-                .build();
-
-        //四氧化钌水溶
-        GTQTMaterials.RutheniumfOxide = new Material.Builder(getMaterialsId(), gregtechId("rutheniumf_oxide"))
-                .fluid().dust()
-                .color(0x8B4726)
-                .build();
-
-        //氧化钌
-        GTQTMaterials.RutheniumOxide = new Material.Builder(getMaterialsId(), gregtechId("ruthenium_oxide"))
-                .dust()
-                .color(0xA020F0)
-                .build();
-
-        //高纯超细氧化钌
-        GTQTMaterials.RutheniumgOxide = new Material.Builder(getMaterialsId(), gregtechId("rutheniumg_oxide"))
-                .dust()
-                .color(0xADFF2F)
-                .build();
-
-        //酸性铱溶液
-        GTQTMaterials.IridiumFluid = new Material.Builder(getMaterialsId(), gregtechId("Iridium_fluid"))
-                .dust()
-                .color(0xFFFF00)
-                .build();
+        getMaterialsId();
+        getMaterialsId();
+        getMaterialsId();
+        getMaterialsId();
+        getMaterialsId();
+        getMaterialsId();
+        getMaterialsId();
+        getMaterialsId();
 
         //硫化金处理
         //焙烧

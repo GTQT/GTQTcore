@@ -95,7 +95,7 @@ public class BoronChain {
                 .circuitMeta(1)
                 .fluidInputs(NitricAcid.getFluid(2000))
                 .fluidInputs(Oxygen.getFluid(1000))
-                .output(dust, SodiumNitrate, 10)
+                .output(dust, SodiumNitrate, 1)
                 .fluidOutputs(Water.getFluid(1000))
                 .EUt(60)
                 .duration(20)

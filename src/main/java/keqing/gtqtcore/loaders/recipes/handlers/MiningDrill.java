@@ -139,9 +139,9 @@ public class MiningDrill {
         GRAVITY_SEPARATOR(MAGMATIC_HYDROTHERMAL,Ulexite,Salt,RockSalt,Almandine,Sapphire,Redstone);
         GRAVITY_SEPARATOR(ALLUVIAL,Ruby,Silver,Bentonite,Olivine,Spessartine,Soapstone);
 
-        GRAVITY_SEPARATOR(BET1,Copper,Tin,Iron,Coal,Lead,Oilsands);
+        GRAVITY_SEPARATOR(BET1,Copper,Tin,Iron,Cobalt,Lead,Oilsands);
         GRAVITY_SEPARATOR(BET2,Apatite,Realgar,Trona,Nickel,Graphite,Calcite);
-        GRAVITY_SEPARATOR(BET3,Mica,RockSalt,Ruby,Lapis,Sapphire,Amethyst);
+        GRAVITY_SEPARATOR(BET3,Mica,Galena,Ruby,Lapis,Sapphire,Amethyst);
         GRAVITY_SEPARATOR(BET4,Opal,Redstone,Cinnabar,GarnetSand,Bauxite,Magnetite);
 
         GRAVITY_SEPARATOR(DIAPHRAGMATIC,Pyrolusite,Lepidolite,VanadiumMagnetite,Cryolite,Electrotine,Emerald);
