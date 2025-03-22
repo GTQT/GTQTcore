@@ -27,6 +27,8 @@ import net.minecraft.item.EnumDyeColor;
 
 import static gregtech.api.GTValues.*;
 import static gregtech.api.unification.material.Materials.*;
+import static keqing.gtqtcore.api.unification.GCYSMaterials.Adamantium;
+import static keqing.gtqtcore.api.unification.GCYSMaterials.Orichalcum;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.common.CommonProxy.GTQTCore_TO;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
@@ -1065,7 +1067,21 @@ public class GTQTMetaItem1 extends StandardMetaItem {
                         true, true, true,
                         true, true), new ItemFluidContainer())
                 .setMaxStackSize(1);
-        //生物基因模板
+
+        //纳米封装机器人 1200
+        WRAP_NANO_SWARM_CARBON = this.addItem(1200, "wrap_nano_swarm.carbon").addComponents(new WrapSwarmBehavior(120,1,Carbon)).setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        WRAP_NANO_SWARM_GOLD = this.addItem(1201, "wrap_nano_swarm.gold").addComponents(new WrapSwarmBehavior(240,1,Gold)).setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        WRAP_NANO_SWARM_PLATINUM = this.addItem(1202, "wrap_nano_swarm.platinum").addComponents(new WrapSwarmBehavior(480,2,Platinum)).setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        WRAP_NANO_SWARM_IRIDIUM = this.addItem(1203, "wrap_nano_swarm.iridium").addComponents(new WrapSwarmBehavior(720,2,Iridium)).setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        WRAP_NANO_SWARM_SAMARIUM = this.addItem(1204, "wrap_nano_swarm.samarium").addComponents(new WrapSwarmBehavior(900,3,Samarium)).setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        WRAP_NANO_SWARM_NAQUADAH = this.addItem(1205, "wrap_nano_swarm.naquadah").addComponents(new WrapSwarmBehavior(1200,3,Naquadah)).setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        WRAP_NANO_SWARM_DURANIUM = this.addItem(1206, "wrap_nano_swarm.duranium").addComponents(new WrapSwarmBehavior(3200,4,Duranium)).setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        WRAP_NANO_SWARM_ADAMANTIUM = this.addItem(1207, "wrap_nano_swarm.adamantium").addComponents(new WrapSwarmBehavior(4800,4,Adamantium)).setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        WRAP_NANO_SWARM_ORICHALCUM = this.addItem(1208, "wrap_nano_swarm.orichalcum").addComponents(new WrapSwarmBehavior(7200,5,Orichalcum)).setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        WRAP_NANO_SWARM_NEUTRONIUM = this.addItem(1209, "wrap_nano_swarm.neutronium").addComponents(new WrapSwarmBehavior(8400,5,Neutronium)).setCreativeTabs(CommonProxy.GTQTCore_BIO);
+
+
+         //生物基因模板
         BIO_0 = this.addItem(1500, "bio.0").setCreativeTabs(CommonProxy.GTQTCore_DISK);
         BIO_1 = this.addItem(1501, "bio.1").setCreativeTabs(CommonProxy.GTQTCore_DISK);
         BIO_2 = this.addItem(1502, "bio.2").setCreativeTabs(CommonProxy.GTQTCore_DISK);

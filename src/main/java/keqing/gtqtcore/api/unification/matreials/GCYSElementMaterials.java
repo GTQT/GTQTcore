@@ -58,33 +58,43 @@ public class GCYSElementMaterials {
                 .build();
 
         Orichalcum = new Material.Builder(getMaterialsId(), gregtechId("orichalcum"))
-                .ingot().fluid()
-                .fluidPipeProperties(16000,32000,true)
+                .ingot(6).fluid()
                 .color(0x72A0C1).iconSet(METALLIC)
                 .flags(GENERATE_FOIL,GENERATE_DENSE,GENERATE_FINE_WIRE,GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_RING, GENERATE_ROUND, GENERATE_BOLT_SCREW, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR,GENERATE_ROTOR)
                 .element(GTQTElements.Or)
-                .toolStats(ToolProperty.Builder.of(7.0F, 25.0F, 17000, 22).build())
+                .toolStats(ToolProperty.Builder.of(160.0F, 100.0F, 62000, 6)
+                        .attackSpeed(0.5F).enchantability(33).magnetic().unbreakable().build())
+                .rotorStats(22.0f, 12.0f, 600000)
+                .fluidPipeProperties(100_000, 4800, true, true, true, true)
                 .blast(9000, BlastProperty.GasTier.HIGH)
                 .build();
 
         Vibranium = new Material.Builder(getMaterialsId(), gregtechId("vibranium"))
-                .ingot().fluid().plasma()
+                .ingot(6).fluid().plasma()
                 .color(0xC880FF).iconSet(SHINY)
                 .flags(GENERATE_FOIL,GENERATE_DENSE,GENERATE_FINE_WIRE,GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_RING, GENERATE_ROUND, GENERATE_BOLT_SCREW, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR,GENERATE_ROTOR)
                 .element(GTQTElements.Vb)
+                .toolStats(ToolProperty.Builder.of(140.0F, 90.0F, 60000, 6)
+                        .attackSpeed(0.5F).enchantability(33).magnetic().unbreakable().build())
+                .rotorStats(22.0f, 12.0f, 580000)
+                .fluidPipeProperties(100_000, 4200, true, true, true, true)
                 .blast(4852, BlastProperty.GasTier.HIGH)
                 .build();
 
         Adamantium = new Material.Builder(getMaterialsId(), gregtechId("adamantium"))
-                .ingot().fluid().plasma()
+                .ingot(6).fluid().plasma()
                 .color(0xFF0040).iconSet(METALLIC)
                 .flags(GENERATE_FOIL,GENERATE_DENSE,GENERATE_FINE_WIRE,GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_RING, GENERATE_ROUND, GENERATE_BOLT_SCREW, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR,GENERATE_ROTOR)
                 .element(GTQTElements.Ad)
+                .toolStats(ToolProperty.Builder.of(160.0F, 100.0F, 62000, 6)
+                        .attackSpeed(0.5F).enchantability(33).magnetic().unbreakable().build())
+                .rotorStats(22.0f, 12.0f, 600000)
+                .fluidPipeProperties(100_000, 4800, true, true, true, true)
                 .blast(5225, BlastProperty.GasTier.HIGH)
                 .build();
 
         Taranium = new Material.Builder(getMaterialsId(), gregtechId("taranium"))
-                .ingot()
+                .ingot(6)
                 .fluid()
                 .plasma()
                 .itemPipeProperties(1920, 128)
@@ -103,6 +113,19 @@ public class GCYSElementMaterials {
                 .iconSet(RUBY)
                 .flags(GENERATE_FOIL,GENERATE_DENSE,GENERATE_FINE_WIRE,GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_RING, GENERATE_ROUND, GENERATE_BOLT_SCREW, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR,GENERATE_ROTOR)
                 .element(GTQTElements.Tu)
+                .build();
+
+        //Indium Uranium
+        IndiumUranium = new Material.Builder(getMaterialsId(), gregtechId("indium_uranium"))
+                .ingot(8).fluid().plasma()
+                .color(0xCD00CD).iconSet(METALLIC)
+                .flags(GENERATE_FOIL,GENERATE_DENSE,GENERATE_FINE_WIRE,GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_RING, GENERATE_ROUND, GENERATE_BOLT_SCREW, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR,GENERATE_ROTOR)
+                .element(GTQTElements.Iu)
+                .toolStats(ToolProperty.Builder.of(200.0F, 120.0F, 76384, 7)
+                        .attackSpeed(0.5F).enchantability(33).magnetic().unbreakable().build())
+                .rotorStats(28.0f, 14.0f, 786432)
+                .fluidPipeProperties(120_000, 6400, true, true, true, true)
+                .blast(9000, BlastProperty.GasTier.HIGH)
                 .build();
 
     }

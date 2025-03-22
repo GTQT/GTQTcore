@@ -41,6 +41,8 @@ import org.apache.commons.lang3.ArrayUtils;
 
 import java.util.List;
 
+import static gregtech.api.util.RelativeDirection.*;
+
 public class MetaTileEntityPrimitiveReactor extends NoEnergyMultiblockController {
 
     private static final TraceabilityPredicate SNOW_PREDICATE = new TraceabilityPredicate(
@@ -75,10 +77,10 @@ public class MetaTileEntityPrimitiveReactor extends NoEnergyMultiblockController
 
     @Override
     protected BlockPattern createStructurePattern() {
-        return FactoryBlockPattern.start()
-                .aisle("BBB", "XXX", "XXX")
-                .aisle("BBB", "X&X", "X#X").setRepeatable(1, 8)
+        FactoryBlockPattern pattern = FactoryBlockPattern.start(RIGHT,UP,FRONT)
                 .aisle("BBB", "XYX", "XXX")
+                .aisle("BBB", "X&X", "X#X").setRepeatable(1, 8)
+                .aisle("BBB", "XXX", "XXX")
                 .where('B', states(GTQTMetaBlocks.blockMultiblockCasing6.getState(BlockMultiblockCasing6.CasingType.REINFORCED_TREATED_WOOD_BOTTOM)))
                 .where('X', states(GTQTMetaBlocks.blockMultiblockCasing6.getState(BlockMultiblockCasing6.CasingType.REINFORCED_TREATED_WOOD_WALL))
                         .or(abilities(MultiblockAbility.IMPORT_ITEMS).setPreviewCount(1).setMaxGlobalLimited(3))
@@ -88,8 +90,8 @@ public class MetaTileEntityPrimitiveReactor extends NoEnergyMultiblockController
                 .where('#', air())
                 .where('&', air().or(SNOW_PREDICATE)) // this won't stay in the structure, and will be broken while
                 // running
-                .where('Y', selfPredicate())
-                .build();
+                .where('Y', selfPredicate());
+        return pattern.build();
     }
 
     @SideOnly(Side.CLIENT)

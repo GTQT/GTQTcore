@@ -10,13 +10,11 @@ import gregtech.api.gui.widgets.AdvancedTextWidget;
 import gregtech.api.gui.widgets.DynamicLabelWidget;
 import gregtech.api.gui.widgets.ImageWidget;
 import gregtech.api.gui.widgets.SlotWidget;
-import gregtech.api.items.itemhandlers.GTItemStackHandler;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockAbilityPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.unification.material.Material;
-import gregtech.client.renderer.texture.Textures;
 import gregtech.common.items.behaviors.AbstractMaterialPartBehavior;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockPart;
 import keqing.gtqtcore.api.capability.IElectrode;
@@ -48,33 +46,12 @@ public class MetaTileEntityElectrodeHatch extends MetaTileEntityMultiblockPart i
     long TotalTick;
     long workTime;
     int tier;
-    boolean work=false;
-
-    @Override
-    public <T> T getCapability(Capability<T> capability, EnumFacing side) {
-        return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY ?
-                CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(this.containerInventory) :
-                super.getCapability(capability, side);
-    }
-    @Override
-    public void onRemoval() {
-        super.onRemoval();
-        for (int i = 0; i < containerInventory.getSlots(); i++) {
-            var pos = getPos();
-            if(!containerInventory.getStackInSlot(i).isEmpty())
-            {
-                getWorld().spawnEntity(new EntityItem(getWorld(),pos.getX()+0.5,pos.getY()+0.5,pos.getZ()+0.5,containerInventory.getStackInSlot(i)));
-                containerInventory.extractItem(i,1,false);
-            }
-
-        }
-    }
+    boolean work = false;
 
     public MetaTileEntityElectrodeHatch(ResourceLocation metaTileEntityId, int tier) {
         super(metaTileEntityId, tier);
         this.tier = tier;
-        this.containerInventory = new NotifiableItemStackHandler(this, 1, null, false)
-        {
+        this.containerInventory = new NotifiableItemStackHandler(this, 1, null, false) {
             @Override
             public int getSlotLimit(int slot) {
                 return 1;
@@ -82,6 +59,24 @@ public class MetaTileEntityElectrodeHatch extends MetaTileEntityMultiblockPart i
 
         };
     }
+
+    @Override
+    public <T> T getCapability(Capability<T> capability, EnumFacing side) {
+        return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY ?
+                CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(this.containerInventory) :
+                super.getCapability(capability, side);
+    }
+
+    @Override
+    public void onRemoval() {
+        super.onRemoval();
+        var pos = getPos();
+        if (!containerInventory.getStackInSlot(0).isEmpty()) {
+            getWorld().spawnEntity(new EntityItem(getWorld(), pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, containerInventory.getStackInSlot(0)));
+            containerInventory.extractItem(0, 1, false);
+        }
+    }
+
     @Override
     public IItemHandlerModifiable getImportItems() {
         return this.containerInventory;
@@ -101,15 +96,16 @@ public class MetaTileEntityElectrodeHatch extends MetaTileEntityMultiblockPart i
 
     @Override
     protected ModularUI createUI(EntityPlayer entityPlayer) {
-        ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND, 176, 209)
-                .bindPlayerInventory(entityPlayer.inventory, 126)
-                .widget(new DynamicLabelWidget(7, 7, () -> "电极仓-等级："+tier))
-                .widget(new SlotWidget(this.containerInventory, 0, 88 - 9, 30, true, true, true)
+        ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND, 180, 240)
+                .widget(new DynamicLabelWidget(28, 12, () -> "电极仓-等级：" + tier))
+                .widget(new SlotWidget(this.containerInventory, 0, 8, 8, true, true, true)
                         .setBackgroundTexture(GuiTextures.SLOT)
                         .setChangeListener(this::markDirty)
                         .setTooltipText("请放入电极"))
-                .widget(new ImageWidget(88 - 9, 48, 18, 6, GuiTextures.BUTTON_POWER_DETAIL))
-                .widget((new AdvancedTextWidget(7, 68, this::addDisplayText, 2302755)).setMaxWidthLimit(181));
+                .widget(new ImageWidget(8, 26, 18, 6, GuiTextures.BUTTON_POWER_DETAIL))
+                .image(4, 28, 172, 128, GuiTextures.DISPLAY)
+                .widget((new AdvancedTextWidget(8, 32, this::addDisplayText, 16777215)).setMaxWidthLimit(180))
+                .bindPlayerInventory(entityPlayer.inventory, GuiTextures.SLOT, 8, 160);
         return builder.build(this.getHolder(), entityPlayer);
     }
 
@@ -123,9 +119,8 @@ public class MetaTileEntityElectrodeHatch extends MetaTileEntityMultiblockPart i
     }
 
     public void update() {
-        if(this.getController()==null)
-        {
-            work=false;
+        if (this.getController() == null) {
+            work = false;
         }
         // 确保槽位存在且不为空
         ItemStack stack = containerInventory.getStackInSlot(0);
@@ -144,8 +139,8 @@ public class MetaTileEntityElectrodeHatch extends MetaTileEntityMultiblockPart i
         }
 
         if (isItemValid(stack)) {
-            if(work)
-                if(getOffsetTimer()%tier==0)behavior.applyDamage(containerInventory.getStackInSlot(0), 1);
+            if (work)
+                if (getOffsetTimer() % tier == 0) behavior.applyDamage(containerInventory.getStackInSlot(0), 1);
 
             workTime = (long) AbstractMaterialPartBehavior.getPartDamage(containerInventory.getStackInSlot(0)) * (tier);
             TotalTick = (long) behavior.getPartMaxDurability(containerInventory.getStackInSlot(0)) * (tier);
@@ -170,13 +165,15 @@ public class MetaTileEntityElectrodeHatch extends MetaTileEntityMultiblockPart i
     protected void addDisplayText(List<ITextComponent> textList) {
         textList.add(new TextComponentString("已经工作: " + GTQTDateHelper.getTimeFromTicks(workTime)));
         textList.add(new TextComponentString("距离损坏: " + GTQTDateHelper.getTimeFromTicks(TotalTick - workTime)));
-        if(isAvailable())textList.add(new TextComponentString("电极材料: " + getElectrodeBehavior().getMaterial().getLocalizedName()));
-        if(isAvailable())textList.add(new TextComponentString("极型等级: " + getElectrodeBehavior().getElectrodeTier()));
+        if (isAvailable())
+            textList.add(new TextComponentString("电极材料: " + getElectrodeBehavior().getMaterial().getLocalizedName()));
+        if (isAvailable())
+            textList.add(new TextComponentString("极型等级: " + getElectrodeBehavior().getElectrodeTier()));
     }
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {
-        return new MetaTileEntityElectrodeHatch(metaTileEntityId,tier);
+        return new MetaTileEntityElectrodeHatch(metaTileEntityId, tier);
     }
 
     @Override
@@ -191,7 +188,7 @@ public class MetaTileEntityElectrodeHatch extends MetaTileEntityMultiblockPart i
 
     @Override
     public int getElectrodeTier() {
-        if(isAvailable()) return getElectrodeBehavior().getElectrodeTier();
+        if (isAvailable()) return getElectrodeBehavior().getElectrodeTier();
         return 0;
     }
 
@@ -217,8 +214,9 @@ public class MetaTileEntityElectrodeHatch extends MetaTileEntityMultiblockPart i
 
     @Override
     public void setWork(boolean w) {
-        work=w;
+        work = w;
     }
+
     @Override
     public Material getMaterial() {
         return ElectrodeBehavior.getInstanceFor(containerInventory.getStackInSlot(0)).getMaterial();

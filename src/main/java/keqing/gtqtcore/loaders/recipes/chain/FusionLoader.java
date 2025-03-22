@@ -463,6 +463,23 @@ public class FusionLoader {
 
         /* -------------------------------- MK4 -------------------------------- */
 
+        //  Indium (plasma) + Uranium (plasma) -> Indium Uranium (plasma)
+        FUSION_RECIPES.recipeBuilder()
+                .fluidInputs(Indium.getFluid(128))
+                .fluidInputs(Duranium.getFluid(16))
+                .fluidOutputs(IndiumUranium.getPlasma(144))
+                .EUt(VA[UHV])
+                .duration(12 * SECOND)
+                .EUToStart(940000000L) // MK4
+                .buildAndRegister();
+
+        PLASMA_GENERATOR_FUELS.recipeBuilder()
+                .fluidInputs(IndiumUranium.getPlasma(1))
+                .fluidOutputs(IndiumUranium.getFluid(1))
+                .EUt((int) V[EV])
+                .duration(32 * SECOND)
+                .buildAndRegister();
+
         //  Radon (plasma) + Nitrogen (plasma) -> Neptunium (plasma)
         FUSION_RECIPES.recipeBuilder()
                 .fluidInputs(Radon.getPlasma(100))

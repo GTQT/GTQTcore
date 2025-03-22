@@ -17,6 +17,7 @@ public class GTQTElements {
     public static final Element Ad = Elements.add(222, 580, -1, null, "Adamantium", "Ad", false);
     public static final Element Tn = Elements.add(321, 478, -1, null, "Taranium", "Tn", false);
     public static final Element Tu = Elements.add(349, 175, -1, null, "Tiberium", "Tu", false);
+    public static final Element Iu = Elements.add(222, 580, -1, null, "Iuranium", "Iu", false);
 
     public static final Element Plutonium244 = Elements.add(94, 152, -1, null, "Plutonium-244", "Pu-244", true);
     public static final Element Californium252 = Elements.add(98, 154, -1, null, "Californium-252", "Cf-252", true);

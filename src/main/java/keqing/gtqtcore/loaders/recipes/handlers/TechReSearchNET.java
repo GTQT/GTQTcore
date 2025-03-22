@@ -2616,7 +2616,7 @@ public class TechReSearchNET {
                 .input(ELECTRIC_MOTOR_LuV, 16)
                 .input(circuit, Tier.LuV, 8)
                 .input(FUEL_CELL_TURBINE[4], 4)
-                .input(plate, Plutonium239, 8)
+                .input(plate, Naquadah, 8)
                 .input(wireGtDouble, SamariumIronArsenicOxide, 8)
                 .input(wireGtDouble, NiobiumTitanium, 8)
                 .input(spring, RTMAlloy, 4)

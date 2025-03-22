@@ -258,6 +258,18 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem HIGH_REFLECT;
     public static MetaItem<?>.MetaValueItem REFLECT_GLASS;
     public static MetaItem<?>.MetaValueItem LASER_GROUP;
+
+    public static MetaItem<?>.MetaValueItem WRAP_NANO_SWARM_CARBON;
+    public static MetaItem<?>.MetaValueItem WRAP_NANO_SWARM_GOLD;
+    public static MetaItem<?>.MetaValueItem WRAP_NANO_SWARM_PLATINUM;
+    public static MetaItem<?>.MetaValueItem WRAP_NANO_SWARM_IRIDIUM;
+    public static MetaItem<?>.MetaValueItem WRAP_NANO_SWARM_SAMARIUM;
+    public static MetaItem<?>.MetaValueItem WRAP_NANO_SWARM_NAQUADAH;
+    public static MetaItem<?>.MetaValueItem WRAP_NANO_SWARM_DURANIUM;
+    public static MetaItem<?>.MetaValueItem WRAP_NANO_SWARM_ADAMANTIUM;
+    public static MetaItem<?>.MetaValueItem WRAP_NANO_SWARM_ORICHALCUM;
+    public static MetaItem<?>.MetaValueItem WRAP_NANO_SWARM_NEUTRONIUM;
+
     //  High Energy Physics items
     public static MetaItem<?>.MetaValueItem HYPOGEN_PLASMA_CONTAINMENT_CELL;
     public static MetaItem<?>.MetaValueItem ACTINIUM_SUPERHYDRIDE_PLASMA_CONTAINMENT_CELL;

@@ -5,14 +5,16 @@ import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.ModularUI;
-import gregtech.api.gui.widgets.*;
+import gregtech.api.gui.widgets.AdvancedTextWidget;
+import gregtech.api.gui.widgets.DynamicLabelWidget;
+import gregtech.api.gui.widgets.ImageWidget;
+import gregtech.api.gui.widgets.SlotWidget;
 import gregtech.api.items.itemhandlers.GTItemStackHandler;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockAbilityPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.unification.material.Material;
-import gregtech.api.unification.material.Materials;
 import gregtech.common.items.behaviors.AbstractMaterialPartBehavior;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockPart;
 import keqing.gtqtcore.api.capability.IRadiation;
@@ -43,7 +45,13 @@ public class MetaTileEntityRadiationHatch extends MetaTileEntityMultiblockPart i
     long TotalTick;
     long workTime;
     int tier;
-    boolean work=false;
+    boolean work = false;
+
+    public MetaTileEntityRadiationHatch(ResourceLocation metaTileEntityId, int tier) {
+        super(metaTileEntityId, tier);
+        this.tier = tier;
+        this.containerInventory = new GTItemStackHandler(this, 1);
+    }
 
     @Override
     public <T> T getCapability(Capability<T> capability, EnumFacing side) {
@@ -51,24 +59,15 @@ public class MetaTileEntityRadiationHatch extends MetaTileEntityMultiblockPart i
                 CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(this.containerInventory) :
                 super.getCapability(capability, side);
     }
+
     @Override
     public void onRemoval() {
         super.onRemoval();
-        for (int i = 0; i < containerInventory.getSlots(); i++) {
-            var pos = getPos();
-            if(!containerInventory.getStackInSlot(i).isEmpty())
-            {
-                getWorld().spawnEntity(new EntityItem(getWorld(),pos.getX()+0.5,pos.getY()+0.5,pos.getZ()+0.5,containerInventory.getStackInSlot(i)));
-                containerInventory.extractItem(i,1,false);
-            }
-
+        var pos = getPos();
+        if (!containerInventory.getStackInSlot(0).isEmpty()) {
+            getWorld().spawnEntity(new EntityItem(getWorld(), pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, containerInventory.getStackInSlot(0)));
+            containerInventory.extractItem(0, 1, false);
         }
-    }
-
-    public MetaTileEntityRadiationHatch(ResourceLocation metaTileEntityId, int tier) {
-        super(metaTileEntityId, tier);
-        this.tier = tier;
-        this.containerInventory = new GTItemStackHandler(this, 1);
     }
 
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
@@ -85,15 +84,16 @@ public class MetaTileEntityRadiationHatch extends MetaTileEntityMultiblockPart i
 
     @Override
     protected ModularUI createUI(EntityPlayer entityPlayer) {
-        ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND, 176, 209)
-                .bindPlayerInventory(entityPlayer.inventory, 126)
-                .widget(new DynamicLabelWidget(7, 7, () -> "放射仓-等级："+(tier-3)))
-                .widget(new SlotWidget(this.containerInventory, 0, 88 - 9, 30, true, true, true)
+        ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND, 180, 240)
+                .widget(new DynamicLabelWidget(28, 12, () -> "放射仓-等级：" + (tier - 3)))
+                .widget(new SlotWidget(this.containerInventory, 0, 8, 8, true, true, true)
                         .setBackgroundTexture(GuiTextures.SLOT)
                         .setChangeListener(this::markDirty)
                         .setTooltipText("请放入辐射元件"))
-                .widget(new ImageWidget(88 - 9, 48, 18, 6, GuiTextures.BUTTON_POWER_DETAIL))
-                .widget((new AdvancedTextWidget(7, 68, this::addDisplayText, 2302755)).setMaxWidthLimit(181));
+                .widget(new ImageWidget(8, 26, 18, 6, GuiTextures.BUTTON_POWER_DETAIL))
+                .image(4, 28, 172, 128, GuiTextures.DISPLAY)
+                .widget((new AdvancedTextWidget(8, 32, this::addDisplayText, 16777215)).setMaxWidthLimit(180))
+                .bindPlayerInventory(entityPlayer.inventory, GuiTextures.SLOT, 8, 160);
         return builder.build(this.getHolder(), entityPlayer);
     }
 
@@ -107,9 +107,8 @@ public class MetaTileEntityRadiationHatch extends MetaTileEntityMultiblockPart i
     }
 
     public void update() {
-        if(this.getController()==null)
-        {
-            work=false;
+        if (this.getController() == null) {
+            work = false;
         }
         // 确保槽位存在且不为空
         ItemStack stack = containerInventory.getStackInSlot(0);
@@ -128,10 +127,10 @@ public class MetaTileEntityRadiationHatch extends MetaTileEntityMultiblockPart i
         }
 
         if (isItemValid(stack)) {
-            if(work)behavior.applyDamage(containerInventory.getStackInSlot(0), tier-3);
+            if (work) behavior.applyDamage(containerInventory.getStackInSlot(0), tier - 3);
 
-            workTime = AbstractMaterialPartBehavior.getPartDamage(containerInventory.getStackInSlot(0)) / (tier-3);
-            TotalTick = behavior.getPartMaxDurability(containerInventory.getStackInSlot(0)) / (tier-3);
+            workTime = AbstractMaterialPartBehavior.getPartDamage(containerInventory.getStackInSlot(0)) / (tier - 3);
+            TotalTick = behavior.getPartMaxDurability(containerInventory.getStackInSlot(0)) / (tier - 3);
         } else {
             workTime = 0;
             TotalTick = 0;
@@ -153,13 +152,15 @@ public class MetaTileEntityRadiationHatch extends MetaTileEntityMultiblockPart i
     protected void addDisplayText(List<ITextComponent> textList) {
         textList.add(new TextComponentString("已经工作: " + GTQTDateHelper.getTimeFromTicks(workTime)));
         textList.add(new TextComponentString("距离损坏: " + GTQTDateHelper.getTimeFromTicks(TotalTick - workTime)));
-        if(isAvailable())textList.add(new TextComponentString("辐射物质: " + getRadiationBehavior().getMaterial().getLocalizedName()));
-        if(isAvailable())textList.add(new TextComponentString("当前辐射: " + getRadiationBehavior().getRadiation() + " x " + (tier-3)+" Sv"));
+        if (isAvailable())
+            textList.add(new TextComponentString("辐射物质: " + getRadiationBehavior().getMaterial().getLocalizedName()));
+        if (isAvailable())
+            textList.add(new TextComponentString("当前辐射: " + getRadiationBehavior().getRadiation() + " x " + (tier - 3) + " Sv"));
     }
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {
-        return new MetaTileEntityRadiationHatch(metaTileEntityId,tier);
+        return new MetaTileEntityRadiationHatch(metaTileEntityId, tier);
     }
 
     @Override
@@ -175,7 +176,7 @@ public class MetaTileEntityRadiationHatch extends MetaTileEntityMultiblockPart i
     @Override
     public int getRadiation() {
 
-        if(isAvailable())return getRadiationBehavior().getRadiation() * (tier-3);
+        if (isAvailable()) return getRadiationBehavior().getRadiation() * (tier - 3);
         return 0;
     }
 
@@ -186,7 +187,7 @@ public class MetaTileEntityRadiationHatch extends MetaTileEntityMultiblockPart i
 
     @Override
     public int getTier() {
-        return (tier-3);
+        return (tier - 3);
     }
 
     @Override
@@ -201,8 +202,9 @@ public class MetaTileEntityRadiationHatch extends MetaTileEntityMultiblockPart i
 
     @Override
     public void setWork(boolean w) {
-        work=w;
+        work = w;
     }
+
     @Override
     public Material getMaterial() {
         return RadiationBehavior.getInstanceFor(containerInventory.getStackInSlot(0)).getMaterial();

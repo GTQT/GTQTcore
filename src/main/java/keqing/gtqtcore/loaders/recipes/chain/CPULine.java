@@ -946,7 +946,7 @@ public class CPULine {
                 .EUt(7680)
                 .input(LAMINATION_IR)
                 .input(FIBER_BOARD, 2)
-                .input(foil, RhodiumPlatedPalladium, 8)
+                .input(foil, Samarium, 8)
                 .fluidInputs(Polybenzimidazole.getFluid(576))
                 .fluidInputs(PolyvinylButyral.getFluid(576))
                 .output(IMPREGNATED_MULTILAYER_FIBER, 2)

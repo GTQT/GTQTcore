@@ -59,14 +59,10 @@ public class MetaTileEntityDrillHeadHatch extends MetaTileEntityMultiblockPart i
     @Override
     public void onRemoval() {
         super.onRemoval();
-        for (int i = 0; i < containerInventory.getSlots(); i++) {
-            var pos = getPos();
-            if(!containerInventory.getStackInSlot(i).isEmpty())
-            {
-                getWorld().spawnEntity(new EntityItem(getWorld(),pos.getX()+0.5,pos.getY()+0.5,pos.getZ()+0.5,containerInventory.getStackInSlot(i)));
-                containerInventory.extractItem(i,1,false);
-            }
-
+        var pos = getPos();
+        if (!containerInventory.getStackInSlot(0).isEmpty()) {
+            getWorld().spawnEntity(new EntityItem(getWorld(), pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, containerInventory.getStackInSlot(0)));
+            containerInventory.extractItem(0, 1, false);
         }
     }
 
@@ -91,18 +87,18 @@ public class MetaTileEntityDrillHeadHatch extends MetaTileEntityMultiblockPart i
 
     @Override
     protected ModularUI createUI(EntityPlayer entityPlayer) {
-        ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND, 176, 209)
-                .bindPlayerInventory(entityPlayer.inventory, 126)
-                .widget(new DynamicLabelWidget(7, 7, () -> "钻头仓-等级："+tier))
-                .widget(new SlotWidget(this.containerInventory, 0, 88 - 9, 30, true, true, true)
+        ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND, 180, 240)
+                .widget(new DynamicLabelWidget(28, 12, () -> "钻头仓-等级：" + tier))
+                .widget(new SlotWidget(this.containerInventory, 0, 8, 8, true, true, true)
                         .setBackgroundTexture(GuiTextures.SLOT)
                         .setChangeListener(this::markDirty)
                         .setTooltipText("请放入钻头"))
-                .widget(new ImageWidget(88 - 9, 48, 18, 6, GuiTextures.BUTTON_POWER_DETAIL))
-                .widget((new AdvancedTextWidget(7, 68, this::addDisplayText, 2302755)).setMaxWidthLimit(181));
+                .widget(new ImageWidget(8, 26, 18, 6, GuiTextures.BUTTON_POWER_DETAIL))
+                .image(4, 28, 172, 128, GuiTextures.DISPLAY)
+                .widget((new AdvancedTextWidget(8, 32, this::addDisplayText, 16777215)).setMaxWidthLimit(180))
+                .bindPlayerInventory(entityPlayer.inventory, GuiTextures.SLOT, 8, 160);
         return builder.build(this.getHolder(), entityPlayer);
     }
-
     @SideOnly(Side.CLIENT)
     @Override
     public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
