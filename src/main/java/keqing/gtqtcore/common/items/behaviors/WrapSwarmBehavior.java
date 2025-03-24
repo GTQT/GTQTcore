@@ -47,6 +47,7 @@ public class WrapSwarmBehavior extends AbstractMaterialPartBehavior implements I
         int damage = getPartDamage(stack);
         lines.add(I18n.format("metaitem.tool.tooltip.durability", maxDurability - damage, maxDurability));
         lines.add(I18n.format("metaitem.tool.tooltip.primary_material", material.getLocalizedName()));
+        lines.add(I18n.format("metaitem.tool.tooltip.tier",WrapSwarmTier));
     }
     @Override
     public int getPartMaxDurability(ItemStack itemStack) {

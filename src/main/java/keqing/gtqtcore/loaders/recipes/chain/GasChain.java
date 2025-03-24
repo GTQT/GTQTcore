@@ -2,6 +2,8 @@ package keqing.gtqtcore.loaders.recipes.chain;
 
 import gregtech.api.fluids.store.FluidStorageKeys;
 
+import static gregtech.api.GTValues.MV;
+import static gregtech.api.GTValues.VA;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
@@ -35,13 +37,13 @@ public class GasChain {
 
         DISTILLATION_RECIPES.recipeBuilder()
                 .fluidInputs(BetAir.getFluid(FluidStorageKeys.GAS, 10000))
-                .fluidOutputs(Methane.getFluid(72000))
-                .fluidOutputs(CoalGas.getFluid(10000))
-                .fluidOutputs(HydrogenSulfide.getFluid(7500))
-                .fluidOutputs(SulfurDioxide.getFluid(7500))
-                .fluidOutputs(Helium3.getFluid(2500))
-                .fluidOutputs(Neon.getFluid(500))
-                .fluidOutputs(Radon.getFluid(500))
+                .fluidOutputs(Methane.getFluid(7200))
+                .fluidOutputs(CoalGas.getFluid(1000))
+                .fluidOutputs(HydrogenSulfide.getFluid(750))
+                .fluidOutputs(SulfurDioxide.getFluid(750))
+                .fluidOutputs(Helium3.getFluid(250))
+                .fluidOutputs(Neon.getFluid(50))
+                .fluidOutputs(Radon.getFluid(50))
                 .duration(2000).EUt(120).buildAndRegister();
 
         //火星
@@ -53,14 +55,14 @@ public class GasChain {
 
         DISTILLATION_RECIPES.recipeBuilder()
                 .fluidInputs(MarsAir.getFluid(FluidStorageKeys.GAS, 10000))
-                .fluidOutputs(CarbonDioxide.getFluid(72000))
-                .fluidOutputs(Argon.getFluid(10000))
-                .fluidOutputs(Oxygen.getFluid(7500))
-                .fluidOutputs(Helium3.getFluid(7500))
-                .fluidOutputs(Radon.getFluid(2500))
-                .fluidOutputs(Hydrogen.getFluid(500))
-                .fluidOutputs(Nitrogen.getFluid(500))
-                .fluidOutputs(MagicGas.getFluid(500))
+                .fluidOutputs(CarbonDioxide.getFluid(7200))
+                .fluidOutputs(Argon.getFluid(1000))
+                .fluidOutputs(Oxygen.getFluid(750))
+                .fluidOutputs(Helium3.getFluid(750))
+                .fluidOutputs(Radon.getFluid(250))
+                .fluidOutputs(Hydrogen.getFluid(50))
+                .fluidOutputs(Nitrogen.getFluid(50))
+                .fluidOutputs(MagicGas.getFluid(50))
                 .duration(2000).EUt(120).buildAndRegister();
 
         //深渊

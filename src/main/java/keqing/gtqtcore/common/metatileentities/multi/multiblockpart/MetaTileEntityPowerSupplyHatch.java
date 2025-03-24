@@ -10,6 +10,8 @@ import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.ModularUI;
 import gregtech.api.gui.widgets.AdvancedTextWidget;
 import gregtech.api.gui.widgets.DynamicLabelWidget;
+import gregtech.api.gui.widgets.ImageWidget;
+import gregtech.api.gui.widgets.SlotWidget;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockAbilityPart;
@@ -153,13 +155,13 @@ public class MetaTileEntityPowerSupplyHatch extends MetaTileEntityMultiblockPart
 
     @Override
     protected ModularUI createUI(EntityPlayer entityPlayer) {
-        ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND, 176, 209)
-                .bindPlayerInventory(entityPlayer.inventory, 126)
-                .widget(new DynamicLabelWidget(7, 7, () -> "超导矩阵模块"))
-                .widget((new AdvancedTextWidget(7, 17, this::addDisplayText, 2302755)).setMaxWidthLimit(181));
+        ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND, 180, 240)
+                .widget(new DynamicLabelWidget(12, 12, () -> "超导矩阵模块："))
+                .image(4, 28, 172, 128, GuiTextures.DISPLAY)
+                .widget((new AdvancedTextWidget(8, 32, this::addDisplayText, 16777215)).setMaxWidthLimit(180))
+                .bindPlayerInventory(entityPlayer.inventory, GuiTextures.SLOT, 8, 160);
         return builder.build(this.getHolder(), entityPlayer);
     }
-
     protected void addDisplayText(List<ITextComponent> textList) {
         textList.add(new TextComponentString("类型： " + type));
         textList.add(new TextComponentString("等级: " + level));

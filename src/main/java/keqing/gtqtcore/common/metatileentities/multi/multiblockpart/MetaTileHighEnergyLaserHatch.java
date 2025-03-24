@@ -44,7 +44,7 @@ import static gregtech.api.GTValues.VN;
 import static keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility.LASER_INPUT;
 import static keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility.LASER_OUTPUT;
 
-public class MetaTileHEL extends MetaTileEntityMultiblockNotifiablePart implements IMultiblockAbilityPart<ILaser>, ILaser {
+public class MetaTileHighEnergyLaserHatch extends MetaTileEntityMultiblockNotifiablePart implements IMultiblockAbilityPart<ILaser>, ILaser {
 
     public int Amperage;
     public int Voltage;
@@ -59,7 +59,7 @@ public class MetaTileHEL extends MetaTileEntityMultiblockNotifiablePart implemen
     BlockPos machinePos;
     boolean findMachine = false;
 
-    public MetaTileHEL(ResourceLocation metaTileEntityId, int tier, boolean isExportHatch) {
+    public MetaTileHighEnergyLaserHatch(ResourceLocation metaTileEntityId, int tier, boolean isExportHatch) {
         super(metaTileEntityId, tier, isExportHatch);
         this.tier = tier;
         this.MaxLaser = V[tier] * 16;
@@ -105,7 +105,7 @@ public class MetaTileHEL extends MetaTileEntityMultiblockNotifiablePart implemen
     }
 
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
-        return new MetaTileHEL(this.metaTileEntityId, this.getTier(), this.isExportHatch);
+        return new MetaTileHighEnergyLaserHatch(this.metaTileEntityId, this.getTier(), this.isExportHatch);
     }
 
     public boolean checkMachine(BlockPos pos) {
@@ -131,7 +131,7 @@ public class MetaTileHEL extends MetaTileEntityMultiblockNotifiablePart implemen
                 if (laserTranslation.isWorkingEnabled() && laserTranslation.isStructureFormed()) {
                     return true;
                 }
-            } else if (mte instanceof MetaTileHEL hel) {
+            } else if (mte instanceof MetaTileHighEnergyLaserHatch hel) {
                 return hel.isExportHatch;
             }
         }
@@ -162,7 +162,7 @@ public class MetaTileHEL extends MetaTileEntityMultiblockNotifiablePart implemen
         // 对于输入来讲，需要与自己的绑定的输出通讯
         if (!findMachine) {
             if (findTarget) {
-                if (GTUtility.getMetaTileEntity(this.getWorld(), TargetPos) instanceof MetaTileHEL target) {
+                if (GTUtility.getMetaTileEntity(this.getWorld(), TargetPos) instanceof MetaTileHighEnergyLaserHatch target) {
                     if (target.isExportHatch) {
                         return;
                     }
@@ -197,7 +197,7 @@ public class MetaTileHEL extends MetaTileEntityMultiblockNotifiablePart implemen
 
                 MetaTileEntity metaTileEntity = GTUtility.getMetaTileEntity(this.getWorld(), posToCheck);
 
-                if (metaTileEntity instanceof MetaTileHEL target) {
+                if (metaTileEntity instanceof MetaTileHighEnergyLaserHatch target) {
                     TargetPos = posToCheck;
                     if (!target.isExportHatch && !target.findMachine) {
                         findTarget = true;
@@ -209,15 +209,15 @@ public class MetaTileHEL extends MetaTileEntityMultiblockNotifiablePart implemen
 
             }
         } else {
-            if (GTUtility.getMetaTileEntity(this.getWorld(), TargetPos) instanceof MetaTileHEL metaTileHEL) {
-                if (metaTileHEL.isExportHatch) {
+            if (GTUtility.getMetaTileEntity(this.getWorld(), TargetPos) instanceof MetaTileHighEnergyLaserHatch metaTileHighEnergyLaserHatch) {
+                if (metaTileHighEnergyLaserHatch.isExportHatch) {
                     return;
                 }
                 if (Laser > 0) {
                     writeCustomData(GregtechDataCodes.UPDATE_PARTICLE, this::writeParticles);
                 }
-                metaTileHEL.setLaser(Laser);
-                metaTileHEL.setMachinePos(this.getPos());
+                metaTileHighEnergyLaserHatch.setLaser(Laser);
+                metaTileHighEnergyLaserHatch.setMachinePos(this.getPos());
                 // 目标最大容量就是他的最大额定接收
             } else if (GTUtility.getMetaTileEntity(this.getWorld(), TargetPos) instanceof MetaTileLaserBooster metaTileLaserBooster) {
                 metaTileLaserBooster.addLaser(Laser);

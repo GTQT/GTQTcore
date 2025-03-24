@@ -109,7 +109,6 @@ public class CopyRecipesHandlers {
             RecipeBuilder<?> builder;
 
             builder = ELECTROBATH.recipeBuilder()
-                    .circuitMeta(2)
                     .duration(baseDuration)
                     .tier(tier)
                     .EUt(EUt);

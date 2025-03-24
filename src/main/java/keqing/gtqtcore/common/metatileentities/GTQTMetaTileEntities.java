@@ -129,7 +129,7 @@ public class GTQTMetaTileEntities {
     public static final MetaTileEntityReinforcedRotorHolder[] REINFORCED_ROTOR_HOLDER = new MetaTileEntityReinforcedRotorHolder[14];
     public static final MetaTileEntityCompressedFusionReactor[] COMPRESSED_FUSION_REACTOR = new MetaTileEntityCompressedFusionReactor[6];
     public static MetaTileEntity[] MULTI_QUANTUM_TANK = new MetaTileEntity[10];
-    public static int currentMultiPartID = 16120;
+    public static MetaTileEntityWrapSwarmHatch[] SWARM_HATCH = new MetaTileEntityWrapSwarmHatch[5];
     //////////////////////////
     public static MetaTileEntityBioHatch BIO_HATCH;
     public static MetaTileEntityHeatHatch[] HEAT_HATCH = new MetaTileEntityHeatHatch[5];
@@ -314,8 +314,8 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityAssemblyLine ASSEMBLY_LINE;
     public static MetaTileEntityKQCCComputationHatch[] KQCC_COMPUTATION_HATCH_RECEIVER = new MetaTileEntityKQCCComputationHatch[GTValues.V.length - 1];
     public static MetaTileEntityKQCCComputationHatch[] KQCC_COMPUTATION_HATCH_TRANSMITTER = new MetaTileEntityKQCCComputationHatch[GTValues.V.length - 1];
-    public static MetaTileHEL[] LASER_INPUT = new MetaTileHEL[GTValues.V.length - 1];
-    public static MetaTileHEL[] LASER_OUTPUT = new MetaTileHEL[GTValues.V.length - 1];
+    public static MetaTileHighEnergyLaserHatch[] LASER_INPUT = new MetaTileHighEnergyLaserHatch[GTValues.V.length - 1];
+    public static MetaTileHighEnergyLaserHatch[] LASER_OUTPUT = new MetaTileHighEnergyLaserHatch[GTValues.V.length - 1];
     public static MetaTileEntityMSF MSF;
     public static MetaTileEntityNicollDysonBeamer NICOLL_DYSON_BEAMER;
     public static MetaTileEntityDimensionallyBiomimeticFactory DIMENSIONAL_BIOMIMETIC_FACTORY;
@@ -415,8 +415,8 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityISO2CleaningMaintenanceHatch ISO2_CLEANING_MAINTENANCE_HATCH;
     public static MetaTileEntityISO1CleaningMaintenanceHatch ISO1_CLEANING_MAINTENANCE_HATCH;
 
-    private static int startId = 15600;
-    private static final int END_ID = startId + 400;
+    private static int startId = 16000;
+    private static final int END_ID = startId + 1000;
 
     public static void simpleTiredInit(MetaTileEntity[] tileEntities, IntFunction<MetaTileEntity> function, IntSupplier idSupplier, IntPredicate canAdd) {
         for (int i = 0; i < GTValues.V.length; i++) {
@@ -426,10 +426,7 @@ public class GTQTMetaTileEntities {
         }
     }
 
-    private static int nextMultiPartID() {
-        currentMultiPartID++;
-        return currentMultiPartID;
-    }
+
 
     public static void simpleTiredInit(MetaTileEntity[] tileEntities, IntFunction<MetaTileEntity> function, IntSupplier idSupplier) {
         simpleTiredInit(tileEntities, function, idSupplier, (i) -> true);
@@ -820,8 +817,8 @@ public class GTQTMetaTileEntities {
             KQCC_COMPUTATION_HATCH_TRANSMITTER[i] = registerMetaTileEntity(15415 + i - 1, new MetaTileEntityKQCCComputationHatch(gtqtcoreId("kqcccomputation_hatch.transmitter." + tierName), i, true));
             MICROWAVE_ENERGY_RECEIVER[i] = registerMetaTileEntity(15430 + i - 1, new MetaTileEntityMicrowaveEnergyReceiver(gtqtcoreId("microwave_energy_receiver." + tierName), i));
 
-            LASER_INPUT[i] = registerMetaTileEntity(15445 + i - 1, new MetaTileHEL(gtqtcoreId("laser.input." + tierName), i, false));
-            LASER_OUTPUT[i] = registerMetaTileEntity(15460 + i - 1, new MetaTileHEL(gtqtcoreId("laser.output." + tierName), i, true));
+            LASER_INPUT[i] = registerMetaTileEntity(15445 + i - 1, new MetaTileHighEnergyLaserHatch(gtqtcoreId("laser.input." + tierName), i, false));
+            LASER_OUTPUT[i] = registerMetaTileEntity(15460 + i - 1, new MetaTileHighEnergyLaserHatch(gtqtcoreId("laser.output." + tierName), i, true));
         }
         LASER_BOOSTER[0] = registerMetaTileEntity(15475, new MetaTileLaserBooster(gtqtcoreId("laser_booster." + LuV), LuV));
         LASER_BOOSTER[1] = registerMetaTileEntity(15476, new MetaTileLaserBooster(gtqtcoreId("laser_booster." + ZPM), ZPM));
@@ -947,6 +944,13 @@ public class GTQTMetaTileEntities {
             ));
         }
 
+        for (int i = 0; i < 5; i++) {
+            int id = 15600 + i;
+            String name = String.format("swarm_hatch.%s", i);
+            SWARM_HATCH[i] = registerMetaTileEntity(id, new MetaTileEntityWrapSwarmHatch(gtqtcoreId(name), i + 5));
+        }
+        //16000
+        //原版转子拓展
         ROTOR_HOLDER[6] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityRotorHolder(gtqtcoreId("rotor_holder.uhv"), GTValues.UHV));
         ROTOR_HOLDER[7] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityRotorHolder(gtqtcoreId("rotor_holder.uev"), GTValues.UEV));
         ROTOR_HOLDER[8] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityRotorHolder(gtqtcoreId("rotor_holder.uiv"), GTValues.UIV));
@@ -1073,6 +1077,6 @@ public class GTQTMetaTileEntities {
         NONUPLE_EXPORT_FLUID_HATCH[2] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedMultiFluidHatch(gtqtcoreId("fluid_hatch.export_9x.uxv"), UXV, 9, true));
         NONUPLE_EXPORT_FLUID_HATCH[3] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedMultiFluidHatch(gtqtcoreId("fluid_hatch.export_9x.opv"), OpV, 9, true));
 
-        simpleTiredInit(CREATIVE_ENERGY_HATCHES, (i) -> new MetaTileEntityCreativeEnergyHatch(gtqtcoreId("creative_energy_hatch." + GTValues.VN[i].toLowerCase()), i), GTQTMetaTileEntities::nextMultiPartID);
+        simpleTiredInit(CREATIVE_ENERGY_HATCHES, (i) -> new MetaTileEntityCreativeEnergyHatch(gtqtcoreId("creative_energy_hatch." + GTValues.VN[i].toLowerCase()), i), GTQTMetaTileEntities::getMaterialsId);
     }
 }

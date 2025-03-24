@@ -711,6 +711,17 @@ metaitem.wrap.supracausal_smd.diode.name=封装自旋网络载波极管
 metaitem.wrap.supracausal_smd.diode.tooltip=用于进行批量组装
 metaitem.wrap.supracausal_smd.inductor.name=封装超对称共形偏振器
 metaitem.wrap.supracausal_smd.inductor.tooltip=用于进行批量组装
+
+metaitem.wrap_nano_swarm.carbon.name=纳米封装集群芯片
+metaitem.wrap_nano_swarm.gold.name=纳米封装集群芯片
+metaitem.wrap_nano_swarm.platinum.name=纳米封装集群芯片
+metaitem.wrap_nano_swarm.iridium.name=纳米封装集群芯片
+metaitem.wrap_nano_swarm.samarium.name=纳米封装集群芯片
+metaitem.wrap_nano_swarm.naquadah.name=纳米封装集群芯片
+metaitem.wrap_nano_swarm.duranium.name=纳米封装集群芯片
+metaitem.wrap_nano_swarm.adamantium.name=纳米封装集群芯片
+metaitem.wrap_nano_swarm.orichalcum.name=纳米封装集群芯片
+metaitem.wrap_nano_swarm.neutronium.name=纳米封装集群芯片
 #  Recipe Properties
 gtqtcore.recipe.temperature=温度:%,d K
 gtqtcore.recipe.glass_tier=玻璃等级:%s
@@ -2669,6 +2680,11 @@ gtqtcore.machine.rotor_holder.uxv.name=极限转子固定器（§eUXV§r）
 gtqtcore.machine.rotor_holder.opv.name=极限转子固定器（§9OpV§r）
 gtqtcore.machine.rotor_holder.max.name=极限转子固定器（§c§lMAX§r）
 
+gtqtcore.machine.swarm_hatch.0.name=纳米封装芯片仓 I
+gtqtcore.machine.swarm_hatch.1.name=纳米封装芯片仓 II
+gtqtcore.machine.swarm_hatch.2.name=纳米封装芯片仓 III
+gtqtcore.machine.swarm_hatch.3.name=纳米封装芯片仓 IV
+gtqtcore.machine.swarm_hatch.4.name=纳米封装芯片仓 V
 ###  Energy Hatches
 gtqtcore.machine.energy_hatch.input_4a.uev.name=4安能源仓（§aUEV§r）
 gtqtcore.machine.energy_hatch.input_4a.uiv.name=4安能源仓（§2UIV§r）
@@ -6271,6 +6287,7 @@ cover.me_machine_controller.title=ME 机器控制器
 cover.me_machine_controller.mode.more_than=超过
 cover.me_machine_controller.mode.less_than=少于
 ##  Universal Texts
+metaitem.tool.tooltip.tier=§等级：§e%s
 gtqtcore.universal.tooltip.max_parallel=最大并行数：§e%s§7
 gtqtcore.universal.tooltip.get_parallel_by_voltage=根据输入电压获得并行。
 gtqtcore.universal.tooltip.laser_input=允许使用§b激光靶仓§7替代能源仓，且二者可以并存。

@@ -491,7 +491,7 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         POS_BINDING_CARD = this.addItem(417, "pos_binding_card").setMaxStackSize(1).addComponents(new PosBindingCardBehaviors()).setCreativeTabs(CommonProxy.GTQTCore_TAB);
 
         DEBUG_STRUCTURE_WRITER = this.addItem(418, "debug.structure_writer").addComponents(StructureWriteBehavior.INSTANCE).setCreativeTabs(GTQTCore_TO);
-        DEBUG_STRUCTURE_BUILDER = this.addItem(419, "debug.structure_builder").addComponents(new MultiblockBuilderBehavior()).setCreativeTabs(GTQTCore_TO);
+        DEBUG_STRUCTURE_BUILDER = this.addItem(419, "debug.structure_builder").addComponents(new MEMultiblockBuilderBehavior()).setCreativeTabs(GTQTCore_TO);
 
         CARBON_ALLOTROPE_MIXTURE = this.addItem(420, "mixture.carbon_allotrope").setCreativeTabs(CommonProxy.GTQTCore_CH);
         GRAPHENE_ALIGNED_CNT = this.addItem(421, "cnt.graphene_aligned").setCreativeTabs(CommonProxy.GTQTCore_CH);

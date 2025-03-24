@@ -725,6 +725,16 @@ metaitem.wrap.supracausal_smd.diode.tooltip=Used for batch assembly
 metaitem.wrap.supracausal_smd.inductor.name=Encapsulated Supersymmetric Conformal Polarizer
 metaitem.wrap.supracausal_smd.inductor.tooltip=Used for batch assembly
 
+metaitem.wrap_nano_swarm.carbon.name=Nano-packaged cluster chips
+metaitem.wrap_nano_swarm.gold.name=Nano-packaged cluster chips
+metaitem.wrap_nano_swarm.platinum.name=Nano-packaged cluster chips
+metaitem.wrap_nano_swarm.iridium.name=Nano-packaged cluster chips
+metaitem.wrap_nano_swarm.samarium.name=Nano-packaged cluster chips
+metaitem.wrap_nano_swarm.naquadah.name=Nano-packaged cluster chips
+metaitem.wrap_nano_swarm.duranium.name=Nano-packaged cluster chips
+metaitem.wrap_nano_swarm.adamantium.name=Nano-packaged cluster chips
+metaitem.wrap_nano_swarm.orichalcum.name=Nano-packaged cluster chips
+metaitem.wrap_nano_swarm.neutronium.name=Nano-packaged cluster chips
 # Recipe Properties
 gtqtcore.recipe.temperature=Temperature: %,d K
 gtqtcore.recipe.glass_tier=Glass Grade: %s
@@ -2683,6 +2693,12 @@ gtqtcore.machine.rotor_holder.uiv.name=Extreme Rotor Holder (§2UIV§r)
 gtqtcore.machine.rotor_holder.uxv.name=Extreme Rotor Holder (§eUXV§r)
 gtqtcore.machine.rotor_holder.opv.name=Extreme Rotor Holder (§9OpV§r)
 gtqtcore.machine.rotor_holder.max.name=Extreme Rotor Holder (§c§lMAX§r)
+
+gtqtcore.machine.swarm_hatch.0.name=Nano-packaged Chip Hatch I
+gtqtcore.machine.swarm_hatch.1.name=Nano-packaged Chip Hatch II
+gtqtcore.machine.swarm_hatch.2.name=Nano-packaged Chip Hatch III
+gtqtcore.machine.swarm_hatch.3.name=Nano-packaged Chip Hatch IV
+gtqtcore.machine.swarm_hatch.4.name=Nano-packaged Chip Hatch V
 
 gtqtcore.machine.energy_hatch.input_4a.uev.name=4A Energy Hatch (§aUEV§r)
 gtqtcore.machine.energy_hatch.input_4a.uiv.name=4A Energy Hatch (§2UIV§r)
@@ -6281,6 +6297,7 @@ cover.me_machine_controller.title=ME Machine Controller
 cover.me_machine_controller.mode.more_than=More than
 cover.me_machine_controller.mode.less_than=Less than
 ## Universal Texts
+metaitem.tool.tooltip.tier=§Tier：§e%s
 gtqtcore.universal.tooltip.max_parallel=Maximum Parallel: §e%s§7
 gtqtcore.universal.tooltip.get_parallel_by_voltage=Obtain parallel by input voltage.
 gtqtcore.universal.tooltip.laser_input=Allows using §bLaser Target Chamber§7 as an alternative to energy warehouse, both can coexist.
