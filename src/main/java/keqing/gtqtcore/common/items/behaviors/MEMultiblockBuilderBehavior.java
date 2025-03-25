@@ -2,11 +2,6 @@ package keqing.gtqtcore.common.items.behaviors;
 
 import appeng.api.AEApi;
 import appeng.api.config.Actionable;
-import appeng.api.networking.IGrid;
-import appeng.api.networking.crafting.ICraftingGrid;
-import appeng.api.networking.crafting.ICraftingJob;
-import appeng.api.networking.crafting.ICraftingLink;
-import appeng.api.networking.crafting.ICraftingRequester;
 import appeng.api.networking.security.IActionSource;
 import appeng.api.storage.IMEMonitor;
 import appeng.api.storage.channels.IItemStorageChannel;
@@ -34,7 +29,6 @@ import gregtech.common.metatileentities.MetaTileEntities;
 import gregtech.integration.jei.multiblock.MultiblockInfoRecipeWrapper;
 import keqing.gtqtcore.api.utils.GTQTLog;
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -53,10 +47,6 @@ import net.minecraft.world.World;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 
 import static gregtech.common.metatileentities.MetaTileEntities.ENERGY_INPUT_HATCH;
 
@@ -610,5 +600,4 @@ public class MEMultiblockBuilderBehavior implements IItemBehaviour, ItemUIFactor
             lines.add(GuiText.Unlinked.getLocal());
         }
     }
-
 }

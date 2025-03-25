@@ -12,7 +12,6 @@ import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.ItemMaterialInfo;
 import gregtech.api.unification.stack.MaterialStack;
 import gregtech.common.items.behaviors.ColorSprayBehaviour;
-import gregtech.common.items.behaviors.MultiblockBuilderBehavior;
 import gregtech.common.items.behaviors.ProspectorScannerBehavior;
 import gregtech.common.items.behaviors.TooltipBehavior;
 import keqing.gtqtcore.api.unification.GCYSMaterials;
@@ -22,6 +21,7 @@ import keqing.gtqtcore.common.CommonProxy;
 import keqing.gtqtcore.common.block.GTQTCrops;
 import keqing.gtqtcore.common.items.behaviors.*;
 import keqing.gtqtcore.common.items.behaviors.render.HaloRenderItemBehavior;
+import keqing.gtqtcore.common.items.behaviors.MEHatchTransBehavior;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.EnumDyeColor;
 
@@ -511,6 +511,8 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         MANIFOLD_OSCILLATORY_POWER_CELL = addItem(434, "component.cosmic.manifold_oscillatory_power_cell").setCreativeTabs(CommonProxy.GTQTCore_HP);
         SCINTILLATOR = addItem(435, "scintillator").setCreativeTabs(CommonProxy.GTQTCore_GD);
         SCINTILLATOR_CRYSTAL = addItem(436, "scintillator_crystal").setCreativeTabs(CommonProxy.GTQTCore_GD);
+
+        DEBUG_HATCH_TRANS = this.addItem(437, "debug.hatch_trans").addComponents(new MEHatchTransBehavior()).setCreativeTabs(GTQTCore_TO);
 
         MTE_COPY_CARD = this.addItem(438, "mte_copy_card").setMaxStackSize(1).addComponents(new MTECopyCardBehaviors()).setCreativeTabs(CommonProxy.GTQTCore_TAB);
 
