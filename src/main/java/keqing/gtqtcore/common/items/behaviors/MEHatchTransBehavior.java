@@ -302,7 +302,7 @@ public class MEHatchTransBehavior implements IItemBehaviour, ItemUIFactory {
 
     @Override
     public void addInformation(ItemStack itemStack, List<String> lines) {
-        lines.add(I18n.format("metaitem.tool.multiblock_builder.tooltip2"));
+        lines.add(I18n.format("替换仓室"));
         if (networkProxy != null) {
             lines.add(GuiText.Linked.getLocal());
             lines.add(I18n.format("网络唯一表示符:" + networkProxy));

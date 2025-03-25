@@ -5387,6 +5387,7 @@ metaitem.pos_binding_card.tooltip=适用于：微波无线仓绑定 科研计算
 metaitem.scintillator.name=闪烁体
 metaitem.scintillator_crystal.name=闪烁晶体
 metaitem.mte_copy_card.name=设备信息复制卡
+metaitem.debug.hatch_trans.name=仓室替换器
 
 gtqtcore.core.tooltip.1=工作模式：独立线程
 gtqtcore.core.tooltip.2=>>核心线程数量:%s

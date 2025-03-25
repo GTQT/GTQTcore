@@ -5401,6 +5401,7 @@ metaitem.pos_binding_card.tooltip=Applicable to: Microwave Wireless Storage Bind
 metaitem.scintillator.name=Scintillator
 metaitem.scintillator_crystal.name=Scintillator Crystal
 metaitem.mte_copy_card.name=MTE Copy Card
+metaitem.debug.hatch_trans.name=Hatch Trans
 
 gtqtcore.core.tooltip.1=Operating Mode: Independent Threads
 gtqtcore.core.tooltip.2=>>Number of Core Threads: %s
