@@ -466,6 +466,12 @@ public class MEMultiblockBuilderBehavior implements IItemBehaviour, ItemUIFactor
 
                 if (player.isSneaking()) {
                     if (!multiblock.isStructureFormed()) {
+                        if(player.isCreative())
+                        {
+                            player.sendMessage(new TextComponentTranslation("检测到玩家处于创造模式，自动忽视库存检测，正在直接构建！").setStyle(new Style().setColor(TextFormatting.GREEN)));
+                            multiblock.structurePattern.autoBuild(player, multiblock);
+                            return EnumActionResult.SUCCESS;
+                        }
                         try {
                             IItemStorageChannel channel = AEApi.instance().storage().getStorageChannel(IItemStorageChannel.class);
                             IMEMonitor<IAEItemStack> monitor = networkProxy.getStorage().getInventory(channel);

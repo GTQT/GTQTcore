@@ -283,7 +283,8 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityLaserCutter LASER_CUTTER;
     public static MetaTileEntityLaserENV LASER_ENV;
     public static MetaTileEntityLaserChemicalPlant LASER_CHEMICAL_PLANT;
-    public static MetaTileEntityLaserBooster LASERtest;
+    public static MetaTileEntityLaserBooster LASER_FBT;
+    public static MetaTileEntityLaserFusionCore LASER_FBC;
     public static MetaTileEntitySBPRC SBPRC;
     public static MetaTileEntitySBPRI SBPRI;
     public static MetaTileEntitySBPRO SBPRO;
@@ -529,7 +530,9 @@ public class GTQTMetaTileEntities {
         LASER_ENV = registerMetaTileEntity(3083, new MetaTileEntityLaserENV(gtqtcoreId("laser_env")));
         LASER_CHEMICAL_PLANT = registerMetaTileEntity(3084, new MetaTileEntityLaserChemicalPlant(gtqtcoreId("laser_chemical_plant")));
 
-        LASERtest=registerMetaTileEntity(3085, new MetaTileEntityLaserBooster(gtqtcoreId("laser_test")));
+        LASER_FBT =registerMetaTileEntity(3085, new MetaTileEntityLaserBooster(gtqtcoreId("laser_fbt")));
+        LASER_FBC = registerMetaTileEntity(3086, new MetaTileEntityLaserFusionCore(gtqtcoreId("laser_fbc")));
+
 
         LASER_EMITTER = registerMetaTileEntity(3090, new MetaTileEntityLaserEmitter(gtqtcoreId("laser_emitter")));
         LASER_TRANSLATION = registerMetaTileEntity(3091, new MetaTileEntityLaserTranslation(gtqtcoreId("laser_translation")));

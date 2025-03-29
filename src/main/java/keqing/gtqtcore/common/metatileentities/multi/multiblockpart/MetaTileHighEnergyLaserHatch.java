@@ -114,8 +114,8 @@ public class MetaTileHighEnergyLaserHatch extends MetaTileEntityMultiblockNotifi
                 if (laserEmitter.isWorkingEnabled() && laserEmitter.isStructureFormed()) {
                     return true;
                 }
-            }if (mte instanceof MetaTileEntityLaserBooster laserbOOSTER) {
-                if (laserbOOSTER.isStructureFormed()) {
+            } else if (mte instanceof MetaTileEntityLaserBooster laserbooster) {
+                if (laserbooster.isStructureFormed()) {
                     return true;
                 }
             } else if (mte instanceof MetaTileEntitySBPRO sbpro) {
@@ -130,15 +130,17 @@ public class MetaTileHighEnergyLaserHatch extends MetaTileEntityMultiblockNotifi
                 if (laserTranslation.isWorkingEnabled() && laserTranslation.isStructureFormed()) {
                     return true;
                 }
+            } else if (mte instanceof MetaTileEntityLaserFusionCore laserFusionCore) {
+                if (laserFusionCore.isStructureFormed()) {
+                    return true;
+                }
             } else if (mte instanceof MetaTileHighEnergyLaserHatch hel) {
                 return hel.isExportHatch;
             }
         }
 
         if (mte instanceof MetaTileEntitySwitch switchMte) {
-            if (switchMte.isWorkingEnabled() && switchMte.isStructureFormed()) {
-                return true;
-            }
+            return switchMte.isWorkingEnabled() && switchMte.isStructureFormed();
         }
 
         return false;
@@ -302,7 +304,7 @@ public class MetaTileHighEnergyLaserHatch extends MetaTileEntityMultiblockNotifi
     }
 
     public void setCurrentA(int i) {
-       setAmperage(MathHelper.clamp(Amperage + i, 0, 1024));
+        setAmperage(MathHelper.clamp(Amperage + i, 0, 1024));
     }
 
     @Override
@@ -380,12 +382,12 @@ public class MetaTileHighEnergyLaserHatch extends MetaTileEntityMultiblockNotifi
 
     @Override
     public void setVoltage(int i) {
-        Voltage=Math.max(Math.min(i,14),0);
+        Voltage = Math.max(Math.min(i, 14), 0);
     }
 
     @Override
     public void setAmperage(int i) {
-        Amperage=Math.max(Math.min(i,1024),0);
+        Amperage = Math.max(Math.min(i, 1024), 0);
     }
 
     @Override

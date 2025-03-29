@@ -270,32 +270,48 @@ public abstract class RecipeMapLaserMultiblockController extends MultiblockWithD
     }
 
     public int getTier() {
-        if(!isStructureFormed())return 0;
-        if (this.getAbilities(LASER_INPUT) == null) return 0;
-        if (inputNum == 1) return GTUtility.getTierByVoltage(this.getAbilities(LASER_INPUT).get(0).Laser());
-        if (inputNum == 2)
-            return Math.max(GTUtility.getTierByVoltage(this.getAbilities(LASER_INPUT).get(0).Laser()), GTUtility.getTierByVoltage(this.getAbilities(LASER_INPUT).get(1).Laser()));
-        return 0;
+        if (!isStructureFormed()) return 0;
+        if (this.getAbilities(LASER_INPUT) == null || inputNum == 0) return 0;
+
+        int maxTier = 0;
+        for (ILaser laser : this.getAbilities(LASER_INPUT)) {
+            int tier = GTUtility.getTierByVoltage(laser.Laser());
+            if (tier > maxTier) {
+                maxTier = tier;
+            }
+        }
+        return maxTier;
     }
+
     public int getMaxLaser() {
-        if(!isStructureFormed())return 0;
-        if (this.getAbilities(LASER_INPUT) == null) return 0;
-        if (inputNum == 1) return GTUtility.getTierByVoltage(this.getAbilities(LASER_INPUT).get(0).MaxLaser());
-        if (inputNum == 2)
-            return Math.max(GTUtility.getTierByVoltage(this.getAbilities(LASER_INPUT).get(0).MaxLaser()), GTUtility.getTierByVoltage(this.getAbilities(LASER_INPUT).get(1).MaxLaser()));
-        return 0;
+        if (!isStructureFormed()) return 0;
+        if (this.getAbilities(LASER_INPUT) == null || inputNum == 0) return 0;
+
+        int maxLaserTier = 0;
+        for (ILaser laser : this.getAbilities(LASER_INPUT)) {
+            int tier = GTUtility.getTierByVoltage(laser.MaxLaser());
+            if (tier > maxLaserTier) {
+                maxLaserTier = tier;
+            }
+        }
+        return maxLaserTier;
     }
+
     public int getTemp() {
         return getTier() * 900 + 900;
     }
 
     public long LaserToEu() {
-        if(!isStructureFormed())return 0;
-        if (inputNum == 1) return this.getAbilities(LASER_INPUT).get(0).Laser();
-        if (inputNum == 2)
-            return this.getAbilities(LASER_INPUT).get(0).Laser() + this.getAbilities(LASER_INPUT).get(1).Laser();
-        return 0;
+        if (!isStructureFormed()) return 0;
+        if (this.getAbilities(LASER_INPUT) == null || inputNum == 0) return 0;
+
+        long totalEu = 0;
+        for (ILaser laser : this.getAbilities(LASER_INPUT)) {
+            totalEu += laser.Laser();
+        }
+        return totalEu;
     }
+
     public int getParallelLimit() {
         return (int) Math.pow(2, getTier());
     }
