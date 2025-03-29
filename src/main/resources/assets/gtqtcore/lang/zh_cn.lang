@@ -4675,7 +4675,7 @@ gtqtcore.machine.suprachronal_neutronium_forge.name=神之锻台
 gtqtcore.machine.mdi.tooltip.1=还在手动挖矿？你居然还在手动挖矿？
 gtqtcore.machine.mdi.tooltip.2=工作时消耗钻头耐久度，耐久度全部消耗后结构将会删除钻头，需要手动安装。
 gtqtcore.machine.mdi.tooltip.3=多方块持续工作时会获得缓慢的效率提升，并行数量由结构等级，钻头等级共同决定
-gtqtcore.machine.mdi.tooltip.4=多方块会根据所处区块的岩层种类决定运行的配方，在输入总线放置地质存储模块提供启动参数
+gtqtcore.machine.mdi.tooltip.4=多方块会根据所处区块的岩层种类决定运行的配方，在输入总线放置目标岩石（地震探测器给你的那个石头），在GUI内的槽位放置地质存储模块（也是地震探测器给你的）提供启动参数
 
 gtqtcore.machine.greenhouse.tooltip.4=升级结构，提供农药，生物质提升机器效率。
 gregtech.machine.fb.tooltip.1=可拓展结构：散热模块,装配后可调节更大范围的冷却效率
@@ -6059,7 +6059,7 @@ metaitem.debug.structure_writer.export_to_json=导出为Json
 metaitem.debug.structure_writer.rotate_along_y_axis=沿Y轴旋转
 metaitem.debug.structure_writer.ex=无
 metaitem.debug.structure_writer.structural_scale=结构规模： X:%s  Y:%s  Z:%s
-metaitem.debug.structure_builder.name=多方块构建工具
+metaitem.debug.structure_builder.name=高级构建器
 
 gtqtcore.machine.mega_cleanroom.name=大型洁净室（LCF）
 gtqtcore.machine.cleanroom.tooltip.1=§b尺寸：§f21x21x10至101x101x101

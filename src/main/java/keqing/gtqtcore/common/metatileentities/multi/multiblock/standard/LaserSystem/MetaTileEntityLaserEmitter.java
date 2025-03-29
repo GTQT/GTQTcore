@@ -7,6 +7,7 @@ import gregtech.api.gui.ModularUI;
 import gregtech.api.gui.Widget;
 import gregtech.api.gui.widgets.AdvancedTextWidget;
 import gregtech.api.gui.widgets.ClickButtonWidget;
+import gregtech.api.gui.widgets.IncrementButtonWidget;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
@@ -24,6 +25,7 @@ import keqing.gtqtcore.api.metaileentity.MetaTileEntityBaseWithControl;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.fml.relauncher.Side;
@@ -36,6 +38,7 @@ import java.util.List;
 
 import static gregtech.api.GTValues.VN;
 import static gregtech.api.metatileentity.multiblock.MultiblockAbility.INPUT_ENERGY;
+import static keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility.LASER_INPUT;
 import static keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility.LASER_OUTPUT;
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4.TurbineCasingType.NQ_TURBINE_CASING;
 
@@ -88,13 +91,19 @@ public class MetaTileEntityLaserEmitter extends MetaTileEntityBaseWithControl {
     protected ModularUI.Builder createUITemplate(EntityPlayer entityPlayer) {
         ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND, 260, 240);
 
-        builder.widget((new AdvancedTextWidget(95, 10, this::addDisplayText, 2302755)).setMaxWidthLimit(181));
+        builder.image(90, 10, 165, 145, GuiTextures.DISPLAY);
+        builder.widget((new AdvancedTextWidget(100, 15, this::addDisplayText, 16777215)).setMaxWidthLimit(181));
 
         builder.widget(new ClickButtonWidget(7, 10, 80, 20, "V -1", this::decrementThresholdV));
         builder.widget(new ClickButtonWidget(7, 40, 80, 20, "V +1", this::incrementThresholdV));
 
-        builder.widget(new ClickButtonWidget(7, 70, 80, 20, "A -1", this::decrementThresholdA));
-        builder.widget(new ClickButtonWidget(7, 100, 80, 20, "A +1", this::incrementThresholdA));
+        builder.widget(new IncrementButtonWidget(7, 70, 80, 20, 1, 4, 16, 64, this::setCurrentA)
+                .setDefaultTooltip()
+                .setShouldClientCallback(false));
+
+        builder.widget(new IncrementButtonWidget(7, 100, 80, 20, -1, -4, -16, -64, this::setCurrentA)
+                .setDefaultTooltip()
+                .setShouldClientCallback(false));
 
         builder.widget(new ClickButtonWidget(7, 130, 80, 20, "I/O", data -> setWorkingEnabled(!isWorkingEnabled())));
 
@@ -110,12 +119,8 @@ public class MetaTileEntityLaserEmitter extends MetaTileEntityBaseWithControl {
         this.getAbilities(LASER_OUTPUT).get(0).addVoltage(-1);
     }
 
-    private void incrementThresholdA(Widget.ClickData clickData) {
-        this.getAbilities(LASER_OUTPUT).get(0).addAmperage(1);
-    }
-
-    private void decrementThresholdA(Widget.ClickData clickData) {
-        this.getAbilities(LASER_OUTPUT).get(0).addAmperage(-1);
+    public void setCurrentA(int i) {
+        this.getAbilities(LASER_INPUT).get(0).setAmperage(MathHelper.clamp( this.getAbilities(LASER_INPUT).get(0).Amperage() + i, 0, 1024));
     }
 
     protected void addDisplayText(List<ITextComponent> textList) {
@@ -141,8 +146,8 @@ public class MetaTileEntityLaserEmitter extends MetaTileEntityBaseWithControl {
                 .aisle("MMM", "MCM", "MMM")
                 .where('C', selfPredicate())
                 .where('M', states(getCasingState()).setMinGlobalLimited(30)
-                        .or(abilities(INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(3)))
-
+                        .or(abilities(INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(3))
+                )
                 .where('O', abilities(LASER_OUTPUT))
                 .build();
     }

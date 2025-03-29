@@ -283,6 +283,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityLaserCutter LASER_CUTTER;
     public static MetaTileEntityLaserENV LASER_ENV;
     public static MetaTileEntityLaserChemicalPlant LASER_CHEMICAL_PLANT;
+    public static MetaTileEntityLaserBooster LASERtest;
     public static MetaTileEntitySBPRC SBPRC;
     public static MetaTileEntitySBPRI SBPRI;
     public static MetaTileEntitySBPRO SBPRO;
@@ -415,7 +416,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityISO2CleaningMaintenanceHatch ISO2_CLEANING_MAINTENANCE_HATCH;
     public static MetaTileEntityISO1CleaningMaintenanceHatch ISO1_CLEANING_MAINTENANCE_HATCH;
 
-    private static int startId = 16000;
+    private static int startId = 13000;
     private static final int END_ID = startId + 1000;
 
     public static void simpleTiredInit(MetaTileEntity[] tileEntities, IntFunction<MetaTileEntity> function, IntSupplier idSupplier, IntPredicate canAdd) {
@@ -527,6 +528,8 @@ public class GTQTMetaTileEntities {
         LASER_CUTTER = registerMetaTileEntity(3082, new MetaTileEntityLaserCutter(gtqtcoreId("laser_cutter")));
         LASER_ENV = registerMetaTileEntity(3083, new MetaTileEntityLaserENV(gtqtcoreId("laser_env")));
         LASER_CHEMICAL_PLANT = registerMetaTileEntity(3084, new MetaTileEntityLaserChemicalPlant(gtqtcoreId("laser_chemical_plant")));
+
+        LASERtest=registerMetaTileEntity(3085, new MetaTileEntityLaserBooster(gtqtcoreId("laser_test")));
 
         LASER_EMITTER = registerMetaTileEntity(3090, new MetaTileEntityLaserEmitter(gtqtcoreId("laser_emitter")));
         LASER_TRANSLATION = registerMetaTileEntity(3091, new MetaTileEntityLaserTranslation(gtqtcoreId("laser_translation")));

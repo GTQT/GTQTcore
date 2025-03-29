@@ -73,7 +73,8 @@ public class MEMultiblockBuilderBehavior implements IItemBehaviour, ItemUIFactor
     boolean ignoredMufflerHatch = false;
     boolean ignoredMaintenanceHatch = false;
 
-    boolean setHatch = false;
+    boolean setHatch = true;
+    boolean MEPlace = false;
     int multiblockTier = 0;
     MetaTileEntity targetMte;
     boolean placeMultiblock = false;
@@ -81,6 +82,7 @@ public class MEMultiblockBuilderBehavior implements IItemBehaviour, ItemUIFactor
     boolean out;
     int page;
 
+    List<ItemStack> itemStacks = new ArrayList<>();
     int endPos = GregTechAPI.isHighTier() ? ENERGY_INPUT_HATCH.length - 1 : Math.min(ENERGY_INPUT_HATCH.length - 1, 10);
 
     MetaTileEntity[] hatchTypes = {
@@ -89,6 +91,7 @@ public class MEMultiblockBuilderBehavior implements IItemBehaviour, ItemUIFactor
             MetaTileEntities.AUTO_MAINTENANCE_HATCH,
             MetaTileEntities.CLEANING_MAINTENANCE_HATCH
     };
+    int tick = 0;
     private AENetworkProxy networkProxy;
 
     private static List<ItemStack> getItemStacks(int tier, MultiblockControllerBase multiblock) throws NoSuchFieldException, IllegalAccessException {
@@ -181,49 +184,65 @@ public class MEMultiblockBuilderBehavior implements IItemBehaviour, ItemUIFactor
                 }
                 if (out) continue;
 
-                if (perItemInputHatchTier >= 0) {
+                if (perItemInputHatchTier >= 0 || MEPlace) {
                     for (int i = 0; i < MetaTileEntities.ITEM_IMPORT_BUS.length; i++) {
 
                         if (MetaTileEntities.ITEM_IMPORT_BUS[i].getStackForm(1).getItem() == hatchStack.getItem() && MetaTileEntities.ITEM_IMPORT_BUS[i].getStackForm(1).getMetadata() == hatchStack.getMetadata()) {
                             out = true;
-                            if (!ignoredItemInputHatch)
-                                itemStackList.add(MetaTileEntities.ITEM_IMPORT_BUS[perItemInputHatchTier].getStackForm(itemStack.getCount()));
+                            if (!ignoredItemInputHatch) {
+                                if (MEPlace)
+                                    itemStackList.add(MetaTileEntities.ITEM_IMPORT_BUS_ME.getStackForm(itemStack.getCount()));
+                                else
+                                    itemStackList.add(MetaTileEntities.ITEM_IMPORT_BUS[perItemInputHatchTier].getStackForm(itemStack.getCount()));
+                            }
                             break;
                         }
                     }
                 }
                 if (out) continue;
 
-                if (perItemOutputHatchTier >= 0) {
+                if (perItemOutputHatchTier >= 0 || MEPlace) {
                     for (int i = 0; i < MetaTileEntities.ITEM_EXPORT_BUS.length; i++) {
                         if (MetaTileEntities.ITEM_EXPORT_BUS[i].getStackForm(1).getItem() == hatchStack.getItem() && MetaTileEntities.ITEM_EXPORT_BUS[i].getStackForm(1).getMetadata() == hatchStack.getMetadata()) {
                             out = true;
-                            if (!ignoredItemOutputHatch)
-                                itemStackList.add(MetaTileEntities.ITEM_EXPORT_BUS[perItemOutputHatchTier].getStackForm(itemStack.getCount()));
+                            if (!ignoredItemOutputHatch) {
+                                if (MEPlace)
+                                    itemStackList.add(MetaTileEntities.ITEM_EXPORT_BUS_ME.getStackForm(itemStack.getCount()));
+                                else
+                                    itemStackList.add(MetaTileEntities.ITEM_EXPORT_BUS[perItemOutputHatchTier].getStackForm(itemStack.getCount()));
+                            }
                             break;
                         }
                     }
                 }
                 if (out) continue;
 
-                if (perFluidInputHatchTier >= 0) {
+                if (perFluidInputHatchTier >= 0 || MEPlace) {
                     for (int i = 0; i < MetaTileEntities.FLUID_IMPORT_HATCH.length; i++) {
                         if (MetaTileEntities.FLUID_IMPORT_HATCH[i].getStackForm(1).getItem() == hatchStack.getItem() && MetaTileEntities.FLUID_IMPORT_HATCH[i].getStackForm(1).getMetadata() == hatchStack.getMetadata()) {
                             out = true;
-                            if (!ignoredFluidInputHatch)
-                                itemStackList.add(MetaTileEntities.FLUID_IMPORT_HATCH[perFluidInputHatchTier].getStackForm(itemStack.getCount()));
+                            if (!ignoredFluidInputHatch) {
+                                if (MEPlace)
+                                    itemStackList.add(MetaTileEntities.FLUID_IMPORT_HATCH_ME.getStackForm(itemStack.getCount()));
+                                else
+                                    itemStackList.add(MetaTileEntities.FLUID_IMPORT_HATCH[perFluidInputHatchTier].getStackForm(itemStack.getCount()));
+                            }
                             break;
                         }
                     }
                 }
                 if (out) continue;
 
-                if (perFluidOutputHatchTier >= 0) {
+                if (perFluidOutputHatchTier >= 0 || MEPlace) {
                     for (int i = 0; i < MetaTileEntities.FLUID_EXPORT_HATCH.length; i++) {
                         if (MetaTileEntities.FLUID_EXPORT_HATCH[i].getStackForm(1).getItem() == hatchStack.getItem() && MetaTileEntities.FLUID_EXPORT_HATCH[i].getStackForm(1).getMetadata() == hatchStack.getMetadata()) {
                             out = true;
-                            if (!ignoredFluidOutputHatch)
-                                itemStackList.add(MetaTileEntities.FLUID_EXPORT_HATCH[perFluidOutputHatchTier].getStackForm(itemStack.getCount()));
+                            if (!ignoredFluidOutputHatch) {
+                                if (MEPlace)
+                                    itemStackList.add(MetaTileEntities.FLUID_EXPORT_HATCH_ME.getStackForm(itemStack.getCount()));
+                                else
+                                    itemStackList.add(MetaTileEntities.FLUID_EXPORT_HATCH[perFluidOutputHatchTier].getStackForm(itemStack.getCount()));
+                            }
                             break;
                         }
                     }
@@ -295,12 +314,13 @@ public class MEMultiblockBuilderBehavior implements IItemBehaviour, ItemUIFactor
                 .widget(new ClickButtonWidget(90, 160, 38, 20, I18n.format("IO明细"), clickData -> this.page = MathHelper.clamp(page + 1, 0, 1)))
                 .widget(new ClickButtonWidget(128, 160, 38, 20, I18n.format("部件总览"), clickData -> this.page = MathHelper.clamp(page - 1, 0, 1)))
 
-                .widget(new ClickButtonWidget(10, 180, 76, 20, I18n.format("放置模式"), clickData -> placeMultiblock = !placeMultiblock))
+                .widget(new ClickButtonWidget(10, 180, 76, 20, I18n.format("放置模式"), clickData -> placeMultiblock = !placeMultiblock).setTooltipText("确认放置模式，将真实放置多方块"))
 
-                .widget(new ClickButtonWidget(90, 180, 76, 20, I18n.format("忽视仓室"), clickData -> setHatch = !setHatch))
+                .widget(new ClickButtonWidget(90, 180, 38, 20, I18n.format("IG"), clickData -> setHatch = !setHatch).setTooltipText("忽视仓室，只放置非仓室结构"))
+                .widget(new ClickButtonWidget(128, 180, 38, 20, I18n.format("ME"), clickData -> MEPlace = !MEPlace).setTooltipText("将输入/输出 总线/仓 替换为对应的ME仓"))
 
 
-                .widget((new AdvancedTextWidget(180, 7, this::addDisplayText1, 16777215)).setMaxWidthLimit(180))
+                .widget((new AdvancedTextWidget(180, 1, this::addDisplayText1, 16777215)).setMaxWidthLimit(500))
 
                 .widget(new ClickButtonWidget(180, 20, 38, 20, I18n.format("II +1"), clickData -> this.perItemInputHatchTier = MathHelper.clamp(perItemInputHatchTier + 1, -1, 9)))
                 .widget(new ClickButtonWidget(220, 20, 38, 20, I18n.format("II -1"), clickData -> this.perItemInputHatchTier = MathHelper.clamp(perItemInputHatchTier - 1, -1, 9)))
@@ -341,16 +361,24 @@ public class MEMultiblockBuilderBehavior implements IItemBehaviour, ItemUIFactor
     }
 
     private void addDisplayText1(List<ITextComponent> iTextComponents) {
-        if(networkProxy!=null)iTextComponents.add(new TextComponentTranslation("高级构建器 网络："+ networkProxy));
+        if (networkProxy != null) iTextComponents.add(new TextComponentTranslation("高级构建器 网络：" + networkProxy));
         else iTextComponents.add(new TextComponentTranslation("高级构建器 网络：未连接"));
+
+        iTextComponents.add(new TextComponentTranslation("放置模式："+placeMultiblock));
     }
 
     private void addDisplayText(List<ITextComponent> iTextComponents) {
         if (page == 0) {
             if (targetMte != null && targetMte instanceof MultiblockControllerBase mte) {
                 iTextComponents.add(new TextComponentTranslation(mte.getMetaFullName()));
-                List<ItemStack> itemStacks = dealWithMultiblock(mte);
-                for (ItemStack itemStack : itemStacks) {
+
+                tick++;
+                if (tick == 20) {
+                    tick = 0;
+                    itemStacks = dealWithMultiblock(mte);
+                }
+                if (itemStacks == null) itemStacks = dealWithMultiblock(mte);
+                for (ItemStack itemStack : this.itemStacks) {
                     iTextComponents.add(new TextComponentTranslation(itemStack.getDisplayName() + " x " + itemStack.getCount()));
                 }
             }
@@ -359,8 +387,8 @@ public class MEMultiblockBuilderBehavior implements IItemBehaviour, ItemUIFactor
             iTextComponents.add(new TextComponentTranslation("输出总线：" + (ignoredItemOutputHatch ? "忽视" : ("设定 Tier" + perItemOutputHatchTier))));
             iTextComponents.add(new TextComponentTranslation("输入仓：" + (ignoredFluidInputHatch ? "忽视" : ("设定 Tier" + perFluidInputHatchTier))));
             iTextComponents.add(new TextComponentTranslation("输出仓：" + (ignoredFluidOutputHatch ? "忽视" : ("设定 Tier" + perFluidOutputHatchTier))));
-            iTextComponents.add(new TextComponentTranslation("能源仓：" + (ignoredEnergyInputHatch ? "忽视" : ("设定 Tier" + perEnergyInputHatchTier+" *"+amperage))));
-            iTextComponents.add(new TextComponentTranslation("动力仓：" + (ignoredEnergyOutputHatch ? "忽视" : ("设定 Tier" + perEnergyOutputHatchTier+" *"+amperage))));
+            iTextComponents.add(new TextComponentTranslation("能源仓：" + (ignoredEnergyInputHatch ? "忽视" : ("设定 Tier" + perEnergyInputHatchTier + " *" + amperage))));
+            iTextComponents.add(new TextComponentTranslation("动力仓：" + (ignoredEnergyOutputHatch ? "忽视" : ("设定 Tier" + perEnergyOutputHatchTier + " *" + amperage))));
             iTextComponents.add(new TextComponentTranslation("消声仓：" + (ignoredMufflerHatch ? "忽视" : ("设定 Tier" + perMufflerHatchTier))));
             iTextComponents.add(new TextComponentTranslation("维护仓：" + (ignoredMaintenanceHatch ? "忽视" : ("设定 Tier" + perMaintenanceHatchTier))));
 
@@ -400,7 +428,7 @@ public class MEMultiblockBuilderBehavior implements IItemBehaviour, ItemUIFactor
             if (securityTerminal.getProxy() != null) {
                 AEpos = pos;
                 networkProxy = securityTerminal.getProxy();
-                player.sendMessage(new TextComponentString("成功绑定AE网络!"));
+                if (world.isRemote) player.sendMessage(new TextComponentString("成功绑定AE网络!"));
                 ItemStack stack = player.getHeldItem(hand);
                 NBTTagCompound compound;
 
@@ -419,7 +447,7 @@ public class MEMultiblockBuilderBehavior implements IItemBehaviour, ItemUIFactor
 
                 return EnumActionResult.SUCCESS;
             } else {
-                player.sendMessage(new TextComponentString("未绑定AE网络!"));
+                if (world.isRemote) player.sendMessage(new TextComponentString("未绑定AE网络!"));
                 return EnumActionResult.FAIL;
             }
 
@@ -429,6 +457,8 @@ public class MEMultiblockBuilderBehavior implements IItemBehaviour, ItemUIFactor
             MetaTileEntity mte = igtte.getMetaTileEntity();
             if (mte instanceof MultiblockControllerBase multiblock) {
                 targetMte = multiblock;
+                multiblockTier = 0;
+
                 if (!player.canPlayerEdit(pos, side, player.getHeldItem(hand))) return EnumActionResult.FAIL;
                 if (world.isRemote) return EnumActionResult.SUCCESS;
 
@@ -440,26 +470,23 @@ public class MEMultiblockBuilderBehavior implements IItemBehaviour, ItemUIFactor
                             IItemStorageChannel channel = AEApi.instance().storage().getStorageChannel(IItemStorageChannel.class);
                             IMEMonitor<IAEItemStack> monitor = networkProxy.getStorage().getInventory(channel);
 
-                            try {
-                                List<ItemStack> allItemStackInputs = dealWithMultiblock(multiblock);
+                            List<ItemStack> allItemStackInputs = dealWithMultiblock(multiblock);
 
-                                for (ItemStack itemStack : allItemStackInputs) {
+                            for (ItemStack itemStack : allItemStackInputs) {
 
-                                    IAEItemStack aeItemStack = channel.createStack(itemStack);
-                                    assert aeItemStack != null;
-                                    extractItemsFromNetwork(monitor, aeItemStack, player);
-                                }
-                            } catch (Exception ignored) {
-
+                                IAEItemStack aeItemStack = channel.createStack(itemStack);
+                                assert aeItemStack != null;
+                                extractItemsFromNetwork(monitor, aeItemStack, player);
                             }
                         } catch (GridAccessException e) {
                             // 网络不可用，记录日志
                             GTQTLog.logger.warn("Grid access failed", e);
+                            player.sendMessage(new TextComponentString("请求失败！：网络不可用").setStyle(new Style().setColor(TextFormatting.RED)));
                         } catch (Exception e) {
                             // 其他异常，记录日志
                             GTQTLog.logger.warn("Unexpected error occurred", e);
+                            player.sendMessage(new TextComponentString("请求失败！：未知错误").setStyle(new Style().setColor(TextFormatting.RED)));
                         }
-
 
                         multiblock.structurePattern.autoBuild(player, multiblock);
 
@@ -471,14 +498,12 @@ public class MEMultiblockBuilderBehavior implements IItemBehaviour, ItemUIFactor
                     if (!multiblock.isStructureFormed()) {
                         PatternError error = multiblock.structurePattern.getError();
                         if (error != null) {
-                            player.sendMessage(
-                                    new TextComponentTranslation("gregtech.multiblock.pattern.error_message_header"));
+                            player.sendMessage(new TextComponentTranslation("gregtech.multiblock.pattern.error_message_header"));
                             player.sendMessage(new TextComponentString(error.getErrorInfo()));
                             return EnumActionResult.SUCCESS;
                         }
                     }
-                    player.sendMessage(new TextComponentTranslation("gregtech.multiblock.pattern.no_errors")
-                            .setStyle(new Style().setColor(TextFormatting.GREEN)));
+                    player.sendMessage(new TextComponentTranslation("gregtech.multiblock.pattern.no_errors").setStyle(new Style().setColor(TextFormatting.GREEN)));
                     return EnumActionResult.SUCCESS;
                 }
             }
@@ -495,6 +520,8 @@ public class MEMultiblockBuilderBehavior implements IItemBehaviour, ItemUIFactor
     private void extractItemsFromNetwork(IMEMonitor<IAEItemStack> monitor, IAEItemStack itemStack, EntityPlayer player) {
         // 创建原型物品堆用于比较
         final ItemStack prototype = itemStack.createItemStack();
+        player.sendMessage(new TextComponentTranslation("------------------"));
+        player.sendMessage(new TextComponentTranslation("正在尝试获取 " + prototype.getDisplayName() + " x " + prototype.getCount()));
 
         // 计算玩家背包中已有该物品的数量
         long playerExistingCount = 0;
@@ -511,13 +538,23 @@ public class MEMultiblockBuilderBehavior implements IItemBehaviour, ItemUIFactor
         final long require = itemStack.getStackSize();
 
         //如果玩家拥有的比需求的多就不请求
-        if (require <= playerExistingCount) return;
+        if (require <= playerExistingCount) {
+            player.sendMessage(new TextComponentTranslation("玩家背包缓存 " + playerExistingCount + " 可用,取消网络请求。").setStyle(new Style().setColor(TextFormatting.GREEN)));
+            player.sendMessage(new TextComponentTranslation("------------------"));
+            return;
+        }
 
         // 计算网络可用数量
         final IAEItemStack networkStack = monitor.getStorageList().findPrecise(itemStack);
         final long networkAvailable = networkStack != null ? networkStack.getStackSize() : 0;
 
-        if (networkAvailable == 0) return;
+        if (networkAvailable == 0) {
+            player.sendMessage(new TextComponentTranslation("网络请求 " + (require - playerExistingCount) + " 缓存不足不足,取消网络请求！").setStyle(new Style().setColor(TextFormatting.RED)));
+            player.sendMessage(new TextComponentTranslation("------------------"));
+            return;
+        }
+        player.sendMessage(new TextComponentTranslation("玩家背包可用 " + playerExistingCount));
+        player.sendMessage(new TextComponentTranslation("网络请求 " + (require - playerExistingCount) + " 合法,开始请求。"));
 
         //如果玩家没有应该请求 require-playerExistingCount (差的)个
         //网络内有networkAvailable个 是否满足需求？
@@ -529,9 +566,10 @@ public class MEMultiblockBuilderBehavior implements IItemBehaviour, ItemUIFactor
         //如果确实需要下单
         if (crafting > 0) {
             //向网络发送合成 itemStack.copy().setStackSize(crafting)
-            player.sendStatusMessage(new TextComponentTranslation("缺失 " + networkStack.createItemStack().getDisplayName() + " x " + crafting), true);
+            player.sendMessage(new TextComponentTranslation("网络缺失 " + crafting).setStyle(new Style().setColor(TextFormatting.RED)));
         }
-
+        player.sendMessage(new TextComponentTranslation("实际向网络请求 " + requireFromNet).setStyle(new Style().setColor(TextFormatting.YELLOW)));
+        player.sendMessage(new TextComponentTranslation("------------------"));
         //如果无需下单，请求 require-playerExistingCount
 
         // 创建提取请求
@@ -593,9 +631,12 @@ public class MEMultiblockBuilderBehavior implements IItemBehaviour, ItemUIFactor
     @Override
     public void addInformation(ItemStack itemStack, List<String> lines) {
         lines.add(I18n.format("metaitem.tool.multiblock_builder.tooltip2"));
+        lines.add(I18n.format("可在UI内调整多方块的各项仓口参数配置，支持各仓开关，升级，调A，ME模式等功能"));
+        lines.add(I18n.format("如果多方块太大材料过多可能导致放置失败，请酌情使用"));
+        lines.add(I18n.format("支持从网络拉取需求材料"));
         if (networkProxy != null) {
             lines.add(GuiText.Linked.getLocal());
-            lines.add(I18n.format("网络唯一表示符:" + networkProxy));
+            lines.add(I18n.format("网络唯一标识符:" + networkProxy));
         } else {
             lines.add(GuiText.Unlinked.getLocal());
         }

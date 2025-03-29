@@ -5,6 +5,7 @@ import gregtech.api.gui.ModularUI;
 import gregtech.api.gui.Widget;
 import gregtech.api.gui.widgets.AdvancedTextWidget;
 import gregtech.api.gui.widgets.ClickButtonWidget;
+import gregtech.api.gui.widgets.IncrementButtonWidget;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
@@ -27,6 +28,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
@@ -213,8 +215,14 @@ public class MetaTileEntitySwitch extends MetaTileEntityBaseWithControl {
 
         builder.widget(new ClickButtonWidget(132, 120, 60, 18, "V +1", this::incrementThresholdV));
         builder.widget(new ClickButtonWidget(200, 120, 60, 18, "V -1", this::decrementThresholdV));
-        builder.widget(new ClickButtonWidget(132, 140, 60, 18, "A +1", this::incrementThresholdA));
-        builder.widget(new ClickButtonWidget(200, 140, 60, 18, "A -1", this::decrementThresholdA));
+
+        builder.widget(new IncrementButtonWidget(132, 140, 60, 18, 1, 4, 16, 64, this::setCurrentA)
+                .setDefaultTooltip()
+                .setShouldClientCallback(false));
+
+        builder.widget(new IncrementButtonWidget(200, 140, 60, 18, -1, -4, -16, -64, this::setCurrentA)
+                .setDefaultTooltip()
+                .setShouldClientCallback(false));
 
 
         builder.bindPlayerInventory(entityPlayer.inventory, GuiTextures.SLOT, 132, 160);
@@ -314,22 +322,24 @@ public class MetaTileEntitySwitch extends MetaTileEntityBaseWithControl {
         else if (circuit < inputNum + outputNum) this.getAbilities(LASER_OUTPUT).get(circuit - inputNum).addVoltage(-1);
     }
 
-    private void incrementThresholdA(Widget.ClickData clickData) {
-        if (circuit < inputNum) this.getAbilities(LASER_INPUT).get(circuit).addAmperage(1);
-        else if (circuit < inputNum + outputNum) {
-            if (More >= this.getAbilities(LASER_OUTPUT).get(circuit - inputNum).Voltage()) {
-                this.getAbilities(LASER_OUTPUT).get(circuit - inputNum).addAmperage(1);
-                this.getAbilities(LASER_OUTPUT).get(circuit - inputNum).setLaser(this.getAbilities(LASER_OUTPUT).get(circuit - inputNum).Amperage() * V[this.getAbilities(LASER_OUTPUT).get(circuit - inputNum).Voltage()]);
+    public void setCurrentA(int i) {
+        if(i>0)
+        {
+            if (circuit < inputNum)this.getAbilities(LASER_INPUT).get(circuit).setAmperage(MathHelper.clamp( this.getAbilities(LASER_INPUT).get(circuit).Amperage() + i, 0, 1024));
+            else if (circuit < inputNum + outputNum) {
+                if (More >= this.getAbilities(LASER_OUTPUT).get(circuit - inputNum).Voltage()) {
+                    this.getAbilities(LASER_OUTPUT).get(circuit - inputNum).setAmperage(MathHelper.clamp( this.getAbilities(LASER_OUTPUT).get(circuit).Amperage() + i, 0, 1024));
+                    this.getAbilities(LASER_OUTPUT).get(circuit - inputNum).setLaser(this.getAbilities(LASER_OUTPUT).get(circuit - inputNum).Amperage() * V[this.getAbilities(LASER_OUTPUT).get(circuit - inputNum).Voltage()]);
+                }
             }
         }
+        else
+        {
+            if (circuit < inputNum)this.getAbilities(LASER_INPUT).get(circuit).setAmperage(MathHelper.clamp( this.getAbilities(LASER_INPUT).get(circuit).Amperage() + i, 0, 1024));
+            else if (circuit < inputNum + outputNum)
+                this.getAbilities(LASER_OUTPUT).get(circuit - inputNum).setAmperage(MathHelper.clamp( this.getAbilities(LASER_OUTPUT).get(circuit - inputNum).Amperage() + i, 0, 1024));
+        }
     }
-
-    private void decrementThresholdA(Widget.ClickData clickData) {
-        if (circuit < inputNum) this.getAbilities(LASER_INPUT).get(circuit).addAmperage(-1);
-        else if (circuit < inputNum + outputNum)
-            this.getAbilities(LASER_OUTPUT).get(circuit - inputNum).addAmperage(-1);
-    }
-
     protected void addTotal(List<ITextComponent> textList) {
         super.addDisplayText(textList);
         textList.add(new TextComponentTranslation("输入激光能量:%s", Laser));

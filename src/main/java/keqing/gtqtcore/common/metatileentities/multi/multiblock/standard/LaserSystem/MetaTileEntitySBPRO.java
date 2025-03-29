@@ -6,6 +6,7 @@ import gregtech.api.gui.ModularUI;
 import gregtech.api.gui.Widget;
 import gregtech.api.gui.widgets.AdvancedTextWidget;
 import gregtech.api.gui.widgets.ClickButtonWidget;
+import gregtech.api.gui.widgets.IncrementButtonWidget;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
@@ -32,6 +33,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
@@ -47,6 +49,7 @@ import java.util.List;
 
 import static gregtech.api.GTValues.V;
 import static gregtech.api.GTValues.VN;
+import static keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility.LASER_INPUT;
 import static keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility.LASER_OUTPUT;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.MaragingSteel250;
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4.TurbineCasingType.NQ_TURBINE_CASING;
@@ -215,9 +218,14 @@ public class MetaTileEntitySBPRO extends MetaTileEntityBaseWithControl {
 
         builder.widget(new ClickButtonWidget(132, 120, 60, 18, "V +1", this::incrementThresholdV));
         builder.widget(new ClickButtonWidget(200, 120, 60, 18, "V -1", this::decrementThresholdV));
-        builder.widget(new ClickButtonWidget(132, 140, 60, 18, "A +1", this::incrementThresholdA));
-        builder.widget(new ClickButtonWidget(200, 140, 60, 18, "A -1", this::decrementThresholdA));
 
+        builder.widget(new IncrementButtonWidget(132, 140, 60, 18, 1, 4, 16, 64, this::setCurrentA)
+                .setDefaultTooltip()
+                .setShouldClientCallback(false));
+
+        builder.widget(new IncrementButtonWidget(200, 140, 60, 18, -1, -4, -16, -64, this::setCurrentA)
+                .setDefaultTooltip()
+                .setShouldClientCallback(false));
 
         builder.bindPlayerInventory(entityPlayer.inventory, GuiTextures.SLOT, 132, 160);
         return builder;
@@ -302,18 +310,18 @@ public class MetaTileEntitySBPRO extends MetaTileEntityBaseWithControl {
         if (circuit < length) this.getAbilities(LASER_OUTPUT).get(circuit).addVoltage(-1);
     }
 
-    private void incrementThresholdA(Widget.ClickData clickData) {
-        if (circuit < length) {
-            if (More >= this.getAbilities(LASER_OUTPUT).get(circuit).Voltage()) {
-                this.getAbilities(LASER_OUTPUT).get(circuit).addAmperage(1);
-                this.getAbilities(LASER_OUTPUT).get(circuit).setLaser(this.getAbilities(LASER_OUTPUT).get(circuit).Amperage() * V[this.getAbilities(LASER_OUTPUT).get(circuit).Voltage()]);
+    public void setCurrentA(int parallelAmount) {
+        if (circuit < length)
+        {
+            if(parallelAmount<0)
+                this.getAbilities(LASER_OUTPUT).get(circuit).setAmperage(MathHelper.clamp( this.getAbilities(LASER_OUTPUT).get(circuit).Amperage() + parallelAmount, 0, 1024));
+            else {
+                if (More >= this.getAbilities(LASER_OUTPUT).get(circuit).Voltage()) {
+                    this.getAbilities(LASER_OUTPUT).get(circuit).setAmperage(MathHelper.clamp( this.getAbilities(LASER_OUTPUT).get(circuit).Amperage() + parallelAmount, 0, 1024));
+                    this.getAbilities(LASER_OUTPUT).get(circuit).setLaser(this.getAbilities(LASER_OUTPUT).get(circuit).Amperage() * V[this.getAbilities(LASER_OUTPUT).get(circuit).Voltage()]);
+                }
             }
         }
-    }
-
-    private void decrementThresholdA(Widget.ClickData clickData) {
-        if (circuit < length)
-            this.getAbilities(LASER_OUTPUT).get(circuit).addAmperage(-1);
     }
 
     protected void addTotal(List<ITextComponent> textList) {

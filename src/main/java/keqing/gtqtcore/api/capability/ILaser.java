@@ -18,5 +18,8 @@ public interface ILaser{
     void addVoltage(int i);
     void addAmperage(int i);
 
+    void setVoltage(int i);
+    void setAmperage(int i);
+
     void setMachinePos(BlockPos pos);
 }

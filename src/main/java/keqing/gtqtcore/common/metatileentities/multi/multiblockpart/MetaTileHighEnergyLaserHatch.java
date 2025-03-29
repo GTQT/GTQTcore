@@ -6,10 +6,7 @@ import codechicken.lib.vec.Matrix4;
 import gregtech.api.capability.GregtechDataCodes;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.ModularUI;
-import gregtech.api.gui.widgets.AdvancedTextWidget;
-import gregtech.api.gui.widgets.ClickButtonWidget;
-import gregtech.api.gui.widgets.ImageWidget;
-import gregtech.api.gui.widgets.TextFieldWidget2;
+import gregtech.api.gui.widgets.*;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockAbilityPart;
@@ -20,16 +17,14 @@ import gregtech.client.renderer.texture.Textures;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockNotifiablePart;
 import keqing.gtqtcore.api.capability.ILaser;
 import keqing.gtqtcore.client.particle.LaserBeamParticle;
-import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.LaserSystem.MetaTileEntityLaserEmitter;
-import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.LaserSystem.MetaTileEntityLaserTranslation;
-import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.LaserSystem.MetaTileEntitySBPRO;
-import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.LaserSystem.MetaTileEntitySwitch;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.LaserSystem.*;
 import keqing.gtqtcore.common.metatileentities.single.electric.MetaTileLaserBooster;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
@@ -62,7 +57,7 @@ public class MetaTileHighEnergyLaserHatch extends MetaTileEntityMultiblockNotifi
     public MetaTileHighEnergyLaserHatch(ResourceLocation metaTileEntityId, int tier, boolean isExportHatch) {
         super(metaTileEntityId, tier, isExportHatch);
         this.tier = tier;
-        this.MaxLaser = V[tier] * 16;
+        this.MaxLaser = V[tier] * 1024;
         this.initializeInventory();
     }
 
@@ -119,6 +114,10 @@ public class MetaTileHighEnergyLaserHatch extends MetaTileEntityMultiblockNotifi
                 if (laserEmitter.isWorkingEnabled() && laserEmitter.isStructureFormed()) {
                     return true;
                 }
+            }if (mte instanceof MetaTileEntityLaserBooster laserbOOSTER) {
+                if (laserbOOSTER.isStructureFormed()) {
+                    return true;
+                }
             } else if (mte instanceof MetaTileEntitySBPRO sbpro) {
                 if (sbpro.isStructureFormed()) {
                     return true;
@@ -151,7 +150,7 @@ public class MetaTileHighEnergyLaserHatch extends MetaTileEntityMultiblockNotifi
         if (Voltage >= 14 || Voltage < 0) {
             Voltage = 0;
         }
-        if (Amperage > 16 || Amperage < 0) {
+        if (Amperage > 1024 || Amperage < 0) {
             Amperage = 0;
         }
 
@@ -262,23 +261,27 @@ public class MetaTileHighEnergyLaserHatch extends MetaTileEntityMultiblockNotifi
         }));
 
         builder.label(7, 55, "折算电流");
-        builder.widget(new ClickButtonWidget(7, 65, 20, 20, "-", data -> Amperage = --Amperage == -1 ? 0 : Amperage));
+
+        builder.widget(new IncrementButtonWidget(7, 65, 20, 20, -1, -4, -16, -64, this::setCurrentA)
+                .setDefaultTooltip()
+                .setShouldClientCallback(false));
+
         builder.widget(new ImageWidget(29, 65, 118, 20, GuiTextures.DISPLAY));
         builder.widget(new TextFieldWidget2(31, 71, 114, 16, () -> String.valueOf(Amperage), value2 -> {
             if (!value2.isEmpty()) {
                 Amperage = Integer.parseInt(value2);
             }
         }).setMaxLength(10).setNumbersOnly(0, 4));
-        builder.widget(new ClickButtonWidget(149, 65, 20, 20, "+", data -> {
-            if (Amperage < 16) {
-                Amperage++;
-            }
-        }));
+
+        builder.widget(new IncrementButtonWidget(149, 64, 20, 20, 1, 4, 16, 64, this::setCurrentA)
+                .setDefaultTooltip()
+                .setShouldClientCallback(false));
 
         builder.widget(new ClickButtonWidget(7, 90, 80, 20, "=MAX", data -> {
             Voltage = tier;
-            Amperage = 16;
+            Amperage = 1024;
         }));
+
         builder.widget(new ClickButtonWidget(90, 90, 80, 20, "=0", data -> {
             Voltage = 0;
             Amperage = 0;
@@ -296,7 +299,10 @@ public class MetaTileHighEnergyLaserHatch extends MetaTileEntityMultiblockNotifi
         textList.add(new TextComponentString("实际 传输激光: " + Laser + " " + VN[GTUtility.getTierByVoltage(Laser)]));
         textList.add(new TextComponentString("额定 传输激光: " + SetLaser + " " + VN[GTUtility.getTierByVoltage(SetLaser)]));
         textList.add(new TextComponentString("最大 传输激光: " + MaxLaser + " " + VN[GTUtility.getTierByVoltage(MaxLaser)]));
+    }
 
+    public void setCurrentA(int i) {
+       setAmperage(MathHelper.clamp(Amperage + i, 0, 1024));
     }
 
     @Override
@@ -364,12 +370,22 @@ public class MetaTileHighEnergyLaserHatch extends MetaTileEntityMultiblockNotifi
     @Override
     public void addAmperage(int i) {
         if (i > 0) {
-            if (Amperage + i <= 16) Amperage += i;
-            else Amperage = 16;
+            if (Amperage + i <= 1024) Amperage += i;
+            else Amperage = 1024;
         } else {
             if (Amperage + i >= 0) Amperage += i;
             else Amperage = 0;
         }
+    }
+
+    @Override
+    public void setVoltage(int i) {
+        Voltage=Math.max(Math.min(i,14),0);
+    }
+
+    @Override
+    public void setAmperage(int i) {
+        Amperage=Math.max(Math.min(i,1024),0);
     }
 
     @Override

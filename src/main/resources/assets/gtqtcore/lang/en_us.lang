@@ -4687,7 +4687,7 @@ gtqtcore.machine.suprachronal_neutronium_forge.name=Forge of the Gods
 gtqtcore.machine.mdi.tooltip.1=Still mining manually? You're still mining manually?
 gtqtcore.machine.mdi.tooltip.2=Consumes drill head durability during operation, the drill head will be deleted when durability is fully consumed, manual installation is required.
 gtqtcore.machine.mdi.tooltip.3=The multi-block will slowly gain efficiency during continuous operation, the number of parallels is determined by the structure level and drill head level.
-gtqtcore.machine.mdi.tooltip.4=The multi-block will decide the recipe to run based on the rock layer type of the chunk it is in, place a geological storage module in the input bus to provide startup parameters.
+gtqtcore.machine.mdi.tooltip.4=The multi-block will determine the recipe to run based on the type of rock layer it is in. Place the target rock (the one given by the seismometer) on the input bus and the geological storage module (also given by the seismometer) in the slot within the GUI to provide the startup parameters.
 
 gtqtcore.machine.greenhouse.tooltip.4=Upgrade structures, provide pesticides, and biomass to improve machine efficiency.
 gregtech.machine.fb.tooltip.1=Expandable structure: Cooling Module, adjustable for greater cooling efficiency.
@@ -6071,7 +6071,7 @@ metaitem.debug.structure_writer.export_to_json=Export to Json
 metaitem.debug.structure_writer.rotate_along_y_axis=Rotate Along Y Axis
 metaitem.debug.structure_writer.ex=None
 metaitem.debug.structure_writer.structural_scale=Structure Scale: X:%s Y:%s Z:%s
-metaitem.debug.structure_builder.name=Multi-block Construction Tool
+metaitem.debug.structure_builder.name=Advanced Builder
 
 gtqtcore.machine.mega_cleanroom.name=Large Cleanroom (LCF)
 gtqtcore.machine.cleanroom.tooltip.1=§bSize: §f21x21x10 to 101x101x101

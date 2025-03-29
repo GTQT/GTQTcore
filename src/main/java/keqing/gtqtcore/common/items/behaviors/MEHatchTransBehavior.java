@@ -39,9 +39,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.*;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -52,12 +50,23 @@ import static gregtech.common.metatileentities.MetaTileEntities.*;
 public class MEHatchTransBehavior implements IItemBehaviour, ItemUIFactory {
     BlockPos AEpos;
     boolean aeModel;
+    boolean meModel;
     int targetTier;
     BlockPos targetPos;
     private AENetworkProxy networkProxy;
 
-    public static void setTier(MetaTileEntityMultiblockPart trans, EntityPlayer player, BlockPos pos) {
+    MetaTileEntity[] hatchTypes = {
+            MetaTileEntities.MAINTENANCE_HATCH,
+            MetaTileEntities.CONFIGURABLE_MAINTENANCE_HATCH,
+            MetaTileEntities.AUTO_MAINTENANCE_HATCH,
+            MetaTileEntities.CLEANING_MAINTENANCE_HATCH
+    };
+
+    public static void setTier(MetaTileEntity trans, EntityPlayer player, BlockPos pos) {
         int facing = 0;
+
+        player.sendMessage(new TextComponentString("正在尝试替换"+pos+"的目标为："+trans.getStackForm().getDisplayName()).setStyle(new Style().setColor(TextFormatting.GREEN)));
+
         TileEntity tileEntity = player.world.getTileEntity(pos);
         if (tileEntity instanceof IGregTechTileEntity igtte) {
             MetaTileEntity mte = igtte.getMetaTileEntity();
@@ -65,8 +74,6 @@ public class MEHatchTransBehavior implements IItemBehaviour, ItemUIFactory {
         }
 
         if (trans != null) {
-
-            GTQTLog.logger.info("设置" + trans.getMetaFullName() + "等级为" + trans.getTier());
             ItemStack found = trans.getStackForm(1);
             ItemBlock itemBlock = (ItemBlock) found.getItem();
             IBlockState state = itemBlock.getBlock().getStateFromMeta(itemBlock.getMetadata(found.getMetadata()));
@@ -96,6 +103,9 @@ public class MEHatchTransBehavior implements IItemBehaviour, ItemUIFactory {
         compound.setInteger("AEposX", AEpos.getX());
         compound.setInteger("AEposY", AEpos.getY());
         compound.setInteger("AEposZ", AEpos.getZ());
+        compound.setBoolean("aeModel", aeModel);
+        compound.setBoolean("meModel", meModel);
+        compound.setInteger("targetTier", targetTier);
     }
 
     public void readFromNBT(NBTTagCompound compound) {
@@ -103,27 +113,35 @@ public class MEHatchTransBehavior implements IItemBehaviour, ItemUIFactory {
         int y = compound.getInteger("AEposY");
         int z = compound.getInteger("AEposZ");
         AEpos = new BlockPos(x, y, z);
+        aeModel = compound.getBoolean("aeModel");
+        meModel = compound.getBoolean("meModel");
+        targetTier = compound.getInteger("targetTier");
     }
 
     @Override
     public ModularUI createUI(PlayerInventoryHolder playerInventoryHolder, EntityPlayer entityPlayer) {
-        return ModularUI.builder(GuiTextures.BACKGROUND, 320, 205)
-                .image(10, 6, 164, 150, GuiTextures.DISPLAY)
+        return ModularUI.builder(GuiTextures.BACKGROUND, 176, 115)
+                .image(10, 8, 156, 50, GuiTextures.DISPLAY)
                 .widget((new AdvancedTextWidget(15, 11, this::addDisplayText, 16777215))
                         .setMaxWidthLimit(500))
 
-                .widget(new ClickButtonWidget(10, 160, 38, 20, I18n.format("结构升级"), clickData -> this.targetTier = MathHelper.clamp(targetTier + 1, 0, 14)))
-                .widget(new ClickButtonWidget(48, 160, 38, 20, I18n.format("结构降级"), clickData -> this.targetTier = MathHelper.clamp(targetTier - 1, 0, 14)))
+                .widget(new ClickButtonWidget(10, 63, 76, 20, I18n.format("仓口升级"), clickData -> this.targetTier = MathHelper.clamp(targetTier + 1, 0, 14)))
+                .widget(new ClickButtonWidget(90, 63, 76, 20, I18n.format("仓口降级"), clickData -> this.targetTier = MathHelper.clamp(targetTier - 1, 0, 14)))
 
-                .widget(new ClickButtonWidget(10, 180, 76, 20, I18n.format("放置模式"), clickData -> aeModel = !aeModel))
-
-
+                .widget(new ClickButtonWidget(10, 87, 76, 20, I18n.format("网络模式"), clickData -> aeModel = !aeModel).setTooltipText("将从网络内抽取仓室，并将返回物品发送至网络"))
+                .widget(new ClickButtonWidget(90, 87, 76, 20, I18n.format("ME模式"), clickData -> meModel = !meModel).setTooltipText("将输入/输出 总线/仓 替换为对应的ME仓"))
                 .build(playerInventoryHolder, entityPlayer);
     }
 
     private void addDisplayText(List<ITextComponent> iTextComponents) {
+        iTextComponents.add(new TextComponentTranslation("仓室替换器"));
         iTextComponents.add(new TextComponentTranslation("目标等级" + targetTier));
         iTextComponents.add(new TextComponentTranslation("网络模式" + aeModel));
+        if(aeModel)
+        {
+            if(networkProxy!=null)iTextComponents.add(new TextComponentTranslation("网络："+ networkProxy));
+            else iTextComponents.add(new TextComponentTranslation("网络：未连接"));
+        }
     }
 
     public void onUpdate(ItemStack itemStack, Entity entity) {
@@ -146,7 +164,7 @@ public class MEHatchTransBehavior implements IItemBehaviour, ItemUIFactory {
             if (securityTerminal.getProxy() != null) {
                 AEpos = pos;
                 networkProxy = securityTerminal.getProxy();
-                player.sendMessage(new TextComponentString("成功绑定AE网络!"));
+                if (world.isRemote)player.sendMessage(new TextComponentString("成功绑定AE网络!"));
                 ItemStack stack = player.getHeldItem(hand);
                 NBTTagCompound compound;
 
@@ -165,11 +183,12 @@ public class MEHatchTransBehavior implements IItemBehaviour, ItemUIFactory {
 
                 return EnumActionResult.SUCCESS;
             } else {
-                player.sendMessage(new TextComponentString("未绑定AE网络!"));
+                if (world.isRemote)player.sendMessage(new TextComponentString("未绑定AE网络!"));
                 return EnumActionResult.FAIL;
             }
         }
 
+        if (world.isRemote) return EnumActionResult.SUCCESS;
 
         if (tileEntity instanceof IGregTechTileEntity igtte) {
             MetaTileEntity mte = igtte.getMetaTileEntity();
@@ -186,23 +205,36 @@ public class MEHatchTransBehavior implements IItemBehaviour, ItemUIFactory {
     }
 
     private void transHatch(MetaTileEntity mte, EntityPlayer player) {
+        targetPos = mte.getPos();
+
+        for (MetaTileEntity hatchType : hatchTypes) {
+            if (mte == hatchType) {
+                trans(mte, hatchTypes[targetTier], player, targetPos);
+            }
+        }
+
         if (mte instanceof MetaTileEntityMultiblockPart part) {
             int tier = part.getTier();
-            targetPos = part.getPos();
+
+
             if (mte instanceof MetaTileEntityItemBus hatch) {
                 if (hatch.getAbility() == EXPORT_ITEMS) {
-                    trans(ITEM_EXPORT_BUS[tier], ITEM_EXPORT_BUS[targetTier], player, targetPos);
+                    if(meModel)trans(ITEM_EXPORT_BUS[tier], ITEM_EXPORT_BUS_ME, player, targetPos);
+                    else trans(ITEM_EXPORT_BUS[tier], ITEM_EXPORT_BUS[targetTier], player, targetPos);
                 }
                 if (hatch.getAbility() == IMPORT_ITEMS) {
-                    trans(ITEM_IMPORT_BUS[tier], ITEM_IMPORT_BUS[targetTier], player, targetPos);
+                    if(meModel)trans(ITEM_IMPORT_BUS[tier], ITEM_IMPORT_BUS_ME, player, targetPos);
+                    else trans(ITEM_IMPORT_BUS[tier], ITEM_IMPORT_BUS[targetTier], player, targetPos);
                 }
             }
             if (mte instanceof MetaTileEntityFluidHatch hatch) {
                 if (hatch.getAbility() == EXPORT_FLUIDS) {
-                    trans(FLUID_EXPORT_HATCH[tier], FLUID_EXPORT_HATCH[targetTier], player, targetPos);
+                    if(meModel)trans(FLUID_EXPORT_HATCH[tier], FLUID_EXPORT_HATCH_ME, player, targetPos);
+                    else trans(FLUID_EXPORT_HATCH[tier], FLUID_EXPORT_HATCH[targetTier], player, targetPos);
                 }
                 if (hatch.getAbility() == IMPORT_FLUIDS) {
-                    trans(FLUID_IMPORT_HATCH[tier], FLUID_IMPORT_HATCH[targetTier], player, targetPos);
+                    if(meModel)trans(FLUID_IMPORT_HATCH[tier], FLUID_IMPORT_HATCH_ME, player, targetPos);
+                    else trans(FLUID_IMPORT_HATCH[tier], FLUID_IMPORT_HATCH[targetTier], player, targetPos);
                 }
             }
             if (mte instanceof MetaTileEntityEnergyHatch hatch) {
@@ -231,7 +263,7 @@ public class MEHatchTransBehavior implements IItemBehaviour, ItemUIFactory {
         }
     }
 
-    private void trans(MetaTileEntityMultiblockPart mte, MetaTileEntityMultiblockPart trans, EntityPlayer player, BlockPos pos) {
+    private void trans(MetaTileEntity mte, MetaTileEntity trans, EntityPlayer player, BlockPos pos) {
         if (aeModel) {
             try {
                 IItemStorageChannel channel = AEApi.instance().storage().getStorageChannel(IItemStorageChannel.class);
@@ -239,17 +271,25 @@ public class MEHatchTransBehavior implements IItemBehaviour, ItemUIFactory {
 
                 if (extractItemsFromNetwork(monitor, mte.getStackForm(1), trans.getStackForm(1), player)) {
                     setTier(trans, player, pos);
+                }else
+                {
+                    player.sendMessage(new TextComponentString("正在尝试替换"+pos+"失败！：网络数量不可用").setStyle(new Style().setColor(TextFormatting.RED)));
                 }
             } catch (GridAccessException e) {
                 // 网络不可用，记录日志
                 GTQTLog.logger.warn("Grid access failed", e);
+                player.sendMessage(new TextComponentString("正在尝试替换"+pos+"失败！：网络不可用").setStyle(new Style().setColor(TextFormatting.RED)));
             } catch (Exception e) {
                 // 其他异常，记录日志
                 GTQTLog.logger.warn("Unexpected error occurred", e);
+                player.sendMessage(new TextComponentString("正在尝试替换"+pos+"失败！：未知错误").setStyle(new Style().setColor(TextFormatting.RED)));
             }
         } else {
             if (extractItemsFromPlayer(mte.getStackForm(1), trans.getStackForm(1), player)) {
                 setTier(trans, player, pos);
+            }else
+            {
+                player.sendMessage(new TextComponentString("正在尝试替换"+pos+"失败！：背包数量不可用").setStyle(new Style().setColor(TextFormatting.RED)));
             }
         }
     }
@@ -259,7 +299,7 @@ public class MEHatchTransBehavior implements IItemBehaviour, ItemUIFactory {
         if (inject == null) return false;
         // 从玩家背包中提取一个 extract 物品（数量为 1）
         if (player.inventory.hasItemStack(inject)) {
-            for (int i = 0; i < player.inventory.getSizeInventory(); i++) {
+            for (int i = 9; i < player.inventory.getSizeInventory(); i++) {
                 ItemStack stackInSlot = player.inventory.getStackInSlot(i);
                 if (stackInSlot.isItemEqual(inject) && stackInSlot.getCount() >= 1) {
                     // 减少物品数量
@@ -302,10 +342,13 @@ public class MEHatchTransBehavior implements IItemBehaviour, ItemUIFactory {
 
     @Override
     public void addInformation(ItemStack itemStack, List<String> lines) {
-        lines.add(I18n.format("替换仓室"));
+        lines.add(I18n.format("替换仓室,支持输入仓，输出仓，输入总线，输出总线，1-16A能源仓，动力仓，维护仓，ME仓"));
+        lines.add(I18n.format("ME模式下会将输入仓，输出仓，输入总线，输出总线替换为对应的ME仓"));
+        lines.add(I18n.format("维护仓列表为维护仓，可配置，无菌，全自动维护仓"));
+        lines.add(I18n.format("支持从网络拉取需求材料，并将替换结构返回网络"));
         if (networkProxy != null) {
             lines.add(GuiText.Linked.getLocal());
-            lines.add(I18n.format("网络唯一表示符:" + networkProxy));
+            lines.add(I18n.format("网络唯一标识符:" + networkProxy));
         } else {
             lines.add(GuiText.Unlinked.getLocal());
         }

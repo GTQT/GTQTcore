@@ -6,6 +6,7 @@ import gregtech.api.gui.ModularUI;
 import gregtech.api.gui.Widget;
 import gregtech.api.gui.widgets.AdvancedTextWidget;
 import gregtech.api.gui.widgets.ClickButtonWidget;
+import gregtech.api.gui.widgets.IncrementButtonWidget;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
@@ -32,6 +33,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
@@ -185,7 +187,6 @@ public class MetaTileEntitySBPRI extends MetaTileEntityBaseWithControl {
         builder.widget((new AdvancedTextWidget(7, 8 + j * 30, this::addInfo6, 16777215)).setMaxWidthLimit(120).setClickHandler(this::handleDisplayClick));
         builder.widget(new ClickButtonWidget(118, 4 + j * 30, 15, 30, "->", data -> circuit = 5));
 
-
         // Display
         builder.image(3, 184, 130, 52, GuiTextures.DISPLAY);
         builder.widget((new AdvancedTextWidget(7, 188, this::addTotal, 16777215)).setMaxWidthLimit(130).setClickHandler(this::handleDisplayClick));
@@ -193,9 +194,14 @@ public class MetaTileEntitySBPRI extends MetaTileEntityBaseWithControl {
 
         builder.widget(new ClickButtonWidget(132, 120, 60, 18, "V +1", this::incrementThresholdV));
         builder.widget(new ClickButtonWidget(200, 120, 60, 18, "V -1", this::decrementThresholdV));
-        builder.widget(new ClickButtonWidget(132, 140, 60, 18, "A +1", this::incrementThresholdA));
-        builder.widget(new ClickButtonWidget(200, 140, 60, 18, "A -1", this::decrementThresholdA));
 
+        builder.widget(new IncrementButtonWidget(132, 140, 60, 18, 1, 4, 16, 64, this::setCurrentA)
+                .setDefaultTooltip()
+                .setShouldClientCallback(false));
+
+        builder.widget(new IncrementButtonWidget(200, 140, 60, 18, -1, -4, -16, -64, this::setCurrentA)
+                .setDefaultTooltip()
+                .setShouldClientCallback(false));
 
         builder.bindPlayerInventory(entityPlayer.inventory, GuiTextures.SLOT, 132, 160);
         return builder;
@@ -275,14 +281,9 @@ public class MetaTileEntitySBPRI extends MetaTileEntityBaseWithControl {
         if (circuit < length) this.getAbilities(LASER_INPUT).get(circuit).addVoltage(-1);
     }
 
-    private void incrementThresholdA(Widget.ClickData clickData) {
-        if (circuit < length) this.getAbilities(LASER_INPUT).get(circuit).addAmperage(1);
+    public void setCurrentA(int parallelAmount) {
+        if (circuit < length)this.getAbilities(LASER_INPUT).get(circuit).setAmperage(MathHelper.clamp( this.getAbilities(LASER_INPUT).get(circuit).Amperage() + parallelAmount, 0, 1024));
     }
-
-    private void decrementThresholdA(Widget.ClickData clickData) {
-        if (circuit < length) this.getAbilities(LASER_INPUT).get(circuit).addAmperage(-1);
-    }
-
     protected void addTotal(List<ITextComponent> textList) {
         super.addDisplayText(textList);
         textList.add(new TextComponentTranslation("输入激光能量:%s", Laser));
