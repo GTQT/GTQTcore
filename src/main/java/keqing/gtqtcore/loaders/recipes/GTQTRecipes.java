@@ -371,6 +371,7 @@ public class GTQTRecipes {
                         'L', new UnificationEntry(stick, material),
                         'C', new UnificationEntry(ring, material),
                         'B', SOLDERING_IRON_LV);
+
                 ModHandler.addShapedRecipe(String.format("bvalve_%s", material),
                         OreDictUnifier.get(valve, material),
                         "SAL", "fCh", "STB",
@@ -380,6 +381,7 @@ public class GTQTRecipes {
                         'L', new UnificationEntry(stick, material),
                         'C', new UnificationEntry(ring, material),
                         'B', SOLDERING_IRON_HV);
+
                 ModHandler.addShapedRecipe(String.format("cvalve_%s", material),
                         OreDictUnifier.get(valve, material),
                         "SAL", "fCh", "STB",

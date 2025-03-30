@@ -1825,8 +1825,7 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         MICROWAVE_ENERGY_RECEIVER_OpV = addItem(4038, "cover.microwave_cover.opv");
         COVER_ITEM_MACHINE_CONTROLLER = addItem(4039, "cover.me_machine_controller");
         COVER_PROGRAMMABLE_CIRCUIT = addItem(4040, "cover.programmable_circuit").setCreativeTabs(CommonProxy.GTQTCore_PC);
-
-
+        COVER_ONE_STACK_FILTER = addItem(4041, "cover.one_stack_filter");
     }
 
 }

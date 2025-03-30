@@ -6291,7 +6291,9 @@ metaitem.cover.microwave_cover.uev.name=UEV Microwave Energy Receiver
 metaitem.cover.microwave_cover.uiv.name=UIV Microwave Energy Receiver
 metaitem.cover.microwave_cover.uxv.name=UXV Microwave Energy Receiver
 metaitem.cover.microwave_cover.opv.name=OpV Microwave Energy Receiver
+
 metaitem.cover.programmable_circuit.name=Programmable Circuit Cover
+metaitem.cover.one_stack_filter.name=Single-item filter overlay plates
 metaitem.cover.me_machine_controller.name=ME Machine Controller
 metaitem.cover.me_machine_controller.tooltip=Turns Machines §fON/OFF§7 as §fCover§7./nControls the machine via an item or fluid amount from your §fME network§7.
 cover.me_machine_controller.title=ME Machine Controller

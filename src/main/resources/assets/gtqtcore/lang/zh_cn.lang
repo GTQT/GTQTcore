@@ -6284,6 +6284,7 @@ metaitem.cover.microwave_cover.opv.name=OpV 微波无线接收覆盖板
 metaitem.cover.me_machine_controller.name=ME 机器控制器
 metaitem.cover.me_machine_controller.tooltip=将机器 §fON/OFF§7 变为 §fCover§7./n通过来自 §fME 网络§7 的物品或液体量控制机器。
 metaitem.cover.programmable_circuit.name=可编程电路覆盖板
+metaitem.cover.one_stack_filter.name=单组物品过滤覆盖板
 cover.me_machine_controller.title=ME 机器控制器
 cover.me_machine_controller.mode.more_than=超过
 cover.me_machine_controller.mode.less_than=少于

@@ -60,7 +60,7 @@ public class WireRecipeHandler {
                         .fluidInputs(Materials.Rubber.getFluid(L * insulationAmount))
                         .output(cablePrefix, material)
                         .EUt(VA[ULV])
-                        .duration(5 * SECOND)
+                        .duration(3 * SECOND)
                         .buildAndRegister();
             }
 
@@ -71,7 +71,7 @@ public class WireRecipeHandler {
                         .input(OrePrefix.foil, Materials.PolyvinylChloride, insulationAmount)
                         .output(cablePrefix, material)
                         .EUt(VA[ULV])
-                        .duration(5 * SECOND)
+                        .duration(3 * SECOND)
                         .buildAndRegister();
             }
 
@@ -83,7 +83,7 @@ public class WireRecipeHandler {
                         .input(wirePrefix, material)
                         .output(cablePrefix, material)
                         .EUt(VA[ULV])
-                        .duration(5 * SECOND);
+                        .duration(3 * SECOND);
                 // Apply PVC foil for EV or above cables.
                 if (voltageTier >= GTValues.EV)
                     builder.input(OrePrefix.foil, Materials.PolyvinylChloride, insulationAmount);
@@ -98,7 +98,7 @@ public class WireRecipeHandler {
                         .input(wirePrefix, material)
                         .output(cablePrefix, material)
                         .EUt(VA[ULV])
-                        .duration(5 * SECOND);
+                        .duration(3 * SECOND);
                 // Apply PVC foil for EV or above cables.
                 if (voltageTier >= EV)
                     builder.input(OrePrefix.foil, Materials.PolyvinylChloride, insulationAmount);

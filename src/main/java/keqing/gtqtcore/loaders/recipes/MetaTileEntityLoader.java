@@ -1591,6 +1591,11 @@ public class MetaTileEntityLoader {
                 'A', ENERGY_MODULE,
                 'C', new UnificationEntry(OrePrefix.circuit, ZPM));
 
+        ModHandler.addShapedRecipe("one_stack_filter", COVER_ONE_STACK_FILTER.getStackForm(),
+                "XXX", "XYX", "XXX",
+                'X', new UnificationEntry(OrePrefix.foil, Materials.Zinc),
+                'Y', new UnificationEntry(OrePrefix.plate, Materials.Iron));
+
         registerMachineRecipe(GTQTMetaTileEntities.LATEX_COLLECTOR,
                 "PCP", "AMA", "PCP",
                 'M', CraftingComponent.HULL,

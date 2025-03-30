@@ -217,6 +217,7 @@ public class GTQTTextures {
     public static OrientedOverlayRenderer COLLIDER_OVERLAY = new OrientedOverlayRenderer("overlay/collider");
 
     public static SimpleOverlayRenderer WIRELESS_OVERLAY = new SimpleOverlayRenderer("overlay/wireless/overlay_front");
+    public static SimpleOverlayRenderer ONE_STACK_FILTER_OVERLAY = new SimpleOverlayRenderer("overlay/one_stack_filter/overlay_front");
 
     public static OrientedOverlayRenderer DIMENSIONAL_OSCILLATOR_OVERLAY = new OrientedOverlayRenderer("overlay/dimensional_oscillator");
     public static OrientedOverlayRenderer DECAY_GENERATOR_OVERLAY = new OrientedOverlayRenderer("overlay/decay_generator");
