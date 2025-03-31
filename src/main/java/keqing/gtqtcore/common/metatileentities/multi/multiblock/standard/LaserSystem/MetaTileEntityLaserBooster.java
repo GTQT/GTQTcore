@@ -63,8 +63,6 @@ import static gregtech.api.metatileentity.multiblock.MultiblockAbility.INPUT_LAS
 import static keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility.LASER_INPUT;
 import static keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility.LASER_OUTPUT;
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing3.CasingType.NAQUADRIA_CASING;
-import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4.TurbineCasingType.NQ_MACHINE_CASING;
-import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4.TurbineCasingType.NQ_TURBINE_CASING;
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockGlass.CasingType.ANTIMATTER_CONTAINMENT_CASING;
 import static net.minecraft.util.EnumFacing.Axis.Y;
 

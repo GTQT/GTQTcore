@@ -6,18 +6,14 @@ import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
 import gregtech.api.capability.IEnergyContainer;
 import gregtech.api.capability.impl.EnergyContainerList;
-import gregtech.api.gui.GuiTextures;
-import gregtech.api.gui.resources.TextureArea;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
-import gregtech.api.metatileentity.multiblock.IProgressBarMultiblock;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.MultiblockWithDisplayBase;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
-import gregtech.api.util.TextComponentUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
@@ -35,7 +31,6 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -45,7 +40,6 @@ import java.util.List;
 import java.util.Random;
 
 import static gregtech.api.GTValues.V;
-import static gregtech.api.GTValues.VA;
 
 public class MetaTileEntitySolarPlate extends MultiblockWithDisplayBase {
 
@@ -78,18 +72,7 @@ public class MetaTileEntitySolarPlate extends MultiblockWithDisplayBase {
     @Nonnull
     @Override
     protected BlockPattern createStructurePattern() {
-        return FactoryBlockPattern.start()
-                .aisle("CCCCCC")
-                .aisle("CSSSSC")
-                .aisle("CSSSSC")
-                .aisle("CSSSSC")
-                .aisle("CSSSSC")
-                .aisle("XCCCCC")
-                .where('X', selfPredicate())
-                .where('S', TiredTraceabilityPredicate.CP_SP_CASING.get())
-                .where('C', states(GTQTMetaBlocks.blockElectrolyticBath.getState(BlockElectrolyticBath.CasingType.SOLAR_PLATE_CASING))
-                        .or(abilities(MultiblockAbility.OUTPUT_ENERGY).setMaxGlobalLimited(4)))
-                .build();
+        return FactoryBlockPattern.start().aisle("CCCCCC").aisle("CSSSSC").aisle("CSSSSC").aisle("CSSSSC").aisle("CSSSSC").aisle("XCCCCC").where('X', selfPredicate()).where('S', TiredTraceabilityPredicate.CP_SP_CASING.get()).where('C', states(GTQTMetaBlocks.blockElectrolyticBath.getState(BlockElectrolyticBath.CasingType.SOLAR_PLATE_CASING)).or(abilities(MultiblockAbility.OUTPUT_ENERGY).setMaxGlobalLimited(4))).build();
     }
 
     @Override
@@ -132,9 +115,7 @@ public class MetaTileEntitySolarPlate extends MultiblockWithDisplayBase {
         super.formStructure(context);
         this.energyContainer = new EnergyContainerList(getAbilities(MultiblockAbility.OUTPUT_ENERGY));
         Object tier = context.get("SPTieredStats");
-        this.tier = GTQTUtil.getOrDefault(() -> tier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired) tier).getIntTier(),
-                0);
+        this.tier = GTQTUtil.getOrDefault(() -> tier instanceof WrappedIntTired, () -> ((WrappedIntTired) tier).getIntTier(), 0);
         this.writeCustomData(GTQTValue.UPDATE_TIER3, buf -> buf.writeInt(this.tier));
     }
 
@@ -169,8 +150,7 @@ public class MetaTileEntitySolarPlate extends MultiblockWithDisplayBase {
     @Override
     public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
         super.renderMetaTileEntity(renderState, translation, pipeline);
-        getFrontOverlay().renderOrientedState(renderState, translation, pipeline, getFrontFacing(), this.isActive(),
-                this.isWorkingEnabled());
+        getFrontOverlay().renderOrientedState(renderState, translation, pipeline, getFrontFacing(), this.isActive(), this.isWorkingEnabled());
     }
 
     public boolean checkNaturalLighting() {

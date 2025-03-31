@@ -181,7 +181,7 @@ public class MetaTileEntityParticleHatch extends MetaTileEntityMultiblockPart im
     @Override
     public long getEUAdd() {
         if(getParticleBehavior()!=null)
-            return (long) ((getParticleBehavior().getMass()/100)*V[UEV]);
+            return (long) ((getParticleBehavior().getMass()/10)*V[UEV]);
         return 0;
     }
 

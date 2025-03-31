@@ -1,20 +1,28 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
+import gregtech.api.GTValues;
 import gregtech.api.capability.GregtechCapabilities;
 import gregtech.api.capability.IEnergyContainer;
 import gregtech.api.capability.IMultipleTankHandler;
 import gregtech.api.capability.impl.EnergyContainerList;
+import gregtech.api.fluids.store.FluidStorageKeys;
+import gregtech.api.gui.GuiTextures;
+import gregtech.api.gui.resources.TextureArea;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
+import gregtech.api.metatileentity.multiblock.IProgressBarMultiblock;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.TraceabilityPredicate;
 import gregtech.api.unification.material.Materials;
+import gregtech.api.util.GTUtility;
+import gregtech.api.util.TextComponentUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
+import gregtech.client.utils.TooltipHelper;
 import keqing.gtqtcore.api.capability.IParticle;
 import keqing.gtqtcore.api.capability.impl.GTQTCoreLogic;
 import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
@@ -24,9 +32,15 @@ import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4;
 import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing7;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -35,19 +49,47 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static gregtech.api.GTValues.UEV;
-import static gregtech.api.GTValues.V;
+import static gregtech.api.GTValues.*;
+import static gregtech.api.GTValues.VN;
 import static gregtech.api.util.RelativeDirection.*;
+import static keqing.gtqtcore.GTQTCoreConfig.MachineSwitch;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.ANTIMATTER_GENERATOR;
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockGlass.CasingType.ANTIMATTER_CONTAINMENT_CASING;
 
-public class MetaTileEntityAntimatterGenerator extends RecipeMapMultiblockController {
+public class MetaTileEntityAntimatterGenerator extends RecipeMapMultiblockController implements IProgressBarMultiblock {
 
-    private static final FluidStack HydrogenStack = Materials.Hydrogen.getPlasma(10000);
-    private static final FluidStack HeliumStack = Materials.Helium.getPlasma(10000);
-    private static final FluidStack NitrogenStack = Materials.Nitrogen.getPlasma(10000);
-    private static final FluidStack OxygenStack = Materials.Oxygen.getPlasma(10000);
+    private static final FluidStack HydrogenStack = Materials.Hydrogen.getPlasma(100);
+    private static final FluidStack HeliumStack = Materials.Helium.getPlasma(100);
+    private static final FluidStack NitrogenStack = Materials.Nitrogen.getPlasma(100);
+    private static final FluidStack OxygenStack = Materials.Oxygen.getPlasma(100);
+    private static final FluidStack ArgonStack = Materials.Argon.getPlasma(100);
+    private static final FluidStack KrStack = Materials.Krypton.getPlasma(100);
 
+    private static final FluidStack ColdNitrogenStack = Materials.Nitrogen.getFluid(FluidStorageKeys.LIQUID, 1000);
+    private static final FluidStack ColdHeliumStack = Materials.Helium.getFluid(FluidStorageKeys.LIQUID, 1000);
+    private static final FluidStack ColdNeonStack = Materials.Neon.getFluid(FluidStorageKeys.LIQUID, 1000);
+
+    int heat;
+
+    @Override
+    public void checkStructurePattern() {
+        if(MachineSwitch.DelayStructureCheckSwitch) {
+            if (this.getOffsetTimer() % 100 == 0 || this.isFirstTick()) {
+                super.checkStructurePattern();
+            }
+        }
+        else super.checkStructurePattern();
+    }
+
+    public NBTTagCompound writeToNBT(NBTTagCompound data) {
+        data.setInteger("heat", heat);
+        return super.writeToNBT(data);
+    }
+
+    public void readFromNBT(NBTTagCompound data) {
+        super.readFromNBT(data);
+        heat = data.getInteger("heat");
+    }
 
     public MetaTileEntityAntimatterGenerator(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, ANTIMATTER_GENERATOR);
@@ -93,6 +135,15 @@ public class MetaTileEntityAntimatterGenerator extends RecipeMapMultiblockContro
 
         if(isStructureFormed())
         {
+            if(heat>300)heat--;
+            if(heat>2000)generateCold();
+
+            if (!recipeMapWorkable.isWorkingEnabled()) {
+                euBooster=0;
+                euBase=0;
+                return;
+            }
+            if(heat>200000)return;
             if(getParticleHatch(0).isAvailable()&&getParticleHatch(1).isAvailable()) {
                 if (getParticleHatch(0).getAntiStaticParticle().isItemEqual(getParticleHatch(1).getParticle())
                         && (getParticleHatch(0).getAntiStaticParticle().getMetadata()==getParticleHatch(1).getParticle().getMetadata())
@@ -102,10 +153,35 @@ public class MetaTileEntityAntimatterGenerator extends RecipeMapMultiblockContro
                         getParticleHatch(1).consumeParticle(false);
                         euBase = Math.min(getParticleHatch(0).getEUAdd(), getParticleHatch(1).getEUAdd());
                         euBooster = getBoosterByFluidStack();
+
+                        if(heat>100000)
+                        {
+                            euBase=euBase*(-heat+200000)/100000;
+                            euBooster=1;
+                        }
+
                         this.energyContainer.addEnergy((long) (euBase * euBooster));
+
+                        heat+=5;
                     }
                 }
             }
+        }
+    }
+
+    private void generateCold() {
+        IMultipleTankHandler inputTank = this.getInputFluidInventory();
+        if (ColdNitrogenStack.isFluidStackIdentical(inputTank.drain(ColdNitrogenStack, false))) {
+            inputTank.drain(ColdNitrogenStack, true);
+            heat-=20;
+        }
+        else if (ColdHeliumStack.isFluidStackIdentical(inputTank.drain(ColdHeliumStack, false))) {
+            inputTank.drain(ColdHeliumStack, true);
+            heat-=40;
+        }
+        else if (ColdNeonStack.isFluidStackIdentical(inputTank.drain(ColdNeonStack, false))) {
+            inputTank.drain(ColdNeonStack, true);
+            heat-=60;
         }
     }
 
@@ -114,19 +190,33 @@ public class MetaTileEntityAntimatterGenerator extends RecipeMapMultiblockContro
         IMultipleTankHandler inputTank = this.getInputFluidInventory();
         if (HydrogenStack.isFluidStackIdentical(inputTank.drain(HydrogenStack, false))) {
             inputTank.drain(HydrogenStack, true);
+            heat+=10;
             return 1.25;
         }
         if (HeliumStack.isFluidStackIdentical(inputTank.drain(HeliumStack, false))) {
             inputTank.drain(HeliumStack, true);
+            heat+=15;
             return 1.5;
         }
         if (NitrogenStack.isFluidStackIdentical(inputTank.drain(NitrogenStack, false))) {
             inputTank.drain(NitrogenStack, true);
+            heat+=20;
             return 1.75;
         }
         if (OxygenStack.isFluidStackIdentical(inputTank.drain(OxygenStack, false))) {
             inputTank.drain(OxygenStack, true);
+            heat+=30;
             return 2;
+        }
+        if (ArgonStack.isFluidStackIdentical(inputTank.drain(ArgonStack, false))) {
+            inputTank.drain(ArgonStack, true);
+            heat+=40;
+            return 2.5;
+        }
+        if (KrStack.isFluidStackIdentical(inputTank.drain(KrStack, false))) {
+            inputTank.drain(KrStack, true);
+            heat+=50;
+            return 3;
         }
 
         return 1;
@@ -136,10 +226,12 @@ public class MetaTileEntityAntimatterGenerator extends RecipeMapMultiblockContro
         super.addDisplayText(textList);
         if (isStructureFormed())
         {
-            textList.add(new TextComponentTranslation("正在湮灭：%s %s", getParticleHatch(0).getParticle(), getParticleHatch(1).getParticle()));
-            textList.add(new TextComponentTranslation("湮灭能量: %s EU", euBase));
-            textList.add(new TextComponentTranslation("湮灭倍率：%s EU", euBooster));
-            textList.add(new TextComponentTranslation("总产生能量：%s EU", euBase* euBooster));
+            textList.add(new TextComponentTranslation("正在湮灭: %s %s", getParticleHatch(0).getParticle().getDisplayName(), getParticleHatch(1).getParticle().getDisplayName()));
+            textList.add(new TextComponentString("湮灭能量: " + euBase + " " + VN[GTUtility.getTierByVoltage((long) euBase)]));
+            textList.add(new TextComponentTranslation("湮灭倍率: %s 倍", euBooster));
+            textList.add(new TextComponentString("总产生能量: " + euBase* euBooster + " " + VN[GTUtility.getTierByVoltage((long) (euBase* euBooster))]));
+
+            textList.add(new TextComponentTranslation("反应温度 : %s K/200000 K", heat));
         }
     }
 
@@ -194,7 +286,7 @@ public class MetaTileEntityAntimatterGenerator extends RecipeMapMultiblockContro
 
                 .where('F', getFramePredicate())
                 .where('D', states(getBlackCasingState())
-                        .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setExactLimit(1))
+                        .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setMaxGlobalLimited(2))
                         .or(abilities(MultiblockAbility.MAINTENANCE_HATCH).setExactLimit(1)))
 
                 .where('P', states(getBlackCasingState())
@@ -250,6 +342,84 @@ public class MetaTileEntityAntimatterGenerator extends RecipeMapMultiblockContro
     @Override
     public boolean hasMufflerMechanics() {
         return false;
+    }
+
+    @Override
+    public int getNumProgressBars() {
+        return 1;
+    }
+
+    @Override
+    public double getFillPercentage(int index) {
+        return (double) heat /200000;
+    }
+
+    @Override
+    public TextureArea getProgressBarTexture(int index) {
+        return GuiTextures.PROGRESS_BAR_HPCA_COMPUTATION;
+    }
+
+    @Override
+    public void addBarHoverText(List<ITextComponent> hoverList, int index) {
+        ITextComponent info = TextComponentUtil.stringWithColor(
+                getColor(),
+                heat+ " / " + 200000 + " H");
+
+        hoverList.add(TextComponentUtil.translationWithColor(
+                TextFormatting.GRAY,
+                "反应温度：%s",
+                info));
+    }
+
+    private TextFormatting getColor() {
+        if (heat <100000) {
+            return TextFormatting.GREEN;
+        } else {
+            return heat < 150000 ? TextFormatting.YELLOW : TextFormatting.RED;
+        }
+    }
+
+    //    private static final FluidStack HydrogenStack = Materials.Hydrogen.getPlasma(100);
+    //    private static final FluidStack HeliumStack = Materials.Helium.getPlasma(100);
+    //    private static final FluidStack NitrogenStack = Materials.Nitrogen.getPlasma(100);
+    //    private static final FluidStack OxygenStack = Materials.Oxygen.getPlasma(100);
+    //    private static final FluidStack ArgonStack = Materials.Argon.getPlasma(100);
+    //    private static final FluidStack KrStack = Materials.Krypton.getPlasma(100);
+    //
+    //    private static final FluidStack ColdNitrogenStack = Materials.Nitrogen.getFluid(FluidStorageKeys.LIQUID, 1000);
+    //    private static final FluidStack ColdHeliumStack = Materials.Helium.getFluid(FluidStorageKeys.LIQUID, 1000);
+    //    private static final FluidStack ColdNeonStack = Materials.Neon.getFluid(FluidStorageKeys.LIQUID, 1000);
+
+    @Override
+    public void addInformation(ItemStack stack,
+                               World player,
+                               List<String> tooltip,
+                               boolean advanced) {
+        super.addInformation(stack, player, tooltip, advanced);
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("根据泛银河系公约 ,反物质被禁止用于武器！"));
+        tooltip.add(I18n.format("=============================================="));
+        tooltip.add(I18n.format("将粒子与半稳定反粒子湮灭产生的巨大能量通过共振线圈收集转化为电能"));
+        tooltip.add(I18n.format("湮灭反应需要对等数量的粒子与半稳定反粒子"));
+        tooltip.add(I18n.format("每个发电周期均为1tick，并消耗一对粒子"));
+        tooltip.add(I18n.format("基础产能计算：mass/10*V[UEV],mass单位为MeV/c^2"));
+        tooltip.add(I18n.format("本发电无视动力仓等级与MAX墙限制！"));
+        tooltip.add(I18n.format("任何无法及时输出到动力仓（包括激光源仓）的能量将会被浪费！"));
+        tooltip.add(I18n.format("=============================================="));
+        tooltip.add(I18n.format("每湮灭一对粒子固定产热 5 K"));
+        tooltip.add(I18n.format("每周期消耗 100mb 氢等离子,提供125%%发电倍率，并额外产生10 K热量"));
+        tooltip.add(I18n.format("每周期消耗 100mb 氦等离子,提供150%%的发电倍率，并额外产生15 K热量"));
+        tooltip.add(I18n.format("每周期消耗 100mb 氮等离子,提供175%%的发电倍率，并额外产生20 K热量"));
+        tooltip.add(I18n.format("每周期消耗 100mb 氧等离子,提供200%%的发电倍率，并额外产生30 K热量"));
+        tooltip.add(I18n.format("每周期消耗 100mb 氩等离子,提供250%%的发电倍率，并额外产生40 K热量"));
+        tooltip.add(I18n.format("每周期消耗 100mb 氪等离子,提供300%%的发电倍率，并额外产生50 K热量"));
+        tooltip.add(I18n.format("当温度大于100000K时，将无视发电倍率，基础发电衰减至(-heat+200000)/100000"));
+        tooltip.add(I18n.format("当温度大于200000K时，设备将关机，直到温度下降至符合工作需求"));
+        tooltip.add(I18n.format("=============================================="));
+        tooltip.add(I18n.format("机器每tick降温 1 K"));
+        tooltip.add(I18n.format("每周期消耗 1000mb 液态氮,吸收20 K的热量"));
+        tooltip.add(I18n.format("每周期消耗 1000mb 液态氦,吸收40 K的热量"));
+        tooltip.add(I18n.format("每周期消耗 1000mb 液态氖,吸收60 K 热量"));
+        tooltip.add(I18n.format("=============================================="));
     }
 
 }
