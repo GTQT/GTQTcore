@@ -3468,12 +3468,7 @@ public class FirstDegreeMaterials {
                 .build()
                 .setFormula("(NH3)CH4", true);
 
-        SodiumMolybdate = new Material.Builder(getMaterialsId(), gregtechId("sodium_molybdate"))
-                .dust()
-                .color(0xfcfc00)
-                .iconSet(ROUGH)
-                .build()
-                .setFormula("Na2MoO4", true);
+        getMaterialsId();
 
         //交错次元空气
         GTQTMaterials.BeneathAir = new Material.Builder(getMaterialsId(), gregtechId("beneath_air"))

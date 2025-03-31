@@ -18,6 +18,8 @@ import static gregtechfoodoption.GTFOMaterialHandler.AceticAnhydride;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
+import static keqing.gtqtcore.api.unification.TJMaterials.Fiberglass;
+import static keqing.gtqtcore.api.unification.TJMaterials.Polyetheretherketone;
 import static keqing.gtqtcore.api.utils.GTQTUtil.CWT;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 
@@ -329,8 +331,28 @@ public class WetwareCircuits {
                         OreDictUnifier.get(foil, NiobiumTitanium, 16)},
                 new FluidStack[]{SterileGrowthMedium.getFluid(4000)});
 
+        LARGE_CHEMICAL_RECIPES.recipeBuilder()
+                .duration(100)
+                .EUt(VA[IV])
+                .input(foil, Yttrium, 4)
+                .input(ACRYLIC_YARN,16)
+                .fluidInputs(Polybenzimidazole.getFluid(288))
+                .fluidInputs(UltraGlue.getFluid(500))
+                .output(LAMINATION_YR, 4)
+                .buildAndRegister();
+
+        PRESSURE_LAMINATOR_RECIPES.recipeBuilder()
+                .duration(200)
+                .EUt(VA[LuV])
+                .input(LAMINATION_YR)
+                .input(foil, Samarium, 8)
+                .fluidInputs(Polyetheretherketone.getFluid(576))
+                .fluidInputs(UltraGlue.getFluid(576))
+                .output(IMPREGNATED_BIO_BOARD, 2)
+                .buildAndRegister();
+
         CIRCUIT_ASSEMBLER_RECIPES.recipeBuilder()
-                .input(plate, KaptonK, 16)
+                .input(IMPREGNATED_BIO_BOARD, 16)
                 .input(ELECTRICALLY_WIRED_PETRI_DISH)
                 .input(ELECTRIC_PUMP_LuV)
                 .input(SENSOR_IV)

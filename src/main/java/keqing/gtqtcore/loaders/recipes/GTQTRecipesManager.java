@@ -56,6 +56,7 @@ public class GTQTRecipesManager {
         AlgaeChain.init();
         FluidizedBedChain.init();
         AcidReactorRecipes.init();
+        AntimatterGenerator.init();
         PPBChain.init();
         BioReactor.init();
         AirDistillation.init();

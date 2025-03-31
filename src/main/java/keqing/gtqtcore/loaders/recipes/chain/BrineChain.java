@@ -3,6 +3,7 @@ package keqing.gtqtcore.loaders.recipes.chain;
 import gregtech.api.recipes.ingredients.IntCircuitIngredient;
 import gregtech.api.unification.OreDictUnifier;
 
+import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
@@ -120,16 +121,6 @@ public class BrineChain {
                 .EUt(480)
                 .buildAndRegister();
 
-        // NH3 + C3H6 + 3O -> 3H2O + C3H3N
-        CHEMICAL_RECIPES.recipeBuilder().duration(100).EUt(120)
-                .notConsumable(dust, Platinum)
-                .fluidInputs(Ammonia.getFluid(1000))
-                .fluidInputs(Propene.getFluid(1000))
-                .fluidInputs(Oxygen.getFluid(3000))
-                .fluidOutputs(Water.getFluid(3000))
-                .fluidOutputs(Acrylonitrile.getFluid(1000))
-                .buildAndRegister();
-
         // S + NaCN -> NaSCN
         CHEMICAL_RECIPES.recipeBuilder().duration(100).EUt(120)
                 .input(dust, Sulfur)
@@ -138,7 +129,7 @@ public class BrineChain {
                 .buildAndRegister();
 
         // NO + C3H3N + NaSCN -> [C3H3N]n(NaSCN) polymerized with Oxygen bond
-        CHEMICAL_RECIPES.recipeBuilder().duration(160).EUt(30)
+        CHEMICAL_RECIPES.recipeBuilder().duration(360).EUt(VA[LuV])
                 .fluidInputs(NitricOxide.getFluid(1000))
                 .fluidInputs(Acrylonitrile.getFluid(1000))
                 .fluidInputs(SodiumThiocyanate.getFluid(1000))
@@ -146,17 +137,25 @@ public class BrineChain {
                 .buildAndRegister();
 
         // [C3H3N]n -> NaSCN + (solidified)[C3H3N]n
-        BLAST_RECIPES.recipeBuilder().duration(180).EUt(120).blastFurnaceTemp(600)
+        BLAST_RECIPES.recipeBuilder().duration(240).EUt(VA[EV]).blastFurnaceTemp(5400)
                 .notConsumable(ELECTRIC_MOTOR_IV.getStackForm())
                 .fluidInputs(PolyacrylonitrileSolution.getFluid(1000))
                 .output(dust, AcrylicFibers, 1)
                 .fluidOutputs(SodiumThiocyanate.getFluid(1000))
                 .buildAndRegister();
 
-        ASSEMBLER_RECIPES.recipeBuilder().duration(60).EUt(24)
+        SPINNER_RECIPES.recipeBuilder().duration(60).EUt(VA[HV])
                 .input(dust, AcrylicFibers, 1)
                 .input(wireFine, Gold)
+                .circuitMeta(1)
                 .outputs(ACRYLIC_YARN.getStackForm())
+                .buildAndRegister();
+
+        SPINNER_RECIPES.recipeBuilder().duration(60).EUt(VA[EV])
+                .input(dust, AcrylicFibers, 1)
+                .input(wireFine, Samarium)
+                .circuitMeta(2)
+                .outputs(ACRYLIC_YARN.getStackForm(4))
                 .buildAndRegister();
 
         // CH2O2 + CH3OH -> H2O + C2H4O2

@@ -86,7 +86,9 @@ public class BlockMultiblockGlass extends VariantBlock<BlockMultiblockGlass.Casi
         TECH_FUSION_GLASS_V("tech_fusion_glass_5"),
         TECH_FUSION_GLASS_VI("tech_fusion_glass_6"),
         UU_GALSS("uu_glass_block"),
-        COPY_GALSS("copy_glass_block");
+        COPY_GALSS("copy_glass_block"),
+        ANTIMATTER_CONTAINMENT_CASING("antimatter_containment_casing"),
+        ;
         private final String name;
 
         CasingType(String name) {

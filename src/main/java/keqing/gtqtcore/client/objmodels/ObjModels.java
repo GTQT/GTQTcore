@@ -23,4 +23,6 @@ public class ObjModels {
 
     public static final IModelCustom WindRotor = AdvancedModelLoader.loadModel(new ResourceLocation("gtqtcore", "models/obj/windrotor.obj"));
     public static final ResourceLocation WindRotor_pic = new ResourceLocation("gtqtcore", "models/obj/windrotor.png");
+
+    public static final IModelCustom BlackHole = AdvancedModelLoader.loadModel(new ResourceLocation("gtqtcore", "models/obj/black_hole.obj"));
 }

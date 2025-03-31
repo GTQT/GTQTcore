@@ -5175,6 +5175,7 @@ metaitem.item.impregnated_epoxy.name=Polymer Fiber Reinforced-Platinum Substrate
 metaitem.item.impregnated_graphite_rodsa.name=Pre-treated Graphite Electrodes
 metaitem.item.impregnated_fiber.name=Engineering Plastic-Sensitive Piezoelectric Substrate
 metaitem.item.impregnated_multilayer_fiber.name=Laminated Composite Fiber-Performance Alloy Substrate
+metaitem.item.impregnated_bio_fiber.name=Super-active bio-based – high-performance conductive substrates
 gtqtcore.machine.froth_flotation_tank.name=Industrial Flotation Reactor Tank
 gtqtcore.machine.fix_bed.name=Fixed Bed
 gtqtcore.machine.cryogenic_freezer.name=Cryogenic Freezer
@@ -5500,11 +5501,12 @@ metaitem.catalyst.rh.name=Dolomite Catalyst (§7ISO§r)
 metaitem.tool.tooltip.catalyst=§fType: §dCatalyst§r
 metaitem.tool.tooltip.catalyst_bed=§fTy
 
-metaitem.item.lamination_ca.name=强化碳纤维基板
-metaitem.item.lamination_fg.name=玻璃纤维基板
-metaitem.item.lamination_wd.name=防腐木基板
+metaitem.item.lamination_ca.name=Reinforced carbon fiber substrate
+metaitem.item.lamination_fg.name=Fiberglass substrates
+metaitem.item.lamination_wd.name=Anticorrosive wood substrates
 metaitem.item.insulating_ir.name=Ruthenium-based Thick Film Resistor Paste Coating
 metaitem.item.lamination_ge.name=Germanium Laminate Fiber Substrate
+metaitem.item.insulating_yr.name=Yttrium-based acrylic fiber composite lamination
 metaitem.item.insulatingmica.name=Insulating Mica Composite Sheet
 gtqtcore.machine.gas_collector.name=Large Gas Collector
 

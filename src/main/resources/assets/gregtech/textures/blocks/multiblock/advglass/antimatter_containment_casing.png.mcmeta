@@ -1,0 +1,14 @@
+{
+    "ctm": {
+        "ctm_version": 1,
+        "type": "CTM",
+        "layer": "BLOOM",
+        "gregtech": true,
+        "textures": [
+            "gregtech:blocks/multiblock/advglass/antimatter_containment_casing_ctm"
+        ],
+        "extra": {
+            "light": 15
+        }
+    }
+}

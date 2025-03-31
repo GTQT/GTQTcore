@@ -21,7 +21,6 @@ import keqing.gtqtcore.common.CommonProxy;
 import keqing.gtqtcore.common.block.GTQTCrops;
 import keqing.gtqtcore.common.items.behaviors.*;
 import keqing.gtqtcore.common.items.behaviors.render.HaloRenderItemBehavior;
-import keqing.gtqtcore.common.items.behaviors.MEHatchTransBehavior;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.EnumDyeColor;
 
@@ -56,6 +55,7 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         IMPREGNATED_EPOXY = this.addItem(5, "item.impregnated_epoxy").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
         IMPREGNATED_FIBER = this.addItem(6, "item.impregnated_fiber").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
         IMPREGNATED_MULTILAYER_FIBER = this.addItem(7, "item.impregnated_multilayer_fiber").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
+        IMPREGNATED_BIO_BOARD = this.addItem(8, "item.impregnated_bio_fiber").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
 
         //绝缘云母
         INSULATINGMICA = this.addItem(9, "item.insulatingmica").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
@@ -66,6 +66,7 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         LAMINATION_CA = this.addItem(15, "item.lamination_ca").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
         LAMINATION_GE = this.addItem(16, "item.lamination_ge").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
         LAMINATION_IR = this.addItem(17, "item.insulating_ir").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
+        LAMINATION_YR = this.addItem(18, "item.insulating_yr").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
 
         //其他燃料
         JIAO_XIAN_REN_ZHANG = this.addItem(20, "fuel.jiaoxianrenzhang").setBurnValue(9600).setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO);
@@ -221,15 +222,10 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         ENDLESS_SPRAY_EMPTY = addItem(161, "endless_spray.empty");
 
         // out of registry order so it can reference the Empty Spray Can
-        ENDLESS_SPRAY_SOLVENT = addItem(160, "endless_spray.solvent").setMaxStackSize(1)
-                .addComponents(new ColorSprayBehaviour(ENDLESS_SPRAY_EMPTY.getStackForm(), Integer.MAX_VALUE, -1))
-                .setCreativeTabs(GTQTCore_TO);
+        ENDLESS_SPRAY_SOLVENT = addItem(160, "endless_spray.solvent").setMaxStackSize(1).addComponents(new ColorSprayBehaviour(ENDLESS_SPRAY_EMPTY.getStackForm(), Integer.MAX_VALUE, -1)).setCreativeTabs(GTQTCore_TO);
 
         for (int i = 0; i < EnumDyeColor.values().length; i++) {
-            ENDLESS_SPRAY_CAN_DYES[i] = addItem(162 + i, "endless_spray.can.dyes." + EnumDyeColor.values()[i].getName())
-                    .setMaxStackSize(1)
-                    .addComponents(new ColorSprayBehaviour(ENDLESS_SPRAY_EMPTY.getStackForm(), Integer.MAX_VALUE, i))
-                    .setCreativeTabs(GTQTCore_TO);
+            ENDLESS_SPRAY_CAN_DYES[i] = addItem(162 + i, "endless_spray.can.dyes." + EnumDyeColor.values()[i].getName()).setMaxStackSize(1).addComponents(new ColorSprayBehaviour(ENDLESS_SPRAY_EMPTY.getStackForm(), Integer.MAX_VALUE, i)).setCreativeTabs(GTQTCore_TO);
         }
 
         //ROCK
@@ -337,12 +333,12 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         CATALYST_SYNCHROTRON_CAPABLE = this.addItem(247, "catalyst.synchrotron_capable").addOreDict("catalystSynchrotronCapable").addComponents(new CatalystBehavior()).setCreativeTabs(CommonProxy.GTQTCore_CH);
 
         //催化剂框架 6种绰绰有余
-        CATALYST_FRAMEWORK_I = this.addItem(250, "catalyst_framework_i").addComponents(new CatalystBehavior(false,4)).setCreativeTabs(CommonProxy.GTQTCore_CH);
-        CATALYST_FRAMEWORK_II = this.addItem(251, "catalyst_framework_ii").addComponents(new CatalystBehavior(false,4)).setCreativeTabs(CommonProxy.GTQTCore_CH);
-        CATALYST_FRAMEWORK_III = this.addItem(252, "catalyst_framework_iii").addComponents(new CatalystBehavior(false,4)).setCreativeTabs(CommonProxy.GTQTCore_CH);
-        CATALYST_FRAMEWORK_IV = this.addItem(253, "catalyst_framework_iv").addComponents(new CatalystBehavior(false,4)).setCreativeTabs(CommonProxy.GTQTCore_CH);
-        CATALYST_FRAMEWORK_V = this.addItem(254, "catalyst_framework_v").addComponents(new CatalystBehavior(false,4)).setCreativeTabs(CommonProxy.GTQTCore_CH);
-        CATALYST_FRAMEWORK_VI = this.addItem(255, "catalyst_framework_vi").addComponents(new CatalystBehavior(false,4)).setCreativeTabs(CommonProxy.GTQTCore_CH);
+        CATALYST_FRAMEWORK_I = this.addItem(250, "catalyst_framework_i").addComponents(new CatalystBehavior(false, 4)).setCreativeTabs(CommonProxy.GTQTCore_CH);
+        CATALYST_FRAMEWORK_II = this.addItem(251, "catalyst_framework_ii").addComponents(new CatalystBehavior(false, 4)).setCreativeTabs(CommonProxy.GTQTCore_CH);
+        CATALYST_FRAMEWORK_III = this.addItem(252, "catalyst_framework_iii").addComponents(new CatalystBehavior(false, 4)).setCreativeTabs(CommonProxy.GTQTCore_CH);
+        CATALYST_FRAMEWORK_IV = this.addItem(253, "catalyst_framework_iv").addComponents(new CatalystBehavior(false, 4)).setCreativeTabs(CommonProxy.GTQTCore_CH);
+        CATALYST_FRAMEWORK_V = this.addItem(254, "catalyst_framework_v").addComponents(new CatalystBehavior(false, 4)).setCreativeTabs(CommonProxy.GTQTCore_CH);
+        CATALYST_FRAMEWORK_VI = this.addItem(255, "catalyst_framework_vi").addComponents(new CatalystBehavior(false, 4)).setCreativeTabs(CommonProxy.GTQTCore_CH);
         CATALYST_FRAMEWORK_BLANK = this.addItem(256, "catalyst_framework_blank").setCreativeTabs(CommonProxy.GTQTCore_CH);
 
         CATALYST_BED_BASE = this.addItem(260, "catalyst_bed.base").addOreDict("catalystBedEmpty").setCreativeTabs(CommonProxy.GTQTCore_CH);
@@ -379,21 +375,21 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         NANOSILICON_CATHODE = addItem(289, "nanosilicon.cathode").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         //催化剂
         //沸石催化剂
-        CATALYST_GAS = this.addItem(290, "catalyst.gas").addComponents(new CatalystBehavior(true,4)).setCreativeTabs(CommonProxy.GTQTCore_CH);
+        CATALYST_GAS = this.addItem(290, "catalyst.gas").addComponents(new CatalystBehavior(true, 4)).setCreativeTabs(CommonProxy.GTQTCore_CH);
         //氧化钴催化剂
-        CATALYST_CO = this.addItem(291, "catalyst.co").addComponents(new CatalystBehavior(true,4)).setCreativeTabs(CommonProxy.GTQTCore_CH);
+        CATALYST_CO = this.addItem(291, "catalyst.co").addComponents(new CatalystBehavior(true, 4)).setCreativeTabs(CommonProxy.GTQTCore_CH);
         //铁基催化剂
-        CATALYST_CU = this.addItem(292, "catalyst.cu").addComponents(new CatalystBehavior(true,4)).setCreativeTabs(CommonProxy.GTQTCore_CH);
+        CATALYST_CU = this.addItem(292, "catalyst.cu").addComponents(new CatalystBehavior(true, 4)).setCreativeTabs(CommonProxy.GTQTCore_CH);
         //铜锌催化剂
-        CATALYST_ZN = this.addItem(293, "catalyst.zn").addComponents(new CatalystBehavior(true,4)).setCreativeTabs(CommonProxy.GTQTCore_CH);
+        CATALYST_ZN = this.addItem(293, "catalyst.zn").addComponents(new CatalystBehavior(true, 4)).setCreativeTabs(CommonProxy.GTQTCore_CH);
         //哈伯催化剂
-        CATALYST_CR = this.addItem(294, "catalyst.cr").addComponents(new CatalystBehavior(true,4)).setCreativeTabs(CommonProxy.GTQTCore_CH);
+        CATALYST_CR = this.addItem(294, "catalyst.cr").addComponents(new CatalystBehavior(true, 4)).setCreativeTabs(CommonProxy.GTQTCore_CH);
         //铬基催化剂
-        CATALYST_NB = this.addItem(295, "catalyst.nb").addComponents(new CatalystBehavior(true,4)).setCreativeTabs(CommonProxy.GTQTCore_CH);
+        CATALYST_NB = this.addItem(295, "catalyst.nb").addComponents(new CatalystBehavior(true, 4)).setCreativeTabs(CommonProxy.GTQTCore_CH);
         //齐格勒催化剂
-        CATALYST_ZR = this.addItem(296, "catalyst.zr").addComponents(new CatalystBehavior(true,4)).setCreativeTabs(CommonProxy.GTQTCore_CH);
+        CATALYST_ZR = this.addItem(296, "catalyst.zr").addComponents(new CatalystBehavior(true, 4)).setCreativeTabs(CommonProxy.GTQTCore_CH);
         //白云石催化剂
-        CATALYST_RH = this.addItem(297, "catalyst.rh").addComponents(new CatalystBehavior(true,4)).setCreativeTabs(CommonProxy.GTQTCore_CH);
+        CATALYST_RH = this.addItem(297, "catalyst.rh").addComponents(new CatalystBehavior(true, 4)).setCreativeTabs(CommonProxy.GTQTCore_CH);
 
         //快乐模具
         MOLD_GAS = this.addItem(300, "mold.gas").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
@@ -413,11 +409,7 @@ public class GTQTMetaItem1 extends StandardMetaItem {
 
 
         //
-        SPINNER = this.addItem(330, "spinner")
-                .addOreDict("toolSpinner")
-                .addOreDict("craftingToolSpinner")
-                .addComponents(new SpinnerBehavior())
-                .setCreativeTabs(GTQTCore_TO);
+        SPINNER = this.addItem(330, "spinner").addOreDict("toolSpinner").addOreDict("craftingToolSpinner").addComponents(new SpinnerBehavior()).setCreativeTabs(GTQTCore_TO);
 
         //升级
         ADV_ENERGY_STORAGE = this.addItem(350, "adv_energy_storage").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_TAB);
@@ -525,95 +517,66 @@ public class GTQTMetaItem1 extends StandardMetaItem {
 
         /* ----------------------------------------------------------------------- Extruders ---------------------------------------------------------------------- */
 
-        EXOTIC_SHAPE_EXTRUDERS[0] = EXOTIC_SHAPE_EXTRUDER_PLATE = this.addItem(450, "shape.exotic_extruder.plate")
-                .setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
+        EXOTIC_SHAPE_EXTRUDERS[0] = EXOTIC_SHAPE_EXTRUDER_PLATE = this.addItem(450, "shape.exotic_extruder.plate").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
 
-        EXOTIC_SHAPE_EXTRUDERS[1] = EXOTIC_SHAPE_EXTRUDER_ROD = this.addItem(451, "shape.exotic_extruder.rod")
-                .setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
+        EXOTIC_SHAPE_EXTRUDERS[1] = EXOTIC_SHAPE_EXTRUDER_ROD = this.addItem(451, "shape.exotic_extruder.rod").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
 
-        EXOTIC_SHAPE_EXTRUDERS[2] = EXOTIC_SHAPE_EXTRUDER_BOLT = this.addItem(452, "shape.exotic_extruder.bolt")
-                .setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
+        EXOTIC_SHAPE_EXTRUDERS[2] = EXOTIC_SHAPE_EXTRUDER_BOLT = this.addItem(452, "shape.exotic_extruder.bolt").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
 
-        EXOTIC_SHAPE_EXTRUDERS[3] = EXOTIC_SHAPE_EXTRUDER_RING = this.addItem(453, "shape.exotic_extruder.ring")
-                .setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
+        EXOTIC_SHAPE_EXTRUDERS[3] = EXOTIC_SHAPE_EXTRUDER_RING = this.addItem(453, "shape.exotic_extruder.ring").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
 
-        EXOTIC_SHAPE_EXTRUDERS[4] = EXOTIC_SHAPE_EXTRUDER_CELL = this.addItem(454, "shape.exotic_extruder.cell")
-                .setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
+        EXOTIC_SHAPE_EXTRUDERS[4] = EXOTIC_SHAPE_EXTRUDER_CELL = this.addItem(454, "shape.exotic_extruder.cell").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
 
-        EXOTIC_SHAPE_EXTRUDERS[5] = EXOTIC_SHAPE_EXTRUDER_INGOT = this.addItem(455, "shape.exotic_extruder.ingot")
-                .setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
+        EXOTIC_SHAPE_EXTRUDERS[5] = EXOTIC_SHAPE_EXTRUDER_INGOT = this.addItem(455, "shape.exotic_extruder.ingot").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
 
-        EXOTIC_SHAPE_EXTRUDERS[6] = EXOTIC_SHAPE_EXTRUDER_WIRE = this.addItem(456, "shape.exotic_extruder.wire")
-                .setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
+        EXOTIC_SHAPE_EXTRUDERS[6] = EXOTIC_SHAPE_EXTRUDER_WIRE = this.addItem(456, "shape.exotic_extruder.wire").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
 
-        EXOTIC_SHAPE_EXTRUDERS[7] = EXOTIC_SHAPE_EXTRUDER_PIPE_TINY = this.addItem(457, "shape.exotic_extruder.pipe.tiny")
-                .setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
+        EXOTIC_SHAPE_EXTRUDERS[7] = EXOTIC_SHAPE_EXTRUDER_PIPE_TINY = this.addItem(457, "shape.exotic_extruder.pipe.tiny").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
 
-        EXOTIC_SHAPE_EXTRUDERS[8] = EXOTIC_SHAPE_EXTRUDER_PIPE_SMALL = this.addItem(458, "shape.exotic_extruder.pipe.small")
-                .setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
+        EXOTIC_SHAPE_EXTRUDERS[8] = EXOTIC_SHAPE_EXTRUDER_PIPE_SMALL = this.addItem(458, "shape.exotic_extruder.pipe.small").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
 
-        EXOTIC_SHAPE_EXTRUDERS[9] = EXOTIC_SHAPE_EXTRUDER_PIPE_NORMAL = this.addItem(459, "shape.exotic_extruder.pipe.normal")
-                .setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
+        EXOTIC_SHAPE_EXTRUDERS[9] = EXOTIC_SHAPE_EXTRUDER_PIPE_NORMAL = this.addItem(459, "shape.exotic_extruder.pipe.normal").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
 
-        EXOTIC_SHAPE_EXTRUDERS[10] = EXOTIC_SHAPE_EXTRUDER_PIPE_LARGE = this.addItem(460, "shape.exotic_extruder.pipe.large")
-                .setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
+        EXOTIC_SHAPE_EXTRUDERS[10] = EXOTIC_SHAPE_EXTRUDER_PIPE_LARGE = this.addItem(460, "shape.exotic_extruder.pipe.large").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
 
-        EXOTIC_SHAPE_EXTRUDERS[11] = EXOTIC_SHAPE_EXTRUDER_PIPE_HUGE = this.addItem(461, "shape.exotic_extruder.pipe.huge")
-                .setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
+        EXOTIC_SHAPE_EXTRUDERS[11] = EXOTIC_SHAPE_EXTRUDER_PIPE_HUGE = this.addItem(461, "shape.exotic_extruder.pipe.huge").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
 
-        EXOTIC_SHAPE_EXTRUDERS[12] = EXOTIC_SHAPE_EXTRUDER_BLOCK = this.addItem(462, "shape.exotic_extruder.block")
-                .setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
+        EXOTIC_SHAPE_EXTRUDERS[12] = EXOTIC_SHAPE_EXTRUDER_BLOCK = this.addItem(462, "shape.exotic_extruder.block").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
 
         //  Free ID 463-470: also index 13-20 (inclusive) are unused (but do not add item in this ID range)
 
-        EXOTIC_SHAPE_EXTRUDERS[21] = EXOTIC_SHAPE_EXTRUDER_GEAR = addItem(471, "shape.exotic_extruder.gear")
-                .setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
+        EXOTIC_SHAPE_EXTRUDERS[21] = EXOTIC_SHAPE_EXTRUDER_GEAR = addItem(471, "shape.exotic_extruder.gear").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
 
-        EXOTIC_SHAPE_EXTRUDERS[22] = EXOTIC_SHAPE_EXTRUDER_BOTTLE = addItem(472, "shape.exotic_extruder.bottle")
-                .setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
+        EXOTIC_SHAPE_EXTRUDERS[22] = EXOTIC_SHAPE_EXTRUDER_BOTTLE = addItem(472, "shape.exotic_extruder.bottle").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
 
-        EXOTIC_SHAPE_EXTRUDERS[23] = EXOTIC_SHAPE_EXTRUDER_FOIL = addItem(473, "shape.exotic_extruder.foil")
-                .setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
+        EXOTIC_SHAPE_EXTRUDERS[23] = EXOTIC_SHAPE_EXTRUDER_FOIL = addItem(473, "shape.exotic_extruder.foil").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
 
-        EXOTIC_SHAPE_EXTRUDERS[24] = EXOTIC_SHAPE_EXTRUDER_GEAR_SMALL = addItem(474, "shape.exotic_extruder.gear_small")
-                .setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
+        EXOTIC_SHAPE_EXTRUDERS[24] = EXOTIC_SHAPE_EXTRUDER_GEAR_SMALL = addItem(474, "shape.exotic_extruder.gear_small").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
 
-        EXOTIC_SHAPE_EXTRUDERS[25] = EXOTIC_SHAPE_EXTRUDER_ROD_LONG = addItem(475, "shape.exotic_extruder.rod_long")
-                .setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
+        EXOTIC_SHAPE_EXTRUDERS[25] = EXOTIC_SHAPE_EXTRUDER_ROD_LONG = addItem(475, "shape.exotic_extruder.rod_long").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
 
-        EXOTIC_SHAPE_EXTRUDERS[26] = EXOTIC_SHAPE_EXTRUDER_ROTOR = addItem(476, "shape.exotic_extruder.rotor")
-                .setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
+        EXOTIC_SHAPE_EXTRUDERS[26] = EXOTIC_SHAPE_EXTRUDER_ROTOR = addItem(476, "shape.exotic_extruder.rotor").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
 
         //Shape Molds and Extruders addition.
-        SHAPE_MOLD_ROD = this.addItem(480, "shape.mold.rod")
-                .setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Steel, M * 4)));
+        SHAPE_MOLD_ROD = this.addItem(480, "shape.mold.rod").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Steel, M * 4)));
 
-        SHAPE_MOLD_BOLT = this.addItem(481, "shape.mold.bolt")
-                .setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Steel, M * 4)));
+        SHAPE_MOLD_BOLT = this.addItem(481, "shape.mold.bolt").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Steel, M * 4)));
 
-        SHAPE_MOLD_ROUND = this.addItem(482, "shape.mold.round")
-                .setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Steel, M * 4)));
+        SHAPE_MOLD_ROUND = this.addItem(482, "shape.mold.round").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Steel, M * 4)));
 
-        SHAPE_MOLD_SCREW = this.addItem(483, "shape.mold.screw")
-                .setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Steel, M * 4)));
+        SHAPE_MOLD_SCREW = this.addItem(483, "shape.mold.screw").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Steel, M * 4)));
 
-        SHAPE_MOLD_RING = this.addItem(484, "shape.mold.ring")
-                .setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Steel, M * 4)));
+        SHAPE_MOLD_RING = this.addItem(484, "shape.mold.ring").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Steel, M * 4)));
 
-        SHAPE_MOLD_ROD_LONG = this.addItem(485, "shape.mold.rod_long")
-                .setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Steel, M * 4)));
+        SHAPE_MOLD_ROD_LONG = this.addItem(485, "shape.mold.rod_long").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Steel, M * 4)));
 
-        SHAPE_MOLD_TURBINE_BLADE = this.addItem(486, "shape.mold.turbine_blade")
-                .setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Steel, M * 4)));
+        SHAPE_MOLD_TURBINE_BLADE = this.addItem(486, "shape.mold.turbine_blade").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Steel, M * 4)));
 
-        SHAPE_MOLD_DRILL_HEAD = this.addItem(487, "shape.mold.drill_head")
-                .setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Steel, M * 4)));
+        SHAPE_MOLD_DRILL_HEAD = this.addItem(487, "shape.mold.drill_head").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Steel, M * 4)));
 
-        SHAPE_EXTRUDER_TURBINE_BLADE = this.addItem(488, "shape.extruder.turbine_blade")
-                .setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Steel, M * 4)));
+        SHAPE_EXTRUDER_TURBINE_BLADE = this.addItem(488, "shape.extruder.turbine_blade").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Steel, M * 4)));
 
-        SHAPE_EXTRUDER_DRILL_HEAD = this.addItem(489, "shape.extruder.drill_head")
-                .setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Steel, M * 4)));
+        SHAPE_EXTRUDER_DRILL_HEAD = this.addItem(489, "shape.extruder.drill_head").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Steel, M * 4)));
 
 
         //  Magneto Resonatic Board
@@ -886,23 +849,17 @@ public class GTQTMetaItem1 extends StandardMetaItem {
 
         /* -------------------------------------------------------------------- Nuclear Items --------------------------------------------------------------------- */
 
-        HIGH_DENSITY_THORIUM = this.addItem(820, "high_density_thorium")
-                .setMaterialInfo(new ItemMaterialInfo(
-                        new MaterialStack(UraniumThoriumCarbides, M * 64), // 64 * Th12UC3
-                        new MaterialStack(TungstenSteel, (M / 4) * 16) // 16 * Tungsten Steel foil
-                ));
+        HIGH_DENSITY_THORIUM = this.addItem(820, "high_density_thorium").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(UraniumThoriumCarbides, M * 64), // 64 * Th12UC3
+                new MaterialStack(TungstenSteel, (M / 4) * 16) // 16 * Tungsten Steel foil
+        ));
 
-        HIGH_DENSITY_URANIUM = this.addItem(821, "high_density_uranium")
-                .setMaterialInfo(new ItemMaterialInfo(
-                        new MaterialStack(GraphiteUraniumMixture, M * 36), // 36 * C3U dust
-                        new MaterialStack(TungstenCarbide, (M / 4) * 16) // 16 * Tungsten Carbide foil
-                ));
+        HIGH_DENSITY_URANIUM = this.addItem(821, "high_density_uranium").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GraphiteUraniumMixture, M * 36), // 36 * C3U dust
+                new MaterialStack(TungstenCarbide, (M / 4) * 16) // 16 * Tungsten Carbide foil
+        ));
 
-        HIGH_DENSITY_PLUTONIUM = this.addItem(822, "high_density_plutonium")
-                .setMaterialInfo(new ItemMaterialInfo(
-                        new MaterialStack(PlutoniumUraniumOxides, M * 64), // 64 * Pu10O12U2C8
-                        new MaterialStack(HSSS, (M / 4) * 16) // 16 * HSSS foil
-                ));
+        HIGH_DENSITY_PLUTONIUM = this.addItem(822, "high_density_plutonium").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(PlutoniumUraniumOxides, M * 64), // 64 * Pu10O12U2C8
+                new MaterialStack(HSSS, (M / 4) * 16) // 16 * HSSS foil
+        ));
 
         // Power Components: ID 356-379
         NANO_POWER_IC_WAFER = this.addItem(840, "wafer.nano_power_integrated_circuit").setCreativeTabs(CommonProxy.GTQTCore_TAB);
@@ -1036,54 +993,30 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         HEAT_SHIELD_MKV = this.addItem(1104, "heat_shield_mkv").setCreativeTabs(CommonProxy.GTQTCore_NC);
 
         //流体单元1150
-        WOODEN_BUCKET = this.addItem(1150, "wooden_bucket")
-                .addComponents(new FilteredFluidStats(1000,
-                        Wood.getProperty(PropertyKey.FLUID_PIPE).getMaxFluidTemperature(),
-                        true, false, false,
-                        false, true), new ItemFluidContainer());
+        WOODEN_BUCKET = this.addItem(1150, "wooden_bucket").addComponents(new FilteredFluidStats(1000, Wood.getProperty(PropertyKey.FLUID_PIPE).getMaxFluidTemperature(), true, false, false, false, true), new ItemFluidContainer());
 
-        FLUID_CELL_CHROME = this.addItem(1151, "large_fluid_cell.chrome")
-                .addComponents(new FilteredFluidStats(2_048_000,
-                        Chrome.getProperty(PropertyKey.FLUID_PIPE).getMaxFluidTemperature(),
-                        true, true, false,
-                        false, true), new ItemFluidContainer())
-                .setMaxStackSize(8);
+        FLUID_CELL_CHROME = this.addItem(1151, "large_fluid_cell.chrome").addComponents(new FilteredFluidStats(2_048_000, Chrome.getProperty(PropertyKey.FLUID_PIPE).getMaxFluidTemperature(), true, true, false, false, true), new ItemFluidContainer()).setMaxStackSize(8);
 
-        FLUID_CELL_IRIDIUM = this.addItem(1152, "large_fluid_cell.iridium")
-                .addComponents(new FilteredFluidStats(8_192_000,
-                        Iridium.getProperty(PropertyKey.FLUID_PIPE).getMaxFluidTemperature(),
-                        true, true, true,
-                        false, true), new ItemFluidContainer())
-                .setMaxStackSize(4);
+        FLUID_CELL_IRIDIUM = this.addItem(1152, "large_fluid_cell.iridium").addComponents(new FilteredFluidStats(8_192_000, Iridium.getProperty(PropertyKey.FLUID_PIPE).getMaxFluidTemperature(), true, true, true, false, true), new ItemFluidContainer()).setMaxStackSize(4);
 
-        FLUID_CELL_NAQUADAH_ALLOY = this.addItem(1153, "large_fluid_cell.naquadah_alloy")
-                .addComponents(new FilteredFluidStats(32_768_000,
-                        NaquadahAlloy.getProperty(PropertyKey.FLUID_PIPE).getMaxFluidTemperature(),
-                        true, true, true,
-                        true, true), new ItemFluidContainer())
-                .setMaxStackSize(2);
+        FLUID_CELL_NAQUADAH_ALLOY = this.addItem(1153, "large_fluid_cell.naquadah_alloy").addComponents(new FilteredFluidStats(32_768_000, NaquadahAlloy.getProperty(PropertyKey.FLUID_PIPE).getMaxFluidTemperature(), true, true, true, true, true), new ItemFluidContainer()).setMaxStackSize(2);
 
-        FLUID_CELL_NEUTRONIUM = this.addItem(1154, "large_fluid_cell.neutronium")
-                .addComponents(new FilteredFluidStats(131_072_000,
-                        Neutronium.getProperty(PropertyKey.FLUID_PIPE).getMaxFluidTemperature(),
-                        true, true, true,
-                        true, true), new ItemFluidContainer())
-                .setMaxStackSize(1);
+        FLUID_CELL_NEUTRONIUM = this.addItem(1154, "large_fluid_cell.neutronium").addComponents(new FilteredFluidStats(131_072_000, Neutronium.getProperty(PropertyKey.FLUID_PIPE).getMaxFluidTemperature(), true, true, true, true, true), new ItemFluidContainer()).setMaxStackSize(1);
 
         //纳米封装机器人 1200
-        WRAP_NANO_SWARM_CARBON = this.addItem(1200, "wrap_nano_swarm.carbon").addComponents(new WrapSwarmBehavior(120,1,Carbon)).setCreativeTabs(CommonProxy.GTQTCore_BIO);
-        WRAP_NANO_SWARM_GOLD = this.addItem(1201, "wrap_nano_swarm.gold").addComponents(new WrapSwarmBehavior(240,1,Gold)).setCreativeTabs(CommonProxy.GTQTCore_BIO);
-        WRAP_NANO_SWARM_PLATINUM = this.addItem(1202, "wrap_nano_swarm.platinum").addComponents(new WrapSwarmBehavior(480,2,Platinum)).setCreativeTabs(CommonProxy.GTQTCore_BIO);
-        WRAP_NANO_SWARM_IRIDIUM = this.addItem(1203, "wrap_nano_swarm.iridium").addComponents(new WrapSwarmBehavior(720,2,Iridium)).setCreativeTabs(CommonProxy.GTQTCore_BIO);
-        WRAP_NANO_SWARM_SAMARIUM = this.addItem(1204, "wrap_nano_swarm.samarium").addComponents(new WrapSwarmBehavior(900,3,Samarium)).setCreativeTabs(CommonProxy.GTQTCore_BIO);
-        WRAP_NANO_SWARM_NAQUADAH = this.addItem(1205, "wrap_nano_swarm.naquadah").addComponents(new WrapSwarmBehavior(1200,3,Naquadah)).setCreativeTabs(CommonProxy.GTQTCore_BIO);
-        WRAP_NANO_SWARM_DURANIUM = this.addItem(1206, "wrap_nano_swarm.duranium").addComponents(new WrapSwarmBehavior(3200,4,Duranium)).setCreativeTabs(CommonProxy.GTQTCore_BIO);
-        WRAP_NANO_SWARM_ADAMANTIUM = this.addItem(1207, "wrap_nano_swarm.adamantium").addComponents(new WrapSwarmBehavior(4800,4,Adamantium)).setCreativeTabs(CommonProxy.GTQTCore_BIO);
-        WRAP_NANO_SWARM_ORICHALCUM = this.addItem(1208, "wrap_nano_swarm.orichalcum").addComponents(new WrapSwarmBehavior(7200,5,Orichalcum)).setCreativeTabs(CommonProxy.GTQTCore_BIO);
-        WRAP_NANO_SWARM_NEUTRONIUM = this.addItem(1209, "wrap_nano_swarm.neutronium").addComponents(new WrapSwarmBehavior(8400,5,Neutronium)).setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        WRAP_NANO_SWARM_CARBON = this.addItem(1200, "wrap_nano_swarm.carbon").addComponents(new WrapSwarmBehavior(120, 1, Carbon)).setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        WRAP_NANO_SWARM_GOLD = this.addItem(1201, "wrap_nano_swarm.gold").addComponents(new WrapSwarmBehavior(240, 1, Gold)).setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        WRAP_NANO_SWARM_PLATINUM = this.addItem(1202, "wrap_nano_swarm.platinum").addComponents(new WrapSwarmBehavior(480, 2, Platinum)).setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        WRAP_NANO_SWARM_IRIDIUM = this.addItem(1203, "wrap_nano_swarm.iridium").addComponents(new WrapSwarmBehavior(720, 2, Iridium)).setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        WRAP_NANO_SWARM_SAMARIUM = this.addItem(1204, "wrap_nano_swarm.samarium").addComponents(new WrapSwarmBehavior(900, 3, Samarium)).setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        WRAP_NANO_SWARM_NAQUADAH = this.addItem(1205, "wrap_nano_swarm.naquadah").addComponents(new WrapSwarmBehavior(1200, 3, Naquadah)).setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        WRAP_NANO_SWARM_DURANIUM = this.addItem(1206, "wrap_nano_swarm.duranium").addComponents(new WrapSwarmBehavior(3200, 4, Duranium)).setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        WRAP_NANO_SWARM_ADAMANTIUM = this.addItem(1207, "wrap_nano_swarm.adamantium").addComponents(new WrapSwarmBehavior(4800, 4, Adamantium)).setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        WRAP_NANO_SWARM_ORICHALCUM = this.addItem(1208, "wrap_nano_swarm.orichalcum").addComponents(new WrapSwarmBehavior(7200, 5, Orichalcum)).setCreativeTabs(CommonProxy.GTQTCore_BIO);
+        WRAP_NANO_SWARM_NEUTRONIUM = this.addItem(1209, "wrap_nano_swarm.neutronium").addComponents(new WrapSwarmBehavior(8400, 5, Neutronium)).setCreativeTabs(CommonProxy.GTQTCore_BIO);
 
 
-         //生物基因模板
+        //生物基因模板
         BIO_0 = this.addItem(1500, "bio.0").setCreativeTabs(CommonProxy.GTQTCore_DISK);
         BIO_1 = this.addItem(1501, "bio.1").setCreativeTabs(CommonProxy.GTQTCore_DISK);
         BIO_2 = this.addItem(1502, "bio.2").setCreativeTabs(CommonProxy.GTQTCore_DISK);
@@ -1146,528 +1079,176 @@ public class GTQTMetaItem1 extends StandardMetaItem {
 
 
         //可变成 2400
-        PROGRAMMABLE_CIRCUIT_0= this.addItem(2400, "programmable_circuit_0").addComponents(new ProgrammableCircuit(0,"programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-        PROGRAMMABLE_CIRCUIT_1= this.addItem(2401, "programmable_circuit_1").addComponents(new ProgrammableCircuit(1,"programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-        PROGRAMMABLE_CIRCUIT_2= this.addItem(2402, "programmable_circuit_2").addComponents(new ProgrammableCircuit(2,"programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-        PROGRAMMABLE_CIRCUIT_3= this.addItem(2403, "programmable_circuit_3").addComponents(new ProgrammableCircuit(3,"programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-        PROGRAMMABLE_CIRCUIT_4= this.addItem(2404, "programmable_circuit_4").addComponents(new ProgrammableCircuit(4,"programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-        PROGRAMMABLE_CIRCUIT_5= this.addItem(2405, "programmable_circuit_5").addComponents(new ProgrammableCircuit(5,"programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-        PROGRAMMABLE_CIRCUIT_6= this.addItem(2406, "programmable_circuit_6").addComponents(new ProgrammableCircuit(6,"programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-        PROGRAMMABLE_CIRCUIT_7= this.addItem(2407, "programmable_circuit_7").addComponents(new ProgrammableCircuit(7,"programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-        PROGRAMMABLE_CIRCUIT_8= this.addItem(2408, "programmable_circuit_8").addComponents(new ProgrammableCircuit(8,"programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-        PROGRAMMABLE_CIRCUIT_9= this.addItem(2409, "programmable_circuit_9").addComponents(new ProgrammableCircuit(9,"programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-        PROGRAMMABLE_CIRCUIT_10= this.addItem(2410, "programmable_circuit_10").addComponents(new ProgrammableCircuit(10,"programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-        PROGRAMMABLE_CIRCUIT_11= this.addItem(2411, "programmable_circuit_11").addComponents(new ProgrammableCircuit(11,"programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-        PROGRAMMABLE_CIRCUIT_12= this.addItem(2412, "programmable_circuit_12").addComponents(new ProgrammableCircuit(12,"programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-        PROGRAMMABLE_CIRCUIT_13= this.addItem(2413, "programmable_circuit_13").addComponents(new ProgrammableCircuit(13,"programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-        PROGRAMMABLE_CIRCUIT_14= this.addItem(2414, "programmable_circuit_14").addComponents(new ProgrammableCircuit(14,"programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-        PROGRAMMABLE_CIRCUIT_15= this.addItem(2415, "programmable_circuit_15").addComponents(new ProgrammableCircuit(15,"programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-        PROGRAMMABLE_CIRCUIT_16= this.addItem(2416, "programmable_circuit_16").addComponents(new ProgrammableCircuit(16,"programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-        PROGRAMMABLE_CIRCUIT_17= this.addItem(2417, "programmable_circuit_17").addComponents(new ProgrammableCircuit(17,"programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-        PROGRAMMABLE_CIRCUIT_18= this.addItem(2418, "programmable_circuit_18").addComponents(new ProgrammableCircuit(18,"programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-        PROGRAMMABLE_CIRCUIT_19= this.addItem(2419, "programmable_circuit_19").addComponents(new ProgrammableCircuit(19,"programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-        PROGRAMMABLE_CIRCUIT_20= this.addItem(2420, "programmable_circuit_20").addComponents(new ProgrammableCircuit(20,"programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-        PROGRAMMABLE_CIRCUIT_21= this.addItem(2421, "programmable_circuit_21").addComponents(new ProgrammableCircuit(21,"programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-        PROGRAMMABLE_CIRCUIT_22= this.addItem(2422, "programmable_circuit_22").addComponents(new ProgrammableCircuit(22,"programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-        PROGRAMMABLE_CIRCUIT_23= this.addItem(2423, "programmable_circuit_23").addComponents(new ProgrammableCircuit(23,"programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-        PROGRAMMABLE_CIRCUIT_24= this.addItem(2424, "programmable_circuit_24").addComponents(new ProgrammableCircuit(24,"programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-        PROGRAMMABLE_CIRCUIT_25= this.addItem(2425, "programmable_circuit_25").addComponents(new ProgrammableCircuit(25,"programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-        PROGRAMMABLE_CIRCUIT_26= this.addItem(2426, "programmable_circuit_26").addComponents(new ProgrammableCircuit(26,"programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-        PROGRAMMABLE_CIRCUIT_27= this.addItem(2427, "programmable_circuit_27").addComponents(new ProgrammableCircuit(27,"programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-        PROGRAMMABLE_CIRCUIT_28= this.addItem(2428, "programmable_circuit_28").addComponents(new ProgrammableCircuit(28,"programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-        PROGRAMMABLE_CIRCUIT_29= this.addItem(2429, "programmable_circuit_29").addComponents(new ProgrammableCircuit(29,"programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-        PROGRAMMABLE_CIRCUIT_30= this.addItem(2430, "programmable_circuit_30").addComponents(new ProgrammableCircuit(30,"programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-        PROGRAMMABLE_CIRCUIT_31= this.addItem(2431, "programmable_circuit_31").addComponents(new ProgrammableCircuit(31,"programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-        PROGRAMMABLE_CIRCUIT_32= this.addItem(2432, "programmable_circuit_32").addComponents(new ProgrammableCircuit(32,"programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-
-
-        ALPHA = this.addItem(2500, "alpha")
-                .addComponents(new ParticleBehavior(
-                        3727.379,    // 质量 (MeV/c^2)
-                        2,            // 电荷 (e)
-                        1,            // 自旋 (h bar)
-                        true,         // 弱相互作用
-                        true,         // 强相互作用
-                        ANTIALPHA     // 反粒子
-                ))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
-
-        ANTIALPHA = this.addItem(2501, "antialpha")
-                .addComponents(new ParticleBehavior(
-                        3727.379,    // 质量 (MeV/c^2)
-                        -2,           // 电荷 (e)
-                        1,            // 自旋 (h bar)
-                        true,         // 弱相互作用
-                        true,         // 强相互作用
-                        ALPHA         // 反粒子
-                ))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
-
-        ANTIBOTTOM_QUARK = this.addItem(2502, "antibottom_quark")
-                .addComponents(new ParticleBehavior(
-                        4180,         // 质量 (MeV/c^2)
-                        -1 / 3.0,       // 电荷 (e)
-                        1 / 2.0,        // 自旋 (h bar)
-                        true,         // 弱相互作用
-                        true,         // 强相互作用
-                        BOTTOM_QUARK  // 反粒子
-                ))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
-
-        ANTICHARM_QUARK = this.addItem(2503, "anticharm_quark")
-                .addComponents(new ParticleBehavior(
-                        1275,         // 质量 (MeV/c^2)
-                        -2 / 3.0,       // 电荷 (e)
-                        1 / 2.0,        // 自旋 (h bar)
-                        true,         // 弱相互作用
-                        true,         // 强相互作用
-                        CHARM_QUARK   // 反粒子
-                ))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
-
-        ANTIDELTA_MINUS = this.addItem(2504, "antidelta_minus")
-                .addComponents(new ParticleBehavior(
-                        1232,         // 质量 (MeV/c^2)
-                        -1,           // 电荷 (e)
-                        3 / 2.0,        // 自旋 (h bar)
-                        true,         // 弱相互作用
-                        true,         // 强相互作用
-                        DELTA_MINUS   // 反粒子
-                ))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
-
-        ANTIDELTA_PLUS_PLUS = this.addItem(2505, "antidelta_plus_plus")
-                .addComponents(new ParticleBehavior(
-                        1232,         // 质量 (MeV/c^2)
-                        2,            // 电荷 (e)
-                        3 / 2.0,        // 自旋 (h bar)
-                        true,         // 弱相互作用
-                        true,         // 强相互作用
-                        DELTA_PLUS_PLUS // 反粒子
-                ))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
-
-        ANTIDEUTERON = this.addItem(2506, "antideuteron")
-                .addComponents(new ParticleBehavior(
-                        1875.613,    // 质量 (MeV/c^2)
-                        -1,           // 电荷 (e)
-                        1,            // 自旋 (h bar)
-                        true,         // 弱相互作用
-                        true,         // 强相互作用
-                        DEUTERON      // 反粒子
-                ))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
-
-        ANTIDOWN_QUARK = this.addItem(2507, "antidown_quark")
-                .addComponents(new ParticleBehavior(
-                        4.8,          // 质量 (MeV/c^2)
-                        1 / 3.0,        // 电荷 (e)
-                        1 / 2.0,        // 自旋 (h bar)
-                        true,         // 弱相互作用
-                        true,         // 强相互作用
-                        DOWN_QUARK    // 反粒子
-                ))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
-
-        ANTIHELION = this.addItem(2508, "antihelion")
-                .addComponents(new ParticleBehavior(
-                        2808.391,    // 质量 (MeV/c^2)
-                        -2,           // 电荷 (e)
-                        1,            // 自旋 (h bar)
-                        true,         // 弱相互作用
-                        true,         // 强相互作用
-                        HELION        // 反粒子
-                ))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
-
-        ANTIKAON_NAUGHT = this.addItem(2509, "antikaon_naught")
-                .addComponents(new ParticleBehavior(
-                        497.614,    // 质量 (MeV/c^2)
-                        0,            // 电荷 (e)
-                        1,            // 自旋 (h bar)
-                        true,         // 弱相互作用
-                        true,         // 强相互作用
-                        KAON_NAUGHT   // 反粒子
-                ))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
-
-        ANTIMUON = this.addItem(2510, "antimuon")
-                .addComponents(new ParticleBehavior(
-                        105.658,    // 质量 (MeV/c^2)
-                        -1,           // 电荷 (e)
-                        1 / 2.0,        // 自旋 (h bar)
-                        true,         // 弱相互作用
-                        false,        // 强相互作用
-                        MUON          // 反粒子
-                ))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
-
-        ANTINEUTRON = this.addItem(2511, "antineutron")
-                .addComponents(new ParticleBehavior(
-                        939.565,    // 质量 (MeV/c^2)
-                        0,            // 电荷 (e)
-                        1 / 2.0,        // 自旋 (h bar)
-                        true,         // 弱相互作用
-                        true,         // 强相互作用
-                        NEUTRON       // 反粒子
-                ))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
-
-        ANTIPROTON = this.addItem(2512, "antiproton")
-                .addComponents(new ParticleBehavior(
-                        938.272,    // 质量 (MeV/c^2)
-                        -1,           // 电荷 (e)
-                        1 / 2.0,        // 自旋 (h bar)
-                        true,         // 弱相互作用
-                        true,         // 强相互作用
-                        PROTON        // 反粒子
-                ))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
-
-        ANTISIGMA_MINUS = this.addItem(2513, "antisigma_minus")
-                .addComponents(new ParticleBehavior(
-                        1189.37,    // 质量 (MeV/c^2)
-                        -1,           // 电荷 (e)
-                        3 / 2.0,        // 自旋 (h bar)
-                        true,         // 弱相互作用
-                        true,         // 强相互作用
-                        SIGMA_MINUS   // 反粒子
-                ))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
-
-        ANTISIGMA_NAUGHT = this.addItem(2514, "antisigma_naught")
-                .addComponents(new ParticleBehavior(
-                        1192.64,    // 质量 (MeV/c^2)
-                        0,            // 电荷 (e)
-                        3 / 2.0,        // 自旋 (h bar)
-                        true,         // 弱相互作用
-                        true,         // 强相互作用
-                        SIGMA_NAUGHT  // 反粒子
-                ))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
-
-        ANTISIGMA_PLUS = this.addItem(2515, "antisigma_plus")
-                .addComponents(new ParticleBehavior(
-                        1197.45,    // 质量 (MeV/c^2)
-                        1,            // 电荷 (e)
-                        3 / 2.0,        // 自旋 (h bar)
-                        true,         // 弱相互作用
-                        true,         // 强相互作用
-                        SIGMA_PLUS    // 反粒子
-                ))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
-
-        ANTISTRANGE_QUARK = this.addItem(2516, "antistrange_quark")
-                .addComponents(new ParticleBehavior(
-                        95,           // 质量 (MeV/c^2)
-                        1 / 3.0,        // 电荷 (e)
-                        1 / 2.0,        // 自旋 (h bar)
-                        true,         // 弱相互作用
-                        true,         // 强相互作用
-                        STRANGE_QUARK // 反粒子
-                ))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
-
-        ANTITAU = this.addItem(2517, "antitau")
-                .addComponents(new ParticleBehavior(
-                        1776.82,    // 质量 (MeV/c^2)
-                        -1,           // 电荷 (e)
-                        1 / 2.0,        // 自旋 (h bar)
-                        true,         // 弱相互作用
-                        false,        // 强相互作用
-                        TAU           // 反粒子
-                ))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
-
-        ANTITOP_QUARK = this.addItem(2518, "antitop_quark")
-                .addComponents(new ParticleBehavior(
-                        172000,       // 质量 (MeV/c^2)
-                        -2 / 3.0,       // 电荷 (e)
-                        1 / 2.0,        // 自旋 (h bar)
-                        true,         // 弱相互作用
-                        true,         // 强相互作用
-                        TOP_QUARK     // 反粒子
-                ))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
-
-        ANTITRITON = this.addItem(2519, "antitriton")
-                .addComponents(new ParticleBehavior(
-                        2808.391,    // 质量 (MeV/c^2)
-                        -1,           // 电荷 (e)
-                        1,            // 自旋 (h bar)
-                        true,         // 弱相互作用
-                        true,         // 强相互作用
-                        TRITON        // 反粒子
-                ))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
-
-        ANTIUP_QUARK = this.addItem(2520, "antiup_quark")
-                .addComponents(new ParticleBehavior(
-                        2.3,          // 质量 (MeV/c^2)
-                        -2 / 3.0,       // 电荷 (e)
-                        1 / 2.0,        // 自旋 (h bar)
-                        true,         // 弱相互作用
-                        true,         // 强相互作用
-                        UP_QUARK      // 反粒子
-                ))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
-
-        BORON_ION = this.addItem(2521, "boron_ion")
-                .addComponents(new ParticleBehavior(
-                        11174.436,    // 质量 (MeV/c^2)
-                        5,            // 电荷 (e)
-                        1,            // 自旋 (h bar)
-                        true,         // 弱相互作用
-                        true,         // 强相互作用
-                        BORON_ION     // 反粒子
-                ))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
-
-        BOTTOM_ETA = this.addItem(2522, "bottom_eta")
-                .addComponents(new ParticleBehavior(
-                        5475,         // 质量 (MeV/c^2)
-                        0,            // 电荷 (e)
-                        1,            // 自旋 (h bar)
-                        true,         // 弱相互作用
-                        true,         // 强相互作用
-                        BOTTOM_ETA    // 反粒子
-                ))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
-
-        BOTTOM_QUARK = this.addItem(2523, "bottom_quark")
-                .addComponents(new ParticleBehavior(
-                        4180,         // 质量 (MeV/c^2)
-                        1 / 3.0,        // 电荷 (e)
-                        1 / 2.0,        // 自旋 (h bar)
-                        true,         // 弱相互作用
-                        true,         // 强相互作用
-                        ANTIBOTTOM_QUARK // 反粒子
-                ))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
-
-        CALCIUM_48_ION = this.addItem(2524, "calcium_48_ion")
-                .addComponents(new ParticleBehavior(
-                        47320.808,    // 质量 (MeV/c^2)
-                        20,           // 电荷 (e)
-                        0,            // 自旋 (h bar)
-                        true,         // 弱相互作用
-                        true,         // 强相互作用
-                        CALCIUM_48_ION // 反粒子
-                ))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
-
-        CHARM_QUARK = this.addItem(2525, "charm_quark")
-                .addComponents(new ParticleBehavior(
-                        1275,         // 质量 (MeV/c^2)
-                        2 / 3.0,        // 电荷 (e)
-                        1 / 2.0,        // 自旋 (h bar)
-                        true,         // 弱相互作用
-                        true,         // 强相互作用
-                        ANTICHARM_QUARK // 反粒子
-                ))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
-
-        CHARMED_ETA = this.addItem(2526, "charmed_eta")
-                .addComponents(new ParticleBehavior(
-                        957.78,       // 质量 (MeV/c^2)
-                        0,            // 电荷 (e)
-                        1,            // 自旋 (h bar)
-                        true,         // 弱相互作用
-                        true,         // 强相互作用
-                        CHARMED_ETA   // 反粒子
-                ))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
-
-        DELTA_MINUS = this.addItem(2527, "delta_minus")
-                .addComponents(new ParticleBehavior(
-                        1232,         // 质量 (MeV/c^2)
-                        -1,           // 电荷 (e)
-                        3 / 2.0,        // 自旋 (h bar)
-                        true,         // 弱相互作用
-                        true,         // 强相互作用
-                        ANTIDELTA_MINUS // 反粒子
-                ))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
-
-        DELTA_PLUS_PLUS = this.addItem(2528, "delta_plus_plus")
-                .addComponents(new ParticleBehavior(
-                        1232,         // 质量 (MeV/c^2)
-                        2,            // 电荷 (e)
-                        3 / 2.0,        // 自旋 (h bar)
-                        true,         // 弱相互作用
-                        true,         // 强相互作用
-                        ANTIDELTA_PLUS_PLUS // 反粒子
-                ))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
-
-        DEUTERON = this.addItem(2529, "deuteron")
-                .addComponents(new ParticleBehavior(
-                        1875.613,    // 质量 (MeV/c^2)
-                        1,            // 电荷 (e)
-                        1,            // 自旋 (h bar)
-                        true,         // 弱相互作用
-                        true,         // 强相互作用
-                        ANTIDEUTERON  // 反粒子
-                ))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
-
-        DOWN_QUARK = this.addItem(2530, "down_quark")
-                .addComponents(new ParticleBehavior(
-                        4.8,          // 质量 (MeV/c^2)
-                        -1 / 3.0,       // 电荷 (e)
-                        1 / 2.0,        // 自旋 (h bar)
-                        true,         // 弱相互作用
-                        true,         // 强相互作用
-                        ANTIDOWN_QUARK // 反粒子
-                ))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
-
-        ELECTRON = this.addItem(2531, "electron")
-                .addComponents(new ParticleBehavior(
-                        0.511,        // 质量 (MeV/c^2)
-                        -1,           // 电荷 (e)
-                        1 / 2.0,        // 自旋 (h bar)
-                        true,         // 弱相互作用
-                        false,        // 强相互作用
-                        POSITRON      // 反粒子
-                ))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
-
-        ELECTRON_ANTINEUTRINO = this.addItem(2532, "electron_antineutrino")
-                .addComponents(new ParticleBehavior(0.0, 0.0, 0.5, true, false, ELECTRON_NEUTRINO))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
-
-        ELECTRON_NEUTRINO = this.addItem(2533, "electron_neutrino")
-                .addComponents(new ParticleBehavior(0.0, 0.0, 0.5, true, false, ELECTRON_ANTINEUTRINO))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
-
-        ETA = this.addItem(2534, "eta")
-                .addComponents(new ParticleBehavior(0.547862, 0.0, 0.0, true, false, ETA))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
-
-        ETA_PRIME = this.addItem(2535, "eta_prime")
-                .addComponents(new ParticleBehavior(0.95778, 0.0, 0.0, true, false, ETA_PRIME))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
-
-        GLUEBALL = this.addItem(2536, "glueball")
-                .addComponents(new ParticleBehavior(0.0, 0.0, 0.0, false, true, GLUEBALL))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
-
-        GLUON = this.addItem(2537, "gluon")
-                .addComponents(new ParticleBehavior(0.0, 0.0, 1.0, false, true, GLUON))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
-
-        HELION = this.addItem(2538, "helion")
-                .addComponents(new ParticleBehavior(2.808921, 1.0, 1.0, true, true, ANTIHELION))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
-
-        HIGGS_BOSON = this.addItem(2539, "higgs_boson")
-                .addComponents(new ParticleBehavior(125.0, 0.0, 0.0, true, false, HIGGS_BOSON))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
-
-        KAON_MINUS = this.addItem(2540, "kaon_minus")
-                .addComponents(new ParticleBehavior(0.493677, -1.0, 0.5, true, true, KAON_MINUS))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
-
-        KAON_NAUGHT = this.addItem(2541, "kaon_naught")
-                .addComponents(new ParticleBehavior(0.497614, 0.0, 0.5, true, true, KAON_NAUGHT))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
-
-        KAON_PLUS = this.addItem(2542, "kaon_plus")
-                .addComponents(new ParticleBehavior(0.493677, 1.0, 0.5, true, true, KAON_PLUS))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
-
-        MUON = this.addItem(2543, "muon")
-                .addComponents(new ParticleBehavior(0.105658, -1.0, 0.5, true, false, POSITRON))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
-
-        MUON_ANTINEUTRINO = this.addItem(2544, "muon_antineutrino")
-                .addComponents(new ParticleBehavior(0.0, 0.0, 0.5, true, false, MUON_NEUTRINO))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
-
-        MUON_NEUTRINO = this.addItem(2545, "muon_neutrino")
-                .addComponents(new ParticleBehavior(0.0, 0.0, 0.5, true, false, MUON_ANTINEUTRINO))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
-
-        NEUTRON = this.addItem(2546, "neutron")
-                .addComponents(new ParticleBehavior(0.939565, 0.0, 0.5, true, true, ANTINEUTRON))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
-
-        PHOTON = this.addItem(2547, "photon")
-                .addComponents(new ParticleBehavior(0.0, 0.0, 1.0, false, false, PHOTON))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
-
-        PION_MINUS = this.addItem(2548, "pion_minus")
-                .addComponents(new ParticleBehavior(0.139570, -1.0, 0.0, true, true, PION_PLUS))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
-
-        PION_NAUGHT = this.addItem(2549, "pion_naught")
-                .addComponents(new ParticleBehavior(0.134977, 0.0, 0.0, true, true, PION_NAUGHT))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
-
-        PION_PLUS = this.addItem(2550, "pion_plus")
-                .addComponents(new ParticleBehavior(0.139570, 1.0, 0.0, true, true, PION_MINUS))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
-
-        POSITRON = this.addItem(2551, "positron")
-                .addComponents(new ParticleBehavior(0.000511, 1.0, 0.5, true, false, MUON))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
-
-        PROTON = this.addItem(2552, "proton")
-                .addComponents(new ParticleBehavior(0.938272, 1.0, 0.5, true, true, ANTIPROTON))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
-
-        SIGMA_MINUS = this.addItem(2553, "sigma_minus")
-                .addComponents(new ParticleBehavior(1.192642, -1.0, 0.5, true, true, ANTISIGMA_MINUS))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
-
-        SIGMA_NAUGHT = this.addItem(2554, "sigma_naught")
-                .addComponents(new ParticleBehavior(1.197449, 0.0, 0.5, true, true, ANTISIGMA_NAUGHT))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
-
-        SIGMA_PLUS = this.addItem(2555, "sigma_plus")
-                .addComponents(new ParticleBehavior(1.189370, 1.0, 0.5, true, true, ANTISIGMA_PLUS))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
-
-        STRANGE_QUARK = this.addItem(2556, "strange_quark")
-                .addComponents(new ParticleBehavior(0.095, -0.333333, 0.5, true, true, STRANGE_QUARK))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
-
-        TAU = this.addItem(2557, "tau")
-                .addComponents(new ParticleBehavior(1.77686, -1.0, 0.5, true, false, ANTITAU))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
-
-        TAU_ANTINEUTRINO = this.addItem(2558, "tau_antineutrino")
-                .addComponents(new ParticleBehavior(0.0, 0.0, 0.5, true, false, TAU_NEUTRINO))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
-
-        TAU_NEUTRINO = this.addItem(2559, "tau_neutrino")
-                .addComponents(new ParticleBehavior(0.0, 0.0, 0.5, true, false, TAU_ANTINEUTRINO))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
-
-        TOP_QUARK = this.addItem(2560, "top_quark")
-                .addComponents(new ParticleBehavior(173.07, 2.0 / 3.0, 0.5, true, true, TOP_QUARK))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
-
-        TRITON = this.addItem(2561, "triton")
-                .addComponents(new ParticleBehavior(2.808921, 1.0, 1.0, true, true, ANTITRITON))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
-
-        UP_QUARK = this.addItem(2562, "up_quark")
-                .addComponents(new ParticleBehavior(0.0023, 2.0 / 3.0, 0.5, true, true, ANTIUP_QUARK))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
-
-        W_MINUS_BOSON = this.addItem(2563, "w_minus_boson")
-                .addComponents(new ParticleBehavior(80.385, -1.0, 1.0, true, false, W_PLUS_BOSON))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
-
-        W_PLUS_BOSON = this.addItem(2564, "w_plus_boson")
-                .addComponents(new ParticleBehavior(80.385, 1.0, 1.0, true, false, W_MINUS_BOSON))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
-
-        Z_BOSON = this.addItem(2565, "z_boson")
-                .addComponents(new ParticleBehavior(91.1876, 0.0, 1.0, true, false, Z_BOSON))
-                .setCreativeTabs(CommonProxy.GTQTCore_PA);
+        PROGRAMMABLE_CIRCUIT_0 = this.addItem(2400, "programmable_circuit_0").addComponents(new ProgrammableCircuit(0, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
+        PROGRAMMABLE_CIRCUIT_1 = this.addItem(2401, "programmable_circuit_1").addComponents(new ProgrammableCircuit(1, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
+        PROGRAMMABLE_CIRCUIT_2 = this.addItem(2402, "programmable_circuit_2").addComponents(new ProgrammableCircuit(2, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
+        PROGRAMMABLE_CIRCUIT_3 = this.addItem(2403, "programmable_circuit_3").addComponents(new ProgrammableCircuit(3, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
+        PROGRAMMABLE_CIRCUIT_4 = this.addItem(2404, "programmable_circuit_4").addComponents(new ProgrammableCircuit(4, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
+        PROGRAMMABLE_CIRCUIT_5 = this.addItem(2405, "programmable_circuit_5").addComponents(new ProgrammableCircuit(5, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
+        PROGRAMMABLE_CIRCUIT_6 = this.addItem(2406, "programmable_circuit_6").addComponents(new ProgrammableCircuit(6, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
+        PROGRAMMABLE_CIRCUIT_7 = this.addItem(2407, "programmable_circuit_7").addComponents(new ProgrammableCircuit(7, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
+        PROGRAMMABLE_CIRCUIT_8 = this.addItem(2408, "programmable_circuit_8").addComponents(new ProgrammableCircuit(8, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
+        PROGRAMMABLE_CIRCUIT_9 = this.addItem(2409, "programmable_circuit_9").addComponents(new ProgrammableCircuit(9, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
+        PROGRAMMABLE_CIRCUIT_10 = this.addItem(2410, "programmable_circuit_10").addComponents(new ProgrammableCircuit(10, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
+        PROGRAMMABLE_CIRCUIT_11 = this.addItem(2411, "programmable_circuit_11").addComponents(new ProgrammableCircuit(11, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
+        PROGRAMMABLE_CIRCUIT_12 = this.addItem(2412, "programmable_circuit_12").addComponents(new ProgrammableCircuit(12, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
+        PROGRAMMABLE_CIRCUIT_13 = this.addItem(2413, "programmable_circuit_13").addComponents(new ProgrammableCircuit(13, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
+        PROGRAMMABLE_CIRCUIT_14 = this.addItem(2414, "programmable_circuit_14").addComponents(new ProgrammableCircuit(14, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
+        PROGRAMMABLE_CIRCUIT_15 = this.addItem(2415, "programmable_circuit_15").addComponents(new ProgrammableCircuit(15, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
+        PROGRAMMABLE_CIRCUIT_16 = this.addItem(2416, "programmable_circuit_16").addComponents(new ProgrammableCircuit(16, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
+        PROGRAMMABLE_CIRCUIT_17 = this.addItem(2417, "programmable_circuit_17").addComponents(new ProgrammableCircuit(17, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
+        PROGRAMMABLE_CIRCUIT_18 = this.addItem(2418, "programmable_circuit_18").addComponents(new ProgrammableCircuit(18, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
+        PROGRAMMABLE_CIRCUIT_19 = this.addItem(2419, "programmable_circuit_19").addComponents(new ProgrammableCircuit(19, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
+        PROGRAMMABLE_CIRCUIT_20 = this.addItem(2420, "programmable_circuit_20").addComponents(new ProgrammableCircuit(20, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
+        PROGRAMMABLE_CIRCUIT_21 = this.addItem(2421, "programmable_circuit_21").addComponents(new ProgrammableCircuit(21, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
+        PROGRAMMABLE_CIRCUIT_22 = this.addItem(2422, "programmable_circuit_22").addComponents(new ProgrammableCircuit(22, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
+        PROGRAMMABLE_CIRCUIT_23 = this.addItem(2423, "programmable_circuit_23").addComponents(new ProgrammableCircuit(23, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
+        PROGRAMMABLE_CIRCUIT_24 = this.addItem(2424, "programmable_circuit_24").addComponents(new ProgrammableCircuit(24, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
+        PROGRAMMABLE_CIRCUIT_25 = this.addItem(2425, "programmable_circuit_25").addComponents(new ProgrammableCircuit(25, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
+        PROGRAMMABLE_CIRCUIT_26 = this.addItem(2426, "programmable_circuit_26").addComponents(new ProgrammableCircuit(26, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
+        PROGRAMMABLE_CIRCUIT_27 = this.addItem(2427, "programmable_circuit_27").addComponents(new ProgrammableCircuit(27, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
+        PROGRAMMABLE_CIRCUIT_28 = this.addItem(2428, "programmable_circuit_28").addComponents(new ProgrammableCircuit(28, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
+        PROGRAMMABLE_CIRCUIT_29 = this.addItem(2429, "programmable_circuit_29").addComponents(new ProgrammableCircuit(29, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
+        PROGRAMMABLE_CIRCUIT_30 = this.addItem(2430, "programmable_circuit_30").addComponents(new ProgrammableCircuit(30, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
+        PROGRAMMABLE_CIRCUIT_31 = this.addItem(2431, "programmable_circuit_31").addComponents(new ProgrammableCircuit(31, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
+        PROGRAMMABLE_CIRCUIT_32 = this.addItem(2432, "programmable_circuit_32").addComponents(new ProgrammableCircuit(32, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
+
+
+        // 注册所有粒子项
+        ALPHA = this.addItem(2500, "alpha");
+        ANTIALPHA = this.addItem(2501, "antialpha");
+        ANTIBOTTOM_QUARK = this.addItem(2502, "antibottom_quark");
+        ANTICHARM_QUARK = this.addItem(2503, "anticharm_quark");
+        ANTIDELTA_MINUS = this.addItem(2504, "antidelta_minus");
+        ANTIDELTA_PLUS_PLUS = this.addItem(2505, "antidelta_plus_plus");
+        ANTIDEUTERON = this.addItem(2506, "antideuteron");
+        ANTIDOWN_QUARK = this.addItem(2507, "antidown_quark");
+        ANTIHELION = this.addItem(2508, "antihelion");
+        ANTIKAON_NAUGHT = this.addItem(2509, "antikaon_naught");
+        ANTIMUON = this.addItem(2510, "antimuon");
+        ANTINEUTRON = this.addItem(2511, "antineutron");
+        ANTIPROTON = this.addItem(2512, "antiproton");
+        ANTISIGMA_MINUS = this.addItem(2513, "antisigma_minus");
+        ANTISIGMA_NAUGHT = this.addItem(2514, "antisigma_naught");
+        ANTISIGMA_PLUS = this.addItem(2515, "antisigma_plus");
+        ANTISTRANGE_QUARK = this.addItem(2516, "antistrange_quark");
+        ANTITAU = this.addItem(2517, "antitau");
+        ANTITOP_QUARK = this.addItem(2518, "antitop_quark");
+        ANTITRITON = this.addItem(2519, "antitriton");
+        ANTIUP_QUARK = this.addItem(2520, "antiup_quark");
+        BORON_ION = this.addItem(2521, "boron_ion");
+        BOTTOM_ETA = this.addItem(2522, "bottom_eta");
+        BOTTOM_QUARK = this.addItem(2523, "bottom_quark");
+        CALCIUM_48_ION = this.addItem(2524, "calcium_48_ion");
+        CHARM_QUARK = this.addItem(2525, "charm_quark");
+        CHARMED_ETA = this.addItem(2526, "charmed_eta");
+        DELTA_MINUS = this.addItem(2527, "delta_minus");
+        DELTA_PLUS_PLUS = this.addItem(2528, "delta_plus_plus");
+        DEUTERON = this.addItem(2529, "deuteron");
+        DOWN_QUARK = this.addItem(2530, "down_quark");
+        ELECTRON = this.addItem(2531, "electron");
+        ELECTRON_ANTINEUTRINO = this.addItem(2532, "electron_antineutrino");
+        ELECTRON_NEUTRINO = this.addItem(2533, "electron_neutrino");
+        ETA = this.addItem(2534, "eta");
+        ETA_PRIME = this.addItem(2535, "eta_prime");
+        GLUEBALL = this.addItem(2536, "glueball");
+        GLUON = this.addItem(2537, "gluon");
+        HELION = this.addItem(2538, "helion");
+        HIGGS_BOSON = this.addItem(2539, "higgs_boson");
+        KAON_MINUS = this.addItem(2540, "kaon_minus");
+        KAON_NAUGHT = this.addItem(2541, "kaon_naught");
+        KAON_PLUS = this.addItem(2542, "kaon_plus");
+        MUON = this.addItem(2543, "muon");
+        MUON_ANTINEUTRINO = this.addItem(2544, "muon_antineutrino");
+        MUON_NEUTRINO = this.addItem(2545, "muon_neutrino");
+        NEUTRON = this.addItem(2546, "neutron");
+        PHOTON = this.addItem(2547, "photon");
+        PION_MINUS = this.addItem(2548, "pion_minus");
+        PION_NAUGHT = this.addItem(2549, "pion_naught");
+        PION_PLUS = this.addItem(2550, "pion_plus");
+        POSITRON = this.addItem(2551, "positron");
+        PROTON = this.addItem(2552, "proton");
+        SIGMA_MINUS = this.addItem(2553, "sigma_minus");
+        SIGMA_NAUGHT = this.addItem(2554, "sigma_naught");
+        SIGMA_PLUS = this.addItem(2555, "sigma_plus");
+        STRANGE_QUARK = this.addItem(2556, "strange_quark");
+        TAU = this.addItem(2557, "tau");
+        TAU_ANTINEUTRINO = this.addItem(2558, "tau_antineutrino");
+        TAU_NEUTRINO = this.addItem(2559, "tau_neutrino");
+        TOP_QUARK = this.addItem(2560, "top_quark");
+        TRITON = this.addItem(2561, "triton");
+        UP_QUARK = this.addItem(2562, "up_quark");
+        W_MINUS_BOSON = this.addItem(2563, "w_minus_boson");
+        W_PLUS_BOSON = this.addItem(2564, "w_plus_boson");
+        Z_BOSON = this.addItem(2565, "z_boson");
+
+        // 统一添加组件和设置创造标签
+        ALPHA.addComponents(new ParticleBehavior(3727.379, 2, 1, true, true, ANTIALPHA)).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        ANTIALPHA.addComponents(new ParticleBehavior(3727.379, -2, 1, true, true, ALPHA)).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        ANTIBOTTOM_QUARK.addComponents(new ParticleBehavior(4180, -1 / 3.0, 1 / 2.0, true, true, BOTTOM_QUARK)).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        ANTICHARM_QUARK.addComponents(new ParticleBehavior(1275, -2 / 3.0, 1 / 2.0, true, true, CHARM_QUARK)).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        ANTIDELTA_MINUS.addComponents(new ParticleBehavior(1232, -1, 3 / 2.0, true, true, DELTA_MINUS)).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        ANTIDELTA_PLUS_PLUS.addComponents(new ParticleBehavior(1232, 2, 3 / 2.0, true, true, DELTA_PLUS_PLUS)).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        ANTIDEUTERON.addComponents(new ParticleBehavior(1875.613, -1, 1, true, true, DEUTERON)).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        ANTIDOWN_QUARK.addComponents(new ParticleBehavior(4.8, 1 / 3.0, 1 / 2.0, true, true, DOWN_QUARK)).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        ANTIHELION.addComponents(new ParticleBehavior(2808.391, -2, 1, true, true, HELION)).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        ANTIKAON_NAUGHT.addComponents(new ParticleBehavior(497.614, 0, 1, true, true, KAON_NAUGHT)).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        ANTIMUON.addComponents(new ParticleBehavior(105.658, -1, 1 / 2.0, true, false, MUON)).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        ANTINEUTRON.addComponents(new ParticleBehavior(939.565, 0, 1 / 2.0, true, true, NEUTRON)).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        ANTIPROTON.addComponents(new ParticleBehavior(938.272, -1, 1 / 2.0, true, true, PROTON)).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        ANTISIGMA_MINUS.addComponents(new ParticleBehavior(1189.37, -1, 3 / 2.0, true, true, SIGMA_MINUS)).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        ANTISIGMA_NAUGHT.addComponents(new ParticleBehavior(1192.64, 0, 3 / 2.0, true, true, SIGMA_NAUGHT)).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        ANTISIGMA_PLUS.addComponents(new ParticleBehavior(1197.45, 1, 3 / 2.0, true, true, SIGMA_PLUS)).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        ANTISTRANGE_QUARK.addComponents(new ParticleBehavior(95, 1 / 3.0, 1 / 2.0, true, true, STRANGE_QUARK)).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        ANTITAU.addComponents(new ParticleBehavior(1776.82, -1, 1 / 2.0, true, false, TAU)).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        ANTITOP_QUARK.addComponents(new ParticleBehavior(172000, -2 / 3.0, 1 / 2.0, true, true, TOP_QUARK)).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        ANTITRITON.addComponents(new ParticleBehavior(2808.391, -1, 1, true, true, TRITON)).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        ANTIUP_QUARK.addComponents(new ParticleBehavior(2.3, -2 / 3.0, 1 / 2.0, true, true, UP_QUARK)).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        BORON_ION.addComponents(new ParticleBehavior(11174.436, 5, 1, true, true, BORON_ION)).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        BOTTOM_ETA.addComponents(new ParticleBehavior(5475, 0, 1, true, true, BOTTOM_ETA)).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        BOTTOM_QUARK.addComponents(new ParticleBehavior(4180, 1 / 3.0, 1 / 2.0, true, true, ANTIBOTTOM_QUARK)).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        CALCIUM_48_ION.addComponents(new ParticleBehavior(47320.808, 20, 0, true, true, CALCIUM_48_ION)).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        CHARM_QUARK.addComponents(new ParticleBehavior(1275, 2 / 3.0, 1 / 2.0, true, true, ANTICHARM_QUARK)).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        CHARMED_ETA.addComponents(new ParticleBehavior(957.78, 0, 1, true, true, CHARMED_ETA)).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        DELTA_MINUS.addComponents(new ParticleBehavior(1232, -1, 3 / 2.0, true, true, ANTIDELTA_MINUS)).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        DELTA_PLUS_PLUS.addComponents(new ParticleBehavior(1232, 2, 3 / 2.0, true, true, ANTIDELTA_PLUS_PLUS)).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        DEUTERON.addComponents(new ParticleBehavior(1875.613, 1, 1, true, true, ANTIDEUTERON)).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        DOWN_QUARK.addComponents(new ParticleBehavior(4.8, -1 / 3.0, 1 / 2.0, true, true, ANTIDOWN_QUARK)).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        ELECTRON.addComponents(new ParticleBehavior(0.511, -1, 1 / 2.0, true, false, POSITRON)).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        ELECTRON_ANTINEUTRINO.addComponents(new ParticleBehavior(0.0, 0.0, 0.5, true, false, ELECTRON_NEUTRINO)).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        ELECTRON_NEUTRINO.addComponents(new ParticleBehavior(0.0, 0.0, 0.5, true, false, ELECTRON_ANTINEUTRINO)).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        ETA.addComponents(new ParticleBehavior(0.547862, 0.0, 0.0, true, false, ETA)).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        ETA_PRIME.addComponents(new ParticleBehavior(0.95778, 0.0, 0.0, true, false, ETA_PRIME)).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        GLUEBALL.addComponents(new ParticleBehavior(0.0, 0.0, 0.0, false, true, GLUEBALL)).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        GLUON.addComponents(new ParticleBehavior(0.0, 0.0, 1.0, false, true, GLUON)).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        HELION.addComponents(new ParticleBehavior(2.808921, 1.0, 1.0, true, true, ANTIHELION)).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        HIGGS_BOSON.addComponents(new ParticleBehavior(125.0, 0.0, 0.0, true, false, HIGGS_BOSON)).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        KAON_MINUS.addComponents(new ParticleBehavior(0.493677, -1.0, 0.5, true, true, KAON_MINUS)).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        KAON_NAUGHT.addComponents(new ParticleBehavior(0.497614, 0.0, 0.5, true, true, KAON_NAUGHT)).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        KAON_PLUS.addComponents(new ParticleBehavior(0.493677, 1.0, 0.5, true, true, KAON_PLUS)).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        MUON.addComponents(new ParticleBehavior(0.105658, -1.0, 0.5, true, false, POSITRON)).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        MUON_ANTINEUTRINO.addComponents(new ParticleBehavior(0.0, 0.0, 0.5, true, false, MUON_NEUTRINO)).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        MUON_NEUTRINO.addComponents(new ParticleBehavior(0.0, 0.0, 0.5, true, false, MUON_ANTINEUTRINO)).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        NEUTRON.addComponents(new ParticleBehavior(0.939565, 0.0, 0.5, true, true, ANTINEUTRON)).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        PHOTON.addComponents(new ParticleBehavior(0.0, 0.0, 1.0, false, false, PHOTON)).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        PION_MINUS.addComponents(new ParticleBehavior(0.139570, -1.0, 0.0, true, true, PION_PLUS)).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        PION_NAUGHT.addComponents(new ParticleBehavior(0.134977, 0.0, 0.0, true, true, PION_NAUGHT)).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        PION_PLUS.addComponents(new ParticleBehavior(0.139570, 1.0, 0.0, true, true, PION_MINUS)).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        POSITRON.addComponents(new ParticleBehavior(0.000511, 1.0, 0.5, true, false, MUON)).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        PROTON.addComponents(new ParticleBehavior(0.938272, 1.0, 0.5, true, true, ANTIPROTON)).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        SIGMA_MINUS.addComponents(new ParticleBehavior(1.192642, -1.0, 0.5, true, true, ANTISIGMA_MINUS)).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        SIGMA_NAUGHT.addComponents(new ParticleBehavior(1.197449, 0.0, 0.5, true, true, ANTISIGMA_NAUGHT)).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        SIGMA_PLUS.addComponents(new ParticleBehavior(1.189370, 1.0, 0.5, true, true, ANTISIGMA_PLUS)).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        STRANGE_QUARK.addComponents(new ParticleBehavior(0.095, -0.333333, 0.5, true, true, STRANGE_QUARK)).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        TAU.addComponents(new ParticleBehavior(1.77686, -1.0, 0.5, true, false, ANTITAU)).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        TAU_ANTINEUTRINO.addComponents(new ParticleBehavior(0.0, 0.0, 0.5, true, false, TAU_NEUTRINO)).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        TAU_NEUTRINO.addComponents(new ParticleBehavior(0.0, 0.0, 0.5, true, false, TAU_ANTINEUTRINO)).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        TOP_QUARK.addComponents(new ParticleBehavior(173.07, 2.0 / 3.0, 0.5, true, true, TOP_QUARK)).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        TRITON.addComponents(new ParticleBehavior(2.808921, 1.0, 1.0, true, true, ANTITRITON)).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        UP_QUARK.addComponents(new ParticleBehavior(0.0023, 2.0 / 3.0, 0.5, true, true, ANTIUP_QUARK)).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        W_MINUS_BOSON.addComponents(new ParticleBehavior(80.385, -1.0, 1.0, true, false, W_PLUS_BOSON)).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        W_PLUS_BOSON.addComponents(new ParticleBehavior(80.385, 1.0, 1.0, true, false, W_MINUS_BOSON)).setCreativeTabs(CommonProxy.GTQTCore_PA);
+        Z_BOSON.addComponents(new ParticleBehavior(91.1876, 0.0, 1.0, true, false, Z_BOSON)).setCreativeTabs(CommonProxy.GTQTCore_PA);
 
         //  High Energy Physics items
         QUANTUM_ANOMALY = this.addItem(2600, "quantum_anomaly").setCreativeTabs(CommonProxy.GTQTCore_HP);

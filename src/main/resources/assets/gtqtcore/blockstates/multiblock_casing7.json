@@ -1,0 +1,43 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "minecraft:cube_all",
+    "textures": {
+      "all": "gregtech:blocks/rendering_error"
+    }
+  },
+  "variants": {
+    "variant": {
+      "magnetic_flux_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casing/magnetic_flux_casing"
+        }
+      },
+      "magnetic_field_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casing/magnetic_field_casing"
+        }
+      },
+      "gravity_stabilization_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casing/gravity_stabilization_casing"
+        }
+      },
+      "protomatter_activation_coil": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casing/protomatter_activation_coil"
+        }
+      },
+      "antimatter_annihilation_matrix": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/casing/antimatter_annihilation_matrix"
+        }
+      }
+    }
+  }
+}

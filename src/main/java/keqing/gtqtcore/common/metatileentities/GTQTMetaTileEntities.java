@@ -141,6 +141,8 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityBlazingBlastFurnace BLAZING_BLAST_FURNACE;
     public static MetaTileEntityBlazingCZPuller BLAZING_CZ_PULLER;
     public static MetaTileEntityHugeChemicalReactor HUGE_CHEMICAL_REACTOR;
+    public static MetaTileEntityAntimatterForge ANTIMATTER_FORGE;
+    public static MetaTileEntityAntimatterGenerator ANTIMATTER_GENERATOR;
     public static MetaTileEntityIntegratedMiningDivision INTEGRATED_MINING_DIVISION;
     public static MetaTileEntityHugeAlloyBlastSmelter HUGE_ALLOY_BLAST_FURANCE;
     public static MetaTileEntityLargeHeatExchanger LARGE_HEAT_EXCHANGER;
@@ -416,6 +418,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityISO3CleaningMaintenanceHatch ISO3_CLEANING_MAINTENANCE_HATCH;
     public static MetaTileEntityISO2CleaningMaintenanceHatch ISO2_CLEANING_MAINTENANCE_HATCH;
     public static MetaTileEntityISO1CleaningMaintenanceHatch ISO1_CLEANING_MAINTENANCE_HATCH;
+    public static MetaTileEntityParticleHatch PARTICLE_HATCH;
 
     private static int startId = 13000;
     private static final int END_ID = startId + 1000;
@@ -684,6 +687,11 @@ public class GTQTMetaTileEntities {
         HUGE_BLAST_FURANCE = registerMetaTileEntity(3313, new MetaTileEntityHugeBlastFurnace(gtqtcoreId("huge_blast_furnace")));
         HUGE_CRACKING_UNIT = registerMetaTileEntity(3314, new MetaTileEntityHugeCrackingUnit(gtqtcoreId("huge_cracking_unit")));
         HUGE_CHEMICAL_REACTOR = registerMetaTileEntity(3315, new MetaTileEntityHugeChemicalReactor(gtqtcoreId("huge_chemical_reactor")));
+
+        ANTIMATTER_FORGE = registerMetaTileEntity(3330, new MetaTileEntityAntimatterForge(gtqtcoreId("antimatter_forge")));
+        ANTIMATTER_GENERATOR = registerMetaTileEntity(3331, new MetaTileEntityAntimatterGenerator(gtqtcoreId("antimatter_generator")));
+
+
         //star
 
         if (GTQTCoreConfig.MachineSwitch.LastSwitch)
@@ -955,7 +963,9 @@ public class GTQTMetaTileEntities {
             String name = String.format("swarm_hatch.%s", i);
             SWARM_HATCH[i] = registerMetaTileEntity(id, new MetaTileEntityWrapSwarmHatch(gtqtcoreId(name), i + 5));
         }
-        //16000
+
+        PARTICLE_HATCH = registerMetaTileEntity(15606, new MetaTileEntityParticleHatch(gtqtcoreId("particle_hatch")));
+        //13000
         //原版转子拓展
         ROTOR_HOLDER[6] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityRotorHolder(gtqtcoreId("rotor_holder.uhv"), GTValues.UHV));
         ROTOR_HOLDER[7] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityRotorHolder(gtqtcoreId("rotor_holder.uev"), GTValues.UEV));

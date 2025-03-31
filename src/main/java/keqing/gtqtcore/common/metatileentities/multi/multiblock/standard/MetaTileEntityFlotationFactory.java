@@ -44,8 +44,8 @@ public class MetaTileEntityFlotationFactory extends GTQTRecipeMapMultiblockContr
         //setTier(auto);
         setMaxParallel(128);
         setMaxParallelFlag(true);
-        //setMaxVoltage(auto);
-        setMaxVoltageFlag(true);
+        //setMaxVoltage(none);
+        setMaxVoltageFlag(false);
         //setTimeReduce(auto);
         setTimeReduceFlag(true);
         setOverclocking(4.0);

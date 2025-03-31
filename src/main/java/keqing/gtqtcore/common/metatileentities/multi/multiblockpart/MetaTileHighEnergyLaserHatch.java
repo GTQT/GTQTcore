@@ -18,6 +18,7 @@ import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMulti
 import keqing.gtqtcore.api.capability.ILaser;
 import keqing.gtqtcore.client.particle.LaserBeamParticle;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.LaserSystem.*;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.MetaTileEntityAntimatterForge;
 import keqing.gtqtcore.common.metatileentities.single.electric.MetaTileLaserBooster;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -132,6 +133,10 @@ public class MetaTileHighEnergyLaserHatch extends MetaTileEntityMultiblockNotifi
                 }
             } else if (mte instanceof MetaTileEntityLaserFusionCore laserFusionCore) {
                 if (laserFusionCore.isStructureFormed()) {
+                    return true;
+                }
+            }else if (mte instanceof MetaTileEntityAntimatterForge antimatterGenerator) {
+                if (antimatterGenerator.isStructureFormed()) {
                     return true;
                 }
             } else if (mte instanceof MetaTileHighEnergyLaserHatch hel) {

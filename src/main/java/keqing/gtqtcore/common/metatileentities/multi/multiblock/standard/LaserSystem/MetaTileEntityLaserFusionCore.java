@@ -18,14 +18,12 @@ import gregtech.client.utils.EffectRenderContext;
 import gregtech.client.utils.IBloomEffect;
 import gregtech.client.utils.RenderBufferHelper;
 import gregtech.common.ConfigHolder;
-import gregtech.common.blocks.BlockGlassCasing;
-import gregtech.common.blocks.MetaBlocks;
 import gregtech.core.sound.GTSoundEvents;
 import keqing.gtqtcore.api.capability.impl.MultiblockLaserRecipeLogic;
 import keqing.gtqtcore.api.metaileentity.multiblock.RecipeMapLaserMultiblockController;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4;
+import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing7;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
@@ -42,6 +40,7 @@ import org.lwjgl.opengl.GL11;
 
 import static gregtech.api.metatileentity.multiblock.MultiblockAbility.*;
 import static keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility.LASER_INPUT;
+import static keqing.gtqtcore.common.block.blocks.BlockMultiblockGlass.CasingType.ANTIMATTER_CONTAINMENT_CASING;
 import static net.minecraft.util.EnumFacing.Axis.*;
 
 public class MetaTileEntityLaserFusionCore extends RecipeMapLaserMultiblockController implements IBloomEffect, IFastRenderMetaTileEntity {
@@ -58,11 +57,11 @@ public class MetaTileEntityLaserFusionCore extends RecipeMapLaserMultiblockContr
     }
 
     private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.blockMultiblockCasing4.getState(BlockMultiblockCasing4.TurbineCasingType.IRIDIUM_CASING);
+        return GTQTMetaBlocks.blockMultiblockCasing7.getState(BlockMultiblockCasing7.CasingType.MAGNETIC_FIELD_CASING);
     }
 
     private static IBlockState getGlassState() {
-        return MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.FUSION_GLASS);
+        return GTQTMetaBlocks.blockMultiblockGlass.getState(ANTIMATTER_CONTAINMENT_CASING);
     }
 
     private static BloomType getBloomType() {
@@ -102,7 +101,7 @@ public class MetaTileEntityLaserFusionCore extends RecipeMapLaserMultiblockContr
     @SideOnly(Side.CLIENT)
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
-        return GTQTTextures.IRIDIUM_CASING;
+        return GTQTTextures.MAGNETIC_FIELD_CASING;
     }
 
     @SideOnly(Side.CLIENT)

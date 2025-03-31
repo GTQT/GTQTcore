@@ -30,13 +30,12 @@ import gregtech.client.utils.EffectRenderContext;
 import gregtech.client.utils.IBloomEffect;
 import gregtech.client.utils.RenderBufferHelper;
 import gregtech.common.ConfigHolder;
-import gregtech.common.blocks.BlockFusionCasing;
-import gregtech.common.blocks.BlockGlassCasing;
-import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.metaileentity.MetaTileEntityBaseWithControl;
+import keqing.gtqtcore.api.unification.GTQTMaterials;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4;
+import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing7;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
@@ -63,8 +62,10 @@ import static gregtech.api.metatileentity.multiblock.MultiblockAbility.INPUT_ENE
 import static gregtech.api.metatileentity.multiblock.MultiblockAbility.INPUT_LASER;
 import static keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility.LASER_INPUT;
 import static keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility.LASER_OUTPUT;
+import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing3.CasingType.NAQUADRIA_CASING;
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4.TurbineCasingType.NQ_MACHINE_CASING;
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4.TurbineCasingType.NQ_TURBINE_CASING;
+import static keqing.gtqtcore.common.block.blocks.BlockMultiblockGlass.CasingType.ANTIMATTER_CONTAINMENT_CASING;
 import static net.minecraft.util.EnumFacing.Axis.Y;
 
 public class MetaTileEntityLaserBooster extends MetaTileEntityBaseWithControl implements IBloomEffect, IFastRenderMetaTileEntity {
@@ -86,23 +87,19 @@ public class MetaTileEntityLaserBooster extends MetaTileEntityBaseWithControl im
     }
 
     private static IBlockState getUniqueCasingState() {
-        return GTQTMetaBlocks.blockMultiblockCasing4.getState(NQ_TURBINE_CASING);
-    }
-
-    private static IBlockState getThirdCasingState() {
-        return GTQTMetaBlocks.blockMultiblockCasing4.getState(NQ_MACHINE_CASING);
+        return GTQTMetaBlocks.blockMultiblockCasing3.getState(NAQUADRIA_CASING);
     }
 
     private static IBlockState getGlassState() {
-        return MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.FUSION_GLASS);
+        return GTQTMetaBlocks.blockMultiblockGlass.getState(ANTIMATTER_CONTAINMENT_CASING);
     }
 
     private static IBlockState getCoilState() {
-        return MetaBlocks.FUSION_CASING.getState(BlockFusionCasing.CasingType.SUPERCONDUCTOR_COIL);
+        return GTQTMetaBlocks.blockMultiblockCasing7.getState(BlockMultiblockCasing7.CasingType.PROTOMATTER_ACTIVATION_COIL);
     }
 
     private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.blockMultiblockCasing4.getState(BlockMultiblockCasing4.TurbineCasingType.IRIDIUM_CASING);
+        return GTQTMetaBlocks.blockMultiblockCasing7.getState(BlockMultiblockCasing7.CasingType.MAGNETIC_FIELD_CASING);
     }
 
     private static IBlockState getSecondCasingState() {
@@ -115,7 +112,7 @@ public class MetaTileEntityLaserBooster extends MetaTileEntityBaseWithControl im
     }
 
     public TraceabilityPredicate getFramePredicate() {
-        return frames(Materials.Naquadah);
+        return frames(GTQTMaterials.BlackPlutonium);
     }
 
     @Override
@@ -250,8 +247,6 @@ public class MetaTileEntityLaserBooster extends MetaTileEntityBaseWithControl im
                 .where('A', states(getSecondCasingState()))
 
                 .where('E', states(getUniqueCasingState()))
-
-                .where('F', states(getThirdCasingState()))
                 .where('G', states(getCoilState()))
                 .where(' ', any())
                 .build();
@@ -260,7 +255,7 @@ public class MetaTileEntityLaserBooster extends MetaTileEntityBaseWithControl im
     @SideOnly(Side.CLIENT)
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
-        return GTQTTextures.IRIDIUM_CASING;
+        return GTQTTextures.MAGNETIC_FIELD_CASING;
     }
 
     @SideOnly(Side.CLIENT)

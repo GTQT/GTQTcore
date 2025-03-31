@@ -2,6 +2,7 @@ package keqing.gtqtcore.common.items.behaviors;
 
 import gregtech.api.items.metaitem.MetaItem;
 import gregtech.api.items.metaitem.stats.IItemBehaviour;
+import gregtech.api.items.metaitem.stats.IItemDurabilityManager;
 import gregtech.common.entities.DynamiteEntity;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
@@ -12,6 +13,8 @@ import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.List;
 
 import static keqing.gtqtcore.common.items.GTQTMetaItems.TIME_BOTTLE;
@@ -23,11 +26,15 @@ public class ParticleBehavior implements IItemBehaviour {
     protected final double spin;	// in h bar
     protected final boolean strongInteract;
     protected final boolean weakInteract;
-    MetaItem<?>.MetaValueItem antiparticle;
+    ItemStack antiparticle;
 
     // Getter 方法（所有字段均为 final，不生成 setter）
     public double getMass() {
         return mass;
+    }
+
+    public ItemStack getAntiparticle() {
+        return antiparticle;
     }
 
     public double getCharge() {
@@ -73,6 +80,23 @@ public class ParticleBehavior implements IItemBehaviour {
         this.spin = spin;
         this.weakInteract = weakInteract;
         this.strongInteract = strongInteract;
-        this.antiparticle = antiparticle;
+        this.antiparticle = antiparticle.getStackForm(1);
     }
+
+    @Nullable
+    public static ParticleBehavior getInstanceFor(@Nonnull ItemStack itemStack) {
+        if (!(itemStack.getItem() instanceof MetaItem)) return null;
+
+        MetaItem<?>.MetaValueItem valueItem = ((MetaItem<?>) itemStack.getItem()).getItem(itemStack);
+        if (valueItem == null) return null;
+
+        for (IItemBehaviour behaviour : valueItem.getBehaviours()) {
+            if (behaviour instanceof ParticleBehavior) {
+                return (ParticleBehavior) behaviour;
+            }
+        }
+
+        return null;
+    }
+
 }

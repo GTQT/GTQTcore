@@ -49,6 +49,8 @@ public class GTQTcoreRecipeMaps {
 
     public static final RecipeMap<FuelRecipeBuilder> BIOMASS_GENERATOR_RECIPES = new RecipeMap<>("biomass_generator", 0, 0, 1, 0, new FuelRecipeBuilder(), false).setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, ProgressWidget.MoveType.HORIZONTAL).setSound(GTSoundEvents.BATH).allowEmptyOutput();
 
+    public static final RecipeMap<FuelRecipeBuilder> ANTIMATTER_GENERATOR = new RecipeMap<>("antimatter_generator", 2, 0, 0, 0, new FuelRecipeBuilder(), false).setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, ProgressWidget.MoveType.HORIZONTAL).setSound(GTSoundEvents.ARC).allowEmptyOutput();
+
     public static final RecipeMap<FuelRecipeBuilder> ACID_GENERATOR_RECIPES = new RecipeMap<>("acid_generator", 0, 0, 1, 0, new FuelRecipeBuilder(), false).setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, ProgressWidget.MoveType.HORIZONTAL).setSound(GTSoundEvents.CHEMICAL_REACTOR).allowEmptyOutput();
 
     public static final RecipeMap<SimpleRecipeBuilder> AUTO_CHISEL_RECIPES = new RecipeMap<>("auto_chisel", 2, 1, 0, 0, new SimpleRecipeBuilder(), false).setSlotOverlay(false, false, false, GuiTextures.BOXED_BACKGROUND).setProgressBar(GuiTextures.PROGRESS_BAR_CRACKING, ProgressWidget.MoveType.HORIZONTAL).setSound(GTSoundEvents.FILE_TOOL);
@@ -132,6 +134,7 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<ComputationRecipeBuilder> PRECISION_SPINNING;
     public static final RecipeMap<SimpleRecipeBuilder> CW_LASER_ENGRAVER_RECIPES;
     public static final RecipeMap<BlastRecipeBuilder> CW_LASER_ALLOY_RECIPES;
+    public static final RecipeMap<BlastRecipeBuilder> ANTIMATTER_FORGE;
     public static final RecipeMap<LaserComputationRecipeBuilder> STEPPER_RECIPES;
     public static final RecipeMap<PrimitiveRecipeBuilder> CLARIFIER;
     public static final RecipeMap<SimpleRecipeBuilder> ELEOIL;
@@ -259,6 +262,8 @@ public class GTQTcoreRecipeMaps {
         CW_LASER_ENGRAVER_RECIPES = new RecipeMap<>("cw_laser_engraver", 2, 6, 1, 0, new SimpleRecipeBuilder(), false).setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL).setSlotOverlay(false, false, false, GuiTextures.CIRCUIT_OVERLAY).setSlotOverlay(false, false, true, GuiTextures.CIRCUIT_OVERLAY).setSound(GTSoundEvents.ASSEMBLER);
 
         CW_LASER_ALLOY_RECIPES = new RecipeMap<>("cw_laser_alloy", 9, 0, 3, 1, new BlastRecipeBuilder(), false).setSlotOverlay(false, false, false, GuiTextures.FURNACE_OVERLAY_1).setSlotOverlay(false, false, true, GuiTextures.FURNACE_OVERLAY_1).setSlotOverlay(false, true, false, GuiTextures.FURNACE_OVERLAY_2).setSlotOverlay(false, true, true, GuiTextures.FURNACE_OVERLAY_2).setSlotOverlay(true, true, false, GuiTextures.FURNACE_OVERLAY_2).setSlotOverlay(true, true, true, GuiTextures.FURNACE_OVERLAY_2).setSound(GTSoundEvents.FURNACE);
+
+        ANTIMATTER_FORGE = new RecipeMap<>("antimatter_forge", 9, 3, 3, 3, new BlastRecipeBuilder(), false).setSlotOverlay(false, false, false, GuiTextures.FURNACE_OVERLAY_1).setSlotOverlay(false, false, true, GuiTextures.FURNACE_OVERLAY_1).setSlotOverlay(false, true, false, GuiTextures.FURNACE_OVERLAY_2).setSlotOverlay(false, true, true, GuiTextures.FURNACE_OVERLAY_2).setSlotOverlay(true, true, false, GuiTextures.FURNACE_OVERLAY_2).setSlotOverlay(true, true, true, GuiTextures.FURNACE_OVERLAY_2).setSound(GTSoundEvents.ARC);
 
         NAQUADAH_REACTOR = new RecipeMap<>("naquadah_reactor", 1, 1, 0, 0, new FuelRecipeBuilder(), false).allowEmptyOutput();
 

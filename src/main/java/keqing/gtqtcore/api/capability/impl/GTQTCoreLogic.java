@@ -9,12 +9,20 @@ public class GTQTCoreLogic extends MultiblockRecipeLogic {
     public GTQTCoreLogic(RecipeMapMultiblockController tileEntity) {
         super(tileEntity);
     }
+    @Override
     public  RecipeMapMultiblockController getMetaTileEntity() {
         return (RecipeMapMultiblockController)super.getMetaTileEntity();
     }
+    @Override
     public void update() {
 
     }
+    @Override
+    public void updateWorkable() {
+
+    }
+
+    @Override
     public boolean checkRecipe( Recipe recipe) {
         return false;
     }

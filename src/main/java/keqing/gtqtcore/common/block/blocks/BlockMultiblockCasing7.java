@@ -14,16 +14,16 @@ import net.minecraft.world.IBlockAccess;
 
 import javax.annotation.Nonnull;
 
-public class BlockMultiblockCasing6 extends VariantBlock<BlockMultiblockCasing6.CasingType> {
+public class BlockMultiblockCasing7 extends VariantBlock<BlockMultiblockCasing7.CasingType> {
 
-    public BlockMultiblockCasing6() {
+    public BlockMultiblockCasing7() {
         super(Material.IRON);
-        setTranslationKey("multiblock_casing6");
+        setTranslationKey("multiblock_casing7");
         setHardness(5.0f);
         setResistance(10.0f);
         setSoundType(SoundType.METAL);
         this.setHarvestLevel("wrench", 1);
-        setDefaultState(getState(CasingType.RHODIUM));
+        setDefaultState(getState(CasingType.MAGNETIC_FLUX_CASING));
     }
 
     @Override
@@ -32,11 +32,11 @@ public class BlockMultiblockCasing6 extends VariantBlock<BlockMultiblockCasing6.
     }
 
     public enum CasingType implements IStringSerializable, IStateHarvestLevel {
-        RHODIUM("rhodium",4),
-        OSMIRIDIUM("osmiridium",4),
-        NEUTRONIUM("neutronium",4),
-        REINFORCED_TREATED_WOOD_WALL("reinforced_treated_wood_wall",1),
-        REINFORCED_TREATED_WOOD_BOTTOM("reinforced_treated_wood_bottom",1);
+        MAGNETIC_FLUX_CASING("magnetic_flux_casing",5),
+        MAGNETIC_FIELD_CASING("magnetic_field_casing",5),
+        GRAVITY_STABILIZATION_CASING("gravity_stabilization_casing",5),
+        PROTOMATTER_ACTIVATION_COIL("protomatter_activation_coil",5),
+        ANTIMATTER_ANNIHILATION_MATRIX("antimatter_annihilation_matrix",5);
 
         private final String name;
         private final int harvestLevel;

@@ -155,6 +155,8 @@ public class GTQTTextures {
     public static SimpleOverlayRenderer NQ_CASING;
     public static SimpleOverlayRenderer VACUUM_CASING;
     public static SimpleOverlayRenderer IRIDIUM_CASING;
+    public static SimpleOverlayRenderer MAGNETIC_FLUX_CASING;
+    public static SimpleOverlayRenderer MAGNETIC_FIELD_CASING;
     public static SimpleOverlayRenderer INF_WATER;
     public static SimpleOverlayRenderer PROCESS;
     public static SimpleOverlayRenderer ADV_COLD_CASING;
@@ -313,6 +315,8 @@ public class GTQTTextures {
         ADVANCED_INVAR_CASING = new SimpleOverlayRenderer("multiblock/casing/advanced_invar_casing");
         NQ_CASING = new SimpleOverlayRenderer("multiblock/casing/nq_turbine_casing");
         IRIDIUM_CASING = new SimpleOverlayRenderer("multiblock/casing/iridium_casing");
+        MAGNETIC_FLUX_CASING = new SimpleOverlayRenderer("multiblock/casing/magnetic_flux_casing");
+        MAGNETIC_FIELD_CASING = new SimpleOverlayRenderer("multiblock/casing/magnetic_field_casing");
         HC_ALLOY_CASING = new SimpleOverlayRenderer("multiblock/casings/hc_alloy_casing");
         SOLAR_PLATE_CASING = new SimpleOverlayRenderer("multiblock/electrolytic_bath/solar_generator_bottom");
         SFTC = new SimpleOverlayRenderer("multiblock/casings/supercritical_fuel_trans_casing");

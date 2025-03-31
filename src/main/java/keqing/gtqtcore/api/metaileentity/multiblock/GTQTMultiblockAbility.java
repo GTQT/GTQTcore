@@ -14,6 +14,7 @@ public class GTQTMultiblockAbility {
     public static final MultiblockAbility<IBio> BIO_MULTIBLOCK_ABILITY = new MultiblockAbility<>("bio");
     public static final MultiblockAbility<IRadiation> RADIATION_MULTIBLOCK_ABILITY = new MultiblockAbility<>("radiation");
     public static final MultiblockAbility<IElectrode> ELECTRODE_MULTIBLOCK_ABILITY = new MultiblockAbility<>("electrode");
+    public static final MultiblockAbility<IParticle> PARTICLE_MULTIBLOCK_ABILITY = new MultiblockAbility<>("particle");
     public static final MultiblockAbility<IDrillHead> DRILL_HEAD_MULTIBLOCK_ABILITY = new MultiblockAbility<>("drill_head");
     public static final MultiblockAbility<IKQCC> KQCC_MULTIBLOCK_ABILITY = new MultiblockAbility<>("kqcc");
     public static final MultiblockAbility<IHeat> HEAT_MULTIBLOCK_ABILITY = new MultiblockAbility<>("heat");
