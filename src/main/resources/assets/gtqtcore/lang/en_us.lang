@@ -3377,6 +3377,7 @@ gtqtcore.machine.reinforced_rotor_holder.error=You must use rotor holders of the
 gtqtcore.machine.mega_turbine.steam.name=Mega Steam Turbine
 gtqtcore.machine.mega_turbine.gas.name=Mega Gas Turbine
 gtqtcore.machine.mega_turbine.plasma.name=Mega Plasma Turbine
+gtqtcore.machine.mega_turbine.fuel_cell.name=Mega Combustion Booster Turbine
 gtqtcore.machine.mega_turbine.mode.0=Normal Mode
 gtqtcore.machine.mega_turbine.mode.1=High-Speed Mode
 gtqtcore.machine.mega_turbine.description=Mega turbines are upgraded versions of large turbines.
@@ -5446,6 +5447,7 @@ gtqtcore.pf.tooltip.4=For a single thread, working duration is determined by: ba
 gtqtcore.pf.tooltip.5=Equal Distribution Mode: When enabled, if an independent thread does not have a dedicated task (each thread has different processing priorities for different types of wafers, and processing such specific wafers is called a dedicated task), it will share the remaining task progress with the nearest thread (if the shared thread has already completed some progress, it will share the unfinished part), working together to complete the task.
 gtqtcore.pf.tooltip.6=Safe Mode: When enabled, the machine continuously works regardless of wafer buffer levels. This means that if the wafer input speed is slow and the lithography capacity is low, the device will only output the first few types of wafers, instead of cycling through the entire lithography list.
 gtqtcore.pf.tooltip.7=Return to Buffer: Returns wafers and photoresist to the non-working area buffer. Items already in the independent thread buffers are not returned.
+gtqtcore.pf.tooltip.8=Each thread needs to consume 100MB of distilled water to work for 1 tick, please pay attention to replenish it in time.
 
 metaitem.catalyst_framework_i.name=Biological Catalyst (Oxidation)
 metaitem.catalyst_framework_ii.name=Biological Catalyst (Reduction)

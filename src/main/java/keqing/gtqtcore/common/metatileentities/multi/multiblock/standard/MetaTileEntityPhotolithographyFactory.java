@@ -25,8 +25,8 @@ import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.TooltipHelper;
 import gregtech.common.blocks.BlockGlassCasing;
 import gregtech.common.blocks.MetaBlocks;
-import keqing.gtqtcore.api.metaileentity.MetaTileEntityBaseWithControl;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
+import keqing.gtqtcore.api.metaileentity.MetaTileEntityBaseWithControl;
 import keqing.gtqtcore.api.utils.GTQTCPUHelper;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
@@ -53,6 +53,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import static gregtech.api.GTValues.VA;
+import static gregtech.api.unification.material.Materials.DistilledWater;
 import static keqing.gtqtcore.GTQTCoreConfig.MachineSwitch;
 import static keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate.CP_PAF_CASING;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
@@ -65,6 +66,7 @@ public class MetaTileEntityPhotolithographyFactory extends MetaTileEntityBaseWit
     int laserTier;
     int laserKind;
     int LaserAmount;
+    int waterAmount;
     int[] wafer = {0, 0, 0, 0, 0, 0, 0};
     boolean work;
     boolean balance;
@@ -79,6 +81,8 @@ public class MetaTileEntityPhotolithographyFactory extends MetaTileEntityBaseWit
     FluidStack LASER3 = SU8_Photoresist.getFluid(1000);
     FluidStack LASER4 = Xmt.getFluid(1000);
     FluidStack LASER5 = Zrbtmst.getFluid(1000);
+    FluidStack WATER = DistilledWater.getFluid(100);
+
 
     //核心缓存： wafer等级0 wafer数量1 光刻胶等级2 耗时3
     public MetaTileEntityPhotolithographyFactory(ResourceLocation metaTileEntityId) {
@@ -101,6 +105,7 @@ public class MetaTileEntityPhotolithographyFactory extends MetaTileEntityBaseWit
         data.setInteger("laserTier", laserTier);
         data.setInteger("laserKind", laserKind);
         data.setInteger("LaserAmount", LaserAmount);
+        data.setInteger("waterAmount", waterAmount);
 
         data.setIntArray("wafer", wafer);
 
@@ -127,6 +132,7 @@ public class MetaTileEntityPhotolithographyFactory extends MetaTileEntityBaseWit
         laserTier = data.getInteger("laserTier");
         laserKind = data.getInteger("laserKind");
         LaserAmount = data.getInteger("LaserAmount");
+        waterAmount = data.getInteger("waterAmount");
 
         wafer = data.getIntArray("wafer");
 
@@ -146,15 +152,16 @@ public class MetaTileEntityPhotolithographyFactory extends MetaTileEntityBaseWit
         coreWork[2] = data.getBoolean("coreWork3");
         coreWork[3] = data.getBoolean("coreWork4");
     }
+
     @Override
     public void checkStructurePattern() {
-        if(MachineSwitch.DelayStructureCheckSwitch) {
+        if (MachineSwitch.DelayStructureCheckSwitch) {
             if (this.getOffsetTimer() % 100 == 0 || this.isFirstTick()) {
                 super.checkStructurePattern();
             }
-        }
-        else super.checkStructurePattern();
+        } else super.checkStructurePattern();
     }
+
     @Override
     protected ModularUI.Builder createUITemplate(EntityPlayer entityPlayer) {
         ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND, 298, 240);
@@ -205,8 +212,7 @@ public class MetaTileEntityPhotolithographyFactory extends MetaTileEntityBaseWit
     }
 
     protected void addTotal(List<ITextComponent> textList) {
-        MultiblockDisplayText.builder(textList, isStructureFormed())
-                .setWorkingStatus(true, isActive() && isWorkingEnabled()) // transform into two-state system for display
+        MultiblockDisplayText.builder(textList, isStructureFormed()).setWorkingStatus(true, isActive() && isWorkingEnabled()) // transform into two-state system for display
                 .addCustom(tl -> {
                     if (isStructureFormed()) {
 
@@ -222,8 +228,7 @@ public class MetaTileEntityPhotolithographyFactory extends MetaTileEntityBaseWit
     }
 
     protected void addInfo1(List<ITextComponent> textList) {
-        MultiblockDisplayText.builder(textList, isStructureFormed())
-                .setWorkingStatus(true, isActive() && isWorkingEnabled()) // transform into two-state system for display
+        MultiblockDisplayText.builder(textList, isStructureFormed()).setWorkingStatus(true, isActive() && isWorkingEnabled()) // transform into two-state system for display
                 .addCustom(tl -> {
                     tl.add(TextComponentUtil.translationWithColor(TextFormatting.GOLD, ">>线程 1 状态： %s", coreWork[0]));
                     tl.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY, "工作进度： %s / %s", core[0][4], core[0][3]));
@@ -232,8 +237,7 @@ public class MetaTileEntityPhotolithographyFactory extends MetaTileEntityBaseWit
     }
 
     protected void addInfo2(List<ITextComponent> textList) {
-        MultiblockDisplayText.builder(textList, isStructureFormed())
-                .setWorkingStatus(true, isActive() && isWorkingEnabled()) // transform into two-state system for display
+        MultiblockDisplayText.builder(textList, isStructureFormed()).setWorkingStatus(true, isActive() && isWorkingEnabled()) // transform into two-state system for display
                 .addCustom(tl -> {
                     tl.add(TextComponentUtil.translationWithColor(TextFormatting.GOLD, ">>线程 2 状态： %s", coreWork[1]));
                     tl.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY, "工作进度： %s / %s", core[1][4], core[1][3]));
@@ -242,8 +246,7 @@ public class MetaTileEntityPhotolithographyFactory extends MetaTileEntityBaseWit
     }
 
     protected void addInfo3(List<ITextComponent> textList) {
-        MultiblockDisplayText.builder(textList, isStructureFormed())
-                .setWorkingStatus(true, isActive() && isWorkingEnabled()) // transform into two-state system for display
+        MultiblockDisplayText.builder(textList, isStructureFormed()).setWorkingStatus(true, isActive() && isWorkingEnabled()) // transform into two-state system for display
                 .addCustom(tl -> {
                     tl.add(TextComponentUtil.translationWithColor(TextFormatting.GOLD, ">>线程 3 状态： %s", coreWork[2]));
                     tl.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY, "工作进度： %s / %s", core[2][4], core[2][3]));
@@ -252,8 +255,7 @@ public class MetaTileEntityPhotolithographyFactory extends MetaTileEntityBaseWit
     }
 
     protected void addInfo4(List<ITextComponent> textList) {
-        MultiblockDisplayText.builder(textList, isStructureFormed())
-                .setWorkingStatus(true, isActive() && isWorkingEnabled()) // transform into two-state system for display
+        MultiblockDisplayText.builder(textList, isStructureFormed()).setWorkingStatus(true, isActive() && isWorkingEnabled()) // transform into two-state system for display
                 .addCustom(tl -> {
                     tl.add(TextComponentUtil.translationWithColor(TextFormatting.GOLD, ">>线程 4 状态： %s", coreWork[3]));
                     tl.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY, "工作进度： %s / %s", core[3][4], core[3][3]));
@@ -268,6 +270,8 @@ public class MetaTileEntityPhotolithographyFactory extends MetaTileEntityBaseWit
         String waferGrade = String.format("各线程配方数: %s %s %s %s", core[0][1], core[1][1], core[1][1], core[1][1]);
         // 光刻胶等级
         String laserKindDesc = String.format(">>光刻胶等级: %s 支持配方数: %s", laserKind, LaserAmount / 1000);
+        // 蒸馏水储量
+        String waterAmountDesc = String.format(">>蒸馏水储量: %s", waterAmount);
         // 开关状态
         String workStatus = String.format("//:开关状态: %s", work);
         // 均分状态
@@ -279,8 +283,7 @@ public class MetaTileEntityPhotolithographyFactory extends MetaTileEntityBaseWit
         // 保险状态
         String speedStatus = String.format("//:超频状态: %s", speed);
         // 组合所有信息
-        String displayText = String.format("%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n",
-                waferList, waferGrade, laserKindDesc, workStatus, balanceStatus, checkStatus, outputCheckStatus, speedStatus);
+        String displayText = String.format("%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n", waferList, waferGrade, laserKindDesc, waterAmountDesc,workStatus, balanceStatus, checkStatus, outputCheckStatus, speedStatus);
         // 添加到文本列表
         textList.add(new TextComponentTranslation(displayText));
     }
@@ -321,9 +324,20 @@ public class MetaTileEntityPhotolithographyFactory extends MetaTileEntityBaseWit
     @Override
     protected void updateFormedValid() {
         InputWafer();
+        handelWater();
         handleLaser();
         updateCoreWork();
         performWork();
+    }
+
+    private void handelWater() {
+        IMultipleTankHandler inputTank = getInputFluidInventory();
+        if (waterAmount + 100 <= 64000) {
+            if (WATER.isFluidStackIdentical(WATER)) {
+                inputTank.drain(WATER, true);
+                waterAmount += 100;
+            }
+        }
     }
 
     private void handleLaser() {
@@ -461,7 +475,10 @@ public class MetaTileEntityPhotolithographyFactory extends MetaTileEntityBaseWit
                             }
 
                             // 增加当前核心的工作进度
-                            core[index][4] += speedMultiplier[finalI];
+                            if(waterAmount>=100) {
+                                core[index][4] += speedMultiplier[finalI];
+                                waterAmount-=100;
+                            }
 
                         } else speedMultiplier[finalI] = 0;
                     } else {
@@ -550,76 +567,19 @@ public class MetaTileEntityPhotolithographyFactory extends MetaTileEntityBaseWit
 
     @Override
     protected BlockPattern createStructurePattern() {
-        return FactoryBlockPattern.start()
-                .aisle("                                               ", "                                               ", "                    FCCCCCF                    ", "                    FCCBCCF                    ", "                    FCCCCCF                    ", "                                               ", "                                               ")
-                .aisle("                                               ", "                    FCBBBCF                    ", "                   CC#####CC                   ", "                   CC#####CC                   ", "                   CC#####CC                   ", "                    FCBBBCF                    ", "                                               ")
-                .aisle("                    FCBBBCF                    ", "                   CC#####CC                   ", "                CCCCC#####CCCCC                ", "                CCCHHHHHHHHHCCC                ", "                CCCCC#####CCCCC                ", "                   CC#####CC                   ", "                    FCBBBCF                    ")
-                .aisle("                    FCCBCCF                    ", "                CCCCC#####CCCCC                ", "              CCCCCHHHHHHHHHCCCCC              ", "              CCHHHHHHHHHHHHHHHCC              ", "              CCCCCHHHHHHHHHCCCCC              ", "                CCCCC#####CCCCC                ", "                    FCCBCCF                    ")
-                .aisle("                    FCBBBCF                    ", "              CCCCCCC#####CCCCCCC              ", "            CCCCHHHCC#####CCHHHCCCC            ", "            CCHHHHHHHHHHHHHHHHHHHCC            ", "            CCCCHHHCC#####CCHHHCCCC            ", "              CCCCCCC#####CCCCCCC              ", "                    FCBBBCF                    ")
-                .aisle("                                               ", "            CCCCCCC FCBBBCF CCCCCCC            ", "           CCCHHCCCCC#####CCCCCHHCCC           ", "           CHHHHHHHCC#####CCHHHHHHHC           ", "           CCCHHCCCCC#####CCCCCHHCCC           ", "            CCCCCCC FCBBBCF CCCCCCC            ", "                                               ")
-                .aisle("                                               ", "           CCCCC               CCCCC           ", "          CCHHCCCCC FCCCCCF CCCCCHHCC          ", "          CHHHHHCCC FCCBCCF CCCHHHHHC          ", "          CCHHCCCCC FCCCCCF CCCCCHHCC          ", "           CCCCC               CCCCC           ", "                                               ")
-                .aisle("                                               ", "          CCCC                   CCCC          ", "         CCHCCCC               CCCCHCC         ", "         CHHHHCC               CCHHHHC         ", "         CCHCCCC               CCCCHCC         ", "          CCCC                   CCCC          ", "                                               ")
-                .aisle("                                               ", "         CCC                       CCC         ", "        CCHCCC                   CCCHCC        ", "        CHHHCC                   CCHHHC        ", "        CCHCCC                   CCCHCC        ", "         CCC                       CCC         ", "                                               ")
-                .aisle("                                               ", "        CCC                         CCC        ", "       CCHCC                       CCHCC       ", "       CHHHC                       CHHHC       ", "       CCHCC                       CCHCC       ", "        CCC                         CCC        ", "                                               ")
-                .aisle("                                               ", "       CCC                           CCC       ", "      CCHCC                         CCHCC      ", "      CHHHC                         CHHHC      ", "      CCHCC                         CCHCC      ", "       CCC                           CCC       ", "                                               ")
-                .aisle("                                               ", "      CCC                             CCC      ", "     CCHCC                           CCHCC     ", "     CHHHC                           CHHHC     ", "     CCHCC                           CCHCC     ", "      CCC                             CCC      ", "                                               ")
-                .aisle("                                               ", "     CCC                               CCC     ", "    CCHCC                             CCHCC    ", "    CHHHC                             CHHHC    ", "    CCHCC                             CCHCC    ", "     CCC                               CCC     ", "                                               ")
-                .aisle("                                               ", "     CCC                               CCC     ", "    CCHCC                             CCHCC    ", "    CHHHC                             CHHHC    ", "    CCHCC                             CCHCC    ", "     CCC                               CCC     ", "                                               ")
-                .aisle("                                               ", "    CCC                                 CCC    ", "   CCHCC                               CCHCC   ", "   CHHHC                               CHHHC   ", "   CCHCC                               CCHCC   ", "    CCC                                 CCC    ", "                                               ")
-                .aisle("                                               ", "    CCC                                 CCC    ", "   CCHCC                               CCHCC   ", "   CHHHC                               CHHHC   ", "   CCHCC                               CCHCC   ", "    CCC                                 CCC    ", "                                               ")
-                .aisle("                                               ", "   CCC                                   CCC   ", "  CCHCC                                 CCHCC  ", "  CHHHC                                 CHHHC  ", "  CCHCC                                 CCHCC  ", "   CCC                                   CCC   ", "                                               ")
-                .aisle("                                               ", "   CCC                                   CCC   ", "  CCHCC                                 CCHCC  ", "  CHHHC                                 CHHHC  ", "  CCHCC                                 CCHCC  ", "   CCC                                   CCC   ", "                                               ")
-                .aisle("                                               ", "   CCC                                   CCC   ", "  CCHCC                                 CCHCC  ", "  CHHHC                                 CHHHC  ", "  CCHCC                                 CCHCC  ", "   CCC                                   CCC   ", "                                               ")
-                .aisle("                                               ", "  CCC                                     CCC  ", " CCHCC                                   CCHCC ", " CHHHC                                   CHHHC ", " CCHCC                                   CCHCC ", "  CCC                                     CCC  ", "                                               ")
-                .aisle("  FFF                                     FFF  ", " FCCCF                                   FCCCF ", "FCCHCCF                                 FCCHCCF", "FCHHHCF                                 FCHHHCF", "FCCHCCF                                 FCCHCCF", " FCCCF                                   FCCCF ", "  FFF                                     FFF  ")
-                .aisle("  CCC                                     CCC  ", " C###C                                   C###C ", "C##H##C                                 C##H##C", "C#HHH#C                                 C#HHH#C", "C##H##C                                 C##H##C", " C###C                                   C###C ", "  CCC                                     CCC  ")
-                .aisle("  CCC                                     CCC  ", " B###B                                   B###B ", "C##H##C                                 C##H##C", "C#HHH#C                                 C#HHH#C", "C##H##C                                 C##H##C", " B###B                                   B###B ", "  CCC                                     CCC  ")
-                .aisle("  CBC                                     CBC  ", " B###B                                   B###B ", "C##H##C                                 C##H##C", "B#HHH#B                                 B#HHH#B", "C##H##C                                 C##H##C", " B###B                                   B###B ", "  CBC                                     CBC  ")
-                .aisle("  CCC                                     CCC  ", " B###B                                   B###B ", "C##H##C                                 C##H##C", "C#HHH#C                                 C#HHH#C", "C##H##C                                 C##H##C", " B###B                                   B###B ", "  CCC                                     CCC  ")
-                .aisle("  CCC                                     CCC  ", " C###C                                   C###C ", "C##H##C                                 C##H##C", "C#HHH#C                                 C#HHH#C", "C##H##C                                 C##H##C", " C###C                                   C###C ", "  CCC                                     CCC  ")
-                .aisle("  FFF                                     FFF  ", " FCCCF                                   FCCCF ", "FCCHCCF                                 FCCHCCF", "FCHHHCF                                 FCHHHCF", "FCCHCCF                                 FCCHCCF", " FCCCF                                   FCCCF ", "  FFF                                     FFF  ")
-                .aisle("                                               ", "  CCC                                     CCC  ", " CCHCC                                   CCHCC ", " CHHHC                                   CHHHC ", " CCHCC                                   CCHCC ", "  CCC                                     CCC  ", "                                               ")
-                .aisle("                                               ", "   CCC                                   CCC   ", "  CCHCC                                 CCHCC  ", "  CHHHC                                 CHHHC  ", "  CCHCC                                 CCHCC  ", "   CCC                                   CCC   ", "                                               ")
-                .aisle("                                               ", "   CCC                                   CCC   ", "  CCHCC                                 CCHCC  ", "  CHHHC                                 CHHHC  ", "  CCHCC                                 CCHCC  ", "   CCC                                   CCC   ", "                                               ")
-                .aisle("                                               ", "   CCC                                   CCC   ", "  CCHCC                                 CCHCC  ", "  CHHHC                                 CHHHC  ", "  CCHCC                                 CCHCC  ", "   CCC                                   CCC   ", "                                               ")
-                .aisle("                                               ", "    CCC                                 CCC    ", "   CCHCC                               CCHCC   ", "   CHHHC                               CHHHC   ", "   CCHCC                               CCHCC   ", "    CCC                                 CCC    ", "                                               ")
-                .aisle("                                               ", "    CCC                                 CCC    ", "   CCHCC                               CCHCC   ", "   CHHHC                               CHHHC   ", "   CCHCC                               CCHCC   ", "    CCC                                 CCC    ", "                                               ")
-                .aisle("                                               ", "     CCC                               CCC     ", "    CCHCC                             CCHCC    ", "    CHHHC                             CHHHC    ", "    CCHCC                             CCHCC    ", "     CCC                               CCC     ", "                                               ")
-                .aisle("                                               ", "     CCC                               CCC     ", "    CCHCC                             CCHCC    ", "    CHHHC                             CHHHC    ", "    CCHCC                             CCHCC    ", "     CCC                               CCC     ", "                                               ")
-                .aisle("                                               ", "      CCC                             CCC      ", "     CCHCC                           CCHCC     ", "     CHHHC                           CHHHC     ", "     CCHCC                           CCHCC     ", "      CCC                             CCC      ", "                                               ")
-                .aisle("                                               ", "       CCC                           CCC       ", "      CCHCC                         CCHCC      ", "      CHHHC                         CHHHC      ", "      CCHCC                         CCHCC      ", "       CCC                           CCC       ", "                                               ")
-                .aisle("                                               ", "        CCC                         CCC        ", "       CCHCC                       CCHCC       ", "       CHHHC                       CHHHC       ", "       CCHCC                       CCHCC       ", "        CCC                         CCC        ", "                                               ")
-                .aisle("                                               ", "         CCC                       CCC         ", "        CCHCCC                   CCCHCC        ", "        CHHHCC                   CCHHHC        ", "        CCHCCC                   CCCHCC        ", "         CCC                       CCC         ", "                                               ")
-                .aisle("                                               ", "          CCCC                   CCCC          ", "         CCHCCCC               CCCCHCC         ", "         CHHHHCC               CCHHHHC         ", "         CCHCCCC               CCCCHCC         ", "          CCCC                   CCCC          ", "                                               ")
-                .aisle("                                               ", "           CCCCC               CCCCC           ", "          CCHHCCCCC FCCCCCF CCCCCHHCC          ", "          CHHHHHCCC FCCBCCF CCCHHHHHC          ", "          CCHHCCCCC FCCCCCF CCCCCHHCC          ", "           CCCCC               CCCCC           ", "                                               ")
-                .aisle("                                               ", "            CCCCCCC FCBBBCF CCCCCCC            ", "           CCCHHCCCCC#####CCCCCHHCCC           ", "           CHHHHHHHCC#####CCHHHHHHHC           ", "           CCCHHCCCCC#####CCCCCHHCCC           ", "            CCCCCCC FCBBBCF CCCCCCC            ", "                                               ")
-                .aisle("                    FCBBBCF                    ", "              CCCCCCC#####CCCCCCC              ", "            CCCCHHHCC#####CCHHHCCCC            ", "            CCHHHHHHHHHHHHHHHHHHHCC            ", "            CCCCHHHCC#####CCHHHCCCC            ", "              CCCCCCC#####CCCCCCC              ", "                    FCBBBCF                    ")
-                .aisle("                    FCCBCCF                    ", "                CCCCC#####CCCCC                ", "              CCCCCHHHHHHHHHCCCCC              ", "              CCHHHHHHHHHHHHHHHCC              ", "              CCCCCHHHHHHHHHCCCCC              ", "                CCCCC#####CCCCC                ", "                    FCCBCCF                    ")
-                .aisle("                    FCBBBCF                    ", "                   CC#####CC                   ", "                CCCCC#####CCCCC                ", "                CCCHHHHHHHHHCCC                ", "                CCCCC#####CCCCC                ", "                   CC#####CC                   ", "                    FCBBBCF                    ")
-                .aisle("                                               ", "                    FCBBBCF                    ", "                   CC#####CC                   ", "                   CC#####CC                   ", "                   CC#####CC                   ", "                    FCBBBCF                    ", "                                               ")
-                .aisle("                                               ", "                                               ", "                    FCCCCCF                    ", "                    FCCSCCF                    ", "                    FCCCCCF                    ", "                                               ", "                                               ")
-                .where('S', this.selfPredicate())
-                .where('B', states(getGlassState()))
-                .where('C', states(getCasingState())
-                        .or(abilities(MultiblockAbility.EXPORT_ITEMS).setMinGlobalLimited(1).setMaxGlobalLimited(2))
-                        .or(abilities(MultiblockAbility.MAINTENANCE_HATCH).setMinGlobalLimited(1).setMaxGlobalLimited(1))
-                        .or(abilities(MultiblockAbility.IMPORT_ITEMS).setMinGlobalLimited(1).setMaxGlobalLimited(2))
-                        .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setMinGlobalLimited(1).setMaxGlobalLimited(1))
-                        .or(abilities(MultiblockAbility.EXPORT_FLUIDS).setMinGlobalLimited(1).setMaxGlobalLimited(1))
-                        .or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(4)))
-                .where('F', states(getFrameState()))
-                .where('H', CP_PAF_CASING.get())
-                .where('#', air())
-                .where(' ', any())
-                .build();
+        return FactoryBlockPattern.start().aisle("                                               ", "                                               ", "                    FCCCCCF                    ", "                    FCCBCCF                    ", "                    FCCCCCF                    ", "                                               ", "                                               ").aisle("                                               ", "                    FCBBBCF                    ", "                   CC#####CC                   ", "                   CC#####CC                   ", "                   CC#####CC                   ", "                    FCBBBCF                    ", "                                               ").aisle("                    FCBBBCF                    ", "                   CC#####CC                   ", "                CCCCC#####CCCCC                ", "                CCCHHHHHHHHHCCC                ", "                CCCCC#####CCCCC                ", "                   CC#####CC                   ", "                    FCBBBCF                    ").aisle("                    FCCBCCF                    ", "                CCCCC#####CCCCC                ", "              CCCCCHHHHHHHHHCCCCC              ", "              CCHHHHHHHHHHHHHHHCC              ", "              CCCCCHHHHHHHHHCCCCC              ", "                CCCCC#####CCCCC                ", "                    FCCBCCF                    ").aisle("                    FCBBBCF                    ", "              CCCCCCC#####CCCCCCC              ", "            CCCCHHHCC#####CCHHHCCCC            ", "            CCHHHHHHHHHHHHHHHHHHHCC            ", "            CCCCHHHCC#####CCHHHCCCC            ", "              CCCCCCC#####CCCCCCC              ", "                    FCBBBCF                    ").aisle("                                               ", "            CCCCCCC FCBBBCF CCCCCCC            ", "           CCCHHCCCCC#####CCCCCHHCCC           ", "           CHHHHHHHCC#####CCHHHHHHHC           ", "           CCCHHCCCCC#####CCCCCHHCCC           ", "            CCCCCCC FCBBBCF CCCCCCC            ", "                                               ").aisle("                                               ", "           CCCCC               CCCCC           ", "          CCHHCCCCC FCCCCCF CCCCCHHCC          ", "          CHHHHHCCC FCCBCCF CCCHHHHHC          ", "          CCHHCCCCC FCCCCCF CCCCCHHCC          ", "           CCCCC               CCCCC           ", "                                               ").aisle("                                               ", "          CCCC                   CCCC          ", "         CCHCCCC               CCCCHCC         ", "         CHHHHCC               CCHHHHC         ", "         CCHCCCC               CCCCHCC         ", "          CCCC                   CCCC          ", "                                               ").aisle("                                               ", "         CCC                       CCC         ", "        CCHCCC                   CCCHCC        ", "        CHHHCC                   CCHHHC        ", "        CCHCCC                   CCCHCC        ", "         CCC                       CCC         ", "                                               ").aisle("                                               ", "        CCC                         CCC        ", "       CCHCC                       CCHCC       ", "       CHHHC                       CHHHC       ", "       CCHCC                       CCHCC       ", "        CCC                         CCC        ", "                                               ").aisle("                                               ", "       CCC                           CCC       ", "      CCHCC                         CCHCC      ", "      CHHHC                         CHHHC      ", "      CCHCC                         CCHCC      ", "       CCC                           CCC       ", "                                               ").aisle("                                               ", "      CCC                             CCC      ", "     CCHCC                           CCHCC     ", "     CHHHC                           CHHHC     ", "     CCHCC                           CCHCC     ", "      CCC                             CCC      ", "                                               ").aisle("                                               ", "     CCC                               CCC     ", "    CCHCC                             CCHCC    ", "    CHHHC                             CHHHC    ", "    CCHCC                             CCHCC    ", "     CCC                               CCC     ", "                                               ").aisle("                                               ", "     CCC                               CCC     ", "    CCHCC                             CCHCC    ", "    CHHHC                             CHHHC    ", "    CCHCC                             CCHCC    ", "     CCC                               CCC     ", "                                               ").aisle("                                               ", "    CCC                                 CCC    ", "   CCHCC                               CCHCC   ", "   CHHHC                               CHHHC   ", "   CCHCC                               CCHCC   ", "    CCC                                 CCC    ", "                                               ").aisle("                                               ", "    CCC                                 CCC    ", "   CCHCC                               CCHCC   ", "   CHHHC                               CHHHC   ", "   CCHCC                               CCHCC   ", "    CCC                                 CCC    ", "                                               ").aisle("                                               ", "   CCC                                   CCC   ", "  CCHCC                                 CCHCC  ", "  CHHHC                                 CHHHC  ", "  CCHCC                                 CCHCC  ", "   CCC                                   CCC   ", "                                               ").aisle("                                               ", "   CCC                                   CCC   ", "  CCHCC                                 CCHCC  ", "  CHHHC                                 CHHHC  ", "  CCHCC                                 CCHCC  ", "   CCC                                   CCC   ", "                                               ").aisle("                                               ", "   CCC                                   CCC   ", "  CCHCC                                 CCHCC  ", "  CHHHC                                 CHHHC  ", "  CCHCC                                 CCHCC  ", "   CCC                                   CCC   ", "                                               ").aisle("                                               ", "  CCC                                     CCC  ", " CCHCC                                   CCHCC ", " CHHHC                                   CHHHC ", " CCHCC                                   CCHCC ", "  CCC                                     CCC  ", "                                               ").aisle("  FFF                                     FFF  ", " FCCCF                                   FCCCF ", "FCCHCCF                                 FCCHCCF", "FCHHHCF                                 FCHHHCF", "FCCHCCF                                 FCCHCCF", " FCCCF                                   FCCCF ", "  FFF                                     FFF  ").aisle("  CCC                                     CCC  ", " C###C                                   C###C ", "C##H##C                                 C##H##C", "C#HHH#C                                 C#HHH#C", "C##H##C                                 C##H##C", " C###C                                   C###C ", "  CCC                                     CCC  ").aisle("  CCC                                     CCC  ", " B###B                                   B###B ", "C##H##C                                 C##H##C", "C#HHH#C                                 C#HHH#C", "C##H##C                                 C##H##C", " B###B                                   B###B ", "  CCC                                     CCC  ").aisle("  CBC                                     CBC  ", " B###B                                   B###B ", "C##H##C                                 C##H##C", "B#HHH#B                                 B#HHH#B", "C##H##C                                 C##H##C", " B###B                                   B###B ", "  CBC                                     CBC  ").aisle("  CCC                                     CCC  ", " B###B                                   B###B ", "C##H##C                                 C##H##C", "C#HHH#C                                 C#HHH#C", "C##H##C                                 C##H##C", " B###B                                   B###B ", "  CCC                                     CCC  ").aisle("  CCC                                     CCC  ", " C###C                                   C###C ", "C##H##C                                 C##H##C", "C#HHH#C                                 C#HHH#C", "C##H##C                                 C##H##C", " C###C                                   C###C ", "  CCC                                     CCC  ").aisle("  FFF                                     FFF  ", " FCCCF                                   FCCCF ", "FCCHCCF                                 FCCHCCF", "FCHHHCF                                 FCHHHCF", "FCCHCCF                                 FCCHCCF", " FCCCF                                   FCCCF ", "  FFF                                     FFF  ").aisle("                                               ", "  CCC                                     CCC  ", " CCHCC                                   CCHCC ", " CHHHC                                   CHHHC ", " CCHCC                                   CCHCC ", "  CCC                                     CCC  ", "                                               ").aisle("                                               ", "   CCC                                   CCC   ", "  CCHCC                                 CCHCC  ", "  CHHHC                                 CHHHC  ", "  CCHCC                                 CCHCC  ", "   CCC                                   CCC   ", "                                               ").aisle("                                               ", "   CCC                                   CCC   ", "  CCHCC                                 CCHCC  ", "  CHHHC                                 CHHHC  ", "  CCHCC                                 CCHCC  ", "   CCC                                   CCC   ", "                                               ").aisle("                                               ", "   CCC                                   CCC   ", "  CCHCC                                 CCHCC  ", "  CHHHC                                 CHHHC  ", "  CCHCC                                 CCHCC  ", "   CCC                                   CCC   ", "                                               ").aisle("                                               ", "    CCC                                 CCC    ", "   CCHCC                               CCHCC   ", "   CHHHC                               CHHHC   ", "   CCHCC                               CCHCC   ", "    CCC                                 CCC    ", "                                               ").aisle("                                               ", "    CCC                                 CCC    ", "   CCHCC                               CCHCC   ", "   CHHHC                               CHHHC   ", "   CCHCC                               CCHCC   ", "    CCC                                 CCC    ", "                                               ").aisle("                                               ", "     CCC                               CCC     ", "    CCHCC                             CCHCC    ", "    CHHHC                             CHHHC    ", "    CCHCC                             CCHCC    ", "     CCC                               CCC     ", "                                               ").aisle("                                               ", "     CCC                               CCC     ", "    CCHCC                             CCHCC    ", "    CHHHC                             CHHHC    ", "    CCHCC                             CCHCC    ", "     CCC                               CCC     ", "                                               ").aisle("                                               ", "      CCC                             CCC      ", "     CCHCC                           CCHCC     ", "     CHHHC                           CHHHC     ", "     CCHCC                           CCHCC     ", "      CCC                             CCC      ", "                                               ").aisle("                                               ", "       CCC                           CCC       ", "      CCHCC                         CCHCC      ", "      CHHHC                         CHHHC      ", "      CCHCC                         CCHCC      ", "       CCC                           CCC       ", "                                               ").aisle("                                               ", "        CCC                         CCC        ", "       CCHCC                       CCHCC       ", "       CHHHC                       CHHHC       ", "       CCHCC                       CCHCC       ", "        CCC                         CCC        ", "                                               ").aisle("                                               ", "         CCC                       CCC         ", "        CCHCCC                   CCCHCC        ", "        CHHHCC                   CCHHHC        ", "        CCHCCC                   CCCHCC        ", "         CCC                       CCC         ", "                                               ").aisle("                                               ", "          CCCC                   CCCC          ", "         CCHCCCC               CCCCHCC         ", "         CHHHHCC               CCHHHHC         ", "         CCHCCCC               CCCCHCC         ", "          CCCC                   CCCC          ", "                                               ").aisle("                                               ", "           CCCCC               CCCCC           ", "          CCHHCCCCC FCCCCCF CCCCCHHCC          ", "          CHHHHHCCC FCCBCCF CCCHHHHHC          ", "          CCHHCCCCC FCCCCCF CCCCCHHCC          ", "           CCCCC               CCCCC           ", "                                               ").aisle("                                               ", "            CCCCCCC FCBBBCF CCCCCCC            ", "           CCCHHCCCCC#####CCCCCHHCCC           ", "           CHHHHHHHCC#####CCHHHHHHHC           ", "           CCCHHCCCCC#####CCCCCHHCCC           ", "            CCCCCCC FCBBBCF CCCCCCC            ", "                                               ").aisle("                    FCBBBCF                    ", "              CCCCCCC#####CCCCCCC              ", "            CCCCHHHCC#####CCHHHCCCC            ", "            CCHHHHHHHHHHHHHHHHHHHCC            ", "            CCCCHHHCC#####CCHHHCCCC            ", "              CCCCCCC#####CCCCCCC              ", "                    FCBBBCF                    ").aisle("                    FCCBCCF                    ", "                CCCCC#####CCCCC                ", "              CCCCCHHHHHHHHHCCCCC              ", "              CCHHHHHHHHHHHHHHHCC              ", "              CCCCCHHHHHHHHHCCCCC              ", "                CCCCC#####CCCCC                ", "                    FCCBCCF                    ").aisle("                    FCBBBCF                    ", "                   CC#####CC                   ", "                CCCCC#####CCCCC                ", "                CCCHHHHHHHHHCCC                ", "                CCCCC#####CCCCC                ", "                   CC#####CC                   ", "                    FCBBBCF                    ").aisle("                                               ", "                    FCBBBCF                    ", "                   CC#####CC                   ", "                   CC#####CC                   ", "                   CC#####CC                   ", "                    FCBBBCF                    ", "                                               ").aisle("                                               ", "                                               ", "                    FCCCCCF                    ", "                    FCCSCCF                    ", "                    FCCCCCF                    ", "                                               ", "                                               ").where('S', this.selfPredicate()).where('B', states(getGlassState())).where('C', states(getCasingState()).or(abilities(MultiblockAbility.EXPORT_ITEMS).setMinGlobalLimited(1).setMaxGlobalLimited(2)).or(abilities(MultiblockAbility.MAINTENANCE_HATCH).setMinGlobalLimited(1).setMaxGlobalLimited(1)).or(abilities(MultiblockAbility.IMPORT_ITEMS).setMinGlobalLimited(1).setMaxGlobalLimited(2)).or(abilities(MultiblockAbility.IMPORT_FLUIDS).setMinGlobalLimited(1).setMaxGlobalLimited(1)).or(abilities(MultiblockAbility.EXPORT_FLUIDS).setMinGlobalLimited(1).setMaxGlobalLimited(1))
+                .or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(4))
+                        .or(abilities(MultiblockAbility.INPUT_LASER).setMaxGlobalLimited(1))
+                )
+
+                .where('F', states(getFrameState())).where('H', CP_PAF_CASING.get()).where('#', air()).where(' ', any()).build();
     }
 
     @SideOnly(Side.CLIENT)
     @Override
     public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
         super.renderMetaTileEntity(renderState, translation, pipeline);
-        this.getFrontOverlay().renderOrientedState(renderState, translation, pipeline, getFrontFacing(), true,
-                isStructureFormed());
+        this.getFrontOverlay().renderOrientedState(renderState, translation, pipeline, getFrontFacing(), true, isStructureFormed());
     }
 
     @SideOnly(Side.CLIENT)
@@ -637,9 +597,7 @@ public class MetaTileEntityPhotolithographyFactory extends MetaTileEntityBaseWit
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
         Object laserTier = context.get("PAFTieredStats");
-        this.laserTier = GTQTUtil.getOrDefault(() -> laserTier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired) laserTier).getIntTier(),
-                0);
+        this.laserTier = GTQTUtil.getOrDefault(() -> laserTier instanceof WrappedIntTired, () -> ((WrappedIntTired) laserTier).getIntTier(), 0);
     }
 
     @Nonnull
@@ -657,6 +615,8 @@ public class MetaTileEntityPhotolithographyFactory extends MetaTileEntityBaseWit
         tooltip.add(I18n.format("gtqtcore.pf.tooltip.5"));
         tooltip.add(I18n.format("gtqtcore.pf.tooltip.6"));
         tooltip.add(I18n.format("gtqtcore.pf.tooltip.7"));
+        tooltip.add(I18n.format("gtqtcore.pf.tooltip.8"));
+        tooltip.add(I18n.format("gtqtcore.multiblock.kq.laser.tooltip"));
         tooltip.add(I18n.format("如宇宙间最精密的织梦者，以光年丈量着世界的边界，悄然模糊科技与艺术的边界。"));
         tooltip.add(I18n.format("如星辰运转于浩瀚银河之中，光线织工在超高速微电路上起舞绘制出纳米级的电路蓝图。"));
         tooltip.add(I18n.format("如同晨曦中露珠滑过蜘蛛网的细腻，每一滴都承载着光的意志，编织着电子世界的经纬。"));

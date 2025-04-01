@@ -606,7 +606,7 @@ public class MetaTileEntityCompressedFusionReactor extends GTQTNoTierMultiblockC
                 tooltip.add(I18n.format("gtqtcore.machine.compressed_fusion_reactor.perfect_oc"));
             }
         }
-        tooltip.add(I18n.format("gtqtcore.multiblock.kq.acc.tooltip"));
+        tooltip.add(I18n.format("gtqtcore.multiblock.kq.laser.tooltip"));
         tooltip.add(I18n.format("gtqtcore.multiblock.kq.acc.tooltip"));
     }
 

@@ -34,11 +34,11 @@ public class HigherDegreeMaterials {
                 .fluid()
                 .color(0x4876FF).iconSet(METALLIC)
                 .flags(EXT2_METAL, GENERATE_SMALL_GEAR, GENERATE_RING, GENERATE_FRAME, GENERATE_ROTOR, GENERATE_ROUND, GENERATE_FOIL, GENERATE_GEAR)
-                .components(Nickel, 2, Titanium, 3)
+                .components(Nickel, 2, Titanium, 3,Chrome,1)
                 .rotorStats(15.0f, 7.0f, 3000)
                 .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 5120, 3)
                         .attackSpeed(0.1F).enchantability(21).build())
-                .blast(1300, BlastProperty.GasTier.LOW)
+                .blast(6000, BlastProperty.GasTier.HIGHER)
                 .build();
 
         //贫硫化金矿石

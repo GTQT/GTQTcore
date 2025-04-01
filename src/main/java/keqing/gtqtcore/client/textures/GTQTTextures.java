@@ -160,7 +160,7 @@ public class GTQTTextures {
     public static SimpleOverlayRenderer INF_WATER;
     public static SimpleOverlayRenderer PROCESS;
     public static SimpleOverlayRenderer ADV_COLD_CASING;
-    public static SimpleOverlayRenderer NITINOL_CASING;
+    public static SimpleOverlayRenderer NITINOL_CASING= new SimpleOverlayRenderer("multiblock/casings/nitinol_machine_casing");
     public static SimpleOverlayRenderer ISA_CASING;
     public static SimpleOverlayRenderer NUCLEAR_FUSION_CASING;
     public static SimpleOverlayRenderer NUCLEAR_FUSION_COOLING;
@@ -178,7 +178,7 @@ public class GTQTTextures {
     public static SimpleOverlayRenderer ADV_MACHINE_VENT_ROTARING;
     public static SimpleOverlayRenderer ADV_MACHINE_TUBBINE;
     public static SimpleOverlayRenderer QUANTUM_CASING;
-    public static SimpleOverlayRenderer HC_ALLOY_CASING;
+    public static SimpleOverlayRenderer HC_ALLOY_CASING = new SimpleOverlayRenderer("multiblock/casings/hc_alloy_casing");
     public static SimpleOverlayRenderer SFTC;
     public static SimpleOverlayRenderer SFTS;
     public static TextureAtlasSprite FORCE_FIELD;
@@ -289,7 +289,6 @@ public class GTQTTextures {
         ASEPTIC_FARM_CASING = new SimpleOverlayRenderer("multiblock/isa_casing/aseptic_farm_machine_casing");
         PROCESS = new SimpleOverlayRenderer("multiblock/isa_casing/process_casing");
         VACUUM_CASING = new SimpleOverlayRenderer("multiblock/isa_casing/vacuum_casing");
-        NITINOL_CASING = new SimpleOverlayRenderer("multiblock/casings/nitinol_machine_casing");
         MACERATOR_CASING = new SimpleOverlayRenderer("multiblock/casing/macerator_casing");
         NUCLEAR_FUSION_CASING = new SimpleOverlayRenderer("multiblock/casings/nuclear_fusion_casing");
         NUCLEAR_FUSION_COOLING = new SimpleOverlayRenderer("multiblock/casings/nuclear_fusion_cooling");
@@ -317,7 +316,6 @@ public class GTQTTextures {
         IRIDIUM_CASING = new SimpleOverlayRenderer("multiblock/casing/iridium_casing");
         MAGNETIC_FLUX_CASING = new SimpleOverlayRenderer("multiblock/casing/magnetic_flux_casing");
         MAGNETIC_FIELD_CASING = new SimpleOverlayRenderer("multiblock/casing/magnetic_field_casing");
-        HC_ALLOY_CASING = new SimpleOverlayRenderer("multiblock/casings/hc_alloy_casing");
         SOLAR_PLATE_CASING = new SimpleOverlayRenderer("multiblock/electrolytic_bath/solar_generator_bottom");
         SFTC = new SimpleOverlayRenderer("multiblock/casings/supercritical_fuel_trans_casing");
         SFTS = new SimpleOverlayRenderer("multiblock/casings/supercritical_fuel_trans_score");

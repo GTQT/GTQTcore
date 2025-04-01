@@ -3368,6 +3368,7 @@ gtqtcore.machine.reinforced_rotor_holder.error=必须使用同一等级的转子
 gtqtcore.machine.mega_turbine.steam.name=特大蒸汽涡轮
 gtqtcore.machine.mega_turbine.gas.name=特大燃气涡轮
 gtqtcore.machine.mega_turbine.plasma.name=特大等离子体涡轮
+gtqtcore.machine.mega_turbine.fuel_cell.name=特大促燃体涡轮
 gtqtcore.machine.mega_turbine.mode.0=正常模式
 gtqtcore.machine.mega_turbine.mode.1=高速模式
 gtqtcore.machine.mega_turbine.description=特大涡轮是大型涡轮的升级版。
@@ -5432,6 +5433,7 @@ gtqtcore.pf.tooltip.4=对于单个线程，工作时长由：基础时长，数�
 gtqtcore.pf.tooltip.5=均分模式：开启后在各独立线程在不存在专职任务（各独立线程对不同种类的晶圆有不同的处理优先级，处理此类特定晶圆称之为专职任务）的情况下，会与最近的一个线程共享剩余任务处理进度（如果被共享的线程已完成部分工作进度，则共享未完成部分的工作进度），共同完成此任务。
 gtqtcore.pf.tooltip.6=保险模式：开启后机器无论晶圆缓存持续工作，这意味着如果晶圆输入速度过慢，可光刻数量较少，设备只会输出前几类晶圆，而不会循环整个可光刻列表。
 gtqtcore.pf.tooltip.7=退回缓存：返回非工作区缓存区的晶圆与光刻胶，已经进入独立线程缓存的物品不返回。
+gtqtcore.pf.tooltip.8=每个线程工作1tick需要消耗100mb蒸馏水，请注意及时补充。
 
 metaitem.catalyst_framework_i.name=生物催化剂（氧化催化）
 metaitem.catalyst_framework_ii.name=生物催化剂（还原催化）

@@ -2534,6 +2534,25 @@ public class TechReSearchNET {
                 .duration(1200)
                 .buildAndRegister();
 
+        //  Mega Plasma Turbine
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(LARGE_FUEL_TURBINE, 6)
+                .input(plate, HMS1J79Alloy, 8)
+                .input(circuit, Tier.ZPM, 32)
+                .input(ELECTRIC_PISTON_ZPM, 4)
+                .input(FLUID_REGULATOR_ZPM, 4)
+                .input(spring, Pikyonium64B, 8)
+                .input(screw, Trinium, 16)
+                .fluidInputs(NaquadahAlloy.getFluid(L * 16))
+                .stationResearch(b -> b
+                        .researchStack(DISK_3.getStackForm())
+                        .CWUt(CWT[IV])
+                        .EUt(VA[ZPM]))
+                .output(MEGA_FUEL_CELL_TURBINE)
+                .EUt(VA[ZPM])
+                .duration(1200)
+                .buildAndRegister();
+
         //  Mega Turbine
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(HIGH_PRESSURE_STEAM_TURBINE, 6)
