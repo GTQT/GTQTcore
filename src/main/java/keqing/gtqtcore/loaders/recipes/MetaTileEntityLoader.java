@@ -65,6 +65,7 @@ import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.BUFFER;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.DISTILLATION_TOWER;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.GAS_COLLECTOR;
+import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.MACHINE_HATCH;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.PYROLYSE_OVEN;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.*;
 import static net.minecraft.init.Blocks.FURNACE;
@@ -371,11 +372,17 @@ public class MetaTileEntityLoader {
                 'H', new UnificationEntry(OrePrefix.plate, Titanium),
                 'N', new UnificationEntry(OrePrefix.pipeLargeFluid, Polyethylene));
 
-        ModHandler.addShapedRecipe(true, "hv_machine_access_interface", HV_MACHINE_HATCH.getStackForm(),
+        ModHandler.addShapedRecipe(true, "_machine_access_interface", MACHINE_HATCH.getStackForm(),
                 "CHS",
-                'C', new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.HV),
-                'H', MetaTileEntities.HULL[GTValues.HV].getStackForm(),
-                'S', MetaItems.SENSOR_HV.getStackForm());
+                'C', new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.MV),
+                'H', MetaTileEntities.HULL[GTValues.MV].getStackForm(),
+                'S', MetaItems.SENSOR_MV.getStackForm());
+
+        ModHandler.addShapedRecipe(true, "generator_access_interface", GENERATOR_HATCH.getStackForm(),
+                "CHS",
+                'C', new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.MV),
+                'H', MetaTileEntities.HULL[GTValues.MV].getStackForm(),
+                'S', EMITTER_MV.getStackForm());
 
         //耐火砖快乐配方
         ASSEMBLER_RECIPES.recipeBuilder()

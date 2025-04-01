@@ -3449,7 +3449,21 @@ gtqtcore.machine.hv_processing_array.name=Small Processing Array (§6HV§r)
 gregtech.multiblock.lv_processing_array.description=The processing array can integrate up to 2 single-block machines into one multiblock machine for more efficient automation.
 gregtech.multiblock.mv_processing_array.description=The processing array can integrate up to 4 single-block machines into one multiblock machine for more efficient automation.
 gregtech.multiblock.hv_processing_array.description=The processing array can integrate up to 8 single-block machines into one multiblock machine for more efficient automation.
-gtqtcore.machine.hv_machine_hatch.name=Machine Access Hatch
+
+gtqtcore.machine.lv_generator_array.name=Small power generation arrays（§7LV§r）
+gtqtcore.machine.mv_generator_array.name=Small power generation arrays（§bMV§r）
+gtqtcore.machine.hv_generator_array.name=Small power generation arrays（§6HV§r）
+gtqtcore.machine.ev_generator_array.name=Small power generation arrays（§eEV§r）
+gtqtcore.machine.iv_generator_array.name=Small power generation arrays（§cIV§r）
+
+gregtech.multiblock.lv_generator_array.description=The processing array can integrate up to 2 single-block generators into a multi-block machine for more efficient power output.
+gregtech.multiblock.mv_generator_array.description=The processing array can integrate up to 4 single-block generators into a multi-block machine for more efficient power output.
+gregtech.multiblock.hv_generator_array.description=The processing array can integrate up to 8 single-block generators into a multi-block machine for more efficient power output.
+gregtech.multiblock.ev_generator_array.description=The processing array can integrate up to 16 single-block generators into a multi-block machine for more efficient power output.
+gtqtcore.multiblock.iv_generator_array.description=The processing array can integrate up to 64 single-block generators into a multi-block machine for more efficient power output.
+
+gtqtcore.machine.machine_hatch.name=Machine Access Hatch
+gtqtcore.machine.generator_hatch.name=Generator Access Hatch
 gtqtcore.machine.coagulation_tank.name=Coagulation Reaction Tank
 gtqtcore.machine.ex_cvd.name=Extreme Particle CVD
 gtqtcore.machine.chemical_factory.name=Large Chemical Factory
