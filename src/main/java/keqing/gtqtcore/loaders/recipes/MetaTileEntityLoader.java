@@ -347,7 +347,8 @@ public class MetaTileEntityLoader {
                 "RCR", "SPE", "HNH",
                 'R', MetaItems.ROBOT_ARM_MV,
                 'C', new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.MV),
-                'S', MetaItems.SENSOR_MV, 'P', GTQTMetaTileEntities.ASSEMBLY_LINE.getStackForm(),
+                'S', MetaItems.SENSOR_MV,
+                'P', ASSEMBLER[1].getStackForm(),
                 'E', MetaItems.EMITTER_MV,
                 'H', new UnificationEntry(OrePrefix.plate, Invar),
                 'N', new UnificationEntry(OrePrefix.pipeLargeFluid, Aluminium));
@@ -371,6 +372,59 @@ public class MetaTileEntityLoader {
                 'E', MetaItems.EMITTER_EV,
                 'H', new UnificationEntry(OrePrefix.plate, Titanium),
                 'N', new UnificationEntry(OrePrefix.pipeLargeFluid, Polyethylene));
+
+        //发电阵列
+        ModHandler.addShapedRecipe(true, "lv_generator_array", LV_GENERATOR_ARRAY.getStackForm(),
+                "RCR", "SPE", "HNH",
+                'R', MetaItems.ROBOT_ARM_MV,
+                'C', new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.MV),
+                'E', MetaItems.SENSOR_MV,
+                'P', ASSEMBLER[1].getStackForm(),
+                'S', MetaItems.EMITTER_MV,
+                'H', new UnificationEntry(OrePrefix.plate, Invar),
+                'N', new UnificationEntry(OrePrefix.pipeLargeFluid, Aluminium));
+
+        ModHandler.addShapedRecipe(true, "mv_generator_array", MV_GENERATOR_ARRAY.getStackForm(),
+                "RCR", "SPE", "HNH",
+                'R', MetaItems.ROBOT_ARM_HV,
+                'C', new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.HV),
+                'E', MetaItems.SENSOR_HV,
+                'P', GTQTMetaTileEntities.LV_GENERATOR_ARRAY.getStackForm(),
+                'S', MetaItems.EMITTER_HV,
+                'H', new UnificationEntry(OrePrefix.plate, Talonite),
+                'N', new UnificationEntry(OrePrefix.pipeLargeFluid, StainlessSteel));
+
+        ModHandler.addShapedRecipe(true, "hv_generator_array", HV_GENERATOR_ARRAY.getStackForm(),
+                "RCR", "SPE", "HNH",
+                'R', MetaItems.ROBOT_ARM_EV,
+                'C', new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.EV),
+                'E', MetaItems.SENSOR_EV,
+                'P', GTQTMetaTileEntities.MV_GENERATOR_ARRAY.getStackForm(),
+                'S', MetaItems.EMITTER_EV,
+                'H', new UnificationEntry(OrePrefix.plate, Titanium),
+                'N', new UnificationEntry(OrePrefix.pipeLargeFluid, Polyethylene));
+
+        ModHandler.addShapedRecipe(true, "ev_generator_array", EV_GENERATOR_ARRAY.getStackForm(),
+                "RCR", "SPE", "HNH",
+                'R', MetaItems.ROBOT_ARM_IV,
+                'C', new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.IV),
+                'E', MetaItems.SENSOR_IV,
+                'P', MetaTileEntities.PROCESSING_ARRAY.getStackForm(),
+                'S', MetaItems.EMITTER_IV,
+                'H', new UnificationEntry(OrePrefix.plate, TungstenSteel),
+                'N', new UnificationEntry(OrePrefix.pipeLargeFluid, Materials.Titanium));
+
+        ModHandler.addShapedRecipe(true, "iv_generator_array",
+                IV_GENERATOR_ARRAY.getStackForm(),
+                "RCR", "SPE", "HNH",
+                'R', MetaItems.ROBOT_ARM_LuV,
+                'C', new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.ZPM),
+                'E', MetaItems.SENSOR_LuV,
+                'P', MetaTileEntities.PROCESSING_ARRAY.getStackForm(),
+                'S', MetaItems.EMITTER_LuV,
+                'H', new UnificationEntry(OrePrefix.plate, Materials.HSSE),
+                'N', new UnificationEntry(OrePrefix.pipeLargeFluid, Materials.Naquadah));
+
 
         ModHandler.addShapedRecipe(true, "_machine_access_interface", MACHINE_HATCH.getStackForm(),
                 "CHS",

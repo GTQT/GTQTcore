@@ -1820,5 +1820,9 @@ public class SecondDegreeMaterials {
                 .components(Lithium, 1, Iodine, 1)
                 .build();
 
+        //氟碳镧铈
+        GTQTMaterials.BastnasiteFront = new Material.Builder(getMaterialsId(), gregtechId("bastnasite_front")).fluid().color(0x8B4726).build();
+
+
     }
 }

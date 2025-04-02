@@ -91,7 +91,7 @@ public class ISALine {
         isaLine(false,Tetrahedrite,TetrahedriteFront,Tetrahedrite,Antimony,Cadmium,Sulfur);
         isaLine(false,Chalcocite,ChalcociteFront,Copper,Copper,Sulfur,Silver);
         isaLine(false,Bornite,BorniteFront,Copper,Gold,Cobalt,Cadmium);
-
+        isaLine(false,Bastnasite,BastnasiteFront,Dysprosium,Holmium,Thulium,Yttrium);
         //铝系
         isaLine(false,Aluminium,AluminiumFront,Aluminium,Aluminium,Ilmenite,Rutile);
         isaLine(false,Bauxite,BauxiteFront,Aluminium,Aluminium,Gallium,Rutile);

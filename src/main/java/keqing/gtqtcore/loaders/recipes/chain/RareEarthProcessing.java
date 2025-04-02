@@ -1,6 +1,7 @@
 package keqing.gtqtcore.loaders.recipes.chain;
 
 import gregtech.api.unification.material.Material;
+import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.unification.GTQTMaterials;
 
 import static gregtech.api.unification.material.Materials.Hafnium;
@@ -28,7 +29,56 @@ public class RareEarthProcessing {
         SodiumFluorosilicate();
         p507();
         NanoSwarm();
+        RareEarthProcess();
     }
+
+    private static void RareEarthProcess() {
+        //  Step 1: Rare Earth Hydroxides Solution -> Rare Earth Chlorides Solution
+        CHEMICAL_RECIPES.recipeBuilder()
+                .fluidInputs(RareEarthHydroxidesSolution.getFluid(1000))
+                .fluidInputs(HydrochloricAcid.getFluid(1000))
+                .output(dust, SodiumHydroxide, 3)
+                .fluidOutputs(RareEarthChloridesSolution.getFluid(1000))
+                .EUt(VA[LV])
+                .duration(120)
+                .buildAndRegister();
+
+        //  Crude Neodymium Oxide Production, can still be obtained as ore byproducts
+        //  This is optional for EV Tier (Motors)
+        DISTILLERY_RECIPES.recipeBuilder()
+                .fluidInputs(RareEarthChloridesSolution.getFluid(1000))
+                .circuitMeta(1)
+                .output(dust, NeodymiumOxide)
+                .fluidOutputs(HydrochloricAcid.getFluid(900))
+                .duration(200)
+                .EUt(VA[LV])
+                .buildAndRegister();
+
+        //  Crude Cerium Oxide Production
+        //  This is optional for ZPM Tier (Pu-241 Fusion)
+        DISTILLERY_RECIPES.recipeBuilder()
+                .fluidInputs(RareEarthChloridesSolution.getFluid(1000))
+                .circuitMeta(2)
+                .output(dust, CeriumOxide)
+                .fluidOutputs(HydrochloricAcid.getFluid(850))
+                .duration(200)
+                .EUt(3840)
+                .buildAndRegister();
+
+        //  Complete Rare Earth Process
+        GTQTcoreRecipeMaps.MOLECULAR_DISTILLATION_RECIPES.recipeBuilder()
+                .fluidInputs(RareEarthChloridesSolution.getFluid(1000))
+                .output(dustSmall, Thorium)
+                .fluidOutputs(LaPrNdCeOxidesSolution.getFluid(250))
+                .fluidOutputs(ScEuGdSmOxidesSolution.getFluid(250))
+                .fluidOutputs(YTbDyHoOxidesSolution.getFluid(250))
+                .fluidOutputs(ErTmYbLuOxidesSolution.getFluid(250))
+                .fluidOutputs(HydrochloricAcid.getFluid(1000))
+                .duration(2000)
+                .EUt(VA[UV])
+                .buildAndRegister();
+    }
+
 
     private static void NanoSwarm() {
         //  Nano Resin Processing is an Advanced Rare Earth Processing for player which beyond ZPM tier,

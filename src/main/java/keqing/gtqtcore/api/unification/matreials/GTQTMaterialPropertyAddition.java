@@ -155,6 +155,7 @@ public class GTQTMaterialPropertyAddition {
         Selenium.setProperty(PropertyKey.DUST, new DustProperty());
         Rubidium.setProperty(PropertyKey.DUST, new DustProperty());
         Thallium.setProperty(PropertyKey.DUST, new DustProperty());
+        Promethium.setProperty(PropertyKey.DUST, new DustProperty());
 
         Rhodium.setProperty(PropertyKey.ORE, new OreProperty(1, 1, false));
         Ruthenium.setProperty(PropertyKey.ORE, new OreProperty(1, 1, false));
@@ -172,7 +173,7 @@ public class GTQTMaterialPropertyAddition {
         Rubidium.setProperty(PropertyKey.ORE, new OreProperty(1, 1, false));
         Thallium.setProperty(PropertyKey.ORE, new OreProperty(1, 1, false));
         Californium.setProperty(PropertyKey.ORE, new OreProperty(1, 1, false));
-
+        Promethium.setProperty(PropertyKey.ORE, new OreProperty(1, 1, false));
         Americium.setProperty(PropertyKey.ORE, new OreProperty(1, 1, false));
         Chrome.setProperty(PropertyKey.ORE, new OreProperty(1, 1, false));
         Iridium.setProperty(PropertyKey.ORE, new OreProperty(1, 1, false));
@@ -206,9 +207,9 @@ public class GTQTMaterialPropertyAddition {
         Scandium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
         Dysprosium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
         Holmium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
-
-
+        Rubidium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
         AmmoniumChloride.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
+        Promethium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
         Hafnium.setProperty(PropertyKey.DUST, new DustProperty());
         Hafnium.setProperty(PropertyKey.INGOT, new IngotProperty());
         // Ore Byproducts

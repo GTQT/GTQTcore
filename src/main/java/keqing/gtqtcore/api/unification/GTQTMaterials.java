@@ -140,6 +140,7 @@ public class GTQTMaterials {
     public static Material PitchblendeFront;
     public static Material NaquadahOxideFront;
     public static Material BorniteFront;
+    public static Material BastnasiteFront;
 
     public static Material Diaminotoluene;
     public static Material Dinitrotoluene;

@@ -17,7 +17,7 @@ public class GTQTMaterialFlagAddition {
 
     public static void init() {
         Material[] material = {
-                Polyethylene, Carbon, Graphite, Invar, Osmium, Naquadah, Dubnium, Tritium, Rutherfordium,Rhodium,
+                Polyethylene, Carbon, Graphite, Invar, Osmium, Naquadah, Dubnium, Tritium, Rutherfordium,Rhodium,Rubidium,
                 Lanthanum, Praseodymium, Neodymium, Cerium, Scandium, Europium, Gadolinium, Yttrium, Terbium, Dysprosium, Holmium, Erbium, Thulium, Ytterbium, Lutetium, Niobium, Palladium, Ruthenium, Naquadria, Samarium,
                 Tritanium, Duranium, Technetium, Meitnerium, Roentgenium, Nobelium, Lawrencium, Moscovium, Lutetium, NaquadahEnriched, Trinium,
                 Stellite100, WatertightSteel, MaragingSteel300, HastelloyC276, HastelloyX, Trinaquadalloy, Zeron100, TitaniumCarbide,
@@ -233,6 +233,11 @@ public class GTQTMaterialFlagAddition {
         oreProp.setOreByProducts(Uraninite, Plutonium239, Sulfur);
         oreProp.setWashedIn(HydrofluoricAcid);
         oreProp.setDirectSmeltResult(Californium);
+
+        oreProp = Promethium.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Neodymium, Lanthanum, Sulfur);
+        oreProp.setWashedIn(Water);
+        oreProp.setDirectSmeltResult(Promethium);
 /*
          */
         //  Coils

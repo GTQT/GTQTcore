@@ -760,36 +760,48 @@ public class ParticleAccelerator {
                 .fluidInputs(Caesium.getFluid(1000))
                 .fluidOutputs(Neodymium.getFluid(1000))
                 .EUToStart(42000)
-                .Scattering(6)
+                .Scattering(1)
                 .duration(100)
                 .EUt(7680)
                 .buildAndRegister();
 
+        // 镧系前半部分元素合成
+        GTQTcoreRecipeMaps.NUCLEOSYNTHESIS.recipeBuilder()
+                .input(NEUTRON)
+                .fluidInputs(Lanthanum.getFluid(1000))  // 镧（La,57）
+                .fluidOutputs(Cerium.getFluid(1000))    // 铈（Ce,58）
+                .EUToStart(40000)
+                .Scattering(3)  // 更高的散射强度
+                .duration(100)
+                .EUt(6144)      // 电压等级逐步提升
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.NUCLEOSYNTHESIS.recipeBuilder()
+                .input(NEUTRON)
+                .fluidInputs(Cerium.getFluid(1000))      // 铈（Ce,58）
+                .fluidOutputs(Praseodymium.getFluid(1000)) // 镨（Pr,59）
+                .EUToStart(41000)
+                .Scattering(2)
+                .duration(100)
+                .EUt(6144)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.NUCLEOSYNTHESIS.recipeBuilder()
+                .input(NEUTRON)
+                .fluidInputs(Praseodymium.getFluid(1000)) // 镨（Pr,59）
+                .fluidOutputs(Neodymium.getFluid(1000))  // 钕（Nd,60）（已存在下游配方）
+                .EUToStart(42000)
+                .Scattering(5)
+                .duration(100)
+                .EUt(6144)
+                .buildAndRegister();
+
+        // 钕（Nd,60）→ 钷（Pm,61）→ 钐（Sm,62）独立路径
         GTQTcoreRecipeMaps.NUCLEOSYNTHESIS.recipeBuilder()
                 .input(NEUTRON)
                 .fluidInputs(Neodymium.getFluid(1000))
-                .fluidOutputs(Samarium.getFluid(1000))
-                .EUToStart(43000)
-                .Scattering(5)
-                .duration(100)
-                .EUt(7680)
-                .buildAndRegister();
-
-        GTQTcoreRecipeMaps.NUCLEOSYNTHESIS.recipeBuilder()
-                .input(NEUTRON)
-                .fluidInputs(Samarium.getFluid(1000))
-                .fluidOutputs(Terbium.getFluid(1000))
-                .EUToStart(44000)
-                .Scattering(4)
-                .duration(100)
-                .EUt(7680)
-                .buildAndRegister();
-
-        GTQTcoreRecipeMaps.NUCLEOSYNTHESIS.recipeBuilder()
-                .input(NEUTRON)
-                .fluidInputs(Europium.getFluid(1000))
-                .fluidOutputs(Terbium.getFluid(1000))
-                .EUToStart(45000)
+                .fluidOutputs(Promethium.getFluid(1000)) // 钷（Pm,61）
+                .EUToStart(42500)
                 .Scattering(3)
                 .duration(100)
                 .EUt(7680)
@@ -797,8 +809,50 @@ public class ParticleAccelerator {
 
         GTQTcoreRecipeMaps.NUCLEOSYNTHESIS.recipeBuilder()
                 .input(NEUTRON)
-                .fluidInputs(Terbium.getFluid(1000))
-                .fluidOutputs(Erbium.getFluid(1000))
+                .fluidInputs(Promethium.getFluid(1000))
+                .fluidOutputs(Samarium.getFluid(1000))   // 钐（Sm,62）（已存在下游）
+                .EUToStart(43000)
+                .Scattering(4)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        // 钆（Gd,64）相关合成路径
+        GTQTcoreRecipeMaps.NUCLEOSYNTHESIS.recipeBuilder()
+                .input(NEUTRON)
+                .fluidInputs(Europium.getFluid(1000))    // 铕（Eu,63）
+                .fluidOutputs(Gadolinium.getFluid(1000)) // 钆（Gd,64）
+                .EUToStart(44500)
+                .Scattering(5)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.NUCLEOSYNTHESIS.recipeBuilder()
+                .input(NEUTRON)
+                .fluidInputs(Gadolinium.getFluid(1000))
+                .fluidOutputs(Terbium.getFluid(1000))    // 铽（Tb,65）（已有其他输入路径）
+                .EUToStart(45000)
+                .Scattering(6)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        // 镝（Dy,66）→ 钬（Ho,67）→ 铒（Er,68）完整链
+        GTQTcoreRecipeMaps.NUCLEOSYNTHESIS.recipeBuilder()
+                .input(NEUTRON)
+                .fluidInputs(Terbium.getFluid(1000))     // 铽（Tb,65）
+                .fluidOutputs(Dysprosium.getFluid(1000))// 镝（Dy,66）
+                .EUToStart(45500)
+                .Scattering(7)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.NUCLEOSYNTHESIS.recipeBuilder()
+                .input(NEUTRON)
+                .fluidInputs(Dysprosium.getFluid(1000))
+                .fluidOutputs(Holmium.getFluid(1000))   // 钬（Ho,67）
                 .EUToStart(46000)
                 .Scattering(2)
                 .duration(100)
@@ -807,10 +861,42 @@ public class ParticleAccelerator {
 
         GTQTcoreRecipeMaps.NUCLEOSYNTHESIS.recipeBuilder()
                 .input(NEUTRON)
+                .fluidInputs(Holmium.getFluid(1000))
+                .fluidOutputs(Erbium.getFluid(1000))    // 铒（Er,68）（已有下游）
+                .EUToStart(46500)
+                .Scattering(6)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        // 铒（Er,68）→ 铥（Tm,69）→ 镱（Yb,70）补充路径
+        GTQTcoreRecipeMaps.NUCLEOSYNTHESIS.recipeBuilder()
+                .input(NEUTRON)
                 .fluidInputs(Erbium.getFluid(1000))
-                .fluidOutputs(Ytterbium.getFluid(1000))
+                .fluidOutputs(Thulium.getFluid(1000))   // 铥（Tm,69）
                 .EUToStart(47000)
-                .Scattering(1)
+                .Scattering(4)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.NUCLEOSYNTHESIS.recipeBuilder()
+                .input(NEUTRON)
+                .fluidInputs(Thulium.getFluid(1000))
+                .fluidOutputs(Ytterbium.getFluid(1000)) // 镱（Yb,70）（已有下游）
+                .EUToStart(47500)
+                .Scattering(3)
+                .duration(100)
+                .EUt(7680)
+                .buildAndRegister();
+
+        // 镱（Yb,70）→ 镥（Lu,71）最终合成
+        GTQTcoreRecipeMaps.NUCLEOSYNTHESIS.recipeBuilder()
+                .input(NEUTRON)
+                .fluidInputs(Ytterbium.getFluid(1000))
+                .fluidOutputs(Lutetium.getFluid(1000))  // 镥（Lu,71）
+                .EUToStart(48000)
+                .Scattering(8)
                 .duration(100)
                 .EUt(7680)
                 .buildAndRegister();
@@ -1869,7 +1955,7 @@ public class ParticleAccelerator {
 
         GTQTcoreRecipeMaps.TARGET_CHAMBER.recipeBuilder()
                 .input(NEUTRON)
-                .fluidOutputs(Helium3.getFluid(1000))
+                .fluidInputs(Helium3.getFluid(1000))
                 .output(HELION)
                 .output(NEUTRON)
                 .EUToStart(19900)

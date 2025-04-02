@@ -87,7 +87,138 @@ public class FusionLoader {
                 .duration((int) (2.5 * SECOND))
                 .buildAndRegister();
 
+        // Lanthanum 聚变合成
+        FUSION_RECIPES.recipeBuilder()
+                .fluidInputs(Barium.getFluid(L))
+                .fluidInputs(Cerium.getFluid(L))
+                .fluidOutputs(Lanthanum.getFluid(L))
+                .EUt(VA[LuV])
+                .duration((int) (6.4 * SECOND))
+                .EUToStart(160000000L) // MK1
+                .buildAndRegister();
+
+        // Strontium 聚变合成
+        FUSION_RECIPES.recipeBuilder()
+                .fluidInputs(Rubidium.getFluid(L))
+                .fluidInputs(Yttrium.getFluid(L))
+                .fluidOutputs(Strontium.getFluid(L))
+                .EUt(VA[LuV])
+                .duration((int) (6.4 * SECOND))
+                .EUToStart(160000000L) // MK1
+                .buildAndRegister();
+
+        // Cerium 聚变合成
+        FUSION_RECIPES.recipeBuilder()
+                .fluidInputs(Lanthanum.getFluid(L))
+                .fluidInputs(Praseodymium.getFluid(L))
+                .fluidOutputs(Cerium.getFluid(L))
+                .EUt(VA[LuV])
+                .duration((int) (6.4 * SECOND))
+                .EUToStart(160000000L) // MK1
+                .buildAndRegister();
+
+        // Yttrium 聚变合成
+        FUSION_RECIPES.recipeBuilder()
+                .fluidInputs(Strontium.getFluid(L))
+                .fluidInputs(Zirconium.getFluid(L))
+                .fluidOutputs(Yttrium.getFluid(L))
+                .EUt(VA[LuV])
+                .duration((int) (6.4 * SECOND))
+                .EUToStart(160000000L) // MK1
+                .buildAndRegister();
+
+        // Samarium 聚变合成
+        FUSION_RECIPES.recipeBuilder()
+                .fluidInputs(Neodymium.getFluid(L))
+                .fluidInputs(Promethium.getFluid(L))
+                .fluidOutputs(Samarium.getFluid(L))
+                .EUt(VA[LuV])
+                .duration((int) (6.4 * SECOND))
+                .EUToStart(160000000L) // MK1
+                .buildAndRegister();
+
+        // Erbium 聚变合成
+        FUSION_RECIPES.recipeBuilder()
+                .fluidInputs(Holmium.getFluid(L))
+                .fluidInputs(Thulium.getFluid(L))
+                .fluidOutputs(Erbium.getFluid(L))
+                .EUt(VA[LuV])
+                .duration((int) (6.4 * SECOND))
+                .EUToStart(160000000L) // MK1
+                .buildAndRegister();
+
+        // Neodymium 聚变合成
+        FUSION_RECIPES.recipeBuilder()
+                .fluidInputs(Praseodymium.getFluid(L))
+                .fluidInputs(Samarium.getFluid(L))
+                .fluidOutputs(Neodymium.getFluid(L))
+                .EUt(VA[LuV])
+                .duration((int) (6.4 * SECOND))
+                .EUToStart(160000000L) // MK1
+                .buildAndRegister();
+
         /* -------------------------------- MK2 -------------------------------- */
+
+        // Dysprosium 聚变合成
+        FUSION_RECIPES.recipeBuilder()
+                .fluidInputs(Neodymium.getFluid(L))
+                .fluidInputs(Gadolinium.getFluid(L))
+                .fluidOutputs(Dysprosium.getFluid(L))
+                .EUt(VA[ZPM])
+                .duration((int) (6.4 * SECOND))
+                .EUToStart(240000000L)
+                .buildAndRegister();
+
+        // Holmium 聚变合成
+        FUSION_RECIPES.recipeBuilder()
+                .fluidInputs(Erbium.getFluid(L))
+                .fluidInputs(Yttrium.getFluid(L))
+                .fluidOutputs(Holmium.getFluid(L))
+                .EUt(VA[ZPM])
+                .duration((int) (6.4 * SECOND))
+                .EUToStart(240000000L)
+                .buildAndRegister();
+
+        // Thulium 聚变合成
+        FUSION_RECIPES.recipeBuilder()
+                .fluidInputs(Ytterbium.getFluid(L))
+                .fluidInputs(Lutetium.getFluid(L))
+                .fluidOutputs(Thulium.getFluid(L))
+                .EUt(VA[ZPM])
+                .duration((int) (6.4 * SECOND))
+                .EUToStart(240000000L)
+                .buildAndRegister();
+
+        // Ytterbium 聚变合成
+        FUSION_RECIPES.recipeBuilder()
+                .fluidInputs(Lutetium.getFluid(L))
+                .fluidInputs(Hafnium.getFluid(L))
+                .fluidOutputs(Ytterbium.getFluid(L))
+                .EUt(VA[ZPM])
+                .duration((int) (6.4 * SECOND))
+                .EUToStart(240000000L)
+                .buildAndRegister();
+
+        // Praseodymium 聚变合成
+        FUSION_RECIPES.recipeBuilder()
+                .fluidInputs(Cerium.getFluid(L))
+                .fluidInputs(Neodymium.getFluid(L))
+                .fluidOutputs(Praseodymium.getFluid(L))
+                .EUt(VA[ZPM])
+                .duration((int) (6.4 * SECOND))
+                .EUToStart(240000000L)
+                .buildAndRegister();
+
+        // Scandium 聚变合成
+        FUSION_RECIPES.recipeBuilder()
+                .fluidInputs(Titanium.getFluid(L))
+                .fluidInputs(Vanadium.getFluid(L))
+                .fluidOutputs(Scandium.getFluid(L))
+                .EUt(VA[ZPM])
+                .duration((int) (6.4 * SECOND))
+                .EUToStart(240000000L)
+                .buildAndRegister();
+
         //  Aluminium + Lithium -> Sulfur (plasma)
         FUSION_RECIPES.recipeBuilder()
                 .fluidInputs(Aluminium.getFluid(16))
