@@ -29,6 +29,7 @@ import static gregtech.api.unification.material.Materials.*;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.Adamantium;
 import static keqing.gtqtcore.api.unification.GCYSMaterials.Orichalcum;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
+import static keqing.gtqtcore.common.CommonProxy.GTQTCore_BIO;
 import static keqing.gtqtcore.common.CommonProxy.GTQTCore_TO;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 import static supercritical.api.unification.material.SCMaterials.Americium241;
@@ -1015,6 +1016,22 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         WRAP_NANO_SWARM_ORICHALCUM = this.addItem(1208, "wrap_nano_swarm.orichalcum").addComponents(new WrapSwarmBehavior(7200, 5, Orichalcum)).setCreativeTabs(CommonProxy.GTQTCore_BIO);
         WRAP_NANO_SWARM_NEUTRONIUM = this.addItem(1209, "wrap_nano_swarm.neutronium").addComponents(new WrapSwarmBehavior(8400, 5, Neutronium)).setCreativeTabs(CommonProxy.GTQTCore_BIO);
 
+        //生物模拟卡
+        MEMORY_CARD_BASE = this.addItem(1250, "memory_card.base").setCreativeTabs(GTQTCore_BIO);
+        MEMORY_CARD_ZOMBIE = this.addItem(1251, "memory_card.zombie").setCreativeTabs(GTQTCore_BIO);
+        MEMORY_CARD_SKELETON = this.addItem(1252, "memory_card.skeleton").setCreativeTabs(GTQTCore_BIO);
+        MEMORY_CARD_CREEPER = this.addItem(1253, "memory_card.creeper").setCreativeTabs(GTQTCore_BIO);
+        MEMORY_CARD_SPIDER = this.addItem(1254, "memory_card.spider").setCreativeTabs(GTQTCore_BIO);
+        MEMORY_CARD_SLIME = this.addItem(1255, "memory_card.slime").setCreativeTabs(GTQTCore_BIO);
+        MEMORY_CARD_WITCH = this.addItem(1256, "memory_card.witch").setCreativeTabs(GTQTCore_BIO);
+        MEMORY_CARD_GUARDIAN = this.addItem(1257, "memory_card.guardian").setCreativeTabs(GTQTCore_BIO);
+        MEMORY_CARD_ENDERMAN = this.addItem(1258, "memory_card.enderman").setCreativeTabs(GTQTCore_BIO);
+        MEMORY_CARD_WITHER_SKELETON = this.addItem(1259, "memory_card.wither_skeleton").setCreativeTabs(GTQTCore_BIO);
+        MEMORY_CARD_BLAZE = this.addItem(1260, "memory_card.blaze").setCreativeTabs(GTQTCore_BIO);
+        MEMORY_CARD_GHAST = this.addItem(1261, "memory_card.ghast").setCreativeTabs(GTQTCore_BIO);
+        MEMORY_CARD_SHULKER = this.addItem(1262, "memory_card.shulker").setCreativeTabs(GTQTCore_BIO);
+        MEMORY_CARD_WITHER = this.addItem(1263, "memory_card.wither").setCreativeTabs(GTQTCore_BIO);
+        MEMORY_CARD_ENDER_DRAGON = this.addItem(1264, "memory_card.ender_dragon").setCreativeTabs(GTQTCore_BIO);
 
         //生物基因模板
         BIO_0 = this.addItem(1500, "bio.0").setCreativeTabs(CommonProxy.GTQTCore_DISK);

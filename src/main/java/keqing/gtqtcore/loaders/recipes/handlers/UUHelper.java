@@ -12,6 +12,8 @@ import gregtech.api.unification.stack.MaterialStack;
 import gregtech.common.blocks.BlockFusionCasing;
 import gregtech.common.blocks.BlockGlassCasing;
 import gregtech.common.blocks.MetaBlocks;
+import gregtech.loaders.recipe.CraftingComponent;
+import gregtech.loaders.recipe.MetaTileEntityLoader;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.common.items.GTQTMetaItems;
@@ -383,6 +385,12 @@ public class UUHelper {
                 .buildAndRegister();
 
         //机器配方
+        registerMachineRecipe(SIMULATOR, "WAW", "OHO", "WAW",
+                'A', CraftingComponent.SENSOR,
+                'W', CraftingComponent.CABLE,
+                'H', CraftingComponent.HULL,
+                'O', CraftingComponent.BETTER_CIRCUIT);
+
         registerMachineRecipe(DUPLICATOR, "PGP", "CMC", "PFP",
                 'M', HULL,
                 'P', EMITTER,

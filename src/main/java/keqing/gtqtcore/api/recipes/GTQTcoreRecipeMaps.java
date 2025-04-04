@@ -17,6 +17,12 @@ import static gregtech.api.recipes.RecipeMaps.*;
 import static keqing.gtqtcore.api.gui.GTQTGuiTextures.*;
 
 public class GTQTcoreRecipeMaps {
+
+    public static final RecipeMap<SimpleRecipeBuilder> SIMULATOR_RECIPES = new RecipeMap<>("simulator", 2, 2, 0, 0, new SimpleRecipeBuilder(), false)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_ARC_FURNACE, ProgressWidget.MoveType.HORIZONTAL)
+            .setSound(GTSoundEvents.SCIENCE);
+
+
     public static final RecipeMap<FuelRecipeBuilder> NAQUADAH_REACTOR_RECIPES = new RecipeMap<>("naquadah_reactor", 0, 0, 1, 1, new FuelRecipeBuilder(), false).setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, ProgressWidget.MoveType.HORIZONTAL).setSound(GTSoundEvents.COMBUSTION).allowEmptyOutput();
 
     public static final RecipeMap<SimpleRecipeBuilder> SPINNER_RECIPES = new RecipeMap<>("spinner", 3, 1, 1, 0, new SimpleRecipeBuilder(), false).setSlotOverlay(false, false, false, GuiTextures.VIAL_OVERLAY_1).setSlotOverlay(false, false, true, GuiTextures.INT_CIRCUIT_OVERLAY).setSlotOverlay(false, true, GuiTextures.VIAL_OVERLAY_1).setSlotOverlay(true, false, GuiTextures.VIAL_OVERLAY_1).setProgressBar(GuiTextures.PROGRESS_BAR_COMPRESS, ProgressWidget.MoveType.HORIZONTAL).setSound(GTSoundEvents.WIRECUTTER_TOOL);
@@ -327,6 +333,7 @@ public class GTQTcoreRecipeMaps {
         REPLICATOR_RECIPES.setSlotOverlay(false, false, GuiTextures.DUST_OVERLAY);
         REPLICATOR_RECIPES.setSlotOverlay(true, false, GuiTextures.DUST_OVERLAY);
         COMBUSTION_GENERATOR_FUELS.setMaxFluidOutputs(1);
+        CANNER_RECIPES.setMaxFluidInputs(1);
     }
 
 }

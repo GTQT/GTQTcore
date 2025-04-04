@@ -83,6 +83,7 @@ public class GTQTRecipesManager {
         NaquadahChain.init();
         MachineCasing.init();
         Bittern.init();
+        SimulatorHandler.init();
         GasChain.init();
         GlueChain.init();
         HexanitrohexaaxaisowurtzitaneChain.init();

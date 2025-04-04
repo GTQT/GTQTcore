@@ -272,6 +272,23 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem WRAP_NANO_SWARM_ORICHALCUM;
     public static MetaItem<?>.MetaValueItem WRAP_NANO_SWARM_NEUTRONIUM;
 
+    //  Memory Cards
+    public static MetaItem<?>.MetaValueItem MEMORY_CARD_BASE;
+    public static MetaItem<?>.MetaValueItem MEMORY_CARD_ZOMBIE;
+    public static MetaItem<?>.MetaValueItem MEMORY_CARD_SKELETON;
+    public static MetaItem<?>.MetaValueItem MEMORY_CARD_CREEPER;
+    public static MetaItem<?>.MetaValueItem MEMORY_CARD_SPIDER;
+    public static MetaItem<?>.MetaValueItem MEMORY_CARD_SLIME;
+    public static MetaItem<?>.MetaValueItem MEMORY_CARD_WITCH;
+    public static MetaItem<?>.MetaValueItem MEMORY_CARD_GUARDIAN;
+    public static MetaItem<?>.MetaValueItem MEMORY_CARD_ENDERMAN;
+    public static MetaItem<?>.MetaValueItem MEMORY_CARD_WITHER_SKELETON;
+    public static MetaItem<?>.MetaValueItem MEMORY_CARD_BLAZE;
+    public static MetaItem<?>.MetaValueItem MEMORY_CARD_GHAST;
+    public static MetaItem<?>.MetaValueItem MEMORY_CARD_SHULKER;
+    public static MetaItem<?>.MetaValueItem MEMORY_CARD_WITHER;
+    public static MetaItem<?>.MetaValueItem MEMORY_CARD_ENDER_DRAGON;
+
     //  High Energy Physics items
     public static MetaItem<?>.MetaValueItem HYPOGEN_PLASMA_CONTAINMENT_CELL;
     public static MetaItem<?>.MetaValueItem ACTINIUM_SUPERHYDRIDE_PLASMA_CONTAINMENT_CELL;

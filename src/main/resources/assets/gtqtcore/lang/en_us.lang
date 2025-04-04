@@ -735,6 +735,24 @@ metaitem.wrap_nano_swarm.duranium.name=Nano-packaged cluster chips
 metaitem.wrap_nano_swarm.adamantium.name=Nano-packaged cluster chips
 metaitem.wrap_nano_swarm.orichalcum.name=Nano-packaged cluster chips
 metaitem.wrap_nano_swarm.neutronium.name=Nano-packaged cluster chips
+
+##  Memory Cards
+metaitem.memory_card.base.name=Memory Card
+metaitem.memory_card.zombie.name=Zombie Memory Card
+metaitem.memory_card.skeleton.name=Skeleton Memory Card
+metaitem.memory_card.creeper.name=Creeper Memory Card
+metaitem.memory_card.spider.name=Spider Memory Card
+metaitem.memory_card.slime.name=Slime Memory Card
+metaitem.memory_card.witch.name=Witch Memory Card
+metaitem.memory_card.guardian.name=Guardian Memory Card
+metaitem.memory_card.enderman.name=Enderman Memory Card
+metaitem.memory_card.wither_skeleton.name=Wither Skeleton Memory Card
+metaitem.memory_card.blaze.name=Blaze Memory Card
+metaitem.memory_card.ghast.name=Ghast Memory Card
+metaitem.memory_card.shulker.name=Shulker Memory Card
+metaitem.memory_card.wither.name=Wither Memory Card
+metaitem.memory_card.ender_dragon.name=Ender Dragon Memory Card
+
 # Recipe Properties
 gtqtcore.recipe.temperature=Temperature: %,d K
 gtqtcore.recipe.glass_tier=Glass Grade: %s
@@ -994,7 +1012,8 @@ gtqtcore.machine.polisher.uxv.tooltip=Surface Smoother
 gtqtcore.machine.polisher.opv.name=Legendary Polisher
 gtqtcore.machine.polisher.opv.tooltip=Surface Smoother
 
-recipemap.pressure_laminator_recipes.name=Lamination Process
+# Layering Machine Translations
+recipemap.pressure_laminator_recipes.name=Lamination
 gtqtcore.machine.pressure_laminator.lv.name=Basic Laminator
 gtqtcore.machine.pressure_laminator.lv.tooltip=Efficient Lamination Process
 gtqtcore.machine.pressure_laminator.mv.name=Advanced Laminator
@@ -1004,23 +1023,53 @@ gtqtcore.machine.pressure_laminator.hv.tooltip=Efficient Lamination Process
 gtqtcore.machine.pressure_laminator.ev.name=Advanced Laminator III
 gtqtcore.machine.pressure_laminator.ev.tooltip=Efficient Lamination Process
 gtqtcore.machine.pressure_laminator.iv.name=Elite Laminator
-gtqtcore.machine.pressure_laminator.iv.tooltip=Advanced Lamination Process
+gtqtcore.machine.pressure_laminator.iv.tooltip=Modern Circuit Printing
 gtqtcore.machine.pressure_laminator.luv.name=Elite Laminator II
-gtqtcore.machine.pressure_laminator.luv.tooltip=Advanced Lamination Process
+gtqtcore.machine.pressure_laminator.luv.tooltip=Modern Circuit Printing
 gtqtcore.machine.pressure_laminator.zpm.name=Elite Laminator III
-gtqtcore.machine.pressure_laminator.zpm.tooltip=Advanced Lamination Process
+gtqtcore.machine.pressure_laminator.zpm.tooltip=Modern Circuit Printing
 gtqtcore.machine.pressure_laminator.uv.name=Ultimate Laminator
-gtqtcore.machine.pressure_laminator.uv.tooltip=Ultra-Efficient Lamination Process
+gtqtcore.machine.pressure_laminator.uv.tooltip=Building Circuit Cities on Substrates
 gtqtcore.machine.pressure_laminator.uhv.name=Epic Laminator
-gtqtcore.machine.pressure_laminator.uhv.tooltip=Ultra-Efficient Lamination Process
+gtqtcore.machine.pressure_laminator.uhv.tooltip=Building Circuit Cities on Substrates
 gtqtcore.machine.pressure_laminator.uev.name=Epic Laminator II
-gtqtcore.machine.pressure_laminator.uev.tooltip=Ultra-Efficient Lamination Process
+gtqtcore.machine.pressure_laminator.uev.tooltip=Building Circuit Cities on Substrates
 gtqtcore.machine.pressure_laminator.uiv.name=Epic Laminator III
-gtqtcore.machine.pressure_laminator.uiv.tooltip=Ultra-Efficient Lamination Process
+gtqtcore.machine.pressure_laminator.uiv.tooltip=Building Circuit Cities on Substrates
 gtqtcore.machine.pressure_laminator.uxv.name=Epic Laminator IV
-gtqtcore.machine.pressure_laminator.uxv.tooltip=Ultra-Efficient Lamination Process
+gtqtcore.machine.pressure_laminator.uxv.tooltip=Building Circuit Cities on Substrates
 gtqtcore.machine.pressure_laminator.opv.name=Legendary Laminator
-gtqtcore.machine.pressure_laminator.opv.tooltip=Ultra-Efficient Lamination Process
+gtqtcore.machine.pressure_laminator.opv.tooltip=Building Circuit Cities on Substrates
+
+
+# Simulator Machine Translations
+recipemap.simulator.name=Data Simulation
+gtqtcore.machine.simulator.lv.name=Basic Biological Simulator
+gtqtcore.machine.simulator.lv.tooltip=Digital Mimetic Organisms
+gtqtcore.machine.simulator.mv.name=Advanced Biological Simulator
+gtqtcore.machine.simulator.mv.tooltip=Digital Mimetic Organisms
+gtqtcore.machine.simulator.hv.name=Advanced Biological Simulator II
+gtqtcore.machine.simulator.hv.tooltip=Digital Mimetic Organisms
+gtqtcore.machine.simulator.ev.name=Advanced Biological Simulator III
+gtqtcore.machine.simulator.ev.tooltip=Digital Mimetic Organisms
+gtqtcore.machine.simulator.iv.name=Elite Biological Simulator
+gtqtcore.machine.simulator.iv.tooltip=Super Digital Biomimetics
+gtqtcore.machine.simulator.luv.name=Elite Biological Simulator II
+gtqtcore.machine.simulator.luv.tooltip=Super Digital Biomimetics
+gtqtcore.machine.simulator.zpm.name=Elite Biological Simulator III
+gtqtcore.machine.simulator.zpm.tooltip=Super Digital Biomimetics
+gtqtcore.machine.simulator.uv.name=Ultimate Biological Simulator
+gtqtcore.machine.simulator.uv.tooltip=Biosphere in a Computer
+gtqtcore.machine.simulator.uhv.name=Epic Biological Simulator
+gtqtcore.machine.simulator.uhv.tooltip=Biosphere in a Computer
+gtqtcore.machine.simulator.uev.name=Epic Biological Simulator II
+gtqtcore.machine.simulator.uev.tooltip=Biosphere in a Computer
+gtqtcore.machine.simulator.uiv.name=Epic Biological Simulator III
+gtqtcore.machine.simulator.uiv.tooltip=Biosphere in a Computer
+gtqtcore.machine.simulator.uxv.name=Epic Biological Simulator IV
+gtqtcore.machine.simulator.uxv.tooltip=Biosphere in a Computer
+gtqtcore.machine.simulator.opv.name=Legendary Biological Simulator
+gtqtcore.machine.simulator.opv.tooltip=Biosphere in a Computer
 
 gtqtcore.machine.naquadah_reactor.iv.name=Elite Naquadah Reactor
 gtqtcore.machine.naquadah_reactor.iv.tooltip=Inexhaustible and Limitless
