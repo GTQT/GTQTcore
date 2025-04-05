@@ -1,0 +1,59 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "minecraft:cube_all",
+    "textures": {
+      "all": "blocks/iron_block"
+    }
+  },
+  "variants": {
+    "low_vacuum": {
+      "model": "gtqtcore:pressure_pipe_low_vacuum"
+    },
+    "medium_vacuum": {
+      "model": "gtqtcore:pressure_pipe_medium_vacuum"
+    },
+    "high_vacuum": {
+      "model": "gtqtcore:pressure_pipe_high_vacuum"
+    },
+    "ultra_high_vacuum": {
+      "model": "gtqtcore:pressure_pipe_ultra_high_vacuum"
+    },
+    "extremely_high_vacuum": {
+      "model": "gtqtcore:pressure_pipe_extremely_high_vacuum"
+    },
+    "close_space_vacuum": {
+      "model": "gtqtcore:pressure_pipe_close_space_vacuum"
+    },
+    "intergalactic_void_vacuum": {
+      "model": "gtqtcore:pressure_pipe_intergalactic_void_vacuum"
+    },
+    "low_pressure": {
+      "model": "gtqtcore:pressure_pipe_low_pressure"
+    },
+    "medium_pressure": {
+      "model": "gtqtcore:pressure_pipe_medium_pressure"
+    },
+    "high_pressure": {
+      "model": "gtqtcore:pressure_pipe_high_pressure"
+    },
+    "ultra_high_pressure": {
+      "model": "gtqtcore:pressure_pipe_ultra_high_pressure"
+    },
+    "electron_degeneracy_pressure": {
+      "model": "gtqtcore:pressure_pipe_electron_degeneracy_pressure"
+    },
+    "white_dwarf_pressure": {
+      "model": "gtqtcore:pressure_pipe_white_dwarf_pressure"
+    },
+    "neutron_star_pressure": {
+      "model": "gtqtcore:pressure_pipe_neutron_star_pressure"
+    },
+    "normal": [
+      {}
+    ],
+    "inventory": [
+      {}
+    ]
+  }
+}

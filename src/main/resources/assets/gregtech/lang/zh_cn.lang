@@ -398,18 +398,18 @@ gcys.multiblock.industrial_drill.tooltip.1=钻取放置在钻头下方的方块�
 gcys.multiblock.industrial_drill.tooltip.2=目标方块在非消耗品时不会被破坏。
 
 # Axial Compressors
-gcys.machine.axis_compressor.subsonic.name=亚音速轴流压缩机
-gcys.machine.axis_compressor.supersonic.name=超音速轴流压缩机
-gcys.multiblock.axis_compressor.tooltip.1=将压力增加§b%sPa/s§7至§a%sPa(§r%s§a)。
-gcys.multiblock.axis_compressor.tooltip.2=增加压力时消耗§e%sL/s§7润滑剂。
-gcys.multiblock.axis_compressor.tooltip.3=使用%s§7能量，不能超频。
+gtqtcore.machine.axial_compressor.subsonic.name=亚音速轴流压缩机
+gtqtcore.machine.axial_compressor.supersonic.name=超音速轴流压缩机
+gtqtcore.multiblock.axial_compressor.tooltip.1=将压力增加§b%sPa/s§7至§a%sPa(§r%s§a)。
+gtqtcore.multiblock.axial_compressor.tooltip.2=增加压力时消耗§e%sL/s§7润滑剂。
+gtqtcore.multiblock.axial_compressor.tooltip.3=使用%s§7能量，不能超频。
 
 # Turbomolecular Pumps
-gcys.machine.turbomolecular_pump.low_power.name=低功率涡轮分子泵
-gcys.machine.turbomolecular_pump.high_power.name=高功率涡轮分子泵
-gcys.multiblock.turbomolecular_pump.tooltip.1=将压力降低§b%sPa/s§7至§a%sPa(§r%s§a)。
-gcys.multiblock.turbomolecular_pump.tooltip.2=降低压力时消耗§e%sL/s§7e润滑剂。
-gcys.multiblock.turbomolecular_pump.tooltip.3=使用%s§7能量，不能超频。
+gtqtcore.machine.turbomolecular_pump.low_power.name=低功率涡轮分子泵
+gtqtcore.machine.turbomolecular_pump.high_power.name=高功率涡轮分子泵
+gtqtcore.multiblock.turbomolecular_pump.tooltip.1=将压力降低§b%sPa/s§7至§a%sPa(§r%s§a)。
+gtqtcore.multiblock.turbomolecular_pump.tooltip.2=降低压力时消耗§e%sL/s§7e润滑剂。
+gtqtcore.multiblock.turbomolecular_pump.tooltip.3=使用%s§7能量，不能超频。
 
 # CZ_Puller
 gcys.machine.cz_puller.name=柴可拉斯基硅生长反应仓

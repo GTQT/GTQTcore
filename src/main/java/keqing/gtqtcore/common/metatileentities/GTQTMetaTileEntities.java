@@ -21,6 +21,7 @@ import gregtech.common.metatileentities.storage.MetaTileEntityBuffer;
 import gregtech.common.metatileentities.storage.MetaTileEntityCrate;
 import gregtech.common.metatileentities.storage.MetaTileEntityDrum;
 import keqing.gtqtcore.GTQTCoreConfig;
+import keqing.gtqtcore.api.GCYSValues;
 import keqing.gtqtcore.api.metaileentity.SimpleSteamMetaTileEntity;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.unification.GCYSMaterials;
@@ -50,6 +51,8 @@ import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.heatSys
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.kqcc.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.multiThreading.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.overwriteMultiblocks.*;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.pressure.MetaTileEntityAxialCompressor;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.pressure.MetaTileEntityTurbomolecularPump;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.resourceCollection.MetaTileEntityAdvancedFluidDrill;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.resourceCollection.MetaTileEntityAdvancedLargeMiner;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.resourceCollection.MetaTileEntityVoidMiner;
@@ -59,7 +62,10 @@ import keqing.gtqtcore.common.metatileentities.single.electric.MetaTileEntityEle
 import keqing.gtqtcore.common.metatileentities.single.electric.MetaTileEntityLatexCollector;
 import keqing.gtqtcore.common.metatileentities.single.electric.MetaTileEntityParticleAcceleratorIO;
 import keqing.gtqtcore.common.metatileentities.single.electric.MetaTileLaserBooster;
+import keqing.gtqtcore.common.metatileentities.single.steam.MetaTileEntityCreativePressurePump;
+import keqing.gtqtcore.common.metatileentities.single.steam.MetaTileEntitySteamEjector;
 import keqing.gtqtcore.common.metatileentities.single.steam.MetaTileEntitySteamLatexCollector;
+import keqing.gtqtcore.common.metatileentities.single.steam.MetaTileEntitySteamVacuumChamber;
 import keqing.gtqtcore.common.metatileentities.storage.MetaTileEntityCommonRubbishBin;
 import keqing.gtqtcore.common.metatileentities.storage.MetaTileEntityFluidRubbishBin;
 import keqing.gtqtcore.common.metatileentities.storage.MetaTileEntityMultiQuantumTank;
@@ -134,6 +140,7 @@ public class GTQTMetaTileEntities {
     public static final MetaTileEntityCompressedFusionReactor[] COMPRESSED_FUSION_REACTOR = new MetaTileEntityCompressedFusionReactor[6];
     public static MetaTileEntity[] MULTI_QUANTUM_TANK = new MetaTileEntity[10];
     public static MetaTileEntityWrapSwarmHatch[] SWARM_HATCH = new MetaTileEntityWrapSwarmHatch[5];
+    public static MetaTileEntityPressureHatch[] PRESSURE_HATCH = new MetaTileEntityPressureHatch[GCYSValues.P.length];
     //////////////////////////
     public static MetaTileEntityBioHatch BIO_HATCH;
     public static MetaTileEntityHeatHatch[] HEAT_HATCH = new MetaTileEntityHeatHatch[5];
@@ -228,7 +235,6 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityIndustrialInductionFurnace INDUSTRIAL_INDUCTION_FURNACE;
     public static MetaTileEntityParticleAggregator PARTICLE_AGGREGATOR;
     public static SimpleMachineMetaTileEntity[] VACUUM_CHAMBER = new SimpleMachineMetaTileEntity[V.length - 1];
-    public static SimpleSteamMetaTileEntity[] STEAM_VACUUM_CHAMBER = new SimpleSteamMetaTileEntity[2];
     public static SimpleSteamMetaTileEntity[] STEAM_SPINNER = new SimpleSteamMetaTileEntity[2];
     public static MetaTileEntityParallelHatch[] PARALLEL_HATCH = new MetaTileEntityParallelHatch[V.length - 1];
     public static MetaTileEntityRadiationHatch[] RADIATION_HATCH = new MetaTileEntityRadiationHatch[5];
@@ -363,11 +369,19 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityMegaTurbine MEGA_PLASMA_TURBINE;
     public static MetaTileEntityMegaTurbine MEGA_FUEL_CELL_TURBINE;
 
+    public static MetaTileEntitySteamEjector STEAM_EJECTOR;
+    public static MetaTileEntitySteamVacuumChamber[] STEAM_VACUUM_CHAMBER=new MetaTileEntitySteamVacuumChamber[2];
+    public static MetaTileEntityCreativePressurePump CREATIVE_PRESSURE;
+
     public static MetaTileEntityLargeHighPressueSteamTurbine HIGH_PRESSURE_STEAM_TURBINE;
     public static MetaTileEntityLargeSupercriticalSteamTurbine SUPERCRITICAL_STEAM_TURBINE;
     public static MetaTileEntityMegaTurbine MEGA_HIGH_PRESSURE_STEAM_TURBINE;
     public static MetaTileEntityMegaTurbine MEGA_SUPERCRITICAL_STEAM_TURBINE;
 
+    public static MetaTileEntityAxialCompressor SUBSONIC_AXIAL_COMPRESSOR;
+    public static MetaTileEntityAxialCompressor SUPERSONIC_AXIAL_COMPRESSOR;
+    public static MetaTileEntityTurbomolecularPump LOW_POWER_TURBOMOLECULAR_PUMP;
+    public static MetaTileEntityTurbomolecularPump HIGH_POWER_TURBOMOLECULAR_PUMP;
 
     public static MetaTileEntityPowerSupplyHatch POWER_SUPPLY_HATCH_BASIC;
     public static MetaTileEntityPowerSupplyHatch[] POWER_SUPPLY_HATCH_BATTLE = new MetaTileEntityPowerSupplyHatch[5];
@@ -777,6 +791,14 @@ public class GTQTMetaTileEntities {
         LARGE_MIX = registerMetaTileEntity(3516, new MetaTileEntityMixer(gtqtcoreId("large_mix")));
         LARGE_PRESSURE_FACTORY = registerMetaTileEntity(3517, new MetaTileEntityPressureFactory(gtqtcoreId("large_pressure_factory")));
 
+        //pressure
+        STEAM_EJECTOR = registerMetaTileEntity(3600, new MetaTileEntitySteamEjector(gtqtcoreId("steam_ejector")));
+        CREATIVE_PRESSURE = registerMetaTileEntity(3601, new MetaTileEntityCreativePressurePump(gtqtcoreId("infinite_pressure_pump")));
+
+        SUBSONIC_AXIAL_COMPRESSOR = registerMetaTileEntity(3610, new MetaTileEntityAxialCompressor(gtqtcoreId("axial_compressor.subsonic"), GTValues.EV, 5E6, 10_000.0));
+        SUPERSONIC_AXIAL_COMPRESSOR = registerMetaTileEntity(3611, new MetaTileEntityAxialCompressor(gtqtcoreId("axial_compressor.supersonic"), GTValues.LuV, 18E9, 50_000.0));
+        LOW_POWER_TURBOMOLECULAR_PUMP = registerMetaTileEntity(3612, new MetaTileEntityTurbomolecularPump(gtqtcoreId("turbomolecular_pump.low_power"), GTValues.EV, 1E-4, 10_000.0));
+        HIGH_POWER_TURBOMOLECULAR_PUMP = registerMetaTileEntity(3613, new MetaTileEntityTurbomolecularPump(gtqtcoreId("turbomolecular_pump.high_power"), GTValues.LuV, 1E-7, 50_000.0));
         //Appeng 4000
 
         // ID 14001-14010: Drums
@@ -791,7 +813,8 @@ public class GTQTMetaTileEntities {
         NEUTRONIUM_CRATE = MetaTileEntities.registerMetaTileEntity(14493, new MetaTileEntityCrate(gtqtcoreId("crate.neutronium"), Materials.Neutronium, 216));
 
         //小机器
-        registerSimpleSteamMetaTileEntity(STEAM_VACUUM_CHAMBER, 14500, "vacuum_chamber", GTQTcoreRecipeMaps.VACUUM_CHAMBER_RECIPES, COMPRESS, Textures.GAS_COLLECTOR_OVERLAY, false);
+        STEAM_VACUUM_CHAMBER[0] = registerMetaTileEntity(14500, new MetaTileEntitySteamVacuumChamber(gtqtcoreId("steam_vacuum_chamber.bronze"), false));
+        STEAM_VACUUM_CHAMBER[1] = registerMetaTileEntity(14501, new MetaTileEntitySteamVacuumChamber(gtqtcoreId("steam_vacuum_chamber.steel"),true));
         registerSimpleSteamMetaTileEntity(STEAM_SPINNER, 14502, "spinner", GTQTcoreRecipeMaps.SPINNER_RECIPES, COMPRESS, GTQTTextures.SPINNER_OVERL, false);
         registerSimpleSteamMetaTileEntity(STEAM_ROASTER, 14504, "roaster", ROASTER_RECIPES, COMPRESS, ROASTER_OVERLAY, false);
 
@@ -985,7 +1008,20 @@ public class GTQTMetaTileEntities {
             SWARM_HATCH[i] = registerMetaTileEntity(id, new MetaTileEntityWrapSwarmHatch(gtqtcoreId(name), i + 5));
         }
 
-        PARTICLE_HATCH = registerMetaTileEntity(15606, new MetaTileEntityParticleHatch(gtqtcoreId("particle_hatch")));
+        int startId = 15605;
+        for (int i = 0; i < PRESSURE_HATCH.length; i++) {
+            double min = GCYSValues.P[GCYSValues.EAP];
+            double max = GCYSValues.P[GCYSValues.EAP];
+            if (i < GCYSValues.EAP) min = GCYSValues.P[i];
+            else if (i > GCYSValues.EAP) max = GCYSValues.P[i];
+            else continue;
+
+            //TODO change tiers to appropriate values
+            int tier = Math.abs(GCYSValues.EAP - i);
+            PRESSURE_HATCH[i] = registerMetaTileEntity(startId + i, new MetaTileEntityPressureHatch(gtqtcoreId(String.format("pressure_hatch.%s", GCYSValues.PN[i].toLowerCase())), tier, min, max));
+        }
+
+        PARTICLE_HATCH = registerMetaTileEntity(15620, new MetaTileEntityParticleHatch(gtqtcoreId("particle_hatch")));
 
         //13000
         //原版转子拓展

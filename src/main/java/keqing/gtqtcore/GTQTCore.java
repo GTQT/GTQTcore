@@ -2,6 +2,7 @@ package keqing.gtqtcore;
 
 import gregtech.common.ConfigHolder;
 import keqing.gtqtcore.api.GTQTAPI;
+import keqing.gtqtcore.api.capability.GTQTTileCapabilities;
 import keqing.gtqtcore.api.io.advancement.IAdvancementManager;
 import keqing.gtqtcore.api.module.IModuleManager;
 import keqing.gtqtcore.api.utils.GTQTLog;
@@ -61,6 +62,7 @@ public class GTQTCore {
         ConfigHolder.machines.enableHighTierSolars = true;
         GTQTLog.init(event.getModLog());
         GTQTMetaItems.initialization();
+        GTQTTileCapabilities.init();
         GTQTMetaBlocks.init();
         GTQTMetaTileEntities.initialization();
         GTQTAPI.init();

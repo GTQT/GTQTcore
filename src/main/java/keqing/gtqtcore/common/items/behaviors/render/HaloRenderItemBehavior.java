@@ -3,7 +3,7 @@ package keqing.gtqtcore.common.items.behaviors.render;
 import codechicken.lib.model.ModelRegistryHelper;
 import codechicken.lib.util.TransformUtils;
 import keqing.gtqtcore.api.items.IHaloRenderBehavior;
-import keqing.gtqtcore.client.renderer.HaloItemRenderer;
+import keqing.gtqtcore.client.render.HaloItemRenderer;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.ResourceLocation;

@@ -7,7 +7,7 @@ import gregtech.client.shader.postprocessing.BloomEffect;
 import gregtech.client.utils.DepthTextureUtil;
 import gregtech.client.utils.RenderUtil;
 import gregtech.common.ConfigHolder;
-import keqing.gtqtcore.client.renderer.ICustomRenderFast;
+import keqing.gtqtcore.client.render.ICustomRenderFast;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.texture.TextureMap;

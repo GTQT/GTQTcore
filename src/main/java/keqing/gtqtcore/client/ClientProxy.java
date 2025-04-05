@@ -1,7 +1,7 @@
 package keqing.gtqtcore.client;
+import keqing.gtqtcore.client.render.pipe.PressurePipeRenderer;
 import keqing.gtqtcore.client.utils.TextureUtils;
-import keqing.gtqtcore.api.utils.GTQTLog;
-import keqing.gtqtcore.client.renderer.handler.StructureSelectRenderer;
+import keqing.gtqtcore.client.render.handler.StructureSelectRenderer;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.client.utils.ShaderUtils;
 import keqing.gtqtcore.client.utils.TitleUtils;
@@ -13,7 +13,6 @@ import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
@@ -55,6 +54,7 @@ public class ClientProxy extends CommonProxy {
         MinecraftForge.EVENT_BUS.register(new ClientEventHandler());
         ShaderUtils.initShaders();
         GTQTTextures.init();
+        PressurePipeRenderer.INSTANCE.preInit();
         GTQTTextures.preInit();
         MetaEntities.initRenderers();
     }

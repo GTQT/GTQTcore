@@ -33,7 +33,9 @@ public class BlockActiveUniqueCasing1 extends VariantActiveBlock<BlockActiveUniq
 
     public enum ActiveCasingType implements IStringSerializable {
         NITINOL_INTAKE_CASING("nitinol_intake_casing"),
-        HG1223_INTAKE_CASING("hg1223_intake_casing");
+        HG1223_INTAKE_CASING("hg1223_intake_casing"),
+        AIRFOIL("airfoil"),
+        ADVANCED_AIRFOIL("advanced_airfoil");
 
         private final String name;
 

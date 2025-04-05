@@ -83,7 +83,7 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<SimpleRecipeBuilder> COPY_RECIPES;
     public static final RecipeMap<SimpleRecipeBuilder> ULTRAVIOLET_LAMP_CHAMBER_RECIPES;
     public static final RecipeMap<SimpleRecipeBuilder> PRESSURE_LAMINATOR_RECIPES;
-    public static final RecipeMap<SimpleRecipeBuilder> VACUUM_CHAMBER_RECIPES;
+    public static final RecipeMap<PressureRecipeBuilder> VACUUM_CHAMBER_RECIPES;
     public static final RecipeMap<ComponentAssemblyLineRecipesTierRecipeBuilder> COMPONENT_ASSEMBLY_LINE_RECIPES;
     public static final RecipeMap<ElectronRecipeBuilder> ELECTROBATH;
     public static final RecipeMap<SwarmTierRecipeBuilder> SWARM_GROWTH;
@@ -195,7 +195,7 @@ public class GTQTcoreRecipeMaps {
 
         NEUTRON_ACTIVATOR = new RecipeMap<>("neutron_activator", 6, 6, 3, 3, new NeutronActivatorRecipeBuilder(), false).setSound(GTSoundEvents.CHEMICAL_REACTOR);
 
-        VACUUM_CHAMBER_RECIPES = new RecipeMap<>("vacuum_chamber_recipes", 6, 3, 3, 3, new SimpleRecipeBuilder(), false).setSlotOverlay(false, false, GuiTextures.CIRCUIT_OVERLAY).setProgressBar(GuiTextures.PROGRESS_BAR_COMPRESS, ProgressWidget.MoveType.HORIZONTAL).setSound(GTSoundEvents.ASSEMBLER);
+        VACUUM_CHAMBER_RECIPES = new RecipeMap<>("vacuum_chamber_recipes", 6, 3, 3, 3, new PressureRecipeBuilder(), false).setSlotOverlay(false, false, GuiTextures.CIRCUIT_OVERLAY).setProgressBar(GuiTextures.PROGRESS_BAR_COMPRESS, ProgressWidget.MoveType.HORIZONTAL).setSound(GTSoundEvents.ASSEMBLER);
 
         ULTRAVIOLET_LAMP_CHAMBER_RECIPES = new RecipeMap<>("ultraviolet_lamp_chamber_recipes", 3, 2, 3, 2, new SimpleRecipeBuilder(), false).setSlotOverlay(false, false, false, GuiTextures.LENS_OVERLAY).setSlotOverlay(false, false, true, GuiTextures.LENS_OVERLAY).setSlotOverlay(false, true, false, GuiTextures.MOLECULAR_OVERLAY_3).setSlotOverlay(false, true, true, GuiTextures.MOLECULAR_OVERLAY_4).setSlotOverlay(true, false, GuiTextures.VIAL_OVERLAY_1).setSlotOverlay(true, true, GuiTextures.VIAL_OVERLAY_2).setSound(GTSoundEvents.CHEMICAL_REACTOR);
 

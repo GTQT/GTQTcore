@@ -9,6 +9,7 @@ import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.material.properties.PropertyKey;
 import gregtech.api.unification.stack.ItemMaterialInfo;
 import gregtech.integration.crafttweaker.block.CTHeatingCoilBlockStats;
+import keqing.gtqtcore.GTQTCore;
 import keqing.gtqtcore.GTQTCoreConfig;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.recipes.properties.EnzymesReactionProperty;
@@ -24,6 +25,8 @@ import keqing.gtqtcore.common.block.blocks.GTQTStoneVariantBlock;
 import keqing.gtqtcore.common.covers.GTQTCoverBehavior;
 import keqing.gtqtcore.common.items.GTQTMetaItems;
 import keqing.gtqtcore.common.items.metaitems.GTQTMetaToolItems;
+import keqing.gtqtcore.common.pipelike.pressure.BlockPressurePipe;
+import keqing.gtqtcore.common.pipelike.pressure.tile.TileEntityPressurePipe;
 import keqing.gtqtcore.loaders.OreDictionaryLoader;
 import keqing.gtqtcore.loaders.recipes.*;
 import keqing.gtqtcore.loaders.recipes.handlers.*;
@@ -33,6 +36,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -42,6 +46,7 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 
 import java.text.DecimalFormat;
@@ -53,7 +58,7 @@ import static keqing.gtqtcore.api.utils.ChatCalculatorHelper.eval;
 import static keqing.gtqtcore.common.block.GTQTMetaBlocks.*;
 import static net.minecraft.init.Blocks.DIRT;
 
-
+import keqing.gtqtcore.common.pipelike.pressure.ItemBlockPressurePipe;
 @Mod.EventBusSubscriber(
         modid = "gtqtcore"
 )
@@ -224,7 +229,7 @@ public class CommonProxy {
 
         for (GTQTStoneVariantBlock block : GTQTMetaBlocks.GTQT_STONE_BLOCKS.values()) registry.register(block);
 
-
+        for (BlockPressurePipe pipe : GTQTMetaBlocks.PRESSURE_PIPES) registry.register(pipe);
 
 
     }
@@ -284,6 +289,9 @@ public class CommonProxy {
 
         for (GTQTStoneVariantBlock block : GTQTMetaBlocks.GTQT_STONE_BLOCKS.values())
             registry.register(createItemBlock(block, VariantItemBlock::new));
+
+        for (BlockPressurePipe pipe : GTQTMetaBlocks.PRESSURE_PIPES)
+            registry.register(createItemBlock(pipe, ItemBlockPressurePipe::new));
     }
 
     private static <T extends Block> ItemBlock createItemBlock(T block, Function<T, ItemBlock> producer) {
@@ -424,6 +432,7 @@ public class CommonProxy {
         GTQTStoneTypes.init();
         GTQTcoreRecipeMaps.init();
         MinecraftForge.EVENT_BUS.register(new GTQTEventHandler.PlayerLoginEventHandler());
+        GameRegistry.registerTileEntity(TileEntityPressurePipe.class, new ResourceLocation(GTQTCore.MODID, "pressure_pipe"));
     }
 
     public void init() {
@@ -453,5 +462,4 @@ public class CommonProxy {
 
         HEATING_COILS.put(DIRT.getDefaultState(), new CTHeatingCoilBlockStats("dirt", 300, 1, 0, 1, Materials.Iron));
     }
-
 }

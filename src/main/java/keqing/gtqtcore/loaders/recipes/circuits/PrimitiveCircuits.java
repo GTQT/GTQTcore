@@ -101,6 +101,7 @@ public class PrimitiveCircuits {
                 .fluidInputs(Glue.getFluid(200))
                 .output(VACUUM_TUBE, 2)
                 .EUt((int) V[ULV])
+                .pressure(13E-5)
                 .duration(10 * SECOND)
                 .buildAndRegister();
 

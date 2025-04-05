@@ -10,11 +10,77 @@ import javax.annotation.Nonnull;
 public interface IPressureContainer {
 
     int PRESSURE_TOLERANCE = 5000;
+    IPressureContainer EMPTY = new IPressureContainer() {
+        @Override
+        public double getParticles() {
+            return 0;
+        }
+
+        @Override
+        public void setParticles(double amount) {/**/}
+
+        @Override
+        public double getVolume() {
+            return 1;
+        }
+
+        @Override
+        public double getMinPressure() {
+            return GCYSValues.EARTH_PRESSURE / 2;
+        }
+
+        @Override
+        public double getMaxPressure() {
+            return GCYSValues.EARTH_PRESSURE * 2;
+        }
+    };
+
+    /**
+     * Equalizes the pressure between containers. This does not modify volume.
+     *
+     * @param containers the containers to merge
+     */
+    static void mergeContainers(@Nonnull IPressureContainer... containers) {
+        mergeContainers(true, containers);
+    }
+
+    /**
+     * Equalizes the pressure between containers. This does not modify volume.
+     *
+     * @param checkSafety whether to check if changing pressure is safe before modifying container values
+     * @param containers  the containers to merge
+     */
+    static void mergeContainers(boolean checkSafety, @Nonnull IPressureContainer... containers) {
+        // P = (n1 + n2) / (v1 + v2)
+        double particles = 0;
+        double volume = 0;
+        for (IPressureContainer container : containers) {
+            particles += container.getParticles();
+            volume += container.getVolume();
+        }
+        if (volume == 0) return;
+
+        // P = vN * [(n1 + n2 + ...) / (v1 + v2 + ...)] / vN
+        final double newParticles = particles / volume;
+        for (IPressureContainer container : containers) {
+            double amount = container.getVolume() * newParticles - container.getParticles();
+            if (!checkSafety || container.changeParticles(amount, true)) {
+                container.changeParticles(amount, false);
+            }
+        }
+    }
 
     /**
      * @return the amount of particles in the container
      */
     double getParticles();
+
+    /**
+     * Set the amount of particles in the container
+     *
+     * @param amount the amount to set
+     */
+    void setParticles(double amount);
 
     /**
      * This method should <b>never</b> return 0.
@@ -51,13 +117,6 @@ public interface IPressureContainer {
     default double getPressureForVolume(double volume) {
         return getParticles() / volume;
     }
-
-    /**
-     * Set the amount of particles in the container
-     *
-     * @param amount the amount to set
-     */
-    void setParticles(double amount);
 
     /**
      * Change the amount of particles in the container by a given amount
@@ -105,7 +164,6 @@ public interface IPressureContainer {
     }
 
     /**
-     *
      * @return if the pressure is a vacuum
      */
     default boolean isVacuum() {
@@ -134,42 +192,6 @@ public interface IPressureContainer {
     }
 
     /**
-     * Equalizes the pressure between containers. This does not modify volume.
-     *
-     * @param containers the containers to merge
-     */
-    static void mergeContainers(@Nonnull IPressureContainer... containers) {
-        mergeContainers(true, containers);
-    }
-
-    /**
-     * Equalizes the pressure between containers. This does not modify volume.
-     *
-     * @param checkSafety whether to check if changing pressure is safe before modifying container values
-     * @param containers  the containers to merge
-     */
-    static void mergeContainers(boolean checkSafety, @Nonnull IPressureContainer... containers) {
-        // P = (n1 + n2) / (v1 + v2)
-        double particles = 0;
-        double volume = 0;
-        for (IPressureContainer container : containers) {
-            particles += container.getParticles();
-            volume += container.getVolume();
-        }
-        if (volume == 0) return;
-
-        // P = vN * [(n1 + n2 + ...) / (v1 + v2 + ...)] / vN
-        final double newParticles = particles / volume;
-        for (IPressureContainer container : containers) {
-            double amount = container.getVolume() * newParticles - container.getParticles();
-            if (!checkSafety || container.changeParticles(amount, true)) {
-                container.changeParticles(amount, false);
-            }
-        }
-    }
-
-    /**
-     *
      * @param trackVacuum true if percentage should be tracked in relation to the min pressure, else the max
      * @return a double from 0.0 to 1.0 representing how close the current pressure is to the max or min
      */
@@ -180,36 +202,4 @@ public interface IPressureContainer {
         double percent = (Math.log10(getPressure()) - min) / (Math.log10(getMaxPressure()) - min);
         return trackVacuum ? 1.0D - percent : percent;
     }
-
-    IPressureContainer EMPTY = new IPressureContainer() {
-        @Override
-        public double getParticles() {
-            return 0;
-        }
-
-        @Override
-        public double getVolume() {
-            return 1;
-        }
-
-        @Override
-        public void setParticles(double amount) {/**/}
-
-        @Override
-        public double getMinPressure() {
-            return GCYSValues.EARTH_PRESSURE / 2;
-        }
-
-        @Override
-        public double getMaxPressure() {
-            return GCYSValues.EARTH_PRESSURE * 2;
-        }
-
-        @Override
-        public int getNetworkId() {
-            return 0;
-        }
-    };
-
-    int getNetworkId();
 }

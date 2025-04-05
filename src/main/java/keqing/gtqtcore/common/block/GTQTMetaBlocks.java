@@ -1,14 +1,19 @@
 package keqing.gtqtcore.common.block;
 
+import gregtech.client.model.SimpleStateMapper;
 import gregtech.common.blocks.MetaBlocks;
+import keqing.gtqtcore.client.render.pipe.PressurePipeRenderer;
 import keqing.gtqtcore.common.block.blocks.*;
 import keqing.gtqtcore.common.block.explosive.BlockSTNT;
 import keqing.gtqtcore.common.block.wood.BlockPineLeaves;
 import keqing.gtqtcore.common.block.wood.BlockPineLog;
 import keqing.gtqtcore.common.block.wood.BlockPineSapling;
+import keqing.gtqtcore.common.pipelike.pressure.BlockPressurePipe;
+import keqing.gtqtcore.common.pipelike.pressure.PressurePipeType;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.IStateMapper;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
@@ -17,6 +22,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.EnumMap;
 
 public class GTQTMetaBlocks {
+    public static final BlockPressurePipe[] PRESSURE_PIPES = new BlockPressurePipe[PressurePipeType.values().length];
+
     public static BlockActiveUniqueCasing blockActiveUniqueCasing;
     public static BlockActiveUniqueCasing1 blockActiveUniqueCasing1;
     public static BlockCleanroomCasing blockCleanroomCasing;
@@ -175,6 +182,12 @@ public class GTQTMetaBlocks {
         for (GTQTStoneVariantBlock.StoneVariant shape : GTQTStoneVariantBlock.StoneVariant.values()) {
             GTQT_STONE_BLOCKS.put(shape, new GTQTStoneVariantBlock(shape));
         }
+
+        for (PressurePipeType type : PressurePipeType.values()) {
+            PRESSURE_PIPES[type.ordinal()] = new BlockPressurePipe(type);
+            PRESSURE_PIPES[type.ordinal()].setRegistryName(String.format("pressure_pipe_%s", type.name));
+        }
+
     }
 
     @SideOnly(Side.CLIENT)
@@ -221,6 +234,12 @@ public class GTQTMetaBlocks {
         registerItemModel(BLOCK_PINE_SAPLING);
         for (GTQTStoneVariantBlock block : GTQT_STONE_BLOCKS.values())
             registerItemModel(block);
+
+        IStateMapper normalStateMapper = new SimpleStateMapper(PressurePipeRenderer.INSTANCE.getModelLocation());
+        for (BlockPressurePipe pipe : PRESSURE_PIPES) {
+            ModelLoader.setCustomMeshDefinition(Item.getItemFromBlock(pipe), stack -> PressurePipeRenderer.INSTANCE.getModelLocation());
+            ModelLoader.setCustomStateMapper(pipe, normalStateMapper);
+        }
     }
 
     @SideOnly(Side.CLIENT)

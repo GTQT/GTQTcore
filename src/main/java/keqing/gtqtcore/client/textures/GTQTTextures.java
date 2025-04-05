@@ -6,7 +6,7 @@ import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
 import gregtech.client.renderer.texture.cube.SimpleOrientedCubeRenderer;
 import gregtech.client.renderer.texture.cube.SimpleOverlayRenderer;
 import keqing.gtqtcore.GTQTCore;
-import keqing.gtqtcore.client.renderer.textures.OverlayRenderer;
+import keqing.gtqtcore.client.render.textures.OverlayRenderer;
 import keqing.gtqtcore.client.textures.custom.IsaMillRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
@@ -84,7 +84,10 @@ public class GTQTTextures {
     public static SimpleOverlayRenderer blue_steel = new SimpleOverlayRenderer("multiblock/advblock/blue_steel");
     public static SimpleOverlayRenderer red_steel = new SimpleOverlayRenderer("multiblock/advblock/red_steel");
     public static SimpleOverlayRenderer tumbaga = new SimpleOverlayRenderer("multiblock/advblock/tumbaga");
-
+    public static OrientedOverlayRenderer LOW_POWER_TURBOMOLECULAR_PUMP = new OrientedOverlayRenderer("multiblock/low_power_turbomolecular_pump");
+    public static OrientedOverlayRenderer HIGH_POWER_TURBOMOLECULAR_PUMP = new OrientedOverlayRenderer("multiblock/high_power_turbomolecular_pump");
+    public static OrientedOverlayRenderer SUBSONIC_AXIAL_COMPRESSOR_OVERLAY = new OrientedOverlayRenderer("multiblock/subsonic_axial_compressor");
+    public static OrientedOverlayRenderer SUPERSONIC_AXIAL_COMPRESSOR_OVERLAY = new OrientedOverlayRenderer("multiblock/supersonic_axial_compressor");
     public static SimpleOverlayRenderer DIMENSIONAL_BRIDGE_CASING = new SimpleOverlayRenderer("multiblock/quantumcasing/dimensional_bridge_casing");
     public static SimpleOverlayRenderer ULTIMATE_HIGH_ENERGY_CASING = new SimpleOverlayRenderer("multiblock/quantumcasing/ultimate_high_energy_casing");
     public static SimpleOverlayRenderer TRANSCENDENTALLY_AMPLIFIED_MAGNETIC_CONFINEMENT_CASING = new SimpleOverlayRenderer("casings/transcendentally_amplified_magnetic_confinement_casing");

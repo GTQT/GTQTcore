@@ -20,7 +20,7 @@ public class GTQTMultiblockAbility {
     public static final MultiblockAbility<IHeat> HEAT_MULTIBLOCK_ABILITY = new MultiblockAbility<>("heat");
     public static final MultiblockAbility<IPowerSupply> POWER_SUPPLY_ABILITY = new MultiblockAbility<>("power_supply");
     public static final MultiblockAbility<IWarpSwarm> WARP_SWARM_MULTIBLOCK_ABILITY = new MultiblockAbility<>("warp_swarm");
-
+    public static final MultiblockAbility<IPressureContainer> PRESSURE_CONTAINER = new MultiblockAbility<>("pressure_container");
 
     public static final MultiblockAbility<ILaser> LASER_INPUT = new MultiblockAbility<>("laser_input");
     public static final MultiblockAbility<ILaser> LASER_OUTPUT = new MultiblockAbility<>("laser_output");

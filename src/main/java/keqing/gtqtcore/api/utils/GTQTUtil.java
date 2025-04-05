@@ -14,6 +14,7 @@ import gregtech.api.unification.material.Materials;
 import gregtech.api.util.BlockInfo;
 import gregtech.api.util.TextFormattingUtil;
 import gregtech.common.blocks.MetaBlocks;
+import keqing.gtqtcore.api.GCYSValues;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
@@ -403,4 +404,20 @@ public class GTQTUtil {
         itemstack1.setCount(amount);
         return itemstack1;
     }
+
+    public static int getTierByPressure(double pressure) {
+        if (pressure == GCYSValues.EARTH_PRESSURE) return GCYSValues.EAP;
+        for (int i = 0; i < GCYSValues.P.length; i++) {
+            double p = GCYSValues.P[i];
+            if (pressure <= GCYSValues.EARTH_PRESSURE && p <= GCYSValues.EARTH_PRESSURE) {
+                if (p < pressure) continue;
+                else return i;
+            }
+            if (pressure >= GCYSValues.EARTH_PRESSURE && p > GCYSValues.EARTH_PRESSURE) {
+                if (p >= pressure) return i;
+            }
+        }
+        return 0;
+    }
+
 }
